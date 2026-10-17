@@ -125,24 +125,38 @@ public final class M3FilteredNavigableSet<E> extends AbstractSet<E> implements N
         return iterator.hasNext() ? iterator.next() : null;
     }
 
+    /** Resolve the first stored predecessor before creating an in-range cursor. */
+    private E predecessor(E probe, boolean inclusive) {
+        E first = inclusive ? backing.floor(probe) : backing.lower(probe);
+        if (first == null) return null;
+        return firstOrNull(filteredIterator(backing.headSet(first, true).descendingIterator()));
+    }
+
+    /** Resolve the first stored successor before creating an in-range cursor. */
+    private E successor(E probe, boolean inclusive) {
+        E first = inclusive ? backing.ceiling(probe) : backing.higher(probe);
+        if (first == null) return null;
+        return firstOrNull(filteredIterator(backing.tailSet(first, true).iterator()));
+    }
+
     @Override
     public E lower(E e) {
-        return firstOrNull(filteredIterator(backing.headSet(e, false).descendingIterator()));
+        return predecessor(e, false);
     }
 
     @Override
     public E floor(E e) {
-        return firstOrNull(filteredIterator(backing.headSet(e, true).descendingIterator()));
+        return predecessor(e, true);
     }
 
     @Override
     public E ceiling(E e) {
-        return firstOrNull(filteredIterator(backing.tailSet(e, true).iterator()));
+        return successor(e, true);
     }
 
     @Override
     public E higher(E e) {
-        return firstOrNull(filteredIterator(backing.tailSet(e, false).iterator()));
+        return successor(e, false);
     }
 
     @Override
