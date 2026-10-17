@@ -1,0 +1,4 @@
+pass	file	before_sha256	new_sha256	category	proof
+1	M3Parallel.java	4d137f355b4bd3301ccfba7ea63425fd7b4efe554d4be9da49879b7529e6978	ff0bb5901c8a8f67ef2ec07ea794f829102c09495a91c3d2e3f0c316baa8b262	lazy source capture	OnePass size/toArray refusal, keys/ordered result, original suites
+2	M3ReadWrite.java	66c6761ec073097bec7d13eb813c8b690e048322db55f8145b7c95539ba4f91c	57416a4d74fbca1a70f81739885410e3d5055e3aad6a6e17b302b8057167c602	budgeted capture	OnePass and existing read/write budget scheduling suites
+3	M3ReceiverInteropSelfTest.java	ABSENT	cc6eeb2bc0a37a488ea2596be921e1019bee6a9662b817fb73faa198e8d3ba6c	filtered/sorted wrapper interoperability	Java and JNI new oracle

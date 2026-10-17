@@ -1,0 +1,119 @@
+{
+  "schema_version": 1,
+  "license": "Apache-2.0",
+  "copyright": "2026 Hitesh Soliwal and contributors",
+  "implementation_status": "candidate; promotion requires executed OpenRewrite receipt and exact-head CI",
+  "origin_repository": "hsoliwal/com.synexia",
+  "base_candidate_commit": "f4b451c579a5738cdd1c880c0134b3936f3ba652",
+  "recipe": "com.synexia.rewrite.M3CollectionsKeyed",
+  "engines": [
+    "M3HashPinnedJavaSnapshotRecipe",
+    "M3HashPinnedTextSnapshotRecipe"
+  ],
+  "destination": "hsoliwal/M3jdk21:m3/collections/keyed",
+  "application_policy": "ABSENT or exact postimage; full passing proof inventory before verify-phase actual engine replay; refuse drift; exclusive workspace; receipt last",
+  "reused_dependency": {
+    "repository": "hsoliwal/M3jdk21",
+    "commit": "ed0d5435eb8796cfd4c9375edfc05b72bb16c8c6",
+    "license": "Apache-2.0",
+    "sources": [
+      {
+        "path": "m3/collections/src/main/java/com/m3/collections/M3LinkedHashMap.java",
+        "git_blob_sha1": "ade59880b8c9b2bee1b32ae67ca9d29b7382d998",
+        "sha256": "5495a8200ff4030a8faa66fde2f8bb9ccca52bdcbccd200a76147698289c2c0c"
+      },
+      {
+        "path": "m3/collections/src/main/java/com/m3/collections/M3OrderedSlotMap.java",
+        "git_blob_sha1": "e7be2297d19f22cf4dd4ef8b7d1424fe963063d9",
+        "sha256": "015242ae386c4366471cd7d26fab886a2c362b58029982b0108976342c4f3357"
+      },
+      {
+        "path": "m3/collections/src/main/java/com/m3/collections/M3SlotArrays.java",
+        "git_blob_sha1": "e337c69710c871f8caa77a1afe53149f1fd705cc",
+        "sha256": "4e978861b03650cec9ab1f064648cc8d342117d8b4f0556152604707c83c2518"
+      },
+      {
+        "path": "m3/collections/src/main/java/com/m3/collections/M3SlotMap.java",
+        "git_blob_sha1": "a7d20300717661c26897f0b69e1e5a83400a62ad",
+        "sha256": "0499cb1f5825429fcf7434665c6785bcffa59ed4a975974a29856ad60317e806"
+      },
+      {
+        "path": "m3/collections/src/main/java/com/m3/collections/M3SlotSpliterators.java",
+        "git_blob_sha1": "30cf137538353ac8e91514fff7c5db3903da8819",
+        "sha256": "4ee2b86ea682c64da881d36eb5b4aadc4ba6640389f2adbfdc8dff4d44cf4070"
+      }
+    ]
+  },
+  "reviewed_not_copied": [
+    {
+      "repository": "google/guava",
+      "commit": "f06690fa3e874f65515e8fd338a74d636e2c792f",
+      "path": "guava/src/com/google/common/collect/TopKSelector.java",
+      "blob": "a61799eb9ed195275fb9e6f8a641880b8b4a00b7",
+      "license": "Apache-2.0",
+      "decision": "Primitive row heap selected for bounded worst-case behavior, k scratch indices and stable source-position ties; no measured performance superiority claimed."
+    },
+    {
+      "repository": "google/guava",
+      "commit": "f06690fa3e874f65515e8fd338a74d636e2c792f",
+      "path": "guava/src/com/google/common/util/concurrent/Striped.java",
+      "license": "Apache-2.0",
+      "decision": "Locks alone do not establish encounter order; use whole connected-component ownership."
+    },
+    {
+      "repository": "jgrapht/jgrapht",
+      "commit": "1d99b7cd84c1bc425ef08a218d5642a9e1fe6449",
+      "path": "jgrapht-core/src/main/java/org/jgrapht/traverse/TopologicalOrderIterator.java",
+      "blob": "8c1793c26b313a9c451bd77f3afeaaca71006662",
+      "license": "EPL-2.0 OR LGPL-2.1-or-later",
+      "decision": "Reviewed, not copied: general object graph and traversal release do not supply callback-completion scheduling. Reuse M3 map/worker atoms plus specialized primitive forward dependency planner. No measured performance superiority."
+    }
+  ],
+  "category_evidence_policy": "LeetCode, HackerRank and GeeksforGeeks independently reviewed; no challenge statements, editorials or solutions copied or relicensed.",
+  "native_policy": "Explicit opt-in; Java default; primitive array region copies; no retained handles or Java callbacks; no speedup promotion without end-to-end evidence.",
+  "inlined_cache_structures": {
+    "policy": "Reuse admitted private storage atoms; no new public map API or widened donor visibility. Fixed source snapshots remain Apache-2.0; production promotion still requires executed canonical recipe.",
+    "donors": [
+      {
+        "repository": "hsoliwal/com.synexia",
+        "commit": "67d4b8f377b3fffba2d008bde1bd28ec8855f2ef",
+        "path": "synexia-common/src/main/java/com/synexia/common/collections/jdk/PackedHashMap.java",
+        "git_blob_sha1": "99d665440d96d94a323a85f9c4bf20347acfb593",
+        "sha256": "a7060599b2f33bc14c168e9e2394fc3f49526d2f5d7dbb249e3c580ebcdfec9e",
+        "license": "Apache-2.0"
+      },
+      {
+        "repository": "hsoliwal/M3jdk21",
+        "commit": "ed0d5435eb8796cfd4c9375edfc05b72bb16c8c6",
+        "path": "m3/collections/src/main/java/com/m3/collections/M3LinkedHashMap.java",
+        "git_blob_sha1": "ade59880b8c9b2bee1b32ae67ca9d29b7382d998",
+        "sha256": "5495a8200ff4030a8faa66fde2f8bb9ccca52bdcbccd200a76147698289c2c0c",
+        "license": "Apache-2.0"
+      },
+      {
+        "repository": "hsoliwal/M3jdk21",
+        "commit": "ed0d5435eb8796cfd4c9375edfc05b72bb16c8c6",
+        "path": "m3/collections/src/main/java/com/m3/collections/M3SlotArrays.java",
+        "git_blob_sha1": "e337c69710c871f8caa77a1afe53149f1fd705cc",
+        "sha256": "4e978861b03650cec9ab1f064648cc8d342117d8b4f0556152604707c83c2518",
+        "license": "Apache-2.0"
+      }
+    ],
+    "unchanged_body_atoms": [
+      "find",
+      "vacant",
+      "rehash",
+      "unlink",
+      "hash",
+      "doubled"
+    ],
+    "specializations": [
+      "store actual values and long weights in the same stable slot",
+      "append/move to MRU only; no general Map/view/reversed state",
+      "reuse after[] for released slots instead of a second free-list array",
+      "clamp lane growth to count budget and release all lane capacity on clear"
+    ],
+    "remaining_other_operators": "M3Parallel and M3ReadWrite still reuse the unchanged M3LinkedHashMap dependency; no blind inlining of every collection.",
+    "native": "Existing JNI sources and symbols unchanged; reference-bearing cache remains Java-owned."
+  }
+}

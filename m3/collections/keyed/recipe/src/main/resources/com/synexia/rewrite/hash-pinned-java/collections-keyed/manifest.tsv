@@ -1,0 +1,15 @@
+# path	pre_sha256	post_sha256	resource
+m3/collections/keyed/src/main/java/com/m3/collections/parallel/M3Batches.java	ABSENT	d3a80bba29ee097f4890afeef568eb701244df9966de656530b8025cfd0066f9	M3Batches.java.txt
+m3/collections/keyed/src/main/java/com/m3/collections/parallel/M3Execution.java	ABSENT	7ddeb97b30cf5e9f7645248929774998772eea44dc86720e84b467665ff07e08	M3Execution.java.txt
+m3/collections/keyed/src/main/java/com/m3/collections/parallel/M3LongWindows.java	ABSENT	8fdd9f4a9f11b3ed85a065ef70077249ef3c46ee1c8fcfc57001abe71269380a	M3LongWindows.java.txt
+m3/collections/keyed/src/main/java/com/m3/collections/parallel/M3Parallel.java	ABSENT	ff0bb5901c8a8f67ef2ec07ea794f829102c09495a91c3d2e3f0c316baa8b262	M3Parallel.java.txt
+m3/collections/keyed/src/main/java/com/m3/collections/parallel/M3PartitionLayout.java	ABSENT	8d26e49cd8182da36558613cd5ff657f99e031af25b3f624c12dbca1b96a2a66	M3PartitionLayout.java.txt
+m3/collections/keyed/src/main/java/com/m3/collections/parallel/M3PlanCache.java	ABSENT	0cea2fd774d6d03dc97dd4d5e5713aa84780db73f9e97d47ed4eb67ceaaa8a0c	M3PlanCache.java.txt
+m3/collections/keyed/src/main/java/com/m3/collections/parallel/M3ReadWrite.java	ABSENT	57416a4d74fbca1a70f81739885410e3d5055e3aad6a6e17b302b8057167c602	M3ReadWrite.java.txt
+m3/collections/keyed/src/main/java/com/m3/collections/parallel/M3SortedJoin.java	ABSENT	573691611d921733560e20be198ea109c3759d666060b95fa9a7d0deae0ac880	M3SortedJoin.java.txt
+m3/collections/keyed/src/test/java/com/m3/collections/parallel/M3CacheAllocationProbe.java	ABSENT	f390ca2571102ddc9854b01c6f57bc3319790f46aeecb1575794019976bf9eb8	M3CacheAllocationProbe.java.txt
+m3/collections/keyed/src/test/java/com/m3/collections/parallel/M3ExtensionsSelfTest.java	ABSENT	5a61ee4fa9dd502a9949a45e95afd0c6117c5cba6c9fc707bce7e3e2d699d046	M3ExtensionsSelfTest.java.txt
+m3/collections/keyed/src/test/java/com/m3/collections/parallel/M3ParallelSelfTest.java	ABSENT	dd5714cc381c7398478e45caf588a9196ef61e8e65c4959a6c8026b06b2d756b	M3ParallelSelfTest.java.txt
+m3/collections/keyed/src/test/java/com/m3/collections/parallel/M3ReceiverInteropSelfTest.java	ABSENT	cc6eeb2bc0a37a488ea2596be921e1019bee6a9662b817fb73faa198e8d3ba6c	M3ReceiverInteropSelfTest.java.txt
+m3/collections/keyed/src/test/java/com/m3/collections/parallel/M3ReuseSelfTest.java	ABSENT	c524ab7405cad1875729090b21950cf57fb5dbdb9c2979fd1bd041a5bbcb55f6	M3ReuseSelfTest.java.txt
+m3/collections/keyed/src/test/java/com/m3/collections/parallel/M3SchedulingSelfTest.java	ABSENT	41e4224a948fc305d7361e1105069d195e5743ab2c0344553a12c4b3c26538a4	M3SchedulingSelfTest.java.txt

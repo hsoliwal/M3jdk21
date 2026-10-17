@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.m3</groupId><artifactId>m3-collections-keyed</artifactId><version>0.1.0-SNAPSHOT</version>
+  <properties><maven.compiler.release>21</maven.compiler.release><project.build.sourceEncoding>UTF-8</project.build.sourceEncoding></properties>
+  <dependencies><dependency><groupId>com.m3</groupId><artifactId>m3-collections</artifactId><version>0.1.0-SNAPSHOT</version></dependency></dependencies>
+  <build><resources><resource><directory>${project.basedir}</directory><includes><include>provenance.json</include><include>README.md</include></includes><targetPath>META-INF/m3-keyed</targetPath></resource></resources><plugins>
+    <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-resources-plugin</artifactId><version>3.3.1</version></plugin>
+    <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-compiler-plugin</artifactId><version>3.13.0</version><configuration><release>21</release><compilerArgs><arg>-Xlint:all</arg><arg>-Werror</arg></compilerArgs></configuration></plugin>
+    <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-surefire-plugin</artifactId><version>3.2.5</version><configuration><skipTests>true</skipTests></configuration></plugin>
+    <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-jar-plugin</artifactId><version>3.4.2</version></plugin>
+    <plugin><groupId>org.codehaus.mojo</groupId><artifactId>exec-maven-plugin</artifactId><version>3.3.0</version>
+      <configuration><classpathScope>test</classpathScope></configuration>
+      <executions><execution><id>java-contracts</id><phase>test</phase><goals><goal>exec</goal></goals><configuration>
+        <executable>${java.home}/bin/java</executable><arguments><argument>-ea</argument><argument>-cp</argument><classpath/><argument>com.m3.collections.parallel.M3ParallelSelfTest</argument></arguments>
+      </configuration></execution>
+      <execution><id>java-extension-contracts</id><phase>test</phase><goals><goal>exec</goal></goals><configuration>
+        <executable>${java.home}/bin/java</executable><arguments><argument>-ea</argument><argument>-cp</argument><classpath/><argument>com.m3.collections.parallel.M3ExtensionsSelfTest</argument></arguments>
+      </configuration></execution>      <execution><id>java-scheduling-contracts</id><phase>test</phase><goals><goal>exec</goal></goals><configuration>
+        <executable>${java.home}/bin/java</executable><arguments><argument>-ea</argument><argument>-cp</argument><classpath/><argument>com.m3.collections.parallel.M3SchedulingSelfTest</argument></arguments>
+      </configuration></execution>
+      <execution><id>java-inline-cache-contracts</id><phase>test</phase><goals><goal>exec</goal></goals><configuration>
+        <executable>${java.home}/bin/java</executable><arguments><argument>-ea</argument><argument>-cp</argument><classpath/><argument>com.m3.collections.parallel.M3ReuseSelfTest</argument></arguments>
+      </configuration></execution></executions>
+    </plugin>
+  </plugins></build>
+  <profiles><profile><id>native</id><build><plugins>
+    <plugin><groupId>org.codehaus.mojo</groupId><artifactId>exec-maven-plugin</artifactId><executions>
+      <execution><id>configure-native</id><phase>generate-test-resources</phase><goals><goal>exec</goal></goals><configuration>
+        <executable>cmake</executable><arguments><argument>-S</argument><argument>${project.basedir}/native</argument><argument>-B</argument><argument>${project.build.directory}/native</argument><argument>-DCMAKE_BUILD_TYPE=Release</argument><argument>-DM3_KEYED_UBSAN=ON</argument></arguments>
+      </configuration></execution>
+      <execution><id>build-native</id><phase>generate-test-resources</phase><goals><goal>exec</goal></goals><configuration>
+        <executable>cmake</executable><arguments><argument>--build</argument><argument>${project.build.directory}/native</argument><argument>--parallel</argument><argument>2</argument></arguments>
+      </configuration></execution>
+      <execution><id>native-contracts</id><phase>test</phase><goals><goal>exec</goal></goals><configuration>
+        <executable>${java.home}/bin/java</executable><arguments><argument>-ea</argument><argument>-Xcheck:jni</argument><argument>-Djava.library.path=${project.build.directory}/native</argument><argument>-cp</argument><classpath/><argument>com.m3.collections.parallel.M3ParallelSelfTest</argument><argument>--native</argument></arguments>
+      </configuration></execution>
+      <execution><id>native-extension-contracts</id><phase>test</phase><goals><goal>exec</goal></goals><configuration>
+        <executable>${java.home}/bin/java</executable><arguments><argument>-ea</argument><argument>-Xcheck:jni</argument><argument>-Djava.library.path=${project.build.directory}/native</argument><argument>-cp</argument><classpath/><argument>com.m3.collections.parallel.M3ExtensionsSelfTest</argument><argument>--native</argument></arguments>
+      </configuration></execution>      <execution><id>native-scheduling-contracts</id><phase>test</phase><goals><goal>exec</goal></goals><configuration>
+        <executable>${java.home}/bin/java</executable><arguments><argument>-ea</argument><argument>-Xcheck:jni</argument><argument>-Djava.library.path=${project.build.directory}/native</argument><argument>-cp</argument><classpath/><argument>com.m3.collections.parallel.M3SchedulingSelfTest</argument><argument>--native</argument></arguments>
+      </configuration></execution>
+      <execution><id>missing-window-native-contract</id><phase>test</phase><goals><goal>exec</goal></goals><configuration>
+        <executable>${java.home}/bin/java</executable><arguments><argument>-ea</argument><argument>-Djava.library.path=${project.build.directory}/missing-library</argument><argument>-cp</argument><classpath/><argument>com.m3.collections.parallel.M3ExtensionsSelfTest</argument><argument>--missing-native</argument></arguments>
+      </configuration></execution>      <execution><id>missing-scheduling-native-contract</id><phase>test</phase><goals><goal>exec</goal></goals><configuration>
+        <executable>${java.home}/bin/java</executable><arguments><argument>-ea</argument><argument>-Djava.library.path=${project.build.directory}/missing-library</argument><argument>-cp</argument><classpath/><argument>com.m3.collections.parallel.M3SchedulingSelfTest</argument><argument>--missing-native</argument></arguments>
+      </configuration></execution>
+      <execution><id>missing-native-contract</id><phase>test</phase><goals><goal>exec</goal></goals><configuration>
+        <executable>${java.home}/bin/java</executable><arguments><argument>-ea</argument><argument>-Djava.library.path=${project.build.directory}/missing-library</argument><argument>-cp</argument><classpath/><argument>com.m3.collections.parallel.M3ParallelSelfTest</argument><argument>--missing-native</argument></arguments>
+      </configuration></execution>
+    </executions></plugin>
+  </plugins></build></profile></profiles>
+</project>

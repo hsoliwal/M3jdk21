@@ -1,0 +1,5 @@
+donor	revision	license	usage
+hsoliwal/com.synexia	2f9a579c60a41422f5b164049cf65746a0830713	Apache-2.0	18 source-sealed original output resources; 2 intentionally refined at receiver template layer
+hsoliwal/M3jdk21	ed0d5435eb8796cfd4c9375edfc05b72bb16c8c6	Apache-2.0	M3LinkedHashMap/M3SlotMap/M3OrderedSlotMap/M3SlotSpliterators/M3SlotArrays existing dependency identities
+hsoliwal/M3jdk21	6fe0f291145db7a99209159cddb77979ad2343c5	Apache-2.0	Existing filtered/sorted wrapper owners preserved; new interop oracle
+LeetCode/HackerRank/GeeksforGeeks	category only	separate source rights	No challenge statement solution or external implementation copied

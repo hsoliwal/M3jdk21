@@ -1,0 +1,10 @@
+# SPDX-License-Identifier: Apache-2.0
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3jdk.KeyedReceiver20261017
+displayName: Receive source-pinned M3 keyed array/offset/mask collection operators
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: collections-keyed
+  - com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe:
+      crateName: collections-keyed
