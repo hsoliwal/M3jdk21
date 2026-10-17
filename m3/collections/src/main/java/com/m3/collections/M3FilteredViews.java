@@ -220,25 +220,43 @@ public final class M3FilteredViews {
             return predicate.test(nav.ceiling(alias));
         }
         /**
-         * One bounded range traversal per navigation query.  This preserves the backing
-         * comparator's representative and exception behavior without repeating tree
-         * searches for every rejected element.
+         * Bounded views admit navigation queries outside their own endpoints,
+         * whereas subSet/headSet/tailSet may reject those same query endpoints.
+         * Start from the backing JDK navigational result, never the query alias.
+         * A null result can also designate a real comparator-admitted null member.
          */
+        private boolean nullIsCandidate(E query, boolean forward, boolean inclusive) {
+            Comparator<? super E> order = nav.comparator();
+            if (order == null || nav.isEmpty()
+                    || (nav.first() != null && nav.last() != null)) return false;
+            int direction = order.compare(null, query);
+            return forward ? (inclusive ? direction >= 0 : direction > 0)
+                    : (inclusive ? direction <= 0 : direction < 0);
+        }
         private E firstVisible(Iterator<E> cursor) {
             Iterator<E> selected = M3FilteredViews.filtered(cursor, predicate);
             return selected.hasNext() ? selected.next() : null;
         }
+        private E navigate(E candidate, E query, boolean forward, boolean inclusive) {
+            if (candidate == null && !nullIsCandidate(query, forward, inclusive)) return null;
+            if (predicate.test(candidate)) return candidate;
+            // The candidate is an actual member within this backing range; strict
+            // successor/predecessor views are therefore legal even on nested subSets.
+            Iterator<E> remaining = forward ? nav.tailSet(candidate, false).iterator()
+                    : nav.headSet(candidate, false).descendingIterator();
+            return firstVisible(remaining);
+        }
         @Override public E lower(E e) {
-            return firstVisible(nav.headSet(e, false).descendingIterator());
+            return navigate(nav.lower(e), e, false, false);
         }
         @Override public E floor(E e) {
-            return firstVisible(nav.headSet(e, true).descendingIterator());
+            return navigate(nav.floor(e), e, false, true);
         }
         @Override public E ceiling(E e) {
-            return firstVisible(nav.tailSet(e, true).iterator());
+            return navigate(nav.ceiling(e), e, true, true);
         }
         @Override public E higher(E e) {
-            return firstVisible(nav.tailSet(e, false).iterator());
+            return navigate(nav.higher(e), e, true, false);
         }
         @Override public E first() {
             Iterator<E> values = iterator();
