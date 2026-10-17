@@ -1,0 +1,8 @@
+# SPDX-License-Identifier: Apache-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3jdk.StoredRepresentative20261017
+displayName: Resolve filtered collection membership and removals against stored representatives
+description: Preserve hidden equal occurrences and actual visible owner references with no new payload store.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: m3-stored-representative-20261017

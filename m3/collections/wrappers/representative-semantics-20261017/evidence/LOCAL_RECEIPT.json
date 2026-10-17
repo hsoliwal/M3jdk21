@@ -1,0 +1,20 @@
+{
+  "schema": "M3_STORED_REPRESENTATIVE_QUALIFICATION_V1",
+  "parent_sha": "cb501d5447c659606f4a5d0910379abaa0c36739",
+  "owner_pre_sha256": "f6a7963ed9a357e1aa41a7285549f07bf1d35c06a58b2e06494fe855e629df55",
+  "owner_post_sha256": "a5c251a48cb0fc6fcf8c362cf449e9ec0e94b3f0563cb17451059b5d04456923",
+  "oracle_sha256": "2c19ec2913ab6f9e5874f0209565f90ea858b79521f55a0916ed9892548da136",
+  "red_reproduced": true,
+  "java_assertions_per_mode": 86866,
+  "random_seeds": 1200,
+  "inherited_wrapper_per_mode": 964437,
+  "inherited_deep_tiered": 1312160,
+  "inherited_deep_interpreter": 165280,
+  "jni_ubsan_checks": 156,
+  "public_abi_retained": true,
+  "replay_emitted_files": 2,
+  "replay_refusals": 10,
+  "maven_openrewrite_sdk": "UNVERIFIED",
+  "full_receiver_build": "UNVERIFIED",
+  "note": "Candidate local packet contains full logs; Maven/OpenRewrite SDK not executed in this local run."
+}

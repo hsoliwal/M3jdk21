@@ -107,7 +107,7 @@ jobs:
           python3 m3/collections/wrappers/contract-refinement-20261017/verify.py
           --root . --output "${{ runner.temp }}/m3-wrapper-proof"
           --sdk "${{ runner.temp }}/m3-wrapper-sdk"
-          --prior-sdk "${{ runner.temp }}/m3-deep-sdk" --installed
+          --prior-sdk "${{ runner.temp }}/m3-deep-sdk"
       - uses: actions/upload-artifact@v4
         if: always()
         with:
