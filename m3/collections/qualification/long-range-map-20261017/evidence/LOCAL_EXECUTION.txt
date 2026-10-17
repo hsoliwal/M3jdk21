@@ -1,0 +1,13 @@
+# LOCAL_EXECUTION, 2026-10-17
+JAVA 21.0.12.1 / MAVEN 3.9.9 / REWRITE CORE 8.17.1 / JUNIT 5.10.2
+ACTUAL MAVEN/OPENREWRITE M3HashPinnedJavaSnapshotRecipe test: 4 passed, 0 failures, 0 errors, 0 skips; BUILD SUCCESS.
+8 partial installations x 2 orders, fixed point, duplicate and drift refusal.
+THREE JAVA POSTIMAGES EXACT SHA-256:
+M3LongRangeMap.java c17ea114980c89ae135e657796326e64acd932dce4e5e66cdcaf73a12f8342b6
+M3LongRangeMapSelfTest.java 9297ace4e5314f3e6506b875a7c735d053ee95d7c32b1f0ff4238cc030bbc1c9
+M3LongRangeMapTest.java 18ea0e7767e8e1c85205038d84716b9a64f52f68947854dd2e4e2ffb7684737d
+ACTUAL RECIPE OUTPUT javac --release 21 -proc:none -Xlint:all -Werror PASS with TEST-ONLY M3IndexPathMasks class.
+TIERED JIT PASS M3_LONG_RANGE_MAP checks=1689303 seeded_operations=49152
+INTERPRETER PASS M3_LONG_RANGE_MAP checks=1689303 seeded_operations=49152
+M3Java/C17 real/native JNI on product target: NOT RUN. Core Maven/JUnit and hosted Actions: NOT RUN.
+The local test-only mask selector is excluded from donor PR and product receiver. No correctness/throughput claim for JDK packaging or Guava RangeMap.
