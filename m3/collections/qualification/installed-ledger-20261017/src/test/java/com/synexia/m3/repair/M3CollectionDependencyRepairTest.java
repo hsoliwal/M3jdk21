@@ -82,9 +82,8 @@ final class M3CollectionDependencyRepairTest {
                 edited.get(M3CollectionDependencyRepair.MODULE) + "<!-- attacker -->\n");
         assertThrows(IllegalStateException.class,
                 () -> M3CollectionDependencyRepair.emit(CRATE, edited));
-        edited = new HashMap<>(original());
-        edited.put(M3CollectionDependencyRepair.RECIPE, "not XML at all");
-        Map<String, String> occupied = edited;
+        Map<String, String> occupied = new HashMap<>(original());
+        occupied.put(M3CollectionDependencyRepair.RECIPE, "not XML at all");
         assertThrows(IllegalStateException.class,
                 () -> M3CollectionDependencyRepair.emit(CRATE, occupied));
         Map<String, String> unrelated = new HashMap<>(original());
