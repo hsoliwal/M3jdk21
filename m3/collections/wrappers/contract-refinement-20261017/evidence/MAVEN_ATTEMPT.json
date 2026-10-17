@@ -1,0 +1,13 @@
+{
+  "argv": [
+    "mvn",
+    "-B",
+    "-ntp",
+    "-f",
+    "/mnt/data/m3-work/m3/collections/wrappers/recipe/pom.xml",
+    "test",
+    "-Dtest=M3WrapperContractsRecipeTest"
+  ],
+  "status": "NOT_STARTED",
+  "error": "[Errno 2] No such file or directory: 'mvn'"
+}

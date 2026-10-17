@@ -115,8 +115,31 @@ public final class M3FilteredMaps {
             return M3CollectionViews.filtered(backing.entrySet(), this::visible);
         }
 
-        @Override public int size() { return selectedEntries().size(); }
-        @Override public boolean isEmpty() { return !selectedEntries().iterator().hasNext(); }
+        // Reuse M3JDK21 #994 raw-entry scan atoms; public entries remain guarded.
+        @Override public int size() {
+            int count = 0;
+            for (Entry<K, V> entry : backing.entrySet()) {
+                if (visible(entry)) count = M3CollectionViews.incrementSize(count);
+            }
+            return count;
+        }
+        @Override public boolean isEmpty() {
+            for (Entry<K, V> entry : backing.entrySet()) if (visible(entry)) return false;
+            return true;
+        }
+        @Override public boolean containsValue(Object value) {
+            for (Entry<K, V> entry : backing.entrySet()) {
+                if (visible(entry) && (value == null ? entry.getValue() == null : value.equals(entry.getValue()))) return true;
+            }
+            return false;
+        }
+        @Override public int hashCode() {
+            int hash = 0;
+            for (Entry<K, V> entry : backing.entrySet()) {
+                if (visible(entry)) hash += Objects.hashCode(entry.getKey()) ^ Objects.hashCode(entry.getValue());
+            }
+            return hash;
+        }
         @Override public boolean containsKey(Object key) { return visible(stored(key)); }
         @Override public V get(Object key) {
             Entry<K, V> entry = stored(key);
@@ -192,7 +215,7 @@ public final class M3FilteredMaps {
                 return mapIterator(selectedEntries().iterator(), GuardedEntry::new);
             }
             @Override public Spliterator<Entry<K, V>> spliterator() {
-                return mapSpliterator(selectedEntries().spliterator(), GuardedEntry::new);
+                return mapSpliterator(selectedEntries().spliterator(), GuardedEntry::new, Spliterator.DISTINCT);
             }
             @Override public boolean contains(Object value) {
                 if (!(value instanceof Entry<?, ?> probe)) return false;
@@ -229,7 +252,7 @@ public final class M3FilteredMaps {
                 return mapIterator(selectedEntries().iterator(), Entry::getKey);
             }
             @Override public Spliterator<K> spliterator() {
-                return mapSpliterator(selectedEntries().spliterator(), Entry::getKey);
+                return mapSpliterator(selectedEntries().spliterator(), Entry::getKey, Spliterator.DISTINCT);
             }
             @Override public void clear() { FilteredMap.this.clear(); }
             @Override public boolean remove(Object key) {
@@ -259,7 +282,7 @@ public final class M3FilteredMaps {
                 return mapIterator(selectedEntries().iterator(), Entry::getValue);
             }
             @Override public Spliterator<V> spliterator() {
-                return mapSpliterator(selectedEntries().spliterator(), Entry::getValue);
+                return mapSpliterator(selectedEntries().spliterator(), Entry::getValue, 0);
             }
             @Override public void clear() { FilteredMap.this.clear(); }
             @Override public boolean remove(Object value) {
@@ -392,25 +415,28 @@ public final class M3FilteredMaps {
     }
     /**
      * One projection descriptor per cursor (and per explicit split), never a
-     * Stream pipeline or retained per-entry array. JDK Stream.map clears the
-     * source's DISTINCT, SORTED, NONNULL, CONCURRENT and IMMUTABLE flags: retain
-     * only ORDERED/SIZED/SUBSIZED, matching the original map() contract.
+     * Stream pipeline or retained per-entry array. Arbitrary projection loses
+     * DISTINCT/SORTED/NONNULL/CONCURRENT/IMMUTABLE. The two Set projections prove
+     * DISTINCT from unique owner keys; value projection proves no extra flags.
+     * Filtered cardinality is still unknown. No sorting or deduplication occurs.
      */
     private static <F, T> Spliterator<T> mapSpliterator(
-            Spliterator<F> source, Function<? super F, ? extends T> map) {
+            Spliterator<F> source, Function<? super F, ? extends T> map, int guaranteed) {
         return new ProjectingSpliterator<>(
                 Objects.requireNonNull(source, "source"),
-                Objects.requireNonNull(map, "map"));
+                Objects.requireNonNull(map, "map"), guaranteed);
     }
 
     private static final class ProjectingSpliterator<F, T> implements Spliterator<T> {
         private final Spliterator<F> source;
         private final Function<? super F, ? extends T> mapper;
+        private final int guaranteed;
 
         private ProjectingSpliterator(
-                Spliterator<F> source, Function<? super F, ? extends T> mapper) {
+                Spliterator<F> source, Function<? super F, ? extends T> mapper, int guaranteed) {
             this.source = source;
             this.mapper = mapper;
+            this.guaranteed = guaranteed;
         }
 
         @Override public boolean tryAdvance(java.util.function.Consumer<? super T> action) {
@@ -425,7 +451,7 @@ public final class M3FilteredMaps {
 
         @Override public Spliterator<T> trySplit() {
             Spliterator<F> prefix = source.trySplit();
-            return prefix == null ? null : new ProjectingSpliterator<>(prefix, mapper);
+            return prefix == null ? null : new ProjectingSpliterator<>(prefix, mapper, guaranteed);
         }
 
         @Override public long estimateSize() {
@@ -433,7 +459,7 @@ public final class M3FilteredMaps {
         }
 
         @Override public int characteristics() {
-            return source.characteristics() & (ORDERED | SIZED | SUBSIZED);
+            return (source.characteristics() & (ORDERED | SIZED | SUBSIZED)) | guaranteed;
         }
 
         @Override public Comparator<? super T> getComparator() {

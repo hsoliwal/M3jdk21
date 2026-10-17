@@ -1,0 +1,22 @@
+/* Copyright 2026 Hitesh Soliwal and contributors. SPDX-License-Identifier: Apache-2.0
+ * Exact method fragments from M3JDK21 PR994 commit e65c7d651d2aa5aec843523b3c6575ec3dee915a,
+ * M3FilteredMaps.java Git blob 42acdecc54133b545fe174230766e86092e37041.
+ * Fragment snapshot, not the complete source file.
+ */
+        @Override public boolean isEmpty() {
+            for (Entry<K, V> entry : backing.entrySet()) if (visible(entry)) return false;
+            return true;
+        }
+        @Override public boolean containsValue(Object value) {
+            for (Entry<K, V> entry : backing.entrySet()) {
+                if (visible(entry) && (value == null ? entry.getValue() == null : value.equals(entry.getValue()))) return true;
+            }
+            return false;
+        }
+        @Override public int hashCode() {
+            int hash = 0;
+            for (Entry<K, V> entry : backing.entrySet()) {
+                if (visible(entry)) hash += Objects.hashCode(entry.getKey()) ^ Objects.hashCode(entry.getValue());
+            }
+            return hash;
+        }

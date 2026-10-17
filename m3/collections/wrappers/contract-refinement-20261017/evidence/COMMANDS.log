@@ -1,0 +1,287 @@
+=== compile-replay ===
+$ ['javac', '--release', '21', '-proc:none', '-Xlint:all', '-Werror', '-d', '/mnt/data/wrapper-qualified-v2/replay-classes', '/mnt/data/m3-work/m3/collections/wrappers/contract-refinement-20261017/replay/Replay.java']
+
+EXIT=0
+
+=== refuse-source-drift ===
+$ ['java', '-cp', '/mnt/data/wrapper-qualified-v2/replay-classes', 'Replay', '--apply', '/mnt/data/m3-work', '/mnt/data/wrapper-qualified-v2/refusals/source-drift']
+Exception in thread "main" java.io.IOException: source/absence drift: m3/collections/src/main/java/com/m3/collections/M3CollectionViews.java
+	at Replay.state(Replay.java:107)
+	at Replay.main(Replay.java:36)
+
+EXIT=1
+
+=== refuse-missing-original ===
+$ ['java', '-cp', '/mnt/data/wrapper-qualified-v2/replay-classes', 'Replay', '--apply', '/mnt/data/m3-work', '/mnt/data/wrapper-qualified-v2/refusals/missing-original']
+Exception in thread "main" java.io.IOException: source/absence drift: m3/collections/src/main/java/com/m3/collections/M3CollectionViews.java
+	at Replay.state(Replay.java:107)
+	at Replay.main(Replay.java:36)
+
+EXIT=1
+
+=== refuse-occupied-new ===
+$ ['java', '-cp', '/mnt/data/wrapper-qualified-v2/replay-classes', 'Replay', '--apply', '/mnt/data/m3-work', '/mnt/data/wrapper-qualified-v2/refusals/occupied-new']
+Exception in thread "main" java.io.IOException: source/absence drift: m3/collections/wrappers/src/test/java/com/m3/collections/M3WrapperContractsProof.java
+	at Replay.state(Replay.java:107)
+	at Replay.main(Replay.java:36)
+
+EXIT=1
+
+=== refuse-mixed-state ===
+$ ['java', '-cp', '/mnt/data/wrapper-qualified-v2/replay-classes', 'Replay', '--apply', '/mnt/data/m3-work', '/mnt/data/wrapper-qualified-v2/refusals/mixed-state']
+Exception in thread "main" java.io.IOException: mixed PRE/POST input
+	at Replay.state(Replay.java:113)
+	at Replay.main(Replay.java:36)
+
+EXIT=1
+
+=== refuse-leaf-symlink ===
+$ ['java', '-cp', '/mnt/data/wrapper-qualified-v2/replay-classes', 'Replay', '--apply', '/mnt/data/m3-work', '/mnt/data/wrapper-qualified-v2/refusals/leaf-symlink']
+Exception in thread "main" java.io.IOException: symlink refused: m3/collections/src/main/java/com/m3/collections/M3CollectionViews.java
+	at Replay.safe(Replay.java:121)
+	at Replay.state(Replay.java:105)
+	at Replay.main(Replay.java:36)
+
+EXIT=1
+
+=== refuse-parent-symlink ===
+$ ['java', '-cp', '/mnt/data/wrapper-qualified-v2/replay-classes', 'Replay', '--apply', '/mnt/data/m3-work', '/mnt/data/wrapper-qualified-v2/refusals/parent-symlink']
+Exception in thread "main" java.io.IOException: symlink refused: m3/collections/src/main/java/com/m3/collections/M3CollectionViews.java
+	at Replay.safe(Replay.java:121)
+	at Replay.state(Replay.java:105)
+	at Replay.main(Replay.java:36)
+
+EXIT=1
+
+=== refuse-directory-target ===
+$ ['java', '-cp', '/mnt/data/wrapper-qualified-v2/replay-classes', 'Replay', '--apply', '/mnt/data/m3-work', '/mnt/data/wrapper-qualified-v2/refusals/directory-target']
+Exception in thread "main" java.io.IOException: not a file
+	at Replay.hashAt(Replay.java:128)
+	at Replay.state(Replay.java:105)
+	at Replay.main(Replay.java:36)
+
+EXIT=1
+
+=== refuse-check-pre ===
+$ ['java', '-cp', '/mnt/data/wrapper-qualified-v2/replay-classes', 'Replay', '--check', '/mnt/data/m3-work', '/mnt/data/wrapper-qualified-v2/refusals/check-pre']
+Exception in thread "main" java.io.IOException: recipe not materialized
+	at Replay.main(Replay.java:40)
+
+EXIT=1
+
+=== refuse-invalid-mode ===
+$ ['java', '-cp', '/mnt/data/wrapper-qualified-v2/replay-classes', 'Replay', '--unknown', '/mnt/data/m3-work', '/mnt/data/wrapper-qualified-v2/refusals/invalid-mode']
+Exception in thread "main" java.lang.IllegalArgumentException: --apply|--check SOURCE_ROOT TARGET_ROOT
+	at Replay.main(Replay.java:32)
+
+EXIT=1
+
+=== refuse-ownership-lock ===
+$ ['java', '-cp', '/mnt/data/wrapper-qualified-v2/replay-classes', 'Replay', '--apply', '/mnt/data/m3-work', '/mnt/data/wrapper-qualified-v2/refusals/ownership-lock']
+Exception in thread "main" java.io.IOException: worktree already owned
+	at Replay.main(Replay.java:45)
+
+EXIT=1
+
+=== refuse-manifest-drift ===
+$ ['java', '-cp', '/mnt/data/wrapper-qualified-v2/replay-classes', 'Replay', '--apply', '/mnt/data/wrapper-qualified-v2/refusals/manifest-drift-source', '/mnt/data/wrapper-qualified-v2/refusals/manifest-drift']
+Exception in thread "main" java.io.IOException: manifest drift
+	at Replay.templates(Replay.java:82)
+	at Replay.main(Replay.java:35)
+
+EXIT=1
+
+=== refuse-template-drift ===
+$ ['java', '-cp', '/mnt/data/wrapper-qualified-v2/replay-classes', 'Replay', '--apply', '/mnt/data/wrapper-qualified-v2/refusals/template-drift-source', '/mnt/data/wrapper-qualified-v2/refusals/template-drift']
+Exception in thread "main" java.io.IOException: template drift: m3/collections/src/main/java/com/m3/collections/M3CollectionViews.java
+	at Replay.templates(Replay.java:94)
+	at Replay.main(Replay.java:35)
+
+EXIT=1
+
+=== refuse-template-symlink ===
+$ ['java', '-cp', '/mnt/data/wrapper-qualified-v2/replay-classes', 'Replay', '--apply', '/mnt/data/wrapper-qualified-v2/refusals/template-symlink-source', '/mnt/data/wrapper-qualified-v2/refusals/template-symlink']
+Exception in thread "main" java.io.IOException: symlink refused: m3/collections/wrappers/contract-refinement-20261017/replay-inputs/M3CollectionViews.java.txt
+	at Replay.safe(Replay.java:121)
+	at Replay.templates(Replay.java:93)
+	at Replay.main(Replay.java:35)
+
+EXIT=1
+
+=== actual-replay-emission ===
+$ ['java', '-cp', '/mnt/data/wrapper-qualified-v2/replay-classes', 'Replay', '--apply', '/mnt/data/m3-work', '/mnt/data/wrapper-qualified-v2/generated']
+PASS M3 short flag replay changes=4
+
+EXIT=0
+
+=== fixed-point-replay ===
+$ ['java', '-cp', '/mnt/data/wrapper-qualified-v2/replay-classes', 'Replay', '--apply', '/mnt/data/m3-work', '/mnt/data/wrapper-qualified-v2/generated']
+PASS M3 short flag replay changes=0
+
+EXIT=0
+
+=== fixed-point-check ===
+$ ['java', '-cp', '/mnt/data/wrapper-qualified-v2/replay-classes', 'Replay', '--check', '/mnt/data/m3-work', '/mnt/data/wrapper-qualified-v2/generated']
+PASS M3 short flag replay changes=0
+
+EXIT=0
+
+=== compile-generated-java ===
+$ ['javac', '--release', '21', '-proc:none', '-Xlint:all', '-Werror', '-h', '/mnt/data/wrapper-qualified-v2/headers', '-d', '/mnt/data/wrapper-qualified-v2/classes', '/mnt/data/wrapper-qualified-v2/generated/m3/collections/src/main/java/com/m3/collections/M3CollectionViews.java', '/mnt/data/wrapper-qualified-v2/generated/m3/collections/src/main/java/com/m3/collections/M3FilteredMaps.java', '/mnt/data/wrapper-qualified-v2/generated/m3/collections/wrappers/src/test/java/com/m3/collections/M3WrapperContractsProof.java', '/mnt/data/m3-work/m3/collections/wrappers/src/test/java/com/m3/collections/M3DeepFilterCompositionProof.java', '/mnt/data/m3-work/m3/collections/wrappers/src/test/java/com/m3/collections/M3DeepFilterNativeProof.java']
+
+EXIT=0
+
+=== generated-tiered ===
+$ ['java', '-ea', '-Xss256k', '-Xmx256m', '-cp', '/mnt/data/wrapper-qualified-v2/classes', 'com.m3.collections.M3WrapperContractsProof']
+M3_WRAPPER_CONTRACTS_PASS checks=964437 seeds=192 ownerProfiles=5
+
+EXIT=0
+
+=== generated-interpreter ===
+$ ['java', '-ea', '-Xss256k', '-Xmx256m', '-Xint', '-cp', '/mnt/data/wrapper-qualified-v2/classes', 'com.m3.collections.M3WrapperContractsProof']
+M3_WRAPPER_CONTRACTS_PASS checks=964437 seeds=192 ownerProfiles=5
+
+EXIT=0
+
+=== inherited-deep-tiered ===
+$ ['java', '-ea', '-Xss256k', '-Xmx256m', '-Dm3.deep.depth=65536', '-cp', '/mnt/data/wrapper-qualified-v2/classes', 'com.m3.collections.M3DeepFilterCompositionProof']
+M3_DEEP_FILTER_PASS checks=1312160 depth=65536 seeds=192
+
+EXIT=0
+
+=== inherited-deep-interpreter ===
+$ ['java', '-ea', '-Xss256k', '-Xmx256m', '-Dm3.deep.depth=8192', '-Xint', '-cp', '/mnt/data/wrapper-qualified-v2/classes', 'com.m3.collections.M3DeepFilterCompositionProof']
+M3_DEEP_FILTER_PASS checks=165280 depth=8192 seeds=192
+
+EXIT=0
+
+=== compile-original-witness ===
+$ ['javac', '--release', '21', '-proc:none', '-Xlint:all', '-Werror', '-d', '/mnt/data/wrapper-qualified-v2/baseline', '/mnt/data/wrapper-qualified-v2/baseline/M3CollectionViews.java', '/mnt/data/wrapper-qualified-v2/baseline/M3FilteredMaps.java', '/mnt/data/wrapper-qualified-v2/generated/m3/collections/wrappers/src/test/java/com/m3/collections/M3WrapperContractsProof.java']
+
+EXIT=0
+
+=== original-distinct-contract ===
+$ ['java', '-Xss256k', '-Xmx256m', '-cp', '/mnt/data/wrapper-qualified-v2/baseline', 'com.m3.collections.M3WrapperContractsProof']
+Exception in thread "main" java.lang.AssertionError: Set DISTINCT contract lost
+	at com.m3.collections.M3WrapperContractsProof.check(M3WrapperContractsProof.java:35)
+	at com.m3.collections.M3WrapperContractsProof.metadata(M3WrapperContractsProof.java:50)
+	at com.m3.collections.M3WrapperContractsProof.projectionMetadata(M3WrapperContractsProof.java:81)
+	at com.m3.collections.M3WrapperContractsProof.main(M3WrapperContractsProof.java:264)
+
+EXIT=1
+
+=== original-large-count ===
+$ ['java', '-Xmx128m', '-cp', '/mnt/data/wrapper-qualified-v2/baseline', 'com.m3.collections.M3WrapperContractsProof', '--large']
+Exception in thread "main" java.lang.AssertionError: Collection.size overflow: expected=2147483647, actual=-2147483632
+	at com.m3.collections.M3WrapperContractsProof.check(M3WrapperContractsProof.java:35)
+	at com.m3.collections.M3WrapperContractsProof.equal(M3WrapperContractsProof.java:39)
+	at com.m3.collections.M3WrapperContractsProof.large(M3WrapperContractsProof.java:258)
+	at com.m3.collections.M3WrapperContractsProof.main(M3WrapperContractsProof.java:263)
+
+EXIT=1
+
+=== generated-large-count ===
+$ ['java', '-Xmx128m', '-cp', '/mnt/data/wrapper-qualified-v2/classes', 'com.m3.collections.M3WrapperContractsProof', '--large']
+M3_WRAPPER_LARGE_PASS occurrences=2147483664 checks=2
+
+EXIT=0
+
+=== M3CollectionViews.java-old-api ===
+$ ['javap', '-public', '-s', '-cp', '/mnt/data/wrapper-qualified-v2/baseline', 'com.m3.collections.M3CollectionViews']
+Compiled from "M3CollectionViews.java"
+public final class com.m3.collections.M3CollectionViews {
+  public static <E> java.util.Collection<E> filtered(java.util.Collection<E>, java.util.function.Predicate<? super E>);
+    descriptor: (Ljava/util/Collection;Ljava/util/function/Predicate;)Ljava/util/Collection;
+
+  public static <E> java.util.Set<E> filtered(java.util.Set<E>, java.util.function.Predicate<? super E>);
+    descriptor: (Ljava/util/Set;Ljava/util/function/Predicate;)Ljava/util/Set;
+
+  public static <E> java.util.SortedSet<E> filtered(java.util.SortedSet<E>, java.util.function.Predicate<? super E>);
+    descriptor: (Ljava/util/SortedSet;Ljava/util/function/Predicate;)Ljava/util/SortedSet;
+
+  public static <E> java.util.NavigableSet<E> filtered(java.util.NavigableSet<E>, java.util.function.Predicate<? super E>);
+    descriptor: (Ljava/util/NavigableSet;Ljava/util/function/Predicate;)Ljava/util/NavigableSet;
+
+  public static <E> java.util.List<E> sortedSnapshot(java.util.Collection<? extends E>, java.util.Comparator<? super E>);
+    descriptor: (Ljava/util/Collection;Ljava/util/Comparator;)Ljava/util/List;
+
+  public static <E> java.util.List<E> filteredSnapshot(java.util.Collection<? extends E>, java.util.function.Predicate<? super E>);
+    descriptor: (Ljava/util/Collection;Ljava/util/function/Predicate;)Ljava/util/List;
+
+  public static <E> java.util.List<E> filteredSortedSnapshot(java.util.Collection<? extends E>, java.util.function.Predicate<? super E>, java.util.Comparator<? super E>);
+    descriptor: (Ljava/util/Collection;Ljava/util/function/Predicate;Ljava/util/Comparator;)Ljava/util/List;
+}
+
+EXIT=0
+
+=== M3CollectionViews.java-new-api ===
+$ ['javap', '-public', '-s', '-cp', '/mnt/data/wrapper-qualified-v2/classes', 'com.m3.collections.M3CollectionViews']
+Compiled from "M3CollectionViews.java"
+public final class com.m3.collections.M3CollectionViews {
+  public static <E> java.util.Collection<E> filtered(java.util.Collection<E>, java.util.function.Predicate<? super E>);
+    descriptor: (Ljava/util/Collection;Ljava/util/function/Predicate;)Ljava/util/Collection;
+
+  public static <E> java.util.Set<E> filtered(java.util.Set<E>, java.util.function.Predicate<? super E>);
+    descriptor: (Ljava/util/Set;Ljava/util/function/Predicate;)Ljava/util/Set;
+
+  public static <E> java.util.SortedSet<E> filtered(java.util.SortedSet<E>, java.util.function.Predicate<? super E>);
+    descriptor: (Ljava/util/SortedSet;Ljava/util/function/Predicate;)Ljava/util/SortedSet;
+
+  public static <E> java.util.NavigableSet<E> filtered(java.util.NavigableSet<E>, java.util.function.Predicate<? super E>);
+    descriptor: (Ljava/util/NavigableSet;Ljava/util/function/Predicate;)Ljava/util/NavigableSet;
+
+  public static <E> java.util.List<E> sortedSnapshot(java.util.Collection<? extends E>, java.util.Comparator<? super E>);
+    descriptor: (Ljava/util/Collection;Ljava/util/Comparator;)Ljava/util/List;
+
+  public static <E> java.util.List<E> filteredSnapshot(java.util.Collection<? extends E>, java.util.function.Predicate<? super E>);
+    descriptor: (Ljava/util/Collection;Ljava/util/function/Predicate;)Ljava/util/List;
+
+  public static <E> java.util.List<E> filteredSortedSnapshot(java.util.Collection<? extends E>, java.util.function.Predicate<? super E>, java.util.Comparator<? super E>);
+    descriptor: (Ljava/util/Collection;Ljava/util/function/Predicate;Ljava/util/Comparator;)Ljava/util/List;
+}
+
+EXIT=0
+
+=== M3FilteredMaps.java-old-api ===
+$ ['javap', '-public', '-s', '-cp', '/mnt/data/wrapper-qualified-v2/baseline', 'com.m3.collections.M3FilteredMaps']
+Compiled from "M3FilteredMaps.java"
+public final class com.m3.collections.M3FilteredMaps {
+  public static <K, V> java.util.Map<K, V> filtered(java.util.Map<K, V>, java.util.function.BiPredicate<? super K, ? super V>);
+    descriptor: (Ljava/util/Map;Ljava/util/function/BiPredicate;)Ljava/util/Map;
+
+  public static <K, V> java.util.SortedMap<K, V> filtered(java.util.SortedMap<K, V>, java.util.function.BiPredicate<? super K, ? super V>);
+    descriptor: (Ljava/util/SortedMap;Ljava/util/function/BiPredicate;)Ljava/util/SortedMap;
+
+  public static <K, V> java.util.NavigableMap<K, V> filtered(java.util.NavigableMap<K, V>, java.util.function.BiPredicate<? super K, ? super V>);
+    descriptor: (Ljava/util/NavigableMap;Ljava/util/function/BiPredicate;)Ljava/util/NavigableMap;
+}
+
+EXIT=0
+
+=== M3FilteredMaps.java-new-api ===
+$ ['javap', '-public', '-s', '-cp', '/mnt/data/wrapper-qualified-v2/classes', 'com.m3.collections.M3FilteredMaps']
+Compiled from "M3FilteredMaps.java"
+public final class com.m3.collections.M3FilteredMaps {
+  public static <K, V> java.util.Map<K, V> filtered(java.util.Map<K, V>, java.util.function.BiPredicate<? super K, ? super V>);
+    descriptor: (Ljava/util/Map;Ljava/util/function/BiPredicate;)Ljava/util/Map;
+
+  public static <K, V> java.util.SortedMap<K, V> filtered(java.util.SortedMap<K, V>, java.util.function.BiPredicate<? super K, ? super V>);
+    descriptor: (Ljava/util/SortedMap;Ljava/util/function/BiPredicate;)Ljava/util/SortedMap;
+
+  public static <K, V> java.util.NavigableMap<K, V> filtered(java.util.NavigableMap<K, V>, java.util.function.BiPredicate<? super K, ? super V>);
+    descriptor: (Ljava/util/NavigableMap;Ljava/util/function/BiPredicate;)Ljava/util/NavigableMap;
+}
+
+EXIT=0
+
+=== compile-jni-ubsan ===
+$ ['gcc', '-std=c17', '-O2', '-Wall', '-Wextra', '-Werror', '-pedantic', '-fPIC', '-shared', '-fsanitize=undefined', '-fno-sanitize-recover=undefined', '-I/usr/lib/jvm/java-21-openjdk-amd64/include', '-I/usr/lib/jvm/java-21-openjdk-amd64/include/linux', '/mnt/data/m3-work/m3/collections/wrappers/direct-projection-20261017/m3_map_cursor_jni.c', '/mnt/data/m3-work/m3/collections/wrappers/deep-filter-20261017/native/m3_deep_filter_jni.c', '-o', '/mnt/data/wrapper-qualified-v2/libm3_wrapper_contracts_jni.so']
+
+EXIT=0
+
+=== generated-jni ===
+$ ['java', '-ea', '-Xss256k', '-Xmx256m', '-Xcheck:jni', '-Dm3.deep.native.library=/mnt/data/wrapper-qualified-v2/libm3_wrapper_contracts_jni.so', '-cp', '/mnt/data/wrapper-qualified-v2/classes', 'com.m3.collections.M3DeepFilterNativeProof']
+M3_DEEP_FILTER_JNI_PASS checks=156 depth=65536
+
+EXIT=0
+
