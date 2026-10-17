@@ -51,6 +51,27 @@ public final class M3IndexMaskCompactor {
         return selectJava(orderedRows, rowStates, requiredMask);
     }
 
+    /**
+     * Internal native selection over an owner's stable half-open index window.
+     * States describe logical positions, not physical row IDs. This never retains inputs.
+     * Old binaries keep using their original native selector and defensive window copy;
+     * an absent library still fails, and a native request never falls back to Java.
+     */
+    static int[] selectNativeRange(int[] orderedRows, int first, int length,
+            byte[] rowStates, int requiredMask) {
+        Objects.requireNonNull(orderedRows, "orderedRows");
+        Objects.checkFromIndexSize(first, length, orderedRows.length);
+        validate(rowStates, length, requiredMask);
+        if (!NativeLibrary.AVAILABLE) {
+            throw new UnsatisfiedLinkError("m3_index_mask JNI library unavailable");
+        }
+        if (NativeRange.AVAILABLE) {
+            return selectRangeNative(orderedRows, rowStates, first, length, requiredMask);
+        }
+        return selectNative(java.util.Arrays.copyOfRange(orderedRows, first, first + length),
+                rowStates, requiredMask);
+    }
+
     /** Count set-flag matches without boxing, copying, or retaining a view. */
     public static int selectedCount(byte[] rowStates, int requiredMask) {
         Objects.requireNonNull(rowStates, "rowStates");
@@ -146,6 +167,23 @@ public final class M3IndexMaskCompactor {
             AVAILABLE = loaded;
         }
     }
+
+    /** Lazy probing does not change initialization of the legacy public native API. */
+    private static final class NativeRange {
+        private static final boolean AVAILABLE = available();
+        private static boolean available() {
+            try {
+                return rangeAbiNative() == 1;
+            } catch (UnsatisfiedLinkError legacyBinary) {
+                return false;
+            }
+        }
+    }
+
+    private static native int rangeAbiNative();
+
+    private static native int[] selectRangeNative(int[] orderedRows, byte[] rowStates,
+            int first, int length, int requiredMask);
 
     private static native int[] selectNative(int[] orderedRows, byte[] rowStates,
                                               int requiredMask);
