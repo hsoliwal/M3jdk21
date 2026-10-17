@@ -35,6 +35,7 @@ public final class M3StringRegexDpTest {
         deterministic();
         randomized();
         compositeDagsAndLongPlans();
+        amalgamatedPrecompute();
         refusals();
         System.out.println("M3_STRING_REGEX_DP_PASS|checks=" + checks);
     }
@@ -141,6 +142,69 @@ public final class M3StringRegexDpTest {
         equal(splitPair.matches(accepting),
                 Pattern.compile(accepting).matcher(new StringBuilder(splitPair)).matches(),
                 "rolling surrogate JDK fallback");
+    }
+
+    /**
+     * More than ten thousand existing and new differential cases. Precomputed
+     * facts are optional: they can only prove impossibility, never a match.
+     */
+    private static void amalgamatedPrecompute() throws Exception {
+        Class<?> storageType = Class.forName("java.lang.M3String");
+        Method prepareFacts = storageType.getDeclaredMethod("facts");
+        prepareFacts.setAccessible(true);
+
+        String missing = String.join("", "a".repeat(192), "b".repeat(192));
+        prepareFacts.invoke(STRING_M3.get(missing));
+        verify(missing, "a*Q.*", 0);
+        verify(missing, "a*b*Q", 0);
+        verify(missing, "Qb*", 0);
+        verify(missing, "a*Q", 0);
+        verify(missing, "a*".repeat(36) + "Q.*", 0);
+        verify(missing, "a*".repeat(36) + "b*Q", 0);
+        verify(missing, "a*b*", 1);
+        verify(missing, "a.*b", 1);
+        verify(String.join("", "ab", "c"), "abc.*", 1);
+        verify(String.join("", "x", "y"), "a*b*c*Q", 0);
+
+        String splitPair = String.join("", "a", "\ud83d", "\ude42", "b");
+        equal(decision(splitPair, "a.*b"), -1,
+                "surrogate-containing possible match still delegates to Pattern");
+        verify(splitPair, "a*Q.*", 0);
+
+        Random random = new Random(0x4d3352414d414c47L);
+        String[] tokens = {"a", "b", "c", "A", "Z", "Q", ".", "a*", "b*", "c*", ".*"};
+        String[] units = {"a", "b", "A", "Z", "c", "ab", "bc", "",
+                "\n", "\r", "\u2028", "\ud83d", "\ude42"};
+        for (int trial = 0; trial < 8_192; trial++) {
+            StringBuilder regex = new StringBuilder("a*");
+            int atoms = 1 + random.nextInt(48);
+            for (int i = 0; i < atoms; i++) {
+                regex.append(tokens[random.nextInt(tokens.length)]);
+            }
+            int parts = 1 + random.nextInt(8);
+            String[] leaves = new String[parts];
+            for (int i = 0; i < parts; i++) {
+                leaves[i] = units[random.nextInt(units.length)];
+            }
+            String composite = String.join("", leaves);
+            String expression = regex.toString();
+            boolean oracle = Pattern.compile(expression)
+                    .matcher(new StringBuilder(composite)).matches();
+            // Empty Strings have no canonical M3 owner in this JDK stage.
+            // Test the authoritative public fallback instead of direct DP.
+            if (composite.isEmpty()) {
+                equal(composite.matches(expression), oracle,
+                        "empty String/Pattern trial=" + trial);
+                continue;
+            }
+            if ((trial & 1) == 0) prepareFacts.invoke(STRING_M3.get(composite));
+            int value = decision(composite, expression);
+            if (value >= 0) {
+                equal(value == 1, oracle, "amalgamated DP/Pattern trial=" + trial);
+            }
+            equal(composite.matches(expression), oracle,
+                    "amalgamated String/Pattern trial=" + trial);
+        }
     }
 
     private static void refusals() throws Exception {

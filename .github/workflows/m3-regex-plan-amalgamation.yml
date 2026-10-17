@@ -1,0 +1,49 @@
+name: M3JDK21 regex plan amalgamation A/B
+
+on:
+  push:
+    branches:
+      - m3/regex-plan-amalgamation-20261017
+  pull_request:
+    paths:
+      - "src/java.base/share/classes/java/lang/M3StringRegexDp.java"
+      - "test/jdk/java/lang/String/M3StringRegexDpTest.java"
+      - "m3/runtime-integration/regex-plan-amalgamation/**"
+      - ".github/workflows/m3-regex-plan-amalgamation.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  java21-exact-source:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - name: Checkout exact Java owners and sealed before-snapshot
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            m3/runtime-integration/regex-plan-amalgamation/
+            src/java.base/share/classes/java/lang/M3StringRegexDp.java
+            src/java.base/share/classes/java/lang/M3String.java
+            src/java.base/share/classes/java/lang/M3StringFacts.java
+            test/jdk/java/lang/String/M3StringRegexDpTest.java
+      - name: Java21 for isolated diff/oracle
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
+      - name: Confirm sealed M3JDK owner files and native path preservation
+        run: python3 m3/runtime-integration/regex-plan-amalgamation/verify_receiver.py
+      - name: Compile complete exact old/new regex engines with extracted M3 facts and cursor
+        run: python3 m3/runtime-integration/regex-plan-amalgamation/source_extracted_java21.py
+      - name: Compile exact enlarged jtreg harness (stock Java21 syntax-only)
+        run: |
+          mkdir -p "$RUNNER_TEMP/m3-regex-amalgam-jtreg"
+          javac --release 21 -proc:none -Xlint:all,-serial -Werror \
+                -d "$RUNNER_TEMP/m3-regex-amalgam-jtreg" \
+                test/jdk/java/lang/String/M3StringRegexDpTest.java
+      # Source-extracted fixture != matched modified M3JDK21 image.
+      # Separate jtreg, JNI, GC, JIT, full reactor, JMH gates remain required.
