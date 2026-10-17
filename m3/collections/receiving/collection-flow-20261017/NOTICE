@@ -1,0 +1,6 @@
+Copyright 2026 Hitesh Soliwal and contributors.
+Apache-2.0 first-party Synexia source, recipes, templates, tests and generated target adaptations.
+Canonical reusable algorithms and source-seal recipe owners remain hsoliwal/com.synexia.
+This is a target-specific receiver/proof mirror; it creates no Synexia runtime dependency.
+Exact source/target lineage: DONOR_MAP.json and manifest.tsv. Existing OpenJDK and third-party licenses are unchanged.
+Third-party SDK/provider executables and JARs are not included. Competitive-programming pages are references only; their editorial or submission bodies are not copied.

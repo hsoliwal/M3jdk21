@@ -1,0 +1,5 @@
+donor_owner	target_owner	mode	phase
+com.synexia.common.collections.flow	com.m3.collections	INDEPENDENT_APACHE_MODULE	ISOLATED_RECEIVER_NO_GLOBAL_PHASE_ADVANCE
+com.synexia.common.collections.M3SortedView	com.m3.collections.M3SortedView	INDEPENDENT_APACHE_MODULE	ISOLATED_RECEIVER_NO_GLOBAL_PHASE_ADVANCE
+com.synexia.common.progress.ProgressMonitor	com.m3.collections.M3ProgressMonitor	REUSE_EXACT_EXISTING_OWNER	KEEP
+M3GpuToolJoinRecipe/Manifest	target proof mirror	EXTERNAL_RECIPE_TOOL	NO_GENERIC_OWNERSHIP_TRANSFER

@@ -1,0 +1,14 @@
+{
+  "date": "2026-10-17",
+  "receiving_base": "05e72c4bbfb1069d1306941ffe8471d373fb3813",
+  "recovered_template_tree": "fe4dc8c9363707b7d97dac3deb974bc88d4460ab",
+  "status": "LOCAL_MAVEN_VERIFY_PASS",
+  "sdk_junit": {"tests":5,"failures":0,"errors":0,"skipped":0},
+  "manifest_targets":29,
+  "generated_changes":25,
+  "fixed_point":0,
+  "runtime_commands":20,
+  "checks":{"v2_java_groups":47,"v2_jni_groups":50,"v3_java_assertions":131108,"v3_jni_assertions":133553,"prepared_per_backend":345868,"target_composition_per_backend":17,"named_module_client":"PASS","C17_UBSan_checked_JNI":"PASS","native_export_count":5},
+  "runtime_verifier_sha256":"9039ac98cc4598396d9dafdfca580dad5a3ad7209b000e0358727ad93966a57f",
+  "limitations":["overlapping counts","selected-source module not full module","no built JDK/jtreg","not hosted CI","Linux only","historical catalogue observations are not fresh performance evidence"]
+}
