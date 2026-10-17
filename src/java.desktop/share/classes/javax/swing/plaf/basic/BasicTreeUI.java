@@ -46,6 +46,7 @@ import sun.swing.SwingUtilities2;
 
 import sun.swing.DefaultLookup;
 import sun.swing.UIAction;
+import sun.swing.tree.M3VariableHeightLayoutCache;
 
 /**
  * The basic L&amp;F for a hierarchical data structure.
@@ -1112,6 +1113,10 @@ public class BasicTreeUI extends TreeUI
     protected AbstractLayoutCache createLayoutCache() {
         if(isLargeModel() && getRowHeight() > 0) {
             return new FixedHeightLayoutCache();
+        }
+        //FLLDCIM: M3 swing-viewport leaf 1 - arithmetic layout cache, opt-in by m3.swing.viewport
+        if (M3VariableHeightLayoutCache.ENABLED) {
+            return new M3VariableHeightLayoutCache();
         }
         return new VariableHeightLayoutCache();
     }
