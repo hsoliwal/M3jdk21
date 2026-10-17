@@ -35,7 +35,10 @@ public final class M3RankIndexRecipe {
                     "50c741073d6ef0b4efbd4a90c1f336f42945fa3bcd5824455f213f7509a52388"),
             new Install("M3LongRankIndexSelfTest.java",
                     "m3/collections/src/test/java/com/m3/collections/M3LongRankIndexSelfTest.java",
-                    "63fd0c55d60419a6ca3669bc5f877357566f06072cfdad553e9824767836e3d1"));
+                    "63fd0c55d60419a6ca3669bc5f877357566f06072cfdad553e9824767836e3d1"),
+            new Install("M3LongRankIndexTest.java",
+                    "m3/collections/src/test/java/com/m3/collections/M3LongRankIndexTest.java",
+                    "b204714a64abb5a6e73c23cf91c1399096c7a2246a714d7bc783568ede131b39"));
 
     private M3RankIndexRecipe() { }
 
