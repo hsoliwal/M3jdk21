@@ -1,0 +1,51 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3 64-bit indexed path/mask Java JNI proof
+on:
+  pull_request:
+    paths:
+      - 'm3/collections/src/main/java/com/m3/collections/M3IndexPathMasks.java'
+      - 'm3/collections/src/main/native/collections/m3_index_path_masks.c'
+      - 'm3/collections/src/test/java/com/m3/collections/M3IndexPathMasksLong*.java'
+      - 'm3/collections/recipe/index-path-long-20261017/**'
+      - 'm3/collections/test_verify_index_path_long.py'
+      - 'm3/collections/verify_donation.py'
+      - '.github/workflows/m3-index-path-long-20261017.yml'
+  workflow_dispatch:
+jobs:
+  java-jni-oracle:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+      - uses: actions/setup-java@dded0888837ed1f317902acf8a20df0ad188d165 # v4.7.1
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Verify exact successor and negative receipt cases
+        run: python3 -m unittest discover -s m3/collections -p 'test_verify_index_path_long.py' -v
+      - name: Strict Java21 compile and JNI generated header
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/classes" "$RUNNER_TEMP/jni-headers"
+          javac --release 21 -proc:none -Xlint:all -Werror \
+            -h "$RUNNER_TEMP/jni-headers" -d "$RUNNER_TEMP/classes" \
+            m3/collections/src/main/java/com/m3/collections/M3IndexPathMasks.java \
+            m3/collections/src/test/java/com/m3/collections/M3IndexPathMasksSelfTest.java \
+            m3/collections/src/test/java/com/m3/collections/M3IndexPathMasksLongSelfTest.java
+      - name: Strict native GCC17, sanitizer, symbol parity and checked JNI
+        shell: bash
+        run: |
+          set -euo pipefail
+          gcc -std=c17 -O2 -Wall -Wextra -Werror -Wconversion -Wshadow -pedantic \
+            -fsanitize=undefined -fno-sanitize-recover=all -shared -fPIC \
+            -I"$JAVA_HOME/include" -I"$JAVA_HOME/include/linux" \
+            -I"$RUNNER_TEMP/jni-headers" \
+            m3/collections/src/main/native/collections/m3_index_path_masks.c \
+            -o "$RUNNER_TEMP/libm3_collections_pathmask.so"
+          nm -D "$RUNNER_TEMP/libm3_collections_pathmask.so" | grep -q Java_com_m3_collections_M3IndexPathMasks_selectNative
+          nm -D "$RUNNER_TEMP/libm3_collections_pathmask.so" | grep -q Java_com_m3_collections_M3IndexPathMasks_selectLongNative
+          java -Xcheck:jni -Djava.library.path="$RUNNER_TEMP" -cp "$RUNNER_TEMP/classes" \
+            com.m3.collections.M3IndexPathMasksSelfTest --native
+          java -Xcheck:jni -Djava.library.path="$RUNNER_TEMP" -cp "$RUNNER_TEMP/classes" \
+            com.m3.collections.M3IndexPathMasksLongSelfTest --native
