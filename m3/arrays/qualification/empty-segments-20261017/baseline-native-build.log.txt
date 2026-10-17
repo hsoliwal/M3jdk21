@@ -1,0 +1,20 @@
+[ 16%] Building C object CMakeFiles/m3_arrays.dir/m3_arrays.c.o
+[ 33%] Building C object CMakeFiles/m3_arrays_checks.dir/tests/m3_arrays_checks.c.o
+/workspace/scratch/13309be96b09/collections-work/baseline/m3/arrays/src/main/native/tests/m3_arrays_checks.c: In function ‘main’:
+/workspace/scratch/13309be96b09/collections-work/baseline/m3/arrays/src/main/native/tests/m3_arrays_checks.c:9:18: error: unused variable ‘greater’ [-Werror=unused-variable]
+    9 |   const uint16_t greater[] = {'a','b','d',0xd83d,0xde00};
+      |                  ^~~~~~~
+/workspace/scratch/13309be96b09/collections-work/baseline/m3/arrays/src/main/native/tests/m3_arrays_checks.c:8:18: error: unused variable ‘same’ [-Werror=unused-variable]
+    8 |   const uint16_t same[] = {'a','b','c',0xd83d,0xde00};
+      |                  ^~~~
+/workspace/scratch/13309be96b09/collections-work/baseline/m3/arrays/src/main/native/tests/m3_arrays_checks.c:7:18: error: unused variable ‘left’ [-Werror=unused-variable]
+    7 |   const uint16_t left[] = {'a','b','c',0xd83d,0xde00};
+      |                  ^~~~
+cc1: all warnings being treated as errors
+[ 50%] Building C object CMakeFiles/m3_arrays.dir/m3_arrays_jni.c.o
+gmake[2]: *** [CMakeFiles/m3_arrays_checks.dir/build.make:79: CMakeFiles/m3_arrays_checks.dir/tests/m3_arrays_checks.c.o] Error 1
+gmake[1]: *** [CMakeFiles/Makefile2:1046: CMakeFiles/m3_arrays_checks.dir/all] Error 2
+gmake[1]: *** Waiting for unfinished jobs....
+[ 66%] Linking C shared library libm3_arrays.so
+[ 66%] Built target m3_arrays
+gmake: *** [Makefile:101: all] Error 2
