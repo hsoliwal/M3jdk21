@@ -19,8 +19,8 @@ STRING = "src/java.base/share/classes/java/lang/M3String.java"
 FACTS = "src/java.base/share/classes/java/lang/M3StringFacts.java"
 BEFORE = "e8320c0669740b7d3a579a9c1e408f6291b3d01f"
 BEFORE_SHA = "f875210dfb605799b6c8dbee53b28ad6383e000d90da775f7fd285464da7b2d3"
-AFTER_SHA = "4972d8c3a664867559273a63df340c042eab1fa40f21e7b2139422ed06f942ba"
-TEST_SHA = "23b49a26ce30586758afb8cc7a7fecaee5a70833943fd3598c5b703d2a516cd9"
+AFTER_SHA = "9536a6df2042fe047f02ef07834edca91ce7a863e5b3c1daafffe55fdad48e6e"
+TEST_SHA = "971290714bb056831ad844288e66562f88fa87fbf0c4cd17fa0716f9df797ffc"
 
 def run(command, **kwargs):
     outcome = subprocess.run(command, check=False, **kwargs)
@@ -47,7 +47,9 @@ def fixture_owner():
     cursor = extract(current, "    static final class CodeUnitCursor {",
                      "    private static final class CharsSpliterator", "M3String.CodeUnitCursor")
     add_signal = extract(facts, "    private static long addSignal(long signal, char value) {",
-                         "    private static long addBigramSignal", "M3StringFacts.addSignal")
+                         "    static long bigramSignal(", "M3StringFacts.addSignal")
+    ngram = extract(facts, "    static long bigramSignal(char first, char second) {",
+                    "    private static int mix32(int value) {", "M3StringFacts.ngram")
     mix32 = extract(facts, "    private static int mix32(int value) {",
                     "    private static char asciiUpper", "M3StringFacts.mix32")
     return """import java.util.Objects;
@@ -80,8 +82,15 @@ final class M3StringTuple extends M3StringOwner {
 }
 final class M3StringFacts {
     final long bitSignal64;
-    M3StringFacts(long bits) { bitSignal64 = bits; }
+    final long bigramSignal64;
+    final long trigramSignal64;
+    M3StringFacts(long bits, long bigrams, long trigrams) {
+        bitSignal64 = bits;
+        bigramSignal64 = bigrams;
+        trigramSignal64 = trigrams;
+    }
     static long codeUnitSignal(char unit) { return addSignal(0L, unit); }
+%s
 %s
 %s
 }
@@ -112,11 +121,15 @@ final class M3String {
     }
     M3StringFacts factsIfPrepared() { return facts; }
     void prepareFacts() {
-        long bits = 0;
+        long bits = 0, bigrams = 0, trigrams = 0;
         for (int i = 0; i < length; i++) {
-            bits |= M3StringFacts.codeUnitSignal(charAt(i));
+            char unit = charAt(i);
+            bits |= M3StringFacts.codeUnitSignal(unit);
+            if (i > 0) bigrams |= M3StringFacts.bigramSignal(charAt(i - 1), unit);
+            if (i > 1) trigrams |= M3StringFacts.trigramSignal(
+                    charAt(i - 2), charAt(i - 1), unit);
         }
-        facts = new M3StringFacts(bits);
+        facts = new M3StringFacts(bits, bigrams, trigrams);
     }
     @Override public String toString() {
         StringBuilder text = new StringBuilder(length);
@@ -125,7 +138,7 @@ final class M3String {
     }
 %s
 }
-""" % (add_signal, mix32, cursor)
+""" % (add_signal, ngram, mix32, cursor)
 
 def rewrite_engine(source, class_name):
     if "package java.lang;" not in source:

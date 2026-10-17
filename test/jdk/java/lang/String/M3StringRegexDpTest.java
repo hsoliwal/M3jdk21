@@ -36,6 +36,7 @@ public final class M3StringRegexDpTest {
         randomized();
         compositeDagsAndLongPlans();
         amalgamatedPrecompute();
+        requiredNgramPrecompute();
         refusals();
         System.out.println("M3_STRING_REGEX_DP_PASS|checks=" + checks);
     }
@@ -204,6 +205,83 @@ public final class M3StringRegexDpTest {
             }
             equal(composite.matches(expression), oracle,
                     "amalgamated String/Pattern trial=" + trial);
+        }
+    }
+
+
+    /**
+     * Source-fact pair/triple rejection must be sound even when required
+     * individual letters (and, for triples, required pairs) are present.
+     */
+    private static void requiredNgramPrecompute() throws Exception {
+        Class<?> dp = Class.forName("java.lang.M3StringRegexDp");
+        Class<?> storage = Class.forName("java.lang.M3String");
+        Class<?> planType = Class.forName("java.lang.M3StringRegexDp$Plan");
+        Method facts = storage.getDeclaredMethod("facts");
+        facts.setAccessible(true);
+        Method tables = dp.getDeclaredMethod("tables");
+        tables.setAccessible(true);
+        Object table = tables.invoke(null);
+        Method compile = dp.getDeclaredMethod("prepare", String.class, table.getClass());
+        compile.setAccessible(true);
+        Method preflight = dp.getDeclaredMethod("rejectsByPrecompute", storage, planType);
+        preflight.setAccessible(true);
+
+        String[] inputs = {
+                String.join("", "bbb", "cccc", "aaaa"),
+                String.join("", "abX", "Xbc", "YYac"),
+                String.join("", "ab", "cXX"),
+                String.join("", "a", "bcXX"),
+                String.join("", "xyz", "abc", "abc")
+        };
+        String[] expressions = {
+                "a*ab.*", "a*abc.*", "a*abc.*", "a*abc.*", ".*abc.*"
+        };
+        boolean[] rejected = {true, true, false, false, false};
+        for (int i = 0; i < inputs.length; i++) {
+            Object owner = STRING_M3.get(inputs[i]);
+            facts.invoke(owner);
+            Object plan = compile.invoke(null, expressions[i], table);
+            equal((Boolean) preflight.invoke(null, owner, plan), rejected[i],
+                    "required ngram preflight case=" + i);
+            int result = decision(inputs[i], expressions[i]);
+            boolean expected = Pattern.matches(expressions[i],
+                    new StringBuilder(inputs[i]));
+            if (result >= 0) equal(result == 1, expected, "ngram DP oracle=" + i);
+            equal(inputs[i].matches(expressions[i]), expected,
+                    "ngram public String oracle=" + i);
+        }
+
+        // Construct admitted patterns together with a guaranteed exact witness.
+        // A necessary-condition bit collision can never create a false negative.
+        Random random = new Random(0x4d334e4752414d53L);
+        String alphabet = "aAbBcC01.";
+        for (int trial = 0; trial < 2_048; trial++) {
+            StringBuilder regex = new StringBuilder("a*");
+            StringBuilder witness = new StringBuilder();
+            int atoms = 1 + random.nextInt(30);
+            for (int i = 0; i < atoms; i++) {
+                char unit = alphabet.charAt(random.nextInt(alphabet.length()));
+                boolean repeat = random.nextInt(3) == 0;
+                regex.append(unit);
+                if (repeat) regex.append('*');
+                int copies = repeat ? random.nextInt(4) : 1;
+                for (int j = 0; j < copies; j++) {
+                    witness.append(unit == '.' ? 'x' : unit);
+                }
+            }
+            if (witness.length() == 0) continue;
+            String expression = regex.toString();
+            String source = String.join("", witness.substring(0, witness.length() / 2),
+                    witness.substring(witness.length() / 2));
+            Object owner = STRING_M3.get(source);
+            facts.invoke(owner);
+            Object plan = compile.invoke(null, expression, table);
+            equal((Boolean) preflight.invoke(null, owner, plan), false,
+                    "matching witness cannot be rejected=" + trial);
+            equal(Pattern.matches(expression, new StringBuilder(source)), true,
+                    "constructed regex witness=" + trial);
+            equal(source.matches(expression), true, "M3 String witness=" + trial);
         }
     }
 

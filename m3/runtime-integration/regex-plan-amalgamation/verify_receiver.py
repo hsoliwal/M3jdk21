@@ -9,9 +9,11 @@ import sys
 ROOT = Path(__file__).resolve().parents[3]
 FILES = {
     "src/java.base/share/classes/java/lang/M3StringRegexDp.java":
-        "4972d8c3a664867559273a63df340c042eab1fa40f21e7b2139422ed06f942ba",
+        "9536a6df2042fe047f02ef07834edca91ce7a863e5b3c1daafffe55fdad48e6e",
     "test/jdk/java/lang/String/M3StringRegexDpTest.java":
-        "23b49a26ce30586758afb8cc7a7fecaee5a70833943fd3598c5b703d2a516cd9"
+        "971290714bb056831ad844288e66562f88fa87fbf0c4cd17fa0716f9df797ffc",
+    "src/java.base/share/classes/java/lang/M3StringFacts.java":
+        "d18122b42e9e4bcb76fd3e807467a59160e012d7ac249efe9cc71e5f6b8faa22"
 }
 for name, expected in FILES.items():
     file = ROOT / name
@@ -29,6 +31,8 @@ for atom in (
     "mandatoryUnitSignals = required;",
     "fixedFirstUnit =",
     "fixedLastUnit =",
+    "mandatoryBigramSignals = requiredPairs;",
+    "mandatoryTrigramSignals = requiredTriples;",
     "M3String.CodeUnitCursor units = new M3String.CodeUnitCursor(source);",
     "private static native long advance0(",
     "private static long evaluate(M3StringOwner owner, int start, int length,",

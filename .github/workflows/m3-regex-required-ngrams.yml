@@ -1,0 +1,44 @@
+name: M3 String required UTF16 ngram plan candidate proof
+on:
+  push:
+    branches: [m3/regex-required-ngrams-20261017]
+  pull_request:
+    paths:
+      - "src/java.base/share/classes/java/lang/M3StringFacts.java"
+      - "src/java.base/share/classes/java/lang/M3StringRegexDp.java"
+      - "test/jdk/java/lang/String/M3StringRegexDpTest.java"
+      - "m3/runtime-integration/regex-required-ngrams/**"
+      - ".github/workflows/m3-regex-required-ngrams.yml"
+permissions:
+  contents: read
+jobs:
+  java21-source-extracted:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            m3/runtime-integration/regex-required-ngrams/
+            m3/runtime-integration/regex-plan-amalgamation/
+            src/java.base/share/classes/java/lang/M3String.java
+            src/java.base/share/classes/java/lang/M3StringFacts.java
+            src/java.base/share/classes/java/lang/M3StringRegexDp.java
+            test/jdk/java/lang/String/M3StringRegexDpTest.java
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
+      - name: Confirm source-first exact owner images
+        run: python3 m3/runtime-integration/regex-required-ngrams/verify.py
+      - name: Compile complete previous/current regex classes with actual owner extract
+        run: python3 m3/runtime-integration/regex-plan-amalgamation/source_extracted_java21.py
+      - name: Syntax-compile exact expanded jtreg for Java21
+        run: |
+          mkdir -p "$RUNNER_TEMP/m3-required-ngram-jtreg"
+          javac --release 21 -proc:none -Xlint:all,-serial -Werror \
+              -d "$RUNNER_TEMP/m3-required-ngram-jtreg" \
+              test/jdk/java/lang/String/M3StringRegexDpTest.java
+      # Full modified M3JDK21 source build, jtreg and native/GC/JIT parity not run here.
