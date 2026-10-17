@@ -19,10 +19,17 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 25
     steps:
-      - name: Checkout source plus pinned preimage ancestor
+      - name: Checkout exact Java owners and sealed before-snapshot
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0
+          fetch-depth: 1
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            m3/runtime-integration/regex-plan-amalgamation/
+            src/java.base/share/classes/java/lang/M3StringRegexDp.java
+            src/java.base/share/classes/java/lang/M3String.java
+            src/java.base/share/classes/java/lang/M3StringFacts.java
+            test/jdk/java/lang/String/M3StringRegexDpTest.java
       - name: Java21 for isolated diff/oracle
         uses: actions/setup-java@v4
         with:
