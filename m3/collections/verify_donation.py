@@ -166,6 +166,54 @@ def include_path_mask_successor(historical_rows, receipt=_PATH_MASK_RECEIPT):
         extra.append((path, after))
     return [*historical_rows, *extra]
 
+
+# Exact, additive successor for signed 64-bit index-path row IDs. Never loosen
+# the retained four-path int[] receiver or historical installed-source seal.
+_PATH_LONG_RECEIPT = HERE / 'recipe/index-path-long-20261017/manifest.tsv'
+_PATH_LONG_SHA256 = '422e7650b0781d5496c3b86261c9c50bd3bad19c4647fb12673b69e7d9babd69'
+_PATH_LONG_PATHS = (
+    'm3/collections/src/main/java/com/m3/collections/M3IndexPathMasks.java',
+    'm3/collections/src/main/native/collections/m3_index_path_masks.c',
+    'm3/collections/src/test/java/com/m3/collections/M3IndexPathMasksLongSelfTest.java',
+    'm3/collections/src/test/java/com/m3/collections/M3IndexPathMasksLongTest.java',
+)
+
+
+def include_path_long_successor(previous_rows, receipt=_PATH_LONG_RECEIPT):
+    """Replace exactly two sealed owners and admit exactly two new tests.
+
+    This is additive receipt reconciliation only, never authorization to rewrite
+    arbitrary installed Java/JNI source or bypass Maven/OpenRewrite/CI checks.
+    """
+    if not receipt.exists() and not receipt.is_symlink():
+        return list(previous_rows)
+    if receipt.is_symlink() or not receipt.is_file() or digest(receipt) != _PATH_LONG_SHA256:
+        raise SystemExit('64-bit path-mask successor manifest missing, aliased or drifted')
+    entries = [line.split('\t') for line in receipt.read_text(encoding='utf-8').splitlines()]
+    if len(entries) != len(_PATH_LONG_PATHS):
+        raise SystemExit('64-bit path-mask successor must declare exactly four paths')
+    current = {path: expected for path, expected in previous_rows}
+    if len(current) != len(previous_rows):
+        raise SystemExit('Duplicate prior source receipt path')
+    extras = []
+    for cells, expected_path in zip(entries, _PATH_LONG_PATHS):
+        if len(cells) != 4:
+            raise SystemExit('Malformed long-row path-mask successor')
+        path, before, after, template = cells
+        if (path != expected_path or len(after) != 64
+                or any(c not in '0123456789abcdef' for c in after)
+                or template != path.rsplit('/', 1)[1] + '.after'):
+            raise SystemExit('Unapproved long-row path-mask source: ' + path)
+        if before == 'ABSENT':
+            if path in current:
+                raise SystemExit('Occupied new long-row path-mask source: ' + path)
+            extras.append((path, after))
+        else:
+            if current.get(path) != before:
+                raise SystemExit('Long-row path-mask source preimage drift: ' + path)
+            current[path] = after
+    return [(path, current[path]) for path, _ in previous_rows] + extras
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--cost-probe', action='store_true', help='record paired diagnostic allocation/time samples')
@@ -208,7 +256,7 @@ def main():
         raise SystemExit('Installed source manifest drift: actual=' + digest(manifest) + ' expected=' + packet['installed_source_manifest_sha256'] + '; reconcile with canonical recipe before verifying')
     rows = [line.split('\t') for line in manifest.read_text().splitlines()
             if line and not line.startswith('#')]
-    rows = include_path_mask_successor(include_stored_representative_successor(include_filtered_view_successor(rows)))
+    rows = include_path_long_successor(include_path_mask_successor(include_stored_representative_successor(include_filtered_view_successor(rows))))
     if len({row[0] for row in rows}) != len(rows):
         raise SystemExit('Duplicate installed source path')
     for path, expected in rows:
