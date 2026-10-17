@@ -1,0 +1,59 @@
+name: M3 generic filtered Set Map receiver Java21 and JNI
+on:
+  pull_request:
+    paths:
+      - 'm3/collections/src/main/java/com/m3/collections/M3CollectionViews.java'
+      - 'm3/collections/src/main/java/com/m3/collections/M3FilteredMaps.java'
+      - 'm3/collections/src/test/java/com/m3/collections/M3CollectionViewsReceiverSelfTest.java'
+      - 'm3/collections/src/test/java/com/m3/collections/M3FilteredMapsSelfTest.java'
+      - 'm3/collections/qualification/generic-filtered-wrappers-postimages-20261017.tsv'
+      - '.github/workflows/m3-generic-filtered-wrappers-receiver-20261017.yml'
+  push:
+    branches: [m3/generic-filtered-wrappers-receiver-20261017]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  actual-m3-core-and-jni:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Check every stacked original and new source receipt
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 m3/collections/qualification/verify_mask_selection.py
+          python3 m3/collections/qualification/verify_mask_keyed.py
+          python3 m3/collections/qualification/verify_mask_priority.py
+          python3 m3/collections/qualification/verify_filtered_sorted.py
+          python3 m3/collections/qualification/verify_filtered_view_late_union.py
+          python3 m3/collections/qualification/verify_sorted_set_algebra.py
+          python3 m3/collections/qualification/verify_generic_filtered_wrappers.py
+          python3 -m unittest discover -s m3/collections/qualification             -p 'test_verify_filtered_sorted_successor.py' -v
+      - name: Compile every M3 Java21 core owner and independent actual contract oracles
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/m3-generic-wrappers
+          find m3/collections/src/main/java/com/m3/collections -name '*.java' -print | sort > /tmp/m3-generic-owner-files.txt
+          javac --release 21 -proc:none -Xlint:all -Werror             -d /tmp/m3-generic-wrappers @/tmp/m3-generic-owner-files.txt
+          javac --release 21 -proc:none -Xlint:all -Werror             -cp /tmp/m3-generic-wrappers -d /tmp/m3-generic-wrappers             m3/collections/src/test/java/com/m3/collections/M3CollectionViewsReceiverSelfTest.java             m3/collections/src/test/java/com/m3/collections/M3FilteredMapsSelfTest.java             m3/collections/src/test/java/com/m3/collections/M3LongSortedAlgebraSelfTest.java             m3/collections/src/test/java/com/m3/collections/M3LongFilteredViewUnionSelfTest.java             m3/collections/src/test/java/com/m3/collections/M3FilteredSortedCompositionSelfTest.java             m3/collections/src/test/java/com/m3/collections/M3IndexMaskCompactorSelfTest.java             m3/collections/src/test/java/com/m3/collections/M3IndexMaskKeyedSelfTest.java             m3/collections/src/test/java/com/m3/collections/M3IndexMaskPrioritySelfTest.java
+          java -Xcheck:jni -cp /tmp/m3-generic-wrappers com.m3.collections.M3CollectionViewsReceiverSelfTest
+          java -Xcheck:jni -cp /tmp/m3-generic-wrappers com.m3.collections.M3FilteredMapsSelfTest
+          java -Xcheck:jni -cp /tmp/m3-generic-wrappers com.m3.collections.M3LongSortedAlgebraSelfTest
+          java -Xcheck:jni -cp /tmp/m3-generic-wrappers com.m3.collections.M3LongFilteredViewUnionSelfTest
+          java -Xcheck:jni -cp /tmp/m3-generic-wrappers com.m3.collections.M3FilteredSortedCompositionSelfTest
+          java -Xcheck:jni -cp /tmp/m3-generic-wrappers com.m3.collections.M3IndexMaskCompactorSelfTest
+          java -Xcheck:jni -cp /tmp/m3-generic-wrappers com.m3.collections.M3IndexMaskKeyedSelfTest
+          java -Xcheck:jni -cp /tmp/m3-generic-wrappers com.m3.collections.M3IndexMaskPrioritySelfTest
+      - name: Build and execute inherited C17 checked JNI mask selector
+        shell: bash
+        run: |
+          set -euo pipefail
+          gcc -std=c17 -Wall -Wextra -Wconversion -Wshadow -Werror             -fPIC -shared -I"$JAVA_HOME/include" -I"$JAVA_HOME/include/linux"             m3/collections/src/main/native/collections/m3_index_mask_compactor.c             -o /tmp/libm3_collections_mask.so
+          java -Xcheck:jni -Djava.library.path=/tmp -cp /tmp/m3-generic-wrappers             com.m3.collections.M3IndexMaskCompactorSelfTest --native
