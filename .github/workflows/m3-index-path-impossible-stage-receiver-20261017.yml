@@ -1,0 +1,135 @@
+# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and contributors
+# SPDX-License-Identifier: Apache-2.0
+name: M3 impossible 32-bit mask stages Java21, C17 JNI and Maven JUnit
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/m3-index-path-impossible-stage-receiver-20261017.yml'
+      - 'm3/collections/src/main/java/com/m3/collections/M3IndexPathMasks.java'
+      - 'm3/collections/src/test/java/com/m3/collections/M3IndexPathImpossibleStage*.java'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  exact-source-and-java21-baseline:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Require exact three reviewed canonical recipe postimages
+        shell: bash
+        run: |
+          set -euo pipefail
+          printf '%s  %s\n' 'b2c216aac77f42493f7b5adad03c24444f2d6661ff2e3b8238ff621772a00402' 'm3/collections/src/main/java/com/m3/collections/M3IndexPathMasks.java' | sha256sum -c -
+          printf '%s  %s\n' '27ee8c3942e18a6fada7e4fad1cd66f163aa6eccb01d8f99cfe6c3e3bd5ecf3a' 'm3/collections/src/test/java/com/m3/collections/M3IndexPathImpossibleStageSelfTest.java' | sha256sum -c -
+          printf '%s  %s\n' '61f686be147e9b940dee3c3b385f6fea0c20deb3c81c03972aae3d10dea572b1' 'm3/collections/src/test/java/com/m3/collections/M3IndexPathImpossibleStageTest.java' | sha256sum -c -
+          echo M3_IMPOSSIBLE_STAGE_RECEIVER_SOURCE_SEAL_PASS
+      - name: Real old and candidate owner compile, differential behavior, and javap ABI
+        shell: bash
+        run: |
+          set -euo pipefail
+          WORK="$(mktemp -d)"
+          trap 'rm -rf "$WORK"' EXIT
+          SRC=m3/collections/src/main/java/com/m3/collections/M3IndexPathMasks.java
+          PROOF=m3/collections/src/test/java/com/m3/collections/M3IndexPathImpossibleStageSelfTest.java
+          mkdir -p "$WORK/baseline/com/m3/collections" "$WORK/old-classes" "$WORK/new-classes"
+          git show 'bb65589bb2252c020a4b41f69dfdf5e2d50a0199':"$SRC" > "$WORK/baseline/com/m3/collections/M3IndexPathMasks.java"
+          javac --release 21 -proc:none -Xlint:all -Werror -d "$WORK/old-classes" \
+            "$WORK/baseline/com/m3/collections/M3IndexPathMasks.java" "$PROOF"
+          javac --release 21 -proc:none -Xlint:all -Werror -d "$WORK/new-classes" "$SRC" "$PROOF"
+          for mode in '' '-Xint' '-XX:TieredStopAtLevel=1'; do
+            java -ea $mode -Xmx384m -cp "$WORK/old-classes" \
+              com.m3.collections.M3IndexPathImpossibleStageSelfTest
+            java -ea $mode -Xmx384m -cp "$WORK/new-classes" \
+              com.m3.collections.M3IndexPathImpossibleStageSelfTest
+          done
+          javap -public -s -classpath "$WORK/old-classes" com.m3.collections.M3IndexPathMasks > "$WORK/old.api"
+          javap -public -s -classpath "$WORK/new-classes" com.m3.collections.M3IndexPathMasks > "$WORK/new.api"
+          diff -u "$WORK/old.api" "$WORK/new.api"
+          git diff --check 'bb65589bb2252c020a4b41f69dfdf5e2d50a0199' HEAD
+      - name: Refuse unintended native or JDK runtime source changes
+        shell: bash
+        run: |
+          set -euo pipefail
+          if git diff --name-only 'bb65589bb2252c020a4b41f69dfdf5e2d50a0199' HEAD | grep -E '(^src/java\.base/|^src/hotspot/|\.(c|cc|cpp|h)$)'; then
+            echo 'Unexpected JDK, HotSpot, or native ABI change'
+            exit 1
+          fi
+  inherited-original-c17-jni-parity:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 50
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Compile exact original native selector, emit real JNI header and execute parity
+        shell: bash
+        run: |
+          set -euo pipefail
+          WORK="$(mktemp -d)"
+          trap 'rm -rf "$WORK"' EXIT
+          ROOT=m3/collections/src
+          javac --release 21 -proc:none -Xlint:all -Werror -h "$WORK" -d "$WORK" \
+            "$ROOT/main/java/com/m3/collections/M3IndexPathMasks.java" \
+            "$ROOT/test/java/com/m3/collections/M3IndexPathImpossibleStageSelfTest.java" \
+            "$ROOT/test/java/com/m3/collections/M3IndexPathMasksSelfTest.java" \
+            "$ROOT/test/java/com/m3/collections/M3IndexPathMaskWindowSelfTest.java" \
+            "$ROOT/test/java/com/m3/collections/M3IndexPathZeroStagesSelfTest.java" \
+            "$ROOT/test/java/com/m3/collections/M3IndexPathZeroWindowSelfTest.java"
+          test -s "$WORK/com_m3_collections_M3IndexPathMasks.h"
+          grep -Fq 'Java_com_m3_collections_M3IndexPathMasks_selectNative' \
+            "$WORK/com_m3_collections_M3IndexPathMasks.h"
+          gcc -std=c17 -O2 -fPIC -shared -Wall -Wextra -Werror -pedantic \
+            -fsanitize=undefined -fno-sanitize-recover=undefined \
+            -I"$JAVA_HOME/include" -I"$JAVA_HOME/include/linux" \
+            "$ROOT/main/native/collections/m3_index_path_masks.c" \
+            -o "$WORK/libm3_collections_pathmask.so"
+          for mode in '' '-Xint' '-XX:TieredStopAtLevel=1'; do
+            UBSAN_OPTIONS=halt_on_error=1:print_stacktrace=1 \
+              java -ea $mode -Xcheck:jni -Djava.library.path="$WORK" \
+                -cp "$WORK" com.m3.collections.M3IndexPathImpossibleStageSelfTest --native
+            UBSAN_OPTIONS=halt_on_error=1:print_stacktrace=1 \
+              java -ea $mode -Xcheck:jni -Djava.library.path="$WORK" \
+                -cp "$WORK" com.m3.collections.M3IndexPathMasksSelfTest --native
+            UBSAN_OPTIONS=halt_on_error=1:print_stacktrace=1 \
+              java -ea $mode -Xcheck:jni -Djava.library.path="$WORK" \
+                -cp "$WORK" com.m3.collections.M3IndexPathMaskWindowSelfTest --native
+            UBSAN_OPTIONS=halt_on_error=1:print_stacktrace=1 \
+              java -ea $mode -Xcheck:jni -Djava.library.path="$WORK" \
+                -cp "$WORK" com.m3.collections.M3IndexPathZeroWindowSelfTest --native
+          done
+  owning-m3-collections-maven-junit:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: maven
+      - name: Compile owning module and run original plus generated JUnit contracts
+        shell: bash
+        run: |
+          set -euo pipefail
+          mvn -B -ntp -f m3/collections/pom.xml \
+            -Dtest=M3IndexPathImpossibleStageTest,M3IndexPathMasksTest \
+            test
+          for suite in M3IndexPathImpossibleStageTest M3IndexPathMasksTest; do
+            REPORT="m3/collections/target/surefire-reports/com.m3.collections.$suite.txt"
+            test -s "$REPORT"
+            grep -E 'Tests run: [1-9][0-9]*, Failures: 0, Errors: 0, Skipped: 0' "$REPORT"
+          done
