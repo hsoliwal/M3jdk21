@@ -174,4 +174,9 @@ public final class M3LibraryCollections {
         return new M3GuavaBiMap<>();
     }
 
+    /** Apache Commons Collections bidirectional map over existing M3 indexed owners. */
+    public static <K, V> org.apache.commons.collections4.BidiMap<K, V> apacheBidiMap() {
+        return new M3ApacheBidiMap<>();
+    }
+
 }
