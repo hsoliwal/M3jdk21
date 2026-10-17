@@ -31,13 +31,13 @@ class SourceCensusTest(unittest.TestCase):
         census = root / 'current.tsv'
         census.write_text('\n'.join('\t'.join(x) for x in now)+'\n')
         return census, baseline
-    def test_five_historical_plus_eight_additive(self):
+    def test_five_historical_plus_twenty_nine_additive(self):
         with tempfile.TemporaryDirectory() as temp:
             root = Path(temp)
             current, old = self.make_fixture(root)
             allowed = verify.verify(root, current, old,
                 verify.sha256(current.read_bytes()), verify.git_blob(old.read_bytes()), False)
-            self.assertEqual(len(allowed), 13)
+            self.assertEqual(len(allowed), 34)
     def test_missing_drift_and_alias_refusal(self):
         with tempfile.TemporaryDirectory() as temp:
             root = Path(temp)
