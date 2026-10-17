@@ -1,17 +1,17 @@
 {
   "schema": "M3_ORIGINAL_MAPPING_PROVIDER_TASK_STATUS_V1",
-  "observedUtc": "2026-10-17 11:53:06 UTC",
+  "observedUtc": "2026-10-17 15:34:00 UTC",
   "fullObjective": "Complete continuous MIndex/MatIndex/SubMIndex migration and java.lang.String RoutesA/B/C; preserve full12-pass specification",
   "goalActive": true,
   "storageProtectionActive": true,
   "localBulkOutput": "HOLD",
-  "scope": "Recipe-owned provider and canonical migration-value reconciliation qualification",
+  "scope": "Receive exact Synexia recipe classpath and current-mapping preservation correction",
   "sourceBase": "892e3f6c51d78bc0948e8a8cf736055b4c70eafa",
-  "receiverBase": "4e29dc9d4141261e8763fbe9ffd6a20e017b1aff",
-  "sdkTree": "139dd99093d8d0add7f6b7392e9c73b92736d572",
+  "receiverBase": "4598bfc398d3024e7ea67e42034e857a53a1b378",
+  "sdkTree": "3c02e3896096753a63654d56650a4561118db2b4",
   "sdkFiles": 72,
-  "sdkBytes": 1873351,
-  "pinsSha256": "f5f96db8fa0c07ecf876536cb957a38e9f447c4f5f5f4c1285b16c9bdfdaf9dc",
+  "sdkBytes": 1888012,
+  "pinsSha256": "6797e1dc7a1317bfd06ef5353c6e4007430c6199ccd9cb793a5a05499f572d24",
   "targets": {
     "total": 60,
     "keep": 54,
@@ -19,7 +19,7 @@
     "add": 5
   },
   "plannedGates": {
-    "namedSdkMethods": 9,
+    "namedSdkMethods": 10,
     "mutableStates": 64,
     "sourceOrders": 2,
     "custodyNegativeControls": 22,
@@ -29,7 +29,7 @@
     "hashObligations": 80,
     "completionBlockers": 158
   },
-  "sourceReview": "CORRECTED_SOURCE_CLEAR_EXECUTION_PENDING",
+  "sourceReview": "CLEAR_SOURCE_ONLY_EXECUTION_PENDING",
   "execution": "NOT_RUN",
   "runtimeApplied": false,
   "canonicalProductionMapApplied": false,
@@ -43,7 +43,7 @@
     "Route A / safe Route B / matched complete Route C Java-JNI-runtime proofs",
     "Performance and heap/native/mapped retention benchmarks"
   ],
-  "pinsGitBlob": "3c655543b92ab9ac4da2168c24ed973945862059",
+  "pinsGitBlob": "1f8a18ab4870ec0e9353e13e33f680b46377e84d",
   "failedWorkflowAttempt": {
     "head": "404a29f3494ccf7fcaa35b982895d7aec4ae258f",
     "run": 39029940546,
@@ -54,7 +54,40 @@
     "rootCause": "runner context used in jobs.<job_id>.env is unavailable; invalid workflow annotation reports Unrecognized named-value: runner."
   },
   "correctedServerAdmission": "PENDING_NEW_HEAD",
-  "correctionEvidence": "workflow-context-correction.json",
-  "sourceCommit": "6e8bfaf8ebc40c0b956eea93e976495a0b1df312",
-  "sourcePullRequest": 12082
+  "correctionEvidence": "annotations-classpath-correction.json",
+  "sourceCommit": "f726d4ce761edf73b04ee2950cbd42790d2370b2",
+  "sourcePullRequest": 12200,
+  "executedBaseline": {
+    "receiverRepository": "hsoliwal/M3jdk21",
+    "head": "23779f5eb89a506d341e92438db92cc985c26158",
+    "workflowBlob": "f04b6bfc76e5a671968a478f44cf13268c04e5e9",
+    "runs": [
+      {
+        "run": 39030437080,
+        "job": 117389630148,
+        "conclusion": "failure",
+        "logSha256": "c610d5d07c9c9b9c7c652084559587eab9d0c2fd1290a76882f88b4eb451c0b0"
+      },
+      {
+        "run": 39030440322,
+        "job": 117389639089,
+        "conclusion": "failure",
+        "logSha256": "530ee2859c03c3ddf61ec4ed31a3f4ffed5bc33faaa7cfc3443013407fdb50a5"
+      }
+    ],
+    "cause": "Actual release21 javac reads OpenRewrite API Language annotations absent from compile classpath;5warnings are rejected by existing -Werror. Custody22 passed but SDK JUnit/provider/original CLI never qualified.",
+    "status": "ACTUAL_EXECUTED_BASELINE_FAILURE"
+  },
+  "currentMappingPreservation": {
+    "topLevelMappings": 59,
+    "optionalModuleMappingPreserved": true,
+    "outsideBytesUnchanged": true,
+    "migrationRecordsBefore": 56,
+    "migrationRecordsAfter": 60,
+    "recordsUnchanged": 54,
+    "recordsExplicitlyReconciled": 2,
+    "recordsAdded": 4,
+    "recordsRemoved": 0,
+    "candidateExecution": "NOT_RUN"
+  }
 }
