@@ -45,6 +45,25 @@ public class Object {
     public Object() {}
 
     /**
+     * Adapt this object to a requested Java type without allocation or conversion.
+     * The default returns this object for assignable types, otherwise null.
+     * Capability-bearing subclasses may override this method; no new resident
+     * state is added to Object, and a nonmatching type is never cast unsafely.
+     *
+     * @param clazz the requested type
+     * @param <T> requested result type
+     * @return this instance when assignable, otherwise null
+     * @throws NullPointerException if clazz is null
+     */
+    public <T> T toAdapter(Class<T> clazz) {
+        if (clazz == null) {
+            throw new NullPointerException("clazz");
+        }
+        return clazz.isInstance(this) ? clazz.cast(this) : null;
+    }
+
+
+    /**
      * Returns the runtime class of this {@code Object}. The returned
      * {@code Class} object is the object that is locked by {@code
      * static synchronized} methods of the represented class.
