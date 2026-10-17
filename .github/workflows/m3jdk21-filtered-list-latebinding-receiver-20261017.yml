@@ -44,7 +44,7 @@ jobs:
           mkdir -p "$B/red/com/m3/collections" "$B/red-classes" "$B/green-classes"
           OWNER=m3/collections/src/main/java/com/m3/collections/M3FilteredLists.java
           PROOF=m3/collections/src/test/java/com/m3/collections/M3FilteredListsLateBindingProof.java
-          git show "HEAD^:$OWNER" > "$B/red/com/m3/collections/M3FilteredLists.java"
+          git show "99ddda2ac83cd78cddd96df1937136d59d2628ad:$OWNER" > "$B/red/com/m3/collections/M3FilteredLists.java"
           javac --release 21 -proc:none -Xlint:all -Werror -d "$B/red-classes" \
             "$B/red/com/m3/collections/M3FilteredLists.java" "$PROOF"
           if java -ea -cp "$B/red-classes" com.m3.collections.M3FilteredListsLateBindingProof > "$B/red.log" 2>&1; then
@@ -62,8 +62,8 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          git diff --check HEAD^ HEAD
-          if git diff --name-only HEAD^ HEAD | grep -E '(^src/java\.base/|^src/hotspot/|\.c$|\.cpp$|\.h$)'; then
+          git diff --check 99ddda2ac83cd78cddd96df1937136d59d2628ad HEAD
+          if git diff --name-only 99ddda2ac83cd78cddd96df1937136d59d2628ad HEAD | grep -E '(^src/java\.base/|^src/hotspot/|\.c$|\.cpp$|\.h$)'; then
             echo 'Native/JDK runtime source changed outside sealed file scope'
             exit 1
           fi
