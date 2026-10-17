@@ -239,6 +239,103 @@ public final class M3IndexMaskCompactor {
     private static native long[] selectLongWindowNative(long[] rows, int rowOffset,
             byte[] states, int stateOffset, int length, int mask);
 
+
+    /**
+     * Select checked row-coordinate windows by full 64-bit parent state words.
+     *
+     * <p>All 64 independent state bits are supported, including bit 63, with
+     * a zero mask matching every row. This is an immutable detached selection,
+     * not a live view or a JNI traversal of Java object references.
+     * `M3ObjectResidency.copyParentBits` can snapshot these state words under
+     * one parent lock before this method is called. Caller input arrays must
+     * remain unchanged until selection returns.</p>
+     */
+    public static int[] selectStateWordWindow(int[] rows, int rowOffset,
+                                              long[] parentStateWords, int stateOffset,
+                                              int length, long requiredBits,
+                                              Backend backend) {
+        Objects.requireNonNull(rows, "rows");
+        Objects.requireNonNull(parentStateWords, "parentStateWords");
+        Objects.requireNonNull(backend, "backend");
+        Objects.checkFromIndexSize(rowOffset, length, rows.length);
+        Objects.checkFromIndexSize(stateOffset, length, parentStateWords.length);
+        if (backend == Backend.NATIVE_REQUIRED) {
+            if (!NativeLibrary.AVAILABLE) {
+                throw new UnsatisfiedLinkError("m3_index_mask JNI library unavailable");
+            }
+            return selectStateWordWindowNative(rows, rowOffset,
+                    parentStateWords, stateOffset, length, requiredBits);
+        }
+        int[] result = new int[countStateWords(parentStateWords,
+                stateOffset, length, requiredBits)];
+        int emitted = 0;
+        for (int i = 0; i < length; i++) {
+            if ((parentStateWords[stateOffset + i] & requiredBits) == requiredBits) {
+                if (emitted == result.length) {
+                    throw new ConcurrentModificationException("aligned state words changed");
+                }
+                result[emitted++] = rows[rowOffset + i];
+            }
+        }
+        if (emitted != result.length) {
+            throw new ConcurrentModificationException("aligned state words changed");
+        }
+        return result;
+    }
+
+    /** Primitive-long row-coordinate counterpart of {@link #selectStateWordWindow}. */
+    public static long[] selectLongStateWordWindow(long[] rows, int rowOffset,
+                                                   long[] parentStateWords, int stateOffset,
+                                                   int length, long requiredBits,
+                                                   Backend backend) {
+        Objects.requireNonNull(rows, "rows");
+        Objects.requireNonNull(parentStateWords, "parentStateWords");
+        Objects.requireNonNull(backend, "backend");
+        Objects.checkFromIndexSize(rowOffset, length, rows.length);
+        Objects.checkFromIndexSize(stateOffset, length, parentStateWords.length);
+        if (backend == Backend.NATIVE_REQUIRED) {
+            if (!NativeLibrary.AVAILABLE) {
+                throw new UnsatisfiedLinkError("m3_index_mask JNI library unavailable");
+            }
+            return selectLongStateWordWindowNative(rows, rowOffset,
+                    parentStateWords, stateOffset, length, requiredBits);
+        }
+        long[] result = new long[countStateWords(parentStateWords,
+                stateOffset, length, requiredBits)];
+        int emitted = 0;
+        for (int i = 0; i < length; i++) {
+            if ((parentStateWords[stateOffset + i] & requiredBits) == requiredBits) {
+                if (emitted == result.length) {
+                    throw new ConcurrentModificationException("aligned state words changed");
+                }
+                result[emitted++] = rows[rowOffset + i];
+            }
+        }
+        if (emitted != result.length) {
+            throw new ConcurrentModificationException("aligned state words changed");
+        }
+        return result;
+    }
+
+    private static int countStateWords(long[] states, int offset,
+                                       int length, long requiredBits) {
+        int count = 0;
+        for (int i = 0; i < length; i++) {
+            if ((states[offset + i] & requiredBits) == requiredBits) {
+                count++;
+            }
+        }
+        return count;
+    }
+
+    private static native int[] selectStateWordWindowNative(
+            int[] rows, int rowOffset, long[] states, int stateOffset,
+            int length, long requiredBits);
+
+    private static native long[] selectLongStateWordWindowNative(
+            long[] rows, int rowOffset, long[] states, int stateOffset,
+            int length, long requiredBits);
+
     private static final class NativeLibrary {
         private static final boolean AVAILABLE;
 
