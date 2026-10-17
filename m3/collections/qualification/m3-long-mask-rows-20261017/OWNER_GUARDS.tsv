@@ -1,0 +1,11 @@
+git_blob	path
+958d1bc57f6c90f78d4e5f408cc758d1adc8fba5	m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java
+0ecf0a20c0f1195f79632e261de54117e204da42	m3/collections/src/main/java/com/m3/collections/M3LongArrayList.java
+d0b389681ade738e97426d950b6291c746912cf0	m3/collections/src/main/java/com/m3/collections/M3LongCollection.java
+b9c3d3119fffde726a5d4b0bb9de7ed99cbdaf9b	m3/collections/src/main/java/com/m3/collections/M3LongDag.java
+9ccb1286c23e4532585541ad212b08eb82fe2f67	m3/collections/src/main/java/com/m3/collections/M3LongFilteredView.java
+44778a63d99c5b1f99adee536b954aebb8c64f3	m3/collections/src/main/java/com/m3/collections/M3LongIterator.java
+1c79d9437acc209a1ed30e90f400f308c2804169	m3/collections/src/main/java/com/m3/collections/M3LongSortedViews.java
+82071a3aa36ae3626283cc4a4fba155028ad8995	m3/collections/src/main/java/com/m3/collections/M3VirtualAccumulator.java
+6d274db8885dd1d1b3c846529f8b30db2e64eb74	m3/collections/src/main/java/com/m3/collections/M3VirtualCollector.java
+f1a9488905807e6417dd267e125bfc44dbcc9297	m3/collections/src/main/native/collections/m3_index_mask_compactor.c

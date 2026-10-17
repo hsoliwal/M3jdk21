@@ -1,0 +1,8 @@
+# SPDX-License-Identifier: Apache-2.0
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.LongMaskRowsReceiver20261017
+displayName: Receive parent-owned DOOP mask rows into Java 21
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: m3jdk21-long-mask-rows-20261017

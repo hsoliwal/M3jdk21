@@ -1,0 +1,17 @@
+category	algorithm_or_pattern	owner_or_donor	cost	contract	decision	license
+DOOP	parent-owned masks	Synexia M3ObjectStateSlots28 PR12064	O(N) one mask admission	Generation owner separate from physical long payload	REFERENCE_ORIGINAL_OWNER	Apache-2.0
+DOOP	immutable range/mask view	M3LongMaskRows (new)	O(1) per composition	One reused parent, no per-row facade; unsigned-byte flags	SELECTED_ADAPTER	Apache-2.0
+COLLECTION_VIEW	LongStream cursor	M3LongCollection + M3LongDag PR1093	O(N) traversal	Late-bound pull with original owner iteration	REUSE	Apache-2.0
+COLLECTION_VIEW	filtered/sorted primitive wrappers	M3LongFilteredView and M3LongSortedViews	O(N) filter; O(N log N) bounded sort	Keep sorted snapshot and live filter distinct	REUSE	Apache-2.0
+INDEX_MASK	byte positional compaction	M3IndexMaskCompactor Java/C17 JNI	O(N) scan + O(K) output	Java oracle, JNI exactness explicit, no object refs	REUSE	Apache-2.0
+INDEX_MASK	64-bit parent state	Synexia PR12067 / M3JDK21 PR1099	O(N) + indexed mask	Different full64 and generation-scoped state semantics	REFERENCE_NOT_REPLACED	Apache-2.0
+INDEX_MASK	generation-safe mask offsets	Synexia PR12084 / M3JDK21 PR1097	O(N) selection	Different slot-generation contract; do not collapse into ordinal mask	REFERENCE_NOT_REPLACED	Apache-2.0
+ARRAY	stable in-place remove	LeetCode 27 Remove Element	O(N) time O(1) scratch	Avoid rebuilding source payload; no challenge solution copied	REFERENCE_ONLY	n/a
+ARRAY	move zeros / stable compaction	LeetCode 283 Move Zeroes	O(N) time O(1) scratch	Zero is valid payload; do not treat as missing	REFERENCE_ONLY	n/a
+ARRAY	array rotation	LeetCode 189 Rotate Array	O(N) time O(1) scratch	Current operator preserves original ordinals rather than rotating	REJECT_FOR_THIS_ATOM	n/a
+HASH	count duplicates	HackerRank Java Hashset	O(N) expected	Key identity vs state bits is independent	REFERENCE_ONLY	n/a
+ITERATOR	iterator remove/scan	HackerRank Java Iterator	O(N) traversal	Source read-only; iterator has no mutable remove action	REFERENCE_ONLY	n/a
+PREFIX	Java prefix sums	GeeksforGeeks prefix sum	O(N) preprocess O(1) query	Only useful if repeated count queries outweigh materialization	DEFERRED	n/a
+COLLECTIONS	filtered collections	Eclipse Collections	O(N) lookup/scan	Primitive long wrapper contract differs from boxed collections	REFERENCE_ONLY	EPL-1.0 OR EDL-1.0
+COLLECTIONS	Multimaps and collection views	Guava	O(N) expected	Boxing, null and live-view contracts differ	REFERENCE_ONLY	Apache-2.0
+JDK	Spliterator.OfLong	OpenJDK 21 java.util.stream	O(N) primitive traversal	Use official ORDERED, NONNULL; no unsafe SIZED characteristic	REUSE_JDK_API	GPL-2.0-with-classpath-exception
