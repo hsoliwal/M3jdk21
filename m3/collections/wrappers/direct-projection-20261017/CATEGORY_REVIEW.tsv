@@ -1,0 +1,9 @@
+category	baseline	selected	complexity	contract_oracle	decision	license_and_provenance
+filtered-map-projection	StreamSupport.parallel().map().spliterator()	ProjectingSpliterator direct source cursor	O(1) scratch per split; O(n) consumed	Java21 JDK stream.map flags and order	SELECTED_PROVISIONAL	First-party Synexia recipe-qualified target adapter Apache-2.0
+sorted-key-facade	Generic mapped Entry::getKey projection	Preserve existing M3CollectionViews filtered(NavigableSet) special case	O(n) filtered scan, backing navigation	Sorted comparator, SORTED and DISTINCT	KEEP_EXISTING	JDK SortedSet is oracle, not imported source
+eager-projection	Copy map entries to array/sort	No eager mapping	O(n) extra memory	breaks live backing owner/snapshot distinction	REJECT	No donor code
+Guava	Maps.filterEntries contract reference	Use already adopted Synexia M3FilteredMaps	Owner-dependent	Guava Apache-2.0, no source copied	REFERENCE	Guava (Google), only API pattern
+Eclipse Collections	select/map lazy iteration	Use existing M3CollectionViews and map cursor	Owner-dependent	Eclipse license preserved, no source copied	REFERENCE	Eclipse public documentation only
+Apache Commons	predicated and unmodifiable wrappers	Preserve target-specific live filters	Owner-dependent	Commons Collections Apache-2.0, no source copied	REFERENCE	Apache contract concepts only
+Spring	CollectionUtils and MultiValueMap adapters	Do not conflate collection and multimap contract	Owner-dependent	Spring Apache-2.0, no source copied	REFERENCE	Spring API comparison only
+LeetCode/HackerRank/GFG	Comparator/iterator/data-structure exercises	Category and negative-case fixtures	Not a runtime donor	Algorithm problem taxonomy only	CATALOGUE_ONLY	No challenge solution copied
