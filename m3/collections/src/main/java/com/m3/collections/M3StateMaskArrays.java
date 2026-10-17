@@ -46,6 +46,8 @@ public final class M3StateMaskArrays {
         checkMasks(setBits, clearBits);
         int index = Objects.checkIndex(slot, stateBits.length);
         int previous = stateBits[index] & 0xff;
+        // A null state transition is an identity operation after all validation.
+        if (setBits == 0 && clearBits == 0) return previous;
         stateBits[index] = (byte) ((previous | setBits) & ~clearBits);
         return previous;
     }
@@ -68,6 +70,9 @@ public final class M3StateMaskArrays {
         requireAligned(rowSlots, stateBits);
         Objects.checkFromToIndex(from, to, rowSlots.length);
         checkMasks(requiredBits, forbiddenBits);
+        // With no required or forbidden state bits, all aligned pairs survive.
+        // Return the existing exclusive end without touching any array cell.
+        if (requiredBits == 0 && forbiddenBits == 0) return to;
         int write = from;
         for (int read = from; read < to; read++) {
             int state = stateBits[read] & 0xff;
