@@ -27,8 +27,8 @@ def main() -> None:
                 or disposition != "RECEIVER_CANDIDATE_NOT_INSTALLED_JDK"):
             raise SystemExit("out-of-scope/invalid target path")
         file = ROOT / rel
-        if not file.is_file():
-            raise SystemExit("missing installed target: " + path)
+        if not file.is_file() or (path in successor and file.is_symlink()):
+            raise SystemExit("missing/aliased installed target: " + path)
         actual = hashlib.sha256(file.read_bytes()).hexdigest()
         if actual != effective_hash(path, expected, successor):
             raise SystemExit("source identity drift: " + path)
