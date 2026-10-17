@@ -1,0 +1,14 @@
+# family	public_eclipse_contract	verified_existing_canonical_owner	candidate_m3_owner	status	gate
+core-runtime progress	org.eclipse.core.runtime.IProgressMonitor	cognix-eclipse-mechanics-adapters/SynexiaEclipseProgressMonitor.java	com.m3.collections.M3ProgressMonitor	ADDITIVE_CANDIDATE	Java21 Maven/JUnit + Eclipse provided API + OSGi runtime
+core-runtime registry	org.eclipse.core.runtime.IExtensionRegistry	cognix-eclipse-mechanics-core/ExtensionRegistryMechanics.java	M3 indexed read-only registry snapshot	HOLD_NOT_REWIRED	registry change events, executable authority and version identity
+Equinox OSGi	org.osgi.framework.BundleContext	cognix-eclipse-mechanics-core/BundleRegistryMechanics.java	M3 handle/offset/mask graph	HOLD_NOT_REWIRED	resolver, service registry, activation and refresh parity
+Eclipse Collections	org.eclipse.collections.api.*	m3/collections/interop/M3LibraryCollections.java	com.m3.collections M3 maps/lists/sets	BOUNDED_OPTIONAL_INTEROP	full API/return closure, mutability, serialization and JNI
+SWT widgets	org.eclipse.swt.widgets.*	docs/M3-SCALE/runs/20261015-intrinsic-widget-viewport/INTRINSIC_WIDGETS.tsv	parent-owned indexed viewport/state plane	HOLD_UNQUALIFIED	original widget owner + native paint/GC/selection/disposal parity
+Nebula widgets	org.eclipse.nebula.*	docs/M3-SCALE/runs/20261015-intrinsic-widget-viewport/INTRINSIC_WIDGETS.tsv	parent-owned indexed viewport/state plane	HOLD_UNQUALIFIED	per-widget source-sealed platform tests
+JFace viewers	org.eclipse.jface.viewers.*	Synexia SWT/JFace viewer work	M3 lazy visibility masks/offsets	HOLD_NOT_REWIRED	selection order, provider, virtual/nonvirtual contracts
+JDT and LTK	org.eclipse.jdt.*;org.eclipse.ltk.*	cognix-eclipse-mechanics-adapters/JdtProjectLanguageMechanics.java	M3 AST/index/recipe atoms	HOLD_NOT_REWIRED	AST identity, bindings and refactoring preview
+Workspace/Resources	org.eclipse.core.resources.*	cognix-eclipse-mechanics-adapters/EclipseWorkspaceMechanics.java	M3 indexed delta/handles	HOLD_NOT_REWIRED	delta ordering, jobs, concurrency and locks
+PDE/Pluginify	org.eclipse.pde.*	synexia-pluginify-bridge-eclipse	M3 source/bundle metadata projection	HOLD_NOT_REWIRED	OSGi/Tycho launch and extension resolution
+EMF	org.eclipse.emf.*	NOT_ESTABLISHED	M3 indexed containment and deferred state	HOLD_UNQUALIFIED	proxy resolution, ENotification, serialization and identity
+GEF/Draw2D	org.eclipse.gef.*	NOT_ESTABLISHED	M3 figure/viewport state	HOLD_UNQUALIFIED	paint, hit-testing, event and native resource parity
+Workbench/RCP	org.eclipse.ui.*	Synexia eclipse visual runtime	M3 lifecycle and view model	HOLD_NOT_REWIRED	UI thread, extension registry, commands and perspective persistence
