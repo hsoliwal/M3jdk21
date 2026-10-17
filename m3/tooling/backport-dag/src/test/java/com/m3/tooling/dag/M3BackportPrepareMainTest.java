@@ -2,9 +2,11 @@
 package com.m3.tooling.dag;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import com.synexia.rewrite.M3RecipeMasteryPortableReceipt;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import org.junit.jupiter.api.Test;
@@ -44,11 +46,10 @@ final class M3BackportPrepareMainTest {
                 """);
         Path output = root.resolve("m3/build/prepared");
 
+        // The package-private verified-entry test fixture exercises source behavior.
+        // The public CLI independently verifies an actual source-pinned receipt.
         var summary =
-                M3BackportPrepareMain.run(
-                        new String[] {
-                            root.toString(), output.toString(), paths.toString()
-                        });
+                M3BackportPrepareMain.run(root, output, paths, fixtureMastery());
 
         assertEquals(2, summary.targets());
         assertEquals(1, summary.javaFiles());
@@ -64,36 +65,36 @@ final class M3BackportPrepareMainTest {
     void invalidCliInputsFailClosed() throws Exception {
         Path root = Files.createTempDirectory("m3-prepare-main-invalid-");
         Path empty = root.resolve("empty.txt");
-        Files.writeString(empty, "# no targets\n");
+        Files.writeString(empty, "# no targets\\n");
+        Path out = root.resolve("out");
 
-        assertThrows(
-                IllegalArgumentException.class,
+        assertThrows(IllegalArgumentException.class,
                 () -> M3BackportPrepareMain.run(new String[] {}));
-        assertThrows(
-                IllegalArgumentException.class,
-                () ->
-                        M3BackportPrepareMain.run(
-                                new String[] {
-                                    root.resolve("missing-root").toString(),
-                                    root.resolve("out").toString(),
-                                    empty.toString()
-                                }));
-        assertThrows(
-                IllegalArgumentException.class,
-                () ->
-                        M3BackportPrepareMain.run(
-                                new String[] {
-                                    root.toString(),
-                                    root.resolve("out").toString(),
-                                    root.resolve("missing.txt").toString()
-                                }));
-        assertThrows(
-                IllegalArgumentException.class,
-                () ->
-                        M3BackportPrepareMain.run(
-                                new String[] {
-                                    root.toString(), root.resolve("out").toString(), empty.toString()
-                                }));
+        // Old unsigned three-argument invocation cannot silently run A3.
+        assertThrows(IllegalArgumentException.class,
+                () -> M3BackportPrepareMain.run(
+                        new String[]{root.toString(), out.toString(), empty.toString()}));
+        assertThrows(IllegalArgumentException.class,
+                () -> M3BackportPrepareMain.run(
+                        root.resolve("missing-root"), out, empty, fixtureMastery()));
+        assertThrows(IllegalArgumentException.class,
+                () -> M3BackportPrepareMain.run(
+                        root, out, root.resolve("missing.txt"), fixtureMastery()));
+        assertThrows(IllegalArgumentException.class,
+                () -> M3BackportPrepareMain.run(root, out, empty, fixtureMastery()));
+
+        // Even a syntactically complete CLI may never forge a verified receipt.
+        assertThrows(java.io.IOException.class,
+                () -> M3BackportPrepareMain.run(new String[]{
+                        root.toString(), out.toString(), empty.toString(),
+                        root.resolve("missing-mastery.tsv").toString(), "0".repeat(64)}));
+        assertFalse(Files.exists(out));
+    }
+
+    private static M3RecipeMasteryPortableReceipt.Verified fixtureMastery() {
+        return new M3RecipeMasteryPortableReceipt.Verified(
+                "1".repeat(64), "2".repeat(64), "3".repeat(64),
+                "EXHAUSTIVE", 3, 1, 1, 10_000, false, 0);
     }
 
     @Test
