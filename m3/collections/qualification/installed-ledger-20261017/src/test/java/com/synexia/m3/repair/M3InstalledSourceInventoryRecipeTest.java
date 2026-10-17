@@ -31,7 +31,7 @@ final class M3InstalledSourceInventoryRecipeTest {
     void newInventoryIsCompleteStableSortedAndBoundToCurrentActualSource() throws IOException {
         String candidate = generate();
         List<String> rows = candidate.lines().filter(l -> !l.startsWith("#")).toList();
-        assertEquals(135, rows.size());
+        assertEquals(136, rows.size());
         assertTrue(candidate.contains(SOURCE_COMMIT));
         Set<String> seen = new HashSet<>();
         String previous = "";
@@ -46,7 +46,7 @@ final class M3InstalledSourceInventoryRecipeTest {
             assertEquals(contentSha, parts[1]);
             if (parts[0].contains("/src/") && parts[0].endsWith(".java")) javaSources++;
         }
-        assertEquals(131, javaSources);
+        assertEquals(132, javaSources);
         assertTrue(seen.contains("m3/collections/LICENSE"));
         assertTrue(seen.contains("m3/collections/NOTICE"));
         String old = M3InstalledSourceInventoryRecipe.digest(ROOT.resolve(
