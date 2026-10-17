@@ -116,10 +116,27 @@ public final class M3SortedView<E> extends AbstractList<E> implements RandomAcce
     private static Runnable guard(Runnable check, LongSupplier revision, long stamp) {
         return () -> { check.run(); if (revision.getAsLong() != stamp) throw new ConcurrentModificationException("source revision"); };
     }
+    /**
+     * One predicate pass with a compact, adaptive primitive row directory.
+     * Reuses the existing growth atom instead of allocating count entries
+     * when the selected subset is sparse or empty. Selected values are never
+     * visited twice; stable encounter order and check timing are unchanged.
+     */
     private static int[] select(int count, IntPredicate selected, Runnable check) {
-        int[] indices = new int[count]; int size = 0;
-        for (int i = 0; i < count; i++) { check.run(); if (selected.test(i)) indices[size++] = i; }
-        check.run(); return Arrays.copyOf(indices, size);
+        int[] indices = M3SlotArrays.EMPTY_INTS;
+        int used = 0;
+        for (int row = 0; row < count; row++) {
+            check.run();
+            if (selected.test(row)) {
+                if (used == indices.length) {
+                    indices = Arrays.copyOf(indices,
+                            Math.min(count, M3SlotArrays.grow(indices.length)));
+                }
+                indices[used++] = row;
+            }
+        }
+        check.run();
+        return used == indices.length ? indices : Arrays.copyOf(indices, used);
     }
     private static native int[] nativeOrder(long[] keys);
     private void valid() {
