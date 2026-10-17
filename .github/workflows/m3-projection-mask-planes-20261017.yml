@@ -1,0 +1,50 @@
+name: M3 index-projection 32-bit mask planes and real JNI proof
+on:
+  push:
+    branches: [m3/projection-path-mask-planes-20261017]
+  pull_request:
+    paths:
+      - "m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java"
+      - "m3/collections/qualification/m3-index-projection-mask-planes-20261017/**"
+      - ".github/workflows/m3-projection-mask-planes-20261017.yml"
+permissions:
+  contents: read
+jobs:
+  java21-jni-parity:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
+      - name: Verify exact source-first Synexia receiver
+        run: python3 m3/collections/qualification/m3-index-projection-mask-planes-20261017/verify.py
+      - name: Compile canonical product owners and independent differential proof
+        run: |
+          mkdir -p "$RUNNER_TEMP/m3-mask-plane-classes"
+          javac --release 21 -proc:none -Xlint:all -Werror \
+            -d "$RUNNER_TEMP/m3-mask-plane-classes" \
+            m3/collections/src/main/java/com/m3/collections/M3LongAddressKernel.java \
+            m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java \
+            m3/collections/src/main/java/com/m3/collections/M3IndexPathMasks.java \
+            m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java \
+            m3/collections/qualification/m3-index-projection-mask-planes-20261017/M3LongIndexPathMaskProof.java
+      - name: Validate Java21 baseline
+        run: java -ea -cp "$RUNNER_TEMP/m3-mask-plane-classes" com.m3.collections.M3LongIndexPathMaskProof
+      - name: Compile unchanged first-party C17 JNI with UBSan
+        run: |
+          gcc -std=c17 -O2 -fPIC -shared -Wall -Wextra -Werror \
+            -fsanitize=undefined -fno-sanitize-recover=all \
+            -I"$JAVA_HOME/include" -I"$JAVA_HOME/include/linux" \
+            m3/collections/src/main/native/collections/m3_index_path_masks.c \
+            -o "$RUNNER_TEMP/libm3_collections_pathmask.so"
+      - name: Run real checked JNI with Java reference oracle
+        run: |
+          java -ea -Xcheck:jni -Djava.library.path="$RUNNER_TEMP" \
+            -cp "$RUNNER_TEMP/m3-mask-plane-classes" \
+            com.m3.collections.M3LongIndexPathMaskProof jni
+      # Not a source-built java.base/HotSpot qualification or full JCK/JTReg release gate.
