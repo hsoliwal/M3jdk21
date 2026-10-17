@@ -1,0 +1,64 @@
+# Copyright 2026 Hitesh Soliwal and contributors; SPDX-License-Identifier: Apache-2.0
+name: M3 filtered cross-family oracle
+on:
+  pull_request:
+    paths:
+      - 'm3/collections/src/test/java/com/m3/collections/M3FilteredCrossFamilyOracleTest.java'
+      - 'm3/collections/wrappers/recipe/src/**'
+      - 'm3/collections/wrappers/cross-family-20261017/**'
+      - '.github/workflows/m3-filtered-crossfamily-oracle.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  proof:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: maven
+      - name: Diff hygiene
+        if: github.event_name == 'pull_request'
+        run: git diff --check "${{ github.event.pull_request.base.sha }}...HEAD"
+      - name: Reusable OpenRewrite receipt
+        run: mvn -B -ntp -f m3/collections/wrappers/recipe/pom.xml -Dtest=M3CrossFamilyOracleRecipeTest -Dsurefire.failIfNoSpecifiedTests=false test
+      - name: Cross-family Java21 contract
+        run: mvn -B -ntp -f m3/collections/pom.xml -Dtest=M3FilteredCrossFamilyOracleTest -Dsurefire.failIfNoSpecifiedTests=false test
+      - name: Exact receipt admission
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import hashlib, pathlib, xml.etree.ElementTree as ET
+          root=pathlib.Path('m3/collections')
+          crate=root/'wrappers/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-filtered-crossfamily-oracle-20261017'
+          path,before,post,template=(crate/'manifest.tsv').read_text().strip().split('\t')
+          assert before=='ABSENT'
+          expected=(crate/template).read_bytes()
+          assert hashlib.sha256(expected).hexdigest()==post
+          assert (pathlib.Path(path)).read_bytes()==expected
+          for module,name,expected_count in [
+              (root/'wrappers/recipe', 'M3CrossFamilyOracleRecipeTest', 2),
+              (root, 'M3FilteredCrossFamilyOracleTest', 4),
+          ]:
+              receipt=module/'target/surefire-reports'/f'TEST-com.{"synexia.rewrite" if expected_count==2 else "m3.collections"}.{name}.xml'
+              assert receipt.is_file(), receipt
+              suite=ET.parse(receipt).getroot()
+              counters={k:int(suite.get(k,'0')) for k in ('tests','skipped','errors','failures')}
+              print(name,counters)
+              assert counters['tests']==expected_count
+              assert not any(counters[k] for k in ('skipped','errors','failures'))
+          print('M3_FILTERED_CROSS_FAMILY_ADMISSION_PASS')
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: filtered-crossfamily-receipts
+          if-no-files-found: warn
+          path: |
+            m3/collections/target/surefire-reports/TEST-com.m3.collections.M3FilteredCrossFamilyOracleTest.xml
+            m3/collections/wrappers/recipe/target/surefire-reports/TEST-com.synexia.rewrite.M3CrossFamilyOracleRecipeTest.xml
