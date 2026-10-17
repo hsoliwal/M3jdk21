@@ -42,7 +42,7 @@ public final class M3CollectionDependencyRepair {
     private static ChangeTagValue visitor(String path) {
         String before = path.equals(MODULE) ? "5.10.2-m3-source-1" : "8.17.1-m3-source-1";
         String after = path.equals(MODULE) ? "5.10.2" : "8.17.1";
-        return new ChangeTagValue("/project/dependencies/dependency/version", before, after, false);
+        return new ChangeTagValue("/project/dependencies/dependency/version", before, after);
     }
 
     private static String emitOne(String path, String before, String after) {
