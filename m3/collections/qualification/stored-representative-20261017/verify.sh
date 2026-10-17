@@ -4,6 +4,7 @@
 set -euo pipefail
 root=$(cd "$(dirname "$0")/../../../.." && pwd)
 python3 "$root/m3/collections/qualification/stored-representative-20261017/verify_receiver.py"
+python3 "$root/m3/collections/qualification/stored-representative-20261017/test_receipt.py"
 work=$(mktemp -d)
 trap 'rm -rf "$work"' EXIT
 pkg="$root/m3/collections/src"
