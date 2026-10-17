@@ -1,0 +1,52 @@
+{
+  "source_receipts": [
+    {
+      "target": "m3/collections/implementations/spring/src/main/java/com/m3/collections/spring/M3MultiValueMap.java",
+      "before": "ABSENT",
+      "sha256": "c1bf11b7ced59b3fdf424ce83c2941324d26ec5161e6dcbedccf8159c9c38c77",
+      "bytes": 7610,
+      "template": "M3MultiValueMap.java.txt"
+    },
+    {
+      "target": "m3/collections/implementations/spring/src/main/java/com/m3/collections/spring/M3SingleValueMapView.java",
+      "before": "ABSENT",
+      "sha256": "e671912bc77d45792a18351219ec2659cc0f6b8fee7eda2848c6c449c2807c02",
+      "bytes": 9415,
+      "template": "M3SingleValueMapView.java.txt"
+    },
+    {
+      "target": "m3/collections/implementations/spring/src/test/java/com/m3/collections/spring/M3MultiValueMapSelfTest.java",
+      "before": "ABSENT",
+      "sha256": "ffa616717237390be73b067e385d5be13b573682e184f31d3003a7f24df84c04",
+      "bytes": 50899,
+      "template": "M3MultiValueMapSelfTest.java.txt"
+    }
+  ],
+  "provider": "Spring6.2.0",
+  "strict_compile": "spring-compile-03",
+  "behavior": "spring-03",
+  "checks": 142073,
+  "paired_operations": 5234,
+  "random_operations": 5000,
+  "diagnostic_cases": 6,
+  "observed_non_admitted_boundaries": 2,
+  "concrete_boundaries": [
+    "structural main forEach callback trace",
+    "structural scalar-view forEach callback trace"
+  ],
+  "current_M3_backed_provider_protocol": "STRICTLY_COMPARED",
+  "own_serialized_wire": "NO_DONOR_WIRE_IDENTITY_PROMISE",
+  "performance": "NOT_MEASURED",
+  "status": "FINITE_RUNTIME_AND_RECIPE_QUALIFIED",
+  "recipe_tests": 2,
+  "recipe_installation_states": 16,
+  "refusal_cases": 6,
+  "api_allocations": "Spring MultiValueMap API only; no Spring implementation superclass/delegate/helper allocation",
+  "pinned_core_commit": "1f6ed369492ee10946ff3f157c68d25d37a3457c",
+  "publication_parent": "4598bfc398d3024e7ea67e42034e857a53a1b378",
+  "publication_storage_owner_blobs_unchanged": true,
+  "ci": "PENDING",
+  "independent_source_review": "PENDING",
+  "existing_adapter_factories": "UNCHANGED_PENDING_SEPARATE_COMPATIBLE_MIGRATION",
+  "full_library_admission": false
+}

@@ -1,0 +1,54 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3 owned Spring MultiValueMap
+on:
+  pull_request:
+    paths:
+      - 'm3/collections/src/main/java/**'
+      - 'm3/collections/implementations/spring/**'
+      - 'm3/collections/recipe/owned-spring-multivalue-map-20261017/**'
+      - 'm3/collections/qualification/owned-spring-multivalue-map-20261017/**'
+      - '.github/workflows/m3-owned-spring-multivalue-map.yml'
+permissions:
+  contents: read
+jobs:
+  qualify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Qualify exact receiving recipe
+        run: |
+          set -euxo pipefail
+          python3 -I -S -B m3/collections/qualification/owned-spring-multivalue-map-20261017/verify.py
+          mvn -B -ntp -f m3/collections/recipe/owned-spring-multivalue-map-20261017/pom.xml test
+      - name: Compile current core and owned Spring protocol
+        run: |
+          set -euxo pipefail
+          mkdir -p proof/core proof/owned
+          POM=m3/collections/recipe/owned-spring-multivalue-map-20261017/pom.xml
+          for ARTIFACT in org.springframework:spring-core:6.2.0 org.springframework:spring-jcl:6.2.0 com.google.code.findbugs:jsr305:3.0.2; do
+            mvn -B -ntp -f "$POM" org.apache.maven.plugins:maven-dependency-plugin:3.6.1:get -Dartifact="$ARTIFACT" -Dtransitive=false
+          done
+          CORE="$HOME/.m2/repository/org/springframework/spring-core/6.2.0/spring-core-6.2.0.jar"
+          JCL="$HOME/.m2/repository/org/springframework/spring-jcl/6.2.0/spring-jcl-6.2.0.jar"
+          ANNOTATIONS="$HOME/.m2/repository/com/google/code/findbugs/jsr305/3.0.2/jsr305-3.0.2.jar"
+          find m3/collections/src/main/java -name '*.java' -print0 | sort -z | xargs -0 javac --release 21 -proc:none -Xlint:all,-module -Werror -d proof/core
+          CP="proof/owned:proof/core:$CORE:$JCL:$ANNOTATIONS"
+          javac --release 21 -proc:none -Xlint:all -Werror -cp "$CP" -d proof/owned m3/collections/implementations/spring/src/main/java/com/m3/collections/spring/M3MultiValueMap.java m3/collections/implementations/spring/src/main/java/com/m3/collections/spring/M3SingleValueMapView.java m3/collections/implementations/spring/src/test/java/com/m3/collections/spring/M3MultiValueMapSelfTest.java m3/collections/qualification/owned-spring-multivalue-map-20261017/SpringProtocolPreimageProbe.java
+          java -Xmx512m -cp "$CP" com.m3.collections.spring.M3MultiValueMapSelfTest
+          java -Xmx512m -cp "$CP" SpringProtocolPreimageProbe
+          python3 -I -S -B m3/collections/qualification/owned-spring-multivalue-map-20261017/verify.py
+          git diff --exit-code
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: m3-owned-spring-${{ github.event.pull_request.head.sha }}
+          path: |
+            proof/
+            m3/collections/recipe/owned-spring-multivalue-map-20261017/target/surefire-reports/

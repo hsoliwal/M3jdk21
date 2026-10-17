@@ -1,0 +1,27 @@
+{
+  "proofs": [
+    {
+      "name": "spring-compile-03",
+      "mode": "spring-compile",
+      "passed": true,
+      "inputs_unchanged": true,
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "spring-03",
+      "mode": "spring",
+      "passed": true,
+      "inputs_unchanged": true,
+      "log_sha256": "fa6a42348bd88a2a903399a3db4ae39fae9d5b28974c8a8568e3f0bf2b67d422"
+    },
+    {
+      "name": "spring-recipe-01",
+      "mode": "spring-recipe",
+      "passed": true,
+      "inputs_unchanged": true,
+      "log_sha256": "bd303ce19e8aaec5507507b2f45e4d09fde810176f965dfbd722c4dec215cfce"
+    }
+  ],
+  "hosted_ci": "PENDING",
+  "performance": "NOT_MEASURED"
+}
