@@ -1,0 +1,7 @@
+# Receiving qualification of existing purpose-wrapper recipes
+
+Canonical owner: Synexia11967, source commit54687f4b14ff8cbbb2ae34680075038e3e86a095, stacked on11951. Receiving parent994 remains the runtime owner; this task changes only recipe qualification inputs and its existing CI job. Core Git tree must equal73b93b1c3f1f7d50414edf3bfe74d7760956d319 exactly.
+
+The canonical sdk/ directory is mirrored as canonical/ here. Three named recipes and all14 tests exercise the existing publicJava2530/Text2db providers, the source-row ordering repair, named-composite test repair, eight partial states and strict replay/refusal/fixed-point custody. Actual emitted canonical repairs must equal the consumed SDK sources/manifest. The existing six runtime source-seal outputs are checked unchanged before and after qualification. The runtime Java21/C17 JNI commands run unchanged before the two new SDK/evidence steps; no new execution job, host or permissions are added.
+
+At authoring, real Maven/SDK qualification is NOT_RUN. A successful receipt is scoped to these public providers and this exact module, not canonical39c/source-Textc1ce, installed/full matched JDK, other providers, lifetime/retention/performance or the complete migration. Existing11951 MAVEN_SDK.md labels do not constitute an executed proof. No runtime output is applied or phase advanced. Keep draft; source authority and full-goal/storage holds remain.

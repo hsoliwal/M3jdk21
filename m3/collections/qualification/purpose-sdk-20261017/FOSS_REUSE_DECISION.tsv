@@ -1,0 +1,2 @@
+capability	donor	commit	paths	license	classification	fit	gap
+purpose-recipe-repair-and-qualification	Synexia11951;M3jdk21 receiving SDK2530/text2db;qualified11964	1dc4904e461c1a2069dd21e955b10b770e800fc2;970a34350ebdf6a3f1c5ff5acc8445d0f3515f55;47be32d9eab353c6947334ce60937a372c6ae217	M3HashPinnedJavaSnapshotRecipe;M3HashPinnedTextSnapshotRecipe;SDK suites;Maven qualification	Apache-2.0	ADAPT	Exact existing source targets and public APIs; preserve runtime templates and contracts	Sort manifest rows; correct test expectation; execute existing SDK tests and composite replay

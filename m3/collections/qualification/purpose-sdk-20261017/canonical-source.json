@@ -1,0 +1,16 @@
+{
+  "schema": "M3_PURPOSE_SDK_CANONICAL_SOURCE_V1",
+  "repository": "hsoliwal/com.synexia",
+  "pullRequest": 11967,
+  "commit": "54687f4b14ff8cbbb2ae34680075038e3e86a095",
+  "sourceTree": "67101a400c001b341e4942d5bb02f8349c7868a0",
+  "canonicalCorePath": "synexia-openrewrite-recipes/recipe-crates/collections-superset-counts/generic-purpose-sdk-qualification-20261017/sdk",
+  "receiverCorePath": "m3/collections/qualification/purpose-sdk-20261017/canonical",
+  "moduleGitTree": "73b93b1c3f1f7d50414edf3bfe74d7760956d319",
+  "taskRoot": "17c80e3a077fd4ded02aa1ea13aa5662fe8785c0607fde6897fc014edd45ff76",
+  "receivingJavaProvider": "2530c533003a8a17d0e782728d98a4dfebe13651",
+  "receivingTextProvider": "2db1257a40d21be06ba2a67da87aff0311183809",
+  "canonicalProvider39c": "NOT_RUN",
+  "runtimeApplied": false,
+  "phaseAdvanced": false
+}

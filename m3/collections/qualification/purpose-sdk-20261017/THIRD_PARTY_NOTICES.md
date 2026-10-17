@@ -1,0 +1,3 @@
+# Third-party and first-party provenance
+
+All copied source fixtures and snapshot providers in this module are existing first-party Synexia code, with Apache-2.0 SPDX identifiers retained. Public providers are pinned to M3jdk21 commits970a3435 (Java/support) and47be32d9 (Text); no private snapshot engine is exported. OpenRewrite8.17.1, JUnit5.10.2 and Maven plugins are dependencies resolved by Maven and retain their own licenses. JDK Collections supplies the wrapper implementations; no JDK source is copied here. Guava, Commons, Eclipse, Spring, LeetCode, HackerRank and GeeksforGeeks remain references recorded in the original11951 catalogue; no solution/editorial code is copied.
