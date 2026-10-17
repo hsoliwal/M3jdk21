@@ -1,0 +1,17 @@
+{
+  "schema": "M3_JAVAC_HOSTED_WORKFLOW_RECEIVING_CANONICAL_SOURCE_V1",
+  "repository": "hsoliwal/com.synexia",
+  "commit": "ea94f34c364e08144d558cf269d48b6e2d1b904f",
+  "pullRequest": 12020,
+  "sourcePath": "synexia-openrewrite-recipes/recipes/m3-javac-regex-hosted-receiving-qualification-20261017/workflow-sdk",
+  "receiverCorePath": "m3/runtime-integration/javac-regex-current-owner-20261017/workflow-canonical",
+  "moduleGitTree": "bb80fe9c69eb41ac6f33c063ce8d0736be9d6f85",
+  "inputPinsGitBlob": "48a7fb94b631ffae4185dc1d6b8792d1eb0ea2a1",
+  "pinsSha256": "f021928cc7dd0ed5cfc0435107293be691be73cf17c44f10fa74bbccee5e46e6",
+  "openrewriteAdapterGitBlob": "1c1b1b568d369f688f6953161636bf36b484bf5a",
+  "manifestKernelGitBlob": "38df5f97bbeec8a8a8cfc77091d56bda925c07f2",
+  "expectedSdkTests": 2,
+  "qualification": "NOT_RUN",
+  "runtimeApplied": false,
+  "phaseAdvanced": false
+}

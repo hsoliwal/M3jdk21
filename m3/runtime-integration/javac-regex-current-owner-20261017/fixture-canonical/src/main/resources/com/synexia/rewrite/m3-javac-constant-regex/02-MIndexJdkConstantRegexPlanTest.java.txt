@@ -1,0 +1,11 @@
+// SPDX-License-Identifier: Apache-2.0
+package com.synexia.indexstring;
+
+import org.junit.jupiter.api.Test;
+
+/** Real JDK Pattern semantic oracle for candidate-only constant regex reuse. */
+final class MIndexJdkConstantRegexPlanTest {
+    @Test void compiledPatternMatchesJava21OperationsAndExceptions() {
+        MIndexJdkConstantRegexPlanContract.main(new String[0]);
+    }
+}

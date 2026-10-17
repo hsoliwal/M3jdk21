@@ -1,0 +1,17 @@
+{
+  "schema": "M3_JAVAC_CURRENT_OWNER_RECEIVING_CANONICAL_SOURCE_V1",
+  "repository": "hsoliwal/com.synexia",
+  "commit": "515f2f2153aa6afbc758da34c495c7223ee7997a",
+  "pullRequest": 12014,
+  "openrewriteAdapterGitBlob": "1c1b1b568d369f688f6953161636bf36b484bf5a",
+  "manifestKernelGitBlob": "38df5f97bbeec8a8a8cfc77091d56bda925c07f2",
+  "runtimeApplied": false,
+  "phaseAdvanced": false,
+  "qualification": "NOT_RUN",
+  "sourcePath": "synexia-openrewrite-recipes/recipes/m3-javac-regex-current-owner-qualification-20261017/sdk",
+  "receiverCorePath": "m3/runtime-integration/javac-regex-current-owner-20261017/current-canonical",
+  "moduleGitTree": "d81ce3df2695611b8fb1f4b0670a317c78d81d30",
+  "inputPinsGitBlob": "f5e27a00e8ad61673532e7d945de4d3827930316",
+  "pinsSha256": "0da95840e225e9e019967a449bd1343bda01085888572d985f6fc54a25927532",
+  "expectedSdkTests": 2
+}

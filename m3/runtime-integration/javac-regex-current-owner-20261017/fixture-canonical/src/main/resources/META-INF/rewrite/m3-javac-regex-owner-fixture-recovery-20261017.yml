@@ -1,0 +1,9 @@
+# SPDX-License-Identifier: Apache-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.JavacRegexOwnerFixtureRecovery
+displayName: Recover the exact javac regex compiler owner fixture
+description: >
+  Restore the omitted complete Apache compiler-owner resource without changing
+  production source, the original three JUnit tests or historical recipe seals.
+recipeList:
+  - com.synexia.rewrite.M3JavacRegexOwnerFixtureRecoveryRecipe
