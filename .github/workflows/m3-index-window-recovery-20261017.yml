@@ -1,0 +1,54 @@
+name: M3 indexed-window owner Java21 and C17 JNI
+on:
+  pull_request:
+    paths:
+      - 'm3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java'
+      - 'm3/collections/src/main/native/collections/m3_index_mask_compactor.c'
+      - 'm3/collections/src/test/java/com/m3/collections/M3IndexMaskWindowRecovery*'
+      - 'm3/collections/qualification/window-recovery-20261017/**'
+      - '.github/workflows/m3-index-window-recovery-20261017.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  focused-java-jni:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Verify source hashes before compilation
+        run: python3 m3/collections/qualification/window-recovery-20261017/verify.py
+      - name: Compile real owner and run Java21 / actual JNI / UBSan parity
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/m3-window-classes /tmp/m3-window-native
+          MAIN=m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java
+          TEST=m3/collections/src/test/java/com/m3/collections/M3IndexMaskWindowRecoverySelfTest.java
+          SRC=m3/collections/src/main/native/collections/m3_index_mask_compactor.c
+          javac --release 21 -proc:none -Xlint:all -Werror -h /tmp/m3-window-native -d /tmp/m3-window-classes "$MAIN" "$TEST"
+          java -Xcheck:jni -cp /tmp/m3-window-classes com.m3.collections.M3IndexMaskWindowRecoverySelfTest
+          gcc -std=c17 -O2 -Wall -Wextra -Werror -Wconversion -Wshadow -pedantic -fPIC -shared -I"$JAVA_HOME/include" -I"$JAVA_HOME/include/linux" "$SRC" -o /tmp/m3-window-native/libm3_collections_mask.so
+          java -Xcheck:jni -Djava.library.path=/tmp/m3-window-native -cp /tmp/m3-window-classes com.m3.collections.M3IndexMaskWindowRecoverySelfTest --native
+          gcc -std=c17 -Wall -Wextra -Werror -Wconversion -Wshadow -pedantic -fsanitize=undefined -fno-sanitize-recover=all -fPIC -shared -I"$JAVA_HOME/include" -I"$JAVA_HOME/include/linux" "$SRC" -o /tmp/m3-window-native/libm3_collections_mask.so
+          UBSAN_OPTIONS=halt_on_error=1:print_stacktrace=1 java -Xcheck:jni -Djava.library.path=/tmp/m3-window-native -cp /tmp/m3-window-classes com.m3.collections.M3IndexMaskWindowRecoverySelfTest --native
+  owning-maven:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: maven
+      - name: Run owning-module contract tests, not only focused standalone oracle
+        run: mvn -B -ntp -f m3/collections/pom.xml -Dtest=M3IndexMaskWindowRecoveryTest test
