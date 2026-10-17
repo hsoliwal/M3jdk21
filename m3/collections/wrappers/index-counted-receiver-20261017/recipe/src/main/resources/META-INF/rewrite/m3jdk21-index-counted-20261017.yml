@@ -1,0 +1,14 @@
+# SPDX-License-Identifier: Apache-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.M3Jdk21FilteredSortedCountedReceiver20261017
+displayName: Receive first-party primitive ID/count ranked sorted multisets with live filtered wrappers
+description: >-
+  Source-sealed 11 Java21 classes/test oracles and exact JNI C17 count-span
+  donor. Canonical Synexia owns algorithms and Maven/OpenRewrite recipes;
+  the M3JDK21 receiving repository owns java.base-independent product code,
+  native symbols, runtime contracts and installed-source qualification.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: m3jdk21-index-counted-20261017
+  - com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe:
+      crateName: m3jdk21-index-counted-native-20261017
