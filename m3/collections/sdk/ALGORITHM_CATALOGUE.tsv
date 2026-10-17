@@ -1,0 +1,10 @@
+category	donor_evidence	baseline	chosen_M3_atom	complexity	contract	license_decision	selection
+OFFSET_PARTITION	Guava Lists.partition; Commons ListUtils.partition	copy every batch	M3IndexPartitions	O(1) view construction/get; O(1) metadata	live outer/backed inner; RandomAccess preserved	Upstream docs only, first-party Apache-2.0	SELECTED
+PRIMITIVE_BAG	Eclipse MutableLongBag; Guava Multiset; Commons Bag	HashMap<Long,Long> boxes	M3LongBag + existing M3LongLongHashMap	expected O(1) count/update; O(distinct) storage	long multiplicity, exact checked total, no entry graph	Upstream reference only, first-party Apache-2.0	SELECTED
+MASK_INDEX	Existing M3IndexPathMasks Java/C17	materialize intermediate predicate outputs	M3CollectionSdk.selectMaskedPath delegates	O(n * maskStages) + O(k) output	full 32-bit required/excluded state words, signed stride, JNI optional	First-party M3 Java/C17 reused unchanged	REUSE
+FILTERED_LIST	Existing M3FilteredLists / JDK List	duplicate filter framework	delegate to existing backed list	owner dependent	read-only and mutable distinct contracts	Upstream references only	REUSE
+FILTERED_SORTED	Existing M3FilteredViews / M3MutableFilteredViews	new wrapper hierarchy	delegate to current navigable owners	owner dependent	preserve comparator, representative, range and write-through rules	JDK/Guava semantic comparison only	REUSE
+MULTIMAP	Spring MultiValueMap; Guava Multimap; Commons MultiValuedMap	assume APIs equivalent	NONE	NOT_IMPLEMENTED	list/set-first/duplicate contracts differ	reference only	DEFER
+DENSE_COMPACTION	LeetCode 27 (category only)	per-filter arrays	precomputed index short-circuit	O(n * stages)	preserve ordered duplicate row occurrences	Challenge solution/editorial not copied	CATEGORY
+FREQUENCY_COUNT	LeetCode 347; HackerRank frequency queries (categories only)	boxed frequency maps	primitive counts	expected O(1) updates	no topK behavior claimed	Challenge solution/editorial not copied	CATEGORY
+PAGING	HackerRank Dynamic Array; GFG partitioning (category only)	materialized pages	logical index offsets	O(1) read-partition	JDK List subList caveats	No external source copied	CATEGORY

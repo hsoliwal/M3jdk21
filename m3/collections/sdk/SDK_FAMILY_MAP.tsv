@@ -1,0 +1,29 @@
+framework	original_api	m3_counterpart	status	contract_note	upstream_license
+JDK	java.util.ArrayList	com.m3.collections.M3CollectionSdk.jdkArrayList	JDK_PASSTHROUGH	actual JDK ArrayList; no M3 replacement	OpenJDK GPLv2+CPE
+JDK	java.util.ArrayList	com.m3.collections.M3LongArrayList	PRIMITIVE_ANALOGUE	primitive-only long; not List<Long>	OpenJDK GPLv2+CPE
+JDK	java.util.HashMap	com.m3.collections.M3LongLongHashMap	PRIMITIVE_ANALOGUE	long/long parallel lanes; not java.util.Map	OpenJDK GPLv2+CPE
+JDK	java.util.HashSet	com.m3.collections.M3LongHashSet	PRIMITIVE_ANALOGUE	primitive long; not java.util.Set	OpenJDK GPLv2+CPE
+JDK	java.util.TreeMap	com.m3.collections.M3TreeMap	EXISTING_M3_JDK_INTERFACE	target-owned NavigableMap implementation; JDK naming preserved	OpenJDK GPLv2+CPE
+JDK	java.util.TreeSet	com.m3.collections.M3TreeSet	EXISTING_M3_JDK_INTERFACE	target-owned NavigableSet implementation; JDK naming preserved	OpenJDK GPLv2+CPE
+JDK	java.util.List.subList	com.m3.collections.M3IndexPartitions.view	NEW_INDEX_VIEW	unmodifiable outer; backed inner subLists	OpenJDK GPLv2+CPE
+JDK	java.util.NavigableSet	com.m3.collections.M3FilteredViews.filter	READ_ONLY_VISIBILITY_VIEW	live predicate hiding; not mutable general replacement	OpenJDK GPLv2+CPE
+JDK	java.util.NavigableMap	com.m3.collections.M3MutableFilteredViews.filterEntries	MUTABLE_VISIBILITY_VIEW	predicate-aware write-through; contract check	OpenJDK GPLv2+CPE
+Guava	com.google.common.collect.Lists.partition	com.m3.collections.M3IndexPartitions.view	NEW_INDEX_VIEW	same outer/inner view shape, not Guava class/interface	Apache-2.0
+Guava	com.google.common.collect.Sets.filter	com.m3.collections.M3FilteredViews.filter	CONTRACT_GAP	M3 read-only differs from mutable filtered Guava	Apache-2.0
+Guava	com.google.common.collect.Maps.filterEntries	com.m3.collections.M3MutableFilteredViews.filterEntries	SEMANTIC_ANALOGUE	NavigableMap only, no Guava dependency	Apache-2.0
+Guava	com.google.common.collect.Multiset	com.m3.collections.M3LongBag	PRIMITIVE_ANALOGUE	long-only 64-bit counted values, not Guava Multiset	Apache-2.0
+Guava	com.google.common.collect.BiMap	PENDING_M3_BIMAP	PENDING	inverse uniqueness and live view unqualified	Apache-2.0
+Guava	com.google.common.collect.Multimap	PENDING_M3_MULTIMAP	PENDING	not interchangeable with Spring MultiValueMap	Apache-2.0
+Guava	com.google.common.collect.Table	PENDING_M3_TABLE	PENDING	two-coordinate cells and views unqualified	Apache-2.0
+Eclipse Collections	org.eclipse.collections.api.list.primitive.MutableLongList	com.m3.collections.M3LongArrayList	PRIMITIVE_ANALOGUE	not Eclipse interface implementation	EPL upstream per file
+Eclipse Collections	org.eclipse.collections.api.set.primitive.MutableLongSet	com.m3.collections.M3LongHashSet	PRIMITIVE_ANALOGUE	not Eclipse interface implementation	EPL upstream per file
+Eclipse Collections	org.eclipse.collections.api.map.primitive.MutableLongLongMap	com.m3.collections.M3LongLongHashMap	PRIMITIVE_ANALOGUE	not Eclipse interface implementation	EPL upstream per file
+Eclipse Collections	org.eclipse.collections.api.bag.primitive.MutableLongBag	com.m3.collections.M3LongBag	NEW_PRIMITIVE_ANALOGUE	64-bit counts, not Eclipse bag interface	EPL upstream per file
+Spring	org.springframework.util.MultiValueMap	PENDING_M3_MULTIVALUE_MAP	PENDING	extends Map<K,List<V>>, getFirst/add/set unimplemented	Apache-2.0
+Spring	org.springframework.util.LinkedMultiValueMap	PENDING_M3_LINKED_MULTIVALUE_MAP	PENDING	linked keys and lists per key unimplemented	Apache-2.0
+Spring	org.springframework.util.MultiValueMapAdapter	PENDING_M3_MULTIVALUE_ADAPTER	PENDING	no Spring runtime dependency or alias	Apache-2.0
+Apache Commons Collections	org.apache.commons.collections4.ListUtils.partition	com.m3.collections.M3IndexPartitions.view	NEW_INDEX_VIEW	independently implemented live partition API	Apache-2.0
+Apache Commons Collections	org.apache.commons.collections4.Bag	com.m3.collections.M3LongBag	PRIMITIVE_ANALOGUE	no boxed Collection/Bag compatibility	Apache-2.0
+Apache Commons Collections	org.apache.commons.collections4.MultiSet	com.m3.collections.M3LongBag	PRIMITIVE_ANALOGUE	long counts, no Apache MultiSet contract	Apache-2.0
+Apache Commons Collections	org.apache.commons.collections4.MultiValuedMap	PENDING_M3_MULTIMAP	PENDING	collection-valued map not Spring list-valued map	Apache-2.0
+Apache Commons Collections	org.apache.commons.collections4.collection.PredicatedCollection	NO_FILTER_EQUIVALENT	REJECT	validating insertion != hiding existing members	Apache-2.0

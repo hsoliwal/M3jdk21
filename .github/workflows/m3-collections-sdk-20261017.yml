@@ -1,0 +1,44 @@
+name: M3 collections named SDK Java21 JNI
+on:
+  pull_request:
+    paths:
+      - 'm3/collections/sdk/**'
+      - 'm3/collections/src/main/java/com/m3/collections/M3CollectionSdk.java'
+      - 'm3/collections/src/main/java/com/m3/collections/M3IndexPartitions.java'
+      - 'm3/collections/src/main/java/com/m3/collections/M3LongBag.java'
+      - 'm3/collections/src/test/java/com/m3/collections/M3CollectionSdk*'
+      - 'm3/collections/verify_donation.py'
+      - '.github/workflows/m3-collections-sdk-20261017.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  collection-sdk:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Refuse tampered SDK and legacy receipts
+        run: |
+          python3 m3/collections/sdk/verify_sdk.py
+          (cd m3/collections/sdk && python3 -m unittest discover -v -p 'test_verify_sdk.py')
+          python3 -m unittest discover -s m3/collections -p 'test_verify_*.py' -v
+      - name: Compile full real-owner M3 Collections module and run JUnit
+        run: mvn -B -ntp -f m3/collections/pom.xml -Dtest=M3CollectionSdkJUnitTest test
+      - name: Execute actual M3 Java contract oracle
+        run: java -ea -cp m3/collections/target/classes:m3/collections/target/test-classes com.m3.collections.M3CollectionSdkSelfTest
+      - name: Compile existing C17 JNI and run SDK native-required checks
+        shell: bash
+        run: |
+          set -euo pipefail
+          gcc -std=c17 -Wall -Wextra -Werror -Wconversion -Wshadow -pedantic -fPIC -shared \
+            -I"$JAVA_HOME/include" -I"$JAVA_HOME/include/linux" \
+            m3/collections/src/main/native/collections/m3_index_path_masks.c \
+            -o "$RUNNER_TEMP/libm3_collections_pathmask.so"
+          java -ea -Xcheck:jni -Djava.library.path="$RUNNER_TEMP" \
+            -cp m3/collections/target/classes:m3/collections/target/test-classes \
+            com.m3.collections.M3CollectionSdkSelfTest --native
