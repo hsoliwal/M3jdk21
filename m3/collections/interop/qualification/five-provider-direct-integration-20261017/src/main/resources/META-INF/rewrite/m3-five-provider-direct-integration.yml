@@ -1,0 +1,13 @@
+# SPDX-License-Identifier: Apache-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.FiveProviderDirectSdk20261017
+displayName: Receive M3 Object[] JDK list and direct Spring map over shared five-provider owners
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: five-provider-direct-integration
+      lst: false
+  - org.openrewrite.text.FindAndReplace:
+      find: com.m3.collections.interop.M3SpringMultiValueMap
+      replace: com.m3.collections.interop.M3SpringArrayMultiValueMap
+      filePattern: "**/sdk-family-bindings.tsv"
+      regex: false

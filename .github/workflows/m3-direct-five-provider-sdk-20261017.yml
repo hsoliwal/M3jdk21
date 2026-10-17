@@ -1,0 +1,81 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3 direct five-provider SDK Java JNI integration
+on:
+  pull_request:
+    paths:
+      - "m3/collections/src/main/java/com/m3/collections/M3ArrayList.java"
+      - "m3/collections/src/main/java/com/m3/collections/M3GenericCollections.java"
+      - "m3/collections/src/main/java/com/m3/collections/M3IndexedListSnapshot.java"
+      - "m3/collections/src/test/java/com/m3/collections/M3GenericArrayList*.java"
+      - "m3/collections/interop/src/main/java/com/m3/collections/interop/M3LibraryCollections.java"
+      - "m3/collections/interop/src/main/java/com/m3/collections/interop/M3SpringArrayMultiValueMap.java"
+      - "m3/collections/interop/src/test/java/com/m3/collections/interop/M3SpringArrayContractTest.java"
+      - "m3/collections/interop/sdk-family-bindings.tsv"
+      - "m3/collections/interop/qualification/five-provider-direct-integration-20261017/**"
+      - ".github/workflows/m3-direct-five-provider-sdk-20261017.yml"
+  push:
+    branches: [m3/five-provider-direct-sdk-receiver-20261017]
+permissions:
+  contents: read
+jobs:
+  real-sdk-and-providers:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
+      - name: Source-sealed actual Java and metadata postimages
+        run: python3 -S m3/collections/interop/qualification/five-provider-direct-integration-20261017/verify.py
+      - name: Execute reusable Maven OpenRewrite Java and text recipes
+        shell: bash
+        run: |
+          set -euxo pipefail
+          mvn -B -ntp -f m3/collections/interop/qualification/five-provider-direct-integration-20261017/pom.xml \
+            -Dm3.engine.sources="$PWD/m3/tooling/migration-recipes/src/main/java" test
+      - name: Full M3 core including JDK Object array and indexed snapshots
+        shell: bash
+        run: |
+          set -euxo pipefail
+          mvn -B -ntp -f m3/collections/pom.xml clean install
+          java -Xmx512m -cp m3/collections/target/classes:m3/collections/target/test-classes \
+            com.m3.collections.M3GenericArrayListSelfTest
+      - name: Full real Guava Eclipse Spring Apache and JDK provider APIs
+        shell: bash
+        run: |
+          set -euxo pipefail
+          mvn -B -ntp -f m3/collections/interop/pom.xml clean verify
+          python3 -S m3/collections/interop/qualification/five-provider-direct-integration-20261017/verify.py
+      - name: Existing JNI precomputed mask ABI under UBSan and checked JNI
+        shell: bash
+        run: |
+          set -euxo pipefail
+          mkdir -p proof/classes proof/native proof/headers
+          javac --release 21 -proc:none -h proof/headers \
+            -cp m3/collections/target/classes -d proof/classes \
+            m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java
+          gcc -std=c17 -Wall -Wextra -Wpedantic -Werror -fPIC -shared \
+            -fsanitize=undefined -fno-sanitize-recover=all \
+            -I"$JAVA_HOME/include" -I"$JAVA_HOME/include/linux" \
+            m3/collections/src/main/native/collections/m3_index_mask_compactor.c \
+            -o proof/native/libm3_collections_mask.so
+          UBSAN_OPTIONS=halt_on_error=1 java -Xmx256m -Xcheck:jni \
+            -Djava.library.path="$PWD/proof/native" \
+            -cp m3/collections/target/classes:m3/collections/target/test-classes \
+            com.m3.collections.M3IndexMaskCompactorSelfTest --native
+          git diff --exit-code
+      - name: Preserve exact head proof and failures
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: m3-direct-five-${{ github.event.pull_request.head.sha || github.sha }}
+          retention-days: 30
+          path: |
+            m3/collections/target/surefire-reports/
+            m3/collections/interop/target/surefire-reports/
+            m3/collections/interop/qualification/five-provider-direct-integration-20261017/target/surefire-reports/
+            proof/

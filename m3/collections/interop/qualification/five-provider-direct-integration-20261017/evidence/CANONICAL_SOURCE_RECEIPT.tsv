@@ -1,0 +1,18 @@
+# Source-first five-provider direct integration custody
+baseline_product_PR	1174
+baseline_product_head	58a72d0b2b8ffab220e3dc6e53ff7cc5d136bfb5
+JDK_direct_donor_PR	1154
+JDK_direct_donor_head	c3cc813959bbb87e5356c10f9518a98ed4cdfbad
+Spring_direct_donor_PR	1190
+Spring_direct_donor_head	484119a5e0923661c9210d55c1cf567a2c799b79
+Java_OpenRewrite_targets	8
+Text_OpenRewrite_targets	1
+Canonical_recipe	com.synexia.m3.FiveProviderDirectSdk20261017
+M3_count_owner_preserved	M3ObjectCounts
+Product_current_master_unmodified	true
+JNI_production_change_count	0
+Provider_names_preserved	JDK;GUAVA;ECLIPSE;SPRING;APACHE
+Original_1174_core_tests	211_PASS_LOCAL
+Original_1174_provider_tests	126_PASS_LOCAL
+Integration_exact_head_gate	PENDING
+Installed_JDK_gate	PENDING
