@@ -56,6 +56,9 @@ final class M3StringRegexDp {
             if (plan == null || ((long) m + 1) * (plan.atoms.length + 1) > MAX_DP_CELLS) {
                 return UNKNOWN;
             }
+            // Amalgamate cached pattern minima/edge literals with already-prepared
+            // canonical text signals before entering either execution engine.
+            if (rejectsByPrecompute(source, plan)) return NO_MATCH;
             if (plan.closure == null) return rolling(source, plan);
             long state = evaluate(source.owner(), source.start(), m,
                     plan, plan.closure[0], cache, 0);
@@ -65,6 +68,25 @@ final class M3StringRegexDp {
             // Derived-state allocation is optional; the ordinary JDK path remains authoritative.
             return UNKNOWN;
         }
+    }
+
+    /**
+     * Conservative pre-match gate shared by the rolling-DP and bitset/effect
+     * engines. Positive candidate facts are never accepted as regex truth.
+     * Never force a text scan merely to reject a candidate: only already
+     * published canonical owner/range facts are consulted.
+     */
+    private static boolean rejectsByPrecompute(M3String source, Plan plan) {
+        int length = source.length();
+        if (length < plan.minimumUtf16Units) return true;
+        if (length != 0 && plan.fixedFirstUnit >= 0
+                && source.charAt(0) != plan.fixedFirstUnit) return true;
+        if (length != 0 && plan.fixedLastUnit >= 0
+                && source.charAt(length - 1) != plan.fixedLastUnit) return true;
+        M3StringFacts known = source.factsIfPrepared();
+        return known != null
+                && (known.bitSignal64 & plan.mandatoryUnitSignals)
+                        != plan.mandatoryUnitSignals;
     }
 
     private static Tables tables() {
@@ -222,6 +244,9 @@ final class M3StringRegexDp {
     private static long maximumRetainedPrimitiveBytes() {
         long perPlan = MAX_PATTERN_UNITS * (long) Integer.BYTES
                 + (MAX_BIT_ATOMS + 1L + 128L + 2L) * Long.BYTES + Integer.BYTES;
+        // Four new primitive pattern facts: min length, required signal and two
+        // fixed literal boundaries. Effects may retain evicted compiled plans.
+        perPlan += 3L * Integer.BYTES + Long.BYTES;
         return (PLAN_SLOTS + (long) EFFECT_SLOTS) * perPlan
                 + EFFECT_SLOTS * 3L * Long.BYTES;
     }
@@ -248,10 +273,33 @@ final class M3StringRegexDp {
         final long[] ascii;
         final long star;
         final long dot;
+        final int minimumUtf16Units;
+        final long mandatoryUnitSignals;
+        final int fixedFirstUnit;
+        final int fixedLastUnit;
 
         Plan(int[] atoms, int units) {
             this.atoms = atoms;
             this.units = units;
+            int minimum = 0;
+            long required = 0L;
+            for (int atom : atoms) {
+                if ((atom & STAR) == 0) {
+                    minimum++;
+                    char literal = (char) (atom & CODE_UNIT);
+                    if (literal != '.') {
+                        required |= M3StringFacts.codeUnitSignal(literal);
+                    }
+                }
+            }
+            minimumUtf16Units = minimum;
+            mandatoryUnitSignals = required;
+            int first = atoms[0];
+            int last = atoms[atoms.length - 1];
+            fixedFirstUnit = (first & STAR) == 0
+                    && (first & CODE_UNIT) != '.' ? first & CODE_UNIT : -1;
+            fixedLastUnit = (last & STAR) == 0
+                    && (last & CODE_UNIT) != '.' ? last & CODE_UNIT : -1;
             if (atoms.length > MAX_BIT_ATOMS) {
                 closure = null;
                 ascii = null;
