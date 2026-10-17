@@ -1,0 +1,14 @@
+category	reviewed_candidate	provenance	license	disposition	complexity_and_contract
+sparse-sorted-row-selection	M3SortedView.select eager int[count]	M3JDK21 #1100 e31b9db77fe12437e2bf008e093ff91e0efeb6aa	Apache-2.0	REPLACE_PRIVATE_ATOM	O(n) predicate once but O(n) temp even k=0
+adaptive-dynamic-array	M3SlotArrays.grow existing 1.5x lane	M3JDK21 #1100 e337c69710c871f8caa77a1afe53149f1fd705cc	Apache-2.0	REUSE	O(n+k) amortized writes, O(k) capacity for k accepted
+direct-exact-output	Two-pass count then copy from M3IntFilterKernel	M3JDK21 #1100 f6ae6a528d2d42c0eae5371eb2a6bc412c9e852b	Apache-2.0	REJECT	User IntPredicate may be stateful; twice invoking violates one-evaluation rule
+packed-bitmap	JDK BitSet and Synexia per-slot masks	OpenJDK21 reference	GPL-2.0+Classpath	DEFER	O(n/8) scratch even when k=0, private row directory enough
+stable-sort	DenseArrayOrder.order comparator indexes	M3JDK21 #1100 049572ea5e444468042e2648c14678cc1183abe8	Apache-2.0	KEEP	Comparator and selected index order unchanged; stable ties
+null-probe	M3SlotArrays.EMPTY_INTS for zero selected	M3JDK21 #1100 e337c69710c871f8caa77a1afe53149f1fd705cc	Apache-2.0	REUSE	Safe immutable zero-length owner
+java-grow-array	JDK Arrays.copyOf	OpenJDK21 source/API	GPL-2.0+Classpath	REUSE_JDK	Checked array copy; private indices not aliased externally
+leetcode-remove	LeetCode 27 remove element	LeetCode problem/category	REFERENCE_ONLY	NOT_COPY	In-place filtering mutates original payload; this view must not
+hackerrank-dynamic	HackerRank Dynamic Array	HackerRank category	REFERENCE_ONLY	INSPIRATION	Geometric growth but unrelated to Java exception/order contracts
+geeksforgeeks-stable	GeeksforGeeks stable sort filtering	GeeksforGeeks category	REFERENCE_ONLY	EVIDENCE	Sort comparator stability tested, editorial not copied
+guava-view	Guava filtered collection	Google Guava upstream	Apache-2.0	REFERENCE_ONLY	Generic live filter not detached prepared sorted view
+eclipse-sorted	Eclipse Collections sorted.select	Eclipse Collections upstream	EPL/EDL verify exact donor	REFERENCE_ONLY	Detached selection equality differs
+commons-predicated	Apache Commons PredicatedCollection	Apache Commons upstream	Apache-2.0	DIFFERENT_CONTRACT	Ingress admission not filtered/sorted selected row snapshot
