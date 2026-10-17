@@ -7,6 +7,7 @@
  */
 package com.m3.collections.spring;
 
+import com.m3.collections.M3ArrayList;
 import com.m3.collections.M3LinkedHashMap;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -44,7 +45,9 @@ import org.springframework.util.MultiValueMapAdapter;
  * <p>Concrete ArrayList capacity, wire format, no-op/replacement epochs, inherited
  * sublist removal and structural predicate timing are diagnostic boundaries of
  * the independently admitted M3ArrayList. They do not prove concrete ArrayList
- * parity. Provider class names, exception text and held entries after external
+ * parity. The four list diagnostics explicitly create and check an M3ArrayList
+ * fixture; borrowed caller lists do not establish an owned-list boundary.
+ * Provider class names, exception text and held entries after external
  * structural changes are excluded. No performance or whole-Spring claim is made.
  */
 public final class M3MultiValueMapSelfTest {
@@ -741,38 +744,53 @@ public final class M3MultiValueMapSelfTest {
         pair.expected.trace.clear(); pair.actual.trace.clear();
         Outcome left = capture(() -> operation.run(pair.expected));
         Outcome right = capture(() -> operation.run(pair.actual));
-        Object before = freeze(pair.expected.map);
-        Object after = freeze(pair.actual.map);
+        Object expectedState = freeze(pair.expected.map);
+        Object actualState = freeze(pair.actual.map);
+        boolean outcomeMatched = Objects.equals(left, right);
+        boolean callbacksMatched = pair.expected.trace.equals(pair.actual.trace);
+        boolean stateMatched = Objects.equals(expectedState, actualState);
+        int differedMask = (outcomeMatched ? 0 : 1) | (callbacksMatched ? 0 : 2) | (stateMatched ? 0 : 4);
+        boolean differs = differedMask != 0;
+        System.out.println(label + " observed=" + differs + " matchedMask=" + (7 ^ differedMask)
+                + " differedMask=" + differedMask + " bits[outcome=1,callbacks=2,state=4]"
+                + " provider=" + left + " owned=" + right
+                + " callbacks=" + pair.expected.trace + "/" + pair.actual.trace);
+        if (!stateMatched) System.out.println(label + " providerState=" + expectedState + " ownedState=" + actualState);
         if (!stateMayDiffer) {
-            check(Objects.equals(before, after), label + " required equal state");
+            check(stateMatched, label + " required equal state");
         }
         if (!failureMayDiffer) check(Objects.equals(left.failure(), right.failure()),
                 label + " required equal exception class");
-        boolean differs = !Objects.equals(left, right) || !pair.expected.trace.equals(pair.actual.trace)
-                || !Objects.equals(before, after);
         if (differs) boundaryDifferences++;
-        System.out.println(label + " observed=" + differs + " provider=" + left
-                + " owned=" + right + " callbacks=" + pair.expected.trace + "/" + pair.actual.trace);
-        if (stateMayDiffer) System.out.println(label + " providerState=" + before + " ownedState=" + after);
+    }
+
+    private static Pair ownedListBoundaryPair(String name) {
+        Pair pair = new Pair(name);
+        pair.step("owned-list fixture a", context -> { context.map.addAll("a", list(1, 2)); return null; });
+        pair.step("owned-list fixture b", context -> { context.map.addAll("b", list(3)); return null; });
+        pair.step("owned-list fixture c", context -> { context.map.addAll("c", list(4)); return null; });
+        check(pair.actual.map.get("a") instanceof M3ArrayList<?>,
+                name + " candidate boundary fixture must be an M3ArrayList");
+        return pair;
     }
 
     private static void listBoundaryDiagnostics() {
-        Pair emptyAdd = populated("empty-add epoch diagnostic");
+        Pair emptyAdd = ownedListBoundaryPair("empty-add epoch diagnostic");
         diagnostic(emptyAdd, "NON_ADMITTED_ARRAYLIST_BOUNDARY empty addAll iterator epoch", context -> {
             List<Integer> values = context.map.get("a"); Iterator<Integer> iterator = values.iterator();
             values.addAll(List.of()); return iterator.next();
         }, false, true);
-        Pair replace = populated("replace epoch diagnostic");
+        Pair replace = ownedListBoundaryPair("replace epoch diagnostic");
         diagnostic(replace, "NON_ADMITTED_ARRAYLIST_BOUNDARY replaceAll iterator epoch", context -> {
             List<Integer> values = context.map.get("a"); Iterator<Integer> iterator = values.iterator();
             values.replaceAll(value -> value + 1); return iterator.next();
         }, false, true);
-        Pair sublist = populated("sublist predicate diagnostic");
+        Pair sublist = ownedListBoundaryPair("sublist predicate diagnostic");
         diagnostic(sublist, "NON_ADMITTED_ARRAYLIST_BOUNDARY sublist predicate failure state", context ->
                 context.map.get("a").subList(0, 2).removeIf(value -> {
                     context.mark("predicate:" + value); if (value == 2) throw new Boom(); return true;
                 }), true, false);
-        Pair structural = populated("structural predicate diagnostic");
+        Pair structural = ownedListBoundaryPair("structural predicate diagnostic");
         diagnostic(structural, "NON_ADMITTED_ARRAYLIST_BOUNDARY structural predicate callback timing", context ->
                 context.map.get("a").removeIf(value -> {
                     context.mark("predicate:" + value); if (value == 1) context.map.get("a").add(9); return false;

@@ -10,30 +10,40 @@
     {
       "target": "m3/collections/implementations/spring/src/main/java/com/m3/collections/spring/M3SingleValueMapView.java",
       "before": "ABSENT",
-      "sha256": "e671912bc77d45792a18351219ec2659cc0f6b8fee7eda2848c6c449c2807c02",
-      "bytes": 9415,
+      "sha256": "6f33bb30aa4c31a9d17191720d801f0298dccea25dba4a34265db1117293d511",
+      "bytes": 10369,
       "template": "M3SingleValueMapView.java.txt"
     },
     {
       "target": "m3/collections/implementations/spring/src/test/java/com/m3/collections/spring/M3MultiValueMapSelfTest.java",
       "before": "ABSENT",
-      "sha256": "ffa616717237390be73b067e385d5be13b573682e184f31d3003a7f24df84c04",
-      "bytes": 50899,
+      "sha256": "2298173ebaa56e2f67f568b9489a24a584f8c3dce16d6e95d2087d2e162d7953",
+      "bytes": 52092,
       "template": "M3MultiValueMapSelfTest.java.txt"
     }
   ],
   "provider": "Spring6.2.0",
-  "strict_compile": "spring-compile-03",
-  "behavior": "spring-03",
-  "checks": 142073,
+  "strict_compile": "spring-compile-05",
+  "behavior": "spring-05",
+  "checks": 142077,
   "paired_operations": 5234,
   "random_operations": 5000,
   "diagnostic_cases": 6,
-  "observed_non_admitted_boundaries": 2,
+  "observed_non_admitted_boundaries": 6,
   "concrete_boundaries": [
     "structural main forEach callback trace",
-    "structural scalar-view forEach callback trace"
+    "structural scalar-view forEach callback trace",
+    "created-list empty addAll iterator epoch",
+    "created-list replaceAll iterator epoch",
+    "created-sublist exceptional removeIf state",
+    "created-list structural predicate callback timing"
   ],
+  "source_review_fixed": [
+    "singleton spliterator flags/hash callbacks",
+    "singleton iterator remove-before-next"
+  ],
+  "singleton_proof": "spring-singleton-03",
+  "prototype_git_commit": "23ee7753a5386e74926e27cffaa6fa2dacbf5053",
   "current_M3_backed_provider_protocol": "STRICTLY_COMPARED",
   "own_serialized_wire": "NO_DONOR_WIRE_IDENTITY_PROMISE",
   "performance": "NOT_MEASURED",

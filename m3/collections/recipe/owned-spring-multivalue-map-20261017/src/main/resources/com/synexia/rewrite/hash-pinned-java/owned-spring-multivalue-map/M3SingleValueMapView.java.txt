@@ -33,9 +33,12 @@ import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.NoSuchElementException;
 import java.util.Objects;
 import java.util.RandomAccess;
 import java.util.Set;
+import java.util.Spliterator;
+import java.util.Spliterators;
 import java.util.function.BiConsumer;
 import java.util.function.Predicate;
 import java.util.function.UnaryOperator;
@@ -263,6 +266,34 @@ public final class M3SingleValueMapView<K, V> implements Map<K, V>, Serializable
         @Override
         public int size() {
             return 1;
+        }
+
+        @Override
+        public Iterator<E> iterator() {
+            return new Iterator<>() {
+                private int index;
+
+                @Override
+                public boolean hasNext() {
+                    return index == 0;
+                }
+
+                @Override
+                public E next() {
+                    if (!hasNext()) {
+                        throw new NoSuchElementException();
+                    }
+                    index = 1;
+                    return get(0);
+                }
+            };
+        }
+
+        @Override
+        public Spliterator<E> spliterator() {
+            final int flags = Spliterator.ORDERED | Spliterator.DISTINCT | Spliterator.IMMUTABLE
+                    | (element[0] != null ? Spliterator.NONNULL : 0);
+            return Spliterators.spliterator(element, flags);
         }
 
         @Override
