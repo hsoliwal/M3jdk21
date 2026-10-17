@@ -13,6 +13,8 @@ package com.sun.tools.javac.m3;
 import com.sun.source.tree.CompilationUnitTree;
 import com.sun.source.tree.LiteralTree;
 import com.sun.source.tree.VariableTree;
+import com.sun.source.tree.Tree;
+import com.sun.tools.javac.tree.JCTree;
 import com.sun.source.util.JavacTask;
 import com.sun.source.util.TreePathScanner;
 import com.sun.source.util.Trees;
@@ -51,6 +53,19 @@ import javax.tools.ToolProvider;
  * no output. Invoked as:
  * <pre>java -m jdk.compiler/com.sun.tools.javac.m3.M3PrimitiveImageCompiler
  *      --out constants.m3prim --slots constants.tsv Source.java ...</pre>
+ *
+ * <p>{@code --fold-expressions} additionally harvests primitive expressions whose
+ * values javac has already established during attribution. This opt-in can add
+ * rows and therefore changes the image namespace and slots; regenerate every
+ * consumer sidecar together. Without it, valid legacy inputs retain identical
+ * image bytes. No evaluator, application call, or new bytecode rewrite is used.
+ * A compiler-known value is not permission to remove evaluation of its source
+ * expression: receiver evaluation and other effects must still be preserved.
+ *
+ * <p>Output/source aliases, symlinks in output paths, and overlapping outputs
+ * are rejected before publication. Two independent output renames are NOT a
+ * multi-file transaction; consumers must check the sidecar's image namespace.
+ * Publication assumes exclusive ownership of the output paths.</p>
  */
 public final class M3PrimitiveImageCompiler {
     private static final long MAGIC = 0x4d335052494d3031L;
@@ -69,9 +84,14 @@ public final class M3PrimitiveImageCompiler {
     public static void main(String[] args) throws Exception {
         Path out = null;
         Path slots = null;
+        boolean foldExpressions = false;
         List<Path> sources = new ArrayList<>();
         for (int n = 0; n < args.length; n++) {
             switch (args[n]) {
+                case "--fold-expressions" -> {
+                    if (foldExpressions) throw new IllegalArgumentException("duplicate --fold-expressions");
+                    foldExpressions = true;
+                }
                 case "--out" -> {
                     if (out != null || ++n == args.length) throw new IllegalArgumentException("--out");
                     out = Path.of(args[n]);
@@ -89,12 +109,25 @@ public final class M3PrimitiveImageCompiler {
             }
         }
         if (out == null || sources.isEmpty() || (slots != null && slots.equals(out))) {
-            throw new IllegalArgumentException("usage: --out IMAGE [--slots TSV] java-sources...");
+            throw new IllegalArgumentException("usage: --out IMAGE [--slots TSV] [--fold-expressions] java-sources...");
         }
-        emit(out, slots, sources);
+        out = checkedOutput(out);
+        if (slots != null) {
+            slots = checkedOutput(slots);
+            if (aliases(out, slots) || out.startsWith(slots) || slots.startsWith(out)) {
+                throw new IOException("image and sidecar outputs overlap");
+            }
+        }
+        for (Path source : sources) {
+            if (aliases(out, source) || (slots != null && aliases(slots, source))) {
+                throw new IOException("output aliases input source: " + source);
+            }
+        }
+        emit(out, slots, sources, foldExpressions);
     }
 
-    private static void emit(Path out, Path slots, List<Path> sources) throws Exception {
+    private static void emit(Path out, Path slots, List<Path> sources,
+                             boolean foldExpressions) throws Exception {
         JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();
         if (compiler == null) throw new IllegalStateException("javac compiler unavailable");
         TreeSet<Entry> values = new TreeSet<>(ORDER);
@@ -116,6 +149,25 @@ public final class M3PrimitiveImageCompiler {
             Trees trees = Trees.instance(task);
             for (CompilationUnitTree unit : parsed) {
                 new TreePathScanner<Void, Void>() {
+                    @Override public Void scan(Tree tree, Void unused) {
+                        if (foldExpressions && tree instanceof JCTree.JCExpression expression
+                                && expression.type != null) {
+                            Object constant = expression.type.constValue();
+                            if (constant != null) {
+                                TypeKind kind = expression.type.getKind();
+                                // javac stores boolean/char constants as Integer, unlike
+                                // VariableElement.getConstantValue's public representation.
+                                Object value = switch (kind) {
+                                    case BOOLEAN -> ((Number) constant).intValue() != 0;
+                                    case CHAR -> (char) ((Number) constant).intValue();
+                                    default -> constant;
+                                };
+                                admitConstant(values, kind, value);
+                            }
+                        }
+                        return super.scan(tree, unused);
+                    }
+
                     @Override public Void visitLiteral(LiteralTree literal, Void unused) {
                         switch (literal.getKind()) {
                             case BOOLEAN_LITERAL -> admit(values, 1, (Boolean) literal.getValue() ? 1 : 0);
@@ -179,7 +231,7 @@ public final class M3PrimitiveImageCompiler {
                     .append(HexFormat.of().toHexDigits(entry.bits())).append('\t')
                     .append(i).append('\t').append(HEADER_BYTES + i * ROW_BYTES).append('\n');
         }
-        // Do not silently publish a new image with mismatched / stale metadata.
+        // Independent renames, not a pair transaction; consumers must verify namespace.
         write(out, buffer.array());
         if (slots != null) write(slots, rows.toString().getBytes(StandardCharsets.UTF_8));
         System.out.println("M3_PRIMITIVE_IMAGE rows=" + count + " sha256="
@@ -203,7 +255,26 @@ public final class M3PrimitiveImageCompiler {
     }
 
     private static void admit(TreeSet<Entry> values, int kind, long bits) {
-        values.add(new Entry(kind, bits));
+        if (values.add(new Entry(kind, bits)) && values.size() > MAX_ROWS) {
+            throw new IllegalArgumentException("too many primitive canonical entries");
+        }
+    }
+
+    private static boolean aliases(Path left, Path right) throws IOException {
+        return left.toAbsolutePath().normalize().equals(right.toAbsolutePath().normalize())
+                || (Files.exists(left) && Files.exists(right) && Files.isSameFile(left, right));
+    }
+
+    private static Path checkedOutput(Path path) throws IOException {
+        Path target = Objects.requireNonNull(path).toAbsolutePath().normalize();
+        for (Path at = target; at != null; at = at.getParent()) {
+            if (Files.isSymbolicLink(at)) throw new IOException("refusing output symlink: " + at);
+            if (Files.exists(at) && (at.equals(target)
+                    ? !Files.isRegularFile(at) : !Files.isDirectory(at))) {
+                throw new IOException("invalid output path: " + at);
+            }
+        }
+        return target;
     }
 
     private static void write(Path path, byte[] bytes) throws IOException {
