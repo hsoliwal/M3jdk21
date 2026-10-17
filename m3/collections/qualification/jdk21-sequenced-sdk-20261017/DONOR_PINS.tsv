@@ -1,0 +1,6 @@
+path	git_blob
+m3/collections/src/main/java/com/m3/collections/M3CollectionSdk.java	042069cd167191e1faa1710fb9a9e65bca14983c
+m3/collections/src/main/java/com/m3/collections/M3LinkedHashMap.java	ade59880b8c9b2bee1b32ae67ca9d29b7382d998
+m3/collections/src/main/java/com/m3/collections/M3LinkedHashSet.java	e1ac806d1ebe8aac1b9efe7bcfbaa3f675e7d0d6
+m3/collections/src/main/java/com/m3/collections/M3LinkedList.java	da39d792baf7311691d2d6e8398adf62f3aa88a8
+m3/tooling/migration-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java	d58ca50dfaeb60f581b64f43545e688aca5c6530

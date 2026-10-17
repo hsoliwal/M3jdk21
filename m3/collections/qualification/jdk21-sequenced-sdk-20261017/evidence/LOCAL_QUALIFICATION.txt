@@ -1,0 +1,9 @@
+LOCAL VERIFICATION 2026-10-17
+OpenJDK21.0.12.1 Maven3.9.9 OpenRewrite8.17.1 JUnit5.10.2 Linux x86-64
+Actual Maven JUnit methods: 4 passed, 0 failures/errors/skips, BUILD SUCCESS
+Actual source-sealed Java recipe: 2 target paths, all 4 pre/post states in two orders, fixed-point and drift/duplicate/late refusal.
+Existing public facade method byte identity asserted.
+javac --release 21 -proc:none -Xlint:all -Werror: generated facade and oracle with real M3LinkedHashMap, M3LinkedHashSet, M3LinkedList precompiled classes and compile-only stubs for other SDK dependencies.
+PASS M3_SEQUENCED_SDK checks=592923 mutations=147456.
+Current master class source Git blobs checked; no JNI source files changed.
+Not full owning Maven reactor or source-built installed JDK; no JMH speed claim.
