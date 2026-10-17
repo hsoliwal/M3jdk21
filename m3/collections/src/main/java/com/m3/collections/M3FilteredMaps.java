@@ -25,7 +25,6 @@ import java.util.function.BiConsumer;
 import java.util.function.BiPredicate;
 import java.util.function.Function;
 import java.util.function.Predicate;
-import java.util.stream.StreamSupport;
 
 /**
  * Live filtered map wrappers over an authoritative caller-owned map.
@@ -391,9 +390,54 @@ public final class M3FilteredMaps {
             @Override public T next() { return map.apply(source.next()); }
         };
     }
-    /** Reuse JDK's lazy mapping cursor rather than a second traversal framework. */
+    /**
+     * One projection descriptor per cursor (and per explicit split), never a
+     * Stream pipeline or retained per-entry array. JDK Stream.map clears the
+     * source's DISTINCT, SORTED, NONNULL, CONCURRENT and IMMUTABLE flags: retain
+     * only ORDERED/SIZED/SUBSIZED, matching the original map() contract.
+     */
     private static <F, T> Spliterator<T> mapSpliterator(
             Spliterator<F> source, Function<? super F, ? extends T> map) {
-        return StreamSupport.stream(source, true).<T>map(map).spliterator();
+        return new ProjectingSpliterator<>(
+                Objects.requireNonNull(source, "source"),
+                Objects.requireNonNull(map, "map"));
+    }
+
+    private static final class ProjectingSpliterator<F, T> implements Spliterator<T> {
+        private final Spliterator<F> source;
+        private final Function<? super F, ? extends T> mapper;
+
+        private ProjectingSpliterator(
+                Spliterator<F> source, Function<? super F, ? extends T> mapper) {
+            this.source = source;
+            this.mapper = mapper;
+        }
+
+        @Override public boolean tryAdvance(java.util.function.Consumer<? super T> action) {
+            Objects.requireNonNull(action, "action");
+            return source.tryAdvance(value -> action.accept(mapper.apply(value)));
+        }
+
+        @Override public void forEachRemaining(java.util.function.Consumer<? super T> action) {
+            Objects.requireNonNull(action, "action");
+            source.forEachRemaining(value -> action.accept(mapper.apply(value)));
+        }
+
+        @Override public Spliterator<T> trySplit() {
+            Spliterator<F> prefix = source.trySplit();
+            return prefix == null ? null : new ProjectingSpliterator<>(prefix, mapper);
+        }
+
+        @Override public long estimateSize() {
+            return source.estimateSize();
+        }
+
+        @Override public int characteristics() {
+            return source.characteristics() & (ORDERED | SIZED | SUBSIZED);
+        }
+
+        @Override public Comparator<? super T> getComparator() {
+            throw new IllegalStateException();
+        }
     }
 }
