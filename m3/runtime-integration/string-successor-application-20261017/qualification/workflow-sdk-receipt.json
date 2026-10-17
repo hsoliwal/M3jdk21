@@ -1,0 +1,34 @@
+{
+  "schema": "M3_STRING_MATCHED_BUILD_RECEIVING_SDK_RECEIPT_V1",
+  "scope": "ORIGINAL_PROVIDER_TWO_EXISTING_WORKFLOW_OUTPUTS",
+  "ciReportedSha": "45af9048c71d188468858b90a8c6cf2b67f592f1",
+  "providers": {
+    "openrewriteAdapter": "1c1b1b568d369f688f6953161636bf36b484bf5a",
+    "manifestKernel": "38df5f97bbeec8a8a8cfc77091d56bda925c07f2"
+  },
+  "inputPinsSha256": "ee641ab96f16eb22e9bdc23d63e7b7b021492dd8c5879118bc68dea660dde3b4",
+  "reports": {
+    "com.synexia.rewrite.M3StringMatchedBuildAdmissionRecipeTest": {
+      "counts": {
+        "tests": 2,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "sha256": "52460b386542d61a25df4e324fbf8d7780d6d53aea937e52d3d3fed7d0defa1a"
+    }
+  },
+  "emittedWorkflowOutputs": {
+    ".github/workflows/m3-first-release-admission.yml": "870a1319893f20b6906aa70a58e72f54b5a14b123ee23982bd78877d2d087f7d",
+    ".github/workflows/mindex-string-backing.yml": "dbcce64499d3b189985137ea0f6580d7fc983b343536abca5fd7d3b6853be0b8"
+  },
+  "isolatedHoldProbe": {
+    "expectedExitCode": 1,
+    "verifiedBySdk": true,
+    "exactLogSha256": "173e37b05b94d2f521f993ea08be7aa92f425e0e7b863f77abd5d167979a53ae"
+  },
+  "fullJdkOutputAdmission": "NOT_ADMITTED",
+  "matchedJdkJtreg": "NOT_RUN",
+  "runtimeAppliedByThisTask": false,
+  "phaseAdvanced": false
+}

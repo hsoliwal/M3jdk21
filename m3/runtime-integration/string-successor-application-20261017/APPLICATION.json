@@ -1,0 +1,308 @@
+{
+  "schema": "M3_STRING_SUCCESSOR_SERIAL_APPLICATION_V1",
+  "state": "SOURCE_TOOLING_APPLIED_RUNTIME_NOT_ACCEPTED",
+  "qualificationParent": "65c4f3faafd1d9888b5e9e2b7af814ffb89d5668",
+  "sourceRecipePr": "https://github.com/hsoliwal/com.synexia/pull/11973",
+  "sourceProofCommit": "487a12a301ab72d930fdaf640c4b222b552b6902",
+  "qualificationRun": 39006246116,
+  "qualificationJob": 117319217620,
+  "qualificationCiSha": "45af9048c71d188468858b90a8c6cf2b67f592f1",
+  "qualifiedArtifact": {
+    "id": 12090938204,
+    "bytes": 74878,
+    "files": 22,
+    "sha256": "14136f7296162e9f47ce9ceba8209ef0bf84fec30770df7e4646efc9db97f7ff"
+  },
+  "applicationMethod": "Materialize exact actual SDK-emitted Git blobs only after all frozen preimages match; serial recipe stages in distinct commits; publish ref only after qualified full-JDK hold exists",
+  "stages": [
+    {
+      "version": "v3",
+      "targets": 12,
+      "changes": 5,
+      "before": [
+        {
+          "path": "m3/synexia-import/current-full-borrow/check_string_phase.py",
+          "beforeGitBlob": "274753ece4a5cfd11dc2e98feca50f2601540b8d",
+          "beforeSha256": "bad0fe420fc677a977079e0aa557ff733e2858939781786bc37d0c9f38d96ff3"
+        },
+        {
+          "path": "m3/synexia-import/current-full-borrow/test_string_phase_successors.py",
+          "beforeGitBlob": "e23fa5f44554e9dc2c841040f06a68657637ae6f",
+          "beforeSha256": "55de1bbd8c7eb003b33e8c969fcfe4581d44a7abbbccc883d981daf2246fe130"
+        },
+        {
+          "path": "m3/synexia-import/current-full-borrow/string-source-target-map.tsv",
+          "beforeGitBlob": "088ee2ae6ccc550af768ac17314d7b0d460e9cf3",
+          "beforeSha256": "954714bf6ada59b7dd22e886f59a403a042141785697781869c78278a0bb9b98"
+        },
+        {
+          "path": "m3/synexia-import/current-full-borrow/m3-string-precompute-observation-v2.tsv",
+          "beforeGitBlob": "3f7ece2cebe1c429256acfa904134a6d0fd47ef5",
+          "beforeSha256": "d29cc98a5611059b69e08edd3d7990c0dd37100fb16e95cbf2136716aa35f52d"
+        },
+        {
+          "path": "m3/synexia-import/current-full-borrow/string-target-successors.tsv",
+          "beforeGitBlob": "141806b3119342dfba2efe6487664ba3a0c53158",
+          "beforeSha256": "ab1c56d567e739a6a5d2f630ec667751a8821ebdab2857a225c2650d84ca7e25"
+        },
+        {
+          "path": "m3/synexia-import/current-full-borrow/string-target-successor-chain.tsv",
+          "beforeGitBlob": "75d949e5aa2c8ff4e5c70d648e81fc0d37b68651",
+          "beforeSha256": "cfdbd550ca16d6f28e718347409b328b677f473f1f498cb903da69c1cb386ca0"
+        },
+        {
+          "path": "m3/runtime-integration/utf8-cursor-20261014/RECEIPT.json",
+          "beforeGitBlob": "e3ee12859fd0a272dfcf56e85741a95ac4acbf76",
+          "beforeSha256": "510d635a87eac7f0d0dcfcb5901b1e985ed770571b5f98f46ae4bb286cdf9f68"
+        },
+        {
+          "path": "m3/compatibility/test_synexia_string_phase_checker_successor.py",
+          "beforeGitBlob": "1c1aeabe6212188815961f160fd719e862625bbe",
+          "beforeSha256": "8cbf60faa89b6ab227a15d35b5e5cee000bff485f76216f51d8da98446e3432f"
+        },
+        {
+          "path": "m3/compatibility/fixtures/string-phase-checker-v2-20261017.py",
+          "before": "ABSENT"
+        },
+        {
+          "path": "m3/compatibility/synexia-string-phase-checker-successor-20261017-v3.json",
+          "before": "ABSENT"
+        },
+        {
+          "path": "m3/compatibility/synexia-string-phase-checker-successor-20261013.json",
+          "beforeGitBlob": "a0373fd42a1fe2b8104e3675abc1919254950fff",
+          "beforeSha256": "78fc05a0cb9b7f26e9a6226b2406cc38801f09040dc14e445e31651f7a9385af"
+        },
+        {
+          "path": "m3/compatibility/synexia-string-phase-checker-successor-20261015-v2.json",
+          "beforeGitBlob": "52cacd20c406f57027734d2e78b405c8b6176e9f",
+          "beforeSha256": "e47b404b87e9748f323cfbca53f07fcde3c3d1a5b14f221e14df6a92613cb1b2"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "m3/synexia-import/current-full-borrow/check_string_phase.py",
+          "afterGitBlob": "368842c70f4671bac14ad902ed047a486109f27d",
+          "afterSha256": "3dd800d3d76523a52918f77f68371965b77527ad1bdefd1e267846da7aaf8b47"
+        },
+        {
+          "path": "m3/synexia-import/current-full-borrow/test_string_phase_successors.py",
+          "afterGitBlob": "70f3abde194e3437ac4e6c68b1d320f82e7d896b",
+          "afterSha256": "992b8524d4ed3f1fabdd4f2685adb6d55eb23d9e3de0683675695afa71e03e75"
+        },
+        {
+          "path": "m3/compatibility/test_synexia_string_phase_checker_successor.py",
+          "afterGitBlob": "9a2c5b0a5583a04b145443df966e29369fcd707e",
+          "afterSha256": "b569114a7e2e0d4380f1bbbb503f9a9c5c5914cdeca3aeebe4c9b4bab26c470f"
+        },
+        {
+          "path": "m3/compatibility/fixtures/string-phase-checker-v2-20261017.py",
+          "afterGitBlob": "274753ece4a5cfd11dc2e98feca50f2601540b8d",
+          "afterSha256": "bad0fe420fc677a977079e0aa557ff733e2858939781786bc37d0c9f38d96ff3"
+        },
+        {
+          "path": "m3/compatibility/synexia-string-phase-checker-successor-20261017-v3.json",
+          "afterGitBlob": "22d49606563cfb93d06024ba6ed34fd3fd682d6e",
+          "afterSha256": "45a7b377ec949d75f12d030952eeab9b5175c42f4581a0d9e900ee994da7208c"
+        }
+      ],
+      "commit": "f21d3ba4d22b33ba3189debee6afd0db20b443b6",
+      "parent": "65c4f3faafd1d9888b5e9e2b7af814ffb89d5668",
+      "tree": "ad89973b2e79b7d2437ce32cdbe3212846d3da61"
+    },
+    {
+      "version": "v4",
+      "targets": 23,
+      "changes": 6,
+      "before": [
+        {
+          "path": "m3/compatibility/fixtures/string-phase-checker-v2-20261017.py",
+          "beforeGitBlob": "274753ece4a5cfd11dc2e98feca50f2601540b8d",
+          "beforeSha256": "bad0fe420fc677a977079e0aa557ff733e2858939781786bc37d0c9f38d96ff3"
+        },
+        {
+          "path": "m3/compatibility/fixtures/string-phase-checker-v3-20261017.py",
+          "before": "ABSENT"
+        },
+        {
+          "path": "m3/compatibility/synexia-string-phase-checker-successor-20261013.json",
+          "beforeGitBlob": "a0373fd42a1fe2b8104e3675abc1919254950fff",
+          "beforeSha256": "78fc05a0cb9b7f26e9a6226b2406cc38801f09040dc14e445e31651f7a9385af"
+        },
+        {
+          "path": "m3/compatibility/synexia-string-phase-checker-successor-20261015-v2.json",
+          "beforeGitBlob": "52cacd20c406f57027734d2e78b405c8b6176e9f",
+          "beforeSha256": "e47b404b87e9748f323cfbca53f07fcde3c3d1a5b14f221e14df6a92613cb1b2"
+        },
+        {
+          "path": "m3/compatibility/synexia-string-phase-checker-successor-20261017-v3.json",
+          "beforeGitBlob": "22d49606563cfb93d06024ba6ed34fd3fd682d6e",
+          "beforeSha256": "45a7b377ec949d75f12d030952eeab9b5175c42f4581a0d9e900ee994da7208c"
+        },
+        {
+          "path": "m3/compatibility/synexia-string-phase-checker-successor-20261017-v4.json",
+          "before": "ABSENT"
+        },
+        {
+          "path": "m3/compatibility/test_synexia_string_phase_checker_successor.py",
+          "beforeGitBlob": "9a2c5b0a5583a04b145443df966e29369fcd707e",
+          "beforeSha256": "b569114a7e2e0d4380f1bbbb503f9a9c5c5914cdeca3aeebe4c9b4bab26c470f"
+        },
+        {
+          "path": "m3/docs/name-mapping.json",
+          "beforeGitBlob": "a44460f982940623cf6ba1ca625caeeaa889f633",
+          "beforeSha256": "fa9832d48ec7dc0334fcb3a02e1b665612ca3a9f3dfe13cd104ff3f2c42871ac"
+        },
+        {
+          "path": "m3/runtime-integration/leaf-cursor-receipt-20261015.md",
+          "beforeGitBlob": "13b2a36514736d6357cb8ccf130fede577ee059b",
+          "beforeSha256": "34d15a97962500108f67909ea3389bd94dceb16111b1617b163ae67039b225d9"
+        },
+        {
+          "path": "m3/runtime-integration/modified-utf8-dp-receipt-20261014.md",
+          "beforeGitBlob": "0777d79c2d32361c40f1198e9bff5c312fbf1229",
+          "beforeSha256": "e4875b1656c2d9c8c2a28888190c794416e14d501fc9b68fe4ed5dcb305448dc"
+        },
+        {
+          "path": "m3/runtime-integration/utf8-cursor-20261014/RECEIPT.json",
+          "beforeGitBlob": "e3ee12859fd0a272dfcf56e85741a95ac4acbf76",
+          "beforeSha256": "510d635a87eac7f0d0dcfcb5901b1e985ed770571b5f98f46ae4bb286cdf9f68"
+        },
+        {
+          "path": "m3/synexia-import/current-full-borrow/check_string_phase.py",
+          "beforeGitBlob": "368842c70f4671bac14ad902ed047a486109f27d",
+          "beforeSha256": "3dd800d3d76523a52918f77f68371965b77527ad1bdefd1e267846da7aaf8b47"
+        },
+        {
+          "path": "m3/synexia-import/current-full-borrow/m3-string-precompute-observation-v2.tsv",
+          "beforeGitBlob": "3f7ece2cebe1c429256acfa904134a6d0fd47ef5",
+          "beforeSha256": "d29cc98a5611059b69e08edd3d7990c0dd37100fb16e95cbf2136716aa35f52d"
+        },
+        {
+          "path": "m3/synexia-import/current-full-borrow/string-source-target-map.tsv",
+          "beforeGitBlob": "088ee2ae6ccc550af768ac17314d7b0d460e9cf3",
+          "beforeSha256": "954714bf6ada59b7dd22e886f59a403a042141785697781869c78278a0bb9b98"
+        },
+        {
+          "path": "m3/synexia-import/current-full-borrow/string-target-owner-successor-chain-20261017.tsv",
+          "before": "ABSENT"
+        },
+        {
+          "path": "m3/synexia-import/current-full-borrow/string-target-successor-chain.tsv",
+          "beforeGitBlob": "75d949e5aa2c8ff4e5c70d648e81fc0d37b68651",
+          "beforeSha256": "cfdbd550ca16d6f28e718347409b328b677f473f1f498cb903da69c1cb386ca0"
+        },
+        {
+          "path": "m3/synexia-import/current-full-borrow/string-target-successors.tsv",
+          "beforeGitBlob": "141806b3119342dfba2efe6487664ba3a0c53158",
+          "beforeSha256": "ab1c56d567e739a6a5d2f630ec667751a8821ebdab2857a225c2650d84ca7e25"
+        },
+        {
+          "path": "m3/synexia-import/current-full-borrow/test_string_phase_successors.py",
+          "beforeGitBlob": "70f3abde194e3437ac4e6c68b1d320f82e7d896b",
+          "beforeSha256": "992b8524d4ed3f1fabdd4f2685adb6d55eb23d9e3de0683675695afa71e03e75"
+        },
+        {
+          "path": "src/java.base/share/classes/java/lang/M3String.java",
+          "beforeGitBlob": "35ed998540e044eed8cb7596e2e2c019ae369bd3",
+          "beforeSha256": "cd1192e27c981da03aeae2385d3d54ad31d912f043cf8c7dfba18c7b9106b728"
+        },
+        {
+          "path": "src/java.base/share/classes/java/lang/M3StringFacts.java",
+          "beforeGitBlob": "d8dd7dc30db6a9e3897146572bd4a7755c954ffb",
+          "beforeSha256": "2152c154d3cdece330667ee09675fd21d86f3b483a23a3156b8a3626c3f9f420"
+        },
+        {
+          "path": "src/java.base/share/classes/java/lang/M3StringPool.java",
+          "beforeGitBlob": "0905414556ad0b698a5b5f835f53d12bc040bc8c",
+          "beforeSha256": "b58c82047f795807ff32229146c370c9e596eff19942a92cd0128ce4987d20ca"
+        },
+        {
+          "path": "src/java.base/share/classes/java/lang/M3StringPositionPrecompute.java",
+          "beforeGitBlob": "c0074f4b144da23040e63e0ba8866d56d0d304ac",
+          "beforeSha256": "a96f49012368859f5bcd22673b3393b49f2e592520741c069ae5ee4bcde2fa1b"
+        },
+        {
+          "path": "src/java.base/share/classes/java/lang/M3StringSearchPrecompute.java",
+          "beforeGitBlob": "0a88ed559b23def5d2229bba3316ea2268b4d720",
+          "beforeSha256": "edae3c8d3afbd7c1b78aa3f88a4d3fdcd6bd03c9f8ee2ace3044255b44f571ac"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "m3/compatibility/fixtures/string-phase-checker-v3-20261017.py",
+          "afterGitBlob": "368842c70f4671bac14ad902ed047a486109f27d",
+          "afterSha256": "3dd800d3d76523a52918f77f68371965b77527ad1bdefd1e267846da7aaf8b47"
+        },
+        {
+          "path": "m3/compatibility/synexia-string-phase-checker-successor-20261017-v4.json",
+          "afterGitBlob": "1bf38b06df3bef3dc07e6c4d4f9c818561592cfe",
+          "afterSha256": "b9e78abacc2a7e6bdf9ac21711812381f476288af2a1e289cf8368ec66e75643"
+        },
+        {
+          "path": "m3/compatibility/test_synexia_string_phase_checker_successor.py",
+          "afterGitBlob": "68faa1c5f4c6807d6d162ee40eae362b6a683ce3",
+          "afterSha256": "b39ed26dfbeef7d830d54c234d4c6de73a823b41412d3161a200c1a0e4389073"
+        },
+        {
+          "path": "m3/synexia-import/current-full-borrow/check_string_phase.py",
+          "afterGitBlob": "2f8b3b75c1de3110c30cf3b860b6fbad8f00fd72",
+          "afterSha256": "db38acfb6f2b04b5f119544e91642a3639bd6b73ae32e88f077e819b0a4375c1"
+        },
+        {
+          "path": "m3/synexia-import/current-full-borrow/string-target-owner-successor-chain-20261017.tsv",
+          "afterGitBlob": "c7b52d16a15277c0aa2a09fada6f1fb3840aa70e",
+          "afterSha256": "c56d86b7981dd31533a509aad97c25368df57b6e0297847dde8b3435e9c618ad"
+        },
+        {
+          "path": "m3/synexia-import/current-full-borrow/test_string_phase_successors.py",
+          "afterGitBlob": "1c45ef4a88d6f941e158be2529b33e3dedbe4d89",
+          "afterSha256": "48796f0fd1be609bd50c7b83293c5c08bcf6de3261298d818f41529926da16cc"
+        }
+      ],
+      "commit": "2db04a29626bf02bf5b0643731149f44b27a9f35",
+      "parent": "f21d3ba4d22b33ba3189debee6afd0db20b443b6",
+      "tree": "7a8c813b43f8926e9e81047ffdf933c648fa3bd3"
+    },
+    {
+      "version": "workflow",
+      "commit": "2bdc54104fa52480d18ecdd39b2ef135b8dc1632",
+      "parent": "2db04a29626bf02bf5b0643731149f44b27a9f35",
+      "tree": "b71246438292e25bba335bf527218965af06573f",
+      "targets": 2,
+      "changes": 1,
+      "before": [
+        {
+          "path": ".github/workflows/m3-first-release-admission.yml",
+          "state": "AFTER",
+          "gitBlob": "949e5ed7d43362ab14820947a8369006ea4dac90"
+        },
+        {
+          "path": ".github/workflows/mindex-string-backing.yml",
+          "state": "BEFORE",
+          "gitBlob": "793ea270938003a40f8d54f831b4d189e1f91f97"
+        }
+      ],
+      "outputs": [
+        {
+          "path": ".github/workflows/mindex-string-backing.yml",
+          "afterGitBlob": "2a92041b72e27aa38581c47bdd653e7c1e75ceab",
+          "afterSha256": "dbcce64499d3b189985137ea0f6580d7fc983b343536abca5fd7d3b6853be0b8"
+        }
+      ]
+    }
+  ],
+  "appliedSourceTreeCommit": "2bdc54104fa52480d18ecdd39b2ef135b8dc1632",
+  "targetToolingApplied": true,
+  "productJavaJniModified": false,
+  "runtimeApplied": false,
+  "phaseAdvanced": false,
+  "wholePhaseCli": "PENDING_ACTUAL_RECEIVING_CI",
+  "sourceGuardSuccessor": "PENDING",
+  "matchedJdkJtreg": "NOT_RUN",
+  "fullJdkOutputAdmission": "NOT_ADMITTED",
+  "formalAutoreview": "NOT_RUN",
+  "retentionPerformance": "NOT_RUN",
+  "historicalQualificationMetadata": "Inherited PR1005 metadata is the immutable qualification-only snapshot with targetToolingApplied=false; this independent application receipt reports the new child task state",
+  "continualOptimization": "ACTIVE"
+}

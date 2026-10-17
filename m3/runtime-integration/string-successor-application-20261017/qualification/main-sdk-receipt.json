@@ -1,0 +1,87 @@
+{
+  "schema": "M3_STRING_SUCCESSOR_RECEIVING_SDK_RECEIPT_V1",
+  "scope": "ORIGINAL_1C1B_38DF_PROVIDER_AND_SERIAL_V3_V4_SOURCE_TOOLING",
+  "ciReportedSha": "45af9048c71d188468858b90a8c6cf2b67f592f1",
+  "providers": {
+    "openrewriteAdapter": "1c1b1b568d369f688f6953161636bf36b484bf5a",
+    "manifestKernel": "38df5f97bbeec8a8a8cfc77091d56bda925c07f2"
+  },
+  "inputPinsSha256": "93a14c96379d598daf86d0ecfc12aa58a5464e06defa4158e77d35408919c3bb",
+  "reports": {
+    "com.synexia.rewrite.M3StringHistoricalPrecomputePinRecipeTest": {
+      "counts": {
+        "tests": 3,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "sha256": "e2b94920127334e41f50d757409561975068954a00e75483ee4954a495a7ff73"
+    },
+    "com.synexia.rewrite.M3StringUtf8SuccessorChainRecipeTest": {
+      "counts": {
+        "tests": 3,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "sha256": "2927519e3e0379ea555f8d63590e638a704b2e3f45e20d0ff9eb3c86a15476ad"
+    }
+  },
+  "pythonLogs": {
+    "v3-baseline.log": {
+      "tests": 26,
+      "result": "FAILED (failures=1, errors=2)",
+      "sha256": "b1363947dc75cbf27e8ec9c0763c992903b7ed8da5502f42bc65bc7e5f628525"
+    },
+    "v4-candidate.log": {
+      "tests": 29,
+      "result": "OK",
+      "sha256": "90cb6db012af7fcced96209e7b8be968b95d35f5ccd9630773fe7e9252b2e2d7"
+    },
+    "v4-custody.log": {
+      "tests": 13,
+      "result": "OK",
+      "sha256": "284b1d00cebdb59f6d93b00cb2400e1757e360b00ddbeea2e5a19421991f0907"
+    }
+  },
+  "emittedVersionedOutputs": {
+    "v3": {
+      "m3/synexia-import/current-full-borrow/check_string_phase.py": "3dd800d3d76523a52918f77f68371965b77527ad1bdefd1e267846da7aaf8b47",
+      "m3/synexia-import/current-full-borrow/test_string_phase_successors.py": "992b8524d4ed3f1fabdd4f2685adb6d55eb23d9e3de0683675695afa71e03e75",
+      "m3/compatibility/test_synexia_string_phase_checker_successor.py": "b569114a7e2e0d4380f1bbbb503f9a9c5c5914cdeca3aeebe4c9b4bab26c470f",
+      "m3/compatibility/fixtures/string-phase-checker-v2-20261017.py": "bad0fe420fc677a977079e0aa557ff733e2858939781786bc37d0c9f38d96ff3",
+      "m3/compatibility/synexia-string-phase-checker-successor-20261017-v3.json": "45a7b377ec949d75f12d030952eeab9b5175c42f4581a0d9e900ee994da7208c"
+    },
+    "v4": {
+      "m3/compatibility/fixtures/string-phase-checker-v3-20261017.py": "3dd800d3d76523a52918f77f68371965b77527ad1bdefd1e267846da7aaf8b47",
+      "m3/compatibility/synexia-string-phase-checker-successor-20261017-v4.json": "b9e78abacc2a7e6bdf9ac21711812381f476288af2a1e289cf8368ec66e75643",
+      "m3/compatibility/test_synexia_string_phase_checker_successor.py": "b39ed26dfbeef7d830d54c234d4c6de73a823b41412d3161a200c1a0e4389073",
+      "m3/synexia-import/current-full-borrow/check_string_phase.py": "db38acfb6f2b04b5f119544e91642a3639bd6b73ae32e88f077e819b0a4375c1",
+      "m3/synexia-import/current-full-borrow/string-target-owner-successor-chain-20261017.tsv": "c56d86b7981dd31533a509aad97c25368df57b6e0297847dde8b3435e9c618ad",
+      "m3/synexia-import/current-full-borrow/test_string_phase_successors.py": "48796f0fd1be609bd50c7b83293c5c08bcf6de3261298d818f41529926da16cc"
+    }
+  },
+  "v3Baseline": {
+    "tests": 26,
+    "failures": 1,
+    "errors": 2
+  },
+  "v4SuccessorSpectrum": {
+    "tests": 29,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "v4CompatibilitySpectrum": {
+    "tests": 13,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "v4NamedDescriptor": "EXECUTED",
+  "wholePhaseCliByThisSdkModule": "NOT_RUN",
+  "matchedJdkJtreg": "NOT_RUN",
+  "runtimeJavaAndJniByThisSdkModule": "NOT_RUN",
+  "runtimeAppliedByThisTask": false,
+  "phaseAdvanced": false
+}
