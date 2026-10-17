@@ -1,0 +1,33 @@
+name: M3 java.util stored occurrences
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/m3-java-util-stored-occurrence.yml'
+      - 'm3/runtime-integration/java-util-stored-occurrence/**'
+      - 'src/java.base/share/classes/java/util/CollectionViews.java'
+      - 'test/jdk/java/util/CollectionViews/StoredRepresentativeOracle.java'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  exact-source-jdk21:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          persist-credentials: false
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Exact source seals, Java21 core compilation and differential contracts
+        shell: bash
+        run: bash m3/runtime-integration/java-util-stored-occurrence/verify.sh "$RUNNER_TEMP/m3-stored-member"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: m3-stored-occurrence-${{ github.event.pull_request.head.sha || github.sha }}
+          path: ${{ runner.temp }}/m3-stored-member/
+          if-no-files-found: warn
