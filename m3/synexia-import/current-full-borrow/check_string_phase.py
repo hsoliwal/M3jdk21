@@ -129,6 +129,21 @@ EXPECTED_STRING_CHAIN = (
      "4fb87fd70ffe5c8d75d17db9c28b44bc9b574704", "11220", "862"),
     ("4fb87fd70ffe5c8d75d17db9c28b44bc9b574704",
      "42399d411c1516a56a47dcdb10242960157b4677", "11247", "864"),
+    ("42399d411c1516a56a47dcdb10242960157b4677",
+     "35ed998540e044eed8cb7596e2e2c019ae369bd3", "11448", "898"),
+)
+
+# Two exact owner transitions extend, but never rewrite, the historical receipts.
+OWNER_SUCCESSOR_CHAIN = Path(__file__).with_name(
+    "string-target-owner-successor-chain-20261017.tsv"
+)
+EXPECTED_OWNER_CHAIN = (
+    ("src/java.base/share/classes/java/lang/M3StringFacts.java",
+     "fcd108ab6181fec11d16eda811b29d18298f3fb1",
+     "d8dd7dc30db6a9e3897146572bd4a7755c954ffb", "11288", "873"),
+    ("src/java.base/share/classes/java/lang/M3StringPool.java",
+     "514247a2e6c3704e03a9b47682f74e481f66585f",
+     "0905414556ad0b698a5b5f835f53d12bc040bc8c", "11612", "929"),
 )
 
 SUCCESSOR_MARKERS = {
@@ -283,6 +298,26 @@ def current_successor_blobs(mapping_rows: list[dict[str, str]]) -> dict[str, str
         if current[M3_STRING_PATH] != before:
             raise ValueError(f"discontinuous String successor chain: {index}")
         current[M3_STRING_PATH] = after
+
+    owner_chain = load_tsv(OWNER_SUCCESSOR_CHAIN, SUCCESSOR_CHAIN_HEADER)
+    if len(owner_chain) != len(EXPECTED_OWNER_CHAIN):
+        raise ValueError("owner successor chain length drift")
+    for index, (step, expected) in enumerate(zip(owner_chain, EXPECTED_OWNER_CHAIN), start=1):
+        target, before, after, synexia_pr, m3jdk_pr = expected
+        if (set(step) != set(SUCCESSOR_CHAIN_HEADER)
+                or any(not step[field] for field in SUCCESSOR_CHAIN_HEADER)):
+            raise ValueError(f"blank or extra owner successor chain field: {index}")
+        if (step["schema"] != "M3JDK21_STRING_TARGET_EVOLUTION_V1"
+                or step["target_path"] != target
+                or step["predecessor_git_blob"] != before
+                or step["successor_git_blob"] != after
+                or step["synexia_pr"] != synexia_pr
+                or step["m3jdk_pr"] != m3jdk_pr
+                or step["state"] != "SOURCE_CANDIDATE_NOT_RUNTIME_ACCEPTED"):
+            raise ValueError(f"unreviewed owner successor chain step: {index}")
+        if current[target] != before:
+            raise ValueError(f"discontinuous owner successor chain: {index}")
+        current[target] = after
     return current
 
 
