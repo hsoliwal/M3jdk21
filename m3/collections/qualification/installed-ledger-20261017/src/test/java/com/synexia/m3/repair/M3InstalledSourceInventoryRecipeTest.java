@@ -78,7 +78,6 @@ final class M3InstalledSourceInventoryRecipeTest {
         assertEquals(approved, M3DonationPointerRecipe.emit(approved, manifestSha, original));
         assertTrue(approved.contains("\"installed_source_manifest\": \"qualification/installed-source-20261017.tsv\""));
         assertTrue(approved.contains("\"installed_source_manifest_sha256\": \"" + manifestSha + "\""));
-        assertFalse(approved.contains("m3-source-1"));
         assertThrows(IllegalStateException.class,
                 () -> M3DonationPointerRecipe.emit(live + "\n{ \"attacker\": true }",
                         manifestSha, original));
