@@ -41,20 +41,26 @@ not change. PR #828 (merged) already added the model side (packed and virtual mo
 | `BasicListUI.updateLayoutState` measures every row unless the cell size is fixed | 551 ms per relayout of 10^6 rows | 4 |
 | `JTable` row heights: `SizeSequence` is already a prefix structure | 2.3 us `setRowHeight`, 16 ms insert at 10^6 rows | none needed (5: object-heavy `DefaultTableModel` is #828's) |
 
-## 3. Leaf 1: `M3VariableHeightLayoutCache`
+## 3. Leaf 1: `M3VariableHeightLayoutCache` (DOOP: state in lanes, objects only when an API asks)
 
-**State only where the stock class has state that matters.** A `Node` exists for the root and for every node whose
-children were loaded (the stock `hasBeenExpanded` nodes). Children that were never loaded have no object. Each node
-holds its loaded children as lanes:
+**DOOP (data-oriented OOP, brief rule 18).** There are no node objects at all. A node with state (the root and every
+node whose children were loaded, the stock `hasBeenExpanded` nodes) is an int id into struct-of-arrays node lanes:
+`parent`, `index`, `depth`, packed flag bits (EXPANDED, LOADED, DIRTY, LANE_DIRTY), `count`, `below`, `belowH`,
+`inval`, `laneMax`, `max`, plus its `TreePath` and user object. Children that were never loaded have no id. The only
+objects handed out are the ones the public API returns (`TreePath`, `Rectangle`), created on request and reused
+through small caches. Each node's loaded children are child lanes:
 
-| Lane | Per child | Meaning |
+| Child lane | Per child | Meaning |
 |---|---|---|
-| `v` | 1 reference | user object as loaded (the stock `TreeStateNode` user object; paths, sizes and leaf tests use it) |
-| `x`, `w`, `h` | 3 ints | cached bounds; `h == 0` marks an invalid size, exactly as the stock `preferredHeight == 0` |
+| `cv` | 1 reference | user object as loaded (the stock `TreeStateNode` user object; paths, sizes and leaf tests use it) |
+| `cx`, `cw`, `ch` | 3 ints | cached bounds; `ch == 0` marks an invalid size, exactly as the stock `preferredHeight == 0` |
 | `fh` | 1 int (Fenwick) | child height + height below the child when it is expanded |
 | `fr` | 1 int (Fenwick, only when a child is expanded) | rows below the child when it is expanded |
-| `kids` | 1 reference (only when a child has state) | the child's `Node` |
-| `lookup` | about 2 ints (only for more than 16 children, built on first lookup) | open-addressing hash of user objects to child positions |
+| `kids` | 1 int (only when a child has state) | the child's node id |
+| `lookup` | about 2 ints (only for more than 16 children, built after 32 scans) | open-addressing hash of user objects to child positions |
+
+The path map (state `TreePath` -> node id) is a primitive open-addressing table with backward-shift deletion, not a
+`Hashtable` of entries.
 
 **Arithmetic instead of a row vector.**
 - Row of a node: walk up its ancestors, adding `index + prefix(fr, index) + 1` per level: O(depth x log children).
@@ -65,8 +71,9 @@ holds its loaded children as lanes:
 - Preferred width: per-node maxima with dirty flags; only changed subtrees are rescanned.
 - Paths: a node's `TreePath` is kept; a child without state gets `parent.path.pathByAddingChild(v[i])`, reused through
   a 1024-slot table by position, and recognised by identity when it comes back (the paint loop hands the same paths
-  to `getBounds` and `getExpandedState`). Other paths resolve through the hash index, as the stock class resolves them
-  through its path map, then through `TreeModel.getIndexOfChild`, as the stock walk does.
+  to `getBounds` and `getExpandedState`). Other paths resolve through the cached user objects (a scan for small or rarely queried parents, the
+  hash index otherwise, an identity memo for repeated components), as the stock class resolves them through its path
+  map, then through `TreeModel.getIndexOfChild`, as the stock walk does.
 
 **Same answers, by construction and by test.** Every operation performs the stock steps in the stock order:
 sizes are computed at the same moments with the same row arguments (including the stock quirks: all children of a
@@ -100,7 +107,9 @@ the answers are the same (such sizes stay 0), the call counts are not. (3) After
 |---|---|---|
 | `m3/ports/swing-viewport/jdk-reproducers/M3TreeLayoutCacheDifferential` | Seeded scripts against a stock cache and an M3 cache with their own `DefaultTreeSelectionModel`s: `setExpandedState` on live, removed and previously returned paths; inserts, removals (single and batched), `nodesChanged` (with replaced user objects), `nodeStructureChanged`, `setRoot`; `setRootVisible`, `setRowHeight` (0, 16, 20, -1), `invalidateSizes`, `invalidatePathBounds`, size changes without invalidation; selection in all three modes. After every step: every row's path, row, expanded state, visible child count and (often) bounds; random paths; `getVisiblePathsFrom`; `getRowsForPaths`; preferred sizes; `getPathClosestTo`; selection rows, lead, min, max and events; exception classes; and, for seeds without zero-height sizes, the exact trace of `NodeDimensions` calls (value, row, depth, expanded). Wide parents (17-46 children) exercise the hash index. | **500 of 500 seeds x 400 steps pass** (seeds 1000-1499); D1 accepted 126 times, rebuilds after D2 exceptions 55, other exceptions 0. Earlier run: 100 of 100 seeds x 200 steps. |
 | `M3JTreeViewportDifferential` | Two `JTree`s on one `DefaultTreeModel` with `MetalTreeUI` (stock cache) and a `MetalTreeUI` whose `createLayoutCache` returns the M3 cache: `expandRow`, `collapseRow`, `expandPath`, `collapsePath`, `makeVisible`, `setRootVisible`, `setShowsRootHandles`, `setRowHeight`, `setLargeModel`, `setFont`, `setCellRenderer`, selection API, editing (`startEditingAtPath`, `stopEditing`, `cancelEditing`), model edits with HTML two-line labels. After every step: rows, row bounds, expanded and selected state, path queries, `getExpandedDescendants`, preferred and scrollable sizes, location queries, listener events (expansion, will-expand, selection, property); every 10 steps the painted pixels of both trees. | **120 of 120 seeds x 250 steps pass**, 3,120 pixel comparisons equal; D1 accepted 22 times. Earlier run: 20 of 20 seeds x 150 steps. |
+| `M3VariableHeightLayoutCacheTest` (JUnit 5): both differentials plus edge scenarios, each compared with the stock cache (no selection model; null/empty events and paths; no model, no root, rebuilds; bad event indices; enumeration past the end; null children; a model changed without events; value-equal objects with a hash collision; 3000 rows and path-cache collisions) | **12/12 pass; JaCoCo 100.00% lines (996/996), 99.71% branches (678/680)** of `sun.swing.tree` (the 2 missed branches are `insertLane`'s `i < 0` guard, unreachable through the public API, and a defensive null-vs-stamp check) |
 | `javac -Xlint:all` of the patched classes against JDK 21.0.9 | | clean for the new class; `BasicTreeUI` keeps its two existing `this-escape` warnings |
+| Hook recipe `com.synexia.openrewrite.viewport.M3SwingViewportBasicTreeUI` (`m3/docs/swing-viewport/recipe/`) via `M3PerFileApply` | | pass 1 CHANGED, pass 2 UNCHANGED (fixed point) |
 | `make`, jtreg (`@run` lines are in the tests) | | PENDING_CI (no OpenJDK build on this host) |
 
 ## 6. Benchmarks (headless, CPU only, `-XX:+UseSerialGC -Xmx1500m`, one JVM at a time)
