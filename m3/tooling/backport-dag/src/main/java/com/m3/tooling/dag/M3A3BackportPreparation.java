@@ -2,6 +2,7 @@
 package com.m3.tooling.dag;
 
 import com.m3.a3.A3Apply;
+import com.synexia.rewrite.M3RecipeMasteryPortableReceipt;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -34,7 +35,7 @@ public final class M3A3BackportPreparation {
             boolean changed,
             boolean fixedPoint) {
         public Row {
-            path = path(path);
+            path = M3A3BackportPreparation.path(path);
             lane = Objects.requireNonNull(lane, "lane");
             beforeSha = sha(beforeSha, "beforeSha");
             preparedSha = sha(preparedSha, "preparedSha");
@@ -73,10 +74,26 @@ public final class M3A3BackportPreparation {
 
     private M3A3BackportPreparation() {}
 
+    /**
+     * Compatibility entry point retained to fail closed for callers without mastered recipe proof.
+     * Use the four-argument overload with a receipt verified by the canonical Synexia verifier.
+     */
+    @Deprecated(forRemoval = true)
+    public static Receipt prepare(
+            Path repositoryRoot, Path outputRoot, List<String> targetPaths) throws IOException {
+        throw new IllegalStateException("A3 backport preparation requires verified recipe mastery");
+    }
+
+    /** Prepare candidate FILE atoms only when Synexia recipe mastery has been verified. */
     public static Receipt prepare(
             Path repositoryRoot,
             Path outputRoot,
-            List<String> targetPaths) throws IOException {
+            List<String> targetPaths,
+            M3RecipeMasteryPortableReceipt.Verified mastery) throws IOException {
+        String masteryRoot = Objects.requireNonNull(mastery, "mastery").root();
+        if (!masteryRoot.matches("[0-9a-f]{64}")) {
+            throw new IllegalArgumentException("invalid verified mastery root");
+        }
         Path root = Objects.requireNonNull(repositoryRoot, "repositoryRoot").toAbsolutePath().normalize();
         Path out = Objects.requireNonNull(outputRoot, "outputRoot").toAbsolutePath().normalize();
         List<String> targets = targetPaths.stream()
@@ -101,8 +118,13 @@ public final class M3A3BackportPreparation {
 
         Map<String, A3Apply.Receipt> javaReceipts = new HashMap<>();
         if (!java.isEmpty()) {
-            for (A3Apply.Receipt receipt : A3Apply.run(root, out.resolve("a3"), java)) {
-                javaReceipts.put(receipt.path(), receipt);
+            for (A3Apply.Receipt receipt : A3Apply.run(root, out.resolve("a3"), java, mastery)) {
+                if (!masteryRoot.equals(receipt.masteryRoot())) {
+                    throw new IllegalStateException("A3 mastery receipt drift: " + receipt.path());
+                }
+                if (javaReceipts.putIfAbsent(receipt.path(), receipt) != null) {
+                    throw new IllegalStateException("duplicate A3 preparation receipt: " + receipt.path());
+                }
             }
             if (javaReceipts.size() != java.size()) {
                 throw new IllegalStateException("A3 receipt coverage mismatch");
