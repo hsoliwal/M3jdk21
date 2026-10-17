@@ -1,0 +1,3 @@
+donor_repo	donor_revision	product_owner	purpose_adaptation	status
+hsoliwal/com.synexia	dfce28fc0394398357195ec63a9778bd57e8140c	com.m3.collections.M3FilteredMaps	nine typed JDK unmodifiable checked synchronized wrappers; allocation-light raw-entry scans	SOURCE_RECEIVED_NOT_INSTALLED
+hsoliwal/com.synexia	1dc4904e461c1a2069dd21e955b10b770e800fc2	M3HashPinnedJavaSnapshotRecipe + M3HashPinnedTextSnapshotRecipe	exact source-guard successor	SDK_PROOF_PENDING
