@@ -1,0 +1,5 @@
+# canonical_origination	original_surface	m3_target_class	mechanism	public_contract_kept
+com.synexia:cognix-eclipse-mechanics-core	org.eclipse.core.runtime.IExtensionRegistry	com.m3.eclipse.framework.M3EclipseExtensionSnapshot	M3ObjectStateSlots28	YES
+com.synexia:cognix-eclipse-mechanics-core	org.osgi.framework.BundleContext	com.m3.eclipse.framework.M3EclipseBundleSnapshot	M3LongLongHashMap/M3ObjectStateSlots28	YES
+com.synexia:cognix-eclipse-mechanics-adapters	org.eclipse.core.resources.IResourceDelta	com.m3.eclipse.framework.M3EclipseResourceDeltaSnapshot	M3LongArrayList/M3ObjectStateSlots28	YES
+com.synexia:synexia-m3index-collections	M3 reference/slot projection	com.m3.eclipse.framework.M3EclipseIndexedSnapshot	M3SlotAllocator28/M3Collections	YES

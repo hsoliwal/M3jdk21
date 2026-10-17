@@ -1,0 +1,2 @@
+schema	canonical_repository	canonical_pr	canonical_recipe	canonical_ref	canonical_commit	status
+ECLIPSE_M3_FRAMEWORK_PIN_V1	hsoliwal/com.synexia	12154	com.synexia.rewrite.M3EclipseFrameworkIndexForward	recipe/eclipse-framework-m3-index-forward-20261017	f4fb75eaa9b227f67cba6a7dc643f77a9e56be37	SOURCE_ONLY_RECEIVER_PENDING_CI
