@@ -8275,6 +8275,52 @@
         "source_license": "Apache-2.0",
         "target_license_rule": "Preserve per-file OpenJDK and third-party rights; no Synexia runtime dependency."
       }
+    },
+    {
+      "source_family": "Synexia filtered-list lineage and qualified first-party M3JDK deep-filter binary-carry composition",
+      "source_role": "Private convergence workspaces develop and compare reusable concepts before JDK/SWT product adaptation",
+      "source_repository": "hsoliwal/com.synexia",
+      "source_reviewed_commit": "11c94feb18155a53cc213708c353791132edc4a7",
+      "first_party_target_donor": {
+        "repository": "hsoliwal/M3jdk21",
+        "commit": "0997991e2496ee07b69be5d245ebc0ed1bd9b1f3",
+        "pr": 1018,
+        "M3CollectionViews_git_blob": "e21fd9b277ce44a8c6efe4a4ffdf9f01a14a1d0b"
+      },
+      "recipe": "com.synexia.m3jdk.DeepFilteredListComposition20261017",
+      "recipe_crate": "synexia-openrewrite-recipes/recipe-crates/m3-deep-filter-list-20261017",
+      "target_family": "Existing external filtered Collection, Set, SortedSet, NavigableSet, List, Map, SortedMap and NavigableMap wrappers",
+      "public_api": "All three existing public wrapper surfaces and collection contracts remain unchanged.",
+      "status": "EXTERNAL_PROVING_GROUND_LOCAL_CONTRACT_GATES; GLOBAL_COLLECTION_PROMOTION_PENDING",
+      "rule": "Reuse exact ordered predicate atom in M3CollectionViews; route existing map/list conjunctions through it. O(log depth) wrapper-created evaluation stack, with unchanged callback order, multiplicity, short circuit and exception identity. Preserve writable map representative keys, AVL/sorted ranges and List live-view semantics.",
+      "preserved_baseline": "10ce8abaa279292c73e1c118628344cf0851d14a (#1031)",
+      "receiving_phase_advanced": false,
+      "phase_rule": "String remains active; this refines the already-existing external wrapper proving ground and does not replace global java.util implementations.",
+      "evidence": "m3/collections/wrappers/deep-filter-list-20261017/recipe/QUALIFICATION.md",
+      "license": "Apache-2.0, original notices retained; challenge/tutor sites supply taxonomy only."
+    },
+    {
+      "source_family": "First-party comparator-ordered counted multiset and deep filtered composition",
+      "source_repository": "hsoliwal/com.synexia",
+      "source_role": "Private recipe convergence; M3JDK21 retains its existing external counted owners and delivery gates",
+      "first_party_target_donor": {
+        "repository": "hsoliwal/M3jdk21",
+        "commit": "37eba37dcbdf0c0222b494d07ba2fca401ce248f",
+        "pr": 1056,
+        "path": "m3/collections/src/main/java/com/m3/collections/M3FilteredSortedMultisets.java"
+      },
+      "recipe": "com.synexia.m3jdk.DeepFilteredListComposition20261017",
+      "recipe_crate": "synexia-openrewrite-recipes/recipe-crates/m3-deep-filter-list-20261017",
+      "target_owners": [
+        "com.m3.collections.M3FilteredSortedMultisets",
+        "com.m3.collections.M3CollectionViews.orderedAnd"
+      ],
+      "status": "EXTERNAL_PROVING_GROUND_DEEP_COMPOSITION; GLOBAL_COLLECTION_PROMOTION_PENDING",
+      "rule": "Reuse the existing ordered predicate atom for View.filtered; preserve backing range/domain, counts, comparator, null policy, read-only state, fail-fast epoch checks, callback order, duplicate occurrences, short circuit and exception identity. No alternate multiset storage or public java.util replacement.",
+      "preserved_source_baseline": "37eba37dcbdf0c0222b494d07ba2fca401ce248f",
+      "receiving_phase_advanced": false,
+      "evidence": "m3/collections/wrappers/deep-filter-list-20261017/recipe/QUALIFICATION.md",
+      "license": "Apache-2.0; original source notices retained."
     }
   ],
   "recipe_authority": {

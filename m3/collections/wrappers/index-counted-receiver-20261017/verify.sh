@@ -4,8 +4,11 @@ set -eu
 repo=$(CDPATH= cd -- "$(dirname -- "$0")/../../../.." && pwd)
 python3 - "$repo" <<'PY'
 from pathlib import Path
-import hashlib, sys
+import hashlib, subprocess, sys
 repo=Path(sys.argv[1]).resolve()
+helper=repo/'m3/collections/wrappers/deep-filter-list-20261017/verify_successor.py'
+if hashlib.sha256(helper.read_bytes()).hexdigest()!='8eadcc8aef4de85b8d262fea018f60d21d690ddbe31ddfde0b326ebbeeb8e102':
+    raise SystemExit('M3_DEEP_FILTER_SUCCESSOR_VALIDATOR_DRIFT')
 crate=repo/'m3/collections/wrappers/index-counted-receiver-20261017/recipe/src/main/resources/com/synexia/rewrite'
 source=crate/'hash-pinned-java/m3jdk21-index-counted-20261017'
 natives=crate/'hash-pinned-text/m3jdk21-index-counted-native-20261017'
@@ -20,7 +23,10 @@ for line in (source/'manifest.tsv').read_text(encoding='utf-8').splitlines():
     actual=(repo/relative)
     assert actual.is_file() and not actual.is_symlink(),(path,'missing or symlink')
     assert hashlib.sha256(candidate).hexdigest()==sha,(path,'template-drift')
-    assert actual.read_bytes()==candidate,(path,'receiver-drift')
+    if path=='m3/collections/src/main/java/com/m3/collections/M3FilteredSortedMultisets.java':
+        subprocess.run([sys.executable,str(helper),'--root',str(repo),'--edge','sorted-multiset'],check=True)
+    else:
+        assert actual.read_bytes()==candidate,(path,'receiver-drift')
     rows.append(path)
 assert len(rows)==12 and rows==sorted(set(rows)),('java inventory',len(rows))
 assert sum('/src/main/java/' in p for p in rows)==8
@@ -42,6 +48,7 @@ main="$repo/m3/collections/src/main/java/com/m3/collections"
 test="$repo/m3/collections/src/test/java/com/m3/collections"
 javac --release 21 -proc:none -Xlint:all,-serial -Werror \
     -h "$work/headers" -d "$work/classes" \
+    "$main/M3CollectionViews.java" \
     "$main/MIndexSpace.java" "$main/M3IndexHeapAdmission.java" \
     "$main/M3IndexOrderedStore.java" "$main/M3IndexRange.java" \
     "$main/M3IndexCountKernel.java" "$main/M3IndexNavigableSet.java" \

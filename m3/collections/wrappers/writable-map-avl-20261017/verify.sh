@@ -4,8 +4,11 @@ set -eu
 repo=$(CDPATH= cd -- "$(dirname -- "$0")/../../../.." && pwd)
 python3 - "$repo" <<'PY'
 from pathlib import Path
-import hashlib, sys
+import hashlib, subprocess, sys
 root=Path(sys.argv[1]).resolve()
+helper=root/'m3/collections/wrappers/deep-filter-list-20261017/verify_successor.py'
+if hashlib.sha256(helper.read_bytes()).hexdigest()!='8eadcc8aef4de85b8d262fea018f60d21d690ddbe31ddfde0b326ebbeeb8e102':
+    raise SystemExit('M3_DEEP_FILTER_SUCCESSOR_VALIDATOR_DRIFT')
 crate=root/'m3/collections/wrappers/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-writable-map-avl-20261017'
 rows=[]
 for row in (crate/'manifest.tsv').read_text(encoding='utf-8').splitlines():
@@ -14,7 +17,9 @@ for row in (crate/'manifest.tsv').read_text(encoding='utf-8').splitlines():
     target=root/path
     if hashlib.sha256(source.read_bytes()).hexdigest()!=after:
         raise SystemExit('M3_WRITABLE_MAP_RECIPE_TEMPLATE_DRIFT: '+path)
-    if target.read_bytes()!=source.read_bytes():
+    if path=='m3/collections/src/main/java/com/m3/collections/M3FilteredMaps.java':
+        subprocess.run([sys.executable,str(helper),'--root',str(root),'--edge','writable-map'],check=True)
+    elif target.read_bytes()!=source.read_bytes():
         raise SystemExit('M3_WRITABLE_MAP_TARGET_DRIFT: '+path)
     rows.append(path)
 if len(rows)!=5 or rows!=sorted(set(rows)):

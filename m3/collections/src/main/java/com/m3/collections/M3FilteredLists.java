@@ -104,7 +104,7 @@ public final class M3FilteredLists {
                 View<E> previous = (View<E>) nested;
                 this.backing = previous.backing;
                 Predicate<? super E> existing = previous.predicate;
-                this.predicate = item -> existing.test(item) && filter.test(item);
+                this.predicate = M3CollectionViews.orderedAnd(existing, filter);
             } else {
                 this.backing = source;
                 this.predicate = filter;

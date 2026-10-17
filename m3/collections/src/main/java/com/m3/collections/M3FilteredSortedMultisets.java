@@ -69,7 +69,7 @@ public final class M3FilteredSortedMultisets {
         /** Conjunctive nested filter without copying or rebuilding the primitive ID lanes. */
         public View<E> filtered(Predicate<? super E> additional) {
             Objects.requireNonNull(additional, "predicate");
-            return new View<>(backing, value -> predicate.test(value) && additional.test(value), readOnly);
+            return new View<>(backing, M3CollectionViews.orderedAnd(predicate, additional), readOnly);
         }
         public MIndexSpace<E> space() { return backing.space(); }
         public Comparator<? super E> comparator() { return backing.comparator(); }
