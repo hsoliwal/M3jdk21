@@ -30,6 +30,7 @@ jobs:
           python3 m3/collections/qualification/verify_mask_priority.py
           python3 m3/collections/qualification/verify_filtered_sorted.py
           python3 m3/collections/qualification/verify_filtered_view_late_union.py
+          python3 -m unittest discover -s m3/collections/qualification -p 'test_verify_filtered_sorted_successor.py' -v
       - name: Compile every current M3 primitive collection owner and run real Java21 oracles
         shell: bash
         run: |
