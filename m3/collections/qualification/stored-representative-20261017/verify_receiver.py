@@ -34,6 +34,16 @@ for claim in ["private Entry<K, V> storedEntry(Object key)",
               "source.floorEntry(alias)", "new TreeMap<>(source.comparator())"]:
     if claim not in write:
         sys.exit("M3_STORED_REP_RECEIVER_FAIL deleted mutable atom=" + claim)
-print("M3_STORED_REP_RECEIVER_SOURCE_PASS files=4"
+METADATA = {
+    "m3/collections/verify_donation.py":
+        "66a0483ff0c6ca11ad83f20fa02162e7960dc516089314d697ab456dcbcca133",
+    "m3/collections/recipe/stored-representative-20261017/manifest.tsv":
+        "a62827ffafc18bd6d710d7898741d2114a0068b8ac9ee63aac02e55038e1f293"
+}
+for name, expected in METADATA.items():
+    source = ROOT / name
+    if not source.is_file() or sha256(source.read_bytes()).hexdigest() != expected:
+        sys.exit("M3_STORED_REP_RECEIVER_FAIL metadata drift=" + name)
+print("M3_STORED_REP_RECEIVER_SOURCE_PASS files=6"
       " source_owner=Synexia target_owner=M3JDK21"
       " no_java_base_change=true no_JNI_change=true")
