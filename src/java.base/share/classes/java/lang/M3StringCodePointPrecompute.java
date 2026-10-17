@@ -51,9 +51,11 @@ final class M3StringCodePointPrecompute {
 
             int[] scratch = new int[Math.min(length >>> 1, 256)];
             int count = 0;
-            char previous = source.charAt(0);
+            // Reuse one tuple-aware cursor: each scalar leaf is resolved once per run.
+            M3String.CodeUnitCursor units = new M3String.CodeUnitCursor(source);
+            char previous = units.at(0);
             for (int index = 1; index < length; index++) {
-                char current = source.charAt(index);
+                char current = units.at(index);
                 if (Character.isHighSurrogate(previous)
                         && Character.isLowSurrogate(current)) {
                     if (count == scratch.length) {
@@ -105,39 +107,60 @@ final class M3StringCodePointPrecompute {
             return (endIndex - beginIndex) - (afterLastPair - firstPair);
         }
 
+        /**
+         * Rank/select over paired-low UTF-16 coordinates. A paired low at q consumes
+         * one extra code unit; q - its ordinal is strictly increasing because
+         * non-overlapping surrogate pairs cannot have adjacent low positions.
+         *
+         * Both directions use one binary search over transformed pair offsets,
+         * not a binary search whose predicate repeatedly binary-searches the lane.
+         * At a boundary inside a pair, the initial low/high unit is independent
+         * in the traversal direction, exactly as Character.offsetByCodePoints.
+         */
         int offsetByCodePoints(int index, int codePointOffset) {
             Objects.checkIndex(index, utf16Length + 1);
             if (codePointOffset == 0) return index;
 
             if (codePointOffset > 0) {
-                int target = codePointOffset;
-                if (codePointCount(index, utf16Length) < target) {
+                if (codePointCount(index, utf16Length) < codePointOffset) {
                     throw new IndexOutOfBoundsException();
                 }
-                int low = index;
-                int high = utf16Length;
+                // Pair lows at index are not included: starting on a low surrogate
+                // must consume it as an independent code point.
+                int first = lowerBound(pairedLowOffsets, index + 1);
+                long threshold = (long) index + codePointOffset - first;
+                int low = first;
+                int high = pairedLowOffsets.length;
                 while (low < high) {
-                    int middle = (low + high + 1) >>> 1;
-                    if (codePointCount(index, middle) <= target) low = middle;
-                    else high = middle - 1;
+                    int middle = (low + high) >>> 1;
+                    if ((long) pairedLowOffsets[middle] - middle <= threshold) {
+                        low = middle + 1;
+                    } else {
+                        high = middle;
+                    }
                 }
-                return low;
+                return index + codePointOffset + (low - first);
             }
 
-            long targetLong = -(long) codePointOffset;
-            if (targetLong > Integer.MAX_VALUE
-                    || codePointCount(0, index) < targetLong) {
+            long backward = -(long) codePointOffset;
+            if (backward > Integer.MAX_VALUE || codePointCount(0, index) < backward) {
                 throw new IndexOutOfBoundsException();
             }
-            int target = (int) targetLong;
+            int steps = (int) backward;
+            // Pair lows at index are excluded when traversing backward, too.
+            int limit = lowerBound(pairedLowOffsets, index);
+            long threshold = (long) index - steps - (limit - 1L);
             int low = 0;
-            int high = index;
+            int high = limit;
             while (low < high) {
                 int middle = (low + high) >>> 1;
-                if (codePointCount(middle, index) <= target) high = middle;
-                else low = middle + 1;
+                if ((long) pairedLowOffsets[middle] - middle < threshold) {
+                    low = middle + 1;
+                } else {
+                    high = middle;
+                }
             }
-            return low;
+            return index - steps - (limit - low);
         }
 
         int pairedLowCount() {
