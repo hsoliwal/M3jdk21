@@ -1,0 +1,42 @@
+name: M3 regex DP shared-cursor recovery source A/B
+
+on:
+  push:
+    branches:
+      - m3/regex-dp-cursor-recovery-20261017
+  pull_request:
+    paths:
+      - "src/java.base/share/classes/java/lang/M3StringRegexDp.java"
+      - "test/jdk/java/lang/String/M3StringRegexDpTest.java"
+      - "m3/runtime-integration/regex-rolling-cursor/**"
+      - ".github/workflows/m3-regex-rolling-cursor-recovery.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  java21-source-and-differential:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout with exact master ancestor for before-image
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Prepare Java 21 (not a source-built M3JDK)
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
+      - name: Verify full source SHA256 and retained native/effects
+        run: python3 m3/runtime-integration/regex-rolling-cursor/verify_exact_source.py
+      - name: Compile exact old/new rolling method and real CodeUnitCursor with fixture owners
+        run: python3 m3/runtime-integration/regex-rolling-cursor/run_source_extracted_java21.py
+      - name: Strict compile expanded jtreg source on stock Java21 (syntax only)
+        run: |
+          mkdir -p "$RUNNER_TEMP/m3-regex-jtreg"
+          javac --release 21 -proc:none -Xlint:all,-serial -Werror \
+                -d "$RUNNER_TEMP/m3-regex-jtreg" \
+                test/jdk/java/lang/String/M3StringRegexDpTest.java
+      # The jtreg source only executes in a matched M3JDK21 image with
+      # -XX:+UseM3StringStorage. A stock JDK21 cannot run its reflection setup.
