@@ -1,0 +1,8 @@
+# Copyright 2026 Hitesh Soliwal and contributors; SPDX-License-Identifier: Apache-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3jdk.FilteredCrossFamilyOracle20261017
+displayName: Receive Java 21 cross-family filtered/sorted contract oracle
+description: Create a source-sealed JDK/M3 differential regression fixture without changing production wrappers.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: m3-filtered-crossfamily-oracle-20261017

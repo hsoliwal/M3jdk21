@@ -1,0 +1,10 @@
+category	donor_or_existing_owner	decision	contract	acceptance
+filter/live-selection	Synexia M3CollectionViews #11913; Guava Collections2.filter	REUSE_OWNER	backed membership and mutation; no eager filtered cache	erased navigation plus seeded 192-operation read differential
+sorted/navigable	JDK21 NavigableSet and TreeSet; Synexia #11913	PRESERVE_JDK	comparator/ranges/descending/poll and stored representative	case-insensitive representative and backed range clear
+map-filter	Synexia M3FilteredMaps #11920; Guava Maps	REUSE_OWNER	key/value live selection and guarded Entry.setValue	comparator equivalence and rejected entry writes
+purpose/admission	JDK Collections checkedNavigableMap/unmodifiableNavigableMap	DELEGATE_JDK	outer view enforces type/read-only contracts	selected checked/read-only map composition
+snapshot/sort	Synexia M3CollectionViews.sortedSnapshot	RETAIN_COPY	independent read-only sorted reference copy	original snapshot frozen after owner mutation
+primitive/native	M3LongFilteredView; M3LongSortedViews; M3BitLane28 JNI	NO_NEW_NATIVE_PREDICATE	no arbitrary Java predicate sent through JNI	existing JNI parity lanes remain separate
+LeetCode/filter	LeetCode 27 problem family	CATEGORY_ONLY	selection and removal patterns; no copied editorial/solution	snapshot versus live distinction
+HackerRank/iterator	HackerRank Java Iterator problem family	CATEGORY_ONLY	iterator state and unsupported remove	live traversal evidence
+GeeksForGeeks/order	TreeMap predecessor/successor problem family	CATEGORY_ONLY	bounded lower/floor/ceiling/higher probes	seeded navigable set/map differential
