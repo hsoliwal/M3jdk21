@@ -1,0 +1,126 @@
+# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and contributors
+# SPDX-License-Identifier: Apache-2.0
+name: M3 bounded zero-mask identity strided windows Java21 and C17 JNI
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/m3-index-path-zero-window-receiver-20261017.yml'
+      - 'm3/collections/src/main/java/com/m3/collections/M3IndexPathMasks.java'
+      - 'm3/collections/src/test/java/com/m3/collections/M3IndexPathZeroWindow*.java'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  exact-java21-original-and-candidate:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Verify three SHA256 postimages from Synexia canonical recipe
+        shell: bash
+        run: |
+          set -euo pipefail
+          printf '%s  %s\n' '86e2f3e1895bd4947fd402eaadfc03d0740dace7b6feaf8593f426c8ded97aff' 'm3/collections/src/main/java/com/m3/collections/M3IndexPathMasks.java' | sha256sum -c -
+          printf '%s  %s\n' '250cfb09472d8b71b1b936987b7944c37fc6252c3a2789a615220f55f7c0c243' 'm3/collections/src/test/java/com/m3/collections/M3IndexPathZeroWindowSelfTest.java' | sha256sum -c -
+          printf '%s  %s\n' 'b2f06d23a69e2928ca8465010a99089f38852f6ecda3a8bd954178da7d856db8' 'm3/collections/src/test/java/com/m3/collections/M3IndexPathZeroWindowTest.java' | sha256sum -c -
+      - name: Original and candidate actual sources compile and keep behavior and ABI
+        shell: bash
+        run: |
+          set -euo pipefail
+          B="$(mktemp -d)"
+          trap 'rm -rf "$B"' EXIT
+          mkdir -p "$B/old/com/m3/collections" "$B/old-classes" "$B/new-classes"
+          SOURCE=m3/collections/src/main/java/com/m3/collections/M3IndexPathMasks.java
+          PROOF=m3/collections/src/test/java/com/m3/collections/M3IndexPathZeroWindowSelfTest.java
+          git show '96bdaf84bfcec50da0da53f452bc93e6150c6473':"$SOURCE" > "$B/old/com/m3/collections/M3IndexPathMasks.java"
+          javac --release 21 -proc:none -Xlint:all -Werror -d "$B/old-classes" "$B/old/com/m3/collections/M3IndexPathMasks.java" "$PROOF"
+          javac --release 21 -proc:none -Xlint:all -Werror -d "$B/new-classes" "$SOURCE" "$PROOF"
+          for variant in old new; do
+            for mode in '' '-Xint' '-XX:TieredStopAtLevel=1'; do
+              java -ea $mode -Xmx384m -cp "$B/$variant-classes" com.m3.collections.M3IndexPathZeroWindowSelfTest
+            done
+          done
+          javap -public -s -classpath "$B/old-classes" com.m3.collections.M3IndexPathMasks > "$B/old.api"
+          javap -public -s -classpath "$B/new-classes" com.m3.collections.M3IndexPathMasks > "$B/new.api"
+          diff -u "$B/old.api" "$B/new.api"
+          git diff --check '96bdaf84bfcec50da0da53f452bc93e6150c6473' HEAD
+  module-junit:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: maven
+      - name: Actual full M3 collections module and inherited mask contract JUnit
+        shell: bash
+        run: |
+          set -euo pipefail
+          mvn -B -ntp -f m3/collections/pom.xml -Dtest=M3IndexPathZeroWindowTest,M3IndexPathZeroStagesTest,M3IndexPathMasksTest test
+          for name in M3IndexPathZeroWindowTest M3IndexPathZeroStagesTest M3IndexPathMasksTest; do
+            REPORT="m3/collections/target/surefire-reports/com.m3.collections.$name.txt"
+            test -s "$REPORT"
+            grep -E 'Tests run: [1-9][0-9]*, Failures: 0, Errors: 0, Skipped: 0' "$REPORT"
+          done
+  original-c17-jni-parity:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 55
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Rebuild unchanged C17 JNI and prove original native requirements and Java equivalence
+        shell: bash
+        run: |
+          set -euo pipefail
+          WORK="$(mktemp -d)"
+          trap 'rm -rf "$WORK"' EXIT
+          ROOT=m3/collections/src
+          javac --release 21 -proc:none -Xlint:all -Werror -h "$WORK" -d "$WORK" \
+            "$ROOT/main/java/com/m3/collections/M3IndexPathMasks.java" \
+            "$ROOT/test/java/com/m3/collections/M3IndexPathZeroWindowSelfTest.java" \
+            "$ROOT/test/java/com/m3/collections/M3IndexPathMasksSelfTest.java" \
+            "$ROOT/test/java/com/m3/collections/M3IndexPathMaskWindowSelfTest.java"
+          test -s "$WORK/com_m3_collections_M3IndexPathMasks.h"
+          grep -Fq 'Java_com_m3_collections_M3IndexPathMasks_selectNative' \
+            "$WORK/com_m3_collections_M3IndexPathMasks.h"
+          gcc -std=c17 -O2 -fPIC -shared -Wall -Wextra -Werror \
+            -fsanitize=undefined -fno-sanitize-recover=undefined \
+            -I"$JAVA_HOME/include" -I"$JAVA_HOME/include/linux" \
+            "$ROOT/main/native/collections/m3_index_path_masks.c" \
+            -o "$WORK/libm3_collections_pathmask.so"
+          for mode in '' '-Xint' '-XX:TieredStopAtLevel=1'; do
+            UBSAN_OPTIONS=halt_on_error=1:print_stacktrace=1 \
+              java -ea $mode -Xcheck:jni -Djava.library.path="$WORK" -cp "$WORK" \
+                com.m3.collections.M3IndexPathZeroWindowSelfTest --native
+            UBSAN_OPTIONS=halt_on_error=1:print_stacktrace=1 \
+              java -ea $mode -Xcheck:jni -Djava.library.path="$WORK" -cp "$WORK" \
+                com.m3.collections.M3IndexPathMasksSelfTest --native
+            UBSAN_OPTIONS=halt_on_error=1:print_stacktrace=1 \
+              java -ea $mode -Xcheck:jni -Djava.library.path="$WORK" -cp "$WORK" \
+                com.m3.collections.M3IndexPathMaskWindowSelfTest --native
+          done
+      - name: Refuse native/HotSpot changes outside this reviewed source slice
+        shell: bash
+        run: |
+          set -euo pipefail
+          if git diff --name-only 96bdaf84bfcec50da0da53f452bc93e6150c6473 HEAD \
+              | grep -E '(^src/java\.base/|^src/hotspot/|\.(c|cc|cpp|h)$)'; then
+            echo 'Unexpected JDK/HotSpot/JNI ABI modification'
+            exit 1
+          fi
