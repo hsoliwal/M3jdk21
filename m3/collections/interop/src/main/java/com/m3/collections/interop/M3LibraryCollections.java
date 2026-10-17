@@ -141,7 +141,7 @@ public final class M3LibraryCollections {
      * single-value copies. Unlike Guava, size counts distinct keys. Supplied lists stay aliased.
      */
     public static <K, V> MultiValueMap<K, V> springMultiValueMap() {
-        return new M3SpringMultiValueMap<>();
+        return new M3SpringArrayMultiValueMap<>();
     }
 
     /** Spring's single-value-to-multi-value view; no multi-value emulation is promised. */
