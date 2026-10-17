@@ -92,11 +92,17 @@ public final class M3LongIndexProjection {
         if (alignedStates.length != size()) {
             throw new IllegalArgumentException("mask must align with logical view size");
         }
-        // One borrowed scratch index range; existing kernel owns Java/JNI parity.
-        int[] viewIndices = physicalIndices();
+        // The compactor neither mutates nor retains rows: a complete immutable index
+        // can be borrowed directly. A partial range still needs aligned scratch.
+        int[] viewIndices = readOnlyIndexRange();
         int[] selected = M3IndexMaskCompactor.select(
                 viewIndices, alignedStates, requiredMask, backend);
         return new M3LongIndexProjection(values, selected, 0, selected.length, order);
+    }
+
+    /** Internal read-only borrow; partial ranges compact without retaining parent capacity. */
+    private int[] readOnlyIndexRange() {
+        return from == 0 && to == indices.length ? indices : physicalIndices();
     }
 
     /** Stable signed-long sort; only the primitive index vector is permuted. */
@@ -106,6 +112,13 @@ public final class M3LongIndexProjection {
     public M3LongIndexProjection sortedDescending() { return sorted(true); }
 
     private M3LongIndexProjection sorted(boolean descending) {
+        Order requested = descending ? Order.DESCENDING : Order.ASCENDING;
+        // The certificate removes sort work. Full extents reuse immutable indices;
+        // partial extents compact once so a small result does not pin a large index.
+        // ENCOUNTER is not a certificate, and opposite order must preserve ties.
+        if (order == requested) {
+            return new M3LongIndexProjection(values, readOnlyIndexRange(), 0, size(), requested);
+        }
         int[] current = physicalIndices();
         int size = current.length;
         if (size < 2) {

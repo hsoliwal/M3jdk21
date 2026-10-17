@@ -60,13 +60,13 @@ Java_com_m3_collections_M3IndexMaskCompactor_selectNative(
         jsize chunk = n - offset < M3_CHUNK ? n - offset : M3_CHUNK;
         (*env)->GetByteArrayRegion(env, states, offset, chunk, marks);
         if ((*env)->ExceptionCheck(env)) return NULL;
-        (*env)->GetIntArrayRegion(env, rows, offset, chunk, row_ids);
-        if ((*env)->ExceptionCheck(env)) return NULL;
+        // Reuse the emission buffer as increasing accepted source offsets first.
+        // It becomes row IDs only after those offsets have admitted a row transfer.
         jsize accepted = 0;
         for (jsize i = 0; i < chunk; i++) {
             unsigned int bits = (unsigned int)(unsigned char)marks[i];
             if ((bits & (unsigned int)required_mask) == (unsigned int)required_mask) {
-                selected[accepted++] = row_ids[i];
+                selected[accepted++] = i;
             }
         }
         if (accepted > count - written) {
@@ -74,7 +74,19 @@ Java_com_m3_collections_M3IndexMaskCompactor_selectNative(
             return NULL;
         }
         if (accepted > 0) {
-            (*env)->SetIntArrayRegion(env, result, written, accepted, selected);
+            (*env)->GetIntArrayRegion(env, rows, offset, chunk, row_ids);
+            if ((*env)->ExceptionCheck(env)) return NULL;
+            const jint *emission = row_ids;
+            if (accepted != chunk) {
+                // Each offset is read before its own slot is overwritten. Other
+                // offsets are untouched, and row_ids is a separate immutable buffer.
+                for (jsize i = 0; i < accepted; i++) {
+                    selected[i] = row_ids[selected[i]];
+                }
+                emission = selected;
+            }
+            // Full chunks need no second scalar copy; rejected chunks read no rows.
+            (*env)->SetIntArrayRegion(env, result, written, accepted, emission);
             if ((*env)->ExceptionCheck(env)) return NULL;
             written += accepted;
         }
