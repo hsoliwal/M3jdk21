@@ -1,0 +1,34 @@
+
+import java.util.*;
+import java.util.function.*;
+import com.m3.collections.*;
+public class FilterGapWitness {
+  private static int failures;
+  static void show(String label,Object expected,Supplier<?> call) {
+    try {Object actual=call.get();boolean ok=Objects.equals(expected,actual);if(!ok)failures++;
+      System.out.println(label+" expected="+expected+" actual="+actual+" "+(ok?"PASS":"FAIL"));}
+    catch(Throwable failure){failures++;System.out.println(label+" expected="+expected+" threw="+failure.getClass().getSimpleName()+" FAIL");}
+  }
+  public static void main(String[] args){
+    var map=new TreeMap<Integer,Integer>();for(int i=1;i<=5;i++)map.put(i,i);
+    var read=M3FilteredViews.filterEntries(map.subMap(2,true,4,true),(k,v)->k%2==0);
+    show("readOnlyMap.ceilingKey(1)",2,()->read.ceilingKey(1));
+    show("readOnlyMap.higherKey(1)",2,()->read.higherKey(1));
+    show("readOnlyMap.floorKey(5)",4,()->read.floorKey(5));
+    show("readOnlyMap.lowerKey(5)",4,()->read.lowerKey(5));
+    var set=new TreeSet<Integer>(List.of(1,2,3,4,5));
+    var mutable=M3MutableFilteredViews.filter(set.subSet(2,true,4,true),v->v%2==0);
+    show("mutableSet.ceiling(1)",2,()->mutable.ceiling(1));
+    show("mutableSet.higher(1)",2,()->mutable.higher(1));
+    show("mutableSet.floor(5)",4,()->mutable.floor(5));
+    show("mutableSet.lower(5)",4,()->mutable.lower(5));
+    Comparator<Integer> order=(a,b)->Integer.compare(a==null?0:a,b==null?0:b);
+    var nullable=new TreeSet<Integer>(order);nullable.add(-1);nullable.add(null);nullable.add(1);
+    var nullView=M3FilteredViews.filter(nullable,Objects::nonNull);
+    show("readOnlySetMiddleNull.higher(-1)",1,()->nullView.higher(-1));
+    show("readOnlySetMiddleNull.lower(1)",-1,()->nullView.lower(1));
+    show("readOnlySetMiddleNull.ceiling(0)",1,()->nullView.ceiling(0));
+    show("readOnlySetMiddleNull.floor(0)",-1,()->nullView.floor(0));
+    if(failures!=0)throw new AssertionError("failed probes="+failures);
+  }
+}
