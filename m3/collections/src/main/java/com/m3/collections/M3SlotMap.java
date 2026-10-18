@@ -20,6 +20,9 @@ import java.util.function.Function;
 
 /** Shared JDK semantics over integer slots; internal traversal never constructs entries. */
 abstract class M3SlotMap<K, V> extends AbstractMap<K, V> {
+    /** Bounded caches of API projections; backing arrays never store entry objects. */
+    private final M3LFUCache<K, Entry<K, V>> entryFacades = new M3LFUCache<>(128);
+    private final M3LFUCache<K, Entry<K, V>> entrySnapshots = new M3LFUCache<>(128);
     abstract int firstSlot();
     abstract int nextSlot(int slot);
     abstract int findSlot(Object key);
@@ -147,8 +150,38 @@ abstract class M3SlotMap<K, V> extends AbstractMap<K, V> {
         }
         return b.append('}').toString();
     }
+    /** Reuse a live facade for repeated API projection of the same logical key. */
+    final Entry<K, V> liveEntry(K key) {
+        Entry<K, V> cached = entryFacades.get(key);
+        if (cached != null) {
+            return cached;
+        }
+        Entry<K, V> created = new LiveEntry(key);
+        entryFacades.put(key, created);
+        return created;
+    }
+
+    /** Reuse only an unchanged immutable snapshot; prior snapshots never change. */
     final Entry<K, V> snapshot(int slot) {
-        return slot < 0 ? null : new SimpleImmutableEntry<>(keyAt(slot), valueAt(slot));
+        if (slot < 0) {
+            return null;
+        }
+        K key = keyAt(slot);
+        V value = valueAt(slot);
+        Entry<K, V> cached = entrySnapshots.get(key);
+        if (cached instanceof SimpleImmutableEntry<?, ?> && cached.getKey() == key
+                && cached.getValue() == value) {
+            return cached;
+        }
+        Entry<K, V> created = new SimpleImmutableEntry<>(key, value);
+        entrySnapshots.put(key, created);
+        return created;
+    }
+
+    /** Drop cached key and facade references on owner clear. */
+    final void clearEntryCaches() {
+        entryFacades.clear();
+        entrySnapshots.clear();
     }
     final class LiveEntry implements Entry<K, V> {
         private final K key;
@@ -189,7 +222,7 @@ abstract class M3SlotMap<K, V> extends AbstractMap<K, V> {
             @Override @SuppressWarnings("unchecked") public T next() {
                 if (!hasNext()) { throw new NoSuchElementException(); }
                 last = cursor; lastKey = heldKey; cursor = nextSlot(cursor); prepared = false;
-                Object result = kind == 0 ? heldKey : kind == 1 ? valueAt(last) : new LiveEntry(heldKey);
+                Object result = kind == 0 ? heldKey : kind == 1 ? valueAt(last) : liveEntry(heldKey);
                 heldKey = null; return (T) result;
             }
             @Override public void remove() {
