@@ -20,9 +20,9 @@ import java.util.function.Function;
 
 /** Shared JDK semantics over integer slots; internal traversal never constructs entries. */
 abstract class M3SlotMap<K, V> extends AbstractMap<K, V> {
-    /** Bounded caches of API projections; backing arrays never store entry objects. */
-    private final M3LFUCache<K, Entry<K, V>> entryFacades = new M3LFUCache<>(128);
-    private final M3LFUCache<K, Entry<K, V>> entrySnapshots = new M3LFUCache<>(128);
+    /** Allocated only when an API actually materializes entries; never part of slot storage. */
+    private M3LFUCache<K, Entry<K, V>> entryFacades;
+    private M3LFUCache<K, Entry<K, V>> entrySnapshots;
     abstract int firstSlot();
     abstract int nextSlot(int slot);
     abstract int findSlot(Object key);
@@ -150,8 +150,17 @@ abstract class M3SlotMap<K, V> extends AbstractMap<K, V> {
         }
         return b.append('}').toString();
     }
+    /** Override for weak-key owners whose caches must never strengthen key reachability. */
+    boolean cacheApiEntries() { return true; }
+
     /** Reuse a live facade for repeated API projection of the same logical key. */
     final Entry<K, V> liveEntry(K key) {
+        if (!cacheApiEntries()) {
+            return new LiveEntry(key);
+        }
+        if (entryFacades == null) {
+            entryFacades = new M3LFUCache<>(128);
+        }
         Entry<K, V> cached = entryFacades.get(key);
         if (cached != null) {
             return cached;
@@ -168,6 +177,12 @@ abstract class M3SlotMap<K, V> extends AbstractMap<K, V> {
         }
         K key = keyAt(slot);
         V value = valueAt(slot);
+        if (!cacheApiEntries()) {
+            return new SimpleImmutableEntry<>(key, value);
+        }
+        if (entrySnapshots == null) {
+            entrySnapshots = new M3LFUCache<>(128);
+        }
         Entry<K, V> cached = entrySnapshots.get(key);
         if (cached instanceof SimpleImmutableEntry<?, ?> && cached.getKey() == key
                 && cached.getValue() == value) {
@@ -178,10 +193,32 @@ abstract class M3SlotMap<K, V> extends AbstractMap<K, V> {
         return created;
     }
 
+    /** Evict API projections when their mapping is removed. */
+    final void forgetEntry(Object key) {
+        if (entryFacades != null) {
+            entryFacades.remove(key);
+            if (entryFacades.size() == 0) {
+                entryFacades = null;
+            }
+        }
+        if (entrySnapshots != null) {
+            entrySnapshots.remove(key);
+            if (entrySnapshots.size() == 0) {
+                entrySnapshots = null;
+            }
+        }
+    }
+
     /** Drop cached key and facade references on owner clear. */
     final void clearEntryCaches() {
-        entryFacades.clear();
-        entrySnapshots.clear();
+        if (entryFacades != null) {
+            entryFacades.clear();
+            entryFacades = null;
+        }
+        if (entrySnapshots != null) {
+            entrySnapshots.clear();
+            entrySnapshots = null;
+        }
     }
     final class LiveEntry implements Entry<K, V> {
         private final K key;
