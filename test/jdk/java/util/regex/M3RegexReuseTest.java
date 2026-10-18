@@ -5,10 +5,15 @@
  * @test
  * @summary Reuse immutable input facts without changing Matcher state or mutable-input semantics
  * @modules java.base/java.util.regex:open
+ *          java.base/java.lang:open
+ *          java.base/jdk.internal.access
  *          jdk.management
  * @run main/othervm -Xcheck:jni M3RegexReuseTest
  * @run main/othervm -Xint -Xcheck:jni M3RegexReuseTest
  * @run main/othervm -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage -Xcheck:jni M3RegexReuseTest
+ * @run main/othervm -XX:+UnlockExperimentalVMOptions -XX:-UseM3StringStorage -Xcheck:jni M3RegexReuseTest flat
+ * @run main/othervm -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage -Xcheck:jni M3RegexReuseTest prepared
+ * @run main/othervm -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage -XX:-CompactStrings -Xcheck:jni M3RegexReuseTest prepared
  */
 
 import java.lang.management.ManagementFactory;
@@ -28,6 +33,8 @@ public class M3RegexReuseTest {
     public static void main(String[] args) throws Exception {
         String mode = args.length == 0 ? "all" : args[0];
         if (mode.equals("cost")) { cost(); return; }
+        if (mode.equals("prepared")) { prepared(); return; }
+        if (mode.equals("flat")) { flat(); return; }
         if (!mode.equals("reuse")) semantic();
         if (!mode.equals("semantic")) reuse();
     }
@@ -125,7 +132,12 @@ public class M3RegexReuseTest {
     private static void reuse() throws Exception {
         Field facts = Matcher.class.getDeclaredField("m3TqFacts");
         facts.setAccessible(true);
-        String text = "abc".repeat(100);
+        // A distinct whole-owner UTF-16 fixture cannot inherit semantic()'s prepared facts.
+        char[] coldUnits = new char[305];
+        for (int i = 0; i < 303; i++) coldUnits[i] = "abc".charAt(i % 3);
+        coldUnits[303] = '\u0a17';
+        coldUnits[304] = '\u4b91';
+        String text = new String(coldUnits);
         Matcher matcher = Pattern.compile("acb", Pattern.LITERAL).matcher(text);
         check(!matcher.find(), "cold rejection");
         Object cold = facts.get(matcher);
@@ -167,6 +179,162 @@ public class M3RegexReuseTest {
         matcher.reset("abc".repeat(10_923)); matcher.find();
         check(facts.get(matcher) == null, "oversize region bypass");
         System.out.println("MR_REUSE\tchecks=" + checks);
+    }
+
+
+    private static void flat() {
+        var access = jdk.internal.access.SharedSecrets.getJavaLangAccess();
+        check(access != null, "JavaLangAccess initialized");
+        check(access.stringM3TrigramFacts(null) == null, "null facts");
+        for (String value : List.of("", "abc", new String(new char[] {'x', '\u0100'}))) {
+            check(access.stringM3TrigramFacts(value) == null, "disabled M3 has no prepared facts");
+        }
+        System.out.println("MR_FLAT_FACTS\tchecks=" + checks);
+    }
+
+    private static void prepared() throws Exception {
+        var access = jdk.internal.access.SharedSecrets.getJavaLangAccess();
+        check(access != null, "JavaLangAccess initialized");
+        check(access.stringM3TrigramFacts(null) == null, "null has no prepared facts");
+        Field storageField = String.class.getDeclaredField("m3");
+        storageField.setAccessible(true);
+        Field cache = Matcher.class.getDeclaredField("m3TqFacts");
+        cache.setAccessible(true);
+        Field cacheFrom = Matcher.class.getDeclaredField("m3TqFactsFrom");
+        Field cacheTo = Matcher.class.getDeclaredField("m3TqFactsTo");
+        cacheFrom.setAccessible(true);
+        cacheTo.setAccessible(true);
+
+        char[] units = new char[305];
+        for (int i = 0; i < 303; i++) units[i] = "abc".charAt(i % 3);
+        units[303] = '\u3191';
+        units[304] = '\u7101';
+        String cold = new String(units);
+        Object storage = storageField.get(cold);
+        check(storage != null, "prepared mode requires M3-backed String");
+        var peek = storage.getClass().getDeclaredMethod("factsIfPrepared");
+        var prepare = storage.getClass().getDeclaredMethod("facts");
+        peek.setAccessible(true);
+        prepare.setAccessible(true);
+        check(peek.invoke(storage) == null, "fresh facts are cold");
+        check(access.stringM3TrigramFacts(cold) == null, "lookup does not prepare");
+        check(access.stringM3TrigramFacts(cold) == null, "repeated lookup does not prepare");
+        check(peek.invoke(storage) == null, "cold lookup leaves source unchanged");
+
+        Pattern missing = Pattern.compile("acb", Pattern.LITERAL);
+        Matcher prior = missing.matcher(cold);
+        boolean coldResult = prior.find();
+        Object originalCache = cache.get(prior);
+        check(originalCache != null, "cold source retains regional preparation");
+        check(peek.invoke(storage) == null, "regional preparation does not prepare String facts");
+        Matcher priorOracle = missing.matcher(new StringBuilder(cold));
+        same(coldResult, priorOracle.find(), prior, priorOracle);
+        Object preparedFacts = prepare.invoke(storage);
+        var predicate = access.stringM3TrigramFacts(cold);
+        check(predicate == preparedFacts, "accessor reuses exact immutable facts");
+        check(access.stringM3TrigramFacts(cold) == predicate, "stable prepared identity");
+        check(!predicate.test(packed("acb", 0)), "negative fixture precondition");
+        check(predicate.test(-1L) && predicate.test(1L << 48), "unknown keys are conservative");
+
+        prior.reset();
+        priorOracle.reset();
+        same(prior.find(), priorOracle.find(), prior, priorOracle);
+        check(cache.get(prior) == originalCache, "prepared String does not replace a warm cache");
+        int savedFrom = cacheFrom.getInt(prior), savedTo = cacheTo.getInt(prior);
+        prior.region(1, 100);
+        priorOracle.region(1, 100);
+        same(prior.find(), priorOracle.find(), prior, priorOracle);
+        check(cache.get(prior) == originalCache, "global negative preserves old regional cache");
+        check(cacheFrom.getInt(prior) == savedFrom && cacheTo.getInt(prior) == savedTo,
+                "negative does not stamp old cache as a new region");
+
+        Matcher absent = missing.matcher(cold), absentOracle = missing.matcher(new StringBuilder(cold));
+        same(absent.find(), absentOracle.find(), absent, absentOracle);
+        check(cache.get(absent) == null, "prepared negative skips regional preparation");
+        absent.region(2, 50);
+        absentOracle.region(2, 50);
+        same(absent.find(), absentOracle.find(), absent, absentOracle);
+        check(cache.get(absent) == null, "regional negative stays metadata-only");
+        check(peek.invoke(storage) == preparedFacts, "negative keeps source facts identity");
+
+        String outside = new String("abcXYZdef".toCharArray());
+        prepareFacts(storageField, outside);
+        check(access.stringM3TrigramFacts(outside).test(packed("XYZ", 0)),
+                "global-positive fixture precondition");
+        Matcher bounded = Pattern.compile("XYZ", Pattern.LITERAL).matcher(outside).region(0, 3);
+        Matcher boundedOracle = Pattern.compile("XYZ", Pattern.LITERAL)
+                .matcher(new StringBuilder(outside)).region(0, 3);
+        same(bounded.find(), boundedOracle.find(), bounded, boundedOracle);
+        check(cache.get(bounded) != null, "global positive still verifies isolated region");
+
+        String slice = outside.substring(0, 3);
+        Object sliceFacts = prepareFacts(storageField, slice);
+        var slicePredicate = access.stringM3TrigramFacts(slice);
+        check(slicePredicate == sliceFacts, "range lookup reuses range facts");
+        check(!slicePredicate.test(packed("XYZ", 0)), "range excludes parent-only trigram");
+        Matcher sliced = Pattern.compile("XYZ", Pattern.LITERAL).matcher(slice);
+        Matcher slicedOracle = Pattern.compile("XYZ", Pattern.LITERAL).matcher(new StringBuilder(slice));
+        same(sliced.find(), slicedOracle.find(), sliced, slicedOracle);
+        check(cache.get(sliced) == null, "prepared range negative skips regional preparation");
+
+        String collision = new String("aco".toCharArray());
+        prepareFacts(storageField, collision);
+        check(access.stringM3TrigramFacts(collision).test(packed("adv", 0)),
+                "probabilistic collision fixture precondition");
+        Matcher collided = Pattern.compile("adv", Pattern.LITERAL).matcher(collision);
+        Matcher collidedOracle = Pattern.compile("adv", Pattern.LITERAL).matcher(new StringBuilder(collision));
+        same(collided.find(), collidedOracle.find(), collided, collidedOracle);
+        check(cache.get(collided) != null, "signal collision retains exact regional verification");
+
+        String captured = new String("xxabcdefyy".toCharArray());
+        prepareFacts(storageField, captured);
+        Pattern capturePattern = Pattern.compile("ab(cd)ef");
+        Matcher capture = capturePattern.matcher(captured);
+        Matcher captureOracle = capturePattern.matcher(new StringBuilder(captured));
+        same(capture.find(), captureOracle.find(), capture, captureOracle);
+        check(cache.get(capture) != null, "captured query retains regional verification");
+        capture.reset();
+        captureOracle.reset();
+        same(capture.find(1), captureOracle.find(1), capture, captureOracle);
+        capture.useTransparentBounds(true).useAnchoringBounds(false).region(2, 8);
+        captureOracle.useTransparentBounds(true).useAnchoringBounds(false).region(2, 8);
+        same(capture.find(), captureOracle.find(), capture, captureOracle);
+
+        List<String> unicode = new ArrayList<>();
+        unicode.add(new String(new char[] {0, '\u00ff', '\u0100', '\ud83d', '\ude42', '\ud800', 'x', '\udc00'}));
+        String high = new String(new char[] {'a', '\ud83d'});
+        String low = new String(new char[] {'\ude42', 'z'});
+        String joined = String.join("", high, low);
+        unicode.add(joined);
+        unicode.add(joined.substring(1, 3));
+        unicode.add(joined.substring(0, 2));
+        unicode.add(joined.substring(2));
+        for (String value : unicode) {
+            Object facts = prepareFacts(storageField, value);
+            var grams = access.stringM3TrigramFacts(value);
+            check(grams == facts, "Unicode facts reused directly");
+            for (int i = 0; i + 2 < value.length(); i++) {
+                check(grams.test(packed(value, i)), "present UTF-16 triple is never rejected");
+            }
+            Pattern literal = Pattern.compile(value, Pattern.LITERAL);
+            Matcher left = literal.matcher(value), right = literal.matcher(new StringBuilder(value));
+            same(left.find(), right.find(), left, right);
+            same(left.find(), right.find(), left, right);
+        }
+        System.out.println("MR_PREPARED\tchecks=" + checks);
+    }
+
+    private static Object prepareFacts(Field storageField, String text) throws Exception {
+        Object storage = storageField.get(text);
+        check(storage != null, "prepared fixture has M3 storage");
+        var method = storage.getClass().getDeclaredMethod("facts");
+        method.setAccessible(true);
+        return method.invoke(storage);
+    }
+
+    private static long packed(String value, int from) {
+        return ((long) value.charAt(from) << 32)
+                | ((long) value.charAt(from + 1) << 16) | value.charAt(from + 2);
     }
 
     private static void cost() throws Exception {
