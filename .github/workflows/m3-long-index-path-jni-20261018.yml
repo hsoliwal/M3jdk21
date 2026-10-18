@@ -1,0 +1,84 @@
+name: M3 long path JNI Java21 C17 differential
+on:
+  pull_request:
+    paths:
+      - 'm3/collections/qualification/m3-long-index-path-jni-20261018/**'
+      - 'm3/collections/src/main/java/com/m3/collections/M3LongIndexPathMasksJNI.java'
+      - 'm3/collections/src/main/native/collections/m3_long_index_path_masks_jni.c'
+      - 'm3/collections/src/test/java/com/m3/collections/M3LongIndexPathMasksJNISelfTest.java'
+      - '.github/workflows/m3-long-index-path-jni-20261018.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          sparse-checkout: |
+            m3/collections
+            .github/workflows
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Verify merged Java oracle has unchanged identity
+        shell: bash
+        run: |
+          set -euo pipefail
+          JAVA_OWNER=m3/collections/src/main/java/com/m3/collections/M3LongIndexPathMasks.java
+          test "$(git hash-object "$JAVA_OWNER")" = dd918fb13360408d71fc3577ee5c7bd255205340
+      - name: Build canonical source-sealed Maven generator
+        shell: bash
+        run: |
+          set -euo pipefail
+          CRATE=m3/collections/qualification/m3-long-index-path-jni-20261018/recipe
+          mvn -B -ntp -f "$CRATE/pom.xml" -DskipTests package
+          java -cp "$CRATE/target/classes" com.synexia.m3.M3LongIndexPathJNIRecipe --check . "$CRATE/templates"
+          FRESH="$RUNNER_TEMP/source-sealed-fresh"
+          mkdir -p "$FRESH"
+          java -cp "$CRATE/target/classes" com.synexia.m3.M3LongIndexPathJNIRecipe --apply "$FRESH" "$CRATE/templates"
+          java -cp "$CRATE/target/classes" com.synexia.m3.M3LongIndexPathJNIRecipe --check "$FRESH" "$CRATE/templates"
+          java -cp "$CRATE/target/classes" com.synexia.m3.M3LongIndexPathJNIRecipe --apply "$FRESH" "$CRATE/templates"
+          cmp "$CRATE/templates/M3LongIndexPathMasksJNI.java" "$FRESH/m3/collections/src/main/java/com/m3/collections/M3LongIndexPathMasksJNI.java"
+          cmp "$CRATE/templates/M3LongIndexPathMasksJNISelfTest.java" "$FRESH/m3/collections/src/test/java/com/m3/collections/M3LongIndexPathMasksJNISelfTest.java"
+          cmp "$CRATE/templates/m3_long_index_path_masks_jni.c" "$FRESH/m3/collections/src/main/native/collections/m3_long_index_path_masks_jni.c"
+          printf '\n// deliberate drift\n' >> "$FRESH/m3/collections/src/main/java/com/m3/collections/M3LongIndexPathMasksJNI.java"
+          if java -cp "$CRATE/target/classes" com.synexia.m3.M3LongIndexPathJNIRecipe --check "$FRESH" "$CRATE/templates"; then
+            echo 'ERROR: changed generated source was accepted' >&2
+            exit 1
+          fi
+      - name: Strict Java21 compile and reference tests
+        shell: bash
+        run: |
+          set -euo pipefail
+          OUT="$RUNNER_TEMP/m3-long-path-jni"
+          mkdir -p "$OUT/classes" "$OUT/headers"
+          MAIN=m3/collections/src/main/java/com/m3/collections
+          TEST=m3/collections/src/test/java/com/m3/collections
+          javac --release 21 -proc:none -Xlint:all -Werror -h "$OUT/headers" -d "$OUT/classes" \
+            "$MAIN/M3LongIndexPathMasks.java" "$MAIN/M3LongIndexPathMasksJNI.java" \
+            "$TEST/M3LongIndexPathMasksSelfTest.java" "$TEST/M3LongIndexPathMasksJNISelfTest.java"
+          java -Xcheck:jni -cp "$OUT/classes" com.m3.collections.M3LongIndexPathMasksSelfTest
+          java -Xcheck:jni -cp "$OUT/classes" com.m3.collections.M3LongIndexPathMasksJNISelfTest
+      - name: Real JNI parity and undefined-behavior sanitizer
+        shell: bash
+        run: |
+          set -euo pipefail
+          OUT="$RUNNER_TEMP/m3-long-path-jni"
+          SRC=m3/collections/src/main/native/collections/m3_long_index_path_masks_jni.c
+          JDK_HOME=$(dirname "$(dirname "$(readlink -f "$(command -v javac)")")")
+          gcc -std=c17 -fPIC -shared -O2 -Wall -Wextra -Wconversion -Wshadow -Werror -pedantic \
+            -I"$JDK_HOME/include" -I"$JDK_HOME/include/linux" \
+            -o "$OUT/libm3_collections_long_path_masks.so" "$SRC"
+          java -Xcheck:jni -Djava.library.path="$OUT" -cp "$OUT/classes" \
+            com.m3.collections.M3LongIndexPathMasksJNISelfTest --native
+          gcc -std=c17 -fPIC -shared -O1 -Wall -Wextra -Wconversion -Wshadow -Werror -pedantic \
+            -fsanitize=undefined -fno-sanitize-recover=undefined \
+            -I"$JDK_HOME/include" -I"$JDK_HOME/include/linux" \
+            -o "$OUT/libm3_collections_long_path_masks.so" "$SRC"
+          java -Xcheck:jni -Djava.library.path="$OUT" -cp "$OUT/classes" \
+            com.m3.collections.M3LongIndexPathMasksJNISelfTest --native
