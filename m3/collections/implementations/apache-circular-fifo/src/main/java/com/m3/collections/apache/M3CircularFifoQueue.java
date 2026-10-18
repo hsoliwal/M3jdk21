@@ -193,7 +193,8 @@ public class M3CircularFifoQueue<E> extends AbstractCollection<E>
                                   Integer.valueOf(index), Integer.valueOf(sz)));
         }
 
-        final int idx = (start + index) % maxElements;
+        final int remaining = maxElements - start;
+        final int idx = index < remaining ? start + index : index - remaining;
         return elements[idx];
     }
 
