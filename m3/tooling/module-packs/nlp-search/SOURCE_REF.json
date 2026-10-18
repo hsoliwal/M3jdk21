@@ -34,5 +34,25 @@
     "git_blob": "15113bd40279c9c0dbcf5b1707e174ae629b78b3"
   },
   "historical_receipt_scope": "canonical_commit and file_receipt retain the original full-tool handoff. Subsequent naming-map/UTF-8/control changes are recorded by the recovery receipt and text-tools/SOURCE_REF.json.",
-  "current_source_qualification": "Full tools rebuilt from restored Synexia source; API, 20 unchanged Apache tests before/after, CLI, training/reload/inference, disk index/reopen/query, and eight-JMOD image passed. Current engines requalified with the same sealed outputs."
+  "current_source_qualification": "Full tools rebuilt from restored Synexia source; API, 20 unchanged Apache tests before/after, CLI, training/reload/inference, disk index/reopen/query, and eight-JMOD image passed. Current engines requalified with the same sealed outputs.",
+  "source_jmod_successor": {
+    "canonical_repository": "hsoliwal/com.synexia",
+    "canonical_crate": "synexia-openrewrite-recipes/crates/m3-nlp-search/m3-source-jmods-20261018",
+    "recipe": "com.synexia.rewrite.M3NlpSearchSourceJmodsRecipe",
+    "source_base": "50f48cbbe11f17fb8dc209bac3812f8940a1e267",
+    "target_base": "f29b0afe7ad253cc0562bc8dfdd48fc1acec710e",
+    "fork_sources": {
+      "hsoliwal/lucene": "d1b7235f1ba1c1eea5b04a5b7e6554595a90719e",
+      "hsoliwal/opennlp": "368337311ad94b665fd178f8d3ced005a73b2370"
+    },
+    "library_modules": 9,
+    "sdk_modules": [
+      "jdk.m3.search",
+      "jdk.m3.search.compiler (optional actual M3AST)"
+    ],
+    "source_lock": "M3_SOURCE_LOCK.json",
+    "proof": "SOURCE_INTEGRATION.json in each fresh build output",
+    "current_source_versions": "Existing Lucene9.10/OpenNLP2.4 + exact fork adapters and complete fork Lucene analysis.opennlp module",
+    "phase_advanced": false
+  }
 }

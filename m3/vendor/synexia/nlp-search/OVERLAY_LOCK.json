@@ -1,4 +1,8 @@
 {
+  "third_party/lucene-core/src/main/java/org/apache/lucene/analysis/M3TextReaders.java": "4c2e5843829487c5be8163fa0817178b8887a1c4199e9b382c88bc726c01daf0",
+  "third_party/lucene-core/src/main/java/org/apache/lucene/analysis/ReusableStringReader.java": "76378fdbded3a1e0ef33775add5f9e9c6c764de9703f048bb4e3e3883d82a53f",
   "third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/classic/QueryParserBase.java": "f5de2da867ca3e9312d1563c27888c1570347f8014267c2f2cb1eaa2e9d1fd30",
+  "third_party/opennlp-tools/src/main/java/opennlp/tools/tokenize/M3Tokenizers.java": "de3823ba8f4a53a7a628e8532d557e3af04a4a852b0302518cc4603ed2fae8c5",
+  "third_party/opennlp-tools/src/main/java/opennlp/tools/tokenize/SimpleTokenizer.java": "ef86045b9fd965accd9140e95ce67f96e6f8e88b9d2cc968d9806d9691ca7890",
   "third_party/opennlp-tools/src/main/java/opennlp/tools/util/StringList.java": "bcaa3553c36688a0efa18e9f7efa2cd42a200815d4d983c117404e4607037fc4"
 }
