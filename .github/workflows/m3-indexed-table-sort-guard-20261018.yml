@@ -1,0 +1,62 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3 IndexedTable reentrant comparator sort
+on:
+  pull_request:
+    paths:
+      - 'm3/collections/src/main/java/com/m3/collections/M3IndexedTable.java'
+      - 'm3/collections/src/test/java/com/m3/collections/M3IndexedTableReentrantSort*'
+      - 'm3/collections/qualification/m3jdk21-table-sort-guard-20261018/**'
+      - '.github/workflows/m3-indexed-table-sort-guard-20261018.yml'
+  workflow_dispatch:
+jobs:
+  jdk21-owner:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Refuse drift from source-first SHA256-sealed product files
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          from hashlib import sha256
+          rows = Path('m3/collections/qualification/m3jdk21-table-sort-guard-20261018/manifest.tsv').read_text(encoding='utf-8').splitlines()
+          assert len(rows) == 3, "unexpected target count"
+          for row in rows:
+              path, before, post, template = row.split('\t')
+              assert before == 'ABSENT' or len(before) == 64
+              actual = sha256(Path(path).read_bytes()).hexdigest()
+              if actual != post:
+                  raise SystemExit(f"source drift: {path}: {actual} expected {post}")
+              print(f"SEALED {path} {actual}")
+          PY
+      - name: Strict Java21 compile with actual M3 source dependencies
+        run: |
+          mkdir -p "$RUNNER_TEMP/m3-classes"
+          javac --release 21 -proc:none -Xlint:all,-serial,-module -Werror \
+            -sourcepath m3/collections/src/main/java \
+            -d "$RUNNER_TEMP/m3-classes" \
+            m3/collections/src/main/java/com/m3/collections/M3IndexedTable.java \
+            m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java \
+            m3/collections/src/test/java/com/m3/collections/M3IndexedTableSelfTest.java \
+            m3/collections/src/test/java/com/m3/collections/M3IndexedTableReentrantSortContract.java
+      - name: Existing table randomized proof plus new reentrant-sort contract
+        run: |
+          java -cp "$RUNNER_TEMP/m3-classes" com.m3.collections.M3IndexedTableSelfTest
+          java -cp "$RUNNER_TEMP/m3-classes" com.m3.collections.M3IndexedTableReentrantSortContract
+          java -Xint -cp "$RUNNER_TEMP/m3-classes" com.m3.collections.M3IndexedTableReentrantSortContract
+      - name: Unchanged original C17 JNI backend with checked native parity
+        run: |
+          JDK_HOME="$(dirname "$(dirname "$(readlink -f "$(command -v javac)")")")"
+          gcc -std=c17 -fPIC -shared -Wall -Wextra -Werror -pedantic \
+            -fsanitize=undefined -fno-sanitize-recover=all \
+            -I"$JDK_HOME/include" -I"$JDK_HOME/include/linux" \
+            m3/collections/src/main/native/collections/m3_index_mask_compactor.c \
+            -o "$RUNNER_TEMP/libm3_collections_mask.so"
+          java -Xcheck:jni -Djava.library.path="$RUNNER_TEMP" -cp "$RUNNER_TEMP/m3-classes" \
+            com.m3.collections.M3IndexedTableSelfTest --native
+      - name: Owning Maven JUnit selection
+        run: mvn -B -ntp -f m3/collections/pom.xml -Dtest=M3IndexedTableTest,M3IndexedTableReentrantSortTest test

@@ -322,8 +322,11 @@ public final class M3IndexedTable<R, C, V> {
                     while (a < mid && b < end) {
                         V firstValue = M3SlotArrays.get(values, sorted[a]);
                         V secondValue = M3SlotArrays.get(values, sorted[b]);
-                        scratch[write++] = comparator.compare(firstValue, secondValue) <= 0
-                                ? sorted[a++] : sorted[b++];
+                        // Comparator callbacks are arbitrary Java: refuse a reentrant
+                        // write before publishing an index that may reference a recycled slot.
+                        int comparison = comparator.compare(firstValue, secondValue);
+                        valid();
+                        scratch[write++] = comparison <= 0 ? sorted[a++] : sorted[b++];
                     }
                     while (a < mid) scratch[write++] = sorted[a++];
                     while (b < end) scratch[write++] = sorted[b++];
@@ -333,6 +336,8 @@ public final class M3IndexedTable<R, C, V> {
                 if (width > sorted.length / 2) break;
                 width <<= 1;
             }
+            // Also refuse post-loop drift rather than returning a stale descriptor.
+            valid();
             return new IndexView(sorted, 0, sorted.length, expectedRevision);
         }
         /**
