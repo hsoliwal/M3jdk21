@@ -83,12 +83,26 @@ public class M3ViewportCollectionsTest {
 		shortLane.setLength (200);
 		assertEquals (100, shortLane.nextClear (0, 100), "beyond the allocated words");
 		assertEquals (-1, shortLane.nextSet (0, 100));
+		assertEquals (1, shortLane.count (0, 0, 200), "the count stops at the allocated words");
 		shortLane.setLength (32);
 		shortLane.setRange (0, 0, 32, true);
 		assertEquals (32, shortLane.nextClear (0, 0), "every allocated word is full");
 		shortLane.setLength (10);
 		assertEquals (10, shortLane.count (0), "shrinking clears the tail");
 		assertEquals (-1, shortLane.nextSet (0, 10));
+	}
+
+	/** The largest lane (2^26 words, 256 MiB) has more bits than an int counts; clearing uses the int ceiling. */
+	@Test
+	public void bitLanesFullIntRange () {
+		M3BitLanes lanes = new M3BitLanes (1);
+		lanes.setLength (Integer.MAX_VALUE);
+		lanes.set (0, Integer.MAX_VALUE - 1, true);
+		lanes.set (0, 5, true);
+		lanes.setLength (10);
+		assertEquals (1, lanes.count (0));
+		assertTrue (lanes.get (0, 5));
+		lanes.clear ();
 	}
 
 	@Test

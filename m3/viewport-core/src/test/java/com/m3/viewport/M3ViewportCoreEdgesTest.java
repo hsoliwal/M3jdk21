@@ -152,6 +152,52 @@ public class M3ViewportCoreEdgesTest {
 	}
 
 	@Test
+	public void remainingDecisionEdges () {
+		M3ViewportPlanner.HorizontalWindow window = new M3ViewportPlanner.HorizontalWindow ();
+		window.setColumns (new long [] {10, 20}, new int [] {0, 1});
+		assertTrue (window.setColumns (new long [] {10, 20}, new int [] {1, 0}), "same widths, new order");
+		assertTrue (window.setViewport (0, 50, 0, false));
+		assertTrue (window.setViewport (0, 50, 4, false), "overscan change");
+		assertTrue (window.setViewport (0, 50, 4, true), "direction change");
+		assertFalse (window.ensureColumnVisible (0), "a column inside the viewport needs no move");
+
+		M3ViewportRuntime.RowWindow rows = new M3ViewportRuntime.RowWindow ();
+		rows.setLogicalCount (6);
+		rows.setViewport (4, 2);
+		long g = rows.generation ();
+		rows.setViewport (4, 5);
+		assertEquals (2, rows.visibleCount ());
+		assertNotEquals (g, rows.generation (), "a new capacity with the same visible rows still counts");
+		rows.setViewport (4, 1);
+		assertEquals (1, rows.visibleCount ());
+
+		M3ViewportRuntime.PixelLayout pixels = M3ViewportRuntime.solvePixels (100, 50, 200, 10, 10, 12,
+				M3ViewportRuntime.AUTO, M3ViewportRuntime.NEVER);
+		assertTrue (pixels.horizontalVisible ());
+		assertFalse (pixels.cornerVisible ());
+		M3ViewportRuntime.RowLayout layout = M3ViewportRuntime.solveRows (100, 50, 0, 1, 10, 10, 10, 12,
+				M3ViewportRuntime.ALWAYS, M3ViewportRuntime.NEVER);
+		assertTrue (layout.horizontalVisible ());
+		assertFalse (layout.verticalVisible ());
+		assertFalse (layout.cornerVisible ());
+
+		M3RowWindowPlan plan = new M3RowWindowPlan ();
+		plan.plan (10, 5);
+		plan.commit ();
+		assertEquals (0, plan.inserted (10, 1), "insert at the first resident row grows the window");
+		assertEquals (6, plan.size ());
+
+		M3ScrollMetrics single = new M3ScrollMetrics ();
+		single.configure (1, 10, 0);
+		assertEquals (1L, single.maxTopRow ());
+		assertEquals (1, single.thumb ());
+		assertEquals (0, single.selectionForTopRow (1), "a one-row bar with a full thumb cannot move");
+
+		assertFalse (new M3SelectionModel ().bitmapMode ());
+		assertFalse (new M3SelectionModel ().bitsMode ());
+	}
+
+	@Test
 	public void projectionRowAndResidentKeys () {
 		assertTrue (new M3TreeProjection.Row (M3TreeTopology.ROOT, 0, 5, 0).materialized ());
 		assertFalse (new M3TreeProjection.Row (M3TreeTopology.ROOT, 0, -1, 0).materialized ());

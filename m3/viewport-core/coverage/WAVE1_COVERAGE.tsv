@@ -1,5 +1,5 @@
 class	lines_covered	lines_total	branches_covered	branches_total
-com.m3.collections.M3BitLanes	182	182	184	190
+com.m3.collections.M3BitLanes	182	182	186	190
 com.m3.collections.M3BlockCache	130	130	100	100
 com.m3.collections.M3ColumnarLanes	136	136	160	160
 com.m3.collections.M3HeapGrowth	24	24	30	30
@@ -8,12 +8,12 @@ com.m3.collections.M3LaneGrowth	2	2	2	2
 com.m3.collections.M3OrderStatisticForest	136	136	62	62
 com.m3.collections.M3SparseExtents	172	172	121	122
 com.m3.viewport.M3PlaneGeometry	14	14	22	22
-com.m3.viewport.M3RowWindowPlan	57	57	45	46
+com.m3.viewport.M3RowWindowPlan	57	57	46	46
 com.m3.viewport.M3ScrollBarGeometry	27	27	34	34
 com.m3.viewport.M3ScrollLayout	13	13	0	0
 com.m3.viewport.M3ScrollLayout.Result	1	1	0	0
-com.m3.viewport.M3ScrollMetrics	64	64	37	44
-com.m3.viewport.M3SelectionModel	166	166	108	109
+com.m3.viewport.M3ScrollMetrics	64	64	38	44
+com.m3.viewport.M3SelectionModel	166	166	109	109
 com.m3.viewport.M3TreeProjection	119	120	79	80
 com.m3.viewport.M3TreeProjection.Residency	153	153	92	92
 com.m3.viewport.M3TreeProjection.Row	2	2	2	2
@@ -21,9 +21,9 @@ com.m3.viewport.M3TreeResidentPlan	126	126	88	88
 com.m3.viewport.M3TreeTopology	382	382	230	232
 com.m3.viewport.M3TreeViewport	108	108	68	68
 com.m3.viewport.M3ViewportPlanner	58	58	28	28
-com.m3.viewport.M3ViewportPlanner.HorizontalWindow	122	122	76	80
-com.m3.viewport.M3ViewportRuntime	97	97	112	117
+com.m3.viewport.M3ViewportPlanner.HorizontalWindow	122	122	80	80
+com.m3.viewport.M3ViewportRuntime	97	97	115	117
 com.m3.viewport.M3ViewportRuntime.PixelLayout	1	1	0	0
 com.m3.viewport.M3ViewportRuntime.RowLayout	1	1	0	0
-com.m3.viewport.M3ViewportRuntime.RowWindow	76	76	73	74
+com.m3.viewport.M3ViewportRuntime.RowWindow	76	76	74	74
 com.m3.viewport.M3ViewportRuntime.Selection	211	211	167	170
