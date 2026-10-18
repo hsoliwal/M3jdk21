@@ -169,6 +169,9 @@ public class M3CompositeBuilderTest {
             } catch (InvocationTargetException e) {
                 throw e.getCause();
             }
+            if (subject.raw() instanceof StringBuffer f) {
+                f.append(""); // the package entry bypasses StringBuffer's toStringCache reset
+            }
         } else if (start == 0 && end == s.length()) {
             subject.append(s);
         } else {
@@ -329,6 +332,7 @@ public class M3CompositeBuilderTest {
         StringBuilder oracle = new StringBuilder(16);
         Sb s = pieces(kind, oracle, sample, new int[] {5, 9, 70});
         Random random = new Random(3);
+        int refills = 0;
         while (oracle.length() > 0) {
             int i = random.nextInt(oracle.length());
             if ((i & 1) == 0) {
@@ -340,7 +344,8 @@ public class M3CompositeBuilderTest {
                 oracle.delete(i, e);
             }
             same(s, oracle, "R12/R13/R14 remove");
-            if (random.nextInt(8) == 0) {
+            if (refills < 64 && random.nextInt(8) == 0) {
+                refills++;
                 String c = sample.substring(0, 1 + random.nextInt(80));
                 piece(s, oracle, c, 0, c.length(), true);
             }

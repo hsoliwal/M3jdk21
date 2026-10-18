@@ -202,7 +202,7 @@ import jdk.internal.vm.annotation.IntrinsicCandidate;
 
     @Override
     public synchronized int length() {
-        return count;
+        return super.length(); //FLLDCIM: R5-BUILDER — pieces + flat chunks
     }
 
     @Override
@@ -504,6 +504,7 @@ import jdk.internal.vm.annotation.IntrinsicCandidate;
      */
     @Override
     public synchronized String substring(int start) {
+        m3EnsureFlat();
         return substring(start, count);
     }
 
@@ -687,6 +688,7 @@ import jdk.internal.vm.annotation.IntrinsicCandidate;
     @Override
     public int lastIndexOf(String str) {
         // Note, synchronization achieved via invocations of other StringBuffer methods
+        m3EnsureFlat();
         return lastIndexOf(str, count);
     }
 
