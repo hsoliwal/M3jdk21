@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: Apache-2.0
-// Copyright 2026 Hitesh Soliwal and contributors.
+// SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
 // Generated from the source-sealed Synexia M3 long-path JNI recipe.
 package com.m3.collections;
 
