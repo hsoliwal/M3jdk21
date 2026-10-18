@@ -1,0 +1,13 @@
+{
+  "schema": "M3_COLLECTIONS_CONTRACT_REFINEMENT_DATASET_V1",
+  "dataset": "fixture",
+  "repository": "hsoliwal/M3JDK21",
+  "baseline_ref": "e913ab89056657eca4009678cfe9a657c020e79b",
+  "crate_name": "m3-collections-contract-refinement-20261017-fixture",
+  "recipe_name": "com.synexia.m3jdk.CollectionsContractRefinement20261017",
+  "targets": 6,
+  "java_targets": 2,
+  "text_targets": 4,
+  "product_sources_written": false,
+  "engine_changes_from_origin": []
+}

@@ -613,6 +613,118 @@
       "receiver_test": "test/jdk/java/util/HashMap/M3HashMapBulkCopyTest.java",
       "status": "candidate backport installed on draft branch; java.base patch testing and target runtime/jtreg gates pending; String-first receiving priority unchanged",
       "target_rule": "Preserve public Map contracts and fallback for nonexact HashMap source types; no Synexia runtime dependency, no new M3 payload owner or native ABI."
+    },
+    {
+      "recipe": "com.synexia.m3jdk.CollectionsContractRefinement20261017",
+      "recipe_datasets": [
+        "m3jdk21-object-vtable",
+        "m3jdk21-progress-doclint",
+        "m3jdk21-functional-doclint",
+        "m3jdk21-progress-scope-lint",
+        "m3jdk21-runtime-control"
+      ],
+      "canonical_recipe_repository": "hsoliwal/com.synexia",
+      "catalogue": "m3/runtime-integration/runtime-repair-20261018/CATALOGUE.tsv",
+      "receiving_baseline": "4b24824c3aa09d802121447f8970d442a855f064",
+      "phase_rule": "STRING phase unchanged; maintenance of already-published owners only",
+      "source": "Published M3jdk21 #1082 Object self-adaptation; existing Synexia convergence pattern",
+      "source_revision": "c8596a624ff7b15b3fe58cbf857eda0852b84402",
+      "target": "java.lang.Object.toAdapter(java.lang.Class)",
+      "target_path": "src/java.base/share/classes/java/lang/Object.java",
+      "receiver_test": "test/jdk/java/lang/Object/M3RuntimeCompatibilityHold.java",
+      "status": "HOLD: no universal source/binary/dispatch compatibility claim; explicit negative witnesses retained",
+      "target_rule": "Keep the current published self-if-assignable result, null mismatch, and null-class rejection; this repair changes no Object declarations or bodies."
+    },
+    {
+      "recipe": "com.synexia.m3jdk.CollectionsContractRefinement20261017",
+      "recipe_datasets": [
+        "m3jdk21-object-vtable",
+        "m3jdk21-progress-doclint",
+        "m3jdk21-functional-doclint",
+        "m3jdk21-progress-scope-lint",
+        "m3jdk21-runtime-control"
+      ],
+      "canonical_recipe_repository": "hsoliwal/com.synexia",
+      "catalogue": "m3/runtime-integration/runtime-repair-20261018/CATALOGUE.tsv",
+      "receiving_baseline": "4b24824c3aa09d802121447f8970d442a855f064",
+      "phase_rule": "STRING phase unchanged; maintenance of already-published owners only",
+      "source": "Published M3jdk21 #1082 progress SPI and #1091 weighted-child cancellation successor",
+      "source_revision": "a5be05424262a3c7cd3ffb65e9de531be8921d98",
+      "target": "java.util.concurrent.ProgressMonitors",
+      "target_path": "src/java.base/share/classes/java/util/concurrent/ProgressMonitors.java",
+      "public_spi": "java.util.concurrent.ProgressMonitor",
+      "receiver_test": "test/jdk/java/lang/Object/M3MonitoredTemplateTest.java",
+      "status": "Existing target-owned API; documentation successor preserves executable bytecode; current-source custody checked through all five manifests",
+      "target_rule": "Borrowed monitor lifetime, thread-local binding, atomic supplier publication and local child cancellation stay unchanged. Eclipse bridge com.m3.collections.M3ProgressMonitor remains a separate published SPI."
+    },
+    {
+      "recipe": "com.synexia.m3jdk.CollectionsContractRefinement20261017",
+      "recipe_datasets": [
+        "m3jdk21-object-vtable",
+        "m3jdk21-progress-doclint",
+        "m3jdk21-functional-doclint",
+        "m3jdk21-progress-scope-lint",
+        "m3jdk21-runtime-control"
+      ],
+      "canonical_recipe_repository": "hsoliwal/com.synexia",
+      "catalogue": "m3/runtime-integration/runtime-repair-20261018/CATALOGUE.tsv",
+      "receiving_baseline": "4b24824c3aa09d802121447f8970d442a855f064",
+      "phase_rule": "STRING phase unchanged; maintenance of already-published owners only",
+      "source": "Published M3jdk21 #1091 monitored default-template tasks, using existing JDK executors",
+      "source_revision": "a5be05424262a3c7cd3ffb65e9de531be8921d98",
+      "target": "java.util.concurrent.MonitoredRunnable and MonitoredCallable",
+      "target_path": "src/java.base/share/classes/java/util/concurrent/MonitoredRunnable.java",
+      "related_target_path": "src/java.base/share/classes/java/util/concurrent/MonitoredCallable.java",
+      "receiver_test": "test/jdk/java/lang/Object/M3RuntimeCompatibilityHold.java",
+      "status": "Existing public names retained; ordinary dual Runnable/Callable source and frozen binary behavior have dedicated witnesses",
+      "target_rule": "Runnable.run remains void and Callable.call retains its result/checked-exception contract. No TaskStatus recast, duplicate Callable.progressMonitor default, new scheduler or mandatory client base class."
+    },
+    {
+      "recipe": "com.synexia.m3jdk.CollectionsContractRefinement20261017",
+      "recipe_datasets": [
+        "m3jdk21-object-vtable",
+        "m3jdk21-progress-doclint",
+        "m3jdk21-functional-doclint",
+        "m3jdk21-progress-scope-lint",
+        "m3jdk21-runtime-control"
+      ],
+      "canonical_recipe_repository": "hsoliwal/com.synexia",
+      "catalogue": "m3/runtime-integration/runtime-repair-20261018/CATALOGUE.tsv",
+      "receiving_baseline": "4b24824c3aa09d802121447f8970d442a855f064",
+      "phase_rule": "STRING phase unchanged; maintenance of already-published owners only",
+      "source": "Published M3jdk21 #1082 monitored function overloads under their existing JDK names",
+      "source_revision": "c8596a624ff7b15b3fe58cbf857eda0852b84402",
+      "target": "java.util.function.Consumer, Function and Supplier",
+      "target_path": "src/java.base/share/classes/java/util/function/Consumer.java",
+      "related_target_paths": [
+        "src/java.base/share/classes/java/util/function/Function.java",
+        "src/java.base/share/classes/java/util/function/Supplier.java"
+      ],
+      "receiver_test": "test/jdk/java/lang/Object/M3AdapterProgress.java",
+      "status": "Existing progress overloads receive Javadoc only; their original single abstract methods and executable bytecode are preserved",
+      "target_rule": "No client base class or SAM replacement; monitored overloads borrow their explicit monitor and restore the prior lexical binding."
+    },
+    {
+      "recipe": "com.synexia.m3jdk.CollectionsContractRefinement20261017",
+      "recipe_datasets": [
+        "m3jdk21-object-vtable",
+        "m3jdk21-progress-doclint",
+        "m3jdk21-functional-doclint",
+        "m3jdk21-progress-scope-lint",
+        "m3jdk21-runtime-control"
+      ],
+      "canonical_recipe_repository": "hsoliwal/com.synexia",
+      "catalogue": "m3/runtime-integration/runtime-repair-20261018/CATALOGUE.tsv",
+      "receiving_baseline": "4b24824c3aa09d802121447f8970d442a855f064",
+      "phase_rule": "STRING phase unchanged; maintenance of already-published owners only",
+      "source": "Existing OpenJDK HotSpot bootstrap vtable count; matched current published Object source",
+      "source_revision": "4b24824c3aa09d802121447f8970d442a855f064",
+      "source_git_blob": "ab29ec3524d40ff58d6ff3e6fe2c1123b3abc1dd",
+      "target": "ClassLoader::compute_Object_vtable",
+      "target_path": "src/hotspot/share/classfile/classLoader.cpp",
+      "source_license": "GPL-2.0-only",
+      "status": "Exact count repaired from five to six with the existing vtable consistency guard retained; full fastdebug image is a separate gate",
+      "target_rule": "No JNI symbol, object layout, native ownership or guard weakening. Bootstrap consistency does not establish Object API compatibility."
     }
   ],
   "imported_donor_sources": [],

@@ -1,0 +1,16 @@
+{
+  "schema": "M3_CURRENT_RUNTIME_RECIPE_PREPARATION_V1",
+  "result": "SEALED_INPUTS_ONLY",
+  "dataset": "m3jdk21-runtime-restore-07ba",
+  "baseline": "07ba6e383343d32c83cfdaf641387bbe72bf325d",
+  "earlier_delivery": "86528a90079b89a50b51ef13da08e7e70d468cb4",
+  "source_admission_sha256": "e921ec70d5a48e34f9f0a47f9f881b983c1efa62fe64b606c0883677478402a0",
+  "authorer_sha256": "994a26b157163a1d429d2e254ade7711d63911219e89a4ace16bb1fe38a3dcd1",
+  "recipe_owner": "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes",
+  "crate": "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017",
+  "candidate": "/workspace/scratch/2b4d1cb957a7/runtime-refinement/merged-recovery-20261018/preparation-v1/candidate-input",
+  "target_count": 31,
+  "production_sources": 14,
+  "receiving_files_written": false,
+  "new_gate_results": "NOT_RUN"
+}
