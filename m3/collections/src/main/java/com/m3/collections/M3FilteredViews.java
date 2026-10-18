@@ -214,6 +214,18 @@ public final class M3FilteredViews {
             while (iterator.hasNext()) last = iterator.next();
             return last;
         }
+
+        // Keep the reversed half-open/comparator view on the same live backing
+        // owner, but do not expose JDK's reverse wrapper as a mutable boundary.
+        @Override public SortedSet<E> reversed() {
+            return new SortedSetView<>(sorted.reversed(), predicate);
+        }
+
+        // SortedSet's Java 21 default removeFirst/removeLast inspect the
+        // collection before attempting removal. Empty strict read-only views
+        // must refuse mutations without invoking a user predicate.
+        @Override public E removeFirst() { throw readonly(); }
+        @Override public E removeLast() { throw readonly(); }
     }
 
     private static final class NavigableSetView<E> extends SortedSetView<E>
@@ -282,6 +294,9 @@ public final class M3FilteredViews {
         @Override public NavigableSet<E> descendingSet() {
             return new NavigableSetView<>(nav.descendingSet(), predicate);
         }
+        // Preserve NavigableSet's covariant sequenced return type and the
+        // same strict mutation refusal inherited from SortedSetView.
+        @Override public NavigableSet<E> reversed() { return descendingSet(); }
         @Override public Iterator<E> descendingIterator() {
             return filtered(nav.descendingSet().iterator(), predicate);
         }
