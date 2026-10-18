@@ -187,8 +187,8 @@
       "license": "Apache-2.0"
     },
     "src/test/java/com/synexia/rewrite/M3RX7CodecCapRecipeTest.java": {
-      "sha256": "aafd39e3c90ce09864d0e53036340f22d0685ce5c89eddb36e5a0db64b00092c",
-      "bytes": 28747,
+      "sha256": "9191c741cba30475723015ead3a342b55cf73f7c1294d3798dc0da683923c79b",
+      "bytes": 33314,
       "license": "Apache-2.0"
     }
   }

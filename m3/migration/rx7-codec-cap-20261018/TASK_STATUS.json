@@ -1,6 +1,6 @@
 {
   "schema": "M3_RX7_CODEC_CAP_TASK_STATUS_V1",
-  "observedUtc": "2026-10-18 05:28:54 UTC",
+  "observedUtc": "2026-10-18 05:47:15 UTC",
   "goalActive": true,
   "completeOriginalObjectivePreserved": true,
   "originalSpecificationSha256": "4855609bc3b6894d95991720375a36087e537c631a2ef4d59bc4d4be5e9f3e9d",
@@ -41,8 +41,8 @@
     "oversizedInputBytes": 67108865
   },
   "execution": {
-    "maven": "NOT_RUN",
-    "strictCompiler": "NOT_RUN",
+    "maven": "NOT_RUN_CORRECTED_CANDIDATE",
+    "strictCompiler": "NOT_RUN_CORRECTED_CANDIDATE",
     "baselineCloneOom": "NOT_RUN",
     "candidate96MiB": "NOT_RUN",
     "formalAutoreviewHelper": "NOT_RUN_STORAGE_HOLD"
@@ -50,11 +50,64 @@
   "runtimeApplied": false,
   "phaseAdvanced": false,
   "fullMigrationComplete": false,
-  "sdkTree": "fdb50b042a35497790ccdc97132eb898c24f171b",
+  "sdkTree": "b933056d76cf58c94182e429526c297de3bc5a0c",
   "sdkFiles": 35,
-  "sdkBytes": 283404,
-  "pinsSha256": "623dee778ec674b669a12cb5930821db40f84abd92f1d2e8321005f5a71a7f9b",
-  "sourceReview": "TWO_INDEPENDENT_BOUNDED_REVIEWS; TWO_FINDINGS_FIXED; NO_ADDITIONAL_SOURCE_BLOCKER",
-  "canonicalSourceCommit": "32ecf17ddba26ae29a29de5996cf709fc65c7512",
+  "sdkBytes": 287971,
+  "pinsSha256": "74f71cc907568805a9a108713caaaf22cd0529948445af6c70366680b972a9bf",
+  "sourceReview": "INDEPENDENT_SOURCE_REVIEW_CLEAR; CORRECTED_CANDIDATE_EXECUTION_PENDING",
+  "previousAttempt": {
+    "sourceCommit": "32ecf17ddba26ae29a29de5996cf709fc65c7512",
+    "receiverCommit": "5b3bbdbcda747839e407cbd111a541f62e070063",
+    "sdkTree": "fdb50b042a35497790ccdc97132eb898c24f171b",
+    "run": 39100818657,
+    "job": 117596539931,
+    "conclusion": "FAILURE",
+    "storagePreflight": "PASS",
+    "exactCheckout": "PASS",
+    "java21Enforcer": "PASS",
+    "mainCompile": "PASS_4_SOURCES",
+    "testCompile": "PASS_1_SOURCE",
+    "junit": {
+      "tests": 3,
+      "failures": 1,
+      "errors": 2,
+      "skipped": 0
+    },
+    "causes": [
+      "Full marker equality rejected the legitimate RecipesThatMadeChanges marker added by Recipe.run",
+      "Ambient scanClassLoader did not discover the four pinned named YAML descriptors"
+    ],
+    "sourceExport": "NOT_REACHED",
+    "strictSourceCompiler": "NOT_REACHED",
+    "baselineCloneOom": "NOT_REACHED",
+    "candidate96MiB": "NOT_REACHED",
+    "artifact": {
+      "id": 12126885722,
+      "zipBytes": 16419,
+      "expandedBytes": 14593,
+      "members": 14,
+      "sha256": "62bf1fe0d797a2b0ddd9e0f044c2c6362e8a9c9d3e7cf8425c112501bad83a71",
+      "mavenLogSha256": "65029af9e14ef765649f1d3d394fc8dc5a88059793ae7ca0d16ae03652f0de6c",
+      "receiptSha256": "cb9d52d97e289455bad1feb3cb47cc40f91d8274602ae36fd5e5ce0cfb28931c",
+      "readback": "RAM_ONLY_HASH_AND_SAFE_MEMBERS_VERIFIED"
+    },
+    "supervision": {
+      "observedCommands": 11,
+      "reaped": 11,
+      "originalGroupsAbsent": 11,
+      "terminationRequests": 0,
+      "mavenExit": 1
+    },
+    "sourceProvenance": {
+      "run": 39100739151,
+      "job": 117596315389,
+      "conclusion": "FAILURE",
+      "executedSteps": null,
+      "cause": "UNKNOWN_LOG_UNAVAILABLE"
+    },
+    "runtimeApplied": false,
+    "phaseAdvanced": false
+  },
+  "canonicalSourceCommit": "20171dc109a1ad8a34d5cde16f33456f498e6f31",
   "receivingScope": "SDK_AND_EXISTING_CONTROL_PLANE_ONLY; PRODUCTION_CODEC_AND_ADDITIVE_TEST_NOT_APPLIED"
 }

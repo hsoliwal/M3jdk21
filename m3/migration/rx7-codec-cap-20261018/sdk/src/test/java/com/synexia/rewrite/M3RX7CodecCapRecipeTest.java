@@ -8,6 +8,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.io.StringWriter;
 import java.lang.reflect.InvocationTargetException;
+import java.net.URI;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.nio.charset.StandardCharsets;
@@ -21,6 +22,7 @@ import java.util.Collections;
 import java.util.HexFormat;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 import java.util.Set;
 import java.util.TreeMap;
 import javax.tools.DiagnosticCollector;
@@ -29,6 +31,10 @@ import javax.tools.ToolProvider;
 import org.junit.jupiter.api.Test;
 import org.openrewrite.InMemoryExecutionContext;
 import org.openrewrite.config.Environment;
+import org.openrewrite.config.YamlResourceLoader;
+import org.openrewrite.marker.BuildTool;
+import org.openrewrite.marker.Marker;
+import org.openrewrite.marker.RecipesThatMadeChanges;
 import org.openrewrite.Parser;
 import org.openrewrite.RecipeRun;
 import org.openrewrite.SourceFile;
@@ -51,8 +57,7 @@ final class M3RX7CodecCapRecipeTest {
 
     @Test
     void activatesNamedForwardAndInverseDescriptors() {
-        Environment environment = Environment.builder()
-                .scanClassLoader(M3RX7CodecCapRecipeTest.class.getClassLoader()).build();
+        Environment environment = recipeEnvironment();
         for (String name : List.of("com.synexia.m3.RX7CodecCap20261018",
                 "com.synexia.m3.RX7CodecCap20261018Inverse")) {
             var activated = environment.activateRecipes(name);
@@ -158,8 +163,7 @@ final class M3RX7CodecCapRecipeTest {
                 textResource(forward, "workflow.yml.txt"),
                 "m3/runtime-integration/check-m3rx7-v7-image-codec.sh",
                 textResource(forward, "launcher.sh.txt"));
-        Environment environment = Environment.builder()
-                .scanClassLoader(M3RX7CodecCapRecipeTest.class.getClassLoader()).build();
+        Environment environment = recipeEnvironment();
         for (String name : List.of("com.synexia.m3.RX7CodecCapLauncher20261018",
                 "com.synexia.m3.RX7CodecCapLauncher20261018Inverse")) {
             var named = environment.activateRecipes(name).getRecipeList().getFirst();
@@ -247,7 +251,10 @@ final class M3RX7CodecCapRecipeTest {
             assertTrue(input.containsKey(path));
             assertEquals(change.getBefore().getId(), change.getAfter().getId());
             assertEquals(change.getBefore().getSourcePath(), change.getAfter().getSourcePath());
-            assertEquals(change.getBefore().getMarkers(), change.getAfter().getMarkers());
+            assertMarkersPreserved(change.getBefore(), change.getAfter(),
+                    M3HashPinnedTextSnapshotRecipe.class);
+            assertSameIdMarkerDriftRefused(change.getBefore(), change.getAfter(),
+                    M3HashPinnedTextSnapshotRecipe.class);
             assertEquals(change.getBefore().getFileAttributes(), change.getAfter().getFileAttributes());
             assertEquals(change.getBefore().getCharset(), change.getAfter().getCharset());
             assertEquals(change.getBefore().isCharsetBomMarked(), change.getAfter().isCharsetBomMarked());
@@ -259,8 +266,8 @@ final class M3RX7CodecCapRecipeTest {
     private static List<SourceFile> textSources(Map<String, String> texts, boolean reversed) {
         List<SourceFile> sources = new ArrayList<>();
         for (var entry : new TreeMap<>(texts).entrySet()) {
-            sources.add(PlainText.builder().sourcePath(Path.of(entry.getKey()))
-                    .text(entry.getValue()).build());
+            sources.add(withCustodyMarker(PlainText.builder()
+                    .sourcePath(Path.of(entry.getKey())).text(entry.getValue()).build()));
         }
         if (reversed) Collections.reverse(sources);
         return sources;
@@ -278,6 +285,71 @@ final class M3RX7CodecCapRecipeTest {
             assertNotNull(stream, file);
             return new String(stream.readAllBytes(), StandardCharsets.UTF_8);
         }
+    }
+
+    private static Environment recipeEnvironment() {
+        Environment.Builder builder = Environment.builder();
+        ClassLoader loader = M3RX7CodecCapRecipeTest.class.getClassLoader();
+        for (String name : List.of(
+                "m3-rx7-codec-cap-20261018.yml",
+                "m3-rx7-codec-cap-20261018-inverse.yml",
+                "m3-rx7-codec-cap-launcher-20261018.yml",
+                "m3-rx7-codec-cap-launcher-20261018-inverse.yml")) {
+            String path = "/META-INF/rewrite/" + name;
+            try (var stream = M3RX7CodecCapRecipeTest.class.getResourceAsStream(path)) {
+                assertNotNull(stream, "exact classpath descriptor required: " + path);
+                builder.load(new YamlResourceLoader(stream, URI.create("classpath:" + path),
+                        new Properties(), loader));
+            } catch (java.io.IOException failure) {
+                throw new AssertionError("cannot close descriptor input: " + path, failure);
+            }
+        }
+        return builder.build();
+    }
+
+    private static SourceFile withCustodyMarker(SourceFile source) {
+        // BuildTool is an existing non-printing marker. Seed nonempty metadata so that
+        // preservation cannot pass vacuously when Recipe.run adds its own bookkeeping.
+        return source.withMarkers(source.getMarkers().add(
+                new BuildTool(java.util.UUID.randomUUID(), BuildTool.Type.Maven, "custody-21")));
+    }
+
+    private static void assertMarkersPreserved(SourceFile before, SourceFile after,
+            Class<?> recipeType) {
+        assertEquals(before.getMarkers().getId(), after.getMarkers().getId(),
+                "original marker container identity");
+        List<Marker> original = before.getMarkers().getMarkers().stream()
+                .filter(marker -> marker.getClass() != RecipesThatMadeChanges.class).toList();
+        List<Marker> retained = after.getMarkers().getMarkers().stream()
+                .filter(marker -> marker.getClass() != RecipesThatMadeChanges.class).toList();
+        assertFalse(original.isEmpty(), "nonempty input custody marker required");
+        assertEquals(original.size(), retained.size(), "no semantic marker loss or addition");
+        for (int index = 0; index < original.size(); index++) {
+            assertSame(original.get(index), retained.get(index),
+                    "all original marker values and order must remain exact");
+        }
+        var bookkeeping = after.getMarkers().getMarkers().stream()
+                .filter(marker -> marker.getClass() == RecipesThatMadeChanges.class)
+                .map(RecipesThatMadeChanges.class::cast).toList();
+        assertEquals(1, bookkeeping.size(), "only one framework change-history marker");
+        var history = bookkeeping.getFirst().getRecipes();
+        assertFalse(history.isEmpty(), "actual Recipe.run change history required");
+        assertTrue(history.stream().allMatch(stack -> stack.stream().anyMatch(recipeType::isInstance)),
+                "change history must identify the actual owning snapshot recipe");
+    }
+
+    private static void assertSameIdMarkerDriftRefused(SourceFile before, SourceFile after,
+            Class<?> recipeType) {
+        BuildTool original = before.getMarkers().findFirst(BuildTool.class).orElseThrow();
+        BuildTool forged = original.withVersion("deliberate-custody-payload-drift");
+        assertEquals(original.getId(), forged.getId(), "negative control keeps the marker UUID");
+        List<Marker> markers = after.getMarkers().getMarkers().stream()
+                .map(marker -> marker == original ? forged : marker).toList();
+        SourceFile changed = after.withMarkers(after.getMarkers().withMarkers(markers));
+        AssertionError refusal = assertThrows(AssertionError.class,
+                () -> assertMarkersPreserved(before, changed, recipeType));
+        assertTrue(refusal.getMessage().contains("all original marker values and order"),
+                "same-UUID marker payload drift must be the rejected condition");
     }
 
     private static void assertManifest(String crate, Map<String, String> before,
@@ -328,7 +400,10 @@ final class M3RX7CodecCapRecipeTest {
             if (result.getBefore() != null) {
                 assertEquals(result.getBefore().getId(), result.getAfter().getId());
                 assertEquals(result.getBefore().getSourcePath(), result.getAfter().getSourcePath());
-                assertEquals(result.getBefore().getMarkers(), result.getAfter().getMarkers());
+                assertMarkersPreserved(result.getBefore(), result.getAfter(),
+                        M3HashPinnedJavaSnapshotRecipe.class);
+                assertSameIdMarkerDriftRefused(result.getBefore(), result.getAfter(),
+                        M3HashPinnedJavaSnapshotRecipe.class);
                 assertEquals(result.getBefore().getFileAttributes(), result.getAfter().getFileAttributes());
                 assertEquals(result.getBefore().getCharset(), result.getAfter().getCharset());
                 assertEquals(result.getBefore().isCharsetBomMarked(), result.getAfter().isCharsetBomMarked());
@@ -395,6 +470,7 @@ final class M3RX7CodecCapRecipeTest {
                 Parser.Input.fromString(Path.of(entry.getKey()), entry.getValue())).toList();
         List<SourceFile> parsed = new ArrayList<>(JavaParser.fromJavaVersion()
                 .classpath(List.<Path>of()).build().parseInputs(inputs, null, context).toList());
+        parsed.replaceAll(M3RX7CodecCapRecipeTest::withCustodyMarker);
         Map<String, String> printed = new TreeMap<>();
         for (SourceFile source : parsed) {
             assertTrue(source instanceof J.CompilationUnit);
