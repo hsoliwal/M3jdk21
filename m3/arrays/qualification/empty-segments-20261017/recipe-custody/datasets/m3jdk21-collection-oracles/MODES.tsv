@@ -1,0 +1,6 @@
+m3/collections/algorithm-catalog/collection-oracle-repair-20261018.tsv	0644
+m3/collections/qualification/oracle-repair-20261018/CATALOGUE.json	0644
+m3/collections/qualification/oracle-repair-20261018/README.md	0644
+m3/collections/qualification/oracle-repair-20261018/src/test/java/CollectionOracleWitness.java	0644
+m3/collections/src/test/java/com/m3/collections/M3LongTreeSetTest.java	0644
+m3/collections/src/test/java/com/m3/collections/M3StoredRepresentativeContract.java	0644

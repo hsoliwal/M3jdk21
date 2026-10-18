@@ -219,7 +219,17 @@ public final class M3StoredRepresentativeContract {
         Collection<Key> projected = M3FilteredViews.filter(duplicates, Key::keep);
         yes(projected.contains(new Key("same", false)),
                 "Collection contains if any stored equals member is visible");
-        duplicates.remove(visible);
+        // remove(Object) would remove the earlier hidden, equals-equal member.
+        // Select the visible reference explicitly while keeping the Collection overload.
+        var cursor = duplicates.iterator();
+        while (cursor.hasNext()) {
+            if (cursor.next() == visible) {
+                cursor.remove();
+                break;
+            }
+        }
+        eq(1, duplicates.size(), "only the selected visible reference is removed");
+        yes(duplicates.iterator().next() == hidden, "hidden equals-equal reference remains");
         no(projected.contains(new Key("same", true)), "last visible equals member removed");
     }
 

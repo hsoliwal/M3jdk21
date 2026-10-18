@@ -1,0 +1,16 @@
+{
+  "command": [
+    "python3",
+    "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/receive.py",
+    "--crate",
+    "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017",
+    "--target",
+    "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/receiver/m3jdk21",
+    "--dataset",
+    "m3jdk21-progress-percent",
+    "--recipe-owner",
+    "/workspace/scratch/2b4d1cb957a7/canonical-recovery/source/synexia-openrewrite-recipes"
+  ],
+  "exit": 0,
+  "seconds": 0.061209
+}

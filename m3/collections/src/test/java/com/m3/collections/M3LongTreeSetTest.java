@@ -155,12 +155,15 @@ final class M3LongTreeSetTest {
     @Test
     void growthSplitsPagesAndRemovalMergesAndTrimsThem() {
         M3LongTreeSet set = new M3LongTreeSet();
+        TreeSet<Long> expected = new TreeSet<>();
         assertEquals(64, set.capacity());
         for (long i = 1; i <= 100_000; i++) {
             assertTrue(set.add(i * 7));
+            assertTrue(expected.add(i * 7));
         }
         for (long i = 1; i <= 100_000; i++) {
             assertTrue(set.add(-i * 7));
+            assertTrue(expected.add(-i * 7));
         }
         assertEquals(200_000, set.size());
         int pages = set.pageCount();
@@ -170,7 +173,9 @@ final class M3LongTreeSetTest {
         for (long i = 1; i <= 100_000; i++) {
             if (i % 3 != 0) {
                 assertTrue(set.remove(i * 7));
+                assertTrue(expected.remove(i * 7));
                 assertTrue(set.remove(-i * 7));
+                assertTrue(expected.remove(-i * 7));
             }
         }
         assertEquals(66_666, set.size());
@@ -178,9 +183,9 @@ final class M3LongTreeSetTest {
         assertEquals(66_666, survivors.length);
         assertEquals(-699_993L, survivors[0]);
         assertEquals(699_993L, survivors[survivors.length - 1]);
-        for (int i = 1; i < survivors.length; i++) {
-            assertEquals(survivors[i - 1] + 21L, survivors[i]);
-        }
+        // Zero was never inserted: the central ordered pair is -21, 21.
+        assertArrayEquals(order(expected), survivors);
+        assertFalse(set.contains(0L));
         assertEquals(-699_993L, set.first());
         assertEquals(699_993L, set.last());
         assertTrue(set.pageCount() < pages / 2, "pages after merges " + set.pageCount());
@@ -261,7 +266,9 @@ final class M3LongTreeSetTest {
         for (long i = 1; i <= 10; i++) {
             assertTrue(set.add(i));
         }
-        assertEquals(3, set.pageCount());
+        // Insert-only half splits keep these pages between half full and full.
+        assertTrue((long) set.pageCount() * set.pageCapacity() >= set.size());
+        assertTrue((long) set.pageCount() * (set.pageCapacity() / 2) <= set.size());
         RuntimeException boom = new RuntimeException("boom");
         RuntimeException thrown = assertThrows(RuntimeException.class, () -> set.filterInPlace(v -> {
             if (v == 7) {
@@ -295,8 +302,10 @@ final class M3LongTreeSetTest {
         M3LongSortedSet sub = M3LongSortedViews.subSet(actual, -50, 50);
         NavigableSet<Long> jdk = expected.subSet(-50L, true, 50L, false);
         assertArrayEquals(order(jdk), sub.toArray());
-        assertTrue(sub.add(7));
-        assertTrue(jdk.add(7L));
+        assertFalse(sub.add(7));
+        assertFalse(jdk.add(7L));
+        assertTrue(sub.add(8));
+        assertTrue(jdk.add(8L));
         assertThrows(IllegalArgumentException.class, () -> sub.add(500));
         assertTrue(sub.remove(-50));
         assertTrue(jdk.remove(-50L));
