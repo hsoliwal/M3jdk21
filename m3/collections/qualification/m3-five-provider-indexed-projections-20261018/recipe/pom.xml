@@ -8,6 +8,9 @@
  <properties><maven.compiler.release>21</maven.compiler.release><project.build.sourceEncoding>UTF-8</project.build.sourceEncoding></properties>
  <dependencies>
   <dependency><groupId>org.openrewrite</groupId><artifactId>rewrite-core</artifactId><version>8.17.1</version></dependency>
+  <!-- Restore the public JetBrains @Language annotation referenced by OpenRewrite metadata.
+       Required for strict javac -Werror; do not suppress the diagnostic. -->
+  <dependency><groupId>org.jetbrains</groupId><artifactId>annotations</artifactId><version>24.1.0</version></dependency>
   <dependency><groupId>org.junit.jupiter</groupId><artifactId>junit-jupiter</artifactId><version>5.10.2</version><scope>test</scope></dependency>
  </dependencies>
  <build><plugins>
