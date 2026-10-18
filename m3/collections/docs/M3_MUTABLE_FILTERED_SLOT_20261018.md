@@ -25,6 +25,12 @@ stored map-entry or tree-node object.
   underlying filter/skip/advance path uses only physical integer slots
   and retains no entries. Structural drift is detected through the
   owner's modification epoch; the iterator's own deletion refreshes it.
+- Key-only neighbor operations (`lowerKey`, `floorKey`,
+  `ceilingKey`, `higherKey`, `firstKey`, `lastKey`) use the
+  M3TreeMap AVL neighbor slots and never create `Map.Entry` objects.
+  Entry-returning neighbors and polls materialize exactly one detached
+  `SimpleImmutableEntry` at the explicit API boundary; filtering
+  hidden candidate slots allocates no intermediate entry.
 - `putAll` continues full input validation before any write, using
   two call-local dynamic reference arrays. Comparator representative
   tracking uses an existing array-backed `M3TreeMap<K,K>`, not a
@@ -54,7 +60,7 @@ installed-image and allocation evidence are **not yet claimed**.
 Recipe/crate in the Synexia convergence workspace:
 `com.synexia.m3.Jdk21MutableFilteredSlot20261018` using
 `M3HashPinnedJavaSnapshotRecipe`, with SHA-256 pre/post manifests for
-the changed source and the two added test sources. The catalogue is
+the changed source, the M3TreeMap neighbor slot owner and the two added test sources and the existing M3TreeMap neighbor slot atoms. The catalogue is
 `synexia-openrewrite-recipes/catalogs/m3jdk21-mutable-filtered-slot-20261018.tsv`.
 Competitive-programming sites are problem-category references only;
 no third-party code has been copied.
