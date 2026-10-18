@@ -6,4 +6,4 @@ source-ordinal-mask	M3JDK21 M3LongStateArray + M3IndexPathMasks existing int fla
 sorting	LeetCode 912 Sort an Array	problem_category	REFERENCE_ONLY	Compare complexities; do not copy challenge source
 stable-counting-sort	HackerRank Full Counting Sort	problem_category	REFERENCE_ONLY	Stable key payload pair ordering; no donor code copied
 radix-sort	GeeksforGeeks Radix Sort	problem_category	REFERENCE_ONLY	Stable digit pass taxonomy; no donor code copied
-counting-sort	TheAlgorithms/Java CountingSort Apache-2.0	donor_reference	REFERENCE_ONLY	Bounded key-range alternative not appropriate for arbitrary IEEE doubles
+counting-sort	TheAlgorithms/Java CountingSort MIT (master@8dbdc51edea193d103fe212c897f1a84ae479ce6)	donor_reference	REFERENCE_ONLY	Bounded key-range alternative not appropriate for arbitrary IEEE doubles
