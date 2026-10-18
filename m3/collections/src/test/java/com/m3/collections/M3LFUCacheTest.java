@@ -28,12 +28,13 @@ final class M3LFUCacheTest {
         assertEquals(2, cache.size());
         assertEquals(2, cache.capacity());
         assertSame(frequent, cache.get(1, 7));
+        assertNull(cache.get(1, 8), "a different map revision must never reuse an old facade");
         assertNull(cache.get(2, 7));
         assertSame(newest, cache.get(3, 7));
     }
 
     @Test
-    void nullKeysAndRemovalKeepProbeChainsValid() {
+    void slotRemovalKeepsProbeChainsAndReleasesFacadeReferences() {
         M3LFUCache<Object> cache = new M3LFUCache<>(3);
         Object nullKeyValue = new Object();
         Object alpha = new Object();
