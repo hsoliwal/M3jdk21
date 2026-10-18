@@ -25,8 +25,9 @@ work="$(mktemp -d)"
 trap 'rm -rf "$work"' EXIT
 mkdir -p "$work/classes"
 
-"$javac" --release 21 -Xlint:all -Werror -d "$work/classes"   m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java   m3/collections/src/main/java/com/m3/collections/M3SignalOrder.java   m3/collections/src/main/java/com/m3/collections/M3SignalOrderNative.java   m3/collections/src/main/java/com/m3/collections/M3SignalDimensions.java   m3/collections/src/test/java/com/m3/collections/M3RequiredExcludedMaskSelectorContract.java   m3/collections/src/test/java/com/m3/collections/M3RequiredExcludedMaskSelectorNativeContract.java
+"$javac" --release 21 -Xlint:all -Werror -d "$work/classes"   m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java   m3/collections/src/main/java/com/m3/collections/M3SignalOrder.java   m3/collections/src/main/java/com/m3/collections/M3SignalOrderNative.java   m3/collections/src/main/java/com/m3/collections/M3SignalDimensions.java   m3/collections/src/test/java/com/m3/collections/M3SignalDimensionsContract.java   m3/collections/src/test/java/com/m3/collections/M3RequiredExcludedMaskSelectorContract.java   m3/collections/src/test/java/com/m3/collections/M3RequiredExcludedMaskSelectorNativeContract.java
 
+"$java" -Xmx64m -cp "$work/classes"   com.m3.collections.M3SignalDimensionsContract
 "$java" -Xmx64m -cp "$work/classes"   com.m3.collections.M3RequiredExcludedMaskSelectorContract
 
 gcc -std=c17 -fPIC -shared -Wall -Wextra -Werror   -fsanitize=undefined -fno-sanitize-recover=all   -I"$jdk/include" -I"$jdk/include/linux"   m3/collections/src/main/native/collections/m3_index_mask_compactor.c   -o "$work/libm3_collections_mask.so"
