@@ -78,6 +78,16 @@ public final class M3ObjectStream<T> {
         return new M3ObjectStream<>(snapshot::stream, true);
     }
 
+    /** Compose two plans in encounter order without materializing either source. */
+    public static <T> M3ObjectStream<T> concat(
+            M3ObjectStream<? extends T> first, M3ObjectStream<? extends T> second) {
+        Objects.requireNonNull(first, "first");
+        Objects.requireNonNull(second, "second");
+        return new M3ObjectStream<>(
+                () -> Stream.concat(first.stream(), second.stream()),
+                first.replayable && second.replayable);
+    }
+
     /** Traverse a live collection on every evaluation; the source owns concurrent-modification semantics. */
     public static <T> M3ObjectStream<T> live(Collection<T> source) {
         Objects.requireNonNull(source, "source");
@@ -173,6 +183,25 @@ public final class M3ObjectStream<T> {
                 if (seen.contains(value)) return false;
                 if (seen.size() >= maxDistinct) throw new IllegalStateException("distinct key budget exceeded");
                 seen.add(value);
+                return true;
+            });
+        });
+    }
+
+    /** Stable first-key distinctness with a hard bound on unique extracted keys. */
+    public <K> M3ObjectStream<T> distinctBy(
+            Function<? super T, ? extends K> keyExtractor, int maxDistinct) {
+        Objects.requireNonNull(keyExtractor, "keyExtractor");
+        requireNonNegative(maxDistinct, "maxDistinct");
+        return stage(s -> {
+            Set<K> seen = new HashSet<>();
+            return s.filter(value -> {
+                K key = keyExtractor.apply(value);
+                if (seen.contains(key)) return false;
+                if (seen.size() >= maxDistinct) {
+                    throw new IllegalStateException("distinct key budget exceeded");
+                }
+                seen.add(key);
                 return true;
             });
         });
@@ -402,6 +431,32 @@ public final class M3ObjectStream<T> {
             while (iterator.hasNext()) { iterator.next(); count = Math.addExact(count, 1L); }
             return count;
         }
+    }
+
+    /** One-pass stable partition with a hard bound on the total number of retained elements. */
+    public Map<Boolean, List<T>> partitionBy(
+            Predicate<? super T> predicate, int maxElements) {
+        Objects.requireNonNull(predicate, "predicate");
+        requireNonNegative(maxElements, "maxElements");
+        List<T> rejected = new ArrayList<>();
+        List<T> accepted = new ArrayList<>();
+        int seen = 0;
+        try (Stream<T> input = stream()) {
+            Iterator<T> iterator = input.iterator();
+            while (iterator.hasNext()) {
+                if (seen >= maxElements) {
+                    throw new IllegalStateException("partition element budget exceeded");
+                }
+                T value = iterator.next();
+                seen++;
+                if (predicate.test(value)) accepted.add(value);
+                else rejected.add(value);
+            }
+        }
+        LinkedHashMap<Boolean, List<T>> result = new LinkedHashMap<>();
+        result.put(Boolean.FALSE, Collections.unmodifiableList(rejected));
+        result.put(Boolean.TRUE, Collections.unmodifiableList(accepted));
+        return Collections.unmodifiableMap(result);
     }
 
     /** JDK-compatible first element terminal; a null first element is rejected by Optional semantics. */
