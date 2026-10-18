@@ -59,7 +59,7 @@ final class M3NoRetainedStructuralEntryTest {
     }
 
     @Test
-    void returnedMapEntriesAreFreshAndNeverRetainedByPackedMapStorage() {
+    void apiEntryFacadesAreCachedButNeverStoredInPackedMapLanes() {
         var hash = new M3LinkedHashMap<Integer, Integer>();
         hash.put(1, 10);
         hash.put(2, 20);
@@ -95,8 +95,8 @@ final class M3NoRetainedStructuralEntryTest {
         assertEquals(11, hash.get(hashEntry.getKey()));
         assertEquals(11, tree.get(treeEntry.getKey()));
 
-        assertFreshBurst(hash::firstEntry, "hash firstEntry");
-        assertFreshBurst(tree::firstEntry, "tree firstEntry");
+        assertCachedBurst(hash::firstEntry, "hash firstEntry immutable snapshot");
+        assertCachedBurst(tree::firstEntry, "tree firstEntry immutable snapshot");
         assertCachedBurst(
                 () -> hash.entrySet().iterator().next(),
                 "hash entrySet iterator projection");
