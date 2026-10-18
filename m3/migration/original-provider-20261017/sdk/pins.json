@@ -11,8 +11,8 @@
   "targets": [
     {
       "path": ".github/workflows/m3-original-mapping-provider-qualification.yml",
-      "before": "ABSENT",
-      "after": "faf6a553557508404de8b644ae7ff17ffaf45c74d5b0cb6f3df86c583a0b2bc0",
+      "before": "faf6a553557508404de8b644ae7ff17ffaf45c74d5b0cb6f3df86c583a0b2bc0",
+      "after": "7e8b57c875190675ccf2312c4041b8e1d151b87d27b3d9542627066b5fab3af4",
       "resource": "after-000.txt"
     },
     {
@@ -371,7 +371,7 @@
     }
   ],
   "expectedExecution": {
-    "sdkMethods": 10,
+    "sdkMethods": 11,
     "mutableStates": 64,
     "sourceOrders": 2,
     "stdlibBoundaryMethods": 38,
@@ -379,16 +379,13 @@
     "originalCliReadPaths": 50,
     "originalCliHashObligations": 80,
     "completionBlockers": 158,
-    "allExecution": "NOT_RUN_AT_PUBLICATION",
-    "custodyNegativeControls": 22
+    "allExecution": "NOT_RUN_AT_SUCCESSOR_PUBLICATION",
+    "custodyNegativeControls": 28,
+    "frozenPreFiles": 55,
+    "frozenPreBytes": 795620,
+    "frozenPreBeforeAndAfterProvider": true
   },
   "files": [
-    {
-      "path": "THIRD_PARTY_NOTICES.md",
-      "gitBlob": "607abb25d11aef09154f28a07d07355ca5c0a558",
-      "sha256": "765fea6288e244b8ba1ec0d7e851aeeaba74cd3b55186667dae8057688119977",
-      "bytes": 1477
-    },
     {
       "path": "licenses/ADDITIONAL_LICENSE_INFO",
       "gitBlob": "ff700cd09f6ea0cc497f68169fd5c210bdaa7c2b",
@@ -409,9 +406,9 @@
     },
     {
       "path": "pom.xml",
-      "gitBlob": "344fd4e38d166366039ea0f0235c07c0bc7c7beb",
-      "sha256": "3b19535312253aa518dae9e86dc87a529f63c5b8539419606e409ff42f529432",
-      "bytes": 2806
+      "gitBlob": "bb4994b86272405a0de2a30ad55509548cd1a2ff",
+      "sha256": "f3f2a72dbe469776766a02184b59702b55917b5f8a1b397d0aa615f342678ae8",
+      "bytes": 2986
     },
     {
       "path": "src/main/java/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
@@ -420,16 +417,10 @@
       "bytes": 12355
     },
     {
-      "path": "src/main/resources/META-INF/rewrite/m3-original-mapping-provider-20261017.yml",
-      "gitBlob": "1400939e88bc2b9c16f6ddfb301df70ba2a63073",
-      "sha256": "da4f0f273a351a4397ddae750d4deee1502cb90f7fe3cad9f9e3ad0ff66aa15e",
-      "bytes": 503
-    },
-    {
       "path": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-original-mapping-provider-20261017/after-000.txt",
-      "gitBlob": "f04b6bfc76e5a671968a478f44cf13268c04e5e9",
-      "sha256": "faf6a553557508404de8b644ae7ff17ffaf45c74d5b0cb6f3df86c583a0b2bc0",
-      "bytes": 34558
+      "gitBlob": "8702ae33a2cee6760b2c19dc2be1818e6c3cae42",
+      "sha256": "7e8b57c875190675ccf2312c4041b8e1d151b87d27b3d9542627066b5fab3af4",
+      "bytes": 35958
     },
     {
       "path": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-original-mapping-provider-20261017/after-001.txt",
@@ -786,6 +777,18 @@
       "bytes": 1021
     },
     {
+      "path": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-original-mapping-provider-20261017/baseline-pre.tsv",
+      "gitBlob": "101454339b1f90bff27bdc62f255b83252f47295",
+      "sha256": "11d69c05d4e4dd0ef27c8a2195827c62b5dd48a49bef34943f4c6a11fbc4899c",
+      "bytes": 7605
+    },
+    {
+      "path": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-original-mapping-provider-20261017/before-after-000.txt",
+      "gitBlob": "f04b6bfc76e5a671968a478f44cf13268c04e5e9",
+      "sha256": "faf6a553557508404de8b644ae7ff17ffaf45c74d5b0cb6f3df86c583a0b2bc0",
+      "bytes": 34558
+    },
+    {
       "path": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-original-mapping-provider-20261017/before-after-009.txt",
       "gitBlob": "4f5911d625090913d85f9cf41b1ead1694dffade",
       "sha256": "4247c5648cf6a5599f8840a7171f147f5c343bf9b97e7a386eb7f351f978c4f3",
@@ -793,21 +796,53 @@
     },
     {
       "path": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-original-mapping-provider-20261017/manifest.tsv",
-      "gitBlob": "0f19af2488cd099a71957330a2898a09d880df29",
-      "sha256": "8b168c5da07b47b83a4618efacabae8323a8476b457001fa20e39d7dab77944d",
-      "bytes": 11923
+      "gitBlob": "5ba393d941b06bb611eb3dd7091eb487ec212acf",
+      "sha256": "875e48cb8bba1bc4da167698341b71ad94a554b8d114a47b621a5640bada9347",
+      "bytes": 11981
+    },
+    {
+      "path": "src/main/resources/META-INF/rewrite/m3-original-mapping-provider-20261017.yml",
+      "gitBlob": "1400939e88bc2b9c16f6ddfb301df70ba2a63073",
+      "sha256": "da4f0f273a351a4397ddae750d4deee1502cb90f7fe3cad9f9e3ad0ff66aa15e",
+      "bytes": 503
     },
     {
       "path": "src/test/java/com/m3/rewrite/backport/M3OriginalCliProviderRecipeTest.java",
-      "gitBlob": "d967dd7abe1acc2b1df5a92fdd909f145288da18",
-      "sha256": "0724e16491c2cd7a67c9258a4822b04f5eb88e9596a5cbacd84dcbdce635e59b",
-      "bytes": 30136
+      "gitBlob": "bcecfb41dab431a061c8789ff99692a68903ef4b",
+      "sha256": "d84776dda077b6f14d98885cb2687f8c69f0bf4ab1d34cb3e735b0b935dd355d",
+      "bytes": 44081
+    },
+    {
+      "path": "THIRD_PARTY_NOTICES.md",
+      "gitBlob": "607abb25d11aef09154f28a07d07355ca5c0a558",
+      "sha256": "765fea6288e244b8ba1ec0d7e851aeeaba74cd3b55186667dae8057688119977",
+      "bytes": 1477
     },
     {
       "path": "verify.py",
-      "gitBlob": "43c9c6e70742d7623a86229cf950a50b029db598",
-      "sha256": "25101c50d4158ff007c792c61222405b1b2246e9281daf9095d92cfbd0768759",
-      "bytes": 15431
+      "gitBlob": "bc28a0831873d696f7195b2ed7dcdeecdfba9b83",
+      "sha256": "218f7ff9eefcc066eda0c1f7330bda1cb29007a908f265979d710f8321034179",
+      "bytes": 21133
     }
-  ]
+  ],
+  "baselineProjectionSuccessor": {
+    "sourceBase": "f9ea13751c1c7e1dc40c2b28657b6de18d73adcb",
+    "borrowFirstFoundation": "3f3508d22b5d3ad37aa2f5a45a1e469e904a80da",
+    "previousQualifiedReceiver": "924b88d8979ac5f904c88e7c33d7cec2e2917e3e",
+    "previousQualifiedSdkTree": "638520715ffb00255639cb1e6667494bab729b53",
+    "frozenPreManifestSha256": "11d69c05d4e4dd0ef27c8a2195827c62b5dd48a49bef34943f4c6a11fbc4899c",
+    "frozenPreMapGitBlob": "4f5911d625090913d85f9cf41b1ead1694dffade",
+    "ownership": "Independent owned root, outside SDK/checkout/POST. Full55file inventory before/after unchanged provider.",
+    "successorRecipePre": "56files including existing workflow; distinct from sealed old55PRE",
+    "mutableTargets": {
+      "add": 4,
+      "change": 2,
+      "keep": 54,
+      "states": 64,
+      "sourceOrders": 2
+    },
+    "bootstrapAndOriginalCliUnchanged": true,
+    "productionOutputsApplied": false,
+    "execution": "NOT_RUN"
+  }
 }

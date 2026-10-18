@@ -1,17 +1,32 @@
 {
   "schema": "M3_ORIGINAL_MAPPING_PROVIDER_RECEIVER_BINDING_V1",
   "repository": "hsoliwal/com.synexia",
-  "sourceCommit": "525e0c3704f8c4b4d9eef54799d1b4c947e37b5f",
-  "sourcePullRequest": 12245,
+  "sourceCommit": "f44400ead6a4c65e9bb9fc371a5b1c2deecc9c6b",
+  "sourcePullRequest": 12264,
   "sourcePath": "synexia-openrewrite-recipes/recipes/m3-original-mapping-provider-20261017/sdk",
   "receiverCorePath": "m3/migration/original-provider-20261017/sdk",
-  "moduleGitTree": "638520715ffb00255639cb1e6667494bab729b53",
-  "pinsSha256": "75f37d1093f5fd3d657de32bcab672f725f6391b4c59910aece1c2ff238951d7",
-  "workflowSha256": "faf6a553557508404de8b644ae7ff17ffaf45c74d5b0cb6f3df86c583a0b2bc0",
-  "workflowGitBlob": "f04b6bfc76e5a671968a478f44cf13268c04e5e9",
-  "receiverBase": "07ba6e383343d32c83cfdaf641387bbe72bf325d",
+  "moduleGitTree": "c93b25915d57178bec19458ba9ddc34383d92639",
+  "pinsSha256": "bfca248cec552a541faf7c69fe20fc1833736931af1638049b70c6d7a7616c46",
+  "workflowSha256": "7e8b57c875190675ccf2312c4041b8e1d151b87d27b3d9542627066b5fab3af4",
+  "workflowGitBlob": "8702ae33a2cee6760b2c19dc2be1818e6c3cae42",
+  "receiverBase": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
   "originalCanonicalPreimageGitBlob": "4f5911d625090913d85f9cf41b1ead1694dffade",
   "canonicalRecipePostimageGitBlob": "853607c6fef4b08ba2a3fd6df35121ac0594db30",
   "runtimeApplied": false,
-  "phaseAdvanced": false
+  "phaseAdvanced": false,
+  "previousQualifiedBinding": {
+    "sourceCommit": "525e0c3704f8c4b4d9eef54799d1b4c947e37b5f",
+    "moduleGitTree": "638520715ffb00255639cb1e6667494bab729b53",
+    "pinsSha256": "75f37d1093f5fd3d657de32bcab672f725f6391b4c59910aece1c2ff238951d7",
+    "workflowGitBlob": "f04b6bfc76e5a671968a478f44cf13268c04e5e9",
+    "receiverQualifiedHead": "924b88d8979ac5f904c88e7c33d7cec2e2917e3e",
+    "run": 39099435918
+  },
+  "frozenPre": {
+    "manifestSha256": "11d69c05d4e4dd0ef27c8a2195827c62b5dd48a49bef34943f4c6a11fbc4899c",
+    "files": 55,
+    "bytes": 795620
+  },
+  "candidateExecution": "NOT_RUN",
+  "canonicalProductionMapApplied": false
 }
