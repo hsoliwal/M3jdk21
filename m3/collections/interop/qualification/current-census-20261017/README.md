@@ -1,5 +1,5 @@
 <!-- SPDX-License-Identifier: Apache-2.0 -->
-# Current M3 five-provider interop source admission — 34 owners
+# Current M3 five-provider interop source admission — 36 owners
 
 M3JDK21 product receiver stacked on target #1210 at exact commit 25d0ceae8645d141b976b4722049d2cca70dc9b6; Synexia owns the reusable Maven/OpenRewrite source-sealed template recipe. The historical five-file recipe and original manifest (Git blob bdc0cab41cd4033421388fbd44f37203d765f57e) are IMMUTABLE and all four historical non-factory owners are unchanged.
 
