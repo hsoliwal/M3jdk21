@@ -26,6 +26,7 @@ public final class M3LongIndexPathBudgetSelfTest {
                     "Java-only proof must run without native library");
         }
         boundaries(nativeTest);
+        noProgressValidation(nativeTest);
         randomized(nativeTest);
         System.out.println("PASS M3_LONG_PATH_INPUT_BUDGET|native=" + nativeTest
                 + "|assertions=" + assertions + "|rounds=2200");
@@ -95,6 +96,53 @@ public final class M3LongIndexPathBudgetSelfTest {
             fail(UnsatisfiedLinkError.class, () -> scan(rows, offsets, planes,
                     need, forbidden, 0, rows.length, 1, 0, 0,
                     new long[0], 0, 0, M3LongIndexPathBudget.Backend.NATIVE_REQUIRED));
+        }
+    }
+
+
+    /** Requested output space is validated even when no input occurrence is examined. */
+    private static void noProgressValidation(boolean nativeTest) {
+        long[] rows = {7, 11};
+        // These offsets must remain unvisited in every no-progress state.
+        int[] offsets = {99, 99};
+        int[][] planes = {{1}};
+        int[] required = {0}, forbidden = {0};
+        int[][] windows = {{0, 0, 0}, {2, 0, 0}, {2, 2, 0}, {2, 2, 1}};
+        for (M3LongIndexPathBudget.Backend backend : backends(nativeTest)) {
+            for (int[] window : windows) {
+                int count = window[0], next = window[1], budget = window[2];
+                long[] output = {CANARY, CANARY, CANARY};
+                for (int limit : new int[]{-1, M3LongIndexPathMasks.MAX_WINDOW + 1}) {
+                    fail(IllegalArgumentException.class, () -> scan(rows, offsets, planes,
+                            required, forbidden, 0, count, 1, next, budget,
+                            output, 1, limit, backend));
+                    eq(new long[]{CANARY, CANARY, CANARY}, output);
+                }
+                fail(IndexOutOfBoundsException.class, () -> scan(rows, offsets, planes,
+                        required, forbidden, 0, count, 1, next, budget,
+                        output, 1, 3, backend));
+                eq(new long[]{CANARY, CANARY, CANARY}, output);
+
+                long token = scan(rows, offsets, planes, required, forbidden,
+                        0, count, 1, next, budget, output, 1, 1, backend);
+                eq(next, M3LongIndexPathMasks.nextOrdinal(token));
+                eq(0, M3LongIndexPathMasks.written(token));
+                eq(new long[]{CANARY, CANARY, CANARY}, output);
+
+                long[] maximum = new long[M3LongIndexPathMasks.MAX_WINDOW + 2];
+                Arrays.fill(maximum, CANARY);
+                token = scan(rows, offsets, planes, required, forbidden,
+                        0, count, 1, next, budget, maximum, 1,
+                        M3LongIndexPathMasks.MAX_WINDOW, backend);
+                eq(next, M3LongIndexPathMasks.nextOrdinal(token));
+                eq(0, M3LongIndexPathMasks.written(token));
+                for (long value : maximum) eq(CANARY, value);
+            }
+        }
+        if (!nativeTest) {
+            fail(UnsatisfiedLinkError.class, () -> scan(rows, offsets, planes,
+                    required, forbidden, 0, 2, 1, 0, 0, new long[1], 0, -1,
+                    M3LongIndexPathBudget.Backend.NATIVE_REQUIRED));
         }
     }
 

@@ -35,8 +35,9 @@ public final class M3LongIndexPathBudget {
      * {@code limit} admitted rows to the supplied output window. Validation
      * precedes output mutation even when the budget is zero.
      *
-     * <p>Complexity O(stages * min(maxExamined, remainingCount)); O(1) extra Java
-     * heap storage. Native execution delegates to the existing bounded JNI atom.
+     * <p>Validation costs O(stages); selection costs
+     * O(stages * min(maxExamined, remainingCount)), with O(1) extra Java heap
+     * storage. Native execution delegates to the existing bounded JNI atom.
      */
     public static long scan(long[] rows, int[] physicalOffsets,
             int[][] statePlanes, int[] requiredMasks, int[] forbiddenMasks,
@@ -48,12 +49,19 @@ public final class M3LongIndexPathBudget {
         }
 
         // Existing owner validates complete path geometry, mask alignment,
-        // output capacity and aliases, without visiting path occurrences.
+        // zero-width output window and aliases, without visiting path occurrences.
         // In NATIVE_REQUIRED mode this also refuses an unavailable library.
         long atRest = delegate(rows, physicalOffsets, statePlanes,
                 requiredMasks, forbiddenMasks, first, count, stride,
                 nextOrdinal, output, outputOffset, 0, backend);
         if (maxExamined == 0 || limit == 0 || nextOrdinal == count) {
+            if (limit != 0) {
+                // An exhausted cursor validates the requested reserved output window
+                // through the same Java/JNI owner without reading any path occurrence.
+                delegate(rows, physicalOffsets, statePlanes, requiredMasks,
+                        forbiddenMasks, first, count, stride, count,
+                        output, outputOffset, limit, backend);
+            }
             return atRest;
         }
 
