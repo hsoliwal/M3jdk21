@@ -1,0 +1,60 @@
+{
+  "schema": "M3_RX7_CODEC_CAP_TASK_STATUS_V1",
+  "observedUtc": "2026-10-18 05:28:54 UTC",
+  "goalActive": true,
+  "completeOriginalObjectivePreserved": true,
+  "originalSpecificationSha256": "4855609bc3b6894d95991720375a36087e537c631a2ef4d59bc4d4be5e9f3e9d",
+  "passes": 12,
+  "sourceBase": "50f48cbbe11f17fb8dc209bac3812f8940a1e267",
+  "receiverBase": "f29b0afe7ad253cc0562bc8dfdd48fc1acec710e",
+  "canonicalHome": "synexia-openrewrite-recipes/tasks/regex-v7-cold-free-projection-20261007/codec-cap-20261018",
+  "scope": "Qualify receiver cap successor without applying unexecuted production output; retain source/vendor producer followups",
+  "storage": {
+    "active": true,
+    "bulkOutput": "HOLD",
+    "localOutputAllowance": 0,
+    "executionLane": "EXISTING_HOSTED_RX7_WORKFLOW_ONLY_AFTER_EXACT_PACKET_REVIEW"
+  },
+  "recipe": {
+    "javaCrate": "m3-rx7-codec-cap-20261018",
+    "textCrate": "m3-rx7-codec-cap-launcher-20261018",
+    "javaTargets": 6,
+    "javaChange": 1,
+    "javaAdd": 1,
+    "javaKeep": 4,
+    "textTargets": 2,
+    "frozen61Changed": false,
+    "inverseDeletesAdd": false
+  },
+  "plannedGates": {
+    "namedJUnitMethods": 3,
+    "javaForwardStates": 8,
+    "javaInverseStates": 4,
+    "javaFixedPoints": 12,
+    "textForwardStates": 8,
+    "textInverseStates": 8,
+    "textFixedPoints": 16,
+    "strictSourceCompiles": 3,
+    "originalOracles": 2,
+    "javaExports": 2,
+    "boundedHeapBytes": 100663296,
+    "oversizedInputBytes": 67108865
+  },
+  "execution": {
+    "maven": "NOT_RUN",
+    "strictCompiler": "NOT_RUN",
+    "baselineCloneOom": "NOT_RUN",
+    "candidate96MiB": "NOT_RUN",
+    "formalAutoreviewHelper": "NOT_RUN_STORAGE_HOLD"
+  },
+  "runtimeApplied": false,
+  "phaseAdvanced": false,
+  "fullMigrationComplete": false,
+  "sdkTree": "fdb50b042a35497790ccdc97132eb898c24f171b",
+  "sdkFiles": 35,
+  "sdkBytes": 283404,
+  "pinsSha256": "623dee778ec674b669a12cb5930821db40f84abd92f1d2e8321005f5a71a7f9b",
+  "sourceReview": "TWO_INDEPENDENT_BOUNDED_REVIEWS; TWO_FINDINGS_FIXED; NO_ADDITIONAL_SOURCE_BLOCKER",
+  "canonicalSourceCommit": "32ecf17ddba26ae29a29de5996cf709fc65c7512",
+  "receivingScope": "SDK_AND_EXISTING_CONTROL_PLANE_ONLY; PRODUCTION_CODEC_AND_ADDITIVE_TEST_NOT_APPLIED"
+}

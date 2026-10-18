@@ -1,0 +1,14 @@
+Synexia M3 RX7 codec-cap qualification recipe
+Copyright 2026 Hitesh Soliwal and contributors.
+First-party recipe engines, Maven tooling and new bounds test are Apache-2.0; see LICENSE.
+Canonical owner: hsoliwal/com.synexia.
+Exact reused source blobs and adaptation gaps are recorded in FOSS_REUSE_DECISION.tsv.
+
+The byte-exact protected M3RX7Test.java.txt and M3RX7CodecTest.java.txt fixtures
+in both forward/inverse resource crates retain their own original notices:
+Copyright (c) 2026 Hitesh Soliwal and contributors. GPLv2 with the Classpath exception.
+Their complete original receiving LICENSE is retained separately as LICENSE.OpenJDK.
+Those files are PRESERVED_HISTORY test oracles; no test logic or license was changed.
+M3RX7, M3RX7Image and M3RX7Codec fixtures retain their existing Apache-2.0 headers.
+This notice does not relicense any protected fixture or dependent project.
+OpenRewrite, JUnit and annotations are declared Maven dependencies, not vendored code.

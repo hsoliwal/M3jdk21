@@ -1,0 +1,14 @@
+{
+  "schema": "SYNEXIA_RX7_CODEC_CAP_BINDING_V1",
+  "repository": "hsoliwal/com.synexia",
+  "sourceCommit": "32ecf17ddba26ae29a29de5996cf709fc65c7512",
+  "sourcePullRequest": "https://github.com/hsoliwal/com.synexia/pull/12253",
+  "canonicalPath": "synexia-openrewrite-recipes/tasks/regex-v7-cold-free-projection-20261007/codec-cap-20261018/sdk",
+  "receiverCorePath": "m3/migration/rx7-codec-cap-20261018/sdk",
+  "moduleGitTree": "fdb50b042a35497790ccdc97132eb898c24f171b",
+  "pinsSha256": "623dee778ec674b669a12cb5930821db40f84abd92f1d2e8321005f5a71a7f9b",
+  "launcherSha256": "37937acee830678c17199a7b52b18c114e2ab5be8b0f27f836e792405d09735b",
+  "workflowSha256": "b878863f71b122dcabbfef09658458a358662e8210a470b70d5cc431acc250a8",
+  "runtimeApplied": false,
+  "phaseAdvanced": false
+}
