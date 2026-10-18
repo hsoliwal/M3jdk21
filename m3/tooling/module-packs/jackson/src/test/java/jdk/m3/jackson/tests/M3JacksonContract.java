@@ -113,6 +113,16 @@ public final class M3JacksonContract {
                 "first duplicate field value");
         equal("two", indexed.valueAt(indexed.childAtomIndexAt(secondField, 0)),
                 "second duplicate field value");
+        equal("one", indexed.valueAt(indexed.objectFieldValueAt(root, "dup", 0)),
+                "first duplicate occurrence query");
+        equal("two", indexed.valueAt(indexed.objectFieldValueAt(root, "dup", 1)),
+                "second duplicate occurrence query");
+        equal(-1, indexed.objectFieldValueAt(root, "dup", 2), "missing duplicate occurrence");
+        int nested = indexed.objectFieldValueAt(root, "nested", 0);
+        equal("ARRAY", indexed.kindAt(nested), "indexed nested array");
+        equal("NULL", indexed.kindAt(indexed.arrayElementAt(nested, 0)), "array element index");
+        expect(IllegalArgumentException.class, () -> indexed.arrayElementAt(root, 0),
+                "array access rejects non-array kind");
         equal(indexed.structuralHash64(), indexed.structuralHash64At(root),
                 "indexed hash matches root hash");
         equal(json, mapper.writeValueAsString(indexed), "streamed JSON index round-trip");
