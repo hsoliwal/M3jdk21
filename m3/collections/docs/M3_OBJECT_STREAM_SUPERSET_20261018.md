@@ -29,7 +29,7 @@ Canonical recipe owner: `hsoliwal/com.synexia`, branch `feature/m3-object-stream
 
 ## Local evidence / open gates
 
-The standalone Java 21 fixture passed `javac --release 21 -Xlint:all -Werror` and 908 deterministic assertions against stand-in implementations of `M3IndexedListSnapshot` and `M3IndexMaskCompactor`. That is not a build against current product helper classes. The new terminal-contract oracle adds 18 deterministic checks for short-circuit results, predicate terminals, extrema, side-effect traversal, null/Optional semantics, typed arrays, and budget refusal; it is committed but **not yet executed**. Full M3JDK Maven tests, actual provider dependency integration, Synexia OpenRewrite engine replay/refusal/fixed-point checks, native/JNI parity, installed-image smoke tests and performance numbers remain **NOT RUN**. Keep this PR draft until they pass on this exact receiver branch.
+The standalone Java 21 fixture passed `javac --release 21 -Xlint:all -Werror` and 908 deterministic assertions against stand-in implementations of `M3IndexedListSnapshot` and `M3IndexMaskCompactor`. That is not a build against current product helper classes. The new terminal-contract oracle adds 29 deterministic assertions for short-circuit results, predicate terminals, extrema, side-effect traversal, null/Optional semantics, typed arrays, and budget refusal; it is committed but **not yet executed**. Full M3JDK Maven tests, actual provider dependency integration, Synexia OpenRewrite engine replay/refusal/fixed-point checks, native/JNI parity, installed-image smoke tests and performance numbers remain **NOT RUN**. Keep this PR draft until they pass on this exact receiver branch.
 
 
 ## Added composition contracts
