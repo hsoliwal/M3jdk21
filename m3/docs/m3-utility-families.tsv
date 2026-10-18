@@ -3,7 +3,7 @@ M3AST	jdk.compiler	com.sun.source.tree	-	MAPPED_PENDING	compiler AST ownership a
 M3Annotations	java.base	java.lang.annotation	-	MAPPED_PENDING	retention inheritance reflection semantics
 M3Arrays	java.base	java.lang.reflect.Array;java.util.Arrays	m3/arrays/src/main/java/com/m3/arrays/M3Arrays.java	QUALIFIED_ISOLATED	array mutability covariance and JNI contract
 M3Atomics	java.base	java.util.concurrent.atomic	-	MAPPED_PENDING	linearization JMM ABA and progress
-M3Bits	java.base	java.util.BitSet	-	MAPPED_PENDING	bit rank select bounds and concurrency
+M3Bits	java.base	java.util.BitSet	src/java.base/share/classes/jdk/internal/mindex/M3Bits.java	EXISTING_INTERNAL_KERNEL	bit rank select bounds and concurrency
 M3Buffers	java.base	java.nio.Buffer;java.nio.ByteBuffer	-	MAPPED_PENDING	positions limits direct memory and byte order
 M3Bytecode	java.base	jdk.internal.classfile	-	MAPPED_PENDING	classfile verifier version and attributes
 M3Channels	java.base	java.nio.channels	-	MAPPED_PENDING	partial I/O interrupts async file channel
