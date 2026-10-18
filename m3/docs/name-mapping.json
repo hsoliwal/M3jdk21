@@ -616,7 +616,7 @@
     },
     {
       "source": "com.synexia.rewrite.M3Jdk21ObjectPhysicalSlotProjection (Synexia recipe and candidate contract)",
-      "source_commit": "f3886def003e18a9fad1666608a0c4f78837011c",
+      "source_commit": "96bc482c0be6eb5ead933bf538b02912ed3cb58b",
       "source_repository": "hsoliwal/com.synexia",
       "source_license": "Apache-2.0; Copyright 2026 Hitesh Soliwal and contributors",
       "target": "com.m3.collections.M3ObjectIndexSnapshot.filteredByPhysicalStatePlane",
