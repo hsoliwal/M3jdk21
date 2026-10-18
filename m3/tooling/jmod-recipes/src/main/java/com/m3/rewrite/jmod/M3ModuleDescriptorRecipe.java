@@ -1,4 +1,4 @@
-// SPDX-License-Identifier: Apache-2.0
+// Copyright 2026 Hitesh Soliwal and contributors. SPDX-License-Identifier: Apache-2.0
 package com.m3.rewrite.jmod;
 
 import java.io.IOException;
@@ -132,15 +132,45 @@ public final class M3ModuleDescriptorRecipe extends ScanningRecipe<M3ModuleDescr
     }
 
     public static List<Row> rows(Path manifest) {
+        try {
+            if (Files.size(manifest) > 512 * 1024) {
+                throw new IllegalArgumentException("descriptor manifest exceeds 512 KiB");
+            }
+        } catch (IOException e) {
+            throw new UncheckedIOException(e);
+        }
         List<String> lines = List.of(read(manifest).split("\n"));
         List<Row> rows = new ArrayList<>();
+        Set<String> targets = new TreeSet<>();
         for (String line : lines.subList(1, lines.size())) {
             if (!line.isBlank()) {
                 String[] c = line.split("\t", -1);
+                if (c.length != 6) {
+                    throw new IllegalArgumentException("descriptor manifest requires six columns");
+                }
+                descriptorTarget(c[3]);
+                if (!targets.add(c[3])) {
+                    throw new IllegalArgumentException("duplicate descriptor target: " + c[3]);
+                }
                 rows.add(new Row(c[0], c[1], c[2], c[3], c[4], c[5].strip()));
+                if (rows.size() > 128) {
+                    throw new IllegalArgumentException("descriptor manifest exceeds 128 rows");
+                }
             }
         }
         return rows;
+    }
+
+    static Path descriptorTarget(String target) {
+        String[] parts = target.split("/", -1);
+        if (target.indexOf('\\') >= 0 || target.indexOf(':') >= 0 || Path.of(target).isAbsolute()
+                || parts.length != 6 || !parts[0].equals("m3") || !parts[1].equals("vendor")
+                || !parts[2].equals("third_party-m3") || !parts[3].equals("descriptors")
+                || parts[4].length() > 128 || !parts[4].matches("[A-Za-z_$][A-Za-z0-9_$]*(\\.[A-Za-z_$][A-Za-z0-9_$]*)*")
+                || !parts[5].equals("module-info.java")) {
+            throw new IllegalArgumentException("unsafe descriptor target: " + target);
+        }
+        return Path.of(target);
     }
 
     static String read(Path path) {
