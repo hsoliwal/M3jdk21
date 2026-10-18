@@ -1110,8 +1110,14 @@ public class BasicTreeUI extends TreeUI
      * @return the object responsible for managing what is expanded
      */
     protected AbstractLayoutCache createLayoutCache() {
+        if (isLargeModel() && getRowHeight() > 0 && sun.swing.tree.M3FixedHeightLayoutCache.ENABLED) {
+            return new sun.swing.tree.M3FixedHeightLayoutCache();
+        }
         if(isLargeModel() && getRowHeight() > 0) {
             return new FixedHeightLayoutCache();
+        }
+        if (sun.swing.tree.M3VariableHeightLayoutCache.ENABLED) {
+            return new sun.swing.tree.M3VariableHeightLayoutCache();
         }
         return new VariableHeightLayoutCache();
     }
