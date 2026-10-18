@@ -44,7 +44,7 @@ final class M3DequeZeroMaskRecipeTest implements RewriteTest {
     }
 
     @Test
-    void refusesMissingOrDuplicateAtom() {
+    void refusesMissingAtom() {
         org.openrewrite.ExecutionContext ctx =
                 new org.openrewrite.InMemoryExecutionContext(Throwable::printStackTrace);
         org.openrewrite.text.PlainText missing = org.openrewrite.text.PlainText.builder()
@@ -52,5 +52,15 @@ final class M3DequeZeroMaskRecipeTest implements RewriteTest {
                 .text("class M3LongArrayDeque {}\n").build();
         org.junit.jupiter.api.Assertions.assertThrows(IllegalStateException.class,
                 () -> new M3DequeZeroMaskRecipe().getVisitor().visit(missing, ctx));
+
+        String duplicateAtom = "M3IndexMaskCompactor.validate(alignedStates, size, requiredMask);\\n"
+                + "        int previous = size;\\n"
+                + "        M3IndexMaskCompactor.validate(alignedStates, size, requiredMask);\\n"
+                + "        int previous = size;\\n";
+        org.openrewrite.text.PlainText duplicate = org.openrewrite.text.PlainText.builder()
+                .sourcePath(java.nio.file.Paths.get("M3LongArrayDeque.java"))
+                .text(duplicateAtom).build();
+        org.junit.jupiter.api.Assertions.assertThrows(IllegalStateException.class,
+                () -> new M3DequeZeroMaskRecipe().getVisitor().visit(duplicate, ctx));
     }
 }
