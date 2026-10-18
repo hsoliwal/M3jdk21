@@ -140,6 +140,92 @@ public final class M3IndexedMultiValueMap<K, V> {
         return old;
     }
 
+
+    /**
+     * Remove exactly one occurrence by its current per-key logical ordinal.
+     * Does not move the canonical Object[] payload array; the predecessor's
+     * int[] next offset bypasses the freed physical slot. A null return is a
+     * legitimate removed value, not an indication that the key was absent.
+     */
+    public V removeAt(Object key, int ordinal) {
+        Integer group = groupIds.get(key);
+        int count = group == null ? 0 : counts[group];
+        Objects.checkIndex(ordinal, count);
+        int previous = -1, slot = heads[group];
+        for (int i = 0; i < ordinal; i++) {
+            previous = slot;
+            slot = next[slot];
+        }
+        return unlink(key, group, previous, slot);
+    }
+
+    /**
+     * Remove the first equals-matching occurrence (including null), preserving
+     * later duplicates and each other key's order. This is M3 backend policy,
+     * not a claim that all five donor APIs share one removal signature.
+     */
+    public boolean removeFirstValue(Object key, Object candidate) {
+        Integer group = groupIds.get(key);
+        if (group == null) return false;
+        int previous = -1;
+        for (int slot = heads[group]; slot >= 0; slot = next[slot]) {
+            if (Objects.equals(candidate, values[slot])) {
+                unlink(key, group, previous, slot);
+                return true;
+            }
+            previous = slot;
+        }
+        return false;
+    }
+
+    /**
+     * Replace one occurrence in its existing physical slot, with no metadata
+     * relocation and no change to application-defined state bits.
+     */
+    public V replaceAt(Object key, int ordinal, V replacement) {
+        int slot = slotAt(key, ordinal);
+        V previous = value(slot);
+        if (previous != replacement) {
+            values[slot] = replacement;
+            revision++;
+        }
+        return previous;
+    }
+
+    /**
+     * Single authoritative slot removal shared by indexed and equality-based
+     * mutations. Reclaims Object[] references and byte[] state, reuses int[]
+     * free-list links, and drops a key when its last occurrence is removed.
+     * Key-index mutation happens before any slot write, so a throwing user key
+     * hash/equals cannot leave a partially unlinked occurrence.
+     */
+    private V unlink(Object key, int group, int previous, int slot) {
+        V removed = value(slot);
+        int successor = next[slot];
+        if (counts[group] == 1) {
+            Integer erased = groupIds.remove(key);
+            if (erased == null || erased.intValue() != group) {
+                throw new IllegalStateException("last-value group identity drift");
+            }
+        }
+        if (previous < 0) heads[group] = successor;
+        else next[previous] = successor;
+        if (tails[group] == slot) tails[group] = previous;
+        counts[group]--;
+        size--;
+        values[slot] = null;
+        states[slot] = 0;
+        next[slot] = freeSlot;
+        freeSlot = slot;
+        if (counts[group] == 0) {
+            tails[group] = -1;
+            heads[group] = freeGroup;
+            freeGroup = group;
+        }
+        revision++;
+        return removed;
+    }
+
     /** Removal clears GC-visible values and recycles group and occurrence slots. */
     public int removeKey(Object key) {
         Integer group = groupIds.remove(key);

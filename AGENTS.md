@@ -1,6 +1,39 @@
 <!-- SPDX-License-Identifier: Apache-2.0 -->
 # M3JDK21 agent instructions
 
+## M3JDK21 is the SDK product, not "M3 + JDK"
+
+**Do not implement or describe M3 as an overlay over an otherwise unchanged JDK.**
+M3JDK21 is one integrated Java/HotSpot/JNI SDK and the product authority for
+all admitted runtime capabilities. Public Java SE classes retain their actual
+`java.util`, `java.lang` and `java.util.concurrent` names and exact JDK
+contracts; M3 names identify the owning array/index/mask implementation atoms.
+New non-JDK capabilities must ship as M3JDK21-owned modules/APIs with verified
+module/package/installed-image evidence, not as a mandatory Synexia runtime.
+
+The five collection compatibility families are **JDK, Guava, Eclipse Collections,
+Apache Commons Collections and Spring Framework**. Each retains its correct
+provider interface names and distinct null, equality, ordering, cardinality,
+backed-view, concurrency, serialization and mutation contracts. Converge their
+validated algorithms on the **existing** M3 dynamic Object[]/primitive array,
+integer offset/physical-slot, bitmap/mask, generation and index owners; do not
+invent another retained per-entry Node/Entry/Cell store. API-required Entry or
+other objects may be projected at the API boundary while preserving observable
+JDK/vendor semantics and stable ownership.
+
+A copied upstream source tree, renamed Java package, Maven module, optional
+interop adapter, source catalogue or green finite oracle is **not** completed
+runtime integration. Qualify source-built JDK/module packaging, public ABI,
+all affected behavioral contracts, ownership and GC/JNI, mutation/version
+invalidations, comparative CPU/heap/native memory and installed-image execution.
+Keep the canonical Synexia Maven/OpenRewrite recipe, exact before/after
+source seals, tests and donor attribution first. Fix/regenerate the recipe;
+never manually patch its product output. Reuse existing array/mask owners and
+the existing checked bulk-JNI selectors before creating native symbols.
+Preserve append-only Synexia develop and the String -> arrays -> collections
+admission order. Do not declare any of the five libraries fully implemented
+without completed per-contract integration evidence.
+
 Read and follow the existing [porting and naming invariant](m3/docs/m3jdk21-porting-invariant.md)
 and [naming/migration map](m3/docs/name-mapping.json) before M3 source work. They remain the target
 policy authorities; this file makes the existing invariant discoverable to repository agents.
