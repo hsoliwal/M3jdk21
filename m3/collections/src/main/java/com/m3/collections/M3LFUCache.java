@@ -6,19 +6,17 @@ import java.util.Arrays;
 import java.util.Objects;
 
 /**
- * Bounded LFU/LRU cache for objects materialized at an API boundary.
+ * Bounded LFU/LRU cache for API objects materialized from an M3 physical slot.
  *
- * <p>All cache bookkeeping is stored in parallel arrays. The cache uses no
- * per-cache-entry node, bucket, or record objects. A cached value may be an
- * API facade (for example, a {@code Map.Entry}); it is not canonical collection
- * storage. Values are never retargeted to a different key when a slot is reused.
+ * <p>The cache is addressed only by primitive {@code (slot, revision)} coordinates.
+ * It never calls user key {@code hashCode()} or {@code equals()} and never allocates
+ * a key tuple, bucket, node, or cache-entry object. Slot identity and lifecycle live
+ * in {@code int[]} lanes; the only object references retained are cached API values.</p>
  *
- * <p>On eviction, the cache drops its references. A client that still holds the
- * old facade keeps its object, but that object is never recycled for another key.
- * This class is package-private and unsynchronized; its owners follow the
- * thread-safety policy of the corresponding collection.
+ * <p>Eviction drops the cache's reference; an externally retained API object is never
+ * repurposed for another coordinate. This class is package-private and unsynchronized.</p>
  */
-final class M3LFUCache<K, V> {
+final class M3LFUCache<V> {
     private static final byte EMPTY = 0;
     private static final byte USED = 1;
     private static final byte DELETED = 2;
@@ -27,9 +25,9 @@ final class M3LFUCache<K, V> {
 
     private final int maximumSize;
     private final int mask;
-    private final Object[] keys;
+    private final int[] slots;
+    private final int[] revisions;
     private final Object[] values;
-    private final int[] hashes;
     private final int[] frequencies;
     private final long[] touched;
     private final byte[] states;
@@ -50,9 +48,9 @@ final class M3LFUCache<K, V> {
             }
             capacity <<= 1;
         }
-        keys = new Object[capacity];
+        slots = new int[capacity];
+        revisions = new int[capacity];
         values = new Object[capacity];
-        hashes = new int[capacity];
         frequencies = new int[capacity];
         touched = new long[capacity];
         states = new byte[capacity];
@@ -60,20 +58,24 @@ final class M3LFUCache<K, V> {
     }
 
     @SuppressWarnings("unchecked")
-    V get(Object key) {
-        int hash = hash(key);
-        int slot = find(key, hash);
+    V get(int slot, int revision) {
         if (slot < 0) {
+            throw new IllegalArgumentException("negative physical slot");
+        }
+        int index = find(slot, revision);
+        if (index < 0) {
             return null;
         }
-        touch(slot);
-        return (V) values[slot];
+        touch(index);
+        return (V) values[index];
     }
 
-    void put(K key, V value) {
+    void put(int slot, int revision, V value) {
+        if (slot < 0) {
+            throw new IllegalArgumentException("negative physical slot");
+        }
         Objects.requireNonNull(value, "value");
-        int hash = hash(key);
-        int existing = find(key, hash);
+        int existing = find(slot, revision);
         if (existing >= 0) {
             values[existing] = value;
             touch(existing);
@@ -82,51 +84,53 @@ final class M3LFUCache<K, V> {
         if (size == maximumSize) {
             evictLeastFrequentlyUsed();
         }
-        // Deletions leave probe markers. Rebuild before those markers can
-        // consume the open-addressed table, preserving LFU ranks and touch order.
         if ((long) occupied + 1L >= (long) states.length * 2L / 3L) {
             rehash();
         }
-        int slot = hash & mask;
+        int hash = hash(slot, revision);
+        int index = hash & mask;
         int firstDeleted = -1;
-        while (states[slot] != EMPTY) {
-            if (states[slot] == DELETED && firstDeleted < 0) {
-                firstDeleted = slot;
+        while (states[index] != EMPTY) {
+            if (states[index] == DELETED && firstDeleted < 0) {
+                firstDeleted = index;
             }
-            slot = (slot + 1) & mask;
+            index = (index + 1) & mask;
         }
-        int target = firstDeleted >= 0 ? firstDeleted : slot;
+        int target = firstDeleted >= 0 ? firstDeleted : index;
         if (states[target] == EMPTY) {
             occupied++;
         }
-        keys[target] = key;
+        slots[target] = slot;
+        revisions[target] = revision;
         values[target] = value;
-        hashes[target] = hash;
         frequencies[target] = 1;
         states[target] = USED;
         touched[target] = nextTick();
         size++;
     }
 
-    boolean remove(Object key) {
-        int slot = find(key, hash(key));
+    /** Remove every cached revision for a physical slot before it is reused. */
+    void removeSlot(int slot) {
         if (slot < 0) {
-            return false;
+            return;
         }
-        deleteAt(slot);
+        for (int i = 0; i < states.length; i++) {
+            if (states[i] == USED && slots[i] == slot) {
+                deleteAt(i);
+            }
+        }
         if (size == 0) {
             Arrays.fill(states, EMPTY);
             occupied = 0;
         } else if ((long) occupied > (long) size * 2L) {
             rehash();
         }
-        return true;
     }
 
     void clear() {
-        Arrays.fill(keys, null);
+        Arrays.fill(slots, 0);
+        Arrays.fill(revisions, 0);
         Arrays.fill(values, null);
-        Arrays.fill(hashes, 0);
         Arrays.fill(frequencies, 0);
         Arrays.fill(touched, 0L);
         Arrays.fill(states, EMPTY);
@@ -143,23 +147,23 @@ final class M3LFUCache<K, V> {
         return maximumSize;
     }
 
-    private int find(Object key, int hash) {
-        int slot = hash & mask;
-        while (states[slot] != EMPTY) {
-            if (states[slot] == USED && hashes[slot] == hash
-                    && Objects.equals(key, keys[slot])) {
-                return slot;
+    private int find(int slot, int revision) {
+        int hash = hash(slot, revision);
+        int index = hash & mask;
+        while (states[index] != EMPTY) {
+            if (states[index] == USED && slots[index] == slot && revisions[index] == revision) {
+                return index;
             }
-            slot = (slot + 1) & mask;
+            index = (index + 1) & mask;
         }
         return -1;
     }
 
-    private void touch(int slot) {
-        if (frequencies[slot] < MAX_FREQUENCY) {
-            frequencies[slot]++;
+    private void touch(int index) {
+        if (frequencies[index] < MAX_FREQUENCY) {
+            frequencies[index]++;
         }
-        touched[slot] = nextTick();
+        touched[index] = nextTick();
     }
 
     private void evictLeastFrequentlyUsed() {
@@ -179,27 +183,27 @@ final class M3LFUCache<K, V> {
         deleteAt(victim);
     }
 
-    private void deleteAt(int slot) {
-        keys[slot] = null;
-        values[slot] = null;
-        hashes[slot] = 0;
-        frequencies[slot] = 0;
-        touched[slot] = 0L;
-        states[slot] = DELETED;
+    private void deleteAt(int index) {
+        slots[index] = 0;
+        revisions[index] = 0;
+        values[index] = null;
+        frequencies[index] = 0;
+        touched[index] = 0L;
+        states[index] = DELETED;
         size--;
     }
 
     private void rehash() {
         int capacity = states.length;
-        Object[] oldKeys = Arrays.copyOf(keys, capacity);
+        int[] oldSlots = Arrays.copyOf(slots, capacity);
+        int[] oldRevisions = Arrays.copyOf(revisions, capacity);
         Object[] oldValues = Arrays.copyOf(values, capacity);
-        int[] oldHashes = Arrays.copyOf(hashes, capacity);
         int[] oldFrequencies = Arrays.copyOf(frequencies, capacity);
         long[] oldTouched = Arrays.copyOf(touched, capacity);
         byte[] oldStates = Arrays.copyOf(states, capacity);
-        Arrays.fill(keys, null);
+        Arrays.fill(slots, 0);
+        Arrays.fill(revisions, 0);
         Arrays.fill(values, null);
-        Arrays.fill(hashes, 0);
         Arrays.fill(frequencies, 0);
         Arrays.fill(touched, 0L);
         Arrays.fill(states, EMPTY);
@@ -209,16 +213,16 @@ final class M3LFUCache<K, V> {
             if (oldStates[i] != USED) {
                 continue;
             }
-            int slot = oldHashes[i] & mask;
-            while (states[slot] == USED) {
-                slot = (slot + 1) & mask;
+            int index = hash(oldSlots[i], oldRevisions[i]) & mask;
+            while (states[index] == USED) {
+                index = (index + 1) & mask;
             }
-            keys[slot] = oldKeys[i];
-            values[slot] = oldValues[i];
-            hashes[slot] = oldHashes[i];
-            frequencies[slot] = oldFrequencies[i];
-            touched[slot] = oldTouched[i];
-            states[slot] = USED;
+            slots[index] = oldSlots[i];
+            revisions[index] = oldRevisions[i];
+            values[index] = oldValues[i];
+            frequencies[index] = oldFrequencies[i];
+            touched[index] = oldTouched[i];
+            states[index] = USED;
             size++;
             occupied++;
         }
@@ -226,8 +230,6 @@ final class M3LFUCache<K, V> {
 
     private long nextTick() {
         if (clock == Long.MAX_VALUE) {
-            // Pathological lifetime-only case: retain a valid deterministic
-            // recency ordering without allocating a helper object.
             long next = 0L;
             for (int i = 0; i < states.length; i++) {
                 if (states[i] == USED) {
@@ -239,8 +241,10 @@ final class M3LFUCache<K, V> {
         return ++clock;
     }
 
-    private static int hash(Object key) {
-        int h = Objects.hashCode(key);
-        return h ^ (h >>> 16);
+    private static int hash(int slot, int revision) {
+        int h = slot * 0x9E3779B9;
+        h ^= Integer.rotateLeft(revision * 0x85EBCA6B, 13);
+        h ^= h >>> 16;
+        return h;
     }
 }
