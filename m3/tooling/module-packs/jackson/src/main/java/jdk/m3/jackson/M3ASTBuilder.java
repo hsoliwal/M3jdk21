@@ -34,6 +34,11 @@ final class M3ASTBuilder {
         return pool.intern(kind, name, value, childAtomIndexes);
     }
 
+    /** Reuse a depth-local child array without copying its unused capacity. */
+    int atom(String kind, String name, String value, int[] children, int childCount) {
+        return pool.intern(kind, name, value, children, childCount);
+    }
+
     /** Seals the only construction owner. A second build or any later write is refused. */
     M3AST build(int rootAtomIndex) {
         pool.seal(rootAtomIndex);
