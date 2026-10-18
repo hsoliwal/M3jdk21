@@ -2,6 +2,10 @@
 // Copyright 2026 Hitesh Soliwal and contributors
 package com.m3.regexcursor;
 
+import static com.m3.regexcursor.M3RegexSyntax.LINE_TERMINATORS;
+import static com.m3.regexcursor.M3RegexSyntax.grow;
+import static com.m3.regexcursor.M3RegexSyntax.predefined;
+
 import java.util.Arrays;
 import java.util.regex.Pattern;
 
@@ -14,12 +18,6 @@ final class M3RegexSubsetParser {
     static final int MAX_COUNT = 1000;
     private static final String QUOTE = "\\" + "Q";
     private static final String UNQUOTE = "\\" + "E";
-    private static final int[] DIGIT = {'0', '9'};
-    private static final int[] WORD = {'a', 'z', 'A', 'Z', '_', '_', '0', '9'};
-    private static final int[] SPACE = {' ', ' ', '\t', '\r'};
-    private static final int[] LINE_TERMINATORS = {
-        '\n', '\n', '\r', '\r', 0x85, 0x85, 0x2028, 0x2029
-    };
 
     private final String text;
     private final M3RegexAst ast = new M3RegexAst(0xFFFF);
@@ -117,19 +115,11 @@ final class M3RegexSubsetParser {
         String body = text.substring(pos + 1, close);
         pos = close + 1;
         int comma = body.indexOf(',');
-        int lower = number(comma < 0 ? body : body.substring(0, comma));
-        int upper = comma < 0 ? lower : comma == body.length() - 1 ? -1 : number(body.substring(comma + 1));
+        int lower = M3RegexSyntax.number(comma < 0 ? body : body.substring(0, comma), MAX_COUNT);
+        int upper = comma < 0 ? lower
+                : comma == body.length() - 1 ? -1 : M3RegexSyntax.number(body.substring(comma + 1), MAX_COUNT);
         if (upper >= 0 && upper < lower) throw new M3RegexRefusal("bounds");
         return new int[] {lower, upper};
-    }
-
-    private static int number(String digits) {
-        if (digits.isEmpty() || digits.length() > 4 || !digits.chars().allMatch(Character::isDigit)) {
-            throw new M3RegexRefusal("count");
-        }
-        int value = Integer.parseInt(digits);
-        if (value > MAX_COUNT) throw new M3RegexRefusal("count");
-        return value;
     }
 
     private int atom() {
@@ -195,19 +185,6 @@ final class M3RegexSubsetParser {
                 int[] pairs = predefined(c);
                 if (pairs != null) return ast.addClassNode(pairs, Character.isUpperCase(c));
                 return literal(escapedUnit(c));
-        }
-    }
-
-    private static int[] predefined(char c) {
-        switch (Character.toLowerCase(c)) {
-            case 'd':
-                return DIGIT;
-            case 'w':
-                return WORD;
-            case 's':
-                return SPACE;
-            default:
-                return null;
         }
     }
 
@@ -289,11 +266,7 @@ final class M3RegexSubsetParser {
         char c = text.charAt(pos + 1);
         pos += 2;
         int[] base = predefined(c);
-        if (!Character.isUpperCase(c)) return base;
-        M3RegexAst scratch = new M3RegexAst(0xFFFF);
-        int id = scratch.addClass(base, base.length / 2, true);
-        int start = scratch.classStart[id];
-        return Arrays.copyOfRange(scratch.ranges, start, start + 2 * scratch.classPairs[id]);
+        return Character.isUpperCase(c) ? M3RegexSyntax.complement(base, 0xFFFF) : base;
     }
 
     private static int union(int[] pairs, int count, int[] set) {
@@ -318,9 +291,5 @@ final class M3RegexSubsetParser {
 
     private boolean peek(char c) {
         return pos < text.length() && text.charAt(pos) == c;
-    }
-
-    private static int[] grow(int[] items, int count) {
-        return count < items.length ? items : Arrays.copyOf(items, items.length * 2);
     }
 }

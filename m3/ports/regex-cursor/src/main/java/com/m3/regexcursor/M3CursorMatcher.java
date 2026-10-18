@@ -34,10 +34,7 @@ public final class M3CursorMatcher {
     private int engine;
     private int gateFrom = -1;
     private int gateHit = -1;
-    private M3CursorDfa forwardFirst;
-    private M3CursorDfa anchoredFirst;
-    private M3CursorDfa anchoredAll;
-    private M3CursorDfa reverseAll;
+    private final M3CursorDfa[] dfas = new M3CursorDfa[4];
     private M3CursorPikeVm pike;
     private Matcher stockMatcher;
 
@@ -154,25 +151,15 @@ public final class M3CursorMatcher {
         return gateHit < 0;
     }
 
+    /** Lazy DFA {@code kind}: 0 unanchored first-match, 1 anchored first-match, 2 anchored all, 3 reverse all. */
     private M3CursorDfa dfa(int kind) {
-        switch (kind) {
-            case 0:
-                if (forwardFirst == null) forwardFirst = newDfa(regex.unanchored, true);
-                return forwardFirst;
-            case 1:
-                if (anchoredFirst == null) anchoredFirst = newDfa(regex.anchored, true);
-                return anchoredFirst;
-            case 2:
-                if (anchoredAll == null) anchoredAll = newDfa(regex.anchored, false);
-                return anchoredAll;
-            default:
-                if (reverseAll == null) reverseAll = newDfa(regex.reverse, false);
-                return reverseAll;
+        M3CursorDfa dfa = dfas[kind];
+        if (dfa == null) {
+            M3CursorNfa nfa = kind == 0 ? regex.unanchored : kind == 3 ? regex.reverse : regex.anchored;
+            dfa = new M3CursorDfa(nfa, regex.classes, kind < 2, regex.maxDfaStates);
+            dfas[kind] = dfa;
         }
-    }
-
-    private M3CursorDfa newDfa(M3CursorNfa nfa, boolean leftmostFirst) {
-        return new M3CursorDfa(nfa, regex.classes, leftmostFirst, regex.maxDfaStates);
+        return dfa;
     }
 
     private M3CursorPikeVm pike() {
