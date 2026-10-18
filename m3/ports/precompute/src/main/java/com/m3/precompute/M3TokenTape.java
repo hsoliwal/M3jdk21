@@ -60,8 +60,10 @@ public final class M3TokenTape {
     /** Boundary position for an empty token match, including the end of a tape. */
     public long boundaryUtf16(int tokenBoundary) {
         Objects.checkFromToIndex(tokenBoundary, tokenBoundary, size());
-        return tokenBoundary < size() ? starts[from + tokenBoundary]
-                : size() == 0 ? 0 : ends[to - 1];
+        if (tokenBoundary < size()) return starts[from + tokenBoundary];
+        if (to > from) return ends[to - 1];
+        if (from < ids.length) return starts[from];
+        return from == 0 ? 0 : ends[from - 1];
     }
 
     /** Returns detached primitive token IDs only on explicit API request. */
