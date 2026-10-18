@@ -1231,6 +1231,7 @@ final class M3RX7CodecCapRecipeTest {
         }
         assertFalse(Files.exists(output, LinkOption.NOFOLLOW_LINKS));
         exportConcatDiffResults(before, after, captured);
+        M3StringConcatTypedCompileQualification.qualify(before, captured);
     }
 
     private static void assertConcatManifest(String crate, boolean javaPlane,

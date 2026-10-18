@@ -1,4 +1,17 @@
 <!-- SPDX-License-Identifier: Apache-2.0 -->
+# Isolated typed String concat compile qualification successor
+
+This separately sealed SDK reuses qualified SDK74d9/run39110032333 at immutable receiverF69. It adds five compile-only cases using complete actual named Result output and the complete authentic JavaLangAccess interface: two Factory positives, one specifically missing-interface refusal and two jtreg source compiles. No generated platform class is loaded and zero new jtreg assertions execute.
+
+The compiler cases share the existing three-method Maven/JUnit process, preinstalled Java21, 256MiB Surefire heap and360-second Maven deadline. Native system symbols and --patch-module apply only to Factory compilation; jtreg remains in the unnamed module. Strict diagnostics/process/storage checks remain active. Added owned output is capped at2MiB inside the existing512MiB aggregate/8GiB reserve; no new workflow, output-cap increase or source checkout exception.
+
+Old RX7/hierarchy/nullable-String descriptors, all resource bytes and carrier payloads remain unchanged. Only one call is appended after the existing nullable-String Result exporter. The old V1 export receipt truthfully records compilation NOT_RUN at its emission stage. A separate later compile-only receipt/carrier must prove all five compiler calls, exact sources and closed class outputs without altering historical claims. Maven log128KiB/XML256KiB/proof2MiB bounds remain unchanged.
+
+New stage status: NOT_RUN. Original-model/EveryModule/task admission, matched-image baseline/candidate/runtime, complete JDK/JNI/performance and product application remain pending. Original task SDK74d9 and receiverF69 remain frozen. Pre-code foundation9ccd precedes helper authoring; see FOSS_REUSE_DECISION.tsv and NOTICE. The full migration/optimization goal and storage protection remain ACTIVE.
+
+## Historical donor README retained verbatim
+
+<!-- SPDX-License-Identifier: Apache-2.0 -->
 # Nullable String concat recipe qualification candidate
 
 This successor extends qualified hierarchy SDK8fba702e07911581678c94aca44ba724a7b5d2e8/run39107636371 without changing its four engines, Maven POM, old resources, test methods, exports or controls. New qualification is NOT_RUN. The composite targets the public factory, existing jtreg test and runtime-owner manifest at master2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49.
