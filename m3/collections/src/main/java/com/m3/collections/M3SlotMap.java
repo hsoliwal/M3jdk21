@@ -28,6 +28,33 @@ abstract class M3SlotMap<K, V> extends AbstractMap<K, V> {
     abstract V writeAt(int slot, V value);
     abstract V eraseAt(int slot);
     abstract int revision();
+
+    /** Owner-specific generation; structural revision is the conservative fallback. */
+    int projectionGeneration(int slot) { return revision(); }
+
+    /** Weak-key owners must not allow cached API entries to pin referents. */
+    boolean retainApiProjections() { return true; }
+
+    private M3LFUCache<Entry<K, V>> apiProjections;
+
+    /** Only API entry requests can materialize or reuse an Entry object. */
+    final Entry<K, V> entryProjection(int slot) {
+        if (slot < 0) { return null; }
+        if (!retainApiProjections()) { return new LiveEntry(keyAt(slot)); }
+        M3LFUCache<Entry<K, V>> cache = apiProjections;
+        if (cache == null) { apiProjections = cache = new M3LFUCache<>(64); }
+        return cache.getOrCreate(slot, projectionGeneration(slot),
+                s -> new LiveEntry(keyAt(s)));
+    }
+
+    /** Release only cached API projection references, never canonical data. */
+    final void invalidateEntryProjection(int slot) {
+        if (apiProjections != null) { apiProjections.invalidate(slot); }
+    }
+
+    final void clearEntryProjections() {
+        if (apiProjections != null) { apiProjections.clear(); }
+    }
     boolean live(int slot) { return true; }
     void accessed(int slot) { }
     final void check(int expected) {
@@ -189,7 +216,7 @@ abstract class M3SlotMap<K, V> extends AbstractMap<K, V> {
             @Override @SuppressWarnings("unchecked") public T next() {
                 if (!hasNext()) { throw new NoSuchElementException(); }
                 last = cursor; lastKey = heldKey; cursor = nextSlot(cursor); prepared = false;
-                Object result = kind == 0 ? heldKey : kind == 1 ? valueAt(last) : new LiveEntry(heldKey);
+                Object result = kind == 0 ? heldKey : kind == 1 ? valueAt(last) : entryProjection(last);
                 heldKey = null; return (T) result;
             }
             @Override public void remove() {
