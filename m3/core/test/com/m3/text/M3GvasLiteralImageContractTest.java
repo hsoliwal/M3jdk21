@@ -23,6 +23,7 @@ public final class M3GvasLiteralImageContractTest {
     private static List<String> fixtures() {
         TreeSet<String> unique = new TreeSet<>(List.of("", "a", "ab", "hello", "HELLO", "a\u0000b",
                 "z", "caf\u00e9", "\u00e9", "\u4f60\u597d", "\ud83d\ude80", "\ud800", "\udc00", "e\u0301"));
+        unique.addAll(List.of("Aa", "BB", "AaAa", "BBBB", "AaBB", "BBAa"));
         Random random = new Random(0x3a5e20261016L);
         char[] alphabet = {'a', 'Z', '0', 0, '\u00e9', '\u4f60', '\ud800', '\udc00',
                 '\ud83d', '\ude80', '\u200d'};
@@ -103,6 +104,7 @@ public final class M3GvasLiteralImageContractTest {
         }
         M3GvasLiteralImage image = M3GvasLiteralImage.open(mapping);
         check(image.size() == STRINGS.size(), "unique literal count");
+        check(image.hashSlotIndexPrepared(), "primitive slots admitted for bounded fixture");
         long first = 0;
         for (String literal : STRINGS) {
             int row = image.findRow(literal);
@@ -125,6 +127,9 @@ public final class M3GvasLiteralImageContractTest {
         }
         check(image.addressOf("not present") == 0L, "miss not synthesized");
         check(image.findRow("totally missing") == -1, "not found row");
+        for (int miss = 0; miss < 2048; miss++) {
+            check(image.findRow("M3_HASH_MISS_" + miss) == -1, "exact hash-slot miss");
+        }
         expectFailure(IndexOutOfBoundsException.class, () -> image.addressAt(image.size()));
         expectFailure(NullPointerException.class, () -> image.findRow(null));
         check(image.addressOf("\ud800\udc00") == 0L, "surrogate semantics exact");
