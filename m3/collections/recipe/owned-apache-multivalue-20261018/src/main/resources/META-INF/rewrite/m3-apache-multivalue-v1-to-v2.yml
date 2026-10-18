@@ -1,0 +1,8 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.ApacheMultiValueV1ToV220261018
+displayName: Exact two-file Apache multivalue null-bulk refinement
+description: Replaces the exact first owned body/probe pair; missing/drifted/duplicate preimages are refused.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: apache-multivalue-v1-to-v2
+      lst: false
