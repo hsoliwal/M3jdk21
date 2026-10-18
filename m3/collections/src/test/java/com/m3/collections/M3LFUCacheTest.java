@@ -67,10 +67,14 @@ final class M3LFUCacheTest {
         Map.Entry<String, Object> two = iterator.next();
         assertNotSame(one, two, "different keys must never alias one cached facade");
 
-        Map.Entry<String, Object> snapshot = new java.util.AbstractMap.SimpleImmutableEntry<>("first", firstValue);
-        map.put("first", replacementValue);
-        assertSame(firstValue, snapshot.getValue());
-        assertSame(replacementValue, map.get("first"));
-        assertTrue(snapshot != first, "API live facade and immutable snapshot are different roles");
+        M3LinkedHashMap<String, Object> linked = new M3LinkedHashMap<>();
+        linked.put("first", firstValue);
+        Map.Entry<String, Object> snapshot = linked.firstEntry();
+        assertSame(snapshot, linked.firstEntry());
+        linked.put("first", replacementValue);
+        Map.Entry<String, Object> refreshed = linked.firstEntry();
+        assertNotSame(snapshot, refreshed);
+        assertSame(firstValue, snapshot.getValue(), "old snapshot must remain detached");
+        assertSame(replacementValue, refreshed.getValue());
     }
 }
