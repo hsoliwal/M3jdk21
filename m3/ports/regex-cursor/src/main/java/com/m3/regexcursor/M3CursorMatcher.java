@@ -23,8 +23,8 @@ public final class M3CursorMatcher {
     public static final int ENGINE_STOCK = 5;
 
     private final M3CursorRegex regex;
-    private final M3ChunkCursor cursor;
-    private final int total;
+    private M3ChunkCursor cursor;
+    private int total;
     private final int[] groups;
     private boolean matched;
     private boolean resolved;
@@ -45,6 +45,7 @@ public final class M3CursorMatcher {
         this.cursor = cursor;
         this.total = cursor.totalLength();
         this.groups = new int[2 * (regex.groupCount + 1)];
+        Arrays.fill(groups, -1);
     }
 
     /** Next match, with the stock empty-match advance rule. */
@@ -266,6 +267,19 @@ public final class M3CursorMatcher {
     /** Engine that decided the last operation ({@code ENGINE_*}). */
     public int engine() {
         return engine;
+    }
+
+    /**
+     * Rebinds to {@code input} (the {@code Matcher.reset(CharSequence)} analogue). Lazy DFA and
+     * PikeVM lanes depend only on the pattern and are kept warm.
+     */
+    public M3CursorMatcher reset(M3ChunkCursor input) {
+        cursor = java.util.Objects.requireNonNull(input, "input");
+        total = input.totalLength();
+        stockMatcher = null;
+        gateFrom = -1;
+        gateHit = -1;
+        return reset();
     }
 
     /** Clears match state and the find position; caches are kept. */
