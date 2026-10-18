@@ -428,6 +428,14 @@ final class M3StringSearchPrecompute {
         return -1;
     }
 
+    /**
+     * Candidates of the reverse search (its needle's last unit found) before the scan may hand
+     * the rest to the reverse KMP (A43): the hand-off fires once the units verified at the
+     * candidates reach the units walked, the sign of a text whose candidates verify long and
+     * often, where the stock shape degrades and the KMP never does.
+     */
+    private static final int DENSE_CANDIDATES = 8;
+
     static int lastIndexOf(
             byte[] source,
             byte sourceCoder,
@@ -438,6 +446,115 @@ final class M3StringSearchPrecompute {
         int maximumStart = Math.min(fromIndex, sourceCount - patternLength);
         if (maximumStart < 0) return -1;
         if (patternLength == 0) return maximumStart;
+        char[] needle = units(pattern);
+        if (needle == null) {
+            return perUnitLastIndexOf(source, sourceCoder, pattern, patternLength, maximumStart);
+        }
+        if (sourceCoder == String.LATIN1 && !latin1(needle)) return -1;
+        if (patternLength == 1) return seekBackwards(source, sourceCoder, maximumStart, 0, needle[0]);
+
+        // The stock reverse search's shape (A43): the needle's last unit sought backwards in a
+        // tight loop per coder, each candidate verified backwards, the source read raw inside the
+        // bounds the arguments fix. A text whose candidates verify long and often hands the rest
+        // of the scan to the reverse KMP of the plan, which never degrades; it continues below
+        // the failed candidate with nothing matched, every match ending above it ruled out.
+        int last = patternLength - 1;
+        char lastUnit = needle[last];
+        int scanStart = maximumStart + last;
+        int compares = 0;
+        int candidates = 0;
+        boolean watching = true;
+        for (int index = scanStart; ; index--) {
+            index = seekBackwards(source, sourceCoder, index, last, lastUnit);
+            if (index < 0) return -1;
+            int matched = 1;
+            while (matched < patternLength
+                    && rawUnit(source, sourceCoder, index - matched) == needle[last - matched]) {
+                matched++;
+            }
+            if (matched == patternLength) return index - last;
+            if (watching) {
+                compares += matched;
+                if (++candidates >= DENSE_CANDIDATES && compares >= scanStart - index + 1) {
+                    Plan plan = prepare(pattern);
+                    if (plan == null) {
+                        watching = false;
+                        continue;
+                    }
+                    return reverseSkipSearch(source, sourceCoder, needle, plan, index - 1);
+                }
+            }
+        }
+    }
+
+    /**
+     * The needle's units read once in bulk (A43), or {@code null} when the copy cannot be
+     * allocated: the per-unit search then answers, precompute is never semantic authority.
+     */
+    private static char[] units(M3String pattern) {
+        try {
+            char[] out = new char[pattern.length()];
+            pattern.getChars(0, out.length, out, 0);
+            return out;
+        } catch (OutOfMemoryError unavailable) {
+            return null;
+        }
+    }
+
+    /** Whether every unit fits Latin-1: a needle with a wider unit is absent from a Latin-1 source. */
+    private static boolean latin1(char[] units) {
+        for (char unit : units) {
+            if (unit > 0xff) return false;
+        }
+        return true;
+    }
+
+    /**
+     * The highest index in {@code [floor, index]} holding {@code unit}, or -1 (A43): the stock
+     * reverse search's seek loop, tight per coder, reading the source raw.
+     */
+    private static int seekBackwards(byte[] source, byte sourceCoder, int index, int floor, char unit) {
+        if (sourceCoder == String.LATIN1) {
+            while (index >= floor && (source[index] & 0xff) != unit) index--;
+        } else {
+            while (index >= floor && StringUTF16.getChar(source, index) != unit) index--;
+        }
+        return index >= floor ? index : -1;
+    }
+
+    /**
+     * The reverse KMP of the plan over {@code [0, scanStart]} of the source: the index of the
+     * rightmost match of the needle whose last unit is at or below {@code scanStart}, or -1.
+     */
+    private static int reverseSkipSearch(byte[] source, byte sourceCoder, char[] needle, Plan plan,
+            int scanStart) {
+        int patternLength = needle.length;
+        int matched = 0;
+        for (int index = scanStart; index >= 0; index--) {
+            char unit = rawUnit(source, sourceCoder, index);
+            while (matched > 0 && unit != needle[patternLength - 1 - matched]) {
+                matched = plan.reversePrefix[matched - 1];
+            }
+            if (unit == needle[patternLength - 1 - matched]) matched++;
+            if (matched == patternLength) return index;
+        }
+        return -1;
+    }
+
+    /**
+     * A unit of the flat source read raw (A43): the reverse lane keeps {@code index} inside
+     * {@code [0, sourceCount)} by construction, so the stock bounds checks of
+     * {@link #sourceUnit} are not repeated per unit there.
+     */
+    private static char rawUnit(byte[] source, byte sourceCoder, int index) {
+        return sourceCoder == String.LATIN1
+                ? (char) (source[index] & 0xff)
+                : StringUTF16.getChar(source, index);
+    }
+
+    /** The per-unit reverse search of master, kept for a needle whose units cannot be copied. */
+    private static int perUnitLastIndexOf(byte[] source, byte sourceCoder, M3String pattern,
+            int patternLength, int maximumStart) {
         if (patternLength == 1) {
             char wanted = pattern.charAt(0);
             for (int index = maximumStart; index >= 0; index--) {
