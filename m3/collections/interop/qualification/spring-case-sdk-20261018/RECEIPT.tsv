@@ -1,0 +1,18 @@
+key	value
+source_repository	hsoliwal/com.synexia
+source_pr	12301
+source_commit	8d88865ad6d85a90ea34f69748794cc4459f6114
+receiver_repository	hsoliwal/M3jdk21
+receiver_base_sha	2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49
+named_recipe	com.synexia.m3.SpringCaseSdkReceiving20261018
+recipe_owners	M3HashPinnedJavaSnapshotRecipe+M3HashPinnedTextSnapshotRecipe
+source_java_changes	3 MODIFY + 1 ADD test
+text_metadata_changes	2 MODIFY
+new_runtime_implementation	NONE; existing M3SpringCaseInsensitiveMap reused
+new_sdk_factory	springCaseInsensitiveMap(java.util.Locale)
+sdk_factory_total	23
+local_real_spring_binary_candidate	480510 checks x2 JVM modes (nonidentical candidate)
+full_original_m3_owner_test	PR1220 previous evidence; not re-executed locally here
+original_JNI_source	UNCHANGED
+exact_head_CI	NOT_YET_OBSERVED
+promotion	WAITING_FOR_STRING
