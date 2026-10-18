@@ -56,7 +56,7 @@ public final class M3EntryFacadeCacheRecipe {
         new SourceAtom("lfu-cache", BASE + "M3LFUCache.java", "MISSING",
             "dc1dc5167efb5ed859c1aa3c41a07d6a5332c4cb"),
         new SourceAtom("entry-facade-tests", TEST + "M3EntryFacadeCacheTest.java", "MISSING",
-            "ec5639ab5af5e23bc1a08da8ac281b2a57daad59"));
+            "cbf4e91fd5d6b517d410df794022972052627493"));
 
     private M3EntryFacadeCacheRecipe() { }
 
