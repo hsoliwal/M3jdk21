@@ -66,10 +66,13 @@ jobs:
       - name: Ensure JDK public API shape did not change
         shell: bash
         run: |
-          javap -public -classpath "$M3_JDK_PATCH_CLASSES" java.util.ArrayList > "$RUNNER_TEMP/after-list.txt"
+          # Read the actual patched classfile path. javap with only a class
+          # name can resolve the bootstrap JDK class even when -classpath
+          # points at a java.base patch, silently invalidating the API gate.
+          javap -public "$M3_JDK_PATCH_CLASSES/java/util/ArrayList.class" > "$RUNNER_TEMP/after-list.txt"
           javap -public java.util.ArrayList > "$RUNNER_TEMP/before-list.txt"
           diff -u "$RUNNER_TEMP/before-list.txt" "$RUNNER_TEMP/after-list.txt"
-          javap -public -classpath "$M3_JDK_PATCH_CLASSES" java.util.Vector > "$RUNNER_TEMP/after-vector.txt"
+          javap -public "$M3_JDK_PATCH_CLASSES/java/util/Vector.class" > "$RUNNER_TEMP/after-vector.txt"
           javap -public java.util.Vector > "$RUNNER_TEMP/before-vector.txt"
           diff -u "$RUNNER_TEMP/before-vector.txt" "$RUNNER_TEMP/after-vector.txt"
       # This does not substitute for a full M3JDK21 source build, JCK/jtreg suite or JMH A/B.
