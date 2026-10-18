@@ -14,6 +14,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
 import java.util.Spliterator;
 import java.util.Spliterators;
@@ -23,6 +24,7 @@ import java.util.function.BiFunction;
 import java.util.function.BinaryOperator;
 import java.util.function.Consumer;
 import java.util.function.Function;
+import java.util.function.IntFunction;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 import java.util.stream.Collector;
@@ -400,6 +402,82 @@ public final class M3ObjectStream<T> {
             while (iterator.hasNext()) { iterator.next(); count = Math.addExact(count, 1L); }
             return count;
         }
+    }
+
+    /** JDK-compatible first element terminal; a null first element is rejected by Optional semantics. */
+    public Optional<T> findFirst() {
+        try (Stream<T> input = stream()) {
+            return input.findFirst();
+        }
+    }
+
+    /** Sequential find-any terminal. The chosen element is intentionally not a stable API promise. */
+    public Optional<T> findAny() {
+        try (Stream<T> input = stream()) {
+            return input.findAny();
+        }
+    }
+
+    public boolean anyMatch(Predicate<? super T> predicate) {
+        Objects.requireNonNull(predicate, "predicate");
+        try (Stream<T> input = stream()) {
+            return input.anyMatch(predicate);
+        }
+    }
+
+    public boolean allMatch(Predicate<? super T> predicate) {
+        Objects.requireNonNull(predicate, "predicate");
+        try (Stream<T> input = stream()) {
+            return input.allMatch(predicate);
+        }
+    }
+
+    public boolean noneMatch(Predicate<? super T> predicate) {
+        Objects.requireNonNull(predicate, "predicate");
+        try (Stream<T> input = stream()) {
+            return input.noneMatch(predicate);
+        }
+    }
+
+    public Optional<T> min(Comparator<? super T> comparator) {
+        Objects.requireNonNull(comparator, "comparator");
+        try (Stream<T> input = stream()) {
+            return input.min(comparator);
+        }
+    }
+
+    public Optional<T> max(Comparator<? super T> comparator) {
+        Objects.requireNonNull(comparator, "comparator");
+        try (Stream<T> input = stream()) {
+            return input.max(comparator);
+        }
+    }
+
+    public void forEach(Consumer<? super T> action) {
+        Objects.requireNonNull(action, "action");
+        try (Stream<T> input = stream()) {
+            input.forEach(action);
+        }
+    }
+
+    public void forEachOrdered(Consumer<? super T> action) {
+        Objects.requireNonNull(action, "action");
+        try (Stream<T> input = stream()) {
+            input.forEachOrdered(action);
+        }
+    }
+
+    /** Bounded array materialization; refuses when more than maxElements values are present. */
+    public Object[] toArray(int maxElements) {
+        return toBoundedList(maxElements).toArray();
+    }
+
+    /** Bounded typed array materialization using the JDK stream array-generator convention. */
+    public <A> A[] toArray(IntFunction<A[]> generator, int maxElements) {
+        Objects.requireNonNull(generator, "generator");
+        List<T> values = toBoundedList(maxElements);
+        return values.toArray(Objects.requireNonNull(
+                generator.apply(values.size()), "array generator returned null"));
     }
 
     /** Encounter-order keyed aggregation with first-key order, null support and a hard distinct-key cap. */
