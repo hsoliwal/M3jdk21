@@ -1,0 +1,95 @@
+{
+  "schema": "M3JDK21_SYNEXIA_FLAT_NEEDLE_GATE_RECEIVER_V2",
+  "copyright": "Copyright 2026 Hitesh Soliwal and contributors",
+  "receivedLicense": "GPLv2 with the Classpath exception for the src/** postimages (TARGET_OWNED_PORT); Apache-2.0 for the test/jdk M3 tests",
+  "epoch": 2,
+  "supersedesEpoch": {
+    "m3jdk21PullRequest": 673,
+    "synexiaPullRequest": 10163,
+    "synexiaCommit": "dc99f0b83af487dc934659cadb7b2c2632a313ca",
+    "state": "CLOSED 2026-10-11 with the A33..A43 stack; preimages (A36 postimages) never on master"
+  },
+  "canonicalSource": {
+    "repository": "hsoliwal/com.synexia",
+    "branch": "codex/m3-precompute-reland-20261018",
+    "pullRequest": 12397,
+    "commit": "d8c8d39b57e7bed51bcc8503f526b711023eca1c",
+    "localChainCommit": "4e69f8b265c55bcb2f01febe5330708619a6c657",
+    "recipes": [
+      "com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe (crate m3-flat-needle-gate: M3StringSearchPrecompute.java preimage->postimage, M3FlatNeedleGateTest ABSENT)",
+      "com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe (crate m3-flat-needle-gate: String.java preimage->postimage)"
+    ],
+    "declarativeRecipe": "com.synexia.m3.FlatNeedleGate",
+    "crate": "m3-flat-needle-gate",
+    "fossReuseDecisionRow": "string.search.flat-needle-trigram-gate",
+    "donors": [
+      {
+        "path": "src/java.base/share/classes/java/lang/M3StringSearchPrecompute.java",
+        "blob": "0a88ed559b23def5d2229bba3316ea2268b4d720",
+        "commit": "970a34350ebdf6a3f1c5ff5acc8445d0f3515f55",
+        "target": "java.lang.M3StringSearchPrecompute.mayContain(M3String, String) / trigramKey / repeatSourceFacts / FLAT_NEEDLE_GATE_UNITS",
+        "mechanics": "the 64-slot SOURCE_CACHE of the M3 needle lane, probed through M3TQ.Facts.test with the needle's trigram keys packed as M3TQ packs them; the A34 register-then-build rule kept locally for the flat-needle lane; no new cache, no retained bytes"
+      },
+      {
+        "path": "src/java.base/share/classes/java/lang/String.java",
+        "blob": "1454f1b34faea4f61f835ab054cc751c88c0b3c5",
+        "commit": "970a34350ebdf6a3f1c5ff5acc8445d0f3515f55",
+        "target": "java.lang.String.indexOf(String, int) / indexOf(String, int, int) / lastIndexOf(String, int), M3 source and flat needle",
+        "mechanics": "the gate consulted after the prepared 64-bit facts gate, before the per-unit loop (S2 G16)"
+      }
+    ],
+    "license": "first-party M3 owner over in-tree JDK donors (GPLv2+CPE)",
+    "disposition": "ADAPT: the same index as the flat String for every needle over every source; no public API change"
+  },
+  "target": {
+    "repository": "hsoliwal/M3jdk21",
+    "base": "master 970a34350ebdf6a3f1c5ff5acc8445d0f3515f55 (refs/m3run/m3jdk21-master-20261017)",
+    "branch": "m3/precompute-reland-20261018",
+    "ownerCommit": "22029366c4983fafb950b7900bba27e474eb4e00",
+    "owners": [
+      "java.lang.M3StringSearchPrecompute",
+      "java.lang.String"
+    ],
+    "publicJdkApiChange": false
+  },
+  "runtimeDependencyOnSynexia": false,
+  "publicJdkReplacement": false,
+  "targets": [
+    {
+      "path": "src/java.base/share/classes/java/lang/M3StringSearchPrecompute.java",
+      "before": "edae3c8d3afbd7c1b78aa3f88a4d3fdcd6bd03c9f8ee2ace3044255b44f571ac",
+      "after": "eb34890dc50abe2f384f9522d82fc4fd2c9c8cfebaac6ecd154ed10f6669f6ba",
+      "resource": "hash-pinned-java/00-M3StringSearchPrecompute.java.txt"
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/String.java",
+      "before": "b7a074c6f366397847538b6b1bc6a5e5fecfb94809ab70fda40ef58406595b13",
+      "after": "5a6334431c2bf06a88914037e93a9739e507ed06f9b576699b59398723fde10a",
+      "resource": "hash-pinned-text/00-String.java.txt"
+    },
+    {
+      "path": "test/jdk/java/lang/String/M3FlatNeedleGateTest.java",
+      "before": "ABSENT",
+      "after": "16f8f7ef9d786e224581366407868b24409278e4f38844e72afd7af17107d617",
+      "resource": "hash-pinned-java/01-M3FlatNeedleGateTest.java.txt"
+    }
+  ],
+  "gates": {
+    "recipeFixedPointAndRefusal": "PASS_WINDOWS Synexia crate test M3FlatNeedleGateRecipeTest 3/3 (mvn -o test; log sha256 c4d6c5c4484c43d4)",
+    "g7PatchModuleCompile": "PASS_WINDOWS javac --release 21 -Xlint:all,-module -Werror --patch-module java.base (65 files, 201 classes; baseline on the pin also 65/201 exit 0)",
+    "gateTestLocal": "PASS_WINDOWS M3FlatNeedleGateTest flag-off on the patched module: 172,125 checks, exit 0 (log sha256 aa180224c5376eaf)",
+    "gitDiffCheck": "PASS_WINDOWS",
+    "flagOnDifferential": "PENDING_LINUX (M3FlatNeedleGateTest under -XX:+UseM3StringStorage)",
+    "ci": "PENDING_CI"
+  },
+  "closesLedgerRows": [
+    "S2 REGEX_MECHANICAL_LEDGER gap_rank 4 (String.indexOf flat needle over M3 atom/tuple: absent needles answered by the trigram gate instead of the naive loop)",
+    "S2 REGEX_MECHANICAL_LEDGER gap_rank 5 absence half (String.lastIndexOf flat needle over M3 atom/tuple)"
+  ],
+  "semanticDecisions": [
+    "the gate is a necessary condition only: a trigram the source lacks proves the needle absent; a needle whose probed trigrams are both present runs the exact per-unit search as before, so every positive stays exact",
+    "two probes, the middle trigram and then the first (the last, for a four-unit needle); needles under three units and sources outside 2048..32768 units take no gate",
+    "a source's first flat-needle search registers its slot without facts and its next builds them, so a source searched once never pays the facts scan; the M3 needle lane keeps building on first use and builds a registered entry too",
+    "the facts cover the whole source, so absence from the whole proves absence from any range of it"
+  ]
+}

@@ -1,0 +1,25 @@
+# SPDX-License-Identifier: Apache-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.FlatNeedleGate
+displayName: M3JDK21 flat needles over M3 sources gated by exact trigrams
+description: >-
+  A flat needle (a literal, the common needle) searched over an M3 source passed only the 64-bit
+  facts signals, which saturate on dense text, so an absent needle scanned the whole source (an
+  absent 8-unit needle over 2048 CJK-mixed units 554 ns against an atom, 3,756 over 16384); the
+  M3 needle's lane has had the exact-trigram gate of the source's repeat use since A34.
+  M3StringSearchPrecompute.mayContain(M3String, String) now probes the source's trigram facts
+  (register-then-build, shared with the M3 needle's lane) with the needle's middle and then
+  its first trigram key packed on the fly, without allocation, for sources of 2048..32768 units;
+  a missing key proves absence and indexOf, lastIndexOf and contains answer without a scan.
+  Epoch 2 (2026-10-18): the epoch-1 stack (A33..A43) never reached M3JDK21 master, so the step
+  is re-pinned to master 970a34350eb, where the flat-needle lane over an M3 source lives in
+  String.indexOf/lastIndexOf and source facts are built on first use; the gate keeps the A34
+  register-then-build rule locally (repeatSourceFacts) and shares the M3 needle lane's cache.
+  Java step: M3StringSearchPrecompute and the jtreg proof; text step: String (carried as text
+  because the pinned Java parser cannot convert its Javadoc). The preimages are the master
+  owners; the steps stack on no other crate.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: m3-flat-needle-gate
+  - com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe:
+      crateName: m3-flat-needle-gate
