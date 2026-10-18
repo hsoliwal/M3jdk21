@@ -1,0 +1,28 @@
+{
+  "schema": "m3-selected-namespace-identity-exception-v1",
+  "authorizedScope": "User requested package-first renaming across collection sources",
+  "mapping": {
+    "source": "org.springframework.util",
+    "target": "com.m3.collections.spring",
+    "selection": "27 selected collection/dependency sources; donor JDK interfaces remain java.util"
+  },
+  "inventory": "FULL_SOURCE_BINDINGS.tsv",
+  "identitiesChanged": [
+    "qualified source names",
+    "reflection names",
+    "serialized class identities",
+    "explicit qualified-name references"
+  ],
+  "preserved": [
+    "original license/header bytes",
+    "original algorithms under name mapping",
+    "retained platform interface names/type identities"
+  ],
+  "notClaimed": [
+    "original assignability/wire compatibility",
+    "complete upstream library coverage",
+    "JDK backend replacement",
+    "all-array storage",
+    "JNI admission"
+  ]
+}
