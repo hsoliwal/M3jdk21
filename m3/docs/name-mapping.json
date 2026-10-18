@@ -613,6 +613,30 @@
       "receiver_test": "test/jdk/java/util/HashMap/M3HashMapBulkCopyTest.java",
       "status": "candidate backport installed on draft branch; java.base patch testing and target runtime/jtreg gates pending; String-first receiving priority unchanged",
       "target_rule": "Preserve public Map contracts and fallback for nonexact HashMap source types; no Synexia runtime dependency, no new M3 payload owner or native ABI."
+    },
+    {
+      "source": "Canonical Synexia MIndex token-path cursors and public Swift Collections rope traversal ideas",
+      "source_role": "Reusable canonical algorithm/recipe in Synexia; public Swift sources are reference-only ideas",
+      "source_git_repo": "hsoliwal/com.synexia",
+      "source_preimage_revision": "140c263a90f9803b9c46103c63355a286e0515f0",
+      "source_paths": [
+        "synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexTupleReferences.java",
+        "synexia-indexstring/src/main/java/com/synexia/indexstring/IndexStringTuple.java",
+        "synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexString.java"
+      ],
+      "source_revision_receipt": "m3/runtime-integration/rope-navigation-20261018/HANDOFF.json",
+      "reference_repository": "apple/swift-collections",
+      "reference_revision": "b905c889ff75059b8ef0bde480fe55948147b1e6",
+      "target": "java.lang.M3String.CodeUnitCursor",
+      "target_path": "src/java.base/share/classes/java/lang/M3String.java",
+      "internal_optimization_owner": "java.lang.M3String.CodeUnitCursor",
+      "recipe": "com.synexia.rewrite.M3RopeNavigationRecipe",
+      "canonical_recipe_path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3RopeNavigationRecipe.java",
+      "receiver_test": "test/jdk/java/lang/String/M3StringPathCursorTest.java",
+      "receiver_evidence": "m3/runtime-integration/rope-navigation-20261018/README.md",
+      "status": "CANDIDATE: recipe-generated canonical token-path navigation and M3 bidirectional scalar windows; bounded actual-owner Java21 proof; matched JDK/jtreg/HotSpot/JNI and full target promotion gates remain pending",
+      "target_rule": "Preserve exact UTF-16, canonical owner plus packed coordinate, existing tuple/scalar owners and public JDK names. The M3 scalar cache covers the complete visible leaf interval without adding cursor fields or path arrays. Canonical MIndex retains bounded token paths; neither target adds text payload or a new runtime dependency. String qualification phase unchanged.",
+      "license": "Synexia recipe Apache-2.0; existing MIndex traversal retains Apache-2.0 AND BSD-3-Clause notices. M3 target source keeps GPLv2 with Classpath exception and adapts its existing public cursor independently; no mixed Synexia file or Swift source copied. Apple is reference-only (Apache-2.0 WITH Swift-exception)"
     }
   ],
   "imported_donor_sources": [],
