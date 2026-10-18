@@ -15,3 +15,26 @@ Full twelve-pass migration, Routes A/B/C, complete semantic inventory, precomput
 Historical evidence remains intact: initial run 39029940546 failed workflow validation before creating jobs; the canonical workflow-context correction is recorded in `workflow-context-correction.json`. Subsequent runs 39030437080 and 39030440322 executed and exposed the annotation-classpath failure. Earlier source-review records describe their own historical candidates.
 
 Copyright 2026 Hitesh Soliwal and contributors. Independent Synexia recipe tooling retains Apache-2.0; embedded fixtures and generated target code retain their original notices and licenses.
+
+## Current exact wheel metadata successor
+
+Canonical source: [Synexia PR #12245](https://github.com/hsoliwal/com.synexia/pull/12245),
+commit `525e0c3704f8c4b4d9eef54799d1b4c947e37b5f`; SDK tree `638520715ffb00255639cb1e6667494bab729b53`.
+This is the exact72-file proof-tooling mirror, with67 unchanged files and five
+resealed resources/pins. Synexia retains reusable recipe ownership.
+
+The actual baseline provider job failed strict raw wheel dependency equality.
+Correcting18 quoted marker strings in recipe resources fixes that evidenced
+metadata defect while retaining every wheel payload, license and core metadata
+pin. Independent literal21/3 profiles now exercise the existing exact-lock test;
+all38 named boundary tests and10 SDK tests remain. The unchanged check_wheel
+function admitted all six real frozen wheels in a RAM-only discriminator; old
+jsonschema/referencing lock rows refused. This is not provider installation proof.
+
+The receiver60-path audit at `07ba6e383343d32c83cfdaf641387bbe72bf325d` found all54 KEEP files,
+four absent provider files, existing workflow and the current59-outside/56-migration
+mapping in their declared states. Production files remain unchanged until exact
+recipe output and original CLI qualify. No String/JNI/full-JDK/performance gate
+advances. Corrected hosted Maven, boundary suite, actual provider/native import,
+original26 tests and CLI are pending. See wheel-metadata-20261018 for evidence and
+follow the canonical continuation record for the full migration scope.

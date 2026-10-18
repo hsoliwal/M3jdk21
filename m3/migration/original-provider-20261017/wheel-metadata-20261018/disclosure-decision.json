@@ -1,0 +1,17 @@
+{
+  "schema": "M3_DISCLOSURE_SCOPE_DECISION_V1",
+  "observedUtc": "2026-10-18 05:05:49 UTC",
+  "scope": "Routine maintenance of the already-public original-provider SDK and released wheel metadata facts",
+  "priorPublicSource": {
+    "repository": "hsoliwal/M3jdk21",
+    "commit": "26f61cbe6da082cdfa7ccbfbd3a51067924dc7ec",
+    "sdkPath": "m3/migration/original-provider-20261017/sdk",
+    "sdkTree": "3c02e3896096753a63654d56650a4561118db2b4"
+  },
+  "newPublicDelta": "18 literal Requires-Dist marker quote corrections, wrapper lock digest, regression fixtures from already-public hash-pinned METADATA and closed pins/source binding",
+  "unpublishedM3InventionSpecificDetails": false,
+  "privateDonorBodiesExported": false,
+  "decision": "ROUTINE_MAINTENANCE_WITH_EXISTING_LICENSES; candidate proof mirror only",
+  "notices": "All existing copyright/LICENSE/NOTICE and wheel/license/core metadata pins retained; no patent status or exclusivity claim",
+  "productionRuntimePromotion": false
+}

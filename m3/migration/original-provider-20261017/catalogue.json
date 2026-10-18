@@ -83,6 +83,25 @@
         }
       ],
       "qualification": "New10th actual-result preservation test authored; original9methods/64states×2orders/22controls and workflow remain intact. All corrected execution pending."
+    },
+    {
+      "category": "dependency-lock/exact-raw-core-metadata",
+      "chosen": "Use exact released Requires-Dist strings; retain unchanged strict comparison",
+      "source": "Hash-verified jsonschema4.26.0 and referencing0.37.0 wheels and core metadata",
+      "evaluation": "17 jsonschema marker quote differences and one referencing marker quote difference explain executed refusal; payloads and published metadata pins all match",
+      "alternatives": [
+        {
+          "candidate": "Normalize quotes or filter inactive extras in admission",
+          "decision": "REJECT; weakens exact donor metadata pin and hides source inventory error"
+        },
+        {
+          "candidate": "Replace schema/native provider or alter original CLI",
+          "decision": "REJECT; original maintained dependency closure fits"
+        }
+      ],
+      "proof": "wheel-metadata-20261018/execution-evidence.json",
+      "performance": "No runtime performance claim; six wheel payloads unchanged",
+      "remaining": "Maven, filesystem boundary suite, real installation, native import and original CLI must execute on corrected candidate"
     }
   ],
   "algorithmPortScope": "This phase reuses packaging/validation/custody mechanisms. Regex, String algorithms, Java/JNI, RoutesA/B/C and full source inventory remain separate active work; no competitive-programming solution is copied."
