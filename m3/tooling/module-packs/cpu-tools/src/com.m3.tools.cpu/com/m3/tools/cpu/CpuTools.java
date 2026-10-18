@@ -1,0 +1,447 @@
+// SPDX-License-Identifier: Apache-2.0
+// Copyright 2026 Hitesh Soliwal and contributors
+package com.m3.tools.cpu;
+
+import com.m3.tools.codec.varint.VarInts;
+import com.m3.tools.graph.paths.ShortestPaths;
+import com.m3.tools.graph.topology.TopologicalOrder;
+import com.m3.tools.stats.streaming.RunningStatistics;
+import com.m3.tools.text.frequency.TermFrequency;
+import com.m3.tools.text.ngram.NGrams;
+import com.m3.tools.text.normalize.UnicodeNormalizer;
+import com.m3.tools.text.search.ExactSearch;
+import com.m3.tools.text.tokenize.WordTokenizer;
+import com.m3.tools.verify.sha256.Sha256;
+import java.io.IOException;
+import java.io.UncheckedIOException;
+import java.lang.module.ModuleReader;
+import java.nio.ByteBuffer;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.text.Normalizer;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HexFormat;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Set;
+import java.util.concurrent.ProgressMonitor;
+import java.util.concurrent.ProgressMonitors;
+import java.util.function.Consumer;
+import jdk.m3.io.M3File;
+import jdk.m3.structured.StructuredTextTools;
+import jdk.m3.text.Atom;
+import jdk.m3.text.Binding;
+import jdk.m3.text.Canonical;
+import jdk.m3.text.Capability;
+import jdk.m3.text.ExecutionResult;
+import jdk.m3.text.Limits;
+import jdk.m3.text.M3UnixRuntime;
+import jdk.m3.text.Node;
+import jdk.m3.text.Plan;
+import jdk.m3.text.Registry;
+import jdk.m3.text.TextFrame;
+import jdk.m3.text.TextLine;
+import jdk.m3.text.TextTools;
+
+/**
+ * CPU-tool bindings over the existing M3 text DAG and separately named algorithm modules.
+ * String/CharSequence remains the public boundary to M3String; no second string pool exists here.
+ * The existing Limits bounds input/output frames and plan geometry, not process RSS or arbitrary
+ * Java instruction counts. Cancellation is cooperative at operation and emission boundaries.
+ */
+public final class CpuTools {
+    private CpuTools() { }
+
+    public static Session session() { return session(Limits.standard(), null); }
+
+    public static Session session(Limits limits, ProgressMonitor monitor) {
+        return new Session(limits, monitor);
+    }
+
+    /**
+     * Immutable binding set and policy. The borrowed monitor is captured at construction;
+     * callers sharing a Session across threads must supply a thread-safe monitor.
+     * No operation completes a borrowed monitor. Every execution uses the incumbent runtime.
+     */
+    public static final class Session {
+        private final Limits limits;
+        private final ProgressMonitor monitor;
+        private final Registry registry;
+        private final M3UnixRuntime runtime;
+
+        private Session(Limits limits, ProgressMonitor monitor) {
+            this.limits = Objects.requireNonNull(limits, "limits");
+            this.monitor = effective(monitor);
+            this.monitor.checkCancelled();
+            this.registry = bindings(limits, this.monitor);
+            this.runtime = new M3UnixRuntime(registry, limits, Set.of(Capability.TEXT));
+        }
+
+        public Registry registry() { return registry; }
+        public Limits limits() { return limits; }
+
+        /** Builds a linear composition in the existing DAG representation. */
+        public Plan pipeline(List<String> operations) {
+            Objects.requireNonNull(operations, "operations");
+            if (operations.isEmpty() || operations.size() > limits.maxNodes()) {
+                throw new IllegalArgumentException("pipeline node budget");
+            }
+            List<Node> nodes = new ArrayList<>(operations.size());
+            String previous = null;
+            for (int i = 0; i < operations.size(); i++) {
+                monitor.checkCancelled();
+                String id = "step-" + i;
+                Binding binding = registry.require(operations.get(i));
+                nodes.add(previous == null ? Node.of(id, binding) : Node.of(id, binding, previous));
+                previous = id;
+            }
+            return new Plan(nodes, previous);
+        }
+
+        public ExecutionResult execute(Plan plan, TextFrame input) {
+            monitor.checkCancelled();
+            ExecutionResult result = runtime.execute(Objects.requireNonNull(plan, "plan"), input);
+            monitor.checkCancelled();
+            return result;
+        }
+
+        /** Reads no file again: every stage consumes this immutable decoded source snapshot. */
+        public ExecutionResult execute(List<String> operations, M3File source) {
+            Plan plan = pipeline(operations);
+            return execute(plan, frame(source, limits, monitor));
+        }
+
+        /** Re-executes the same bindings and compares exact frames plus all receipt fields. */
+        public ExecutionResult replay(Plan plan, TextFrame input, ExecutionResult expected) {
+            monitor.checkCancelled();
+            ExecutionResult result = runtime.replay(plan, input, expected);
+            monitor.checkCancelled();
+            return result;
+        }
+    }
+
+    private static Registry bindings(Limits limits, ProgressMonitor monitor) {
+        List<Binding> result = new ArrayList<>();
+        bind(result, "text.identity", "Retain original line content and CR/LF/CRLF endings", limits, monitor,
+                (input, output) -> input.lines().forEach(output));
+        bind(result, "text.sort", "Stable natural UTF-16 line-content ordering", limits, monitor,
+                (input, output) -> TextTools.sort(input, false, limits).lines().forEach(output));
+        bind(result, "text.sort.reverse", "Stable reverse UTF-16 line-content ordering", limits, monitor,
+                (input, output) -> TextTools.sort(input, true, limits).lines().forEach(output));
+        bind(result, "text.uniq", "Collapse adjacent equal-content lines under the existing TextTools contract", limits, monitor,
+                (input, output) -> TextTools.uniq(input, limits).lines().forEach(output));
+        bind(result, "text.normalize.nfc", "JDK Unicode NFC; preserve resulting line endings", limits, monitor,
+                (input, output) -> TextFrame.fromString(UnicodeNormalizer.normalize(input.text(), Normalizer.Form.NFC))
+                        .lines().forEach(output));
+        bind(result, "text.normalize.nfkc", "JDK Unicode NFKC; preserve resulting line endings", limits, monitor,
+                (input, output) -> TextFrame.fromString(UnicodeNormalizer.nfkc(input.text())).lines().forEach(output));
+        bind(result, "text.words", "Locale.ROOT JDK word breaks; retain spans containing a letter or digit; LF output", limits, monitor,
+                (input, output) -> WordTokenizer.words(input.text()).forEach(word -> line(output, word)));
+        bind(result, "text.frequency", "Count each input line as one exact term; sorted term TAB count output", limits, monitor,
+                (input, output) -> counts(TermFrequency.count(input.lines().stream().map(TextLine::content).toList()), output));
+        bind(result, "text.ngram.2", "Count overlapping UTF-16 code-unit bigrams; sorted escaped gram TAB count output", limits, monitor,
+                (input, output) -> counts(NGrams.count(input.text(), 2), output));
+        bind(result, "text.ngram.3", "Count overlapping UTF-16 code-unit trigrams; sorted escaped gram TAB count output", limits, monitor,
+                (input, output) -> counts(NGrams.count(input.text(), 3), output));
+        bind(result, "text.fold.80", "Existing code-point fold at width 80", limits, monitor,
+                (input, output) -> TextTools.fold(input, 80, limits).lines().forEach(output));
+        bind(result, "text.number", "Existing nl with first=1 and step=1", limits, monitor,
+                (input, output) -> TextTools.nl(input, 1L, 1L, limits).lines().forEach(output));
+        bind(result, "graph.topology", "First line vertex-count; remaining lines from TAB to; deterministic integer topological order", limits, monitor,
+                (input, output) -> topology(input, output, limits, monitor));
+        bind(result, "graph.shortest-paths", "First line vertex-count TAB source; edges from TAB to TAB nonnegative-weight; node TAB distance; MAX means unreachable-or-overflow", limits, monitor,
+                (input, output) -> paths(input, output, limits, monitor));
+        bind(result, "graph.tsort", "Existing TextTools tsort over whitespace-separated named edges", limits, monitor,
+                (input, output) -> TextTools.tsort(input, limits).lines().forEach(output));
+        bind(result, "statistics.moments", "One finite double per line; count/mean/population-variance/min/max using existing Welford owner", limits, monitor,
+                (input, output) -> moments(input, output, monitor));
+        bind(result, "hash.sha256.utf8", "SHA-256 of exact reassembled frame UTF-8 bytes, including line endings", limits, monitor,
+                (input, output) -> line(output, Sha256.utf8(input.text())));
+        bind(result, "codec.varint.encode", "One decimal in [0,Long.MAX_VALUE] per line -> canonical hexadecimal LEB128", limits, monitor,
+                (input, output) -> input.lines().forEach(value -> line(output,
+                        HexFormat.of().formatHex(VarInts.encode(Long.parseLong(value.content()))))));
+        bind(result, "codec.varint.decode", "One hexadecimal canonical LEB128 in [0,Long.MAX_VALUE] per line -> decimal", limits, monitor,
+                (input, output) -> input.lines().forEach(value -> line(output,
+                        Long.toString(VarInts.decode(HexFormat.of().parseHex(value.content()))))));
+        bind(result, "structured.csv.first-column", "Existing strict CSV projection of column zero with LF record output", limits, monitor,
+                (input, output) -> StructuredTextTools.selectDelimited(input, ',', new int[]{0}, limits).lines().forEach(output));
+        bind(result, "structured.tsv.first-column", "Existing strict TSV projection of column zero with LF record output", limits, monitor,
+                (input, output) -> StructuredTextTools.selectDelimited(input, '\t', new int[]{0}, limits).lines().forEach(output));
+        bind(result, "structured.env", "Existing strict dotenv subset -> sorted escaped key TAB value rows; no expansion", limits, monitor,
+                (input, output) -> StructuredTextTools.dotenv(input, limits).entrySet().stream()
+                        .sorted(Map.Entry.comparingByKey()).forEach(entry -> line(output,
+                                escape(entry.getKey()) + "\t" + escape(entry.getValue()))));
+        return new Registry(result);
+    }
+
+    private static void bind(List<Binding> bindings, String id, String definition, Limits limits,
+                             ProgressMonitor monitor, Atom atom) {
+        bindings.add(new Binding(id, definition + "\nlimits=" + limits.sha256(), Implementation.ROOT,
+                Set.of(Capability.TEXT), (input, output) -> {
+                    monitor.checkCancelled();
+                    limits.check(input);
+                    monitor.message(id);
+                    atom.execute(input, value -> {
+                        monitor.checkCancelled();
+                        output.accept(value);
+                    });
+                    monitor.checkCancelled();
+                    monitor.worked(1);
+                }));
+    }
+
+    private static void counts(Map<String, Integer> values, Consumer<TextLine> output) {
+        values.entrySet().stream().sorted(Map.Entry.comparingByKey()).forEach(entry ->
+                line(output, escape(entry.getKey()) + "\t" + entry.getValue()));
+    }
+
+    private static void line(Consumer<TextLine> output, String content) { output.accept(new TextLine(content, "\n")); }
+
+    /** Admit line geometry before TextFrame allocates a retained row for every source line. */
+    private static TextFrame frame(M3File source, Limits limits, ProgressMonitor monitor) {
+        Objects.requireNonNull(source, "source");
+        monitor.checkCancelled();
+        if (source.byteLength() > limits.maxBytes()) throw new IllegalArgumentException("source byte budget");
+        String text = source.text();
+        int lines = 0;
+        int start = 0;
+        for (int i = 0; i < text.length(); i++) {
+            if ((i & 8191) == 0) monitor.checkCancelled();
+            char c = text.charAt(i);
+            if (c == '\r' || c == '\n') {
+                if (++lines > limits.maxLines()) throw new IllegalArgumentException("source line budget");
+                if (c == '\r' && i + 1 < text.length() && text.charAt(i + 1) == '\n') i++;
+                start = i + 1;
+            }
+        }
+        if (start < text.length() && ++lines > limits.maxLines()) throw new IllegalArgumentException("source line budget");
+        monitor.checkCancelled();
+        TextFrame result = TextFrame.fromString(text);
+        monitor.checkCancelled();
+        return result;
+    }
+
+    /** Escaped TSV field, reversible without confusing a gram's newline with a record boundary. */
+    public static String escape(String value) {
+        Objects.requireNonNull(value, "value");
+        StringBuilder result = new StringBuilder(value.length());
+        for (int i = 0; i < value.length(); i++) {
+            char c = value.charAt(i);
+            switch (c) {
+                case '\\' -> result.append("\\\\");
+                case '\t' -> result.append("\\t");
+                case '\r' -> result.append("\\r");
+                case '\n' -> result.append("\\n");
+                default -> {
+                    if (Character.isHighSurrogate(c) && i + 1 < value.length()
+                            && Character.isLowSurrogate(value.charAt(i + 1))) {
+                        result.append(c).append(value.charAt(++i));
+                    } else if (Character.isSurrogate(c)) {
+                        result.append("\\u");
+                        for (int shift = 12; shift >= 0; shift -= 4) {
+                            result.append("0123456789abcdef".charAt((c >>> shift) & 15));
+                        }
+                    } else result.append(c);
+                }
+            }
+        }
+        return result.toString();
+    }
+
+    private static int vertices(TextFrame input, Limits limits, boolean withSource) {
+        if (input.lines().isEmpty()) throw new IllegalArgumentException("graph header required");
+        String[] header = fields(input.lines().getFirst(), withSource ? 2 : 1);
+        int vertices = Integer.parseInt(header[0]);
+        if (vertices < (withSource ? 1 : 0) || vertices > Math.min(1_000_000, limits.maxLines())) {
+            throw new IllegalArgumentException("vertex budget");
+        }
+        if (input.lines().size() - 1 > limits.maxEdges()) throw new IllegalArgumentException("graph edge budget");
+        return vertices;
+    }
+
+    private static String[] fields(TextLine line, int count) {
+        String[] values = line.content().split("\t", -1);
+        if (values.length != count) throw new IllegalArgumentException("expected " + count + " tab-separated fields");
+        return values;
+    }
+
+    private static void topology(TextFrame input, Consumer<TextLine> output, Limits limits, ProgressMonitor monitor) {
+        int vertices = vertices(input, limits, false);
+        List<TopologicalOrder.Arc> edges = new ArrayList<>(input.lines().size() - 1);
+        for (int i = 1; i < input.lines().size(); i++) {
+            monitor.checkCancelled();
+            String[] row = fields(input.lines().get(i), 2);
+            int from = Integer.parseInt(row[0]);
+            int to = Integer.parseInt(row[1]);
+            endpoints(vertices, from, to);
+            edges.add(new TopologicalOrder.Arc(from, to));
+        }
+        for (int vertex : TopologicalOrder.sort(vertices, edges)) line(output, Integer.toString(vertex));
+    }
+
+    private static void paths(TextFrame input, Consumer<TextLine> output, Limits limits, ProgressMonitor monitor) {
+        int vertices = vertices(input, limits, true);
+        int source = Integer.parseInt(fields(input.lines().getFirst(), 2)[1]);
+        if (source < 0 || source >= vertices) throw new IllegalArgumentException("source outside graph");
+        List<ShortestPaths.Edge> edges = new ArrayList<>(input.lines().size() - 1);
+        for (int i = 1; i < input.lines().size(); i++) {
+            monitor.checkCancelled();
+            String[] row = fields(input.lines().get(i), 3);
+            int from = Integer.parseInt(row[0]);
+            int to = Integer.parseInt(row[1]);
+            endpoints(vertices, from, to);
+            edges.add(new ShortestPaths.Edge(from, to, Long.parseLong(row[2])));
+        }
+        long[] distances = ShortestPaths.distances(vertices, edges, source);
+        for (int i = 0; i < distances.length; i++) line(output, i + "\t" + distances[i]);
+    }
+
+    private static void endpoints(int vertices, int from, int to) {
+        if (from < 0 || from >= vertices || to < 0 || to >= vertices) {
+            throw new IllegalArgumentException("edge endpoint outside graph");
+        }
+    }
+
+    private static void moments(TextFrame input, Consumer<TextLine> output, ProgressMonitor monitor) {
+        RunningStatistics stats = new RunningStatistics();
+        for (TextLine line : input.lines()) {
+            monitor.checkCancelled();
+            stats.accept(Double.parseDouble(line.content()));
+        }
+        line(output, "count\t" + stats.count());
+        line(output, "mean\t" + stats.mean());
+        line(output, "populationVariance\t" + stats.populationVariance());
+        line(output, "min\t" + stats.min());
+        line(output, "max\t" + stats.max());
+    }
+
+    /** Immutable, source-bound exact-search result. Truncation is explicit. */
+    public static final class Search {
+        private final int[] positions;
+        private final boolean complete;
+        private final String sha256;
+
+        private Search(int[] positions, boolean complete, String sha256) {
+            this.positions = positions.clone();
+            this.complete = complete;
+            this.sha256 = sha256;
+        }
+        public int[] positions() { return positions.clone(); }
+        public int size() { return positions.length; }
+        public boolean complete() { return complete; }
+        public String sha256() { return sha256; }
+    }
+
+    public static Search literal(M3File source, String needle, int maxHits) {
+        return literal(source, needle, maxHits, null);
+    }
+
+    /** Exact UTF-16 matching across M3String components, including overlaps and empty needles. */
+    public static Search literal(M3File source, String needle, int maxHits, ProgressMonitor monitor) {
+        Objects.requireNonNull(source, "source");
+        Objects.requireNonNull(needle, "needle");
+        if (maxHits < 0 || maxHits > 1_000_000) throw new IllegalArgumentException("match budget");
+        if (needle.length() > M3File.MAX_BYTES) throw new IllegalArgumentException("needle UTF-16 budget");
+        ProgressMonitor progress = effective(monitor);
+        progress.checkCancelled();
+        // One additional observation distinguishes a complete result from a capped prefix.
+        int[] observed = ExactSearch.positions(source.text(), needle, maxHits + 1);
+        progress.checkCancelled();
+        boolean complete = observed.length <= maxHits;
+        int[] positions = complete ? observed : Arrays.copyOf(observed, maxHits);
+        Canonical hash = new Canonical("m3-cpu-literal-result-v1").text(Implementation.ROOT)
+                .text(source.uri().toASCIIString()).text(source.rawSha256()).text(source.utf16Sha256())
+                .number(source.length()).number(maxHits).number(complete ? 1 : 0);
+        // UTF-16 framing also represents a legal Java needle containing isolated surrogates.
+        hash.number(needle.length());
+        for (int i = 0; i < needle.length(); i++) {
+            if ((i & 8191) == 0) progress.checkCancelled();
+            hash.number(needle.charAt(i));
+        }
+        hash.number(positions.length);
+        for (int i = 0; i < positions.length; i++) {
+            if ((i & 8191) == 0) progress.checkCancelled();
+            hash.number(positions[i]);
+        }
+        progress.worked(1);
+        progress.checkCancelled();
+        return new Search(positions, complete, hash.finish());
+    }
+
+    /** A receipt is evidence of identity; this explicit independent re-execution checks it. */
+    public static boolean verifyLiteral(M3File source, String needle, int maxHits, Search expected,
+                                        ProgressMonitor monitor) {
+        Objects.requireNonNull(expected, "expected");
+        Search actual = literal(source, needle, maxHits, monitor);
+        return actual.complete == expected.complete && actual.sha256.equals(expected.sha256)
+                && Arrays.equals(actual.positions, expected.positions);
+    }
+
+    /**
+     * Binds an existing DAG receipt to an admitted file's bytes, characters and location.
+     * The check prevents attaching a receipt for different input text to this source.
+     * This is an integrity receipt, not a signature or a substitute for replay.
+     */
+    public static String sourceReceipt(M3File source, ExecutionResult result) {
+        return sourceReceipt(source, result, Limits.standard(), null);
+    }
+
+    /** Same source binding with explicit input budgets and cooperative cancellation. */
+    public static String sourceReceipt(M3File source, ExecutionResult result, Limits limits, ProgressMonitor monitor) {
+        Objects.requireNonNull(source, "source");
+        Objects.requireNonNull(result, "result");
+        Objects.requireNonNull(limits, "limits");
+        ProgressMonitor progress = effective(monitor);
+        if (!frame(source, limits, progress).sha256().equals(result.receipt().inputSha256())) {
+            throw new IllegalArgumentException("source does not match execution input");
+        }
+        String receipt = new Canonical("m3-cpu-file-execution-v1").text(Implementation.ROOT)
+                .text(source.uri().toASCIIString()).text(source.rawSha256()).text(source.utf16Sha256())
+                .number(source.byteLength()).number(source.length()).text(result.receipt().sha256()).finish();
+        progress.worked(1);
+        progress.checkCancelled();
+        return receipt;
+    }
+
+    private static ProgressMonitor effective(ProgressMonitor monitor) {
+        return monitor == null ? ProgressMonitors.current() : monitor;
+    }
+
+    /** Digest of actual linked tool class/resource bytes, computed once per class-loader lifetime. */
+    public static String implementationSha256() { return Implementation.ROOT; }
+
+    private static final class Implementation {
+        private static final String ROOT = root();
+        private static String root() {
+            Module module = CpuTools.class.getModule();
+            ModuleLayer layer = module.getLayer();
+            if (!module.isNamed() || layer == null) throw new IllegalStateException("named CPU-tools module required");
+            List<String> names = new ArrayList<>(module.getDescriptor().requires().stream().map(r -> r.name())
+                    .filter(name -> name.startsWith("com.m3.tools.") || name.startsWith("jdk.m3.")).toList());
+            names.add(module.getName());
+            names.sort(String::compareTo);
+            Canonical root = new Canonical("m3-cpu-module-set-v1").text(System.getProperty("java.runtime.version"))
+                    .text(System.getProperty("java.vm.version")).number(names.size());
+            for (String name : names) {
+                var resolved = layer.configuration().findModule(name).orElseThrow();
+                root.text(name);
+                try (ModuleReader reader = resolved.reference().open(); var entries = reader.list()) {
+                    List<String> resources = entries.filter(entry -> !entry.endsWith("/")).sorted().toList();
+                    root.number(resources.size());
+                    for (String resource : resources) {
+                        ByteBuffer bytes = reader.read(resource).orElseThrow(() -> new IOException("missing module resource"));
+                        try {
+                            MessageDigest digest = MessageDigest.getInstance("SHA-256");
+                            digest.update(bytes.duplicate());
+                            root.text(resource).text(HexFormat.of().formatHex(digest.digest()));
+                        } finally { reader.release(bytes); }
+                    }
+                } catch (IOException failure) { throw new UncheckedIOException(failure); }
+                catch (NoSuchAlgorithmException impossible) { throw new IllegalStateException(impossible); }
+            }
+            return root.finish();
+        }
+    }
+}

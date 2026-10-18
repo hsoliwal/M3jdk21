@@ -1,0 +1,9 @@
+{
+  "baseline_revision": "f29b0afe7ad253cc0562bc8dfdd48fc1acec710e",
+  "path": "m3/tooling/jmod-recipes/tools/jmod_pack.py",
+  "baseline_git_blob": "86b62fddc148b372145e807438dd7cd018acca0f",
+  "current_git_blob": "86b62fddc148b372145e807438dd7cd018acca0f",
+  "same_as_baseline": true,
+  "existing_gate_expected_git_blob": "83b1483c6c5e6a39c519f82af603382914eed3e5",
+  "classification": "INHERITED_SUCCESSOR_LEDGER_MISMATCH"
+}

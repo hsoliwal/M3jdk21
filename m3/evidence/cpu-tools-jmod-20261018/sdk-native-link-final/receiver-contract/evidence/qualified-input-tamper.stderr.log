@@ -1,0 +1,12 @@
+Traceback (most recent call last):
+  File "/workspace/scratch/f4826e049195/com.synexia/synexia-openrewrite-recipes/recipes/m3-cpu-tools-jmod-20261018/target/native-link/receiver-proof/isolated-q6jsflva/input-tamper/crate/receive.py", line 197, in <module>
+    main()
+  File "/workspace/scratch/f4826e049195/com.synexia/synexia-openrewrite-recipes/recipes/m3-cpu-tools-jmod-20261018/target/native-link/receiver-proof/isolated-q6jsflva/input-tamper/crate/receive.py", line 192, in main
+    result = receive(crate, args.dataset, owner.absolute(), args.target.absolute(), args.check)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/scratch/f4826e049195/com.synexia/synexia-openrewrite-recipes/recipes/m3-cpu-tools-jmod-20261018/target/native-link/receiver-proof/isolated-q6jsflva/input-tamper/crate/receive.py", line 149, in receive
+    qualified = qualification(crate, dataset, owner)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/scratch/f4826e049195/com.synexia/synexia-openrewrite-recipes/recipes/m3-cpu-tools-jmod-20261018/target/native-link/receiver-proof/isolated-q6jsflva/input-tamper/crate/receive.py", line 93, in qualification
+    raise ValueError("recipe changed after SDK qualification: " + path)
+ValueError: recipe changed after SDK qualification: crate/datasets/native-link/MODES.tsv
