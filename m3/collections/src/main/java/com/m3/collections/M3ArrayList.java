@@ -137,13 +137,22 @@ public final class M3ArrayList<E> extends AbstractList<E>
     @Override public boolean addAll(int index, Collection<? extends E> source) {
         Objects.checkIndex(index, required(size, 1));
         Objects.requireNonNull(source, "source");
-        // Snapshot first: aliasing this list or a view of it remains correct.
-        Object[] incoming = source.toArray();
-        if (incoming.length == 0) return false;
-        int next = required(size, incoming.length);
+        Object[] incoming;
+        int count;
+        // Distinct final owners never share a mutable backing lane. Self and views
+        // still snapshot before shifting; foreign toArray contracts stay unchanged.
+        if (source instanceof M3ArrayList<?> owner && owner != this) {
+            incoming = owner.elements;
+            count = owner.size;
+        } else {
+            incoming = source.toArray();
+            count = incoming.length;
+        }
+        if (count == 0) return false;
+        int next = required(size, count);
         reserve(next);
-        System.arraycopy(elements, index, elements, index + incoming.length, size - index);
-        System.arraycopy(incoming, 0, elements, index, incoming.length);
+        System.arraycopy(elements, index, elements, index + count, size - index);
+        System.arraycopy(incoming, 0, elements, index, count);
         size = next;
         modCount++;
         return true;
