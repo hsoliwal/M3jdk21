@@ -95,7 +95,8 @@ public final class M3IndexPathMasks {
      * sentinel. All matching predicates are pure precomputed state-bit tests, never Java
      * callbacks or mutable/live collection membership.
      *
-     * <p>All path geometry, stage alignment, output bounds and aliases are checked before
+     * <p>All path geometry, stage alignment, output bounds and aliases (including
+     * required/forbidden mask arrays) are checked before
      * writes. Only offsets encountered in this window are checked: later offsets are
      * validated when their respective window is visited. A zero limit performs no scans
      * or writes and leaves {@code next} unchanged. The returned high 32 bits contain the
@@ -124,6 +125,11 @@ public final class M3IndexPathMasks {
         Objects.checkFromIndexSize(outputOffset, limit, output.length);
         if (output == orderedRows || output == physicalOffsets) {
             throw new IllegalArgumentException("source/output metadata alias");
+        }
+        // Mask parameters are borrowed input lanes too. An output alias can
+        // corrupt the active predicate or the next resumable window's rule.
+        if (output == requiredMasks || output == forbiddenMasks) {
+            throw new IllegalArgumentException("mask/output alias");
         }
         for (int[] plane : statePlanes) {
             if (plane == output) throw new IllegalArgumentException("state/output alias");
