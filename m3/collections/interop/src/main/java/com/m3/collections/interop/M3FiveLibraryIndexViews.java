@@ -7,8 +7,10 @@ package com.m3.collections.interop;
 
 import com.google.common.collect.ListMultimap;
 import com.google.common.collect.SetMultimap;
+import com.google.common.collect.SortedSetMultimap;
 import com.m3.collections.M3IndexMaskCompactor;
 import com.m3.collections.M3IndexMaskWindow;
+import com.m3.collections.M3IndexPathMasks;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
@@ -18,6 +20,10 @@ import java.util.Objects;
 import org.apache.commons.collections4.ListValuedMap;
 import org.apache.commons.collections4.SetValuedMap;
 import org.eclipse.collections.api.list.MutableList;
+import org.eclipse.collections.api.map.MutableMap;
+import org.eclipse.collections.api.multimap.list.MutableListMultimap;
+import org.eclipse.collections.api.multimap.set.MutableSetMultimap;
+import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.api.set.sorted.MutableSortedSet;
 import org.springframework.util.MultiValueMap;
 
@@ -163,6 +169,61 @@ public final class M3FiveLibraryIndexViews<K, V> {
         return filteredByState(required, excluded, M3IndexMaskCompactor.Backend.JAVA);
     }
 
+
+    /**
+     * Select the current encounter path using the EXISTING M3 32-bit, multi-stage
+     * index/offset selector. Full signed int flag words, including bit 31, are
+     * supported; all required bits must be present and excluded bits absent in
+     * every stage. Stages are ANDed. The selected path is detached, but it
+     * shares this object's immutable captured payload planes.
+     *
+     * <p>Every supplied state plane must align exactly to the captured physical
+     * payload length. The caller owns these int[] arrays and must not mutate
+     * them during the call. Repeated occurrence indexes remain repeated.
+     * No Java key/value, predicate or comparator is passed to JNI.
+     * NATIVE_REQUIRED fails if the native library is not loaded, even for an
+     * empty selection. No separate indexing engine or JNI symbol is added.
+     */
+    public M3FiveLibraryIndexViews<K, V> filteredByStatePlanes(
+            int[][] statePlanes, int[] required, int[] excluded,
+            M3IndexPathMasks.Backend backend) {
+        Objects.requireNonNull(backend, "backend");
+        requireAlignedStages(statePlanes);
+        int[] ordered = Arrays.copyOfRange(rows, from, to);
+        // The ordered row IDs are also physical offsets into all supplied
+        // planes. Aliasing these two READ-ONLY selector inputs is intentional.
+        int[] selected = M3IndexPathMasks.select(ordered, ordered, statePlanes,
+                required, excluded, 0, ordered.length, 1, backend);
+        return new M3FiveLibraryIndexViews<>(keys, values, states,
+                selected, 0, selected.length);
+    }
+
+    /** Default all-stage full-width selection is Java, not implicit JNI. */
+    public M3FiveLibraryIndexViews<K, V> filteredByStatePlanes(
+            int[][] statePlanes, int[] required, int[] excluded) {
+        return filteredByStatePlanes(statePlanes, required, excluded,
+                M3IndexPathMasks.Backend.JAVA);
+    }
+
+    /** Index of the first passing occurrence, relative to this slice, or -1. */
+    public int firstMatchingOrdinalByStatePlanes(
+            int[][] statePlanes, int[] required, int[] excluded) {
+        requireAlignedStages(statePlanes);
+        int[] ordered = Arrays.copyOfRange(rows, from, to);
+        return M3IndexPathMasks.firstMatchingIndex(ordered, ordered, statePlanes,
+                required, excluded, 0, ordered.length, 1);
+    }
+
+    private void requireAlignedStages(int[][] statePlanes) {
+        Objects.requireNonNull(statePlanes, "statePlanes");
+        for (int i = 0; i < statePlanes.length; i++) {
+            int[] stage = Objects.requireNonNull(statePlanes[i], "statePlanes[" + i + "]");
+            if (stage.length != keys.length) {
+                throw new IllegalArgumentException("state plane must align with captured payload");
+            }
+        }
+    }
+
     /** Stable mergesort of only the selected physical index lane, preserving key ties. */
     public M3FiveLibraryIndexViews<K, V> sortedByKey(Comparator<? super K> comparator) {
         Objects.requireNonNull(comparator, "comparator");
@@ -243,6 +304,53 @@ public final class M3FiveLibraryIndexViews<K, V> {
         MutableSortedSet<V> result = M3LibraryCollections.eclipseSortedSet(
                 Objects.requireNonNull(comparator, "comparator"));
         for (int i = 0; i < size(); i++) result.add(valueAt(i));
+        return result;
+    }
+
+
+    /** JDK NavigableMap materialization: repeated keys replace previous values. */
+    public java.util.NavigableMap<K, V> asJdkNavigableMapLastWins(
+            Comparator<? super K> comparator) {
+        java.util.NavigableMap<K, V> result = M3LibraryCollections.jdkSortedMap(
+                Objects.requireNonNull(comparator, "comparator"));
+        for (int i = 0; i < size(); i++) result.put(keyAt(i), valueAt(i));
+        return result;
+    }
+
+    /** Guava SortedSetMultimap: comparator-equivalent values collapse per key. */
+    public SortedSetMultimap<K, V> asGuavaSortedSetMultimap(
+            Comparator<? super V> comparator) {
+        SortedSetMultimap<K, V> result = M3LibraryCollections.guavaSortedSetMultimap(
+                Objects.requireNonNull(comparator, "comparator"));
+        for (int i = 0; i < size(); i++) result.put(keyAt(i), valueAt(i));
+        return result;
+    }
+
+    /** Eclipse MutableMap: a JDK Map-like last-occurrence-wins projection. */
+    public MutableMap<K, V> asEclipseMapLastWins() {
+        MutableMap<K, V> result = M3LibraryCollections.eclipseMap();
+        for (int i = 0; i < size(); i++) result.put(keyAt(i), valueAt(i));
+        return result;
+    }
+
+    /** Eclipse MutableSet: duplicate values are collapsed, independent of key. */
+    public MutableSet<V> asEclipseSet() {
+        MutableSet<V> result = M3LibraryCollections.eclipseSet();
+        for (int i = 0; i < size(); i++) result.add(valueAt(i));
+        return result;
+    }
+
+    /** Eclipse MutableListMultimap: repeated key/value occurrences are kept. */
+    public MutableListMultimap<K, V> asEclipseListMultimap() {
+        MutableListMultimap<K, V> result = new M3EclipseListMultimap<>();
+        for (int i = 0; i < size(); i++) result.put(keyAt(i), valueAt(i));
+        return result;
+    }
+
+    /** Eclipse MutableSetMultimap: duplicate key/value pairs are collapsed. */
+    public MutableSetMultimap<K, V> asEclipseSetMultimap() {
+        MutableSetMultimap<K, V> result = new M3EclipseSetMultimap<>();
+        for (int i = 0; i < size(); i++) result.put(keyAt(i), valueAt(i));
         return result;
     }
 
