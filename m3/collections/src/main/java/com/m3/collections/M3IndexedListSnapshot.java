@@ -213,6 +213,7 @@ public final class M3IndexedListSnapshot<E> extends AbstractList<E> implements R
         int length = current.length;
         if (length < 2) return;
         int[] scratch = new int[length];
+        int[] source = current, destination = scratch;
         // Use wide loop arithmetic to avoid overflow near Java's array-size limit.
         for (long width = 1; width < length; width <<= 1) {
             for (long base = 0; base < length; base += width * 2) {
@@ -222,17 +223,18 @@ public final class M3IndexedListSnapshot<E> extends AbstractList<E> implements R
                 int a = low, b = mid, out = low;
                 while (a < mid && b < high) {
                     // Left wins equal comparisons, retaining previous stable order.
-                    if (compare(current[a], current[b], comparator) <= 0) {
-                        scratch[out++] = current[a++];
-                    } else scratch[out++] = current[b++];
+                    if (compare(source[a], source[b], comparator) <= 0) {
+                        destination[out++] = source[a++];
+                    } else destination[out++] = source[b++];
                 }
-                while (a < mid) scratch[out++] = current[a++];
-                while (b < high) scratch[out++] = current[b++];
+                while (a < mid) destination[out++] = source[a++];
+                while (b < high) destination[out++] = source[b++];
             }
-            // Sorting must finish in the original selected index directory. A swap
-            // of the local variable would leave the receiver pointing to old order.
-            System.arraycopy(scratch, 0, current, 0, length);
+            int[] swap = source; source = destination; destination = swap;
         }
+        // The selected int[] is the output owner; copy at most once, and only
+        // if merge passes finished in the scratch lane.
+        if (source != current) System.arraycopy(source, 0, current, 0, length);
     }
 
     /** Signed/natural Comparable ordering when elements permit it. */
