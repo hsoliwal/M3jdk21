@@ -223,7 +223,63 @@ method names and lane meanings change only together with a note in this section.
    every expansion; an expanded-path index keyed by parent removes the O(expanded) factor.
 3. `BasicTreeUI` paint by row index (inventory OH18 of `m3-swing-awt-viewport.md`): one `TreePath` per painted row only
    where `paintRow` needs it.
-4. JList: prefix sums over `cellHeights` for `getCellBounds` and `convertLocationToRow` (identical answers, O(log n)),
-   guarded so that subclasses that write `cellHeights` keep the stock loops; measure-on-demand for `updateLayoutState`.
+4. JList: prefix sums over `cellHeights` for `getCellBounds` and `convertLocationToRow` (done: leaf 3, section 9),
+   guarded so that subclasses that write `cellHeights` keep the stock loops; next: measure-on-demand for `updateLayoutState`.
 5. Fix D2 in `DefaultTreeSelectionModel` in the M3 mode, with its own differential.
 6. Default-on switch, together with the SWT `swt.widget.mode` convention, once CI has run make and jtreg.
+
+## 9. Leaf 3: JList row offsets by prefix lane (`sun.swing.list`)
+
+Stock `BasicListUI` keeps one height per row in `cellHeights` (a new array per `updateLayoutState`) and sums it row
+by row in two places: `getCellBounds(JList, int)` (the y of a vertical row) and `convertLocationToRow` (the row at a
+y). `indexToLocation`, `locationToIndex`, `getPreferredSize` (the bounds of the last row), scroll increments and
+every painted row pay O(row): 302-455 us per query at the end of 10^6 rows (section 2).
+
+| Class | Role |
+|---|---|
+| `sun.swing.list.M3RowOffsets` | the seam: `startOf(row)` (wrapped `int` sum of the heights before a row), `monotone()`, `firstEndingAfter(offset)`; the switch point for an `m3/collections` prefix-sum owner once one ships inside the JDK (none exists on `m3/viewport-everywhere-20261018` at `b9d9659c184`; `M3SparseExtents` is sparse and lives outside `java.desktop`) |
+| `sun.swing.list.M3PrefixRowOffsets` | one `int[n + 1]` prefix lane built in one pass; `startOf` is a load, `firstEndingAfter` a binary search |
+| `sun.swing.list.M3ListRows` | per-UI state: offsets keyed by the identity of the `cellHeights` array, the module guard, and the two stock loops' answers |
+
+**Algorithm choice (rule 21, `ALGORITHM_CATALOGUE.tsv`, `bench/ROW_OFFSETS_20261018.tsv`).** At 10^6 rows the prefix
+lane builds in 0.69 ms and answers the start of a row in 3.5 ns and the row at an offset in 149 ns; the in-repo
+`javax.swing.SizeSequence` takes 4.4 ms, 133 ns and 176 ns, a Fenwick tree 1.8 ms, 28 ns and 236 ns, sqrt blocks
+0.3 ms, 196 ns and 280 ns; the stock loop takes 288 us for the start of the last row. The heights never change in
+place (the stock class replaces the array on every layout), so the point updates of SizeSequence and Fenwick buy
+nothing here; SizeSequence stays the candidate owner for the measure-on-demand leaf, where single heights change.
+
+**Same answers.** `getCellBounds`: the stock `y = insets.top + h[0] + ... + h[row - 1]` in `int` arithmetic equals
+`insets.top + startOf(row)` for any heights, wrapping included (addition modulo 2^32); rows at or past
+`cellHeights.length` keep the stock code (which answers y = 0). `convertLocationToRow`: the stock loop returns the
+first row whose `[y, y + h)` holds `y0`, else `size - 1` (also when `y0` is above the list and `closest` is false),
+and 0 for `closest` above the top; with non-negative heights and no `int` overflow of `insets.top + startOf(size)`
+that is `min(firstEndingAfter(y0 - top), size - 1)`. With a negative height or an overflow, `M3ListRows.rowAt`
+answers `STOCK` and the stock loop runs.
+
+**Guard.** The stock class writes `cellHeights` only while it fills a newly allocated array in `updateLayoutState`,
+and no other `java.desktop` class touches the field (`git grep cellHeights`), so the array's identity is its
+version. A `BasicListUI` subclass from another module could write the array in place; such UIs keep the stock loops
+(the check is `getClass().getModule()`). Third-party look and feels therefore keep stock behaviour and cost.
+
+**Hook (recipe-first).** `recipe/META-INF/rewrite/m3-swing-viewport-list.yml`
+(`com.synexia.openrewrite.viewport.M3SwingViewportBasicListUI`): one field (`M3AddMemberIfMissing`) and two blocks
+(`M3InsertStatements`, `BEFORE` the stock code they bypass, falling through to it when the path is off). OpenJDK
+writes `default:` without braces and `else if` chains, which the insert recipe did not search; the recipe was
+extended (hsoliwal/com.synexia `8c122afccd25` on `m3/viewport-catalogue-recipes-20261016`: `else if` chains and
+`case` statements with or without braces, two new recipe tests) and then applied.
+
+| Proof (2026-10-19, JDK 21.0.9, stock + `--patch-module java.desktop`) | Result |
+|---|---|
+| `M3JListViewportDifferential 40 300` (`-Dm3.swing.viewport=true`): two JLists on one `DefaultListModel`, one with a `BasicListUI` subclass outside `java.desktop` (stock loops), one with `BasicListUI` (prefix lane); heights 0, negative and very large included; public answers after every step, pixels every 10 steps | **40 of 40 seeds x 300 steps pass, 1,240 pixel comparisons equal, offsets built at all 12,040 checks** |
+| Mutation check: `firstEndingAfter` with `>=` in place of `>` | caught: 3 of 5 seeds fail |
+| `M3ListRowsTest` (JUnit 5: lane and `rowAt` against the stock loops copied as oracles, wrapping, the monotone flag, guard and versioning, the JList differential) under JaCoCo 0.8.15, merged with a flag-off differential run | **7/7 pass; `sun.swing.list` 100.00% lines (47/47), 100.00% branches (30/30)** |
+| `javac -Xlint:all` of the patched classes | clean for the three new classes; `BasicListUI` adds no warning |
+| Hook recipe via `M3PerFileApply` | pass 1 CHANGED, pass 2 UNCHANGED (fixed point); the extended `M3InsertStatements` leaves the `BasicTreeUI` and SWT `Tree` hooks UNCHANGED |
+| Recipe crate tests | 35 run, 0 failures, 2 skipped (`M3InsertStatementsTest` 9/9) |
+| `make`, jtreg | PENDING_CI |
+
+**Benchmark** (`bench/LIST_20261019.tsv`, `SwingViewportBench list`, 10^6 rows, two interleaved rounds, stock / M3):
+`locationToIndex` of the last row 363 and 358 us / 2.7 and 2.3 us; `indexToLocation` of the last row 302 and 333 us /
+2.5 and 2.1 us; 800x600 frame p50 in the middle 0.61 and 0.69 ms / 0.39 and 0.37 ms, at the end 0.86 and 0.89 ms /
+0.37 and 0.36 ms (the start frame is noise-bound in both); `getPreferredSize` (relayout) 458-480 ms in both, since
+`updateLayoutState` still measures every row; heap +4 MB (the lane).
