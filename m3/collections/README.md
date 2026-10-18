@@ -138,3 +138,19 @@ Canonical recipes and actual source/runtime qualification stay in Synexia's
 See `synexia-donation.json`, `name-mapping.json` and `qualification/receiving-repair-20261008.json`.
 The global migration remains in STRING. No array/collection/AST phase or JDK backend
 is promoted by this independent module proof. Historical records retain their own hashes.
+
+## CPU tool: mask-selected tumbling-window statistics (2026-10-18)
+
+The independent `M3CpuMaskWindowStats` combines the existing
+`M3IndexPathMasks` Java/JNI selector with a bounded primitive reduction
+over at most 4096 selected occurrences per window. No per-row object,
+String payload, duplicate native library or large selected-array copy is
+created. It emits exact count, signed ID sum, minimum and maximum to a
+callback; duplicate row IDs and negative-stride encounter order survive.
+The selector remains the single C17/JNI owner.
+
+Source, caller contract, array/mask geometry, Synexia Maven/OpenRewrite
+recipe and exact SHA-256 manifests are documented at
+`qualification/CPU_MASK_WINDOW_STATS_20261018.md`.
+This is an independent receiver candidate, not migration of java.util
+or completion of the global STRING prerequisite.

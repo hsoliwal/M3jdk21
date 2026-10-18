@@ -81,7 +81,7 @@ def include_stored_representative_successor(previous_rows,
         path, before, after, template = cells
         if (path != expected_path or len(after) != 64
                 or any(c not in '0123456789abcdef' for c in after)
-                or template != path.rsplit('/', 1)[1] + '.after'):
+                or template != path.rsplit('/', 1)[1] + '.txt'):
             raise SystemExit('Unapproved stored-representative source: ' + path)
         if before == 'ABSENT':
             if path in current:
@@ -167,6 +167,39 @@ def include_path_mask_successor(historical_rows, receipt=_PATH_MASK_RECEIPT):
         extra.append((path, after))
     return [*historical_rows, *extra]
 
+
+# Exact M3 CPU tumbling-window receiver; all source bytes remain Synexia-owned.
+_CPU_WINDOW_RECEIPT = HERE / 'recipe/cpu-mask-window-stats-20261018/manifest.tsv'
+_CPU_WINDOW_SHA256 = '07e4cd4f5c5e58c861b6a6059a1b1b75dc2d35aec37893902df6d48cc5c09456'
+_CPU_WINDOW_PATHS = (
+    'm3/collections/src/main/java/com/m3/collections/M3CpuMaskWindowStats.java',
+    'm3/collections/src/test/java/com/m3/collections/M3CpuMaskWindowStatsSelfTest.java',
+)
+
+
+def include_cpu_window_stats_successor(previous_rows, receipt=_CPU_WINDOW_RECEIPT):
+    """Admit exactly two new recipe-sealed Java CPU window owners; refuse aliases/drift."""
+    if not receipt.exists() and not receipt.is_symlink():
+        return list(previous_rows)
+    if receipt.is_symlink() or not receipt.is_file() or digest(receipt) != _CPU_WINDOW_SHA256:
+        raise SystemExit('CPU window receipt absent, symlinked or drifted')
+    entries = [line.split('\t') for line in receipt.read_text(encoding='utf-8').splitlines()]
+    if len(entries) != len(_CPU_WINDOW_PATHS):
+        raise SystemExit('CPU window manifest needs exactly two source paths')
+    already = {path for path, _ in previous_rows}
+    result = list(previous_rows)
+    for entry, path in zip(entries, _CPU_WINDOW_PATHS):
+        if (len(entry) != 4 or entry[0] != path or entry[1] != 'ABSENT'
+                or len(entry[2]) != 64
+                or any(c not in '0123456789abcdef' for c in entry[2])
+                or entry[3] != path.rsplit('/', 1)[1] + '.after'
+                or path in already):
+            raise SystemExit('CPU window path/metadata preimage drift: ' + path)
+        result.append((path, entry[2]))
+        already.add(path)
+    return result
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--cost-probe', action='store_true', help='record paired diagnostic allocation/time samples')
@@ -211,6 +244,7 @@ def main():
             if line and not line.startswith('#')]
     rows = include_path_mask_successor(include_stored_representative_successor(include_filtered_view_successor(rows)))
     rows = include_object_state_offset_successor(rows)
+    rows = include_cpu_window_stats_successor(rows)
     if len({row[0] for row in rows}) != len(rows):
         raise SystemExit('Duplicate installed source path')
     for path, expected in rows:
@@ -250,7 +284,7 @@ def main():
             totals[key] += int(suite.attrib.get(key, '0'))
     if not totals['tests'] or any(totals[key] for key in ('failures', 'errors', 'skipped')):
         raise SystemExit('JUnit acceptance requires nonzero tests and no failures/errors/skips: ' + repr(totals))
-    for name in ('M3LazyTreeMapSelfTest', 'M3LazyValueStateSelfTest'):
+    for name in ('M3LazyTreeMapSelfTest', 'M3LazyValueStateSelfTest', 'M3CpuMaskWindowStatsSelfTest'):
         run('04-' + name, [java_home / 'bin/java', '-ea', '-cp', runtime_classpath,
                            'com.m3.collections.' + name])
     resources = target / 'module-resources/META-INF'

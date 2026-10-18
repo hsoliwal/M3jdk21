@@ -1,0 +1,46 @@
+# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and contributors
+# SPDX-License-Identifier: Apache-2.0
+name: M3 CPU mask window stats Java21 receiver
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - 'm3/collections/src/main/java/com/m3/collections/M3CpuMaskWindowStats.java'
+      - 'm3/collections/src/test/java/com/m3/collections/M3CpuMaskWindowStatsSelfTest.java'
+      - 'm3/collections/recipe/cpu-mask-window-stats-20261018/**'
+      - 'm3/collections/test_verify_cpu_mask_window_stats.py'
+      - 'm3/collections/verify_donation.py'
+      - 'm3/collections/algorithm-catalog/cpu-mask-window-stats-20261018.tsv'
+      - 'm3/collections/qualification/CPU_MASK_WINDOW_STATS_20261018.md'
+      - 'm3/tooling/jmod-recipes/CPU_TOOL_CATEGORY_MATRIX_20261017.tsv'
+      - '.github/workflows/m3-cpu-mask-window-stats-20261018.yml'
+permissions:
+  contents: read
+jobs:
+  source-and-java:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Verify exact two-source receipt, drift refusals, legacy preservation
+        run: python3 -m unittest discover -s m3/collections -p 'test_verify_cpu_mask_window_stats.py' -v
+      - name: Expose actual JVM heap bound
+        run: java -Xmx24m -XshowSettings:vm -version
+      - name: Compile actual M3 collection backend and bounded CPU self-test
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p target/m3-cpu-window/classes
+          mapfile -t sources < <(find m3/collections/src/main/java -name '*.java' | sort)
+          javac --release 21 -Xlint:all,-module -Werror \
+            -d target/m3-cpu-window/classes \
+            "${sources[@]}" \
+            m3/collections/src/test/java/com/m3/collections/M3CpuMaskWindowStatsSelfTest.java
+      - name: Run 900 deterministic trials and 10000-row stream under 24 MiB
+        run: >
+          java -Xmx24m -cp target/m3-cpu-window/classes
+          com.m3.collections.M3CpuMaskWindowStatsSelfTest

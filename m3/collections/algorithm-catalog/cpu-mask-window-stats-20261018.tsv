@@ -1,0 +1,11 @@
+# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and contributors
+# SPDX-License-Identifier: Apache-2.0
+problem_category	reference	donor_license	existing_owner	selected_atom	complexity	contract	qualification
+STREAM_TUMBLING_WINDOW	CPUTOOLS(6).txt:26 (stream/window processors)	user-supplied category only	M3IndexPathMasks.scanWindow	M3CpuMaskWindowStats bounded occurrence tumbling	O(n*s), O(min(4096,max(64,width))) scratch	Filtered occurrence order including duplicates and reversed stride	CANDIDATE_TESTED_WITH_SHIM
+STATE_MASK_SELECTION	M3IndexPathMasks (Synexia first party)	Apache-2.0	M3IndexPathMasks	Required and forbidden full 32-bit flags including sign bit	O(n*s)	Delegates input/JNI validation; masks are precomputed and pure	REUSED_UNCHANGED
+INDEX_PATH	M3CpuMaskRuns (Synexia first party)	Apache-2.0	M3CpuMaskRuns, M3IndexPathMasks	No additional index copies; row ID is not physical offset	O(n) grouping	Window ordinals count selected occurrences, not sorted keys	COMPOSED_WITH_EXISTING
+WINDOW_SUM	LeetCode 643 Maximum Average Subarray I (shape only)	reference-only; no source	M3IndexPathMasks	Exact signed 64-bit sum of selected 32-bit IDs	O(n), no per-row object	Baseline differs: filtered tumbling windows vs fixed raw-array sliding windows	DIFFERENTIAL_ORACLE
+ARRAY_RANGE	HackerRank Array Manipulation (shape only)	reference-only; no source	M3IndexPathMasks	Bounded ordinal windows over stride/offset lanes	O(n)	Difference-array implementation not copied or substituted	CATEGORY_REVIEW
+TWO_POINTER_WINDOWS	GeeksforGeeks Sliding Window Technique (shape only)	reference-only; no source	M3IndexPathMasks	Reuse bounded 4096-element native-capable selection windows	O(n), bounded scratch	No overlap/slide semantics claimed; partial tail emitted	CATEGORY_REVIEW
+JNI_BOUNDARY	M3IndexPathMasks NATIVE_REQUIRED	Apache-2.0	M3IndexPathMasks native selector	Optional existing C17 JNI only	JNI-dependent	Borrowed primitive arrays; native unavailable fails, no new JNI symbols	NATIVE_PARITY_PENDING
+M3STRING_NAMES	M3String current phase receiver	Apache-2.0 + OpenJDK per-file	M3String/MIndexString canonical owner	Use primitive row IDs; decode/lookup text at explicit boundary only	O(1) identity after qualified interning	No second storage owner or claim of universal OS interning	RECEIVER_BOUNDARY_ONLY
