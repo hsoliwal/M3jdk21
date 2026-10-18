@@ -424,7 +424,7 @@ public final class M3MutableFilteredViews {
 
         /**
          * Validate the effective *stored* representatives before any writes.
-         * The transient TreeMap holds only first-occurrence keys for new
+         * The transient array-backed M3TreeMap holds first-occurrence keys for new
          * comparator classes; it is not a retained element/entry cache.
          * This also handles input maps with distinct comparator-equal keys. Each key
          * and value reference is captured once; the owner's bulk call reads that exact
@@ -437,9 +437,9 @@ public final class M3MutableFilteredViews {
             NavigableMap<K, K> newRepresentatives = null;
             ArrayList<K> admittedKeys = new ArrayList<>();
             ArrayList<V> admittedValues = new ArrayList<>();
+            M3TreeMap<K, V> owner = slotOwner();
             for (Entry<? extends K, ? extends V> entry : incoming.entrySet()) {
                 K key = entry.getKey();
-                M3TreeMap<K, V> owner = slotOwner();
                 int existingSlot = owner == null ? -1 : owner.findSlot(key);
                 Entry<K, V> existing = owner == null ? storedEntry(key) : null;
                 K effective;
@@ -469,7 +469,6 @@ public final class M3MutableFilteredViews {
             }
             // Direct bulk write after complete predicate validation avoids API
             // entries for M3's own slot-backed owner; retain third-party putAll.
-            M3TreeMap<K, V> owner = slotOwner();
             if (owner != null) {
                 for (int i = 0; i < admittedKeys.size(); i++) {
                     owner.put(admittedKeys.get(i), admittedValues.get(i));
