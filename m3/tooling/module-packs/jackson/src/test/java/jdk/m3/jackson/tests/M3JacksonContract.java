@@ -79,6 +79,7 @@ public final class M3JacksonContract {
         run("trailing-and-malformed-input", M3JacksonContract::trailingAndMalformed);
         run("character-snapshot-and-source-goldens", M3JacksonContract::characterSnapshots);
         run("file-bounds-decoding-and-byte-goldens", () -> fileSnapshots(output));
+        run("primitive-index-and-streamed-json", () -> primitiveIndexAndStreaming(output));
         run("invalid-limit-configuration", M3JacksonContract::invalidLimits);
         run("input-token-atom-reference-text-depth-limits", M3JacksonContract::inputLimits);
         run("retained-output-limits", M3JacksonContract::retainedOutputLimits);
@@ -89,6 +90,48 @@ public final class M3JacksonContract {
         Files.writeString(output.resolve("CONTRACT_RESULTS.tsv"), RESULTS,
                 StandardCharsets.UTF_8, StandardOpenOption.CREATE_NEW);
         System.out.println("M3_JACKSON_CONTRACT_PASS cases=" + cases + " checks=" + checks);
+    }
+
+    private static void primitiveIndexAndStreaming(Path output) throws Exception {
+        String json = "{\"dup\":\"one\",\"dup\":\"two\",\"number\":-2.5e+2,"
+                + "\"nested\":[null,true,false,\"🚀\"]}";
+        Path path = output.resolve("streaming.json");
+        byte[] bytes = json.getBytes(StandardCharsets.UTF_8);
+        Files.write(path, bytes, StandardOpenOption.CREATE_NEW);
+
+        M3ObjectMapper mapper = new M3ObjectMapper(ROOM);
+        M3AST indexed = mapper.readASTStreaming(path, StandardCharsets.UTF_8, bytes.length);
+        int root = indexed.rootAtomIndex();
+        equal("OBJECT", indexed.kindAt(root), "primitive root kind");
+        equal(4, indexed.childCountAt(root), "preserve duplicate ordered fields");
+        int firstField = indexed.childAtomIndexAt(root, 0);
+        int secondField = indexed.childAtomIndexAt(root, 1);
+        equal("FIELD", indexed.kindAt(firstField), "primitive field kind");
+        equal("dup", indexed.nameAt(firstField), "first duplicate field name");
+        equal("dup", indexed.nameAt(secondField), "second duplicate field name");
+        equal("one", indexed.valueAt(indexed.childAtomIndexAt(firstField, 0)),
+                "first duplicate field value");
+        equal("two", indexed.valueAt(indexed.childAtomIndexAt(secondField, 0)),
+                "second duplicate field value");
+        equal(indexed.structuralHash64(), indexed.structuralHash64At(root),
+                "indexed hash matches root hash");
+        equal(json, mapper.writeValueAsString(indexed), "streamed JSON index round-trip");
+        equal(mapper.writeValueAsString(mapper.readAST(json)),
+                mapper.writeValueAsString(indexed), "snapshot/streaming parity");
+        expect(IndexOutOfBoundsException.class, () -> indexed.kindAt(-1),
+                "invalid primitive atom coordinate");
+        expect(IndexOutOfBoundsException.class, () -> indexed.childAtomIndexAt(root, 4),
+                "invalid primitive child coordinate");
+        expect(IOException.class, () -> mapper.readASTStreaming(path,
+                StandardCharsets.UTF_8, bytes.length - 1), "stream byte cap");
+        expect(IllegalArgumentException.class, () -> mapper.readASTStreaming(path,
+                StandardCharsets.UTF_8, -1), "negative streaming byte cap");
+
+        Path malformed = output.resolve("malformed-streaming.json");
+        Files.write(malformed, HexFormat.of().parseHex("7b2278223a22c328227d"),
+                StandardOpenOption.CREATE_NEW);
+        expect(IOException.class, () -> mapper.readASTStreaming(malformed,
+                StandardCharsets.UTF_8, 1024), "malformed streaming UTF-8 rejected");
     }
 
     private static void originalObjectMapper() throws Exception {
