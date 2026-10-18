@@ -1,0 +1,6 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.FiveProviderIndexedProjections20261018
+displayName: Five-provider M3 indexed filtered/sorted result adapters
+description: Reuse the existing M3 array-offset and mask owner with source-sealed vendor adapters.
+recipeList:
+  - com.synexia.rewrite.M3FiveProviderIndexedProjectionsRecipe

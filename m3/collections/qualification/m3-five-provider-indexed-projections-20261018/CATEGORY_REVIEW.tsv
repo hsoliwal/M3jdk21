@@ -1,0 +1,12 @@
+category	provider	original_api	M3_owner	algorithm_or_contract	decision	licensing
+SET_DEDUP	JDK	java.util.Set	M3LinkedHashSet	Equality dedup over source occurrences	REUSE EXISTING OWNER	M3 Apache-2.0
+BIMAP_UNIQUENESS	Guava	com.google.common.collect.BiMap	M3GuavaBiMap	Unique value forward/reverse map, inverse live mutation	REUSE EXISTING OWNER	Guava Apache-2.0 API dependency, no copied code
+MULTISET_COUNTS	Guava	com.google.common.collect.Multiset	M3GuavaMultiset/M3CountedBag	Count multiplicities in packed M3 lanes	REUSE EXISTING OWNER	Guava Apache-2.0 API dependency
+TABLE_COORDINATES	Guava	com.google.common.collect.Table	M3LinkedHashMap nested	Selected ordinal as unique column; retains duplicate rows	REUSE EXISTING OWNER	Guava Apache-2.0 API dependency
+MULTIMAP_DUPLICATES	Eclipse Collections	org.eclipse.collections.api.multimap.list.MutableListMultimap	M3EclipseListMultimap	Encounter-order repeated key/value pairs	REUSE EXISTING OWNER	Eclipse EPL/EDL dependency, source not copied
+MULTIMAP_SET	Eclipse Collections	org.eclipse.collections.api.multimap.set.MutableSetMultimap	M3EclipseSetMultimap	Distinct key/value pairs per key	REUSE EXISTING OWNER	Eclipse EPL/EDL dependency, source not copied
+BAG_COUNTS	Apache Commons Collections	org.apache.commons.collections4.MultiSet	M3ApacheMultiSet/M3CountedBag	Exact count by equality; underlying M3 group slots	REUSE EXISTING OWNER	Apache Commons Apache-2.0 dependency
+MULTIVALUE_LAST	Spring Framework	org.springframework.util.MultiValueMap	M3SpringArrayMultiValueMap	Last selected value per key; size counts keys	REUSE EXISTING OWNER	Spring Apache-2.0 dependency
+STABLE_INDIRECT_SORT	LeetCode	#912 Sort an Array	M3FiveLibraryIndexViews	Merge source index vector, preserve equal-key stability	REUSE FIRST_PARTY	Category reference only, no solution copied
+INDEX_WINDOW	HackerRank	Dynamic Array	M3FiveLibraryIndexViews	Half-open offsets + immutable indirect indices	REUSE FIRST_PARTY	Category reference only
+STATE_BITMASK	GeeksforGeeks	Bit Manipulation	M3IndexMaskWindow	Unsigned-byte state select, optional JNI parity	REUSE EXISTING JNI	Category reference only
