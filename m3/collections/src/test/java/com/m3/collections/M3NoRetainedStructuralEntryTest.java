@@ -22,8 +22,9 @@ import org.junit.jupiter.api.Test;
 /**
  * Mechanical LEAN guard: logical collection entries are not retained as structural objects.
  *
- * <p>Map.Entry is permitted only as a transient Java API projection. Canonical packed storage must
- * remain payload lanes plus primitive slot/index/topology state.</p>
+ * <p>Map.Entry is permitted only as an API projection and may be retained by the bounded
+ * {@link M3LFUCache} that manages those projections. Canonical packed storage must remain payload
+ * lanes plus primitive slot/index/topology state; the API cache must never become a backing table.</p>
  */
 final class M3NoRetainedStructuralEntryTest {
     private static final String PACKAGE = "com.m3.collections.";
@@ -117,21 +118,6 @@ final class M3NoRetainedStructuralEntryTest {
         Map.Entry<?, ?> expected = supplier.get();
         for (int iteration = 0; iteration < 1_024; iteration++) {
             assertSame(expected, supplier.get(), label + " failed to reuse its live facade at " + iteration);
-        }
-    }
-
-    private static void assertFreshBurst(
-            Supplier<? extends Map.Entry<?, ?>> supplier, String label) {
-        Object[] seen = new Object[1_024];
-        for (int iteration = 0; iteration < seen.length; iteration++) {
-            Map.Entry<?, ?> current = supplier.get();
-            for (int prior = 0; prior < iteration; prior++) {
-                assertNotSame(
-                        seen[prior],
-                        current,
-                        label + " reused/pool-cycled an Entry identity at " + iteration);
-            }
-            seen[iteration] = current;
         }
     }
 
