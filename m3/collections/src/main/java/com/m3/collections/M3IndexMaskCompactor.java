@@ -52,6 +52,28 @@ public final class M3IndexMaskCompactor {
     }
 
     /**
+     * Select logical positions satisfying all required state bits without a caller-owned
+     * identity row array. The result is detached, ascending encounter-order coordinates.
+     * New native binaries generate coordinates directly from the byte-state lane; legacy
+     * binaries remain compatible through the original row selector.
+     */
+    public static int[] selectPositions(byte[] rowStates, int requiredMask, Backend backend) {
+        Objects.requireNonNull(rowStates, "rowStates");
+        Objects.requireNonNull(backend, "backend");
+        requireMask(requiredMask);
+        if (backend == Backend.NATIVE_REQUIRED) {
+            if (!NativeLibrary.AVAILABLE) {
+                throw new UnsatisfiedLinkError("m3_index_mask JNI library unavailable");
+            }
+            if (NativePositions.AVAILABLE) {
+                return selectPositionsNative(rowStates, requiredMask);
+            }
+            return selectNative(identityPositions(rowStates.length), rowStates, requiredMask);
+        }
+        return selectPositionsJava(rowStates, requiredMask);
+    }
+
+    /**
      * Internal native selection over an owner's stable half-open index window.
      * States describe logical positions, not physical row IDs. This never retains inputs.
      * Old binaries keep using their original native selector and defensive window copy;
@@ -150,6 +172,32 @@ public final class M3IndexMaskCompactor {
             throw new ConcurrentModificationException("aligned selection states changed");
         }
         return selected;
+    }
+
+    /** Exact-sized logical-position selection; no O(n) identity input scratch. */
+    static int[] selectPositionsJava(byte[] rowStates, int requiredMask) {
+        int selectedCount = countSelected(rowStates, requiredMask);
+        if (selectedCount == rowStates.length) return identityPositions(rowStates.length);
+        int[] selected = new int[selectedCount];
+        int written = 0;
+        for (int i = 0; i < rowStates.length; i++) {
+            if (matches(rowStates[i], requiredMask)) {
+                if (written == selected.length) {
+                    throw new ConcurrentModificationException("aligned selection states changed");
+                }
+                selected[written++] = i;
+            }
+        }
+        if (written != selected.length) {
+            throw new ConcurrentModificationException("aligned selection states changed");
+        }
+        return selected;
+    }
+
+    private static int[] identityPositions(int length) {
+        int[] positions = new int[length];
+        for (int i = 0; i < length; i++) positions[i] = i;
+        return positions;
     }
 
     /**
@@ -262,6 +310,22 @@ public final class M3IndexMaskCompactor {
             AVAILABLE = loaded;
         }
     }
+
+    /** Lazy capability probe keeps old JNI binaries compatible with position selection. */
+    private static final class NativePositions {
+        private static final boolean AVAILABLE = available();
+        private static boolean available() {
+            try {
+                return positionsAbiNative() == 1;
+            } catch (UnsatisfiedLinkError legacyBinary) {
+                return false;
+            }
+        }
+    }
+
+    private static native int positionsAbiNative();
+
+    private static native int[] selectPositionsNative(byte[] rowStates, int requiredMask);
 
     /** Lazy probing does not change initialization of the legacy public native API. */
     private static final class NativeRange {
