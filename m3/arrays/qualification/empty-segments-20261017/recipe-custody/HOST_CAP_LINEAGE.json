@@ -1,0 +1,37 @@
+{
+  "canonical_revision": "8f8200375d8d403b58e855ee5db02f2e8fac33a8",
+  "canonical_crate": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017",
+  "change": "Recipe-source POM exposes m3.recipe.test.maxHeap, default768m. All original engines, SDK tests, sealing/receiving gates unchanged.",
+  "before_pom_sha256": "77768901812250c397a0ec138c83c7117a86bd14d1c77fbd75cce1324812ebb5",
+  "after_pom_sha256": "4c90faaa9e64aebeeba14fb2196731c6334293781d0fdcafbf190f2f5662eb7d",
+  "original_test_sha256": "74b03a3ac3e445a04b8b15076d3ced667bfae2442bd0968cbe74468e4a499e43",
+  "qualification": "PASS_FRESH_FIXTURE_AND_NUMERIC_DATASET",
+  "fresh_qualification": [
+    {
+      "dataset": "fixture",
+      "sdk_tests": 5,
+      "sdk_failures": 0,
+      "sdk_errors": 0,
+      "sdk_skipped": 0,
+      "sealing_tests": 8,
+      "receiver_cases": 9,
+      "sdk_inputs_sha256": "ca2677dba86f46e0bc5ffff14f5fd97e6eadc34c6b519906e002a94989f09692",
+      "sdk_results_sha256": "4dfc646b45dad6214452eb4de5888689916479de51b9cfac4268c426236ff999",
+      "junit_xml_sha256": "0fa17586c52fef135b91691cea188429b544dcd5ed987d342b807bb3c81c2d8f",
+      "maven_receipt_sha256": "7b243370a0f623c39b5828bdbf13ddacb775de4640052f743a4d9dca207d170e"
+    },
+    {
+      "dataset": "m3jdk21-numeric-copy",
+      "sdk_tests": 5,
+      "sdk_failures": 0,
+      "sdk_errors": 0,
+      "sdk_skipped": 0,
+      "sealing_tests": 8,
+      "receiver_cases": 9,
+      "sdk_inputs_sha256": "1f6796cfb9dc805b44223e02efe05596147be06052447c9f9d6d6bf7016a3365",
+      "sdk_results_sha256": "0f4c412e6b4ade2c05bb7afcec22efd626e89eebf0278762fad32c71ee593043",
+      "junit_xml_sha256": "f247eaf35f3dc536315bc90e01a6c318a882a65ff9316025c8f967754ea7169a",
+      "maven_receipt_sha256": "61211d38cb22a8aec4e75969806e5a0ae1d67890e95c1ec7b75d7dd8393287a4"
+    }
+  ]
+}

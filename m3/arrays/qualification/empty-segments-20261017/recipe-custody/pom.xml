@@ -18,6 +18,7 @@ SPDX-License-Identifier: Apache-2.0
     <m3.resources>${project.basedir}/datasets/${m3.dataset}/resources</m3.resources>
     <m3.recipe.name>com.synexia.m3jdk.CollectionsContractRefinement20261017</m3.recipe.name>
     <rewrite.version>8.17.1</rewrite.version>
+    <m3.recipe.test.maxHeap>768m</m3.recipe.test.maxHeap>
   </properties>
   <dependencies>
     <dependency><groupId>org.openrewrite</groupId><artifactId>rewrite-java</artifactId><version>${rewrite.version}</version></dependency>
@@ -46,7 +47,7 @@ SPDX-License-Identifier: Apache-2.0
         <configuration>
           <failIfNoTests>true</failIfNoTests>
           <includes><include>com/synexia/rewrite/M3TaskRecipeTest.java</include></includes>
-          <argLine>-Xmx1536m</argLine>
+          <argLine>-Xmx${m3.recipe.test.maxHeap}</argLine>
           <systemPropertyVariables>
             <m3.dataset>${m3.dataset}</m3.dataset>
             <m3.crate.name>${m3.crate.name}</m3.crate.name>
