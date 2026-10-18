@@ -1,0 +1,39 @@
+{
+  "platform": "Linux-6.18.55-x86_64-with-glibc2.39",
+  "machine": "x86_64",
+  "affinity": [
+    0,
+    1
+  ],
+  "active_processor_count": 2,
+  "fixed_heap_mib": 256,
+  "effective_explicit_environment": {
+    "JAVA_HOME": "/tmp/m3-toolchain/jdk-21.0.12.1+1",
+    "LANG": "C.UTF-8",
+    "LC_ALL": "C.UTF-8",
+    "TZ": "UTC"
+  },
+  "cleared_optional_environment_variable_was_present": {
+    "JAVA_TOOL_OPTIONS": false,
+    "JDK_JAVA_OPTIONS": false,
+    "_JAVA_OPTIONS": false,
+    "CLASSPATH": false,
+    "LD_PRELOAD": false
+  },
+  "runtime_classpath_jars": [],
+  "jar_boundary": "No external or project JAR is on the runtime classpath; actual all-main class directories are sealed instead.",
+  "toolchain_sha256": {
+    "bin/java": "2a207f5e7d075afa01d97f8048389a64432a44c4a5af0f5e77d6e286ec5f401d",
+    "bin/javac": "55859b80e7a9c4c4736be19ad3addeb35112ca6d17a30c4e0e116afc0a499bdb",
+    "release": "ebbd70bf00bab6d39addf51969c5ff244030b86b29de400b9fb10612ebd3ceec",
+    "lib/modules": "70c5465dabf8e1bec2860631ea3ffd342f0ec23a5e2efd3a389d2abe32448f98"
+  },
+  "taskset": {
+    "path": "/usr/bin/taskset",
+    "sha256": "a9c851792e54e91fba7b827019380abee54e715b6817899c835e4f221354b260"
+  },
+  "proof_source_sha256": "633ad8b6e70b211efc1917daea6277b38632359f9442120396fbeb187e663cf0",
+  "invocation_script_sha256": "63c63dda6543a1106f07669a28f573a71d5db19aa17da677483046622cad2877",
+  "protocol_sha256": "0b0e89f92b6ee808eb31c3558b4de1323de1951079e6f0f694e6ff606437a636",
+  "before_code_sha256": "da28c2b276c7c69a7e26d9a42043feabadfdcad4514c3922a7391b4d442c8aa9"
+}

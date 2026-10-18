@@ -1,0 +1,85 @@
+{
+  "schema": "M3_EXISTING_PROOF_ALLOCATION_OBSERVATION_V1",
+  "status": "PASS_NARROW_ALLOCATION_OBSERVATION",
+  "metric": "JVM-reported invoking-thread allocated bytes",
+  "workload": {
+    "mode": "allocation",
+    "jvms_per_lane": 3,
+    "samples_per_jvm": 3,
+    "operations_per_sample": 100,
+    "projection_units": 32750,
+    "warmup_operations": 100,
+    "order": [
+      "baseline-1",
+      "receiver-1",
+      "baseline-2",
+      "receiver-2",
+      "baseline-3",
+      "receiver-3"
+    ],
+    "jvm_flags": [
+      "-Xms256m",
+      "-Xmx256m",
+      "-XX:ActiveProcessorCount=2"
+    ],
+    "linux_cpu_affinity": [
+      0,
+      1
+    ],
+    "metric": "com.sun.management.ThreadMXBean.getThreadAllocatedBytes for the invoking thread",
+    "report": [
+      "raw bytes per100operations",
+      "bytes peroperation",
+      "median of each three-sample JVM",
+      "range and median across all nine samples per lane"
+    ],
+    "statistics_limit": "Three samples in a JVM share VM state; no independence or confidence interval is claimed.",
+    "claims_excluded": [
+      "elapsed-time speedup",
+      "CPU efficiency",
+      "JNI speedup",
+      "all collection operations",
+      "retained heap or GC improvement"
+    ]
+  },
+  "lanes": {
+    "baseline": {
+      "jvms": 3,
+      "samples": 9,
+      "operations_per_sample": 100,
+      "jvm_median_bytes": {
+        "1": 26206400,
+        "2": 26206400,
+        "3": 26206400
+      },
+      "median_bytes_per_sample": 26206400,
+      "min_bytes_per_sample": 26206400,
+      "max_bytes_per_sample": 26206400,
+      "median_bytes_per_operation": 262064.0
+    },
+    "receiver": {
+      "jvms": 3,
+      "samples": 9,
+      "operations_per_sample": 100,
+      "jvm_median_bytes": {
+        "1": 13104800,
+        "2": 13104800,
+        "3": 13104800
+      },
+      "median_bytes_per_sample": 13104800,
+      "min_bytes_per_sample": 13104800,
+      "max_bytes_per_sample": 13104800,
+      "median_bytes_per_operation": 131048.0
+    }
+  },
+  "median_difference_bytes_per_operation": 131016.0,
+  "median_reduction_percent": 49.993894621161246,
+  "same_proof_bytecode": true,
+  "source_and_class_recheck": "PASS",
+  "runtime_classpath_jars": [],
+  "limitations": [
+    "Only sortedDescending on the specified already-sorted slice was observed.",
+    "Within-JVM samples are not independent fresh JVMs; no confidence interval is claimed.",
+    "No elapsed-time, CPU, JNI, retained-heap, GC, or broad collection performance inference."
+  ]
+}

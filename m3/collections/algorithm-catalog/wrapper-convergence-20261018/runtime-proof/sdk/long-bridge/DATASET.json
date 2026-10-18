@@ -1,0 +1,13 @@
+{
+  "schema": "M3_COLLECTIONS_CONTRACT_REFINEMENT_DATASET_V1",
+  "dataset": "m3jdk21-long-bridge-20261018",
+  "repository": "hsoliwal/M3jdk21",
+  "baseline_ref": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
+  "crate_name": "m3-collections-contract-refinement-20261017-m3jdk21-long-bridge-20261018",
+  "recipe_name": "com.synexia.m3jdk.CollectionsContractRefinement20261017",
+  "targets": 1,
+  "java_targets": 1,
+  "text_targets": 0,
+  "product_sources_written": false,
+  "engine_changes_from_origin": []
+}

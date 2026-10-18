@@ -1,4 +1,6 @@
 // SPDX-License-Identifier: Apache-2.0
+// Copyright 2026 Hitesh Soliwal and contributors
+// Modified 2026-10-18: recover reviewed navigation ownership and strict endpoints.
 package com.m3.collections;
 
 import java.util.AbstractSet;
@@ -41,6 +43,8 @@ public final class M3FilteredNavigableSet<E> extends AbstractSet<E> implements N
     private static <E> NavigableSet<E> wrap(NavigableSet<E> view) {
         return new M3FilteredNavigableSet<>(view);
     }
+
+    NavigableSet<E> navigationOwner() { return delegate; }
 
     @Override public Comparator<? super E> comparator() { return delegate.comparator(); }
     @Override public Iterator<E> iterator() { return delegate.iterator(); }
@@ -95,6 +99,8 @@ public final class M3FilteredNavigableSet<E> extends AbstractSet<E> implements N
     @Override public boolean retainAll(Collection<?> values) { throw readonly(); }
     @Override public boolean removeIf(Predicate<? super E> predicate) { throw readonly(); }
     @Override public void clear() { throw readonly(); }
+    @Override public E removeFirst() { throw readonly(); }
+    @Override public E removeLast() { throw readonly(); }
     @Override public E pollFirst() { throw readonly(); }
     @Override public E pollLast() { throw readonly(); }
 }
