@@ -17,8 +17,15 @@ import org.apache.commons.collections4.multiset.AbstractMultiSet;
  * semantics are reused, with counts, iteration, and revisions owned by M3.
  */
 public final class M3ApacheMultiSet<E> extends AbstractMultiSet<E> {
-    private final M3CountedBag<E> bag = new M3CountedBag<>();
-    public M3ApacheMultiSet() { }
+    private final M3CountedBag<E> bag;
+
+    /** Independent default indexed count owner; preserves the original contract. */
+    public M3ApacheMultiSet() { this(new M3CountedBag<>()); }
+
+    /** Share a single existing M3 count owner with other provider facades. */
+    public M3ApacheMultiSet(M3CountedBag<E> owner) {
+        this.bag = Objects.requireNonNull(owner, "owner");
+    }
     public static <E> M3ApacheMultiSet<E> create() { return new M3ApacheMultiSet<>(); }
 
     @Override public int getCount(Object element) { return bag.count(element); }
