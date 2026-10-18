@@ -151,8 +151,19 @@ final class M3RX7CodecCapRecipeTest {
 
     @Test
     void qualifiesLauncherRecipeAndFixedPoints() throws Exception {
-        String forward = "m3-rx7-codec-cap-launcher-20261018";
+        qualifyTextCrates("m3-rx7-codec-cap-launcher-20261018",
+                "com.synexia.m3.RX7CodecCapLauncher20261018", false);
+        qualifyTextCrates("m3-rx7-codec-receive-20261018",
+                "com.synexia.m3.RX7CodecReceive20261018", true);
+    }
+
+    private static void qualifyTextCrates(String forward, String namedForward,
+            boolean exportReceiveResults) throws Exception {
         String inverse = forward + "-inverse";
+        if (exportReceiveResults) {
+            assertEquals("m3-rx7-codec-receive-20261018", forward);
+            assertEquals("com.synexia.m3.RX7CodecReceive20261018", namedForward);
+        }
         Map<String, String> before = Map.of(
                 ".github/workflows/m3rx7-v7-image-codec-20261014.yml",
                 textResource(inverse, "workflow.yml.txt"),
@@ -164,8 +175,7 @@ final class M3RX7CodecCapRecipeTest {
                 "m3/runtime-integration/check-m3rx7-v7-image-codec.sh",
                 textResource(forward, "launcher.sh.txt"));
         Environment environment = recipeEnvironment();
-        for (String name : List.of("com.synexia.m3.RX7CodecCapLauncher20261018",
-                "com.synexia.m3.RX7CodecCapLauncher20261018Inverse")) {
+        for (String name : List.of(namedForward, namedForward + "Inverse")) {
             var named = environment.activateRecipes(name).getRecipeList().getFirst();
             assertEquals(name, named.getName());
             assertEquals(1, named.getRecipeList().size());
@@ -174,6 +184,7 @@ final class M3RX7CodecCapRecipeTest {
                     (M3HashPinnedTextSnapshotRecipe) named.getRecipeList().getFirst();
             assertEquals(name.endsWith("Inverse") ? inverse : forward, recipe.getCrateName());
         }
+        Map<String, String> actualTextResults = null;
         for (boolean undo : List.of(false, true)) {
             String crate = undo ? inverse : forward;
             Map<String, String> from = undo ? after : before;
@@ -199,10 +210,27 @@ final class M3RX7CodecCapRecipeTest {
                             input.put(paths.get(index), to.get(paths.get(index)));
                         }
                     }
-                    Outcome applied = runText(crate, textSources(input, reversed));
+                    Outcome applied = exportReceiveResults && !undo && state == 0 && !reversed
+                            ? runText(environment.activateRecipes(namedForward),
+                                    textSources(input, reversed))
+                            : runText(crate, textSources(input, reversed));
                     assertEquals(to, successfulText(input, applied));
                     assertEquals(2 - Integer.bitCount(state),
                             applied.run().getChangeset().getAllResults().size());
+                    if (exportReceiveResults && !undo && state == 0 && !reversed) {
+                        Map<String, String> resultData = new TreeMap<>();
+                        for (var change : applied.run().getChangeset().getAllResults()) {
+                            assertNotNull(change.getBefore());
+                            assertNotNull(change.getAfter());
+                            String path = normalized(change.getAfter().getSourcePath());
+                            assertTrue(before.containsKey(path));
+                            assertEquals(before.get(path), change.getBefore().printAll());
+                            assertNull(resultData.put(path, change.getAfter().printAll()),
+                                    "duplicate named forward Result");
+                        }
+                        assertEquals(after, resultData);
+                        actualTextResults = Map.copyOf(resultData);
+                    }
                     Outcome fixed = runText(crate, textSources(to, reversed));
                     assertEquals(to, successfulText(to, fixed));
                     assertTrue(fixed.run().getChangeset().getAllResults().isEmpty());
@@ -222,16 +250,37 @@ final class M3RX7CodecCapRecipeTest {
                 textRefused(crate, duplicate, "duplicate target");
             }
         }
+        if (exportReceiveResults) {
+            assertNotNull(actualTextResults, "full-BEFORE named forward Results required");
+            Map<String, String> missingResult = new TreeMap<>(actualTextResults);
+            missingResult.remove("m3/runtime-integration/check-m3rx7-v7-image-codec.sh");
+            AssertionError missingRefusal = assertThrows(AssertionError.class,
+                    () -> exportTextResults(before, after, missingResult));
+            assertTrue(missingRefusal.getMessage().contains("exact named forward Result allowlist"));
+            Map<String, String> changedResult = new TreeMap<>(actualTextResults);
+            String changedPath = changedResult.keySet().iterator().next();
+            changedResult.put(changedPath, changedResult.get(changedPath) + "\n# result drift\n");
+            AssertionError changedRefusal = assertThrows(AssertionError.class,
+                    () -> exportTextResults(before, after, changedResult));
+            assertTrue(changedRefusal.getMessage().contains(
+                    "export only exact actual named forward Results"));
+            assertFalse(Files.exists(owned("m3.build.root").resolve("text-recipe-results"),
+                    LinkOption.NOFOLLOW_LINKS), "refused Results must not create output");
+            exportTextResults(before, after, actualTextResults);
+        }
     }
 
     private static Outcome runText(String crate, List<SourceFile> sources) {
+        return runText(new M3HashPinnedTextSnapshotRecipe(crate), sources);
+    }
+
+    private static Outcome runText(org.openrewrite.Recipe recipe, List<SourceFile> sources) {
         List<Throwable> errors = new ArrayList<>();
         InMemoryExecutionContext context = new InMemoryExecutionContext(errors::add);
         RecipeRun run = null;
         Throwable thrown = null;
         try {
-            run = new M3HashPinnedTextSnapshotRecipe(crate)
-                    .run(new InMemoryLargeSourceSet(sources), context, 1);
+            run = recipe.run(new InMemoryLargeSourceSet(sources), context, 1);
         } catch (RuntimeException | AssertionError failure) {
             thrown = failure;
         }
@@ -294,7 +343,9 @@ final class M3RX7CodecCapRecipeTest {
                 "m3-rx7-codec-cap-20261018.yml",
                 "m3-rx7-codec-cap-20261018-inverse.yml",
                 "m3-rx7-codec-cap-launcher-20261018.yml",
-                "m3-rx7-codec-cap-launcher-20261018-inverse.yml")) {
+                "m3-rx7-codec-cap-launcher-20261018-inverse.yml",
+                "m3-rx7-codec-receive-20261018.yml",
+                "m3-rx7-codec-receive-20261018-inverse.yml")) {
             String path = "/META-INF/rewrite/" + name;
             try (var stream = M3RX7CodecCapRecipeTest.class.getResourceAsStream(path)) {
                 assertNotNull(stream, "exact classpath descriptor required: " + path);
@@ -586,6 +637,135 @@ final class M3RX7CodecCapRecipeTest {
             }
         }
         assertEquals(actual, files);
+    }
+
+    private static void exportTextResults(Map<String, String> before,
+            Map<String, String> expected, Map<String, String> actual) throws Exception {
+        Set<String> allowed = Set.of(
+                ".github/workflows/m3rx7-v7-image-codec-20261014.yml",
+                "m3/runtime-integration/check-m3rx7-v7-image-codec.sh");
+        assertEquals(allowed, before.keySet(), "exact text preimage allowlist");
+        assertEquals(allowed, expected.keySet(), "exact text postimage allowlist");
+        assertEquals(allowed, actual.keySet(), "exact named forward Result allowlist");
+        assertEquals(expected, actual, "export only exact actual named forward Results");
+        Map<String, byte[]> payloads = new TreeMap<>();
+        StringBuilder receipt = new StringBuilder(
+                "# SPDX-License-Identifier: Apache-2.0\n"
+                + "# schema=M3_RX7_TEXT_RECIPE_RESULTS_V1\n"
+                + "# recipe=com.synexia.m3.RX7CodecReceive20261018\n"
+                + "# origin=ACTUAL_NAMED_FULL_BEFORE_FORWARD_RESULTS\n"
+                + "# targetActivatedByExporter=false\n"
+                + "# productionOutputsReceivedByExporter=false\n"
+                + "# hostedReceiveQualification=NOT_RUN\n"
+                + "# receiptSelfExcluded=true\n"
+                + "path\tbefore_sha256\tafter_sha256\tbytes\n");
+        for (var entry : new TreeMap<>(actual).entrySet()) {
+            String path = entry.getKey();
+            byte[] data = entry.getValue().getBytes(StandardCharsets.UTF_8);
+            assertTrue(data.length > 0 && data.length <= 64 * 1024,
+                    "bounded text Result required");
+            assertEquals(sha256(expected.get(path)), sha256(entry.getValue()),
+                    "actual text Result hash");
+            payloads.put(path, data);
+            receipt.append(path).append('\t').append(sha256(before.get(path)))
+                    .append('\t').append(sha256(entry.getValue())).append('\t')
+                    .append(data.length).append('\n');
+        }
+        byte[] receiptBytes = receipt.toString().getBytes(StandardCharsets.UTF_8);
+        assertTrue(receiptBytes.length <= 4 * 1024, "bounded text receipt required");
+        payloads.put("receipt.tsv", receiptBytes);
+        long plannedBytes = payloads.values().stream().mapToLong(data -> data.length).sum();
+        assertTrue(plannedBytes <= 128 * 1024, "bounded two-Result bundle required");
+
+        Path recipeRoot = owned("m3.recipe.root");
+        Path build = owned("m3.build.root");
+        Path javaOutput = owned("m3.output.root");
+        for (Path external : List.of(build, javaOutput)) {
+            assertFalse(external.startsWith(recipeRoot) || recipeRoot.startsWith(external),
+                    "external output root must be disjoint from recipe source");
+        }
+        assertFalse(build.startsWith(javaOutput) || javaOutput.startsWith(build),
+                "text build root and Java export root must be disjoint");
+        Path output = build.resolve("text-recipe-results").normalize();
+        assertTrue(output.startsWith(build) && !output.equals(build));
+        assertFalse(Files.exists(output, LinkOption.NOFOLLOW_LINKS),
+                "fresh named text Result output required");
+        assertFalse(Files.isSymbolicLink(output));
+        for (String path : payloads.keySet()) {
+            Path destination = output.resolve(path).normalize();
+            assertTrue(destination.startsWith(output) && !destination.equals(output),
+                    "text Result destination escaped owned root");
+            for (Path current = destination; current != null && !current.equals(build);
+                    current = current.getParent()) {
+                assertFalse(Files.isSymbolicLink(current));
+                assertFalse(Files.exists(current, LinkOption.NOFOLLOW_LINKS),
+                        "text Result destination must be initially absent");
+            }
+        }
+        assertTrue(Files.getFileStore(build).getUsableSpace()
+                >= 8L * 1024 * 1024 * 1024 + plannedBytes,
+                "8GiB reserve after planned text Result output required");
+
+        Files.createDirectory(output);
+        for (var entry : payloads.entrySet()) {
+            Path destination = output.resolve(entry.getKey()).normalize();
+            Files.createDirectories(destination.getParent());
+            for (Path current = destination.getParent(); current != null;
+                    current = current.getParent()) {
+                assertFalse(Files.isSymbolicLink(current));
+                assertTrue(Files.isDirectory(current, LinkOption.NOFOLLOW_LINKS));
+                if (current.equals(build)) break;
+            }
+            Files.write(destination, entry.getValue(), StandardOpenOption.CREATE_NEW);
+        }
+        Map<String, byte[]> observed = new TreeMap<>();
+        try (var paths = Files.walk(output, 5)) {
+            List<Path> entries = paths.limit(16).toList();
+            assertEquals(8, entries.size(), "bounded closed text Result output inventory");
+            for (Path file : entries) {
+                assertFalse(Files.isSymbolicLink(file));
+                if (Files.isDirectory(file, LinkOption.NOFOLLOW_LINKS)) continue;
+                assertTrue(Files.isRegularFile(file, LinkOption.NOFOLLOW_LINKS));
+                String path = normalized(output.relativize(file));
+                assertTrue(payloads.containsKey(path), "foreign text Result output");
+                assertTrue(Files.size(file) <= 64 * 1024);
+                byte[] data;
+                try (var stream = Files.newInputStream(file, LinkOption.NOFOLLOW_LINKS)) {
+                    data = stream.readNBytes(64 * 1024 + 1);
+                }
+                assertTrue(data.length <= 64 * 1024, "text Result readback grew");
+                assertArrayEquals(payloads.get(path), data, "exact text Result readback");
+                assertNull(observed.put(path, data), "duplicate text Result output");
+            }
+        }
+        assertEquals(payloads.keySet(), observed.keySet(), "closed text Result output");
+        assertTrue(Files.getFileStore(build).getUsableSpace() >= 8L * 1024 * 1024 * 1024);
+        assertEquals(Set.of(
+                ".github/workflows/m3rx7-v7-image-codec-20261014.yml",
+                "m3/runtime-integration/check-m3rx7-v7-image-codec.sh", "receipt.tsv"),
+                observed.keySet(), "exact text Result carrier allowlist");
+        StringBuilder carrier = new StringBuilder();
+        for (var entry : observed.entrySet()) {
+            byte[] data = entry.getValue();
+            String encoded = java.util.Base64.getEncoder().encodeToString(data);
+            assertArrayEquals(data, java.util.Base64.getDecoder().decode(encoded),
+                    "exact carrier byte roundtrip");
+            String hash = HexFormat.of().formatHex(
+                    MessageDigest.getInstance("SHA-256").digest(data));
+            carrier.append("M3_RX7_TEXT_RESULT_B64_V1").append('\t')
+                    .append(entry.getKey()).append('\t').append(hash).append('\t')
+                    .append(data.length).append('\t').append(encoded).append('\n');
+        }
+        byte[] carrierBytes = carrier.toString().getBytes(StandardCharsets.UTF_8);
+        assertTrue(carrierBytes.length <= 64 * 1024,
+                "entire actual Result carrier exceeds 64KiB");
+        assertEquals(3L, carrier.toString().lines().count(),
+                "exactly three actual readback carrier records");
+        System.out.print(carrier.toString());
+        System.out.println("M3_RX7_TEXT_RECIPE_RESULTS_EXPORTED outputs=2 receipt=1"
+                + " refusalControls=2 origin=ACTUAL_NAMED_FORWARD_RESULTS"
+                + " carrierRecords=3 carrierBytes=" + carrierBytes.length
+                + " targetActivatedByExporter=false hostedReceiveQualification=NOT_RUN");
     }
 
     private static String file(String path) {

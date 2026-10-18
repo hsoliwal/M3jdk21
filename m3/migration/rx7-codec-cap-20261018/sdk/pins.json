@@ -1,8 +1,12 @@
 {
   "schema": "M3_RX7_CODEC_CAP_SDK_PINS_V1",
-  "canonicalSourceBase": "50f48cbbe11f17fb8dc209bac3812f8940a1e267",
-  "receiverBase": "f29b0afe7ad253cc0562bc8dfdd48fc1acec710e",
-  "fossContractCommit": "4f8a1cd9d3c54b6b0f362d57ead790c37540bdec",
+  "status": "UNADMITTED_TOOL_QUALIFICATION_BOOTSTRAP",
+  "canonicalSourceBase": "a17b395aa849a53ba48e896d53636b9dc6942f7d",
+  "receiverBase": "b42f5260417d12bb73246302c8722b9295a2d24f",
+  "fossContractCommit": "d2cbc85192d09abc0548b7f825f86cddff44a224",
+  "qualifiedCapDonor": "e89f12783efeb9b6302aa0d02219651c8aeb9b5d",
+  "receiveRecipeDonor": "2711cbfe44896502aa31ecf854de41f571aa3a13",
+  "everyModuleAdmission": "NOT_RUN",
   "expectedExecution": {
     "junitClass": "com.synexia.rewrite.M3RX7CodecCapRecipeTest",
     "namedMethods": [
@@ -13,13 +17,25 @@
     "javaForwardStates": 8,
     "javaInverseStates": 4,
     "javaFixedPoints": 12,
-    "textForwardStates": 8,
-    "textInverseStates": 8,
-    "textFixedPoints": 16,
+    "textForwardStates": 16,
+    "textInverseStates": 16,
+    "textFixedPoints": 32,
     "strictCompiles": 3,
     "javaExports": 2,
     "constrainedHeapProof": "SEPARATE_EXISTING_HOSTED_LAUNCHER_REQUIRED; NOT Maven256MiB",
-    "oracleLogControls": 4
+    "oracleLogControls": 4,
+    "legacyTextForwardStates": 8,
+    "legacyTextInverseStates": 8,
+    "legacyTextFixedPoints": 16,
+    "receiveTextForwardStates": 8,
+    "receiveTextInverseStates": 8,
+    "receiveTextFixedPoints": 16,
+    "actualTextResultExports": 2,
+    "textResultExportRefusals": 2,
+    "carrierRecords": 3,
+    "carrierCapBytes": 65536,
+    "carrierSchema": "M3_RX7_TEXT_RESULT_B64_V1",
+    "receiveControlRuntime": "NOT_EXECUTED_BY_THIS_BOOTSTRAP"
   },
   "files": {
     "FOSS_REUSE_DECISION.tsv": {
@@ -40,6 +56,11 @@
     "NOTICE": {
       "sha256": "8119032b4049805679590845a079bc23656e28ab2843d2d20179584b3be6ac9f",
       "bytes": 973,
+      "license": "Apache-2.0"
+    },
+    "README.md": {
+      "sha256": "ee76bee9639c6fd907e147140407933cd9fa4b65b166f4cc582b5d77dfbf9d10",
+      "bytes": 4756,
       "license": "Apache-2.0"
     },
     "pom.xml": {
@@ -85,6 +106,16 @@
     "src/main/resources/META-INF/rewrite/m3-rx7-codec-cap-launcher-20261018.yml": {
       "sha256": "649bdc2aee410d090f9918c5c3a364ad10676428c84d4f9730c07bfb600f19a0",
       "bytes": 600,
+      "license": "Apache-2.0"
+    },
+    "src/main/resources/META-INF/rewrite/m3-rx7-codec-receive-20261018-inverse.yml": {
+      "sha256": "f2379cac373cd6d8decf2298fe680bdc414e8f68f4f157bcab5c746e8e25c44a",
+      "bytes": 535,
+      "license": "Apache-2.0"
+    },
+    "src/main/resources/META-INF/rewrite/m3-rx7-codec-receive-20261018.yml": {
+      "sha256": "6debd00e69b0325917906ece59329dfb8d3d4833c439915a0300b6d37585c6aa",
+      "bytes": 621,
       "license": "Apache-2.0"
     },
     "src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-rx7-codec-cap-20261018-inverse/M3RX7.java.txt": {
@@ -187,9 +218,39 @@
       "bytes": 7629,
       "license": "Apache-2.0"
     },
+    "src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-rx7-codec-receive-20261018-inverse/launcher.sh.txt": {
+      "sha256": "63de29b3444fcd5a794ff8ba47b8cebf2d0aa14934c5fb38ed58624f0a661a00",
+      "bytes": 22034,
+      "license": "Apache-2.0"
+    },
+    "src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-rx7-codec-receive-20261018-inverse/manifest.tsv": {
+      "sha256": "7daa91f0560f810b807cff9f037e99bcebc7736558dd8e8adb342f336cae2b89",
+      "bytes": 398,
+      "license": "Apache-2.0"
+    },
+    "src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-rx7-codec-receive-20261018-inverse/workflow.yml.txt": {
+      "sha256": "b878863f71b122dcabbfef09658458a358662e8210a470b70d5cc431acc250a8",
+      "bytes": 7629,
+      "license": "Apache-2.0"
+    },
+    "src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-rx7-codec-receive-20261018/launcher.sh.txt": {
+      "sha256": "70d8d98bde8c579a666b051fa88009816bab232a6dd63c243321a4b2d8504473",
+      "bytes": 24352,
+      "license": "Apache-2.0"
+    },
+    "src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-rx7-codec-receive-20261018/manifest.tsv": {
+      "sha256": "a8641647a82f45d652bce0f6700991fe0cccd5bf90353ae0a6cd301470cf0c05",
+      "bytes": 398,
+      "license": "Apache-2.0"
+    },
+    "src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-rx7-codec-receive-20261018/workflow.yml.txt": {
+      "sha256": "c655b1896bc8d99c7d0986da7ad6da78db8ac7607ea4669c61d3f52f814f0a66",
+      "bytes": 7800,
+      "license": "Apache-2.0"
+    },
     "src/test/java/com/synexia/rewrite/M3RX7CodecCapRecipeTest.java": {
-      "sha256": "9191c741cba30475723015ead3a342b55cf73f7c1294d3798dc0da683923c79b",
-      "bytes": 33314,
+      "sha256": "a475796fac0ef0e0adb999bc920f7d00ee6a0bfdcad5a8c22172581899b28a2c",
+      "bytes": 44507,
       "license": "Apache-2.0"
     }
   }
