@@ -118,4 +118,37 @@ final class M3TokenRegexTest {
         assertTrue(plan.matches(tape));
         assertEquals(new M3TokenRegex.Span(0, n + 1, 0, n + 1), plan.find(tape));
     }
+
+    @Test
+    void boundedGrammarAgreesWithJavaRegexFullMatchOracleOnTokenAlphabet() {
+        String[][] cases = {
+                {"", ""},
+                {"a", "[kind=1]"},
+                {"b", "[kind=2]"},
+                {"a*b", "[kind=1]*[kind=2]"},
+                {"(a|b)+", "([kind=1]|[kind=2])+"},
+                {"a?(ba)*", "[kind=1]?([kind=2][kind=1])*"},
+                {"(aa|a)*b", "([kind=1][kind=1]|[kind=1])*[kind=2]"},
+                {"^(a|b)*b$", "^([kind=1]|[kind=2])*[kind=2]$"},
+                {".*a.", ".*[kind=1]."}
+        };
+        for (int count = 0; count <= 8; count++) {
+            for (int value = 0; value < (1 << count); value++) {
+                int[] kinds = new int[count], starts = new int[count], ends = new int[count];
+                StringBuilder raw = new StringBuilder(count);
+                for (int i = 0; i < count; i++) {
+                    kinds[i] = (value & (1 << i)) == 0 ? 1 : 2;
+                    raw.append(kinds[i] == 1 ? 'a' : 'b');
+                    starts[i] = i;
+                    ends[i] = i + 1;
+                }
+                var tape = M3TokenRegex.Tape.ofKinds(raw, count, kinds, starts, ends);
+                for (String[] mapping : cases) {
+                    assertEquals(java.util.regex.Pattern.matches(mapping[0], raw),
+                            M3TokenRegex.compile(mapping[1]).matches(tape),
+                            "regex " + mapping[0] + " input " + raw);
+                }
+            }
+        }
+    }
 }
