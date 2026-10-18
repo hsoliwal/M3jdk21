@@ -1,0 +1,30 @@
+QUALIFY 01-java-lint-compile
+QUALIFY 02-test-lint-compile
+QUALIFY 03-native-lint
+QUALIFY 04-native-link
+QUALIFY 05-native-symbols
+QUALIFY 06-donor-contract
+QUALIFY 07-java-boundaries
+QUALIFY 08-native-boundaries
+QUALIFY 09-native-interpreter
+QUALIFY api-M3RX7
+QUALIFY baseline-api-M3RX7
+QUALIFY api-M3RX7-TokenIndex
+QUALIFY baseline-api-M3RX7-TokenIndex
+QUALIFY resource-candidate-0
+Traceback (most recent call last):
+  File "/workspace/scratch/8cbeab1c181e/Synexia/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/token-convergence-20261018/verify_component.py", line 94, in <module>
+    main()
+  File "/workspace/scratch/8cbeab1c181e/Synexia/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/token-convergence-20261018/verify_component.py", line 85, in main
+    call('resource-candidate-' + str(trial), '/usr/bin/time', '-v', *run, 'M3RX7ResourceProbe')
+  File "/workspace/scratch/8cbeab1c181e/Synexia/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/token-convergence-20261018/verify_component.py", line 44, in call
+    result = subprocess.run(argv, stdout=log, stderr=subprocess.STDOUT, check=False,
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/subprocess.py", line 548, in run
+    with Popen(*popenargs, **kwargs) as process:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/subprocess.py", line 1026, in __init__
+    self._execute_child(args, executable, preexec_fn, close_fds,
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/subprocess.py", line 1955, in _execute_child
+    raise child_exception_type(errno_num, err_msg, err_filename)
+FileNotFoundError: [Errno 2] No such file or directory: '/usr/bin/time'
