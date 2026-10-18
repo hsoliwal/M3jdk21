@@ -50,7 +50,7 @@ public final class M3ApacheHeader extends Recipe {
 				if (pkg == null) return cu;
 				List<Comment> comments = new ArrayList<> (cu.getPrefix ().getComments ());
 				comments.addAll (pkg.getPrefix ().getComments ());
-				if (cu.getPrefix ().getComments ().isEmpty () && !comments.isEmpty () && comments.get (0) instanceof TextComment first
+				if (!comments.isEmpty () && comments.get (0) instanceof TextComment first
 						&& first.getText ().startsWith ("\n" + COPYRIGHT)) return cu;
 				String source = cu.getClasses ().isEmpty () ? "?" : cu.getClasses ().get (0).getSimpleName ();
 				String text = header (source, kept (comments));
