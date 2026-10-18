@@ -11,6 +11,9 @@ import java.util.Objects;
  * Null keys/values are supported. Expected O(1) access; O(n) collision worst case.
  * Reversed and sequenced views share storage. No stored Entry or Node objects.
  * Backing arrays are allocated on first insertion; empty owners share zero-length lanes.
+ * Erasure back-shifts hash-index coordinates, not payload slots, so lookup never
+ * traverses dead tombstones; this favors lookup-heavy churn at the cost of
+ * scanning the affected probe run on a deletion.
  */
 public final class M3LinkedHashMap<K, V> extends M3OrderedSlotMap<K, V> {
     private final Table table;
@@ -61,7 +64,7 @@ public final class M3LinkedHashMap<K, V> extends M3OrderedSlotMap<K, V> {
         private int[] hashes = M3SlotArrays.EMPTY_INTS, before = M3SlotArrays.EMPTY_INTS,
                 after = M3SlotArrays.EMPTY_INTS, positions = M3SlotArrays.EMPTY_INTS;
         private int[] index = M3SlotArrays.EMPTY_INTS;
-        private int first = -1, last = -1, free = -1, used, occupied, size, modifications;
+        private int first = -1, last = -1, free = -1, used, size, modifications;
         private final boolean accessOrder, keyOnly;
         Table(boolean accessOrder, boolean keyOnly) {
             this.accessOrder = accessOrder; this.keyOnly = keyOnly;
@@ -76,7 +79,7 @@ public final class M3LinkedHashMap<K, V> extends M3OrderedSlotMap<K, V> {
         }
         int vacant(int hash) {
             int p = hash & (index.length - 1);
-            while (index[p] > 0) { p = (p + 1) & (index.length - 1); } return p;
+            while (index[p] != 0) { p = (p + 1) & (index.length - 1); } return p;
         }
         void rehash(int capacity) {
             int[] replacement = new int[capacity];
@@ -85,7 +88,7 @@ public final class M3LinkedHashMap<K, V> extends M3OrderedSlotMap<K, V> {
                 while (replacement[p] != 0) { p = (p + 1) & (capacity - 1); }
                 replacement[p] = s + 1; positions[s] = p;
             }
-            index = replacement; occupied = size;
+            index = replacement;
         }
         void grow() {
             int n = M3SlotArrays.grow(keys.length);
@@ -96,12 +99,11 @@ public final class M3LinkedHashMap<K, V> extends M3OrderedSlotMap<K, V> {
         void insert(Object key, Object value, int hash, boolean atFirst) {
             if (free < 0 && used == keys.length) { grow(); }
             if (index.length == 0) { rehash(16); }
-            else if (occupied + 1 >= index.length - index.length / 3) {
-                rehash(size + 1 >= index.length - index.length / 3 ? M3SlotArrays.doubled(index.length) : index.length);
+            else if (size + 1 >= index.length - index.length / 3) {
+                rehash(M3SlotArrays.doubled(index.length));
             }
             int p = vacant(hash), s;
             if (free < 0) { s = used++; } else { s = free; free = after[s]; }
-            if (index[p] == 0) { occupied++; }
             keys[s] = key; if (!keyOnly) { values[s] = value; } hashes[s] = hash;
             index[p] = s + 1; positions[s] = p; link(s, atFirst); size++; modifications++;
         }
@@ -120,13 +122,30 @@ public final class M3LinkedHashMap<K, V> extends M3OrderedSlotMap<K, V> {
             unlink(s); link(s, atFirst); modifications++;
         }
         void erase(int s) {
-            unlink(s); index[positions[s]] = -1; keys[s] = null; if (!keyOnly) { values[s] = null; }
-            before[s] = -1; positions[s] = -1; after[s] = free; free = s; size--; modifications++;
+            unlink(s);
+            // Move hash bucket coordinates only. Payload slot s and all other
+            // stable payload slots remain fixed for sequenced API views.
+            int mask = index.length - 1;
+            int hole = positions[s];
+            for (int scan = (hole + 1) & mask; index[scan] != 0; scan = (scan + 1) & mask) {
+                int shifted = index[scan] - 1;
+                int home = hashes[shifted] & mask;
+                if (((scan - home) & mask) >= ((scan - hole) & mask)) {
+                    index[hole] = index[scan];
+                    positions[shifted] = hole;
+                    hole = scan;
+                }
+            }
+            index[hole] = 0;
+            keys[s] = null;
+            if (!keyOnly) { values[s] = null; }
+            before[s] = -1; positions[s] = -1; after[s] = free; free = s;
+            size--; modifications++;
         }
         void clear() {
             if (size == 0) { return; }
             Arrays.fill(keys, null); Arrays.fill(values, null); Arrays.fill(index, 0);
-            first = -1; last = -1; free = -1; used = 0; occupied = 0; size = 0; modifications++;
+            first = -1; last = -1; free = -1; used = 0; size = 0; modifications++;
         }
         void verify() {
             boolean[] seen = new boolean[used]; int count = 0, previous = -1, buckets = 0;
@@ -135,7 +154,13 @@ public final class M3LinkedHashMap<K, V> extends M3OrderedSlotMap<K, V> {
                 seen[s] = true; previous = s; count++;
             }
             if (count != size || previous != last) { throw new AssertionError("hash size"); }
-            for (int p = 0; p < index.length; p++) { if (index[p] > 0) { buckets++; if (positions[index[p] - 1] != p) { throw new AssertionError("bucket"); } } }
+            for (int p = 0; p < index.length; p++) {
+                if (index[p] < 0) { throw new AssertionError("tombstone"); }
+                if (index[p] > 0) {
+                    buckets++;
+                    if (positions[index[p] - 1] != p) { throw new AssertionError("bucket"); }
+                }
+            }
             if (buckets != size) { throw new AssertionError("buckets"); }
             for (int s = free; s >= 0; s = after[s]) {
                 if (s >= used || seen[s] || keys[s] != null || !keyOnly && values[s] != null) { throw new AssertionError("hash free"); }
