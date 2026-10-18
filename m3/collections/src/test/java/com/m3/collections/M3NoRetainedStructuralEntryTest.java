@@ -6,6 +6,7 @@ package com.m3.collections;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
+import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.lang.reflect.Array;
@@ -58,50 +59,48 @@ final class M3NoRetainedStructuralEntryTest {
     }
 
     @Test
-    void returnedMapEntriesAreFreshAndNeverRetainedByPackedMapStorage() {
+    void cachedApiEntriesReuseOnlyBySlotGenerationWithoutBecomingStorage() {
         var hash = new M3LinkedHashMap<Integer, Integer>();
         hash.put(1, 10);
         hash.put(2, 20);
         Map.Entry<Integer, Integer> hashEntry = hash.entrySet().iterator().next();
-        Map.Entry<Integer, Integer> hashEntryAgain = hash.entrySet().iterator().next();
-        assertFalse(
-                hashEntry == hashEntryAgain,
-                "PackedHashMap reused/cached an API Entry object");
-        assertFalse(
-                retainsIdentity(hash, hashEntry),
-                "PackedHashMap retained an entry API projection as canonical storage");
-        assertFalse(
-                retainsIdentity(hash, hashEntryAgain),
-                "PackedHashMap retained a repeated entry API projection");
+        assertSame(hashEntry, hash.entrySet().iterator().next(),
+                "explicit API projection should reuse LFU identity for the same live slot");
+        hashEntry.setValue(11);
+        assertEquals(11, hash.get(hashEntry.getKey()));
+        hash.put(3, 30);
+        assertSame(hashEntry, hash.entrySet().iterator().next(),
+                "unrelated insertion must not change the slot generation");
 
         var tree = new M3TreeMap<Integer, Integer>();
         tree.put(1, 10);
         tree.put(2, 20);
         Map.Entry<Integer, Integer> treeEntry = tree.entrySet().iterator().next();
-        Map.Entry<Integer, Integer> treeEntryAgain = tree.entrySet().iterator().next();
-        assertFalse(
-                treeEntry == treeEntryAgain,
-                "PackedTreeMap reused/cached an API Entry object");
-        assertFalse(
-                retainsIdentity(tree, treeEntry),
-                "PackedTreeMap retained an entry API projection as canonical storage");
-        assertFalse(
-                retainsIdentity(tree, treeEntryAgain),
-                "PackedTreeMap retained a repeated entry API projection");
-
-        hashEntry.setValue(11);
+        assertSame(treeEntry, tree.entrySet().iterator().next());
         treeEntry.setValue(11);
-        assertEquals(11, hash.get(hashEntry.getKey()));
         assertEquals(11, tree.get(treeEntry.getKey()));
 
-        assertFreshBurst(hash::firstEntry, "hash firstEntry");
-        assertFreshBurst(tree::firstEntry, "tree firstEntry");
-        assertFreshBurst(
-                () -> hash.entrySet().iterator().next(),
-                "hash entrySet iterator projection");
-        assertFreshBurst(
-                () -> tree.entrySet().iterator().next(),
-                "tree entrySet iterator projection");
+        // No cached entry object may be retargeted after slot removal/reuse.
+        hash.remove(1);
+        hash.put(4, 40);
+        Map.Entry<Integer, Integer> replacement = null;
+        for (Map.Entry<Integer, Integer> entry : hash.entrySet()) {
+            if (entry.getKey() == 4) { replacement = entry; }
+        }
+        assertFalse(replacement == null);
+        assertNotSame(hashEntry, replacement);
+        assertEquals(1, hashEntry.getKey());
+
+        // Poll/firstEntry are detached snapshots, not mutable cached entry views.
+        assertFreshBurst(hash::firstEntry, "hash detached firstEntry");
+        assertFreshBurst(tree::firstEntry, "tree detached firstEntry");
+
+        // Weak-key maps cannot strongly cache API entries without violating GC.
+        var weak = new M3WeakHashMap<Object, Integer>();
+        Object key = new Object();
+        weak.put(key, 7);
+        assertNotSame(weak.entrySet().iterator().next(),
+                weak.entrySet().iterator().next());
     }
 
     private static void assertFreshBurst(
