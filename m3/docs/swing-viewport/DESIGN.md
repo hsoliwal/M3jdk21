@@ -100,6 +100,12 @@ the answers are the same (such sizes stay 0), the call counts are not. (3) After
 - **D2**: `DefaultTreeSelectionModel.insureRowContinuity` throws `ArrayIndexOutOfBoundsException`
   (`DefaultTreeSelectionModel.java:918`) when a CONTIGUOUS selection holds an invisible path; both caches throw it at
   the same point. Not fixed in this leaf.
+- **D4**: stock `FixedHeightLayoutCache.getRowForPath` and `getVisiblePathsFrom` pass `getIndexOfChild`'s -1 on
+  without a check when the parent is expanded and visible but no longer has the path's last component (a removed
+  selected node, before `JTree` prunes the selection): the row is the parent's row and the enumeration starts at the
+  parent, where `VariableHeightLayoutCache` answers -1 and null. The M3 cache reproduces it on purpose: answering -1
+  would hand a row -1 to `resetRowSelection` during node removal (the UI's model listener runs before `JTree`'s) and
+  expose D2 in CONTIGUOUS selections of large-model trees that do not throw today.
 
 ## 5. Proof
 

@@ -709,9 +709,9 @@ public final class M3TreeLayoutCacheDifferential {
                 passed++;
             } catch (AssertionError e) {
                 failures.add("seed " + seed);
-                if (failures.size() == 1) {
-                    System.err.println(e.getMessage());
-                }
+                String msg = String.valueOf(e.getMessage());
+                System.err.println(failures.size() == 1 ? msg
+                        : "seed " + seed + ": " + msg.lines().limit(3).reduce((x, y) -> x + " | " + y).orElse(""));
             }
         }
         return "M3TreeLayoutCacheDifferential" + (FIXED ? " (fixed)" : "") + " seeds " + seeds + " steps " + steps

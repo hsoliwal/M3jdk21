@@ -199,10 +199,8 @@ public class M3FixedHeightLayoutCache extends FixedHeightLayoutCache {
         }
         int p = resolveParent(path);
         if (p != 0 && expanded(p)) {
-            int mi = treeModel.getIndexOfChild(value[p], path.getLastPathComponent());
-            if (mi != -1) {
-                return rowOfChild(p, mi);
-            }
+            // D4 (as stock getRowToModelIndex(-1)): a child the model no longer has answers the parent row
+            return rowOfChild(p, treeModel.getIndexOfChild(value[p], path.getLastPathComponent()));
         }
         return -1;
     }
@@ -233,10 +231,8 @@ public class M3FixedHeightLayoutCache extends FixedHeightLayoutCache {
         }
         int p = resolveParent(path);
         if (p != 0 && expanded(p)) {
-            int mi = treeModel.getIndexOfChild(value[p], path.getLastPathComponent());
-            if (mi != -1) {
-                return new Visible(p, mi);
-            }
+            // D4 (as stock): a child the model no longer has (index -1) starts at the parent
+            return new Visible(p, treeModel.getIndexOfChild(value[p], path.getLastPathComponent()));
         }
         return null;
     }
