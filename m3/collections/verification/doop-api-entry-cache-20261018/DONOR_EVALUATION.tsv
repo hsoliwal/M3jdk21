@@ -1,0 +1,10 @@
+problem_category	candidate	decision	complexity	contract_and_compatibility	license_and_provenance
+API facade materialization	Allocate a new Entry per call	Rejected for repeated unchanged coordinates	O(1) allocation per call	Correct in isolation but creates avoidable short-lived objects; user asked for API-boundary reuse	JDK contract reference only; no code copied
+API facade materialization	Store Entry/Node per mapping	Rejected	O(1) access; O(n) retained objects	Violates canonical array/offset/mask storage invariant	JDK source custody in #1325 is reference only; runtime nodes are not retained
+API facade materialization	M3LFUCache with Object[] values and primitive slot/revision lanes	Selected	Average O(1) lookup; O(C) LFU victim scan; C=128	Bounded; avoids calling user key equals/hashCode; revision separates changed owner state	First-party M3 M3SlotMap and M3SlotArrays patterns; Apache-2.0 authored receiver
+API facade materialization	Cache keyed by user key object	Rejected	Average O(1)	Would add observable key equals/hashCode calls and can strengthen weak keys	No source copied
+Cache eviction	Pure LFU	Adjusted	O(C) victim scan	LFU ties otherwise rely on table scan ordering; recency tie-break is deterministic	Standard algorithm concept only
+Cache eviction	LFU with LRU tie-break	Selected	O(C) insertion at capacity	Small fixed bounded cache favors simpler array scans over a node-based frequency list	Authored M3 implementation, Apache-2.0
+Weak-key map facades	Strong cached LiveEntry references	Rejected	O(1) lookup	A facade captures a key strongly and would defeat weak-key reclamation	Preserve weak-key contract; no donor source copied
+Detached sorted entry snapshots	Cache by key alone	Rejected	O(1)	May return stale snapshots after value replacement or mapping changes	No source copied
+Detached sorted entry snapshots	Slot+revision cache with key/value identity validation	Selected	Average O(1) lookup; bounded capacity	Old externally-held immutable snapshots remain detached; new values get new snapshots	Reuses M3 slot ownership; Apache-2.0
