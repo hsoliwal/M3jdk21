@@ -291,6 +291,9 @@ public class M3FixedHeightLayoutCache extends FixedHeightLayoutCache {
         for (int ci : changed) {
             childInserted(p, ci, vis);
         }
+        if (vis && treeSelectionModel != null) {
+            treeSelectionModel.resetRowSelection();
+        }
     }
 
     @Override
@@ -307,8 +310,13 @@ public class M3FixedHeightLayoutCache extends FixedHeightLayoutCache {
         for (int c = changed.length - 1; c >= 0; c--) {
             childRemoved(p, changed[c], vis);
         }
-        if (vis && treeModel.getChildCount(value[p]) == 0 && treeModel.isLeaf(value[p])) {
-            collapse(p, false);
+        if (vis) {
+            if (treeSelectionModel != null) {
+                treeSelectionModel.resetRowSelection();
+            }
+            if (treeModel.getChildCount(value[p]) == 0 && treeModel.isLeaf(value[p])) {
+                collapse(p, false);
+            }
         }
     }
 
@@ -517,40 +525,52 @@ public class M3FixedHeightLayoutCache extends FixedHeightLayoutCache {
         }
     }
 
+    /**
+     * The stock expand: the child count is snapshotted now, and rows below the node include the
+     * subtrees of children that were expanded while this node was collapsed (the stock
+     * setRowAndChildren walks them), so tot is recomputed from the children's tot lanes.
+     */
     private void expand(int n) {
         if (expanded(n) || treeModel.isLeaf(value[n])) {
             return;
         }
+        boolean vis = visible(n);
         flags[n] |= EXPANDED;
         count[n] = treeModel.getChildCount(value[n]);
-        boolean vis = visible(n);
-        changeTot(n, count[n]);
+        fb[n] = null;
+        tot[n] = count[n] + fenwickPrefix(n, stateCount[n]);
+        propagate(n, tot[n]);
         if (vis && treeSelectionModel != null) {
             treeSelectionModel.resetRowSelection();
         }
     }
 
+    /** The stock collapse: children keep their expanded flags, so tot[n] is kept for a re-expansion. */
     private void collapse(int n, boolean adjust) {
         if (!expanded(n)) {
             return;
         }
         boolean vis = visible(n);
         int removed = tot[n];
+        propagate(n, -removed);
         flags[n] &= ~EXPANDED;
-        changeTot(n, -removed);
         if (adjust && vis && removed > 0 && treeSelectionModel != null) {
             treeSelectionModel.resetRowSelection();
         }
     }
 
-    /** Adds {@code delta} to tot[n] and to every expanded ancestor's Fenwick tree. */
+    /** Adds {@code delta} to tot[n] and to the aggregates of every ancestor it contributes to. */
     private void changeTot(int n, int delta) {
+        tot[n] += delta;
+        propagate(n, delta);
+    }
+
+    /** Adds {@code delta} to each ancestor's tot and Fenwick entry while the chain below it is expanded. */
+    private void propagate(int c, int delta) {
         if (delta == 0) {
             return;
         }
-        tot[n] += delta;
-        int c = n;
-        for (int p = parent[c]; p != 0 && expanded(p); c = p, p = parent[c]) {
+        for (int p = parent[c]; p != 0 && expanded(c); c = p, p = parent[c]) {
             fenwickAdd(p, slotOf[c], delta);
             tot[p] += delta;
         }
@@ -564,21 +584,15 @@ public class M3FixedHeightLayoutCache extends FixedHeightLayoutCache {
         fb[p] = null;
         if (expanded(p)) {
             count[p]++;
-            if (vis) {
-                changeTot(p, 1);
-            }
+            changeTot(p, 1);
         }
     }
 
     private void childRemoved(int p, int mi, boolean vis) {
         int s = slotForModelIndex(p, mi);
-        int removedRows = 1;
         if (s >= 0) {
             int k = skid[p][s];
-            if (expanded(k)) {
-                removedRows += tot[k];
-                collapse(k, false);
-            }
+            collapse(k, false);
             unmap(k);
             removeSlot(p, s);
         }
@@ -591,9 +605,7 @@ public class M3FixedHeightLayoutCache extends FixedHeightLayoutCache {
         fb[p] = null;
         if (expanded(p)) {
             count[p]--;
-            if (vis) {
-                changeTot(p, -removedRows);
-            }
+            changeTot(p, -1);
         }
     }
 
@@ -710,7 +722,10 @@ public class M3FixedHeightLayoutCache extends FixedHeightLayoutCache {
     }
 
     private void fenwickAdd(int p, int s, int delta) {
-        int[] t = fenwick(p);
+        int[] t = fb[p];
+        if (t == null) {
+            return; // rebuilt lazily from the already updated tot lanes
+        }
         for (int i = s + 1, n = stateCount[p]; i <= n; i += i & -i) {
             t[i] += delta;
         }

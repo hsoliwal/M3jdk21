@@ -27,6 +27,7 @@ import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.DefaultTreeSelectionModel;
 import javax.swing.tree.TreePath;
 import javax.swing.tree.TreeSelectionModel;
+import javax.swing.tree.FixedHeightLayoutCache;
 import javax.swing.tree.VariableHeightLayoutCache;
 
 /**
@@ -124,12 +125,14 @@ public final class M3TreeLayoutCacheDifferential {
         boolean rowSensitive = rnd.nextInt(3) == 0;
         boolean zeroes = rnd.nextBoolean();
         model = new DefaultTreeModel(randomTree(0, 3 + rnd.nextInt(3)), rnd.nextInt(4) == 0);
-        stock = new Side("stock", new VariableHeightLayoutCache(), new Dims(rowSensitive, zeroes));
-        m3 = new Side("m3", (AbstractLayoutCache) Class.forName("sun.swing.tree.M3VariableHeightLayoutCache")
-                .getDeclaredConstructor().newInstance(), new Dims(rowSensitive, zeroes));
+        stock = new Side("stock", FIXED ? new FixedHeightLayoutCache() : new VariableHeightLayoutCache(),
+                new Dims(rowSensitive, zeroes));
+        m3 = new Side("m3", (AbstractLayoutCache) Class.forName(FIXED ? "sun.swing.tree.M3FixedHeightLayoutCache"
+                : "sun.swing.tree.M3VariableHeightLayoutCache").getDeclaredConstructor().newInstance(),
+                new Dims(rowSensitive, zeroes));
         log.add("seed " + seed + " rowSensitive " + rowSensitive + " zeroes " + zeroes + " asksAllowsChildren "
                 + model.asksAllowsChildren());
-        int rh = new int[] {0, 0, 16, 20}[rnd.nextInt(4)];
+        int rh = FIXED ? new int[] {16, 20, 17, 1}[rnd.nextInt(4)] : new int[] {0, 0, 16, 20}[rnd.nextInt(4)];
         boolean rv = rnd.nextBoolean();
         log.add("init rowHeight " + rh + " rootVisible " + rv);
         for (Side s : new Side[] {stock, m3}) {
@@ -290,6 +293,8 @@ public final class M3TreeLayoutCacheDifferential {
     // ---- accepted upstream defects (m3/docs/swing-viewport/UPSTREAM_DEFECTS.tsv) ----------------
 
     static final int[] ACCEPTED = new int[3];
+    /** -Ddiff.fixed=true: stock FixedHeightLayoutCache vs M3FixedHeightLayoutCache (positive row heights). */
+    static final boolean FIXED = Boolean.getBoolean("diff.fixed");
 
     /**
      * D1: stock treeNodesChanged for children of a hidden root keeps the old y origins of the rows
@@ -414,7 +419,7 @@ public final class M3TreeLayoutCacheDifferential {
             log.add(step + " setRootVisible " + rv);
             both("setRootVisible", s -> s.cache.setRootVisible(rv));
         } else if (op < 56) {
-            int rh = new int[] {0, 0, 16, 20, -1}[rnd.nextInt(5)];
+            int rh = FIXED ? new int[] {16, 20, 17, 0, -1}[rnd.nextInt(5)] : new int[] {0, 0, 16, 20, -1}[rnd.nextInt(5)];
             log.add(step + " setRowHeight " + rh);
             both("setRowHeight", s -> s.cache.setRowHeight(rh));
         } else if (op < 59) {
@@ -709,7 +714,8 @@ public final class M3TreeLayoutCacheDifferential {
                 }
             }
         }
-        return "M3TreeLayoutCacheDifferential seeds " + seeds + " steps " + steps + " passed " + passed
+        return "M3TreeLayoutCacheDifferential" + (FIXED ? " (fixed)" : "") + " seeds " + seeds + " steps " + steps
+                + " passed " + passed
                 + " failed " + failures.size() + " " + failures + "; accepted upstream defect D1 " + ACCEPTED[0]
                 + " times; rebuilt after exceptions: D2 " + ACCEPTED[1] + ", other " + ACCEPTED[2];
     }
