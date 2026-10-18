@@ -1,0 +1,61 @@
+{
+  "schema": "M3_COLLECTION_ORACLE_ORIGINAL_FAILURE_CUSTODY_V1",
+  "baseline": "0efc1719ca5766aead09f4f7c49f5067975bd946",
+  "source": "parent original Maven run; exact copied sources and reports",
+  "files": [
+    {
+      "original_workspace_path": "build-proof/collections-current-baseline.log",
+      "path": "maven.log",
+      "sha256": "981e637f4818c6bf4565db2f50c78b83a022e39ab442d4827b5129db02d0a5fb",
+      "size": 22978
+    },
+    {
+      "original_workspace_path": "build-proof/collections-current-baseline.json",
+      "path": "module-receipt.json",
+      "sha256": "206aae4a4174909e897c445a7b4cdb5347cc5e9dfb04c2c6698efaf9364305bc",
+      "size": 446
+    },
+    {
+      "original_workspace_path": "build-proof/collections-current-baseline.resources.txt",
+      "path": "resources.txt",
+      "sha256": "6473a286dfd06815ee493752f9af87a514194a6e72347c585b973ee5622562a7",
+      "size": 937
+    },
+    {
+      "original_workspace_path": "build-proof/collections-current-baseline-surefire/TEST-com.m3.collections.M3LongTreeSetTest.xml",
+      "path": "surefire/TEST-com.m3.collections.M3LongTreeSetTest.xml",
+      "sha256": "5fe72faf4164a01a618f34666c1f628c2d741ce899400d66a10df9e16f4dd2b1",
+      "size": 10347
+    },
+    {
+      "original_workspace_path": "build-proof/collections-current-baseline-surefire/com.m3.collections.M3LongTreeSetTest.txt",
+      "path": "surefire/com.m3.collections.M3LongTreeSetTest.txt",
+      "sha256": "d29d865fb452d57b6ff23283d4cd4788da5ff97826ee457915d6875cb8e3fc42",
+      "size": 3279
+    },
+    {
+      "original_workspace_path": "build-proof/collections-current-baseline-surefire/TEST-com.m3.collections.M3StoredRepresentativeTest.xml",
+      "path": "surefire/TEST-com.m3.collections.M3StoredRepresentativeTest.xml",
+      "sha256": "96baf482ca0539073e4ecd4d5d32393c0b4df095f044e48f0737b65d44c52ffb",
+      "size": 7538
+    },
+    {
+      "original_workspace_path": "build-proof/collections-current-baseline-surefire/com.m3.collections.M3StoredRepresentativeTest.txt",
+      "path": "surefire/com.m3.collections.M3StoredRepresentativeTest.txt",
+      "sha256": "04d52360768871ebde6982762145348a7c085487109f7217519f5cdcfa9482d4",
+      "size": 1282
+    },
+    {
+      "original_workspace_path": "M3jdk21-progress/m3/collections/src/test/java/com/m3/collections/M3LongTreeSetTest.java",
+      "path": "original-tests/M3LongTreeSetTest.java.txt",
+      "sha256": "57289895f6bf2307cf3890faa803ff8b81ec128a56e11f84df613fe65068c4cf",
+      "size": 15877
+    },
+    {
+      "original_workspace_path": "M3jdk21-progress/m3/collections/src/test/java/com/m3/collections/M3StoredRepresentativeContract.java",
+      "path": "original-tests/M3StoredRepresentativeContract.java.txt",
+      "sha256": "9686f4d820c5872665d6273faa0de0b327b9689b12696af7827269cb8774e016",
+      "size": 13048
+    }
+  ]
+}

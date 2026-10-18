@@ -1,0 +1,24 @@
+{
+  "command": [
+    "/tmp/m3-toolchain/jdk-21.0.12.1+1/bin/javap",
+    "-protected",
+    "-s",
+    "-constants",
+    "-cp",
+    "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/proof/candidate-m3jdk21/classes",
+    "com.m3.collections.M3ChildProgressMonitor",
+    "com.m3.collections.M3DefaultProgressMonitor",
+    "com.m3.collections.M3Progress",
+    "com.m3.collections.M3Progress$NullProgress",
+    "com.m3.collections.M3Progress$Snapshot",
+    "com.m3.collections.M3Progress$SubProgress",
+    "com.m3.collections.M3ProgressAdapters",
+    "com.m3.collections.M3ProgressAdapters$LegacyAdapter",
+    "com.m3.collections.M3ProgressMonitor",
+    "com.m3.collections.M3ProgressScope",
+    "com.m3.collections.M3ProgressState",
+    "com.m3.collections.M3SystemProgress"
+  ],
+  "exit": 0,
+  "seconds": 0.292403
+}
