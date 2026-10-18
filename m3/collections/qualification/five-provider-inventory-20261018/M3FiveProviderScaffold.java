@@ -308,7 +308,7 @@ public final class M3FiveProviderScaffold {
         private final Map<String, String> plan;
         private final TypeToken<?> token;
         private final Set<String> classVars = new TreeSet<>();
-        private final List<String> skipped = new ArrayList<>();
+        private final Set<String> skipped = new TreeSet<>();
         private final Set<String> lints = new TreeSet<>();
         private Map<String, String> rename = Map.of();
         private boolean raw;
@@ -439,14 +439,15 @@ public final class M3FiveProviderScaffold {
 
         private void instance(StringBuilder out) {
             Map<String, Method> chosen = new TreeMap<>();
-            for (Method m : donor.getMethods()) {
-                int mod = m.getModifiers();
-                if (Modifier.isStatic(mod) || m.isBridge() || m.isSynthetic()) { continue; }
+            for (Method found : donor.getMethods()) {
+                Method m = found.isBridge() ? origin(found) : found;
+                if (m == null || Modifier.isStatic(m.getModifiers()) || m.isSynthetic()) { continue; }
                 if (m.getDeclaringClass() == Object.class) { continue; }
                 String key = m.getName() + Arrays.stream(m.getGenericParameterTypes())
                         .map(p -> TypeToken.of(resolve(p)).getRawType().getName()).collect(Collectors.joining(",", "(", ")"));
                 chosen.merge(key, m, Generator::better);
             }
+            chosen.replaceAll((key, m) -> jdkConflict(m));
             boolean eq = chosen.containsKey("equals(java.lang.Object)");
             boolean hc = chosen.containsKey("hashCode()");
             if (eq != hc) { lints.add("overrides-pair"); }
@@ -462,6 +463,48 @@ public final class M3FiveProviderScaffold {
 
         private static String objectMethod(String sig) {
             return "\n    " + sig + " {\n        throw new UnsupportedOperationException(M3_SCAFFOLD_MESSAGE);\n    }\n";
+        }
+
+        /**
+         * A public class inheriting public methods from a package-private superclass receives javac
+         * visibility bridges; they carry no generic signature, so the generic origin is located in the
+         * superclass chain. Generic (erasure) bridges have no same-erasure origin and are dropped.
+         */
+        private static Method origin(Method bridge) {
+            for (Class<?> k = bridge.getDeclaringClass().getSuperclass(); k != null; k = k.getSuperclass()) {
+                try {
+                    Method m = k.getDeclaredMethod(bridge.getName(), bridge.getParameterTypes());
+                    if (!m.isBridge() && Modifier.isPublic(m.getModifiers())) { return m; }
+                } catch (NoSuchMethodException ignored) {
+                    // keep walking
+                }
+            }
+            return null;
+        }
+
+        /**
+         * Provider bytecode compiled before JDK 21 can declare methods whose return type conflicts with a
+         * JDK 21 interface default (for example {@code boolean addFirst(E)} versus {@code List.addFirst}).
+         * Such a class cannot be compiled against JDK 21, so the interface signature is declared instead
+         * and the conflict is recorded in SCAFFOLD_SURFACE.tsv.
+         */
+        private Method jdkConflict(Method m) {
+            if (m.getDeclaringClass().isInterface()) { return m; }
+            for (Class<?> i : token.getTypes().interfaces().rawTypes()) {
+                try {
+                    Method im = i.getMethod(m.getName(), m.getParameterTypes());
+                    Class<?> want = im.getReturnType();
+                    Class<?> have = m.getReturnType();
+                    boolean compatible = want == have || !want.isPrimitive() && !have.isPrimitive() && want.isAssignableFrom(have);
+                    if (!compatible) {
+                        skipped.add(m.getName() + ":" + have.getSimpleName() + "-return-conflicts-with-" + i.getSimpleName());
+                        return im;
+                    }
+                } catch (NoSuchMethodException ignored) {
+                    // not declared by this interface
+                }
+            }
+            return m;
         }
 
         private static Method better(Method a, Method b) {
