@@ -54,6 +54,35 @@ public final class M3AST {
         return pool.childAt(atomIndex, childIndex);
     }
 
+    /** Array element coordinate without creating a Java node or iterator. */
+    public int arrayElementAt(int arrayAtomIndex, int elementIndex) {
+        if (!"ARRAY".equals(kindAt(arrayAtomIndex))) {
+            throw new IllegalArgumentException("expected JSON array atom");
+        }
+        return childAtomIndexAt(arrayAtomIndex, elementIndex);
+    }
+
+    /**
+     * Find an object's named field occurrence, including duplicates, by zero-based
+     * occurrence number. Returns the field's VALUE atom index or -1 if absent.
+     * This performs a bounded linear scan of primitive child coordinates and
+     * creates no field/entry objects; a secondary field index may be added later.
+     */
+    public int objectFieldValueAt(int objectAtomIndex, String fieldName, int occurrence) {
+        Objects.requireNonNull(fieldName, "fieldName");
+        if (occurrence < 0) throw new IllegalArgumentException("negative field occurrence");
+        if (!"OBJECT".equals(kindAt(objectAtomIndex))) {
+            throw new IllegalArgumentException("expected JSON object atom");
+        }
+        for (int ordinal = 0, count = childCountAt(objectAtomIndex); ordinal < count; ordinal++) {
+            int field = childAtomIndexAt(objectAtomIndex, ordinal);
+            if ("FIELD".equals(kindAt(field)) && fieldName.equals(nameAt(field))) {
+                if (occurrence-- == 0) return childAtomIndexAt(field, 0);
+            }
+        }
+        return -1;
+    }
+
     /** Structural candidate hash of an indexed atom. */
     public long structuralHash64At(int atomIndex) { return pool.structuralHash64(atomIndex); }
 
