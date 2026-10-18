@@ -60,7 +60,7 @@ public final class M3WeakHashMap<K, V> extends M3SlotMap<K, V> {
     }
     @Override V valueAt(int s) { return M3SlotArrays.get(values, s); }
     @Override V writeAt(int s, V value) { V old = valueAt(s); values[s] = value; return old; }
-    @Override V eraseAt(int s) { forgetEntry(keyAt(s)); return erase(s, true); }
+    @Override V eraseAt(int s) { forgetSlot(s); return erase(s, true); }
     private V erase(int s, boolean structural) {
         if (states[s] != 1) { return null; }
         V old = valueAt(s);
