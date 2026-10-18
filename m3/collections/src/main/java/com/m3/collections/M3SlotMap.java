@@ -18,7 +18,10 @@ import java.util.function.BiConsumer;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 
-/** Shared JDK semantics over integer slots; internal traversal never constructs entries. */
+/**
+ * Shared JDK semantics over integer slots. Internal operations use slots and arrays;
+ * public entry views alone request live facades, bounded and reused through M3LFUCache.
+ */
 abstract class M3SlotMap<K, V> extends AbstractMap<K, V> {
     private static final int ENTRY_FACADE_CACHE_CAPACITY = 64;
     private M3LFUCache<K, LiveEntry> entryFacades;
