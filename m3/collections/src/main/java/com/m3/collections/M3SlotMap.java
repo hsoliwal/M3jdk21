@@ -164,7 +164,7 @@ abstract class M3SlotMap<K, V> extends AbstractMap<K, V> {
             entryFacades = new M3LFUCache<>(128);
         }
         Entry<K, V> cached = entryFacades.get(slot, epoch);
-        if (cached != null) {
+        if (cached != null && cached.getKey() == key) {
             return cached;
         }
         Entry<K, V> created = new LiveEntry(key);
