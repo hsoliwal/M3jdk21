@@ -1,0 +1,6 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.FiveProviderCensusSuccessorGate20261018
+displayName: Admit only pinned successor source census
+description: Enforce historical or exact new source-sealed M3 five-provider receipt ancestry.
+recipeList:
+  - com.synexia.rewrite.M3FiveProviderCensusSuccessorGateRecipe
