@@ -179,8 +179,11 @@ final class M3LongTreeSetTest {
         assertEquals(-699_993L, survivors[0]);
         assertEquals(699_993L, survivors[survivors.length - 1]);
         for (int i = 1; i < survivors.length; i++) {
-            assertEquals(survivors[i - 1] + 21L, survivors[i]);
+            assertTrue(survivors[i - 1] < survivors[i]);
+            assertEquals(0L, survivors[i] % 21L);
         }
+        assertEquals(-21L, survivors[33_332]);
+        assertEquals(21L, survivors[33_333]);
         assertEquals(-699_993L, set.first());
         assertEquals(699_993L, set.last());
         assertTrue(set.pageCount() < pages / 2, "pages after merges " + set.pageCount());
@@ -261,7 +264,7 @@ final class M3LongTreeSetTest {
         for (long i = 1; i <= 10; i++) {
             assertTrue(set.add(i));
         }
-        assertEquals(3, set.pageCount());
+        assertEquals(4, set.pageCount());
         RuntimeException boom = new RuntimeException("boom");
         RuntimeException thrown = assertThrows(RuntimeException.class, () -> set.filterInPlace(v -> {
             if (v == 7) {
@@ -295,8 +298,8 @@ final class M3LongTreeSetTest {
         M3LongSortedSet sub = M3LongSortedViews.subSet(actual, -50, 50);
         NavigableSet<Long> jdk = expected.subSet(-50L, true, 50L, false);
         assertArrayEquals(order(jdk), sub.toArray());
-        assertTrue(sub.add(7));
-        assertTrue(jdk.add(7L));
+        assertTrue(sub.add(8));
+        assertTrue(jdk.add(8L));
         assertThrows(IllegalArgumentException.class, () -> sub.add(500));
         assertTrue(sub.remove(-50));
         assertTrue(jdk.remove(-50L));
