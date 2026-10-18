@@ -110,13 +110,15 @@ final class M3LFUCache<V> {
     }
 
     /** Remove every cached revision for a physical slot before it is reused. */
-    void removeSlot(int slot) {
+    boolean removeSlot(int slot) {
         if (slot < 0) {
-            return;
+            return false;
         }
+        boolean removed = false;
         for (int i = 0; i < states.length; i++) {
             if (states[i] == USED && slots[i] == slot) {
                 deleteAt(i);
+                removed = true;
             }
         }
         if (size == 0) {
@@ -125,6 +127,7 @@ final class M3LFUCache<V> {
         } else if ((long) occupied > (long) size * 2L) {
             rehash();
         }
+        return removed;
     }
 
     void clear() {
