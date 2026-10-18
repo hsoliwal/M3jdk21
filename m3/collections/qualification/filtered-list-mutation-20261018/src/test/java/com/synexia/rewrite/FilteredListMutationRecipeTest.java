@@ -50,7 +50,8 @@ final class FilteredListMutationRecipeTest {
     }
     @Test void generateExactOutputsAndProveFixedPoint() throws Exception {
         var recipe = new M3HashPinnedJavaSnapshotRecipe(NAME);
-        assertEquals(3, recipe.targetPaths().size());
+        assertEquals(3L, resource("manifest.tsv").lines()
+                .filter(row -> !row.isBlank() && !row.startsWith("#")).count());
         var changes = recipe.run(new InMemoryLargeSourceSet(parse(before())), context(), 1)
                 .getChangeset().getAllResults();
         assertEquals(3, changes.size());
