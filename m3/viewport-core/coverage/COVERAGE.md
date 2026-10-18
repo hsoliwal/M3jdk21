@@ -9,7 +9,8 @@ folder, not committed).
 
 | Scope | Lines | Branches |
 |---|---|---|
-| All wave-1 classes | 2159 / 2585 = 83.52% | 1464 / 1952 = 75.00% |
+| All wave-1 classes, ported tests only (run 1) | 2159 / 2585 = 83.52% | 1464 / 1952 = 75.00% |
+| All wave-1 classes, plus direct tests (run 2: 136 tests) | 2528 / 2585 = 97.79% | 1807 / 1952 = 92.57% |
 
 **Gate (99% lines and branches): NOT MET yet.** The gap is the SWT tests that were not ported because they need SWT
 widgets or the UI differential harness, plus branches that only SWT widget tests reached:
