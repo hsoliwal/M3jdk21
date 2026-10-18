@@ -26,8 +26,9 @@ class M3RegexCursorDifferentialTest {
         long[] engines = new long[6];
         int compared = 0;
         int refused = 0;
+        List<String> failures = new java.util.ArrayList<>();
         M3CursorProbe.reset();
-        for (int round = 0; round < 6000; round++) {
+        for (int round = 0; round < 20_000; round++) {
             String regex = M3RegexCursorFixtures.pattern(random, 4, round % 3 == 0);
             int flags = random.nextInt(8) == 0 ? Pattern.DOTALL : 0;
             Pattern stock;
@@ -44,16 +45,26 @@ class M3RegexCursorDifferentialTest {
                 M3ChunkCursor cursor = M3RegexCursorFixtures.cursor(random, input);
                 matcher = matcher == null ? cursorRegex.matcher(cursor) : matcher.reset(cursor);
                 String expected = M3RegexCursorFixtures.trace(stock.matcher(input), input.length());
-                String actual = M3RegexCursorFixtures.trace(matcher, input.length());
-                assertEquals(expected, actual, () -> "regex=" + regex + " flags=" + flags + " input=" + escape(input));
-                engines[matcher.engine()]++;
+                String actual;
+                try {
+                    actual = M3RegexCursorFixtures.trace(matcher, input.length());
+                } catch (RuntimeException failure) {
+                    actual = failure.toString();
+                }
+                if (!expected.equals(actual) && failures.size() < 12) {
+                    failures.add("regex=" + regex + " flags=" + flags + " input=" + escape(input)
+                            + "\n  stock =" + expected + "\n  cursor=" + actual);
+                }
                 compared++;
             }
+            for (int e = 0; e < engines.length && matcher != null; e++) engines[e] += matcher.operations(e);
         }
+        assertEquals("", String.join("\n", failures));
         System.out.printf("random differential: %d cases, %d refused patterns, engines=%s, stock=%d%n",
                 compared, refused, java.util.Arrays.toString(engines), M3CursorProbe.stockSearches());
-        assertTrue(compared > 30_000, "cases " + compared);
-        assertTrue(engines[M3CursorMatcher.ENGINE_DFA] + engines[M3CursorMatcher.ENGINE_PIKEVM] > compared / 2);
+        assertTrue(compared > 100_000, "cases " + compared);
+        long operations = java.util.Arrays.stream(engines).sum();
+        assertTrue(engines[M3CursorMatcher.ENGINE_STOCK] * 5 < operations, "stock share too high");
         assertEquals(0, M3CursorProbe.materializedUnits());
     }
 
@@ -102,9 +113,9 @@ class M3RegexCursorDifferentialTest {
                 String expected = M3RegexCursorFixtures.trace(stock.matcher(input), input.length());
                 String actual = M3RegexCursorFixtures.trace(matcher, input.length());
                 assertEquals(expected, actual, () -> "regex=" + regex + " input=" + escape(input));
-                engines[matcher.engine()]++;
                 compared++;
             }
+            for (int e = 0; e < engines.length && matcher != null; e++) engines[e] += matcher.operations(e);
         }
         System.out.printf("mastery matrix: %d cases, %d refused patterns, engines=%s%n",
                 compared, refused, java.util.Arrays.toString(engines));

@@ -26,6 +26,7 @@ public final class M3CursorMatcher {
     private M3ChunkCursor cursor;
     private int total;
     private final int[] groups;
+    private final long[] operations = new long[6];
     private boolean matched;
     private boolean resolved;
     private int first = -1;
@@ -201,7 +202,13 @@ public final class M3CursorMatcher {
         return hit(groups[0], groups[1], ENGINE_STOCK);
     }
 
+    /** Operations this matcher answered with {@code engine} ({@code ENGINE_*}). */
+    public long operations(int engine) {
+        return operations[engine];
+    }
+
     private boolean hit(int start, int end, int used) {
+        operations[used]++;
         if (used != ENGINE_PIKEVM && used != ENGINE_STOCK) resolved = regex.groupCount == 0;
         groups[0] = start;
         groups[1] = end;
@@ -213,6 +220,7 @@ public final class M3CursorMatcher {
     }
 
     private boolean miss(int used) {
+        operations[used]++;
         matched = false;
         first = -1;
         engine = used;

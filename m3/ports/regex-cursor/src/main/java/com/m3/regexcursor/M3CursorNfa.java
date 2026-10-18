@@ -54,7 +54,8 @@ final class M3CursorNfa {
 
     private int prefixLoop(int body) {
         int loop = state(SPLIT, body, -1, 0);
-        out2[loop] = state(CLASS, loop, -1, ast.anyClass);
+        int any = state(CLASS, loop, -1, ast.anyClass);
+        out2[loop] = any;
         return loop;
     }
 

@@ -102,6 +102,11 @@ final class M3RegexSubsetParser {
     private int repeat(int atom, int lower, int upper, boolean greedy) {
         if (ast.op[atom] == M3RegexAst.ASSERT) throw new M3RegexRefusal("quantified assertion");
         if (upper != 1 && ast.nullable(atom)) throw new M3RegexRefusal("nullable loop");
+        int body = ast.op[atom] == M3RegexAst.GROUP ? ast.a[atom] : atom;
+        if (upper != 1 && ast.hasGroup(body)) {
+            // Stock GroupCurly/Curly keep inner captures of failed attempts (no restore).
+            throw new M3RegexRefusal("capture inside loop");
+        }
         if (lower == 1 && upper == 1) return atom;
         return ast.repeat(atom, lower, upper, greedy);
     }
@@ -166,7 +171,9 @@ final class M3RegexSubsetParser {
         int body = alternation();
         if (!peek(')')) throw new M3RegexRefusal("unclosed group");
         pos++;
-        return index == 0 ? body : ast.group(body, index);
+        if (index != 0) return ast.group(body, index);
+        // (?:(x)) stays distinct from (x): stock quantifies them with different capture rules.
+        return ast.op[body] == M3RegexAst.GROUP ? ast.node(M3RegexAst.CONCAT, body) : body;
     }
 
     private int assertion(int kind) {

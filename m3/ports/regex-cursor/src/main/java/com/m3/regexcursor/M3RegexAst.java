@@ -184,6 +184,17 @@ final class M3RegexAst {
         return classPairs[id] == 1 && ranges[base] == ranges[base + 1] ? ranges[base] : -1;
     }
 
+    /** Whether the subtree at {@code node} contains a capturing group. */
+    boolean hasGroup(int node) {
+        if (op[node] == GROUP) return true;
+        if (op[node] == REPEAT) return hasGroup(a[node]);
+        if (op[node] != CONCAT && op[node] != ALT) return false;
+        for (int child = a[node]; child >= 0; child = next[child]) {
+            if (hasGroup(child)) return true;
+        }
+        return false;
+    }
+
     boolean nullable(int node) {
         switch (op[node]) {
             case CLASS:
