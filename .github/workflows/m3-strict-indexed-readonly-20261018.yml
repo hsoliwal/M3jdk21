@@ -35,7 +35,7 @@ jobs:
           OUT="$RUNNER_TEMP/m3-index-readonly/classes"
           mkdir -p "$OUT"
           javac --release 21 -proc:none -Xlint:all,-serial -Werror \
-            -sourcepath "$PKG" -d "$OUT" \
+            -sourcepath m3/collections/src/main/java -d "$OUT" \
             "$PKG/M3IndexedListSnapshot.java" "$PKG/M3ObjectIndexSnapshot.java" \
             "$TST/M3IndexedReadOnlyNoopProof.java" \
             "$TST/M3IndexedSnapshotPositionProof.java"
