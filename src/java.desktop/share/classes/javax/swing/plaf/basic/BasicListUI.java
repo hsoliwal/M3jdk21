@@ -1103,6 +1103,12 @@ public class BasicListUI extends ListUI
             break;
         default:
             x = insets.left;
+            if (m3Rows.indexes(this, cellHeights) && row < cellHeights.length) {
+                y += m3Rows.startOf(row);
+                w = list.getWidth() - (insets.left + insets.right);
+                h = getRowHeight(index);
+                return new Rectangle(x, y, w, h);
+            }
             if (cellHeights == null) {
                 y += (cellHeight * row);
             }
@@ -1217,6 +1223,12 @@ public class BasicListUI extends ListUI
             return -1;
         }
         else {
+            if (m3Rows.indexes(this, cellHeights)) {
+                int m3Row = m3Rows.rowAt(size, insets.top, y0, closest);
+                if (m3Row != sun.swing.list.M3ListRows.STOCK) {
+                    return m3Row;
+                }
+            }
             int y = insets.top;
             int row = 0;
 
