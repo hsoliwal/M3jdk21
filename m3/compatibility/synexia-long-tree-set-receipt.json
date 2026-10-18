@@ -6,7 +6,7 @@
     "repository": "hsoliwal/com.synexia",
     "branch": "codex/m3-long-tree-set-20261017",
     "pullRequest": 12330,
-    "commit": "d703e7982a66",
+    "commit": "d8ee678460fd",
     "recipe": "com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe",
     "declarativeRecipe": "com.synexia.m3.LongTreeSet",
     "crate": "m3-long-tree-set",
