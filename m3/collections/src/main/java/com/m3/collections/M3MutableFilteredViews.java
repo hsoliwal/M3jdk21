@@ -9,6 +9,7 @@ import java.util.AbstractSet;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Comparator;
+import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.NavigableMap;
@@ -18,8 +19,7 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.SortedMap;
 import java.util.SortedSet;
-import java.util.TreeMap;
-import java.util.function.BiPredicate;
+ import java.util.function.BiPredicate;
 import java.util.function.Predicate;
 
 /**
@@ -315,6 +315,16 @@ public final class M3MutableFilteredViews {
             return entry != null && predicate.test(entry.getKey(), entry.getValue());
         }
 
+        /** Native M3 backing: skip Map.Entry materialization for internal reads. */
+        @SuppressWarnings("unchecked")
+        private M3TreeMap<K, V> slotOwner() {
+            return source instanceof M3TreeMap<?, ?> m3 ? (M3TreeMap<K, V>) m3 : null;
+        }
+
+        private boolean visibleSlot(M3TreeMap<K, V> owner, int slot) {
+            return predicate.test(owner.keyAt(slot), owner.valueAt(slot));
+        }
+
         private Entry<K, V> seek(Entry<K, V> candidate, boolean forward) {
             while (candidate != null && !visible(candidate)) {
                 candidate = forward ? source.higherEntry(candidate.getKey())
@@ -330,13 +340,27 @@ public final class M3MutableFilteredViews {
         @Override public Comparator<? super K> comparator() { return source.comparator(); }
 
         @Override public int size() {
+            M3TreeMap<K, V> owner = slotOwner();
             int count = 0;
-            for (Entry<K, V> entry : source.entrySet()) if (visible(entry)) count++;
+            if (owner != null) {
+                for (int slot = owner.firstSlot(); slot >= 0; slot = owner.nextSlot(slot)) {
+                    if (visibleSlot(owner, slot)) count++;
+                }
+            } else {
+                for (Entry<K, V> entry : source.entrySet()) if (visible(entry)) count++;
+            }
             return count;
         }
 
         @Override public boolean isEmpty() {
-            for (Entry<K, V> entry : source.entrySet()) if (visible(entry)) return false;
+            M3TreeMap<K, V> owner = slotOwner();
+            if (owner != null) {
+                for (int slot = owner.firstSlot(); slot >= 0; slot = owner.nextSlot(slot)) {
+                    if (visibleSlot(owner, slot)) return false;
+                }
+            } else {
+                for (Entry<K, V> entry : source.entrySet()) if (visible(entry)) return false;
+            }
             return true;
         }
 
@@ -351,16 +375,43 @@ public final class M3MutableFilteredViews {
         }
 
         private boolean hasVisibleKey(Object key) {
+            M3TreeMap<K, V> owner = slotOwner();
+            if (owner != null) {
+                int slot = owner.findSlot(key);
+                return slot >= 0 && visibleSlot(owner, slot);
+            }
             return visible(storedEntry(key));
         }
 
         @Override public boolean containsKey(Object key) { return hasVisibleKey(key); }
         @Override public V get(Object key) {
+            M3TreeMap<K, V> owner = slotOwner();
+            if (owner != null) {
+                int slot = owner.findSlot(key);
+                if (slot < 0) return null;
+                V value = owner.valueAt(slot);
+                return predicate.test(owner.keyAt(slot), value) ? value : null;
+            }
             Entry<K, V> retained = storedEntry(key);
             return visible(retained) ? retained.getValue() : null;
         }
 
         @Override public V put(K key, V value) {
+            M3TreeMap<K, V> owner = slotOwner();
+            if (owner != null) {
+                int slot = owner.findSlot(key);
+                K effective = slot < 0 ? key : owner.keyAt(slot);
+                if (!predicate.test(effective, value)) {
+                    throw new IllegalArgumentException("mapping rejected by filtered view");
+                }
+                V prior = null;
+                if (slot >= 0) {
+                    V old = owner.valueAt(slot);
+                    if (predicate.test(effective, old)) prior = old;
+                }
+                source.put(key, value);
+                return prior;
+            }
             Entry<K, V> previous = storedEntry(key);
             K effective = previous == null ? key : previous.getKey();
             if (!predicate.test(effective, value)) {
@@ -388,13 +439,19 @@ public final class M3MutableFilteredViews {
             ArrayList<V> admittedValues = new ArrayList<>();
             for (Entry<? extends K, ? extends V> entry : incoming.entrySet()) {
                 K key = entry.getKey();
-                Entry<K, V> existing = storedEntry(key);
+                M3TreeMap<K, V> owner = slotOwner();
+                int existingSlot = owner == null ? -1 : owner.findSlot(key);
+                Entry<K, V> existing = owner == null ? storedEntry(key) : null;
                 K effective;
-                if (existing != null) {
+                if (existingSlot >= 0) {
+                    effective = owner.keyAt(existingSlot);
+                } else if (existing != null) {
                     effective = existing.getKey();
                 } else {
                     if (newRepresentatives == null) {
-                        newRepresentatives = new TreeMap<>(source.comparator());
+                        // Call-local sorted index: the M3 AVL owner uses reference and
+                        // primitive topology arrays, never JDK TreeMap.Node storage.
+                        newRepresentatives = new M3TreeMap<>(source.comparator());
                     }
                     if (newRepresentatives.containsKey(key)) {
                         effective = newRepresentatives.get(key);
@@ -410,14 +467,37 @@ public final class M3MutableFilteredViews {
                 admittedKeys.add(key);
                 admittedValues.add(value);
             }
-            source.putAll(new CapturedEntries<>(admittedKeys, admittedValues));
+            // Direct bulk write after complete predicate validation avoids API
+            // entries for M3's own slot-backed owner; retain third-party putAll.
+            M3TreeMap<K, V> owner = slotOwner();
+            if (owner != null) {
+                for (int i = 0; i < admittedKeys.size(); i++) {
+                    owner.put(admittedKeys.get(i), admittedValues.get(i));
+                }
+            } else {
+                source.putAll(new CapturedEntries<>(admittedKeys, admittedValues));
+            }
         }
 
         @Override public V remove(Object key) {
+            M3TreeMap<K, V> owner = slotOwner();
+            if (owner != null) {
+                int slot = owner.findSlot(key);
+                return slot >= 0 && visibleSlot(owner, slot) ? owner.remove(key) : null;
+            }
             return hasVisibleKey(key) ? source.remove(key) : null;
         }
 
         @Override public void clear() {
+            M3TreeMap<K, V> owner = slotOwner();
+            if (owner != null) {
+                for (int slot = owner.firstSlot(); slot >= 0;) {
+                    int next = owner.nextSlot(slot);
+                    if (visibleSlot(owner, slot)) owner.remove(owner.keyAt(slot));
+                    slot = next;
+                }
+                return;
+            }
             Iterator<Entry<K, V>> cursor = source.entrySet().iterator();
             while (cursor.hasNext()) if (visible(cursor.next())) cursor.remove();
         }
@@ -445,6 +525,8 @@ public final class M3MutableFilteredViews {
         }
 
         private Iterator<Entry<K, V>> entryCursor() {
+            M3TreeMap<K, V> owner = slotOwner();
+            if (owner != null) return new IndexedEntryCursor(owner);
             return new Iterator<>() {
                 private boolean started;
                 private boolean prepared;
@@ -486,6 +568,51 @@ public final class M3MutableFilteredViews {
                     exhausted = false;
                 }
             };
+        }
+
+        /** Only entrySet().iterator() API calls construct entries, never scans. */
+        private final class IndexedEntryCursor implements Iterator<Entry<K, V>> {
+            private final M3TreeMap<K, V> owner;
+            private int next;
+            private int expected;
+            private K lastKey;
+            private boolean removable;
+
+            IndexedEntryCursor(M3TreeMap<K, V> owner) {
+                this.owner = owner;
+                next = owner.firstSlot();
+                expected = owner.revision();
+            }
+
+            private void check() {
+                if (expected != owner.revision()) throw new ConcurrentModificationException();
+            }
+
+            @Override public boolean hasNext() {
+                check();
+                while (next >= 0 && !visibleSlot(owner, next)) {
+                    next = owner.nextSlot(next);
+                }
+                return next >= 0;
+            }
+
+            @Override public Entry<K, V> next() {
+                if (!hasNext()) throw new NoSuchElementException();
+                int slot = next;
+                next = owner.nextSlot(slot);
+                lastKey = owner.keyAt(slot);
+                removable = true;
+                return new LiveEntry(lastKey);
+            }
+
+            @Override public void remove() {
+                check();
+                if (!removable) throw new IllegalStateException("next required");
+                owner.remove(lastKey);
+                expected = owner.revision();
+                removable = false;
+                lastKey = null;
+            }
         }
 
         private final class LiveEntry implements Entry<K, V> {
