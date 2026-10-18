@@ -21,6 +21,10 @@ public final class M3LongIndexPathMasksSelfTest {
                 M3LongIndexPathMasks.select(rows, offsets, planes, required, forbidden, 0, 5, 1));
         eq(new long[]{Long.MAX_VALUE, Long.MIN_VALUE},
                 M3LongIndexPathMasks.select(rows, offsets, planes, required, forbidden, 4, 5, -1));
+        eq(new long[]{Long.MAX_VALUE, Long.MIN_VALUE},
+                M3LongIndexPathMasks.select(rows, offsets, planes, required, forbidden, 4, 3, -2));
+        eq(new long[]{}, M3LongIndexPathMasks.select(rows, offsets, planes,
+                required, forbidden, rows.length, 0, 1));
         eq(new long[]{}, M3LongIndexPathMasks.select(rows, offsets, planes,
                 new int[]{1, 8}, new int[]{1, 0}, 0, 5, 1));
         long[] returned = M3LongIndexPathMasks.select(rows, offsets, planes, required, forbidden, 0, 5, 1);
@@ -58,6 +62,14 @@ public final class M3LongIndexPathMasksSelfTest {
         fails(IllegalArgumentException.class, () -> M3LongIndexPathMasks.scanWindow(
                 rows, offsets, planes, required, forbidden, 0, 5, 1, 0,
                 buffer, 0, M3LongIndexPathMasks.MAX_WINDOW + 1));
+        fails(IndexOutOfBoundsException.class, () -> M3LongIndexPathMasks.scanWindow(
+                rows, offsets, planes, required, forbidden, 0, 5, 1, 6,
+                buffer, 0, 1));
+        fails(IndexOutOfBoundsException.class, () -> M3LongIndexPathMasks.scanWindow(
+                rows, offsets, planes, required, forbidden, 0, 5, 1, 0,
+                buffer, buffer.length, 1));
+        fails(IllegalArgumentException.class, () -> M3LongIndexPathMasks.select(
+                rows, offsets, planes, new int[]{1}, forbidden, 0, 5, 1));
         long[] canary = {1,2,3};
         fails(IndexOutOfBoundsException.class, () -> M3LongIndexPathMasks.scanWindow(
                 rows, new int[]{2,0,99,1,4}, planes, required, forbidden, 0, 5, 1, 0,
@@ -83,24 +95,46 @@ public final class M3LongIndexPathMasksSelfTest {
             }
             for (int s = 0; s < stages; s++) {
                 for (int i = 0; i < capacity; i++) flags[s][i] = random.nextInt();
-                need[s] = random.nextInt();
-                exclude[s] = random.nextInt();
+                // Unlike unconstrained random 32-bit AND masks (almost always empty),
+                // these cases cover all-pass, high-bit, sparse, guaranteed-pass,
+                // and impossibly selective paths in every multi-stage composition.
+                switch (round % 7) {
+                    case 0 -> { need[s] = 0; exclude[s] = 0; }
+                    case 1 -> { need[s] = Integer.MIN_VALUE; exclude[s] = 0; }
+                    case 2 -> { need[s] = 0; exclude[s] = Integer.MIN_VALUE; }
+                    case 3 -> { need[s] = 1; exclude[s] = 2; }
+                    case 4 -> {
+                        int representative = length == 0 ? 0 : flags[s][positions[0]];
+                        need[s] = representative & 0x81000001;
+                        exclude[s] = ~representative & 0x04000002;
+                    }
+                    case 5 -> { need[s] = -1; exclude[s] = -1; }
+                    default -> { need[s] = random.nextInt() & 7; exclude[s] = random.nextInt() & 112; }
+                }
             }
-            boolean reversed = random.nextBoolean();
-            int first = length == 0 ? 0 : (reversed ? length - 1 : 0);
-            int stride = reversed ? -1 : 1;
-            long[] expected = oracle(data, positions, flags, need, exclude, first, length, stride);
+            int first = length == 0 ? 0 : random.nextInt(length);
+            int stride = (random.nextBoolean() ? 1 : -1) * (1 + random.nextInt(3));
+            int maximum = length == 0 ? 0
+                    : (stride > 0 ? (length - 1 - first) / stride : first / -stride) + 1;
+            int count = random.nextInt(maximum + 1);
+            long[] expected = oracle(data, positions, flags, need, exclude, first, count, stride);
             eq(expected, M3LongIndexPathMasks.select(data, positions, flags,
-                    need, exclude, first, length, stride));
-            long[] page = new long[2];
+                    need, exclude, first, count, stride));
+            int limit = 1 + random.nextInt(3);
+            long[] page = new long[limit + 2];
             ArrayList<Long> materialized = new ArrayList<>();
             int nextOrdinal = 0;
-            while (nextOrdinal < length) {
+            while (nextOrdinal < count) {
+                Arrays.fill(page, 0x0ad0ad0ad0ad0ad0L);
                 long result = M3LongIndexPathMasks.scanWindow(data, positions, flags,
-                        need, exclude, first, length, stride, nextOrdinal, page, 0, 2);
+                        need, exclude, first, count, stride, nextOrdinal, page, 1, limit);
                 int nextOrdinalAfter = M3LongIndexPathMasks.nextOrdinal(result);
                 if (nextOrdinalAfter <= nextOrdinal) throw new AssertionError("window made no progress");
-                for (int i = 0; i < M3LongIndexPathMasks.written(result); i++) materialized.add(page[i]);
+                int written = M3LongIndexPathMasks.written(result);
+                if (written < 0 || written > limit) throw new AssertionError("invalid page count");
+                for (int i = 0; i < written; i++) materialized.add(page[i + 1]);
+                eq(0x0ad0ad0ad0ad0ad0L, page[0]);
+                eq(0x0ad0ad0ad0ad0ad0L, page[page.length - 1]);
                 nextOrdinal = nextOrdinalAfter;
             }
             long[] actual = materialized.stream().mapToLong(Long::longValue).toArray();

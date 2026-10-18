@@ -24,7 +24,7 @@ public final class M3LongIndexPathMasksRecipe {
     };
     private static final String[] HASHES = {
         "c7692b6d8d6f6ea6b586580b351747165e4a9a7d9bb7b37979dd737d4ea258e9",
-        "4bf27c96e87145256b7d72ecd3e593da3035425fa896f576aad3defb542ae82b"
+        "a7afd8a3162ce5def1b67bbc2b106d1f9d8a1c71c7780fd11a02a747eb1e151b"
     };
     private static final String[] TARGETS = {
         "m3/collections/src/main/java/com/m3/collections/M3LongIndexPathMasks.java",

@@ -25,6 +25,6 @@ java -cp /tmp/m3-long-path com.m3.collections.M3LongIndexPathMasksSelfTest
 
 ## Bounded evidence, provenance, and alternatives
 
-Direct installed OpenJDK 21.0.12.1 `javac`/Java run: **PASS 3,022 assertions / 1,500 deterministic randomized cases**; source recipe apply/check/apply fixed point: PASS. No real Maven SDK run, full reactor, JNI extension, performance comparison, JDK image, or hosted CI is claimed by this local proof. The GitHub workflow runs source-custody and isolated Java gates on PR head.
+Direct installed OpenJDK 21.0.12.1 `javac`/Java run: **PASS 7,127 assertions / 1,500 deterministic randomized cases (including all-pass, selective, empty, signed high-bit, and signed-stride windows)**; source recipe apply/check/apply fixed point: PASS. No real Maven SDK run, full reactor, JNI extension, performance comparison, JDK image, or hosted CI is claimed by this local proof. The GitHub workflow runs source-custody and isolated Java gates on PR head.
 
 Algorithm source is new first-party Apache-2.0 Java using the same lane/mask semantics as the existing `M3IndexPathMasks` owner. LeetCode, HackerRank and GeeksforGeeks are problem-category references only; no editorial or submission code is copied. `CATALOG.tsv` records candidate and contract decisions. The change does not modify preexisting APIs, `java.base`, JDK collections, existing JNI, or Synexia's append-only `develop` branch.
