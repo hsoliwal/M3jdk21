@@ -37,7 +37,9 @@ additive collection receiving candidate, not general JDK promotion.
 Source recipe authority: `hsoliwal/com.synexia` descriptor
 `com.synexia.m3.M3Jdk21LongStateArrayReceiver` with exact after-images for
 the Java owner, JUnit tests, algorithm catalogue, and this receipt.
-Target: `hsoliwal/M3jdk21/m3/collections`. All source changes are
+Target: `hsoliwal/M3jdk21/m3/collections`. Exact first-party source
+blobs, licenses, and reuse-vs-copy decisions are recorded in
+`algorithm-catalog/long-state-array-provenance-20261018.tsv`. All source changes are
 reviewable alongside recipe tests and provenance; no Synexia runtime
 dependency or LeetCode/HackerRank/GeeksForGeeks solution code is copied.
 
