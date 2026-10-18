@@ -1,0 +1,83 @@
+{
+  "schema": "M3JDK21_SYNEXIA_LONG_TREE_SET_RECEIVER_V1",
+  "copyright": "Copyright 2026 Hitesh Soliwal and contributors",
+  "receivedLicense": "Apache-2.0",
+  "canonicalSource": {
+    "repository": "hsoliwal/com.synexia",
+    "branch": "codex/m3-long-tree-set-20261017",
+    "pullRequest": 12330,
+    "commit": "d703e7982a66",
+    "recipe": "com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe",
+    "declarativeRecipe": "com.synexia.m3.LongTreeSet",
+    "crate": "m3-long-tree-set",
+    "fossReuseDecisionRow": "m3jdk-collections-long-tree-set-20261017",
+    "donors": [
+      {
+        "path": "synexia-common/src/main/java/com/synexia/common/collections/PackedLongSortedSet.java",
+        "blob": "be9baccc",
+        "developCommit": "11c94feb1815",
+        "target": "com.m3.collections.M3LongTreeSet",
+        "mechanics": "sorted-lane navigation contract (first/last/floor/ceiling/lower/higher with caller fallback), binary-search add/remove/contains, filterInPlace partial-commit rule"
+      },
+      {
+        "path": "synexia-common/src/main/java/com/synexia/common/collections/LongSortedSet.java",
+        "blob": "101a6e79",
+        "developCommit": "11c94feb1815",
+        "target": "com.m3.collections.M3LongSortedSet",
+        "mechanics": "navigable primitive-long set contract; the existing master interface M3LongTreeSet implements"
+      },
+      {
+        "path": "synexia-common/src/main/java/com/synexia/common/collections/PackedLongPagedSortedSet.java",
+        "blob": "46ca4ddf",
+        "developCommit": "11c94feb1815",
+        "target": "com.m3.collections.M3LongTreeSet",
+        "mechanics": "fixed-capacity page lanes (values, page maxima, page counts), page-maxima binary search, split-on-full, merge-when-fits, page removal; Abseil-derived PackedSortedPageRebalanceAtoms (552978ba) not carried"
+      }
+    ],
+    "license": "Apache-2.0 first-party",
+    "disposition": "ADAPT: logical page order is a slot lane plus a free-slot stack so a split or merge moves one page of values and the page lanes, never the whole value lane; fail-fast modCount iterator; SORTED/DISTINCT/SIZED primitive spliterator; trimToSize repack; capacity/pageCount/pageCapacity/payloadBytes sizing surface; C1 UNREACHABLE confirmed (donors import only java.*); per-element allocation 0"
+  },
+  "target": {
+    "repository": "hsoliwal/M3jdk21",
+    "base": "970a34350ebdf6a3f1c5ff5acc8445d0f3515f55",
+    "ownerPullRequest": 1054,
+    "owners": [
+      "com.m3.collections.M3LongTreeSet"
+    ],
+    "publicJdkReplacement": false
+  },
+  "runtimeDependencyOnSynexia": false,
+  "publicJdkReplacement": false,
+  "targets": [
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LongTreeSet.java",
+      "before": "ABSENT",
+      "after": "141b90d104cf9d8715e97b6a805314fd2a8fcc9fe10d3c81b1894cf744141d42",
+      "resource": "00-M3LongTreeSet.java.txt"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3LongTreeSetTest.java",
+      "before": "ABSENT",
+      "after": "088e41d28929b3916e5c6da9a12a2ebbae258116d11508235d44771a6c1b2471",
+      "resource": "01-M3LongTreeSetTest.java.txt"
+    }
+  ],
+  "gates": {
+    "m3CollectionsModuleCompile": "PASS_WINDOWS mvn -o -B -ntp -f m3/collections/pom.xml (-Xlint:all,-module -Werror via pom)",
+    "m3CollectionsModuleTests": "PASS_WINDOWS 163/163 (M3LongTreeSetTest 7/7 with the master test revision 50eca57f27a: 40,000 + 10,000-operation differential vs TreeSet<Long> as NavigableSet incl. M3LongSortedViews range views and M3LongCompositeViews.sortedUnion over the owner, fail-fast, growth/merge/trimToSize, filterInPlace partial commit; mvn log sha256 c1063cad96478a55258ac22acec214c718c3b68796ec0b2c1818200da610977a); the #1054 test revision failed 3 of its own expectations (160/163, log sha256 77ded5ec2b2522aca0df3b9f298e2ce3c7fa7cc2d2d1fa6a3f6e7d2adc8be805)",
+    "recipeFixedPointAndRefusal": "Synexia crate test M3LongTreeSetRecipeTest 2/2 (mvn log sha256 c570463ce8a4bc7e14be798ad739876e182da3bbdf6ff9559d8451c18b52127d)",
+    "gitDiffCheck": "PASS_WINDOWS",
+    "offlineCompatibilityCheckers": "PASS_WINDOWS check_synexia_m3_collection_port_recipe.py (log sha256 6f8c67f4a944b398db527863ca91c871c37d77641044f6da23ddf1eec758417f); check_synexia_m3_family_naming.py (log sha256 465cdd77f589f143a798264907efc1074dd06b005c7ec976f169b4a7f969e546)",
+    "jdkBuildJtregRuntime": "PENDING_LINUX",
+    "ci": "PENDING_QUEUE; m3/collections/verify_donation.py line 99 refuses new m3/collections source until a successor installed-source packet is qualified: 'Java source set changed; qualify a successor packet'"
+  },
+  "semanticDecisions": [
+    "the test postimage is the master revision from 50eca57f27a (blob c43f89052e14), which corrected three wrong expectations of the #1054 revision; the owner postimage is the #1054 owner (blob 310e7e1b6083); the recipe is a fixed point on master",
+    "every long is a legal member; natural signed-long order; no per-element node, entry or boxed Long (DOOP: per-element allocation 0)",
+    "contains and navigation are two binary searches (page maxima, then one page): O(log n); add/remove shift at most one page and, on a split or merge, copy one page plus shift the page lanes",
+    "a full page splits in half; a page that empties is released to the free-slot stack; adjacent pages whose counts fit one page merge after a removal; trimToSize repacks lanes to the live page count",
+    "first/last throw NoSuchElementException on an empty set; floor/ceiling/lower/higher return the caller fallback; the iterator is fail-fast",
+    "range views are M3LongSortedViews.subSet/headSet/tailSet over the owner (interface-defined); M3LongSortedViews and M3LongCompositeViews are unchanged and exercised by the owner test",
+    "not a java.util.Set: primitive M3LongSortedSet surface only; a pointer-lane B-tree or red-black alternative stays additive until benchmarked"
+  ]
+}
