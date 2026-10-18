@@ -136,11 +136,51 @@ public final class M3FiveProviderScaffold {
         }
     }
 
+    /**
+     * Expands peer ledger groups such as {@code JDK:ConcurrentSkipListMap/Set} or {@code COMMONS:TransformedX family}
+     * into "lib:SimpleName" keys that exist in the candidate universe.
+     */
+    static Map<String, List<String>> peerClaims(Path file, Set<String> known) throws Exception {
+        Map<String, String> libs = Map.of("JDK", "jdk", "GUAVA", "guava", "COMMONS", "apache", "SPRING", "spring", "ECLIPSE", "eclipse");
+        Map<String, List<String>> claims = new TreeMap<>();
+        for (Map<String, String> row : read(file)) {
+            String peer = row.get("peer_owner") + " (" + row.get("peer_ref") + ")";
+            for (String group : row.get("provider_types").split(";")) {
+                String[] parts = group.split(":", 2);
+                String lib = libs.get(parts[0].trim());
+                if (lib == null || parts.length < 2) { continue; }
+                String[] names = parts[1].replace(" family", "").split("/");
+                String first = names[0].trim();
+                for (String raw : names) {
+                    String n = raw.trim();
+                    List<String> keys = new ArrayList<>();
+                    if (n.endsWith("X")) {
+                        String prefix = lib + ":" + n.substring(0, n.length() - 1);
+                        known.stream().filter(k -> k.startsWith(prefix)).forEach(keys::add);
+                    } else if (known.contains(lib + ":" + n)) {
+                        keys.add(lib + ":" + n);
+                    } else {
+                        String stem = first.replaceAll("[A-Z][a-z0-9]*$", "");
+                        if (known.contains(lib + ":" + stem + n)) { keys.add(lib + ":" + stem + n); }
+                    }
+                    for (String k : keys) { claims.computeIfAbsent(k, x -> new ArrayList<>()).add(peer); }
+                }
+            }
+        }
+        return claims;
+    }
+
     static void inventory(Path q) throws Exception {
         Map<String, Map<String, String>> providers = index(read(q.resolve("PROVIDERS.tsv")), "code");
         Map<String, Map<String, String>> overlay = index(read(q.resolve("STATUS_OVERLAY.tsv")), "type");
+        List<Map<String, String>> candidates = read(q.resolve("CANDIDATES_PR1278.tsv"));
+        Set<String> known = new TreeSet<>();
+        for (Map<String, String> c : candidates) {
+            known.add(providers.get(c.get("artifact")).get("lib") + ":" + simple(c.get("binary_type")));
+        }
+        Map<String, List<String>> peers = peerClaims(q.resolve("PEER_SCAFFOLD_CLAIMS.tsv"), known);
         List<Map<String, String>> out = new ArrayList<>();
-        for (Map<String, String> c : read(q.resolve("CANDIDATES_PR1278.tsv"))) {
+        for (Map<String, String> c : candidates) {
             String type = c.get("binary_type");
             Map<String, String> p = providers.get(c.get("artifact"));
             Map<String, String> o = overlay.getOrDefault(type, Map.of());
@@ -157,7 +197,13 @@ public final class M3FiveProviderScaffold {
             String owner = o.getOrDefault("m3_owner", "-");
             row.put("m3_owner", open && owner.equals("-") ? p.get("package") + ".M3" + simple(type) : owner);
             row.put("evidence", o.getOrDefault("evidence", eclipse ? "#1278 candidate; EPL pattern evidence only" : "#1278 candidate"));
-            row.put("reuse_owner", o.getOrDefault("reuse_owner", "-"));
+            String reuse = o.getOrDefault("reuse_owner", "-");
+            List<String> peer = peers.get(p.get("lib") + ":" + simple(type));
+            if (peer != null) {
+                String hint = "peer native skeleton " + String.join(", ", new TreeSet<>(peer));
+                reuse = reuse.equals("-") ? hint : reuse + "; " + hint;
+            }
+            row.put("reuse_owner", reuse);
             row.put("priority", eclipse ? "-" : priority(type, c.get("categories")));
             row.put("source", eclipse ? "provider-pattern-only" : "provider");
             row.put("module", open ? p.get("lib") + "-" + kebab(simple(type)) : "-");
