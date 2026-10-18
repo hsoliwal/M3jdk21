@@ -57,13 +57,21 @@ public final class M3MutableFilteredSlotSelfTest {
         same(ref.isEmpty(), actual.isEmpty(), "empty " + phase);
         same(ref.firstEntry(), actual.firstEntry(), "first " + phase);
         same(ref.lastEntry(), actual.lastEntry(), "last " + phase);
+        if (!ref.isEmpty()) {
+            same(ref.firstKey(), actual.firstKey(), "first key " + phase);
+            same(ref.lastKey(), actual.lastKey(), "last key " + phase);
+        }
         for (int key=-16; key<=16; key++) {
             same(ref.containsKey(key), actual.containsKey(key), "membership "+key);
             same(ref.get(key), actual.get(key), "value "+key);
             same(ref.lowerEntry(key), actual.lowerEntry(key), "lower "+key);
+            same(ref.lowerKey(key), actual.lowerKey(key), "lower key "+key);
             same(ref.floorEntry(key), actual.floorEntry(key), "floor "+key);
+            same(ref.floorKey(key), actual.floorKey(key), "floor key "+key);
             same(ref.ceilingEntry(key), actual.ceilingEntry(key), "ceiling "+key);
+            same(ref.ceilingKey(key), actual.ceilingKey(key), "ceiling key "+key);
             same(ref.higherEntry(key), actual.higherEntry(key), "higher "+key);
+            same(ref.higherKey(key), actual.higherKey(key), "higher key "+key);
         }
         owner.verifyInvariants();
     }
@@ -134,7 +142,14 @@ public final class M3MutableFilteredSlotSelfTest {
                     same(expected.entrySet().remove(probe),
                             actual.entrySet().remove(probe), "entry remove");
                 }
-                default -> { /* query-only phase */ }
+                case 8 -> {
+                    if (random.nextBoolean()) {
+                        same(expected.pollFirstEntry(), actual.pollFirstEntry(), "first poll");
+                    } else {
+                        same(expected.pollLastEntry(), actual.pollLastEntry(), "last poll");
+                    }
+                }
+                default -> throw new AssertionError(op);
             }
             same(baselineRoot, m3Root, "underlying canonical mappings");
             verify(expected, actual, m3Root, step);
