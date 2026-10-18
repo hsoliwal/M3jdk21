@@ -1,0 +1,12 @@
+com.m3.collections.M3FilteredLists EXACT_EFFECTIVE_API members=13
+com.m3.collections.M3FilteredNavigableSet EXACT_EFFECTIVE_API members=58
+com.m3.collections.M3FilteredViews EXACT_EFFECTIVE_API members=17
+com.m3.collections.M3IndexPathMasks EXACT_EFFECTIVE_API members=18
+com.m3.collections.M3IndexedListSnapshot EXACT_EFFECTIVE_API members=63
+com.m3.collections.M3LongArrayDeque EXACT_EFFECTIVE_API members=50
+com.m3.collections.M3LongCompositeViews EXACT_EFFECTIVE_API members=16
+com.m3.collections.M3MutableFilteredViews EXACT_EFFECTIVE_API members=13
+com.m3.collections.M3ObjectIndexSnapshot EXACT_EFFECTIVE_API members=65
+com.m3.collections.M3SlotSpliterators NON_PUBLIC_OWNER
+
+EXIT=0
