@@ -27,9 +27,9 @@ public final class M3ApacheHeader extends Recipe {
 	static final String COPYRIGHT = " * Copyright 2026 Hitesh Soliwal and contributors";
 	static final String ORIGIN = "hsoliwal/eclipse.platform.swt 553eefd41d9961d303c41e0e4e181712e64a1e45";
 	private static final Pattern DROPPED = Pattern.compile (
-			"Copyright|SPDX-License-Identifier|Eclipse Public License|accompanies this distribution|"
+			"^\\s*\\*?\\s*Copyright|SPDX-License-Identifier|Eclipse Public License|accompanies this distribution|"
 			+ "is available at|epl-2\\.0|program and the accompanying|Dual-licensed|apache\\.org/licenses|"
-			+ "\\(https://|^\\s*\\*?\\s*\\**/?\\s*$");
+			+ "^\\s*\\*?\\s*\\**/?\\s*$");
 
 	@Override
 	public String getDisplayName () {
@@ -48,13 +48,14 @@ public final class M3ApacheHeader extends Recipe {
 			public J.CompilationUnit visitCompilationUnit (J.CompilationUnit cu, ExecutionContext ctx) {
 				J.Package pkg = cu.getPackageDeclaration ();
 				if (pkg == null) return cu;
-				List<Comment> comments = pkg.getPrefix ().getComments ();
-				if (!comments.isEmpty () && comments.get (0) instanceof TextComment first
+				List<Comment> comments = new ArrayList<> (cu.getPrefix ().getComments ());
+				comments.addAll (pkg.getPrefix ().getComments ());
+				if (cu.getPrefix ().getComments ().isEmpty () && !comments.isEmpty () && comments.get (0) instanceof TextComment first
 						&& first.getText ().startsWith ("\n" + COPYRIGHT)) return cu;
 				String source = cu.getClasses ().isEmpty () ? "?" : cu.getClasses ().get (0).getSimpleName ();
 				String text = header (source, kept (comments));
 				TextComment comment = new TextComment (true, text, "\n", Markers.EMPTY);
-				return cu.withPackageDeclaration (pkg.withPrefix (Space.build ("", List.of (comment))));
+				return cu.withPrefix (Space.EMPTY).withPackageDeclaration (pkg.withPrefix (Space.build ("", List.of (comment))));
 			}
 		};
 	}

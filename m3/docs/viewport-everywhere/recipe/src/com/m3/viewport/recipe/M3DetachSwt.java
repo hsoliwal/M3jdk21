@@ -10,7 +10,7 @@ import java.util.Map;
 import org.openrewrite.ExecutionContext;
 import org.openrewrite.Recipe;
 import org.openrewrite.TreeVisitor;
-import org.openrewrite.java.JavaTemplate;
+import org.openrewrite.java.JavaParser;
 import org.openrewrite.java.JavaVisitor;
 import org.openrewrite.java.tree.Expression;
 import org.openrewrite.java.tree.J;
@@ -55,10 +55,17 @@ public final class M3DetachSwt extends Recipe {
 				J.MethodInvocation m = (J.MethodInvocation) super.visitMethodInvocation (method, ctx);
 				String message = message (m);
 				if (message == null) return m;
-				return JavaTemplate.builder ("throw new IllegalArgumentException (\"" + message + "\")").build ()
-						.apply (getCursor (), m.getCoordinates ().replace ());
+				return throwOf (message).withPrefix (m.getPrefix ());
 			}
 		};
+	}
+
+	/** Parses {@code throw new IllegalArgumentException ("message")} in SWT spacing; each call yields fresh ids. */
+	static J.Throw throwOf (String message) {
+		String unit = "class M3T { void m () { throw new IllegalArgumentException (\"" + message + "\"); } }";
+		J.CompilationUnit cu = (J.CompilationUnit) JavaParser.fromJavaVersion ().build ().parse (unit).toList ().get (0);
+		J.MethodDeclaration m = (J.MethodDeclaration) cu.getClasses ().get (0).getBody ().getStatements ().get (0);
+		return (J.Throw) m.getBody ().getStatements ().get (0);
 	}
 
 	static String message (J.MethodInvocation m) {

@@ -40,6 +40,7 @@ recipeList:
   - com.m3.viewport.recipe.M3ApacheHeader
   - com.m3.viewport.recipe.M3DetachSwt
   - com.m3.viewport.recipe.Wave1Types
+  - com.m3.viewport.recipe.M3TidyImports
   - com.m3.viewport.recipe.M3PublicSurface
 ---
 type: specs.openrewrite.org/v1beta/recipe
@@ -49,6 +50,7 @@ description: Header, test class renames and reflective names for the ported SWT 
 recipeList:
   - com.m3.viewport.recipe.M3ApacheHeader
   - com.m3.viewport.recipe.Wave1Types
+  - com.m3.viewport.recipe.M3TidyImports
   - org.openrewrite.java.ChangeType: {oldFullyQualifiedTypeName: org.eclipse.swt.tests.junit.Test_VirtualRowExtents, newFullyQualifiedTypeName: com.m3.collections.M3SparseExtentsTest}
   - org.openrewrite.java.ChangeType: {oldFullyQualifiedTypeName: org.eclipse.swt.tests.junit.Test_VirtualCellLanes, newFullyQualifiedTypeName: com.m3.collections.M3ColumnarLanesTest}
   - org.openrewrite.java.ChangeType: {oldFullyQualifiedTypeName: org.eclipse.swt.tests.junit.Test_VirtualBitLanes, newFullyQualifiedTypeName: com.m3.viewport.M3BitLanesTest}
