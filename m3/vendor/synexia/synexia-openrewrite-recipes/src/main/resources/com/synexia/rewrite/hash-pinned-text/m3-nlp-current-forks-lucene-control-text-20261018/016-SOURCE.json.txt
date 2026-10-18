@@ -1,0 +1,15 @@
+{
+  "coordinate": "io.github.dmlloyd:jdk-classfile-backport:25.1",
+  "module": "io.github.dmlloyd.classfile",
+  "source_repository": "https://github.com/smallrye/jdk-classfile-backport",
+  "source_revision": "a35d959ac2f83c2473f6ca954deefbc5411a0696",
+  "source_tag": "25.1",
+  "sources_uri": "https://repo.maven.apache.org/maven2/io/github/dmlloyd/jdk-classfile-backport/25.1/jdk-classfile-backport-25.1-sources.jar",
+  "sources_sha256": "5585777fad645a4603df7685bdae35c115bf5acc799f0ce444aaeb88490338bc",
+  "license": "GPL-2.0-only WITH Classpath-exception-2.0",
+  "notices": {
+    "LICENSE.txt": "7239ded8033bfe5f01bc94d04b1b8fbcacf55512ab6e779cc90515bef60176d7",
+    "COPYING.txt": "8177f97513213526df2cf6184d8ff986c675afb514d4e68a404010521b880643"
+  },
+  "qualification": "Actual current JavascriptCompiler retained; imports relocated to io.github.dmlloyd.classfile; generated class version explicitly21; arithmetic, variables, custom MethodHandles and error tests run in module path and linked JMOD image."
+}

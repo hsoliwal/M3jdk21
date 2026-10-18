@@ -1,0 +1,21 @@
+// SPDX-License-Identifier: Apache-2.0
+// Reviewed release-21 descriptor; original automatic-module exports/openness retained.
+open module spatial4j {
+    requires transitive com.fasterxml.jackson.core;
+    requires transitive com.fasterxml.jackson.databind;
+    requires transitive noggit;
+    requires transitive org.locationtech.jts;
+
+    exports org.locationtech.spatial4j;
+    exports org.locationtech.spatial4j.context;
+    exports org.locationtech.spatial4j.context.jts;
+    exports org.locationtech.spatial4j.distance;
+    exports org.locationtech.spatial4j.exception;
+    exports org.locationtech.spatial4j.io;
+    exports org.locationtech.spatial4j.io.jackson;
+    exports org.locationtech.spatial4j.io.jts;
+    exports org.locationtech.spatial4j.shape;
+    exports org.locationtech.spatial4j.shape.impl;
+    exports org.locationtech.spatial4j.shape.jts;
+
+}
