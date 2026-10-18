@@ -61,11 +61,17 @@ final class M3ASTPool {
     }
 
     synchronized int intern(String kind, String name, String value, int[] children) {
+        return intern(kind, name, value, children, children.length);
+    }
+
+    /** Counted input view; child buffers can be reused across sibling containers. */
+    synchronized int intern(String kind, String name, String value, int[] children, int childCount) {
         requireOpen();
         Objects.requireNonNull(kind, "kind");
         Objects.requireNonNull(children, "children");
-        for (int child : children) {
-            Objects.checkIndex(child, size);
+        Objects.checkFromIndexSize(0, childCount, children.length);
+        for (int i = 0; i < childCount; i++) {
+            Objects.checkIndex(children[i], size);
         }
 
         int kindIndex = lookupString(kind);
@@ -105,9 +111,9 @@ final class M3ASTPool {
         long valueHash = value == null ? NULL_VALUE_HASH
                 : valueIndex == kindIndex ? kindHash
                 : valueIndex == nameIndex ? nameHash : textHash(valueIndex, value);
-        long hash = structuralHash(kindHash, nameHash, valueHash, children);
+        long hash = structuralHash(kindHash, nameHash, valueHash, children, childCount);
         if (newStrings == 0) {
-            int existing = find(kindIndex, nameIndex, valueIndex, children, hash);
+            int existing = find(kindIndex, nameIndex, valueIndex, children, childCount, hash);
             if (existing >= 0) {
                 return existing;
             }
@@ -116,7 +122,7 @@ final class M3ASTPool {
         if (size >= limits.maxAtoms() || size >= MAX_ARRAY_LENGTH - 1) {
             throw new IllegalArgumentException("M3 AST atom limit exceeded");
         }
-        long requiredChildren = (long) childArenaSize + children.length;
+        long requiredChildren = (long) childArenaSize + childCount;
         if (requiredChildren > limits.maxChildReferences()
                 || requiredChildren > MAX_ARRAY_LENGTH) {
             throw new IllegalArgumentException("M3 AST child reference limit exceeded");
@@ -135,13 +141,13 @@ final class M3ASTPool {
 
         int atomIndex = size;
         int childOffset = childArenaSize;
-        System.arraycopy(children, 0, childArena, childOffset, children.length);
+        System.arraycopy(children, 0, childArena, childOffset, childCount);
         childArenaSize = (int) requiredChildren;
         kindIndexes[atomIndex] = kindIndex;
         nameIndexes[atomIndex] = nameIndex;
         valueIndexes[atomIndex] = valueIndex;
         childOffsets[atomIndex] = childOffset;
-        childCounts[atomIndex] = children.length;
+        childCounts[atomIndex] = childCount;
         structuralHashes[atomIndex] = hash;
         childOffsets[atomIndex + 1] = childArenaSize;
         size++;
@@ -290,7 +296,7 @@ final class M3ASTPool {
         return index == NO_STRING ? null : strings[index];
     }
 
-    private int find(int kind, int name, int value, int[] children, long hash) {
+    private int find(int kind, int name, int value, int[] children, int childCount, long hash) {
         if (slots.length == 0) return -1;
         int mask = slots.length - 1;
         int slot = slot(hash, mask);
@@ -300,28 +306,30 @@ final class M3ASTPool {
             int index = stored - 1;
             if (structuralHashes[index] == hash && kindIndexes[index] == kind
                     && nameIndexes[index] == name && valueIndexes[index] == value
-                    && sameChildren(index, children)) {
+                    && sameChildren(index, children, childCount)) {
                 return index;
             }
             slot = (slot + 1) & mask;
         }
     }
 
-    private boolean sameChildren(int atomIndex, int[] query) {
-        if (childCounts[atomIndex] != query.length) return false;
+    private boolean sameChildren(int atomIndex, int[] query, int queryCount) {
+        if (childCounts[atomIndex] != queryCount) return false;
         int offset = childOffsets[atomIndex];
-        for (int index = 0; index < query.length; index++) {
+        for (int index = 0; index < queryCount; index++) {
             if (childArena[offset + index] != query[index]) return false;
         }
         return true;
     }
 
-    private long structuralHash(long kind, long name, long value, int[] children) {
+    private long structuralHash(long kind, long name, long value, int[] children, int childCount) {
         long hash = mix(HASH_SEED, kind);
         hash = mix(hash, name);
         hash = mix(hash, value);
-        hash = mix(hash, children.length);
-        for (int child : children) hash = mix(hash, structuralHashes[child]);
+        hash = mix(hash, childCount);
+        for (int index = 0; index < childCount; index++) {
+            hash = mix(hash, structuralHashes[children[index]]);
+        }
         return avalanche(hash);
     }
 
