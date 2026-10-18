@@ -3,6 +3,20 @@
   "policy": "additive; no blind renames or unverified compatibility claims; Synexia donor names do not define M3JDK target ABI; precompute is internal-only",
   "mappings": [
     {
+      "source": "com.synexia.indexstring.projection.MIndexDerivativeRegex / MIndexPredicateAlphabet / native derivative power ABI",
+      "source_commit": "892e3f6c51d78bc0948e8a8cf736055b4c70eafa",
+      "source_blob": "292675e404c5a087e0039e20bf2b63f22bb97bfe",
+      "target": "com.m3.precompute.M3RegexDerivative / M3RegexPredicateAlphabet / M3RegexDerivativeNative",
+      "target_module": "m3/ports/precompute",
+      "status": "ISOLATED_TARGET_CANDIDATE_NO_JAVA_BASE_PROMOTION",
+      "recipe": "com.synexia.rewrite.M3Jdk21DerivativeRegexReceiver",
+      "license": "Apache-2.0; Copyright 2026 Hitesh Soliwal and contributors; preserve OpenJDK licenses",
+      "adaptation": "target owned M3 naming, M3Progress, shared precompute native load path, symbolic predicates, existing M3RegexDfaEffects ASCII effect bridge",
+      "restrictions": "restricted non-surrogate BMP algebraic full matches; no captures/lookarounds/backreferences; Java Pattern/Matcher remain authoritative",
+      "gates": "receiver recipe fixed-point and drift refusal; Maven Java 21; native C11/JNI tests; differential Java Pattern fixtures; unicode refusal; full JDK jtreg and CPU/heap/JNI resource measurements PENDING",
+      "collections": "filtered/sorted collections remain separately gated after String stage; no public java.util contract changes"
+    },
+    {
       "source": "com.synexia.indexstring.MIndexRegexProgram / LeetCode 10 and GeeksForGeeks dot-star matching taxonomy",
       "target": "java.lang.M3StringRegexDp and java.lang.String.matches",
       "status": "additive bounded M3JDK21 runtime candidate; JDK product qualification pending",
@@ -70,6 +84,15 @@
         "VM-local native scalar lookup is weak; dead native payload is reclaimable",
         "tuple composition is bounded-height and canonical by ordered terminal M3 owner/range sequence independent of concat parenthesization"
       ]
+    },
+    {
+      "source": "com.synexia.m3index.jdk.M3JdkStringBridge / com.synexia.mindex.MIndexStringPrecomputeBridge",
+      "target": "java.lang.M3StringPrecomputeBridge",
+      "status": "target-internal String precompute dispatch membrane",
+      "source_role": "Synexia canonical bridge policy/recipe donor",
+      "recipe": "com.synexia.rewrite.M3Jdk21StringPrecomputeBridgeReceiverRecipe",
+      "recipe_blob": "8879983c1c1eea32537ee92c3cb953143b5ea748",
+      "target_rule": "Package-private java.lang coordinator only; owns no cache or spelling payload, never admits a flat String merely for an optimization hit, and delegates to existing M3String facts/search/range owners with exact fallback semantics."
     },
     {
       "source": "com.synexia.indexstring.MIndexStringBacking",
@@ -575,6 +598,21 @@
       "receiver_test": "test/jdk/java/lang/String/M3StringCodePointRankCursorTest.java",
       "status": "source-sealed exact Java21 rank/select candidate and host reference A/B passed; matched M3JDK21 java.base/HotSpot jtreg and resource gates pending",
       "target_rule": "No public String ABI, duplicate payload owner, JNI symbol or retained per-value metadata changes; preserve unpaired UTF-16 surrogate semantics and fallback."
+    },
+    {
+      "source": "OpenJDK JDK-8371656 HashMap.putAll optimizations (27 GA)",
+      "source_revision": "13c92d0d4d137c7d83a946d1fcd2dfc5686e7b51",
+      "source_git_repo": "openjdk/jdk",
+      "source_path": "src/java.base/share/classes/java/util/HashMap.java",
+      "source_license": "GPLv2 with Classpath exception",
+      "target": "java.util.HashMap",
+      "target_path": "src/java.base/share/classes/java/util/HashMap.java",
+      "internal_optimization_owner": "java.util.HashMap.putHashMapEntries",
+      "recipe": "com.synexia.m3.Jdk27HashMapBulk20261017",
+      "canonical_recipe_pr": "hsoliwal/com.synexia#11969",
+      "receiver_test": "test/jdk/java/util/HashMap/M3HashMapBulkCopyTest.java",
+      "status": "candidate backport installed on draft branch; java.base patch testing and target runtime/jtreg gates pending; String-first receiving priority unchanged",
+      "target_rule": "Preserve public Map contracts and fallback for nonexact HashMap source types; no Synexia runtime dependency, no new M3 payload owner or native ABI."
     }
   ],
   "imported_donor_sources": [],
@@ -8324,5 +8362,18 @@
     "history_convergence_review_head": "5b2cbde34976ff5fe8bf6275bfbd9c58de6c34b0",
     "absorbed_product_evidence": "hsoliwal/M3jdk21#153@b11611609d378abba3a8a9e10edf9839a5c5676a",
     "runtime_dependency_rule": "M3JDK21 must not depend on Synexia at runtime; Synexia owns portable recipe/provenance only."
-  }
+  },
+  "optional_module_mappings": [
+    {
+      "module": "jdk.m3.collections",
+      "maven_profile": "m3-collections",
+      "mapping": "m3/docs/name-mapping.d/m3-filtered-collection-pack-20261017.json",
+      "intake_mode": "INDEPENDENT_APACHE_MODULE",
+      "receiving_sequence_advanced": false,
+      "canonical_recipe": "com.synexia.m3.M3JdkCollectionPublicationOwners20261017",
+      "target_proof": "m3/tooling/module-packs/collections/build.py",
+      "existing_generic_module": "com.m3.collections",
+      "optional_exported_package": "com.m3.util"
+    }
+  ]
 }

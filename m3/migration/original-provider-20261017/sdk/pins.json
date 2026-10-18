@@ -2,12 +2,12 @@
   "schema": "M3_ORIGINAL_MAPPING_PROVIDER_SDK_V1",
   "snapshotProviderGitBlob": "4a38e39d0755462d40c2b22548b87abde938ea0b",
   "sourceBase": "892e3f6c51d78bc0948e8a8cf736055b4c70eafa",
-  "receiverBase": "4e29dc9d4141261e8763fbe9ffd6a20e017b1aff",
+  "receiverBase": "4598bfc398d3024e7ea67e42034e857a53a1b378",
   "receiverOriginalAuditBase": "d47a4b4fdb8e3794ec56768b06aa9e23730c6b8e",
-  "receiverBaseEquivalence": "Independent81a82 source review verified all55 Git/raw/size identities unchanged at4e29.",
+  "receiverBaseEquivalence": "Original55-input4e29/d47 equivalence is historical. Fresh4598 audit: all54KEEP exact; workflow alreadyAFTER,4ADD absent; currentA56 migration raw equals oldA while59top mappings/optional fields are preserved by reviewed value-only successor.",
   "originalCliGitBlob": "d976f4a5d7f8983ade85d5d2cf608e3f6b2885d7",
-  "canonicalBeforeGitBlob": "769874f3049070f07d3481c70ae9fa873807aecd",
-  "canonicalAfterGitBlob": "00c6890957e4a2998053f3979e01ad8e9e25fc16",
+  "canonicalBeforeGitBlob": "4f5911d625090913d85f9cf41b1ead1694dffade",
+  "canonicalAfterGitBlob": "853607c6fef4b08ba2a3fd6df35121ac0594db30",
   "targets": [
     {
       "path": ".github/workflows/m3-original-mapping-provider-qualification.yml",
@@ -65,8 +65,8 @@
     },
     {
       "path": "m3/docs/name-mapping.json",
-      "before": "03434d125f8d758a5da24f55adfdc399f6cc828f8fa5b214f1cfe8777d635283",
-      "after": "77fd28e5d0a8afd1f8a253bbb2d10c1659c408d45657980a7f68ff69c03d2b80",
+      "before": "4247c5648cf6a5599f8840a7171f147f5c343bf9b97e7a386eb7f351f978c4f3",
+      "after": "216e2de854195c9f8363f2113e166955d5df22b6cea1d7d48721b18c2d28edf8",
       "resource": "after-009.txt"
     },
     {
@@ -371,7 +371,7 @@
     }
   ],
   "expectedExecution": {
-    "sdkMethods": 9,
+    "sdkMethods": 10,
     "mutableStates": 64,
     "sourceOrders": 2,
     "stdlibBoundaryMethods": 38,
@@ -409,9 +409,9 @@
     },
     {
       "path": "pom.xml",
-      "gitBlob": "22fb8eb4fb93054d63392dd216fcf0c96496fc4a",
-      "sha256": "c834821035f9b51cdcf5216a8d3a06a3143396de9dd9ba53153634cf3be387be",
-      "bytes": 2662
+      "gitBlob": "344fd4e38d166366039ea0f0235c07c0bc7c7beb",
+      "sha256": "3b19535312253aa518dae9e86dc87a529f63c5b8539419606e409ff42f529432",
+      "bytes": 2806
     },
     {
       "path": "src/main/java/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
@@ -481,9 +481,9 @@
     },
     {
       "path": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-original-mapping-provider-20261017/after-009.txt",
-      "gitBlob": "00c6890957e4a2998053f3979e01ad8e9e25fc16",
-      "sha256": "77fd28e5d0a8afd1f8a253bbb2d10c1659c408d45657980a7f68ff69c03d2b80",
-      "bytes": 437356
+      "gitBlob": "853607c6fef4b08ba2a3fd6df35121ac0594db30",
+      "sha256": "216e2de854195c9f8363f2113e166955d5df22b6cea1d7d48721b18c2d28edf8",
+      "bytes": 441047
     },
     {
       "path": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-original-mapping-provider-20261017/after-010.txt",
@@ -787,27 +787,27 @@
     },
     {
       "path": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-original-mapping-provider-20261017/before-after-009.txt",
-      "gitBlob": "769874f3049070f07d3481c70ae9fa873807aecd",
-      "sha256": "03434d125f8d758a5da24f55adfdc399f6cc828f8fa5b214f1cfe8777d635283",
-      "bytes": 400385
+      "gitBlob": "4f5911d625090913d85f9cf41b1ead1694dffade",
+      "sha256": "4247c5648cf6a5599f8840a7171f147f5c343bf9b97e7a386eb7f351f978c4f3",
+      "bytes": 404076
     },
     {
       "path": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-original-mapping-provider-20261017/manifest.tsv",
-      "gitBlob": "d9e3cfed9658fe077e161ce6862296505f1a6d43",
-      "sha256": "a8feef68f24bb3663c174087c376411d8c535e30cd393fe0e9b9026c60ddeae1",
+      "gitBlob": "5edf59fd5bda69cc01c183ca9ecc9507441575fb",
+      "sha256": "3689cf1e0d72198b827369da0b3b689b44db830bd88cc3cd508cb3ea53396791",
       "bytes": 11923
     },
     {
       "path": "src/test/java/com/m3/rewrite/backport/M3OriginalCliProviderRecipeTest.java",
-      "gitBlob": "0dce23dc4e3d7203931c21b4973e8992359555a0",
-      "sha256": "9ba203d2149000b297d85725b0b0092a249a44abcd45c37eec62ac21439ec432",
-      "bytes": 23225
+      "gitBlob": "d967dd7abe1acc2b1df5a92fdd909f145288da18",
+      "sha256": "0724e16491c2cd7a67c9258a4822b04f5eb88e9596a5cbacd84dcbdce635e59b",
+      "bytes": 30136
     },
     {
       "path": "verify.py",
-      "gitBlob": "5bdc315c9b1810cc8968c6019c8a9ad85078f960",
-      "sha256": "d87a5aa9c5bfe236b76b2395237f2f07b3dbddcaf5322bc6c12f0928c1799adf",
-      "bytes": 15362
+      "gitBlob": "43c9c6e70742d7623a86229cf950a50b029db598",
+      "sha256": "25101c50d4158ff007c792c61222405b1b2246e9281daf9095d92cfbd0768759",
+      "bytes": 15431
     }
   ]
 }

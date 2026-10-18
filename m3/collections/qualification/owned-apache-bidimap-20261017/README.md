@@ -31,3 +31,7 @@ This delivers one owned collection implementation, not every class in Apache or
 all five libraries. Donor concrete class identity/serialized wire form and stale
 entries after external structural changes are not claimed equivalent. Hosted
 CI and independent source review remain pending; the PR stays draft.
+
+V2 review refinement: a real values-iterator replacement discriminator exposed a mismatch in V1. V2 retains the delivered value in scalar cursor state and preserves the pinned provider inverse-state quirk. Eight forward/inverse key/value/entry/map-cursor replacement cases now pass, along with the original580058checks and66traversal comparisons. V1 recipe resources remain byte-identical. New recipes receive V2 from absent targets or transform only the exact V1 body; six real recipe tests pass including fresh marker-free byte replay and refusals. Shared core source changes now trigger the oracle workflow. Hosted CI and review recheck remain pending.
+
+V3 lifecycle refinement clears the delivered-value scalar only after successful iterator removal, matching donor release timing. V1 and V2 receiving resources remain immutable; new full/transition V3 recipes pass with ten total tests. Full580058checks,66traversal and8replacement cases rerun and pass. Source lifecycle review is not a garbage-collection performance measurement.

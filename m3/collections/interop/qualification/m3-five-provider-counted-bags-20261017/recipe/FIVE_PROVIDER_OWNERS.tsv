@@ -1,0 +1,9 @@
+upstream_provider_fqcn	m3_implementation_or_factory	canonical_M3_storage	status
+java.util.Map	com.m3.collections.interop.M3LibraryCollections.jdkMap	com.m3.collections.M3LinkedHashMap	REUSE_EXISTING
+com.google.common.collect.ListMultimap	com.m3.collections.interop.M3LibraryCollections.guavaListMultimap	M3LinkedHashMap and M3LinkedList	REUSE_EXISTING
+com.google.common.collect.ClassToInstanceMap	com.m3.collections.interop.M3GuavaClassToInstanceMaps.create	M3LinkedHashMap with Guava checked facade	NEW_PROVEN_BOUNDARY
+org.eclipse.collections.api.multimap.list.MutableListMultimap	com.m3.collections.interop.M3EclipseListMultimap	M3LinkedHashMap and M3LinkedList	REUSE_EXISTING
+org.eclipse.collections.api.bag.MutableBag	com.m3.collections.interop.M3EclipseBag	M3LinkedHashMap<E,Integer>	NEW_REAL_PROVIDER_TEST
+org.eclipse.collections.api.multimap.bag.MutableBagMultimap	com.m3.collections.interop.M3EclipseBagMultimap	M3LinkedHashMap and M3EclipseBag	NEW_REAL_PROVIDER_TEST
+org.springframework.util.MultiValueMap	com.m3.collections.interop.M3LibraryCollections.springMultiValueMap	M3LinkedHashMap and M3LinkedList	REUSE_EXISTING
+org.apache.commons.collections4.ListValuedMap	com.m3.collections.interop.M3LibraryCollections.apacheListValuedMap	M3LinkedHashMap and M3LinkedList	REUSE_EXISTING

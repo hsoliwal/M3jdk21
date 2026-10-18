@@ -375,6 +375,7 @@ public final class M3BidiMap<K, V> implements BidiMap<K, V> {
         public Iterator<V> iterator() {
             return new Iterator<>() {
                 private final KeyCursor cursor = new KeyCursor();
+                private V deliveredValue;
 
                 @Override
                 public boolean hasNext() {
@@ -383,12 +384,15 @@ public final class M3BidiMap<K, V> implements BidiMap<K, V> {
 
                 @Override
                 public V next() {
-                    return forward.get(cursor.next());
+                    deliveredValue = forward.get(cursor.next());
+                    return deliveredValue;
                 }
 
                 @Override
                 public void remove() {
-                    cursor.remove();
+                    // Preserve the donor's delivered-value removal after an external replacement.
+                    cursor.removeObservedValue(deliveredValue);
+                    deliveredValue = null;
                 }
             };
         }
@@ -483,7 +487,13 @@ public final class M3BidiMap<K, V> implements BidiMap<K, V> {
             if (!current) {
                 throw new IllegalStateException("Iterator remove() can only be called once after next()");
             }
-            final V value = forward.get(currentKey);
+            removeObservedValue(forward.get(currentKey));
+        }
+
+        private void removeObservedValue(final V value) {
+            if (!current) {
+                throw new IllegalStateException("Iterator remove() can only be called once after next()");
+            }
             slots.remove();
             reverse.remove(value);
             currentKey = null;
