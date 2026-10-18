@@ -1,3 +1,5 @@
+# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
+# SPDX-License-Identifier: Apache-2.0
 name: M3 long path JNI Java21 C17 differential
 on:
   pull_request:

@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: Apache-2.0
-// Copyright 2026 Hitesh Soliwal and contributors.
+// SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
 package com.synexia.m3;
 
 import java.io.IOException;
@@ -25,9 +25,9 @@ public final class M3LongIndexPathJNIRecipe {
         "m3_long_index_path_masks_jni.c"
     };
     private static final String[] HASHES = {
-        "0d6c06ad07051082470cf93999521eafbda1b426fefb061ce0b4db1bff604686",
-        "7ed3deadb020fc13a5742a973dd582251780a468dd0d5547767e4f00a145f6b9",
-        "f0e1e88ba558902d6d597933406b8e8a62a48220edcb028b814be3d054ac2d5e"
+        "6170e9899132ef746a88c140cebc78cbaf511aea1c797549fab3e2238d4c5a06",
+        "2a095a08f26fa8b5c776c179af65d6d392715d3e0e8f05c7765350da117aa202",
+        "c5971bd4bb6ee01a5385cc9ae22a2d7bc2bedd2163a1e39dd24cf76ec5f5e512"
     };
     private static final String[] TARGETS = {
         "m3/collections/src/main/java/com/m3/collections/M3LongIndexPathMasksJNI.java",

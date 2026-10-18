@@ -1,3 +1,5 @@
+<!-- SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
+     SPDX-License-Identifier: Apache-2.0 -->
 # M3 long-index path JNI — bounded Java/C17 receiver (2026-10-18)
 
 **Phase:** additive, separately built `m3/collections` proof; not JDK `java.util` promotion, a JNI speedup claim, or a replacement for existing live filtered/sorted collection views.
@@ -22,7 +24,7 @@ java -cp "$ROOT/target/classes" com.synexia.m3.M3LongIndexPathJNIRecipe --check 
 java -cp "$ROOT/target/classes" com.synexia.m3.M3LongIndexPathJNIRecipe --apply /fresh/checkout "$ROOT/templates"
 ```
 
-The product receiver mirrors recipe sources byte-for-byte for reproducibility. Subsequent modification of *existing* Java owners must use a source-sealed OpenRewrite recipe; this additive source-admission operation intentionally does not introduce another AST transformation framework. Synexia `develop` is append-only and is never rebased. Donor provenance and category comparisons are tracked in `CATALOG.tsv`.
+The product receiver mirrors recipe sources byte-for-byte for reproducibility. Subsequent modification of *existing* Java owners must use a source-sealed OpenRewrite recipe; this additive source-admission operation intentionally does not introduce another AST transformation framework. Synexia `develop` is append-only and is never rebased. Donor provenance and category comparisons are tracked in `CATALOG.txt`.
 
 ## Local qualification / acceptance
 
