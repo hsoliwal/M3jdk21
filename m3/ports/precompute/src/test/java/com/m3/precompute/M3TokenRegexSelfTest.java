@@ -34,6 +34,7 @@ public final class M3TokenRegexSelfTest {
         check(slice.idAt(0) == 8 && slice.startUtf16At(0) == 3
                 && slice.endUtf16At(1) == 105, "offset-only slice");
         check(Arrays.equals(slice.idsCopy(), new int[] {8, 8}), "detached ID array copy");
+        check(tape.slice(2, 2).boundaryUtf16(0) == 100, "empty interior slice offset");
         check(M3TokenRegex.compile("#8").find(slice).equals(
                 new M3TokenRegex.Match(0, 1, 3, 4)), "first token ID span");
         check(M3TokenRegex.compile("[id=8,all=1,none=0x0c]").find(slice)
