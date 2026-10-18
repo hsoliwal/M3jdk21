@@ -1,0 +1,9 @@
+category	evidence	selected_atom	decision	contract_boundary
+BULK_NAMESPACE_CHANGE	OpenRewrite ChangePackage official recipe	Java LST package/import/FQCN visitors	USE	Only pinned isolated fork, never public API in place
+HASH_AND_MAP	Guava CompactHashMap, M3LinkedHashMap	Reuse M3 parallel key/value/hash/state lanes	POST_RELOCATION	Hash/equality/null/view contracts are provider-specific
+COUNTS_BAG	Eclipse MutableBag, Apache Bag, Guava Multiset	Reuse M3LongBag/M3CountedBag	POST_RELOCATION	Primitive vs generic and multiplicity contract differs
+MULTIVALUED	Spring MultiValueMap, Guava Multimap, Apache MultiValuedMap	Reuse M3IndexedMultiValueMap/interop adapters	POST_RELOCATION	Key count vs pair count, aliasing and backed views
+SORTED	JDK NavigableMap, Eclipse sorted maps	Reuse M3TreeMap/index masks	POST_RELOCATION	Comparator representative and live range contracts
+MASK_FILTER	LeetCode #27 Remove Element, HackerRank Bit Manipulation, GeeksforGeeks stable sort	Reuse M3IndexMaskCompactor/M3StateMaskArrays	REFERENCE_ONLY	No challenge source copied
+JNI_BATCH	Existing M3IndexMaskCompactor C17	No new native ABI in relocation	REUSE	Java callbacks never run in JNI
+LICENSING	JDK GPL-2.0-with-Classpath-exception, Eclipse EPL/EDL	Retain exact upstream copyright/LICENSE/NOTICE	MANDATORY	Source relocation does not change license
