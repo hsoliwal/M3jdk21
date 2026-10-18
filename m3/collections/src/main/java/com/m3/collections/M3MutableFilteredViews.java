@@ -21,6 +21,7 @@ import java.util.Set;
 import java.util.SortedMap;
 import java.util.SortedSet;
  import java.util.function.BiConsumer;
+import java.util.function.BiFunction;
 import java.util.function.BiPredicate;
 import java.util.function.Predicate;
 
@@ -593,6 +594,40 @@ public final class M3MutableFilteredViews {
                 V value = owner.valueAt(slot);
                 if (predicate.test(key, value)) action.accept(key, value);
                 if (owner.revision() != expected) throw new ConcurrentModificationException();
+            }
+        }
+
+        @Override public boolean containsValue(Object value) {
+            M3TreeMap<K, V> owner = slotOwner();
+            if (owner == null) return super.containsValue(value);
+            for (int slot = owner.firstSlot(); slot >= 0; slot = owner.nextSlot(slot)) {
+                K key = owner.keyAt(slot);
+                V stored = owner.valueAt(slot);
+                if (predicate.test(key, stored) && Objects.equals(value, stored)) return true;
+            }
+            return false;
+        }
+
+        @Override public void replaceAll(
+                BiFunction<? super K, ? super V, ? extends V> action) {
+            Objects.requireNonNull(action, "action");
+            M3TreeMap<K, V> owner = slotOwner();
+            if (owner == null) {
+                for (Entry<K, V> entry : entrySet()) {
+                    entry.setValue(action.apply(entry.getKey(), entry.getValue()));
+                }
+                return;
+            }
+            for (int slot = owner.firstSlot(); slot >= 0; slot = owner.nextSlot(slot)) {
+                K key = owner.keyAt(slot);
+                V old = owner.valueAt(slot);
+                if (!predicate.test(key, old)) continue;
+                int expected = owner.revision();
+                V value = action.apply(key, old);
+                if (expected != owner.revision()) {
+                    throw new ConcurrentModificationException();
+                }
+                put(key, value);
             }
         }
 
