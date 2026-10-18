@@ -3,7 +3,7 @@
 from hashlib import sha256
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[4]
+ROOT = Path(__file__).resolve().parents[2]
 SOURCE = ROOT / "implementations/apache-circular-fifo/src/main/java/com/m3/collections/apache/M3CircularFifoQueue.java"
 EXPECTED = "3d337f1123ce5c8f977a395a37e515198a72fce967953d59e8a9a379463d8186"
 OLD = "final int idx = (start + index) % maxElements;"
