@@ -31,7 +31,7 @@ public final class M3LinkedHashMap<K, V> extends M3OrderedSlotMap<K, V> {
     @Override V writeAt(int slot, V value) {
         V old = valueAt(slot); if (!table.keyOnly) { table.values[slot] = value; } return old;
     }
-    @Override V eraseAt(int slot) { forgetEntry(keyAt(slot)); V old = valueAt(slot); table.erase(slot); return old; }
+    @Override V eraseAt(int slot) { forgetSlot(slot); V old = valueAt(slot); table.erase(slot); return old; }
     @Override void accessed(int slot) { if (table.accessOrder) { table.move(slot, false); } }
     @Override public int size() { return table.size; }
     @Override public V put(K key, V value) {
