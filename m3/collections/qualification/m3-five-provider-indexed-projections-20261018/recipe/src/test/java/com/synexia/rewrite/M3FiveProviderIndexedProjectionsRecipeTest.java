@@ -88,7 +88,7 @@ final class M3FiveProviderIndexedProjectionsRecipeTest {
         var duplicate = inputs(false); duplicate.add(duplicate.get(0)); refuses(duplicate);
     }
     @Test void canonicalYamlIsDiscovered() {
-        var recipe = Environment.builder().scanClassLoader(getClass().getClassLoader()).build()
+        var recipe = Environment.builder().scanRuntimeClasspath().build()
                 .activateRecipes("com.synexia.m3.FiveProviderIndexedProjections20261018");
         assertTrue(recipe.validateAll().stream().allMatch(v -> v.isValid()));
     }
