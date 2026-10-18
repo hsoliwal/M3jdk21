@@ -2,7 +2,6 @@
 // Copyright 2026 Hitesh Soliwal and contributors
 package jdk.m3.jackson;
 
-import com.fasterxml.jackson.core.JsonFactory;
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonToken;
@@ -33,8 +32,6 @@ final class M3JsonCodec {
         M3ASTBuilder builder = new M3ASTBuilder(limits);
         ArrayDeque<InputFrame> stack = new ArrayDeque<>();
         Work work = new Work(limits);
-        JsonFactory strictNumbers = JsonFactory.builder()
-                .streamReadConstraints(parser.streamReadConstraints()).build();
         JsonToken token = parser.currentToken();
         if (token == null) token = parser.nextToken();
         if (token == null) throw JsonMappingException.from(parser, "empty JSON input");
@@ -76,13 +73,9 @@ final class M3JsonCodec {
                     if (parser.isNaN()) throw JsonMappingException.from(parser, "M3AST requires finite JSON numbers");
                     String value = parser.getText();
                     work.text(value);
-                    // Preserve parser-exposed lexemes, but never emit permissive non-JSON spelling.
-                    try (JsonParser check = strictNumbers.createParser(value)) {
-                        JsonToken numeric = check.nextToken();
-                        if (numeric == null || !numeric.isNumeric() || !value.equals(check.getText())
-                                || check.nextToken() != null) {
-                            throw JsonMappingException.from(parser, "M3AST requires a strict JSON numeric lexeme");
-                        }
+                    // RFC 8259 numeric grammar; no parser allocation per numeric token.
+                    if (!isStrictJsonNumber(value)) {
+                        throw JsonMappingException.from(parser, "M3AST requires a strict JSON numeric lexeme");
                     }
                     atom = builder.leaf(token == JsonToken.VALUE_NUMBER_INT ? "NUMBER_INT" : "NUMBER_FLOAT",
                             null, value);
@@ -104,6 +97,38 @@ final class M3JsonCodec {
         }
     }
 
+    /** Validates the entire JSON number lexeme without creating another parser or Node. */
+    private static boolean isStrictJsonNumber(String text) {
+        int size = text.length();
+        if (size == 0) return false;
+        int cursor = text.charAt(0) == '-' ? 1 : 0;
+        if (cursor == size) return false;
+        char first = text.charAt(cursor);
+        if (first == '0') {
+            cursor++;
+        } else if (first >= '1' && first <= '9') {
+            while (++cursor < size && Character.isDigit(text.charAt(cursor))) {
+                if (text.charAt(cursor) > '9') return false;
+            }
+        } else {
+            return false;
+        }
+        if (cursor < size && text.charAt(cursor) == '.') {
+            cursor++;
+            int start = cursor;
+            while (cursor < size && text.charAt(cursor) >= '0' && text.charAt(cursor) <= '9') cursor++;
+            if (cursor == start) return false;
+        }
+        if (cursor < size && (text.charAt(cursor) == 'e' || text.charAt(cursor) == 'E')) {
+            cursor++;
+            if (cursor < size && (text.charAt(cursor) == '+' || text.charAt(cursor) == '-')) cursor++;
+            int start = cursor;
+            while (cursor < size && text.charAt(cursor) >= '0' && text.charAt(cursor) <= '9') cursor++;
+            if (cursor == start) return false;
+        }
+        return cursor == size;
+    }
+
     private static JsonToken requiredNext(JsonParser parser) throws IOException {
         JsonToken token = parser.nextToken();
         if (token == null) throw JsonMappingException.from(parser, "unexpected end of JSON input");
@@ -119,7 +144,7 @@ final class M3JsonCodec {
     }
 
     private static void writeValue(M3AST ast, JsonGenerator generator, M3JsonLimits limits) throws IOException {
-        if (ast.root().kind().equals("FIELD")) {
+        if ("FIELD".equals(ast.kindAt(ast.rootAtomIndex()))) {
             throw new IllegalArgumentException("a field occurrence is not a complete JSON value");
         }
         if (ast.atomCount() > limits.maxAtoms()) throw new IllegalArgumentException("M3 AST atom budget");
@@ -135,8 +160,7 @@ final class M3JsonCodec {
         int depth = 0;
         while (!stack.isEmpty()) {
             OutputFrame frame = stack.peek();
-            M3ASTAtom atom = ast.atom(frame.atom);
-            String kind = atom.kind();
+            String kind = ast.kindAt(frame.atom);
             if (frame.nextChild == -1) {
                 work.token();
                 switch (kind) {
@@ -147,13 +171,13 @@ final class M3JsonCodec {
                         frame.nextChild = 0;
                     }
                     case "FIELD" -> {
-                        if (atom.childCount() != 1) throw new IllegalStateException("field requires one value");
-                        work.text(atom.name());
+                        if (ast.childCountAt(frame.atom) != 1) throw new IllegalStateException("field requires one value");
+                        work.text(ast.nameAt(frame.atom));
                         generator.writeFieldName(atom.name());
                         frame.nextChild = 0;
                     }
                     case "STRING" -> {
-                        work.text(atom.value());
+                        work.text(ast.valueAt(frame.atom));
                         generator.writeString(atom.value());
                         stack.pop();
                         continue;
@@ -182,7 +206,7 @@ final class M3JsonCodec {
                 }
             }
             if (frame.nextChild < atom.childCount()) {
-                stack.push(new OutputFrame(atom.childAtomIndex(frame.nextChild++)));
+                stack.push(new OutputFrame(ast.childAtomIndexAt(frame.atom, frame.nextChild++)));
             } else {
                 if (kind.equals("OBJECT") || kind.equals("ARRAY")) {
                     work.token();
