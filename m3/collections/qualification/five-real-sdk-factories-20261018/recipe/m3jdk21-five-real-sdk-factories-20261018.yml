@@ -1,0 +1,14 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.FiveRealSdkFactories20261018
+displayName: Five actual M3 collection provider factories with exact source admission
+description: >-
+  Retain all current JDK Guava Eclipse Spring Apache collection owners and
+  append five correctly typed factories over incumbent M3 array/index/count stores.
+  Refine only the two named Java files; reconcile exact 34-source census and
+  restore missing compile-only JetBrains annotations for the existing recipe.
+  No copied challenge solutions, public package renames or new JNI ABI.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: m3jdk21-five-real-sdk-factories-20261018
+  - com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe:
+      crateName: m3jdk21-five-real-sdk-factories-20261018

@@ -1,0 +1,45 @@
+name: M3 five real SDK factory families Java21 and JNI
+on:
+  pull_request:
+    paths:
+      - 'm3/collections/interop/src/main/java/com/m3/collections/interop/M3LibraryCollections.java'
+      - 'm3/collections/interop/src/test/java/com/m3/collections/interop/M3FiveLibraryInteropContractTest.java'
+      - 'm3/collections/interop/qualification/current-census-20261017/**'
+      - 'm3/collections/qualification/m3-five-provider-current-census-20261017/recipe/**'
+      - 'm3/collections/qualification/five-real-sdk-factories-20261018/**'
+      - '.github/workflows/m3-five-real-sdk-factories-20261018.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  five-real-provider-factories:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Validate current 34-owner source receipt, historical negatives
+        run: |
+          set -euo pipefail
+          python3 m3/collections/interop/qualification/current-census-20261017/verify.py
+          python3 -m unittest discover -s m3/collections/interop/qualification/current-census-20261017 -p 'test_verify.py' -v
+      - name: Execute original Maven/OpenRewrite 34-owner recipe with Werror intact
+        run: mvn -B -ntp -f m3/collections/qualification/m3-five-provider-current-census-20261017/recipe/pom.xml test
+      - name: Compile and install actual M3 collection arrays/offsets and JUnit
+        run: mvn -B -ntp -f m3/collections/pom.xml -DfailIfNoTests=true install
+      - name: Run authentic JDK Guava Eclipse Spring Apache provider contract
+        run: mvn -B -ntp -f m3/collections/interop/pom.xml -Dtest=M3FiveLibraryInteropContractTest test
+      - name: Compile and run existing M3 32-bit JNI path mask checks
+        shell: bash
+        run: |
+          set -euo pipefail
+          gcc -std=c17 -O2 -Wall -Wextra -Wconversion -Wshadow -Werror -pedantic -fPIC -shared \
+            -I"$JAVA_HOME/include" -I"$JAVA_HOME/include/linux" \
+            m3/collections/src/main/native/collections/m3_index_path_masks.c \
+            -o "$RUNNER_TEMP/libm3_collections_pathmask.so"
+          java -Xcheck:jni -Djava.library.path="$RUNNER_TEMP" \
+            -cp "m3/collections/target/classes:m3/collections/target/test-classes" \
+            com.m3.collections.M3IndexPathMasksSelfTest --native
