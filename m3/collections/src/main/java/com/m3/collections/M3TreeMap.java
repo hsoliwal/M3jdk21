@@ -107,7 +107,7 @@ public final class M3TreeMap<K, V> extends M3OrderedSlotMap<K, V> implements Nav
         if (tree.lazy != null) { tree.lazy.admitted(slot, true); }
         return old;
     }
-    @Override V eraseAt(int slot) { forgetEntry(keyAt(slot)); tree.writable(); V old = valueAt(slot); tree.erase(slot); return old; }
+    @Override V eraseAt(int slot) { forgetSlot(slot); tree.writable(); V old = valueAt(slot); tree.erase(slot); return old; }
     @Override int revision() { return tree.modifications; }
     @Override public int size() {
         if (!hasLow && !hasHigh) { return tree.size; }
@@ -253,11 +253,11 @@ public final class M3TreeMap<K, V> extends M3OrderedSlotMap<K, V> implements Nav
     @Override public K floorKey(K k) { return nullableKey(near(k, -1)); }
     @Override public K ceilingKey(K k) { return nullableKey(near(k, 1)); }
     @Override public K higherKey(K k) { return nullableKey(near(k, 2)); }
-    private Entry<K, V> poll(int s) { Entry<K, V> e = snapshot(s); if (s >= 0) { forgetEntry(keyAt(s)); tree.erase(s); } return e; }
+    private Entry<K, V> poll(int s) { Entry<K, V> e = snapshot(s); if (s >= 0) { forgetSlot(s); tree.erase(s); } return e; }
     @Override public Entry<K, V> pollFirstEntry() { return poll(firstSlot()); }
     @Override public Entry<K, V> pollLastEntry() { return poll(lastSlot()); }
     K pollKey(boolean last) {
-        int s = last ? lastSlot() : firstSlot(); K k = nullableKey(s); if (s >= 0) { forgetEntry(k); tree.erase(s); } return k;
+        int s = last ? lastSlot() : firstSlot(); K k = nullableKey(s); if (s >= 0) { forgetSlot(s); tree.erase(s); } return k;
     }
     @Override public M3TreeMap<K, V> reversed() { return descendingMap(); }
     @Override public M3TreeMap<K, V> descendingMap() {
