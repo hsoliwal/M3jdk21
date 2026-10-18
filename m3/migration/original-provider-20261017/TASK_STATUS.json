@@ -1,6 +1,6 @@
 {
   "schema": "M3_ORIGINAL_MAPPING_PROVIDER_TASK_STATUS_V1",
-  "observedUtc": "2026-10-18 05:51:24 UTC",
+  "observedUtc": "2026-10-18 06:02:40 UTC",
   "fullObjective": "Complete continuous MIndex/MatIndex/SubMIndex migration and java.lang.String RoutesA/B/C; preserve full12-pass specification",
   "goalActive": true,
   "storageProtectionActive": true,
@@ -32,9 +32,9 @@
     "frozenPreBytes": 795620
   },
   "sourceReview": "INDEPENDENT_JAVA_POM_AND_PYTHON_WORKFLOW_REVIEW_CLEAR_SOURCE_ONLY",
-  "execution": "FROZEN_PRE_SUCCESSOR_NOT_RUN; PRIOR_QUALIFIED_PROVIDER_PRESERVED",
+  "execution": "RECIPE_HOSTED_11_28_38_26_PASS; RECEIVED_POST_CHECKOUT_NOT_RUN",
   "runtimeApplied": false,
-  "canonicalProductionMapApplied": false,
+  "canonicalProductionMapApplied": true,
   "phaseAdvanced": false,
   "fullMigrationComplete": false,
   "remaining": [
@@ -131,8 +131,121 @@
     "frozenPreManifestSha256": "11d69c05d4e4dd0ef27c8a2195827c62b5dd48a49bef34943f4c6a11fbc4899c",
     "beforeAfterProvider": true,
     "sourceReview": "CLEAR_SOURCE_ONLY",
-    "execution": "NOT_RUN"
+    "execution": "PASS_AT613e5ff4; RECEIVED_POST_CHECKOUT_REQUALIFICATION_PENDING"
   },
   "canonicalSourceCommit": "f44400ead6a4c65e9bb9fc371a5b1c2deecc9c6b",
-  "receivingScope": "EXACT_SDK_MIRROR_AND_EXISTING_WORKFLOW; NO_PRODUCTION_PROVIDER_MAP_OUTPUTS"
+  "receivingScope": "DRAFT_BRANCH_EXACT_FIVE_DATA_OUTPUTS_PLUS_QUALIFIED_SDK_AND_EXISTING_WORKFLOW; DEFAULT_UNPROMOTED",
+  "hostedQualification": {
+    "schema": "M3_PROVIDER_FROZEN_PRE_HOSTED_QUALIFICATION_V1",
+    "observedUtc": "2026-10-18 06:01:21 UTC",
+    "repository": "hsoliwal/M3jdk21",
+    "head": "613e5ff4385146ee0326ca4a5820fd11bed793e1",
+    "sourceHead": "f44400ead6a4c65e9bb9fc371a5b1c2deecc9c6b",
+    "run": 39102078256,
+    "job": 117600228618,
+    "conclusion": "SUCCESS",
+    "sdkTree": "c93b25915d57178bec19458ba9ddc34383d92639",
+    "pinsSha256": "bfca248cec552a541faf7c69fe20fc1833736931af1638049b70c6d7a7616c46",
+    "artifact": {
+      "id": 12127665194,
+      "zipBytes": 161703,
+      "zipSha256": "1333ef83ab1c7a850ff71516439b99e5daf2adc6d8d514ae4cf83a4e70a045f8",
+      "members": 41,
+      "expandedBytes": 155679,
+      "inventoryPinsVerified": 38,
+      "readback": "TWO_BOUNDED_RAM_READS_ALL_INVENTORY_PINS_AND_XML_VERIFIED"
+    },
+    "junit": {
+      "tests": 11,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "custodyControls": 28,
+    "providerBoundaries": 38,
+    "originalMethods": 26,
+    "emittedTargets": 60,
+    "mutableStates": 64,
+    "sourceOrders": 2,
+    "postAdded": 4,
+    "postChanged": 2,
+    "frozenPre": {
+      "bytes": 795620,
+      "files": 55,
+      "independentOfInstalledPost": true,
+      "manifestSha256": "11d69c05d4e4dd0ef27c8a2195827c62b5dd48a49bef34943f4c6a11fbc4899c",
+      "preInventorySha256": "d2a4133059aca61b7c001951b9d9df8cbdcac108bd59c5403c8d3131c7cea0ef",
+      "root": "/home/runner/work/_temp/m3-original-provider-39102078256-1/baseline",
+      "beforeAfterByteIdentical": true,
+      "recipeBeforeSha256": "cf5f6b1a66b29d922335382f25a5f870a7cc2a34dd02f4e76686f4960c765edf",
+      "recipeAfterSha256": "cf5f6b1a66b29d922335382f25a5f870a7cc2a34dd02f4e76686f4960c765edf"
+    },
+    "cliCodes": {
+      "baseline-validate": 1,
+      "baseline-report": 1,
+      "baseline-complete": 1,
+      "current-validate": 0,
+      "current-report": 0,
+      "current-complete": 2
+    },
+    "completionBlockers": 158,
+    "currentCompleteStderrSha256": "5013590c325b4b7eb3809da39e1704474d2eee73baedc7a12cb899be42f5479f",
+    "providerGenuine": true,
+    "releasedDistributions": 6,
+    "releasedFiles": 132,
+    "nativePayload": {
+      "kind": "PYTHON_RPDS_NOT_M3_JNI",
+      "bytes": 1060936,
+      "sha256": "627491614eecdb6d41f8d569d20e60545d4b3c5cd59e4ccadc275a940df73336"
+    },
+    "providerOutputBytes": 14029908,
+    "providerBudgetBytes": 67108864,
+    "outerCommands": 6,
+    "allReapedAndOwnedSessionAbsent": true,
+    "runtimeJniQualified": false,
+    "matchedJdkQualified": false,
+    "performanceRetentionQualified": false,
+    "phaseAdvanced": false,
+    "migrationComplete": false,
+    "goalActive": true,
+    "formalAutoreviewHelper": "NOT_RUN_STORAGE_HOLD",
+    "cliCommandTerminationsNull": true
+  },
+  "qualifiedDataOutputs": [
+    {
+      "path": "m3/docs/name-mapping.json",
+      "gitBlob": "853607c6fef4b08ba2a3fd6df35121ac0594db30",
+      "sha256": "216e2de854195c9f8363f2113e166955d5df22b6cea1d7d48721b18c2d28edf8",
+      "bytes": 441047,
+      "kind": "CHANGE"
+    },
+    {
+      "path": "m3/migration/provider/python312-linux-x86_64/bootstrap.py",
+      "gitBlob": "fd943dae946249b57d45343eba59c4a62c3ac6c5",
+      "sha256": "ad5c7df9cf9178ff656a369bbae82c20e2914f1005e187467be0000226cda243",
+      "bytes": 42501,
+      "kind": "ADD"
+    },
+    {
+      "path": "m3/migration/provider/python312-linux-x86_64/previous-name-mapping.json",
+      "gitBlob": "a44460f982940623cf6ba1ca625caeeaa889f633",
+      "sha256": "fa9832d48ec7dc0334fcb3a02e1b665612ca3a9f3dfe13cd104ff3f2c42871ac",
+      "bytes": 399438,
+      "kind": "ADD"
+    },
+    {
+      "path": "m3/migration/provider/python312-linux-x86_64/test_bootstrap.py",
+      "gitBlob": "537e6701ebde8e064d69425c5dd144df614577d3",
+      "sha256": "301727f395b772328c7e311fd0a7562deeb1ad938c9f4d4f0fc912eb83c39456",
+      "bytes": 29770,
+      "kind": "ADD"
+    },
+    {
+      "path": "m3/migration/provider/python312-linux-x86_64/wheels.lock.json",
+      "gitBlob": "3291ec0a80c15b311dc44b15b078f5d1f103df4b",
+      "sha256": "7ecf3b8050b9cceb75304fa3bbe6721a5b4844cb5ca520827ed19f5c21cfbfe9",
+      "bytes": 10099,
+      "kind": "ADD"
+    }
+  ]
 }
