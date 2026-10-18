@@ -30,6 +30,8 @@ final class M3NoRetainedStructuralEntryTest {
     private static final String PACKAGE = "com.m3.collections.";
 
     private static final List<Class<?>> STORAGE_ROOTS = List.of(
+            M3HashMap.class,
+            M3HashSet.class,
             M3LinkedHashMap.class,
             M3TreeMap.class,
             M3LinkedList.class,
