@@ -18,6 +18,8 @@ jobs:
         with:
           distribution: temurin
           java-version: '21'
+      - name: Verify exact Synexia recipe SHA-256 postimages
+        run: python3 m3/ports/capability-runtime/verify_byte_window_receipt.py
       - name: Compile and verify bounded CPU module against full source
         run: |
           set -eu
