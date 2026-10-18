@@ -1,0 +1,89 @@
+# Copyright 2026 Hitesh Soliwal and contributors
+# SPDX-License-Identifier: Apache-2.0
+#
+# Wave 1 of viewport-everywhere (m3/docs/viewport-everywhere/DESIGN.md section 3): copy the toolkit-neutral SWT
+# viewport classes into m3/collections (com.m3.collections) and m3/viewport-core (com.m3.viewport).
+# Source: hsoliwal/eclipse.platform.swt 553eefd41d9961d303c41e0e4e181712e64a1e45. Apply twice: pass 2 is UNCHANGED.
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.m3.viewport.recipe.Wave1Types
+displayName: M3 viewport-everywhere wave 1 type renames
+description: SWT viewport classes to their M3 owners.
+recipeList:
+  - org.openrewrite.java.ChangeType: {oldFullyQualifiedTypeName: org.eclipse.swt.widgets.VirtualTreeSiblingIndex, newFullyQualifiedTypeName: com.m3.collections.M3OrderStatisticForest}
+  - org.openrewrite.java.ChangeType: {oldFullyQualifiedTypeName: org.eclipse.swt.widgets.VirtualRowExtents, newFullyQualifiedTypeName: com.m3.collections.M3SparseExtents}
+  - org.openrewrite.java.ChangeType: {oldFullyQualifiedTypeName: org.eclipse.swt.widgets.VirtualCellLanes, newFullyQualifiedTypeName: com.m3.collections.M3ColumnarLanes}
+  - org.openrewrite.java.ChangeType: {oldFullyQualifiedTypeName: org.eclipse.swt.widgets.VirtualBitLanes, newFullyQualifiedTypeName: com.m3.collections.M3BitLanes}
+  - org.openrewrite.java.ChangeType: {oldFullyQualifiedTypeName: org.eclipse.swt.widgets.VirtualBlockStore, newFullyQualifiedTypeName: com.m3.collections.M3BlockStore}
+  - org.openrewrite.java.ChangeType: {oldFullyQualifiedTypeName: org.eclipse.swt.widgets.VirtualBlockCache, newFullyQualifiedTypeName: com.m3.collections.M3BlockCache}
+  - org.openrewrite.java.ChangeType: {oldFullyQualifiedTypeName: org.eclipse.swt.widgets.VirtualGrowth, newFullyQualifiedTypeName: com.m3.collections.M3LaneGrowth}
+  - org.openrewrite.java.ChangeType: {oldFullyQualifiedTypeName: org.eclipse.swt.internal.PackedHeapGrowth, newFullyQualifiedTypeName: com.m3.collections.M3HeapGrowth}
+  - org.openrewrite.java.ChangeType: {oldFullyQualifiedTypeName: org.eclipse.swt.internal.ViewportRuntime, newFullyQualifiedTypeName: com.m3.viewport.M3ViewportRuntime}
+  - org.openrewrite.java.ChangeType: {oldFullyQualifiedTypeName: org.eclipse.swt.widgets.VirtualScrollMetrics, newFullyQualifiedTypeName: com.m3.viewport.M3ScrollMetrics}
+  - org.openrewrite.java.ChangeType: {oldFullyQualifiedTypeName: org.eclipse.swt.widgets.VirtualRowWindowPlan, newFullyQualifiedTypeName: com.m3.viewport.M3RowWindowPlan}
+  - org.openrewrite.java.ChangeType: {oldFullyQualifiedTypeName: org.eclipse.swt.widgets.VirtualItemState, newFullyQualifiedTypeName: com.m3.viewport.M3ItemState}
+  - org.openrewrite.java.ChangeType: {oldFullyQualifiedTypeName: org.eclipse.swt.widgets.VirtualTreeTopology, newFullyQualifiedTypeName: com.m3.viewport.M3TreeTopology}
+  - org.openrewrite.java.ChangeType: {oldFullyQualifiedTypeName: org.eclipse.swt.widgets.VirtualTreeVisibleProjection, newFullyQualifiedTypeName: com.m3.viewport.M3TreeProjection}
+  - org.openrewrite.java.ChangeType: {oldFullyQualifiedTypeName: org.eclipse.swt.widgets.VirtualTreeResidentPlan, newFullyQualifiedTypeName: com.m3.viewport.M3TreeResidentPlan}
+  - org.openrewrite.java.ChangeType: {oldFullyQualifiedTypeName: org.eclipse.swt.widgets.VirtualTreeViewport, newFullyQualifiedTypeName: com.m3.viewport.M3TreeViewport}
+  - org.openrewrite.java.ChangeType: {oldFullyQualifiedTypeName: org.eclipse.swt.widgets.VirtualSelectionModel, newFullyQualifiedTypeName: com.m3.viewport.M3SelectionModel}
+  - org.openrewrite.java.ChangeType: {oldFullyQualifiedTypeName: org.eclipse.swt.widgets.VirtualViewportPlanner, newFullyQualifiedTypeName: com.m3.viewport.M3ViewportPlanner}
+  - org.openrewrite.java.ChangeType: {oldFullyQualifiedTypeName: org.eclipse.swt.widgets.ViewportScrollLayout, newFullyQualifiedTypeName: com.m3.viewport.M3ScrollLayout}
+  - org.openrewrite.java.ChangeType: {oldFullyQualifiedTypeName: org.eclipse.swt.widgets.ViewportScrollBarGeometry, newFullyQualifiedTypeName: com.m3.viewport.M3ScrollBarGeometry}
+  - org.openrewrite.java.ChangeType: {oldFullyQualifiedTypeName: org.eclipse.swt.widgets.ViewportPlaneGeometry, newFullyQualifiedTypeName: com.m3.viewport.M3PlaneGeometry}
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.m3.viewport.recipe.Wave1Main
+displayName: M3 viewport-everywhere wave 1 (main sources)
+description: Header, SWT detachment, type renames and public surface for the copied main sources.
+recipeList:
+  - com.m3.viewport.recipe.M3ApacheHeader
+  - com.m3.viewport.recipe.M3DetachSwt
+  - com.m3.viewport.recipe.Wave1Types
+  - com.m3.viewport.recipe.M3PublicSurface
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.m3.viewport.recipe.Wave1Tests
+displayName: M3 viewport-everywhere wave 1 (tests)
+description: Header, test class renames and reflective names for the ported SWT unit tests.
+recipeList:
+  - com.m3.viewport.recipe.M3ApacheHeader
+  - com.m3.viewport.recipe.Wave1Types
+  - org.openrewrite.java.ChangeType: {oldFullyQualifiedTypeName: org.eclipse.swt.tests.junit.Test_VirtualRowExtents, newFullyQualifiedTypeName: com.m3.collections.M3SparseExtentsTest}
+  - org.openrewrite.java.ChangeType: {oldFullyQualifiedTypeName: org.eclipse.swt.tests.junit.Test_VirtualCellLanes, newFullyQualifiedTypeName: com.m3.collections.M3ColumnarLanesTest}
+  - org.openrewrite.java.ChangeType: {oldFullyQualifiedTypeName: org.eclipse.swt.tests.junit.Test_VirtualBitLanes, newFullyQualifiedTypeName: com.m3.viewport.M3BitLanesTest}
+  - org.openrewrite.java.ChangeType: {oldFullyQualifiedTypeName: org.eclipse.swt.tests.junit.VirtualTreeReflection, newFullyQualifiedTypeName: com.m3.viewport.M3TreeReflection}
+  - org.openrewrite.java.ChangeType: {oldFullyQualifiedTypeName: org.eclipse.swt.tests.junit.Test_VirtualRowWindowPlan, newFullyQualifiedTypeName: com.m3.viewport.M3RowWindowPlanTest}
+  - org.openrewrite.java.ChangeType: {oldFullyQualifiedTypeName: org.eclipse.swt.tests.junit.Test_VirtualTreeResidentPlan, newFullyQualifiedTypeName: com.m3.viewport.M3TreeResidentPlanTest}
+  - org.openrewrite.java.ChangeType: {oldFullyQualifiedTypeName: org.eclipse.swt.tests.junit.Test_VirtualTreeTopology, newFullyQualifiedTypeName: com.m3.viewport.M3TreeTopologyTest}
+  - org.openrewrite.java.ChangeType: {oldFullyQualifiedTypeName: org.eclipse.swt.tests.junit.Test_VirtualTreeOrderStatistic, newFullyQualifiedTypeName: com.m3.viewport.M3TreeOrderStatisticTest}
+  - org.openrewrite.java.ChangeType: {oldFullyQualifiedTypeName: org.eclipse.swt.tests.junit.Test_VirtualTreeWindow, newFullyQualifiedTypeName: com.m3.viewport.M3TreeWindowTest}
+  - org.openrewrite.java.ChangeType: {oldFullyQualifiedTypeName: org.eclipse.swt.tests.junit.Test_VirtualTreeViewport, newFullyQualifiedTypeName: com.m3.viewport.M3TreeViewportTest}
+  - org.openrewrite.java.ChangeType: {oldFullyQualifiedTypeName: org.eclipse.swt.tests.junit.Test_VirtualTreeCoverage, newFullyQualifiedTypeName: com.m3.viewport.M3TreeCoverageTest}
+  - org.openrewrite.java.ChangeType: {oldFullyQualifiedTypeName: org.eclipse.swt.tests.junit.Test_VirtualTreeResidency, newFullyQualifiedTypeName: com.m3.viewport.M3TreeResidencyTest}
+  - org.openrewrite.java.ChangeType: {oldFullyQualifiedTypeName: org.eclipse.swt.tests.junit.Test_ViewportRowWindow, newFullyQualifiedTypeName: com.m3.viewport.M3ViewportRowWindowTest}
+  - org.openrewrite.java.ChangeType: {oldFullyQualifiedTypeName: org.eclipse.swt.tests.junit.Test_ViewportSelectionShifts, newFullyQualifiedTypeName: com.m3.viewport.M3SelectionShiftsTest}
+  - org.openrewrite.java.ChangeType: {oldFullyQualifiedTypeName: org.eclipse.swt.tests.junit.Test_ViewportSelectionEnumeration, newFullyQualifiedTypeName: com.m3.viewport.M3SelectionEnumerationTest}
+  - org.openrewrite.java.ChangeType: {oldFullyQualifiedTypeName: org.eclipse.swt.tests.junit.Test_ViewportPlaneGeometry, newFullyQualifiedTypeName: com.m3.viewport.M3PlaneGeometryTest}
+  - com.m3.viewport.recipe.M3ChangeStringLiteral: {from: org.eclipse.swt.widgets.VirtualRowExtents, to: com.m3.collections.M3SparseExtents}
+  - com.m3.viewport.recipe.M3ChangeStringLiteral: {from: org.eclipse.swt.widgets.VirtualCellLanes, to: com.m3.collections.M3ColumnarLanes}
+  - com.m3.viewport.recipe.M3ChangeStringLiteral: {from: org.eclipse.swt.widgets.VirtualBitLanes, to: com.m3.collections.M3BitLanes}
+  - com.m3.viewport.recipe.M3ChangeStringLiteral: {from: org.eclipse.swt.widgets.VirtualTreeTopology, to: com.m3.viewport.M3TreeTopology}
+  - com.m3.viewport.recipe.M3ChangeStringLiteral: {from: org.eclipse.swt.widgets.VirtualItemState, to: com.m3.viewport.M3ItemState}
+  - com.m3.viewport.recipe.M3ChangeStringLiteral: {from: org.eclipse.swt.widgets.VirtualTreeResidentPlan, to: com.m3.viewport.M3TreeResidentPlan}
+  - com.m3.viewport.recipe.M3ChangeStringLiteral: {from: org.eclipse.swt.widgets.VirtualRowWindowPlan, to: com.m3.viewport.M3RowWindowPlan}
+  - com.m3.viewport.recipe.M3ChangeStringLiteral: {from: org.eclipse.swt.widgets.VirtualTreeViewport, to: com.m3.viewport.M3TreeViewport}
+  - com.m3.viewport.recipe.M3ChangeStringLiteral: {from: org.eclipse.swt.widgets.VirtualViewportPlanner, to: com.m3.viewport.M3ViewportPlanner}
+  - com.m3.viewport.recipe.M3ChangeStringLiteral: {from: org.eclipse.swt.widgets.ViewportPlaneGeometry, to: com.m3.viewport.M3PlaneGeometry}
+  - com.m3.viewport.recipe.M3ChangeStringLiteral: {from: org.eclipse.swt.widgets., to: ""}
+  - com.m3.viewport.recipe.M3ChangeStringLiteral: {from: VirtualTreeTopology, to: com.m3.viewport.M3TreeTopology}
+  - com.m3.viewport.recipe.M3ChangeStringLiteral: {from: VirtualTreeVisibleProjection, to: com.m3.viewport.M3TreeProjection}
+  - com.m3.viewport.recipe.M3ChangeStringLiteral: {from: VirtualTreeVisibleProjection$Row, to: com.m3.viewport.M3TreeProjection$Row}
+  - com.m3.viewport.recipe.M3ChangeStringLiteral: {from: VirtualTreeVisibleProjection$Residency, to: com.m3.viewport.M3TreeProjection$Residency}
+  - com.m3.viewport.recipe.M3ChangeStringLiteral: {from: VirtualTreeViewport, to: com.m3.viewport.M3TreeViewport}
+  - com.m3.viewport.recipe.M3ChangeStringLiteral: {from: VirtualTreeResidentPlan, to: com.m3.viewport.M3TreeResidentPlan}
+  - com.m3.viewport.recipe.M3ChangeStringLiteral: {from: VirtualItemState, to: com.m3.viewport.M3ItemState}
+  - com.m3.viewport.recipe.M3ChangeStringLiteral: {from: VirtualSelectionModel, to: com.m3.viewport.M3SelectionModel}
+  - com.m3.viewport.recipe.M3ChangeStringLiteral: {from: VirtualBitLanes, to: com.m3.collections.M3BitLanes}
+  - com.m3.viewport.recipe.M3ChangeStringLiteral: {from: VirtualBlockCache, to: com.m3.collections.M3BlockCache}
+  - com.m3.viewport.recipe.M3ChangeStringLiteral: {from: VirtualBlockStore, to: com.m3.collections.M3BlockStore}

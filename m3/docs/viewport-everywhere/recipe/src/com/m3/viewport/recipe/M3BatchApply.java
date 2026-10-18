@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import org.openrewrite.ExecutionContext;
 import org.openrewrite.InMemoryExecutionContext;
@@ -50,11 +51,11 @@ public final class M3BatchApply {
 		}
 		List<SourceFile> parsed = JavaParser.fromJavaVersion ().build ().parse (ctx, texts.toArray (String[]::new)).toList ();
 		if (parsed.size () != inputs.size ()) throw new IllegalStateException ("parsed " + parsed.size () + " of " + inputs.size ());
-		Map<SourceFile, Path> origin = new HashMap<> ();
-		for (int i = 0; i < parsed.size (); i++) origin.put (parsed.get (i), inputs.get (i));
+		Map<UUID, Path> origin = new HashMap<> ();
+		for (int i = 0; i < parsed.size (); i++) origin.put (parsed.get (i).getId (), inputs.get (i));
 		Map<Path, String> after = new HashMap<> ();
 		for (Result r : recipe.run (new InMemoryLargeSourceSet (parsed), ctx).getChangeset ().getAllResults ()) {
-			if (r.getBefore () != null && r.getAfter () != null) after.put (origin.get (r.getBefore ()), r.getAfter ().printAll ());
+			if (r.getBefore () != null && r.getAfter () != null) after.put (origin.get (r.getBefore ().getId ()), r.getAfter ().printAll ());
 		}
 		for (int i = 0; i < parsed.size (); i++) write (args[1], inputs.get (i), texts.get (i), after.get (inputs.get (i)));
 	}
