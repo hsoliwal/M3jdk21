@@ -15,41 +15,43 @@ import org.junit.jupiter.api.Test;
 final class M3LFUCacheTest {
     @Test
     void evictsLeastFrequentlyUsedAndBreaksTiesByLeastRecentTouch() {
-        M3LFUCache<String, Object> cache = new M3LFUCache<>(2);
+        M3LFUCache<Object> cache = new M3LFUCache<>(2);
         Object frequent = new Object();
         Object cold = new Object();
         Object newest = new Object();
 
-        cache.put("frequent", frequent);
-        cache.put("cold", cold);
-        assertSame(frequent, cache.get("frequent"));
-        cache.put("newest", newest);
+        cache.put(1, 7, frequent);
+        cache.put(2, 7, cold);
+        assertSame(frequent, cache.get(1, 7));
+        cache.put(3, 7, newest);
 
         assertEquals(2, cache.size());
         assertEquals(2, cache.capacity());
-        assertSame(frequent, cache.get("frequent"));
-        assertNull(cache.get("cold"));
-        assertSame(newest, cache.get("newest"));
+        assertSame(frequent, cache.get(1, 7));
+        assertNull(cache.get(2, 7));
+        assertSame(newest, cache.get(3, 7));
     }
 
     @Test
     void nullKeysAndRemovalKeepProbeChainsValid() {
-        M3LFUCache<String, Object> cache = new M3LFUCache<>(3);
+        M3LFUCache<Object> cache = new M3LFUCache<>(3);
         Object nullKeyValue = new Object();
         Object alpha = new Object();
         Object beta = new Object();
-        cache.put(null, nullKeyValue);
-        cache.put("alpha", alpha);
-        cache.put("beta", beta);
+        cache.put(10, 1, nullKeyValue);
+        cache.put(11, 1, alpha);
+        cache.put(12, 1, beta);
 
-        assertSame(nullKeyValue, cache.get(null));
-        assertTrue(cache.remove("alpha"));
-        assertFalse(cache.remove("missing"));
-        assertSame(beta, cache.get("beta"));
-        assertSame(nullKeyValue, cache.get(null));
+        assertSame(nullKeyValue, cache.get(10, 1));
+        assertTrue(cache.removeSlot(11));
+        assertFalse(cache.removeSlot(50));
+        assertSame(beta, cache.get(12, 1));
+        assertSame(nullKeyValue, cache.get(10, 1));
+        cache.removeSlot(10);
+        assertNull(cache.get(10, 1));
         cache.clear();
         assertEquals(0, cache.size());
-        assertNull(cache.get(null));
+        assertNull(cache.get(10, 1));
     }
 
     @Test
