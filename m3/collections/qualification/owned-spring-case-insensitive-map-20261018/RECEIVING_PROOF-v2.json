@@ -1,0 +1,293 @@
+{
+  "status": "PASS",
+  "tests": 2,
+  "engineSHA256": "3fc6e77a1394e292747d689a4a42a328b496000865aa390afe05d5571febd599",
+  "testSHA256": "04943fca61debfe7ae48fe8fb83899e3cb9b128f5dce78cbbc4c4cbdb31fe135",
+  "dependencies": [
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\rewrite-core\\8.17.1\\rewrite-core-8.17.1.jar",
+      "bytes": 3392625,
+      "sha256": "d7c07f91ab085a39bf1b40d7f2a7796a52619aaeefeca1481435e685aa663efa"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\com\\fasterxml\\jackson\\core\\jackson-databind\\2.16.1\\jackson-databind-2.16.1.jar",
+      "bytes": 1637611,
+      "sha256": "baf8a8ebee8f45ef68cdd5e2dd3923b3e296c0937b96ec0b4806aa3a31bccd1d"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\com\\fasterxml\\jackson\\core\\jackson-core\\2.16.1\\jackson-core-2.16.1.jar",
+      "bytes": 578125,
+      "sha256": "f5f8ef90609e64fec82eb908e497dc7d81b2eb983fe509b870292a193cde4dfb"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\com\\fasterxml\\jackson\\dataformat\\jackson-dataformat-smile\\2.16.1\\jackson-dataformat-smile-2.16.1.jar",
+      "bytes": 96079,
+      "sha256": "3767744f2e37e6e672c3a98174e68567907d18ea5c451b203a19e7b0ad934354"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\com\\fasterxml\\jackson\\module\\jackson-module-parameter-names\\2.16.1\\jackson-module-parameter-names-2.16.1.jar",
+      "bytes": 10354,
+      "sha256": "9b333e7e69053807f42a9d92fc1e5da405938ecc4683146b8b1eb9c6967fea8e"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\com\\fasterxml\\jackson\\datatype\\jackson-datatype-jsr310\\2.16.1\\jackson-datatype-jsr310-2.16.1.jar",
+      "bytes": 128295,
+      "sha256": "6281970682a8da3ddbac54bb203c9badf1c26f507f3ecaa48ef10318579bc9ad"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\jetbrains\\annotations\\24.1.0\\annotations-24.1.0.jar",
+      "bytes": 30570,
+      "sha256": "27a770dc7ce50500918bb8c3c0660c98290630ec796b5e3cf6b90f403b3033c6"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\tools\\java-object-diff\\1.0.1\\java-object-diff-1.0.1.jar",
+      "bytes": 163543,
+      "sha256": "8dcf0381d306c5223cea4c0acb84afd5691ec6eb41e0b6a36dda288a0c7ec4dc"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\io\\quarkus\\gizmo\\gizmo\\1.0.11.Final\\gizmo-1.0.11.Final.jar",
+      "bytes": 101336,
+      "sha256": "a54bfbb6dcce9298134595b3cd1df961bc732468825f26ee5296f2b5f88c0b99"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\jboss\\jandex\\2.4.2.Final\\jandex-2.4.2.Final.jar",
+      "bytes": 230776,
+      "sha256": "3f2ce55c7d71e744581488dc5105806aa8084c08e6e916a019bab8f8698994f0"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\net\\java\\dev\\jna\\jna-platform\\5.14.0\\jna-platform-5.14.0.jar",
+      "bytes": 1369287,
+      "sha256": "ae4caceb3840730c2537f9b7fb55a01baba580286b4122951488bcee558c2449"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\net\\java\\dev\\jna\\jna\\5.14.0\\jna-5.14.0.jar",
+      "bytes": 1878533,
+      "sha256": "34ed1e1f27fa896bca50dbc4e99cf3732967cec387a7a0d5e3486c09673fe8c6"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\apache\\commons\\commons-compress\\1.26.0\\commons-compress-1.26.0.jar",
+      "bytes": 1078328,
+      "sha256": "051aceb8bbcc62d0f5b2b8ac72c53767f9c59bfbd050151e65bef6f51c8ed9c9"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\commons-io\\commons-io\\2.15.1\\commons-io-2.15.1.jar",
+      "bytes": 501218,
+      "sha256": "a58af12ee1b68cfd2ebb0c27caef164f084381a00ec81a48cc275fd7ea54e154"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\io\\micrometer\\micrometer-core\\1.9.17\\micrometer-core-1.9.17.jar",
+      "bytes": 663613,
+      "sha256": "c350cfdc76c08356f12a60e840f2dbeaeea7540712d58b54becd6c302a86147a"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\hdrhistogram\\HdrHistogram\\2.1.12\\HdrHistogram-2.1.12.jar",
+      "bytes": 173763,
+      "sha256": "9b47fbae444feaac4b7e04f0ea294569e4bc282bc69d8c2ce2ac3f23577281e2"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\latencyutils\\LatencyUtils\\2.0.3\\LatencyUtils-2.0.3.jar",
+      "bytes": 29779,
+      "sha256": "a32a9ffa06b2f4e01c5360f8f9df7bc5d9454a5d373cd8f361347fa5a57165ec"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\io\\github\\classgraph\\classgraph\\4.8.165\\classgraph-4.8.165.jar",
+      "bytes": 562061,
+      "sha256": "5258d9218fc6413f4d14218a5a6e784528e349f60f48883b77de74bb478ebafd"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\yaml\\snakeyaml\\2.2\\snakeyaml-2.2.jar",
+      "bytes": 334352,
+      "sha256": "1467931448a0817696ae2805b7b8b20bfb082652bf9c4efaed528930dc49389b"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\rewrite-java\\8.17.1\\rewrite-java-8.17.1.jar",
+      "bytes": 1613246,
+      "sha256": "32a3b27c0eafeb44c776500ae1378efdfb79d490a6afd7b58be07c6c0d6c55ff"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\rewrite-yaml\\8.17.1\\rewrite-yaml-8.17.1.jar",
+      "bytes": 245085,
+      "sha256": "0203cc3b08f519975ed2dc2d20091f0b8e0ab20f72016871c05e50feb49e5a13"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\rewrite-xml\\8.17.1\\rewrite-xml-8.17.1.jar",
+      "bytes": 231353,
+      "sha256": "89e9568e9e48bd2d3fbce5d9d23d1a828a54c97442590f8f77624cafb095785f"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\com\\fasterxml\\jackson\\core\\jackson-annotations\\2.16.1\\jackson-annotations-2.16.1.jar",
+      "bytes": 78480,
+      "sha256": "a4730771e6a495dd3793a42cdb8ce6bddb96c77e15f40c98fd8d9a7ae09e7286"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\antlr\\antlr4-runtime\\4.11.1\\antlr4-runtime-4.11.1.jar",
+      "bytes": 324039,
+      "sha256": "e06c6553c1ccc14d36052ec4b0fc6f13b808cf957b5b1dc3f61bf401996ada59"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\apache\\commons\\commons-lang3\\3.14.0\\commons-lang3-3.14.0.jar",
+      "bytes": 657952,
+      "sha256": "7b96bf3ee68949abb5bc465559ac270e0551596fa34523fddf890ec418dde13c"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\apache\\commons\\commons-text\\1.11.0\\commons-text-1.11.0.jar",
+      "bytes": 246659,
+      "sha256": "2acf30a070b19163d5a480eae411a281341e870020e3534c6d5d4c8472739e30"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\xerial\\snappy\\snappy-java\\1.1.10.5\\snappy-java-1.1.10.5.jar",
+      "bytes": 2299797,
+      "sha256": "0f3f1857ed33116583f480b4df5c0218836c47bfbc9c6221c0d73f356decf37b"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\io\\github\\fastfilter\\fastfilter\\1.0.2\\fastfilter-1.0.2.jar",
+      "bytes": 84703,
+      "sha256": "38f8824d07c8c932fa50cc0175f32c0fff2fafb3913cd2f9571ac349c9631149"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\ow2\\asm\\asm\\9.6\\asm-9.6.jar",
+      "bytes": 123598,
+      "sha256": "3c6fac2424db3d4a853b669f4e3d1d9c3c552235e19a319673f887083c2303a1"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\ow2\\asm\\asm-util\\9.6\\asm-util-9.6.jar",
+      "bytes": 91131,
+      "sha256": "c635a7402f4aa9bf66b2f4230cea62025a0fe1cd63e8729adefc9b1994fac4c3"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\ow2\\asm\\asm-tree\\9.6\\asm-tree-9.6.jar",
+      "bytes": 51935,
+      "sha256": "c43ecf17b539c777e15da7b5b86553b377e2d39a683de6285567d5283888e7ef"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\ow2\\asm\\asm-analysis\\9.6\\asm-analysis-9.6.jar",
+      "bytes": 34041,
+      "sha256": "d92832d7c37edc07c60e2559ac6118b31d642e337a6671edcb7ba9fae68edbbb"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\rewrite-java-21\\8.17.1\\rewrite-java-21-8.17.1.jar",
+      "bytes": 109302,
+      "sha256": "7e654435905cf6afb9e659185773de0b75e4282c8e30c916ad15fd16b0fba9f4"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\slf4j\\slf4j-api\\1.7.36\\slf4j-api-1.7.36.jar",
+      "bytes": 41125,
+      "sha256": "d3ef575e3e4979678dc01bf1dcce51021493b4d11fb7f1be8ad982877c16a1c0"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\slf4j\\slf4j-simple\\1.7.36\\slf4j-simple-1.7.36.jar",
+      "bytes": 15333,
+      "sha256": "2f39bed943d624dfa8f4102d0571283a10870b6aa36f197a8a506f147010c10f"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\jupiter\\junit-jupiter\\5.10.2\\junit-jupiter-5.10.2.jar",
+      "bytes": 6359,
+      "sha256": "263e43447f4b40f126ad6b1dcbd7df379448413bdedb8e0d240c5bcbba7c7a4f"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\jupiter\\junit-jupiter-api\\5.10.2\\junit-jupiter-api-5.10.2.jar",
+      "bytes": 210956,
+      "sha256": "afff77c186cd317275803872fa5133aa801fd6ac40bd91c78a6cf8009b4b17cc"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\opentest4j\\opentest4j\\1.3.0\\opentest4j-1.3.0.jar",
+      "bytes": 14304,
+      "sha256": "48e2df636cab6563ced64dcdff8abb2355627cb236ef0bf37598682ddf742f1b"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\platform\\junit-platform-commons\\1.10.2\\junit-platform-commons-1.10.2.jar",
+      "bytes": 106232,
+      "sha256": "b56a5ec000a479df4973b18bba24c98fe0db8faa14c8907d3ef451d8c71fd8ae"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\apiguardian\\apiguardian-api\\1.1.2\\apiguardian-api-1.1.2.jar",
+      "bytes": 6806,
+      "sha256": "b509448ac506d607319f182537f0b35d71007582ec741832a1f111e5b5b70b38"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\jupiter\\junit-jupiter-params\\5.10.2\\junit-jupiter-params-5.10.2.jar",
+      "bytes": 586027,
+      "sha256": "edb1e43ff0b8067626ffb55e5e9eeca1d9ab2478141a7c7f253d115b29cc7cf2"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\jupiter\\junit-jupiter-engine\\5.10.2\\junit-jupiter-engine-5.10.2.jar",
+      "bytes": 244690,
+      "sha256": "b6df35da750a546ae932376f11b3c0df841f0c90c7cb2944cd39adb432886e4b"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\platform\\junit-platform-engine\\1.10.2\\junit-platform-engine-1.10.2.jar",
+      "bytes": 204821,
+      "sha256": "905cba9b4998ccc29d1239085a7fb1fe0e28024d7526152356d810edec0a49a3"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\platform\\junit-platform-launcher\\1.10.2\\junit-platform-launcher-1.10.2.jar",
+      "bytes": 183814,
+      "sha256": "aed4f42fb90ada9b347c231f13656fc09121ba20dab6dc646a6bd9d4da31e4aa"
+    }
+  ],
+  "runner": "official JUnitPlatformLauncher1.10.2, Java21; local Maven not run to keep C cache read-only",
+  "commands": [
+    {
+      "label": "receiving-compile",
+      "argv": [
+        "C:\\Program Files\\Java\\jdk-21\\bin\\javac.exe",
+        "-J-Xmx512m",
+        "-J-XX:ActiveProcessorCount=2",
+        "-J-XX:-UsePerfData",
+        "-J-Djava.io.tmpdir=S:\\codex-work\\m3-collections-next-20261018\\temp",
+        "--release",
+        "21",
+        "-proc:none",
+        "-Xlint:all",
+        "-Werror",
+        "-cp",
+        "C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\rewrite-core\\8.17.1\\rewrite-core-8.17.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\fasterxml\\jackson\\core\\jackson-databind\\2.16.1\\jackson-databind-2.16.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\fasterxml\\jackson\\core\\jackson-core\\2.16.1\\jackson-core-2.16.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\fasterxml\\jackson\\dataformat\\jackson-dataformat-smile\\2.16.1\\jackson-dataformat-smile-2.16.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\fasterxml\\jackson\\module\\jackson-module-parameter-names\\2.16.1\\jackson-module-parameter-names-2.16.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\fasterxml\\jackson\\datatype\\jackson-datatype-jsr310\\2.16.1\\jackson-datatype-jsr310-2.16.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\jetbrains\\annotations\\24.1.0\\annotations-24.1.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\tools\\java-object-diff\\1.0.1\\java-object-diff-1.0.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\io\\quarkus\\gizmo\\gizmo\\1.0.11.Final\\gizmo-1.0.11.Final.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\jboss\\jandex\\2.4.2.Final\\jandex-2.4.2.Final.jar;C:\\Users\\hsoliwal\\.m2\\repository\\net\\java\\dev\\jna\\jna-platform\\5.14.0\\jna-platform-5.14.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\net\\java\\dev\\jna\\jna\\5.14.0\\jna-5.14.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\apache\\commons\\commons-compress\\1.26.0\\commons-compress-1.26.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\commons-io\\commons-io\\2.15.1\\commons-io-2.15.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\io\\micrometer\\micrometer-core\\1.9.17\\micrometer-core-1.9.17.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\hdrhistogram\\HdrHistogram\\2.1.12\\HdrHistogram-2.1.12.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\latencyutils\\LatencyUtils\\2.0.3\\LatencyUtils-2.0.3.jar;C:\\Users\\hsoliwal\\.m2\\repository\\io\\github\\classgraph\\classgraph\\4.8.165\\classgraph-4.8.165.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\yaml\\snakeyaml\\2.2\\snakeyaml-2.2.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\rewrite-java\\8.17.1\\rewrite-java-8.17.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\rewrite-yaml\\8.17.1\\rewrite-yaml-8.17.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\rewrite-xml\\8.17.1\\rewrite-xml-8.17.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\fasterxml\\jackson\\core\\jackson-annotations\\2.16.1\\jackson-annotations-2.16.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\antlr\\antlr4-runtime\\4.11.1\\antlr4-runtime-4.11.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\apache\\commons\\commons-lang3\\3.14.0\\commons-lang3-3.14.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\apache\\commons\\commons-text\\1.11.0\\commons-text-1.11.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\xerial\\snappy\\snappy-java\\1.1.10.5\\snappy-java-1.1.10.5.jar;C:\\Users\\hsoliwal\\.m2\\repository\\io\\github\\fastfilter\\fastfilter\\1.0.2\\fastfilter-1.0.2.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\ow2\\asm\\asm\\9.6\\asm-9.6.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\ow2\\asm\\asm-util\\9.6\\asm-util-9.6.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\ow2\\asm\\asm-tree\\9.6\\asm-tree-9.6.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\ow2\\asm\\asm-analysis\\9.6\\asm-analysis-9.6.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\rewrite-java-21\\8.17.1\\rewrite-java-21-8.17.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\slf4j\\slf4j-api\\1.7.36\\slf4j-api-1.7.36.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\slf4j\\slf4j-simple\\1.7.36\\slf4j-simple-1.7.36.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\jupiter\\junit-jupiter\\5.10.2\\junit-jupiter-5.10.2.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\jupiter\\junit-jupiter-api\\5.10.2\\junit-jupiter-api-5.10.2.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\opentest4j\\opentest4j\\1.3.0\\opentest4j-1.3.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\platform\\junit-platform-commons\\1.10.2\\junit-platform-commons-1.10.2.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\apiguardian\\apiguardian-api\\1.1.2\\apiguardian-api-1.1.2.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\jupiter\\junit-jupiter-params\\5.10.2\\junit-jupiter-params-5.10.2.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\jupiter\\junit-jupiter-engine\\5.10.2\\junit-jupiter-engine-5.10.2.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\platform\\junit-platform-engine\\1.10.2\\junit-platform-engine-1.10.2.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\platform\\junit-platform-launcher\\1.10.2\\junit-platform-launcher-1.10.2.jar",
+        "-d",
+        "S:\\codex-work\\m3-collections-next-20261018\\spring-case-insensitive-map\\receiving-classes-v2",
+        "S:\\codex-work\\m3-collections-next-20261018\\spring-case-insensitive-map\\recipe\\engine-src\\com\\synexia\\rewrite\\M3HashPinnedJavaSnapshotRecipe.java",
+        "S:\\codex-work\\m3-collections-next-20261018\\spring-case-insensitive-map\\recipe\\src\\test\\java\\com\\synexia\\rewrite\\M3OwnedSpringCaseInsensitiveMapRecipeTest.java",
+        "S:\\codex-work\\m3-collections-next-20261018\\spring-case-insensitive-map\\RecipeTestLauncher.java"
+      ],
+      "returncode": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "label": "receiving-junit",
+      "argv": [
+        "C:\\Program Files\\Java\\jdk-21\\bin\\java.exe",
+        "-Xmx512m",
+        "-XX:ActiveProcessorCount=2",
+        "-XX:-UsePerfData",
+        "-Djava.io.tmpdir=S:\\codex-work\\m3-collections-next-20261018\\temp",
+        "-Duser.home=S:\\codex-work\\m3-collections-next-20261018\\temp",
+        "-cp",
+        "S:\\codex-work\\m3-collections-next-20261018\\spring-case-insensitive-map\\receiving-classes-v2;S:\\codex-work\\m3-collections-next-20261018\\spring-case-insensitive-map\\recipe\\src\\main\\resources;C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\rewrite-core\\8.17.1\\rewrite-core-8.17.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\fasterxml\\jackson\\core\\jackson-databind\\2.16.1\\jackson-databind-2.16.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\fasterxml\\jackson\\core\\jackson-core\\2.16.1\\jackson-core-2.16.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\fasterxml\\jackson\\dataformat\\jackson-dataformat-smile\\2.16.1\\jackson-dataformat-smile-2.16.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\fasterxml\\jackson\\module\\jackson-module-parameter-names\\2.16.1\\jackson-module-parameter-names-2.16.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\fasterxml\\jackson\\datatype\\jackson-datatype-jsr310\\2.16.1\\jackson-datatype-jsr310-2.16.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\jetbrains\\annotations\\24.1.0\\annotations-24.1.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\tools\\java-object-diff\\1.0.1\\java-object-diff-1.0.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\io\\quarkus\\gizmo\\gizmo\\1.0.11.Final\\gizmo-1.0.11.Final.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\jboss\\jandex\\2.4.2.Final\\jandex-2.4.2.Final.jar;C:\\Users\\hsoliwal\\.m2\\repository\\net\\java\\dev\\jna\\jna-platform\\5.14.0\\jna-platform-5.14.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\net\\java\\dev\\jna\\jna\\5.14.0\\jna-5.14.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\apache\\commons\\commons-compress\\1.26.0\\commons-compress-1.26.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\commons-io\\commons-io\\2.15.1\\commons-io-2.15.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\io\\micrometer\\micrometer-core\\1.9.17\\micrometer-core-1.9.17.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\hdrhistogram\\HdrHistogram\\2.1.12\\HdrHistogram-2.1.12.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\latencyutils\\LatencyUtils\\2.0.3\\LatencyUtils-2.0.3.jar;C:\\Users\\hsoliwal\\.m2\\repository\\io\\github\\classgraph\\classgraph\\4.8.165\\classgraph-4.8.165.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\yaml\\snakeyaml\\2.2\\snakeyaml-2.2.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\rewrite-java\\8.17.1\\rewrite-java-8.17.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\rewrite-yaml\\8.17.1\\rewrite-yaml-8.17.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\rewrite-xml\\8.17.1\\rewrite-xml-8.17.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\fasterxml\\jackson\\core\\jackson-annotations\\2.16.1\\jackson-annotations-2.16.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\antlr\\antlr4-runtime\\4.11.1\\antlr4-runtime-4.11.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\apache\\commons\\commons-lang3\\3.14.0\\commons-lang3-3.14.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\apache\\commons\\commons-text\\1.11.0\\commons-text-1.11.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\xerial\\snappy\\snappy-java\\1.1.10.5\\snappy-java-1.1.10.5.jar;C:\\Users\\hsoliwal\\.m2\\repository\\io\\github\\fastfilter\\fastfilter\\1.0.2\\fastfilter-1.0.2.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\ow2\\asm\\asm\\9.6\\asm-9.6.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\ow2\\asm\\asm-util\\9.6\\asm-util-9.6.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\ow2\\asm\\asm-tree\\9.6\\asm-tree-9.6.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\ow2\\asm\\asm-analysis\\9.6\\asm-analysis-9.6.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\rewrite-java-21\\8.17.1\\rewrite-java-21-8.17.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\slf4j\\slf4j-api\\1.7.36\\slf4j-api-1.7.36.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\slf4j\\slf4j-simple\\1.7.36\\slf4j-simple-1.7.36.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\jupiter\\junit-jupiter\\5.10.2\\junit-jupiter-5.10.2.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\jupiter\\junit-jupiter-api\\5.10.2\\junit-jupiter-api-5.10.2.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\opentest4j\\opentest4j\\1.3.0\\opentest4j-1.3.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\platform\\junit-platform-commons\\1.10.2\\junit-platform-commons-1.10.2.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\apiguardian\\apiguardian-api\\1.1.2\\apiguardian-api-1.1.2.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\jupiter\\junit-jupiter-params\\5.10.2\\junit-jupiter-params-5.10.2.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\jupiter\\junit-jupiter-engine\\5.10.2\\junit-jupiter-engine-5.10.2.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\platform\\junit-platform-engine\\1.10.2\\junit-platform-engine-1.10.2.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\platform\\junit-platform-launcher\\1.10.2\\junit-platform-launcher-1.10.2.jar",
+        "RecipeTestLauncher"
+      ],
+      "returncode": 0,
+      "stdout": "\nTest run finished after 701 ms\n[         2 containers found      ]\n[         0 containers skipped    ]\n[         2 containers started    ]\n[         0 containers aborted    ]\n[         2 containers successful ]\n[         0 containers failed     ]\n[         2 tests found           ]\n[         0 tests skipped         ]\n[         2 tests started         ]\n[         0 tests aborted         ]\n[         2 tests successful      ]\n[         0 tests failed          ]\n\n",
+      "stderr": ""
+    }
+  ],
+  "storageBefore": {
+    "root": "S:\\codex-work\\m3-collections-next-20261018",
+    "free_bytes": 26178715648,
+    "logical_bytes": 47167683,
+    "cap_bytes": 536870912,
+    "reserve_bytes": 8589934592,
+    "verified_child_temp": "S:\\codex-work\\m3-collections-next-20261018\\temp\\",
+    "C_build_lane": "HELD",
+    "K_temp_lane": "UNAVAILABLE"
+  },
+  "storageAfter": {
+    "root": "S:\\codex-work\\m3-collections-next-20261018",
+    "free_bytes": 26178605056,
+    "logical_bytes": 47240313,
+    "cap_bytes": 536870912,
+    "reserve_bytes": 8589934592,
+    "verified_child_temp": "S:\\codex-work\\m3-collections-next-20261018\\temp\\",
+    "C_build_lane": "HELD",
+    "K_temp_lane": "UNAVAILABLE"
+  }
+}
