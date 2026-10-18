@@ -634,29 +634,115 @@ public final class M3MutableFilteredViews {
             @Override public String toString() { return key + "=" + getValue(); }
         }
 
-        @Override public Entry<K, V> lowerEntry(K key) { return seek(source.lowerEntry(key), false); }
-        @Override public K lowerKey(K key) { return keyOf(lowerEntry(key)); }
-        @Override public Entry<K, V> floorEntry(K key) { return seek(source.floorEntry(key), false); }
-        @Override public K floorKey(K key) { return keyOf(floorEntry(key)); }
-        @Override public Entry<K, V> ceilingEntry(K key) { return seek(source.ceilingEntry(key), true); }
-        @Override public K ceilingKey(K key) { return keyOf(ceilingEntry(key)); }
-        @Override public Entry<K, V> higherEntry(K key) { return seek(source.higherEntry(key), true); }
-        @Override public K higherKey(K key) { return keyOf(higherEntry(key)); }
-        @Override public Entry<K, V> firstEntry() { return seek(source.firstEntry(), true); }
-        @Override public Entry<K, V> lastEntry() { return seek(source.lastEntry(), false); }
+        /** Search hidden candidates by AVL offsets rather than transient API entries. */
+        private int visibleNear(M3TreeMap<K, V> owner, K key, int relation) {
+            int slot = owner.nearIndexedSlot(key, relation);
+            while (slot >= 0 && !visibleSlot(owner, slot)) {
+                slot = relation < 0 ? owner.previousIndexedSlot(slot) : owner.nextSlot(slot);
+            }
+            return slot;
+        }
+
+        private int visibleEnd(M3TreeMap<K, V> owner, boolean first) {
+            int slot = first ? owner.firstSlot() : owner.lastSlot();
+            while (slot >= 0 && !visibleSlot(owner, slot)) {
+                slot = first ? owner.nextSlot(slot) : owner.previousIndexedSlot(slot);
+            }
+            return slot;
+        }
+
+        private Entry<K, V> requestedEntry(M3TreeMap<K, V> owner, int slot) {
+            // Only a public Entry-valued API reaches this allocation boundary.
+            return slot < 0 ? null : new SimpleImmutableEntry<>(owner.keyAt(slot), owner.valueAt(slot));
+        }
+
+        private K requestedKey(M3TreeMap<K, V> owner, int slot) {
+            return slot < 0 ? null : owner.keyAt(slot);
+        }
+
+        @Override public Entry<K, V> lowerEntry(K key) {
+            M3TreeMap<K, V> owner = slotOwner();
+            return owner == null ? seek(source.lowerEntry(key), false)
+                    : requestedEntry(owner, visibleNear(owner, key, -2));
+        }
+        @Override public K lowerKey(K key) {
+            M3TreeMap<K, V> owner = slotOwner();
+            return owner == null ? keyOf(lowerEntry(key)) : requestedKey(owner, visibleNear(owner, key, -2));
+        }
+        @Override public Entry<K, V> floorEntry(K key) {
+            M3TreeMap<K, V> owner = slotOwner();
+            return owner == null ? seek(source.floorEntry(key), false)
+                    : requestedEntry(owner, visibleNear(owner, key, -1));
+        }
+        @Override public K floorKey(K key) {
+            M3TreeMap<K, V> owner = slotOwner();
+            return owner == null ? keyOf(floorEntry(key)) : requestedKey(owner, visibleNear(owner, key, -1));
+        }
+        @Override public Entry<K, V> ceilingEntry(K key) {
+            M3TreeMap<K, V> owner = slotOwner();
+            return owner == null ? seek(source.ceilingEntry(key), true)
+                    : requestedEntry(owner, visibleNear(owner, key, 1));
+        }
+        @Override public K ceilingKey(K key) {
+            M3TreeMap<K, V> owner = slotOwner();
+            return owner == null ? keyOf(ceilingEntry(key)) : requestedKey(owner, visibleNear(owner, key, 1));
+        }
+        @Override public Entry<K, V> higherEntry(K key) {
+            M3TreeMap<K, V> owner = slotOwner();
+            return owner == null ? seek(source.higherEntry(key), true)
+                    : requestedEntry(owner, visibleNear(owner, key, 2));
+        }
+        @Override public K higherKey(K key) {
+            M3TreeMap<K, V> owner = slotOwner();
+            return owner == null ? keyOf(higherEntry(key)) : requestedKey(owner, visibleNear(owner, key, 2));
+        }
+        @Override public Entry<K, V> firstEntry() {
+            M3TreeMap<K, V> owner = slotOwner();
+            return owner == null ? seek(source.firstEntry(), true)
+                    : requestedEntry(owner, visibleEnd(owner, true));
+        }
+        @Override public Entry<K, V> lastEntry() {
+            M3TreeMap<K, V> owner = slotOwner();
+            return owner == null ? seek(source.lastEntry(), false)
+                    : requestedEntry(owner, visibleEnd(owner, false));
+        }
         private K keyOf(Entry<K, V> entry) { return entry == null ? null : entry.getKey(); }
         @Override public K firstKey() {
+            M3TreeMap<K, V> owner = slotOwner();
+            if (owner != null) {
+                int slot = visibleEnd(owner, true);
+                if (slot < 0) throw new NoSuchElementException();
+                return owner.keyAt(slot);
+            }
             Entry<K, V> result = firstEntry();
             if (result == null) throw new NoSuchElementException();
             return result.getKey();
         }
         @Override public K lastKey() {
+            M3TreeMap<K, V> owner = slotOwner();
+            if (owner != null) {
+                int slot = visibleEnd(owner, false);
+                if (slot < 0) throw new NoSuchElementException();
+                return owner.keyAt(slot);
+            }
             Entry<K, V> result = lastEntry();
             if (result == null) throw new NoSuchElementException();
             return result.getKey();
         }
-        @Override public Entry<K, V> pollFirstEntry() { return poll(entryCursor()); }
-        @Override public Entry<K, V> pollLastEntry() { return poll(descendingMap().entrySet().iterator()); }
+        @Override public Entry<K, V> pollFirstEntry() {
+            return slotOwner() == null ? poll(entryCursor()) : pollIndexed(true);
+        }
+        @Override public Entry<K, V> pollLastEntry() {
+            return slotOwner() == null ? poll(descendingMap().entrySet().iterator()) : pollIndexed(false);
+        }
+        private Entry<K, V> pollIndexed(boolean first) {
+            M3TreeMap<K, V> owner = slotOwner();
+            int slot = visibleEnd(owner, first);
+            if (slot < 0) return null;
+            Entry<K, V> result = requestedEntry(owner, slot);
+            owner.remove(owner.keyAt(slot));
+            return result;
+        }
         private Entry<K, V> poll(Iterator<Entry<K, V>> cursor) {
             if (!cursor.hasNext()) return null;
             Entry<K, V> entry = snapshot(cursor.next());
