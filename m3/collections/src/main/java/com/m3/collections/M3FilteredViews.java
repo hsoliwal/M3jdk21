@@ -1,3 +1,4 @@
+// Modified 2026 by Hitesh Soliwal and contributors: preserve comparator metadata across filtered splits.
 /*
  * SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
  * SPDX-License-Identifier: Apache-2.0
@@ -19,6 +20,7 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.SortedMap;
 import java.util.SortedSet;
+import java.util.Spliterator;
 import java.util.function.BiPredicate;
 import java.util.function.Predicate;
 
@@ -190,6 +192,10 @@ public final class M3FilteredViews {
         }
 
         @Override public Comparator<? super E> comparator() { return sorted.comparator(); }
+        /** Preserve custom ordering on every recursively split child. */
+        @Override public Spliterator<E> spliterator() {
+            return M3SlotSpliterators.sorted(this);
+        }
         @Override public boolean contains(Object value) {
             if (!sorted.contains(value)) return false;
             @SuppressWarnings("unchecked") E alias = (E) value;

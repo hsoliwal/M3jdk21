@@ -84,3 +84,39 @@ jobs:
             m3/collections/target/donation-verification/evidence/
             m3/collections/target/donation-verification/junit-reports/
           if-no-files-found: warn
+
+  filtered-splits-mask-spans:
+    name: Filtered splits and bounded JNI spans at exact head
+    runs-on: ubuntu-22.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          persist-credentials: false
+      - name: Record exact checked-out head
+        env:
+          EXPECTED_HEAD: ${{ github.event.pull_request.head.sha || github.sha }}
+        run: test "$(git rev-parse HEAD)" = "$EXPECTED_HEAD"
+      - name: Prepare pinned Java 21 compiler and JUnit console
+        shell: bash
+        run: |
+          curl --fail --location --retry 3 'https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21.0.12.1%2B1/OpenJDK21U-jdk_x64_linux_hotspot_21.0.12.1_1.tar.gz' -o "$RUNNER_TEMP/m3-jdk21.tar.gz"
+          printf '%s  %s\n' 'ce79869e1307ed8ee1e2baa86a412b1eb5b75d10a01006d788a6f968bcfaee94' "$RUNNER_TEMP/m3-jdk21.tar.gz" | sha256sum --check -
+          tar -xzf "$RUNNER_TEMP/m3-jdk21.tar.gz" -C "$RUNNER_TEMP"
+          printf 'JAVA_HOME=%s\n' "$RUNNER_TEMP/jdk-21.0.12.1+1" >> "$GITHUB_ENV"
+          printf '%s\n' "$RUNNER_TEMP/jdk-21.0.12.1+1/bin" >> "$GITHUB_PATH"
+          curl --fail --location --retry 3 'https://repo.maven.apache.org/maven2/org/junit/platform/junit-platform-console-standalone/1.12.2/junit-platform-console-standalone-1.12.2.jar' -o "$RUNNER_TEMP/m3-junit-console.jar"
+          printf '%s  %s\n' '329bd10288875a74d04c9ca6b7c9889c265ddf87b21a9ea42a7f7392f391472a' "$RUNNER_TEMP/m3-junit-console.jar" | sha256sum --check -
+          printf 'JUNIT_CONSOLE_JAR=%s\n' "$RUNNER_TEMP/m3-junit-console.jar" >> "$GITHUB_ENV"
+      - name: Compile current Java sources and run filtered and checked JNI contracts
+        run: python3 m3/collections/qualification/filtered-splits-mask-spans-20261018/verify.py
+      - name: Retain actual head proof
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: filtered-splits-mask-spans-${{ github.event.pull_request.head.sha || github.sha }}
+          path: |
+            m3/collections/target/filtered-splits-mask-spans/PROOF.json
+            m3/collections/target/filtered-splits-mask-spans/reports/
+          if-no-files-found: warn
