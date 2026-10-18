@@ -1,0 +1,45 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3JDK21 physical-mask indexed snapshot
+on:
+  pull_request:
+    paths:
+      - "m3/collections/src/main/java/com/m3/collections/M3IndexedListSnapshot.java"
+      - "m3/collections/src/test/java/com/m3/collections/M3PhysicalStateSnapshot*.java"
+      - ".github/workflows/m3-physical-state-snapshot.yml"
+  workflow_dispatch:
+jobs:
+  java-jni-parity:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Strict compilation of real M3JDK21 Java owners
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p build/m3-physical-mask
+          dir=m3/collections/src/main/java/com/m3/collections
+          javac --release 21 -Xlint:all -Werror -d build/m3-physical-mask \
+            "$dir/M3IndexMaskCompactor.java" \
+            "$dir/M3IndexPathMasks.java" \
+            "$dir/M3IndexedListSnapshot.java" \
+            m3/collections/src/test/java/com/m3/collections/M3PhysicalStateSnapshotProof.java
+      - name: Pure Java JDK-oracle proof
+        run: java -cp build/m3-physical-mask com.m3.collections.M3PhysicalStateSnapshotProof
+      - name: Compile existing C17 JNI index-path kernel
+        shell: bash
+        run: |
+          set -euo pipefail
+          cc -std=c17 -Wall -Wextra -Werror -fPIC -shared \
+            -I"$JAVA_HOME/include" -I"$JAVA_HOME/include/linux" \
+            m3/collections/src/main/native/collections/m3_index_path_masks.c \
+            -o build/m3-physical-mask/libm3_collections_pathmask.so
+      - name: Actual JNI parity and checked JNI access
+        run: |
+          java -Xcheck:jni -Djava.library.path=build/m3-physical-mask \
+            -cp build/m3-physical-mask \
+            com.m3.collections.M3PhysicalStateSnapshotProof --native
