@@ -11,7 +11,8 @@ Pattern donors (designs and algorithms studied; no source code copied; Rust is n
 - rust-lang/regex (regex-automata), commit 72d650cb0a880a01ab6dc2137c0888e8f89740f7,
   MIT OR Apache-2.0. Copyright (c) The Rust Project Developers. Leftmost-first determinization,
   reverse start search, PikeVM thread priority (algorithms; Thompson 1968, Cox 2007-2010).
-- square/t-rex, commit c84ddf5a06fdff3e3ae984ed0f3eaa0fab3dfca3, Apache-2.0 (README).
+- square/t-rex, commit c84ddf5a06fdff3e3ae984ed0f3eaa0fab3dfca3, Apache-2.0 stated in README only (no LICENSE
+  file): LICENSE_REVIEW_REQUIRED, pattern use only, no code or test text copied.
   Copyright Square, Inc. Token-sequence regex algebra (single-token predicates, sequences,
   quantifiers, captures) for the token layer.
 - nltk/nltk, commit 323da98f37388421c22e279587cf75e375b99efb, Apache-2.0. Copyright NLTK
