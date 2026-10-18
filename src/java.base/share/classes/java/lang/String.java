@@ -2974,6 +2974,8 @@ public final class String
             // Flat needle (for example a literal): prepared facts can prove absence first.
             M3StringFacts prepared = sourceM3.factsIfPrepared();
             if (prepared != null && !prepared.mayContain(str)) return -1;
+            // The exact-trigram gate of the source's repeat use (A42): absence answers without a scan.
+            if (!M3StringSearchPrecompute.mayContain(sourceM3, str)) return -1;
             int limit = sourceM3.length() - targetLength;
             char first = str.charAt(0);
             for (int start = from; start <= limit; start++) {
@@ -3030,6 +3032,8 @@ public final class String
             // Flat needle (for example a literal): prepared facts can prove absence first.
             M3StringFacts prepared = sourceM3.factsIfPrepared();
             if (prepared != null && !prepared.mayContain(str)) return -1;
+            // The exact-trigram gate of the source's repeat use (A42): absence answers without a scan.
+            if (!M3StringSearchPrecompute.mayContain(sourceM3, str)) return -1;
             int limit = endIndex - targetLength;
             char first = str.charAt(0);
             for (int start = beginIndex; start <= limit; start++) {
@@ -3135,6 +3139,8 @@ public final class String
             // Flat needle (for example a literal): prepared facts can prove absence first.
             M3StringFacts prepared = storage.factsIfPrepared();
             if (prepared != null && !prepared.mayContain(str)) return -1;
+            // The exact-trigram gate of the source's repeat use (A42): absence answers without a scan.
+            if (!M3StringSearchPrecompute.mayContain(storage, str)) return -1;
             for (int candidate = start; candidate >= 0; candidate--) {
                 int index = 0;
                 while (index < targetLength
