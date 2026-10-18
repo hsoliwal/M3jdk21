@@ -1,6 +1,7 @@
 /*
  * SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
  * SPDX-License-Identifier: Apache-2.0
+ * Modified 2026: interior-null navigation through bounded ordered cursors.
  */
 package com.m3.collections;
 
@@ -229,25 +230,36 @@ public final class M3FilteredViews {
             return predicate.test(nav.ceiling(alias));
         }
         /**
-         * Bounded views admit navigation queries outside their own endpoints,
-         * whereas subSet/headSet/tailSet may reject those same query endpoints.
-         * Start from the backing JDK navigational result, never the query alias.
-         * A null result can also designate a real comparator-admitted null member.
+         * Disambiguate a null navigation result using iterator presence. An owner's
+         * comparator may place null anywhere, including between two non-null values.
+         * Reuse the ordered-cursor range rule from M3CollectionViews: construct a
+         * tail range only inside actual member bounds, then skip rejected values.
+         * This preserves bounded-view queries and O(log n + rejected) tree work.
          */
-        private boolean nullIsCandidate(E query, boolean forward, boolean inclusive) {
-            Comparator<? super E> order = nav.comparator();
-            if (order == null || nav.isEmpty()
-                    || (nav.first() != null && nav.last() != null)) return false;
-            int direction = order.compare(null, query);
-            return forward ? (inclusive ? direction >= 0 : direction > 0)
-                    : (inclusive ? direction <= 0 : direction < 0);
+        private E nullCandidate(E query, boolean forward, boolean inclusive) {
+            // Natural order cannot admit a null member. Preserve its no-result
+            // path without extra Comparable callbacks, including reversed views.
+            if (nav.comparator() == null) return null;
+            NavigableSet<E> reverse = nav.descendingSet();
+            if (reverse.comparator() == null) return null;
+            NavigableSet<E> ordered = forward ? nav : reverse;
+            Iterator<E> cursor = ordered.iterator();
+            if (!cursor.hasNext()) return null;
+            Comparator<? super E> order = ordered.comparator();
+            int fromFirst = compareStored(query, cursor.next(), order);
+            if (fromFirst < 0 || (fromFirst == 0 && inclusive)) {
+                return firstVisible(ordered.iterator());
+            }
+            int fromLast = compareStored(query, ordered.last(), order);
+            if (fromLast > 0 || (fromLast == 0 && !inclusive)) return null;
+            return firstVisible(ordered.tailSet(query, inclusive).iterator());
         }
         private E firstVisible(Iterator<E> cursor) {
             Iterator<E> selected = M3FilteredViews.filtered(cursor, predicate);
             return selected.hasNext() ? selected.next() : null;
         }
         private E navigate(E candidate, E query, boolean forward, boolean inclusive) {
-            if (candidate == null && !nullIsCandidate(query, forward, inclusive)) return null;
+            if (candidate == null) return nullCandidate(query, forward, inclusive);
             if (predicate.test(candidate)) return candidate;
             // The candidate is an actual member within this backing range; strict
             // successor/predecessor views are therefore legal even on nested subSets.
