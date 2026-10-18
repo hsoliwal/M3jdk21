@@ -107,7 +107,7 @@ public final class M3HashMap<K, V> extends M3SlotMap<K, V>
     @Override int revision() { return modifications; }
     @Override public int size() { return size; }
     @Override V eraseAt(int slot) {
-        forgetEntry(keyAt(slot));
+        forgetSlot(slot);
         V previous = valueAt(slot);
         index[positions[slot]] = -1;
         keys[slot] = null;
