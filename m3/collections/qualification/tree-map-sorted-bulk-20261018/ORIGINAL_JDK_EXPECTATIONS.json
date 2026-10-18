@@ -1,0 +1,84 @@
+{
+  "id": "m3-tree-map-putAll-sorted-source-v1",
+  "phase": "FROZEN_BEFORE_PROOF_SOURCE_AND_CANDIDATE",
+  "target": "com.m3.collections.M3TreeMap",
+  "baseline": "Oracle JDK 21.0.9 java.util.TreeMap public API",
+  "source_blind": "Public javap signatures only; no candidate/baseline implementation, tests or other-agent output notes read.",
+  "sizes": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    7,
+    8,
+    15,
+    16,
+    31,
+    32,
+    255,
+    256,
+    4095
+  ],
+  "orders": [
+    "natural with default constructor",
+    "explicit natural comparator",
+    "reverse comparator",
+    "null-friendly nulls-first comparator"
+  ],
+  "scenarios": [
+    {
+      "id": "BULK",
+      "inputs": "Each size x order; TreeMap sorted source with gaps, negative keys, null/repeated value references, null key in nonempty null-friendly cases.",
+      "expected": "Empty destination putAll succeeds; size, ordered mappings, comparator, navigable endpoints/neighbors and descending traversal match original TreeMap. Copied mapping values retain original references."
+    },
+    {
+      "id": "GATED",
+      "inputs": "Each size x explicit-natural/reverse/null-friendly comparator. Populate source and create destination before blocking comparator.compare for the putAll call only; same comparator instance.",
+      "expected": "Original empty JDK TreeMap.putAll compatible SortedMap completes with no comparison-triggered exception; after unblocking mappings match source. This is a frozen concrete original-JDK outcome, not a universal promise about comparison traces."
+    },
+    {
+      "id": "INDEPENDENCE",
+      "inputs": "After every bulk copy, mutate/remove/add/clear source; mutate copied mutable value once before clear.",
+      "expected": "Copied mappings/order remain independent; shared value-object mutation is visible. No unintended structural alias."
+    },
+    {
+      "id": "MUTATE",
+      "inputs": "After bulk: deterministic replace/insert/remove, remove sampled keys, insert gaps, alternate endpoint polls to empty, refill, clear and refill.",
+      "expected": "Every return, mapping, navigation result and resulting order matches a separate TreeMap. Public verifyInvariants completes when available. Successful later behavior is required; no balancing formula is mirrored."
+    },
+    {
+      "id": "RANGE_SOURCE",
+      "inputs": "Natural and reverse compatible bounded SortedMap sources; copy into empty destination.",
+      "expected": "Exactly the bounded mappings are copied, independent of later source changes."
+    },
+    {
+      "id": "DESC_SOURCE_TARGET",
+      "inputs": "Descending SortedMap source with matching comparator; descending destination view; nested destination ranges.",
+      "expected": "Original TreeMap ordered mappings/backing effects, endpoints and navigation match; no copied entry outside source bounds."
+    },
+    {
+      "id": "FALLBACK",
+      "inputs": "Nonempty destination with overlap, empty destination with different source comparator, plain LinkedHashMap source, and cleared/reused destination.",
+      "expected": "Success; overwrite collisions and final order/old mappings exactly match TreeMap."
+    },
+    {
+      "id": "RANGE_REJECT",
+      "inputs": "Destination subMap[-10,10), sorted input{-2->value,12->value}.",
+      "expected": "IllegalArgumentException; the already-copied -2 mapping remains and 12 is absent, matching original TreeMap partial writes."
+    },
+    {
+      "id": "LAZY_PUBLIC",
+      "inputs": "If provider constructor exists, instantiate public comparator+M3LazyValueProvider constructor using proxy provider; bulk explicit values for sizes0,1,32,4095.",
+      "expected": "Map-facing contents and later changes match TreeMap; call public verifyInvariants. Provider invocation outputs/counts are diagnostic unless they change contracted Map results. No defer/touch semantics are assumed."
+    }
+  ],
+  "public_calls": "M3 public (), (Comparator), (Comparator,M3LazyValueProvider) constructors; Map putAll/put/remove/clear/get/containsKey/size/isEmpty and views; NavigableMap comparator, endpoints, neighbor keys/entries, pollFirstEntry/pollLastEntry, descendingMap, headMap/tailMap/subMap and navigableKeySet/descendingKeySet; public verifyInvariants():void. Reflection only resolves those public constructors/methods.",
+  "out_of_scope": "Package-private keyOnly constructor; private fields, storage/balance formulas, performance/throughput, whole-library compatibility. No exact positive comparator call sequence/count assertion.",
+  "sequencing": "The harness computes and detaches each original expected state/outcome before matching candidate execution. Run oracle mode first and retain its deterministic expected-observation digest before candidate. Every unexpected candidate exception/state/result difference fails this finite proof or requires explicit adjudication; never silently normalize.",
+  "sources": [
+    "https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/TreeMap.html#putAll(java.util.Map)",
+    "https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/NavigableMap.html"
+  ],
+  "status": "Expected outcomes frozen; actual oracle/candidate execution pending."
+}

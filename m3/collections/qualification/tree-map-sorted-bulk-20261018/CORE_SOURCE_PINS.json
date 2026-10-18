@@ -1,0 +1,658 @@
+{
+  "schema": "m3-source-pins/v1",
+  "base_commit": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
+  "selected_java_sources": [
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3AdaptiveEnumLongMap.java",
+      "before_git_blob": "67a1bf136c21ab2b347f0a33ec4784e17c0eb245",
+      "compiled_git_blob": "67a1bf136c21ab2b347f0a33ec4784e17c0eb245"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3Address28.java",
+      "before_git_blob": "2dda612d7cfdc39d8138c17a85308dc9d084b28b",
+      "compiled_git_blob": "2dda612d7cfdc39d8138c17a85308dc9d084b28b"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3ArrayList.java",
+      "before_git_blob": "250905f67429fbedfb4d6f652ea6e90a516cb59c",
+      "compiled_git_blob": "250905f67429fbedfb4d6f652ea6e90a516cb59c"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3BitLane28.java",
+      "before_git_blob": "3185f2fd33894797d012bb21e62dac4422275ea1",
+      "compiled_git_blob": "3185f2fd33894797d012bb21e62dac4422275ea1"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3BlockingDeque.java",
+      "before_git_blob": "b2c730f6d666a81fb1ea1bd2a8f220820c1dfa35",
+      "compiled_git_blob": "b2c730f6d666a81fb1ea1bd2a8f220820c1dfa35"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3ChildProgressMonitor.java",
+      "before_git_blob": "44a791db2fac00214479e7020ec3c509f70d7ef2",
+      "compiled_git_blob": "44a791db2fac00214479e7020ec3c509f70d7ef2"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3CollectionSdk.java",
+      "before_git_blob": "4f3a64d070b361cd6a25269184370a7ab486c0a5",
+      "compiled_git_blob": "4f3a64d070b361cd6a25269184370a7ab486c0a5"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3CollectionSdkCatalog.java",
+      "before_git_blob": "f94ae73c9c16d3a0574b1aba97f09001f83dfbce",
+      "compiled_git_blob": "f94ae73c9c16d3a0574b1aba97f09001f83dfbce"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3CollectionSdkNames.java",
+      "before_git_blob": "b85cce7dabd0e8bcd0779fbf50f111173a1ad48a",
+      "compiled_git_blob": "b85cce7dabd0e8bcd0779fbf50f111173a1ad48a"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3Collections.java",
+      "before_git_blob": "3d2f5aa53bda55293b3254bed3d526b896cbd044",
+      "compiled_git_blob": "3d2f5aa53bda55293b3254bed3d526b896cbd044"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3ConcurrentBitSet.java",
+      "before_git_blob": "feb93280cbc1481c40c52156ffc50e2be5e35b54",
+      "compiled_git_blob": "feb93280cbc1481c40c52156ffc50e2be5e35b54"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3ConcurrentIntLane28.java",
+      "before_git_blob": "bc2004e2c4802c3338c0099d537b94fb49dc4363",
+      "compiled_git_blob": "bc2004e2c4802c3338c0099d537b94fb49dc4363"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3ConcurrentLongLane28.java",
+      "before_git_blob": "176991710420d96aace2774c59fe0137d2b1ba4e",
+      "compiled_git_blob": "176991710420d96aace2774c59fe0137d2b1ba4e"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3ConcurrentLongMap.java",
+      "before_git_blob": "bbe25dfd008fe143806c8c3aefac6d33e413aec2",
+      "compiled_git_blob": "bbe25dfd008fe143806c8c3aefac6d33e413aec2"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3ConcurrentLongSet.java",
+      "before_git_blob": "1dd5331b42efa855a51ba31d40380b0064231983",
+      "compiled_git_blob": "1dd5331b42efa855a51ba31d40380b0064231983"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3CountedBag.java",
+      "before_git_blob": "121a45e12151ba92292331bf538443cf99cc4283",
+      "compiled_git_blob": "121a45e12151ba92292331bf538443cf99cc4283"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3CpuMaskRuns.java",
+      "before_git_blob": "1c30981aefab6171675c4e31dfd37bdae416691b",
+      "compiled_git_blob": "1c30981aefab6171675c4e31dfd37bdae416691b"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3DefaultProgressMonitor.java",
+      "before_git_blob": "2c5f52b913ed7d4207645871f522ad63c2bf57df",
+      "compiled_git_blob": "2c5f52b913ed7d4207645871f522ad63c2bf57df"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3EnumLongMap.java",
+      "before_git_blob": "43623113339ffff197d682f2c497b0f07abd4b25",
+      "compiled_git_blob": "43623113339ffff197d682f2c497b0f07abd4b25"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3EnumSet.java",
+      "before_git_blob": "3b9cd8179549116524b7f9252a29ba185c22fc98",
+      "compiled_git_blob": "3b9cd8179549116524b7f9252a29ba185c22fc98"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3FilteredDeques.java",
+      "before_git_blob": "d6ac51e7632a5e6ca8d51c9bfcc94c27d4463f25",
+      "compiled_git_blob": "d6ac51e7632a5e6ca8d51c9bfcc94c27d4463f25"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3FilteredLists.java",
+      "before_git_blob": "e094fdde4a153eab2d1a125785bc55c68187bbd1",
+      "compiled_git_blob": "e094fdde4a153eab2d1a125785bc55c68187bbd1"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3FilteredNavigableSet.java",
+      "before_git_blob": "ccf65b212b756fe2147b68d3c1d6655e87bb3103",
+      "compiled_git_blob": "ccf65b212b756fe2147b68d3c1d6655e87bb3103"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java",
+      "before_git_blob": "6ec7a88dafeca87760faee0c808dbd9a93ba1424",
+      "compiled_git_blob": "6ec7a88dafeca87760faee0c808dbd9a93ba1424"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3GenericCollections.java",
+      "before_git_blob": "6aaff3e0e7f410b69e511a957c1aa4390ab9ff4d",
+      "compiled_git_blob": "6aaff3e0e7f410b69e511a957c1aa4390ab9ff4d"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java",
+      "before_git_blob": "134fb98f8a39969c43fd75338ecb233c5fe49446",
+      "compiled_git_blob": "134fb98f8a39969c43fd75338ecb233c5fe49446"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3IndexMaskWindow.java",
+      "before_git_blob": "0be72190789c7248a3093480b23b0c119a3243a4",
+      "compiled_git_blob": "0be72190789c7248a3093480b23b0c119a3243a4"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3IndexPartitions.java",
+      "before_git_blob": "d5ea82c59c406322d745e0894b5bfd74dbb2437d",
+      "compiled_git_blob": "d5ea82c59c406322d745e0894b5bfd74dbb2437d"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3IndexPathMasks.java",
+      "before_git_blob": "ef0fac5c1e71f8493baab365c8af64bb22cb6171",
+      "compiled_git_blob": "ef0fac5c1e71f8493baab365c8af64bb22cb6171"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3IndexPathRank.java",
+      "before_git_blob": "6bc439b69f739608141acf6ee3800e5b5b0163c3",
+      "compiled_git_blob": "6bc439b69f739608141acf6ee3800e5b5b0163c3"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3IndexedListSnapshot.java",
+      "before_git_blob": "c1c0bead12632dd42a30961ccf63193de0773c64",
+      "compiled_git_blob": "c1c0bead12632dd42a30961ccf63193de0773c64"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3IndexedMultiValueMap.java",
+      "before_git_blob": "9035b651c5aab1f5850009372e2432ef196efc79",
+      "compiled_git_blob": "9035b651c5aab1f5850009372e2432ef196efc79"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3IndexedTable.java",
+      "before_git_blob": "ef65261a642da8e473763d57905297d3e0dc5c2c",
+      "compiled_git_blob": "ef65261a642da8e473763d57905297d3e0dc5c2c"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3IntCollection.java",
+      "before_git_blob": "bd6aff905cf47e64ccd76bc19acc899ef93742af",
+      "compiled_git_blob": "bd6aff905cf47e64ccd76bc19acc899ef93742af"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3IntHashSet.java",
+      "before_git_blob": "f4c5e217feb953f4314e1f5e23221f59ceec2ead",
+      "compiled_git_blob": "f4c5e217feb953f4314e1f5e23221f59ceec2ead"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3IntIntConsumer.java",
+      "before_git_blob": "f1329b55c234a65faad61be2a1a557b2a9b2dcd8",
+      "compiled_git_blob": "f1329b55c234a65faad61be2a1a557b2a9b2dcd8"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3IntIntHashMap.java",
+      "before_git_blob": "b050603ae26a5e3c177eb9e97f052ff8e94e103b",
+      "compiled_git_blob": "b050603ae26a5e3c177eb9e97f052ff8e94e103b"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3IntIterator.java",
+      "before_git_blob": "366f92e9da842e00e346872f386ecfede38c5cb6",
+      "compiled_git_blob": "366f92e9da842e00e346872f386ecfede38c5cb6"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3IntLane28.java",
+      "before_git_blob": "4e1e7eb7f2212493eecd544c3e7174ac1ca33232",
+      "compiled_git_blob": "4e1e7eb7f2212493eecd544c3e7174ac1ca33232"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3IntLongConsumer.java",
+      "before_git_blob": "49404c6e9b450da64228ddb4af958770f9060382",
+      "compiled_git_blob": "49404c6e9b450da64228ddb4af958770f9060382"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3IntLongHashMap.java",
+      "before_git_blob": "f490cc55f75eec77d1e4f427675b61dde11ff409",
+      "compiled_git_blob": "f490cc55f75eec77d1e4f427675b61dde11ff409"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3IntPriorityQueue.java",
+      "before_git_blob": "3ee7233f27105d326832e212b01b8da17142569e",
+      "compiled_git_blob": "3ee7233f27105d326832e212b01b8da17142569e"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LazyEventBits.java",
+      "before_git_blob": "e0605534823bd2933b9a3f92f2481a1fef794b33",
+      "compiled_git_blob": "e0605534823bd2933b9a3f92f2481a1fef794b33"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LazyEventGranularity.java",
+      "before_git_blob": "7e031ea2e06900aa6326d6d587ad66f290911d6a",
+      "compiled_git_blob": "7e031ea2e06900aa6326d6d587ad66f290911d6a"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LazyEventPolicy.java",
+      "before_git_blob": "aa79f1cc24bc83a5c2db5f7427a3a461715af380",
+      "compiled_git_blob": "aa79f1cc24bc83a5c2db5f7427a3a461715af380"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LazyEventSink.java",
+      "before_git_blob": "f0085ec59bbedda0ca18d752996ad489ec976d5c",
+      "compiled_git_blob": "f0085ec59bbedda0ca18d752996ad489ec976d5c"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LazyEventSource.java",
+      "before_git_blob": "a21d4701650880ae5db7c569427ff64ec2195b92",
+      "compiled_git_blob": "a21d4701650880ae5db7c569427ff64ec2195b92"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LazyEvents.java",
+      "before_git_blob": "c2a0aa479a4aa89b029ab9d99e22a3a27557b392",
+      "compiled_git_blob": "c2a0aa479a4aa89b029ab9d99e22a3a27557b392"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LazyOperation.java",
+      "before_git_blob": "9d8939d6d768c3c1861a532d185e8c27afa35994",
+      "compiled_git_blob": "9d8939d6d768c3c1861a532d185e8c27afa35994"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LazyValueProvider.java",
+      "before_git_blob": "5bb4a035f57206bb82dc6b19657a0f39dc2d5fe8",
+      "compiled_git_blob": "5bb4a035f57206bb82dc6b19657a0f39dc2d5fe8"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LazyValueState.java",
+      "before_git_blob": "d13625a82d623a5aa99fee498e7b5afe793f504a",
+      "compiled_git_blob": "d13625a82d623a5aa99fee498e7b5afe793f504a"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LinkedHashMap.java",
+      "before_git_blob": "ade59880b8c9b2bee1b32ae67ca9d29b7382d998",
+      "compiled_git_blob": "ade59880b8c9b2bee1b32ae67ca9d29b7382d998"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LinkedHashSet.java",
+      "before_git_blob": "e1ac806d1ebe8aac1b9efe7bcfbaa3f675e7d0d6",
+      "compiled_git_blob": "e1ac806d1ebe8aac1b9efe7bcfbaa3f675e7d0d6"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LinkedList.java",
+      "before_git_blob": "744d1c488b8342c98e49d2cfd3465c0f558b199d",
+      "compiled_git_blob": "744d1c488b8342c98e49d2cfd3465c0f558b199d"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LockedMap.java",
+      "before_git_blob": "17cdc6d3bba0093fba9f598f74219c90706f05be",
+      "compiled_git_blob": "17cdc6d3bba0093fba9f598f74219c90706f05be"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LockedTreeMap.java",
+      "before_git_blob": "374960e9edfd4c1bbcc0951c4592d3ffd1b31f70",
+      "compiled_git_blob": "374960e9edfd4c1bbcc0951c4592d3ffd1b31f70"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LockedTreeSet.java",
+      "before_git_blob": "fb472120f4e93fcf8ca474e390c89aaef63fc9a6",
+      "compiled_git_blob": "fb472120f4e93fcf8ca474e390c89aaef63fc9a6"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LongAddressKernel.java",
+      "before_git_blob": "9ac6c5a1e121affd28e6503d922927f6c91c3a66",
+      "compiled_git_blob": "9ac6c5a1e121affd28e6503d922927f6c91c3a66"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LongArena28.java",
+      "before_git_blob": "b265551ff952606326e25c0361bc6f35c72adedf",
+      "compiled_git_blob": "b265551ff952606326e25c0361bc6f35c72adedf"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LongArrayDeque.java",
+      "before_git_blob": "73d90117f3a3b4f1a5a670fb34f5326765627d2c",
+      "compiled_git_blob": "73d90117f3a3b4f1a5a670fb34f5326765627d2c"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LongArrayList.java",
+      "before_git_blob": "543e4d99ba6cc07a949141640588fd6437203635",
+      "compiled_git_blob": "543e4d99ba6cc07a949141640588fd6437203635"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LongBag.java",
+      "before_git_blob": "a3aa54e2b3f01f4341efdf7c3f6683828b116eba",
+      "compiled_git_blob": "a3aa54e2b3f01f4341efdf7c3f6683828b116eba"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LongBitmapFilterPlan.java",
+      "before_git_blob": "9145aedc0ef0fe0ef76f2d7ec9cf20df7c95bc4d",
+      "compiled_git_blob": "9145aedc0ef0fe0ef76f2d7ec9cf20df7c95bc4d"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LongBitmapFilteredSnapshot.java",
+      "before_git_blob": "a5fe77001be04ca123593908fb68ca008935d543",
+      "compiled_git_blob": "a5fe77001be04ca123593908fb68ca008935d543"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LongCollection.java",
+      "before_git_blob": "d0b389681ade738e97426d950b6291c746912cf0",
+      "compiled_git_blob": "d0b389681ade738e97426d950b6291c746912cf0"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LongCompositeViews.java",
+      "before_git_blob": "7d4a3b83e13eb24940c3d72aac860fa5a419a08f",
+      "compiled_git_blob": "7d4a3b83e13eb24940c3d72aac860fa5a419a08f"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LongDag.java",
+      "before_git_blob": "b9c3d3119fffde726a5d4b0bb9de7ed99cbdaf9b",
+      "compiled_git_blob": "b9c3d3119fffde726a5d4b0bb9de7ed99cbdaf9b"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LongDeque.java",
+      "before_git_blob": "7fb1dc4bcd5275c703a19f36062ae5c66b3d2f43",
+      "compiled_git_blob": "7fb1dc4bcd5275c703a19f36062ae5c66b3d2f43"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LongFilteredView.java",
+      "before_git_blob": "07fdbb60e1a7272272c1f462e5102435392bacef",
+      "compiled_git_blob": "07fdbb60e1a7272272c1f462e5102435392bacef"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LongHashSet.java",
+      "before_git_blob": "c2f04bb08698169862180e3759146e31c60d84b5",
+      "compiled_git_blob": "c2f04bb08698169862180e3759146e31c60d84b5"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java",
+      "before_git_blob": "317136e66200db1d8fc72d47ff9f8cf52b4566b5",
+      "compiled_git_blob": "317136e66200db1d8fc72d47ff9f8cf52b4566b5"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LongIterator.java",
+      "before_git_blob": "44778a63d99c5b1f99adee536b954a4ebb8c64f3",
+      "compiled_git_blob": "44778a63d99c5b1f99adee536b954a4ebb8c64f3"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LongLane28.java",
+      "before_git_blob": "8616ab397be434e947a3148ea7b02e946c710e99",
+      "compiled_git_blob": "8616ab397be434e947a3148ea7b02e946c710e99"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LongLaneStore28.java",
+      "before_git_blob": "bc67c1f6d4da60c330c2d130cfa69b9c05d5b814",
+      "compiled_git_blob": "bc67c1f6d4da60c330c2d130cfa69b9c05d5b814"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LongLinkedHashSet.java",
+      "before_git_blob": "28c864a69a384dbfe6fbc499eff7da4015264a3f",
+      "compiled_git_blob": "28c864a69a384dbfe6fbc499eff7da4015264a3f"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LongLinkedList28.java",
+      "before_git_blob": "f92fd3b564b53ee7bee422db4ce7b6b63a0860eb",
+      "compiled_git_blob": "f92fd3b564b53ee7bee422db4ce7b6b63a0860eb"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LongList.java",
+      "before_git_blob": "df2d2741b67987d93deefcd75f139d5648eb4dc2",
+      "compiled_git_blob": "df2d2741b67987d93deefcd75f139d5648eb4dc2"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LongListSpliterator.java",
+      "before_git_blob": "a1a620d464f7b29bb8a5e801e51a1ce9592d3f7f",
+      "compiled_git_blob": "a1a620d464f7b29bb8a5e801e51a1ce9592d3f7f"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LongLongConsumer.java",
+      "before_git_blob": "b1c01d1afacc76bd338179398ab42835e16992fa",
+      "compiled_git_blob": "b1c01d1afacc76bd338179398ab42835e16992fa"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LongLongHashMap.java",
+      "before_git_blob": "9dc8bdda1fbf81d2be4d2fff72c83c303b7bb981",
+      "compiled_git_blob": "9dc8bdda1fbf81d2be4d2fff72c83c303b7bb981"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LongLongLinkedHashMap.java",
+      "before_git_blob": "befc032498ca830b5598bd447ccca0796bc6f446",
+      "compiled_git_blob": "befc032498ca830b5598bd447ccca0796bc6f446"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LongPredicates.java",
+      "before_git_blob": "2367a2e5f7437ffe340d800a1a5c949cef54adc4",
+      "compiled_git_blob": "2367a2e5f7437ffe340d800a1a5c949cef54adc4"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LongPriorityQueue.java",
+      "before_git_blob": "2fb403549f2baf0afe5b04743647c26ebd4cce80",
+      "compiled_git_blob": "2fb403549f2baf0afe5b04743647c26ebd4cce80"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LongQueue.java",
+      "before_git_blob": "8fcb61bd6a8a5077008ac0102f44f28035096bec",
+      "compiled_git_blob": "8fcb61bd6a8a5077008ac0102f44f28035096bec"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LongRangeSet.java",
+      "before_git_blob": "5dbc2ec9317c79d801bb4c312f2c0b7ffad6ffbd",
+      "compiled_git_blob": "5dbc2ec9317c79d801bb4c312f2c0b7ffad6ffbd"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LongRankBatchNative.java",
+      "before_git_blob": "2bc0c445bf525b442d9b80b8a03ad4208b52c782",
+      "compiled_git_blob": "2bc0c445bf525b442d9b80b8a03ad4208b52c782"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LongRankIndex.java",
+      "before_git_blob": "48b1cb131c60b84e381ec6ff6425f356dad0bd04",
+      "compiled_git_blob": "48b1cb131c60b84e381ec6ff6425f356dad0bd04"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LongSequence.java",
+      "before_git_blob": "26ca657bd372e3a70ed4ee84a216e9a78b95dba0",
+      "compiled_git_blob": "26ca657bd372e3a70ed4ee84a216e9a78b95dba0"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LongSortedSet.java",
+      "before_git_blob": "c613bf12e479d1b206ee0b4a290c6f10f263547e",
+      "compiled_git_blob": "c613bf12e479d1b206ee0b4a290c6f10f263547e"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LongSortedSnapshot.java",
+      "before_git_blob": "2b58886676ea78db055041290683bebf8714c373",
+      "compiled_git_blob": "2b58886676ea78db055041290683bebf8714c373"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LongSortedViews.java",
+      "before_git_blob": "ef918bc7c3b41911d7bc0ad6e3110026cad87720",
+      "compiled_git_blob": "ef918bc7c3b41911d7bc0ad6e3110026cad87720"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LongStack.java",
+      "before_git_blob": "94ff060e1294197863e3676632e9809cfc6d8593",
+      "compiled_git_blob": "94ff060e1294197863e3676632e9809cfc6d8593"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LongStateArray.java",
+      "before_git_blob": "3495bc323b8be60c7c2929f53fb9747583b9d1c6",
+      "compiled_git_blob": "3495bc323b8be60c7c2929f53fb9747583b9d1c6"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LongTreeSet.java",
+      "before_git_blob": "310e7e1b6083d6cd11c8ceafa889c8af8ecbad10",
+      "compiled_git_blob": "310e7e1b6083d6cd11c8ceafa889c8af8ecbad10"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3MutableFilteredViews.java",
+      "before_git_blob": "ef1a9538212a04dc513cde0ccf0b3fe4507438d1",
+      "compiled_git_blob": "ef1a9538212a04dc513cde0ccf0b3fe4507438d1"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3ObjectIdentityMap.java",
+      "before_git_blob": "18f9277389f7fa5ab8ddbff9971bb0f941659750",
+      "compiled_git_blob": "18f9277389f7fa5ab8ddbff9971bb0f941659750"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3ObjectIdentitySet.java",
+      "before_git_blob": "6f20a64f8d7e9dc6bbc9880396c502349e2e3d7a",
+      "compiled_git_blob": "6f20a64f8d7e9dc6bbc9880396c502349e2e3d7a"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3ObjectIndexSnapshot.java",
+      "before_git_blob": "a212ea57297199900add9e1cc3aef1088abc9d1c",
+      "compiled_git_blob": "a212ea57297199900add9e1cc3aef1088abc9d1c"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3ObjectResidency.java",
+      "before_git_blob": "d3132cdc31d450926d29f7c4f9d3c47d03ad2363",
+      "compiled_git_blob": "d3132cdc31d450926d29f7c4f9d3c47d03ad2363"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3ObjectSlotStore28.java",
+      "before_git_blob": "42a33b9af05d9ec4e1e9c1833a27fa5dd008564b",
+      "compiled_git_blob": "42a33b9af05d9ec4e1e9c1833a27fa5dd008564b"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3ObjectStateBatch28.java",
+      "before_git_blob": "8bd65f67c13377d1e48cca1849bbcbc8c822ef7e",
+      "compiled_git_blob": "8bd65f67c13377d1e48cca1849bbcbc8c822ef7e"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3ObjectStateSlots28.java",
+      "before_git_blob": "1ee69a4f8596691f888362ed46ca786163a0f3f5",
+      "compiled_git_blob": "1ee69a4f8596691f888362ed46ca786163a0f3f5"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3OrderedSlotMap.java",
+      "before_git_blob": "e7be2297d19f22cf4dd4ef8b7d1424fe963063d9",
+      "compiled_git_blob": "e7be2297d19f22cf4dd4ef8b7d1424fe963063d9"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3PrimitiveFilteredSequences.java",
+      "before_git_blob": "8d3e2ed80e74d10b039b7b704bcc24a40dd48d82",
+      "compiled_git_blob": "8d3e2ed80e74d10b039b7b704bcc24a40dd48d82"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3Progress.java",
+      "before_git_blob": "5728ff52b138121791fd2b12c923a883d52327bc",
+      "compiled_git_blob": "5728ff52b138121791fd2b12c923a883d52327bc"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3ProgressAdapters.java",
+      "before_git_blob": "331e3e74bea6c366455cfe151a652e6386fbab48",
+      "compiled_git_blob": "331e3e74bea6c366455cfe151a652e6386fbab48"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3ProgressMonitor.java",
+      "before_git_blob": "fbaaf21bb7f013bebbc32d0d43dbf71e47b90059",
+      "compiled_git_blob": "fbaaf21bb7f013bebbc32d0d43dbf71e47b90059"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3ProgressScope.java",
+      "before_git_blob": "591223844f3cfd50fdf5431deb3bc2b1c9d7b5f0",
+      "compiled_git_blob": "591223844f3cfd50fdf5431deb3bc2b1c9d7b5f0"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3ProgressState.java",
+      "before_git_blob": "23e877a0862e2b9a9a83f247e6b0b499a0757d9e",
+      "compiled_git_blob": "23e877a0862e2b9a9a83f247e6b0b499a0757d9e"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3ProgressiveSignalEvidence.java",
+      "before_git_blob": "128b6af337da7efb6519195f2c1ec31005ab8249",
+      "compiled_git_blob": "128b6af337da7efb6519195f2c1ec31005ab8249"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3Residency.java",
+      "before_git_blob": "34c18f45632096c3bd4f0df199fe99a1a59c2f16",
+      "compiled_git_blob": "34c18f45632096c3bd4f0df199fe99a1a59c2f16"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3ResidencyStateMaskIndex.java",
+      "before_git_blob": "58c65f69e3b457b979983d81e393e6ed9aad77da",
+      "compiled_git_blob": "58c65f69e3b457b979983d81e393e6ed9aad77da"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3SignalOrder.java",
+      "before_git_blob": "f7f6e1f4ea9763b4b4238998ffb7377f4f871e6f",
+      "compiled_git_blob": "f7f6e1f4ea9763b4b4238998ffb7377f4f871e6f"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3SignalOrderNative.java",
+      "before_git_blob": "7e5bc5fb1c1a25e00452f2dc0f58d4c90900bffe",
+      "compiled_git_blob": "7e5bc5fb1c1a25e00452f2dc0f58d4c90900bffe"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3SlotAllocator28.java",
+      "before_git_blob": "3aa639f8fa88c948babfacb5b34511dd2f18442d",
+      "compiled_git_blob": "3aa639f8fa88c948babfacb5b34511dd2f18442d"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3SlotArrays.java",
+      "before_git_blob": "e337c69710c871f8caa77a1afe53149f1fd705cc",
+      "compiled_git_blob": "e337c69710c871f8caa77a1afe53149f1fd705cc"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3SlotMap.java",
+      "before_git_blob": "a7d20300717661c26897f0b69e1e5a83400a62ad",
+      "compiled_git_blob": "9e4d7588d5bd527f3988ca4d46d79f31132630c7"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3SlotSpliterators.java",
+      "before_git_blob": "30cf137538353ac8e91514fff7c5db3903da8819",
+      "compiled_git_blob": "30cf137538353ac8e91514fff7c5db3903da8819"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3SpanIndex.java",
+      "before_git_blob": "2f3099248a67b636a9f926747dd6a8d2b4c21baf",
+      "compiled_git_blob": "2f3099248a67b636a9f926747dd6a8d2b4c21baf"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3StateMaskArrays.java",
+      "before_git_blob": "06dc86a44df0e962613273011ff7d653f20d6ea9",
+      "compiled_git_blob": "06dc86a44df0e962613273011ff7d653f20d6ea9"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3StateMaskHistogram.java",
+      "before_git_blob": "5988d568c52bc959e760a51a280b78c1d41f8519",
+      "compiled_git_blob": "5988d568c52bc959e760a51a280b78c1d41f8519"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3SystemProgress.java",
+      "before_git_blob": "66984feed7d22b8e047f69de0862b7ade9083ede",
+      "compiled_git_blob": "66984feed7d22b8e047f69de0862b7ade9083ede"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3TransferQueue.java",
+      "before_git_blob": "54c577fcbd5d43959b748e734603f40370d98e78",
+      "compiled_git_blob": "54c577fcbd5d43959b748e734603f40370d98e78"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3TreeMap.java",
+      "before_git_blob": "8a85b86c027bc031ef096ad94de2747b8fd28f9c",
+      "compiled_git_blob": "8d0690dd904df04cf087de7a7dc64107cf475210"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3TreeSet.java",
+      "before_git_blob": "e414f679a341392770fb482377a51fe2f5e6518f",
+      "compiled_git_blob": "e414f679a341392770fb482377a51fe2f5e6518f"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3VirtualAccumulator.java",
+      "before_git_blob": "82071a3aa36ae3626283cc4a4fba155028ad8995",
+      "compiled_git_blob": "82071a3aa36ae3626283cc4a4fba155028ad8995"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3VirtualCollector.java",
+      "before_git_blob": "6d274db8885dd1d1b3c846529f8b30db2e64eb74",
+      "compiled_git_blob": "6d274db8885dd1d1b3c846529f8b30db2e64eb74"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3WeakHashMap.java",
+      "before_git_blob": "5d7eb065aeca2cecc1d939532d154c87bbb01c2c",
+      "compiled_git_blob": "5d7eb065aeca2cecc1d939532d154c87bbb01c2c"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/package-info.java",
+      "before_git_blob": "3998c9f78a8617aa3b593c353f7d7ac48e93a52b",
+      "compiled_git_blob": "3998c9f78a8617aa3b593c353f7d7ac48e93a52b"
+    },
+    {
+      "path": "m3/collections/src/main/java/module-info.java",
+      "before_git_blob": "e6ca30e5a04a0b7c0f1ada4f0659342cd863d78d",
+      "compiled_git_blob": "e6ca30e5a04a0b7c0f1ada4f0659342cd863d78d"
+    }
+  ],
+  "selected_count": 130,
+  "selection_scope": "129 existing core class sources plus module-info; two exact transformed blobs only"
+}
