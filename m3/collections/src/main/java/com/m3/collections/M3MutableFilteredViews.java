@@ -50,6 +50,13 @@ public final class M3MutableFilteredViews {
         return new MapView<>(source, predicate);
     }
 
+    /** Shared comparator ordering atom for bounded mutable-set recovery. */
+    @SuppressWarnings("unchecked")
+    private static <T> int compareStored(T stored, T query, Comparator<? super T> comparator) {
+        return comparator != null ? comparator.compare(stored, query)
+                : ((Comparable<? super T>) stored).compareTo(query);
+    }
+
     private static <E> E firstMatch(Iterator<E> cursor, Predicate<? super E> visible) {
         while (cursor.hasNext()) {
             E candidate = cursor.next();
@@ -197,18 +204,33 @@ public final class M3MutableFilteredViews {
             return firstMatch(sourceCursor, predicate);
         }
 
-        @Override public E lower(E value) {
-            return seek(source.headSet(value, false).descendingIterator());
+        /** One-seek normal path; recover only invalid bounded-range construction. */
+        private E bounded(E query, boolean forward, boolean inclusive) {
+            Iterator<E> cursor;
+            try {
+                cursor = forward ? source.tailSet(query, inclusive).iterator()
+                        : source.headSet(query, inclusive).descendingIterator();
+            } catch (IllegalArgumentException outOfRange) {
+                Iterator<E> bounded = forward ? source.iterator() : source.descendingIterator();
+                Comparator<? super E> comparator = source.comparator();
+                while (bounded.hasNext()) {
+                    E stored = bounded.next();
+                    int relation = compareStored(stored, query, comparator);
+                    if ((forward ? relation > 0 || (inclusive && relation == 0)
+                            : relation < 0 || (inclusive && relation == 0))
+                            && predicate.test(stored)) {
+                        return stored;
+                    }
+                }
+                return null;
+            }
+            return seek(cursor);
         }
-        @Override public E floor(E value) {
-            return seek(source.headSet(value, true).descendingIterator());
-        }
-        @Override public E ceiling(E value) {
-            return seek(source.tailSet(value, true).iterator());
-        }
-        @Override public E higher(E value) {
-            return seek(source.tailSet(value, false).iterator());
-        }
+
+        @Override public E lower(E value) { return bounded(value, false, false); }
+        @Override public E floor(E value) { return bounded(value, false, true); }
+        @Override public E ceiling(E value) { return bounded(value, true, true); }
+        @Override public E higher(E value) { return bounded(value, true, false); }
         @Override public E first() {
             Iterator<E> cursor = iterator();
             if (!cursor.hasNext()) throw new NoSuchElementException();
