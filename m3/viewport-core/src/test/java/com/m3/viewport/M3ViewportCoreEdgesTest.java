@@ -156,8 +156,9 @@ public class M3ViewportCoreEdgesTest {
 		assertTrue (new M3TreeProjection.Row (M3TreeTopology.ROOT, 0, 5, 0).materialized ());
 		assertFalse (new M3TreeProjection.Row (M3TreeTopology.ROOT, 0, -1, 0).materialized ());
 		M3TreeResidentPlan plan = new M3TreeResidentPlan ();
-		plan.plan (1, new int [] {M3TreeTopology.ROOT}, new int [] {0}, new int [] {-1});
-		plan.commit (new long [] {77});
+		int [] parents = {M3TreeTopology.ROOT}, indices = {0}, physical = {-1};
+		plan.plan (1, parents, indices, physical);
+		plan.commit (1, parents, indices, physical, new long [] {77});
 		assertEquals (M3TreeResidentPlan.key (M3TreeTopology.ROOT, 0), plan.keyOf (0));
 		assertThrows (RuntimeException.class, () -> plan.keyOf (1));
 	}
