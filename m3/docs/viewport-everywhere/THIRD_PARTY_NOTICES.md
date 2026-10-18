@@ -20,7 +20,7 @@
 |---|---|---|
 | JetBrains/intellij-community | Apache-2.0 | adapter jar compiled against public APIs (phase 2); patterns |
 | arotenberg/swingx | LGPL-2.1 | patterns only |
-| eclipse-rap/org.eclipse.rap | EPL-1.0 (repository LICENSE) | patterns; adapter design |
+| eclipse-rap/org.eclipse.rap | EPL-2.0 file headers (repository LICENSE file: EPL-1.0) | patterns; adapter design |
 | JetBrains/skija, JetBrains/skiko | Apache-2.0 | binding behind the M3 renderer adapter (render-modes branch); patterns |
 | openjdk/jfx | GPL-2.0 WITH Classpath-exception-2.0 | patterns only |
 | glazedlists/glazedlists | LGPL-2.1 OR MPL-1.1 | pattern confirmation only |

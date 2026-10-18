@@ -235,6 +235,35 @@ only / donor pattern, **-** no such widget.
   4. RWT virtual Tree/Table adapter design;
   5. M3 renderer: `M3RowPainter` over the M3 drawn-mode backend and over Java2D.
 
+## 8a. Donor pattern evidence (UI donor-atomize run)
+
+Source: hsoliwal/com.synexia draft PR #12398, branch `codex/m3-ui-donor-atomize-20261017`,
+`docs/M3-SCALE/runs/20261017-ui-donor-atomize/PATTERN_MAP.md`: 69 donors, including IntelliJ UI (459 files,
+`06e20852`), RAP RWT (192 files, `b0830aae`, EPL-2.0 file headers) and Skiko (hash-only). Every row there is a CPU
+projection (identifier theme x L-Hash structural key x DOOP lexical shape); keys are candidate evidence only.
+
+| Theme | DOOP-shaped keys / all | What it means for the core |
+|---|---|---|
+| prefix_sums | 24 / 51 | the most lane-shaped theme (own code 22, SWT 9, IntelliJ 6, JDK desktop 5): lift the Fenwick/prefix-sum owners first (M3SparseExtents, M3OrderStatisticForest in wave 1; M3FenwickForest in wave 4) |
+| expansion_maps | 2 / 62 | expansion and tree-model events are object graphs in every toolkit; `M3TreeTopology` (lane-shaped expansion, cold children as arithmetic) and the `(parentId, childIndex)` resident lanes are the gap this core fills |
+| damage_blit | 0 / 46 | no lane-shaped donor anywhere: the resident-window blit and damage math (`M3RowWindowPlan` head/tail deltas, `M3ScrollMetrics`, row-rectangle damage in `M3RowPainter`) is a first-of-its-kind core component, designed here, not adapted |
+| visible_range | 7 / 74 | 6 of 7 DOOP keys include our own code; `M3ViewportRuntime.RowWindow` is the reference |
+| selection_ranges | 5 / 154 | `setSelection`/`isCellSelected`/`deselectCell` share one key across SWT, Nebula, RAP and SWTSwing: `M3SelectionModel` is the common target |
+| lazy_facades | 10 / 85 | `getItem`/`getCell`/`release*` keys (SWT, RAP, NatTable, SwingX): the residency engine plus int-id facades |
+
+**Adapter checklist** (the strongest cross-family keys per theme; each adapter maps every listed seam onto the core
+or records why not):
+
+| Seam (method names from the pattern map) | AWT | SwingX | IntelliJ | RWT |
+|---|---|---|---|---|
+| visible range: `scrollPathToVisible`, `showSelection`, `setFillsViewportHeight`, `updateVisibleRows`, `getViewLocation` | `makeVisible` | JXTree/JXList | Tree, JBList | Tree/Table `showSelection` |
+| prefix sums: `convertRowToY`, `getVisibleChildCount`, `ceilingRow`/`higherRow` | row -> y on the peer | JXTreeTable row y | `getPositionInWorld`-style row math | flat index + preload window |
+| expansion: `treeNodesInserted/Removed/Changed`, `treeStructureChanged`, `nodeForRow`, `rowCount` | - | TreeModel events -> topology edits | Tree model events | server-side expansion -> client rows |
+| selection: `setSelection`, `isCellSelected`, `deselectCell`, `fireSelectionChanged` | `select`/`deselect` | ListSelectionModel bridge | JBList selection | Table/Tree selection |
+| lazy facades: `getCellRenderer`, `getItemAsString`, `releaseChildren`, `getCellByPosition` | item strings from lanes | renderer stamp from lanes | renderer stamp | virtual items |
+| damage: `repaintPath`, `extendDirtyRegion`, `invalidate` | row-rect repaint | row-rect repaint | row-rect repaint | client redraw of changed rows |
+| theme: `installDefaults`, `getFont`, `decorateColumnHeader`, `applySpeedSearchHighlighting` | - | highlighters as theme | LaF + speed search | theming via CSS |
+
 ## 9. Run record
 
 | Step | Command | Result |

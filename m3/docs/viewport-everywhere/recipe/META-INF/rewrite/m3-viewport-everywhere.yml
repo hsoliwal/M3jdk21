@@ -68,6 +68,7 @@ recipeList:
   - org.openrewrite.java.ChangeType: {oldFullyQualifiedTypeName: org.eclipse.swt.tests.junit.Test_ViewportSelectionShifts, newFullyQualifiedTypeName: com.m3.viewport.M3SelectionShiftsTest}
   - org.openrewrite.java.ChangeType: {oldFullyQualifiedTypeName: org.eclipse.swt.tests.junit.Test_ViewportSelectionEnumeration, newFullyQualifiedTypeName: com.m3.viewport.M3SelectionEnumerationTest}
   - org.openrewrite.java.ChangeType: {oldFullyQualifiedTypeName: org.eclipse.swt.tests.junit.Test_ViewportPlaneGeometry, newFullyQualifiedTypeName: com.m3.viewport.M3PlaneGeometryTest}
+  - com.m3.viewport.recipe.M3ChangeImport: {from: org.eclipse.swt.internal.ViewportRuntime.Selection, to: com.m3.viewport.M3ViewportRuntime.Selection}
   - com.m3.viewport.recipe.M3ChangeStringLiteral: {from: org.eclipse.swt.widgets.VirtualRowExtents, to: com.m3.collections.M3SparseExtents}
   - com.m3.viewport.recipe.M3ChangeStringLiteral: {from: org.eclipse.swt.widgets.VirtualCellLanes, to: com.m3.collections.M3ColumnarLanes}
   - com.m3.viewport.recipe.M3ChangeStringLiteral: {from: org.eclipse.swt.widgets.VirtualBitLanes, to: com.m3.collections.M3BitLanes}
