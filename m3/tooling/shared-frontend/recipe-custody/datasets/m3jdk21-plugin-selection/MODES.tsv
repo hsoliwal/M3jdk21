@@ -1,0 +1,5 @@
+m3/docs/name-mapping.d/m3-ast-plugin-selection-20261018.json	0644
+m3/tooling/shared-frontend/plugin-selection/README.md	0644
+src/jdk.compiler/share/classes/com/sun/source/util/M3AST.java	0644
+src/jdk.compiler/share/classes/com/sun/tools/javac/m3/M3ASTPC.java	0644
+test/langtools/tools/javac/m3/M3ASTPluginSelectionTest.java	0644

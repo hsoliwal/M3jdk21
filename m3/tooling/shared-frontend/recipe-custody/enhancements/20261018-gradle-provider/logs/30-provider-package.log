@@ -1,0 +1,15 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] --------------< org.m3jdk.tooling:m3-gradle-ast-provider >--------------
+[INFO] Building M3 Gradle original-compiler provider 1.0-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- jar:3.4.1:jar (default-cli) @ m3-gradle-ast-provider ---
+[INFO] Building jar: /workspace/scratch/65626af64474/m3-ast-shared-20261018/gradle-provider-work/generated-final/m3/tooling/module-packs/build-support/gradle-provider/target/m3-gradle-ast-provider-1.0-SNAPSHOT.jar
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  0.967 s
+[INFO] Finished at: 2026-10-18T17:26:36+04:00
+[INFO] ------------------------------------------------------------------------

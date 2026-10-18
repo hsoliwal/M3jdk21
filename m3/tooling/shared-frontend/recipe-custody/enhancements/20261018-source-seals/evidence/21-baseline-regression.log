@@ -1,0 +1,6 @@
+M3_PRIMITIVE_IMAGE rows=1 sha256=f0706a2c597fb7104492ea28767bcc3b9b897b46151c03a568b98a2740d16d4e
+Exception in thread "main" java.lang.AssertionError: expected class java.lang.IllegalStateException but got java.lang.RuntimeException: java.lang.AssertionError: capture refusal closes before a later COMPILATION event
+	at M3ASTSourceSealTest.check(M3ASTSourceSealTest.java:317)
+	at M3ASTSourceSealTest.expect(M3ASTSourceSealTest.java:309)
+	at M3ASTSourceSealTest.duplicateUri(M3ASTSourceSealTest.java:241)
+	at M3ASTSourceSealTest.main(M3ASTSourceSealTest.java:53)

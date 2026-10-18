@@ -1,0 +1,2141 @@
+{
+  "all_other_jmods_preserved_byte_for_byte": {
+    "java.compiler.jmod": {
+      "mode": "0o644",
+      "sha256": "8ecb32088b19111c3ee0853bea6746b22194432ebcf74862167b9b274000fe91",
+      "size": 132036,
+      "type": "file"
+    },
+    "java.datatransfer.jmod": {
+      "mode": "0o644",
+      "sha256": "81080a1cf86550f26b4f97ea339b440d71f490c039219517f83057f31587c824",
+      "size": 59308,
+      "type": "file"
+    },
+    "java.desktop.jmod": {
+      "mode": "0o644",
+      "sha256": "9fe3cc48baa72ea5db726d771fc4eaf96a93e74ee3e8003d8dcd659e2be8ab16",
+      "size": 14187405,
+      "type": "file"
+    },
+    "java.instrument.jmod": {
+      "mode": "0o644",
+      "sha256": "1c5e7a1b45df25593d4ed18cdf4a4bbf2cfa84973cbb3ec3bd6146089ee46317",
+      "size": 50940,
+      "type": "file"
+    },
+    "java.logging.jmod": {
+      "mode": "0o644",
+      "sha256": "e10ecae70b2bc533f3030c9d82e378c802a6e7fed290631c80e266c2bd5c3253",
+      "size": 129985,
+      "type": "file"
+    },
+    "java.management.jmod": {
+      "mode": "0o644",
+      "sha256": "6e8d448dd6faa4446337a367d5f9da0f98d1472cdc415f4df7f28d08d4ed3bd3",
+      "size": 900330,
+      "type": "file"
+    },
+    "java.management.rmi.jmod": {
+      "mode": "0o644",
+      "sha256": "96d3dcfdfb7feeb607f02c04b36a540dd277b4a2973d14474432f1cc79583b16",
+      "size": 98813,
+      "type": "file"
+    },
+    "java.naming.jmod": {
+      "mode": "0o644",
+      "sha256": "b2ec32c7fbc6eab604134eddd84c4d52f598934cec1c162ff5a618964821abcb",
+      "size": 483439,
+      "type": "file"
+    },
+    "java.net.http.jmod": {
+      "mode": "0o644",
+      "sha256": "05a8d7ad35f6c4c512ad83dfff488cf38754e6340ee4f3f67e91130cc504b7ae",
+      "size": 787316,
+      "type": "file"
+    },
+    "java.prefs.jmod": {
+      "mode": "0o644",
+      "sha256": "a976af64aac691428478043b8c0ef1438aa33b84ec265369d3b52ec8d92ebbe7",
+      "size": 70316,
+      "type": "file"
+    },
+    "java.rmi.jmod": {
+      "mode": "0o644",
+      "sha256": "fee9ea4cb68aa07b63207a967fa9e089148da5d6ab2735e69dbc1c97d625eabb",
+      "size": 273630,
+      "type": "file"
+    },
+    "java.scripting.jmod": {
+      "mode": "0o644",
+      "sha256": "153c4335816abb651b5c3677b4aafa9b9be093d68cb389cb469b81623f726fb4",
+      "size": 48220,
+      "type": "file"
+    },
+    "java.se.jmod": {
+      "mode": "0o644",
+      "sha256": "9976f9186f8b411aeb074a6fb3099ca7593cb75f235d8bcb402c0437b8146273",
+      "size": 9869,
+      "type": "file"
+    },
+    "java.security.jgss.jmod": {
+      "mode": "0o644",
+      "sha256": "8e5630c78fb65f402e7316b8e932a1285a24ba30fb43b5d60f3b94f7a114cb70",
+      "size": 598511,
+      "type": "file"
+    },
+    "java.security.sasl.jmod": {
+      "mode": "0o644",
+      "sha256": "5cbfc6356e053e43ffa1abadb892cb39ada3b1d9b046dd4dd9bcabea21590d6e",
+      "size": 89346,
+      "type": "file"
+    },
+    "java.smartcardio.jmod": {
+      "mode": "0o644",
+      "sha256": "aa3eeb8691e062a9eed9cc4fe7d761cbf206fa59ab6b0aecdf0bf07c395ee4d5",
+      "size": 63588,
+      "type": "file"
+    },
+    "java.sql.jmod": {
+      "mode": "0o644",
+      "sha256": "09fc6697b6cfb5fb156bf6ed69f462a04b41d6194f45fcfaabb20c963c8da62c",
+      "size": 83900,
+      "type": "file"
+    },
+    "java.sql.rowset.jmod": {
+      "mode": "0o644",
+      "sha256": "e6abfe2f60fb1b52c38d6069a1805ddbd118b8cffd26f1a0ad2d241e4d4ef91e",
+      "size": 221368,
+      "type": "file"
+    },
+    "java.transaction.xa.jmod": {
+      "mode": "0o644",
+      "sha256": "5f593e97ffcedc42628cd892dc328d30c4fdcf32c426b4c97ecb917d829c503b",
+      "size": 11682,
+      "type": "file"
+    },
+    "java.xml.crypto.jmod": {
+      "mode": "0o644",
+      "sha256": "97132aa0427e76aa958ec310c18d6efd735092e55e9bed92ffbe12bcd13153a8",
+      "size": 707634,
+      "type": "file"
+    },
+    "java.xml.jmod": {
+      "mode": "0o644",
+      "sha256": "47583b53613b63857528d628a56d7e5562896db526528fd2fd790c1702980877",
+      "size": 5241053,
+      "type": "file"
+    },
+    "jdk.accessibility.jmod": {
+      "mode": "0o644",
+      "sha256": "e19ddb1e375d99ee6e344c4830bba068bca47a62c30209c6170dffc6a958b111",
+      "size": 57681,
+      "type": "file"
+    },
+    "jdk.attach.jmod": {
+      "mode": "0o644",
+      "sha256": "9f775b1c1875ce8808565e2c94f201ae76987554943742c2c4a518df2d7d077d",
+      "size": 40608,
+      "type": "file"
+    },
+    "jdk.charsets.jmod": {
+      "mode": "0o644",
+      "sha256": "07db04862b54e3356222fa835dbcb65b721778308ee297dada88f224ebe8420c",
+      "size": 1248673,
+      "type": "file"
+    },
+    "jdk.crypto.cryptoki.jmod": {
+      "mode": "0o644",
+      "sha256": "2192534d947d41a07f018f10f6c467e342047074a5a19b5064c1e8aa0c73cad7",
+      "size": 423226,
+      "type": "file"
+    },
+    "jdk.crypto.ec.jmod": {
+      "mode": "0o644",
+      "sha256": "5c0f6f12ed6ff8db3f6adaa79b6263dc2ae532c82790a2b503f2a9077547780d",
+      "size": 146481,
+      "type": "file"
+    },
+    "jdk.dynalink.jmod": {
+      "mode": "0o644",
+      "sha256": "e7556260319c24069c7b77cede622b44798644d6db27a0dfbb150fe20bb67d13",
+      "size": 163992,
+      "type": "file"
+    },
+    "jdk.editpad.jmod": {
+      "mode": "0o644",
+      "sha256": "6e4a457cab6d64bd3590f9423b6ec54e356f0d69691914c31e740c3c7a5de9a0",
+      "size": 15305,
+      "type": "file"
+    },
+    "jdk.hotspot.agent.jmod": {
+      "mode": "0o644",
+      "sha256": "71638b688326ef2d95cf1c15228914f0377151caf56e72f67159e7e014880d6e",
+      "size": 2314107,
+      "type": "file"
+    },
+    "jdk.httpserver.jmod": {
+      "mode": "0o644",
+      "sha256": "ab90731e3cf2119d5a2cb4a0b4db35c8387292602afda1c1a5e99269a7dbc731",
+      "size": 166535,
+      "type": "file"
+    },
+    "jdk.incubator.vector.jmod": {
+      "mode": "0o644",
+      "sha256": "b1b35bedbc5959c48194c81873ace9466c39c8ef9594dfdfac0f735c9cd46ba7",
+      "size": 1167738,
+      "type": "file"
+    },
+    "jdk.internal.ed.jmod": {
+      "mode": "0o644",
+      "sha256": "5e4183cdefea2ad90a90fea6add84cb24af8b0acba1e8753658652d01ac3279c",
+      "size": 15168,
+      "type": "file"
+    },
+    "jdk.internal.jvmstat.jmod": {
+      "mode": "0o644",
+      "sha256": "a78214fbdf970647b30d618cf50dd232881f5afded6d347a93833e1f974bfedd",
+      "size": 96064,
+      "type": "file"
+    },
+    "jdk.internal.le.jmod": {
+      "mode": "0o644",
+      "sha256": "7f376038fc5daa8d961ca96dd3c56fe0dbe1e40eea80a77ba2c27efb9afbeb11",
+      "size": 536184,
+      "type": "file"
+    },
+    "jdk.internal.opt.jmod": {
+      "mode": "0o644",
+      "sha256": "b8a9b6e9ae1bb6e88d57296f87b0c9794445efd716ad27e6fe0ae3490c759c55",
+      "size": 95613,
+      "type": "file"
+    },
+    "jdk.internal.vm.ci.jmod": {
+      "mode": "0o644",
+      "sha256": "6cf7a4a0b421a0fa3465ecda59bcc0235766329501175c65e97cdadfb385e783",
+      "size": 501979,
+      "type": "file"
+    },
+    "jdk.internal.vm.compiler.jmod": {
+      "mode": "0o644",
+      "sha256": "f611033ff5707666caa2a2f5c3da1864c6487182d0c48ee21558cb92b828fd1d",
+      "size": 9657,
+      "type": "file"
+    },
+    "jdk.internal.vm.compiler.management.jmod": {
+      "mode": "0o644",
+      "sha256": "667d7d43701a355f4fd3da371ca0c5a70658a1dcedb4184d3398e60eb0a20ec3",
+      "size": 9666,
+      "type": "file"
+    },
+    "jdk.jartool.jmod": {
+      "mode": "0o644",
+      "sha256": "3b3c66468edc46389019324297608a48f7b5452dbea6e961c4032ffac1f7a98a",
+      "size": 283524,
+      "type": "file"
+    },
+    "jdk.javadoc.jmod": {
+      "mode": "0o644",
+      "sha256": "6c3b5eceb5a584623280632d013105beac9e49790ca0f62ae09136c048234881",
+      "size": 1584590,
+      "type": "file"
+    },
+    "jdk.jcmd.jmod": {
+      "mode": "0o644",
+      "sha256": "1daac8ffa53131f79c8bbf47a77981d907c4cafd9438025fdb333dff0b50eaf7",
+      "size": 140550,
+      "type": "file"
+    },
+    "jdk.jconsole.jmod": {
+      "mode": "0o644",
+      "sha256": "07420f51b3b18d1012fc3899bf599375ed0865fdc85f431d6f738f8d4c91aa19",
+      "size": 484963,
+      "type": "file"
+    },
+    "jdk.jdeps.jmod": {
+      "mode": "0o644",
+      "sha256": "603648b9a16cf8297e9b93450cc0d141c52d7a90cd51d19a6a84773c757f0cd5",
+      "size": 761171,
+      "type": "file"
+    },
+    "jdk.jdi.jmod": {
+      "mode": "0o644",
+      "sha256": "6a6ec784621e6c4c13cbffd7ddcd65e57bcc0d31f8e4d073951ce6b83f19068f",
+      "size": 877237,
+      "type": "file"
+    },
+    "jdk.jdwp.agent.jmod": {
+      "mode": "0o644",
+      "sha256": "86aa6ee1b41c4840f67a7db2b3a16458d6c6b55bb75e329c2c123e4f089709d5",
+      "size": 154201,
+      "type": "file"
+    },
+    "jdk.jfr.jmod": {
+      "mode": "0o644",
+      "sha256": "76e4416fa558f3a8e15b660c4e53525421b01c7d6d0ea16474828806a07307a8",
+      "size": 881431,
+      "type": "file"
+    },
+    "jdk.jlink.jmod": {
+      "mode": "0o644",
+      "sha256": "1d1eb5ea4ecdad9e6e319a687d307a65e99405ee85327cc029258e2da6e997d7",
+      "size": 456757,
+      "type": "file"
+    },
+    "jdk.jpackage.jmod": {
+      "mode": "0o644",
+      "sha256": "359575e07166a3b418933ccc536828883832a7e1fcca3322353efd869f47f028",
+      "size": 771361,
+      "type": "file"
+    },
+    "jdk.jshell.jmod": {
+      "mode": "0o644",
+      "sha256": "184882f480a3e0741e6ff192d288418bcdf6e3f4462f8add9f3ff6256c99853d",
+      "size": 768414,
+      "type": "file"
+    },
+    "jdk.jsobject.jmod": {
+      "mode": "0o644",
+      "sha256": "d805b75e4da6bd309aa1e1b9604156670152ead9bbfceb711558c6d24e9df87f",
+      "size": 10752,
+      "type": "file"
+    },
+    "jdk.jstatd.jmod": {
+      "mode": "0o644",
+      "sha256": "007aaf0ff0afd717d71926040216e9b58b3dda20d7ae7ab89b5c827767463d49",
+      "size": 37638,
+      "type": "file"
+    },
+    "jdk.localedata.jmod": {
+      "mode": "0o644",
+      "sha256": "978d06a09398702837a6940f301bb22d47b6d7845296e8b330b9635843dca112",
+      "size": 11949326,
+      "type": "file"
+    },
+    "jdk.management.agent.jmod": {
+      "mode": "0o644",
+      "sha256": "ec973e3e1276df9e9754e45ba5ab98d16a22399828e70208131af8a53cf56384",
+      "size": 96593,
+      "type": "file"
+    },
+    "jdk.management.jfr.jmod": {
+      "mode": "0o644",
+      "sha256": "0f6f0f0037f5390555480b9b4de57d006d161e68a6083c8c419e790173151dfa",
+      "size": 62347,
+      "type": "file"
+    },
+    "jdk.management.jmod": {
+      "mode": "0o644",
+      "sha256": "b4ef8e9dde6bd917ba7184f53b96b6f3a5d1900ed0c5391b1d23f9e54c1081e9",
+      "size": 80656,
+      "type": "file"
+    },
+    "jdk.naming.dns.jmod": {
+      "mode": "0o644",
+      "sha256": "17eebef765cf9bb1cc6ca9c8b09ae750f0fc39f85a74472cd31d58ef85d9d10d",
+      "size": 72510,
+      "type": "file"
+    },
+    "jdk.naming.rmi.jmod": {
+      "mode": "0o644",
+      "sha256": "b19cdc985f3ccc56283e5792a7b031abe5c7fa289b32d033dc139e9dfab92246",
+      "size": 31008,
+      "type": "file"
+    },
+    "jdk.net.jmod": {
+      "mode": "0o644",
+      "sha256": "3b018d18ae9b313af0af150293c7149421b0d801c8820d892243ca3ecfa7ca20",
+      "size": 32401,
+      "type": "file"
+    },
+    "jdk.nio.mapmode.jmod": {
+      "mode": "0o644",
+      "sha256": "15646a6c62d4e56c9df6be47597fefa39ebecd9e965031d0c5eb4b334fd55be9",
+      "size": 10221,
+      "type": "file"
+    },
+    "jdk.random.jmod": {
+      "mode": "0o644",
+      "sha256": "e9b374bca4f6ccc9b6a92f4f3ddb43b47dcddbd6af97b46bd464ed0261951ea0",
+      "size": 29477,
+      "type": "file"
+    },
+    "jdk.sctp.jmod": {
+      "mode": "0o644",
+      "sha256": "5d95539c1e48563c4fa045d741f8051bdd4ed4ac24aae365d4875f3cae13adab",
+      "size": 93457,
+      "type": "file"
+    },
+    "jdk.security.auth.jmod": {
+      "mode": "0o644",
+      "sha256": "f856f102525420a8be0491917526101906d6fdfe73404ffb204e4d8a39029d42",
+      "size": 75099,
+      "type": "file"
+    },
+    "jdk.security.jgss.jmod": {
+      "mode": "0o644",
+      "sha256": "a85002ada4c4bc97ca550698a0d53191c6034d57145122a75bf3544701246993",
+      "size": 32879,
+      "type": "file"
+    },
+    "jdk.unsupported.desktop.jmod": {
+      "mode": "0o644",
+      "sha256": "0a60945f5e12eafec6a03d1b92badb9fa19f26af0d725d59495bd84215c5a884",
+      "size": 21752,
+      "type": "file"
+    },
+    "jdk.unsupported.jmod": {
+      "mode": "0o644",
+      "sha256": "7dbe51bf64d9b9e5f6e87d3042413b335ced61b99325750b52dacb9adbc5bb6f",
+      "size": 25230,
+      "type": "file"
+    },
+    "jdk.xml.dom.jmod": {
+      "mode": "0o644",
+      "sha256": "d0684b86dd827be5fcc49cf44aacf8fb9ed829f023ae002e075460f462e475bf",
+      "size": 49965,
+      "type": "file"
+    },
+    "jdk.zipfs.jmod": {
+      "mode": "0o644",
+      "sha256": "4ef65e80e2caa4c028fc8cca474a08d782ddfea046d7c035b3485213760bfd62",
+      "size": 112492,
+      "type": "file"
+    }
+  },
+  "base_preservation": {
+    "all_changes_confined_to_owned_classes_and_descriptor": true,
+    "changed_entries": [
+      "classes/module-info.class"
+    ],
+    "new_entry_count": 7622,
+    "original_entry_count": 7622,
+    "unchanged_entry_count": 7621
+  },
+  "classification": "hybrid qualification image: stock Java 21 modules/native payload with four source-compiled M3 compiler owners, actual target descriptor and supported java.base module-hash regeneration; not a full source-built M3 JDK",
+  "compiler_preservation": {
+    "all_changes_confined_to_owned_classes_and_descriptor": true,
+    "changed_entries": [
+      "classes/com/sun/source/util/M3AST$Consumer.class",
+      "classes/com/sun/source/util/M3AST$Factory.class",
+      "classes/com/sun/source/util/M3AST$Phase.class",
+      "classes/com/sun/source/util/M3AST$Projection.class",
+      "classes/com/sun/source/util/M3AST$Source.class",
+      "classes/com/sun/source/util/M3AST$Summary.class",
+      "classes/com/sun/source/util/M3AST$Unit.class",
+      "classes/com/sun/source/util/M3AST.class",
+      "classes/com/sun/tools/javac/m3/M3ASTPC$1.class",
+      "classes/com/sun/tools/javac/m3/M3ASTPC$LiveUnit$Failure.class",
+      "classes/com/sun/tools/javac/m3/M3ASTPC$LiveUnit.class",
+      "classes/com/sun/tools/javac/m3/M3ASTPC$Seal.class",
+      "classes/com/sun/tools/javac/m3/M3ASTPC$Session.class",
+      "classes/com/sun/tools/javac/m3/M3ASTPC$Trace.class",
+      "classes/com/sun/tools/javac/m3/M3ASTPC.class",
+      "classes/com/sun/tools/javac/m3/M3PrimitiveImageCompiler$1.class",
+      "classes/com/sun/tools/javac/m3/M3PrimitiveImageCompiler$2.class",
+      "classes/com/sun/tools/javac/m3/M3PrimitiveImageCompiler$3.class",
+      "classes/com/sun/tools/javac/m3/M3PrimitiveImageCompiler$Entry.class",
+      "classes/com/sun/tools/javac/m3/M3PrimitiveImageCompiler.class",
+      "classes/com/sun/tools/javac/main/JavaCompiler$1.class",
+      "classes/com/sun/tools/javac/main/JavaCompiler$1MethodBodyRemover.class",
+      "classes/com/sun/tools/javac/main/JavaCompiler$1ScanNested.class",
+      "classes/com/sun/tools/javac/main/JavaCompiler$2.class",
+      "classes/com/sun/tools/javac/main/JavaCompiler$InitialFileParser.class",
+      "classes/com/sun/tools/javac/main/JavaCompiler.class",
+      "classes/module-info.class"
+    ],
+    "new_entry_count": 1620,
+    "original_entry_count": 1600,
+    "unchanged_entry_count": 1593
+  },
+  "descriptor": {
+    "java.base": {
+      "InnerClasses": {
+        "raw_sha256": "1ecbb7785663239be83cd35592a8d4cc95606fd0ff4f390dfa8efd61153617cf"
+      },
+      "Module": {
+        "exports": [
+          [
+            "com/sun/crypto/provider",
+            0,
+            [
+              "jdk.crypto.cryptoki"
+            ]
+          ],
+          [
+            "com/sun/security/ntlm",
+            0,
+            [
+              "java.security.sasl"
+            ]
+          ],
+          [
+            "java/io",
+            0,
+            []
+          ],
+          [
+            "java/lang",
+            0,
+            []
+          ],
+          [
+            "java/lang/annotation",
+            0,
+            []
+          ],
+          [
+            "java/lang/constant",
+            0,
+            []
+          ],
+          [
+            "java/lang/foreign",
+            0,
+            []
+          ],
+          [
+            "java/lang/invoke",
+            0,
+            []
+          ],
+          [
+            "java/lang/module",
+            0,
+            []
+          ],
+          [
+            "java/lang/ref",
+            0,
+            []
+          ],
+          [
+            "java/lang/reflect",
+            0,
+            []
+          ],
+          [
+            "java/lang/runtime",
+            0,
+            []
+          ],
+          [
+            "java/math",
+            0,
+            []
+          ],
+          [
+            "java/net",
+            0,
+            []
+          ],
+          [
+            "java/net/spi",
+            0,
+            []
+          ],
+          [
+            "java/nio",
+            0,
+            []
+          ],
+          [
+            "java/nio/channels",
+            0,
+            []
+          ],
+          [
+            "java/nio/channels/spi",
+            0,
+            []
+          ],
+          [
+            "java/nio/charset",
+            0,
+            []
+          ],
+          [
+            "java/nio/charset/spi",
+            0,
+            []
+          ],
+          [
+            "java/nio/file",
+            0,
+            []
+          ],
+          [
+            "java/nio/file/attribute",
+            0,
+            []
+          ],
+          [
+            "java/nio/file/spi",
+            0,
+            []
+          ],
+          [
+            "java/security",
+            0,
+            []
+          ],
+          [
+            "java/security/cert",
+            0,
+            []
+          ],
+          [
+            "java/security/interfaces",
+            0,
+            []
+          ],
+          [
+            "java/security/spec",
+            0,
+            []
+          ],
+          [
+            "java/text",
+            0,
+            []
+          ],
+          [
+            "java/text/spi",
+            0,
+            []
+          ],
+          [
+            "java/time",
+            0,
+            []
+          ],
+          [
+            "java/time/chrono",
+            0,
+            []
+          ],
+          [
+            "java/time/format",
+            0,
+            []
+          ],
+          [
+            "java/time/temporal",
+            0,
+            []
+          ],
+          [
+            "java/time/zone",
+            0,
+            []
+          ],
+          [
+            "java/util",
+            0,
+            []
+          ],
+          [
+            "java/util/concurrent",
+            0,
+            []
+          ],
+          [
+            "java/util/concurrent/atomic",
+            0,
+            []
+          ],
+          [
+            "java/util/concurrent/locks",
+            0,
+            []
+          ],
+          [
+            "java/util/function",
+            0,
+            []
+          ],
+          [
+            "java/util/jar",
+            0,
+            []
+          ],
+          [
+            "java/util/random",
+            0,
+            []
+          ],
+          [
+            "java/util/regex",
+            0,
+            []
+          ],
+          [
+            "java/util/spi",
+            0,
+            []
+          ],
+          [
+            "java/util/stream",
+            0,
+            []
+          ],
+          [
+            "java/util/zip",
+            0,
+            []
+          ],
+          [
+            "javax/crypto",
+            0,
+            []
+          ],
+          [
+            "javax/crypto/interfaces",
+            0,
+            []
+          ],
+          [
+            "javax/crypto/spec",
+            0,
+            []
+          ],
+          [
+            "javax/net",
+            0,
+            []
+          ],
+          [
+            "javax/net/ssl",
+            0,
+            []
+          ],
+          [
+            "javax/security/auth",
+            0,
+            []
+          ],
+          [
+            "javax/security/auth/callback",
+            0,
+            []
+          ],
+          [
+            "javax/security/auth/login",
+            0,
+            []
+          ],
+          [
+            "javax/security/auth/spi",
+            0,
+            []
+          ],
+          [
+            "javax/security/auth/x500",
+            0,
+            []
+          ],
+          [
+            "javax/security/cert",
+            0,
+            []
+          ],
+          [
+            "jdk/internal/access",
+            0,
+            [
+              "java.desktop",
+              "java.logging",
+              "java.management",
+              "java.naming",
+              "java.rmi",
+              "jdk.charsets",
+              "jdk.crypto.cryptoki",
+              "jdk.jartool",
+              "jdk.jfr",
+              "jdk.jlink",
+              "jdk.net",
+              "jdk.sctp"
+            ]
+          ],
+          [
+            "jdk/internal/classfile",
+            0,
+            [
+              "jdk.jartool",
+              "jdk.jlink",
+              "jdk.jshell"
+            ]
+          ],
+          [
+            "jdk/internal/classfile/attribute",
+            0,
+            [
+              "jdk.jartool",
+              "jdk.jlink"
+            ]
+          ],
+          [
+            "jdk/internal/classfile/constantpool",
+            0,
+            [
+              "jdk.jartool",
+              "jdk.jlink"
+            ]
+          ],
+          [
+            "jdk/internal/classfile/instruction",
+            0,
+            [
+              "jdk.jlink",
+              "jdk.jshell"
+            ]
+          ],
+          [
+            "jdk/internal/event",
+            0,
+            [
+              "jdk.jfr"
+            ]
+          ],
+          [
+            "jdk/internal/foreign",
+            0,
+            [
+              "jdk.incubator.vector"
+            ]
+          ],
+          [
+            "jdk/internal/io",
+            0,
+            [
+              "jdk.internal.le",
+              "jdk.jshell"
+            ]
+          ],
+          [
+            "jdk/internal/javac",
+            0,
+            [
+              "java.compiler",
+              "jdk.compiler",
+              "jdk.incubator.vector",
+              "jdk.jshell"
+            ]
+          ],
+          [
+            "jdk/internal/jimage",
+            0,
+            [
+              "jdk.jlink"
+            ]
+          ],
+          [
+            "jdk/internal/jimage/decompressor",
+            0,
+            [
+              "jdk.jlink"
+            ]
+          ],
+          [
+            "jdk/internal/jmod",
+            0,
+            [
+              "jdk.compiler",
+              "jdk.jlink"
+            ]
+          ],
+          [
+            "jdk/internal/loader",
+            0,
+            [
+              "java.instrument",
+              "java.logging",
+              "java.naming"
+            ]
+          ],
+          [
+            "jdk/internal/logger",
+            0,
+            [
+              "java.logging"
+            ]
+          ],
+          [
+            "jdk/internal/misc",
+            0,
+            [
+              "java.desktop",
+              "java.logging",
+              "java.management",
+              "java.naming",
+              "java.net.http",
+              "java.rmi",
+              "java.security.jgss",
+              "jdk.attach",
+              "jdk.charsets",
+              "jdk.compiler",
+              "jdk.crypto.cryptoki",
+              "jdk.incubator.vector",
+              "jdk.internal.vm.ci",
+              "jdk.jfr",
+              "jdk.jshell",
+              "jdk.nio.mapmode",
+              "jdk.unsupported"
+            ]
+          ],
+          [
+            "jdk/internal/module",
+            0,
+            [
+              "java.instrument",
+              "java.management.rmi",
+              "jdk.jartool",
+              "jdk.jfr",
+              "jdk.jlink",
+              "jdk.jpackage"
+            ]
+          ],
+          [
+            "jdk/internal/org/objectweb/asm",
+            0,
+            [
+              "jdk.jfr"
+            ]
+          ],
+          [
+            "jdk/internal/org/objectweb/asm/commons",
+            0,
+            [
+              "jdk.jfr"
+            ]
+          ],
+          [
+            "jdk/internal/org/objectweb/asm/tree",
+            0,
+            [
+              "jdk.jfr"
+            ]
+          ],
+          [
+            "jdk/internal/org/objectweb/asm/util",
+            0,
+            [
+              "jdk.jfr"
+            ]
+          ],
+          [
+            "jdk/internal/org/xml/sax",
+            0,
+            [
+              "jdk.jfr"
+            ]
+          ],
+          [
+            "jdk/internal/org/xml/sax/helpers",
+            0,
+            [
+              "jdk.jfr"
+            ]
+          ],
+          [
+            "jdk/internal/perf",
+            0,
+            [
+              "java.management",
+              "jdk.internal.jvmstat",
+              "jdk.management.agent"
+            ]
+          ],
+          [
+            "jdk/internal/platform",
+            0,
+            [
+              "jdk.jfr",
+              "jdk.management"
+            ]
+          ],
+          [
+            "jdk/internal/ref",
+            0,
+            [
+              "java.desktop",
+              "java.net.http",
+              "jdk.naming.dns"
+            ]
+          ],
+          [
+            "jdk/internal/reflect",
+            0,
+            [
+              "java.logging",
+              "java.sql",
+              "java.sql.rowset",
+              "jdk.dynalink",
+              "jdk.internal.vm.ci",
+              "jdk.unsupported"
+            ]
+          ],
+          [
+            "jdk/internal/util",
+            0,
+            [
+              "java.desktop",
+              "java.prefs",
+              "java.security.jgss",
+              "java.smartcardio",
+              "jdk.charsets",
+              "jdk.jlink",
+              "jdk.jpackage",
+              "jdk.net"
+            ]
+          ],
+          [
+            "jdk/internal/util/random",
+            0,
+            [
+              "jdk.random"
+            ]
+          ],
+          [
+            "jdk/internal/util/xml",
+            0,
+            [
+              "jdk.jfr"
+            ]
+          ],
+          [
+            "jdk/internal/util/xml/impl",
+            0,
+            [
+              "jdk.jfr"
+            ]
+          ],
+          [
+            "jdk/internal/vm",
+            0,
+            [
+              "java.management",
+              "jdk.internal.jvmstat",
+              "jdk.internal.vm.ci",
+              "jdk.management",
+              "jdk.management.agent"
+            ]
+          ],
+          [
+            "jdk/internal/vm/annotation",
+            0,
+            [
+              "java.instrument",
+              "jdk.incubator.vector",
+              "jdk.internal.vm.ci",
+              "jdk.jfr",
+              "jdk.unsupported"
+            ]
+          ],
+          [
+            "jdk/internal/vm/vector",
+            0,
+            [
+              "jdk.incubator.vector"
+            ]
+          ],
+          [
+            "sun/invoke/util",
+            0,
+            [
+              "jdk.compiler"
+            ]
+          ],
+          [
+            "sun/net",
+            0,
+            [
+              "java.net.http",
+              "jdk.naming.dns"
+            ]
+          ],
+          [
+            "sun/net/dns",
+            0,
+            [
+              "java.security.jgss",
+              "jdk.naming.dns"
+            ]
+          ],
+          [
+            "sun/net/ext",
+            0,
+            [
+              "jdk.net"
+            ]
+          ],
+          [
+            "sun/net/util",
+            0,
+            [
+              "java.desktop",
+              "java.net.http",
+              "jdk.jconsole",
+              "jdk.sctp"
+            ]
+          ],
+          [
+            "sun/net/www",
+            0,
+            [
+              "java.net.http",
+              "jdk.jartool"
+            ]
+          ],
+          [
+            "sun/net/www/protocol/http",
+            0,
+            [
+              "java.security.jgss"
+            ]
+          ],
+          [
+            "sun/nio/ch",
+            0,
+            [
+              "java.management",
+              "jdk.crypto.cryptoki",
+              "jdk.net",
+              "jdk.sctp"
+            ]
+          ],
+          [
+            "sun/nio/cs",
+            0,
+            [
+              "java.desktop",
+              "jdk.charsets"
+            ]
+          ],
+          [
+            "sun/nio/fs",
+            0,
+            [
+              "jdk.net"
+            ]
+          ],
+          [
+            "sun/reflect/annotation",
+            0,
+            [
+              "jdk.compiler"
+            ]
+          ],
+          [
+            "sun/reflect/generics/reflectiveObjects",
+            0,
+            [
+              "java.desktop"
+            ]
+          ],
+          [
+            "sun/reflect/misc",
+            0,
+            [
+              "java.datatransfer",
+              "java.desktop",
+              "java.management",
+              "java.management.rmi",
+              "java.rmi",
+              "java.sql.rowset"
+            ]
+          ],
+          [
+            "sun/security/action",
+            0,
+            [
+              "java.desktop",
+              "java.security.jgss",
+              "jdk.crypto.ec"
+            ]
+          ],
+          [
+            "sun/security/internal/interfaces",
+            0,
+            [
+              "jdk.crypto.cryptoki"
+            ]
+          ],
+          [
+            "sun/security/internal/spec",
+            0,
+            [
+              "jdk.crypto.cryptoki"
+            ]
+          ],
+          [
+            "sun/security/jca",
+            0,
+            [
+              "java.smartcardio",
+              "jdk.crypto.cryptoki",
+              "jdk.crypto.ec",
+              "jdk.naming.dns"
+            ]
+          ],
+          [
+            "sun/security/pkcs",
+            0,
+            [
+              "jdk.crypto.ec",
+              "jdk.jartool"
+            ]
+          ],
+          [
+            "sun/security/provider",
+            0,
+            [
+              "java.rmi",
+              "java.security.jgss",
+              "jdk.crypto.cryptoki",
+              "jdk.crypto.ec",
+              "jdk.security.auth"
+            ]
+          ],
+          [
+            "sun/security/provider/certpath",
+            0,
+            [
+              "java.naming",
+              "jdk.jartool"
+            ]
+          ],
+          [
+            "sun/security/rsa",
+            0,
+            [
+              "jdk.crypto.cryptoki"
+            ]
+          ],
+          [
+            "sun/security/timestamp",
+            0,
+            [
+              "jdk.jartool"
+            ]
+          ],
+          [
+            "sun/security/tools",
+            0,
+            [
+              "jdk.jartool"
+            ]
+          ],
+          [
+            "sun/security/util",
+            0,
+            [
+              "java.desktop",
+              "java.naming",
+              "java.rmi",
+              "java.security.jgss",
+              "java.security.sasl",
+              "java.smartcardio",
+              "java.xml.crypto",
+              "jdk.crypto.cryptoki",
+              "jdk.crypto.ec",
+              "jdk.jartool",
+              "jdk.security.auth",
+              "jdk.security.jgss"
+            ]
+          ],
+          [
+            "sun/security/util/math",
+            0,
+            [
+              "jdk.crypto.ec"
+            ]
+          ],
+          [
+            "sun/security/util/math/intpoly",
+            0,
+            [
+              "jdk.crypto.ec"
+            ]
+          ],
+          [
+            "sun/security/validator",
+            0,
+            [
+              "jdk.jartool"
+            ]
+          ],
+          [
+            "sun/security/x509",
+            0,
+            [
+              "jdk.crypto.cryptoki",
+              "jdk.crypto.ec",
+              "jdk.jartool"
+            ]
+          ],
+          [
+            "sun/util/cldr",
+            0,
+            [
+              "jdk.jlink"
+            ]
+          ],
+          [
+            "sun/util/locale/provider",
+            0,
+            [
+              "java.desktop",
+              "jdk.jlink",
+              "jdk.localedata"
+            ]
+          ],
+          [
+            "sun/util/logging",
+            0,
+            [
+              "java.desktop",
+              "java.logging",
+              "java.prefs"
+            ]
+          ],
+          [
+            "sun/util/resources",
+            0,
+            [
+              "jdk.localedata"
+            ]
+          ]
+        ],
+        "flags": 0,
+        "name": "java.base",
+        "opens": [],
+        "provides": [
+          [
+            "java/nio/file/spi/FileSystemProvider",
+            [
+              "jdk/internal/jrtfs/JrtFileSystemProvider"
+            ]
+          ],
+          [
+            "java/util/random/RandomGenerator",
+            [
+              "java/security/SecureRandom",
+              "java/util/Random",
+              "java/util/SplittableRandom"
+            ]
+          ]
+        ],
+        "requires": [],
+        "uses": [
+          "java/lang/System$LoggerFinder",
+          "java/net/ContentHandlerFactory",
+          "java/net/spi/InetAddressResolverProvider",
+          "java/net/spi/URLStreamHandlerProvider",
+          "java/nio/channels/spi/AsynchronousChannelProvider",
+          "java/nio/channels/spi/SelectorProvider",
+          "java/nio/charset/spi/CharsetProvider",
+          "java/nio/file/spi/FileSystemProvider",
+          "java/nio/file/spi/FileTypeDetector",
+          "java/security/Provider",
+          "java/text/spi/BreakIteratorProvider",
+          "java/text/spi/CollatorProvider",
+          "java/text/spi/DateFormatProvider",
+          "java/text/spi/DateFormatSymbolsProvider",
+          "java/text/spi/DecimalFormatSymbolsProvider",
+          "java/text/spi/NumberFormatProvider",
+          "java/time/chrono/AbstractChronology",
+          "java/time/chrono/Chronology",
+          "java/time/zone/ZoneRulesProvider",
+          "java/util/random/RandomGenerator",
+          "java/util/spi/CalendarDataProvider",
+          "java/util/spi/CalendarNameProvider",
+          "java/util/spi/CurrencyNameProvider",
+          "java/util/spi/LocaleNameProvider",
+          "java/util/spi/ResourceBundleControlProvider",
+          "java/util/spi/ResourceBundleProvider",
+          "java/util/spi/TimeZoneNameProvider",
+          "java/util/spi/ToolProvider",
+          "javax/security/auth/spi/LoginModule",
+          "jdk/internal/io/JdkConsoleProvider",
+          "jdk/internal/logger/DefaultLoggerFinder",
+          "sun/text/spi/JavaTimeDateTimePatternProvider",
+          "sun/util/locale/provider/LocaleDataMetaInfo",
+          "sun/util/resources/LocaleData$CommonResourceBundleProvider",
+          "sun/util/resources/LocaleData$SupplementaryResourceBundleProvider",
+          "sun/util/spi/CalendarProvider"
+        ],
+        "version": "21.0.12.1"
+      },
+      "ModuleHashes": {
+        "algorithm": "SHA-256",
+        "hashes": {
+          "java.datatransfer": "886b66f7622a2a22a93abb1a913423f0565307fc9bf70a15c890527057f58dcd",
+          "java.desktop": "d03c32fbe0ef8e28d47b6fdd00e08f5e8791fe2b5348c5f9c3a84c33a2cc76fb",
+          "java.instrument": "59009820501e8ebd04566a62714f52e4a41f5a5c4eef339881f4da06a8e8957f",
+          "java.logging": "4a8fd7bb7c77df5db76d39725d5bd4c7d57799be6735979b2b98aa9d408eeb99",
+          "java.management": "4f5148fc5b95bbad54e9dcabf1145af0c8b788acba3e6f2278f9d9872eb9c337",
+          "java.management.rmi": "023fe879cb7e86206bbd0e0e202c435a31d0f14de185fcb7cb241548021afb22",
+          "java.naming": "1b0edaef12b8399c1b62987fdab8a4ebedcda1adba23f48ad62a28942dd7eee8",
+          "java.net.http": "be7f9d57ab96513a18de1b285f6591c726a947943f29e55e166b020be592f5cd",
+          "java.prefs": "d2d568d7ac62786a69b29eda02a42b9db7b8f21615be59aa5fc293fb6ec2a435",
+          "java.rmi": "bf978b648c9c7b7be8da27e4afc16135e2fd89044a8343b8d0a9cb80e98df978",
+          "java.scripting": "7eb0cae0dc9d11d80d1aac2b2247d54ca265a97d87cd0ba60c8d3cce3a141830",
+          "java.se": "7baf7067f3ebd49652a8c99e23208b626401040bf165bbd697d4bedd5f697d65",
+          "java.security.jgss": "7d0431bd965b78f88bc0121d7f4e45f1fe087a5dcaf1380a1b2837b27b1d5ae9",
+          "java.security.sasl": "c1f05a1c5ce74ecfcb7e338893da513128921d5f26c568e7fd39a5459d1ed503",
+          "java.smartcardio": "7a5eea1fcaf25995d9a61ef130f278bf692e3cce50333d366ecd3b71df8567df",
+          "java.sql": "c53635bf523595e5b90edb386be02c9958fbc7bf8f10b5f0255c44eefb33bf15",
+          "java.sql.rowset": "f0041bbf49a41541bfff40671fb682d77650d55ba21ce3c627fcd81e05194952",
+          "java.transaction.xa": "70d7d5dcfd2f5221012871f1c6c8b6b8292fd15d5f0997f2551c4203e20d06b1",
+          "java.xml": "f4f13b61f7fda81257488422be98ac55353931af5dd919555a9b353aace6c07e",
+          "java.xml.crypto": "2d32d73ee8f8715045f7a5dd25450dfde98a3b968e0d3cb7b6dd9a7fc7bd723e",
+          "jdk.accessibility": "dc9a2573073e75bd276f27e5ab69058ec064a15e5f12de44e36b5bb751433aaa",
+          "jdk.attach": "1fe3ac8d3a3e4e32e6c23e8188434068825f4fd16b0aab05b334da8f1f0aa24c",
+          "jdk.charsets": "f8823748484d6face9af28925595d8727f796e1446a5ee20d19c783352f776e0",
+          "jdk.compiler": "8a8cff2c03383fffa5a8b70fdd6d0b838e37c11ed7ae60f499ede9729e441921",
+          "jdk.crypto.cryptoki": "c08a8afa506219be6f7df568d30a0727d65f37035098fe6fa92e6099448beb01",
+          "jdk.crypto.ec": "ea757d0f5dc5f1921853ef9233097103d0c0fc8609579e6e9ccdf5811deedee7",
+          "jdk.dynalink": "d04cd2ddb99e4746911195237472997c87a9fda372a94cc9235f39ba781684fe",
+          "jdk.editpad": "7f439529dbcc8692272f83d1a6a589dd26c03cd9a9a12ebde68853a04f9e51c6",
+          "jdk.hotspot.agent": "ba49fbe965e29f193cd90a3ea8552a64ea14ba98ff495f03bc21cacb72cb951a",
+          "jdk.httpserver": "6807b34f2498a830c1b23bcc4718508a753ba4ef0b6f618e2e7128800aee8def",
+          "jdk.incubator.vector": "caf912bd1365fe821c4eabea02954726e6897e6ab78f3bcb9a4eb902415f451f",
+          "jdk.internal.ed": "aebcf717fd70dbadfcdf98d149bb7414fabcc22ad65495d8cf3993f5a7636cb5",
+          "jdk.internal.jvmstat": "aa0466d35f3beb4187b1d02b006ac0991c9600c7d4c0c33bed0f2eec776dd01a",
+          "jdk.internal.le": "340508bcd3cb6e813ba7ccb645ca89457130681380d01912d8899bd95ec85972",
+          "jdk.internal.opt": "1ae3d254638dcc04f08bfcf115f6d088d091118223a1126bd2dc3001bc58a504",
+          "jdk.internal.vm.ci": "b20b12fd93a07bef6052fa23aa284857af46253e3ae40fcc0019213a2d7ca398",
+          "jdk.jartool": "88707daae3305d26cfccbd1906885e09609353ca085460c1d601263272bafc4b",
+          "jdk.javadoc": "42652aa030e925326efe35943fd16b06106829db8b46a2285040c378023ecad3",
+          "jdk.jcmd": "352ab1ee08acc79a90e2011d44fa46249f780b520f9e8bb98efabda078bced36",
+          "jdk.jconsole": "768869d2ffc81f7bbee654fcf21b49c0f734ea18c19cec9a85381287afda15a8",
+          "jdk.jdeps": "00b5e3a6952cd4da160f9be32b26838482e5b31055fd5345826187190c0e858c",
+          "jdk.jdi": "d2372fafcb536c3bed9c3134baa60563af69f17711f39eac66591f8c2294f7fd",
+          "jdk.jdwp.agent": "2b6e2849ea4703d465258e9bf34d48fca7b33886d50f8849333da97054a3636e",
+          "jdk.jfr": "751bee75fe5c580784e236dc8b3e15b3ce6534a72779030c423db9f304cfaf6a",
+          "jdk.jlink": "aa136c670eb7dddaa1ea490527e3f06167f680d37721472211f62a421e3c79a3",
+          "jdk.jpackage": "7b28bf9af6ba6399983df3f443597fb545c618eff28db4ee84db0b5fe18a6776",
+          "jdk.jshell": "fbb47a0cf8d16cab80d1dc7c98553ffbd4cc5c34e981b7bd6b7ca18463171570",
+          "jdk.jsobject": "31052808e328a32e4cc7e26a96c73152afbe920a75d6c39f8d05624a6a2fd37b",
+          "jdk.jstatd": "e570536a37b092e68a4eb7b98ea97d791e626d91d0f23939f51412d75f458898",
+          "jdk.localedata": "179593bea644d5447f61b526a374cc6740cdef2a7996082dad6d91c8d0d75ee5",
+          "jdk.management": "8e4dcd69d3ec9674a4729583ab9fefa88dffcedcea915061b82e308b1033f95c",
+          "jdk.management.agent": "2efd7abc78452ca4b4c529e4aa6ad30edef201ffb47598d6f09af67da1930535",
+          "jdk.management.jfr": "81bbe34cea2078a78d44a34c1849d9f44c391cc8589f6e542b26d1b4842219b1",
+          "jdk.naming.dns": "d4be63c8359798695004e6dbebf4591d8756195f332586b9c844006aec048585",
+          "jdk.naming.rmi": "233b89c52fb15d1f394226affd3687810d9428474d3456c8780e29ffa7b2c448",
+          "jdk.net": "d1c070216b8a1a8b6fae475424131b40b881e4ed66ec4df916102d194fb1c654",
+          "jdk.nio.mapmode": "1f61cbb883447f781f550204bf31f7ea362bb1397624b877c3b99c3d7391d2d0",
+          "jdk.random": "d20dad3a051fef7f780089b89dbe9c1a0b00e7b0d5d2e82267a6d076fb5d29cb",
+          "jdk.sctp": "32a8fb9e736d912f2c7ac4497c246f04527eecde3400703f7f2fe1dbf009edf9",
+          "jdk.security.auth": "0c9f51ed503377fb0040ccec8176967e1ee217287ed2ffb32b6fb6542938ef34",
+          "jdk.security.jgss": "22f39479ef9a2c641ae38ca4cd01bb921a7053990c592887262e0ab68949b697",
+          "jdk.unsupported": "8f06b5caa837ed04eeef539987bfb1ef6c10ab1b1c56165c76d35a35bda76792",
+          "jdk.unsupported.desktop": "0cf55ec7714ccef2d7701b91e6328c7a5f482639cc994a31a21f16cb21cb3130",
+          "jdk.xml.dom": "a9f6ba14bc7a828f4d48b97442de5a811b3e19141e2ec7a67d75f18eedf65278",
+          "jdk.zipfs": "ed11509f6c36ac6f361f2aaf98e970282bae4b048b85ae8e0711f5ca6f307102"
+        }
+      },
+      "ModulePackages": [
+        "com/sun/crypto/provider",
+        "com/sun/security/ntlm",
+        "java/io",
+        "java/lang",
+        "java/lang/annotation",
+        "java/lang/constant",
+        "java/lang/foreign",
+        "java/lang/foreign/snippets",
+        "java/lang/invoke",
+        "java/lang/module",
+        "java/lang/ref",
+        "java/lang/reflect",
+        "java/lang/runtime",
+        "java/math",
+        "java/net",
+        "java/net/spi",
+        "java/nio",
+        "java/nio/channels",
+        "java/nio/channels/spi",
+        "java/nio/charset",
+        "java/nio/charset/spi",
+        "java/nio/file",
+        "java/nio/file/attribute",
+        "java/nio/file/spi",
+        "java/security",
+        "java/security/cert",
+        "java/security/interfaces",
+        "java/security/spec",
+        "java/text",
+        "java/text/spi",
+        "java/time",
+        "java/time/chrono",
+        "java/time/format",
+        "java/time/temporal",
+        "java/time/zone",
+        "java/util",
+        "java/util/concurrent",
+        "java/util/concurrent/atomic",
+        "java/util/concurrent/locks",
+        "java/util/function",
+        "java/util/jar",
+        "java/util/random",
+        "java/util/regex",
+        "java/util/spi",
+        "java/util/stream",
+        "java/util/zip",
+        "javax/crypto",
+        "javax/crypto/interfaces",
+        "javax/crypto/spec",
+        "javax/net",
+        "javax/net/ssl",
+        "javax/security/auth",
+        "javax/security/auth/callback",
+        "javax/security/auth/login",
+        "javax/security/auth/spi",
+        "javax/security/auth/x500",
+        "javax/security/cert",
+        "jdk/internal",
+        "jdk/internal/access",
+        "jdk/internal/access/foreign",
+        "jdk/internal/classfile",
+        "jdk/internal/classfile/attribute",
+        "jdk/internal/classfile/components",
+        "jdk/internal/classfile/constantpool",
+        "jdk/internal/classfile/impl",
+        "jdk/internal/classfile/impl/verifier",
+        "jdk/internal/classfile/instruction",
+        "jdk/internal/event",
+        "jdk/internal/foreign",
+        "jdk/internal/foreign/abi",
+        "jdk/internal/foreign/abi/aarch64",
+        "jdk/internal/foreign/abi/aarch64/linux",
+        "jdk/internal/foreign/abi/aarch64/macos",
+        "jdk/internal/foreign/abi/aarch64/windows",
+        "jdk/internal/foreign/abi/fallback",
+        "jdk/internal/foreign/abi/ppc64",
+        "jdk/internal/foreign/abi/ppc64/linux",
+        "jdk/internal/foreign/abi/riscv64",
+        "jdk/internal/foreign/abi/riscv64/linux",
+        "jdk/internal/foreign/abi/s390",
+        "jdk/internal/foreign/abi/s390/linux",
+        "jdk/internal/foreign/abi/x64",
+        "jdk/internal/foreign/abi/x64/sysv",
+        "jdk/internal/foreign/abi/x64/windows",
+        "jdk/internal/foreign/layout",
+        "jdk/internal/icu/impl",
+        "jdk/internal/icu/impl/data/icudt72b",
+        "jdk/internal/icu/lang",
+        "jdk/internal/icu/text",
+        "jdk/internal/icu/util",
+        "jdk/internal/io",
+        "jdk/internal/javac",
+        "jdk/internal/jimage",
+        "jdk/internal/jimage/decompressor",
+        "jdk/internal/jmod",
+        "jdk/internal/jrtfs",
+        "jdk/internal/loader",
+        "jdk/internal/logger",
+        "jdk/internal/math",
+        "jdk/internal/misc",
+        "jdk/internal/module",
+        "jdk/internal/org/objectweb/asm",
+        "jdk/internal/org/objectweb/asm/commons",
+        "jdk/internal/org/objectweb/asm/signature",
+        "jdk/internal/org/objectweb/asm/tree",
+        "jdk/internal/org/objectweb/asm/tree/analysis",
+        "jdk/internal/org/objectweb/asm/util",
+        "jdk/internal/org/xml/sax",
+        "jdk/internal/org/xml/sax/helpers",
+        "jdk/internal/perf",
+        "jdk/internal/platform",
+        "jdk/internal/platform/cgroupv1",
+        "jdk/internal/platform/cgroupv2",
+        "jdk/internal/ref",
+        "jdk/internal/reflect",
+        "jdk/internal/util",
+        "jdk/internal/util/random",
+        "jdk/internal/util/regex",
+        "jdk/internal/util/xml",
+        "jdk/internal/util/xml/impl",
+        "jdk/internal/vm",
+        "jdk/internal/vm/annotation",
+        "jdk/internal/vm/vector",
+        "sun/invoke",
+        "sun/invoke/empty",
+        "sun/invoke/util",
+        "sun/launcher",
+        "sun/launcher/resources",
+        "sun/net",
+        "sun/net/dns",
+        "sun/net/ext",
+        "sun/net/ftp",
+        "sun/net/ftp/impl",
+        "sun/net/idn",
+        "sun/net/sdp",
+        "sun/net/smtp",
+        "sun/net/spi",
+        "sun/net/util",
+        "sun/net/www",
+        "sun/net/www/content/text",
+        "sun/net/www/http",
+        "sun/net/www/protocol/file",
+        "sun/net/www/protocol/ftp",
+        "sun/net/www/protocol/http",
+        "sun/net/www/protocol/http/ntlm",
+        "sun/net/www/protocol/https",
+        "sun/net/www/protocol/jar",
+        "sun/net/www/protocol/jmod",
+        "sun/net/www/protocol/jrt",
+        "sun/net/www/protocol/mailto",
+        "sun/nio",
+        "sun/nio/ch",
+        "sun/nio/cs",
+        "sun/nio/fs",
+        "sun/reflect/annotation",
+        "sun/reflect/generics/factory",
+        "sun/reflect/generics/parser",
+        "sun/reflect/generics/reflectiveObjects",
+        "sun/reflect/generics/repository",
+        "sun/reflect/generics/scope",
+        "sun/reflect/generics/tree",
+        "sun/reflect/generics/visitor",
+        "sun/reflect/misc",
+        "sun/security/action",
+        "sun/security/internal/interfaces",
+        "sun/security/internal/spec",
+        "sun/security/jca",
+        "sun/security/pkcs",
+        "sun/security/pkcs10",
+        "sun/security/pkcs12",
+        "sun/security/provider",
+        "sun/security/provider/certpath",
+        "sun/security/provider/certpath/ssl",
+        "sun/security/rsa",
+        "sun/security/ssl",
+        "sun/security/timestamp",
+        "sun/security/tools",
+        "sun/security/tools/keytool",
+        "sun/security/util",
+        "sun/security/util/math",
+        "sun/security/util/math/intpoly",
+        "sun/security/validator",
+        "sun/security/x509",
+        "sun/text",
+        "sun/text/resources",
+        "sun/text/resources/cldr",
+        "sun/text/spi",
+        "sun/util",
+        "sun/util/calendar",
+        "sun/util/cldr",
+        "sun/util/locale",
+        "sun/util/locale/provider",
+        "sun/util/logging",
+        "sun/util/resources",
+        "sun/util/resources/cldr",
+        "sun/util/spi"
+      ],
+      "ModuleTarget": "linux-amd64",
+      "SourceFile": "module-info.java",
+      "class_flags": 32768,
+      "major": 65,
+      "minor": 0
+    },
+    "jdk.compiler": {
+      "InnerClasses": {
+        "raw_sha256": "389ab8db1598c1d80eb197ca549dfb0b75a098eb52034c0938e4763f1a6ba7cc"
+      },
+      "Module": {
+        "exports": [
+          [
+            "com/sun/source/doctree",
+            0,
+            []
+          ],
+          [
+            "com/sun/source/tree",
+            0,
+            []
+          ],
+          [
+            "com/sun/source/util",
+            0,
+            []
+          ],
+          [
+            "com/sun/tools/doclint",
+            0,
+            [
+              "jdk.javadoc"
+            ]
+          ],
+          [
+            "com/sun/tools/javac",
+            0,
+            []
+          ],
+          [
+            "com/sun/tools/javac/api",
+            0,
+            [
+              "jdk.javadoc",
+              "jdk.jshell"
+            ]
+          ],
+          [
+            "com/sun/tools/javac/code",
+            0,
+            [
+              "jdk.javadoc",
+              "jdk.jshell"
+            ]
+          ],
+          [
+            "com/sun/tools/javac/comp",
+            0,
+            [
+              "jdk.javadoc",
+              "jdk.jshell"
+            ]
+          ],
+          [
+            "com/sun/tools/javac/file",
+            0,
+            [
+              "jdk.javadoc",
+              "jdk.jdeps"
+            ]
+          ],
+          [
+            "com/sun/tools/javac/jvm",
+            0,
+            [
+              "jdk.javadoc"
+            ]
+          ],
+          [
+            "com/sun/tools/javac/main",
+            0,
+            [
+              "jdk.javadoc",
+              "jdk.jshell"
+            ]
+          ],
+          [
+            "com/sun/tools/javac/model",
+            0,
+            [
+              "jdk.javadoc"
+            ]
+          ],
+          [
+            "com/sun/tools/javac/parser",
+            0,
+            [
+              "jdk.jshell"
+            ]
+          ],
+          [
+            "com/sun/tools/javac/platform",
+            0,
+            [
+              "jdk.javadoc",
+              "jdk.jdeps"
+            ]
+          ],
+          [
+            "com/sun/tools/javac/resources",
+            0,
+            [
+              "jdk.jshell"
+            ]
+          ],
+          [
+            "com/sun/tools/javac/tree",
+            0,
+            [
+              "jdk.javadoc",
+              "jdk.jshell"
+            ]
+          ],
+          [
+            "com/sun/tools/javac/util",
+            0,
+            [
+              "jdk.javadoc",
+              "jdk.jdeps",
+              "jdk.jshell"
+            ]
+          ],
+          [
+            "jdk/internal/shellsupport/doc",
+            0,
+            [
+              "jdk.jshell"
+            ]
+          ]
+        ],
+        "flags": 0,
+        "name": "jdk.compiler",
+        "opens": [],
+        "provides": [
+          [
+            "com/sun/source/util/Plugin",
+            [
+              "com/sun/tools/javac/m3/M3ASTPC"
+            ]
+          ],
+          [
+            "com/sun/tools/javac/platform/PlatformProvider",
+            [
+              "com/sun/tools/javac/platform/JDKPlatformProvider"
+            ]
+          ],
+          [
+            "java/util/spi/ToolProvider",
+            [
+              "com/sun/tools/javac/main/JavacToolProvider"
+            ]
+          ],
+          [
+            "javax/tools/JavaCompiler",
+            [
+              "com/sun/tools/javac/api/JavacTool"
+            ]
+          ],
+          [
+            "javax/tools/Tool",
+            [
+              "com/sun/tools/javac/api/JavacTool"
+            ]
+          ]
+        ],
+        "requires": [
+          [
+            "java.base",
+            32768,
+            "21.0.12.1"
+          ],
+          [
+            "java.compiler",
+            32,
+            "21.0.12.1"
+          ],
+          [
+            "jdk.internal.opt",
+            0,
+            "21.0.12.1"
+          ],
+          [
+            "jdk.zipfs",
+            0,
+            "21.0.12.1"
+          ]
+        ],
+        "uses": [
+          "com/sun/source/util/M3AST$Consumer",
+          "com/sun/source/util/Plugin",
+          "com/sun/tools/doclint/DocLint",
+          "com/sun/tools/javac/platform/PlatformProvider",
+          "javax/annotation/processing/Processor"
+        ],
+        "version": "21.0.12.1"
+      },
+      "ModulePackages": [
+        "com/sun/source/doctree",
+        "com/sun/source/tree",
+        "com/sun/source/util",
+        "com/sun/tools/doclint",
+        "com/sun/tools/javac",
+        "com/sun/tools/javac/api",
+        "com/sun/tools/javac/code",
+        "com/sun/tools/javac/comp",
+        "com/sun/tools/javac/file",
+        "com/sun/tools/javac/jvm",
+        "com/sun/tools/javac/launcher",
+        "com/sun/tools/javac/m3",
+        "com/sun/tools/javac/main",
+        "com/sun/tools/javac/model",
+        "com/sun/tools/javac/parser",
+        "com/sun/tools/javac/platform",
+        "com/sun/tools/javac/processing",
+        "com/sun/tools/javac/resources",
+        "com/sun/tools/javac/tree",
+        "com/sun/tools/javac/util",
+        "jdk/internal/shellsupport/doc",
+        "jdk/internal/shellsupport/doc/resources",
+        "sun/tools/serialver",
+        "sun/tools/serialver/resources"
+      ],
+      "ModuleTarget": "linux-amd64",
+      "SourceFile": "module-info.java",
+      "class_flags": 32768,
+      "major": 65,
+      "minor": 0
+    }
+  },
+  "hash_gate": "supported jmod create/hash; exact original coverage; no bypass",
+  "module_hash_witnesses": {
+    "java.datatransfer": {
+      "computed_sha256": "886b66f7622a2a22a93abb1a913423f0565307fc9bf70a15c890527057f58dcd",
+      "recorded_sha256": "886b66f7622a2a22a93abb1a913423f0565307fc9bf70a15c890527057f58dcd"
+    },
+    "java.desktop": {
+      "computed_sha256": "d03c32fbe0ef8e28d47b6fdd00e08f5e8791fe2b5348c5f9c3a84c33a2cc76fb",
+      "recorded_sha256": "d03c32fbe0ef8e28d47b6fdd00e08f5e8791fe2b5348c5f9c3a84c33a2cc76fb"
+    },
+    "java.instrument": {
+      "computed_sha256": "59009820501e8ebd04566a62714f52e4a41f5a5c4eef339881f4da06a8e8957f",
+      "recorded_sha256": "59009820501e8ebd04566a62714f52e4a41f5a5c4eef339881f4da06a8e8957f"
+    },
+    "java.logging": {
+      "computed_sha256": "4a8fd7bb7c77df5db76d39725d5bd4c7d57799be6735979b2b98aa9d408eeb99",
+      "recorded_sha256": "4a8fd7bb7c77df5db76d39725d5bd4c7d57799be6735979b2b98aa9d408eeb99"
+    },
+    "java.management": {
+      "computed_sha256": "4f5148fc5b95bbad54e9dcabf1145af0c8b788acba3e6f2278f9d9872eb9c337",
+      "recorded_sha256": "4f5148fc5b95bbad54e9dcabf1145af0c8b788acba3e6f2278f9d9872eb9c337"
+    },
+    "java.management.rmi": {
+      "computed_sha256": "023fe879cb7e86206bbd0e0e202c435a31d0f14de185fcb7cb241548021afb22",
+      "recorded_sha256": "023fe879cb7e86206bbd0e0e202c435a31d0f14de185fcb7cb241548021afb22"
+    },
+    "java.naming": {
+      "computed_sha256": "1b0edaef12b8399c1b62987fdab8a4ebedcda1adba23f48ad62a28942dd7eee8",
+      "recorded_sha256": "1b0edaef12b8399c1b62987fdab8a4ebedcda1adba23f48ad62a28942dd7eee8"
+    },
+    "java.net.http": {
+      "computed_sha256": "be7f9d57ab96513a18de1b285f6591c726a947943f29e55e166b020be592f5cd",
+      "recorded_sha256": "be7f9d57ab96513a18de1b285f6591c726a947943f29e55e166b020be592f5cd"
+    },
+    "java.prefs": {
+      "computed_sha256": "d2d568d7ac62786a69b29eda02a42b9db7b8f21615be59aa5fc293fb6ec2a435",
+      "recorded_sha256": "d2d568d7ac62786a69b29eda02a42b9db7b8f21615be59aa5fc293fb6ec2a435"
+    },
+    "java.rmi": {
+      "computed_sha256": "bf978b648c9c7b7be8da27e4afc16135e2fd89044a8343b8d0a9cb80e98df978",
+      "recorded_sha256": "bf978b648c9c7b7be8da27e4afc16135e2fd89044a8343b8d0a9cb80e98df978"
+    },
+    "java.scripting": {
+      "computed_sha256": "7eb0cae0dc9d11d80d1aac2b2247d54ca265a97d87cd0ba60c8d3cce3a141830",
+      "recorded_sha256": "7eb0cae0dc9d11d80d1aac2b2247d54ca265a97d87cd0ba60c8d3cce3a141830"
+    },
+    "java.se": {
+      "computed_sha256": "7baf7067f3ebd49652a8c99e23208b626401040bf165bbd697d4bedd5f697d65",
+      "recorded_sha256": "7baf7067f3ebd49652a8c99e23208b626401040bf165bbd697d4bedd5f697d65"
+    },
+    "java.security.jgss": {
+      "computed_sha256": "7d0431bd965b78f88bc0121d7f4e45f1fe087a5dcaf1380a1b2837b27b1d5ae9",
+      "recorded_sha256": "7d0431bd965b78f88bc0121d7f4e45f1fe087a5dcaf1380a1b2837b27b1d5ae9"
+    },
+    "java.security.sasl": {
+      "computed_sha256": "c1f05a1c5ce74ecfcb7e338893da513128921d5f26c568e7fd39a5459d1ed503",
+      "recorded_sha256": "c1f05a1c5ce74ecfcb7e338893da513128921d5f26c568e7fd39a5459d1ed503"
+    },
+    "java.smartcardio": {
+      "computed_sha256": "7a5eea1fcaf25995d9a61ef130f278bf692e3cce50333d366ecd3b71df8567df",
+      "recorded_sha256": "7a5eea1fcaf25995d9a61ef130f278bf692e3cce50333d366ecd3b71df8567df"
+    },
+    "java.sql": {
+      "computed_sha256": "c53635bf523595e5b90edb386be02c9958fbc7bf8f10b5f0255c44eefb33bf15",
+      "recorded_sha256": "c53635bf523595e5b90edb386be02c9958fbc7bf8f10b5f0255c44eefb33bf15"
+    },
+    "java.sql.rowset": {
+      "computed_sha256": "f0041bbf49a41541bfff40671fb682d77650d55ba21ce3c627fcd81e05194952",
+      "recorded_sha256": "f0041bbf49a41541bfff40671fb682d77650d55ba21ce3c627fcd81e05194952"
+    },
+    "java.transaction.xa": {
+      "computed_sha256": "70d7d5dcfd2f5221012871f1c6c8b6b8292fd15d5f0997f2551c4203e20d06b1",
+      "recorded_sha256": "70d7d5dcfd2f5221012871f1c6c8b6b8292fd15d5f0997f2551c4203e20d06b1"
+    },
+    "java.xml": {
+      "computed_sha256": "f4f13b61f7fda81257488422be98ac55353931af5dd919555a9b353aace6c07e",
+      "recorded_sha256": "f4f13b61f7fda81257488422be98ac55353931af5dd919555a9b353aace6c07e"
+    },
+    "java.xml.crypto": {
+      "computed_sha256": "2d32d73ee8f8715045f7a5dd25450dfde98a3b968e0d3cb7b6dd9a7fc7bd723e",
+      "recorded_sha256": "2d32d73ee8f8715045f7a5dd25450dfde98a3b968e0d3cb7b6dd9a7fc7bd723e"
+    },
+    "jdk.accessibility": {
+      "computed_sha256": "dc9a2573073e75bd276f27e5ab69058ec064a15e5f12de44e36b5bb751433aaa",
+      "recorded_sha256": "dc9a2573073e75bd276f27e5ab69058ec064a15e5f12de44e36b5bb751433aaa"
+    },
+    "jdk.attach": {
+      "computed_sha256": "1fe3ac8d3a3e4e32e6c23e8188434068825f4fd16b0aab05b334da8f1f0aa24c",
+      "recorded_sha256": "1fe3ac8d3a3e4e32e6c23e8188434068825f4fd16b0aab05b334da8f1f0aa24c"
+    },
+    "jdk.charsets": {
+      "computed_sha256": "f8823748484d6face9af28925595d8727f796e1446a5ee20d19c783352f776e0",
+      "recorded_sha256": "f8823748484d6face9af28925595d8727f796e1446a5ee20d19c783352f776e0"
+    },
+    "jdk.compiler": {
+      "computed_sha256": "8a8cff2c03383fffa5a8b70fdd6d0b838e37c11ed7ae60f499ede9729e441921",
+      "recorded_sha256": "8a8cff2c03383fffa5a8b70fdd6d0b838e37c11ed7ae60f499ede9729e441921"
+    },
+    "jdk.crypto.cryptoki": {
+      "computed_sha256": "c08a8afa506219be6f7df568d30a0727d65f37035098fe6fa92e6099448beb01",
+      "recorded_sha256": "c08a8afa506219be6f7df568d30a0727d65f37035098fe6fa92e6099448beb01"
+    },
+    "jdk.crypto.ec": {
+      "computed_sha256": "ea757d0f5dc5f1921853ef9233097103d0c0fc8609579e6e9ccdf5811deedee7",
+      "recorded_sha256": "ea757d0f5dc5f1921853ef9233097103d0c0fc8609579e6e9ccdf5811deedee7"
+    },
+    "jdk.dynalink": {
+      "computed_sha256": "d04cd2ddb99e4746911195237472997c87a9fda372a94cc9235f39ba781684fe",
+      "recorded_sha256": "d04cd2ddb99e4746911195237472997c87a9fda372a94cc9235f39ba781684fe"
+    },
+    "jdk.editpad": {
+      "computed_sha256": "7f439529dbcc8692272f83d1a6a589dd26c03cd9a9a12ebde68853a04f9e51c6",
+      "recorded_sha256": "7f439529dbcc8692272f83d1a6a589dd26c03cd9a9a12ebde68853a04f9e51c6"
+    },
+    "jdk.hotspot.agent": {
+      "computed_sha256": "ba49fbe965e29f193cd90a3ea8552a64ea14ba98ff495f03bc21cacb72cb951a",
+      "recorded_sha256": "ba49fbe965e29f193cd90a3ea8552a64ea14ba98ff495f03bc21cacb72cb951a"
+    },
+    "jdk.httpserver": {
+      "computed_sha256": "6807b34f2498a830c1b23bcc4718508a753ba4ef0b6f618e2e7128800aee8def",
+      "recorded_sha256": "6807b34f2498a830c1b23bcc4718508a753ba4ef0b6f618e2e7128800aee8def"
+    },
+    "jdk.incubator.vector": {
+      "computed_sha256": "caf912bd1365fe821c4eabea02954726e6897e6ab78f3bcb9a4eb902415f451f",
+      "recorded_sha256": "caf912bd1365fe821c4eabea02954726e6897e6ab78f3bcb9a4eb902415f451f"
+    },
+    "jdk.internal.ed": {
+      "computed_sha256": "aebcf717fd70dbadfcdf98d149bb7414fabcc22ad65495d8cf3993f5a7636cb5",
+      "recorded_sha256": "aebcf717fd70dbadfcdf98d149bb7414fabcc22ad65495d8cf3993f5a7636cb5"
+    },
+    "jdk.internal.jvmstat": {
+      "computed_sha256": "aa0466d35f3beb4187b1d02b006ac0991c9600c7d4c0c33bed0f2eec776dd01a",
+      "recorded_sha256": "aa0466d35f3beb4187b1d02b006ac0991c9600c7d4c0c33bed0f2eec776dd01a"
+    },
+    "jdk.internal.le": {
+      "computed_sha256": "340508bcd3cb6e813ba7ccb645ca89457130681380d01912d8899bd95ec85972",
+      "recorded_sha256": "340508bcd3cb6e813ba7ccb645ca89457130681380d01912d8899bd95ec85972"
+    },
+    "jdk.internal.opt": {
+      "computed_sha256": "1ae3d254638dcc04f08bfcf115f6d088d091118223a1126bd2dc3001bc58a504",
+      "recorded_sha256": "1ae3d254638dcc04f08bfcf115f6d088d091118223a1126bd2dc3001bc58a504"
+    },
+    "jdk.internal.vm.ci": {
+      "computed_sha256": "b20b12fd93a07bef6052fa23aa284857af46253e3ae40fcc0019213a2d7ca398",
+      "recorded_sha256": "b20b12fd93a07bef6052fa23aa284857af46253e3ae40fcc0019213a2d7ca398"
+    },
+    "jdk.jartool": {
+      "computed_sha256": "88707daae3305d26cfccbd1906885e09609353ca085460c1d601263272bafc4b",
+      "recorded_sha256": "88707daae3305d26cfccbd1906885e09609353ca085460c1d601263272bafc4b"
+    },
+    "jdk.javadoc": {
+      "computed_sha256": "42652aa030e925326efe35943fd16b06106829db8b46a2285040c378023ecad3",
+      "recorded_sha256": "42652aa030e925326efe35943fd16b06106829db8b46a2285040c378023ecad3"
+    },
+    "jdk.jcmd": {
+      "computed_sha256": "352ab1ee08acc79a90e2011d44fa46249f780b520f9e8bb98efabda078bced36",
+      "recorded_sha256": "352ab1ee08acc79a90e2011d44fa46249f780b520f9e8bb98efabda078bced36"
+    },
+    "jdk.jconsole": {
+      "computed_sha256": "768869d2ffc81f7bbee654fcf21b49c0f734ea18c19cec9a85381287afda15a8",
+      "recorded_sha256": "768869d2ffc81f7bbee654fcf21b49c0f734ea18c19cec9a85381287afda15a8"
+    },
+    "jdk.jdeps": {
+      "computed_sha256": "00b5e3a6952cd4da160f9be32b26838482e5b31055fd5345826187190c0e858c",
+      "recorded_sha256": "00b5e3a6952cd4da160f9be32b26838482e5b31055fd5345826187190c0e858c"
+    },
+    "jdk.jdi": {
+      "computed_sha256": "d2372fafcb536c3bed9c3134baa60563af69f17711f39eac66591f8c2294f7fd",
+      "recorded_sha256": "d2372fafcb536c3bed9c3134baa60563af69f17711f39eac66591f8c2294f7fd"
+    },
+    "jdk.jdwp.agent": {
+      "computed_sha256": "2b6e2849ea4703d465258e9bf34d48fca7b33886d50f8849333da97054a3636e",
+      "recorded_sha256": "2b6e2849ea4703d465258e9bf34d48fca7b33886d50f8849333da97054a3636e"
+    },
+    "jdk.jfr": {
+      "computed_sha256": "751bee75fe5c580784e236dc8b3e15b3ce6534a72779030c423db9f304cfaf6a",
+      "recorded_sha256": "751bee75fe5c580784e236dc8b3e15b3ce6534a72779030c423db9f304cfaf6a"
+    },
+    "jdk.jlink": {
+      "computed_sha256": "aa136c670eb7dddaa1ea490527e3f06167f680d37721472211f62a421e3c79a3",
+      "recorded_sha256": "aa136c670eb7dddaa1ea490527e3f06167f680d37721472211f62a421e3c79a3"
+    },
+    "jdk.jpackage": {
+      "computed_sha256": "7b28bf9af6ba6399983df3f443597fb545c618eff28db4ee84db0b5fe18a6776",
+      "recorded_sha256": "7b28bf9af6ba6399983df3f443597fb545c618eff28db4ee84db0b5fe18a6776"
+    },
+    "jdk.jshell": {
+      "computed_sha256": "fbb47a0cf8d16cab80d1dc7c98553ffbd4cc5c34e981b7bd6b7ca18463171570",
+      "recorded_sha256": "fbb47a0cf8d16cab80d1dc7c98553ffbd4cc5c34e981b7bd6b7ca18463171570"
+    },
+    "jdk.jsobject": {
+      "computed_sha256": "31052808e328a32e4cc7e26a96c73152afbe920a75d6c39f8d05624a6a2fd37b",
+      "recorded_sha256": "31052808e328a32e4cc7e26a96c73152afbe920a75d6c39f8d05624a6a2fd37b"
+    },
+    "jdk.jstatd": {
+      "computed_sha256": "e570536a37b092e68a4eb7b98ea97d791e626d91d0f23939f51412d75f458898",
+      "recorded_sha256": "e570536a37b092e68a4eb7b98ea97d791e626d91d0f23939f51412d75f458898"
+    },
+    "jdk.localedata": {
+      "computed_sha256": "179593bea644d5447f61b526a374cc6740cdef2a7996082dad6d91c8d0d75ee5",
+      "recorded_sha256": "179593bea644d5447f61b526a374cc6740cdef2a7996082dad6d91c8d0d75ee5"
+    },
+    "jdk.management": {
+      "computed_sha256": "8e4dcd69d3ec9674a4729583ab9fefa88dffcedcea915061b82e308b1033f95c",
+      "recorded_sha256": "8e4dcd69d3ec9674a4729583ab9fefa88dffcedcea915061b82e308b1033f95c"
+    },
+    "jdk.management.agent": {
+      "computed_sha256": "2efd7abc78452ca4b4c529e4aa6ad30edef201ffb47598d6f09af67da1930535",
+      "recorded_sha256": "2efd7abc78452ca4b4c529e4aa6ad30edef201ffb47598d6f09af67da1930535"
+    },
+    "jdk.management.jfr": {
+      "computed_sha256": "81bbe34cea2078a78d44a34c1849d9f44c391cc8589f6e542b26d1b4842219b1",
+      "recorded_sha256": "81bbe34cea2078a78d44a34c1849d9f44c391cc8589f6e542b26d1b4842219b1"
+    },
+    "jdk.naming.dns": {
+      "computed_sha256": "d4be63c8359798695004e6dbebf4591d8756195f332586b9c844006aec048585",
+      "recorded_sha256": "d4be63c8359798695004e6dbebf4591d8756195f332586b9c844006aec048585"
+    },
+    "jdk.naming.rmi": {
+      "computed_sha256": "233b89c52fb15d1f394226affd3687810d9428474d3456c8780e29ffa7b2c448",
+      "recorded_sha256": "233b89c52fb15d1f394226affd3687810d9428474d3456c8780e29ffa7b2c448"
+    },
+    "jdk.net": {
+      "computed_sha256": "d1c070216b8a1a8b6fae475424131b40b881e4ed66ec4df916102d194fb1c654",
+      "recorded_sha256": "d1c070216b8a1a8b6fae475424131b40b881e4ed66ec4df916102d194fb1c654"
+    },
+    "jdk.nio.mapmode": {
+      "computed_sha256": "1f61cbb883447f781f550204bf31f7ea362bb1397624b877c3b99c3d7391d2d0",
+      "recorded_sha256": "1f61cbb883447f781f550204bf31f7ea362bb1397624b877c3b99c3d7391d2d0"
+    },
+    "jdk.random": {
+      "computed_sha256": "d20dad3a051fef7f780089b89dbe9c1a0b00e7b0d5d2e82267a6d076fb5d29cb",
+      "recorded_sha256": "d20dad3a051fef7f780089b89dbe9c1a0b00e7b0d5d2e82267a6d076fb5d29cb"
+    },
+    "jdk.sctp": {
+      "computed_sha256": "32a8fb9e736d912f2c7ac4497c246f04527eecde3400703f7f2fe1dbf009edf9",
+      "recorded_sha256": "32a8fb9e736d912f2c7ac4497c246f04527eecde3400703f7f2fe1dbf009edf9"
+    },
+    "jdk.security.auth": {
+      "computed_sha256": "0c9f51ed503377fb0040ccec8176967e1ee217287ed2ffb32b6fb6542938ef34",
+      "recorded_sha256": "0c9f51ed503377fb0040ccec8176967e1ee217287ed2ffb32b6fb6542938ef34"
+    },
+    "jdk.security.jgss": {
+      "computed_sha256": "22f39479ef9a2c641ae38ca4cd01bb921a7053990c592887262e0ab68949b697",
+      "recorded_sha256": "22f39479ef9a2c641ae38ca4cd01bb921a7053990c592887262e0ab68949b697"
+    },
+    "jdk.unsupported": {
+      "computed_sha256": "8f06b5caa837ed04eeef539987bfb1ef6c10ab1b1c56165c76d35a35bda76792",
+      "recorded_sha256": "8f06b5caa837ed04eeef539987bfb1ef6c10ab1b1c56165c76d35a35bda76792"
+    },
+    "jdk.unsupported.desktop": {
+      "computed_sha256": "0cf55ec7714ccef2d7701b91e6328c7a5f482639cc994a31a21f16cb21cb3130",
+      "recorded_sha256": "0cf55ec7714ccef2d7701b91e6328c7a5f482639cc994a31a21f16cb21cb3130"
+    },
+    "jdk.xml.dom": {
+      "computed_sha256": "a9f6ba14bc7a828f4d48b97442de5a811b3e19141e2ec7a67d75f18eedf65278",
+      "recorded_sha256": "a9f6ba14bc7a828f4d48b97442de5a811b3e19141e2ec7a67d75f18eedf65278"
+    },
+    "jdk.zipfs": {
+      "computed_sha256": "ed11509f6c36ac6f361f2aaf98e970282bae4b048b85ae8e0711f5ca6f307102",
+      "recorded_sha256": "ed11509f6c36ac6f361f2aaf98e970282bae4b048b85ae8e0711f5ca6f307102"
+    }
+  },
+  "source_root": "/workspace/scratch/65626af64474/m3-ast-shared-20261018/M3jdk21"
+}

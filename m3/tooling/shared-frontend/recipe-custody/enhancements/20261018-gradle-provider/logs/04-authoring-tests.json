@@ -1,0 +1,19 @@
+{
+  "label": "04-authoring-tests",
+  "command": [
+    "/tmp/m3-array-refinement-20261018-recovery/toolchain/apache-maven-3.9.9/bin/mvn",
+    "-B",
+    "-ntp",
+    "-o",
+    "-Dmaven.repo.local=/workspace/scratch/65626af64474/m3-ast-shared-20261018/gradle-provider-work/maven-cache",
+    "-Dm3.dataset=gradle-provider-20261018",
+    "surefire:test"
+  ],
+  "cwd": "/workspace/scratch/65626af64474/m3-ast-shared-20261018/gradle-provider-work/canonical/synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017",
+  "jdk": "/tmp/m3-regex-toolchain-20261018/jdk-21.0.12.1+1",
+  "previous": "03-authoring-compile",
+  "started_utc": "2026-10-18T12:50:21.623218+00:00",
+  "finished_utc": "2026-10-18T12:50:38.922741+00:00",
+  "exit_code": 1,
+  "log_sha256": "3ae2db85ac33cc815130631dbb1f4e148e53fc089d5de5f63efc0d18c261770e"
+}
