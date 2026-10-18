@@ -31,7 +31,7 @@ stored map-entry or tree-node object.
   Entry-returning neighbors and polls materialize exactly one detached
   `SimpleImmutableEntry` at the explicit API boundary; filtering
   hidden candidate slots allocates no intermediate entry.
-- `values()`, `forEach`, `equals`, `hashCode`, and `toString`
+- `values()`, `forEach`, `equals`, `hashCode`, and `toString`, plus `containsValue` and `replaceAll`,
   run on canonical M3 slot coordinates without manufacturing intermediate
   `Map.Entry` instances. A requested `values()` view has its own
   fail-fast slot iterator and forwards iterator deletion to the M3 owner.
