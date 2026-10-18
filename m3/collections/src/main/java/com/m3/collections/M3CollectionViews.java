@@ -19,8 +19,6 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.SortedSet;
 import java.util.Spliterator;
-import java.util.concurrent.CopyOnWriteArrayList;
-import java.util.concurrent.CopyOnWriteArraySet;
 import java.util.function.BiPredicate;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
@@ -35,8 +33,9 @@ import java.util.function.Predicate;
  * ordering semantics of the backing collection.
  *
  * <p>Backed views are not automatically synchronized, serializable or snapshots.
- * Iterator removal is deliberately unsupported; bulk mutations and explicit
- * {@code remove} do write through to the underlying collection when supported.
+ * Filtered iterator removal is deliberately unsupported; bulk mutations and
+ * explicit {@code remove} write through when the owner supports the required
+ * physical deletion. Equal external probes never bypass stored visibility.
  *
  * <p>All live wrappers keep the supplied owner authoritative, including nested
  * filters and sorted ranges. They neither sort the owner nor build a second
@@ -395,10 +394,6 @@ public final class M3CollectionViews {
         }
 
         private boolean removeMatching(Predicate<? super E> condition) {
-            // M3_COW_BULK_REMOVE_V1: delegate to JDK copy-on-write owner's supported removeIf.
-            if (backing instanceof CopyOnWriteArrayList<?> || backing instanceof CopyOnWriteArraySet<?>) {
-                return backing.removeIf(element -> visible(element) && condition.test(element));
-            }
             boolean changed = false;
             Iterator<E> iterator = backing.iterator();
             while (iterator.hasNext()) {
