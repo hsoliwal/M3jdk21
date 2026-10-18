@@ -240,7 +240,7 @@ public class M3FixedHeightLayoutCache extends FixedHeightLayoutCache {
     @Override
     public void setExpandedState(TreePath path, boolean isExpanded) {
         if (isExpanded) {
-            ensurePathIsExpanded(path, true);
+            ensurePathIsExpanded(path);
         } else if (path != null) {
             TreePath parentPath = path.getParentPath();
             if (parentPath != null && resolve(parentPath, false)) {
@@ -495,20 +495,18 @@ public class M3FixedHeightLayoutCache extends FixedHeightLayoutCache {
 
     // ---- expansion ------------------------------------------------------------------------------
 
-    private void ensurePathIsExpanded(TreePath aPath, boolean expandLast) {
+    /** The stock {@code ensurePathIsExpanded(path, true)} that setExpandedState makes: a leaf expands its parent. */
+    private void ensurePathIsExpanded(TreePath aPath) {
         if (aPath == null) {
             return;
         }
         if (treeModel.isLeaf(aPath.getLastPathComponent())) {
             aPath = aPath.getParentPath();
-            expandLast = true;
         }
-        if (aPath != null && resolve(aPath, false)) {
-            int k = resNode;
+        if (resolve(aPath, false)) {
+            int k = resNode; // resetRowSelection calls back into resolve
             makeVisible(k);
-            if (expandLast) {
-                expand(k);
-            }
+            expand(k);
         }
     }
 
@@ -667,11 +665,11 @@ public class M3FixedHeightLayoutCache extends FixedHeightLayoutCache {
                 }
             }
             int start = startOffset(n, m);
-            int k = childNode(n, m);
-            if (row == start || k == 0 || !expanded(k)) {
+            if (row == start) {
                 return path[n].pathByAddingChild(childValue(n, m));
             }
-            n = k;
+            // row > start: only an expanded child with state has rows below its own (startOffset)
+            n = childNode(n, m);
             row = row - start - 1;
         }
     }
@@ -686,12 +684,9 @@ public class M3FixedHeightLayoutCache extends FixedHeightLayoutCache {
         return m + fenwickPrefix(n, lowerBound(n, m));
     }
 
+    /** The stock getRowContainingYLocation; its caller has already answered an empty cache. */
     private int rowContainingY(int location) {
-        int rows = getRowCount();
-        if (rows <= 0) {
-            return -1;
-        }
-        return Math.max(0, Math.min(rows - 1, location / getRowHeight()));
+        return Math.max(0, Math.min(getRowCount() - 1, location / getRowHeight()));
     }
 
     // ---- Fenwick over resolved-child slots ------------------------------------------------------
@@ -889,13 +884,9 @@ public class M3FixedHeightLayoutCache extends FixedHeightLayoutCache {
         }
 
         private void findNextValidParent() {
-            if (parentNode == root) {
-                parentNode = 0;
-                return;
-            }
-            while (parentNode != 0) {
+            while (true) {
                 int up = parent[parentNode];
-                if (up == 0) {
+                if (up == 0) { // past the root (parent[root] == 0): the stock enumeration ends
                     parentNode = 0;
                     return;
                 }

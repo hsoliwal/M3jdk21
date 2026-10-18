@@ -224,4 +224,115 @@ public class M3FixedHeightLayoutCacheTest {
             out.append(' ').append(c.getRowCount());
         });
     }
+
+    /** Null and empty events, null and unknown paths, an empty cache, and the other early returns. */
+    @Test
+    void nullAndEmptyInput() throws Exception {
+        M3VariableHeightLayoutCacheTest.sameFixed((c, out) -> {
+            TreePath nobody = new TreePath(new Object[] {"nobody", "child"});
+            out.append(" empty ").append(c.getRowCount()).append(c.getRowForPath(nobody))
+                    .append(c.getBounds(nobody, null)).append(c.getVisiblePathsFrom(nobody))
+                    .append(c.getPathClosestTo(0, 5)).append(c.getPathForRow(0));
+            DefaultMutableTreeNode root = M3VariableHeightLayoutCacheTest.tree("r", 2, 2);
+            DefaultTreeModel m = new DefaultTreeModel(root);
+            setUp(c, m, 15, false);
+            c.setSelectionModel(new DefaultTreeSelectionModel());
+            TreePath rp = new TreePath(root);
+            M3VariableHeightLayoutCacheTest.step(out, "changed null", () -> c.treeNodesChanged(null));
+            M3VariableHeightLayoutCacheTest.step(out, "inserted null", () -> c.treeNodesInserted(null));
+            M3VariableHeightLayoutCacheTest.step(out, "removed null", () -> c.treeNodesRemoved(null));
+            M3VariableHeightLayoutCacheTest.step(out, "structure null", () -> c.treeStructureChanged(null));
+            M3VariableHeightLayoutCacheTest.step(out, "changed no indices", () -> c.treeNodesChanged(
+                    new TreeModelEvent(m, rp)));
+            M3VariableHeightLayoutCacheTest.step(out, "changed empty", () -> c.treeNodesChanged(
+                    new TreeModelEvent(m, rp, new int[0], new Object[0])));
+            M3VariableHeightLayoutCacheTest.step(out, "inserted no indices", () -> c.treeNodesInserted(
+                    new TreeModelEvent(m, rp)));
+            M3VariableHeightLayoutCacheTest.step(out, "inserted empty", () -> c.treeNodesInserted(
+                    new TreeModelEvent(m, rp, new int[0], new Object[0])));
+            M3VariableHeightLayoutCacheTest.step(out, "removed no indices", () -> c.treeNodesRemoved(
+                    new TreeModelEvent(m, rp)));
+            M3VariableHeightLayoutCacheTest.step(out, "removed empty", () -> c.treeNodesRemoved(
+                    new TreeModelEvent(m, rp, new int[0], new Object[0])));
+            for (String kind : new String[] {"changed", "inserted", "removed", "structure"}) {
+                M3VariableHeightLayoutCacheTest.step(out, kind + " unknown parent", () -> {
+                    TreeModelEvent e = new TreeModelEvent(m, nobody, new int[] {0}, new Object[] {"x"});
+                    switch (kind) {
+                        case "changed" -> c.treeNodesChanged(e);
+                        case "inserted" -> c.treeNodesInserted(e);
+                        case "removed" -> c.treeNodesRemoved(e);
+                        default -> c.treeStructureChanged(e);
+                    }
+                });
+            }
+            M3VariableHeightLayoutCacheTest.step(out, "expand null", () -> c.setExpandedState(null, true));
+            M3VariableHeightLayoutCacheTest.step(out, "collapse null", () -> c.setExpandedState(null, false));
+            out.append(' ').append(c.getRowForPath(null)).append(c.isExpanded(null)).append(c.getBounds(null, null))
+                    .append(c.getVisiblePathsFrom(null)).append(c.getVisibleChildCount(null))
+                    .append(c.getExpandedState(null));
+            M3VariableHeightLayoutCacheTest.step(out, "unknown path", () -> c.setExpandedState(nobody, true));
+            M3VariableHeightLayoutCacheTest.step(out, "collapse unknown", () -> c.setExpandedState(nobody, false));
+            M3VariableHeightLayoutCacheTest.dump(c, out);
+        });
+    }
+
+    /** No model, a model without a root, and the structure events that rebuild. */
+    @Test
+    void noModelAndNoRoot() throws Exception {
+        M3VariableHeightLayoutCacheTest.sameFixed((c, out) -> {
+            c.setNodeDimensions(M3VariableHeightLayoutCacheTest.dims());
+            c.setRowHeight(14);
+            c.setSelectionModel(new DefaultTreeSelectionModel());
+            M3VariableHeightLayoutCacheTest.step(out, "null model", () -> c.setModel(null));
+            M3VariableHeightLayoutCacheTest.dump(c, out);
+            M3VariableHeightLayoutCacheTest.step(out, "structure null path", () -> c.treeStructureChanged(
+                    new TreeModelEvent(new Object(), (TreePath) null)));
+            DefaultTreeModel m = new DefaultTreeModel(null);
+            M3VariableHeightLayoutCacheTest.step(out, "model without root", () -> c.setModel(m));
+            M3VariableHeightLayoutCacheTest.dump(c, out);
+            M3VariableHeightLayoutCacheTest.step(out, "structure (root null)", () -> c.treeStructureChanged(
+                    new TreeModelEvent(m, (TreePath) null)));
+            M3VariableHeightLayoutCacheTest.step(out, "expand", () -> c.setExpandedState(new TreePath("x"), true));
+            DefaultMutableTreeNode root = M3VariableHeightLayoutCacheTest.tree("r", 2, 1);
+            m.setRoot(root);
+            M3VariableHeightLayoutCacheTest.step(out, "root set", () -> c.treeStructureChanged(
+                    new TreeModelEvent(m, new TreePath(root))));
+            M3VariableHeightLayoutCacheTest.dump(c, out);
+            DefaultMutableTreeNode other = M3VariableHeightLayoutCacheTest.tree("o", 2, 1);
+            m.setRoot(other);
+            M3VariableHeightLayoutCacheTest.step(out, "root replaced", () -> c.treeStructureChanged(
+                    new TreeModelEvent(m, new TreePath(other))));
+            M3VariableHeightLayoutCacheTest.step(out, "stale two-component path", () -> c.treeStructureChanged(
+                    new TreeModelEvent(m, new TreePath(new Object[] {root, root.getChildAt(0)}))));
+            m.setRoot(null);
+            M3VariableHeightLayoutCacheTest.step(out, "root removed", () -> c.treeStructureChanged(
+                    new TreeModelEvent(m, (TreePath) null)));
+            M3VariableHeightLayoutCacheTest.dump(c, out);
+        });
+    }
+
+    /** Expand, collapse and model edits with no selection model, and a structure change without one. */
+    @Test
+    void withoutSelectionModel() throws Exception {
+        M3VariableHeightLayoutCacheTest.sameFixed((c, out) -> {
+            DefaultMutableTreeNode root = M3VariableHeightLayoutCacheTest.tree("r", 3, 3);
+            DefaultTreeModel m = new DefaultTreeModel(root);
+            setUp(c, m, 12, true);
+            c.setSelectionModel(null);
+            DefaultMutableTreeNode a = (DefaultMutableTreeNode) root.getChildAt(0);
+            M3VariableHeightLayoutCacheTest.step(out, "expand a", () -> c.setExpandedState(pathOf(a), true));
+            DefaultMutableTreeNode n = new DefaultMutableTreeNode("n");
+            a.insert(n, 1);
+            M3VariableHeightLayoutCacheTest.step(out, "insert", () -> c.treeNodesInserted(
+                    new TreeModelEvent(m, pathOf(a), new int[] {1}, new Object[] {n})));
+            a.remove(1);
+            M3VariableHeightLayoutCacheTest.step(out, "remove", () -> c.treeNodesRemoved(
+                    new TreeModelEvent(m, pathOf(a), new int[] {1}, new Object[] {n})));
+            M3VariableHeightLayoutCacheTest.dump(c, out);
+            M3VariableHeightLayoutCacheTest.step(out, "collapse a", () -> c.setExpandedState(pathOf(a), false));
+            M3VariableHeightLayoutCacheTest.step(out, "structure at root", () -> c.treeStructureChanged(
+                    new TreeModelEvent(m, new TreePath(root))));
+            M3VariableHeightLayoutCacheTest.dump(c, out);
+        });
+    }
 }
