@@ -221,7 +221,7 @@ public final class M3SdkSortedContractRecipe {
         } finally {
             // Synthetic fixture root is isolated; remove files after proof.
             Files.deleteIfExists(root.resolve(MAIN + "SelfTestFixture.java"));
-            for (Path p = file.getParent(); !p.equals(root); p = p.getParent()) {
+            for (Path p = root.resolve(MAIN + "SelfTestFixture.java").getParent(); !p.equals(root); p = p.getParent()) {
                 Files.deleteIfExists(p);
             }
             Files.deleteIfExists(root);

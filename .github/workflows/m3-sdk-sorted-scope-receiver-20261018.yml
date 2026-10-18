@@ -1,0 +1,55 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3 SDK Sorted Scope Recipe Receiver Java21
+on:
+  pull_request:
+    paths:
+      - 'm3/collections/qualification/m3-sdk-families-20261017/recipe-v3/src/main/java/com/synexia/m3/M3SdkSortedContractRecipe.java'
+      - 'm3/docs/m3-sdk-sorted-scope-receiving-20261018.md'
+      - '.github/workflows/m3-sdk-sorted-scope-receiver-20261018.yml'
+  push:
+    branches:
+      - 'work/m3-sdk-sorted-recipe-scope-receive-20261018'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  exact-source-recipe-replay:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Prove one atom, original preimage and canonical output sha
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import subprocess
+          from pathlib import Path
+          p = "m3/collections/qualification/m3-sdk-families-20261017/recipe-v3/src/main/java/com/synexia/m3/M3SdkSortedContractRecipe.java"
+          original = subprocess.check_output(["git", "show", "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49:" + p])
+          actual = Path(p).read_bytes()
+          old = b"for (Path p = file.getParent(); !p.equals(root); p = p.getParent()) {"
+          new = b'for (Path p = root.resolve(MAIN + "SelfTestFixture.java").getParent(); !p.equals(root); p = p.getParent()) {'
+          assert original.count(old) == 1
+          assert actual == original.replace(old, new), "unreviewed extra source changes"
+          assert subprocess.check_output(["git", "hash-object", p]).decode().strip() == "19dc55f249614aa5aa50717354c42e5a30fc244d"
+          PY
+      - name: Compile actual receiver recipe on Java21 and run source selftest
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/m3-sdk-sorted-scope-classes
+          javac --release 21 -Xlint:all -Werror -d /tmp/m3-sdk-sorted-scope-classes m3/collections/qualification/m3-sdk-families-20261017/recipe-v3/src/main/java/com/synexia/m3/M3SdkSortedContractRecipe.java
+          java -cp /tmp/m3-sdk-sorted-scope-classes com.synexia.m3.M3SdkSortedContractRecipe --selftest
+      - name: Retain all product sources unchanged
+        shell: bash
+        run: |
+          test -z "$(git diff --name-only origin/master...HEAD -- m3/collections/src m3/collections/interop)"
+          git diff --check origin/master...HEAD
