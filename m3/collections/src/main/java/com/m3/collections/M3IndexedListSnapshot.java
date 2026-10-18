@@ -176,9 +176,42 @@ public final class M3IndexedListSnapshot<E> extends AbstractList<E> implements R
         return new M3IndexedListSnapshot<>(values, admitted, 0, admitted.length, null);
     }
 
+    /**
+     * Fuses one predicate pass and stable indexed sorting. The filtered projection
+     * owns a newly selected int[]; only that private directory is permuted.
+     * The canonical Object[] payload, this view's offsets and prior projections
+     * are never changed. No boxed indices or per-element entry objects are built.
+     */
+    public M3IndexedListSnapshot<E> filteredSorted(
+            Predicate<? super E> predicate, Comparator<? super E> comparator) {
+        return filteredSorted(predicate, comparator, M3IndexMaskCompactor.Backend.JAVA);
+    }
+
+    /**
+     * Explicit primitive-coordinate selection backend. Java evaluates each
+     * predicate once in encounter order; the existing JNI option receives only
+     * mask bytes and never object references, predicates, or comparators.
+     * NATIVE_REQUIRED refuses before the first predicate call if unavailable.
+     */
+    public M3IndexedListSnapshot<E> filteredSorted(
+            Predicate<? super E> predicate, Comparator<? super E> comparator,
+            M3IndexMaskCompactor.Backend backend) {
+        M3IndexedListSnapshot<E> selected = filtered(predicate, backend);
+        selected.sortPositions(selected.positions, comparator);
+        return selected;
+    }
+
     public M3IndexedListSnapshot<E> sorted(Comparator<? super E> comparator) {
         int[] current = physicalIndices();
+        sortPositions(current, comparator);
+        return new M3IndexedListSnapshot<>(values, current, 0, current.length,
+                physicalMembership);
+    }
+
+    /** Stable bottom-up mergesort of physical indices with an int[] scratch lane. */
+    private void sortPositions(int[] current, Comparator<? super E> comparator) {
         int length = current.length;
+        if (length < 2) return;
         int[] scratch = new int[length];
         // Use wide loop arithmetic to avoid overflow near Java's array-size limit.
         for (long width = 1; width < length; width <<= 1) {
@@ -196,10 +229,10 @@ public final class M3IndexedListSnapshot<E> extends AbstractList<E> implements R
                 while (a < mid) scratch[out++] = current[a++];
                 while (b < high) scratch[out++] = current[b++];
             }
-            int[] swap = current; current = scratch; scratch = swap;
+            // Sorting must finish in the original selected index directory. A swap
+            // of the local variable would leave the receiver pointing to old order.
+            System.arraycopy(scratch, 0, current, 0, length);
         }
-        return new M3IndexedListSnapshot<>(values, current, 0, length,
-                physicalMembership);
     }
 
     /** Signed/natural Comparable ordering when elements permit it. */
