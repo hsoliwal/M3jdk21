@@ -1,0 +1,62 @@
+{
+  "schema": "M3JDK21_SYNEXIA_RECEIPT_ONLY_CLOSURE_V1",
+  "copyright": "Copyright 2026 Hitesh Soliwal and contributors",
+  "receivedLicense": "Apache-2.0",
+  "evidenceOnly": true,
+  "claim": "Receipt is EVIDENCE of pre-existing pinned-master content and its Synexia canonical unit. It receives nothing, changes no source, advances no phase, and asserts no runtime result.",
+  "canonicalSource": {
+    "repository": "hsoliwal/com.synexia",
+    "branch": "develop",
+    "pullRequest": "UNVERIFIED",
+    "commit": "11c94feb18155a53cc213708c353791132edc4a7",
+    "pinRef": "refs/m3run/synexia-develop-20261017",
+    "recipe": "UNVERIFIED",
+    "crate": "m3-dotstar-rolling-dp-20261014",
+    "unitKind": "RECIPE_DIR_EXT",
+    "unitPath": "synexia-openrewrite-recipes/recipes/m3-dotstar-rolling-dp-20261014",
+    "unitTreeSha": "62e5c32ff1237b77225c82d4f8e463a1b0f4f2bc",
+    "mechanics": "M3String dot-star rolling DP - source-sealed candidate (README title)",
+    "donors": [
+      {
+        "path": "synexia-openrewrite-recipes/recipes/m3-dotstar-rolling-dp-20261014/README.md",
+        "blob": "0d851fb1bee1",
+        "target": "M3DotStarRelations",
+        "mechanics": "unit contract"
+      },
+      {
+        "path": "synexia-openrewrite-recipes/recipes/m3-dotstar-rolling-dp-20261014/verify.py",
+        "blob": "d07a9d4a5a2c",
+        "target": "M3DotStarRelations",
+        "mechanics": "verification driver (no pom at pin)"
+      }
+    ],
+    "license": "Apache-2.0 first-party"
+  },
+  "target": {
+    "repository": "hsoliwal/M3jdk21",
+    "base": "970a34350ebdf6a3f1c5ff5acc8445d0f3515f55",
+    "pinRef": "refs/m3run/m3jdk21-master-20261017",
+    "owners": [
+      "M3DotStarRelations"
+    ]
+  },
+  "runtimeDependencyOnSynexia": false,
+  "publicJdkReplacement": false,
+  "targets": [
+    {
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3DotStarRelations.java",
+      "blob": "780c7887aaa6",
+      "before": "PREEXISTING",
+      "after": "bbc2901ebe5b2de9951b672127bd47e9d13c70b5a39482fa0727703d0a2ff757"
+    }
+  ],
+  "residue": "RE_SEAL_REQUIRED: unit has no hash-pinned manifest covering the pinned-master content of its owner file(s); a successor hash-pinned recipe must seal master content before any phase advance",
+  "unverifiedFields": [
+    "pullRequest",
+    "recipe",
+    "ownerAssociation=TOKEN_MATCH(dotstar)"
+  ],
+  "gates": {
+    "evidenceOnly": "NOT_RUN: no build, no recipe execution, no tests; ls-tree + git show sha256 only (run RCPT-receipt-only-closure 2026-10-18)"
+  }
+}
