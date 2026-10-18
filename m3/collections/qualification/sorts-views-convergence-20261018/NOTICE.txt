@@ -1,0 +1,4 @@
+Copyright 2026 Hitesh Soliwal and contributors.
+SPDX-License-Identifier: Apache-2.0
+
+The new collection-convergence document and catalogue are Apache-2.0. Existing runtime source and published oracle templates retain their original first-party Apache-2.0 notices. This material does not change the separate GPL notices on java.base sorting sources. No third-party challenge or Guava source body is included. The unchanged owning module LICENSE supplies the full Apache-2.0 terms.
