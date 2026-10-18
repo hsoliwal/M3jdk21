@@ -153,6 +153,11 @@ final class M3RegexAst {
         return classCount++;
     }
 
+    /** CLASS node over {@code pairs} (all pairs used). */
+    int addClassNode(int[] pairs, boolean negate) {
+        return node(CLASS, addClass(pairs, pairs.length / 2, negate));
+    }
+
     /** Whether class {@code id} contains {@code unit} (binary search over its pairs). */
     boolean contains(int id, int unit) {
         int low = 0;
