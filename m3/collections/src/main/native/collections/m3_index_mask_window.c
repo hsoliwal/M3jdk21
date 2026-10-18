@@ -87,14 +87,17 @@ static jlong m3_window_scan_range(JNIEnv *env, jintArray rows, jbyteArray states
             next += take;
             continue;
         }
-        (*env)->GetIntArrayRegion(env, rows, next, take, values);
+        /* The rejected prefix cannot contribute output. Preserve region/call
+         * batching while transferring only the suffix whose row IDs can be used. */
+        (*env)->GetIntArrayRegion(env, rows, next + first_match,
+                take - first_match, values);
         if ((*env)->ExceptionCheck(env)) return (jlong) -1;
         next += first_match;
         for (jint i = first_match; i < take; i++) {
             unsigned int flags = (unsigned int) (unsigned char) marks[i];
             if ((flags & (unsigned int) required) == (unsigned int) required
                     && (flags & (unsigned int) excluded) == 0U) {
-                selected[pending++] = values[i];
+                selected[pending++] = values[i - first_match];
                 written++;
                 if (pending == M3_MASK_WINDOW_CHUNK || written == limit) {
                     (*env)->SetIntArrayRegion(env, output,
