@@ -181,6 +181,9 @@ public final class M3LongArrayDeque implements M3LongDeque {
      */
     public int retainByStateMask(byte[] alignedStates, int requiredMask) {
         M3IndexMaskCompactor.validate(alignedStates, size, requiredMask);
+        // A zero required mask admits every logical element. Validate first, then preserve
+        // the circular storage, logical size, and iterator epoch without scanning the ring.
+        if (requiredMask == 0) return 0;
         int previous = size;
         int kept = 0;
         for (int read = 0; read < previous; read++) {

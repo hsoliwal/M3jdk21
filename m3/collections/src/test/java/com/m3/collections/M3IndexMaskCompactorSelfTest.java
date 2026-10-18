@@ -345,6 +345,19 @@ public final class M3IndexMaskCompactorSelfTest {
         fails(NullPointerException.class, () -> deque.retainByStateMask(null, 1));
         eq(new long[] {1, 2, 3}, list.toArray());
         eq(new long[] {1, 2, 3}, deque.toArray());
+
+        // Zero-mask validation is still mandatory, but a valid identity selection must not
+        // invalidate an existing iterator or disturb the circular deque's logical order.
+        M3LongArrayDeque zeroMaskDeque = new M3LongArrayDeque(0);
+        zeroMaskDeque.addLast(Long.MIN_VALUE);
+        zeroMaskDeque.addLast(0L);
+        zeroMaskDeque.addLast(Long.MAX_VALUE);
+        M3LongIterator zeroMaskCursor = zeroMaskDeque.iterator();
+        ok(zeroMaskDeque.retainByStateMask(new byte[] {0, (byte) 0xff, 1}, 0) == 0);
+        ok(zeroMaskCursor.hasNext());
+        ok(zeroMaskCursor.nextLong() == Long.MIN_VALUE);
+        eq(new long[] {Long.MIN_VALUE, 0L, Long.MAX_VALUE}, zeroMaskDeque.toArray());
+
         for (Class<?> owner : new Class<?>[] {M3LongArrayList.class, M3LongArrayDeque.class}) {
             for (java.lang.reflect.Field field : owner.getDeclaredFields()) {
                 Class<?> fieldType = field.getType();
