@@ -22,7 +22,7 @@ jobs:
         run: |
           mkdir -p "$RUNNER_TEMP/classes"
           javac --release 21 -proc:none -Xlint:all,-serial,-processing,-module -Werror \
-            -sourcepath m3/collections/src/main/java \
+            -sourcepath m3/collections/src/main/java:m3/collections/src/test/java \
             -d "$RUNNER_TEMP/classes" \
             m3/collections/src/main/java/com/m3/collections/M3ObjectRangeMap.java \
             m3/collections/src/main/java/com/m3/collections/M3SlotArrays.java \
