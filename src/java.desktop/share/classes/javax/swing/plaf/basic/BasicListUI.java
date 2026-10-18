@@ -199,6 +199,9 @@ public class BasicListUI extends ListUI
 
     private static final int DROP_LINE_THICKNESS = 2;
 
+    /** Row offsets over {@code cellHeights} for the M3 row path ({@code sun.swing.list.M3ListRows}). */
+    private final sun.swing.list.M3ListRows m3Rows = new sun.swing.list.M3ListRows();
+
     /**
      * Constructs a {@code BasicListUI}.
      */
