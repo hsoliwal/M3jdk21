@@ -26,12 +26,16 @@ public final class M3GvasLiteralImage {
     private final ByteBuffer data;
     private final int count;
     private final int payloadStart;
+    /** Immutable, optional primitive row+1 hash directory; never owns spelling payload. */
+    private final int[] hashSlots;
 
     private M3GvasLiteralImage(M3FixedAddressMapping.Image mapped) {
         this.mapped = mapped;
         this.data = mapped.readOnlyBuffer().order(ByteOrder.LITTLE_ENDIAN);
         this.count = data.getInt(16);
         this.payloadStart = data.getInt(28);
+        // open() validates the complete immutable native image before building this index.
+        this.hashSlots = buildHashSlots(data, count);
     }
 
     /** Admit the exact backing image only after native exact-address admission succeeded. */
@@ -134,9 +138,90 @@ public final class M3GvasLiteralImage {
         return Integer.compare(needle.length(), length);
     }
 
+
+    /*
+     * An entry-less hash directory over existing mapped UTF-16 rows.
+     * Zero means empty; row+1 retains row 0 without a sentinel collision.
+     * Optional acceleration is bounded by a 50% load factor, probe length and
+     * heap budget. Source image layout, mapped owners and JNI ABI are unchanged.
+     */
+    private static int[] buildHashSlots(ByteBuffer bytes, int rows) {
+        if (rows < 64 || rows > (1 << 20)) return null;
+        int capacity = 1;
+        while (capacity < rows * 2) capacity <<= 1;
+        Runtime runtime = Runtime.getRuntime();
+        long headroom = runtime.maxMemory()
+                - (runtime.totalMemory() - runtime.freeMemory());
+        if ((long) capacity * Integer.BYTES > headroom / 8) return null;
+        int[] slots;
+        try {
+            slots = new int[capacity];
+        } catch (OutOfMemoryError optionalIndexPressure) {
+            return null;
+        }
+        int mask = capacity - 1;
+        for (int row = 0; row < rows; row++) {
+            int at = HEADER_BYTES + row * ROW_BYTES;
+            int length = bytes.getInt(at + 4);
+            long hash = spellingHash(bytes, bytes.getInt(at), length);
+            int slot = mixSpellingHash(hash) & mask;
+            int probes = 0;
+            while (slots[slot] != 0) {
+                if (++probes >= 64) return null;
+                slot = (slot + 1) & mask;
+            }
+            slots[slot] = row + 1;
+        }
+        return slots;
+    }
+
+    private static long spellingHash(ByteBuffer bytes, int offset, int length) {
+        long hash = 0xcbf29ce484222325L;
+        for (int i = 0; i < length; i++) {
+            hash = (hash ^ bytes.getChar(offset + (i << 1))) * 0x100000001b3L;
+        }
+        return hash ^ length;
+    }
+
+    private static long spellingHash(String text) {
+        long hash = 0xcbf29ce484222325L;
+        for (int i = 0; i < text.length(); i++) {
+            hash = (hash ^ text.charAt(i)) * 0x100000001b3L;
+        }
+        return hash ^ text.length();
+    }
+
+    private static int mixSpellingHash(long hash) {
+        hash ^= hash >>> 33;
+        hash *= 0xff51afd7ed558ccdL;
+        hash ^= hash >>> 33;
+        hash *= 0xc4ceb9fe1a85ec53L;
+        return (int) (hash ^ (hash >>> 33));
+    }
+
+    /** Package-private receiver-test hook, not a String or JNI API. */
+    boolean hashSlotIndexPrepared() { return hashSlots != null; }
+
     /** Returns a zero-allocation row index, or {@code -1}; Unicode comparison is UTF-16 exact. */
     public int findRow(String spelling) {
         Objects.requireNonNull(spelling, "spelling");
+        int[] slots = hashSlots;
+        if (slots != null) {
+            int mask = slots.length - 1;
+            int slot = mixSpellingHash(spellingHash(spelling)) & mask;
+            for (int probes = 0; probes < 64; probes++) {
+                int encoded = slots[slot];
+                if (encoded == 0) return -1;
+                int row = encoded - 1;
+                if (data.getInt(HEADER_BYTES + row * ROW_BYTES + 4) == spelling.length()
+                        && compare(spelling, row) == 0) return row;
+                slot = (slot + 1) & mask;
+            }
+        }
+        return findRowBinary(spelling);
+    }
+
+    private int findRowBinary(String spelling) {
         int lo = 0, hi = count;
         while (lo < hi) {
             int middle = (lo + hi) >>> 1;
