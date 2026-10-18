@@ -4,6 +4,8 @@ package com.m3.eclipse.smoke;
 
 import com.m3.ast.M3ASTHierarchy;
 import com.m3.collections.M3LongIndexProjection;
+import com.m3.collections.M3IndexMaskCompactor;
+import java.util.Arrays;
 import com.m3.eclipse.core.M3EclipseCore;
 import com.m3.file.M3File;
 import com.m3.text.M3StringPiece;
@@ -41,6 +43,21 @@ public final class M3EclipseCoreSelfTest {
         require(sorted.physicalIndex(2) == 0 && sorted.physicalIndex(3) == 2,
                 "stable equal-valued physical occurrences");
         require(sorted.slice(1, 2).size() == 2, "M3 offset slice");
+        int[] rowIds = {7, 0, 7, -1};
+        byte[] stateBytes = {1, 3, 0, 1};
+        int[] javaRows = M3IndexMaskCompactor.select(rowIds, stateBytes, 1,
+                M3IndexMaskCompactor.Backend.JAVA);
+        require(Arrays.equals(javaRows, new int[]{7, 0, -1}),
+                "M3 Java index-mask encounter order and duplicates");
+        if (M3IndexMaskCompactor.nativeAvailable()) {
+            int[] nativeRows = M3IndexMaskCompactor.select(rowIds, stateBytes, 1,
+                    M3IndexMaskCompactor.Backend.NATIVE_REQUIRED);
+            require(Arrays.equals(javaRows, nativeRows), "existing M3 JNI parity");
+        } else {
+            expect(UnsatisfiedLinkError.class, () -> M3IndexMaskCompactor.select(
+                    rowIds, stateBytes, 1, M3IndexMaskCompactor.Backend.NATIVE_REQUIRED),
+                    "missing M3 JNI must fail explicitly");
+        }
 
         M3ASTHierarchy.FileFact file = new M3ASTHierarchy.FileFact("p", "m", "pkg",
                 "p/src/C.java", "a".repeat(64), "b".repeat(64),
