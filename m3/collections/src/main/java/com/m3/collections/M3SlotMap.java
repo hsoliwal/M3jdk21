@@ -182,9 +182,6 @@ abstract class M3SlotMap<K, V> extends AbstractMap<K, V> {
         if (!cacheApiEntries()) {
             return new SimpleImmutableEntry<>(key, value);
         }
-        if (entrySnapshots == null) {
-            entrySnapshots = new M3LFUCache<>(128);
-        }
         int epoch = revision();
         if (entrySnapshots == null) {
             entrySnapshots = new M3LFUCache<>(128);
