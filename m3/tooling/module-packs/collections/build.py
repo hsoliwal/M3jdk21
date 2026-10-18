@@ -37,6 +37,21 @@ def digest(path):
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
+def jni_header_symbols(header):
+    """Read exact JNI declarations from this owner's generated javac -h header."""
+    source = header.read_text(encoding="utf-8")
+    declarations = re.sub(r"/\*[\s\S]*?\*/|//[^\n]*", "", source)
+    names = re.findall(
+        r"\bJNIEXPORT\s+[A-Za-z_][A-Za-z0-9_]*\s+JNICALL\s+"
+        r"(Java_[A-Za-z0-9_]+)\s*\(", declarations)
+    expected = set(names)
+    if len(names) != len(re.findall(r"\bJNIEXPORT\b", declarations)):
+        raise ValueError("malformed generated JNI declaration")
+    if len(names) != len(expected) or NATIVE_SYMBOL not in expected:
+        raise ValueError("generated JNI owner contract is missing or duplicated")
+    return expected
+
+
 def qualify(java, javac, modules, pack, repo, output, native, linked):
     label = "image" if linked else "host"
     patch = output / (label + "-contracts")
@@ -111,8 +126,7 @@ def main():
                 "-Xlint:all,-module", "-Werror", "-proc:none", "-h", headers,
                 "-d", modules / name, *sources)
     header = headers / "com_m3_collections_M3IndexMaskCompactor.h"
-    if NATIVE_SYMBOL not in header.read_text():
-        raise ValueError("existing JNI header contract is missing")
+    expected_jni = jni_header_symbols(header)
     library = native / "libm3_collections_mask.so"
     command(output / "native-compile.log", os.environ.get("CC", "cc"), "-std=c17", "-O2",
             "-fPIC", "-shared", "-Wall", "-Wextra", "-Werror",
@@ -121,8 +135,10 @@ def main():
     symbols = command(output / "native-symbols.log", "nm", "-D", "--defined-only", library)
     exported_jni = {line.split()[-1] for line in symbols.splitlines()
                     if line.split() and line.split()[-1].startswith("Java_")}
-    if exported_jni != {NATIVE_SYMBOL}:
-        raise ValueError("unexpected JNI export set: " + repr(exported_jni))
+    if exported_jni != expected_jni:
+        raise ValueError("JNI export/header mismatch: missing="
+                         + repr(sorted(expected_jni - exported_jni))
+                         + " extra=" + repr(sorted(exported_jni - expected_jni)))
     qualify(home / "bin/java", home / "bin/javac", modules, pack, repo, output, native, False)
     rows = ["artifact\tversion\tjar\tmodule\trequires\tdisposition"]
     for module in ("com.m3.collections", "jdk.m3.collections"):
@@ -156,7 +172,8 @@ def main():
     receipt = {"status": "PASS", "modules": ["com.m3.collections", "jdk.m3.collections"],
                "existing_collection_source_files": len(collection_sources),
                "optional_projection_source_files": len(view_sources),
-               "native_symbol": NATIVE_SYMBOL, "native_sha256": digest(library),
+               "native_symbol": NATIVE_SYMBOL, "native_symbols": sorted(expected_jni),
+               "native_sha256": digest(library),
                "linked_native_sha256": digest(linked_library),
                "native_packaging_transform": "objcopy --strip-debug reference; exact linked byte parity",
                "native_required_on_host_and_image": True, "jdk_home": str(home),

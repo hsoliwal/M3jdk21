@@ -250,7 +250,6 @@ Java_com_m3_collections_M3IndexMaskCompactor_selectWindowNative(
     if (result == NULL) return NULL;
     jbyte marks[M3_CHUNK];
     jint values[M3_CHUNK];
-    jint accepted[M3_CHUNK];
     jint written = 0;
     for (jint position = 0; position < length;) {
         jint remaining = length - position;
@@ -266,7 +265,8 @@ Java_com_m3_collections_M3IndexMaskCompactor_selectWindowNative(
             batch = 0;
             for (jsize i = 0; i < chunk; i++) {
                 unsigned int flags = (unsigned int)(unsigned char)marks[i];
-                if ((flags & (unsigned int)mask) == (unsigned int)mask) accepted[batch++] = values[i];
+                /* The accepted prefix never overtakes this input ordinal. */
+                if ((flags & (unsigned int)mask) == (unsigned int)mask) values[batch++] = values[i];
             }
         }
         if (batch > kept - written) {
@@ -275,7 +275,7 @@ Java_com_m3_collections_M3IndexMaskCompactor_selectWindowNative(
         }
         if (batch > 0) {
             /* Zero-mask identity copies the row chunk without reading aligned states. */
-            (*env)->SetIntArrayRegion(env, result, written, batch, mask == 0 ? values : accepted);
+            (*env)->SetIntArrayRegion(env, result, written, batch, values);
             if ((*env)->ExceptionCheck(env)) return NULL;
             written += batch;
         }
@@ -302,7 +302,6 @@ Java_com_m3_collections_M3IndexMaskCompactor_selectLongWindowNative(
     if (result == NULL) return NULL;
     jbyte marks[M3_CHUNK];
     jlong values[M3_CHUNK];
-    jlong accepted[M3_CHUNK];
     jint written = 0;
     for (jint position = 0; position < length;) {
         jint remaining = length - position;
@@ -318,7 +317,8 @@ Java_com_m3_collections_M3IndexMaskCompactor_selectLongWindowNative(
             batch = 0;
             for (jsize i = 0; i < chunk; i++) {
                 unsigned int flags = (unsigned int)(unsigned char)marks[i];
-                if ((flags & (unsigned int)mask) == (unsigned int)mask) accepted[batch++] = values[i];
+                /* The accepted prefix never overtakes this input ordinal. */
+                if ((flags & (unsigned int)mask) == (unsigned int)mask) values[batch++] = values[i];
             }
         }
         if (batch > kept - written) {
@@ -327,7 +327,7 @@ Java_com_m3_collections_M3IndexMaskCompactor_selectLongWindowNative(
         }
         if (batch > 0) {
             /* Keep the same detached, exact-sized copy contract as the int window. */
-            (*env)->SetLongArrayRegion(env, result, written, batch, mask == 0 ? values : accepted);
+            (*env)->SetLongArrayRegion(env, result, written, batch, values);
             if ((*env)->ExceptionCheck(env)) return NULL;
             written += batch;
         }
