@@ -139,3 +139,20 @@ algorithmic contract checks, not full JDK or performance qualifications.
 These examples are algorithm categories and candidate inspirations, not
 licenses to copy third-party solutions. Catalogue entries explicitly track
 constraint matching, selected/rejected alternatives, and verification.
+
+## Problem-area catalogue expansion (same M3JDK21 review line)
+
+- `docs/m3/problem-areas.tsv`: 127 curated LeetCode/HackerRank problem links,
+  45 cross-cutting areas, independent contract/complexity hints and M3 targets;
+  explicitly **not** an exhaustive platform catalogue or copied solutions.
+- `make/m3/recipes/.../M3ProblemCatalogue.java`: deterministic Java 21
+  offline primitive-array inverted index, area/source/technique/target lookup,
+  duplicate ID/URL/metadata validation, sorted normalization.
+- `M3ProblemCatalogueTest`: independent tests for 12,000 indexed rows,
+  source-domain enforcement, invalid labels, duplicate IDs, category searches
+  and normalization fixed point.
+- `docs/m3/problem-catalogue.md`: donor licensing, investigation method,
+  file-by-file candidate proof gates, and JDK contract mismatch examples.
+
+The new index **does not** automatically change JDK/HotSpot code. Its search
+results nominate categories for a distinct contract-preserving recipe review.

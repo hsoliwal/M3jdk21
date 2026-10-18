@@ -32,6 +32,19 @@
               <classpathScope>test</classpathScope>
             </configuration>
           </execution>
+
+          <execution>
+            <id>m3-problem-catalogue-contracts</id>
+            <phase>test</phase>
+            <goals><goal>java</goal></goals>
+            <configuration>
+              <mainClass>org.synexia.m3.recipe.M3ProblemCatalogueTest</mainClass>
+              <classpathScope>test</classpathScope>
+              <arguments>
+                <argument>${project.basedir}/../../../docs/m3/problem-areas.tsv</argument>
+              </arguments>
+            </configuration>
+          </execution>
         </executions>
       </plugin>
     </plugins>
