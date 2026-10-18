@@ -155,6 +155,7 @@ final class M3RX7CodecCapRecipeTest {
                 "com.synexia.m3.RX7CodecCapLauncher20261018", false);
         qualifyTextCrates("m3-rx7-codec-receive-20261018",
                 "com.synexia.m3.RX7CodecReceive20261018", true);
+        qualifyHierarchyTestRecipe();
     }
 
     private static void qualifyTextCrates(String forward, String namedForward,
@@ -345,7 +346,9 @@ final class M3RX7CodecCapRecipeTest {
                 "m3-rx7-codec-cap-launcher-20261018.yml",
                 "m3-rx7-codec-cap-launcher-20261018-inverse.yml",
                 "m3-rx7-codec-receive-20261018.yml",
-                "m3-rx7-codec-receive-20261018-inverse.yml")) {
+                "m3-rx7-codec-receive-20261018-inverse.yml",
+                "m3-everymodule-hierarchy-test-20261018.yml",
+                "m3-everymodule-hierarchy-test-20261018-inverse.yml")) {
             String path = "/META-INF/rewrite/" + name;
             try (var stream = M3RX7CodecCapRecipeTest.class.getResourceAsStream(path)) {
                 assertNotNull(stream, "exact classpath descriptor required: " + path);
@@ -766,6 +769,299 @@ final class M3RX7CodecCapRecipeTest {
                 + " refusalControls=2 origin=ACTUAL_NAMED_FORWARD_RESULTS"
                 + " carrierRecords=3 carrierBytes=" + carrierBytes.length
                 + " targetActivatedByExporter=false hostedReceiveQualification=NOT_RUN");
+    }
+
+
+    private static void qualifyHierarchyTestRecipe() throws Exception {
+        String forward = "m3-everymodule-hierarchy-test-20261018";
+        String inverse = forward + "-inverse";
+        String name = "com.synexia.m3.EveryModuleHierarchyTest20261018";
+        String target = hierarchyTestTarget();
+        String seed = "src/test/java/demo/HierarchyQualificationUnrelated.java";
+        String seedText = "package demo; final class HierarchyQualificationUnrelated {"
+                + " int value() { return 7; } }\n";
+        String before = resource(inverse, file(target));
+        String after = resource(forward, file(target));
+        assertEquals("2221343fd8f8219e80305ff912a27eb8e64d7183ccc603b415dda45eb016546b",
+                sha256(before));
+        assertEquals("486cad828ea18cf395bf658763db961a870ed21a513d03eef10234d2e14e3adc",
+                sha256(after));
+        assertManifest(forward, Map.of(target, before), Map.of(target, after));
+        assertManifest(inverse, Map.of(target, after), Map.of(target, before));
+        Environment environment = recipeEnvironment();
+        Map<String, String> actualResult = null;
+        int actualRuns = 0;
+        int fixedPoints = 0;
+        for (boolean undo : List.of(false, true)) {
+            String crate = undo ? inverse : forward;
+            String named = undo ? name + "Inverse" : name;
+            String from = undo ? after : before;
+            String to = undo ? before : after;
+            var activated = environment.activateRecipes(named);
+            assertEquals(1, activated.getRecipeList().size());
+            var descriptor = activated.getRecipeList().getFirst();
+            assertEquals(named, descriptor.getName());
+            assertEquals(1, descriptor.getRecipeList().size());
+            assertInstanceOf(M3HashPinnedJavaSnapshotRecipe.class,
+                    descriptor.getRecipeList().getFirst());
+            assertEquals(crate, ((M3HashPinnedJavaSnapshotRecipe)
+                    descriptor.getRecipeList().getFirst()).getCrateName());
+            for (int state = 0; state < 2; state++) {
+                for (boolean reversed : List.of(false, true)) {
+                    Map<String, String> input = Map.of(
+                            target, state == 0 ? from : to, seed, seedText);
+                    Map<String, String> expected = Map.of(target, to, seed, seedText);
+                    Outcome applied = runHierarchyRecipe(
+                            environment.activateRecipes(named), parse(input, reversed));
+                    assertEquals(expected, successfulHierarchyResult(target, input, applied));
+                    assertEquals(state == 0 ? 1 : 0,
+                            applied.run().getChangeset().getAllResults().size());
+                    actualRuns++;
+                    if (!undo && state == 0 && !reversed) {
+                        Map<String, String> emitted = new TreeMap<>();
+                        for (var result : applied.run().getChangeset().getAllResults()) {
+                            assertNotNull(result.getBefore());
+                            assertNotNull(result.getAfter());
+                            assertEquals(before, result.getBefore().printAll());
+                            assertNull(emitted.put(normalized(result.getAfter().getSourcePath()),
+                                    result.getAfter().printAll()), "duplicate hierarchy Result");
+                        }
+                        assertEquals(Map.of(target, after), emitted);
+                        actualResult = Map.copyOf(emitted);
+                    }
+                    Outcome fixed = runHierarchyRecipe(
+                            environment.activateRecipes(named), parse(expected, reversed));
+                    assertEquals(expected, successfulHierarchyResult(target, expected, fixed));
+                    assertTrue(fixed.run().getChangeset().getAllResults().isEmpty());
+                    fixedPoints++;
+                }
+            }
+            Map<String, String> complete = Map.of(target, from, seed, seedText);
+            List<SourceFile> missing = parse(complete, false);
+            missing.removeIf(source -> normalized(source.getSourcePath()).equals(target));
+            refused(crate, missing, "required source missing");
+            Map<String, String> drift = new TreeMap<>(complete);
+            drift.put(target, from + "\n// deliberate hierarchy qualification drift\n");
+            refused(crate, parse(drift, false), "source drift");
+            List<SourceFile> duplicate = parse(complete, false);
+            SourceFile first = duplicate.stream().filter(source ->
+                    normalized(source.getSourcePath()).equals(target)).findFirst().orElseThrow();
+            duplicate.add(first.withId(java.util.UUID.randomUUID()));
+            refused(crate, duplicate, "duplicate target");
+            List<SourceFile> text = parse(complete, false);
+            text.replaceAll(source -> normalized(source.getSourcePath()).equals(target)
+                    ? withCustodyMarker(PlainText.builder()
+                            .sourcePath(Path.of(target)).text(from).build()) : source);
+            refused(crate, text, "not a Java compilation unit");
+            hierarchyChangedAfterScan(crate, target, complete,
+                    Map.of(target, to, seed, seedText));
+        }
+        assertEquals(8, actualRuns);
+        assertEquals(8, fixedPoints);
+        assertNotNull(actualResult, "actual named full-BEFORE Java Result required");
+        Map<String, String> missingResult = new TreeMap<>(actualResult);
+        missingResult.remove(target);
+        AssertionError missingRefusal = assertThrows(AssertionError.class,
+                () -> exportHierarchyTestResult(before, after, missingResult));
+        assertTrue(missingRefusal.getMessage().contains("exact hierarchy Result allowlist"));
+        Map<String, String> changedResult = new TreeMap<>(actualResult);
+        changedResult.put(target, changedResult.get(target) + "\n// exported Result drift\n");
+        AssertionError changedRefusal = assertThrows(AssertionError.class,
+                () -> exportHierarchyTestResult(before, after, changedResult));
+        assertTrue(changedRefusal.getMessage().contains("exact actual hierarchy Java Result"));
+        assertFalse(Files.exists(owned("m3.build.root").resolve("everymodule-test-recipe-results"),
+                LinkOption.NOFOLLOW_LINKS), "refused hierarchy Results must not create output");
+        exportHierarchyTestResult(before, after, actualResult);
+    }
+
+    private static String hierarchyTestTarget() {
+        return "synexia-openrewrite-recipes/src/test/java/com/synexia/rewrite/"
+                + "M3EveryModuleRecipeFirstRecipeTest.java";
+    }
+
+    private static Outcome runHierarchyRecipe(org.openrewrite.Recipe recipe,
+            List<SourceFile> sources) {
+        List<Throwable> errors = new ArrayList<>();
+        InMemoryExecutionContext context = new InMemoryExecutionContext(errors::add);
+        context.putMessage(PARSER_CLASSPATH, List.<Path>of());
+        RecipeRun run = null;
+        Throwable thrown = null;
+        try {
+            run = recipe.run(new InMemoryLargeSourceSet(sources), context, 1);
+        } catch (RuntimeException | AssertionError failure) {
+            thrown = failure;
+        }
+        return new Outcome(run, List.copyOf(errors), thrown);
+    }
+
+    private static Map<String, String> successfulHierarchyResult(String target,
+            Map<String, String> input, Outcome outcome) {
+        assertNull(outcome.thrown(), messages(outcome));
+        assertTrue(outcome.errors().isEmpty(), messages(outcome));
+        assertNotNull(outcome.run());
+        Map<String, String> result = new TreeMap<>(input);
+        for (var change : outcome.run().getChangeset().getAllResults()) {
+            assertNotNull(change.getBefore(), "hierarchy recipe changes an existing test only");
+            assertNotNull(change.getAfter());
+            assertInstanceOf(J.CompilationUnit.class, change.getBefore());
+            assertInstanceOf(J.CompilationUnit.class, change.getAfter());
+            assertEquals(target, normalized(change.getBefore().getSourcePath()));
+            assertEquals(target, normalized(change.getAfter().getSourcePath()),
+                    "unrelated source changed");
+            assertEquals(input.get(target), change.getBefore().printAll());
+            assertEquals(change.getBefore().getId(), change.getAfter().getId());
+            assertEquals(change.getBefore().getSourcePath(), change.getAfter().getSourcePath());
+            assertMarkersPreserved(change.getBefore(), change.getAfter(),
+                    M3HashPinnedJavaSnapshotRecipe.class);
+            assertSameIdMarkerDriftRefused(change.getBefore(), change.getAfter(),
+                    M3HashPinnedJavaSnapshotRecipe.class);
+            assertEquals(change.getBefore().getFileAttributes(), change.getAfter().getFileAttributes());
+            assertEquals(change.getBefore().getCharset(), change.getAfter().getCharset());
+            assertEquals(change.getBefore().isCharsetBomMarked(), change.getAfter().isCharsetBomMarked());
+            result.put(target, change.getAfter().printAll());
+        }
+        return Map.copyOf(result);
+    }
+
+    private static void hierarchyChangedAfterScan(String crate, String target,
+            Map<String, String> scannedText, Map<String, String> changedText) {
+        InMemoryExecutionContext context = new InMemoryExecutionContext(failure -> {
+            throw new AssertionError("hierarchy Java parser callback failed", failure);
+        });
+        context.putMessage(PARSER_CLASSPATH, List.<Path>of());
+        M3HashPinnedJavaSnapshotRecipe recipe = new M3HashPinnedJavaSnapshotRecipe(crate);
+        var inventory = recipe.getInitialValue(context);
+        var scanner = recipe.getScanner(inventory);
+        for (SourceFile source : parse(scannedText, false)) scanner.visit(source, context);
+        assertTrue(recipe.generate(inventory, context).isEmpty(),
+                "existing hierarchy test must not be generated as an addition");
+        var visitor = recipe.getVisitor(inventory);
+        SourceFile changed = parse(changedText, false).stream().filter(source ->
+                normalized(source.getSourcePath()).equals(target)).findFirst().orElseThrow();
+        RuntimeException refusal = assertThrows(RuntimeException.class,
+                () -> visitor.visit(changed, context));
+        String detail = messages(new Outcome(null, List.of(), refusal));
+        assertTrue(detail.contains("java.lang.IllegalStateException: target changed after scan: "
+                + target), detail);
+    }
+
+    private static void exportHierarchyTestResult(String before, String expected,
+            Map<String, String> actual) throws Exception {
+        String target = hierarchyTestTarget();
+        assertEquals(Set.of(target), actual.keySet(), "exact hierarchy Result allowlist");
+        assertEquals(Map.of(target, expected), actual, "exact actual hierarchy Java Result");
+        assertEquals("2221343fd8f8219e80305ff912a27eb8e64d7183ccc603b415dda45eb016546b",
+                sha256(before));
+        assertEquals("486cad828ea18cf395bf658763db961a870ed21a513d03eef10234d2e14e3adc",
+                sha256(expected));
+        byte[] resultBytes = actual.get(target).getBytes(StandardCharsets.UTF_8);
+        assertTrue(resultBytes.length > 0 && resultBytes.length <= 16 * 1024);
+        String receipt = "# SPDX-License-Identifier: Apache-2.0\n"
+                + "# schema=M3_EVERYMODULE_TEST_RECIPE_RESULT_V1\n"
+                + "# recipe=com.synexia.m3.EveryModuleHierarchyTest20261018\n"
+                + "# origin=ACTUAL_NAMED_FULL_BEFORE_FORWARD_JAVA_AST_RESULT\n"
+                + "# originalModuleCompile=NOT_RUN\n"
+                + "# originalModuleTestExecution=NOT_RUN\n"
+                + "# actualEveryModule=NOT_RUN\n"
+                + "# fullMavenModel=NOT_RUN\n"
+                + "# typeAttribution=NOT_PROVEN\n"
+                + "# targetActivatedByExporter=false\n"
+                + "# receiptSelfExcluded=true\n"
+                + "path\tbefore_sha256\tafter_sha256\tbytes\n"
+                + target + "\t" + sha256(before) + "\t" + sha256(actual.get(target))
+                + "\t" + resultBytes.length + "\n";
+        byte[] receiptBytes = receipt.getBytes(StandardCharsets.UTF_8);
+        assertTrue(receiptBytes.length <= 4 * 1024);
+        Map<String, byte[]> payloads = new TreeMap<>();
+        payloads.put(target, resultBytes);
+        payloads.put("receipt.tsv", receiptBytes);
+        long plannedBytes = payloads.values().stream().mapToLong(data -> data.length).sum();
+        assertTrue(plannedBytes <= 64 * 1024);
+        Path recipeRoot = owned("m3.recipe.root");
+        Path build = owned("m3.build.root");
+        Path javaOutput = owned("m3.output.root");
+        for (Path external : List.of(build, javaOutput)) {
+            assertFalse(external.startsWith(recipeRoot) || recipeRoot.startsWith(external),
+                    "hierarchy outputs must be external to recipe source");
+        }
+        assertFalse(build.startsWith(javaOutput) || javaOutput.startsWith(build),
+                "hierarchy build root and Java export root must be disjoint");
+        Path output = build.resolve("everymodule-test-recipe-results").normalize();
+        assertTrue(output.startsWith(build) && !output.equals(build));
+        Path prior = build.resolve("text-recipe-results").normalize();
+        assertFalse(output.startsWith(prior) || prior.startsWith(output),
+                "hierarchy and existing text Result roots must be disjoint");
+        assertFalse(Files.exists(output, LinkOption.NOFOLLOW_LINKS),
+                "fresh hierarchy Result root required");
+        assertFalse(Files.isSymbolicLink(output));
+        for (String relative : payloads.keySet()) {
+            Path destination = output.resolve(relative).normalize();
+            assertTrue(destination.startsWith(output) && !destination.equals(output));
+            for (Path current = destination; current != null && !current.equals(build);
+                    current = current.getParent()) {
+                assertFalse(Files.isSymbolicLink(current));
+                assertFalse(Files.exists(current, LinkOption.NOFOLLOW_LINKS),
+                        "all hierarchy destinations must initially be absent");
+            }
+        }
+        assertTrue(Files.getFileStore(build).getUsableSpace()
+                >= 8L * 1024 * 1024 * 1024 + plannedBytes,
+                "8GiB reserve after planned hierarchy output required");
+        Files.createDirectory(output);
+        for (var entry : payloads.entrySet()) {
+            Path destination = output.resolve(entry.getKey()).normalize();
+            Files.createDirectories(destination.getParent());
+            for (Path current = destination.getParent(); current != null;
+                    current = current.getParent()) {
+                assertFalse(Files.isSymbolicLink(current));
+                assertTrue(Files.isDirectory(current, LinkOption.NOFOLLOW_LINKS));
+                if (current.equals(build)) break;
+            }
+            Files.write(destination, entry.getValue(), StandardOpenOption.CREATE_NEW);
+        }
+        Map<String, byte[]> observed = new TreeMap<>();
+        try (var paths = Files.walk(output, 10)) {
+            List<Path> entries = paths.limit(16).toList();
+            assertEquals(10, entries.size(), "closed hierarchy Result output inventory");
+            for (Path path : entries) {
+                assertFalse(Files.isSymbolicLink(path));
+                if (Files.isDirectory(path, LinkOption.NOFOLLOW_LINKS)) continue;
+                assertTrue(Files.isRegularFile(path, LinkOption.NOFOLLOW_LINKS));
+                String relative = normalized(output.relativize(path));
+                assertTrue(payloads.containsKey(relative), "foreign hierarchy output");
+                assertTrue(Files.size(path) <= 16 * 1024);
+                byte[] data;
+                try (var stream = Files.newInputStream(path, LinkOption.NOFOLLOW_LINKS)) {
+                    data = stream.readNBytes(16 * 1024 + 1);
+                }
+                assertTrue(data.length <= 16 * 1024);
+                assertArrayEquals(payloads.get(relative), data, "exact hierarchy readback");
+                assertNull(observed.put(relative, data), "duplicate hierarchy output");
+            }
+        }
+        assertEquals(payloads.keySet(), observed.keySet());
+        assertTrue(Files.getFileStore(build).getUsableSpace() >= 8L * 1024 * 1024 * 1024);
+        StringBuilder carrier = new StringBuilder();
+        for (String path : List.of(target, "receipt.tsv")) {
+            byte[] data = observed.get(path);
+            String encoded = java.util.Base64.getEncoder().encodeToString(data);
+            assertArrayEquals(data, java.util.Base64.getDecoder().decode(encoded));
+            String hash = HexFormat.of().formatHex(
+                    MessageDigest.getInstance("SHA-256").digest(data));
+            carrier.append("M3_EVERYMODULE_TEST_RESULT_B64_V1").append('\t')
+                    .append(path).append('\t').append(hash).append('\t')
+                    .append(data.length).append('\t').append(encoded).append('\n');
+        }
+        byte[] carrierBytes = carrier.toString().getBytes(StandardCharsets.UTF_8);
+        assertTrue(carrierBytes.length <= 16 * 1024, "bounded hierarchy Result carrier");
+        assertEquals(2L, carrier.toString().lines().count());
+        System.out.print(carrier.toString());
+        System.out.println("M3_EVERYMODULE_HIERARCHY_TEST_RECIPE_PASS actualRuns=8 fixedPoints=8"
+                + " refusalControls=10 exportRefusals=2 outputs=1 receipt=1 carrierRecords=2"
+                + " carrierBytes=" + carrierBytes.length
+                + " originalModuleCompile=NOT_RUN originalModuleTestExecution=NOT_RUN"
+                + " actualEveryModule=NOT_RUN fullMavenModel=NOT_RUN typeAttribution=NOT_PROVEN"
+                + " targetActivatedByExporter=false");
     }
 
     private static String file(String path) {

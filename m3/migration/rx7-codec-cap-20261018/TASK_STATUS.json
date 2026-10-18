@@ -1,55 +1,45 @@
 {
-  "schema": "M3_RX7_RECEIVE_BOOTSTRAP_RECEIVER_STATUS_V1",
-  "observedUtc": "2026-10-18 06:49:16 UTC",
-  "scope": "Tool qualification SDK and binding only on separate stacked draft; active controls/original runtime sources unchanged",
-  "canonicalSource": {
-    "commit": "2c6c80a68b732926d74d34e0138d74d2dac4fb48",
-    "pr": "https://github.com/hsoliwal/com.synexia/pull/12287",
-    "path": "synexia-openrewrite-recipes/tasks/regex-v7-cold-free-projection-20261007/codec-receive-bootstrap-20261018/sdk"
-  },
+  "schema": "M3_EVERYMODULE_HIERARCHY_TEST_RECEIVER_STATUS_V1",
+  "status": "UNADMITTED_TEST_RECIPE_QUALIFICATION_CANDIDATE",
+  "canonicalSourceCore": "d9e5fcd712d25e16f1b52a93b8a2c3a14639a323",
+  "sourcePR": 12303,
   "sdk": {
-    "tree": "603c438782a1447b4dd0a486ec6bb6287c8db715",
-    "files": 44,
-    "bytes": 371346,
-    "nonselfPins": 43,
-    "pinsSha256": "269767130ddc605c47fca66d6d171b78395dc00c57b0fb8e0ca52d06a1e2035b"
+    "tree": "8fba702e07911581678c94aca44ba724a7b5d2e8",
+    "files": 50,
+    "bytes": 396532,
+    "nonselfPins": 49,
+    "pinsSha256": "aaeca3f76302a5390819f77e5149111809cf7768b45364203d20856a28a617e4"
   },
-  "controls": {
-    "launcherSha256": "63de29b3444fcd5a794ff8ba47b8cebf2d0aa14934c5fb38ed58624f0a661a00",
-    "workflowSha256": "b878863f71b122dcabbfef09658458a358662e8210a470b70d5cc431acc250a8",
-    "unchanged": true
+  "preservedQualifiedBootstrap": {
+    "head": "9701611c9f9cfc99850f4a439e3c9c5b4f8e1634",
+    "sdk": "603c438782a1447b4dd0a486ec6bb6287c8db715",
+    "run": 39105399855
   },
-  "qualification": {
-    "maven": "NOT_RUN",
-    "carrier": "NOT_RUN",
-    "codecRuntimeRegression": "NOT_RUN_ON_BOOTSTRAP",
-    "everyModule": "NOT_RUN",
-    "receiveControlRuntime": "NOT_RUN"
+  "newExecution": "NOT_RUN",
+  "actualNewCarrier": "NOT_RUN",
+  "scope": "One exact source-test AST snapshot recipe qualification through old bounded lane; original module test is not executed",
+  "calculatedOnly": {
+    "newCarrierBytes": 3715,
+    "receiptBytes": 687
   },
-  "carrier": {
-    "schema": "M3_RX7_TEXT_RESULT_B64_V1",
-    "records": 3,
-    "calculatedBytes": 44256,
-    "calculatedReceiptBytes": 731,
-    "calculationNotProof": true,
-    "entireCarrierCapBytes": 65536,
-    "combinedMavenLogCapBytes": 131072
+  "expected": {
+    "newNamedRuns": 8,
+    "fixedPoints": 8,
+    "sourceRefusals": 10,
+    "exportRefusals": 2,
+    "newCarrierRecords": 2,
+    "oldCarrierRecords": 3,
+    "oldJavaExports": 2,
+    "oldNamedMethods": 3
   },
-  "oldQualifiedContext": {
-    "head": "b42f5260417d12bb73246302c8722b9295a2d24f",
-    "sdk": "e89f12783efeb9b6302aa0d02219651c8aeb9b5d",
-    "run": 39102406947,
-    "unchangedBranch": true
-  },
-  "formalAutoreviewHelper": "NOT_RUN_STORAGE_HOLD",
+  "originalModel": "UNSEALED",
+  "originalModuleCompile": "NOT_RUN",
+  "originalModuleTestExecution": "NOT_RUN",
+  "actualEveryModule": "NOT_RUN",
+  "typeAttribution": "NOT_PROVEN",
   "runtimeApplied": false,
-  "controlApplied": false,
-  "productReceived": false,
-  "receivePre": false,
-  "receivePost": false,
-  "fullJdkQualified": false,
-  "jniQualified": false,
-  "performanceRetentionQualified": false,
+  "controlsApplied": false,
+  "originalTestApplied": false,
   "phaseAdvanced": false,
   "fullMigrationComplete": false,
   "goalActive": true
