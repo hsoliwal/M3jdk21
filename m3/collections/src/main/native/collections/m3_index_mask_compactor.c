@@ -182,6 +182,60 @@ static jint m3_count_window(JNIEnv *env, jbyteArray states,
     return kept;
 }
 
+/* ABI probe for direct logical-position selection from the state lane. */
+JNIEXPORT jint JNICALL
+Java_com_m3_collections_M3IndexMaskCompactor_positionsAbiNative(JNIEnv *env, jclass owner) {
+    (void)env; (void)owner;
+    return 1;
+}
+
+JNIEXPORT jintArray JNICALL
+Java_com_m3_collections_M3IndexMaskCompactor_selectPositionsNative(
+        JNIEnv *env, jclass owner, jbyteArray states, jint mask) {
+    (void)owner;
+    if (states == NULL || mask < 0 || mask > 255) {
+        m3_bad_window(env);
+        return NULL;
+    }
+    jsize length = (*env)->GetArrayLength(env, states);
+    if ((*env)->ExceptionCheck(env)) return NULL;
+    jint kept = m3_count_window(env, states, 0, length, mask);
+    if (kept < 0) return NULL;
+    jintArray result = (*env)->NewIntArray(env, kept);
+    if (result == NULL) return NULL;
+    jbyte marks[M3_CHUNK];
+    jint positions[M3_CHUNK];
+    jint written = 0;
+    for (jint offset = 0; offset < length;) {
+        jint remaining = length - offset;
+        jsize chunk = remaining < M3_CHUNK ? remaining : M3_CHUNK;
+        if (mask != 0) {
+            (*env)->GetByteArrayRegion(env, states, offset, chunk, marks);
+            if ((*env)->ExceptionCheck(env)) return NULL;
+        }
+        jsize accepted = 0;
+        for (jsize i = 0; i < chunk; i++) {
+            unsigned int flags = mask == 0 ? 0u : (unsigned int)(unsigned char)marks[i];
+            if ((flags & (unsigned int)mask) == (unsigned int)mask) positions[accepted++] = offset + i;
+        }
+        if (accepted > kept - written) {
+            m3_throw_state_drift(env);
+            return NULL;
+        }
+        if (accepted > 0) {
+            (*env)->SetIntArrayRegion(env, result, written, accepted, positions);
+            if ((*env)->ExceptionCheck(env)) return NULL;
+            written += accepted;
+        }
+        offset += chunk;
+    }
+    if (written != kept) {
+        m3_throw_state_drift(env);
+        return NULL;
+    }
+    return result;
+}
+
 JNIEXPORT jintArray JNICALL
 Java_com_m3_collections_M3IndexMaskCompactor_selectWindowNative(
         JNIEnv *env, jclass owner, jintArray rows, jint row_offset,

@@ -38,6 +38,10 @@ public final class M3IndexMaskCompactorSelfTest {
         ok(all != source);
         eq(new int[] {-17}, M3IndexMaskCompactor.select(source, states, 255, java));
         eq(new int[] {10, -17}, M3IndexMaskCompactor.select(source, states, 1, java));
+        eq(new int[] {0, 1, 2, 3}, M3IndexMaskCompactor.selectPositions(states, 0, java));
+        eq(new int[] {1}, M3IndexMaskCompactor.selectPositions(states, 255, java));
+        eq(new int[] {0, 1}, M3IndexMaskCompactor.selectPositions(states, 1, java));
+        eq(new int[] {}, M3IndexMaskCompactor.selectPositions(new byte[0], 128, java));
         eq(new int[] {}, M3IndexMaskCompactor.select(new int[0], new byte[0], 128, java));
         fails(NullPointerException.class, () -> M3IndexMaskCompactor.select(null, states, 0, java));
         fails(NullPointerException.class, () -> M3IndexMaskCompactor.select(source, null, 0, java));
@@ -48,10 +52,24 @@ public final class M3IndexMaskCompactorSelfTest {
                 () -> M3IndexMaskCompactor.select(source, states, -1, java));
         fails(IllegalArgumentException.class,
                 () -> M3IndexMaskCompactor.select(source, states, 256, java));
+        fails(NullPointerException.class,
+                () -> M3IndexMaskCompactor.selectPositions(null, 0, java));
+        fails(NullPointerException.class,
+                () -> M3IndexMaskCompactor.selectPositions(states, 0, null));
+        fails(IllegalArgumentException.class,
+                () -> M3IndexMaskCompactor.selectPositions(states, -1, java));
+        fails(IllegalArgumentException.class,
+                () -> M3IndexMaskCompactor.selectPositions(states, 256, java));
         if (nativeRun) {
             M3IndexMaskCompactor.Backend nativeBackend = M3IndexMaskCompactor.Backend.NATIVE_REQUIRED;
             eq(new int[] {-17}, M3IndexMaskCompactor.select(source, states, 255, nativeBackend));
             eq(source, M3IndexMaskCompactor.select(source, states, 0, nativeBackend));
+            eq(new int[] {0, 1, 2, 3},
+                    M3IndexMaskCompactor.selectPositions(states, 0, nativeBackend));
+            eq(new int[] {1},
+                    M3IndexMaskCompactor.selectPositions(states, 255, nativeBackend));
+            eq(new int[] {0, 1},
+                    M3IndexMaskCompactor.selectPositions(states, 1, nativeBackend));
         }
     }
 
@@ -77,11 +95,16 @@ public final class M3IndexMaskCompactorSelfTest {
             }
             for (int mask = 0; mask < 256; mask++) {
                 int[] expected = oracle(rows, states, mask);
+                int[] expectedPositions = positionOracle(states, mask);
                 eq(expected, M3IndexMaskCompactor.select(rows, states, mask,
                         M3IndexMaskCompactor.Backend.JAVA));
+                eq(expectedPositions, M3IndexMaskCompactor.selectPositions(
+                        states, mask, M3IndexMaskCompactor.Backend.JAVA));
                 if (nativeRun) {
                     eq(expected, M3IndexMaskCompactor.select(rows, states, mask,
                             M3IndexMaskCompactor.Backend.NATIVE_REQUIRED));
+                    eq(expectedPositions, M3IndexMaskCompactor.selectPositions(
+                            states, mask, M3IndexMaskCompactor.Backend.NATIVE_REQUIRED));
                 }
             }
         }
@@ -102,6 +125,8 @@ public final class M3IndexMaskCompactorSelfTest {
             windowValidation(backend);
         }
         if (!M3IndexMaskCompactor.nativeAvailable()) {
+            fails(UnsatisfiedLinkError.class, () -> M3IndexMaskCompactor.selectPositions(
+                    new byte[0], 0, M3IndexMaskCompactor.Backend.NATIVE_REQUIRED));
             fails(UnsatisfiedLinkError.class, () -> M3IndexMaskCompactor.selectWindow(
                     new int[0], 0, new byte[0], 0, 0, 0,
                     M3IndexMaskCompactor.Backend.NATIVE_REQUIRED));
@@ -243,11 +268,16 @@ public final class M3IndexMaskCompactorSelfTest {
             }
             int mask = random.nextInt(256);
             int[] expected = oracle(rows, states, mask);
+            int[] expectedPositions = positionOracle(states, mask);
             eq(expected, M3IndexMaskCompactor.select(rows, states, mask,
                     M3IndexMaskCompactor.Backend.JAVA));
+            eq(expectedPositions, M3IndexMaskCompactor.selectPositions(
+                    states, mask, M3IndexMaskCompactor.Backend.JAVA));
             if (nativeRun) {
                 eq(expected, M3IndexMaskCompactor.select(rows, states, mask,
                         M3IndexMaskCompactor.Backend.NATIVE_REQUIRED));
+                eq(expectedPositions, M3IndexMaskCompactor.selectPositions(
+                        states, mask, M3IndexMaskCompactor.Backend.NATIVE_REQUIRED));
             }
         }
     }
@@ -329,6 +359,17 @@ public final class M3IndexMaskCompactorSelfTest {
             throw new AssertionError("long selection mismatch: "
                     + Arrays.toString(expected) + " vs " + Arrays.toString(actual));
         }
+    }
+
+    private static int[] positionOracle(byte[] states, int mask) {
+        int[] candidates = new int[states.length];
+        int count = 0;
+        for (int position = 0; position < states.length; position++) {
+            if (((states[position] & 0xff) & mask) == mask) {
+                candidates[count++] = position;
+            }
+        }
+        return Arrays.copyOf(candidates, count);
     }
 
     private static int[] oracle(int[] order, byte[] states, int mask) {

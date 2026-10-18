@@ -304,9 +304,7 @@ public final class M3CountedBag<E> extends AbstractCollection<E> {
         if (states.length != keys.length) {
             throw new IllegalArgumentException("state length differs from distinct key count");
         }
-        int[] rowIds = new int[keys.length];
-        for (int i = 0; i < keys.length; i++) rowIds[i] = i;
-        int[] chosen = M3IndexMaskCompactor.select(rowIds, states, required, backend);
+        int[] chosen = M3IndexMaskCompactor.selectPositions(states, required, backend);
         M3CountedBag<E> result = new M3CountedBag<>();
         for (int i : chosen) {
             @SuppressWarnings("unchecked") E key = (E) keys[i];
