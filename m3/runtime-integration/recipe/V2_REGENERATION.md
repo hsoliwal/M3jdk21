@@ -73,3 +73,10 @@ re-seal, so their master hashes are recorded as `superseded` too (PRE_EXISTING_D
 `a4/reseal.py` regeneration is refused by the current `apply.py` (`modified UTF-8 recipe seal drift:
 src/hotspot/share/classfile/javaClasses.cpp`), so the superseded custody of the A41/A42 epoch-1 re-seals
 is kept. `apply.py --check` state=superseded and `test_recipe.py` 8/8 on the 66 targets of aabb10ebf8.
+
+## 2026-10-18 re-seal (A43 reverse needle stock lane re-land, leaf REGEX-RELAND)
+
+Superseded-custody re-seal against e977631b9f (receiver of Synexia #12397): `runtime.patch` and every
+`after` image untouched (66 targets); `M3StringSearchPrecompute.java` records its A43 owner as a reviewed
+`superseded` hash; no other target changed. `apply.py --check` state=superseded and `test_recipe.py` 8/8
+on the 66 targets of e977631b9f.
