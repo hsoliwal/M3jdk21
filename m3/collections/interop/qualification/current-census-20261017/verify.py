@@ -4,7 +4,7 @@
 """Fail-closed M3 interop installed-source successor; never relax the historical recipe.
 
 Historical five-file postimages remain immutable. This receipt admits exactly the
-current thirty-four first-party source/test owners and their SHA-256 and Git blobs.
+current thirty-four first-party source/test owners, including the five-provider indexed materialization successor and their SHA-256 and Git blobs.
 """
 import hashlib
 from pathlib import Path
@@ -14,7 +14,7 @@ HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[4] if len(HERE.parents) > 4 else Path.cwd()
 CENSUS = HERE / 'current-source-census.tsv'
 LEGACY = ROOT / 'm3/collections/interop/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-java/collections-library-interop/manifest.tsv'
-RECEIPT_SHA256 = 'd439a75720ad222dff399e28d794906e1955d7c20a84bc545b8d99b29d0e7963'
+RECEIPT_SHA256 = 'daac777a08a081832436efba2a41d01a8e964b9054017ebc949cf5c36e506409'
 LEGACY_GIT_BLOB = 'bdc0cab41cd4033421388fbd44f37203d765f57e'
 BASE = 'm3/collections/interop/src/'
 MAIN = BASE + 'main/java/com/m3/collections/interop/'

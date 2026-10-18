@@ -142,4 +142,122 @@ final class M3FiveLibraryIndexViewsTest {
             assertArrayEquals(order, Arrays.copyOf(order, order.length));
         }
     }
+
+    @Test void extendedProviderMaterializationsAreActualM3Collections() {
+        var rows = M3FiveLibraryIndexViews.capture(
+                new String[] {"alpha", "beta", "alpha", "beta"},
+                new Integer[] {10, 20, 10, 21},
+                new int[] {0, 2, 3, 1, 0},
+                new byte[] {1, 3, 1, 1});
+        assertEquals(java.util.Set.of(10, 20, 21), rows.asJdkSet());
+        var guavaCounts = rows.asGuavaMultiset();
+        assertEquals(3, guavaCounts.count(10));
+        assertEquals(1, guavaCounts.count(21));
+        assertEquals(5, guavaCounts.size());
+        var apacheCounts = rows.asApacheMultiSet();
+        assertEquals(3, apacheCounts.getCount(10));
+        assertEquals(5, apacheCounts.size());
+        var eclipseList = rows.asEclipseListMultimap();
+        assertEquals(3, eclipseList.get("alpha").size());
+        assertEquals(2, eclipseList.get("beta").size());
+        var eclipseSet = rows.asEclipseSetMultimap();
+        assertEquals(1, eclipseSet.get("alpha").size());
+        assertEquals(2, eclipseSet.get("beta").size());
+        var spring = rows.asSpringLastValueMap();
+        assertEquals(2, spring.size());
+        assertEquals(java.util.List.of(10), spring.get("alpha"));
+        assertEquals(java.util.List.of(20), spring.get("beta"));
+        var table = rows.asGuavaOrdinalTable();
+        assertEquals(5, table.size());
+        assertEquals(Integer.valueOf(10), table.get("alpha", 0));
+        assertEquals(Integer.valueOf(10), table.get("alpha", 4));
+        assertEquals(3, table.row("alpha").size());
+        assertEquals(5, rows.size()); // vendor result mutation never reaches the snapshot
+    }
+
+    @Test void actualGuavaBiMapRejectsValueCollisionsAndExposesLiveInverse() {
+        var rows = M3FiveLibraryIndexViews.capture(
+                new String[] {"first", "second", "first"},
+                new Integer[] {7, 8, 9},
+                new int[] {0, 1, 2},
+                new byte[] {1, 1, 1});
+        var result = rows.asGuavaBiMap();
+        assertEquals(2, result.size());
+        assertEquals(Integer.valueOf(9), result.get("first"));
+        assertEquals("first", result.inverse().get(9));
+        result.inverse().put(10, "third");
+        assertEquals(Integer.valueOf(10), result.get("third"));
+        assertEquals(3, rows.size());
+        var clash = M3FiveLibraryIndexViews.capture(
+                new String[] {"x", "y"},
+                new Integer[] {1, 1},
+                new int[] {0, 1},
+                new byte[] {1, 1});
+        assertThrows(IllegalArgumentException.class, clash::asGuavaBiMap);
+    }
+
+    @Test void composedOffsetMasksMaterializeCorrectProviderSemantics() {
+        var source = M3FiveLibraryIndexViews.capture(
+                new String[] {"z", "a", "a", "z", "b"},
+                new Integer[] {3, 1, 1, 4, 2},
+                new int[] {0, 1, 2, 4, 3, 2},
+                new byte[] {1, 3, 1, 1, 3});
+        var selected = source.slice(1, 5).filteredByState(1, 0);
+        assertEquals(5, selected.size());
+        assertEquals(3, selected.asGuavaMultiset().count(1));
+        assertEquals(3, selected.asApacheMultiSet().getCount(1));
+        assertEquals(3, selected.asEclipseListMultimap().get("a").size());
+        assertEquals(1, selected.asEclipseSetMultimap().get("a").size());
+        var ordered = selected.sortedByKey(Comparator.naturalOrder());
+        assertEquals(List.of("a", "a", "a", "b", "z"),
+                java.util.stream.IntStream.range(0, ordered.size())
+                    .mapToObj(ordered::keyAt).toList());
+        assertEquals(5, ordered.asGuavaOrdinalTable().size());
+        if (M3IndexMaskCompactor.nativeAvailable()) {
+            var nativeSelected = source.slice(1, 5).filteredByState(1, 0,
+                    M3IndexMaskCompactor.Backend.NATIVE_REQUIRED);
+            assertEquals(selected.asJdkList(), nativeSelected.asJdkList());
+            assertEquals(selected.asGuavaMultiset(), nativeSelected.asGuavaMultiset());
+        }
+    }
+
+    @Test void seededCrossProviderCountsPreserveLogicalOccurrences() {
+        Random random = new Random(20261018L);
+        for (int trial = 0; trial < 500; trial++) {
+            int n = 1 + random.nextInt(48);
+            Integer[] key = new Integer[n], value = new Integer[n];
+            byte[] flags = new byte[n];
+            int[] order = new int[n + 12];
+            for (int i = 0; i < n; i++) {
+                key[i] = random.nextInt(11);
+                value[i] = random.nextInt(8);
+                flags[i] = (byte) random.nextInt(256);
+            }
+            for (int i = 0; i < order.length; i++) order[i] = random.nextInt(n);
+            var indexed = M3FiveLibraryIndexViews.capture(key, value, order, flags);
+            int required = random.nextInt(256);
+            var filtered = indexed.filteredByState(required, 0);
+            java.util.Map<Integer, Integer> oracle = new java.util.HashMap<>();
+            int[] expectedCounts = new int[8];
+            for (int p : order) {
+                if (((flags[p] & 0xff) & required) == required) {
+                    oracle.put(key[p], value[p]);
+                    expectedCounts[value[p]]++;
+                }
+            }
+            assertEquals(oracle, filtered.asJdkMapLastWins());
+            var guava = filtered.asGuavaMultiset();
+            var apache = filtered.asApacheMultiSet();
+            int total = 0;
+            for (int v = 0; v < expectedCounts.length; v++) {
+                assertEquals(expectedCounts[v], guava.count(v));
+                assertEquals(expectedCounts[v], apache.getCount(v));
+                total += expectedCounts[v];
+            }
+            assertEquals(total, guava.size());
+            assertEquals(total, apache.size());
+            assertEquals(total, filtered.asGuavaOrdinalTable().size());
+            assertEquals(oracle.size(), filtered.asSpringLastValueMap().size());
+        }
+    }
 }

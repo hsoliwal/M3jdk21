@@ -1,0 +1,5 @@
+category	operation	decision	proof
+SOURCE_GENEALOGY	Historical 34-file receipt after a qualified successor revision	EXACT_OLD_OR_ONE_PINNED_SUCCESSOR	Pinned manifest SHA256 and exact before/after hashes
+HISTORICAL_PIN	2 unchanged historical workflow outputs	RETAIN STRICT	Byte-for-byte original template comparison
+MAVEN_OPENREWRITE	Single sealed YAML workflow semantic atom	REUSE M3GpuToolJoinRecipe	Named Java21 OpenRewrite scheduler and fixed point
+JNI_CONTRACT	Index/mask selector	UNCHANGED	Existing exact-head C17 JNI parity remains required downstream

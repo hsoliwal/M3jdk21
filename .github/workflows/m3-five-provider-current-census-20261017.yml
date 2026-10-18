@@ -32,8 +32,32 @@ jobs:
               expected=(r/template).read_bytes()
               actual=(root/target).read_bytes()
               assert sha256(expected).hexdigest()==after,(target,"template seal")
-              assert actual==expected,(target,"receiver not generated")
-          print("PASS four source-sealed census postimages")
+              if actual != expected:
+              # The historical 34-file census can be followed only by this exact
+              # reviewed source-sealed 2026-10-18 successor, not by arbitrary drift.
+              successor = root/"m3/collections/qualification/m3-five-provider-indexed-projections-20261018/recipe/src/main/resources/com/synexia/rewrite/m3-five-provider-indexed-projections-20261018"
+              approved = {
+                  "m3/collections/interop/qualification/current-census-20261017/current-source-census.tsv": ("d439a75720ad222dff399e28d794906e1955d7c20a84bc545b8d99b29d0e7963", "daac777a08a081832436efba2a41d01a8e964b9054017ebc949cf5c36e506409"),
+                  "m3/collections/interop/qualification/current-census-20261017/verify.py": ("1f7b04b3a5aa6da934c96b38518748aea692508d775a631696a0a95d41438787", "443a9bd4150a4b192bf4f14e8a618c361e63fedad31742b2868cab4f74b4fda7"),
+              }
+              assert target in approved, (target,"historical source changed without successor")
+              source_manifest = (successor/"manifest.tsv").read_bytes()
+              assert sha256(source_manifest).hexdigest()=="5aad026f5c2159aa62fe2236eb1484eff6724a1d3b56b59b11b97ab0851501d4", "unapproved successor manifest"
+              successor_entries = {}
+              for successor_line in source_manifest.decode("utf-8").splitlines():
+                  successor_path, successor_before, successor_after, successor_template = successor_line.split("\t")
+                  assert successor_path not in successor_entries, "duplicate successor"
+                  successor_entries[successor_path] = (successor_before, successor_after, successor_template)
+              assert len(successor_entries)==4
+              assert target in successor_entries, target
+              successor_before, successor_after, successor_template = successor_entries[target]
+              assert (successor_before,successor_after)==approved[target], "broken source ancestry"
+              assert successor_before==after, "historical/source chain mismatch"
+              successor_content=(successor/successor_template).read_bytes()
+              assert sha256(successor_content).hexdigest()==successor_after, "successor template drift"
+              assert actual==successor_content, (target,"not qualified successor")
+
+          print("PASS four census postimages or exact named successor")
           PY
       - name: Preserve synthetic negative tests and verify installed 34-file census
         run: |
