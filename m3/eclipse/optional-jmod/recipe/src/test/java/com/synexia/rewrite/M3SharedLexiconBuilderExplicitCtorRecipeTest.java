@@ -12,15 +12,14 @@ import java.nio.file.Path;
 import java.security.MessageDigest;
 import java.util.HexFormat;
 import java.util.List;
-import java.util.Map;
 import org.junit.jupiter.api.Test;
 import org.openrewrite.InMemoryExecutionContext;
 import org.openrewrite.Parser;
 import org.openrewrite.SourceFile;
-import org.openrewrite.internal.InMemoryLargeSourceSet;
-import org.openrewrite.java.JavaParser;
 import org.openrewrite.Recipe;
 import org.openrewrite.config.Environment;
+import org.openrewrite.internal.InMemoryLargeSourceSet;
+import org.openrewrite.java.JavaParser;
 
 /** Exact-source, fixed-point and drift-refusal proof for the shared M3 catalog warning. */
 final class M3SharedLexiconBuilderExplicitCtorRecipeTest {
