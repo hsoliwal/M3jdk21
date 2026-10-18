@@ -105,23 +105,7 @@ public final class M3IndexMaskCompactor {
     public static long[] selectLong(long[] orderedRows, byte[] rowStates, int requiredMask) {
         Objects.requireNonNull(orderedRows, "orderedRows");
         validate(rowStates, orderedRows.length, requiredMask);
-        int selectedCount = countSelected(rowStates, requiredMask);
-        // Every row is selected: one defensive primitive copy, no second mask scan.
-        if (selectedCount == orderedRows.length) return orderedRows.clone();
-        long[] selected = new long[selectedCount];
-        int written = 0;
-        for (int i = 0; i < orderedRows.length; i++) {
-            if (matches(rowStates[i], requiredMask)) {
-                if (written == selected.length) {
-                    throw new ConcurrentModificationException("aligned selection states changed");
-                }
-                selected[written++] = orderedRows[i];
-            }
-        }
-        if (written != selected.length) {
-            throw new ConcurrentModificationException("aligned selection states changed");
-        }
-        return selected;
+        return selectLongWindowJava(orderedRows, 0, rowStates, 0, orderedRows.length, requiredMask);
     }
 
     /** Validate before an in-place primitive owner writes a single resident slot. */
@@ -144,10 +128,7 @@ public final class M3IndexMaskCompactor {
     }
 
     private static int countSelected(byte[] states, int requiredMask) {
-        if (requiredMask == 0) return states.length;
-        int kept = 0;
-        for (byte state : states) if (matches(state, requiredMask)) kept++;
-        return kept;
+        return countWindow(states, 0, states.length, requiredMask);
     }
 
     /**
@@ -155,23 +136,7 @@ public final class M3IndexMaskCompactor {
      * or per-element object. Caller must keep both input arrays stable during use.
      */
     static int[] selectJava(int[] orderedRows, byte[] rowStates, int requiredMask) {
-        int selectedCount = countSelected(rowStates, requiredMask);
-        // Retain output isolation even when the mask selects every source index.
-        if (selectedCount == orderedRows.length) return orderedRows.clone();
-        int[] selected = new int[selectedCount];
-        int written = 0;
-        for (int i = 0; i < orderedRows.length; i++) {
-            if (matches(rowStates[i], requiredMask)) {
-                if (written == selected.length) {
-                    throw new ConcurrentModificationException("aligned selection states changed");
-                }
-                selected[written++] = orderedRows[i];
-            }
-        }
-        if (written != selected.length) {
-            throw new ConcurrentModificationException("aligned selection states changed");
-        }
-        return selected;
+        return selectIntWindowJava(orderedRows, 0, rowStates, 0, orderedRows.length, requiredMask);
     }
 
     /** Exact-sized logical-position selection; no O(n) identity input scratch. */
@@ -222,6 +187,32 @@ public final class M3IndexMaskCompactor {
             return selectWindowNative(orderedRows, rowOffset, states, stateOffset,
                     length, requiredMask);
         }
+        return selectIntWindowJava(orderedRows, rowOffset, states, stateOffset, length, requiredMask);
+    }
+
+    /** Primitive-long counterpart, preserving signed extremes and duplicates. */
+    public static long[] selectLongWindow(long[] orderedRows, int rowOffset,
+                                          byte[] states, int stateOffset, int length,
+                                          int requiredMask, Backend backend) {
+        Objects.requireNonNull(orderedRows, "orderedRows");
+        Objects.requireNonNull(states, "states");
+        Objects.requireNonNull(backend, "backend");
+        Objects.checkFromIndexSize(rowOffset, length, orderedRows.length);
+        Objects.checkFromIndexSize(stateOffset, length, states.length);
+        requireMask(requiredMask);
+        if (backend == Backend.NATIVE_REQUIRED) {
+            if (!NativeLibrary.AVAILABLE) {
+                throw new UnsatisfiedLinkError("m3_index_mask JNI library unavailable");
+            }
+            return selectLongWindowNative(orderedRows, rowOffset, states, stateOffset,
+                    length, requiredMask);
+        }
+        return selectLongWindowJava(orderedRows, rowOffset, states, stateOffset, length, requiredMask);
+    }
+
+    /** Existing checked callers share one stable int emission atom; no retained inputs. */
+    private static int[] selectIntWindowJava(int[] orderedRows, int rowOffset,
+            byte[] states, int stateOffset, int length, int requiredMask) {
         int kept = countWindow(states, stateOffset, length, requiredMask);
         if (kept == length) {
             return java.util.Arrays.copyOfRange(orderedRows, rowOffset, rowOffset + length);
@@ -242,23 +233,9 @@ public final class M3IndexMaskCompactor {
         return selected;
     }
 
-    /** Primitive-long counterpart, preserving signed extremes and duplicates. */
-    public static long[] selectLongWindow(long[] orderedRows, int rowOffset,
-                                          byte[] states, int stateOffset, int length,
-                                          int requiredMask, Backend backend) {
-        Objects.requireNonNull(orderedRows, "orderedRows");
-        Objects.requireNonNull(states, "states");
-        Objects.requireNonNull(backend, "backend");
-        Objects.checkFromIndexSize(rowOffset, length, orderedRows.length);
-        Objects.checkFromIndexSize(stateOffset, length, states.length);
-        requireMask(requiredMask);
-        if (backend == Backend.NATIVE_REQUIRED) {
-            if (!NativeLibrary.AVAILABLE) {
-                throw new UnsatisfiedLinkError("m3_index_mask JNI library unavailable");
-            }
-            return selectLongWindowNative(orderedRows, rowOffset, states, stateOffset,
-                    length, requiredMask);
-        }
+    /** Existing checked callers share one stable long emission atom; no retained inputs. */
+    private static long[] selectLongWindowJava(long[] orderedRows, int rowOffset,
+            byte[] states, int stateOffset, int length, int requiredMask) {
         int kept = countWindow(states, stateOffset, length, requiredMask);
         if (kept == length) {
             return java.util.Arrays.copyOfRange(orderedRows, rowOffset, rowOffset + length);
