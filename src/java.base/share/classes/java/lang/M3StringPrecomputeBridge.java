@@ -21,6 +21,13 @@ package java.lang;
 final class M3StringPrecomputeBridge {
     private M3StringPrecomputeBridge() {}
 
+    /** Return only already-published facts for this exact String coordinate. */
+    static java.util.function.LongPredicate trigramFactsIfPrepared(M3String source) {
+        if (source == null) return null;
+        M3StringFacts prepared = source.factsIfPrepared();
+        return prepared != null && prepared.utf16Length == source.length() ? prepared : null;
+    }
+
     static boolean contentEquals(
             String left, String right, M3String leftStorage, M3String rightStorage) {
         if (leftStorage != null) {

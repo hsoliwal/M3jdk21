@@ -1,0 +1,20 @@
+{
+  "schema": "JTREG_OFFICIAL_SOURCE_BUILD_V1",
+  "upstream_repo": "openjdk/jtreg",
+  "upstream_tag": "jtreg-7.2+1",
+  "upstream_commit": "5b9e661eb6ee9dd9a9d2690986bbf9ce303a8f03",
+  "command": [
+    "bash",
+    "make/build.sh",
+    "--jdk",
+    "/workspace/scratch/beeb6792462c/toolchain/jdk-21.0.12.1+1",
+    "--",
+    "-j2"
+  ],
+  "start_utc": "2026-10-18T12:40:44Z",
+  "end_utc": "2026-10-18T12:42:36Z",
+  "exit_code": 2,
+  "stop_reason": null,
+  "console_sha256": "5d6d12f56a05bf9bd0a79ffe7361cca1c8afca277adfb41bf742a46f97b18835",
+  "checksum_checks_skipped": false
+}

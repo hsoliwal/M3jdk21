@@ -9,11 +9,11 @@ import sys
 ROOT = Path(__file__).resolve().parents[4]
 EXPECTED = {
     "m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java":
-        "fd880291f6119899e530e19b1dc622bb4f1ea51c6c136ab1c510d507c303c761",
+        "e61f94f0262878726b5c7255ebc3aa655a7808c4d1544a8bd0ee3fd1bc49f1a7",
     "m3/collections/src/main/java/com/m3/collections/M3MutableFilteredViews.java":
-        "bbc218ecd8c87648976501a5f09aa8baa5af94e1ea79fdef1647ac4248f59e65",
+        "51188863415920856a0f5e69ea8a54735e8502d7c0bcf8ca42fcf3a84bf1c6ec",
     "m3/collections/src/test/java/com/m3/collections/M3StoredRepresentativeContract.java":
-        "9686f4d820c5872665d6273faa0de0b327b9689b12696af7827269cb8774e016",
+        "821b8ae1ec22516dceef16f5951ab66fe3f6db799f26732c620202bab862754b",
     "m3/collections/src/test/java/com/m3/collections/M3StoredRepresentativeTest.java":
         "b948aca5ae6f14b80027429e6b820800927d3013bebb972fa92b712383af55f3"
 }
