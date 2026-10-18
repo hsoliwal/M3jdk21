@@ -17,6 +17,10 @@ Existing JDK runtime owners remain authoritative:
 This port owns the broader second-pass fabric:
 
 - `M3TextMetrics`: composable UTF-16/UTF-8/code-point/Java-hash geometry;
+- `M3MeasuredRope` with `M3RopeArena`, `M3RopeMeasure`, `M3RopeMetric` and `M3RopeMeasures`: a persistent
+  rope whose nodes carry pluggable monoid measures (hash, code points, UTF-8, lines, whitespace, DFA
+  transfer) in primitive arena lanes, with range summaries and metric seek (Synexia crate
+  `m3-measured-rope`, receipt `m3/compatibility/synexia-measured-rope-receipt.json`);
 - `M3TextSignals`: character, bigram and trigram histograms, safe edit lower bounds,
   SimHash and MinHash/Jaccard sketches;
 - `M3RegexShape`: fail-closed literal/prefix/suffix/exact regex recognition;
