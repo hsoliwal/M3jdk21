@@ -1,0 +1,20 @@
+Compiled from "M3FilteredViews.java"
+public final class com.m3.collections.M3FilteredViews {
+  public static <E> java.util.Collection<E> filter(java.util.Collection<E>, java.util.function.Predicate<? super E>);
+    descriptor: (Ljava/util/Collection;Ljava/util/function/Predicate;)Ljava/util/Collection;
+
+  public static <E> java.util.Set<E> filter(java.util.Set<E>, java.util.function.Predicate<? super E>);
+    descriptor: (Ljava/util/Set;Ljava/util/function/Predicate;)Ljava/util/Set;
+
+  public static <E> java.util.SortedSet<E> filter(java.util.SortedSet<E>, java.util.function.Predicate<? super E>);
+    descriptor: (Ljava/util/SortedSet;Ljava/util/function/Predicate;)Ljava/util/SortedSet;
+
+  public static <E> java.util.NavigableSet<E> filter(java.util.NavigableSet<E>, java.util.function.Predicate<? super E>);
+    descriptor: (Ljava/util/NavigableSet;Ljava/util/function/Predicate;)Ljava/util/NavigableSet;
+
+  public static <K, V> java.util.SortedMap<K, V> filterEntries(java.util.SortedMap<K, V>, java.util.function.BiPredicate<? super K, ? super V>);
+    descriptor: (Ljava/util/SortedMap;Ljava/util/function/BiPredicate;)Ljava/util/SortedMap;
+
+  public static <K, V> java.util.NavigableMap<K, V> filterEntries(java.util.NavigableMap<K, V>, java.util.function.BiPredicate<? super K, ? super V>);
+    descriptor: (Ljava/util/NavigableMap;Ljava/util/function/BiPredicate;)Ljava/util/NavigableMap;
+}
