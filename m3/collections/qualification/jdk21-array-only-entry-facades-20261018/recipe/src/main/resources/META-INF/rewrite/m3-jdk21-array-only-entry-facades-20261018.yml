@@ -1,0 +1,6 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.Jdk21ArrayOnlyEntryFacades20261018
+displayName: M3 JDK21 array-only LFU API Entry facades
+description: Generate bounded array/offset/mask cache and API-only immutable Entry snapshots; do not promote the 59 source-only JDK classes.
+recipeList:
+  - com.synexia.rewrite.M3Jdk21ArrayOnlyEntryFacadesRecipe
