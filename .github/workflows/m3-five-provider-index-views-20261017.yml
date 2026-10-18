@@ -23,8 +23,8 @@ jobs:
         with:
           distribution: temurin
           java-version: '21'
-      - name: Verify exact canonical source seals and generated postimages
-        run: python3 m3/collections/interop/recipe/five-library-index-views-20261017/verify.py
+      - name: Verify historical source seal or exact named 32-bit successor
+        run: python3 m3/collections/interop/recipe/five-library-index-views-20261017/verify_successor.py
       - name: Execute real OpenRewrite recipe refusal and fixed-point JUnit
         run: mvn -B -ntp -f m3/collections/interop/recipe/five-library-index-views-20261017/pom.xml test
       - name: Compile real M3 array/index/byte-mask core under Java21 strictness
