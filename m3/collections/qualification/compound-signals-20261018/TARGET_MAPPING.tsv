@@ -1,0 +1,8 @@
+donor_source	target_owner	receiving_mode	status	contract
+Synexia MatSignalDimensions @ PR-11656	help:com.m3.collections.M3SignalDimensions	INDEPENDENT_APACHE_MODULE	TARGET_PR_CANDIDATE	stable multidimensional order and signed numeric gaps over primitive row IDs
+Synexia MatIntOrder/LongRadix	com.m3.collections.M3SignalOrder	REUSE_EXISTING_TARGET_OWNER	UNCHANGED	stable unsigned LSD signed-zero canonical-NaN order
+Synexia MatNativeSignalOrder	com.m3.collections.M3SignalOrderNative	REUSE_EXISTING_JNI_ABI	UNCHANGED	stable C17 radix of primitive long keys and int row indexes
+Synexia @Sortable / MatSortableProcessor	jdk.compiler source-time signal producer	DEFER_COMPILER_PHASE	PENDING	compile-time class/package/field/method/dependency signals into sidecars
+Synexia SourceEdgeSignalProfile	future compiler graph signal image	DEFER_COMPILER_PHASE	PENDING	independent typed edge comparison distance
+Synexia MatQueryDistanceLedger	future M3 query-distance owner	DEFER_REQUIREMENT_PROOF	PENDING	exact or fuzzy distance specified by domain
+M3ObjectIndexSnapshot	com.m3.collections.M3ObjectIndexSnapshot	COMPOSE_EXISTING_VIEW	UNCHANGED	already owns immutable filtered/sorted object row order; optional multi-column view method pending
