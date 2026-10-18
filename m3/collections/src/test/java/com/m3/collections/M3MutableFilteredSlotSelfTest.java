@@ -65,6 +65,10 @@ public final class M3MutableFilteredSlotSelfTest {
         same(baselinePairs, indexedPairs, "forEach " + phase);
         same(ref.size(), actual.size(), "size " + phase);
         same(ref.isEmpty(), actual.isEmpty(), "empty " + phase);
+        for (Integer candidate : new Integer[] {null, -99, -1, 0, 3, 7, 15}) {
+            same(ref.containsValue(candidate), actual.containsValue(candidate),
+                    "containsValue " + candidate);
+        }
         same(ref.firstEntry(), actual.firstEntry(), "first " + phase);
         same(ref.lastEntry(), actual.lastEntry(), "last " + phase);
         if (!ref.isEmpty()) {
@@ -109,7 +113,7 @@ public final class M3MutableFilteredSlotSelfTest {
         for (int step=1;step<=340;step++) {
             int key=random.nextInt(25)-12;
             Integer value=random.nextInt(7)==0?null:random.nextInt(41)-20;
-            int op=random.nextInt(10);
+            int op=random.nextInt(11);
             switch (op) {
                 case 0 -> {
                     same(baseline.put(key, value), storage.put(key, value), "source put");
@@ -167,6 +171,10 @@ public final class M3MutableFilteredSlotSelfTest {
                         same(a.next(), b.next(), "value iterator next");
                         a.remove(); b.remove();
                     }
+                }
+                case 10 -> {
+                    expected.replaceAll((k, v) -> v == null ? null : v < 0 ? v : v + 1);
+                    actual.replaceAll((k, v) -> v == null ? null : v < 0 ? v : v + 1);
                 }
                 default -> throw new AssertionError(op);
             }
