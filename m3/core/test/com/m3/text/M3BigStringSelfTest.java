@@ -61,6 +61,17 @@ public final class M3BigStringSelfTest {
         eq(25L, s.indexOf("needle", 8), "second literal occurrence");
         eq(-1L, s.indexOf("absent", 0), "missing literal");
         eq(s.length(), s.indexOf("", s.length()), "empty literal at end");
+        M3BigString boundary = M3BigString.of("a", "bc");
+        String oracle = "abc";
+        for (int from : new int[] {-7, -1, 0, 1, 3, 4, Integer.MAX_VALUE}) {
+            eq((long) oracle.indexOf("", from), boundary.indexOf("", from),
+                    "JDK empty search from=" + from);
+            eq((long) oracle.indexOf("bc", from), boundary.indexOf("bc", from),
+                    "JDK nonempty search from=" + from);
+        }
+        eq(3L, boundary.indexOf("", Long.MAX_VALUE), "long source overshoot clamps");
+        M3BigString boundaryView = boundary.subSequence(1, 3);
+        eq(2L, boundaryView.indexOf("", Long.MAX_VALUE), "view overshoot clamps");
         check(s.mayContainLiteral("needle"), "bloom positive for present literal");
         check(!s.mayContainLiteral("zzzz"), "bloom negative for absent character");
         check(Pattern.compile("prefix.*suffix.*needle").matcher(s.asCharSequence()).find(), "JDK regex on rope CharSequence");
