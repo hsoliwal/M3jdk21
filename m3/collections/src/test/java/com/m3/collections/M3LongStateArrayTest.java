@@ -27,7 +27,7 @@ final class M3LongStateArrayTest {
                     default -> random.nextInt(17) - 8;
                 };
                 int state = random.nextInt();
-                int operation = values.size() > 110 ? 5 : random.nextInt(8);
+                int operation = values.size() > 110 ? 5 : random.nextInt(9);
                 switch (operation) {
                     case 0 -> { values.add(value); states.add(state); actual.add(value, state); }
                     case 1 -> {
@@ -63,7 +63,21 @@ final class M3LongStateArrayTest {
                             assertEquals(updated, actual.updateState(at, state, state >>> 1));
                         }
                     }
-                    default -> actual.ensureCapacity(values.size() + random.nextInt(25));
+                    case 7 -> actual.ensureCapacity(values.size() + random.nextInt(25));
+                    default -> {
+                        int required = random.nextBoolean() ? 0 : 1 << random.nextInt(32);
+                        int forbidden = random.nextBoolean() ? 0 : 1 << random.nextInt(32);
+                        int removed = 0;
+                        for (int at = values.size() - 1; at >= 0; at--) {
+                            int bits = states.get(at);
+                            if ((bits & required) != required || (bits & forbidden) != 0) {
+                                values.remove(at);
+                                states.remove(at);
+                                removed++;
+                            }
+                        }
+                        assertEquals(removed, actual.retainByStateMask(required, forbidden));
+                    }
                 }
                 assertEquals(values.size(), actual.size());
                 assertTrue(actual.capacity() >= actual.size());
@@ -156,6 +170,7 @@ final class M3LongStateArrayTest {
         owner.add(10, 3);
         long generation = owner.generation();
         owner.set(0, 10); owner.setState(0, 3); owner.updateState(0, 0, 0);
+        assertEquals(0, owner.retainByStateMask(0, 0));
         assertEquals(generation, owner.generation());
         assertThrows(IndexOutOfBoundsException.class, () -> owner.stateAt(1));
         assertThrows(IndexOutOfBoundsException.class, () -> owner.removeAt(1));

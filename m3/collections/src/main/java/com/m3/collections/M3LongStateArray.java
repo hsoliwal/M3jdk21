@@ -123,6 +123,48 @@ public final class M3LongStateArray {
         generation++;
     }
 
+    /**
+     * Stable in-place LeetCode-style array compaction under pure full-width
+     * required/forbidden mask bits. No per-element or result-array allocation.
+     * It first counts survivors to preserve the no-op iterator/generation
+     * contract when every value passes. Tail deletions are performed only
+     * after survivors have been shifted into their final slots.
+     *
+     * @return number of removed occurrences
+     */
+    public int retainByStateMask(int requiredMask, int forbiddenMask) {
+        int before = size();
+        int kept = 0;
+        for (int read = 0; read < before; read++) {
+            int flags = states[read];
+            if ((flags & requiredMask) == requiredMask && (flags & forbiddenMask) == 0) {
+                kept++;
+            }
+        }
+        if (kept == before) return 0;
+        if (kept == 0) {
+            clear();
+            return before;
+        }
+        int write = 0;
+        for (int read = 0; read < before; read++) {
+            int flags = states[read];
+            if ((flags & requiredMask) == requiredMask && (flags & forbiddenMask) == 0) {
+                if (write != read) {
+                    values.set(write, values.get(read));
+                    states[write] = flags;
+                }
+                write++;
+            }
+        }
+        for (int index = before - 1; index >= write; index--) {
+            values.removeAt(index);
+            states[index] = 0;
+        }
+        generation++;
+        return before - write;
+    }
+
     public long[] toArray() { return values.toArray(); }
     public int[] statesCopy() { return Arrays.copyOf(states, size()); }
 

@@ -8,6 +8,9 @@
 primitive-value owner and a parallel full-width `int[]` of caller-defined
 state bits. Capacity is dynamic. Positional insert/remove shifts both lanes
 in lockstep, while `set`, `setState` and `updateState` target one slot.
+`retainByStateMask(required, forbidden)` performs stable two-pass O(n)
+compaction on both arrays, updates the mutation generation only when actual
+removal occurs, and clears dead tail states.
 Values include all longs; masks include all 32 state bits. No per-element
 Entry allocation, unstable native pointer, GC-root claim, or object-header
 mutation is introduced.
