@@ -1,0 +1,22 @@
+M3JDK regex cursor port (m3/ports/regex-cursor)
+Copyright 2026 Hitesh Soliwal and contributors. Licensed under the Apache License, Version 2.0.
+
+Pattern donors (designs and algorithms studied; no source code copied; Rust is never compiled):
+- helix-editor/regex-cursor 0.1.5, commit fd4c51c73587981219daf9a36184aabbddae78ee,
+  MIT OR Apache-2.0. Copyright (c) the regex-cursor authors (Cargo.toml repository
+  pascalkuthe/regex-cursor), itself a fork of rust-lang/regex regex-automata. Cursor/Input chunk contract (src/cursor.rs, src/input.rs),
+  chunked lazy-DFA search loop (src/engines/hybrid/search.rs), chunk-spanning literal search
+  (src/literal.rs), meta strategy order (src/engines/meta/strategy.rs), random-chunk test rope
+  (src/test_rope.rs).
+- rust-lang/regex (regex-automata), commit 72d650cb0a880a01ab6dc2137c0888e8f89740f7,
+  MIT OR Apache-2.0. Copyright (c) The Rust Project Developers. Leftmost-first determinization,
+  reverse start search, PikeVM thread priority (algorithms; Thompson 1968, Cox 2007-2010).
+- square/t-rex, commit c84ddf5a06fdff3e3ae984ed0f3eaa0fab3dfca3, Apache-2.0 (README).
+  Copyright Square, Inc. Token-sequence regex algebra (single-token predicates, sequences,
+  quantifiers, captures) for the token layer.
+- nltk/nltk, commit 323da98f37388421c22e279587cf75e375b99efb, Apache-2.0. Copyright NLTK
+  Project. TokenSearcher angle-bracket token notation (nltk/text.py); its flattening trick is used
+  only in tests as an oracle encoding.
+
+Oracle, not a donor: OpenJDK java.util.regex (GPLv2 with the Classpath Exception) in this
+repository. Evidence only: google/re2j (BSD-3-Clause). Decisions: FOSS_REUSE_DECISION.tsv.
