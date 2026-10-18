@@ -374,4 +374,131 @@ public final class M3FiveLibraryIndexViews<K, V> {
         for (int i = 0; i < size(); i++) result.put(keyAt(i), valueAt(i));
         return result;
     }
+
+    /**
+     * Actual JDK Deque over the existing M3 linked-index array owner.
+     * Encounter order and duplicate occurrences are preserved.
+     */
+    public java.util.Deque<V> asJdkDeque() {
+        java.util.Deque<V> result = M3LibraryCollections.jdkDeque();
+        for (int i = 0; i < size(); i++) result.addLast(valueAt(i));
+        return result;
+    }
+
+    /** Actual JDK Set: encounter order retained; equal values collapse. */
+    public java.util.Set<V> asJdkSet() {
+        java.util.Set<V> result = M3LibraryCollections.jdkSet();
+        for (int i = 0; i < size(); i++) result.add(valueAt(i));
+        return result;
+    }
+
+    /**
+     * Detached M3 TreeSet owner with a live, READ-ONLY JDK filtered view.
+     * Unlike primitive state bitmaps, predicates remain Java callbacks,
+     * evaluated against the actual stored representative at view access.
+     */
+    public NavigableSet<V> asJdkReadOnlyFilteredSortedSet(
+            Comparator<? super V> comparator, java.util.function.Predicate<? super V> predicate) {
+        Objects.requireNonNull(predicate, "predicate");
+        return com.m3.collections.M3FilteredViews.filter(
+                asJdkSortedSet(comparator), predicate);
+    }
+
+    /** Guava occurrence-count Multiset over M3's existing indexed count lanes. */
+    public com.google.common.collect.Multiset<V> asGuavaMultiset() {
+        com.google.common.collect.Multiset<V> result = new M3GuavaMultiset<>();
+        for (int i = 0; i < size(); i++) result.add(valueAt(i));
+        return result;
+    }
+
+    /**
+     * Genuine Guava BiMap. Duplicate values across distinct keys are
+     * rejected by the existing M3GuavaBiMap; do not silently forcePut.
+     */
+    public com.google.common.collect.BiMap<K, V> asGuavaBiMap() {
+        com.google.common.collect.BiMap<K, V> result = M3LibraryCollections.guavaBiMap();
+        for (int i = 0; i < size(); i++) result.put(keyAt(i), valueAt(i));
+        return result;
+    }
+
+    /**
+     * Guava Table's (row, column) coordinate is projected from the captured
+     * key by two Java functions. Neither callback crosses JNI, and the
+     * existing M3 nested-map owner stores the resulting independent table.
+     */
+    public <R, C> com.google.common.collect.Table<R, C, V> asGuavaTable(
+            java.util.function.Function<? super K, ? extends R> row,
+            java.util.function.Function<? super K, ? extends C> column) {
+        Objects.requireNonNull(row, "row");
+        Objects.requireNonNull(column, "column");
+        com.google.common.collect.Table<R, C, V> result = M3LibraryCollections.guavaTable();
+        for (int i = 0; i < size(); i++) {
+            K key = keyAt(i);
+            result.put(row.apply(key), column.apply(key), valueAt(i));
+        }
+        return result;
+    }
+
+    /**
+     * Guava's live predicate-backed Collection wrapper over an independent
+     * M3 linked-index list. Rejected existing values are hidden, not removed;
+     * subsequent predicate-state changes are observed by the wrapper.
+     */
+    public java.util.Collection<V> asGuavaFilteredCollection(
+            com.google.common.base.Predicate<? super V> predicate) {
+        Objects.requireNonNull(predicate, "predicate");
+        com.m3.collections.M3LinkedList<V> owner = new com.m3.collections.M3LinkedList<>();
+        for (int i = 0; i < size(); i++) owner.add(valueAt(i));
+        return M3LibraryCollections.guavaFilteredCollection(owner, predicate);
+    }
+
+    /** Eclipse Collections sorted-map contract over the original M3 tree. */
+    public org.eclipse.collections.api.map.sorted.MutableSortedMap<K, V>
+            asEclipseSortedMapLastWins(Comparator<? super K> comparator) {
+        org.eclipse.collections.api.map.sorted.MutableSortedMap<K, V> result =
+                M3LibraryCollections.eclipseSortedMap(Objects.requireNonNull(comparator, "comparator"));
+        for (int i = 0; i < size(); i++) result.put(keyAt(i), valueAt(i));
+        return result;
+    }
+
+    /** Eclipse MutableBag counts selected occurrences using M3 indexed counts. */
+    public org.eclipse.collections.api.bag.MutableBag<V> asEclipseBag() {
+        org.eclipse.collections.api.bag.MutableBag<V> result = new M3EclipseBag<>();
+        for (int i = 0; i < size(); i++) result.add(valueAt(i));
+        return result;
+    }
+
+    /** Eclipse MutableBagMultimap: indexed per-key occurrence counts, not a set. */
+    public org.eclipse.collections.api.multimap.bag.MutableBagMultimap<K, V>
+            asEclipseBagMultimap() {
+        org.eclipse.collections.api.multimap.bag.MutableBagMultimap<K, V> result =
+                new M3EclipseBagMultimap<>();
+        for (int i = 0; i < size(); i++) result.put(keyAt(i), valueAt(i));
+        return result;
+    }
+
+    /** Spring's single-value adapter: each repeated key keeps its last value. */
+    public MultiValueMap<K, V> asSpringSingleValueMapLastWins() {
+        MultiValueMap<K, V> result = M3LibraryCollections.springSingleValueMap();
+        for (int i = 0; i < size(); i++) result.set(keyAt(i), valueAt(i));
+        return result;
+    }
+
+    /** Apache Commons MultiSet counts occurrences on the existing M3 bag. */
+    public org.apache.commons.collections4.MultiSet<V> asApacheMultiSet() {
+        org.apache.commons.collections4.MultiSet<V> result = new M3ApacheMultiSet<>();
+        for (int i = 0; i < size(); i++) result.add(valueAt(i));
+        return result;
+    }
+
+    /**
+     * Apache Commons BidiMap, distinct from Guava BiMap: reusing a value
+     * may evict its former key under Apache's own delegate contract.
+     */
+    public org.apache.commons.collections4.BidiMap<K, V> asApacheBidiMap() {
+        org.apache.commons.collections4.BidiMap<K, V> result =
+                M3LibraryCollections.apacheBidiMap();
+        for (int i = 0; i < size(); i++) result.put(keyAt(i), valueAt(i));
+        return result;
+    }
 }
