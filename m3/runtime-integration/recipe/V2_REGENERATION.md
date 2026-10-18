@@ -61,3 +61,15 @@ The three leaves had reached master only as zero-file superset merges (62153d40f
 ## 2026-10-12 reseal (logical concat length guard)
 
 Master commit 2442a6b242953f4ec8bd63d52ac48708d0383782 adds the checked logical-length/OOME guard to M3StringPool.java. This is an additive six-line change over the v2 recipe state; the source is pinned as an exact superseded SHA-256 (f8bac45d1623d25470e1b79beffa276f271db10e297ef5b434d5335c9d4c908b) in manifest.json. The recipe remains refusal-safe: it recognizes this state as already superseded and does not apply or reverse the older patch over it. Unknown source states remain rejected.
+
+## 2026-10-18 re-seal (A42 flat-needle trigram gate re-land, leaf REGEX-RELAND)
+
+Superseded-custody re-seal against aabb10ebf8 (receiver of Synexia #12397): `runtime.patch` and every
+`after` image are untouched (66 targets). `M3StringSearchPrecompute.java` and `String.java` record their
+A42 re-land owners as reviewed `superseded` hashes. The pinned master 970a34350eb already failed
+`apply.py --check` (`source drift: .../M3String.java`): `M3String.java`, `M3StringPool.java`,
+`M3PatternQuery.java` and `Pattern.java` had changed on master after the last seal (3c3d66694a) without a
+re-seal, so their master hashes are recorded as `superseded` too (PRE_EXISTING_DRIFT). A full
+`a4/reseal.py` regeneration is refused by the current `apply.py` (`modified UTF-8 recipe seal drift:
+src/hotspot/share/classfile/javaClasses.cpp`), so the superseded custody of the A41/A42 epoch-1 re-seals
+is kept. `apply.py --check` state=superseded and `test_recipe.py` 8/8 on the 66 targets of aabb10ebf8.
