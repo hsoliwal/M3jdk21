@@ -60,4 +60,46 @@ final class M3FiveLibraryInteropContractTest {
         assertNotSame(spring, M3LibraryCollections.<String,Integer>springMultiValueMap());
         assertNotSame(apache, M3LibraryCollections.<String,Integer>apacheListValuedMap());
     }
+
+    /** All five actual upstream APIs compose established M3 payload/index stores. */
+    @Test void additionalTypedFactoriesUseRealM3BackingsWithoutContractConflation() {
+        List<String> jdk = M3LibraryCollections.jdkArrayList();
+        assertInstanceOf(com.m3.collections.M3ArrayList.class, jdk);
+        jdk.add("x");
+        jdk.add("x");
+        assertEquals(List.of("x", "x"), jdk);
+
+        var guava = M3LibraryCollections.<String>guavaMultiset();
+        assertInstanceOf(M3GuavaMultiset.class, guava);
+        assertEquals(0, guava.add("x", 2));
+        assertEquals(2, guava.count("x"));
+        assertEquals(2, guava.size());
+
+        var eclipseList = M3LibraryCollections.<String, Integer>eclipseListMultimap();
+        assertInstanceOf(M3EclipseListMultimap.class, eclipseList);
+        assertTrue(eclipseList.put("k", 7));
+        assertTrue(eclipseList.put("k", 7));
+        assertEquals(List.of(7, 7), eclipseList.get("k").toList());
+        var eclipseSet = M3LibraryCollections.<String, Integer>eclipseSetMultimap();
+        assertInstanceOf(M3EclipseSetMultimap.class, eclipseSet);
+        assertTrue(eclipseSet.put("k", 7));
+        assertFalse(eclipseSet.put("k", 7));
+        assertEquals(1, eclipseSet.size());
+
+        var spring = M3LibraryCollections.<String, Integer>springMultiValueMap();
+        assertInstanceOf(M3SpringArrayMultiValueMap.class, spring);
+        spring.add("k", 7);
+        spring.add("k", 7);
+        assertEquals(1, spring.size());
+        assertEquals(List.of(7, 7), spring.get("k"));
+
+        var apache = M3LibraryCollections.<String>apacheMultiSet();
+        assertInstanceOf(M3ApacheMultiSet.class, apache);
+        apache.add("x", 2);
+        assertEquals(2, apache.getCount("x"));
+
+        assertNotSame(guava, M3LibraryCollections.<String>guavaMultiset());
+        assertNotSame(eclipseList, M3LibraryCollections.<String, Integer>eclipseListMultimap());
+        assertNotSame(apache, M3LibraryCollections.<String>apacheMultiSet());
+    }
 }

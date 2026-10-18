@@ -179,4 +179,31 @@ public final class M3LibraryCollections {
         return new M3ApacheBidiMap<>();
     }
 
+
+    /** Actual JDK List interface over incumbent M3 dynamic Object[] storage. */
+    public static <E> List<E> jdkArrayList() {
+        return new com.m3.collections.M3ArrayList<>();
+    }
+
+    /** Real Guava Multiset API; counts reside in existing M3CountedBag primitive planes. */
+    public static <E> com.google.common.collect.Multiset<E> guavaMultiset() {
+        return new M3GuavaMultiset<>();
+    }
+
+    /** Real Eclipse list multimap; the existing M3 group/index owners retain payloads. */
+    public static <K, V> org.eclipse.collections.api.multimap.list.MutableListMultimap<K, V>
+            eclipseListMultimap() {
+        return new M3EclipseListMultimap<>();
+    }
+
+    /** Real Eclipse set multimap; per-key duplicate suppression stays with its M3 set. */
+    public static <K, V> org.eclipse.collections.api.multimap.set.MutableSetMultimap<K, V>
+            eclipseSetMultimap() {
+        return new M3EclipseSetMultimap<>();
+    }
+
+    /** Real Apache MultiSet API over existing M3 per-key count/occupancy lanes. */
+    public static <E> org.apache.commons.collections4.MultiSet<E> apacheMultiSet() {
+        return new M3ApacheMultiSet<>();
+    }
 }
