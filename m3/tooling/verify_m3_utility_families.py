@@ -12,7 +12,7 @@ import sys
 ROOT = Path(__file__).resolve().parents[2]
 CATALOGUE = ROOT / "m3/docs/m3-utility-families.tsv"
 HEADER = ["family", "module", "upstream_api", "current_owner_path", "status", "required_gate"]
-STATES = {"QUALIFIED_ISOLATED", "IMPLEMENTED_INTERNAL", "MAPPED_PENDING"}
+STATES = {"QUALIFIED_ISOLATED", "IMPLEMENTED_INTERNAL", "EXISTING_INTERNAL_KERNEL", "MAPPED_PENDING"}
 SEEDS = {"M3Objects", "M3Strings", "M3Streams", "M3Reflection", "M3Arrays",
          "M3Collections", "M3IO", "M3Files"}
 
@@ -50,7 +50,7 @@ def verify() -> tuple[int, list[str]]:
             source = (ROOT / path).read_text(encoding="utf-8")
             if not re.search(r"\b(?:public\s+)?final\s+class\s+" + re.escape(family) + r"\b", source):
                 raise ValueError(f"missing exact class declaration: {family}")
-            if row["status"] == "IMPLEMENTED_INTERNAL" and not path.startswith(
+            if row["status"] in ("IMPLEMENTED_INTERNAL", "EXISTING_INTERNAL_KERNEL") and not path.startswith(
                     f"src/{module}/share/classes/jdk/internal/"):
                 raise ValueError(f"internal owner not in target JDK module: {family}")
             if row["status"] == "QUALIFIED_ISOLATED" and not path.startswith("m3/"):
