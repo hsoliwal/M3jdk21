@@ -14,7 +14,11 @@ reports were written to the regenerable scratch folder and are not committed.
 | 3: + edge tests | 149 | 2584 / 2585 = 99.96% | 1920 / 1952 = 98.36% |
 | **4: final** | **151** | **2584 / 2585 = 99.96%** | **1933 / 1952 = 99.03%** |
 
-**Gate (99% lines and branches): MET.** Run 4: BUILD SUCCESS, 0 failures (collections 23 tests, viewport-core 128).
+**Gate (99% lines and branches): MET in run 4, re-verification pending.** Run 4: BUILD SUCCESS, 0 failures
+(collections 23 tests, viewport-core 128; test results come from the Maven log on K:). The JaCoCo exec file and the
+CSV/XML reports of runs 1-4 were written to G:, which was later found unhealthy (exFAT dirty bit, random write
+failures, 2026-10-19). The coverage numbers above must be regenerated on a healthy output location before they are
+trusted. Wave 2 (M3ListModel, M3ListWidth, M3SparseItemStore) is not yet measured on a healthy location either.
 
 ## Uncovered spots (1 line, 19 branches): all unreachable, with the reason
 
