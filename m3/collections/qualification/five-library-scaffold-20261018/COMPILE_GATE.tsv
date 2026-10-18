@@ -3,3 +3,4 @@ batch	sources	javac_flags	result	log_sha256
 2	123	--release 21 -Xlint:all,-module -Werror	PASS	f617aebfcf45ec26aa519525ea4eda963b775fe37c6d5ade03328d2878dc8d65
 3	143	--release 21 -Xlint:all,-module -Werror	PASS	f617aebfcf45ec26aa519525ea4eda963b775fe37c6d5ade03328d2878dc8d65
 4	149	--release 21 -Xlint:all,-module -Werror	PASS	f617aebfcf45ec26aa519525ea4eda963b775fe37c6d5ade03328d2878dc8d65
+5	161	--release 21 -Xlint:all,-module -Werror	PASS	f617aebfcf45ec26aa519525ea4eda963b775fe37c6d5ade03328d2878dc8d65

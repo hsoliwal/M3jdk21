@@ -4,7 +4,7 @@ name: com.synexia.m3.FiveLibraryScaffoldPinned
 displayName: M3JDK21 five-library scaffold owners (hash-pinned receiver copy)
 description: >-
   Thin receiver of Synexia crate m3-five-library-scaffold (hsoliwal/com.synexia#12384, commit
-  3113a7cda975): reproduces the 66 recipe-generated scaffold owners from exact SHA-256 postimages
+  6182ad6eb1fc): reproduces the 78 recipe-generated scaffold targets from exact SHA-256 postimages
   through the existing M3HashPinnedJavaSnapshotRecipe engine. Scaffold only; no behavior claimed.
 recipeList:
   - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
