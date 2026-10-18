@@ -1,0 +1,73 @@
+type	owned_status	m3_owner	evidence	reuse_owner	note
+com.google.common.collect.EvictingQueue	DONE #1239	com.m3.collections.guava.M3EvictingQueue	master:m3/collections/implementations/guava-evicting-queue	-	owned array ring; merged
+com.google.common.collect.HashBiMap	DONE master	com.m3.collections.guava.M3HashBiMap	master:m3/collections/qualification/owned-guava-hash-bimap-20261017	-	owned payload/hash/order lanes
+org.apache.commons.collections4.queue.CircularFifoQueue	DONE master	com.m3.collections.apache.M3CircularFifoQueue	master:m3/collections/qualification/owned-apache-circular-fifo-20261018	-	owned array ring
+org.apache.commons.collections4.bidimap.DualHashBidiMap	DONE master	com.m3.collections.apache.M3BidiMap	master:m3/collections/qualification/owned-apache-bidimap-20261017	-	complete Apache BidiMap over two M3LinkedHashMap owners
+org.apache.commons.collections4.multimap.ArrayListValuedHashMap	DONE master	com.m3.collections.apache.M3ListValuedMap	master:m3/collections/qualification/owned-apache-multivalue-20261018	-	owned list-valued map
+org.apache.commons.collections4.multimap.HashSetValuedHashMap	DONE master	com.m3.collections.apache.M3SetValuedMap	master:m3/collections/qualification/owned-apache-multivalue-20261018	-	owned set-valued map
+org.apache.commons.collections4.multiset.UnmodifiableMultiSet	DONE master	com.m3.collections.apache.M3ApacheUnmodifiableMultiSet	master:m3/collections/implementations/apache	-	owned decorator closure of the multivalue packet
+org.apache.commons.collections4.set.UnmodifiableSet	DONE master	com.m3.collections.apache.M3ApacheUnmodifiableSet	master:m3/collections/implementations/apache	-	owned decorator closure of the multivalue packet
+org.springframework.util.LinkedMultiValueMap	DONE master	com.m3.collections.spring.M3MultiValueMap	master:m3/collections/qualification/owned-spring-multivalue-map-20261017	-	owned Spring MultiValueMap
+java.util.ArrayList	EXISTING	com.m3.collections.M3ArrayList	master:m3/collections/src/main/java/com/m3/collections/M3ArrayList.java	-	core generic list owner
+java.util.LinkedHashMap	EXISTING	com.m3.collections.M3LinkedHashMap	master:m3/collections/src/main/java/com/m3/collections/M3LinkedHashMap.java	-	slot lanes + int link lanes
+java.util.LinkedHashSet	EXISTING	com.m3.collections.M3LinkedHashSet	master:m3/collections/src/main/java/com/m3/collections/M3LinkedHashSet.java	-	keyOnly slot table
+java.util.LinkedList	EXISTING	com.m3.collections.M3LinkedList	master:m3/collections/src/main/java/com/m3/collections/M3LinkedList.java	-	slot lanes + int link lanes
+java.util.TreeMap	EXISTING	com.m3.collections.M3TreeMap	master:m3/collections/src/main/java/com/m3/collections/M3TreeMap.java	viewport order-statistic tree (rank queries)	AVL over slot lanes
+java.util.TreeSet	EXISTING	com.m3.collections.M3TreeSet	master:m3/collections/src/main/java/com/m3/collections/M3TreeSet.java	viewport order-statistic tree (rank queries)	AVL over slot lanes
+java.util.WeakHashMap	EXISTING	com.m3.collections.M3WeakHashMap	master:m3/collections/src/main/java/com/m3/collections/M3WeakHashMap.java	-	weak-reference slot owner
+java.util.IdentityHashMap	EXISTING	com.m3.collections.M3ObjectIdentityMap	master:m3/collections/src/main/java/com/m3/collections/M3ObjectIdentityMap.java	-	flat reference lanes
+java.util.concurrent.LinkedTransferQueue	EXISTING	com.m3.collections.M3TransferQueue	master:m3/collections/src/main/java/com/m3/collections/M3TransferQueue.java	-	transfer buffer owner
+java.util.concurrent.LinkedBlockingDeque	EXISTING	com.m3.collections.M3BlockingDeque	master:m3/collections/src/main/java/com/m3/collections/M3BlockingDeque.java	-	blocking ring owner
+java.util.ArrayDeque	CLAIMED #1317 #1330	com.m3.collections.M3ArrayDeque	open PR #1317 (direct generic Object[] ArrayDeque) and #1330 (DOOP slot ports)	M3LongArrayDeque	do not duplicate
+java.util.PriorityQueue	CLAIMED #1317 #1330	com.m3.collections.M3PriorityQueue	open PR #1317 and #1330	M3LongPriorityQueue	do not duplicate
+java.util.HashMap	CLAIMED #1355 #1330	com.m3.collections.M3ArrayMap / M3HashMap	open PR #1355 (DOOP array/mask HashMap) and #1330	M3LinkedHashMap	do not duplicate
+java.util.HashSet	CLAIMED #1330	com.m3.collections.M3HashSet	open PR #1330	M3LinkedHashSet	do not duplicate
+java.util.Vector	CLAIMED #1286	java.base Vector deletion-mask	open PR #1286 (java.base ArrayList/Vector deletion-mask compaction)	M3ArrayList	java.base owner, not a separate M3 class
+com.google.common.collect.MinMaxPriorityQueue	CLAIMED #1274	com.m3.collections.guava.M3MinMaxPriorityQueue	open PR #1274 (owned Guava min-max queue)	-	do not duplicate
+com.google.common.collect.TreeRangeMap	CLAIMED #1264	com.m3.collections.M3ObjectRangeMap	open PR #1264 (native generic ObjectRangeMap)	viewport order-statistic tree	do not duplicate
+com.google.common.collect.MutableClassToInstanceMap	CLAIMED #1307	com.m3.collections.interop.M3GuavaClassToInstanceMaps	open PR #1307 (qualified ClassToInstanceMap factory)	-	do not duplicate
+com.google.common.collect.ImmutableClassToInstanceMap	CLAIMED #1307	com.m3.collections.interop.M3GuavaClassToInstanceMaps	open PR #1307	-	do not duplicate
+org.springframework.util.LinkedCaseInsensitiveMap	CLAIMED #1269	com.m3.collections.spring.M3LinkedCaseInsensitiveMap	open PR #1269 (other worker: owned Spring case-insensitive map)	-	claimed by the other five-provider worker
+com.google.common.collect.ArrayListMultimap	OPEN	-	interop adapter only (master)	interop M3GuavaListMultimap; core M3IndexedMultiValueMap; apache M3ListValuedMap	fill order a
+com.google.common.collect.HashMultimap	OPEN	-	native engine in open PR #1261; interop adapter on master	#1261 M3IndexedSetMultiMap; interop M3GuavaSetMultimap; apache M3SetValuedMap	fill order a; reuse engine, do not duplicate
+com.google.common.collect.LinkedHashMultimap	OPEN	-	-	core M3LinkedHashMap + M3IndexedMultiValueMap	-
+com.google.common.collect.LinkedListMultimap	OPEN	-	-	core M3LinkedList link lanes	-
+com.google.common.collect.TreeMultimap	OPEN	-	-	core M3TreeMap + M3TreeSet	-
+com.google.common.collect.HashMultiset	OPEN	-	adapter work in open PR #1271; interop adapter on master	#1271 M3GuavaMultiset; core M3CountedBag	fill order b; reuse counts lanes
+com.google.common.collect.LinkedHashMultiset	OPEN	-	-	core M3CountedBag + M3LinkedHashMap	-
+com.google.common.collect.TreeMultiset	OPEN	-	-	core M3CountedBag; viewport order-statistic tree + Fenwick prefix sums	range counts via viewport owners
+com.google.common.collect.EnumMultiset	OPEN	-	-	core M3EnumLongMap counts by ordinal	-
+com.google.common.collect.ConcurrentHashMultiset	OPEN	-	-	core M3CountedBag + M3LockedMap	-
+org.apache.commons.collections4.bag.HashBag	OPEN	-	interop adapter on master	interop M3ApacheBag; core M3CountedBag	fill order b
+org.apache.commons.collections4.multiset.HashMultiSet	OPEN	-	adapter work in open PR #1271	#1271 M3ApacheMultiSet; core M3CountedBag	fill order b
+org.apache.commons.collections4.bag.TreeBag	OPEN	-	-	core M3CountedBag + M3TreeMap	-
+com.google.common.collect.EnumBiMap	OPEN	-	-	guava M3HashBiMap; core M3EnumLongMap	fill order c
+com.google.common.collect.EnumHashBiMap	OPEN	-	-	guava M3HashBiMap	fill order c
+org.apache.commons.collections4.bidimap.DualLinkedHashBidiMap	OPEN	-	-	apache M3BidiMap	fill order c
+org.apache.commons.collections4.bidimap.DualTreeBidiMap	OPEN	-	-	apache M3BidiMap + core M3TreeMap	fill order c
+org.apache.commons.collections4.bidimap.TreeBidiMap	OPEN	-	-	core M3TreeMap twice	fill order c
+com.google.common.collect.HashBasedTable	OPEN	-	-	core M3IndexedTable; viewport int-pair-keyed map	-
+com.google.common.collect.TreeBasedTable	OPEN	-	-	core M3IndexedTable; interop M3GuavaRowSortedTable; viewport Grid row tree	-
+com.google.common.collect.ArrayTable	OPEN	-	-	core M3IndexedTable; viewport packed lanes	-
+com.google.common.collect.TreeRangeSet	OPEN	-	-	core M3LongRangeSet; viewport order-statistic tree	-
+com.google.common.collect.ImmutableRangeSet	OPEN	-	-	core M3LongRangeSet	-
+com.google.common.collect.ImmutableRangeMap	OPEN	-	-	#1264 M3ObjectRangeMap	-
+org.springframework.util.MultiValueMapAdapter	OPEN	-	-	spring M3MultiValueMap	fill order e (LinkedMultiValueMap already owned)
+org.apache.commons.collections4.map.CaseInsensitiveMap	OPEN	-	-	#1269 casefold lanes	-
+org.apache.commons.collections4.map.LinkedMap	OPEN	-	-	core M3LinkedHashMap	-
+org.apache.commons.collections4.map.ListOrderedMap	OPEN	-	-	core M3LinkedHashMap	-
+org.apache.commons.collections4.map.LRUMap	OPEN	-	-	core M3LinkedHashMap(accessOrder)	-
+org.apache.commons.collections4.map.HashedMap	OPEN	-	-	core M3LinkedHashMap table	-
+org.apache.commons.collections4.list.TreeList	OPEN	-	-	viewport order-statistic tree	-
+org.apache.commons.collections4.list.CursorableLinkedList	OPEN	-	-	core M3LinkedList	-
+org.apache.commons.collections4.list.NodeCachingLinkedList	OPEN	-	-	core M3LinkedList	-
+org.apache.commons.collections4.trie.PatriciaTrie	OPEN	-	-	core M3TreeMap sorted key lanes	-
+org.springframework.util.ConcurrentReferenceHashMap	OPEN	-	-	core M3WeakHashMap	-
+org.apache.commons.collections4.map.ReferenceMap	OPEN	-	-	core M3WeakHashMap	-
+java.util.EnumMap	OPEN	-	-	core M3EnumLongMap ordinal lanes	-
+java.util.concurrent.ConcurrentHashMap	OPEN	-	-	core M3LockedMap; M3ConcurrentLongMap	-
+java.util.concurrent.ConcurrentSkipListMap	OPEN	-	-	core M3LockedTreeMap	-
+java.util.concurrent.ConcurrentSkipListSet	OPEN	-	-	core M3LockedTreeSet	-
+java.util.concurrent.ArrayBlockingQueue	OPEN	-	-	core M3BlockingDeque ring	-
+java.util.concurrent.LinkedBlockingQueue	OPEN	-	-	core M3BlockingDeque ring	-
+java.util.concurrent.CopyOnWriteArrayList	OPEN	-	-	core M3ArrayList	-
