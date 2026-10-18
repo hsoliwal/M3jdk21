@@ -635,6 +635,13 @@ public final class M3FilteredViews {
         @Override public Set<Entry<K, V>> entrySet() {
             return Collections.unmodifiableSet(new AbstractSet<>() {
                 @Override public int size() { return SortedMapView.this.size(); }
+                @Override public boolean contains(Object candidate) {
+                    if (!(candidate instanceof Entry<?, ?> entry)) return false;
+                    // The backing owner defines key equivalence and value comparison.
+                    // Existing containsKey resolves the stored key before visibility.
+                    return sorted.entrySet().contains(candidate)
+                            && SortedMapView.this.containsKey(entry.getKey());
+                }
                 @Override public Iterator<Entry<K, V>> iterator() {
                     Iterator<Entry<K, V>> cursor = sorted.entrySet().iterator();
                     Iterator<Entry<K, V>> filtered = M3FilteredViews.filtered(cursor,
