@@ -478,4 +478,131 @@ final class M3OriginalCliProviderRecipeTest {
             removeOwnedFixture(base);
         }
     }
+
+    @Test void currentMappingReconciliationPreservesNewFieldsAndReviewedMigration()
+            throws Exception {
+        String name = "m3/docs/name-mapping.json";
+        Row mapping = ROWS.stream().filter(row -> row.path().equals(name))
+                .findFirst().orElseThrow();
+        String before = beforeText(mapping);
+        String after = assertReplay(state(0), false).get(name);
+        assertNotNull(after, "actual recipe overlay must contain the canonical map");
+        assertEquals("4247c5648cf6a5599f8840a7171f147f5c343bf9b97e7a386eb7f351f978c4f3",
+                sha(before), "exact current receiver map preimage");
+
+        // These reviewed spans cover the JSON object value, excluding its property label/comma.
+        int valueStart = 40_771;
+        int beforeValueEnd = 377_326;
+        int afterValueEnd = 414_297;
+        assertEquals('{', before.charAt(valueStart));
+        assertEquals('{', after.charAt(valueStart));
+        assertEquals('}', before.charAt(beforeValueEnd - 1));
+        assertEquals('}', after.charAt(afterValueEnd - 1));
+        assertEquals("9ed985fa03ee732c8c9d15c3b6e082764dd1e3c4e258ad4d29188bf008ded449",
+                sha(before.substring(valueStart, beforeValueEnd)),
+                "original A56 migration object value");
+        assertEquals("128762e785aa39ac3c9ec7cb8c6fb797f3ed50cd213d9c19323c332930c9bf46",
+                sha(after.substring(valueStart, afterValueEnd)),
+                "independently reviewed D60 migration object value");
+        assertArrayEquals(before.substring(0, valueStart).getBytes(StandardCharsets.UTF_8),
+                after.substring(0, valueStart).getBytes(StandardCharsets.UTF_8),
+                "every byte before the migration value is preserved");
+        assertArrayEquals(before.substring(beforeValueEnd).getBytes(StandardCharsets.UTF_8),
+                after.substring(afterValueEnd).getBytes(StandardCharsets.UTF_8),
+                "every byte after the migration value is preserved");
+
+        var json = new com.fasterxml.jackson.databind.ObjectMapper();
+        var beforeJson = json.readTree(before);
+        var afterJson = json.readTree(after);
+        assertTrue(beforeJson.isObject());
+        assertTrue(afterJson.isObject());
+        assertEquals(59, beforeJson.path("mappings").size(), "current top-level mappings");
+        assertEquals(59, afterJson.path("mappings").size(), "retained top-level mappings");
+        assertTrue(beforeJson.has("optional_module_mappings"));
+        assertTrue(afterJson.has("optional_module_mappings"));
+        var outsideBefore =
+                (com.fasterxml.jackson.databind.node.ObjectNode) beforeJson.deepCopy();
+        var outsideAfter =
+                (com.fasterxml.jackson.databind.node.ObjectNode) afterJson.deepCopy();
+        outsideBefore.remove("migration");
+        outsideAfter.remove("migration");
+        assertEquals(outsideBefore, outsideAfter, "every nonmigration JSON field is retained");
+
+        var beforeMigration = beforeJson.path("migration");
+        var afterMigration = afterJson.path("migration");
+        assertTrue(beforeMigration.isObject());
+        assertTrue(afterMigration.isObject());
+        var migrationContextBefore =
+                (com.fasterxml.jackson.databind.node.ObjectNode) beforeMigration.deepCopy();
+        var migrationContextAfter =
+                (com.fasterxml.jackson.databind.node.ObjectNode) afterMigration.deepCopy();
+        migrationContextBefore.remove("records");
+        migrationContextAfter.remove("records");
+        assertEquals(migrationContextBefore, migrationContextAfter,
+                "migration version/source/target/coverage/gates remain unchanged");
+
+        var beforeRecords = mappingRecordsById(beforeMigration.path("records"));
+        var afterRecords = mappingRecordsById(afterMigration.path("records"));
+        assertEquals(56, beforeRecords.size());
+        assertEquals(60, afterRecords.size());
+        assertTrue(afterRecords.keySet().containsAll(beforeRecords.keySet()),
+                "no existing migration record may be removed");
+        Set<String> added = new TreeSet<>(afterRecords.keySet());
+        added.removeAll(beforeRecords.keySet());
+        assertEquals(Set.of(
+                "synexia.regex.ordered-relations.adapter",
+                "synexia.regex.ordered-relations.dispatch",
+                "synexia.regex.metadata-pressure",
+                "synexia.regex.hierarchical-route-acceptance"), added,
+                "only the four reviewed restore records are added");
+
+        Map<String, Set<String>> lineageChanges = Map.of(
+                "synexia.counterpart.MIndexRegexTrigramQuery",
+                Set.of("targets", "sync", "lineage", "observation"),
+                "synexia.counterpart.MIndexRegexTrigramQuery.sparseLookup",
+                Set.of("sources", "recipe", "sync", "observation"));
+        int unchanged = 0;
+        int changed = 0;
+        for (var entry : beforeRecords.entrySet()) {
+            String id = entry.getKey();
+            var previous = entry.getValue();
+            var current = afterRecords.get(id);
+            if (lineageChanges.containsKey(id)) {
+                assertEquals(lineageChanges.get(id), changedRecordFields(previous, current),
+                        id + " has only its explicit reviewed lineage field changes");
+                changed++;
+            } else {
+                assertEquals(previous, current, id + " whole record is preserved");
+                unchanged++;
+            }
+        }
+        assertEquals(54, unchanged);
+        assertEquals(2, changed);
+    }
+
+    private static Map<String, com.fasterxml.jackson.databind.JsonNode> mappingRecordsById(
+            com.fasterxml.jackson.databind.JsonNode records) {
+        assertTrue(records.isArray(), "migration records must be an array");
+        Map<String, com.fasterxml.jackson.databind.JsonNode> result = new TreeMap<>();
+        for (var record : records) {
+            assertTrue(record.isObject(), "migration record must be an object");
+            String id = record.path("id").asText();
+            assertFalse(id.isBlank(), "migration record ID is required");
+            assertNull(result.put(id, record), "duplicate migration record ID: " + id);
+        }
+        return result;
+    }
+
+    private static Set<String> changedRecordFields(
+            com.fasterxml.jackson.databind.JsonNode before,
+            com.fasterxml.jackson.databind.JsonNode after) {
+        assertTrue(before.isObject());
+        assertNotNull(after, "reviewed lineage record must remain present");
+        assertTrue(after.isObject());
+        Set<String> names = new TreeSet<>();
+        before.fieldNames().forEachRemaining(names::add);
+        after.fieldNames().forEachRemaining(names::add);
+        names.removeIf(name -> java.util.Objects.equals(before.get(name), after.get(name)));
+        return names;
+    }
 }
