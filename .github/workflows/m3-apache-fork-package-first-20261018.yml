@@ -1,0 +1,55 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3 Apache relocated fork queue source parity
+on:
+  pull_request:
+    paths:
+      - 'm3/collections/qualification/apache-fork-package-first-20261018/**'
+      - '.github/workflows/m3-apache-fork-package-first-20261018.yml'
+  workflow_dispatch:
+jobs:
+  verify-existing-m3-owner-against-fork:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Check exact Apache original, renamed donor and Synexia output custody
+        run: |
+          set -eu
+          Q=m3/collections/qualification/apache-fork-package-first-20261018
+          awk -F '\t' 'NR>6 && NF>=6 {print $6 "  " "IGNORE"}' "$Q/DONOR_SHA256.tsv" >/dev/null
+          awk -F '\t' '{print $3 "  " $1}' "$Q/recipe/manifest.tsv" | sha256sum -c -
+          cmp "$Q/recipe/M3ApacheCircularForkParityProof.java.txt" \
+            "$Q/src/test/java/com/m3/collections/apache/M3ApacheCircularForkParityProof.java"
+          python3 - <<'PY'
+          from pathlib import Path
+          p=Path('m3/collections/qualification/apache-fork-package-first-20261018/reference')
+          original=(p/'original/org/apache/commons/collections4/BoundedCollection.java').read_text()
+          renamed=(p/'relocated/com/m3/collections/apache/BoundedCollection.java').read_text()
+          assert renamed == original.replace('package org.apache.commons.collections4;',
+                                               'package com.m3.collections.apache;')
+          original=(p/'original/org/apache/commons/collections4/queue/CircularFifoQueue.java').read_text()
+          renamed=(p/'relocated/com/m3/collections/apache/queue/CircularFifoQueue.java').read_text()
+          assert renamed == original.replace('package org.apache.commons.collections4.queue;',
+                                               'package com.m3.collections.apache.queue;').replace(
+                                               'import org.apache.commons.collections4.BoundedCollection;',
+                                               'import com.m3.collections.apache.BoundedCollection;')
+          print('PASS complete method bodies, original licensing and package-only changes')
+          PY
+      - name: Compile original Apache, relocated Apache, existing M3 array/mask ring
+        run: |
+          set -eu
+          Q=m3/collections/qualification/apache-fork-package-first-20261018
+          O="$Q/reference/original/org/apache/commons/collections4"
+          R="$Q/reference/relocated/com/m3/collections/apache"
+          M=m3/collections/implementations/apache-circular-fifo/src/main/java/com/m3/collections/apache
+          T="$Q/src/test/java/com/m3/collections/apache"
+          OUT="$RUNNER_TEMP/m3-apache-fork/classes"
+          mkdir -p "$OUT"
+          javac --release 21 -proc:none -Xlint:all,-serial,-this-escape -Werror -d "$OUT" \
+            "$O/BoundedCollection.java" "$O/queue/CircularFifoQueue.java" \
+            "$R/BoundedCollection.java" "$R/queue/CircularFifoQueue.java" \
+            "$M/M3CircularFifoQueue.java" "$T/M3ApacheCircularForkParityProof.java"
+          java -ea -cp "$OUT" com.m3.collections.apache.M3ApacheCircularForkParityProof
