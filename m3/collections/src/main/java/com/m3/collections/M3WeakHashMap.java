@@ -36,6 +36,8 @@ public final class M3WeakHashMap<K, V> extends M3SlotMap<K, V> {
             int s = ref.slot; if (s >= 0 && references[s] == ref) { erase(s, false); }
         }
     }
+    // A strong facade cache would keep weak keys alive; weak-map API entries remain uncached.
+    @Override boolean cacheApiEntries() { return false; }
     @Override boolean live(int s) { return states[s] == 1 && referent(s) != null; }
     @Override int firstSlot() { drain(); return nextSlot(-1); }
     @Override int nextSlot(int s) {
@@ -58,7 +60,7 @@ public final class M3WeakHashMap<K, V> extends M3SlotMap<K, V> {
     }
     @Override V valueAt(int s) { return M3SlotArrays.get(values, s); }
     @Override V writeAt(int s, V value) { V old = valueAt(s); values[s] = value; return old; }
-    @Override V eraseAt(int s) { return erase(s, true); }
+    @Override V eraseAt(int s) { forgetEntry(keyAt(s)); return erase(s, true); }
     private V erase(int s, boolean structural) {
         if (states[s] != 1) { return null; }
         V old = valueAt(s);
@@ -94,6 +96,7 @@ public final class M3WeakHashMap<K, V> extends M3SlotMap<K, V> {
         references = r; values = v; hashes = h; states = state; size = count; occupied = count;
     }
     @Override public void clear() {
+        clearEntryCaches();
         if (occupied == 0) { return; }
         for (Object r : references) { if (r instanceof KeyReference ref) { ref.slot = -1; ref.clear(); } }
         Arrays.fill(references, null); Arrays.fill(values, null); Arrays.fill(states, (byte) 0);
