@@ -80,6 +80,25 @@ final class M3EntryFacadeCacheTest {
         assertEquals(3, afterReinsert.getValue());
     }
 
+
+    @Test
+    void treeMapReusesLiveFacadesButKeepsEntrySnapshotsDetached() {
+        M3TreeMap<String, Integer> map = new M3TreeMap<>();
+        map.put("one", 1);
+
+        Map.Entry<String, Integer> first = map.entrySet().iterator().next();
+        Map.Entry<String, Integer> second = map.entrySet().iterator().next();
+        assertSame(first, second);
+
+        Map.Entry<String, Integer> snapshot = map.firstEntry();
+        assertNotSame(snapshot, map.firstEntry());
+        map.put("one", 2);
+        assertEquals(1, snapshot.getValue(),
+                "firstEntry must remain a detached immutable snapshot");
+        assertEquals(2, first.getValue(),
+                "the cached iterator facade resolves the live mapping");
+    }
+
     @Test
     void weakKeyMapBypassesStrongFacadeCache() throws ReflectiveOperationException {
         M3WeakHashMap<Object, Integer> map = new M3WeakHashMap<>();
