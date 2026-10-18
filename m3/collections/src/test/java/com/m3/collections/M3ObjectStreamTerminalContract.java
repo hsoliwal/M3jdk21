@@ -18,6 +18,7 @@ public final class M3ObjectStreamTerminalContract {
     public static void main(String[] args) {
         terminals();
         arrayMaterialization();
+        compositionAndBoundedPartition();
         System.out.println("M3ObjectStreamTerminalContract PASS assertions=" + assertions);
     }
 
@@ -55,6 +56,37 @@ public final class M3ObjectStreamTerminalContract {
         throwsType(IllegalStateException.class, () -> M3ObjectStream.snapshot(values).toArray(3));
         throwsType(IllegalStateException.class,
                 () -> M3ObjectStream.snapshot(values).toArray(Integer[]::new, 3));
+    }
+
+    private static void compositionAndBoundedPartition() {
+        var concatenated = M3ObjectStream.concat(
+                M3ObjectStream.snapshot(List.of(1, 2)),
+                M3ObjectStream.snapshot(List.of(3, 4)));
+        eq(true, concatenated.replayable());
+        eq(List.of(1, 2, 3, 4), concatenated.toBoundedList(4));
+
+        var oneShot = M3ObjectStream.once(java.util.stream.Stream.of(1));
+        var oneShotConcat = M3ObjectStream.concat(oneShot, M3ObjectStream.snapshot(List.of(2)));
+        eq(false, oneShotConcat.replayable());
+        eq(List.of(1, 2), oneShotConcat.toBoundedList(2));
+        throwsType(IllegalStateException.class, oneShotConcat::count);
+
+        eq(Arrays.asList("a1", "b1", null),
+                M3ObjectStream.snapshot(Arrays.asList("a1", "a2", "b1", null, null))
+                        .distinctBy(value -> value == null ? null : value.substring(0, 1), 3)
+                        .toBoundedList(3));
+        throwsType(IllegalStateException.class,
+                () -> M3ObjectStream.snapshot(Arrays.asList("a1", "a2", "b1", null))
+                        .distinctBy(value -> value == null ? null : value.substring(0, 1), 2)
+                        .count());
+
+        var partitions = M3ObjectStream.snapshot(Arrays.asList(1, null, 2, 3, null))
+                .partitionBy(value -> value != null && value % 2 != 0, 5);
+        eq(Arrays.asList(null, 2, null), partitions.get(Boolean.FALSE));
+        eq(List.of(1, 3), partitions.get(Boolean.TRUE));
+        eq(List.of(Boolean.FALSE, Boolean.TRUE), new ArrayList<>(partitions.keySet()));
+        throwsType(IllegalStateException.class,
+                () -> M3ObjectStream.snapshot(List.of(1, 2, 3)).partitionBy(x -> x > 0, 2));
     }
 
     private static void eq(Object expected, Object actual) {
