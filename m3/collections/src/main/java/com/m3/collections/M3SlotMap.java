@@ -40,11 +40,11 @@ abstract class M3SlotMap<K, V> extends AbstractMap<K, V> {
     /** Only API entry requests can materialize or reuse an Entry object. */
     final Entry<K, V> entryProjection(int slot) {
         if (slot < 0) { return null; }
-        if (!retainApiProjections()) { return new LiveEntry(keyAt(slot)); }
+        if (!retainApiProjections()) { return new LiveEntry(slot); }
         M3LFUCache<Entry<K, V>> cache = apiProjections;
         if (cache == null) { apiProjections = cache = new M3LFUCache<>(64); }
         return cache.getOrCreate(slot, projectionGeneration(slot),
-                s -> new LiveEntry(keyAt(s)));
+                s -> new LiveEntry(s));
     }
 
     /** Release only cached API projection references, never canonical data. */
@@ -179,14 +179,24 @@ abstract class M3SlotMap<K, V> extends AbstractMap<K, V> {
     }
     final class LiveEntry implements Entry<K, V> {
         private final K key;
-        LiveEntry(K key) { this.key = key; }
-        @Override public K getKey() { return key; }
-        @Override public V getValue() { int s = findSlot(key); return s < 0 ? null : valueAt(s); }
-        @Override public V setValue(V value) {
-            int s = findSlot(key);
-            if (s < 0) { throw new IllegalStateException("entry no longer present"); }
-            return writeAt(s, value);
+        private final int slot;
+        private final int generation;
+        LiveEntry(int slot) {
+            this.key = keyAt(slot);
+            this.slot = slot;
+            this.generation = projectionGeneration(slot);
         }
+        @Override public K getKey() { return key; }
+        private int checkedSlot() {
+            // A physical slot may be recycled, including for an equal key.
+            // Never redirect an escaped API Entry onto another logical row.
+            if (findSlot(key) != slot || projectionGeneration(slot) != generation) {
+                throw new IllegalStateException("API entry is no longer backed by its original row");
+            }
+            return slot;
+        }
+        @Override public V getValue() { return valueAt(checkedSlot()); }
+        @Override public V setValue(V value) { return writeAt(checkedSlot(), value); }
         @Override public boolean equals(Object o) {
             return o instanceof Entry<?, ?> e && Objects.equals(key, e.getKey()) && Objects.equals(getValue(), e.getValue());
         }
