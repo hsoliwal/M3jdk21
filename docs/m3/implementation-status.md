@@ -39,6 +39,8 @@ and reconciliation with active collection work.
 - `M3IndexedArray.java`: dynamic parallel arrays, masks, stable handles,
   explicit leases, logical position arrays, removal and free-slot reuse.
 - `M3IndexedView.java`: versioned filtered and sorted index wrappers.
+- `M3IntAlgorithms.java`: problem-category-qualified XOR singleton and adaptive
+  lonely-neighbor filters with offset-aware primitive-array kernels and mask storage.
 - `M3ByteSlices.java`: immutable page-backed atoms, open-addressed `int[]`
   intern dictionary, offsets, lengths, read-only ByteBuffer API facades.
 - `M3CompositeBytes.java`: immutable sequence of primitive descriptors,
@@ -52,6 +54,9 @@ and reconciliation with active collection work.
 
 | Mechanic | Complexity | Remarks |
 | --- | --- | --- |
+| XOR singleton (paired inputs only) | O(n) time / O(1) extra space | Not a substitute for true frequency counting |
+| Lonely-neighbor dense | O(n + U/64) time / O(n + U/64) space | long[] presence/duplicate masks for bounded integer domain U |
+| Lonely-neighbor sparse | O(n) expected time / O(n) space | int[] hash keys + byte[] masks; worst-case O(n²) probing |
 | Indexed append | amortized O(1) | occasional copies of primitive indexes and reference array |
 | Indexed remove | O(n) | shifts logical `int[]` positions, not stored values |
 | Acquire/release lease | O(1) | per-handle synchronized updates |
@@ -105,3 +110,32 @@ expected contracts, run the candidate on generated fixtures, compile/test with
 HotSpot as the oracle, compare observable behavior, reject on disagreement,
 then rerun to fixed point. Independent candidate trials can be parallelized,
 but per-file source changes must remain serial and reviewable.
+
+## LeetCode / HackerRank qualification: two different lonely contracts
+
+LeetCode 136 and HackerRank Lonely Integer require **exactly one singleton** and
+that **every other integer occurs exactly twice**. The XOR atom therefore
+requires no counts or entry objects; an odd input length is necessary, not a
+proof of the full data contract. Never replace general uniqueness or ownership
+counting with XOR.
+
+LeetCode 2150 additionally requires the singleton's `x - 1` and `x + 1`
+values to be absent. M3JDK21 uses a deterministic data-shape selector:
+
+- For a compact span at most 1,048,576 integers and at most eight times the
+  input count (with a 64-value floor), use `long[]` bit masks for presence
+  and duplicate status; each frequency saturates at two.
+- Otherwise use open-addressed `int[]` keys and `byte[]` state masks, with
+  explicit equality checks on hash collisions. This is expected O(n),
+  but adversarial collisions have a worse bound.
+
+Both paths preserve encounter order, accept negative/full-range `int`
+values without neighbor overflow, do not mutate the input, expose
+`offset,length` bounds, and store no per-value objects. Randomized test
+comparisons against a straightforward boxed-HashMap oracle cover both
+paths; separate randomized paired-input tests qualify XOR. Tests are
+algorithmic contract checks, not full JDK or performance qualifications.
+
+These examples are algorithm categories and candidate inspirations, not
+licenses to copy third-party solutions. Catalogue entries explicitly track
+constraint matching, selected/rejected alternatives, and verification.

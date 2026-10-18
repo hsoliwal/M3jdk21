@@ -6,7 +6,9 @@
  */
 package org.synexia.m3.recipe;
 
+import com.sun.source.tree.BinaryTree;
 import com.sun.source.tree.CompilationUnitTree;
+import com.sun.source.tree.CompoundAssignmentTree;
 import com.sun.source.tree.MethodInvocationTree;
 import com.sun.source.tree.MethodTree;
 import com.sun.source.tree.NewArrayTree;
@@ -122,6 +124,25 @@ public final class M3InventoryRecipe {
                     }
 
                     @Override
+                    public Void visitBinary(BinaryTree node, Void unused) {
+                        if (node.getKind() == Tree.Kind.XOR) {
+                            // XOR is evidence only. Paired-duplicate semantics
+                            // require a separate caller-contract proof.
+                            evidence(node, "OPERATOR", "xor_candidate");
+                        }
+                        return super.visitBinary(node, unused);
+                    }
+
+                    @Override
+                    public Void visitCompoundAssignment(CompoundAssignmentTree node,
+                                                        Void unused) {
+                        if (node.getKind() == Tree.Kind.XOR_ASSIGNMENT) {
+                            evidence(node, "OPERATOR", "xor_candidate");
+                        }
+                        return super.visitCompoundAssignment(node, unused);
+                    }
+
+                    @Override
                     public Void visitNewArray(NewArrayTree node, Void unused) {
                         evidence(node, "ALLOCATION", "dynamic_arrays");
                         return super.visitNewArray(node, unused);
@@ -152,6 +173,10 @@ public final class M3InventoryRecipe {
             case "substring", "slice", "subSequence", "concat" -> "composite_strings";
             case "retain", "release", "ownerCount" -> "storage_ownership";
             case "shallowSize", "getObjectSize" -> "object_sizing";
+            // Lexical API names nominate candidates only; e.g. merge() is
+            // not proof of frequency counting or neighbor-isolation semantics.
+            case "merge", "getOrDefault", "compute" -> "frequency_candidate";
+            case "containsKey" -> "membership_candidate";
             default -> null;
         };
     }

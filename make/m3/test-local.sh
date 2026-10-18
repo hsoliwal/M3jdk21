@@ -10,6 +10,7 @@ mkdir -p "$CLASSES" "$TESTS"
 javac --patch-module java.base="$ROOT/src/java.base/share/classes" -d "$CLASSES" \
     "$ROOT/src/java.base/share/classes/jdk/internal/m3/M3IndexedArray.java" \
     "$ROOT/src/java.base/share/classes/jdk/internal/m3/M3IndexedView.java" \
+    "$ROOT/src/java.base/share/classes/jdk/internal/m3/M3IntAlgorithms.java" \
     "$ROOT/src/java.base/share/classes/jdk/internal/m3/M3ObjectMetrics.java" \
     "$ROOT/src/java.base/share/classes/jdk/internal/m3/M3ByteSlices.java" \
     "$ROOT/src/java.base/share/classes/jdk/internal/m3/M3CompositeBytes.java"
@@ -23,6 +24,9 @@ javac --patch-module java.base="$CLASSES" \
 java --patch-module java.base="$CLASSES" \
     --add-exports java.base/jdk.internal.m3=ALL-UNNAMED \
     -cp "$TESTS" M3IndexedArrayTest
+java --patch-module java.base="$CLASSES" \
+    --add-exports java.base/jdk.internal.m3=ALL-UNNAMED \
+    -cp "$TESTS" M3IntAlgorithmsTest
 java --patch-module java.base="$CLASSES" \
     --add-exports java.base/jdk.internal.m3=ALL-UNNAMED \
     -cp "$TESTS" M3ByteSlicesTest
