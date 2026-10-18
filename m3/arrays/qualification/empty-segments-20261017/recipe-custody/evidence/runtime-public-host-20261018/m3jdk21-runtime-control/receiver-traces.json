@@ -1,0 +1,121 @@
+{
+  "schema": "M3_LOSSLESS_PUBLIC_RECEIVER_TRACE_BUNDLE_V1",
+  "dataset": "m3jdk21-runtime-control",
+  "encoding": "Each utf8 value re-encodes to the exact original bytes, including final newlines",
+  "files": [
+    {
+      "path": "RECEIVER_RECEIPT.json",
+      "sha256": "4d746c90447caff2290e02b164abfc9b1bce7c81f110dd82f895223619814f7d",
+      "size_bytes": 1626,
+      "utf8": "{\n  \"schema\": \"M3_AST_BUILD_RECEIVER_CONTRACT_V1\",\n  \"status\": \"PASS\",\n  \"dataset\": \"m3jdk21-runtime-control\",\n  \"targets\": 10,\n  \"cases\": [\n    {\n      \"case\": \"check-no-write\",\n      \"exit_code\": 0,\n      \"expected_refusal\": null\n    },\n    {\n      \"case\": \"apply-exact-sdk\",\n      \"exit_code\": 0,\n      \"expected_refusal\": null\n    },\n    {\n      \"case\": \"fixed-point-no-write\",\n      \"exit_code\": 0,\n      \"expected_refusal\": null\n    },\n    {\n      \"case\": \"late-drift-no-partial-write\",\n      \"exit_code\": 1,\n      \"expected_refusal\": \"target source drift: test/jdk/java/lang/Object/M3RuntimeCompatibilityHold.java\"\n    },\n    {\n      \"case\": \"qualified-input-tamper\",\n      \"exit_code\": 1,\n      \"expected_refusal\": \"recipe changed after SDK qualification:\"\n    },\n    {\n      \"case\": \"sdk-result-tamper\",\n      \"exit_code\": 1,\n      \"expected_refusal\": \"SDK result changed after qualification: test/jdk/java/lang/Object/M3RuntimeCompatibilityHold.java\"\n    },\n    {\n      \"case\": \"symlink-target\",\n      \"exit_code\": 1,\n      \"expected_refusal\": \"symlink target or parent is not admitted:\"\n    },\n    {\n      \"case\": \"mixed-pre-postimages\",\n      \"exit_code\": 0,\n      \"expected_refusal\": null\n    },\n    {\n      \"case\": \"failed-sdk-test-refusal\",\n      \"exit_code\": 1,\n      \"expected_refusal\": \"all actual SDK qualification tests must execute successfully\"\n    }\n  ],\n  \"actual_sdk_results\": true,\n  \"product_files_written\": false,\n  \"sdk_inputs_sha256\": \"561c029b02c87b41777c738b503c9650f02722b26ba1446f9cdae1a5eae13f9e\",\n  \"sdk_results_sha256\": \"06757e5790dbac3e96781519ed304c92e9f1d476bb48494877182cd0ede2ccc7\"\n}\n"
+    },
+    {
+      "path": "apply-exact-sdk.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0,
+      "utf8": ""
+    },
+    {
+      "path": "apply-exact-sdk.stdout.log",
+      "sha256": "2d3b85f25a9674c861c95218d09eb9a7e0491760aa36d230f0e61d53fff05efe",
+      "size_bytes": 143,
+      "utf8": "M3_COLLECTIONS_RECEIVER_PASS {\"actual_sdk_results\": true, \"changes\": 10, \"dataset\": \"m3jdk21-runtime-control\", \"mode\": \"apply\", \"targets\": 10}\n"
+    },
+    {
+      "path": "check-no-write.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0,
+      "utf8": ""
+    },
+    {
+      "path": "check-no-write.stdout.log",
+      "sha256": "64e58f32164cb775df089fb804e7141e33b7e6d41f8a2f9c4be4fbc865b4f965",
+      "size_bytes": 143,
+      "utf8": "M3_COLLECTIONS_RECEIVER_PASS {\"actual_sdk_results\": true, \"changes\": 10, \"dataset\": \"m3jdk21-runtime-control\", \"mode\": \"check\", \"targets\": 10}\n"
+    },
+    {
+      "path": "failed-sdk-test-refusal.stderr.log",
+      "sha256": "ec7c8f4696a27f6b0b0cf3241785a2f51a63c5e29bf28daabf1ebffe949737ac",
+      "size_bytes": 1277,
+      "utf8": "Traceback (most recent call last):\n  File \"/workspace/scratch/2b4d1cb957a7/runtime-refinement/proof/public-host-seven/m3jdk21-runtime-control-receiver-proof/isolated-cyk065ri/failed-tests/crate/receive.py\", line 195, in <module>\n    main()\n  File \"/workspace/scratch/2b4d1cb957a7/runtime-refinement/proof/public-host-seven/m3jdk21-runtime-control-receiver-proof/isolated-cyk065ri/failed-tests/crate/receive.py\", line 190, in main\n    result = receive(crate, args.dataset, owner.absolute(), args.target.absolute(), args.check)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/scratch/2b4d1cb957a7/runtime-refinement/proof/public-host-seven/m3jdk21-runtime-control-receiver-proof/isolated-cyk065ri/failed-tests/crate/receive.py\", line 147, in receive\n    qualified = qualification(crate, dataset, owner)\n                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/scratch/2b4d1cb957a7/runtime-refinement/proof/public-host-seven/m3jdk21-runtime-control-receiver-proof/isolated-cyk065ri/failed-tests/crate/receive.py\", line 71, in qualification\n    raise ValueError(\"all actual SDK qualification tests must execute successfully\")\nValueError: all actual SDK qualification tests must execute successfully\n"
+    },
+    {
+      "path": "failed-sdk-test-refusal.stdout.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0,
+      "utf8": ""
+    },
+    {
+      "path": "fixed-point-no-write.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0,
+      "utf8": ""
+    },
+    {
+      "path": "fixed-point-no-write.stdout.log",
+      "sha256": "f7b3a857e2d86e3b55f1068f0cc9f34561950794152b747f4ca02a5f0022854e",
+      "size_bytes": 142,
+      "utf8": "M3_COLLECTIONS_RECEIVER_PASS {\"actual_sdk_results\": true, \"changes\": 0, \"dataset\": \"m3jdk21-runtime-control\", \"mode\": \"apply\", \"targets\": 10}\n"
+    },
+    {
+      "path": "late-drift-no-partial-write.stderr.log",
+      "sha256": "d26f7f1aecef9c0d1840317b5af5b7a594ab0ae9e340815ad882127246af5526",
+      "size_bytes": 957,
+      "utf8": "Traceback (most recent call last):\n  File \"/workspace/scratch/2b4d1cb957a7/runtime-refinement/proof/public-host-seven/m3jdk21-runtime-control-receiver-proof/isolated-cyk065ri/late-drift/crate/receive.py\", line 195, in <module>\n    main()\n  File \"/workspace/scratch/2b4d1cb957a7/runtime-refinement/proof/public-host-seven/m3jdk21-runtime-control-receiver-proof/isolated-cyk065ri/late-drift/crate/receive.py\", line 190, in main\n    result = receive(crate, args.dataset, owner.absolute(), args.target.absolute(), args.check)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/scratch/2b4d1cb957a7/runtime-refinement/proof/public-host-seven/m3jdk21-runtime-control-receiver-proof/isolated-cyk065ri/late-drift/crate/receive.py\", line 154, in receive\n    raise ValueError(\"target source drift: \" + relative)\nValueError: target source drift: test/jdk/java/lang/Object/M3RuntimeCompatibilityHold.java\n"
+    },
+    {
+      "path": "late-drift-no-partial-write.stdout.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0,
+      "utf8": ""
+    },
+    {
+      "path": "mixed-pre-postimages.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0,
+      "utf8": ""
+    },
+    {
+      "path": "mixed-pre-postimages.stdout.log",
+      "sha256": "b6bb5d8674d3f77c5c78872c1f03e179aa87d240bffb822dcb4399c735d5bc62",
+      "size_bytes": 142,
+      "utf8": "M3_COLLECTIONS_RECEIVER_PASS {\"actual_sdk_results\": true, \"changes\": 5, \"dataset\": \"m3jdk21-runtime-control\", \"mode\": \"apply\", \"targets\": 10}\n"
+    },
+    {
+      "path": "qualified-input-tamper.stderr.log",
+      "sha256": "d991a2c57074aae1946159b5cebf779473ec1a9ed932bb9c8b34e7b65c704cb9",
+      "size_bytes": 1292,
+      "utf8": "Traceback (most recent call last):\n  File \"/workspace/scratch/2b4d1cb957a7/runtime-refinement/proof/public-host-seven/m3jdk21-runtime-control-receiver-proof/isolated-cyk065ri/input-tamper/crate/receive.py\", line 195, in <module>\n    main()\n  File \"/workspace/scratch/2b4d1cb957a7/runtime-refinement/proof/public-host-seven/m3jdk21-runtime-control-receiver-proof/isolated-cyk065ri/input-tamper/crate/receive.py\", line 190, in main\n    result = receive(crate, args.dataset, owner.absolute(), args.target.absolute(), args.check)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/scratch/2b4d1cb957a7/runtime-refinement/proof/public-host-seven/m3jdk21-runtime-control-receiver-proof/isolated-cyk065ri/input-tamper/crate/receive.py\", line 147, in receive\n    qualified = qualification(crate, dataset, owner)\n                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/scratch/2b4d1cb957a7/runtime-refinement/proof/public-host-seven/m3jdk21-runtime-control-receiver-proof/isolated-cyk065ri/input-tamper/crate/receive.py\", line 91, in qualification\n    raise ValueError(\"recipe changed after SDK qualification: \" + path)\nValueError: recipe changed after SDK qualification: crate/datasets/m3jdk21-runtime-control/MODES.tsv\n"
+    },
+    {
+      "path": "qualified-input-tamper.stdout.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0,
+      "utf8": ""
+    },
+    {
+      "path": "sdk-result-tamper.stderr.log",
+      "sha256": "66d1c7d831928d75a83088b9e3295b56642e13e6b0fa40b5bee2439aefbb710d",
+      "size_bytes": 1306,
+      "utf8": "Traceback (most recent call last):\n  File \"/workspace/scratch/2b4d1cb957a7/runtime-refinement/proof/public-host-seven/m3jdk21-runtime-control-receiver-proof/isolated-cyk065ri/result-tamper/crate/receive.py\", line 195, in <module>\n    main()\n  File \"/workspace/scratch/2b4d1cb957a7/runtime-refinement/proof/public-host-seven/m3jdk21-runtime-control-receiver-proof/isolated-cyk065ri/result-tamper/crate/receive.py\", line 190, in main\n    result = receive(crate, args.dataset, owner.absolute(), args.target.absolute(), args.check)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/scratch/2b4d1cb957a7/runtime-refinement/proof/public-host-seven/m3jdk21-runtime-control-receiver-proof/isolated-cyk065ri/result-tamper/crate/receive.py\", line 147, in receive\n    qualified = qualification(crate, dataset, owner)\n                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/scratch/2b4d1cb957a7/runtime-refinement/proof/public-host-seven/m3jdk21-runtime-control-receiver-proof/isolated-cyk065ri/result-tamper/crate/receive.py\", line 137, in qualification\n    raise ValueError(\"SDK result changed after qualification: \" + path)\nValueError: SDK result changed after qualification: test/jdk/java/lang/Object/M3RuntimeCompatibilityHold.java\n"
+    },
+    {
+      "path": "sdk-result-tamper.stdout.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0,
+      "utf8": ""
+    },
+    {
+      "path": "symlink-target.stderr.log",
+      "sha256": "cfd7f44fb13e0cf4622ffb1634d60859ec7318c0fd42d28223cffc1683d0c1ae",
+      "size_bytes": 1257,
+      "utf8": "Traceback (most recent call last):\n  File \"/workspace/scratch/2b4d1cb957a7/runtime-refinement/proof/public-host-seven/m3jdk21-runtime-control-receiver-proof/isolated-cyk065ri/symlink/crate/receive.py\", line 195, in <module>\n    main()\n  File \"/workspace/scratch/2b4d1cb957a7/runtime-refinement/proof/public-host-seven/m3jdk21-runtime-control-receiver-proof/isolated-cyk065ri/symlink/crate/receive.py\", line 190, in main\n    result = receive(crate, args.dataset, owner.absolute(), args.target.absolute(), args.check)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/scratch/2b4d1cb957a7/runtime-refinement/proof/public-host-seven/m3jdk21-runtime-control-receiver-proof/isolated-cyk065ri/symlink/crate/receive.py\", line 150, in receive\n    path = contained(target, relative)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/scratch/2b4d1cb957a7/runtime-refinement/proof/public-host-seven/m3jdk21-runtime-control-receiver-proof/isolated-cyk065ri/symlink/crate/receive.py\", line 50, in contained\n    raise ValueError(\"symlink target or parent is not admitted: \" + relative)\nValueError: symlink target or parent is not admitted: test/jdk/java/lang/Object/M3RuntimeCompatibilityHold.java\n"
+    },
+    {
+      "path": "symlink-target.stdout.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0,
+      "utf8": ""
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+Traceback (most recent call last):
+  File "/workspace/scratch/2b4d1cb957a7/runtime-refinement/proof/runtime-control-recipe-v3/receiver/isolated-l0d8s9jn/input-tamper/crate/receive.py", line 195, in <module>
+    main()
+  File "/workspace/scratch/2b4d1cb957a7/runtime-refinement/proof/runtime-control-recipe-v3/receiver/isolated-l0d8s9jn/input-tamper/crate/receive.py", line 190, in main
+    result = receive(crate, args.dataset, owner.absolute(), args.target.absolute(), args.check)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/scratch/2b4d1cb957a7/runtime-refinement/proof/runtime-control-recipe-v3/receiver/isolated-l0d8s9jn/input-tamper/crate/receive.py", line 147, in receive
+    qualified = qualification(crate, dataset, owner)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/scratch/2b4d1cb957a7/runtime-refinement/proof/runtime-control-recipe-v3/receiver/isolated-l0d8s9jn/input-tamper/crate/receive.py", line 91, in qualification
+    raise ValueError("recipe changed after SDK qualification: " + path)
+ValueError: recipe changed after SDK qualification: crate/datasets/m3jdk21-runtime-control/MODES.tsv

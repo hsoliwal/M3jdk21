@@ -1,0 +1,708 @@
+{
+  "schema": "M3_PUBLIC_RUNTIME_SEVEN_DATASET_REPLAY_V1",
+  "status": "PASS",
+  "public_repository": "/workspace/scratch/2b4d1cb957a7/M3jdk21-runtime",
+  "receiving_baseline": "4b24824c3aa09d802121447f8970d442a855f064",
+  "recipe_host": "/workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/m3/arrays/qualification/empty-segments-20261017/recipe-custody",
+  "recipe_owner": "/workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/m3/arrays/qualification/empty-segments-20261017/recipe-custody/sdk-owner",
+  "private_recipe_owner_used": false,
+  "qualifications": [
+    {
+      "dataset": "m3jdk21-object-vtable",
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "sealing_cases": 8,
+      "receiver_cases": 9,
+      "execution": {
+        "command": [
+          "/tmp/m3-toolchain/apache-maven-3.9.11/bin/mvn",
+          "-B",
+          "-ntp",
+          "-U",
+          "-s",
+          "/tmp/m3-toolchain/settings.xml",
+          "-Dmaven.repo.local=/tmp/m3-maven-repository",
+          "-f",
+          "/workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/m3/arrays/qualification/empty-segments-20261017/recipe-custody/pom.xml",
+          "-Drecipe.owner.root=/workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/m3/arrays/qualification/empty-segments-20261017/recipe-custody/sdk-owner",
+          "-Dm3.dataset=m3jdk21-object-vtable",
+          "-Dm3.contract.output=/workspace/scratch/2b4d1cb957a7/runtime-refinement/proof/public-host-seven/m3jdk21-object-vtable-receiver-proof",
+          "-Pcontract",
+          "verify"
+        ],
+        "exit_code": 0,
+        "stdout_sha256": "4be879ee26d8371871a76d1f15a509e6f5c3db85ca7ff71b5d1a329b1c684388",
+        "stderr_sha256": "d1737db24da81b3c3a0b18702ce65bfadfb6524254e681f8bc84ee0e82703fbb"
+      },
+      "sdk_report_sha256": "fe8f009b379c421aac5bc5bb2c5411e17a57bbc75db50caf3c3c9460cd10bc95"
+    },
+    {
+      "dataset": "m3jdk21-progress-doclint",
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "sealing_cases": 8,
+      "receiver_cases": 9,
+      "execution": {
+        "command": [
+          "/tmp/m3-toolchain/apache-maven-3.9.11/bin/mvn",
+          "-B",
+          "-ntp",
+          "-U",
+          "-s",
+          "/tmp/m3-toolchain/settings.xml",
+          "-Dmaven.repo.local=/tmp/m3-maven-repository",
+          "-f",
+          "/workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/m3/arrays/qualification/empty-segments-20261017/recipe-custody/pom.xml",
+          "-Drecipe.owner.root=/workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/m3/arrays/qualification/empty-segments-20261017/recipe-custody/sdk-owner",
+          "-Dm3.dataset=m3jdk21-progress-doclint",
+          "-Dm3.contract.output=/workspace/scratch/2b4d1cb957a7/runtime-refinement/proof/public-host-seven/m3jdk21-progress-doclint-receiver-proof",
+          "-Pcontract",
+          "verify"
+        ],
+        "exit_code": 0,
+        "stdout_sha256": "167eb93771b2dd9f282fe7f624b8d6e8f3b15cc90e810456a90a72a1451115e1",
+        "stderr_sha256": "2e7e95d82618f1ea08b0a24d61f374c3b161fb04ee47113d6baab1ebd15ac0a2"
+      },
+      "sdk_report_sha256": "8b107509798e821a3a26b41452edd267d09b8e010ea40549dc908aaa3e1551a7"
+    },
+    {
+      "dataset": "m3jdk21-functional-doclint",
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "sealing_cases": 8,
+      "receiver_cases": 9,
+      "execution": {
+        "command": [
+          "/tmp/m3-toolchain/apache-maven-3.9.11/bin/mvn",
+          "-B",
+          "-ntp",
+          "-U",
+          "-s",
+          "/tmp/m3-toolchain/settings.xml",
+          "-Dmaven.repo.local=/tmp/m3-maven-repository",
+          "-f",
+          "/workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/m3/arrays/qualification/empty-segments-20261017/recipe-custody/pom.xml",
+          "-Drecipe.owner.root=/workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/m3/arrays/qualification/empty-segments-20261017/recipe-custody/sdk-owner",
+          "-Dm3.dataset=m3jdk21-functional-doclint",
+          "-Dm3.contract.output=/workspace/scratch/2b4d1cb957a7/runtime-refinement/proof/public-host-seven/m3jdk21-functional-doclint-receiver-proof",
+          "-Pcontract",
+          "verify"
+        ],
+        "exit_code": 0,
+        "stdout_sha256": "c4e743bfd6935272503b8f3f9bd8ac4abcb17d022f40dab6405ac0fd866b4f3b",
+        "stderr_sha256": "1b9010f3ee76d9299c23d33a008e23fde33424e267614ab416c262a38d66483f"
+      },
+      "sdk_report_sha256": "28822dd1e9451efc0a3c4832bb743151d2b96907437172ccbb13550f03721147"
+    },
+    {
+      "dataset": "m3jdk21-progress-scope-lint",
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "sealing_cases": 8,
+      "receiver_cases": 9,
+      "execution": {
+        "command": [
+          "/tmp/m3-toolchain/apache-maven-3.9.11/bin/mvn",
+          "-B",
+          "-ntp",
+          "-U",
+          "-s",
+          "/tmp/m3-toolchain/settings.xml",
+          "-Dmaven.repo.local=/tmp/m3-maven-repository",
+          "-f",
+          "/workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/m3/arrays/qualification/empty-segments-20261017/recipe-custody/pom.xml",
+          "-Drecipe.owner.root=/workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/m3/arrays/qualification/empty-segments-20261017/recipe-custody/sdk-owner",
+          "-Dm3.dataset=m3jdk21-progress-scope-lint",
+          "-Dm3.contract.output=/workspace/scratch/2b4d1cb957a7/runtime-refinement/proof/public-host-seven/m3jdk21-progress-scope-lint-receiver-proof",
+          "-Pcontract",
+          "verify"
+        ],
+        "exit_code": 0,
+        "stdout_sha256": "a8841483e02da7cb6dfb16d4b3fb9d5fd3c2f758cedb44f74f1cd305fde71a95",
+        "stderr_sha256": "a7083af566e86cbe22772151b6fca3f8ebd5e54b15b65a53b075122112189e1f"
+      },
+      "sdk_report_sha256": "2442c0fef3d6731c02dc2046033710ccba54745fab42883c2e50f0e5b8dfa382"
+    },
+    {
+      "dataset": "m3jdk21-strings-doclint",
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "sealing_cases": 8,
+      "receiver_cases": 9,
+      "execution": {
+        "command": [
+          "/tmp/m3-toolchain/apache-maven-3.9.11/bin/mvn",
+          "-B",
+          "-ntp",
+          "-U",
+          "-s",
+          "/tmp/m3-toolchain/settings.xml",
+          "-Dmaven.repo.local=/tmp/m3-maven-repository",
+          "-f",
+          "/workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/m3/arrays/qualification/empty-segments-20261017/recipe-custody/pom.xml",
+          "-Drecipe.owner.root=/workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/m3/arrays/qualification/empty-segments-20261017/recipe-custody/sdk-owner",
+          "-Dm3.dataset=m3jdk21-strings-doclint",
+          "-Dm3.contract.output=/workspace/scratch/2b4d1cb957a7/runtime-refinement/proof/public-host-seven/m3jdk21-strings-doclint-receiver-proof",
+          "-Pcontract",
+          "verify"
+        ],
+        "exit_code": 0,
+        "stdout_sha256": "393f2747e92fbe069589890fec1ac65488d7053114fce8d0975cb6ec432f4826",
+        "stderr_sha256": "988ce78dcbc6ad958a909868f1540f1f8e04035fd67fb203dd52fc889230c6b1"
+      },
+      "sdk_report_sha256": "3e47e6143f20d1dd66fb950a24a387bdfa0a4dfd0ab62d829cfa65d87e78e174"
+    },
+    {
+      "dataset": "m3jdk21-native-feature-guard",
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "sealing_cases": 8,
+      "receiver_cases": 9,
+      "execution": {
+        "command": [
+          "/tmp/m3-toolchain/apache-maven-3.9.11/bin/mvn",
+          "-B",
+          "-ntp",
+          "-U",
+          "-s",
+          "/tmp/m3-toolchain/settings.xml",
+          "-Dmaven.repo.local=/tmp/m3-maven-repository",
+          "-f",
+          "/workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/m3/arrays/qualification/empty-segments-20261017/recipe-custody/pom.xml",
+          "-Drecipe.owner.root=/workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/m3/arrays/qualification/empty-segments-20261017/recipe-custody/sdk-owner",
+          "-Dm3.dataset=m3jdk21-native-feature-guard",
+          "-Dm3.contract.output=/workspace/scratch/2b4d1cb957a7/runtime-refinement/proof/public-host-seven/m3jdk21-native-feature-guard-receiver-proof",
+          "-Pcontract",
+          "verify"
+        ],
+        "exit_code": 0,
+        "stdout_sha256": "9f731c02a0b09e03b18e436679986eb860421c6ba8563935cd0e88d84d17d2c9",
+        "stderr_sha256": "489d8fec4214192d21ef621f802a943fb57007a29204410d590ff3ceb58c5003"
+      },
+      "sdk_report_sha256": "f4451cbafb5dd0bec2bc268109b6dda26aad3eb7f08198f519117452389ac734"
+    },
+    {
+      "dataset": "m3jdk21-runtime-control",
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "sealing_cases": 8,
+      "receiver_cases": 9,
+      "execution": {
+        "command": [
+          "/tmp/m3-toolchain/apache-maven-3.9.11/bin/mvn",
+          "-B",
+          "-ntp",
+          "-U",
+          "-s",
+          "/tmp/m3-toolchain/settings.xml",
+          "-Dmaven.repo.local=/tmp/m3-maven-repository",
+          "-f",
+          "/workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/m3/arrays/qualification/empty-segments-20261017/recipe-custody/pom.xml",
+          "-Drecipe.owner.root=/workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/m3/arrays/qualification/empty-segments-20261017/recipe-custody/sdk-owner",
+          "-Dm3.dataset=m3jdk21-runtime-control",
+          "-Dm3.contract.output=/workspace/scratch/2b4d1cb957a7/runtime-refinement/proof/public-host-seven/m3jdk21-runtime-control-receiver-proof",
+          "-Pcontract",
+          "verify"
+        ],
+        "exit_code": 0,
+        "stdout_sha256": "110419636f58751eab721b28af235ae4935aa6def5a838e59147f863a7b006d7",
+        "stderr_sha256": "2e7e95d82618f1ea08b0a24d61f374c3b161fb04ee47113d6baab1ebd15ac0a2"
+      },
+      "sdk_report_sha256": "0567842c3152e74df597b603e0fc591fa55b4b2658769a07e8fdd96ccd39de8e"
+    }
+  ],
+  "operations": [
+    {
+      "dataset": "m3jdk21-object-vtable",
+      "check": {
+        "dataset": "m3jdk21-object-vtable",
+        "targets": 1,
+        "changes": 1,
+        "mode": "check",
+        "actual_sdk_results": true
+      },
+      "apply": {
+        "dataset": "m3jdk21-object-vtable",
+        "targets": 1,
+        "changes": 1,
+        "mode": "apply",
+        "actual_sdk_results": true
+      },
+      "fixed_point": {
+        "dataset": "m3jdk21-object-vtable",
+        "targets": 1,
+        "changes": 0,
+        "mode": "apply",
+        "actual_sdk_results": true
+      }
+    },
+    {
+      "dataset": "m3jdk21-progress-doclint",
+      "check": {
+        "dataset": "m3jdk21-progress-doclint",
+        "targets": 9,
+        "changes": 9,
+        "mode": "check",
+        "actual_sdk_results": true
+      },
+      "apply": {
+        "dataset": "m3jdk21-progress-doclint",
+        "targets": 9,
+        "changes": 9,
+        "mode": "apply",
+        "actual_sdk_results": true
+      },
+      "fixed_point": {
+        "dataset": "m3jdk21-progress-doclint",
+        "targets": 9,
+        "changes": 0,
+        "mode": "apply",
+        "actual_sdk_results": true
+      }
+    },
+    {
+      "dataset": "m3jdk21-functional-doclint",
+      "check": {
+        "dataset": "m3jdk21-functional-doclint",
+        "targets": 4,
+        "changes": 4,
+        "mode": "check",
+        "actual_sdk_results": true
+      },
+      "apply": {
+        "dataset": "m3jdk21-functional-doclint",
+        "targets": 4,
+        "changes": 4,
+        "mode": "apply",
+        "actual_sdk_results": true
+      },
+      "fixed_point": {
+        "dataset": "m3jdk21-functional-doclint",
+        "targets": 4,
+        "changes": 0,
+        "mode": "apply",
+        "actual_sdk_results": true
+      }
+    },
+    {
+      "dataset": "m3jdk21-progress-scope-lint",
+      "check": {
+        "dataset": "m3jdk21-progress-scope-lint",
+        "targets": 5,
+        "changes": 5,
+        "mode": "check",
+        "actual_sdk_results": true
+      },
+      "apply": {
+        "dataset": "m3jdk21-progress-scope-lint",
+        "targets": 5,
+        "changes": 5,
+        "mode": "apply",
+        "actual_sdk_results": true
+      },
+      "fixed_point": {
+        "dataset": "m3jdk21-progress-scope-lint",
+        "targets": 5,
+        "changes": 0,
+        "mode": "apply",
+        "actual_sdk_results": true
+      }
+    },
+    {
+      "dataset": "m3jdk21-strings-doclint",
+      "check": {
+        "dataset": "m3jdk21-strings-doclint",
+        "targets": 1,
+        "changes": 1,
+        "mode": "check",
+        "actual_sdk_results": true
+      },
+      "apply": {
+        "dataset": "m3jdk21-strings-doclint",
+        "targets": 1,
+        "changes": 1,
+        "mode": "apply",
+        "actual_sdk_results": true
+      },
+      "fixed_point": {
+        "dataset": "m3jdk21-strings-doclint",
+        "targets": 1,
+        "changes": 0,
+        "mode": "apply",
+        "actual_sdk_results": true
+      }
+    },
+    {
+      "dataset": "m3jdk21-native-feature-guard",
+      "check": {
+        "dataset": "m3jdk21-native-feature-guard",
+        "targets": 1,
+        "changes": 1,
+        "mode": "check",
+        "actual_sdk_results": true
+      },
+      "apply": {
+        "dataset": "m3jdk21-native-feature-guard",
+        "targets": 1,
+        "changes": 1,
+        "mode": "apply",
+        "actual_sdk_results": true
+      },
+      "fixed_point": {
+        "dataset": "m3jdk21-native-feature-guard",
+        "targets": 1,
+        "changes": 0,
+        "mode": "apply",
+        "actual_sdk_results": true
+      }
+    },
+    {
+      "dataset": "m3jdk21-runtime-control",
+      "check": {
+        "dataset": "m3jdk21-runtime-control",
+        "targets": 10,
+        "changes": 10,
+        "mode": "check",
+        "actual_sdk_results": true
+      },
+      "apply": {
+        "dataset": "m3jdk21-runtime-control",
+        "targets": 10,
+        "changes": 10,
+        "mode": "apply",
+        "actual_sdk_results": true
+      },
+      "fixed_point": {
+        "dataset": "m3jdk21-runtime-control",
+        "targets": 10,
+        "changes": 0,
+        "mode": "apply",
+        "actual_sdk_results": true
+      }
+    }
+  ],
+  "public_host_source_bindings": [
+    {
+      "path": "prepare.py",
+      "sha256": "9b0b3d93c787c9a56036cddb2b044aef30f6fa8a1fa20fa5a2edae46dfd1e62c"
+    },
+    {
+      "path": "receive.py",
+      "sha256": "db258f16e1841f6f5191c1c969c20314a8d143bfa6558b60f684bea440cc1712"
+    },
+    {
+      "path": "ENGINE_SOURCES.tsv",
+      "sha256": "ae731c5780c73a98f6fc81079b5f863613fddea50d2a6c893c6dfd2aa2030b5c"
+    },
+    {
+      "path": "src/test/java/com/synexia/rewrite/M3TaskRecipeTest.java",
+      "sha256": "74b03a3ac3e445a04b8b15076d3ced667bfae2442bd0968cbe74468e4a499e43"
+    },
+    {
+      "path": "contract/test_prepare.py",
+      "sha256": "f504f1dcfafb24fd87f8f677643b45eecc74674881e16bf727b76c4e6a4d1856"
+    },
+    {
+      "path": "contract/verify_receiver.py",
+      "sha256": "a4d82df8b31e707afe7caa5e76524d191f285e2887dbfdfa95cfdc382ae01f7d"
+    },
+    {
+      "path": "sdk-owner/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+      "sha256": "67f7b81126e4736c7b61b444fa6545153a61e23c012975ca796fcee623ab6625"
+    },
+    {
+      "path": "sdk-owner/src/main/java/com/synexia/rewrite/M3HashPinnedTextSnapshotRecipe.java",
+      "sha256": "fbf1ea9efad784afef5ac201ff7fc324551f77a099ebfe2f79b70c3a17c731ef"
+    },
+    {
+      "path": "sdk-owner/src/main/java/com/synexia/rewrite/M3ScopeInference.java",
+      "sha256": "13660b59f60ec2941ec19e9bc8964ffd4b04689cdc33cd19711fba14b8da09a4"
+    },
+    {
+      "path": "sdk-owner/src/main/java/com/synexia/rewrite/M3EditScope.java",
+      "sha256": "962d37d62d740c3e8055c365a048ae7ee0479c26a9f6bbfe741e540d6c1134ab"
+    }
+  ],
+  "public_pom_sha256": "4c90faaa9e64aebeeba14fb2196731c6334293781d0fdcafbf190f2f5662eb7d",
+  "baseline_sources": [
+    {
+      "path": "m3/backports/ALGORITHM_CATALOGUE.tsv",
+      "git_blob": "c05ccaa300d014cda63acb5980da6d7e75125754",
+      "sha256": "1aad547fe2f419cf2f265a8f1d7c492779c1bbc86ef685bfafd47516a98a276e"
+    },
+    {
+      "path": "m3/compatibility/check_object_adapter_progress_receiver_20261017.py",
+      "git_blob": "23384a1f7e7317024b56a2b5c8e8b8c2b650bf89",
+      "sha256": "5e44ba190257db7d9715d80e7870d6a1b69f8c76cc3c285182193e80fc0da443"
+    },
+    {
+      "path": "m3/compatibility/m3-default-template-source-seal.tsv",
+      "git_blob": "7fcd530e452165d9e0b2bf697071164137ac03db",
+      "sha256": "c431bf732eb91a289b4bcd0b886db71d43da7d7bb17074cd6116db6b37e73ad6"
+    },
+    {
+      "path": "m3/compatibility/m3-object-adapter-progress-20261017.tsv",
+      "git_blob": "e76b8d2ff204960960c9f63c0bc42ade1d44aec9",
+      "sha256": "2f581a791adc7ecf7f217a6276f0da8af424c1e3e49385ca6ae44704d3319c82"
+    },
+    {
+      "path": "m3/compatibility/verify_m3_default_template_20261017.py",
+      "git_blob": "94340b0e9c118d8b821e5dc02f99ae966815630e",
+      "sha256": "856910b716021260d387c0e3230c774223d7afc6ba62eab8e0c35668ffc8f2da"
+    },
+    {
+      "path": "m3/docs/name-mapping.json",
+      "git_blob": "4f5911d625090913d85f9cf41b1ead1694dffade",
+      "sha256": "4247c5648cf6a5599f8840a7171f147f5c343bf9b97e7a386eb7f351f978c4f3"
+    },
+    {
+      "path": "src/hotspot/share/classfile/classLoader.cpp",
+      "git_blob": "ab29ec3524d40ff58d6ff3e6fe2c1123b3abc1dd",
+      "sha256": "665bb788428c8d3837d052ac4f69a2756bb1823918726b41a7a7008eadfafd8d"
+    },
+    {
+      "path": "src/java.base/linux/native/libjava/M3PrimitiveFixedArena.c",
+      "git_blob": "15354f8cef8ae6f5a051ec2ad490cce1ac9023f1",
+      "sha256": "04c5281944444e9a9c4bee49748b2a80f7661f44897003f87619403e709e2ddb"
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/Object.java",
+      "git_blob": "2bfef3101224112c40957c954592a100dc59a3fc",
+      "sha256": "829fb37093cf3e8d11b3c1e3d42f898f0c86f3b697e7a66cefe09934be3bb259"
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/Runnable.java",
+      "git_blob": "1d8275948a6e638bfe814f41f0afac82663ff2ca",
+      "sha256": "bad73b8ae0b17e2160845c41058ebdda55fb755affecad51ef37fbc8e0d25534"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/Strings.java",
+      "git_blob": "d4f0687c2145b94de67d29012cea5edf1f47badd",
+      "sha256": "cbadcbce521f89c53fbd92d9644402e7a72bb5e7e56e8943e8c29fbdc0fadb9d"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/concurrent/Callable.java",
+      "git_blob": "8210cfb6a6fdf942b9553e80c303a4b8c9f2671f",
+      "sha256": "a9d2d8cc73583297fb6c07dee24765473aaaeeaae2651a0b54eb411ed2d46261"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/concurrent/Executor.java",
+      "git_blob": "802c00832d217a77bb1245c1ba473479df4c3096",
+      "sha256": "63f808755d552e372f9669c47041b2aeb52f5e34d0f92428aa5899273e4515d4"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/concurrent/ExecutorService.java",
+      "git_blob": "a599ad8915eda2ace1454d59cc64c739ffc9cf66",
+      "sha256": "ca9342b2227960f32bde645c6df74dcd993d23deafad1429fac6521816daa868"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/concurrent/MonitoredCallable.java",
+      "git_blob": "157cce905a828a8cc34fc977f0fa42dc8362aa03",
+      "sha256": "a402533489745504fa3e9b8ca667be9b0d9cc3a370bbe2092c70f20051afb2f7"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/concurrent/MonitoredRunnable.java",
+      "git_blob": "1a8d02bf7ea449018cae69aae5b784a65a172e66",
+      "sha256": "8c975815e833bca4c214313efde24acf776a1ef676140701f9a5293ef4b5415b"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/concurrent/ProgressMonitor.java",
+      "git_blob": "2c90932ecb19c138a62f9860232162002f87c012",
+      "sha256": "58d084535f0e1c76adc102cffd1eff2cadae5c80877812908281699a55ce88b3"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/concurrent/ProgressMonitors.java",
+      "git_blob": "a634db13a764d22fc55ad75ae35cc4952d3b20f6",
+      "sha256": "5073890ccf101b597e656b2516be70b83f0b77f9accdc157d75fc8d6f525a359"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/function/Consumer.java",
+      "git_blob": "3df6f12a3a442c3a9f0d47ed5fc8aa725e634ccb",
+      "sha256": "4de2f5ed281ed6f56b872bd4ae9cc832ffb11b6c78e84a0774d7d6058a4a31fc"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/function/Function.java",
+      "git_blob": "76a20ef10fa1fbb701adb544ff6b7eb152f4303c",
+      "sha256": "7943afca3f9a3816e8f75a62b9c6104c31b883a1a1e614fb795a8fc85333c744"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/function/Supplier.java",
+      "git_blob": "ae9a9fd8a0158cb396d36304a607709cd875903c",
+      "sha256": "49c58acaea3e70e81ec7187b47551d1e0cf6906443bcf3d71e8c9cbba4d032c6"
+    },
+    {
+      "path": "test/jdk/java/lang/Object/M3AdapterProgress.java",
+      "git_blob": "17c0e4f83c3142bbede6523058f40d09ebfe4a02",
+      "sha256": "8bd6da7debf43c81e55b55dd6399404027f098e96be96c46afc0a7969a9453b5"
+    },
+    {
+      "path": "test/jdk/java/lang/Object/M3MonitoredTemplateTest.java",
+      "git_blob": "0b9bd424c67d98c7f033e5e91fd1881b38767fd7",
+      "sha256": "46d25019252f8cc474103f2192332d394b36e4b169ed6ab0e567c0f83a46798b"
+    }
+  ],
+  "composed_current_targets": [
+    {
+      "path": "m3/backports/ALGORITHM_CATALOGUE.tsv",
+      "sha256": "6e129506e8e1bb6c8e728ed82ddae11822129da00b708959dc65deb40d2d0e0c"
+    },
+    {
+      "path": "m3/compatibility/check_object_adapter_progress_receiver_20261017.py",
+      "sha256": "e2c0e81911a8ea4e6d0d6b77eacc36fa4a4aca2c792536b9c32cbcdd40be0404"
+    },
+    {
+      "path": "m3/compatibility/m3-functional-progress-doclint-20261018.tsv",
+      "sha256": "3b62981be6a617b903c559cc31904eca2bffb2b200380f1be57e07a8f634d969"
+    },
+    {
+      "path": "m3/compatibility/m3-progress-doclint-20261018.tsv",
+      "sha256": "7246c16a0e8ec742eba98dac97e24b7fc3947250ad5d2a22f72ac32dcddf0219"
+    },
+    {
+      "path": "m3/compatibility/m3-progress-scope-lint-20261018.tsv",
+      "sha256": "1a45edfa747a03b3491063648a455083633e7de836e4c46241de104d689eebee"
+    },
+    {
+      "path": "m3/compatibility/test_object_adapter_progress_receiver_20261018.py",
+      "sha256": "e84be3f274caf1543ce7a2eb10aced6670fa488ad5478719be5b3227dc48a611"
+    },
+    {
+      "path": "m3/compatibility/verify_m3_default_template_20261017.py",
+      "sha256": "234293306f44acc4f756816564b9dea6146962b13ac2529397e25f062cce49bc"
+    },
+    {
+      "path": "m3/docs/name-mapping.json",
+      "sha256": "d63db548f89f25622399329148872225a438e9121cb3436d967bccd3bdff0c02"
+    },
+    {
+      "path": "m3/runtime-integration/runtime-repair-20261018/CATALOGUE.tsv",
+      "sha256": "3f88e143299a558a1a4f20c86d012b0823dc9f9ee4d519ce28cd16bc9cf35ff4"
+    },
+    {
+      "path": "m3/runtime-integration/runtime-repair-20261018/CURRENT_OWNERS.json",
+      "sha256": "6c6e6dca85d5bf211ec04d8164d357918950348c4c3a9413be453c2bb11de364"
+    },
+    {
+      "path": "m3/runtime-integration/runtime-repair-20261018/FILE_REVIEW.tsv",
+      "sha256": "1c5b958b528e94183f710dea0f4b7ce9319750407062ca51285bd66286b4d377"
+    },
+    {
+      "path": "m3/runtime-integration/runtime-repair-20261018/README.md",
+      "sha256": "04e8ff5ea3b57b861ce4381c120e56584478c1f8004c2397829fb8c59e8dd49a"
+    },
+    {
+      "path": "src/hotspot/share/classfile/classLoader.cpp",
+      "sha256": "d6283c23f650714e85b9a910f6cda656146552ae95950a04b02af861b636dca2"
+    },
+    {
+      "path": "src/java.base/linux/native/libjava/M3PrimitiveFixedArena.c",
+      "sha256": "bcc1693812f4e81ae490ed9ca03c38d6411a7ba81eb2108c1436d693991e0e30"
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/Runnable.java",
+      "sha256": "b549cf18db454b6cff5d4a8181b54fdae1e26659ecc2d7f205e4d2ea6da9f93a"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/Strings.java",
+      "sha256": "20071ef19a84a81f9bccd9a4260df58225442810aef2cbe0b1ec4980c8251087"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/concurrent/Callable.java",
+      "sha256": "6b1ecf702a9e59b171efcaa28dd18fb72265d2bedbfeb2b8bc9d831a74d4892f"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/concurrent/Executor.java",
+      "sha256": "e887630e8a6fe2cb3b24f890fe02118abb06b9a340f8d79f47344840b9b2b6aa"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/concurrent/ExecutorService.java",
+      "sha256": "9196858f2b800cc32671801563da29b14f881bbf37477419664aa6abd795ce2d"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/concurrent/MonitoredCallable.java",
+      "sha256": "77436155c7936ab04698de243fc91b8a9c53a500e63247c364de591c45c1d733"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/concurrent/MonitoredRunnable.java",
+      "sha256": "2670d2b928981c1068c2299dc1458c2b9dc7dc372d2e8d2527005d695c77f06e"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/concurrent/ProgressMonitor.java",
+      "sha256": "368f6b70ca1639ed193c477d1523a1707cf9ec65d056275552e8ca42f500ae93"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/concurrent/ProgressMonitors.java",
+      "sha256": "48b06f44b71fd22a2bafc4e8a99d7542d280830043d929ce1d26ae338f3b4efc"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/function/Consumer.java",
+      "sha256": "52773610a8cd4d4e0808c2895e504b09ce9c0c05a0273e81cc533bad19ab6226"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/function/Function.java",
+      "sha256": "73877c7a547bb812a6901cae0af4866645de978b867e055204cd53f6dffb6476"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/function/Supplier.java",
+      "sha256": "84170e0863237433f20c3fdc4617eea990731fa7a1e5b0aeaf6b03f89e55c096"
+    },
+    {
+      "path": "test/jdk/java/lang/Object/M3RuntimeCompatibilityHold.java",
+      "sha256": "9faf22addfe520efd30ef8181fa1b89bb4e130f65acb35d2ac9e8b58a3ce38aa"
+    }
+  ],
+  "built_receiving_source_comparison": "ALL_COMPOSED_TARGET_BYTES_EQUAL",
+  "checks": {
+    "check_object_adapter_progress_receiver_20261017.py": {
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "-B",
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/proof/public-host-seven/receiving/m3/compatibility/check_object_adapter_progress_receiver_20261017.py"
+      ],
+      "exit_code": 0,
+      "stdout_sha256": "82dbc035a38e4a86751d13a1c5abc677b9d5c4cc6e33334e0e6b58032a3a917c",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "verify_m3_default_template_20261017.py": {
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "-B",
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/proof/public-host-seven/receiving/m3/compatibility/verify_m3_default_template_20261017.py"
+      ],
+      "exit_code": 0,
+      "stdout_sha256": "c28f27631e805393263d4eeded95fd9a41c81adba33c2133d864547a07ad1bea",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "test_object_adapter_progress_receiver_20261018.py": {
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "-B",
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/proof/public-host-seven/receiving/m3/compatibility/test_object_adapter_progress_receiver_20261018.py"
+      ],
+      "exit_code": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "e13d1397892b8f6c6dcfe4ee87391deb822f424fc353127d0da3a5cc6d7a580a"
+    }
+  },
+  "historical_manifests_preserved": [
+    "m3/compatibility/m3-object-adapter-progress-20261017.tsv",
+    "m3/compatibility/m3-default-template-source-seal.tsv"
+  ],
+  "negative_regression_methods": 31,
+  "fixed_point_scope": "Each historical dataset is replayed at its admitted immediate postimage; later exact successors are composed, not accepted as arbitrary old-dataset drift",
+  "universal_object_compatibility": "HOLD_COUNTEREXAMPLES_RETAINED"
+}

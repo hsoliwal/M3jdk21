@@ -1,0 +1,20 @@
+[
+  {
+    "phase": "check",
+    "exit": 0,
+    "stdout": "M3_COLLECTIONS_RECEIVER_PASS {\"actual_sdk_results\": true, \"changes\": 10, \"dataset\": \"m3jdk21-runtime-control\", \"mode\": \"check\", \"targets\": 10}\n",
+    "stderr": ""
+  },
+  {
+    "phase": "apply",
+    "exit": 0,
+    "stdout": "M3_COLLECTIONS_RECEIVER_PASS {\"actual_sdk_results\": true, \"changes\": 10, \"dataset\": \"m3jdk21-runtime-control\", \"mode\": \"apply\", \"targets\": 10}\n",
+    "stderr": ""
+  },
+  {
+    "phase": "replay",
+    "exit": 0,
+    "stdout": "M3_COLLECTIONS_RECEIVER_PASS {\"actual_sdk_results\": true, \"changes\": 0, \"dataset\": \"m3jdk21-runtime-control\", \"mode\": \"check\", \"targets\": 10}\n",
+    "stderr": ""
+  }
+]

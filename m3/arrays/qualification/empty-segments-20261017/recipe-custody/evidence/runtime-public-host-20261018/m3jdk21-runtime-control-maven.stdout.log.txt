@@ -1,0 +1,48 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] --< com.synexia.verification:m3-collections-contract-refinement-recipe-proof >--
+[INFO] Building m3-collections-contract-refinement-recipe-proof 1
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ m3-collections-contract-refinement-recipe-proof ---
+[INFO] Copying 17 resources from datasets/m3jdk21-runtime-control/resources to target/m3jdk21-runtime-control/classes
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ m3-collections-contract-refinement-recipe-proof ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 4 source files with javac [debug release 21] to target/m3jdk21-runtime-control/classes
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ m3-collections-contract-refinement-recipe-proof ---
+[INFO] skip non existing resourceDirectory /workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/m3/arrays/qualification/empty-segments-20261017/recipe-custody/src/test/resources
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ m3-collections-contract-refinement-recipe-proof ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 1 source file with javac [debug release 21] to target/m3jdk21-runtime-control/test-classes
+[INFO] 
+[INFO] --- surefire:3.2.5:test (default-test) @ m3-collections-contract-refinement-recipe-proof ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running com.synexia.rewrite.M3TaskRecipeTest
+[INFO] Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 9.486 s -- in com.synexia.rewrite.M3TaskRecipeTest
+[INFO] 
+[INFO] Results:
+[INFO] 
+[INFO] Tests run: 5, Failures: 0, Errors: 0, Skipped: 0
+[INFO] 
+[INFO] 
+[INFO] --- jar:3.4.1:jar (default-jar) @ m3-collections-contract-refinement-recipe-proof ---
+[INFO] Building jar: /workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/m3/arrays/qualification/empty-segments-20261017/recipe-custody/target/m3jdk21-runtime-control/m3-collections-contract-refinement-recipe-proof-1.jar
+[INFO] 
+[INFO] --- exec:3.5.0:exec (verify-input-sealing-contract) @ m3-collections-contract-refinement-recipe-proof ---
+[INFO] 
+[INFO] --- exec:3.5.0:exec (verify-sdk-receiver-integrity) @ m3-collections-contract-refinement-recipe-proof ---
+M3_AST_BUILD_RECEIVER_CONTRACT_PASS cases=9 targets=10
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  18.637 s
+[INFO] Finished at: 2026-10-18T11:23:51+09:00
+[INFO] ------------------------------------------------------------------------

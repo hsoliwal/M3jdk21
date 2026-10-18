@@ -1,0 +1,6 @@
+java/lang/Object/FinalizationOption.java          Passed. Execution successful
+java/lang/Object/InvalidFinalizationOption.java   Passed. Execution successful
+java/lang/Object/M3AdapterProgress.java           Passed. Execution successful
+java/lang/Object/M3MonitoredTemplateTest.java     Passed. Execution successful
+java/lang/Object/M3RuntimeCompatibilityHold.java  Passed. Execution successful
+java/lang/Object/WaitTooLong.java                 Passed. Execution successful

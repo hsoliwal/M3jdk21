@@ -1,0 +1,44 @@
+{
+  "schema": "M3_PUBLIC_HOST_EVIDENCE_BUNDLE_RECEIPT_V1",
+  "status": "PASS",
+  "datasets": [
+    {
+      "dataset": "m3jdk21-object-vtable",
+      "files": 19,
+      "bundle_sha256": "976d5c00023deaecf3336fe6f8a0ad4f60aeb8cb27169419f015f5f0240d6695"
+    },
+    {
+      "dataset": "m3jdk21-progress-doclint",
+      "files": 19,
+      "bundle_sha256": "5c843f42847185ee8d8678b8659846fd13a6e27f114bb8fdbef2d5b472059af0"
+    },
+    {
+      "dataset": "m3jdk21-functional-doclint",
+      "files": 19,
+      "bundle_sha256": "a3b20b031c50d516c139517b80dce46fa414004c9de1bd3d7965a9710ec6398d"
+    },
+    {
+      "dataset": "m3jdk21-progress-scope-lint",
+      "files": 19,
+      "bundle_sha256": "285241a4d7c221b90c111d6d42f119487275af1bf6b9db50350d9ec18185c15e"
+    },
+    {
+      "dataset": "m3jdk21-strings-doclint",
+      "files": 19,
+      "bundle_sha256": "b54276f220623d9633908a03630b4f262ab96bcc542839b84b348871671e32b3"
+    },
+    {
+      "dataset": "m3jdk21-native-feature-guard",
+      "files": 19,
+      "bundle_sha256": "3dc278ee199b8ff0ab8771889f87d1994ffc1e1d12396526415b1fa6482f95fb"
+    },
+    {
+      "dataset": "m3jdk21-runtime-control",
+      "files": 19,
+      "bundle_sha256": "44042b381a42c311c4406083720d6def3e4c02e1784456f972124b395be961f5"
+    }
+  ],
+  "original_trace_files": 133,
+  "trace_files_lost": 0,
+  "bytes_changed": 0
+}

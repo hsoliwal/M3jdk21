@@ -1,0 +1,20 @@
+[
+  {
+    "phase": "check",
+    "exit": 0,
+    "stdout": "M3_COLLECTIONS_RECEIVER_PASS {\"actual_sdk_results\": true, \"changes\": 5, \"dataset\": \"m3jdk21-progress-scope-lint\", \"mode\": \"check\", \"targets\": 5}\n",
+    "stderr": ""
+  },
+  {
+    "phase": "apply",
+    "exit": 0,
+    "stdout": "M3_COLLECTIONS_RECEIVER_PASS {\"actual_sdk_results\": true, \"changes\": 5, \"dataset\": \"m3jdk21-progress-scope-lint\", \"mode\": \"apply\", \"targets\": 5}\n",
+    "stderr": ""
+  },
+  {
+    "phase": "replay",
+    "exit": 0,
+    "stdout": "M3_COLLECTIONS_RECEIVER_PASS {\"actual_sdk_results\": true, \"changes\": 0, \"dataset\": \"m3jdk21-progress-scope-lint\", \"mode\": \"check\", \"targets\": 5}\n",
+    "stderr": ""
+  }
+]

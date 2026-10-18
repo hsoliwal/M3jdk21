@@ -1,0 +1,66 @@
+/workspace/scratch/2b4d1cb957a7/runtime-refinement/proof/progress-doclint-buildscope/after-all-visibility/source/src/java.base/share/classes/java/util/concurrent/ProgressMonitor.java:21: warning: use of default constructor, which does not provide a comment
+    ProgressMonitor NONE = new ProgressMonitor() { };
+                                                 ^
+/workspace/scratch/2b4d1cb957a7/runtime-refinement/proof/progress-doclint-buildscope/after-all-visibility/source/src/java.base/share/classes/java/util/concurrent/ProgressMonitors.java:19: warning: no comment
+    private static final Supplier<? extends ProgressMonitor> NONE = () -> ProgressMonitor.NONE;
+                                                             ^
+/workspace/scratch/2b4d1cb957a7/runtime-refinement/proof/progress-doclint-buildscope/after-all-visibility/source/src/java.base/share/classes/java/util/concurrent/ProgressMonitors.java:20: warning: no comment
+    private static final AtomicReference<Supplier<? extends ProgressMonitor>> SYSTEM =
+                                                                              ^
+/workspace/scratch/2b4d1cb957a7/runtime-refinement/proof/progress-doclint-buildscope/after-all-visibility/source/src/java.base/share/classes/java/util/concurrent/ProgressMonitors.java:22: warning: no comment
+    private static final ThreadLocal<Scope> CURRENT = new ThreadLocal<>();
+                                            ^
+/workspace/scratch/2b4d1cb957a7/runtime-refinement/proof/progress-doclint-buildscope/after-all-visibility/source/src/java.base/share/classes/java/util/concurrent/ProgressMonitors.java:24: warning: no comment
+    private ProgressMonitors() { }
+            ^
+/workspace/scratch/2b4d1cb957a7/runtime-refinement/proof/progress-doclint-buildscope/after-all-visibility/source/src/java.base/share/classes/java/util/concurrent/ProgressMonitors.java:158: warning: no comment
+        private final Scope parent;
+                            ^
+/workspace/scratch/2b4d1cb957a7/runtime-refinement/proof/progress-doclint-buildscope/after-all-visibility/source/src/java.base/share/classes/java/util/concurrent/ProgressMonitors.java:159: warning: no comment
+        private final ProgressMonitor monitor;
+                                      ^
+/workspace/scratch/2b4d1cb957a7/runtime-refinement/proof/progress-doclint-buildscope/after-all-visibility/source/src/java.base/share/classes/java/util/concurrent/ProgressMonitors.java:160: warning: no comment
+        private final Thread owner = Thread.currentThread();
+                             ^
+/workspace/scratch/2b4d1cb957a7/runtime-refinement/proof/progress-doclint-buildscope/after-all-visibility/source/src/java.base/share/classes/java/util/concurrent/ProgressMonitors.java:161: warning: no comment
+        private boolean closed;
+                        ^
+/workspace/scratch/2b4d1cb957a7/runtime-refinement/proof/progress-doclint-buildscope/after-all-visibility/source/src/java.base/share/classes/java/util/concurrent/ProgressMonitors.java:163: warning: no comment
+        private Scope(Scope parent, ProgressMonitor monitor) {
+                ^
+/workspace/scratch/2b4d1cb957a7/runtime-refinement/proof/progress-doclint-buildscope/after-all-visibility/source/src/java.base/share/classes/java/util/concurrent/ProgressMonitors.java:189: warning: no comment
+    private static final class WeightedChild implements ProgressMonitor {
+                         ^
+/workspace/scratch/2b4d1cb957a7/runtime-refinement/proof/progress-doclint-buildscope/after-all-visibility/source/src/java.base/share/classes/java/util/concurrent/ProgressMonitors.java:190: warning: no comment
+        private final ProgressMonitor parent;
+                                      ^
+/workspace/scratch/2b4d1cb957a7/runtime-refinement/proof/progress-doclint-buildscope/after-all-visibility/source/src/java.base/share/classes/java/util/concurrent/ProgressMonitors.java:191: warning: no comment
+        private final long parentTicks;
+                           ^
+/workspace/scratch/2b4d1cb957a7/runtime-refinement/proof/progress-doclint-buildscope/after-all-visibility/source/src/java.base/share/classes/java/util/concurrent/ProgressMonitors.java:192: warning: no comment
+        private final long totalWork;
+                           ^
+/workspace/scratch/2b4d1cb957a7/runtime-refinement/proof/progress-doclint-buildscope/after-all-visibility/source/src/java.base/share/classes/java/util/concurrent/ProgressMonitors.java:193: warning: no comment
+        private final AtomicLong consumed = new AtomicLong();
+                                 ^
+/workspace/scratch/2b4d1cb957a7/runtime-refinement/proof/progress-doclint-buildscope/after-all-visibility/source/src/java.base/share/classes/java/util/concurrent/ProgressMonitors.java:194: warning: no comment
+        private final AtomicLong credited = new AtomicLong();
+                                 ^
+/workspace/scratch/2b4d1cb957a7/runtime-refinement/proof/progress-doclint-buildscope/after-all-visibility/source/src/java.base/share/classes/java/util/concurrent/ProgressMonitors.java:195: warning: no comment
+        private final AtomicBoolean closed = new AtomicBoolean();
+                                    ^
+/workspace/scratch/2b4d1cb957a7/runtime-refinement/proof/progress-doclint-buildscope/after-all-visibility/source/src/java.base/share/classes/java/util/concurrent/ProgressMonitors.java:196: warning: no comment
+        private final AtomicBoolean cancelled = new AtomicBoolean();
+                                    ^
+/workspace/scratch/2b4d1cb957a7/runtime-refinement/proof/progress-doclint-buildscope/after-all-visibility/source/src/java.base/share/classes/java/util/concurrent/ProgressMonitors.java:198: warning: no comment
+        WeightedChild(ProgressMonitor parent, String name, long parentTicks, long totalWork) {
+        ^
+/workspace/scratch/2b4d1cb957a7/runtime-refinement/proof/progress-doclint-buildscope/after-all-visibility/source/src/java.base/share/classes/java/util/concurrent/ProgressMonitors.java:219: warning: no comment
+        private void credit(long target) {
+                     ^
+/workspace/scratch/2b4d1cb957a7/runtime-refinement/proof/progress-doclint-buildscope/after-all-visibility/source/src/java.base/share/classes/java/util/concurrent/ProgressMonitors.java:228: warning: no comment
+        private static long scale(long done, long ticks, long total) {
+                            ^
+error: warnings found and -Werror specified
+1 error
+21 warnings

@@ -1,0 +1,51 @@
+Using exact match for CONF=m3-runtime-fastdebug (other matches are possible)
+Building target 'images' in configuration 'm3-runtime-fastdebug'
+Compiling up to 3565 files for java.base
+Updating support/src.zip
+Compiling up to 18 files for java.datatransfer
+Compiling up to 127 files for java.compiler
+Creating support/modules_libs/java.base/libverify.so from 1 file(s)
+Creating support/modules_libs/java.base/libjava.so from 72 file(s)
+Creating support/modules_libs/java.base/libzip.so from 5 file(s)
+Creating support/modules_libs/java.base/libjimage.so from 6 file(s)
+Creating support/modules_libs/java.base/libjli.so from 8 file(s)
+Creating support/modules_libs/java.base/libnet.so from 13 file(s)
+Creating support/modules_libs/java.base/libnio.so from 23 file(s)
+Creating support/modules_libs/java.base/libjsig.so from 1 file(s)
+Creating support/modules_libs/java.base/libsyslookup.so from 1 file(s)
+Compiling up to 1850 files for java.xml
+/workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/src/java.base/linux/native/libjava/M3PrimitiveFixedArena.c:11: error: "_GNU_SOURCE" redefined [-Werror]
+   11 | #define _GNU_SOURCE
+      | 
+<command-line>: note: this is the location of the previous definition
+cc1: all warnings being treated as errors
+gmake[3]: *** [lib/CoreLibraries.gmk:58: /workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/build/m3-runtime-fastdebug/support/native/java.base/libjava/M3PrimitiveFixedArena.o] Error 1
+gmake[2]: *** [make/Main.gmk:199: java.base-libs] Error 2
+gmake[2]: *** Waiting for unfinished jobs....
+
+ERROR: Build failed for target 'images' in configuration 'm3-runtime-fastdebug' (exit code 2) 
+
+=== Output from failing command(s) repeated here ===
+* For target jdk_modules_java.base__the.java.base_batch:
+/workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/src/java.base/share/classes/java/util/function/Function.java:114: warning: [try] auto-closeable resource ignored is never referenced in body of corresponding try statement
+        try (java.util.concurrent.ProgressMonitors.Scope ignored =
+                                                         ^
+error: warnings found and -Werror specified
+1 error
+1 warning
+* For target support_native_java.base_libjava_M3PrimitiveFixedArena.o:
+/workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/src/java.base/linux/native/libjava/M3PrimitiveFixedArena.c:11: error: "_GNU_SOURCE" redefined [-Werror]
+   11 | #define _GNU_SOURCE
+      | 
+<command-line>: note: this is the location of the previous definition
+cc1: all warnings being treated as errors
+
+* All command lines available in /workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/build/m3-runtime-fastdebug/make-support/failure-logs.
+=== End of repeated output ===
+
+No indication of failed target found.
+HELP: Try searching the build log for '] Error'.
+HELP: Run 'make doctor' to diagnose build problems.
+
+make[1]: *** [/workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/make/Init.gmk:320: main] Error 2
+make: *** [/workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/make/Init.gmk:186: images] Error 2

@@ -1,0 +1,20 @@
+{
+  "before_sha256": "cbadcbce521f89c53fbd92d9644402e7a72bb5e7e56e8943e8c29fbdc0fadb9d",
+  "after_sha256": "20071ef19a84a81f9bccd9a4260df58225442810aef2cbe0b1ec4980c8251087",
+  "public_methods_documented": 27,
+  "candidate_only": true,
+  "gate": "Maven/OpenRewrite and bytecode equivalence must execute before receiving",
+  "metadata": {
+    "schema": "M3_COLLECTIONS_CONTRACT_REFINEMENT_DATASET_V1",
+    "dataset": "m3jdk21-strings-doclint",
+    "repository": "hsoliwal/M3jdk21",
+    "baseline_ref": "4b24824c3aa09d802121447f8970d442a855f064",
+    "crate_name": "m3-collections-contract-refinement-20261017-m3jdk21-strings-doclint",
+    "recipe_name": "com.synexia.m3jdk.CollectionsContractRefinement20261017",
+    "targets": 1,
+    "java_targets": 1,
+    "text_targets": 0,
+    "product_sources_written": false,
+    "engine_changes_from_origin": []
+  }
+}

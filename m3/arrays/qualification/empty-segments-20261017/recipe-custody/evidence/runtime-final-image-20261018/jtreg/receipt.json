@@ -1,0 +1,19 @@
+{
+  "command": [
+    "/tmp/m3-toolchain/jtreg/bin/jtreg",
+    "-jdk:/workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/build/m3-runtime-fastdebug/images/jdk",
+    "-w:/workspace/scratch/2b4d1cb957a7/build-proof/runtime-jtreg/work",
+    "-r:/workspace/scratch/2b4d1cb957a7/build-proof/runtime-jtreg/report",
+    "-conc:2",
+    "-othervm",
+    "-Xmx512m",
+    "-Xcheck:jni",
+    "-Dm3.stock.jdk=/tmp/m3-toolchain/jdk-21.0.12.1+1",
+    "/workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/test/jdk/java/lang/Object"
+  ],
+  "exit": 0,
+  "seconds": 56.707988023757935,
+  "runtime_image": "/workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/build/m3-runtime-fastdebug/images/jdk",
+  "stock_jdk": "/tmp/m3-toolchain/jdk-21.0.12.1+1",
+  "scope": "test/jdk/java/lang/Object; compatibility witness success is an observed universal-no-break failure, not compatibility admission"
+}

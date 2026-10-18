@@ -1,0 +1,48 @@
+[
+  {
+    "dataset": "m3jdk21-runtime-custody-1",
+    "phases": [
+      {
+        "phase": "check",
+        "exit": 0,
+        "stdout": "M3_COLLECTIONS_RECEIVER_PASS {\"actual_sdk_results\": true, \"changes\": 251, \"dataset\": \"m3jdk21-runtime-custody-1\", \"mode\": \"check\", \"targets\": 251}\n",
+        "stderr": ""
+      },
+      {
+        "phase": "apply",
+        "exit": 0,
+        "stdout": "M3_COLLECTIONS_RECEIVER_PASS {\"actual_sdk_results\": true, \"changes\": 251, \"dataset\": \"m3jdk21-runtime-custody-1\", \"mode\": \"apply\", \"targets\": 251}\n",
+        "stderr": ""
+      },
+      {
+        "phase": "replay",
+        "exit": 0,
+        "stdout": "M3_COLLECTIONS_RECEIVER_PASS {\"actual_sdk_results\": true, \"changes\": 0, \"dataset\": \"m3jdk21-runtime-custody-1\", \"mode\": \"check\", \"targets\": 251}\n",
+        "stderr": ""
+      }
+    ]
+  },
+  {
+    "dataset": "m3jdk21-runtime-custody-2",
+    "phases": [
+      {
+        "phase": "check",
+        "exit": 0,
+        "stdout": "M3_COLLECTIONS_RECEIVER_PASS {\"actual_sdk_results\": true, \"changes\": 251, \"dataset\": \"m3jdk21-runtime-custody-2\", \"mode\": \"check\", \"targets\": 251}\n",
+        "stderr": ""
+      },
+      {
+        "phase": "apply",
+        "exit": 0,
+        "stdout": "M3_COLLECTIONS_RECEIVER_PASS {\"actual_sdk_results\": true, \"changes\": 251, \"dataset\": \"m3jdk21-runtime-custody-2\", \"mode\": \"apply\", \"targets\": 251}\n",
+        "stderr": ""
+      },
+      {
+        "phase": "replay",
+        "exit": 0,
+        "stdout": "M3_COLLECTIONS_RECEIVER_PASS {\"actual_sdk_results\": true, \"changes\": 0, \"dataset\": \"m3jdk21-runtime-custody-2\", \"mode\": \"check\", \"targets\": 251}\n",
+        "stderr": ""
+      }
+    ]
+  }
+]

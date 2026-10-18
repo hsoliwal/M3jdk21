@@ -1,0 +1,56 @@
+diff --git a/src/java.base/share/classes/java/util/concurrent/ProgressMonitors.java b/src/java.base/share/classes/java/util/concurrent/ProgressMonitors.java
+index fadedef..38637be 100644
+--- a/src/java.base/share/classes/java/util/concurrent/ProgressMonitors.java
++++ b/src/java.base/share/classes/java/util/concurrent/ProgressMonitors.java
+@@ -88,6 +88,7 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
+      * @throws CancellationException if cancellation is observed before or
+      *         after the task
+      */
++    @SuppressWarnings("try")
+     public static void run(Runnable task, ProgressMonitor monitor) {
+         Objects.requireNonNull(task, "task");
+         try (Scope ignored = bind(monitor)) {
+@@ -111,6 +112,7 @@
+      *         after the task
+      * @throws Exception if the task cannot compute a result
+      */
++    @SuppressWarnings("try")
+     public static <T> T call(Callable<T> task, ProgressMonitor monitor) throws Exception {
+         Objects.requireNonNull(task, "task");
+         try (Scope ignored = bind(monitor)) {
+diff --git a/src/java.base/share/classes/java/util/function/Consumer.java b/src/java.base/share/classes/java/util/function/Consumer.java
+index b97f3a7..e3b80f1 100644
+--- a/src/java.base/share/classes/java/util/function/Consumer.java
++++ b/src/java.base/share/classes/java/util/function/Consumer.java
+@@ -75,6 +75,7 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
+      * @throws java.util.concurrent.CancellationException if cancellation is
+      *         observed before or after this operation
+      */
++    @SuppressWarnings("try")
+     default void accept(T value, java.util.concurrent.ProgressMonitor monitor) {
+         java.util.Objects.requireNonNull(monitor, "monitor");
+         try (java.util.concurrent.ProgressMonitors.Scope ignored =
+diff --git a/src/java.base/share/classes/java/util/function/Function.java b/src/java.base/share/classes/java/util/function/Function.java
+index 22c1c7e..5735f4d 100644
+--- a/src/java.base/share/classes/java/util/function/Function.java
++++ b/src/java.base/share/classes/java/util/function/Function.java
+@@ -109,6 +109,7 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
+      * @throws java.util.concurrent.CancellationException if cancellation is
+      *         observed before or after this operation
+      */
++    @SuppressWarnings("try")
+     default R apply(T value, java.util.concurrent.ProgressMonitor monitor) {
+         java.util.Objects.requireNonNull(monitor, "monitor");
+         try (java.util.concurrent.ProgressMonitors.Scope ignored =
+diff --git a/src/java.base/share/classes/java/util/function/Supplier.java b/src/java.base/share/classes/java/util/function/Supplier.java
+index 840bbe2..f560deb 100644
+--- a/src/java.base/share/classes/java/util/function/Supplier.java
++++ b/src/java.base/share/classes/java/util/function/Supplier.java
+@@ -57,6 +57,7 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
+      * @throws java.util.concurrent.CancellationException if cancellation is
+      *         observed before or after this operation
+      */
++    @SuppressWarnings("try")
+     default T get(java.util.concurrent.ProgressMonitor monitor) {
+         java.util.Objects.requireNonNull(monitor, "monitor");
+         try (java.util.concurrent.ProgressMonitors.Scope ignored =

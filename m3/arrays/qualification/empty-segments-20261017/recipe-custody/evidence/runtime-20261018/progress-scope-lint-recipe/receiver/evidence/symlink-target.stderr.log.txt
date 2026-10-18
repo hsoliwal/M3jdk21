@@ -1,0 +1,12 @@
+Traceback (most recent call last):
+  File "/workspace/scratch/2b4d1cb957a7/runtime-refinement/proof/progress-scope-lint-recipe/receiver/isolated-cb75b353/symlink/crate/receive.py", line 195, in <module>
+    main()
+  File "/workspace/scratch/2b4d1cb957a7/runtime-refinement/proof/progress-scope-lint-recipe/receiver/isolated-cb75b353/symlink/crate/receive.py", line 190, in main
+    result = receive(crate, args.dataset, owner.absolute(), args.target.absolute(), args.check)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/scratch/2b4d1cb957a7/runtime-refinement/proof/progress-scope-lint-recipe/receiver/isolated-cb75b353/symlink/crate/receive.py", line 150, in receive
+    path = contained(target, relative)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/scratch/2b4d1cb957a7/runtime-refinement/proof/progress-scope-lint-recipe/receiver/isolated-cb75b353/symlink/crate/receive.py", line 50, in contained
+    raise ValueError("symlink target or parent is not admitted: " + relative)
+ValueError: symlink target or parent is not admitted: src/java.base/share/classes/java/util/function/Supplier.java

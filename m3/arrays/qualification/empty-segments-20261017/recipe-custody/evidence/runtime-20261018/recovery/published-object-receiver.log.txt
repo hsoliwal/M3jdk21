@@ -1,0 +1,6 @@
+Traceback (most recent call last):
+  File "/workspace/scratch/2b4d1cb957a7/runtime-recovery/current-tree/m3/compatibility/check_object_adapter_progress_receiver_20261017.py", line 35, in <module>
+    verify()
+  File "/workspace/scratch/2b4d1cb957a7/runtime-recovery/current-tree/m3/compatibility/check_object_adapter_progress_receiver_20261017.py", line 27, in verify
+    raise RuntimeError(f"source drift: {path}: {actual} != {after}")
+RuntimeError: source drift: src/java.base/share/classes/java/util/concurrent/Callable.java: a9d2d8cc73583297fb6c07dee24765473aaaeeaae2651a0b54eb411ed2d46261 != d38c9364edd57c72791df26a9b4cb6af6b8955caa412715559899d19c864443f

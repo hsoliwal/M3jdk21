@@ -1,0 +1,71 @@
+[
+  {
+    "dataset": "m3jdk21-progress-doclint",
+    "phases": [
+      {
+        "phase": "check",
+        "exit": 0,
+        "stdout": "M3_COLLECTIONS_RECEIVER_PASS {\"actual_sdk_results\": true, \"changes\": 9, \"dataset\": \"m3jdk21-progress-doclint\", \"mode\": \"check\", \"targets\": 9}\n",
+        "stderr": ""
+      },
+      {
+        "phase": "apply",
+        "exit": 0,
+        "stdout": "M3_COLLECTIONS_RECEIVER_PASS {\"actual_sdk_results\": true, \"changes\": 9, \"dataset\": \"m3jdk21-progress-doclint\", \"mode\": \"apply\", \"targets\": 9}\n",
+        "stderr": ""
+      },
+      {
+        "phase": "replay",
+        "exit": 0,
+        "stdout": "M3_COLLECTIONS_RECEIVER_PASS {\"actual_sdk_results\": true, \"changes\": 0, \"dataset\": \"m3jdk21-progress-doclint\", \"mode\": \"check\", \"targets\": 9}\n",
+        "stderr": ""
+      }
+    ]
+  },
+  {
+    "dataset": "m3jdk21-functional-doclint",
+    "phases": [
+      {
+        "phase": "check",
+        "exit": 0,
+        "stdout": "M3_COLLECTIONS_RECEIVER_PASS {\"actual_sdk_results\": true, \"changes\": 4, \"dataset\": \"m3jdk21-functional-doclint\", \"mode\": \"check\", \"targets\": 4}\n",
+        "stderr": ""
+      },
+      {
+        "phase": "apply",
+        "exit": 0,
+        "stdout": "M3_COLLECTIONS_RECEIVER_PASS {\"actual_sdk_results\": true, \"changes\": 4, \"dataset\": \"m3jdk21-functional-doclint\", \"mode\": \"apply\", \"targets\": 4}\n",
+        "stderr": ""
+      },
+      {
+        "phase": "replay",
+        "exit": 0,
+        "stdout": "M3_COLLECTIONS_RECEIVER_PASS {\"actual_sdk_results\": true, \"changes\": 0, \"dataset\": \"m3jdk21-functional-doclint\", \"mode\": \"check\", \"targets\": 4}\n",
+        "stderr": ""
+      }
+    ]
+  },
+  {
+    "dataset": "m3jdk21-strings-doclint",
+    "phases": [
+      {
+        "phase": "check",
+        "exit": 0,
+        "stdout": "M3_COLLECTIONS_RECEIVER_PASS {\"actual_sdk_results\": true, \"changes\": 1, \"dataset\": \"m3jdk21-strings-doclint\", \"mode\": \"check\", \"targets\": 1}\n",
+        "stderr": ""
+      },
+      {
+        "phase": "apply",
+        "exit": 0,
+        "stdout": "M3_COLLECTIONS_RECEIVER_PASS {\"actual_sdk_results\": true, \"changes\": 1, \"dataset\": \"m3jdk21-strings-doclint\", \"mode\": \"apply\", \"targets\": 1}\n",
+        "stderr": ""
+      },
+      {
+        "phase": "replay",
+        "exit": 0,
+        "stdout": "M3_COLLECTIONS_RECEIVER_PASS {\"actual_sdk_results\": true, \"changes\": 0, \"dataset\": \"m3jdk21-strings-doclint\", \"mode\": \"check\", \"targets\": 1}\n",
+        "stderr": ""
+      }
+    ]
+  }
+]

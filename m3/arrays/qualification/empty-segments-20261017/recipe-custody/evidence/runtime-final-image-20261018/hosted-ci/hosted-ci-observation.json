@@ -1,0 +1,428 @@
+{
+  "schema": "M3_HOSTED_CI_OBSERVATION_V1",
+  "observed_at": "2026-10-18",
+  "pull_requests": [
+    {
+      "repo": "hsoliwal/M3jdk21",
+      "pr": 1234,
+      "sha": "5a98bb51b62d36a39490efc865e32c5277d8cc73",
+      "total": 14,
+      "runs": [
+        {
+          "id": 39087852300,
+          "name": "M3 foundation contracts",
+          "status": "completed",
+          "conclusion": "failure",
+          "url": "https://github.com/hsoliwal/M3jdk21/actions/runs/39087852300"
+        },
+        {
+          "id": 39087852276,
+          "name": "m3-primitive-filtered-sequences-java21",
+          "status": "completed",
+          "conclusion": "failure",
+          "url": "https://github.com/hsoliwal/M3jdk21/actions/runs/39087852276"
+        },
+        {
+          "id": 39087852235,
+          "name": "m3-object-filtered-deques-java21",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/hsoliwal/M3jdk21/actions/runs/39087852235"
+        },
+        {
+          "id": 39087852252,
+          "name": "M3 CI probe",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/hsoliwal/M3jdk21/actions/runs/39087852252"
+        },
+        {
+          "id": 39087852274,
+          "name": "M3 A3 absorption proof",
+          "status": "completed",
+          "conclusion": "failure",
+          "url": "https://github.com/hsoliwal/M3jdk21/actions/runs/39087852274"
+        },
+        {
+          "id": 39087852238,
+          "name": "M3 Array Substrate",
+          "status": "completed",
+          "conclusion": "failure",
+          "url": "https://github.com/hsoliwal/M3jdk21/actions/runs/39087852238"
+        },
+        {
+          "id": 39087852253,
+          "name": "M3 first release admission",
+          "status": "completed",
+          "conclusion": "failure",
+          "url": "https://github.com/hsoliwal/M3jdk21/actions/runs/39087852253"
+        },
+        {
+          "id": 39087852257,
+          "name": "M3 retained capability audit",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/hsoliwal/M3jdk21/actions/runs/39087852257"
+        },
+        {
+          "id": 39087852224,
+          "name": "M3 released JEP authority repair",
+          "status": "completed",
+          "conclusion": "failure",
+          "url": "https://github.com/hsoliwal/M3jdk21/actions/runs/39087852224"
+        },
+        {
+          "id": 39087852229,
+          "name": "M3JDK21 Backport Recipe DAG",
+          "status": "completed",
+          "conclusion": "failure",
+          "url": "https://github.com/hsoliwal/M3jdk21/actions/runs/39087852229"
+        },
+        {
+          "id": 39087852241,
+          "name": "M3 JEP 423 current materialization",
+          "status": "completed",
+          "conclusion": "failure",
+          "url": "https://github.com/hsoliwal/M3jdk21/actions/runs/39087852241"
+        },
+        {
+          "id": 39087852301,
+          "name": "M3 JDK21 backport admission",
+          "status": "completed",
+          "conclusion": "failure",
+          "url": "https://github.com/hsoliwal/M3jdk21/actions/runs/39087852301"
+        },
+        {
+          "id": 39087829728,
+          "name": "OpenJDK GHA Sanity Checks",
+          "status": "queued",
+          "conclusion": null,
+          "url": "https://github.com/hsoliwal/M3jdk21/actions/runs/39087829728"
+        },
+        {
+          "id": 39087829634,
+          "name": "M3 A3 absorption proof",
+          "status": "completed",
+          "conclusion": "failure",
+          "url": "https://github.com/hsoliwal/M3jdk21/actions/runs/39087829634"
+        }
+      ]
+    },
+    {
+      "repo": "hsoliwal/M3jdk21",
+      "pr": 1236,
+      "sha": "50eca57f27a9040908837bda6fe1d11f9a0f09b5",
+      "total": 17,
+      "runs": [
+        {
+          "id": 39089965312,
+          "name": "M3JDK21 filtered stored representative receiver Java21",
+          "status": "completed",
+          "conclusion": "failure",
+          "url": "https://github.com/hsoliwal/M3jdk21/actions/runs/39089965312"
+        },
+        {
+          "id": 39089965348,
+          "name": "M3 CI probe",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/hsoliwal/M3jdk21/actions/runs/39089965348"
+        },
+        {
+          "id": 39089965391,
+          "name": "m3-object-filtered-deques-java21",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/hsoliwal/M3jdk21/actions/runs/39089965391"
+        },
+        {
+          "id": 39089965285,
+          "name": "M3 foundation contracts",
+          "status": "completed",
+          "conclusion": "failure",
+          "url": "https://github.com/hsoliwal/M3jdk21/actions/runs/39089965285"
+        },
+        {
+          "id": 39089965345,
+          "name": "m3-primitive-filtered-sequences-java21",
+          "status": "completed",
+          "conclusion": "failure",
+          "url": "https://github.com/hsoliwal/M3jdk21/actions/runs/39089965345"
+        },
+        {
+          "id": 39089965338,
+          "name": "Owned M3 Apache multivalue contracts",
+          "status": "completed",
+          "conclusion": "failure",
+          "url": "https://github.com/hsoliwal/M3jdk21/actions/runs/39089965338"
+        },
+        {
+          "id": 39089965397,
+          "name": "M3 four-library receiver admission",
+          "status": "completed",
+          "conclusion": "failure",
+          "url": "https://github.com/hsoliwal/M3jdk21/actions/runs/39089965397"
+        },
+        {
+          "id": 39089965316,
+          "name": "M3 collection contracts",
+          "status": "completed",
+          "conclusion": "failure",
+          "url": "https://github.com/hsoliwal/M3jdk21/actions/runs/39089965316"
+        },
+        {
+          "id": 39089965400,
+          "name": "M3 long direct address kernel",
+          "status": "completed",
+          "conclusion": "failure",
+          "url": "https://github.com/hsoliwal/M3jdk21/actions/runs/39089965400"
+        },
+        {
+          "id": 39089965306,
+          "name": "M3 owned Spring MultiValueMap",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/hsoliwal/M3jdk21/actions/runs/39089965306"
+        },
+        {
+          "id": 39089965356,
+          "name": "M3 owned Apache BidiMap",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/hsoliwal/M3jdk21/actions/runs/39089965356"
+        },
+        {
+          "id": 39089965369,
+          "name": "M3 Array Substrate",
+          "status": "completed",
+          "conclusion": "failure",
+          "url": "https://github.com/hsoliwal/M3jdk21/actions/runs/39089965369"
+        },
+        {
+          "id": 39089965309,
+          "name": "M3 Eclipse framework indexed forward receiver",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/hsoliwal/M3jdk21/actions/runs/39089965309"
+        },
+        {
+          "id": 39089965324,
+          "name": "M3 Eclipse progress forward receiver (Java 21)",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/hsoliwal/M3jdk21/actions/runs/39089965324"
+        },
+        {
+          "id": 39089965388,
+          "name": "M3 retained capability audit",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/hsoliwal/M3jdk21/actions/runs/39089965388"
+        },
+        {
+          "id": 39089965358,
+          "name": "M3 first release admission",
+          "status": "completed",
+          "conclusion": "failure",
+          "url": "https://github.com/hsoliwal/M3jdk21/actions/runs/39089965358"
+        },
+        {
+          "id": 39089928358,
+          "name": "OpenJDK GHA Sanity Checks",
+          "status": "queued",
+          "conclusion": null,
+          "url": "https://github.com/hsoliwal/M3jdk21/actions/runs/39089928358"
+        }
+      ]
+    },
+    {
+      "repo": "hsoliwal/com.synexia",
+      "pr": 12226,
+      "sha": "538f43e076d3ee0cff0c2ce34cf6964416e00ac0",
+      "total": 14,
+      "runs": [
+        {
+          "id": 39088797760,
+          "name": "M3 Strict LLM Repository Gate",
+          "status": "completed",
+          "conclusion": "failure",
+          "url": "https://github.com/hsoliwal/com.synexia/actions/runs/39088797760"
+        },
+        {
+          "id": 39088797692,
+          "name": "M3 Module Fanout",
+          "status": "completed",
+          "conclusion": "failure",
+          "url": "https://github.com/hsoliwal/com.synexia/actions/runs/39088797692"
+        },
+        {
+          "id": 39088797679,
+          "name": "M3 automatic viewport residency Java 21",
+          "status": "completed",
+          "conclusion": "failure",
+          "url": "https://github.com/hsoliwal/com.synexia/actions/runs/39088797679"
+        },
+        {
+          "id": 39088797752,
+          "name": "M3 text recipe qualification",
+          "status": "completed",
+          "conclusion": "failure",
+          "url": "https://github.com/hsoliwal/com.synexia/actions/runs/39088797752"
+        },
+        {
+          "id": 39088797662,
+          "name": "Multi-Repository Additive Superset Java21",
+          "status": "completed",
+          "conclusion": "failure",
+          "url": "https://github.com/hsoliwal/com.synexia/actions/runs/39088797662"
+        },
+        {
+          "id": 39088797665,
+          "name": "M3 Strict LLM Repository Gate",
+          "status": "completed",
+          "conclusion": "failure",
+          "url": "https://github.com/hsoliwal/com.synexia/actions/runs/39088797665"
+        },
+        {
+          "id": 39088797708,
+          "name": "M3 Provenance Gate",
+          "status": "completed",
+          "conclusion": "failure",
+          "url": "https://github.com/hsoliwal/com.synexia/actions/runs/39088797708"
+        },
+        {
+          "id": 39088797818,
+          "name": "Java 21 Serial Reactor Progress",
+          "status": "completed",
+          "conclusion": "failure",
+          "url": "https://github.com/hsoliwal/com.synexia/actions/runs/39088797818"
+        },
+        {
+          "id": 39088797691,
+          "name": "SPDX compliance",
+          "status": "completed",
+          "conclusion": "failure",
+          "url": "https://github.com/hsoliwal/com.synexia/actions/runs/39088797691"
+        },
+        {
+          "id": 39088797864,
+          "name": "M3 Unified Recipe-First Serial Gate",
+          "status": "completed",
+          "conclusion": "failure",
+          "url": "https://github.com/hsoliwal/com.synexia/actions/runs/39088797864"
+        },
+        {
+          "id": 39088797699,
+          "name": "CI",
+          "status": "completed",
+          "conclusion": "failure",
+          "url": "https://github.com/hsoliwal/com.synexia/actions/runs/39088797699"
+        },
+        {
+          "id": 39088797684,
+          "name": "M3 TornadoVM 7.2 swizzle",
+          "status": "completed",
+          "conclusion": "failure",
+          "url": "https://github.com/hsoliwal/com.synexia/actions/runs/39088797684"
+        },
+        {
+          "id": 39088797667,
+          "name": "M3 OpenRewrite recipe reactor qualification",
+          "status": "completed",
+          "conclusion": "failure",
+          "url": "https://github.com/hsoliwal/com.synexia/actions/runs/39088797667"
+        },
+        {
+          "id": 39088797719,
+          "name": "Everything Discussed Current Head",
+          "status": "completed",
+          "conclusion": "failure",
+          "url": "https://github.com/hsoliwal/com.synexia/actions/runs/39088797719"
+        }
+      ]
+    }
+  ],
+  "job_failure_excerpts": [
+    {
+      "job_id": 117558078643,
+      "url": "https://github.com/hsoliwal/M3jdk21/actions/runs/39087852238/job/117558078643",
+      "evidence": [
+        "2026-10-18T01:50:27.8698015Z [ERROR] \tCould not find artifact org.openrewrite:rewrite-java:jar:8.17.1-m3-source-1 in central (https://repo.maven.apache.org/maven2)",
+        "2026-10-18T01:50:27.8700067Z [ERROR] \tCould not find artifact org.openrewrite:rewrite-java-21:jar:8.17.1-m3-source-1 in central (https://repo.maven.apache.org/maven2)",
+        "2026-10-18T01:50:27.8701620Z [ERROR] \tCould not find artifact org.openrewrite:rewrite-test:jar:8.17.1-m3-source-1 in central (https://repo.maven.apache.org/maven2)",
+        "2026-10-18T01:50:27.8703204Z [ERROR] \tCould not find artifact org.junit.jupiter:junit-jupiter:jar:5.10.2-m3-source-1 in central (https://repo.maven.apache.org/maven2)",
+        "2026-10-18T01:50:27.8705718Z [ERROR] \tprefixes: Path com/synexia/synexia-openrewrite-recipes/1.0.0-SNAPSHOT/synexia-openrewrite-recipes-1.0.0-SNAPSHOT.jar NOT allowed from central"
+      ],
+      "run_id": 39087852238
+    },
+    {
+      "job_id": 117558078718,
+      "url": "https://github.com/hsoliwal/M3jdk21/actions/runs/39087852238/job/117558078718",
+      "evidence": [
+        "2026-10-18T01:50:30.7527799Z [ERROR] \tCould not find artifact org.junit.jupiter:junit-jupiter:jar:5.10.2-m3-source-1 in central (https://repo.maven.apache.org/maven2)"
+      ],
+      "run_id": 39087852238
+    },
+    {
+      "job_id": 117558078775,
+      "url": "https://github.com/hsoliwal/M3jdk21/actions/runs/39087852238/job/117558078775",
+      "evidence": [
+        "2026-10-18T01:51:15.9422709Z [ERROR] \tCould not find artifact org.junit.jupiter:junit-jupiter:jar:5.10.2-m3-source-1 in central (https://repo.maven.apache.org/maven2)"
+      ],
+      "run_id": 39087852238
+    },
+    {
+      "job_id": 117564431286,
+      "url": "https://github.com/hsoliwal/M3jdk21/actions/runs/39089965316/job/117564431286",
+      "evidence": [
+        "2026-10-18T02:25:32.9810550Z [ERROR] \tCould not find artifact org.openrewrite:rewrite-java-21:jar:8.17.1-m3-source-1 in central (https://repo.maven.apache.org/maven2)"
+      ],
+      "run_id": 39089965316
+    },
+    {
+      "job_id": 117564431465,
+      "url": "https://github.com/hsoliwal/M3jdk21/actions/runs/39089965316/job/117564431465",
+      "evidence": [
+        "2026-10-18T02:25:10.6869634Z AssertionError: '0b7f2175dbb34ed087b76a07e93335ee488338d544fd49c332f503acfdd51ca8' != '4a109baf88457d625fa8fc259ee8e7908340f5436cfea77dc5ac554924045b8d'",
+        "2026-10-18T02:25:10.6875055Z AssertionError: 'c8c8b273da8d20ace83148230c62f63e03f92efa2cf880f935f9fae8dcdd3bc2' != '0b4f3600af352d2b22b35a520f98540a446c0a3494a9253cb0ef6c309a5f7bcb'",
+        "2026-10-18T02:25:10.6879658Z AssertionError: Lists differ: [('m3[136 chars]bc2')] != [('m3[136 chars]bc2'), ('m3/collections/src/test/java/com/m3/c[110 chars]26')]",
+        "2026-10-18T02:25:10.6900398Z FAILED (failures=3)"
+      ],
+      "run_id": 39089965316
+    },
+    {
+      "job_id": 117564431132,
+      "url": "https://github.com/hsoliwal/M3jdk21/actions/runs/39089965312/job/117564431132",
+      "evidence": [
+        "2026-10-18T02:24:33.7977353Z M3_STORED_REP_RECEIVER_FAIL hash=m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java found=4a109baf88457d625fa8fc259ee8e7908340f5436cfea77dc5ac554924045b8d"
+      ],
+      "run_id": 39089965312
+    },
+    {
+      "job_id": 117558079157,
+      "url": "https://github.com/hsoliwal/M3jdk21/actions/runs/39087852300/job/117558079157",
+      "evidence": [
+        "2026-10-18T01:50:02.8253231Z ValueError: superseded owner drift: src/java.base/share/classes/java/lang/M3String.java expected=35ed998540e044eed8cb7596e2e2c019ae369bd3 actual=e3bffdb11669a80a8fe8e1ba127b23fb7efc3c1e"
+      ],
+      "run_id": 39087852300
+    },
+    {
+      "job_id": 117558078676,
+      "url": "https://github.com/hsoliwal/M3jdk21/actions/runs/39087852229/job/117558078676",
+      "evidence": [
+        "2026-10-18T01:52:26.8894508Z [ERROR] /home/runner/work/M3jdk21/M3jdk21/m3/tooling/migration-recipes/src/test/java/com/synexia/rewrite/M3ObjectSlotIndexSnapshot20261017RecipeTest.java:[41,23] cannot find symbol",
+        "2026-10-18T01:52:26.8895734Z   symbol:   method targetPaths()",
+        "2026-10-18T01:52:26.8926069Z [ERROR] /home/runner/work/M3jdk21/M3jdk21/m3/tooling/migration-recipes/src/test/java/com/synexia/rewrite/M3ObjectSlotIndexSnapshot20261017RecipeTest.java:[41,23] cannot find symbol",
+        "2026-10-18T01:52:26.8927297Z [ERROR]   symbol:   method targetPaths()"
+      ],
+      "run_id": 39087852229
+    }
+  ],
+  "diagnosis": {
+    "maven": "Observed array and historical recipe jobs stop because source-built dependency coordinates are unavailable from Maven Central; the local qualification first built the repository's original JUnit closure.",
+    "receiver": "Observed older gates reject already-published M3FilteredViews and M3String successor hashes. Exact scoped baseline-byte comparisons are in hosted-ci-baseline-inputs.json.",
+    "migration": "An existing migration-recipe test calls an absent targetPaths method. Both the test and recipe source match the published base.",
+    "canonical": "The inspected six private-repository jobs have no allocated runner or steps; source-gate commands did not run. The log blobs are absent; no billing or policy cause is asserted."
+  },
+  "limits": "Hosted CI is not green. These observations are separate from local qualification and do not justify disabling gates or claiming all uninspected failures are unrelated."
+}

@@ -1,0 +1,241 @@
+{
+  "schema": "M3_NATIVE_FEATURE_GUARD_EQUIVALENCE_V1",
+  "status": "PASS",
+  "variants": [
+    {
+      "variant": "before-standalone",
+      "source_sha256": "04c5281944444e9a9c4bee49748b2a80f7661f44897003f87619403e709e2ddb",
+      "preprocessed_sha256": "fdd2c0c9acf192e3365a1a32e226845e3ce6a8f3c41b28b620c0ca5811e563b1",
+      "object_sha256": "c6982df7be18fbd3297245f229b6e20818c7e4a9f591e7d7b9b1a7c848fdd5be",
+      "steps": [
+        {
+          "stage": "preprocess",
+          "command": [
+            "gcc",
+            "-std=c11",
+            "-O2",
+            "-g0",
+            "-fPIC",
+            "-fno-ident",
+            "-Wall",
+            "-Wextra",
+            "-Werror",
+            "-D_REENTRANT",
+            "-D_LARGEFILE64_SOURCE",
+            "-DLINUX",
+            "-I/tmp/m3-toolchain/jdk-21.0.12.1+1/include",
+            "-I/tmp/m3-toolchain/jdk-21.0.12.1+1/include/linux",
+            "-E",
+            "-P",
+            "/workspace/scratch/2b4d1cb957a7/M3jdk21/src/java.base/linux/native/libjava/M3PrimitiveFixedArena.c",
+            "-o",
+            "/workspace/scratch/2b4d1cb957a7/native-feature-refinement/proof/equivalence/before-standalone.i"
+          ],
+          "exit": 0
+        },
+        {
+          "stage": "compile",
+          "command": [
+            "gcc",
+            "-std=c11",
+            "-O2",
+            "-g0",
+            "-fPIC",
+            "-fno-ident",
+            "-Wall",
+            "-Wextra",
+            "-Werror",
+            "-D_REENTRANT",
+            "-D_LARGEFILE64_SOURCE",
+            "-DLINUX",
+            "-I/tmp/m3-toolchain/jdk-21.0.12.1+1/include",
+            "-I/tmp/m3-toolchain/jdk-21.0.12.1+1/include/linux",
+            "-c",
+            "/workspace/scratch/2b4d1cb957a7/M3jdk21/src/java.base/linux/native/libjava/M3PrimitiveFixedArena.c",
+            "-o",
+            "/workspace/scratch/2b4d1cb957a7/native-feature-refinement/proof/equivalence/before-standalone.o"
+          ],
+          "exit": 0
+        }
+      ]
+    },
+    {
+      "variant": "after-standalone",
+      "source_sha256": "bcc1693812f4e81ae490ed9ca03c38d6411a7ba81eb2108c1436d693991e0e30",
+      "preprocessed_sha256": "fdd2c0c9acf192e3365a1a32e226845e3ce6a8f3c41b28b620c0ca5811e563b1",
+      "object_sha256": "c6982df7be18fbd3297245f229b6e20818c7e4a9f591e7d7b9b1a7c848fdd5be",
+      "steps": [
+        {
+          "stage": "preprocess",
+          "command": [
+            "gcc",
+            "-std=c11",
+            "-O2",
+            "-g0",
+            "-fPIC",
+            "-fno-ident",
+            "-Wall",
+            "-Wextra",
+            "-Werror",
+            "-D_REENTRANT",
+            "-D_LARGEFILE64_SOURCE",
+            "-DLINUX",
+            "-I/tmp/m3-toolchain/jdk-21.0.12.1+1/include",
+            "-I/tmp/m3-toolchain/jdk-21.0.12.1+1/include/linux",
+            "-E",
+            "-P",
+            "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-native-feature-guard/candidate/src/java.base/linux/native/libjava/M3PrimitiveFixedArena.c",
+            "-o",
+            "/workspace/scratch/2b4d1cb957a7/native-feature-refinement/proof/equivalence/after-standalone.i"
+          ],
+          "exit": 0
+        },
+        {
+          "stage": "compile",
+          "command": [
+            "gcc",
+            "-std=c11",
+            "-O2",
+            "-g0",
+            "-fPIC",
+            "-fno-ident",
+            "-Wall",
+            "-Wextra",
+            "-Werror",
+            "-D_REENTRANT",
+            "-D_LARGEFILE64_SOURCE",
+            "-DLINUX",
+            "-I/tmp/m3-toolchain/jdk-21.0.12.1+1/include",
+            "-I/tmp/m3-toolchain/jdk-21.0.12.1+1/include/linux",
+            "-c",
+            "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-native-feature-guard/candidate/src/java.base/linux/native/libjava/M3PrimitiveFixedArena.c",
+            "-o",
+            "/workspace/scratch/2b4d1cb957a7/native-feature-refinement/proof/equivalence/after-standalone.o"
+          ],
+          "exit": 0
+        }
+      ]
+    },
+    {
+      "variant": "after-build-defined",
+      "source_sha256": "bcc1693812f4e81ae490ed9ca03c38d6411a7ba81eb2108c1436d693991e0e30",
+      "preprocessed_sha256": "fdd2c0c9acf192e3365a1a32e226845e3ce6a8f3c41b28b620c0ca5811e563b1",
+      "object_sha256": "c6982df7be18fbd3297245f229b6e20818c7e4a9f591e7d7b9b1a7c848fdd5be",
+      "steps": [
+        {
+          "stage": "preprocess",
+          "command": [
+            "gcc",
+            "-std=c11",
+            "-O2",
+            "-g0",
+            "-fPIC",
+            "-fno-ident",
+            "-Wall",
+            "-Wextra",
+            "-Werror",
+            "-D_REENTRANT",
+            "-D_LARGEFILE64_SOURCE",
+            "-DLINUX",
+            "-I/tmp/m3-toolchain/jdk-21.0.12.1+1/include",
+            "-I/tmp/m3-toolchain/jdk-21.0.12.1+1/include/linux",
+            "-D_GNU_SOURCE",
+            "-E",
+            "-P",
+            "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-native-feature-guard/candidate/src/java.base/linux/native/libjava/M3PrimitiveFixedArena.c",
+            "-o",
+            "/workspace/scratch/2b4d1cb957a7/native-feature-refinement/proof/equivalence/after-build-defined.i"
+          ],
+          "exit": 0
+        },
+        {
+          "stage": "compile",
+          "command": [
+            "gcc",
+            "-std=c11",
+            "-O2",
+            "-g0",
+            "-fPIC",
+            "-fno-ident",
+            "-Wall",
+            "-Wextra",
+            "-Werror",
+            "-D_REENTRANT",
+            "-D_LARGEFILE64_SOURCE",
+            "-DLINUX",
+            "-I/tmp/m3-toolchain/jdk-21.0.12.1+1/include",
+            "-I/tmp/m3-toolchain/jdk-21.0.12.1+1/include/linux",
+            "-D_GNU_SOURCE",
+            "-c",
+            "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-native-feature-guard/candidate/src/java.base/linux/native/libjava/M3PrimitiveFixedArena.c",
+            "-o",
+            "/workspace/scratch/2b4d1cb957a7/native-feature-refinement/proof/equivalence/after-build-defined.o"
+          ],
+          "exit": 0
+        }
+      ]
+    },
+    {
+      "variant": "after-defined-zero",
+      "source_sha256": "bcc1693812f4e81ae490ed9ca03c38d6411a7ba81eb2108c1436d693991e0e30",
+      "preprocessed_sha256": "fdd2c0c9acf192e3365a1a32e226845e3ce6a8f3c41b28b620c0ca5811e563b1",
+      "object_sha256": "c6982df7be18fbd3297245f229b6e20818c7e4a9f591e7d7b9b1a7c848fdd5be",
+      "steps": [
+        {
+          "stage": "preprocess",
+          "command": [
+            "gcc",
+            "-std=c11",
+            "-O2",
+            "-g0",
+            "-fPIC",
+            "-fno-ident",
+            "-Wall",
+            "-Wextra",
+            "-Werror",
+            "-D_REENTRANT",
+            "-D_LARGEFILE64_SOURCE",
+            "-DLINUX",
+            "-I/tmp/m3-toolchain/jdk-21.0.12.1+1/include",
+            "-I/tmp/m3-toolchain/jdk-21.0.12.1+1/include/linux",
+            "-D_GNU_SOURCE=0",
+            "-E",
+            "-P",
+            "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-native-feature-guard/candidate/src/java.base/linux/native/libjava/M3PrimitiveFixedArena.c",
+            "-o",
+            "/workspace/scratch/2b4d1cb957a7/native-feature-refinement/proof/equivalence/after-defined-zero.i"
+          ],
+          "exit": 0
+        },
+        {
+          "stage": "compile",
+          "command": [
+            "gcc",
+            "-std=c11",
+            "-O2",
+            "-g0",
+            "-fPIC",
+            "-fno-ident",
+            "-Wall",
+            "-Wextra",
+            "-Werror",
+            "-D_REENTRANT",
+            "-D_LARGEFILE64_SOURCE",
+            "-DLINUX",
+            "-I/tmp/m3-toolchain/jdk-21.0.12.1+1/include",
+            "-I/tmp/m3-toolchain/jdk-21.0.12.1+1/include/linux",
+            "-D_GNU_SOURCE=0",
+            "-c",
+            "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-native-feature-guard/candidate/src/java.base/linux/native/libjava/M3PrimitiveFixedArena.c",
+            "-o",
+            "/workspace/scratch/2b4d1cb957a7/native-feature-refinement/proof/equivalence/after-defined-zero.o"
+          ],
+          "exit": 0
+        }
+      ]
+    }
+  ],
+  "preprocessed_identity": true,
+  "object_identity": true,
+  "limit": "Finite Linux/GCC13.3/JDK21 source closure; full owning JDK build and runtime remain separate gates."
+}

@@ -1,0 +1,121 @@
+{
+  "schema": "M3_LOSSLESS_PUBLIC_RECEIVER_TRACE_BUNDLE_V1",
+  "dataset": "m3jdk21-functional-doclint",
+  "encoding": "Each utf8 value re-encodes to the exact original bytes, including final newlines",
+  "files": [
+    {
+      "path": "RECEIVER_RECEIPT.json",
+      "sha256": "3087a1169cec6245bccbe978ac43c03be635a695fd537079d2c32aeaa4e56d63",
+      "size_bytes": 1634,
+      "utf8": "{\n  \"schema\": \"M3_AST_BUILD_RECEIVER_CONTRACT_V1\",\n  \"status\": \"PASS\",\n  \"dataset\": \"m3jdk21-functional-doclint\",\n  \"targets\": 4,\n  \"cases\": [\n    {\n      \"case\": \"check-no-write\",\n      \"exit_code\": 0,\n      \"expected_refusal\": null\n    },\n    {\n      \"case\": \"apply-exact-sdk\",\n      \"exit_code\": 0,\n      \"expected_refusal\": null\n    },\n    {\n      \"case\": \"fixed-point-no-write\",\n      \"exit_code\": 0,\n      \"expected_refusal\": null\n    },\n    {\n      \"case\": \"late-drift-no-partial-write\",\n      \"exit_code\": 1,\n      \"expected_refusal\": \"target source drift: src/java.base/share/classes/java/util/function/Supplier.java\"\n    },\n    {\n      \"case\": \"qualified-input-tamper\",\n      \"exit_code\": 1,\n      \"expected_refusal\": \"recipe changed after SDK qualification:\"\n    },\n    {\n      \"case\": \"sdk-result-tamper\",\n      \"exit_code\": 1,\n      \"expected_refusal\": \"SDK result changed after qualification: src/java.base/share/classes/java/util/function/Supplier.java\"\n    },\n    {\n      \"case\": \"symlink-target\",\n      \"exit_code\": 1,\n      \"expected_refusal\": \"symlink target or parent is not admitted:\"\n    },\n    {\n      \"case\": \"mixed-pre-postimages\",\n      \"exit_code\": 0,\n      \"expected_refusal\": null\n    },\n    {\n      \"case\": \"failed-sdk-test-refusal\",\n      \"exit_code\": 1,\n      \"expected_refusal\": \"all actual SDK qualification tests must execute successfully\"\n    }\n  ],\n  \"actual_sdk_results\": true,\n  \"product_files_written\": false,\n  \"sdk_inputs_sha256\": \"4224229fa706e5c997201b3d8ed615d27f59586c1aef3f302c41087cd081909e\",\n  \"sdk_results_sha256\": \"fc5ddff42b90ab4fae47fede4c587a6f2b6f3d055f8a5e718b8dcf351ad61578\"\n}\n"
+    },
+    {
+      "path": "apply-exact-sdk.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0,
+      "utf8": ""
+    },
+    {
+      "path": "apply-exact-sdk.stdout.log",
+      "sha256": "ac9d386d791a7e8d1974bb3447bcf7aa8a9205453e6ed72c03065c9683e2544e",
+      "size_bytes": 144,
+      "utf8": "M3_COLLECTIONS_RECEIVER_PASS {\"actual_sdk_results\": true, \"changes\": 4, \"dataset\": \"m3jdk21-functional-doclint\", \"mode\": \"apply\", \"targets\": 4}\n"
+    },
+    {
+      "path": "check-no-write.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0,
+      "utf8": ""
+    },
+    {
+      "path": "check-no-write.stdout.log",
+      "sha256": "3a14ee80daa3b6c6b3c8f01b41e306aa092d81142a9a305e9590c1824dbad108",
+      "size_bytes": 144,
+      "utf8": "M3_COLLECTIONS_RECEIVER_PASS {\"actual_sdk_results\": true, \"changes\": 4, \"dataset\": \"m3jdk21-functional-doclint\", \"mode\": \"check\", \"targets\": 4}\n"
+    },
+    {
+      "path": "failed-sdk-test-refusal.stderr.log",
+      "sha256": "82c34362ca937f8e3c1b96bb8518d4ccbff021bdf7555d1e275e48ff828e4506",
+      "size_bytes": 1289,
+      "utf8": "Traceback (most recent call last):\n  File \"/workspace/scratch/2b4d1cb957a7/runtime-refinement/proof/public-host-seven/m3jdk21-functional-doclint-receiver-proof/isolated-mo9vzjlg/failed-tests/crate/receive.py\", line 195, in <module>\n    main()\n  File \"/workspace/scratch/2b4d1cb957a7/runtime-refinement/proof/public-host-seven/m3jdk21-functional-doclint-receiver-proof/isolated-mo9vzjlg/failed-tests/crate/receive.py\", line 190, in main\n    result = receive(crate, args.dataset, owner.absolute(), args.target.absolute(), args.check)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/scratch/2b4d1cb957a7/runtime-refinement/proof/public-host-seven/m3jdk21-functional-doclint-receiver-proof/isolated-mo9vzjlg/failed-tests/crate/receive.py\", line 147, in receive\n    qualified = qualification(crate, dataset, owner)\n                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/scratch/2b4d1cb957a7/runtime-refinement/proof/public-host-seven/m3jdk21-functional-doclint-receiver-proof/isolated-mo9vzjlg/failed-tests/crate/receive.py\", line 71, in qualification\n    raise ValueError(\"all actual SDK qualification tests must execute successfully\")\nValueError: all actual SDK qualification tests must execute successfully\n"
+    },
+    {
+      "path": "failed-sdk-test-refusal.stdout.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0,
+      "utf8": ""
+    },
+    {
+      "path": "fixed-point-no-write.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0,
+      "utf8": ""
+    },
+    {
+      "path": "fixed-point-no-write.stdout.log",
+      "sha256": "963cbee85cf97bbdd58cd6e72e057de72e7000cf9f9313a057e5a2453657edff",
+      "size_bytes": 144,
+      "utf8": "M3_COLLECTIONS_RECEIVER_PASS {\"actual_sdk_results\": true, \"changes\": 0, \"dataset\": \"m3jdk21-functional-doclint\", \"mode\": \"apply\", \"targets\": 4}\n"
+    },
+    {
+      "path": "late-drift-no-partial-write.stderr.log",
+      "sha256": "593643ebeb0acefbd7c3ca22eb33c9e315bea175b55eafffba1f16c6236c141a",
+      "size_bytes": 969,
+      "utf8": "Traceback (most recent call last):\n  File \"/workspace/scratch/2b4d1cb957a7/runtime-refinement/proof/public-host-seven/m3jdk21-functional-doclint-receiver-proof/isolated-mo9vzjlg/late-drift/crate/receive.py\", line 195, in <module>\n    main()\n  File \"/workspace/scratch/2b4d1cb957a7/runtime-refinement/proof/public-host-seven/m3jdk21-functional-doclint-receiver-proof/isolated-mo9vzjlg/late-drift/crate/receive.py\", line 190, in main\n    result = receive(crate, args.dataset, owner.absolute(), args.target.absolute(), args.check)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/scratch/2b4d1cb957a7/runtime-refinement/proof/public-host-seven/m3jdk21-functional-doclint-receiver-proof/isolated-mo9vzjlg/late-drift/crate/receive.py\", line 154, in receive\n    raise ValueError(\"target source drift: \" + relative)\nValueError: target source drift: src/java.base/share/classes/java/util/function/Supplier.java\n"
+    },
+    {
+      "path": "late-drift-no-partial-write.stdout.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0,
+      "utf8": ""
+    },
+    {
+      "path": "mixed-pre-postimages.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0,
+      "utf8": ""
+    },
+    {
+      "path": "mixed-pre-postimages.stdout.log",
+      "sha256": "84cee1e2715ea76976357b01df521f65adee10966f8e93e511502156c1fd53ef",
+      "size_bytes": 144,
+      "utf8": "M3_COLLECTIONS_RECEIVER_PASS {\"actual_sdk_results\": true, \"changes\": 2, \"dataset\": \"m3jdk21-functional-doclint\", \"mode\": \"apply\", \"targets\": 4}\n"
+    },
+    {
+      "path": "qualified-input-tamper.stderr.log",
+      "sha256": "9359337703c8ca151632ce4ce5baf4df49ce019110fa2fce3b136656c716e214",
+      "size_bytes": 1307,
+      "utf8": "Traceback (most recent call last):\n  File \"/workspace/scratch/2b4d1cb957a7/runtime-refinement/proof/public-host-seven/m3jdk21-functional-doclint-receiver-proof/isolated-mo9vzjlg/input-tamper/crate/receive.py\", line 195, in <module>\n    main()\n  File \"/workspace/scratch/2b4d1cb957a7/runtime-refinement/proof/public-host-seven/m3jdk21-functional-doclint-receiver-proof/isolated-mo9vzjlg/input-tamper/crate/receive.py\", line 190, in main\n    result = receive(crate, args.dataset, owner.absolute(), args.target.absolute(), args.check)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/scratch/2b4d1cb957a7/runtime-refinement/proof/public-host-seven/m3jdk21-functional-doclint-receiver-proof/isolated-mo9vzjlg/input-tamper/crate/receive.py\", line 147, in receive\n    qualified = qualification(crate, dataset, owner)\n                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/scratch/2b4d1cb957a7/runtime-refinement/proof/public-host-seven/m3jdk21-functional-doclint-receiver-proof/isolated-mo9vzjlg/input-tamper/crate/receive.py\", line 91, in qualification\n    raise ValueError(\"recipe changed after SDK qualification: \" + path)\nValueError: recipe changed after SDK qualification: crate/datasets/m3jdk21-functional-doclint/MODES.tsv\n"
+    },
+    {
+      "path": "qualified-input-tamper.stdout.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0,
+      "utf8": ""
+    },
+    {
+      "path": "sdk-result-tamper.stderr.log",
+      "sha256": "0a06194344677b625234a1221d74902427f62e650ec744dcca03b853b3d1a467",
+      "size_bytes": 1321,
+      "utf8": "Traceback (most recent call last):\n  File \"/workspace/scratch/2b4d1cb957a7/runtime-refinement/proof/public-host-seven/m3jdk21-functional-doclint-receiver-proof/isolated-mo9vzjlg/result-tamper/crate/receive.py\", line 195, in <module>\n    main()\n  File \"/workspace/scratch/2b4d1cb957a7/runtime-refinement/proof/public-host-seven/m3jdk21-functional-doclint-receiver-proof/isolated-mo9vzjlg/result-tamper/crate/receive.py\", line 190, in main\n    result = receive(crate, args.dataset, owner.absolute(), args.target.absolute(), args.check)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/scratch/2b4d1cb957a7/runtime-refinement/proof/public-host-seven/m3jdk21-functional-doclint-receiver-proof/isolated-mo9vzjlg/result-tamper/crate/receive.py\", line 147, in receive\n    qualified = qualification(crate, dataset, owner)\n                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/scratch/2b4d1cb957a7/runtime-refinement/proof/public-host-seven/m3jdk21-functional-doclint-receiver-proof/isolated-mo9vzjlg/result-tamper/crate/receive.py\", line 137, in qualification\n    raise ValueError(\"SDK result changed after qualification: \" + path)\nValueError: SDK result changed after qualification: src/java.base/share/classes/java/util/function/Supplier.java\n"
+    },
+    {
+      "path": "sdk-result-tamper.stdout.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0,
+      "utf8": ""
+    },
+    {
+      "path": "symlink-target.stderr.log",
+      "sha256": "f6042134f2e25ed7fd5d807af8720c5f7356c291e2d9909bcd69f3bff69de161",
+      "size_bytes": 1272,
+      "utf8": "Traceback (most recent call last):\n  File \"/workspace/scratch/2b4d1cb957a7/runtime-refinement/proof/public-host-seven/m3jdk21-functional-doclint-receiver-proof/isolated-mo9vzjlg/symlink/crate/receive.py\", line 195, in <module>\n    main()\n  File \"/workspace/scratch/2b4d1cb957a7/runtime-refinement/proof/public-host-seven/m3jdk21-functional-doclint-receiver-proof/isolated-mo9vzjlg/symlink/crate/receive.py\", line 190, in main\n    result = receive(crate, args.dataset, owner.absolute(), args.target.absolute(), args.check)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/scratch/2b4d1cb957a7/runtime-refinement/proof/public-host-seven/m3jdk21-functional-doclint-receiver-proof/isolated-mo9vzjlg/symlink/crate/receive.py\", line 150, in receive\n    path = contained(target, relative)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/scratch/2b4d1cb957a7/runtime-refinement/proof/public-host-seven/m3jdk21-functional-doclint-receiver-proof/isolated-mo9vzjlg/symlink/crate/receive.py\", line 50, in contained\n    raise ValueError(\"symlink target or parent is not admitted: \" + relative)\nValueError: symlink target or parent is not admitted: src/java.base/share/classes/java/util/function/Supplier.java\n"
+    },
+    {
+      "path": "symlink-target.stdout.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0,
+      "utf8": ""
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+diff --git a/m3/compatibility/m3-progress-scope-lint-20261018.tsv b/m3/compatibility/m3-progress-scope-lint-20261018.tsv
+new file mode 100644
+index 0000000..87a267b
+--- /dev/null
++++ b/m3/compatibility/m3-progress-scope-lint-20261018.tsv
+@@ -0,0 +1,5 @@ com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe
++# Method-local try-resource annotations after the exact progress/functional Javadoc successors.
++src/java.base/share/classes/java/util/concurrent/ProgressMonitors.java	d1fc14e9b59c305d6f71df76afb86d9e7d9e4cabd0899105e5d001380ce4c736	48b06f44b71fd22a2bafc4e8a99d7542d280830043d929ce1d26ae338f3b4efc	ProgressMonitors.java.txt
++src/java.base/share/classes/java/util/function/Consumer.java	025c5fa47f9505eccea26c540bc3e320762346c464ecca37ec1994297285a073	52773610a8cd4d4e0808c2895e504b09ce9c0c05a0273e81cc533bad19ab6226	Consumer.java.txt
++src/java.base/share/classes/java/util/function/Function.java	e116c9989d314cb6ffdaef60e8f665205afccdd28ee3674af2c6eedc008da588	73877c7a547bb812a6901cae0af4866645de978b867e055204cd53f6dffb6476	Function.java.txt
++src/java.base/share/classes/java/util/function/Supplier.java	2d5f23125e22f4d20d80d7734e883c45fd179207f0ab508fdd0c9e8616156766	84170e0863237433f20c3fdc4617eea990731fa7a1e5b0aeaf6b03f89e55c096	Supplier.java.txt

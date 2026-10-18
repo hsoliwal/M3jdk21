@@ -1,0 +1,5 @@
+m3/compatibility/m3-progress-scope-lint-20261018.tsv	0644
+src/java.base/share/classes/java/util/concurrent/ProgressMonitors.java	0644
+src/java.base/share/classes/java/util/function/Consumer.java	0644
+src/java.base/share/classes/java/util/function/Function.java	0644
+src/java.base/share/classes/java/util/function/Supplier.java	0644

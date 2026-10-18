@@ -1,0 +1,10 @@
+m3/backports/ALGORITHM_CATALOGUE.tsv	0644
+m3/compatibility/check_object_adapter_progress_receiver_20261017.py	0644
+m3/compatibility/test_object_adapter_progress_receiver_20261018.py	0644
+m3/compatibility/verify_m3_default_template_20261017.py	0644
+m3/docs/name-mapping.json	0644
+m3/runtime-integration/runtime-repair-20261018/CATALOGUE.tsv	0644
+m3/runtime-integration/runtime-repair-20261018/CURRENT_OWNERS.json	0644
+m3/runtime-integration/runtime-repair-20261018/FILE_REVIEW.tsv	0644
+m3/runtime-integration/runtime-repair-20261018/README.md	0644
+test/jdk/java/lang/Object/M3RuntimeCompatibilityHold.java	0644

@@ -1,0 +1,192 @@
+/workspace/scratch/2b4d1cb957a7/runtime-refinement/proof/progress-doclint-compile/before-doclint/source/src/java.base/share/classes/java/lang/Runnable.java:49: warning: no @return
+    default java.util.concurrent.ProgressMonitor progressMonitor() {
+                                                 ^
+/workspace/scratch/2b4d1cb957a7/runtime-refinement/proof/progress-doclint-compile/before-doclint/source/src/java.base/share/classes/java/lang/Runnable.java:57: warning: no @param for monitor
+    default void run(java.util.concurrent.ProgressMonitor monitor) {
+                 ^
+/workspace/scratch/2b4d1cb957a7/runtime-refinement/proof/progress-doclint-compile/before-doclint/source/src/java.base/share/classes/java/util/concurrent/Callable.java:68: warning: no @param for monitor
+    default V call(ProgressMonitor monitor) throws Exception {
+              ^
+/workspace/scratch/2b4d1cb957a7/runtime-refinement/proof/progress-doclint-compile/before-doclint/source/src/java.base/share/classes/java/util/concurrent/Callable.java:68: warning: no @return
+    default V call(ProgressMonitor monitor) throws Exception {
+              ^
+/workspace/scratch/2b4d1cb957a7/runtime-refinement/proof/progress-doclint-compile/before-doclint/source/src/java.base/share/classes/java/util/concurrent/Callable.java:68: warning: no @throws for java.lang.Exception
+    default V call(ProgressMonitor monitor) throws Exception {
+              ^
+/workspace/scratch/2b4d1cb957a7/runtime-refinement/proof/progress-doclint-compile/before-doclint/source/src/java.base/share/classes/java/util/concurrent/Executor.java:142: warning: no @param for command
+    default void execute(Runnable command, ProgressMonitor monitor) {
+                 ^
+/workspace/scratch/2b4d1cb957a7/runtime-refinement/proof/progress-doclint-compile/before-doclint/source/src/java.base/share/classes/java/util/concurrent/Executor.java:142: warning: no @param for monitor
+    default void execute(Runnable command, ProgressMonitor monitor) {
+                 ^
+/workspace/scratch/2b4d1cb957a7/runtime-refinement/proof/progress-doclint-compile/before-doclint/source/src/java.base/share/classes/java/util/concurrent/Executor.java:149: warning: no @param for command
+    default void executeWithProgress(Runnable command) {
+                 ^
+/workspace/scratch/2b4d1cb957a7/runtime-refinement/proof/progress-doclint-compile/before-doclint/source/src/java.base/share/classes/java/util/concurrent/ExecutorService.java:435: warning: no @param for <T>
+    default <T> Future<T> submitMonitored(Callable<T> task, ProgressMonitor monitor) {
+                          ^
+/workspace/scratch/2b4d1cb957a7/runtime-refinement/proof/progress-doclint-compile/before-doclint/source/src/java.base/share/classes/java/util/concurrent/ExecutorService.java:435: warning: no @param for task
+    default <T> Future<T> submitMonitored(Callable<T> task, ProgressMonitor monitor) {
+                          ^
+/workspace/scratch/2b4d1cb957a7/runtime-refinement/proof/progress-doclint-compile/before-doclint/source/src/java.base/share/classes/java/util/concurrent/ExecutorService.java:435: warning: no @param for monitor
+    default <T> Future<T> submitMonitored(Callable<T> task, ProgressMonitor monitor) {
+                          ^
+/workspace/scratch/2b4d1cb957a7/runtime-refinement/proof/progress-doclint-compile/before-doclint/source/src/java.base/share/classes/java/util/concurrent/ExecutorService.java:435: warning: no @return
+    default <T> Future<T> submitMonitored(Callable<T> task, ProgressMonitor monitor) {
+                          ^
+/workspace/scratch/2b4d1cb957a7/runtime-refinement/proof/progress-doclint-compile/before-doclint/source/src/java.base/share/classes/java/util/concurrent/ExecutorService.java:442: warning: no @param for task
+    default Future<?> submitMonitored(Runnable task, ProgressMonitor monitor) {
+                      ^
+/workspace/scratch/2b4d1cb957a7/runtime-refinement/proof/progress-doclint-compile/before-doclint/source/src/java.base/share/classes/java/util/concurrent/ExecutorService.java:442: warning: no @param for monitor
+    default Future<?> submitMonitored(Runnable task, ProgressMonitor monitor) {
+                      ^
+/workspace/scratch/2b4d1cb957a7/runtime-refinement/proof/progress-doclint-compile/before-doclint/source/src/java.base/share/classes/java/util/concurrent/ExecutorService.java:442: warning: no @return
+    default Future<?> submitMonitored(Runnable task, ProgressMonitor monitor) {
+                      ^
+/workspace/scratch/2b4d1cb957a7/runtime-refinement/proof/progress-doclint-compile/before-doclint/source/src/java.base/share/classes/java/util/concurrent/MonitoredCallable.java:16: warning: no @param for monitor
+    V callMonitored(ProgressMonitor monitor) throws Exception;
+      ^
+/workspace/scratch/2b4d1cb957a7/runtime-refinement/proof/progress-doclint-compile/before-doclint/source/src/java.base/share/classes/java/util/concurrent/MonitoredCallable.java:16: warning: no @return
+    V callMonitored(ProgressMonitor monitor) throws Exception;
+      ^
+/workspace/scratch/2b4d1cb957a7/runtime-refinement/proof/progress-doclint-compile/before-doclint/source/src/java.base/share/classes/java/util/concurrent/MonitoredCallable.java:16: warning: no @throws for java.lang.Exception
+    V callMonitored(ProgressMonitor monitor) throws Exception;
+      ^
+/workspace/scratch/2b4d1cb957a7/runtime-refinement/proof/progress-doclint-compile/before-doclint/source/src/java.base/share/classes/java/util/concurrent/MonitoredRunnable.java:15: warning: no @param for monitor
+    void runMonitored(ProgressMonitor monitor);
+         ^
+/workspace/scratch/2b4d1cb957a7/runtime-refinement/proof/progress-doclint-compile/before-doclint/source/src/java.base/share/classes/java/util/concurrent/ProgressMonitor.java:14: warning: no comment
+    long UNKNOWN_WORK = -1L;
+         ^
+/workspace/scratch/2b4d1cb957a7/runtime-refinement/proof/progress-doclint-compile/before-doclint/source/src/java.base/share/classes/java/util/concurrent/ProgressMonitor.java:15: warning: no comment
+    ProgressMonitor NONE = new ProgressMonitor() { };
+                    ^
+/workspace/scratch/2b4d1cb957a7/runtime-refinement/proof/progress-doclint-compile/before-doclint/source/src/java.base/share/classes/java/util/concurrent/ProgressMonitor.java:15: warning: use of default constructor, which does not provide a comment
+    ProgressMonitor NONE = new ProgressMonitor() { };
+                                                 ^
+/workspace/scratch/2b4d1cb957a7/runtime-refinement/proof/progress-doclint-compile/before-doclint/source/src/java.base/share/classes/java/util/concurrent/ProgressMonitor.java:17: warning: no comment
+    default void begin(String task, long totalWork) { }
+                 ^
+/workspace/scratch/2b4d1cb957a7/runtime-refinement/proof/progress-doclint-compile/before-doclint/source/src/java.base/share/classes/java/util/concurrent/ProgressMonitor.java:18: warning: no comment
+    default void worked(long units) { }
+                 ^
+/workspace/scratch/2b4d1cb957a7/runtime-refinement/proof/progress-doclint-compile/before-doclint/source/src/java.base/share/classes/java/util/concurrent/ProgressMonitor.java:19: warning: no comment
+    default void message(String text) { }
+                 ^
+/workspace/scratch/2b4d1cb957a7/runtime-refinement/proof/progress-doclint-compile/before-doclint/source/src/java.base/share/classes/java/util/concurrent/ProgressMonitor.java:20: warning: no comment
+    default boolean isCancelled() { return false; }
+                    ^
+/workspace/scratch/2b4d1cb957a7/runtime-refinement/proof/progress-doclint-compile/before-doclint/source/src/java.base/share/classes/java/util/concurrent/ProgressMonitor.java:21: warning: no comment
+    default void cancel() { }
+                 ^
+/workspace/scratch/2b4d1cb957a7/runtime-refinement/proof/progress-doclint-compile/before-doclint/source/src/java.base/share/classes/java/util/concurrent/ProgressMonitor.java:22: warning: no comment
+    default void done() { }
+                 ^
+/workspace/scratch/2b4d1cb957a7/runtime-refinement/proof/progress-doclint-compile/before-doclint/source/src/java.base/share/classes/java/util/concurrent/ProgressMonitor.java:24: warning: no comment
+    default void checkCancelled() {
+                 ^
+/workspace/scratch/2b4d1cb957a7/runtime-refinement/proof/progress-doclint-compile/before-doclint/source/src/java.base/share/classes/java/util/concurrent/ProgressMonitor.java:31: warning: no @param for name
+    default ProgressMonitor child(String name, long parentTicks, long totalWork) {
+                            ^
+/workspace/scratch/2b4d1cb957a7/runtime-refinement/proof/progress-doclint-compile/before-doclint/source/src/java.base/share/classes/java/util/concurrent/ProgressMonitor.java:31: warning: no @param for parentTicks
+    default ProgressMonitor child(String name, long parentTicks, long totalWork) {
+                            ^
+/workspace/scratch/2b4d1cb957a7/runtime-refinement/proof/progress-doclint-compile/before-doclint/source/src/java.base/share/classes/java/util/concurrent/ProgressMonitor.java:31: warning: no @param for totalWork
+    default ProgressMonitor child(String name, long parentTicks, long totalWork) {
+                            ^
+/workspace/scratch/2b4d1cb957a7/runtime-refinement/proof/progress-doclint-compile/before-doclint/source/src/java.base/share/classes/java/util/concurrent/ProgressMonitor.java:31: warning: no @return
+    default ProgressMonitor child(String name, long parentTicks, long totalWork) {
+                            ^
+/workspace/scratch/2b4d1cb957a7/runtime-refinement/proof/progress-doclint-compile/before-doclint/source/src/java.base/share/classes/java/util/concurrent/ProgressMonitors.java:19: warning: no comment
+    private static final Supplier<? extends ProgressMonitor> NONE = () -> ProgressMonitor.NONE;
+                                                             ^
+/workspace/scratch/2b4d1cb957a7/runtime-refinement/proof/progress-doclint-compile/before-doclint/source/src/java.base/share/classes/java/util/concurrent/ProgressMonitors.java:20: warning: no comment
+    private static final AtomicReference<Supplier<? extends ProgressMonitor>> SYSTEM =
+                                                                              ^
+/workspace/scratch/2b4d1cb957a7/runtime-refinement/proof/progress-doclint-compile/before-doclint/source/src/java.base/share/classes/java/util/concurrent/ProgressMonitors.java:22: warning: no comment
+    private static final ThreadLocal<Scope> CURRENT = new ThreadLocal<>();
+                                            ^
+/workspace/scratch/2b4d1cb957a7/runtime-refinement/proof/progress-doclint-compile/before-doclint/source/src/java.base/share/classes/java/util/concurrent/ProgressMonitors.java:24: warning: no comment
+    private ProgressMonitors() { }
+            ^
+/workspace/scratch/2b4d1cb957a7/runtime-refinement/proof/progress-doclint-compile/before-doclint/source/src/java.base/share/classes/java/util/concurrent/ProgressMonitors.java:27: warning: no @return
+    public static ProgressMonitor system() {
+                                  ^
+/workspace/scratch/2b4d1cb957a7/runtime-refinement/proof/progress-doclint-compile/before-doclint/source/src/java.base/share/classes/java/util/concurrent/ProgressMonitors.java:33: warning: no @param for provider
+    public static Supplier<? extends ProgressMonitor> setSystem(
+                                                      ^
+/workspace/scratch/2b4d1cb957a7/runtime-refinement/proof/progress-doclint-compile/before-doclint/source/src/java.base/share/classes/java/util/concurrent/ProgressMonitors.java:33: warning: no @return
+    public static Supplier<? extends ProgressMonitor> setSystem(
+                                                      ^
+/workspace/scratch/2b4d1cb957a7/runtime-refinement/proof/progress-doclint-compile/before-doclint/source/src/java.base/share/classes/java/util/concurrent/ProgressMonitors.java:38: warning: no comment
+    public static void resetSystem() { SYSTEM.set(NONE); }
+                       ^
+/workspace/scratch/2b4d1cb957a7/runtime-refinement/proof/progress-doclint-compile/before-doclint/source/src/java.base/share/classes/java/util/concurrent/ProgressMonitors.java:41: warning: no @return
+    public static ProgressMonitor current() {
+                                  ^
+/workspace/scratch/2b4d1cb957a7/runtime-refinement/proof/progress-doclint-compile/before-doclint/source/src/java.base/share/classes/java/util/concurrent/ProgressMonitors.java:47: warning: no @param for monitor
+    public static Scope bind(ProgressMonitor monitor) {
+                        ^
+/workspace/scratch/2b4d1cb957a7/runtime-refinement/proof/progress-doclint-compile/before-doclint/source/src/java.base/share/classes/java/util/concurrent/ProgressMonitors.java:47: warning: no @return
+    public static Scope bind(ProgressMonitor monitor) {
+                        ^
+/workspace/scratch/2b4d1cb957a7/runtime-refinement/proof/progress-doclint-compile/before-doclint/source/src/java.base/share/classes/java/util/concurrent/ProgressMonitors.java:54: warning: no comment
+    public static void run(Runnable task, ProgressMonitor monitor) {
+                       ^
+/workspace/scratch/2b4d1cb957a7/runtime-refinement/proof/progress-doclint-compile/before-doclint/source/src/java.base/share/classes/java/util/concurrent/ProgressMonitors.java:63: warning: no comment
+    public static <T> T call(Callable<T> task, ProgressMonitor monitor) throws Exception {
+                        ^
+/workspace/scratch/2b4d1cb957a7/runtime-refinement/proof/progress-doclint-compile/before-doclint/source/src/java.base/share/classes/java/util/concurrent/ProgressMonitors.java:73: warning: no comment
+    public static ProgressMonitor child(
+                                  ^
+/workspace/scratch/2b4d1cb957a7/runtime-refinement/proof/progress-doclint-compile/before-doclint/source/src/java.base/share/classes/java/util/concurrent/ProgressMonitors.java:87: warning: no comment
+        private final Scope parent;
+                            ^
+/workspace/scratch/2b4d1cb957a7/runtime-refinement/proof/progress-doclint-compile/before-doclint/source/src/java.base/share/classes/java/util/concurrent/ProgressMonitors.java:88: warning: no comment
+        private final ProgressMonitor monitor;
+                                      ^
+/workspace/scratch/2b4d1cb957a7/runtime-refinement/proof/progress-doclint-compile/before-doclint/source/src/java.base/share/classes/java/util/concurrent/ProgressMonitors.java:89: warning: no comment
+        private final Thread owner = Thread.currentThread();
+                             ^
+/workspace/scratch/2b4d1cb957a7/runtime-refinement/proof/progress-doclint-compile/before-doclint/source/src/java.base/share/classes/java/util/concurrent/ProgressMonitors.java:90: warning: no comment
+        private boolean closed;
+                        ^
+/workspace/scratch/2b4d1cb957a7/runtime-refinement/proof/progress-doclint-compile/before-doclint/source/src/java.base/share/classes/java/util/concurrent/ProgressMonitors.java:92: warning: no comment
+        private Scope(Scope parent, ProgressMonitor monitor) {
+                ^
+/workspace/scratch/2b4d1cb957a7/runtime-refinement/proof/progress-doclint-compile/before-doclint/source/src/java.base/share/classes/java/util/concurrent/ProgressMonitors.java:111: warning: no comment
+    private static final class WeightedChild implements ProgressMonitor {
+                         ^
+/workspace/scratch/2b4d1cb957a7/runtime-refinement/proof/progress-doclint-compile/before-doclint/source/src/java.base/share/classes/java/util/concurrent/ProgressMonitors.java:112: warning: no comment
+        private final ProgressMonitor parent;
+                                      ^
+/workspace/scratch/2b4d1cb957a7/runtime-refinement/proof/progress-doclint-compile/before-doclint/source/src/java.base/share/classes/java/util/concurrent/ProgressMonitors.java:113: warning: no comment
+        private final long parentTicks;
+                           ^
+/workspace/scratch/2b4d1cb957a7/runtime-refinement/proof/progress-doclint-compile/before-doclint/source/src/java.base/share/classes/java/util/concurrent/ProgressMonitors.java:114: warning: no comment
+        private final long totalWork;
+                           ^
+/workspace/scratch/2b4d1cb957a7/runtime-refinement/proof/progress-doclint-compile/before-doclint/source/src/java.base/share/classes/java/util/concurrent/ProgressMonitors.java:115: warning: no comment
+        private final AtomicLong consumed = new AtomicLong();
+                                 ^
+/workspace/scratch/2b4d1cb957a7/runtime-refinement/proof/progress-doclint-compile/before-doclint/source/src/java.base/share/classes/java/util/concurrent/ProgressMonitors.java:116: warning: no comment
+        private final AtomicLong credited = new AtomicLong();
+                                 ^
+/workspace/scratch/2b4d1cb957a7/runtime-refinement/proof/progress-doclint-compile/before-doclint/source/src/java.base/share/classes/java/util/concurrent/ProgressMonitors.java:117: warning: no comment
+        private final AtomicBoolean closed = new AtomicBoolean();
+                                    ^
+/workspace/scratch/2b4d1cb957a7/runtime-refinement/proof/progress-doclint-compile/before-doclint/source/src/java.base/share/classes/java/util/concurrent/ProgressMonitors.java:118: warning: no comment
+        private final AtomicBoolean cancelled = new AtomicBoolean();
+                                    ^
+/workspace/scratch/2b4d1cb957a7/runtime-refinement/proof/progress-doclint-compile/before-doclint/source/src/java.base/share/classes/java/util/concurrent/ProgressMonitors.java:120: warning: no comment
+        WeightedChild(ProgressMonitor parent, String name, long parentTicks, long totalWork) {
+        ^
+/workspace/scratch/2b4d1cb957a7/runtime-refinement/proof/progress-doclint-compile/before-doclint/source/src/java.base/share/classes/java/util/concurrent/ProgressMonitors.java:141: warning: no comment
+        private void credit(long target) {
+                     ^
+/workspace/scratch/2b4d1cb957a7/runtime-refinement/proof/progress-doclint-compile/before-doclint/source/src/java.base/share/classes/java/util/concurrent/ProgressMonitors.java:150: warning: no comment
+        private static long scale(long done, long ticks, long total) {
+                            ^
+error: warnings found and -Werror specified
+1 error
+63 warnings

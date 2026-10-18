@@ -1,0 +1,37 @@
+[
+  {
+    "command": [
+      "/tmp/m3-toolchain/jdk-21.0.12.1+1/bin/javac",
+      "-g:none",
+      "-Xlint:all",
+      "-Werror",
+      "--patch-module",
+      "java.base=/workspace/scratch/2b4d1cb957a7/strings-refinement/baseline/src/java.base/share/classes",
+      "-d",
+      "/workspace/scratch/2b4d1cb957a7/strings-refinement/proof/baseline-classes",
+      "/workspace/scratch/2b4d1cb957a7/strings-refinement/baseline/src/java.base/share/classes/java/util/Strings.java"
+    ],
+    "exit": 0,
+    "source_sha256": "cbadcbce521f89c53fbd92d9644402e7a72bb5e7e56e8943e8c29fbdc0fadb9d"
+  },
+  {
+    "command": [
+      "/tmp/m3-toolchain/jdk-21.0.12.1+1/bin/javac",
+      "-g:none",
+      "-Xlint:all",
+      "-Werror",
+      "-Xdoclint:all/protected",
+      "--patch-module",
+      "java.base=/workspace/scratch/2b4d1cb957a7/strings-refinement/candidate/src/java.base/share/classes",
+      "-d",
+      "/workspace/scratch/2b4d1cb957a7/strings-refinement/proof/candidate-classes",
+      "/workspace/scratch/2b4d1cb957a7/strings-refinement/candidate/src/java.base/share/classes/java/util/Strings.java"
+    ],
+    "exit": 0,
+    "source_sha256": "20071ef19a84a81f9bccd9a4260df58225442810aef2cbe0b1ec4980c8251087"
+  },
+  {
+    "exact_classfile_equality": true,
+    "sha256": "c5227f8ff9964eded8f53974f25af389ad19555d814b449b3e679407302381c6"
+  }
+]

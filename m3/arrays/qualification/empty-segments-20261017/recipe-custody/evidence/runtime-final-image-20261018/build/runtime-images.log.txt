@@ -1,0 +1,378 @@
+Using exact match for CONF=m3-runtime-fastdebug (other matches are possible)
+Building target 'images' in configuration 'm3-runtime-fastdebug'
+Compiling up to 1 files for BUILD_TOOLS_HOTSPOT
+Compiling up to 8 files for BUILD_TOOLS_LANGTOOLS
+Creating hotspot/variant-server/tools/adlc/adlc from 13 file(s)
+Compiling up to 2 files for BUILD_JVMTI_TOOLS
+Generating classes for compiler.properties launcher.properties
+Compiling 20 properties into resource bundles for jdk.compiler
+Compiling 17 properties into resource bundles for jdk.javadoc
+Compiling 15 properties into resource bundles for jdk.jdeps
+Compiling 9 properties into resource bundles for jdk.jshell
+Compiling up to 127 files for BUILD_java.compiler.interim
+Compiling up to 363 files for BUILD_jdk.compiler.interim
+Compiling up to 242 files for BUILD_jdk.javadoc.interim
+Compiling up to 17 files for BUILD_JAVAC_SERVER
+Creating support/modules_libs/java.base/server/libjvm.so from 1219 file(s)
+Compiling up to 31 files for BUILD_JRTFS
+Creating support/modules_libs/java.base/jrt-fs.jar
+Compiling up to 187 files for BUILD_TOOLS_JDK
+Compiling up to 2 files for COMPILE_DEPEND
+Compiling 4 properties into resource bundles for jdk.httpserver
+Compiling 11 properties into resource bundles for jdk.jartool
+Compiling up to 71 files for COMPILE_CREATE_SYMBOLS
+Compiling 11 properties into resource bundles for jdk.management.agent
+Compiling 4 properties into resource bundles for jdk.jdi
+Compiling 9 properties into resource bundles for jdk.jlink
+Compiling 4 properties into resource bundles for jdk.jlink
+Compiling 1 properties into resource bundles for jdk.jlink
+Compiling 224 properties into resource bundles for jdk.localedata
+Compiling up to 2 files for BUILD_BREAKITERATOR_BASE
+Compiling up to 2 files for BUILD_BREAKITERATOR_LD
+Compiling 11 properties into resource bundles for java.base
+Compiling 6 properties into resource bundles for java.base
+Compiling 11 properties into resource bundles for java.logging
+Compiling up to 3565 files for java.base
+Compiling 89 properties into resource bundles for java.desktop
+Compiling up to 71 files for COMPILE_CREATE_SYMBOLS
+/workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/src/java.base/share/classes/java/lang/Runnable.java:49: warning: no @return
+    default java.util.concurrent.ProgressMonitor progressMonitor() {
+                                                 ^
+/workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/src/java.base/share/classes/java/lang/Runnable.java:57: warning: no @param for monitor
+    default void run(java.util.concurrent.ProgressMonitor monitor) {
+                 ^
+/workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/src/java.base/share/classes/java/util/Strings.java:25: warning: no @param for source
+    public static boolean isNullOrEmpty(CharSequence source) {
+                          ^
+/workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/src/java.base/share/classes/java/util/Strings.java:25: warning: no @return
+    public static boolean isNullOrEmpty(CharSequence source) {
+                          ^
+/workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/src/java.base/share/classes/java/util/Strings.java:30: warning: no @param for source
+    public static String nullToEmpty(String source) {
+                         ^
+/workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/src/java.base/share/classes/java/util/Strings.java:30: warning: no @return
+    public static String nullToEmpty(String source) {
+                         ^
+/workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/src/java.base/share/classes/java/util/Strings.java:35: warning: no @param for source
+    public static String emptyToNull(String source) {
+                         ^
+/workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/src/java.base/share/classes/java/util/Strings.java:35: warning: no @return
+    public static String emptyToNull(String source) {
+                         ^
+/workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/src/java.base/share/classes/java/util/Strings.java:43: warning: no @param for source
+    public static boolean isNullOrBlank(CharSequence source) {
+                          ^
+/workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/src/java.base/share/classes/java/util/Strings.java:43: warning: no @return
+    public static boolean isNullOrBlank(CharSequence source) {
+                          ^
+/workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/src/java.base/share/classes/java/util/Strings.java:54: warning: no @param for source
+    public static boolean hasText(CharSequence source) {
+                          ^
+/workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/src/java.base/share/classes/java/util/Strings.java:54: warning: no @return
+    public static boolean hasText(CharSequence source) {
+                          ^
+/workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/src/java.base/share/classes/java/util/Strings.java:59: warning: no @param for source
+    public static String defaultIfEmpty(String source, String fallback) {
+                         ^
+/workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/src/java.base/share/classes/java/util/Strings.java:59: warning: no @param for fallback
+    public static String defaultIfEmpty(String source, String fallback) {
+                         ^
+/workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/src/java.base/share/classes/java/util/Strings.java:59: warning: no @return
+    public static String defaultIfEmpty(String source, String fallback) {
+                         ^
+/workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/src/java.base/share/classes/java/util/Strings.java:64: warning: no @param for source
+    public static String defaultIfBlank(String source, String fallback) {
+                         ^
+/workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/src/java.base/share/classes/java/util/Strings.java:64: warning: no @param for fallback
+    public static String defaultIfBlank(String source, String fallback) {
+                         ^
+/workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/src/java.base/share/classes/java/util/Strings.java:64: warning: no @return
+    public static String defaultIfBlank(String source, String fallback) {
+                         ^
+/workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/src/java.base/share/classes/java/util/Strings.java:69: warning: no @param for source
+    public static String repeat(String source, int copies) {
+                         ^
+/workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/src/java.base/share/classes/java/util/Strings.java:69: warning: no @param for copies
+    public static String repeat(String source, int copies) {
+                         ^
+/workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/src/java.base/share/classes/java/util/Strings.java:69: warning: no @return
+    public static String repeat(String source, int copies) {
+                         ^
+/workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/src/java.base/share/classes/java/util/Strings.java:74: warning: no @param for source
+    public static String padStart(String source, int minLength, char pad) {
+                         ^
+/workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/src/java.base/share/classes/java/util/Strings.java:74: warning: no @param for minLength
+    public static String padStart(String source, int minLength, char pad) {
+                         ^
+/workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/src/java.base/share/classes/java/util/Strings.java:74: warning: no @param for pad
+    public static String padStart(String source, int minLength, char pad) {
+                         ^
+/workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/src/java.base/share/classes/java/util/Strings.java:74: warning: no @return
+    public static String padStart(String source, int minLength, char pad) {
+                         ^
+/workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/src/java.base/share/classes/java/util/Strings.java:82: warning: no @param for source
+    public static String padEnd(String source, int minLength, char pad) {
+                         ^
+/workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/src/java.base/share/classes/java/util/Strings.java:82: warning: no @param for minLength
+    public static String padEnd(String source, int minLength, char pad) {
+                         ^
+/workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/src/java.base/share/classes/java/util/Strings.java:82: warning: no @param for pad
+    public static String padEnd(String source, int minLength, char pad) {
+                         ^
+/workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/src/java.base/share/classes/java/util/Strings.java:82: warning: no @return
+    public static String padEnd(String source, int minLength, char pad) {
+                         ^
+/workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/src/java.base/share/classes/java/util/Strings.java:93: warning: no @param for first
+    public static String commonPrefix(String first, String second) {
+                         ^
+/workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/src/java.base/share/classes/java/util/Strings.java:93: warning: no @param for second
+    public static String commonPrefix(String first, String second) {
+                         ^
+/workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/src/java.base/share/classes/java/util/Strings.java:93: warning: no @return
+    public static String commonPrefix(String first, String second) {
+                         ^
+/workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/src/java.base/share/classes/java/util/Strings.java:104: warning: no @param for first
+    public static String commonSuffix(String first, String second) {
+                         ^
+/workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/src/java.base/share/classes/java/util/Strings.java:104: warning: no @param for second
+    public static String commonSuffix(String first, String second) {
+                         ^
+/workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/src/java.base/share/classes/java/util/Strings.java:104: warning: no @return
+    public static String commonSuffix(String first, String second) {
+                         ^
+/workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/src/java.base/share/classes/java/util/Strings.java:118: warning: no @param for source
+    public static String removePrefix(String source, String prefix) {
+                         ^
+/workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/src/java.base/share/classes/java/util/Strings.java:118: warning: no @param for prefix
+    public static String removePrefix(String source, String prefix) {
+                         ^
+/workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/src/java.base/share/classes/java/util/Strings.java:118: warning: no @return
+    public static String removePrefix(String source, String prefix) {
+                         ^
+/workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/src/java.base/share/classes/java/util/Strings.java:125: warning: no @param for source
+    public static String removeSuffix(String source, String suffix) {
+                         ^
+/workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/src/java.base/share/classes/java/util/Strings.java:125: warning: no @param for suffix
+    public static String removeSuffix(String source, String suffix) {
+                         ^
+/workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/src/java.base/share/classes/java/util/Strings.java:125: warning: no @return
+    public static String removeSuffix(String source, String suffix) {
+                         ^
+/workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/src/java.base/share/classes/java/util/Strings.java:133: warning: no @param for source
+    public static String substringBefore(String source, String delimiter) {
+                         ^
+/workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/src/java.base/share/classes/java/util/Strings.java:133: warning: no @param for delimiter
+    public static String substringBefore(String source, String delimiter) {
+                         ^
+/workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/src/java.base/share/classes/java/util/Strings.java:133: warning: no @return
+    public static String substringBefore(String source, String delimiter) {
+                         ^
+/workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/src/java.base/share/classes/java/util/Strings.java:141: warning: no @param for source
+    public static String substringAfter(String source, String delimiter) {
+                         ^
+/workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/src/java.base/share/classes/java/util/Strings.java:141: warning: no @param for delimiter
+    public static String substringAfter(String source, String delimiter) {
+                         ^
+/workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/src/java.base/share/classes/java/util/Strings.java:141: warning: no @return
+    public static String substringAfter(String source, String delimiter) {
+                         ^
+/workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/src/java.base/share/classes/java/util/Strings.java:149: warning: no @param for source
+    public static String substringBeforeLast(String source, String delimiter) {
+                         ^
+/workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/src/java.base/share/classes/java/util/Strings.java:149: warning: no @param for delimiter
+    public static String substringBeforeLast(String source, String delimiter) {
+                         ^
+/workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/src/java.base/share/classes/java/util/Strings.java:149: warning: no @return
+    public static String substringBeforeLast(String source, String delimiter) {
+                         ^
+/workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/src/java.base/share/classes/java/util/Strings.java:158: warning: no @param for source
+    public static String substringAfterLast(String source, String delimiter) {
+                         ^
+/workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/src/java.base/share/classes/java/util/Strings.java:158: warning: no @param for delimiter
+    public static String substringAfterLast(String source, String delimiter) {
+                         ^
+/workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/src/java.base/share/classes/java/util/Strings.java:158: warning: no @return
+    public static String substringAfterLast(String source, String delimiter) {
+                         ^
+/workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/src/java.base/share/classes/java/util/Strings.java:167: warning: no @param for source
+    public static int countOccurrences(String source, String needle) {
+                      ^
+/workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/src/java.base/share/classes/java/util/Strings.java:167: warning: no @param for needle
+    public static int countOccurrences(String source, String needle) {
+                      ^
+/workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/src/java.base/share/classes/java/util/Strings.java:167: warning: no @return
+    public static int countOccurrences(String source, String needle) {
+                      ^
+/workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/src/java.base/share/classes/java/util/Strings.java:183: warning: no @param for source
+    public static boolean startsWithIgnoreCase(String source, String prefix) {
+                          ^
+/workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/src/java.base/share/classes/java/util/Strings.java:183: warning: no @param for prefix
+    public static boolean startsWithIgnoreCase(String source, String prefix) {
+                          ^
+/workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/src/java.base/share/classes/java/util/Strings.java:183: warning: no @return
+    public static boolean startsWithIgnoreCase(String source, String prefix) {
+                          ^
+/workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/src/java.base/share/classes/java/util/Strings.java:190: warning: no @param for source
+    public static boolean endsWithIgnoreCase(String source, String suffix) {
+                          ^
+/workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/src/java.base/share/classes/java/util/Strings.java:190: warning: no @param for suffix
+    public static boolean endsWithIgnoreCase(String source, String suffix) {
+                          ^
+/workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/src/java.base/share/classes/java/util/Strings.java:190: warning: no @return
+    public static boolean endsWithIgnoreCase(String source, String suffix) {
+                          ^
+/workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/src/java.base/share/classes/java/util/Strings.java:199: warning: no @param for source
+    public static int indexOfIgnoreCase(String source, String needle, int fromIndex) {
+                      ^
+/workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/src/java.base/share/classes/java/util/Strings.java:199: warning: no @param for needle
+    public static int indexOfIgnoreCase(String source, String needle, int fromIndex) {
+                      ^
+/workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/src/java.base/share/classes/java/util/Strings.java:199: warning: no @param for fromIndex
+    public static int indexOfIgnoreCase(String source, String needle, int fromIndex) {
+                      ^
+/workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/src/java.base/share/classes/java/util/Strings.java:199: warning: no @return
+    public static int indexOfIgnoreCase(String source, String needle, int fromIndex) {
+                      ^
+/workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/src/java.base/share/classes/java/util/Strings.java:211: warning: no comment
+    public static int indexOfIgnoreCase(String source, String needle) {
+                      ^
+/workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/src/java.base/share/classes/java/util/Strings.java:215: warning: no comment
+    public static boolean containsIgnoreCase(String source, String needle) {
+                          ^
+/workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/src/java.base/share/classes/java/util/Strings.java:220: warning: no @param for source
+    public static String reverse(String source) {
+                         ^
+/workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/src/java.base/share/classes/java/util/Strings.java:220: warning: no @return
+    public static String reverse(String source) {
+                         ^
+/workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/src/java.base/share/classes/java/util/Strings.java:227: warning: no @param for source
+    public static String stripToNull(String source) {
+                         ^
+/workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/src/java.base/share/classes/java/util/Strings.java:227: warning: no @return
+    public static String stripToNull(String source) {
+                         ^
+/workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/src/java.base/share/classes/java/util/Strings.java:234: warning: no @param for source
+    public static String stripToEmpty(String source) {
+                         ^
+/workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/src/java.base/share/classes/java/util/Strings.java:234: warning: no @return
+    public static String stripToEmpty(String source) {
+                         ^
+/workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/src/java.base/share/classes/java/util/concurrent/Callable.java:68: warning: no @param for monitor
+    default V call(ProgressMonitor monitor) throws Exception {
+              ^
+/workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/src/java.base/share/classes/java/util/concurrent/Callable.java:68: warning: no @return
+    default V call(ProgressMonitor monitor) throws Exception {
+              ^
+/workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/src/java.base/share/classes/java/util/concurrent/Callable.java:68: warning: no @throws for java.lang.Exception
+    default V call(ProgressMonitor monitor) throws Exception {
+              ^
+Creating ct.sym classes
+/workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/src/java.base/share/classes/java/util/concurrent/Executor.java:142: warning: no @param for command
+    default void execute(Runnable command, ProgressMonitor monitor) {
+                 ^
+/workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/src/java.base/share/classes/java/util/concurrent/Executor.java:142: warning: no @param for monitor
+    default void execute(Runnable command, ProgressMonitor monitor) {
+                 ^
+/workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/src/java.base/share/classes/java/util/concurrent/Executor.java:149: warning: no @param for command
+    default void executeWithProgress(Runnable command) {
+                 ^
+/workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/src/java.base/share/classes/java/util/concurrent/ExecutorService.java:435: warning: no @param for <T>
+    default <T> Future<T> submitMonitored(Callable<T> task, ProgressMonitor monitor) {
+                          ^
+/workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/src/java.base/share/classes/java/util/concurrent/ExecutorService.java:435: warning: no @param for task
+    default <T> Future<T> submitMonitored(Callable<T> task, ProgressMonitor monitor) {
+                          ^
+/workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/src/java.base/share/classes/java/util/concurrent/ExecutorService.java:435: warning: no @param for monitor
+    default <T> Future<T> submitMonitored(Callable<T> task, ProgressMonitor monitor) {
+                          ^
+/workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/src/java.base/share/classes/java/util/concurrent/ExecutorService.java:435: warning: no @return
+    default <T> Future<T> submitMonitored(Callable<T> task, ProgressMonitor monitor) {
+                          ^
+/workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/src/java.base/share/classes/java/util/concurrent/ExecutorService.java:442: warning: no @param for task
+    default Future<?> submitMonitored(Runnable task, ProgressMonitor monitor) {
+                      ^
+/workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/src/java.base/share/classes/java/util/concurrent/ExecutorService.java:442: warning: no @param for monitor
+    default Future<?> submitMonitored(Runnable task, ProgressMonitor monitor) {
+                      ^
+/workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/src/java.base/share/classes/java/util/concurrent/ExecutorService.java:442: warning: no @return
+    default Future<?> submitMonitored(Runnable task, ProgressMonitor monitor) {
+                      ^
+/workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/src/java.base/share/classes/java/util/concurrent/MonitoredCallable.java:16: warning: no @param for monitor
+    V callMonitored(ProgressMonitor monitor) throws Exception;
+      ^
+/workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/src/java.base/share/classes/java/util/concurrent/MonitoredCallable.java:16: warning: no @return
+    V callMonitored(ProgressMonitor monitor) throws Exception;
+      ^
+/workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/src/java.base/share/classes/java/util/concurrent/MonitoredCallable.java:16: warning: no @throws for java.lang.Exception
+    V callMonitored(ProgressMonitor monitor) throws Exception;
+      ^
+/workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/src/java.base/share/classes/java/util/concurrent/MonitoredRunnable.java:15: warning: no @param for monitor
+    void runMonitored(ProgressMonitor monitor);
+         ^
+/workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/src/java.base/share/classes/java/util/concurrent/ProgressMonitor.java:14: warning: no comment
+    long UNKNOWN_WORK = -1L;
+         ^
+/workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/src/java.base/share/classes/java/util/concurrent/ProgressMonitor.java:15: warning: no comment
+    ProgressMonitor NONE = new ProgressMonitor() { };
+                    ^
+/workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/src/java.base/share/classes/java/util/concurrent/ProgressMonitor.java:17: warning: no comment
+    default void begin(String task, long totalWork) { }
+                 ^
+/workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/src/java.base/share/classes/java/util/concurrent/ProgressMonitor.java:18: warning: no comment
+    default void worked(long units) { }
+                 ^
+/workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/src/java.base/share/classes/java/util/concurrent/ProgressMonitor.java:19: warning: no comment
+    default void message(String text) { }
+                 ^
+/workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/src/java.base/share/classes/java/util/concurrent/ProgressMonitor.java:20: warning: no comment
+    default boolean isCancelled() { return false; }
+                    ^
+/workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/src/java.base/share/classes/java/util/concurrent/ProgressMonitor.java:21: warning: no comment
+    default void cancel() { }
+                 ^
+/workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/src/java.base/share/classes/java/util/concurrent/ProgressMonitor.java:22: warning: no comment
+    default void done() { }
+                 ^
+/workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/src/java.base/share/classes/java/util/concurrent/ProgressMonitor.java:24: warning: no comment
+    default void checkCancelled() {
+                 ^
+error: warnings found and -Werror specified
+Updating support/src.zip
+Note: Some input files additionally use or override a deprecated API that is marked for removal.
+1 error
+100 warnings
+only showing the first 100 warnings, of 121 total; use -Xmaxwarns if you would like to see more
+gmake[3]: *** [CompileJavaModules.gmk:95: /workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/build/m3-runtime-fastdebug/jdk/modules/java.base/_the.java.base_batch] Error 1
+gmake[2]: *** [make/Main.gmk:193: java.base-java] Error 2
+gmake[2]: *** Waiting for unfinished jobs....
+
+ERROR: Build failed for target 'images' in configuration 'm3-runtime-fastdebug' (exit code 2) 
+
+=== Output from failing command(s) repeated here ===
+* For target jdk_modules_java.base__the.java.base_batch:
+/workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/src/java.base/share/classes/java/lang/Runnable.java:49: warning: no @return
+    default java.util.concurrent.ProgressMonitor progressMonitor() {
+                                                 ^
+/workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/src/java.base/share/classes/java/lang/Runnable.java:57: warning: no @param for monitor
+    default void run(java.util.concurrent.ProgressMonitor monitor) {
+                 ^
+/workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/src/java.base/share/classes/java/util/Strings.java:25: warning: no @param for source
+    public static boolean isNullOrEmpty(CharSequence source) {
+                          ^
+/workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/src/java.base/share/classes/java/util/Strings.java:25: warning: no @return
+    public static boolean isNullOrEmpty(CharSequence source) {
+                          ^
+/workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/src/java.base/share/classes/java/util/Strings.java:30: warning: no @param for source
+    public static String nullToEmpty(String source) {
+                         ^
+   ... (rest of output omitted)
+
+* All command lines available in /workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/build/m3-runtime-fastdebug/make-support/failure-logs.
+=== End of repeated output ===
+
+No indication of failed target found.
+HELP: Try searching the build log for '] Error'.
+HELP: Run 'make doctor' to diagnose build problems.
+
+make[1]: *** [/workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/make/Init.gmk:320: main] Error 2
+make: *** [/workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/make/Init.gmk:186: images] Error 2

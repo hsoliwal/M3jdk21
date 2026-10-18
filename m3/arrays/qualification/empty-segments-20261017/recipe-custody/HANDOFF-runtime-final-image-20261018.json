@@ -1,0 +1,1403 @@
+{
+  "schema": "M3_EXISTING_PUBLIC_RECIPE_HANDOFF_V1",
+  "label": "runtime-final-image-20261018",
+  "canonical_repository": "hsoliwal/com.synexia",
+  "canonical_crate": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017",
+  "canonical_engine_baseline": "8f8200375d8d403b58e855ee5db02f2e8fac33a8",
+  "canonical_successor_publication": "Recorded by the later pinned publication receipt; this staging record makes no publication claim.",
+  "public_baseline": "4b24824c3aa09d802121447f8970d442a855f064",
+  "public_host": "m3/arrays/qualification/empty-segments-20261017/recipe-custody",
+  "public_recipe_owner_override": "sdk-owner",
+  "runtime_dependency_added": false,
+  "existing_host_controls": [
+    {
+      "path": "prepare.py",
+      "sha256": "9b0b3d93c787c9a56036cddb2b044aef30f6fa8a1fa20fa5a2edae46dfd1e62c"
+    },
+    {
+      "path": "receive.py",
+      "sha256": "db258f16e1841f6f5191c1c969c20314a8d143bfa6558b60f684bea440cc1712"
+    },
+    {
+      "path": "ENGINE_SOURCES.tsv",
+      "sha256": "ae731c5780c73a98f6fc81079b5f863613fddea50d2a6c893c6dfd2aa2030b5c"
+    },
+    {
+      "path": "src/test/java/com/synexia/rewrite/M3TaskRecipeTest.java",
+      "sha256": "74b03a3ac3e445a04b8b15076d3ced667bfae2442bd0968cbe74468e4a499e43"
+    },
+    {
+      "path": "contract/test_prepare.py",
+      "sha256": "f504f1dcfafb24fd87f8f677643b45eecc74674881e16bf727b76c4e6a4d1856"
+    },
+    {
+      "path": "contract/verify_receiver.py",
+      "sha256": "a4d82df8b31e707afe7caa5e76524d191f285e2887dbfdfa95cfdc382ae01f7d"
+    }
+  ],
+  "existing_engine_sources": [
+    {
+      "path": "sdk-owner/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+      "sha256": "67f7b81126e4736c7b61b444fa6545153a61e23c012975ca796fcee623ab6625"
+    },
+    {
+      "path": "sdk-owner/src/main/java/com/synexia/rewrite/M3HashPinnedTextSnapshotRecipe.java",
+      "sha256": "fbf1ea9efad784afef5ac201ff7fc324551f77a099ebfe2f79b70c3a17c731ef"
+    },
+    {
+      "path": "sdk-owner/src/main/java/com/synexia/rewrite/M3ScopeInference.java",
+      "sha256": "13660b59f60ec2941ec19e9bc8964ffd4b04689cdc33cd19711fba14b8da09a4"
+    },
+    {
+      "path": "sdk-owner/src/main/java/com/synexia/rewrite/M3EditScope.java",
+      "sha256": "962d37d62d740c3e8055c365a048ae7ee0479c26a9f6bbfe741e540d6c1134ab"
+    }
+  ],
+  "pom_before_sha256": "4c90faaa9e64aebeeba14fb2196731c6334293781d0fdcafbf190f2f5662eb7d",
+  "pom_after_sha256": "4c90faaa9e64aebeeba14fb2196731c6334293781d0fdcafbf190f2f5662eb7d",
+  "qualified_datasets": [
+    {
+      "dataset": "m3jdk21-runtime-control",
+      "targets": 10,
+      "actual_sdk_tests": 5,
+      "sdk_bindings_checked": true,
+      "evidence": {
+        "SDK_INPUTS.tsv": {
+          "path": "evidence/runtime-final-image-20261018/m3jdk21-runtime-control/SDK_INPUTS.tsv",
+          "sha256": "561c029b02c87b41777c738b503c9650f02722b26ba1446f9cdae1a5eae13f9e"
+        },
+        "SDK_RESULTS.tsv": {
+          "path": "evidence/runtime-final-image-20261018/m3jdk21-runtime-control/SDK_RESULTS.tsv",
+          "sha256": "06757e5790dbac3e96781519ed304c92e9f1d476bb48494877182cd0ede2ccc7"
+        },
+        "SDK_TESTS.xml": {
+          "path": "evidence/runtime-final-image-20261018/m3jdk21-runtime-control/SDK_TESTS.xml",
+          "sha256": "176ff24fd2cda18907b13b404984d23235eecf6f806ce06486c9051e3e182c88"
+        }
+      }
+    }
+  ],
+  "historical_evidence": "Existing OWNER_CUSTODY.json, SOURCE.json and earlier reports describe their pinned predecessor. The capped POM has fresh qualification; predecessor reports are not new current-host runs.",
+  "mirrored_files": [
+    {
+      "path": "authoring/build_public_recipe_handoff.py",
+      "sha256": "b7b0281d38e989bfa909190481c72cd203ff7b03411dd28ee521e569d1e6964a",
+      "bytes": 12062,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/authoring/build_public_recipe_handoff.py"
+      ]
+    },
+    {
+      "path": "authoring/prepare_final_image_evidence.py",
+      "sha256": "b86f24fec9c00c1958cf1c77c90c9f398551517d8ddf7a3b5860179a86f65f7c",
+      "bytes": 8823,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/runtime-final-evidence/prepare_final_evidence.py"
+      ]
+    },
+    {
+      "path": "authoring/runtime-public-host-20261018/prepare_public_host_evidence.py",
+      "sha256": "6102290054e5833501d686ed4310e73bc1a654bb3f41faef113e6e2e6f6e0bd9",
+      "bytes": 7118,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/authoring/prepare_public_host_evidence.py"
+      ]
+    },
+    {
+      "path": "authoring/runtime-public-host-20261018/verify_public_host_seven.py",
+      "sha256": "1c1dbb991bbef0ebd0c75c6d620cb7aa0dcaa65e6eca5c321e41d4293aeecb7e",
+      "bytes": 10226,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/authoring/verify_public_host_seven.py"
+      ]
+    },
+    {
+      "path": "datasets/m3jdk21-runtime-control/DATASET.json",
+      "sha256": "26a382eabf0ef3a7b6cbb0074e5850206f67410230d29eea816e3b59f8b84bd6",
+      "bytes": 496,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-runtime-control/DATASET.json"
+      ]
+    },
+    {
+      "path": "datasets/m3jdk21-runtime-control/ENGINE_EFFECTIVE.tsv",
+      "sha256": "80bf80ee81878cc05393b3c23ef07b2261be1bcb7dcb500b0d4b12cd8e05ec23",
+      "bytes": 747,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-runtime-control/ENGINE_EFFECTIVE.tsv"
+      ]
+    },
+    {
+      "path": "datasets/m3jdk21-runtime-control/MODES.tsv",
+      "sha256": "d3db9bbfd064fb5ae20ecee296d91c51380f1ec0d22d702a4cfe43401275d382",
+      "bytes": 610,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-runtime-control/MODES.tsv"
+      ]
+    },
+    {
+      "path": "datasets/m3jdk21-runtime-control/resources/META-INF/rewrite/m3-collections-contract-refinement-20261017-m3jdk21-runtime-control.yml",
+      "sha256": "4febeb30cea64a55538deeb2a5d5ac9756e7e02214a8b987b2b6aee20d4f9d73",
+      "bytes": 540,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-runtime-control/resources/META-INF/rewrite/m3-collections-contract-refinement-20261017-m3jdk21-runtime-control.yml"
+      ]
+    },
+    {
+      "path": "datasets/m3jdk21-runtime-control/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-runtime-control/0010-M3RuntimeCompatibilityHold.java.txt",
+      "sha256": "9faf22addfe520efd30ef8181fa1b89bb4e130f65acb35d2ac9e8b58a3ce38aa",
+      "bytes": 14663,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-runtime-control/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-runtime-control/0010-M3RuntimeCompatibilityHold.java.txt"
+      ]
+    },
+    {
+      "path": "datasets/m3jdk21-runtime-control/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-runtime-control/manifest.tsv",
+      "sha256": "d3e5f9373fbdcf10c555b084b75f25f644beea01d1a052ae159e2bf049ffd6ef",
+      "bytes": 171,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-runtime-control/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-runtime-control/manifest.tsv"
+      ]
+    },
+    {
+      "path": "datasets/m3jdk21-runtime-control/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-control/0001-ALGORITHM_CATALOGUE.tsv.txt",
+      "sha256": "6e129506e8e1bb6c8e728ed82ddae11822129da00b708959dc65deb40d2d0e0c",
+      "bytes": 5046,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-runtime-control/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-control/0001-ALGORITHM_CATALOGUE.tsv.txt"
+      ]
+    },
+    {
+      "path": "datasets/m3jdk21-runtime-control/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-control/0002-check_object_adapter_progress_receiver_20261017.py.txt",
+      "sha256": "e2c0e81911a8ea4e6d0d6b77eacc36fa4a4aca2c792536b9c32cbcdd40be0404",
+      "bytes": 8803,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-runtime-control/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-control/0002-check_object_adapter_progress_receiver_20261017.py.txt"
+      ]
+    },
+    {
+      "path": "datasets/m3jdk21-runtime-control/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-control/0003-test_object_adapter_progress_receiver_20261018.py.txt",
+      "sha256": "e84be3f274caf1543ce7a2eb10aced6670fa488ad5478719be5b3227dc48a611",
+      "bytes": 14842,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-runtime-control/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-control/0003-test_object_adapter_progress_receiver_20261018.py.txt"
+      ]
+    },
+    {
+      "path": "datasets/m3jdk21-runtime-control/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-control/0004-verify_m3_default_template_20261017.py.txt",
+      "sha256": "234293306f44acc4f756816564b9dea6146962b13ac2529397e25f062cce49bc",
+      "bytes": 1128,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-runtime-control/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-control/0004-verify_m3_default_template_20261017.py.txt"
+      ]
+    },
+    {
+      "path": "datasets/m3jdk21-runtime-control/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-control/0005-name-mapping.json.txt",
+      "sha256": "d63db548f89f25622399329148872225a438e9121cb3436d967bccd3bdff0c02",
+      "bytes": 411184,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-runtime-control/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-control/0005-name-mapping.json.txt"
+      ]
+    },
+    {
+      "path": "datasets/m3jdk21-runtime-control/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-control/0006-CATALOGUE.tsv.txt",
+      "sha256": "3f88e143299a558a1a4f20c86d012b0823dc9f9ee4d519ce28cd16bc9cf35ff4",
+      "bytes": 5316,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-runtime-control/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-control/0006-CATALOGUE.tsv.txt"
+      ]
+    },
+    {
+      "path": "datasets/m3jdk21-runtime-control/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-control/0007-CURRENT_OWNERS.json.txt",
+      "sha256": "6c6e6dca85d5bf211ec04d8164d357918950348c4c3a9413be453c2bb11de364",
+      "bytes": 2042,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-runtime-control/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-control/0007-CURRENT_OWNERS.json.txt"
+      ]
+    },
+    {
+      "path": "datasets/m3jdk21-runtime-control/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-control/0008-FILE_REVIEW.tsv.txt",
+      "sha256": "1c5b958b528e94183f710dea0f4b7ce9319750407062ca51285bd66286b4d377",
+      "bytes": 7737,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-runtime-control/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-control/0008-FILE_REVIEW.tsv.txt"
+      ]
+    },
+    {
+      "path": "datasets/m3jdk21-runtime-control/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-control/0009-README.md.txt",
+      "sha256": "04e8ff5ea3b57b861ce4381c120e56584478c1f8004c2397829fb8c59e8dd49a",
+      "bytes": 6157,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-runtime-control/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-control/0009-README.md.txt"
+      ]
+    },
+    {
+      "path": "datasets/m3jdk21-runtime-control/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-control/manifest.tsv",
+      "sha256": "152abb3f955b1be8a9d2fe02c649b6e5de4bf61b66eb1ead1d0822457752fc02",
+      "bytes": 1705,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-runtime-control/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-control/manifest.tsv"
+      ]
+    },
+    {
+      "path": "datasets/m3jdk21-runtime-control/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-control/pre/0001-ALGORITHM_CATALOGUE.tsv.txt",
+      "sha256": "1aad547fe2f419cf2f265a8f1d7c492779c1bbc86ef685bfafd47516a98a276e",
+      "bytes": 2752,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-runtime-control/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-control/pre/0001-ALGORITHM_CATALOGUE.tsv.txt"
+      ]
+    },
+    {
+      "path": "datasets/m3jdk21-runtime-control/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-control/pre/0002-check_object_adapter_progress_receiver_20261017.py.txt",
+      "sha256": "5e44ba190257db7d9715d80e7870d6a1b69f8c76cc3c285182193e80fc0da443",
+      "bytes": 1304,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-runtime-control/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-control/pre/0002-check_object_adapter_progress_receiver_20261017.py.txt"
+      ]
+    },
+    {
+      "path": "datasets/m3jdk21-runtime-control/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-control/pre/0004-verify_m3_default_template_20261017.py.txt",
+      "sha256": "856910b716021260d387c0e3230c774223d7afc6ba62eab8e0c35668ffc8f2da",
+      "bytes": 1176,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-runtime-control/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-control/pre/0004-verify_m3_default_template_20261017.py.txt"
+      ]
+    },
+    {
+      "path": "datasets/m3jdk21-runtime-control/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-control/pre/0005-name-mapping.json.txt",
+      "sha256": "4247c5648cf6a5599f8840a7171f147f5c343bf9b97e7a386eb7f351f978c4f3",
+      "bytes": 404076,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-runtime-control/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-control/pre/0005-name-mapping.json.txt"
+      ]
+    },
+    {
+      "path": "evidence/runtime-final-image-20261018/QUALIFICATION.json",
+      "sha256": "7187f9e05bdc3ea985345ff7a45d73afbdb00c96bbc710378c837df6d80bbb06",
+      "bytes": 72124,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/runtime-final-evidence/inputs/QUALIFICATION.json"
+      ]
+    },
+    {
+      "path": "evidence/runtime-final-image-20261018/README.md",
+      "sha256": "c7029a1bbf10612a09869f744757c44506422e98bb415db9d1a922f072d984d4",
+      "bytes": 2274,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/runtime-final-evidence/inputs/README.md"
+      ]
+    },
+    {
+      "path": "evidence/runtime-final-image-20261018/build/arrays-m3-image-online.json",
+      "sha256": "1fcc2d99d6a55f74ec842dccb91695fb1789a3a0bb71bd67e94957895fc6a074",
+      "bytes": 837,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/build-proof/arrays-m3-image-online.json"
+      ]
+    },
+    {
+      "path": "evidence/runtime-final-image-20261018/build/arrays-m3-image-online.log.txt",
+      "sha256": "3e06ed99316d3985552ceeaab9da5f94900c8d38cfc015a92423bd417aee5dd9",
+      "bytes": 3604,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/build-proof/arrays-m3-image-online.log"
+      ]
+    },
+    {
+      "path": "evidence/runtime-final-image-20261018/build/arrays-m3-image-online.resources.txt",
+      "sha256": "398d720c9bbe7b4533e1536b30bc52d908ab317fa89b2df6f4c894f5d06b417d",
+      "bytes": 948,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/build-proof/arrays-m3-image-online.resources.txt"
+      ]
+    },
+    {
+      "path": "evidence/runtime-final-image-20261018/build/arrays-m3-image.json",
+      "sha256": "1f5857b9c8dc547a57111b12eb5def2b8f2c35db7ca0d12c5f014158a8ab84ce",
+      "bytes": 622,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/build-proof/arrays-m3-image.json"
+      ]
+    },
+    {
+      "path": "evidence/runtime-final-image-20261018/build/arrays-m3-image.log.txt",
+      "sha256": "6bc354fe16a577bf913b329db6db6803845b0bc5c69f7f43852e20be469ebec0",
+      "bytes": 1444,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/build-proof/arrays-m3-image.log"
+      ]
+    },
+    {
+      "path": "evidence/runtime-final-image-20261018/build/arrays-m3-image.resources.txt",
+      "sha256": "a93eee6480285e94681e300b6c8d1e052279fd683ce5d9daa4a67f3fab89d4cb",
+      "bytes": 944,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/build-proof/arrays-m3-image.resources.txt"
+      ]
+    },
+    {
+      "path": "evidence/runtime-final-image-20261018/build/collections-m3-image-online.json",
+      "sha256": "e82376f4c8e342deb42f0407d12d5bf928dbde5be7d70507cebc8a7963417196",
+      "bytes": 817,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/build-proof/collections-m3-image-online.json"
+      ]
+    },
+    {
+      "path": "evidence/runtime-final-image-20261018/build/collections-m3-image-online.log.txt",
+      "sha256": "0ab27866b1e4bb2299946dc253e1dfb294bcd0d2c111ebc715793116ecff5d0b",
+      "bytes": 18467,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/build-proof/collections-m3-image-online.log"
+      ]
+    },
+    {
+      "path": "evidence/runtime-final-image-20261018/build/collections-m3-image-online.resources.txt",
+      "sha256": "5b3c2ce6d0ab7af9decb89da7e643956a6e3b3a89e1f657659118d0697b51375",
+      "bytes": 937,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/build-proof/collections-m3-image-online.resources.txt"
+      ]
+    },
+    {
+      "path": "evidence/runtime-final-image-20261018/build/collections-m3-image.json",
+      "sha256": "23942c727f065fe3198d8a7f1d20946c12809f13a6a69bc45d5285b0c93104e7",
+      "bytes": 605,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/build-proof/collections-m3-image.json"
+      ]
+    },
+    {
+      "path": "evidence/runtime-final-image-20261018/build/collections-m3-image.log.txt",
+      "sha256": "772e9cf5ef3de2d656ef934bd0e181ec7561cdff1b9e00cefff4bab0f7a89f54",
+      "bytes": 1435,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/build-proof/collections-m3-image.log"
+      ]
+    },
+    {
+      "path": "evidence/runtime-final-image-20261018/build/collections-m3-image.resources.txt",
+      "sha256": "609880694b3e1f6afbd542d38124d952a57f9ff34c667627c7ff4b31ed41746a",
+      "bytes": 934,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/build-proof/collections-m3-image.resources.txt"
+      ]
+    },
+    {
+      "path": "evidence/runtime-final-image-20261018/build/native-feature-guard-application.json",
+      "sha256": "f36acec41ad0a48b6b5f81fe1529534d2aedd19d73f0d85c57d11089c1dd79ef",
+      "bytes": 730,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/build-proof/native-feature-guard-application.json"
+      ]
+    },
+    {
+      "path": "evidence/runtime-final-image-20261018/build/runtime-configure-with-xrandr.json",
+      "sha256": "a6f68ae8363153d599d6d833192fc98f3641bc85fba8522e4f447a463abccbec",
+      "bytes": 663,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/build-proof/runtime-configure-with-xrandr.json"
+      ]
+    },
+    {
+      "path": "evidence/runtime-final-image-20261018/build/runtime-configure-with-xrandr.log.txt",
+      "sha256": "e0f3ea7cc49a5e83939a0ebab676958ff3dd55bec4dfff90dccea1c441bea08d",
+      "bytes": 18639,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/build-proof/runtime-configure-with-xrandr.log"
+      ]
+    },
+    {
+      "path": "evidence/runtime-final-image-20261018/build/runtime-configure.json",
+      "sha256": "b577568e3886efe29649d2ac586b047fa06662b602ec822cf19267af54335df2",
+      "bytes": 618,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/build-proof/runtime-configure.json"
+      ]
+    },
+    {
+      "path": "evidence/runtime-final-image-20261018/build/runtime-configure.log.txt",
+      "sha256": "725edd064a92c27bbab87e9ded25e5d055d248b0b1750bb298a237c77c42b807",
+      "bytes": 13525,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/build-proof/runtime-configure.log"
+      ]
+    },
+    {
+      "path": "evidence/runtime-final-image-20261018/build/runtime-control-application.json",
+      "sha256": "0d17b7bbeafe6121ab8bb4443019d04e7ae6de7a840317ab672acfa533888a0a",
+      "bytes": 720,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/build-proof/runtime-control-application.json"
+      ]
+    },
+    {
+      "path": "evidence/runtime-final-image-20261018/build/runtime-custody-application.json",
+      "sha256": "36d26a086faa2f7f98fc1f6429ededc4f3889a65cf79a0e1f9a677697ef76af2",
+      "bytes": 1751,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/build-proof/runtime-custody-application.json"
+      ]
+    },
+    {
+      "path": "evidence/runtime-final-image-20261018/build/runtime-documentation-application.json",
+      "sha256": "12c40a743ebed24d8b44c0e433d829e27c1f3a9d625d017951551eeb85e6d3ee",
+      "bytes": 2587,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/build-proof/runtime-documentation-application.json"
+      ]
+    },
+    {
+      "path": "evidence/runtime-final-image-20261018/build/runtime-images-documentation.json",
+      "sha256": "4e15905a87b85d8d760858be79999dfc22abe604cca9e328d4e914a069b1282a",
+      "bytes": 1992,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/build-proof/runtime-images-documentation.json"
+      ]
+    },
+    {
+      "path": "evidence/runtime-final-image-20261018/build/runtime-images-documentation.log.txt",
+      "sha256": "8205fe2fd19b4b25a928cf4027a8dfac786109daa84661f2b4f57f2a68a14ec3",
+      "bytes": 2001,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/build-proof/runtime-images-documentation.log"
+      ]
+    },
+    {
+      "path": "evidence/runtime-final-image-20261018/build/runtime-images-documentation.resources.txt",
+      "sha256": "e29eff63fbe0b78ce0575c85ecf1a5faa3ea986a60b848ca601f33ede75eaa64",
+      "bytes": 816,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/build-proof/runtime-images-documentation.resources.txt"
+      ]
+    },
+    {
+      "path": "evidence/runtime-final-image-20261018/build/runtime-images-native-feature.json",
+      "sha256": "8fdab52f9bba5ad8d94987bff52483dc3492738ce3b56433b5a20059c23fd749",
+      "bytes": 2614,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/build-proof/runtime-images-native-feature.json"
+      ]
+    },
+    {
+      "path": "evidence/runtime-final-image-20261018/build/runtime-images-native-feature.log.txt",
+      "sha256": "f7dbe6072368d1f206f9ce9b2bc42704ff80868a7e60c0190ecacb76df843d21",
+      "bytes": 11474,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/build-proof/runtime-images-native-feature.log"
+      ]
+    },
+    {
+      "path": "evidence/runtime-final-image-20261018/build/runtime-images-native-feature.resources.txt",
+      "sha256": "9106a8ce804c7ab675d9ecd65d502409b98e4fe06a155475ec035ca8ea6e9a1b",
+      "bytes": 786,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/build-proof/runtime-images-native-feature.resources.txt"
+      ]
+    },
+    {
+      "path": "evidence/runtime-final-image-20261018/build/runtime-images-scope-lint.json",
+      "sha256": "29ed2af7c9452324ff019df3ebae38dd43a2bdb4462adb745f9c5d3cd2011cc2",
+      "bytes": 1992,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/build-proof/runtime-images-scope-lint.json"
+      ]
+    },
+    {
+      "path": "evidence/runtime-final-image-20261018/build/runtime-images-scope-lint.log.txt",
+      "sha256": "7ee40915580d462e4f65dadb352cc7dcf89a873c0fce9724370413ed1ee0f4c9",
+      "bytes": 3012,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/build-proof/runtime-images-scope-lint.log"
+      ]
+    },
+    {
+      "path": "evidence/runtime-final-image-20261018/build/runtime-images-scope-lint.resources.txt",
+      "sha256": "39d35ea98afa4b42819b06bc41f314ec53c00a7e91f9a576cd9b0e43867fcf94",
+      "bytes": 817,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/build-proof/runtime-images-scope-lint.resources.txt"
+      ]
+    },
+    {
+      "path": "evidence/runtime-final-image-20261018/build/runtime-images.json",
+      "sha256": "7e6364b3fe5f540f0a4a2447ad89082add6a1c8d63a8b8d58616c18cc65967fa",
+      "bytes": 710,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/build-proof/runtime-images.json"
+      ]
+    },
+    {
+      "path": "evidence/runtime-final-image-20261018/build/runtime-images.log.txt",
+      "sha256": "43b453cd8bac835414502c43b822caad2483946de3f0d0acdf87c102bcd0b67e",
+      "bytes": 27291,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/build-proof/runtime-images.log"
+      ]
+    },
+    {
+      "path": "evidence/runtime-final-image-20261018/build/runtime-images.resources.txt",
+      "sha256": "08001a4be3596fb0506ab05c3c04ef26a651238b8694868f0ed833a10bc8846d",
+      "bytes": 822,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/build-proof/runtime-images.resources.txt"
+      ]
+    },
+    {
+      "path": "evidence/runtime-final-image-20261018/build/runtime-native-application.json",
+      "sha256": "d39bdebad516bdd11007cab45b284562953341e66574ae25228347c11ae230f4",
+      "bytes": 1710,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/build-proof/runtime-native-application.json"
+      ]
+    },
+    {
+      "path": "evidence/runtime-final-image-20261018/build/runtime-scope-lint-application.json",
+      "sha256": "586bc2d1dd15ed66283b3a5689c1dc36cbc8d255149edf42ceefd31a12cc433c",
+      "bytes": 727,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/build-proof/runtime-scope-lint-application.json"
+      ]
+    },
+    {
+      "path": "evidence/runtime-final-image-20261018/compatibility/compatibility-receipt.tsv",
+      "sha256": "0b06ca4652cf207c167350031e6344d6531a33a3f8d287be5234b2edb146a54e",
+      "bytes": 354,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/build-proof/runtime-jtreg/work/scratch/0/m3-compatibility-hold-13406758446925390028/compatibility-receipt.tsv"
+      ]
+    },
+    {
+      "path": "evidence/runtime-final-image-20261018/compatibility/current-dual-current.log.txt",
+      "sha256": "2174cd09e046634682c3e83c637b5ef1123efc19ffac87776aa221302cf4eb88",
+      "bytes": 35,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/build-proof/runtime-jtreg/work/scratch/0/m3-compatibility-hold-13406758446925390028/current-dual-current.log"
+      ]
+    },
+    {
+      "path": "evidence/runtime-final-image-20261018/compatibility/default-source-current.log.txt",
+      "sha256": "8f76699a329c8fe6e70af37d6b5b8e5cd9a89972d6f6e94b8aa00d0bf6b78470",
+      "bytes": 124,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/build-proof/runtime-jtreg/work/scratch/0/m3-compatibility-hold-13406758446925390028/default-source-current.log"
+      ]
+    },
+    {
+      "path": "evidence/runtime-final-image-20261018/compatibility/dual-source-current.log.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/build-proof/runtime-jtreg/work/scratch/0/m3-compatibility-hold-13406758446925390028/dual-source-current.log"
+      ]
+    },
+    {
+      "path": "evidence/runtime-final-image-20261018/compatibility/legacy-compile.log.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/build-proof/runtime-jtreg/work/scratch/0/m3-compatibility-hold-13406758446925390028/legacy-compile.log"
+      ]
+    },
+    {
+      "path": "evidence/runtime-final-image-20261018/compatibility/legacy-default-bytecode.log.txt",
+      "sha256": "3f0d699679df91ad859af75088951f5f8060b052ef4aeab060b2f85a2b368ef6",
+      "bytes": 2351,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/build-proof/runtime-jtreg/work/scratch/0/m3-compatibility-hold-13406758446925390028/legacy-default-bytecode.log"
+      ]
+    },
+    {
+      "path": "evidence/runtime-final-image-20261018/compatibility/legacy-default-current.log.txt",
+      "sha256": "071a6d464f76420b8060c64faabcfe6929a097abbbf6c5ecdc7328510c00aef7",
+      "bytes": 42,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/build-proof/runtime-jtreg/work/scratch/0/m3-compatibility-hold-13406758446925390028/legacy-default-current.log"
+      ]
+    },
+    {
+      "path": "evidence/runtime-final-image-20261018/compatibility/legacy-default-stock.log.txt",
+      "sha256": "0c99a181457613e54f25acb9877647112b2b12ecceafa353a495f73503987f09",
+      "bytes": 25,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/build-proof/runtime-jtreg/work/scratch/0/m3-compatibility-hold-13406758446925390028/legacy-default-stock.log"
+      ]
+    },
+    {
+      "path": "evidence/runtime-final-image-20261018/compatibility/legacy-dual-current.log.txt",
+      "sha256": "2174cd09e046634682c3e83c637b5ef1123efc19ffac87776aa221302cf4eb88",
+      "bytes": 35,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/build-proof/runtime-jtreg/work/scratch/0/m3-compatibility-hold-13406758446925390028/legacy-dual-current.log"
+      ]
+    },
+    {
+      "path": "evidence/runtime-final-image-20261018/compatibility/legacy-dual-stock.log.txt",
+      "sha256": "2174cd09e046634682c3e83c637b5ef1123efc19ffac87776aa221302cf4eb88",
+      "bytes": 35,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/build-proof/runtime-jtreg/work/scratch/0/m3-compatibility-hold-13406758446925390028/legacy-dual-stock.log"
+      ]
+    },
+    {
+      "path": "evidence/runtime-final-image-20261018/compatibility/legacy-optional-current.log.txt",
+      "sha256": "51dc1e94814d87e18f38f7b831a1c9866e042c3fad35cfd511bf63e4381d4de0",
+      "bytes": 33,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/build-proof/runtime-jtreg/work/scratch/0/m3-compatibility-hold-13406758446925390028/legacy-optional-current.log"
+      ]
+    },
+    {
+      "path": "evidence/runtime-final-image-20261018/compatibility/legacy-optional-stock.log.txt",
+      "sha256": "51dc1e94814d87e18f38f7b831a1c9866e042c3fad35cfd511bf63e4381d4de0",
+      "bytes": 33,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/build-proof/runtime-jtreg/work/scratch/0/m3-compatibility-hold-13406758446925390028/legacy-optional-stock.log"
+      ]
+    },
+    {
+      "path": "evidence/runtime-final-image-20261018/compatibility/optional-source-current.log.txt",
+      "sha256": "45e5eaf93d8799109844e86ba9a08378f0b495e8309119e76318bde3e77c3059",
+      "bytes": 234,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/build-proof/runtime-jtreg/work/scratch/0/m3-compatibility-hold-13406758446925390028/optional-source-current.log"
+      ]
+    },
+    {
+      "path": "evidence/runtime-final-image-20261018/compatibility/stock-javac-version.log.txt",
+      "sha256": "2df6b9c76e710158266aeaae8f3578eaed8ddd747a2272483506ad9a8a5e644a",
+      "bytes": 16,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/build-proof/runtime-jtreg/work/scratch/0/m3-compatibility-hold-13406758446925390028/stock-javac-version.log"
+      ]
+    },
+    {
+      "path": "evidence/runtime-final-image-20261018/compatibility/stock-object-api.log.txt",
+      "sha256": "e804921e1322c7ed90174beca3199c44172f5acbe45133ba8186658d95ca5a25",
+      "bytes": 769,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/build-proof/runtime-jtreg/work/scratch/0/m3-compatibility-hold-13406758446925390028/stock-object-api.log"
+      ]
+    },
+    {
+      "path": "evidence/runtime-final-image-20261018/hosted-ci/hosted-ci-baseline-inputs.json",
+      "sha256": "18c78d506ff880d60fdbf82c2907c1fde0ed1403d4d97b2ce0ee9fb629ac5883",
+      "bytes": 4008,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/build-proof/hosted-ci-baseline-inputs.json"
+      ]
+    },
+    {
+      "path": "evidence/runtime-final-image-20261018/hosted-ci/hosted-ci-observation.json",
+      "sha256": "f2c1afda6825ce4f0616542f3f1aee53d40f7163c15c18ffdecd016ad27e1bd4",
+      "bytes": 17437,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/build-proof/hosted-ci-observation.json"
+      ]
+    },
+    {
+      "path": "evidence/runtime-final-image-20261018/jni/canonical.tsv",
+      "sha256": "0acef1635632fd46250144b055fa775b462c1b74d21a692ffa239aacbe0b6932",
+      "bytes": 472,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/build-proof/native-image-execution/canonical.tsv"
+      ]
+    },
+    {
+      "path": "evidence/runtime-final-image-20261018/jni/compile-image.log.txt",
+      "sha256": "496e9299515292007405c2d0d4f2dd8ce4b1ead78d32983d0d94400608b7137f",
+      "bytes": 99,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/build-proof/native-image-execution/compile-image.log"
+      ]
+    },
+    {
+      "path": "evidence/runtime-final-image-20261018/jni/compile-tests.log.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/build-proof/native-image-execution/compile-tests.log"
+      ]
+    },
+    {
+      "path": "evidence/runtime-final-image-20261018/jni/native-mapping-0.log.txt",
+      "sha256": "c90b35332df43494a461de84bdf8a88d11ac8a55b85713904e213d038a0d21a2",
+      "bytes": 113,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/build-proof/native-image-execution/native-mapping-0.log"
+      ]
+    },
+    {
+      "path": "evidence/runtime-final-image-20261018/jni/native-mapping-1.log.txt",
+      "sha256": "c90b35332df43494a461de84bdf8a88d11ac8a55b85713904e213d038a0d21a2",
+      "bytes": 113,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/build-proof/native-image-execution/native-mapping-1.log"
+      ]
+    },
+    {
+      "path": "evidence/runtime-final-image-20261018/jni/primitive-identity.log.txt",
+      "sha256": "c687529c36e5caa9aa78dc549223585aee98b5f50fb3214ed054977fa03bf660",
+      "bytes": 110,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/build-proof/native-image-execution/primitive-identity.log"
+      ]
+    },
+    {
+      "path": "evidence/runtime-final-image-20261018/jni/receipt.json",
+      "sha256": "e86fe5351e6c4736342df9c96929cb62a6fc4fa2753b069713975685d6048e60",
+      "bytes": 4236,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/build-proof/native-image-execution/receipt.json"
+      ]
+    },
+    {
+      "path": "evidence/runtime-final-image-20261018/jtreg/FinalizationOption.jtr.txt",
+      "sha256": "5e636f8a8da122ede74e24f714358e34e6a847686c74bac2451c5da38eaae444",
+      "bytes": 14803,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/build-proof/runtime-jtreg/work/java/lang/Object/FinalizationOption.jtr"
+      ]
+    },
+    {
+      "path": "evidence/runtime-final-image-20261018/jtreg/InvalidFinalizationOption.jtr.txt",
+      "sha256": "56a942c3383e6a686777329dd3cf3ee9caa9c5e9d01f2222868869da3daadccf",
+      "bytes": 11578,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/build-proof/runtime-jtreg/work/java/lang/Object/InvalidFinalizationOption.jtr"
+      ]
+    },
+    {
+      "path": "evidence/runtime-final-image-20261018/jtreg/M3AdapterProgress.jtr.txt",
+      "sha256": "e83968dfdd8e8304ad5ab0d18ce83166ee6c4aef572252e903911c47e4370a71",
+      "bytes": 7909,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/build-proof/runtime-jtreg/work/java/lang/Object/M3AdapterProgress.jtr"
+      ]
+    },
+    {
+      "path": "evidence/runtime-final-image-20261018/jtreg/M3MonitoredTemplateTest.jtr.txt",
+      "sha256": "69f4177190589213e1352435df83c6514f95a38ffa5e3cc1653d96a3eac2f419",
+      "bytes": 8128,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/build-proof/runtime-jtreg/work/java/lang/Object/M3MonitoredTemplateTest.jtr"
+      ]
+    },
+    {
+      "path": "evidence/runtime-final-image-20261018/jtreg/M3RuntimeCompatibilityHold.jtr.txt",
+      "sha256": "7e67d9efad8364f90efe4e8073e5b4fb74ec24aec47c27c1250413bad588ae04",
+      "bytes": 8465,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/build-proof/runtime-jtreg/work/java/lang/Object/M3RuntimeCompatibilityHold.jtr"
+      ]
+    },
+    {
+      "path": "evidence/runtime-final-image-20261018/jtreg/WaitTooLong.jtr.txt",
+      "sha256": "1c43ce48c4d1aba193f9c0432f801b08edaa041c625a221d6003a6a84e40a4fb",
+      "bytes": 7792,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/build-proof/runtime-jtreg/work/java/lang/Object/WaitTooLong.jtr"
+      ]
+    },
+    {
+      "path": "evidence/runtime-final-image-20261018/jtreg/jtreg.log.txt",
+      "sha256": "0a82427b903a44f098387f044e9234968559d78f0c522349ed4fdb64a204f5c0",
+      "bytes": 398,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/build-proof/runtime-jtreg/jtreg.log"
+      ]
+    },
+    {
+      "path": "evidence/runtime-final-image-20261018/jtreg/receipt.json",
+      "sha256": "1de56bf05defebe4917c8c5a110a8f0155529c5a1817ec7fac79731d9a85f4ce",
+      "bytes": 860,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/build-proof/runtime-jtreg/receipt.json"
+      ]
+    },
+    {
+      "path": "evidence/runtime-final-image-20261018/jtreg/summary.txt",
+      "sha256": "fca3fdbc0150b69385bdfdc82a886415fbda4c94f4890e5d80c378ab2f195617",
+      "bytes": 474,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/build-proof/runtime-jtreg/report/text/summary.txt"
+      ]
+    },
+    {
+      "path": "evidence/runtime-final-image-20261018/m3jdk21-runtime-control/SDK_INPUTS.tsv",
+      "sha256": "561c029b02c87b41777c738b503c9650f02722b26ba1446f9cdae1a5eae13f9e",
+      "bytes": 5866,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-runtime-control/candidate/SDK_INPUTS.tsv"
+      ]
+    },
+    {
+      "path": "evidence/runtime-final-image-20261018/m3jdk21-runtime-control/SDK_RESULTS.tsv",
+      "sha256": "06757e5790dbac3e96781519ed304c92e9f1d476bb48494877182cd0ede2ccc7",
+      "bytes": 1572,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-runtime-control/candidate/SDK_RESULTS.tsv"
+      ]
+    },
+    {
+      "path": "evidence/runtime-final-image-20261018/m3jdk21-runtime-control/SDK_TESTS.xml",
+      "sha256": "176ff24fd2cda18907b13b404984d23235eecf6f806ce06486c9051e3e182c88",
+      "bytes": 14735,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-runtime-control/surefire-reports/TEST-com.synexia.rewrite.M3TaskRecipeTest.xml"
+      ]
+    },
+    {
+      "path": "evidence/runtime-final-image-20261018/public-array-host/fixture.log.txt",
+      "sha256": "1aa63162a5433fbcde3a1923ca8bc0d65b493c3d097353699893d56552b2c6d5",
+      "bytes": 2994,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/build-proof/public-array-host/fixture.log"
+      ]
+    },
+    {
+      "path": "evidence/runtime-final-image-20261018/public-array-host/m3jdk21-numeric-copy.log.txt",
+      "sha256": "bc5e2d5e263b93cece0b61018656d0f6cf5425da8a16bb781dc3cc30fc02cc19",
+      "bytes": 3059,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/build-proof/public-array-host/m3jdk21-numeric-copy.log"
+      ]
+    },
+    {
+      "path": "evidence/runtime-final-image-20261018/public-array-host/receipt.json",
+      "sha256": "1b69c379bb77fe59ae3440084ede72f232c94ba983082ee33875cb30294f2d2b",
+      "bytes": 1213,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/build-proof/public-array-host/receipt.json"
+      ]
+    },
+    {
+      "path": "evidence/runtime-final-image-20261018/public-array-host/receiving-replay.json",
+      "sha256": "731ad837226fb2a21366d789a92de810a4b71d32ac4651211660bdfe5a22fbaa",
+      "bytes": 201,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/build-proof/public-array-host/receiving-replay.json"
+      ]
+    },
+    {
+      "path": "evidence/runtime-final-image-20261018/public-collection-oracle-host/maven.log.txt",
+      "sha256": "4b3395f7d73ac95091b02c835fa42cfffa897a8af653f80ba18a7890c966f225",
+      "bytes": 3107,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/build-proof/public-collection-oracle-host/maven.log"
+      ]
+    },
+    {
+      "path": "evidence/runtime-final-image-20261018/public-collection-oracle-host/receipt.json",
+      "sha256": "3064b81d1f4b7db56cb18204ecf0c379e39bc1d68c5951805f16acda14cb0179",
+      "bytes": 611,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/build-proof/public-collection-oracle-host/receipt.json"
+      ]
+    },
+    {
+      "path": "evidence/runtime-final-image-20261018/public-collection-oracle-host/receiving-replay.json",
+      "sha256": "88f947b3615c592b022d51ff83774b615345d5f37271dd1670ff77a392f56cf9",
+      "bytes": 660,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/build-proof/public-collection-oracle-host/receiving-replay.json"
+      ]
+    },
+    {
+      "path": "evidence/runtime-final-image-20261018/public-progress-host/maven.log.txt",
+      "sha256": "ba7d53fadad791cd8e66ef3c44aee3e88df36438a12270f0a5ae18ccde3538c5",
+      "bytes": 3096,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/build-proof/public-progress-host/maven.log"
+      ]
+    },
+    {
+      "path": "evidence/runtime-final-image-20261018/public-progress-host/receipt.json",
+      "sha256": "2fcefe3afa8dc58c4194d2b3bd820bc1977a63c0ad739bf14202f698cc2acc38",
+      "bytes": 607,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/build-proof/public-progress-host/receipt.json"
+      ]
+    },
+    {
+      "path": "evidence/runtime-final-image-20261018/public-progress-host/receiving-replay.json",
+      "sha256": "e9e9221564007d282d8f150347a8619bc4c9c4b9a5a07efac175abf20f812985",
+      "bytes": 205,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/build-proof/public-progress-host/receiving-replay.json"
+      ]
+    },
+    {
+      "path": "evidence/runtime-public-host-20261018/README.md",
+      "sha256": "7053721f8c8b35794fe9e5f0e64dd2620b55be25cb7960d4efa12dedcc622751",
+      "bytes": 1614,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/public-host-evidence-input-v2/README.md"
+      ]
+    },
+    {
+      "path": "evidence/runtime-public-host-20261018/RECEIPT.json",
+      "sha256": "89d3b3f6cc174ecab835f73291410ba291725c163c8016efcad0decd74e3805c",
+      "bytes": 27997,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/proof/public-host-seven/receipt.json"
+      ]
+    },
+    {
+      "path": "evidence/runtime-public-host-20261018/bundle-receipt.json",
+      "sha256": "fd022951473ef477391dc42ef779a09e45a1c020f697238d3579a5d9bd7d58f9",
+      "bytes": 1351,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/public-host-evidence-input-v2/bundle-receipt.json"
+      ]
+    },
+    {
+      "path": "evidence/runtime-public-host-20261018/check_object_adapter_progress_receiver_20261017.py.stderr.log.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/proof/public-host-seven/check_object_adapter_progress_receiver_20261017.py.stderr.log"
+      ]
+    },
+    {
+      "path": "evidence/runtime-public-host-20261018/check_object_adapter_progress_receiver_20261017.py.stdout.log.txt",
+      "sha256": "82dbc035a38e4a86751d13a1c5abc677b9d5c4cc6e33334e0e6b58032a3a917c",
+      "bytes": 133,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/proof/public-host-seven/check_object_adapter_progress_receiver_20261017.py.stdout.log"
+      ]
+    },
+    {
+      "path": "evidence/runtime-public-host-20261018/m3jdk21-functional-doclint-maven.stderr.log.txt",
+      "sha256": "1b9010f3ee76d9299c23d33a008e23fde33424e267614ab416c262a38d66483f",
+      "bytes": 106,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/proof/public-host-seven/m3jdk21-functional-doclint-maven.stderr.log"
+      ]
+    },
+    {
+      "path": "evidence/runtime-public-host-20261018/m3jdk21-functional-doclint-maven.stdout.log.txt",
+      "sha256": "c4e743bfd6935272503b8f3f9bd8ac4abcb17d022f40dab6405ac0fd866b4f3b",
+      "bytes": 2999,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/proof/public-host-seven/m3jdk21-functional-doclint-maven.stdout.log"
+      ]
+    },
+    {
+      "path": "evidence/runtime-public-host-20261018/m3jdk21-functional-doclint/SDK_INPUTS.tsv",
+      "sha256": "4224229fa706e5c997201b3d8ed615d27f59586c1aef3f302c41087cd081909e",
+      "bytes": 4057,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/m3/arrays/qualification/empty-segments-20261017/recipe-custody/target/m3jdk21-functional-doclint/candidate/SDK_INPUTS.tsv"
+      ]
+    },
+    {
+      "path": "evidence/runtime-public-host-20261018/m3jdk21-functional-doclint/SDK_RESULTS.tsv",
+      "sha256": "fc5ddff42b90ab4fae47fede4c587a6f2b6f3d055f8a5e718b8dcf351ad61578",
+      "bytes": 766,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/m3/arrays/qualification/empty-segments-20261017/recipe-custody/target/m3jdk21-functional-doclint/candidate/SDK_RESULTS.tsv"
+      ]
+    },
+    {
+      "path": "evidence/runtime-public-host-20261018/m3jdk21-functional-doclint/TEST-com.synexia.rewrite.M3TaskRecipeTest.xml",
+      "sha256": "28822dd1e9451efc0a3c4832bb743151d2b96907437172ccbb13550f03721147",
+      "bytes": 14533,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/m3/arrays/qualification/empty-segments-20261017/recipe-custody/target/m3jdk21-functional-doclint/surefire-reports/TEST-com.synexia.rewrite.M3TaskRecipeTest.xml"
+      ]
+    },
+    {
+      "path": "evidence/runtime-public-host-20261018/m3jdk21-functional-doclint/com.synexia.rewrite.M3TaskRecipeTest.txt",
+      "sha256": "97b2587b7485cdd60934709667ff74be686adc0b02c25609cd30ea17ce411cdd",
+      "bytes": 322,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/m3/arrays/qualification/empty-segments-20261017/recipe-custody/target/m3jdk21-functional-doclint/surefire-reports/com.synexia.rewrite.M3TaskRecipeTest.txt"
+      ]
+    },
+    {
+      "path": "evidence/runtime-public-host-20261018/m3jdk21-functional-doclint/receiver-traces.json",
+      "sha256": "a3b20b031c50d516c139517b80dce46fa414004c9de1bd3d7965a9710ec6398d",
+      "bytes": 12453,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/public-host-evidence-input-v2/m3jdk21-functional-doclint-receiver-traces.json"
+      ]
+    },
+    {
+      "path": "evidence/runtime-public-host-20261018/m3jdk21-native-feature-guard-maven.stderr.log.txt",
+      "sha256": "489d8fec4214192d21ef621f802a943fb57007a29204410d590ff3ceb58c5003",
+      "bytes": 106,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/proof/public-host-seven/m3jdk21-native-feature-guard-maven.stderr.log"
+      ]
+    },
+    {
+      "path": "evidence/runtime-public-host-20261018/m3jdk21-native-feature-guard-maven.stdout.log.txt",
+      "sha256": "9f731c02a0b09e03b18e436679986eb860421c6ba8563935cd0e88d84d17d2c9",
+      "bytes": 3007,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/proof/public-host-seven/m3jdk21-native-feature-guard-maven.stdout.log"
+      ]
+    },
+    {
+      "path": "evidence/runtime-public-host-20261018/m3jdk21-native-feature-guard/SDK_INPUTS.tsv",
+      "sha256": "cafbf9660b30eb38f02dc7145a9ecee42b31c592392ae77a66646ba9d202a70d",
+      "bytes": 2583,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/m3/arrays/qualification/empty-segments-20261017/recipe-custody/target/m3jdk21-native-feature-guard/candidate/SDK_INPUTS.tsv"
+      ]
+    },
+    {
+      "path": "evidence/runtime-public-host-20261018/m3jdk21-native-feature-guard/SDK_RESULTS.tsv",
+      "sha256": "e66bcb8112ade2a561cdcd48eda080c318ee51ad46db826490b505f519f06a49",
+      "bytes": 249,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/m3/arrays/qualification/empty-segments-20261017/recipe-custody/target/m3jdk21-native-feature-guard/candidate/SDK_RESULTS.tsv"
+      ]
+    },
+    {
+      "path": "evidence/runtime-public-host-20261018/m3jdk21-native-feature-guard/TEST-com.synexia.rewrite.M3TaskRecipeTest.xml",
+      "sha256": "f4451cbafb5dd0bec2bc268109b6dda26aad3eb7f08198f519117452389ac734",
+      "bytes": 14554,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/m3/arrays/qualification/empty-segments-20261017/recipe-custody/target/m3jdk21-native-feature-guard/surefire-reports/TEST-com.synexia.rewrite.M3TaskRecipeTest.xml"
+      ]
+    },
+    {
+      "path": "evidence/runtime-public-host-20261018/m3jdk21-native-feature-guard/com.synexia.rewrite.M3TaskRecipeTest.txt",
+      "sha256": "51fc21a52ff84e759c017fc4761a229f28e8ca39477896865ab38d044fc6ad64",
+      "bytes": 322,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/m3/arrays/qualification/empty-segments-20261017/recipe-custody/target/m3jdk21-native-feature-guard/surefire-reports/com.synexia.rewrite.M3TaskRecipeTest.txt"
+      ]
+    },
+    {
+      "path": "evidence/runtime-public-host-20261018/m3jdk21-native-feature-guard/receiver-traces.json",
+      "sha256": "3dc278ee199b8ff0ab8771889f87d1994ffc1e1d12396526415b1fa6482f95fb",
+      "bytes": 12495,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/public-host-evidence-input-v2/m3jdk21-native-feature-guard-receiver-traces.json"
+      ]
+    },
+    {
+      "path": "evidence/runtime-public-host-20261018/m3jdk21-object-vtable-maven.stderr.log.txt",
+      "sha256": "d1737db24da81b3c3a0b18702ce65bfadfb6524254e681f8bc84ee0e82703fbb",
+      "bytes": 106,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/proof/public-host-seven/m3jdk21-object-vtable-maven.stderr.log"
+      ]
+    },
+    {
+      "path": "evidence/runtime-public-host-20261018/m3jdk21-object-vtable-maven.stdout.log.txt",
+      "sha256": "4be879ee26d8371871a76d1f15a509e6f5c3db85ca7ff71b5d1a329b1c684388",
+      "bytes": 2972,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/proof/public-host-seven/m3jdk21-object-vtable-maven.stdout.log"
+      ]
+    },
+    {
+      "path": "evidence/runtime-public-host-20261018/m3jdk21-object-vtable/SDK_INPUTS.tsv",
+      "sha256": "46a1f6b7c3be8e0969e53ed18ae04641350a27bc991ae131f1dc82b6913f8b87",
+      "bytes": 2490,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/m3/arrays/qualification/empty-segments-20261017/recipe-custody/target/m3jdk21-object-vtable/candidate/SDK_INPUTS.tsv"
+      ]
+    },
+    {
+      "path": "evidence/runtime-public-host-20261018/m3jdk21-object-vtable/SDK_RESULTS.tsv",
+      "sha256": "641a4ade4989a6fc3bb5295280c3b1b772c3e2a74f48670e03c344b526b0dada",
+      "bytes": 234,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/m3/arrays/qualification/empty-segments-20261017/recipe-custody/target/m3jdk21-object-vtable/candidate/SDK_RESULTS.tsv"
+      ]
+    },
+    {
+      "path": "evidence/runtime-public-host-20261018/m3jdk21-object-vtable/TEST-com.synexia.rewrite.M3TaskRecipeTest.xml",
+      "sha256": "fe8f009b379c421aac5bc5bb2c5411e17a57bbc75db50caf3c3c9460cd10bc95",
+      "bytes": 14476,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/m3/arrays/qualification/empty-segments-20261017/recipe-custody/target/m3jdk21-object-vtable/surefire-reports/TEST-com.synexia.rewrite.M3TaskRecipeTest.xml"
+      ]
+    },
+    {
+      "path": "evidence/runtime-public-host-20261018/m3jdk21-object-vtable/com.synexia.rewrite.M3TaskRecipeTest.txt",
+      "sha256": "a12dd44b87316ac1bd43484b90dd6e94f3d22a61b65ce21b1f052399190746fb",
+      "bytes": 322,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/m3/arrays/qualification/empty-segments-20261017/recipe-custody/target/m3jdk21-object-vtable/surefire-reports/com.synexia.rewrite.M3TaskRecipeTest.txt"
+      ]
+    },
+    {
+      "path": "evidence/runtime-public-host-20261018/m3jdk21-object-vtable/receiver-traces.json",
+      "sha256": "976d5c00023deaecf3336fe6f8a0ad4f60aeb8cb27169419f015f5f0240d6695",
+      "bytes": 12238,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/public-host-evidence-input-v2/m3jdk21-object-vtable-receiver-traces.json"
+      ]
+    },
+    {
+      "path": "evidence/runtime-public-host-20261018/m3jdk21-progress-doclint-maven.stderr.log.txt",
+      "sha256": "2e7e95d82618f1ea08b0a24d61f374c3b161fb04ee47113d6baab1ebd15ac0a2",
+      "bytes": 106,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/proof/public-host-seven/m3jdk21-progress-doclint-maven.stderr.log"
+      ]
+    },
+    {
+      "path": "evidence/runtime-public-host-20261018/m3jdk21-progress-doclint-maven.stdout.log.txt",
+      "sha256": "167eb93771b2dd9f282fe7f624b8d6e8f3b15cc90e810456a90a72a1451115e1",
+      "bytes": 2989,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/proof/public-host-seven/m3jdk21-progress-doclint-maven.stdout.log"
+      ]
+    },
+    {
+      "path": "evidence/runtime-public-host-20261018/m3jdk21-progress-doclint/SDK_INPUTS.tsv",
+      "sha256": "98470d984edac1fc2f98e7cb3a10b6e6145332389c4a42e9e0f22456676a0d42",
+      "bytes": 6540,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/m3/arrays/qualification/empty-segments-20261017/recipe-custody/target/m3jdk21-progress-doclint/candidate/SDK_INPUTS.tsv"
+      ]
+    },
+    {
+      "path": "evidence/runtime-public-host-20261018/m3jdk21-progress-doclint/SDK_RESULTS.tsv",
+      "sha256": "69c4e3e8a7f20bf0279e5fb87a3715d2d7004ef766ad5540da95b465c449c1e9",
+      "bytes": 1755,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/m3/arrays/qualification/empty-segments-20261017/recipe-custody/target/m3jdk21-progress-doclint/candidate/SDK_RESULTS.tsv"
+      ]
+    },
+    {
+      "path": "evidence/runtime-public-host-20261018/m3jdk21-progress-doclint/TEST-com.synexia.rewrite.M3TaskRecipeTest.xml",
+      "sha256": "8b107509798e821a3a26b41452edd267d09b8e010ea40549dc908aaa3e1551a7",
+      "bytes": 14513,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/m3/arrays/qualification/empty-segments-20261017/recipe-custody/target/m3jdk21-progress-doclint/surefire-reports/TEST-com.synexia.rewrite.M3TaskRecipeTest.xml"
+      ]
+    },
+    {
+      "path": "evidence/runtime-public-host-20261018/m3jdk21-progress-doclint/com.synexia.rewrite.M3TaskRecipeTest.txt",
+      "sha256": "84a2743ae10518a65a8c6b013859adf48ba72c382f4b523c4905b29e95077a13",
+      "bytes": 322,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/m3/arrays/qualification/empty-segments-20261017/recipe-custody/target/m3jdk21-progress-doclint/surefire-reports/com.synexia.rewrite.M3TaskRecipeTest.txt"
+      ]
+    },
+    {
+      "path": "evidence/runtime-public-host-20261018/m3jdk21-progress-doclint/receiver-traces.json",
+      "sha256": "5c843f42847185ee8d8678b8659846fd13a6e27f114bb8fdbef2d5b472059af0",
+      "bytes": 12451,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/public-host-evidence-input-v2/m3jdk21-progress-doclint-receiver-traces.json"
+      ]
+    },
+    {
+      "path": "evidence/runtime-public-host-20261018/m3jdk21-progress-scope-lint-maven.stderr.log.txt",
+      "sha256": "a7083af566e86cbe22772151b6fca3f8ebd5e54b15b65a53b075122112189e1f",
+      "bytes": 106,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/proof/public-host-seven/m3jdk21-progress-scope-lint-maven.stderr.log"
+      ]
+    },
+    {
+      "path": "evidence/runtime-public-host-20261018/m3jdk21-progress-scope-lint-maven.stdout.log.txt",
+      "sha256": "a8841483e02da7cb6dfb16d4b3fb9d5fd3c2f758cedb44f74f1cd305fde71a95",
+      "bytes": 3004,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/proof/public-host-seven/m3jdk21-progress-scope-lint-maven.stdout.log"
+      ]
+    },
+    {
+      "path": "evidence/runtime-public-host-20261018/m3jdk21-progress-scope-lint/SDK_INPUTS.tsv",
+      "sha256": "acce557c0352d02cc00aaad0ff67621909f0499a79899e7691ae595a6921a389",
+      "bytes": 4592,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/m3/arrays/qualification/empty-segments-20261017/recipe-custody/target/m3jdk21-progress-scope-lint/candidate/SDK_INPUTS.tsv"
+      ]
+    },
+    {
+      "path": "evidence/runtime-public-host-20261018/m3jdk21-progress-scope-lint/SDK_RESULTS.tsv",
+      "sha256": "e12d3a10029a8e9c472f12a3346e453573637aadbf29d372033ca4b60171a8bf",
+      "bytes": 959,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/m3/arrays/qualification/empty-segments-20261017/recipe-custody/target/m3jdk21-progress-scope-lint/candidate/SDK_RESULTS.tsv"
+      ]
+    },
+    {
+      "path": "evidence/runtime-public-host-20261018/m3jdk21-progress-scope-lint/TEST-com.synexia.rewrite.M3TaskRecipeTest.xml",
+      "sha256": "2442c0fef3d6731c02dc2046033710ccba54745fab42883c2e50f0e5b8dfa382",
+      "bytes": 14544,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/m3/arrays/qualification/empty-segments-20261017/recipe-custody/target/m3jdk21-progress-scope-lint/surefire-reports/TEST-com.synexia.rewrite.M3TaskRecipeTest.xml"
+      ]
+    },
+    {
+      "path": "evidence/runtime-public-host-20261018/m3jdk21-progress-scope-lint/com.synexia.rewrite.M3TaskRecipeTest.txt",
+      "sha256": "a65d850ac6584d47841e6be2160060e0384ff34db4824597cefed1f29d94a45d",
+      "bytes": 322,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/m3/arrays/qualification/empty-segments-20261017/recipe-custody/target/m3jdk21-progress-scope-lint/surefire-reports/com.synexia.rewrite.M3TaskRecipeTest.txt"
+      ]
+    },
+    {
+      "path": "evidence/runtime-public-host-20261018/m3jdk21-progress-scope-lint/receiver-traces.json",
+      "sha256": "285241a4d7c221b90c111d6d42f119487275af1bf6b9db50350d9ec18185c15e",
+      "bytes": 12479,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/public-host-evidence-input-v2/m3jdk21-progress-scope-lint-receiver-traces.json"
+      ]
+    },
+    {
+      "path": "evidence/runtime-public-host-20261018/m3jdk21-runtime-control-maven.stderr.log.txt",
+      "sha256": "2e7e95d82618f1ea08b0a24d61f374c3b161fb04ee47113d6baab1ebd15ac0a2",
+      "bytes": 106,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/proof/public-host-seven/m3jdk21-runtime-control-maven.stderr.log"
+      ]
+    },
+    {
+      "path": "evidence/runtime-public-host-20261018/m3jdk21-runtime-control-maven.stdout.log.txt",
+      "sha256": "110419636f58751eab721b28af235ae4935aa6def5a838e59147f863a7b006d7",
+      "bytes": 2985,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/proof/public-host-seven/m3jdk21-runtime-control-maven.stdout.log"
+      ]
+    },
+    {
+      "path": "evidence/runtime-public-host-20261018/m3jdk21-runtime-control/SDK_INPUTS.tsv",
+      "sha256": "561c029b02c87b41777c738b503c9650f02722b26ba1446f9cdae1a5eae13f9e",
+      "bytes": 5866,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/m3/arrays/qualification/empty-segments-20261017/recipe-custody/target/m3jdk21-runtime-control/candidate/SDK_INPUTS.tsv"
+      ]
+    },
+    {
+      "path": "evidence/runtime-public-host-20261018/m3jdk21-runtime-control/SDK_RESULTS.tsv",
+      "sha256": "06757e5790dbac3e96781519ed304c92e9f1d476bb48494877182cd0ede2ccc7",
+      "bytes": 1572,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/m3/arrays/qualification/empty-segments-20261017/recipe-custody/target/m3jdk21-runtime-control/candidate/SDK_RESULTS.tsv"
+      ]
+    },
+    {
+      "path": "evidence/runtime-public-host-20261018/m3jdk21-runtime-control/TEST-com.synexia.rewrite.M3TaskRecipeTest.xml",
+      "sha256": "0567842c3152e74df597b603e0fc591fa55b4b2658769a07e8fdd96ccd39de8e",
+      "bytes": 14499,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/m3/arrays/qualification/empty-segments-20261017/recipe-custody/target/m3jdk21-runtime-control/surefire-reports/TEST-com.synexia.rewrite.M3TaskRecipeTest.xml"
+      ]
+    },
+    {
+      "path": "evidence/runtime-public-host-20261018/m3jdk21-runtime-control/com.synexia.rewrite.M3TaskRecipeTest.txt",
+      "sha256": "575e5b9631dd5531212f55c39c378d5d5146830248aec7f3f7b380a3b93b9883",
+      "bytes": 322,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/m3/arrays/qualification/empty-segments-20261017/recipe-custody/target/m3jdk21-runtime-control/surefire-reports/com.synexia.rewrite.M3TaskRecipeTest.txt"
+      ]
+    },
+    {
+      "path": "evidence/runtime-public-host-20261018/m3jdk21-runtime-control/receiver-traces.json",
+      "sha256": "44042b381a42c311c4406083720d6def3e4c02e1784456f972124b395be961f5",
+      "bytes": 12367,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/public-host-evidence-input-v2/m3jdk21-runtime-control-receiver-traces.json"
+      ]
+    },
+    {
+      "path": "evidence/runtime-public-host-20261018/m3jdk21-strings-doclint-maven.stderr.log.txt",
+      "sha256": "988ce78dcbc6ad958a909868f1540f1f8e04035fd67fb203dd52fc889230c6b1",
+      "bytes": 106,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/proof/public-host-seven/m3jdk21-strings-doclint-maven.stderr.log"
+      ]
+    },
+    {
+      "path": "evidence/runtime-public-host-20261018/m3jdk21-strings-doclint-maven.stdout.log.txt",
+      "sha256": "393f2747e92fbe069589890fec1ac65488d7053114fce8d0975cb6ec432f4826",
+      "bytes": 2983,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/proof/public-host-seven/m3jdk21-strings-doclint-maven.stdout.log"
+      ]
+    },
+    {
+      "path": "evidence/runtime-public-host-20261018/m3jdk21-strings-doclint/SDK_INPUTS.tsv",
+      "sha256": "b7bb02d9c1da6c5112046ae3d765ad97af97a4401916c4791d6daca5ba2b23f8",
+      "bytes": 2506,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/m3/arrays/qualification/empty-segments-20261017/recipe-custody/target/m3jdk21-strings-doclint/candidate/SDK_INPUTS.tsv"
+      ]
+    },
+    {
+      "path": "evidence/runtime-public-host-20261018/m3jdk21-strings-doclint/SDK_RESULTS.tsv",
+      "sha256": "7759d98ac2c7ccd2ae9dc606152e2b713088a82e2d520ce483d3a5540039ce0c",
+      "bytes": 241,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/m3/arrays/qualification/empty-segments-20261017/recipe-custody/target/m3jdk21-strings-doclint/candidate/SDK_RESULTS.tsv"
+      ]
+    },
+    {
+      "path": "evidence/runtime-public-host-20261018/m3jdk21-strings-doclint/TEST-com.synexia.rewrite.M3TaskRecipeTest.xml",
+      "sha256": "3e47e6143f20d1dd66fb950a24a387bdfa0a4dfd0ab62d829cfa65d87e78e174",
+      "bytes": 14498,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/m3/arrays/qualification/empty-segments-20261017/recipe-custody/target/m3jdk21-strings-doclint/surefire-reports/TEST-com.synexia.rewrite.M3TaskRecipeTest.xml"
+      ]
+    },
+    {
+      "path": "evidence/runtime-public-host-20261018/m3jdk21-strings-doclint/com.synexia.rewrite.M3TaskRecipeTest.txt",
+      "sha256": "394c3141693613575d754a7de483209b1a30917752baad87cafb0e64f0289954",
+      "bytes": 322,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/m3/arrays/qualification/empty-segments-20261017/recipe-custody/target/m3jdk21-strings-doclint/surefire-reports/com.synexia.rewrite.M3TaskRecipeTest.txt"
+      ]
+    },
+    {
+      "path": "evidence/runtime-public-host-20261018/m3jdk21-strings-doclint/receiver-traces.json",
+      "sha256": "b54276f220623d9633908a03630b4f262ab96bcc542839b84b348871671e32b3",
+      "bytes": 12325,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/public-host-evidence-input-v2/m3jdk21-strings-doclint-receiver-traces.json"
+      ]
+    },
+    {
+      "path": "evidence/runtime-public-host-20261018/test_object_adapter_progress_receiver_20261018.py.stderr.log.txt",
+      "sha256": "e13d1397892b8f6c6dcfe4ee87391deb822f424fc353127d0da3a5cc6d7a580a",
+      "bytes": 130,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/proof/public-host-seven/test_object_adapter_progress_receiver_20261018.py.stderr.log"
+      ]
+    },
+    {
+      "path": "evidence/runtime-public-host-20261018/test_object_adapter_progress_receiver_20261018.py.stdout.log.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/proof/public-host-seven/test_object_adapter_progress_receiver_20261018.py.stdout.log"
+      ]
+    },
+    {
+      "path": "evidence/runtime-public-host-20261018/verify_m3_default_template_20261017.py.stderr.log.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/proof/public-host-seven/verify_m3_default_template_20261017.py.stderr.log"
+      ]
+    },
+    {
+      "path": "evidence/runtime-public-host-20261018/verify_m3_default_template_20261017.py.stdout.log.txt",
+      "sha256": "c28f27631e805393263d4eeded95fd9a41c81adba33c2133d864547a07ad1bea",
+      "bytes": 188,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/proof/public-host-seven/verify_m3_default_template_20261017.py.stdout.log"
+      ]
+    },
+    {
+      "path": "pom.xml",
+      "sha256": "4c90faaa9e64aebeeba14fb2196731c6334293781d0fdcafbf190f2f5662eb7d",
+      "bytes": 5855,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/pom.xml"
+      ]
+    }
+  ]
+}

@@ -1491,11 +1491,10 @@ jlong ClassLoader::class_link_time_ms() {
 }
 
 int ClassLoader::compute_Object_vtable() {
-  // hardwired for JDK1.2 -- would need to duplicate class file parsing
-  // code to determine actual value from file
-  // Would be value '11' if finals were in vtable
-  int JDK_1_2_Object_vtable_size = 5;
-  return JDK_1_2_Object_vtable_size * vtableEntry::size();
+  // Object declares five legacy virtual methods and M3's non-final toAdapter.
+  // This count must match java.lang.Object before array klasses are created.
+  const int Object_vtable_size = 6;
+  return Object_vtable_size * vtableEntry::size();
 }
 
 

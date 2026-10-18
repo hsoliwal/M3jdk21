@@ -1,0 +1,803 @@
+diff --git a/m3/backports/ALGORITHM_CATALOGUE.tsv b/m3/backports/ALGORITHM_CATALOGUE.tsv
+index fb595d3..904ad49 100644
+--- a/m3/backports/ALGORITHM_CATALOGUE.tsv
++++ b/m3/backports/ALGORITHM_CATALOGUE.tsv
+@@ -7,3 +7,7 @@ com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe
+ ALG-LEV	FUZZY_SEARCH	LEVENSHTEIN_AUTOMATON	hold-contract	MODULE	NONE	https://leetcode.com/problems/edit-distance/	https://www.hackerrank.com/challenges/basic-spell-checker/problem	https://www.geeksforgeeks.org/dsa/edit-distance-dp-5/	https://github.com/apache/lucene	Apache-2.0	REFERENCE_ONLY	inventory a real JDK owner and fuzzy/string contract before any adaptation
+ ALG-FIB	SEARCH	FIBONACCI_SEARCH	hold-evidence	FILE	NONE	NONE	NONE	https://www.geeksforgeeks.org/dsa/fibonacci-search-in-python/	NONE	NONE	REFERENCE_ONLY	complete LeetCode and HackerRank category evidence before implementation
+ ALG-NUMERIC-COPY-RUNS	ARRAYS	IMMUTABLE_NUMERIC_RANGE_COPY	candidate-adapted	FILE	m3/arrays/src/main/java/com/m3/arrays/M3Arrays.java	https://leetcode.com/problems/range-sum-query-immutable/	https://www.hackerrank.com/challenges/array-left-rotation/problem	https://www.geeksforgeeks.org/dsa/understanding-prefix-sums/	https://github.com/hsoliwal/M3jdk21/blob/4b24824c3aa09d802121447f8970d442a855f064/m3/arrays/src/main/java/com/m3/arrays/M3ArrayNative.java	Apache-2.0	ADAPT_FIRST_PARTY_AND_JDK_API	require matching Maven SDK, range/callback, API, allocation and original Java/JNI receipts; see m3/arrays/qualification/numeric-copy-20261018/CATALOGUE.json
++M3-RUNTIME-VTABLE-COUNT	RUNTIME_BOOTSTRAP	update matched constant to 6	BOUNDED_REPAIR	FILE	ClassLoader::compute_Object_vtable	NOT_APPLICABLE	NOT_APPLICABLE	NOT_APPLICABLE	https://github.com/hsoliwal/M3jdk21/blob/4b24824c3aa09d802121447f8970d442a855f064/src/hotspot/share/classfile/classLoader.cpp	GPL-2.0-only	EXISTING_OWNER_OR_FIRST_PARTY	m3/runtime-integration/runtime-repair-20261018/CATALOGUE.tsv
++M3-PROGRESS-JAVADOC	PUBLIC_API_DOCUMENTATION	Javadoc-only exact snapshots	DOCUMENTATION_ONLY	FILE	8 Runnable/concurrent plus 3 functional progress owners	NOT_APPLICABLE	NOT_APPLICABLE	NOT_APPLICABLE	https://github.com/hsoliwal/M3jdk21/blob/4b24824c3aa09d802121447f8970d442a855f064/make/modules/java.base/Java.gmk	GPL-2.0-only WITH Classpath-exception-2.0	EXISTING_OWNER_OR_FIRST_PARTY	m3/runtime-integration/runtime-repair-20261018/CATALOGUE.tsv
++M3-PROGRESS-MANIFEST-SUCCESSION	SOURCE_IDENTITY_CUSTODY	four byte-pinned manifests with explicit overlap sets	EXPLICIT_SUCCESSOR	FILE	14 current original/template receiver owners	NOT_APPLICABLE	NOT_APPLICABLE	NOT_APPLICABLE	https://github.com/hsoliwal/com.synexia/tree/8f8200375d8d403b58e855ee5db02f2e8fac33a8/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017	Apache-2.0 recipe; target licenses retained	EXISTING_OWNER_OR_FIRST_PARTY	m3/runtime-integration/runtime-repair-20261018/CATALOGUE.tsv
++M3-OBJECT-LEGACY-DISPATCH	API_COMPATIBILITY	frozen Java21 binaries plus candidate compiler witnesses	COMPATIBILITY_HOLD	FILE	Object.toAdapter and existing interface defaults	NOT_APPLICABLE	NOT_APPLICABLE	NOT_APPLICABLE	https://docs.oracle.com/javase/specs/jls/se21/html/jls-9.html#jls-9.4.1.2	Reference only	EXISTING_OWNER_OR_FIRST_PARTY	m3/runtime-integration/runtime-repair-20261018/CATALOGUE.tsv
+diff --git a/m3/compatibility/check_object_adapter_progress_receiver_20261017.py b/m3/compatibility/check_object_adapter_progress_receiver_20261017.py
+index 23384a1..d59e20c 100644
+--- a/m3/compatibility/check_object_adapter_progress_receiver_20261017.py
++++ b/m3/compatibility/check_object_adapter_progress_receiver_20261017.py
+@@ -1,35 +1,158 @@ com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe
+ #!/usr/bin/env python3
+-"""Read-only exact candidate hash verification; not an OpenRewrite execution receipt."""
++# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and contributors
++# SPDX-License-Identifier: Apache-2.0
++"""Read-only current receiver custody; recipe/runtime qualification remains separate."""
+ from __future__ import annotations
++
+ import hashlib
+-from pathlib import Path
++from pathlib import Path, PurePosixPath
++import re
+ 
+ ROOT = Path(__file__).resolve().parents[2]
+-MANIFEST = ROOT / "m3/compatibility/m3-object-adapter-progress-20261017.tsv"
++BASE_MANIFEST = "m3/compatibility/m3-object-adapter-progress-20261017.tsv"
++NEXT_MANIFEST = "m3/compatibility/m3-default-template-source-seal.tsv"
++BASE_MANIFEST_SHA256 = "2f581a791adc7ecf7f217a6276f0da8af424c1e3e49385ca6ae44704d3319c82"
++NEXT_MANIFEST_SHA256 = "c431bf732eb91a289b4bcd0b886db71d43da7d7bb17074cd6116db6b37e73ad6"
++DOCS_MANIFEST = "m3/compatibility/m3-progress-doclint-20261018.tsv"
++DOCS_MANIFEST_SHA256 = "7246c16a0e8ec742eba98dac97e24b7fc3947250ad5d2a22f72ac32dcddf0219"
++FUNCTIONAL_MANIFEST = "m3/compatibility/m3-functional-progress-doclint-20261018.tsv"
++FUNCTIONAL_MANIFEST_SHA256 = "3b62981be6a617b903c559cc31904eca2bffb2b200380f1be57e07a8f634d969"
++FUNCTIONAL = frozenset((
++    "src/java.base/share/classes/java/util/function/Consumer.java",
++    "src/java.base/share/classes/java/util/function/Function.java",
++    "src/java.base/share/classes/java/util/function/Supplier.java",
++))
++DOCUMENTED = frozenset((
++    "src/java.base/share/classes/java/lang/Runnable.java",
++    "src/java.base/share/classes/java/util/concurrent/Callable.java",
++    "src/java.base/share/classes/java/util/concurrent/Executor.java",
++    "src/java.base/share/classes/java/util/concurrent/ExecutorService.java",
++    "src/java.base/share/classes/java/util/concurrent/MonitoredCallable.java",
++    "src/java.base/share/classes/java/util/concurrent/MonitoredRunnable.java",
++    "src/java.base/share/classes/java/util/concurrent/ProgressMonitor.java",
++    "src/java.base/share/classes/java/util/concurrent/ProgressMonitors.java",
++))
++REPLACED = frozenset((
++    "src/java.base/share/classes/java/util/concurrent/Callable.java",
++    "src/java.base/share/classes/java/util/concurrent/ProgressMonitors.java",
++))
++ADDED = frozenset((
++    "src/java.base/share/classes/java/util/concurrent/MonitoredCallable.java",
++    "src/java.base/share/classes/java/util/concurrent/MonitoredRunnable.java",
++    "test/jdk/java/lang/Object/M3MonitoredTemplateTest.java",
++))
+ 
+-def verify() -> int:
+-    lines = MANIFEST.read_text(encoding="utf-8").splitlines()
+-    seen: set[str] = set()
+-    count = 0
+-    for row in lines:
+-        if not row or row.startswith("#"):
++
++def contained_file(root: Path, relative: str) -> Path:
++    """Admit a regular file beneath the caller's receiving root, without symlinks."""
++    part = PurePosixPath(relative)
++    if (not relative or str(part) != relative or part.is_absolute()
++            or ".." in part.parts or ".git" in part.parts or "\\" in relative
++            or any(c in relative for c in "\t\r\n\0")):
++        raise RuntimeError("unsafe receiver path: " + repr(relative))
++    root = root.absolute()
++    if root.is_symlink() or not root.is_dir():
++        raise RuntimeError("receiver root must be a real directory")
++    path = root.joinpath(*part.parts)
++    cursor = path
++    while cursor != root:
++        if cursor.is_symlink():
++            raise RuntimeError("symlink receiver: " + relative)
++        cursor = cursor.parent
++    if not path.is_file() or not path.resolve().is_relative_to(root.resolve()):
++        raise RuntimeError("missing or non-regular receiver: " + relative)
++    return path
++
++
++def read_manifest(root: Path, relative: str, expected: str, count: int):
++    """Keep each historical manifest byte-exact before interpreting its source transitions."""
++    data = contained_file(root, relative).read_bytes()
++    if hashlib.sha256(data).hexdigest() != expected:
++        raise RuntimeError("historical manifest custody drift: " + relative)
++    rows = {}
++    for line in data.decode("utf-8").splitlines():
++        if not line or line.startswith("#"):
+             continue
+-        path, before, after, template = row.split("\t")
+-        assert path.startswith(("src/java.base/share/classes/", "test/jdk/")), path
+-        assert path not in seen, path
+-        assert len(after) == 64 and (before == "ABSENT" or len(before) == 64)
+-        seen.add(path)
+-        file = ROOT / path
+-        if not file.is_file():
+-            raise RuntimeError(f"missing receiver: {path}")
+-        actual = hashlib.sha256(file.read_bytes()).hexdigest()
++        cells = line.split("\t")
++        if len(cells) != 4:
++            raise RuntimeError("invalid manifest row: " + relative)
++        path, before, after, template = cells
++        part = PurePosixPath(path)
++        if (not path.startswith(("src/java.base/share/classes/", "test/jdk/"))
++                or str(part) != path or ".." in part.parts or "\\" in path
++                or path in rows or not re.fullmatch(r"[0-9a-f]{64}", after)
++                or (before != "ABSENT" and not re.fullmatch(r"[0-9a-f]{64}", before))
++                or not template or PurePosixPath(template).name != template):
++            raise RuntimeError("invalid or duplicate manifest target: " + path)
++        rows[path] = (before, after, template)
++    if len(rows) != count:
++        raise RuntimeError("manifest coverage differs: " + relative)
++    return rows
++
++
++def compose_targets(original, successor):
++    """Compose the one published successor; never admit arbitrary old/new mixtures."""
++    if len(original) != 11 or set(successor) != REPLACED | ADDED:
++        raise RuntimeError("unexpected receiver successor closure")
++    if set(original) & set(successor) != REPLACED or set(original) & ADDED:
++        raise RuntimeError("unexpected receiver overlap")
++    current = {path: row[1] for path, row in original.items()}
++    for path in sorted(successor):
++        before, after, _ = successor[path]
++        if path in REPLACED:
++            if before != current[path]:
++                raise RuntimeError("broken historical transition: " + path)
++        elif before != "ABSENT":
++            raise RuntimeError("successor addition was not absent: " + path)
++        current[path] = after
++    if len(current) != 14:
++        raise RuntimeError("current receiver coverage differs")
++    return current
++
++
++def compose_documentation(current, documentation):
++    """Apply only the eight explicitly sealed documentation postimages."""
++    if set(documentation) != DOCUMENTED or not DOCUMENTED.issubset(current):
++        raise RuntimeError("unexpected documentation successor closure")
++    expected = dict(current)
++    for path, (before, after, _) in sorted(documentation.items()):
++        if before != current[path]:
++            raise RuntimeError("broken documentation transition: " + path)
++        expected[path] = after
++    return expected
++
++
++def compose_functional(current, documentation):
++    """Apply only the three explicitly sealed functional Javadoc postimages."""
++    if set(documentation) != FUNCTIONAL or not FUNCTIONAL.issubset(current):
++        raise RuntimeError("unexpected functional successor closure")
++    expected = dict(current)
++    for path, (before, after, _) in sorted(documentation.items()):
++        if before != current[path]:
++            raise RuntimeError("broken functional transition: " + path)
++        expected[path] = after
++    return expected
++
++
++def current_targets(root: Path):
++    original = read_manifest(root, BASE_MANIFEST, BASE_MANIFEST_SHA256, 11)
++    successor = read_manifest(root, NEXT_MANIFEST, NEXT_MANIFEST_SHA256, 5)
++    documentation = read_manifest(root, DOCS_MANIFEST, DOCS_MANIFEST_SHA256, 8)
++    functional = read_manifest(root, FUNCTIONAL_MANIFEST, FUNCTIONAL_MANIFEST_SHA256, 3)
++    return compose_functional(compose_documentation(compose_targets(original, successor), documentation), functional)
++
++
++def verify(root: Path | None = None) -> int:
++    root = ROOT if root is None else Path(root)
++    expected = current_targets(root)
++    for path, after in sorted(expected.items()):
++        actual = hashlib.sha256(contained_file(root, path).read_bytes()).hexdigest()
+         if actual != after:
+             raise RuntimeError(f"source drift: {path}: {actual} != {after}")
+-        count += 1
+-    if count != 11:
+-        raise RuntimeError(f"receiver coverage {count} != 11")
+-    print(f"PASS exact 11-file receiver identity: {count}")
+-    return count
++    print("PASS exact 14-file current receiver identity; historical manifests preserved; "
++          "Object compatibility and runtime admission remain HOLD")
++    return len(expected)
++
+ 
+ if __name__ == "__main__":
+     verify()
+diff --git a/m3/compatibility/test_object_adapter_progress_receiver_20261018.py b/m3/compatibility/test_object_adapter_progress_receiver_20261018.py
+new file mode 100644
+index 0000000..139dd20
+--- /dev/null
++++ b/m3/compatibility/test_object_adapter_progress_receiver_20261018.py
+@@ -0,0 +1,263 @@ com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe
++#!/usr/bin/env python3
++# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and contributors
++# SPDX-License-Identifier: Apache-2.0
++"""Current-source and negative custody tests for the original receiver's explicit successor."""
++from __future__ import annotations
++
++import contextlib
++import hashlib
++import importlib.util
++import io
++from pathlib import Path
++import shutil
++import sys
++import tempfile
++import unittest
++
++sys.dont_write_bytecode = True
++REPOSITORY = Path(__file__).resolve().parents[2]
++SPEC = importlib.util.spec_from_file_location("object_progress_receiver",
++        Path(__file__).with_name("check_object_adapter_progress_receiver_20261017.py"))
++CHECKER = importlib.util.module_from_spec(SPEC)
++SPEC.loader.exec_module(CHECKER)
++TEMPLATE_SPEC = importlib.util.spec_from_file_location("default_template_receiver",
++        Path(__file__).with_name("verify_m3_default_template_20261017.py"))
++TEMPLATE = importlib.util.module_from_spec(TEMPLATE_SPEC)
++TEMPLATE_SPEC.loader.exec_module(TEMPLATE)
++
++
++class ReceiverSuccessorTest(unittest.TestCase):
++    def setUp(self):
++        self.temp = tempfile.TemporaryDirectory(prefix="m3-receiver-successor-")
++        self.root = Path(self.temp.name) / "receiver"
++        self.root.mkdir()
++        self.original = CHECKER.read_manifest(REPOSITORY, CHECKER.BASE_MANIFEST,
++                                               CHECKER.BASE_MANIFEST_SHA256, 11)
++        self.successor = CHECKER.read_manifest(REPOSITORY, CHECKER.NEXT_MANIFEST,
++                                                CHECKER.NEXT_MANIFEST_SHA256, 5)
++        self.documentation = CHECKER.read_manifest(REPOSITORY, CHECKER.DOCS_MANIFEST,
++                                                   CHECKER.DOCS_MANIFEST_SHA256, 8)
++        self.functional = CHECKER.read_manifest(REPOSITORY, CHECKER.FUNCTIONAL_MANIFEST,
++                                                CHECKER.FUNCTIONAL_MANIFEST_SHA256, 3)
++        paths = set(CHECKER.current_targets(REPOSITORY))
++        paths.update((CHECKER.BASE_MANIFEST, CHECKER.NEXT_MANIFEST, CHECKER.DOCS_MANIFEST, CHECKER.FUNCTIONAL_MANIFEST))
++        for relative in paths:
++            destination = self.root / relative
++            destination.parent.mkdir(parents=True, exist_ok=True)
++            shutil.copyfile(REPOSITORY / relative, destination)
++
++    def tearDown(self):
++        self.temp.cleanup()
++
++    def run_check(self):
++        with contextlib.redirect_stdout(io.StringIO()) as output:
++            count = CHECKER.verify(self.root)
++        return count, output.getvalue()
++
++    def test_complete_current_receiver_passes(self):
++        count, output = self.run_check()
++        self.assertEqual(14, count)
++        self.assertIn("Object compatibility and runtime admission remain HOLD", output)
++
++    def test_verifier_does_not_write_sources_or_manifests(self):
++        before = {p.relative_to(self.root): (p.read_bytes(), p.stat().st_mtime_ns)
++                  for p in self.root.rglob("*") if p.is_file()}
++        self.run_check()
++        self.assertEqual(before, {p.relative_to(self.root): (p.read_bytes(), p.stat().st_mtime_ns)
++                                 for p in self.root.rglob("*") if p.is_file()})
++
++    def test_both_replaced_owners_reject_arbitrary_drift(self):
++        for relative in sorted(CHECKER.REPLACED):
++            with self.subTest(path=relative):
++                path = self.root / relative
++                before = path.read_bytes()
++                path.write_bytes(before + b"\n// unexpected source\n")
++                with self.assertRaisesRegex(RuntimeError, "source drift"):
++                    self.run_check()
++                path.write_bytes(before)
++
++    def test_unchanged_original_owner_still_required(self):
++        (self.root / "src/java.base/share/classes/java/lang/Object.java").write_text("class Object {}\n")
++        with self.assertRaisesRegex(RuntimeError, "source drift"):
++            self.run_check()
++
++    def test_every_successor_addition_is_required(self):
++        for relative in sorted(CHECKER.ADDED):
++            with self.subTest(path=relative):
++                path = self.root / relative
++                before = path.read_bytes()
++                path.unlink()
++                with self.assertRaisesRegex(RuntimeError, "missing"):
++                    self.run_check()
++                path.write_bytes(before)
++
++    def test_historical_manifests_cannot_be_resealed_silently(self):
++        for relative in (CHECKER.BASE_MANIFEST, CHECKER.NEXT_MANIFEST, CHECKER.DOCS_MANIFEST, CHECKER.FUNCTIONAL_MANIFEST):
++            with self.subTest(path=relative):
++                path = self.root / relative
++                before = path.read_bytes()
++                path.write_bytes(before + b"# rewritten history\n")
++                with self.assertRaisesRegex(RuntimeError, "historical manifest custody drift"):
++                    self.run_check()
++                path.write_bytes(before)
++
++    def test_missing_successor_manifest_refuses(self):
++        (self.root / CHECKER.NEXT_MANIFEST).unlink()
++        with self.assertRaisesRegex(RuntimeError, "missing"):
++            self.run_check()
++
++    def test_exact_content_symlink_is_not_admitted(self):
++        path = self.root / "src/java.base/share/classes/java/lang/Object.java"
++        outside = Path(self.temp.name) / "Object.java"
++        outside.write_bytes(path.read_bytes())
++        path.unlink()
++        path.symlink_to(outside)
++        with self.assertRaisesRegex(RuntimeError, "symlink"):
++            self.run_check()
++
++    def test_symlink_parent_is_not_admitted(self):
++        directory = self.root / "src/java.base/share/classes/java/lang"
++        outside = Path(self.temp.name) / "lang"
++        directory.rename(outside)
++        directory.symlink_to(outside, target_is_directory=True)
++        with self.assertRaisesRegex(RuntimeError, "symlink"):
++            self.run_check()
++
++    def test_unrelated_repository_files_do_not_widen_scope(self):
++        (self.root / "unrelated.txt").write_text("not a receiver owner\n")
++        self.assertEqual(14, self.run_check()[0])
++
++    def fixture_manifest(self, lines, count):
++        path = self.root / "fixture.tsv"
++        data = ("\n".join(lines) + "\n").encode()
++        path.write_bytes(data)
++        return CHECKER.read_manifest(self.root, "fixture.tsv", hashlib.sha256(data).hexdigest(), count)
++
++    def test_manifest_duplicate_and_unsafe_paths_refuse(self):
++        row = "src/java.base/share/classes/A.java\tABSENT\t" + "a" * 64 + "\ta.txt"
++        with self.assertRaisesRegex(RuntimeError, "duplicate"):
++            self.fixture_manifest([row, row], 2)
++        for path in ("src/java.base/share/classes/../A.java", "test/jdk/../A.java", "/A.java"):
++            with self.subTest(path=path), self.assertRaisesRegex(RuntimeError, "invalid"):
++                self.fixture_manifest([path + "\tABSENT\t" + "a" * 64 + "\ta.txt"], 1)
++
++    def test_manifest_shape_hash_and_coverage_refuse(self):
++        for line in ("only\ttwo", "test/jdk/A.java\tBAD\t" + "a" * 64 + "\ta.txt",
++                     "test/jdk/A.java\tABSENT\tbad\ta.txt",
++                     "test/jdk/A.java\tABSENT\t" + "a" * 64 + "\t../a.txt"):
++            with self.subTest(line=line), self.assertRaisesRegex(RuntimeError, "invalid"):
++                self.fixture_manifest([line], 1)
++        with self.assertRaisesRegex(RuntimeError, "coverage"):
++            self.fixture_manifest(["test/jdk/A.java\tABSENT\t" + "a" * 64 + "\ta.txt"], 2)
++
++    def test_successor_must_start_at_the_published_postimage(self):
++        next_rows = dict(self.successor)
++        path = sorted(CHECKER.REPLACED)[0]
++        _, after, template = next_rows[path]
++        next_rows[path] = ("f" * 64, after, template)
++        with self.assertRaisesRegex(RuntimeError, "broken historical transition"):
++            CHECKER.compose_targets(self.original, next_rows)
++
++    def test_additions_must_be_explicitly_absent_before(self):
++        next_rows = dict(self.successor)
++        path = sorted(CHECKER.ADDED)[0]
++        _, after, template = next_rows[path]
++        next_rows[path] = ("f" * 64, after, template)
++        with self.assertRaisesRegex(RuntimeError, "not absent"):
++            CHECKER.compose_targets(self.original, next_rows)
++
++    def test_unknown_successor_owner_refuses(self):
++        next_rows = dict(self.successor)
++        next_rows["test/jdk/Unknown.java"] = ("ABSENT", "a" * 64, "unknown.txt")
++        with self.assertRaisesRegex(RuntimeError, "successor closure"):
++            CHECKER.compose_targets(self.original, next_rows)
++
++    def test_missing_original_overlap_refuses(self):
++        original = dict(self.original)
++        original["test/jdk/Unexpected.java"] = original.pop(sorted(CHECKER.REPLACED)[0])
++        with self.assertRaisesRegex(RuntimeError, "overlap"):
++            CHECKER.compose_targets(original, self.successor)
++
++    def test_documentation_must_follow_the_current_published_source(self):
++        rows = dict(self.documentation)
++        path = sorted(CHECKER.DOCUMENTED)[0]
++        _, after, template = rows[path]
++        rows[path] = ("f" * 64, after, template)
++        with self.assertRaisesRegex(RuntimeError, "broken documentation transition"):
++            CHECKER.compose_documentation(CHECKER.compose_targets(self.original, self.successor), rows)
++
++    def test_documentation_cannot_add_an_arbitrary_owner(self):
++        rows = dict(self.documentation)
++        rows["test/jdk/Unexpected.java"] = rows.pop(sorted(rows)[0])
++        with self.assertRaisesRegex(RuntimeError, "documentation successor closure"):
++            CHECKER.compose_documentation(CHECKER.compose_targets(self.original, self.successor), rows)
++
++    def test_each_documented_owner_rejects_source_drift(self):
++        for relative in sorted(CHECKER.DOCUMENTED):
++            with self.subTest(path=relative):
++                path = self.root / relative
++                before = path.read_bytes()
++                path.write_bytes(before + b"\n// unqualified documentation change\n")
++                with self.assertRaisesRegex(RuntimeError, "source drift"):
++                    self.run_check()
++                path.write_bytes(before)
++
++    def test_default_template_checker_accepts_the_exact_successor(self):
++        with contextlib.redirect_stdout(io.StringIO()) as output:
++            self.assertEqual(5, TEMPLATE.run(self.root))
++        self.assertIn("PASS 5 exact current M3 Java/template receiver digests", output.getvalue())
++        self.assertIn("remain HOLD", output.getvalue())
++
++    def test_default_template_checker_rejects_each_owner_drift(self):
++        for relative in sorted(CHECKER.REPLACED | CHECKER.ADDED):
++            with self.subTest(path=relative):
++                path = self.root / relative
++                before = path.read_bytes()
++                path.write_bytes(before + b"\n// drift\n")
++                with self.assertRaisesRegex(RuntimeError, "source drift"):
++                    TEMPLATE.run(self.root)
++                path.write_bytes(before)
++
++    def test_default_template_checker_requires_documentation_manifest(self):
++        (self.root / CHECKER.DOCS_MANIFEST).unlink()
++        with self.assertRaisesRegex(RuntimeError, "missing"):
++            TEMPLATE.run(self.root)
++
++    def test_default_template_checker_preserves_original_manifest_custody(self):
++        path = self.root / CHECKER.NEXT_MANIFEST
++        path.write_bytes(path.read_bytes() + b"# unqualified amendment\n")
++        with self.assertRaisesRegex(RuntimeError, "historical manifest custody drift"):
++            TEMPLATE.run(self.root)
++
++    def test_functional_documentation_must_follow_the_exact_current_source(self):
++        rows = dict(self.functional)
++        path = sorted(CHECKER.FUNCTIONAL)[0]
++        _, after, template = rows[path]
++        rows[path] = ("f" * 64, after, template)
++        with self.assertRaisesRegex(RuntimeError, "broken functional transition"):
++            CHECKER.compose_functional(CHECKER.current_targets(REPOSITORY), rows)
++
++    def test_functional_documentation_cannot_add_an_arbitrary_owner(self):
++        rows = dict(self.functional)
++        rows["test/jdk/Unexpected.java"] = rows.pop(sorted(rows)[0])
++        with self.assertRaisesRegex(RuntimeError, "functional successor closure"):
++            CHECKER.compose_functional(CHECKER.current_targets(REPOSITORY), rows)
++
++    def test_each_functional_owner_rejects_source_drift(self):
++        for relative in sorted(CHECKER.FUNCTIONAL):
++            with self.subTest(path=relative):
++                path = self.root / relative
++                before = path.read_bytes()
++                path.write_bytes(before + b"\n// unqualified functional change\n")
++                with self.assertRaisesRegex(RuntimeError, "source drift"):
++                    self.run_check()
++                path.write_bytes(before)
++
++    def test_default_template_checker_requires_functional_manifest(self):
++        (self.root / CHECKER.FUNCTIONAL_MANIFEST).unlink()
++        with self.assertRaisesRegex(RuntimeError, "missing"):
++            TEMPLATE.run(self.root)
++
++
++if __name__ == "__main__":
++    unittest.main()
+diff --git a/m3/compatibility/verify_m3_default_template_20261017.py b/m3/compatibility/verify_m3_default_template_20261017.py
+index 94340b0..a81b2ae 100644
+--- a/m3/compatibility/verify_m3_default_template_20261017.py
++++ b/m3/compatibility/verify_m3_default_template_20261017.py
+@@ -1,28 +1,29 @@ com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe
+ #!/usr/bin/env python3
+-"""Fail-closed exact M3 source receiver digest check. Does not run OpenRewrite or jtreg."""
+-import hashlib
++# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and contributors
++# SPDX-License-Identifier: Apache-2.0
++"""Read-only default-template custody composed with the sealed documentation successor."""
++import importlib.util
+ from pathlib import Path
++import sys
+ 
++sys.dont_write_bytecode = True
+ ROOT = Path(__file__).resolve().parents[2]
+ MANIFEST = ROOT / "m3/compatibility/m3-default-template-source-seal.tsv"
++SPEC = importlib.util.spec_from_file_location("m3_progress_receiver_custody",
++        Path(__file__).with_name("check_object_adapter_progress_receiver_20261017.py"))
++CHECKER = importlib.util.module_from_spec(SPEC)
++SPEC.loader.exec_module(CHECKER)
+ 
+-def run():
+-    seen = set()
+-    for raw in MANIFEST.read_text(encoding="utf-8").splitlines():
+-        if not raw or raw.startswith("#"):
+-            continue
+-        path, before, after, template = raw.split("\t")
+-        if path in seen or not path.startswith(("src/java.base/share/classes/", "test/jdk/")):
+-            raise ValueError("unexpected/duplicate source: " + path)
+-        if len(after) != 64 or (before != "ABSENT" and len(before) != 64):
+-            raise ValueError("unsealed source: " + path)
+-        expected = hashlib.sha256((ROOT / path).read_bytes()).hexdigest()
+-        if expected != after:
+-            raise AssertionError(path + ": " + expected + " != " + after)
+-        seen.add(path)
+-    if len(seen) != 5:
+-        raise AssertionError("expected five source-sealed Java files")
+-    print("PASS 5 exact M3 Java/template receiver digests")
++
++def run(root=None):
++    """Retain the five template owners within the exact 14-file current closure."""
++    receiver = ROOT if root is None else Path(root)
++    CHECKER.verify(receiver)
++    # The shared verifier pins the original five-row manifest and proves each
++    # before-to-after transition before checking the current source bytes.
++    print("PASS 5 exact current M3 Java/template receiver digests")
++    return 5
++
+ 
+ if __name__ == "__main__":
+     run()
+diff --git a/m3/docs/name-mapping.json b/m3/docs/name-mapping.json
+index 4f5911d..2ae8afb 100644
+--- a/m3/docs/name-mapping.json
++++ b/m3/docs/name-mapping.json
+@@ -613,6 +613,113 @@ com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe
+       "receiver_test": "test/jdk/java/util/HashMap/M3HashMapBulkCopyTest.java",
+       "status": "candidate backport installed on draft branch; java.base patch testing and target runtime/jtreg gates pending; String-first receiving priority unchanged",
+       "target_rule": "Preserve public Map contracts and fallback for nonexact HashMap source types; no Synexia runtime dependency, no new M3 payload owner or native ABI."
++    },
++    {
++      "recipe": "com.synexia.m3jdk.CollectionsContractRefinement20261017",
++      "recipe_datasets": [
++        "m3jdk21-object-vtable",
++        "m3jdk21-progress-doclint",
++        "m3jdk21-functional-doclint",
++        "m3jdk21-runtime-control"
++      ],
++      "canonical_recipe_repository": "hsoliwal/com.synexia",
++      "catalogue": "m3/runtime-integration/runtime-repair-20261018/CATALOGUE.tsv",
++      "receiving_baseline": "4b24824c3aa09d802121447f8970d442a855f064",
++      "phase_rule": "STRING phase unchanged; maintenance of already-published owners only",
++      "source": "Published M3jdk21 #1082 Object self-adaptation; existing Synexia convergence pattern",
++      "source_revision": "c8596a624ff7b15b3fe58cbf857eda0852b84402",
++      "target": "java.lang.Object.toAdapter(java.lang.Class)",
++      "target_path": "src/java.base/share/classes/java/lang/Object.java",
++      "receiver_test": "test/jdk/java/lang/Object/M3RuntimeCompatibilityHold.java",
++      "status": "HOLD: no universal source/binary/dispatch compatibility claim; explicit negative witnesses retained",
++      "target_rule": "Keep the current published self-if-assignable result, null mismatch, and null-class rejection; this repair changes no Object declarations or bodies."
++    },
++    {
++      "recipe": "com.synexia.m3jdk.CollectionsContractRefinement20261017",
++      "recipe_datasets": [
++        "m3jdk21-object-vtable",
++        "m3jdk21-progress-doclint",
++        "m3jdk21-functional-doclint",
++        "m3jdk21-runtime-control"
++      ],
++      "canonical_recipe_repository": "hsoliwal/com.synexia",
++      "catalogue": "m3/runtime-integration/runtime-repair-20261018/CATALOGUE.tsv",
++      "receiving_baseline": "4b24824c3aa09d802121447f8970d442a855f064",
++      "phase_rule": "STRING phase unchanged; maintenance of already-published owners only",
++      "source": "Published M3jdk21 #1082 progress SPI and #1091 weighted-child cancellation successor",
++      "source_revision": "a5be05424262a3c7cd3ffb65e9de531be8921d98",
++      "target": "java.util.concurrent.ProgressMonitors",
++      "target_path": "src/java.base/share/classes/java/util/concurrent/ProgressMonitors.java",
++      "public_spi": "java.util.concurrent.ProgressMonitor",
++      "receiver_test": "test/jdk/java/lang/Object/M3MonitoredTemplateTest.java",
++      "status": "Existing target-owned API; documentation successor preserves executable bytecode; current-source custody checked through all four manifests",
++      "target_rule": "Borrowed monitor lifetime, thread-local binding, atomic supplier publication and local child cancellation stay unchanged. Eclipse bridge com.m3.collections.M3ProgressMonitor remains a separate published SPI."
++    },
++    {
++      "recipe": "com.synexia.m3jdk.CollectionsContractRefinement20261017",
++      "recipe_datasets": [
++        "m3jdk21-object-vtable",
++        "m3jdk21-progress-doclint",
++        "m3jdk21-functional-doclint",
++        "m3jdk21-runtime-control"
++      ],
++      "canonical_recipe_repository": "hsoliwal/com.synexia",
++      "catalogue": "m3/runtime-integration/runtime-repair-20261018/CATALOGUE.tsv",
++      "receiving_baseline": "4b24824c3aa09d802121447f8970d442a855f064",
++      "phase_rule": "STRING phase unchanged; maintenance of already-published owners only",
++      "source": "Published M3jdk21 #1091 monitored default-template tasks, using existing JDK executors",
++      "source_revision": "a5be05424262a3c7cd3ffb65e9de531be8921d98",
++      "target": "java.util.concurrent.MonitoredRunnable and MonitoredCallable",
++      "target_path": "src/java.base/share/classes/java/util/concurrent/MonitoredRunnable.java",
++      "related_target_path": "src/java.base/share/classes/java/util/concurrent/MonitoredCallable.java",
++      "receiver_test": "test/jdk/java/lang/Object/M3RuntimeCompatibilityHold.java",
++      "status": "Existing public names retained; ordinary dual Runnable/Callable source and frozen binary behavior have dedicated witnesses",
++      "target_rule": "Runnable.run remains void and Callable.call retains its result/checked-exception contract. No TaskStatus recast, duplicate Callable.progressMonitor default, new scheduler or mandatory client base class."
++    },
++    {
++      "recipe": "com.synexia.m3jdk.CollectionsContractRefinement20261017",
++      "recipe_datasets": [
++        "m3jdk21-object-vtable",
++        "m3jdk21-progress-doclint",
++        "m3jdk21-functional-doclint",
++        "m3jdk21-runtime-control"
++      ],
++      "canonical_recipe_repository": "hsoliwal/com.synexia",
++      "catalogue": "m3/runtime-integration/runtime-repair-20261018/CATALOGUE.tsv",
++      "receiving_baseline": "4b24824c3aa09d802121447f8970d442a855f064",
++      "phase_rule": "STRING phase unchanged; maintenance of already-published owners only",
++      "source": "Published M3jdk21 #1082 monitored function overloads under their existing JDK names",
++      "source_revision": "c8596a624ff7b15b3fe58cbf857eda0852b84402",
++      "target": "java.util.function.Consumer, Function and Supplier",
++      "target_path": "src/java.base/share/classes/java/util/function/Consumer.java",
++      "related_target_paths": [
++        "src/java.base/share/classes/java/util/function/Function.java",
++        "src/java.base/share/classes/java/util/function/Supplier.java"
++      ],
++      "receiver_test": "test/jdk/java/lang/Object/M3AdapterProgress.java",
++      "status": "Existing progress overloads receive Javadoc only; their original single abstract methods and executable bytecode are preserved",
++      "target_rule": "No client base class or SAM replacement; monitored overloads borrow their explicit monitor and restore the prior lexical binding."
++    },
++    {
++      "recipe": "com.synexia.m3jdk.CollectionsContractRefinement20261017",
++      "recipe_datasets": [
++        "m3jdk21-object-vtable",
++        "m3jdk21-progress-doclint",
++        "m3jdk21-functional-doclint",
++        "m3jdk21-runtime-control"
++      ],
++      "canonical_recipe_repository": "hsoliwal/com.synexia",
++      "catalogue": "m3/runtime-integration/runtime-repair-20261018/CATALOGUE.tsv",
++      "receiving_baseline": "4b24824c3aa09d802121447f8970d442a855f064",
++      "phase_rule": "STRING phase unchanged; maintenance of already-published owners only",
++      "source": "Existing OpenJDK HotSpot bootstrap vtable count; matched current published Object source",
++      "source_revision": "4b24824c3aa09d802121447f8970d442a855f064",
++      "source_git_blob": "ab29ec3524d40ff58d6ff3e6fe2c1123b3abc1dd",
++      "target": "ClassLoader::compute_Object_vtable",
++      "target_path": "src/hotspot/share/classfile/classLoader.cpp",
++      "source_license": "GPL-2.0-only",
++      "status": "Exact count repaired from five to six with the existing vtable consistency guard retained; full fastdebug image is a separate gate",
++      "target_rule": "No JNI symbol, object layout, native ownership or guard weakening. Bootstrap consistency does not establish Object API compatibility."
+     }
+   ],
+   "imported_donor_sources": [],
+diff --git a/m3/runtime-integration/runtime-repair-20261018/CATALOGUE.tsv b/m3/runtime-integration/runtime-repair-20261018/CATALOGUE.tsv
+new file mode 100644
+index 0000000..88f30d8
+--- /dev/null
++++ b/m3/runtime-integration/runtime-repair-20261018/CATALOGUE.tsv
+@@ -0,0 +1,5 @@ com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe
++atom_id	problem_category	target_owner	observed_input	candidates	selection	correctness	contract_boundary	time_complexity	space_complexity	performance_result	selection_rationale	primary_reference	license	challenge_discovery	license_action	validation	evidence_scope	status
++M3-RUNTIME-VTABLE-COUNT	RUNTIME_BOOTSTRAP	ClassLoader::compute_Object_vtable	5 legacy entries versus 6 current non-final Object methods	update matched constant; duplicate parser; weaken guard	update matched constant to 6	matches exact published Object bytes; existing klassVtable guard remains	No JNI or Object API change; universal compatibility remains HOLD	O(1)	O(1)	No performance claim	Smallest target-owned correction; duplicating class parsing or relaxing guard would widen the change	https://github.com/hsoliwal/M3jdk21/blob/4b24824c3aa09d802121447f8970d442a855f064/src/hotspot/share/classfile/classLoader.cpp	GPL-2.0-only	Not a challenge-array/search problem; no donor code copied	Preserve OpenJDK source header and license	Full fastdebug images plus actual VM witnesses	Native text recipe qualified; VM behavior requires fresh image	BOUNDED_REPAIR
++M3-PROGRESS-JAVADOC	PUBLIC_API_DOCUMENTATION	8 Runnable/concurrent plus 3 functional progress owners	42 concurrent plus 7 functional original public/protected doclint warnings	complete comments; disable Werror; alter anonymous implementation	Javadoc-only exact snapshots	14 -g:none class files in the full 11-source closure are byte-identical; original all/protected doclint has zero warnings	Public signatures and executable tokens unchanged	Unchanged	Unchanged	No runtime performance claim	Restore original build gate without suppressions or representation changes	https://github.com/hsoliwal/M3jdk21/blob/4b24824c3aa09d802121447f8970d442a855f064/make/modules/java.base/Java.gmk	GPL-2.0-only WITH Classpath-exception-2.0	Not a challenge algorithm; no external code copied	Preserve every original source header	verify_progress_doclint.py; original JDK doclint flags	Strict all-visibility private/anonymous warnings remain separately retained	DOCUMENTATION_ONLY
++M3-PROGRESS-MANIFEST-SUCCESSION	SOURCE_IDENTITY_CUSTODY	14 current original/template receiver owners	Original #1082 checker rejected exact published #1091 Callable	fixed successor chain; accept either hash; replace old manifest; general dependency graph	four byte-pinned manifests with explicit overlap sets	Each successor starts at preceding postimage; all 14 current sources and manifests are required	No arbitrary old/new mixtures and no rewriting #1082/#1091 history	O(total bytes hashed + path count)	O(path count)	No benchmark claim; bounded 11+5+8+3 manifest rows	Reuse exact hash-pinned source custody and linear transition composition	https://github.com/hsoliwal/com.synexia/tree/8f8200375d8d403b58e855ee5db02f2e8fac33a8/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017	Apache-2.0 recipe; target licenses retained	Challenge-platform array/graph templates do not justify generic machinery for this fixed transition	Original manifests retained byte-exact; new checker is first-party	python3 m3/compatibility/test_object_adapter_progress_receiver_20261018.py	SDK and Python regressions qualify current bytes only	EXPLICIT_SUCCESSOR
++M3-OBJECT-LEGACY-DISPATCH	API_COMPATIBILITY	Object.toAdapter and existing interface defaults	Published Object adds a public non-final instance method	assert additive compatibility; frozen binary and source counterexamples	frozen Java21 binaries plus candidate compiler witnesses	Check invokeinterface dispatch separately from source collision and Optional-return binary compatibility	A passing test records universal_no_break=FAIL_COUNTEREXAMPLES_OBSERVED	Test only	Test only	No performance claim	JLS source/default rules and observable frozen dispatch must both be tested	https://docs.oracle.com/javase/specs/jls/se21/html/jls-9.html#jls-9.4.1.2	Reference only	Challenge algorithms cannot establish language or VM compatibility	Original witness implementation; no external code copied	M3RuntimeCompatibilityHold with candidate image and stock Java21	Fresh current-image execution required; lost prior evidence not reused	COMPATIBILITY_HOLD
+diff --git a/m3/runtime-integration/runtime-repair-20261018/CURRENT_OWNERS.json b/m3/runtime-integration/runtime-repair-20261018/CURRENT_OWNERS.json
+new file mode 100644
+index 0000000..5fae94e
+--- /dev/null
++++ b/m3/runtime-integration/runtime-repair-20261018/CURRENT_OWNERS.json
+@@ -0,0 +1,28 @@ com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe
++{
++  "schema": "M3_RUNTIME_CURRENT_OWNER_CUSTODY_V1",
++  "receiving_baseline": "4b24824c3aa09d802121447f8970d442a855f064",
++  "canonical_recipe_baseline": "8f8200375d8d403b58e855ee5db02f2e8fac33a8",
++  "recipe": "com.synexia.m3jdk.CollectionsContractRefinement20261017",
++  "datasets": [
++    "m3jdk21-object-vtable",
++    "m3jdk21-progress-doclint",
++    "m3jdk21-functional-doclint",
++    "m3jdk21-runtime-control"
++  ],
++  "recipe_runtime_dependency": false,
++  "historical_manifests": {
++    "m3/compatibility/m3-object-adapter-progress-20261017.tsv": "2f581a791adc7ecf7f217a6276f0da8af424c1e3e49385ca6ae44704d3319c82",
++    "m3/compatibility/m3-default-template-source-seal.tsv": "c431bf732eb91a289b4bcd0b886db71d43da7d7bb17074cd6116db6b37e73ad6"
++  },
++  "documentation_successor": {
++    "m3/compatibility/m3-progress-doclint-20261018.tsv": "7246c16a0e8ec742eba98dac97e24b7fc3947250ad5d2a22f72ac32dcddf0219",
++    "m3/compatibility/m3-functional-progress-doclint-20261018.tsv": "3b62981be6a617b903c559cc31904eca2bffb2b200380f1be57e07a8f634d969"
++  },
++  "current_object_sha256": "829fb37093cf3e8d11b3c1e3d42f898f0c86f3b697e7a66cefe09934be3bb259",
++  "native_before_sha256": "665bb788428c8d3837d052ac4f69a2756bb1823918726b41a7a7008eadfafd8d",
++  "native_after_sha256": "d6283c23f650714e85b9a910f6cda656146552ae95950a04b02af861b636dca2",
++  "historical_evidence": "Lost unpublished runtime44/jtreg evidence is not recovered or applied to these bytes",
++  "compatibility_policy": "HOLD: Object source and interface-default dispatch counterexamples must remain visible",
++  "phase_policy": "STRING unchanged; no broad SDK/JNI admission",
++  "full_image_evidence": "A separate fresh gate recorded by the receiving PR"
++}
+diff --git a/m3/runtime-integration/runtime-repair-20261018/FILE_REVIEW.tsv b/m3/runtime-integration/runtime-repair-20261018/FILE_REVIEW.tsv
+new file mode 100644
+index 0000000..468ce04
+--- /dev/null
++++ b/m3/runtime-integration/runtime-repair-20261018/FILE_REVIEW.tsv
+@@ -0,0 +1,17 @@ com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe
++pass	path	before_sha256	after_sha256	category	catalogue_atom	decision	validation_scope
++1	src/hotspot/share/classfile/classLoader.cpp	665bb788428c8d3837d052ac4f69a2756bb1823918726b41a7a7008eadfafd8d	d6283c23f650714e85b9a910f6cda656146552ae95950a04b02af861b636dca2	RUNTIME_BOOTSTRAP	M3-RUNTIME-VTABLE-COUNT	6 matched Object virtual methods; unchanged guard	Exact native text dataset; full image separately gated
++2	src/java.base/share/classes/java/lang/Runnable.java	bad73b8ae0b17e2160845c41058ebdda55fb755affecad51ef37fbc8e0d25534	b549cf18db454b6cff5d4a8181b54fdae1e26659ecc2d7f205e4d2ea6da9f93a	PUBLIC_API_DOCUMENTATION	M3-PROGRESS-JAVADOC	Public lifecycle/parameters/results/errors documented; code preserved	JavaLST recipe plus zero build-scope doclint and 14 identical classes in the full 11-source closure
++3	src/java.base/share/classes/java/util/concurrent/Callable.java	a9d2d8cc73583297fb6c07dee24765473aaaeeaae2651a0b54eb411ed2d46261	6b1ecf702a9e59b171efcaa28dd18fb72265d2bedbfeb2b8bc9d831a74d4892f	PUBLIC_API_DOCUMENTATION	M3-PROGRESS-JAVADOC	Public lifecycle/parameters/results/errors documented; code preserved	JavaLST recipe plus zero build-scope doclint and 14 identical classes in the full 11-source closure
++4	src/java.base/share/classes/java/util/concurrent/Executor.java	63f808755d552e372f9669c47041b2aeb52f5e34d0f92428aa5899273e4515d4	e887630e8a6fe2cb3b24f890fe02118abb06b9a340f8d79f47344840b9b2b6aa	PUBLIC_API_DOCUMENTATION	M3-PROGRESS-JAVADOC	Public lifecycle/parameters/results/errors documented; code preserved	JavaLST recipe plus zero build-scope doclint and 14 identical classes in the full 11-source closure
++5	src/java.base/share/classes/java/util/concurrent/ExecutorService.java	ca9342b2227960f32bde645c6df74dcd993d23deafad1429fac6521816daa868	9196858f2b800cc32671801563da29b14f881bbf37477419664aa6abd795ce2d	PUBLIC_API_DOCUMENTATION	M3-PROGRESS-JAVADOC	Public lifecycle/parameters/results/errors documented; code preserved	JavaLST recipe plus zero build-scope doclint and 14 identical classes in the full 11-source closure
++6	src/java.base/share/classes/java/util/concurrent/MonitoredCallable.java	a402533489745504fa3e9b8ca667be9b0d9cc3a370bbe2092c70f20051afb2f7	77436155c7936ab04698de243fc91b8a9c53a500e63247c364de591c45c1d733	PUBLIC_API_DOCUMENTATION	M3-PROGRESS-JAVADOC	Public lifecycle/parameters/results/errors documented; code preserved	JavaLST recipe plus zero build-scope doclint and 14 identical classes in the full 11-source closure
++7	src/java.base/share/classes/java/util/concurrent/MonitoredRunnable.java	8c975815e833bca4c214313efde24acf776a1ef676140701f9a5293ef4b5415b	2670d2b928981c1068c2299dc1458c2b9dc7dc372d2e8d2527005d695c77f06e	PUBLIC_API_DOCUMENTATION	M3-PROGRESS-JAVADOC	Public lifecycle/parameters/results/errors documented; code preserved	JavaLST recipe plus zero build-scope doclint and 14 identical classes in the full 11-source closure
++8	src/java.base/share/classes/java/util/concurrent/ProgressMonitor.java	58d084535f0e1c76adc102cffd1eff2cadae5c80877812908281699a55ce88b3	368f6b70ca1639ed193c477d1523a1707cf9ec65d056275552e8ca42f500ae93	PUBLIC_API_DOCUMENTATION	M3-PROGRESS-JAVADOC	Public lifecycle/parameters/results/errors documented; code preserved	JavaLST recipe plus zero build-scope doclint and 14 identical classes in the full 11-source closure
++9	src/java.base/share/classes/java/util/concurrent/ProgressMonitors.java	5073890ccf101b597e656b2516be70b83f0b77f9accdc157d75fc8d6f525a359	d1fc14e9b59c305d6f71df76afb86d9e7d9e4cabd0899105e5d001380ce4c736	PUBLIC_API_DOCUMENTATION	M3-PROGRESS-JAVADOC	Public lifecycle/parameters/results/errors documented; code preserved	JavaLST recipe plus zero build-scope doclint and 14 identical classes in the full 11-source closure
++10	src/java.base/share/classes/java/util/function/Consumer.java	4de2f5ed281ed6f56b872bd4ae9cc832ffb11b6c78e84a0774d7d6058a4a31fc	025c5fa47f9505eccea26c540bc3e320762346c464ecca37ec1994297285a073	PUBLIC_API_DOCUMENTATION	M3-PROGRESS-JAVADOC	Public lifecycle/parameters/results/errors documented; code preserved	JavaLST recipe plus zero build-scope doclint and 14 identical classes in the full 11-source closure
++11	src/java.base/share/classes/java/util/function/Function.java	7943afca3f9a3816e8f75a62b9c6104c31b883a1a1e614fb795a8fc85333c744	e116c9989d314cb6ffdaef60e8f665205afccdd28ee3674af2c6eedc008da588	PUBLIC_API_DOCUMENTATION	M3-PROGRESS-JAVADOC	Public lifecycle/parameters/results/errors documented; code preserved	JavaLST recipe plus zero build-scope doclint and 14 identical classes in the full 11-source closure
++12	src/java.base/share/classes/java/util/function/Supplier.java	49c58acaea3e70e81ec7187b47551d1e0cf6906443bcf3d71e8c9cbba4d032c6	2d5f23125e22f4d20d80d7734e883c45fd179207f0ab508fdd0c9e8616156766	PUBLIC_API_DOCUMENTATION	M3-PROGRESS-JAVADOC	Public lifecycle/parameters/results/errors documented; code preserved	JavaLST recipe plus zero build-scope doclint and 14 identical classes in the full 11-source closure
++13	m3/compatibility/check_object_adapter_progress_receiver_20261017.py	5e44ba190257db7d9715d80e7870d6a1b69f8c76cc3c285182193e80fc0da443	763a7d6ffbbdce0d07a1e499fe9aa74cbe49dc6e5cf06c3c48a5dc4f58bd506a	SOURCE_IDENTITY_CUSTODY	M3-PROGRESS-MANIFEST-SUCCESSION	Explicit bounded successor or compatibility witness	Fresh qualified recipe output; targeted regression/image evidence
++14	m3/compatibility/test_object_adapter_progress_receiver_20261018.py	ABSENT	6f51e65b1e4f142a99a30c57ffbfb86670340c77f39680475c4b89a52fa26d2e	SOURCE_IDENTITY_CUSTODY	M3-PROGRESS-MANIFEST-SUCCESSION	Explicit bounded successor or compatibility witness	Fresh qualified recipe output; targeted regression/image evidence
++15	m3/compatibility/verify_m3_default_template_20261017.py	856910b716021260d387c0e3230c774223d7afc6ba62eab8e0c35668ffc8f2da	234293306f44acc4f756816564b9dea6146962b13ac2529397e25f062cce49bc	SOURCE_IDENTITY_CUSTODY	M3-PROGRESS-MANIFEST-SUCCESSION	Explicit bounded successor or compatibility witness	Fresh qualified recipe output; targeted regression/image evidence
++16	test/jdk/java/lang/Object/M3RuntimeCompatibilityHold.java	ABSENT	9faf22addfe520efd30ef8181fa1b89bb4e130f65acb35d2ac9e8b58a3ce38aa	API_COMPATIBILITY	M3-OBJECT-LEGACY-DISPATCH	Explicit bounded successor or compatibility witness	Fresh qualified recipe output; targeted regression/image evidence
+diff --git a/m3/runtime-integration/runtime-repair-20261018/README.md b/m3/runtime-integration/runtime-repair-20261018/README.md
+new file mode 100644
+index 0000000..bb44294
+--- /dev/null
++++ b/m3/runtime-integration/runtime-repair-20261018/README.md
+@@ -0,0 +1,91 @@ com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe
++<!--
++SPDX-FileCopyrightText: 2026 Hitesh Soliwal and contributors
++SPDX-License-Identifier: Apache-2.0
++-->
++# Bounded runtime repair and compatibility hold
++
++The current receiving baseline is `4b24824c3aa09d802121447f8970d442a855f064`.
++This maintenance pass uses the existing Synexia Maven/OpenRewrite snapshot host
++and four unmodified pinned engines. Native, documentation and control changes
++are distinct datasets of `com.synexia.m3jdk.CollectionsContractRefinement20261017`.
++There is no Synexia or OpenRewrite runtime dependency.
++
++## Product changes and owner mapping
++
++`ClassLoader::compute_Object_vtable` changes its matching count from five to six
++for the already-published non-final `Object.toAdapter` method. The existing
++`klassVtable` mismatch guard is retained. There is no new JNI symbol, object
++layout or native ownership. `Object` itself is unchanged by this repair.
++
++Eight published Runnable/progress API owners and three functional overload owners receive Javadoc only. Strict Java
++21 compilation uses the repository's existing `-Xdoclint:all/protected -Werror`
++visibility scope. The eleven emitted sources produce fourteen byte-identical class files
++against the original sources when debug metadata is omitted. All-visibility
++private/anonymous-constructor documentation failures are retained separately;
++this pass does not claim that wider documentation scope is qualified.
++
++The owner map appends Object adaptation, the progress SPI, monitored templates
++the functional progress overloads, and the matched native vtable owner. The existing Eclipse forwarder uses the
++separate `com.m3.collections.M3ProgressMonitor` SPI; this pass does not conflate
++that SPI with `java.util.concurrent.ProgressMonitor`.
++
++## Immutable source succession
++
++The original #1082 eleven-row manifest and #1091 five-row manifest remain
++byte-exact. The documentation successors are new eight-row and three-row manifests.
++The receiver checker composes only those four pinned manifests: two original
++owners are replaced and three template owners are added by #1091, followed by
++eight concurrent and three functional documentation replacements. It requires the resulting fourteen
++current sources, rejects arbitrary drift or old/new mixtures, validates path
++containment and symlinks, and performs no receiving writes. The default-template
++checker shares that current-closure verification while retaining its five owners.
++
++Run both receiving checks and the isolated negative regressions:
++
++```sh
++python3 m3/compatibility/check_object_adapter_progress_receiver_20261017.py
++python3 m3/compatibility/verify_m3_default_template_20261017.py
++python3 m3/compatibility/test_object_adapter_progress_receiver_20261018.py
++```
++
++## Object compatibility remains on hold
++
++Adding this public Object method cannot be described as universally compatible.
++The `M3RuntimeCompatibilityHold` jtreg driver deliberately distinguishes a
++passing witness from a compatibility pass. It checks current self-adaptation,
++then compiles legacy fixtures using an unmodified Java 21 compiler, records the
++class hashes and `invokeinterface` bytecode, and runs those frozen classes on
++both stock and candidate images. It separately records changed interface-default
++dispatch, source collision diagnostics, Optional-return binary behavior, and
++ordinary dual Runnable/Callable results and checked-exception identity.
++
++Supply a genuine stock Java 21 toolchain using `-Dm3.stock.jdk`. Compile and run
++the driver with the actual rebuilt candidate image. When invoking jtreg, pass
++that system property through the test VM options. The driver uses a new evidence
++directory, bounds each subprocess and keeps individual compiler/VM logs.
++A successful witness writes `universal_no_break=FAIL_COUNTEREXAMPLES_OBSERVED`.
++The candidate-source probes intentionally omit `--release`, so they see the
++candidate Object API instead of historical `ct.sym` symbols.
++
++The relevant language boundaries are documented in [JLS 9.4.1.2](https://docs.oracle.com/javase/specs/jls/se21/html/jls-9.html#jls-9.4.1.2)
++and [JLS 13.4.6](https://docs.oracle.com/javase/specs/jls/se21/html/jls-13.html#jls-13.4.6).
++Neither source identity checks nor recipe passes replace VM execution, JNI,
++JCK or full SDK qualification. Lost unpublished runtime proof is not reused.
++
++## Catalogue and reusable verification
++
++`CATALOGUE.tsv` records problem categories, evaluated candidates, complexity,
++license and selection rationale. `FILE_REVIEW.tsv` binds the serial native and
++Java source pass to exact before/after identities. The central algorithm
++catalogue indexes this packet. Challenge-platform algorithms are marked
++inapplicable for these runtime, documentation and source-custody problems;
++no unrelated code or performance claims are imported.
++
++Qualify each dataset with the canonical capped Maven host, its five actual SDK
++tests and its input-sealing and receiver integrity profile. Apply only its
++qualified retained SDK results using the unchanged `receive.py`, first with
++`--check`, then apply, then repeat to prove a fixed point. Documentation requires
++the additional exact-bytecode/doclint comparison; runtime witnesses and the
++full fastdebug image build remain separate receiving gates. The receiving PR
++must retain the fresh results and earlier failed attempts with their sources.
++STRING phase and all wider compatibility/admission holds remain unchanged.

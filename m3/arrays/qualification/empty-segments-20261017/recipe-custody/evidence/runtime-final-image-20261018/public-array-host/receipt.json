@@ -1,0 +1,38 @@
+[
+  {
+    "dataset": "fixture",
+    "command": [
+      "/tmp/m3-toolchain/apache-maven-3.9.11/bin/mvn",
+      "-B",
+      "-ntp",
+      "-o",
+      "-Dmaven.repo.local=/tmp/m3-maven-repository",
+      "-f",
+      "/workspace/scratch/2b4d1cb957a7/M3jdk21/m3/arrays/qualification/empty-segments-20261017/recipe-custody/pom.xml",
+      "-Drecipe.owner.root=/workspace/scratch/2b4d1cb957a7/M3jdk21/m3/arrays/qualification/empty-segments-20261017/recipe-custody/sdk-owner",
+      "-Dm3.dataset=fixture",
+      "-Pcontract",
+      "verify"
+    ],
+    "exit": 0,
+    "seconds": 22.41745638847351
+  },
+  {
+    "dataset": "m3jdk21-numeric-copy",
+    "command": [
+      "/tmp/m3-toolchain/apache-maven-3.9.11/bin/mvn",
+      "-B",
+      "-ntp",
+      "-o",
+      "-Dmaven.repo.local=/tmp/m3-maven-repository",
+      "-f",
+      "/workspace/scratch/2b4d1cb957a7/M3jdk21/m3/arrays/qualification/empty-segments-20261017/recipe-custody/pom.xml",
+      "-Drecipe.owner.root=/workspace/scratch/2b4d1cb957a7/M3jdk21/m3/arrays/qualification/empty-segments-20261017/recipe-custody/sdk-owner",
+      "-Dm3.dataset=m3jdk21-numeric-copy",
+      "-Pcontract",
+      "verify"
+    ],
+    "exit": 0,
+    "seconds": 40.10957098007202
+  }
+]

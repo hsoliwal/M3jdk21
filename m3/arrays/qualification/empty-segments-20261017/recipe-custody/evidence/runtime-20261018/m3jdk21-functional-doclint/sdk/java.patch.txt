@@ -1,0 +1,67 @@
+diff --git a/src/java.base/share/classes/java/util/function/Consumer.java b/src/java.base/share/classes/java/util/function/Consumer.java
+index 3df6f12..b97f3a7 100644
+--- a/src/java.base/share/classes/java/util/function/Consumer.java
++++ b/src/java.base/share/classes/java/util/function/Consumer.java
+@@ -65,7 +65,16 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
+         return (T t) -> { accept(t); after.accept(t); };
+     }
+ 
+-    /** Execute with an explicit borrowed monitor, retaining the original SAM. */
++    /**
++     * Performs this operation with a borrowed monitor scoped to the call.
++     * The previous binding is restored on exit and the monitor is not completed.
++     *
++     * @param value the input argument
++     * @param monitor the borrowed monitor
++     * @throws NullPointerException if {@code monitor} is {@code null}
++     * @throws java.util.concurrent.CancellationException if cancellation is
++     *         observed before or after this operation
++     */
+     default void accept(T value, java.util.concurrent.ProgressMonitor monitor) {
+         java.util.Objects.requireNonNull(monitor, "monitor");
+         try (java.util.concurrent.ProgressMonitors.Scope ignored =
+diff --git a/src/java.base/share/classes/java/util/function/Function.java b/src/java.base/share/classes/java/util/function/Function.java
+index 76a20ef..22c1c7e 100644
+--- a/src/java.base/share/classes/java/util/function/Function.java
++++ b/src/java.base/share/classes/java/util/function/Function.java
+@@ -98,7 +98,17 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
+         return t -> t;
+     }
+ 
+-    /** Execute with an explicit borrowed monitor, retaining the original SAM. */
++    /**
++     * Applies this function with a borrowed monitor scoped to the call.
++     * The previous binding is restored on exit and the monitor is not completed.
++     *
++     * @param value the input argument
++     * @param monitor the borrowed monitor
++     * @return the function result
++     * @throws NullPointerException if {@code monitor} is {@code null}
++     * @throws java.util.concurrent.CancellationException if cancellation is
++     *         observed before or after this operation
++     */
+     default R apply(T value, java.util.concurrent.ProgressMonitor monitor) {
+         java.util.Objects.requireNonNull(monitor, "monitor");
+         try (java.util.concurrent.ProgressMonitors.Scope ignored =
+diff --git a/src/java.base/share/classes/java/util/function/Supplier.java b/src/java.base/share/classes/java/util/function/Supplier.java
+index ae9a9fd..840bbe2 100644
+--- a/src/java.base/share/classes/java/util/function/Supplier.java
++++ b/src/java.base/share/classes/java/util/function/Supplier.java
+@@ -47,7 +47,16 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
+      */
+     T get();
+ 
+-    /** Execute with an explicit borrowed monitor, retaining the original SAM. */
++    /**
++     * Gets a result with a borrowed monitor scoped to the call.
++     * The previous binding is restored on exit and the monitor is not completed.
++     *
++     * @param monitor the borrowed monitor
++     * @return the supplied result
++     * @throws NullPointerException if {@code monitor} is {@code null}
++     * @throws java.util.concurrent.CancellationException if cancellation is
++     *         observed before or after this operation
++     */
+     default T get(java.util.concurrent.ProgressMonitor monitor) {
+         java.util.Objects.requireNonNull(monitor, "monitor");
+         try (java.util.concurrent.ProgressMonitors.Scope ignored =

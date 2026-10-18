@@ -1,0 +1,1966 @@
+{
+  "schema": "M3_FRESH_IMAGE_QUALIFICATION_V1",
+  "runtime_baseline": "4b24824c3aa09d802121447f8970d442a855f064",
+  "collection_baseline": "0efc1719ca5766aead09f4f7c49f5067975bd946",
+  "modules": {
+    "arrays": {
+      "receipt": {
+        "command": [
+          "/tmp/m3-toolchain/apache-maven-3.9.11/bin/mvn",
+          "-B",
+          "-ntp",
+          "-s",
+          "/tmp/m3-toolchain/settings.xml",
+          "-Dmaven.repo.local=/tmp/m3-maven-repository",
+          "-DargLine=-Xmx768m -Xcheck:jni",
+          "-f",
+          "m3/arrays/pom.xml",
+          "-Pnative-linux",
+          "clean",
+          "verify"
+        ],
+        "exit": 0,
+        "seconds": 51.26761233400066,
+        "runtime_image": "/workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/build/m3-runtime-fastdebug/images/jdk",
+        "sourceCommit": "4b24824c3aa09d802121447f8970d442a855f064",
+        "tests": {
+          "tests": 10,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "pomBeforeSha256": "fb6b3453259febac2a3571bbc606d5e1bf886d1560c15f16f17246f0e362e810",
+        "pomAfterSha256": "fb6b3453259febac2a3571bbc606d5e1bf886d1560c15f16f17246f0e362e810",
+        "sources_recompiled_by_clean": true
+      },
+      "suites": [
+        {
+          "name": "com.m3.arrays.M3ArrayEmptySegmentsTest",
+          "counts": {
+            "tests": 1,
+            "failures": 0,
+            "errors": 0,
+            "skipped": 0
+          },
+          "xml_sha256": "122f40b9595c7291a93757afbd1811c634211622b9378ca4ccaba614548beae4",
+          "testcases": [
+            {
+              "name": "preservesJoinedCoordinatesEmptyDescriptorsAndNativeProjection",
+              "classname": "com.m3.arrays.M3ArrayEmptySegmentsTest"
+            }
+          ]
+        },
+        {
+          "name": "com.m3.arrays.M3ArrayNativeTest",
+          "counts": {
+            "tests": 2,
+            "failures": 0,
+            "errors": 0,
+            "skipped": 0
+          },
+          "xml_sha256": "9041f92c9356c53f8e251026dd222eed0c14c306fab7a0c65359608685260951",
+          "testcases": [
+            {
+              "name": "javaFallbackHasExactCompareAndMaterializationSemantics",
+              "classname": "com.m3.arrays.M3ArrayNativeTest"
+            },
+            {
+              "name": "optionalNativeProviderMatchesJavaAcrossChunkAndUnicodeBoundaries",
+              "classname": "com.m3.arrays.M3ArrayNativeTest"
+            }
+          ]
+        },
+        {
+          "name": "com.m3.arrays.M3ArrayNumericCopyTest",
+          "counts": {
+            "tests": 1,
+            "failures": 0,
+            "errors": 0,
+            "skipped": 0
+          },
+          "xml_sha256": "4128bf308c6989e1e8376bc96f20c4406361d2cb397cf0568259fb016ddfb673",
+          "testcases": [
+            {
+              "name": "numericCopyMatchesDefaultInterfaceBehavior",
+              "classname": "com.m3.arrays.M3ArrayNumericCopyTest"
+            }
+          ]
+        },
+        {
+          "name": "com.m3.arrays.M3ArraysTest",
+          "counts": {
+            "tests": 6,
+            "failures": 0,
+            "errors": 0,
+            "skipped": 0
+          },
+          "xml_sha256": "11495214043144bb05b89514950cb35ad4b5d86c45a10568fba2024b559f4a2c",
+          "testcases": [
+            {
+              "name": "snapshotsDetachFromMutableInputsAndExportsAreIndependent",
+              "classname": "com.m3.arrays.M3ArraysTest"
+            },
+            {
+              "name": "primitiveJoinsPreserveOrderAndCheckedSlices",
+              "classname": "com.m3.arrays.M3ArraysTest"
+            },
+            {
+              "name": "precomputedFactCompositionMatchesDirectComputation",
+              "classname": "com.m3.arrays.M3ArraysTest"
+            },
+            {
+              "name": "slicesAndJoinsRemainCoordinateExactWithoutFlattening",
+              "classname": "com.m3.arrays.M3ArraysTest"
+            },
+            {
+              "name": "utf16JoinKeepsExactHashAndCodePointFactsAcrossSurrogateSeam",
+              "classname": "com.m3.arrays.M3ArraysTest"
+            },
+            {
+              "name": "byteJoinUsesScatterGatherReadOnlyDescriptors",
+              "classname": "com.m3.arrays.M3ArraysTest"
+            }
+          ]
+        }
+      ]
+    },
+    "collections": {
+      "receipt": {
+        "command": [
+          "/tmp/m3-toolchain/apache-maven-3.9.11/bin/mvn",
+          "-B",
+          "-ntp",
+          "-s",
+          "/tmp/m3-toolchain/settings.xml",
+          "-Dmaven.repo.local=/tmp/m3-maven-repository",
+          "-DargLine=-Xmx768m -Xcheck:jni",
+          "-f",
+          "m3/collections/pom.xml",
+          "clean",
+          "verify"
+        ],
+        "exit": 0,
+        "seconds": 108.621117572,
+        "runtime_image": "/workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/build/m3-runtime-fastdebug/images/jdk",
+        "sourceCommit": "0efc1719ca5766aead09f4f7c49f5067975bd946",
+        "tests": {
+          "tests": 226,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "pomBeforeSha256": "d216e3da4ac02615ef46f8b48803174e24c11939ad5b826be9ca9d7df6bbebf6",
+        "pomAfterSha256": "d216e3da4ac02615ef46f8b48803174e24c11939ad5b826be9ca9d7df6bbebf6",
+        "sources_recompiled_by_clean": true
+      },
+      "suites": [
+        {
+          "name": "com.m3.collections.M3AdaptiveEnumLongMapTest",
+          "counts": {
+            "tests": 5,
+            "failures": 0,
+            "errors": 0,
+            "skipped": 0
+          },
+          "xml_sha256": "825accbf24caa3e0c6645d8c947b8cef99e15cb543ffa77218d3ebcbfacf7d00",
+          "testcases": [
+            {
+              "name": "modeTransitionsAndOrdinalOrderInSparseMode",
+              "classname": "com.m3.collections.M3AdaptiveEnumLongMapTest"
+            },
+            {
+              "name": "narrowEnumIsDenseFromTheStartAndEdgeContracts",
+              "classname": "com.m3.collections.M3AdaptiveEnumLongMapTest"
+            },
+            {
+              "name": "foreignEnumKeysAreRejectedLikeJdkInBothModes",
+              "classname": "com.m3.collections.M3AdaptiveEnumLongMapTest"
+            },
+            {
+              "name": "wideEnumMatchesJdkAcrossMutationsAndModes",
+              "classname": "com.m3.collections.M3AdaptiveEnumLongMapTest"
+            },
+            {
+              "name": "retainsOnlyTheActiveBackingAndNoKeyReferences",
+              "classname": "com.m3.collections.M3AdaptiveEnumLongMapTest"
+            }
+          ]
+        },
+        {
+          "name": "com.m3.collections.M3BitLane28FenwickTest",
+          "counts": {
+            "tests": 2,
+            "failures": 0,
+            "errors": 0,
+            "skipped": 0
+          },
+          "xml_sha256": "f9dca3bf245987cc9e1b18b7d53769d3dd9bac5482a4a40d17254e3c842a7b6a",
+          "testcases": [
+            {
+              "name": "indexedRankSelectMatchesIndependentOrderedSetOracle",
+              "classname": "com.m3.collections.M3BitLane28FenwickTest"
+            },
+            {
+              "name": "repeatedWriteNoopAndInvalidBoundsPreserveBitsAndCounts",
+              "classname": "com.m3.collections.M3BitLane28FenwickTest"
+            }
+          ]
+        },
+        {
+          "name": "com.m3.collections.M3ConcurrentContractTest",
+          "counts": {
+            "tests": 12,
+            "failures": 0,
+            "errors": 0,
+            "skipped": 0
+          },
+          "xml_sha256": "4e19c5feb8927a78e09eb4b6afaab8a767f242fe0328974c60c21f8bb7604633",
+          "testcases": [
+            {
+              "name": "mpmcRendezvousHasNoLossOrDuplicates",
+              "classname": "com.m3.collections.M3ConcurrentContractTest"
+            },
+            {
+              "name": "mpmcTransferHasNoLossOrDuplicates",
+              "classname": "com.m3.collections.M3ConcurrentContractTest"
+            },
+            {
+              "name": "atomicHashAndTreeCompute",
+              "classname": "com.m3.collections.M3ConcurrentContractTest"
+            },
+            {
+              "name": "blockingWakeupTimeoutAndInterrupt",
+              "classname": "com.m3.collections.M3ConcurrentContractTest"
+            },
+            {
+              "name": "concurrentStreamsUseSnapshotSizeAndSelfToStringTerminates",
+              "classname": "com.m3.collections.M3ConcurrentContractTest"
+            },
+            {
+              "name": "mpmcBlockingDequeHasNoLossOrDuplicates",
+              "classname": "com.m3.collections.M3ConcurrentContractTest"
+            },
+            {
+              "name": "drainFailureRetainsUndeliveredElement",
+              "classname": "com.m3.collections.M3ConcurrentContractTest"
+            },
+            {
+              "name": "synchronousQueueHasNoCollectionCapacity",
+              "classname": "com.m3.collections.M3ConcurrentContractTest"
+            },
+            {
+              "name": "blockingDequeDifferential",
+              "classname": "com.m3.collections.M3ConcurrentContractTest"
+            },
+            {
+              "name": "transferBufferedDifferentialAndIteratorRecycling",
+              "classname": "com.m3.collections.M3ConcurrentContractTest"
+            },
+            {
+              "name": "lockedRangeAndSetViews",
+              "classname": "com.m3.collections.M3ConcurrentContractTest"
+            },
+            {
+              "name": "transferWaitersCancellationAndTimeout",
+              "classname": "com.m3.collections.M3ConcurrentContractTest"
+            }
+          ]
+        },
+        {
+          "name": "com.m3.collections.M3ConcurrentLaneContractTest",
+          "counts": {
+            "tests": 5,
+            "failures": 0,
+            "errors": 0,
+            "skipped": 0
+          },
+          "xml_sha256": "7b91011efa145743d875feb2c8bb5a220771616dcbe5d5555a652d973e1356e2",
+          "testcases": [
+            {
+              "name": "racingPublicationAndAtomicAddsLoseNoUpdates",
+              "classname": "com.m3.collections.M3ConcurrentLaneContractTest"
+            },
+            {
+              "name": "parallelStreamsSplitFixedRangesWithoutLosingOrDuplicatingSlots",
+              "classname": "com.m3.collections.M3ConcurrentLaneContractTest"
+            },
+            {
+              "name": "intAtomicBoundaryAndSparsePreparation",
+              "classname": "com.m3.collections.M3ConcurrentLaneContractTest"
+            },
+            {
+              "name": "concurrentCollectionStreamsPreserveCapturedSnapshotsAndIndexOrder",
+              "classname": "com.m3.collections.M3ConcurrentLaneContractTest"
+            },
+            {
+              "name": "atomicValuesWrapAndZeroWritesKeepPublicationLocations",
+              "classname": "com.m3.collections.M3ConcurrentLaneContractTest"
+            }
+          ]
+        },
+        {
+          "name": "com.m3.collections.M3CountedBagTest",
+          "counts": {
+            "tests": 1,
+            "failures": 0,
+            "errors": 0,
+            "skipped": 0
+          },
+          "xml_sha256": "c978d5d8e0c2056c77690dd9fe7f140f131ed3a478fd6b761fa57915eadcca9a",
+          "testcases": [
+            {
+              "name": "sourceSealedDifferentialContract",
+              "classname": "com.m3.collections.M3CountedBagTest"
+            }
+          ]
+        },
+        {
+          "name": "com.m3.collections.M3EnumLongMapTest",
+          "counts": {
+            "tests": 4,
+            "failures": 0,
+            "errors": 0,
+            "skipped": 0
+          },
+          "xml_sha256": "6e6e14c8166b3a108a91e01f3a1ef4fd1ec6f885bdfad7ab21c2085367bb0f71",
+          "testcases": [
+            {
+              "name": "foreignEnumKeysAreRejectedLikeJdk",
+              "classname": "com.m3.collections.M3EnumLongMapTest"
+            },
+            {
+              "name": "wideEnumMatchesJdkAcrossMutationsAndOrdinalOrder",
+              "classname": "com.m3.collections.M3EnumLongMapTest"
+            },
+            {
+              "name": "retainsOnlyPrimitiveLanesAndTheSharedUniverse",
+              "classname": "com.m3.collections.M3EnumLongMapTest"
+            },
+            {
+              "name": "narrowEnumAndEdgeContracts",
+              "classname": "com.m3.collections.M3EnumLongMapTest"
+            }
+          ]
+        },
+        {
+          "name": "com.m3.collections.M3EnumSetTest",
+          "counts": {
+            "tests": 4,
+            "failures": 0,
+            "errors": 0,
+            "skipped": 0
+          },
+          "xml_sha256": "d206ce3cd1c7569d0218d0eccc68cad65b88a203c6be749faaeb9dea7f110ddb",
+          "testcases": [
+            {
+              "name": "wideEnumMatchesJdkAcrossMutationsAndBulkOperations",
+              "classname": "com.m3.collections.M3EnumSetTest"
+            },
+            {
+              "name": "foreignEnumConstantsAreRejectedLikeJdk",
+              "classname": "com.m3.collections.M3EnumSetTest"
+            },
+            {
+              "name": "retainsOnlyPresenceWordsAndTheSharedUniverse",
+              "classname": "com.m3.collections.M3EnumSetTest"
+            },
+            {
+              "name": "narrowEnumEdgeContractsMatchJdk",
+              "classname": "com.m3.collections.M3EnumSetTest"
+            }
+          ]
+        },
+        {
+          "name": "com.m3.collections.M3FactoryContractTest",
+          "counts": {
+            "tests": 2,
+            "failures": 0,
+            "errors": 0,
+            "skipped": 0
+          },
+          "xml_sha256": "cf56a2b32fc3d3283f944605088e6fac6daf6d81bbf796dd7d9b6d74636030b2",
+          "testcases": [
+            {
+              "name": "immutableAndJdkUtilityWrappers",
+              "classname": "com.m3.collections.M3FactoryContractTest"
+            },
+            {
+              "name": "allFactoryFamiliesAreUsable",
+              "classname": "com.m3.collections.M3FactoryContractTest"
+            }
+          ]
+        },
+        {
+          "name": "com.m3.collections.M3FilteredDequesTest",
+          "counts": {
+            "tests": 2,
+            "failures": 0,
+            "errors": 0,
+            "skipped": 0
+          },
+          "xml_sha256": "bcfb6074a5b636a134249a69206e61236cc978207052f09bd6eca06450a97e20",
+          "testcases": [
+            {
+              "name": "existingPackedM3LinkedListIsTheOnlyPayloadOwner",
+              "classname": "com.m3.collections.M3FilteredDequesTest"
+            },
+            {
+              "name": "liveFilteredDequeContracts",
+              "classname": "com.m3.collections.M3FilteredDequesTest"
+            }
+          ]
+        },
+        {
+          "name": "com.m3.collections.M3FilteredListsDeepCompositionTest",
+          "counts": {
+            "tests": 1,
+            "failures": 0,
+            "errors": 0,
+            "skipped": 0
+          },
+          "xml_sha256": "3f7fb3a2f19ce12cbd1c77d4c1d29ce7b4e232ec98c61aae1b7625cf63372a6b",
+          "testcases": [
+            {
+              "name": "deepChainShortCircuitAndSortedListInterop",
+              "classname": "com.m3.collections.M3FilteredListsDeepCompositionTest"
+            }
+          ]
+        },
+        {
+          "name": "com.m3.collections.M3FilteredListsReadonlyDepthTest",
+          "counts": {
+            "tests": 1,
+            "failures": 0,
+            "errors": 0,
+            "skipped": 0
+          },
+          "xml_sha256": "e01f7d145b79465dee4a0bc46fc84989af9f88544b3cd83085838a4f0c232009",
+          "testcases": [
+            {
+              "name": "nestedReadOnlyNeverRecursesOrLeaksWriteAccess",
+              "classname": "com.m3.collections.M3FilteredListsReadonlyDepthTest"
+            }
+          ]
+        },
+        {
+          "name": "com.m3.collections.M3FilteredListsSortedInteropTest",
+          "counts": {
+            "tests": 2,
+            "failures": 0,
+            "errors": 0,
+            "skipped": 0
+          },
+          "xml_sha256": "c9f72196907a1c88795a80f1cbaed10d57994e186bec35a21b1efc9e4cfbec1b",
+          "testcases": [
+            {
+              "name": "readonlyEmptyAndNestedReversedMutatorsRefuse",
+              "classname": "com.m3.collections.M3FilteredListsSortedInteropTest"
+            },
+            {
+              "name": "sourceDefinedReverseOrderAndLiveVisibility",
+              "classname": "com.m3.collections.M3FilteredListsSortedInteropTest"
+            }
+          ]
+        },
+        {
+          "name": "com.m3.collections.M3FilteredListsTest",
+          "counts": {
+            "tests": 3,
+            "failures": 0,
+            "errors": 0,
+            "skipped": 0
+          },
+          "xml_sha256": "59ae5a2a989c5d0ff4155ffa021eceb134c28b1b31ebb33eea0527fb533ba4bd",
+          "testcases": [
+            {
+              "name": "mutationAndNullEdges",
+              "classname": "com.m3.collections.M3FilteredListsTest"
+            },
+            {
+              "name": "oracleHistories",
+              "classname": "com.m3.collections.M3FilteredListsTest"
+            },
+            {
+              "name": "linearTraversalEvidence",
+              "classname": "com.m3.collections.M3FilteredListsTest"
+            }
+          ]
+        },
+        {
+          "name": "com.m3.collections.M3FilteredNavigableSetRangeTest",
+          "counts": {
+            "tests": 1,
+            "failures": 0,
+            "errors": 0,
+            "skipped": 0
+          },
+          "xml_sha256": "c2fc70c4c360130430ace9e333cafa5b4723ef953a5ef18042b49a0ac9a5db65",
+          "testcases": [
+            {
+              "name": "comparatorNullableBackingAndBoundedNavigation",
+              "classname": "com.m3.collections.M3FilteredNavigableSetRangeTest"
+            }
+          ]
+        },
+        {
+          "name": "com.m3.collections.M3FilteredNavigableSetTest",
+          "counts": {
+            "tests": 4,
+            "failures": 0,
+            "errors": 0,
+            "skipped": 0
+          },
+          "xml_sha256": "0d3a44468323a291f3c9c69c7a84d20432b024f0a21d1e3dfe86d3878438bdaf",
+          "testcases": [
+            {
+              "name": "preservesOrderingRangeSemanticsAndLiveBackingChanges",
+              "classname": "com.m3.collections.M3FilteredNavigableSetTest"
+            },
+            {
+              "name": "comparatorEquivalentDifferentObjectsRemainMembers",
+              "classname": "com.m3.collections.M3FilteredNavigableSetTest"
+            },
+            {
+              "name": "reversedComparatorAndEmptyResultsKeepNavigableContracts",
+              "classname": "com.m3.collections.M3FilteredNavigableSetTest"
+            },
+            {
+              "name": "readOnlyViewsRejectAllMutatorsIncludingIteratorRemove",
+              "classname": "com.m3.collections.M3FilteredNavigableSetTest"
+            }
+          ]
+        },
+        {
+          "name": "com.m3.collections.M3FilteredViewsTest",
+          "counts": {
+            "tests": 4,
+            "failures": 0,
+            "errors": 0,
+            "skipped": 0
+          },
+          "xml_sha256": "945afb2b238b94a3e32f511dcb11d577f13a845096c3852b1f19f55fbb681ea7",
+          "testcases": [
+            {
+              "name": "navigableMap",
+              "classname": "com.m3.collections.M3FilteredViewsTest"
+            },
+            {
+              "name": "navigableSet",
+              "classname": "com.m3.collections.M3FilteredViewsTest"
+            },
+            {
+              "name": "randomizedDivergence",
+              "classname": "com.m3.collections.M3FilteredViewsTest"
+            },
+            {
+              "name": "collectionAndSet",
+              "classname": "com.m3.collections.M3FilteredViewsTest"
+            }
+          ]
+        },
+        {
+          "name": "com.m3.collections.M3FootprintContractTest",
+          "counts": {
+            "tests": 7,
+            "failures": 0,
+            "errors": 0,
+            "skipped": 0
+          },
+          "xml_sha256": "f83c741d6deb6fb3969f9e15155bda78f3d299f238bdd484d13d3fb587351bb1",
+          "testcases": [
+            {
+              "name": "treeEmptyChecksStillInvokeComparatorAndRejectNull",
+              "classname": "com.m3.collections.M3FootprintContractTest"
+            },
+            {
+              "name": "weakSecondHashFailureLeavesAnUsableEmptyOwner",
+              "classname": "com.m3.collections.M3FootprintContractTest"
+            },
+            {
+              "name": "emptyHashLookupsStillEvaluateCallbacksAndFirstInsertRecovers",
+              "classname": "com.m3.collections.M3FootprintContractTest"
+            },
+            {
+              "name": "mapViewsCreatedWhileEmptyRemainBackedAndFailFast",
+              "classname": "com.m3.collections.M3FootprintContractTest"
+            },
+            {
+              "name": "representableAvlHeightFitsSignedByteEvenDuringInsertion",
+              "classname": "com.m3.collections.M3FootprintContractTest"
+            },
+            {
+              "name": "separateEmptyOwnersNeverShareWritableSlots",
+              "classname": "com.m3.collections.M3FootprintContractTest"
+            },
+            {
+              "name": "listAndSetViewsWorkAcrossFirstInsertionClearAndReuse",
+              "classname": "com.m3.collections.M3FootprintContractTest"
+            }
+          ]
+        },
+        {
+          "name": "com.m3.collections.M3GenericArrayListTest",
+          "counts": {
+            "tests": 1,
+            "failures": 0,
+            "errors": 0,
+            "skipped": 0
+          },
+          "xml_sha256": "a3c65e4290c9fe66a08bf652baae4a5ac66fd3ff20b419b678301ae418f65928",
+          "testcases": [
+            {
+              "name": "objectArrayListAndIndexedSnapshot",
+              "classname": "com.m3.collections.M3GenericArrayListTest"
+            }
+          ]
+        },
+        {
+          "name": "com.m3.collections.M3IndexMaskCompactorTest",
+          "counts": {
+            "tests": 1,
+            "failures": 0,
+            "errors": 0,
+            "skipped": 0
+          },
+          "xml_sha256": "3bc0e3d3192ccf73cc5030f02697f3cb3fc47cfabf98cea41cfa65aeeca3eacf",
+          "testcases": [
+            {
+              "name": "stableMaskSelectionContract",
+              "classname": "com.m3.collections.M3IndexMaskCompactorTest"
+            }
+          ]
+        },
+        {
+          "name": "com.m3.collections.M3IndexMaskWindowRecoveryTest",
+          "counts": {
+            "tests": 1,
+            "failures": 0,
+            "errors": 0,
+            "skipped": 0
+          },
+          "xml_sha256": "a6422edb9fd16ba1d7bf204e5760af70196d450f414b74f6865d0254000b6630",
+          "testcases": [
+            {
+              "name": "contract",
+              "classname": "com.m3.collections.M3IndexMaskWindowRecoveryTest"
+            }
+          ]
+        },
+        {
+          "name": "com.m3.collections.M3IndexMaskWindowTest",
+          "counts": {
+            "tests": 1,
+            "failures": 0,
+            "errors": 0,
+            "skipped": 0
+          },
+          "xml_sha256": "29d6747681047c2bfcd91e180681dc1844c8d55c684cfba0c8dd65f8fb12d738",
+          "testcases": [
+            {
+              "name": "sortedAndFilteredWindowContracts",
+              "classname": "com.m3.collections.M3IndexMaskWindowTest"
+            }
+          ]
+        },
+        {
+          "name": "com.m3.collections.M3IndexPathMasksTest",
+          "counts": {
+            "tests": 1,
+            "failures": 0,
+            "errors": 0,
+            "skipped": 0
+          },
+          "xml_sha256": "57bc34400aecf13d25ff1c71f338c8e28506a609e10d9ecd17b3d3add6dc5467",
+          "testcases": [
+            {
+              "name": "maskedIndexPathsPreserveDetachedOrderAndBounds",
+              "classname": "com.m3.collections.M3IndexPathMasksTest"
+            }
+          ]
+        },
+        {
+          "name": "com.m3.collections.M3IndexPathRankTest",
+          "counts": {
+            "tests": 2,
+            "failures": 0,
+            "errors": 0,
+            "skipped": 0
+          },
+          "xml_sha256": "f7c39842475814eea6a5448b834ecac66453ed0d791ea47030599c06380b408c",
+          "testcases": [
+            {
+              "name": "boundedDeterministicDifferential",
+              "classname": "com.m3.collections.M3IndexPathRankTest"
+            },
+            {
+              "name": "agreesWithOriginalJavaMaskSelector",
+              "classname": "com.m3.collections.M3IndexPathRankTest"
+            }
+          ]
+        },
+        {
+          "name": "com.m3.collections.M3IndexedTableTest",
+          "counts": {
+            "tests": 1,
+            "failures": 0,
+            "errors": 0,
+            "skipped": 0
+          },
+          "xml_sha256": "06aee014a64d399caf25baf83de7707e2e9a5ea8b5f7aec0fd72a79e7a424c64",
+          "testcases": [
+            {
+              "name": "arraySlotRowColumnMasksAndState",
+              "classname": "com.m3.collections.M3IndexedTableTest"
+            }
+          ]
+        },
+        {
+          "name": "com.m3.collections.M3IntLanesTest",
+          "counts": {
+            "tests": 6,
+            "failures": 0,
+            "errors": 0,
+            "skipped": 0
+          },
+          "xml_sha256": "fff004caf4a615ea0422d3bb7d4475f0f119be2d494e69171fda23c000a0c6ef",
+          "testcases": [
+            {
+              "name": "intLanesRetainOnlyPrimitiveFields",
+              "classname": "com.m3.collections.M3IntLanesTest"
+            },
+            {
+              "name": "priorityQueueMatchesJdkHeadContentsAndRemoval",
+              "classname": "com.m3.collections.M3IntLanesTest"
+            },
+            {
+              "name": "intIntMapMatchesJdkAcrossChurnIncludingZeroKey",
+              "classname": "com.m3.collections.M3IntLanesTest"
+            },
+            {
+              "name": "hashSetMatchesJdkAcrossChurnIncludingZeroAndRehash",
+              "classname": "com.m3.collections.M3IntLanesTest"
+            },
+            {
+              "name": "hashSetEdgeContractsAndFailFast",
+              "classname": "com.m3.collections.M3IntLanesTest"
+            },
+            {
+              "name": "intIntMapEdgeContractsAndFailFast",
+              "classname": "com.m3.collections.M3IntLanesTest"
+            }
+          ]
+        },
+        {
+          "name": "com.m3.collections.M3IntLongHashMapTest",
+          "counts": {
+            "tests": 2,
+            "failures": 0,
+            "errors": 0,
+            "skipped": 0
+          },
+          "xml_sha256": "ed9926e3909fbf3be98d4b93f0684cb149ca538440e8e2d44cb4cf60df0eb824",
+          "testcases": [
+            {
+              "name": "matchesJdkAcrossChurnIncludingZeroKeyAndRehash",
+              "classname": "com.m3.collections.M3IntLongHashMapTest"
+            },
+            {
+              "name": "edgeContractsFailFastAndSizing",
+              "classname": "com.m3.collections.M3IntLongHashMapTest"
+            }
+          ]
+        },
+        {
+          "name": "com.m3.collections.M3JdkCollectionDifferentialTest",
+          "counts": {
+            "tests": 10,
+            "failures": 0,
+            "errors": 0,
+            "skipped": 0
+          },
+          "xml_sha256": "87dbad30a80d398248cd0a3c41ab4b9811d2ac349d9d1f038a8f80197fd171da",
+          "testcases": [
+            {
+              "name": "zeroCapacityRendezvousPreservesSynchronousQueueContract",
+              "classname": "com.m3.collections.M3JdkCollectionDifferentialTest"
+            },
+            {
+              "name": "transferAcknowledgementTimeoutAndCancellationMatchJdk",
+              "classname": "com.m3.collections.M3JdkCollectionDifferentialTest"
+            },
+            {
+              "name": "reversedSublistAndDefaultListMutationsMatchLinkedList",
+              "classname": "com.m3.collections.M3JdkCollectionDifferentialTest"
+            },
+            {
+              "name": "lateBindingTraversalsFollowListSetAndMapViews",
+              "classname": "com.m3.collections.M3JdkCollectionDifferentialTest"
+            },
+            {
+              "name": "blockedProducerInterruptionLeavesNoPhantomElement",
+              "classname": "com.m3.collections.M3JdkCollectionDifferentialTest"
+            },
+            {
+              "name": "comparatorEquivalentKeysAndNestedBoundsMatchTreeMap",
+              "classname": "com.m3.collections.M3JdkCollectionDifferentialTest"
+            },
+            {
+              "name": "boundedDequeWrapDrainAndTimedOperationsMatchJdk",
+              "classname": "com.m3.collections.M3JdkCollectionDifferentialTest"
+            },
+            {
+              "name": "lockedMapAtomicCallbacksLoseNoUpdates",
+              "classname": "com.m3.collections.M3JdkCollectionDifferentialTest"
+            },
+            {
+              "name": "everySortedSplitRetainsCustomComparatorAndEncounterOrder",
+              "classname": "com.m3.collections.M3JdkCollectionDifferentialTest"
+            },
+            {
+              "name": "sequencedNullAndAccessOrderOperationsMatchLinkedHashMap",
+              "classname": "com.m3.collections.M3JdkCollectionDifferentialTest"
+            }
+          ]
+        },
+        {
+          "name": "com.m3.collections.M3JdkShapedPrimitiveCollectionsTest",
+          "counts": {
+            "tests": 7,
+            "failures": 0,
+            "errors": 0,
+            "skipped": 0
+          },
+          "xml_sha256": "60962b20cc1a80b62d71957fbdf24d4ecce545a95e79806ab52579f201915ffc",
+          "testcases": [
+            {
+              "name": "priorityQueueMatchesJdkHeadContentsAndRemoval",
+              "classname": "com.m3.collections.M3JdkShapedPrimitiveCollectionsTest"
+            },
+            {
+              "name": "arrayListMatchesJdkAcrossDeterministicMutationSequence",
+              "classname": "com.m3.collections.M3JdkShapedPrimitiveCollectionsTest"
+            },
+            {
+              "name": "iteratorsAreFailFastOnStructuralMutation",
+              "classname": "com.m3.collections.M3JdkShapedPrimitiveCollectionsTest"
+            },
+            {
+              "name": "arrayDequeMatchesJdkOrderAndOccurrenceRemoval",
+              "classname": "com.m3.collections.M3JdkShapedPrimitiveCollectionsTest"
+            },
+            {
+              "name": "duplicateSetAddAndMapValueReplacementAreNonStructural",
+              "classname": "com.m3.collections.M3JdkShapedPrimitiveCollectionsTest"
+            },
+            {
+              "name": "hashSetMatchesJdkAcrossCollisionsDeletionAndRehash",
+              "classname": "com.m3.collections.M3JdkShapedPrimitiveCollectionsTest"
+            },
+            {
+              "name": "hashMapMatchesJdkAcrossReplacementDeletionAndRehash",
+              "classname": "com.m3.collections.M3JdkShapedPrimitiveCollectionsTest"
+            }
+          ]
+        },
+        {
+          "name": "com.m3.collections.M3LazyObserverRegressionTest",
+          "counts": {
+            "tests": 5,
+            "failures": 0,
+            "errors": 0,
+            "skipped": 0
+          },
+          "xml_sha256": "152cbb0e76152880901eb530ae5e938b86ff62a8f91fd3a927f5a4f68347915d",
+          "testcases": [
+            {
+              "name": "deferredKeysPreserveNullFailureCancellationAndViewOrder",
+              "classname": "com.m3.collections.M3LazyObserverRegressionTest"
+            },
+            {
+              "name": "rangeAndCachedValueObserversShareMutationGuard",
+              "classname": "com.m3.collections.M3LazyObserverRegressionTest"
+            },
+            {
+              "name": "beforeTouchObserverCannotRetargetRecycledSlot",
+              "classname": "com.m3.collections.M3LazyObserverRegressionTest"
+            },
+            {
+              "name": "successfulValueRemainsCoherentWhenCompletionObserverThrows",
+              "classname": "com.m3.collections.M3LazyObserverRegressionTest"
+            },
+            {
+              "name": "failureObserversCannotReplaceProviderExceptionOrPoisonRetry",
+              "classname": "com.m3.collections.M3LazyObserverRegressionTest"
+            }
+          ]
+        },
+        {
+          "name": "com.m3.collections.M3LazyTreeMapTest",
+          "counts": {
+            "tests": 1,
+            "failures": 0,
+            "errors": 0,
+            "skipped": 0
+          },
+          "xml_sha256": "f61204ae0648da2deb3f617f68f50040375d45abc7c2bf3df39186186b6f4e37",
+          "testcases": [
+            {
+              "name": "actualPackedTreeProviderContract",
+              "classname": "com.m3.collections.M3LazyTreeMapTest"
+            }
+          ]
+        },
+        {
+          "name": "com.m3.collections.M3LongAddressBoundedTest",
+          "counts": {
+            "tests": 1,
+            "failures": 0,
+            "errors": 0,
+            "skipped": 0
+          },
+          "xml_sha256": "0a61d94ccc7bd391652a9277e428637feb7fe458ca5d3dec7b1393c7b24545d1",
+          "testcases": [
+            {
+              "name": "preservesOffsetsDuplicatesMasksAndPartialFailure",
+              "classname": "com.m3.collections.M3LongAddressBoundedTest"
+            }
+          ]
+        },
+        {
+          "name": "com.m3.collections.M3LongAddressKernelTest",
+          "counts": {
+            "tests": 1,
+            "failures": 0,
+            "errors": 0,
+            "skipped": 0
+          },
+          "xml_sha256": "185c0b6992a292915bb49cae13fb339aee157c5966b031b1c94ce527b9da6128",
+          "testcases": [
+            {
+              "name": "directAddressAndBatchParity",
+              "classname": "com.m3.collections.M3LongAddressKernelTest"
+            }
+          ]
+        },
+        {
+          "name": "com.m3.collections.M3LongArrayDequeTest",
+          "counts": {
+            "tests": 3,
+            "failures": 0,
+            "errors": 0,
+            "skipped": 0
+          },
+          "xml_sha256": "09bf5c15cd74d42fa48a7990d4fc126ceb141074a1b0e400ed6435524ea2ba8c",
+          "testcases": [
+            {
+              "name": "primitiveDequeMatchesJdkAcrossWrapGrowthReuseAndStreams",
+              "classname": "com.m3.collections.M3LongArrayDequeTest"
+            },
+            {
+              "name": "callbackFailurePreservesThrowingValueAndUnreadSuffixAcrossRingWrap",
+              "classname": "com.m3.collections.M3LongArrayDequeTest"
+            },
+            {
+              "name": "queueAndIndexedViewsAreJdkShapedAliases",
+              "classname": "com.m3.collections.M3LongArrayDequeTest"
+            }
+          ]
+        },
+        {
+          "name": "com.m3.collections.M3LongArrayListTest",
+          "counts": {
+            "tests": 7,
+            "failures": 0,
+            "errors": 0,
+            "skipped": 0
+          },
+          "xml_sha256": "79dec569e4a137100dbb39a7d9cab04f57417385fd2750c4fffca37774cfaf64",
+          "testcases": [
+            {
+              "name": "boundsOwnershipAndStackExceptions",
+              "classname": "com.m3.collections.M3LongArrayListTest"
+            },
+            {
+              "name": "directStreamsRetainOwnerAcrossStorageRelocation",
+              "classname": "com.m3.collections.M3LongArrayListTest"
+            },
+            {
+              "name": "mixedOperationsMatchJdkValueOrder",
+              "classname": "com.m3.collections.M3LongArrayListTest"
+            },
+            {
+              "name": "callbackFailurePreservesThrowingValueAndUnreadSuffix",
+              "classname": "com.m3.collections.M3LongArrayListTest"
+            },
+            {
+              "name": "primitiveStorageAndCapacityChecksStayBounded",
+              "classname": "com.m3.collections.M3LongArrayListTest"
+            },
+            {
+              "name": "structuralMutationsFailFastAndStackIsJdkShapedRemoval",
+              "classname": "com.m3.collections.M3LongArrayListTest"
+            },
+            {
+              "name": "sortDedupAndSearchPreserveSignedLongSemantics",
+              "classname": "com.m3.collections.M3LongArrayListTest"
+            }
+          ]
+        },
+        {
+          "name": "com.m3.collections.M3LongCompositeLateBindTest",
+          "counts": {
+            "tests": 1,
+            "failures": 0,
+            "errors": 0,
+            "skipped": 0
+          },
+          "xml_sha256": "2c2aa95bf8a05d8781f2f6cc97baa19518b6ca9320b1ae48ce9a68c0b192db05",
+          "testcases": [
+            {
+              "name": "compositeSpliteratorsBindOnFirstTraversal",
+              "classname": "com.m3.collections.M3LongCompositeLateBindTest"
+            }
+          ]
+        },
+        {
+          "name": "com.m3.collections.M3LongDagJUnitTest",
+          "counts": {
+            "tests": 1,
+            "failures": 0,
+            "errors": 0,
+            "skipped": 0
+          },
+          "xml_sha256": "1e5309bf9eb20cc48150933993c1a77e15636db967b460a4786ebbeb30dee7c6",
+          "testcases": [
+            {
+              "name": "primitiveDAGAndVirtualCollectorContracts",
+              "classname": "com.m3.collections.M3LongDagJUnitTest"
+            }
+          ]
+        },
+        {
+          "name": "com.m3.collections.M3LongFilteredViewContractTest",
+          "counts": {
+            "tests": 5,
+            "failures": 0,
+            "errors": 0,
+            "skipped": 0
+          },
+          "xml_sha256": "5f75b66aedaf230ee4e200376b162accfa6e5ee14f6dfe934dfe7924bdc136a0",
+          "testcases": [
+            {
+              "name": "differentialSeeded",
+              "classname": "com.m3.collections.M3LongFilteredViewContractTest"
+            },
+            {
+              "name": "lateBindingStreamsAndNoSizeScan",
+              "classname": "com.m3.collections.M3LongFilteredViewContractTest"
+            },
+            {
+              "name": "composableAndReadOnly",
+              "classname": "com.m3.collections.M3LongFilteredViewContractTest"
+            },
+            {
+              "name": "fusedNestedPredicatesKeepEvaluationOrder",
+              "classname": "com.m3.collections.M3LongFilteredViewContractTest"
+            },
+            {
+              "name": "exceptionBoundaries",
+              "classname": "com.m3.collections.M3LongFilteredViewContractTest"
+            }
+          ]
+        },
+        {
+          "name": "com.m3.collections.M3LongIndexProjectionMaskOffsetTest",
+          "counts": {
+            "tests": 1,
+            "failures": 0,
+            "errors": 0,
+            "skipped": 0
+          },
+          "xml_sha256": "c2b391a786c2ab0cf051e52cc8cfca2cbd7aace8ffb23d19bdf8fff1500169f8",
+          "testcases": [
+            {
+              "name": "composableOffsetSortedAndNativeMaskContracts",
+              "classname": "com.m3.collections.M3LongIndexProjectionMaskOffsetTest"
+            }
+          ]
+        },
+        {
+          "name": "com.m3.collections.M3LongLinkedHashSetTest",
+          "counts": {
+            "tests": 3,
+            "failures": 0,
+            "errors": 0,
+            "skipped": 0
+          },
+          "xml_sha256": "99386abcfab79bdd1f406c5f39e77992a7256cd6ccd01b77e1c897c142e2194e",
+          "testcases": [
+            {
+              "name": "matchesJdkSequencedSetAcrossChurnIncludingMovesAndRehash",
+              "classname": "com.m3.collections.M3LongLinkedHashSetTest"
+            },
+            {
+              "name": "edgeContractsFailFastAndSizing",
+              "classname": "com.m3.collections.M3LongLinkedHashSetTest"
+            },
+            {
+              "name": "retainsOnlyPrimitiveLanes",
+              "classname": "com.m3.collections.M3LongLinkedHashSetTest"
+            }
+          ]
+        },
+        {
+          "name": "com.m3.collections.M3LongLongLinkedHashMapTest",
+          "counts": {
+            "tests": 3,
+            "failures": 0,
+            "errors": 0,
+            "skipped": 0
+          },
+          "xml_sha256": "fd81a966d4c003a146859777990742fda10774de0055eda4ca400991c53bba6c",
+          "testcases": [
+            {
+              "name": "matchesJdkSequencedMapAcrossChurnIncludingMovesAndRehash",
+              "classname": "com.m3.collections.M3LongLongLinkedHashMapTest"
+            },
+            {
+              "name": "edgeContractsFailFastAndSizing",
+              "classname": "com.m3.collections.M3LongLongLinkedHashMapTest"
+            },
+            {
+              "name": "retainsOnlyPrimitiveLanes",
+              "classname": "com.m3.collections.M3LongLongLinkedHashMapTest"
+            }
+          ]
+        },
+        {
+          "name": "com.m3.collections.M3LongRangeSetTest",
+          "counts": {
+            "tests": 1,
+            "failures": 0,
+            "errors": 0,
+            "skipped": 0
+          },
+          "xml_sha256": "8276e5e795fda2f4af651e7c2455849bc2bf9513a25d7f220ff5e1d997f191bc",
+          "testcases": [
+            {
+              "name": "arrayRangeOperationsDifferential",
+              "classname": "com.m3.collections.M3LongRangeSetTest"
+            }
+          ]
+        },
+        {
+          "name": "com.m3.collections.M3LongRankIndexTest",
+          "counts": {
+            "tests": 3,
+            "failures": 0,
+            "errors": 0,
+            "skipped": 0
+          },
+          "xml_sha256": "96d47b9a9a337aa048ca5eb0a5422024a1ca51abc596b9205da3eb671bb359ba",
+          "testcases": [
+            {
+              "name": "randomizedBoundsAndOptionalBatchParity",
+              "classname": "com.m3.collections.M3LongRankIndexTest"
+            },
+            {
+              "name": "freezesLiveFilteredInputWithoutMutatingSource",
+              "classname": "com.m3.collections.M3LongRankIndexTest"
+            },
+            {
+              "name": "rejectsInvalidRangesAndDoesNotExposeRetainedArray",
+              "classname": "com.m3.collections.M3LongRankIndexTest"
+            }
+          ]
+        },
+        {
+          "name": "com.m3.collections.M3LongSortedAlgebraTest",
+          "counts": {
+            "tests": 1,
+            "failures": 0,
+            "errors": 0,
+            "skipped": 0
+          },
+          "xml_sha256": "2c32255ee93157e3b1ae3bf7ce2ddac12f35cc7fb19605cb7b625b10025c1add",
+          "testcases": [
+            {
+              "name": "seededSortedSetAlgebraAndFilterComposition",
+              "classname": "com.m3.collections.M3LongSortedAlgebraTest"
+            }
+          ]
+        },
+        {
+          "name": "com.m3.collections.M3LongStateArrayTest",
+          "counts": {
+            "tests": 5,
+            "failures": 0,
+            "errors": 0,
+            "skipped": 0
+          },
+          "xml_sha256": "d71108105a068335b1d0fa7d99660dd811b4b2f03dff996a39afca136de5c2e1",
+          "testcases": [
+            {
+              "name": "sortedAndFilteredViewsPreserveDuplicateOccurrences",
+              "classname": "com.m3.collections.M3LongStateArrayTest"
+            },
+            {
+              "name": "validationAndGenerationAreNonmutatingOnRefusal",
+              "classname": "com.m3.collections.M3LongStateArrayTest"
+            },
+            {
+              "name": "randomizedMutationsKeepStateFlagsAligned",
+              "classname": "com.m3.collections.M3LongStateArrayTest"
+            },
+            {
+              "name": "fullWordMasksAndExistingNativeSelectorStayInParity",
+              "classname": "com.m3.collections.M3LongStateArrayTest"
+            },
+            {
+              "name": "onlyOneValueOwnerAndOneAlignedMetadataLaneAreRetained",
+              "classname": "com.m3.collections.M3LongStateArrayTest"
+            }
+          ]
+        },
+        {
+          "name": "com.m3.collections.M3LongTreeSetTest",
+          "counts": {
+            "tests": 7,
+            "failures": 0,
+            "errors": 0,
+            "skipped": 0
+          },
+          "xml_sha256": "fd336c6d99d38ff79eaf8bde90738151d50625aceac72b659f97d98a3e278ea4",
+          "testcases": [
+            {
+              "name": "filterInPlaceCommitsPriorRejectionsAndKeepsTheThrowingSuffix",
+              "classname": "com.m3.collections.M3LongTreeSetTest"
+            },
+            {
+              "name": "matchesJdkNavigableSetWithTinyPages",
+              "classname": "com.m3.collections.M3LongTreeSetTest"
+            },
+            {
+              "name": "growthSplitsPagesAndRemovalMergesAndTrimsThem",
+              "classname": "com.m3.collections.M3LongTreeSetTest"
+            },
+            {
+              "name": "sortedViewsAndUnionsWorkOverTheOwnerAsBackingSet",
+              "classname": "com.m3.collections.M3LongTreeSetTest"
+            },
+            {
+              "name": "edgeContractsFailFastAndSizing",
+              "classname": "com.m3.collections.M3LongTreeSetTest"
+            },
+            {
+              "name": "retainsOnlyPrimitiveLanes",
+              "classname": "com.m3.collections.M3LongTreeSetTest"
+            },
+            {
+              "name": "matchesJdkNavigableSetAcrossChurnIncludingViewsAndFilters",
+              "classname": "com.m3.collections.M3LongTreeSetTest"
+            }
+          ]
+        },
+        {
+          "name": "com.m3.collections.M3MapContractTest",
+          "counts": {
+            "tests": 18,
+            "failures": 0,
+            "errors": 0,
+            "skipped": 0
+          },
+          "xml_sha256": "23fea2e466357197772b135084285a7a73806888a87b56326bf862456eb000d6",
+          "testcases": [
+            {
+              "name": "sequencedAndReversedHashViews",
+              "classname": "com.m3.collections.M3MapContractTest"
+            },
+            {
+              "name": "iteratorDeletionPreservesAllTreeSuccessors",
+              "classname": "com.m3.collections.M3MapContractTest"
+            },
+            {
+              "name": "collisionChainsRecyclingAndNull",
+              "classname": "com.m3.collections.M3MapContractTest"
+            },
+            {
+              "name": "weakCleanupIsDeterministicAndDoesNotDeleteReusedKeys",
+              "classname": "com.m3.collections.M3MapContractTest"
+            },
+            {
+              "name": "differential(String, Supplier, Supplier)[1]",
+              "classname": "com.m3.collections.M3MapContractTest"
+            },
+            {
+              "name": "differential(String, Supplier, Supplier)[2]",
+              "classname": "com.m3.collections.M3MapContractTest"
+            },
+            {
+              "name": "differential(String, Supplier, Supplier)[3]",
+              "classname": "com.m3.collections.M3MapContractTest"
+            },
+            {
+              "name": "differential(String, Supplier, Supplier)[4]",
+              "classname": "com.m3.collections.M3MapContractTest"
+            },
+            {
+              "name": "comparatorNullKeysAndEquality",
+              "classname": "com.m3.collections.M3MapContractTest"
+            },
+            {
+              "name": "backedViewsAndCallbacks(String, Supplier, Supplier)[1]",
+              "classname": "com.m3.collections.M3MapContractTest"
+            },
+            {
+              "name": "backedViewsAndCallbacks(String, Supplier, Supplier)[2]",
+              "classname": "com.m3.collections.M3MapContractTest"
+            },
+            {
+              "name": "backedViewsAndCallbacks(String, Supplier, Supplier)[3]",
+              "classname": "com.m3.collections.M3MapContractTest"
+            },
+            {
+              "name": "backedViewsAndCallbacks(String, Supplier, Supplier)[4]",
+              "classname": "com.m3.collections.M3MapContractTest"
+            },
+            {
+              "name": "nestedRangeExceptionContractsMatchTreeMap",
+              "classname": "com.m3.collections.M3MapContractTest"
+            },
+            {
+              "name": "treeRangesNavigationAndMutation",
+              "classname": "com.m3.collections.M3MapContractTest"
+            },
+            {
+              "name": "sequencedEndpointsUseLiveAndDetachedEntriesCorrectly",
+              "classname": "com.m3.collections.M3MapContractTest"
+            },
+            {
+              "name": "treeRotationsAndEveryDeletionOrder",
+              "classname": "com.m3.collections.M3MapContractTest"
+            },
+            {
+              "name": "entryAndKeyViewsRemoveNullValuedMappings",
+              "classname": "com.m3.collections.M3MapContractTest"
+            }
+          ]
+        },
+        {
+          "name": "com.m3.collections.M3MaskAllSelectionReceiverTest",
+          "counts": {
+            "tests": 1,
+            "failures": 0,
+            "errors": 0,
+            "skipped": 0
+          },
+          "xml_sha256": "1ee157793e652e319f2f410aa4f7f540fc79e1749af7f409fef9cafff4167a02",
+          "testcases": [
+            {
+              "name": "everyMaskAndDefensiveResultIsCorrect",
+              "classname": "com.m3.collections.M3MaskAllSelectionReceiverTest"
+            }
+          ]
+        },
+        {
+          "name": "com.m3.collections.M3MutableFilteredViewsTest",
+          "counts": {
+            "tests": 1,
+            "failures": 0,
+            "errors": 0,
+            "skipped": 0
+          },
+          "xml_sha256": "913c6564aee5c736475af2ceb7ea59a1ef815596f411ea4e33677cd7e05c3a00",
+          "testcases": [
+            {
+              "name": "liveMutableNavigableContracts",
+              "classname": "com.m3.collections.M3MutableFilteredViewsTest"
+            }
+          ]
+        },
+        {
+          "name": "com.m3.collections.M3NativeIndexRangeTest",
+          "counts": {
+            "tests": 1,
+            "failures": 0,
+            "errors": 0,
+            "skipped": 0
+          },
+          "xml_sha256": "097244f052773c51bb001d3a79cc35ad8ec4b1055f4096bba34e7cf39a317d01",
+          "testcases": [
+            {
+              "name": "snapshotContracts",
+              "classname": "com.m3.collections.M3NativeIndexRangeTest"
+            }
+          ]
+        },
+        {
+          "name": "com.m3.collections.M3NoRetainedStructuralEntryTest",
+          "counts": {
+            "tests": 3,
+            "failures": 0,
+            "errors": 0,
+            "skipped": 0
+          },
+          "xml_sha256": "3805936ad50e9f10e9e4e751b9c2fb5778d163e7557f251ecaa0b14fb107d469",
+          "testcases": [
+            {
+              "name": "storageRootsAndNestedOwnersHaveNoRetainedEntryNodeBucketOrCellFields",
+              "classname": "com.m3.collections.M3NoRetainedStructuralEntryTest"
+            },
+            {
+              "name": "returnedMapEntriesAreFreshAndNeverRetainedByPackedMapStorage",
+              "classname": "com.m3.collections.M3NoRetainedStructuralEntryTest"
+            },
+            {
+              "name": "onlySlotMapDefinesTheExplicitMapEntryCompatibilityProjection",
+              "classname": "com.m3.collections.M3NoRetainedStructuralEntryTest"
+            }
+          ]
+        },
+        {
+          "name": "com.m3.collections.M3ObjectIdentityTest",
+          "counts": {
+            "tests": 4,
+            "failures": 0,
+            "errors": 0,
+            "skipped": 0
+          },
+          "xml_sha256": "18447c9a418169af37a6e837321c58b5ff21fa123fa3706ba2ff5c56dac4ae7e",
+          "testcases": [
+            {
+              "name": "identityMapEdgeContractsRehashAndFailFast",
+              "classname": "com.m3.collections.M3ObjectIdentityTest"
+            },
+            {
+              "name": "identityOwnersRetainOnlyFlatLanes",
+              "classname": "com.m3.collections.M3ObjectIdentityTest"
+            },
+            {
+              "name": "identityMapMatchesJdkAcrossChurnWithNullKeyAndValues",
+              "classname": "com.m3.collections.M3ObjectIdentityTest"
+            },
+            {
+              "name": "identitySetMatchesJdkAcrossChurn",
+              "classname": "com.m3.collections.M3ObjectIdentityTest"
+            }
+          ]
+        },
+        {
+          "name": "com.m3.collections.M3ObjectResidencyBorrowTest",
+          "counts": {
+            "tests": 4,
+            "failures": 0,
+            "errors": 0,
+            "skipped": 0
+          },
+          "xml_sha256": "902e1d594b4e177abe765a721d37735fb7e5de60e9ac3821d1f2378dfe3e24f8",
+          "testcases": [
+            {
+              "name": "callbackExceptionAndReentrantReleasePreserveCount",
+              "classname": "com.m3.collections.M3ObjectResidencyBorrowTest"
+            },
+            {
+              "name": "ExternalAndUnprovenOwnersNeverFastRetire",
+              "classname": "com.m3.collections.M3ObjectResidencyBorrowTest"
+            },
+            {
+              "name": "independentBorrowersPreventEarlyReclamationAndStaleReuse",
+              "classname": "com.m3.collections.M3ObjectResidencyBorrowTest"
+            },
+            {
+              "name": "asynchronousBorrowKeepsEventOwnerUntilAck",
+              "classname": "com.m3.collections.M3ObjectResidencyBorrowTest"
+            }
+          ]
+        },
+        {
+          "name": "com.m3.collections.M3ObjectResidencyRuntimePressureTest",
+          "counts": {
+            "tests": 1,
+            "failures": 0,
+            "errors": 0,
+            "skipped": 0
+          },
+          "xml_sha256": "94cc1ad2047738ff1d1c65a8bc2b3b2df28f97510a674c1278d1f3443609e07b",
+          "testcases": [
+            {
+              "name": "targetUsesTheActualRunningJvmHeap",
+              "classname": "com.m3.collections.M3ObjectResidencyRuntimePressureTest"
+            }
+          ]
+        },
+        {
+          "name": "com.m3.collections.M3ObjectResidencyTest",
+          "counts": {
+            "tests": 12,
+            "failures": 0,
+            "errors": 0,
+            "skipped": 0
+          },
+          "xml_sha256": "fd3618668381996cf5fe75429c4185166a2d7f1d87da423acd20e4b8978ca47e",
+          "testcases": [
+            {
+              "name": "lazyCreateAndStableIntegerSlot",
+              "classname": "com.m3.collections.M3ObjectResidencyTest"
+            },
+            {
+              "name": "strictScopeRejectsReturningTheProjection",
+              "classname": "com.m3.collections.M3ObjectResidencyTest"
+            },
+            {
+              "name": "failedSwapLeavesOriginalProjectionResident",
+              "classname": "com.m3.collections.M3ObjectResidencyTest"
+            },
+            {
+              "name": "exposedProjectionIsPinnedAndNeverSilentlyReplaced",
+              "classname": "com.m3.collections.M3ObjectResidencyTest"
+            },
+            {
+              "name": "parentBitsRemainCanonicalAcrossProjectionRecreation",
+              "classname": "com.m3.collections.M3ObjectResidencyTest"
+            },
+            {
+              "name": "rejectsUnknownFlagsAndIncompleteSwapConfiguration",
+              "classname": "com.m3.collections.M3ObjectResidencyTest"
+            },
+            {
+              "name": "neverEvictsActiveSlotAndReportsUnrecoverableBudget",
+              "classname": "com.m3.collections.M3ObjectResidencyTest"
+            },
+            {
+              "name": "lruDoesNotSpinWhenNoEvictionStrategyIsConfigured",
+              "classname": "com.m3.collections.M3ObjectResidencyTest"
+            },
+            {
+              "name": "swapsToSecondaryAndRestoresWithoutChangingLogicalValue",
+              "classname": "com.m3.collections.M3ObjectResidencyTest"
+            },
+            {
+              "name": "recreatesOnlyFromCanonicalParentState",
+              "classname": "com.m3.collections.M3ObjectResidencyTest"
+            },
+            {
+              "name": "residencyAnnotationIsClassRetainedAndExplicit",
+              "classname": "com.m3.collections.M3ObjectResidencyTest"
+            },
+            {
+              "name": "exposedInstallIsPinnedFromTheMomentItEntersTheArena",
+              "classname": "com.m3.collections.M3ObjectResidencyTest"
+            }
+          ]
+        },
+        {
+          "name": "com.m3.collections.M3ObjectSlotIndexTest",
+          "counts": {
+            "tests": 1,
+            "failures": 0,
+            "errors": 0,
+            "skipped": 0
+          },
+          "xml_sha256": "afc0dd656360cfdaff219cb245f6fbe1c5ff61912755373fccf67e51ee45e29b",
+          "testcases": [
+            {
+              "name": "contracts",
+              "classname": "com.m3.collections.M3ObjectSlotIndexTest"
+            }
+          ]
+        },
+        {
+          "name": "com.m3.collections.M3PrimitiveCollectionDifferentialTest",
+          "counts": {
+            "tests": 3,
+            "failures": 0,
+            "errors": 0,
+            "skipped": 0
+          },
+          "xml_sha256": "b49823f70ebedb77b16bfbddc8e6d380a03bbcb86f26853f3ac8ac93b93f958d",
+          "testcases": [
+            {
+              "name": "primitiveDequeMatchesJdkAcrossWrapGrowthReuseAndStreams",
+              "classname": "com.m3.collections.M3PrimitiveCollectionDifferentialTest"
+            },
+            {
+              "name": "primitiveListMatchesJdkAcrossGrowthCompactionSortingAndStreams",
+              "classname": "com.m3.collections.M3PrimitiveCollectionDifferentialTest"
+            },
+            {
+              "name": "primitiveListSnapshotFilterFailureAndOwnerBoundStream",
+              "classname": "com.m3.collections.M3PrimitiveCollectionDifferentialTest"
+            }
+          ]
+        },
+        {
+          "name": "com.m3.collections.M3PrimitiveFilteredSequencesTest",
+          "counts": {
+            "tests": 1,
+            "failures": 0,
+            "errors": 0,
+            "skipped": 0
+          },
+          "xml_sha256": "cadd5df4db522a7447131a5ee41fc23b5da5ce805469dceea3a13edb7b792694",
+          "testcases": [
+            {
+              "name": "fullPrimitiveFilteredSequenceContract",
+              "classname": "com.m3.collections.M3PrimitiveFilteredSequencesTest"
+            }
+          ]
+        },
+        {
+          "name": "com.m3.collections.M3ProgressAdaptersPercentageTest",
+          "counts": {
+            "tests": 1,
+            "failures": 0,
+            "errors": 0,
+            "skipped": 0
+          },
+          "xml_sha256": "de4d0fdd559ed7546aee518bda06ec30c8c6fb877e0aa92655a025a0791fad1b",
+          "testcases": [
+            {
+              "name": "exactLongPercentageAndCallbackContracts",
+              "classname": "com.m3.collections.M3ProgressAdaptersPercentageTest"
+            }
+          ]
+        },
+        {
+          "name": "com.m3.collections.M3ReadOnlyMapDefaultsTest",
+          "counts": {
+            "tests": 1,
+            "failures": 0,
+            "errors": 0,
+            "skipped": 0
+          },
+          "xml_sha256": "46fe667ae2a2d5127189ba093645b10544a8cfc91561ceec106dc78eca5f5c7e",
+          "testcases": [
+            {
+              "name": "defaultMethodsAndDerivedRanges",
+              "classname": "com.m3.collections.M3ReadOnlyMapDefaultsTest"
+            }
+          ]
+        },
+        {
+          "name": "com.m3.collections.M3ReceivingRecoveryTest",
+          "counts": {
+            "tests": 3,
+            "failures": 0,
+            "errors": 0,
+            "skipped": 0
+          },
+          "xml_sha256": "78cebcef192f394a48e58105b3e8da71535b727157d4fef34d3616fc3eb7a1e4",
+          "testcases": [
+            {
+              "name": "restoredSequenceAndCurrentListAreOneOwnerThroughTheFactory",
+              "classname": "com.m3.collections.M3ReceivingRecoveryTest"
+            },
+            {
+              "name": "restoredDequeFactoryKeepsCurrentCallbackFailureAndNoOpSemantics",
+              "classname": "com.m3.collections.M3ReceivingRecoveryTest"
+            },
+            {
+              "name": "restoredFactoryKeepsCurrentSmallListSortInvalidation",
+              "classname": "com.m3.collections.M3ReceivingRecoveryTest"
+            }
+          ]
+        },
+        {
+          "name": "com.m3.collections.M3ResidencyStateMaskTest",
+          "counts": {
+            "tests": 1,
+            "failures": 0,
+            "errors": 0,
+            "skipped": 0
+          },
+          "xml_sha256": "05f456e95b31ea0de84ae61a985b07a2b02d7f22f821ea48060500f75ffaddb2",
+          "testcases": [
+            {
+              "name": "deterministicJavaStateMaskAndIndexContract",
+              "classname": "com.m3.collections.M3ResidencyStateMaskTest"
+            }
+          ]
+        },
+        {
+          "name": "com.m3.collections.M3SdkOwnerFactoryTest",
+          "counts": {
+            "tests": 1,
+            "failures": 0,
+            "errors": 0,
+            "skipped": 0
+          },
+          "xml_sha256": "8fc8e51fb55234e4745c1da09588569990691f3b8055648d159f88ec5ec11b99",
+          "testcases": [
+            {
+              "name": "ownerFactoriesAndSortedViewContracts",
+              "classname": "com.m3.collections.M3SdkOwnerFactoryTest"
+            }
+          ]
+        },
+        {
+          "name": "com.m3.collections.M3SdkRecoveryTest",
+          "counts": {
+            "tests": 1,
+            "failures": 0,
+            "errors": 0,
+            "skipped": 0
+          },
+          "xml_sha256": "cc6a003d30651727d979c6105b283e8693a9933a07ba37a51c67049622c4ba81",
+          "testcases": [
+            {
+              "name": "exactSdkRecoveryContract",
+              "classname": "com.m3.collections.M3SdkRecoveryTest"
+            }
+          ]
+        },
+        {
+          "name": "com.m3.collections.M3SequenceContractTest",
+          "counts": {
+            "tests": 6,
+            "failures": 0,
+            "errors": 0,
+            "skipped": 0
+          },
+          "xml_sha256": "3d0f23bb5b1ddeedb3a087c9ab1978900dd2f07c97aeba5865221dc996c746e7",
+          "testcases": [
+            {
+              "name": "linkedListAndDequeDifferential",
+              "classname": "com.m3.collections.M3SequenceContractTest"
+            },
+            {
+              "name": "listIteratorAlternatingMutations",
+              "classname": "com.m3.collections.M3SequenceContractTest"
+            },
+            {
+              "name": "treeSetViewsAndPolls",
+              "classname": "com.m3.collections.M3SequenceContractTest"
+            },
+            {
+              "name": "sublistAndReverseShareStructuralVersion",
+              "classname": "com.m3.collections.M3SequenceContractTest"
+            },
+            {
+              "name": "streamsRetainEncounterOrderAndSortedComparator",
+              "classname": "com.m3.collections.M3SequenceContractTest"
+            },
+            {
+              "name": "orderedSetSequenceOperations",
+              "classname": "com.m3.collections.M3SequenceContractTest"
+            }
+          ]
+        },
+        {
+          "name": "com.m3.collections.M3SignalOrderJUnitTest",
+          "counts": {
+            "tests": 1,
+            "failures": 0,
+            "errors": 0,
+            "skipped": 0
+          },
+          "xml_sha256": "4ca9581a6e0a21a07ddd174b6f84eabbfe0d8ccb7f97806db124ced1e3e54e00",
+          "testcases": [
+            {
+              "name": "stableFilteredSignalOrderPreservesExactJavaSemantics",
+              "classname": "com.m3.collections.M3SignalOrderJUnitTest"
+            }
+          ]
+        },
+        {
+          "name": "com.m3.collections.M3SpanIndexTest",
+          "counts": {
+            "tests": 1,
+            "failures": 0,
+            "errors": 0,
+            "skipped": 0
+          },
+          "xml_sha256": "44b547ec7a7e2b41d6443d6a34c6acfb01ce3653b313a34a2382e51e323a98eb",
+          "testcases": [
+            {
+              "name": "compareAgainstSparseWidgetSpanOracle",
+              "classname": "com.m3.collections.M3SpanIndexTest"
+            }
+          ]
+        },
+        {
+          "name": "com.m3.collections.M3StateMaskHistogramTest",
+          "counts": {
+            "tests": 1,
+            "failures": 0,
+            "errors": 0,
+            "skipped": 0
+          },
+          "xml_sha256": "702f14d8ed3e4c68a8453e7bf7981684c6419be3c2d5612016c1506c32b0f623",
+          "testcases": [
+            {
+              "name": "differentialAndMaskAlgebra",
+              "classname": "com.m3.collections.M3StateMaskHistogramTest"
+            }
+          ]
+        },
+        {
+          "name": "com.m3.collections.M3StoredRepresentativeTest",
+          "counts": {
+            "tests": 1,
+            "failures": 0,
+            "errors": 0,
+            "skipped": 0
+          },
+          "xml_sha256": "388efe848ae4432a18f49f0445c8c706afb165254de220c36ddf627f6cc39e54",
+          "testcases": [
+            {
+              "name": "storedRepresentativeAndBulkComparatorAliases",
+              "classname": "com.m3.collections.M3StoredRepresentativeTest"
+            }
+          ]
+        },
+        {
+          "name": "com.m3.collections.M3TombstoneReuseTest",
+          "counts": {
+            "tests": 1,
+            "failures": 0,
+            "errors": 0,
+            "skipped": 0
+          },
+          "xml_sha256": "868be15b58e7be63ae47ed189486fa153e9599f003dc78b7de20cd77f44af2e2",
+          "testcases": [
+            {
+              "name": "tombstoneReusePreservesPrimitiveSetMapContracts",
+              "classname": "com.m3.collections.M3TombstoneReuseTest"
+            }
+          ]
+        },
+        {
+          "name": "com.m3.collections.M3ZeroMaskArrayFastPathTest",
+          "counts": {
+            "tests": 1,
+            "failures": 0,
+            "errors": 0,
+            "skipped": 0
+          },
+          "xml_sha256": "f1fed4726b7d2b5135ce7d24a6498a3709557c5a4ff8b8b999c550343216d0a9",
+          "testcases": [
+            {
+              "name": "noOpWindowAndPrimitiveMaskCompactionStayContractIdentical",
+              "classname": "com.m3.collections.M3ZeroMaskArrayFastPathTest"
+            }
+          ]
+        },
+        {
+          "name": "com.m3.collections.M3ZeroSlotCapacityTest",
+          "counts": {
+            "tests": 1,
+            "failures": 0,
+            "errors": 0,
+            "skipped": 0
+          },
+          "xml_sha256": "7da4dd4e965926936e4929d7cd55b68b84fbff7c87974684d3eb4a15952c7482",
+          "testcases": [
+            {
+              "name": "primitiveZeroKeyIsNotAProbeSlot",
+              "classname": "com.m3.collections.M3ZeroSlotCapacityTest"
+            }
+          ]
+        },
+        {
+          "name": "com.m3.collections.SegmentedLaneBulkContractTest",
+          "counts": {
+            "tests": 6,
+            "failures": 0,
+            "errors": 0,
+            "skipped": 0
+          },
+          "xml_sha256": "76dc73c742988c0d9e3a310e0d48b1b1a1354e68463a8564de35ad4ba9e7b3eb",
+          "testcases": [
+            {
+              "name": "intCopiesAndImportsMatchFlatArrays",
+              "classname": "com.m3.collections.SegmentedLaneBulkContractTest"
+            },
+            {
+              "name": "longCopiesMatchArraycopyAcrossBothOverlapDirections",
+              "classname": "com.m3.collections.SegmentedLaneBulkContractTest"
+            },
+            {
+              "name": "sparseRowsRetainAscendingSlotAndGenerationSemantics",
+              "classname": "com.m3.collections.SegmentedLaneBulkContractTest"
+            },
+            {
+              "name": "invalidRangesAreRejectedBeforeWriting",
+              "classname": "com.m3.collections.SegmentedLaneBulkContractTest"
+            },
+            {
+              "name": "sparseZeroPropagationAndExtremeEndpointsDoNotGrowHoles",
+              "classname": "com.m3.collections.SegmentedLaneBulkContractTest"
+            },
+            {
+              "name": "bitmapRankSelectAndTraversalMatchBitSet",
+              "classname": "com.m3.collections.SegmentedLaneBulkContractTest"
+            }
+          ]
+        },
+        {
+          "name": "com.m3.collections.SegmentedPrimitiveStorageTest",
+          "counts": {
+            "tests": 7,
+            "failures": 0,
+            "errors": 0,
+            "skipped": 0
+          },
+          "xml_sha256": "09ddebb6b40be84fe9f87c16e7d6f0e02699bd9db0188f2f5ffa97a2adb70ca4",
+          "testcases": [
+            {
+              "name": "addressRoundTripsAllBoundaries",
+              "classname": "com.m3.collections.SegmentedPrimitiveStorageTest"
+            },
+            {
+              "name": "multiLaneStoreDoesNotMoveOtherHandlesOnRemoval",
+              "classname": "com.m3.collections.SegmentedPrimitiveStorageTest"
+            },
+            {
+              "name": "linkedListKeepsOrderAcrossStableSlotReuse",
+              "classname": "com.m3.collections.SegmentedPrimitiveStorageTest"
+            },
+            {
+              "name": "leanFactoryExposesStorageWithoutChoosingSemantics",
+              "classname": "com.m3.collections.SegmentedPrimitiveStorageTest"
+            },
+            {
+              "name": "longIntAndBitLanesAllocateOnlyTouchedPaths",
+              "classname": "com.m3.collections.SegmentedPrimitiveStorageTest"
+            },
+            {
+              "name": "allocatorRejectsStaleHandlesAfterReuse",
+              "classname": "com.m3.collections.SegmentedPrimitiveStorageTest"
+            },
+            {
+              "name": "segmentedArenaCrossesLeafBoundaryWithoutCopyingExistingOffsets",
+              "classname": "com.m3.collections.SegmentedPrimitiveStorageTest"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "universal_object_compatibility": "HOLD: the executed witness demonstrates old interface-default dispatch and source compatibility counterexamples",
+  "jni": "131403 checks; two independent sequential JVM mappings and same-process collision refusal; not concurrent processes",
+  "hosted_ci_claim": false,
+  "phase_promotion": false,
+  "image_inputs": {
+    "m3/backports/ALGORITHM_CATALOGUE.tsv": "6e129506e8e1bb6c8e728ed82ddae11822129da00b708959dc65deb40d2d0e0c",
+    "m3/compatibility/check_object_adapter_progress_receiver_20261017.py": "e2c0e81911a8ea4e6d0d6b77eacc36fa4a4aca2c792536b9c32cbcdd40be0404",
+    "m3/compatibility/verify_m3_default_template_20261017.py": "234293306f44acc4f756816564b9dea6146962b13ac2529397e25f062cce49bc",
+    "m3/docs/name-mapping.json": "d63db548f89f25622399329148872225a438e9121cb3436d967bccd3bdff0c02",
+    "src/hotspot/share/classfile/classLoader.cpp": "d6283c23f650714e85b9a910f6cda656146552ae95950a04b02af861b636dca2",
+    "src/java.base/linux/native/libjava/M3PrimitiveFixedArena.c": "bcc1693812f4e81ae490ed9ca03c38d6411a7ba81eb2108c1436d693991e0e30",
+    "src/java.base/share/classes/java/lang/Runnable.java": "b549cf18db454b6cff5d4a8181b54fdae1e26659ecc2d7f205e4d2ea6da9f93a",
+    "src/java.base/share/classes/java/util/Strings.java": "20071ef19a84a81f9bccd9a4260df58225442810aef2cbe0b1ec4980c8251087",
+    "src/java.base/share/classes/java/util/concurrent/Callable.java": "6b1ecf702a9e59b171efcaa28dd18fb72265d2bedbfeb2b8bc9d831a74d4892f",
+    "src/java.base/share/classes/java/util/concurrent/Executor.java": "e887630e8a6fe2cb3b24f890fe02118abb06b9a340f8d79f47344840b9b2b6aa",
+    "src/java.base/share/classes/java/util/concurrent/ExecutorService.java": "9196858f2b800cc32671801563da29b14f881bbf37477419664aa6abd795ce2d",
+    "src/java.base/share/classes/java/util/concurrent/MonitoredCallable.java": "77436155c7936ab04698de243fc91b8a9c53a500e63247c364de591c45c1d733",
+    "src/java.base/share/classes/java/util/concurrent/MonitoredRunnable.java": "2670d2b928981c1068c2299dc1458c2b9dc7dc372d2e8d2527005d695c77f06e",
+    "src/java.base/share/classes/java/util/concurrent/ProgressMonitor.java": "368f6b70ca1639ed193c477d1523a1707cf9ec65d056275552e8ca42f500ae93",
+    "src/java.base/share/classes/java/util/concurrent/ProgressMonitors.java": "48b06f44b71fd22a2bafc4e8a99d7542d280830043d929ce1d26ae338f3b4efc",
+    "src/java.base/share/classes/java/util/function/Consumer.java": "52773610a8cd4d4e0808c2895e504b09ce9c0c05a0273e81cc533bad19ab6226",
+    "src/java.base/share/classes/java/util/function/Function.java": "73877c7a547bb812a6901cae0af4866645de978b867e055204cd53f6dffb6476",
+    "src/java.base/share/classes/java/util/function/Supplier.java": "84170e0863237433f20c3fdc4617eea990731fa7a1e5b0aeaf6b03f89e55c096",
+    "src/java.base/share/classes/java/lang/Object.java": "829fb37093cf3e8d11b3c1e3d42f898f0c86f3b697e7a66cefe09934be3bb259",
+    "src/java.base/share/classes/java/lang/Runtime.java": "daacc198e43203c8bfabaf925569da40964f2758b9f1513dfce88b77e8da8c87"
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "schema": "M3_NATIVE_FEATURE_GUARD_CANDIDATE_V1",
+  "dataset": "m3jdk21-native-feature-guard",
+  "target": "src/java.base/linux/native/libjava/M3PrimitiveFixedArena.c",
+  "before_sha256": "04c5281944444e9a9c4bee49748b2a80f7661f44897003f87619403e709e2ddb",
+  "after_sha256": "bcc1693812f4e81ae490ed9ca03c38d6411a7ba81eb2108c1436d693991e0e30",
+  "candidate_only": true,
+  "metadata": {
+    "schema": "M3_COLLECTIONS_CONTRACT_REFINEMENT_DATASET_V1",
+    "dataset": "m3jdk21-native-feature-guard",
+    "repository": "hsoliwal/M3jdk21",
+    "baseline_ref": "4b24824c3aa09d802121447f8970d442a855f064",
+    "crate_name": "m3-collections-contract-refinement-20261017-m3jdk21-native-feature-guard",
+    "recipe_name": "com.synexia.m3jdk.CollectionsContractRefinement20261017",
+    "targets": 1,
+    "java_targets": 0,
+    "text_targets": 1,
+    "product_sources_written": false,
+    "engine_changes_from_origin": []
+  },
+  "category": "JNI / NATIVE_FEATURE_MACRO_ADMISSION",
+  "selection": "Reuse the existing conditional feature-macro idiom; preserve a build-supplied definition and supply the original definition otherwise.",
+  "existing_pattern": "src/hotspot/os/linux/os_linux.cpp at 4b24824c3aa09d802121447f8970d442a855f064",
+  "rejected": [
+    "Disable warnings-as-errors",
+    "Remove the feature macro from standalone source",
+    "Change JNI mapping or ownership logic"
+  ],
+  "contract": "No JNI signature, C function, mapping flag, file validation, exception, or cleanup path changes.",
+  "license": "GPL-2.0-only WITH Classpath-exception-2.0",
+  "required_gates": [
+    "Original Maven/OpenRewrite5+sealer8+receiver9",
+    "Preprocessed C equality",
+    "Object-code equality with debug information disabled",
+    "Original full JDK images build with warnings-as-errors"
+  ]
+}

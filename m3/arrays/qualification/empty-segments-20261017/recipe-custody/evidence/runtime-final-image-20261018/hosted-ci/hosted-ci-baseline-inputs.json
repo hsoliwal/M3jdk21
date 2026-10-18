@@ -1,0 +1,85 @@
+{
+  "baseline": "0efc1719ca5766aead09f4f7c49f5067975bd946",
+  "paths": [
+    {
+      "path": ".github/workflows/m3-array-substrate.yml",
+      "base_sha256": "a0cb19afe9c348c733492d519978f53dd10be102f6cef8f8ec43ecf9bfb093a6",
+      "branch_sha256": "a0cb19afe9c348c733492d519978f53dd10be102f6cef8f8ec43ecf9bfb093a6",
+      "same_bytes": true
+    },
+    {
+      "path": ".github/workflows/m3-collections.yml",
+      "base_sha256": "c5ee0eaa49e26c97c48db19e40d97c11c99d761c267cf1ea76023efd37def642",
+      "branch_sha256": "c5ee0eaa49e26c97c48db19e40d97c11c99d761c267cf1ea76023efd37def642",
+      "same_bytes": true
+    },
+    {
+      "path": "m3/arrays/pom.xml",
+      "base_sha256": "fb6b3453259febac2a3571bbc606d5e1bf886d1560c15f16f17246f0e362e810",
+      "branch_sha256": "fb6b3453259febac2a3571bbc606d5e1bf886d1560c15f16f17246f0e362e810",
+      "same_bytes": true
+    },
+    {
+      "path": "m3/collections/recipe/pom.xml",
+      "base_sha256": "85705511c828c8753bbe2702d238311c062056e56ce63a2b770ecc21d8d6edd6",
+      "branch_sha256": "85705511c828c8753bbe2702d238311c062056e56ce63a2b770ecc21d8d6edd6",
+      "same_bytes": true
+    },
+    {
+      "path": "m3/tooling/migration-recipes/pom.xml",
+      "base_sha256": "02972fa670771862db3b3b16ba3ee6070a5c2304560e52c8a37cdf2e6cd76f46",
+      "branch_sha256": "02972fa670771862db3b3b16ba3ee6070a5c2304560e52c8a37cdf2e6cd76f46",
+      "same_bytes": true
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/test/java/com/synexia/rewrite/M3ObjectSlotIndexSnapshot20261017RecipeTest.java",
+      "base_sha256": "5a1e857a1003b106848ec3f3deac378b7b9633fdec8337581c3b9fe3d1b69a89",
+      "branch_sha256": "5a1e857a1003b106848ec3f3deac378b7b9633fdec8337581c3b9fe3d1b69a89",
+      "same_bytes": true
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+      "base_sha256": "3fc6e77a1394e292747d689a4a42a328b496000865aa390afe05d5571febd599",
+      "branch_sha256": "3fc6e77a1394e292747d689a4a42a328b496000865aa390afe05d5571febd599",
+      "same_bytes": true
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java",
+      "base_sha256": "4a109baf88457d625fa8fc259ee8e7908340f5436cfea77dc5ac554924045b8d",
+      "branch_sha256": "4a109baf88457d625fa8fc259ee8e7908340f5436cfea77dc5ac554924045b8d",
+      "same_bytes": true
+    },
+    {
+      "path": "m3/collections/test_verify_filtered_views.py",
+      "base_sha256": "d4c5a38fe2245a910c722cc8f675635e109d351f7aceaeaadb9111e43626b51b",
+      "branch_sha256": "d4c5a38fe2245a910c722cc8f675635e109d351f7aceaeaadb9111e43626b51b",
+      "same_bytes": true
+    },
+    {
+      "path": "m3/collections/test_verify_object_state_offset.py",
+      "base_sha256": "02ce8cb46fdb1c81ad9b21eb255242c6124a6a435455951202954eb51b3b86b7",
+      "branch_sha256": "02ce8cb46fdb1c81ad9b21eb255242c6124a6a435455951202954eb51b3b86b7",
+      "same_bytes": true
+    },
+    {
+      "path": "m3/collections/verify_donation.py",
+      "base_sha256": "2e98edda477e2805586ffced0749c62bd2d9674727e84c65cc8b2511fbb622cb",
+      "branch_sha256": "2e98edda477e2805586ffced0749c62bd2d9674727e84c65cc8b2511fbb622cb",
+      "same_bytes": true
+    },
+    {
+      "path": "m3/runtime-integration/char-array-copy/recipe/apply.py",
+      "base_sha256": "01a20628a493101194d4698ad0701533c2a3ba797d17a344e5d557616976e16b",
+      "branch_sha256": "01a20628a493101194d4698ad0701533c2a3ba797d17a344e5d557616976e16b",
+      "same_bytes": true
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/M3String.java",
+      "base_sha256": "fad8274a84532ce29bd2b2fbdcb62474cfce32a6fb8eee89b885e5a611ea46f0",
+      "branch_sha256": "fad8274a84532ce29bd2b2fbdcb62474cfce32a6fb8eee89b885e5a611ea46f0",
+      "same_bytes": true
+    }
+  ],
+  "all_same_bytes": true,
+  "qualification_scope": "These inputs to the observed failing hosted jobs are unchanged from the published base. This does not declare uninspected failures unrelated."
+}

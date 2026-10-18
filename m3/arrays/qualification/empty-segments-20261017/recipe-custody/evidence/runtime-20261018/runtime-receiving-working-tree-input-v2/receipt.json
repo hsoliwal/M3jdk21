@@ -1,0 +1,250 @@
+{
+  "schema": "M3_RUNTIME_RECEIVING_VERIFICATION_V1",
+  "result": "PASS",
+  "baseline": "4b24824c3aa09d802121447f8970d442a855f064",
+  "seeded_originals": {
+    "m3/backports/ALGORITHM_CATALOGUE.tsv": "50e6381eed8e06fe9c073298b8a4cf20ad853df096887c6c8510a40bedce6569",
+    "m3/compatibility/check_object_adapter_progress_receiver_20261017.py": "5e44ba190257db7d9715d80e7870d6a1b69f8c76cc3c285182193e80fc0da443",
+    "m3/compatibility/m3-default-template-source-seal.tsv": "c431bf732eb91a289b4bcd0b886db71d43da7d7bb17074cd6116db6b37e73ad6",
+    "m3/compatibility/m3-object-adapter-progress-20261017.tsv": "2f581a791adc7ecf7f217a6276f0da8af424c1e3e49385ca6ae44704d3319c82",
+    "m3/compatibility/verify_m3_default_template_20261017.py": "856910b716021260d387c0e3230c774223d7afc6ba62eab8e0c35668ffc8f2da",
+    "m3/docs/name-mapping.json": "4247c5648cf6a5599f8840a7171f147f5c343bf9b97e7a386eb7f351f978c4f3",
+    "src/hotspot/share/classfile/classLoader.cpp": "665bb788428c8d3837d052ac4f69a2756bb1823918726b41a7a7008eadfafd8d",
+    "src/java.base/share/classes/java/lang/Object.java": "829fb37093cf3e8d11b3c1e3d42f898f0c86f3b697e7a66cefe09934be3bb259",
+    "src/java.base/share/classes/java/lang/Runnable.java": "bad73b8ae0b17e2160845c41058ebdda55fb755affecad51ef37fbc8e0d25534",
+    "src/java.base/share/classes/java/util/concurrent/Callable.java": "a9d2d8cc73583297fb6c07dee24765473aaaeeaae2651a0b54eb411ed2d46261",
+    "src/java.base/share/classes/java/util/concurrent/Executor.java": "63f808755d552e372f9669c47041b2aeb52f5e34d0f92428aa5899273e4515d4",
+    "src/java.base/share/classes/java/util/concurrent/ExecutorService.java": "ca9342b2227960f32bde645c6df74dcd993d23deafad1429fac6521816daa868",
+    "src/java.base/share/classes/java/util/concurrent/MonitoredCallable.java": "a402533489745504fa3e9b8ca667be9b0d9cc3a370bbe2092c70f20051afb2f7",
+    "src/java.base/share/classes/java/util/concurrent/MonitoredRunnable.java": "8c975815e833bca4c214313efde24acf776a1ef676140701f9a5293ef4b5415b",
+    "src/java.base/share/classes/java/util/concurrent/ProgressMonitor.java": "58d084535f0e1c76adc102cffd1eff2cadae5c80877812908281699a55ce88b3",
+    "src/java.base/share/classes/java/util/concurrent/ProgressMonitors.java": "5073890ccf101b597e656b2516be70b83f0b77f9accdc157d75fc8d6f525a359",
+    "src/java.base/share/classes/java/util/function/Consumer.java": "4de2f5ed281ed6f56b872bd4ae9cc832ffb11b6c78e84a0774d7d6058a4a31fc",
+    "src/java.base/share/classes/java/util/function/Function.java": "7943afca3f9a3816e8f75a62b9c6104c31b883a1a1e614fb795a8fc85333c744",
+    "src/java.base/share/classes/java/util/function/Supplier.java": "49c58acaea3e70e81ec7187b47551d1e0cf6906443bcf3d71e8c9cbba4d032c6",
+    "test/jdk/java/lang/Object/M3AdapterProgress.java": "8bd6da7debf43c81e55b55dd6399404027f098e96be96c46afc0a7969a9453b5",
+    "test/jdk/java/lang/Object/M3MonitoredTemplateTest.java": "46d25019252f8cc474103f2192332d394b36e4b169ed6ab0e567c0f83a46798b"
+  },
+  "observations": {
+    "m3jdk21-object-vtable-check": {
+      "command": [
+        "python3",
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/receive.py",
+        "--dataset",
+        "m3jdk21-object-vtable",
+        "--target",
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/receiver",
+        "--recipe-owner",
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes",
+        "--check"
+      ],
+      "exit": 0,
+      "stdout_sha256": "8faabc8e68d5c5fa7f6c49438e536fadc8beae214abc0c67cd9695fcaaed7900",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "m3jdk21-object-vtable-apply": {
+      "command": [
+        "python3",
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/receive.py",
+        "--dataset",
+        "m3jdk21-object-vtable",
+        "--target",
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/receiver",
+        "--recipe-owner",
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes"
+      ],
+      "exit": 0,
+      "stdout_sha256": "c2775208c1e04370b8f4ded3c177c57dd6843ee9ca0f71c0246e3d5c5d079dec",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "m3jdk21-object-vtable-fixed-point": {
+      "command": [
+        "python3",
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/receive.py",
+        "--dataset",
+        "m3jdk21-object-vtable",
+        "--target",
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/receiver",
+        "--recipe-owner",
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes"
+      ],
+      "exit": 0,
+      "stdout_sha256": "3373be3fcd28c33b7d5670f2d03a9db46a6aa860680c255b667783b1c37c6781",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "m3jdk21-progress-doclint-check": {
+      "command": [
+        "python3",
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/receive.py",
+        "--dataset",
+        "m3jdk21-progress-doclint",
+        "--target",
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/receiver",
+        "--recipe-owner",
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes",
+        "--check"
+      ],
+      "exit": 0,
+      "stdout_sha256": "bc7b2e4623a0173a1123eec25a9c6f0ce4013c5bcece71b935232143054cbd14",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "m3jdk21-progress-doclint-apply": {
+      "command": [
+        "python3",
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/receive.py",
+        "--dataset",
+        "m3jdk21-progress-doclint",
+        "--target",
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/receiver",
+        "--recipe-owner",
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes"
+      ],
+      "exit": 0,
+      "stdout_sha256": "4ec779aeef1e5d7b1f6948b093ead7d0721bad312f7d7eebe5d366f323068edb",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "m3jdk21-progress-doclint-fixed-point": {
+      "command": [
+        "python3",
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/receive.py",
+        "--dataset",
+        "m3jdk21-progress-doclint",
+        "--target",
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/receiver",
+        "--recipe-owner",
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes"
+      ],
+      "exit": 0,
+      "stdout_sha256": "4e259c757b786ccf5c40da2bb8840ce14204763219338cd3ae64e90b98659ade",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "m3jdk21-functional-doclint-check": {
+      "command": [
+        "python3",
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/receive.py",
+        "--dataset",
+        "m3jdk21-functional-doclint",
+        "--target",
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/receiver",
+        "--recipe-owner",
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes",
+        "--check"
+      ],
+      "exit": 0,
+      "stdout_sha256": "3a14ee80daa3b6c6b3c8f01b41e306aa092d81142a9a305e9590c1824dbad108",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "m3jdk21-functional-doclint-apply": {
+      "command": [
+        "python3",
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/receive.py",
+        "--dataset",
+        "m3jdk21-functional-doclint",
+        "--target",
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/receiver",
+        "--recipe-owner",
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes"
+      ],
+      "exit": 0,
+      "stdout_sha256": "ac9d386d791a7e8d1974bb3447bcf7aa8a9205453e6ed72c03065c9683e2544e",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "m3jdk21-functional-doclint-fixed-point": {
+      "command": [
+        "python3",
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/receive.py",
+        "--dataset",
+        "m3jdk21-functional-doclint",
+        "--target",
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/receiver",
+        "--recipe-owner",
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes"
+      ],
+      "exit": 0,
+      "stdout_sha256": "963cbee85cf97bbdd58cd6e72e057de72e7000cf9f9313a057e5a2453657edff",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "m3jdk21-runtime-control-check": {
+      "command": [
+        "python3",
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/receive.py",
+        "--dataset",
+        "m3jdk21-runtime-control",
+        "--target",
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/receiver",
+        "--recipe-owner",
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes",
+        "--check"
+      ],
+      "exit": 0,
+      "stdout_sha256": "64e58f32164cb775df089fb804e7141e33b7e6d41f8a2f9c4be4fbc865b4f965",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "m3jdk21-runtime-control-apply": {
+      "command": [
+        "python3",
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/receive.py",
+        "--dataset",
+        "m3jdk21-runtime-control",
+        "--target",
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/receiver",
+        "--recipe-owner",
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes"
+      ],
+      "exit": 0,
+      "stdout_sha256": "2d3b85f25a9674c861c95218d09eb9a7e0491760aa36d230f0e61d53fff05efe",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "m3jdk21-runtime-control-fixed-point": {
+      "command": [
+        "python3",
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/receive.py",
+        "--dataset",
+        "m3jdk21-runtime-control",
+        "--target",
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/receiver",
+        "--recipe-owner",
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes"
+      ],
+      "exit": 0,
+      "stdout_sha256": "f7b3a857e2d86e3b55f1068f0cc9f34561950794152b747f4ca02a5f0022854e",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "check_object_adapter_progress_receiver_20261017.py": {
+      "command": [
+        "python3",
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/receiver/m3/compatibility/check_object_adapter_progress_receiver_20261017.py"
+      ],
+      "exit": 0,
+      "stdout_sha256": "82dbc035a38e4a86751d13a1c5abc677b9d5c4cc6e33334e0e6b58032a3a917c",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "verify_m3_default_template_20261017.py": {
+      "command": [
+        "python3",
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/receiver/m3/compatibility/verify_m3_default_template_20261017.py"
+      ],
+      "exit": 0,
+      "stdout_sha256": "c28f27631e805393263d4eeded95fd9a41c81adba33c2133d864547a07ad1bea",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "test_object_adapter_progress_receiver_20261018.py": {
+      "command": [
+        "python3",
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/receiver/m3/compatibility/test_object_adapter_progress_receiver_20261018.py"
+      ],
+      "exit": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "523527796b691e53305bffa3af2e637b5533b430b6ea8d58e09d1c7c0547c381"
+    }
+  },
+  "historical_manifests": {
+    "m3/compatibility/m3-object-adapter-progress-20261017.tsv": "2f581a791adc7ecf7f217a6276f0da8af424c1e3e49385ca6ae44704d3319c82",
+    "m3/compatibility/m3-default-template-source-seal.tsv": "c431bf732eb91a289b4bcd0b886db71d43da7d7bb17074cd6116db6b37e73ad6"
+  },
+  "current_owner_count": 64,
+  "previous_owner_count": 59,
+  "negative_test_methods": 27,
+  "Object_universal_compatibility": "HOLD",
+  "runtime_image_execution": "SEPARATE_GATE"
+}

@@ -1,0 +1,37 @@
+{
+  "baseline": "4b24824c3aa09d802121447f8970d442a855f064",
+  "object_sha256": "829fb37093cf3e8d11b3c1e3d42f898f0c86f3b697e7a66cefe09934be3bb259",
+  "before_sha256": "665bb788428c8d3837d052ac4f69a2756bb1823918726b41a7a7008eadfafd8d",
+  "after_sha256": "d6283c23f650714e85b9a910f6cda656146552ae95950a04b02af861b636dca2",
+  "runs": [
+    {
+      "command": [
+        "python3",
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/receive.py",
+        "--dataset",
+        "m3jdk21-object-vtable",
+        "--target",
+        "/workspace/scratch/2b4d1cb957a7/M3jdk21-runtime",
+        "--recipe-owner",
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes"
+      ],
+      "exit": 0,
+      "output": "M3_COLLECTIONS_RECEIVER_PASS {\"actual_sdk_results\": true, \"changes\": 1, \"dataset\": \"m3jdk21-object-vtable\", \"mode\": \"apply\", \"targets\": 1}\n"
+    },
+    {
+      "command": [
+        "python3",
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/receive.py",
+        "--dataset",
+        "m3jdk21-object-vtable",
+        "--target",
+        "/workspace/scratch/2b4d1cb957a7/M3jdk21-runtime",
+        "--recipe-owner",
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes",
+        "--check"
+      ],
+      "exit": 0,
+      "output": "M3_COLLECTIONS_RECEIVER_PASS {\"actual_sdk_results\": true, \"changes\": 0, \"dataset\": \"m3jdk21-object-vtable\", \"mode\": \"check\", \"targets\": 1}\n"
+    }
+  ]
+}

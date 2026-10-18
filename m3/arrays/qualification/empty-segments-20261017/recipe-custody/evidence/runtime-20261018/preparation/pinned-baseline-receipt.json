@@ -1,0 +1,133 @@
+{
+  "schema": "M3_IMMUTABLE_RUNTIME_BASELINE_V1",
+  "commit": "4b24824c3aa09d802121447f8970d442a855f064",
+  "source": "git objects; working tree contents are not inputs",
+  "files": [
+    {
+      "path": "m3/backports/ALGORITHM_CATALOGUE.tsv",
+      "git_blob": "c05ccaa300d014cda63acb5980da6d7e75125754",
+      "sha256": "1aad547fe2f419cf2f265a8f1d7c492779c1bbc86ef685bfafd47516a98a276e",
+      "size": 2752
+    },
+    {
+      "path": "m3/compatibility/check_object_adapter_progress_receiver_20261017.py",
+      "git_blob": "23384a1f7e7317024b56a2b5c8e8b8c2b650bf89",
+      "sha256": "5e44ba190257db7d9715d80e7870d6a1b69f8c76cc3c285182193e80fc0da443",
+      "size": 1304
+    },
+    {
+      "path": "m3/compatibility/m3-default-template-source-seal.tsv",
+      "git_blob": "7fcd530e452165d9e0b2bf697071164137ac03db",
+      "sha256": "c431bf732eb91a289b4bcd0b886db71d43da7d7bb17074cd6116db6b37e73ad6",
+      "size": 1064
+    },
+    {
+      "path": "m3/compatibility/m3-object-adapter-progress-20261017.tsv",
+      "git_blob": "e76b8d2ff204960960c9f63c0bc42ade1d44aec9",
+      "sha256": "2f581a791adc7ecf7f217a6276f0da8af424c1e3e49385ca6ae44704d3319c82",
+      "size": 2280
+    },
+    {
+      "path": "m3/compatibility/verify_m3_default_template_20261017.py",
+      "git_blob": "94340b0e9c118d8b821e5dc02f99ae966815630e",
+      "sha256": "856910b716021260d387c0e3230c774223d7afc6ba62eab8e0c35668ffc8f2da",
+      "size": 1176
+    },
+    {
+      "path": "m3/docs/name-mapping.json",
+      "git_blob": "4f5911d625090913d85f9cf41b1ead1694dffade",
+      "sha256": "4247c5648cf6a5599f8840a7171f147f5c343bf9b97e7a386eb7f351f978c4f3",
+      "size": 404076
+    },
+    {
+      "path": "src/hotspot/share/classfile/classLoader.cpp",
+      "git_blob": "ab29ec3524d40ff58d6ff3e6fe2c1123b3abc1dd",
+      "sha256": "665bb788428c8d3837d052ac4f69a2756bb1823918726b41a7a7008eadfafd8d",
+      "size": 63485
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/Object.java",
+      "git_blob": "2bfef3101224112c40957c954592a100dc59a3fc",
+      "sha256": "829fb37093cf3e8d11b3c1e3d42f898f0c86f3b697e7a66cefe09934be3bb259",
+      "size": 28923
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/Runnable.java",
+      "git_blob": "1d8275948a6e638bfe814f41f0afac82663ff2ca",
+      "sha256": "bad73b8ae0b17e2160845c41058ebdda55fb755affecad51ef37fbc8e0d25534",
+      "size": 2211
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/concurrent/Callable.java",
+      "git_blob": "8210cfb6a6fdf942b9553e80c303a4b8c9f2671f",
+      "sha256": "a9d2d8cc73583297fb6c07dee24765473aaaeeaae2651a0b54eb411ed2d46261",
+      "size": 2727
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/concurrent/Executor.java",
+      "git_blob": "802c00832d217a77bb1245c1ba473479df4c3096",
+      "sha256": "63f808755d552e372f9669c47041b2aeb52f5e34d0f92428aa5899273e4515d4",
+      "size": 5506
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/concurrent/ExecutorService.java",
+      "git_blob": "a599ad8915eda2ace1454d59cc64c739ffc9cf66",
+      "sha256": "ca9342b2227960f32bde645c6df74dcd993d23deafad1429fac6521816daa868",
+      "size": 19302
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/concurrent/MonitoredCallable.java",
+      "git_blob": "157cce905a828a8cc34fc977f0fa42dc8362aa03",
+      "sha256": "a402533489745504fa3e9b8ca667be9b0d9cc3a370bbe2092c70f20051afb2f7",
+      "size": 975
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/concurrent/MonitoredRunnable.java",
+      "git_blob": "1a8d02bf7ea449018cae69aae5b784a65a172e66",
+      "sha256": "8c975815e833bca4c214313efde24acf776a1ef676140701f9a5293ef4b5415b",
+      "size": 908
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/concurrent/ProgressMonitor.java",
+      "git_blob": "2c90932ecb19c138a62f9860232162002f87c012",
+      "sha256": "58d084535f0e1c76adc102cffd1eff2cadae5c80877812908281699a55ce88b3",
+      "size": 1285
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/concurrent/ProgressMonitors.java",
+      "git_blob": "a634db13a764d22fc55ad75ae35cc4952d3b20f6",
+      "sha256": "5073890ccf101b597e656b2516be70b83f0b77f9accdc157d75fc8d6f525a359",
+      "size": 6695
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/function/Consumer.java",
+      "git_blob": "3df6f12a3a442c3a9f0d47ed5fc8aa725e634ccb",
+      "sha256": "4de2f5ed281ed6f56b872bd4ae9cc832ffb11b6c78e84a0774d7d6058a4a31fc",
+      "size": 3159
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/function/Function.java",
+      "git_blob": "76a20ef10fa1fbb701adb544ff6b7eb152f4303c",
+      "sha256": "7943afca3f9a3816e8f75a62b9c6104c31b883a1a1e614fb795a8fc85333c744",
+      "size": 4389
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/function/Supplier.java",
+      "git_blob": "ae9a9fd8a0158cb396d36304a607709cd875903c",
+      "sha256": "49c58acaea3e70e81ec7187b47551d1e0cf6906443bcf3d71e8c9cbba4d032c6",
+      "size": 2242
+    },
+    {
+      "path": "test/jdk/java/lang/Object/M3AdapterProgress.java",
+      "git_blob": "17c0e4f83c3142bbede6523058f40d09ebfe4a02",
+      "sha256": "8bd6da7debf43c81e55b55dd6399404027f098e96be96c46afc0a7969a9453b5",
+      "size": 2852
+    },
+    {
+      "path": "test/jdk/java/lang/Object/M3MonitoredTemplateTest.java",
+      "git_blob": "0b9bd424c67d98c7f033e5e91fd1881b38767fd7",
+      "sha256": "46d25019252f8cc474103f2192332d394b36e4b169ed6ab0e567c0f83a46798b",
+      "size": 2922
+    }
+  ]
+}

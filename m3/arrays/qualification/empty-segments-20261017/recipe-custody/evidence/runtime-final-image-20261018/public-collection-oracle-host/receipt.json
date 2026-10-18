@@ -1,0 +1,18 @@
+{
+  "dataset": "m3jdk21-collection-oracles",
+  "command": [
+    "/tmp/m3-toolchain/apache-maven-3.9.11/bin/mvn",
+    "-B",
+    "-ntp",
+    "-o",
+    "-Dmaven.repo.local=/tmp/m3-maven-repository",
+    "-f",
+    "/workspace/scratch/2b4d1cb957a7/M3jdk21-progress/m3/arrays/qualification/empty-segments-20261017/recipe-custody/pom.xml",
+    "-Drecipe.owner.root=/workspace/scratch/2b4d1cb957a7/M3jdk21-progress/m3/arrays/qualification/empty-segments-20261017/recipe-custody/sdk-owner",
+    "-Dm3.dataset=m3jdk21-collection-oracles",
+    "-Pcontract",
+    "verify"
+  ],
+  "exit": 0,
+  "seconds": 35.23158604400123
+}

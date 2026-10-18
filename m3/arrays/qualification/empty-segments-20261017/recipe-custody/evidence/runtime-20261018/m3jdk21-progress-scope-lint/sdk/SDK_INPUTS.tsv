@@ -1,0 +1,27 @@
+# Recipe inputs used by this SDK execution
+crate/ENGINE_SOURCES.tsv	ae731c5780c73a98f6fc81079b5f863613fddea50d2a6c893c6dfd2aa2030b5c
+crate/contract/test_prepare.py	f504f1dcfafb24fd87f8f677643b45eecc74674881e16bf727b76c4e6a4d1856
+crate/contract/verify_receiver.py	a4d82df8b31e707afe7caa5e76524d191f285e2887dbfdfa95cfdc382ae01f7d
+crate/datasets/m3jdk21-progress-scope-lint/DATASET.json	a58d1e4ce8b5e663bc0092cacb378939895c9b9be79d819c39027f91bb6c9835
+crate/datasets/m3jdk21-progress-scope-lint/ENGINE_EFFECTIVE.tsv	80bf80ee81878cc05393b3c23ef07b2261be1bcb7dcb500b0d4b12cd8e05ec23
+crate/datasets/m3jdk21-progress-scope-lint/MODES.tsv	34998e72ad6260bc1af475efa6cba523cdf628723374a497564eae7611f15657
+crate/datasets/m3jdk21-progress-scope-lint/resources/META-INF/rewrite/m3-collections-contract-refinement-20261017-m3jdk21-progress-scope-lint.yml	4cee63dcf383c96f8dee104e5b3bfd364a6d703f83fae323e9f6c546a2046b5d
+crate/datasets/m3jdk21-progress-scope-lint/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-progress-scope-lint/0002-ProgressMonitors.java.txt	48b06f44b71fd22a2bafc4e8a99d7542d280830043d929ce1d26ae338f3b4efc
+crate/datasets/m3jdk21-progress-scope-lint/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-progress-scope-lint/0003-Consumer.java.txt	52773610a8cd4d4e0808c2895e504b09ce9c0c05a0273e81cc533bad19ab6226
+crate/datasets/m3jdk21-progress-scope-lint/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-progress-scope-lint/0004-Function.java.txt	73877c7a547bb812a6901cae0af4866645de978b867e055204cd53f6dffb6476
+crate/datasets/m3jdk21-progress-scope-lint/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-progress-scope-lint/0005-Supplier.java.txt	84170e0863237433f20c3fdc4617eea990731fa7a1e5b0aeaf6b03f89e55c096
+crate/datasets/m3jdk21-progress-scope-lint/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-progress-scope-lint/manifest.tsv	0f55fb75b49c743fbbc43127d9a2e791eff59dd067956a0094bb7d5f353a88e8
+crate/datasets/m3jdk21-progress-scope-lint/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-progress-scope-lint/pre/0002-ProgressMonitors.java.txt	d1fc14e9b59c305d6f71df76afb86d9e7d9e4cabd0899105e5d001380ce4c736
+crate/datasets/m3jdk21-progress-scope-lint/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-progress-scope-lint/pre/0003-Consumer.java.txt	025c5fa47f9505eccea26c540bc3e320762346c464ecca37ec1994297285a073
+crate/datasets/m3jdk21-progress-scope-lint/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-progress-scope-lint/pre/0004-Function.java.txt	e116c9989d314cb6ffdaef60e8f665205afccdd28ee3674af2c6eedc008da588
+crate/datasets/m3jdk21-progress-scope-lint/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-progress-scope-lint/pre/0005-Supplier.java.txt	2d5f23125e22f4d20d80d7734e883c45fd179207f0ab508fdd0c9e8616156766
+crate/datasets/m3jdk21-progress-scope-lint/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-progress-scope-lint/0001-m3-progress-scope-lint-20261018.tsv.txt	1a45edfa747a03b3491063648a455083633e7de836e4c46241de104d689eebee
+crate/datasets/m3jdk21-progress-scope-lint/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-progress-scope-lint/manifest.tsv	4a0302444667f6fb59983e06609cd40dbcd8d2ab16df772a65f00bc916a3d57d
+crate/pom.xml	4c90faaa9e64aebeeba14fb2196731c6334293781d0fdcafbf190f2f5662eb7d
+crate/prepare.py	9b0b3d93c787c9a56036cddb2b044aef30f6fa8a1fa20fa5a2edae46dfd1e62c
+crate/receive.py	db258f16e1841f6f5191c1c969c20314a8d143bfa6558b60f684bea440cc1712
+crate/src/test/java/com/synexia/rewrite/M3TaskRecipeTest.java	74b03a3ac3e445a04b8b15076d3ced667bfae2442bd0968cbe74468e4a499e43
+owner/src/main/java/com/synexia/rewrite/M3EditScope.java	962d37d62d740c3e8055c365a048ae7ee0479c26a9f6bbfe741e540d6c1134ab
+owner/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java	67f7b81126e4736c7b61b444fa6545153a61e23c012975ca796fcee623ab6625
+owner/src/main/java/com/synexia/rewrite/M3HashPinnedTextSnapshotRecipe.java	fbf1ea9efad784afef5ac201ff7fc324551f77a099ebfe2f79b70c3a17c731ef
+owner/src/main/java/com/synexia/rewrite/M3ScopeInference.java	13660b59f60ec2941ec19e9bc8964ffd4b04689cdc33cd19711fba14b8da09a4

@@ -1,0 +1,29 @@
+{
+  "command": [
+    "/tmp/m3-toolchain/apache-maven-3.9.11/bin/mvn",
+    "-B",
+    "-ntp",
+    "-s",
+    "/tmp/m3-toolchain/settings.xml",
+    "-Dmaven.repo.local=/tmp/m3-maven-repository",
+    "-DargLine=-Xmx768m -Xcheck:jni",
+    "-f",
+    "m3/arrays/pom.xml",
+    "-Pnative-linux",
+    "clean",
+    "verify"
+  ],
+  "exit": 0,
+  "seconds": 51.26761233400066,
+  "runtime_image": "/workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/build/m3-runtime-fastdebug/images/jdk",
+  "sourceCommit": "4b24824c3aa09d802121447f8970d442a855f064",
+  "tests": {
+    "tests": 10,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "pomBeforeSha256": "fb6b3453259febac2a3571bbc606d5e1bf886d1560c15f16f17246f0e362e810",
+  "pomAfterSha256": "fb6b3453259febac2a3571bbc606d5e1bf886d1560c15f16f17246f0e362e810",
+  "sources_recompiled_by_clean": true
+}

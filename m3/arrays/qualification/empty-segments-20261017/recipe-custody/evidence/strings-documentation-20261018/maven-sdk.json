@@ -1,0 +1,18 @@
+{
+  "command": [
+    "/tmp/m3-toolchain/apache-maven-3.9.11/bin/mvn",
+    "-B",
+    "-ntp",
+    "-o",
+    "-Dmaven.repo.local=/tmp/m3-maven-repository",
+    "-f",
+    "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/pom.xml",
+    "-Dm3.dataset=m3jdk21-strings-doclint",
+    "-Pcontract",
+    "verify"
+  ],
+  "exit": 0,
+  "seconds": 22.166480779647827,
+  "maven_heap": "256m",
+  "test_heap": "768m"
+}

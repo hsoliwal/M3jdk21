@@ -1,0 +1,24 @@
+/workspace/scratch/2b4d1cb957a7/runtime-refinement/proof/functional-doclint-buildscope/before-doclint/source/src/java.base/share/classes/java/util/function/Consumer.java:69: warning: no @param for value
+    default void accept(T value, java.util.concurrent.ProgressMonitor monitor) {
+                 ^
+/workspace/scratch/2b4d1cb957a7/runtime-refinement/proof/functional-doclint-buildscope/before-doclint/source/src/java.base/share/classes/java/util/function/Consumer.java:69: warning: no @param for monitor
+    default void accept(T value, java.util.concurrent.ProgressMonitor monitor) {
+                 ^
+/workspace/scratch/2b4d1cb957a7/runtime-refinement/proof/functional-doclint-buildscope/before-doclint/source/src/java.base/share/classes/java/util/function/Function.java:102: warning: no @param for value
+    default R apply(T value, java.util.concurrent.ProgressMonitor monitor) {
+              ^
+/workspace/scratch/2b4d1cb957a7/runtime-refinement/proof/functional-doclint-buildscope/before-doclint/source/src/java.base/share/classes/java/util/function/Function.java:102: warning: no @param for monitor
+    default R apply(T value, java.util.concurrent.ProgressMonitor monitor) {
+              ^
+/workspace/scratch/2b4d1cb957a7/runtime-refinement/proof/functional-doclint-buildscope/before-doclint/source/src/java.base/share/classes/java/util/function/Function.java:102: warning: no @return
+    default R apply(T value, java.util.concurrent.ProgressMonitor monitor) {
+              ^
+/workspace/scratch/2b4d1cb957a7/runtime-refinement/proof/functional-doclint-buildscope/before-doclint/source/src/java.base/share/classes/java/util/function/Supplier.java:51: warning: no @param for monitor
+    default T get(java.util.concurrent.ProgressMonitor monitor) {
+              ^
+/workspace/scratch/2b4d1cb957a7/runtime-refinement/proof/functional-doclint-buildscope/before-doclint/source/src/java.base/share/classes/java/util/function/Supplier.java:51: warning: no @return
+    default T get(java.util.concurrent.ProgressMonitor monitor) {
+              ^
+error: warnings found and -Werror specified
+1 error
+7 warnings

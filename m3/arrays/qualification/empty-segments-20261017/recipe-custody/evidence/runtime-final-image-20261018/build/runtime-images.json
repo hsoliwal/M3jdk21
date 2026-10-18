@@ -1,0 +1,16 @@
+{
+  "command": [
+    "make",
+    "CONF=m3-runtime-fastdebug",
+    "images"
+  ],
+  "exit": 2,
+  "seconds": 891.6489734649658,
+  "sourceCommit": "4b24824c3aa09d802121447f8970d442a855f064",
+  "inputs": {
+    "src/hotspot/share/classfile/classLoader.cpp": "d6283c23f650714e85b9a910f6cda656146552ae95950a04b02af861b636dca2",
+    "src/hotspot/share/oops/klassVtable.cpp": "3d52781e6d5894055e12b21ef68520707c23986004d0cda2955667d1e20a7f1e",
+    "src/java.base/share/classes/java/lang/Object.java": "829fb37093cf3e8d11b3c1e3d42f898f0c86f3b697e7a66cefe09934be3bb259",
+    "src/java.base/share/classes/java/util/concurrent/ProgressMonitors.java": "5073890ccf101b597e656b2516be70b83f0b77f9accdc157d75fc8d6f525a359"
+  }
+}

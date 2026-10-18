@@ -1,0 +1,5 @@
+{
+  "exit": 0,
+  "stdout": "M3_COLLECTIONS_RECEIVER_PASS {\"actual_sdk_results\": true, \"changes\": 0, \"dataset\": \"m3jdk21-numeric-copy\", \"mode\": \"check\", \"targets\": 8}\n",
+  "stderr": ""
+}

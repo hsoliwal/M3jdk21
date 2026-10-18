@@ -1,0 +1,398 @@
+diff --git a/src/java.base/share/classes/java/lang/Runnable.java b/src/java.base/share/classes/java/lang/Runnable.java
+index 1d82759..8fb270d 100644
+--- a/src/java.base/share/classes/java/lang/Runnable.java
++++ b/src/java.base/share/classes/java/lang/Runnable.java
+@@ -45,6 +45,8 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
+     /**
+      * The ambient, never-null M3 progress monitor for this execution thread.
+      * A pool must bind it explicitly when dispatching work asynchronously.
++     *
++     * @return the current progress monitor, never {@code null}
+      */
+     default java.util.concurrent.ProgressMonitor progressMonitor() {
+         return java.util.concurrent.ProgressMonitors.current();
+@@ -53,6 +55,11 @@
+     /**
+      * Run under a borrowed monitor without completing its parent.
+      * Existing run() remains the sole abstract method.
++     *
++     * @param monitor the borrowed monitor to bind during this operation
++     * @throws NullPointerException if {@code monitor} is {@code null}
++     * @throws java.util.concurrent.CancellationException if cancellation is
++     *         observed before or after this operation
+      */
+     default void run(java.util.concurrent.ProgressMonitor monitor) {
+         java.util.concurrent.ProgressMonitors.run(this, monitor);
+diff --git a/src/java.base/share/classes/java/util/concurrent/Callable.java b/src/java.base/share/classes/java/util/concurrent/Callable.java
+index 8210cfb..7cd9b5d 100644
+--- a/src/java.base/share/classes/java/util/concurrent/Callable.java
++++ b/src/java.base/share/classes/java/util/concurrent/Callable.java
+@@ -64,7 +64,17 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
+      */
+     V call() throws Exception;
+ 
+-    /** A borrowed monitor is scoped for this call; call() remains abstract. */
++    /**
++     * Computes this task's result with a borrowed monitor scoped to this call.
++     * The no-argument {@link #call()} remains the sole abstract method.
++     *
++     * @param monitor the borrowed monitor to bind during this call
++     * @return the computed result
++     * @throws NullPointerException if {@code monitor} is {@code null}
++     * @throws CancellationException if cancellation is observed before or
++     *         after this call
++     * @throws Exception if this task cannot compute a result
++     */
+     default V call(ProgressMonitor monitor) throws Exception {
+         return ProgressMonitors.call(this, monitor);
+     }
+diff --git a/src/java.base/share/classes/java/util/concurrent/Executor.java b/src/java.base/share/classes/java/util/concurrent/Executor.java
+index 802c008..4fd7398 100644
+--- a/src/java.base/share/classes/java/util/concurrent/Executor.java
++++ b/src/java.base/share/classes/java/util/concurrent/Executor.java
+@@ -138,6 +138,12 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
+     /**
+      * An overload for monitored dispatch. Captures the caller-selected monitor
+      * before switching threads. Existing execute(Runnable) is unchanged.
++     * The monitor is borrowed and is not completed by the dispatched task.
++     *
++     * @param command the runnable task
++     * @param monitor the monitor to bind while the task runs
++     * @throws NullPointerException if {@code command} or {@code monitor} is null
++     * @throws RejectedExecutionException if this task cannot be accepted
+      */
+     default void execute(Runnable command, ProgressMonitor monitor) {
+         java.util.Objects.requireNonNull(command, "command");
+@@ -145,7 +151,13 @@
+         execute(() -> ProgressMonitors.run(command, monitor));
+     }
+ 
+-    /** Capture the current lexical or process-wide monitor at submission. */
++    /**
++     * Captures the current lexical or process-wide monitor at submission.
++     *
++     * @param command the runnable task
++     * @throws NullPointerException if {@code command} is {@code null}
++     * @throws RejectedExecutionException if this task cannot be accepted
++     */
+     default void executeWithProgress(Runnable command) {
+         execute(command, ProgressMonitors.current());
+     }
+diff --git a/src/java.base/share/classes/java/util/concurrent/ExecutorService.java b/src/java.base/share/classes/java/util/concurrent/ExecutorService.java
+index a599ad8..fa608eb 100644
+--- a/src/java.base/share/classes/java/util/concurrent/ExecutorService.java
++++ b/src/java.base/share/classes/java/util/concurrent/ExecutorService.java
+@@ -431,6 +431,14 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
+     /**
+      * Run a checked task with an explicitly borrowed progress monitor.
+      * Future cancellation and cooperative monitor cancellation remain distinct.
++     * The monitor is bound during execution and is not completed by this task.
++     *
++     * @param <T> the task's result type
++     * @param task the task to submit
++     * @param monitor the borrowed monitor to bind during the task
++     * @return a future representing pending completion of the task
++     * @throws NullPointerException if {@code task} or {@code monitor} is null
++     * @throws RejectedExecutionException if the task cannot be scheduled
+      */
+     default <T> Future<T> submitMonitored(Callable<T> task, ProgressMonitor monitor) {
+         java.util.Objects.requireNonNull(task, "task");
+@@ -438,7 +446,17 @@
+         return submit((Callable<T>) () -> ProgressMonitors.call(task, monitor));
+     }
+ 
+-    /** Avoids overloading submit(Runnable,T), which would change overload resolution. */
++    /**
++     * Submits a runnable with a borrowed monitor scoped to its execution.
++     * Avoids overloading {@code submit(Runnable,T)}, which would change
++     * overload resolution. Completion does not finish the borrowed monitor.
++     *
++     * @param task the task to submit
++     * @param monitor the borrowed monitor to bind during the task
++     * @return a future whose successful completion result is {@code null}
++     * @throws NullPointerException if {@code task} or {@code monitor} is null
++     * @throws RejectedExecutionException if the task cannot be scheduled
++     */
+     default Future<?> submitMonitored(Runnable task, ProgressMonitor monitor) {
+         java.util.Objects.requireNonNull(task, "task");
+         java.util.Objects.requireNonNull(monitor, "monitor");
+diff --git a/src/java.base/share/classes/java/util/concurrent/MonitoredCallable.java b/src/java.base/share/classes/java/util/concurrent/MonitoredCallable.java
+index 157cce9..6e08ac6 100644
+--- a/src/java.base/share/classes/java/util/concurrent/MonitoredCallable.java
++++ b/src/java.base/share/classes/java/util/concurrent/MonitoredCallable.java
+@@ -12,10 +12,25 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
+  */
+ @FunctionalInterface
+ public interface MonitoredCallable<V> extends Callable<V> {
+-    /** Replaceable checked body, with no ownership over monitor completion. */
++    /**
++     * Computes a result using the supplied borrowed progress monitor.
++     * This body does not own completion of the monitor.
++     *
++     * @param monitor the monitor bound by the template call
++     * @return the computed result
++     * @throws Exception if the body cannot compute a result
++     */
+     V callMonitored(ProgressMonitor monitor) throws Exception;
+ 
+-    /** Template method: inherit monitor, check cancellation, dispatch body. */
++    /**
++     * Inherits the current monitor, checks cancellation, and dispatches the body.
++     * Cancellation is checked again after the body returns.
++     *
++     * @return the result computed by {@link #callMonitored(ProgressMonitor)}
++     * @throws CancellationException if cancellation is observed before or
++     *         after the body
++     * @throws Exception if the body cannot compute a result
++     */
+     @Override
+     default V call() throws Exception {
+         ProgressMonitor monitor = ProgressMonitors.current();
+diff --git a/src/java.base/share/classes/java/util/concurrent/MonitoredRunnable.java b/src/java.base/share/classes/java/util/concurrent/MonitoredRunnable.java
+index 1a8d02b..b81a48b 100644
+--- a/src/java.base/share/classes/java/util/concurrent/MonitoredRunnable.java
++++ b/src/java.base/share/classes/java/util/concurrent/MonitoredRunnable.java
+@@ -11,10 +11,20 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
+  */
+ @FunctionalInterface
+ public interface MonitoredRunnable extends Runnable {
+-    /** Replaceable task body; implementations report progress through monitor. */
++    /**
++     * Runs the task body using the supplied borrowed progress monitor.
++     *
++     * @param monitor the monitor bound by the template run
++     */
+     void runMonitored(ProgressMonitor monitor);
+ 
+-    /** Template method: inherit monitor, check cancellation, dispatch body. */
++    /**
++     * Inherits the current monitor, checks cancellation, and dispatches the body.
++     * Cancellation is checked again after the body returns.
++     *
++     * @throws CancellationException if cancellation is observed before or
++     *         after the body
++     */
+     @Override
+     default void run() {
+         ProgressMonitor monitor = ProgressMonitors.current();
+diff --git a/src/java.base/share/classes/java/util/concurrent/ProgressMonitor.java b/src/java.base/share/classes/java/util/concurrent/ProgressMonitor.java
+index 2c90932..5817236 100644
+--- a/src/java.base/share/classes/java/util/concurrent/ProgressMonitor.java
++++ b/src/java.base/share/classes/java/util/concurrent/ProgressMonitor.java
+@@ -11,23 +11,73 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
+  * This opt-in M3JDK API does not alter legacy Executor execution semantics.
+  */
+ public interface ProgressMonitor {
++    /** Indicates that the total amount of work is not known. */
+     long UNKNOWN_WORK = -1L;
++    /**
++     * A monitor with no progress state and no local cancellation state.
++     * Its inherited {@link #checkCancelled()} still observes interruption
++     * of the calling thread.
++     */
+     ProgressMonitor NONE = new ProgressMonitor() { };
+ 
++    /**
++     * Announces a task and its estimated work. The default implementation
++     * does nothing; implementations define their task lifecycle and validation.
++     *
++     * @param task the task description
++     * @param totalWork the estimated work, or {@link #UNKNOWN_WORK}
++     */
+     default void begin(String task, long totalWork) { }
++    /**
++     * Reports additional completed work. The default implementation does nothing.
++     *
++     * @param units the additional work units, with validation defined by the
++     *              implementation
++     */
+     default void worked(long units) { }
++    /**
++     * Reports a progress message. The default implementation does nothing.
++     *
++     * @param text the progress message
++     */
+     default void message(String text) { }
++    /**
++     * Reports cooperative cancellation state. The default returns {@code false}.
++     *
++     * @return whether this monitor reports cancellation
++     */
+     default boolean isCancelled() { return false; }
++    /** Requests cooperative cancellation. The default implementation does nothing. */
+     default void cancel() { }
++    /**
++     * Completes work owned by this monitor. The default implementation does
++     * nothing. A task must not complete a monitor borrowed from its caller.
++     */
+     default void done() { }
+ 
++    /**
++     * Checks this monitor and the calling thread for cancellation without
++     * clearing the thread's interrupt status.
++     *
++     * @throws CancellationException if {@link #isCancelled()} is true or
++     *         the calling thread is interrupted
++     */
+     default void checkCancelled() {
+         if (isCancelled() || Thread.currentThread().isInterrupted()) {
+             throw new CancellationException("Operation cancelled");
+         }
+     }
+ 
+-    /** Allocate parent ticks to a child; complete the child independently. */
++    /**
++     * Allocates parent ticks to a child that can be completed independently.
++     * Delegates to {@link ProgressMonitors#child(ProgressMonitor, String, long, long)}.
++     *
++     * @param name the child description, or {@code null} for no description
++     * @param parentTicks the nonnegative work budget credited to this monitor
++     * @param totalWork the positive child work estimate, or {@link #UNKNOWN_WORK}
++     * @return the child monitor, or {@link #NONE} when this monitor is {@code NONE}
++     * @throws IllegalArgumentException if the work budget or estimate is invalid
++     */
+     default ProgressMonitor child(String name, long parentTicks, long totalWork) {
+         return ProgressMonitors.child(this, name, parentTicks, totalWork);
+     }
+diff --git a/src/java.base/share/classes/java/util/concurrent/ProgressMonitors.java b/src/java.base/share/classes/java/util/concurrent/ProgressMonitors.java
+index a634db1..fadedef 100644
+--- a/src/java.base/share/classes/java/util/concurrent/ProgressMonitors.java
++++ b/src/java.base/share/classes/java/util/concurrent/ProgressMonitors.java
+@@ -23,27 +23,53 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
+ 
+     private ProgressMonitors() { }
+ 
+-    /** Process fallback. Supplier publication is atomic; it may be called concurrently. */
++    /**
++     * Gets the process fallback monitor. Supplier publication is atomic; the
++     * supplier may be called concurrently and must support that use.
++     *
++     * @return the provider's monitor, or {@link ProgressMonitor#NONE} if it
++     *         supplies {@code null}
++     */
+     public static ProgressMonitor system() {
+         ProgressMonitor monitor = SYSTEM.get().get();
+         return monitor == null ? ProgressMonitor.NONE : monitor;
+     }
+ 
+-    /** Update the global fallback and return the previous provider. */
++    /**
++     * Atomically replaces the global fallback provider.
++     *
++     * @param provider the provider to use when no lexical monitor is bound
++     * @return the previous provider
++     * @throws NullPointerException if {@code provider} is {@code null}
++     */
+     public static Supplier<? extends ProgressMonitor> setSystem(
+             Supplier<? extends ProgressMonitor> provider) {
+         return SYSTEM.getAndSet(Objects.requireNonNull(provider, "provider"));
+     }
+ 
++    /** Restores the global provider that supplies {@link ProgressMonitor#NONE}. */
+     public static void resetSystem() { SYSTEM.set(NONE); }
+ 
+-    /** The lexical monitor, or the process fallback when no scope is active. */
++    /**
++     * Gets the lexical monitor, or the process fallback when no scope is active.
++     *
++     * @return the current monitor, never {@code null}
++     */
+     public static ProgressMonitor current() {
+         Scope scope = CURRENT.get();
+         return scope != null ? scope.monitor : system();
+     }
+ 
+-    /** Bind an already-owned monitor: closing this scope does not call done(). */
++    /**
++     * Binds a borrowed monitor to this thread until the returned scope closes.
++     * Scopes must close on their creating thread in reverse creation order.
++     * Closing a scope does not complete its borrowed monitor. Binding is local
++     * to this thread and is not automatically propagated to asynchronous tasks.
++     *
++     * @param monitor the borrowed monitor
++     * @return the scope that restores the previous binding when closed
++     * @throws NullPointerException if {@code monitor} is {@code null}
++     */
+     public static Scope bind(ProgressMonitor monitor) {
+         Objects.requireNonNull(monitor, "monitor");
+         Scope next = new Scope(CURRENT.get(), monitor);
+@@ -51,6 +77,17 @@
+         return next;
+     }
+ 
++    /**
++     * Runs a task with a borrowed monitor, restoring the previous binding on exit.
++     * Cancellation is checked before and after the task, and the monitor is
++     * not completed by this method.
++     *
++     * @param task the task to run
++     * @param monitor the borrowed monitor
++     * @throws NullPointerException if {@code task} or {@code monitor} is null
++     * @throws CancellationException if cancellation is observed before or
++     *         after the task
++     */
+     public static void run(Runnable task, ProgressMonitor monitor) {
+         Objects.requireNonNull(task, "task");
+         try (Scope ignored = bind(monitor)) {
+@@ -60,6 +97,20 @@
+         }
+     }
+ 
++    /**
++     * Calls a task with a borrowed monitor, restoring the previous binding on exit.
++     * Cancellation is checked before and after the task, and the monitor is
++     * not completed by this method.
++     *
++     * @param <T> the result type
++     * @param task the task to call
++     * @param monitor the borrowed monitor
++     * @return the computed result
++     * @throws NullPointerException if {@code task} or {@code monitor} is null
++     * @throws CancellationException if cancellation is observed before or
++     *         after the task
++     * @throws Exception if the task cannot compute a result
++     */
+     public static <T> T call(Callable<T> task, ProgressMonitor monitor) throws Exception {
+         Objects.requireNonNull(task, "task");
+         try (Scope ignored = bind(monitor)) {
+@@ -70,6 +121,26 @@
+         }
+     }
+ 
++    /**
++     * Creates a child whose completed work is scaled to a bounded parent budget.
++     * Completing the child credits the remaining budget without completing its
++     * parent. A child observes parent cancellation, while cancelling the child
++     * does not cancel its parent. A zero budget still observes cancellation.
++     * If the parent is {@link ProgressMonitor#NONE}, returns that monitor.
++     *
++     * <p>The child uses atomic local accounting. Its parent must support any
++     * concurrent callbacks caused by callers sharing the child.
++     *
++     * @param parent the borrowed parent monitor
++     * @param name the child description, or {@code null} for no description
++     * @param parentTicks the nonnegative work budget credited to the parent
++     * @param totalWork the positive child work estimate, or
++     *                  {@link ProgressMonitor#UNKNOWN_WORK} to credit only at completion
++     * @return the child monitor, or {@code NONE} when the parent is {@code NONE}
++     * @throws NullPointerException if {@code parent} is {@code null}
++     * @throws IllegalArgumentException if {@code parentTicks} is negative or
++     *         {@code totalWork} is neither positive nor {@code UNKNOWN_WORK}
++     */
+     public static ProgressMonitor child(
+             ProgressMonitor parent, String name, long parentTicks, long totalWork) {
+         Objects.requireNonNull(parent, "parent");
+@@ -94,6 +165,13 @@
+             this.monitor = monitor;
+         }
+ 
++        /**
++         * Restores this thread's previous progress binding. Repeated close on
++         * the owning thread has no effect after a successful close.
++         *
++         * @throws IllegalStateException if called on another thread, or if an
++         *         open nested scope must be closed first
++         */
+         @Override public void close() {
+             if (owner != Thread.currentThread()) {
+                 throw new IllegalStateException("Progress scope belongs to another thread");

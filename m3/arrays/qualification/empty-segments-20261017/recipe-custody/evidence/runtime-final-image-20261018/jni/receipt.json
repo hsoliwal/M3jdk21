@@ -1,0 +1,96 @@
+{
+  "status": "PASS",
+  "runtime_image": "/workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/build/m3-runtime-fastdebug/images/jdk",
+  "commands": [
+    {
+      "name": "compile-image",
+      "command": [
+        "/workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/build/m3-runtime-fastdebug/images/jdk/bin/java",
+        "-Xcheck:jni",
+        "-m",
+        "jdk.compiler/com.sun.tools.javac.m3.M3PrimitiveImageCompiler",
+        "--out",
+        "/workspace/scratch/2b4d1cb957a7/build-proof/native-image-execution/canonical.m3prim",
+        "--slots",
+        "/workspace/scratch/2b4d1cb957a7/build-proof/native-image-execution/canonical.tsv",
+        "/workspace/scratch/2b4d1cb957a7/build-proof/native-image-execution/PrimitiveFixture.java"
+      ],
+      "exit": 0,
+      "seconds": 2.473102569580078
+    },
+    {
+      "name": "compile-tests",
+      "command": [
+        "/workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/build/m3-runtime-fastdebug/images/jdk/bin/javac",
+        "-Xlint:all",
+        "-Werror",
+        "--add-exports",
+        "java.base/jdk.internal.mindex=ALL-UNNAMED",
+        "-d",
+        "/workspace/scratch/2b4d1cb957a7/build-proof/native-image-execution/classes",
+        "/workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/test/jdk/jdk/internal/mindex/M3PrimitiveIdentityTest.java",
+        "/workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/test/jdk/jdk/internal/mindex/M3PrimitiveFixedArenaProbe.java"
+      ],
+      "exit": 0,
+      "seconds": 3.5023834705352783
+    },
+    {
+      "name": "primitive-identity",
+      "command": [
+        "/workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/build/m3-runtime-fastdebug/images/jdk/bin/java",
+        "-Xcheck:jni",
+        "--add-exports",
+        "java.base/jdk.internal.mindex=ALL-UNNAMED",
+        "-cp",
+        "/workspace/scratch/2b4d1cb957a7/build-proof/native-image-execution/classes",
+        "M3PrimitiveIdentityTest",
+        "/workspace/scratch/2b4d1cb957a7/build-proof/native-image-execution/canonical.m3prim"
+      ],
+      "exit": 0,
+      "seconds": 0.48468899726867676
+    },
+    {
+      "name": "native-mapping-0",
+      "command": [
+        "/workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/build/m3-runtime-fastdebug/images/jdk/bin/java",
+        "-Xcheck:jni",
+        "--add-exports",
+        "java.base/jdk.internal.mindex=ALL-UNNAMED",
+        "-cp",
+        "/workspace/scratch/2b4d1cb957a7/build-proof/native-image-execution/classes",
+        "M3PrimitiveFixedArenaProbe",
+        "/workspace/scratch/2b4d1cb957a7/build-proof/native-image-execution/canonical.m3prim",
+        "/workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/build/m3-runtime-fastdebug/images/jdk/lib/libjava.so"
+      ],
+      "exit": 0,
+      "seconds": 0.4569368362426758
+    },
+    {
+      "name": "native-mapping-1",
+      "command": [
+        "/workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/build/m3-runtime-fastdebug/images/jdk/bin/java",
+        "-Xcheck:jni",
+        "--add-exports",
+        "java.base/jdk.internal.mindex=ALL-UNNAMED",
+        "-cp",
+        "/workspace/scratch/2b4d1cb957a7/build-proof/native-image-execution/classes",
+        "M3PrimitiveFixedArenaProbe",
+        "/workspace/scratch/2b4d1cb957a7/build-proof/native-image-execution/canonical.m3prim",
+        "/workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/build/m3-runtime-fastdebug/images/jdk/lib/libjava.so"
+      ],
+      "exit": 0,
+      "seconds": 0.37592315673828125
+    }
+  ],
+  "primitive_output": "M3_NAMESPACE=6dc3b1770d9e6c0b24a442b9ef6045b1705157b433496b60188ff6ba0788eab8\nM3_PRIMITIVE_TEST checks=131403\n",
+  "native_outputs": [
+    "M3_FIXED_ARENA_OK base=0x600000000000 namespace=6dc3b1770d9e6c0b24a442b9ef6045b1705157b433496b60188ff6ba0788eab8\n",
+    "M3_FIXED_ARENA_OK base=0x600000000000 namespace=6dc3b1770d9e6c0b24a442b9ef6045b1705157b433496b60188ff6ba0788eab8\n"
+  ],
+  "independent_processes": 2,
+  "concurrent_processes": false,
+  "collision_refusal": "asserted by existing probe in each process",
+  "native_libjava_sha256": "ed3ee9cb8a1c5a84574ed3d2f1a8faf6f2d5b9ad7466738a1c3443b43fa83a26",
+  "libjvm_sha256": "807a66b5923c7ea4d33de84b783fae8eb30505c674c7d90e3258b0afe17d8012",
+  "image_sha256": "c9de5bd62eba0668fbc6725bb2d3a1eb82272dae180218eaa059191d5c93f645"
+}

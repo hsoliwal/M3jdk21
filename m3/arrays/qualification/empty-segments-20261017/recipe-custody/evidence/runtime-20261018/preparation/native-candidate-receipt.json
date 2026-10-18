@@ -1,0 +1,40 @@
+{
+  "schema": "M3_RUNTIME_NATIVE_CANDIDATE_V1",
+  "baseline": "4b24824c3aa09d802121447f8970d442a855f064",
+  "path": "src/hotspot/share/classfile/classLoader.cpp",
+  "before_sha256": "665bb788428c8d3837d052ac4f69a2756bb1823918726b41a7a7008eadfafd8d",
+  "after_sha256": "d6283c23f650714e85b9a910f6cda656146552ae95950a04b02af861b636dca2",
+  "object_sha256": "829fb37093cf3e8d11b3c1e3d42f898f0c86f3b697e7a66cefe09934be3bb259",
+  "apparatus": {
+    "prepare.py": "9b0b3d93c787c9a56036cddb2b044aef30f6fa8a1fa20fa5a2edae46dfd1e62c",
+    "receive.py": "db258f16e1841f6f5191c1c969c20314a8d143bfa6558b60f684bea440cc1712",
+    "ENGINE_SOURCES.tsv": "ae731c5780c73a98f6fc81079b5f863613fddea50d2a6c893c6dfd2aa2030b5c",
+    "HARNESS_LINEAGE.json": "3a26e75c15328e96a95714035659afd24195c49e557b78e081530d28c3ac968f",
+    "LICENSE.txt": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+    "NOTICE.md": "8d2556e22d133bae88a8550d1787507d0be2a5ce5934bf9f474dbbd202558993",
+    "src/test/java/com/synexia/rewrite/M3TaskRecipeTest.java": "74b03a3ac3e445a04b8b15076d3ced667bfae2442bd0968cbe74468e4a499e43",
+    "contract/test_prepare.py": "f504f1dcfafb24fd87f8f677643b45eecc74674881e16bf727b76c4e6a4d1856",
+    "contract/verify_receiver.py": "a4d82df8b31e707afe7caa5e76524d191f285e2887dbfdfa95cfdc382ae01f7d",
+    "pom.xml": "4c90faaa9e64aebeeba14fb2196731c6334293781d0fdcafbf190f2f5662eb7d",
+    "owner/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java": "67f7b81126e4736c7b61b444fa6545153a61e23c012975ca796fcee623ab6625",
+    "owner/src/main/java/com/synexia/rewrite/M3HashPinnedTextSnapshotRecipe.java": "fbf1ea9efad784afef5ac201ff7fc324551f77a099ebfe2f79b70c3a17c731ef",
+    "owner/src/main/java/com/synexia/rewrite/M3ScopeInference.java": "13660b59f60ec2941ec19e9bc8964ffd4b04689cdc33cd19711fba14b8da09a4",
+    "owner/src/main/java/com/synexia/rewrite/M3EditScope.java": "962d37d62d740c3e8055c365a048ae7ee0479c26a9f6bbfe741e540d6c1134ab"
+  },
+  "receiving_source_written": false,
+  "metadata": {
+    "schema": "M3_COLLECTIONS_CONTRACT_REFINEMENT_DATASET_V1",
+    "dataset": "m3jdk21-object-vtable",
+    "repository": "hsoliwal/M3jdk21",
+    "baseline_ref": "4b24824c3aa09d802121447f8970d442a855f064",
+    "crate_name": "m3-collections-contract-refinement-20261017-m3jdk21-object-vtable",
+    "recipe_name": "com.synexia.m3jdk.CollectionsContractRefinement20261017",
+    "targets": 1,
+    "java_targets": 0,
+    "text_targets": 1,
+    "product_sources_written": false,
+    "engine_changes_from_origin": []
+  },
+  "runtime_qualification": "NOT_RUN",
+  "Object_universal_compatibility": "HOLD"
+}

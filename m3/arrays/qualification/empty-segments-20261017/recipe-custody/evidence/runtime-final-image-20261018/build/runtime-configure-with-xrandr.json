@@ -1,0 +1,23 @@
+{
+  "command": [
+    "bash",
+    "configure",
+    "--with-conf-name=m3-runtime-fastdebug",
+    "--with-boot-jdk=/tmp/m3-toolchain/jdk-21.0.12.1+1",
+    "--with-jtreg=/tmp/m3-toolchain/jtreg",
+    "--with-debug-level=fastdebug",
+    "--with-jvm-variants=server",
+    "--enable-headless-only",
+    "--with-freetype=bundled",
+    "--enable-warnings-as-errors",
+    "--disable-javac-server",
+    "--with-native-debug-symbols=none",
+    "--with-memory-size=4096",
+    "--with-jobs=4",
+    "--with-test-jobs=2"
+  ],
+  "exit": 0,
+  "seconds": 6.105938196182251,
+  "sourceCommit": "4b24824c3aa09d802121447f8970d442a855f064",
+  "appliedDataset": "m3jdk21-object-vtable"
+}

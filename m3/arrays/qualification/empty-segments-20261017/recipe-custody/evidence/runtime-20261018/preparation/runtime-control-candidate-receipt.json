@@ -1,0 +1,24 @@
+{
+  "schema": "M3_RUNTIME_CONTROL_CANDIDATE_V1",
+  "baseline": "4b24824c3aa09d802121447f8970d442a855f064",
+  "docs_manifest_sha256": "7246c16a0e8ec742eba98dac97e24b7fc3947250ad5d2a22f72ac32dcddf0219",
+  "functional_manifest_sha256": "3b62981be6a617b903c559cc31904eca2bffb2b200380f1be57e07a8f634d969",
+  "scope_manifest_sha256": "1a45edfa747a03b3491063648a455083633e7de836e4c46241de104d689eebee",
+  "metadata": {
+    "schema": "M3_COLLECTIONS_CONTRACT_REFINEMENT_DATASET_V1",
+    "dataset": "m3jdk21-runtime-control",
+    "repository": "hsoliwal/M3jdk21",
+    "baseline_ref": "4b24824c3aa09d802121447f8970d442a855f064",
+    "crate_name": "m3-collections-contract-refinement-20261017-m3jdk21-runtime-control",
+    "recipe_name": "com.synexia.m3jdk.CollectionsContractRefinement20261017",
+    "targets": 10,
+    "java_targets": 1,
+    "text_targets": 9,
+    "product_sources_written": false,
+    "engine_changes_from_origin": []
+  },
+  "map_previous_entries": 59,
+  "map_appended_entries": 5,
+  "receiving_source_written": false,
+  "Object_universal_compatibility": "HOLD"
+}

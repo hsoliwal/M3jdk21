@@ -1,0 +1,9 @@
+/workspace/scratch/2b4d1cb957a7/runtime-refinement/proof/progress-scope-lint-compile-v2/before-full-lint/source/src/java.base/share/classes/java/util/concurrent/ProgressMonitors.java:93: warning: [try] auto-closeable resource ignored is never referenced in body of corresponding try statement
+        try (Scope ignored = bind(monitor)) {
+                   ^
+/workspace/scratch/2b4d1cb957a7/runtime-refinement/proof/progress-scope-lint-compile-v2/before-full-lint/source/src/java.base/share/classes/java/util/concurrent/ProgressMonitors.java:116: warning: [try] auto-closeable resource ignored is never referenced in body of corresponding try statement
+        try (Scope ignored = bind(monitor)) {
+                   ^
+error: warnings found and -Werror specified
+1 error
+2 warnings

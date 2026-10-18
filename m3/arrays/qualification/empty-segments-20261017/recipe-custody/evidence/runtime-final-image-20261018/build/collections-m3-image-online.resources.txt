@@ -1,0 +1,23 @@
+	Command being timed: "/tmp/m3-toolchain/apache-maven-3.9.11/bin/mvn -B -ntp -s /tmp/m3-toolchain/settings.xml -Dmaven.repo.local=/tmp/m3-maven-repository -DargLine=-Xmx768m -Xcheck:jni -f m3/collections/pom.xml clean verify"
+	User time (seconds): 278.14
+	System time (seconds): 5.18
+	Percent of CPU this job got: 260%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 1:48.59
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 603504
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 2
+	Minor (reclaiming a frame) page faults: 338525
+	Voluntary context switches: 65957
+	Involuntary context switches: 31220
+	Swaps: 0
+	File system inputs: 9864
+	File system outputs: 13784
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0

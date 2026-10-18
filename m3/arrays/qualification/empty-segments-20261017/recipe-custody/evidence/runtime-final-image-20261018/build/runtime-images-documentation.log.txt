@@ -1,0 +1,34 @@
+Using exact match for CONF=m3-runtime-fastdebug (other matches are possible)
+Building target 'images' in configuration 'm3-runtime-fastdebug'
+Compiling up to 3565 files for java.base
+Updating support/src.zip
+/workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/src/java.base/share/classes/java/util/function/Function.java:114: warning: [try] auto-closeable resource ignored is never referenced in body of corresponding try statement
+        try (java.util.concurrent.ProgressMonitors.Scope ignored =
+                                                         ^
+error: warnings found and -Werror specified
+1 error
+1 warning
+gmake[3]: *** [CompileJavaModules.gmk:95: /workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/build/m3-runtime-fastdebug/jdk/modules/java.base/_the.java.base_batch] Error 1
+gmake[2]: *** [make/Main.gmk:193: java.base-java] Error 2
+gmake[2]: *** Waiting for unfinished jobs....
+
+ERROR: Build failed for target 'images' in configuration 'm3-runtime-fastdebug' (exit code 2) 
+
+=== Output from failing command(s) repeated here ===
+* For target jdk_modules_java.base__the.java.base_batch:
+/workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/src/java.base/share/classes/java/util/function/Function.java:114: warning: [try] auto-closeable resource ignored is never referenced in body of corresponding try statement
+        try (java.util.concurrent.ProgressMonitors.Scope ignored =
+                                                         ^
+error: warnings found and -Werror specified
+1 error
+1 warning
+
+* All command lines available in /workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/build/m3-runtime-fastdebug/make-support/failure-logs.
+=== End of repeated output ===
+
+No indication of failed target found.
+HELP: Try searching the build log for '] Error'.
+HELP: Run 'make doctor' to diagnose build problems.
+
+make[1]: *** [/workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/make/Init.gmk:320: main] Error 2
+make: *** [/workspace/scratch/2b4d1cb957a7/M3jdk21-runtime/make/Init.gmk:186: images] Error 2

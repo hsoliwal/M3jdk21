@@ -1,0 +1,14 @@
+diff --git a/src/java.base/linux/native/libjava/M3PrimitiveFixedArena.c b/src/java.base/linux/native/libjava/M3PrimitiveFixedArena.c
+index 15354f8..c6d722c 100644
+--- a/src/java.base/linux/native/libjava/M3PrimitiveFixedArena.c
++++ b/src/java.base/linux/native/libjava/M3PrimitiveFixedArena.c
+@@ -8,7 +8,9 @@ com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe
+  * particular file as subject to the "Classpath" exception as provided
+  * by Oracle in the LICENSE file that accompanied this code.
+  */
++#ifndef _GNU_SOURCE
+ #define _GNU_SOURCE
++#endif
+ #include <jni.h>
+ #include <errno.h>
+ #include <fcntl.h>

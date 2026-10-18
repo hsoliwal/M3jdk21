@@ -1,0 +1,1 @@
+PASS exact 14-file current receiver identity; historical manifests preserved; Object compatibility and runtime admission remain HOLD
