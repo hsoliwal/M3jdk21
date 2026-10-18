@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: Apache-2.0
+// Modified 2026-10-18: reject blocked parent directories before creating any output.
 package com.m3.recipe;
 
 import java.io.IOException;
@@ -72,6 +73,9 @@ public final class M3RankIndexRecipe {
                 if (Files.isSymbolicLink(part)) {
                     throw new IOException("SYMLINK_PATH:" + item.target());
                 }
+                if (!part.equals(destination) && Files.exists(part) && !Files.isDirectory(part)) {
+                    throw new IOException("PRODUCT_PARENT_NOT_DIRECTORY:" + item.target());
+                }
             }
             if (Files.exists(destination)) {
                 if (!Files.isRegularFile(destination)
@@ -91,6 +95,9 @@ public final class M3RankIndexRecipe {
                 for (Path part = destination; !part.equals(root); part = part.getParent()) {
                     if (Files.isSymbolicLink(part)) {
                         throw new IOException("SYMLINK_PATH:" + item.target());
+                    }
+                    if (!part.equals(destination) && Files.exists(part) && !Files.isDirectory(part)) {
+                        throw new IOException("PRODUCT_PARENT_NOT_DIRECTORY:" + item.target());
                     }
                 }
                 if (Files.exists(destination)) {
