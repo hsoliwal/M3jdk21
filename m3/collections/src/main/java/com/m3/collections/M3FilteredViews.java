@@ -1,6 +1,7 @@
 /*
  * SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
  * SPDX-License-Identifier: Apache-2.0
+ * Modified 2026 by Hitesh Soliwal and contributors: restore comparator-key entry membership.
  */
 package com.m3.collections;
 
@@ -343,6 +344,15 @@ public final class M3FilteredViews {
         @Override public Set<Entry<K, V>> entrySet() {
             return new AbstractSet<>() {
                 @Override public int size() { return SortedMapView.this.size(); }
+                /** Membership resolves the stored comparator key before testing visibility. */
+                @Override public boolean contains(Object candidate) {
+                    if (!(candidate instanceof Entry<?, ?> probe)) return false;
+                    Object key = probe.getKey();
+                    if (!sorted.containsKey(key)) return false;
+                    V value = sorted.get(key);
+                    return predicate.test(storedKey(key), value)
+                            && Objects.equals(value, probe.getValue());
+                }
                 @Override public Iterator<Entry<K, V>> iterator() {
                     Iterator<Entry<K, V>> cursor = sorted.entrySet().iterator();
                     Iterator<Entry<K, V>> filtered = M3FilteredViews.filtered(cursor,
