@@ -266,4 +266,81 @@ public final class M3FiveLibraryIndexViews<K, V> {
         for (int i = 0; i < size(); i++) result.put(keyAt(i), valueAt(i));
         return result;
     }
+
+    /**
+     * JDK Set materialization. Equal values collapse using the incumbent M3
+     * linked-hash set's equality semantics. The source occurrence index is not
+     * altered and the returned mutable owner is independent of this snapshot.
+     */
+    public java.util.Set<V> asJdkSet() {
+        java.util.Set<V> result = M3LibraryCollections.jdkSet();
+        for (int i = 0; i < size(); i++) result.add(valueAt(i));
+        return result;
+    }
+
+    /**
+     * Guava BiMap: uniqueness of values is provider-specific. Conflicting
+     * values belonging to distinct keys fail through the real BiMap API.
+     * Repeated keys may replace their earlier mappings.
+     */
+    public com.google.common.collect.BiMap<K, V> asGuavaBiMap() {
+        com.google.common.collect.BiMap<K, V> result = M3LibraryCollections.guavaBiMap();
+        for (int i = 0; i < size(); i++) result.put(keyAt(i), valueAt(i));
+        return result;
+    }
+
+    /** Guava Multiset: one count per equal value, not one retained Entry node. */
+    public com.google.common.collect.Multiset<V> asGuavaMultiset() {
+        com.google.common.collect.Multiset<V> result = new M3GuavaMultiset<>();
+        for (int i = 0; i < size(); i++) result.add(valueAt(i));
+        return result;
+    }
+
+    /**
+     * Guava Table: use the selected *logical ordinal* as the column identifier.
+     * This retains every occurrence, including duplicated keys and physical rows.
+     * The actual Table API owns its null restrictions and view behavior.
+     */
+    public com.google.common.collect.Table<K, Integer, V> asGuavaOrdinalTable() {
+        com.google.common.collect.Table<K, Integer, V> result =
+                M3LibraryCollections.guavaTable();
+        for (int i = 0; i < size(); i++) result.put(keyAt(i), i, valueAt(i));
+        return result;
+    }
+
+    /** Eclipse Collections list multimap with M3 group and ordered-value owners. */
+    public org.eclipse.collections.api.multimap.list.MutableListMultimap<K, V>
+            asEclipseListMultimap() {
+        org.eclipse.collections.api.multimap.list.MutableListMultimap<K, V> result =
+                new M3EclipseListMultimap<>();
+        for (int i = 0; i < size(); i++) result.put(keyAt(i), valueAt(i));
+        return result;
+    }
+
+    /** Eclipse Collections set multimap: equality collapses duplicate key/value pairs. */
+    public org.eclipse.collections.api.multimap.set.MutableSetMultimap<K, V>
+            asEclipseSetMultimap() {
+        org.eclipse.collections.api.multimap.set.MutableSetMultimap<K, V> result =
+                new M3EclipseSetMultimap<>();
+        for (int i = 0; i < size(); i++) result.put(keyAt(i), valueAt(i));
+        return result;
+    }
+
+    /** Apache Commons MultiSet, backed by the incumbent M3CountedBag lanes. */
+    public org.apache.commons.collections4.MultiSet<V> asApacheMultiSet() {
+        org.apache.commons.collections4.MultiSet<V> result = new M3ApacheMultiSet<>();
+        for (int i = 0; i < size(); i++) result.add(valueAt(i));
+        return result;
+    }
+
+    /**
+     * Spring MultiValueMap is a map of lists: each selected occurrence
+     * replaces the previous list for that key. Its size counts distinct keys,
+     * unlike Guava/Apache occurrence-counting multimaps.
+     */
+    public MultiValueMap<K, V> asSpringLastValueMap() {
+        MultiValueMap<K, V> result = M3LibraryCollections.springMultiValueMap();
+        for (int i = 0; i < size(); i++) result.set(keyAt(i), valueAt(i));
+        return result;
+    }
 }
