@@ -153,67 +153,86 @@ final class M3JsonCodec {
         if (ast.retainedTextUnits() > limits.maxTextUnits()) {
             throw new IllegalArgumentException("M3 AST retained text budget");
         }
-        ArrayDeque<OutputFrame> stack = new ArrayDeque<>();
-        stack.push(new OutputFrame(ast.rootAtomIndex()));
+
+        // This stack is two primitive arrays, not one OutputFrame object per JSON token.
+        int[] atomStack = new int[32];
+        int[] nextStack = new int[32];
+        atomStack[0] = ast.rootAtomIndex();
+        nextStack[0] = -1;
+        int top = 0;
+        int containers = 0;
         Work work = new Work(limits);
-        int depth = 0;
-        while (!stack.isEmpty()) {
-            OutputFrame frame = stack.peek();
-            String kind = ast.kindAt(frame.atom);
-            if (frame.nextChild == -1) {
+        while (top >= 0) {
+            int index = atomStack[top];
+            String kind = ast.kindAt(index);
+            if (nextStack[top] == -1) {
                 work.token();
                 switch (kind) {
                     case "OBJECT", "ARRAY" -> {
-                        if (++depth > limits.maxDepth()) throw new IllegalArgumentException("JSON depth budget");
+                        if (++containers > limits.maxDepth()) {
+                            throw new IllegalArgumentException("JSON depth budget");
+                        }
                         if (kind.equals("OBJECT")) generator.writeStartObject();
                         else generator.writeStartArray();
-                        frame.nextChild = 0;
+                        nextStack[top] = 0;
                     }
                     case "FIELD" -> {
-                        if (ast.childCountAt(frame.atom) != 1) throw new IllegalStateException("field requires one value");
-                        work.text(ast.nameAt(frame.atom));
-                        generator.writeFieldName(atom.name());
-                        frame.nextChild = 0;
+                        if (ast.childCountAt(index) != 1) {
+                            throw new IllegalStateException("field requires one value");
+                        }
+                        String name = ast.nameAt(index);
+                        work.text(name);
+                        generator.writeFieldName(name);
+                        nextStack[top] = 0;
                     }
                     case "STRING" -> {
-                        work.text(ast.valueAt(frame.atom));
-                        generator.writeString(atom.value());
-                        stack.pop();
+                        String value = ast.valueAt(index);
+                        work.text(value);
+                        generator.writeString(value);
+                        top--;
                         continue;
                     }
                     case "NUMBER_INT", "NUMBER_FLOAT" -> {
-                        work.text(atom.value());
+                        String value = ast.valueAt(index);
+                        work.text(value);
                         if (generator instanceof TokenBuffer buffer) {
-                            buffer.writeNumber(atom.value(), kind.equals("NUMBER_INT"));
+                            buffer.writeNumber(value, kind.equals("NUMBER_INT"));
                         } else {
-                            generator.writeNumber(atom.value());
+                            generator.writeNumber(value);
                         }
-                        stack.pop();
+                        top--;
                         continue;
                     }
                     case "TRUE", "FALSE" -> {
                         generator.writeBoolean(kind.equals("TRUE"));
-                        stack.pop();
+                        top--;
                         continue;
                     }
                     case "NULL" -> {
                         generator.writeNull();
-                        stack.pop();
+                        top--;
                         continue;
                     }
                     default -> throw new IllegalStateException("unrecognized JSON atom kind: " + kind);
                 }
             }
-            if (frame.nextChild < atom.childCount()) {
-                stack.push(new OutputFrame(ast.childAtomIndexAt(frame.atom, frame.nextChild++)));
+            if (nextStack[top] < ast.childCountAt(index)) {
+                int child = ast.childAtomIndexAt(index, nextStack[top]++);
+                if (top + 1 == atomStack.length) {
+                    int capacity = Math.multiplyExact(atomStack.length, 2);
+                    atomStack = Arrays.copyOf(atomStack, capacity);
+                    nextStack = Arrays.copyOf(nextStack, capacity);
+                }
+                atomStack[++top] = child;
+                nextStack[top] = -1;
             } else {
                 if (kind.equals("OBJECT") || kind.equals("ARRAY")) {
                     work.token();
                     if (kind.equals("OBJECT")) generator.writeEndObject();
                     else generator.writeEndArray();
-                    depth--;
+                    containers--;
                 }
-                stack.pop();
+                top--;
             }
         }
     }
@@ -233,12 +252,6 @@ final class M3JsonCodec {
             }
             children[size++] = atom;
         }
-    }
-
-    private static final class OutputFrame {
-        final int atom;
-        int nextChild = -1;
-        OutputFrame(int atom) { this.atom = atom; }
     }
 
     /** Count occurrences as well as retained atoms: DAG sharing cannot evade output work bounds. */
