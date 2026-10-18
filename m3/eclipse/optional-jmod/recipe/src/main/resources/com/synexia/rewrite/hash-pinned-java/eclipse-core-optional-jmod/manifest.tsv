@@ -1,0 +1,9 @@
+# Exact source-absent Java21 target postimages: path\tbefore\tafter\ttemplate
+m3/eclipse/optional-jmod/module-overlays/com.m3.ast/src/main/java/module-info.java	ABSENT	2839a3965c6c0715e382b407f240a248042059e6bb785c9bbb371b4be29710b6	M3AST-overlay-module-info.java.txt
+m3/eclipse/optional-jmod/module-overlays/com.m3.collections/src/main/java/module-info.java	ABSENT	cb03044e24780a2f887259e228e391cd024413accdcabc83d8a13d41b228e47b	M3Collections-overlay-module-info.java.txt
+m3/eclipse/optional-jmod/src/main/java/com/m3/eclipse/core/M3EclipseCore.java	ABSENT	6a0cee401ca6f507776b3ac18852d8001d85ab7cc2a71f7b4ab2a315f2964ae6	M3EclipseCore.java.txt
+m3/eclipse/optional-jmod/src/main/java/com/m3/eclipse/core/impl/M3EclipseCoreProvider.java	ABSENT	8b91ff2ee8b0fb9f118a58051d33a145e68e3d5ec2cb74de73fc52f8bee2ee8b	M3EclipseCoreProvider.java.txt
+m3/eclipse/optional-jmod/src/main/java/module-info.java	ABSENT	1813e07cd2f450d0c751e8de8783c103fab5eecc64579322092ecee371e59922	M3EclipseCore-module-info.java.txt
+m3/eclipse/optional-jmod/src/test/java/com/m3/eclipse/smoke/M3EclipseCoreSelfTest.java	ABSENT	f62c306c212f0dcafab8655b0ca00dbdb8ed0c87c7b435983b684ea41b0ac574	M3EclipseCoreSelfTest.java.txt
+m3/file/src/main/java/com/m3/file/M3File.java	ABSENT	22b6c0e7f2a136b2d43e765ec4a0669c2bc564a7d81f0b31f4f0a13f184e36e4	M3File.java.txt
+m3/file/src/main/java/module-info.java	ABSENT	e1b6465866957b2ebbb51fc5c13dd6c20b186ef72b3612fb891d7937d357def0	M3File-module-info.java.txt
