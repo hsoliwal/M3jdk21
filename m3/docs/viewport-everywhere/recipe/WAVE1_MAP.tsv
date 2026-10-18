@@ -36,3 +36,8 @@ Test_ViewportRowWindow	tests	viewport-core	M3ViewportRowWindowTest	test
 Test_ViewportSelectionShifts	tests	viewport-core	M3SelectionShiftsTest	test
 Test_ViewportSelectionEnumeration	tests	viewport-core	M3SelectionEnumerationTest	test
 Test_ViewportPlaneGeometry	tests	viewport-core	M3PlaneGeometryTest	test
+VirtualListModel	widgets	viewport-core	M3ListModel	main
+VirtualListWidth	widgets	viewport-core	M3ListWidth	main
+VirtualItemStorage	widgets	collections	M3SparseItemStore	main
+Test_VirtualListModel	tests	viewport-core	M3ListModelTest	test
+Test_VirtualListWidth	tests	viewport-core	M3ListWidthTest	test

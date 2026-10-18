@@ -31,6 +31,9 @@ recipeList:
   - org.openrewrite.java.ChangeType: {oldFullyQualifiedTypeName: org.eclipse.swt.widgets.ViewportScrollLayout, newFullyQualifiedTypeName: com.m3.viewport.M3ScrollLayout}
   - org.openrewrite.java.ChangeType: {oldFullyQualifiedTypeName: org.eclipse.swt.widgets.ViewportScrollBarGeometry, newFullyQualifiedTypeName: com.m3.viewport.M3ScrollBarGeometry}
   - org.openrewrite.java.ChangeType: {oldFullyQualifiedTypeName: org.eclipse.swt.widgets.ViewportPlaneGeometry, newFullyQualifiedTypeName: com.m3.viewport.M3PlaneGeometry}
+  - org.openrewrite.java.ChangeType: {oldFullyQualifiedTypeName: org.eclipse.swt.widgets.VirtualListModel, newFullyQualifiedTypeName: com.m3.viewport.M3ListModel}
+  - org.openrewrite.java.ChangeType: {oldFullyQualifiedTypeName: org.eclipse.swt.widgets.VirtualListWidth, newFullyQualifiedTypeName: com.m3.viewport.M3ListWidth}
+  - org.openrewrite.java.ChangeType: {oldFullyQualifiedTypeName: org.eclipse.swt.widgets.VirtualItemStorage, newFullyQualifiedTypeName: com.m3.collections.M3SparseItemStore}
 ---
 type: specs.openrewrite.org/v1beta/recipe
 name: com.m3.viewport.recipe.Wave1Main
@@ -68,6 +71,8 @@ recipeList:
   - org.openrewrite.java.ChangeType: {oldFullyQualifiedTypeName: org.eclipse.swt.tests.junit.Test_ViewportSelectionShifts, newFullyQualifiedTypeName: com.m3.viewport.M3SelectionShiftsTest}
   - org.openrewrite.java.ChangeType: {oldFullyQualifiedTypeName: org.eclipse.swt.tests.junit.Test_ViewportSelectionEnumeration, newFullyQualifiedTypeName: com.m3.viewport.M3SelectionEnumerationTest}
   - org.openrewrite.java.ChangeType: {oldFullyQualifiedTypeName: org.eclipse.swt.tests.junit.Test_ViewportPlaneGeometry, newFullyQualifiedTypeName: com.m3.viewport.M3PlaneGeometryTest}
+  - org.openrewrite.java.ChangeType: {oldFullyQualifiedTypeName: org.eclipse.swt.tests.junit.Test_VirtualListModel, newFullyQualifiedTypeName: com.m3.viewport.M3ListModelTest}
+  - org.openrewrite.java.ChangeType: {oldFullyQualifiedTypeName: org.eclipse.swt.tests.junit.Test_VirtualListWidth, newFullyQualifiedTypeName: com.m3.viewport.M3ListWidthTest}
   - com.m3.viewport.recipe.M3ChangeImport: {from: org.eclipse.swt.internal.ViewportRuntime.Selection, to: com.m3.viewport.M3ViewportRuntime.Selection}
   - com.m3.viewport.recipe.M3ChangeStringLiteral: {from: org.eclipse.swt.widgets.VirtualRowExtents, to: com.m3.collections.M3SparseExtents}
   - com.m3.viewport.recipe.M3ChangeStringLiteral: {from: org.eclipse.swt.widgets.VirtualCellLanes, to: com.m3.collections.M3ColumnarLanes}
@@ -91,3 +96,6 @@ recipeList:
   - com.m3.viewport.recipe.M3ChangeStringLiteral: {from: VirtualBitLanes, to: com.m3.collections.M3BitLanes}
   - com.m3.viewport.recipe.M3ChangeStringLiteral: {from: VirtualBlockCache, to: com.m3.collections.M3BlockCache}
   - com.m3.viewport.recipe.M3ChangeStringLiteral: {from: VirtualBlockStore, to: com.m3.collections.M3BlockStore}
+  - com.m3.viewport.recipe.M3ChangeStringLiteral: {from: org.eclipse.swt.widgets.VirtualListWidth, to: com.m3.viewport.M3ListWidth}
+  - com.m3.viewport.recipe.M3ChangeStringLiteral: {from: VirtualListModel, to: com.m3.viewport.M3ListModel}
+  - com.m3.viewport.recipe.M3ChangeStringLiteral: {from: VirtualListWidth, to: com.m3.viewport.M3ListWidth}

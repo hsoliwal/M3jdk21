@@ -111,6 +111,22 @@
     {"source": "tests/org.eclipse.swt.tests/JUnit Tests/org/eclipse/swt/tests/junit/Test_ViewportPlaneGeometry.java", "source_blob": "c9039203f725d51f2cba01c20057784851e44c63", "source_sha256": "ab93f2efb123f001d232d07d0129998260d6f3c1ed7c39cf4b44d6102096ffdb",
      "target": "m3/viewport-core/src/test/java/com/m3/viewport/M3PlaneGeometryTest.java", "target_sha256": "01c52adce4945b3429fd2ec6697f828a2f7fa22b53bdac56dcc156dfc2a3719b",
      "changes": ["Apache-2.0 header with donor attribution kept", "type rename", "package move", "reflective class names follow the rename"],
+     "license": "Apache-2.0 (EPL-2.0 at source; same author)"},
+    {"source": "bundles/org.eclipse.swt/Eclipse SWT/common/org/eclipse/swt/widgets/VirtualListModel.java", "source_blob": "9386d3542b3a78c1e10219a0209ab62f7646d7de", "source_sha256": "b3184b68365ccf0cdd484776d34d58dacaa8d6cea497a5a0c7a6262859d9e241",
+     "target": "m3/viewport-core/src/main/java/com/m3/viewport/M3ListModel.java", "target_sha256": "9d13e871b3f327fd2da4704d16d55633a1e6a620c4c4327e798f51b94f6fb759",
+     "changes": ["Apache-2.0 header with donor attribution kept", "type rename", "package move", "package-private surface made public; SWT.error replaced by the identical IllegalArgumentException"],
+     "license": "Apache-2.0 (EPL-2.0 at source; same author)"},
+    {"source": "bundles/org.eclipse.swt/Eclipse SWT/common/org/eclipse/swt/widgets/VirtualListWidth.java", "source_blob": "6340a42f8375820caf1ec8325e08778218e14354", "source_sha256": "f458cc73cbbc454d4eff06bc6b164f0bef995fdd7e421a3ffc53372110c647e4",
+     "target": "m3/viewport-core/src/main/java/com/m3/viewport/M3ListWidth.java", "target_sha256": "3a2155d4ea217925d89665456b8fb52c1f5ecd46e3a8c7068c66ddf46032c54e",
+     "changes": ["Apache-2.0 header with donor attribution kept", "type rename", "package move", "package-private surface made public; SWT.error replaced by the identical IllegalArgumentException"],
+     "license": "Apache-2.0 (EPL-2.0 at source; same author)"},
+    {"source": "tests/org.eclipse.swt.tests/JUnit Tests/org/eclipse/swt/tests/junit/Test_VirtualListModel.java", "source_blob": "1086a0c951c59a9d4f5198d1d41e96fd9794b5fb", "source_sha256": "75fb9bda479309608816c8b0d3874744a02445e3d82ba62816692bee72934848",
+     "target": "m3/viewport-core/src/test/java/com/m3/viewport/M3ListModelTest.java", "target_sha256": "73e67e8711ff52198fc321f58818720987c3f3bd77a14f3ec62d5f05deea6b47",
+     "changes": ["Apache-2.0 header with donor attribution kept", "type rename", "package move", "reflective class names follow the rename"],
+     "license": "Apache-2.0 (EPL-2.0 at source; same author)"},
+    {"source": "tests/org.eclipse.swt.tests/JUnit Tests/org/eclipse/swt/tests/junit/Test_VirtualListWidth.java", "source_blob": "6f7224d1792091a8b3889adbd44e86079eb91a1f", "source_sha256": "77b29049237b77beb437da44f519f524284b418e9c466f15989b013201b8a00b",
+     "target": "m3/viewport-core/src/test/java/com/m3/viewport/M3ListWidthTest.java", "target_sha256": "57520b2b027089a29f39ad7d16c0efc34c341df54481b92572ca4f6dace13911",
+     "changes": ["Apache-2.0 header with donor attribution kept", "type rename", "package move", "reflective class names follow the rename"],
      "license": "Apache-2.0 (EPL-2.0 at source; same author)"}
   ]
 }

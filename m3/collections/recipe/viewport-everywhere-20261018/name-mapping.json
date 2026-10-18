@@ -11,6 +11,7 @@
     {"source": "org.eclipse.swt.widgets.VirtualBlockStore", "source_path": "bundles/org.eclipse.swt/Eclipse SWT/common/org/eclipse/swt/widgets/VirtualBlockStore.java", "source_blob_sha1": "76b640edd3b96518f79bdf83b18b0a18b1b61ac3", "target": "com.m3.collections.M3BlockStore"},
     {"source": "org.eclipse.swt.widgets.VirtualBlockCache", "source_path": "bundles/org.eclipse.swt/Eclipse SWT/common/org/eclipse/swt/widgets/VirtualBlockCache.java", "source_blob_sha1": "47f6a4797601263a8c507b6f77a6e56969e1762f", "target": "com.m3.collections.M3BlockCache"},
     {"source": "org.eclipse.swt.widgets.VirtualGrowth", "source_path": "bundles/org.eclipse.swt/Eclipse SWT/common/org/eclipse/swt/widgets/VirtualGrowth.java", "source_blob_sha1": "7ccf8caf6048b04f2b5f3992f6c5dc7c182f569c", "target": "com.m3.collections.M3LaneGrowth"},
-    {"source": "org.eclipse.swt.internal.PackedHeapGrowth", "source_path": "bundles/org.eclipse.swt/Eclipse SWT/common/org/eclipse/swt/internal/PackedHeapGrowth.java", "source_blob_sha1": "82c88d4d5b2517e21694076e5b32c73a4e362fbb", "target": "com.m3.collections.M3HeapGrowth"}
+    {"source": "org.eclipse.swt.internal.PackedHeapGrowth", "source_path": "bundles/org.eclipse.swt/Eclipse SWT/common/org/eclipse/swt/internal/PackedHeapGrowth.java", "source_blob_sha1": "82c88d4d5b2517e21694076e5b32c73a4e362fbb", "target": "com.m3.collections.M3HeapGrowth"},
+    {"source": "org.eclipse.swt.widgets.VirtualItemStorage", "source_path": "bundles/org.eclipse.swt/Eclipse SWT/common/org/eclipse/swt/widgets/VirtualItemStorage.java", "source_blob_sha1": "e8ab2f2333b77b8faaa43499a099f02d6b46504b", "target": "com.m3.collections.M3SparseItemStore"}
   ]
 }

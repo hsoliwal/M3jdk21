@@ -43,6 +43,10 @@
     {"source": "tests/org.eclipse.swt.tests/JUnit Tests/org/eclipse/swt/tests/junit/Test_VirtualCellLanes.java", "source_blob": "db3cf0eb7a4977dd74686192e0533c4dc933cf21", "source_sha256": "9bfb34461701a9d460f0e8a162ea3a10f9b64e1f7a34f6af14a2819aecc13d7b",
      "target": "m3/collections/src/test/java/com/m3/collections/M3ColumnarLanesTest.java", "target_sha256": "b7c42a7a44320ebfff8b232c17f0b8db9e61fbb96025c6f7c83d7784469f3a65",
      "changes": ["Apache-2.0 header with donor attribution kept", "type rename", "package move", "reflective class names follow the rename"],
+     "license": "Apache-2.0 (EPL-2.0 at source; same author)"},
+    {"source": "bundles/org.eclipse.swt/Eclipse SWT/common/org/eclipse/swt/widgets/VirtualItemStorage.java", "source_blob": "e8ab2f2333b77b8faaa43499a099f02d6b46504b", "source_sha256": "dc286db2d784641f27b51e134c8faf2db57766e0ccc8572bee7173afe90cc60a",
+     "target": "m3/collections/src/main/java/com/m3/collections/M3SparseItemStore.java", "target_sha256": "c2d31c62294bdf27388228404b7e713ba90fe89f1d2ce26ab884af9871165730",
+     "changes": ["Apache-2.0 header with donor attribution kept", "type rename", "package move", "package-private surface made public; SWT.error replaced by the identical IllegalArgumentException"],
      "license": "Apache-2.0 (EPL-2.0 at source; same author)"}
   ]
 }
