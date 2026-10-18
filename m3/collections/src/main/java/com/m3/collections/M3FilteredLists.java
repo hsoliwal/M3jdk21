@@ -133,6 +133,19 @@ public final class M3FilteredLists {
         StrictReadOnlyList(List<E> delegate) { this.delegate = Objects.requireNonNull(delegate); }
         @Override public int size() { return delegate.size(); }
         @Override public E get(int index) { return delegate.get(index); }
+        // Keep the inherited indexed read path and its callback demand unchanged.
+        // Only removal is guarded, including calls before next or after exhaustion.
+        @Override public Iterator<E> iterator() {
+            Iterator<E> cursor = super.iterator();
+            return new Iterator<>() {
+                @Override public boolean hasNext() { return cursor.hasNext(); }
+                @Override public E next() { return cursor.next(); }
+                @Override public void forEachRemaining(Consumer<? super E> action) {
+                    cursor.forEachRemaining(action);
+                }
+                @Override public void remove() { throw new UnsupportedOperationException(); }
+            };
+        }
         @Override public ListIterator<E> listIterator(int index) {
             return Collections.unmodifiableList(delegate).listIterator(index);
         }
