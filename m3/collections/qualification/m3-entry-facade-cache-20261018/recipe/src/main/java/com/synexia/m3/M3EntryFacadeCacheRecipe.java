@@ -151,6 +151,11 @@ public final class M3EntryFacadeCacheRecipe {
 
     private static String slotMap(String source) throws IOException {
         source = replaceExactly(source,
+            "/** Shared JDK semantics over integer slots; internal traversal never constructs entries. */",
+            "/**\n * Shared JDK semantics over integer slots. Internal operations use slots and arrays;\n"
+            + " * public entry views alone request live facades, bounded and reused through M3LFUCache.\n"
+            + " */");
+        source = replaceExactly(source,
             "abstract class M3SlotMap<K, V> extends AbstractMap<K, V> {\n",
             "abstract class M3SlotMap<K, V> extends AbstractMap<K, V> {\n"
             + "    private static final int ENTRY_FACADE_CACHE_CAPACITY = 64;\n"
