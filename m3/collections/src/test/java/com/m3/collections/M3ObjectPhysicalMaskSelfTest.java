@@ -131,9 +131,16 @@ public final class M3ObjectPhysicalMaskSelfTest {
     }
 
     public static void main(String[] args) {
-        if (args.length != 0) throw new IllegalArgumentException("no arguments");
+        boolean nativeRequired = args.length == 1 && "--native".equals(args[0]);
+        if (!nativeRequired && args.length != 0) {
+            throw new IllegalArgumentException("only optional --native supported");
+        }
+        if (nativeRequired && !M3IndexPathMasks.nativeAvailable()) {
+            throw new AssertionError("native-required physical-state projection library missing");
+        }
         projectedSortedAndSliced();
         strictReadonlyEvenForNoOps();
-        System.out.println("PASS M3_OBJECT_PHYSICAL_MASK checks=" + checks);
+        System.out.println("PASS M3_OBJECT_PHYSICAL_MASK checks=" + checks
+                + " native=" + M3IndexPathMasks.nativeAvailable());
     }
 }
