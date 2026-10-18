@@ -1,0 +1,2 @@
+# target_path	source_revision	git_blob	before_sha256	after_sha256	mode	license
+src/hotspot/share/classfile/classLoader.cpp	19fc2c988ae7358b24e68e090eba214340d66452	ab29ec3524d40ff58d6ff3e6fe2c1123b3abc1dd	665bb788428c8d3837d052ac4f69a2756bb1823918726b41a7a7008eadfafd8d	5f8555b02497a2a1a416244dc6bbd2b6fcbc51b7ac3dde34e76fba2de52bfac6	0644	GPL-2.0-only

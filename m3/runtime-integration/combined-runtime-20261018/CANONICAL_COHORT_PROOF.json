@@ -1,0 +1,111 @@
+{
+  "schema": "M3_ACTUAL_LOCAL_FINAL_CANONICAL_COHORT_30_V1",
+  "copyright": "Copyright 2026 Hitesh Soliwal and Contributors to the Synexia Project",
+  "license": "Apache-2.0 for generated proof metadata; original source payload notices retained byte-exact",
+  "status": "PASS_ACTUAL_LOCAL_SELECTED_DATASET_COHORT",
+  "final_workflow_sha256": "232fbe986ba16735052c90c2316de0bdcaaffc14ab8d9d1fdcf624ebcf700b9d",
+  "final_workflow_git_blob_sha1": "d16b1e7b0d94c43c2967e73ee61ab3732e8a15af",
+  "ordered_datasets": [
+    "m3-budget-window-20261018",
+    "m3-entry-membership-20261018",
+    "m3-tq-current-epoch-20261018",
+    "m3-recipe-path-api-20261018",
+    "m3-sdk-ci-20261018",
+    "m3-regex-facts-v2-20261018",
+    "m3-sdk-regex-ci-20261018",
+    "m3-sdk-regex-ci-v2-20261018",
+    "m3jdk21-tq-bootstrap-20261018",
+    "m3-tq-guard-proof-20261018",
+    "m3-combined-manifest-20261018",
+    "java21-doc-compat-20261018",
+    "m3-sdk-parser-ci-20261018",
+    "m3-api-doclint-20261018",
+    "m3-sdk-doclint-ci-20261018",
+    "m3-progress-scope-lint-20261018",
+    "m3-tq-custody-v2-20261018",
+    "m3-native-feature-guard-20261018",
+    "m3-sdk-build-ci-20261018",
+    "m3-object-vtable-20261018",
+    "m3-sdk-object-ci-20261018",
+    "m3-runtime-catalogue-20261018",
+    "m3-catalogue-logs-20261018",
+    "m3-tq-sparse-jtreg-20261018",
+    "m3-native-index-build3-20261018",
+    "m3-mapping-custody-v2-20261018",
+    "m3-map-sparse-guard-20261018",
+    "m3-map-sparse-inputs-20261018",
+    "m3-sdk-final-ci-20261018",
+    "m3-sdk-raw-fixtures-ci-20261018"
+  ],
+  "dataset_count": 30,
+  "all_maven_exit_zero": true,
+  "sdk_tests": 150,
+  "sealing_tests": 240,
+  "receiver_cases": 270,
+  "execution_method": {
+    "prior29_snapshot_sha256": "5d3e405e26b0ab20b0d5450a4025afe5dd97b089a183d404694b1a4206b1f1ab",
+    "prior_actual_reused_source_identical": 3,
+    "fresh_final_namespace": 27,
+    "additive30_sha256": "d8671b09bc78e67ec7c7fede5e1078517a2d632d4f53260c63906113ee3920d0",
+    "no_prior29_rerun_for_source_hydration": true
+  },
+  "source_binding": {
+    "framework_files": 84,
+    "framework_pin_sha256": "fc8a06153570f221c26f293b5fc98a5297023bf3ea90bd4769f581c456f87040",
+    "pom_sha256": "71a903b5cb082d74b05fb36b2f2171a51451eee10e9380857cee9572e1d0d99a",
+    "old29_source_files": 616,
+    "additive_source_files": 12,
+    "combined_source_files": 628,
+    "source_index29_sha256": "7319ded500d89600fdfcffe08ed9caf801b84bbd44d8bfeed5246f7e7faa05bb",
+    "source_extension30_sha256": "27ea303badbff4d0f8718c98702fc3c88c54cbb3b3155b88900f2f6991be932e",
+    "runtime_source_freeze_sha256": "9020405f7f727b049666932ddebcc1ba96765e60bf917f4cad8de32f4b3d6249"
+  },
+  "provider_policy": {
+    "default": "stock OpenRewrite8.17.1",
+    "compat_only": [
+      "m3-regex-facts-v2-20261018",
+      "java21-doc-compat-20261018"
+    ],
+    "corrected_provider_sha256": "00d452ccb86a5658498b26cda1526cbaa11ba0b7f7a5a0d697aa1c418d9d2711",
+    "core_scheduler_and_four_owners_changed": false
+  },
+  "hydration_bridge": {
+    "proof_sha256": "d9a54dbd4963e826a21a0ad96a1c4fca599cc60567f971d378753768433b4d08",
+    "verbatim_block_sha256": "3225567af22f2a2445b03c3da54cca7da60a8fbbaba900ddf3800cbe9aa52702",
+    "archive_sha256": "259e2385fd04c4b502ba446712cee8d3ce1ef1a50715a3b433746976d7af729b",
+    "old29_before": 610,
+    "old29_after": 616,
+    "all_source_hashes_and_file_sets_equal": true,
+    "positive_cases": 1,
+    "negative_cases": 3,
+    "negative_case_no_write_claim": "Only corrupt archive pin refuses before writes. Member-manifest mismatch is explicitly after restoring six correct bytes and before SDK."
+  },
+  "publication_hygiene": {
+    "six_flat_fixture_paths_excluded": true,
+    "filter_sha256": "5b8764cc983270fbdef9287f8b3642f2e11425fea4de0d4a8dc18726fd4a0176",
+    "raw_source_and_logs_preserved_in_compressed_archives": true,
+    "no_normalization_or_waiver": true
+  },
+  "resources": {
+    "intended_transient_workspace_cap_held": false,
+    "detail_sha256": "bacb87949947c144a896fe27e5c065bc271eef0e3d29b049402754bb87b45f26",
+    "original_temp_actual_runs": 25,
+    "TMPDIR_SHM_actual_runs": 5,
+    "java_io_tmpdir_unchanged": "/tmp",
+    "minimum_continuous_free_reserve_claim": false
+  },
+  "independent_review": {
+    "critical": 0,
+    "important": 0,
+    "review29_sha256": "22f2bf4be2fad547eeff73c80ede74fe289c46c04e0bfcde2c004278b85d72fc",
+    "review30_sha256": "082f58ef0ffb17aa17fee831b38e79423b3f08158fb5383c9fef323595d19cb3"
+  },
+  "limits": [
+    "Finite SDK5, prepare8, receiver9 cases are not universal runtime or performance acceptance.",
+    "Historical datasets retain their original preimage and postimage epochs; this cohort does not assert every old recipe is a fixed point on the final installed runtime tree.",
+    "This executes the selected workflow dataset loop locally. It does not claim the whole hosted GitHub workflow, dependency bootstrap, or later source-complete reactor steps ran green.",
+    "Actual runtime image, semantic jtreg, and native proofs have separate source-bound receipts."
+  ],
+  "hosted_full_workflow_claim": false,
+  "runtime_performance_or_universal_acceptance_claim": false
+}

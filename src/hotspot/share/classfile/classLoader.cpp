@@ -1491,11 +1491,11 @@ jlong ClassLoader::class_link_time_ms() {
 }
 
 int ClassLoader::compute_Object_vtable() {
-  // hardwired for JDK1.2 -- would need to duplicate class file parsing
-  // code to determine actual value from file
-  // Would be value '11' if finals were in vtable
-  int JDK_1_2_Object_vtable_size = 5;
-  return JDK_1_2_Object_vtable_size * vtableEntry::size();
+  // Required before Object is loaded, when bootstrap array klasses are created.
+  // M3JDK21 adds the overridable toAdapter(Class) method to the five legacy
+  // Object slots. klassVtable verifies this reservation against parsed methods.
+  const int M3_Object_vtable_size = 6;
+  return M3_Object_vtable_size * vtableEntry::size();
 }
 
 

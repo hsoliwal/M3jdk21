@@ -155,3 +155,7 @@ other-platform native support.
 ## Catalogue delivery status
 
 The first catalogue TEXT delivery failed the unchanged path-admission guard. Runtime acceptance remains intact. The corrected filenames and two bounded TEXT datasets are described in [the packaging correction](PACKAGING_CORRECTION.md); their actual SDK/receiving pass is pending. Preserved raw receipts retain their original execution paths and resolve delivery filenames through `DELIVERY_PATHS.json`.
+
+## Later compiler and bootstrap source boundary
+
+The additive [latest runtime scope](LATEST_RUNTIME_SCOPE.md) records exact serial documentation, monitored-scope, native-feature, TQ-custody and Object-vtable repairs. The c857 image assembly and default/CDS-on/CDS-off boot probes pass; targeted jtreg remains NOT_RUN after a retained preexecution sparse-group refusal. Earlier rows and finite collections claims remain unchanged; these gates do not establish whole-JDK or performance acceptance.

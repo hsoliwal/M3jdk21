@@ -1,0 +1,30 @@
+{
+  "schema": "M3_COMBINED_MATCHED_IMAGE_STEP_V1",
+  "source_head": "c857a9ecf07270e9cd0b199221fd9d1d8d8aa744",
+  "source_tree": "f30bf4ae784f4c6c7b461d245e63d3299b053931",
+  "hotspot_git_tree": "7a1892921ebd3e3888192fa89dfba90184942254",
+  "step": "images-after-object-vtable",
+  "command": [
+    "make",
+    "images",
+    "JOBS=4",
+    "MAX_JOBS=4"
+  ],
+  "build_root": "/dev/shm/m3-combined-image-f8287/build",
+  "start_utc": "2026-10-18T13:50:21Z",
+  "resource_limits": {
+    "shm_min_free_bytes": 314572800,
+    "memory_min_available_bytes": 629145600,
+    "process_group_max_rss_bytes": 3221225472
+  },
+  "warnings_as_errors": true,
+  "exit_code": 0,
+  "stop_reason": null,
+  "end_utc": "2026-10-18T13:52:04Z",
+  "console_sha256": "f3c8147f57aa5337ffd1bd9b36c68de9fc52be7c6489d44a4f041c78318abc45",
+  "lowest_shm_free_bytes": 460464128,
+  "lowest_memory_available_bytes": 3123134464,
+  "peak_process_group_rss_bytes": 1475833856,
+  "source_head_after": "c857a9ecf07270e9cd0b199221fd9d1d8d8aa744",
+  "source_tree_after": "f30bf4ae784f4c6c7b461d245e63d3299b053931"
+}

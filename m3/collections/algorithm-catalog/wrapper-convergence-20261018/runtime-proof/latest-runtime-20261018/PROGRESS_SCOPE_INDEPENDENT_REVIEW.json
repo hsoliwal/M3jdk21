@@ -1,0 +1,39 @@
+{
+  "schema": "M3_EXISTING_RESOURCE_INDEPENDENT_SOURCE_REVIEW_V1",
+  "baseline_head": "242e43eb18cbe2613990baedb5dbb5440c3956f6",
+  "review_utc": "2026-10-18T13:18:06Z",
+  "status": "NO_SOURCE_BLOCKER_BEHAVIOR_AND_SDK_GATES_SEPARATE",
+  "files": [
+    {
+      "path": "src/java.base/share/classes/java/util/function/Consumer.java",
+      "before_sha256": "8097153ca83eeb7a61e577f481294be6a54c81101335cfa40e7c61b6e7a941b6",
+      "after_sha256": "740d91d3938b745f02ca38b0e0bebbf86ba91fc9a31d7dc97bc82b86978be66f",
+      "sites": 1
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/function/Function.java",
+      "before_sha256": "17880c4e228c19b8f2f3da3ab6251e724a23236720cf7172ba451c2c260252ec",
+      "after_sha256": "e78c8eeb289ef53a9042da65b970b97a5008f4b43a79c358121ea07bdb433046",
+      "sites": 1
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/function/Supplier.java",
+      "before_sha256": "73ff551b2ab612379d9d03fa9b2c0fd6a06145183ec449e6a0b23158d2c72739",
+      "after_sha256": "6479f488e8749ec24a3bab3d27f5649363a109ddb97ad591272d9f4b2a0bc3a0",
+      "sites": 1
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/concurrent/ProgressMonitors.java",
+      "before_sha256": "154083cc3d8d8801d7705a09a7b2d7427dcabb560511d8869d95cc44392793df",
+      "after_sha256": "f6c7ede21050d192af4685ada1eff8e4f06ae7f7bcbbbfb4c2bf5b857abb2245",
+      "sites": 2
+    }
+  ],
+  "observations": [
+    "Exactly five scope declarations become effectively-final local bindings plus Java9 existing-resource try statements.",
+    "The non-null check, bind evaluation, body, cancellation checks, return expression and close/suppression mechanism retain order.",
+    "No body references the original ignored variable; all other source bytes remain identical and local scope name has no conflict.",
+    "Public and protected declarations are untouched. The existing JDK source already uses this resource form."
+  ],
+  "limits": "Source review only; actual compiler, baseline/candidate lifecycle behavior, SDK/refusal/fixed-point and matched image remain required."
+}
