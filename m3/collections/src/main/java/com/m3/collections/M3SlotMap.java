@@ -22,6 +22,7 @@ import java.util.function.Function;
 abstract class M3SlotMap<K, V> extends AbstractMap<K, V> {
     /** API-boundary entries only; backing tables continue to store payloads and integer slots. */
     private final M3LFUCache<K, Entry<K, V>> entryFacades = new M3LFUCache<>(128);
+    private final M3LFUCache<K, Entry<K, V>> entrySnapshots = new M3LFUCache<>(128);
     abstract int firstSlot();
     abstract int nextSlot(int slot);
     abstract int findSlot(Object key);
@@ -161,7 +162,19 @@ abstract class M3SlotMap<K, V> extends AbstractMap<K, V> {
     }
 
     final Entry<K, V> snapshot(int slot) {
-        return slot < 0 ? null : new SimpleImmutableEntry<>(keyAt(slot), valueAt(slot));
+        if (slot < 0) {
+            return null;
+        }
+        K key = keyAt(slot);
+        V value = valueAt(slot);
+        Entry<K, V> cached = entrySnapshots.get(key);
+        if (cached instanceof SimpleImmutableEntry<?, ?> && cached.getKey() == key
+                && cached.getValue() == value) {
+            return cached;
+        }
+        Entry<K, V> created = new SimpleImmutableEntry<>(key, value);
+        entrySnapshots.put(key, created);
+        return created;
     }
     final class LiveEntry implements Entry<K, V> {
         private final K key;
