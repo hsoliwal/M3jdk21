@@ -1,0 +1,18 @@
+key	value
+receiverRepository	hsoliwal/M3jdk21
+baseCommit	2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49
+baseTree	a493469edd30b3345cc32f608fca19b55b4a378a
+sourceRepository	hsoliwal/eclipse-collections
+sourceCommit	2729a8109f0a5d877896b947a35993961c3d57f2
+expectedImportedSubtree	2668aea460e921db2fe693f680177a1b073c63b5
+target	m3/collections/implementations/eclipse-collections-11.1
+publicMetadata	m3/collections/receiving/eclipse-collections-11.1-20261018
+namespace	com.m3.collections.eclipse
+transformation	Prefix insertion paths only; preserve all source bytes and modes
+transport	3150 literal UTF8 postimages from21 nonempty insertion chunks;188 unchanged text paths/174 unique blobs;five exact base64 binary uploads
+runtimeReplays	None; completed compile/SPI/donor-suite/review evidence retained
+sourceOrBuildCopies	0
+preparationRemoteMutations	0
+receivingSourceRootTree	9ff090416a45dd75695a51a37a219af9819bcecb
+receivingSourceSubtreeVerified	2668aea460e921db2fe693f680177a1b073c63b5
+wholeArraysJavaJNIAdmission	OPEN

@@ -1,0 +1,11 @@
+targetPath() ::= ""
+
+fileName(primitive) ::= "com.m3.collections.eclipse.api.factory.stack.primitive.Immutable<primitive.name>StackFactory"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.name, primitive.wrapperName)>
+>>
+
+body(type, name, wrapperName) ::= <<
+com.m3.collections.eclipse.impl.stack.immutable.primitive.Immutable<primitive.name>StackFactoryImpl
+>>

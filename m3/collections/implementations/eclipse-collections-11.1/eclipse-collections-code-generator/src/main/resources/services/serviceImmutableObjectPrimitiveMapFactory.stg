@@ -1,0 +1,11 @@
+targetPath() ::= ""
+
+fileName(primitive) ::= "com.m3.collections.eclipse.api.factory.map.primitive.ImmutableObject<primitive.name>MapFactory"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.name, primitive.wrapperName)>
+>>
+
+body(type, name, wrapperName) ::= <<
+com.m3.collections.eclipse.impl.map.immutable.primitive.ImmutableObject<primitive.name>MapFactoryImpl
+>>

@@ -1,0 +1,6 @@
+output	consumer	guarantee	limit
+m3/collections/implementations/eclipse-collections-11.1	M3 code owners	Complete actual donor source and licenses;all3343 exact blobs;subtree2668aea460e921db2fe693f680177a1b073c63b5	Exact target subtree verified before topic commit
+FULL_SOURCE_BINDINGS.tsv	Root source readback/audit	Full sorted nontruncated path/mode/Git identity/size bindings	Binary5 raw SHA not previously recorded;Git byte identity required
+six M3 outputs	Reviewer/user	Actual statuses/contracts/provenance without private local paths	Neither full source21 nor complete arrays/JNI admission
+SOURCE_PREFIX_INSERTION_PLAN.json	Root Git/API transport	All3343 insertion identities;existing22 chunk prefix recipe;0 namespace deletions	Private transport plan;source bytes stay existing/external
+UNCHANGED_193_TRANSFER_MANIFEST.json	Root exact remote blob transfer	193 path/mode/SHA/size bindings;2557588 bytes	All193 actual blobs transferred;exact source tree verified

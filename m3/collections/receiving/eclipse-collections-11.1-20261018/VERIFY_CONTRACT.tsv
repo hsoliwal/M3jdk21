@@ -1,0 +1,10 @@
+gate	required	current
+Frozen input pins	All source/audit/chunk pins exact	PASS in metadata preparation
+Full insertion closure	3343 unique prefixed blob entries;3150+193 exact partition;0 deletions	PASS in metadata preparation
+Receiver object availability	All3150 literal postimages and193 actual unchanged bytes available in target repo	PASS_ALL3343_ACTUAL_TARGET_BLOBS
+Unchanged blob integrity	Pinned mode/Git SHA/size;raw SHA where recorded;binary decoded bytes	PASS_EXACT_TARGET_SUBTREE_AND_FIVE_BINARY_SHA_UPLOADS
+Imported subtree	Receiver recursive path/mode/blob readback and exact source tree2668aea460e921db2fe693f680177a1b073c63b5	PASS_EXACT_TARGET_SUBTREE_HASH
+M3 base custody	Preserve all pinned M3 base siblings;target absent;only add source/receiving metadata	PASS_SOURCE_TREE_BUILT_ON_PINNED_BASE_ONLY
+Licensing	All original license/header/notice bytes retained inside import;receiving notice outside import	BOUND_ALL3343_NOT_RELICENSED
+Behavior status	Report actual285pass/1fail and source21failure	RETAINED_FAILED_RESULTS
+Scope	No five-library/storage/native completion claim from this source import	OPEN

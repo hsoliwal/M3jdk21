@@ -1,0 +1,30 @@
+{
+  "schema": "m3-namespace-receiving-disposition-v1",
+  "copyright": "Copyright 2026 Hitesh Soliwal and contributors",
+  "metadataLicense": "Apache-2.0",
+  "authority": {
+    "repository": "hsoliwal/M3jdk21",
+    "revision": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
+    "policy": "m3/docs/m3jdk21-porting-invariant.md",
+    "mapping": "m3/docs/name-mapping.json"
+  },
+  "namespaceMapping": {
+    "source": "org.eclipse.collections",
+    "receiving": "com.m3.collections.eclipse",
+    "scope": "Complete independently licensed source-tree custody only",
+    "sourceTree": "2668aea460e921db2fe693f680177a1b073c63b5"
+  },
+  "targetDisposition": "PENDING_RUNTIME_PORT",
+  "publicJDKNames": "UNCHANGED",
+  "canonicalPayloadOwner": "Existing concrete java.util/java.util.concurrent owner if later admitted; this source copy is not a JDK backend",
+  "receivingSequenceAdvanced": false,
+  "sourceRefinementAuthority": "Synexia reusable recipes; no Synexia runtime dependency",
+  "outstanding": [
+    "JDK21 source compatibility",
+    "Full donor-suite green result",
+    "Per-concrete array/index/offset/mask backend transformation",
+    "Applicable Java/JNI/runtime/resource and contract proofs",
+    "Target-specific licensing and concrete-owner mapping before any src/** promotion"
+  ],
+  "licenseBoundary": "Exact donor EPL1/EDL1 notices preserved; outer Apache metadata and recipe licenses do not relicense imported Eclipse code"
+}

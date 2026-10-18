@@ -1,0 +1,11 @@
+capability	state	evidence	remaining
+Whole source receiving	SOURCE_TREE_VERIFIED	3343 actual target blobs; exact imported subtree2668aea460e921db2fe693f680177a1b073c63b5;Root target tree9ff090416a45dd75695a51a37a219af9819bcecb	Reviewable topic publication; later per-file array refinements
+M3 receiving baseline	PINNED	2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49/treea493469edd30b3345cc32f608fca19b55b4a378a	Recheck target absence and current base before mutation
+Namespace fork	PUBLISHED	2729a8109f0a5d877896b947a35993961c3d57f2;PRhttps://github.com/hsoliwal/eclipse-collections/pull/4	Receiving source tree verified
+Original algorithm custody	EXACT_NAMESPACE_ONLY	Root all-file byte/mode/path/Git audit;3150 inverse-byte pairs	Whole array/index/offset/mask refinements
+Mapped compile	BASELINE8_PASS_SOURCE21_FAILED	JDK21 release8 API/implementation postimages PASS; 12 Unsafe classes at major65; default source21 FAILED (List getFirst/getLast conflicts)	Separate JDK21 source compatibility
+SPI	238_DEFINED_PASS_16_ORIGINALLY_ABSENT	238 original defined SPI pairs PASS;16 original absent Boolean-key descriptors preserved	No fabricated original Boolean-key providers
+Mapped original tests	FAILED_285_PASS_1_FAIL_0_IGNORED	286 ran;285 passed;1 failed;0 ignored; FAILED. UnifiedMapTest.unifiedMapProperSuperSetOfHashMap newHashMap(int):HashMap is an original API-superset failure	Original API-superset failure remains
+Review	FOCUSED_V5_PASS_SEPARATE_MACHINE_AUDIT	Focused namespace recipe/configuration source-aware Codex review V5 findings=[] rc0; all-file byte/mode/path/Git proof is separate; no manual review of3150 source bodies claim	Exact target subtree and five binary upload hashes verified
+Five-library arrays and Java/JNI	OPEN	OPEN for all five collections libraries; this exact namespace import does not admit storage/native refinement	Not admitted by namespace import
+Storage protection	ACTIVE	Verified native S temp exception;512MiB shared/4MiB metadata task;8GiB reserve;C/D/E scratch hold	Remeasure before/during later output

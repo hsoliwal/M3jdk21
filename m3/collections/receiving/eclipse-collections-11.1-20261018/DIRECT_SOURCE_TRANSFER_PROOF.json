@@ -1,0 +1,30 @@
+{
+  "schema": "m3-eclipse-direct-source-transfer-proof-v1",
+  "repository": "hsoliwal/M3jdk21",
+  "base": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
+  "sourceCommit": "2729a8109f0a5d877896b947a35993961c3d57f2",
+  "sourcePR": "https://github.com/hsoliwal/eclipse-collections/pull/4",
+  "prefix": "m3/collections/implementations/eclipse-collections-11.1",
+  "blobs": 3343,
+  "changedLiteralUTF8": 3150,
+  "unchangedTextPaths": 188,
+  "unchangedTextUniqueBlobs": 174,
+  "binaryFiles": 5,
+  "binaryRawBytes": 1058229,
+  "sourceOnlyTargetRootTree": "9ff090416a45dd75695a51a37a219af9819bcecb",
+  "expectedImportedTree": "2668aea460e921db2fe693f680177a1b073c63b5",
+  "actualImportedTree": "2668aea460e921db2fe693f680177a1b073c63b5",
+  "exactSubtreeVerified": true,
+  "binaryUploadExpectedSHAsVerified": true,
+  "algorithmBodyChanges": 0,
+  "fiveLibraryArrayAndJNIGoal": "OPEN",
+  "review": "Focused frozen namespace recipe/configuration V5 Codex review rc0 findings=[]; full source transport proved separately by exact Git subtree equality; no additional all-source manual review claim",
+  "qualification": {
+    "compile": "Original release8 baseline on JDK21 passed with isolated twelve Unsafe major65 classes; default source21 failed (List default conflicts)",
+    "spi": "238 actually defined SPI pairs passed;16 originally absent descriptors preserved",
+    "donorSuite": "286 run;285 passed;1 original API-superset failure;0 ignored"
+  },
+  "preservedFailedAttempt": {
+    "finalSourceChunk21": "Contained only deletion entries; empty insertion create_tree rejected422; no ref mutation. Skipped empty insertion batch; final exact subtree verified."
+  }
+}
