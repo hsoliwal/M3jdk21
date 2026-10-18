@@ -6,6 +6,7 @@ package com.m3.collections;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
+import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.lang.reflect.Array;
@@ -64,9 +65,9 @@ final class M3NoRetainedStructuralEntryTest {
         hash.put(2, 20);
         Map.Entry<Integer, Integer> hashEntry = hash.entrySet().iterator().next();
         Map.Entry<Integer, Integer> hashEntryAgain = hash.entrySet().iterator().next();
-        assertFalse(
-                hashEntry == hashEntryAgain,
-                "PackedHashMap reused/cached an API Entry object");
+        assertSame(
+                hashEntry, hashEntryAgain,
+                "PackedHashMap did not reuse the same key's API facade");
         assertFalse(
                 retainsIdentity(hash, hashEntry),
                 "PackedHashMap retained an entry API projection as canonical storage");
@@ -79,9 +80,9 @@ final class M3NoRetainedStructuralEntryTest {
         tree.put(2, 20);
         Map.Entry<Integer, Integer> treeEntry = tree.entrySet().iterator().next();
         Map.Entry<Integer, Integer> treeEntryAgain = tree.entrySet().iterator().next();
-        assertFalse(
-                treeEntry == treeEntryAgain,
-                "PackedTreeMap reused/cached an API Entry object");
+        assertSame(
+                treeEntry, treeEntryAgain,
+                "PackedTreeMap did not reuse the same key's API facade");
         assertFalse(
                 retainsIdentity(tree, treeEntry),
                 "PackedTreeMap retained an entry API projection as canonical storage");
@@ -96,12 +97,27 @@ final class M3NoRetainedStructuralEntryTest {
 
         assertFreshBurst(hash::firstEntry, "hash firstEntry");
         assertFreshBurst(tree::firstEntry, "tree firstEntry");
-        assertFreshBurst(
+        assertCachedBurst(
                 () -> hash.entrySet().iterator().next(),
                 "hash entrySet iterator projection");
-        assertFreshBurst(
+        assertCachedBurst(
                 () -> tree.entrySet().iterator().next(),
                 "tree entrySet iterator projection");
+
+        var distinct = new M3LinkedHashMap<Integer, Integer>();
+        distinct.put(10, 100);
+        distinct.put(20, 200);
+        var distinctEntries = distinct.entrySet().iterator();
+        assertNotSame(distinctEntries.next(), distinctEntries.next(),
+                "different logical keys must never share one Entry facade");
+    }
+
+    private static void assertCachedBurst(
+            Supplier<? extends Map.Entry<?, ?>> supplier, String label) {
+        Map.Entry<?, ?> expected = supplier.get();
+        for (int iteration = 0; iteration < 1_024; iteration++) {
+            assertSame(expected, supplier.get(), label + " failed to reuse its live facade at " + iteration);
+        }
     }
 
     private static void assertFreshBurst(
