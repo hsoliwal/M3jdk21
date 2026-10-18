@@ -163,3 +163,221 @@ public final class M3TokenRegex {
         private boolean anchoredStart, anchoredEnd;
 
         private Parser(String source) { this.source = source; }
+
+        private M3TokenRegex compile() {
+            skipSpace();
+            if (take('^')) anchoredStart = true;
+            int expr = alternation();
+            skipSpace();
+            if (take('$')) anchoredEnd = true;
+            skipSpace();
+            if (cursor != source.length()) error("unrecognized or misplaced token-regex operator");
+            int accept = leaf(ACCEPT, -1, 0, 0);
+            int root = node(CONCAT, expr, accept);
+            int words = (positions + Long.SIZE - 1) / Long.SIZE;
+            long[] first = new long[nodeCount * words];
+            long[] last = new long[nodeCount * words];
+            long[] follow = new long[positions * words];
+            boolean[] nullable = new boolean[nodeCount];
+            for (int n = 0; n < nodeCount; n++) {
+                int a = left[n], b = right[n], dst = n * words;
+                switch (op[n]) {
+                    case ID, MASK, ANY, ACCEPT -> {
+                        int pos = leafPosition[n];
+                        first[dst + (pos >>> 6)] |= 1L << pos;
+                        last[dst + (pos >>> 6)] |= 1L << pos;
+                    }
+                    case EMPTY -> nullable[n] = true;
+                    case ALT -> {
+                        nullable[n] = nullable[a] || nullable[b];
+                        orRow(first, dst, first, a * words, words);
+                        orRow(first, dst, first, b * words, words);
+                        orRow(last, dst, last, a * words, words);
+                        orRow(last, dst, last, b * words, words);
+                    }
+                    case CONCAT -> {
+                        nullable[n] = nullable[a] && nullable[b];
+                        orRow(first, dst, first, a * words, words);
+                        if (nullable[a]) orRow(first, dst, first, b * words, words);
+                        orRow(last, dst, last, b * words, words);
+                        if (nullable[b]) orRow(last, dst, last, a * words, words);
+                        connect(last, a * words, first, b * words, follow, positions, words);
+                    }
+                    case STAR, PLUS, OPTIONAL -> {
+                        nullable[n] = op[n] != PLUS || nullable[a];
+                        orRow(first, dst, first, a * words, words);
+                        orRow(last, dst, last, a * words, words);
+                        if (op[n] != OPTIONAL) {
+                            connect(last, a * words, first, a * words, follow, positions, words);
+                        }
+                    }
+                    default -> throw new IllegalStateException("invalid token regex node");
+                }
+            }
+            return new M3TokenRegex(source, anchoredStart, anchoredEnd, positions,
+                    leafPosition[accept], Arrays.copyOf(ids, positions),
+                    Arrays.copyOf(req, positions), Arrays.copyOf(exc, positions),
+                    Arrays.copyOf(kind, positions),
+                    Arrays.copyOfRange(first, root * words, (root + 1) * words), follow, words);
+        }
+
+        private static void orRow(long[] target, int dst, long[] src, int from, int words) {
+            for (int w = 0; w < words; w++) target[dst + w] |= src[from + w];
+        }
+
+        private static void connect(long[] last, int lastOffset, long[] first, int firstOffset,
+                long[] follow, int positions, int words) {
+            for (int w = 0; w < words; w++) {
+                long bits = last[lastOffset + w];
+                while (bits != 0) {
+                    int pos = (w << 6) + Long.numberOfTrailingZeros(bits);
+                    if (pos < positions) orRow(follow, pos * words, first, firstOffset, words);
+                    bits &= bits - 1;
+                }
+            }
+        }
+
+        private int alternation() {
+            int result = sequence();
+            skipSpace();
+            while (take('|')) {
+                result = node(ALT, result, sequence());
+                skipSpace();
+            }
+            return result;
+        }
+
+        private int sequence() {
+            int result = -1;
+            skipSpace();
+            while (cursor < source.length()) {
+                char ch = source.charAt(cursor);
+                if (ch == ')' || ch == '|' || ch == '$') break;
+                int item = atom();
+                result = result < 0 ? item : node(CONCAT, result, item);
+                skipSpace();
+            }
+            return result < 0 ? node(EMPTY, 0, 0) : result;
+        }
+
+        private int atom() {
+            skipSpace();
+            int result;
+            if (take('(')) {
+                result = alternation();
+                skipSpace();
+                if (!take(')')) error("missing closing parenthesis");
+            } else if (take('.')) {
+                result = leaf(ANY, -1, 0, 0);
+            } else if (take('#')) {
+                int id = number();
+                if (id < 0) error("token ID exceeds signed int range");
+                result = leaf(ID, id, 0, 0);
+            } else if (take('%')) {
+                result = leaf(MASK, -1, number(), 0);
+            } else if (take('!')) {
+                if (!take('%')) error("expected !%kind-mask");
+                result = leaf(MASK, -1, 0, number());
+            } else if (take('[')) {
+                result = bracket();
+            } else {
+                error("expected token ID, kind mask, wildcard or group");
+                throw new AssertionError();
+            }
+            if (take('*')) result = node(STAR, result, 0);
+            else if (take('+')) result = node(PLUS, result, 0);
+            else if (take('?')) result = node(OPTIONAL, result, 0);
+            return result;
+        }
+
+        private int bracket() {
+            int id = -1, required = 0, excluded = 0;
+            boolean found = false;
+            while (true) {
+                skipSpace();
+                if (take(']')) {
+                    if (!found) error("empty token selector");
+                    return leaf(id >= 0 ? ID : MASK, id, required, excluded);
+                }
+                String key = keyword();
+                skipSpace();
+                if (!take('=')) error("token selector requires '='");
+                int value = number();
+                switch (key) {
+                    case "id" -> {
+                        if (id >= 0) error("duplicate id");
+                        if (value < 0) error("token ID exceeds signed int range");
+                        id = value;
+                    }
+                    case "all" -> required |= value;
+                    case "none" -> excluded |= value;
+                    default -> error("unknown selector attribute");
+                }
+                found = true;
+                skipSpace();
+                if (!take(',')) {
+                    if (!take(']')) error("expected ',' or ']'");
+                    return leaf(id >= 0 ? ID : MASK, id, required, excluded);
+                }
+            }
+        }
+
+        private String keyword() {
+            int start = cursor;
+            while (cursor < source.length() && Character.isLetter(source.charAt(cursor))) cursor++;
+            if (start == cursor) error("expected selector attribute name");
+            return source.substring(start, cursor);
+        }
+
+        private int number() {
+            skipSpace();
+            int radix = 10;
+            if (source.startsWith("0x", cursor) || source.startsWith("0X", cursor)) {
+                radix = 16; cursor += 2;
+            }
+            int start = cursor;
+            while (cursor < source.length()
+                    && Character.digit(source.charAt(cursor), radix) >= 0) cursor++;
+            if (start == cursor) error("missing numeric token/mask value");
+            try {
+                return radix == 16
+                        ? Integer.parseUnsignedInt(source.substring(start, cursor), 16)
+                        : Integer.parseUnsignedInt(source.substring(start, cursor), 10);
+            } catch (NumberFormatException invalid) {
+                throw new IllegalArgumentException("token regex numeric value out of range", invalid);
+            }
+        }
+
+        private int leaf(int opcode, int tokenId, int required, int excluded) {
+            if (positions >= MAX_POSITIONS) error("token-regex position budget exceeded");
+            int at = positions++;
+            ids[at] = tokenId;
+            req[at] = required;
+            exc[at] = excluded;
+            kind[at] = opcode;
+            int n = node(opcode, 0, 0);
+            leafPosition[n] = at;
+            return n;
+        }
+
+        private int node(int opcode, int a, int b) {
+            if (nodeCount == MAX_NODES) error("token-regex node budget exceeded");
+            int at = nodeCount++;
+            op[at] = opcode;
+            left[at] = a;
+            right[at] = b;
+            return at;
+        }
+
+        private void skipSpace() {
+            while (cursor < source.length() && Character.isWhitespace(source.charAt(cursor)) cursor++;
+        }
+        private boolean take(char ch) {
+            if (cursor < source.length() && source.charAt(cursor) == ch) { cursor++; return true; }
+            return false;
+        }
+        private void error(String message) {
+            throw new IllegalArgumentException(message + " at offset " + cursor);
+        }
+    }
+}
