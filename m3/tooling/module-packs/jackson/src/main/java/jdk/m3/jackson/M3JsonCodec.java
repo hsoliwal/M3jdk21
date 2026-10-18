@@ -107,9 +107,8 @@ final class M3JsonCodec {
         if (first == '0') {
             cursor++;
         } else if (first >= '1' && first <= '9') {
-            while (++cursor < size && Character.isDigit(text.charAt(cursor))) {
-                if (text.charAt(cursor) > '9') return false;
-            }
+            cursor++;
+            while (cursor < size && text.charAt(cursor) >= '0' && text.charAt(cursor) <= '9') cursor++;
         } else {
             return false;
         }
