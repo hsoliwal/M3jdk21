@@ -1,14 +1,14 @@
 {
   "schema": "M3_RECIPE_CUSTODY_V1",
   "target_repo": "hsoliwal/M3jdk21",
-  "target_base_commit": "f29b0afe7ad253cc0562bc8dfdd48fc1acec710e",
+  "target_base_commit": "8c274790d5b7cf2741df7baec96d6c5d0e9c72c4",
   "canonical_source_repo": "hsoliwal/com.synexia",
-  "source_base_commit": "50f48cbbe11f17fb8dc209bac3812f8940a1e267",
+  "source_base_commit": "ec0ab00a64070e96ac5dc310cc168e49d9319be7",
   "canonical_review_ref": "refs/heads/codex/m3-jackson-jmod-20261018",
-  "canonical_recipe": "com.synexia.rewrite.M3JacksonJmodRecipe",
-  "application_runner": "com.synexia.rewrite.M3JacksonJmodApply",
+  "canonical_recipe": "com.synexia.rewrite.M3JacksonJmodFullRecipe",
+  "application_runner": "com.synexia.rewrite.M3JacksonJmodFullApply",
   "maven_crate": "synexia-openrewrite-recipes/crates/m3-jackson-jmod/pom.xml",
-  "packet": "m3-jackson-jmod-20261018",
+  "packet": "m3-jackson-jmod-full-20261018",
   "resource_roots": [
     "com/synexia/rewrite/hash-pinned-java",
     "com/synexia/rewrite/hash-pinned-text",
@@ -30,5 +30,15 @@
   ],
   "execution_contract": "Execute actual OpenRewrite SDK results, verify every postimage and a complete second pass before writing, atomically replace only declared targets, read back exact bytes, retain external SHA-256 receipt.",
   "runtime_dependency_on_synexia": false,
-  "upstream_runtime_source_lock": "SOURCE_LOCK.json"
+  "upstream_runtime_source_lock": "SOURCE_LOCK.json",
+  "previous_packet": "m3-jackson-jmod-20261018",
+  "historical_replay": "The v1 recipe and resource packet remain unchanged and replay against their original sealed base. The follow-up packet applies to the published v1 receiver.",
+  "fork_receiver": {
+    "repository": "hsoliwal/jackson-databind",
+    "base_commit": "1a506043e0644c9cf60c0905474459605fc751d0",
+    "path": "m3/m3jdk-jackson",
+    "canonical_recipe": "com.synexia.rewrite.M3JacksonForkRecipe",
+    "application_runner": "com.synexia.rewrite.M3JacksonForkApply",
+    "packet": "m3-jackson-fork-20261018"
+  }
 }

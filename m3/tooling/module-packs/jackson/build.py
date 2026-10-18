@@ -26,6 +26,7 @@ import zipfile
 
 MODULE = "jdk.m3.jackson"
 VERSION = "2.19.2"
+OUTPUT_TIMESTAMP = "2026-01-01T00:00:00Z"
 DONORS = (
     ("fastdoubleparser-1.0.90", "ch.randelshofer", "fastdoubleparser", "1.0.90-m3-source-1", None),
     ("jackson-annotations-2.19.2", "com.fasterxml.jackson.core", "jackson-annotations", "2.19.2-m3-source-1", "com.fasterxml.jackson.annotation"),
@@ -35,6 +36,7 @@ DONORS = (
 TESTS = {
     "jdk.m3.jackson.JacksonContract": "JACKSON_CONTRACT_PASS checks=",
     "jdk.m3.jackson.M3FileContract": "M3_FILE_CONTRACT_PASS checks=",
+    "jdk.m3.jackson.JacksonStreamingContract": "JACKSON_STREAMING_PASS checks=",
 }
 IGNORED = {"target", "dependency-reduced-pom.xml", "__pycache__", ".DS_Store"}
 
@@ -181,9 +183,13 @@ def test_runtime(java: Path, patch: Path, jars: list[Path], logs: Path,
                      "--add-opens", MODULE + "/jdk.m3.jackson=com.fasterxml.jackson.databind",
                      "-m", MODULE + "/" + test])
         text = command(args, logs / (label + "-" + test.rsplit(".", 1)[1] + ".log"))
-        if not any(line.startswith(TESTS[test]) for line in text.splitlines()):
-            raise ValueError("Contract PASS marker absent: " + label + "/" + test)
-        result[test] = {"status": "PASS", "stdout": text.strip()}
+        markers = [line for line in text.splitlines() if line.startswith(TESTS[test])]
+        match = (re.fullmatch(re.escape(TESTS[test]) + r"([1-9][0-9]*)(?:\s.*)?", markers[0])
+                 if len(markers) == 1 else None)
+        if match is None:
+            raise ValueError("One nonzero contract PASS marker is required: " + label + "/" + test)
+        result[test] = {"status": "PASS", "checks": int(match.group(1)),
+                        "stdout": text.strip()}
     return result
 
 
@@ -222,11 +228,13 @@ def main(argv: list[str] | None = None) -> int:
             raise ValueError("Existing packaging owner changed: " + item["path"])
     java_sources = sorted((source / "src/main/java").rglob("*.java"))
     test_sources = sorted((source / "src/test/java").rglob("*.java"))
-    for name in ("JacksonContract.java", "M3FileContract.java"):
+    for name in (test.rsplit(".", 1)[1] + ".java" for test in TESTS):
         if not any(path.name == name for path in test_sources):
             raise FileNotFoundError("Required executable contract is absent: " + name)
     if not java_sources or not (source / "src/main/java/module-info.java").is_file():
         raise FileNotFoundError("Generated named adapter-module sources are required")
+    source_hashes = {str(path.relative_to(source)): digest(path)
+                     for path in [*java_sources, *test_sources]}
     out.mkdir(parents=True)
     logs = out / "logs"
     logs.mkdir()
@@ -238,7 +246,8 @@ def main(argv: list[str] | None = None) -> int:
     env = dict(os.environ)
     env["JAVA_HOME"] = str(jdk)
     env["PATH"] = str(jdk / "bin") + os.pathsep + env.get("PATH", "")
-    maven = [args.maven, "-B", "-ntp", "-C", "-Dmaven.repo.local=" + str(args.maven_repo.resolve())]
+    maven = [args.maven, "-B", "-ntp", "-C", "-Dmaven.repo.local=" + str(args.maven_repo.resolve()),
+             "-Dproject.build.outputTimestamp=" + OUTPUT_TIMESTAMP]
     if args.maven_offline == "true":
         maven.append("-o")
     if args.maven_settings:
@@ -264,6 +273,7 @@ def main(argv: list[str] | None = None) -> int:
             named.append((module, selected, version))
     write_json(out / "SOURCE_BUILD.json", {"status": "PASS", "donors": receipts,
                                            "runtime_dependency_policy": "VENDORED_SOURCE_ONLY",
+                                           "archive_output_timestamp": OUTPUT_TIMESTAMP,
                                            "maven_offline": args.maven_offline == "true"})
     classes = out / "classes"
     classes.mkdir()
@@ -276,7 +286,7 @@ def main(argv: list[str] | None = None) -> int:
         shutil.copytree(resource_root, classes, dirs_exist_ok=True)
     adapter = jar_output / (MODULE + ".jar")
     command([jdk / "bin/jar", "--create", "--file", adapter, "--module-version", VERSION,
-             "--date", "2026-01-01T00:00:00Z",
+             "--date", OUTPUT_TIMESTAMP,
              "-C", classes, "."], logs / "adapter-jar.log")
     jars.append(adapter)
     named.append((MODULE, adapter, VERSION))
@@ -328,11 +338,17 @@ def main(argv: list[str] | None = None) -> int:
                        for module, jar, _ in named},
               "jmod_sha256": {name: digest(pack / "jmods" / name) for name in produced},
               "upstream_version": VERSION, "host_contracts": host, "linked_contracts": linked,
+              "adapter_and_contract_source_inputs": source_hashes,
+              "qualification_tool_sha256": digest(Path(__file__).resolve()),
               "m3_string_runtime": m3, "native_code": "NO_NEW_JNI_ABI",
-              "full_jdk_and_jackson_upstream_suites": "NOT_RUN",
+              "full_jdk_suite": "NOT_RUN",
+              "jackson_upstream_suite": "SEPARATE_UPSTREAM_QUALIFICATION_RECEIPT",
               "packaging_owner": "m3/tooling/jmod-recipes/tools/jmod_pack.py"}
     # Build and package operations must not mutate the actual donor checkout.
     check_donors(repo, lock)
+    for name, expected in source_hashes.items():
+        if digest(source / name) != expected:
+            raise ValueError("adapter/contract source changed during qualification: " + name)
     if args.require_m3_runtime and m3["status"] != "PASS":
         result["status"] = "REQUIRED_M3_RUNTIME_UNAVAILABLE"
         write_json(out / "RESULT.json", result)

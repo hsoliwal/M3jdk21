@@ -3,13 +3,16 @@
 // Donor: hsoliwal/com.synexia at 50f48cbbe11f17fb8dc209bac3812f8940a1e267
 // Path: synexia-indexstring/src/main/java/com/synexia/indexstring/file/MIndexFile.java
 // Git blob: 0c30aaa8b9f88a829c87e46ef82a0ea96c0d68a3
-// Adaptation: bounded indexed-input port of occurrence handles and UTF-16 prefix offsets.
+// Adaptation: decoded indexed I/O port of occurrence handles and UTF-16 prefix offsets.
 // Existing String references replace resolver-specific text descriptors at the public JDK boundary.
 // Search, postings, file persistence, native admission and the complete MIndexFile API are not ported here.
 package jdk.m3.jackson;
 
 import java.io.IOException;
 import java.io.Reader;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -17,11 +20,11 @@ import java.util.Map;
 import java.util.Objects;
 
 /**
- * Immutable indexed content for Jackson input, composed from existing String atoms.
+ * Immutable indexed content for Jackson input and output, composed from String atoms.
  *
  * <p>The source index retains one reference to the first supplied String with each distinct
  * spelling, an adaptive primitive occurrence lane, and UTF-16 prefix offsets. The temporary
- * admission map is discarded. It creates no independent character/byte spelling storage and
+ * admission map is discarded. The finished file retains no independent character/byte spelling storage and
  * does not call {@link String#intern()}. On the M3JDK runtime, String is the existing public
  * boundary to the canonical internal M3String owner; this class does not activate that runtime
  * or establish its compatibility qualification.</p>
@@ -61,6 +64,59 @@ public final class M3File implements CharSequence {
      */
     public static M3File of(List<String> pieces) {
         return admit(Objects.requireNonNull(pieces, "pieces").toArray(String[]::new));
+    }
+
+    /**
+     * Reads decoded text into bounded String atoms without closing the supplied reader.
+     * The limit counts UTF-16 code units and is checked before accepting each chunk.
+     * A failing read leaves ownership of the reader with the caller.
+     */
+    public static M3File read(Reader input, int maxUtf16Length) throws IOException {
+        Objects.requireNonNull(input, "input");
+        try (Writer output = newWriter(maxUtf16Length)) {
+            char[] buffer = new char[8192];
+            int count;
+            while ((count = input.read(buffer, 0, buffer.length)) != -1) {
+                if (count == 0) {
+                    // A reader returning zero must not make the admission loop spin.
+                    int next = input.read();
+                    if (next == -1) break;
+                    output.write(next);
+                } else {
+                    output.write(buffer, 0, count);
+                }
+            }
+            return output.finish();
+        }
+    }
+
+    /**
+     * Reads a physical file through an explicit decoder and closes the opened reader.
+     * Use M3ObjectMapper's Path overloads when Jackson should detect byte encoding/BOMs.
+     */
+    public static M3File read(Path input, Charset charset, int maxUtf16Length)
+            throws IOException {
+        Objects.requireNonNull(input, "input");
+        Objects.requireNonNull(charset, "charset");
+        if (maxUtf16Length < 0) throw new IllegalArgumentException("negative UTF-16 limit");
+        try (Reader reader = Files.newBufferedReader(input, charset)) {
+            return read(reader, maxUtf16Length);
+        }
+    }
+
+    /** Opens a chunked output boundary with the CharSequence maximum length. */
+    public static Writer newWriter() {
+        return newWriter(Integer.MAX_VALUE);
+    }
+
+    /**
+     * Opens a chunked output boundary. Only frozen String atoms are retained after
+     * finish/close; the temporary character buffer is released. No whole-document
+     * String is constructed. A zero limit accepts empty output only.
+     */
+    public static Writer newWriter(int maxUtf16Length) {
+        if (maxUtf16Length < 0) throw new IllegalArgumentException("negative UTF-16 limit");
+        return new Writer(maxUtf16Length);
     }
 
     private static M3File admit(String[] pieces) {
@@ -185,6 +241,161 @@ public final class M3File implements CharSequence {
      */
     public Reader reader() {
         return new CursorReader(this);
+    }
+
+    /**
+     * Writes this view directly from its source atoms, without closing or flushing
+     * the caller's writer. Returns the number of UTF-16 code units written.
+     */
+    public long writeTo(java.io.Writer output) throws IOException {
+        Objects.requireNonNull(output, "output");
+        if (length == 0) return 0;
+        int token = source.tokenAtOffset(start);
+        int offset = start - source.offsets[token];
+        int remaining = length;
+        while (remaining > 0) {
+            String atom = source.atom(token++);
+            int count = Math.min(remaining, atom.length() - offset);
+            if (count > 0) output.write(atom, offset, count);
+            remaining -= count;
+            offset = 0;
+        }
+        return length;
+    }
+
+    /**
+     * Owned mutable output boundary for producing an immutable indexed file.
+     * Writes use a bounded temporary buffer. Flush freezes the current chunk;
+     * finish and close freeze the final chunk and release all mutable payload.
+     * The immutable result remains available after close, including when Jackson
+     * closes its output automatically. Repeated finish calls return that same result.
+     */
+    public static final class Writer extends java.io.Writer {
+        private final int limit;
+        private List<String> pieces = new ArrayList<>();
+        private char[] buffer;
+        private int buffered;
+        private int written;
+        private M3File result;
+
+        private Writer(int limit) {
+            this.limit = limit;
+            buffer = new char[Math.max(1, Math.min(8192, limit))];
+        }
+
+        private void ensureOpen() throws IOException {
+            if (result != null) throw new IOException("Writer closed");
+        }
+
+        private void reserve(int count) throws IOException {
+            if ((long) written + count > limit) {
+                throw new IOException("indexed UTF-16 output exceeds limit " + limit);
+            }
+        }
+
+        private void freezeChunk() {
+            if (buffered != 0) {
+                pieces.add(new String(buffer, 0, buffered));
+                buffered = 0;
+            }
+        }
+
+        @Override public void write(int value) throws IOException {
+            synchronized (lock) {
+                ensureOpen();
+                reserve(1);
+                buffer[buffered++] = (char) value;
+                written++;
+                if (buffered == buffer.length) freezeChunk();
+            }
+        }
+
+        @Override public void write(char[] text, int offset, int count) throws IOException {
+            synchronized (lock) {
+                ensureOpen();
+                Objects.requireNonNull(text, "text");
+                Objects.checkFromIndexSize(offset, count, text.length);
+                reserve(count);
+                int copied = 0;
+                while (copied < count) {
+                    int amount = Math.min(count - copied, buffer.length - buffered);
+                    System.arraycopy(text, offset + copied, buffer, buffered, amount);
+                    buffered += amount;
+                    copied += amount;
+                    if (buffered == buffer.length) freezeChunk();
+                }
+                written += count;
+            }
+        }
+
+        @Override public void write(String text, int offset, int count) throws IOException {
+            synchronized (lock) {
+                ensureOpen();
+                Objects.requireNonNull(text, "text");
+                Objects.checkFromIndexSize(offset, count, text.length());
+                reserve(count);
+                int copied = 0;
+                while (copied < count) {
+                    int amount = Math.min(count - copied, buffer.length - buffered);
+                    text.getChars(offset + copied, offset + copied + amount, buffer, buffered);
+                    buffered += amount;
+                    copied += amount;
+                    if (buffered == buffer.length) freezeChunk();
+                }
+                written += count;
+            }
+        }
+
+        @Override public Writer append(CharSequence text) throws IOException {
+            CharSequence value = text == null ? "null" : text;
+            return append(value, 0, value.length());
+        }
+
+        @Override public Writer append(CharSequence text, int from, int to) throws IOException {
+            CharSequence value = text == null ? "null" : text;
+            synchronized (lock) {
+                ensureOpen();
+                Objects.checkFromToIndex(from, to, value.length());
+                reserve(to - from);
+                if (value instanceof M3File file) {
+                    file.slice(from, to).writeTo(this);
+                } else if (value instanceof String string) {
+                    write(string, from, to - from);
+                } else {
+                    for (int i = from; i < to; i++) write(value.charAt(i));
+                }
+                return this;
+            }
+        }
+
+        @Override public Writer append(char value) throws IOException {
+            write(value);
+            return this;
+        }
+
+        @Override public void flush() throws IOException {
+            synchronized (lock) {
+                ensureOpen();
+                freezeChunk();
+            }
+        }
+
+        /** Closes this output boundary and returns its immutable indexed content. */
+        public M3File finish() {
+            synchronized (lock) {
+                if (result == null) {
+                    freezeChunk();
+                    result = M3File.of(pieces);
+                    pieces = null;
+                    buffer = null;
+                }
+                return result;
+            }
+        }
+
+        @Override public void close() {
+            finish();
+        }
     }
 
     /**

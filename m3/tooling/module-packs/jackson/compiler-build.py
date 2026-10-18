@@ -38,6 +38,20 @@ def digest(path):
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
+def contract_counts(text):
+    patterns = {
+        "baseline": r"M3_AST_BINDINGS_PASS shapes=([1-9][0-9]*) projections=([1-9][0-9]*) hits=([1-9][0-9]*)",
+        "extended": r"M3_AST_BINDINGS_EXTENDED_PASS checks=([1-9][0-9]*)",
+    }
+    counts = {}
+    for name, pattern in patterns.items():
+        matches = [match for line in text.splitlines() if (match := re.fullmatch(pattern, line))]
+        if len(matches) != 1:
+            raise ValueError("one nonzero M3AST " + name + " contract marker required")
+        counts[name] = [int(value) for value in matches[0].groups()]
+    return counts
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--jdk-home", type=Path, required=True)
@@ -50,7 +64,7 @@ def main():
     args = parser.parse_args()
     home = args.jdk_home.resolve(strict=True)
     repo = args.repo_root.resolve(strict=True)
-    pack = repo / "m3/tooling/module-packs/jackson"
+    pack = Path(__file__).resolve().parent
     source = (args.source_root or pack / "compiler").resolve(strict=True)
     if not re.search(r'^JAVA_VERSION="21(?:[.+"-])', (home / "release").read_text(), re.MULTILINE):
         raise ValueError("Java 21 development toolchain required")
@@ -109,6 +123,11 @@ def main():
     sources = sorted((source / "src/main/java").rglob("*.java"))
     if not sources or not any(path.name == "module-info.java" for path in sources):
         raise ValueError("compiler bridge sources and descriptor required")
+    tests = sorted((source / "src/test/java").rglob("*.java"))
+    if not tests or not any(path.name == "M3AstBindingsContract.java" for path in tests):
+        raise ValueError("actual compiler bridge contract sources required")
+    bridge_hashes = [{"path": str(path.relative_to(source)), "sha256": digest(path)} for path in sources]
+    test_hashes = [{"path": str(path.relative_to(source)), "sha256": digest(path)} for path in tests]
     classes = output / "classes"
     run(output / "bridge-javac.log", home / "bin/javac", "-source", "21", "-target", "21",
         "-Xlint:all,-module", "-Werror", "-proc:none", "--module-path", module_path,
@@ -118,7 +137,6 @@ def main():
         "--date", "2026-01-01T00:00:00Z", "-C", classes, ".")
     inputs[MODULES[-1]] = jar
     runtime_path = os.pathsep.join(str(path) for path in inputs.values())
-    tests = sorted((source / "src/test/java").rglob("*.java"))
     test_classes = output / "test-classes"
     common = ["--patch-module", "jdk.compiler=" + str(compiler_patch),
               "--patch-module", "jdk.m3.jackson.compiler=" + str(source / "src/test/java")]
@@ -130,8 +148,8 @@ def main():
                "--add-opens", "jdk.m3.jackson.compiler/jdk.m3.jackson.compiler=com.fasterxml.jackson.databind",
                "--add-opens", "jdk.m3.jackson.compiler/jdk.m3.jackson.compiler.fixture=com.fasterxml.jackson.databind",
                "-m", "jdk.m3.jackson.compiler/jdk.m3.jackson.compiler.M3AstBindingsContract"]
-    run(output / "host-ast.log", home / "bin/java", "--module-path", runtime_path,
-        *runtime, expected="M3_AST_BINDINGS_PASS")
+    host_counts = contract_counts(run(output / "host-ast.log", home / "bin/java", "--module-path", runtime_path,
+        *runtime, expected="M3_AST_BINDINGS_PASS"))
 
     image_tsv = output / "IMAGE.tsv"
     image_tsv.write_text("artifact\tversion\tjar\tmodule\trequires\tdisposition\n"
@@ -146,12 +164,25 @@ def main():
         "--root-module", "jdk.m3.jackson.compiler",
         "--add-modules", "java.se,jdk.compiler,jdk.jlink,jdk.jartool,jdk.jdeps")
     image = output / "pack/image"
-    run(output / "image-ast.log", image / "bin/java", *runtime, expected="M3_AST_BINDINGS_PASS")
+    linked_counts = contract_counts(run(output / "image-ast.log", image / "bin/java", *runtime,
+                                      expected="M3_AST_BINDINGS_PASS"))
+    if host_counts != linked_counts:
+        raise ValueError("host and linked-image M3AST contract counts differ")
+    for item in receipts:
+        if digest(repo / item["path"]) != item["sha256"]:
+            raise ValueError("M3 compiler source changed during qualification: " + item["path"])
+    for item in [*bridge_hashes, *test_hashes]:
+        if digest(source / item["path"]) != item["sha256"]:
+            raise ValueError("compiler bridge/contract source changed during qualification: " + item["path"])
     receipt = {
         "status": "PASS", "proof": "ACTUAL_M3AST_COMPILER_PATCH_AND_FIVE_JMOD_IMAGE",
         "modules": list(inputs), "compiler_source_inputs": receipts,
         "runtime_input_jars": input_receipts,
         "runtime_result_sha256": digest(runtime_receipt_path),
+        "bridge_source_inputs": bridge_hashes,
+        "contract_source_inputs": test_hashes,
+        "contract_counts": {"host": host_counts, "linked": linked_counts},
+        "qualification_tool_sha256": digest(Path(__file__).resolve()),
         "patch_role": "Qualification only; use a qualified M3JDK compiler in production.",
         "runtime_dependency_on_synexia": False,
         "full_m3_vm_string_storage_flag_test": "NOT_EXECUTED_BY_THIS_COMPILER_HARNESS",

@@ -18,7 +18,7 @@ SOURCE_LOCK.json pins the exact source/build/legal trees and the existing M3
 JMOD assembler. Every resulting JMOD receives the complete selected legal bundle.
 Its source-built upstream JAR resources retain their own provenance and notices.
 
-The bounded indexed-input M3File adapter derives its occurrence/offset model from
+The decoded indexed-I/O M3File adapter derives its occurrence/offset model from
 Synexia MIndexFile and retains MIndexFileTokenStore's adaptive storage logic under
 their Apache-2.0 grant. Per-file source paths, the exact source commit and Git blob
 identities are retained in the Java headers and the M3 Jackson name-mapping record.

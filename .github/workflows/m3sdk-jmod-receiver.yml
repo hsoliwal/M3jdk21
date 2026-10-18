@@ -130,9 +130,9 @@ jobs:
             build/m3-text-tools/**/*.log
 
   jackson-source-jmods:
-    name: Jackson source runtime and M3AST compiler JMODs
+    name: Jackson source runtime, M3AST JMODs and full upstream suites
     runs-on: ubuntu-24.04
-    timeout-minutes: 30
+    timeout-minutes: 45
     env:
       M3_JACKSON_HEAD: ${{ github.event.pull_request.head.sha || github.sha }}
     steps:
@@ -150,6 +150,30 @@ jobs:
           mkdir -p build/m3-jackson-ci
           git rev-parse HEAD > build/m3-jackson-ci/HEAD.txt
           test "$(cat build/m3-jackson-ci/HEAD.txt)" = "$M3_JACKSON_HEAD"
+      - name: Check out pinned jackson-annotations fork test oracle
+        uses: actions/checkout@v5
+        with:
+          repository: hsoliwal/jackson-annotations
+          ref: e84b2adf8f4bb9d881d02a1ec4a0c70dcc9c5a00
+          fetch-depth: 0
+          path: build/m3-jackson-upstream-sources/jackson-annotations
+          persist-credentials: false
+      - name: Check out pinned jackson-core fork test oracle
+        uses: actions/checkout@v5
+        with:
+          repository: hsoliwal/jackson-core
+          ref: 1fb76534cd69a94ecbfb23ed6dce334109c1230c
+          fetch-depth: 0
+          path: build/m3-jackson-upstream-sources/jackson-core
+          persist-credentials: false
+      - name: Check out pinned jackson-databind fork test oracle
+        uses: actions/checkout@v5
+        with:
+          repository: hsoliwal/jackson-databind
+          ref: 1a506043e0644c9cf60c0905474459605fc751d0
+          fetch-depth: 0
+          path: build/m3-jackson-upstream-sources/jackson-databind
+          persist-credentials: false
       - name: Build Jackson sources and execute host and linked runtime contracts
         run: |
           set -euo pipefail
@@ -163,117 +187,24 @@ jobs:
           python3 m3/tooling/module-packs/jackson/compiler-build.py \
             --jdk-home "$JAVA_HOME" --repo-root "$PWD" \
             --jars build/m3-jackson/jars --out build/m3-jackson-compiler
-      - name: Verify executed contracts and source-built artifact identity
+      - name: Run complete pinned fork suites and exact generated-library replays
         run: |
           set -euo pipefail
-          python3 - <<'PY'
-          import hashlib
-          import json
-          import os
-          from pathlib import Path
-          import re
-
-          def require(value, message):
-              if not value:
-                  raise SystemExit(message)
-
-          def content(path):
-              require(path.is_file() and path.stat().st_size > 0, "Missing evidence: " + str(path))
-              return path.read_bytes()
-
-          def load(path):
-              return json.loads(content(path))
-
-          def digest(path):
-              return hashlib.sha256(content(path)).hexdigest()
-
-          base = Path("build/m3-jackson")
-          compiler = Path("build/m3-jackson-compiler")
-          result = load(base / "RESULT.json")
-          source = load(base / "SOURCE_BUILD.json")
-          receipt = load(compiler / "COMPILER_RECEIPT.json")
-          modules = {
-              "com.fasterxml.jackson.annotation", "com.fasterxml.jackson.core",
-              "com.fasterxml.jackson.databind", "jdk.m3.jackson",
-          }
-          require(result.get("status") == "PASS" and result.get("source_build") == "PASS",
-                  "Runtime source/JMOD proof did not pass")
-          require(source.get("status") == "PASS"
-                  and source.get("runtime_dependency_policy") == "VENDORED_SOURCE_ONLY",
-                  "Runtime inputs were not qualified from the selected sources")
-          donors = source.get("donors", [])
-          require(len(donors) == 4
-                  and all(item.get("maven_source_build") == "PASS" for item in donors),
-                  "Four successful donor source builds are required")
-          require(set(result.get("jars", {})) == modules
-                  and sorted(result.get("jmods", [])) == sorted(name + ".jmod" for name in modules),
-                  "Runtime module closure must contain exactly four modules")
-          require(receipt.get("status") == "PASS"
-                  and receipt.get("proof") == "ACTUAL_M3AST_COMPILER_PATCH_AND_FIVE_JMOD_IMAGE"
-                  and sorted(receipt.get("modules", [])) == sorted(modules | {"jdk.m3.jackson.compiler"}),
-                  "Actual compiler proof must contain exactly five modules")
-          require(receipt.get("runtime_result_sha256") == digest(base / "RESULT.json")
-                  and set(receipt.get("runtime_input_jars", {})) == modules,
-                  "Compiler proof does not refer to this runtime result")
-          for module in sorted(modules):
-              jar_hash = digest(base / "jars" / (module + ".jar"))
-              require(jar_hash == result["jars"][module].get("sha256")
-                      == receipt["runtime_input_jars"][module].get("sha256"),
-                      "Runtime/compiler JAR identity mismatch: " + module)
-              require(digest(base / "pack/jmods" / (module + ".jmod"))
-                      == result.get("jmod_sha256", {}).get(module + ".jmod"),
-                      "Runtime JMOD identity mismatch: " + module)
-          require(digest(compiler / "jdk.m3.jackson.compiler.jar") == receipt.get("jar_sha256")
-                  and digest(compiler / "pack/jmods/jdk.m3.jackson.compiler.jmod") == receipt.get("jmod_sha256"),
-                  "Compiler output artifact identity mismatch")
-          owners = receipt.get("compiler_source_inputs", [])
-          required_owners = {
-              "src/jdk.compiler/share/classes/com/sun/source/util/M3AST.java",
-              "src/jdk.compiler/share/classes/com/sun/tools/javac/m3/M3ASTPC.java",
-              "src/jdk.compiler/share/classes/com/sun/tools/javac/m3/M3PrimitiveImageCompiler.java",
-              "src/jdk.compiler/share/classes/com/sun/tools/javac/main/JavaCompiler.java",
-          }
-          require(len(owners) == 4 and {item.get("path") for item in owners} == required_owners,
-                  "Compiler proof must use the four actual M3 compiler source owners")
-          for owner in owners:
-              require(digest(Path(owner["path"])) == owner.get("sha256"),
-                      "Compiler source identity mismatch: " + owner["path"])
-          counts = {}
-          for lane, key in (("host", "host_contracts"), ("linked", "linked_contracts")):
-              contracts = result.get(key, {})
-              for name, marker in (("JacksonContract", "JACKSON_CONTRACT_PASS"),
-                                   ("M3FileContract", "M3_FILE_CONTRACT_PASS")):
-                  contract = contracts.get("jdk.m3.jackson." + name, {})
-                  pattern = r"(?m)^" + marker + r" checks=([1-9][0-9]*)(?:\s|$)"
-                  logged = re.search(pattern, content(base / "logs" / (lane + "-" + name + ".log")).decode())
-                  recorded = re.search(pattern, contract.get("stdout", ""))
-                  require(contract.get("status") == "PASS" and logged and recorded
-                          and logged.group(1) == recorded.group(1),
-                          "Nonzero executed contract missing: " + lane + "/" + name)
-                  command = load(base / "logs" / (lane + "-" + name + ".result.json"))
-                  require(command.get("exit_code") == 0, "Runtime contract process failed: " + lane + "/" + name)
-                  counts[lane + "/" + name] = int(logged.group(1))
-          for name in ("host-ast.log", "image-ast.log"):
-              log = content(compiler / name).decode()
-              matched = re.search(r"(?m)^M3_AST_BINDINGS_PASS shapes=([1-9][0-9]*)"
-                                  r" projections=([1-9][0-9]*) hits=([1-9][0-9]*)\s*$", log)
-              require(matched and log.rstrip().endswith("EXIT 0"),
-                      "Nonzero actual M3AST contract missing: " + name)
-              counts[name] = [int(value) for value in matched.groups()]
-          head = content(Path("build/m3-jackson-ci/HEAD.txt")).decode().strip()
-          require(head == os.environ["M3_JACKSON_HEAD"], "Evidence revision differs from selected head")
-          evidence = {
-              "status": "PASS", "head": head, "runtime_modules": sorted(modules),
-              "compiler_modules": sorted(receipt["modules"]), "executed_counts": counts,
-              "runtime_result_sha256": digest(base / "RESULT.json"),
-              "compiler_receipt_sha256": digest(compiler / "COMPILER_RECEIPT.json"),
-              "m3_vm_string_storage": result.get("m3_string_runtime", {}),
-              "scope": "Source-built JMOD and actual compiler-patch proof; full M3 VM qualification is separate.",
-          }
-          Path("build/m3-jackson-ci/CI_RECEIPT.json").write_text(
-              json.dumps(evidence, indent=2, sort_keys=True) + "\n", encoding="utf-8")
-          print("JACKSON_SOURCE_JMOD_CI_PASS head=" + head + " runtimeModules=4 compilerModules=5")
-          PY
+          python3 m3/tooling/module-packs/jackson/upstream-qualification-regression.py 2>&1 | tee build/m3-jackson-ci/upstream-admission-regression.log
+          python3 m3/tooling/module-packs/jackson/upstream-qualification.py \
+            --annotations-root build/m3-jackson-upstream-sources/jackson-annotations \
+            --core-root build/m3-jackson-upstream-sources/jackson-core \
+            --databind-root build/m3-jackson-upstream-sources/jackson-databind \
+            --runtime-jars build/m3-jackson/jars --java-home "$JAVA_HOME" \
+            --maven "$(command -v mvn)" --cache "$RUNNER_TEMP/m3-jackson-test-maven" \
+            --out build/m3-jackson-upstream-proof
+      - name: Verify executed contracts, exact source hashes and all eight upstream lanes
+        run: |
+          set -euo pipefail
+          python3 m3/tooling/module-packs/jackson/verify-qualification.py \
+            --runtime build/m3-jackson --compiler build/m3-jackson-compiler \
+            --upstream build/m3-jackson-upstream-proof --repo-root "$PWD" \
+            --expected-head "$M3_JACKSON_HEAD" --out build/m3-jackson-ci/CI_RECEIPT.json
       - name: Retain head-specific Jackson source and JMOD evidence
         if: always()
         uses: actions/upload-artifact@v4
@@ -301,3 +232,9 @@ jobs:
             build/m3-jackson-compiler/pack/*.tsv
             build/m3-jackson-compiler/pack/*.log
             build/m3-jackson-compiler/pack/jmods/*.jmod
+            build/m3-jackson-upstream-proof/**/*.json
+            build/m3-jackson-upstream-proof/**/*.xml
+            build/m3-jackson-upstream-proof/**/*.log
+            build/m3-jackson-upstream-proof/**/test-classes/**
+            build/m3-jackson-upstream-proof/**/test-classpath.txt
+            build/m3-jackson-upstream-proof/**/release.txt

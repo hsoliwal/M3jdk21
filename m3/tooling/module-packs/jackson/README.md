@@ -26,6 +26,11 @@ JDK modules that Jackson's descriptor marks as optional. Four JMODs are produced
 FastDoubleParser is built from source and shaded by Jackson core's original
 build configuration; it is not installed as a competing runtime module.
 
+The build passes the existing Maven `project.build.outputTimestamp` property as
+`2026-01-01T00:00:00Z` to the pinned archive plugins. This fixes ZIP entry dates
+without editing any donor POM or source, so separate receiving builds can compare
+the complete Jackson JAR bytes and reuse exact-artifact upstream test evidence.
+
 ## Build and execute
 
 Use a complete JDK 21, Maven 3.9 or later, Python 3.10 or later, and the repository
@@ -63,7 +68,7 @@ String → arrays → collections → AST/compiler receiving sequence.
 
 ## Executed contracts and remaining runtime gates
 
-`JacksonContract` and `M3FileContract` run first from named source-built modules,
+`JacksonContract`, `M3FileContract` and `JacksonStreamingContract` run first from named source-built modules,
 then from the linked image. Test classes are patched into `jdk.m3.jackson` only
 for execution. Their private fixture POJOs use an explicit test-only qualified
 opening to `com.fasterxml.jackson.databind`. An application's own named model
@@ -75,8 +80,9 @@ receipts and command logs identify the exact inputs and executed lanes. A stock
 JDK run records the M3String storage flag as unavailable. A selected M3 runtime
 that accepts `-XX:+UseM3StringStorage` additionally runs host/image contracts with
 the flag enabled and disabled. `--require-m3-runtime` refuses completion without
-that separate lane. Passing this bounded corpus does not claim the full Jackson
-upstream suite, full JDK/jtreg coverage, all platforms, or a performance gain.
+that separate lane. The complete upstream fork suites have their own reproducible
+qualification entry point below. Full JDK/jtreg coverage, all platforms, and
+performance measurements remain separate gates.
 
 ## Optional M3AST compiler module
 
@@ -105,3 +111,64 @@ This bounded compiler harness is distinct from a full M3JDK VM build. Use a
 qualified M3JDK compiler for production; the harness records its limited scope
 in `COMPILER_RECEIPT.json` and does not establish the M3String VM storage lane.
 The fifth-module pack reuses the complete legal bundle from the core build.
+
+## Indexed input, output and prepared sequences
+
+`M3ObjectMapper` inherits the full upstream ObjectMapper API and adds M3File and
+NIO Path boundaries. `M3File.read(Reader, limit)` admits decoded text into indexed
+String chunks without taking ownership of the supplied reader. The Path factory
+requires an explicit charset. Mapper Path overloads retain Jackson's byte encoding
+and BOM detection. `writeValueAsM3File` streams JSON into bounded chunks; it does
+not first construct a complete document String.
+
+```java
+M3ObjectMapper mapper = new M3ObjectMapper();
+var binding = mapper.prepare(Person.class);
+M3File document = binding.writeValueAsM3File(new Person("Hitesh", 31), 1_000_000);
+Person person = binding.readValue(document);
+
+M3File array = binding.writeValuesAsM3File(people, true, 1_000_000);
+try (var values = binding.readValues(array)) {
+    while (values.hasNextValue()) consume(values.nextValue());
+}
+```
+
+The prepared reader and writer preserve the full resolved generic type and the
+configured Jackson serializers, annotations, modules, filters and root separator.
+Sequences use Jackson's MappingIterator and SequenceWriter. Close a reader iterator
+when stopping early or handling malformed data. Details and complete imports are
+in `INTEGRATION.md`.
+
+The M3AST bridge also accepts `TypeReference<T>` and `JavaType`. Its default
+projection retains the existing top-level declaration contract; the explicit
+`allDeclarations` consumer adds named member declarations. All retained metadata
+is detached from the compiler session.
+
+## Full upstream fork qualification
+
+`upstream-qualification.py` executes the original tests from the pinned user forks,
+then runs the same selected cases against the exact three generated Jackson JARs.
+It verifies nonempty test reports, exact testcase selection, the known upstream
+skips, and actual loaded class origins. See `UPSTREAM_QUALIFICATION.md` for the
+command, fork revisions, JVM prerequisites, environment adjustments and scope.
+
+## Jackson fork workspace
+
+The generated development receiver in `hsoliwal/jackson-databind` lives at
+`m3/m3jdk-jackson`. Its sources and tests are the same optional module pack.
+The original upstream source, tests and POM remain the pinned test oracle. From
+that checkout, provide the M3JDK source repository explicitly:
+
+```sh
+python3 m3/m3jdk-jackson/build.py \
+  --repo-root /path/to/M3jdk21 --jdk-home /path/to/jdk21 \
+  --maven /path/to/maven/bin/mvn --maven-repo /path/to/maven-cache \
+  --out /new/fork-jackson-proof
+python3 m3/m3jdk-jackson/compiler-build.py \
+  --repo-root /path/to/M3jdk21 --jdk-home /path/to/jdk21 \
+  --jars /new/fork-jackson-proof/jars --out /new/fork-compiler-proof
+```
+
+For the standalone Maven entry point in the fork, pass
+`-Dm3.jackson.repo.root=/path/to/M3jdk21` and an absent `m3.jackson.out` directory.
+The source lock still verifies the M3JDK donor trees and existing assembler owners.

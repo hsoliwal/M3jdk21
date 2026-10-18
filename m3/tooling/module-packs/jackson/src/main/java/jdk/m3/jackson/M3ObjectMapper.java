@@ -8,6 +8,7 @@ import com.fasterxml.jackson.core.JsonFactory;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.MappingIterator;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -103,6 +104,47 @@ public class M3ObjectMapper extends ObjectMapper {
     public JsonNode readTree(Path source) throws IOException {
         try (var stream = Files.newInputStream(Objects.requireNonNull(source, "source"))) {
             return super.readTree(stream);
+        }
+    }
+
+    /** Reads an owned indexed sequence; close the iterator when stopping early. */
+    public <T> MappingIterator<T> readValues(M3File source, Class<T> type) throws IOException {
+        return M3Binding.readSequence(readerFor(Objects.requireNonNull(type, "type")), source);
+    }
+
+    public <T> MappingIterator<T> readValues(M3File source, TypeReference<T> type)
+            throws IOException {
+        return M3Binding.readSequence(readerFor(Objects.requireNonNull(type, "type")), source);
+    }
+
+    public <T> MappingIterator<T> readValues(M3File source, JavaType type) throws IOException {
+        return M3Binding.readSequence(readerFor(Objects.requireNonNull(type, "type")), source);
+    }
+
+    /** Reads an owned byte-stream sequence with Jackson's normal encoding detection. */
+    public <T> MappingIterator<T> readValues(Path source, Class<T> type) throws IOException {
+        return M3Binding.readSequence(readerFor(Objects.requireNonNull(type, "type")), source);
+    }
+
+    public <T> MappingIterator<T> readValues(Path source, TypeReference<T> type)
+            throws IOException {
+        return M3Binding.readSequence(readerFor(Objects.requireNonNull(type, "type")), source);
+    }
+
+    public <T> MappingIterator<T> readValues(Path source, JavaType type) throws IOException {
+        return M3Binding.readSequence(readerFor(Objects.requireNonNull(type, "type")), source);
+    }
+
+    /** Serializes to indexed String chunks, without flattening the document. */
+    public M3File writeValueAsM3File(Object value) throws IOException {
+        return writeValueAsM3File(value, Integer.MAX_VALUE);
+    }
+
+    /** Serializes to indexed output with an explicit UTF-16 length limit. */
+    public M3File writeValueAsM3File(Object value, int maxUtf16Length) throws IOException {
+        try (M3File.Writer output = M3File.newWriter(maxUtf16Length)) {
+            super.writeValue(output, value);
+            return output.finish();
         }
     }
 
