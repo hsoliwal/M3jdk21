@@ -22,6 +22,8 @@ This rule covers the JDK product, **not a parallel "M3 + JDK" library**:
 - Reuse existing target owners before adding a utility. `M3Arrays` and
   `M3Collections` already exist in independently qualified modules; this work does not
   create aliases or claim they have been installed as the ordinary JDK backing.
+- `M3Bits` exists as a package-private primitive address helper in java.base;
+  catalogue it as an **internal kernel only**, not a complete `BitSet` API utility.
 - Distinguish static/entry-point vocabulary from storage identity: `M3Strings` is a
   proposed collection of composite-aware text operations; `java.lang.M3String` is the
   canonical internal String representation. The plural utility cannot own another
