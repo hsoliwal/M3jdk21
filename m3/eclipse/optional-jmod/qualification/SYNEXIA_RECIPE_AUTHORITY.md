@@ -57,3 +57,22 @@ no added JNI symbol, no Eclipse public API rename.
 `com.synexia.rewrite.M3EclipseCoreOptionalJmod`, using the existing
 `com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe`; the builder is an
 **output packaging/proof tool, not a new source transformation engine**.
+
+## Additional strict-warning receiver fix — separate source-sealed crate
+
+The optional-JMOD actual-owner CI exposed a Java 21 `missing-explicit-ctor`
+warning in the existing exported `com.m3.text.SharedLexiconPrecomputeCatalog.Builder`.
+With the module's intentional `-Xlint:all,-module -Werror` gate, this is a build
+failure before packaging. The contract-preserving fix makes the existing public
+no-argument constructor explicit; it does not add another M3 owner or API behavior.
+
+Canonical Synexia recipe PR: https://github.com/hsoliwal/com.synexia/pull/12337
+Pinned target-receiver record: `qualification/SYNEXIA_SHARED_BUILDER_CTOR_RECIPE_PIN.tsv`.
+It uses the existing `M3HashPinnedJavaSnapshotRecipe` engine with exact source and
+postimage hashes. The exact preimage, output template, JUnit replay/fixed-point test,
+named-recipe discovery test and drift refusal are mirrored in this receiver's existing
+recipe proof host. Both canonical and receiver CI are **pending** at this point.
+
+The generated product source must be applied only after the recipe execution and
+preimage/postimage evidence are verified. This correction only addresses the strict
+Java compiler gate; it does not qualify full Eclipse Platform/PDE integration.
