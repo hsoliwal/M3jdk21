@@ -2,7 +2,7 @@
   "schema": 1,
   "target": "hsoliwal/M3JDK21",
   "base_ref": "master",
-  "base_commit": "0d73745d7203123533dce8f8fb264ba2746f6d2d",
+  "base_commit": "07ba6e383343d32c83cfdaf641387bbe72bf325d",
   "recipe": "com.m3.collections.recipe.M3DequeZeroMaskRecipe",
   "target_file": {
     "path": "m3/collections/src/main/java/com/m3/collections/M3LongArrayDeque.java",
