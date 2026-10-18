@@ -39,7 +39,7 @@ public final class M3EntryFacadeCacheRecipe {
     private static final List<SourceAtom> ATOMS = List.of(
         new SourceAtom("slot-map", BASE + "M3SlotMap.java",
             "a7d20300717661c26897f0b69e1e5a83400a62ad",
-            "b622a06de7fe77f021c3985af0bfd899094c8189"),
+            "5f31da47a35009b8e2e4a44f9817fa6e2b8ffdc1"),
         new SourceAtom("ordered-slot-map", BASE + "M3OrderedSlotMap.java",
             "e7be2297d19f22cf4dd4ef8b7d1424fe963063d9",
             "4d5ed2b1494e3f252e92ca98b4b84072b2c17dfe"),
