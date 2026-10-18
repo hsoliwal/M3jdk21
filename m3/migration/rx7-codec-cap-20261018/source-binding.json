@@ -1,16 +1,19 @@
 {
   "schema": "SYNEXIA_RX7_CODEC_CAP_BINDING_V1",
   "repository": "hsoliwal/com.synexia",
-  "sourceCommit": "20171dc109a1ad8a34d5cde16f33456f498e6f31",
+  "sourceCommit": "6871e87e278f3eadf1176c986dc7de74e5293e2d",
   "sourcePullRequest": "https://github.com/hsoliwal/com.synexia/pull/12253",
   "canonicalPath": "synexia-openrewrite-recipes/tasks/regex-v7-cold-free-projection-20261007/codec-cap-20261018/sdk",
   "receiverCorePath": "m3/migration/rx7-codec-cap-20261018/sdk",
-  "moduleGitTree": "b933056d76cf58c94182e429526c297de3bc5a0c",
-  "pinsSha256": "74f71cc907568805a9a108713caaaf22cd0529948445af6c70366680b972a9bf",
-  "launcherSha256": "37937acee830678c17199a7b52b18c114e2ab5be8b0f27f836e792405d09735b",
+  "moduleGitTree": "e89f12783efeb9b6302aa0d02219651c8aeb9b5d",
+  "pinsSha256": "2e6d6bc1958671416fb944d6e045a3675242db3a6b2f9580164353e375569c27",
+  "launcherSha256": "63de29b3444fcd5a794ff8ba47b8cebf2d0aa14934c5fb38ed58624f0a661a00",
   "workflowSha256": "b878863f71b122dcabbfef09658458a358662e8210a470b70d5cc431acc250a8",
   "runtimeApplied": false,
   "phaseAdvanced": false,
-  "previousFailedRun": 39100818657,
-  "correctedCandidateExecution": "NOT_RUN"
+  "previousFailedRuns": [
+    39100818657,
+    39101824825
+  ],
+  "candidateExecution": "NOT_RUN_LOG_ADMISSION_SUCCESSOR"
 }

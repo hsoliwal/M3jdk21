@@ -295,10 +295,23 @@ try:
  markers={"M3RX7Test":r"(?m)^M3RX7Test candidate_oracle_checks=[1-9][0-9]* PASS$",
   "M3RX7CodecTest":r"(?m)^M3RX7CodecTest checks=[1-9][0-9]* PASS$",
   "M3RX7CodecBoundsTest":r"(?m)^M3RX7CodecBoundsTest PASS$"}
+ def oracle_succeeded(output,pattern):
+  # Match the actual Java exception type, not the benign VM option banner.
+  return re.search(pattern,output) is not None and re.search(r"\bjava\.lang\.OutOfMemoryError\b",output) is None
+ benign_banner="Picked up JAVA_TOOL_OPTIONS: -XX:-HeapDumpOnOutOfMemoryError\n"
+ positive_marker="M3RX7Test candidate_oracle_checks=2165 PASS\n"
+ oracle_controls=[
+  (benign_banner+positive_marker,True),
+  (benign_banner+'Exception in thread "main" java.lang.OutOfMemoryError: Java heap space\n'+positive_marker,False),
+  (benign_banner+"M3RX7Test PASS\n",False),
+  (benign_banner+"M3RX7Test candidate_oracle_checks=0 PASS\n",False)]
+ for control,wanted in oracle_controls:
+  need(oracle_succeeded(control,markers["M3RX7Test"]) is wanted,"oracle log admission control failed")
+ receipt["oracleLogControls"]=len(oracle_controls)
  for interpreted in (False,True):
   for main,pattern in markers.items():
    output=run("candidate-"+("int-" if interpreted else "mixed-")+main.lower(),java_command(candidate_classes,candidate_tests,main,interpreted),45,heap=256*MIB)
-   need(re.search(pattern,output) is not None and "OutOfMemoryError" not in output,"candidate missing protected oracle or bounds success")
+   need(oracle_succeeded(output,pattern),"candidate missing protected oracle or bounds success")
  for path,wanted in OLD.items():hash_file(source/path,wanted)
  for path,wanted in EXPORTS.items():hash_file(overlay/path,wanted,64*1024)
  receipt.update(status="PASSED",checkoutCommit=head,canonicalSourceCommit=binding["sourceCommit"],

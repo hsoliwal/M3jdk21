@@ -18,7 +18,8 @@
     "textFixedPoints": 16,
     "strictCompiles": 3,
     "javaExports": 2,
-    "constrainedHeapProof": "SEPARATE_EXISTING_HOSTED_LAUNCHER_REQUIRED; NOT Maven256MiB"
+    "constrainedHeapProof": "SEPARATE_EXISTING_HOSTED_LAUNCHER_REQUIRED; NOT Maven256MiB",
+    "oracleLogControls": 4
   },
   "files": {
     "FOSS_REUSE_DECISION.tsv": {
@@ -162,7 +163,7 @@
       "license": "Apache-2.0"
     },
     "src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-rx7-codec-cap-launcher-20261018-inverse/manifest.tsv": {
-      "sha256": "b57d50f7537e67ff4682b31bb1b74144ae0b1971455f1a73d83a13ec60989016",
+      "sha256": "58f8f266d12f884a91103d5d8b743cff46ff619a8a874769db69f49d9c3d5691",
       "bytes": 398,
       "license": "Apache-2.0"
     },
@@ -172,12 +173,12 @@
       "license": "Apache-2.0"
     },
     "src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-rx7-codec-cap-launcher-20261018/launcher.sh.txt": {
-      "sha256": "37937acee830678c17199a7b52b18c114e2ab5be8b0f27f836e792405d09735b",
-      "bytes": 21221,
+      "sha256": "63de29b3444fcd5a794ff8ba47b8cebf2d0aa14934c5fb38ed58624f0a661a00",
+      "bytes": 22034,
       "license": "Apache-2.0"
     },
     "src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-rx7-codec-cap-launcher-20261018/manifest.tsv": {
-      "sha256": "bac22b3c5602fb98cb34db5b38a645455983860f2ddabcb97fa0b6df9651ce71",
+      "sha256": "19713b093691cf6d5b48e38f14ed3eaf5f12fd41a0a377be55f7ffccc44e97e3",
       "bytes": 398,
       "license": "Apache-2.0"
     },
