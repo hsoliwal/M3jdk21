@@ -26,8 +26,9 @@ import java.util.function.Predicate;
  * identity or equals() value of the referenced object: duplicate and null values
  * remain distinguishable. This is a read-only List, not a live filtered List.
  *
- * <p>Optional JNI runs only the pre-existing primitive int[]/byte[] index
- * selector; no Java object reference, comparator, or predicate crosses JNI.
+ * <p>Optional JNI runs only the existing byte[]-to-int[] logical-position
+ * selector; the Java owner maps selected positions through its immutable index
+ * directory. No Java object reference, comparator, or predicate crosses JNI.
  * Native-required mode never silently falls back to Java.
  */
 public final class M3IndexedListSnapshot<E> extends AbstractList<E> implements RandomAccess {
@@ -144,8 +145,9 @@ public final class M3IndexedListSnapshot<E> extends AbstractList<E> implements R
     }
 
     /**
-     * A one-time predicate evaluation. JNI, if required, receives only detached
-     * primitive index IDs and bytes, never user objects or Java callbacks.
+     * A one-time predicate evaluation. JNI, if required, receives only the
+     * transient primitive byte-state lane; Java retains all Object[] references,
+     * index offsets, comparators and callbacks.
      */
     public M3IndexedListSnapshot<E> filtered(
             Predicate<? super E> predicate, M3IndexMaskCompactor.Backend backend) {
@@ -156,16 +158,22 @@ public final class M3IndexedListSnapshot<E> extends AbstractList<E> implements R
             throw new UnsatisfiedLinkError("m3_collections_mask JNI library unavailable");
         }
         byte[] alignedStates = new byte[size()];
-        BitSet selected = new BitSet();
+        // Evaluate Java callbacks once in logical encounter order. The JNI boundary
+        // receives only the primitive state byte lane, never the Object[] owner.
         for (int i = 0; i < alignedStates.length; i++) {
-            if (predicate.test(get(i))) {
-                alignedStates[i] = 1;
-                selected.set(physicalIndex(i));
-            }
+            if (predicate.test(get(i))) alignedStates[i] = 1;
         }
-        int[] admitted = M3IndexMaskCompactor.select(
-                physicalIndices(), alignedStates, 1, backend);
-        return new M3IndexedListSnapshot<>(values, admitted, 0, admitted.length, selected);
+        // The existing Java/JNI position selector avoids materializing a full
+        // copy of the physical index window merely to decide which rows survive.
+        // It emits logical ordinals; map those back to the one canonical payload
+        // index directory in place, preserving duplicate and sorted occurrences.
+        int[] admitted = M3IndexMaskCompactor.selectPositions(alignedStates, 1, backend);
+        for (int i = 0; i < admitted.length; i++) {
+            admitted[i] = positions[from + admitted[i]];
+        }
+        // Physical membership is already lazily computable from admitted indexes;
+        // do not allocate a separate BitSet until a caller actually requests it.
+        return new M3IndexedListSnapshot<>(values, admitted, 0, admitted.length, null);
     }
 
     public M3IndexedListSnapshot<E> sorted(Comparator<? super E> comparator) {
