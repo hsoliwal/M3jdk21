@@ -86,7 +86,8 @@ def collect_jmods(build, jars, legal, owners):
                         raise ValueError("duplicate JMOD class/resource: " + name)
                     entries[relative] = data
                 elif name.startswith("legal/"):
-                    target = legal / module / name[len("legal/"):]
+                    # Donor legal paths are already scoped; reuse them across JMODs.
+                    target = legal / name[len("legal/"):]
                     target.parent.mkdir(parents=True, exist_ok=True)
                     if target.exists() and target.read_bytes() != data:
                         raise ValueError("conflicting legal notice: " + name)

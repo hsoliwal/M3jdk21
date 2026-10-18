@@ -21,7 +21,7 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 60
     env:
-      JAVA_TOOL_OPTIONS: '-Xmx512m'
+      JAVA_TOOL_OPTIONS: '-Xmx1024m'
       MAVEN_OPTS: '-Xmx512m'
     steps:
       - name: Check out the M3 receiver
@@ -65,6 +65,9 @@ jobs:
               if actual != refs['donors'][name]['implementation_commit']:
                   raise SystemExit('companion commit mismatch: ' + name)
           PY
+      - name: Verify JMOD collection regressions
+        shell: bash
+        run: python3 -m unittest discover -s m3/tooling/module-packs/nlp-search/tests -p 'test_current_forks.py' -v
       - name: Build and verify the canonical recipe engine
         shell: bash
         run: |
