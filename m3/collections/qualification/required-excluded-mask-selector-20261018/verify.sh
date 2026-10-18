@@ -5,7 +5,7 @@ root="$(cd "$(dirname "${BASH_SOURCE[0]}")/../../../.." && pwd)"
 cd "$root"
 
 sha256sum --check <<'HASHES'
-9db335f6505e8e157cfe4b31a997c1ee944dc975fb0583480ee1c2b73723cfb7  m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java
+ed76ad01f7b89f064846d0dc35a1a705f461abe17772694c1be8223dbed2156c  m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java
 18fb1aa21aec7ce0ed9c3e9e46b4f5a86413a786574ca5a66ac548ac9c65b31f  m3/collections/src/main/java/com/m3/collections/M3SignalDimensions.java
 b7573258fca1fbc19fa2726032cb58a04b4582359e3505defbc41f886a5356a0  m3/collections/src/main/native/collections/m3_index_mask_compactor.c
 cb7211d70e551452c1724f186bfbd88a3e459ca0ac64a96f14dfda92b996e15c  m3/collections/src/test/java/com/m3/collections/M3RequiredExcludedMaskSelectorContract.java
