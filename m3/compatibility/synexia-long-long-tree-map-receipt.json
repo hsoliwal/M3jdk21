@@ -83,7 +83,7 @@
   "gates": {
     "m3CollectionsModuleCompile": "PASS_WINDOWS mvn -o -B -ntp -f m3/collections/pom.xml (-Xlint:all,-module -Werror via pom; 85 sources)",
     "m3CollectionsModuleTests": "PASS_WINDOWS 159/159 (M3LongLongTreeMapTest 3: 50,000-operation differential vs TreeMap<Long, Long> as NavigableMap incl. navigation, polls, sorted batches, order snapshots, walks vs subMap, growth and compaction; mvn log sha256 f4182f2f5763b38c3939fb675c3f188907830c5efb033e721f906fb7ab72ecee)",
-    "recipeFixedPointAndRefusal": "PENDING_RETRY: attempt 1 JVM native OOM on this memory-starved host (log sha256 aafbb484084a4cfafe71d0e4a9531e636b4f31913365e9766c4866818888acc9); re-run in flight",
+    "recipeFixedPointAndRefusal": "PASS_WINDOWS Synexia crate test M3LongLongTreeMapRecipeTest 2/2 (generate 3 ABSENT targets, fixed point, foreign-occupant refusal; mvn log sha256 7ac08a9ef2357ba2b28634d81761583a6efe8f6931a1332b6e34a713d9e8aa20; attempts 1-2 BLOCKED_MEMORY by host commit charge)",
     "gitDiffCheck": "PASS_WINDOWS (git diff --cached --check before each commit)",
     "offlineCompatibilityCheckers": "PASS: check_synexia_m3_collection_port_recipe.py -> SYNEXIA_M3_COLLECTION_PORT_RECIPE_PIN_PASS (log sha256 6f8c67f4a944b398db527863ca91c871c37d77641044f6da23ddf1eec758417f); check_synexia_m3_family_naming.py -> SYNEXIA_M3_FAMILY_NAMING_RECEIVER_PASS families=9 (log sha256 465cdd77f589f143a798264907efc1074dd06b005c7ec976f169b4a7f969e546)",
     "atomizePatternize": "J1 lane (Java-only CPU projection); Python atomize_patternize.py NOT_RUN by user rule",
