@@ -89,7 +89,7 @@ final class M3JsonCodec {
             InputFrame parent = stack.peek();
             if (parent.kind.equals("OBJECT")) {
                 if (parent.name == null) throw JsonMappingException.from(parser, "object value without a field name");
-                atom = builder.atom("FIELD", parent.name, null, new int[] {atom});
+                atom = builder.field(parent.name, atom);
                 parent.name = null;
             }
             parent.add(atom, limits.maxChildReferences());
