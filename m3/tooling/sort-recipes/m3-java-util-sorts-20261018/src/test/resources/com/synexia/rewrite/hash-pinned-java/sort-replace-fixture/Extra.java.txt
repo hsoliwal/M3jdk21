@@ -1,0 +1,14 @@
+// SPDX-License-Identifier: Apache-2.0
+// SPDX-FileCopyrightText: 2026 Hitesh Soliwal and contributors
+package fixture;
+public final class Extra {
+    private Extra() {}
+    public static int value(int input) {
+        return switch (input) {
+            case 0 -> 3;
+            default -> new java.util.function.IntUnaryOperator() {
+                @Override public int applyAsInt(int operand) { return operand * 2; }
+            }.applyAsInt(input);
+        };
+    }
+}
