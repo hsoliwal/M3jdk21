@@ -43,7 +43,7 @@ final class M3CursorDfa {
     private int[] table = new int[64];
     private final int[] dense;
     private final int[] sparse;
-    private int[] stack;
+    private final int[] stack;
     private final int[] list;
     private int setSize;
     private int listSize;
@@ -60,7 +60,8 @@ final class M3CursorDfa {
         Arrays.fill(trans, UNKNOWN);
         this.dense = new int[nfa.size];
         this.sparse = new int[nfa.size];
-        this.stack = new int[nfa.size + 1];
+        // Each state expands once per closure and pushes at most 2 ints (SPLIT): 2n + 1 bound.
+        this.stack = new int[2 * nfa.size + 2];
         this.list = new int[nfa.size];
     }
 
@@ -73,7 +74,6 @@ final class M3CursorDfa {
     int scanForward(M3ChunkCursor cursor, int from, int to) {
         int state = startState();
         if (state < 0) return GAVE_UP;
-        if (state == DEAD) return NO_MATCH;
         int last = isMatch(state) ? from : NO_MATCH;
         if (from >= to || (last >= 0 && stateLength[state] == 0)) return last;
         cursor.seek(from);
@@ -98,7 +98,6 @@ final class M3CursorDfa {
     int scanBackward(M3ChunkCursor cursor, int from, int end) {
         int state = startState();
         if (state < 0) return GAVE_UP;
-        if (state == DEAD) return NO_MATCH;
         int last = isMatch(state) ? end : NO_MATCH;
         if (end <= from || (last >= 0 && stateLength[state] == 0)) return last;
         cursor.seek(end - 1);
@@ -188,14 +187,10 @@ final class M3CursorDfa {
                     if (leftmostFirst) return true;
                 }
                 case M3CursorNfa.SPLIT -> {
-                    stack = ensure(stack, top + 2);
                     stack[top++] = nfa.out2[s];
                     stack[top++] = nfa.out[s];
                 }
-                case M3CursorNfa.EPS, M3CursorNfa.SAVE -> {
-                    stack = ensure(stack, top + 1);
-                    stack[top++] = nfa.out[s];
-                }
+                case M3CursorNfa.SAVE -> stack[top++] = nfa.out[s];
                 default -> { }
             }
         }

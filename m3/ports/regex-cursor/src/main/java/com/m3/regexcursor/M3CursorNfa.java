@@ -16,7 +16,6 @@ import java.util.Arrays;
 final class M3CursorNfa {
     static final int CLASS = 1;
     static final int SPLIT = 2;
-    static final int EPS = 3;
     static final int SAVE = 4;
     static final int MATCH = 5;
     static final int ASSERT = 6;
@@ -60,8 +59,8 @@ final class M3CursorNfa {
     }
 
     private int state(int kind, int target, int target2, int argument) {
+        if (size >= MAX_STATES) throw new M3RegexRefusal("nfa size");
         if (size == op.length) {
-            if (size >= MAX_STATES) throw new M3RegexRefusal("nfa size");
             int capacity = size * 2;
             op = Arrays.copyOf(op, capacity);
             out = Arrays.copyOf(out, capacity);

@@ -124,13 +124,14 @@ public final class M3CursorMatcher {
         if (end < M3CursorDfa.NO_MATCH) return pikeOrStock(from, false, false);
         if (end == M3CursorDfa.NO_MATCH) return miss(ENGINE_DFA);
         int start = dfa(3).scanBackward(cursor, from, end);
-        if (start < M3CursorDfa.NO_MATCH) return pikeOrStock(from, false, false);
-        if (start < 0) throw new IllegalStateException("reverse scan lost match " + regex);
+        // A forward end always has a reverse start; any negative result (cache full) re-runs on the PikeVM.
+        if (start < 0) return pikeOrStock(from, false, false);
         return hit(start, end, ENGINE_DFA);
     }
 
     private boolean prefixSearch(int from) {
-        for (int position = from; position <= total; ) {
+        int position = from;
+        while (true) {
             int start = regex.prefix.find(cursor, position, total);
             if (start < 0) return miss(ENGINE_DFA);
             int end = dfa(1).scanForward(cursor, start, total);
@@ -138,7 +139,6 @@ public final class M3CursorMatcher {
             if (end >= 0) return hit(start, end, ENGINE_DFA);
             position = start + 1;
         }
-        return miss(ENGINE_DFA);
     }
 
     private boolean gateRejects(int from) {
@@ -147,6 +147,7 @@ public final class M3CursorMatcher {
                 && (facts.unitPresenceMask() & regex.requiredMask) != regex.requiredMask) {
             return true;
         }
+        if (regex.strategy == M3CursorRegex.STRATEGY_LITERAL) return false;
         if (gateFrom >= 0 && from >= gateFrom && (gateHit < 0 || gateHit >= from)) return gateHit < 0;
         gateFrom = from;
         gateHit = regex.required.find(cursor, from, total);

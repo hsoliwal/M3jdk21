@@ -28,7 +28,7 @@ final class M3CursorPikeVm {
     private int[] nextSparse;
     private int[] nextSlots;
     private int nextSize;
-    private int[] stack;
+    private final int[] stack;
     private final int[] scratch;
     final int[] result;
     private M3ChunkCursor cursor;
@@ -46,7 +46,8 @@ final class M3CursorPikeVm {
         nextDense = new int[n];
         nextSparse = new int[n];
         nextSlots = new int[n * slots];
-        stack = new int[2 * n + 2];
+        // Each state expands once per closure and pushes at most 3 ints (SAVE): 3n + 1 bound.
+        stack = new int[3 * n + 2];
         scratch = new int[slots];
         result = new int[slots];
     }
@@ -137,13 +138,11 @@ final class M3CursorPikeVm {
     }
 
     private int expand(int s, int pos, int[] block, int top) {
-        stack = ensure(stack, top + 4);
         switch (nfa.op[s]) {
             case M3CursorNfa.SPLIT -> {
                 stack[top++] = nfa.out2[s];
                 stack[top++] = nfa.out[s];
             }
-            case M3CursorNfa.EPS -> stack[top++] = nfa.out[s];
             case M3CursorNfa.SAVE -> {
                 int slot = nfa.arg[s];
                 stack[top++] = scratch[slot];
@@ -157,10 +156,6 @@ final class M3CursorPikeVm {
             default -> System.arraycopy(scratch, 0, block, s * slots, slots);
         }
         return top;
-    }
-
-    private static int[] ensure(int[] array, int needed) {
-        return needed <= array.length ? array : Arrays.copyOf(array, Math.max(needed, array.length * 2));
     }
 
     private boolean holds(int kind, int pos) {
