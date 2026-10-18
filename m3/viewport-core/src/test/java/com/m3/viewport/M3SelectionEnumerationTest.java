@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.*;
 
-import org.eclipse.swt.internal.ViewportRuntime.Selection;
+import com.m3.viewport.M3ViewportRuntime.Selection;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Timeout;
 

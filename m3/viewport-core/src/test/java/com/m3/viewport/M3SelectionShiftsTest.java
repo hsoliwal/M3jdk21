@@ -13,7 +13,7 @@ import java.lang.reflect.Field;
 import java.util.Arrays;
 import java.util.Random;
 
-import org.eclipse.swt.internal.ViewportRuntime.Selection;
+import com.m3.viewport.M3ViewportRuntime.Selection;
 import org.junit.jupiter.api.Test;
 
 /** Target-native tests of the real internal owner; no Display or substitute toolkit. */
