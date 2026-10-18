@@ -25,13 +25,19 @@ public final class M3LinkedHashMap<K, V> extends M3OrderedSlotMap<K, V> {
     @Override int lastSlot() { return reversed ? table.first : table.last; }
     @Override int nextSlot(int slot) { return reversed ? table.before[slot] : table.after[slot]; }
     @Override int revision() { return table.modifications; }
+    @Override int projectionGeneration(int slot) { return table.generations[slot]; }
     @Override int findSlot(Object key) { return table.find(key, M3SlotArrays.hash(key)); }
     @Override K keyAt(int slot) { return M3SlotArrays.get(table.keys, slot); }
     @Override V valueAt(int slot) { return table.keyOnly ? null : M3SlotArrays.get(table.values, slot); }
     @Override V writeAt(int slot, V value) {
         V old = valueAt(slot); if (!table.keyOnly) { table.values[slot] = value; } return old;
     }
-    @Override V eraseAt(int slot) { V old = valueAt(slot); table.erase(slot); return old; }
+    @Override V eraseAt(int slot) {
+        V old = valueAt(slot);
+        invalidateEntryProjection(slot);
+        table.erase(slot);
+        return old;
+    }
     @Override void accessed(int slot) { if (table.accessOrder) { table.move(slot, false); } }
     @Override public int size() { return table.size; }
     @Override public V put(K key, V value) {
@@ -52,14 +58,19 @@ public final class M3LinkedHashMap<K, V> extends M3OrderedSlotMap<K, V> {
     @Override public Entry<K, V> pollFirstEntry() { return poll(firstSlot()); }
     @Override public Entry<K, V> pollLastEntry() { return poll(lastSlot()); }
     @Override public M3LinkedHashMap<K, V> reversed() { return new M3LinkedHashMap<>(table, !reversed); }
-    @Override public void clear() { table.clear(); }
+    @Override public void clear() { clearEntryProjections(); table.clear(); }
     /** Validate index membership, encounter links and free-slot ownership. */
     public void verifyInvariants() { table.verify(); }
 
     private static final class Table {
+        private static final int SLOT_LIVE = 1;
+        private static final int SLOT_LINKED = 1 << 1;
+        private static final int SLOT_TOUCHED = 1 << 2;
+        private static final int SLOT_FREE = 1 << 3;
         private Object[] keys = M3SlotArrays.EMPTY_OBJECTS, values = M3SlotArrays.EMPTY_OBJECTS;
         private int[] hashes = M3SlotArrays.EMPTY_INTS, before = M3SlotArrays.EMPTY_INTS,
-                after = M3SlotArrays.EMPTY_INTS, positions = M3SlotArrays.EMPTY_INTS;
+                after = M3SlotArrays.EMPTY_INTS, positions = M3SlotArrays.EMPTY_INTS,
+                generations = M3SlotArrays.EMPTY_INTS, stateMasks = M3SlotArrays.EMPTY_INTS;
         private int[] index = M3SlotArrays.EMPTY_INTS;
         private int first = -1, last = -1, free = -1, used, occupied, size, modifications;
         private final boolean accessOrder, keyOnly;
@@ -91,7 +102,9 @@ public final class M3LinkedHashMap<K, V> extends M3OrderedSlotMap<K, V> {
             int n = M3SlotArrays.grow(keys.length);
             Object[] k = Arrays.copyOf(keys, n), v = keyOnly ? values : Arrays.copyOf(values, n);
             int[] h = Arrays.copyOf(hashes, n), b = Arrays.copyOf(before, n), a = Arrays.copyOf(after, n), p = Arrays.copyOf(positions, n);
+            int[] g = Arrays.copyOf(generations, n), states = Arrays.copyOf(stateMasks, n);
             keys = k; values = v; hashes = h; before = b; after = a; positions = p;
+            generations = g; stateMasks = states;
         }
         void insert(Object key, Object value, int hash, boolean atFirst) {
             if (free < 0 && used == keys.length) { grow(); }
@@ -99,46 +112,59 @@ public final class M3LinkedHashMap<K, V> extends M3OrderedSlotMap<K, V> {
             else if (occupied + 1 >= index.length - index.length / 3) {
                 rehash(size + 1 >= index.length - index.length / 3 ? M3SlotArrays.doubled(index.length) : index.length);
             }
-            int p = vacant(hash), s;
-            if (free < 0) { s = used++; } else { s = free; free = after[s]; }
+            int p = vacant(hash), s = free < 0 ? used : free;
+            if (generations[s] == Integer.MAX_VALUE) {
+                throw new IllegalStateException("physical slot generation exhausted");
+            }
+            if (free < 0) { used++; } else { free = after[s]; }
+            generations[s]++;
+            stateMasks[s] = SLOT_LIVE;
             if (index[p] == 0) { occupied++; }
             keys[s] = key; if (!keyOnly) { values[s] = value; } hashes[s] = hash;
             index[p] = s + 1; positions[s] = p; link(s, atFirst); size++; modifications++;
         }
         void link(int s, boolean atFirst) {
+            stateMasks[s] |= SLOT_LINKED;
             before[s] = atFirst ? -1 : last; after[s] = atFirst ? first : -1;
             if (atFirst) { if (first < 0) { last = s; } else { before[first] = s; } first = s; }
             else { if (last < 0) { first = s; } else { after[last] = s; } last = s; }
         }
         void unlink(int s) {
+            stateMasks[s] &= ~SLOT_LINKED;
             int b = before[s], a = after[s];
             if (b < 0) { first = a; } else { after[b] = a; }
             if (a < 0) { last = b; } else { before[a] = b; }
         }
         void move(int s, boolean atFirst) {
             if (s == (atFirst ? first : last)) { return; }
-            unlink(s); link(s, atFirst); modifications++;
+            unlink(s); link(s, atFirst); stateMasks[s] |= SLOT_TOUCHED; modifications++;
         }
         void erase(int s) {
             unlink(s); index[positions[s]] = -1; keys[s] = null; if (!keyOnly) { values[s] = null; }
-            before[s] = -1; positions[s] = -1; after[s] = free; free = s; size--; modifications++;
+            before[s] = -1; positions[s] = -1; after[s] = free; free = s;
+            stateMasks[s] = SLOT_FREE; size--; modifications++;
         }
         void clear() {
             if (size == 0) { return; }
             Arrays.fill(keys, null); Arrays.fill(values, null); Arrays.fill(index, 0);
+            Arrays.fill(stateMasks, 0);
+            // Keep generation counters when physical slots are reused after clear.
             first = -1; last = -1; free = -1; used = 0; occupied = 0; size = 0; modifications++;
         }
         void verify() {
             boolean[] seen = new boolean[used]; int count = 0, previous = -1, buckets = 0;
             for (int s = first; s >= 0; s = after[s]) {
-                if (s >= used || seen[s] || before[s] != previous || index[positions[s]] != s + 1 || find(keys[s], hashes[s]) != s) { throw new AssertionError("hash links"); }
+                if (s >= used || seen[s] || before[s] != previous || index[positions[s]] != s + 1
+                        || find(keys[s], hashes[s]) != s || (stateMasks[s] & (SLOT_LIVE | SLOT_LINKED)) != (SLOT_LIVE | SLOT_LINKED)
+                        || generations[s] == 0) { throw new AssertionError("hash links and live mask"); }
                 seen[s] = true; previous = s; count++;
             }
             if (count != size || previous != last) { throw new AssertionError("hash size"); }
             for (int p = 0; p < index.length; p++) { if (index[p] > 0) { buckets++; if (positions[index[p] - 1] != p) { throw new AssertionError("bucket"); } } }
             if (buckets != size) { throw new AssertionError("buckets"); }
             for (int s = free; s >= 0; s = after[s]) {
-                if (s >= used || seen[s] || keys[s] != null || !keyOnly && values[s] != null) { throw new AssertionError("hash free"); }
+                if (s >= used || seen[s] || stateMasks[s] != SLOT_FREE
+                        || keys[s] != null || !keyOnly && values[s] != null) { throw new AssertionError("hash free"); }
                 seen[s] = true; count++;
             }
             if (count != used) { throw new AssertionError("hash ownership"); }
