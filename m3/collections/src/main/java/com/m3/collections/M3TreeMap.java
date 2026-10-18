@@ -115,6 +115,7 @@ public final class M3TreeMap<K, V> extends M3OrderedSlotMap<K, V> implements Nav
         return old;
     }
     @Override int revision() { return tree.modifications; }
+    @Override int projectionGeneration(int slot) { return tree.generations[slot]; }
     @Override public int size() {
         if (!hasLow && !hasHigh) { return tree.size; }
         int count = 0; for (int s = firstSlot(); s >= 0; s = nextSlot(s)) { count++; } return count;
@@ -259,11 +260,16 @@ public final class M3TreeMap<K, V> extends M3OrderedSlotMap<K, V> implements Nav
     @Override public K floorKey(K k) { return nullableKey(near(k, -1)); }
     @Override public K ceilingKey(K k) { return nullableKey(near(k, 1)); }
     @Override public K higherKey(K k) { return nullableKey(near(k, 2)); }
-    private Entry<K, V> poll(int s) { Entry<K, V> e = snapshot(s); if (s >= 0) { tree.erase(s); } return e; }
+    private Entry<K, V> poll(int s) {
+        Entry<K, V> e = snapshot(s);
+        if (s >= 0) { invalidateEntryProjection(s); tree.erase(s); }
+        return e;
+    }
     @Override public Entry<K, V> pollFirstEntry() { return poll(firstSlot()); }
     @Override public Entry<K, V> pollLastEntry() { return poll(lastSlot()); }
     K pollKey(boolean last) {
-        int s = last ? lastSlot() : firstSlot(); K k = nullableKey(s); if (s >= 0) { tree.erase(s); } return k;
+        int s = last ? lastSlot() : firstSlot(); K k = nullableKey(s);
+        if (s >= 0) { invalidateEntryProjection(s); tree.erase(s); } return k;
     }
     @Override public M3TreeMap<K, V> reversed() { return descendingMap(); }
     @Override public M3TreeMap<K, V> descendingMap() {
@@ -297,9 +303,12 @@ public final class M3TreeMap<K, V> extends M3OrderedSlotMap<K, V> implements Nav
     public void verifyInvariants() { tree.verify(); }
 
     private static final class Tree<K, V> {
+        private static final int SLOT_LIVE = 1;
+        private static final int SLOT_FREE = 1 << 1;
         private Object[] keys = M3SlotArrays.EMPTY_OBJECTS;
         private Object[] values = M3SlotArrays.EMPTY_OBJECTS;
         private int[] left = M3SlotArrays.EMPTY_INTS, right = M3SlotArrays.EMPTY_INTS, parent = M3SlotArrays.EMPTY_INTS;
+        private int[] generations = M3SlotArrays.EMPTY_INTS, stateMasks = M3SlotArrays.EMPTY_INTS;
         // N(45)=2,971,215,072 exceeds the slot limit; even a transient height fits a byte.
         private byte[] height = M3SlotArrays.EMPTY_BYTES;
         private int root = -1, free = -1, used, size, modifications;
@@ -373,16 +382,23 @@ public final class M3TreeMap<K, V> extends M3OrderedSlotMap<K, V> implements Nav
             int n = M3SlotArrays.grow(keys.length);
             Object[] k = Arrays.copyOf(keys, n), v = keyOnly ? values : Arrays.copyOf(values, n);
             int[] l = Arrays.copyOf(left, n), r = Arrays.copyOf(right, n), p = Arrays.copyOf(parent, n);
+            int[] generationsNext = Arrays.copyOf(generations, n), masksNext = Arrays.copyOf(stateMasks, n);
             byte[] h = Arrays.copyOf(height, n);
             if (lazy != null) { lazy.grow(n); }
             keys = k; values = v; left = l; right = r; parent = p; height = h;
+            generations = generationsNext; stateMasks = masksNext;
         }
         void insert(int p, int direction, K key, V value) { insert(p, direction, key, value, true); }
         void insert(int p, int direction, K key, V value, boolean loaded) {
             writable();
             if (free < 0 && used == keys.length) { grow(); }
-            int s;
-            if (free < 0) { s = used++; } else { s = free; free = left[s]; }
+            int s = free < 0 ? used : free;
+            if (generations[s] == Integer.MAX_VALUE) {
+                throw new IllegalStateException("physical tree slot generation exhausted");
+            }
+            if (free < 0) { used++; } else { free = left[s]; }
+            generations[s]++;
+            stateMasks[s] = SLOT_LIVE;
             keys[s] = key; if (!keyOnly) { values[s] = value; }
             if (lazy != null) { lazy.admitted(s, loaded); }
             left[s] = -1; right[s] = -1; parent[s] = p; height[s] = 1;
@@ -407,12 +423,15 @@ public final class M3TreeMap<K, V> extends M3OrderedSlotMap<K, V> implements Nav
             keys[s] = null; if (!keyOnly) { values[s] = null; }
             if (lazy != null) { lazy.erased(s); }
             height[s] = 0; parent[s] = -1; right[s] = -1; left[s] = free; free = s;
+            stateMasks[s] = SLOT_FREE;
             size--; modifications++; balance(rebalance);
         }
         void clear() {
             writable();
             if (size == 0) { return; }
             Arrays.fill(keys, null); Arrays.fill(values, null); Arrays.fill(height, (byte) 0);
+            Arrays.fill(stateMasks, 0);
+            // Preserve generations when slots are reused following clear().
             if (lazy != null) { lazy.cleared(); }
             root = -1; free = -1; used = 0; size = 0; modifications++;
         }
@@ -422,7 +441,8 @@ public final class M3TreeMap<K, V> extends M3OrderedSlotMap<K, V> implements Nav
             if (verify(root, -1, seen) != size) { throw new AssertionError("tree size"); }
             int n = size;
             for (int s = free; s >= 0; s = left[s]) {
-                if (s >= used || seen[s] || height[s] != 0 || keys[s] != null || !keyOnly && values[s] != null) { throw new AssertionError("free slot"); }
+                if (s >= used || seen[s] || height[s] != 0 || stateMasks[s] != SLOT_FREE
+                        || keys[s] != null || !keyOnly && values[s] != null) { throw new AssertionError("free slot"); }
                 if (lazy != null) { lazy.verifySlot(s, false, values); }
                 seen[s] = true; n++;
             }
@@ -435,7 +455,8 @@ public final class M3TreeMap<K, V> extends M3OrderedSlotMap<K, V> implements Nav
         }
         int verify(int s, int p, boolean[] seen) {
             if (s < 0) { return 0; }
-            if (s >= used || seen[s] || parent[s] != p) { throw new AssertionError("tree links"); }
+            if (s >= used || seen[s] || parent[s] != p || stateMasks[s] != SLOT_LIVE
+                    || generations[s] == 0) { throw new AssertionError("tree links and slot state"); }
             if (lazy != null) { lazy.verifySlot(s, true, values); }
             seen[s] = true; int n = 1 + verify(left[s], s, seen) + verify(right[s], s, seen);
             if (height[s] != 1 + Math.max(h(left[s]), h(right[s])) || Math.abs(h(left[s]) - h(right[s])) > 1) { throw new AssertionError("AVL balance"); }
