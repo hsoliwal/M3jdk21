@@ -86,7 +86,14 @@ public final class M3TreeMap<K, V> extends M3OrderedSlotMap<K, V> implements Nav
         int s = tree.step(slot, descending); return slotWithin(s) ? s : -1;
     }
     @Override int findSlot(Object key) {
+        if (tree.size == 0 && tree.comparator != null && !hasLow && !hasHigh) { return -1; }
         K k = checked(key); return within(k) ? tree.find(k) : -1;
+    }
+    @Override int entrySlot(K key, int hint, int expected) {
+        // Attached API entries can address their slot without invoking the comparator.
+        // After structural change retain the existing key-based resolution semantics.
+        return expected == revision() && hint >= 0 && hint < tree.used
+                && tree.height[hint] != 0 && tree.keys[hint] == key ? hint : findSlot(key);
     }
     @Override K keyAt(int slot) { return M3SlotArrays.get(tree.keys, slot); }
     @Override V valueAt(int slot) {
@@ -369,8 +376,10 @@ public final class M3TreeMap<K, V> extends M3OrderedSlotMap<K, V> implements Nav
             parent[s] = pivot; if (middle >= 0) { parent[middle] = s; }
             update(s); update(pivot); return pivot;
         }
-        void balance(int s) {
+        void balance(int s) { balance(s, false); }
+        void balance(int s, boolean stopWhenStable) {
             while (s >= 0) {
+                int previousHeight = stopWhenStable ? h(s) : 0;
                 update(s); int delta = h(left[s]) - h(right[s]);
                 if (delta > 1) {
                     if (h(left[left[s]]) < h(right[left[s]])) { rotate(left[s], false); }
@@ -379,6 +388,9 @@ public final class M3TreeMap<K, V> extends M3OrderedSlotMap<K, V> implements Nav
                     if (h(right[right[s]]) < h(left[right[s]])) { rotate(right[s], true); }
                     s = rotate(s, false);
                 }
+                // Insertion cannot affect higher ancestors after this height is stable.
+                // Deletion keeps the full walk: transplanted successors are pre-updated.
+                if (stopWhenStable && h(s) == previousHeight) { return; }
                 s = parent[s];
             }
         }
@@ -437,7 +449,7 @@ public final class M3TreeMap<K, V> extends M3OrderedSlotMap<K, V> implements Nav
             if (lazy != null) { lazy.admitted(s, loaded); }
             left[s] = -1; right[s] = -1; parent[s] = p; height[s] = 1;
             if (p < 0) { root = s; } else if (direction < 0) { left[p] = s; } else { right[p] = s; }
-            size++; modifications++; balance(p);
+            size++; modifications++; balance(p, true);
         }
         void erase(int s) {
             writable();
