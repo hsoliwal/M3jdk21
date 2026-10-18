@@ -6,7 +6,8 @@ This is the task build driver, not an application facade or transformation engin
 """
 import argparse, hashlib, json, os, shutil, subprocess, zipfile
 from pathlib import Path
-MODULES=['slf4j-api-2.0.12','slf4j-simple','opennlp-tools','lucene-core','lucene-analysis-common','lucene-queries','lucene-sandbox','lucene-queryparser']
+MODULES=['slf4j-api-2.0.12','slf4j-simple','opennlp-tools','lucene-core','lucene-analysis-common','lucene-queries','lucene-sandbox','lucene-queryparser','lucene-analysis-opennlp']
+JAVA_RELEASES={'opennlp-tools': '17', 'lucene-analysis-opennlp': '21'}
 
 def run(argv, log):
     with log.open('w') as f:
@@ -37,7 +38,7 @@ def compile_tools(repo, out, jdk, overlay=None):
         sources=sorted((stage/'src/main/java').rglob('*.java'))
         classes=out/'classes'/name;classes.mkdir(parents=True)
         args=out/(name+'.args');args.write_text('\n'.join('"'+str(p)+'"' for p in sources)+'\n')
-        java=['-J-Xmx512m','-encoding','UTF-8','-proc:none','--release','17' if name=='opennlp-tools' else '11','-d',classes]
+        java=['-J-Xmx512m','-encoding','UTF-8','-proc:none','--release',JAVA_RELEASES.get(name, '11'),'-d',classes]
         if jars:java+=['--module-path' if name.startswith('lucene-') else '-classpath',os.pathsep.join(map(str,jars))]
         run([jdk/'bin/javac',*java,'@'+str(args)],out/(name+'.compile.log'))
         resources=stage/'src/main/resources'
