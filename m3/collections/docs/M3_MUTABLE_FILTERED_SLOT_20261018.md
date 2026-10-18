@@ -31,6 +31,10 @@ stored map-entry or tree-node object.
   Entry-returning neighbors and polls materialize exactly one detached
   `SimpleImmutableEntry` at the explicit API boundary; filtering
   hidden candidate slots allocates no intermediate entry.
+- `values()`, `forEach`, `equals`, `hashCode`, and `toString`
+  run on canonical M3 slot coordinates without manufacturing intermediate
+  `Map.Entry` instances. A requested `values()` view has its own
+  fail-fast slot iterator and forwards iterator deletion to the M3 owner.
 - `putAll` continues full input validation before any write, using
   two call-local dynamic reference arrays. Comparator representative
   tracking uses an existing array-backed `M3TreeMap<K,K>`, not a
