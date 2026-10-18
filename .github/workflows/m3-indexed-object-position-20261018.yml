@@ -53,5 +53,10 @@ jobs:
             com.m3.collections.M3IndexedSnapshotPositionProof --native
           java -Xcheck:jni -Djava.library.path="$BIN" -cp "$OUT" \
             com.m3.collections.M3GenericArrayListSelfTest
+      - name: Bootstrap existing source-vendored JUnit dependency closure
+        run: |
+          set -eu
+          mvn -B -ntp -f m3/vendor/third_party/pom.xml \
+            -pl junit-jupiter-5.10.2 -am -DskipTests install
       - name: Owning Maven JUnit (promotion gate)
         run: mvn -B -ntp -f m3/collections/pom.xml -Dtest=M3IndexedSnapshotPositionTest test
