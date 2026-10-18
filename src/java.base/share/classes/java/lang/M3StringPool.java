@@ -945,6 +945,8 @@ final class M3StringPool {
         private final int[] offsets;
         private final int[] lengths;
         private final int[] javaHashes;
+        /** Optional immutable primitive row+1 lookup directory; no text or Entry objects. */
+        private final int[] hashSlots;
         private final M3StringAtom[] atoms;
         private final long generation64;
         private final boolean available;
@@ -957,6 +959,7 @@ final class M3StringPool {
             baseAddress = 0L;
             payloadOffset = 0;
             offsets = lengths = javaHashes = new int[0];
+            hashSlots = null;
             atoms = new M3StringAtom[0];
             generation64 = 0L;
             available = false;
@@ -975,6 +978,7 @@ final class M3StringPool {
             this.offsets = offsets;
             this.lengths = lengths;
             this.javaHashes = javaHashes;
+            this.hashSlots = prepareHashSlots(javaHashes, lengths);
             this.atoms = new M3StringAtom[offsets.length];
             this.generation64 = generation64;
             this.available = true;
@@ -1062,7 +1066,66 @@ final class M3StringPool {
             }
         }
 
+
+        /*
+         * Existing javaHashes were independently validated against every immutable
+         * mapped UTF-16 payload at Lexicon.open(). Reuse those facts for a bounded
+         * primitive row+1 index instead of introducing another String store.
+         * Hash collision NEVER implies String content equality. Optional index
+         * admission is budgeted; binary search remains complete and authoritative.
+         */
+        private static int[] prepareHashSlots(int[] hashes, int[] lengths) {
+            int count = hashes.length;
+            if (count < 64 || count > (1 << 20)) return null;
+            int capacity = 1;
+            while (capacity < count * 2) capacity <<= 1;
+            Runtime runtime = Runtime.getRuntime();
+            long headroom = runtime.maxMemory()
+                    - (runtime.totalMemory() - runtime.freeMemory());
+            if ((long) capacity * Integer.BYTES > headroom / 8) return null;
+            int[] slots;
+            try {
+                slots = new int[capacity];
+            } catch (OutOfMemoryError optionalIndexPressure) {
+                return null;
+            }
+            int mask = capacity - 1;
+            for (int row = 0; row < count; row++) {
+                int slot = indexSlot(hashes[row], lengths[row], mask);
+                int probes = 0;
+                while (slots[slot] != 0) {
+                    if (++probes >= 64) return null;
+                    slot = (slot + 1) & mask;
+                }
+                slots[slot] = row + 1;
+            }
+            return slots;
+        }
+
+        private static int indexSlot(int javaHash, int length, int mask) {
+            int hash = javaHash ^ Integer.rotateLeft(length * 0x9e3779b9, 16);
+            hash ^= hash >>> 16;
+            hash *= 0x7feb352d;
+            hash ^= hash >>> 15;
+            hash *= 0x846ca68b;
+            return (hash ^ (hash >>> 16)) & mask;
+        }
+
         int findUnit(char unit) {
+            int[] slots = hashSlots;
+            if (slots != null) {
+                int mask = slots.length - 1;
+                int slot = indexSlot(unit, 1, mask);
+                for (int probes = 0; probes < 64; probes++) {
+                    int encoded = slots[slot];
+                    if (encoded == 0) return -1;
+                    int row = encoded - 1;
+                    if (lengths[row] == 1 && mappedUnit(offsets[row], 0) == unit) {
+                        return row;
+                    }
+                    slot = (slot + 1) & mask;
+                }
+            }
             int low = 0;
             int high = offsets.length - 1;
             while (low <= high) {
@@ -1089,6 +1152,32 @@ final class M3StringPool {
 
         int findCodePoints(
                 int[] value, int offset, int count, int utf16Length) {
+            int[] slots = hashSlots;
+            if (slots != null) {
+                int hash = 0;
+                for (int i = 0; i < count; i++) {
+                    int point = value[offset + i];
+                    if (Character.isBmpCodePoint(point)) {
+                        hash = 31 * hash + point;
+                    } else {
+                        hash = 31 * hash + Character.highSurrogate(point);
+                        hash = 31 * hash + Character.lowSurrogate(point);
+                    }
+                }
+                int mask = slots.length - 1;
+                int slot = indexSlot(hash, utf16Length, mask);
+                for (int probes = 0; probes < 64; probes++) {
+                    int encoded = slots[slot];
+                    if (encoded == 0) return -1;
+                    int row = encoded - 1;
+                    if (lengths[row] == utf16Length && javaHashes[row] == hash
+                            && compareCodePoints(value, offset, count, utf16Length,
+                                    offsets[row], lengths[row]) == 0) {
+                        return row;
+                    }
+                    slot = (slot + 1) & mask;
+                }
+            }
             int low = 0;
             int high = offsets.length - 1;
             while (low <= high) {
@@ -1145,6 +1234,37 @@ final class M3StringPool {
 
         int findCompactBytes(
                 byte[] value, int sourceOffset, int logicalLength, byte sourceCoder) {
+            int[] slots = hashSlots;
+            if (slots != null) {
+                int hash = 0;
+                for (int i = 0; i < logicalLength; i++) {
+                    char unit = sourceCoder == String.LATIN1
+                            ? (char) (value[sourceOffset + i] & 0xff)
+                            : StringUTF16.charAt(value, sourceOffset + i);
+                    hash = 31 * hash + unit;
+                }
+                int mask = slots.length - 1;
+                int slot = indexSlot(hash, logicalLength, mask);
+                for (int probes = 0; probes < 64; probes++) {
+                    int encoded = slots[slot];
+                    if (encoded == 0) return -1;
+                    int row = encoded - 1;
+                    if (lengths[row] == logicalLength && javaHashes[row] == hash) {
+                        boolean same = true;
+                        for (int i = 0; i < logicalLength; i++) {
+                            char unit = sourceCoder == String.LATIN1
+                                    ? (char) (value[sourceOffset + i] & 0xff)
+                                    : StringUTF16.charAt(value, sourceOffset + i);
+                            if (unit != mappedUnit(offsets[row], i)) {
+                                same = false;
+                                break;
+                            }
+                        }
+                        if (same) return row;
+                    }
+                    slot = (slot + 1) & mask;
+                }
+            }
             int low = 0;
             int high = offsets.length - 1;
             while (low <= high) {
@@ -1168,32 +1288,37 @@ final class M3StringPool {
         }
 
         int findLatin1Bytes(byte[] value, int offset, int logicalLength) {
-            int low = 0;
-            int high = offsets.length - 1;
-            while (low <= high) {
-                int middle = (low + high) >>> 1;
-                int common = Math.min(logicalLength, lengths[middle]);
-                int comparison = 0;
-                for (int index = 0; index < common; index++) {
-                    comparison =
-                            (value[offset + index] & 0xff)
-                                    - mappedUnit(offsets[middle], index);
-                    if (comparison != 0) break;
-                }
-                if (comparison == 0) comparison = logicalLength - lengths[middle];
-                if (comparison == 0) {
-                    return middle;
-                }
-                if (comparison < 0) {
-                    high = middle - 1;
-                } else {
-                    low = middle + 1;
-                }
-            }
-            return -1;
+            // The exact compact-string atom handles the same Latin-1 source shape;
+            // reuse its primitive hash probe and its original binary fallback.
+            return findCompactBytes(value, offset, logicalLength, String.LATIN1);
         }
 
         int find(char[] value, int offset, int logicalLength) {
+            int[] slots = hashSlots;
+            if (slots != null) {
+                int hash = 0;
+                for (int i = 0; i < logicalLength; i++) {
+                    hash = 31 * hash + value[offset + i];
+                }
+                int mask = slots.length - 1;
+                int slot = indexSlot(hash, logicalLength, mask);
+                for (int probes = 0; probes < 64; probes++) {
+                    int encoded = slots[slot];
+                    if (encoded == 0) return -1;
+                    int row = encoded - 1;
+                    if (lengths[row] == logicalLength && javaHashes[row] == hash) {
+                        boolean same = true;
+                        for (int i = 0; i < logicalLength; i++) {
+                            if (value[offset + i] != mappedUnit(offsets[row], i)) {
+                                same = false;
+                                break;
+                            }
+                        }
+                        if (same) return row;
+                    }
+                    slot = (slot + 1) & mask;
+                }
+            }
             int low = 0;
             int high = offsets.length - 1;
             while (low <= high) {
