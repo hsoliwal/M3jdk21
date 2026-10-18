@@ -1,0 +1,9 @@
+# SPDX-License-Identifier: Apache-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.OwnedApacheCircularFifoQueue20261018
+displayName: Receive one exact owned M3 circular FIFO queue source
+description: Installs one absent production source or accepts its exact current postimage. PlainText execution establishes source custody; queue API behavior and native process qualification are separate.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: owned-apache-circular-fifo
+      lst: false
