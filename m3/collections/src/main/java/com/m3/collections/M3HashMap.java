@@ -107,6 +107,7 @@ public final class M3HashMap<K, V> extends M3SlotMap<K, V>
     @Override int revision() { return modifications; }
     @Override public int size() { return size; }
     @Override V eraseAt(int slot) {
+        forgetEntry(keyAt(slot));
         V previous = valueAt(slot);
         index[positions[slot]] = -1;
         keys[slot] = null;
@@ -183,6 +184,7 @@ public final class M3HashMap<K, V> extends M3SlotMap<K, V>
     }
 
     @Override public void clear() {
+        clearEntryCaches();
         Arrays.fill(keys, 0, used, null);
         if (!keyOnly) Arrays.fill(values, 0, used, null);
         Arrays.fill(hashes, 0, used, 0);
