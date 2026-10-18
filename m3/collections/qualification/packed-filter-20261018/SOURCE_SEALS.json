@@ -1,0 +1,44 @@
+[
+  {
+    "path": "m3/collections/src/main/java/com/m3/collections/M3IndexedListSnapshot.java",
+    "before": "0e201b871ca85fa0af306530b6e52cd7fbcdb47207ea0554456abb25e003a61d",
+    "after": "9dd26cecb3405d304d2661c1b2e5569d73184e1cd9777843ab4c40158e701a18",
+    "template": "M3IndexedListSnapshot.java"
+  },
+  {
+    "path": "m3/collections/src/main/native/collections/m3_index_mask_compactor.c",
+    "before": "8610e9fcedcc8eb698acbf3161bca8ea7d16194e61c66915f9e25fe47aae27f7",
+    "after": "816a69e73926375a9583861ae5cc20bc1a9eac65a1f0617339c04cc9f64c5202",
+    "template": "m3_index_mask_compactor.c"
+  },
+  {
+    "path": "m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java",
+    "before": "477135e13481942fef3b95b96a08d39c9c86dd92a649959c6d035b19b5784031",
+    "after": "477135e13481942fef3b95b96a08d39c9c86dd92a649959c6d035b19b5784031",
+    "template": "KEEP"
+  },
+  {
+    "path": "m3/collections/src/test/java/com/m3/collections/M3PackedFilterProof.java",
+    "before": "ABSENT",
+    "after": "bc5ebc176450006f6d3be454c599bd2762d7e56ca3009693b479cfa337e23ab8",
+    "template": "M3PackedFilterProof.java"
+  },
+  {
+    "path": "m3/collections/src/test/java/com/m3/collections/M3PackedFilterTest.java",
+    "before": "ABSENT",
+    "after": "d20afb44f4b6915ea343b448093e0de2bcce763aa071d3a30d884627172ca0bb",
+    "template": "M3PackedFilterTest.java"
+  },
+  {
+    "path": "m3/collections/qualification/packed-filter-20261018/M3PackedFilterBenchmark.java",
+    "before": "ABSENT",
+    "after": "e99a22fcb567c73386d7b0cd959d97f36fb0c74ecefb2b34bd71f37a9772b991",
+    "template": "M3PackedFilterBenchmark.java"
+  },
+  {
+    "path": "m3/collections/qualification/packed-filter-20261018/CONTRACT.md",
+    "before": "ABSENT",
+    "after": "fe685bd0e00234526b61c2b99c395d6435ec7575e1194c22004e97abd337ad43",
+    "template": "CONTRACT.md"
+  }
+]
