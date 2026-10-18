@@ -899,6 +899,10 @@ public class M3FixedHeightLayoutCache extends FixedHeightLayoutCache {
             }
             while (parentNode != 0) {
                 int up = parent[parentNode];
+                if (up == 0) {
+                    parentNode = 0;
+                    return;
+                }
                 next = mindex[parentNode];
                 parentNode = up;
                 childCount = treeModel.getChildCount(value[parentNode]);

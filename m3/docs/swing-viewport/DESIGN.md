@@ -190,6 +190,23 @@ Proof: the leaf-1 differential run in fixed mode (`-Ddiff.fixed=true`: stock `Fi
 class, positive row heights, plus the `setRowHeight(0)` and `setRowHeight(-1)` IllegalArgumentException probes) and
 the JUnit scenario suite with JaCoCo. Results in section 5 and `m3/ports/swing-viewport/TESTS_TO_RUN.md`.
 
+## 7a. Seams for reuse (read-only, for `m3/viewport-core` and the AWT, SwingX, IntelliJ and RWT adapters)
+
+Both caches live in `sun.swing.tree` (not exported) and stay Swing classes; another toolkit reuses them read-only,
+through one of these seams, and never by reaching into their private lanes:
+
+| Seam | What it is | Contract kept by this branch |
+|---|---|---|
+| `AbstractLayoutCache` surface | both classes are drop-in subclasses of the stock caches | every public method answers as the stock class (sections 5 and 7); a change here is a stock-behaviour change and needs a differential |
+| `NodeDimensions` callback | the only toolkit coupling besides `TreeModel`, `TreePath` and `Rectangle` | called with the stock row, depth and expanded arguments, at the stock moments |
+| Lane layout | int ids into struct-of-arrays lanes, id 0 = none; leaf 1: section 3 table; leaf 2: `parent`, `mindex`, `depth`, `flags` (EXPANDED), `count` (model child count at expansion), `tot` (visible rows below an expanded node), per node `smi`/`skid` (sorted resolved model indices and their ids) and `fb` (Fenwick of `tot` over expanded slots, `null` = rebuild on next read) | no absolute row or y origin is stored anywhere; a stale aggregate is impossible by construction |
+| Row arithmetic | row of a child = row of parent + 1 + model index + Fenwick prefix of the slots before it; row to node = per-level binary search over that start offset (`descend`); expand, collapse, insert, remove = O(depth x log k) Fenwick updates along the ancestors (`propagate`, `fenwickAdd`) | pure int arithmetic over the lanes; no toolkit types; the part a toolkit-neutral core can lift as is |
+| Mutation entry points | `TreeModelListener` methods, `setExpandedState`, `setModel`, `setRootVisible`, `setRowHeight`, `invalidate*` | the only writers of the lanes |
+
+Lifting the lanes and the row arithmetic into `m3/viewport-core` (an int row model with a node-dimension callback,
+with the Swing classes delegating to it) is the viewport-everywhere agent's leaf, not this one; until then these
+method names and lane meanings change only together with a note in this section.
+
 ## 8. Next leaves
 
 1. Leaf 2 above (done).
