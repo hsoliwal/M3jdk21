@@ -26,10 +26,14 @@ weak key; therefore `M3WeakHashMap` refuses API-entry caching.
 
 The current hash owner `M3LinkedHashMap` now retains an `int[]` generation
 plane and an `int[]` slot-mask plane, in addition to parallel keys/values,
-hashes, index offsets, before/after order offsets and free-list offsets. Slot
-reuse advances generation, including reuse after clear. Bitmasks encode live,
-linked, touched and free state; traversal never materializes an Entry. A retained
-API entry is not rebound when the physical slot is reused.
+hashes, index offsets, before/after order offsets and free-list offsets.
+`M3TreeMap` likewise tracks per-slot generations and live/free lifecycle masks
+alongside its primitive AVL child, parent, free and height planes. Slot reuse
+advances generation, including reuse after clear. Bitmasks encode hash live,
+linked, touched and free states, or tree live/free state; traversal never
+materializes an Entry. Every escaped API entry validates its original slot
+and generation before value access or mutation; if recycled, it fails closed
+rather than silently addressing another mapping.
 
 ## Lifetime, secondary storage and concurrency limits
 
