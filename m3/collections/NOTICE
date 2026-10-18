@@ -6,3 +6,19 @@ reviewed segmented-lane recipe candidate. Original Synexia notices are
 preserved. See provenance.json for exact source/target hashes and changes.
 OpenJDK retains its existing licensing. This separately built library does
 not replace java.util classes or integrate into java.base.
+
+Primitive collection forwarding and live read-only facades (2026-10-14):
+Explicit forwarding design adapted from Guava ForwardingCollection, revision
+f06690fa3e874f65515e8fd338a74d636e2c792f, Copyright (C) The Guava Authors,
+Apache License 2.0. Specialized to the existing M3LongList union contract;
+no Guava implementation/runtime dependency copied. OpenJDK Collections is
+behavior-reference evidence only; no OpenJDK source copied or relicensed.
+M3ForwardingLongList and M3ReadOnlyLongList remain independently Apache-2.0.
+Exact lineage and executed first-leaf proofs are recorded in the Synexia
+collection-decorators-20261014 recipe crate; further collection policies
+and full current-cohort qualification remain pending.
+
+Queue forwarding and live read-only access (2026-10-14):
+Design donor: Google Guava ForwardingQueue and ForwardingDeque, revision f06690fa3e874f65515e8fd338a74d636e2c792f, Apache License 2.0.
+https://github.com/google/guava/tree/f06690fa3e874f65515e8fd338a74d636e2c792f/guava/src/com/google/common/collect
+Primitive signatures and explicit native bulk/default/traversal forwarding are CPU adaptations of the owned Synexia/M3 collection interfaces.
