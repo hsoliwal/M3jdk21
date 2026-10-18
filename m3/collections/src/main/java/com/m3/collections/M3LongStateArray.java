@@ -126,26 +126,15 @@ public final class M3LongStateArray {
     /**
      * Stable in-place LeetCode-style array compaction under pure full-width
      * required/forbidden mask bits. No per-element or result-array allocation.
-     * It first counts survivors to preserve the no-op iterator/generation
-     * contract when every value passes. Tail deletions are performed only
-     * after survivors have been shifted into their final slots.
+     * One forward scan performs both survivor discovery and stable compaction.
+     * Writes begin only after the first rejection, so an all-pass selection
+     * performs no content write and preserves the no-op generation contract.
+     * Tail deletions happen only after survivors occupy their final slots.
      *
      * @return number of removed occurrences
      */
     public int retainByStateMask(int requiredMask, int forbiddenMask) {
         int before = size();
-        int kept = 0;
-        for (int read = 0; read < before; read++) {
-            int flags = states[read];
-            if ((flags & requiredMask) == requiredMask && (flags & forbiddenMask) == 0) {
-                kept++;
-            }
-        }
-        if (kept == before) return 0;
-        if (kept == 0) {
-            clear();
-            return before;
-        }
         int write = 0;
         for (int read = 0; read < before; read++) {
             int flags = states[read];
@@ -156,6 +145,11 @@ public final class M3LongStateArray {
                 }
                 write++;
             }
+        }
+        if (write == before) return 0;
+        if (write == 0) {
+            clear();
+            return before;
         }
         for (int index = before - 1; index >= write; index--) {
             values.removeAt(index);
