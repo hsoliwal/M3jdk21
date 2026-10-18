@@ -6,6 +6,7 @@ package com.m3.collections;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
+import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.lang.reflect.Array;
@@ -21,8 +22,9 @@ import org.junit.jupiter.api.Test;
 /**
  * Mechanical LEAN guard: logical collection entries are not retained as structural objects.
  *
- * <p>Map.Entry is permitted only as a transient Java API projection. Canonical packed storage must
- * remain payload lanes plus primitive slot/index/topology state.</p>
+ * <p>Map.Entry is permitted only as an API projection and may be retained by the bounded
+ * {@link M3LFUCache} that manages those projections. Canonical packed storage remains payload
+ * lanes plus primitive slot/index/topology state; the API cache must never become a backing table.</p>
  */
 final class M3NoRetainedStructuralEntryTest {
     private static final String PACKAGE = "com.m3.collections.";
@@ -58,15 +60,15 @@ final class M3NoRetainedStructuralEntryTest {
     }
 
     @Test
-    void returnedMapEntriesAreFreshAndNeverRetainedByPackedMapStorage() {
+    void apiEntryFacadesAreCachedButNeverStoredInPackedMapLanes() {
         var hash = new M3LinkedHashMap<Integer, Integer>();
         hash.put(1, 10);
         hash.put(2, 20);
         Map.Entry<Integer, Integer> hashEntry = hash.entrySet().iterator().next();
         Map.Entry<Integer, Integer> hashEntryAgain = hash.entrySet().iterator().next();
-        assertFalse(
-                hashEntry == hashEntryAgain,
-                "PackedHashMap reused/cached an API Entry object");
+        assertSame(
+                hashEntry, hashEntryAgain,
+                "PackedHashMap did not reuse the same key's API facade");
         assertFalse(
                 retainsIdentity(hash, hashEntry),
                 "PackedHashMap retained an entry API projection as canonical storage");
@@ -79,9 +81,9 @@ final class M3NoRetainedStructuralEntryTest {
         tree.put(2, 20);
         Map.Entry<Integer, Integer> treeEntry = tree.entrySet().iterator().next();
         Map.Entry<Integer, Integer> treeEntryAgain = tree.entrySet().iterator().next();
-        assertFalse(
-                treeEntry == treeEntryAgain,
-                "PackedTreeMap reused/cached an API Entry object");
+        assertSame(
+                treeEntry, treeEntryAgain,
+                "PackedTreeMap did not reuse the same key's API facade");
         assertFalse(
                 retainsIdentity(tree, treeEntry),
                 "PackedTreeMap retained an entry API projection as canonical storage");
@@ -94,28 +96,29 @@ final class M3NoRetainedStructuralEntryTest {
         assertEquals(11, hash.get(hashEntry.getKey()));
         assertEquals(11, tree.get(treeEntry.getKey()));
 
-        assertFreshBurst(hash::firstEntry, "hash firstEntry");
-        assertFreshBurst(tree::firstEntry, "tree firstEntry");
-        assertFreshBurst(
+        assertCachedBurst(hash::firstEntry, "hash firstEntry immutable snapshot");
+        assertCachedBurst(tree::firstEntry, "tree firstEntry immutable snapshot");
+        assertCachedBurst(
                 () -> hash.entrySet().iterator().next(),
                 "hash entrySet iterator projection");
-        assertFreshBurst(
+        assertCachedBurst(
                 () -> tree.entrySet().iterator().next(),
                 "tree entrySet iterator projection");
+
+        var distinct = new M3LinkedHashMap<Integer, Integer>();
+        distinct.put(10, 100);
+        distinct.put(20, 200);
+        var distinctEntries = distinct.entrySet().iterator();
+        assertNotSame(distinctEntries.next(), distinctEntries.next(),
+                "different logical keys must never share one Entry facade");
     }
 
-    private static void assertFreshBurst(
+    private static void assertCachedBurst(
             Supplier<? extends Map.Entry<?, ?>> supplier, String label) {
-        Object[] seen = new Object[1_024];
-        for (int iteration = 0; iteration < seen.length; iteration++) {
-            Map.Entry<?, ?> current = supplier.get();
-            for (int prior = 0; prior < iteration; prior++) {
-                assertNotSame(
-                        seen[prior],
-                        current,
-                        label + " reused/pool-cycled an Entry identity at " + iteration);
-            }
-            seen[iteration] = current;
+        Map.Entry<?, ?> expected = supplier.get();
+        for (int iteration = 0; iteration < 1_024; iteration++) {
+            assertSame(expected, supplier.get(),
+                    label + " failed to reuse its API object at " + iteration);
         }
     }
 
