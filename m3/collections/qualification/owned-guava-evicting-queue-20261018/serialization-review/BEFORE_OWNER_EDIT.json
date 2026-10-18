@@ -1,0 +1,31 @@
+{
+  "status": "PREWRITTEN_BEFORE_OWNER_EDIT",
+  "files": [
+    {
+      "name": "GuavaEvictingQueueSerializationProof.java",
+      "bytes": 12460,
+      "sha256": "6659b1f7853a5edd8f286b67e42644fe1d6d1df68f5df60fa6d620124c818e5b"
+    },
+    {
+      "name": "FOSS_SERIALIZATION_REVIEW_DECISION.tsv",
+      "bytes": 1254,
+      "sha256": "01f2e75061a91a210e3fbb1b813d0e55eda61b0062ec3705a91f25c5acc55fb1"
+    },
+    {
+      "name": "M3EvictingQueue.java",
+      "bytes": 16180,
+      "sha256": "34e31faf78923e335d74a249af3c2d419f616d9812e5f5bee0a9a0d4bf1ac04b"
+    }
+  ],
+  "localRawReceipt": {
+    "name": "BEFORE_OWNER_EDIT.json",
+    "bytes": 1002,
+    "sha256": "ddad0eeefce1a0ec757b1c3c4c3978c4eb6350e220749173a8e27240981b8e49"
+  },
+  "frozenV1SelectedPublicFileCount": 45,
+  "frozenV1LocalReceipt": {
+    "name": "V1_FROZEN_RECEIPT.json",
+    "bytes": 2337,
+    "sha256": "cd3377efbc00fd7c54d4ba576ce9d5865f72398bfdfc275ba878344c7989e276"
+  }
+}

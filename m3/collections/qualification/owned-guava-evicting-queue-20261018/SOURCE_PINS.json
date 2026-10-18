@@ -1,0 +1,182 @@
+{
+  "status": "BEFORE_CODE_SOURCE_ONLY",
+  "target": "Full owned Guava EvictingQueue public Queue/Collection surface",
+  "guavaVersion": "33.4.8-jre",
+  "guavaCommit": "f06690fa3e874f65515e8fd338a74d636e2c792f",
+  "jdkReference": {
+    "tag": "jdk-21+35",
+    "annotatedTag": "07687d169a5e181789869817f10f3e8a4a4c30a9",
+    "commit": "890adb6410dab4606a4f26a942aed02fb2f55387",
+    "limits": "Reference behavior on selected JDK21 release; actual provisioned JDK oracle must be pinned separately before runtime qualification; current source explicitly GPL2+Classpath"
+  },
+  "sources": [
+    {
+      "repository": "google/guava",
+      "commit": "f06690fa3e874f65515e8fd338a74d636e2c792f",
+      "path": "guava/src/com/google/common/collect/EvictingQueue.java",
+      "git_blob": "957d10b7eb76d6566301e876e7fb16725ddaa22e",
+      "bytes": 4734,
+      "license": "Apache-2.0",
+      "source_status": "FULL_SOURCE_READ",
+      "url": "https://github.com/google/guava/blob/f06690fa3e874f65515e8fd338a74d636e2c792f/guava/src/com/google/common/collect/EvictingQueue.java"
+    },
+    {
+      "repository": "google/guava",
+      "commit": "f06690fa3e874f65515e8fd338a74d636e2c792f",
+      "path": "guava/src/com/google/common/collect/ForwardingQueue.java",
+      "git_blob": "8fbe467a07eb6dc3e13e13df5c94a0630ad6e5fe",
+      "bytes": 4040,
+      "license": "Apache-2.0",
+      "source_status": "FULL_SOURCE_READ",
+      "url": "https://github.com/google/guava/blob/f06690fa3e874f65515e8fd338a74d636e2c792f/guava/src/com/google/common/collect/ForwardingQueue.java"
+    },
+    {
+      "repository": "google/guava",
+      "commit": "f06690fa3e874f65515e8fd338a74d636e2c792f",
+      "path": "guava/src/com/google/common/collect/ForwardingCollection.java",
+      "git_blob": "45cb5a86c0f8565097623db9b197a8c240b217ef",
+      "bytes": 8328,
+      "license": "Apache-2.0",
+      "source_status": "FULL_SOURCE_READ",
+      "url": "https://github.com/google/guava/blob/f06690fa3e874f65515e8fd338a74d636e2c792f/guava/src/com/google/common/collect/ForwardingCollection.java"
+    },
+    {
+      "repository": "google/guava",
+      "commit": "f06690fa3e874f65515e8fd338a74d636e2c792f",
+      "path": "guava/src/com/google/common/collect/ForwardingObject.java",
+      "git_blob": "712b14fa134318b6bc50ad1a14cc2359408f6f53",
+      "bytes": 3028,
+      "license": "Apache-2.0",
+      "source_status": "FULL_SOURCE_READ",
+      "url": "https://github.com/google/guava/blob/f06690fa3e874f65515e8fd338a74d636e2c792f/guava/src/com/google/common/collect/ForwardingObject.java"
+    },
+    {
+      "repository": "google/guava",
+      "commit": "f06690fa3e874f65515e8fd338a74d636e2c792f",
+      "path": "guava-tests/test/com/google/common/collect/EvictingQueueTest.java",
+      "git_blob": "1d8cdd383907eb4f8eddb99c1ffb715368ae0b7b",
+      "bytes": 6827,
+      "license": "Apache-2.0",
+      "source_status": "FULL_SOURCE_READ",
+      "url": "https://github.com/google/guava/blob/f06690fa3e874f65515e8fd338a74d636e2c792f/guava-tests/test/com/google/common/collect/EvictingQueueTest.java"
+    },
+    {
+      "repository": "google/guava",
+      "commit": "f06690fa3e874f65515e8fd338a74d636e2c792f",
+      "path": "LICENSE",
+      "git_blob": "d645695673349e3947e8e5ae42332d0ac3164cd7",
+      "bytes": 11358,
+      "license": "Apache-2.0",
+      "source_status": "FULL_SOURCE_READ",
+      "url": "https://github.com/google/guava/blob/f06690fa3e874f65515e8fd338a74d636e2c792f/LICENSE"
+    },
+    {
+      "repository": "google/guava",
+      "commit": "f06690fa3e874f65515e8fd338a74d636e2c792f",
+      "path": "guava/src/com/google/common/collect/Iterables.java",
+      "git_blob": "79b908d45959b5c1b31e4f621f6a761c77ebc1d4",
+      "bytes": 44132,
+      "license": "Apache-2.0",
+      "source_status": "FULL_SOURCE_FETCHED; RELEVANT_ATOMS_READ; no complete helper-library admission",
+      "url": "https://github.com/google/guava/blob/f06690fa3e874f65515e8fd338a74d636e2c792f/guava/src/com/google/common/collect/Iterables.java"
+    },
+    {
+      "repository": "google/guava",
+      "commit": "f06690fa3e874f65515e8fd338a74d636e2c792f",
+      "path": "guava/src/com/google/common/collect/Iterators.java",
+      "git_blob": "6e8551bb7fde823f3767716298ae2b64df9b820b",
+      "bytes": 51764,
+      "license": "Apache-2.0",
+      "source_status": "FULL_SOURCE_FETCHED; RELEVANT_ATOMS_READ; no complete helper-library admission",
+      "url": "https://github.com/google/guava/blob/f06690fa3e874f65515e8fd338a74d636e2c792f/guava/src/com/google/common/collect/Iterators.java"
+    },
+    {
+      "repository": "openjdk/jdk",
+      "commit": "890adb6410dab4606a4f26a942aed02fb2f55387",
+      "path": "src/java.base/share/classes/java/util/ArrayDeque.java",
+      "git_blob": "eb459b805174b7f091e09eeb3f99e74fc4b47553",
+      "bytes": 43461,
+      "license": "GPL-2.0-only WITH Classpath-exception-2.0",
+      "source_status": "FULL_SOURCE_FETCHED; RELEVANT_ATOMS_READ; GPL reference not admitted for copying",
+      "url": "https://github.com/openjdk/jdk/blob/jdk-21+35/src/java.base/share/classes/java/util/ArrayDeque.java"
+    },
+    {
+      "repository": "openjdk/jdk",
+      "commit": "890adb6410dab4606a4f26a942aed02fb2f55387",
+      "path": "src/java.base/share/classes/java/util/Collection.java",
+      "git_blob": "0f63f0b26a46b6a9e309818241ac7663aad52f1f",
+      "bytes": 38921,
+      "license": "GPL-2.0-only WITH Classpath-exception-2.0",
+      "source_status": "FULL_SOURCE_FETCHED; RELEVANT_ATOMS_READ; GPL reference not admitted for copying",
+      "url": "https://github.com/openjdk/jdk/blob/jdk-21+35/src/java.base/share/classes/java/util/Collection.java"
+    },
+    {
+      "repository": "openjdk/jdk",
+      "commit": "890adb6410dab4606a4f26a942aed02fb2f55387",
+      "path": "LICENSE",
+      "git_blob": "8b400c7ab81b7b18baff3f81d597f5e511883134",
+      "bytes": 19274,
+      "license": "GPL-2.0-only WITH Classpath-exception-2.0",
+      "source_status": "FULL_SOURCE_FETCHED; RELEVANT_ATOMS_READ; GPL reference not admitted for copying",
+      "url": "https://github.com/openjdk/jdk/blob/jdk-21+35/LICENSE"
+    },
+    {
+      "repository": "google/guava",
+      "commit": "f06690fa3e874f65515e8fd338a74d636e2c792f",
+      "path": "guava/src/com/google/common/base/Preconditions.java",
+      "git_blob": "ebe99ec8b333d56c12f7e493f6cb7a9bd3f85c61",
+      "bytes": 54016,
+      "license": "Apache-2.0",
+      "source_status": "FULL_SOURCE_FETCHED; RELEVANT_ATOMS_READ; no complete helper-library admission",
+      "url": "https://github.com/google/guava/blob/f06690fa3e874f65515e8fd338a74d636e2c792f/guava/src/com/google/common/base/Preconditions.java"
+    },
+    {
+      "repository": "hsoliwal/M3jdk21",
+      "commit": "0efc1719ca5766aead09f4f7c49f5067975bd946",
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LinkedList.java",
+      "git_blob": "744d1c488b8342c98e49d2cfd3465c0f558b199d",
+      "bytes": 10719,
+      "license": "Apache-2.0 (source header)",
+      "source_status": "FULL_SOURCE_READ; first-party comparison",
+      "url": "https://github.com/hsoliwal/M3jdk21/blob/0efc1719ca5766aead09f4f7c49f5067975bd946/m3/collections/src/main/java/com/m3/collections/M3LinkedList.java"
+    },
+    {
+      "repository": "hsoliwal/M3jdk21",
+      "commit": "0efc1719ca5766aead09f4f7c49f5067975bd946",
+      "path": "m3/collections/src/main/java/com/m3/collections/M3ArrayList.java",
+      "git_blob": "250905f67429fbedfb4d6f652ea6e90a516cb59c",
+      "bytes": 10039,
+      "license": "Apache-2.0 (source header)",
+      "source_status": "FULL_SOURCE_READ; first-party comparison",
+      "url": "https://github.com/hsoliwal/M3jdk21/blob/0efc1719ca5766aead09f4f7c49f5067975bd946/m3/collections/src/main/java/com/m3/collections/M3ArrayList.java"
+    },
+    {
+      "repository": "hsoliwal/M3jdk21",
+      "commit": "0efc1719ca5766aead09f4f7c49f5067975bd946",
+      "path": "m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java",
+      "git_blob": "5def05aad11dbe3ab7bebe27a3c11b5d241c9a7a",
+      "bytes": 12568,
+      "license": "Apache-2.0 (source header)",
+      "source_status": "FULL_SOURCE_READ; first-party comparison",
+      "url": "https://github.com/hsoliwal/M3jdk21/blob/0efc1719ca5766aead09f4f7c49f5067975bd946/m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java"
+    }
+  ],
+  "harmonyDiscovery": {
+    "commit": "02970cb7227a335edd2c8457ebdde0195a735733",
+    "directory": "classlib/modules/luni/src/main/java/java/util",
+    "entries": 89,
+    "arrayDequeEntries": 0,
+    "queriedArrayDequePathStatus": 404,
+    "limits": "Only this directory/path was inspected; no whole Harmony/repository/fabric absence claim"
+  },
+  "guavaNoticeDiscovery": {
+    "rootEntries": 25,
+    "licenseEntries": [
+      "LICENSE"
+    ],
+    "noticeEntries": [],
+    "limits": "Exact Guava root directory inspected; do not infer dependency/package notice absence"
+  },
+  "runtimeStatus": "No candidate code, builds, donor tests or runtime probes performed",
+  "storage": "S only; explicit S TEMP/TMP and native GetTempPathW gate; C held; K unavailable"
+}
