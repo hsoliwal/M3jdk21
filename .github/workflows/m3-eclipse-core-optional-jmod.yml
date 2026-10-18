@@ -73,7 +73,7 @@ jobs:
           from pathlib import Path
           import hashlib
           root = Path('m3/eclipse/optional-jmod/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-shared-lexicon-builder-explicit-ctor-20261018')
-          rows = [x.split('\\t') for x in (root / 'manifest.tsv').read_text().splitlines()
+          rows = [x.split('\t') for x in (root / 'manifest.tsv').read_text().splitlines()
                   if x and not x.startswith('#')]
           assert len(rows) == 1, rows
           path, before, after, template = rows[0]
