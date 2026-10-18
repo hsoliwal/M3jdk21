@@ -156,4 +156,23 @@ public final class M3CollectionSdk {
         return M3IndexPathMasks.select(rows, physicalOffsets, statePlanes,
                 required, forbidden, first, count, stride, backend);
     }
+    /** M3 dynamic Object[] list, distinct from the retained JDK ArrayList factory. */
+    public static <E> M3ArrayList<E> m3ArrayList() {
+        return new M3ArrayList<>();
+    }
+
+    /** M3 indexed table: object payloads plus primitive row/column/slot directories. */
+    public static <R, C, V> M3IndexedTable<R, C, V> indexedTable() {
+        return new M3IndexedTable<>();
+    }
+
+    /** M3 multivalue backend: one value lane plus primitive links and unsigned state masks. */
+    public static <K, V> M3IndexedMultiValueMap<K, V> indexedMultiValueMap() {
+        return new M3IndexedMultiValueMap<>();
+    }
+
+    /** M3 signed-long interval set over sorted parallel start/end arrays. */
+    public static M3LongRangeSet longRangeSet() {
+        return new M3LongRangeSet();
+    }
 }
