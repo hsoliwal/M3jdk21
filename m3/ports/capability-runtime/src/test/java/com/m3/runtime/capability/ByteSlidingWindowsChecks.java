@@ -58,8 +58,10 @@ public final class ByteSlidingWindowsChecks {
                     check(count == expected.size() && actual.equals(expected),
                             "differential: length=" + len + " width=" + width + " step=" + step);
                     if (!expected.isEmpty()) {
+                        final int checkedWidth = width;
+                        final int checkedStep = step;
                         List<String> rejected = new ArrayList<>();
-                        refuse(() -> ByteSlidingWindows.scan(whole, width, step,
+                        refuse(() -> ByteSlidingWindows.scan(whole, checkedWidth, checkedStep,
                                 expected.size() - 1, (a,b,c,d) -> rejected.add("unexpected")));
                         check(rejected.isEmpty(), "validate output budget before callbacks");
                     }

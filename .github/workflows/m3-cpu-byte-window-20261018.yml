@@ -1,0 +1,25 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3 CPU byte sliding windows Java 21
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - 'm3/ports/capability-runtime/**'
+      - '.github/workflows/m3-cpu-byte-window-20261018.yml'
+permissions:
+  contents: read
+jobs:
+  window-differential:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Compile and verify bounded CPU module against full source
+        run: |
+          set -eu
+          cd m3/ports/capability-runtime
+          mvn -B -ntp verify
