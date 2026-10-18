@@ -4,6 +4,7 @@
  */
 package com.m3.collections;
 
+import java.util.AbstractCollection;
 import java.util.AbstractMap;
 import java.util.AbstractSet;
 import java.util.ArrayList;
@@ -19,7 +20,8 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.SortedMap;
 import java.util.SortedSet;
- import java.util.function.BiPredicate;
+ import java.util.function.BiConsumer;
+import java.util.function.BiPredicate;
 import java.util.function.Predicate;
 
 /**
@@ -521,6 +523,129 @@ public final class M3MutableFilteredViews {
                     return entryCursor();
                 }
             };
+        }
+
+        /**
+         * JDK values() API requests a collection view, not one Entry per value.
+         * The M3 owner visits physical slots and returns value references directly.
+         */
+        @Override public Collection<V> values() {
+            M3TreeMap<K, V> owner = slotOwner();
+            if (owner == null) return super.values();
+            return new AbstractCollection<>() {
+                @Override public int size() { return MapView.this.size(); }
+                @Override public void clear() { MapView.this.clear(); }
+                @Override public Iterator<V> iterator() {
+                    return new Iterator<>() {
+                        private int next = owner.firstSlot();
+                        private int expected = owner.revision();
+                        private K lastKey;
+                        private boolean removable;
+
+                        private void check() {
+                            if (expected != owner.revision()) {
+                                throw new ConcurrentModificationException();
+                            }
+                        }
+
+                        @Override public boolean hasNext() {
+                            check();
+                            while (next >= 0 && !visibleSlot(owner, next)) {
+                                next = owner.nextSlot(next);
+                            }
+                            return next >= 0;
+                        }
+
+                        @Override public V next() {
+                            if (!hasNext()) throw new NoSuchElementException();
+                            int slot = next;
+                            next = owner.nextSlot(slot);
+                            lastKey = owner.keyAt(slot);
+                            removable = true;
+                            return owner.valueAt(slot);
+                        }
+
+                        @Override public void remove() {
+                            check();
+                            if (!removable) throw new IllegalStateException("next required");
+                            owner.remove(lastKey);
+                            expected = owner.revision();
+                            removable = false;
+                            lastKey = null;
+                        }
+                    };
+                }
+            };
+        }
+
+        @Override public void forEach(BiConsumer<? super K, ? super V> action) {
+            Objects.requireNonNull(action, "action");
+            M3TreeMap<K, V> owner = slotOwner();
+            if (owner == null) {
+                for (Entry<K, V> entry : entrySet()) {
+                    action.accept(entry.getKey(), entry.getValue());
+                }
+                return;
+            }
+            int expected = owner.revision();
+            for (int slot = owner.firstSlot(); slot >= 0; slot = owner.nextSlot(slot)) {
+                K key = owner.keyAt(slot);
+                V value = owner.valueAt(slot);
+                if (predicate.test(key, value)) action.accept(key, value);
+                if (owner.revision() != expected) throw new ConcurrentModificationException();
+            }
+        }
+
+        @Override public int hashCode() {
+            M3TreeMap<K, V> owner = slotOwner();
+            if (owner == null) return super.hashCode();
+            int hash = 0;
+            for (int slot = owner.firstSlot(); slot >= 0; slot = owner.nextSlot(slot)) {
+                K key = owner.keyAt(slot);
+                V value = owner.valueAt(slot);
+                if (predicate.test(key, value)) {
+                    hash += Objects.hashCode(key) ^ Objects.hashCode(value);
+                }
+            }
+            return hash;
+        }
+
+        @Override public boolean equals(Object other) {
+            if (other == this) return true;
+            M3TreeMap<K, V> owner = slotOwner();
+            if (owner == null) return super.equals(other);
+            if (!(other instanceof Map<?, ?> map) || map.size() != size()) return false;
+            try {
+                for (int slot = owner.firstSlot(); slot >= 0; slot = owner.nextSlot(slot)) {
+                    K key = owner.keyAt(slot);
+                    V value = owner.valueAt(slot);
+                    if (!predicate.test(key, value)) continue;
+                    if (!Objects.equals(value, map.get(key))
+                            || value == null && !map.containsKey(key)) {
+                        return false;
+                    }
+                }
+            } catch (ClassCastException | NullPointerException ignored) {
+                return false;
+            }
+            return true;
+        }
+
+        @Override public String toString() {
+            M3TreeMap<K, V> owner = slotOwner();
+            if (owner == null) return super.toString();
+            StringBuilder out = new StringBuilder("{");
+            boolean comma = false;
+            for (int slot = owner.firstSlot(); slot >= 0; slot = owner.nextSlot(slot)) {
+                K key = owner.keyAt(slot);
+                V value = owner.valueAt(slot);
+                if (!predicate.test(key, value)) continue;
+                if (comma) out.append(", ");
+                comma = true;
+                out.append(key == this ? "(this Map)" : key).append('=')
+                        .append(value == this ? "(this Map)" : value);
+            }
+            return out.append('}').toString();
         }
 
         private Iterator<Entry<K, V>> entryCursor() {
