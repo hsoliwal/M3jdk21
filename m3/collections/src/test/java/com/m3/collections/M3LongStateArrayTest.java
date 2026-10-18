@@ -112,6 +112,25 @@ final class M3LongStateArrayTest {
         }
     }
 
+    @Test void stateMaskCompactionUsesOneMutationEpochAndPreservesAlignment() {
+        var owner = new M3LongStateArray();
+        owner.add(10, 1);
+        owner.add(20, 0);
+        owner.add(30, 1);
+        owner.add(40, 0);
+        long before = owner.generation();
+        assertEquals(2, owner.retainByStateMask(1, 0));
+        assertArrayEquals(new long[] {10, 30}, owner.toArray());
+        assertArrayEquals(new int[] {1, 1}, owner.statesCopy());
+        assertEquals(before + 1, owner.generation());
+        long stable = owner.generation();
+        assertEquals(0, owner.retainByStateMask(1, 0));
+        assertEquals(stable, owner.generation());
+        assertEquals(2, owner.retainByStateMask(2, 0));
+        assertTrue(owner.isEmpty());
+        assertEquals(stable + 1, owner.generation());
+    }
+
     @Test void sortedAndFilteredViewsPreserveDuplicateOccurrences() {
         var owner = new M3LongStateArray();
         long[] values = {5, 1, 5, -2, 1};
