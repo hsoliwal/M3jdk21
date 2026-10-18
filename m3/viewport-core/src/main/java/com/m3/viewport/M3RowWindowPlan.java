@@ -28,6 +28,9 @@ public final class M3RowWindowPlan {
 	private int retiredHead, retiredTail, insertedHead, insertedTail;
 	private boolean replaced;
 
+	public M3RowWindowPlan () {
+	}
+
 	/** First logical row of the committed window. */
 	public int first () {
 		return first;

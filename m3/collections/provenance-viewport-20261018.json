@@ -5,7 +5,7 @@
   "authority": "m3/docs/viewport-everywhere/RELICENSE_RECORD.md",
   "files": [
     {"source": "bundles/org.eclipse.swt/Eclipse SWT/common/org/eclipse/swt/widgets/VirtualTreeSiblingIndex.java", "source_blob": "4563f5e6d0d312a548e6728a5707f243173c2f49", "source_sha256": "0b85fb2c948c541b4025216374b97233809e9f3d2b21cd5facb2a8858cdd16ec",
-     "target": "m3/collections/src/main/java/com/m3/collections/M3OrderStatisticForest.java", "target_sha256": "890d1e96ae8f1197dc6d25fc258d4eb3d141de88360dc0d5953c18c71aed08b7",
+     "target": "m3/collections/src/main/java/com/m3/collections/M3OrderStatisticForest.java", "target_sha256": "fd38d42a878f412c963d9b701a1d03b4c8ebb65ae63b241c6c64d8c3c71b5347",
      "changes": ["Apache-2.0 header with donor attribution kept", "type rename", "package move", "package-private surface made public; SWT.error replaced by the identical IllegalArgumentException"],
      "license": "Apache-2.0 (EPL-2.0 at source; same author)"},
     {"source": "bundles/org.eclipse.swt/Eclipse SWT/common/org/eclipse/swt/widgets/VirtualRowExtents.java", "source_blob": "f0e0143a04c5b9494c7db57b93c32cf4f1704093", "source_sha256": "0c94510fcf1269bcb4458d623e88a3b923f112279e5bba222201ea7057f7ae39",
@@ -33,7 +33,7 @@
      "changes": ["Apache-2.0 header with donor attribution kept", "type rename", "package move", "package-private surface made public; SWT.error replaced by the identical IllegalArgumentException"],
      "license": "Apache-2.0 (EPL-2.0 at source; same author)"},
     {"source": "bundles/org.eclipse.swt/Eclipse SWT/common/org/eclipse/swt/internal/PackedHeapGrowth.java", "source_blob": "82c88d4d5b2517e21694076e5b32c73a4e362fbb", "source_sha256": "3c2e690bf022e2f60dc9fa92be14c71fa236096673c7c2c90238b1a2f14b81f0",
-     "target": "m3/collections/src/main/java/com/m3/collections/M3HeapGrowth.java", "target_sha256": "4f89c8a2c40155566308492fc1217a27e839031205de7ac98b75f350c3c3f60e",
+     "target": "m3/collections/src/main/java/com/m3/collections/M3HeapGrowth.java", "target_sha256": "eedc28058cbfaad31584e9e62bf2c2d303cb08512f655abe4878496494d2f48c",
      "changes": ["Apache-2.0 header with donor attribution kept", "type rename", "package move", "package-private surface made public; SWT.error replaced by the identical IllegalArgumentException"],
      "license": "Apache-2.0 (EPL-2.0 OR Apache-2.0 at source; same author)"},
     {"source": "tests/org.eclipse.swt.tests/JUnit Tests/org/eclipse/swt/tests/junit/Test_VirtualRowExtents.java", "source_blob": "92367d9cd484e31441fb9d10796d26713a748fe0", "source_sha256": "f2f8dd337bea87c7fdd9646aab94d832ef573e9b0a700c849082c10e11fee729",

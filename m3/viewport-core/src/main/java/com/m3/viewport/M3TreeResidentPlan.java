@@ -37,6 +37,9 @@ public final class M3TreeResidentPlan {
 	private boolean [] kept = new boolean [0];
 	private int plannedCount, retiredCount;
 
+	public M3TreeResidentPlan () {
+	}
+
 	public static long key (int parentId, int childIndex) {
 		return ((long) parentId << 32) | (childIndex & 0xFFFFFFFFL);
 	}

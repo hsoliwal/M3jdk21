@@ -1,9 +1,11 @@
 /*
  * Copyright 2026 Hitesh Soliwal and contributors
- * SPDX-License-Identifier: Apache-2.0
+ * SPDX-License-Identifier: EPL-2.0 OR Apache-2.0
  *
- * Derived by recipe (m3/docs/viewport-everywhere/recipe) from hsoliwal/eclipse.platform.swt 553eefd41d9961d303c41e0e4e181712e64a1e45,
- * PackedHeapGrowth.java (EPL-2.0 at source; authority: m3/docs/viewport-everywhere/RELICENSE_RECORD.md).
+ * Dual-licensed by the rights holder's decision of 2026-10-13: you may use this file under the
+ * Eclipse Public License 2.0 (https://www.eclipse.org/legal/epl-2.0/) or the Apache License 2.0
+ * (https://www.apache.org/licenses/LICENSE-2.0).
+ *
  * Ported from hsoliwal/com.synexia 46e296ad537c6ecbd62b9783874e8f1714e278a9:
  * synexia-common/src/main/java/com/synexia/common/collections/PackedHeapGrowth.java (#10871),
  * PackedSupport.growArrayCapacity, and the once-per-miss sampling of

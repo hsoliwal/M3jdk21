@@ -44,6 +44,9 @@ public final class M3OrderStatisticForest {
 	private long [] weights = new long [0];
 	private long seekBefore;
 
+	public M3OrderStatisticForest () {
+	}
+
 	/** Rebinds the borrowed key and weight lanes after the owner grows them. */
 	public void lanes (int [] keys, long [] weights) {
 		this.keys = keys;

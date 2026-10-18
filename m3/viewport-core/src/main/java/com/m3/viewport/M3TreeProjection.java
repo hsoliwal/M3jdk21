@@ -43,6 +43,9 @@ public final class M3TreeProjection {
 		private int size, paintCount, rootCount, firstRoot = -1, lastRoot = -1;
 		private long firstPaintRow, sourceGeneration = -1;
 
+	public Residency () {
+	}
+
 		public boolean isHint (int entry) { requireEntry (entry); return materializedIds [entry] == -2; }
 
 		public void bindFacade (int entry, int id) {

@@ -22,6 +22,9 @@ public final class M3ScrollMetrics {
 	private int sampleRowExtent = 1;
 	private int viewportExtent;
 
+	public M3ScrollMetrics () {
+	}
+
 	public void configure (int logicalRows, int sampleRowExtent, int viewportExtent) {
 		configure ((long)logicalRows, sampleRowExtent, viewportExtent);
 	}

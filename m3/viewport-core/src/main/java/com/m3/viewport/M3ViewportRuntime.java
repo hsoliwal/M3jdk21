@@ -70,6 +70,9 @@ public final class M3ViewportRuntime {
 		private int overscanRows = DEFAULT_OVERSCAN_ROWS;
 		private long generation;
 
+	public RowWindow () {
+	}
+
 		public long logicalCount () {
 			return logicalCount;
 		}
@@ -203,6 +206,9 @@ public final class M3ViewportRuntime {
 		private int [] starts = new int [4];
 		private int [] ends = new int [4];
 		private int rangeCount;
+
+	public Selection () {
+	}
 
 		public int logicalCount () {
 			return logicalCount;
@@ -524,6 +530,9 @@ public final class M3ViewportRuntime {
 	private double originX;
 	private double originY;
 	private boolean originInitialized;
+
+	public M3ViewportRuntime () {
+	}
 
 	public void initializeOrigin (double x, double y) {
 		requireFinite (x, y);

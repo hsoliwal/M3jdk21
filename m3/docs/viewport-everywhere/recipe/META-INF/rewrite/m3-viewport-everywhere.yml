@@ -42,6 +42,7 @@ recipeList:
   - com.m3.viewport.recipe.Wave1Types
   - com.m3.viewport.recipe.M3TidyImports
   - com.m3.viewport.recipe.M3PublicSurface
+  - com.m3.viewport.recipe.M3ExplicitConstructor
 ---
 type: specs.openrewrite.org/v1beta/recipe
 name: com.m3.viewport.recipe.Wave1Tests

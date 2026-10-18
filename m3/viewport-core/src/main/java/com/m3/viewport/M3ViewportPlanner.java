@@ -169,6 +169,9 @@ public final class M3ViewportPlanner {
 		private boolean rtl;
 		private long geometryGeneration, generation;
 
+	public HorizontalWindow () {
+	}
+
 		/** Invalid input/overflow leaves both the directory and window unchanged. */
 		public boolean setColumns (long [] widthsByLogicalColumn, int [] displayOrder) {
 			Objects.requireNonNull (widthsByLogicalColumn);
