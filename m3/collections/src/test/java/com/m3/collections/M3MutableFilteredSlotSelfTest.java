@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.NavigableMap;
 import java.util.Objects;
@@ -53,6 +54,15 @@ public final class M3MutableFilteredSlotSelfTest {
                 "visible traversal " + phase);
         same(new ArrayList<>(ref.descendingMap().entrySet()),
                 new ArrayList<>(actual.descendingMap().entrySet()), "descending " + phase);
+        same(new ArrayList<>(ref.values()), new ArrayList<>(actual.values()), "values " + phase);
+        same(ref.hashCode(), actual.hashCode(), "hash code " + phase);
+        same(ref.toString(), actual.toString(), "map string " + phase);
+        same(ref.equals(actual), actual.equals(ref), "symmetric map equality " + phase);
+        List<String> baselinePairs = new ArrayList<>();
+        List<String> indexedPairs = new ArrayList<>();
+        ref.forEach((key, value) -> baselinePairs.add(key + "=" + value));
+        actual.forEach((key, value) -> indexedPairs.add(key + "=" + value));
+        same(baselinePairs, indexedPairs, "forEach " + phase);
         same(ref.size(), actual.size(), "size " + phase);
         same(ref.isEmpty(), actual.isEmpty(), "empty " + phase);
         same(ref.firstEntry(), actual.firstEntry(), "first " + phase);
@@ -99,7 +109,7 @@ public final class M3MutableFilteredSlotSelfTest {
         for (int step=1;step<=340;step++) {
             int key=random.nextInt(25)-12;
             Integer value=random.nextInt(7)==0?null:random.nextInt(41)-20;
-            int op=random.nextInt(9);
+            int op=random.nextInt(10);
             switch (op) {
                 case 0 -> {
                     same(baseline.put(key, value), storage.put(key, value), "source put");
@@ -147,6 +157,15 @@ public final class M3MutableFilteredSlotSelfTest {
                         same(expected.pollFirstEntry(), actual.pollFirstEntry(), "first poll");
                     } else {
                         same(expected.pollLastEntry(), actual.pollLastEntry(), "last poll");
+                    }
+                }
+                case 9 -> {
+                    Iterator<Integer> a = expected.values().iterator();
+                    Iterator<Integer> b = actual.values().iterator();
+                    same(a.hasNext(), b.hasNext(), "value iterator hasNext");
+                    if (a.hasNext()) {
+                        same(a.next(), b.next(), "value iterator next");
+                        a.remove(); b.remove();
                     }
                 }
                 default -> throw new AssertionError(op);
