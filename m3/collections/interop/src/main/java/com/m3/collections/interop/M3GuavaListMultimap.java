@@ -144,7 +144,9 @@ public final class M3GuavaListMultimap<K, V> implements ListMultimap<K, V> {
         @Override public V set(int index, V element) {
             List<V> list = list();
             if (list == null) throw new IndexOutOfBoundsException(index);
-            return list.set(index, element);
+            V previous = list.set(index, element);
+            if (!Objects.equals(previous, element)) revision++;
+            return previous;
         }
         @Override public void add(int index, V element) {
             List<V> list = list();
@@ -421,11 +423,15 @@ public final class M3GuavaListMultimap<K, V> implements ListMultimap<K, V> {
         Object[] allValues = new Object[pairs];
         int[] positions = new int[pairs];
         int ordinal = 0;
-        for (Map.Entry<K, V> entry : entries()) {
-            allKeys[ordinal] = entry.getKey();
-            allValues[ordinal] = entry.getValue();
-            positions[ordinal] = ordinal++;
+        for (Map.Entry<K, List<V>> group : directory.entrySet()) {
+            K key = group.getKey();
+            for (V value : group.getValue()) {
+                allKeys[ordinal] = key;
+                allValues[ordinal] = value;
+                positions[ordinal] = ordinal++;
+            }
         }
+        if (ordinal != pairs || expected != revision) throw new ConcurrentModificationException();
         int[] kept = M3IndexPathMasks.select(positions, positions, new int[][]{states},
                 new int[]{required}, new int[]{forbidden}, 0, pairs, 1, backend);
         if (expected != revision) throw new ConcurrentModificationException();

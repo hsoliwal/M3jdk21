@@ -13,6 +13,8 @@ import com.m3.collections.M3LinkedHashMap;
 import com.m3.collections.M3LinkedList;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.ConcurrentModificationException;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -112,6 +114,18 @@ final class M3GuavaListMultimapRealTest {
         map.asMap().get("a").clear();
         assertFalse(map.containsKey("a"));
         assertEquals(0, map.size());
+    }
+
+    @Test void valueReplacementAdvancesOccurrenceRevisionWithoutChangingPairCount() {
+        M3GuavaListMultimap<String,Integer> map = new M3GuavaListMultimap<>();
+        map.put("a", 1);
+        map.put("a", 2);
+        Iterator<Map.Entry<String,Integer>> cursor = map.entries().iterator();
+        assertEquals(Map.entry("a", 1), cursor.next());
+        assertEquals(1, map.get("a").set(0, 9));
+        assertEquals(2, map.size());
+        assertEquals(List.of(9, 2), map.get("a"));
+        assertThrows(ConcurrentModificationException.class, cursor::hasNext);
     }
 
     @Test void signedBitMasksAndRequiredNativeParity() {
