@@ -7,8 +7,10 @@ recipe.crate	m3-object-stream-superset-20261018
 recipe.manifest	 synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-object-stream-superset-20261018/manifest.tsv
 delivery	draft source receiver; no installed-image claim
 checks.javac	local Java 21 compile passed against helper fixtures only
-checks.contract	908 deterministic fixture assertions passed before the source-sealed provider test was added
+checks.contract	908 deterministic fixture assertions passed for the original stream fixture; the new terminal contract is separately sealed and pending execution
 checks.maven	NOT RUN (maven unavailable in local environment)
 checks.openrewrite	NOT RUN against full OpenRewrite SDK/reactor
 checks.native_jni	NOT RUN against native binary
 checks.provider_interop	JUnit tests added; Maven execution pending
+checks.terminal_contract	18 deterministic assertions added; NOT RUN until actual Maven/JUnit execution
+source.outputs	8 exact ABSENT-to-SHA256 targets in canonical manifest
