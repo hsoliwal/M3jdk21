@@ -67,9 +67,9 @@ class BootstrapBoundaryTest(unittest.TestCase):
         with self.assertRaises(bootstrap.Refusal):
             call()
 
-    def wheel(self, mutations=None, extra=None, duplicate=None, record_bad=False):
+    def wheel(self, mutations=None, extra=None, duplicate=None, record_bad=False, requires_dist=None):
         item = copy.deepcopy(self.lock["artifacts"][1])
-        item["requiresDist"] = []
+        item["requiresDist"] = [] if requires_dist is None else list(requires_dist)
         item["coreMetadataSha256"] = None
         license_bytes = b"fixture-license\n"
         item["license"] = {"expression": "MIT", "sourcePath": "LICENSE",
@@ -82,6 +82,10 @@ class BootstrapBoundaryTest(unittest.TestCase):
             info + "WHEEL": b"Wheel-Version: 1.0\nGenerator: fixture\nRoot-Is-Purelib: true\nTag: py3-none-any\n\n",
             info + "licenses/LICENSE": license_bytes,
         }
+        if requires_dist is not None:
+            headers = ("Metadata-Version: 2.4\nName: jsonschema\nVersion: 4.26.0\nRequires-Python: >=3.10\n"
+                       + "".join("Requires-Dist: " + row + "\n" for row in requires_dist) + "\n")
+            files[info + "METADATA"] = headers.encode("utf-8")
         files.update(mutations or {})
         if extra:
             files.update(extra)
@@ -115,9 +119,28 @@ class BootstrapBoundaryTest(unittest.TestCase):
         self.assertEqual(642142, sum(x["bytes"] for x in self.lock["artifacts"]))
         self.assertEqual(26, len(self.lock["original"]["tests"]["methods"]))
         self.assertEqual(
-            ["typing-extensions>=4.4.0; python_version < \"3.13\""],
+            ["typing-extensions>=4.4.0; python_version < '3.13'"],
             [r for x in self.lock["artifacts"] for r in x["requiresDist"]
              if r.startswith("typing-extensions")])
+
+        # Raw Requires-Dist profiles from the hash-pinned released METADATA.
+        # The fixture remains jsonschema; real six-wheel admission is separate.
+        cases = [[1, ['attrs>=22.2.0', 'jsonschema-specifications>=2023.03.6', 'referencing>=0.28.4', 'rpds-py>=0.25.0', "fqdn; extra == 'format'", "idna; extra == 'format'", "isoduration; extra == 'format'", "jsonpointer>1.13; extra == 'format'", "rfc3339-validator; extra == 'format'", "rfc3987; extra == 'format'", "uri-template; extra == 'format'", "webcolors>=1.11; extra == 'format'", "fqdn; extra == 'format-nongpl'", "idna; extra == 'format-nongpl'", "isoduration; extra == 'format-nongpl'", "jsonpointer>1.13; extra == 'format-nongpl'", "rfc3339-validator; extra == 'format-nongpl'", "rfc3986-validator>0.1.0; extra == 'format-nongpl'", "rfc3987-syntax>=1.1.0; extra == 'format-nongpl'", "uri-template; extra == 'format-nongpl'", "webcolors>=24.6.0; extra == 'format-nongpl'"]], [3, ['attrs>=22.2.0', 'rpds-py>=0.7.0', "typing-extensions>=4.4.0; python_version < '3.13'"]]]
+        for index, expected in cases:
+            with self.subTest(distribution=self.lock["artifacts"][index]["name"]):
+                self.assertEqual(expected, self.lock["artifacts"][index]["requiresDist"])
+                path, item = self.wheel(requires_dist=expected)
+                bootstrap.check_wheel(path, item)
+                altered = copy.deepcopy(item)
+                altered["requiresDist"] = [row.replace(chr(39), chr(34)) for row in expected]
+                self.assertNotEqual(expected, altered["requiresDist"])
+                with self.assertRaisesRegex(bootstrap.Refusal, "wheel dependency metadata mismatch"):
+                    bootstrap.check_wheel(path, altered)
+                for rows in (expected[:-1], expected + expected[-1:]):
+                    self.assertNotEqual(expected, rows)
+                    altered["requiresDist"] = rows
+                    with self.assertRaisesRegex(bootstrap.Refusal, "wheel dependency metadata mismatch"):
+                        bootstrap.check_wheel(path, altered)
 
     def test_lock_byte_drift_is_refused(self):
         path = self.root / "changed.json"

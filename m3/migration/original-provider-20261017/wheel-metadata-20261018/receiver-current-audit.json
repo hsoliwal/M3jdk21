@@ -1,0 +1,17 @@
+{
+  "schema": "M3_PROVIDER_CURRENT_RECEIVER_AUDIT_POINTER_V1",
+  "receiverCommit": "07ba6e383343d32c83cfdaf641387bbe72bf325d",
+  "canonicalEvidenceCommit": "525e0c3704f8c4b4d9eef54799d1b4c947e37b5f",
+  "canonicalEvidencePath": "synexia-openrewrite-recipes/recipes/m3-original-mapping-provider-20261017/wheel-metadata-20261018/receiver-current-audit.json",
+  "canonicalEvidenceGitBlob": "b34a24421b9ae0e9777637fb4011436ec797df9e",
+  "observedStates": {
+    "total": 60,
+    "keepExact": 54,
+    "addAbsent": 4,
+    "workflowAlreadyAfter": 1,
+    "mapExactBefore": 1,
+    "divergence": 0,
+    "errors": 0
+  },
+  "scope": "Custody metadata only; no runtime or semantic acceptance"
+}

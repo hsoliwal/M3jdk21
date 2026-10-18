@@ -108,7 +108,7 @@
     {
       "path": "m3/migration/provider/python312-linux-x86_64/bootstrap.py",
       "before": "ABSENT",
-      "after": "08531c8ec0d9a77c701735935442b53d7084809f777668bf25be25495704c9d5",
+      "after": "ad5c7df9cf9178ff656a369bbae82c20e2914f1005e187467be0000226cda243",
       "resource": "after-016.txt"
     },
     {
@@ -120,13 +120,13 @@
     {
       "path": "m3/migration/provider/python312-linux-x86_64/test_bootstrap.py",
       "before": "ABSENT",
-      "after": "dc2bd1b88d2a3291ce6e6f63715d69254aa07a9f9727a8d1ec4c595c6d637d79",
+      "after": "301727f395b772328c7e311fd0a7562deeb1ad938c9f4d4f0fc912eb83c39456",
       "resource": "after-018.txt"
     },
     {
       "path": "m3/migration/provider/python312-linux-x86_64/wheels.lock.json",
       "before": "ABSENT",
-      "after": "3b5399db82a98e8f081be41b90213957c8509d5464d303e9e5312c77d6b807c8",
+      "after": "7ecf3b8050b9cceb75304fa3bbe6721a5b4844cb5ca520827ed19f5c21cfbfe9",
       "resource": "after-019.txt"
     },
     {
@@ -523,8 +523,8 @@
     },
     {
       "path": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-original-mapping-provider-20261017/after-016.txt",
-      "gitBlob": "4636bcfbcbd43dea2ac5b0fcfd6ee24318e3c9ad",
-      "sha256": "08531c8ec0d9a77c701735935442b53d7084809f777668bf25be25495704c9d5",
+      "gitBlob": "fd943dae946249b57d45343eba59c4a62c3ac6c5",
+      "sha256": "ad5c7df9cf9178ff656a369bbae82c20e2914f1005e187467be0000226cda243",
       "bytes": 42501
     },
     {
@@ -535,15 +535,15 @@
     },
     {
       "path": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-original-mapping-provider-20261017/after-018.txt",
-      "gitBlob": "324de32d73079a452b4fe906dc76d037321697f4",
-      "sha256": "dc2bd1b88d2a3291ce6e6f63715d69254aa07a9f9727a8d1ec4c595c6d637d79",
-      "bytes": 27313
+      "gitBlob": "537e6701ebde8e064d69425c5dd144df614577d3",
+      "sha256": "301727f395b772328c7e311fd0a7562deeb1ad938c9f4d4f0fc912eb83c39456",
+      "bytes": 29770
     },
     {
       "path": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-original-mapping-provider-20261017/after-019.txt",
-      "gitBlob": "7f1141e62940b12db24057cd7d9e0dcc5b9cf0f2",
-      "sha256": "3b5399db82a98e8f081be41b90213957c8509d5464d303e9e5312c77d6b807c8",
-      "bytes": 10135
+      "gitBlob": "3291ec0a80c15b311dc44b15b078f5d1f103df4b",
+      "sha256": "7ecf3b8050b9cceb75304fa3bbe6721a5b4844cb5ca520827ed19f5c21cfbfe9",
+      "bytes": 10099
     },
     {
       "path": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-original-mapping-provider-20261017/after-020.txt",
@@ -793,8 +793,8 @@
     },
     {
       "path": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-original-mapping-provider-20261017/manifest.tsv",
-      "gitBlob": "5edf59fd5bda69cc01c183ca9ecc9507441575fb",
-      "sha256": "3689cf1e0d72198b827369da0b3b689b44db830bd88cc3cd508cb3ea53396791",
+      "gitBlob": "0f19af2488cd099a71957330a2898a09d880df29",
+      "sha256": "8b168c5da07b47b83a4618efacabae8323a8476b457001fa20e39d7dab77944d",
       "bytes": 11923
     },
     {

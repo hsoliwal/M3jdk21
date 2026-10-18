@@ -1,17 +1,17 @@
 {
   "schema": "M3_ORIGINAL_MAPPING_PROVIDER_TASK_STATUS_V1",
-  "observedUtc": "2026-10-17 15:34:00 UTC",
+  "observedUtc": "2026-10-18 05:06:23 UTC",
   "fullObjective": "Complete continuous MIndex/MatIndex/SubMIndex migration and java.lang.String RoutesA/B/C; preserve full12-pass specification",
   "goalActive": true,
   "storageProtectionActive": true,
   "localBulkOutput": "HOLD",
-  "scope": "Receive exact Synexia recipe classpath and current-mapping preservation correction",
-  "sourceBase": "892e3f6c51d78bc0948e8a8cf736055b4c70eafa",
-  "receiverBase": "4598bfc398d3024e7ea67e42034e857a53a1b378",
-  "sdkTree": "3c02e3896096753a63654d56650a4561118db2b4",
+  "scope": "Thin exact canonical provider recipe mirror for corrected hosted qualification; no production mapping or runtime application",
+  "sourceBase": "525e0c3704f8c4b4d9eef54799d1b4c947e37b5f",
+  "receiverBase": "07ba6e383343d32c83cfdaf641387bbe72bf325d",
+  "sdkTree": "638520715ffb00255639cb1e6667494bab729b53",
   "sdkFiles": 72,
-  "sdkBytes": 1888012,
-  "pinsSha256": "6797e1dc7a1317bfd06ef5353c6e4007430c6199ccd9cb793a5a05499f572d24",
+  "sdkBytes": 1890433,
+  "pinsSha256": "75f37d1093f5fd3d657de32bcab672f725f6391b4c59910aece1c2ff238951d7",
   "targets": {
     "total": 60,
     "keep": 54,
@@ -30,7 +30,7 @@
     "completionBlockers": 158
   },
   "sourceReview": "CLEAR_SOURCE_ONLY_EXECUTION_PENDING",
-  "execution": "NOT_RUN",
+  "execution": "REAL_WHEEL_RAM_ADMISSION_6_PASS; CORRECTED_HOSTED_MAVEN_PROVIDER_NOT_RUN",
   "runtimeApplied": false,
   "canonicalProductionMapApplied": false,
   "phaseAdvanced": false,
@@ -43,7 +43,7 @@
     "Route A / safe Route B / matched complete Route C Java-JNI-runtime proofs",
     "Performance and heap/native/mapped retention benchmarks"
   ],
-  "pinsGitBlob": "1f8a18ab4870ec0e9353e13e33f680b46377e84d",
+  "pinsGitBlob": "cb2fc9bc7bba9b03b8b1dff50cfe93fcd4d589df",
   "failedWorkflowAttempt": {
     "head": "404a29f3494ccf7fcaa35b982895d7aec4ae258f",
     "run": 39029940546,
@@ -89,5 +89,30 @@
     "recordsAdded": 4,
     "recordsRemoved": 0,
     "candidateExecution": "NOT_RUN"
+  },
+  "canonicalSourcePullRequest": 12245,
+  "latestExecutedBaseline": {
+    "receiverHead": "26f61cbe6da082cdfa7ccbfbd3a51067924dc7ec",
+    "run": 39045717868,
+    "job": 117433909668,
+    "sdkCompile": "PASS",
+    "sdkJUnit": "10_PASS_0_FAILURE_ERROR_SKIP",
+    "custodyControls": "22_PASS",
+    "boundaryTests": "38_PASS",
+    "genuineProvider": "FAIL: wheel dependency metadata mismatch",
+    "originalCli": "NOT_RUN",
+    "artifactId": 12110657726,
+    "artifactZipSha256": "715f3d5a5fe2983d635a8abe9f3b1f246d6a6e1f25da7dae6489798d4581d888"
+  },
+  "currentCorrection": {
+    "evidence": "wheel-metadata-20261018/execution-evidence.json",
+    "receiverAudit": "wheel-metadata-20261018/receiver-current-audit.json",
+    "keptSdkFiles": 67,
+    "changedSdkFiles": 5,
+    "namedBoundaryMethods": 38,
+    "newRawMetadataProfiles": 2,
+    "originalCliBytesChanged": false,
+    "productionMappingChanged": false,
+    "providerInstalled": false
   }
 }
