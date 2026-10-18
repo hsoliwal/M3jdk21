@@ -35,7 +35,7 @@ jobs:
           curl --fail --location --silent --show-error             --output "$OUT/commons-collections4-4.5.0.jar"             https://repo.maven.apache.org/maven2/org/apache/commons/commons-collections4/4.5.0/commons-collections4-4.5.0.jar
           find m3/collections/src/main/java -name '*.java' | sort > "$OUT/core.args"
           javac --release 21 -g -proc:none -Xlint:all,-module -Werror             -d "$OUT/core" @"$OUT/core.args"
-          javac --release 21 -g -proc:none -Xlint:all,-module -Werror             -cp "$OUT/core:$OUT/commons-collections4-4.5.0.jar"             -d "$OUT/classes"             m3/collections/implementations/apache-circular-fifo/src/main/java/com/m3/collections/apache/M3CircularFifoQueue.java             m3/collections/qualification/owned-apache-circular-fifo-20261018/CircularFifoProtocolProof.java             m3/collections/qualification/owned-apache-circular-fifo-index-wrap-20261018/CircularFifoIndexWrapProof.java
+          javac --release 21 -g -proc:none -Xlint:all,-module -Werror             -cp "$OUT/core:$OUT/commons-collections4-4.5.0.jar"             -d "$OUT/classes"             m3/collections/implementations/apache-circular-fifo/src/main/java/com/m3/collections/apache/M3CircularFifoQueue.java             m3/collections/qualification/owned-apache-circular-fifo-20261018/CircularFifoProtocolProof.java             m3/collections/qualification/owned-apache-circular-fifo-20261018/CircularFifoMutationProbe.java             m3/collections/qualification/owned-apache-circular-fifo-index-wrap-20261018/CircularFifoIndexWrapProof.java
           gcc -std=c17 -O2 -Wall -Wextra -Werror -fPIC -shared             -I"$JAVA_HOME/include" -I"$JAVA_HOME/include/linux"             m3/collections/src/main/native/collections/m3_index_mask_compactor.c             -o "$OUT/native/libm3_collections_mask.so"
           echo "$OUT" > "$RUNNER_TEMP/m3_fifo_out"
       - name: Run Apache differential and checked JNI lane
@@ -47,5 +47,7 @@ jobs:
           java -cp "$CP" CircularFifoProtocolProof             org.apache.commons.collections4.queue.CircularFifoQueue > "$OUT/provider.json"
           java -cp "$CP" CircularFifoProtocolProof             com.m3.collections.apache.M3CircularFifoQueue > "$OUT/java.json"
           java -Xcheck:jni -Djava.library.path="$OUT/native" -cp "$CP"             CircularFifoProtocolProof com.m3.collections.apache.M3CircularFifoQueue native             > "$OUT/native.json"
+          java -cp "$CP" CircularFifoMutationProbe             org.apache.commons.collections4.queue.CircularFifoQueue > "$OUT/provider-mutation.json"
+          java -cp "$CP" CircularFifoMutationProbe             com.m3.collections.apache.M3CircularFifoQueue > "$OUT/owned-mutation.json"
           python -I -S -B             m3/collections/qualification/owned-apache-circular-fifo-20261018/compare.py "$OUT"
           java -cp "$CP" CircularFifoIndexWrapProof
