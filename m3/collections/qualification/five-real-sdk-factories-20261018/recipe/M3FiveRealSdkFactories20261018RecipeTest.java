@@ -74,7 +74,7 @@ final class M3FiveRealSdkFactories20261018RecipeTest implements RewriteTest {
                 javaRecipe.preimageManifest().get(MAIN));
         var textRecipe = new M3HashPinnedTextSnapshotRecipe(CRATE);
         assertEquals(6, textRecipe.targetPaths().size());
-        assertEquals("f0cef7045875cea74f836ffc11bb0278dca3fcdfb3b584637a97ef4dfa40fc45",
+        assertEquals("e9353beec98ea0b6a8ec78447146fae7f3095c852e23822d97ef7ab1a58b74c6",
                 textRecipe.preimageManifest().get(POM));
     }
 

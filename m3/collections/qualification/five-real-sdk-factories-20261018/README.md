@@ -15,7 +15,7 @@ The work does NOT implement every method/class in the five external libraries. I
 
 **Source-sealed recipe:** Existing Maven-based OpenRewrite `M3HashPinnedJavaSnapshotRecipe` and `M3HashPinnedTextSnapshotRecipe`. All previous Java methods and test bodies remain unchanged, new methods appended after the old source terminator. Two exact Java source SHA-256 preimages; the original 34-file interop source census remains enumerated, with exact SHA-256 and Git blob updates for ONLY the two refined files. The existing fail-closed verifier is modified solely to pin the new census checksum. The original five historical source receipts remain immutable.
 
-**CI blocker correction:** Hosted run [39046293766](https://github.com/hsoliwal/M3jdk21/actions/runs/39046293766) failed before SDK tests because `org.intellij.lang.annotations.Language` was absent on the compiler path under `-Werror`. The existing scoped Maven recipe `pom.xml` gains the donor's `org.jetbrains:annotations:24.1.0` **provided** dependency; warning suppression and blanket test exclusion are forbidden. Subsequent exact-head Maven and provider/JNI tests remain acceptance requirements.
+**CI blocker correction:** Hosted run [39046293766](https://github.com/hsoliwal/M3jdk21/actions/runs/39046293766) failed before SDK tests because `org.intellij.lang.annotations.Language` was absent on the compiler path under `-Werror`. The prerequisite M3JDK21 census recipe now already declares the JetBrains annotations and SLF4J dependencies; this new recipe **pins its exact updated POM as an unchanged KEEP source**, does not overwrite it, and does not suppress compiler warnings or skip tests. Subsequent exact-head Maven and provider/JNI tests remain acceptance requirements.
 
 Reproduction:
 ```sh
