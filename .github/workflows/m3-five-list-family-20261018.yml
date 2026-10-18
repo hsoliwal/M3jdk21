@@ -1,0 +1,59 @@
+name: M3 five-library direct List family Java21 and C17 JNI
+on:
+  push:
+    branches: ['m3/five-list-family-receiver-20261018']
+  pull_request:
+    paths:
+      - 'm3/collections/interop/src/main/java/com/m3/collections/interop/M3GuavaListMultimap.java'
+      - 'm3/collections/interop/src/main/java/com/m3/collections/interop/M3FiveListFamilies.java'
+      - 'm3/collections/interop/src/test/java/com/m3/collections/interop/M3GuavaListMultimap*'
+      - 'm3/collections/interop/src/test/java/com/m3/collections/interop/M3FiveListFamilies*'
+      - 'm3/collections/interop/qualification/m3-five-list-family-20261018/**'
+      - '.github/workflows/m3-five-list-family-20261018.yml'
+permissions:
+  contents: read
+jobs:
+  exact-real-provider:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 55
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Exact canonical six Java postimages
+        shell: bash
+        run: |
+          set -euo pipefail
+          echo '25f4051dcff340507c0e662413104b74a3bbb295bbe6bc78250f1ec7ea92a236  m3/collections/interop/src/main/java/com/m3/collections/interop/M3FiveListFamilies.java' | sha256sum -c -
+          echo '1e8e1e58e4d1cd3f18574914ec371dcc847a8fb4ec47c55b31923accb178b63f  m3/collections/interop/src/main/java/com/m3/collections/interop/M3GuavaListMultimap.java' | sha256sum -c -
+          echo '93fdf15c0abb5dff4dce37c26a85d6a0340b10477b3fa73ac1e35ef9df69bd7b  m3/collections/interop/src/test/java/com/m3/collections/interop/M3FiveListFamiliesContract.java' | sha256sum -c -
+          echo '68ad68cd200a3791f29e97078cbf8e0724b1dec6f13775e1be51e505ddc59b7f  m3/collections/interop/src/test/java/com/m3/collections/interop/M3FiveListFamiliesTest.java' | sha256sum -c -
+          echo '32dfc1e0441589ccc809364d7832287b2748c5925a2625fbb51e9c6f273c6748  m3/collections/interop/src/test/java/com/m3/collections/interop/M3GuavaListMultimapContract.java' | sha256sum -c -
+          echo '0d792d9c4a9ff76d1a07b90297d08ce8b00ebcba9206fa128bdf0bdb942af211  m3/collections/interop/src/test/java/com/m3/collections/interop/M3GuavaListMultimapRealTest.java' | sha256sum -c -
+      - name: Build and test complete existing M3 java.base-only collection owners
+        run: |
+          mvn -B -ntp -f m3/collections/pom.xml install
+          jdeps --print-module-deps m3/collections/target/m3-collections-0.1.0-SNAPSHOT.jar
+      - name: Compile against actual five provider artifacts and run all inherited JUnit
+        run: |
+          mvn -B -ntp -f m3/collections/interop/pom.xml verify
+      - name: Existing C17 full-width indexed mask selector
+        shell: bash
+        run: |
+          set -euo pipefail
+          cc -std=c17 -O2 -Wall -Wextra -Werror -Wconversion -Wshadow -pedantic -fPIC -shared \
+            -I"$JAVA_HOME/include" -I"$JAVA_HOME/include/linux" \
+            m3/collections/src/main/native/collections/m3_index_path_masks.c \
+            -o "$RUNNER_TEMP/libm3_collections_pathmask.so"
+      - name: Required JNI and authentic Guava six-thousand-step comparison
+        shell: bash
+        run: |
+          set -euo pipefail
+          JAVA_TOOL_OPTIONS="-Xcheck:jni -Djava.library.path=$RUNNER_TEMP" \
+            mvn -B -ntp -f m3/collections/interop/pom.xml \
+              -Dm3.interop.requireNative=true \
+              -Dtest=M3GuavaListMultimapRealTest,M3FiveListFamiliesTest test
