@@ -1,0 +1,34 @@
+{
+  "schema": "M3_RECIPE_CUSTODY_V1",
+  "target_repo": "hsoliwal/M3jdk21",
+  "target_base_commit": "f29b0afe7ad253cc0562bc8dfdd48fc1acec710e",
+  "canonical_source_repo": "hsoliwal/com.synexia",
+  "source_base_commit": "50f48cbbe11f17fb8dc209bac3812f8940a1e267",
+  "canonical_review_ref": "refs/heads/codex/m3-jackson-jmod-20261018",
+  "canonical_recipe": "com.synexia.rewrite.M3JacksonJmodRecipe",
+  "application_runner": "com.synexia.rewrite.M3JacksonJmodApply",
+  "maven_crate": "synexia-openrewrite-recipes/crates/m3-jackson-jmod/pom.xml",
+  "packet": "m3-jackson-jmod-20261018",
+  "resource_roots": [
+    "com/synexia/rewrite/hash-pinned-java",
+    "com/synexia/rewrite/hash-pinned-text",
+    "com/synexia/rewrite/hash-pinned-descriptors"
+  ],
+  "existing_engines": [
+    {
+      "class": "com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe",
+      "source_blob": "3bdeeaea9a212fe0c7d1f544510f87c4cd49eb40"
+    },
+    {
+      "class": "com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe",
+      "source_blob": "9d0788d3717e017d58345c5c3e62022c2915a3c8"
+    },
+    {
+      "class": "com.m3.rewrite.jmod.M3ModuleDescriptorRecipe",
+      "source_blob": "302a06c5a79ecb6fd26c988dcf1fb9147e9198e1"
+    }
+  ],
+  "execution_contract": "Execute actual OpenRewrite SDK results, verify every postimage and a complete second pass before writing, atomically replace only declared targets, read back exact bytes, retain external SHA-256 receipt.",
+  "runtime_dependency_on_synexia": false,
+  "upstream_runtime_source_lock": "SOURCE_LOCK.json"
+}
