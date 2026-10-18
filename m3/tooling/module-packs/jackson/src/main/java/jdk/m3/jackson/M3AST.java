@@ -37,6 +37,26 @@ public final class M3AST {
         return pool.atom(atomIndex);
     }
 
+    /** Primitive indexed lookup; unlike {@link #atom(int)}, creates no node wrapper. */
+    public String kindAt(int atomIndex) { return pool.kind(atomIndex); }
+
+    /** Field name at an indexed atom; null for non-field values. */
+    public String nameAt(int atomIndex) { return pool.name(atomIndex); }
+
+    /** Scalar text or original numeric lexeme at an indexed atom. */
+    public String valueAt(int atomIndex) { return pool.value(atomIndex); }
+
+    /** Number of child references, including repeated occurrences of shared atoms. */
+    public int childCountAt(int atomIndex) { return pool.childCount(atomIndex); }
+
+    /** Ordered child atom coordinate without allocating an M3ASTAtom. */
+    public int childAtomIndexAt(int atomIndex, int childIndex) {
+        return pool.childAt(atomIndex, childIndex);
+    }
+
+    /** Structural candidate hash of an indexed atom. */
+    public long structuralHash64At(int atomIndex) { return pool.structuralHash64(atomIndex); }
+
     /**
      * Deterministic structural candidate hash in the receiving UTF-16 domain.
      * Hash equality alone does not establish structure or document identity.
