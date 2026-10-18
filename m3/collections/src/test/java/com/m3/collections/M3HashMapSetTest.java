@@ -104,6 +104,13 @@ class M3HashMapSetTest {
         assertEquals(1, map.get("a"));
         assertTrue(map.containsKey("b"));
         Map.Entry<String, Integer> e = map.entrySet().iterator().next();
+        Map.Entry<String, Integer> repeated = map.entrySet().iterator().next();
+        assertSame(e, repeated, "the same logical key should reuse its cached API facade");
+        var distinctEntries = map.entrySet().iterator();
+        Map.Entry<String, Integer> first = distinctEntries.next();
+        if (distinctEntries.hasNext()) {
+            assertNotSame(first, distinctEntries.next(), "different keys must not alias one facade");
+        }
         assertEquals(map.get(e.getKey()), e.getValue());
         assertEquals(e.getValue(), e.setValue(57));
         assertEquals(57, map.get(e.getKey()));
