@@ -323,9 +323,10 @@ public class M3FixedHeightLayoutCache extends FixedHeightLayoutCache {
         }
         TreePath changedPath = SwingUtilities2.getTreePath(e, getModel());
         int changedNode = resolve(changedPath, false) ? resNode : 0;
+        // the stock adds treeModel != null && getRoot() == null to changedPath == null; here root != 0
+        // implies a model (rebuild), and getTreePath answers null only for a model without a root
         if (changedNode == root
-                || (changedNode == 0 && ((changedPath == null && treeModel != null)
-                || (changedPath != null && changedPath.getPathCount() <= 1)))) {
+                || (changedNode == 0 && (changedPath == null || changedPath.getPathCount() <= 1))) {
             rebuild(true);
         } else if (changedNode != 0) {
             boolean wasExpanded = expanded(changedNode);
@@ -523,32 +524,36 @@ public class M3FixedHeightLayoutCache extends FixedHeightLayoutCache {
      * The stock expand: the child count is snapshotted now, and rows below the node include the
      * subtrees of children that were expanded while this node was collapsed (the stock
      * setRowAndChildren walks them), so tot is recomputed from the children's tot lanes.
+     * Every caller expands a visible node (ancestors first, as the stock makeVisible), so the stock
+     * {@code isVisible()} test before resetRowSelection always holds.
      */
     private void expand(int n) {
         if (expanded(n) || treeModel.isLeaf(value[n])) {
             return;
         }
-        boolean vis = visible(n);
         flags[n] |= EXPANDED;
         count[n] = treeModel.getChildCount(value[n]);
         fb[n] = null;
         tot[n] = count[n] + fenwickPrefix(n, stateCount[n]);
         propagate(n, tot[n]);
-        if (vis && treeSelectionModel != null) {
+        if (treeSelectionModel != null) {
             treeSelectionModel.resetRowSelection();
         }
     }
 
-    /** The stock collapse: children keep their expanded flags, so tot[n] is kept for a re-expansion. */
+    /**
+     * The stock collapse: children keep their expanded flags, so tot[n] is kept for a re-expansion.
+     * {@code adjust} comes only from setExpandedState, which collapses only a visible path, so the
+     * stock {@code isVisible() && adjustRows} is {@code adjust}.
+     */
     private void collapse(int n, boolean adjust) {
         if (!expanded(n)) {
             return;
         }
-        boolean vis = visible(n);
         int removed = tot[n];
         propagate(n, -removed);
         flags[n] &= ~EXPANDED;
-        if (adjust && vis && removed > 0 && treeSelectionModel != null) {
+        if (adjust && removed > 0 && treeSelectionModel != null) {
             treeSelectionModel.resetRowSelection();
         }
     }

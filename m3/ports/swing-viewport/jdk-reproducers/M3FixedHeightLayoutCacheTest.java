@@ -254,6 +254,16 @@ public class M3FixedHeightLayoutCacheTest {
                     new TreeModelEvent(m, rp)));
             M3VariableHeightLayoutCacheTest.step(out, "removed empty", () -> c.treeNodesRemoved(
                     new TreeModelEvent(m, rp, new int[0], new Object[0])));
+            for (String kind : new String[] {"changed", "inserted", "removed"}) {
+                M3VariableHeightLayoutCacheTest.step(out, kind + " null indices", () -> {
+                    TreeModelEvent e = new TreeModelEvent(m, rp, (int[]) null, null);
+                    switch (kind) {
+                        case "changed" -> c.treeNodesChanged(e);
+                        case "inserted" -> c.treeNodesInserted(e);
+                        default -> c.treeNodesRemoved(e);
+                    }
+                });
+            }
             for (String kind : new String[] {"changed", "inserted", "removed", "structure"}) {
                 M3VariableHeightLayoutCacheTest.step(out, kind + " unknown parent", () -> {
                     TreeModelEvent e = new TreeModelEvent(m, nobody, new int[] {0}, new Object[] {"x"});
