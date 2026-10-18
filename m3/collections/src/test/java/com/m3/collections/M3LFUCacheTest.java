@@ -4,6 +4,7 @@ package com.m3.collections;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -67,17 +68,8 @@ final class M3LFUCacheTest {
         map.put("first", replacementValue);
         Map.Entry<String, Object> refreshed = map.firstEntry();
         assertSame(replacementValue, refreshed.getValue());
-        assertTrue(snapshot != refreshed, "different stored value must have a distinct immutable snapshot");
-        assertSame(snapshot, mapSnapshotForOriginal(snapshot, map, firstValue));
-    }
-
-    private static Map.Entry<String, Object> mapSnapshotForOriginal(
-            Map.Entry<String, Object> original,
-            M3LinkedHashMap<String, Object> map,
-            Object originalValue) {
-        // The original immutable projection is stable even after its backing mapping changes.
-        assertSame(originalValue, original.getValue());
-        assertSame(map, map);
-        return original;
+        assertNotSame(snapshot, refreshed, "different stored value must have a distinct immutable snapshot");
+        assertSame(firstValue, snapshot.getValue(),
+                "a previously returned snapshot must remain detached after map mutation");
     }
 }
