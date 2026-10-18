@@ -15,6 +15,7 @@ import java.util.Objects;
  * Backing arrays are allocated on first insertion; reference-queue ownership is unchanged.
  */
 public final class M3WeakHashMap<K, V> extends M3SlotMap<K, V> {
+    @Override protected boolean cacheEntryFacades() { return false; }
     private static final Object NULL_KEY = new Object();
     private Object[] references = M3SlotArrays.EMPTY_OBJECTS, values = M3SlotArrays.EMPTY_OBJECTS;
     private int[] hashes = M3SlotArrays.EMPTY_INTS;
@@ -58,7 +59,7 @@ public final class M3WeakHashMap<K, V> extends M3SlotMap<K, V> {
     }
     @Override V valueAt(int s) { return M3SlotArrays.get(values, s); }
     @Override V writeAt(int s, V value) { V old = valueAt(s); values[s] = value; return old; }
-    @Override V eraseAt(int s) { return erase(s, true); }
+    @Override V eraseAt(int s) { forgetEntryFacade(keyAt(s)); return erase(s, true); }
     private V erase(int s, boolean structural) {
         if (states[s] != 1) { return null; }
         V old = valueAt(s);
