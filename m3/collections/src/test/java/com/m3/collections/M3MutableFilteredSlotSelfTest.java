@@ -111,7 +111,7 @@ public final class M3MutableFilteredSlotSelfTest {
                 }
                 case 5 -> {
                     Map<Integer, Integer> incoming = batch(key, 4,
-                            key == 12 ? 10 : key + (key % 2 == 0 ? 0 : 1), 6);
+                            key == 12 ? 10 : key + 2, 6);
                     if (incoming.keySet().stream().allMatch(k -> k >= -12 && k < 13)
                             && incoming.keySet().stream().allMatch(k -> (k & 1) == 0)) {
                         expected.putAll(incoming); actual.putAll(incoming);
