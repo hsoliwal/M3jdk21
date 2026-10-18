@@ -1,0 +1,334 @@
+{
+  "source_repository": "hsoliwal/com.synexia",
+  "source_revision": "50f48cbbe11f17fb8dc209bac3812f8940a1e267",
+  "file_family_java_count": 50,
+  "mappings": [
+    {
+      "source": "com.synexia.indexstring.file.MIndexByteFile",
+      "target": "com.m3.file.M3ByteFile",
+      "scope": "FULL_SOURCE_BODY_WITH_EXPLICIT_TYPE_AND_PACKAGE_MAPPING"
+    },
+    {
+      "source": "com.synexia.indexstring.file.MIndexByteFileStreamIndexer",
+      "target": "com.m3.file.M3ByteFileStreamIndexer",
+      "scope": "FULL_SOURCE_BODY_WITH_EXPLICIT_TYPE_AND_PACKAGE_MAPPING"
+    },
+    {
+      "source": "com.synexia.indexstring.file.MIndexFile",
+      "target": "com.m3.file.M3File",
+      "scope": "FULL_SOURCE_BODY_WITH_EXPLICIT_TYPE_AND_PACKAGE_MAPPING"
+    },
+    {
+      "source": "com.synexia.indexstring.file.MIndexFileAttributeOrder",
+      "target": "com.m3.file.M3FileAttributeOrder",
+      "scope": "FULL_SOURCE_BODY_WITH_EXPLICIT_TYPE_AND_PACKAGE_MAPPING"
+    },
+    {
+      "source": "com.synexia.indexstring.file.MIndexFileAttributes",
+      "target": "com.m3.file.M3FileAttributes",
+      "scope": "FULL_SOURCE_BODY_WITH_EXPLICIT_TYPE_AND_PACKAGE_MAPPING"
+    },
+    {
+      "source": "com.synexia.indexstring.file.MIndexFileBuilder",
+      "target": "com.m3.file.M3FileBuilder",
+      "scope": "FULL_SOURCE_BODY_WITH_EXPLICIT_TYPE_AND_PACKAGE_MAPPING"
+    },
+    {
+      "source": "com.synexia.indexstring.file.MIndexFileByteFacts",
+      "target": "com.m3.file.M3FileByteFacts",
+      "scope": "FULL_SOURCE_BODY_WITH_EXPLICIT_TYPE_AND_PACKAGE_MAPPING"
+    },
+    {
+      "source": "com.synexia.indexstring.file.MIndexFileByteFactsSnapshot",
+      "target": "com.m3.file.M3FileByteFactsSnapshot",
+      "scope": "FULL_SOURCE_BODY_WITH_EXPLICIT_TYPE_AND_PACKAGE_MAPPING"
+    },
+    {
+      "source": "com.synexia.indexstring.file.MIndexFileEventReader",
+      "target": "com.m3.file.M3FileEventReader",
+      "scope": "FULL_SOURCE_BODY_WITH_EXPLICIT_TYPE_AND_PACKAGE_MAPPING"
+    },
+    {
+      "source": "com.synexia.indexstring.file.MIndexFileEventSnapshotCollector",
+      "target": "com.m3.file.M3FileEventSnapshotCollector",
+      "scope": "FULL_SOURCE_BODY_WITH_EXPLICIT_TYPE_AND_PACKAGE_MAPPING"
+    },
+    {
+      "source": "com.synexia.indexstring.file.MIndexFileEventWriter",
+      "target": "com.m3.file.M3FileEventWriter",
+      "scope": "FULL_SOURCE_BODY_WITH_EXPLICIT_TYPE_AND_PACKAGE_MAPPING"
+    },
+    {
+      "source": "com.synexia.indexstring.file.MIndexFileFrequencyIndex",
+      "target": "com.m3.file.M3FileFrequencyIndex",
+      "scope": "FULL_SOURCE_BODY_WITH_EXPLICIT_TYPE_AND_PACKAGE_MAPPING"
+    },
+    {
+      "source": "com.synexia.indexstring.file.MIndexFileImage",
+      "target": "com.m3.file.M3FileImage",
+      "scope": "FULL_SOURCE_BODY_WITH_EXPLICIT_TYPE_AND_PACKAGE_MAPPING"
+    },
+    {
+      "source": "com.synexia.indexstring.file.MIndexFileKindIndex",
+      "target": "com.m3.file.M3FileKindIndex",
+      "scope": "FULL_SOURCE_BODY_WITH_EXPLICIT_TYPE_AND_PACKAGE_MAPPING"
+    },
+    {
+      "source": "com.synexia.indexstring.file.MIndexFileLexicon",
+      "target": "com.m3.file.M3FileLexicon",
+      "scope": "FULL_SOURCE_BODY_WITH_EXPLICIT_TYPE_AND_PACKAGE_MAPPING"
+    },
+    {
+      "source": "com.synexia.indexstring.file.MIndexFileLexiconSnapshot",
+      "target": "com.m3.file.M3FileLexiconSnapshot",
+      "scope": "FULL_SOURCE_BODY_WITH_EXPLICIT_TYPE_AND_PACKAGE_MAPPING"
+    },
+    {
+      "source": "com.synexia.indexstring.file.MIndexFileMultiPattern",
+      "target": "com.m3.file.M3FileMultiPattern",
+      "scope": "FULL_SOURCE_BODY_WITH_EXPLICIT_TYPE_AND_PACKAGE_MAPPING"
+    },
+    {
+      "source": "com.synexia.indexstring.file.MIndexFilePattern",
+      "target": "com.m3.file.M3FilePattern",
+      "scope": "FULL_SOURCE_BODY_WITH_EXPLICIT_TYPE_AND_PACKAGE_MAPPING"
+    },
+    {
+      "source": "com.synexia.indexstring.file.MIndexFilePrimitiveSnapshot",
+      "target": "com.m3.file.M3FilePrimitiveSnapshot",
+      "scope": "FULL_SOURCE_BODY_WITH_EXPLICIT_TYPE_AND_PACKAGE_MAPPING"
+    },
+    {
+      "source": "com.synexia.indexstring.file.MIndexFileProjection",
+      "target": "com.m3.file.M3FileProjection",
+      "scope": "FULL_SOURCE_BODY_WITH_EXPLICIT_TYPE_AND_PACKAGE_MAPPING"
+    },
+    {
+      "source": "com.synexia.indexstring.file.MIndexFileProjectionSnapshot",
+      "target": "com.m3.file.M3FileProjectionSnapshot",
+      "scope": "FULL_SOURCE_BODY_WITH_EXPLICIT_TYPE_AND_PACKAGE_MAPPING"
+    },
+    {
+      "source": "com.synexia.indexstring.file.MIndexFileRangeFingerprint",
+      "target": "com.m3.file.M3FileRangeFingerprint",
+      "scope": "FULL_SOURCE_BODY_WITH_EXPLICIT_TYPE_AND_PACKAGE_MAPPING"
+    },
+    {
+      "source": "com.synexia.indexstring.file.MIndexFileRollingIndex",
+      "target": "com.m3.file.M3FileRollingIndex",
+      "scope": "FULL_SOURCE_BODY_WITH_EXPLICIT_TYPE_AND_PACKAGE_MAPPING"
+    },
+    {
+      "source": "com.synexia.indexstring.file.MIndexFileSnapshot",
+      "target": "com.m3.file.M3FileSnapshot",
+      "scope": "FULL_SOURCE_BODY_WITH_EXPLICIT_TYPE_AND_PACKAGE_MAPPING"
+    },
+    {
+      "source": "com.synexia.indexstring.file.MIndexFileSnapshotCodec",
+      "target": "com.m3.file.M3FileSnapshotCodec",
+      "scope": "FULL_SOURCE_BODY_WITH_EXPLICIT_TYPE_AND_PACKAGE_MAPPING"
+    },
+    {
+      "source": "com.synexia.indexstring.file.MIndexFileSourceFacts",
+      "target": "com.m3.file.M3FileSourceFacts",
+      "scope": "FULL_SOURCE_BODY_WITH_EXPLICIT_TYPE_AND_PACKAGE_MAPPING"
+    },
+    {
+      "source": "com.synexia.indexstring.file.MIndexFileSourceFactsImage",
+      "target": "com.m3.file.M3FileSourceFactsImage",
+      "scope": "FULL_SOURCE_BODY_WITH_EXPLICIT_TYPE_AND_PACKAGE_MAPPING"
+    },
+    {
+      "source": "com.synexia.indexstring.file.MIndexFileSourceFactsKey",
+      "target": "com.m3.file.M3FileSourceFactsKey",
+      "scope": "FULL_SOURCE_BODY_WITH_EXPLICIT_TYPE_AND_PACKAGE_MAPPING"
+    },
+    {
+      "source": "com.synexia.indexstring.file.MIndexFileSourceFactsSnapshot",
+      "target": "com.m3.file.M3FileSourceFactsSnapshot",
+      "scope": "FULL_SOURCE_BODY_WITH_EXPLICIT_TYPE_AND_PACKAGE_MAPPING"
+    },
+    {
+      "source": "com.synexia.indexstring.file.MIndexFileSourceFactsStore",
+      "target": "com.m3.file.M3FileSourceFactsStore",
+      "scope": "FULL_SOURCE_BODY_WITH_EXPLICIT_TYPE_AND_PACKAGE_MAPPING"
+    },
+    {
+      "source": "com.synexia.indexstring.file.MIndexFileSpan",
+      "target": "com.m3.file.M3FileSpan",
+      "scope": "FULL_SOURCE_BODY_WITH_EXPLICIT_TYPE_AND_PACKAGE_MAPPING"
+    },
+    {
+      "source": "com.synexia.indexstring.file.MIndexFileSpanSnapshot",
+      "target": "com.m3.file.M3FileSpanSnapshot",
+      "scope": "FULL_SOURCE_BODY_WITH_EXPLICIT_TYPE_AND_PACKAGE_MAPPING"
+    },
+    {
+      "source": "com.synexia.indexstring.file.MIndexFileStreamEvents",
+      "target": "com.m3.file.M3FileStreamEvents",
+      "scope": "FULL_SOURCE_BODY_WITH_EXPLICIT_TYPE_AND_PACKAGE_MAPPING"
+    },
+    {
+      "source": "com.synexia.indexstring.file.MIndexFileStreamIndexer",
+      "target": "com.m3.file.M3FileStreamIndexer",
+      "scope": "FULL_SOURCE_BODY_WITH_EXPLICIT_TYPE_AND_PACKAGE_MAPPING"
+    },
+    {
+      "source": "com.synexia.indexstring.file.MIndexFileTokenKind",
+      "target": "com.m3.file.M3FileTokenKind",
+      "scope": "FULL_SOURCE_BODY_WITH_EXPLICIT_TYPE_AND_PACKAGE_MAPPING"
+    },
+    {
+      "source": "com.synexia.indexstring.file.MIndexFileTokenRange",
+      "target": "com.m3.file.M3FileTokenRange",
+      "scope": "FULL_SOURCE_BODY_WITH_EXPLICIT_TYPE_AND_PACKAGE_MAPPING"
+    },
+    {
+      "source": "com.synexia.indexstring.file.MIndexFileTokenRangeSha256",
+      "target": "com.m3.file.M3FileTokenRangeSha256",
+      "scope": "FULL_SOURCE_BODY_WITH_EXPLICIT_TYPE_AND_PACKAGE_MAPPING"
+    },
+    {
+      "source": "com.synexia.indexstring.file.MIndexFileTokenStore",
+      "target": "com.m3.file.M3FileTokenStore",
+      "scope": "FULL_SOURCE_BODY_WITH_EXPLICIT_TYPE_AND_PACKAGE_MAPPING"
+    },
+    {
+      "source": "com.synexia.indexstring.file.MIndexFileTokenizer",
+      "target": "com.m3.file.M3FileTokenizer",
+      "scope": "FULL_SOURCE_BODY_WITH_EXPLICIT_TYPE_AND_PACKAGE_MAPPING"
+    },
+    {
+      "source": "com.synexia.indexstring.file.MIndexFileUniverseEventReader",
+      "target": "com.m3.file.M3FileUniverseEventReader",
+      "scope": "FULL_SOURCE_BODY_WITH_EXPLICIT_TYPE_AND_PACKAGE_MAPPING"
+    },
+    {
+      "source": "com.synexia.indexstring.file.MIndexFileUniverseEventWriter",
+      "target": "com.m3.file.M3FileUniverseEventWriter",
+      "scope": "FULL_SOURCE_BODY_WITH_EXPLICIT_TYPE_AND_PACKAGE_MAPPING"
+    },
+    {
+      "source": "com.synexia.indexstring.file.MIndexFileUniversePlan",
+      "target": "com.m3.file.M3FileUniversePlan",
+      "scope": "FULL_SOURCE_BODY_WITH_EXPLICIT_TYPE_AND_PACKAGE_MAPPING"
+    },
+    {
+      "source": "com.synexia.indexstring.file.MIndexFileUniverseSnapshot",
+      "target": "com.m3.file.M3FileUniverseSnapshot",
+      "scope": "FULL_SOURCE_BODY_WITH_EXPLICIT_TYPE_AND_PACKAGE_MAPPING"
+    },
+    {
+      "source": "com.synexia.indexstring.file.MIndexFileUniverseSnapshotImage",
+      "target": "com.m3.file.M3FileUniverseSnapshotImage",
+      "scope": "FULL_SOURCE_BODY_WITH_EXPLICIT_TYPE_AND_PACKAGE_MAPPING"
+    },
+    {
+      "source": "com.synexia.indexstring.file.MIndexFileUniverseTokenIndex",
+      "target": "com.m3.file.M3FileUniverseTokenIndex",
+      "scope": "FULL_SOURCE_BODY_WITH_EXPLICIT_TYPE_AND_PACKAGE_MAPPING"
+    },
+    {
+      "source": "com.synexia.indexstring.file.MIndexFileUniverseTokenIndexImage",
+      "target": "com.m3.file.M3FileUniverseTokenIndexImage",
+      "scope": "FULL_SOURCE_BODY_WITH_EXPLICIT_TYPE_AND_PACKAGE_MAPPING"
+    },
+    {
+      "source": "com.synexia.indexstring.file.MIndexFileUniverseTokenRangeSha256",
+      "target": "com.m3.file.M3FileUniverseTokenRangeSha256",
+      "scope": "FULL_SOURCE_BODY_WITH_EXPLICIT_TYPE_AND_PACKAGE_MAPPING"
+    },
+    {
+      "source": "com.synexia.indexstring.file.MIndexFileUniverseTokenSpan",
+      "target": "com.m3.file.M3FileUniverseTokenSpan",
+      "scope": "FULL_SOURCE_BODY_WITH_EXPLICIT_TYPE_AND_PACKAGE_MAPPING"
+    },
+    {
+      "source": "com.synexia.indexstring.file.MappedMIndexFile",
+      "target": "com.m3.file.MappedM3File",
+      "scope": "FULL_SOURCE_BODY_WITH_EXPLICIT_TYPE_AND_PACKAGE_MAPPING"
+    },
+    {
+      "source": "com.synexia.indexstring.file.json.MIndexJsonStructuralIndex",
+      "target": "com.m3.file.json.M3JsonStructuralIndex",
+      "scope": "FULL_SOURCE_BODY_WITH_EXPLICIT_TYPE_AND_PACKAGE_MAPPING"
+    }
+  ],
+  "support_type_mapping": {
+    "MIndexString": "M3FileText",
+    "MIndexStringBuilder": "M3FileTextBuilder",
+    "MIndexStringPool": "M3FileTextPool",
+    "MIndexStringRef": "M3FileTextRef",
+    "MatHash256": "M3Hash256",
+    "IndexResolver": "M3FileResolver",
+    "IndexCoordinateFingerprint": "M3FileCoordinates",
+    "IndexId": "M3FileId",
+    "IndexStringHash": "M3FileHash",
+    "IndexFrozenLongLookup": "M3LongLookup",
+    "IndexTextMetrics": "M3TextMetrics",
+    "MIndexTextPrecomputedFacts": "M3TextFacts",
+    "IndexCharacterFlags": "M3CharacterFlags",
+    "IndexStringNative": "M3FileNative",
+    "IndexTokenizer": "M3FileTextTokenizer",
+    "MIndexPageableTree": "M3PageableTree",
+    "MIndexStringCharsetEncoding": "M3FileCharsetEncoding",
+    "MIndexPageableTreeCursor": "M3PageableTreeCursor",
+    "MIndexJsonStructuralNative": "M3JsonStructuralNative",
+    "IProgressMonitor": "M3ProgressMonitor",
+    "readMIndexFile": "readM3File",
+    "readEmbeddedMIndexFile": "readEmbeddedM3File",
+    "asMIndexString": "asM3String",
+    "MIndexFileEventSnapshotCollector": "M3FileEventSnapshotCollector",
+    "MIndexFileUniverseSnapshot": "M3FileUniverseSnapshot",
+    "MIndexFileUniverseTokenIndexImage": "M3FileUniverseTokenIndexImage",
+    "MIndexFileByteFactsSnapshot": "M3FileByteFactsSnapshot",
+    "MIndexFileSourceFactsSnapshot": "M3FileSourceFactsSnapshot",
+    "MIndexFileSourceFactsImage": "M3FileSourceFactsImage",
+    "MIndexFileUniverseEventWriter": "M3FileUniverseEventWriter",
+    "MIndexFileTokenizer": "M3FileTokenizer",
+    "MIndexFileSnapshot": "M3FileSnapshot",
+    "MIndexFileMultiPattern": "M3FileMultiPattern",
+    "MappedMIndexFile": "MappedM3File",
+    "MIndexFileUniverseTokenSpan": "M3FileUniverseTokenSpan",
+    "MIndexFileSourceFactsStore": "M3FileSourceFactsStore",
+    "MIndexFilePrimitiveSnapshot": "M3FilePrimitiveSnapshot",
+    "MIndexFileLexiconSnapshot": "M3FileLexiconSnapshot",
+    "MIndexFileAttributes": "M3FileAttributes",
+    "MIndexByteFileStreamIndexer": "M3ByteFileStreamIndexer",
+    "MIndexFilePattern": "M3FilePattern",
+    "MIndexFileTokenRangeSha256": "M3FileTokenRangeSha256",
+    "MIndexFileUniverseEventReader": "M3FileUniverseEventReader",
+    "MIndexFileRollingIndex": "M3FileRollingIndex",
+    "MIndexFileSnapshotCodec": "M3FileSnapshotCodec",
+    "MIndexFileSourceFactsKey": "M3FileSourceFactsKey",
+    "MIndexFileImage": "M3FileImage",
+    "MIndexFileSpanSnapshot": "M3FileSpanSnapshot",
+    "MIndexFileStreamEvents": "M3FileStreamEvents",
+    "MIndexFileStreamIndexer": "M3FileStreamIndexer",
+    "MIndexFileFrequencyIndex": "M3FileFrequencyIndex",
+    "MIndexFile": "M3File",
+    "MIndexFileSourceFacts": "M3FileSourceFacts",
+    "MIndexFileTokenKind": "M3FileTokenKind",
+    "MIndexFileUniverseTokenIndex": "M3FileUniverseTokenIndex",
+    "MIndexFileProjectionSnapshot": "M3FileProjectionSnapshot",
+    "MIndexFileByteFacts": "M3FileByteFacts",
+    "MIndexFileLexicon": "M3FileLexicon",
+    "MIndexFileBuilder": "M3FileBuilder",
+    "MIndexFileAttributeOrder": "M3FileAttributeOrder",
+    "MIndexFileUniverseSnapshotImage": "M3FileUniverseSnapshotImage",
+    "MIndexFileProjection": "M3FileProjection",
+    "MIndexFileTokenRange": "M3FileTokenRange",
+    "MIndexFileTokenStore": "M3FileTokenStore",
+    "MIndexFileUniverseTokenRangeSha256": "M3FileUniverseTokenRangeSha256",
+    "MIndexFileRangeFingerprint": "M3FileRangeFingerprint",
+    "MIndexFileUniversePlan": "M3FileUniversePlan",
+    "MIndexFileKindIndex": "M3FileKindIndex",
+    "MIndexFileSpan": "M3FileSpan",
+    "MIndexFileEventReader": "M3FileEventReader",
+    "MIndexByteFile": "M3ByteFile",
+    "MIndexFileEventWriter": "M3FileEventWriter",
+    "MIndexJsonStructuralIndex": "M3JsonStructuralIndex"
+  },
+  "text_rule": "java.lang.String is the sole text payload owner; M3FileText retains only resolver identity and primitive ID/composition metadata; it is not another M3String implementation.",
+  "format_rule": "Binary magic/schema/domain constants remain unchanged; durable files require exact immutable packed-ID coordinate fingerprints; mutable overlay IDs refuse."
+}

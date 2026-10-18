@@ -8374,6 +8374,29 @@
       "target_proof": "m3/tooling/module-packs/collections/build.py",
       "existing_generic_module": "com.m3.collections",
       "optional_exported_package": "com.m3.util"
+    },
+    {
+      "module": "org.m3jdk.file",
+      "mapping": "m3/docs/name-mapping.d/m3-file-nlp-search.json",
+      "intake_mode": "INDEPENDENT_APACHE_MODULE",
+      "receiving_sequence_advanced": false,
+      "canonical_recipe": "com.synexia.m3.M3NlpSearchIntegration20261018",
+      "target_proof": "m3/tooling/module-packs/nlp-search/build.py",
+      "optional_exported_packages": [
+        "com.m3.file",
+        "com.m3.file.json"
+      ]
+    },
+    {
+      "module": "org.m3jdk.tools.search",
+      "mapping": "m3/docs/name-mapping.d/m3-file-nlp-search.json",
+      "intake_mode": "INDEPENDENT_APACHE_MODULE",
+      "receiving_sequence_advanced": false,
+      "canonical_recipe": "com.synexia.m3.M3NlpSearchIntegration20261018",
+      "target_proof": "m3/tooling/module-packs/nlp-search/build.py",
+      "optional_exported_packages": [
+        "org.m3jdk.tools.search"
+      ]
     }
   ]
 }
