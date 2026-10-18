@@ -49,7 +49,11 @@ public final class M3EclipseCoreSelfTest {
                 M3IndexMaskCompactor.Backend.JAVA);
         require(Arrays.equals(javaRows, new int[]{7, 0, -1}),
                 "M3 Java index-mask encounter order and duplicates");
-        if (M3IndexMaskCompactor.nativeAvailable()) {
+        boolean nativePresent = M3IndexMaskCompactor.nativeAvailable();
+        if (Boolean.getBoolean("m3.native.required") && !nativePresent) {
+            throw new AssertionError("existing M3 JNI mask library was required but unavailable");
+        }
+        if (nativePresent) {
             int[] nativeRows = M3IndexMaskCompactor.select(rowIds, stateBytes, 1,
                     M3IndexMaskCompactor.Backend.NATIVE_REQUIRED);
             require(Arrays.equals(javaRows, nativeRows), "existing M3 JNI parity");
