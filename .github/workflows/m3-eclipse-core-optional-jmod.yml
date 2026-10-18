@@ -65,6 +65,32 @@ jobs:
                   assert actual == digest, (file, digest, actual)
           print('EIGHT_EXACT_M3_JAVA_POSTIMAGES')
           PY
+      - name: Verify source seal for strict-warning Builder correction
+        shell: bash
+        run: |
+          set -euxo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          import hashlib
+          root = Path('m3/eclipse/optional-jmod/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-shared-lexicon-builder-explicit-ctor-20261018')
+          rows = [x.split('\\t') for x in (root / 'manifest.tsv').read_text().splitlines()
+                  if x and not x.startswith('#')]
+          assert len(rows) == 1, rows
+          path, before, after, template = rows[0]
+          assert path == 'm3/core/src/com/m3/text/SharedLexiconPrecomputeCatalog.java'
+          fixture = Path('m3/eclipse/optional-jmod/recipe/src/test/resources/com/synexia/rewrite/m3-shared-lexicon-builder-explicit-ctor-20261018/SharedLexiconPrecomputeCatalog.java.before.txt')
+          target = Path(path)
+          postimage = root / template
+          for item in (fixture, target, postimage):
+              assert item.is_file() and not item.is_symlink(), item
+          digest = lambda item: hashlib.sha256(item.read_bytes()).hexdigest()
+          assert digest(fixture) == before, (fixture, before, digest(fixture))
+          assert digest(postimage) == after, (postimage, after, digest(postimage))
+          assert digest(target) in {before, after}, (target, before, after, digest(target))
+          named = Path('m3/eclipse/optional-jmod/recipe/src/main/resources/META-INF/rewrite/m3-shared-lexicon-builder-explicit-ctor-20261018.yml')
+          assert named.is_file() and not named.is_symlink(), named
+          print('EXACT_SHARED_LEXICON_BUILDER_POSTIMAGE_SEAL')
+          PY
       - name: Execute actual canonical OpenRewrite fixed-point and refusal tests
         shell: bash
         run: |
@@ -78,7 +104,7 @@ jobs:
           roots=[ET.parse(x).getroot() for x in r]
           totals={k: sum(int(x.attrib.get(k,0)) for x in roots)
                   for k in ('tests','failures','errors','skipped')}
-          assert totals == {'tests':4,'failures':0,'errors':0,'skipped':0}, totals
+          assert totals == {'tests':8,'failures':0,'errors':0,'skipped':0}, totals
           print('CANONICAL_OPENREWRITE_TESTS_PASSED',totals)
           PY
       - name: Build real target M3File module with Java21 warnings-as-errors
