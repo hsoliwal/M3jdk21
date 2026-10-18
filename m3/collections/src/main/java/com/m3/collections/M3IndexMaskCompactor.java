@@ -85,7 +85,6 @@ public final class M3IndexMaskCompactor {
         Objects.requireNonNull(backend, "backend");
         requireMask(requiredMask);
         requireMask(excludedMask);
-        if ((requiredMask & excludedMask) != 0) return new int[0];
         if (excludedMask == 0) return selectPositions(rowStates, requiredMask, backend);
         if (backend == Backend.NATIVE_REQUIRED) {
             if (!NativeLibrary.AVAILABLE) {
@@ -97,6 +96,7 @@ public final class M3IndexMaskCompactor {
             }
             return selectPositionsMasksNative(rowStates, requiredMask, excludedMask);
         }
+        if ((requiredMask & excludedMask) != 0) return new int[0];
         return selectPositionsJava(rowStates, requiredMask, excludedMask);
     }
 
