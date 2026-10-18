@@ -12,6 +12,8 @@ final class M3ASTBuilder {
     private static final int[] NO_CHILDREN = new int[0];
 
     private final M3ASTPool pool;
+    // The builder is single-thread owned. The pool copies child coordinates immediately.
+    private final int[] oneChild = new int[1];
 
     M3ASTBuilder(M3JsonLimits limits) {
         pool = new M3ASTPool(Objects.requireNonNull(limits, "limits"));
@@ -19,6 +21,12 @@ final class M3ASTBuilder {
 
     int leaf(String kind, String name, String value) {
         return atom(kind, name, value, NO_CHILDREN);
+    }
+
+    /** Avoid one temporary int[1] allocation per JSON field occurrence. */
+    int field(String name, int valueAtomIndex) {
+        oneChild[0] = valueAtomIndex;
+        return pool.intern("FIELD", name, null, oneChild);
     }
 
     /** Child coordinates must already exist in this builder's document. */
