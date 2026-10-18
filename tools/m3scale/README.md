@@ -3,7 +3,7 @@
 **M3JDK21 is the product/runtime owner**, not M3 wrapped around another JDK.
 The first-party canonical Java 21 all-file controller comes unchanged from
 [hsoliwal/synexia-m3scale-apache2#214](https://github.com/hsoliwal/synexia-m3scale-apache2/pull/214),
-exact Git blob `75053bbd47f0b72e981d016f9c349223fb3cf886`. This is a standalone
+exact Git blob `5f3cb6a13cb9bfced77be4b47e103196d7d263fc`. This is a standalone
 developer tool with **no runtime dependency** on Synexia or vendor donors.
 
 The controller scans **every Git-tracked source, test, resource, documentation
