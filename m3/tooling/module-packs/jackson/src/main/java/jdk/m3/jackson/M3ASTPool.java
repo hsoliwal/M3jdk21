@@ -6,7 +6,6 @@
 package jdk.m3.jackson;
 
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.Objects;
 
 /**
@@ -45,7 +44,8 @@ final class M3ASTPool {
     private int[] slots = new int[0];
     private String[] strings = new String[0];
     private long[] textHashes = new long[0];
-    private HashMap<String, Integer> stringsByValue = new HashMap<>();
+    /** Construction-only open-addressed String index: no Map.Entry or boxed coordinates. */
+    private int[] stringSlots = new int[0];
     private int size;
     private int childArenaSize;
     private int stringCount;
@@ -125,6 +125,7 @@ final class M3ASTPool {
         ensureNodeCapacity(size + 1);
         ensureChildCapacity((int) requiredChildren);
         ensureStringCapacity(requiredStrings);
+        ensureStringTableCapacity(requiredStrings);
         ensureTableCapacity(size + 1);
 
         admitString(kind, kindIndex, kindHash);
@@ -160,7 +161,7 @@ final class M3ASTPool {
         structuralHashes = Arrays.copyOf(structuralHashes, size);
         childArena = Arrays.copyOf(childArena, childArenaSize);
         strings = Arrays.copyOf(strings, stringCount);
-        stringsByValue = null;
+        stringSlots = new int[0];
         slots = new int[0];
         textHashes = new long[0];
         sealed = true;
@@ -224,8 +225,39 @@ final class M3ASTPool {
 
     private int lookupString(String value) {
         if (value == null) return NO_STRING;
-        Integer index = stringsByValue.get(value);
-        return index == null ? UNKNOWN_STRING : index;
+        if (stringSlots.length == 0) return UNKNOWN_STRING;
+        int mask = stringSlots.length - 1;
+        int slot = spreadString(value.hashCode()) & mask;
+        while (stringSlots[slot] != 0) {
+            int index = stringSlots[slot] - 1;
+            if (strings[index].equals(value)) return index;
+            slot = (slot + 1) & mask;
+        }
+        return UNKNOWN_STRING;
+    }
+
+    private void ensureStringTableCapacity(int required) {
+        if (required <= (long) stringSlots.length * 65 / 100) return;
+        int capacity = Math.max(16, stringSlots.length);
+        while (required > (long) capacity * 65 / 100) {
+            if (capacity == MAX_TABLE_LENGTH) {
+                throw new IllegalArgumentException("M3 AST string table limit exceeded");
+            }
+            capacity *= 2;
+        }
+        stringSlots = new int[capacity];
+        for (int index = 0; index < stringCount; index++) insertString(index);
+    }
+
+    private void insertString(int index) {
+        int mask = stringSlots.length - 1;
+        int slot = spreadString(strings[index].hashCode()) & mask;
+        while (stringSlots[slot] != 0) slot = (slot + 1) & mask;
+        stringSlots[slot] = index + 1;
+    }
+
+    private static int spreadString(int hash) {
+        return hash ^ (hash >>> 16);
     }
 
     private int nextStringIndex(int additional) {
@@ -248,9 +280,9 @@ final class M3ASTPool {
     private void admitString(String value, int index, long hash) {
         if (index < stringCount) return;
         if (index != stringCount) throw new AssertionError("M3 AST string coordinate order");
-        stringsByValue.put(value, index);
         strings[index] = value;
         textHashes[index] = hash;
+        insertString(index);
         stringCount++;
     }
 
