@@ -128,8 +128,8 @@ final class M3FiveLibraryPreparedRowsTest {
         assertEquals(Arrays.asList(1, 1, 2, 2, null, 1), jdk);
         var jdkMap = image.asJdkMapLastWins();
         assertEquals(2, jdkMap.size());
-        assertEquals(1, jdkMap.get("a"));
-        assertEquals(2, jdkMap.get("b"));
+        assertEquals(Integer.valueOf(1), jdkMap.get("a"));
+        assertEquals(Integer.valueOf(2), jdkMap.get("b"));
         var guavaList = image.asGuavaListMultimap();
         assertEquals(6, guavaList.size());
         assertEquals(Arrays.asList(1, 1, null, 1), guavaList.get("a"));
