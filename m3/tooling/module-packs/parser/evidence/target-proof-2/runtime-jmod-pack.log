@@ -1,0 +1,4 @@
+$ ["/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3","/workspace/scratch/a0f19f379302/M3jdk21/m3/tooling/jmod-recipes/tools/jmod_pack.py","--jdk-home","/workspace/scratch/a0f19f379302/jdk-21.0.12.1+1","--image-tsv","/workspace/scratch/a0f19f379302/parser-target-proof-2/INPUT_JMOD_IMAGE.tsv","--manifest","/workspace/scratch/a0f19f379302/parser-target-proof-2/EMPTY_DESCRIPTOR_MANIFEST.tsv","--layer-root","/workspace/scratch/a0f19f379302/M3jdk21","--out","/workspace/scratch/a0f19f379302/parser-target-proof-2/pack","--legal-notices","/workspace/scratch/a0f19f379302/M3jdk21/m3/tooling/module-packs/parser/legal","--add-modules","java.se,jdk.compiler,jdk.jlink,jdk.jartool,jdk.jdeps"]
+image /workspace/scratch/a0f19f379302/parser-target-proof-2/pack/image modules 28 vendored 1 validate rc 0 
+
+EXIT 0
