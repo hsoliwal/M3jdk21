@@ -140,18 +140,6 @@ public final class M3CollectionSdk {
         return M3MutableFilteredViews.filterEntries(source, predicate);
     }
 
-    /** Preserve the original SortedSet interface and source comparator. */
-    public static <E> SortedSet<E> readOnlyFilteredSortedSet(
-            SortedSet<E> source, Predicate<? super E> predicate) {
-        return M3FilteredViews.filter(source, predicate);
-    }
-
-    /** Preserve the original SortedMap interface and source comparator. */
-    public static <K, V> SortedMap<K, V> readOnlyFilteredSortedMap(
-            SortedMap<K, V> source, BiPredicate<? super K, ? super V> predicate) {
-        return M3FilteredViews.filterEntries(source, predicate);
-    }
-
     public static <K, V> M3TreeMap<K, V> treeMap() { return M3Collections.treeMap(); }
 
     public static <E> M3TreeSet<E> treeSet() { return M3Collections.treeSet(); }

@@ -41,3 +41,17 @@ forEach, Set.spliterator, stream and parallelStream remain interface defaults
 over the guarded iterator, as in the pinned provider.
 Previous passing source-byte receipts precede this dispatch correction; final
 qualification belongs to the root-run targeted discriminator/full provider oracle.
+
+
+Owned M3 list/set-valued maps and bounded protocol closure
+--------------------------------------------------------
+Adapted from Apache Commons Collections 4.5.0, commit
+7f7fb0244abc940a2e9dd28b67508c0483a58c3e. Original ASF headers,
+LICENSE.txt and the existing BidiMap notice remain retained.
+Full source/body pins are recorded in SOURCE_INVENTORY.tsv and the FOSS
+decision ledgers in qualification/owned-apache-multivalue-20261018.
+Modified 2026 by Hitesh Soliwal and Synexia contributors: M3-owned array
+directories/groups/FIFO, own class identities and serialized forms, bounded
+utility atoms, positive count membership and mandatory null validation,
+nonempty logical views preserving raw list aliases. No provider collection
+implementation superclass, stored entry nodes or JDK linked-node owners.
