@@ -44,7 +44,7 @@ abstract class M3OrderedSlotMap<K, V> extends M3SlotMap<K, V> implements Sequenc
         }
         @SuppressWarnings("unchecked") private T endpoint(boolean last, boolean remove) {
             int s = last ? lastSlot() : firstSlot(); if (s < 0) { throw new NoSuchElementException(); }
-            Object value = kind == 0 ? keyAt(s) : kind == 1 ? valueAt(s) : remove ? new SimpleEntry<>(keyAt(s), valueAt(s)) : new LiveEntry(keyAt(s));
+            Object value = kind == 0 ? keyAt(s) : kind == 1 ? valueAt(s) : remove ? new SimpleEntry<>(keyAt(s), valueAt(s)) : liveEntry(keyAt(s));
             if (remove) { eraseAt(s); } return (T) value;
         }
         @Override public T getFirst() { return endpoint(false, false); }
