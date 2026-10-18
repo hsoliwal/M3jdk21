@@ -1,0 +1,16 @@
+# SPDX-License-Identifier: Apache-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.RegexAutomatonCore
+displayName: M3JDK21 regex automaton core (R6 general DFA, Lucene util.automaton TARGET_OWNED_PORT)
+description: >-
+  Adds the R6 general-DFA rung to jdk.internal.mindex: M3Automaton (packed int lanes), M3AutomatonOps
+  (union/concatenation/repetition, work-limited powerset determinization, Hopcroft minimization, reverse,
+  complement over the UTF-16 unit alphabet), M3RegExpCompiler (regular subset of java.util.regex syntax to
+  minimized DFAs; refusals carry a reason so the regex ladder descends), M3RunTable (table-driven run, per-atom
+  transfer elements and their composition, separator presence masks, forward/backward runners) and the
+  M3ChunkCursor contract, ported from the Lucene 9.10.0 automaton core vendored in M3jdk21 with lineage in every
+  file, plus the M3NotYetReceived scaffold marker and two jtreg differentials against java.util.regex.Pattern.
+  Pattern.compile is not wired; the stock engine remains the regex authority.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: m3-regex-automaton-core
