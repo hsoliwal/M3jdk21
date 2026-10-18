@@ -81,3 +81,14 @@ separately; Eclipse's original public interfaces and provider semantics
 must remain stable. The full M3JDK21 modified JDK image, jtreg, native
 platform matrix, actual Eclipse PDE/Tycho launch and performance gates
 are separate and may not be marked passing by this JMOD-only test.
+
+ 
+### Strict Java 21 compiler gate
+
+The real-owner JMOD job exposed a pre-packaging `missing-explicit-ctor` warning in
+the existing exported M3 text catalog's nested `Builder`, promoted to an error by
+the intentional warnings-as-errors policy. The one-line explicit public constructor
+is tracked by a separate canonical Synexia hash-pinned recipe (PR
+https://github.com/hsoliwal/com.synexia/pull/12337) and receiver pin in
+`qualification/SYNEXIA_SHARED_BUILDER_CTOR_RECIPE_PIN.tsv`. Its generated source
+update and exact-head JMOD/JNI rerun remain gated on actual recipe/CI evidence.
