@@ -146,6 +146,7 @@ public final class M3CountedBag<E> extends AbstractCollection<E> {
             private int keyIndex;
             private int remaining;
             private E current;
+            private E delivered;
             private boolean canRemove;
             private void prepare() {
                 verify(expected);
@@ -159,15 +160,17 @@ public final class M3CountedBag<E> extends AbstractCollection<E> {
             @Override public E next() {
                 if (!hasNext()) throw new NoSuchElementException();
                 remaining--;
+                delivered = current;
                 canRemove = true;
-                return current;
+                return delivered;
             }
             @Override public void remove() {
                 verify(expected);
                 if (!canRemove) throw new IllegalStateException("no removable occurrence");
-                removeOccurrences(current, 1);
+                removeOccurrences(delivered, 1);
                 expected = revision;
                 canRemove = false;
+                delivered = null;
             }
         };
     }
