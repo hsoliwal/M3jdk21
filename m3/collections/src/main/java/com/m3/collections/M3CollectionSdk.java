@@ -140,18 +140,6 @@ public final class M3CollectionSdk {
         return M3MutableFilteredViews.filterEntries(source, predicate);
     }
 
-    /** Preserve the original SortedSet interface and source comparator. */
-    public static <E> SortedSet<E> readOnlyFilteredSortedSet(
-            SortedSet<E> source, Predicate<? super E> predicate) {
-        return M3FilteredViews.filter(source, predicate);
-    }
-
-    /** Preserve the original SortedMap interface and source comparator. */
-    public static <K, V> SortedMap<K, V> readOnlyFilteredSortedMap(
-            SortedMap<K, V> source, BiPredicate<? super K, ? super V> predicate) {
-        return M3FilteredViews.filterEntries(source, predicate);
-    }
-
     public static <K, V> M3TreeMap<K, V> treeMap() { return M3Collections.treeMap(); }
 
     public static <E> M3TreeSet<E> treeSet() { return M3Collections.treeSet(); }
@@ -167,5 +155,24 @@ public final class M3CollectionSdk {
             int first, int count, int stride, M3IndexPathMasks.Backend backend) {
         return M3IndexPathMasks.select(rows, physicalOffsets, statePlanes,
                 required, forbidden, first, count, stride, backend);
+    }
+    /** M3 dynamic Object[] list, distinct from the retained JDK ArrayList factory. */
+    public static <E> M3ArrayList<E> m3ArrayList() {
+        return new M3ArrayList<>();
+    }
+
+    /** M3 indexed table: object payloads plus primitive row/column/slot directories. */
+    public static <R, C, V> M3IndexedTable<R, C, V> indexedTable() {
+        return new M3IndexedTable<>();
+    }
+
+    /** M3 multivalue backend: one value lane plus primitive links and unsigned state masks. */
+    public static <K, V> M3IndexedMultiValueMap<K, V> indexedMultiValueMap() {
+        return new M3IndexedMultiValueMap<>();
+    }
+
+    /** M3 signed-long interval set over sorted parallel start/end arrays. */
+    public static M3LongRangeSet longRangeSet() {
+        return new M3LongRangeSet();
     }
 }
