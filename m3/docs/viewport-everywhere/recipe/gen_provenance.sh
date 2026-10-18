@@ -33,3 +33,16 @@ for module in collections viewport-core; do
     printf '  ]\n}\n'
   } > "$out"
 done
+# Name-mapping fragment for the collection owners (m3/collections conventions: type_mappings with source blob).
+frag="$M3/collections/recipe/viewport-everywhere-20261018"
+mkdir -p "$frag"
+{
+  printf '{\n  "package": "com.m3.collections",\n  "scope": "SEPARATE_APACHE_MODULE_NOT_JDK_BACKEND_PROMOTION",\n'
+  printf '  "source_repository": "hsoliwal/eclipse.platform.swt",\n  "source_commit": "%s",\n  "type_mappings": [\n' $SRC
+  awk -F'\t' 'NR>1 && $3=="collections" && $5=="main"' "$MAP" | while IFS=$'\t' read -r cls dir mod target kind; do
+    pkg=$([ $dir = internal ] && echo org.eclipse.swt.internal || echo org.eclipse.swt.widgets)
+    printf '    {"source": "%s.%s", "source_path": "%s", "source_blob_sha1": "%s", "target": "com.m3.collections.%s"},\n' \
+      $pkg $cls "$BASE/$dir/$cls.java" "$(git hash-object "$DONOR/swt/$cls.java")" $target
+  done | sed '$ s/},$/}/'
+  printf '  ]\n}\n'
+} > "$frag/name-mapping.json"

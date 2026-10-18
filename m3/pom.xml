@@ -27,6 +27,7 @@
       <id>m3-extended</id>
       <modules>
         <module>collections</module>
+        <module>viewport-core</module>
       </modules>
     </profile>
     <profile>

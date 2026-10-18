@@ -1,0 +1,16 @@
+{
+  "package": "com.m3.collections",
+  "scope": "SEPARATE_APACHE_MODULE_NOT_JDK_BACKEND_PROMOTION",
+  "source_repository": "hsoliwal/eclipse.platform.swt",
+  "source_commit": "553eefd41d9961d303c41e0e4e181712e64a1e45",
+  "type_mappings": [
+    {"source": "org.eclipse.swt.widgets.VirtualTreeSiblingIndex", "source_path": "bundles/org.eclipse.swt/Eclipse SWT/common/org/eclipse/swt/widgets/VirtualTreeSiblingIndex.java", "source_blob_sha1": "4563f5e6d0d312a548e6728a5707f243173c2f49", "target": "com.m3.collections.M3OrderStatisticForest"},
+    {"source": "org.eclipse.swt.widgets.VirtualRowExtents", "source_path": "bundles/org.eclipse.swt/Eclipse SWT/common/org/eclipse/swt/widgets/VirtualRowExtents.java", "source_blob_sha1": "f0e0143a04c5b9494c7db57b93c32cf4f1704093", "target": "com.m3.collections.M3SparseExtents"},
+    {"source": "org.eclipse.swt.widgets.VirtualCellLanes", "source_path": "bundles/org.eclipse.swt/Eclipse SWT/common/org/eclipse/swt/widgets/VirtualCellLanes.java", "source_blob_sha1": "5f5a1b2a654c5396678c3f13091072b77f788d90", "target": "com.m3.collections.M3ColumnarLanes"},
+    {"source": "org.eclipse.swt.widgets.VirtualBitLanes", "source_path": "bundles/org.eclipse.swt/Eclipse SWT/common/org/eclipse/swt/widgets/VirtualBitLanes.java", "source_blob_sha1": "9c43aa99cbd7d8dabb727d2601e177a6f797de53", "target": "com.m3.collections.M3BitLanes"},
+    {"source": "org.eclipse.swt.widgets.VirtualBlockStore", "source_path": "bundles/org.eclipse.swt/Eclipse SWT/common/org/eclipse/swt/widgets/VirtualBlockStore.java", "source_blob_sha1": "76b640edd3b96518f79bdf83b18b0a18b1b61ac3", "target": "com.m3.collections.M3BlockStore"},
+    {"source": "org.eclipse.swt.widgets.VirtualBlockCache", "source_path": "bundles/org.eclipse.swt/Eclipse SWT/common/org/eclipse/swt/widgets/VirtualBlockCache.java", "source_blob_sha1": "47f6a4797601263a8c507b6f77a6e56969e1762f", "target": "com.m3.collections.M3BlockCache"},
+    {"source": "org.eclipse.swt.widgets.VirtualGrowth", "source_path": "bundles/org.eclipse.swt/Eclipse SWT/common/org/eclipse/swt/widgets/VirtualGrowth.java", "source_blob_sha1": "7ccf8caf6048b04f2b5f3992f6c5dc7c182f569c", "target": "com.m3.collections.M3LaneGrowth"},
+    {"source": "org.eclipse.swt.internal.PackedHeapGrowth", "source_path": "bundles/org.eclipse.swt/Eclipse SWT/common/org/eclipse/swt/internal/PackedHeapGrowth.java", "source_blob_sha1": "82c88d4d5b2517e21694076e5b32c73a4e362fbb", "target": "com.m3.collections.M3HeapGrowth"}
+  ]
+}
