@@ -78,7 +78,7 @@ final class M3FiveProviderCurrentCensusRecipeTest {
         assertFalse(errors.isEmpty(),"unsafe recipe run accepted");
     }
     @Test void namedRecipeDiscovery() {
-        var recipe=Environment.builder().scanClassLoader(getClass().getClassLoader()).build()
+        var recipe=Environment.builder().scanRuntimeClasspath().build()
                 .activateRecipes("com.synexia.m3.FiveProviderCurrentCensus20261017");
         assertTrue(recipe.validateAll().stream().allMatch(v->v.isValid()));
     }
