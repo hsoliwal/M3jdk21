@@ -42,3 +42,10 @@ this proof as an independent job and verifies the checked-out PR head SHA.
 See `LOCAL_VERIFICATION.md` for executed gates and limitations. Source-count assertions from
 Synexia PR #8896 are not established by these collection tests. No JDK class, runtime phase,
 third-party license or whole-corpus acceptance is changed by this handoff.
+
+## Successor owning-module proof
+
+The [full Java/JNI qualification](../full-java-jni-20261018/README.md) repairs the source-JUnit
+bootstrap and runs the owning Maven build in Java and all-native modes. Historical execution
+records here remain attached to their original pass; use the successor receipt for current
+build evidence.
