@@ -96,14 +96,14 @@ in its five-provider INVENTORY as CLAIMED by viewport-everywhere; they do not du
 
 | Wave | Source | M3 owner | What it is | Route |
 |---|---|---|---|---|
-| 1 | VirtualTreeSiblingIndex | **M3OrderStatisticForest** | one AVL order-statistic tree per parent over borrowed `int[]` key and `long[]` weight lanes; nodes are the caller's int ids (no node objects); find/lower/insert/remove/adjust/prefix/total/seek | rename recipe |
-| 1 | VirtualRowExtents | **M3SparseExtents** | variable extents over an implicit estimate: sorted measured ids + Fenwick tree of signed deltas; offsetOf/rowAt/visibleRange/anchored resize | rename recipe |
-| 1 | VirtualCellLanes | **M3ColumnarLanes** | per (field, column) lazy lanes indexed by row; lane allocated on its first non-default value; row/column insert and remove move lanes | rename recipe |
-| 1 | VirtualGrowth | **M3LaneGrowth** | the one growth rule for packed lanes | rename recipe |
-| 1 | PackedHeapGrowth | **M3HeapGrowth** | heap-aware capacity choice, sampled once per miss | rename recipe |
-| 1 | VirtualItemStorage | **M3SparseItemStore** | sparse identity-preserving store of materialized entries with shifting logical indices | rename recipe |
-| 2 | VirtualBitLanes | **M3BitLanes** | per-row bit lanes in `int` words, lazy, word-wise range ops and shifting | rename + `SWT.error` -> `IllegalArgumentException` recipe |
-| 2 | VirtualListWidth | **M3MaxIntLane** | incremental max over an `int` lane with lazy (unmeasured) slots | rename + growth-reference recipe |
+| 1 (done) | VirtualTreeSiblingIndex | **M3OrderStatisticForest** | one AVL order-statistic tree per parent over borrowed `int[]` key and `long[]` weight lanes; nodes are the caller's int ids (no node objects); find/lower/insert/remove/adjust/prefix/total/seek | rename recipe |
+| 1 (done) | VirtualRowExtents | **M3SparseExtents** | variable extents over an implicit estimate: sorted measured ids + Fenwick tree of signed deltas; offsetOf/rowAt/visibleRange/anchored resize | rename recipe |
+| 1 (done) | VirtualCellLanes | **M3ColumnarLanes** | per (field, column) lazy lanes indexed by row; lane allocated on its first non-default value; row/column insert and remove move lanes | rename recipe |
+| 1 (done) | VirtualGrowth | **M3LaneGrowth** | the one growth rule for packed lanes | rename recipe |
+| 1 (done) | PackedHeapGrowth | **M3HeapGrowth** | heap-aware capacity choice, sampled once per miss | rename recipe |
+| 2 (done) | VirtualItemStorage | **M3SparseItemStore** | sparse identity-preserving store of materialized entries with shifting logical indices | rename recipe |
+| 1 (done) | VirtualBitLanes | **M3BitLanes** | per-row bit lanes in `int` words, lazy, word-wise range ops and shifting | rename + `SWT.error` -> `IllegalArgumentException` recipe |
+| 2 (done, in core) | VirtualListWidth | **com.m3.viewport.M3ListWidth** | incremental widest-item index over an `int` lane with lazy slots | rename recipe; kept in viewport-core because it shares the list model's replaceable growth hook (a move into collections would split that hook) |
 | 2 | VirtualTreeResidentPlan map | (reuse) **M3LongLongHashMap** | the `(parentId, childIndex) -> slot` and `handle -> slot` maps, keyed by `key(parentId, childIndex)`; replaces two boxed `HashMap<Long,Integer>` | recipe on the core class; no new type |
 | 3 | Nebula GridRowTree | **M3RowTree** | subtree size, visible count, pixel extent per node | rename + generify (`GridItem` -> type parameter) |
 | 3 | Nebula GridSelectionList | **M3PositionMarkedSelection** | O(1) position-marked selection list | rename + generify |
@@ -128,9 +128,9 @@ and a `name-mapping.json` fragment (`m3/collections/recipe/viewport-everywhere-n
 | 1 | VirtualTreeResidentPlan | M3TreeResidentPlan (diff planner: keep/retire/insert by logical coordinate) |
 | 1 | VirtualTreeViewport | M3TreeViewport |
 | 1 | ViewportScrollLayout, ViewportScrollBarGeometry, ViewportPlaneGeometry | M3ScrollLayout, M3ScrollBarGeometry, M3PlaneGeometry |
-| 2 | VirtualSelectionModel | M3SelectionModel (needs M3BitLanes) |
-| 2 | VirtualViewportPlanner | M3ViewportPlanner |
-| 2 | VirtualListModel | M3ListModel |
+| 1 (done) | VirtualSelectionModel | M3SelectionModel |
+| 1 (done) | VirtualViewportPlanner | M3ViewportPlanner |
+| 2 (done) | VirtualListModel, VirtualListWidth | M3ListModel, M3ListWidth |
 
 The SWT fork keeps its classes. Later, an SWT recipe can switch SWT to the M3 owners; the core is a copy, not a move.
 
@@ -270,3 +270,7 @@ or records why not):
 |---|---|---|
 | inventory | `git ls-tree`, `git show`, `grep -w` over the SWT integration branch | 29 candidate files, 2 internal; dependency table above |
 | authorship | `git log --format=%an` on the candidate paths | 30 commits, all Hitesh Soliwal |
+| wave 1 recipe | `M3BatchApply` with `Wave1Main` / `Wave1Tests`, then pass 2 | 21 main classes + 16 test files; pass 2 UNCHANGED 58/58 |
+| wave 1 build | local reactor `mvn -o verify`, `-Xlint:all,-module -Werror` | BUILD SUCCESS; 151 tests after the direct tests, 0 failures |
+| wave 1 coverage | JaCoCo 0.8.15 agent | 99.96% lines, 99.03% branches (reports were on G:, flagged for regeneration; see `m3/viewport-core/coverage/COVERAGE.md`) |
+| wave 2 recipe | same recipe, 3 more classes + 2 tests | pass 2 UNCHANGED 66/66; build 161 tests, 0 failures; coverage not yet measured on a healthy location |
