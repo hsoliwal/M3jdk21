@@ -46,10 +46,18 @@ import sun.security.action.GetBooleanAction;
  * <p>
  * Exactness: {@link #removeDescendants} removes the same keys as the stock scan, and the order of
  * removals does not change the table's structure (a removal unlinks one entry and never rehashes).
- * {@link #hasExpandedDescendant} only decides that the stock scan would find nothing; when it would
- * find something, the stock scan runs, so the enumeration order stays the table's. Any mutation the
- * index did not see (a view or iterator removal) is detected by the count check and hands every
- * call back to the stock scan. Design and proof: m3/docs/swing-viewport/DESIGN.md section 11.
+ * {@link #hasExpandedDescendant} only decides that the stock scan would find nothing; when it might
+ * find something, the stock scan runs, so the enumeration and its order stay the table's. A JTree
+ * class that overrides {@code getDescendantToggledPaths} keeps a plain {@code Hashtable}
+ * ({@link #accepts}). A mutation the index did not see (none in {@code JTree}, which only calls
+ * {@code get}, {@code put}, {@code remove}, {@code clear} and {@code keys}) makes the key count
+ * differ and hands every call back to the stock scan.
+ * <p>
+ * Precondition, as for the {@code Hashtable} itself: the last component of a path keeps its
+ * {@code hashCode} and {@code equals} while the tree shows it. The index also holds the ancestors
+ * of the keys, so a component whose hash changes while only its descendants are keys can make
+ * {@link #hasExpandedDescendant} answer false where the stock scan, which uses only
+ * {@code equals}, would find a path. Design and proof: m3/docs/swing-viewport/DESIGN.md section 11.
  */
 //FLLDCIM: M3 swing-viewport leaf 5 - JTree expansion table indexed by parent, same table and order
 @SuppressWarnings("serial") // transient in JTree, never serialized
@@ -61,18 +69,26 @@ public final class M3ExpandedState extends Hashtable<TreePath, Boolean> {
     /** Whether a JTree class keeps the stock {@code getDescendantToggledPaths}. */
     private static final ClassValue<Boolean> STOCK_TOGGLED_PATHS = new ClassValue<>() {
         @Override
+        @SuppressWarnings("removal")
         protected Boolean computeValue(Class<?> type) {
-            for (Class<?> c = type; c != null && c != JTree.class; c = c.getSuperclass()) {
-                try {
-                    c.getDeclaredMethod("getDescendantToggledPaths", TreePath.class);
-                    return Boolean.FALSE;
-                } catch (NoSuchMethodException e) {
-                    // not overridden here
-                }
-            }
-            return Boolean.TRUE;
+            return java.security.AccessController.doPrivileged(
+                    (java.security.PrivilegedAction<Boolean>) () -> stockToggledPaths(type));
         }
     };
+
+    private static boolean stockToggledPaths(Class<?> type) {
+        for (Class<?> c = type; c != null && c != JTree.class; c = c.getSuperclass()) {
+            try {
+                c.getDeclaredMethod("getDescendantToggledPaths", TreePath.class);
+                return false;
+            } catch (NoSuchMethodException e) {
+                // not overridden in c
+            } catch (SecurityException | LinkageError e) {
+                return false;
+            }
+        }
+        return true;
+    }
 
     /** A path of the trie: a key of the table ({@code toggled}, {@code path} is then the key instance) or an ancestor of one. */
     private static final class Node {
@@ -95,9 +111,12 @@ public final class M3ExpandedState extends Hashtable<TreePath, Boolean> {
     public M3ExpandedState() {
     }
 
-    /** Whether {@code jtreeClass} keeps the stock {@code getDescendantToggledPaths}. */
-    public static boolean stockToggledPaths(Class<?> jtreeClass) {
-        return STOCK_TOGGLED_PATHS.get(jtreeClass);
+    /**
+     * Whether a {@code JTree} of class {@code jtreeClass} gets this table: the property is set and the
+     * class keeps the stock {@code getDescendantToggledPaths}, which the index replaces.
+     */
+    public static boolean accepts(Class<?> jtreeClass) {
+        return ENABLED && STOCK_TOGGLED_PATHS.get(jtreeClass);
     }
 
     @Override

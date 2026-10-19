@@ -720,7 +720,7 @@ public class JTree extends JComponent implements Scrollable, Accessible
         expandedStack = new Stack<Stack<TreePath>>();
         toggleClickCount = 2;
         expandedState = new Hashtable<TreePath, Boolean>();
-        if (sun.swing.tree.M3ExpandedState.ENABLED) {
+        if (sun.swing.tree.M3ExpandedState.accepts(getClass())) {
             expandedState = new sun.swing.tree.M3ExpandedState();
         }
         setLayout(null);
@@ -3209,7 +3209,7 @@ public class JTree extends JComponent implements Scrollable, Accessible
         // Create an instance of expanded state.
 
         expandedState = new Hashtable<TreePath, Boolean>();
-        if (sun.swing.tree.M3ExpandedState.ENABLED) {
+        if (sun.swing.tree.M3ExpandedState.accepts(getClass())) {
             expandedState = new sun.swing.tree.M3ExpandedState();
         }
 
@@ -3823,8 +3823,7 @@ public class JTree extends JComponent implements Scrollable, Accessible
      protected void
          removeDescendantToggledPaths(Enumeration<TreePath> toRemove)
     {
-         if (toRemove != null && expandedState instanceof sun.swing.tree.M3ExpandedState m3State
-                 && sun.swing.tree.M3ExpandedState.stockToggledPaths(getClass())) {
+         if (toRemove != null && expandedState instanceof sun.swing.tree.M3ExpandedState m3State) {
              while (toRemove.hasMoreElements()) {
                  TreePath path = toRemove.nextElement();
                  if (!m3State.removeDescendants(path)) {
