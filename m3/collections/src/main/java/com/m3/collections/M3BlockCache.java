@@ -3,7 +3,8 @@
  * SPDX-License-Identifier: Apache-2.0
  *
  * Derived by recipe (m3/docs/viewport-everywhere/recipe) from hsoliwal/eclipse.platform.swt 553eefd41d9961d303c41e0e4e181712e64a1e45,
- * VirtualBlockCache.java (EPL-2.0 at source; authority: m3/docs/viewport-everywhere/RELICENSE_RECORD.md).
+ * VirtualBlockCache.java; Apache-2.0 elected from its Apache-2.0 OR EPL-2.0 publication
+ * (m3/docs/viewport-everywhere/LICENSE_ELECTION.tsv).
  */
 package com.m3.collections;
 
