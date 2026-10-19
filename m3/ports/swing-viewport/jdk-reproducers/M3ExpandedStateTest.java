@@ -176,14 +176,13 @@ public class M3ExpandedStateTest {
                     m3.clear();
                 } else {
                     TreePath[] got = m3.expandedKeysBelow(p);
-                    if (got == null) {
-                        ties++;
-                    } else {
-                        answered++;
-                        List<TreePath> want = stockBelow(stock, p);
-                        assertEquals(want.size(), got.length, "round " + round + " op " + op);
-                        for (int i = 0; i < got.length; i++) {
-                            assertSame(want.get(i), got[i]);
+                    answered++;
+                    List<TreePath> want = stockBelow(stock, p);
+                    assertEquals(want.size(), got.length, "round " + round + " op " + op);
+                    for (int i = 0; i < got.length; i++) {
+                        assertSame(want.get(i), got[i], "round " + round + " op " + op + " key " + i);
+                        if (i > 0 && bucket(got[i], m3) == bucket(got[i - 1], m3)) {
+                            ties++;
                         }
                     }
                 }
@@ -192,7 +191,40 @@ public class M3ExpandedStateTest {
                 assertEquals(buckets(stock), buckets(m3));
             }
         }
-        assertTrue(answered > 1000 && ties > 10, answered + " answered, " + ties + " ties");
+        assertTrue(answered > 1000 && ties > 100, answered + " answered, " + ties + " neighbours in one bucket");
+    }
+
+    static int bucket(TreePath p, M3ExpandedState t) {
+        return (p.hashCode() & 0x7FFFFFFF) % t.bucketCount();
+    }
+
+    /** A null key or value never reaches rehash: same exception as Hashtable, same table after it. */
+    @Test
+    void nullKeyOrValueAtTheThreshold() {
+        M3ExpandedState m3 = new M3ExpandedState();
+        Hashtable<TreePath, Boolean> stock = new Hashtable<>();
+        for (int i = 0; i < 8; i++) {
+            TreePath p = new TreePath(new Object[] {"r", "k" + i});
+            stock.put(p, Boolean.TRUE);
+            m3.put(p, Boolean.TRUE);
+        }
+        TreePath fresh = new TreePath(new Object[] {"r", "fresh"});
+        org.junit.jupiter.api.Assertions.assertThrows(NullPointerException.class, () -> m3.put(fresh, null));
+        org.junit.jupiter.api.Assertions.assertThrows(NullPointerException.class, () -> stock.put(fresh, null));
+        org.junit.jupiter.api.Assertions.assertThrows(NullPointerException.class, () -> m3.put(null, Boolean.TRUE));
+        sameKeys(stock, m3);
+        for (int i = 0; i < 30; i++) {
+            TreePath p = new TreePath(new Object[] {"r", "m" + i});
+            stock.put(p, Boolean.TRUE);
+            m3.put(p, Boolean.TRUE);
+        }
+        sameKeys(stock, m3);
+        List<TreePath> want = stockBelow(stock, new TreePath("r"));
+        TreePath[] got = m3.expandedKeysBelow(new TreePath("r"));
+        assertEquals(want.size(), got.length);
+        for (int i = 0; i < got.length; i++) {
+            assertSame(want.get(i), got[i]);
+        }
     }
 
     /** Hashtable's growth rule, including the array limit, and the mirror over 10^5 puts. */
@@ -237,30 +269,43 @@ public class M3ExpandedStateTest {
         assertTrue(m3.removeDescendants(k1), "unknown path");
     }
 
-    /** Two keys in one bucket: their chain order is not mirrored, so the caller runs the stock loop. */
+    /**
+     * Keys in one bucket keep their chain order: newest first, and after each rehash the order in
+     * which rehash moved them. Hashes 3 + 11k all land in bucket 3 of 11; growth to 23, 47 and 95
+     * buckets splits and reverses the chains.
+     */
     @Test
-    void sharedBucketHandsBackToTheStockLoop() {
+    void sharedBucketKeepsTheChainOrder() {
         M3ExpandedState m3 = new M3ExpandedState();
-        Name root = new Name("root");
-        Name a = new Name("a");
-        Name b = new Name("b");
-        a.hash = 3;
-        b.hash = 14;
-        TreePath r = new TreePath(root);
-        m3.put(r, Boolean.TRUE);
-        m3.put(r.pathByAddingChild(a), Boolean.TRUE);
-        assertEquals(1, m3.expandedKeysBelow(r).length);
-        m3.put(r.pathByAddingChild(b), Boolean.TRUE);
-        assertNull(m3.expandedKeysBelow(r), "3 and 14 share bucket 3 of 11");
         Hashtable<TreePath, Boolean> stock = new Hashtable<>();
-        stock.put(r, Boolean.TRUE);
-        stock.put(r.pathByAddingChild(a), Boolean.TRUE);
-        stock.put(r.pathByAddingChild(new Name("b")), Boolean.TRUE);
-        M3ExpandedState m3b = new M3ExpandedState();
-        for (Map.Entry<TreePath, Boolean> e : List.copyOf(stock.entrySet())) {
-            m3b.put(e.getKey(), e.getValue());
+        TreePath r = new TreePath(new Name("root"));
+        for (Hashtable<TreePath, Boolean> t : List.of(stock, m3)) {
+            t.put(r, Boolean.TRUE);
         }
-        assertNotNull(m3b.expandedKeysBelow(new TreePath(root)));
+        TreePath fresh = new TreePath(new Name("root"));
+        for (int i = 0; i < 60; i++) {
+            Name c = new Name("c" + i);
+            c.hash = 3 + 11 * (i % 7) + 23 * (i % 3);
+            TreePath p = r.pathByAddingChild(c);
+            for (Hashtable<TreePath, Boolean> t : List.of(stock, m3)) {
+                t.put(p, Boolean.TRUE);
+            }
+            if (i % 9 == 4) {
+                int j = i / 2;
+                Name g = new Name("c" + j);
+                g.hash = 3 + 11 * (j % 7) + 23 * (j % 3);
+                TreePath gone = r.pathByAddingChild(g);
+                assertEquals(stock.remove(gone), m3.remove(gone));
+            }
+            sameKeys(stock, m3);
+            List<TreePath> want = stockBelow(stock, fresh);
+            TreePath[] got = m3.expandedKeysBelow(fresh);
+            assertEquals(want.size(), got.length);
+            for (int k = 0; k < got.length; k++) {
+                assertSame(want.get(k), got[k], "after " + i + " key " + k);
+            }
+        }
+        assertEquals(95, m3.bucketCount());
     }
 
     /** A removal the index did not see (an entry-set iterator) hands every call back until clear. */
@@ -322,6 +367,13 @@ public class M3ExpandedStateTest {
             TreePath top = new TreePath(x);
             t.put(top, Boolean.TRUE);
             t.remove(below);
+            if (!reattach) {
+                for (int i = 0; i < 10; i++) {
+                    t.put(new TreePath(new Object[] {"z", "z" + i}), Boolean.TRUE);
+                }
+                assertEquals(23, t.bucketCount(), "a rehash with a key the index lost");
+                t.removeDescendants(new TreePath("z"));
+            }
             if (reattach) {
                 t.put(new TreePath(new Object[] {x, "c"}), Boolean.TRUE);
             }
