@@ -66,7 +66,7 @@ public final class M3HfLexiconIntakeProof {
     private static int verifyLanguageResourceDiscovery() throws IOException {
         List<String> lines = resourceLines(
                 "/com/m3/lexicon/hf/language-resource-discovery.tsv");
-        require(lines.size() == 175, "174 language-resource candidates plus header");
+        require(lines.size() == 176, "175 language-resource candidates plus header");
         List<String> expectedHeader = List.of("source_id", "resource", "category",
                 "data_shape_and_identity", "rights_and_attribution", "m3_candidate_use",
                 "admission_blockers", "state", "evidence");
@@ -263,8 +263,9 @@ public final class M3HfLexiconIntakeProof {
                 "polyglotta-africana-cldf-v2-0",
                 "lexik-fr-1-0-2026-10",
                 "ealex-east-african-lexome-2026",
-                "nzonza-cialr-44"
-        )), "exact 174 language-resource source IDs match the pinned catalogue");
+                "nzonza-cialr-44",
+                "dannet-danish-wordnet-2026-08-21"
+        )), "exact 175 language-resource source IDs match the pinned catalogue");
         String massive = discoveryRecord(lines, "massive-nlu-1-1");
         require(massive.contains("52 languages") && massive.contains("SLURP") && massive.contains("CC BY 4.0")
                 && massive.contains("not a canonical dictionary"),
@@ -518,6 +519,14 @@ public final class M3HfLexiconIntakeProof {
         require(langdex.contains("preserve donor IDs and reject ambiguous rows")
                 && langdex.contains("occurrence-coordinate"),
                 "LangDex keeps native IDs and rejects ambiguous row identity");
+        String dannet = discoveryRecord(lines, "dannet-danish-wordnet-2026-08-21");
+        require(dannet.contains("69,851 concepts")
+                && dannet.contains("61,994 lexical entries")
+                && dannet.contains("77,284 lexicalizations")
+                && dannet.contains("CC BY-SA 4.0")
+                && dannet.contains("CILI")
+                && dannet.contains("REFERENCE_ONLY"),
+                "DanNet release, license, concept links and reference-only state stay explicit");
         String worldLanguages = lines.stream().skip(1)
                 .filter(line -> "hf-world-languages-7130".equals(splitTsv(line)[0]))
                 .findFirst().orElse("");
