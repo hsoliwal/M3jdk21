@@ -1,0 +1,96 @@
+{
+  "schema": "spring-value-equality-v1-reproduction",
+  "result": "REPRODUCED_OBSERVABLE_DIFFERENCES",
+  "cases": 6,
+  "differentCases": 2,
+  "differences": [
+    {
+      "case": "same-value-reference",
+      "provider": "same-value-reference\ttrue\t[V:self]\t{A=V}",
+      "owner": "same-value-reference\ttrue\t[]\t{A=V}"
+    },
+    {
+      "case": "two-shared-values",
+      "provider": "two-shared-values\ttrue\t[V:self, V:self]\t{A=V, B=V}",
+      "owner": "two-shared-values\ttrue\t[]\t{A=V, B=V}"
+    }
+  ],
+  "commands": [
+    {
+      "label": "strictcompile",
+      "argv": [
+        "C:\\Program Files\\Java\\jdk-21\\bin\\javac.exe",
+        "-J-Xmx128m",
+        "-J-Xss512k",
+        "-J-XX:ActiveProcessorCount=2",
+        "-J-XX:-UsePerfData",
+        "-J-Djava.io.tmpdir=S:\\codex-work\\m3-collections-next-20261018\\temp",
+        "-J-Duser.home=S:\\codex-work\\m3-collections-next-20261018\\temp",
+        "-J-XX:ErrorFile=S:\\codex-work\\m3-collections-next-20261018\\spring-case-insensitive-map\\equality-review\\hs_err_pid%p.log",
+        "--release",
+        "21",
+        "-g",
+        "-proc:none",
+        "-Xlint:all",
+        "-Werror",
+        "-d",
+        "S:\\codex-work\\m3-collections-next-20261018\\spring-case-insensitive-map\\equality-review\\classes",
+        "S:\\codex-work\\m3-collections-next-20261018\\spring-case-insensitive-map\\equality-review\\SpringMapEqualityProtocol.java"
+      ],
+      "returncode": 0,
+      "stdoutSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "provider-v1",
+      "argv": [
+        "C:\\Program Files\\Java\\jdk-21\\bin\\java.exe",
+        "-Xmx128m",
+        "-Xss512k",
+        "-XX:ActiveProcessorCount=2",
+        "-XX:-UsePerfData",
+        "-Djava.io.tmpdir=S:\\codex-work\\m3-collections-next-20261018\\temp",
+        "-Duser.home=S:\\codex-work\\m3-collections-next-20261018\\temp",
+        "-XX:ErrorFile=S:\\codex-work\\m3-collections-next-20261018\\spring-case-insensitive-map\\equality-review\\hs_err_pid%p.log",
+        "-cp",
+        "S:\\codex-work\\m3-collections-next-20261018\\spring-case-insensitive-map\\equality-review\\classes;C:\\Users\\hsoliwal\\.m2\\repository\\org\\springframework\\spring-core\\6.2.0\\spring-core-6.2.0.jar",
+        "SpringMapEqualityProtocol",
+        "org.springframework.util.LinkedCaseInsensitiveMap"
+      ],
+      "returncode": 0,
+      "stdoutSHA256": "24567875cf56ef67781abeb65a7327019448982286537314854f14761c9aa08f",
+      "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "owner-v1",
+      "argv": [
+        "C:\\Program Files\\Java\\jdk-21\\bin\\java.exe",
+        "-Xmx128m",
+        "-Xss512k",
+        "-XX:ActiveProcessorCount=2",
+        "-XX:-UsePerfData",
+        "-Djava.io.tmpdir=S:\\codex-work\\m3-collections-next-20261018\\temp",
+        "-Duser.home=S:\\codex-work\\m3-collections-next-20261018\\temp",
+        "-XX:ErrorFile=S:\\codex-work\\m3-collections-next-20261018\\spring-case-insensitive-map\\equality-review\\hs_err_pid%p.log",
+        "-cp",
+        "S:\\codex-work\\m3-collections-next-20261018\\spring-case-insensitive-map\\equality-review\\classes;S:\\codex-work\\m3-collections-next-20261018\\spring-case-insensitive-map\\entry-getter-review\\classes-v1",
+        "SpringMapEqualityProtocol",
+        "com.m3.collections.spring.M3LinkedCaseInsensitiveMap"
+      ],
+      "returncode": 0,
+      "stdoutSHA256": "333f97ae11ccafae5556b39ad1d6aadd1351e9b994d24336527185cb23328261",
+      "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "beforeFixSealSHA256": "6e66e47949b3b8b8555df67eff8425026c559fb4cde23614f9b7914d48689223",
+  "storageAfter": {
+    "root": "S:\\codex-work\\m3-collections-next-20261018",
+    "free_bytes": 26182037504,
+    "logical_bytes": 44853555,
+    "cap_bytes": 536870912,
+    "reserve_bytes": 8589934592,
+    "verified_child_temp": "S:\\codex-work\\m3-collections-next-20261018\\temp\\",
+    "C_build_lane": "HELD",
+    "K_temp_lane": "UNAVAILABLE"
+  }
+}
