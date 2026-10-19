@@ -66,7 +66,7 @@ public final class M3HfLexiconIntakeProof {
     private static int verifyLanguageResourceDiscovery() throws IOException {
         List<String> lines = resourceLines(
                 "/com/m3/lexicon/hf/language-resource-discovery.tsv");
-        require(lines.size() == 182, "181 language-resource candidates plus header");
+        require(lines.size() == 187, "186 language-resource candidates plus header");
         List<String> expectedHeader = List.of("source_id", "resource", "category",
                 "data_shape_and_identity", "rights_and_attribution", "m3_candidate_use",
                 "admission_blockers", "state", "evidence");
@@ -270,8 +270,13 @@ public final class M3HfLexiconIntakeProof {
                 "crubadan-hf-character-trigrams-449",
                 "elg-catalogue-release-3-0-2026",
                 "oanc-open-frequency-derivation",
-                "elexis-dictionary-rest-discovery"
-        )), "exact 181 language-resource source IDs match the pinned catalogue");
+                "elexis-dictionary-rest-discovery",
+                "hf-multilingual-frequency-lists",
+                "hf-mlnorm-resources-composite",
+                "hf-multilexnorm2026-full-pub",
+                "hf-nanai-russian-dictionary",
+                "hf-haitian-creole-word-freq"
+        )), "exact 186 language-resource source IDs match the pinned catalogue");
         String massive = discoveryRecord(lines, "massive-nlu-1-1");
         require(massive.contains("52 languages") && massive.contains("SLURP") && massive.contains("CC BY 4.0")
                 && massive.contains("not a canonical dictionary"),
@@ -541,6 +546,27 @@ public final class M3HfLexiconIntakeProof {
         require(afwn.contains("nine languages") && afwn.contains("CC BY 4.0")
                 && afwn.contains("synset"),
                 "African Wordnet release coverage, rights and sense identity remain explicit");
+        String multilingualFrequency = discoveryRecord(lines, "hf-multilingual-frequency-lists");
+        require(multilingualFrequency.contains("five language configurations")
+                && multilingualFrequency.contains("AGPL-3.0")
+                && multilingualFrequency.contains("scraped Netflix subtitles"),
+                "multilingual lemma frequency source and subtitle-rights caveat stay explicit");
+        String mlnormBundle = discoveryRecord(lines, "hf-mlnorm-resources-composite");
+        require(mlnormBundle.contains("17-variety") && mlnormBundle.contains("component-level")
+                && mlnormBundle.contains("not downloaded"),
+                "mlnorm bundle retains component-specific licensing and no-download boundary");
+        String multiLexNorm = discoveryRecord(lines, "hf-multilexnorm2026-full-pub");
+        require(multiLexNorm.contains("share contact information") && multiLexNorm.contains("README is empty")
+                && multiLexNorm.contains("No license"),
+                "gated MultiLexNorm remains inaccessible and unlicensed pending review");
+        String nanai = discoveryRecord(lines, "hf-nanai-russian-dictionary");
+        require(nanai.contains("2,494 unique term IDs") && nanai.contains("887 Nanai translations")
+                && nanai.contains("No source-dictionary"),
+                "Nanai dictionary preserves source identity, missing pairs and rights uncertainty");
+        String haitian = discoveryRecord(lines, "hf-haitian-creole-word-freq");
+        require(haitian.contains("17.9k rows") && haitian.contains("could not be confirmed")
+                && haitian.contains("strictly reference-only"),
+                "Haitian frequency lead remains unverified and reference-only");
         String crubadan = discoveryRecord(lines, "crubadan-hf-character-trigrams-449");
         require(crubadan.contains("449 writing systems") && crubadan.contains("GPL-3.0")
                 && crubadan.contains("ISO 639-3") && crubadan.contains("boundary markers"),
@@ -830,7 +856,7 @@ public final class M3HfLexiconIntakeProof {
         require(Files.isRegularFile(catalogue), "algorithm catalogue exists at Maven invocation root");
         if (!Files.isRegularFile(catalogue)) return 0;
         List<String> lines = Files.readAllLines(catalogue, StandardCharsets.UTF_8);
-        require(lines.size() == 66, "65 algorithm patterns plus header");
+        require(lines.size() == 67, "66 algorithm patterns plus header");
         List<String> header = List.of("problem_category", "discovery_source", "candidate",
                 "decision", "owner_or_reason", "qualification");
         require(!lines.isEmpty() && List.of(splitTsv(lines.getFirst())).equals(header),
@@ -909,15 +935,17 @@ public final class M3HfLexiconIntakeProof {
                 "named_entity_surface_candidate_spans",
                 "unicode_cldr_transliteration_precompute",
                 "orthographic_skeleton_lookup",
-                "privacy_thresholded_search_demand"
-        )), "all 65 algorithm categories match the pinned catalogue");
+                "privacy_thresholded_search_demand",
+                "observed_form_normalization"
+        )), "all 66 algorithm categories match the pinned catalogue");
         for (String category : List.of("spoken_language_phoneme_morphology_alignment",
                 "medical_translation_regression", "low_resource_african_parallel_corpus",
                 "multi_source_parallel_corpus_provenance", "document_level_translation_regression",
                 "named_entity_surface_candidate_spans",
                 "unicode_cldr_transliteration_precompute",
                 "orthographic_skeleton_lookup",
-                "privacy_thresholded_search_demand")) {
+                "privacy_thresholded_search_demand",
+                "observed_form_normalization")) {
             String row = lines.stream().skip(1)
                     .filter(line -> category.equals(splitTsv(line)[0]))
                     .findFirst().orElse("");
@@ -933,6 +961,15 @@ public final class M3HfLexiconIntakeProof {
                 && corpusFields[4].contains("not interchangeable")
                 && corpusFields[5].contains("review each source's terms"),
                 "FineWeb2 remains an evaluated corpus source, not imported lexical frequency");
+        String normalization = lines.stream().skip(1)
+                .filter(line -> "observed_form_normalization".equals(splitTsv(line)[0]))
+                .findFirst().orElse("");
+        String[] normalizationFields = splitTsv(normalization);
+        require(normalizationFields.length == 6 && "EVALUATE_ONLY".equals(normalizationFields[3])
+                && normalizationFields[2].contains("raw-to-normal form")
+                && normalizationFields[4].contains("not translation")
+                && normalizationFields[5].contains("component licenses"),
+                "normalization algorithm evaluation preserves source identity and non-translation semantics");
         return lines.size() - 1;
     }
 

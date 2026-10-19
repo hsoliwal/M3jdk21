@@ -23,7 +23,7 @@ source Synexia owner. Repeated source rows remain separate stable record IDs
 while the downstream M3LEX image may deduplicate identical UTF-16 values.
 
 The companion `language-resource-discovery.tsv` is a searchable,
-release-aware catalogue of 181 **reference-only** candidates.
+release-aware catalogue of 186 **reference-only** candidates.
 An earlier discovery pass added 14 reference-only leads: GATITOS bilingual pairs; Swedish Flex/Kubord frequencies, LEXIN, Parole+ and given-name forms; Linguabase's English lexical graph; Bashkir frequency and n-gram indexes; EuroVoc; Czech MorfFlex; Icelandic DMII; Japanese UniDic; and Taiwan's Taigi dictionary. Every row carries its own version, identity and rights caveats. In particular, noncommercial/share-alike, no-derivatives, component-level licensing, unresolved upstream corpus rights, and release-metadata inconsistencies block payload admission. No data files were downloaded or copied.
  In addition to
 dictionaries, grammar, translation, frequency, names, units and speech sources,
@@ -104,6 +104,9 @@ A follow-on WordNet review records DanNet's 2026-08-21 Danish release: its metad
 
 
 The next internet-source pass adds six reference-only candidates: AIATSIS Austlang for stable Australian language-variety codes and alternate names; the 2022 African Wordnet release for nine South African languages; Hugging Face/NLTK Crúbadán character trigrams for 449 writing systems; ELG Release 3 as a European grammar/lexicon/corpus discovery index; OANC as a source for locally derived, document-aware frequency fixtures; and the ELEXIS dictionary API for federated metadata/entry discovery. Their coordinates remain source-specific. In particular, Crúbadán's Hub card declares GPL-3.0, OANC must not be conflated with ANC Second Release frequency exports, ELG/ELEXIS do not license provider payloads, and Austlang/AfWN attribution and identity coordinates must be retained. All six remain `REFERENCE_ONLY`; no payload was downloaded.
+
+
+The next Hugging Face pass adds five more reference-only records. They cover an AGPL-labelled five-language lemma-frequency release derived from scraped subtitle material; the multi-component mlnorm bundle (normalization dictionaries, benchmark files, Hunspell packages, Leipzig counts and generated definitions) with per-component licenses; its gated MultiLexNorm 2026 upstream, whose files require contact-information sharing and whose card has no README; a Russian–Nanai dictionary conversion with 2,494 source term IDs, 887 missing Nanai forms and no stated data license; and a Haitian Creole frequency-list lead whose card and corpus rights could not be verified. The algorithm catalogue now records observed-form normalization as evaluation-only, distinct from semantic translation. These findings are not payload admissions; no additional files were downloaded.
 
 ## Testing, donor decisions, and limits
 
