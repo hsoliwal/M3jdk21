@@ -219,8 +219,8 @@ method names and lane meanings change only together with a note in this section.
 ## 8. Next leaves
 
 1. Leaf 2 above (done).
-2. `JTree` expansion table: `getExpandedDescendants` and `removeDescendantToggledPaths` iterate the whole table on
-   every expansion; an expanded-path index keyed by parent removes the O(expanded) factor.
+2. `JTree` expansion table (done: leaf 5, section 11): `getExpandedDescendants` and `removeDescendantToggledPaths` iterated the whole table on
+   every expansion; an index by parent with the table's own order mirrored removes the O(expanded) factor.
 3. `BasicTreeUI` paint by row index (inventory OH18 of `m3-swing-awt-viewport.md`): one `TreePath` per painted row only
    where `paintRow` needs it.
 4. JList: prefix sums over `cellHeights` for `getCellBounds` and `convertLocationToRow` (done: leaf 3, section 9),
@@ -228,7 +228,7 @@ method names and lane meanings change only together with a note in this section.
    that list data events touched (done: leaf 4, section 10). An estimated-height lane is a contract change, recorded
    in `ENHANCED_API_MAP.tsv` for the user.
 5. Fix D2 in `DefaultTreeSelectionModel` in the M3 mode, with its own differential.
-6. Default-on switch, together with the SWT `swt.widget.mode` convention, once CI has run make and jtreg.
+6. Default-on switch, together with the SWT `swt.widget.mode` convention, once CI has run make and jtreg (proposal: section 12).
 
 ## 9. Leaf 3: JList row offsets by prefix lane (`sun.swing.list`)
 
@@ -378,3 +378,128 @@ stock / M3; `relayout_*` = one model edit + `getPreferredSize`, median of 11):
 | heap after the first layout | 62.3-63.3 MB | 70.9 MB (+4 MB width lane, +4 MB leaf 3 prefix lane) |
 
 The machine was more loaded than in section 9's run; the stock edit rows there were 360-588 ms single shot.
+
+## 11. Leaf 5: the JTree expansion table indexed by parent (`sun.swing.tree.M3ExpandedState`)
+
+`JTree` keeps every path ever expanded in a `Hashtable<TreePath, Boolean>`. Two of its operations scan the whole
+table with `TreePath.isDescendant`:
+- `getExpandedDescendants(parent)`. `BasicTreeUI` calls it on every expansion, so expanding n nodes costs O(n * table).
+- `removeDescendantToggledPaths`, run for every removed toggled child and on structure changes.
+
+On the deep shape (1,111,111 nodes), stock got through 23,152-30,752 of the 111,111 expansions in the 120 s budget,
+and so did leaves 1-2.
+
+**The table.** With `-Dm3.swing.viewport=true`, `JTree` creates `M3ExpandedState` instead of the plain table, in
+its constructor and in `readObject`. It is the stock `Hashtable`, with the same constructor and the same `put`
+sequence, so `get`, `keys()` and their order are those of stock. Beside it, it keeps:
+- A trie of the keys and their ancestors (`HashMap<TreePath, Node>`: parent, children, toggled), updated by
+  `put`, `remove` and `clear`.
+- The `Hashtable`'s bucket count, mirrored: 11 buckets, then 2n + 1 when a new key arrives and the count has
+  reached 0.75 of the capacity.
+- A stamp per key, whose descending order is the key's position in its bucket's chain. A new entry goes to the head
+  of its chain. `rehash` moves the entries in `keys()` order, each to the head of its new bucket, and the stamps are
+  renumbered in that order.
+
+**The two operations.**
+- `getExpandedDescendants` takes the TRUE keys at or below the parent from the trie, sorted as `keys()` walks them
+  (bucket descending, then stamp descending). It then tests `isVisible` on them in that order, which yields the stock
+  enumeration with the stock elements in the stock order. The parent is skipped by identity, as the stock loop's
+  `path != parent` does, so a fresh path equal to a key returns that key, as in stock.
+- `removeDescendantToggledPaths` removes each path's subtree through the trie. The order of removals does not change
+  the table: a removal unlinks one entry and never rehashes.
+
+**When the stock code still runs:**
+- The `JTree` class overrides `getDescendantToggledPaths`: it keeps a plain `Hashtable`, checked once per class
+  under `doPrivileged`. A class whose methods cannot be resolved also keeps it.
+- A mutation the index did not see. None exists in `JTree`, which only calls `get`, `put`, `remove`, `clear` and
+  `keys`; one would come from reflection or an entry-set iterator. It makes the key count differ, and every call
+  goes back to the stock scan until `clear`.
+
+**Precondition (the one known difference).** As for the `Hashtable` itself, a path's last component must keep its
+`hashCode` and `equals` while the tree shows it. The trie also holds the ancestors of keys, so a component whose
+hash changes while only its descendants are keys can make the index miss keys that the stock loop, which uses only
+`equals`, finds. `M3ExpandedStateTest.changedHashIsTheRecordedPrecondition` records it, and records that the
+cases where the index loses track fall back to the stock loop.
+
+**Algorithm choice (rule 21, `ALGORITHM_CATALOGUE.tsv`, `bench/EXPANSION_TABLE_20261019.tsv`).**
+- Chosen: the trie with mirrored bucket and chain order.
+- Rejected: the first version, which handed bucket ties to the stock scan. 17% of queries tied in the differential,
+  and every re-expansion with 100+ answers tied.
+- Rejected: replacing the table with a sorted or linked map, because it changes the order callers see.
+- Donors: JetBrainsRuntime has nothing to port. Its `jbr21` `JTree` differs only in accessibility, and
+  `DefaultTreeSelectionModel` is identical (`FOSS_REUSE_DECISION.tsv`).
+
+**Hook (recipe-first).** The recipe `M3SwingViewportJTree` makes four insertions into `JTree`: the constructor,
+`readObject`, `getExpandedDescendants` and `removeDescendantToggledPaths`. Pass 1 CHANGED, pass 2 UNCHANGED.
+`JTree`'s two `this-escape` warnings are stock.
+
+| Proof (2026-10-19, JDK 21.0.9, stock + `--patch-module java.desktop`, output on S:) | Result |
+|---|---|
+| `M3JTreeExpansionDifferential 40 300`. Two JTrees on one `DefaultTreeModel`; the stock side overrides `getDescendantToggledPaths` and keeps the plain table. Steps: expand and collapse by path and by row, makeVisible, selection, inserts, removals, subtree moves, structure changes, reloads, new roots, `setModel`, vetoes; every fourth seed uses nodes equal by name with reused names. Compared after every step: table keys, values and order; public queries with fresh paths and with the table's own keys; rows; selection; preferred size; pixels every 10 steps | **40/40 pass, 1,240 equal pixel captures; 130,207 expanded-parent queries answered by the index, 0 by the stock loop** |
+| Planted bugs: parent identity, growth rule, subtree removal without the path, stamp order, no renumbering on rehash | caught: 10, 10, 8, 10 and 7 of 10 seeds fail |
+| `M3ExpandedStateTest` (JUnit 5, 10 tests: 30 x 500 random operations against a plain `Hashtable`, including the bucket count read from `Hashtable.table`; the growth rule to the array limit; parent identity; chains in one bucket across three rehashes; null key or value at the threshold; an unseen removal; the recorded precondition; the class gate; serialization; 20 x 200 differential), under JaCoCo, merged with a flag-off run | **10/10 pass; `M3ExpandedState` 100% lines (136/136), 100% branches (90/90)** |
+| `javac -Xlint:all` | no new warnings |
+| `make`, jtreg | PENDING_CI |
+
+**Benchmark** (`bench/JTREE_EXPANSION_20261019.tsv`, `bench/EXPANSION_TABLE_20261019.tsv`):
+
+| Measure | stock | M3 |
+|---|---:|---:|
+| expand all inner nodes in preorder, deep shape (111,111) | 30,752 done in 120 s (budget) | all in 776 ms (1,226 ms with the stamps, loaded machine) |
+| expand all, wide shape (1,001) | 1,261 ms | 267-301 ms |
+| `getExpandedDescendants` table loop, fresh expansion, 11,111 keys | 755 us | 1.6 us |
+| re-expansion with 1,111 remembered keys | 411 us | 170 us |
+| subtree removal of 1,111 keys (with re-insert) | 779 us | 310 us |
+| memory | table only | about 190 bytes per key more |
+
+## 12. Proposal for the user: from opt-in to default-on (not applied)
+
+Today every M3 path is opt-in (`-Dm3.swing.viewport=true`). This section proposes how it becomes the default, with the
+property kept only as a kill switch. Nothing here is applied yet; the default stays off until the user decides.
+
+**Already in place.** M3jdk21 is the JDK, so the M3 paths are part of `java.desktop`, not a layer beside it:
+- The `sun.swing.tree` and `sun.swing.list` classes are reached from stock entry points (`BasicTreeUI.createLayoutCache`,
+  `BasicListUI.getCellBounds`, `convertLocationToRow` and `updateLayoutState`, the `JTree` constructor and
+  `readObject`) through hooks that a recipe applies (section 7a).
+- Each hook falls through to the unchanged stock code when the property is off, so the off state is the stock JDK by
+  construction.
+- No leaf so far needs JNI or HotSpot changes.
+
+**Gates that stay after the flip.** These are correctness conditions, not part of the opt-in, so they remain:
+
+| Leaf | Path | Stock code still runs when |
+|---|---|---|
+| 1, 2 | `M3VariableHeightLayoutCache`, `M3FixedHeightLayoutCache` | a `BasicTreeUI` subclass overrides `createLayoutCache` |
+| 3 | `M3ListRows` | the UI class is outside `java.desktop`, or `cellHeights` is null |
+| 4 | `M3ListMeasure` | renderer other than `DefaultListCellRenderer`(`.UIResource`), fixed cell height, disabled list, wrapped layout, UI outside `java.desktop` |
+| 5 | `M3ExpandedState` | the `JTree` class overrides `getDescendantToggledPaths`; a table mutation the index did not see (none in `JTree`) |
+
+**Known differences from stock.** Each needs a decision before the flip: accept it as a documented change, make
+M3 match stock, or keep that leaf opt-in.
+
+| Id | Leaf | Difference | Proposal |
+|---|---|---|---|
+| D1 | 1 | stock keeps stale y origins after `treeNodesChanged` under a hidden root; M3 rows stay exact | accept (M3 is right; upstream bug) |
+| D4 | 2 | reproduced on purpose; M3 equals stock | none |
+| leaf 4 | 4 | a value changed without a list data event: stock re-measures it at the next layout, M3 when its row gets an event or all rows are re-measured | accept, documented as a `ListModel` contract requirement; or keep leaf 4 opt-in |
+| leaf 5 | 5 | a path component whose `hashCode` changes while the tree shows it can make the index miss keys the stock loop finds | accept (the stock `Hashtable` breaks under the same misuse) |
+
+**Exit criteria. All must hold before the flip:**
+1. CI builds the JDK (`make images`) from this branch. Today: PENDING_CI.
+2. The jtreg groups `test/jdk/javax/swing` (JTree, JList, JTable, `plaf/basic`, `plaf/metal`, `plaf/nimbus`) and the
+   new reproducers pass with the property true and with it false. The failure lists must equal those of stock.
+3. Every M3 differential is identical to stock under each shipped look and feel (Metal and Nimbus everywhere,
+   Windows, GTK and Aqua on their platforms). Today they run headless under Basic and Metal.
+4. Heap deltas are documented per leaf (leaf 3 +4 MB and leaf 4 +4 MB per 10^6 JList rows; leaf 5 about 190 bytes per
+   expanded path).
+5. The user approves the differences table above.
+
+**Steps (one PR each, recipe first):**
+1. **No behaviour change.** Move the four copies of `ENABLED` (in `M3ListRows`, `M3VariableHeightLayoutCache`,
+   `M3FixedHeightLayoutCache` and `M3ExpandedState`) into one `sun.swing.M3Viewport.ENABLED`, read once.
+2. **CI.** Run step 2 of the exit criteria with the property true. Fix or gate every new failure.
+3. **The look-and-feel matrix** for the differentials (exit criterion 3).
+4. **The flip.** `ENABLED = !"false".equals(property)`. `-Dm3.swing.viewport=false` is the kill switch: it restores
+   every stock path. Release note: what changed, the heap deltas, the differences table, the kill switch.
+5. **Only if CI finds a leaf-specific regression:** one switch per leaf, `m3.swing.viewport.<leaf>=false`, so the
+   other leaves stay on while it is fixed. Not proposed otherwise; one switch is simpler to support.
