@@ -1,0 +1,7 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.donors.ApacheForkM3Parity20261018
+displayName: Admit original renamed and existing M3 circular FIFO parity oracle
+description: Generate test-only Java21 source; no product runtime replacement.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: m3-donors-apache-m3-receiver-20261018
