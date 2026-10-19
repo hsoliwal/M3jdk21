@@ -85,20 +85,49 @@ public final class M3MutableFilteredViews {
             this.allowAdd = allowAdd;
         }
 
+        /** Same bounded/descending array-backed AVL owner as the supplied Set. */
+        @SuppressWarnings("unchecked")
+        private M3TreeMap<E, ?> indexed() {
+            return source instanceof M3TreeSet<?> m3
+                    ? ((M3TreeSet<E>) m3).indexedOwner() : null;
+        }
+
+        private int edge(M3TreeMap<E, ?> owner, boolean first) {
+            int slot = first ? owner.firstSlot() : owner.lastSlot();
+            while (slot >= 0 && !predicate.test(owner.keyAt(slot))) {
+                slot = first ? owner.nextSlot(slot) : owner.previousIndexedSlot(slot);
+            }
+            return slot;
+        }
+
         @Override public Comparator<? super E> comparator() { return source.comparator(); }
 
         @Override public int size() {
+            M3TreeMap<E, ?> owner = indexed();
             int count = 0;
-            for (E value : source) if (predicate.test(value)) count++;
+            if (owner != null) {
+                for (int slot = owner.firstSlot(); slot >= 0; slot = owner.nextSlot(slot)) {
+                    if (predicate.test(owner.keyAt(slot))) count++;
+                }
+            } else {
+                for (E value : source) if (predicate.test(value)) count++;
+            }
             return count;
         }
 
         @Override public boolean isEmpty() {
+            M3TreeMap<E, ?> owner = indexed();
+            if (owner != null) return edge(owner, true) < 0;
             for (E value : source) if (predicate.test(value)) return false;
             return true;
         }
 
         @Override public boolean contains(Object value) {
+            M3TreeMap<E, ?> owner = indexed();
+            if (owner != null) {
+                int slot = owner.findSlot(value);
+                return slot >= 0 && predicate.test(owner.keyAt(slot));
+            }
             if (!source.contains(value)) return false;
             @SuppressWarnings("unchecked") E alias = (E) value;
             // The comparator may equate a query with a different stored
@@ -129,6 +158,13 @@ public final class M3MutableFilteredViews {
         }
 
         @Override public boolean remove(Object value) {
+            M3TreeMap<E, ?> owner = indexed();
+            if (owner != null) {
+                int slot = owner.findSlot(value);
+                if (slot < 0 || !predicate.test(owner.keyAt(slot))) return false;
+                owner.eraseAt(slot);
+                return true;
+            }
             return contains(value) && source.remove(value);
         }
 
@@ -136,6 +172,22 @@ public final class M3MutableFilteredViews {
 
         @Override public boolean removeIf(Predicate<? super E> filter) {
             Objects.requireNonNull(filter, "filter");
+            M3TreeMap<E, ?> owner = indexed();
+            if (owner != null) {
+                boolean modified = false;
+                // Compute successor before deletion; the original M3 AVL
+                // relinks physical offsets without moving the successor slot.
+                for (int slot = owner.firstSlot(); slot >= 0;) {
+                    int next = owner.nextSlot(slot);
+                    E value = owner.keyAt(slot);
+                    if (predicate.test(value) && filter.test(value)) {
+                        owner.eraseAt(slot);
+                        modified = true;
+                    }
+                    slot = next;
+                }
+                return modified;
+            }
             boolean modified = false;
             Iterator<E> cursor = source.iterator();
             while (cursor.hasNext()) {
@@ -152,6 +204,53 @@ public final class M3MutableFilteredViews {
         @Override public Iterator<E> descendingIterator() { return cursor(true); }
 
         private Iterator<E> cursor(boolean descending) {
+            M3TreeMap<E, ?> owner = indexed();
+            if (owner != null) {
+                return new Iterator<>() {
+                    private int pending = descending ? owner.lastSlot() : owner.firstSlot();
+                    private int expected = owner.revision();
+                    private int lastReturned = -1;
+                    private boolean prepared;
+                    private boolean exhausted;
+
+                    private void check() {
+                        if (expected != owner.revision())
+                            throw new ConcurrentModificationException();
+                    }
+                    private void prepare() {
+                        check();
+                        if (prepared || exhausted) return;
+                        while (pending >= 0) {
+                            if (predicate.test(owner.keyAt(pending))) {
+                                prepared = true;
+                                return;
+                            }
+                            pending = descending ? owner.previousIndexedSlot(pending)
+                                    : owner.nextSlot(pending);
+                        }
+                        exhausted = true;
+                    }
+                    @Override public boolean hasNext() { prepare(); return prepared; }
+                    @Override public E next() {
+                        if (!hasNext()) throw new NoSuchElementException();
+                        int slot = pending;
+                        E result = owner.keyAt(slot);
+                        pending = descending ? owner.previousIndexedSlot(slot)
+                                : owner.nextSlot(slot);
+                        prepared = false;
+                        lastReturned = slot;
+                        return result;
+                    }
+                    @Override public void remove() {
+                        check();
+                        if (lastReturned < 0)
+                            throw new IllegalStateException("next required");
+                        owner.eraseAt(lastReturned);
+                        expected = owner.revision();
+                        lastReturned = -1;
+                    }
+                };
+            }
             return new Iterator<>() {
                 private boolean started;
                 private boolean prepared;
@@ -209,6 +308,15 @@ public final class M3MutableFilteredViews {
 
         /** One-seek normal path; recover only invalid bounded-range construction. */
         private E bounded(E query, boolean forward, boolean inclusive) {
+            M3TreeMap<E, ?> owner = indexed();
+            if (owner != null) {
+                int relation = forward ? (inclusive ? 1 : 2) : (inclusive ? -1 : -2);
+                int slot = owner.nearIndexedSlot(query, relation);
+                while (slot >= 0 && !predicate.test(owner.keyAt(slot))) {
+                    slot = forward ? owner.nextSlot(slot) : owner.previousIndexedSlot(slot);
+                }
+                return slot < 0 ? null : owner.keyAt(slot);
+            }
             Iterator<E> cursor;
             try {
                 cursor = forward ? source.tailSet(query, inclusive).iterator()
@@ -235,17 +343,45 @@ public final class M3MutableFilteredViews {
         @Override public E ceiling(E value) { return bounded(value, true, true); }
         @Override public E higher(E value) { return bounded(value, true, false); }
         @Override public E first() {
+            M3TreeMap<E, ?> owner = indexed();
+            if (owner != null) {
+                int slot = edge(owner, true);
+                if (slot < 0) throw new NoSuchElementException();
+                return owner.keyAt(slot);
+            }
             Iterator<E> cursor = iterator();
             if (!cursor.hasNext()) throw new NoSuchElementException();
             return cursor.next();
         }
         @Override public E last() {
+            M3TreeMap<E, ?> owner = indexed();
+            if (owner != null) {
+                int slot = edge(owner, false);
+                if (slot < 0) throw new NoSuchElementException();
+                return owner.keyAt(slot);
+            }
             Iterator<E> cursor = descendingIterator();
             if (!cursor.hasNext()) throw new NoSuchElementException();
             return cursor.next();
         }
-        @Override public E pollFirst() { return poll(iterator()); }
-        @Override public E pollLast() { return poll(descendingIterator()); }
+        @Override public E pollFirst() {
+            M3TreeMap<E, ?> owner = indexed();
+            if (owner == null) return poll(iterator());
+            int slot = edge(owner, true);
+            if (slot < 0) return null;
+            E result = owner.keyAt(slot);
+            owner.eraseAt(slot);
+            return result;
+        }
+        @Override public E pollLast() {
+            M3TreeMap<E, ?> owner = indexed();
+            if (owner == null) return poll(descendingIterator());
+            int slot = edge(owner, false);
+            if (slot < 0) return null;
+            E result = owner.keyAt(slot);
+            owner.eraseAt(slot);
+            return result;
+        }
         private E poll(Iterator<E> cursor) {
             if (!cursor.hasNext()) return null;
             E selected = cursor.next();
