@@ -490,7 +490,10 @@ M3 match stock, or keep that leaf opt-in.
 | D4 | 2 | reproduced on purpose; M3 equals stock | none |
 | leaf 4 | 4 | a value changed without a list data event: stock re-measures it at the next layout, M3 when its row gets an event or all rows are re-measured | accept, documented as a `ListModel` contract requirement; or keep leaf 4 opt-in |
 | leaf 5 | 5 | a path component whose `hashCode` changes while the tree shows it can make the index miss keys the stock loop finds | accept (the stock `Hashtable` breaks under the same misuse) |
-Already unconditional, so they apply whichever way the user decides: D3 (JDK-8299722, `DefaultRowSorter.getComparator`)and D2 (`insureRowContinuity`). Both turned an exception into the documented result.
+
+Already unconditional, so they apply whichever way the user decides: D3 (JDK-8299722,
+`DefaultRowSorter.getComparator`) and D2 (`insureRowContinuity`). Both turned an exception into the documented
+result.
 
 **Exit criteria. All must hold before the flip:**
 1. CI builds the JDK (`make images`) from this branch. Today: PENDING_CI.
