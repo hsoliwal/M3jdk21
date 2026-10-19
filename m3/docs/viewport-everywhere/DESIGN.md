@@ -316,3 +316,37 @@ The collections-superset INVENTORY lists all of these as first-party viewport ty
 - Swing/SwingX/IntelliJ: M3FlatteningView plus M3SparseExtents for layout.
 - AWT: M3WindowView over the item lane.
 - RWT: M3WindowView over the server-side flattening.
+
+## 12. In-place landing plan (user, 2026-10-19: "this is M3Jdk21, not m3 + jdk")
+
+`m3/collections` and `m3/viewport-core` are the proving ground only. The destination is in place in the JDK:
+- the collection views land in **java.base**, package `jdk.internal.util.m3`, with a qualified export to
+  java.desktop added in `java.base/module-info.java`;
+- the adapters land in **java.desktop**, package `sun.swing.viewport`, next to the Swing agent's `sun.swing.tree`
+  caches.
+
+Every copy is TARGET_OWNED_PORT under the OpenJDK GPLv2+CPE header. The Synexia/SWT/Nebula lineage (source blob,
+proving-ground class, recipe) goes in the name-mapping. Delivery is by `M3JdkHandoff` recipe packets: hash-pinned
+preimage/postimage, recipe-applied, second pass UNCHANGED. JNI/HotSpot changes are allowed where a view needs VM
+cooperation; heap headroom for the growth rules is the only candidate so far.
+
+| Proving-ground class | JDK target (module / package) | Consumer inside the JDK | Packet |
+|---|---|---|---|
+| M3LaneGrowth, M3HeapGrowth, M3WarmHeapGrowth, M3HeapSampler | java.base / jdk.internal.util.m3 | lane growth beside `jdk.internal.util.ArraysSupport.newLength`; heap headroom could come from HotSpot instead of `Runtime` sampling (VM cooperation, optional) | 1 |
+| M3BitLanes, M3OrderStatisticForest, M3SparseExtents, M3ColumnarLanes | java.base / jdk.internal.util.m3 | `sun.swing.tree` layout caches (sibling forest, Fenwick extents); `javax.swing.JTable` row heights (`SizeSequence` path); `BasicListUI` cell heights; packed table models | 1 |
+| M3RangeSet (+ M3WindowRuntime.Selection) | java.base / jdk.internal.util.m3 | `javax.swing.DefaultListSelectionModel` (BitSet today) in M3 mode; `java.awt.List` selection | 2 |
+| M3WindowRuntime, M3WindowPlan, M3WindowView, M3WindowPlanner | java.base / jdk.internal.util.m3 | `java.awt.List` viewport (A2); `BasicListUI`/`BasicTableUI` paint-range window; `JViewport` row windows | 2 |
+| M3ListDiff, M3Patch | java.base / jdk.internal.util.m3 | minimal `ListDataEvent`/`TableModelEvent` intervals for bulk model replacement (`DefaultListModel`, `AbstractTableModel`) | 2 |
+| M3BoundedCache, M3BlockCache, M3BlockStore, M3SparseItemStore | java.base / jdk.internal.util.m3 | renderer/measurement caches in `BasicListUI`/`BasicTreeUI`; lazy item facades (residency) | 2 |
+| M3TreeTopology, M3TreeProjection, M3FlatteningView, M3TreeWindow, M3TreeWindowPlan, M3ItemState | java.base / jdk.internal.util.m3 | `javax.swing.tree` layout caches (alternative to `VariableHeightLayoutCache`), `JXTreeTable`-style hierarchical columns | 3 |
+| M3ScrollMetrics, M3ScrollLayout, M3ScrollBarGeometry, M3PlaneGeometry | java.base / jdk.internal.util.m3 | `ScrollPaneLayout`, `JScrollBar`/`BoundedRangeModel` for row counts beyond `int` | 3 |
+| M3ListModel, M3ListWidth | java.desktop / sun.swing.viewport | `BasicListUI` widest-cell width; `java.awt.List` preferred size (A1) | 4 |
+| M3RowHost, M3RowEvents, M3RowPainter | java.desktop / sun.swing.viewport | the AWT/Swing adapter seam; `M3Java2DRowPainter` | 4 |
+| M3RowTree, M3PositionMarkedSelection, M3CellSelectionCounts, M3RowIndex, M3RowTreeItem, M3SelectionItem, M3CellPoint | stay in m3/collections (Apache) | Nebula Grid (outside the JDK); no JDK consumer yet | - |
+
+Handoff order: packets 1 -> 2 -> 3 land in java.base, each with a jtreg/JUnit differential (stock JDK behaviour
+unchanged when the M3 mode is off). Packet 4 lands in java.desktop together with the first consumer receiver (AWT A1
+hook in `java.awt.List`). Swing receivers follow, coordinated with the M3JDK Swing agent (`sun.swing.tree`, PR #1423).
+The relicence of the Apache-2.0 proving-ground copies into GPLv2+CPE needs the same explicit record as the
+item-residency engine (`m3/docs/m3-item-residency-explicit-relicense.md`). The rights holder is the same person for
+every listed class, see `LICENSE_ELECTION.tsv`.
