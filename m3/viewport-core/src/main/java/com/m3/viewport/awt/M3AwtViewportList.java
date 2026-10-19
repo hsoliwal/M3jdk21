@@ -198,16 +198,15 @@ public final class M3AwtViewportList extends Panel implements ItemSelectable {
 		return multipleMode;
 	}
 
-	/** Switches the selection mode; leaving multiple mode keeps only the lowest selected row. */
+	/**
+	 * Switches the selection mode. Leaving multiple mode clears the selection, as the displayed stock list does
+	 * (measured with {@code M3AwtListDifferential} on win32).
+	 */
 	public synchronized void setMultipleMode (boolean b) {
 		if (b == multipleMode) return;
 		multipleMode = b;
 		plane.setMultipleMode (b);
-		if (!b && selection.selectedCount () > 1) {
-			int keep = selection.toArray () [0];
-			selection.clear ();
-			selection.setSelected (keep, true);
-		}
+		if (!b) selection.clear ();
 		syncSelection ();
 	}
 
