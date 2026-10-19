@@ -46,8 +46,8 @@ public final class @CLASS@ {
 @DEMO@
     }
 
-    /** Stores {@code n} elements. */
-    private static void fill(@TYPE@ m, int n) {
+    /** Stores up to {@code n} elements and returns how many it stored. */
+    private static int fill(@TYPE@ m, int n) {
 @FILL@
     }
 
@@ -58,7 +58,7 @@ public final class @CLASS@ {
 
     private static void compare(String who, Supplier<@TYPE@> make) {
         @TYPE@ m = make.get();
-        fill(m, ELEMENTS);
+        int stored = fill(m, ELEMENTS);
         com.sun.management.ThreadMXBean bean = (com.sun.management.ThreadMXBean) ManagementFactory.getThreadMXBean();
         long id = Thread.currentThread().threadId();
         Integer k = BOXES[7];
@@ -73,9 +73,9 @@ public final class @CLASS@ {
             fill(copy, ELEMENTS);
             hold[c] = copy;
         }
-        double perElement = (usedAfterGc() - base) / ((double) COPIES * ELEMENTS);
+        double perElement = (usedAfterGc() - base) / ((double) COPIES * stored);
         Reference.reachabilityFence(hold);
-        LOG.info(String.format("%s allocation %.1f B/op, footprint %.1f B/element (%d elements x %d copies)", who, perOp, perElement, ELEMENTS, COPIES));
+        LOG.info(String.format("%s allocation %.1f B/op, footprint %.1f B/element (%d elements x %d copies)", who, perOp, perElement, stored, COPIES));
     }
 
     private static long usedAfterGc() {
