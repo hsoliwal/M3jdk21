@@ -36,6 +36,7 @@ jobs:
           mkdir -p "$OUT/bitmap" "$OUT/hist" "$OUT/native" "$OUT/headers"
           javac --release 21 -proc:none -Xlint:all -Werror -d "$OUT/bitmap" \
             "$SRC/M3LongCollection.java" "$SRC/M3LongIterator.java" \
+            "$SRC/M3LongAddressKernel.java" "$SRC/M3IndexPathMasks.java" \
             "$SRC/M3LongIndexProjection.java" "$SRC/M3IndexMaskCompactor.java" \
             "$SRC/M3LongBitmapFilteredSnapshot.java" \
             "$TEST/M3LongBitmapFilteredSnapshotSelfTest.java"
