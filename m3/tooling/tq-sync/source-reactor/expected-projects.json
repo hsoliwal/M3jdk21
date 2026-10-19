@@ -1,8 +1,8 @@
 {
   "schema": 1,
-  "evidenceState": "SOURCE_INVENTORY_NOT_EXECUTED",
+  "evidenceState": "CURRENT_RECEIVER_EXACT_MAVEN_3_10_MODEL_REQUALIFICATION_PENDING",
   "targetRepository": "hsoliwal/M3jdk21",
-  "targetCommit": "a3e88976ee8664d1ef5d0cade96aec1206b2133d",
+  "targetCommit": "a7cfe4931f2258e01b3fd129db518ade6fbb4ff4",
   "vendorAggregator": {
     "path": "m3/vendor/third_party/pom.xml",
     "pomBlob": "287d47d2c44749f0d4d0cf903002137b11a50a4b",
@@ -53,7 +53,7 @@
     },
     {
       "module": "apiguardian-api",
-      "pomBlob": "6538a4c5e7c12f3d51c125e6cad5d6bf0c141279",
+      "pomBlob": "cbeafd81a00611494595a47726b6a807d65f1f11",
       "gav": "org.apiguardian:apiguardian-api:1.1.2-m3-source-1"
     },
     {
@@ -652,7 +652,7 @@
     },
     {
       "module": "apiguardian-api",
-      "pomBlob": "6538a4c5e7c12f3d51c125e6cad5d6bf0c141279",
+      "pomBlob": "cbeafd81a00611494595a47726b6a807d65f1f11",
       "gav": "org.apiguardian:apiguardian-api:1.1.2-m3-source-1"
     },
     {

@@ -1,10 +1,10 @@
 {
   "schema": 1,
   "repository": "hsoliwal/com.synexia",
-  "sourceCommit": "4b89cc8af1fd70f081a50ffb151a767d6039d85f",
+  "sourceCommit": "7f034c7d526c2486fe43e8470a082af5dbcd8a12",
   "sourcePullRequest": 12447,
   "receiverRepository": "hsoliwal/M3jdk21",
-  "receiverBase": "a3e88976ee8664d1ef5d0cade96aec1206b2133d",
+  "receiverBase": "a7cfe4931f2258e01b3fd129db518ade6fbb4ff4",
   "mode": "INDEPENDENT_APACHE_MODULE",
   "payload": "Canonical first-party Maven recipe authoring/proof inputs only; no generated product postimages.",
   "files": [
@@ -17,8 +17,8 @@
     {
       "sourcePath": "synexia-openrewrite-recipes/tasks/source-qualified-tq-reactor-20261019/recipe/expected-projects.json",
       "targetPath": "m3/tooling/tq-sync/source-reactor/expected-projects.json",
-      "gitBlob": "8c33eaac82b481fda334bf4fd529e2a2a293e269",
-      "bytes": 35243
+      "gitBlob": "a26f46ef0c9b70a175b82609b5a8e42bdc381185",
+      "bytes": 35277
     },
     {
       "sourcePath": "synexia-openrewrite-recipes/tasks/source-qualified-tq-reactor-20261019/recipe/pom.xml",
@@ -41,5 +41,5 @@
   ],
   "runtimeApplied": false,
   "phaseAdvanced": false,
-  "qualification": "PENDING_ACTUAL_EXACT_MAVEN_3_10_MODEL_ONLY; historical3.9 NOT_RUN; no compilation/JUnit/native/original-model claims"
+  "qualification": "CURRENT_RECEIVER_REQUALIFICATION_PENDING_ACTUAL_EXACT_MAVEN_3_10_MODEL_ONLY; historical pass remains head-specific; no source compile/JUnit/native/original-model claim."
 }

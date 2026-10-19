@@ -113,26 +113,142 @@ jobs:
         run: |
           set -euo pipefail
           python3 -I -S -B - <<'PY'
-          import hashlib,json,os,pathlib,re,shutil,signal,subprocess,time
+          import errno,hashlib,json,os,pathlib,re,shutil,signal,subprocess,time
           reserve,cap=8*1024**3,512*1024**2
           root=pathlib.Path(os.environ["M3_PROOF_ROOT"])
           source=pathlib.Path(os.environ["M3_SOURCE_ROOT"])
+          bundle=root/"artifacts";bundle.mkdir(exist_ok=False)
           start=time.monotonic()
-          def traversal_error(error):raise RuntimeError("storage census failed") from error
+          admitted_clean_targets={}
+          admitted_clean_gavs={}
+          active_command=None
+          class CensusRescan(RuntimeError):pass
+          def traversal_error(error):
+              if error.errno==errno.ENOENT and error.filename and active_command=="producer-install":
+                  state_path=bundle/"producer-witnesses.json"
+                  if state_path.is_file() and not state_path.is_symlink():
+                      state=json.loads(state_path.read_bytes())
+                      order=state.get("nativeOrder",[])
+                      rows=state.get("producers",[])
+                      if len(order)!=57 or len(set(order))!=57 or set(order)!=set(admitted_clean_gavs.values()) or not isinstance(rows,list) or len(rows)>57:
+                          raise RuntimeError("native clean census witness order invalid") from error
+                      targets=[]
+                      for index,row in enumerate(rows):
+                          module=row.get("module")
+                          coordinate=row.get("gav")
+                          if module not in admitted_clean_targets or coordinate!=admitted_clean_gavs[module] or coordinate!=order[index]:
+                              raise RuntimeError("native clean census witness prefix invalid") from error
+                          for phase in ("install","clean"):
+                              event=row.get(phase,{})
+                              if event.get("exitCode")!=0 or event.get("selectedGav")!=coordinate or event.get("log")!="producer-"+phase+".log":
+                                  raise RuntimeError("native clean census lifecycle invalid") from error
+                          if row.get("targetAbsentAfterNativeClean") is not True or row.get("installedHashesUnchangedAfterNativeClean") is not True:
+                              raise RuntimeError("native clean census completion invalid") from error
+                          targets.append(admitted_clean_targets[module])
+                      if state.get("activePhase")=="CLEAN":
+                          module=state.get("activeModule")
+                          pending=state.get("pendingProducer") or {}
+                          event=pending.get("install",{})
+                          if module not in admitted_clean_targets or len(rows)>=57 or pending.get("module")!=module or pending.get("gav")!=order[len(rows)] or pending.get("gav")!=admitted_clean_gavs[module] or event.get("exitCode")!=0 or event.get("selectedGav")!=pending.get("gav") or event.get("log")!="producer-install.log":
+                              raise RuntimeError("active native clean census identity invalid") from error
+                          targets.append(admitted_clean_targets[module])
+                      missing=pathlib.Path(error.filename)
+                      if missing.is_absolute() and any(missing==target or target in missing.parents for target in targets):
+                          raise CensusRescan("admitted native clean changed its target") from error
+              raise RuntimeError("storage census failed: "+str(error)) from error
           def gate(limit=480*1024**2):
-              used=0
-              for base in (pathlib.Path(os.environ["RUNNER_TEMP"]),source):
-                  if not base.is_dir() or base.is_symlink():raise RuntimeError("missing/redirected storage")
-                  for folder,names,files in os.walk(base,followlinks=False,onerror=traversal_error):
-                      for name in names+files:
-                          try:info=os.lstat(pathlib.Path(folder)/name)
-                          except FileNotFoundError:continue
-                          used+=max(info.st_size,info.st_blocks*512)
-              if used>limit:raise RuntimeError("512MiB aggregate task limit (32MiB artifact reserve)")
+              for attempt in range(3):
+                  used=0
+                  try:
+                      for base in (pathlib.Path(os.environ["RUNNER_TEMP"]),source):
+                          if not base.is_dir() or base.is_symlink():raise RuntimeError("missing/redirected storage")
+                          for folder,names,files in os.walk(base,followlinks=False,onerror=traversal_error):
+                              for name in names:
+                                  try:info=os.lstat(pathlib.Path(folder)/name)
+                                  except OSError as error:traversal_error(error)
+                                  used+=max(info.st_size,info.st_blocks*512)
+                              for name in files:
+                                  try:info=os.lstat(pathlib.Path(folder)/name)
+                                  except FileNotFoundError:continue
+                                  except OSError as error:traversal_error(error)
+                                  used+=max(info.st_size,info.st_blocks*512)
+                  except CensusRescan:
+                      if attempt==2:raise RuntimeError("storage census unstable after three full rescan attempts")
+                      continue
+                  break
+              if used>limit:raise RuntimeError("512MiB aggregate task limit: observed="+str(used)+" limit="+str(limit)+" bytes (32MiB artifact reserve)")
               for base in (root,source):
                   st=os.statvfs(base)
-                  if st.f_bavail*st.f_frsize<reserve+cap-used:raise RuntimeError("8GiB-after-output reserve")
+                  available=st.f_bavail*st.f_frsize
+                  required=reserve+cap-used
+                  if available<required:raise RuntimeError("8GiB-after-output reserve: observed="+str(available)+" required="+str(required)+" bytes")
               return used
+          def storage_guard_discriminators():
+              # Exercise this same gate with mocked metadata; no real files or targets change.
+              from types import SimpleNamespace
+              from unittest.mock import patch
+              global active_command
+              previous_command=active_command
+              order=list(admitted_clean_gavs.values())
+              module=next(iter(admitted_clean_gavs))
+              target=admitted_clean_targets[module]
+              coordinate=admitted_clean_gavs[module]
+              event=lambda phase:{"exitCode":0,"selectedGav":coordinate,"log":"producer-"+phase+".log"}
+              pending={"module":module,"gav":coordinate,"install":event("install")}
+              completed={**pending,"clean":event("clean"),"targetAbsentAfterNativeClean":True,"installedHashesUnchangedAfterNativeClean":True}
+              cases=[]
+              def exercise(name,kind,state=None,expected=None,repeat=False,size=0,available=None):
+                  counts={"walks":0,"stats":0}
+                  missing=source/"ordinary-output.txt" if kind=="file" else target if kind=="target" else root/"m2/missing-directory" if kind=="m2" else source/"src"
+                  owner=pathlib.Path(os.environ["RUNNER_TEMP"]) if kind=="m2" else source
+                  def walk(base,**options):
+                      if pathlib.Path(base)!=owner:return iter(())
+                      counts["walks"]=counts["walks"]+1
+                      return iter([(str(missing.parent),[missing.name] if kind!="file" else [],[missing.name] if kind=="file" else [])])
+                  def lstat(path):
+                      counts["stats"]=counts["stats"]+1
+                      if kind=="permission":raise PermissionError(errno.EACCES,"denied",str(path))
+                      if kind=="file" or kind in ("target","other","m2") and (repeat or counts["stats"]==1):
+                          raise FileNotFoundError(errno.ENOENT,"gone",str(path))
+                      return SimpleNamespace(st_size=size,st_blocks=0)
+                  free=reserve+cap if available is None else available
+                  patches=[patch.object(os,"walk",walk),patch.object(os,"lstat",lstat),
+                           patch.object(os,"statvfs",lambda path:SimpleNamespace(f_bavail=free,f_frsize=1)),
+                           patch.object(pathlib.Path,"is_dir",lambda path:True),
+                           patch.object(pathlib.Path,"is_file",lambda path:True),
+                           patch.object(pathlib.Path,"is_symlink",lambda path:False),
+                           patch.object(pathlib.Path,"read_bytes",lambda path:json.dumps(state or {}).encode("utf-8"))]
+                  from contextlib import ExitStack
+                  with ExitStack() as stack:
+                      for item in patches:stack.enter_context(item)
+                      try:gate()
+                      except RuntimeError as error:
+                          if expected is None or expected not in str(error):raise AssertionError(name+" rejected incorrectly") from error
+                      else:
+                          if expected is not None:raise AssertionError(name+" unexpectedly admitted")
+                  if name in ("active-clean-rescan","completed-prefix-rescan") and counts["walks"]!=2:raise AssertionError("complete census did not restart")
+                  if name=="three-rescan-bound" and counts["walks"]!=3:raise AssertionError("census retry bound changed")
+                  cases.append(name)
+              try:
+                  active_command="producer-install"
+                  active={"nativeOrder":order,"producers":[],"activePhase":"CLEAN","activeModule":module,"pendingProducer":pending}
+                  advanced={"nativeOrder":order,"producers":[completed],"activePhase":"INSTALL","activeModule":None}
+                  exercise("vanished-file-baseline","file")
+                  exercise("active-clean-rescan","target",active)
+                  exercise("completed-prefix-rescan","target",advanced)
+                  exercise("unadmitted-directory-refused","other",active,expected="storage census failed")
+                  exercise("m2-directory-refused","m2",active,expected="storage census failed")
+                  exercise("unadmitted-target-phase-refused","target",{"nativeOrder":order,"producers":[],"activePhase":"INSTALL"},expected="storage census failed")
+                  exercise("permission-error-refused","permission",active,expected="storage census failed")
+                  exercise("three-rescan-bound","target",active,expected="three full rescan attempts",repeat=True)
+                  exercise("cap-exhaustion-refused","size",size=480*1024**2+1,expected="aggregate task limit")
+                  exercise("reserve-exhaustion-refused","size",available=0,expected="8GiB-after-output reserve")
+              finally:active_command=previous_command
+              if len(cases)!=10:raise RuntimeError("ten storage guard discriminator cases required")
+              gate()
+              receipt={"schema":"M3_STORAGE_GUARD_DISCRIMINATORS_V1","tests":len(cases),"failures":0,"cases":cases,"scope":"SAME_INLINE_GATE_WITH_MOCKED_METADATA_NO_REAL_TARGET_MUTATION"}
+              (bundle/"storage-guard-receipt.json").write_text(json.dumps(receipt,indent=2)+"\n",encoding="utf-8")
+              print("PASS: ten actual-inline mocked storage guard discriminators")
           def getgit(*args):
               return subprocess.check_output(["git",*args],cwd=source,text=True,timeout=15).strip()
           gate()
@@ -155,12 +271,14 @@ jobs:
                       time.sleep(.05)
               raise RuntimeError("owned process group terminal state unproved")
           def run(name,command,deadline=300):
+              global active_command
               if time.monotonic()-start>1500:raise RuntimeError("global deadline before launch")
               gate()
               child=None;code=None
-              log=root/(name+".log")
+              log=bundle/(name+".log")
               launched=time.time()
               with log.open("xb") as out:
+                  active_command=name
                   try:
                       child=subprocess.Popen(command,cwd=source,env=env,stdin=subprocess.DEVNULL,stdout=out,stderr=subprocess.STDOUT,start_new_session=True)
                       command_start=time.monotonic()
@@ -171,17 +289,19 @@ jobs:
                       code=child.wait()
                       if time.monotonic()-start>1500:raise RuntimeError("global deadline after child exit")
                   finally:
-                      if child is not None:
-                          if child.poll() is None:
-                              try:os.killpg(child.pid,signal.SIGTERM)
-                              except ProcessLookupError:pass
-                              try:child.wait(timeout=2)
-                              except subprocess.TimeoutExpired:
-                                  try:os.killpg(child.pid,signal.SIGKILL)
+                      try:
+                          if child is not None:
+                              if child.poll() is None:
+                                  try:os.killpg(child.pid,signal.SIGTERM)
                                   except ProcessLookupError:pass
-                                  child.wait(timeout=5)
-                          cleanup(child)
-                          records.append({"name":name,"argv":command,"returncode":child.returncode,"startedUtc":time.strftime("%Y-%m-%dT%H:%M:%SZ",time.gmtime(launched)),"completedUtc":time.strftime("%Y-%m-%dT%H:%M:%SZ",time.gmtime()),"log":log.name,"logBytes":log.stat().st_size,"parentReaped":True,"ownedSessionAbsent":True})
+                                  try:child.wait(timeout=2)
+                                  except subprocess.TimeoutExpired:
+                                      try:os.killpg(child.pid,signal.SIGKILL)
+                                      except ProcessLookupError:pass
+                                      child.wait(timeout=5)
+                              cleanup(child)
+                              records.append({"name":name,"argv":command,"returncode":child.returncode,"startedUtc":time.strftime("%Y-%m-%dT%H:%M:%SZ",time.gmtime(launched)),"completedUtc":time.strftime("%Y-%m-%dT%H:%M:%SZ",time.gmtime()),"log":log.name,"logBytes":log.stat().st_size,"parentReaped":True,"ownedSessionAbsent":True})
+                      finally:active_command=None
               gate()
               if code:raise RuntimeError(name+" failed with "+str(code))
           py=[os.environ["M3_PYTHON"],"-I","-S","-B"]
@@ -194,48 +314,111 @@ jobs:
               run("model-contract",py+[str(source/"m3/tooling/tq-sync/source-reactor/test_reactor.py")],deadline=90)
               model=json.loads((root/"model-receipt.json").read_bytes())
               if model["tests"]!=6 or model["errors"] or model["failures"] or model["skips"] or not model["successful"]:raise RuntimeError("exact prior model contract required")
+              # The unchanged model suite writes ROOT outputs; retain them once before bulk work.
+              model_outputs=sorted(root.glob("*.json"))+sorted(root.glob("*.log"))
+              if len(model_outputs)>16 or any(any(q.is_symlink() for q in [p,*p.parents]) or not p.is_file() or (bundle/p.name).exists() for p in model_outputs):raise RuntimeError("closed model evidence fence")
+              model_bytes=sum(p.stat().st_size for p in model_outputs)
+              if model_bytes+sum(p.stat().st_size for p in bundle.iterdir())>7*1024**2 or gate()+model_bytes+1024**2>480*1024**2:raise RuntimeError("bounded model evidence budget")
+              for path in model_outputs:
+                  gate();shutil.copyfile(path,bundle/path.name)
               run("sparse-expansion",py+[str(qualifier),"expand"],deadline=180)
               run("source-custody-before",py+[str(qualifier),"before"],deadline=180)
               inputs=json.loads((qualifier.parent/"build-inputs.json").read_bytes())
-              run("producer-install",maven+["-f",str(source/"m3/vendor/third_party/pom.xml"),"-pl",",".join(inputs["producerSelectors"]),"-am","install"],deadline=900)
+              modules=[row["module"] for row in inputs["modules"]]
+              if len(modules)!=57 or len(set(modules))!=57 or any(not re.fullmatch(r"[A-Za-z0-9_.-]+",name) or name in (".","..") for name in modules):raise RuntimeError("exact admitted clean target inventory required")
+              admitted_clean_targets={name:source/"m3/vendor/third_party"/name/"target" for name in modules}
+              admitted_clean_gavs={row["module"]:row["gav"] for row in inputs["modules"]}
+              storage_guard_discriminators()
+              run("producer-order",maven+["-f",str(source/"m3/vendor/third_party/pom.xml"),"-pl",",".join(inputs["producerSelectors"]),"-am","validate"],deadline=90)
+              run("producer-install",py+[str(qualifier),"produce"],deadline=900)
+              run("serial-selftest",py+[str(qualifier),"selftest"],deadline=90)
               run("installed-artifacts",py+[str(qualifier),"installed"],deadline=90)
               run("tq-verify",maven+["-f",str(source/"m3/tooling/tq-sync/source-reactor/pom.xml"),"-Dm3.receiver.relative=../../../..","-pl","com.m3:tq-sync","-DskipTests=false","-Dmaven.test.skip=false","verify"],deadline=300)
               run("build-report",py+[str(qualifier),"report"],deadline=180)
-              receipt=json.loads((root/"build-receipt.json").read_bytes())
+              receipt=json.loads((bundle/"build-receipt.json").read_bytes())
               if receipt["producerBuildQualified"] is not True or receipt["tqSyncFixtureJUnitQualified"] is not True:raise RuntimeError("actual build and TQ sync test proof required")
               for key in ("currentProductCustodyQualified","runtimeTqJniQualified","originalPrivateModelQualified","canonicalOverflowQualified","matchedJdkQualified","performanceRetentionQualified","phaseAdvanced"):
                   if receipt[key] is not False:raise RuntimeError("source-build scope drift")
-              hosted={"schema":"M3_TQ_SOURCE_BUILD_HOSTED_V1","checkoutCommit":head,"commands":records,"buildReceiptSha256":hashlib.sha256((root/"build-receipt.json").read_bytes()).hexdigest(),"aggregateBytes":gate(),"phaseAdvanced":False}
-              (root/"hosted-build-receipt.json").write_text(json.dumps(hosted,indent=2)+"\n",encoding="utf-8")
+              hosted={"schema":"M3_TQ_SOURCE_BUILD_HOSTED_V1","checkoutCommit":head,"commands":records,"buildReceiptSha256":hashlib.sha256((bundle/"build-receipt.json").read_bytes()).hexdigest(),"aggregateBytes":gate(),"storageGuardReceiptSha256":hashlib.sha256((bundle/"storage-guard-receipt.json").read_bytes()).hexdigest(),"phaseAdvanced":False}
+              (bundle/"hosted-build-receipt.json").write_text(json.dumps(hosted,indent=2)+"\n",encoding="utf-8")
           finally:
-              # Preserve full bounded command logs; a tail is additional failure context.
-              last=root/(records[-1]["log"] if records else "binding.log")
+              # Command logs already reside in the upload directory if storage refuses new copies.
+              last=bundle/(records[-1]["log"] if records else "binding.log")
               tail=b""
               if last.is_file() and not last.is_symlink():
                   with last.open("rb") as f:f.seek(max(0,last.stat().st_size-32768));tail=f.read(32768)
               try:
                   before=gate(496*1024**2)
-                  selected=sorted(root.glob("*.json"))+sorted(root.glob("*.log"))
-                  selected+=sorted((source/"m3/tooling/tq-sync/target/surefire-reports").glob("TEST-*.xml"))
-                  selected+=sorted((source/"m3/tooling/tq-sync/target/surefire-reports").glob("*.txt"))
-                  selected+=[qualifier.parent/"source-binding.json"]
-                  selected=[p for p in selected if p.is_file()]
-                  if len(selected)>56 or len({p.name for p in selected})!=len(selected) or any(any(q.is_symlink() for q in [p,*p.parents]) for p in selected):raise RuntimeError("closed artifact source fence")
-                  planned=sum(p.stat().st_size for p in selected)+len(tail)
-                  if planned>8*1024**2 or before+planned+1024**2>496*1024**2:raise RuntimeError("full qualifying logs exceed closed artifact budget")
+                  present=sorted(bundle.iterdir())
+                  external=sorted(root.glob("*.json"))+sorted(root.glob("*.log"))
+                  external+=sorted((source/"m3/tooling/tq-sync/target/surefire-reports").glob("TEST-*.xml"))
+                  external+=sorted((source/"m3/tooling/tq-sync/target/surefire-reports").glob("*.txt"))
+                  external+=[qualifier.parent/"source-binding.json"]
+                  selected=present+[p for p in external if p.is_file()]
+                  if any(not p.is_file() or any(q.is_symlink() for q in [p,*p.parents]) for p in selected):raise RuntimeError("closed artifact source fence")
+                  by_name={}
+                  origins={}
+                  copies=[]
+                  for path in selected:
+                      if path.name in ("commands.json","inventory.json","log-tail.txt"):raise RuntimeError("reserved artifact name already exists")
+                      destination=bundle/path.name
+                      if path.name in by_name:
+                          if path.read_bytes()!=by_name[path.name].read_bytes():raise RuntimeError("artifact basename conflict")
+                          continue
+                      by_name[path.name]=path
+                      origins[path.name]=str(path.relative_to(root)) if root in path.parents else str(path.relative_to(source))
+                      if path!=destination:copies.append((path,destination))
+                  commands=(json.dumps(records,indent=2)+"\n").encode("utf-8")
+                  payload=sum(p.stat().st_size for p in by_name.values())+len(tail)+len(commands)
+                  planned=sum(p.stat().st_size for p,d in copies)+len(tail)+len(commands)
+                  if len(by_name)+3>64 or payload+1024**2>8*1024**2 or before+planned+1024**2>496*1024**2:raise RuntimeError("complete artifact payload exceeds closed budget")
               except BaseException:
                   print(tail.decode("utf-8",errors="replace"));raise
-              bundle=root/"artifacts";bundle.mkdir(exist_ok=False)
+              for path,destination in copies:
+                  gate(496*1024**2);shutil.copyfile(path,destination)
+              gate(496*1024**2);(bundle/"commands.json").write_bytes(commands)
+              gate(496*1024**2);(bundle/"log-tail.txt").write_bytes(tail)
+              origins["commands.json"]="generated command lifecycle records"
+              origins["log-tail.txt"]="additional bounded tail of "+last.name
               inventory={}
-              for path in selected:
-                  gate(496*1024**2);shutil.copyfile(path,bundle/path.name)
+              for path in sorted(bundle.iterdir()):
+                  if not path.is_file() or path.is_symlink():raise RuntimeError("artifact inventory redirected")
                   with path.open("rb") as f:digest=hashlib.file_digest(f,"sha256").hexdigest()
-                  inventory[path.name]={"bytes":path.stat().st_size,"sha256":digest,"source":str(path.relative_to(root)) if root in path.parents else str(path.relative_to(source))}
-              (bundle/"commands.json").write_text(json.dumps(records,indent=2)+"\n",encoding="utf-8")
+                  inventory[path.name]={"bytes":path.stat().st_size,"sha256":digest,"source":origins[path.name]}
+              gate(496*1024**2)
               (bundle/"inventory.json").write_text(json.dumps(inventory,indent=2)+"\n",encoding="utf-8")
-              (bundle/"log-tail.txt").write_bytes(tail)
               print(tail.decode("utf-8",errors="replace"))
               print("Final aggregate bytes before artifact upload:",gate(496*1024**2))
+          PY
+      - name: Fence the existing artifact payload
+        id: artifact_payload
+        env:
+          M3_PROOF_ROOT: ${{ runner.temp }}/m3-source-qualified-tq-build-${{ github.run_id }}-${{ github.run_attempt }}
+          M3_SOURCE_ROOT: ${{ github.workspace }}/m3-source-qualified-tq-build-source
+          TMPDIR: ${{ runner.temp }}/m3-source-qualified-tq-build-${{ github.run_id }}-${{ github.run_attempt }}/tmp
+          TEMP: ${{ runner.temp }}/m3-source-qualified-tq-build-${{ github.run_id }}-${{ github.run_attempt }}/tmp
+          TMP: ${{ runner.temp }}/m3-source-qualified-tq-build-${{ github.run_id }}-${{ github.run_attempt }}/tmp
+          XDG_CACHE_HOME: ${{ runner.temp }}/m3-source-qualified-tq-build-${{ github.run_id }}-${{ github.run_attempt }}/cache
+          XDG_CONFIG_HOME: ${{ runner.temp }}/m3-source-qualified-tq-build-${{ github.run_id }}-${{ github.run_attempt }}/config
+          XDG_DATA_HOME: ${{ runner.temp }}/m3-source-qualified-tq-build-${{ github.run_id }}-${{ github.run_attempt }}/data
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -I -S -B - <<'PY'
+          import os,pathlib,stat
+          bundle=pathlib.Path(os.environ["M3_PROOF_ROOT"])/"artifacts"
+          if not bundle.is_dir() or any(p.is_symlink() for p in [bundle,*bundle.parents]):raise SystemExit("artifact payload missing or redirected")
+          files=list(bundle.iterdir())
+          if not files or len(files)>64:raise SystemExit("artifact payload must contain1..64flat regular files")
+          total=0
+          for path in files:
+              info=path.lstat()
+              if not stat.S_ISREG(info.st_mode) or path.is_symlink():raise SystemExit("artifact payload contains nonregular or redirected input")
+              total+=info.st_size
+          if total>8*1024**2:raise SystemExit("artifact payload exceeds8MiB: observed="+str(total)+" limit="+str(8*1024**2)+" bytes")
+          print("Closed artifact payload:",len(files),"files",total,"bytes")
+          with open(os.environ["GITHUB_OUTPUT"],"a",encoding="utf-8") as output:output.write("allowed=true\n")
           PY
       - name: Retain complete bounded source build logs and fixture receipts
         env:
@@ -247,7 +430,7 @@ jobs:
           XDG_CACHE_HOME: ${{ runner.temp }}/m3-source-qualified-tq-build-${{ github.run_id }}-${{ github.run_attempt }}/cache
           XDG_CONFIG_HOME: ${{ runner.temp }}/m3-source-qualified-tq-build-${{ github.run_id }}-${{ github.run_attempt }}/config
           XDG_DATA_HOME: ${{ runner.temp }}/m3-source-qualified-tq-build-${{ github.run_id }}-${{ github.run_attempt }}/data
-        if: always()
+        if: ${{ always() && steps.artifact_payload.outputs.allowed == 'true' }}
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
           name: m3-source-qualified-tq-build-${{ github.run_id }}-${{ github.run_attempt }}
