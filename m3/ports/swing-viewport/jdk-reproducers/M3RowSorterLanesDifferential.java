@@ -170,6 +170,7 @@ public final class M3RowSorterLanesDifferential {
         return keys;
     }
 
+    @SuppressWarnings("unchecked")
     void step() {
         int op = rnd.nextInt(100);
         int size = model.getRowCount();
