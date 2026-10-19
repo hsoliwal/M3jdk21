@@ -22,6 +22,7 @@ import java.util.Random;
  * a {@code SUMMARY} line.</p>
  */
 public final class M3AwtListDifferential {
+	private static final System.Logger LOG = System.getLogger ("com.m3.viewport.awt.M3AwtListDifferential");
 	private M3AwtListDifferential () {
 	}
 
@@ -36,7 +37,7 @@ public final class M3AwtListDifferential {
 			EventQueue.invokeAndWait (() -> runSeed (frame, s, steps, totals));
 		}
 		EventQueue.invokeAndWait (() -> bulk (frame, bulk));
-		System.out.println ("SUMMARY seeds=" + seeds + " ok=" + totals [0] + " mismatched=" + totals [1] + " steps=" + totals [2]);
+		LOG.log (System.Logger.Level.INFO, String.valueOf ("SUMMARY seeds=" + seeds + " ok=" + totals [0] + " mismatched=" + totals [1] + " steps=" + totals [2]));
 		frame.dispose ();
 		System.exit (totals [1] == 0 ? 0 : 1);
 	}
@@ -65,10 +66,10 @@ public final class M3AwtListDifferential {
 		frame.remove (viewport);
 		if (failure == null) {
 			totals [0]++;
-			System.out.println ("SEED " + seed + " OK rows=" + rows + " multiple=" + multiple + " maxResident=" + maxResident);
+			LOG.log (System.Logger.Level.INFO, String.valueOf ("SEED " + seed + " OK rows=" + rows + " multiple=" + multiple + " maxResident=" + maxResident));
 		} else {
 			totals [1]++;
-			System.out.println ("SEED " + seed + " MISMATCH " + failure + "\n  ops " + String.join ("; ", log));
+			LOG.log (System.Logger.Level.INFO, String.valueOf ("SEED " + seed + " MISMATCH " + failure + "\n  ops " + String.join ("; ", log)));
 		}
 	}
 
@@ -174,8 +175,8 @@ public final class M3AwtListDifferential {
 		for (int i = 0; i < rows; i++) viewport.add ("row " + i);
 		long t2 = System.nanoTime ();
 		viewport.makeVisible (rows / 2);
-		System.out.println ("BULK rows=" + rows + " stockMs=" + (t1 - t0) / 1_000_000 + " viewportMs=" + (t2 - t1) / 1_000_000
-				+ " viewportResident=" + viewport.residentRows () + " top=" + viewport.getTopIndex ());
+		LOG.log (System.Logger.Level.INFO, String.valueOf ("BULK rows=" + rows + " stockMs=" + (t1 - t0) / 1_000_000 + " viewportMs=" + (t2 - t1) / 1_000_000
+				+ " viewportResident=" + viewport.residentRows () + " top=" + viewport.getTopIndex ()));
 		frame.remove (stock);
 		frame.remove (viewport);
 	}

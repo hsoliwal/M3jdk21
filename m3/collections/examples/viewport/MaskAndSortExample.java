@@ -6,6 +6,7 @@ import java.util.Random;
 
 /** A filter mask over 10^6 rows (popcount rank, lowest-set-bit compaction) and a two-key radix sort of the kept rows. */
 public final class MaskAndSortExample {
+    private static final System.Logger LOG = System.getLogger ("MaskAndSortExample");
     public static void main(String[] args) {
         int n = 1_000_000;
         int[] price = new Random(1).ints(n, 0, 100_000).toArray();
@@ -16,14 +17,14 @@ public final class MaskAndSortExample {
         int[] kept = new int[n], rank = new int[words];
         int visible = M3BitMask.compact(mask, words, kept, rank);
         int firstKept = kept[0];
-        System.out.println("visible=" + visible + " row " + firstKept + " is view row " + M3BitMask.rank(mask, rank, firstKept));
+        LOG.log (System.Logger.Level.INFO, String.valueOf ("visible=" + visible + " row " + firstKept + " is view row " + M3BitMask.rank(mask, rank, firstKept)));
         M3PermutationIndex sort = new M3PermutationIndex();
         M3RadixKey byRegion = key(region), byPrice = key(price);
         long start = System.nanoTime();
         sort.sort(kept, visible, new M3RadixKey[] {byRegion, byPrice}, new boolean[] {false, true}, 2,
                 (a, b) -> region[a] != region[b] ? Integer.compare(region[a], region[b]) : Integer.compare(price[b], price[a]));
-        System.out.println("sorted " + visible + " rows in " + (System.nanoTime() - start) / 1_000_000 + " ms; first row region "
-                + region[kept[0]] + " price " + price[kept[0]]);
+        LOG.log (System.Logger.Level.INFO, String.valueOf ("sorted " + visible + " rows in " + (System.nanoTime() - start) / 1_000_000 + " ms; first row region "
+                + region[kept[0]] + " price " + price[kept[0]]));
         for (int i = 1; i < visible; i++) {
             int a = kept[i - 1], b = kept[i];
             if (region[a] > region[b] || region[a] == region[b] && price[a] < price[b]) throw new AssertionError("sort example");

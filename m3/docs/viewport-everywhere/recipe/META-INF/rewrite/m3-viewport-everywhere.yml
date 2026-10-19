@@ -197,3 +197,11 @@ recipeList:
   - com.m3.viewport.recipe.M3PublicSurface
   - com.m3.viewport.recipe.M3PublicLanes
   - com.m3.viewport.recipe.M3ExplicitConstructor
+---
+# Brief rule 22 (user 2026-10-19, "use JUL logging"): System.out/err become System.Logger (java.util.logging).
+type: specs.openrewrite.org/v1beta/recipe
+name: com.m3.viewport.recipe.Rule22Logging
+displayName: M3 rule 22 logging
+description: System.out/err println and printf to System.Logger with a declared LOG.
+recipeList:
+  - com.m3.viewport.recipe.M3SystemOutToLogger

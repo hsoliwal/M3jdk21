@@ -15,6 +15,7 @@ import java.util.Random;
  * tab-separated row: problem, chosen, alternative, n, chosen ns/op, alternative ns/op. Not a JUnit test.
  */
 public final class M3ViewportAlgorithmBench {
+	private static final System.Logger LOG = System.getLogger ("com.m3.collections.M3ViewportAlgorithmBench");
 	private static volatile long sink;
 
 	private M3ViewportAlgorithmBench () {
@@ -35,7 +36,7 @@ public final class M3ViewportAlgorithmBench {
 	}
 
 	private static void row (String problem, String chosen, String alternative, int n, double a, double b) {
-		System.out.printf ("%s\t%s\t%s\t%d\t%.1f\t%.1f%n", problem, chosen, alternative, n, a, b);
+		LOG.log (System.Logger.Level.INFO, String.format ("%s\t%s\t%s\t%d\t%.1f\t%.1f%n", problem, chosen, alternative, n, a, b));
 	}
 
 	public static void main (String [] args) {

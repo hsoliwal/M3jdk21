@@ -17,6 +17,7 @@ import javax.swing.table.AbstractTableModel;
  * Run with {@code --check} to build and verify the model without a window (works headless).
  */
 public final class ViewportFromCollectionsSwingExample {
+    private static final System.Logger LOG = System.getLogger ("ViewportFromCollectionsSwingExample");
     record Node(int group, int index) { }
 
     public static void main(String[] args) {
@@ -48,7 +49,7 @@ public final class ViewportFromCollectionsSwingExample {
                 return switch (column) { case 0 -> node.group(); case 1 -> node.index(); default -> selection.isSelected(row); };
             }
         };
-        System.out.println("tree rows=" + n + " visible after filter=" + visible + " first=" + model.getValueAt(0, 1));
+        LOG.log (System.Logger.Level.INFO, String.valueOf ("tree rows=" + n + " visible after filter=" + visible + " first=" + model.getValueAt(0, 1)));
         if (args.length > 0 && args[0].equals("--check")) {
             if (visible >= n || (int) model.getValueAt(0, 1) % 7 == 0) throw new AssertionError("swing example");
             return;
