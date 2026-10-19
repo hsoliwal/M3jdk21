@@ -50,3 +50,10 @@ Oracle files keep Oracle's header and are listed in `API_DECISIONS.tsv`.
 
 Examples: `examples/` has the JTable, JList and JTree demos of the shared scenario (SWT twin snippets in
 `org.eclipse.swt.snippets.m3`).
+
+## Runs
+
+| date | leaf | commits | run | result |
+|---|---|---|---|---|
+| 2026-10-19 | S1 | e6ce53b8d6f | `run-tests.sh coverage`, `run-tests.sh diff` | 16/16; new code 100% lines, 96% branches; differential equal |
+| 2026-10-19 | S8 | d7284fdd1f9 (`M3Patch`), 8cc0a4d2b29 (`firePatch`, the three `apply` methods, `M3PatchTest`, `ModelPatchTest`; both committed by the interval sweep as "WIP checkpoint") | `run-tests.sh coverage`, `run-tests.sh diff` on JDK 21, `--patch-module` | 22/22 tests in all; new code 412/412 lines, 243/250 branches (97.2%); probe differential equal, 281 lines, sha256 5815825a9e9a1603 |
