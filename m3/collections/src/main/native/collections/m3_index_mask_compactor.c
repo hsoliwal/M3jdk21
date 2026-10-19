@@ -16,6 +16,23 @@ static void m3_throw_state_drift(JNIEnv *env) {
     }
 }
 
+/* Reuse the existing count atom for zero-result verification before reading rows.
+ * The second state pass preserves the existing count/emit drift diagnostic.
+ */
+static jint m3_count_window(JNIEnv *env, jbyteArray states,
+        jint state_offset, jint length, jint mask);
+
+static int m3_verify_empty(JNIEnv *env, jbyteArray states,
+        jint state_offset, jint length, jint mask) {
+    jint observed = m3_count_window(env, states, state_offset, length, mask);
+    if (observed < 0) return 0;
+    if (observed != 0) {
+        m3_throw_state_drift(env);
+        return 0;
+    }
+    return 1;
+}
+
 /* One core for legacy whole-index and offset windows. All bounds validated by exports.
  * Prefix compaction is safe in row_ids: accepted never exceeds the current input slot.
  */
@@ -36,6 +53,9 @@ static jintArray m3_select_range(JNIEnv *env, jintArray rows, jbyteArray states,
     }
     jintArray result = (*env)->NewIntArray(env, count);
     if (result == NULL) return NULL;
+    if (count == 0) {
+        return m3_verify_empty(env, states, 0, n, required_mask) ? result : NULL;
+    }
     jsize written = 0;
     for (jsize offset = 0; offset < n;) {
         jsize chunk = n - offset < M3_CHUNK ? n - offset : M3_CHUNK;
@@ -248,6 +268,9 @@ Java_com_m3_collections_M3IndexMaskCompactor_selectWindowNative(
     if (kept < 0) return NULL;
     jintArray result = (*env)->NewIntArray(env, kept);
     if (result == NULL) return NULL;
+    if (kept == 0) {
+        return m3_verify_empty(env, states, state_offset, length, mask) ? result : NULL;
+    }
     jbyte marks[M3_CHUNK];
     jint values[M3_CHUNK];
     jint accepted[M3_CHUNK];
@@ -300,6 +323,9 @@ Java_com_m3_collections_M3IndexMaskCompactor_selectLongWindowNative(
     if (kept < 0) return NULL;
     jlongArray result = (*env)->NewLongArray(env, kept);
     if (result == NULL) return NULL;
+    if (kept == 0) {
+        return m3_verify_empty(env, states, state_offset, length, mask) ? result : NULL;
+    }
     jbyte marks[M3_CHUNK];
     jlong values[M3_CHUNK];
     jlong accepted[M3_CHUNK];
