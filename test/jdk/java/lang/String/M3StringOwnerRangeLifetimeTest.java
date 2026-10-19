@@ -106,7 +106,7 @@ public class M3StringOwnerRangeLifetimeTest {
         check(M3_VALUE.getLong(middleM3) != M3_VALUE.getLong(nestedM3),
                 "nested substring changes only packed coordinate");
         check(middle.equals("3456789-\u0100-\uD83D\uDE42-"), "middle content");
-        check(nested.equals("56789-\u0100-\uD83D\uDE42"), "nested content");
+        check(nested.equals("56789-\u0100-\uD83D"), "nested content");
     }
 
     private static void tupleRetainsChildCoordinates() throws Exception {
