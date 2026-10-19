@@ -1,0 +1,45 @@
+{
+  "schema": 1,
+  "repository": "hsoliwal/com.synexia",
+  "sourceCommit": "36a0d3c22b23d22d5ee65f30fb9e661e19bdb06b",
+  "sourcePullRequest": 12447,
+  "receiverRepository": "hsoliwal/M3jdk21",
+  "receiverBase": "a3e88976ee8664d1ef5d0cade96aec1206b2133d",
+  "mode": "INDEPENDENT_APACHE_MODULE",
+  "payload": "Canonical first-party Maven recipe authoring/proof inputs only; no generated product postimages.",
+  "files": [
+    {
+      "sourcePath": "synexia-openrewrite-recipes/tasks/source-qualified-tq-reactor-20261019/recipe/README.md",
+      "targetPath": "m3/tooling/tq-sync/source-reactor/README.md",
+      "gitBlob": "26146304d14884ac1ebf3b487e4fb290a0fe24fc",
+      "bytes": 1984
+    },
+    {
+      "sourcePath": "synexia-openrewrite-recipes/tasks/source-qualified-tq-reactor-20261019/recipe/expected-projects.json",
+      "targetPath": "m3/tooling/tq-sync/source-reactor/expected-projects.json",
+      "gitBlob": "5cfbf49c56b1117f4ee1d93f79d23a00d4a08edb",
+      "bytes": 35019
+    },
+    {
+      "sourcePath": "synexia-openrewrite-recipes/tasks/source-qualified-tq-reactor-20261019/recipe/pom.xml",
+      "targetPath": "m3/tooling/tq-sync/source-reactor/pom.xml",
+      "gitBlob": "67f9d07050c93e4268fd6d09b93b6c967a93050b",
+      "bytes": 836
+    },
+    {
+      "sourcePath": "synexia-openrewrite-recipes/tasks/source-qualified-tq-reactor-20261019/recipe/qualification.yml",
+      "targetPath": ".github/workflows/m3-source-qualified-tq-model.yml",
+      "gitBlob": "9b00cde80d76361dafc8961d33300e29c1da5900",
+      "bytes": 16076
+    },
+    {
+      "sourcePath": "synexia-openrewrite-recipes/tasks/source-qualified-tq-reactor-20261019/recipe/test_reactor.py",
+      "targetPath": "m3/tooling/tq-sync/source-reactor/test_reactor.py",
+      "gitBlob": "fafdf425d71dd5eeb824f6eca5f370c0d8069534",
+      "bytes": 9393
+    }
+  ],
+  "runtimeApplied": false,
+  "phaseAdvanced": false,
+  "qualification": "PENDING_ACTUAL_OFFLINE_MODEL_ONLY; no compilation/JUnit/native/original-model claims"
+}

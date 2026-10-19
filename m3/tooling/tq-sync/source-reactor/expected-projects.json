@@ -1,0 +1,968 @@
+{
+  "schema": 1,
+  "evidenceState": "SOURCE_INVENTORY_NOT_EXECUTED",
+  "targetRepository": "hsoliwal/M3jdk21",
+  "targetCommit": "a3e88976ee8664d1ef5d0cade96aec1206b2133d",
+  "vendorAggregator": {
+    "path": "m3/vendor/third_party/pom.xml",
+    "pomBlob": "287d47d2c44749f0d4d0cf903002137b11a50a4b",
+    "gav": "com.m3.vendor:third-party-sources:1.0.0-SNAPSHOT"
+  },
+  "consumer": {
+    "module": "m3/tooling/tq-sync",
+    "pomBlob": "ee408306125c6d8bf5b5aecf7d74eb75cdac3377",
+    "gav": "com.m3:tq-sync:1.0-SNAPSHOT"
+  },
+  "modelInputModuleBase": "m3/vendor/third_party",
+  "modelInputCount": 121,
+  "modelInputs": [
+    {
+      "module": "HdrHistogram",
+      "pomBlob": "2fce90a048af9c53ec673f3945f9bcb6bcbb3648",
+      "gav": "org.hdrhistogram:HdrHistogram:2.1.12-m3-source-1"
+    },
+    {
+      "module": "JavaEWAH",
+      "pomBlob": "087dcb4f76595cc391fa1bd9dd607edb1a4d06c1",
+      "gav": "com.googlecode.javaewah:JavaEWAH:1.1.13-m3-source-1"
+    },
+    {
+      "module": "LatencyUtils",
+      "pomBlob": "7bef156cd848715d6c9b12d1e782216fbfcbe26b",
+      "gav": "org.latencyutils:LatencyUtils:2.0.3-m3-source-1"
+    },
+    {
+      "module": "agrona",
+      "pomBlob": "b48f893175903dcd5ee7924336424b4971395b45",
+      "gav": "org.agrona:agrona:1.21.2-m3-source-1"
+    },
+    {
+      "module": "annotations",
+      "pomBlob": "7a3f4dc101b20bfbb6a4d28b206705e3112f6175",
+      "gav": "org.jetbrains:annotations:24.1.0-m3-source-1"
+    },
+    {
+      "module": "antlr4-runtime-4.11.1",
+      "pomBlob": "6cfc2be4e87863f90b8c4b6d45c6f322d6facbf1",
+      "gav": "org.antlr:antlr4-runtime:4.11.1-m3-source-1"
+    },
+    {
+      "module": "antlr4-runtime-4.13.2",
+      "pomBlob": "f0a84405c2ee539009b866f1e8800786a4a7cf2d",
+      "gav": "org.antlr:antlr4-runtime:4.13.2-m3-source-1"
+    },
+    {
+      "module": "apiguardian-api",
+      "pomBlob": "6538a4c5e7c12f3d51c125e6cad5d6bf0c141279",
+      "gav": "org.apiguardian:apiguardian-api:1.1.2-m3-source-1"
+    },
+    {
+      "module": "asm-9.10.1",
+      "pomBlob": "26acef3bdb0abeaf8a8d42aeeec19122a814ffa2",
+      "gav": "org.ow2.asm:asm:9.10.1-m3-source-1"
+    },
+    {
+      "module": "asm-9.6",
+      "pomBlob": "dfd58246ec95e19657cb7670bae02fa676e14d69",
+      "gav": "org.ow2.asm:asm:9.6-m3-source-1"
+    },
+    {
+      "module": "asm-analysis",
+      "pomBlob": "b2c06e3be425c191644d13499e269654a63b1d53",
+      "gav": "org.ow2.asm:asm-analysis:9.6-m3-source-1"
+    },
+    {
+      "module": "asm-tree",
+      "pomBlob": "f87bf089141ad36cbe4ce15e5555e12ea4f2644f",
+      "gav": "org.ow2.asm:asm-tree:9.6-m3-source-1"
+    },
+    {
+      "module": "asm-util",
+      "pomBlob": "d096601be5e29c1ac45e661aad036a7cd0a0d1a4",
+      "gav": "org.ow2.asm:asm-util:9.6-m3-source-1"
+    },
+    {
+      "module": "assertj-core",
+      "pomBlob": "3cf41988c9c34d574ba009039d29ca233bd7329f",
+      "gav": "org.assertj:assertj-core:3.25.3-m3-source-1"
+    },
+    {
+      "module": "byte-buddy",
+      "pomBlob": "1d777d92942206b708258b2e55fac6affa550669",
+      "gav": "net.bytebuddy:byte-buddy:1.14.11-m3-source-1"
+    },
+    {
+      "module": "caffeine",
+      "pomBlob": "45b495c5d720712151224464f734017bec06d7d6",
+      "gav": "com.github.ben-manes.caffeine:caffeine:3.1.8-m3-source-1"
+    },
+    {
+      "module": "cglib",
+      "pomBlob": "c79246ee8a6a4f4401109b6fd5f46c76948a9167",
+      "gav": "cglib:cglib:3.3.0-m3-source-1"
+    },
+    {
+      "module": "checker-qual-3.37.0",
+      "pomBlob": "f9a6d89463a89cfc16eb781aa9fac341231224a9",
+      "gav": "org.checkerframework:checker-qual:3.37.0-m3-source-1"
+    },
+    {
+      "module": "checker-qual-3.55.1",
+      "pomBlob": "bcbefda4ba28b046f032f11a1bc9802c73caba52",
+      "gav": "org.checkerframework:checker-qual:3.55.1-m3-source-1"
+    },
+    {
+      "module": "classgraph",
+      "pomBlob": "4d1509c1374d7fa5f51a537d36aa56c9c65fbb43",
+      "gav": "io.github.classgraph:classgraph:4.8.165-m3-source-1"
+    },
+    {
+      "module": "commonmark",
+      "pomBlob": "64406a10d4a29ab1393581f8eb32a7a822938892",
+      "gav": "org.commonmark:commonmark:0.30.0-m3-source-1"
+    },
+    {
+      "module": "commons-codec-1.17.1",
+      "pomBlob": "309a09d162197746a3be0e6370928df51ba7c83b",
+      "gav": "commons-codec:commons-codec:1.17.1-m3-source-1"
+    },
+    {
+      "module": "commons-codec-1.22.1",
+      "pomBlob": "4ed066d341f210b3cd182c179f1e4ecf1121c1ea",
+      "gav": "commons-codec:commons-codec:1.22.1-m3-source-1"
+    },
+    {
+      "module": "commons-compress-1.26.0",
+      "pomBlob": "7a2ea9cfe9436a4797ccfeb0bfb3d8e3fb933893",
+      "gav": "org.apache.commons:commons-compress:1.26.0-m3-source-1"
+    },
+    {
+      "module": "commons-compress-1.27.1",
+      "pomBlob": "4b48bfb2535519ef94188d9e95f82aeb693d6f77",
+      "gav": "org.apache.commons:commons-compress:1.27.1-m3-source-1"
+    },
+    {
+      "module": "commons-csv",
+      "pomBlob": "90ae5821db1d502331185b50c495b5e7741973c3",
+      "gav": "org.apache.commons:commons-csv:1.12.0-m3-source-1"
+    },
+    {
+      "module": "commons-io-2.15.1",
+      "pomBlob": "6d7cf95034486fee9fddc9ff45a8d7abb91c4dcb",
+      "gav": "commons-io:commons-io:2.15.1-m3-source-1"
+    },
+    {
+      "module": "commons-io-2.18.0",
+      "pomBlob": "41496da2c181568572cdd99b8d9c48a1623d4ede",
+      "gav": "commons-io:commons-io:2.18.0-m3-source-1"
+    },
+    {
+      "module": "commons-jexl3",
+      "pomBlob": "5c0ade9cbe578033b767bf1eff7b3bfd5aa29363",
+      "gav": "org.apache.commons:commons-jexl3:3.4.0-m3-source-1"
+    },
+    {
+      "module": "commons-lang3-3.14.0",
+      "pomBlob": "3c32c1149f6a4b6da9f4abea3263b51bbaed9afe",
+      "gav": "org.apache.commons:commons-lang3:3.14.0-m3-source-1"
+    },
+    {
+      "module": "commons-lang3-3.17.0",
+      "pomBlob": "62150c4435967f0184de652e5e698871c7101a94",
+      "gav": "org.apache.commons:commons-lang3:3.17.0-m3-source-1"
+    },
+    {
+      "module": "commons-logging",
+      "pomBlob": "b46e602a4774911d673ae1cee0d6f1715d757847",
+      "gav": "commons-logging:commons-logging:1.3.2-m3-source-1"
+    },
+    {
+      "module": "commons-net",
+      "pomBlob": "398b8723fa68547bcb0d7d99e85fc45c9bdeb25e",
+      "gav": "commons-net:commons-net:3.11.1-m3-source-1"
+    },
+    {
+      "module": "commons-pool2",
+      "pomBlob": "fc96963cd1a88bb82666851425b7b46e1bf27266",
+      "gav": "org.apache.commons:commons-pool2:2.12.0-m3-source-1"
+    },
+    {
+      "module": "commons-text",
+      "pomBlob": "34c0b83bf9e34f685921f3745c49cadfe458218b",
+      "gav": "org.apache.commons:commons-text:1.11.0-m3-source-1"
+    },
+    {
+      "module": "dec",
+      "pomBlob": "fcc142b4900487767eb80bae5d928960ab7bdb45",
+      "gav": "org.brotli:dec:0.1.2-m3-source-1"
+    },
+    {
+      "module": "eclipse-collections",
+      "pomBlob": "bf05eebb63f1e865bc86d32f7d55399c789d6dc3",
+      "gav": "org.eclipse.collections:eclipse-collections:11.1.0-m3-source-1"
+    },
+    {
+      "module": "eclipse-collections-api",
+      "pomBlob": "1ffd3e2aeb241a354ad3f14cd6a20d1ba1b5fb56",
+      "gav": "org.eclipse.collections:eclipse-collections-api:11.1.0-m3-source-1"
+    },
+    {
+      "module": "error_prone_annotations",
+      "pomBlob": "99aa663d298668a1ff2dc34a1f0fe6d50e4e06dc",
+      "gav": "com.google.errorprone:error_prone_annotations:2.21.1-m3-source-1"
+    },
+    {
+      "module": "failureaccess",
+      "pomBlob": "86741122847f67c1f781b499d605fc58dd211fa2",
+      "gav": "com.google.guava:failureaccess:1.0.2-m3-source-1"
+    },
+    {
+      "module": "fastdoubleparser-0.9.0",
+      "pomBlob": "a1c9d147e197a8c4ffc7bf18791c0cecd402548e",
+      "gav": "ch.randelshofer:fastdoubleparser:0.9.0-m3-source-1"
+    },
+    {
+      "module": "fastdoubleparser-1.0.0",
+      "pomBlob": "62d9664e6d03998bb49e1c812238c66419a90fa5",
+      "gav": "ch.randelshofer:fastdoubleparser:1.0.0-m3-source-1"
+    },
+    {
+      "module": "fastdoubleparser-1.0.90",
+      "pomBlob": "e85b0e4b3b03afceb76ef983919d7cafd6d55002",
+      "gav": "ch.randelshofer:fastdoubleparser:1.0.90-m3-source-1"
+    },
+    {
+      "module": "fastfilter",
+      "pomBlob": "3f428d35de65d09588010631a984ab9a9d026eb3",
+      "gav": "io.github.fastfilter:fastfilter:1.0.2-m3-source-1"
+    },
+    {
+      "module": "gizmo",
+      "pomBlob": "44855b9b2ca17c45cf5084f97df899b000cd4fad",
+      "gav": "io.quarkus.gizmo:gizmo:1.0.11.Final-m3-source-1"
+    },
+    {
+      "module": "guava",
+      "pomBlob": "0481cbd4399cddc38669bef2d18eaad04c46e029",
+      "gav": "com.google.guava:guava:33.0.0-jre-m3-source-1"
+    },
+    {
+      "module": "j2objc-annotations",
+      "pomBlob": "483bb49b6bde9212ec1081a85b6bd6526beaff0e",
+      "gav": "com.google.j2objc:j2objc-annotations:2.8-m3-source-1"
+    },
+    {
+      "module": "jackson-annotations-2.15.3",
+      "pomBlob": "ce7ff22381787aecc1a9de552021555cd62b0688",
+      "gav": "com.fasterxml.jackson.core:jackson-annotations:2.15.3-m3-source-1"
+    },
+    {
+      "module": "jackson-annotations-2.16.1",
+      "pomBlob": "9f8201a61ae714b9faa274d6cee04216e2362289",
+      "gav": "com.fasterxml.jackson.core:jackson-annotations:2.16.1-m3-source-1"
+    },
+    {
+      "module": "jackson-annotations-2.19.2",
+      "pomBlob": "6c9b1b358845b69b0b68616153f26543eba1500b",
+      "gav": "com.fasterxml.jackson.core:jackson-annotations:2.19.2-m3-source-1"
+    },
+    {
+      "module": "jackson-core-2.15.3",
+      "pomBlob": "7386cc6ecfbbaf33b2734dadd3c9be557f9ce8b2",
+      "gav": "com.fasterxml.jackson.core:jackson-core:2.15.3-m3-source-1"
+    },
+    {
+      "module": "jackson-core-2.16.1",
+      "pomBlob": "0b3260fdc77dee473cb3472aa66cfdc30d259027",
+      "gav": "com.fasterxml.jackson.core:jackson-core:2.16.1-m3-source-1"
+    },
+    {
+      "module": "jackson-core-2.19.2",
+      "pomBlob": "1bbe804668b9831edc9b3b94b6352d9294bb65e2",
+      "gav": "com.fasterxml.jackson.core:jackson-core:2.19.2-m3-source-1"
+    },
+    {
+      "module": "jackson-databind-2.15.3",
+      "pomBlob": "7bc07ad83d3957d9be71d544c8087b5070940a83",
+      "gav": "com.fasterxml.jackson.core:jackson-databind:2.15.3-m3-source-1"
+    },
+    {
+      "module": "jackson-databind-2.16.1",
+      "pomBlob": "e141dcd972fbed190c13bd5fa2d09cd180f656ff",
+      "gav": "com.fasterxml.jackson.core:jackson-databind:2.16.1-m3-source-1"
+    },
+    {
+      "module": "jackson-databind-2.19.2",
+      "pomBlob": "678ca3f01821cf58cf34841c175bbf90d8faa3f7",
+      "gav": "com.fasterxml.jackson.core:jackson-databind:2.19.2-m3-source-1"
+    },
+    {
+      "module": "jackson-dataformat-csv",
+      "pomBlob": "bbccf6da547af4529ab013f7b37bc6754b043980",
+      "gav": "com.fasterxml.jackson.dataformat:jackson-dataformat-csv:2.16.1-m3-source-1"
+    },
+    {
+      "module": "jackson-dataformat-smile",
+      "pomBlob": "beab852548791d385a145363d379e1d842ea1e6d",
+      "gav": "com.fasterxml.jackson.dataformat:jackson-dataformat-smile:2.16.1-m3-source-1"
+    },
+    {
+      "module": "jackson-dataformat-yaml",
+      "pomBlob": "5cffbeb465ce68a8e50a11c2cc4aed478df0054e",
+      "gav": "com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.15.3-m3-source-1"
+    },
+    {
+      "module": "jackson-datatype-jsr310-2.15.3",
+      "pomBlob": "75528fa93411ecd46d46a602d43bcf5081a7f083",
+      "gav": "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.15.3-m3-source-1"
+    },
+    {
+      "module": "jackson-datatype-jsr310-2.16.1",
+      "pomBlob": "f10b6dbdd160bc4239756346d0793183f0b07c4a",
+      "gav": "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.16.1-m3-source-1"
+    },
+    {
+      "module": "jackson-module-parameter-names",
+      "pomBlob": "a4b99cc79e1e4847614634293d64cf7d1a613517",
+      "gav": "com.fasterxml.jackson.module:jackson-module-parameter-names:2.16.1-m3-source-1"
+    },
+    {
+      "module": "jandex",
+      "pomBlob": "dd4120b0eb4129d2ddeb82c4c2addec6eab4355b",
+      "gav": "org.jboss:jandex:2.4.2.Final-m3-source-1"
+    },
+    {
+      "module": "java-object-diff",
+      "pomBlob": "9360964212b0d723e7d95763f0dd084d133e30b1",
+      "gav": "org.openrewrite.tools:java-object-diff:1.0.1-m3-source-1"
+    },
+    {
+      "module": "jna-5.14.0",
+      "pomBlob": "0293e224b9230e05996104e2ad93844060ff4607",
+      "gav": "net.java.dev.jna:jna:5.14.0-m3-source-1"
+    },
+    {
+      "module": "jna-5.18.1",
+      "pomBlob": "98a051fa6b7b00af6f4d8430474d4b244f208e33",
+      "gav": "net.java.dev.jna:jna:5.18.1-m3-source-1"
+    },
+    {
+      "module": "jna-platform",
+      "pomBlob": "d0ab610250f86fc73aca134dac27e27b522cc070",
+      "gav": "net.java.dev.jna:jna-platform:5.14.0-m3-source-1"
+    },
+    {
+      "module": "jsoup-1.17.2",
+      "pomBlob": "c301306f1e2b246a7d1567122705578bdbbcfc93",
+      "gav": "org.jsoup:jsoup:1.17.2-m3-source-1"
+    },
+    {
+      "module": "jsoup-1.23.2",
+      "pomBlob": "3003a46002fe18b85d8a782ec70dbbc03e7b5376",
+      "gav": "org.jsoup:jsoup:1.23.2-m3-source-1"
+    },
+    {
+      "module": "jspecify-0.3.0",
+      "pomBlob": "77bb8430a807d3851ed294083e515ca97c8c03da",
+      "gav": "org.jspecify:jspecify:0.3.0-m3-source-1"
+    },
+    {
+      "module": "jspecify-1.0.1",
+      "pomBlob": "6e77a1404d8904e06e641044116246b73b26f4bc",
+      "gav": "org.jspecify:jspecify:1.0.1-m3-source-1"
+    },
+    {
+      "module": "jsr305",
+      "pomBlob": "ecab42bef945ed96b92bfd4af036858b278e8040",
+      "gav": "com.google.code.findbugs:jsr305:3.0.2-m3-source-1"
+    },
+    {
+      "module": "junit-jupiter-5.10.2",
+      "pomBlob": "b3f0e178fb3dea43021adbf59cc036d7f0376463",
+      "gav": "org.junit.jupiter:junit-jupiter:5.10.2-m3-source-1"
+    },
+    {
+      "module": "junit-jupiter-5.11.4",
+      "pomBlob": "30efabf4c8c4c8af7f3ae88f1f81339e34ae2ef1",
+      "gav": "org.junit.jupiter:junit-jupiter:5.11.4-m3-source-1"
+    },
+    {
+      "module": "junit-jupiter-api-5.10.2",
+      "pomBlob": "58106c10f994253ddcb4213c91dccd8f8e53d522",
+      "gav": "org.junit.jupiter:junit-jupiter-api:5.10.2-m3-source-1"
+    },
+    {
+      "module": "junit-jupiter-api-5.11.4",
+      "pomBlob": "0523468c5cdf0ad35ccb8f81761b42164765819f",
+      "gav": "org.junit.jupiter:junit-jupiter-api:5.11.4-m3-source-1"
+    },
+    {
+      "module": "junit-jupiter-engine-5.10.2",
+      "pomBlob": "afff0d3e4b397ba47189687f10079d63543323fb",
+      "gav": "org.junit.jupiter:junit-jupiter-engine:5.10.2-m3-source-1"
+    },
+    {
+      "module": "junit-jupiter-engine-5.11.4",
+      "pomBlob": "1208c7e9df94c8922294874f5245936b00f7d92e",
+      "gav": "org.junit.jupiter:junit-jupiter-engine:5.11.4-m3-source-1"
+    },
+    {
+      "module": "junit-jupiter-params-5.10.2",
+      "pomBlob": "c078c4682188c6055c7456de83aae29f63a79480",
+      "gav": "org.junit.jupiter:junit-jupiter-params:5.10.2-m3-source-1"
+    },
+    {
+      "module": "junit-jupiter-params-5.11.4",
+      "pomBlob": "111d41fdc8277b5364d0bdb867c71733b66abebc",
+      "gav": "org.junit.jupiter:junit-jupiter-params:5.11.4-m3-source-1"
+    },
+    {
+      "module": "junit-platform-commons-1.10.2",
+      "pomBlob": "3b3b1266d0a5362308cbc0dfe90426bedc737574",
+      "gav": "org.junit.platform:junit-platform-commons:1.10.2-m3-source-1"
+    },
+    {
+      "module": "junit-platform-commons-1.11.4",
+      "pomBlob": "821c2ff369d6232e868faa109e0c70cdc665bebf",
+      "gav": "org.junit.platform:junit-platform-commons:1.11.4-m3-source-1"
+    },
+    {
+      "module": "junit-platform-engine-1.10.2",
+      "pomBlob": "64fb9850b8232236549096558df92fa95aa8e41b",
+      "gav": "org.junit.platform:junit-platform-engine:1.10.2-m3-source-1"
+    },
+    {
+      "module": "junit-platform-engine-1.11.4",
+      "pomBlob": "39f0d1442de6d134194ed2fc4c539c52f52d46c1",
+      "gav": "org.junit.platform:junit-platform-engine:1.11.4-m3-source-1"
+    },
+    {
+      "module": "junit-platform-launcher-1.10.2",
+      "pomBlob": "b473c4c8dd601e3d58a6847bcbc2e65dd8f55936",
+      "gav": "org.junit.platform:junit-platform-launcher:1.10.2-m3-source-1"
+    },
+    {
+      "module": "junit-platform-launcher-1.11.4",
+      "pomBlob": "8b6b7dccd9ca0f400536c777a6565240f2a2d182",
+      "gav": "org.junit.platform:junit-platform-launcher:1.11.4-m3-source-1"
+    },
+    {
+      "module": "lucene-analysis-common",
+      "pomBlob": "316fd9d8d9d01cfd747dd2174430f1cc56964bea",
+      "gav": "org.apache.lucene:lucene-analysis-common:9.10.0-m3-source-1"
+    },
+    {
+      "module": "lucene-core",
+      "pomBlob": "b2e020258dd8fec292e4a35f6fd065dbe9ea4610",
+      "gav": "org.apache.lucene:lucene-core:9.10.0-m3-source-1"
+    },
+    {
+      "module": "lucene-queries",
+      "pomBlob": "f4b5b541bdc54251eaee8a32f2eb526b0c05e811",
+      "gav": "org.apache.lucene:lucene-queries:9.10.0-m3-source-1"
+    },
+    {
+      "module": "lucene-queryparser",
+      "pomBlob": "db561d61d062005d78e9cc15de380a2cc6dacf54",
+      "gav": "org.apache.lucene:lucene-queryparser:9.10.0-m3-source-1"
+    },
+    {
+      "module": "lucene-sandbox",
+      "pomBlob": "718881c88ce4700982f5929d7a1eb571a4a0364f",
+      "gav": "org.apache.lucene:lucene-sandbox:9.10.0-m3-source-1"
+    },
+    {
+      "module": "lz4-java",
+      "pomBlob": "6d457d54b8245488b3a67fe695b835553b7dec37",
+      "gav": "org.lz4:lz4-java:1.8.0-m3-source-1"
+    },
+    {
+      "module": "m3-tooling-shaded",
+      "pomBlob": "c28392d6c779ba72feb361285f161c1accf4701d",
+      "gav": "com.m3.vendor:m3-tooling-third-party:8.17.1-m3-shaded-1"
+    },
+    {
+      "module": "micrometer-core",
+      "pomBlob": "197b827a7cf119a809ce4c3e56e34e4fb462e62c",
+      "gav": "io.micrometer:micrometer-core:1.9.17-m3-source-1"
+    },
+    {
+      "module": "opentest4j",
+      "pomBlob": "aa3b3f3b67ff08430c31ab535f31c47659bfd441",
+      "gav": "org.opentest4j:opentest4j:1.3.0-m3-source-1"
+    },
+    {
+      "module": "org.eclipse.jgit",
+      "pomBlob": "952d98ca747d8a41fa1f8d975934db9dd60894a4",
+      "gav": "org.eclipse.jgit:org.eclipse.jgit:5.13.3.202401111512-r-m3-source-1"
+    },
+    {
+      "module": "org.osgi.core",
+      "pomBlob": "509216365166dc7052d01126db2972b6a8dcec75",
+      "gav": "org.osgi:org.osgi.core:6.0.0-m3-source-1"
+    },
+    {
+      "module": "picocli",
+      "pomBlob": "bdde6853d462eb2abb6ceae24d4cb3b555d901f0",
+      "gav": "info.picocli:picocli:4.7.5-m3-source-1"
+    },
+    {
+      "module": "re2j",
+      "pomBlob": "7e5d3e23e693e3c0a1ac708c43ea75c220276247",
+      "gav": "com.google.re2j:re2j:1.8-m3-source-1"
+    },
+    {
+      "module": "rewrite-core",
+      "pomBlob": "9269efac900ad96af9a7148cad7c60324768cdf4",
+      "gav": "org.openrewrite:rewrite-core:8.17.1-m3-source-1"
+    },
+    {
+      "module": "rewrite-java",
+      "pomBlob": "2339c206bd40272fd7766cacb01a482f900660cd",
+      "gav": "org.openrewrite:rewrite-java:8.17.1-m3-source-1"
+    },
+    {
+      "module": "rewrite-java-21",
+      "pomBlob": "6be8ba9fdb175354d598dca33ae08f2370067eae",
+      "gav": "org.openrewrite:rewrite-java-21:8.17.1-m3-source-1"
+    },
+    {
+      "module": "rewrite-test",
+      "pomBlob": "6e693f1a4336d3f0b1c30bd7a7e4c9b1bfa8137e",
+      "gav": "org.openrewrite:rewrite-test:8.17.1-m3-source-1"
+    },
+    {
+      "module": "rewrite-xml",
+      "pomBlob": "07fd39acab996a04fd66b2349106b58f2f8806a2",
+      "gav": "org.openrewrite:rewrite-xml:8.17.1-m3-source-1"
+    },
+    {
+      "module": "rewrite-yaml",
+      "pomBlob": "8351e53569abaea27bab59e1c9d3d37239c5282b",
+      "gav": "org.openrewrite:rewrite-yaml:8.17.1-m3-source-1"
+    },
+    {
+      "module": "slf4j-api-1.7.36",
+      "pomBlob": "c1aeb4649b61fac31b6dae0158cec696cd7b58fa",
+      "gav": "org.slf4j:slf4j-api:1.7.36-m3-source-1"
+    },
+    {
+      "module": "slf4j-api-2.0.12",
+      "pomBlob": "dabbcd1c71594bf20eea75c6f8285835130f1b28",
+      "gav": "org.slf4j:slf4j-api:2.0.12-m3-source-1"
+    },
+    {
+      "module": "slf4j-api-2.0.9",
+      "pomBlob": "ec1566753b23587db8a33ac9a68fc085d8eb22dc",
+      "gav": "org.slf4j:slf4j-api:2.0.9-m3-source-1"
+    },
+    {
+      "module": "slf4j-simple",
+      "pomBlob": "98a31da15ae48310e7eb9ada9ec1b06bd6c418de",
+      "gav": "org.slf4j:slf4j-simple:2.0.13-m3-source-1"
+    },
+    {
+      "module": "snakeyaml-2.1",
+      "pomBlob": "eadc7847f47fc1805de45b8b2662823e24bb186c",
+      "gav": "org.yaml:snakeyaml:2.1-m3-source-1"
+    },
+    {
+      "module": "snakeyaml-2.2",
+      "pomBlob": "4be0bb962fa5c9c05a92c92292febf4590917561",
+      "gav": "org.yaml:snakeyaml:2.2-m3-source-1"
+    },
+    {
+      "module": "snakeyaml-2.6",
+      "pomBlob": "6d9b02b32276a92a4b2266bed482faf19f384e5e",
+      "gav": "org.yaml:snakeyaml:2.6-m3-source-1"
+    },
+    {
+      "module": "snakeyaml-engine",
+      "pomBlob": "4688a78a178d5a7285bf59d3d407173f69831b1a",
+      "gav": "org.snakeyaml:snakeyaml-engine:3.1.1-m3-source-1"
+    },
+    {
+      "module": "snappy-java",
+      "pomBlob": "7494608703173f2c4d164b95bfbddc22efeeb569",
+      "gav": "org.xerial.snappy:snappy-java:1.1.10.5-m3-source-1"
+    },
+    {
+      "module": "sqlite-jdbc-3.45.1.0",
+      "pomBlob": "bdd99d40edefb9485467a733d3286c462bf33ed9",
+      "gav": "org.xerial:sqlite-jdbc:3.45.1.0-m3-source-1"
+    },
+    {
+      "module": "sqlite-jdbc-3.51.1.1",
+      "pomBlob": "3460a05ff087e61d104cd9df98df138dd610029b",
+      "gav": "org.xerial:sqlite-jdbc:3.51.1.1-m3-source-1"
+    },
+    {
+      "module": "tomlj-1.1.1",
+      "pomBlob": "21bae40cee24c8d5e70ebfae185a514497257859",
+      "gav": "org.tomlj:tomlj:1.1.1-m3-source-1"
+    },
+    {
+      "module": "tomlj-1.3.0",
+      "pomBlob": "7880bd41f68898ca5f1ca253bff5437bdb685819",
+      "gav": "org.tomlj:tomlj:1.3.0-m3-source-1"
+    },
+    {
+      "module": "univocity-parsers",
+      "pomBlob": "04ad19b0bc5892a8151a49092a9dfe2eeb0612ac",
+      "gav": "com.univocity:univocity-parsers:2.9.1-m3-source-1"
+    },
+    {
+      "module": "xz",
+      "pomBlob": "8907b5b2685a4989a2d25b9a3c922bd1b237ce6d",
+      "gav": "org.tukaani:xz:1.10-m3-source-1"
+    },
+    {
+      "module": "zero-allocation-hashing",
+      "pomBlob": "888697ec55fab52c71a8040cfd03058cd8d33232",
+      "gav": "net.openhft:zero-allocation-hashing:0.16-m3-source-1"
+    }
+  ],
+  "selectedProducerCount": 56,
+  "selectedProjectCount": 57,
+  "selectedProducers": [
+    {
+      "module": "HdrHistogram",
+      "pomBlob": "2fce90a048af9c53ec673f3945f9bcb6bcbb3648",
+      "gav": "org.hdrhistogram:HdrHistogram:2.1.12-m3-source-1"
+    },
+    {
+      "module": "JavaEWAH",
+      "pomBlob": "087dcb4f76595cc391fa1bd9dd607edb1a4d06c1",
+      "gav": "com.googlecode.javaewah:JavaEWAH:1.1.13-m3-source-1"
+    },
+    {
+      "module": "LatencyUtils",
+      "pomBlob": "7bef156cd848715d6c9b12d1e782216fbfcbe26b",
+      "gav": "org.latencyutils:LatencyUtils:2.0.3-m3-source-1"
+    },
+    {
+      "module": "annotations",
+      "pomBlob": "7a3f4dc101b20bfbb6a4d28b206705e3112f6175",
+      "gav": "org.jetbrains:annotations:24.1.0-m3-source-1"
+    },
+    {
+      "module": "antlr4-runtime-4.11.1",
+      "pomBlob": "6cfc2be4e87863f90b8c4b6d45c6f322d6facbf1",
+      "gav": "org.antlr:antlr4-runtime:4.11.1-m3-source-1"
+    },
+    {
+      "module": "apiguardian-api",
+      "pomBlob": "6538a4c5e7c12f3d51c125e6cad5d6bf0c141279",
+      "gav": "org.apiguardian:apiguardian-api:1.1.2-m3-source-1"
+    },
+    {
+      "module": "asm-9.6",
+      "pomBlob": "dfd58246ec95e19657cb7670bae02fa676e14d69",
+      "gav": "org.ow2.asm:asm:9.6-m3-source-1"
+    },
+    {
+      "module": "asm-analysis",
+      "pomBlob": "b2c06e3be425c191644d13499e269654a63b1d53",
+      "gav": "org.ow2.asm:asm-analysis:9.6-m3-source-1"
+    },
+    {
+      "module": "asm-tree",
+      "pomBlob": "f87bf089141ad36cbe4ce15e5555e12ea4f2644f",
+      "gav": "org.ow2.asm:asm-tree:9.6-m3-source-1"
+    },
+    {
+      "module": "asm-util",
+      "pomBlob": "d096601be5e29c1ac45e661aad036a7cd0a0d1a4",
+      "gav": "org.ow2.asm:asm-util:9.6-m3-source-1"
+    },
+    {
+      "module": "assertj-core",
+      "pomBlob": "3cf41988c9c34d574ba009039d29ca233bd7329f",
+      "gav": "org.assertj:assertj-core:3.25.3-m3-source-1"
+    },
+    {
+      "module": "byte-buddy",
+      "pomBlob": "1d777d92942206b708258b2e55fac6affa550669",
+      "gav": "net.bytebuddy:byte-buddy:1.14.11-m3-source-1"
+    },
+    {
+      "module": "classgraph",
+      "pomBlob": "4d1509c1374d7fa5f51a537d36aa56c9c65fbb43",
+      "gav": "io.github.classgraph:classgraph:4.8.165-m3-source-1"
+    },
+    {
+      "module": "commons-codec-1.22.1",
+      "pomBlob": "4ed066d341f210b3cd182c179f1e4ecf1121c1ea",
+      "gav": "commons-codec:commons-codec:1.22.1-m3-source-1"
+    },
+    {
+      "module": "commons-compress-1.26.0",
+      "pomBlob": "7a2ea9cfe9436a4797ccfeb0bfb3d8e3fb933893",
+      "gav": "org.apache.commons:commons-compress:1.26.0-m3-source-1"
+    },
+    {
+      "module": "commons-io-2.15.1",
+      "pomBlob": "6d7cf95034486fee9fddc9ff45a8d7abb91c4dcb",
+      "gav": "commons-io:commons-io:2.15.1-m3-source-1"
+    },
+    {
+      "module": "commons-lang3-3.14.0",
+      "pomBlob": "3c32c1149f6a4b6da9f4abea3263b51bbaed9afe",
+      "gav": "org.apache.commons:commons-lang3:3.14.0-m3-source-1"
+    },
+    {
+      "module": "commons-text",
+      "pomBlob": "34c0b83bf9e34f685921f3745c49cadfe458218b",
+      "gav": "org.apache.commons:commons-text:1.11.0-m3-source-1"
+    },
+    {
+      "module": "dec",
+      "pomBlob": "fcc142b4900487767eb80bae5d928960ab7bdb45",
+      "gav": "org.brotli:dec:0.1.2-m3-source-1"
+    },
+    {
+      "module": "fastdoubleparser-1.0.0",
+      "pomBlob": "62d9664e6d03998bb49e1c812238c66419a90fa5",
+      "gav": "ch.randelshofer:fastdoubleparser:1.0.0-m3-source-1"
+    },
+    {
+      "module": "fastfilter",
+      "pomBlob": "3f428d35de65d09588010631a984ab9a9d026eb3",
+      "gav": "io.github.fastfilter:fastfilter:1.0.2-m3-source-1"
+    },
+    {
+      "module": "gizmo",
+      "pomBlob": "44855b9b2ca17c45cf5084f97df899b000cd4fad",
+      "gav": "io.quarkus.gizmo:gizmo:1.0.11.Final-m3-source-1"
+    },
+    {
+      "module": "jackson-annotations-2.16.1",
+      "pomBlob": "9f8201a61ae714b9faa274d6cee04216e2362289",
+      "gav": "com.fasterxml.jackson.core:jackson-annotations:2.16.1-m3-source-1"
+    },
+    {
+      "module": "jackson-core-2.16.1",
+      "pomBlob": "0b3260fdc77dee473cb3472aa66cfdc30d259027",
+      "gav": "com.fasterxml.jackson.core:jackson-core:2.16.1-m3-source-1"
+    },
+    {
+      "module": "jackson-databind-2.16.1",
+      "pomBlob": "e141dcd972fbed190c13bd5fa2d09cd180f656ff",
+      "gav": "com.fasterxml.jackson.core:jackson-databind:2.16.1-m3-source-1"
+    },
+    {
+      "module": "jackson-dataformat-csv",
+      "pomBlob": "bbccf6da547af4529ab013f7b37bc6754b043980",
+      "gav": "com.fasterxml.jackson.dataformat:jackson-dataformat-csv:2.16.1-m3-source-1"
+    },
+    {
+      "module": "jackson-dataformat-smile",
+      "pomBlob": "beab852548791d385a145363d379e1d842ea1e6d",
+      "gav": "com.fasterxml.jackson.dataformat:jackson-dataformat-smile:2.16.1-m3-source-1"
+    },
+    {
+      "module": "jackson-datatype-jsr310-2.16.1",
+      "pomBlob": "f10b6dbdd160bc4239756346d0793183f0b07c4a",
+      "gav": "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.16.1-m3-source-1"
+    },
+    {
+      "module": "jackson-module-parameter-names",
+      "pomBlob": "a4b99cc79e1e4847614634293d64cf7d1a613517",
+      "gav": "com.fasterxml.jackson.module:jackson-module-parameter-names:2.16.1-m3-source-1"
+    },
+    {
+      "module": "jandex",
+      "pomBlob": "dd4120b0eb4129d2ddeb82c4c2addec6eab4355b",
+      "gav": "org.jboss:jandex:2.4.2.Final-m3-source-1"
+    },
+    {
+      "module": "java-object-diff",
+      "pomBlob": "9360964212b0d723e7d95763f0dd084d133e30b1",
+      "gav": "org.openrewrite.tools:java-object-diff:1.0.1-m3-source-1"
+    },
+    {
+      "module": "jna-5.14.0",
+      "pomBlob": "0293e224b9230e05996104e2ad93844060ff4607",
+      "gav": "net.java.dev.jna:jna:5.14.0-m3-source-1"
+    },
+    {
+      "module": "jna-platform",
+      "pomBlob": "d0ab610250f86fc73aca134dac27e27b522cc070",
+      "gav": "net.java.dev.jna:jna-platform:5.14.0-m3-source-1"
+    },
+    {
+      "module": "jsr305",
+      "pomBlob": "ecab42bef945ed96b92bfd4af036858b278e8040",
+      "gav": "com.google.code.findbugs:jsr305:3.0.2-m3-source-1"
+    },
+    {
+      "module": "junit-jupiter-5.10.2",
+      "pomBlob": "b3f0e178fb3dea43021adbf59cc036d7f0376463",
+      "gav": "org.junit.jupiter:junit-jupiter:5.10.2-m3-source-1"
+    },
+    {
+      "module": "junit-jupiter-api-5.10.2",
+      "pomBlob": "58106c10f994253ddcb4213c91dccd8f8e53d522",
+      "gav": "org.junit.jupiter:junit-jupiter-api:5.10.2-m3-source-1"
+    },
+    {
+      "module": "junit-jupiter-engine-5.10.2",
+      "pomBlob": "afff0d3e4b397ba47189687f10079d63543323fb",
+      "gav": "org.junit.jupiter:junit-jupiter-engine:5.10.2-m3-source-1"
+    },
+    {
+      "module": "junit-jupiter-params-5.10.2",
+      "pomBlob": "c078c4682188c6055c7456de83aae29f63a79480",
+      "gav": "org.junit.jupiter:junit-jupiter-params:5.10.2-m3-source-1"
+    },
+    {
+      "module": "junit-platform-commons-1.10.2",
+      "pomBlob": "3b3b1266d0a5362308cbc0dfe90426bedc737574",
+      "gav": "org.junit.platform:junit-platform-commons:1.10.2-m3-source-1"
+    },
+    {
+      "module": "junit-platform-engine-1.10.2",
+      "pomBlob": "64fb9850b8232236549096558df92fa95aa8e41b",
+      "gav": "org.junit.platform:junit-platform-engine:1.10.2-m3-source-1"
+    },
+    {
+      "module": "micrometer-core",
+      "pomBlob": "197b827a7cf119a809ce4c3e56e34e4fb462e62c",
+      "gav": "io.micrometer:micrometer-core:1.9.17-m3-source-1"
+    },
+    {
+      "module": "opentest4j",
+      "pomBlob": "aa3b3f3b67ff08430c31ab535f31c47659bfd441",
+      "gav": "org.opentest4j:opentest4j:1.3.0-m3-source-1"
+    },
+    {
+      "module": "org.eclipse.jgit",
+      "pomBlob": "952d98ca747d8a41fa1f8d975934db9dd60894a4",
+      "gav": "org.eclipse.jgit:org.eclipse.jgit:5.13.3.202401111512-r-m3-source-1"
+    },
+    {
+      "module": "org.osgi.core",
+      "pomBlob": "509216365166dc7052d01126db2972b6a8dcec75",
+      "gav": "org.osgi:org.osgi.core:6.0.0-m3-source-1"
+    },
+    {
+      "module": "rewrite-core",
+      "pomBlob": "9269efac900ad96af9a7148cad7c60324768cdf4",
+      "gav": "org.openrewrite:rewrite-core:8.17.1-m3-source-1"
+    },
+    {
+      "module": "rewrite-java",
+      "pomBlob": "2339c206bd40272fd7766cacb01a482f900660cd",
+      "gav": "org.openrewrite:rewrite-java:8.17.1-m3-source-1"
+    },
+    {
+      "module": "rewrite-java-21",
+      "pomBlob": "6be8ba9fdb175354d598dca33ae08f2370067eae",
+      "gav": "org.openrewrite:rewrite-java-21:8.17.1-m3-source-1"
+    },
+    {
+      "module": "rewrite-test",
+      "pomBlob": "6e693f1a4336d3f0b1c30bd7a7e4c9b1bfa8137e",
+      "gav": "org.openrewrite:rewrite-test:8.17.1-m3-source-1"
+    },
+    {
+      "module": "rewrite-xml",
+      "pomBlob": "07fd39acab996a04fd66b2349106b58f2f8806a2",
+      "gav": "org.openrewrite:rewrite-xml:8.17.1-m3-source-1"
+    },
+    {
+      "module": "rewrite-yaml",
+      "pomBlob": "8351e53569abaea27bab59e1c9d3d37239c5282b",
+      "gav": "org.openrewrite:rewrite-yaml:8.17.1-m3-source-1"
+    },
+    {
+      "module": "slf4j-api-1.7.36",
+      "pomBlob": "c1aeb4649b61fac31b6dae0158cec696cd7b58fa",
+      "gav": "org.slf4j:slf4j-api:1.7.36-m3-source-1"
+    },
+    {
+      "module": "slf4j-api-2.0.9",
+      "pomBlob": "ec1566753b23587db8a33ac9a68fc085d8eb22dc",
+      "gav": "org.slf4j:slf4j-api:2.0.9-m3-source-1"
+    },
+    {
+      "module": "snakeyaml-2.2",
+      "pomBlob": "4be0bb962fa5c9c05a92c92292febf4590917561",
+      "gav": "org.yaml:snakeyaml:2.2-m3-source-1"
+    },
+    {
+      "module": "snappy-java",
+      "pomBlob": "7494608703173f2c4d164b95bfbddc22efeeb569",
+      "gav": "org.xerial.snappy:snappy-java:1.1.10.5-m3-source-1"
+    },
+    {
+      "module": "univocity-parsers",
+      "pomBlob": "04ad19b0bc5892a8151a49092a9dfe2eeb0612ac",
+      "gav": "com.univocity:univocity-parsers:2.9.1-m3-source-1"
+    },
+    {
+      "module": "xz",
+      "pomBlob": "8907b5b2685a4989a2d25b9a3c922bd1b237ce6d",
+      "gav": "org.tukaani:xz:1.10-m3-source-1"
+    }
+  ],
+  "selectedProjectGavs": [
+    "ch.randelshofer:fastdoubleparser:1.0.0-m3-source-1",
+    "com.fasterxml.jackson.core:jackson-annotations:2.16.1-m3-source-1",
+    "com.fasterxml.jackson.core:jackson-core:2.16.1-m3-source-1",
+    "com.fasterxml.jackson.core:jackson-databind:2.16.1-m3-source-1",
+    "com.fasterxml.jackson.dataformat:jackson-dataformat-csv:2.16.1-m3-source-1",
+    "com.fasterxml.jackson.dataformat:jackson-dataformat-smile:2.16.1-m3-source-1",
+    "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.16.1-m3-source-1",
+    "com.fasterxml.jackson.module:jackson-module-parameter-names:2.16.1-m3-source-1",
+    "com.google.code.findbugs:jsr305:3.0.2-m3-source-1",
+    "com.googlecode.javaewah:JavaEWAH:1.1.13-m3-source-1",
+    "com.m3:tq-sync:1.0-SNAPSHOT",
+    "com.univocity:univocity-parsers:2.9.1-m3-source-1",
+    "commons-codec:commons-codec:1.22.1-m3-source-1",
+    "commons-io:commons-io:2.15.1-m3-source-1",
+    "io.github.classgraph:classgraph:4.8.165-m3-source-1",
+    "io.github.fastfilter:fastfilter:1.0.2-m3-source-1",
+    "io.micrometer:micrometer-core:1.9.17-m3-source-1",
+    "io.quarkus.gizmo:gizmo:1.0.11.Final-m3-source-1",
+    "net.bytebuddy:byte-buddy:1.14.11-m3-source-1",
+    "net.java.dev.jna:jna-platform:5.14.0-m3-source-1",
+    "net.java.dev.jna:jna:5.14.0-m3-source-1",
+    "org.antlr:antlr4-runtime:4.11.1-m3-source-1",
+    "org.apache.commons:commons-compress:1.26.0-m3-source-1",
+    "org.apache.commons:commons-lang3:3.14.0-m3-source-1",
+    "org.apache.commons:commons-text:1.11.0-m3-source-1",
+    "org.apiguardian:apiguardian-api:1.1.2-m3-source-1",
+    "org.assertj:assertj-core:3.25.3-m3-source-1",
+    "org.brotli:dec:0.1.2-m3-source-1",
+    "org.eclipse.jgit:org.eclipse.jgit:5.13.3.202401111512-r-m3-source-1",
+    "org.hdrhistogram:HdrHistogram:2.1.12-m3-source-1",
+    "org.jboss:jandex:2.4.2.Final-m3-source-1",
+    "org.jetbrains:annotations:24.1.0-m3-source-1",
+    "org.junit.jupiter:junit-jupiter-api:5.10.2-m3-source-1",
+    "org.junit.jupiter:junit-jupiter-engine:5.10.2-m3-source-1",
+    "org.junit.jupiter:junit-jupiter-params:5.10.2-m3-source-1",
+    "org.junit.jupiter:junit-jupiter:5.10.2-m3-source-1",
+    "org.junit.platform:junit-platform-commons:1.10.2-m3-source-1",
+    "org.junit.platform:junit-platform-engine:1.10.2-m3-source-1",
+    "org.latencyutils:LatencyUtils:2.0.3-m3-source-1",
+    "org.openrewrite.tools:java-object-diff:1.0.1-m3-source-1",
+    "org.openrewrite:rewrite-core:8.17.1-m3-source-1",
+    "org.openrewrite:rewrite-java-21:8.17.1-m3-source-1",
+    "org.openrewrite:rewrite-java:8.17.1-m3-source-1",
+    "org.openrewrite:rewrite-test:8.17.1-m3-source-1",
+    "org.openrewrite:rewrite-xml:8.17.1-m3-source-1",
+    "org.openrewrite:rewrite-yaml:8.17.1-m3-source-1",
+    "org.opentest4j:opentest4j:1.3.0-m3-source-1",
+    "org.osgi:org.osgi.core:6.0.0-m3-source-1",
+    "org.ow2.asm:asm-analysis:9.6-m3-source-1",
+    "org.ow2.asm:asm-tree:9.6-m3-source-1",
+    "org.ow2.asm:asm-util:9.6-m3-source-1",
+    "org.ow2.asm:asm:9.6-m3-source-1",
+    "org.slf4j:slf4j-api:1.7.36-m3-source-1",
+    "org.slf4j:slf4j-api:2.0.9-m3-source-1",
+    "org.tukaani:xz:1.10-m3-source-1",
+    "org.xerial.snappy:snappy-java:1.1.10.5-m3-source-1",
+    "org.yaml:snakeyaml:2.2-m3-source-1"
+  ]
+}
