@@ -188,6 +188,13 @@ final class M3IndexedReversedCoordinates20261019Test {
                     .physicalIndices();
             assertArrayEquals(oracle.stream().mapToInt(Integer::intValue).toArray(),
                     actual, "trial " + trial);
+            if (M3IndexPathMasks.nativeAvailable()) {
+                assertArrayEquals(actual,
+                        slice.maskedByPhysicalState(state, required, forbidden,
+                                M3IndexPathMasks.Backend.NATIVE_REQUIRED)
+                                .physicalIndices(),
+                        "JNI trial " + trial);
+            }
         }
     }
 
