@@ -97,9 +97,16 @@ the answers are the same (such sizes stay 0), the call counts are not. (3) After
   changes (`VariableHeightLayoutCache.java:436-440`: the hidden root's row is -1). Stock rows overlap or leave gaps,
   for example after a node's text changes from a two-line HTML label to one line with `setRootVisible(false)`. The
   M3 cache has no stored y origins, so its rows stay exact.
-- **D2**: `DefaultTreeSelectionModel.insureRowContinuity` throws `ArrayIndexOutOfBoundsException`
-  (`DefaultTreeSelectionModel.java:918`) when a CONTIGUOUS selection holds an invisible path; both caches throw it at
-  the same point. Not fixed in this leaf.
+- **D2** (fixed 2026-10-19, unconditionally, like D3): `DefaultTreeSelectionModel.insureRowContinuity` threw
+  `ArrayIndexOutOfBoundsException` (`DefaultTreeSelectionModel.java:918`) when a CONTIGUOUS selection held a path
+  that is not visible. It copies each selected path whose row is below the first gap to `newSel[row - min]`, and
+  row -1 is below every gap. Such a selection arises when one hidden path is selected (one path is always
+  contiguous) and `expandsSelectedPaths` is false. The recipe `M3SwingTreeSelectionContinuity` inserts one guard
+  that skips rows below `min`, so the selection becomes the documented first run of contiguous rows.
+  `M3TreeSelectionContinuityTest` fails on stock and passes on the patched JDK. JetBrainsRuntime has the same code.
+  Fixing it uncovered two `resetRowSelection` calls of the stock `FixedHeightLayoutCache` that leaf 2 skipped (a
+  structure change of an expanded node that leaves it a leaf; the collapse of an expanded node without children);
+  both are fixed, and the fixed-mode differential passes 300 x 400.
 - **D4**: stock `FixedHeightLayoutCache.getRowForPath` and `getVisiblePathsFrom` pass `getIndexOfChild`'s -1 on
   without a check when the parent is expanded and visible but no longer has the path's last component (a removed
   selected node, before `JTree` prunes the selection): the row is the parent's row and the enumeration starts at the
