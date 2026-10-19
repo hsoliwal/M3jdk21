@@ -60,7 +60,7 @@ public final class M3HfLexiconIntakeProof {
     private static int verifyLanguageResourceDiscovery() throws IOException {
         List<String> lines = resourceLines(
                 "/com/m3/lexicon/hf/language-resource-discovery.tsv");
-        require(lines.size() == 60, "59 language-resource candidates plus header");
+        require(lines.size() == 64, "63 language-resource candidates plus header");
         List<String> expectedHeader = List.of("source_id", "resource", "category",
                 "data_shape_and_identity", "rights_and_attribution", "m3_candidate_use",
                 "admission_blockers", "state", "evidence");
@@ -92,8 +92,26 @@ public final class M3HfLexiconIntakeProof {
                 "openslr-beep", "dobes-archive", "elar-archive", "elarspeech-preprint-2026", "ai4bharat-indic-frequency-lists",
                 "morphynet-multilingual-morphology",
                 "cmudict-us-english-pronunciations", "hunspell-language-dictionaries",
-                "global-wordnet-discovery-index", "babelnet-restricted-lexical-graph")),
+                "global-wordnet-discovery-index", "babelnet-restricted-lexical-graph",
+                "hf-paranames-1-0", "giellalt-language-repositories",
+                "gf-resource-grammar-library", "sigmorphon-2022-segmentation")),
                 "lexicon, grammar, translation, concept, norms, archive, sign and HF leads retained");
+        String paranames = lines.stream().skip(1)
+                .filter(line -> "hf-paranames-1-0".equals(splitTsv(line)[0]))
+                .findFirst().orElse("");
+        require(paranames.contains("MIT") && paranames.contains("CC BY 4.0")
+                && paranames.contains("Conflicting license evidence"),
+                "ParaNames license discrepancy stays visible and non-admitted");
+        String giella = lines.stream().skip(1)
+                .filter(line -> "giellalt-language-repositories".equals(splitTsv(line)[0]))
+                .findFirst().orElse("");
+        require(giella.contains("per repository") && giella.contains("GPL-3.0"),
+                "GiellaLT language-package license scope remains explicit");
+        String sigmorphon = lines.stream().skip(1)
+                .filter(line -> "sigmorphon-2022-segmentation".equals(splitTsv(line)[0]))
+                .findFirst().orElse("");
+        require(sigmorphon.contains("CC BY-SA 3.0") && sigmorphon.contains("Wiktionary"),
+                "SIGMORPHON task attribution and share-alike remain explicit");
         String panlex = lines.stream().skip(1).filter(line -> "panlex".equals(splitTsv(line)[0]))
                 .findFirst().orElse("");
         require(panlex.contains("CC BY-NC-SA 4.0") && panlex.contains("CC0")
