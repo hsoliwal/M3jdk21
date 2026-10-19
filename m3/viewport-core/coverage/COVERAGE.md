@@ -13,7 +13,8 @@ reports were written to the regenerable scratch folder and are not committed.
 | 2: + runtime, planner, scroll and block-cache tests | 136 | 2528 / 2585 = 97.79% | 1807 / 1952 = 92.57% |
 | 3: + edge tests | 149 | 2584 / 2585 = 99.96% | 1920 / 1952 = 98.36% |
 | 4: wave 1 final (reports on G:, superseded) | 151 | 2584 / 2585 = 99.96% | 1933 / 1952 = 99.03% |
-| **5: waves 1+2, regenerated on S:** | **170** | **3141 / 3142 = 99.97%** | **2247 / 2268 = 99.07%** |
+| 5: waves 1+2, regenerated on S: | 170 | 3141 / 3142 = 99.97% | 2247 / 2268 = 99.07% |
+| **6: waves 1-3, folded into m3/collections, slot-map swap, M3ListDiff (S:)** | **178** | **3810 / 3811 = 99.97%** | **2614 / 2634 = 99.24%** |
 
 **Gate (99% lines and branches): MET (run 5).** Runs 1-4 wrote their JaCoCo exec and reports to G:, which was later
 found unhealthy (exFAT dirty bit, random write failures). Run 5 regenerated everything on `S:/m3-scratch/viewport-everywhere`
