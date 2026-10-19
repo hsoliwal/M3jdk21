@@ -30,7 +30,16 @@ public final class StructuralSignals {
         return union == 0 ? 0.0 : 1.0 - intersection / (double) union;
     }
 
-    /** Weighted aggregate over package, class, fields, methods, dependencies, and calls. */
+    /**
+     * Weighted aggregate over package, class, fields, methods, dependencies, and calls.
+     *
+     * <p>Weights are nonnegative finite domain evidence, not ordering keys. Divide by the
+     * greatest positive weight before accumulation: multiplying every weight by the same
+     * positive finite factor must not change the distance or cause a spurious overflow when
+     * the sum of individually finite weights exceeds {@code Double.MAX_VALUE}. Six scaled
+     * weights sum to at most six. All token lanes, including zero-weight lanes, retain their
+     * previous sorted-unique validation contract.</p>
+     */
     public static double weightedDistance(long[][] left, long[][] right, double[] weights) {
         Objects.requireNonNull(left, "left");
         Objects.requireNonNull(right, "right");
@@ -39,19 +48,25 @@ public final class StructuralSignals {
                 || weights.length != DIMENSIONS) {
             throw new IllegalArgumentException("expected six signal dimensions");
         }
-        double total = 0.0, mass = 0.0;
-        for (int d = 0; d < DIMENSIONS; d++) {
-            double weight = weights[d];
-            if (!Double.isFinite(weight) || weight < 0) {
+        double greatest = 0.0;
+        for (double weight : weights) {
+            if (!Double.isFinite(weight) || weight < 0.0) {
                 throw new IllegalArgumentException("weight must be finite and nonnegative");
             }
-            double delta = jaccardDistance(left[d], right[d]);
-            total += delta * weight;
-            mass += weight;
+            if (weight > greatest) greatest = weight;
         }
-        if (!(mass > 0.0) || !Double.isFinite(mass)) {
+        if (greatest == 0.0) {
             throw new IllegalArgumentException("total weight must be finite and positive");
         }
+        double total = 0.0, mass = 0.0;
+        for (int d = 0; d < DIMENSIONS; d++) {
+            // Always validate the lane, including zero-weight and underflowed-weight lanes.
+            double delta = jaccardDistance(left[d], right[d]);
+            double scaled = weights[d] / greatest;
+            total += delta * scaled;
+            mass += scaled;
+        }
+        // greatest contributes 1.0, so mass >= 1 and is finite even at extreme scales.
         return Math.min(1.0, Math.max(0.0, total / mass));
     }
 
