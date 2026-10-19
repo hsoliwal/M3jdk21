@@ -66,7 +66,7 @@ public final class M3HfLexiconIntakeProof {
     private static int verifyLanguageResourceDiscovery() throws IOException {
         List<String> lines = resourceLines(
                 "/com/m3/lexicon/hf/language-resource-discovery.tsv");
-        require(lines.size() == 217, "216 language-resource candidates plus header");
+        require(lines.size() == 227, "226 language-resource candidates plus header");
         List<String> expectedHeader = List.of("source_id", "resource", "category",
                 "data_shape_and_identity", "rights_and_attribution", "m3_candidate_use",
                 "admission_blockers", "state", "evidence");
@@ -305,8 +305,18 @@ public final class M3HfLexiconIntakeProof {
                 "cefrlex-six-language",
                 "clearpond-five-language-neighborhoods",
                 "manulex-french-child-directed-lexicons",
-                "multi-lex-french-ngrams-2022"
-        )), "exact 216 language-resource source IDs match the pinned catalogue");
+                "multi-lex-french-ngrams-2022",
+                "hf-malayalam-pronunciation-lexicon",
+                "hf-nusax-mt",
+                "hf-maori-language-eval",
+                "hf-afrisud-treebanks",
+                "hf-wolof-french-jolof",
+                "hf-apertium-breton-french",
+                "inuktitutcomputing-uqailaut-roots",
+                "nrc-nunavut-hansard-3",
+                "hf-americasnli",
+                "hf-teara-maori-english"
+        )), "exact 226 language-resource source IDs match the pinned catalogue");
         String sindhi = discoveryRecord(lines, "hf-sindhi-open-lexicon");
         require(sindhi.contains("223,342") && sindhi.contains("lexical_id")
                 && sindhi.contains("entry_id") && sindhi.contains("schema casting"),
@@ -431,6 +441,47 @@ public final class M3HfLexiconIntakeProof {
                 && multiLex.contains("license field is blank")
                 && multiLex.contains("about 1.4 GB"),
                 "Multi-LEX n-gram order, scale and unresolved derivative rights stay explicit");
+        String malayalam = discoveryRecord(lines, "hf-malayalam-pronunciation-lexicon");
+        require(malayalam.contains("174,849") && malayalam.contains("Nine categorized subsets")
+                && malayalam.contains("automatically generated")
+                && malayalam.contains("CC BY-SA 4.0"),
+                "Malayalam IPA rows preserve generated status, category and separate upstream-rights review");
+        String nusax = discoveryRecord(lines, "hf-nusax-mt");
+        require(nusax.contains("132 directed language pairs") && nusax.contains("builder-generated enumeration IDs")
+                && nusax.contains("CC BY-SA 4.0"),
+                "NusaX pair views retain source row provenance and do not invent lexeme equivalence");
+        String maoriEval = discoveryRecord(lines, "hf-maori-language-eval");
+        require(maoriEval.contains("551 paragraph pairs") && maoriEval.contains("pending kaitiakitanga review")
+                && maoriEval.contains("do not train"),
+                "Māori legal benchmark remains evaluation-only with its unresolved community license");
+        String afrisud = discoveryRecord(lines, "hf-afrisud-treebanks");
+        require(afrisud.contains("eight language configurations") && afrisud.contains("nine")
+                && afrisud.contains("CC BY-NC 4.0"),
+                "AfriSUD language count discrepancy and noncommercial SUD scope remain explicit");
+        String wolof = discoveryRecord(lines, "hf-wolof-french-jolof");
+        require(wolof.contains("12,084 rows") && wolof.contains("MIT")
+                && wolof.contains("no documented source-native row ID"),
+                "Wolof export packaging license is not mistaken for cleared underlying source rights");
+        String breton = discoveryRecord(lines, "hf-apertium-breton-french");
+        require(breton.contains("17,952") && breton.contains("GPL-2.0")
+                && breton.contains("lose analyses"),
+                "Breton flat pairs retain Apertium license and morphology-loss caveat");
+        String uqailaut = discoveryRecord(lines, "inuktitutcomputing-uqailaut-roots");
+        require(uqailaut.contains("3,221 text lines") && uqailaut.contains("no distinct license")
+                && uqailaut.contains("not a native lexical identifier"),
+                "UQAILAUT data rights are not inferred from the repository code license");
+        String nunavut = discoveryRecord(lines, "nrc-nunavut-hansard-3");
+        require(nunavut.contains("1.3 million aligned sentence pairs") && nunavut.contains("CC BY 4.0")
+                && nunavut.contains("not an official transcript or translation"),
+                "Nunavut Hansard retains NRC record identity, required disclaimer and permitted-use limits");
+        String americas = discoveryRecord(lines, "hf-americasnli");
+        require(americas.contains("13.9K") && americas.contains("ten varieties")
+                && americas.contains("CC BY-SA 4.0") && americas.contains("three-way NLI label"),
+                "AmericasNLI remains variety-scoped task evaluation rather than a translation lexicon");
+        String teara = discoveryRecord(lines, "hf-teara-maori-english");
+        require(teara.contains("6.49K") && teara.contains("CC BY-NC 3.0")
+                && teara.contains("item-level source URL") && teara.contains("item-level exceptions"),
+                "Te Ara exports preserve noncommercial and item-specific rights and do not invent source IDs");
         String massive = discoveryRecord(lines, "massive-nlu-1-1");
         require(massive.contains("52 languages") && massive.contains("SLURP") && massive.contains("CC BY 4.0")
                 && massive.contains("not a canonical dictionary"),
@@ -1010,7 +1061,7 @@ public final class M3HfLexiconIntakeProof {
         require(Files.isRegularFile(catalogue), "algorithm catalogue exists at Maven invocation root");
         if (!Files.isRegularFile(catalogue)) return 0;
         List<String> lines = Files.readAllLines(catalogue, StandardCharsets.UTF_8);
-        require(lines.size() == 76, "75 algorithm patterns plus header");
+        require(lines.size() == 79, "78 algorithm patterns plus header");
         List<String> header = List.of("problem_category", "discovery_source", "candidate",
                 "decision", "owner_or_reason", "qualification");
         require(!lines.isEmpty() && List.of(splitTsv(lines.getFirst())).equals(header),
@@ -1100,7 +1151,7 @@ public final class M3HfLexiconIntakeProof {
                 "cross_lingual_neighborhood_precompute",
                 "child_directed_lexical_signal_precompute",
                 "multiword_ngram_frequency_index"
-        )), "all 75 algorithm categories match the pinned catalogue");
+        )), "all 78 algorithm categories match the pinned catalogue");
         for (String category : List.of("spoken_language_phoneme_morphology_alignment",
                 "medical_translation_regression", "low_resource_african_parallel_corpus",
                 "multi_source_parallel_corpus_provenance", "document_level_translation_regression",
