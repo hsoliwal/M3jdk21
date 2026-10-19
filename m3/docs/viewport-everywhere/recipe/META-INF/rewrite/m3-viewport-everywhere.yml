@@ -179,3 +179,21 @@ recipeList:
   - com.m3.viewport.recipe.M3ChangeImport: {from: com.m3.viewport.M3ViewportRuntime.RowLayout, to: com.m3.collections.M3WindowRuntime.RowLayout}
   - com.m3.viewport.recipe.M3ChangeImport: {from: com.m3.viewport.M3ViewportRuntime.RowWindow, to: com.m3.collections.M3WindowRuntime.RowWindow}
   - com.m3.viewport.recipe.M3ChangeImport: {from: com.m3.viewport.M3ViewportRuntime.Selection, to: com.m3.collections.M3WindowRuntime.Selection}
+---
+# Wave 4 (user 2026-10-19, exhaustive extraction): SWT round 10 (5593cc43ba) sort/filter lanes, Apache-2.0 OR EPL-2.0
+# at source. M3RowMask (long[] word masks: popcount rank, lowest-set-bit compaction) becomes M3BitMask; M3SortLanes
+# (LSD radix + run merge sort of a row permutation) becomes M3PermutationIndex, its column key type M3RadixKey.
+type: specs.openrewrite.org/v1beta/recipe
+name: com.m3.viewport.recipe.Wave4Lanes
+displayName: M3 viewport-everywhere wave 4 (mask and permutation lanes)
+description: M3RowMask to M3BitMask; M3SortLanes to M3PermutationIndex with M3RadixKey keys.
+recipeList:
+  - com.m3.viewport.recipe.M3ApacheHeader: {origin: hsoliwal/eclipse.platform.swt 5593cc43baad179097f1fc3f72c9e5d8b6f8fb8a}
+  - com.m3.viewport.recipe.M3DetachSwt
+  - org.openrewrite.java.ChangeType: {oldFullyQualifiedTypeName: org.eclipse.swt.m3.M3RowMask, newFullyQualifiedTypeName: com.m3.collections.M3BitMask}
+  - org.openrewrite.java.ChangeType: {oldFullyQualifiedTypeName: org.eclipse.swt.m3.M3SortLanes, newFullyQualifiedTypeName: com.m3.collections.M3PermutationIndex}
+  - org.openrewrite.java.ChangeType: {oldFullyQualifiedTypeName: org.eclipse.swt.m3.M3ColumnKey, newFullyQualifiedTypeName: com.m3.collections.M3RadixKey}
+  - com.m3.viewport.recipe.M3TidyImports
+  - com.m3.viewport.recipe.M3PublicSurface
+  - com.m3.viewport.recipe.M3PublicLanes
+  - com.m3.viewport.recipe.M3ExplicitConstructor
