@@ -103,4 +103,18 @@ public class VisibleRangeTest {
         viewport.setSize(200, 0);
         assertTrue(tree.getVisibleRange().isEmpty());
     }
+
+    @Test
+    public void treeAreasOutsideTheRows() {
+        JTree tree = Fixtures.tree();
+        tree.setBorder(javax.swing.BorderFactory.createEmptyBorder(50, 0, 0, 0));
+        JViewport viewport = viewport(tree, 200, 20);
+        viewport.setViewPosition(new Point(0, 0));
+        assertTrue(tree.getVisibleRange().isEmpty(), "only the border above the rows is visible");
+        tree.setBorder(null);
+        tree.setSize(200, tree.getPreferredSize().height + 500);
+        viewport.setSize(200, 100);
+        viewport.setViewPosition(new Point(0, tree.getHeight() - 100));
+        assertTrue(tree.getVisibleRange().isEmpty(), "only the area below the rows is visible");
+    }
 }

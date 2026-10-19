@@ -159,4 +159,24 @@ public class SelectionRangesTest {
         tree.setSelectionRanges(new M3ItemRange[] {M3ItemRange.EMPTY});
         assertEquals(0, tree.getSelectionCount());
     }
+
+    @Test
+    public void treeSelectionModelsMayAnswerNullOrHiddenRows() {
+        JTree tree = Fixtures.tree();
+        tree.setSelectionModel(new javax.swing.tree.DefaultTreeSelectionModel() {
+            @Override
+            public int[] getSelectionRows() {
+                int[] rows = super.getSelectionRows();
+                if (rows == null || rows.length == 0) {
+                    return null;
+                }
+                int[] withHidden = java.util.Arrays.copyOf(rows, rows.length + 1);
+                withHidden[rows.length] = -1;
+                return withHidden;
+            }
+        });
+        assertEquals(0, tree.getSelectionRanges().length);
+        tree.setSelectionRow(3);
+        assertArrayEquals(new M3ItemRange[] {M3ItemRange.of(3, 3)}, tree.getSelectionRanges());
+    }
 }

@@ -39,7 +39,7 @@ Oracle files keep Oracle's header and are listed in `API_DECISIONS.tsv`.
 
 | leaf | content | status |
 |---|---|---|
-| S1 | `M3ItemRange`; `getSelectionRanges` / `setSelectionRanges` / `getVisibleRange` on JList, JTable, JTree | in progress |
+| S1 | `M3ItemRange`; `getSelectionRanges` / `setSelectionRanges` / `getVisibleRange` on JList, JTable, JTree | done: 16 tests, new code 100% lines / 96% branches, differential equal |
 | S2 | `M3Scrolling` alignments, `scrollRowToVisible(row, alignment)`, `M3ScrollInfo` | planned |
 | S3 | `M3RowMath` (JTree visible-row arithmetic over the layout cache) | planned |
 | S4 | `M3Emptiness` (row count crossing zero, for all three) | planned |
