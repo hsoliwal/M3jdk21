@@ -1,0 +1,18 @@
+{
+  "schema" : "M3_NLP_CURRENT_FORKS_SDK_RECEIPT_V1",
+  "engine" : "com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe",
+  "sdk_version" : "8.17.1",
+  "kind" : "text",
+  "crate" : "m3-nlp-current-forks-receiver-control-20261018",
+  "targets" : 3,
+  "first_application_changes" : 3,
+  "fixed_point_changes" : 0,
+  "drift_refusals" : 1,
+  "duplicate_refusals" : 1,
+  "missing_refusals" : 0,
+  "source_sha256" : {
+    "m3/tooling/module-packs/nlp-search/CURRENT_FORKS.md" : "76d4bee5535612e787e2197ad2103b85d2d14043cfa7ff1b9c4ffe48af7c1639",
+    "m3/tooling/module-packs/nlp-search/current-source-lock.json" : "054029431fbd8063c1e0397c43f3538f319984e252c92f08538881dc0a2eaff5",
+    "m3/tooling/module-packs/nlp-search/current_forks.py" : "209a243df4aee17ba2fb98e63353c1055cf5a07546bb5a854a19a9540340c037"
+  }
+}

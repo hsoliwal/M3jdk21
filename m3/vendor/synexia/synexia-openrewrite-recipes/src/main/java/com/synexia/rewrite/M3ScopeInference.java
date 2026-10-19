@@ -102,12 +102,43 @@ public final class M3ScopeInference {
         }
 
         if ((path.startsWith("bundles/") || path.startsWith("tests/") || path.startsWith("widgets/")
-                || path.startsWith("examples/org.eclipse.swt.opengl.examples/src/org/eclipse/swt/opengl/examples/"))
+                || path.startsWith("examples/"))
                 && path.contains("/src/")) {
             int source = path.indexOf("/src/");
             module = path.substring(0, source);
             relative = path.substring(source + "/src/".length());
             return location(module, relative, value);
+        }
+
+        // The source-backed NLP integration is one explicit receiver module owner.
+        String nlpPackage = switch (path) {
+            case "m3/tooling/module-packs/nlp-search/src/jdk.m3.nlp.search/jdk/m3/nlp/search/LuceneSourceFields.java" -> "jdk.m3.nlp.search";
+            case "m3/tooling/module-packs/nlp-search/src/jdk.m3.nlp.search/jdk/m3/nlp/search/SourceDocument.java" -> "jdk.m3.nlp.search";
+            case "m3/tooling/module-packs/nlp-search/src/jdk.m3.nlp.search/jdk/m3/nlp/search/SourceSpans.java" -> "jdk.m3.nlp.search";
+            case "m3/tooling/module-packs/nlp-search/tests/ModelSourceProbe.java" -> "jdk.m3.nlp.search.test";
+            case "m3/tooling/module-packs/nlp-search/tests/SourceFactsProbe.java" -> "jdk.m3.nlp.search.test";
+            case "m3/tooling/module-packs/nlp-search/tests/SourceIntegrationProbe.java" -> "jdk.m3.nlp.search.test";
+            default -> null;
+        };
+        if (nlpPackage != null) return new JavaLocation("jdk.m3.nlp.search", nlpPackage);
+
+        // The existing CPULLM JNI parity test has a legacy physical location.
+        // Preserve its actual module and package; refuse all adjacent unknown paths.
+        if (path.equals("cpullm-java/facet-release/tests/FacetExactCoverageChecks.java")) {
+            return new JavaLocation("cpullm-java", "com.synexia.cpullm.facets");
+        }
+
+        // Lucene core uses Gradle's src/java and src/test roots instead of Maven paths.
+        // Qualify only its Apache Lucene Java package; other Gradle paths still refuse.
+        if (path.startsWith("lucene/core/src/java/org/apache/lucene/")
+                || path.startsWith("lucene/core/src/test/org/apache/lucene/")) {
+            int source = path.indexOf("/src/");
+            String luceneModule = path.substring(0, source);
+            String relativePath = path.substring(source + "/src/".length());
+            relativePath = relativePath.startsWith("java/")
+                    ? relativePath.substring("java/".length())
+                    : relativePath.substring("test/".length());
+            return location(luceneModule, relativePath, value);
         }
 
         int main = path.indexOf("/src/main/java/");
