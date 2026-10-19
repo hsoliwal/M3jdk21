@@ -47,10 +47,6 @@ public final class M3ASTIngress {
     /** Secure, complete POM XML parsing; exact element byte offsets are unavailable. */
     public static M3ASTIndex mavenPom(M3File source, Limits limits) throws IOException {
         check(source, limits);
-        if (source.uri().getPath() != null && !source.uri().getPath().endsWith(".xml")
-                && !source.uri().getPath().endsWith("pom.xml")) {
-            // An explicit Maven caller may supply a memory URI; its name is not grammar authority.
-        }
         try {
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             factory.setNamespaceAware(true);
@@ -63,6 +59,15 @@ public final class M3ASTIngress {
             factory.setAttribute(XMLConstants.ACCESS_EXTERNAL_SCHEMA, "");
             Document document = factory.newDocumentBuilder().parse(
                     new InputSource(new StringReader(source.text())));
+            if (document.getDocumentElement() == null
+                    || !"project".equals(document.getDocumentElement().getLocalName())) {
+                throw new IOException("XML input is not a Maven POM project root");
+            }
+            String namespace = document.getDocumentElement().getNamespaceURI();
+            if (namespace != null && !namespace.isEmpty()
+                    && !"http://maven.apache.org/POM/4.0.0".equals(namespace)) {
+                throw new IOException("foreign XML namespace is not a Maven POM");
+            }
             M3ASTIndex.Builder output = M3ASTIndex.builder(
                     source, M3ASTIndex.Domain.MAVEN_POM, limits.maxNodes());
             Node[] stack = new Node[32];
