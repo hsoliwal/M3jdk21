@@ -12,13 +12,13 @@ ROOT = pathlib.Path(__file__).resolve().parents[4]
 MANIFEST = pathlib.Path(__file__).resolve().parent / "PRODUCT_SOURCE_MANIFEST.tsv"
 HASH = re.compile(r"[0-9a-f]{64}\Z")
 PREFIX = "m3/collections/"
-EXPECTED = {
+EXPECTED = (
     "src/main/java/com/m3/collections/M3TreeSet.java",
     "src/main/java/com/m3/collections/M3FilteredViews.java",
     "src/main/java/com/m3/collections/M3MutableFilteredViews.java",
     "src/test/java/com/m3/collections/M3FilteredSortedSetSlotSelfTest.java",
     "src/test/java/com/m3/collections/M3FilteredSortedSetSlotTest.java",
-}
+)
 
 
 def receipt_bytes() -> list[tuple[str, str, str, str]]:
@@ -41,7 +41,7 @@ def receipt_bytes() -> list[tuple[str, str, str, str]]:
             raise ValueError(f"manifest row {number}: original owner preimage cannot be ABSENT")
         rows.append((target, before, after, resource))
     actual = [row[0].removeprefix(PREFIX) for row in rows]
-    if len(actual) != len(EXPECTED) or set(actual) != EXPECTED:
+    if actual != list(EXPECTED):
         raise ValueError("missing, duplicated, added or reordered set-view source packet")
     return rows
 
