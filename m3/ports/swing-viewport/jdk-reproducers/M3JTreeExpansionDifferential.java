@@ -56,7 +56,7 @@ public final class M3JTreeExpansionDifferential {
 
     /** The stock side: overriding getDescendantToggledPaths keeps the plain Hashtable. */
     @SuppressWarnings("serial")
-    static final class StockTree extends JTree {
+    static class StockTree extends JTree {
         StockTree(TreeModel model) {
             super(model);
         }

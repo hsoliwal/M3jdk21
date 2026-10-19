@@ -85,7 +85,7 @@ public final class M3ExpandedState extends Hashtable<TreePath, Boolean> {
                 return false;
             } catch (NoSuchMethodException e) {
                 // not overridden in c
-            } catch (SecurityException | LinkageError e) {
+            } catch (LinkageError e) {
                 return false;
             }
         }
@@ -147,17 +147,23 @@ public final class M3ExpandedState extends Hashtable<TreePath, Boolean> {
         return old;
     }
 
-    /** Mirrors {@code Hashtable.rehash}, which a put of a new key runs when the count reached the threshold. */
-    private void grow() {
+    /** The bucket count {@code Hashtable.rehash} gives a table of {@code capacity} buckets: 2n + 1, at most the array limit. */
+    public static int nextCapacity(int capacity) {
         int next = (capacity << 1) + 1;
         if (next - MAX_ARRAY_SIZE > 0) {
-            if (capacity == MAX_ARRAY_SIZE) {
-                return;
-            }
-            next = MAX_ARRAY_SIZE;
+            return capacity == MAX_ARRAY_SIZE ? capacity : MAX_ARRAY_SIZE;
         }
-        capacity = next;
-        threshold = (int) Math.min(next * LOAD_FACTOR, MAX_ARRAY_SIZE + 1);
+        return next;
+    }
+
+    /**
+     * Mirrors {@code Hashtable.rehash}, which a put of a new key runs when the count reached the
+     * threshold. At the array limit {@code rehash} changes nothing; the threshold computed here is
+     * then the one it already has.
+     */
+    private void grow() {
+        capacity = nextCapacity(capacity);
+        threshold = (int) Math.min(capacity * LOAD_FACTOR, MAX_ARRAY_SIZE + 1);
     }
 
     @Override
