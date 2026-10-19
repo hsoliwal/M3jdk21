@@ -131,7 +131,25 @@ public final class M3LongBitmapFilteredSnapshot implements M3LongCollection {
     @Override public int size() { return selected.size(); }
 
     @Override public boolean contains(long value) {
+        M3LongIndexProjection.Order order = selected.order();
+        if (order != M3LongIndexProjection.Order.ENCOUNTER) {
+            return containsSorted(value, order == M3LongIndexProjection.Order.DESCENDING);
+        }
         for (int i = 0; i < size(); i++) if (selected.get(i) == value) return true;
+        return false;
+    }
+
+    /** Reuses the immutable projection order without callbacks or another index. */
+    private boolean containsSorted(long value, boolean descending) {
+        int low = 0;
+        int high = size();
+        while (low < high) {
+            int middle = low + ((high - low) >>> 1);
+            long candidate = selected.get(middle);
+            if (candidate == value) return true;
+            if (descending ? candidate > value : candidate < value) low = middle + 1;
+            else high = middle;
+        }
         return false;
     }
 
