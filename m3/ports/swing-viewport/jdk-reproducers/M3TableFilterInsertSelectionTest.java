@@ -5,9 +5,10 @@
 
 /*
  * @test
- * @bug 8366188
- * @summary A row inserted at a selected model index of a filtered JTable must not be selected; the
- *          selection must follow the originally selected row, as it does without a filter.
+ * @bug 8366188 6727200
+ * @summary With a filter that hides rows, JTable must keep a row inserted at a selected model index
+ *          unselected (JDK-8366188) and must not bring back a selection cached for an earlier update
+ *          at the next sorter event (JDK-6727200); the selection must match the unfiltered table's.
  * @run main/othervm -Djava.awt.headless=true M3TableFilterInsertSelectionTest
  */
 
@@ -29,9 +30,16 @@ import javax.swing.table.TableRowSorter;
  * model terms and shifts it on an insert with {@code DefaultListSelectionModel.insertIndexInterval(start,
  * length, true)}, which selects the new indices when the index at the insertion point is selected. So a
  * row inserted at the selected model index came back selected too, while the same insert without a
- * filter (the {@code restoreSortingSelection} path) keeps one selected row. Scenarios: the report's,
- * a multi-row insert with the lead kept, an insert before the selection, and 40 seeded scripts that
- * compare a filtered table with an unfiltered one row by row.
+ * filter (the {@code restoreSortingSelection} path) keeps one selected row.
+ * <p>
+ * JDK-6727200 (closed in 2011 as "Cannot Reproduce"). A table change that does not re-sort, such as
+ * an update, caches the selection in {@code lastModelSelection}, which only a re-sort consumed. At
+ * the next sorter event with a filter, {@code restoreSelection} preferred that stale cache to the
+ * current selection, so a cleared or changed selection came back.
+ * <p>
+ * Scenarios: JDK-8366188's report, a multi-row insert with the lead kept, an insert before the
+ * selection, JDK-6727200's report (update, clearSelection, setRowFilter), and 40 seeded scripts that
+ * compare a filtered table with an unfiltered one row by row (the scripts found JDK-6727200).
  */
 public final class M3TableFilterInsertSelectionTest {
 
@@ -78,6 +86,7 @@ public final class M3TableFilterInsertSelectionTest {
         for (Runnable r : new Runnable[] {M3TableFilterInsertSelectionTest::reportScenario,
                 M3TableFilterInsertSelectionTest::multiRowInsertKeepsLead,
                 M3TableFilterInsertSelectionTest::insertBeforeSelection,
+                M3TableFilterInsertSelectionTest::clearedSelectionStaysCleared,
                 M3TableFilterInsertSelectionTest::filteredMatchesUnfiltered}) {
             try {
                 SwingUtilities.invokeAndWait(r);
@@ -140,6 +149,24 @@ public final class M3TableFilterInsertSelectionTest {
         int[] rows = table.getSelectedRows();
         check(rows.length == 1 && Integer.valueOf(3).equals(table.getValueAt(rows[0], 0)),
                 "before: selected " + Arrays.toString(rows));
+    }
+
+    /** JDK-6727200: an update that does not re-sort, clearSelection, then a sorter event. */
+    static void clearedSelectionStaysCleared() {
+        Rows model = new Rows();
+        model.insert(0, 1, 2, 3, 5, 6);
+        JTable table = filtered(model);
+        table.setRowSelectionInterval(1, 2);
+        model.fireTableRowsUpdated(0, 0);
+        table.clearSelection();
+        refilter(table);
+        check(table.getSelectedRowCount() == 0, "6727200: selection came back " + Arrays.toString(table.getSelectedRows()));
+        table.setRowSelectionInterval(0, 0);
+        model.fireTableRowsUpdated(1, 1);
+        table.setRowSelectionInterval(3, 3);
+        refilter(table);
+        check(Arrays.equals(new int[] {3}, table.getSelectedRows()), "6727200: changed selection replaced by "
+                + Arrays.toString(table.getSelectedRows()));
     }
 
     /** Sorter with a filter hiding multiples of 5, ascending by id. */
