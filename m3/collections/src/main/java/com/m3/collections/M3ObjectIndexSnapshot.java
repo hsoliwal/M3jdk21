@@ -8,11 +8,15 @@ package com.m3.collections;
 import java.util.AbstractList;
 import java.util.Arrays;
 import java.util.BitSet;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Comparator;
+import java.util.List;
 import java.util.ConcurrentModificationException;
 import java.util.Objects;
 import java.util.RandomAccess;
 import java.util.function.Predicate;
+import java.util.function.UnaryOperator;
 import java.util.function.ToDoubleFunction;
 
 /**
@@ -32,8 +36,9 @@ import java.util.function.ToDoubleFunction;
  *
  * <p>This is a detached read-only M3 view, not a replacement concrete identity
  * for {@code java.util.ArrayList}, {@code SortedSet} or another JDK collection.
- * Mutation methods inherited from {@link AbstractList} refuse with
- * {@link UnsupportedOperationException}.</p>
+ * Every mutator explicitly refuses with {@link UnsupportedOperationException},
+ * including empty/no-op bulk methods; reversed views retain the same strict
+ * immutable boundary instead of inheriting AbstractList's no-op paths.</p>
  */
 public final class M3ObjectIndexSnapshot<E> extends AbstractList<E> implements RandomAccess {
     public enum Order {
@@ -85,6 +90,35 @@ public final class M3ObjectIndexSnapshot<E> extends AbstractList<E> implements R
     @SuppressWarnings("unchecked")
     public E get(int index) {
         return (E) values[denseRow(index)];
+    }
+
+    /** Strict immutable mutation boundary, even for no-op writes or empty views. */
+    private static UnsupportedOperationException immutable() {
+        return new UnsupportedOperationException("immutable M3 object-index snapshot");
+    }
+
+    @Override public E set(int index, E value) { throw immutable(); }
+    @Override public void add(int index, E value) { throw immutable(); }
+    @Override public boolean add(E value) { throw immutable(); }
+    @Override public boolean addAll(Collection<? extends E> incoming) { throw immutable(); }
+    @Override public boolean addAll(int index, Collection<? extends E> incoming) { throw immutable(); }
+    @Override public E remove(int index) { throw immutable(); }
+    @Override public boolean remove(Object value) { throw immutable(); }
+    @Override public boolean removeAll(Collection<?> incoming) { throw immutable(); }
+    @Override public boolean retainAll(Collection<?> incoming) { throw immutable(); }
+    @Override public boolean removeIf(Predicate<? super E> test) { throw immutable(); }
+    @Override public void replaceAll(UnaryOperator<E> operator) { throw immutable(); }
+    @Override public void sort(Comparator<? super E> comparator) { throw immutable(); }
+    @Override public void clear() { throw immutable(); }
+    @Override protected void removeRange(int begin, int end) { throw immutable(); }
+    @Override public void addFirst(E value) { throw immutable(); }
+    @Override public void addLast(E value) { throw immutable(); }
+    @Override public E removeFirst() { throw immutable(); }
+    @Override public E removeLast() { throw immutable(); }
+
+    /** JDK21 reverse order is a view, but never a writable alias to a snapshot. */
+    @Override public List<E> reversed() {
+        return Collections.unmodifiableList(super.reversed());
     }
 
     public int physicalSlotAt(int index) {

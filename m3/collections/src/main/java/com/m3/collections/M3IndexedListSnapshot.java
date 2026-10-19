@@ -9,8 +9,10 @@ import java.util.AbstractList;
 import java.util.Arrays;
 import java.util.BitSet;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.function.UnaryOperator;
 import java.util.Comparator;
+import java.util.List;
 import java.util.Objects;
 import java.util.RandomAccess;
 import java.util.function.Predicate;
@@ -109,6 +111,16 @@ public final class M3IndexedListSnapshot<E> extends AbstractList<E> implements R
     @Override public void sort(Comparator<? super E> comparator) { throw immutable(); }
     @Override public void clear() { throw immutable(); }
     @Override protected void removeRange(int begin, int end) { throw immutable(); }
+
+    @Override public void addFirst(E value) { throw immutable(); }
+    @Override public void addLast(E value) { throw immutable(); }
+    @Override public E removeFirst() { throw immutable(); }
+    @Override public E removeLast() { throw immutable(); }
+
+    /** Preserve no-op immutable refusal on the JDK21 reversed view as well. */
+    @Override public List<E> reversed() {
+        return Collections.unmodifiableList(super.reversed());
+    }
 
     public int[] physicalIndices() { return Arrays.copyOfRange(positions, from, to); }
 
