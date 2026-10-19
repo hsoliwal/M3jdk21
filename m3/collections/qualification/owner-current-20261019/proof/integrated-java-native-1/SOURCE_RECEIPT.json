@@ -1,0 +1,2230 @@
+{
+  "scope": "Existing integrated M3JDK21 image plus exact emitted external com.m3.collections module and test patch, real required JNI libraries; not a claim that collections was linked into the prebuilt image",
+  "runtime_inputs_sha256": "571dee423d012cbc01c35d5e6a5c3cc1efadabf2a2d4048919251016b804b01d",
+  "sdk_source_kind": "ACTUAL_SDK_EMITTED",
+  "java_image": "/tmp/m3-parser-refinement-20261019/emitted-integrated-01/image",
+  "image_files": [
+    {
+      "path": "bin/java",
+      "sha256": "1ac220c9c1e542dcb544d64235e65fe6b67454f9a6b8ec0217bf95f42637abbf"
+    },
+    {
+      "path": "lib/modules",
+      "sha256": "d852163d8569ccfe6887615d0be84b6803cb5f463fc4f2f9e0638daf5a62d84d"
+    },
+    {
+      "path": "lib/server/libjvm.so",
+      "sha256": "32d09a74a96861364f0ccfc23d9e55903ec5c6ec2b294d8db06d99c5604b36b1"
+    },
+    {
+      "path": "release",
+      "sha256": "2456066594100b27851a845195fc86abe3ca783ddd8467ce77b3a3674e883e0f"
+    }
+  ],
+  "module_classes": [
+    {
+      "path": "com/m3/collections/M3AdaptiveEnumLongMap.class",
+      "sha256": "bf37a1a96fe02a0cb054b18dce2f41ce7db9b1da00c4bff6413c68113a5b1504"
+    },
+    {
+      "path": "com/m3/collections/M3Address28.class",
+      "sha256": "6305c8ab4f9666ab32359e71329cece9e1d5cdc1cf20435ca789169f08e50796"
+    },
+    {
+      "path": "com/m3/collections/M3ArrayBlockingLongQueue.class",
+      "sha256": "46ea3342adb69de90ee78f42ae4c2e12b56e3f2c63f08d23bf4b52dd943e00c9"
+    },
+    {
+      "path": "com/m3/collections/M3ArrayDeque$Cursor.class",
+      "sha256": "1a34b7e60c9f4df5260b62118549552be5a8851e2488809423cc19b4270c2731"
+    },
+    {
+      "path": "com/m3/collections/M3ArrayDeque.class",
+      "sha256": "e370b426bf8dedcd52aa354d33b74c8f849e51c5e7a44276cad498bcbcff3de7"
+    },
+    {
+      "path": "com/m3/collections/M3ArrayList.class",
+      "sha256": "e3ecc1bf36fa2da02dcbfbee1e7bb6e6aafa40b71ccbc9888986af6141f8ae7f"
+    },
+    {
+      "path": "com/m3/collections/M3ArrayTable.class",
+      "sha256": "56105f1fc4aeacb672cffb44d15e4861afda13bbdb20ecafe2b95cd209a4c49d"
+    },
+    {
+      "path": "com/m3/collections/M3ArrayifiedIndexOps.class",
+      "sha256": "9bd556cde0bbc13afcab74828cde703f6ed6aaea5d72bb2474046f9b0c0a7c3c"
+    },
+    {
+      "path": "com/m3/collections/M3BagRankIndex$1.class",
+      "sha256": "aaca5997475705e2ac6532635137bc7d0e35283d06873bae73a92a2628b95f55"
+    },
+    {
+      "path": "com/m3/collections/M3BagRankIndex$2.class",
+      "sha256": "69ddce11937cdc86b53d1934c507eb82b7b8915bf5f8dc7347a865e64a1fed87"
+    },
+    {
+      "path": "com/m3/collections/M3BagRankIndex.class",
+      "sha256": "529c51c8d55c3f0a9ce7361ff15652deef01c10db955861779678b2728cb4818"
+    },
+    {
+      "path": "com/m3/collections/M3BitLane28.class",
+      "sha256": "1b0100e4d92e6b308069a9f57d79709306ce3abc82f35889d020f52122df0e97"
+    },
+    {
+      "path": "com/m3/collections/M3BitLanes.class",
+      "sha256": "e7ede7c6db60187a041637105eb44b285e5eff9c7587cb50d79bff7d8514ddd9"
+    },
+    {
+      "path": "com/m3/collections/M3BlockCache.class",
+      "sha256": "928548baf69934eb6606d8bf065b2663a0a6b673eede18744b2b7fa834bc9866"
+    },
+    {
+      "path": "com/m3/collections/M3BlockStore$Evictor.class",
+      "sha256": "4447a5f0a61a3c325315345ee114aff4bac0286a58247758ce37c8b23d08306f"
+    },
+    {
+      "path": "com/m3/collections/M3BlockStore.class",
+      "sha256": "b68f78f6ade3d63a92ef8b2865ae89d2df8f7336bbc69e5ac00017b9d9b7d5d5"
+    },
+    {
+      "path": "com/m3/collections/M3BlockingDeque$1.class",
+      "sha256": "fc2dd861ddf761a1b4a21f876103b2d5f132c886a57035a32eb47ff1dc6da73c"
+    },
+    {
+      "path": "com/m3/collections/M3BlockingDeque.class",
+      "sha256": "3c7097225d9c5214643a1c904196c14d8f02bb09839d5ce48885d7fae474638f"
+    },
+    {
+      "path": "com/m3/collections/M3CellPoint.class",
+      "sha256": "e54c5946cd3d9d8a3d1133e7a1ba431e0006e42a1a77bcba1cdc9cc93ebdb341"
+    },
+    {
+      "path": "com/m3/collections/M3CellSelectionCounts.class",
+      "sha256": "3595c1545bcc47611c7dc87df8782d496b84822d4ab7a7e4257698cc97259a05"
+    },
+    {
+      "path": "com/m3/collections/M3ChildProgressMonitor.class",
+      "sha256": "1a6dbcdcb268db85f494aaca5b383456c4cdd2760a120fcdbed1f53a1d922104"
+    },
+    {
+      "path": "com/m3/collections/M3CollectionSdk.class",
+      "sha256": "c49308ddb53d780f4268b4ad07e5de594db4ba546f94c75b6527aa0fde522471"
+    },
+    {
+      "path": "com/m3/collections/M3CollectionSdkCatalog$1.class",
+      "sha256": "46c4562a1d539b1c31faacf3237b75aeb827e22a36211b0c09c2041a1ec71d24"
+    },
+    {
+      "path": "com/m3/collections/M3CollectionSdkCatalog$Disposition.class",
+      "sha256": "e52fa95d39db3d3732dc0b3aa23157d12943b078515156309d368f87b2e33d2d"
+    },
+    {
+      "path": "com/m3/collections/M3CollectionSdkCatalog$Family.class",
+      "sha256": "7ded5eb812a477366f9a7d8b35db51c37c48572172b6b09ec7a05da5e2121ac1"
+    },
+    {
+      "path": "com/m3/collections/M3CollectionSdkCatalog$Vendor.class",
+      "sha256": "a23a29485f2bdecc4ed2d3ff36b5c036682bf9881b5dda4e0c8f997d4bdca06d"
+    },
+    {
+      "path": "com/m3/collections/M3CollectionSdkCatalog.class",
+      "sha256": "46734cf88662b844af6e5af8b57551c241c4eb09d86ab700e6803473df73d964"
+    },
+    {
+      "path": "com/m3/collections/M3CollectionSdkNames$Disposition.class",
+      "sha256": "5b73668b4a6aee0d5d959a1d4378de1c349aee8ac829fe0c9a7c2b297c30995b"
+    },
+    {
+      "path": "com/m3/collections/M3CollectionSdkNames$Family.class",
+      "sha256": "22954ea9d1184d098311a27732bf7a616a65e26ee2ed0c1a9016f6a6e0bb4ef6"
+    },
+    {
+      "path": "com/m3/collections/M3CollectionSdkNames$Provider.class",
+      "sha256": "a58320e787f7d23c15ecbe9459e016ed0b0d4cb7a66cac72d6843dc5b7ac1994"
+    },
+    {
+      "path": "com/m3/collections/M3CollectionSdkNames.class",
+      "sha256": "db0c1ed558c890e881a7183dd7be83bc41793ac39024372d69f4019b087659d8"
+    },
+    {
+      "path": "com/m3/collections/M3CollectionViews$1.class",
+      "sha256": "28937dd3ee04e635f9cc1694be601d5a229ad01f114027a9a60f8c609733d231"
+    },
+    {
+      "path": "com/m3/collections/M3CollectionViews$FilterNode.class",
+      "sha256": "0d0e10bdc149a529b0b43827f45fd01d9a442f670da21ca659d99e7344105a61"
+    },
+    {
+      "path": "com/m3/collections/M3CollectionViews$FilteredCollection.class",
+      "sha256": "a44fa20d1015ee6c523fa2ed0f6704e8fa1cd15754f7bc500257ea10ab99e3d1"
+    },
+    {
+      "path": "com/m3/collections/M3CollectionViews$FilteredNavigableSet.class",
+      "sha256": "aee9f2ca075c1e31182dd4ec98d345bedbba60acd124a421d1a89f38b717f1df"
+    },
+    {
+      "path": "com/m3/collections/M3CollectionViews$FilteredSet.class",
+      "sha256": "effad2da07387ddca045908d7058d0c515d91d2e17af0bc957780b6f5960ccaf"
+    },
+    {
+      "path": "com/m3/collections/M3CollectionViews$FilteredSortedSet.class",
+      "sha256": "c0f66ca328e9a72559819d133af5c3059ce358f57444fc6b13d6080113404bc6"
+    },
+    {
+      "path": "com/m3/collections/M3CollectionViews$OrderedBiPredicate.class",
+      "sha256": "3e2d286fb5073fdacc01a381e21c8810d742f663056f7ed3a8b07e247ff7ce75"
+    },
+    {
+      "path": "com/m3/collections/M3CollectionViews$OrderedPredicate.class",
+      "sha256": "f3a192536ad4cf02460079c2bdd485ea84f0a536b8b494c16214b19ee689c5b4"
+    },
+    {
+      "path": "com/m3/collections/M3CollectionViews$SelectionSpliterator.class",
+      "sha256": "e322904f43fc8858d8da7639cc863ddab43b36580492b255b29cc0cff94402dd"
+    },
+    {
+      "path": "com/m3/collections/M3CollectionViews.class",
+      "sha256": "01001043ab746b4110cb624fb225a41ea11c7d56159477c42daef5c7e4d429f0"
+    },
+    {
+      "path": "com/m3/collections/M3Collections.class",
+      "sha256": "e541c9035dda96798ff33a1b5f541b20354b20ec9430a92fbd84d3bd274157a2"
+    },
+    {
+      "path": "com/m3/collections/M3ColumnarLanes$IntLaneAction.class",
+      "sha256": "e5b762849f157f27fa8a95bb506df98e6ac9276af5416ddc728c79b02ae8c00f"
+    },
+    {
+      "path": "com/m3/collections/M3ColumnarLanes$ObjectLaneAction.class",
+      "sha256": "4357461c1e9e93154369b4b9c68bb6f492fc77c3a916ceaaf7f59eb163ec1706"
+    },
+    {
+      "path": "com/m3/collections/M3ColumnarLanes.class",
+      "sha256": "ef927da699bbc5df075bd40d04bbabca14c1d3690a2c13fd1fc8117208aada95"
+    },
+    {
+      "path": "com/m3/collections/M3CompositeCollectionView.class",
+      "sha256": "31f4d8b16f9b2c2f2ee25fdc00f424228c6aed45610869a5f984998de5b7dfd2"
+    },
+    {
+      "path": "com/m3/collections/M3CompositeMapView.class",
+      "sha256": "f5c78d0cb6fc41a6c2e53b8f4cf67b35a5199dc414b17a62af2c89d3ac845400"
+    },
+    {
+      "path": "com/m3/collections/M3ConcurrentBitSet$SetBits.class",
+      "sha256": "6562fa1885dd8365406194b8f9de07538709ae9de8b4c9274326ff8329c18043"
+    },
+    {
+      "path": "com/m3/collections/M3ConcurrentBitSet.class",
+      "sha256": "1dacd982310dd6b6d08e6bd3406057cf4ab04bcee4d810336bc8e3219531d28e"
+    },
+    {
+      "path": "com/m3/collections/M3ConcurrentIntLane28$Range.class",
+      "sha256": "dc9d1e448be347e10f4c591c7ecf510208e9e9dd7ce5dd9bd709a1f5ea70aad8"
+    },
+    {
+      "path": "com/m3/collections/M3ConcurrentIntLane28.class",
+      "sha256": "bc241b4731c9591f0d95de49529596fdc59e7046f105345033dcb6cb7e7f546b"
+    },
+    {
+      "path": "com/m3/collections/M3ConcurrentLongLane28$Range.class",
+      "sha256": "d5438f73aa3edbbf7c9d1c001839fd71fc16208ff890d8d02e654dc175db908b"
+    },
+    {
+      "path": "com/m3/collections/M3ConcurrentLongLane28.class",
+      "sha256": "2da5b77e19c85a734f49253fa916221d281a37407462e7629be589dc839b170e"
+    },
+    {
+      "path": "com/m3/collections/M3ConcurrentLongLinkedDeque.class",
+      "sha256": "6b84cfd3203696343a5078b923d2507ec964c41e81bcc3b4c647b9f7d12d5672"
+    },
+    {
+      "path": "com/m3/collections/M3ConcurrentLongMap$PairLane.class",
+      "sha256": "30f1a7ebdbbb2fcd3d51d1b38f14cf50dc6747567f73a1721dc97a02212684df"
+    },
+    {
+      "path": "com/m3/collections/M3ConcurrentLongMap.class",
+      "sha256": "2929d37571cc38fd0574fa29a9861928e35f2db8d3545855fa6c7bed3db1f996"
+    },
+    {
+      "path": "com/m3/collections/M3ConcurrentLongMultiset.class",
+      "sha256": "8f689413f331896f1eef048628e191d8bc271d16ae4c5256da52c0e7d32a2a5f"
+    },
+    {
+      "path": "com/m3/collections/M3ConcurrentLongSet$1.class",
+      "sha256": "406a231873b0c07dbde5a92b4196c2eb523c3b94e67e86a17ff1e481e24e1135"
+    },
+    {
+      "path": "com/m3/collections/M3ConcurrentLongSet.class",
+      "sha256": "8014d2112ae06d6b9da0467d00cbb10767fc77f948d1a01b0629d43f840585b3"
+    },
+    {
+      "path": "com/m3/collections/M3ConcurrentLruCache.class",
+      "sha256": "58638dbde22aceb5fd9c58ab9c7751401a20614eeec20dd526223d1b9cd8b5c4"
+    },
+    {
+      "path": "com/m3/collections/M3ConcurrentMultiset.class",
+      "sha256": "cdb010e772748195d016e66137eb56cf551112f14332e946224da225704f2168"
+    },
+    {
+      "path": "com/m3/collections/M3ConcurrentReferenceMap.class",
+      "sha256": "e947af45cf8299744d5563b5d9cfcfee0992ae3f902f039c6a21fac599677b9a"
+    },
+    {
+      "path": "com/m3/collections/M3ConcurrentSkipLongLongMap.class",
+      "sha256": "f2052e7b3c0fc41afb1ccb9ac484fd496c07854bb641127ac731becb26187b25"
+    },
+    {
+      "path": "com/m3/collections/M3ConcurrentSkipLongSet.class",
+      "sha256": "786e8dab7bbd74b5fc9d3ebd2193c56fb846ad1f3d7ab34a87d9706615b688a2"
+    },
+    {
+      "path": "com/m3/collections/M3CountedBag$1.class",
+      "sha256": "c299213e9122099a1397d347cea8542d51514f8bc0ca4f27c05b075987fdbdf9"
+    },
+    {
+      "path": "com/m3/collections/M3CountedBag$CountSnapshot.class",
+      "sha256": "77508a1e80a5d4c871753f391ce18259d62ad70f1a1853e0b695837715a6643b"
+    },
+    {
+      "path": "com/m3/collections/M3CountedBag$DistinctElements$1.class",
+      "sha256": "de9c3fc74093a30daca0de1ca1fd0b8eceee2f510b3f3a77ab29db87e608b014"
+    },
+    {
+      "path": "com/m3/collections/M3CountedBag$DistinctElements.class",
+      "sha256": "68455a8917f47fba9552e19e07fa7567e59bfb8df16ebd3e888f0038e47c3dd7"
+    },
+    {
+      "path": "com/m3/collections/M3CountedBag.class",
+      "sha256": "fa077a735065db7d21a3d903207ef0c0d2fd7c0e5291c003ffced0f5dff463cc"
+    },
+    {
+      "path": "com/m3/collections/M3CowList.class",
+      "sha256": "ea7389c2a8c6340d8c960581eea065ec81cd21f2955e3b0ce3a4fe25f9401f23"
+    },
+    {
+      "path": "com/m3/collections/M3CowLongList.class",
+      "sha256": "1ba26714ba1da007c33ec8bcfc63f766ed6eaefd46473bf0d9301afad3fa6ca1"
+    },
+    {
+      "path": "com/m3/collections/M3CowSet.class",
+      "sha256": "c22673cf0f4092abe649dbadd4638ca211e79fea2ea9492d78475157f51d719f"
+    },
+    {
+      "path": "com/m3/collections/M3CpuMaskRuns$RunConsumer.class",
+      "sha256": "0f721daff81d5d47986ae2f6a2b40fcc7e91cb56dd8a9e6baa5396250a748824"
+    },
+    {
+      "path": "com/m3/collections/M3CpuMaskRuns.class",
+      "sha256": "bb9daa94720cc0b0d5f4d206455fc20bea964a0a5034977eef4d89c8aa29f59f"
+    },
+    {
+      "path": "com/m3/collections/M3DefaultProgressMonitor.class",
+      "sha256": "51368f5467b0477e6680cf2e0b0591703b1fbc97c52cbb07aa5f557586fc40b2"
+    },
+    {
+      "path": "com/m3/collections/M3DefaultedMapView.class",
+      "sha256": "71a3f5617fdaee5477b35a73a8dc7c3f01813573eb58e855723c0b8d5d4d0abf"
+    },
+    {
+      "path": "com/m3/collections/M3DelayLongQueue.class",
+      "sha256": "8d5b85d3048cecd1bce436bd93226ee7cbb3c6058d81ec37a0891c0e92d81a15"
+    },
+    {
+      "path": "com/m3/collections/M3DelayQueue.class",
+      "sha256": "c358881714a9d18e395c72f9dab648df9fb5e13b7b2a193312c39f478c3ccf27"
+    },
+    {
+      "path": "com/m3/collections/M3EnumBiMap.class",
+      "sha256": "56c9a6cb8088a2079f8bd68fd0566a3813ae9bafba1e1091e274aeac5f396727"
+    },
+    {
+      "path": "com/m3/collections/M3EnumLongMap$EntryConsumer.class",
+      "sha256": "e51eac9a653b54b2924de86206ca4c57826e93e939d6819c7bc0ebf52a4d2ece"
+    },
+    {
+      "path": "com/m3/collections/M3EnumLongMap$OrdinalLongConsumer.class",
+      "sha256": "f68b289f6d311b7bd95a030a2532caa09e909fa3db275255e41e8960b8a88416"
+    },
+    {
+      "path": "com/m3/collections/M3EnumLongMap.class",
+      "sha256": "5d808ba5c14a5be2bc864c8b50be517577e73e53301e35b4ccca7d4e5fedb2a9"
+    },
+    {
+      "path": "com/m3/collections/M3EnumSet.class",
+      "sha256": "c8be2f9f64e2e53c828cb4b9c951cee95a5b1b8fd8bc74701c9e09669aef363d"
+    },
+    {
+      "path": "com/m3/collections/M3ExpiringLongLongMapView.class",
+      "sha256": "e40be68cef9fddff7916e9378cdfe9b45bdbd52a47d6997f5669ca5d70e97572"
+    },
+    {
+      "path": "com/m3/collections/M3ExpiringMapView.class",
+      "sha256": "0bea3a6ef11aae39e7e88ba2e0990253a29d82a9d5b819ba02e7149d364168c1"
+    },
+    {
+      "path": "com/m3/collections/M3FilteredDeques$ReadOnly$1.class",
+      "sha256": "e492ef78ed6a71974fef9e242ed583f8956a227bbae91fa570fcf6f781810c10"
+    },
+    {
+      "path": "com/m3/collections/M3FilteredDeques$ReadOnly.class",
+      "sha256": "47887be8509bad18ff6b3471e9e5f41f6ca027edcd3373d8ee325af100aef237"
+    },
+    {
+      "path": "com/m3/collections/M3FilteredDeques$View$Cursor.class",
+      "sha256": "b0135d800c1199ee739f46cac2e82681995c81ae0f301206c2228711efe60e8b"
+    },
+    {
+      "path": "com/m3/collections/M3FilteredDeques$View.class",
+      "sha256": "d624d2fcd7d3a070829006ac8a6fc4c4633edb323dbe53942040af5dcb0d5a01"
+    },
+    {
+      "path": "com/m3/collections/M3FilteredDeques.class",
+      "sha256": "c6bb711da1dd767d21842f1ba29dcb341dea6970ed6daf2554c4204e37635f23"
+    },
+    {
+      "path": "com/m3/collections/M3FilteredLists$FilterChain.class",
+      "sha256": "06b8badab0fb591dec98e8f72e5568f7409a477de514b2cfa7fe0eb383cb6b66"
+    },
+    {
+      "path": "com/m3/collections/M3FilteredLists$FilterTerm.class",
+      "sha256": "6e11b685b7655200b3ac49303eb0d04f42e5cdcf609765d412e630b5925acba7"
+    },
+    {
+      "path": "com/m3/collections/M3FilteredLists$StrictReadOnlyList$1.class",
+      "sha256": "44c087d62df038f931e2bd93e52f50be1648948eb4bff3cea713a380f0ea4ea6"
+    },
+    {
+      "path": "com/m3/collections/M3FilteredLists$StrictReadOnlyList.class",
+      "sha256": "ae9ccf5899854ecbe7f75551dccf42a75858ced9b52035fef1cfda48bf40e265"
+    },
+    {
+      "path": "com/m3/collections/M3FilteredLists$View$1.class",
+      "sha256": "359b351d5aef0583ef16d9851ab7840c5a74a8fe00e73ff01b440bf42c5dc542"
+    },
+    {
+      "path": "com/m3/collections/M3FilteredLists$View$Cursor.class",
+      "sha256": "1bab5996ad8fee2765a4617ef9e1aa54413f77f55d4c9eeac61b9ebffebcad68"
+    },
+    {
+      "path": "com/m3/collections/M3FilteredLists$View.class",
+      "sha256": "562c821595db2d77c99fa9f3e2bf7234a93129fc353933fd0fd9f1d176b1499d"
+    },
+    {
+      "path": "com/m3/collections/M3FilteredLists.class",
+      "sha256": "1e51b6bf6c8a15d8134a7f2e878a232e068dce36baa6c01c1a9a96e1229e5cb1"
+    },
+    {
+      "path": "com/m3/collections/M3FilteredNavigableSet.class",
+      "sha256": "333c5cbe5299ca2c8b76f16b583d0620f8bae816bd298aad189b0ced36890241"
+    },
+    {
+      "path": "com/m3/collections/M3FilteredViews$1.class",
+      "sha256": "ad23b15f4a31a497f06fdd793abb5fd4dd95b203d2ef0137176226e3ad956f81"
+    },
+    {
+      "path": "com/m3/collections/M3FilteredViews$CollectionView.class",
+      "sha256": "6450172a4b0297ddec2f086e269711285bd01b963daa71483d1a503064cfec41"
+    },
+    {
+      "path": "com/m3/collections/M3FilteredViews$NavigableMapView.class",
+      "sha256": "e6eb972ae496f92a51bd1a458780586a1626ccdf2f4e6d9aba78bd8c4b30e0a2"
+    },
+    {
+      "path": "com/m3/collections/M3FilteredViews$NavigableSetView.class",
+      "sha256": "7b49571bdc5eba73c2e100e7fce98296d6cca3a1bbab1c04c93c58e1cc32e84b"
+    },
+    {
+      "path": "com/m3/collections/M3FilteredViews$ReadOnlySortedSet.class",
+      "sha256": "4534ea75a9c92f73086c997a10574e334945aa1e8515b85f00fed8c262fbb54d"
+    },
+    {
+      "path": "com/m3/collections/M3FilteredViews$SetView.class",
+      "sha256": "03e7efbbf87b4941e59e81e2b0d7c3d19e11fe0abef5f3f56428f90f50dfe946"
+    },
+    {
+      "path": "com/m3/collections/M3FilteredViews$SortedMapView$1$1.class",
+      "sha256": "742ebc41f2d091ea04b1584db2bf8d1570b5ad94f538bf95a273f989f1ff59ca"
+    },
+    {
+      "path": "com/m3/collections/M3FilteredViews$SortedMapView$1.class",
+      "sha256": "bb554bdf9c51dd89282afeb51731327b3600f189373ca573538cad1cbd499c41"
+    },
+    {
+      "path": "com/m3/collections/M3FilteredViews$SortedMapView.class",
+      "sha256": "5014e82b35d838c7c2b4098c30555dae17fe6f03e02ce809cbe4b88d869b3494"
+    },
+    {
+      "path": "com/m3/collections/M3FilteredViews$SortedSetView.class",
+      "sha256": "706ca3e7e2c03d6cace8bea7624a9e2d0fe0449877fa909d2dcbd5ece9b259f8"
+    },
+    {
+      "path": "com/m3/collections/M3FilteredViews.class",
+      "sha256": "c92632072dc5233d1f76a003cee5118f23c1108f84c77e8f624520d25c9afdbf"
+    },
+    {
+      "path": "com/m3/collections/M3FixedSizeListView.class",
+      "sha256": "8922f9d19b12a58635c2bfb76aa5e0509f1a1fbe7baa1532e210676eb7afaa0e"
+    },
+    {
+      "path": "com/m3/collections/M3FixedSizeLongListView.class",
+      "sha256": "f28cfd35084271a8983addca5bf87ba2e2f373c904113ea1a537df8bca25a25f"
+    },
+    {
+      "path": "com/m3/collections/M3Flat3Map.class",
+      "sha256": "1bfc53893af7c376724519a23475cabc47644aecdbdafb325da9d7671623468c"
+    },
+    {
+      "path": "com/m3/collections/M3FrozenBag.class",
+      "sha256": "816d42f55ed4ed7dd75db9b320fa0811f32b27b9ddd0ec3b972d0afeabcc0069"
+    },
+    {
+      "path": "com/m3/collections/M3FrozenBiMap.class",
+      "sha256": "82006779e1fbcd67abcc467b37c7c9066491254d5f9dd7b33f6e38c78a892ccf"
+    },
+    {
+      "path": "com/m3/collections/M3FrozenIntList.class",
+      "sha256": "728019dbafde584e1b5ace723644bcf6ac3de04cfb4ac9f3e9666dab6e0c3dae"
+    },
+    {
+      "path": "com/m3/collections/M3FrozenIntMap.class",
+      "sha256": "e5fbfdbc054429cccaaa4aae72f71c2c7ec73960662b132963b2b2001890444e"
+    },
+    {
+      "path": "com/m3/collections/M3FrozenIntSet.class",
+      "sha256": "13b4828fd3036277f86a7fc43a20a25f3de95709fb2e362a27df19068461bf5d"
+    },
+    {
+      "path": "com/m3/collections/M3FrozenList.class",
+      "sha256": "d2355ed43abeac934942ef687c55c2c7e5300b397d08b2df3369b0c1e1938561"
+    },
+    {
+      "path": "com/m3/collections/M3FrozenLongBag.class",
+      "sha256": "2265608c829033682bc559576da09698acc02fe688976e23e105127abc7e2225"
+    },
+    {
+      "path": "com/m3/collections/M3FrozenLongBiMap.class",
+      "sha256": "72da6c5468dbaa50d87627e19c760c432c289444750fac77c8c592ed2150a945"
+    },
+    {
+      "path": "com/m3/collections/M3FrozenLongList.class",
+      "sha256": "7bc7d574d5d9f1cc65bd1279fcb817519a15a6bbf71ffdf7da789d93ba2f463e"
+    },
+    {
+      "path": "com/m3/collections/M3FrozenLongMap.class",
+      "sha256": "b9d302e0349b1ef1a3af54b9bf6b7cc7c29df46d00694d9523b7ca37d361212d"
+    },
+    {
+      "path": "com/m3/collections/M3FrozenLongMultimap.class",
+      "sha256": "afca081797f83080b6eeaf7a6c9eb9d7cbd84c83a09fefb38289db7c83accf7c"
+    },
+    {
+      "path": "com/m3/collections/M3FrozenLongRangeSet.class",
+      "sha256": "6d66ef108662d5379d5e9e30534232bb3d969bc07b246ef36bac598ecf15e816"
+    },
+    {
+      "path": "com/m3/collections/M3FrozenLongSet.class",
+      "sha256": "726c61d8f51182a1f5f63f22d6578cb7ad8eee2bfc6842b95ed37e388d3735bf"
+    },
+    {
+      "path": "com/m3/collections/M3FrozenLongTable.class",
+      "sha256": "643ed35851135fced32d1b92b9f65dbc6fdd3ea1f499f3edda30918ee06aedcc"
+    },
+    {
+      "path": "com/m3/collections/M3FrozenMap.class",
+      "sha256": "6c7ff4e7514620a2c49b7962c283f8964b8b5abb8f6f58242b09b1cb2df07d04"
+    },
+    {
+      "path": "com/m3/collections/M3FrozenMultimap.class",
+      "sha256": "c8f6aeeb886c5af5a4de4375acbc4c12c7ab1a00b17e369d988b79b10904e418"
+    },
+    {
+      "path": "com/m3/collections/M3FrozenSet.class",
+      "sha256": "6e8afc9c719f690e7e74bcd159e7e443f26ae455e076e0f15e36d7eb205a2920"
+    },
+    {
+      "path": "com/m3/collections/M3FrozenTable.class",
+      "sha256": "c94a685c3f5d12369a6b08d08af7987ec17ab7451e64dcbfb12cde19da646b42"
+    },
+    {
+      "path": "com/m3/collections/M3GenericCollections.class",
+      "sha256": "9f4a0a416f0bbdb3ce5357a10ce4be83d35d4889a136b7b649cde6c81e21764d"
+    },
+    {
+      "path": "com/m3/collections/M3GrowthListView.class",
+      "sha256": "dc54a1bbc09b0310085cce4798863a257d13647009ab269da87ce7b54237a096"
+    },
+    {
+      "path": "com/m3/collections/M3HeapGrowth$1.class",
+      "sha256": "1448c40faaf467bcb0b0830045883453f38f0fb91dfb2fd3c9aa54de20af9faa"
+    },
+    {
+      "path": "com/m3/collections/M3HeapGrowth$Sampler.class",
+      "sha256": "a53b69b8e0724eea0c0827120744593280b92a8a60cc59df28a2b893f74bbdda"
+    },
+    {
+      "path": "com/m3/collections/M3HeapGrowth.class",
+      "sha256": "499ea86eed1fa824d4a9766401c36135a9cc98e910701a7f4c56db2b0bc05997"
+    },
+    {
+      "path": "com/m3/collections/M3HeapSampler.class",
+      "sha256": "0d6214bd9e55f3f2093b819c284977d82528c7f3bfb20ac1cb1bef2478d87f50"
+    },
+    {
+      "path": "com/m3/collections/M3IndexMaskCompactor$Backend.class",
+      "sha256": "ba88b56db816f917e5d868c8b609c99726013335832bfd513f36e196f689c3e2"
+    },
+    {
+      "path": "com/m3/collections/M3IndexMaskCompactor$NativeLibrary.class",
+      "sha256": "74cdffe45a9e312bbad6508070a0e190dc0a861b39986cede40119b440736691"
+    },
+    {
+      "path": "com/m3/collections/M3IndexMaskCompactor$NativePositionMasks.class",
+      "sha256": "45af34df0ff8a4630912c44d9a2d44e9132fcd26a341c444f0bab38526df68d1"
+    },
+    {
+      "path": "com/m3/collections/M3IndexMaskCompactor$NativePositions.class",
+      "sha256": "caff4e3777b9f13e904484e13621a72e825b674bcb63693816fe33f24d6db952"
+    },
+    {
+      "path": "com/m3/collections/M3IndexMaskCompactor$NativeRange.class",
+      "sha256": "8b852aec3c752f52fae573e5811700d2b477c531f746ec0acaaa23330003cef0"
+    },
+    {
+      "path": "com/m3/collections/M3IndexMaskCompactor.class",
+      "sha256": "b575827c4a385f992bc245f553ef44d307f564b8b04f0922ba94d833bb97ce9f"
+    },
+    {
+      "path": "com/m3/collections/M3IndexMaskWindow.class",
+      "sha256": "ceb8f12005ad76b3fb62ddf78201c9753200d2b5028716d81b179a26da1de3a1"
+    },
+    {
+      "path": "com/m3/collections/M3IndexPartitions$FastView.class",
+      "sha256": "6a09d047cf3050fdfe81cc1f1a43f956d7dee698e4c81f46f6eebe3dbb01fe8f"
+    },
+    {
+      "path": "com/m3/collections/M3IndexPartitions$View.class",
+      "sha256": "81d1629dc98af25180dc73842ce42980c18d038bfea948a745fe8ba7b66508ef"
+    },
+    {
+      "path": "com/m3/collections/M3IndexPartitions.class",
+      "sha256": "e81df6c1c22f92ee1ad898a5ff6d13005658b9f9e4db2b96bba2906f81319748"
+    },
+    {
+      "path": "com/m3/collections/M3IndexPathMasks$Backend.class",
+      "sha256": "633bb5967dd4d549992ffe39e5efa9e0f1a84ca6ed60ff639f0382018efd6a88"
+    },
+    {
+      "path": "com/m3/collections/M3IndexPathMasks$NativeLibrary.class",
+      "sha256": "3f9b58df92479c85a4b674ceb2ee817022e7c2752cb78232e21cd9e29bec4d26"
+    },
+    {
+      "path": "com/m3/collections/M3IndexPathMasks.class",
+      "sha256": "bc496ce6ac9094e115b445d4408d30cf30b89fc8357d2d44f3402c81a3881922"
+    },
+    {
+      "path": "com/m3/collections/M3IndexPathRank$Window.class",
+      "sha256": "e648ef0505bd9606f0a5ad2585134799a8d8c7ca81f7a231a050263a27912df0"
+    },
+    {
+      "path": "com/m3/collections/M3IndexPathRank.class",
+      "sha256": "df7d0d70e3edc1e0415c6f7783c6c9eb402343e7bd90e9c8a3c5c6a345d95b80"
+    },
+    {
+      "path": "com/m3/collections/M3IndexedBiMap$Entries$1$1.class",
+      "sha256": "1f81581fa88561ed8b02257242eaa32b7095726358e08c6ab286269d003f600a"
+    },
+    {
+      "path": "com/m3/collections/M3IndexedBiMap$Entries$1.class",
+      "sha256": "3186fd171a857c8bf8a4dfdea25578442aa77d9e67bbce9799681d56830f9920"
+    },
+    {
+      "path": "com/m3/collections/M3IndexedBiMap$Entries.class",
+      "sha256": "bcc72d501eb4a22f3081f8f38cf60937b06ce691e43e9132947a320518ea8b15"
+    },
+    {
+      "path": "com/m3/collections/M3IndexedBiMap$Epoch.class",
+      "sha256": "e386497394073394f2737d6d413b7c0d19885cbd1e0fbd15c8139a836e3bb921"
+    },
+    {
+      "path": "com/m3/collections/M3IndexedBiMap.class",
+      "sha256": "a60bc81f601dc4346819d87acfb4380877af944c0f5bb81e0de33c4210ea7b18"
+    },
+    {
+      "path": "com/m3/collections/M3IndexedCollectionView.class",
+      "sha256": "1ef03bdae43d1649c7a1a848861b4c129d30ee9b6b1e87b08e7c498153bff0c7"
+    },
+    {
+      "path": "com/m3/collections/M3IndexedList.class",
+      "sha256": "0a970b41421601c296cb64d381ff90a2324d7c3a51c3fbb964f9f5563f4553eb"
+    },
+    {
+      "path": "com/m3/collections/M3IndexedListSnapshot.class",
+      "sha256": "f6c9b101aca113585ad362ec4967b21b7b6af8bc737fce3231a0b07f890cb7db"
+    },
+    {
+      "path": "com/m3/collections/M3IndexedLongList.class",
+      "sha256": "c89f290662de7d84a0c91d4741700b9277bee8bca04e2c2bfd07a057fa6a3ee0"
+    },
+    {
+      "path": "com/m3/collections/M3IndexedMultiValueMap$ValuesSnapshot.class",
+      "sha256": "c54f38c1025805454e176dce08da5fd2a0d2b7ff950571434aff0b3f11afb83f"
+    },
+    {
+      "path": "com/m3/collections/M3IndexedMultiValueMap.class",
+      "sha256": "40bb625624563120b02725887a891eb79e775408de8806bc76750712192c076d"
+    },
+    {
+      "path": "com/m3/collections/M3IndexedSetMultiMap$1$1.class",
+      "sha256": "926b180726621ff70f03d9407fc3bba32637a53b3d7ccad2ebaae87c571121fb"
+    },
+    {
+      "path": "com/m3/collections/M3IndexedSetMultiMap$1.class",
+      "sha256": "bb7fa17f107c002bd6f6cfe8420d61017883397edb544d757fe020eac741d09c"
+    },
+    {
+      "path": "com/m3/collections/M3IndexedSetMultiMap.class",
+      "sha256": "5f48caa268c422a123df6deb28011cf08cd6fbddc2dfc245157d7165fef983c3"
+    },
+    {
+      "path": "com/m3/collections/M3IndexedTable$IndexView.class",
+      "sha256": "edf031c77237e2f84cc82412c519bb8bfe442744a89d7f14600e9a9088c45160"
+    },
+    {
+      "path": "com/m3/collections/M3IndexedTable.class",
+      "sha256": "ee4305d80993e5b1d373d228303cde4fab871847706e39c1c8595df928edccec"
+    },
+    {
+      "path": "com/m3/collections/M3IntArrayList$1.class",
+      "sha256": "cd08db159d6b22970bf95b6e493bb6cd581d19efb241c7ffce53dc725fe260c9"
+    },
+    {
+      "path": "com/m3/collections/M3IntArrayList$2.class",
+      "sha256": "450dccf657a4b8391926b4962dceb3135318742509531937b8ba703df15fafb6"
+    },
+    {
+      "path": "com/m3/collections/M3IntArrayList.class",
+      "sha256": "3a01ccfe36879c90c63faba1295ece1323e39ce63a88515abdf67dfbee356e46"
+    },
+    {
+      "path": "com/m3/collections/M3IntCollection$1.class",
+      "sha256": "de7b4df86a1a977c093fb04d14479706f9639de42a177da35754f94ffbad1904"
+    },
+    {
+      "path": "com/m3/collections/M3IntCollection.class",
+      "sha256": "90509dfff86850bdae32f2da3bb2be02a1824783d56937526abc07494280ec39"
+    },
+    {
+      "path": "com/m3/collections/M3IntHashSet$1.class",
+      "sha256": "712e6ad921ccc3f00cc6c673b4c3333f179382125492973298bb9f26693e4eba"
+    },
+    {
+      "path": "com/m3/collections/M3IntHashSet.class",
+      "sha256": "56e29ae445c4f9cf3ba08525b1f1cef24e2faafc181ca84c8f790f6219cc643a"
+    },
+    {
+      "path": "com/m3/collections/M3IntIndexedSnapshot$1.class",
+      "sha256": "1af65b4cb659eefbf6e938d96168ec09bd0e823fa9c043802f0ae8f998b8eaa2"
+    },
+    {
+      "path": "com/m3/collections/M3IntIndexedSnapshot$Order.class",
+      "sha256": "815d2cadf5182b969f00f7755c24da2c371764c6855fefa5478041cfcbf655af"
+    },
+    {
+      "path": "com/m3/collections/M3IntIndexedSnapshot$SnapshotSpliterator.class",
+      "sha256": "971db27cf51b444f5545e25904bd1681c18bdf08337815b402495e2e4fc9a1c9"
+    },
+    {
+      "path": "com/m3/collections/M3IntIndexedSnapshot.class",
+      "sha256": "4f2c2d2805f02a26b0241147b3dd2efe8cbabf0ac66e6d6f5997986bc0938566"
+    },
+    {
+      "path": "com/m3/collections/M3IntIntConsumer.class",
+      "sha256": "50b101ca3b714b3a3b4890b2fb6400b23c762ad349378639dc5a587b34dc19f0"
+    },
+    {
+      "path": "com/m3/collections/M3IntIntHashMap$1.class",
+      "sha256": "c457d6ba3a266c57a6c99bd4b5db4d4cba352d5e9c353d8f7feb6b6c43f95d72"
+    },
+    {
+      "path": "com/m3/collections/M3IntIntHashMap.class",
+      "sha256": "51c4ed430d4f55c53858517ecc66fb07002d7c9adbc44909b341bab721790a00"
+    },
+    {
+      "path": "com/m3/collections/M3IntIterator.class",
+      "sha256": "5f6a9bc1a069a31d1380aefd5c425a731723db1283daee4e6450e9f4b9e297e6"
+    },
+    {
+      "path": "com/m3/collections/M3IntLane28.class",
+      "sha256": "ab23fd70b8fab30ddec19896939bcf79f3cedf47c941ab4c7b1c13fe96c99910"
+    },
+    {
+      "path": "com/m3/collections/M3IntList.class",
+      "sha256": "510553dade57f2787e48bc7e6ef1e57bd56623012f713e9c6409d699e03a0b4a"
+    },
+    {
+      "path": "com/m3/collections/M3IntLongConsumer.class",
+      "sha256": "c2a6384e5fc36a01e2d19b127018426870b4aae036a5034170ef5c4baeb02321"
+    },
+    {
+      "path": "com/m3/collections/M3IntLongHashMap$1.class",
+      "sha256": "638e673c9c4f7b937c8f3b7bc27b56dfe289e6387fa3caaef0c6e982bb0b92a0"
+    },
+    {
+      "path": "com/m3/collections/M3IntLongHashMap.class",
+      "sha256": "75eeeba267a1188308aac324e036cc869e840c4f4dc5a93a79264d824fc289ba"
+    },
+    {
+      "path": "com/m3/collections/M3IntPriorityQueue$1.class",
+      "sha256": "4426f8f4b90fefa6ea93a067d58fae5d5e66c3eb03372c07f0c4a0941f81e2ef"
+    },
+    {
+      "path": "com/m3/collections/M3IntPriorityQueue.class",
+      "sha256": "e3158dbd8771cb5ac48bcc5eeb3a14a4e5d3d209c72c454cafbf4d3bb44ef9c1"
+    },
+    {
+      "path": "com/m3/collections/M3ItemState.class",
+      "sha256": "ebd57b71fbbc5b30caf020d01e7d95e71c91e689b377a7d90343d41a333fd8f0"
+    },
+    {
+      "path": "com/m3/collections/M3KeyedParallelismPlan$Completion.class",
+      "sha256": "f5b5a69bdca905c08f30b268c63230f40a110a187883c2bd45853212258a6499"
+    },
+    {
+      "path": "com/m3/collections/M3KeyedParallelismPlan$OrderedResults.class",
+      "sha256": "bb4289ef0dc590063221cccccdb6df3814ad16ddce1b72da3c163ed01a338e54"
+    },
+    {
+      "path": "com/m3/collections/M3KeyedParallelismPlan$Work.class",
+      "sha256": "a9f7e48d39b1a8a1ab7ad075d088da247c1057a5a1a9d24d5a3996cadf832b95"
+    },
+    {
+      "path": "com/m3/collections/M3KeyedParallelismPlan.class",
+      "sha256": "1bd474bbcdebe7d12f898839d0924f476b79fc7c186c20eb55cc9a4b0bf1312f"
+    },
+    {
+      "path": "com/m3/collections/M3LFUCache.class",
+      "sha256": "3b588f4c8dbb2cbe008e4b5846d2c944ae4c02a3a1ae17f784c09a7ad11fc20c"
+    },
+    {
+      "path": "com/m3/collections/M3LaneGrowth.class",
+      "sha256": "19c75a64be32d1d31c6f6bf1674a9aca03121d347545e0df296c57508b7ac022"
+    },
+    {
+      "path": "com/m3/collections/M3LazyEventBits.class",
+      "sha256": "25b8807932eaa161476298ba56cb6503870ad86ed4df296abeac8be1f146757b"
+    },
+    {
+      "path": "com/m3/collections/M3LazyEventGranularity.class",
+      "sha256": "fe66b6e2ed27d9bb5992731509cae5650dd65dfc259c81915db8600ffb418b41"
+    },
+    {
+      "path": "com/m3/collections/M3LazyEventPolicy.class",
+      "sha256": "46ece6bb799b5dc6f534e80ad8ae226de4ab246ae3fe00e6eefb0b7588229eea"
+    },
+    {
+      "path": "com/m3/collections/M3LazyEventSink$NoOpHolder.class",
+      "sha256": "6393b7b11b6d5444928c83733f5a8b881d550dd08f99bd0f8c43694f3b8982ce"
+    },
+    {
+      "path": "com/m3/collections/M3LazyEventSink.class",
+      "sha256": "2a5c99ec9d494adbfb2215739ccb143672ae8691ac42a1cf1225934818d6f3b1"
+    },
+    {
+      "path": "com/m3/collections/M3LazyEventSource.class",
+      "sha256": "b6168035f1fd25d15956ececa0304e12038f319d259ed524b45853481ebb4b89"
+    },
+    {
+      "path": "com/m3/collections/M3LazyEvents.class",
+      "sha256": "9759a5914eeb444cd19b9cb22b89315ad9ecdb7ddeadfb655857469811cef44b"
+    },
+    {
+      "path": "com/m3/collections/M3LazyOperation.class",
+      "sha256": "3e34292466d76a1035a77626ba724d4285ff8661b93f663386d22adb1cb30af5"
+    },
+    {
+      "path": "com/m3/collections/M3LazyValueProvider.class",
+      "sha256": "fcbd3f870b2a8305ea84088f443d5d92645810294b34c824360878f715ff0782"
+    },
+    {
+      "path": "com/m3/collections/M3LazyValueState.class",
+      "sha256": "0ad392af5e9112b292f585c9943a334bfd39872e2174fac9bea56b0523c4157b"
+    },
+    {
+      "path": "com/m3/collections/M3LegacySynchronizedViews.class",
+      "sha256": "d09af96969ee87f866fab68c945d69ea82dff8790ef57737ae2a7f4e0bba9122"
+    },
+    {
+      "path": "com/m3/collections/M3LinkedHashMap$Table.class",
+      "sha256": "f05b93e927b19d2c01212988cab94e48d3ebb6bdd2e4972c72054741394ae5e9"
+    },
+    {
+      "path": "com/m3/collections/M3LinkedHashMap.class",
+      "sha256": "759bf748111cf838b06feca25e9b8791e7f1843f033ce3b99c5597a003f74006"
+    },
+    {
+      "path": "com/m3/collections/M3LinkedHashSet.class",
+      "sha256": "23aab01787fc8e3fcce17dbb9d69563004d65bfaf11e184e912a2697c48b1cf0"
+    },
+    {
+      "path": "com/m3/collections/M3LinkedList$1.class",
+      "sha256": "93d7d9d114ba4981c61583666f18fc1cc8a49d0d190345aab544a43787acdf76"
+    },
+    {
+      "path": "com/m3/collections/M3LinkedList$LinkedIndexSplit.class",
+      "sha256": "321a34dc41739def3ef0edc822ab283f1f6b918ba8f7e96dd49a1ff30f378410"
+    },
+    {
+      "path": "com/m3/collections/M3LinkedList$Storage.class",
+      "sha256": "70114d97f4db72eeab8379d52d2b778ef26cfb2387f77678b203fd1cf33c8f5b"
+    },
+    {
+      "path": "com/m3/collections/M3LinkedList.class",
+      "sha256": "b9685358c974035f100388856606f7bbef78b78e6c2c02c6d54268dc755a89ab"
+    },
+    {
+      "path": "com/m3/collections/M3LinkedListMultimap.class",
+      "sha256": "ea1d4ab7daeadfc2df62191c7e87d3a7a8a3b623f0affbf3ae69e2d1e3ae14f7"
+    },
+    {
+      "path": "com/m3/collections/M3LinkedLongMultimap.class",
+      "sha256": "618ac171b2ce9f267588e6c6b985c12b500778dd19cbd537bc13ab6ec4eff466"
+    },
+    {
+      "path": "com/m3/collections/M3ListDiff.class",
+      "sha256": "5ee32d2274d97606554cfbb423b3837e3c6483ebdbdce6a8f9d583f5a501ce7e"
+    },
+    {
+      "path": "com/m3/collections/M3ListModel.class",
+      "sha256": "e0ad10567d7b9d7ed84b4518477d88396de57a84385e50a6094a993a165f8494"
+    },
+    {
+      "path": "com/m3/collections/M3ListMultiValueMap$1$1$1.class",
+      "sha256": "9560acc38a706e09849e7dcc8a86664f786ad13b14feef476f278dc0b6c2ba43"
+    },
+    {
+      "path": "com/m3/collections/M3ListMultiValueMap$1$1.class",
+      "sha256": "5149e55e59a88abe041cd25785f9abbb0294588c15db1949d834e6a1ca389899"
+    },
+    {
+      "path": "com/m3/collections/M3ListMultiValueMap$1.class",
+      "sha256": "6d72b11ef89aaa85181e585337c86445f0dd48d45773c0a9cd60d82ec8ef74d0"
+    },
+    {
+      "path": "com/m3/collections/M3ListMultiValueMap.class",
+      "sha256": "cb05a652ba01163dc12f1f61c9e67c208f3b80bf5ef02eef83979becf64b1c71"
+    },
+    {
+      "path": "com/m3/collections/M3ListOrderedMapView.class",
+      "sha256": "0bbf495d48c8b238368a7177cf7e289ceb2023e81bb1db20e8b0a7c4a1924018"
+    },
+    {
+      "path": "com/m3/collections/M3ListOrderedSetView.class",
+      "sha256": "7cc156dd75a1d05c346b77dfd020da2050a18a77c856dd1b4f6f14bf4d81c2b7"
+    },
+    {
+      "path": "com/m3/collections/M3ListWidth.class",
+      "sha256": "78d3f9f28eb30fc7f3c73431c3b985deb7dfc8058dcbee414a41d41c63c59dae"
+    },
+    {
+      "path": "com/m3/collections/M3LockedMap$1.class",
+      "sha256": "1944d37b99eb959f14afb0754e1c60efd1878154a5d73de4da601259a7393752"
+    },
+    {
+      "path": "com/m3/collections/M3LockedMap$2.class",
+      "sha256": "84273b2a142e2c9bd04b0ae2c432494df8e5ec6a3c06e5ffcdc34131652a3afd"
+    },
+    {
+      "path": "com/m3/collections/M3LockedMap$3.class",
+      "sha256": "f3adbdd0560a5e0674c9ac59aa538c0f53cc48166b5c5e01b7f74b4c097fa55b"
+    },
+    {
+      "path": "com/m3/collections/M3LockedMap$4.class",
+      "sha256": "e3dcf7f617c5280846b6f5b4ac0b3ecc7718a66585e38b01e81a308e6146d513"
+    },
+    {
+      "path": "com/m3/collections/M3LockedMap$SnapshotEntry.class",
+      "sha256": "7fc630def9dd226ac5351ebb37b7bf171c4a9b697d21531170cc322a4f3c94ad"
+    },
+    {
+      "path": "com/m3/collections/M3LockedMap.class",
+      "sha256": "70e29f9b88025f08be1a2fe034a660d9e30e6498ab4f55f170b17ded6ecd5f99"
+    },
+    {
+      "path": "com/m3/collections/M3LockedTreeMap.class",
+      "sha256": "3db50db8e5ac0671dda5ee4f7347969ad8db1b1d494899ef4aa694daebeb8164"
+    },
+    {
+      "path": "com/m3/collections/M3LockedTreeSet.class",
+      "sha256": "a7e08c8b6e4d7b4acfd4fa7a72e637b6f06ed4dd9fea4e84581310ddc5916778"
+    },
+    {
+      "path": "com/m3/collections/M3LongAddressKernel$NativeLibrary.class",
+      "sha256": "8dc0c05604e4dda2618c052bc1eab6e9119d41031211f53434dd3eb71436bda0"
+    },
+    {
+      "path": "com/m3/collections/M3LongAddressKernel.class",
+      "sha256": "0b85f982c282841386254065acea5144b2360957bc56410c24f4c9f8af49b4d4"
+    },
+    {
+      "path": "com/m3/collections/M3LongArena28.class",
+      "sha256": "11db58ff9861521260895b82141519006ca02b9f34865aa72eab871b4032e326"
+    },
+    {
+      "path": "com/m3/collections/M3LongArrayDeque$1.class",
+      "sha256": "5b68d990925ccb89a1490f9f06d68185346c7837d74f43af0d2027d6dbd329b5"
+    },
+    {
+      "path": "com/m3/collections/M3LongArrayDeque$2.class",
+      "sha256": "a10a7d84d5204a6ac77efd4fdca81c3ebe69e7ed5441fa4240a05ec546043db2"
+    },
+    {
+      "path": "com/m3/collections/M3LongArrayDeque.class",
+      "sha256": "aa3ec4289ff3731ae2ba9cd61862f5597cd5a8804da44028098a4b5937fde11a"
+    },
+    {
+      "path": "com/m3/collections/M3LongArrayList$1.class",
+      "sha256": "6f25c63196d89b6f6277f609b86985d2d52d9d46c655a349414d9b945f3317d4"
+    },
+    {
+      "path": "com/m3/collections/M3LongArrayList.class",
+      "sha256": "13067dfee18834c653007154fa41ab93fbf37a62242f644318567b0669abb68e"
+    },
+    {
+      "path": "com/m3/collections/M3LongArrayTable.class",
+      "sha256": "feac3a2ef8424c8caaceddec7f2ceb8a4ac407cbcbd82c7d47998b59b6456ef6"
+    },
+    {
+      "path": "com/m3/collections/M3LongBag.class",
+      "sha256": "d3595f5622335d5abe940271254d06e5722b109aa9c56661139625f426c88beb"
+    },
+    {
+      "path": "com/m3/collections/M3LongBigList.class",
+      "sha256": "ef850cf6bf9bdd221f0597623ea26407242589974ceda5645234a22bb35f184e"
+    },
+    {
+      "path": "com/m3/collections/M3LongBitmapFilterPlan$1.class",
+      "sha256": "6a89a2ebfcd35eb7cf41f6cbf16054cb78144209be3d25eda81afdacfe7b7f28"
+    },
+    {
+      "path": "com/m3/collections/M3LongBitmapFilterPlan$IndexedSpliterator.class",
+      "sha256": "f423423ce5450d82be14b14e498ec8e630b1bd01e112ff1668264eb96b84b12e"
+    },
+    {
+      "path": "com/m3/collections/M3LongBitmapFilterPlan.class",
+      "sha256": "95e55f4019811777cb82e9a77f42d68e756e1bd2698e70f6c2c1e24f7db014ca"
+    },
+    {
+      "path": "com/m3/collections/M3LongBitmapFilteredSnapshot$1.class",
+      "sha256": "54e1efa083e7c2dbc5da0edcfe80486afe448241778876a72b9649c61a61764f"
+    },
+    {
+      "path": "com/m3/collections/M3LongBitmapFilteredSnapshot$IndexSpliterator.class",
+      "sha256": "00a7418c7f6688309fa2de7079df343c50cc1fdc802eeb5eec2bf51b15a7d178"
+    },
+    {
+      "path": "com/m3/collections/M3LongBitmapFilteredSnapshot$VersionedView$1.class",
+      "sha256": "b50f0b1b5b92849ef87b44831af1ce5da966d43f565ff838caebfc83c6695020"
+    },
+    {
+      "path": "com/m3/collections/M3LongBitmapFilteredSnapshot$VersionedView$Cache.class",
+      "sha256": "2a4c3a003bad4dde5b63a71c6327a8314f4fa344c4584c836b7393071ecd6d3c"
+    },
+    {
+      "path": "com/m3/collections/M3LongBitmapFilteredSnapshot$VersionedView.class",
+      "sha256": "eed99be4d8026cb7b351c01fcd830acaa9a5061ee26bf780ff7662fced50eacf"
+    },
+    {
+      "path": "com/m3/collections/M3LongBitmapFilteredSnapshot.class",
+      "sha256": "b7abe912a3315156ce629fc7d42e6c7527da7cda14d838eec7329fc2207e58d1"
+    },
+    {
+      "path": "com/m3/collections/M3LongCollection$1.class",
+      "sha256": "bb3f0f8e1d152cd3f45a94dae1502926bb0df4967cad9d438e33d2788bf24907"
+    },
+    {
+      "path": "com/m3/collections/M3LongCollection.class",
+      "sha256": "515ed3480be8df795ae3a467a76711bf9f51250ce69306c99c55bba58447bcb2"
+    },
+    {
+      "path": "com/m3/collections/M3LongCompositeViews$1.class",
+      "sha256": "5b509b5da728ade23f4f967bc7b71b8278129222501ec526a633883fe2560b84"
+    },
+    {
+      "path": "com/m3/collections/M3LongCompositeViews$BinarySetAlgebra.class",
+      "sha256": "4980a8654d7757037839862c8e85a6b2b2239b76352425bdd73d26cffd00a668"
+    },
+    {
+      "path": "com/m3/collections/M3LongCompositeViews$BinarySetCursor.class",
+      "sha256": "66e6f96362fc5a9cc4377087125516a879349dcca17e2ef32d3ba249393634dc"
+    },
+    {
+      "path": "com/m3/collections/M3LongCompositeViews$Concatenation$1.class",
+      "sha256": "7f2bd8afcb86934307d8ca901cb7ec5411532b23423b236ffce72dfa7e8e323e"
+    },
+    {
+      "path": "com/m3/collections/M3LongCompositeViews$Concatenation.class",
+      "sha256": "7bf348d50ae07c27c43c705f0a10a5635b7dc5fa07c2e64a04491d7185fab6d9"
+    },
+    {
+      "path": "com/m3/collections/M3LongCompositeViews$Merge.class",
+      "sha256": "17185004f5c124a1758b127b3e2225319964dd87f79377c389b941c30239e851"
+    },
+    {
+      "path": "com/m3/collections/M3LongCompositeViews$SetOperation.class",
+      "sha256": "b5f4e2dc5d09f8e36e0c19a3f5206114fc86f836f7489ec0ab4c88f97e40dd34"
+    },
+    {
+      "path": "com/m3/collections/M3LongCompositeViews$Union.class",
+      "sha256": "284174ca7e0090d178a79df3b3b311bf9fde0faee81a90ea19a03452f795798e"
+    },
+    {
+      "path": "com/m3/collections/M3LongCompositeViews.class",
+      "sha256": "4c87b115da98ac34461d1dc4ab6c427088ed3205e6241f1575be7e7bd4cdbcdb"
+    },
+    {
+      "path": "com/m3/collections/M3LongDag$1.class",
+      "sha256": "3927d8ca1ddc7f965a88257087cb85beaa3cbdf4fda223ca3a6db557b92a95db"
+    },
+    {
+      "path": "com/m3/collections/M3LongDag$Concat.class",
+      "sha256": "84c9701c2c5b28d6a413c2ddf2ace06436924a338266f900f9e33518bbdab151"
+    },
+    {
+      "path": "com/m3/collections/M3LongDag$Distinct.class",
+      "sha256": "2adadfbd976c2d839d846fede8c86ae358b67bfab5ceeaf8501341b3faa5f990"
+    },
+    {
+      "path": "com/m3/collections/M3LongDag$Filter.class",
+      "sha256": "4913a23996b425fed7120aad22e0605acb6d3e977b6b59bdd8178a8bf09554fd"
+    },
+    {
+      "path": "com/m3/collections/M3LongDag$Frame.class",
+      "sha256": "e060498b44dc00f358454ba1cfaa9fc5620089ea96f2fb50e32be5a3158fdcef"
+    },
+    {
+      "path": "com/m3/collections/M3LongDag$Limit.class",
+      "sha256": "4868b6a6a2bd742e31e8749991ed4b1878dfe4aa2fdd477e1c294fb363d895ad"
+    },
+    {
+      "path": "com/m3/collections/M3LongDag$MapValue.class",
+      "sha256": "7584c59c198126954cf089cb5157f1a25d660438ea4fc68259d3ff1037480182"
+    },
+    {
+      "path": "com/m3/collections/M3LongDag$Node.class",
+      "sha256": "834b4421687ea022f639cb8e2a3ef88348d7d84cd637a7819948fc596c73dcb2"
+    },
+    {
+      "path": "com/m3/collections/M3LongDag$Skip.class",
+      "sha256": "73141ce5eb1a93fca60ab836dbe9511e3aae6b858675c2bc300b99765d7eb3d5"
+    },
+    {
+      "path": "com/m3/collections/M3LongDag$Sort.class",
+      "sha256": "4956fe6d5a188c5ba9cc470f9a3efbd9ab724daf91f17a052d4f70bc2a683bd5"
+    },
+    {
+      "path": "com/m3/collections/M3LongDag$Source.class",
+      "sha256": "00e887e227db82b5485ba82a84de61d887c80bbfe7d4b5fb7bdfda0718e96b22"
+    },
+    {
+      "path": "com/m3/collections/M3LongDag$Stage.class",
+      "sha256": "fea16192a4281512e1f1e7bf146744c677f21b4f14a68c27d62f72e45c3ac897"
+    },
+    {
+      "path": "com/m3/collections/M3LongDag$Unary.class",
+      "sha256": "cbdf366fc16eaefe79f5efa113133a077da0b8e717ef9718bec92570f4d1622f"
+    },
+    {
+      "path": "com/m3/collections/M3LongDag.class",
+      "sha256": "21e9012087783fee67efa56c7057625190ac27a36c3505903f3acdaf1ab4c486"
+    },
+    {
+      "path": "com/m3/collections/M3LongDeque.class",
+      "sha256": "da9c8cc8dd92be8d282fc2bbb3020f4b369290a4e2c48043d74dcb2f0bc02a52"
+    },
+    {
+      "path": "com/m3/collections/M3LongFilteredView$1.class",
+      "sha256": "8498fa8d462a189da26ccb0ac79045c48429f7f598e6a5386efad3836d819e8c"
+    },
+    {
+      "path": "com/m3/collections/M3LongFilteredView$2.class",
+      "sha256": "040f99341ab9227fd5d55462a60601051ef1337ceb28f875437c2468a2924396"
+    },
+    {
+      "path": "com/m3/collections/M3LongFilteredView.class",
+      "sha256": "ea9683469ced38c1d61ba610e9425e9418b066cbc45b831337159bcb94769a87"
+    },
+    {
+      "path": "com/m3/collections/M3LongHashSet$1.class",
+      "sha256": "1330375364285f7ff4c44920e7facf594140c51858e5f1df8dd302938ceb5321"
+    },
+    {
+      "path": "com/m3/collections/M3LongHashSet.class",
+      "sha256": "b52f57534b785aa9c517cc58357efba6a0db56e067dd4d84af533fcb74264be0"
+    },
+    {
+      "path": "com/m3/collections/M3LongIndexPathMasks.class",
+      "sha256": "ec5f6326b51101c78c3e013a960527d52b05d23405fd89814117880d952d5ce6"
+    },
+    {
+      "path": "com/m3/collections/M3LongIndexPathMasksJNI.class",
+      "sha256": "43a712c526f2415e2e9b0388d0a5ccc3b64592bfb62f15d2e805d712859823ca"
+    },
+    {
+      "path": "com/m3/collections/M3LongIndexProjection$Order.class",
+      "sha256": "f8f3b34203b2564928f67d41490c7c73c5c90f371bc0d58bf615efbff5fc1ce6"
+    },
+    {
+      "path": "com/m3/collections/M3LongIndexProjection.class",
+      "sha256": "6407a1e37ea0ac98bc564860d30a0be322cea284133a2799ef67c24bdebeb0f5"
+    },
+    {
+      "path": "com/m3/collections/M3LongInterval.class",
+      "sha256": "05a066ceab1608432ad628162a26cb1c09e2335471f23cc5f71e2de714013351"
+    },
+    {
+      "path": "com/m3/collections/M3LongIterator.class",
+      "sha256": "27dc860fb4e54d0db92ab3de2aa48977024f4f7a23267c12d62181573aeacf3b"
+    },
+    {
+      "path": "com/m3/collections/M3LongLane28.class",
+      "sha256": "5b57c8270cab08d246dfaeb841f56a22184cf935071a04315571040c7675e41e"
+    },
+    {
+      "path": "com/m3/collections/M3LongLaneStore28$HandleConsumer.class",
+      "sha256": "b133cce6eefae4023a4cdb221624292dac4d8966f23c51c62456f4103b56cfb4"
+    },
+    {
+      "path": "com/m3/collections/M3LongLaneStore28.class",
+      "sha256": "ec017da97fb2aaec1d4ce985e292f73263bc31736fda2d83136ce619ea351ae9"
+    },
+    {
+      "path": "com/m3/collections/M3LongLinkedHashSet$1.class",
+      "sha256": "a5b61ead2ca519bd75b712fc9c8668d4d12c56867acf6395ca342a17b0028c33"
+    },
+    {
+      "path": "com/m3/collections/M3LongLinkedHashSet.class",
+      "sha256": "00ddaffa6433e13a8572422eae7c21eab540308e1b0d060b0b57640641b8c391"
+    },
+    {
+      "path": "com/m3/collections/M3LongLinkedList28.class",
+      "sha256": "57758a410bd9faaf4687dc897f233d2d95e922e19609a6490daa92112abd4195"
+    },
+    {
+      "path": "com/m3/collections/M3LongList.class",
+      "sha256": "8642c637a725f23ab6cf08255a424c8ec733f72671add97c824d25adbf09fa39"
+    },
+    {
+      "path": "com/m3/collections/M3LongListSpliterator.class",
+      "sha256": "7ca5f1aa09510aa513c1e5496bbd311a22660c3e72a930dcd8d82ca66852d99a"
+    },
+    {
+      "path": "com/m3/collections/M3LongLongConsumer.class",
+      "sha256": "533d6e1f33805fc3be80a267ccdc2d5e2a79b631850c7f5f7b98bf6b45dc8378"
+    },
+    {
+      "path": "com/m3/collections/M3LongLongHashMap$1.class",
+      "sha256": "b6c6ff23ae0fa458fe307c2371f0a4d513fef7b184c7c1c273a32faf7671029b"
+    },
+    {
+      "path": "com/m3/collections/M3LongLongHashMap.class",
+      "sha256": "3b3abc2581405043eefcd792f2433b717a5e79cb90196f3e7dd50ad572a5bb85"
+    },
+    {
+      "path": "com/m3/collections/M3LongLongLinkedHashMap$1.class",
+      "sha256": "3bd3310cf4bcac3807f23ef57f19a5037cd9d9d9d4927b399b51b971b710ca6d"
+    },
+    {
+      "path": "com/m3/collections/M3LongLongLinkedHashMap.class",
+      "sha256": "864027f466c4a044cfa850ce7b9cc4dde156ae6330c95dcd369c7dfb552e63b9"
+    },
+    {
+      "path": "com/m3/collections/M3LongLongSortedMap.class",
+      "sha256": "a3432bd509892b35589ac9237742e2a519c509b61ec6854b4567ed1d2d4585f9"
+    },
+    {
+      "path": "com/m3/collections/M3LongLongTreeMap$1.class",
+      "sha256": "81a814b6471d45507d10707a0de535567f9f42f9f4d7457e5a9c4e44f81e4dd8"
+    },
+    {
+      "path": "com/m3/collections/M3LongLongTreeMap.class",
+      "sha256": "2b2f65d872df0f405445702093477f517d19b1f15c2b2f06fc16a6b7ee285822"
+    },
+    {
+      "path": "com/m3/collections/M3LongPatriciaTrie.class",
+      "sha256": "9ce7c93792d38216235159083ba315af48b7f0553661c63bb2878f124eb89055"
+    },
+    {
+      "path": "com/m3/collections/M3LongPredicates$1.class",
+      "sha256": "965a8c47b3551830e90058fa904e282cc1763ec1dfe272f6d0401aebc879248c"
+    },
+    {
+      "path": "com/m3/collections/M3LongPredicates$Branch.class",
+      "sha256": "17515290f3f5ea2c89bc258a0e3e9f03e1556d32c082326d1e985df0a4e8fd57"
+    },
+    {
+      "path": "com/m3/collections/M3LongPredicates$Chain.class",
+      "sha256": "6ed91b24f5296b616145dd28ccbf3a61beded24bf29edd69f29055b0a8e376c6"
+    },
+    {
+      "path": "com/m3/collections/M3LongPredicates$Leaf.class",
+      "sha256": "419395d692a92a34fe6dd87207485fdc2d71e85984a34ad26200bf10e6eceea5"
+    },
+    {
+      "path": "com/m3/collections/M3LongPredicates$Node.class",
+      "sha256": "2ffc26ce5cc33c78cdf9663cf02a3f6aae309b933d61b4dfc3862c696679d6da"
+    },
+    {
+      "path": "com/m3/collections/M3LongPredicates.class",
+      "sha256": "180a4e9f03aeba0590c7cd41487e81d1a38b0b09d049d7340e417823f748bdf4"
+    },
+    {
+      "path": "com/m3/collections/M3LongPriorityQueue$1.class",
+      "sha256": "ad3b9e0f3b92335bb7b4b7df5ed06b4ad76cb4a32ed7f74405ebb82c13218505"
+    },
+    {
+      "path": "com/m3/collections/M3LongPriorityQueue.class",
+      "sha256": "220338b7580fa0e52542c7b2aead0d76bb2769d9bd428efb586babd488d47fc5"
+    },
+    {
+      "path": "com/m3/collections/M3LongQueue.class",
+      "sha256": "aa30f394bff887882a6511ab148217b13dd8ec7b89b7cc98ad71afba0c35db21"
+    },
+    {
+      "path": "com/m3/collections/M3LongRangeSet.class",
+      "sha256": "329b2d096fae026147a2b531c2d009cc5895eb6e70cf8af5d86d2aff3ec77ac2"
+    },
+    {
+      "path": "com/m3/collections/M3LongRankBatchNative.class",
+      "sha256": "9c340d754d484e91a0799cc5c44ebfed4872d799cd48e65032f933fead9d485e"
+    },
+    {
+      "path": "com/m3/collections/M3LongRankIndex.class",
+      "sha256": "86fd101468176e144c67d70d3ce043f47027d2ead0fbbbe05b9e118dccc8b716"
+    },
+    {
+      "path": "com/m3/collections/M3LongSequence.class",
+      "sha256": "d8db168936f54d25080ce3680c07f1d31d335fa9a267f4eb7aa78241e367d0f1"
+    },
+    {
+      "path": "com/m3/collections/M3LongSortedSet.class",
+      "sha256": "1d38f96f231e88d4a9d317525d789b4d3d053a7c13851c8e91f4b58ea6f823e8"
+    },
+    {
+      "path": "com/m3/collections/M3LongSortedSnapshot$1.class",
+      "sha256": "c55854df0b6dd9022bb6fd77aaef504fee04858d3f5d04acda70544cada1b6eb"
+    },
+    {
+      "path": "com/m3/collections/M3LongSortedSnapshot.class",
+      "sha256": "2b38977804130595d02c4c03cc44d9f85f08458e6787f3fe49063670941b5750"
+    },
+    {
+      "path": "com/m3/collections/M3LongSortedViews$1.class",
+      "sha256": "a8110f1490df3995a0888f72f1af62dae19d3591a33f8bcc6c6abb7fb6269b22"
+    },
+    {
+      "path": "com/m3/collections/M3LongSortedViews$Filtered.class",
+      "sha256": "8ece4e971df2f68eb26e65d7e7b4f374de165747ae1c0bb78c938f0e153d6520"
+    },
+    {
+      "path": "com/m3/collections/M3LongSortedViews$Unmodifiable.class",
+      "sha256": "56fc0681caf714342370250acb12f2568d05dfa8f35ec55f28a2634cc4316276"
+    },
+    {
+      "path": "com/m3/collections/M3LongSortedViews.class",
+      "sha256": "8ba5ddd6614d149a8221b4b6bd75adad0eebbef0be4d8a71c753cdd2787f0862"
+    },
+    {
+      "path": "com/m3/collections/M3LongStack.class",
+      "sha256": "846e099b4dc8f77ba80316e8a128d6becd661dc7605295a9ef51f399996207ce"
+    },
+    {
+      "path": "com/m3/collections/M3LongStateArray$Selection.class",
+      "sha256": "78fb29645b2ca73dc8c9198ed5abf7da0a97b9dccfaf085b142c8be163294442"
+    },
+    {
+      "path": "com/m3/collections/M3LongStateArray$Snapshot.class",
+      "sha256": "ccd78f137420da3825fdea2665818f8641ac3966b873755318b1b5a9940a576f"
+    },
+    {
+      "path": "com/m3/collections/M3LongStateArray$Window.class",
+      "sha256": "aace79eb1225fc7fc90e235dad76284a015e0754ebdbcfaaa336d0c1fdd205a7"
+    },
+    {
+      "path": "com/m3/collections/M3LongStateArray.class",
+      "sha256": "92d7ba579097e53c437b6ecbf1cfb2b53de3ff6c44a6436054c3a2b43d41eaf3"
+    },
+    {
+      "path": "com/m3/collections/M3LongTreeSet$1.class",
+      "sha256": "2a40463f59ba9e578a60b54171a084287fe5547367db0d696449b24e61d798c9"
+    },
+    {
+      "path": "com/m3/collections/M3LongTreeSet$2.class",
+      "sha256": "3993b32a87b7ac92de138d5ea1ba2214f8d52dd4266e5c022a1bc9b380da7441"
+    },
+    {
+      "path": "com/m3/collections/M3LongTreeSet.class",
+      "sha256": "f630e5a6478f7f40c31b5f3e348167297fc20550f25734df6dba81535120713e"
+    },
+    {
+      "path": "com/m3/collections/M3LruLongLongMap.class",
+      "sha256": "1c85f971d28004065a13a7f8496d9ab917d96e6a8c1e3d0e35591a6441737b03"
+    },
+    {
+      "path": "com/m3/collections/M3LruMap.class",
+      "sha256": "fcb30ae3db6623ee9637aefcd2bfeed3a4b5c0811bceb7d6ef32a19dfe167faa"
+    },
+    {
+      "path": "com/m3/collections/M3MaskViewportKernel.class",
+      "sha256": "9fbb57c8ec81ea556f5e6fc085ca6fd5f974a099f0772a6b48f335b06615d966"
+    },
+    {
+      "path": "com/m3/collections/M3MaskViewportNative.class",
+      "sha256": "b9e678a0b813f820e73d91d739bda8af86495fcd2ef43bfe792b4970583ad008"
+    },
+    {
+      "path": "com/m3/collections/M3MpmcLongQueue.class",
+      "sha256": "ba6702dd5eb9049749581f909b188d210b8f29f37bfaa91d636dc362a8ca40a2"
+    },
+    {
+      "path": "com/m3/collections/M3MpmcQueue.class",
+      "sha256": "fd9429c7b8e3745711d9b5f45b51a25c5e0e8fa860bd1a9102af13c48fe37ebd"
+    },
+    {
+      "path": "com/m3/collections/M3MpscQueue.class",
+      "sha256": "5c2424553bac7eea67f784eed0434322d7f2b2056b79012406937d064fb27c87"
+    },
+    {
+      "path": "com/m3/collections/M3MultiKeyLongMap.class",
+      "sha256": "5572412022b7dd84718f72cef98b31ba493b92e810df589c67bbe96e42bb695a"
+    },
+    {
+      "path": "com/m3/collections/M3MultiKeyMap.class",
+      "sha256": "38e948ef54a8354e166417b8ede624d08637dc6b7486df318024bb073feffc17"
+    },
+    {
+      "path": "com/m3/collections/M3MutableFilteredViews$CapturedEntries$1$1.class",
+      "sha256": "b0e6f2b4332de1f09b8c478b4ee86e626e8b31b2d68bcf91b1ae37605e43f603"
+    },
+    {
+      "path": "com/m3/collections/M3MutableFilteredViews$CapturedEntries$1.class",
+      "sha256": "99711e30160e6e77554b76a05929186320c18077272dac875681488f906bbee8"
+    },
+    {
+      "path": "com/m3/collections/M3MutableFilteredViews$CapturedEntries.class",
+      "sha256": "df82fc680a695d3f61c213f4b4d5931b60407e2d2f71912d5aafb22d11602879"
+    },
+    {
+      "path": "com/m3/collections/M3MutableFilteredViews$MapView$1.class",
+      "sha256": "b66f50d9a3ae8f24e0145de9d51f22c99859054e25f98b8291de0b0675b9e7ea"
+    },
+    {
+      "path": "com/m3/collections/M3MutableFilteredViews$MapView$2.class",
+      "sha256": "1dec67139d2973d15c1d1d5f73cda730e8b8bad0bf4819068a881edfb29f9089"
+    },
+    {
+      "path": "com/m3/collections/M3MutableFilteredViews$MapView$LiveEntry.class",
+      "sha256": "571f6c6619322ad4a7e1ca2a9f8545ea8de908a1f0c2b41b9f1a8df1cbcf6219"
+    },
+    {
+      "path": "com/m3/collections/M3MutableFilteredViews$MapView.class",
+      "sha256": "f60aa3bd212597ba444fe8da1172064b1aa677cb1eb6d90ba566f655ce037fe8"
+    },
+    {
+      "path": "com/m3/collections/M3MutableFilteredViews$SetView$1.class",
+      "sha256": "f40f9d8e71fa7e87eb0b8efbaa12477469227daada71a849fdf2a6d51e8c02b3"
+    },
+    {
+      "path": "com/m3/collections/M3MutableFilteredViews$SetView.class",
+      "sha256": "42fa6e6cf8275aa20d98604a1a37c8a12ab9463ba7adcf5935e6d65b3ec87441"
+    },
+    {
+      "path": "com/m3/collections/M3MutableFilteredViews.class",
+      "sha256": "c4fad67af4ad0a9863ad30ac0195454dd62ed0630b09ed8949dba2788f8212d8"
+    },
+    {
+      "path": "com/m3/collections/M3NativeFiveLibrarySdk.class",
+      "sha256": "a01cb670b6c19f27eaeeabf938983f1876aeddd473fbbab0dacb1e9a64f23fcf"
+    },
+    {
+      "path": "com/m3/collections/M3NotYetReceived.class",
+      "sha256": "3156fb5792033c48949ce80da540c89ff0e94c23f1f6369baa273045c06a5718"
+    },
+    {
+      "path": "com/m3/collections/M3ObjectCollection$1.class",
+      "sha256": "04d34ecb5deea13dc545cbc5c4533cb2e84a01c50b24291ee84c3622f1c6715c"
+    },
+    {
+      "path": "com/m3/collections/M3ObjectCollection.class",
+      "sha256": "70f1c9e460d3ad4849091248f162d4048026d1ec546b777dfeb602a1e76d4d8c"
+    },
+    {
+      "path": "com/m3/collections/M3ObjectCounts$1.class",
+      "sha256": "6d0ec08f3c1bd2ed4d069f734c154f8d714ec249120312319590b272978d9686"
+    },
+    {
+      "path": "com/m3/collections/M3ObjectCounts$2.class",
+      "sha256": "7ad4b01e52e1875f167e9b69afb56049a1c9fdf87f9edd8e9f2bf892cf0768da"
+    },
+    {
+      "path": "com/m3/collections/M3ObjectCounts.class",
+      "sha256": "c38dfadbc942d561adac632b009c18c172cca092ba2a49dc3254acc32b759032"
+    },
+    {
+      "path": "com/m3/collections/M3ObjectIdentityMap.class",
+      "sha256": "6e0aaab34f6020468ffd264262f88b5ac3db5248ec676d52dcfee8b2583818bf"
+    },
+    {
+      "path": "com/m3/collections/M3ObjectIdentitySet.class",
+      "sha256": "deae224962d261203d162598d2b24edc783b0f4cb4a1147d90e00ce18e9087a0"
+    },
+    {
+      "path": "com/m3/collections/M3ObjectIndexSnapshot$Order.class",
+      "sha256": "66bf8fa375533ed3b713243286d3ed571bd6fd911aa3794e3ddadc97c99f1a4e"
+    },
+    {
+      "path": "com/m3/collections/M3ObjectIndexSnapshot.class",
+      "sha256": "5a4256a056e3a09fb8735df384ac29caee4db48f0b1949c6c64569fd317cc5d0"
+    },
+    {
+      "path": "com/m3/collections/M3ObjectRangeMap$IndexView.class",
+      "sha256": "e74b799b3882aea0f13c2a22eec6b23b5b5be77ae169bb1eb2e00c1d3a8bea6a"
+    },
+    {
+      "path": "com/m3/collections/M3ObjectRangeMap$SpanConsumer.class",
+      "sha256": "9851749371b7c14fc845b94a5c816db06498d3b4f806bd632993e4cec420b1a4"
+    },
+    {
+      "path": "com/m3/collections/M3ObjectRangeMap.class",
+      "sha256": "ebedac3def18c42413ea9de22c7c2c356444cd56bfd33f2624fd57f842bbddb4"
+    },
+    {
+      "path": "com/m3/collections/M3ObjectResidency$BudgetExceededException.class",
+      "sha256": "5b4e210da71e448653c3a02c122dba9aab11263e9f4d2d8fdf060d38055229be"
+    },
+    {
+      "path": "com/m3/collections/M3ObjectResidency$Codec.class",
+      "sha256": "4307c5187f05f290f2574849aeef25ebede63fb4ac684be947c97c8bc16cb40a"
+    },
+    {
+      "path": "com/m3/collections/M3ObjectResidency$Decision.class",
+      "sha256": "50ab95c923d512c7a2f175b6eeddd6992e8c6d0b9eae51dc33872a5becd4f365"
+    },
+    {
+      "path": "com/m3/collections/M3ObjectResidency$Factory.class",
+      "sha256": "a8e9f2be66d0aa4d57c9ceb879085dcca6619a951a62ae0f171be7d8fc67c73f"
+    },
+    {
+      "path": "com/m3/collections/M3ObjectResidency$HeapSnapshot.class",
+      "sha256": "4b4219a62340fdd27e1b1d25f8fcc9719326e8cb0a0d157f09e534ec38e90b55"
+    },
+    {
+      "path": "com/m3/collections/M3ObjectResidency$ResidencyException.class",
+      "sha256": "1190d8d89e08b6e5846b197cfabbb876288ac8e8291379c613173a0ebdbfb58f"
+    },
+    {
+      "path": "com/m3/collections/M3ObjectResidency$SpillStore.class",
+      "sha256": "79adf0d59fce08195f2e871cbd5b06735e1aa32d885894a596368d0fabffa6b8"
+    },
+    {
+      "path": "com/m3/collections/M3ObjectResidency$State.class",
+      "sha256": "7289da26285bc95f6b85ce0088f478d2488597443aee3276b949310abbb4e297"
+    },
+    {
+      "path": "com/m3/collections/M3ObjectResidency.class",
+      "sha256": "f39bc461664c139d70b9ac9de8493dd1d3dc479d184978e099b1cdf29c4f5087"
+    },
+    {
+      "path": "com/m3/collections/M3ObjectSlotStore28.class",
+      "sha256": "5ef03b7a31a92ccae3cf15f77d4c931d96e6aced6d63b7d67e1138591ac5e2dd"
+    },
+    {
+      "path": "com/m3/collections/M3ObjectStateBatch28.class",
+      "sha256": "dcb56886a5cd340a12a7bb94678a899d8fe3ccb7441c0d467fc95b6479070adf"
+    },
+    {
+      "path": "com/m3/collections/M3ObjectStateSlots28.class",
+      "sha256": "de35ef96e3dc69658a18dfc90eeeb4953f9734c4a6cc16da349cef5fbc0f9abc"
+    },
+    {
+      "path": "com/m3/collections/M3ObjectStream$1.class",
+      "sha256": "b247aa50488b7fcb72ae2356223d8e199a522e6f30f68021e6cc81881f4ce09c"
+    },
+    {
+      "path": "com/m3/collections/M3ObjectStream$2.class",
+      "sha256": "fb3b6173f40aaafebd7e4597717f22e316b1c1b0e34625c20bc2a6acd9fc6b10"
+    },
+    {
+      "path": "com/m3/collections/M3ObjectStream$3.class",
+      "sha256": "fde9f6da96b256cbbd20fd84ff2c4d166331aa087e78db559897664838a12bbd"
+    },
+    {
+      "path": "com/m3/collections/M3ObjectStream$Mark.class",
+      "sha256": "9953ee1208731f3de65aeee131e262bb525519835c22e6298bcf502485178dfd"
+    },
+    {
+      "path": "com/m3/collections/M3ObjectStream$TailPolicy.class",
+      "sha256": "525a581528da45d071b8742c4a8339cc5e0a53f22bf5a94a62b30258c6b3706f"
+    },
+    {
+      "path": "com/m3/collections/M3ObjectStream.class",
+      "sha256": "867e7710541ed12cbebd437f809f81b23b1771b9448d92bdea5642e8cee3dcbf"
+    },
+    {
+      "path": "com/m3/collections/M3OffHeapLongLongMap.class",
+      "sha256": "bfaa2024b6b2b32044b153b03597eb002731d28581bdfccbaa5ec64306454054"
+    },
+    {
+      "path": "com/m3/collections/M3OffHeapRingBuffer.class",
+      "sha256": "8a8ed50b788fc347c617f39ccfc18959fdf366f10e814627d2a7ea860018f30a"
+    },
+    {
+      "path": "com/m3/collections/M3OrderStatisticForest.class",
+      "sha256": "1bb8bb3ee0b530abef24df066c374ac48e492bd009e48ea26fcdbee5d60ac422"
+    },
+    {
+      "path": "com/m3/collections/M3OrderedSlotMap$SetView.class",
+      "sha256": "63ce1bcfe8319a7cc614f5ee8592a843f68c858af8f9925da591522aa46c9ff4"
+    },
+    {
+      "path": "com/m3/collections/M3OrderedSlotMap$View.class",
+      "sha256": "31fc9a18acbdb50f07153e11f1f49d308e30af7e92bd72fec2f3e1b6b15ab737"
+    },
+    {
+      "path": "com/m3/collections/M3OrderedSlotMap.class",
+      "sha256": "72c0d81c5edfb9d4a8d76b3a6d4e6cc4ada53a993f74e0f4636c1cdb89af1df5"
+    },
+    {
+      "path": "com/m3/collections/M3Patch$1.class",
+      "sha256": "e543bf0850f137c8f23530f4e9122ef6b946d8afd04f826eed742a2544600a55"
+    },
+    {
+      "path": "com/m3/collections/M3Patch$Target.class",
+      "sha256": "a8ed544ba56fbdcc94b7b8de25878b0d40f7eca7fd9a74494b263802bf071cfd"
+    },
+    {
+      "path": "com/m3/collections/M3Patch.class",
+      "sha256": "87434e29fecc937f931afc275d4cc20516fbc5a34b72136ffa9fffe0e8783411"
+    },
+    {
+      "path": "com/m3/collections/M3PatriciaTrie.class",
+      "sha256": "0c2f24854407340c6eeb8dc73b9e2df5d0b146534818ec986eb79f74ba6e39a4"
+    },
+    {
+      "path": "com/m3/collections/M3PlaneGeometry.class",
+      "sha256": "c70a8b69d7ced588936535c8f28f8201cc6e93f5e66b193393feea90b1c786e8"
+    },
+    {
+      "path": "com/m3/collections/M3PositionMarkedSelection$1.class",
+      "sha256": "30ad3dd0e6b76bd1fdbc7d21af6fa047845eae550e9339df0aaae498facb2cdd"
+    },
+    {
+      "path": "com/m3/collections/M3PositionMarkedSelection.class",
+      "sha256": "a2ac87ab326796be3be7bd88f1ffa219657178f1c61138583d0ae7cfcdfc0c15"
+    },
+    {
+      "path": "com/m3/collections/M3PrimitiveFilteredSequences$Cursor.class",
+      "sha256": "85a5ddfa4faffe3a8dd0e8fd72cd1f40c0e4d655599363be9671398e05a1c7f2"
+    },
+    {
+      "path": "com/m3/collections/M3PrimitiveFilteredSequences$DequeView.class",
+      "sha256": "cec480b798cdbd9c13777d4a33f9db5c69994e41ab9b1976ecfd6ac78528f654"
+    },
+    {
+      "path": "com/m3/collections/M3PrimitiveFilteredSequences$ListView.class",
+      "sha256": "4dc5520b030a4c955a920586fab08d91b9faa7650501e1bf745d5e7bf8df25a2"
+    },
+    {
+      "path": "com/m3/collections/M3PrimitiveFilteredSequences$StackView.class",
+      "sha256": "ef42010ffc65a298ac0b00d85676659b3cd4081f119e7da530f2cc82ef315354"
+    },
+    {
+      "path": "com/m3/collections/M3PrimitiveFilteredSequences$View.class",
+      "sha256": "5d76cd120c786beb41415b17b5e3d268157389175048d0c5c5124e3348ad6534"
+    },
+    {
+      "path": "com/m3/collections/M3PrimitiveFilteredSequences.class",
+      "sha256": "098d1328e38480b7eef946d06379094d621da2cd69c30a5775a40a56527b2bcb"
+    },
+    {
+      "path": "com/m3/collections/M3PriorityBlockingLongQueue.class",
+      "sha256": "68068ee7d3ad238ba6b5c2e06d9e112623b0cd55af771bbe83d41779134f6a29"
+    },
+    {
+      "path": "com/m3/collections/M3PriorityQueue$1.class",
+      "sha256": "3331f5a66537383c46942b314b5e0e20096963fb5430e8a6469abee440678286"
+    },
+    {
+      "path": "com/m3/collections/M3PriorityQueue.class",
+      "sha256": "3659c486c7605074d0aa68bb7296c85a9e7bc36798ae38e123befb6c1254bc19"
+    },
+    {
+      "path": "com/m3/collections/M3Progress$NullProgress.class",
+      "sha256": "2ef7a183fcd9d7db4db6771f6ca1156148515a58427b1557178127f81a2d5a3b"
+    },
+    {
+      "path": "com/m3/collections/M3Progress$Snapshot.class",
+      "sha256": "9e32bd9acee4d65b018b69e42e9ec65b9ff8db573263cc0bff068e3078e420af"
+    },
+    {
+      "path": "com/m3/collections/M3Progress$SubProgress.class",
+      "sha256": "182fcc8c47fc18407005a2298eabdfd3d5084d3da4013820cc5d3b99d13668a8"
+    },
+    {
+      "path": "com/m3/collections/M3Progress.class",
+      "sha256": "292c4a050ca91ac99d25b40c1c1402c8f3b421cd7039352401a79f40ec41bea5"
+    },
+    {
+      "path": "com/m3/collections/M3ProgressAdapters$LegacyAdapter.class",
+      "sha256": "3857f87dcd04f34db79077d8be679aad5bcaef5002ff8fc3ce692872daf98d7c"
+    },
+    {
+      "path": "com/m3/collections/M3ProgressAdapters.class",
+      "sha256": "917a254fcdc676169e8722c772f59300f3e9e16e916ebd21f1009a927d788272"
+    },
+    {
+      "path": "com/m3/collections/M3ProgressMonitor.class",
+      "sha256": "03cd2da647042386e8b82f6c95a89b44efb11f40c87cd35fd2c7b25808a8c580"
+    },
+    {
+      "path": "com/m3/collections/M3ProgressScope.class",
+      "sha256": "67331794e91e2b54a22036ef04c8541aa6771a2ea32cc57d688d337ad7275463"
+    },
+    {
+      "path": "com/m3/collections/M3ProgressState.class",
+      "sha256": "928a75b36be4b5eb7257fe54ebd8db488405e4e40e559c4b73705890669c14fb"
+    },
+    {
+      "path": "com/m3/collections/M3ProgressiveSignalEvidence$Bounds.class",
+      "sha256": "7893153fe19ffa88f2c3538b7a5c253a0d1a2fc681292ef40e9456d9b75180b3"
+    },
+    {
+      "path": "com/m3/collections/M3ProgressiveSignalEvidence$Dimension.class",
+      "sha256": "86a84319f934bfe0aace5f65c070ae354d67a60d8fd942ab62d3cd4d7effc449"
+    },
+    {
+      "path": "com/m3/collections/M3ProgressiveSignalEvidence$Evidence.class",
+      "sha256": "daaa8b52dbb21db4c3bfd40b6487f1fd32f4140baf55cfb0b5ef1f3f3014b2b6"
+    },
+    {
+      "path": "com/m3/collections/M3ProgressiveSignalEvidence$Family.class",
+      "sha256": "b33afda0a629d15bf9bdb2b724e44587f345367f79c095f960b29506f1799fa2"
+    },
+    {
+      "path": "com/m3/collections/M3ProgressiveSignalEvidence$Plan.class",
+      "sha256": "c93e536c7c7aab6a61d6e16ff4420830f4839e431ccbfa23249f84b54b0e72be"
+    },
+    {
+      "path": "com/m3/collections/M3ProgressiveSignalEvidence$Provenance.class",
+      "sha256": "bcceaae0660116176771126e51ad0989750ae6945008eab5b4e8d5ca0e5bdb2d"
+    },
+    {
+      "path": "com/m3/collections/M3ProgressiveSignalEvidence$Reader.class",
+      "sha256": "3c60bb365f3759595f79f20bd95acf04285fe87ef9c89bcfa585a6a9a4f9bc75"
+    },
+    {
+      "path": "com/m3/collections/M3ProgressiveSignalEvidence$Workspace.class",
+      "sha256": "8e63139f57b0bef9a37e6b2ce2a71959e198dbb52d6232233bc13f4e3b218f68"
+    },
+    {
+      "path": "com/m3/collections/M3ProgressiveSignalEvidence.class",
+      "sha256": "826b1c369a4906b9badeb3837b9372e27b87b0e8909196b3cfab2a5a26ca4e8b"
+    },
+    {
+      "path": "com/m3/collections/M3RangeSet.class",
+      "sha256": "6f1d8151a0dc25a0e915898ae6add8b5939867013f40435b89767741e63aac5c"
+    },
+    {
+      "path": "com/m3/collections/M3ReferenceMap.class",
+      "sha256": "9fa58281f134e109cb63522ea0414345c3146f10e43b153e86aefd948a934df8"
+    },
+    {
+      "path": "com/m3/collections/M3Residency$Strategy.class",
+      "sha256": "e6bda47db7281e3a49b2c123ce37b257927cf0de7b8519789a5c0a9022516102"
+    },
+    {
+      "path": "com/m3/collections/M3Residency.class",
+      "sha256": "12a8a9225281c527e6c23c8cf2513a8e94e7c259d1e8965d9ebb57c0aeedc282"
+    },
+    {
+      "path": "com/m3/collections/M3ResidencyStateMaskIndex$Backend.class",
+      "sha256": "73e88e588db658f0ee57a3f6241e98f28e46689ce69899a72972efe38e79a1a6"
+    },
+    {
+      "path": "com/m3/collections/M3ResidencyStateMaskIndex$NativePeer.class",
+      "sha256": "16ed3abe35c8b058bd06dbd3a72499241ddfb3a743971425093c5bacc0f32edc"
+    },
+    {
+      "path": "com/m3/collections/M3ResidencyStateMaskIndex.class",
+      "sha256": "9db1620118f04c5cc56093be1b7bf628212408c4c1e93ebb2008aae6c82e36a7"
+    },
+    {
+      "path": "com/m3/collections/M3Roaring64Bitmap.class",
+      "sha256": "ccea55b7a5e3e62ee323bebc18415cd69f0847f1ba0b80825c5fbad16a77681a"
+    },
+    {
+      "path": "com/m3/collections/M3RoaringBitmap.class",
+      "sha256": "fcf5375ab8bde00848f8351679fa2f361e7d111d8c463f30ef0b1e08d7accbd8"
+    },
+    {
+      "path": "com/m3/collections/M3RowIndex.class",
+      "sha256": "4ad40d552426532b22e8ad12ac7850984fea9ffb548340c9191f7dba5fe45c54"
+    },
+    {
+      "path": "com/m3/collections/M3RowTree$1.class",
+      "sha256": "46a09396ceb51ab31f2d5a7c67e904848158f0190e374f270fe7997ba4c70128"
+    },
+    {
+      "path": "com/m3/collections/M3RowTree.class",
+      "sha256": "a44f89234155cc48c9ade5be0b1d1525763a868bc1743326c2299b2c499f66fb"
+    },
+    {
+      "path": "com/m3/collections/M3RowTreeItem.class",
+      "sha256": "8259e20c428997575f22089d57ff2ca2457e666bac1985b4ce5ec5d86d367ebd"
+    },
+    {
+      "path": "com/m3/collections/M3ScrollBarGeometry.class",
+      "sha256": "8eafe9d2203d0e8aaea4a373aa92cbc4c095deb7bb2f966519cdfe94d63cf88b"
+    },
+    {
+      "path": "com/m3/collections/M3ScrollLayout$Result.class",
+      "sha256": "b84bdde7792783891f8bfdf38b8c0b945ea6d05d60afad55d3ab53e78e4d72e0"
+    },
+    {
+      "path": "com/m3/collections/M3ScrollLayout.class",
+      "sha256": "8bf2e3159fcb3ad827e73ab618714d917be2e60e3abd4bc954a886fb75851e26"
+    },
+    {
+      "path": "com/m3/collections/M3ScrollMetrics.class",
+      "sha256": "035d9a0bb5321a74789774a6a2e77af3cca66f24bab1259256d337e7418031bb"
+    },
+    {
+      "path": "com/m3/collections/M3SelectionItem.class",
+      "sha256": "19591542f168e264da9092d5e3db124b1e4a732a7fc7e4978cbe07e3259ac856"
+    },
+    {
+      "path": "com/m3/collections/M3SetAssociativeCache.class",
+      "sha256": "d850c61fca852bed1006f2585203e5616f3e72986c77d985e78470b00cee7cb2"
+    },
+    {
+      "path": "com/m3/collections/M3SetUniqueListView.class",
+      "sha256": "0cb7bfbbdd0871e864d270b3b769cacd46011fa529908679b30d77363e6d0f21"
+    },
+    {
+      "path": "com/m3/collections/M3SignalDimensions$Comparison.class",
+      "sha256": "73e9266fca867d7f9a09c8f8b88341ec14e7550b47aa5ca61ce32a61f3f33fbe"
+    },
+    {
+      "path": "com/m3/collections/M3SignalDimensions.class",
+      "sha256": "f9409ecb816fe0711adec6866f703600230275a47e3462fb60bdbd1d1c8f6a74"
+    },
+    {
+      "path": "com/m3/collections/M3SignalOrder$Backend.class",
+      "sha256": "728297d27df72f07c3c5fc194207bd49f68dc249209dc152e92d9bf9ea454901"
+    },
+    {
+      "path": "com/m3/collections/M3SignalOrder.class",
+      "sha256": "fcff33fda5dc5708b823f1f2f00ae4c9de4e435839f1c2e6e0d456f47604131a"
+    },
+    {
+      "path": "com/m3/collections/M3SignalOrderNative.class",
+      "sha256": "7b7dc3efaa33e420cfc65b970f0c67bf279d1f34231056fe663280ef0371b9de"
+    },
+    {
+      "path": "com/m3/collections/M3SlotAllocator28.class",
+      "sha256": "85289cae49be89da767a5e2fab98d61631c7ca59bdd8f5163f65d93669b0084a"
+    },
+    {
+      "path": "com/m3/collections/M3SlotArrays.class",
+      "sha256": "d38d9689040950975dc05f73eed403ea2b4a1675fb53ab413aabced51a91c890"
+    },
+    {
+      "path": "com/m3/collections/M3SlotMap$1.class",
+      "sha256": "ff437bdc04f3b52b01b99328dd09c7bbcc3af5fdf02473320170922981ee64e1"
+    },
+    {
+      "path": "com/m3/collections/M3SlotMap$2.class",
+      "sha256": "75604b90fd853113afd5e887c052f43fac09aee87e655ec72651a82beadf501e"
+    },
+    {
+      "path": "com/m3/collections/M3SlotMap$3.class",
+      "sha256": "63b0633ba53b2b87a790916d1442ed2ea5af1a98a1e892c5d7a9e0c86840444b"
+    },
+    {
+      "path": "com/m3/collections/M3SlotMap$4.class",
+      "sha256": "ba322f665cb585942e962bd6490d18068e04ee9a475707b513eba649720f3358"
+    },
+    {
+      "path": "com/m3/collections/M3SlotMap$LiveEntry.class",
+      "sha256": "f845f1a3cb837a5ee7fcb4ec4454dd40f2cd4682be03eda45c5d4255c6462e6b"
+    },
+    {
+      "path": "com/m3/collections/M3SlotMap.class",
+      "sha256": "97da773f1411e9ab282a621a3eacdbe4d94ba98faa8ddafdc722d39d18d1b7b0"
+    },
+    {
+      "path": "com/m3/collections/M3SlotMapIterator.class",
+      "sha256": "f8c30a3294cc1ef0f630d94e95335cfe7b57ab282e0b21c7c9735a7981b55b32"
+    },
+    {
+      "path": "com/m3/collections/M3SlotSpliterators$1.class",
+      "sha256": "62289360ecbce8abe6a93e12f66ab0e5d2ef251c19af921cad1bc05c48623802"
+    },
+    {
+      "path": "com/m3/collections/M3SlotSpliterators$2.class",
+      "sha256": "cd6b259bc5c2f3e2388b72681736a30f24cb5e1b6cd1e60a26d8f25310c4174e"
+    },
+    {
+      "path": "com/m3/collections/M3SlotSpliterators.class",
+      "sha256": "6f1d49bc783e41d7e5625f347a8c91c481d8197d2d7398372c6df070a80b2bdd"
+    },
+    {
+      "path": "com/m3/collections/M3SpanIndex$Backend.class",
+      "sha256": "0416619f1b6eca1857337316998265bf5a461cf5bafa98dc4f481a49e7a33252"
+    },
+    {
+      "path": "com/m3/collections/M3SpanIndex$Snapshot.class",
+      "sha256": "83e384b2de444c67bfeea88654177bee5923528281aba34e363897a2b0dd93f5"
+    },
+    {
+      "path": "com/m3/collections/M3SpanIndex.class",
+      "sha256": "ad27ecc1e7434b2fb89761c0ccff3e88ef622bd2b6d3190f852336a0a1db577d"
+    },
+    {
+      "path": "com/m3/collections/M3SparseExtents.class",
+      "sha256": "770ff91a751cf3fb958f9ab5ecf8ef70d6c7a1daceba4cf9a06ba66dcdf2ecc9"
+    },
+    {
+      "path": "com/m3/collections/M3SparseItemStore$IndexedConsumer.class",
+      "sha256": "b19c5fe03f59d902ccf83916090f5a2cbadbcb8e7d08bcd401ebd9a7c1f703a3"
+    },
+    {
+      "path": "com/m3/collections/M3SparseItemStore.class",
+      "sha256": "928d3c163e1fe51f901b4c6a49478679b8d47e68c3fc00065a2c343eb8279807"
+    },
+    {
+      "path": "com/m3/collections/M3SpscLongQueue.class",
+      "sha256": "edc32050e9fb2f9ee8e0e9d44c6c35d6e54c44da3146209c775dd4c643f4822d"
+    },
+    {
+      "path": "com/m3/collections/M3SpscQueue.class",
+      "sha256": "efbdc78f4611088b6679151519dd2f82b2583cb464a4d65315ae5fe777724190"
+    },
+    {
+      "path": "com/m3/collections/M3StateMaskArrays.class",
+      "sha256": "2b41c58efe30694b96d07f071bb1cba62370fdcfba9df4a469250378f85dceff"
+    },
+    {
+      "path": "com/m3/collections/M3StateMaskHistogram$Backend.class",
+      "sha256": "c55e4a74f8c45df82b1d9a3ac6538790fea3b408515e444586053172affe5f90"
+    },
+    {
+      "path": "com/m3/collections/M3StateMaskHistogram.class",
+      "sha256": "f5bee936533ba47c80e4c4190df2480e14a18df6604298432f2f41904d32d386"
+    },
+    {
+      "path": "com/m3/collections/M3StrategyHashMap.class",
+      "sha256": "65d18d3680485a0741f17db0a640da76e888024c68207c7a3722f57ba7b1abf8"
+    },
+    {
+      "path": "com/m3/collections/M3SynchronousQueue.class",
+      "sha256": "6eb7a9705cb15b5cc612908d9a3e4efc74b2c56c181e936686046c5809a50a6b"
+    },
+    {
+      "path": "com/m3/collections/M3SystemProgress.class",
+      "sha256": "25be7bd15feca53586e667d2a3b04a18ca24e12d8ae7e6700b3bb28594b9eec9"
+    },
+    {
+      "path": "com/m3/collections/M3TransferQueue$1.class",
+      "sha256": "300d5f86570b67f1295e595754557b5870327212948d6d4e108d2a5e652c9ff9"
+    },
+    {
+      "path": "com/m3/collections/M3TransferQueue.class",
+      "sha256": "93f4080bf4b76d5ef7e6d737cb06ab55cd4a4b07e16394d63b289c55755e949e"
+    },
+    {
+      "path": "com/m3/collections/M3TransformedCollectionView.class",
+      "sha256": "8648b83cc43b0a3db0d8738d4ee349bcc898f9808aa137b833535ebdb494abf8"
+    },
+    {
+      "path": "com/m3/collections/M3TransformedMapView.class",
+      "sha256": "730fac3eb49922bb975dc48f4dff2e548f9c77acac4f9c7b721a544b79ae840e"
+    },
+    {
+      "path": "com/m3/collections/M3TreeMap$Tree.class",
+      "sha256": "25b5444ab0d1b1c7cb696d3b3df92ba5de5a19d9333af2569cb4ad1c55d69ecf"
+    },
+    {
+      "path": "com/m3/collections/M3TreeMap.class",
+      "sha256": "52f5a1a903bbe895c4831e08f58ff6b480720bf0e6ef53aea312bd41841935a5"
+    },
+    {
+      "path": "com/m3/collections/M3TreeProjection$Residency.class",
+      "sha256": "642769fda71b634a48bc9541dfc03dd1888cb17bc12d8e7985ecd342fd05c3b2"
+    },
+    {
+      "path": "com/m3/collections/M3TreeProjection$Row.class",
+      "sha256": "e7895b9fba8e7d021974fe582360439234bd9954236224cde56b56b718cc509d"
+    },
+    {
+      "path": "com/m3/collections/M3TreeProjection.class",
+      "sha256": "1d3cfccd59cf71b96d9bfc2c8db49b37f8ddb5862fc9edddb4eac5ac72220758"
+    },
+    {
+      "path": "com/m3/collections/M3TreeSet.class",
+      "sha256": "ef5164798231490cf4b9184094a7841ed3fc40f7fce23aef30634f40f124246c"
+    },
+    {
+      "path": "com/m3/collections/M3TreeTopology.class",
+      "sha256": "9a0b6f1689e361c54b9b9de6dc189e2855b1df44c0abf0a4eca8a94f6194247b"
+    },
+    {
+      "path": "com/m3/collections/M3TreeWindow.class",
+      "sha256": "30a29e2810a1c74f0b5f2e99015498ead37a8e82befcea32b1a468abf9ab9e63"
+    },
+    {
+      "path": "com/m3/collections/M3TreeWindowPlan.class",
+      "sha256": "973b29fa09522e60452d0841dfa26fbb81bb8639a505c30b9c9ae9b6375d968c"
+    },
+    {
+      "path": "com/m3/collections/M3VirtualAccumulator.class",
+      "sha256": "d61f2a9ab27b3be379355a60a3cb484b28bfb5c1e4036270c12f7766ddcadec9"
+    },
+    {
+      "path": "com/m3/collections/M3VirtualCollector$Pair.class",
+      "sha256": "fa158e7ce08fc1a0821853c5d13cf05955b7596bec38c83ae7349b81a4ceb795"
+    },
+    {
+      "path": "com/m3/collections/M3VirtualCollector.class",
+      "sha256": "4b4ac57e9c6ca8200d1caee89c7453c32264fc3ce0eec11456adb3a056e3fbee"
+    },
+    {
+      "path": "com/m3/collections/M3WarmHeapGrowth.class",
+      "sha256": "b3e37a5e7b54e120a0a8f08cec419f2f2338b3112289573ed4384b06f6189e19"
+    },
+    {
+      "path": "com/m3/collections/M3WeakHashMap$KeyReference.class",
+      "sha256": "b1d68602601dc39ded160756ad17b884ab8484c8b456bef58cadb3aef3afc0d4"
+    },
+    {
+      "path": "com/m3/collections/M3WeakHashMap.class",
+      "sha256": "a6c712a7e723ed2c50c9be2cc92a24661131c96002444bac75a3526b4df08d9b"
+    },
+    {
+      "path": "com/m3/collections/M3WindowPlan.class",
+      "sha256": "90b316974198e0cef2ed545231fe01db55cbd696debaf7c2899d6ed12b5815a5"
+    },
+    {
+      "path": "com/m3/collections/M3WindowPlanner$HorizontalWindow.class",
+      "sha256": "46d7d69107b35883278750d340856eeb6a151261b0ae912f810697e2ea762d1f"
+    },
+    {
+      "path": "com/m3/collections/M3WindowPlanner.class",
+      "sha256": "15e7ca4c5e27c46508c7a3399081ae45f8bf21c6a97c0d268c385c30a0a19f8e"
+    },
+    {
+      "path": "com/m3/collections/M3WindowRuntime$PixelLayout.class",
+      "sha256": "634a21050e764d738112668e2ed30e337a45914de1050ff4f830ecdb78014a93"
+    },
+    {
+      "path": "com/m3/collections/M3WindowRuntime$RowLayout.class",
+      "sha256": "25f644899a2a7858bdadbff1d6e5ca7e242396507d8183e7e692c068d1b55f0d"
+    },
+    {
+      "path": "com/m3/collections/M3WindowRuntime$RowWindow.class",
+      "sha256": "a3226a72681caeaa38709ec89ba24d67ce63c6423a312cfd3b575b7d16730ac2"
+    },
+    {
+      "path": "com/m3/collections/M3WindowRuntime$Selection.class",
+      "sha256": "d6632712f89505968a0659cba3e7b24cf82e23bc8aff8676cd8ac53f8a5b9657"
+    },
+    {
+      "path": "com/m3/collections/M3WindowRuntime.class",
+      "sha256": "cd334a6d8c5619c2dc38829c276b7ea897f3a25bda1296bf649afed8e16bdd69"
+    },
+    {
+      "path": "module-info.class",
+      "sha256": "440779e416e3a6e75114f6aa1631d00083d502855636b833a295e60226c150f6"
+    }
+  ],
+  "test_classes": [
+    {
+      "path": "com/m3/collections/M3BoundedFilteredNavigationContract.class",
+      "sha256": "e981c23294edec6f6a75d4c4be990df028223103c5ee591663f0fcea758839cf"
+    },
+    {
+      "path": "com/m3/collections/M3FilteredListMutationProof.class",
+      "sha256": "428844eb98dfc2dd4c29f2c61506869aa2920924bf1c212711c352d0df624723"
+    },
+    {
+      "path": "com/m3/collections/M3FilteredListMutationWitness$Observation.class",
+      "sha256": "497eb95742d52c0099eb9abe8deced348dcc39ed8383aa07ab7a06f068b3b157"
+    },
+    {
+      "path": "com/m3/collections/M3FilteredListMutationWitness.class",
+      "sha256": "f5d232bad2c8ee7c3757adff03d54b087c0e741af73c3c5cfd5f8b80e8b3df64"
+    },
+    {
+      "path": "com/m3/collections/M3FilteredListsContract.class",
+      "sha256": "21c1cfab566d1cef949326cc725c9e64cf967f13dd7395d65afda790837e7b3f"
+    },
+    {
+      "path": "com/m3/collections/M3FilteredListsDeepCompositionProof.class",
+      "sha256": "75b2851df6d4519c132134548364912cbce7a5f463f1a6ce96e2dae198740528"
+    },
+    {
+      "path": "com/m3/collections/M3FilteredListsEdges.class",
+      "sha256": "55f5bec07ed02a9785a274b323ffd25bf6ef5982bcdc4527e2a2ff40526e7fe5"
+    },
+    {
+      "path": "com/m3/collections/M3FilteredListsMaskBridgeProof.class",
+      "sha256": "13ea38a6dc4db5929269816ff958dd4ebfe4d299ca8d631c7dd3c434b662bb14"
+    },
+    {
+      "path": "com/m3/collections/M3FilteredListsReadonlyDepthProof.class",
+      "sha256": "0973244d68ab4f07cf812022bba0e5a47d975e59cdfe575ecd015c3501e1d560"
+    },
+    {
+      "path": "com/m3/collections/M3FilteredMergedSequencedContract.class",
+      "sha256": "552657f0e8279909cd2e1b5e42c82ba44d4b60d88d20a6a40d8333e2151ff3a3"
+    },
+    {
+      "path": "com/m3/collections/M3FilteredNavigableSetRangeContract.class",
+      "sha256": "a70a1b5c7f574c9156f9f080b1b37948b606f25735f9ecff1b3c7874c3e89ad1"
+    },
+    {
+      "path": "com/m3/collections/M3FilteredNavigationReconciliationContract$1.class",
+      "sha256": "4d5473066fd67ca67bb288d7ae32ac46522e8dbaf9a834a09e0b7832b99adc52"
+    },
+    {
+      "path": "com/m3/collections/M3FilteredNavigationReconciliationContract$2.class",
+      "sha256": "be116b8da1ad9a1e45f7fff8d0617ed5948ebd752c416065d6a4b2205943a3da"
+    },
+    {
+      "path": "com/m3/collections/M3FilteredNavigationReconciliationContract$3.class",
+      "sha256": "c3fd3d6a502571cbda71895caa6c432577aca83e292f4fdffb835f8de9aa5092"
+    },
+    {
+      "path": "com/m3/collections/M3FilteredNavigationReconciliationContract.class",
+      "sha256": "fef5758bb0c50e945c448e2b8c000975041480d1add3e6fdad475b93a12e5f39"
+    },
+    {
+      "path": "com/m3/collections/M3FilteredSetIdentityContract$1.class",
+      "sha256": "8c673b6af8d1fb8dd5a30e3b42d334d4ed769b4e67687595f7a695f4e2cbea20"
+    },
+    {
+      "path": "com/m3/collections/M3FilteredSetIdentityContract$2.class",
+      "sha256": "26c16074f9ab32e2c830beca2d85d006dac19b1e5e628126c63c2e4e077c62f5"
+    },
+    {
+      "path": "com/m3/collections/M3FilteredSetIdentityContract$Key.class",
+      "sha256": "10aa0751151fc643b5aea937c3755371e9c9f3ce24e6c774f4749bdd4d8d78b4"
+    },
+    {
+      "path": "com/m3/collections/M3FilteredSetIdentityContract.class",
+      "sha256": "25e247f8a75cca25dde0813bd6358ad4d8c1065cf19c158f812006b0e20cc8ea"
+    },
+    {
+      "path": "com/m3/collections/M3FilteredSplitContract$CountingSet.class",
+      "sha256": "22237ea3cc407a1920545281f9e6f8e0a73f17aea17d7b011c12942cc20b56f1"
+    },
+    {
+      "path": "com/m3/collections/M3FilteredSplitContract.class",
+      "sha256": "c5906e1c21999cf836b6cea199b0dc402831677d5f834e9949a2e63ef696ad3c"
+    },
+    {
+      "path": "com/m3/collections/M3FilteredViewsContract.class",
+      "sha256": "ad682b86e30928731d36db85c29430f9dc77dcc06540be6ebe5c0ae4389d8bba"
+    },
+    {
+      "path": "com/m3/collections/M3IndexMaskCompactorSelfTest.class",
+      "sha256": "635e728aac113d07e6a94436ba2f09f197207dbc74bd64d8d076d103c3565fd5"
+    },
+    {
+      "path": "com/m3/collections/M3IndexOrderWindowContract.class",
+      "sha256": "445d6dc7249da0acd9c51c73270ff9ec6766be66445e60293967f98a7612bea3"
+    },
+    {
+      "path": "com/m3/collections/M3IndexOrderWindowResourceProbe$Workload.class",
+      "sha256": "a39d18d1ebea2f1041900561aa5adb56ea37142e51007f770a0849cc18cd05fa"
+    },
+    {
+      "path": "com/m3/collections/M3IndexOrderWindowResourceProbe.class",
+      "sha256": "7cac558667eddcb7ce3b225fcf8edc731932564dc7d279b09ee4e9137743ee6c"
+    },
+    {
+      "path": "com/m3/collections/M3IndexedMultiValueOccurrenceSelfTest$Item.class",
+      "sha256": "e3747eaef62a3dfe3f0c2e525d672de863cb444069e90cb15e8257fac21f7638"
+    },
+    {
+      "path": "com/m3/collections/M3IndexedMultiValueOccurrenceSelfTest.class",
+      "sha256": "41339f43f4db9d12d3f100c97149b443ab6351a9a5b23bff5a951dc180b612c9"
+    },
+    {
+      "path": "com/m3/collections/M3LongIndexProjectionMaskOffsetProof.class",
+      "sha256": "0b65a71f611c109abbc8da612ef9042b4cad9f41ff3cce8dc7db2770e85291a7"
+    },
+    {
+      "path": "com/m3/collections/M3LongIndexProjectionSelfTest.class",
+      "sha256": "c1ce4af90f8cd2700405c2f3a8b9b6ce050579687221cf24bf1df4fd62a6cb86"
+    },
+    {
+      "path": "com/m3/collections/M3MutableFilteredViewsContract.class",
+      "sha256": "98b8ae50c98d1daca7406a9df4de7b75892ac7cd844e2a66a9c3ab7e8c872b23"
+    },
+    {
+      "path": "com/m3/collections/M3NativeIndexRangeSelfTest.class",
+      "sha256": "03f4adea61bdbbd5df639de4827a77fcd34af4a7712be49f91fde7f4242b51ac"
+    },
+    {
+      "path": "com/m3/collections/M3RequiredExcludedMaskSelectorContract.class",
+      "sha256": "dfb25b6aa76d2d4606e573fae3bc0b4020244364658b988c4785a1b9112de163"
+    },
+    {
+      "path": "com/m3/collections/M3RequiredExcludedMaskSelectorNativeContract.class",
+      "sha256": "5feaad55148329656e5931c108bc7ad8afcbf62f7f38cb904553d5e00f058f06"
+    },
+    {
+      "path": "com/m3/collections/M3StoredRepresentativeContract$Key.class",
+      "sha256": "5d137c267af1f68a77b7283752272c8b2383ad4937466c985740dd51b9fedd9f"
+    },
+    {
+      "path": "com/m3/collections/M3StoredRepresentativeContract.class",
+      "sha256": "3980e1e7f3b5a747febe239814986d078fc64b006fbbc7b6fddde921bcd13860"
+    },
+    {
+      "path": "com/m3/collections/M3StrictFilteredSequencedContract.class",
+      "sha256": "521d57248c614590a5a2e166ef1014be1f7c77b06fd2634c87e2f40c1596aaca"
+    }
+  ],
+  "native_libraries": [
+    {
+      "path": "libm3_collections_address.so",
+      "sha256": "efb054eee7c6ebaaa8812a70d926667c8496fa0886db77c6ff1a146b0395df47"
+    },
+    {
+      "path": "libm3_collections_mask.so",
+      "sha256": "17deda824323cbd790aeaf72ec5851814b9e98c3b8d458e9d04662f96ddfd0bf"
+    }
+  ],
+  "native_source_seals": [
+    {
+      "path": "m3/collections/src/main/native/collections/m3_index_mask_compactor.c",
+      "sha256": "d1c300832aa9bf44cd7b7199cff593beb2a9464fbb52c9c8448da7773eaf0aef",
+      "git_blob": "15024c40ba9b92fd50fb7823ecfa9543aba22be1",
+      "decision": "UNCHANGED_EXISTING_OWNER"
+    },
+    {
+      "path": "m3/collections/src/main/native/collections/m3_index_mask_window.c",
+      "sha256": "8107ba8ba5f9d7519563eba9d20e76932dd077b2359f056b05ccd0a2d7d62e18",
+      "git_blob": "bd300c90d54ede9b7f238efe8a18c918d2fcef9e",
+      "decision": "UNCHANGED_EXISTING_OWNER"
+    },
+    {
+      "path": "m3/collections/src/main/native/collections/m3_long_address_kernel.c",
+      "sha256": "49a3e45262ee764c37746c323ae0def76adfff5f27a4cace6ab7416587ca544f",
+      "git_blob": "821876dfb56d836a0ae23e4bc16a391fd7f97ef2",
+      "decision": "UNCHANGED_EXISTING_OWNER"
+    }
+  ]
+}

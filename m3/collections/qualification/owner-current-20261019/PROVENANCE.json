@@ -1,0 +1,77 @@
+{
+  "repository": "hsoliwal/M3jdk21",
+  "initial_baseline": "677437be295b23f7ccf7409be287008944d0e8b0",
+  "receiving_baseline": "9a164c31b38c7013c179a3ff38b0bb60c199c7fd",
+  "receiving_transition": "Fresh current snapshot; preserve prior 11-target SDK proofs as historical and omit four current-upstream fixes and stronger tests from the current target set",
+  "generation": "Candidate templates are inputs only; root and canonical Synexia agent own actual OpenRewrite Recipe.run output generation",
+  "atoms": [
+    {
+      "owner": "M3FilteredLists.Cursor",
+      "behavior": "Validate the original retained cursor by reversible next/previous reads immediately before the existing indexed remove/set/add writes",
+      "product_pr": "https://github.com/hsoliwal/M3jdk21/pull/1268",
+      "product_head": "624e2e67060a804fab97394815b04c5bf9b6d43b",
+      "product_merged_commit": "29406c24c29a121498b4669714e90d354dd57f0e",
+      "canonical_pr": "https://github.com/hsoliwal/com.synexia/pull/12255",
+      "canonical_source": "804f98e37704d817542bbe980db6bff1b74b1032",
+      "donor_source_resource": "m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-filtered-list-mutation-20261018/M3FilteredLists.java.txt",
+      "donor_source_git_blob": "25e243eabdbf32f2de215ebc96072849600a0568",
+      "reuse": "Private correction atom and exact donor proof/test; preserve current newer read-only fixes. Do not replace current source with the older complete donor source.",
+      "contract": "Existing indexed backing writes retained, including CopyOnWriteArrayList optional writes; no iterator-mutation substitution, saved-size guard, public API addition or per-element state. Preserve fail-fast cursor generation, hidden/null/duplicate occurrences, callback order, sorted/sublist/reversed composition."
+    },
+    {
+      "owner": "M3LongIndexProjection.sorted",
+      "behavior": "Reverse known opposite-order value groups into one final index array; retain stable physical index order inside equal-value groups",
+      "product_pr": "https://github.com/hsoliwal/M3jdk21/pull/1451",
+      "product_head": "63bc1db1c6ef1c701aa5e25629288c0c4139a64d",
+      "canonical_pr": "https://github.com/hsoliwal/com.synexia/pull/12461",
+      "canonical_source": "db329cda4434f40c282285c5879984b515660403",
+      "canonical_recipe": "com.synexia.m3.ViewOrder20261019",
+      "donor_source_git_blob": "4191858c5aa6e0c1961376e2724fccef0a1d6bcb",
+      "reuse": "Exact product PR source postimage; stable run reversal also held in current wrapper-convergence-20261018 recipe custody. Existing exhaustive index/window contract and resource probe reused.",
+      "contract": "Existing primitive payload owner shared. Same-order zero-work path, encounter-order merge sort, duplicate stability, slice/filter offsets and Java/JNI mask selectors retained. No JNI symbol or native source change."
+    },
+    {
+      "owner": "M3FilteredViews.SortedSetView and NavigableSetView",
+      "behavior": "Restore the four strict sequenced/reversed overrides that current upstream accidentally removed while resolving duplicate declarations",
+      "current_counterexample": "All 268 main sources compile; unchanged M3StrictFilteredSequencedContract fails with NoSuchElementException instead of unconditional UnsupportedOperationException on hidden sorted removeFirst",
+      "restoration": "Reuse existing readOnlySortedSet(SortedSet.super.reversed()) atom and strict endpoint guards; retain covariant navigable reverse to descendingSet. Preserve current M3SlotSpliterators.sorted(source), comparator/null/bounded navigation, predicate demand and guarded original-JDK reversed traversal.",
+      "source_of_existing_atoms": "Both duplicate variants were in the historical receiving source 7bdfa3143f; the guarded JDK variant is retained to preserve the current reverse owner rather than construct another predicate pipeline.",
+      "unchanged_test": "m3/collections/src/test/java/com/m3/collections/M3StrictFilteredSequencedContract.java",
+      "new_framework": false
+    }
+  ],
+  "license": "Preserve existing first-party Apache-2.0 and Hitesh Soliwal/contributors attribution; no third-party source body copied",
+  "scope_limits": "This collection pass does not claim global String/arrays/collections/AST/compiler admission, installed-JDK or JCK/JTReg completion, universal speedup or new native ABI.",
+  "upstream_preserved": [
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3SlotMap.java",
+      "git_blob": "894e273ee0744be8590bac08a791790cc7c66b6f",
+      "sha256": "94941ecd803a93db5bbe036c1cea6f936eefaaf5a5864929e93422901e4c09d5",
+      "status": "CURRENT_UPSTREAM_FIX_AND_STRONGER_TESTS_UNTOUCHED"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3EntryFacadeCacheTest.java",
+      "git_blob": "338b988e1092e81480a5fa61e4c868f2259de0ea",
+      "sha256": "c90443f83af4f54799261dd73f413df20a3c71ef230e02b8364dcd1d84319adf",
+      "status": "CURRENT_UPSTREAM_FIX_AND_STRONGER_TESTS_UNTOUCHED"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3IndexedMultiValueOccurrenceSelfTest.java",
+      "git_blob": "d7fac9775d25379935b69cebcb2f281361a2819b",
+      "sha256": "ba21551a5b2d4ecd57fae17842fdc05371c2eb7433b584ee6eba5b2e0ba676d0",
+      "status": "CURRENT_UPSTREAM_FIX_AND_STRONGER_TESTS_UNTOUCHED"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3RequiredExcludedMaskSelectorContract.java",
+      "git_blob": "ba4b96a53d5a16fa9cfe8312dbfb03af16c7bb5f",
+      "sha256": "549ae933049b3f3925036cf0c188aaf0affea95ecf5c7d6e05c1ee1426325381",
+      "status": "CURRENT_UPSTREAM_FIX_AND_STRONGER_TESTS_UNTOUCHED"
+    },
+    {
+      "path": "m3/collections/pom.xml",
+      "git_blob": "2e9dd0126296be03531c2d7fcb008cb4b1186a91",
+      "sha256": "7308f1db65883601ab9645b4d824178773d1a815fe9b644f2ae59f5513867573",
+      "status": "CURRENT_UPSTREAM_RESOURCE_METADATA_UNTOUCHED"
+    }
+  ]
+}
