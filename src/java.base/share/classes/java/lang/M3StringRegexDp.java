@@ -171,18 +171,16 @@ final class M3StringRegexDp {
                     : isJdkLineTerminator(unit) ? 0L : plan.dot;
             long live = state & accepts;
             long destinations = (live & plan.star) | ((live & ~plan.star) << 1);
-            state = close(destinations, plan.closure);
+            state = close(destinations, plan.star);
         }
         return state;
     }
 
-    private static long close(long bits, long[] closure) {
-        long result = 0L;
-        while (bits != 0L) {
-            result |= closure[Long.numberOfTrailingZeros(bits)];
-            bits &= bits - 1;
-        }
-        return result;
+    private static long close(long bits, long star) {
+        if (bits == 0L) return 0L;
+        // A carry closes each starred run from its first seed through its exit.
+        // At most 32 atom bits keep the sum below 2^33.
+        return bits | (star ^ (star + (bits & star)));
     }
 
     /** Larger admitted patterns use one row and a saved previous-row diagonal. */
