@@ -17,9 +17,10 @@ Scope: every class viewport-everywhere put into `m3/collections`:
 | 1: wave 1, ported tests only (reports on G:, superseded) | 111 | 2159 / 2585 = 83.52% | 1464 / 1952 = 75.00% |
 | 4: wave 1 final (reports on G:, superseded) | 151 | 2584 / 2585 = 99.96% | 1933 / 1952 = 99.03% |
 | 5: waves 1+2, regenerated on S: | 170 | 3141 / 3142 = 99.97% | 2247 / 2268 = 99.07% |
-| **8: after the fold, waves 1-3 + general views, on S: (2026-10-19)** | **183** | **3980 / 3981 = 99.97%** | **2686 / 2706 = 99.26%** |
+| 8: after the fold, waves 1-3 + general views, on S: | 183 | 3980 / 3981 = 99.97% | 2686 / 2706 = 99.26% |
+| **10: + wave 4 (M3BitMask, M3PermutationIndex, M3RadixKey), on S: (2026-10-19)** | **187** | **4133 / 4134 = 99.98%** | **2789 / 2810 = 99.25%** |
 
-**Gate (99% lines and branches): MET (run 8).** Command: local reactor `mvn -o verify`, `-Xlint:all,-module
+**Gate (99% lines and branches): MET (run 10).** Command: local reactor `mvn -o verify`, `-Xlint:all,-module
 -Werror`, JaCoCo 0.8.15 agent, after a fresh recipe regeneration (pass 2 UNCHANGED 66/66). Result: BUILD SUCCESS, 0
 failures.
 

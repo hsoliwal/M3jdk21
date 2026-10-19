@@ -1,5 +1,6 @@
 class	lines_covered	lines_total	branches_covered	branches_total
 com.m3.collections.M3BitLanes	182	182	186	190
+com.m3.collections.M3BitMask	57	57	32	32
 com.m3.collections.M3BlockCache	130	130	100	100
 com.m3.collections.M3BoundedCache	99	99	40	40
 com.m3.collections.M3CellPoint	7	7	6	6
@@ -16,9 +17,11 @@ com.m3.collections.M3ListWidth	224	224	144	144
 com.m3.collections.M3OrderStatisticForest	136	136	62	62
 com.m3.collections.M3Patch	30	30	8	8
 com.m3.collections.M3Patch.new M3Patch.Target() {...}	5	5	4	4
+com.m3.collections.M3PermutationIndex	94	94	71	72
 com.m3.collections.M3PlaneGeometry	14	14	22	22
 com.m3.collections.M3PositionMarkedSelection	118	118	60	60
 com.m3.collections.M3PositionMarkedSelection.new Iterator() {...}	11	11	6	6
+com.m3.collections.M3RadixKey	2	2	0	0
 com.m3.collections.M3RangeSet	166	166	109	109
 com.m3.collections.M3RowTree	320	320	159	160
 com.m3.collections.M3RowTree.new Iterator() {...}	11	11	6	6

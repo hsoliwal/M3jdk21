@@ -1,0 +1,10 @@
+{
+  "source_repository": "hsoliwal/eclipse.platform.swt",
+  "source_commit": "5593cc43baad179097f1fc3f72c9e5d8b6f8fb8a",
+  "recipe": "m3/docs/viewport-everywhere/recipe/META-INF/rewrite/m3-viewport-everywhere.yml (Wave4Lanes)",
+  "files": [
+    {"source": "bundles/org.eclipse.swt/Eclipse SWT/common/org/eclipse/swt/m3/M3RowMask.java", "source_blob": "cbba4ee4d0f07c9eaf0a53944ab235b9f180a5db", "source_sha256": "6f64ae00b0bf20e6b6266e7675508024cf85a7103e1ce6fe8d39cc65938ebfc6", "target": "m3/collections/src/main/java/com/m3/collections/M3BitMask.java", "target_sha256": "984c80a8317b842b769ecc8bfeeee546e5e9f584761f4a045615d45f46fc7d1f", "license": "Apache-2.0 (Apache-2.0 OR EPL-2.0 at source; election)"},
+    {"source": "bundles/org.eclipse.swt/Eclipse SWT/common/org/eclipse/swt/m3/M3SortLanes.java", "source_blob": "d2af42b163626f2f47d0463dda8bbb03590d5bce", "source_sha256": "1c39061171138efc3473ef77cb62ca950bb4e4393db21ad0245b8f95db728164", "target": "m3/collections/src/main/java/com/m3/collections/M3PermutationIndex.java", "target_sha256": "6f95bc5c617e1eebf9eb5002705e0af368b848cdb0cf9dead22d8caded9ed4ba", "license": "Apache-2.0 (Apache-2.0 OR EPL-2.0 at source; election)"}
+  ],
+  "new": ["M3RadixKey (key type of M3PermutationIndex, written new)"]
+}
