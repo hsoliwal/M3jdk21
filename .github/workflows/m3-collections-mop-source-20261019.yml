@@ -18,7 +18,9 @@ jobs:
           path: product
           persist-credentials: false
           sparse-checkout: |
-            m3
+            m3/collections
+            m3/pcollections
+            m3/docs
             src/java.base/share/classes/java/util
             .github/workflows
       - name: Export exact tracked sources and hash inventory
@@ -27,8 +29,10 @@ jobs:
           python3 - <<'PYCODE'
           import hashlib,json,pathlib,subprocess,zipfile
           cases=[('product','ac3b5c68b628f7582cb10bedf08ff040deeb694c',[
-              'm3','.github/workflows','src/java.base/share/classes/java/util','AGENTS.md','pom.xml'])]
+              'm3/collections','m3/pcollections','m3/docs','.github/workflows',
+              'src/java.base/share/classes/java/util','AGENTS.md','pom.xml'])]
           records=[]; total=0
+          full_tree=subprocess.check_output(['git','-C','product','ls-tree','-r',cases[0][1],'--','m3'])
           with zipfile.ZipFile('m3-mop-sources.zip','x',zipfile.ZIP_DEFLATED) as archive:
               for folder,pin,paths in cases:
                   checkout=pathlib.Path(folder)
@@ -50,6 +54,7 @@ jobs:
                       archive.writestr(folder+'/'+path,data)
                       records.append({'repository':folder,'revision':pin,'path':path,'git_blob':blob,
                                       'sha256':hashlib.sha256(data).hexdigest(),'bytes':len(data)})
+              archive.writestr('FULL_M3_TREE.tsv',full_tree)
               archive.writestr('SOURCE_INVENTORY.json',json.dumps(records,sort_keys=True,indent=2)+'\n')
           print(json.dumps({'source_files':len(records),'bytes':total,
               'archive_sha256':hashlib.sha256(pathlib.Path('m3-mop-sources.zip').read_bytes()).hexdigest()}))
