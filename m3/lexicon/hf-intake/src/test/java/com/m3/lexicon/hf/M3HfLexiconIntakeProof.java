@@ -60,7 +60,7 @@ public final class M3HfLexiconIntakeProof {
     private static int verifyLanguageResourceDiscovery() throws IOException {
         List<String> lines = resourceLines(
                 "/com/m3/lexicon/hf/language-resource-discovery.tsv");
-        require(lines.size() == 54, "53 language-resource candidates plus header");
+        require(lines.size() == 60, "59 language-resource candidates plus header");
         List<String> expectedHeader = List.of("source_id", "resource", "category",
                 "data_shape_and_identity", "rights_and_attribution", "m3_candidate_use",
                 "admission_blockers", "state", "evidence");
@@ -89,13 +89,38 @@ public final class M3HfLexiconIntakeProof {
                 "clarin-vlo-api-4-15", "olac-archive-network-2026",
                 "elra-language-resource-catalogue", "concepticon-3-4", "norare-1-0",
                 "asjp-database", "clics-4", "wold", "asl-lex-2", "mudidi-hf-2026",
-                "openslr-beep", "dobes-archive", "elar-archive", "elarspeech-preprint-2026")),
+                "openslr-beep", "dobes-archive", "elar-archive", "elarspeech-preprint-2026", "ai4bharat-indic-frequency-lists",
+                "morphynet-multilingual-morphology",
+                "cmudict-us-english-pronunciations", "hunspell-language-dictionaries",
+                "global-wordnet-discovery-index", "babelnet-restricted-lexical-graph")),
                 "lexicon, grammar, translation, concept, norms, archive, sign and HF leads retained");
         String panlex = lines.stream().skip(1).filter(line -> "panlex".equals(splitTsv(line)[0]))
                 .findFirst().orElse("");
         require(panlex.contains("CC BY-NC-SA 4.0") && panlex.contains("CC0")
                 && panlex.contains("clarification"),
                 "conflicting PanLex license statements remain unresolved and conservative");
+        String indicFrequency = lines.stream().skip(1)
+                .filter(line -> "ai4bharat-indic-frequency-lists".equals(splitTsv(line)[0]))
+                .findFirst().orElse("");
+        require(indicFrequency.contains("CC BY-NC 4.0")
+                && indicFrequency.contains("CC BY-NC-SA 4.0")
+                && indicFrequency.contains("conflict"),
+                "Indic frequency license mismatch remains visible and non-admitted");
+        String morphynet = lines.stream().skip(1)
+                .filter(line -> "morphynet-multilingual-morphology".equals(splitTsv(line)[0]))
+                .findFirst().orElse("");
+        require(morphynet.contains("CC BY-SA 3.0") && morphynet.contains("Wiktionary"),
+                "MorphyNet attribution and share-alike terms remain attached");
+        String hunspell = lines.stream().skip(1)
+                .filter(line -> "hunspell-language-dictionaries".equals(splitTsv(line)[0]))
+                .findFirst().orElse("");
+        require(hunspell.contains("per-dictionary licenses"),
+                "Hunspell engine rights are not mistaken for dictionary payload rights");
+        String babelnet = lines.stream().skip(1)
+                .filter(line -> "babelnet-restricted-lexical-graph".equals(splitTsv(line)[0]))
+                .findFirst().orElse("");
+        require(babelnet.contains("non-commercial") && babelnet.contains("research-institution"),
+                "BabelNet restrictions remain explicit");
         String langdex = lines.stream().skip(1)
                 .filter(line -> "hf-langdex".equals(splitTsv(line)[0]))
                 .findFirst().orElse("");
