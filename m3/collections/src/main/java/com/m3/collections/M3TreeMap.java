@@ -87,8 +87,8 @@ public final class M3TreeMap<K, V> extends M3OrderedSlotMap<K, V> implements Nav
     }
     @Override int findSlot(Object key) {
         if (tree.size == 0 && !hasLow && !hasHigh) {
-            // No bounds or visited key can validate a natural-order empty lookup.
-            if (tree.comparator == null) { checked(key); }
+            // Empty natural lookup checks null/type without comparing a key.
+            if (tree.comparator == null) { Objects.requireNonNull((Comparable<?>) key); }
             return -1;
         }
         @SuppressWarnings("unchecked") K k = (K) key;
