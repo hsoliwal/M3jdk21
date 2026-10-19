@@ -46,6 +46,8 @@ Two additional primary-source candidates extend the catalogue: HPLT Monolingual 
 
 A focused source pass adds six more reference-only resources: DoReCo 2.0 for phoneme-aligned documentary data and a subset with morpheme annotations; TICO-19 for 37-language medical translation regression; MAFAND-MT for low-resource African news bitext; OPUS-100 as a heterogeneous 100-language parallel-corpus index; AFRIDOC-MT's currently available health subset for document-context tests; and MultiCoNER v2 for fine-grained named-entity surface-span evaluation. MAFAND-MT is marked noncommercial and has source-specific restrictions; AFRIDOC-MT's technology subset was removed over permissions; OPUS-100 has no aggregate license grant on its overview; TICO rows preserve source URLs/licenses; and MultiCoNER's data-creation provenance remains incomplete. All six stay `REFERENCE_ONLY`; do not turn benchmark mentions or sentence pairs into canonical lexemes or entity identities.
 
+CLDR 48.2's pinned transform rules are also catalogued as a script-conversion precompute candidate, not as translation: transform direction, locale selection, collisions and reversibility must be tested per rule, and Unicode attribution remains attached.
+
 The catalogue is discovery, not an import adapter: Parquet, Arrow, JSONL,
 streaming CSV quotations, proprietary/gated corpora, grammar models and
 arbitrary Hub file types are not yet supported by the tested importer.
