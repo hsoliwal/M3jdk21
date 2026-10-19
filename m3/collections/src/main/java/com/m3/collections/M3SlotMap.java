@@ -82,8 +82,10 @@ abstract class M3SlotMap<K, V> extends AbstractMap<K, V> {
         eraseAt(s); return true;
     }
     @Override public void putAll(Map<? extends K, ? extends V> source) {
-        if (source != this) { source.forEach(this::put); }
+        if (source != this && !putAllSorted(source)) { source.forEach(this::put); }
     }
+    /** Optional internal bulk path; ordinary slot maps retain per-mapping insertion. */
+    boolean putAllSorted(Map<? extends K, ? extends V> source) { return false; }
     @Override public V putIfAbsent(K key, V value) {
         int s = findSlot(key);
         if (s < 0) { return put(key, value); }

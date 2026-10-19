@@ -6,6 +6,8 @@ package com.m3.collections;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Iterator;
+import java.util.Map;
 import java.util.NavigableMap;
 import java.util.NavigableSet;
 import java.util.NoSuchElementException;
@@ -124,6 +126,24 @@ public final class M3TreeMap<K, V> extends M3OrderedSlotMap<K, V> implements Nav
             p = s; s = cmp < 0 ? tree.left[s] : tree.right[s];
         }
         check(expected); tree.insert(p, cmp, key, value); return null;
+    }
+    /**
+     * Copy compatible sorted inputs into an empty eager owner in linear time.
+     * Other views, value modes and inputs retain the ordinary per-mapping path.
+     */
+    @Override boolean putAllSorted(Map<? extends K, ? extends V> source) {
+        int expected = revision();
+        if (!hasLow && !hasHigh && !descending && tree.size == 0
+                && tree.lazy == null && !tree.keyOnly
+                && source instanceof SortedMap<?, ?> sorted
+                && Objects.equals(sorted.comparator(), tree.comparator)) {
+            int count = source.size();
+            if (count > 0) {
+                tree.loadSorted(count, source.entrySet().iterator(), expected);
+                return true;
+            }
+        }
+        return false;
     }
     @Override public void clear() {
         tree.writable();
@@ -370,6 +390,43 @@ public final class M3TreeMap<K, V> extends M3OrderedSlotMap<K, V> implements Nav
             byte[] h = Arrays.copyOf(height, n);
             if (lazy != null) { lazy.grow(n); }
             keys = k; values = v; left = l; right = r; parent = p; height = h;
+        }
+        /**
+         * In-order balanced construction adapted from fastutil AVLTreeMap.drv
+         * readTree, Apache-2.0, Copyright (C) 2002-2026 Sebastiano Vigna,
+         * commit e70f36a137c349efa50f346818d16917a9f91986. Only the ordered
+         * subtree split is reused; payloads and links stay in M3 arrays.
+         */
+        void loadSorted(int count, Iterator<? extends Map.Entry<? extends K, ? extends V>> entries,
+                int expected) {
+            if (count > Integer.MAX_VALUE - 8) {
+                throw new OutOfMemoryError("collection capacity exhausted");
+            }
+            int capacity = 0;
+            while (capacity < count) { capacity = M3SlotArrays.grow(capacity); }
+            // Keep the old empty storage intact until every source entry is read.
+            Tree<K, V> built = new Tree<>(comparator, false, null);
+            built.keys = new Object[capacity]; built.values = new Object[capacity];
+            built.left = new int[capacity]; built.right = new int[capacity];
+            built.parent = new int[capacity]; built.height = new byte[capacity];
+            built.root = built.readSorted(entries, 0, count, -1);
+            if (modifications != expected) { throw new java.util.ConcurrentModificationException(); }
+            keys = built.keys; values = built.values;
+            left = built.left; right = built.right; parent = built.parent; height = built.height;
+            root = built.root; free = -1; used = count; size = count; modifications++;
+        }
+        private int readSorted(Iterator<? extends Map.Entry<? extends K, ? extends V>> entries,
+                int first, int count, int owner) {
+            if (count == 0) { return -1; }
+            int rightCount = count / 2, leftCount = count - rightCount - 1;
+            int slot = first + leftCount;
+            parent[slot] = owner;
+            left[slot] = readSorted(entries, first, leftCount, slot);
+            Map.Entry<? extends K, ? extends V> entry = entries.next();
+            keys[slot] = entry.getKey(); values[slot] = entry.getValue();
+            right[slot] = readSorted(entries, slot + 1, rightCount, slot);
+            update(slot);
+            return slot;
         }
         void insert(int p, int direction, K key, V value) { insert(p, direction, key, value, true); }
         void insert(int p, int direction, K key, V value, boolean loaded) {
