@@ -9,7 +9,7 @@ import jdk.internal.util.ArraysSupport;
 import static java.lang.String.LATIN1;
 import static java.lang.String.UTF16;
 
-//FLLDCIM: R5-BUILDER — composite lane first cut (pieces + flat chunks; flatten on read/edit)
+//FLLDCIM: R5-BUILDER — composite lane (indexed unit reads; other reads/edits may flatten)
 /**
  * Composite lane of an {@link AbstractStringBuilder}: appended M3 Strings are kept as pieces
  * (references to the caller's immutable String plus a packed range) instead of being copied into
@@ -18,15 +18,19 @@ import static java.lang.String.UTF16;
  *
  * <p>While a lane is attached, the builder's {@code value}/{@code count} hold only the flat chunks,
  * in order; piece {@code i} sits logically just before flat offset {@code flatAt[i]}. Flat appends
- * (chars, numbers, short Strings) therefore run the stock code unchanged. Every other reader or
- * editor first calls {@link #flatten}, which materializes the logical content into a buffer of the
- * capacity the stock builder would have had ({@link #virtualCapacity}) and detaches the lane, or
- * reads a detached copy ({@link #detached}, {@link #copyOut}) when it must not mutate the builder.</p>
+ * (chars, numbers, short Strings) therefore run the stock code unchanged. Indexed code-unit and
+ * code-point readers translate positions through {@code logicalEnd} without copying piece text.
+ * Other readers and editors call {@link #flatten}, which materializes the logical content into a
+ * buffer of the capacity the stock builder would have had ({@link #virtualCapacity}) and detaches
+ * the lane, or read a detached copy ({@link #detached}, {@link #copyOut}) when they must not mutate
+ * the builder.</p>
  *
- * <p>DOOP: parallel lanes ({@code text}, {@code span}, {@code flatAt}) plus one int of state bits;
- * no per-piece objects. Pattern donor: apple/swift-collections {@code Rope.Builder}
- * (Apache-2.0, Swift, pattern only): undersized items coalesce into the pending chunk, committed
- * items stack, {@code finalize} folds the stack into one rope.</p>
+ * <p>DOOP: parallel lanes ({@code text}, {@code span}, {@code flatAt}, {@code logicalEnd}) plus one
+ * int of state bits; no per-piece objects. Pattern donor: apple/swift-collections
+ * {@code Rope.Builder} (Apache-2.0, Swift, pattern only): undersized items coalesce into the pending
+ * chunk, committed items stack, {@code finalize} folds the stack into one rope. Indexed reads use
+ * the separate occurrence-coordinate and binary-search concepts reviewed in Apache NetBeans
+ * {@code OffsetGapList}/{@code FlyOffsetGapList}; no NetBeans source body is copied.</p>
  */
 final class M3StringBuilderLane {
     /** Smallest appended range that becomes a piece; shorter ranges are copied as stock. */
@@ -40,6 +44,8 @@ final class M3StringBuilderLane {
     private String[] text;
     private long[] span;
     private int[] flatAt;
+    /** Nondecreasing logical end offsets, including forced empty pieces. */
+    private int[] logicalEnd;
     private int pieces;
     /** Sum of piece lengths. */
     int units;
@@ -56,6 +62,7 @@ final class M3StringBuilderLane {
         this.text = new String[4];
         this.span = new long[4];
         this.flatAt = new int[4];
+        this.logicalEnd = new int[4];
     }
 
     /** Lift predicate: only admitted M3 Strings, above the threshold, without pinning a huge owner. */
@@ -71,21 +78,69 @@ final class M3StringBuilderLane {
 
     /** Appends {@code s[start, start + length)} as a piece before flat offset {@code flatCount}. */
     void push(String s, int start, int length, int flatCount, byte flatCoder) {
-        reserve(flatCount + length, flatCoder);
+        long end = (long) flatCount + units + length;
+        if (end > Integer.MAX_VALUE) {
+            throw new OutOfMemoryError("Required length exceeds implementation limit");
+        }
+        reserveLogical((int) end, flatCoder);
         if (pieces == text.length) {
-            int grown = pieces << 1;
-            text = java.util.Arrays.copyOf(text, grown);
-            span = java.util.Arrays.copyOf(span, grown);
-            flatAt = java.util.Arrays.copyOf(flatAt, grown);
+            grow();
         }
         text[pieces] = s;
         span[pieces] = ((long) start << 32) | (length & 0xffff_ffffL);
         flatAt[pieces] = flatCount;
+        logicalEnd[pieces] = (int) end;
         pieces++;
         units += length;
         if (s.coder() == UTF16) {
             state |= UTF16_PIECE;
         }
+    }
+
+    /** Publish replacement lanes only after every allocation and copy succeeds. */
+    private void grow() {
+        int grown = ArraysSupport.newLength(text.length, 1, text.length);
+        String[] newText = java.util.Arrays.copyOf(text, grown);
+        long[] newSpan = java.util.Arrays.copyOf(span, grown);
+        int[] newFlatAt = java.util.Arrays.copyOf(flatAt, grown);
+        int[] newLogicalEnd = java.util.Arrays.copyOf(logicalEnd, grown);
+        text = newText;
+        span = newSpan;
+        flatAt = newFlatAt;
+        logicalEnd = newLogicalEnd;
+    }
+
+    /**
+     * Read one already bounds-checked logical UTF-16 unit without changing the lane or flat buffer.
+     * A strict upper bound skips empty pieces and selects either the next piece or its flat prefix.
+     */
+    char charAt(byte[] flat, byte flatCoder, int index) {
+        int low = 0;
+        int high = pieces;
+        while (low < high) {
+            int mid = (low + high) >>> 1;
+            if (index < logicalEnd[mid]) {
+                high = mid;
+            } else {
+                low = mid + 1;
+            }
+        }
+        if (low == pieces) {
+            return flatCharAt(flat, flatCoder, index - units);
+        }
+        long packed = span[low];
+        int start = logicalEnd[low] - (int) packed;
+        if (index >= start) {
+            return text[low].charAt((int) (packed >>> 32) + (index - start));
+        }
+        int precedingUnits = start - flatAt[low];
+        return flatCharAt(flat, flatCoder, index - precedingUnits);
+    }
+
+    private static char flatCharAt(byte[] flat, byte flatCoder, int index) {
+        return flatCoder == LATIN1
+                ? (char) (flat[index] & 0xff)
+                : StringUTF16.getChar(flat, index);
     }
 
     /** Stock capacity growth for a flat-buffer minimum, applied to the logical length. */
@@ -220,7 +275,7 @@ final class M3StringBuilderLane {
 
     // M3NotYetReceived: piece-table middle edits (insert/delete/replace/setCharAt/reverse) over the
     //   lanes; donor naotsugu/piecetable PieceTableImpl (Apache-2.0, PORT). First cut: flatten.
-    // M3NotYetReceived: indexOf/lastIndexOf/charAt over pieces through the composite search gates
+    // M3NotYetReceived: indexOf/lastIndexOf over pieces through the composite search gates
     //   (S2 G25). First cut: flatten.
     // M3NotYetReceived: eager admission of the pending flat chunk at a chunk threshold.
     // M3NotYetReceived: append(AbstractStringBuilder) transfers the source pieces instead of copying.
