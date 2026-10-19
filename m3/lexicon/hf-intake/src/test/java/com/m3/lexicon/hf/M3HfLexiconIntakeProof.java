@@ -66,7 +66,7 @@ public final class M3HfLexiconIntakeProof {
     private static int verifyLanguageResourceDiscovery() throws IOException {
         List<String> lines = resourceLines(
                 "/com/m3/lexicon/hf/language-resource-discovery.tsv");
-        require(lines.size() == 176, "175 language-resource candidates plus header");
+        require(lines.size() == 227, "226 language-resource candidates plus header");
         List<String> expectedHeader = List.of("source_id", "resource", "category",
                 "data_shape_and_identity", "rights_and_attribution", "m3_candidate_use",
                 "admission_blockers", "state", "evidence");
@@ -264,8 +264,224 @@ public final class M3HfLexiconIntakeProof {
                 "lexik-fr-1-0-2026-10",
                 "ealex-east-african-lexome-2026",
                 "nzonza-cialr-44",
-                "dannet-danish-wordnet-2026-08-21"
-        )), "exact 175 language-resource source IDs match the pinned catalogue");
+                "dannet-danish-wordnet-2026-08-21",
+                "aiatsis-austlang-live-2026",
+                "afwn-2022-release-1-0",
+                "crubadan-hf-character-trigrams-449",
+                "elg-catalogue-release-3-0-2026",
+                "oanc-open-frequency-derivation",
+                "elexis-dictionary-rest-discovery",
+                "hf-multilingual-frequency-lists",
+                "hf-mlnorm-resources-composite",
+                "hf-multilexnorm2026-full-pub",
+                "hf-nanai-russian-dictionary",
+                "hf-haitian-creole-word-freq",
+                "hf-sindhi-open-lexicon",
+                "hf-javanese-multilingual-lexicon",
+                "hf-tajiknlp-ar-ru-en-dictionary",
+                "hf-tigre-data-lexicon",
+                "hf-tigre-generated-dictionary",
+                "nict-japanese-english-kyoto-wiki-corpus",
+                "kaggle-google-web-english-frequency-333333",
+                "hf-ratman-african-stopword-frequency",
+                "hf-amharic-gemination-lexicon-v3",
+                "hf-khmer-dictionary-44k",
+                "hf-khpos-seanghay-2023",
+                "hf-sasak-benchmark-100k",
+                "hf-georgian-case-alignment",
+                "hf-tibetan-word-segmentation-100",
+                "hf-bridgeconn-sign-dictionary-isl",
+                "hf-hmar-numeral-words",
+                "hf-hmar-unigrams",
+                "hf-hmar-corpus-archive",
+                "hf-robinson-hausa-en-1914",
+                "hf-african-tokenizer-challenge-v1",
+                "hf-naath-en-nuer-dinka-sw-corpus",
+                "hf-dusun-dictionary-corpus",
+                "hf-okinawan-dictionary-index",
+                "hf-tigre-parallel-multilingual",
+                "hf-multilingual-endangered-cultural-heritage",
+                "hf-nenets-mixed-schema",
+                "cefrlex-six-language",
+                "clearpond-five-language-neighborhoods",
+                "manulex-french-child-directed-lexicons",
+                "multi-lex-french-ngrams-2022",
+                "hf-malayalam-pronunciation-lexicon",
+                "hf-nusax-mt",
+                "hf-maori-language-eval",
+                "hf-afrisud-treebanks",
+                "hf-wolof-french-jolof",
+                "hf-apertium-breton-french",
+                "inuktitutcomputing-uqailaut-roots",
+                "nrc-nunavut-hansard-3",
+                "hf-americasnli",
+                "hf-teara-maori-english"
+        )), "exact 226 language-resource source IDs match the pinned catalogue");
+        String sindhi = discoveryRecord(lines, "hf-sindhi-open-lexicon");
+        require(sindhi.contains("223,342") && sindhi.contains("lexical_id")
+                && sindhi.contains("entry_id") && sindhi.contains("schema casting"),
+                "Sindhi source IDs, heterogeneous schema and license review stay explicit");
+        String jav = discoveryRecord(lines, "hf-javanese-multilingual-lexicon");
+        require(jav.contains("202,912") && jav.contains("32 historical dictionaries")
+                && jav.contains("CC BY-NC 4.0") && jav.contains("contact-gated"),
+                "Javanese original IDs, historical varieties and noncommercial gate stay explicit");
+        String tajik = discoveryRecord(lines, "hf-tajiknlp-ar-ru-en-dictionary");
+        require(tajik.contains("80,093") && tajik.contains("no Tajik-language entries")
+                && tajik.contains("underlying lexical-file rights"),
+                "Tajik publisher label, actual language pairs and source rights stay distinct");
+        String tigre = discoveryRecord(lines, "hf-tigre-data-lexicon");
+        require(tigre.contains("419,627") && tigre.contains("contact information")
+                && tigre.contains("stable source ID"),
+                "Tigre data remains gated and source identity unverified");
+        String tigreCandidates = discoveryRecord(lines, "hf-tigre-generated-dictionary");
+        require(tigreCandidates.contains("30,000+") && tigreCandidates.contains("6,164-entry")
+                && tigreCandidates.contains("not verified translation"),
+                "Tigre embedding output remains ranked candidate evidence, not gold translation");
+        String kyoto = discoveryRecord(lines, "nict-japanese-english-kyoto-wiki-corpus");
+        require(kyoto.contains("14,111") && kyoto.contains("50,000")
+                && kyoto.contains("CC BY-SA 3.0"),
+                "NICT Kyoto corpus and term-pair source coordinates stay explicit");
+        String kaggleFrequency = discoveryRecord(lines, "kaggle-google-web-english-frequency-333333");
+        require(kaggleFrequency.contains("333,333") && kaggleFrequency.contains("no license grant")
+                && kaggleFrequency.contains("no payload download"),
+                "Kaggle frequency lead remains rights-unresolved discovery only");
+        String ratman = discoveryRecord(lines, "hf-ratman-african-stopword-frequency");
+        require(ratman.contains("Lugbarati Official") && ratman.contains("incompatible schemas")
+                && ratman.contains("Apache-2.0"),
+                "Ratman preserves per-language file shapes and the viewer/license caveats");
+        String amharic = discoveryRecord(lines, "hf-amharic-gemination-lexicon-v3");
+        require(amharic.contains("86,022") && amharic.contains("8,506")
+                && amharic.contains("8,526") && amharic.contains("no source-native lexical ID"),
+                "Amharic reading ambiguity and source identity remain explicit");
+        String khmerDictionary = discoveryRecord(lines, "hf-khmer-dictionary-44k");
+        require(khmerDictionary.contains("44,706") && khmerDictionary.contains("not commercial")
+                && khmerDictionary.contains("no source-native stable entry ID"),
+                "Khmer dictionary rights and repeated-headword identity remain gated");
+        String khpos = discoveryRecord(lines, "hf-khpos-seanghay-2023");
+        require(khpos.contains("12,000 sentence records") && khpos.contains("25,626 words")
+                && khpos.contains("CC BY-NC-SA 4.0") && khpos.contains("sentence ID"),
+                "Khmer POS fixture preserves segmentation, tags, and noncommercial terms");
+        String sasak = discoveryRecord(lines, "hf-sasak-benchmark-100k");
+        require(sasak.contains("100,000") && sasak.contains("2,761")
+                && sasak.contains("meaning_id") && sasak.contains("underlying content rights"),
+                "Sasak records preserve dialect/source IDs and block unverified rights");
+        String georgian = discoveryRecord(lines, "hf-georgian-case-alignment");
+        require(georgian.contains("370 examples") && georgian.contains("seven verb-series")
+                && georgian.contains("CC BY 4.0") && georgian.contains("not a lexeme ID"),
+                "Georgian case contrasts preserve source coordinates and grammar-only semantics");
+        String tibetan = discoveryRecord(lines, "hf-tibetan-word-segmentation-100");
+        require(tibetan.contains("100 modern Lhasa") && tibetan.contains("2,634")
+                && tibetan.contains("U+0F0B") && tibetan.contains("no inter-annotator agreement"),
+                "Tibetan segmentation retains script boundary, dialect and annotation limitations");
+        String signIsl = discoveryRecord(lines, "hf-bridgeconn-sign-dictionary-isl");
+        require(signIsl.contains("3,077 lexical items") && signIsl.contains("7.11 GB")
+                && signIsl.contains("CC BY-SA 4.0") && signIsl.contains("signer consent"),
+                "Indian Sign Language media stays reference-only pending consent and identity review");
+        String hmarNumerals = discoveryRecord(lines, "hf-hmar-numeral-words");
+        require(hmarNumerals.contains("999,999") && hmarNumerals.contains("zero is omitted")
+                && hmarNumerals.contains("Apache-2.0") && hmarNumerals.contains("REFERENCE_ONLY"),
+                "Hmar number forms stay language-scoped, observed-only, and gated");
+        String hmarUnigrams = discoveryRecord(lines, "hf-hmar-unigrams");
+        require(hmarUnigrams.contains("110,603") && hmarUnigrams.contains("4,832,070")
+                && hmarUnigrams.contains("ṭ/ț") && hmarUnigrams.contains("raw counts"),
+                "Hmar raw counts preserve exact orthography and remain distinct from Zipf scores");
+        String hmarArchive = discoveryRecord(lines, "hf-hmar-corpus-archive");
+        require(hmarArchive.contains("0001..0012") && hmarArchive.contains("CC BY-NC-SA 4.0")
+                && hmarArchive.contains("per-item source/license/community review"),
+                "Hmar archive IDs do not transfer rights to linked payloads");
+        String robinson = discoveryRecord(lines, "hf-robinson-hausa-en-1914");
+        require(robinson.contains("20,628") && robinson.contains("robinson_1914_vol2")
+                && robinson.contains("no stable source-entry ID") && robinson.contains("OCR"),
+                "Robinson Hausa entries remain historical OCR candidates pending source identity and rights review");
+        String tokenizer = discoveryRecord(lines, "hf-african-tokenizer-challenge-v1");
+        require(tokenizer.contains("240,000-train/24,000-validation")
+                && tokenizer.contains("b04c8d1ceb2f5cd4588862100d08de323dccfbaa")
+                && tokenizer.contains("not a gold word-segmentation lexicon"),
+                "African tokenizer data remain source-addressed text diagnostics, not lexical gold labels");
+        String naath = discoveryRecord(lines, "hf-naath-en-nuer-dinka-sw-corpus");
+        require(naath.contains("803k") && naath.contains("CC BY-NC-SA 4.0")
+                && naath.contains("no source-native row ID"),
+                "Naath sentence pairs remain noncommercial sentence-level fixtures, not M3 lexeme IDs");
+        String dusun = discoveryRecord(lines, "hf-dusun-dictionary-corpus");
+        require(dusun.contains("24,000") && dusun.contains("9,000 dictionary words")
+                && dusun.contains("15,000 phrases/sentences") && dusun.contains("no stable row-ID column"),
+                "Dusun bilingual word and phrase rows stay separated and source identity is not invented");
+        String okinawan = discoveryRecord(lines, "hf-okinawan-dictionary-index");
+        require(okinawan.contains("9.25k") && okinawan.contains("ninjal_sakuin_00001-style")
+                && okinawan.contains("Shuri dialect only") && okinawan.contains("CC BY 4.0"),
+                "Okinawan index preserves NINJAL row IDs, page and dialect-specific scope");
+        String tigreParallel = discoveryRecord(lines, "hf-tigre-parallel-multilingual");
+        require(tigreParallel.contains("66.1k") && tigreParallel.contains("132,288")
+                && tigreParallel.contains("CC BY 2.0 FR") && tigreParallel.contains("no row ID field"),
+                "Tigre parallel corpus preserves mixed source licenses and unresolved count discrepancy");
+        String endangered = discoveryRecord(lines, "hf-multilingual-endangered-cultural-heritage");
+        require(endangered.contains("1,050") && endangered.contains("269 source-described real")
+                && endangered.contains("745 synthetic") && endangered.contains("CC0 1.0"),
+                "endangered-language material keeps synthetic and source-described records separate");
+        String nenets = discoveryRecord(lines, "hf-nenets-mixed-schema");
+        require(nenets.contains("653275c014918400943f924f035089ea9e4a4755")
+                && nenets.contains("articles_yamal_expedition.csv")
+                && nenets.contains("source/example_nn/example_ru") && nenets.contains("text/title/link"),
+                "Nenets cast failure remains an explicit schema-refusal discovery, not an ingested lexicon");
+        String cefrlex = discoveryRecord(lines, "cefrlex-six-language");
+        require(cefrlex.contains("Seven resources") && cefrlex.contains("six languages")
+                && cefrlex.contains("A1") && cefrlex.contains("no explicit data license"),
+                "CEFRLex level-frequency scope and unresolved dataset license stay explicit");
+        String clearpond = discoveryRecord(lines, "clearpond-five-language-neighborhoods");
+        require(clearpond.contains("Dutch, English, French, German and Spanish")
+                && clearpond.contains("bigram/biphone probabilities")
+                && clearpond.contains("no separate license"),
+                "CLEARPOND cross-language neighbor signals and dataset/paper rights stay distinct");
+        String manulex = discoveryRecord(lines, "manulex-french-child-directed-lexicons");
+        require(manulex.contains("48,886 wordforms") && manulex.contains("23,812 lemmas")
+                && manulex.contains("CC BY-NC-SA 3.0"),
+                "Manulex grade, identity and noncommercial-sharealike scope stay explicit");
+        String multiLex = discoveryRecord(lines, "multi-lex-french-ngrams-2022");
+        require(multiLex.contains("2-, 3-, 4- and 5-word")
+                && multiLex.contains("license field is blank")
+                && multiLex.contains("about 1.4 GB"),
+                "Multi-LEX n-gram order, scale and unresolved derivative rights stay explicit");
+        String malayalam = discoveryRecord(lines, "hf-malayalam-pronunciation-lexicon");
+        require(malayalam.contains("174,849") && malayalam.contains("Nine categorized subsets")
+                && malayalam.contains("automatically generated")
+                && malayalam.contains("CC BY-SA 4.0"),
+                "Malayalam IPA rows preserve generated status, category and separate upstream-rights review");
+        String nusax = discoveryRecord(lines, "hf-nusax-mt");
+        require(nusax.contains("132 directed language pairs") && nusax.contains("builder-generated enumeration IDs")
+                && nusax.contains("CC BY-SA 4.0"),
+                "NusaX pair views retain source row provenance and do not invent lexeme equivalence");
+        String maoriEval = discoveryRecord(lines, "hf-maori-language-eval");
+        require(maoriEval.contains("551 paragraph pairs") && maoriEval.contains("pending kaitiakitanga review")
+                && maoriEval.contains("do not train"),
+                "Māori legal benchmark remains evaluation-only with its unresolved community license");
+        String afrisud = discoveryRecord(lines, "hf-afrisud-treebanks");
+        require(afrisud.contains("eight language configurations") && afrisud.contains("nine")
+                && afrisud.contains("CC BY-NC 4.0"),
+                "AfriSUD language count discrepancy and noncommercial SUD scope remain explicit");
+        String wolof = discoveryRecord(lines, "hf-wolof-french-jolof");
+        require(wolof.contains("12,084 rows") && wolof.contains("MIT")
+                && wolof.contains("no documented source-native row ID"),
+                "Wolof export packaging license is not mistaken for cleared underlying source rights");
+        String breton = discoveryRecord(lines, "hf-apertium-breton-french");
+        require(breton.contains("17,952") && breton.contains("GPL-2.0")
+                && breton.contains("lose analyses"),
+                "Breton flat pairs retain Apertium license and morphology-loss caveat");
+        String uqailaut = discoveryRecord(lines, "inuktitutcomputing-uqailaut-roots");
+        require(uqailaut.contains("3,221 text lines") && uqailaut.contains("no distinct license")
+                && uqailaut.contains("not a native lexical identifier"),
+                "UQAILAUT data rights are not inferred from the repository code license");
+        String nunavut = discoveryRecord(lines, "nrc-nunavut-hansard-3");
+        require(nunavut.contains("1.3 million aligned sentence pairs") && nunavut.contains("CC BY 4.0")
+                && nunavut.contains("not an official transcript or translation"),
+                "Nunavut Hansard retains NRC record identity, required disclaimer and permitted-use limits");
+        String americas = discoveryRecord(lines, "hf-americasnli");
+        require(americas.contains("13.9K") && americas.contains("ten varieties")
+                && americas.contains("CC BY-SA 4.0") && americas.contains("three-way NLI label"),
+                "AmericasNLI remains variety-scoped task evaluation rather than a translation lexicon");
+        String teara = discoveryRecord(lines, "hf-teara-maori-english");
+        require(teara.contains("6.49K") && teara.contains("CC BY-NC 3.0")
+                && teara.contains("item-level source URL") && teara.contains("item-level exceptions"),
+                "Te Ara exports preserve noncommercial and item-specific rights and do not invent source IDs");
         String massive = discoveryRecord(lines, "massive-nlu-1-1");
         require(massive.contains("52 languages") && massive.contains("SLURP") && massive.contains("CC BY 4.0")
                 && massive.contains("not a canonical dictionary"),
@@ -527,6 +743,51 @@ public final class M3HfLexiconIntakeProof {
                 && dannet.contains("CILI")
                 && dannet.contains("REFERENCE_ONLY"),
                 "DanNet release, license, concept links and reference-only state stay explicit");
+        String austlang = discoveryRecord(lines, "aiatsis-austlang-live-2026");
+        require(austlang.contains("CC BY 4.0") && austlang.contains("alpha-numeric")
+                && austlang.contains("approximate"),
+                "Austlang stable variety IDs and approximate locations remain qualified");
+        String afwn = discoveryRecord(lines, "afwn-2022-release-1-0");
+        require(afwn.contains("nine languages") && afwn.contains("CC BY 4.0")
+                && afwn.contains("synset"),
+                "African Wordnet release coverage, rights and sense identity remain explicit");
+        String multilingualFrequency = discoveryRecord(lines, "hf-multilingual-frequency-lists");
+        require(multilingualFrequency.contains("five language configurations")
+                && multilingualFrequency.contains("AGPL-3.0")
+                && multilingualFrequency.contains("scraped Netflix subtitles"),
+                "multilingual lemma frequency source and subtitle-rights caveat stay explicit");
+        String mlnormBundle = discoveryRecord(lines, "hf-mlnorm-resources-composite");
+        require(mlnormBundle.contains("17-variety") && mlnormBundle.contains("component-level")
+                && mlnormBundle.contains("not downloaded"),
+                "mlnorm bundle retains component-specific licensing and no-download boundary");
+        String multiLexNorm = discoveryRecord(lines, "hf-multilexnorm2026-full-pub");
+        require(multiLexNorm.contains("share contact information") && multiLexNorm.contains("README is empty")
+                && multiLexNorm.contains("No license"),
+                "gated MultiLexNorm remains inaccessible and unlicensed pending review");
+        String nanai = discoveryRecord(lines, "hf-nanai-russian-dictionary");
+        require(nanai.contains("2,494 unique term IDs") && nanai.contains("887 Nanai translations")
+                && nanai.contains("No source-dictionary"),
+                "Nanai dictionary preserves source identity, missing pairs and rights uncertainty");
+        String haitian = discoveryRecord(lines, "hf-haitian-creole-word-freq");
+        require(haitian.contains("17.9k rows") && haitian.contains("could not be confirmed")
+                && haitian.contains("strictly reference-only"),
+                "Haitian frequency lead remains unverified and reference-only");
+        String crubadan = discoveryRecord(lines, "crubadan-hf-character-trigrams-449");
+        require(crubadan.contains("449 writing systems") && crubadan.contains("GPL-3.0")
+                && crubadan.contains("ISO 639-3") && crubadan.contains("boundary markers"),
+                "Crúbadán codes, character n-gram semantics and license remain explicit");
+        String elg = discoveryRecord(lines, "elg-catalogue-release-3-0-2026");
+        require(elg.contains("October 2026") && elg.contains("grammars")
+                && elg.contains("record-level rights"),
+                "ELG remains a discovery catalogue with per-resource rights");
+        String oanc = discoveryRecord(lines, "oanc-open-frequency-derivation");
+        require(oanc.contains("15-million-word") && oanc.contains("unrestricted")
+                && oanc.contains("ANC Second Release frequency exports"),
+                "OANC-derived frequencies stay distinct from ANC2 exports");
+        String elexis = discoveryRecord(lines, "elexis-dictionary-rest-discovery");
+        require(elexis.contains("Public Domain") && elexis.contains("X-API-KEY")
+                && elexis.contains("separate access"),
+                "ELEXIS protocol rights stay distinct from dictionary rights");
         String worldLanguages = lines.stream().skip(1)
                 .filter(line -> "hf-world-languages-7130".equals(splitTsv(line)[0]))
                 .findFirst().orElse("");
@@ -800,7 +1061,7 @@ public final class M3HfLexiconIntakeProof {
         require(Files.isRegularFile(catalogue), "algorithm catalogue exists at Maven invocation root");
         if (!Files.isRegularFile(catalogue)) return 0;
         List<String> lines = Files.readAllLines(catalogue, StandardCharsets.UTF_8);
-        require(lines.size() == 66, "65 algorithm patterns plus header");
+        require(lines.size() == 79, "78 algorithm patterns plus header");
         List<String> header = List.of("problem_category", "discovery_source", "candidate",
                 "decision", "owner_or_reason", "qualification");
         require(!lines.isEmpty() && List.of(splitTsv(lines.getFirst())).equals(header),
@@ -879,21 +1140,115 @@ public final class M3HfLexiconIntakeProof {
                 "named_entity_surface_candidate_spans",
                 "unicode_cldr_transliteration_precompute",
                 "orthographic_skeleton_lookup",
-                "privacy_thresholded_search_demand"
-        )), "all 65 algorithm categories match the pinned catalogue");
+                "privacy_thresholded_search_demand",
+                "observed_form_normalization",
+                "cross_lingual_embedding_retrieval",
+                "khmer_segmentation_pos_tagging",
+                "georgian_case_alignment_masked_contrast",
+                "tibetan_word_segmentation_evaluation",
+                "balanced_multilingual_tokenizer_fertility",
+                "cefr_level_frequency_precompute",
+                "cross_lingual_neighborhood_precompute",
+                "child_directed_lexical_signal_precompute",
+                "multiword_ngram_frequency_index",
+                "regional_parallel_pair_views",
+                "african_sud_treebank_precompute",
+                "indigenous_language_task_partitioned_regression"
+        )), "all 78 algorithm categories match the pinned catalogue");
         for (String category : List.of("spoken_language_phoneme_morphology_alignment",
                 "medical_translation_regression", "low_resource_african_parallel_corpus",
                 "multi_source_parallel_corpus_provenance", "document_level_translation_regression",
                 "named_entity_surface_candidate_spans",
                 "unicode_cldr_transliteration_precompute",
                 "orthographic_skeleton_lookup",
-                "privacy_thresholded_search_demand")) {
+                "privacy_thresholded_search_demand",
+                "observed_form_normalization",
+                "cross_lingual_embedding_retrieval",
+                "khmer_segmentation_pos_tagging",
+                "georgian_case_alignment_masked_contrast",
+                "tibetan_word_segmentation_evaluation",
+                "balanced_multilingual_tokenizer_fertility",
+                "bilingual_dictionary_regression",
+                "multilingual_translation_regression",
+                "language_resource_discovery",
+                "cefr_level_frequency_precompute",
+                "cross_lingual_neighborhood_precompute",
+                "child_directed_lexical_signal_precompute",
+                "multiword_ngram_frequency_index",
+                "regional_parallel_pair_views",
+                "african_sud_treebank_precompute",
+                "indigenous_language_task_partitioned_regression")) {
             String row = lines.stream().skip(1)
                     .filter(line -> category.equals(splitTsv(line)[0]))
                     .findFirst().orElse("");
             require(!row.isEmpty() && "EVALUATE_ONLY".equals(splitTsv(row)[3]),
-                    "new dataset pattern remains evaluation-only: " + category);
+                    "algorithm candidate remains evaluation-only: " + category);
         }
+        String bilingual = lines.stream().skip(1)
+                .filter(line -> "bilingual_dictionary_regression".equals(splitTsv(line)[0]))
+                .findFirst().orElse("");
+        require(splitTsv(bilingual).length == 6
+                && splitTsv(bilingual)[1].contains("DusunDictionary.com")
+                && splitTsv(bilingual)[1].contains("NINJAL Okinawa")
+                && splitTsv(bilingual)[4].contains("lack row IDs"),
+                "bilingual candidates retain source-native IDs, direction and type distinctions");
+        String tigrePattern = lines.stream().skip(1)
+                .filter(line -> "low_resource_african_parallel_corpus".equals(splitTsv(line)[0]))
+                .findFirst().orElse("");
+        require(splitTsv(tigrePattern).length == 6
+                && splitTsv(tigrePattern)[1].contains("BeitTigreAI")
+                && splitTsv(tigrePattern)[5].contains("66.1k vs 132,288")
+                && splitTsv(tigrePattern)[5].contains("source-specific licenses"),
+                "African parallel evaluation records Tigre source/count/license boundaries");
+        String endangeredPattern = lines.stream().skip(1)
+                .filter(line -> "multilingual_translation_regression".equals(splitTsv(line)[0]))
+                .findFirst().orElse("");
+        require(splitTsv(endangeredPattern).length == 6
+                && splitTsv(endangeredPattern)[1].contains("Multilingual Endangered Languages")
+                && splitTsv(endangeredPattern)[4].contains("synthetic records")
+                && splitTsv(endangeredPattern)[5].contains("isolate synthetic"),
+                "multilingual translation evaluation isolates synthetic text and provenance");
+        String nenetsPattern = lines.stream().skip(1)
+                .filter(line -> "language_resource_discovery".equals(splitTsv(line)[0]))
+                .findFirst().orElse("");
+        require(splitTsv(nenetsPattern).length == 6
+                && splitTsv(nenetsPattern)[1].contains("shnyakov/nenets")
+                && splitTsv(nenetsPattern)[4].contains("viewer currently fails")
+                && splitTsv(nenetsPattern)[5].contains("refusal test"),
+                "schema-discovery catalogue preserves the observed Nenets fail-closed path");
+        String khmerSegmentation = lines.stream().skip(1)
+                .filter(line -> "khmer_segmentation_pos_tagging".equals(splitTsv(line)[0]))
+                .findFirst().orElse("");
+        String[] khmerSegmentationFields = splitTsv(khmerSegmentation);
+        require(khmerSegmentationFields.length == 6
+                && khmerSegmentationFields[2].contains("CRF")
+                && khmerSegmentationFields[2].contains("trigram HMM")
+                && khmerSegmentationFields[2].contains("RDR")
+                && khmerSegmentationFields[5].contains("boundary precision/recall/F1"),
+                "Khmer sequence-tagging baselines remain an evaluation plan, not an implementation claim");
+        String georgianCase = lines.stream().skip(1)
+                .filter(line -> "georgian_case_alignment_masked_contrast".equals(splitTsv(line)[0]))
+                .findFirst().orElse("");
+        require(splitTsv(georgianCase).length == 6
+                && splitTsv(georgianCase)[2].contains("nominative/dative/ergative")
+                && splitTsv(georgianCase)[4].contains("not translation links"),
+                "Georgian case evaluation remains grammar-scoped and evaluation-only");
+        String tibetanSegmentation = lines.stream().skip(1)
+                .filter(line -> "tibetan_word_segmentation_evaluation".equals(splitTsv(line)[0]))
+                .findFirst().orElse("");
+        require(splitTsv(tibetanSegmentation).length == 6
+                && splitTsv(tibetanSegmentation)[2].contains("Botok")
+                && splitTsv(tibetanSegmentation)[5].contains("tsek U+0F0B"),
+                "Tibetan boundary evaluation retains source-script invariants");
+        String tokenizerFertility = lines.stream().skip(1)
+                .filter(line -> "balanced_multilingual_tokenizer_fertility".equals(splitTsv(line)[0]))
+                .findFirst().orElse("");
+        require(splitTsv(tokenizerFertility).length == 6
+                && "EVALUATE_ONLY".equals(splitTsv(tokenizerFertility)[3])
+                && splitTsv(tokenizerFertility)[4].contains("not gold word-boundary accuracy")
+                && splitTsv(tokenizerFertility)[5].contains("b04c8d1ceb2f5cd4588862100d08de323dccfbaa")
+                && splitTsv(tokenizerFertility)[5].contains("no train/validation leakage"),
+                "tokenizer-fertility comparison stays evaluation-only and split-safe");
         String corpusPrecompute = lines.stream().skip(1)
                 .filter(line -> "offline_corpus_frequency_and_ngram_precompute".equals(splitTsv(line)[0]))
                 .findFirst().orElse("");
@@ -903,6 +1258,15 @@ public final class M3HfLexiconIntakeProof {
                 && corpusFields[4].contains("not interchangeable")
                 && corpusFields[5].contains("review each source's terms"),
                 "FineWeb2 remains an evaluated corpus source, not imported lexical frequency");
+        String normalization = lines.stream().skip(1)
+                .filter(line -> "observed_form_normalization".equals(splitTsv(line)[0]))
+                .findFirst().orElse("");
+        String[] normalizationFields = splitTsv(normalization);
+        require(normalizationFields.length == 6 && "EVALUATE_ONLY".equals(normalizationFields[3])
+                && normalizationFields[2].contains("raw-to-normal form")
+                && normalizationFields[4].contains("not translation")
+                && normalizationFields[5].contains("component licenses"),
+                "normalization algorithm evaluation preserves source identity and non-translation semantics");
         return lines.size() - 1;
     }
 
