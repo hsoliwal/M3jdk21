@@ -40,7 +40,7 @@ jobs:
           # tree to javac would implicitly compile unrelated M3 regex sources.
           cp src/java.base/share/classes/java/util/EnumMap.java target/m3-javabase-src/java/util/
           cp src/java.base/share/classes/java/util/IdentityHashMap.java target/m3-javabase-src/java/util/
-          javac -Xlint:all,-serial,-module -Werror \
+          javac -Xlint:all,-serial,-module,-this-escape -Werror \
             --patch-module java.base=target/m3-javabase-src \
             -d target/m3-enummap-patch \
             target/m3-javabase-src/java/util/EnumMap.java \
