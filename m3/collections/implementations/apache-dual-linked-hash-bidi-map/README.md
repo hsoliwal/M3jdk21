@@ -49,6 +49,17 @@ is removed it keeps its last value, even if the slot is reused.
   iterator.
 - `toString` has no self-reference guard, because Commons prints its delegate map.
 - A value whose hash changes after insertion leaves the inverse direction stale, exactly as in Commons.
+- Two Commons quirks that leave the directions out of step are reproduced, because the owner of the
+  DualHashBidiMap row (`M3BidiMap`) reproduces them too:
+  - `entrySet().toArray()` and `toArray(T[])` return raw entries, like the LinkedHashMap nodes Commons
+    exposes there. Their `setValue` skips the ownership check and the inverse, and changes no `modCount`.
+    Iterator, stream and `forEach` entries stay guarded.
+  - A values-iterator `remove()` drops the value it delivered from the inverse. After a concurrent
+    non-structural replacement, that is the stale value, so the new value stays in the inverse.
+  - The values view's `containsAll` scans forward values, as Commons' decorated collection does; `contains`
+    uses the inverse index.
+
+  `verifyStructure()` checks each table on its own; `verifyInvariants()` adds the mirror check.
 
 ## Deliberate differences
 
@@ -56,8 +67,6 @@ is removed it keeps its last value, even if the slot is reused.
   - The inverse view serializes as its forward map and resolves back to that map's inverse.
   - Commons rebuilds the inverse order by re-putting. This class does the same, so the orders after a
     round trip agree.
-- A values-iterator `remove()` after the current value was replaced by a concurrent non-structural `put`
-  removes the live value. Commons removes the stale value and leaves the inverse inconsistent.
 - An entry or map iterator whose mapping was changed through another handle and then removed reports the
   last value it observed. Commons reports the node's final value. The Map.Entry contract leaves this
   undefined.
@@ -65,14 +74,15 @@ is removed it keeps its last value, even if the slot is reused.
 
 ## Validation
 
-Run `mvn -f pom.xml test` (Java 21, `-Xlint:all -Werror`). There are 19 JUnit tests.
+Run `mvn -f pom.xml test` (Java 21, `-Xlint:all -Werror`). There are 20 JUnit tests.
 
 The seeded differential run applies 96,000 operations to the real Commons provider and to this class, and
-makes 960,102 comparisons. Each operation targets the forward map or its inverse at random. Comparisons
+makes 960,117 comparisons. Each operation targets the forward map or its inverse at random. Comparisons
 cover exact forward and inverse order, the order of every view, and the iterator, entry and `forEach`
-traces.
+traces, including raw entry-array writes and stale values-iterator removals (per-table structure is checked
+after every step, since those quirks leave the directions out of step exactly as in Commons).
 
-JaCoCo line and branch coverage is 100%: 434/434 lines and 234/234 branches over 12 classes, gated at 99%
+JaCoCo line and branch coverage is 100%: 469/469 lines and 258/258 branches over 12 classes, gated at 99%
 per class. The steady-state allocation probe measures 0 bytes. It covers `put`/`get`/`getKey`/`contains*`,
 `removeValue`, inverse `put`/`remove`, `hashCode` and `forEach`.
 

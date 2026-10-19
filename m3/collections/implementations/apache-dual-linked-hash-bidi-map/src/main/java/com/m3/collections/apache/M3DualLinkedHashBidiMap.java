@@ -422,16 +422,29 @@ public final class M3DualLinkedHashBidiMap<K, V> implements BidiMap<K, V>, Seria
 
     /** Checks both tables (links, index, free chain) and that each mapping is mirrored by the other side. */
     void verifyInvariants() {
+        verifyStructure();
         for (int s = 0; s < 2; s++) {
             Table t = tables[s];
             Table o = tables[1 - s];
+            for (int slot = t.first; slot >= 0; slot = t.after[slot]) {
+                int mirror = o.find(t.values[slot]);
+                if (mirror < 0 || !Objects.equals(o.values[mirror], t.keys[slot])) { throw new AssertionError("mirror"); }
+            }
+        }
+    }
+
+    /**
+     * Checks each table on its own (links, index, free chain, size). Commons' raw entry-set arrays and its
+     * values-iterator removal can leave the two directions out of step; this check still holds then.
+     */
+    void verifyStructure() {
+        for (int s = 0; s < 2; s++) {
+            Table t = tables[s];
             boolean[] seen = new boolean[t.used];
             int count = 0;
             int previous = -1;
             for (int slot = t.first; slot >= 0; slot = t.after[slot]) {
-                int mirror = o.find(t.values[slot]);
-                if (seen[slot] || t.before[slot] != previous || t.index[t.positions[slot]] != slot + 1 || t.find(t.keys[slot]) != slot
-                        || mirror < 0 || !Objects.equals(o.values[mirror], t.keys[slot])) {
+                if (seen[slot] || t.before[slot] != previous || t.index[t.positions[slot]] != slot + 1 || t.find(t.keys[slot]) != slot) {
                     throw new AssertionError("links");
                 }
                 seen[slot] = true;
@@ -499,15 +512,22 @@ public final class M3DualLinkedHashBidiMap<K, V> implements BidiMap<K, V>, Seria
             return current;
         }
 
-        /** Removes the current mapping from this table, then its value from the other table, as Commons does. */
+        /** Removes the current mapping from this table, then its live value from the other table, as Commons does. */
         final void drop() {
+            drop(tables[s].values[current]);
+        }
+
+        /**
+         * Removes the current mapping from this table, then {@code reverseKey} from the other table. Commons'
+         * values iterator passes the value it delivered, which may be stale after a concurrent replacement.
+         */
+        final void drop(Object reverseKey) {
             Table t = tables[s];
             if (t.modCount != expected) { throw new ConcurrentModificationException(); }
-            Object value = t.values[current];
             t.erase(current);
             current = -1;
             expected = t.modCount;
-            tables[1 - s].remove(value);
+            tables[1 - s].remove(reverseKey);
         }
     }
 
@@ -591,6 +611,7 @@ public final class M3DualLinkedHashBidiMap<K, V> implements BidiMap<K, V>, Seria
     private final class ViewCursor<T> extends Walk implements Iterator<T> {
         private final int kind;
         private boolean canRemove;
+        private Object delivered;
 
         ViewCursor(int s, int kind) {
             super(s);
@@ -606,31 +627,43 @@ public final class M3DualLinkedHashBidiMap<K, V> implements BidiMap<K, V>, Seria
             Table t = tables[s];
             canRemove = true;
             if (kind == KEYS) { return cast(t.keys[slot]); }
-            if (kind == VALUES) { return cast(t.values[slot]); }
-            return cast(new Entry<>(s, slot, t.births[slot], t.keys[slot], t.values[slot]));
+            if (kind == VALUES) { return cast(delivered = t.values[slot]); }
+            return cast(new Entry<>(s, slot, t.births[slot], t.keys[slot], t.values[slot], false));
         }
 
+        /** The values iterator drops the value it delivered (Commons' ValuesIterator); the others drop the live value. */
         @Override public void remove() {
             if (!canRemove) { throw new IllegalStateException("Iterator remove() can only be called once after next()"); }
-            drop();
+            if (kind == VALUES) {
+                drop(delivered);
+                delivered = null;
+            } else {
+                drop();
+            }
             canRemove = false;
         }
     }
 
-    /** Boundary flyweight for one entry, node-like: live while its slot keeps its birth stamp, then frozen. */
+    /**
+     * Boundary flyweight for one entry, node-like: live while its slot keeps its birth stamp, then frozen. A
+     * guarded entry (iterator, stream, forEach) sets through {@code put}; a raw entry ({@code toArray}) writes
+     * only this direction's value, as the LinkedHashMap nodes Commons' entry-set arrays expose do.
+     */
     private final class Entry<A, B> implements Map.Entry<A, B> {
         private final int s;
         private final int slot;
         private final int birth;
         private final Object key;
+        private final boolean raw;
         private Object value;
 
-        Entry(int s, int slot, int birth, Object key, Object value) {
+        Entry(int s, int slot, int birth, Object key, Object value, boolean raw) {
             this.s = s;
             this.slot = slot;
             this.birth = birth;
             this.key = key;
             this.value = value;
+            this.raw = raw;
         }
 
         @Override public A getKey() {
@@ -645,12 +678,22 @@ public final class M3DualLinkedHashBidiMap<K, V> implements BidiMap<K, V>, Seria
 
         /** Commons' entry decorator: refuse a value owned by another key, put, then report the node's value. */
         @Override public B setValue(B newValue) {
+            if (raw) { return cast(setRaw(newValue)); }
             checkOwner(s, key, newValue);
             boolean wasLive = tables[s].live(slot, birth);
             Object old = getValue();
             put(s, key, newValue);
             value = newValue;
             return cast(wasLive ? newValue : old);
+        }
+
+        /** Node setValue: no ownership check, no inverse maintenance, no modCount change. */
+        private Object setRaw(Object newValue) {
+            Table t = tables[s];
+            Object old = getValue();
+            if (t.live(slot, birth)) { t.values[slot] = newValue; }
+            value = newValue;
+            return old;
         }
 
         @Override public boolean equals(Object other) {
@@ -786,6 +829,17 @@ public final class M3DualLinkedHashBidiMap<K, V> implements BidiMap<K, V>, Seria
             return new ViewCursor<>(s, VALUES);
         }
 
+        /** Commons delegates containsAll to the forward values collection: a scan, not the inverse index. */
+        @Override public boolean containsAll(Collection<?> coll) {
+            Table t = tables[s];
+            for (Object o : coll) {
+                boolean found = false;
+                for (int slot = t.first; slot >= 0 && !found; slot = t.after[slot]) { found = Objects.equals(o, t.values[slot]); }
+                if (!found) { return false; }
+            }
+            return true;
+        }
+
         @Override public boolean equals(Object other) {
             return other == this;
         }
@@ -821,6 +875,26 @@ public final class M3DualLinkedHashBidiMap<K, V> implements BidiMap<K, V>, Seria
 
         @Override public Iterator<Map.Entry<A, B>> iterator() {
             return new ViewCursor<>(s, ENTRIES);
+        }
+
+        /** Raw entries, as Commons' decorated LinkedHashMap entry-set arrays hold its nodes. */
+        @Override public Object[] toArray() {
+            Table t = tables[s];
+            Object[] out = new Object[t.size];
+            int i = 0;
+            for (int slot = t.first; slot >= 0; slot = t.after[slot]) { out[i++] = new Entry<>(s, slot, t.births[slot], t.keys[slot], t.values[slot], true); }
+            return out;
+        }
+
+        @Override public <T> T[] toArray(T[] a) {
+            Object[] raw = toArray();
+            if (a.length < raw.length) {
+                @SuppressWarnings("unchecked") T[] grown = (T[]) Arrays.copyOf(raw, raw.length, a.getClass());
+                return grown;
+            }
+            System.arraycopy(raw, 0, a, 0, raw.length);
+            if (a.length > raw.length) { a[raw.length] = null; }
+            return a;
         }
 
         @Override public boolean equals(Object other) {
