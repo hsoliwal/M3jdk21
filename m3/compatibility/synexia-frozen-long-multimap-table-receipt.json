@@ -1,0 +1,85 @@
+{
+  "schema": "M3JDK21_SYNEXIA_FROZEN_LONG_MULTIMAP_TABLE_RECEIVER_V1",
+  "copyright": "Copyright 2026 Hitesh Soliwal and contributors",
+  "receivedLicense": "Apache-2.0",
+  "canonicalSource": {
+    "repository": "hsoliwal/com.synexia",
+    "branch": "codex/m3-frozen-long-multimap-table-20261018",
+    "pullRequest": 12485,
+    "commit": "f20ac54f67eae9743de939fff7cca114ca5779d7",
+    "recipe": "com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe",
+    "declarativeRecipe": "com.synexia.m3.FrozenLongMultimapTable",
+    "crate": "m3-frozen-long-multimap-table",
+    "fossReuseDecisionRow": "collections.superset.ls3-frozen-long-multimap-table",
+    "donors": [
+      {
+        "path": "synexia-common/src/main/java/com/synexia/common/collections/PackedLongLongMultiMap.java",
+        "blob": "524d685cb973df79038c5db7577e996745a637c3",
+        "developCommit": "11c94feb18155a53cc213708c353791132edc4a7",
+        "target": "com.m3.collections.M3FrozenLongMultimap",
+        "mechanics": "key->values lanes pattern (CSR adaptation)"
+      },
+      {
+        "path": "synexia-common/src/main/java/com/synexia/common/collections/foss/FrozenLongTable.java",
+        "blob": "e02549f8b734e7cbe4d3628315bc680dd83d91c1",
+        "developCommit": "11c94feb18155a53cc213708c353791132edc4a7",
+        "target": "com.m3.collections.M3FrozenLongTable",
+        "mechanics": "frozen row/column/value lanes"
+      },
+      {
+        "path": "synexia-common/src/main/java/com/synexia/common/collections/PackedLongLongTable.java",
+        "blob": "b9f6e1d3bcc4370f0f92d51f451c6ba82e4d197a",
+        "developCommit": "11c94feb18155a53cc213708c353791132edc4a7",
+        "target": "com.m3.collections.M3FrozenLongTable",
+        "mechanics": "row/column slot lanes"
+      }
+    ],
+    "license": "Apache-2.0 first-party; provider libraries are test-scope oracles only",
+    "disposition": "ADAPT over the five-library scaffold preimages (M3FrozenLongMultimap 7d8ea373..., M3FrozenLongTable 7f2be8e3...)"
+  },
+  "target": {
+    "repository": "hsoliwal/M3jdk21",
+    "base": "0ac188a9df574ed8aa5160642949371e746e0d37",
+    "stackedOn": "hsoliwal/M3jdk21#1419",
+    "owners": [
+      "com.m3.collections.M3FrozenLongMultimap",
+      "com.m3.collections.M3FrozenLongTable"
+    ],
+    "publicJdkReplacement": false
+  },
+  "runtimeDependencyOnSynexia": false,
+  "publicJdkReplacement": false,
+  "perElementAllocation": "0 for queries (field-shape test + ThreadMXBean steady-state 0 bytes); get(key) returns one defensive copy",
+  "gates": {
+    "synexiaCrateTest": "PASS 3/3",
+    "m3CollectionsSuite": "PASS 172/172 (combined LS1-LS3 tree)",
+    "interopProviderTests": "PASS 6/6 (combined LS1-LS3 tree)",
+    "fullInteropSuite": "NOT_RUN"
+  },
+  "targets": [
+    {
+      "path": "m3/collections/interop/src/test/java/com/m3/collections/interop/M3FrozenLongMultimapTableProviderTest.java",
+      "before": "ABSENT",
+      "after": "2a92bf4504713bb4efbc3a4d211eee2bde133c6d2484f93d06b4b5cd0e133751",
+      "resource": "03-M3FrozenLongMultimapTableProviderTest.java.txt"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3FrozenLongMultimap.java",
+      "before": "7d8ea37347f2e27ddcfb560fcfaa533e23e0ca98f5dd3c13c427206a9c053397",
+      "after": "6ad92dc679ff65b50516b37a678e210a40222e085d61529281435c55885a85e2",
+      "resource": "00-M3FrozenLongMultimap.java.txt"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3FrozenLongTable.java",
+      "before": "7f2be8e3d62c2a85d72c60416bab6dd727a378f61bd25f630bd1dab43b283fb1",
+      "after": "2bcc835f0ac834f3dedd3bb1fd7fa85be33325002bcbf5c623d4e3df86040b03",
+      "resource": "01-M3FrozenLongTable.java.txt"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3FrozenLongMultimapTableTest.java",
+      "before": "ABSENT",
+      "after": "f125861a721f6a13b6cca2821aa02e58472b080358d21a210ee1b441fbdfd074",
+      "resource": "02-M3FrozenLongMultimapTableTest.java.txt"
+    }
+  ]
+}

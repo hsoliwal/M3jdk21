@@ -1,0 +1,4 @@
+# path	before_sha256	after_sha256	resource
+m3/collections/interop/src/test/java/com/m3/collections/interop/M3FrozenLongSetProviderTest.java	ABSENT	80e0b77589a102a71ba81cbf7e4556a453601a388129f7525385300e1dca9a7a	02-M3FrozenLongSetProviderTest.java.txt
+m3/collections/src/main/java/com/m3/collections/M3FrozenLongSet.java	4fc3c4898115c784d695bee275a1c9ae4e7d4ba7a5cd4b8968e8286747608715	e27ea26caab4549e1cd364b96e62022d6716848233844ad714664a45b1875d79	00-M3FrozenLongSet.java.txt
+m3/collections/src/test/java/com/m3/collections/M3FrozenLongSetTest.java	ABSENT	fbfc1efa44622a644d627276625e061db1c861e91ab32b86c2455ea14b1630fc	01-M3FrozenLongSetTest.java.txt
