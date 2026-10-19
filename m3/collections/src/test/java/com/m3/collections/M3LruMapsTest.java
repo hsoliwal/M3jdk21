@@ -15,6 +15,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.ConcurrentModificationException;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -116,7 +117,7 @@ final class M3LruMapsTest {
         view.put("c", 3);
         view.put("d", 4);
         assertFalse(view.containsKey("a"));
-        assertEquals(Map.of("b", 2, "c", 3, "d", 4), view);
+        assertEquals(Map.of("b", 2, "c", 3, "d", 4), new HashMap<>(view));
         Iterator<Map.Entry<String, Integer>> it = view.entrySet().iterator();
         Map.Entry<String, Integer> first = it.next();
         assertEquals("b", first.getKey());

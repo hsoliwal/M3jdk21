@@ -21,9 +21,9 @@ import java.util.Objects;
  *
  * <p>DOOP mapping: lane kind OBJECT; slot lanes {@code key1Lane}, {@code key2Lane}, {@code key3Lane} (a private sentinel
  * marks two-element keys), {@code valueLane}, {@code hashIndexLane} (cached combined hash); linear probing, power-of-two
- * capacity, load <= 1/2, backward-shift deletion; 2-bit per-slot state words in {@code stateMaskWords}. Stored nodes:
- * NONE (no MultiKey objects are stored or created). Per-element allocation: 0 in steady state (growth doubles the lanes,
- * amortised). Not a {@code java.util} replacement.
+ * capacity, load <= 1/2, backward-shift deletion; 2-bit per-slot state words in {@code stateMaskWords}.
+ * Stored nodes: NONE (no MultiKey objects are stored or created). Per-element allocation: 0 in steady state (growth
+ * doubles the lanes, amortised). Not a {@code java.util} replacement.
  *
  * @param <K> key element type
  * @param <V> value type
