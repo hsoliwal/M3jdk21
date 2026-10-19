@@ -1,0 +1,39 @@
+{
+  "schema": 1,
+  "repository": "hsoliwal/com.synexia",
+  "sourceCommit": "7fb8d60bad3cdea8f3af8020a203d627c11ad6a3",
+  "sourcePullRequest": 12447,
+  "receiverRepository": "hsoliwal/M3jdk21",
+  "receiverBase": "59e324b50b15f8114da22c677a582f66dbcb90e3",
+  "mode": "INDEPENDENT_APACHE_MODULE",
+  "payload": "Canonical first-party source build qualification authoring inputs only; no generated product postimages or private source bodies.",
+  "files": [
+    {
+      "sourcePath": "synexia-openrewrite-recipes/tasks/source-qualified-tq-reactor-20261019/build/README.md",
+      "targetPath": "m3/tooling/tq-sync/source-build/README.md",
+      "gitBlob": "0bc10a99f3c43c133d14f9885321216d5dd96fbb",
+      "bytes": 3343
+    },
+    {
+      "sourcePath": "synexia-openrewrite-recipes/tasks/source-qualified-tq-reactor-20261019/build/build-inputs.json",
+      "targetPath": "m3/tooling/tq-sync/source-build/build-inputs.json",
+      "gitBlob": "e659c03ca39c6735be247bc665c66d0ac7b785c7",
+      "bytes": 67195
+    },
+    {
+      "sourcePath": "synexia-openrewrite-recipes/tasks/source-qualified-tq-reactor-20261019/build/qualify.py",
+      "targetPath": "m3/tooling/tq-sync/source-build/qualify.py",
+      "gitBlob": "18dfb9831c1ff84522a8557713bd66e154d788eb",
+      "bytes": 14946
+    },
+    {
+      "sourcePath": "synexia-openrewrite-recipes/tasks/source-qualified-tq-reactor-20261019/build/qualification.yml",
+      "targetPath": ".github/workflows/m3-source-qualified-tq-build.yml",
+      "gitBlob": "6d9b20125ebb8d127d70e3360fb7b0aec3a7c957",
+      "bytes": 19139
+    }
+  ],
+  "runtimeApplied": false,
+  "phaseAdvanced": false,
+  "qualification": "PENDING_ACTUAL_57_SOURCE_PRODUCERS_AND_3_TQ_SYNC_FIXTURE_JUNIT_METHODS; no current-product/native/original-private-model/matched-JDK/performance qualification."
+}
