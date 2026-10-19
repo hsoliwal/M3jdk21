@@ -13,6 +13,7 @@ import java.util.ListIterator;
 import java.util.NoSuchElementException;
 import java.util.Objects;
 import java.util.Spliterator;
+import java.util.function.Consumer;
 
 /**
  * List and deque over reusable array slots, with integer links instead of nodes.
@@ -65,7 +66,88 @@ public final class M3LinkedList<E> extends AbstractSequentialList<E> implements 
         }
         return false;
     }
-    @Override public Spliterator<E> spliterator() { return M3SlotSpliterators.ordered(this, false); }
+    @Override public Spliterator<E> spliterator() { return new LinkedIndexSplit(); }
+
+    /** Split the existing int[] slot links, never copy an Object[] batch. */
+    private final class LinkedIndexSplit implements Spliterator<E> {
+        private int cursor = -1;
+        private int remaining = -1;
+        private int expected;
+        private int depth = boundedSplitDepth();
+
+        LinkedIndexSplit() { }
+        private LinkedIndexSplit(int cursor, int count, int expected, int depth) {
+            this.cursor = cursor;
+            this.remaining = count;
+            this.expected = expected;
+            this.depth = depth;
+        }
+        private void bind() {
+            if (remaining < 0) {
+                cursor = first();
+                remaining = size();
+                expected = modCount;
+            }
+        }
+        private void check() {
+            if (expected != modCount) throw new ConcurrentModificationException();
+        }
+        @Override public boolean tryAdvance(Consumer<? super E> action) {
+            Objects.requireNonNull(action, "action");
+            bind();
+            check();
+            if (remaining == 0) return false;
+            if (cursor < 0) throw new ConcurrentModificationException("invalid linked slot");
+            int slot = cursor;
+            cursor = next(slot);
+            remaining--;
+            action.accept(value(slot));
+            check();
+            return true;
+        }
+        @Override public void forEachRemaining(Consumer<? super E> action) {
+            Objects.requireNonNull(action, "action");
+            bind();
+            check();
+            while (remaining > 0) {
+                if (cursor < 0) throw new ConcurrentModificationException("invalid linked slot");
+                int slot = cursor;
+                cursor = next(slot);
+                remaining--;
+                action.accept(value(slot));
+                check();
+            }
+        }
+        @Override public Spliterator<E> trySplit() {
+            bind();
+            check();
+            if (depth == 0 || remaining < 2) return null;
+            int half = remaining >>> 1;
+            int prefix = cursor, suffix = prefix;
+            for (int i = 0; i < half; i++) {
+                if (suffix < 0) throw new ConcurrentModificationException("invalid linked slot");
+                suffix = next(suffix);
+            }
+            cursor = suffix;
+            remaining -= half;
+            int budget = --depth;
+            return new LinkedIndexSplit(prefix, half, expected, budget);
+        }
+        @Override public long estimateSize() {
+            bind();
+            check();
+            return remaining;
+        }
+        @Override public int characteristics() {
+            return ORDERED | SIZED | SUBSIZED;
+        }
+    }
+
+    private static int boundedSplitDepth() {
+        int leaves = Math.min(64, Math.max(1,
+                Runtime.getRuntime().availableProcessors())) * 2;
+        return Integer.SIZE - Integer.numberOfLeadingZeros(leaves - 1);
+    }
     @Override public Iterator<E> descendingIterator() { return reversed().iterator(); }
     @Override public M3LinkedList<E> reversed() {
         if (reverse == null) {
