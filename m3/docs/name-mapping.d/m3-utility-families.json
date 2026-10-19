@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "copyright": "Copyright 2026 Hitesh Soliwal and contributors",
+  "license": "Apache-2.0",
+  "target_repository": "hsoliwal/M3jdk21",
+  "target_base": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
+  "canonical_repository": "hsoliwal/com.synexia",
+  "canonical_recipe_path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/tasks/sorts-views-utilities-20261018",
+  "canonical_recipe": "com.synexia.m3jdk.CollectionsContractRefinement20261017",
+  "canonical_harness_source_commit": "dfe51be2e1e973f44a8a4827fac51b551593b3cc",
+  "canonical_engine_source_commit": "10e8628b2479e56f6f841f160233d3a8bf04a6db",
+  "dataset": "m3jdk21-utils-20261018",
+  "intake_mode": "TARGET_OWNED_PORT",
+  "status": "ADDITIVE_UTILITY_FAMILIES_NO_ORDERED_STAGE_ADVANCE",
+  "runtime_dependencies": [
+    "java.base"
+  ],
+  "existing_public_contracts": "Existing Strings, Objects, Arrays, Collections, Files and internal stream helpers retain their source and contract ownership.",
+  "catalogue": "m3/docs/utilities/FAMILIES.tsv",
+  "public_utility_classes": 3,
+  "public_static_methods": {
+    "java.util.Streams": 11,
+    "java.io.IOUtils": 15,
+    "java.lang.reflect.Reflections": 8
+  },
+  "mappings": [
+    {
+      "source": "JDK StreamSupport, Spliterators, Enumeration and Optional owners; independently reviewed Guava API shapes",
+      "target": "java.util.Streams",
+      "visibility": "public",
+      "license": "GPL-2.0-only WITH Classpath-exception-2.0"
+    },
+    {
+      "source": "JDK InputStream, Reader, array mismatch and explicit Charset owners; independently reviewed Commons IO API shapes",
+      "target": "java.io.IOUtils",
+      "visibility": "public",
+      "license": "GPL-2.0-only WITH Classpath-exception-2.0"
+    },
+    {
+      "source": "Explicit caller-supplied JDK MethodHandles.Lookup and primitive modifier-mask selection over supplied member arrays",
+      "target": "java.lang.reflect.Reflections",
+      "visibility": "public",
+      "license": "GPL-2.0-only WITH Classpath-exception-2.0"
+    }
+  ],
+  "pending_product_gates": [
+    "Full M3JDK21 image build",
+    "Actual product jtreg harness",
+    "Ordered receiving-stage acceptance",
+    "Cross-platform/GC/CDS qualification"
+  ]
+}
