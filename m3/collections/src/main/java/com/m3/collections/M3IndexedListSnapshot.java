@@ -9,10 +9,8 @@ import java.util.AbstractList;
 import java.util.Arrays;
 import java.util.BitSet;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.function.UnaryOperator;
 import java.util.Comparator;
-import java.util.List;
 import java.util.Objects;
 import java.util.RandomAccess;
 import java.util.function.Predicate;
@@ -38,14 +36,21 @@ public final class M3IndexedListSnapshot<E> extends AbstractList<E> implements R
     private final int[] positions;
     private final int from;
     private final int to;
+    private final boolean reversed;
     private volatile BitSet physicalMembership;
 
     private M3IndexedListSnapshot(Object[] values, int[] positions,
                                   int from, int to, BitSet membership) {
+        this(values, positions, from, to, membership, false);
+    }
+
+    private M3IndexedListSnapshot(Object[] values, int[] positions,
+                                  int from, int to, BitSet membership, boolean reversed) {
         this.values = values;
         this.positions = positions;
         this.from = from;
         this.to = to;
+        this.reversed = reversed;
         this.physicalMembership = membership;
     }
 
@@ -69,21 +74,29 @@ public final class M3IndexedListSnapshot<E> extends AbstractList<E> implements R
 
     @Override public int size() { return to - from; }
 
+    /** One coordinate transform, with no index-directory copy or payload allocation. */
+    private int slotAt(int ordinal) {
+        int checked = Objects.checkIndex(ordinal, size());
+        return positions[reversed ? to - 1 - checked : from + checked];
+    }
+
     @SuppressWarnings("unchecked")
     @Override public E get(int ordinal) {
-        return (E) values[positions[from + Objects.checkIndex(ordinal, size())]];
+        return (E) values[slotAt(ordinal)];
     }
 
     /** The physical occurrence slot in the privately owned Object[] payload. */
     public int physicalIndex(int ordinal) {
-        return positions[from + Objects.checkIndex(ordinal, size())];
+        return slotAt(ordinal);
     }
 
     /** O(1) immutable, backed-by-own-snapshot view over a half-open index span. */
     @Override public M3IndexedListSnapshot<E> subList(int begin, int end) {
         Objects.checkFromToIndex(begin, end, size());
-        return new M3IndexedListSnapshot<>(values, positions, from + begin, from + end,
-                begin == 0 && end == size() ? physicalMembership : null);
+        int lower = reversed ? to - end : from + begin;
+        int upper = reversed ? to - begin : from + end;
+        return new M3IndexedListSnapshot<>(values, positions, lower, upper,
+                begin == 0 && end == size() ? physicalMembership : null, reversed);
     }
 
     /** Metadata-only slice, not a re-evaluation of predicates. */
@@ -117,17 +130,31 @@ public final class M3IndexedListSnapshot<E> extends AbstractList<E> implements R
     @Override public E removeFirst() { throw immutable(); }
     @Override public E removeLast() { throw immutable(); }
 
-    /** Preserve no-op immutable refusal on the JDK21 reversed view as well. */
-    @Override public List<E> reversed() {
-        return Collections.unmodifiableList(super.reversed());
+    /** O(1) read-only reversed view: the owner, index directory and mask cache are shared. */
+    @Override public M3IndexedListSnapshot<E> reversed() {
+        return new M3IndexedListSnapshot<>(values, positions, from, to,
+                physicalMembership, !reversed);
     }
 
-    public int[] physicalIndices() { return Arrays.copyOfRange(positions, from, to); }
+    /** Detached logical-order physical coordinates, including reversed and sliced views. */
+    public int[] physicalIndices() {
+        int[] output = Arrays.copyOfRange(positions, from, to);
+        if (reversed) {
+            for (int left = 0, right = output.length - 1; left < right; left++, right--) {
+                int value = output[left];
+                output[left] = output[right];
+                output[right] = value;
+            }
+        }
+        return output;
+    }
 
     /** Detached copy; mutable callers cannot modify the canonical reference lane. */
     @Override public Object[] toArray() {
         Object[] output = new Object[size()];
-        for (int i = 0; i < output.length; i++) output[i] = values[positions[from + i]];
+        for (int i = 0; i < output.length; i++) {
+            output[i] = values[positions[reversed ? to - 1 - i : from + i]];
+        }
         return output;
     }
 
@@ -181,7 +208,7 @@ public final class M3IndexedListSnapshot<E> extends AbstractList<E> implements R
         // index directory in place, preserving duplicate and sorted occurrences.
         int[] admitted = M3IndexMaskCompactor.selectPositions(alignedStates, 1, backend);
         for (int i = 0; i < admitted.length; i++) {
-            admitted[i] = positions[from + admitted[i]];
+            admitted[i] = physicalIndex(admitted[i]);
         }
         // Physical membership is already lazily computable from admitted indexes;
         // do not allocate a separate BitSet until a caller actually requests it.
@@ -263,9 +290,12 @@ public final class M3IndexedListSnapshot<E> extends AbstractList<E> implements R
                 throw new IllegalArgumentException("state words must align with physical slots");
             }
         }
+        // The existing Java/C17/JNI kernel understands a negative logical stride.
+        // For an empty reversed slice, 'from' is the valid zero-count sentinel.
+        int first = reversed && size() > 0 ? to - 1 : from;
         int[] admitted = M3IndexPathMasks.select(
                 positions, positions, physicalStates, requiredMasks, forbiddenMasks,
-                from, size(), 1, backend);
+                first, size(), reversed ? -1 : 1, backend);
         return new M3IndexedListSnapshot<>(values, admitted, 0, admitted.length, null);
     }
 
