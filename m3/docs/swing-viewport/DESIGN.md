@@ -268,7 +268,7 @@ writes `default:` without braces and `else if` chains, which the insert recipe d
 extended (hsoliwal/com.synexia `8c122afccd25` on `m3/viewport-catalogue-recipes-20261016`: `else if` chains and
 `case` statements with or without braces, two new recipe tests) and then applied.
 
-| Proof (2026-10-19, JDK 21.0.9, stock + `--patch-module java.desktop`) | Result |
+| Proof (2026-10-19, JDK 21.0.9, stock + `--patch-module java.desktop`; re-run with build and test output on S: after G: showed failing writes, same results) | Result |
 |---|---|
 | `M3JListViewportDifferential 40 300` (`-Dm3.swing.viewport=true`): two JLists on one `DefaultListModel`, one with a `BasicListUI` subclass outside `java.desktop` (stock loops), one with `BasicListUI` (prefix lane); heights 0, negative and very large included; public answers after every step, pixels every 10 steps | **40 of 40 seeds x 300 steps pass, 1,240 pixel comparisons equal, offsets built at all 12,040 checks** |
 | Mutation check: `firstEndingAfter` with `>=` in place of `>` | caught: 3 of 5 seeds fail |
@@ -278,8 +278,10 @@ extended (hsoliwal/com.synexia `8c122afccd25` on `m3/viewport-catalogue-recipes-
 | Recipe crate tests | 35 run, 0 failures, 2 skipped (`M3InsertStatementsTest` 9/9) |
 | `make`, jtreg | PENDING_CI |
 
-**Benchmark** (`bench/LIST_20261019.tsv`, `SwingViewportBench list`, 10^6 rows, two interleaved rounds, stock / M3):
-`locationToIndex` of the last row 363 and 358 us / 2.7 and 2.3 us; `indexToLocation` of the last row 302 and 333 us /
-2.5 and 2.1 us; 800x600 frame p50 in the middle 0.61 and 0.69 ms / 0.39 and 0.37 ms, at the end 0.86 and 0.89 ms /
-0.37 and 0.36 ms (the start frame is noise-bound in both); `getPreferredSize` (relayout) 458-480 ms in both, since
-`updateLayoutState` still measures every row; heap +4 MB (the lane).
+**Benchmark** (`bench/LIST_20261019.tsv`, `SwingViewportBench list`, 10^6 rows, three rounds on a heavily shared
+machine, stock / M3): `locationToIndex` of the last row 405-626 us / 2.0-3.2 us; `indexToLocation` of the last row
+366-501 us / 1.6-2.8 us; 800x600 frame p50 in the middle 0.82-0.99 ms / 0.42-0.57 ms, at the end 1.23-1.36 ms /
+0.43-0.50 ms (the start frame is noise-bound in both); heap +4 MB (the lane). The single-shot relayout rows
+(`getPreferredSize` 493-687 ms / 593-869 ms, `add(0)` + relayout 378-574 ms / 360-588 ms) follow machine load and GC:
+`model_build`, which runs no M3 code, varied 150-893 ms in the same session. Every row is still measured on each
+relayout; leaf 4 (section 10) removes that for model edits.

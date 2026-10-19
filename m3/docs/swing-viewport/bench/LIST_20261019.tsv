@@ -1,46 +1,68 @@
-# SwingViewportBench list (JList, 10^6 DefaultListModel strings, renderer heights 18), 2026-10-19, JDK 21.0.9 stock vs stock + patch with -Dm3.swing.viewport=true (leaf 3 hook), -XX:+UseSerialGC -Xmx1500m, headless, two interleaved rounds; run_bench.sh <out> stock|m3 list -
+# SwingViewportBench list (JList, 10^6 DefaultListModel strings, renderer heights 18), re-run 2026-10-19 06:39-06:53 with output on S: (the first run wrote to G:, which had failing writes), JDK 21.0.9 stock vs stock + patch with -Dm3.swing.viewport=true (leaf 3 hook), -XX:+UseSerialGC -Xms64m -Xmx1500m, headless, three rounds (stock first twice, M3 first once); machine heavily shared: commit headroom fell to 2.6 GB during round 1, and single-shot rows (model_build, preferred_size, insert_first_relayout) vary with load and GC even where no M3 code runs
 case	shape	impl	nodes	rows	metric	value	unit	note
-# 2026-10-19T00:33:54+05:30 list - stock headroom_kb=30417612
-list	-	stock	1000000	1000000	model_build	137	ms	DefaultListModel.addElement
-list	-	stock	1000000	1000000	preferred_size	458	ms	BasicListUI.updateLayoutState measures every row; 72x18000000
+# 2026-10-19T06:39:54+05:30 list - stock headroom_kb=42033344
+list	-	stock	1000000	1000000	model_build	212	ms	DefaultListModel.addElement
+list	-	stock	1000000	1000000	preferred_size	687	ms	BasicListUI.updateLayoutState measures every row; 72x18000000
 list	-	stock	1000000	1000000	heap	63.0	MB	model + JList + UI
-list	-	stock	1000000	1000000	location_to_index_end	362.83	us/op	index 999999
-list	-	stock	1000000	1000000	index_to_location_end	302.09	us/op	y 17999982
-list	-	stock	1000000	1000000	insert_first_relayout	346	ms	add(0) + getPreferredSize, 18000018
-list	-	stock	1000000	1000000	frame_start	0.497	ms p50	p95 1.162 ms; setViewPosition + paint 800x600
-list	-	stock	1000000	1000000	frame_middle	0.609	ms p50	p95 0.774 ms; setViewPosition + paint 800x600
-list	-	stock	1000000	1000000	frame_end	0.861	ms p50	p95 1.297 ms; setViewPosition + paint 800x600
+list	-	stock	1000000	1000000	location_to_index_end	587.15	us/op	index 999999
+list	-	stock	1000000	1000000	index_to_location_end	501.23	us/op	y 17999982
+list	-	stock	1000000	1000000	insert_first_relayout	504	ms	add(0) + getPreferredSize, 18000018
+list	-	stock	1000000	1000000	frame_start	0.643	ms p50	p95 1.483 ms; setViewPosition + paint 800x600
+list	-	stock	1000000	1000000	frame_middle	0.888	ms p50	p95 1.179 ms; setViewPosition + paint 800x600
+list	-	stock	1000000	1000000	frame_end	1.225	ms p50	p95 5.563 ms; setViewPosition + paint 800x600
 # exit 0 list -
-# 2026-10-19T00:33:58+05:30 list - m3 headroom_kb=30034932
-list	-	m3	1000000	1000000	model_build	155	ms	DefaultListModel.addElement
-list	-	m3	1000000	1000000	preferred_size	457	ms	BasicListUI.updateLayoutState measures every row; 72x18000000
+# 2026-10-19T06:48:01+05:30 list - m3 headroom_kb=28071012
+list	-	m3	1000000	1000000	model_build	242	ms	DefaultListModel.addElement
+list	-	m3	1000000	1000000	preferred_size	755	ms	BasicListUI.updateLayoutState measures every row; 72x18000000
+list	-	m3	1000000	1000000	heap	67.5	MB	model + JList + UI
+list	-	m3	1000000	1000000	location_to_index_end	2.35	us/op	index 999999
+list	-	m3	1000000	1000000	index_to_location_end	2.45	us/op	y 17999982
+list	-	m3	1000000	1000000	insert_first_relayout	522	ms	add(0) + getPreferredSize, 18000018
+list	-	m3	1000000	1000000	frame_start	0.611	ms p50	p95 1.565 ms; setViewPosition + paint 800x600
+list	-	m3	1000000	1000000	frame_middle	0.546	ms p50	p95 0.648 ms; setViewPosition + paint 800x600
+list	-	m3	1000000	1000000	frame_end	0.502	ms p50	p95 0.879 ms; setViewPosition + paint 800x600
+# exit 0 list -
+# 2026-10-19T06:49:55+05:30 list - stock headroom_kb=33516956
+list	-	stock	1000000	1000000	model_build	224	ms	DefaultListModel.addElement
+list	-	stock	1000000	1000000	preferred_size	684	ms	BasicListUI.updateLayoutState measures every row; 72x18000000
+list	-	stock	1000000	1000000	heap	63.4	MB	model + JList + UI
+list	-	stock	1000000	1000000	location_to_index_end	626.14	us/op	index 999999
+list	-	stock	1000000	1000000	index_to_location_end	413.27	us/op	y 17999982
+list	-	stock	1000000	1000000	insert_first_relayout	574	ms	add(0) + getPreferredSize, 18000018
+list	-	stock	1000000	1000000	frame_start	0.696	ms p50	p95 1.709 ms; setViewPosition + paint 800x600
+list	-	stock	1000000	1000000	frame_middle	0.991	ms p50	p95 1.254 ms; setViewPosition + paint 800x600
+list	-	stock	1000000	1000000	frame_end	1.357	ms p50	p95 2.259 ms; setViewPosition + paint 800x600
+# exit 0 list -
+# 2026-10-19T06:50:25+05:30 list - m3 headroom_kb=34377436
+list	-	m3	1000000	1000000	model_build	249	ms	DefaultListModel.addElement
+list	-	m3	1000000	1000000	preferred_size	869	ms	BasicListUI.updateLayoutState measures every row; 72x18000000
 list	-	m3	1000000	1000000	heap	67.0	MB	model + JList + UI
-list	-	m3	1000000	1000000	location_to_index_end	2.74	us/op	index 999999
-list	-	m3	1000000	1000000	index_to_location_end	2.48	us/op	y 17999982
-list	-	m3	1000000	1000000	insert_first_relayout	341	ms	add(0) + getPreferredSize, 18000018
-list	-	m3	1000000	1000000	frame_start	0.902	ms p50	p95 1.934 ms; setViewPosition + paint 800x600
-list	-	m3	1000000	1000000	frame_middle	0.388	ms p50	p95 0.547 ms; setViewPosition + paint 800x600
-list	-	m3	1000000	1000000	frame_end	0.374	ms p50	p95 0.786 ms; setViewPosition + paint 800x600
+list	-	m3	1000000	1000000	location_to_index_end	3.22	us/op	index 999999
+list	-	m3	1000000	1000000	index_to_location_end	2.75	us/op	y 17999982
+list	-	m3	1000000	1000000	insert_first_relayout	588	ms	add(0) + getPreferredSize, 18000018
+list	-	m3	1000000	1000000	frame_start	0.721	ms p50	p95 1.558 ms; setViewPosition + paint 800x600
+list	-	m3	1000000	1000000	frame_middle	0.566	ms p50	p95 0.669 ms; setViewPosition + paint 800x600
+list	-	m3	1000000	1000000	frame_end	0.478	ms p50	p95 0.863 ms; setViewPosition + paint 800x600
 # exit 0 list -
-# 2026-10-19T00:34:02+05:30 list - stock headroom_kb=29443292
-list	-	stock	1000000	1000000	model_build	150	ms	DefaultListModel.addElement
-list	-	stock	1000000	1000000	preferred_size	464	ms	BasicListUI.updateLayoutState measures every row; 72x18000000
+# 2026-10-19T06:53:04+05:30 list - m3 headroom_kb=37847696
+list	-	m3	1000000	1000000	model_build	176	ms	DefaultListModel.addElement
+list	-	m3	1000000	1000000	preferred_size	593	ms	BasicListUI.updateLayoutState measures every row; 72x18000000
+list	-	m3	1000000	1000000	heap	67.0	MB	model + JList + UI
+list	-	m3	1000000	1000000	location_to_index_end	2.01	us/op	index 999999
+list	-	m3	1000000	1000000	index_to_location_end	1.63	us/op	y 17999982
+list	-	m3	1000000	1000000	insert_first_relayout	360	ms	add(0) + getPreferredSize, 18000018
+list	-	m3	1000000	1000000	frame_start	1.016	ms p50	p95 1.898 ms; setViewPosition + paint 800x600
+list	-	m3	1000000	1000000	frame_middle	0.418	ms p50	p95 0.800 ms; setViewPosition + paint 800x600
+list	-	m3	1000000	1000000	frame_end	0.432	ms p50	p95 0.726 ms; setViewPosition + paint 800x600
+# exit 0 list -
+# 2026-10-19T06:53:09+05:30 list - stock headroom_kb=36253008
+list	-	stock	1000000	1000000	model_build	154	ms	DefaultListModel.addElement
+list	-	stock	1000000	1000000	preferred_size	493	ms	BasicListUI.updateLayoutState measures every row; 72x18000000
 list	-	stock	1000000	1000000	heap	63.0	MB	model + JList + UI
-list	-	stock	1000000	1000000	location_to_index_end	357.76	us/op	index 999999
-list	-	stock	1000000	1000000	index_to_location_end	332.87	us/op	y 17999982
-list	-	stock	1000000	1000000	insert_first_relayout	319	ms	add(0) + getPreferredSize, 18000018
-list	-	stock	1000000	1000000	frame_start	0.852	ms p50	p95 1.146 ms; setViewPosition + paint 800x600
-list	-	stock	1000000	1000000	frame_middle	0.686	ms p50	p95 0.813 ms; setViewPosition + paint 800x600
-list	-	stock	1000000	1000000	frame_end	0.888	ms p50	p95 1.527 ms; setViewPosition + paint 800x600
-# exit 0 list -
-# 2026-10-19T00:34:06+05:30 list - m3 headroom_kb=22095368
-list	-	m3	1000000	1000000	model_build	150	ms	DefaultListModel.addElement
-list	-	m3	1000000	1000000	preferred_size	480	ms	BasicListUI.updateLayoutState measures every row; 72x18000000
-list	-	m3	1000000	1000000	heap	67.0	MB	model + JList + UI
-list	-	m3	1000000	1000000	location_to_index_end	2.28	us/op	index 999999
-list	-	m3	1000000	1000000	index_to_location_end	2.05	us/op	y 17999982
-list	-	m3	1000000	1000000	insert_first_relayout	341	ms	add(0) + getPreferredSize, 18000018
-list	-	m3	1000000	1000000	frame_start	0.479	ms p50	p95 1.482 ms; setViewPosition + paint 800x600
-list	-	m3	1000000	1000000	frame_middle	0.369	ms p50	p95 0.472 ms; setViewPosition + paint 800x600
-list	-	m3	1000000	1000000	frame_end	0.360	ms p50	p95 0.676 ms; setViewPosition + paint 800x600
+list	-	stock	1000000	1000000	location_to_index_end	405.33	us/op	index 999999
+list	-	stock	1000000	1000000	index_to_location_end	365.53	us/op	y 17999982
+list	-	stock	1000000	1000000	insert_first_relayout	378	ms	add(0) + getPreferredSize, 18000018
+list	-	stock	1000000	1000000	frame_start	0.809	ms p50	p95 1.654 ms; setViewPosition + paint 800x600
+list	-	stock	1000000	1000000	frame_middle	0.822	ms p50	p95 1.319 ms; setViewPosition + paint 800x600
+list	-	stock	1000000	1000000	frame_end	1.254	ms p50	p95 1.908 ms; setViewPosition + paint 800x600
 # exit 0 list -
