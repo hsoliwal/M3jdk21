@@ -24,6 +24,13 @@ jobs:
         os: [ubuntu-latest, macos-latest, windows-latest]
     steps:
       - uses: actions/checkout@v4
+        with:
+          # The test compiles only these original owner paths. Do not checkout
+          # unrelated deep recipe-custody paths that exceed Windows path limits.
+          sparse-checkout: |
+            m3/collections/src/main/java/com/m3/collections
+            m3/collections/src/test/java/com/m3/collections
+          sparse-checkout-cone-mode: true
       - uses: actions/setup-java@v4
         with:
           distribution: temurin

@@ -1,0 +1,112 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3JDK21 DOOP java.base collections JNI convergence
+on:
+  pull_request:
+    paths:
+      - 'm3/collections/src/main/java/com/m3/collections/**'
+      - 'm3/collections/src/main/native/collections/m3_index_mask_compactor.c'
+      - 'm3/collections/src/main/java/com/m3/collections/M3LongPredicates.java'
+      - 'm3/collections/src/test/java/com/m3/collections/**'
+      - 'src/java.base/share/classes/java/util/EnumMap.java'
+      - 'src/java.base/share/classes/java/util/IdentityHashMap.java'
+      - 'test/jdk/java/util/EnumMap/**'
+      - 'test/jdk/java/util/IdentityHashMap/**'
+      - '.github/workflows/m3-doop-product-convergence-20261019.yml'
+  push:
+    branches: ['m3/doop-javabase-collections-convergence-20261019']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  indexed-owners-and-jni:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          sparse-checkout: |
+            m3/collections/src/main/java
+            m3/collections/src/test/java
+            m3/collections/src/main/native
+          sparse-checkout-cone-mode: true
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Compile the existing M3JDK21 collection owners
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p target/doop-convergence/classes
+          javac --release 21 -Xlint:all,-serial,-module -Werror \
+            -d target/doop-convergence/classes \
+            -sourcepath m3/collections/src/main/java:m3/collections/src/test/java \
+            m3/collections/src/test/java/com/m3/collections/M3ReadonlyFilteredSlotSelfTest.java \
+            m3/collections/src/test/java/com/m3/collections/M3MutableFilteredSlotSelfTest.java \
+            m3/collections/src/test/java/com/m3/collections/M3IndexedFilterSortFusionSelfTest.java \
+            m3/collections/src/test/java/com/m3/collections/M3LongDeepFilterSelfTest.java
+      - name: Direct-slot / offset / mask contract oracles (Java)
+        shell: bash
+        run: |
+          set -euo pipefail
+          for klass in M3ReadonlyFilteredSlotSelfTest M3MutableFilteredSlotSelfTest M3IndexedFilterSortFusionSelfTest M3LongDeepFilterSelfTest; do
+            java -ea -cp target/doop-convergence/classes com.m3.collections.$klass
+          done
+      - name: Build existing M3JNI primitive-mask implementation with strict C17
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p target/doop-convergence/native
+          gcc -std=c17 -O2 -fPIC -shared -Wall -Wextra -Werror \
+            -I"$JAVA_HOME/include" -I"$JAVA_HOME/include/linux" \
+            m3/collections/src/main/native/collections/m3_index_mask_compactor.c \
+            -o target/doop-convergence/native/libm3_collections_mask.so
+      - name: Verify identical selected slot coordinates with JNI required
+        shell: bash
+        run: |
+          set -euo pipefail
+          java -ea -Xcheck:jni \
+            -Djava.library.path="$PWD/target/doop-convergence/native" \
+            -cp target/doop-convergence/classes \
+            com.m3.collections.M3IndexedFilterSortFusionSelfTest --native
+  actual-javabase:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          sparse-checkout: |
+            src/java.base/share/classes/java/util
+            test/jdk/java/util/EnumMap
+            test/jdk/java/util/IdentityHashMap
+          sparse-checkout-cone-mode: true
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Compile exact modified java.base classes, not a separate implementation
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p target/doop-javabase/src/java/util target/doop-javabase/classes target/doop-javabase/tests
+          cp src/java.base/share/classes/java/util/EnumMap.java target/doop-javabase/src/java/util/
+          cp src/java.base/share/classes/java/util/IdentityHashMap.java target/doop-javabase/src/java/util/
+          javac -Xlint:all,-serial,-module,-this-escape -Werror \
+            --patch-module java.base=target/doop-javabase/src \
+            -d target/doop-javabase/classes \
+            target/doop-javabase/src/java/util/EnumMap.java \
+            target/doop-javabase/src/java/util/IdentityHashMap.java
+          javac --release 21 -Xlint:all,-serial -Werror \
+            -d target/doop-javabase/tests \
+            test/jdk/java/util/EnumMap/DirectOrdinalTraversal.java \
+            test/jdk/java/util/IdentityHashMap/DirectOffsetString.java
+      - name: Verify JDK Map contracts on patched java.base
+        shell: bash
+        run: |
+          set -euo pipefail
+          java -ea --patch-module java.base=target/doop-javabase/classes \
+            -cp target/doop-javabase/tests DirectOrdinalTraversal
+          java -ea --patch-module java.base=target/doop-javabase/classes \
+            -cp target/doop-javabase/tests DirectOffsetString

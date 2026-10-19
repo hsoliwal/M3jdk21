@@ -63,29 +63,47 @@ final class M3LongPredicates {
         @Override public boolean test(long value) { return root.test(value); }
     }
 
-    /** AVL-style persistent concatenation; in-order traversal is predicate evaluation order. */
+    /**
+     * AVL join descends the taller tree to the insertion frontier before rotating.
+     * A single root rotation without this descent does not preserve logarithmic
+     * depth after repeated nested filtered-view compositions.
+     * Retains existing immutable leaves and their exact encounter order.
+     */
     private static Node join(Node left, Node right) {
-        int delta = left.height() - right.height();
-        if (delta > 1 && left instanceof Branch branch) {
+        if (left.height() > right.height() + 1) {
+            Branch branch = (Branch) left;
+            return rebalance(branch.left(), join(branch.right(), right));
+        }
+        if (right.height() > left.height() + 1) {
+            Branch branch = (Branch) right;
+            return rebalance(join(left, branch.left()), branch.right());
+        }
+        return new Branch(left, right);
+    }
+
+    /** No leaf or predicate result is materialized during rotations. */
+    private static Node rebalance(Node left, Node right) {
+        if (left.height() > right.height() + 1) {
+            Branch branch = (Branch) left;
             Node a = branch.left();
             Node b = branch.right();
             if (a.height() >= b.height()) {
                 return new Branch(a, new Branch(b, right));
             }
-            if (b instanceof Branch middle) {
-                return new Branch(new Branch(a, middle.left()),
-                        new Branch(middle.right(), right));
-            }
-        } else if (delta < -1 && right instanceof Branch branch) {
+            Branch middle = (Branch) b;
+            return new Branch(new Branch(a, middle.left()),
+                    new Branch(middle.right(), right));
+        }
+        if (right.height() > left.height() + 1) {
+            Branch branch = (Branch) right;
             Node b = branch.left();
             Node c = branch.right();
             if (c.height() >= b.height()) {
                 return new Branch(new Branch(left, b), c);
             }
-            if (b instanceof Branch middle) {
-                return new Branch(new Branch(left, middle.left()),
-                        new Branch(middle.right(), c));
-            }
+            Branch middle = (Branch) b;
+            return new Branch(new Branch(left, middle.left()),
+                    new Branch(middle.right(), c));
         }
         return new Branch(left, right);
     }
