@@ -60,7 +60,7 @@ public final class M3HfLexiconIntakeProof {
     private static int verifyLanguageResourceDiscovery() throws IOException {
         List<String> lines = resourceLines(
                 "/com/m3/lexicon/hf/language-resource-discovery.tsv");
-        require(lines.size() == 85, "84 language-resource candidates plus header");
+        require(lines.size() == 91, "90 language-resource candidates plus header");
         List<String> expectedHeader = List.of("source_id", "resource", "category",
                 "data_shape_and_identity", "rights_and_attribution", "m3_candidate_use",
                 "admission_blockers", "state", "evidence");
@@ -104,8 +104,36 @@ public final class M3HfLexiconIntakeProof {
                 "numeralbank-cosinus-v2-2026", "ai4bharat-aksharantar-26m",
                 "ai4bharat-samanantar-v0-3", "ai4bharat-indiccorp-v2",
                 "ai4bharat-naamapadam-11", "mozilla-common-voice-text-lid-300",
-                "dbnary-ontolex-wiktionary-26", "masakhaner2-african-20")),
+                "dbnary-ontolex-wiktionary-26", "masakhaner2-african-20",
+                "ids-intercontinental-dictionary-series", "autotyp-typology-database-v1-1-1",
+                "apics-creole-grammar-cldf", "dplace-language-culture-environment",
+                "apertium-language-data-packs", "parseme-multilingual-mwe-corpus-v2")),
                 "lexicon, grammar, translation, concept, norms, archive, sign and HF leads retained");
+        String idsRecord = lines.stream().skip(1)
+                .filter(line -> "ids-intercontinental-dictionary-series".equals(splitTsv(line)[0]))
+                .findFirst().orElse("");
+        require(idsRecord.contains("437,902") && idsRecord.contains("352,262")
+                && idsRecord.contains("CC BY 4.0"),
+                "IDS count, missing-source provenance and data license remain explicit");
+        String apertiumRecord = lines.stream().skip(1)
+                .filter(line -> "apertium-language-data-packs".equals(splitTsv(line)[0]))
+                .findFirst().orElse("");
+        require(apertiumRecord.contains("per exact language/pair repository")
+                && apertiumRecord.contains("GPL-3.0"),
+                "Apertium package-specific rights remain explicit");
+        String dplaceRecord = lines.stream().skip(1)
+                .filter(line -> "dplace-language-culture-environment".equals(splitTsv(line)[0]))
+                .findFirst().orElse("");
+        require(dplaceRecord.contains("CC BY-NC 4.0")
+                && dplaceRecord.contains("CC-BY-4.0")
+                && dplaceRecord.contains("Licensing conflict"),
+                "D-PLACE release-license discrepancy remains visible");
+        String parsemeRecord = lines.stream().skip(1)
+                .filter(line -> "parseme-multilingual-mwe-corpus-v2".equals(splitTsv(line)[0]))
+                .findFirst().orElse("");
+        require(parsemeRecord.contains("No blanket license verified")
+                && parsemeRecord.contains("preserve token spans"),
+                "PARSEME corpus rights and span identity stay explicit");
         String paranames = lines.stream().skip(1)
                 .filter(line -> "hf-paranames-1-0".equals(splitTsv(line)[0]))
                 .findFirst().orElse("");
