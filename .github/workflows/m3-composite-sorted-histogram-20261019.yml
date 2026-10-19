@@ -1,0 +1,78 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3JDK21 composite sorted bitmap and JNI histogram proof
+on:
+  pull_request:
+    paths:
+      - 'm3/collections/src/main/java/com/m3/collections/M3LongBitmapFilteredSnapshot.java'
+      - 'm3/collections/src/test/java/com/m3/collections/M3LongBitmapFilteredSnapshotSelfTest.java'
+      - 'm3/collections/src/main/native/collections/m3_state_mask_histogram.c'
+      - 'm3/collections/src/test/java/com/m3/collections/M3StateMaskHistogramSelfTest.java'
+      - 'm3/collections/qualification/fleet-sorted-histogram-20261019/**'
+      - '.github/workflows/m3-composite-sorted-histogram-20261019.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  existing-owners-java-jni:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Refuse exact source drift
+        run: |
+          set -euo pipefail
+          sha256sum --check m3/collections/qualification/fleet-sorted-histogram-20261019/SOURCE_SEALS.sha256
+      - name: Compile existing primitive sorted/bitmap owner and run Java21 oracle
+        shell: bash
+        run: |
+          set -euo pipefail
+          SRC=m3/collections/src/main/java/com/m3/collections
+          TEST=m3/collections/src/test/java/com/m3/collections
+          OUT="$RUNNER_TEMP/m3-sorted-hist"
+          mkdir -p "$OUT/bitmap" "$OUT/hist" "$OUT/native" "$OUT/headers"
+          javac --release 21 -proc:none -Xlint:all -Werror -d "$OUT/bitmap" \
+            "$SRC/M3LongCollection.java" "$SRC/M3LongIterator.java" \
+            "$SRC/M3LongIndexProjection.java" "$SRC/M3IndexMaskCompactor.java" \
+            "$SRC/M3LongBitmapFilteredSnapshot.java" \
+            "$TEST/M3LongBitmapFilteredSnapshotSelfTest.java"
+          java -ea -cp "$OUT/bitmap" com.m3.collections.M3LongBitmapFilteredSnapshotSelfTest
+      - name: Exercise existing bitmap selection through checked C17 JNI
+        shell: bash
+        run: |
+          set -euo pipefail
+          OUT="$RUNNER_TEMP/m3-sorted-hist"
+          cc -std=c17 -O2 -fPIC -shared -Wall -Wextra -Werror \
+            -I"$JAVA_HOME/include" -I"$JAVA_HOME/include/linux" \
+            m3/collections/src/main/native/collections/m3_index_mask_compactor.c \
+            -o "$OUT/native/libm3_collections_mask.so"
+          java -ea -Xcheck:jni -Djava.library.path="$OUT/native" \
+            -cp "$OUT/bitmap" com.m3.collections.M3LongBitmapFilteredSnapshotSelfTest
+      - name: Compile existing histogram owner and run Java21 state-mask oracle
+        shell: bash
+        run: |
+          set -euo pipefail
+          OUT="$RUNNER_TEMP/m3-sorted-hist"
+          SRC=m3/collections/src/main/java/com/m3/collections
+          TEST=m3/collections/src/test/java/com/m3/collections
+          javac --release 21 -proc:none -Xlint:all -Werror -h "$OUT/headers" \
+            -d "$OUT/hist" "$SRC/M3StateMaskHistogram.java" \
+            "$TEST/M3StateMaskHistogramSelfTest.java"
+          java -ea -cp "$OUT/hist" com.m3.collections.M3StateMaskHistogramSelfTest
+      - name: Exercise batched state histograms through checked UBSan JNI
+        shell: bash
+        run: |
+          set -euo pipefail
+          OUT="$RUNNER_TEMP/m3-sorted-hist"
+          cc -std=c17 -O2 -fPIC -shared -Wall -Wextra -Wpedantic \
+            -Wconversion -Wsign-conversion -Werror -fsanitize=undefined \
+            -fno-sanitize-recover=all \
+            -I"$JAVA_HOME/include" -I"$JAVA_HOME/include/linux" \
+            -I"$OUT/headers" \
+            m3/collections/src/main/native/collections/m3_state_mask_histogram.c \
+            -o "$OUT/native/libm3_collections_statehist.so"
+          java -ea -Xcheck:jni -Djava.library.path="$OUT/native" \
+            -cp "$OUT/hist" com.m3.collections.M3StateMaskHistogramSelfTest
