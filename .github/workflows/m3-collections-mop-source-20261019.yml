@@ -1,0 +1,62 @@
+# Copyright 2026 Hitesh Soliwal and contributors. SPDX-License-Identifier: Apache-2.0
+name: M3 collections MOP product capture 20261019
+on:
+  push:
+    branches: [aix/collections-mop-execution-20261019]
+    paths: [.github/workflows/m3-collections-mop-source-20261019.yml]
+permissions:
+  contents: read
+jobs:
+  capture:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: hsoliwal/M3jdk21
+          ref: ac3b5c68b628f7582cb10bedf08ff040deeb694c
+          path: product
+          persist-credentials: false
+          sparse-checkout: |
+            m3
+            src/java.base/share/classes/java/util
+            .github/workflows
+      - name: Export exact tracked sources and hash inventory
+        shell: bash
+        run: |
+          python3 - <<'PYCODE'
+          import hashlib,json,pathlib,subprocess,zipfile
+          cases=[('product','ac3b5c68b628f7582cb10bedf08ff040deeb694c',[
+              'm3','.github/workflows','src/java.base/share/classes/java/util','AGENTS.md','pom.xml'])]
+          records=[]; total=0
+          with zipfile.ZipFile('m3-mop-sources.zip','x',zipfile.ZIP_DEFLATED) as archive:
+              for folder,pin,paths in cases:
+                  checkout=pathlib.Path(folder)
+                  actual=subprocess.check_output(['git','-C',folder,'rev-parse','HEAD'],text=True).strip()
+                  if actual!=pin: raise RuntimeError('revision drift')
+                  entries=subprocess.check_output(['git','-C',folder,'ls-tree','-rz',pin,'--',*paths])
+                  for raw in entries.split(b'\0'):
+                      if not raw: continue
+                      metadata,path=raw.decode().split('\t',1)
+                      mode,kind,blob=metadata.split()
+                      if mode not in ('100644','100755') or kind!='blob':
+                          raise RuntimeError('non-regular source: '+path)
+                      f=checkout/path
+                      if f.is_symlink() or not f.is_file(): raise RuntimeError('missing source: '+path)
+                      data=f.read_bytes(); total+=len(data)
+                      if total>536870912: raise RuntimeError('source capture budget exceeded')
+                      actual_blob=hashlib.sha1(b'blob '+str(len(data)).encode()+b'\0'+data).hexdigest()
+                      if actual_blob!=blob: raise RuntimeError('source bytes differ: '+path)
+                      archive.writestr(folder+'/'+path,data)
+                      records.append({'repository':folder,'revision':pin,'path':path,'git_blob':blob,
+                                      'sha256':hashlib.sha256(data).hexdigest(),'bytes':len(data)})
+              archive.writestr('SOURCE_INVENTORY.json',json.dumps(records,sort_keys=True,indent=2)+'\n')
+          print(json.dumps({'source_files':len(records),'bytes':total,
+              'archive_sha256':hashlib.sha256(pathlib.Path('m3-mop-sources.zip').read_bytes()).hexdigest()}))
+          PYCODE
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: m3-collections-mop-sources-20261019
+          path: m3-mop-sources.zip
+          if-no-files-found: error
+          retention-days: 7
