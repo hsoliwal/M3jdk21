@@ -128,6 +128,16 @@ public final class M3TreeMap<K, V> extends M3OrderedSlotMap<K, V> implements Nav
         int count = 0; for (int s = firstSlot(); s >= 0; s = nextSlot(s)) { count++; } return count;
     }
     @Override public boolean isEmpty() { return firstSlot() < 0; }
+    /** Single-search value lookup, independent of getOrDefault's null-result probe. */
+    @Override public V get(Object key) { return super.getOrDefault(key, null); }
+    /** Preserve JDK TreeMap's observable second search after a null result. */
+    @Override public V getOrDefault(Object key, V fallback) {
+        // M3-specific value modes retain their established single-search contract.
+        if (tree.lazy != null || tree.keyOnly) { return super.getOrDefault(key, fallback); }
+        V value = get(key);
+        if (value != null) { return value; }
+        return containsKey(key) ? null : fallback;
+    }
     @Override public V put(K key, V value) {
         tree.writable();
         // Ordinary nonempty roots validate against visited keys during descent.
