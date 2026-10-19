@@ -66,7 +66,7 @@ public final class M3HfLexiconIntakeProof {
     private static int verifyLanguageResourceDiscovery() throws IOException {
         List<String> lines = resourceLines(
                 "/com/m3/lexicon/hf/language-resource-discovery.tsv");
-        require(lines.size() == 213, "212 language-resource candidates plus header");
+        require(lines.size() == 217, "216 language-resource candidates plus header");
         List<String> expectedHeader = List.of("source_id", "resource", "category",
                 "data_shape_and_identity", "rights_and_attribution", "m3_candidate_use",
                 "admission_blockers", "state", "evidence");
@@ -301,8 +301,12 @@ public final class M3HfLexiconIntakeProof {
                 "hf-okinawan-dictionary-index",
                 "hf-tigre-parallel-multilingual",
                 "hf-multilingual-endangered-cultural-heritage",
-                "hf-nenets-mixed-schema"
-        )), "exact 212 language-resource source IDs match the pinned catalogue");
+                "hf-nenets-mixed-schema",
+                "cefrlex-six-language",
+                "clearpond-five-language-neighborhoods",
+                "manulex-french-child-directed-lexicons",
+                "multi-lex-french-ngrams-2022"
+        )), "exact 216 language-resource source IDs match the pinned catalogue");
         String sindhi = discoveryRecord(lines, "hf-sindhi-open-lexicon");
         require(sindhi.contains("223,342") && sindhi.contains("lexical_id")
                 && sindhi.contains("entry_id") && sindhi.contains("schema casting"),
@@ -409,6 +413,24 @@ public final class M3HfLexiconIntakeProof {
                 && nenets.contains("articles_yamal_expedition.csv")
                 && nenets.contains("source/example_nn/example_ru") && nenets.contains("text/title/link"),
                 "Nenets cast failure remains an explicit schema-refusal discovery, not an ingested lexicon");
+        String cefrlex = discoveryRecord(lines, "cefrlex-six-language");
+        require(cefrlex.contains("Seven resources") && cefrlex.contains("six languages")
+                && cefrlex.contains("A1") && cefrlex.contains("no explicit data license"),
+                "CEFRLex level-frequency scope and unresolved dataset license stay explicit");
+        String clearpond = discoveryRecord(lines, "clearpond-five-language-neighborhoods");
+        require(clearpond.contains("Dutch, English, French, German and Spanish")
+                && clearpond.contains("bigram/biphone probabilities")
+                && clearpond.contains("no separate license"),
+                "CLEARPOND cross-language neighbor signals and dataset/paper rights stay distinct");
+        String manulex = discoveryRecord(lines, "manulex-french-child-directed-lexicons");
+        require(manulex.contains("48,886 wordforms") && manulex.contains("23,812 lemmas")
+                && manulex.contains("CC BY-NC-SA 3.0"),
+                "Manulex grade, identity and noncommercial-sharealike scope stay explicit");
+        String multiLex = discoveryRecord(lines, "multi-lex-french-ngrams-2022");
+        require(multiLex.contains("2-, 3-, 4- and 5-word")
+                && multiLex.contains("license field is blank")
+                && multiLex.contains("about 1.4 GB"),
+                "Multi-LEX n-gram order, scale and unresolved derivative rights stay explicit");
         String massive = discoveryRecord(lines, "massive-nlu-1-1");
         require(massive.contains("52 languages") && massive.contains("SLURP") && massive.contains("CC BY 4.0")
                 && massive.contains("not a canonical dictionary"),
@@ -988,7 +1010,7 @@ public final class M3HfLexiconIntakeProof {
         require(Files.isRegularFile(catalogue), "algorithm catalogue exists at Maven invocation root");
         if (!Files.isRegularFile(catalogue)) return 0;
         List<String> lines = Files.readAllLines(catalogue, StandardCharsets.UTF_8);
-        require(lines.size() == 72, "71 algorithm patterns plus header");
+        require(lines.size() == 76, "75 algorithm patterns plus header");
         List<String> header = List.of("problem_category", "discovery_source", "candidate",
                 "decision", "owner_or_reason", "qualification");
         require(!lines.isEmpty() && List.of(splitTsv(lines.getFirst())).equals(header),
@@ -1073,8 +1095,12 @@ public final class M3HfLexiconIntakeProof {
                 "khmer_segmentation_pos_tagging",
                 "georgian_case_alignment_masked_contrast",
                 "tibetan_word_segmentation_evaluation",
-                "balanced_multilingual_tokenizer_fertility"
-        )), "all 71 algorithm categories match the pinned catalogue");
+                "balanced_multilingual_tokenizer_fertility",
+                "cefr_level_frequency_precompute",
+                "cross_lingual_neighborhood_precompute",
+                "child_directed_lexical_signal_precompute",
+                "multiword_ngram_frequency_index"
+        )), "all 75 algorithm categories match the pinned catalogue");
         for (String category : List.of("spoken_language_phoneme_morphology_alignment",
                 "medical_translation_regression", "low_resource_african_parallel_corpus",
                 "multi_source_parallel_corpus_provenance", "document_level_translation_regression",
@@ -1090,7 +1116,11 @@ public final class M3HfLexiconIntakeProof {
                 "balanced_multilingual_tokenizer_fertility",
                 "bilingual_dictionary_regression",
                 "multilingual_translation_regression",
-                "language_resource_discovery")) {
+                "language_resource_discovery",
+                "cefr_level_frequency_precompute",
+                "cross_lingual_neighborhood_precompute",
+                "child_directed_lexical_signal_precompute",
+                "multiword_ngram_frequency_index")) {
             String row = lines.stream().skip(1)
                     .filter(line -> category.equals(splitTsv(line)[0]))
                     .findFirst().orElse("");
