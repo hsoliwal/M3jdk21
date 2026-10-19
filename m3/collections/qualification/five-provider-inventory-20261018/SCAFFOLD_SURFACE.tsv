@@ -92,7 +92,6 @@ apache-unmodifiable-trie	org.apache.commons.collections4.trie.UnmodifiableTrie	c
 guava-array-table	com.google.common.collect.ArrayTable	com.m3.collections.guava.M3ArrayTable	com.google.common.collect.Table<R,C,V>;java.io.Serializable	0	2	29	-	-	2
 guava-concurrent-hash-multiset	com.google.common.collect.ConcurrentHashMultiset	com.m3.collections.guava.M3ConcurrentHashMultiset	Iterable<E>;com.google.common.collect.Multiset<E>;java.io.Serializable;java.util.Collection<E>	0	3	32	-	-	1
 guava-enum-bi-map	com.google.common.collect.EnumBiMap	com.m3.collections.guava.M3EnumBiMap	com.google.common.collect.BiMap<K,V>;java.io.Serializable;java.util.Map<K,V>	0	2	30	-	-	0
-guava-enum-hash-bi-map	com.google.common.collect.EnumHashBiMap	com.m3.collections.guava.M3EnumHashBiMap	com.google.common.collect.BiMap<K,V>;java.io.Serializable;java.util.Map<K,V>	0	2	29	-	-	0
 guava-enum-multiset	com.google.common.collect.EnumMultiset	com.m3.collections.guava.M3EnumMultiset	Iterable<E>;com.google.common.collect.Multiset<E>;java.io.Serializable;java.util.Collection<E>	0	3	30	-	-	0
 guava-hash-based-table	com.google.common.collect.HashBasedTable	com.m3.collections.guava.M3HashBasedTable	com.google.common.collect.Table<R,C,V>;java.io.Serializable	0	3	22	-	-	0
 guava-hash-multimap	com.google.common.collect.HashMultimap	com.m3.collections.guava.M3HashMultimap	com.google.common.collect.Multimap<K,V>;com.google.common.collect.SetMultimap<K,V>;java.io.Serializable	0	3	22	-	-	0

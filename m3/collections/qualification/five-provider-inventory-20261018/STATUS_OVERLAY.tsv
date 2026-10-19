@@ -42,7 +42,7 @@ org.apache.commons.collections4.bag.HashBag	DONE #1421	com.m3.collections.apache
 org.apache.commons.collections4.multiset.HashMultiSet	OPEN	-	adapter work in open PR #1271	#1271 M3ApacheMultiSet; core M3CountedBag	fill order b
 org.apache.commons.collections4.bag.TreeBag	OPEN	-	-	core M3CountedBag + M3TreeMap	-
 com.google.common.collect.EnumBiMap	OPEN	-	-	guava M3HashBiMap; core M3EnumLongMap	fill order c
-com.google.common.collect.EnumHashBiMap	OPEN	-	-	guava M3HashBiMap	fill order c
+com.google.common.collect.EnumHashBiMap	DONE #1460	com.m3.collections.guava.M3EnumHashBiMap	PR #1460: implementations/guava-enum-hash-bi-map + qualification/owned-guava-enum-hash-bi-map-20261019	guava M3HashBiMap	fill order c
 org.apache.commons.collections4.bidimap.DualLinkedHashBidiMap	OPEN	-	-	apache M3BidiMap	fill order c
 org.apache.commons.collections4.bidimap.DualTreeBidiMap	OPEN	-	-	apache M3BidiMap + core M3TreeMap	fill order c
 org.apache.commons.collections4.bidimap.TreeBidiMap	OPEN	-	-	core M3TreeMap twice	fill order c
