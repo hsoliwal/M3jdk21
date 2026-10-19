@@ -7,8 +7,8 @@
 #   run-tests.sh diff       behaviour probe against master's classes and against this branch's; outputs must be equal
 # Env: M3_JDK21 (JDK 21 home), OUT (output dir, default S:/m3-scratch/enhanced-api/swing), BASE (git ref, default origin/master).
 set -euo pipefail
-here=$(cd "$(dirname "$0")" && pwd)
-wt=$(cd "$here/../../.." && pwd)
+here=$(cd "$(dirname "$0")" && { pwd -W 2>/dev/null || pwd; })
+wt=$(cd "$here/../../.." && { pwd -W 2>/dev/null || pwd; })
 jdk=${M3_JDK21:-"C:/Program Files/Java/jdk-21"}
 out=${OUT:-S:/m3-scratch/enhanced-api/swing}
 base=${BASE:-origin/master}
@@ -70,7 +70,7 @@ case "${1:-test}" in
     for side in base work; do
       p="$out/patch"; [ "$side" = base ] && p="$out/patch-base"
       "$jdk/bin/java" -Xmx1g -Djava.awt.headless=true --patch-module java.desktop="$p" \
-        -cp "$out/test-classes" m3.swing.api.M3SwingBehaviourProbe > "$out/probe-$side.txt"
+        -cp "$out/test-classes" m3.swing.api.M3SwingBehaviourProbe "$out/probe-$side.txt"
     done
     if cmp -s "$out/probe-base.txt" "$out/probe-work.txt"; then
       echo "DIFF EQUAL $(wc -l < "$out/probe-work.txt") lines, sha256 $(sha256sum "$out/probe-work.txt" | cut -c1-16)"

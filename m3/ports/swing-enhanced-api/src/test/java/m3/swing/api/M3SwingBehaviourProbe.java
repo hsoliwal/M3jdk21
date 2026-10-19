@@ -34,13 +34,14 @@ public final class M3SwingBehaviourProbe {
     private M3SwingBehaviourProbe() {
     }
 
+    /** @param args the output file of the trace */
     public static void main(String[] args) throws Exception {
         UIManager.setLookAndFeel(new MetalLookAndFeel());
         Random random = new Random(42);
         probeList(random);
         probeTable(random);
         probeTree(random);
-        System.out.print(OUT);
+        java.nio.file.Files.writeString(java.nio.file.Path.of(args[0]), OUT);
     }
 
     private static void line(String key, Object value) {
@@ -82,7 +83,7 @@ public final class M3SwingBehaviourProbe {
     }
 
     private static void probeList(Random random) {
-        JList<String> list = SelectionRangesTest.list(300);
+        JList<String> list = Fixtures.list(300);
         list.addListSelectionListener(e -> line("list-event", e.getFirstIndex() + "," + e.getLastIndex() + "," + e.getValueIsAdjusting()));
         JViewport viewport = show(list, 180, 150);
         for (int step = 0; step < 40; step++) {
@@ -102,7 +103,7 @@ public final class M3SwingBehaviourProbe {
     }
 
     private static void probeTable(Random random) {
-        JTable table = SelectionRangesTest.table(400);
+        JTable table = Fixtures.table(400);
         table.getSelectionModel().addListSelectionListener(e -> line("table-event", e.getFirstIndex() + "," + e.getLastIndex() + "," + e.getValueIsAdjusting()));
         JViewport viewport = show(table, 300, 200);
         for (int step = 0; step < 40; step++) {
@@ -123,7 +124,7 @@ public final class M3SwingBehaviourProbe {
     }
 
     private static void probeTree(Random random) {
-        JTree tree = SelectionRangesTest.tree();
+        JTree tree = Fixtures.tree();
         tree.getSelectionModel().setSelectionMode(TreeSelectionModel.DISCONTIGUOUS_TREE_SELECTION);
         tree.addTreeSelectionListener(e -> line("tree-event", e.getPaths().length + "," + e.getNewLeadSelectionPath()));
         JViewport viewport = show(tree, 200, 150);

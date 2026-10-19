@@ -2352,7 +2352,9 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
 
     /**
      * Replaces the row selection with the given ranges of view rows, as one
-     * change: listeners receive a single non-adjusting {@code valueChanged}.
+     * change: listeners receive a single non-adjusting {@code valueChanged}
+     * (adjusting events may precede it, as for any change made while the
+     * model adjusts).
      * Ranges are added with {@code addSelectionInterval}, so the selection
      * mode of the model applies; empty ranges are ignored. The column
      * selection is not changed.

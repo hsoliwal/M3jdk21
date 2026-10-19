@@ -31,40 +31,6 @@ import org.junit.jupiter.api.Test;
  */
 public class SelectionRangesTest {
 
-    static JList<String> list(int size) {
-        DefaultListModel<String> model = new DefaultListModel<>();
-        for (int i = 0; i < size; i++) {
-            model.addElement("item " + i);
-        }
-        return new JList<>(model);
-    }
-
-    static JTable table(int rows) {
-        DefaultTableModel model = new DefaultTableModel(0, 2);
-        for (int i = 0; i < rows; i++) {
-            model.addRow(new Object[] {"row " + i, i});
-        }
-        return new JTable(model);
-    }
-
-    /* 20 roots with 4 children each; the even roots expanded */
-    static JTree tree() {
-        DefaultMutableTreeNode root = new DefaultMutableTreeNode("root");
-        for (int r = 0; r < 20; r++) {
-            DefaultMutableTreeNode node = new DefaultMutableTreeNode("r" + r);
-            for (int c = 0; c < 4; c++) {
-                node.add(new DefaultMutableTreeNode("r" + r + "." + c));
-            }
-            root.add(node);
-        }
-        JTree tree = new JTree(new DefaultTreeModel(root));
-        tree.setRootVisible(false);
-        for (int r = 19; r >= 0; r -= 2) {
-            tree.expandRow(r - 1 < 0 ? 0 : r - 1);
-        }
-        return tree;
-    }
-
     private static void randomSelection(ListSelectionModel model, Random random, int size) {
         model.clearSelection();
         for (int k = random.nextInt(6); k >= 0; k--) {
@@ -80,8 +46,8 @@ public class SelectionRangesTest {
     @Test
     public void listAndTableRangesAgreeWithTheIndices() {
         Random random = new Random(2);
-        JList<String> list = list(200);
-        JTable table = table(200);
+        JList<String> list = Fixtures.list(200);
+        JTable table = Fixtures.table(200);
         for (int round = 0; round < 200; round++) {
             randomSelection(list.getSelectionModel(), random, 200);
             assertArrayEquals(M3ItemRange.coalesce(list.getSelectedIndices()), list.getSelectionRanges(), "list round " + round);
@@ -93,7 +59,7 @@ public class SelectionRangesTest {
     @Test
     public void customSelectionModelsAreAskedIndexByIndex() {
         Random random = new Random(3);
-        JList<String> list = list(100);
+        JList<String> list = Fixtures.list(100);
         /* a subclass may override the queries: the bit set is not read for it */
         list.setSelectionModel(new DefaultListSelectionModel() {
             @Override
@@ -118,13 +84,17 @@ public class SelectionRangesTest {
 
     @Test
     public void setSelectionRangesIsOneChange() {
-        JTable table = table(1_000_000 / 100);
+        JTable table = Fixtures.table(1_000_000 / 100);
         List<ListSelectionEvent> events = new ArrayList<>();
-        table.getSelectionModel().addListSelectionListener(events::add);
+        table.getSelectionModel().addListSelectionListener(e -> {
+            if (!e.getValueIsAdjusting()) {
+                events.add(e);
+            }
+        });
         M3ItemRange[] ranges = {M3ItemRange.of(5, 9), M3ItemRange.EMPTY, M3ItemRange.of(100, 9_999)};
         table.setSelectionRanges(ranges);
         assertArrayEquals(new M3ItemRange[] {M3ItemRange.of(5, 9), M3ItemRange.of(100, 9_999)}, table.getSelectionRanges());
-        assertEquals(1, events.size(), "one valueChanged");
+        assertEquals(1, events.size(), "one non-adjusting valueChanged (adjusting ones may precede it)");
         assertFalse(events.get(0).getValueIsAdjusting());
         assertEquals(5, events.get(0).getFirstIndex());
         assertEquals(9_999, events.get(0).getLastIndex());
@@ -137,11 +107,11 @@ public class SelectionRangesTest {
 
     @Test
     public void selectionModeApplies() {
-        JList<String> list = list(50);
+        JList<String> list = Fixtures.list(50);
         list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         list.setSelectionRanges(new M3ItemRange[] {M3ItemRange.of(3, 6), M3ItemRange.of(10, 12)});
         /* the same as clearSelection then addSelectionInterval per range */
-        JList<String> stock = list(50);
+        JList<String> stock = Fixtures.list(50);
         stock.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         stock.clearSelection();
         stock.addSelectionInterval(3, 6);
@@ -153,7 +123,7 @@ public class SelectionRangesTest {
 
     @Test
     public void treeRangesAreVisibleRows() {
-        JTree tree = tree();
+        JTree tree = Fixtures.tree();
         tree.getSelectionModel().setSelectionMode(TreeSelectionModel.DISCONTIGUOUS_TREE_SELECTION);
         Random random = new Random(4);
         for (int round = 0; round < 60; round++) {

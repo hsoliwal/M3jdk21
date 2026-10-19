@@ -50,7 +50,7 @@ public class VisibleRangeTest {
 
     @Test
     public void tableRowsInsideTheViewport() {
-        JTable table = SelectionRangesTest.table(500);
+        JTable table = Fixtures.table(500);
         table.setRowHeight(7, 40);
         table.setRowHeight(120, 3);
         JViewport viewport = viewport(table, 300, 157);
@@ -59,14 +59,14 @@ public class VisibleRangeTest {
             Rectangle visible = table.getVisibleRect();
             assertEquals(oracle(table.getRowCount(), row -> table.getCellRect(row, 0, true), visible), table.getVisibleRange(), "y " + y);
         }
-        assertTrue(SelectionRangesTest.table(0).getVisibleRange().isEmpty());
+        assertTrue(Fixtures.table(0).getVisibleRange().isEmpty());
         viewport.setSize(300, 0);
         assertTrue(table.getVisibleRange().isEmpty());
     }
 
     @Test
     public void tableShorterThanTheViewport() {
-        JTable table = SelectionRangesTest.table(3);
+        JTable table = Fixtures.table(3);
         JViewport viewport = viewport(table, 300, 400);
         table.setSize(300, 400);
         assertEquals(M3ItemRange.of(0, 2), table.getVisibleRange());
@@ -77,19 +77,19 @@ public class VisibleRangeTest {
 
     @Test
     public void listCellsInsideTheViewport() {
-        JList<String> list = SelectionRangesTest.list(400);
+        JList<String> list = Fixtures.list(400);
         JViewport viewport = viewport(list, 200, 133);
         for (int y : new int[] {0, 9, 500, list.getHeight() - 133}) {
             viewport.setViewPosition(new Point(0, y));
             Rectangle visible = list.getVisibleRect();
             assertEquals(oracle(400, row -> list.getCellBounds(row, row), visible), list.getVisibleRange(), "y " + y);
         }
-        assertTrue(SelectionRangesTest.list(0).getVisibleRange().isEmpty());
+        assertTrue(Fixtures.list(0).getVisibleRange().isEmpty());
     }
 
     @Test
     public void treeRowsInsideTheViewport() {
-        JTree tree = SelectionRangesTest.tree();
+        JTree tree = Fixtures.tree();
         JViewport viewport = viewport(tree, 200, 101);
         for (int y : new int[] {0, 3, 250, tree.getHeight() - 101}) {
             viewport.setViewPosition(new Point(0, y));
