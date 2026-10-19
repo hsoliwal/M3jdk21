@@ -1,5 +1,9 @@
 {
-  "emittedFiles": 14,
+  "emittedFiles": 15,
+  "sdkVersion": "8.17.1",
+  "tests": 5,
+  "failures": 0,
+  "original14OutputsUnchanged": true,
   "files": [
     {
       "path": "m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java",
@@ -20,6 +24,11 @@
       "path": "m3/collections/src/test/java/com/m3/collections/M3FilteredTerminalTrace.java",
       "before": "ABSENT",
       "after": "378ec11a5b40a5f40bf35edff58fc901c549f6b26499c602caf4298d2ef55011"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3FootprintContractTest.java",
+      "before": "e369e66b2f95179383ef1e1b2a9cef28f439f762fcd3478e6df2113e3d1f8957",
+      "after": "d7ce007320cc1593125dc686cddf4a1c2abdb70ac0cd6be5728081ac856d4084"
     },
     {
       "path": "m3/collections/src/test/java/com/m3/collections/M3SparseMaskReadContract.java",

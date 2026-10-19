@@ -30,18 +30,31 @@ APIs still return fresh caller-owned projections.
 - Recipe: five actual OpenRewrite 8.17.1 tests pass, covering exact output,
   reverse input order, fixed point and fail-closed drift/missing/duplicate cases.
 
-The full collection baseline has 464 tests, three failures and two skips. An
-incremental candidate build produced nested classes missing methods present in
-sealed source, and retained those three failures. Direct javac emits the correct
-methods and passes their contracts. The cause is not established; the fresh,
-forked full Maven build is running. See QUALIFICATION.json for the final state.
-No test has been removed or weakened to make these gates pass.
+The full collection baseline has 464 tests, three failures and two skips.
+The fresh forked candidate run completes all **473 tests**, fixes those three
+filtered-view failures, and finds one obsolete footprint assertion expecting an
+empty comparator lookup to invoke its comparator. JDK 21 and the frozen corpus
+require zero calls. The canonical recipe restores the earlier qualified,
+JDK-backed assertion, retaining insertion failure, recovery, natural-null and
+storage checks. Its focused rerun passes all **7 footprint tests**.
+
+Together these receipts cover **471 passing tests and two existing skips**.
+All baseline coverage is retained (one test renamed and strengthened), with nine
+new tests. This is a full run followed by a test-only reconciliation, **not a
+single green full-suite run**. Production sources and the original 14 SDK
+postimages are unchanged. Fresh-build TreeMap observations retain 640/640.
+
+An earlier incremental build emitted nested classes missing methods present in
+sealed source. Its three failures and cancellation are retained. Direct javac
+and the fresh forked build emitted the correct methods; the incremental cause
+is unproven. See QUALIFICATION.json and collection-suite-summary.json for the
+exact receipts, case identities and reconciliation.
 
 ## Reproduction and source custody
 
 Product base: `5cb893e1ab224236b33d41132a31f604d89a4e12`.
 Canonical engine base: `56842e83d741df4eb368997b903b40ca09e1cce4`.
-`FILE_PASSES.tsv` records all 14 exact pre/postimages. `ALGORITHMS.tsv` contains
+`FILE_PASSES.tsv` records all 15 exact pre/postimages. `ALGORITHMS.tsv` contains
 15 category-indexed candidate evaluations and donor/license decisions.
 `observations/sdk-receipt.json` and source/toolchain manifests bind the receipts
 to actual files. See the canonical crate's README and `qualify.py` for portable

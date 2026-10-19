@@ -58,13 +58,18 @@ final class M3FootprintContractTest {
         Reference.reachabilityFence(key);
     }
 
-    @Test void treeEmptyChecksStillInvokeComparatorAndRejectNull() {
+    @Test void treeEmptyLookupSkipsComparatorAndStillRejectsNaturalNull() {
         int[] calls = {0}; boolean[] reject = {false};
         var map = new M3TreeMap<Integer, Integer>((a, b) -> {
             calls[0]++; if (reject[0]) { throw new IllegalArgumentException("comparator"); }
             return Integer.compare(a, b);
         });
-        assertNull(map.get(1)); assertEquals(1, calls[0]);
+        int[] jdkCalls = {0};
+        var jdk = new java.util.TreeMap<Integer, Integer>((a, b) -> {
+            jdkCalls[0]++; return Integer.compare(a, b);
+        });
+        assertNull(jdk.get(1)); assertNull(map.get(1));
+        assertEquals(jdkCalls[0], calls[0]); assertEquals(0, calls[0]);
         reject[0] = true;
         assertThrows(IllegalArgumentException.class, () -> map.put(1, 10));
         assertTrue(map.isEmpty()); reject[0] = false;

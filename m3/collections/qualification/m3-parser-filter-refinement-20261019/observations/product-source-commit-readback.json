@@ -1,0 +1,665 @@
+{
+  "commit": "22c3d19339c8042d6b15869e8661a1524183d807",
+  "files": [
+    {
+      "path": "m3/collections/qualification/m3-parser-filter-refinement-20261019/ALGORITHMS.tsv",
+      "expected": "c79a423ee83e95dc86770c365813e3b1a6f91636",
+      "actual": "c79a423ee83e95dc86770c365813e3b1a6f91636",
+      "ok": true
+    },
+    {
+      "path": "m3/collections/qualification/m3-parser-filter-refinement-20261019/CONTRACT.md",
+      "expected": "0ca04ce9b8978c94b4b4456fd32fc3c4410e1b8c",
+      "actual": "0ca04ce9b8978c94b4b4456fd32fc3c4410e1b8c",
+      "ok": true
+    },
+    {
+      "path": "m3/collections/qualification/m3-parser-filter-refinement-20261019/COVERAGE.tsv",
+      "expected": "aeb103db54ad481d23b95a704ead6d5fde5aee16",
+      "actual": "aeb103db54ad481d23b95a704ead6d5fde5aee16",
+      "ok": true
+    },
+    {
+      "path": "m3/collections/qualification/m3-parser-filter-refinement-20261019/FILE_PASSES.tsv",
+      "expected": "1e81f9f90a2ce34500e7ce1acba917f93aa7d671",
+      "actual": "1e81f9f90a2ce34500e7ce1acba917f93aa7d671",
+      "ok": true
+    },
+    {
+      "path": "m3/collections/qualification/m3-parser-filter-refinement-20261019/QUALIFICATION.json",
+      "expected": "0b49886edc636548d7d2ce117fd3b43ad00b1884",
+      "actual": "0b49886edc636548d7d2ce117fd3b43ad00b1884",
+      "ok": true
+    },
+    {
+      "path": "m3/collections/qualification/m3-parser-filter-refinement-20261019/README.md",
+      "expected": "b5621accac6b49bdf1742476337c822405b9517e",
+      "actual": "b5621accac6b49bdf1742476337c822405b9517e",
+      "ok": true
+    },
+    {
+      "path": "m3/collections/qualification/m3-parser-filter-refinement-20261019/jdt-dependencies.json",
+      "expected": "1db6c5c2ba76dbc01f83b94a82a2c3816c63d43f",
+      "actual": "1db6c5c2ba76dbc01f83b94a82a2c3816c63d43f",
+      "ok": true
+    },
+    {
+      "path": "m3/collections/qualification/m3-parser-filter-refinement-20261019/observations/baseline-source-closure.json",
+      "expected": "0917656d9ae5e90179c70967393ea1d71bc50c8d",
+      "actual": "0917656d9ae5e90179c70967393ea1d71bc50c8d",
+      "ok": true
+    },
+    {
+      "path": "m3/collections/qualification/m3-parser-filter-refinement-20261019/observations/canonical-readback.json",
+      "expected": "ebbccac0eedfd129cbd9652fd71e88a47f7ac0e4",
+      "actual": "ebbccac0eedfd129cbd9652fd71e88a47f7ac0e4",
+      "ok": true
+    },
+    {
+      "path": "m3/collections/qualification/m3-parser-filter-refinement-20261019/observations/collections-after-attempt1.command.json",
+      "expected": "65976d80adc6913112c8a8c30fb6fb61766049ee",
+      "actual": "65976d80adc6913112c8a8c30fb6fb61766049ee",
+      "ok": true
+    },
+    {
+      "path": "m3/collections/qualification/m3-parser-filter-refinement-20261019/observations/collections-after.command.json",
+      "expected": "65976d80adc6913112c8a8c30fb6fb61766049ee",
+      "actual": "65976d80adc6913112c8a8c30fb6fb61766049ee",
+      "ok": true
+    },
+    {
+      "path": "m3/collections/qualification/m3-parser-filter-refinement-20261019/observations/collections-after.log",
+      "expected": "29edf8cb4824388f730a7a94c63c5f1a04afe3db",
+      "actual": "29edf8cb4824388f730a7a94c63c5f1a04afe3db",
+      "ok": true
+    },
+    {
+      "path": "m3/collections/qualification/m3-parser-filter-refinement-20261019/observations/collections-before.log",
+      "expected": "d7f0d8f3307bda80423bde71c3769a8bee01006b",
+      "actual": "d7f0d8f3307bda80423bde71c3769a8bee01006b",
+      "ok": true
+    },
+    {
+      "path": "m3/collections/qualification/m3-parser-filter-refinement-20261019/observations/failure-ledger.json",
+      "expected": "434cc0e55bb46b218dc1a4a36e1961ba36e210a7",
+      "actual": "434cc0e55bb46b218dc1a4a36e1961ba36e210a7",
+      "ok": true
+    },
+    {
+      "path": "m3/collections/qualification/m3-parser-filter-refinement-20261019/observations/filtered-direct-contracts.log",
+      "expected": "cdc5bf66beb750c2511c1c7bcdbf79d6269d8f93",
+      "actual": "cdc5bf66beb750c2511c1c7bcdbf79d6269d8f93",
+      "ok": true
+    },
+    {
+      "path": "m3/collections/qualification/m3-parser-filter-refinement-20261019/observations/final/jdt-compile.command.json",
+      "expected": "2359424fc4486e121cd29b2f1d11768e060bd7ee",
+      "actual": "2359424fc4486e121cd29b2f1d11768e060bd7ee",
+      "ok": true
+    },
+    {
+      "path": "m3/collections/qualification/m3-parser-filter-refinement-20261019/observations/final/jdt-compile.log",
+      "expected": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "actual": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "ok": true
+    },
+    {
+      "path": "m3/collections/qualification/m3-parser-filter-refinement-20261019/observations/final/jdt-dependencies.json",
+      "expected": "1db6c5c2ba76dbc01f83b94a82a2c3816c63d43f",
+      "actual": "1db6c5c2ba76dbc01f83b94a82a2c3816c63d43f",
+      "ok": true
+    },
+    {
+      "path": "m3/collections/qualification/m3-parser-filter-refinement-20261019/observations/final/jdt-runtime.command.json",
+      "expected": "1020e4b3df264b78068deb8075e818a2e15a2994",
+      "actual": "1020e4b3df264b78068deb8075e818a2e15a2994",
+      "ok": true
+    },
+    {
+      "path": "m3/collections/qualification/m3-parser-filter-refinement-20261019/observations/final/jdt-runtime.log",
+      "expected": "90ff399f3cb72c2fa794bc441de3402c2a356d90",
+      "actual": "90ff399f3cb72c2fa794bc441de3402c2a356d90",
+      "ok": true
+    },
+    {
+      "path": "m3/collections/qualification/m3-parser-filter-refinement-20261019/observations/final/jni-symbols.json",
+      "expected": "1516bc83015d46e43416dd6bddf7370608b8e778",
+      "actual": "1516bc83015d46e43416dd6bddf7370608b8e778",
+      "ok": true
+    },
+    {
+      "path": "m3/collections/qualification/m3-parser-filter-refinement-20261019/observations/final/native-baseline-library-compile.command.json",
+      "expected": "ce6f097f7c368445ee5a9fa9fe85a9ea198a83ef",
+      "actual": "ce6f097f7c368445ee5a9fa9fe85a9ea198a83ef",
+      "ok": true
+    },
+    {
+      "path": "m3/collections/qualification/m3-parser-filter-refinement-20261019/observations/final/native-baseline-library-compile.log",
+      "expected": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "actual": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "ok": true
+    },
+    {
+      "path": "m3/collections/qualification/m3-parser-filter-refinement-20261019/observations/final/native-java-compile.command.json",
+      "expected": "2c6f250ecc2c3e6cd4bcf73fefd3cee7946d4b85",
+      "actual": "2c6f250ecc2c3e6cd4bcf73fefd3cee7946d4b85",
+      "ok": true
+    },
+    {
+      "path": "m3/collections/qualification/m3-parser-filter-refinement-20261019/observations/final/native-java-compile.log",
+      "expected": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "actual": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "ok": true
+    },
+    {
+      "path": "m3/collections/qualification/m3-parser-filter-refinement-20261019/observations/final/native-jvm-runtime.command.json",
+      "expected": "315a046eae3736f0ff89aa0c0761a19c07a731ac",
+      "actual": "315a046eae3736f0ff89aa0c0761a19c07a731ac",
+      "ok": true
+    },
+    {
+      "path": "m3/collections/qualification/m3-parser-filter-refinement-20261019/observations/final/native-jvm-runtime.log",
+      "expected": "ee777b5010c952e463ad92f934da753527a146f6",
+      "actual": "ee777b5010c952e463ad92f934da753527a146f6",
+      "ok": true
+    },
+    {
+      "path": "m3/collections/qualification/m3-parser-filter-refinement-20261019/observations/final/native-library-compile.command.json",
+      "expected": "1907707b98e5469bd90f36c6bb12209ee75b6b5f",
+      "actual": "1907707b98e5469bd90f36c6bb12209ee75b6b5f",
+      "ok": true
+    },
+    {
+      "path": "m3/collections/qualification/m3-parser-filter-refinement-20261019/observations/final/native-library-compile.log",
+      "expected": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "actual": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "ok": true
+    },
+    {
+      "path": "m3/collections/qualification/m3-parser-filter-refinement-20261019/observations/final/native-traffic-compile.command.json",
+      "expected": "2ebe71b1021d1c77b5ab5e2dd003ca58f84be518",
+      "actual": "2ebe71b1021d1c77b5ab5e2dd003ca58f84be518",
+      "ok": true
+    },
+    {
+      "path": "m3/collections/qualification/m3-parser-filter-refinement-20261019/observations/final/native-traffic-compile.log",
+      "expected": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "actual": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "ok": true
+    },
+    {
+      "path": "m3/collections/qualification/m3-parser-filter-refinement-20261019/observations/final/native-traffic-runtime.command.json",
+      "expected": "5bfdf117c71a59b578c59ff702ada1edc21dd3f6",
+      "actual": "5bfdf117c71a59b578c59ff702ada1edc21dd3f6",
+      "ok": true
+    },
+    {
+      "path": "m3/collections/qualification/m3-parser-filter-refinement-20261019/observations/final/native-traffic-runtime.log",
+      "expected": "2e7a40f68964df793a021907b844a50dbbf800af",
+      "actual": "2e7a40f68964df793a021907b844a50dbbf800af",
+      "ok": true
+    },
+    {
+      "path": "m3/collections/qualification/m3-parser-filter-refinement-20261019/observations/final/tree-baseline.command.json",
+      "expected": "328e7ed47cb03c503fa4f50f01a072866703af92",
+      "actual": "328e7ed47cb03c503fa4f50f01a072866703af92",
+      "ok": true
+    },
+    {
+      "path": "m3/collections/qualification/m3-parser-filter-refinement-20261019/observations/final/tree-baseline.log",
+      "expected": "d927cee57e53038a0fba9242d2986cce68c2ff9f",
+      "actual": "d927cee57e53038a0fba9242d2986cce68c2ff9f",
+      "ok": true
+    },
+    {
+      "path": "m3/collections/qualification/m3-parser-filter-refinement-20261019/observations/final/tree-candidate.command.json",
+      "expected": "d3780ca66b789d2448cff15ec6dca069035c9b6b",
+      "actual": "d3780ca66b789d2448cff15ec6dca069035c9b6b",
+      "ok": true
+    },
+    {
+      "path": "m3/collections/qualification/m3-parser-filter-refinement-20261019/observations/final/tree-candidate.log",
+      "expected": "9e48b4a2caa3cf9aafede10eb219ead6976572e9",
+      "actual": "9e48b4a2caa3cf9aafede10eb219ead6976572e9",
+      "ok": true
+    },
+    {
+      "path": "m3/collections/qualification/m3-parser-filter-refinement-20261019/observations/final/tree-jdk.command.json",
+      "expected": "e9be262609c068d6cd71b143273dcecb45a05294",
+      "actual": "e9be262609c068d6cd71b143273dcecb45a05294",
+      "ok": true
+    },
+    {
+      "path": "m3/collections/qualification/m3-parser-filter-refinement-20261019/observations/final/tree-jdk.log",
+      "expected": "152720851c0a4fae11b7e4a8721d67457a8cc123",
+      "actual": "152720851c0a4fae11b7e4a8721d67457a8cc123",
+      "ok": true
+    },
+    {
+      "path": "m3/collections/qualification/m3-parser-filter-refinement-20261019/observations/final/tree-oracle-compile.command.json",
+      "expected": "86bc14f2eacff399f6c68fb2f7400f93eb477d44",
+      "actual": "86bc14f2eacff399f6c68fb2f7400f93eb477d44",
+      "ok": true
+    },
+    {
+      "path": "m3/collections/qualification/m3-parser-filter-refinement-20261019/observations/final/tree-oracle-compile.log",
+      "expected": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "actual": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "ok": true
+    },
+    {
+      "path": "m3/collections/qualification/m3-parser-filter-refinement-20261019/observations/final/tree-report.json",
+      "expected": "ee40724f887f11dceae3f1b4cfd025733a048968",
+      "actual": "ee40724f887f11dceae3f1b4cfd025733a048968",
+      "ok": true
+    },
+    {
+      "path": "m3/collections/qualification/m3-parser-filter-refinement-20261019/observations/incremental-output-anomaly.json",
+      "expected": "b8b404a4b44bec48c59af9b6fb17a6c28750f65a",
+      "actual": "b8b404a4b44bec48c59af9b6fb17a6c28750f65a",
+      "ok": true
+    },
+    {
+      "path": "m3/collections/qualification/m3-parser-filter-refinement-20261019/observations/jdk-640.jsonl",
+      "expected": "152720851c0a4fae11b7e4a8721d67457a8cc123",
+      "actual": "152720851c0a4fae11b7e4a8721d67457a8cc123",
+      "ok": true
+    },
+    {
+      "path": "m3/collections/qualification/m3-parser-filter-refinement-20261019/observations/jdk-640.jsonl.stderr",
+      "expected": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "actual": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "ok": true
+    },
+    {
+      "path": "m3/collections/qualification/m3-parser-filter-refinement-20261019/observations/jdt-compile.command.json",
+      "expected": "185c4915a7d5cd4768dd1a9e900aa6de9d54fabf",
+      "actual": "185c4915a7d5cd4768dd1a9e900aa6de9d54fabf",
+      "ok": true
+    },
+    {
+      "path": "m3/collections/qualification/m3-parser-filter-refinement-20261019/observations/jdt-compile.log",
+      "expected": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "actual": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "ok": true
+    },
+    {
+      "path": "m3/collections/qualification/m3-parser-filter-refinement-20261019/observations/jdt-dependencies.json",
+      "expected": "1db6c5c2ba76dbc01f83b94a82a2c3816c63d43f",
+      "actual": "1db6c5c2ba76dbc01f83b94a82a2c3816c63d43f",
+      "ok": true
+    },
+    {
+      "path": "m3/collections/qualification/m3-parser-filter-refinement-20261019/observations/jdt-runtime.command.json",
+      "expected": "5baf6c4bc1e70dc82cfa5883bd322282fb1fb926",
+      "actual": "5baf6c4bc1e70dc82cfa5883bd322282fb1fb926",
+      "ok": true
+    },
+    {
+      "path": "m3/collections/qualification/m3-parser-filter-refinement-20261019/observations/jdt-runtime.log",
+      "expected": "90ff399f3cb72c2fa794bc441de3402c2a356d90",
+      "actual": "90ff399f3cb72c2fa794bc441de3402c2a356d90",
+      "ok": true
+    },
+    {
+      "path": "m3/collections/qualification/m3-parser-filter-refinement-20261019/observations/jni-symbols.json",
+      "expected": "1516bc83015d46e43416dd6bddf7370608b8e778",
+      "actual": "1516bc83015d46e43416dd6bddf7370608b8e778",
+      "ok": true
+    },
+    {
+      "path": "m3/collections/qualification/m3-parser-filter-refinement-20261019/observations/master-640.jsonl",
+      "expected": "d927cee57e53038a0fba9242d2986cce68c2ff9f",
+      "actual": "d927cee57e53038a0fba9242d2986cce68c2ff9f",
+      "ok": true
+    },
+    {
+      "path": "m3/collections/qualification/m3-parser-filter-refinement-20261019/observations/master-640.jsonl.stderr",
+      "expected": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "actual": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "ok": true
+    },
+    {
+      "path": "m3/collections/qualification/m3-parser-filter-refinement-20261019/observations/native-baseline-library-compile.command.json",
+      "expected": "931295521e5725c9324d460a429582e9cbcd5509",
+      "actual": "931295521e5725c9324d460a429582e9cbcd5509",
+      "ok": true
+    },
+    {
+      "path": "m3/collections/qualification/m3-parser-filter-refinement-20261019/observations/native-baseline-library-compile.log",
+      "expected": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "actual": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "ok": true
+    },
+    {
+      "path": "m3/collections/qualification/m3-parser-filter-refinement-20261019/observations/native-java-compile.command.json",
+      "expected": "33c4831f76f95f39d339dc05ac757065b580508c",
+      "actual": "33c4831f76f95f39d339dc05ac757065b580508c",
+      "ok": true
+    },
+    {
+      "path": "m3/collections/qualification/m3-parser-filter-refinement-20261019/observations/native-java-compile.log",
+      "expected": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "actual": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "ok": true
+    },
+    {
+      "path": "m3/collections/qualification/m3-parser-filter-refinement-20261019/observations/native-jvm-runtime.command.json",
+      "expected": "da58f684cbfafaac6c53fc2c8c808032f7d2c99f",
+      "actual": "da58f684cbfafaac6c53fc2c8c808032f7d2c99f",
+      "ok": true
+    },
+    {
+      "path": "m3/collections/qualification/m3-parser-filter-refinement-20261019/observations/native-jvm-runtime.log",
+      "expected": "ee777b5010c952e463ad92f934da753527a146f6",
+      "actual": "ee777b5010c952e463ad92f934da753527a146f6",
+      "ok": true
+    },
+    {
+      "path": "m3/collections/qualification/m3-parser-filter-refinement-20261019/observations/native-library-compile.command.json",
+      "expected": "fbd8c6bacb1c7b455a52aa615d713b1b03ca2269",
+      "actual": "fbd8c6bacb1c7b455a52aa615d713b1b03ca2269",
+      "ok": true
+    },
+    {
+      "path": "m3/collections/qualification/m3-parser-filter-refinement-20261019/observations/native-library-compile.log",
+      "expected": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "actual": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "ok": true
+    },
+    {
+      "path": "m3/collections/qualification/m3-parser-filter-refinement-20261019/observations/native-traffic-before.log",
+      "expected": "eed4cf6d560f551d14c45f4ebc964e60cf0db7ed",
+      "actual": "eed4cf6d560f551d14c45f4ebc964e60cf0db7ed",
+      "ok": true
+    },
+    {
+      "path": "m3/collections/qualification/m3-parser-filter-refinement-20261019/observations/native-traffic-compile.command.json",
+      "expected": "d0b924ba06a6fe82a5b0046e7a2baeded22a5569",
+      "actual": "d0b924ba06a6fe82a5b0046e7a2baeded22a5569",
+      "ok": true
+    },
+    {
+      "path": "m3/collections/qualification/m3-parser-filter-refinement-20261019/observations/native-traffic-compile.log",
+      "expected": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "actual": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "ok": true
+    },
+    {
+      "path": "m3/collections/qualification/m3-parser-filter-refinement-20261019/observations/native-traffic-runtime.command.json",
+      "expected": "f90e78f98bcf6aaedf3df3c6230e5bd61f1c57b3",
+      "actual": "f90e78f98bcf6aaedf3df3c6230e5bd61f1c57b3",
+      "ok": true
+    },
+    {
+      "path": "m3/collections/qualification/m3-parser-filter-refinement-20261019/observations/native-traffic-runtime.log",
+      "expected": "2e7a40f68964df793a021907b844a50dbbf800af",
+      "actual": "2e7a40f68964df793a021907b844a50dbbf800af",
+      "ok": true
+    },
+    {
+      "path": "m3/collections/qualification/m3-parser-filter-refinement-20261019/observations/oracle-identity.json",
+      "expected": "29a73e534272e9f2c37f1b1059f5d8080fd64d02",
+      "actual": "29a73e534272e9f2c37f1b1059f5d8080fd64d02",
+      "ok": true
+    },
+    {
+      "path": "m3/collections/qualification/m3-parser-filter-refinement-20261019/observations/parser-original-after-M3CrossFrontendContract.command.json",
+      "expected": "d2e1108d1cae452d308ecd7f3be55ffd27be6649",
+      "actual": "d2e1108d1cae452d308ecd7f3be55ffd27be6649",
+      "ok": true
+    },
+    {
+      "path": "m3/collections/qualification/m3-parser-filter-refinement-20261019/observations/parser-original-after-M3CrossFrontendContract.log",
+      "expected": "b1686d5195e6b9bf3e53eb04c2d164f868c409dc",
+      "actual": "b1686d5195e6b9bf3e53eb04c2d164f868c409dc",
+      "ok": true
+    },
+    {
+      "path": "m3/collections/qualification/m3-parser-filter-refinement-20261019/observations/parser-original-after-M3ParserFrameworkContract.command.json",
+      "expected": "d6b93c132853df5d626ba66234e52184504154fb",
+      "actual": "d6b93c132853df5d626ba66234e52184504154fb",
+      "ok": true
+    },
+    {
+      "path": "m3/collections/qualification/m3-parser-filter-refinement-20261019/observations/parser-original-after-M3ParserFrameworkContract.log",
+      "expected": "553003871c76be8f6d3cddf896673ed8a8e87b82",
+      "actual": "553003871c76be8f6d3cddf896673ed8a8e87b82",
+      "ok": true
+    },
+    {
+      "path": "m3/collections/qualification/m3-parser-filter-refinement-20261019/observations/parser-original-after-compile.command.json",
+      "expected": "fc45af4ee5c2ff38727e326ac97168829e315474",
+      "actual": "fc45af4ee5c2ff38727e326ac97168829e315474",
+      "ok": true
+    },
+    {
+      "path": "m3/collections/qualification/m3-parser-filter-refinement-20261019/observations/parser-original-after-compile.log",
+      "expected": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "actual": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "ok": true
+    },
+    {
+      "path": "m3/collections/qualification/m3-parser-filter-refinement-20261019/observations/parser-original-before-M3CrossFrontendContract.command.json",
+      "expected": "2e8c22d18cd9c83bdddd23777a33705fa11f5681",
+      "actual": "2e8c22d18cd9c83bdddd23777a33705fa11f5681",
+      "ok": true
+    },
+    {
+      "path": "m3/collections/qualification/m3-parser-filter-refinement-20261019/observations/parser-original-before-M3CrossFrontendContract.log",
+      "expected": "b1686d5195e6b9bf3e53eb04c2d164f868c409dc",
+      "actual": "b1686d5195e6b9bf3e53eb04c2d164f868c409dc",
+      "ok": true
+    },
+    {
+      "path": "m3/collections/qualification/m3-parser-filter-refinement-20261019/observations/parser-original-before-M3ParserFrameworkContract.command.json",
+      "expected": "e90067fb795d745189e44a003b999b52a5eb1c4c",
+      "actual": "e90067fb795d745189e44a003b999b52a5eb1c4c",
+      "ok": true
+    },
+    {
+      "path": "m3/collections/qualification/m3-parser-filter-refinement-20261019/observations/parser-original-before-M3ParserFrameworkContract.log",
+      "expected": "553003871c76be8f6d3cddf896673ed8a8e87b82",
+      "actual": "553003871c76be8f6d3cddf896673ed8a8e87b82",
+      "ok": true
+    },
+    {
+      "path": "m3/collections/qualification/m3-parser-filter-refinement-20261019/observations/parser-original-before-compile-attempt1.command.json",
+      "expected": "69af39fe1688a9911bbdd3ae2c1f6c3438385fb0",
+      "actual": "69af39fe1688a9911bbdd3ae2c1f6c3438385fb0",
+      "ok": true
+    },
+    {
+      "path": "m3/collections/qualification/m3-parser-filter-refinement-20261019/observations/parser-original-before-compile-attempt1.log",
+      "expected": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "actual": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "ok": true
+    },
+    {
+      "path": "m3/collections/qualification/m3-parser-filter-refinement-20261019/observations/parser-original-before-compile.command.json",
+      "expected": "659703e5542e1854015810c122497a62d6d4073e",
+      "actual": "659703e5542e1854015810c122497a62d6d4073e",
+      "ok": true
+    },
+    {
+      "path": "m3/collections/qualification/m3-parser-filter-refinement-20261019/observations/parser-original-before-compile.log",
+      "expected": "660cc6d5f721bbf53f64bdb02be8e34051a1a5f8",
+      "actual": "660cc6d5f721bbf53f64bdb02be8e34051a1a5f8",
+      "ok": true
+    },
+    {
+      "path": "m3/collections/qualification/m3-parser-filter-refinement-20261019/observations/receiver-guard.log",
+      "expected": "3e79a6760cadc707b2b07302ce92c5aa7df70658",
+      "actual": "3e79a6760cadc707b2b07302ce92c5aa7df70658",
+      "ok": true
+    },
+    {
+      "path": "m3/collections/qualification/m3-parser-filter-refinement-20261019/observations/recipe-engine-identity.json",
+      "expected": "75b47926364d3e2c71cdde72fb88b3791fc824b5",
+      "actual": "75b47926364d3e2c71cdde72fb88b3791fc824b5",
+      "ok": true
+    },
+    {
+      "path": "m3/collections/qualification/m3-parser-filter-refinement-20261019/observations/recipe-sdk.log",
+      "expected": "eb6724f2e0bc196486c42431bb8a8d85fb6eac94",
+      "actual": "eb6724f2e0bc196486c42431bb8a8d85fb6eac94",
+      "ok": true
+    },
+    {
+      "path": "m3/collections/qualification/m3-parser-filter-refinement-20261019/observations/sdk-receipt.json",
+      "expected": "d7793ee5bbef56f9c7945654be9c48cda57e3604",
+      "actual": "d7793ee5bbef56f9c7945654be9c48cda57e3604",
+      "ok": true
+    },
+    {
+      "path": "m3/collections/qualification/m3-parser-filter-refinement-20261019/observations/toolchain.json",
+      "expected": "6868cf8a82f94d179e8e6f6d00b4fd92f68f3670",
+      "actual": "6868cf8a82f94d179e8e6f6d00b4fd92f68f3670",
+      "ok": true
+    },
+    {
+      "path": "m3/collections/qualification/m3-parser-filter-refinement-20261019/observations/trace-parity-final.json",
+      "expected": "53001d21af038c66e20aa116e369f3bf8892a636",
+      "actual": "53001d21af038c66e20aa116e369f3bf8892a636",
+      "ok": true
+    },
+    {
+      "path": "m3/collections/qualification/m3-parser-filter-refinement-20261019/observations/trace-parity.json",
+      "expected": "21312dcfd610e8c91cc7dd6cd7fa88b3e6a7b20f",
+      "actual": "21312dcfd610e8c91cc7dd6cd7fa88b3e6a7b20f",
+      "ok": true
+    },
+    {
+      "path": "m3/collections/qualification/m3-parser-filter-refinement-20261019/observations/workspace-compile-attempt1.command.json",
+      "expected": "746da38f66eea69a51ec95233c91d41f0ce1dae5",
+      "actual": "746da38f66eea69a51ec95233c91d41f0ce1dae5",
+      "ok": true
+    },
+    {
+      "path": "m3/collections/qualification/m3-parser-filter-refinement-20261019/observations/workspace-compile-attempt1.log",
+      "expected": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "actual": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "ok": true
+    },
+    {
+      "path": "m3/collections/qualification/m3-parser-filter-refinement-20261019/observations/workspace-compile.command.json",
+      "expected": "746da38f66eea69a51ec95233c91d41f0ce1dae5",
+      "actual": "746da38f66eea69a51ec95233c91d41f0ce1dae5",
+      "ok": true
+    },
+    {
+      "path": "m3/collections/qualification/m3-parser-filter-refinement-20261019/observations/workspace-compile.log",
+      "expected": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "actual": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "ok": true
+    },
+    {
+      "path": "m3/collections/qualification/m3-parser-filter-refinement-20261019/observations/workspace-runtime-attempt1.command.json",
+      "expected": "204ddd9d14c2055e79a404cb0ee03cc9bc4718aa",
+      "actual": "204ddd9d14c2055e79a404cb0ee03cc9bc4718aa",
+      "ok": true
+    },
+    {
+      "path": "m3/collections/qualification/m3-parser-filter-refinement-20261019/observations/workspace-runtime-attempt1.log",
+      "expected": "01775f53e91cc75e67d3c05f2338b7defb61c4aa",
+      "actual": "01775f53e91cc75e67d3c05f2338b7defb61c4aa",
+      "ok": true
+    },
+    {
+      "path": "m3/collections/qualification/m3-parser-filter-refinement-20261019/observations/workspace-runtime.command.json",
+      "expected": "204ddd9d14c2055e79a404cb0ee03cc9bc4718aa",
+      "actual": "204ddd9d14c2055e79a404cb0ee03cc9bc4718aa",
+      "ok": true
+    },
+    {
+      "path": "m3/collections/qualification/m3-parser-filter-refinement-20261019/observations/workspace-runtime.log",
+      "expected": "2fc9da427e895217fff5170552eb0caaf04a1c23",
+      "actual": "2fc9da427e895217fff5170552eb0caaf04a1c23",
+      "ok": true
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java",
+      "expected": "ad4ebf2f6ccce79b3d8f3fe1f3a513f5ade4d378",
+      "actual": "ad4ebf2f6ccce79b3d8f3fe1f3a513f5ade4d378",
+      "ok": true
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3SlotMap.java",
+      "expected": "e4bcf701a32bbcf0cc201030ebb2cff216bc9115",
+      "actual": "e4bcf701a32bbcf0cc201030ebb2cff216bc9115",
+      "ok": true
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3TreeMap.java",
+      "expected": "bcb9c73bc8a4244695db627a483b99a671d60df8",
+      "actual": "bcb9c73bc8a4244695db627a483b99a671d60df8",
+      "ok": true
+    },
+    {
+      "path": "m3/collections/src/main/native/collections/m3_index_mask_compactor.c",
+      "expected": "795a55d3b8646940fea5748c39bbcddc68e2122f",
+      "actual": "795a55d3b8646940fea5748c39bbcddc68e2122f",
+      "ok": true
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3FilteredTerminalTrace.java",
+      "expected": "37c430377ca8e6552cade749b6d3738bad5ea851",
+      "actual": "37c430377ca8e6552cade749b6d3738bad5ea851",
+      "ok": true
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3SparseMaskReadContract.java",
+      "expected": "57a23e8d744d10f760d9930a8b33c716e4585bc6",
+      "actual": "57a23e8d744d10f760d9930a8b33c716e4585bc6",
+      "ok": true
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3TreeMapEmptyLookupTest.java",
+      "expected": "95aee590ff9732f38f4064be626188a088c518e6",
+      "actual": "95aee590ff9732f38f4064be626188a088c518e6",
+      "ok": true
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3TreeMapGetOrDefaultTest.java",
+      "expected": "73183c6420cb782fdddcfbdb4fdd3196f8298227",
+      "actual": "73183c6420cb782fdddcfbdb4fdd3196f8298227",
+      "ok": true
+    },
+    {
+      "path": "m3/collections/src/test/native/m3_sparse_mask_reads.c",
+      "expected": "1888952af54008e62d88518fd370290284e347a4",
+      "actual": "1888952af54008e62d88518fd370290284e347a4",
+      "ok": true
+    },
+    {
+      "path": "m3/tooling/module-packs/parser/src/integration/java/jdk/m3/parser/test/M3JdtEquinoxContract.java",
+      "expected": "9420f878fc86a47bf0ec157ea4e6b9769a42d58f",
+      "actual": "9420f878fc86a47bf0ec157ea4e6b9769a42d58f",
+      "ok": true
+    },
+    {
+      "path": "m3/tooling/module-packs/parser/src/integration/java/jdk/m3/parser/test/M3JdtSemanticContract.java",
+      "expected": "9afbe80178de390736382058ff5cb996d6615ebd",
+      "actual": "9afbe80178de390736382058ff5cb996d6615ebd",
+      "ok": true
+    },
+    {
+      "path": "m3/tooling/module-packs/parser/src/integration/java/jdk/m3/parser/test/M3JdtWorkspaceProbe.java",
+      "expected": "0a988411d880886e74e59c7ec533d543a366724b",
+      "actual": "0a988411d880886e74e59c7ec533d543a366724b",
+      "ok": true
+    },
+    {
+      "path": "m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3ASTIndex.java",
+      "expected": "9446e8734164cd6d8dcfd1904013e064f27f7069",
+      "actual": "9446e8734164cd6d8dcfd1904013e064f27f7069",
+      "ok": true
+    },
+    {
+      "path": "m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3ASTIngress.java",
+      "expected": "986291be1b4b41e150cff8c68299afff8d138b88",
+      "actual": "986291be1b4b41e150cff8c68299afff8d138b88",
+      "ok": true
+    }
+  ]
+}

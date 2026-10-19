@@ -1,0 +1,21 @@
+Compiled from "M3FilteredViews.java"
+class com.m3.collections.M3FilteredViews$SortedSetView<E> extends com.m3.collections.M3FilteredViews$SetView<E> implements java.util.SortedSet<E> {
+  protected final java.util.SortedSet<E> sorted;
+  protected final java.util.function.Predicate<? super E> predicate;
+  com.m3.collections.M3FilteredViews$SortedSetView(java.util.SortedSet<E>, java.util.function.Predicate<? super E>);
+  public java.util.Comparator<? super E> comparator();
+  public java.util.Spliterator<E> spliterator();
+  public boolean contains(java.lang.Object);
+  public java.util.SortedSet<E> subSet(E, E);
+  public java.util.SortedSet<E> headSet(E);
+  public java.util.SortedSet<E> tailSet(E);
+  public java.util.SortedSet<E> reversed();
+  public E removeFirst();
+  public E removeLast();
+  public void addFirst(E);
+  public void addLast(E);
+  public E first();
+  public E last();
+  public java.util.SequencedSet reversed();
+  public java.util.SequencedCollection reversed();
+}
