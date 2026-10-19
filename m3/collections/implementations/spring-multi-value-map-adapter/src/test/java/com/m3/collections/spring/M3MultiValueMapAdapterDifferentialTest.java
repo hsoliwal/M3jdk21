@@ -18,6 +18,7 @@ import java.util.Map;
 import java.util.Random;
 import java.util.concurrent.Callable;
 import java.util.concurrent.atomic.AtomicLong;
+import java.util.logging.Logger;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -34,6 +35,7 @@ import org.springframework.util.MultiValueMapAdapter;
 final class M3MultiValueMapAdapterDifferentialTest {
     static final AtomicLong CHECKS = new AtomicLong();
     static final AtomicLong OPERATIONS = new AtomicLong();
+    private static final Logger LOG = Logger.getLogger(M3MultiValueMapAdapterDifferentialTest.class.getName());
     private static final int OPS_PER_SEED = 12_000;
 
     private final Map<String, List<Integer>> oracleTarget = new LinkedHashMap<>();
@@ -43,7 +45,7 @@ final class M3MultiValueMapAdapterDifferentialTest {
 
     @AfterAll
     static void report() {
-        System.out.println("M3MultiValueMapAdapter differential: operations=" + OPERATIONS.get() + " checks=" + CHECKS.get());
+        LOG.info(() -> "M3MultiValueMapAdapter differential: operations=" + OPERATIONS.get() + " checks=" + CHECKS.get());
     }
 
     @ParameterizedTest

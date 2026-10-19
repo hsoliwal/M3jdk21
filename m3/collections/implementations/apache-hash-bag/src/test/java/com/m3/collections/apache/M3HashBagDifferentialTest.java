@@ -18,6 +18,7 @@ import java.util.Map;
 import java.util.Random;
 import java.util.concurrent.Callable;
 import java.util.concurrent.atomic.AtomicLong;
+import java.util.logging.Logger;
 import java.util.function.Predicate;
 import org.apache.commons.collections4.Bag;
 import org.apache.commons.collections4.bag.HashBag;
@@ -34,6 +35,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 final class M3HashBagDifferentialTest {
     static final AtomicLong CHECKS = new AtomicLong();
     static final AtomicLong OPERATIONS = new AtomicLong();
+    private static final Logger LOG = Logger.getLogger(M3HashBagDifferentialTest.class.getName());
     private static final int OPS_PER_SEED = 12_000;
 
     private final Bag<Integer> oracle = new HashBag<>();
@@ -41,7 +43,7 @@ final class M3HashBagDifferentialTest {
 
     @AfterAll
     static void report() {
-        System.out.println("M3HashBag differential: operations=" + OPERATIONS.get() + " checks=" + CHECKS.get());
+        LOG.info(() -> "M3HashBag differential: operations=" + OPERATIONS.get() + " checks=" + CHECKS.get());
     }
 
     @ParameterizedTest
