@@ -106,3 +106,32 @@ resource lifetime, JFR allocation/cost benchmarks, LFU/pressure and
 installed-image parity **remain separate acceptance gates**.
 Authoritative reference payloads must not be dropped under pressure;
 M3LFU can reclaim only qualified/reconstructible derived data.
+
+## Integrated execution after primitive predicate convergence
+
+After the second additive source merge and the Windows-path-only CI
+checkout correction, the exact integrated head passed the four
+focused GitHub Actions workflows:
+
+- [M3JDK21 DOOP Java/JNI convergence, run 39196975949](https://github.com/hsoliwal/M3jdk21/actions/runs/39196975949)
+  — PASS both jobs. Java-only and `NATIVE_REQUIRED` JNI masks,
+  checked native JNI crossings, and actual patched `java.base` oracles.
+  Assertions across six pre-existing oracles total **857,528**.
+- The same combined job executes original `M3LongDeepFilterSelfTest`:
+  `M3_DEEP_FILTER_PASS assertions=3119 depth=100000`.
+  Combined distinct assertions: **860,647**.
+- [M3 balanced primitive views, run 39196976031](https://github.com/hsoliwal/M3jdk21/actions/runs/39196976031)
+  — PASS on Linux, macOS **and Windows**. On Windows, both normal and
+  `-Xint` with `-Xss256k` pass 3,119 assertions each; failure to
+  checkout unrelated long recipe-custody paths was eliminated by
+  restricting checkout to the original module owner directories.
+- [M3 DOOP index views, run 39196976050](https://github.com/hsoliwal/M3jdk21/actions/runs/39196976050)
+  — PASS.
+- [Actual JDK map sources, run 39196976037](https://github.com/hsoliwal/M3jdk21/actions/runs/39196976037)
+  — PASS.
+
+These are reproducible focused CI receipts, **not** completed full
+JDK HotSpot image, jtreg, JFR performance, synchronized/weak-reference,
+M3LFU or memory pressure admission. Broader repository workflows may
+still fail independently of these focused owner gates. Do not clear
+the overall release status based only on these jobs.
