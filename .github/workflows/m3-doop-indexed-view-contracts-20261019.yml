@@ -37,7 +37,7 @@ jobs:
         run: |
           set -euo pipefail
           mkdir -p target/doop-view-classes
-          javac --release 21 -Xlint:all,-serial -Werror \
+          javac --release 21 -Xlint:all,-serial,-module -Werror \
             -d target/doop-view-classes \
             -sourcepath m3/collections/src/main/java:m3/collections/src/test/java \
             m3/collections/src/test/java/com/m3/collections/M3ReadonlyFilteredSlotSelfTest.java \
