@@ -6,7 +6,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.m3.collections</groupId><artifactId>m3-five-provider-scaffold-aggregator</artifactId><version>0.1.0-SNAPSHOT</version><packaging>pom</packaging>
   <name>M3 five-provider scaffold aggregator</name>
-  <description>127 SCAFFOLD modules generated from INVENTORY.tsv OPEN rows; none is an owned implementation.</description>
+  <description>126 SCAFFOLD modules generated from INVENTORY.tsv OPEN rows; none is an owned implementation.</description>
   <modules>
     <module>apache-abstract-hashed-map</module>
     <module>apache-array-list-valued-linked-hash-map</module>
@@ -134,6 +134,5 @@
     <module>jdk-synchronous-queue</module>
     <module>spring-auto-populating-list</module>
     <module>spring-concurrent-reference-hash-map</module>
-    <module>spring-multi-value-map-adapter</module>
   </modules>
 </project>

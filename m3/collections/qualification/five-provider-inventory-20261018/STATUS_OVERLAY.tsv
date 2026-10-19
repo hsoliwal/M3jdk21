@@ -52,7 +52,7 @@ com.google.common.collect.ArrayTable	OPEN	-	-	core M3IndexedTable; viewport pack
 com.google.common.collect.TreeRangeSet	OPEN	-	-	#1403 M3RangeSet + M3OrderStatisticForest; core M3LongRangeSet	-
 com.google.common.collect.ImmutableRangeSet	OPEN	-	-	#1403 M3RangeSet; core M3LongRangeSet	-
 com.google.common.collect.ImmutableRangeMap	OPEN	-	-	#1264 M3ObjectRangeMap	-
-org.springframework.util.MultiValueMapAdapter	OPEN	-	-	spring M3MultiValueMap	fill order e (LinkedMultiValueMap already owned)
+org.springframework.util.MultiValueMapAdapter	DONE #1469	com.m3.collections.spring.M3MultiValueMapAdapter	PR #1469: implementations/spring-multi-value-map-adapter + qualification/owned-spring-multi-value-map-adapter-20261019	spring M3MultiValueMap (protocol); JDK ArrayList (in-place M3 lanes)	fill order e (LinkedMultiValueMap already owned)
 org.apache.commons.collections4.map.CaseInsensitiveMap	OPEN	-	-	#1269 casefold lanes	-
 org.apache.commons.collections4.map.LinkedMap	OPEN	-	-	core M3LinkedHashMap	-
 org.apache.commons.collections4.map.ListOrderedMap	OPEN	-	-	core M3LinkedHashMap	-
