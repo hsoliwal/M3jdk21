@@ -10,6 +10,7 @@ import java.util.AbstractSet;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.NavigableMap;
@@ -19,6 +20,7 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.SortedMap;
 import java.util.SortedSet;
+import java.util.function.BiConsumer;
 import java.util.function.BiPredicate;
 import java.util.function.Predicate;
 
@@ -311,14 +313,37 @@ public final class M3FilteredViews {
             this.sorted = Objects.requireNonNull(sorted, "sorted");
             this.predicate = Objects.requireNonNull(predicate, "predicate");
         }
+        /** The original M3 AVL owner, not an adapter or a secondary collection. */
+        @SuppressWarnings("unchecked")
+        protected final M3TreeMap<K, V> indexed() {
+            return sorted instanceof M3TreeMap<?, ?> m3 ? (M3TreeMap<K, V>) m3 : null;
+        }
+        protected final boolean visibleSlot(M3TreeMap<K, V> owner, int slot) {
+            return predicate.test(owner.keyAt(slot), owner.valueAt(slot));
+        }
+        protected final int boundarySlot(M3TreeMap<K, V> owner, boolean first) {
+            int slot = first ? owner.firstSlot() : owner.lastSlot();
+            while (slot >= 0 && !visibleSlot(owner, slot)) {
+                slot = first ? owner.nextSlot(slot) : owner.previousIndexedSlot(slot);
+            }
+            return slot;
+        }
         @Override public Comparator<? super K> comparator() { return sorted.comparator(); }
         @Override public int size() {
+            M3TreeMap<K, V> owner = indexed();
             int count = 0;
-            for (Entry<K, V> entry : sorted.entrySet())
-                if (predicate.test(entry.getKey(), entry.getValue())) count++;
+            if (owner != null) {
+                for (int slot = owner.firstSlot(); slot >= 0; slot = owner.nextSlot(slot))
+                    if (visibleSlot(owner, slot)) count++;
+            } else {
+                for (Entry<K, V> entry : sorted.entrySet())
+                    if (predicate.test(entry.getKey(), entry.getValue())) count++;
+            }
             return count;
         }
         @Override public boolean isEmpty() {
+            M3TreeMap<K, V> owner = indexed();
+            if (owner != null) return boundarySlot(owner, true) < 0;
             return !filtered(sorted.entrySet().iterator(),
                     item -> predicate.test(item.getKey(), item.getValue())).hasNext();
         }
@@ -328,14 +353,28 @@ public final class M3FilteredViews {
          * when the query is a distinct comparator-equivalent object.
          */
         protected K storedKey(Object query) {
+            M3TreeMap<K, V> owner = indexed();
+            if (owner != null) return owner.keyAt(owner.findSlot(query));
             @SuppressWarnings("unchecked") K alias = (K) query;
             return sorted.tailMap(alias).firstKey();
         }
         @Override public boolean containsKey(Object key) {
+            M3TreeMap<K, V> owner = indexed();
+            if (owner != null) {
+                int slot = owner.findSlot(key);
+                return slot >= 0 && visibleSlot(owner, slot);
+            }
             if (!sorted.containsKey(key)) return false;
             return predicate.test(storedKey(key), sorted.get(key));
         }
         @Override public V get(Object key) {
+            M3TreeMap<K, V> owner = indexed();
+            if (owner != null) {
+                int slot = owner.findSlot(key);
+                if (slot < 0) return null;
+                V value = owner.valueAt(slot);
+                return predicate.test(owner.keyAt(slot), value) ? value : null;
+            }
             if (!sorted.containsKey(key)) return null;
             V value = sorted.get(key);
             return predicate.test(storedKey(key), value) ? value : null;
@@ -344,6 +383,28 @@ public final class M3FilteredViews {
             return new AbstractSet<>() {
                 @Override public int size() { return SortedMapView.this.size(); }
                 @Override public Iterator<Entry<K, V>> iterator() {
+                    M3TreeMap<K, V> owner = indexed();
+                    if (owner != null) {
+                        return new Iterator<>() {
+                            private int next = owner.firstSlot();
+                            private final int expected = owner.revision();
+                            private void check() {
+                                if (expected != owner.revision()) throw new ConcurrentModificationException();
+                            }
+                            @Override public boolean hasNext() {
+                                check();
+                                while (next >= 0 && !visibleSlot(owner, next)) next = owner.nextSlot(next);
+                                return next >= 0;
+                            }
+                            @Override public Entry<K, V> next() {
+                                if (!hasNext()) throw new NoSuchElementException();
+                                int slot = next;
+                                next = owner.nextSlot(slot);
+                                return new SimpleImmutableEntry<>(owner.keyAt(slot), owner.valueAt(slot));
+                            }
+                            @Override public void remove() { throw readonly(); }
+                        };
+                    }
                     Iterator<Entry<K, V>> cursor = sorted.entrySet().iterator();
                     Iterator<Entry<K, V>> filtered = M3FilteredViews.filtered(cursor,
                             item -> predicate.test(item.getKey(), item.getValue()));
@@ -361,16 +422,125 @@ public final class M3FilteredViews {
             };
         }
         @Override public K firstKey() {
+            M3TreeMap<K, V> owner = indexed();
+            if (owner != null) {
+                int slot = boundarySlot(owner, true);
+                if (slot < 0) throw new NoSuchElementException();
+                return owner.keyAt(slot);
+            }
             Iterator<Entry<K, V>> cursor = entrySet().iterator();
             if (!cursor.hasNext()) throw new NoSuchElementException();
             return cursor.next().getKey();
         }
         @Override public K lastKey() {
+            M3TreeMap<K, V> owner = indexed();
+            if (owner != null) {
+                int slot = boundarySlot(owner, false);
+                if (slot < 0) throw new NoSuchElementException();
+                return owner.keyAt(slot);
+            }
             Iterator<Entry<K, V>> cursor = entrySet().iterator();
             if (!cursor.hasNext()) throw new NoSuchElementException();
             K key = cursor.next().getKey();
             while (cursor.hasNext()) key = cursor.next().getKey();
             return key;
+        }
+        /** Direct value cursor: ordinary values iteration never creates a Map.Entry. */
+        @Override public Collection<V> values() {
+            M3TreeMap<K, V> owner = indexed();
+            if (owner == null) return super.values();
+            return new AbstractCollection<>() {
+                @Override public int size() { return SortedMapView.this.size(); }
+                @Override public Iterator<V> iterator() {
+                    return new Iterator<>() {
+                        private int next = owner.firstSlot();
+                        private final int expected = owner.revision();
+                        private void check() {
+                            if (expected != owner.revision()) throw new ConcurrentModificationException();
+                        }
+                        @Override public boolean hasNext() {
+                            check();
+                            while (next >= 0 && !visibleSlot(owner, next)) next = owner.nextSlot(next);
+                            return next >= 0;
+                        }
+                        @Override public V next() {
+                            if (!hasNext()) throw new NoSuchElementException();
+                            int slot = next;
+                            next = owner.nextSlot(slot);
+                            return owner.valueAt(slot);
+                        }
+                        @Override public void remove() { throw readonly(); }
+                    };
+                }
+            };
+        }
+        @Override public boolean containsValue(Object value) {
+            M3TreeMap<K, V> owner = indexed();
+            if (owner == null) return super.containsValue(value);
+            for (int slot = owner.firstSlot(); slot >= 0; slot = owner.nextSlot(slot)) {
+                V stored = owner.valueAt(slot);
+                if (predicate.test(owner.keyAt(slot), stored) && Objects.equals(value, stored))
+                    return true;
+            }
+            return false;
+        }
+        @Override public void forEach(BiConsumer<? super K, ? super V> consumer) {
+            Objects.requireNonNull(consumer, "consumer");
+            M3TreeMap<K, V> owner = indexed();
+            if (owner == null) { super.forEach(consumer); return; }
+            int expected = owner.revision();
+            for (int slot = owner.firstSlot(); slot >= 0; slot = owner.nextSlot(slot)) {
+                K key = owner.keyAt(slot);
+                V value = owner.valueAt(slot);
+                if (predicate.test(key, value)) consumer.accept(key, value);
+                if (expected != owner.revision()) throw new ConcurrentModificationException();
+            }
+        }
+        @Override public int hashCode() {
+            M3TreeMap<K, V> owner = indexed();
+            if (owner == null) return super.hashCode();
+            int hash = 0;
+            for (int slot = owner.firstSlot(); slot >= 0; slot = owner.nextSlot(slot)) {
+                K key = owner.keyAt(slot);
+                V value = owner.valueAt(slot);
+                if (predicate.test(key, value))
+                    hash += Objects.hashCode(key) ^ Objects.hashCode(value);
+            }
+            return hash;
+        }
+        @Override public boolean equals(Object other) {
+            if (this == other) return true;
+            M3TreeMap<K, V> owner = indexed();
+            if (owner == null) return super.equals(other);
+            if (!(other instanceof Map<?, ?> map) || map.size() != size()) return false;
+            try {
+                for (int slot = owner.firstSlot(); slot >= 0; slot = owner.nextSlot(slot)) {
+                    K key = owner.keyAt(slot);
+                    V value = owner.valueAt(slot);
+                    if (predicate.test(key, value)
+                            && (!Objects.equals(value, map.get(key))
+                            || value == null && !map.containsKey(key))) return false;
+                }
+            } catch (ClassCastException | NullPointerException ex) {
+                return false;
+            }
+            return true;
+        }
+        @Override public String toString() {
+            M3TreeMap<K, V> owner = indexed();
+            if (owner == null) return super.toString();
+            StringBuilder builder = new StringBuilder("{");
+            boolean comma = false;
+            for (int slot = owner.firstSlot(); slot >= 0; slot = owner.nextSlot(slot)) {
+                K key = owner.keyAt(slot);
+                V value = owner.valueAt(slot);
+                if (!predicate.test(key, value)) continue;
+                if (comma) builder.append(", ");
+                comma = true;
+                builder.append(key == this ? "(this Map)" : key).append('=')
+                        .append(value == this ? "(this Map)" : value);
+            }
+            return builder.append('}').toString();
         }
         @Override public SortedMap<K, V> subMap(K from, K to) {
             return new SortedMapView<>(sorted.subMap(from, to), predicate);
@@ -396,10 +566,36 @@ public final class M3FilteredViews {
             nav = source;
         }
         @Override protected K storedKey(Object key) {
+            M3TreeMap<K, V> owner = indexed();
+            if (owner != null) return owner.keyAt(owner.findSlot(key));
             @SuppressWarnings("unchecked") K alias = (K) key;
             // A matching key exists (checked by containsKey); floorEntry
             // retrieves its stored comparator-equivalent representative.
             return nav.floorEntry(alias).getKey();
+        }
+
+        /** Search by the existing bounded AVL neighbor index, skipping hidden slots. */
+        private int indexedNeighbor(M3TreeMap<K, V> owner, K query,
+                boolean forward, boolean inclusive) {
+            int relation = forward ? (inclusive ? 1 : 2) : (inclusive ? -1 : -2);
+            int slot = owner.nearIndexedSlot(query, relation);
+            while (slot >= 0 && !visibleSlot(owner, slot)) {
+                slot = forward ? owner.nextSlot(slot) : owner.previousIndexedSlot(slot);
+            }
+            return slot;
+        }
+        private Entry<K, V> indexedEntry(M3TreeMap<K, V> owner, int slot) {
+            return slot < 0 ? null : new SimpleImmutableEntry<>(owner.keyAt(slot), owner.valueAt(slot));
+        }
+        private K indexedKey(M3TreeMap<K, V> owner, int slot) {
+            return slot < 0 ? null : owner.keyAt(slot);
+        }
+        private K boundKey(K key, boolean forward, boolean inclusive) {
+            M3TreeMap<K, V> owner = indexed();
+            if (owner != null) {
+                return indexedKey(owner, indexedNeighbor(owner, key, forward, inclusive));
+            }
+            return keyOf(boundedEntry(key, forward, inclusive));
         }
         /**
          * Select the first visible entry from a bounded backing iterator and detach it
@@ -418,6 +614,10 @@ public final class M3FilteredViews {
          * comparator-backed bounded iterator, retaining each stored key/value.
          */
         private Entry<K, V> boundedEntry(K query, boolean forward, boolean inclusive) {
+            M3TreeMap<K, V> owner = indexed();
+            if (owner != null) {
+                return indexedEntry(owner, indexedNeighbor(owner, query, forward, inclusive));
+            }
             Iterator<Entry<K, V>> cursor;
             try {
                 cursor = forward ? nav.tailMap(query, inclusive).entrySet().iterator()
@@ -442,35 +642,31 @@ public final class M3FilteredViews {
         @Override public Entry<K, V> lowerEntry(K key) {
             return boundedEntry(key, false, false);
         }
-        @Override public K lowerKey(K key) { return keyOf(lowerEntry(key)); }
+        @Override public K lowerKey(K key) { return boundKey(key, false, false); }
         @Override public Entry<K, V> floorEntry(K key) {
             return boundedEntry(key, false, true);
         }
-        @Override public K floorKey(K key) { return keyOf(floorEntry(key)); }
+        @Override public K floorKey(K key) { return boundKey(key, false, true); }
         @Override public Entry<K, V> ceilingEntry(K key) {
             return boundedEntry(key, true, true);
         }
-        @Override public K ceilingKey(K key) { return keyOf(ceilingEntry(key)); }
+        @Override public K ceilingKey(K key) { return boundKey(key, true, true); }
         @Override public Entry<K, V> higherEntry(K key) {
             return boundedEntry(key, true, false);
         }
-        @Override public K higherKey(K key) { return keyOf(higherEntry(key)); }
+        @Override public K higherKey(K key) { return boundKey(key, true, false); }
         @Override public Entry<K, V> firstEntry() {
-            return firstVisible(nav.entrySet().iterator());
+            M3TreeMap<K, V> owner = indexed();
+            return owner == null ? firstVisible(nav.entrySet().iterator())
+                    : indexedEntry(owner, boundarySlot(owner, true));
         }
         @Override public Entry<K, V> lastEntry() {
-            return firstVisible(nav.descendingMap().entrySet().iterator());
+            M3TreeMap<K, V> owner = indexed();
+            return owner == null ? firstVisible(nav.descendingMap().entrySet().iterator())
+                    : indexedEntry(owner, boundarySlot(owner, false));
         }
-        @Override public K firstKey() {
-            Entry<K, V> e = firstEntry();
-            if (e == null) throw new NoSuchElementException();
-            return e.getKey();
-        }
-        @Override public K lastKey() {
-            Entry<K, V> e = lastEntry();
-            if (e == null) throw new NoSuchElementException();
-            return e.getKey();
-        }
+        @Override public K firstKey() { return super.firstKey(); }
+        @Override public K lastKey() { return super.lastKey(); }
         private K keyOf(Entry<K, V> entry) { return entry == null ? null : entry.getKey(); }
         @Override public Entry<K, V> pollFirstEntry() { throw readonly(); }
         @Override public Entry<K, V> pollLastEntry() { throw readonly(); }
