@@ -23,7 +23,7 @@ source Synexia owner. Repeated source rows remain separate stable record IDs
 while the downstream M3LEX image may deduplicate identical UTF-16 values.
 
 The companion `language-resource-discovery.tsv` is a searchable,
-release-aware catalogue of 145 **reference-only** candidates.
+release-aware catalogue of 161 **reference-only** candidates.
 An earlier discovery pass added 14 reference-only leads: GATITOS bilingual pairs; Swedish Flex/Kubord frequencies, LEXIN, Parole+ and given-name forms; Linguabase's English lexical graph; Bashkir frequency and n-gram indexes; EuroVoc; Czech MorfFlex; Icelandic DMII; Japanese UniDic; and Taiwan's Taigi dictionary. Every row carries its own version, identity and rights caveats. In particular, noncommercial/share-alike, no-derivatives, component-level licensing, unresolved upstream corpus rights, and release-metadata inconsistencies block payload admission. No data files were downloaded or copied.
  In addition to
 dictionaries, grammar, translation, frequency, names, units and speech sources,
@@ -91,6 +91,9 @@ is a **data** recipe, not a substitute source-rewrite recipe. No `java.base`
 behavior, installed JMOD, native ABI, or public collection contract is changed.
 
 The latest internet-source pass adds ten distinct leads: MASSIVE for localized intent/slot utterances; MADAR and SAMER for Arabic dialect forms and readability; SIL's Bloom collection and ARBML's Masader as discovery indexes; Vocab Bloom Hub for an AI-generated dictionary/grammar export; MADLAD-400 for language-sharded corpus precompute; Wikidata's 2025 multilingual entity labels; BhasaAnuvaad for Indic speech/text alignment; and IATE for domain terminology. All ten remain reference-only. In particular, SAMER is not distributable, Bloom and Masader are indexes rather than blanket-licensed payloads, IATE export terms must be checked, and generated or web-crawled resources are not treated as canonical language truth. No dataset payload was downloaded.
+
+
+A follow-on source review adds 16 more reference-only records and strengthens the existing GF grammar row: MAGRAM grammaticalization paths, Ge'ez-family materials, KELLY learner/frequency mappings, low-resource Gamayun kits, AfriSpeech verse alignment, licensed Yoruba dictionaries, FrequencyWords and Lexique frequency/morphology, AGROVOC and GEMET domain terms, Dakshina script romanization, Lexibank/ACD comparative wordlists, Teanu dictionary senses, India's CSTT Shabd technical terms, and CFILT IndoWordnet synset links. These are complementary data types, not interchangeable dictionaries: romanization is not translation; source counts are not language-normalized probabilities; wordlist concepts/cognates are not sense equivalence; and language-specific or contributor-level rights must remain attached. Every new row is `REFERENCE_ONLY`; no corpus was downloaded.
 
 ## Testing, donor decisions, and limits
 
