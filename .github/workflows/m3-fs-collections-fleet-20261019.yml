@@ -1,0 +1,105 @@
+# Copyright 2026 Hitesh Soliwal and contributors
+# SPDX-License-Identifier: Apache-2.0
+# Canonical source: Synexia m3-fs-collections-fleet-20261019/bootstrap/target-workflow.yml
+name: M3FS collections source and baseline qualification
+on:
+  push:
+    branches: ['m3/fs-collections-fleet-convergence-20261019']
+    paths:
+      - 'm3/qualification/fs-collections-fleet-20261019/bootstrap/**'
+      - '.github/workflows/m3-fs-collections-fleet-20261019.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  pinned-input:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: m3/qualification/fs-collections-fleet-20261019
+          persist-credentials: false
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Capture pinned public product sources and immutable donor trees
+        shell: bash
+        run: |
+          set -euo pipefail
+          out="$RUNNER_TEMP/m3-fleet-input"
+          mkdir -p "$out/sources" "$out/dependencies"
+          repo="$RUNNER_TEMP/m3-fleet-pinned.git"
+          git clone --bare --filter=blob:none --depth=1 https://github.com/hsoliwal/M3jdk21.git "$repo"
+          extract() {
+            local name=$1 pin=$2
+            shift 2
+            git -C "$repo" fetch --depth=1 origin "$pin"
+            test "$(git -C "$repo" rev-parse "$pin^{commit}")" = "$pin"
+            mkdir -p "$out/sources/$name"
+            git -C "$repo" archive "$pin" "$@" | tar -xf - -C "$out/sources/$name"
+            git -C "$repo" ls-tree -r "$pin" -- "$@" > "$out/sources/$name/GIT_BLOBS.tsv"
+            printf '%s\t%s\n' "$name" "$pin" >> "$out/sources/PINS.tsv"
+          }
+          extract baseline a3e88976ee8664d1ef5d0cade96aec1206b2133d m3/collections/src m3/collections/pom.xml m3/fs m3/eclipse/filesystem m3/pom.xml AGENTS.md m3/docs/m3jdk21-porting-invariant.md m3/docs/name-mapping.json
+          extract mask f2688ab690537500ef5a45d8af2d849d2d0e5eda m3/collections/src m3/docs/name-mapping.d/m3-array-mask-lookup-20261018.json m3/qualification/string-index-reverse-20261018/collections
+          extract predicate 45008413898bc27a4dc61c2bf19e1d433a84db01 m3/collections/src m3/collections/qualification/long-predicate-avl-20261019
+          extract views 9d3c0a6bfb790d033cc6753fd05c48597b3bb59c m3/collections/src m3/collections/docs/M3_READONLY_DOOP_SLOTMAP_20261019.md m3/collections/algorithm-catalog/readonly-doop-slot-views-20261019.tsv .github/workflows/m3-doop-indexed-view-contracts-20261019.yml
+          (java -version; javac -version; mvn -version; gcc --version; cmake --version) > "$out/TOOLS.txt" 2>&1
+      - name: Resolve recipe/JUnit execution dependencies without custom snapshot artifacts
+        shell: bash
+        run: |
+          set -euo pipefail
+          out="$RUNNER_TEMP/m3-fleet-input"
+          bootstrap="$RUNNER_TEMP/m3-fleet-bootstrap"
+          mkdir -p "$bootstrap/src/test/java"
+          cp m3/qualification/fs-collections-fleet-20261019/bootstrap/pom.xml "$bootstrap/pom.xml"
+          printf '%s\n' 'import org.junit.jupiter.api.Test;' 'import static org.junit.jupiter.api.Assertions.assertEquals;' 'final class DependencyBootstrapTest {' ' @Test void libraryCanLoad() { assertEquals("org.openrewrite.Recipe", org.openrewrite.Recipe.class.getName()); }' '}' > "$bootstrap/src/test/java/DependencyBootstrapTest.java"
+          mvn -B -ntp -Dmaven.repo.local="$out/dependencies/m2" -f "$bootstrap/pom.xml" package > "$out/dependencies/bootstrap.log" 2>&1
+          printf 'DEPENDENCY_BOOTSTRAP_ONLY; NOT A PRODUCT OR TRANSFORMATION TEST\n' > "$out/dependencies/STATUS.txt"
+          maven_home=$(dirname "$(dirname "$(readlink -f "$(command -v mvn)")")")
+          mkdir -p "$out/dependencies/maven"
+          cp -aL "$maven_home/." "$out/dependencies/maven/"
+      - name: Build and test the unchanged pinned M3FS baseline
+        shell: bash
+        run: |
+          set -euo pipefail
+          sudo apt-get update -qq
+          sudo apt-get install -y cmake libsqlite3-dev libssl-dev
+          out="$RUNNER_TEMP/m3-fleet-input"
+          mvn -B -ntp -Dmaven.repo.local="$out/dependencies/m2" -f "$out/sources/baseline/m3/fs/pom.xml" install > "$out/baseline-fs.log" 2>&1
+          mkdir -p "$out/baseline-reports"
+          cp "$out/sources/baseline/m3/fs/target/surefire-reports/"TEST-*.xml "$out/baseline-reports/"
+          cp "$out/sources/baseline/m3/fs/target/native/Testing/Temporary/LastTest.log" "$out/baseline-reports/native.log"
+      - name: Seal acquired sources and execution material, retaining failed-stage logs
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          out="$RUNNER_TEMP/m3-fleet-input"
+          test -d "$out/sources/baseline"
+          python3 - "$out" <<'PY'
+          import hashlib, json, pathlib, sys
+          root = pathlib.Path(sys.argv[1])
+          rows = []
+          for p in sorted((root / 'sources').rglob('*')):
+              if p.is_file() and 'target' not in p.relative_to(root).parts:
+                  b = p.read_bytes()
+                  rows.append({'path': p.relative_to(root).as_posix(), 'bytes': len(b), 'sha256': hashlib.sha256(b).hexdigest()})
+          (root / 'SOURCES_SHA256.json').write_text(json.dumps(rows, indent=2) + '\n')
+          PY
+          tar --exclude='*/target' --exclude='pinned-input.tgz' -czf "$RUNNER_TEMP/pinned-input.tgz" -C "$out" .
+          mv "$RUNNER_TEMP/pinned-input.tgz" "$out/pinned-input.tgz"
+          sha256sum "$out/pinned-input.tgz" > "$out/ARCHIVE.sha256"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: m3-fleet-pinned-input
+          path: |
+            ${{ runner.temp }}/m3-fleet-input/pinned-input.tgz
+            ${{ runner.temp }}/m3-fleet-input/ARCHIVE.sha256
+            ${{ runner.temp }}/m3-fleet-input/dependencies/bootstrap.log
+            ${{ runner.temp }}/m3-fleet-input/baseline-fs.log
+          if-no-files-found: error
+          retention-days: 3
