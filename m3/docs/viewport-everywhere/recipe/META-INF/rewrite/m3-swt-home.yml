@@ -7,7 +7,7 @@ name: com.m3.viewport.recipe.SwtHome
 displayName: M3 viewport collections, SWT home
 description: com.m3.collections to org.eclipse.swt.internal.m3.collections with the Synexia dual header.
 recipeList:
-  - com.m3.viewport.recipe.M3ApacheHeader: {origin: hsoliwal/M3jdk21 m3/viewport-everywhere-20261018 826e57b779174368fec5c4295eca9e3ad794c2e1, style: swt}
+  - com.m3.viewport.recipe.M3ApacheHeader: {origin: hsoliwal/M3jdk21 m3/viewport-everywhere-20261018 b8313c4f84dc5426f41c259b56c2b864327c3f73, style: swt}
   - org.openrewrite.java.ChangeType: {oldFullyQualifiedTypeName: com.m3.collections.M3OrderStatisticForest, newFullyQualifiedTypeName: org.eclipse.swt.internal.m3.collections.M3OrderStatisticForest}
   - org.openrewrite.java.ChangeType: {oldFullyQualifiedTypeName: com.m3.collections.M3SparseExtents, newFullyQualifiedTypeName: org.eclipse.swt.internal.m3.collections.M3SparseExtents}
   - org.openrewrite.java.ChangeType: {oldFullyQualifiedTypeName: com.m3.collections.M3ColumnarLanes, newFullyQualifiedTypeName: org.eclipse.swt.internal.m3.collections.M3ColumnarLanes}
@@ -54,6 +54,7 @@ recipeList:
   - org.openrewrite.java.ChangeType: {oldFullyQualifiedTypeName: com.m3.collections.M3LongLongHashMap, newFullyQualifiedTypeName: org.eclipse.swt.internal.m3.collections.M3LongLongHashMap}
   - org.openrewrite.java.ChangeType: {oldFullyQualifiedTypeName: com.m3.collections.M3LongIterator, newFullyQualifiedTypeName: org.eclipse.swt.internal.m3.collections.M3LongIterator}
   - org.openrewrite.java.ChangeType: {oldFullyQualifiedTypeName: com.m3.collections.M3LongLongConsumer, newFullyQualifiedTypeName: org.eclipse.swt.internal.m3.collections.M3LongLongConsumer}
+  - org.openrewrite.java.ChangeType: {oldFullyQualifiedTypeName: com.m3.collections.M3LongLongHashMapTest, newFullyQualifiedTypeName: org.eclipse.swt.internal.m3.collections.M3LongLongHashMapTest}
   - org.openrewrite.java.ChangeType: {oldFullyQualifiedTypeName: com.m3.collections.M3SparseExtentsTest, newFullyQualifiedTypeName: org.eclipse.swt.internal.m3.collections.M3SparseExtentsTest}
   - org.openrewrite.java.ChangeType: {oldFullyQualifiedTypeName: com.m3.collections.M3ColumnarLanesTest, newFullyQualifiedTypeName: org.eclipse.swt.internal.m3.collections.M3ColumnarLanesTest}
   - org.openrewrite.java.ChangeType: {oldFullyQualifiedTypeName: com.m3.collections.M3BitLanesTest, newFullyQualifiedTypeName: org.eclipse.swt.internal.m3.collections.M3BitLanesTest}

@@ -205,3 +205,12 @@ displayName: M3 rule 22 logging
 description: System.out/err println and printf to System.Logger with a declared LOG.
 recipeList:
   - com.m3.viewport.recipe.M3SystemOutToLogger
+---
+# Template-first generation (user 2026-10-19, TmOP): the int-word bit mask is generated from the long-word template.
+type: specs.openrewrite.org/v1beta/recipe
+name: com.m3.viewport.recipe.WordWidthVariants
+displayName: M3 word-width variants
+description: M3IntBitMask generated from the M3BitMask template.
+recipeList:
+  - org.openrewrite.java.ChangeType: {oldFullyQualifiedTypeName: com.m3.collections.M3BitMask, newFullyQualifiedTypeName: com.m3.collections.M3IntBitMask}
+  - com.m3.viewport.recipe.M3WordWidthVariant

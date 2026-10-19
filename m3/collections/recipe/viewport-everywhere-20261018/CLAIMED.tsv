@@ -37,3 +37,4 @@ M3FlatteningView	com.m3.collections	PLANNED	new general view (DESIGN.md section 
 M3ListDiff	com.m3.collections	PLANNED	new general view (DESIGN.md section 11)	viewport-everywhere
 M3Patch	com.m3.collections	PLANNED	new general view (DESIGN.md section 11)	viewport-everywhere
 M3BoundedCache	com.m3.collections	PLANNED	new general view (DESIGN.md section 11)	viewport-everywhere
+M3IntBitMask	com.m3.collections	GENERATED	from the M3BitMask template by M3WordWidthVariant (TmOP)	viewport-everywhere
