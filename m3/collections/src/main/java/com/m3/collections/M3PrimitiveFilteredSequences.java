@@ -352,8 +352,14 @@ public final class M3PrimitiveFilteredSequences {
             requireAccepted(value);
             return source.offerLast(value);
         }
-        @Override public void addFirst(long value) { offerFirst(value); }
-        @Override public void addLast(long value) { offerLast(value); }
+        @Override public void addFirst(long value) {
+            requireAccepted(value);
+            source.addFirst(value);
+        }
+        @Override public void addLast(long value) {
+            requireAccepted(value);
+            source.addLast(value);
+        }
         @Override public boolean offer(long value) { return offerLast(value); }
         @Override public boolean addLastIf(long value, LongPredicate condition) {
             requireWritable();
