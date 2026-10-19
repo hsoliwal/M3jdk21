@@ -1,3 +1,18 @@
+<!-- SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project -->
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+
+# Current draft: substring contract recipe qualification
+
+This draft mirrors the exact existing Maven/OpenRewrite SDK from [Synexia PR #12431](https://github.com/hsoliwal/com.synexia/pull/12431), immutable commit `5a3339df604fba2ea0cedd80707bc616e41cb596`, SDK tree `cb7764db204a5e87fca101bbec8bb9944785d589`. The72 files total1,919,301 bytes;71 nonself pins bind their source identity. Exactly four SDK files change from `638520715ffb00255639cb1e6667494bab729b53`: the existing map resource, manifest, qualification test and pins. The six accompanying receiver metadata files bind and describe this draft.
+
+The pending substring record now pins four actual source owners and records three non-owning M3/String comparisons. It leaves target ownership empty and dependencies explicitly unassessed. Every byte outside the migration value and all59 top-level mappings remain unchanged;53 original records are unchanged, three explicitly reconciled and four restored. The existing tenth qualification method adds four named YAML scenarios/eight invocations with fixed points; all ten method names and the first nine bodies remain intact.
+
+**Current exact-candidate Maven/OpenRewrite, provider and original CLI qualification: NOT_RUN.** The unchanged public PR workflow is the configured qualification route. Its binding checks this receiving Git tree; independent source path/tree custody is also required. This SDK copy is authoring/proof input custody. The recipe subsequently emits60 product overlay files for verification; no product overlay, active canonical map or runtime implementation is applied by this draft. Source ownership stays in Synexia, with existing module and embedded-fixture notices preserved.
+
+Previous compiler/provider successes and failures below belong to earlier candidates. They do not qualify this SDK. Runtime/JNI, original-model dependency closure, complete Routes A/B/C, performance and heap/native/mapped retention remain open. `runtimeApplied`, `phaseAdvanced` and `fullMigrationComplete` stay false. The full continual optimization goal remains active.
+
+## Historical receiver notes (unchanged)
+
 # Genuine original mapping validator qualification
 
 The current candidate receives [Synexia PR #12200](https://github.com/hsoliwal/com.synexia/pull/12200), commit `f726d4ce761edf73b04ee2950cbd42790d2370b2`. Its exact 72-file SDK tree is `3c02e3896096753a63654d56650a4561118db2b4`; `source-binding.json` records the source and receiver identities.

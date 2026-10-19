@@ -1,17 +1,17 @@
 {
   "schema": "M3_ORIGINAL_MAPPING_PROVIDER_RECEIVER_BINDING_V1",
   "repository": "hsoliwal/com.synexia",
-  "sourceCommit": "525e0c3704f8c4b4d9eef54799d1b4c947e37b5f",
-  "sourcePullRequest": 12245,
+  "sourceCommit": "5a3339df604fba2ea0cedd80707bc616e41cb596",
+  "sourcePullRequest": 12431,
   "sourcePath": "synexia-openrewrite-recipes/recipes/m3-original-mapping-provider-20261017/sdk",
   "receiverCorePath": "m3/migration/original-provider-20261017/sdk",
-  "moduleGitTree": "638520715ffb00255639cb1e6667494bab729b53",
-  "pinsSha256": "75f37d1093f5fd3d657de32bcab672f725f6391b4c59910aece1c2ff238951d7",
+  "moduleGitTree": "cb7764db204a5e87fca101bbec8bb9944785d589",
+  "pinsSha256": "b3c1ba7f3b85e4c0a11949f5f4b787fc994d888ac8a0c0d97aa6ae04b6276b73",
   "workflowSha256": "faf6a553557508404de8b644ae7ff17ffaf45c74d5b0cb6f3df86c583a0b2bc0",
   "workflowGitBlob": "f04b6bfc76e5a671968a478f44cf13268c04e5e9",
-  "receiverBase": "07ba6e383343d32c83cfdaf641387bbe72bf325d",
+  "receiverBase": "a3e88976ee8664d1ef5d0cade96aec1206b2133d",
   "originalCanonicalPreimageGitBlob": "4f5911d625090913d85f9cf41b1ead1694dffade",
-  "canonicalRecipePostimageGitBlob": "853607c6fef4b08ba2a3fd6df35121ac0594db30",
+  "canonicalRecipePostimageGitBlob": "a90f96ed14bdb8c2ce3310d3ed4a3e40cea28f4f",
   "runtimeApplied": false,
   "phaseAdvanced": false
 }
