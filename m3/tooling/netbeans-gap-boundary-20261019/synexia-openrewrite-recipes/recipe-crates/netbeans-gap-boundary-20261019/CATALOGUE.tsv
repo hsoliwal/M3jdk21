@@ -1,0 +1,10 @@
+category	candidate	disposition	fit_and_cost	rights
+LOWER_BOUND_DUPLICATES	Existing GapContent.findMarkAdjustIndex	REFINE_TARGET_OWNER	Preserve max(key,1); retain arbitrary-match quick path; binary lower-bound only preceding duplicates; keep findSortIndex identity selection	GPL-2.0-only WITH Classpath-exception-2.0
+OFFSET_GAP	NetBeans OffsetGapList.findElementIndex	EXECUTABLE_ORACLE_ONLY	Same first-equal contract and same linear duplicate scan; positive-offset limit approx 2^30; use bounded donor fixture	Apache-2.0, exact unmodified offline proof
+GAP_ARRAY	NetBeans GapList	REUSE_DONOR_ORACLE_DEPENDENCY	JDK GapVector already owns gap storage; no duplicate family	Apache-2.0
+CANONICAL_FLYWEIGHTS	NetBeans FlyOffsetGapList	DEFER	Backward flyweight offset walks may be linear; no consumer or lifecycle contract qualified here	Reference only
+INCREMENTAL_LEXING	NetBeans TokenListUpdater	DEFER	Offset+state convergence is promising; lexer state/lookahead and consumer contracts need separate qualification	Reference only
+HASH_STORAGE	NetBeans CompactMap	REJECT_DIRECT_REPLACEMENT	Linked MapEntry storage; null-key/iterator mismatch	Reference only
+SORTED_BOUNDARIES	Existing M3LongRankIndex, M3LongSortedSnapshot catalogue	REUSE_PATTERN	Existing rank boundary approach; importing its primitive storage into GapContent would duplicate position ownership	Existing source catalogue
+BINARY_SEARCH	LeetCode 35 / HackerRank leaderboard / GeeksforGeeks range counts	CATEGORY_ONLY	Reuse existing category mappings; duplicate boundaries and signed extrema; no statement/editorial/submission copied	Reference only
+LOWER_BOUND_DUPLICATES	First whole-range lower-bound candidate	SUPERSEDED	Passed finite corpus; refined to preserve exact-midpoint quick match of existing findSortIndex; retain all source and measurements	Target-owned GPL refinement
