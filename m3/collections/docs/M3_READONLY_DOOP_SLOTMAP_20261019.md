@@ -84,3 +84,7 @@ Source-receiving, OpenRewrite fixed point/refusal, JNI/native
 parity, performance, M3LFU/GC, installed JDK image and `java.base`
 jtreg gates must be verified separately. This change alone does
 **not** certify full M3JDK21 collection-family integration.
+
+## Executed focused Java21 gate
+
+On 2026-10-19, GitHub Actions run 39185305177 completed success: actual M3JDK21 owner source compiled with Java21 warnings-as-errors and the three standalone differential oracles passed (266236 + 478161 + 9962 = 754359 checks). JNI=false in the filter/sort oracle. The installed JDK, full Maven/JUnit and native JNI parity gates remain pending.
