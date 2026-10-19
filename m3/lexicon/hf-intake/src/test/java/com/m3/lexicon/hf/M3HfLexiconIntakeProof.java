@@ -60,7 +60,7 @@ public final class M3HfLexiconIntakeProof {
     private static int verifyLanguageResourceDiscovery() throws IOException {
         List<String> lines = resourceLines(
                 "/com/m3/lexicon/hf/language-resource-discovery.tsv");
-        require(lines.size() == 64, "63 language-resource candidates plus header");
+        require(lines.size() == 66, "65 language-resource candidates plus header");
         List<String> expectedHeader = List.of("source_id", "resource", "category",
                 "data_shape_and_identity", "rights_and_attribution", "m3_candidate_use",
                 "admission_blockers", "state", "evidence");
@@ -94,7 +94,8 @@ public final class M3HfLexiconIntakeProof {
                 "cmudict-us-english-pronunciations", "hunspell-language-dictionaries",
                 "global-wordnet-discovery-index", "babelnet-restricted-lexical-graph",
                 "hf-paranames-1-0", "giellalt-language-repositories",
-                "gf-resource-grammar-library", "sigmorphon-2022-segmentation")),
+                "gf-resource-grammar-library", "sigmorphon-2022-segmentation",
+                "hf-world-languages-7130", "wordfreq-3-0-2-data")),
                 "lexicon, grammar, translation, concept, norms, archive, sign and HF leads retained");
         String paranames = lines.stream().skip(1)
                 .filter(line -> "hf-paranames-1-0".equals(splitTsv(line)[0]))
@@ -145,6 +146,18 @@ public final class M3HfLexiconIntakeProof {
         require(langdex.contains("preserve donor IDs and reject ambiguous rows")
                 && langdex.contains("occurrence-coordinate"),
                 "LangDex keeps native IDs and rejects ambiguous row identity");
+        String worldLanguages = lines.stream().skip(1)
+                .filter(line -> "hf-world-languages-7130".equals(splitTsv(line)[0]))
+                .findFirst().orElse("");
+        require(worldLanguages.contains("7,130") && worldLanguages.contains("Glottocode")
+                && worldLanguages.contains("ISO 639-3") && worldLanguages.contains("ambiguous mappings"),
+                "world-language metadata preserves language-variety identity boundaries");
+        String wordfreq = lines.stream().skip(1)
+                .filter(line -> "wordfreq-3-0-2-data".equals(splitTsv(line)[0]))
+                .findFirst().orElse("");
+        require(wordfreq.contains("CC BY-SA 4.0") && wordfreq.contains("Apache-2.0")
+                && wordfreq.contains("2021") && wordfreq.contains("bare CSV"),
+                "wordfreq data/code rights, vintage and attribution constraints remain explicit");
         return lines.size() - 1;
     }
 
