@@ -991,9 +991,7 @@ final class M3StringPool {
     }
 
     private static final class Lexicon {
-        /** Optional primitive lookup metadata: at most 16 MiB of slots per VM. */
-        private static final int MAX_EXACT_INDEX_SLOTS = 1 << 22;
-        private static final int MAX_EXACT_PROBES = 64;
+        /** Empty compatibility view when optional direct-address metadata is unavailable. */
         private static final int[] NO_EXACT_INDEX = new int[0];
         /** Packed validation geometry: Java hash in bits 0..31, Latin-1 eligibility in bit 32. */
         private static final long LATIN1_GEOMETRY = 1L << Integer.SIZE;
@@ -1004,6 +1002,7 @@ final class M3StringPool {
         private final int[] lengths;
         private final int[] javaHashes;
         private final byte[] coders;
+        private final M3FrozenLexiconIndex exactIndex;
         private final int[] exactRows;
         private final M3StringAtom[] atoms;
         private final long generation64;
@@ -1018,6 +1017,7 @@ final class M3StringPool {
             payloadOffset = 0;
             offsets = lengths = javaHashes = new int[0];
             coders = null;
+            exactIndex = M3FrozenLexiconIndex.empty();
             exactRows = NO_EXACT_INDEX;
             atoms = new M3StringAtom[0];
             generation64 = 0L;
@@ -1041,7 +1041,8 @@ final class M3StringPool {
             this.javaHashes = javaHashes;
             this.coders = coders;
             this.atoms = atoms;
-            this.exactRows = buildExactIndex(javaHashes, lengths);
+            this.exactIndex = M3FrozenLexiconIndex.build(javaHashes, lengths);
+            this.exactRows = exactIndex.rows();
             this.generation64 = generation64;
             this.available = true;
         }
@@ -1119,6 +1120,10 @@ final class M3StringPool {
                         throw new IOException("Fixed M3 lexicon full-image SHA-256 mismatch");
                     }
                     result = readMapped(mapped, size);
+                    if (result.offsets.length != 0 && !result.exactIndex.available()) {
+                        throw new IOException(
+                                "Fixed M3 lexicon direct-address index unavailable");
+                    }
                 }
                 published = true;
                 return result;
@@ -1209,19 +1214,12 @@ final class M3StringPool {
         int findUnit(char unit) {
             if (exactRows.length == 0) return findUnitBinary(unit);
             int hash = unit;
-            int mask = exactRows.length - 1;
-            int slot = exactSlot(hash, 1, mask);
-            for (int probe = 0; probe < MAX_EXACT_PROBES; probe++) {
-                int encoded = exactRows[slot];
-                if (encoded == 0) return -1;
-                int row = (encoded & Integer.MAX_VALUE) - 1;
-                if (javaHashes[row] == hash && lengths[row] == 1) {
-                    if (encoded < 0) return findUnitBinary(unit);
-                    if (mappedUnit(offsets[row], 0) == unit) return row;
-                }
-                slot = (slot + 1) & mask;
-            }
-            return findUnitBinary(unit);
+            int encoded = exactIndex.candidate(hash, 1);
+            if (encoded == 0) return -1;
+            int row = (encoded & Integer.MAX_VALUE) - 1;
+            if (javaHashes[row] != hash || lengths[row] != 1) return -1;
+            if (encoded < 0) return findUnitBinary(unit);
+            return mappedUnit(offsets[row], 0) == unit ? row : -1;
         }
 
         private int findUnitBinary(char unit) {
@@ -1261,19 +1259,18 @@ final class M3StringPool {
                     hash = 31 * hash + Character.lowSurrogate(point);
                 }
             }
-            int mask = exactRows.length - 1;
-            int slot = exactSlot(hash, utf16Length, mask);
-            for (int probe = 0; probe < MAX_EXACT_PROBES; probe++) {
-                int encoded = exactRows[slot];
-                if (encoded == 0) return -1;
-                int row = (encoded & Integer.MAX_VALUE) - 1;
-                if (javaHashes[row] == hash && lengths[row] == utf16Length) {
-                    if (encoded < 0) return findCodePointsBinary(value, offset, count, utf16Length);
-                    if (compareCodePoints(value, offset, count, utf16Length, offsets[row], lengths[row]) == 0) return row;
-                }
-                slot = (slot + 1) & mask;
+            int encoded = exactIndex.candidate(hash, utf16Length);
+            if (encoded == 0) return -1;
+            int row = (encoded & Integer.MAX_VALUE) - 1;
+            if (javaHashes[row] != hash || lengths[row] != utf16Length) return -1;
+            if (encoded < 0) {
+                return findCodePointsBinary(value, offset, count, utf16Length);
             }
-            return findCodePointsBinary(value, offset, count, utf16Length);
+            return compareCodePoints(
+                            value, offset, count, utf16Length, offsets[row], lengths[row])
+                            == 0
+                    ? row
+                    : -1;
         }
 
         private int findCodePointsBinary(
@@ -1341,19 +1338,18 @@ final class M3StringPool {
                         : StringUTF16.charAt(value, sourceOffset + index);
                 hash = 31 * hash + unit;
             }
-            int mask = exactRows.length - 1;
-            int slot = exactSlot(hash, logicalLength, mask);
-            for (int probe = 0; probe < MAX_EXACT_PROBES; probe++) {
-                int encoded = exactRows[slot];
-                if (encoded == 0) return -1;
-                int row = (encoded & Integer.MAX_VALUE) - 1;
-                if (javaHashes[row] == hash && lengths[row] == logicalLength) {
-                    if (encoded < 0) return findCompactBytesBinary(value, sourceOffset, logicalLength, sourceCoder);
-                    if (equalsCompactBytes(value, sourceOffset, logicalLength, sourceCoder, offsets[row])) return row;
-                }
-                slot = (slot + 1) & mask;
+            int encoded = exactIndex.candidate(hash, logicalLength);
+            if (encoded == 0) return -1;
+            int row = (encoded & Integer.MAX_VALUE) - 1;
+            if (javaHashes[row] != hash || lengths[row] != logicalLength) return -1;
+            if (encoded < 0) {
+                return findCompactBytesBinary(
+                        value, sourceOffset, logicalLength, sourceCoder);
             }
-            return findCompactBytesBinary(value, sourceOffset, logicalLength, sourceCoder);
+            return equalsCompactBytes(
+                            value, sourceOffset, logicalLength, sourceCoder, offsets[row])
+                    ? row
+                    : -1;
         }
 
         private int findCompactBytesBinary(
@@ -1386,19 +1382,15 @@ final class M3StringPool {
             for (int index = 0; index < logicalLength; index++) {
                 hash = 31 * hash + (value[offset + index] & 0xff);
             }
-            int mask = exactRows.length - 1;
-            int slot = exactSlot(hash, logicalLength, mask);
-            for (int probe = 0; probe < MAX_EXACT_PROBES; probe++) {
-                int encoded = exactRows[slot];
-                if (encoded == 0) return -1;
-                int row = (encoded & Integer.MAX_VALUE) - 1;
-                if (javaHashes[row] == hash && lengths[row] == logicalLength) {
-                    if (encoded < 0) return findLatin1BytesBinary(value, offset, logicalLength);
-                    if (equalsCompactBytes(value, offset, logicalLength, String.LATIN1, offsets[row])) return row;
-                }
-                slot = (slot + 1) & mask;
-            }
-            return findLatin1BytesBinary(value, offset, logicalLength);
+            int encoded = exactIndex.candidate(hash, logicalLength);
+            if (encoded == 0) return -1;
+            int row = (encoded & Integer.MAX_VALUE) - 1;
+            if (javaHashes[row] != hash || lengths[row] != logicalLength) return -1;
+            if (encoded < 0) return findLatin1BytesBinary(value, offset, logicalLength);
+            return equalsCompactBytes(
+                            value, offset, logicalLength, String.LATIN1, offsets[row])
+                    ? row
+                    : -1;
         }
 
         private int findLatin1BytesBinary(byte[] value, int offset, int logicalLength) {
@@ -1433,19 +1425,12 @@ final class M3StringPool {
             for (int index = 0; index < logicalLength; index++) {
                 hash = 31 * hash + value[offset + index];
             }
-            int mask = exactRows.length - 1;
-            int slot = exactSlot(hash, logicalLength, mask);
-            for (int probe = 0; probe < MAX_EXACT_PROBES; probe++) {
-                int encoded = exactRows[slot];
-                if (encoded == 0) return -1;
-                int row = (encoded & Integer.MAX_VALUE) - 1;
-                if (javaHashes[row] == hash && lengths[row] == logicalLength) {
-                    if (encoded < 0) return findBinary(value, offset, logicalLength);
-                    if (equalsChars(value, offset, logicalLength, offsets[row])) return row;
-                }
-                slot = (slot + 1) & mask;
-            }
-            return findBinary(value, offset, logicalLength);
+            int encoded = exactIndex.candidate(hash, logicalLength);
+            if (encoded == 0) return -1;
+            int row = (encoded & Integer.MAX_VALUE) - 1;
+            if (javaHashes[row] != hash || lengths[row] != logicalLength) return -1;
+            if (encoded < 0) return findBinary(value, offset, logicalLength);
+            return equalsChars(value, offset, logicalLength, offsets[row]) ? row : -1;
         }
 
         private int findBinary(char[] value, int offset, int logicalLength) {
@@ -1491,42 +1476,11 @@ final class M3StringPool {
             return true;
         }
 
-        /** A bounded optional index; admission and exact binary fallback do not depend on it. */
+        /**
+         * Compatibility test hook: returns the precomputed row lane of the one-candidate index.
+         */
         private static int[] buildExactIndex(int[] hashes, int[] lengths) {
-            int count = hashes.length;
-            if (count == 0 || count > MAX_EXACT_INDEX_SLOTS / 2) return NO_EXACT_INDEX;
-            int capacity = 2;
-            while (capacity < count * 2) capacity <<= 1;
-            int[] rows;
-            try {
-                rows = new int[capacity];
-            } catch (OutOfMemoryError unavailable) {
-                return NO_EXACT_INDEX;
-            }
-            int mask = capacity - 1;
-            for (int row = 0; row < count; row++) {
-                int slot = exactSlot(hashes[row], lengths[row], mask);
-                int probe = 0;
-                boolean ambiguous = false;
-                while (probe < MAX_EXACT_PROBES && rows[slot] != 0) {
-                    int existing = (rows[slot] & Integer.MAX_VALUE) - 1;
-                    if (hashes[existing] == hashes[row] && lengths[existing] == lengths[row]) {
-                        rows[slot] |= Integer.MIN_VALUE;
-                        ambiguous = true;
-                    }
-                    slot = (slot + 1) & mask;
-                    probe++;
-                }
-                if (probe == MAX_EXACT_PROBES) return NO_EXACT_INDEX;
-                rows[slot] = (row + 1) | (ambiguous ? Integer.MIN_VALUE : 0);
-            }
-            return rows;
-        }
-
-        private static int exactSlot(int hash, int length, int mask) {
-            long key = Integer.toUnsignedLong(hash)
-                    ^ Long.rotateLeft(Integer.toUnsignedLong(length), Integer.SIZE);
-            return (int) M3StringPool.mix64(key) & mask;
+            return M3FrozenLexiconIndex.build(hashes, lengths).rows();
         }
 
         private static byte[] allocateCoders(int count) {
