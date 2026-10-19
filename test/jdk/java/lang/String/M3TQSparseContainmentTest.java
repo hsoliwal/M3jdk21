@@ -2,7 +2,7 @@
 /*
  * @test
  * @summary Exact adaptive trigram containment across sparse/dense sets and warm payload fences
- * @modules java.base/jdk.internal.mindex:open
+ * @modules java.base/jdk.internal.mindex:+open
  * @run main M3TQSparseContainmentTest
  */
 import java.lang.reflect.Constructor;

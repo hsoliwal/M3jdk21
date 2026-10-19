@@ -1,0 +1,171 @@
+{
+  "schema": "M3_TARGET_NAME_MAPPING_V1",
+  "copyright": "Copyright 2026 Hitesh Soliwal and contributors",
+  "license": "Apache-2.0 for this metadata; each source retains its own notices",
+  "date": "2026-10-19",
+  "target_repository": "hsoliwal/M3JDK21",
+  "target_base": "a62756a22a379d7d08c1e633e55b93155cea9ff5",
+  "canonical_recipe_repository": "hsoliwal/com.synexia",
+  "canonical_recipe_base": "47981356df68c2e12c658d2d6fe3969b695aa2fe",
+  "canonical_recipe_path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017",
+  "canonical_recipe_name": "com.synexia.m3jdk.CollectionsContractRefinement20261017",
+  "source_role": "Convergence workspace: reusable recipes, catalogue, fixtures, donor evaluation and qualification",
+  "target_role": "M3JDK21 Java, JNI and HotSpot runtime owners",
+  "runtime_dependency_on_synexia": false,
+  "receiving_sequence_advanced": false,
+  "status": "REVIEW_CANDIDATE; runtime evidence does not promote a whole receiving family",
+  "catalogue_authority": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/CATALOGUE.tsv",
+  "target_catalogue": "docs/m3/donor-catalogue.tsv",
+  "historical_maps_preserved": [
+    "m3/docs/name-mapping.d/m3-regex-lexical-nfa-20261018.json",
+    "m3/docs/name-mapping.d/m3-filtered-collection-pack-20261017.json",
+    "m3/synexia-import/current-full-borrow/string-target-successors.tsv",
+    "m3/synexia-import/current-full-borrow/m3-string-precompute-observation-v2.tsv"
+  ],
+  "mappings": [
+    {
+      "source": "M3JDK21#1371 / com.synexia#12374 qualified full visible-leaf cursor",
+      "source_revision": "9f0ee2fb57699e1d94b7133691664be7bf5eeb8c",
+      "targets": [
+        "java.lang.M3String.CodeUnitCursor"
+      ],
+      "dataset": "string-cursor-20261019",
+      "rule": "Cache the clipped canonical leaf interval in both directions; preserve existing five fields, UTF-16 coordinates, source lifetime and public String contracts",
+      "cost": "No retained text copy; cache misses descend from the root; reverse reuse gains and forward/fresh/random regressions are separately recorded"
+    },
+    {
+      "source": "M3JDK21#1368 / com.synexia#12370 prepared trigram negative facts",
+      "source_revision": "a0e9d6c0c95960deb21d45f3800e592b890a4d28",
+      "targets": [
+        "java.lang.M3StringFacts",
+        "java.lang.M3StringPrecomputeBridge",
+        "java.lang.System",
+        "jdk.internal.access.JavaLangAccess",
+        "java.util.regex.Matcher"
+      ],
+      "dataset": "string-trigram-20261019",
+      "rule": "Read only existing immutable coordinate-bound facts; negative facts can reject candidates, while positives/collisions retain exact Matcher behavior; mutable inputs bypass the shortcut",
+      "api": "Existing public String/Pattern/Matcher descriptors are unchanged; internal JavaLangAccess gains a default metadata accessor"
+    },
+    {
+      "source": "Current target collection owners and evaluated M3JDK21 donors #1357, #1365, #1412 and #1413",
+      "targets": [
+        "com.m3.collections.M3CollectionViews",
+        "com.m3.collections.M3FilteredLists",
+        "com.m3.collections.M3LongIndexProjection",
+        "com.m3.collections.M3LongBitmapFilterPlan",
+        "com.m3.collections.M3LongBitmapFilteredSnapshot",
+        "com.m3.collections.M3LongPredicates"
+      ],
+      "datasets": [
+        "collections-donors-20261019",
+        "collections-gap-20261019"
+      ],
+      "rule": "Preserve identity membership, callback order/count, thrown instance/cause, stable equal groups, comparator identity, projection bounds and opaque BitSet clone provenance",
+      "standalone_contract": "The owning collection module remains compilable and runnable on its supported stock Java21 target"
+    },
+    {
+      "source": "Same qualified collection behavioral atoms, mapped to the intrinsic M3JDK21 owner",
+      "targets": [
+        "java.util.CollectionViews"
+      ],
+      "rule": "Add intrinsic filtered and sorted views in java.base; preserve the standalone owner and verify route/behavior parity using common fixtures",
+      "api": "Additive java.util utility; existing JDK collection interfaces are unchanged",
+      "license_rule": "Retain the original first-party Apache-2.0 notice; namespace or control-flow adaptation does not establish relicensing authority; distribution review remains explicit"
+    },
+    {
+      "source": "M3JDK21#1352 exact foundation donor, followed by the qualified JNI lifetime successor",
+      "source_revision": "414b4198f75f386546289d41fadbe48b4adf041a",
+      "targets": [
+        "jdk.internal.m3.M3ByteSlices",
+        "jdk.internal.m3.M3CompositeBytes",
+        "jdk.internal.m3.M3IndexedArray",
+        "jdk.internal.m3.M3IndexedView",
+        "jdk.internal.m3.M3IntAlgorithms",
+        "jdk.internal.m3.M3ObjectMetrics"
+      ],
+      "dataset": "foundation-20261019",
+      "rule": "Dynamic and parallel primitive arrays, packed handles/state, explicit leases, clipped offsets, stable indices and long composite positions remain intrinsic target ownership",
+      "jni": "src/java.base/share/native/libjava/M3ObjectMetrics.c; shallow object size only, with bounded environment ownership"
+    },
+    {
+      "source": "Existing M3StringSearchPrecompute KMP recurrence, qualified M3CompositeBytes owner and byte-search donor comparison",
+      "targets": [
+        "jdk.internal.m3.M3CompositeBytes.PreparedLiteral",
+        "jdk.internal.m3.M3CompositeBytes.LiteralMatches",
+        "jdk.internal.m3.M3CompositeBytes.StreamMatches"
+      ],
+      "dataset": "composite-search-20261019",
+      "rule": "One prepared prefix table and continuation state cross every piece/read seam; long byte offsets, empty patterns, overlaps, cancellation and clipped ranges are explicit",
+      "memory": "At most1048576 pattern bytes plus int prefix table; stream scratch at most65536 bytes, independent of input length; source stream remains caller-owned",
+      "scope": "Exact byte literals. UTF-16 text semantics and arbitrary regex continue to belong to their existing String/Matcher/RX7 owners",
+      "rejected": "Fixed-overlap windows cannot preserve arbitrary unbounded regex, anchors, lookaround and greed/capture semantics"
+    },
+    {
+      "source": "M3JDK21#1417 full RX7 token, lexical, JNI transition and power closure",
+      "source_revision": "46b35b58e142099020822d7189b1f18c129729eb",
+      "targets": [
+        "jdk.internal.mindex.M3RX7",
+        "jdk.internal.mindex.M3RX7Transitions"
+      ],
+      "dataset": "rx7-20261019",
+      "rule": "CSR offsets, kind/state masks, spelling identities and precomputed transition powers retain the original exact token namespace and v7 image contracts",
+      "jni": "src/java.base/share/native/libjava/M3RX7.c; generated-header boundaries and explicit native modes are verified separately from Java fallback",
+      "scope": "The declared regular/token subsets; this does not claim full Java regex or full Synexia family parity"
+    },
+    {
+      "source": "M3JDK21#1424 / com.synexia#12416 exact matched-build prerequisites",
+      "source_revision": "7e9fe6c851d317be04e69c6d5ca3fe5d16a41352",
+      "targets": [
+        "src/hotspot/share/classfile/classLoader.cpp",
+        "src/java.base/linux/native/libjava/M3PrimitiveFixedArena.c",
+        "existing java.base API doclint and lexical-scope owners"
+      ],
+      "datasets": [
+        "build-doclint-20261019",
+        "build-scope-20261019",
+        "build-arena-20261019",
+        "build-vtable-20261019"
+      ],
+      "rule": "Match the existing Object vtable contract; guard the feature macro; retain bytecode/API equality for documentation and SOURCE-retained warning fixes"
+    }
+  ],
+  "unreceived_or_rejected": [
+    {
+      "candidate": "Conflicting unreceived M3NotYetReceived marker variants in fleet #1396/#1397",
+      "reason": "No selected closure requires either; no ambiguous owner is admitted"
+    },
+    {
+      "candidate": "Wholesale later TreeSet/regex/donor workspace closures",
+      "reason": "Not covered by this per-file receipt set; retain their existing gates and evidence"
+    },
+    {
+      "candidate": "Hard-linked standalone collection facade",
+      "reason": "Would remove stock Java21 compilation/runtime compatibility; preserve standalone implementation instead"
+    }
+  ],
+  "historical_qualification_base": "a3e88976ee8664d1ef5d0cade96aec1206b2133d",
+  "publication_recipe_dataset": "fleet-convergence-20261019",
+  "source_qualification_epochs": [
+    {
+      "baseline": "a3e88976ee8664d1ef5d0cade96aec1206b2133d",
+      "dataset": "convergence-final-20261019",
+      "role": "Frozen96-path full-image and component qualification; historical source/cost claims retain this base"
+    },
+    {
+      "baseline": "a62756a22a379d7d08c1e633e55b93155cea9ff5",
+      "dataset": "fleet-convergence-20261019",
+      "role": "Per-file current-master delta; retains newer fleet owners and every unchanged donor"
+    }
+  ],
+  "current_master_preservation": [
+    "Keep the12 newer API documentation owners (15 byte-identical classfiles)",
+    "Keep the six-slot HotSpot Object vtable implementation already on master",
+    "Keep the newer RX7 image-codec provider/Maven launcher and its strict epoch pins",
+    "Keep the complete existing catalogue-driven porting invariant",
+    "Keep both exact-trigram M3StringSearchPrecompute gates in M3StringPrecomputeBridge",
+    "Keep all64 pre-existing naming-map rows",
+    "Use the existing POSIX parent test launcher to invoke the non-executable child scripts with sh"
+  ],
+  "review_evidence": "m3/runtime-integration/catalogue-convergence-20261019/REVIEW.md"
+}

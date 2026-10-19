@@ -724,6 +724,16 @@
       "source_license": "GPL-2.0-only",
       "status": "Exact count repaired from five to six with the existing vtable consistency guard retained; full fastdebug image is a separate gate",
       "target_rule": "No JNI symbol, object layout, native ownership or guard weakening. Bootstrap consistency does not establish Object API compatibility."
+    },
+    {
+      "source": "Canonical catalogue-driven M3JDK21 String, collection and native per-file convergence",
+      "target": "Existing M3JDK21 Java/JNI/HotSpot owners and additive intrinsic CollectionViews",
+      "mapping": "m3/docs/name-mapping.d/m3-catalogue-convergence-20261019.json",
+      "canonical_recipe_repository": "hsoliwal/com.synexia",
+      "canonical_recipe_path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017",
+      "status": "Review candidate; exact recipe and runtime evidence are recorded per owner; no family promotion",
+      "rule": "Preserve existing public contracts, source notices, standalone module support and all historical mapping rows; no Synexia runtime dependency",
+      "receiving_sequence_advanced": false
     }
   ],
   "imported_donor_sources": [],

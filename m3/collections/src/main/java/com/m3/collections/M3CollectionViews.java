@@ -4,6 +4,7 @@
  * Modified 2026: M3 receiver namespace, runtime-capability dispatch,
  * direct owner membership/removal and single-pass sorted snapshot acquisition.
  * Identity-set refinement: owner-gated membership and exact-reference removal.
+ * Modified 2026-10-19: preserve outer traversal state across reentrant callbacks.
  */
 package com.m3.collections;
 
@@ -710,6 +711,8 @@ public final class M3CollectionViews {
         @Override
         public boolean tryAdvance(Consumer<? super E> consumer) {
             Objects.requireNonNull(consumer, "action");
+            Consumer<? super E> previousAction = action;
+            boolean previousDelivered = delivered;
             action = consumer;
             delivered = false;
             try {
@@ -718,7 +721,8 @@ public final class M3CollectionViews {
                 }
                 return delivered;
             } finally {
-                action = null;
+                action = previousAction;
+                delivered = previousDelivered;
             }
         }
 
