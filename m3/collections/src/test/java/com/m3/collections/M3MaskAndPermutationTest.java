@@ -148,5 +148,18 @@ public class M3MaskAndPermutationTest {
 		int [] same = new int [50];
 		index.sort (constant, 50, new M3RadixKey [] {new IntKey (same)}, new boolean [] {false}, 1, (x, y) -> Integer.compare (x, y));
 		assertArrayEquals (IntStream.range (0, 50).toArray (), constant, "equal keys keep source order");
+		int [] presorted = IntStream.range (0, 40).toArray ();
+		index.sort (presorted, 40, new M3RadixKey [] {new IntKey (same)}, new boolean [] {false}, 1, Integer::compare);
+		assertArrayEquals (IntStream.range (0, 40).toArray (), presorted, "ordered runs are copied, not merged");
+		int [] wide = IntStream.range (0, 60).toArray ();
+		M3RadixKey eightBytes = new M3RadixKey () {
+			@Override
+			public int radixKeys (int [] r, int n, M3PermutationIndex lanes) {
+				for (int i = 0; i < n; i++) lanes.keys [i] = r [i] * 1_000_000_007L;
+				return 8;
+			}
+		};
+		index.sort (wide, 60, new M3RadixKey [] {eightBytes}, new boolean [] {true}, 1, (x, y) -> Integer.compare (y, x));
+		assertArrayEquals (IntStream.range (0, 60).map (i -> 59 - i).toArray (), wide, "descending on all eight key bytes");
 	}
 }
