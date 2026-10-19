@@ -429,7 +429,7 @@ public final class M3HfLexiconIntakeProof {
 
         String gatitos = discoveryRecord(lines, "google-smol-gatitos");
         require(gatitos.contains("one-to-many") && gatitos.contains("CC BY 4.0")
-                && gatitos.contains("upstream source terms"),
+                && gatitos.contains("upstream data/source terms"),
                 "GATITOS translation pairs retain one-to-many shape and upstream-rights caveat");
         String flex = discoveryRecord(lines, "sprakbanken-flex");
         require(flex.contains("per million") && flex.contains("novels, newspapers")
