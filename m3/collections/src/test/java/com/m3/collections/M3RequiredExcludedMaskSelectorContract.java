@@ -24,7 +24,8 @@ public final class M3RequiredExcludedMaskSelectorContract {
     private static void boundary() {
         var java = M3IndexMaskCompactor.Backend.JAVA;
         byte[] states = {0, 1, 2, 3, (byte) 0x80, (byte) 0xff};
-        eq(new int[] {0, 2}, M3IndexMaskCompactor.selectPositions(states, 0, 1, java));
+        // The unrelated high bit in state[4] does not exclude that logical position.
+        eq(new int[] {0, 2, 4}, M3IndexMaskCompactor.selectPositions(states, 0, 1, java));
         eq(new int[] {1}, M3IndexMaskCompactor.selectPositions(states, 1, 2, java));
         eq(new int[] {4}, M3IndexMaskCompactor.selectPositions(states, 128, 1, java));
         eq(new int[0], M3IndexMaskCompactor.selectPositions(states, 1, 1, java));

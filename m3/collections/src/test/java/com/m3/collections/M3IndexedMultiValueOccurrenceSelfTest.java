@@ -160,7 +160,7 @@ public final class M3IndexedMultiValueOccurrenceSelfTest {
         oracle.clear();
         validate(map, oracle);
         check(map.capacity() >= 0, "array capacity");
-        expect(IllegalArgumentException.class, () -> map.add("bad", 1,
+        expect(IllegalArgumentException.class, () -> map.add(-1, 1,
                 M3IndexedMultiValueMap.LIVE));
         System.out.println("PASS M3IndexedMultiValueOccurrenceSelfTest checks=" + checks
                 + " native=" + M3IndexMaskCompactor.nativeAvailable());

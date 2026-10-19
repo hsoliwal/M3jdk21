@@ -1,0 +1,530 @@
+{
+  "schema": "M3_TOOLS4J_THIN_REFINEMENT_HANDOFF_V1",
+  "SPDX-FileCopyrightText": "2026 Hitesh Soliwal and Contributors to the Synexia Project",
+  "SPDX-License-Identifier": "Apache-2.0",
+  "as_of": "2026-10-19",
+  "status": "QUALIFIED_LEAVES_AND_FROZEN_PROOF_BOUND;_RECEIVING_PUBLICATION_TRACKED_BY_GIT",
+  "receiver_repository": "hsoliwal/M3JDK21",
+  "receiver_baseline": "677437be295b23f7ccf7409be287008944d0e8b0",
+  "canonical_repository": "hsoliwal/com.synexia",
+  "canonical_qualified_baseline": "c7cacae8c93533faf05c90d35fcab190c9d86642",
+  "canonical_publication_commit": "dade40a9f6e3ab054bf67628b4a22bd8ffe21a6a",
+  "canonical_commit_url": "https://github.com/hsoliwal/com.synexia/commit/dade40a9f6e3ab054bf67628b4a22bd8ffe21a6a",
+  "canonical_review_url": "https://github.com/hsoliwal/com.synexia/blob/dade40a9f6e3ab054bf67628b4a22bd8ffe21a6a/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/catalogue/tools4j-unix-20261019/README.md",
+  "canonical_crate": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017",
+  "canonical_references": [
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/catalogue/tools4j-unix-20261019/CAMPAIGN.json",
+      "bytes": 7100,
+      "sha256": "4c067f566b78bb98a43a078f88197c84b5e8e8ab9704f877005f9a4a050149c7",
+      "url": "https://github.com/hsoliwal/com.synexia/blob/dade40a9f6e3ab054bf67628b4a22bd8ffe21a6a/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/catalogue/tools4j-unix-20261019/CAMPAIGN.json"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/catalogue/tools4j-unix-20261019/PASS_INDEX.json",
+      "bytes": 136453,
+      "sha256": "6217960c3c9204b47beef4bad843aaacb451c6609ea95fdc3d0d9e89786b5ab9",
+      "url": "https://github.com/hsoliwal/com.synexia/blob/dade40a9f6e3ab054bf67628b4a22bd8ffe21a6a/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/catalogue/tools4j-unix-20261019/PASS_INDEX.json"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/catalogue/tools4j-unix-20261019/ENGINE_PROFILES.json",
+      "bytes": 3614,
+      "sha256": "92faa1885b074f20d10e953870a3afe271a4fa307b74355ec7a861574f35a866",
+      "url": "https://github.com/hsoliwal/com.synexia/blob/dade40a9f6e3ab054bf67628b4a22bd8ffe21a6a/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/catalogue/tools4j-unix-20261019/ENGINE_PROFILES.json"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/catalogue/tools4j-unix-20261019/REPLAY.md",
+      "bytes": 11523,
+      "sha256": "1d746b075984758cb80fc89f4acdc1919d38d6497ba5044353a2d1d2d8427d08",
+      "url": "https://github.com/hsoliwal/com.synexia/blob/dade40a9f6e3ab054bf67628b4a22bd8ffe21a6a/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/catalogue/tools4j-unix-20261019/REPLAY.md"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/catalogue/tools4j-unix-20261019/EVIDENCE_MANIFEST.json",
+      "bytes": 152661,
+      "sha256": "0e794aa42068e1dd20736750e94aa59eb57a7f5b2cc12bdd6be94f76402dd9d6",
+      "url": "https://github.com/hsoliwal/com.synexia/blob/dade40a9f6e3ab054bf67628b4a22bd8ffe21a6a/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/catalogue/tools4j-unix-20261019/EVIDENCE_MANIFEST.json"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/catalogue/tools4j-unix-20261019/PROVENANCE_CHECK.json",
+      "bytes": 2073,
+      "sha256": "25a24d7cff0f08be7e1aee3ac489536f1056919ed6eab5aa6c2f058ba8676640",
+      "url": "https://github.com/hsoliwal/com.synexia/blob/dade40a9f6e3ab054bf67628b4a22bd8ffe21a6a/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/catalogue/tools4j-unix-20261019/PROVENANCE_CHECK.json"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/catalogue/tools4j-unix-20261019/THIRD_PARTY_NOTICES.md",
+      "bytes": 13321,
+      "sha256": "bd81304e40e47790e35899a4a7ea78ea43388c147e3e643400db57284dbeaf8e",
+      "url": "https://github.com/hsoliwal/com.synexia/blob/dade40a9f6e3ab054bf67628b4a22bd8ffe21a6a/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/catalogue/tools4j-unix-20261019/THIRD_PARTY_NOTICES.md"
+    }
+  ],
+  "source_only_archives": [
+    {
+      "id": "execution",
+      "archive": {
+        "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/catalogue-proof/tools4j-unix-20261019/execution-evidence-v1.tar.gz",
+        "bytes": 3151462,
+        "sha256": "4559cd0211af4e812b168e8cb6f84000f847ada67dca4c4d125f7d78af307f82",
+        "url": "https://github.com/hsoliwal/com.synexia/blob/dade40a9f6e3ab054bf67628b4a22bd8ffe21a6a/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/catalogue-proof/tools4j-unix-20261019/execution-evidence-v1.tar.gz"
+      },
+      "manifest": {
+        "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/catalogue-proof/tools4j-unix-20261019/EXECUTION_MANIFEST.json",
+        "bytes": 2292765,
+        "sha256": "c67b0a68bd89df7e7e85eaf5e4b9e44f6d19aefd9923d5d3f0213a28f7fa8b23",
+        "url": "https://github.com/hsoliwal/com.synexia/blob/dade40a9f6e3ab054bf67628b4a22bd8ffe21a6a/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/catalogue-proof/tools4j-unix-20261019/EXECUTION_MANIFEST.json"
+      },
+      "custody": {
+        "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/catalogue-proof/tools4j-unix-20261019/EXECUTION_CUSTODY.json",
+        "bytes": 1333,
+        "sha256": "cf3df25a606ab6e9c11bc28e7affa5c9768193321d0f05fba0b68efe9f96832f",
+        "url": "https://github.com/hsoliwal/com.synexia/blob/dade40a9f6e3ab054bf67628b4a22bd8ffe21a6a/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/catalogue-proof/tools4j-unix-20261019/EXECUTION_CUSTODY.json"
+      },
+      "source_members": 1757,
+      "regular_members_including_manifest": 1758,
+      "license_expression": "Apache-2.0 AND MIT",
+      "scope": "Source, probes, receipts and readable logs; compiled classes, native binaries, dependency JARs, JMODs and linked images are excluded."
+    },
+    {
+      "id": "workflow",
+      "archive": {
+        "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/catalogue-proof/tools4j-unix-20261019/workflow-evidence-v1.tar.gz",
+        "bytes": 1373833,
+        "sha256": "f437d534a12b116d54b3197cfe29e9da3d88d1b192baecd1fe377611f3a9f3ca",
+        "url": "https://github.com/hsoliwal/com.synexia/blob/dade40a9f6e3ab054bf67628b4a22bd8ffe21a6a/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/catalogue-proof/tools4j-unix-20261019/workflow-evidence-v1.tar.gz"
+      },
+      "manifest": {
+        "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/catalogue-proof/tools4j-unix-20261019/WORKFLOW_MANIFEST.json",
+        "bytes": 545531,
+        "sha256": "f062445540be2fd9f4c0da12560022eb379788408feca90708d02231ceb531ce",
+        "url": "https://github.com/hsoliwal/com.synexia/blob/dade40a9f6e3ab054bf67628b4a22bd8ffe21a6a/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/catalogue-proof/tools4j-unix-20261019/WORKFLOW_MANIFEST.json"
+      },
+      "custody": {
+        "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/catalogue-proof/tools4j-unix-20261019/WORKFLOW_CUSTODY.json",
+        "bytes": 1323,
+        "sha256": "df109844e5a6a000c5c7859e4845260f2c7405c7c8e78aa8004cbb43835607ff",
+        "url": "https://github.com/hsoliwal/com.synexia/blob/dade40a9f6e3ab054bf67628b4a22bd8ffe21a6a/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/catalogue-proof/tools4j-unix-20261019/WORKFLOW_CUSTODY.json"
+      },
+      "source_members": 464,
+      "regular_members_including_manifest": 465,
+      "license_expression": "Apache-2.0 AND MIT",
+      "scope": "Source, probes, receipts and readable logs; compiled classes, native binaries, dependency JARs, JMODs and linked images are excluded."
+    }
+  ],
+  "qualification_per_leaf": {
+    "sdk_junit": {
+      "status": "PASS",
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "preparation_contract": {
+      "status": "PASS",
+      "tests": 8
+    },
+    "receiver_contract": {
+      "status": "PASS",
+      "tests": 9
+    },
+    "scope": "Repeated qualification of each single-file transformation and fail-closed receiver; these are not counts of distinct product behavior tests.",
+    "offline_profile_limit": "The Maven contract profile required unavailable exec-maven-plugin 3.5.0. The unchanged eight-case preparation and nine-case receiver programs were executed directly; no Maven profile success is claimed.",
+    "exact_sdk_inputs_results_outputs": "Per-leaf hashes are below; archive/member/length references are in the pinned PASS_INDEX row."
+  },
+  "campaign_fixed_point": {
+    "status": "PASS",
+    "active_datasets": 20,
+    "receiving_changes": 0,
+    "compiled_collection_inputs_unchanged": 278,
+    "text_source_seals_unchanged": 43,
+    "evidence": {
+      "archive": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/catalogue-proof/tools4j-unix-20261019/workflow-evidence-v1.tar.gz",
+      "manifest": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/catalogue-proof/tools4j-unix-20261019/WORKFLOW_MANIFEST.json",
+      "member": "workflow-evidence-v1/root/evidence/fixedpoint-root-v2/RESULT.json",
+      "bytes": 29005,
+      "sha256": "37bc9a5927d3d7b1d6e0a25325836bf819c324e00792ee91eb666db4f755101e"
+    },
+    "scope": "Full canonical campaign across both repositories; the local handoff leaf count is separate."
+  },
+  "canonical_publication_provenance": {
+    "status": "PASS",
+    "changed_paths": 379,
+    "violations": 0,
+    "evidence": {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/catalogue/tools4j-unix-20261019/PROVENANCE_CHECK.json",
+      "bytes": 2073,
+      "sha256": "25a24d7cff0f08be7e1aee3ac489536f1056919ed6eab5aa6c2f058ba8676640",
+      "url": "https://github.com/hsoliwal/com.synexia/blob/dade40a9f6e3ab054bf67628b4a22bd8ffe21a6a/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/catalogue/tools4j-unix-20261019/PROVENANCE_CHECK.json"
+    },
+    "scope": "Unchanged existing licensing checker on the exact canonical publication frontier with original policy; not a full repository or hosted CI check."
+  },
+  "history_and_license": {
+    "original_headers_and_notices_preserved": true,
+    "source_archive_license_expression": "Apache-2.0 AND MIT",
+    "original_donation_receipts_and_historical_provenance_preserved": true,
+    "rule": "This handoff binds the current receiving refinement; it does not relabel original donation hashes as current or replace historical qualification receipts."
+  },
+  "limits": [
+    "Finite source and contract qualification; inventory membership is not blanket algorithm review.",
+    "Existing owners only. No public API expansion, new runtime layer or donor framework import is asserted.",
+    "Linux qualification uses an existing sealed M3 JDK image. No fresh whole current HotSpot/JDK build, jtreg, full Synexia reactor or non-Linux acceptance was performed.",
+    "String remains the active global receiving phase. No java.util receiving promotion or phase advance is claimed."
+  ],
+  "handoff": "m3/tooling/refinement-proofs/tools4j-unix-20261019",
+  "scope": "collections",
+  "qualified_leaf_count": 14,
+  "leaf_composition": {
+    "production_java": 2,
+    "production_c": 1,
+    "existing_java_test_owners": 6,
+    "existing_build_driver": 1,
+    "metadata_and_successor_receipt": 4
+  },
+  "new_handoff_documents": [
+    "README.md",
+    "RECEIPT.json"
+  ],
+  "handoff_documents_are_additional_to_qualified_leaf_count": true,
+  "leaves": [
+    {
+      "path": "m3/collections/name-mapping.json",
+      "before_sha256": "320f47e9a8381350cd641a3444119513e5fd32b961369c98338846d7735d03f4",
+      "after_sha256": "8e81856d27d63fcf7e0390dcd1ef6b19604a47041d8a012d36187e07dff13ae2",
+      "after_bytes": 63404,
+      "mode": "0644",
+      "dataset": "tools4j-module-map-20261019",
+      "role": "existing module mapping current successor link",
+      "engine_profile": "pinned-master",
+      "dataset_path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/tools4j-module-map-20261019",
+      "dataset_url": "https://github.com/hsoliwal/com.synexia/tree/dade40a9f6e3ab054bf67628b4a22bd8ffe21a6a/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/tools4j-module-map-20261019",
+      "manifest_sha256": "bf73404b954a0bdb424964434c9ba90bf1a64a552ca0e01970f0bc551e057b4d",
+      "sdk_inputs_sha256": "98adfb60ac6c706d545a83a1ff388a810c7295e58ab6f89a95daa6b555a94660",
+      "sdk_results_sha256": "cf3db0f5ea981051857293a2b0622bd67c56f124784c5617f68a15a9c89675d0",
+      "sdk_junit_xml_sha256": "52ebc687bc6d2db0117dcaa7c833934d90d3553ecde48edb1ef63acbdaeba5bd",
+      "evidence_locator": "PASS_INDEX.json datasets[dataset=tools4j-module-map-20261019]"
+    },
+    {
+      "path": "m3/collections/qualification/tools4j-unix-source-successor-20261019.tsv",
+      "before_sha256": "ABSENT",
+      "after_sha256": "a802b36b031d2280c72e148baf93e0977a422ef1f07525f349526a2e2b31e46b",
+      "after_bytes": 89744,
+      "mode": "0644",
+      "dataset": "tools4j-receipt-20261019",
+      "role": "source membership and hash reconciliation metadata",
+      "engine_profile": "pinned-master",
+      "dataset_path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/tools4j-receipt-20261019",
+      "dataset_url": "https://github.com/hsoliwal/com.synexia/tree/dade40a9f6e3ab054bf67628b4a22bd8ffe21a6a/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/tools4j-receipt-20261019",
+      "manifest_sha256": "fc207f8bb0e8df8201e05c47dbcec1d992a3de0e9d7d488c0c176457185353a1",
+      "sdk_inputs_sha256": "4c688331a573e13bc3984b858b1ba6007d84e4a5674c51ab1b274c2df339c7a4",
+      "sdk_results_sha256": "96fa2e76a105a76ff4a6170b87115c1f29b64fd1fff192c703a523f009e6b2c8",
+      "sdk_junit_xml_sha256": "adf849492e7d7d391d82495490dcfff24c444b9ecc4d380fbb150bec4f545ad9",
+      "evidence_locator": "PASS_INDEX.json datasets[dataset=tools4j-receipt-20261019]"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java",
+      "before_sha256": "eb3feb81c6534e617727cc2993ae01dea5675a40a18414b872dc7212edbf7f88",
+      "after_sha256": "e1b179fa00f02e7a3f68c3936580a9824256ba5e01d73cc6bc0930d8bc67a758",
+      "after_bytes": 32003,
+      "mode": "0644",
+      "dataset": "tools4j-views-20261019",
+      "role": "production duplicate-declaration compile repair",
+      "engine_profile": "pinned-master",
+      "dataset_path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/tools4j-views-20261019",
+      "dataset_url": "https://github.com/hsoliwal/com.synexia/tree/dade40a9f6e3ab054bf67628b4a22bd8ffe21a6a/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/tools4j-views-20261019",
+      "manifest_sha256": "7045f353258919ff2f0a5a5eed69e7dbd392578b2882e083234e7720e384c5cc",
+      "sdk_inputs_sha256": "8e4092fcacc8be9329bbaf249ff4970dcd0b748a370761999119662fc65cd53a",
+      "sdk_results_sha256": "e91d5365f1673aaa34e58ffa830632a9c260fd4599680f797f989644bbbaa9be",
+      "sdk_junit_xml_sha256": "ee383d70cda39b5f7477aa542af082c771185fae1b7c82c1b8dc778d30e98817",
+      "evidence_locator": "PASS_INDEX.json datasets[dataset=tools4j-views-20261019]"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3ObjectResidency.java",
+      "before_sha256": "c8ffc48d43e98223ae37e722c5841b962217fb6b98daf561cba430eb3492bdc5",
+      "after_sha256": "6543c4a749a5fc570eec610ea13646fe0b207d53238e1b697bfd208b0cde2c84",
+      "after_bytes": 24533,
+      "mode": "0644",
+      "dataset": "tools4j-residency-20261019",
+      "role": "runtime LRU selection refinement",
+      "engine_profile": "pinned-master",
+      "dataset_path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/tools4j-residency-20261019",
+      "dataset_url": "https://github.com/hsoliwal/com.synexia/tree/dade40a9f6e3ab054bf67628b4a22bd8ffe21a6a/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/tools4j-residency-20261019",
+      "manifest_sha256": "891d2887106a3e5a257f165c04c971e25941c1c742f32820bd96552b9da2c42e",
+      "sdk_inputs_sha256": "92b60c92bec8115c23d3cd9e9a506d97cbb6c276a562d69ef5b53fd072e49c81",
+      "sdk_results_sha256": "05b42c0c44b5f7d7707497b11870c8f1e1c6c87acc6336db4abb9da00d53b37c",
+      "sdk_junit_xml_sha256": "d09d7d94676d9e46647c6ea42549ef527fcf467f9a62fb1342a973cf917d98a1",
+      "evidence_locator": "PASS_INDEX.json datasets[dataset=tools4j-residency-20261019]"
+    },
+    {
+      "path": "m3/collections/src/main/native/collections/m3_long_address_kernel.c",
+      "before_sha256": "49a3e45262ee764c37746c323ae0def76adfff5f27a4cace6ab7416587ca544f",
+      "after_sha256": "05bcaf4403295eb929a830c18f56c10bdc40a2cf0cb972842722d12eba633ca5",
+      "after_bytes": 3770,
+      "mode": "0644",
+      "dataset": "tools4j-gather-native-20261019",
+      "role": "native failure contract correction",
+      "engine_profile": "pinned-master",
+      "dataset_path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/tools4j-gather-native-20261019",
+      "dataset_url": "https://github.com/hsoliwal/com.synexia/tree/dade40a9f6e3ab054bf67628b4a22bd8ffe21a6a/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/tools4j-gather-native-20261019",
+      "manifest_sha256": "70b3d8de70d4b1f6c392f00e40972a9ab8671d7313c57cae2e1d02e8b72c2eea",
+      "sdk_inputs_sha256": "958263c45251d0f08b37b01bdc4716943d7adc2887da0252a3e4a8cd96889790",
+      "sdk_results_sha256": "835950a7a52db25628517dd552c2d2d717fa13c0ced56bfc76fee911f3c8cd65",
+      "sdk_junit_xml_sha256": "4a972c177837d38fa25480c3f0f772e57d5d8f9dc289db1def736be0520c7bb6",
+      "evidence_locator": "PASS_INDEX.json datasets[dataset=tools4j-gather-native-20261019]"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3IndexedMultiValueOccurrenceSelfTest.java",
+      "before_sha256": "1a1cb081fe7a9489d754052586f7e9ebd6bdfd4136e809a4b776a807c3d19c32",
+      "after_sha256": "bb1e04d855273b69deb48da913c1229042044231535ef57488abc240b30f8e23",
+      "after_bytes": 8301,
+      "mode": "0644",
+      "dataset": "tools4j-occurrence-20261019",
+      "role": "existing typed failure fixture correction",
+      "engine_profile": "pinned-master",
+      "dataset_path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/tools4j-occurrence-20261019",
+      "dataset_url": "https://github.com/hsoliwal/com.synexia/tree/dade40a9f6e3ab054bf67628b4a22bd8ffe21a6a/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/tools4j-occurrence-20261019",
+      "manifest_sha256": "d4d28dfd1ea98252c3330579868aff0344e98107d8d19e373ccdbcdda9ed8cb1",
+      "sdk_inputs_sha256": "b637a7081e41033dfcb43fccb4b5d791ab690716a451fc4508c770555e7fd5d2",
+      "sdk_results_sha256": "e8940f6704d2450121e42fac6f57fbd89a2495f490d8e5b7b16923a58e47ad25",
+      "sdk_junit_xml_sha256": "f9c4b8777e377215a8b15e74aeacd3acd8f66299ca16265fd862367b36476822",
+      "evidence_locator": "PASS_INDEX.json datasets[dataset=tools4j-occurrence-20261019]"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3LazyTreeMapSelfTest.java",
+      "before_sha256": "b61d390196173ef0d4f99a86d0569f0542f9805d639a29eff4035140f6cf10ea",
+      "after_sha256": "0e81883c2426a135e2416127916a660e1085b686df53ce830a43ab6b5c928329",
+      "after_bytes": 18798,
+      "mode": "0644",
+      "dataset": "tools4j-lazy-entry-20261019",
+      "role": "existing lazy entry oracle correction",
+      "engine_profile": "pinned-master",
+      "dataset_path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/tools4j-lazy-entry-20261019",
+      "dataset_url": "https://github.com/hsoliwal/com.synexia/tree/dade40a9f6e3ab054bf67628b4a22bd8ffe21a6a/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/tools4j-lazy-entry-20261019",
+      "manifest_sha256": "1bfa1902cb3db15f3d5d6acea283de4baf93b423ac57e00b34fae8df454ca926",
+      "sdk_inputs_sha256": "a6ac0e6268149ac836432ba3bca4b0fc859f0fbcc7f861f550df1666fa292711",
+      "sdk_results_sha256": "fb15445396e9b61c6a611a4b61269f401f37dc302f542034d328879d32c615fc",
+      "sdk_junit_xml_sha256": "10bf058424605545502f5e4f55d24ad1d0229271d7a4d9377924921df506415b",
+      "evidence_locator": "PASS_INDEX.json datasets[dataset=tools4j-lazy-entry-20261019]"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3LongAddressBoundedSelfTest.java",
+      "before_sha256": "0e590e67416010c433b82eb263ddc55f162c099eed13b7fb1606b2c868d83c5d",
+      "after_sha256": "7e1c70759b76dbcdb2800c46430d568345b63bc2d26d8ba392f4409335884dd5",
+      "after_bytes": 8617,
+      "mode": "0644",
+      "dataset": "tools4j-gather-test-20261019",
+      "role": "existing JNI bounded oracle correction",
+      "engine_profile": "pinned-master",
+      "dataset_path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/tools4j-gather-test-20261019",
+      "dataset_url": "https://github.com/hsoliwal/com.synexia/tree/dade40a9f6e3ab054bf67628b4a22bd8ffe21a6a/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/tools4j-gather-test-20261019",
+      "manifest_sha256": "f4aab1ebd6c3f59040b104dc6e25b973c1f403cb1237e5389a6bcc82d172d591",
+      "sdk_inputs_sha256": "156b39364d31c31a018490e8ce1fb6042561af6f79bcf16efaf87e1b98858e3f",
+      "sdk_results_sha256": "a3129201b40dbad74b8702fc9712e56e907bf79a6801dd9f017366454873018c",
+      "sdk_junit_xml_sha256": "b4ad6d42b60451499cfad01cb2302b4d0ea6609bdbba1b18d678c705346377cf",
+      "evidence_locator": "PASS_INDEX.json datasets[dataset=tools4j-gather-test-20261019]"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3NoRetainedStructuralEntryTest.java",
+      "before_sha256": "338d443ef01b118377940397b447b083af9a5a73c8bd8a001005b08efd5a9666",
+      "after_sha256": "bf524182763930713cfbf83d57348a8845ae4a001d60668a49fa3ac284047383",
+      "after_bytes": 10187,
+      "mode": "0644",
+      "dataset": "tools4j-entry-oracle-20261019",
+      "role": "existing bounded API-facade oracle correction",
+      "engine_profile": "pinned-master",
+      "dataset_path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/tools4j-entry-oracle-20261019",
+      "dataset_url": "https://github.com/hsoliwal/com.synexia/tree/dade40a9f6e3ab054bf67628b4a22bd8ffe21a6a/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/tools4j-entry-oracle-20261019",
+      "manifest_sha256": "ff53b177c5b89943c971f1d858608beb15862edbc2c3c2cf2db97d0002aab4f1",
+      "sdk_inputs_sha256": "e06e8d9174d690bb15c6d696828abb6be2c34a8a0c0f499e3a0fca1d5da12924",
+      "sdk_results_sha256": "a749fc8f9816e74b752535471fcc76fec1f071795fab0c299afa49a86137888f",
+      "sdk_junit_xml_sha256": "7cb6002de7eed432ef1181402832c24246cb39ab57fa38c83d53f6a4ef3085c1",
+      "evidence_locator": "PASS_INDEX.json datasets[dataset=tools4j-entry-oracle-20261019]"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3ObjectRangeMapSelfTest.java",
+      "before_sha256": "f78aff3fdd0dff9d7e8faa685a92f26ba1a41d29c1c9a07d46a1af76b46a6381",
+      "after_sha256": "dee07d00fd8cbd4c6193db4ec8583b9f4af2c8815a87175c8746f15f5f761f6b",
+      "after_bytes": 11006,
+      "mode": "0644",
+      "dataset": "tools4j-range-oracle-20261019",
+      "role": "existing present/absent JNI oracle correction",
+      "engine_profile": "pinned-master",
+      "dataset_path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/tools4j-range-oracle-20261019",
+      "dataset_url": "https://github.com/hsoliwal/com.synexia/tree/dade40a9f6e3ab054bf67628b4a22bd8ffe21a6a/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/tools4j-range-oracle-20261019",
+      "manifest_sha256": "16d6d9274013479114acb100c1ada9f29b3c5398c5914c98126aacc8bccda8d9",
+      "sdk_inputs_sha256": "ce809afe1338a6f784a9c55472c9cc2c0e6e19fb9b9839752289f7acd24965f7",
+      "sdk_results_sha256": "102032bd119ff85eb046cd2795ca22fe79566ac5b30a2c26db672ce0e7b9a1f3",
+      "sdk_junit_xml_sha256": "3a2134ea7dd1a237526d1cc4e0e5eb1d7cf004dba2007bb9fc9f16c93da2fbbe",
+      "evidence_locator": "PASS_INDEX.json datasets[dataset=tools4j-range-oracle-20261019]"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3RequiredExcludedMaskSelectorContract.java",
+      "before_sha256": "cb7211d70e551452c1724f186bfbd88a3e459ca0ac64a96f14dfda92b996e15c",
+      "after_sha256": "4a5777ea4b5222d76feb0479ebbe616ef6ca03015b9d4f325550faa456b4fc68",
+      "after_bytes": 6367,
+      "mode": "0644",
+      "dataset": "tools4j-mask-oracle-20261019",
+      "role": "existing unsigned mask oracle correction",
+      "engine_profile": "pinned-master",
+      "dataset_path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/tools4j-mask-oracle-20261019",
+      "dataset_url": "https://github.com/hsoliwal/com.synexia/tree/dade40a9f6e3ab054bf67628b4a22bd8ffe21a6a/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/tools4j-mask-oracle-20261019",
+      "manifest_sha256": "4c8f2630e7b377e1e9fcd8dbc9f27a07adf4d3df58c1e83ee879c2096108f29b",
+      "sdk_inputs_sha256": "d1373643133016291489deeb1b0272774cbe59b0e13e0eaa64fd67c63406262d",
+      "sdk_results_sha256": "39b1cc6595c017d92fad61852f6237b26adf7e233f3579cbf85ec1da9a4f2974",
+      "sdk_junit_xml_sha256": "7bca8ab702a2753d16e5f84c2024d3b85d10a14c1bd3433dc8aa0f7174fb17f7",
+      "evidence_locator": "PASS_INDEX.json datasets[dataset=tools4j-mask-oracle-20261019]"
+    },
+    {
+      "path": "m3/collections/synexia-donation.json",
+      "before_sha256": "50df53dec7be6b25b0f84c1635fa3abbe1391dc8a9c28c4ad0c993b0aa5ed964",
+      "after_sha256": "9bc90b2578b7a82353533746e002f77dfdc0a2459c910d3e7eaf83dd5cf7924c",
+      "after_bytes": 67681,
+      "mode": "0644",
+      "dataset": "tools4j-donation-link-20261019",
+      "role": "existing donation metadata current successor link",
+      "engine_profile": "pinned-master",
+      "dataset_path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/tools4j-donation-link-20261019",
+      "dataset_url": "https://github.com/hsoliwal/com.synexia/tree/dade40a9f6e3ab054bf67628b4a22bd8ffe21a6a/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/tools4j-donation-link-20261019",
+      "manifest_sha256": "fa4108332eabe407998f4ae5abe9cf4688d7a8da72add1ae28b8b0c0e07c2b21",
+      "sdk_inputs_sha256": "9f91d73448d8923802a19239c394fb1f5b676deae8837238732ae68229489cac",
+      "sdk_results_sha256": "85cc7e6ed670370dc746bebbaaa32357108989a2061d5d79d94e027e26e0d72e",
+      "sdk_junit_xml_sha256": "295d9ee1fceb91800db53464a877e17996adb234494e4d6185222f7f5df69ea6",
+      "evidence_locator": "PASS_INDEX.json datasets[dataset=tools4j-donation-link-20261019]"
+    },
+    {
+      "path": "m3/collections/verify_donation.py",
+      "before_sha256": "2e98edda477e2805586ffced0749c62bd2d9674727e84c65cc8b2511fbb622cb",
+      "after_sha256": "cbb92b8e8bc37a473f4c0b6788e9d6fea16da0090e4cbb7f9151337041b64a6b",
+      "after_bytes": 21028,
+      "mode": "0644",
+      "dataset": "tools4j-donation-gate-20261019",
+      "role": "existing donation gate current successor check",
+      "engine_profile": "pinned-master",
+      "dataset_path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/tools4j-donation-gate-20261019",
+      "dataset_url": "https://github.com/hsoliwal/com.synexia/tree/dade40a9f6e3ab054bf67628b4a22bd8ffe21a6a/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/tools4j-donation-gate-20261019",
+      "manifest_sha256": "04c4cf250d9872a561a8ea810aba35cc66e68f389c84ef3b009c536739b2ab23",
+      "sdk_inputs_sha256": "3959aec6927dd5f2392c571fe889cf35ec5f945a9a40d233b271f52bfc91aa28",
+      "sdk_results_sha256": "295dcba19b0f9730ad358b77d88aab68a7bd8e2ef20b6406f83d2c0b1d7bee7e",
+      "sdk_junit_xml_sha256": "a61fb24402011e7d3cb4165e2fe1cc55a92d980240334817b0ef2be4b499a2c5",
+      "evidence_locator": "PASS_INDEX.json datasets[dataset=tools4j-donation-gate-20261019]"
+    },
+    {
+      "path": "m3/tooling/module-packs/collections/build.py",
+      "before_sha256": "115bbc8d7bf48b25c81228797efb36ad0463fc535a8ff5be134c61ecb38c0934",
+      "after_sha256": "0d50756bdadd8ed87892c54dbb21bbaa190b12bff110ac23e79302b0e3d39288",
+      "after_bytes": 11817,
+      "mode": "0644",
+      "dataset": "tools4j-pack-maskwindow-20261019",
+      "role": "existing collections build driver, complete eleven-symbol native closure",
+      "engine_profile": "pinned-master",
+      "dataset_path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/tools4j-pack-maskwindow-20261019",
+      "dataset_url": "https://github.com/hsoliwal/com.synexia/tree/dade40a9f6e3ab054bf67628b4a22bd8ffe21a6a/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/tools4j-pack-maskwindow-20261019",
+      "manifest_sha256": "e0a4afb8ad7dceceb32d55c73ac5d0de256c88862c1ff3c618f8c680063a565c",
+      "sdk_inputs_sha256": "75b1192a3d8d8345ff39da9c11b68f2e66be71a55547865cecd62d336f20a0a2",
+      "sdk_results_sha256": "147ffc29a705dbad98790d095053a3d77bc808adffc87619726be68e72814e09",
+      "sdk_junit_xml_sha256": "602cccc3c9621bb798f01c23b0b119b288acc22fb71dc3f2cf9aa120e05375a7",
+      "evidence_locator": "PASS_INDEX.json datasets[dataset=tools4j-pack-maskwindow-20261019]"
+    }
+  ],
+  "product_gates": {
+    "whole_module_java": {
+      "status": "PASS",
+      "tests": 447,
+      "passed": 445,
+      "native_only_skips": 2,
+      "failures": 0,
+      "errors": 0,
+      "evidence": {
+        "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/catalogue-proof/tools4j-unix-20261019/root-results/collections-whole-java-final-v2.json",
+        "bytes": 306,
+        "sha256": "788d2e744ddcdce46893dba3be2efbf944973c8d433663b6592224bb4d96498a",
+        "url": "https://github.com/hsoliwal/com.synexia/blob/dade40a9f6e3ab054bf67628b4a22bd8ffe21a6a/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/catalogue-proof/tools4j-unix-20261019/root-results/collections-whole-java-final-v2.json"
+      }
+    },
+    "whole_module_native": {
+      "status": "PASS",
+      "tests": 447,
+      "passed": 447,
+      "skipped": 0,
+      "failures": 0,
+      "errors": 0,
+      "evidence": {
+        "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/catalogue-proof/tools4j-unix-20261019/root-results/collections-whole-native-final-v2.json",
+        "bytes": 308,
+        "sha256": "9ee31d795cbc0a0807933a6a5af315f1c5c37db22024e32918d378f69d8e4496",
+        "url": "https://github.com/hsoliwal/com.synexia/blob/dade40a9f6e3ab054bf67628b4a22bd8ffe21a6a/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/catalogue-proof/tools4j-unix-20261019/root-results/collections-whole-native-final-v2.json"
+      }
+    },
+    "real_collections_module_pack": {
+      "status": "PASS",
+      "modules": [
+        "com.m3.collections",
+        "jdk.m3.collections"
+      ],
+      "existing_java_sources": 268,
+      "optional_projection_java_sources": 7,
+      "native_exports_exact": 11,
+      "native_required_host_and_installed_image": true,
+      "evidence": {
+        "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/catalogue-proof/tools4j-unix-20261019/root-results/collections-image.json",
+        "bytes": 951,
+        "sha256": "39090408f124a7ba18cd362b3df7362f6a4341d35c211734281a71414bcd2f09",
+        "url": "https://github.com/hsoliwal/com.synexia/blob/dade40a9f6e3ab054bf67628b4a22bd8ffe21a6a/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/catalogue-proof/tools4j-unix-20261019/root-results/collections-image.json"
+      }
+    },
+    "installed_donation_verifier": {
+      "status": "PASS",
+      "java_sources": 268,
+      "test_sources": 235,
+      "junit_passed": 447,
+      "main_self_tests_passed": 2,
+      "strict_java_compile": "--release 21 -Xlint:all,-module -Werror",
+      "c17_ubsan_checked_jni_prepared_allocation_and_packaged_provenance": "PASS",
+      "evidence": {
+        "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/catalogue-proof/tools4j-unix-20261019/root-results/donation-installed.json",
+        "bytes": 1848,
+        "sha256": "9d95432629b791ab6f2a524e47af41ab173617f56c35656308d27f4436a20f3a",
+        "url": "https://github.com/hsoliwal/com.synexia/blob/dade40a9f6e3ab054bf67628b4a22bd8ffe21a6a/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/catalogue-proof/tools4j-unix-20261019/root-results/donation-installed.json"
+      }
+    }
+  },
+  "metadata_successor": {
+    "schema": "M3_COLLECTION_EXACT_SOURCE_REFINEMENT_V1",
+    "receiver_baseline": "677437be295b23f7ccf7409be287008944d0e8b0",
+    "successor_receipt": "qualification/tools4j-unix-source-successor-20261019.tsv",
+    "successor_receipt_sha256": "a802b36b031d2280c72e148baf93e0977a422ef1f07525f349526a2e2b31e46b",
+    "receipt_columns": [
+      "path",
+      "inherited_manifest_sha256",
+      "pinned_master_sha256",
+      "final_received_sha256"
+    ],
+    "inherited_composed_manifest_sha256": "104bd2f6582f4ce496ff13524a7a8f33e7f4c10fb18981ae9e3229c6da5ba7b9",
+    "inherited_rows": 113,
+    "successor_rows": 418,
+    "resulting_rows": 510,
+    "exact_java_source_membership": 503,
+    "existing_unlisted_java_files_reconciled": 396,
+    "preexisting_stale_hashes_reconciled": 18,
+    "new_pass_hash_drift_in_previously_current_rows": 3,
+    "source_refinement_paths": 9,
+    "canonical_recipe_repository": "hsoliwal/com.synexia",
+    "canonical_recipe_crate": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017",
+    "canonical_metadata_datasets": [
+      "tools4j-receipt-20261019",
+      "tools4j-donation-gate-20261019",
+      "tools4j-module-map-20261019",
+      "tools4j-donation-link-20261019"
+    ],
+    "target_handoff": "m3/tooling/refinement-proofs/tools4j-unix-20261019",
+    "naming_disposition": "EXISTING_OWNER_REFINEMENT_NO_RENAME; BASELINE_INVENTORY_RECONCILIATION",
+    "historical_hash_rule": "Original donor and target hash records retain their recorded receiving revisions. Current listed source hashes are the final_received_sha256 column of this exact successor; historical files and receipts are not rewritten.",
+    "review_scope": "Inventory reconciliation is not algorithm review of all503 Java files. Source refinements and their individual canonical recipes/gates remain separately recorded in the target handoff.",
+    "phase_advance": false
+  },
+  "selected_scope_and_limits": [
+    "M3ObjectResidency reuses the existing owner with two primitive int link arrays. Eligibility, pinning, active/borrowed state, spill rollback, generation and observer behavior remain covered by frozen differential evidence; tick overflow/nonincrease uses the original scan fallback.",
+    "Residency work probes count candidate visits, not elapsed-time speedup. Two int arrays add eight bytes per logical slot plus array headers only in the relevant LRU modes.",
+    "M3FilteredViews removes four duplicated merge declarations while preserving the selected guarded reverse behavior. This does not claim a wrapper-wide predicate, comparator, fail-fast or navigation redesign.",
+    "The gather native leaf aligns array-bounds exception behavior. Public gatherInto already rejects output/payload aliasing, including zero-length calls; the refinement does not introduce alias support. Exact diagnostic parity is qualified with -XX:-OmitStackTraceInFastThrow in the recorded JIT and interpreter runs.",
+    "Mask, bounded-entry, lazy-entry, typed-occurrence and range-native-availability repairs correct existing test oracles with independent contract witnesses; their existing production algorithms are not replaced.",
+    "The final existing build driver compiles both current mask C owners and checks both generated headers and the exact eleven exported symbols. The nine-symbol tools4j-pack-abi-20261019 proposal is retained as superseded evidence and is not applied.",
+    "The 396 previously unlisted Java files and 18 stale hashes were inherited baseline inventory gaps. The nine source refinement paths are separately identified by recipes; the 503-member census is not 503 algorithm changes."
+  ]
+}
