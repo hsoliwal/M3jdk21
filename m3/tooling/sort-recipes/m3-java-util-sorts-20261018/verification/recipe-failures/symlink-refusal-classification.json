@@ -1,0 +1,21 @@
+{
+  "schema": "M3_RECIPE_REFUSAL_COUNTEREXAMPLE_V1",
+  "scope": "RECEIVER_REFUSAL_CLASSIFICATION",
+  "initial_tests": 20,
+  "initial_failures": 1,
+  "initial_errors": 0,
+  "initial_skips": 0,
+  "test": "targetSymlinkParentsRefuseBeforeAnyFilesystemMutation",
+  "input": "Real temporary target directory whose src ancestor is a symbolic link to a separate empty directory.",
+  "expected": "IllegalStateException with Symlink in target path fingerprint; both external directory and every new target remain untouched.",
+  "observed": "An earlier NOFOLLOW_LINKS directory check refused the symlink as Non-directory target ancestor. The assertion on refusal fingerprint failed. No source application ran.",
+  "failed_receiver_sha256": "3544e3d7845e1beded810280c8f6f8a80258c804c3a259d6b812a36bd9044faa",
+  "failed_surefire_xml_sha256": "690658463f5ac3d1fcea14892671001ef7dfed389bbc051faff71beab01ef562",
+  "fix": "Check Files.isSymbolicLink before the non-directory-ancestor branch; keep the exact regression assertion and no-write checks.",
+  "status": "CORRECTED_AND_REGRESSION_EXECUTED",
+  "corrected_receiver_sha256": "d0f7d62e58286821a26bfc468a57f6d009553afb101c319e2c631327c240d08c",
+  "unchanged_single_regression_tests": 1,
+  "single_regression_failures": 0,
+  "required_full_rerun_tests": 20,
+  "required_full_rerun_failures": 0
+}
