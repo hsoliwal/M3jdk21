@@ -1,0 +1,19 @@
+{
+  "label": "29-provider-tests",
+  "command": [
+    "/tmp/m3-array-refinement-20261018-recovery/toolchain/apache-maven-3.9.9/bin/mvn",
+    "-B",
+    "-ntp",
+    "-o",
+    "-Dmaven.repo.local=/workspace/scratch/65626af64474/m3-ast-shared-20261018/gradle-provider-work/maven-cache",
+    "-Dm3.gradle.worker.jar=/workspace/scratch/65626af64474/m3-ast-shared-20261018/gradle-provider-work/proof-inputs/gradle-exact-spi-419a77cf.jar",
+    "surefire:test"
+  ],
+  "cwd": "/workspace/scratch/65626af64474/m3-ast-shared-20261018/gradle-provider-work/generated-final/m3/tooling/module-packs/build-support/gradle-provider",
+  "jdk": "/workspace/scratch/65626af64474/m3-ast-shared-20261018/descriptor-qualification-02/candidate/image",
+  "previous": "28-provider-compile",
+  "started_utc": "2026-10-18T13:25:58.614944+00:00",
+  "finished_utc": "2026-10-18T13:26:04.250172+00:00",
+  "exit_code": 0,
+  "log_sha256": "07d7062caf122f69d343d4bd492da34253c06d353576570e2f573cc813779223"
+}

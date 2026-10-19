@@ -1,0 +1,17 @@
+{
+  "schema": "M3_AST_ALGORITHM_CATALOGUE_SOURCES_V1",
+  "retrieved_date_utc": "2026-10-18",
+  "basis": "Official problem descriptions retrieved directly; complexity and receiving-fit analysis are original reasoning.",
+  "language_target": "Java 21; existing JNI owners only where a separately measured workload justifies them",
+  "references": [
+    {"id": "LC136", "title": "Single Number", "url": "https://leetcode.com/problems/single-number/", "category": "paired-duplicate-uniqueness", "source_type": "official problem description"},
+    {"id": "HR-lonely-integer", "title": "Lonely Integer", "url": "https://www.hackerrank.com/challenges/lonely-integer/problem", "category": "paired-duplicate-uniqueness", "source_type": "official problem description"},
+    {"id": "LC2150", "title": "Find All Lonely Numbers in the Array", "url": "https://leetcode.com/problems/find-all-lonely-numbers-in-the-array/", "category": "singleton-and-absent-neighbours", "source_type": "official problem description"},
+    {"id": "LC146", "title": "LRU Cache", "url": "https://leetcode.com/problems/lru-cache/", "category": "bounded-reuse-and-eviction", "source_type": "official problem description"}
+  ],
+  "source_code_copy": "NONE",
+  "future_donor_admission": "Verify exact repository revision, license, attribution, API/behaviour compatibility and measured workload before adapting implementation code.",
+  "production_changes_in_this_leaf": 0,
+  "tests_rerun_for_documentation_only_leaf": 0,
+  "prior_qualified_source_and_receipts_changed": false
+}
