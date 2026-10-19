@@ -60,7 +60,7 @@ public final class M3HfLexiconIntakeProof {
     private static int verifyLanguageResourceDiscovery() throws IOException {
         List<String> lines = resourceLines(
                 "/com/m3/lexicon/hf/language-resource-discovery.tsv");
-        require(lines.size() == 92, "91 language-resource candidates plus header");
+        require(lines.size() == 94, "93 language-resource candidates plus header");
         List<String> expectedHeader = List.of("source_id", "resource", "category",
                 "data_shape_and_identity", "rights_and_attribution", "m3_candidate_use",
                 "admission_blockers", "state", "evidence");
@@ -107,7 +107,8 @@ public final class M3HfLexiconIntakeProof {
                 "dbnary-ontolex-wiktionary-26", "masakhaner2-african-20",
                 "ids-intercontinental-dictionary-series", "autotyp-typology-database-v1-1-1",
                 "apics-creole-grammar-cldf", "dplace-language-culture-environment",
-                "apertium-language-data-packs", "parseme-multilingual-mwe-corpus-v2")),
+                "apertium-language-data-packs", "parseme-multilingual-mwe-corpus-v2",
+                "hplt-monolingual-v3", "oldi-flores-plus-4-6")),
                 "lexicon, grammar, translation, concept, norms, archive, sign and HF leads retained");
         String idsRecord = lines.stream().skip(1)
                 .filter(line -> "ids-intercontinental-dictionary-series".equals(splitTsv(line)[0]))
@@ -275,6 +276,25 @@ public final class M3HfLexiconIntakeProof {
                 && wikipron.contains("separate licensing terms")
                 && wikipron.contains("do not treat software license as payload license"),
                 "WikiPron software and Wiktionary-derived data rights remain distinct");
+        String hplt = lines.stream().skip(1)
+                .filter(line -> "hplt-monolingual-v3".equals(splitTsv(line)[0]))
+                .findFirst().orElse("");
+        require(hplt.contains("50 terabytes") && hplt.contains("198 languages")
+                && hplt.contains("Common Crawl") && hplt.contains("Internet Archive"),
+                "HPLT scale, language coverage and crawl provenance remain explicit");
+        require(hplt.contains("CC0") && hplt.contains("do not ingest the 50 TB release wholesale")
+                && hplt.contains("per-shard quality warnings"),
+                "HPLT per-language terms and shard-level safeguards remain explicit");
+        String floresPlus = lines.stream().skip(1)
+                .filter(line -> "oldi-flores-plus-4-6".equals(splitTsv(line)[0]))
+                .findFirst().orElse("");
+        require(floresPlus.contains("230 language varieties")
+                && floresPlus.contains("997 dev") && floresPlus.contains("1012 devtest"),
+                "FLORES+ release coverage and split sizes remain explicit");
+        require(floresPlus.contains("CC BY-SA 4.0") && floresPlus.contains("gated")
+                && floresPlus.contains("not for training")
+                && floresPlus.contains("automatic scraping"),
+                "FLORES+ access, evaluation-only use and redistribution terms remain explicit");
         return lines.size() - 1;
     }
 
