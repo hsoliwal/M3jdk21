@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: Apache-2.0
+// Modified 2026-10-18: reject blocked parent directories before creating any output.
 package com.m3.recipe;
 
 import java.io.IOException;
@@ -51,11 +52,15 @@ public final class M3RankIndexRecipe {
 
     public static void run(Path repoRoot, boolean apply) throws IOException {
         Path root = repoRoot.toAbsolutePath().normalize();
-        if (!Files.isDirectory(root.resolve("m3/collections"))) {
+        if (Files.isSymbolicLink(root) || !Files.isDirectory(root.resolve("m3/collections"))) {
             throw new IOException("M3_COLLECTIONS_REPO_ROOT_NOT_FOUND");
         }
-        int matched = 0;
-        for (Install item : INPUTS) {
+
+        // Prepare and validate every target before any destination is written.
+        // The original installer could create earlier files before a later drift refused.
+        byte[][] verified = new byte[INPUTS.size()][];
+        for (int index = 0; index < INPUTS.size(); index++) {
+            Install item = INPUTS.get(index);
             byte[] expected = template(item.resource());
             if (!sha256(expected).equals(item.sha256())) {
                 throw new IOException("TEMPLATE_SHA_MISMATCH:" + item.resource());
@@ -64,28 +69,56 @@ public final class M3RankIndexRecipe {
             if (!destination.startsWith(root)) {
                 throw new IOException("TARGET_ESCAPES_REPO");
             }
+            for (Path part = destination; !part.equals(root); part = part.getParent()) {
+                if (Files.isSymbolicLink(part)) {
+                    throw new IOException("SYMLINK_PATH:" + item.target());
+                }
+                if (!part.equals(destination) && Files.exists(part) && !Files.isDirectory(part)) {
+                    throw new IOException("PRODUCT_PARENT_NOT_DIRECTORY:" + item.target());
+                }
+            }
             if (Files.exists(destination)) {
-                if (Files.isSymbolicLink(destination)
-                        || !Files.isRegularFile(destination)
+                if (!Files.isRegularFile(destination)
                         || !Arrays.equals(Files.readAllBytes(destination), expected)) {
                     throw new IOException("PRODUCT_POSTIMAGE_DIFFERS:" + item.target());
                 }
-            } else if (apply) {
+            } else if (!apply) {
+                throw new IOException("PRODUCT_POSTIMAGE_MISSING:" + item.target());
+            }
+            verified[index] = expected;
+        }
+
+        if (apply) {
+            for (int index = 0; index < INPUTS.size(); index++) {
+                Install item = INPUTS.get(index);
+                Path destination = root.resolve(item.target()).normalize();
+                for (Path part = destination; !part.equals(root); part = part.getParent()) {
+                    if (Files.isSymbolicLink(part)) {
+                        throw new IOException("SYMLINK_PATH:" + item.target());
+                    }
+                    if (!part.equals(destination) && Files.exists(part) && !Files.isDirectory(part)) {
+                        throw new IOException("PRODUCT_PARENT_NOT_DIRECTORY:" + item.target());
+                    }
+                }
+                if (Files.exists(destination)) {
+                    if (!Files.isRegularFile(destination)
+                            || !Arrays.equals(Files.readAllBytes(destination), verified[index])) {
+                        throw new IOException("PRODUCT_POSTIMAGE_DIFFERS:" + item.target());
+                    }
+                    continue;
+                }
                 Files.createDirectories(destination.getParent());
                 Path temp = Files.createTempFile(destination.getParent(), ".m3-rank-", ".tmp");
                 try {
-                    Files.write(temp, expected);
+                    Files.write(temp, verified[index]);
                     Files.move(temp, destination, StandardCopyOption.ATOMIC_MOVE);
                 } finally {
                     Files.deleteIfExists(temp);
                 }
-            } else {
-                throw new IOException("PRODUCT_POSTIMAGE_MISSING:" + item.target());
             }
-            matched++;
         }
         System.out.println("M3 rank/select recipe " + (apply ? "applied" : "checked")
-                + "; sealed paths=" + matched);
+                + "; sealed paths=" + INPUTS.size());
     }
 
     private static byte[] template(String name) throws IOException {
