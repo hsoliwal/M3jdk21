@@ -66,7 +66,7 @@ public final class M3HfLexiconIntakeProof {
     private static int verifyLanguageResourceDiscovery() throws IOException {
         List<String> lines = resourceLines(
                 "/com/m3/lexicon/hf/language-resource-discovery.tsv");
-        require(lines.size() == 176, "175 language-resource candidates plus header");
+        require(lines.size() == 182, "181 language-resource candidates plus header");
         List<String> expectedHeader = List.of("source_id", "resource", "category",
                 "data_shape_and_identity", "rights_and_attribution", "m3_candidate_use",
                 "admission_blockers", "state", "evidence");
@@ -264,8 +264,14 @@ public final class M3HfLexiconIntakeProof {
                 "lexik-fr-1-0-2026-10",
                 "ealex-east-african-lexome-2026",
                 "nzonza-cialr-44",
-                "dannet-danish-wordnet-2026-08-21"
-        )), "exact 175 language-resource source IDs match the pinned catalogue");
+                "dannet-danish-wordnet-2026-08-21",
+                "aiatsis-austlang-live-2026",
+                "afwn-2022-release-1-0",
+                "crubadan-hf-character-trigrams-449",
+                "elg-catalogue-release-3-0-2026",
+                "oanc-open-frequency-derivation",
+                "elexis-dictionary-rest-discovery"
+        )), "exact 181 language-resource source IDs match the pinned catalogue");
         String massive = discoveryRecord(lines, "massive-nlu-1-1");
         require(massive.contains("52 languages") && massive.contains("SLURP") && massive.contains("CC BY 4.0")
                 && massive.contains("not a canonical dictionary"),
@@ -527,6 +533,30 @@ public final class M3HfLexiconIntakeProof {
                 && dannet.contains("CILI")
                 && dannet.contains("REFERENCE_ONLY"),
                 "DanNet release, license, concept links and reference-only state stay explicit");
+        String austlang = discoveryRecord(lines, "aiatsis-austlang-live-2026");
+        require(austlang.contains("CC BY 4.0") && austlang.contains("alpha-numeric")
+                && austlang.contains("approximate"),
+                "Austlang stable variety IDs and approximate locations remain qualified");
+        String afwn = discoveryRecord(lines, "afwn-2022-release-1-0");
+        require(afwn.contains("nine languages") && afwn.contains("CC BY 4.0")
+                && afwn.contains("synset"),
+                "African Wordnet release coverage, rights and sense identity remain explicit");
+        String crubadan = discoveryRecord(lines, "crubadan-hf-character-trigrams-449");
+        require(crubadan.contains("449 writing systems") && crubadan.contains("GPL-3.0")
+                && crubadan.contains("ISO 639-3") && crubadan.contains("boundary markers"),
+                "Crúbadán codes, character n-gram semantics and license remain explicit");
+        String elg = discoveryRecord(lines, "elg-catalogue-release-3-0-2026");
+        require(elg.contains("October 2026") && elg.contains("grammars")
+                && elg.contains("record-level rights"),
+                "ELG remains a discovery catalogue with per-resource rights");
+        String oanc = discoveryRecord(lines, "oanc-open-frequency-derivation");
+        require(oanc.contains("15-million-word") && oanc.contains("unrestricted")
+                && oanc.contains("ANC Second Release frequency exports"),
+                "OANC-derived frequencies stay distinct from ANC2 exports");
+        String elexis = discoveryRecord(lines, "elexis-dictionary-rest-discovery");
+        require(elexis.contains("Public Domain") && elexis.contains("X-API-KEY")
+                && elexis.contains("separate access"),
+                "ELEXIS protocol rights stay distinct from dictionary rights");
         String worldLanguages = lines.stream().skip(1)
                 .filter(line -> "hf-world-languages-7130".equals(splitTsv(line)[0]))
                 .findFirst().orElse("");

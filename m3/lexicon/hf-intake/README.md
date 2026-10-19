@@ -23,7 +23,7 @@ source Synexia owner. Repeated source rows remain separate stable record IDs
 while the downstream M3LEX image may deduplicate identical UTF-16 values.
 
 The companion `language-resource-discovery.tsv` is a searchable,
-release-aware catalogue of 175 **reference-only** candidates.
+release-aware catalogue of 181 **reference-only** candidates.
 An earlier discovery pass added 14 reference-only leads: GATITOS bilingual pairs; Swedish Flex/Kubord frequencies, LEXIN, Parole+ and given-name forms; Linguabase's English lexical graph; Bashkir frequency and n-gram indexes; EuroVoc; Czech MorfFlex; Icelandic DMII; Japanese UniDic; and Taiwan's Taigi dictionary. Every row carries its own version, identity and rights caveats. In particular, noncommercial/share-alike, no-derivatives, component-level licensing, unresolved upstream corpus rights, and release-metadata inconsistencies block payload admission. No data files were downloaded or copied.
  In addition to
 dictionaries, grammar, translation, frequency, names, units and speech sources,
@@ -101,6 +101,9 @@ A further source check found four non-duplicate resources: MOT Release 1 supplie
 A fresh source-discovery pass adds nine reference-only leads: Morphalou 3.1 for French lemma/inflection/phonetic coverage; RL-fr and BEL-RL-fr for typed lexical relations and citation-linked sense examples; Prolexbase 2.2 for pivoted proper names and inflections; Unicode Unilex for sparse lexical-property files; LeXiK 1.0 for French proper names, units, abbreviations, pronunciation, grapheme-phone alignment and frequency; and the historical Polyglotta Africana CLDF wordlist. East African Lexome is tracked as a developing inventory/source bibliography, not a completed 420-language lexicon. Nzonza CIALR is a community-reviewed discovery lead only: its site says dataset licensing is separate and contributor-specific, and its service terms prohibit scraping. All nine remain `REFERENCE_ONLY`; no payload was downloaded. Existing generic UniMorph, Wiktionary, PanLex, Common Voice, Apertium, OPUS, CLDR and French Lexique entries were checked rather than duplicated.
 
 A follow-on WordNet review records DanNet's 2026-08-21 Danish release: its metadata reports 69,851 concepts, 61,994 lexical entries, 77,284 lexicalizations and 2,138,435 triples, with RDF, CSV and WN-LMF exports. DanNet data are CC BY-SA 4.0 (separate from MIT-licensed code). Its source-native dn:* URIs and CILI links are useful for a Danish sense/concept bridge, but CILI links are not exact translations; the export's inferred facts and COR/DDS/OEWN companion graphs must remain distinguishable. The record is REFERENCE_ONLY pending a pinned artifact/hash and receiver-level identity proof; no payload was downloaded.
+
+
+The next internet-source pass adds six reference-only candidates: AIATSIS Austlang for stable Australian language-variety codes and alternate names; the 2022 African Wordnet release for nine South African languages; Hugging Face/NLTK Crúbadán character trigrams for 449 writing systems; ELG Release 3 as a European grammar/lexicon/corpus discovery index; OANC as a source for locally derived, document-aware frequency fixtures; and the ELEXIS dictionary API for federated metadata/entry discovery. Their coordinates remain source-specific. In particular, Crúbadán's Hub card declares GPL-3.0, OANC must not be conflated with ANC Second Release frequency exports, ELG/ELEXIS do not license provider payloads, and Austlang/AfWN attribution and identity coordinates must be retained. All six remain `REFERENCE_ONLY`; no payload was downloaded.
 
 ## Testing, donor decisions, and limits
 
