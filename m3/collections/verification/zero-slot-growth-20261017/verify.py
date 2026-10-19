@@ -36,6 +36,11 @@ def run():
     successors={}
     successor_file=here/'SOURCE_SUCCESSORS.tsv'
     if successor_file.exists():
+        # Seal the independently reviewed successor manifest itself: without this
+        # pin an edited manifest could bless arbitrary postimages.
+        if sha(successor_file.read_bytes()) != (
+                '1127aea0ea864a506e84d4f718a02d385e5b57f2433477fc8483a9347e9f4f1a'):
+            raise AssertionError('source successor receipt drift')
         additions=[line.split('\t') for line in successor_file.read_text().splitlines()
                    if line and not line.startswith('#')]
         if len(additions)!=1 or len(additions[0])!=5:
