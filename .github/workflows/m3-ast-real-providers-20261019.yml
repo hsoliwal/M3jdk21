@@ -17,7 +17,7 @@ permissions:
 jobs:
   real-providers:
     runs-on: ubuntu-latest
-    timeout-minutes: 45
+    timeout-minutes: 65
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-java@v4
@@ -50,9 +50,11 @@ jobs:
             "$PACK/src/main/java/jdk/m3/parser/M3ASTIndex.java" \
             "$PACK/src/main/java/jdk/m3/parser/M3ASTIngress.java" \
             "$PACK/src/main/java/jdk/m3/parser/M3ASTAuthoritativeModels.java" \
+            "$PACK/src/main/java/jdk/m3/parser/M3ASTJacksonEvents.java" \
             "$PACK/real-providers/src/test/java/jdk/m3/parser/tests/M3RealProvidersSmoke.java" \
             "$PACK/real-providers/src/test/java/jdk/m3/parser/tests/M3GradleToolingSmoke.java" \
-            "$PACK/real-providers/src/test/java/jdk/m3/parser/tests/M3KotlinPsiSmoke.java"
+            "$PACK/real-providers/src/test/java/jdk/m3/parser/tests/M3KotlinPsiSmoke.java" \
+            "$PACK/real-providers/src/test/java/jdk/m3/parser/tests/M3JacksonIndexScale.java"
       - name: Actual JDT ASTParser, Maven ModelBuilder and Groovy SourceUnit
         shell: bash
         run: |
@@ -77,12 +79,21 @@ jobs:
           java -ea -Xmx2g -cp "$CP" jdk.m3.parser.tests.M3KotlinPsiSmoke \
             | tee "$RUNNER_TEMP/m3-real/kotlin.log"
           grep '^M3_AST_REAL_KOTLIN_PSI_PASS ' "$RUNNER_TEMP/m3-real/kotlin.log"
+      - name: Actual Jackson parser into primitive M3AST index at exactly 100MB and 100MiB
+        shell: bash
+        run: |
+          set -euo pipefail
+          CP="$RUNNER_TEMP/m3-real/classes:$(cat "$RUNNER_TEMP/m3-real/classpath.txt")"
+          java -ea -Xmx2g -cp "$CP" jdk.m3.parser.tests.M3JacksonIndexScale             "$RUNNER_TEMP/m3-real/json100mb" 100000000             | tee "$RUNNER_TEMP/m3-real/json100mb.log"
+          grep '^M3_AST_JACKSON_INDEX_SCALE_PASS bytes=100000000 ' "$RUNNER_TEMP/m3-real/json100mb.log"
+          java -ea -Xmx2g -cp "$CP" jdk.m3.parser.tests.M3JacksonIndexScale             "$RUNNER_TEMP/m3-real/json100mib" 104857600             | tee "$RUNNER_TEMP/m3-real/json100mib.log"
+          grep '^M3_AST_JACKSON_INDEX_SCALE_PASS bytes=104857600 ' "$RUNNER_TEMP/m3-real/json100mib.log"
       - name: Upload small proof receipts only
         if: always()
         shell: bash
         run: |
           mkdir -p real-providers-proof
-          for f in providers.log gradle.log kotlin.log; do
+          for f in providers.log gradle.log kotlin.log json100mb.log json100mib.log; do
             if test -f "$RUNNER_TEMP/m3-real/$f"; then
               cp "$RUNNER_TEMP/m3-real/$f" real-providers-proof/
             fi
