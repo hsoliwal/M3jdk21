@@ -66,7 +66,7 @@ public final class M3HfLexiconIntakeProof {
     private static int verifyLanguageResourceDiscovery() throws IOException {
         List<String> lines = resourceLines(
                 "/com/m3/lexicon/hf/language-resource-discovery.tsv");
-        require(lines.size() == 118, "117 language-resource candidates plus header");
+        require(lines.size() == 126, "125 language-resource candidates plus header");
         List<String> expectedHeader = List.of("source_id", "resource", "category",
                 "data_shape_and_identity", "rights_and_attribution", "m3_candidate_use",
                 "admission_blockers", "state", "evidence");
@@ -206,8 +206,50 @@ public final class M3HfLexiconIntakeProof {
                 "hf-uzbek-lexicon-skeleton",
                 "hf-khmer-search-frequency",
                 "hf-afri-dict",
-                "hf-fineweb-2"
-        )), "exact 116 language-resource source IDs match the pinned catalogue");
+                "hf-fineweb-2",
+                "sign-language-dataset-compendium-v1-5",
+                "easier-multilingual-sign-language-wordnet",
+                "corola-romanian-frequency-lists",
+                "hf-mainlp-word-level-translations",
+                "hf-jnext-chinese-word-frequency",
+                "hf-google-books-ngram-pos",
+                "hf-dillm-persian-grammar-corpus",
+                "hf-pashto-grammar-100"
+        )), "exact 125 language-resource source IDs match the pinned catalogue");
+        String signCompendium = discoveryRecord(lines, "sign-language-dataset-compendium-v1-5");
+        require(signCompendium.contains("87") && signCompendium.contains("v1.5.0")
+                && signCompendium.contains("no blanket redistribution grant"),
+                "sign-language compendium remains an index with per-resource rights");
+        String signWordnet = discoveryRecord(lines, "easier-multilingual-sign-language-wordnet");
+        require(signWordnet.contains("BSL, DGS, DSGS, GSL, LSF, NGT, PJM and STS")
+                && signWordnet.contains("CC BY-NC-SA 4.0")
+                && signWordnet.contains("only to sign-ID/synset-ID links"),
+                "eight sign varieties and link-only noncommercial license scope stay explicit");
+        String corola = discoveryRecord(lines, "corola-romanian-frequency-lists");
+        require(corola.contains("2,260,992") && corola.contains("1,635,250")
+                && corola.contains("Rights/License field is blank"),
+                "CoRoLa form/lemma sizes and missing export license remain explicit");
+        String mainlp = discoveryRecord(lines, "hf-mainlp-word-level-translations");
+        require(mainlp.contains("100 query concepts") && mainlp.contains("25-concept example pool")
+                && mainlp.contains("MIT"),
+                "MaiNLP split and dataset-card license remain explicit");
+        String chineseFrequency = discoveryRecord(lines, "hf-jnext-chinese-word-frequency");
+        require(chineseFrequency.contains("12,472,823") && chineseFrequency.contains("Jieba")
+                && chineseFrequency.contains("source corpus identity and redistribution rights are not established"),
+                "Chinese frequency tokenizer, scale and upstream-rights gap remain explicit");
+        String googlePos = discoveryRecord(lines, "hf-google-books-ngram-pos");
+        require(googlePos.contains("6,320,259") && googlePos.contains("1800-2019")
+                && googlePos.contains("CC BY 3.0"),
+                "Google Books POS/time slice retains size, vintage and attribution");
+        String dillm = discoveryRecord(lines, "hf-dillm-persian-grammar-corpus");
+        require(dillm.contains("41,922") && dillm.contains("3.5 million tokens")
+                && dillm.contains("not parsed rule tables"),
+                "Persian grammar prose is not mistaken for structured rules");
+        String pashtoGrammar = discoveryRecord(lines, "hf-pashto-grammar-100");
+        require(pashtoGrammar.contains("One hundred JSONL")
+                && pashtoGrammar.contains("CC BY 4.0")
+                && pashtoGrammar.contains("not comprehensive"),
+                "Pashto grammar QA remains a small fixture, not a full grammar");
         String cldr = discoveryRecord(lines, "unicode-cldr-48-2");
         require(cldr.contains("48.2") && cldr.contains("common/transforms")
                 && cldr.contains("not reversible"),
