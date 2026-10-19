@@ -112,6 +112,7 @@ recipeList:
   - org.openrewrite.java.ChangeType: {oldFullyQualifiedTypeName: org.eclipse.nebula.widgets.grid.GridRowTree, newFullyQualifiedTypeName: com.m3.collections.M3RowTree}
   - org.openrewrite.java.ChangeType: {oldFullyQualifiedTypeName: org.eclipse.nebula.widgets.grid.GridRowIndex, newFullyQualifiedTypeName: com.m3.collections.M3RowIndex}
   - org.openrewrite.java.ChangeType: {oldFullyQualifiedTypeName: org.eclipse.nebula.widgets.grid.model.HeapGrowth, newFullyQualifiedTypeName: com.m3.collections.M3WarmHeapGrowth}
+  - org.openrewrite.java.ChangeType: {oldFullyQualifiedTypeName: org.eclipse.nebula.widgets.grid.model.HeapSampler, newFullyQualifiedTypeName: com.m3.collections.M3HeapSampler}
   - org.openrewrite.java.ChangeType: {oldFullyQualifiedTypeName: org.eclipse.nebula.widgets.grid.GridItem, newFullyQualifiedTypeName: com.m3.collections.M3RowTreeItem}
   - com.m3.viewport.recipe.M3TidyImports
   - com.m3.viewport.recipe.M3PublicSurface
