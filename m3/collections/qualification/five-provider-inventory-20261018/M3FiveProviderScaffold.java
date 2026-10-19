@@ -44,7 +44,8 @@ import java.util.stream.Collectors;
  */
 public final class M3FiveProviderScaffold {
     private static final List<String> INVENTORY_COLUMNS = List.of("type", "provider", "version", "kind",
-            "categories", "owned_status", "m3_owner", "evidence", "reuse_owner", "priority", "source", "module");
+            "categories", "owned_status", "m3_owner", "evidence", "reuse_owner", "priority", "source", "module",
+            "in_place_landing", "landing_consumer");
     private static final List<String> FAMILY_ORDER = List.of("18", "19", "01", "08", "09", "12", "15", "16",
             "02", "03", "05", "11", "06", "14", "07", "13", "04", "10", "17");
     private static final Set<String> P1 = Set.of("01", "08", "09", "12", "15", "16", "18", "19");
@@ -216,10 +217,43 @@ public final class M3FiveProviderScaffold {
             row.put("module", "-");
             out.add(row);
         }
+        Map<String, Map<String, String>> landing = index(read(q.resolve("LANDING_MAP.tsv")), "family");
+        for (Map<String, String> row : out) { land(row, landing); }
         List<String> order = List.of("jdk", "guava", "apache", "spring", "eclipse", "first-party");
         out.sort(Comparator.comparing((Map<String, String> r) -> order.indexOf(r.get("provider")))
                 .thenComparing(r -> r.get("type")));
         write(q.resolve("INVENTORY.tsv"), INVENTORY_COLUMNS, out);
+    }
+
+    /**
+     * M3jdk21 is the JDK: an owned store lands in place in java.base. JDK rows land in their own
+     * java.util type (public API unchanged, internals on M3 lanes, TARGET_OWNED_PORT GPLv2+CPE via an
+     * M3JdkHandoff packet). Provider rows keep their provider-shaped owner outside java.base and reuse
+     * the java.base store of the java.util analogue of their family. Eclipse rows never land.
+     */
+    static void land(Map<String, String> row, Map<String, Map<String, String>> landing) {
+        String provider = row.get("provider");
+        String type = row.get("type").replace('$', '.');
+        Map<String, String> family = landing.get(family(row.getOrDefault("categories", "17")));
+        switch (provider) {
+            case "jdk" -> {
+                row.put("in_place_landing", "java.base " + type + " (internals on M3 lanes; public API unchanged)");
+                row.put("landing_consumer", "every " + type + " caller; TARGET_OWNED_PORT GPLv2+CPE via M3JdkHandoff packet");
+            }
+            case "eclipse" -> {
+                row.put("in_place_landing", "-");
+                row.put("landing_consumer", "-");
+            }
+            case "first-party" -> {
+                row.put("in_place_landing", "java.base M3 store shared by " + family.get("java_util_analogue"));
+                row.put("landing_consumer", row.getOrDefault("reuse_owner", "-"));
+            }
+            default -> {
+                row.put("in_place_landing", "java.base M3 store of " + family.get("java_util_analogue") + " (" + family.get("store_note")
+                        + "); API owner " + row.get("m3_owner") + " stays outside java.base");
+                row.put("landing_consumer", provider + " API callers of " + type.substring(type.lastIndexOf('.') + 1));
+            }
+        }
     }
 
     // ---------------------------------------------------------------- scaffold
