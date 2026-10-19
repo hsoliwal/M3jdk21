@@ -66,7 +66,7 @@ public final class M3HfLexiconIntakeProof {
     private static int verifyLanguageResourceDiscovery() throws IOException {
         List<String> lines = resourceLines(
                 "/com/m3/lexicon/hf/language-resource-discovery.tsv");
-        require(lines.size() == 136, "135 language-resource candidates plus header");
+        require(lines.size() == 146, "145 language-resource candidates plus header");
         List<String> expectedHeader = List.of("source_id", "resource", "category",
                 "data_shape_and_identity", "rights_and_attribution", "m3_candidate_use",
                 "admission_blockers", "state", "evidence");
@@ -224,8 +224,59 @@ public final class M3HfLexiconIntakeProof {
                 "hf-sango-vocabulary-grammar",
                 "hf-haajidheere-somali-dictionary",
                 "hf-nltk-word-lists",
-                "hf-nltk-swadesh-24"
-        )), "exact 135 language-resource source IDs match the pinned catalogue");
+                "hf-nltk-swadesh-24",
+                "massive-nlu-1-1",
+                "madar-arabic-dialect-lexicon",
+                "samer-arabic-readability-v2",
+                "sil-bloom-library-discovery",
+                "arbml-masader-catalogue",
+                "hf-vocab-bloom-hub-en",
+                "madlad-400-v1-5",
+                "hf-wikidata-label-maps-2025",
+                "ai4bharat-bhasaanuvaad",
+                "iate-eu-terminology"
+        )), "exact 145 language-resource source IDs match the pinned catalogue");
+        String massive = discoveryRecord(lines, "massive-nlu-1-1");
+        require(massive.contains("52 languages") && massive.contains("SLURP") && massive.contains("CC BY 4.0")
+                && massive.contains("not a canonical dictionary"),
+                "MASSIVE locale, SLURP provenance and non-lexicon scope stay explicit");
+        String madar = discoveryRecord(lines, "madar-arabic-dialect-lexicon");
+        require(madar.contains("25 city dialect varieties") && madar.contains("CODA")
+                && madar.contains("CAPHI") && madar.contains("noncommercial"),
+                "MADAR variety and orthographic/phonological coordinates stay explicit");
+        String samer = discoveryRecord(lines, "samer-arabic-readability-v2");
+        require(samer.contains("40,000 lemmas") && samer.contains("no sublicensing")
+                && samer.contains("or modification without separate agreement"),
+                "SAMER remains internal-evaluation-only and non-distributable");
+        String bloom = discoveryRecord(lines, "sil-bloom-library-discovery");
+        require(bloom.contains("363 languages") && bloom.contains("32 language families")
+                && bloom.contains("licenses vary by artifact"),
+                "Bloom is a discovery collection with per-artifact rights");
+        String masader = discoveryRecord(lines, "arbml-masader-catalogue");
+        require(masader.contains("GPL-3.0") && masader.contains("does not license the datasets")
+                && masader.contains("catalogue records are discovery coordinates"),
+                "Masader code license is not attributed to indexed dataset payloads");
+        String vocabBloom = discoveryRecord(lines, "hf-vocab-bloom-hub-en");
+        require(vocabBloom.contains("seven languages") && vocabBloom.contains("28 grammar-pattern rows")
+                && vocabBloom.contains("word plus part_of_speech")
+                && vocabBloom.contains("AI-generated-content notice"),
+                "Vocab Bloom schema, translation scope and generated-content notice stay explicit");
+        String madlad = discoveryRecord(lines, "madlad-400-v1-5");
+        require(madlad.contains("ODC-By") && madlad.contains("language/script shard")
+                && madlad.contains("not lexeme ID"),
+                "MADLAD corpus coordinates and underlying source-rights review stay explicit");
+        String wikidataLabels = discoveryRecord(lines, "hf-wikidata-label-maps-2025");
+        require(wikidataLabels.contains("725,274,530") && wikidataLabels.contains("613 language codes")
+                && wikidataLabels.contains("CC0-1.0") && wikidataLabels.contains("not lexical entries"),
+                "Wikidata label snapshot preserves entity identity and avoids lexeme conflation");
+        String bhasa = discoveryRecord(lines, "ai4bharat-bhasaanuvaad");
+        require(bhasa.contains("44,400 hours") && bhasa.contains("17 million aligned text segments")
+                && bhasa.contains("curated, mined and synthetic"),
+                "BhasaAnuvaad alignment scale and source mix remain explicit");
+        String iate = discoveryRecord(lines, "iate-eu-terminology");
+        require(iate.contains("7 million terms") && iate.contains("24 official EU languages plus Latin")
+                && iate.contains("no dataset-wide license is inferred"),
+                "IATE term identities, language coverage and reuse gate stay explicit");
         String signCompendium = discoveryRecord(lines, "sign-language-dataset-compendium-v1-5");
         require(signCompendium.contains("87") && signCompendium.contains("v1.5.0")
                 && signCompendium.contains("no blanket redistribution grant"),
