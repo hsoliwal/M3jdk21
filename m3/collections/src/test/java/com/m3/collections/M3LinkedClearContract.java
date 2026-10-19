@@ -1,3 +1,4 @@
+// SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
 /*
  * Copyright 2026 Hitesh Soliwal and contributors.
  * SPDX-License-Identifier: Apache-2.0
@@ -61,10 +62,12 @@ public final class M3LinkedClearContract {
         boolean staleSub = false;
         try { sub.size(); } catch (ConcurrentModificationException expected) { staleSub = true; }
         check(staleSub, "sublist observes parent structural change");
-        // The existing iterator spliterator checks hasNext before next; an emptied
-        // owner reports exhaustion here. Fail-fast is not guaranteed for this path.
-        check(!bound.tryAdvance(v -> { throw new AssertionError("stale payload"); }),
-                "bound spliterator cannot expose a cleared payload");
+        // The current index-backed split binds its structural version above.
+        // A nonempty clear invalidates that version even when no slots remain.
+        boolean staleSplit = false;
+        try { bound.tryAdvance(v -> { throw new AssertionError("stale payload"); }); }
+        catch (ConcurrentModificationException expected) { staleSplit = true; }
+        check(staleSplit, "bound index split must be invalidated by nonempty clear");
         check(late.estimateSize() == 0 && !late.tryAdvance(v -> { }), "late binding sees empty list");
         var emptyIterator = list.listIterator();
         list.clear(); reverse.clear();

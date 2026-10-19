@@ -167,8 +167,11 @@ public final class M3LinkedList<E> extends AbstractSequentialList<E> implements 
                 storage.liveMask[s >>> 6] = 0L;
             }
         } else {
-            Arrays.fill(storage.values, null);
-            Arrays.fill(storage.liveMask, 0L);
+            // A previous clear can leave a large retained capacity above used.
+            // Deleted slots below used are already null; high live slots still
+            // require the full used prefix, even when size is much smaller.
+            Arrays.fill(storage.values, 0, storage.used, null);
+            Arrays.fill(storage.liveMask, 0, ((storage.used - 1) >>> 6) + 1, 0L);
         }
         storage.first = -1; storage.last = -1; storage.free = -1;
         storage.size = 0; storage.used = 0; changed();
