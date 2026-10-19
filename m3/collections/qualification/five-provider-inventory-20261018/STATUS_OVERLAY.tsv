@@ -36,7 +36,7 @@ com.google.common.collect.TreeMultimap	OPEN	-	-	core M3TreeMap + M3TreeSet	-
 com.google.common.collect.HashMultiset	DONE #1418	com.m3.collections.guava.M3HashMultiset	PR #1418: implementations/guava-hash-multiset + qualification/owned-guava-hash-multiset-20261018	#1271 M3GuavaMultiset; core M3CountedBag	fill order b; reuse counts lanes
 com.google.common.collect.LinkedHashMultiset	OPEN	-	-	core M3CountedBag + M3LinkedHashMap	-
 com.google.common.collect.TreeMultiset	OPEN	-	-	core M3CountedBag; #1403 M3OrderStatisticForest + M3SparseExtents	range counts via viewport owners
-com.google.common.collect.EnumMultiset	OPEN	-	-	core M3EnumLongMap counts by ordinal	-
+com.google.common.collect.EnumMultiset	DONE #1499	com.m3.collections.guava.M3EnumMultiset	PR #1499: implementations/guava-enum-multiset + qualification/owned-guava-enum-multiset-20261019	core M3EnumLongMap (ordinal lanes + presence mask); PR #1418 M3HashMultiset (counting lanes, views)	next wave 1 of 5; reuse ordinal lanes
 com.google.common.collect.ConcurrentHashMultiset	OPEN	-	-	core M3CountedBag + M3LockedMap	-
 org.apache.commons.collections4.bag.HashBag	DONE #1421	com.m3.collections.apache.M3HashBag	PR #1421: implementations/apache-hash-bag + qualification/owned-apache-hash-bag-20261019	interop M3ApacheBag; core M3CountedBag	fill order b
 org.apache.commons.collections4.multiset.HashMultiSet	OPEN	-	adapter work in open PR #1271	#1271 M3ApacheMultiSet; core M3CountedBag	fill order b
