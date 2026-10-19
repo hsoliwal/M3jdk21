@@ -1,0 +1,43 @@
+# Copyright 2026 Hitesh Soliwal and contributors
+# SPDX-License-Identifier: Apache-2.0
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.openrewrite.viewport.M3SwingViewportJTree
+displayName: JTree keeps its expansion table indexed by parent when m3.swing.viewport is set
+description: >-
+  M3JDK Swing viewport leaf 5 (m3/docs/swing-viewport/DESIGN.md section 11). javax.swing.JTree creates
+  sun.swing.tree.M3ExpandedState (the stock Hashtable plus an index of its paths by parent) instead of a plain
+  Hashtable in its constructor and readObject; getExpandedDescendants returns the stock empty enumeration
+  without scanning the table when the index shows no expanded descendant; removeDescendantToggledPaths removes
+  each path's subtree from the index instead of scanning the table, unless the JTree class overrides
+  getDescendantToggledPaths. Default off. Applied by M3PerFileApply; a second pass must report UNCHANGED.
+recipeList:
+  - com.synexia.openrewrite.viewport.M3InsertStatements:
+      declaringClasses: [javax.swing.JTree]
+      methodName: JTree
+      parameterCount: 1
+      parameterTypes: TreeModel
+      anchor: "expandedState = new Hashtable<TreePath, Boolean>();"
+      position: AFTER
+      statements: "        if (sun.swing.tree.M3ExpandedState.ENABLED) {\n            expandedState = new sun.swing.tree.M3ExpandedState();\n        }"
+  - com.synexia.openrewrite.viewport.M3InsertStatements:
+      declaringClasses: [javax.swing.JTree]
+      methodName: readObject
+      parameterCount: 1
+      anchor: "expandedState = new Hashtable<TreePath, Boolean>();"
+      position: AFTER
+      statements: "        if (sun.swing.tree.M3ExpandedState.ENABLED) {\n            expandedState = new sun.swing.tree.M3ExpandedState();\n        }"
+  - com.synexia.openrewrite.viewport.M3InsertStatements:
+      declaringClasses: [javax.swing.JTree]
+      methodName: getExpandedDescendants
+      parameterCount: 1
+      anchor: "Enumeration<TreePath> toggledPaths = expandedState.keys();"
+      position: BEFORE
+      statements: "        if (expandedState instanceof sun.swing.tree.M3ExpandedState m3State\n                && !m3State.hasExpandedDescendant(parent)) {\n            Set<TreePath> none = Collections.emptySet();\n            return Collections.enumeration(none);\n        }"
+  - com.synexia.openrewrite.viewport.M3InsertStatements:
+      declaringClasses: [javax.swing.JTree]
+      methodName: removeDescendantToggledPaths
+      parameterCount: 1
+      anchor: "if(toRemove != null) {"
+      position: BEFORE
+      statements: "         if (toRemove != null && expandedState instanceof sun.swing.tree.M3ExpandedState m3State\n                 && sun.swing.tree.M3ExpandedState.stockToggledPaths(getClass())) {\n             while (toRemove.hasMoreElements()) {\n                 TreePath path = toRemove.nextElement();\n                 if (!m3State.removeDescendants(path)) {\n                     Enumeration<?> descendants = getDescendantToggledPaths(path);\n                     if (descendants != null) {\n                         while (descendants.hasMoreElements()) {\n                             expandedState.remove(descendants.nextElement());\n                         }\n                     }\n                 }\n             }\n             return;\n         }"
