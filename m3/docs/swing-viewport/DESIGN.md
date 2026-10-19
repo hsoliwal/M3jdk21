@@ -282,6 +282,6 @@ extended (hsoliwal/com.synexia `8c122afccd25` on `m3/viewport-catalogue-recipes-
 machine, stock / M3): `locationToIndex` of the last row 405-626 us / 2.0-3.2 us; `indexToLocation` of the last row
 366-501 us / 1.6-2.8 us; 800x600 frame p50 in the middle 0.82-0.99 ms / 0.42-0.57 ms, at the end 1.23-1.36 ms /
 0.43-0.50 ms (the start frame is noise-bound in both); heap +4 MB (the lane). The single-shot relayout rows
-(`getPreferredSize` 493-687 ms / 593-869 ms, `add(0)` + relayout 378-574 ms / 360-588 ms) follow machine load and GC:
-`model_build`, which runs no M3 code, varied 150-893 ms in the same session. Every row is still measured on each
-relayout; leaf 4 (section 10) removes that for model edits.
+(`getPreferredSize` 493-687 ms / 593-869 ms, `add(0)` + relayout 378-574 ms / 360-588 ms) are noise-bound: two further
+rounds with a fixed 1.5 GB heap (no heap growth) gave `getPreferredSize` 559-699 ms stock and 622-656 ms M3. Every
+row is still measured on each relayout; the next leaf removes that for model edits.
