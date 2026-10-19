@@ -39,3 +39,14 @@ independent CI failures and are not promoted by focused tests.
 Problem families: LeetCode/HackerRank/GFG binary search, sorted membership,
 state-mask histogram / batched strided gather. No third-party challenge source
 is copied. Existing first-party Apache-2.0 source and notices retained.
+
+## First combined receiving execution (compile closure correction)
+
+The new product CI initially failed **before executing assertions** because
+`M3LongIndexProjection`'s original Java dependencies were missing from the
+standalone `javac` command: `M3LongAddressKernel` and `M3IndexPathMasks`.
+Neither owner nor the qualified #1408 Java/C atom changed. The canonical
+source-sealed workflow now includes those two exact existing owners in the
+compilation input set, preserving the original test and JNI proof scope.
+The original failed CI remains visible; only a new actual green run can qualify
+this composed product.
