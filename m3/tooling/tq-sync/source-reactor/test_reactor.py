@@ -59,12 +59,13 @@ class ReactorContract(unittest.TestCase):
                 raise RuntimeError("source model custody drift: " + str(path))
         if len(ORACLE["modelInputs"]) != 121:
             raise RuntimeError("all121 producer models required")
-        version = subprocess.check_output(["mvn", "-version"], text=True, timeout=20)
+        version = subprocess.check_output(["mvn", "-B", "-ntp", "-Dstyle.color=never", "-version"], text=True, timeout=20)
+        (ROOT / "toolchain.log").write_text(version, encoding="utf-8")
+        print(version, flush=True)
         if not re.search(r"Apache Maven 3\.9\.\d+", version):
             raise RuntimeError("preinstalled Maven3.9 required, no download fallback")
         if not re.search(r"Java version: 21(?:\.|,)", version):
             raise RuntimeError("actual Maven JVM must be JDK21")
-        (ROOT / "toolchain.log").write_text(version, encoding="utf-8")
 
     def fixture(self, name):
         receiver = ROOT / ("fixture-" + name)
