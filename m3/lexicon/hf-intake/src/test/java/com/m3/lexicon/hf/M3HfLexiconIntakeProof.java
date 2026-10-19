@@ -60,7 +60,7 @@ public final class M3HfLexiconIntakeProof {
     private static int verifyLanguageResourceDiscovery() throws IOException {
         List<String> lines = resourceLines(
                 "/com/m3/lexicon/hf/language-resource-discovery.tsv");
-        require(lines.size() == 40, "39 language-resource candidates plus header");
+        require(lines.size() == 54, "53 language-resource candidates plus header");
         List<String> expectedHeader = List.of("source_id", "resource", "category",
                 "data_shape_and_identity", "rights_and_attribution", "m3_candidate_use",
                 "admission_blockers", "state", "evidence");
@@ -85,8 +85,12 @@ public final class M3HfLexiconIntakeProof {
         }
         require(sourceIds.containsAll(List.of("wikidata-lexemes", "universal-dependencies",
                 "glottolog-5-3", "dgt-tm", "geonames", "bipm-si-brochure-2026",
-                "hf-langdex", "hf-langdex-dictionaries", "kaggle-langdex-notebook")),
-                "lexicon, grammar, translation, names, standards and HF/Kaggle leads retained");
+                "hf-langdex", "hf-langdex-dictionaries", "kaggle-langdex-notebook",
+                "clarin-vlo-api-4-15", "olac-archive-network-2026",
+                "elra-language-resource-catalogue", "concepticon-3-4", "norare-1-0",
+                "asjp-database", "clics-4", "wold", "asl-lex-2", "mudidi-hf-2026",
+                "openslr-beep", "dobes-archive", "elar-archive", "elarspeech-preprint-2026")),
+                "lexicon, grammar, translation, concept, norms, archive, sign and HF leads retained");
         String panlex = lines.stream().skip(1).filter(line -> "panlex".equals(splitTsv(line)[0]))
                 .findFirst().orElse("");
         require(panlex.contains("CC BY-NC-SA 4.0") && panlex.contains("CC0")
