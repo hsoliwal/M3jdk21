@@ -55,7 +55,8 @@ public final class M3AwtViewportList extends Panel implements ItemSelectable {
 	private final Scrollbar bar = new Scrollbar (Scrollbar.VERTICAL);
 	private final int rows;
 	private boolean multipleMode;
-	private int visibleIndex = -1, top;
+	/* the native caret (focus) row, which decides the row kept when leaving multiple mode */
+	private int visibleIndex = -1, top, caret;
 	private transient ItemListener itemListener;
 	private transient ActionListener actionListener;
 	private boolean syncing;
@@ -108,6 +109,7 @@ public final class M3AwtViewportList extends Panel implements ItemSelectable {
 		items [at] = value;
 		count++;
 		selection.insert (at, 1);
+		if (at <= caret && count > 1) caret++;
 		refresh ();
 	}
 
@@ -122,6 +124,7 @@ public final class M3AwtViewportList extends Panel implements ItemSelectable {
 		selection.clear ();
 		selection.setLogicalCount (0);
 		top = 0;
+		caret = 0;
 		refresh ();
 	}
 
@@ -143,6 +146,9 @@ public final class M3AwtViewportList extends Panel implements ItemSelectable {
 		Arrays.fill (items, count - removed, count, null);
 		count -= removed;
 		selection.remove (start, removed);
+		if (caret > end) caret -= removed;
+		else if (caret >= start) caret = start;
+		caret = Math.max (0, Math.min (caret, count - 1));
 		refresh ();
 	}
 
@@ -177,11 +183,13 @@ public final class M3AwtViewportList extends Panel implements ItemSelectable {
 		if (index < 0 || index >= count) return;
 		if (!multipleMode) selection.clear ();
 		selection.setSelected (index, true);
+		caret = index;
 		syncSelection ();
 	}
 
 	public synchronized void deselect (int index) {
 		if (index < 0 || index >= count) return;
+		if (multipleMode) caret = index;
 		selection.setSelected (index, false);
 		syncSelection ();
 	}
@@ -199,14 +207,22 @@ public final class M3AwtViewportList extends Panel implements ItemSelectable {
 	}
 
 	/**
-	 * Switches the selection mode. Leaving multiple mode keeps a single selected row and clears a selection of two
-	 * or more rows, as the displayed stock list does (measured with {@code M3AwtListDifferential} on win32).
+	 * Switches the selection mode as the displayed stock list does (win32 {@code AwtList::SetMultiSelect}, confirmed
+	 * with {@code M3AwtListDifferential}): leaving multiple mode keeps only the caret row, and only when it is
+	 * selected; entering multiple mode keeps the selected row and puts the caret on it (on row 0 when none).
 	 */
 	public synchronized void setMultipleMode (boolean b) {
 		if (b == multipleMode) return;
 		multipleMode = b;
 		plane.setMultipleMode (b);
-		if (!b && selection.selectedCount () != 1) selection.clear ();
+		if (!b) {
+			boolean keep = caret < count && selection.isSelected (caret);
+			selection.clear ();
+			if (keep) selection.setSelected (caret, true);
+		} else {
+			int selected = getSelectedIndex ();
+			caret = selected >= 0 ? selected : 0;
+		}
 		syncSelection ();
 	}
 

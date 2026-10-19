@@ -31,12 +31,13 @@ import org.openrewrite.java.tree.J;
  * place. Prints {@code CHANGED} or {@code UNCHANGED} with source and target per file.</p>
  */
 public final class M3BatchApply {
+	private static final System.Logger LOG = System.getLogger ("com.m3.viewport.recipe.M3BatchApply");
 	private M3BatchApply () {
 	}
 
 	public static void main (String[] args) throws IOException {
 		if (args.length < 3) {
-			System.err.println ("usage: M3BatchApply <recipe> <out-root|-> <file>...");
+			LOG.log (System.Logger.Level.WARNING, String.valueOf ("usage: M3BatchApply <recipe> <out-root|-> <file>..."));
 			System.exit (2);
 		}
 		Recipe recipe = Environment.builder ().scanRuntimeClasspath ("com.m3.viewport.recipe").build ().activateRecipes (args[0]);
@@ -65,7 +66,7 @@ public final class M3BatchApply {
 		Path target = "-".equals (outRoot) ? input : Path.of (outRoot).resolve (location (text));
 		Files.createDirectories (target.toAbsolutePath ().getParent ());
 		if (changed != null || !"-".equals (outRoot)) Files.writeString (target, text, StandardCharsets.UTF_8);
-		System.out.println ((changed == null ? "UNCHANGED\t" : "CHANGED\t") + input + "\t" + target);
+		LOG.log (System.Logger.Level.INFO, String.valueOf ((changed == null ? "UNCHANGED\t" : "CHANGED\t") + input + "\t" + target));
 	}
 
 	static String location (String text) {
