@@ -193,8 +193,10 @@ final class M3StringRegexDp {
         for (int j = 1; j <= count; j++) {
             row[j] = (plan.atoms[j - 1] & STAR) != 0 && row[j - 1];
         }
+        // Reuse canonical leaf-local UTF-16 coordinates; no copied text or new owner.
+        M3String.CodeUnitCursor units = new M3String.CodeUnitCursor(source);
         for (int i = 0; i < source.length(); i++) {
-            char value = source.charAt(i);
+            char value = units.at(i);
             if (Character.isSurrogate(value)) return UNKNOWN;
             boolean diagonal = row[0];
             row[0] = false;

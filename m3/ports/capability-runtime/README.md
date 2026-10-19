@@ -178,3 +178,36 @@ query reuse, exact receipt equality, wrong-owner refusal and budget boundaries.
 stock-JDK21 linked image's `CapabilityImageSmoke`. This is a testable JPMS/JMOD
 consumer building block for CPULLM evidence retrieval; **integration with the
 actual CPULLM/FLLDCIM resolver and full modified M3JDK HotSpot remains gated**.
+
+## P5: byte histograms, Shannon entropy, and source-run algebra (2026-10-17)
+
+The opt-in source-byte capability runtime gains the first-party ByteHistogram256
+leaf: unsigned-byte frequency (256 primitive long slots = 2,048 counter
+payload bytes), immutable-source run-length traversal (two-pass, callback-only,
+O(1) retained space and preflight result budget refusal), and bounded Shannon
+entropy. Java remains the semantic oracle; no separate M3String payload owner.
+Native Unix and source streams remain bytes until explicitly decoded through
+the existing M3String canonical owner.
+
+nativeCount is an explicit optional C11/JNI operation within the existing
+SHA-256-pinned LfCount.install library. The input is a direct ByteBuffer;
+the JNI result is exactly one 256-long array. A legacy library without the
+symbol fails closed. Source Span conversion uses a temporary direct shadow;
+no native pointer outlives a JNI call and the v1 LF ABI remains unchanged.
+
+Canonical Maven/OpenRewrite recipe: hsoliwal/com.synexia
+com.synexia.rewrite.M3CpuByteHistogramRecipe, crate m3-cpu-byte-histogram-20261017.
+Target postimages and before-SHA receipts remain reviewable and Apache-2.0;
+no third-party source or challenge code is copied.
+
+    python3 m3/ports/capability-runtime/verify_byte_histogram.py --out /tmp/m3-hist-proof
+    mvn -B -ntp -f m3/ports/capability-runtime/pom.xml verify
+
+Local authoring proof on Linux JDK21 used temporary API-shaped
+SourceArtifact/LfCount controls and original C11 JNI: 21,572 Java
+and 31,171 JNI differential assertions passed. This does not prove the
+full target module, JMOD/jlink, HotSpot/jtreg or setup-inclusive speedup.
+
+The 110-row CPUTOOLS category matrix under m3/tooling/jmod-recipes/
+CPU_TOOL_CATEGORY_MATRIX_20261017.tsv retains 91 categories and 19 host
+commands; most entries are CATALOGUED_ONLY, not completed implementations.

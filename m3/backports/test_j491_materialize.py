@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import csv
 import importlib.util
+import sys
 import tempfile
 import unittest
 from pathlib import Path
@@ -16,6 +17,8 @@ def load_module():
     if spec is None or spec.loader is None:
         raise RuntimeError(path)
     module = importlib.util.module_from_spec(spec)
+    # dataclasses resolves postponed annotations through sys.modules during import.
+    sys.modules[spec.name] = module
     spec.loader.exec_module(module)
     return module
 

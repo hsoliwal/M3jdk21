@@ -1,0 +1,8 @@
+# SPDX-License-Identifier: Apache-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.FilteredTerminalFusion20261017
+displayName: Fuse M3 primitive filtered terminal scans without intermediate cursors
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: filtered-terminal-fusion
+      lst: false

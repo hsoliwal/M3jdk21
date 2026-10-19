@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and contributors
 # SPDX-License-Identifier: Apache-2.0
 """Bounded, offline JMOD/jlink assembler. Upstream inputs are read-only and checksum-pinned."""
 import argparse
@@ -86,6 +87,10 @@ def main(argv=None):
     parser.add_argument("--jdk", type=Path, required=True)
     parser.add_argument("--out", type=Path, required=True)
     parser.add_argument("--javafx-lock", type=Path)
+    parser.add_argument("--tool-pack-lock", type=Path,
+                        help="Offline, checksum-pinned optional build-tool inputs")
+    parser.add_argument("--tool-pack", action="append", default=[], metavar="NAME",
+                        help="Explicit optional tool selection; repeat to compose packs")
     parser.add_argument("--profile", choices=("diagnostics", "developer"), default="diagnostics")
     args = parser.parse_args(argv)
     home = java_home(args.jdk)
@@ -95,6 +100,9 @@ def main(argv=None):
     if output.resolve().is_relative_to(home):
         raise ValueError("Output inside JAVA_HOME is forbidden")
     fx_lock, fx_artifacts = load_fx(args.javafx_lock) if args.javafx_lock else (None, [])
+    from tool_packs import (copy_selected_modules, install_assets, inventory_modules,
+                            load_tool_packs)
+    tools = load_tool_packs(args.tool_pack_lock, args.tool_pack)
     output.mkdir(parents=True, exist_ok=False)
     log = output / "logs"
     log.mkdir()
@@ -124,6 +132,8 @@ def main(argv=None):
     if args.profile == "developer":
         from developer_tools import DEVELOPER_ROOTS
         roots = sorted(set(roots).union(DEVELOPER_ROOTS))
+    if tools.names:
+        roots = sorted(set(roots).union(tools.roots))
     if fx_lock:
         fx_classes = output / "javafx-classes"
         compile_module(home, source / "fixtures/javafx", fx_classes,
@@ -132,10 +142,18 @@ def main(argv=None):
                  "--legal-notices", source / "legal", jmods / "com.m3pack.fx.jmod"], log / "javafx-jmod.log")
         roots.append("com.m3pack.fx")
     inventory = [home / "bin/java", "-cp", classes, "com.m3.tools.modulepack.M3ModuleInventory",
-                 ",".join(roots), home / "jmods", jmods]
+                 ",".join(roots), home / "jmods", jmods,
+                 *[item.path for item in tools.modules]]
     first = command(inventory, output / "MODULES.tsv")
     if command(inventory, log / "inventory-replay.tsv") != first:
         raise ValueError("Inventory fixed-point mismatch")
+    selected_modules = copy_selected_modules(tools, first, jmods)
+    if tools.names:
+        installed_inventory = command(
+            [home / "bin/java", "-cp", classes, "com.m3.tools.modulepack.M3ModuleInventory",
+             ",".join(roots), home / "jmods", jmods], log / "installed-inventory.tsv")
+        if inventory_modules(installed_inventory) != selected_modules:
+            raise ValueError("Installed tool module closure differs from admitted inventory")
     if fx_lock:
         observed = {line.split("\t")[0]: line.split("\t")[1] for line in first.splitlines()[1:]}
         for name in FX_MODULES:
@@ -148,6 +166,7 @@ def main(argv=None):
              "--strip-debug", "--no-header-files", "--no-man-pages", "--output", image],
             log / "jlink.log")
     command([image / "bin/java", "--list-modules"], log / "image-modules.log")
+    install_assets(tools, image)
     smoke = command([image / "bin/java", "-Xcheck:jni", "-m",
                      "com.m3pack.diagnostics/com.m3.pack.diagnostics.M3DiagnosticsSmoke",
                      output / "probe.jfr"], log / "diagnostics-run.log")
@@ -169,6 +188,8 @@ def main(argv=None):
     receipt = {"status": "LOCAL_IMAGE_PROVEN", "jdk_release_sha256": digest(home / "release"),
                "javafx": fx_lock, "roots": roots, "profile": args.profile, "developer": developer, "m3jdk21_product_acceptance": False,
                "maven_junit_jacoco": "NOT_EXECUTED_BY_THIS_SCRIPT"}
+    if tools.names:
+        receipt["tool_packs"] = tools.receipt(selected_modules)
     (output / "RECEIPT.json").write_text(json.dumps(receipt, indent=2, sort_keys=True) + "\n")
     files = sorted(path for path in image.rglob("*") if path.is_file())
     (output / "IMAGE_SHA256.tsv").write_text("sha256\tpath\n" + "".join(

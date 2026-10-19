@@ -1,0 +1,14 @@
+Usage: m3-rewrite --source-root DIR --source FILE [--source FILE ...]
+       --recipe QUALIFIED_NAME [--recipe QUALIFIED_NAME ...]
+       [--recipe-config YAML ...] [--recipe-jar JAR ...]
+       [--patch NEW_FILE] [--classes-dir DIR] [-- JAVAC_OPTIONS ...]
+
+Runs OpenRewrite 8.17.1 Java recipes after one successful, lossless by-file
+M3 javac compilation. Recipe YAML supplies recipe options. Sources are UTF-8;
+relative --source paths resolve against --source-root. Other paths resolve
+against the working directory. The default patch destination is stdout.
+--patch creates a new file and refuses overwrite. Source files are not applied.
+Class output uses a temporary directory unless --classes-dir is supplied.
+Pass normal classpath, release, processor and other compiler options after --.
+Every requested source must produce an attributed LST. Unsupported units
+(including module-info/package-info without an analyzed type) are refused.

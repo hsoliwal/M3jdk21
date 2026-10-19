@@ -1,0 +1,13 @@
+# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
+# SPDX-License-Identifier: Apache-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3jdk.ProgramEscapePrecompute20261017
+displayName: Prepare bounded method escape masks and preserve SWAP aliases
+description: >-
+  Refine existing ASM def-use escape owners through exact source admission,
+  a bounded primitive dependency graph and the retained conservative forward fallback.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: m3-program-escape-precompute-20261017
+  - com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe:
+      crateName: m3-program-escape-precompute-20261017

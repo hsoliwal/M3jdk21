@@ -1,0 +1,10 @@
+priority	state	task
+P0	DONE	Pin exact Synexia recipe revision and source templates
+P0	DONE	Verify three generated postimages and unchanged public JVM descriptors
+P0	DONE	Run selected Java21 randomized JDK value and capacity differential
+P0	OPEN	Qualify Maven JUnit and OpenRewrite SDK in authoritative owning builds
+P0	OPEN	Run hosted CI and review failures without bypass
+P1	OPEN	Verify installed native/JNI/GC/HotSpot and matched jtreg
+P1	OPEN	Measure cold/warm CPU throughput and actual retained heap
+P1	OPEN	Resolve Synexia donor draft merge/promotion, handoff gate
+P2	OPEN	Inventory remaining collection-family recipes without duplicating owners

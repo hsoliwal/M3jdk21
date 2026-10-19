@@ -1,0 +1,9 @@
+category	provider	problem	decision	provenance
+SOURCE_CENSUS	JDK	Preserve JDK Map and generic list backing, no direct source mutation	REUSE_PINNED	M3 first-party
+SOURCE_CENSUS	Guava	Preserve existing Guava BiMap and Multiset owner blobs	REUSE_PINNED	Guava Apache-2.0 jar; no copied source
+SOURCE_CENSUS	Eclipse Collections	Preserve Eclipse indexed list/set multimap owners	REUSE_PINNED	EPL/EDL upstream dependency
+SOURCE_CENSUS	Spring	Preserve direct Spring MultiValueMap source and tests	REUSE_PINNED	Spring Apache-2.0 dependency
+SOURCE_CENSUS	Apache Commons Collections	Preserve BidiMap/MultiSet/ListValuedMap/SetValuedMap owners	REUSE_PINNED	Apache-2.0 + ASF notices
+SOURCE_CENSUS	LeetCode	Array indexed hashing algorithms	REFERENCE_ONLY	No challenge code copied
+SOURCE_CENSUS	HackerRank	Bit manipulation and arrays algorithms	REFERENCE_ONLY	No challenge code copied
+SOURCE_CENSUS	GeeksforGeeks	Array index and masks	REFERENCE_ONLY	No challenge code copied

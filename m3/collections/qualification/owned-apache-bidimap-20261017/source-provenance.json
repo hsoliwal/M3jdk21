@@ -1,0 +1,74 @@
+{
+  "class": "com.m3.collections.apache.M3BidiMap",
+  "protocol_donor": {
+    "repository": "apache/commons-collections",
+    "commit": "7f7fb0244abc940a2e9dd28b67508c0483a58c3e",
+    "body_blob": "c99878d0446429cd1677e32f8ed58cb5ab500009",
+    "view_blob": "493ff732764698abe64b156c1f6a40b24a54ac04",
+    "license": "Apache-2.0",
+    "decision": "ADAPT"
+  },
+  "M3_owner_blob": "ade59880b8c9b2bee1b32ae67ca9d29b7382d998",
+  "runtime_provider_implementation_superclass_or_delegate": false,
+  "qualification": "one complete owned BidiMap protocol with pinned provider quirks and tested interface scenarios; not full-library admission",
+  "ci": "PENDING",
+  "independent_source_review": "PRIOR_FINDINGS_RESOLVED_V3_EXACT_BYTE_RECHECK_PENDING",
+  "tested_core_commit": "e913ab89056657eca4009678cfe9a657c020e79b",
+  "publication_parent_commit": "1f6ed369492ee10946ff3f157c68d25d37a3457c",
+  "publication_parent_tree": "19ce7c1c8b1c0ecfabb3dba8e8eb8c22eab3b32d",
+  "additive_rebase": {
+    "ancestor_commits_preserved": 55,
+    "new_target_namespaces_absent": true,
+    "owner_blobs_unchanged": true,
+    "full_current_core_compile": "HOSTED_CI_PENDING"
+  },
+  "V1_source_receipts": [
+    {
+      "target": "m3/collections/implementations/apache/src/main/java/com/m3/collections/apache/M3BidiMap.java",
+      "before": "ABSENT",
+      "sha256": "f811a07b8fcd6be3a4b64d61f548742ad44a047f58ecb8641c490850d51bad9e",
+      "bytes": 16931,
+      "template": "M3BidiMap.java.txt"
+    },
+    {
+      "target": "m3/collections/implementations/apache/src/test/java/com/m3/collections/apache/M3BidiMapSelfTest.java",
+      "before": "ABSENT",
+      "sha256": "e6cdb48ba26466b8e8a3c6afe31036182b353d7c10cfd83896737714a209419d",
+      "bytes": 35742,
+      "template": "M3BidiMapSelfTest.java.txt"
+    }
+  ],
+  "source_receipts": [
+    {
+      "target": "m3/collections/implementations/apache/src/main/java/com/m3/collections/apache/M3BidiMap.java",
+      "before": "ABSENT",
+      "sha256": "8f0448814922c2c0375728c7a5d50262c564f8be158a369f28e68452eeb177ac",
+      "bytes": 17418,
+      "template": "M3BidiMap.java.txt"
+    },
+    {
+      "target": "m3/collections/implementations/apache/src/test/java/com/m3/collections/apache/M3BidiMapSelfTest.java",
+      "before": "ABSENT",
+      "sha256": "e6cdb48ba26466b8e8a3c6afe31036182b353d7c10cfd83896737714a209419d",
+      "bytes": 35742,
+      "template": "M3BidiMapSelfTest.java.txt"
+    }
+  ],
+  "original_review_regression": "bidi-value-01 real provider mismatch, retained; new delivered-value scalar protocol passes8paired cases",
+  "V2_source_receipts": [
+    {
+      "target": "m3/collections/implementations/apache/src/main/java/com/m3/collections/apache/M3BidiMap.java",
+      "before": "ABSENT",
+      "sha256": "709a577431c923f8032c93f8a882796a8c81446e321b7cb4fbfeda55553fc3de",
+      "bytes": 17375,
+      "template": "M3BidiMap.java.txt"
+    },
+    {
+      "target": "m3/collections/implementations/apache/src/test/java/com/m3/collections/apache/M3BidiMapSelfTest.java",
+      "before": "ABSENT",
+      "sha256": "e6cdb48ba26466b8e8a3c6afe31036182b353d7c10cfd83896737714a209419d",
+      "bytes": 35742,
+      "template": "M3BidiMapSelfTest.java.txt"
+    }
+  ]
+}

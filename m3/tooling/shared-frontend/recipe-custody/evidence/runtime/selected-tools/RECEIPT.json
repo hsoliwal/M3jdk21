@@ -1,0 +1,193 @@
+{
+  "builder_sha256": "46ae225a30f007c480338618969eb87928aeb812f6974c9b6bf7b9d5124a6614",
+  "combined_lock_sha256": "8717998bb1a4aecb83dc542f4e9a43611b9837e2c6f99984a6440aa284630c91",
+  "commands": [
+    {
+      "argv": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "/workspace/scratch/13309be96b09/M3jdk21/m3/tooling/module-packs/build_pack.py",
+        "--jdk",
+        "/tmp/m3-ast-product-build/images/jdk",
+        "--out",
+        "/tmp/m3-selected-tools-final-v3-20261017/linked",
+        "--tool-pack-lock",
+        "/tmp/m3-selected-tools-final-v3-20261017/combined-tool-lock.json",
+        "--tool-pack",
+        "maven",
+        "--tool-pack",
+        "openrewrite"
+      ],
+      "cwd": null,
+      "label": "build-selected-image",
+      "log": "/tmp/m3-selected-tools-final-v3-20261017/logs/build-selected-image.txt",
+      "log_sha256": "b89405e7b477262393cfce2d1cd60b698bd19bc30fcbb412723d77f357425c8f",
+      "returncode": 0
+    },
+    {
+      "argv": [
+        "/tmp/m3-selected-tools-final-v3-20261017/linked/image/bin/m3-mvn",
+        "--version"
+      ],
+      "cwd": null,
+      "label": "maven-before-relocation",
+      "log": "/tmp/m3-selected-tools-final-v3-20261017/logs/maven-before-relocation.txt",
+      "log_sha256": "95b3ac32855d52627e9ff79c89fb2b1e542001094a5c8b703dce41041c1b5673",
+      "returncode": 0
+    },
+    {
+      "argv": [
+        "/tmp/m3-selected-tools-final-v3-20261017/linked/image/bin/m3-rewrite",
+        "--help"
+      ],
+      "cwd": null,
+      "label": "rewrite-before-relocation",
+      "log": "/tmp/m3-selected-tools-final-v3-20261017/logs/rewrite-before-relocation.txt",
+      "log_sha256": "70aba104ec96f47eb9ab6de7b489f7f5e491ed04c0f73d2641c1cb2399451159",
+      "returncode": 0
+    },
+    {
+      "argv": [
+        "/tmp/m3-selected-tools-final-v3-20261017/relocated image with spaces/bin/m3-mvn",
+        "--version"
+      ],
+      "cwd": null,
+      "label": "maven-after-relocation",
+      "log": "/tmp/m3-selected-tools-final-v3-20261017/logs/maven-after-relocation.txt",
+      "log_sha256": "ef33684fe5e60217df6d11321e3faa9f996a30c87b555763053e41b7ede6e9be",
+      "returncode": 0
+    },
+    {
+      "argv": [
+        "/tmp/m3-selected-tools-final-v3-20261017/relocated image with spaces/bin/m3-rewrite",
+        "--help"
+      ],
+      "cwd": null,
+      "label": "rewrite-after-relocation",
+      "log": "/tmp/m3-selected-tools-final-v3-20261017/logs/rewrite-after-relocation.txt",
+      "log_sha256": "70aba104ec96f47eb9ab6de7b489f7f5e491ed04c0f73d2641c1cb2399451159",
+      "returncode": 0
+    },
+    {
+      "argv": [
+        "/tmp/m3-selected-tools-final-v3-20261017/relocated image with spaces/bin/m3-mvn",
+        "-o",
+        "-B",
+        "-ntp",
+        "-s",
+        "/tmp/m3-selected-tools-final-v3-20261017/offline-settings.xml",
+        "-Dmaven.repo.local=/tmp/m3-maven-repository",
+        "-Dm3.ast=true",
+        "org.apache.maven.plugins:maven-compiler-plugin:3.16.0:compile"
+      ],
+      "cwd": "/tmp/m3-selected-tools-final-v3-20261017/project with spaces",
+      "label": "maven-compile",
+      "log": "/tmp/m3-selected-tools-final-v3-20261017/logs/maven-compile.txt",
+      "log_sha256": "382506ddc56352da57a9c6d7ef0a796872746d4ccf74ab626be2efde701c1aef",
+      "returncode": 0
+    },
+    {
+      "argv": [
+        "/tmp/m3-selected-tools-final-v3-20261017/relocated image with spaces/bin/java",
+        "-cp",
+        "/tmp/m3-selected-tools-final-v3-20261017/project with spaces/target/classes",
+        "demo.Use"
+      ],
+      "cwd": null,
+      "label": "compiled-program",
+      "log": "/tmp/m3-selected-tools-final-v3-20261017/logs/compiled-program.txt",
+      "log_sha256": "8b85518672bb6350f95a49cc1ed31c6bb23ee655194ee2bac7d6b3769eaf7e0d",
+      "returncode": 0
+    },
+    {
+      "argv": [
+        "/tmp/m3-selected-tools-final-v3-20261017/relocated image with spaces/bin/m3-rewrite",
+        "--source-root",
+        "/tmp/m3-selected-tools-final-v3-20261017/project with spaces/src/main/java",
+        "--source",
+        "demo/Api.java",
+        "--source",
+        "demo/Use.java",
+        "--recipe",
+        "demo.Rename",
+        "--recipe-config",
+        "/tmp/m3-selected-tools-final-v3-20261017/project with spaces/rewrite.yml",
+        "--patch",
+        "/tmp/m3-selected-tools-final-v3-20261017/project with spaces/review.patch",
+        "--",
+        "--release",
+        "21",
+        "-proc:none"
+      ],
+      "cwd": "/tmp/m3-selected-tools-final-v3-20261017/project with spaces",
+      "label": "typed-java-recipe",
+      "log": "/tmp/m3-selected-tools-final-v3-20261017/logs/typed-java-recipe.txt",
+      "log_sha256": "1486e24f89c82c6e260841d2b118a3b98fe56cf13777e70961a1a00b1dda5481",
+      "returncode": 0
+    }
+  ],
+  "framework_nonjava_execution": "SEPARATE_FRAMEWORK_JUNIT_GATE",
+  "image": "/tmp/m3-selected-tools-final-v3-20261017/relocated image with spaces",
+  "input_locks": [
+    {
+      "name": "maven",
+      "path": "/workspace/scratch/13309be96b09/build-work/native-maven-sdk-pack-lock.json",
+      "sha256": "13231a58122efbf7269810a1dba934ec8663833adbf738c32f25b36b2e65e03f"
+    },
+    {
+      "name": "openrewrite",
+      "path": "/workspace/scratch/13309be96b09/ast-work/rewrite-pack-sdk-proof/openrewrite-lock.json",
+      "sha256": "a847e6c9c8f89a1d0c9be9aaf047d3ffa64a65fb33d4ec7dcabfa08d8d1619a8"
+    }
+  ],
+  "input_sources": {
+    "demo/Api.java": "package demo;\npublic final class Api {\n  public static final int VALUE = 42;\n  public static String oldName(String value) { return value + \"!\"; }\n}\n",
+    "demo/Use.java": "package demo;\npublic final class Use {\n  public static void main(String[] args) {\n    System.out.println(Api.oldName(\"M3_TOOLS\"));\n  }\n}\n"
+  },
+  "input_sources_sha256": {
+    "demo/Api.java": "6877e2a3ab03a28020a72d5eaf2a44069d0374061a90f20e9d3deef5e19cbaed",
+    "demo/Use.java": "177727d890fcdef8e77cf066e494727c3d5555dcb05ba11cd894c3c4efda8da9"
+  },
+  "java_recipe_stats": {
+    "analyzed": "2",
+    "completed": "true",
+    "conversions": "2",
+    "errors": "0",
+    "inputLsts": "2",
+    "parsed": "2",
+    "sourceChecks": "2"
+  },
+  "java_recipe_summary": "M3RewriteCompiler parsed=2 analyzed=2 inputLsts=2 conversions=2 sourceChecks=2 errors=0 completed=true\nSLF4J(W): No SLF4J providers were found.\nSLF4J(W): Defaulting to no-operation (NOP) logger implementation\nSLF4J(W): See https://www.slf4j.org/codes.html#noProviders for further details.\nM3Rewrite recipes=1 inputLsts=2 changedFiles=2\n",
+  "maven_compiler_stats": {
+    "analyzed": "2",
+    "captures": "2",
+    "completed": "true",
+    "consumerFailed": "false",
+    "errors": "0",
+    "extraSourceReads": "0",
+    "hits": "0",
+    "parsed": "2",
+    "projections": "0"
+  },
+  "maven_version": "Apache Maven 4.1.0-SNAPSHOT\nMaven home: /tmp/m3-selected-tools-final-v3-20261017/relocated image with spaces/lib/m3-tools/maven\nJava version: 21-internal, vendor: N/A, runtime: /tmp/m3-selected-tools-final-v3-20261017/relocated image with spaces\nDefault locale: en, platform encoding: UTF-8, time zone: America/Mexico_City\nOS name: \"linux\", version: \"6.18.55\", arch: \"amd64\", family: \"unix\"\n",
+  "platform": "Linux x86_64; no native Windows execution claim",
+  "pom": "<project xmlns=\"http://maven.apache.org/POM/4.0.0\"><modelVersion>4.0.0</modelVersion><groupId>org.m3.fixture</groupId><artifactId>selected-tools</artifactId><version>1</version><properties><maven.compiler.release>21</maven.compiler.release></properties><build><plugins><plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-compiler-plugin</artifactId><version>3.16.0</version><configuration><proc>none</proc><compilerArgs><arg>-Xplugin:M3AST lossless trace=maven-trace.tsv image=constants.m3prim slots=slots.tsv fold-expressions</arg></compilerArgs></configuration></plugin></plugins></build></project>\n",
+  "primitive_sha256": "b200601c251a13de0fd54e918021a648841198c2f3d1a8cfeb50382201e65eda",
+  "recipe_yaml": "type: specs.openrewrite.org/v1beta/recipe\nname: demo.Rename\ndisplayName: Rename a typed API\ndescription: Exercise the full selected framework with shared compiler units.\nrecipeList:\n  - org.openrewrite.java.ChangeMethodName:\n      methodPattern: 'demo.Api oldName(java.lang.String)'\n      newMethodName: renamed\n      matchOverrides: false\n      ignoreDefinition: false\n",
+  "relocated_with_spaces": true,
+  "review_patch": "diff --git a/demo/Api.java b/demo/Api.java\nindex ef38a62..1df0b06 100644\n--- a/demo/Api.java\n+++ b/demo/Api.java\n@@ -1,5 +1,5 @@ org.openrewrite.config.CompositeRecipe\n package demo;\n public final class Api {\n   public static final int VALUE = 42;\n-  public static String oldName(String value) { return value + \"!\"; }\n+  public static String renamed(String value) { return value + \"!\"; }\n }\ndiff --git a/demo/Use.java b/demo/Use.java\nindex 5366690..810eb1c 100644\n--- a/demo/Use.java\n+++ b/demo/Use.java\n@@ -1,6 +1,6 @@ org.openrewrite.config.CompositeRecipe\n package demo;\n public final class Use {\n   public static void main(String[] args) {\n-    System.out.println(Api.oldName(\"M3_TOOLS\"));\n+    System.out.println(Api.renamed(\"M3_TOOLS\"));\n   }\n }\n",
+  "selected_packs": [
+    "maven",
+    "openrewrite"
+  ],
+  "slots_sha256": "9738b5684d3873cc670a90f271c37e705ad9a026d31584ddcc2cdadab85258d1",
+  "source_jdk": "/tmp/m3-ast-product-build/images/jdk",
+  "source_jdk_sha256": {
+    "lib/modules": "e7a2827ebfcb2f1fb474db3a8e4e4bc058ffe5f5dea5f9701803669101b28b8b",
+    "release": "5a3d73c8957e7fcb0da466afc0be260adeaddbf8bb04ad82ebb562710c2989de"
+  },
+  "status": "SELECTED_MAVEN_OPENREWRITE_IMAGE_PASS",
+  "unselected_gradle_ant_absent": true,
+  "unselected_missing_plugin_not_opened": true,
+  "verified_asset_count": 336,
+  "verifier_sha256": "1f97567d361e9bbf130a7b3c7817664b778246e913322b36483c77798782ce2e"
+}

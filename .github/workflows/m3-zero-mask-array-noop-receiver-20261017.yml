@@ -1,0 +1,134 @@
+# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and contributors
+# SPDX-License-Identifier: Apache-2.0
+name: M3JDK21 zero-state-mask identity dynamic arrays and JNI gates
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/m3-zero-mask-array-noop-receiver-20261017.yml'
+      - 'm3/collections/src/main/java/com/m3/collections/M3LongArrayList.java'
+      - 'm3/collections/src/main/java/com/m3/collections/M3StateMaskArrays.java'
+      - 'm3/collections/src/test/java/com/m3/collections/M3ZeroMaskArrayFastPath*.java'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  source-sealed-jdk21-contract:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Verify all four original Synexia recipe postimage SHA-256 values
+        shell: bash
+        run: |
+          set -euo pipefail
+          printf '%s  %s\n' '968773eb7e044332b9c1a44040b49e3aa253e0f1464d8d9e38513e2ebcc8f6dd' 'm3/collections/src/main/java/com/m3/collections/M3LongArrayList.java' | sha256sum -c -
+          printf '%s  %s\n' '6c21752b4a73bc110a5f6b7aebc808d216e5df157cd67f0542065627cc88cefc' 'm3/collections/src/main/java/com/m3/collections/M3StateMaskArrays.java' | sha256sum -c -
+          printf '%s  %s\n' 'edb173ca45a1d7b0194b95cdef00b1690307e43b8cb4bf0855d3b4e8377c1ffd' 'm3/collections/src/test/java/com/m3/collections/M3ZeroMaskArrayFastPathProof.java' | sha256sum -c -
+          printf '%s  %s\n' '2235c5a6a917b4a1550bf98f3eb0b23bb96ad0f50bf295aee0253c85c92ed2b3' 'm3/collections/src/test/java/com/m3/collections/M3ZeroMaskArrayFastPathTest.java' | sha256sum -c -
+          echo M3_ZERO_MASK_TARGET_SOURCE_SEAL_PASS
+      - name: Compile actual full M3 module tests and compare public JVM descriptors
+        shell: bash
+        run: |
+          set -euo pipefail
+          mvn -B -ntp -f m3/collections/pom.xml -DskipTests test-compile
+          B="$(mktemp -d)"
+          trap 'rm -rf "$B"' EXIT
+          mkdir -p "$B/original/com/m3/collections" "$B/old-classes"
+          for name in M3LongArrayList M3StateMaskArrays; do
+            path="m3/collections/src/main/java/com/m3/collections/${name}.java"
+            git show '4e29dc9d4141261e8763fbe9ffd6a20e017b1aff':"$path" > "$B/original/com/m3/collections/${name}.java"
+          done
+          javac --release 21 -proc:none -Xlint:all -Werror \
+            -cp m3/collections/target/classes \
+            -d "$B/old-classes" "$B/original/com/m3/collections/"*.java
+          for name in M3LongArrayList M3StateMaskArrays; do
+            javap -public -s -classpath "$B/old-classes" com.m3.collections."$name" > "$B/${name}.before"
+            javap -public -s -classpath m3/collections/target/classes com.m3.collections."$name" > "$B/${name}.after"
+            diff -u "$B/${name}.before" "$B/${name}.after"
+          done
+          # The old and new code must pass the same independent behavioral oracle.
+          java -ea -Xmx384m \
+            -cp "$B/old-classes:m3/collections/target/classes:m3/collections/target/test-classes" \
+            com.m3.collections.M3ZeroMaskArrayFastPathProof
+          java -ea -Xmx384m \
+            -cp m3/collections/target/classes:m3/collections/target/test-classes \
+            com.m3.collections.M3ZeroMaskArrayFastPathProof
+          java -Xint -ea -Xmx384m \
+            -cp m3/collections/target/classes:m3/collections/target/test-classes \
+            com.m3.collections.M3ZeroMaskArrayFastPathProof
+          git diff --check '4e29dc9d4141261e8763fbe9ffd6a20e017b1aff' HEAD
+      - name: Preserve exact scope and existing native ABI
+        shell: bash
+        run: |
+          set -euo pipefail
+          if git diff --name-only '4e29dc9d4141261e8763fbe9ffd6a20e017b1aff' HEAD | \
+             grep -E '(^src/java\.base/|^src/hotspot/|\.(c|cc|cpp|h)$)'; then
+            echo 'Unexpected JDK/HotSpot/native source mutation'
+            exit 1
+          fi
+  full-collections-maven-junit:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: maven
+      - name: Run candidate and inherited collection/JNI-adjacent JUnit suites
+        shell: bash
+        run: |
+          set -euo pipefail
+          mvn -B -ntp -f m3/collections/pom.xml \
+            -Dtest=M3ZeroMaskArrayFastPathTest,M3LongArrayListTest,M3IndexMaskCompactorTest \
+            test
+          for name in M3ZeroMaskArrayFastPathTest M3LongArrayListTest M3IndexMaskCompactorTest; do
+            REPORT="m3/collections/target/surefire-reports/com.m3.collections.${name}.txt"
+            test -s "$REPORT"
+            grep -E 'Tests run: [1-9][0-9]*, Failures: 0, Errors: 0, Skipped: 0' "$REPORT"
+          done
+          java -ea -Xmx384m \
+            -cp m3/collections/target/classes:m3/collections/target/test-classes \
+            com.m3.collections.M3StateMaskArraysSelfTest
+  inherited-native-c17-jni:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Compile unchanged original C17 primitive mask owner; execute checked JNI
+        shell: bash
+        run: |
+          set -euo pipefail
+          mvn -B -ntp -f m3/collections/pom.xml -DskipTests test-compile
+          B="$(mktemp -d)"
+          trap 'rm -rf "$B"' EXIT
+          javac --release 21 -proc:none -Xlint:all -Werror -h "$B" -d "$B" \
+            m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java
+          test -s "$B/com_m3_collections_M3IndexMaskCompactor.h"
+          grep -Fq Java_com_m3_collections_M3IndexMaskCompactor_selectNative \
+            "$B/com_m3_collections_M3IndexMaskCompactor.h"
+          gcc -std=c17 -O2 -fPIC -shared -Wall -Wextra -Werror -pedantic \
+            -fsanitize=undefined -fno-sanitize-recover=undefined \
+            -I"$JAVA_HOME/include" -I"$JAVA_HOME/include/linux" \
+            m3/collections/src/main/native/collections/m3_index_mask_compactor.c \
+            -o "$B/libm3_collections_mask.so"
+          UBSAN_OPTIONS=halt_on_error=1:print_stacktrace=1 \
+            java -ea -Xcheck:jni -Djava.library.path="$B" \
+              -cp m3/collections/target/classes:m3/collections/target/test-classes \
+              com.m3.collections.M3IndexMaskCompactorSelfTest --native

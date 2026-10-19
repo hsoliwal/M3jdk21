@@ -1,0 +1,21 @@
+field	value
+source_repo	hsoliwal/com.synexia
+source_PR	12213
+source_commit	f0c3c21afbdef370f1173c84d6600031072d13fa
+product_repo	hsoliwal/M3jdk21
+target_base	4b24824c3aa09d802121447f8970d442a855f064
+recipe	com.synexia.m3.Jdk21SpringCaseIndexed20261018
+existing_engine	M3HashPinnedJavaSnapshotRecipe
+source_targets	3
+existing_Java_owners_modified	0
+new_JNI_symbols	0
+provider_binary	Spring 6.2.0
+local_provider_assertions_per_JVM	947349
+local_provider_randomized_ops_per_JVM	22500
+java21_compile	STRICT_LOCAL_PASS
+default_JVM	PASS
+interpreter_JVM	PASS
+local_maven_openrewrite	NOT_RUN
+hosted_Maven_and_Java_JNI	NOT_YET_PROVEN
+source_built_JDK	NOT_RUN
+receiving_phase	WAITING_FOR_STRING

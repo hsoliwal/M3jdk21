@@ -75,7 +75,8 @@ public final class M3LinkedList<E> extends AbstractSequentialList<E> implements 
     }
     @Override public void clear() {
         if (isEmpty()) { return; }
-        Arrays.fill(storage.values, null); storage.first = -1; storage.last = -1; storage.free = -1;
+        Arrays.fill(storage.values, null); Arrays.fill(storage.liveMask, 0L);
+        storage.first = -1; storage.last = -1; storage.free = -1;
         storage.size = 0; storage.used = 0; changed();
     }
     private int slot(int index) {
@@ -123,37 +124,74 @@ public final class M3LinkedList<E> extends AbstractSequentialList<E> implements 
     private static final class Storage {
         private Object[] values = M3SlotArrays.EMPTY_OBJECTS;
         private int[] before = M3SlotArrays.EMPTY_INTS, after = M3SlotArrays.EMPTY_INTS;
+        /** Physical-slot occupancy: one bit per slot, not one Java Node or Entry. */
+        private static final long[] EMPTY_LIVE_MASK = new long[0];
+        private long[] liveMask = EMPTY_LIVE_MASK;
         private int first = -1, last = -1, free = -1, size, used;
+
+        private boolean live(int slot) {
+            return (liveMask[slot >>> 6] & (1L << (slot & 63))) != 0L;
+        }
+
+        private void markLive(int slot) {
+            long mask = 1L << (slot & 63);
+            int word = slot >>> 6;
+            if ((liveMask[word] & mask) != 0L) {
+                throw new IllegalStateException("reused occupied list slot");
+            }
+            liveMask[word] |= mask;
+        }
+
+        private void markFree(int slot) {
+            long mask = 1L << (slot & 63);
+            int word = slot >>> 6;
+            if ((liveMask[word] & mask) == 0L) {
+                throw new IllegalStateException("freed non-live list slot");
+            }
+            liveMask[word] &= ~mask;
+        }
         void insert(int b, int a, Object value) {
             if (free < 0 && used == values.length) {
                 int n = M3SlotArrays.grow(values.length);
                 Object[] v = Arrays.copyOf(values, n); int[] p = Arrays.copyOf(before, n), q = Arrays.copyOf(after, n);
-                values = v; before = p; after = q;
+                long[] states = Arrays.copyOf(liveMask, ((n - 1) >>> 6) + 1);
+                values = v; before = p; after = q; liveMask = states;
             }
             int s;
             if (free < 0) { s = used++; } else { s = free; free = after[s]; }
+            markLive(s);
             values[s] = value; before[s] = b; after[s] = a;
             if (b < 0) { first = s; } else { after[b] = s; }
             if (a < 0) { last = s; } else { before[a] = s; } size++;
         }
         void erase(int s) {
+            if (s < 0 || s >= used) throw new IllegalStateException("list slot out of range");
+            markFree(s);
             int b = before[s], a = after[s];
             if (b < 0) { first = a; } else { after[b] = a; }
             if (a < 0) { last = b; } else { before[a] = b; }
             values[s] = null; before[s] = -1; after[s] = free; free = s; size--;
         }
         void verify() {
-            boolean[] seen = new boolean[used]; int n = 0, p = -1;
+            // The retained packed state lane is the authority; no temporary boolean[used].
+            int n = 0, p = -1;
             for (int s = first; s >= 0; s = after[s]) {
-                if (s >= used || seen[s] || before[s] != p) { throw new AssertionError("list links"); }
-                seen[s] = true; p = s; n++;
+                if (s >= used || !live(s) || before[s] != p || n >= size) {
+                    throw new AssertionError("list links");
+                }
+                p = s; n++;
             }
             if (n != size || p != last) { throw new AssertionError("list size"); }
             for (int s = free; s >= 0; s = after[s]) {
-                if (s >= used || seen[s] || values[s] != null) { throw new AssertionError("list free"); }
-                seen[s] = true; n++;
+                if (s >= used || live(s) || before[s] != -1 || values[s] != null || n >= used) {
+                    throw new AssertionError("list free");
+                }
+                n++;
             }
             if (n != used) { throw new AssertionError("list ownership"); }
+            int active = 0;
+            for (long word : liveMask) active += Long.bitCount(word);
+            if (active != size) { throw new AssertionError("list state-mask count"); }
         }
     }
 }

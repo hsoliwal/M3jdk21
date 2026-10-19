@@ -789,7 +789,9 @@ public abstract class DefaultRowSorter<M, I> extends RowSorter<M> {
      */
     public Comparator<?> getComparator(int column) {
         checkColumn(column);
-        if (comparators != null) {
+        // M3 (JDK-8299722): the array was sized by an earlier column count; a model column added
+        // since then is a valid column without a comparator, not an out-of-bounds index.
+        if (comparators != null && column < comparators.length) {
             return comparators[column];
         }
         return null;

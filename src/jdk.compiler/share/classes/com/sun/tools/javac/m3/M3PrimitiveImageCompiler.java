@@ -16,6 +16,8 @@ import com.sun.source.tree.VariableTree;
 import com.sun.source.tree.Tree;
 import com.sun.tools.javac.tree.JCTree;
 import com.sun.source.util.JavacTask;
+import com.sun.source.util.M3AST;
+import com.sun.source.util.TreePath;
 import com.sun.source.util.TreePathScanner;
 import com.sun.source.util.Trees;
 import java.io.IOException;
@@ -147,54 +149,106 @@ public final class M3PrimitiveImageCompiler {
                 throw new IllegalArgumentException("javac analysis failed; image not written");
             }
             Trees trees = Trees.instance(task);
-            for (CompilationUnitTree unit : parsed) {
-                new TreePathScanner<Void, Void>() {
-                    @Override public Void scan(Tree tree, Void unused) {
-                        if (foldExpressions && tree instanceof JCTree.JCExpression expression
-                                && expression.type != null) {
-                            Object constant = expression.type.constValue();
-                            if (constant != null) {
-                                TypeKind kind = expression.type.getKind();
-                                // javac stores boolean/char constants as Integer, unlike
-                                // VariableElement.getConstantValue's public representation.
-                                Object value = switch (kind) {
-                                    case BOOLEAN -> ((Number) constant).intValue() != 0;
-                                    case CHAR -> (char) ((Number) constant).intValue();
-                                    default -> constant;
-                                };
-                                admitConstant(values, kind, value);
-                            }
-                        }
-                        return super.scan(tree, unused);
-                    }
-
-                    @Override public Void visitLiteral(LiteralTree literal, Void unused) {
-                        switch (literal.getKind()) {
-                            case BOOLEAN_LITERAL -> admit(values, 1, (Boolean) literal.getValue() ? 1 : 0);
-                            case CHAR_LITERAL -> admit(values, 4, (Character) literal.getValue());
-                            case INT_LITERAL -> admit(values, 5, Integer.toUnsignedLong((Integer) literal.getValue()));
-                            case LONG_LITERAL -> admit(values, 6, (Long) literal.getValue());
-                            case FLOAT_LITERAL -> admit(values, 7, Integer.toUnsignedLong(
-                                    Float.floatToRawIntBits((Float) literal.getValue())));
-                            case DOUBLE_LITERAL -> admit(values, 8, Double.doubleToRawLongBits(
-                                    (Double) literal.getValue()));
-                            default -> { } // Strings, null and class literals are outside this image.
-                        }
-                        return super.visitLiteral(literal, unused);
-                    }
-
-                    @Override public Void visitVariable(VariableTree tree, Void unused) {
-                        Element element = trees.getElement(getCurrentPath());
-                        if (element instanceof VariableElement variable) {
-                            Object constant = variable.getConstantValue();
-                            if (constant != null) admitConstant(values,
-                                    variable.asType().getKind(), constant);
-                        }
-                        return super.visitVariable(tree, unused);
-                    }
-                }.scan(unit, null);
-            }
+            for (CompilationUnitTree unit : parsed)
+                collect(values, new TreePath(unit), trees, foldExpressions);
         }
+        emitValues(out, slots, values);
+    }
+
+    private static void collect(TreeSet<Entry> values, TreePath path, Trees trees,
+                                boolean foldExpressions) {
+        new TreePathScanner<Void, Void>() {
+            @Override public Void scan(Tree tree, Void unused) {
+                if (foldExpressions && tree instanceof JCTree.JCExpression expression
+                        && expression.type != null) {
+                    Object constant = expression.type.constValue();
+                    if (constant != null) {
+                        TypeKind kind = expression.type.getKind();
+                        // javac stores boolean/char constants as Integer, unlike
+                        // VariableElement.getConstantValue's public representation.
+                        Object value = switch (kind) {
+                            case BOOLEAN -> ((Number) constant).intValue() != 0;
+                            case CHAR -> (char) ((Number) constant).intValue();
+                            default -> constant;
+                        };
+                        admitConstant(values, kind, value);
+                    }
+                }
+                return super.scan(tree, unused);
+            }
+
+            @Override public Void visitLiteral(LiteralTree literal, Void unused) {
+                switch (literal.getKind()) {
+                    case BOOLEAN_LITERAL -> admit(values, 1, (Boolean) literal.getValue() ? 1 : 0);
+                    case CHAR_LITERAL -> admit(values, 4, (Character) literal.getValue());
+                    case INT_LITERAL -> admit(values, 5, Integer.toUnsignedLong((Integer) literal.getValue()));
+                    case LONG_LITERAL -> admit(values, 6, (Long) literal.getValue());
+                    case FLOAT_LITERAL -> admit(values, 7, Integer.toUnsignedLong(
+                            Float.floatToRawIntBits((Float) literal.getValue())));
+                    case DOUBLE_LITERAL -> admit(values, 8, Double.doubleToRawLongBits(
+                            (Double) literal.getValue()));
+                    default -> { } // Strings, null and class literals are outside this image.
+                }
+                return super.visitLiteral(literal, unused);
+            }
+
+            @Override public Void visitVariable(VariableTree tree, Void unused) {
+                Element element = trees == null ? null : trees.getElement(getCurrentPath());
+                if (element instanceof VariableElement variable) {
+                    Object constant = variable.getConstantValue();
+                    if (constant != null) admitConstant(values,
+                            variable.asType().getKind(), constant);
+                }
+                return super.visitVariable(tree, unused);
+            }
+        }.scan(path, null);
+    }
+
+    /**
+     * Consume an existing compilation through M3AST. Literal syntax is frozen at
+     * PARSE and attributed constants at each ANALYZE event, before lowering.
+     * No new task, source parse, attribution, or processor run is created.
+     * Publication requires a successful Task.call() COMPILATION event; closing
+     * a parse/analyze-only session does not authorize a partial image.
+     */
+    public static M3AST.Consumer consumer(Path out, Path slots,
+                                         boolean foldExpressions) throws IOException {
+        Path image = checkedOutput(out);
+        Path sidecar = slots == null ? null : checkedOutput(slots);
+        if (sidecar != null && (aliases(image, sidecar)
+                || image.startsWith(sidecar) || sidecar.startsWith(image)))
+            throw new IOException("image and sidecar outputs overlap");
+        return new M3AST.Consumer() {
+            private final TreeSet<Entry> values = new TreeSet<>(ORDER);
+
+            @Override public void parsed(M3AST.Unit unit) throws IOException {
+                var uri = unit.tree().getSourceFile().toUri();
+                if ("file".equalsIgnoreCase(uri.getScheme())) {
+                    Path source = Path.of(uri);
+                    if (aliases(image, source) || (sidecar != null && aliases(sidecar, source)))
+                        throw new IOException("output aliases input source: " + source);
+                }
+                collect(values, new TreePath(unit.tree()), null, false);
+            }
+
+            @Override public void analyzed(M3AST.Unit unit) {
+                TreePath path = unit.trees().getPath(unit.analyzedType());
+                if (path == null) throw new IllegalStateException("missing analyzed type path");
+                collect(values, path, unit.trees(), foldExpressions);
+            }
+
+            @Override public void finished(M3AST.Summary summary) throws IOException {
+                try {
+                    if (summary.completed() && summary.compilerErrors() == 0
+                            && !summary.consumerFailed()) emitValues(image, sidecar, values);
+                } finally {
+                    values.clear();
+                }
+            }
+        };
+    }
+
+    private static void emitValues(Path out, Path slots, TreeSet<Entry> values) throws IOException {
         if (values.size() > MAX_ROWS) throw new IOException("too many primitive canonical entries");
         int count = values.size();
         int length = Math.addExact(HEADER_BYTES, Math.multiplyExact(count, ROW_BYTES));

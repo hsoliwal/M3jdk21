@@ -3,6 +3,7 @@
 // SPDX-License-Identifier: Apache-2.0
 package com.m3.collections;
 
+import java.math.BigInteger;
 import java.util.Objects;
 
 /** Compatibility adapters between legacy Progress APIs and the shared long-work monitor SPI. */
@@ -58,8 +59,17 @@ public final class M3ProgressAdapters {
         @Override public String getSubTaskName() { return delegate.state().subTaskName(); }
         @Override public int getPercentComplete() {
             M3ProgressState state = delegate.state();
-            if (state.totalWork() <= 0L) return 0;
-            return (int) Math.min(100L, state.worked() * 100L / state.totalWork());
+            long total = state.totalWork();
+            if (total <= 0L) return 0;
+            long worked = state.worked();
+            if (worked >= total) return 100;
+            // Reuse ChildProgressMonitor's exact scale atom after bounding the percentage.
+            try {
+                return (int) (Math.multiplyExact(worked, 100L) / total);
+            } catch (ArithmeticException overflow) {
+                return BigInteger.valueOf(worked).multiply(BigInteger.valueOf(100L))
+                        .divide(BigInteger.valueOf(total)).intValueExact();
+            }
         }
         @Override public Snapshot snapshot() {
             M3ProgressState state = delegate.state();

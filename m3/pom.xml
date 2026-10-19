@@ -203,6 +203,32 @@
         </plugins>
       </build>
     </profile>
+    <profile>
+      <id>m3-synexia-atomlogic-readonly</id>
+      <build><plugins><plugin>
+        <groupId>org.openrewrite.maven</groupId>
+        <artifactId>rewrite-maven-plugin</artifactId>
+        <version>5.23.1</version>
+        <dependencies><dependency>
+          <groupId>com.synexia</groupId>
+          <artifactId>synexia-openrewrite-recipes</artifactId>
+          <version>1.0.0-SNAPSHOT</version>
+        </dependency></dependencies>
+        <executions><execution>
+          <id>m3-atomlogic-candidate-scan</id>
+          <phase>verify</phase><goals><goal>dryRun</goal></goals>
+        </execution></executions>
+        <configuration>
+          <activeRecipes>
+            <recipe>com.synexia.rewrite.M3AtomLogicClusterRecipe</recipe>
+          </activeRecipes>
+          <exportDatatables>true</exportDatatables>
+          <runPerSubmodule>false</runPerSubmodule>
+          <failOnInvalidActiveRecipes>true</failOnInvalidActiveRecipes>
+          <failOnDryRunResults>false</failOnDryRunResults>
+        </configuration>
+      </plugin></plugins></build>
+    </profile>
   </profiles>
 
   <build>

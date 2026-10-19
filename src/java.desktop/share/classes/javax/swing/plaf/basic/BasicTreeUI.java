@@ -1113,6 +1113,9 @@ public class BasicTreeUI extends TreeUI
         if(isLargeModel() && getRowHeight() > 0) {
             return new FixedHeightLayoutCache();
         }
+        if (sun.swing.tree.M3VariableHeightLayoutCache.ENABLED) {
+            return new sun.swing.tree.M3VariableHeightLayoutCache();
+        }
         return new VariableHeightLayoutCache();
     }
 

@@ -97,4 +97,17 @@ public interface Function<T, R> {
     static <T> Function<T, T> identity() {
         return t -> t;
     }
+
+    /** Execute with an explicit borrowed monitor, retaining the original SAM. */
+    default R apply(T value, java.util.concurrent.ProgressMonitor monitor) {
+        java.util.Objects.requireNonNull(monitor, "monitor");
+        try (java.util.concurrent.ProgressMonitors.Scope ignored =
+                     java.util.concurrent.ProgressMonitors.bind(monitor)) {
+            monitor.checkCancelled();
+            R result = apply(value);
+            monitor.checkCancelled();
+            return result;
+        }
+    }
+
 }

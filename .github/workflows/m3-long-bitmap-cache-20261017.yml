@@ -1,0 +1,49 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3 cached bitmap filters (recipe + Java 21 + existing JNI)
+on:
+  pull_request:
+    paths:
+      - 'm3/collections/src/main/java/com/m3/collections/M3LongBitmapFilteredSnapshot.java'
+      - 'm3/collections/src/test/java/com/m3/collections/M3LongBitmapFilteredSnapshotSelfTest.java'
+      - 'm3/collections/qualification/m3-long-bitmap-cache-20261017/**'
+      - '.github/workflows/m3-long-bitmap-cache-20261017.yml'
+  workflow_dispatch:
+jobs:
+  bitmap-filter:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Qualify canonical source-sealed Maven recipe
+        run: |
+          set -eu
+          DIR=m3/collections/qualification/m3-long-bitmap-cache-20261017/recipe
+          mvn -B -ntp -f "$DIR/pom.xml" verify
+          java -cp "$DIR/target/classes" com.synexia.m3.M3LongBitmapFilteredSnapshotRecipe --check .
+      - name: Strict Java 21 selected-source contract gate
+        run: |
+          set -eu
+          mkdir -p "$RUNNER_TEMP/m3-bitmap/classes" "$RUNNER_TEMP/m3-bitmap/lib"
+          javac --release 21 -proc:none -Xlint:all -Werror -d "$RUNNER_TEMP/m3-bitmap/classes" \
+            m3/collections/src/main/java/com/m3/collections/M3LongCollection.java \
+            m3/collections/src/main/java/com/m3/collections/M3LongIterator.java \
+            m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java \
+            m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java \
+            m3/collections/src/main/java/com/m3/collections/M3LongBitmapFilteredSnapshot.java \
+            m3/collections/src/test/java/com/m3/collections/M3LongBitmapFilteredSnapshotSelfTest.java
+          java -cp "$RUNNER_TEMP/m3-bitmap/classes" com.m3.collections.M3LongBitmapFilteredSnapshotSelfTest
+      - name: Existing checked JNI primitive mask parity
+        run: |
+          set -eu
+          cc -std=c17 -O2 -Wall -Wextra -Werror -fPIC -shared \
+            -fsanitize=undefined -fno-sanitize-recover=all \
+            -I"$JAVA_HOME/include" -I"$JAVA_HOME/include/linux" \
+            m3/collections/src/main/native/collections/m3_index_mask_compactor.c \
+            -o "$RUNNER_TEMP/m3-bitmap/lib/libm3_collections_mask.so"
+          java -Xcheck:jni -Djava.library.path="$RUNNER_TEMP/m3-bitmap/lib" \
+            -cp "$RUNNER_TEMP/m3-bitmap/classes" com.m3.collections.M3LongBitmapFilteredSnapshotSelfTest
+      - name: Owning module Maven test
+        run: mvn -B -ntp -f m3/collections/pom.xml test

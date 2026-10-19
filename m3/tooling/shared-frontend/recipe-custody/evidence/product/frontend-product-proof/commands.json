@@ -1,0 +1,51 @@
+[
+  {
+    "name": "jdk-version",
+    "argv": [
+      "/tmp/m3-ast-product-build/images/jdk/bin/java",
+      "-version"
+    ],
+    "exit": 0
+  },
+  {
+    "name": "compile",
+    "argv": [
+      "/tmp/m3-ast-product-build/images/jdk/bin/javac",
+      "-Xlint:all",
+      "-Werror",
+      "--add-exports",
+      "jdk.compiler/com.sun.tools.javac.m3=ALL-UNNAMED",
+      "-d",
+      "/workspace/scratch/13309be96b09/compiler-work/qualification/frontend-product-proof/classes",
+      "/workspace/scratch/13309be96b09/M3jdk21/test/langtools/tools/javac/m3/M3ASTSharedFrontendTest.java"
+    ],
+    "exit": 0
+  },
+  {
+    "name": "compiler-contracts",
+    "argv": [
+      "/tmp/m3-ast-product-build/images/jdk/bin/java",
+      "--add-exports",
+      "jdk.compiler/com.sun.tools.javac.m3=ALL-UNNAMED",
+      "-cp",
+      "/workspace/scratch/13309be96b09/compiler-work/qualification/frontend-product-proof/classes",
+      "M3ASTSharedFrontendTest"
+    ],
+    "exit": 0
+  },
+  {
+    "name": "openrewrite",
+    "argv": [
+      "/tmp/m3-toolchain/apache-maven-3.9.11/bin/mvn",
+      "-B",
+      "-ntp",
+      "-o",
+      "-Dmaven.repo.local=/tmp/m3-maven-repository",
+      "-Dm3.proof.directory=/workspace/scratch/13309be96b09/compiler-work/qualification/frontend-product-proof/rewrite",
+      "-f",
+      "/workspace/scratch/13309be96b09/M3jdk21/m3/tooling/shared-frontend/openrewrite/pom.xml",
+      "verify"
+    ],
+    "exit": 0
+  }
+]
