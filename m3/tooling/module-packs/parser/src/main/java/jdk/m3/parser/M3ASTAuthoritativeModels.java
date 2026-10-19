@@ -95,11 +95,21 @@ public final class M3ASTAuthoritativeModels {
      */
     public static M3ASTIndex gradleTooling(M3File source, Object gradleProject,
             M3ASTIngress.Limits limits) {
+        Objects.requireNonNull(source, "source");
+        String path = source.uri().getPath();
+        return gradleTooling(source, gradleProject,
+                path != null && path.endsWith(".gradle.kts"), limits);
+    }
+
+    /** Retain the original build-script language for read-only Tooling models. */
+    public static M3ASTIndex gradleTooling(M3File source, Object gradleProject,
+            boolean kotlin, M3ASTIngress.Limits limits) {
         check(source, limits);
         Class<?> type = requireType(gradleProject,
                 "org.gradle.tooling.model.GradleProject");
         M3ASTIndex.Builder out = M3ASTIndex.builder(source,
-                M3ASTIndex.Domain.GRADLE_GROOVY, limits.maxNodes());
+                kotlin ? M3ASTIndex.Domain.GRADLE_KOTLIN : M3ASTIndex.Domain.GRADLE_GROOVY,
+                limits.maxNodes());
         Object[] projects = new Object[16];
         int[] parents = new int[16], depths = new int[16];
         int size = 1;
