@@ -1,40 +1,15 @@
-# Genuine original mapping validator qualification
+<!-- SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project -->
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+# Original mapping provider qualification
 
-The current candidate receives [Synexia PR #12200](https://github.com/hsoliwal/com.synexia/pull/12200), commit `f726d4ce761edf73b04ee2950cbd42790d2370b2`. Its exact 72-file SDK tree is `3c02e3896096753a63654d56650a4561118db2b4`; `source-binding.json` records the source and receiver identities.
+This receiver mirrors the [canonical Synexia Maven recipe](https://github.com/hsoliwal/com.synexia/tree/f44400ead6a4c65e9bb9fc371a5b1c2deecc9c6b/synexia-openrewrite-recipes/recipes/m3-original-mapping-provider-20261017) from [PR12264](https://github.com/hsoliwal/com.synexia/pull/12264). Its74-file/1955646-byte SDKtree is c93b25915d57178bec19458ba9ddc34383d92639; source-binding.json seals the owner, pins and existing workflow. Production mapping and four provider outputs remain unchanged.
 
-Two earlier hosted jobs reached Java 21 compilation and failed because the recipe SDK omitted the donor's provided `org.jetbrains:annotations:24.1.0` dependency. This correction restores it while retaining `-Xlint:all` and `-Werror`. The current mapping fixture preserves every byte outside the migration value, including all 59 top-level mappings and the optional-module declaration. The reviewed migration delta preserves 54 records, explicitly reconciles two and adds four. The existing snapshot engine and workflow are unchanged.
+The independently qualified earlier packet at924b88d8 passed10 recipe methods,22 custody controls,38 provider boundary methods and26 unchanged original tests in run39099435918. That is evidence for the old packet. The new successor has not executed. It generates the exact original55-file/795620-byte PRE from pinned resources under a separate owned root, never from installed POST, and seals all55 files before and after the unchanged provider/CLI execution.
 
-Qualification requires ten SDK methods, including the original nine and a new test of actual recipe output preservation, 64 mutable states in both orders and fixed points, 22 custody negative controls, 38 provider boundaries, 26 original synthetic methods and genuine original CLI PRE/POST executions. Source reviews and 71 nonself pins are clear. Corrected candidate execution and formal autoreview remain **NOT_RUN**. See `annotations-classpath-correction.json` for the actual baseline failures and current source-only limits.
+The current60-target recipe has54 KEEP,4 ADD and2 CHANGE owners, with all64 mutable states in both source orders. Ten original methods remain and one independent-PRE method makes11. Six new baseline refusals join the byte-exact original22 controls. A deterministic second-read mutation control covers the receipt window found in review. The existing workflow retains all six original CLI exit expectations,38 boundary methods,26 original tests and genuine six-wheel/native/Draft2020 probes. Require PRE1/1/1 and POST0/0/2; POST remains INCOMPLETE158.
 
-The 60-target recipe preserves 54 current files, prepares one migration-value-only successor and adds five provider/workflow files. The production `m3/docs/name-mapping.json` remains at its current preimage. The original CLI, schema, requirements, licenses and Java/JNI/runtime owners are preserved. After qualification, receive exact emitted output through the recipe.
+The existing workflow uses explicit preinstalled tools, owned roots,8GiB reserve,512MiB aggregate budget, bounded supervision and closed proof artifacts. Source Java/POM and Python/workflow reviews are clear; AST parsing passed in RAM. Maven/provider execution and formal local autoreview remain pending under active local storage protections. Keep draft until exact-head hosted receipts pass. Read canonical baseline-projection-20261018/TODO.md, source-review.json and minute records before applying exact generated output.
 
-The baseline must expose its existing M3TQ/missing-recipe errors; POST validate/report must succeed, while complete must retain exit 2 and all 158 completion blockers. Six pinned whole wheels total 642142 bytes. Native provider, payload and Draft 2020-12 checks must execute. The existing 15-minute hosted lane requires preinstalled JDK 21/CPython 3.12, a 512 MiB aggregate output limit and 8 GiB reserve.
+The snapshot engine, original CLI/schema/tests and genuine provider are reused unchanged. Existing licenses and notices are preserved. Full12-pass continual migration, independent RoutesA/B/C, Java/JNI, matched complete JDK, String/Unicode and performance/heap/native/mapped retention remain ACTIVE requirements.
 
-Full twelve-pass migration, Routes A/B/C, complete semantic inventory, precompute/regex refinement and heap/native/mapped retention remain ACTIVE. Local storage protection and bulk-output HOLD remain ACTIVE. This source handoff does not establish Java/JNI, complete-JDK, performance or phase acceptance.
-
-Historical evidence remains intact: initial run 39029940546 failed workflow validation before creating jobs; the canonical workflow-context correction is recorded in `workflow-context-correction.json`. Subsequent runs 39030437080 and 39030440322 executed and exposed the annotation-classpath failure. Earlier source-review records describe their own historical candidates.
-
-Copyright 2026 Hitesh Soliwal and contributors. Independent Synexia recipe tooling retains Apache-2.0; embedded fixtures and generated target code retain their original notices and licenses.
-
-## Current exact wheel metadata successor
-
-Canonical source: [Synexia PR #12245](https://github.com/hsoliwal/com.synexia/pull/12245),
-commit `525e0c3704f8c4b4d9eef54799d1b4c947e37b5f`; SDK tree `638520715ffb00255639cb1e6667494bab729b53`.
-This is the exact72-file proof-tooling mirror, with67 unchanged files and five
-resealed resources/pins. Synexia retains reusable recipe ownership.
-
-The actual baseline provider job failed strict raw wheel dependency equality.
-Correcting18 quoted marker strings in recipe resources fixes that evidenced
-metadata defect while retaining every wheel payload, license and core metadata
-pin. Independent literal21/3 profiles now exercise the existing exact-lock test;
-all38 named boundary tests and10 SDK tests remain. The unchanged check_wheel
-function admitted all six real frozen wheels in a RAM-only discriminator; old
-jsonschema/referencing lock rows refused. This is not provider installation proof.
-
-The receiver60-path audit at `07ba6e383343d32c83cfdaf641387bbe72bf325d` found all54 KEEP files,
-four absent provider files, existing workflow and the current59-outside/56-migration
-mapping in their declared states. Production files remain unchanged until exact
-recipe output and original CLI qualify. No String/JNI/full-JDK/performance gate
-advances. Corrected hosted Maven, boundary suite, actual provider/native import,
-original26 tests and CLI are pending. See wheel-metadata-20261018 for evidence and
-follow the canonical continuation record for the full migration scope.
+Exact hosted run39102078256 at613e5ff4/sourcef44400ea now passed11 recipe methods,28 custody controls,38 boundaries and26 originals. Artifact12127665194 was RAM verified against all38 inventory pins and the exact11-method XML; both55-file PRE receipts are byte-identical. This draft now receives the five exact qualified data outputs (922855B): mapping CHANGE plus four provider ADDs. Each blob is the qualified SDK postimage, with no edited generated bytes. Source binding lists every hash and TASK_STATUS embeds the exact proof. SDK and workflow are unchanged. The new POST checkout requires fresh exact-head qualification before promotion; default remains unchanged and full migration remains INCOMPLETE158.

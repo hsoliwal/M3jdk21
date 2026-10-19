@@ -6548,7 +6548,7 @@
         "targets": [
           {
             "repo": "hsoliwal/M3jdk21",
-            "commit": null,
+            "commit": "e28fcedc76831dc7e7d1cbf71ea785dc545b117c",
             "module": "java.base",
             "path": "src/java.base/share/classes/jdk/internal/mindex/M3TQ.java",
             "symbol": "jdk.internal.mindex.M3TQ",
@@ -6560,10 +6560,10 @@
               "Facts Facts.concat(Facts,int)",
               "boolean Facts.containsAll(Facts)"
             ],
-            "sha256": "d7c3f9fdff0b5f1dcc5272ac4b57962d3f405ec53003b79344361e5515992155",
-            "git_blob_sha1": "ca23741ecd8cd24593ba5c260aa0d939c53d6766",
+            "sha256": "78aa154b8aa25134edd9a16c746e4fdc7bcd3984b8f76cc96ef81437247e08d4",
+            "git_blob_sha1": "533a07b77061e757d476627557413f6df1067d34",
             "fingerprint": null,
-            "revision_role": "candidate"
+            "revision_role": "pinned"
           }
         ],
         "owner": "jdk.internal.mindex.M3TQ derived facts; existing M3StringBacking retains payload authority",
@@ -6633,13 +6633,14 @@
         },
         "sync": {
           "source_revision": "cf3796cfca75284e9626b1e31703e41314c9f852",
-          "target_revision": "1c389e31805fb4faf5d9fe256c8dc6797a2eadff",
+          "target_revision": "e28fcedc76831dc7e7d1cbf71ea785dc545b117c",
           "direction": "source-to-target",
           "target_adaptations": [
             "M3TQ internal name",
             "JDK backing range bridge",
             "Public internal query factories",
-            "Retain M3 backing rename and existing Facts.containsAll from 1ba43c787d44cf46324634efee7bceacd9fcec4e"
+            "Retain M3 backing rename and existing Facts.containsAll from 1ba43c787d44cf46324634efee7bceacd9fcec4e",
+            "Current target custody advances to the already-present sparse refinement recorded by synexia.counterpart.MIndexRegexTrigramQuery.sparseLookup; original target d7c3/ca237 is retained in lineage. This is metadata reconciliation, with no historical receipt or runtime qualification transferred to the current hash."
           ],
           "pending": [
             "Complete matched image, normal C1/C2 and M3 interpreter-boundary gates",
@@ -6669,12 +6670,31 @@
               "git_blob_sha1": "565173748382cb3c49c35649785c41b46288a251",
               "fingerprint": null,
               "revision_role": "candidate"
+            },
+            {
+              "repo": "hsoliwal/M3jdk21",
+              "commit": null,
+              "module": "java.base",
+              "path": "src/java.base/share/classes/jdk/internal/mindex/M3TQ.java",
+              "symbol": "jdk.internal.mindex.M3TQ",
+              "signatures": [
+                "Facts precompute(CharSequence,int)",
+                "Facts precompute(CharSequence,int,int,int)",
+                "Facts precompute(M3StringBacking,long,int,int,int)",
+                "boolean testPrecomputed(Facts)",
+                "Facts Facts.concat(Facts,int)",
+                "boolean Facts.containsAll(Facts)"
+              ],
+              "sha256": "d7c3f9fdff0b5f1dcc5272ac4b57962d3f405ec53003b79344361e5515992155",
+              "git_blob_sha1": "ca23741ecd8cd24593ba5c260aa0d939c53d6766",
+              "fingerprint": null,
+              "revision_role": "candidate"
             }
           ],
           "supersedes": []
         },
         "source_state": "implemented",
-        "observation": "TQ is a caller-owned precompute kernel, not a production JNI accelerator or proof of complete MIndex migration. Current owner survives byte-for-byte; templates, guards and mapping are reconciled by tq-sync."
+        "observation": "TQ is a caller-owned precompute kernel, not a production JNI accelerator or proof of complete MIndex migration. Current owner survives byte-for-byte; templates, guards and mapping are reconciled by tq-sync. Current target custody now pins the existing sparse owner at e28fcedc; the original d7c3/ca237 target remains historical lineage. Original source, contract, recipe and test entries are retained without transferring their qualification to the newer target. Status remains implemented-unverified; complete-image/runtime admission remains pending."
       },
       {
         "id": "synexia.collections.SegmentedAddress28",
@@ -7786,6 +7806,21 @@
             "fingerprint": null,
             "revision_role": "pinned",
             "tracking_ref": "refs/heads/develop"
+          },
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "f1e9ff1f2426b20d55f82e50033c0aa8ed66bf72",
+            "module": "synexia-openrewrite-recipes",
+            "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-tq-sparse-lookup/manifest.tsv",
+            "symbol": "m3jdk21-tq-sparse-lookup/manifest.tsv",
+            "signatures": [
+              "src/java.base/share/classes/jdk/internal/mindex/M3TQ.java\td7c3f9fdff0b5f1dcc5272ac4b57962d3f405ec53003b79344361e5515992155\t78aa154b8aa25134edd9a16c746e4fdc7bcd3984b8f76cc96ef81437247e08d4\tM3TQ.java.txt",
+              "test/jdk/java/lang/String/M3TQSparseContainmentTest.java\tABSENT\t94a1b87f6702a780173c14b9676400522c980b2da328b13321650f0df656c790\tM3TQSparseContainmentTest.java.txt"
+            ],
+            "sha256": "725a5dbccbfa4ff834586c21f9c495fffec985dd9d9033f86fc6e808ea421fa2",
+            "git_blob_sha1": "2fdaa30d27463bb9e9bff5064cbd4015571d3aa9",
+            "fingerprint": null,
+            "revision_role": "pinned"
           }
         ],
         "targets": [
@@ -7851,11 +7886,12 @@
         "recipe": {
           "id": "com.synexia.rewrite.M3Jdk21TqSparseLookup",
           "version": "20261007",
-          "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-tq-sparse-lookup/manifest.tsv",
-          "sha256": "725a5dbccbfa4ff834586c21f9c495fffec985dd9d9033f86fc6e808ea421fa2",
+          "path": null,
+          "sha256": null,
           "preconditions": [
             "Exact current M3TQ preimage, absent additive semantic test; canonical engine and target contracts retained.",
-            "Actual OpenRewrite SDK execution, byte-exact postimages, fixed point, missing/drift refusal."
+            "Actual OpenRewrite SDK execution, byte-exact postimages, fixed point, missing/drift refusal.",
+            "The original manifest is historical Synexia source custody at f1e9ff1f2426b20d55f82e50033c0aa8ed66bf72, not an installed receiving recipe. Receiving recipe publication and qualification for the current target remain pending."
           ],
           "rollback": "Restore exact parent commit sources; refuse rollback across unrelated edits."
         },
@@ -7875,13 +7911,15 @@
           "target_revision": "d769ee9c3bcfd881f514817cb86c0768e62ed970",
           "direction": "source-to-target",
           "target_adaptations": [
-            "Sparse binary lookup with first-key singleton fast path; dense merge unchanged."
+            "Sparse binary lookup with first-key singleton fast path; dense merge unchanged.",
+            "Metadata custody correction only: the exact historical sparse manifest is retained as a pinned Synexia source artifact; no receiving recipe path, runtime change or acceptance is claimed."
           ],
           "pending": [
             "Full custom M3 JDK image and UseM3StringStorage jtreg",
             "End-to-end String/JMH, retained-memory and cross-platform qualification",
             "Receiving snapshot reconciliation",
-            "Pre-existing HOLD_MATCHER_STATE_GAP invariant failure"
+            "Pre-existing HOLD_MATCHER_STATE_GAP invariant failure",
+            "Receiving Maven/OpenRewrite recipe publication and qualification for the current target owner; historical host/source proof does not qualify the receiving runtime."
           ],
           "conflicts": []
         },
@@ -7911,7 +7949,603 @@
           "supersedes": []
         },
         "source_state": "implemented",
-        "observation": "Canonical candidate recipe PR hsoliwal/com.synexia#9726. Existing mapping records retain their historical authority. New finite proof does not qualify the full family or change matching semantics."
+        "observation": "Canonical candidate recipe PR hsoliwal/com.synexia#9726. Existing mapping records retain their historical authority. New finite proof does not qualify the full family or change matching semantics. The exact original manifest at source f1e9ff1f is retained in structured source custody; its path is absent at current source515f2f and receiving e28fcedc. Receiving recipe.path and sha256 are null because no receiving recipe installation or qualification is observed. Original source kernel, contracts, status and test references are unchanged; no historical proof is transferred."
+      },
+      {
+        "id": "synexia.regex.ordered-relations.adapter",
+        "kind": "adapter",
+        "status": "implemented-unverified",
+        "reason": "Observed source-to-target package/type/JNI adaptation exists at the pinned receiving revision. This is a partial ordered-relation numeric adapter, not the complete MIndexStateRelation API or production dispatch qualification.",
+        "sources": [
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "515f2f2153aa6afbc758da34c495c7223ee7997a",
+            "module": "synexia-indexstring",
+            "path": "synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexDotStarRelations.java",
+            "symbol": "com.synexia.indexstring.MIndexDotStarRelations",
+            "signatures": [
+              "<T> Result evaluate(T,Access<T>,int[],int,int,long,Join,IProgressMonitor)",
+              "Object Access.owner(T)",
+              "long Access.coordinate(T)",
+              "int Access.length(T)",
+              "int Access.codeUnitAt(T,int)",
+              "T Access.first(T)",
+              "T Access.second(T)",
+              "long[] Join.compose(long[],long[])"
+            ],
+            "sha256": "1eeaef102a313396a000538f2f8b1c04cd1dbfd5553d7fa81b4d97a131fb1573",
+            "git_blob_sha1": "9b75e3370bcec6de914954490cc355b9573f7505",
+            "fingerprint": null,
+            "revision_role": "pinned"
+          },
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "515f2f2153aa6afbc758da34c495c7223ee7997a",
+            "module": "synexia-indexstring",
+            "path": "synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexStateRelation.java",
+            "symbol": "com.synexia.indexstring.MIndexStateRelation",
+            "signatures": [
+              "void compose(long[],int,long[],int,long[],int,int)",
+              "native long[] composeNative(long[],long[])",
+              "native long[] repeatNative(long[],long)"
+            ],
+            "sha256": "b74e54410a6ece719ec38e88fa725271ec2ad0fe6a2a9a3446580e54d6c323d4",
+            "git_blob_sha1": "bc5eb2bf64eaacb85011c50749f8b02b7608f4f4",
+            "fingerprint": null,
+            "revision_role": "pinned"
+          },
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "515f2f2153aa6afbc758da34c495c7223ee7997a",
+            "module": "synexia-indexstring/native",
+            "path": "synexia-indexstring/native/src/mindex_state_relation_jni.c",
+            "symbol": "mindex_state_relation_compose / mindex_state_relation_repeat",
+            "signatures": [
+              "int mindex_state_relation_compose(const uint64_t*,const uint64_t*,uint64_t*,size_t)",
+              "int mindex_state_relation_repeat(const uint64_t*,uint64_t*,size_t,uint64_t)",
+              "jlongArray Java_com_synexia_indexstring_MIndexStateRelation_composeNative(JNIEnv*,jclass,jlongArray,jlongArray)",
+              "jlongArray Java_com_synexia_indexstring_MIndexStateRelation_repeatNative(JNIEnv*,jclass,jlongArray,jlong)"
+            ],
+            "sha256": "7210ecac2b72d411870889233957ce8213ec3cd0028b4f0a034a48b989f6d9f1",
+            "git_blob_sha1": "37cb952c9d9aea30de6f34e8dd6d5a5a571e46cd",
+            "fingerprint": null,
+            "revision_role": "pinned"
+          },
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "515f2f2153aa6afbc758da34c495c7223ee7997a",
+            "module": "synexia-indexstring/native",
+            "path": "synexia-indexstring/native/include/mindex_state_relation.h",
+            "symbol": "mindex_state_relation_compose / mindex_state_relation_repeat",
+            "signatures": [
+              "int mindex_state_relation_compose(const uint64_t*,const uint64_t*,uint64_t*,size_t)",
+              "int mindex_state_relation_repeat(const uint64_t*,uint64_t*,size_t,uint64_t)"
+            ],
+            "sha256": "fcf42319350f44cb82b76f0cd4a8b71af87b474d643452e27cb07d3e163d021c",
+            "git_blob_sha1": "8ceee90e2e3b3665b433b410f81c4057b7e1de72",
+            "fingerprint": null,
+            "revision_role": "pinned"
+          }
+        ],
+        "targets": [
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": "e28fcedc76831dc7e7d1cbf71ea785dc545b117c",
+            "module": "java.base",
+            "path": "src/java.base/share/classes/jdk/internal/mindex/M3DotStarRelations.java",
+            "symbol": "jdk.internal.mindex.M3DotStarRelations",
+            "signatures": [
+              "<T> Result evaluate(T,Access<T>,int[],int,int,long,Join,Runnable)",
+              "Object Access.owner(T)",
+              "long Access.coordinate(T)",
+              "int Access.length(T)",
+              "int Access.codeUnitAt(T,int)",
+              "T Access.first(T)",
+              "T Access.second(T)",
+              "long[] Join.compose(long[],long[])"
+            ],
+            "sha256": "bbc2901ebe5b2de9951b672127bd47e9d13c70b5a39482fa0727703d0a2ff757",
+            "git_blob_sha1": "780c7887aaa6b0892a76f4eee1dcb17086a60289",
+            "fingerprint": null,
+            "revision_role": "pinned"
+          },
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": "e28fcedc76831dc7e7d1cbf71ea785dc545b117c",
+            "module": "java.base",
+            "path": "src/java.base/share/classes/jdk/internal/mindex/M3StateRelation.java",
+            "symbol": "jdk.internal.mindex.M3StateRelation",
+            "signatures": [
+              "void compose(long[],int,long[],int,long[],int,int)",
+              "native long[] composeNative(long[],long[])",
+              "native long[] repeatNative(long[],long)"
+            ],
+            "sha256": "3270f7889a8c94fa15c90e88491b7fbe483d5ad3053ab36d7e07a63c4c734caa",
+            "git_blob_sha1": "ea904c0962fb976f43b45575f06f46ad198e29a2",
+            "fingerprint": null,
+            "revision_role": "pinned"
+          },
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": "e28fcedc76831dc7e7d1cbf71ea785dc545b117c",
+            "module": "java.base",
+            "path": "src/java.base/share/native/libjava/M3StateRelation.c",
+            "symbol": "m3_state_relation_compose / m3_state_relation_repeat",
+            "signatures": [
+              "int m3_state_relation_compose(const uint64_t*,const uint64_t*,uint64_t*,size_t)",
+              "int m3_state_relation_repeat(const uint64_t*,uint64_t*,size_t,uint64_t)",
+              "jlongArray Java_jdk_internal_mindex_M3StateRelation_composeNative(JNIEnv*,jclass,jlongArray,jlongArray)",
+              "jlongArray Java_jdk_internal_mindex_M3StateRelation_repeatNative(JNIEnv*,jclass,jlongArray,jlong)"
+            ],
+            "sha256": "b1bfd040a1454ac06ab3f96952d97c8c5a6509dcf55dbba9797b6517eea2ef16",
+            "git_blob_sha1": "610ca8bab47065a49b9b58814d6392a287f4fd8b",
+            "fingerprint": null,
+            "revision_role": "pinned"
+          },
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": "e28fcedc76831dc7e7d1cbf71ea785dc545b117c",
+            "module": "java.base",
+            "path": "src/java.base/share/native/libjava/m3_state_relation.h",
+            "symbol": "m3_state_relation_compose / m3_state_relation_repeat",
+            "signatures": [
+              "int m3_state_relation_compose(const uint64_t*,const uint64_t*,uint64_t*,size_t)",
+              "int m3_state_relation_repeat(const uint64_t*,uint64_t*,size_t,uint64_t)"
+            ],
+            "sha256": "c948c0ac34180f1f9412a764c3c9fd8c59e11509467aa9e04f8825e903526885",
+            "git_blob_sha1": "18a02e228129827da486edc5b316790af6135310",
+            "fingerprint": null,
+            "revision_role": "pinned"
+          }
+        ],
+        "owner": "jdk.internal.mindex.M3DotStarRelations ordered algebra; M3StateRelation primitive representation; existing text owners retain payload authority",
+        "identity": {
+          "namespace": "Reuse existing immutable owner, generation and UTF-16 range identities; no new intern namespace or target ABI.",
+          "generation": "Caller keeps borrowed owners stable and reachable for the operation; recomputable metadata does not own or close canonical text."
+        },
+        "contract": {
+          "differences": [
+            "MIndexDotStarRelations becomes internal M3DotStarRelations; IProgressMonitor is mapped to an optional Runnable checkpoint.",
+            "M3StateRelation retains only package-private primitive composition and two JNI entry points. Source Domain, Backend, RangeIndex, loader, progress and public relation object lifecycle are not ported.",
+            "C/header/JNI names become M3-owned identifiers; ordered numeric algebra is retained."
+          ],
+          "compatibility_obligations": [
+            "Preserve ordered composition, bounded state masks, zero-repeat identity, alias-safe C outputs and JNI validation/error behavior.",
+            "Refusal/unsupported/surrogate/budget cases return UNKNOWN rather than a false regex answer; a helper result is not a complete Pattern implementation.",
+            "No exported Java SE API, canonical text ownership, interning or lifecycle change.",
+            "Matched custom JVM, JNI/platform, retention and differential runtime evidence remain unqualified."
+          ],
+          "public_surface": [
+            "Internal jdk.internal.mindex adapter only; no claim of source MIndexStateRelation public API equivalence."
+          ]
+        },
+        "format": {
+          "schema": null,
+          "abi": null,
+          "bootstrap": "Internal java.base owners and existing JNI identifiers only; Maven/OpenRewrite remains tool-only."
+        },
+        "dependencies": [],
+        "materialization": {
+          "admission": "Borrow exact immutable owner/range DAG and already compiled ASCII dot/star atoms under explicit node/work bounds.",
+          "joins": "Compose ordered primitive state rows; optional numeric JNI receives no text owner or pointer.",
+          "outputs": "Per-invocation decision/counters and primitive relation summaries; no payload flattening.",
+          "cached_facts": "Helper summaries are operation-local; their existence does not prove integration into String matching."
+        },
+        "recipe": {
+          "id": null,
+          "version": null,
+          "path": null,
+          "sha256": null,
+          "preconditions": [
+            "Observed current receiving source custody only; no matching receiving application receipt is claimed."
+          ],
+          "rollback": "This record does not mutate runtime owners. Any future receiving change requires an exact-preimage recipe and separately sealed restoration; refuse foreign edits."
+        },
+        "tests": [],
+        "provenance": {
+          "license": "Apache-2.0 Synexia Java/C/header bodies; retain original per-file notices. Existing GPLv2-with-Classpath-exception String owners are separate.",
+          "publication": "User-authorized Synexia-to-M3 naming/adaptation; public receiving files are observed at the exact pinned commit.",
+          "copied_code": true
+        },
+        "sync": {
+          "source_revision": "515f2f2153aa6afbc758da34c495c7223ee7997a",
+          "target_revision": "e28fcedc76831dc7e7d1cbf71ea785dc545b117c",
+          "direction": "source-to-target",
+          "target_adaptations": [
+            "Internal M3 names and packages",
+            "Runnable checkpoint replaces source IProgressMonitor",
+            "Numeric-only M3StateRelation subset and renamed JNI/header symbols"
+          ],
+          "pending": [
+            "Complete source API/dependency inventory and remaining Domain/RangeIndex/lifecycle surfaces",
+            "Production dispatch, matched-image JNI/differential/platform/retention/performance qualification"
+          ],
+          "conflicts": []
+        },
+        "lineage": {
+          "previous_sources": [],
+          "previous_targets": [],
+          "supersedes": []
+        },
+        "source_state": "partial",
+        "observation": "Four actual public receiving artifacts are pinned; no source candidate fixture is represented as an applied runtime owner."
+      },
+      {
+        "id": "synexia.regex.ordered-relations.dispatch",
+        "kind": "pending",
+        "status": "pending",
+        "reason": "Committed source recipe output proposes connecting the existing ordered-relation helper to the current DP owner. The pinned receiving DP remains 164c and has no RELATION_ACCESS field or helper call.",
+        "sources": [
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "515f2f2153aa6afbc758da34c495c7223ee7997a",
+            "module": "synexia-openrewrite-recipes",
+            "path": "synexia-openrewrite-recipes/recipes/m3-regex-relations-current-owner-20261017/sdk/src/main/resources/com/synexia/rewrite/m3-regex-relations-current-owner-20261017/out/M3StringRegexDp.java",
+            "symbol": "java.lang.M3StringRegexDp",
+            "signatures": [
+              "int tryMatch(M3String,String)",
+              "M3DotStarRelations.Access<M3String> relationAccess()"
+            ],
+            "sha256": "fa8d39a5ad63b548f4333f86eb418c333acdb3a17b28c798f3b4737b31e90188",
+            "git_blob_sha1": "20caae4db7cd059a14a29709d7d5b5b10fff3d54",
+            "fingerprint": null,
+            "revision_role": "candidate"
+          }
+        ],
+        "targets": [
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": "e28fcedc76831dc7e7d1cbf71ea785dc545b117c",
+            "module": "java.base",
+            "path": "src/java.base/share/classes/java/lang/M3StringRegexDp.java",
+            "symbol": "java.lang.M3StringRegexDp",
+            "signatures": [
+              "int tryMatch(M3String,String)"
+            ],
+            "sha256": "9a5d9511b996d780f26672e2f5dc6ccc0a2747fe33f0c5ef1a9c62629564a41e",
+            "git_blob_sha1": "164c3a369de2b888b5e5b532d0553352acccd032",
+            "fingerprint": null,
+            "revision_role": "pinned"
+          }
+        ],
+        "owner": "java.lang.M3StringRegexDp derived metadata; M3StringBacking and M3StringOwner retain canonical payload authority",
+        "identity": {
+          "namespace": "Reuse existing immutable owner, generation and UTF-16 range identities; no new intern namespace or target ABI.",
+          "generation": "Caller keeps borrowed owners stable and reachable for the operation; recomputable metadata does not own or close canonical text."
+        },
+        "contract": {
+          "differences": [
+            "Source fixture20c adds a lazy volatile Access adapter and a relation decision attempt without replacing current cache/native/rolling lanes.",
+            "The selector preserves the prepared <=32-atom lane with plan.closure==null and offers the uncached 33-63-atom cohort at length>=256."
+          ],
+          "compatibility_obligations": [
+            "Preserve exact public String/Pattern behavior and UNKNOWN fallback, including invalid regex, non-Latin/surrogate input, ranges, interruption and OOM.",
+            "Retain existing native advance, one-row DP, cache capacities and source reachability fences.",
+            "Prove actual helper entry separately from a helper result and qualify the unchanged public fallback on a matched custom JVM."
+          ],
+          "public_surface": [
+            "Private java.lang.M3StringRegexDp integration only; no exported API or new runtime seam."
+          ]
+        },
+        "format": {
+          "schema": null,
+          "abi": null,
+          "bootstrap": "Internal java.base owners and existing JNI identifiers only; Maven/OpenRewrite remains tool-only."
+        },
+        "dependencies": [
+          {
+            "id": "synexia.regex.ordered-relations.adapter",
+            "resolution": "resolved",
+            "reason": "Exact helper/numeric source custody exists; this does not qualify runtime dispatch."
+          }
+        ],
+        "materialization": {
+          "admission": "Candidate requires actual immutable source tuple, length>=256, 33-63 atoms, existing plan.closure==null, <=128 nodes and min(MAX_DP_CELLS,length*(atomCount+1)) work.",
+          "joins": "Candidate delegates ordered DAG effects to the existing helper; no new regex engine.",
+          "outputs": "Return proven Boolean helper decisions only; UNKNOWN/OOM preserves the prior exact fallback.",
+          "cached_facts": "Candidate lazy adapter creation is inside the existing allocation guard; old bounded metadata lanes remain."
+        },
+        "recipe": {
+          "id": "com.synexia.rewrite.M3RegexRelationsCurrentOwnerRecipe",
+          "version": "20261017",
+          "path": null,
+          "sha256": null,
+          "preconditions": [
+            "Private source SDK is a committed candidate, not a receiving recipe path.",
+            "Apply only after exact DP preimage, helper KEEP custody, Maven/OpenRewrite and matched runtime gates qualify."
+          ],
+          "rollback": "This record does not mutate runtime owners. Any future receiving change requires an exact-preimage recipe and separately sealed restoration; refuse foreign edits."
+        },
+        "tests": [],
+        "provenance": {
+          "license": "GPLv2 with Classpath exception for the derived DP fixture; Apache-2.0 existing helper/tooling retain their own notices.",
+          "publication": "Source recipe fixture at pinned private source revision; not applied to the public receiving owner.",
+          "copied_code": true
+        },
+        "sync": {
+          "source_revision": "515f2f2153aa6afbc758da34c495c7223ee7997a",
+          "target_revision": "e28fcedc76831dc7e7d1cbf71ea785dc545b117c",
+          "direction": "source-to-target",
+          "target_adaptations": [],
+          "pending": [
+            "Receive exact recipe and qualify fixed point/refusal on the current public DP owner",
+            "Execute matched custom JVM dispatch/fallback/native/retention gates"
+          ],
+          "conflicts": []
+        },
+        "lineage": {
+          "previous_sources": [],
+          "previous_targets": [],
+          "supersedes": []
+        },
+        "source_state": "proposed",
+        "observation": "Source fixture20c is in sources only; target164c is the actual receiving baseline. Tests and runtime acceptance are NOT_RUN for this record."
+      },
+      {
+        "id": "synexia.regex.metadata-pressure",
+        "kind": "pending",
+        "status": "pending",
+        "reason": "Existing Synexia pressure-governor policy and its committed current-owner fixture are not received by the pinned strong-table DP owner.",
+        "sources": [
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "515f2f2153aa6afbc758da34c495c7223ee7997a",
+            "module": "synexia-openrewrite-recipes",
+            "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/m3jdk21-regex-pressure-20261014/M3StringRegexDp.java",
+            "symbol": "java.lang.M3StringRegexDp",
+            "signatures": [
+              "Caches caches()",
+              "void releaseCachedMetadata()",
+              "boolean heapAllowsPreparation()",
+              "boolean hasHeapHeadroom(long,long,long,boolean)"
+            ],
+            "sha256": "9219bc4f6fc7cb7b1cbdefce4ebe9b9d3e722a89be5132241e66c44a7e19aed5",
+            "git_blob_sha1": "06fdd8072ce07b4b03c0381e7a175878749bf27d",
+            "fingerprint": null,
+            "revision_role": "pinned"
+          },
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "515f2f2153aa6afbc758da34c495c7223ee7997a",
+            "module": "synexia-openrewrite-recipes",
+            "path": "synexia-openrewrite-recipes/recipes/m3-regex-pressure-current-owner-20261017/sdk/src/main/resources/com/synexia/rewrite/m3-regex-pressure-current-owner-20261017/out/M3StringRegexDp.java",
+            "symbol": "java.lang.M3StringRegexDp",
+            "signatures": [
+              "int tryMatch(M3String,String)",
+              "Tables tables()",
+              "void releaseCachedMetadata()",
+              "boolean heapAllowsPreparation()",
+              "boolean hasHeapHeadroom(long,long,long,boolean)"
+            ],
+            "sha256": "287ad2b934c91f87ce904018528a16263585b43dd5ff1224f1d3de5dd92d94a3",
+            "git_blob_sha1": "e5b761fe32c9385cb09a8685c852eac3dd912216",
+            "fingerprint": null,
+            "revision_role": "candidate"
+          }
+        ],
+        "targets": [
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": "e28fcedc76831dc7e7d1cbf71ea785dc545b117c",
+            "module": "java.base",
+            "path": "src/java.base/share/classes/java/lang/M3StringRegexDp.java",
+            "symbol": "java.lang.M3StringRegexDp",
+            "signatures": [
+              "int tryMatch(M3String,String)"
+            ],
+            "sha256": "9a5d9511b996d780f26672e2f5dc6ccc0a2747fe33f0c5ef1a9c62629564a41e",
+            "git_blob_sha1": "164c3a369de2b888b5e5b532d0553352acccd032",
+            "fingerprint": null,
+            "revision_role": "pinned"
+          }
+        ],
+        "owner": "java.lang.M3StringRegexDp derived metadata; M3StringBacking and M3StringOwner retain canonical payload authority",
+        "identity": {
+          "namespace": "Reuse existing immutable owner, generation and UTF-16 range identities; no new intern namespace or target ABI.",
+          "generation": "Caller keeps borrowed owners stable and reachable for the operation; recomputable metadata does not own or close canonical text."
+        },
+        "contract": {
+          "differences": [
+            "Candidate replaces static strong Tables retention with SoftReference<Tables>, advisory heap hysteresis and clear/suspend/UNKNOWN on optional-preparation OOM.",
+            "Candidate preserves corrected relation selection, current native/rolling lanes and capacities64 plans/256 effects."
+          ],
+          "compatibility_obligations": [
+            "No canonical payload loss, forced GC, owner closure, silent error conversion or change to public matching/fallback behavior.",
+            "Headroom is maxMemory-(clampedTotal-clampedFree); suspend reserve=max(512KiB,maxMemory/32), resume=max(1MiB,maxMemory/16).",
+            "Permit strong in-flight table generations; do not claim SoftReference alone bounds active generations or guarantees VM reclamation.",
+            "Retain the current588544 primitive-field/array bound, excluding references, headers, transients and in-flight generations.",
+            "Qualify real allocation pressure/concurrency/OOM behavior and matched public parity; scalar source tests alone are not VM/JNI/retention/performance evidence."
+          ],
+          "public_surface": [
+            "Recomputable private java.lang.M3StringRegexDp metadata policy only."
+          ]
+        },
+        "format": {
+          "schema": null,
+          "abi": null,
+          "bootstrap": "Internal java.base owners and existing JNI identifiers only; Maven/OpenRewrite remains tool-only."
+        },
+        "dependencies": [
+          {
+            "id": "synexia.regex.ordered-relations.dispatch",
+            "resolution": "pending",
+            "reason": "Pressure fixturee5b is defined against the corrected20c dispatch candidate, not actual receiving164c."
+          }
+        ],
+        "materialization": {
+          "admission": "Candidate checks advisory heap headroom before optional metadata preparation.",
+          "joins": "Existing relation/cache/native/rolling algorithms remain; only metadata admission and retention policy changes.",
+          "outputs": "Recomputable private plan/effect metadata and unchanged fallback decisions.",
+          "cached_facts": "SoftReference<Tables> permits reclamation; no hidden static strong Tables root. In-flight callers may retain a generation."
+        },
+        "recipe": {
+          "id": "com.synexia.rewrite.M3RegexPressureCurrentOwnerRecipe",
+          "version": "20261017",
+          "path": null,
+          "sha256": null,
+          "preconditions": [
+            "Private source SDK path is not a receiving recipe.path.",
+            "Require exact corrected dispatch preimage and whole current-owner/metadata/test custody before receiving."
+          ],
+          "rollback": "This record does not mutate runtime owners. Any future receiving change requires an exact-preimage recipe and separately sealed restoration; refuse foreign edits."
+        },
+        "tests": [],
+        "provenance": {
+          "license": "GPLv2 with Classpath exception for original and successor DP fixtures; Apache-2.0 recipe/scalar donor attribution is preserved separately.",
+          "publication": "Source policy donor and successor fixture are committed at the pinned private source revision; no receiving application or runtime result is claimed.",
+          "copied_code": true
+        },
+        "sync": {
+          "source_revision": "515f2f2153aa6afbc758da34c495c7223ee7997a",
+          "target_revision": "e28fcedc76831dc7e7d1cbf71ea785dc545b117c",
+          "direction": "source-to-target",
+          "target_adaptations": [],
+          "pending": [
+            "Receive corrected relation parent and pressure recipe without overwriting current native/cache/rolling lanes",
+            "Execute actual receiving effects/hysteresis/parity/OOM/concurrency/retention tests",
+            "Distinguish source-described scalar11460 from historical16MiB/12008 proof and current VM acceptance"
+          ],
+          "conflicts": []
+        },
+        "lineage": {
+          "previous_sources": [],
+          "previous_targets": [],
+          "supersedes": []
+        },
+        "source_state": "proposed",
+        "observation": "Source donor06fd and candidatee5b are traceability artifacts; current receiving DP164c remains strongly cached. Runtime and standalone qualification are NOT_RUN."
+      },
+      {
+        "id": "synexia.regex.hierarchical-route-acceptance",
+        "kind": "pending",
+        "status": "pending",
+        "reason": "Committed additive jtreg successor preserves the original hierarchical corpus and adds deterministic route/helper coverage, but the actual receiving jtreg and DP remain their pinned older versions.",
+        "sources": [
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "515f2f2153aa6afbc758da34c495c7223ee7997a",
+            "module": "synexia-openrewrite-recipes",
+            "path": "synexia-openrewrite-recipes/recipes/m3-regex-hierarchical-route-acceptance-20261017/sdk/src/main/resources/com/synexia/rewrite/m3-regex-hierarchical-route-acceptance-20261017/out/M3StringHierarchicalRegexTest.java",
+            "symbol": "M3StringHierarchicalRegexTest",
+            "signatures": [
+              "void main(String[]) throws Exception",
+              "void verifyProductionRoutes(Field,Method,Field,Method,String) throws Exception"
+            ],
+            "sha256": "5302a8d4e877c168dc0224316cac8d75e39c850eafd7123c33e7feaf27f06209",
+            "git_blob_sha1": "0a91c9d3266525152ef64990eeb09af4c005f23d",
+            "fingerprint": null,
+            "revision_role": "candidate"
+          }
+        ],
+        "targets": [
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": "e28fcedc76831dc7e7d1cbf71ea785dc545b117c",
+            "module": "jtreg",
+            "path": "test/jdk/java/lang/String/M3StringHierarchicalRegexTest.java",
+            "symbol": "M3StringHierarchicalRegexTest",
+            "signatures": [
+              "void main(String[]) throws Exception"
+            ],
+            "sha256": "1653c23098529c2fc9f7e66e1bfb5c5c2c97adc67c422b0e67cfbd7b5fb121fd",
+            "git_blob_sha1": "5d47787597630efc70a4e3b173f2e788dfb6aa3a",
+            "fingerprint": null,
+            "revision_role": "pinned"
+          },
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": "e28fcedc76831dc7e7d1cbf71ea785dc545b117c",
+            "module": "java.base",
+            "path": "src/java.base/share/classes/java/lang/M3StringRegexDp.java",
+            "symbol": "java.lang.M3StringRegexDp",
+            "signatures": [
+              "int tryMatch(M3String,String)"
+            ],
+            "sha256": "9a5d9511b996d780f26672e2f5dc6ccc0a2747fe33f0c5ef1a9c62629564a41e",
+            "git_blob_sha1": "164c3a369de2b888b5e5b532d0553352acccd032",
+            "fingerprint": null,
+            "revision_role": "pinned"
+          }
+        ],
+        "owner": "java.lang.M3StringRegexDp derived metadata; M3StringBacking and M3StringOwner retain canonical payload authority",
+        "identity": {
+          "namespace": "Reuse existing immutable owner, generation and UTF-16 range identities; no new intern namespace or target ABI.",
+          "generation": "Caller keeps borrowed owners stable and reachable for the operation; recomputable metadata does not own or close canonical text."
+        },
+        "contract": {
+          "differences": [
+            "Candidate adds an explicit lazy-adapter factory warmup and deterministic source-backed route cases without changing production code.",
+            "Thread-filtered delegating Proxy counts actual Access dispatch and code-unit reads, restores the original adapter in finally, and separately checks direct helper decisions."
+          ],
+          "compatibility_obligations": [
+            "Preserve every old case, helper-reuse assertion, interruption cleanup and both original jtreg runs.",
+            "Source-described additions are39 route cases,33 Access/6 no-Access,5 required-read/8 surrogate UNKNOWN cases and4 direct helper results; these are not executed counts.",
+            "Cover33/63 atom cohorts,255/256 lengths, ranges, UTF-16/non-Latin input, cross-owner surrogate seams and interruption without catastrophic Pattern oracles.",
+            "Access entry does not prove a helper result was returned; >=64 atoms can refuse before Access. Do not turn these observations into stronger route claims.",
+            "Run the actual jtreg on matched M3 JVM configurations and keep the original12297 counted checks; no source-only stub or narrowed replacement."
+          ],
+          "public_surface": [
+            "Additive test-only acceptance; no new production seam, runtime ABI or exported API."
+          ]
+        },
+        "format": {
+          "schema": null,
+          "abi": null,
+          "bootstrap": "Existing jtreg and platform reflection/Proxy APIs; actual custom java.base owners are required."
+        },
+        "dependencies": [
+          {
+            "id": "synexia.regex.ordered-relations.dispatch",
+            "resolution": "pending",
+            "reason": "Actual route/adapter reflection requires the pending corrected relation dispatch."
+          },
+          {
+            "id": "synexia.regex.metadata-pressure",
+            "resolution": "pending",
+            "reason": "Successor fixture is sealed against the pending pressure DP e5b; actual target remains164c."
+          }
+        ],
+        "materialization": {
+          "admission": "Build deterministic backed views from required M3 storage, preserving real owner/range geometry.",
+          "joins": "Observe existing helper and real production tryMatch; no synthetic M3 owner or new evaluator.",
+          "outputs": "Test assertions and source-described case inventories only until execution.",
+          "cached_facts": "Scoped Proxy instrumentation and counters are restored; no production cache policy change."
+        },
+        "recipe": {
+          "id": "com.synexia.rewrite.M3RegexHierarchicalRouteAcceptanceRecipe",
+          "version": "20261017",
+          "path": null,
+          "sha256": null,
+          "preconditions": [
+            "Private source test fixture is not applied receiving jtreg.",
+            "Require exact original5d477 test preimage and pressuree5b/helper/native KEEP custody before recipe application."
+          ],
+          "rollback": "This record does not mutate runtime owners. Any future receiving change requires an exact-preimage recipe and separately sealed restoration; refuse foreign edits."
+        },
+        "tests": [],
+        "provenance": {
+          "license": "GPLv2 with Classpath exception for the derived jtreg fixture; Apache-2.0 recipe tooling retains its own notices.",
+          "publication": "Committed source-only acceptance fixture under user-authorized migration work; no matched runtime test result is claimed.",
+          "copied_code": true
+        },
+        "sync": {
+          "source_revision": "515f2f2153aa6afbc758da34c495c7223ee7997a",
+          "target_revision": "e28fcedc76831dc7e7d1cbf71ea785dc545b117c",
+          "direction": "source-to-target",
+          "target_adaptations": [],
+          "pending": [
+            "Receive exact additive jtreg through its Maven/OpenRewrite recipe",
+            "Execute both unchanged jtreg configurations against the actual matched receiving JVM and preserve the full old corpus"
+          ],
+          "conflicts": []
+        },
+        "lineage": {
+          "previous_sources": [],
+          "previous_targets": [],
+          "supersedes": []
+        },
+        "source_state": "proposed",
+        "observation": "Candidate0a91 exists only in committed source SDK output. Actual receiving test5d477 and DP164c are explicitly pinned; all new execution remains NOT_RUN."
       }
     ]
   },
