@@ -9,9 +9,9 @@
   "files": [
     {
       "path": "FOSS_REUSE_DECISION.tsv",
-      "gitBlob": "9f72858fb0c55c2179a05ce47ffb1531d695e46f",
-      "bytes": 1191,
-      "sha256": "176afcf59d49c510099f35d4e5b6b9d3f078c21dea3af7710f60e043879c3df1"
+      "gitBlob": "c5549cda82b37ec7a06e216fe38fd5f1ed3ffc70",
+      "bytes": 1246,
+      "sha256": "7beb028394b29dafdeca1c4f4c37d94deaf4ad35126f7c3ed8a559a9453ee5de"
     },
     {
       "path": "pinned-engine/com/synexia/rewrite/M3GpuToolJoinManifest.java",
@@ -51,9 +51,9 @@
     },
     {
       "path": "src/main/resources/com/synexia/rewrite/regex-ascii-lexical-receiver-20261019/forward/before/m3/docs/name-mapping.json",
-      "gitBlob": "5fb9433353441d27293a4bfecab86ff0ccdeaaa7",
-      "bytes": 448823,
-      "sha256": "63b28070e1a3657cc3e7bda16661eaf85c2baba2eef8ec57b0f945a787fb6c9f"
+      "gitBlob": "a7008bc04536586218da76e823bf570d50cec526",
+      "bytes": 451339,
+      "sha256": "1085c259e66bff017137e0c63bb86fc0b8daf436865f6378075cf4c920035ef4"
     },
     {
       "path": "src/main/resources/com/synexia/rewrite/regex-ascii-lexical-receiver-20261019/forward/before/src/java.base/share/classes/jdk/internal/mindex/M3Automaton.java",
@@ -99,15 +99,15 @@
     },
     {
       "path": "src/main/resources/com/synexia/rewrite/regex-ascii-lexical-receiver-20261019/forward/manifest.tsv",
-      "gitBlob": "a046b7a1c32a94279ecd6f885045b2e094fa9cda",
+      "gitBlob": "269bcda77ed0f8b09d475bcc7b9614d7237967a3",
       "bytes": 1719,
-      "sha256": "0b99b9875a690958d09fc1b924ba3b127fb352101832e37dc64354bf0c41002c"
+      "sha256": "db7432adc99c7be2dfd48f7437d48abcb493c775e36049d0f13953cc36dc2186"
     },
     {
       "path": "src/main/resources/com/synexia/rewrite/regex-ascii-lexical-receiver-20261019/forward/out/m3/docs/name-mapping.json",
-      "gitBlob": "ccfdadc7ad1f9d32a3a50bfa052886461e2ad9c7",
-      "bytes": 459083,
-      "sha256": "1ced7c62738289a08ec3734e855b676695c5bf5a25ddf27a85c8b8700c7e6c42"
+      "gitBlob": "b97a5f233cd993fbaf7bb3c297bf1821c6f4b8d7",
+      "bytes": 461599,
+      "sha256": "017c24acab18146c994c89328fe1081738017f32d3f5e4635ce3402e053e20d1"
     },
     {
       "path": "src/main/resources/com/synexia/rewrite/regex-ascii-lexical-receiver-20261019/forward/out/src/java.base/share/classes/jdk/internal/mindex/M3Automaton.java",
@@ -153,9 +153,9 @@
     },
     {
       "path": "src/main/resources/com/synexia/rewrite/regex-ascii-lexical-receiver-20261019/inverse/before/m3/docs/name-mapping.json",
-      "gitBlob": "ccfdadc7ad1f9d32a3a50bfa052886461e2ad9c7",
-      "bytes": 459083,
-      "sha256": "1ced7c62738289a08ec3734e855b676695c5bf5a25ddf27a85c8b8700c7e6c42"
+      "gitBlob": "b97a5f233cd993fbaf7bb3c297bf1821c6f4b8d7",
+      "bytes": 461599,
+      "sha256": "017c24acab18146c994c89328fe1081738017f32d3f5e4635ce3402e053e20d1"
     },
     {
       "path": "src/main/resources/com/synexia/rewrite/regex-ascii-lexical-receiver-20261019/inverse/before/src/java.base/share/classes/jdk/internal/mindex/M3Automaton.java",
@@ -201,15 +201,15 @@
     },
     {
       "path": "src/main/resources/com/synexia/rewrite/regex-ascii-lexical-receiver-20261019/inverse/manifest.tsv",
-      "gitBlob": "6a757737774b62996162a0d404c8d697e16d7df0",
+      "gitBlob": "e61533b4e5f7d013bb2ce790fc6c4fa82cedbc1e",
       "bytes": 1719,
-      "sha256": "c19856e1d36006058c165ac9deae4396573d218948e64726946f9ad21e8e17b3"
+      "sha256": "df9909ff35c5c158682a58b0fd7f238cc57a144a38bc944a6abbf65b21f13e86"
     },
     {
       "path": "src/main/resources/com/synexia/rewrite/regex-ascii-lexical-receiver-20261019/inverse/out/m3/docs/name-mapping.json",
-      "gitBlob": "5fb9433353441d27293a4bfecab86ff0ccdeaaa7",
-      "bytes": 448823,
-      "sha256": "63b28070e1a3657cc3e7bda16661eaf85c2baba2eef8ec57b0f945a787fb6c9f"
+      "gitBlob": "a7008bc04536586218da76e823bf570d50cec526",
+      "bytes": 451339,
+      "sha256": "1085c259e66bff017137e0c63bb86fc0b8daf436865f6378075cf4c920035ef4"
     },
     {
       "path": "src/main/resources/com/synexia/rewrite/regex-ascii-lexical-receiver-20261019/inverse/out/src/java.base/share/classes/jdk/internal/mindex/M3Automaton.java",

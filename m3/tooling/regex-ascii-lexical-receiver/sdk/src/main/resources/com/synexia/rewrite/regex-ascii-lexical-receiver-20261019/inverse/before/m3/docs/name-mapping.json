@@ -726,6 +726,30 @@
       "target_rule": "No JNI symbol, object layout, native ownership or guard weakening. Bootstrap consistency does not establish Object API compatibility."
     },
     {
+      "source": "M3JDK21 frozen-lexicon direct-address implementation (PR #1458)",
+      "source_commit": "8a761caa0fcf083b088fe30ea9453d5ae2ee5e3b",
+      "source_blob_sha1": "958511f3e46ee63f2657b72494a9740b9001120f",
+      "source_role": "Existing target-owned two-level displacement index for immutable Java hash/UTF-16-length groups",
+      "target": "java.lang.M3FrozenLexiconIndex owned by java.lang.M3StringPool.Lexicon",
+      "status": "target-owned candidate refined through source-sealed Synexia recipes; no family promotion",
+      "target_rule": "The public API remains java.lang.String. Primitive displacement and row directories only nominate a candidate; exact UTF-16 verification remains authoritative. The sign bit marks ambiguous groups while low 31 bits retain row+1. Reject an impossible seed before placement; preserve successful deterministic geometry and existing binary fallback.",
+      "source_license": "GPL-2.0-only WITH Classpath-exception-2.0; existing target notices retained",
+      "recipe_owner": "synexia-openrewrite-recipes/recipe-crates/m3jdk21-fixed-lexicon-convergence-20261019/datasets/string-index-20261019",
+      "scope_limit": "Component qualification is distinct from complete M3JDK21 image/JIT/GC/CDS and platform admission; no second text payload and no Synexia runtime dependency."
+    },
+    {
+      "source": "Existing M3JDK21 M3IndexedView and AbstractList range/spliterator contracts",
+      "source_commit": "677437be295b23f7ccf7409be287008944d0e8b0",
+      "source_blob_sha1": "d0dd0be5485a679290687542d334b37997bd0c9f",
+      "source_role": "Live filtered/sorted/reversed projection over M3IndexedArray physical indices",
+      "target": "jdk.internal.m3.M3IndexedView",
+      "status": "existing-owner contract repair; no collection-family promotion",
+      "target_rule": "Bind traversal after root refresh, bind subranges to source epoch, check before row delivery, and retain existing unsupported-operation bounds/null/callback ordering. Range and cursor facades store scalar coordinates and root reference; the root owns the single primitive index directory.",
+      "source_license": "GPL-2.0-only WITH Classpath-exception-2.0; existing target notices retained",
+      "recipe_owner": "synexia-openrewrite-recipes/recipe-crates/m3jdk21-fixed-lexicon-convergence-20261019/datasets/indexed-views-20261019",
+      "scope_limit": "Refines one existing owner; public collection APIs and the current STRING qualification phase remain unchanged."
+    },
+    {
       "id": "m3.regex.ascii-numeric-lexemes",
       "source": "com.synexia.indexstring.MIndexRegexProgram numeric-lexeme admission only: Parser.parseDecimal and Parser.parseHex",
       "source_repository": "hsoliwal/com.synexia",
