@@ -4,6 +4,7 @@
  */
 package com.m3.collections;
 
+import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -21,6 +22,7 @@ import java.util.SortedMap;
 import java.util.SortedSet;
 import java.util.TreeMap;
 import java.util.TreeSet;
+import java.util.function.BiPredicate;
 
 /**
  * Standalone Java21 before/after oracle for stored-reference and comparator-key
@@ -124,6 +126,188 @@ public final class M3StoredRepresentativeContract {
         eq(3, sorted.get("ADMIN"), "sorted read through comparator alias");
         yes(view.descendingMap().containsKey("ADMIN"), "descending representative lookup");
         yes(view.headMap("z", true).containsKey("ADMIN"), "bounded representative lookup");
+    }
+
+    /** Frozen counterexample: the JDK owner admits a comparator-equivalent entry key. */
+    private static void readOnlyMapEntryBaseline() {
+        NavigableMap<String, Integer> owner = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
+        owner.put("Alpha", 7);
+        NavigableMap<String, Integer> view =
+                M3FilteredViews.filterEntries(owner, (key, value) -> true);
+        Map.Entry<String, Integer> probe = Map.entry("ALPHA", 7);
+        yes(owner.entrySet().contains(probe), "JDK comparator-key entry membership oracle");
+        yes(view.entrySet().contains(probe), "filtered comparator-key entry membership");
+    }
+
+    /** Build the oracle only in test code; the live product view keeps its owner. */
+    private static void entryMembershipOracle(SortedMap<String, Integer> source,
+            SortedMap<String, Integer> view, BiPredicate<String, Integer> selection,
+            boolean nullable, String label) {
+        TreeMap<String, Integer> expected = new TreeMap<>(source.comparator());
+        for (Map.Entry<String, Integer> entry : source.entrySet()) {
+            if (selection.test(entry.getKey(), entry.getValue())) {
+                expected.put(entry.getKey(), entry.getValue());
+            }
+        }
+        ArrayList<String> keys = new ArrayList<>(Arrays.asList(
+                "Alpha", "ALPHA", "alpha", "BETA", "beta", "GAMMA", "gamma",
+                "OMEGA", "omega", "missing"));
+        if (nullable) keys.add(null);
+        for (String key : keys) {
+            for (Integer value : Arrays.asList(null, -1, 3, 7, 8, 11, 19, 23)) {
+                Map.Entry<String, Integer> probe =
+                        new AbstractMap.SimpleImmutableEntry<>(key, value);
+                eq(expected.entrySet().contains(probe), view.entrySet().contains(probe),
+                        label + " entry=" + probe);
+            }
+        }
+        no(view.entrySet().contains(null), label + " null candidate is not an entry");
+        no(view.entrySet().contains("not an entry"), label + " non-entry candidate");
+        eq(new ArrayList<>(expected.entrySet()), new ArrayList<>(view.entrySet()),
+                label + " iteration retains original key/value representatives");
+    }
+
+    private static void readOnlyMapEntryMembership() {
+        NavigableMap<String, Integer> source = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
+        source.put("alpha", 7);
+        source.put("BETA", 8);
+        source.put("gamma", null);
+        source.put("omega", 19);
+        BiPredicate<String, Integer> selected = (key, value) -> lowercase(key);
+        NavigableMap<String, Integer> view = M3FilteredViews.filterEntries(source, selected);
+        SortedMap<String, Integer> sortedSource = Collections.unmodifiableSortedMap(source);
+        SortedMap<String, Integer> sorted = M3FilteredViews.filterEntries(sortedSource, selected);
+        entryMembershipOracle(source, view, selected, false, "navigable");
+        entryMembershipOracle(sortedSource, sorted, selected, false, "sorted-only");
+        entryMembershipOracle(source.descendingMap(), view.descendingMap(), selected,
+                false, "descending");
+        entryMembershipOracle(source.subMap("ALPHA", true, "OMEGA", false),
+                view.subMap("ALPHA", true, "OMEGA", false), selected, false, "bounded");
+        entryMembershipOracle(source.tailMap("BETA", false).descendingMap(),
+                view.tailMap("BETA", false).descendingMap(), selected, false, "bounded descending");
+        entryMembershipOracle(sortedSource.headMap("OMEGA"), sorted.headMap("OMEGA"),
+                selected, false, "sorted head");
+        entryMembershipOracle(sortedSource.tailMap("BETA"), sorted.tailMap("BETA"),
+                selected, false, "sorted tail");
+        BiPredicate<String, Integer> nestedSelection =
+                (key, value) -> selected.test(key, value) && !"omega".equals(key);
+        NavigableMap<String, Integer> nested = M3FilteredViews.filterEntries(
+                view, (key, value) -> !"omega".equals(key));
+        entryMembershipOracle(source, nested, nestedSelection, false, "nested");
+        yes(view.entrySet().containsAll(Arrays.asList(Map.entry("ALPHA", 7),
+                new AbstractMap.SimpleImmutableEntry<>("GAMMA", null))),
+                "containsAll uses comparator-key membership including null values");
+
+        source.put("ALPHA", 23);
+        source.remove("gamma");
+        entryMembershipOracle(source, view, selected, false, "live replace and remove");
+        entryMembershipOracle(sortedSource, sorted, selected, false, "sorted live replace and remove");
+        source.put("GAMMA", null);
+        no(view.entrySet().contains(new AbstractMap.SimpleImmutableEntry<>("gamma", null)),
+                "accepted probe must not expose a hidden newly stored representative");
+        source.remove("GAMMA");
+        source.put("gamma", null);
+        yes(view.entrySet().contains(new AbstractMap.SimpleImmutableEntry<>("GAMMA", null)),
+                "reinserted visible stored representative is live");
+
+        NavigableMap<String, Integer> natural = new TreeMap<>();
+        natural.putAll(source);
+        entryMembershipOracle(natural, M3FilteredViews.filterEntries(natural, selected),
+                selected, false, "natural order");
+        NavigableMap<String, Integer> empty = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
+        entryMembershipOracle(empty, M3FilteredViews.filterEntries(empty, selected),
+                selected, false, "empty");
+
+        List<Comparator<String>> orders = List.of(
+                Comparator.nullsFirst(String.CASE_INSENSITIVE_ORDER),
+                Comparator.nullsLast(String.CASE_INSENSITIVE_ORDER),
+                Comparator.nullsFirst(String.CASE_INSENSITIVE_ORDER).reversed());
+        for (int index = 0; index < orders.size(); index++) {
+            NavigableMap<String, Integer> nullable = new TreeMap<>(orders.get(index));
+            nullable.put(null, null);
+            nullable.put("alpha", 7);
+            nullable.put("BETA", 8);
+            NavigableMap<String, Integer> live = M3FilteredViews.filterEntries(nullable, selected);
+            entryMembershipOracle(nullable, live, selected, true, "nullable " + index);
+            entryMembershipOracle(nullable.descendingMap(), live.descendingMap(), selected,
+                    true, "nullable descending " + index);
+            entryMembershipOracle(nullable.headMap(null, true), live.headMap(null, true),
+                    selected, true, "nullable bounded " + index);
+            SortedMap<String, Integer> only = Collections.unmodifiableSortedMap(nullable);
+            SortedMap<String, Integer> filtered = M3FilteredViews.filterEntries(only, selected);
+            entryMembershipOracle(only, filtered, selected, true, "nullable sorted " + index);
+            entryMembershipOracle(only.headMap(null), filtered.headMap(null), selected,
+                    true, "nullable sorted bounded " + index);
+        }
+    }
+
+    private static void entryFailureIdentity(SortedMap<String, Integer> view,
+            Map.Entry<String, Integer> probe, RuntimeException failure, String label) {
+        try {
+            view.entrySet().contains(probe);
+        } catch (RuntimeException observed) {
+            yes(observed == failure, label + " preserves throwable identity");
+            return;
+        }
+        throw new AssertionError(label + ": must propagate the failure");
+    }
+
+    private static void readOnlyMapEntryCallbacks() {
+        String visible = new String("alpha");
+        String hidden = new String("BETA");
+        NavigableMap<String, Integer> source = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
+        source.put(visible, 7);
+        source.put(hidden, 8);
+        ArrayList<String> observed = new ArrayList<>();
+        NavigableMap<String, Integer> view = M3FilteredViews.filterEntries(source,
+                (key, value) -> { observed.add(key); return lowercase(key); });
+        yes(view.entrySet().contains(Map.entry("ALPHA", 7)), "visible comparator alias");
+        eq(1, observed.size(), "membership tests one matched representative");
+        yes(observed.get(0) == visible, "predicate receives the exact retained visible reference");
+        observed.clear();
+        no(view.entrySet().contains(Map.entry("beta", 8)), "hidden comparator alias");
+        eq(1, observed.size(), "hidden membership tests one matched representative");
+        yes(observed.get(0) == hidden, "predicate receives the exact retained hidden reference");
+        observed.clear();
+        no(view.entrySet().contains(Map.entry("missing", 7)), "absent comparator key");
+        yes(observed.isEmpty(), "absent key does not evaluate visibility of unrelated entries");
+
+        RuntimeException predicateFailure = new IllegalStateException("entry predicate sentinel");
+        NavigableMap<String, Integer> throwing = M3FilteredViews.filterEntries(source,
+                (key, value) -> { throw predicateFailure; });
+        entryFailureIdentity(throwing, Map.entry("ALPHA", 7), predicateFailure, "predicate failure");
+        RuntimeException comparatorFailure = new IllegalArgumentException("entry comparator sentinel");
+        Comparator<String> comparator = (left, right) -> {
+            if ("boom".equals(left) || "boom".equals(right)) throw comparatorFailure;
+            return String.CASE_INSENSITIVE_ORDER.compare(left, right);
+        };
+        NavigableMap<String, Integer> comparatorOwner = new TreeMap<>(comparator);
+        comparatorOwner.put("alpha", 7);
+        entryFailureIdentity(M3FilteredViews.filterEntries(comparatorOwner, (key, value) -> true),
+                Map.entry("boom", 7), comparatorFailure, "comparator failure");
+        refuses(NullPointerException.class,
+                () -> view.entrySet().contains(new AbstractMap.SimpleImmutableEntry<String, Integer>(null, 7)),
+                "owner-rejected null entry key");
+        refuses(ClassCastException.class,
+                () -> view.entrySet().contains(new AbstractMap.SimpleImmutableEntry<>(42, 7)),
+                "owner-rejected entry key type");
+
+        Map.Entry<String, Integer> snapshot = view.entrySet().iterator().next();
+        refuses(UnsupportedOperationException.class, () -> snapshot.setValue(23),
+                "entry remains immutable after membership repair");
+        refuses(UnsupportedOperationException.class, () -> view.entrySet().remove(Map.entry("ALPHA", 7)),
+                "read-only entry removal still refuses comparator aliases");
+        refuses(UnsupportedOperationException.class, () -> view.entrySet().removeAll(List.of()),
+                "read-only no-op entry removal still refuses");
+        refuses(UnsupportedOperationException.class, () -> view.entrySet().removeIf(entry -> {
+            throw new AssertionError("read-only entry removal must not call the predicate");
+        }), "read-only callback refusal");
+        eq(7, source.get("alpha"), "refused writes retain the owner value");
+        source.put("ALPHA", 23);
+        eq(7, snapshot.getValue(), "previous entry projection stays detached after owner update");
+        no(view.entrySet().contains(snapshot), "old snapshot value is no longer a live member");
+        yes(view.entrySet().contains(Map.entry("ALPHA", 23)), "membership sees live replacement");
+        yes(source.firstKey() == visible, "alias update preserves retained key identity");
     }
 
     private static void mutableSet() {
@@ -259,8 +443,11 @@ public final class M3StoredRepresentativeContract {
             verifyOldSourceIsIncorrect();
             return;
         }
+        readOnlyMapEntryBaseline();
         readOnlySet();
         readOnlyMap();
+        readOnlyMapEntryMembership();
+        readOnlyMapEntryCallbacks();
         mutableSet();
         mutableMap();
         collidingNewBulkKeys();
