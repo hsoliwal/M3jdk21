@@ -1,10 +1,10 @@
 {
   "schema": "M3_NAME_MAPPING_FRAGMENT_V1",
-  "note": "Fragment for the serial manifest reducer; name-mapping.json untouched by this leaf. Epoch 2 (re-land on master 970a34350eb) of the closed A42 leaf (#673).",
+  "note": "Fragment for the serial manifest reducer; name-mapping.json untouched by this leaf. Epoch 3 (re-land on master 2f2beb2eff7a; the lanes live in M3StringPrecomputeBridge since #1119) of the closed A42 leaf (#673).",
   "mappings": [
     {
-      "source": "java.lang.String.indexOf / lastIndexOf of a flat needle over an M3 source: the prepared 64-bit facts signals as the only absence gate, then a per-unit loop through M3String.charAt (S2 G16)",
-      "source_commit": "970a34350ebdf6a3f1c5ff5acc8445d0f3515f55",
+      "source": "java.lang.M3StringPrecomputeBridge.indexOf / lastIndexOf (String.indexOf / lastIndexOf) of a flat needle over an M3 source: the prepared 64-bit facts signals as the only absence gate, then a per-unit loop through M3String.charAt (S2 G16)",
+      "source_commit": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
       "target": "M3StringSearchPrecompute.mayContain(M3String, String): the source's trigram facts (register-then-build for this lane, shared with the M3 needle's lane) probed with the flat needle's middle and then its first trigram key packed on the fly, without allocation, for sources of 2048..32768 units; a missing key proves absence and indexOf, lastIndexOf and contains answer -1 without a scan",
       "status": "implemented-locally-verified (G7 65 files/201 classes; flag-off: M3FlatNeedleGateTest 172,125 checks against the flat String on every call)",
       "target_rule": "the same index as the flat String for every needle over every source on the first and on every repeat use"

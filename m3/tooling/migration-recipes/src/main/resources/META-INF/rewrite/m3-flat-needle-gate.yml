@@ -11,15 +11,12 @@ description: >-
   (register-then-build, shared with the M3 needle's lane) with the needle's middle and then
   its first trigram key packed on the fly, without allocation, for sources of 2048..32768 units;
   a missing key proves absence and indexOf, lastIndexOf and contains answer without a scan.
-  Epoch 2 (2026-10-18): the epoch-1 stack (A33..A43) never reached M3JDK21 master, so the step
-  is re-pinned to master 970a34350eb, where the flat-needle lane over an M3 source lives in
-  String.indexOf/lastIndexOf and source facts are built on first use; the gate keeps the A34
-  register-then-build rule locally (repeatSourceFacts) and shares the M3 needle lane's cache.
-  Java step: M3StringSearchPrecompute and the jtreg proof; text step: String (carried as text
-  because the pinned Java parser cannot convert its Javadoc). The preimages are the master
-  owners; the steps stack on no other crate.
+  Epoch 3 (2026-10-19): re-pinned to M3JDK21 master 2f2beb2eff7a, where #1119 moved the M3
+  flat-needle lanes of String.indexOf/lastIndexOf into M3StringPrecomputeBridge; source facts are
+  built on first use there, so the gate keeps the A34 register-then-build rule locally
+  (repeatSourceFacts) and shares the M3 needle lane's cache. Java step: M3StringPrecomputeBridge,
+  M3StringSearchPrecompute and the jtreg proof; String is no longer a target (the epoch-2 text
+  step is retired). The preimages are the master owners; the step stacks on no other crate.
 recipeList:
   - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
-      crateName: m3-flat-needle-gate
-  - com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe:
       crateName: m3-flat-needle-gate
