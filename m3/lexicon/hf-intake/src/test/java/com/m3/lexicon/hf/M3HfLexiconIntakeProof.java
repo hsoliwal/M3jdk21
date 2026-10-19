@@ -57,10 +57,16 @@ public final class M3HfLexiconIntakeProof {
         return line.split(String.valueOf((char) 9), -1);
     }
 
+    private static String discoveryRecord(List<String> lines, String sourceId) {
+        return lines.stream().skip(1)
+                .filter(line -> sourceId.equals(splitTsv(line)[0]))
+                .findFirst().orElse("");
+    }
+
     private static int verifyLanguageResourceDiscovery() throws IOException {
         List<String> lines = resourceLines(
                 "/com/m3/lexicon/hf/language-resource-discovery.tsv");
-        require(lines.size() == 94, "93 language-resource candidates plus header");
+        require(lines.size() == 100, "99 language-resource candidates plus header");
         List<String> expectedHeader = List.of("source_id", "resource", "category",
                 "data_shape_and_identity", "rights_and_attribution", "m3_candidate_use",
                 "admission_blockers", "state", "evidence");
@@ -108,7 +114,9 @@ public final class M3HfLexiconIntakeProof {
                 "ids-intercontinental-dictionary-series", "autotyp-typology-database-v1-1-1",
                 "apics-creole-grammar-cldf", "dplace-language-culture-environment",
                 "apertium-language-data-packs", "parseme-multilingual-mwe-corpus-v2",
-                "hplt-monolingual-v3", "oldi-flores-plus-4-6")),
+                "hplt-monolingual-v3", "oldi-flores-plus-4-6", "doreco-spoken-documentation-2",
+                "tico-19-medical-translation", "mafand-mt-african-news",
+                "opus-100-parallel-corpus", "afridoc-mt-health", "multiconer-v2-entities")),
                 "lexicon, grammar, translation, concept, norms, archive, sign and HF leads retained");
         String idsRecord = lines.stream().skip(1)
                 .filter(line -> "ids-intercontinental-dictionary-series".equals(splitTsv(line)[0]))
@@ -282,7 +290,7 @@ public final class M3HfLexiconIntakeProof {
         require(hplt.contains("50 terabytes") && hplt.contains("198 languages")
                 && hplt.contains("Common Crawl") && hplt.contains("Internet Archive"),
                 "HPLT scale, language coverage and crawl provenance remain explicit");
-        require(hplt.contains("CC0") && hplt.contains("do not ingest the 50 TB release wholesale")
+        require(hplt.contains("CC0") && hplt.toLowerCase(java.util.Locale.ROOT).contains("do not ingest the 50 tb release wholesale")
                 && hplt.contains("per-shard quality warnings"),
                 "HPLT per-language terms and shard-level safeguards remain explicit");
         String floresPlus = lines.stream().skip(1)
@@ -295,6 +303,73 @@ public final class M3HfLexiconIntakeProof {
                 && floresPlus.contains("not for training")
                 && floresPlus.contains("automatic scraping"),
                 "FLORES+ access, evaluation-only use and redistribution terms remain explicit");
+        String doreco = discoveryRecord(lines, "doreco-spoken-documentation-2");
+        require(doreco.contains("50 languages") && doreco.contains("one million words")
+                && doreco.contains("morpheme breaks"),
+                "DoReCo spoken-language and morphology coverage remain explicit");
+        require(doreco.contains("CC BY 4.0") && doreco.contains("permanent identifier")
+                && doreco.contains("audio rights"),
+                "DoReCo source citation and separate media rights remain explicit");
+        String tico = discoveryRecord(lines, "tico-19-medical-translation");
+        require(tico.contains("37 languages") && tico.contains("3,071 sentences")
+                && tico.contains("stringID") && tico.contains("translator ID"),
+                "TICO-19 benchmark scale and row identity remain explicit");
+        require(tico.contains("CC0") && tico.contains("row-level terms")
+                && tico.contains("source-text license"),
+                "TICO translation license is not generalized to source text");
+        String mafand = discoveryRecord(lines, "mafand-mt-african-news");
+        require(mafand.contains("CC BY-NC 4.0") && mafand.contains("Luo")
+                && mafand.contains("copyright"),
+                "MAFAND restrictions and withheld-language caveat remain explicit");
+        String opus100 = discoveryRecord(lines, "opus-100-parallel-corpus");
+        require(opus100.contains("55 million sentence pairs")
+                && opus100.contains("100 languages") && opus100.contains("99 English-centric pairs"),
+                "OPUS-100 scope and source composition remain explicit");
+        require(opus100.contains("no blanket corpus license")
+                && opus100.contains("upstream corpus licenses differ"),
+                "OPUS-100 does not receive an inferred aggregate license");
+        String afridoc = discoveryRecord(lines, "afridoc-mt-health");
+        require(afridoc.contains("334 health") && afridoc.contains("technology portion was removed")
+                && afridoc.contains("CC BY-NC-SA 3.0"),
+                "AFRIDOC-MT available health scope and restrictions remain explicit");
+        String multiconer = discoveryRecord(lines, "multiconer-v2-entities");
+        require(multiconer.contains("13 configurations") && multiconer.contains("sample IDs")
+                && multiconer.contains("CC BY 4.0") && multiconer.contains("TBD"),
+                "MultiCoNER candidate spans retain IDs, declared terms and provenance gap");
+        return lines.size() - 1;
+    }
+
+    private static int verifyAlgorithmCatalogue() throws IOException {
+        Path catalogue = Path.of("algorithm-catalogue.tsv");
+        if (!Files.isRegularFile(catalogue)) {
+            catalogue = Path.of("m3/lexicon/hf-intake/algorithm-catalogue.tsv");
+        }
+        require(Files.isRegularFile(catalogue), "algorithm catalogue exists at Maven invocation root");
+        if (!Files.isRegularFile(catalogue)) return 0;
+        List<String> lines = Files.readAllLines(catalogue, StandardCharsets.UTF_8);
+        List<String> header = List.of("problem_category", "discovery_source", "candidate",
+                "decision", "owner_or_reason", "qualification");
+        require(!lines.isEmpty() && List.of(splitTsv(lines.getFirst())).equals(header),
+                "algorithm catalogue schema");
+        java.util.Set<String> categories = new java.util.HashSet<>();
+        for (int i = 1; i < lines.size(); i++) {
+            String[] fields = splitTsv(lines.get(i));
+            require(fields.length == 6, "algorithm catalogue row has six fields: " + i);
+            if (fields.length != 6) continue;
+            require(java.util.Arrays.stream(fields).allMatch(field -> !field.isBlank()),
+                    "algorithm choice has rationale and qualification: " + i);
+            require(categories.add(fields[0]), "unique algorithm problem category: " + fields[0]);
+        }
+        for (String category : List.of("spoken_language_phoneme_morphology_alignment",
+                "medical_translation_regression", "low_resource_african_parallel_corpus",
+                "multi_source_parallel_corpus_provenance", "document_level_translation_regression",
+                "named_entity_surface_candidate_spans")) {
+            String row = lines.stream().skip(1)
+                    .filter(line -> category.equals(splitTsv(line)[0]))
+                    .findFirst().orElse("");
+            require(!row.isEmpty() && "EVALUATE_ONLY".equals(splitTsv(row)[3]),
+                    "new dataset pattern remains evaluation-only: " + category);
+        }
         return lines.size() - 1;
     }
 
@@ -345,6 +420,7 @@ public final class M3HfLexiconIntakeProof {
 
     public static void main(String[] args) throws Exception {
         int discoveredSources = verifyLanguageResourceDiscovery();
+        int algorithmPatterns = verifyAlgorithmCatalogue();
         int auditedTables = verifyLangDexTableAudit();
         Path scratch = Files.createTempDirectory("m3-hf-intake-proof-");
         try {
@@ -437,7 +513,8 @@ public final class M3HfLexiconIntakeProof {
             require(!Files.exists(scratch.resolve("empty-out.tsv")), "empty image not published");
             require(approval.pinnedUrl().toString().contains(REVISION), "immutable Hugging Face address");
             System.out.println("M3_HF_INTAKE_PROOF_PASS|checks=" + checks + "|types=3|language_sources="
-                    + discoveredSources + "|langdex_tables=" + auditedTables + "|jni_owner=reused");
+                    + discoveredSources + "|algorithm_patterns=" + algorithmPatterns
+                    + "|langdex_tables=" + auditedTables + "|jni_owner=reused");
         } finally {
             try (var files = Files.walk(scratch)) {
                 for (var path : files.sorted(java.util.Comparator.reverseOrder()).toList()) {
