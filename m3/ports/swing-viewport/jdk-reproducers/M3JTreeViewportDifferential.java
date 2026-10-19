@@ -33,6 +33,7 @@ import javax.swing.tree.AbstractLayoutCache;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeCellRenderer;
 import javax.swing.tree.DefaultTreeModel;
+import javax.swing.tree.FixedHeightLayoutCache;
 import javax.swing.tree.TreePath;
 import javax.swing.tree.TreeSelectionModel;
 import javax.swing.tree.VariableHeightLayoutCache;
@@ -41,14 +42,16 @@ import javax.swing.tree.VariableHeightLayoutCache;
  * Seeded random scripts of public JTree operations and model edits run against two JTrees on one
  * DefaultTreeModel: one with the stock MetalTreeUI and one whose MetalTreeUI creates
  * {@code sun.swing.tree.M3VariableHeightLayoutCache} where the stock UI creates a
- * {@code VariableHeightLayoutCache}. After every step the public answers and the listener events
- * are compared; every few steps both trees are painted into images and compared pixel by pixel.
+ * {@code VariableHeightLayoutCache} (and {@code M3FixedHeightLayoutCache} where it creates a
+ * {@code FixedHeightLayoutCache}; {@code -Ddiff.fixed=true} starts both trees large-model). After every
+ * step the public answers and the listener events are compared; every few steps both trees are painted
+ * into images and compared pixel by pixel.
  * Usage: {@code java --add-exports java.desktop/sun.swing.tree=ALL-UNNAMED M3JTreeViewportDifferential
  * <seeds> <steps> [firstSeed]}.
  */
 public final class M3JTreeViewportDifferential {
 
-    /** MetalTreeUI that creates the M3 cache where the stock one creates VariableHeightLayoutCache. */
+    /** MetalTreeUI that creates the M3 caches where the stock one creates Variable- or FixedHeightLayoutCache. */
     static final class M3MetalTreeUI extends MetalTreeUI {
         @Override
         protected AbstractLayoutCache createLayoutCache() {
@@ -56,6 +59,14 @@ public final class M3JTreeViewportDifferential {
             if (c.getClass() == VariableHeightLayoutCache.class) {
                 try {
                     return (AbstractLayoutCache) Class.forName("sun.swing.tree.M3VariableHeightLayoutCache")
+                            .getDeclaredConstructor().newInstance();
+                } catch (ReflectiveOperationException e) {
+                    throw new IllegalStateException(e);
+                }
+            }
+            if (c.getClass() == FixedHeightLayoutCache.class) {
+                try {
+                    return (AbstractLayoutCache) Class.forName("sun.swing.tree.M3FixedHeightLayoutCache")
                             .getDeclaredConstructor().newInstance();
                 } catch (ReflectiveOperationException e) {
                     throw new IllegalStateException(e);
@@ -122,6 +133,10 @@ public final class M3JTreeViewportDifferential {
     /** A treeNodesChanged event for children of the root happened during this step. */
     private boolean changedUnderRoot;
     static int pixelChecks;
+    /** Steps after which the M3 tree ran on the fixed-height cache (evidence that leaf 2 was exercised). */
+    static int fixedSteps;
+    /** -Ddiff.fixed=true: both trees start large-model with row height 16 (the fixed-height caches). */
+    static final boolean FIXED = Boolean.getBoolean("diff.fixed");
 
     M3JTreeViewportDifferential(long seed) {
         rnd = new Random(seed);
@@ -133,6 +148,12 @@ public final class M3JTreeViewportDifferential {
         b.setUI(ui);
         stock = new Side(a);
         m3 = new Side(b);
+        if (FIXED) {
+            for (JTree t : new JTree[] {a, b}) {
+                t.setRowHeight(16);
+                t.setLargeModel(true);
+            }
+        }
         model.addTreeModelListener(new javax.swing.event.TreeModelListener() {
             @Override
             public void treeNodesChanged(javax.swing.event.TreeModelEvent e) {
@@ -152,7 +173,7 @@ public final class M3JTreeViewportDifferential {
             }
         });
         log.add("seed " + seed);
-        if (!(ui.cache().getClass().getName().endsWith("M3VariableHeightLayoutCache"))) {
+        if (!(ui.cache().getClass().getName().startsWith("sun.swing.tree.M3"))) {
             throw new IllegalStateException("M3 cache not installed: " + ui.cache().getClass());
         }
     }
@@ -263,10 +284,10 @@ public final class M3JTreeViewportDifferential {
             boolean v = rnd.nextBoolean();
             act("setShowsRootHandles " + v, s -> s.tree.setShowsRootHandles(v));
         } else if (op < 46) {
-            int h = new int[] {0, 0, 16, 21}[rnd.nextInt(4)];
+            int h = (FIXED ? new int[] {0, 16, 18, 21} : new int[] {0, 0, 16, 21})[rnd.nextInt(4)];
             act("setRowHeight " + h, s -> s.tree.setRowHeight(h));
         } else if (op < 47) {
-            boolean v = rnd.nextBoolean();
+            boolean v = FIXED ? rnd.nextInt(4) != 0 : rnd.nextBoolean();
             act("setLargeModel " + v, s -> s.tree.setLargeModel(v));
         } else if (op < 49) {
             float size = 10 + rnd.nextInt(8);
@@ -490,6 +511,10 @@ public final class M3JTreeViewportDifferential {
                 acceptD1();
             }
             check(step % 10 == 0);
+            if (((M3MetalTreeUI) m3.tree.getUI()).cache().getClass().getSimpleName()
+                    .equals("M3FixedHeightLayoutCache")) {
+                fixedSteps++;
+            }
         }
     }
 
@@ -515,15 +540,16 @@ public final class M3JTreeViewportDifferential {
                     passed[0]++;
                 } catch (AssertionError e) {
                     failures.add("seed " + seed);
-                    if (failures.size() == 1) {
-                        System.err.println(e.getMessage());
-                    }
+                    String msg = String.valueOf(e.getMessage());
+                    System.err.println(failures.size() == 1 ? msg
+                            : "seed " + seed + ": " + msg.lines().limit(3).reduce((x, y) -> x + " | " + y).orElse(""));
                 }
             }
         });
-        return "M3JTreeViewportDifferential seeds " + seeds + " steps " + steps + " passed " + passed[0]
+        return "M3JTreeViewportDifferential" + (FIXED ? " (fixed)" : "") + " seeds " + seeds + " steps " + steps
+                + " passed " + passed[0]
                 + " failed " + failures.size() + " " + failures + "; pixel comparisons " + pixelChecks
                 + "; accepted upstream defect D1 " + acceptedD1 + " times; rebuilt after exceptions "
-                + rebuiltAfterException;
+                + rebuiltAfterException + "; steps on M3FixedHeightLayoutCache " + fixedSteps;
     }
 }
