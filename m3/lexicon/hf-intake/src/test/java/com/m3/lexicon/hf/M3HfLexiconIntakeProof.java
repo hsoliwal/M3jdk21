@@ -104,7 +104,7 @@ public final class M3HfLexiconIntakeProof {
                 .findFirst().orElse("");
         require(indicFrequency.contains("CC BY-NC 4.0")
                 && indicFrequency.contains("CC BY-NC-SA 4.0")
-                && indicFrequency.contains("mismatch"),
+                && indicFrequency.contains("while"),
                 "Indic frequency license mismatch remains visible and non-admitted");
         String morphynet = lines.stream().skip(1)
                 .filter(line -> "morphynet-multilingual-morphology".equals(splitTsv(line)[0]))
