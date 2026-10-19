@@ -17,10 +17,12 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTree;
 import javax.swing.JViewport;
+import javax.swing.RowFilter;
 import javax.swing.RowSorter;
 import javax.swing.SortOrder;
 import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreePath;
@@ -53,6 +55,7 @@ public final class DeltaBench {
                 case "tree" -> tree();
                 case "list" -> list();
                 case "heap" -> heap();
+                case "sorter" -> sorter();
                 default -> throw new IllegalArgumentException(kase);
             }
         });
@@ -139,6 +142,53 @@ public final class DeltaBench {
         measure("structure_changed", t, r -> m.fireTableStructureChanged(),
                 "no change, fireTableStructureChanged (columns recreated)");
         measure("no_event", t, r -> sink += r, "validate + frame only");
+    }
+
+    /** Leaf 7: the sorter's own paths at 10^6 rows, median of 7, without a frame. */
+    @SuppressWarnings("unchecked")
+    static void sorter() {
+        DefaultTableModel m = tableModel();
+        JTable t = new JTable(m);
+        TableRowSorter<DefaultTableModel> s = new TableRowSorter<>(m);
+        t.setRowSorter(s);
+        Vector<Vector<Object>> data = (Vector<Vector<Object>>) (Vector<?>) m.getDataVector();
+        int mid = N / 2;
+        time("sort_descending_int", r -> {
+            s.setSortKeys(List.of(new RowSorter.SortKey(1, r % 2 == 0 ? SortOrder.DESCENDING : SortOrder.ASCENDING)));
+        }, "setSortKeys on column b (Integer), alternating order: sortExistingData");
+        s.setSortKeys(List.of(new RowSorter.SortKey(1, SortOrder.DESCENDING)));
+        time("sort_from_unsorted", r -> {
+            s.setSortKeys(null);
+            s.setSortKeys(List.of(new RowSorter.SortKey(1, SortOrder.DESCENDING)));
+        }, "setSortKeys(null) then one key: drop the lanes, build and sort them");
+        time("insert_one_row", r -> m.insertRow(mid, new Object[] {"ins" + r, 500_000, true}),
+                "DefaultTableModel.insertRow at the middle: rowsInserted0");
+        time("remove_one_row", r -> m.removeRow(mid), "DefaultTableModel.removeRow at the middle: rowsDeleted0");
+        s.setSortsOnUpdates(true);
+        time("update_one_row_sorts", r -> m.setValueAt(r, mid, 1), "setValueAt with sortsOnUpdates: rowsUpdated0");
+        time("update_1000_rows_sorts", r -> {
+            for (int i = mid; i < mid + 1000; i++) {
+                data.get(i).set(1, (r + i) % 1000);
+            }
+            m.fireTableRowsUpdated(mid, mid + 999);
+        }, "fireTableRowsUpdated over 1,000 rows with sortsOnUpdates: rowsUpdated0");
+        time("set_filter", r -> s.setRowFilter(RowFilter.numberFilter(RowFilter.ComparisonType.AFTER, r % 2 == 0 ? 500_000 : 250_000, 1)),
+                "setRowFilter: initializeFilteredMapping + sort");
+        time("update_one_row_filtered", r -> m.setValueAt(r, mid, 1), "setValueAt with a filter and sortsOnUpdates");
+        row("view_rows", s.getViewRowCount(), "rows", "after the filter");
+    }
+
+    /** Median of 7 runs of {@code edit}, in ms. */
+    static void time(String metric, Edit edit, String note) {
+        long[] ns = new long[7];
+        for (int r = 0; r < ns.length; r++) {
+            long t0 = System.nanoTime();
+            edit.run(r);
+            ns[r] = System.nanoTime() - t0;
+        }
+        Arrays.sort(ns);
+        row(metric, String.format("%.3f", ns[3] / 1e6), "ms p50", note + "; min " + String.format("%.3f", ns[0] / 1e6)
+                + " max " + String.format("%.3f", ns[6] / 1e6));
     }
 
     // ---- JTree ------------------------------------------------------------------------------------

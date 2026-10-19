@@ -414,19 +414,20 @@ public final class M3SorterLanes {
         System.arraycopy(current, last, viewToModel, last + count, current.length - last);
     }
 
-    /** {@code Arrays.binarySearch} over model indices with the host's order. */
+    /**
+     * {@code Arrays.binarySearch} over model indices with the host's order. The key is never in
+     * {@code a} (the order is strict and the callers removed it first), so the found case is left
+     * out; the insertion point is the same.
+     */
     private int binarySearch(int[] a, int key) {
         int low = 0;
         int high = a.length - 1;
         while (low <= high) {
             int mid = (low + high) >>> 1;
-            int c = host.compare(a[mid], key);
-            if (c < 0) {
+            if (host.compare(a[mid], key) < 0) {
                 low = mid + 1;
-            } else if (c > 0) {
-                high = mid - 1;
             } else {
-                return mid;
+                high = mid - 1;
             }
         }
         return -(low + 1);
@@ -437,8 +438,9 @@ public final class M3SorterLanes {
     /**
      * Sorts {@code a[0 .. n)} by the host's order: a merge sort that skips a merge whose halves are
      * already in order, so an ordered lane costs n - 1 comparisons, as the stock TimSort does.
+     * Public for the unit test.
      */
-    void sortLane(int[] a, int n) {
+    public void sortLane(int[] a, int n) {
         if (n > 1) {
             mergeSort(a, new int[n], 0, n);
         }
