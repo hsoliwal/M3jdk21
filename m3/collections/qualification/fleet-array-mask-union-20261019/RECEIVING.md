@@ -53,3 +53,18 @@ Source-sealed workflow successor invokes the actual existing
 `M3PackedFilterProof` with direct javac and existing checked-JNI library
 so original-owner sorted/filtered regression can execute independently.
 The full custom Maven dependency issue remains a separate build gate.
+
+## Historical zero-slot receipt compatibility
+
+The older zero-key selected-source CI refused the new M3IntIntHashMap SHA
+even after the canonical, byte-identical, behavior-qualified #1388 receipt.
+Do **not** overwrite the historical `SOURCE_MANIFEST.tsv`. The separately
+source-sealed `SOURCE_SUCCESSORS.tsv` admits exactly one current reviewed
+M3IntIntHashMap postimage, bound to its historical hash, Synexia #12402
+and exact product Git blob. The original `verify.py` source is modified
+only to recognize that additional exact successor. Any other changed
+bytes or an invalid/foreign successor manifest still refuse admission.
+
+The older zero-key workflow's distinct module-JUnit job calls a missing
+`./mvnw`; this source-admission repair does not claim to solve that
+runner/build dependency or make JUnit pass.
