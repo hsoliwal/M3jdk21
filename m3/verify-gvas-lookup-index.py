@@ -30,6 +30,14 @@ def main() -> None:
         library = proof.compile_sources(work, jdk)
         proof.run(str(jdk / "bin/javac"), "--release", "21", "-Xlint:all", "-Werror",
                   "-cp", str(work), "-d", str(work), str(test))
+        proof.run(str(jdk / "bin/java"), "-Xcheck:jni", "-ea", "-esa", "-cp", str(work),
+                  test_class, "paths", str(library), str(work / "pathname-fixtures"))
+        fault_test = ROOT / "lexicon/native/test/m3_fixed_address_path_fault_test.c"
+        fault_binary = work / "native-path-fault-test"
+        proof.run(os.environ.get("CC", "cc"), "-std=c17", "-Wall", "-Wextra", "-Werror",
+                  "-I" + str(jdk / "include"), "-I" + str(jdk / "include/linux"),
+                  str(fault_test), "-o", str(fault_binary))
+        proof.run(str(fault_binary))
         for kind in fixtures:
             image = work / (kind + ".m3gvas")
             proof.run(str(jdk / "bin/java"), "-ea", "-cp", str(work), test_class,

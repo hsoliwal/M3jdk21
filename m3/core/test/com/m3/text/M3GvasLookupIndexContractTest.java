@@ -4,8 +4,12 @@
 package com.m3.text;
 
 import com.m3.compiletime.M3GvasLiteralImageWriter;
+import java.io.IOException;
 import java.lang.management.ManagementFactory;
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -68,6 +72,74 @@ public final class M3GvasLookupIndexContractTest {
         }
     }
 
+    private static void nativePathFailure(Method method, Class<? extends Throwable> expected,
+            String path, long address, long length) throws Exception {
+        try {
+            method.invoke(null, path, address, length);
+            throw new AssertionError("native filename was not refused");
+        } catch (InvocationTargetException rejected) {
+            require(expected.isInstance(rejected.getCause()),
+                    "native filename refusal type: " + rejected.getCause());
+        }
+    }
+
+    private static void pathnames(Path library, Path work) throws Exception {
+        List<String> names = List.of("ascii", "caf\u00e9", "cafe\u0301", "\u4f60\u597d",
+                "\u0939\u093f\u0928\u094d\u0926\u0940", "\ud800\udc00",
+                "\ud83d\ude80", "\udbff\udfff");
+        List<String> words = fixtures("small");
+        var compiled = M3GvasLiteralImageWriter.build(words);
+        Method nativeMap = M3FixedAddressMapping.class.getDeclaredMethod("mapExact0",
+                String.class, long.class, long.class);
+        nativeMap.setAccessible(true);
+        long checks = 0;
+        for (int index = 0; index < names.size(); index++) {
+            String name = names.get(index);
+            Path directory = Files.createDirectories(work.resolve("folder-" + name));
+            Path file = directory.resolve("image-" + name + ".m3gvas");
+            M3GvasLiteralImageWriter.writeNew(file, compiled);
+            long address = M3FixedAddressMapping.DEFAULT_BASE + index * 0x20000L;
+            M3FixedAddressMapping.Image mapping = M3FixedAddressMapping.open(
+                    file, address, compiled.sha256(), library);
+            M3GvasLiteralImage image = M3GvasLiteralImage.open(mapping);
+            require(mapping.address() == address, "pathname retains exact fixed address");
+            require(mapping.file().equals(file.toRealPath()), "exact canonical pathname");
+            require(mapping == M3FixedAddressMapping.open(file, address, compiled.sha256(), library),
+                    "repeated pathname admission preserves process-lifetime owner");
+            checks += 3;
+            for (int row = 0; row < words.size(); row++) {
+                String spelling = words.get(row);
+                require(image.findRow(spelling) == row, "pathname UTF-16 row identity");
+                require(image.addressOf(spelling) == image.addressAt(row), "pathname reverse address");
+                require(image.hashCodeAt(row) == spelling.hashCode(), "pathname mapped hash");
+                checks += 3;
+            }
+            long retryAddress = address + 0x10000L;
+            nativePathFailure(nativeMap, IllegalArgumentException.class, null,
+                    retryAddress, compiled.bytes().length);
+            nativePathFailure(nativeMap, IOException.class, file + "\0suffix",
+                    retryAddress, compiled.bytes().length);
+            nativePathFailure(nativeMap, IOException.class, file + "-absent",
+                    retryAddress, compiled.bytes().length);
+            try {
+                M3FixedAddressMapping.open(file, retryAddress, "0".repeat(64), library);
+                throw new AssertionError("wrong digest was accepted");
+            } catch (IOException rejected) {
+                require(rejected.getMessage().contains("SHA-256 mismatch"),
+                        "digest rejection reached the mapped image");
+            }
+            M3FixedAddressMapping.Image retry = M3FixedAddressMapping.open(
+                    file, retryAddress, compiled.sha256(), library);
+            require(retry.address() == retryAddress, "failed admission released the address");
+            M3GvasLiteralImage retryImage = M3GvasLiteralImage.open(retry);
+            require(retryImage.addressOf("Aa") - retryAddress == image.addressOf("Aa") - address,
+                    "retry retains the same immutable image coordinate");
+            checks += 6;
+        }
+        System.out.println("M3_GVAS_NATIVE_PATH_PASS paths=" + names.size() + " checks=" + checks
+                + " encoder=sun.nio.fs.Util.toBytes");
+    }
+
     public static void main(String[] args) throws Exception {
         if (args.length == 3 && args[0].equals("emit")) {
             var result = M3GvasLiteralImageWriter.build(fixtures(args[2]));
@@ -75,10 +147,16 @@ public final class M3GvasLookupIndexContractTest {
             System.out.println("M3_GVAS_INDEX_EMIT sha256=" + result.sha256());
             return;
         }
+        if (args.length == 3 && args[0].equals("paths")) {
+            pathnames(Path.of(args[1]), Path.of(args[2]));
+            return;
+        }
         if (args.length != 5) throw new IllegalArgumentException("kind library image digest checks|bench");
         List<String> words = fixtures(args[0]);
+        long mappingStart = System.nanoTime();
         M3FixedAddressMapping.Image mapping = M3FixedAddressMapping.open(Path.of(args[2]),
                 M3FixedAddressMapping.DEFAULT_BASE, args[3], Path.of(args[1]));
+        long mappingNanos = System.nanoTime() - mappingStart;
         long prepareStart = System.nanoTime();
         M3GvasLiteralImage image = M3GvasLiteralImage.open(mapping);
         long prepareNanos = System.nanoTime() - prepareStart;
@@ -106,9 +184,19 @@ public final class M3GvasLookupIndexContractTest {
             List<String> randomized = new ArrayList<>(words);
             Collections.shuffle(randomized, new Random(0x3a11L));
             String[] needles = randomized.toArray(String[]::new);
+            String[] misses = new String[needles.length];
+            for (int index = 0; index < needles.length; index++) {
+                String absent = needles[index] + '\uffff';
+                while (image.findRow(absent) >= 0) absent += '\uffff';
+                misses[index] = absent;
+            }
             long sum = 0;
             for (int repetition = 0; repetition < 20; repetition++) {
                 for (String value : needles) sum += image.findRow(value);
+                for (String value : misses) sum += image.findRow(value);
+                for (int row = 0; row < words.size(); row++) {
+                    sum = Long.rotateLeft(sum, 7) ^ image.addressAt(row);
+                }
             }
             consumed = sum;
             com.sun.management.ThreadMXBean bean =
@@ -116,6 +204,7 @@ public final class M3GvasLookupIndexContractTest {
             boolean allocations = bean.isThreadAllocatedMemorySupported();
             if (allocations && !bean.isThreadAllocatedMemoryEnabled()) bean.setThreadAllocatedMemoryEnabled(true);
             long thread = Thread.currentThread().threadId();
+            sum = 0;
             long allocatedBefore = allocations ? bean.getThreadAllocatedBytes(thread) : -1;
             long start = System.nanoTime();
             for (int repetition = 0; repetition < 100; repetition++) {
@@ -124,6 +213,19 @@ public final class M3GvasLookupIndexContractTest {
             long lookupNanos = System.nanoTime() - start;
             long allocated = allocations ? bean.getThreadAllocatedBytes(thread) - allocatedBefore : -1;
             consumed = sum;
+            long hitChecksum = sum;
+            sum = 0;
+            allocatedBefore = allocations ? bean.getThreadAllocatedBytes(thread) : -1;
+            start = System.nanoTime();
+            for (int repetition = 0; repetition < 100; repetition++) {
+                for (String value : misses) sum += image.findRow(value);
+            }
+            long missNanos = System.nanoTime() - start;
+            long allocatedMiss = allocations ? bean.getThreadAllocatedBytes(thread) - allocatedBefore : -1;
+            consumed = sum;
+            long missChecksum = sum;
+            sum = 0;
+            allocatedBefore = allocations ? bean.getThreadAllocatedBytes(thread) : -1;
             start = System.nanoTime();
             for (int repetition = 0; repetition < 100; repetition++) {
                 for (int row = 0; row < words.size(); row++) {
@@ -131,12 +233,20 @@ public final class M3GvasLookupIndexContractTest {
                 }
             }
             long reverseNanos = System.nanoTime() - start;
+            long allocatedReverse = allocations ? bean.getThreadAllocatedBytes(thread) - allocatedBefore : -1;
             consumed = sum;
+            require(hitChecksum == 100L * words.size() * (words.size() - 1) / 2,
+                    "timed hit checksum");
+            require(missChecksum == -100L * words.size(), "timed miss checksum");
             System.out.println("M3_GVAS_INDEX_COST words=" + words.size() + " operations="
                     + (100L * words.size()) + " prepare_ns=" + prepareNanos
                     + " lookup_ns=" + lookupNanos + " reverse_ns=" + reverseNanos
                     + " allocated_lookup_bytes=" + allocated + " retained_index_payload_bytes=" + metadata
-                    + " mapped_bytes=" + mapping.byteLength() + " consumed=" + consumed);
+                    + " mapped_bytes=" + mapping.byteLength() + " consumed=" + consumed
+                    + " mapping_ns=" + mappingNanos + " miss_ns=" + missNanos
+                    + " allocated_miss_bytes=" + allocatedMiss
+                    + " allocated_reverse_bytes=" + allocatedReverse
+                    + " hit_checksum=" + hitChecksum + " miss_checksum=" + missChecksum);
         }
         System.out.println("M3_GVAS_INDEX_PASS kind=" + args[0] + " checks=" + (checks + 3)
                 + " retained_index_payload_bytes=" + metadata);
