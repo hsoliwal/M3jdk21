@@ -1,6 +1,6 @@
 /*
  * Copyright 2026 Hitesh Soliwal and contributors.
- * SPDX-License-Identifier: GPL-2.0-only WITH Classpath-exception-2.0
+ * SPDX-License-Identifier: GPL-2.0-only
  *
  * @test
  * @summary EnumMap bulk forEach, replaceAll and toString use ordinal-indexed values
