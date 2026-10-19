@@ -1,0 +1,10 @@
+{
+  "workspace-first-attempt": "Conflicting Equinox storage/configuration properties; corrected the test bootstrap; log retained.",
+  "workspace-current": "Real platform cannot resolve DS extender and com.sun.jna.platform.win32; no workspace qualification claim.",
+  "parser-original-first-attempt": "Harness excluded M3JavacTree required by existing fixture helper; included unchanged owner and reran both suites successfully.",
+  "native-fixture-first-attempt": "GCC strict aliasing rejected test-only cast between fake int/long arrays; fixture changed to union-backed fields; both C baselines and candidate pass; product algorithm was unchanged by the fixture repair.",
+  "full-suite-baseline": "464 tests, 3 failures, 2 skipped; strict sorted endpoint and reverse split regressions; tests preserved.",
+  "receiver-lineage": "Guard rejects hydrated checkout because required ancestor is unavailable; no bypass or phase promotion.",
+  "dependency-download": "Maven Central request failed with proxy CONNECT timeout; no replacement or synthetic DS runtime used.",
+  "compiler-thread-diagnostic": "Optional attach diagnostic could not access the build process across command PID namespaces; no compiler failure inferred. Build continues independently."
+}

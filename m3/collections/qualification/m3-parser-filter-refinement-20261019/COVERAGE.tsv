@@ -1,0 +1,13 @@
+area	owner_or_contract	status	evidence_or_remaining_gate
+javac/Maven-Gradle-compilation	Existing shared M3AST in jdk.compiler	EXISTING_OWNER_RETAINED	PR1382 merged; source-built compiler/JDK image not requalified in this pass
+Eclipse-JDT/DOM	M3ASTIngress.eclipseJdt and eclipseJdtResolved	HEADLESS_QUALIFIED	3115 real JDT assertions for structure, positions, bindings, recovery, diagnostics and rename/reparse
+Eclipse-JDT/workspace	Real Equinox ICompilationUnit working-copy probe	BLOCKED	Missing DS extender and JNA platform resolution; failure log retained; no full PDE claim
+Maven/POM	Existing secured XML DOM ingress	REGRESSION_QUALIFIED	Original cross-frontend tests retained; effective ModelBuilder/dependency models remain open
+Gradle/Groovy-Kotlin	Existing lexical block/comment/string ingress	REGRESSION_QUALIFIED	Original tests retained; actual Groovy/Kotlin semantic frontends remain open
+Jackson/JSON	Existing public M3AST occurrence ingress	SHAPE_ONLY	Original fixture-double tests retained; real Jackson module integration remains open
+Generic-grammar	Existing array-backed grammar/parser owners	REGRESSION_QUALIFIED	297 framework assertions; no new language grammar claimed
+TreeMap	Original array-backed AVL plus current source reconciliation	EXACT_CORPUS_GATE	All 640 frozen observations required, including 144 empty-map and original 10 getOrDefault differences
+Filtered-sorted-views	Existing terminal, strict endpoint and reversed split owners	FULL_SUITE_GATE	18720 exact terminal traces plus existing strict/reversed regression tests; baseline has 3 failures
+JNI/mask-selection	Existing exported compactor symbols	LINUX_JDK21_QUALIFIED	61440 Java/native assertions, C region/failure proof, unchanged 9 exports; other platforms unrun
+Full-product-lineage	Existing source/borrow/phase guards	OPEN	Hydrated tree lacks Git ancestry; no String-to-AST phase promotion
+Performance	Selected-span row traffic and terminal wrapper removal	BOUNDED_COST_EVIDENCE	Instrumented native fixture reads 1 vs 1025 row values for one match; no throughput/latency or whole-product claim

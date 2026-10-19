@@ -1,0 +1,58 @@
+{
+  "targetBase": "5cb893e1ab224236b33d41132a31f604d89a4e12",
+  "canonicalRecipe": "com.synexia.m3.ParserFilterRefinement",
+  "canonicalPR": "https://github.com/hsoliwal/com.synexia/pull/12511",
+  "strictTreeMapCorpusAcceptance": true,
+  "fullProductAcceptance": false,
+  "draftRequired": true,
+  "treeMap": {
+    "total": 640,
+    "baselineMatches": 128,
+    "candidateMatches": 640,
+    "preservedEmptyCases": 144,
+    "introducedDifferences": [],
+    "remainingDifferences": []
+  },
+  "openRewriteSDK": {
+    "version": "8.17.1",
+    "tests": 5,
+    "failures": 0
+  },
+  "filteredTerminalTraces": {
+    "cases": 18720,
+    "sha256": "877fc075dedf9cab5f586bdfc5d5dfb5ae29cfd2993eb3dd63e937d86a06b512",
+    "exact": true,
+    "before": "trace-before-attempt1.log",
+    "after": "trace-after-attempt1.log"
+  },
+  "jdtAssertions": 3115,
+  "genericParserAssertions": 297,
+  "crossFrontendAssertions": 12071,
+  "javaJniAssertions": 61440,
+  "jniExportCount": 9,
+  "directFilteredContracts": {
+    "reversed": 2517,
+    "strictEndpoints": 126,
+    "navigation": 154239,
+    "failures": 0
+  },
+  "collectionSuite": {
+    "baseline": {
+      "tests": 464,
+      "failures": 3,
+      "skipped": 2
+    },
+    "incremental": "Failed with stale nested-class signatures; cause not established",
+    "freshForked": "RUNNING"
+  },
+  "openGates": [
+    "Full Eclipse/PDE workspace: missing DS/JNA platform bundle resolution",
+    "Maven effective models",
+    "Groovy/Kotlin semantic frontend integration",
+    "Real Jackson module integration",
+    "Full Git ancestry receiver guard",
+    "Source-built JDK and jtreg",
+    "Windows/macOS JNI",
+    "End-to-end latency, throughput and memory performance"
+  ]
+}

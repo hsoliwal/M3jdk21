@@ -1,0 +1,10 @@
+Traceback (most recent call last):
+  File "/workspace/scratch/a20ebe6f78bb/continuation/before/m3/compatibility/check_synexia_full_borrow_receiver.py", line 425, in <module>
+    raise SystemExit(main(sys.argv))
+                     ^^^^^^^^^^^^^^
+  File "/workspace/scratch/a20ebe6f78bb/continuation/before/m3/compatibility/check_synexia_full_borrow_receiver.py", line 405, in main
+    pin = load_pin()
+          ^^^^^^^^^^
+  File "/workspace/scratch/a20ebe6f78bb/continuation/before/m3/compatibility/check_synexia_full_borrow_receiver.py", line 160, in load_pin
+    raise ValueError("recorded M3JDK target baseline is not an ancestor of tested HEAD")
+ValueError: recorded M3JDK target baseline is not an ancestor of tested HEAD
