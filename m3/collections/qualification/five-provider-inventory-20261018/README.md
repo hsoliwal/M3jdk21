@@ -65,12 +65,15 @@ only; the core `m3/collections` module is unchanged and still depends on `java.b
 
 ## Fill order (one owned type per PR, each flips its row to DONE)
 
-1. Guava `ArrayListMultimap` (reuse interop `M3GuavaListMultimap`, core `M3IndexedMultiValueMap`); Guava
-   `HashMultimap` reuses the #1261 engine.
-2. Commons `HashBag` / Guava `HashMultiset` over `M3CountedBag` (coordinate with #1271).
-3. Guava `EnumHashBiMap`/`EnumBiMap`, Commons `DualLinkedHashBidiMap` over the owned `M3HashBiMap`/`M3BidiMap`.
+1. Guava `ArrayListMultimap` (DONE #1400). Guava `HashMultimap` is BLOCKED until open #1261 lands: it must
+   reuse that PR's `M3IndexedSetMultiMap` engine, not duplicate it (coordinator, 2026-10-19).
+2. Commons `HashBag` (DONE #1421) and Guava `HashMultiset` (DONE #1418).
+3. Guava `EnumHashBiMap` (DONE #1460) and `EnumBiMap` (DONE #1462); Commons `DualLinkedHashBidiMap` (DONE #1468).
 4. Filtered/sorted wrappers are already claimed (#1362, #1365, #1366, #1367, viewport selection lists): no scaffold.
-5. Spring `MultiValueMapAdapter` over the owned `M3MultiValueMap` (`LinkedMultiValueMap` is DONE).
+5. Spring `MultiValueMapAdapter` (DONE #1469; `LinkedMultiValueMap` is DONE on master).
+6. Next wave (approved 2026-10-19), one stacked PR each: Guava `EnumMultiset`, `LinkedHashMultiset`,
+   `LinkedHashMultimap`, Commons `TreeBag`, Guava `TreeMultimap`. Each row's `in_place_landing` names the
+   java.util store it lands in under the M3jdk21-is-the-JDK rule.
 
 ## Viewport-derived views (2026-10-19)
 

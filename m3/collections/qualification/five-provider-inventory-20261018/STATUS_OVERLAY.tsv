@@ -29,7 +29,7 @@ com.google.common.collect.MutableClassToInstanceMap	CLAIMED #1307	com.m3.collect
 com.google.common.collect.ImmutableClassToInstanceMap	CLAIMED #1307	com.m3.collections.interop.M3GuavaClassToInstanceMaps	open PR #1307	-	do not duplicate
 org.springframework.util.LinkedCaseInsensitiveMap	CLAIMED #1269	com.m3.collections.spring.M3LinkedCaseInsensitiveMap	open PR #1269 (other worker: owned Spring case-insensitive map)	-	claimed by the other five-provider worker
 com.google.common.collect.ArrayListMultimap	DONE #1400	com.m3.collections.guava.M3ArrayListMultimap	PR #1400: implementations/guava-array-list-multimap + qualification/owned-guava-array-list-multimap-20261018	interop M3GuavaListMultimap; core M3IndexedMultiValueMap; apache M3ListValuedMap	fill order a
-com.google.common.collect.HashMultimap	OPEN	-	native engine in open PR #1261; interop adapter on master	#1261 M3IndexedSetMultiMap; interop M3GuavaSetMultimap; apache M3SetValuedMap	fill order a; reuse engine, do not duplicate
+com.google.common.collect.HashMultimap	OPEN	-	native engine in open PR #1261; interop adapter on master	BLOCKED until open #1261 lands (engine M3IndexedSetMultiMap); interop M3GuavaSetMultimap; apache M3SetValuedMap	fill order a; BLOCKED on #1261 (coordinator 2026-10-19): reuse its engine, do not duplicate
 com.google.common.collect.LinkedHashMultimap	OPEN	-	-	core M3LinkedHashMap + M3IndexedMultiValueMap	-
 com.google.common.collect.LinkedListMultimap	OPEN	-	-	core M3LinkedList link lanes	-
 com.google.common.collect.TreeMultimap	OPEN	-	-	core M3TreeMap + M3TreeSet	-
