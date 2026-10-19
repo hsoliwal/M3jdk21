@@ -60,7 +60,7 @@ public final class M3HfLexiconIntakeProof {
     private static int verifyLanguageResourceDiscovery() throws IOException {
         List<String> lines = resourceLines(
                 "/com/m3/lexicon/hf/language-resource-discovery.tsv");
-        require(lines.size() == 76, "75 language-resource candidates plus header");
+        require(lines.size() == 85, "84 language-resource candidates plus header");
         List<String> expectedHeader = List.of("source_id", "resource", "category",
                 "data_shape_and_identity", "rights_and_attribution", "m3_candidate_use",
                 "admission_blockers", "state", "evidence");
@@ -100,7 +100,11 @@ public final class M3HfLexiconIntakeProof {
                 "google-fleurs-102", "google-waxalnlp", "dictionaria-cldf-dictionaries",
                 "nchlt-south-african-resource-bundles", "sails-south-american-grammar",
                 "word2word-bilingual-lexicons", "wordhoard-frequency-morphology",
-                "muse-bilingual-dictionary-benchmarks")),
+                "muse-bilingual-dictionary-benchmarks", "numeralbank-chan-numerals-2019",
+                "numeralbank-cosinus-v2-2026", "ai4bharat-aksharantar-26m",
+                "ai4bharat-samanantar-v0-3", "ai4bharat-indiccorp-v2",
+                "ai4bharat-naamapadam-11", "mozilla-common-voice-text-lid-300",
+                "dbnary-ontolex-wiktionary-26", "masakhaner2-african-20")),
                 "lexicon, grammar, translation, concept, norms, archive, sign and HF leads retained");
         String paranames = lines.stream().skip(1)
                 .filter(line -> "hf-paranames-1-0".equals(splitTsv(line)[0]))
@@ -205,6 +209,33 @@ public final class M3HfLexiconIntakeProof {
         String muse = lines.stream().skip(1).filter(line -> "muse-bilingual-dictionary-benchmarks".equals(splitTsv(line)[0])).findFirst().orElse("");
         require(muse.contains("110 directed") && muse.contains("CC BY-NC 4.0")
                 && muse.contains("archived read-only"), "MUSE evaluation scope and noncommercial limit remain explicit");
+        String chan = lines.stream().skip(1).filter(line -> "numeralbank-chan-numerals-2019".equals(splitTsv(line)[0])).findFirst().orElse("");
+        require(chan.contains("5,332 varieties") && chan.contains("100 concepts")
+                && chan.contains("0-10,000"), "Chan numeral coverage is not overstated as a full number generator");
+        String cosinus = lines.stream().skip(1).filter(line -> "numeralbank-cosinus-v2-2026".equals(splitTsv(line)[0])).findFirst().orElse("");
+        require(cosinus.contains("NumberValue") && cosinus.contains("CC BY 4.0")
+                && cosinus.contains("under review"), "CoSiNuS identifiers, rights and research status stay explicit");
+        String aksharantar = lines.stream().skip(1).filter(line -> "ai4bharat-aksharantar-26m".equals(splitTsv(line)[0])).findFirst().orElse("");
+        require(aksharantar.contains("manual") && aksharantar.contains("mined")
+                && aksharantar.contains("CC0"), "Aksharantar source-specific mixed licensing remains visible");
+        String samanantar = lines.stream().skip(1).filter(line -> "ai4bharat-samanantar-v0-3".equals(splitTsv(line)[0])).findFirst().orElse("");
+        require(samanantar.contains("49.6M") && samanantar.contains("existing")
+                && samanantar.contains("no uniform license"), "Samanantar alignment and rights are source-scoped");
+        String indicCorpV2 = lines.stream().skip(1).filter(line -> "ai4bharat-indiccorp-v2".equals(splitTsv(line)[0])).findFirst().orElse("");
+        require(indicCorpV2.contains("20.9B tokens") && indicCorpV2.contains("24 languages")
+                && indicCorpV2.contains("source text"), "IndicCorpV2 is a versioned corpus, not a lexical-ID source");
+        String naamapadam = lines.stream().skip(1).filter(line -> "ai4bharat-naamapadam-11".equals(splitTsv(line)[0])).findFirst().orElse("");
+        require(naamapadam.contains("11 Indic languages") && naamapadam.contains("CC0")
+                && naamapadam.contains("not owned"), "Naamapadam packaging license does not clear source text");
+        String textLid = lines.stream().skip(1).filter(line -> "mozilla-common-voice-text-lid-300".equals(splitTsv(line)[0])).findFirst().orElse("");
+        require(textLid.contains("19M") && textLid.contains("300 languages")
+                && textLid.contains("sentence plus language"), "Common Voice LID label and dedupe scope remain explicit");
+        String dbnary = lines.stream().skip(1).filter(line -> "dbnary-ontolex-wiktionary-26".equals(splitTsv(line)[0])).findFirst().orElse("");
+        require(dbnary.contains("OntoLex RDF") && dbnary.contains("26 language editions")
+                && dbnary.contains("CC BY-SA 3.0"), "DBnary data and extractor licenses remain separated");
+        String masakha = lines.stream().skip(1).filter(line -> "masakhaner2-african-20".equals(splitTsv(line)[0])).findFirst().orElse("");
+        require(masakha.contains("20 African languages") && masakha.contains("AFL 3.0")
+                && masakha.contains("source-text rights"), "MasakhaNER artifact terms and source rights remain explicit");
         return lines.size() - 1;
     }
 
