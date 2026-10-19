@@ -60,7 +60,7 @@ public final class ExpansionTableBench {
             row(report, "m3_index", n, "fresh_expansion", time(() -> m3Below(m3, stock, leafKey, ties)), "");
             row(report, "stock_loop", n, "re_expansion_" + sub.size(), time(() -> stockBelow(stock, midFresh).size()), "");
             row(report, "m3_index", n, "re_expansion_" + sub.size(), time(() -> m3Below(m3, m3, midFresh, ties)),
-                    "the stock loop runs when two keys share a bucket");
+                    "index order: bucket, then chain stamp");
             row(report, "stock_loop", n, "remove_subtree_" + sub.size(), time(() -> {
                 stockRemove(stock, mid);
                 for (TreePath p : sub) {
@@ -112,7 +112,7 @@ public final class ExpansionTableBench {
         }
         inner.add(p);
         for (int i = 0; i < 10; i++) {
-            build(p.pathByAddingChild("n" + level + "." + i), level + 1, depth, inner);
+            build(p.pathByAddingChild(p.getLastPathComponent() + "." + i), level + 1, depth, inner);
         }
     }
 
