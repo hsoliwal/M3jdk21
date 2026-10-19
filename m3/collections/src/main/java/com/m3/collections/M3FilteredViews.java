@@ -1,12 +1,14 @@
 /*
  * SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
  * SPDX-License-Identifier: Apache-2.0
+ * Modified 2026: converge stack-safe filters, readonly navigation and sorted splits.
  */
 package com.m3.collections;
 
 import java.util.AbstractCollection;
 import java.util.AbstractMap;
 import java.util.AbstractSet;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
@@ -19,6 +21,7 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.SortedMap;
 import java.util.SortedSet;
+import java.util.Spliterator;
 import java.util.function.BiPredicate;
 import java.util.function.Predicate;
 
@@ -124,6 +127,12 @@ public final class M3FilteredViews {
     private static <E> boolean visible(Collection<E> source,
             Predicate<? super E> predicate, Object value) {
         if (!source.contains(value)) return false;
+        return visibleMember(source, predicate, value);
+    }
+
+    /** Membership has already succeeded; preserve the original representative probe order. */
+    private static <E> boolean visibleMember(Collection<E> source,
+            Predicate<? super E> predicate, Object value) {
         if (source instanceof Set<?>) {
             for (E owned : source) {
                 if (owned == value) return predicate.test(owned);
@@ -135,6 +144,20 @@ public final class M3FilteredViews {
         return false;
     }
 
+    /** Open only private read-only owners whose iterator is exactly the same filter decorator. */
+    @SuppressWarnings("unchecked")
+    private static <E> CollectionView<E> iterationView(Collection<E> source) {
+        if (source instanceof CollectionView<?> view) return (CollectionView<E>) view;
+        return source instanceof SetView<?> view ? ((SetView<E>) view).view : null;
+    }
+
+    /** Sorted membership has a different representative probe and remains an opaque boundary. */
+    @SuppressWarnings("unchecked")
+    private static <E> CollectionView<E> membershipView(Collection<E> source) {
+        if (source instanceof CollectionView<?> view) return (CollectionView<E>) view;
+        return source.getClass() == SetView.class ? ((SetView<E>) source).view : null;
+    }
+
     private static class CollectionView<E> extends AbstractCollection<E> {
         private final Collection<E> source;
         private final Predicate<? super E> predicate;
@@ -144,14 +167,48 @@ public final class M3FilteredViews {
             this.predicate = Objects.requireNonNull(predicate, "predicate");
         }
 
-        @Override public Iterator<E> iterator() { return filtered(source.iterator(), predicate); }
+        @Override public Iterator<E> iterator() {
+            if (iterationView(source) == null) return filtered(source.iterator(), predicate);
+            // A depth-sized array replaces nested iterator frames, never backing elements.
+            ArrayList<Predicate<? super E>> filters = new ArrayList<>();
+            CollectionView<E> layer = this;
+            Collection<E> backing;
+            do {
+                filters.add(layer.predicate);
+                backing = layer.source;
+                layer = iterationView(backing);
+            } while (layer != null);
+            return filtered(backing.iterator(), value -> {
+                for (int index = filters.size() - 1; index >= 0; index--) {
+                    if (!filters.get(index).test(value)) return false;
+                }
+                return true;
+            });
+        }
         @Override public int size() {
             int count = 0;
-            for (E item : source) if (predicate.test(item)) count++;
+            Iterator<E> cursor = iterator();
+            while (cursor.hasNext()) { cursor.next(); count++; }
             return count;
         }
         @Override public boolean isEmpty() { return !iterator().hasNext(); }
-        @Override public boolean contains(Object value) { return visible(source, predicate, value); }
+        @Override public boolean contains(Object value) {
+            if (membershipView(source) == null) return visible(source, predicate, value);
+            // Replay the existing inner membership and outer representative scans in order.
+            ArrayList<CollectionView<E>> pending = new ArrayList<>();
+            CollectionView<E> layer = this;
+            CollectionView<E> inner;
+            while ((inner = membershipView(layer.source)) != null) {
+                pending.add(layer);
+                layer = inner;
+            }
+            if (!visible(layer.source, layer.predicate, value)) return false;
+            for (int index = pending.size() - 1; index >= 0; index--) {
+                layer = pending.get(index);
+                if (!visibleMember(layer.source, layer.predicate, value)) return false;
+            }
+            return true;
+        }
         @Override public boolean add(E value) { throw readonly(); }
         @Override public boolean remove(Object value) { throw readonly(); }
         @Override public boolean addAll(Collection<? extends E> values) { throw readonly(); }
@@ -179,6 +236,50 @@ public final class M3FilteredViews {
         @Override public void clear() { throw readonly(); }
     }
 
+    /** Guard the existing JDK reversed traversal without rebuilding its predicate pipeline. */
+    private static <E> SortedSet<E> readOnlySortedSet(SortedSet<E> source) {
+        return source instanceof SortedSetView<?> || source instanceof ReadOnlySortedSet<?>
+                ? source : new ReadOnlySortedSet<>(source);
+    }
+
+    private static final class ReadOnlySortedSet<E> extends AbstractSet<E> implements SortedSet<E> {
+        private final SortedSet<E> source;
+        private ReadOnlySortedSet(SortedSet<E> source) { this.source = source; }
+        @Override public int size() { return source.size(); }
+        @Override public boolean isEmpty() { return source.isEmpty(); }
+        @Override public boolean contains(Object value) { return source.contains(value); }
+        @Override public boolean containsAll(Collection<?> values) { return source.containsAll(values); }
+        @Override public Iterator<E> iterator() { return Collections.unmodifiableSet(source).iterator(); }
+        @Override public java.util.Spliterator<E> spliterator() { return source.spliterator(); }
+        @Override public Object[] toArray() { return source.toArray(); }
+        @Override public <T> T[] toArray(T[] target) { return source.toArray(target); }
+        @Override public <T> T[] toArray(java.util.function.IntFunction<T[]> factory) {
+            return source.toArray(factory);
+        }
+        @Override public void forEach(java.util.function.Consumer<? super E> action) { source.forEach(action); }
+        @Override public boolean equals(Object other) { return other == this || source.equals(other); }
+        @Override public int hashCode() { return source.hashCode(); }
+        @Override public String toString() { return source.toString(); }
+        @Override public Comparator<? super E> comparator() { return source.comparator(); }
+        @Override public E first() { return source.first(); }
+        @Override public E last() { return source.last(); }
+        @Override public SortedSet<E> subSet(E from, E to) { return readOnlySortedSet(source.subSet(from, to)); }
+        @Override public SortedSet<E> headSet(E to) { return readOnlySortedSet(source.headSet(to)); }
+        @Override public SortedSet<E> tailSet(E from) { return readOnlySortedSet(source.tailSet(from)); }
+        @Override public SortedSet<E> reversed() { return readOnlySortedSet(source.reversed()); }
+        @Override public boolean add(E value) { throw readonly(); }
+        @Override public boolean remove(Object value) { throw readonly(); }
+        @Override public boolean addAll(Collection<? extends E> values) { throw readonly(); }
+        @Override public boolean removeAll(Collection<?> values) { throw readonly(); }
+        @Override public boolean retainAll(Collection<?> values) { throw readonly(); }
+        @Override public boolean removeIf(Predicate<? super E> filter) { throw readonly(); }
+        @Override public void clear() { throw readonly(); }
+        @Override public void addFirst(E value) { throw readonly(); }
+        @Override public void addLast(E value) { throw readonly(); }
+        @Override public E removeFirst() { throw readonly(); }
+        @Override public E removeLast() { throw readonly(); }
+    }
+
     private static class SortedSetView<E> extends SetView<E> implements SortedSet<E> {
         protected final SortedSet<E> sorted;
         protected final Predicate<? super E> predicate;
@@ -190,6 +291,10 @@ public final class M3FilteredViews {
         }
 
         @Override public Comparator<? super E> comparator() { return sorted.comparator(); }
+        /** Preserve custom ordering on every recursively split child. */
+        @Override public Spliterator<E> spliterator() {
+            return M3SlotSpliterators.sorted(this);
+        }
         @Override public boolean contains(Object value) {
             if (!sorted.contains(value)) return false;
             @SuppressWarnings("unchecked") E alias = (E) value;
@@ -206,6 +311,14 @@ public final class M3FilteredViews {
         @Override public SortedSet<E> tailSet(E from) {
             return new SortedSetView<>(sorted.tailSet(from), predicate);
         }
+        @Override public SortedSet<E> reversed() {
+            return readOnlySortedSet(SortedSet.super.reversed());
+        }
+        // An explicit read-only boundary refuses even empty endpoint mutations.
+        @Override public void addFirst(E value) { throw readonly(); }
+        @Override public void addLast(E value) { throw readonly(); }
+        @Override public E removeFirst() { throw readonly(); }
+        @Override public E removeLast() { throw readonly(); }
         @Override public E first() { return iterator().next(); }
         @Override public E last() {
             Iterator<E> iterator = iterator();
@@ -236,9 +349,15 @@ public final class M3FilteredViews {
          */
         private boolean nullIsCandidate(E query, boolean forward, boolean inclusive) {
             Comparator<? super E> order = nav.comparator();
-            if (order == null || nav.isEmpty()
-                    || (nav.first() != null && nav.last() != null)) return false;
-            int direction = order.compare(null, query);
+            if (order == null || nav.isEmpty()) return false;
+            // Retain the former first/last lookup order. A null member need not
+            // be an extreme: the opposite stored boundary proves whether a
+            // navigational candidate exists, even when that candidate is null.
+            // Compare only a stored value; do not fabricate an unsupported null.
+            E first = nav.first();
+            E last = first == null ? null : nav.last();
+            E boundary = first == null || last == null ? null : (forward ? last : first);
+            int direction = order.compare(boundary, query);
             return forward ? (inclusive ? direction >= 0 : direction > 0)
                     : (inclusive ? direction <= 0 : direction < 0);
         }
@@ -279,6 +398,7 @@ public final class M3FilteredViews {
         }
         @Override public E pollFirst() { throw readonly(); }
         @Override public E pollLast() { throw readonly(); }
+        @Override public NavigableSet<E> reversed() { return descendingSet(); }
         @Override public NavigableSet<E> descendingSet() {
             return new NavigableSetView<>(nav.descendingSet(), predicate);
         }
@@ -343,6 +463,16 @@ public final class M3FilteredViews {
         @Override public Set<Entry<K, V>> entrySet() {
             return new AbstractSet<>() {
                 @Override public int size() { return SortedMapView.this.size(); }
+                @Override public boolean contains(Object candidate) {
+                    if (!(candidate instanceof Entry<?, ?> probe)) return false;
+                    Object key = probe.getKey();
+                    if (!sorted.containsKey(key)) return false;
+                    V value = sorted.get(key);
+                    // Reuse comparator membership and the existing stored-key
+                    // atom. A nullable mapping is distinct from an absent key.
+                    return predicate.test(storedKey(key), value)
+                            && Objects.equals(value, probe.getValue());
+                }
                 @Override public Iterator<Entry<K, V>> iterator() {
                     Iterator<Entry<K, V>> cursor = sorted.entrySet().iterator();
                     Iterator<Entry<K, V>> filtered = M3FilteredViews.filtered(cursor,

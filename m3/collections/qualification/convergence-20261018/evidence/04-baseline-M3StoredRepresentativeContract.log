@@ -1,0 +1,6 @@
+Exception in thread "main" java.lang.AssertionError: filtered comparator-key entry membership
+	at com.m3.collections.M3StoredRepresentativeContract.yes(M3StoredRepresentativeContract.java:38)
+	at com.m3.collections.M3StoredRepresentativeContract.readOnlyMapEntryBaseline(M3StoredRepresentativeContract.java:140)
+	at com.m3.collections.M3StoredRepresentativeContract.main(M3StoredRepresentativeContract.java:447)
+
+EXIT=1

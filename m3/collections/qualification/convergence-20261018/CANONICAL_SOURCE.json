@@ -1,0 +1,24 @@
+{
+  "schema": "M3_CANONICAL_CONVERGENCE_RECEIPT_V1",
+  "repository": "hsoliwal/com.synexia",
+  "canonical_commit": "5bd512f6ea12a92ba4cb294c3394c86319fad119",
+  "canonical_pr": "https://github.com/hsoliwal/com.synexia/pull/12363",
+  "crate": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017",
+  "target_baseline": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
+  "recipe": "com.synexia.m3jdk.CollectionsContractRefinement20261017",
+  "engine_changes": [],
+  "datasets": {
+    "converged-owners-v2-20261018": {
+      "resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-converged-owners-v2-20261018/manifest.tsv": "e166266db3ee7abfc08188b07cf6da1d886834a4a022a41ed96c27efe171be4d",
+      "resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-converged-owners-v2-20261018/manifest.tsv": "48ee5d1905a8135cff9a8312aeaaa59af20ec5d6fa8da6929a3a571b771f6709"
+    },
+    "converged-oracles-20261018": {
+      "resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-converged-oracles-20261018/manifest.tsv": "d5191b0b85bfc5e2569302172a073827d716dc65b9083cdefdcd81423b3adada",
+      "resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-converged-oracles-20261018/manifest.tsv": "1fa785122273d3f53cd8bbc7439f29819c108943bf52cd3b6afac5c263c6304f"
+    },
+    "converged-build-20261018": {
+      "resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-converged-build-20261018/manifest.tsv": "5d4b248dd550d4a21af45b4b7d86602f5f9ec92f54720cae7c6edc801a12935e"
+    }
+  },
+  "limits": "draft; three unresolved baseline wrapper probes; no whole-JDK, jtreg, full canonical reactor, hosted CI or non-Linux claim"
+}

@@ -1,0 +1,17 @@
+m3/collections/qualification/full-java-jni-20261018/LICENSE.txt	0644
+m3/collections/qualification/full-java-jni-20261018/NOTICE.txt	0644
+m3/collections/qualification/full-java-jni-20261018/README.md	0644
+m3/collections/qualification/full-java-jni-20261018/verify.py	0644
+m3/collections/qualification/swift-deque-spans-20261018/NOTICE.txt	0644
+m3/collections/qualification/swift-deque-spans-20261018/SWIFT-LICENSE.txt	0644
+m3/collections/src/main/java/com/m3/collections/M3FilteredLists.java	0644
+m3/collections/src/main/java/com/m3/collections/M3FilteredNavigableSet.java	0644
+m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java	0644
+m3/collections/src/main/java/com/m3/collections/M3IndexPathMasks.java	0644
+m3/collections/src/main/java/com/m3/collections/M3IndexedListSnapshot.java	0644
+m3/collections/src/main/java/com/m3/collections/M3LongArrayDeque.java	0644
+m3/collections/src/main/java/com/m3/collections/M3LongCompositeViews.java	0644
+m3/collections/src/main/java/com/m3/collections/M3MutableFilteredViews.java	0644
+m3/collections/src/main/java/com/m3/collections/M3ObjectIndexSnapshot.java	0644
+m3/collections/src/main/java/com/m3/collections/M3SlotSpliterators.java	0644
+m3/collections/src/main/native/collections/m3_index_mask_window.c	0644
