@@ -3,7 +3,7 @@
 ---
 type: specs.openrewrite.org/v1beta/recipe
 name: com.synexia.openrewrite.viewport.M3SwingViewportBasicListUI
-displayName: BasicListUI reads row offsets from a prefix lane when m3.swing.viewport is set
+displayName: BasicListUI reads row offsets from a prefix lane and measures only edited rows when m3.swing.viewport is set
 description: >-
   M3JDK Swing viewport leaf 3 (m3/docs/swing-viewport/DESIGN.md section 9). One field and two statement
   blocks in javax.swing.plaf.basic.BasicListUI: getCellBounds(JList, int) takes the y of a vertical row
@@ -32,3 +32,33 @@ recipeList:
       anchor: "int y = insets.top;"
       position: BEFORE
       statements: "            if (m3Rows.indexes(this, cellHeights)) {\n                int m3Row = m3Rows.rowAt(size, insets.top, y0, closest);\n                if (m3Row != sun.swing.list.M3ListRows.STOCK) {\n                    return m3Row;\n                }\n            }"
+  # Leaf 4 (DESIGN.md section 10): updateLayoutState measures only the rows that list data events touched.
+  - com.synexia.openrewrite.viewport.M3AddMemberIfMissing:
+      declaringClasses: [javax.swing.plaf.basic.BasicListUI]
+      memberName: m3Measure
+      beforeMethod: BasicListUI
+      memberSource: "    /** Row sizes kept between layouts for the M3 measurement path ({@code sun.swing.list.M3ListMeasure}). */\n    private final sun.swing.list.M3ListMeasure m3Measure = new sun.swing.list.M3ListMeasure();"
+  - com.synexia.openrewrite.viewport.M3InsertStatements:
+      declaringClasses: [javax.swing.plaf.basic.BasicListUI]
+      methodName: updateLayoutState
+      parameterCount: 0
+      position: METHOD_START
+      statements: "        if (layoutOrientation == JList.VERTICAL && m3Measure.measure(this, list, rendererPane)) {\n            cellWidth = m3Measure.cellWidth();\n            cellHeight = -1;\n            cellHeights = m3Measure.cellHeights();\n            columnCount = 1;\n            return;\n        }"
+  - com.synexia.openrewrite.viewport.M3InsertStatements:
+      declaringClasses: [javax.swing.plaf.basic.BasicListUI$Handler, javax.swing.plaf.basic.BasicListUI.Handler]
+      methodName: intervalAdded
+      parameterCount: 1
+      position: METHOD_START
+      statements: "            m3Measure.added(e.getIndex0(), e.getIndex1());"
+  - com.synexia.openrewrite.viewport.M3InsertStatements:
+      declaringClasses: [javax.swing.plaf.basic.BasicListUI$Handler, javax.swing.plaf.basic.BasicListUI.Handler]
+      methodName: intervalRemoved
+      parameterCount: 1
+      position: METHOD_START
+      statements: "            m3Measure.removed(e.getIndex0(), e.getIndex1());"
+  - com.synexia.openrewrite.viewport.M3InsertStatements:
+      declaringClasses: [javax.swing.plaf.basic.BasicListUI$Handler, javax.swing.plaf.basic.BasicListUI.Handler]
+      methodName: contentsChanged
+      parameterCount: 1
+      position: METHOD_START
+      statements: "            m3Measure.changed(e.getIndex0(), e.getIndex1());"
