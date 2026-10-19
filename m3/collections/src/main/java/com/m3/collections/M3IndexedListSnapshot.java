@@ -213,6 +213,42 @@ public final class M3IndexedListSnapshot<E> extends AbstractList<E> implements R
         return selected;
     }
 
+    /**
+     * Filters this immutable indexed snapshot by the full 32-bit state word at
+     * each canonical physical slot. The aligned mask lane is read only during
+     * this invocation and never retained; the returned int[] index directory
+     * preserves encounter order, duplicate values, and the current slice.
+     *
+     * <p>No object reference or user callback enters JNI. Native-required mode
+     * reuses M3IndexPathMasks and refuses when its existing library is absent.
+     */
+    public M3IndexedListSnapshot<E> maskedByPhysicalState(
+            int[] physicalStates, int requiredMask, int forbiddenMask,
+            M3IndexPathMasks.Backend backend) {
+        Objects.requireNonNull(physicalStates, "physicalStates");
+        Objects.requireNonNull(backend, "backend");
+        if (physicalStates.length != values.length) {
+            throw new IllegalArgumentException("state words must align with physical slots");
+        }
+        int[] admitted = M3IndexPathMasks.select(
+                positions, positions, new int[][] {physicalStates},
+                new int[] {requiredMask}, new int[] {forbiddenMask},
+                from, size(), 1, backend);
+        return new M3IndexedListSnapshot<>(values, admitted, 0, admitted.length, null);
+    }
+
+    /**
+     * Selects physical state bits before performing the existing stable indirect
+     * index sort. Only selected Java values reach the comparator; the payload
+     * Object[] and original snapshot remain unchanged.
+     */
+    public M3IndexedListSnapshot<E> sortedMaskedByPhysicalState(
+            int[] physicalStates, int requiredMask, int forbiddenMask,
+            Comparator<? super E> comparator, M3IndexPathMasks.Backend backend) {
+        return maskedByPhysicalState(
+                physicalStates, requiredMask, forbiddenMask, backend).sorted(comparator);
+    }
+
     public M3IndexedListSnapshot<E> sorted(Comparator<? super E> comparator) {
         int[] current = physicalIndices();
         sortPositions(current, comparator);
