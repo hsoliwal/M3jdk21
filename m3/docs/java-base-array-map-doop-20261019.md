@@ -24,8 +24,11 @@ original notices remain on modified JDK implementation sources.
   `(this Map)` rendering. It checks `modCount` before visiting
   a subsequent occupied slot after reentrant structural changes,
   matching the existing entry iterator's best-effort fail-fast
-  boundary. Existing unusual reference-equality Map contracts and
-  serialization are unchanged.
+  boundary. For equals(Map) with a non-IdentityHashMap, only the
+  **foreign** entrySet is traversed; each candidate is checked via
+  the original containsMapping identity array index, without any
+  own Map.Entry or EntryIterator allocation. Existing unusual
+  reference-equality Map contracts and serialization are unchanged.
 
 Neither operation copies or stores one `Map.Entry` per mapping.
 No primitive JNI call is appropriate for arbitrary Java object
