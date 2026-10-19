@@ -26,6 +26,7 @@
 package sun.swing.tree;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Hashtable;
 
@@ -46,9 +47,10 @@ import sun.security.action.GetBooleanAction;
  * <p>
  * Exactness: {@link #removeDescendants} removes the same keys as the stock scan, and the order of
  * removals does not change the table's structure (a removal unlinks one entry and never rehashes).
- * {@link #hasExpandedDescendant} only decides that the stock scan would find nothing; when it might
- * find something, the stock scan runs, so the enumeration and its order stay the table's. A JTree
- * class that overrides {@code getDescendantToggledPaths} keeps a plain {@code Hashtable}
+ * {@link #expandedKeysBelow} gives the keys the stock loop tests, in the order of {@code keys()}:
+ * {@code keys()} walks the buckets from the last to the first, the bucket count is mirrored from
+ * {@code Hashtable}'s growth rule, and when two of the keys share a bucket the stock loop runs. A
+ * JTree class that overrides {@code getDescendantToggledPaths} keeps a plain {@code Hashtable}
  * ({@link #accepts}). A mutation the index did not see (none in {@code JTree}, which only calls
  * {@code get}, {@code put}, {@code remove}, {@code clear} and {@code keys}) makes the key count
  * differ and hands every call back to the stock scan.
@@ -56,8 +58,8 @@ import sun.security.action.GetBooleanAction;
  * Precondition, as for the {@code Hashtable} itself: the last component of a path keeps its
  * {@code hashCode} and {@code equals} while the tree shows it. The index also holds the ancestors
  * of the keys, so a component whose hash changes while only its descendants are keys can make
- * {@link #hasExpandedDescendant} answer false where the stock scan, which uses only
- * {@code equals}, would find a path. Design and proof: m3/docs/swing-viewport/DESIGN.md section 11.
+ * {@link #expandedKeysBelow} miss a key that the stock loop, which uses only {@code equals},
+ * finds. Design and proof: m3/docs/swing-viewport/DESIGN.md section 11.
  */
 //FLLDCIM: M3 swing-viewport leaf 5 - JTree expansion table indexed by parent, same table and order
 @SuppressWarnings("serial") // transient in JTree, never serialized
@@ -105,8 +107,15 @@ public final class M3ExpandedState extends Hashtable<TreePath, Boolean> {
         }
     }
 
+    /** Hashtable's defaults ({@code new Hashtable()}: 11 buckets, load factor 0.75) and size limit. */
+    private static final float LOAD_FACTOR = 0.75f;
+    private static final int MAX_ARRAY_SIZE = Integer.MAX_VALUE - 8;
+    private static final TreePath[] NONE = new TreePath[0];
+
     private final HashMap<TreePath, Node> nodes = new HashMap<>();
     private int toggled;
+    private int capacity = 11;
+    private int threshold = (int) Math.min(11 * LOAD_FACTOR, MAX_ARRAY_SIZE + 1);
 
     /** Creates an empty table. */
     public M3ExpandedState() {
@@ -300,3 +309,6 @@ public final class M3ExpandedState extends Hashtable<TreePath, Boolean> {
                 }
             }
             n = p;
+        }
+    }
+}

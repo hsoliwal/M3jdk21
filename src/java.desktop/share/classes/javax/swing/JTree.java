@@ -2033,10 +2033,23 @@ public class JTree extends JComponent implements Scrollable, Accessible
     public Enumeration<TreePath> getExpandedDescendants(TreePath parent) {
         if(!isExpanded(parent))
             return null;
-        if (expandedState instanceof sun.swing.tree.M3ExpandedState m3State
-                && !m3State.hasExpandedDescendant(parent)) {
-            Set<TreePath> none = Collections.emptySet();
-            return Collections.enumeration(none);
+        TreePath[] m3Keys = expandedState instanceof sun.swing.tree.M3ExpandedState m3State
+                ? m3State.expandedKeysBelow(parent) : null;
+        if (m3Keys != null) {
+            Vector<TreePath> found = null;
+            for (TreePath path : m3Keys) {
+                if (isVisible(path)) {
+                    if (found == null) {
+                        found = new Vector<TreePath>();
+                    }
+                    found.addElement(path);
+                }
+            }
+            if (found == null) {
+                Set<TreePath> none = Collections.emptySet();
+                return Collections.enumeration(none);
+            }
+            return found.elements();
         }
 
         Enumeration<TreePath> toggledPaths = expandedState.keys();

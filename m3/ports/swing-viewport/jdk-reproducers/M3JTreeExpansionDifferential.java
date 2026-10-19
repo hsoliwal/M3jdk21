@@ -400,10 +400,17 @@ public final class M3JTreeExpansionDifferential {
         compare("selection", t -> Arrays.toString(t.getSelectionRows()) + " " + t.getLeadSelectionPath()
                 + " " + Arrays.toString(t.getSelectionPaths()));
         M3ExpandedState s = (M3ExpandedState) table(m3);
+        List<TreePath> parents = new ArrayList<>();
         for (DefaultMutableTreeNode n : sample) {
-            TreePath p = path(n);
+            parents.add(path(n));
+        }
+        List<TreePath> k = keys(m3);
+        for (int i : at) {
+            parents.add(k.get(i));
+        }
+        for (TreePath p : parents) {
             if (m3.isExpanded(p)) {
-                if (s.hasExpandedDescendant(p)) {
+                if (s.expandedKeysBelow(p) == null) {
                     scans++;
                 } else {
                     indexSkips++;
