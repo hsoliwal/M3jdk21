@@ -97,7 +97,6 @@ guava-enum-hash-bi-map	com.google.common.collect.EnumHashBiMap	com.m3.collection
 guava-enum-multiset	com.google.common.collect.EnumMultiset	com.m3.collections.guava.M3EnumMultiset	Iterable<E>;com.google.common.collect.Multiset<E>;java.io.Serializable;java.util.Collection<E>	0	3	30	-	-	0
 guava-hash-based-table	com.google.common.collect.HashBasedTable	com.m3.collections.guava.M3HashBasedTable	com.google.common.collect.Table<R,C,V>;java.io.Serializable	0	3	22	-	-	0
 guava-hash-multimap	com.google.common.collect.HashMultimap	com.m3.collections.guava.M3HashMultimap	com.google.common.collect.Multimap<K,V>;com.google.common.collect.SetMultimap<K,V>;java.io.Serializable	0	3	22	-	-	0
-guava-hash-multiset	com.google.common.collect.HashMultiset	com.m3.collections.guava.M3HashMultiset	Iterable<E>;com.google.common.collect.Multiset<E>;java.io.Serializable;java.util.Collection<E>	0	3	30	-	-	0
 guava-immutable-list-multimap	com.google.common.collect.ImmutableListMultimap	com.m3.collections.guava.M3ImmutableListMultimap	com.google.common.collect.ListMultimap<K,V>;com.google.common.collect.Multimap<K,V>;java.io.Serializable	0	12	23	-	-	7
 guava-immutable-range-map	com.google.common.collect.ImmutableRangeMap	com.m3.collections.guava.M3ImmutableRangeMap	com.google.common.collect.RangeMap<K,V>;java.io.Serializable	0	5	15	-	-	6
 guava-immutable-range-set	com.google.common.collect.ImmutableRangeSet	com.m3.collections.guava.M3ImmutableRangeSet	com.google.common.collect.RangeSet<C>;java.io.Serializable	0	7	26	-	rawtypes	6

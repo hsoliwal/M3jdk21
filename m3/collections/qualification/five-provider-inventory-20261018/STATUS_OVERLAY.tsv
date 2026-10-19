@@ -33,7 +33,7 @@ com.google.common.collect.HashMultimap	OPEN	-	native engine in open PR #1261; in
 com.google.common.collect.LinkedHashMultimap	OPEN	-	-	core M3LinkedHashMap + M3IndexedMultiValueMap	-
 com.google.common.collect.LinkedListMultimap	OPEN	-	-	core M3LinkedList link lanes	-
 com.google.common.collect.TreeMultimap	OPEN	-	-	core M3TreeMap + M3TreeSet	-
-com.google.common.collect.HashMultiset	OPEN	-	adapter work in open PR #1271; interop adapter on master	#1271 M3GuavaMultiset; core M3CountedBag	fill order b; reuse counts lanes
+com.google.common.collect.HashMultiset	DONE #1418	com.m3.collections.guava.M3HashMultiset	PR #1418: implementations/guava-hash-multiset + qualification/owned-guava-hash-multiset-20261018	#1271 M3GuavaMultiset; core M3CountedBag	fill order b; reuse counts lanes
 com.google.common.collect.LinkedHashMultiset	OPEN	-	-	core M3CountedBag + M3LinkedHashMap	-
 com.google.common.collect.TreeMultiset	OPEN	-	-	core M3CountedBag; #1403 M3OrderStatisticForest + M3SparseExtents	range counts via viewport owners
 com.google.common.collect.EnumMultiset	OPEN	-	-	core M3EnumLongMap counts by ordinal	-
