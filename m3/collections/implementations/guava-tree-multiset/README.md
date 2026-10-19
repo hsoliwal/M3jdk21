@@ -11,7 +11,7 @@ Entry-shaped value demanded by the provider API is a boundary flyweight created 
 
 Planned lanes: `Object[] elements`, `int[] counts`, `int[] hashes`, `int[] index`, `long[] liveMask`, `long totalSize`, `int modCount`.
 
-Reuse when filling: core M3CountedBag; viewport order-statistic tree + Fenwick prefix sums.
+Reuse when filling: core M3CountedBag; #1403 M3OrderStatisticForest + M3SparseExtents.
 
 The row in `m3/collections/qualification/five-provider-inventory-20261018/INVENTORY.tsv` is `SCAFFOLD`;
 the owning PR flips it to `DONE #PR`. Regenerate with the generator in that directory rather than editing

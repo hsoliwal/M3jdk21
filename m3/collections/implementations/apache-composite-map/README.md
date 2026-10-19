@@ -11,7 +11,7 @@ Entry-shaped value demanded by the provider API is a boundary flyweight created 
 
 Planned lanes: `Object backing`, `int state`.
 
-Reuse when filling: peer native skeleton M3CompositeCollectionView (m3/five-library-scaffold-20261018@bec1ebbaa352), M3CompositeMapView (m3/five-library-scaffold-20261018@bec1ebbaa352).
+Reuse when filling: #1403 M3FlatteningView; peer native skeleton M3CompositeCollectionView (m3/five-library-scaffold-20261018@bec1ebbaa352), M3CompositeMapView (m3/five-library-scaffold-20261018@bec1ebbaa352).
 
 The row in `m3/collections/qualification/five-provider-inventory-20261018/INVENTORY.tsv` is `SCAFFOLD`;
 the owning PR flips it to `DONE #PR`. Regenerate with the generator in that directory rather than editing

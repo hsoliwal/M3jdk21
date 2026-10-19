@@ -11,7 +11,7 @@ Entry-shaped value demanded by the provider API is a boundary flyweight created 
 
 Planned lanes: `Object backing`, `int state`.
 
-Reuse when filling: existing M3SlotArrays/M3SlotMap lane mechanics.
+Reuse when filling: #1403 M3FlatteningView.
 
 The row in `m3/collections/qualification/five-provider-inventory-20261018/INVENTORY.tsv` is `SCAFFOLD`;
 the owning PR flips it to `DONE #PR`. Regenerate with the generator in that directory rather than editing
