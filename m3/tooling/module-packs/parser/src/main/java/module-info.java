@@ -4,6 +4,7 @@
 /** Optional source, generic grammar, and existing javac-event parser framework. */
 module jdk.m3.parser {
     requires transitive jdk.compiler;
+    requires java.xml;
     exports jdk.m3.parser;
     exports jdk.m3.parser.grammar;
 }
