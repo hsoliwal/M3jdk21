@@ -1,0 +1,12 @@
+[
+  "/tmp/m3-toolchain/verified/jdk-21.0.12.1+1/bin/javac",
+  "--release",
+  "21",
+  "--patch-module",
+  "java.base=/workspace/scratch/87fb3604f641/m3-implementation/M3jdk21/build/m3-p0/jdk/modules/java.base",
+  "-Xlint:all",
+  "-Werror",
+  "-d",
+  "/workspace/scratch/87fb3604f641/m3-implementation/collections-lane/synexia/synexia-openrewrite-recipes/recipe-crates/m3-object-base-vtable-20261018/target/runtime-classes",
+  "/workspace/scratch/87fb3604f641/m3-implementation/collections-lane/synexia/synexia-openrewrite-recipes/recipe-crates/m3-object-base-vtable-20261018/contract/M3ObjectBaseVtableContract.java"
+]
