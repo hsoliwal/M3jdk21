@@ -65,8 +65,7 @@ public final class M3PrimitiveSlotMap extends Recipe {
 					String name = v.getVariables ().get (0).getSimpleName ();
 					return member (mods + "M3LongLongHashMap " + name + " = new M3LongLongHashMap ();").withPrefix (v.getPrefix ());
 				}
-				if (v.getVariables ().size () == 1 && v.getTypeExpression () != null
-						&& "Integer".equals (v.getTypeExpression ().printTrimmed (getCursor ()))
+				if (v.getVariables ().size () == 1 && named (v.getTypeExpression (), "Integer")
 						&& v.getVariables ().get (0).getInitializer () instanceof J.MethodInvocation call
 						&& "get".equals (call.getSimpleName ()) && call.getSelect () instanceof J.Identifier map
 						&& maps.contains (map.getSimpleName ()) && call.getArguments ().size () == 1) {
@@ -93,8 +92,13 @@ public final class M3PrimitiveSlotMap extends Recipe {
 	}
 
 	static boolean isBoxedSlotMap (J.VariableDeclarations v) {
-		return v.getTypeExpression () != null
-				&& v.getTypeExpression ().printTrimmed (new Cursor (null, v)).replace (" ", "").equals ("HashMap<Long,Integer>");
+		return v.getTypeExpression () instanceof J.ParameterizedType type && named (type.getClazz (), "HashMap")
+				&& type.getTypeParameters () != null && type.getTypeParameters ().size () == 2
+				&& named (type.getTypeParameters ().get (0), "Long") && named (type.getTypeParameters ().get (1), "Integer");
+	}
+
+	static boolean named (Object tree, String name) {
+		return tree instanceof J.Identifier id && name.equals (id.getSimpleName ());
 	}
 
 	private static J.ClassDeclaration unit (String body) {
