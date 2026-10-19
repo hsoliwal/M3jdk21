@@ -66,7 +66,7 @@ public final class M3HfLexiconIntakeProof {
     private static int verifyLanguageResourceDiscovery() throws IOException {
         List<String> lines = resourceLines(
                 "/com/m3/lexicon/hf/language-resource-discovery.tsv");
-        require(lines.size() == 162, "161 language-resource candidates plus header");
+        require(lines.size() == 166, "165 language-resource candidates plus header");
         List<String> expectedHeader = List.of("source_id", "resource", "category",
                 "data_shape_and_identity", "rights_and_attribution", "m3_candidate_use",
                 "admission_blockers", "state", "evidence");
@@ -250,8 +250,12 @@ public final class M3HfLexiconIntakeProof {
                 "lexibank-austronesian-comparative-dictionary",
                 "dictionaria-teanu",
                 "shabd-cstt-indian-technical-terminology",
-                "iwn-en-indowordnet"
-        )), "exact 161 language-resource source IDs match the pinned catalogue");
+                "iwn-en-indowordnet",
+                "multilingual-open-text-mot-release1",
+                "multi-simlex-12-language",
+                "tsammalex-v0-3",
+                "dicovalence-french-valency-v2"
+        )), "exact 165 language-resource source IDs match the pinned catalogue");
         String massive = discoveryRecord(lines, "massive-nlu-1-1");
         require(massive.contains("52 languages") && massive.contains("SLURP") && massive.contains("CC BY 4.0")
                 && massive.contains("not a canonical dictionary"),
@@ -330,6 +334,23 @@ public final class M3HfLexiconIntakeProof {
                 && shabd.contains("license/redistribution grant was not established"), "CSTT no implied data license");
         String iwn = discoveryRecord(lines, "iwn-en-indowordnet");
         require(iwn.contains("CC BY-NC-SA 4.0") && iwn.contains("native synset IDs"), "IndoWordnet rights/identity");
+        String mot = discoveryRecord(lines, "multilingual-open-text-mot-release1");
+        require(mot.contains("44 languages") && mot.contains("43;")
+                && mot.contains("CC BY 4.0") && mot.contains("MIT code"),
+                "MOT release-count discrepancy and data/code license split stay explicit");
+        String multiSimlex = discoveryRecord(lines, "multi-simlex-12-language");
+        require(multiSimlex.contains("12 languages") && multiSimlex.contains("1,888")
+                && multiSimlex.contains("CC BY-NC-ND 4.0") && multiSimlex.contains("pair number"),
+                "Multi-SimLex remains a language-scoped evaluation benchmark");
+        String tsammalex = discoveryRecord(lines, "tsammalex-v0-3");
+        require(tsammalex.contains("CC BY 4.0") && tsammalex.contains("community consent")
+                && tsammalex.contains("Kalahari") && tsammalex.contains("taxon"),
+                "Tsammalex domain, consent and taxon identity remain explicit");
+        String dicovalence = discoveryRecord(lines, "dicovalence-french-valency-v2");
+        require(dicovalence.contains("3,700") && dicovalence.contains("8,000")
+                && dicovalence.contains("LGPL-LR") && dicovalence.contains("CC BY-NC 4.0")
+                && dicovalence.contains("conflict"),
+                "DICOVALENCE source scope and unresolved mirrored-license conflict stay explicit");
         String signCompendium = discoveryRecord(lines, "sign-language-dataset-compendium-v1-5");
         require(signCompendium.contains("87") && signCompendium.contains("v1.5.0")
                 && signCompendium.contains("no blanket redistribution grant"),
