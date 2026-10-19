@@ -66,7 +66,7 @@ public final class M3HfLexiconIntakeProof {
     private static int verifyLanguageResourceDiscovery() throws IOException {
         List<String> lines = resourceLines(
                 "/com/m3/lexicon/hf/language-resource-discovery.tsv");
-        require(lines.size() == 117, "113 language-resource candidates plus header");
+        require(lines.size() == 117, "116 language-resource candidates plus header");
         List<String> expectedHeader = List.of("source_id", "resource", "category",
                 "data_shape_and_identity", "rights_and_attribution", "m3_candidate_use",
                 "admission_blockers", "state", "evidence");
@@ -510,7 +510,7 @@ public final class M3HfLexiconIntakeProof {
         require(Files.isRegularFile(catalogue), "algorithm catalogue exists at Maven invocation root");
         if (!Files.isRegularFile(catalogue)) return 0;
         List<String> lines = Files.readAllLines(catalogue, StandardCharsets.UTF_8);
-        require(lines.size() == 66, "63 algorithm patterns plus header");
+        require(lines.size() == 66, "65 algorithm patterns plus header");
         List<String> header = List.of("problem_category", "discovery_source", "candidate",
                 "decision", "owner_or_reason", "qualification");
         require(!lines.isEmpty() && List.of(splitTsv(lines.getFirst())).equals(header),
