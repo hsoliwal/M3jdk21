@@ -1,5 +1,6 @@
 /*
  * Copyright (c) 2012, 2020, Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2026, Hitesh Soliwal and contributors. All rights reserved.
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
  *
  * This code is free software; you can redistribute it and/or modify it
@@ -25,8 +26,12 @@
 package java.util.stream;
 
 import java.util.Comparator;
+import java.util.Enumeration;
+import java.util.Iterator;
 import java.util.Objects;
 import java.util.Spliterator;
+import java.util.Spliterators;
+import java.util.function.BiFunction;
 import java.util.function.Consumer;
 import java.util.function.DoubleConsumer;
 import java.util.function.IntConsumer;
@@ -40,12 +45,201 @@ import jdk.internal.vm.annotation.IntrinsicCandidate;
  * sequential stream can be transformed into a parallel stream by calling the
  * {@code parallel()} method on the created stream.
  *
- * @since 1.8
+ * <p>This public utility family belongs to the same java.base stream
+ * implementation as Stream and StreamSupport. Existing stream builders,
+ * range spliterators, and close-composition helpers keep their internal roles.
+ *
+ * @since 21
  */
-final class Streams {
+public final class Streams {
 
     private Streams() {
         throw new Error("no instances");
+    }
+
+    /**
+     * Creates a sequential stream from an iterable's own spliterator.
+     * The spliterator is obtained immediately; its binding and interference
+     * policies, encounter order, and characteristics are preserved. Closing
+     * the result does not close the iterable, even if it is closeable.
+     *
+     * @param source the iterable
+     * @param <T> the element type
+     * @return a sequential stream
+     * @throws NullPointerException if {@code source} is null
+     * @since 21
+     */
+    public static <T> Stream<T> stream(Iterable<T> source) {
+        return stream(source, false);
+    }
+
+    /**
+     * Creates a stream from the iterable's own spliterator and requested
+     * execution mode. Splitting, late binding, fail-fast behavior, and
+     * metadata come from that spliterator. Closing the result does not
+     * close the iterable.
+     *
+     * @param source the iterable
+     * @param parallel whether the stream is initially parallel
+     * @param <T> the element type
+     * @return a stream over the iterable
+     * @throws NullPointerException if {@code source} is null
+     * @since 21
+     */
+    public static <T> Stream<T> stream(Iterable<T> source, boolean parallel) {
+        Objects.requireNonNull(source, "source");
+        return StreamSupport.stream(source.spliterator(), parallel);
+    }
+
+    /**
+     * Creates a sequential, ordered stream over the remaining elements of
+     * an iterator. Encounter order follows iterator traversal. No element
+     * is traversed during construction. Closing the result does not close
+     * the iterator, even if it is closeable.
+     *
+     * @param source the iterator
+     * @param <T> the element type
+     * @return a sequential stream
+     * @throws NullPointerException if {@code source} is null
+     * @since 21
+     */
+    public static <T> Stream<T> stream(Iterator<? extends T> source) {
+        return stream(source, false);
+    }
+
+    /**
+     * Creates an ordered stream over the remaining iterator elements with
+     * the requested execution mode. The iterator has an unknown size;
+     * parallel traversal uses the batching policy of
+     * {@link Spliterators#spliteratorUnknownSize(Iterator, int)}. Do not
+     * use the iterator separately after creating the stream. Closing the
+     * result does not close the iterator.
+     *
+     * @param source the iterator
+     * @param parallel whether the stream is initially parallel
+     * @param <T> the element type
+     * @return a stream over the remaining iterator elements
+     * @throws NullPointerException if {@code source} is null
+     * @since 21
+     */
+    public static <T> Stream<T> stream(Iterator<? extends T> source, boolean parallel) {
+        Objects.requireNonNull(source, "source");
+        return StreamSupport.stream(
+                Spliterators.spliteratorUnknownSize(source, Spliterator.ORDERED), parallel);
+    }
+
+    /**
+     * Creates a sequential, ordered stream over the remaining elements of
+     * an enumeration. Uses {@link Enumeration#asIterator()} and has the
+     * same ownership and traversal rules as {@link #stream(Iterator)}.
+     *
+     * @param source the enumeration
+     * @param <T> the element type
+     * @return a sequential stream
+     * @throws NullPointerException if {@code source} is null
+     * @since 21
+     */
+    public static <T> Stream<T> stream(Enumeration<? extends T> source) {
+        return stream(Objects.requireNonNull(source, "source").asIterator());
+    }
+
+    /**
+     * Combines corresponding elements of two streams, stopping when either
+     * input is exhausted. The result is initially sequential and its source
+     * does not split, including after {@code parallel()} is called. It is
+     * ordered only when both inputs are ordered. Size metadata is retained
+     * only when both input sizes are known; sortedness, distinctness, and
+     * non-null characteristics are not inferred for mapped results.
+     *
+     * <p>The input spliterators are acquired immediately, but elements are
+     * pulled lazily. Testing whether a pair exists can consume one unpaired
+     * element from the longer input. The supplied streams must be distinct,
+     * open, and unused, and must not be used separately afterward.
+     *
+     * <p>Closing the returned stream closes the first input and then the
+     * second, even if the first close fails. If both close operations fail,
+     * the second exception is suppressed on the first. Exhaustion alone
+     * does not close either input; use try-with-resources when appropriate.
+     * If construction fails, resource ownership remains with the caller.
+     * Exceptions from traversal or {@code zipper} are propagated unchanged.
+     * As with other stream operations, traversal callbacks may be elided
+     * when the result can be obtained from size metadata.
+     *
+     * @param first the first input stream
+     * @param second the second input stream
+     * @param zipper the non-interfering, stateless pair-combining function
+     * @param <A> the first input element type
+     * @param <B> the second input element type
+     * @param <R> the result element type
+     * @return the stream of paired results
+     * @throws NullPointerException if an argument is null
+     * @throws IllegalArgumentException if the two input stream references are identical
+     * @throws IllegalStateException if an input stream has been operated on or closed
+     * @since 21
+     */
+    public static <A, B, R> Stream<R> zip(Stream<? extends A> first,
+                                         Stream<? extends B> second,
+                                         BiFunction<? super A, ? super B, ? extends R> zipper) {
+        Objects.requireNonNull(first, "first");
+        Objects.requireNonNull(second, "second");
+        Objects.requireNonNull(zipper, "zipper");
+        if (first == second) throw new IllegalArgumentException("distinct streams required");
+        Spliterator<R> paired = new ZipSpliterator<>(
+                first.spliterator(), second.spliterator(), zipper);
+        return StreamSupport.stream(paired, false).onClose(composedClose(first, second));
+    }
+
+    // A pair is one replaceable behavioral atom. Unsplittable traversal keeps
+    // one-shot input iterators and unequal-length handling serial and bounded.
+    private static final class ZipSpliterator<A, B, R> implements Spliterator<R> {
+        private final Iterator<? extends A> first;
+        private final Iterator<? extends B> second;
+        private final BiFunction<? super A, ? super B, ? extends R> zipper;
+        private final int characteristics;
+        private long estimate;
+        private boolean finished;
+
+        ZipSpliterator(Spliterator<? extends A> first, Spliterator<? extends B> second,
+                       BiFunction<? super A, ? super B, ? extends R> zipper) {
+            this.first = Spliterators.iterator(first);
+            this.second = Spliterators.iterator(second);
+            this.zipper = zipper;
+            this.estimate = Math.min(first.estimateSize(), second.estimateSize());
+            this.characteristics = first.characteristics() & second.characteristics()
+                    & (Spliterator.ORDERED | Spliterator.SIZED | Spliterator.SUBSIZED);
+        }
+
+        @Override
+        public boolean tryAdvance(Consumer<? super R> action) {
+            Objects.requireNonNull(action, "action");
+            if (finished) return false;
+            if (!first.hasNext() || !second.hasNext()) {
+                finished = true;
+                estimate = 0;
+                return false;
+            }
+            A a = first.next();
+            B b = second.next();
+            if (estimate > 0 && (estimate != Long.MAX_VALUE
+                    || (characteristics & Spliterator.SIZED) != 0)) estimate--;
+            action.accept(zipper.apply(a, b));
+            return true;
+        }
+
+        @Override
+        public Spliterator<R> trySplit() {
+            return null;
+        }
+
+        @Override
+        public long estimateSize() {
+            return estimate;
+        }
+
+        @Override
+        public int characteristics() {
+            return characteristics;
+        }
     }
 
     /**

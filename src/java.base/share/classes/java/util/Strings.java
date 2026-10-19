@@ -37,8 +37,8 @@ public final class Strings {
     }
 
     /**
-     * True for null or for text with no Unicode code point classified as whitespace by
-     * {@link Character#isWhitespace(int)} (the rule also used by String.isBlank).
+     * True for null, empty text, or text whose every Unicode code point is whitespace
+     * according to {@link Character#isWhitespace(int)} (also used by String.isBlank).
      */
     public static boolean isNullOrBlank(CharSequence source) {
         if (source == null) return true;

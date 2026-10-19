@@ -1,0 +1,121 @@
+{
+  "schema": 1,
+  "scope": "ACTUAL_OPENREWRITE_SDK_FIXTURE_AND_CANDIDATE_RUNNER",
+  "jdk": "21.0.12.1+1",
+  "maven": "3.9.11",
+  "openrewrite": "8.17.1",
+  "java_compilation": "--release 21 -Xlint:all -Werror",
+  "test_result": {
+    "tests": 16,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "mixed_pre_post_states": 32
+  },
+  "qualification_includes": [
+    "actual SDK result production for Java C and metadata fixture",
+    "actual SDK second fixedpoint",
+    "drift missing duplicate occupied-ABSENT cancellation and unrelated-input refusals",
+    "explicit named YAML loading through YamlResourceLoader",
+    "fresh source-disjoint candidate emission",
+    "output ancestor symlink refusal",
+    "unchanged source custody of reused engine"
+  ],
+  "production_manifest": "NOT_ASSEMBLED_AT_THIS_FIXTURE_RUN",
+  "product_runtime": "NOT_RUN_BY_RECIPE_ENGINE",
+  "source_files": [
+    {
+      "path": "ENGINE_PROVENANCE.json",
+      "sha256": "dcbfa2198dcaf5230592c4208a50710c53767c2eb9ec3030edbdbee6c97dbb64"
+    },
+    {
+      "path": "NOTICE.md",
+      "sha256": "4cc23716811185366008c128bd2f5e2d19ee91837cb62ef8b82708e3c29b7d00"
+    },
+    {
+      "path": "README.md",
+      "sha256": "cb07a87489fef3948c50f939bb72c7caa64c1328810545a385a826c89b45aa2c"
+    },
+    {
+      "path": "pom.xml",
+      "sha256": "e9c468164b598c968db91a1e75496f9530a5917df59ba046959d033319bc7293"
+    },
+    {
+      "path": "src/main/java/com/synexia/rewrite/IntegratedUtilitiesRunner.java",
+      "sha256": "2fc68d51cf0631124daa79f9c59f816242915a984a776e880ed2727ab0a0a590"
+    },
+    {
+      "path": "src/main/java/com/synexia/rewrite/M3GpuToolJoinManifest.java",
+      "sha256": "56bd61be29eae76b3f468519677424450448751d94ca032956b330d7b3dd1999"
+    },
+    {
+      "path": "src/main/java/com/synexia/rewrite/M3GpuToolJoinRecipe.java",
+      "sha256": "ee90a2b8689699745553c2f4d2d07121b91777f4e9a671fdb33ba8edea0c14ec"
+    },
+    {
+      "path": "src/main/java/com/synexia/rewrite/M3IntegratedUtilitiesRecipe.java",
+      "sha256": "2bf8f3f4dd6f22056eb3e908febbae4f40aca1a30bbd5a1540d13603eb20b80c"
+    },
+    {
+      "path": "src/main/resources/META-INF/rewrite/m3jdk21-integrated-utilities-20261018.yml",
+      "sha256": "6b94b6356acb19d05562db6a34c98453f868ec2dd3f156393a5ac498e868b1db"
+    },
+    {
+      "path": "src/test/java/com/synexia/rewrite/EngineCustodyTest.java",
+      "sha256": "9ef9c985b84a6bc7e48bbc7da7fd16b586877251d855f5e734375b99dc9733f9"
+    },
+    {
+      "path": "src/test/java/com/synexia/rewrite/IntegratedUtilitiesRecipeTest.java",
+      "sha256": "375198a7ce53b5255f5f7085fb567c9295e8269d05d74c20c21e8618ad480e2f"
+    },
+    {
+      "path": "src/test/resources/com/synexia/rewrite/integrated-utilities-fixture/before/README.md",
+      "sha256": "71053e04d49df9410c6f294dace1abec9d3f42651e2ef92b966b11387972fc77"
+    },
+    {
+      "path": "src/test/resources/com/synexia/rewrite/integrated-utilities-fixture/before/native/kernel.c",
+      "sha256": "e502f6b59bddb52d3b1e94a8dba0226df9450efe44986f1ae5fa469984bf9d08"
+    },
+    {
+      "path": "src/test/resources/com/synexia/rewrite/integrated-utilities-fixture/before/src/example/Owner.java",
+      "sha256": "bf2d0b1e70e3bca5b994303b3ce639fab618f96e07e3bb33b6ef0637043a8c88"
+    },
+    {
+      "path": "src/test/resources/com/synexia/rewrite/integrated-utilities-fixture/manifest.tsv",
+      "sha256": "2ac43a824fe4cd8c91c30525eb0e9530ac0b90dcd837643eb0f39a46c6b3a50f"
+    },
+    {
+      "path": "src/test/resources/com/synexia/rewrite/integrated-utilities-fixture/templates/docs/coverage.json",
+      "sha256": "5c899d8e16da16b696f97b60dd5f6e13d1edd122d61e17b0045f0f5ca1581612"
+    },
+    {
+      "path": "src/test/resources/com/synexia/rewrite/integrated-utilities-fixture/templates/native/kernel.c",
+      "sha256": "db6170686210709f73bcdb4f6c3d3b9ad55a9ee5f01e788b01a8cb80de6d9e07"
+    },
+    {
+      "path": "src/test/resources/com/synexia/rewrite/integrated-utilities-fixture/templates/src/example/Added.java",
+      "sha256": "1984ceb87c81037eb4f72a880a1f79b54d9a9f986bafe0c9ac627016ca7a7090"
+    },
+    {
+      "path": "src/test/resources/com/synexia/rewrite/integrated-utilities-fixture/templates/src/example/Owner.java",
+      "sha256": "87b68169e0269925785f2d2453fb8c73fb193aef5c6509b81d186133170c4c67"
+    }
+  ],
+  "raw_log": {
+    "path": "qualification/maven-sdk-fixture-tests.log",
+    "sha256": "a7257eab78419508d086039ba341fcb2b8e4792aec950cb49a8fefd98eec9168"
+  },
+  "rerun_reason": "Canonical first-party SPDX copyright/license pair correction; copied engine and exact fixture bytes unchanged.",
+  "qualified_at_utc": "2026-10-18T13:18:35.720657+00:00",
+  "command": "/tmp/m3-toolchain/apache-maven-3.9.11/bin/mvn -s /tmp/m3-toolchain/settings.xml -B -ntp -Dmaven.repo.local=/tmp/m3-maven-repository test",
+  "environment": {
+    "JAVA_HOME": "/tmp/m3-toolchain/jdk-21.0.12.1+1",
+    "JAVA_TOOL_OPTIONS": "-Djavax.net.ssl.trustStore=/etc/ssl/certs/java/cacerts",
+    "MAVEN_OPTS": "-Xmx256m"
+  },
+  "earlier_environment_failure": {
+    "status": "DEPENDENCY_RESOLUTION_FAILED_BEFORE_COMPILATION",
+    "cause": "Default Maven configuration could not resolve Maven Central DNS; successful retry used established proxy and system trust configuration.",
+    "retained_log_sha256": "f5013ccf9ed2e7907febdb141f6730328a4f794caf4fdccdc0f08f39d6d86116"
+  }
+}

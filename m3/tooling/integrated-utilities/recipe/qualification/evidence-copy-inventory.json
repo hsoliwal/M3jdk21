@@ -1,0 +1,1001 @@
+{
+  "schema": 1,
+  "meaning": "Exact copied evidence, not a replacement API or recipe registry",
+  "files": [
+    {
+      "path": "qualification/catalogue/baseline-source-verification.json",
+      "source": "/dev/shm/m3jdk21-work/catalogue-expanded-source-verification.json",
+      "sha256": "b67463b6dc601ef68f71afbf59eeafd149f0e768e69b45df385c6fe732d1667f",
+      "bytes": 4817,
+      "category": "IMMUTABLE_GIT_SOURCE_COVERAGE_EVIDENCE",
+      "copy": "EXACT_BYTES"
+    },
+    {
+      "path": "qualification/catalogue/candidate-intake.json",
+      "source": "/dev/shm/m3jdk21-work/catalogue-expanded-intake.json",
+      "sha256": "394db1601ddf15ea10494da3938aac3a886bbf8fcf254352802655696d7dd0cb",
+      "bytes": 111389,
+      "category": "IMMUTABLE_GIT_SOURCE_COVERAGE_EVIDENCE",
+      "copy": "EXACT_BYTES"
+    },
+    {
+      "path": "qualification/catalogue/emitted-source-verification-1.json",
+      "source": "/dev/shm/m3jdk21-work/catalogue-emitted-source-verification-1.json",
+      "sha256": "7fd8fd243d09e2c53158d272e3df71b8f436a4f9a5115977ab6629f75a07016b",
+      "bytes": 5508,
+      "category": "IMMUTABLE_GIT_SOURCE_COVERAGE_EVIDENCE",
+      "copy": "EXACT_BYTES"
+    },
+    {
+      "path": "qualification/catalogue/source-refusal-tests.log",
+      "source": "/dev/shm/m3jdk21-work/catalogue-expanded-source-tests.log",
+      "sha256": "7d9f778894b796fe20cf6dad45028692019720a4e3c8a09b396c8875fcaadefe",
+      "bytes": 3559,
+      "category": "IMMUTABLE_GIT_SOURCE_COVERAGE_EVIDENCE",
+      "copy": "EXACT_BYTES"
+    },
+    {
+      "path": "qualification/collections/baseline-raw-atoms.json",
+      "source": "/dev/shm/m3jdk21-work/collection-candidates/qualification/baseline-raw-atoms.json",
+      "sha256": "358e856add1555637fc53ad04b8e86d7ed5417af6225285e9fa9c3ea516cac04",
+      "bytes": 361496,
+      "category": "COLLECTION_SOURCE_BOUND_EVIDENCE",
+      "copy": "EXACT_BYTES"
+    },
+    {
+      "path": "qualification/collections/combined-candidate-receiver.json",
+      "source": "/dev/shm/m3jdk21-work/collection-candidates/qualification/combined-candidate-receiver.json",
+      "sha256": "e17789173c806f65921720e17ac13fc5f46e203c13d5bc1f33bd7b2ac55dbf8f",
+      "bytes": 7076,
+      "category": "COLLECTION_SOURCE_BOUND_EVIDENCE",
+      "copy": "EXACT_BYTES"
+    },
+    {
+      "path": "qualification/collections/current-raw-atoms.json",
+      "source": "/dev/shm/m3jdk21-work/collection-candidates/qualification/current-raw-atoms.json",
+      "sha256": "9c1c232c113a5c8c4fc3975f708f04cce6a0d31d1387ac8b8929205aada1f95f",
+      "bytes": 492452,
+      "category": "COLLECTION_SOURCE_BOUND_EVIDENCE",
+      "copy": "EXACT_BYTES"
+    },
+    {
+      "path": "qualification/collections/public-api.json",
+      "source": "/dev/shm/m3jdk21-work/collection-candidates/qualification/public-api.json",
+      "sha256": "aa9eaf8e3e92a1211cff849048169f35e88dd9ebca59d7714d54be6e7f61ad19",
+      "bytes": 2110,
+      "category": "COLLECTION_SOURCE_BOUND_EVIDENCE",
+      "copy": "EXACT_BYTES"
+    },
+    {
+      "path": "qualification/collections/rejected/M3CollectionViews-indirect.java.txt",
+      "source": "/dev/shm/m3jdk21-work/collection-candidates/qualification/rejected/M3CollectionViews-indirect.java.txt",
+      "sha256": "a5f4f146cd60cb726628673dded32d076f70b8d4ad32d0d0cb25ad4dfa308199",
+      "bytes": 53450,
+      "category": "COLLECTION_SOURCE_BOUND_EVIDENCE",
+      "copy": "EXACT_BYTES"
+    },
+    {
+      "path": "qualification/collections/sorter-refinement-receiver.json",
+      "source": "/dev/shm/m3jdk21-work/collection-candidates/qualification/sorter-refinement-receiver.json",
+      "sha256": "0d334e13765b476d851f7b8585f9157dda4e4d3150eb460eec5eb13dcd0d0025",
+      "bytes": 7076,
+      "category": "COLLECTION_SOURCE_BOUND_EVIDENCE",
+      "copy": "EXACT_BYTES"
+    },
+    {
+      "path": "qualification/jtreg-existing/initial-refusal/cmdArgs.txt",
+      "source": "/dev/shm/m3jdk21-work/jtreg-existing-report/text/cmdArgs.txt",
+      "sha256": "e39c8ac915b83548282ae5cf437c738476f4f3a872476a70b9c625f85ceb821d",
+      "bytes": 261,
+      "category": "EXISTING_COLLECTIONS_JTREG_CANDIDATE_PATCH_EVIDENCE",
+      "copy": "EXACT_BYTES"
+    },
+    {
+      "path": "qualification/jtreg-existing/initial-refusal/jtreg-harness.log",
+      "source": "/dev/shm/m3jdk21-work/jtreg-existing-work/jtData/logfile.log",
+      "sha256": "a2219301b80b47e93a3fb59a3000ab072b5a49433cf5bdd5f5f5ba7f3578de63",
+      "bytes": 226,
+      "category": "EXISTING_COLLECTIONS_JTREG_CANDIDATE_PATCH_EVIDENCE",
+      "copy": "EXACT_BYTES"
+    },
+    {
+      "path": "qualification/jtreg-existing/jtreg-existing-receipt.json",
+      "source": "/dev/shm/m3jdk21-work/jtreg-existing-receipt.json",
+      "sha256": "4cfe930350aa403da333810d54a270dca82b67eb3f87016dc66790a3dbc81723",
+      "bytes": 651,
+      "category": "EXISTING_COLLECTIONS_JTREG_CANDIDATE_PATCH_EVIDENCE",
+      "copy": "EXACT_BYTES"
+    },
+    {
+      "path": "qualification/jtreg-existing/jtreg-existing-run.log",
+      "source": "/dev/shm/m3jdk21-work/jtreg-existing-run.log",
+      "sha256": "dbfdf35e5039ab00adc8d390aea2c26a36fe1df796b014caedf5e8c303d1f20e",
+      "bytes": 323,
+      "category": "EXISTING_COLLECTIONS_JTREG_CANDIDATE_PATCH_EVIDENCE",
+      "copy": "EXACT_BYTES"
+    },
+    {
+      "path": "qualification/jtreg-existing/jtreg-metadata-materialization.json",
+      "source": "/dev/shm/m3jdk21-work/jtreg-metadata-materialization.json",
+      "sha256": "fbcfc52f0ee541fe72f9cd03e25bf0596ec3859f444a62a1ab73b6069d70dc1e",
+      "bytes": 15458,
+      "category": "EXISTING_COLLECTIONS_JTREG_CANDIDATE_PATCH_EVIDENCE",
+      "copy": "EXACT_BYTES"
+    },
+    {
+      "path": "qualification/masks/M3CollectionMasksTest-compile.json",
+      "source": "/dev/shm/m3jdk21-work/mask-candidates/qualification/M3CollectionMasksTest-compile.json",
+      "sha256": "88a926569860c2e9fff4cedbe50ed23e7104be0335d1ff32007bba6bb17a8dbe",
+      "bytes": 590,
+      "category": "MASK_AND_COLLECTION_SOURCE_BOUND_EVIDENCE",
+      "copy": "EXACT_BYTES"
+    },
+    {
+      "path": "qualification/masks/M3CollectionViewsBenchmark-compile.json",
+      "source": "/dev/shm/m3jdk21-work/mask-candidates/qualification/M3CollectionViewsBenchmark-compile.json",
+      "sha256": "bf7ab03c5912177f266c9a51a7c837f7ff0756696d5619a5b1c29acfe03b9bcd",
+      "bytes": 760,
+      "category": "MASK_AND_COLLECTION_SOURCE_BOUND_EVIDENCE",
+      "copy": "EXACT_BYTES"
+    },
+    {
+      "path": "qualification/masks/benchmark-summary.json",
+      "source": "/dev/shm/m3jdk21-work/mask-candidates/qualification/benchmark-summary.json",
+      "sha256": "d8e9acdffbdb9a9355b2e6ef6b1ecb08156115befcfd3e7e291a8717a987a4d8",
+      "bytes": 6141,
+      "category": "MASK_AND_COLLECTION_SOURCE_BOUND_EVIDENCE",
+      "copy": "EXACT_BYTES"
+    },
+    {
+      "path": "qualification/masks/collection-baseline-jni.log",
+      "source": "/dev/shm/m3jdk21-work/mask-candidates/qualification/collection-baseline-jni.log",
+      "sha256": "bde348e0713ad405045bd7d87efebb44053c2d0581555ab18ad86a3857ac6ee8",
+      "bytes": 23629,
+      "category": "MASK_AND_COLLECTION_SOURCE_BOUND_EVIDENCE",
+      "copy": "EXACT_BYTES"
+    },
+    {
+      "path": "qualification/masks/collection-baseline-receipt.json",
+      "source": "/dev/shm/m3jdk21-work/mask-candidates/qualification/collection-baseline-receipt.json",
+      "sha256": "eb4b6b936f2510106664a2e06313b8f99fe32ea3be1ee61baedaa47379120508",
+      "bytes": 1466,
+      "category": "MASK_AND_COLLECTION_SOURCE_BOUND_EVIDENCE",
+      "copy": "EXACT_BYTES"
+    },
+    {
+      "path": "qualification/masks/collection-baseline-resource.txt",
+      "source": "/dev/shm/m3jdk21-work/mask-candidates/qualification/collection-baseline-resource.txt",
+      "sha256": "59644a442b0a375e43cde47a7460363d293a91e6dd735278fe757814b218d514",
+      "bytes": 1209,
+      "category": "MASK_AND_COLLECTION_SOURCE_BOUND_EVIDENCE",
+      "copy": "EXACT_BYTES"
+    },
+    {
+      "path": "qualification/masks/collection-baseline.jsonl",
+      "source": "/dev/shm/m3jdk21-work/mask-candidates/qualification/collection-baseline.jsonl",
+      "sha256": "a28d0ed77b647f73fbff8ccea0688c984e1a53a68fc27960ebe6364e3911efff",
+      "bytes": 5995,
+      "category": "MASK_AND_COLLECTION_SOURCE_BOUND_EVIDENCE",
+      "copy": "EXACT_BYTES"
+    },
+    {
+      "path": "qualification/masks/collection-benchmark-patch-classes.json",
+      "source": "/dev/shm/m3jdk21-work/mask-candidates/qualification/collection-benchmark-patch-classes.json",
+      "sha256": "d1278289a49c3264fa0ad6dab847a6f02b2ee29a7716d9d951cfb570d8b31fb8",
+      "bytes": 11140,
+      "category": "MASK_AND_COLLECTION_SOURCE_BOUND_EVIDENCE",
+      "copy": "EXACT_BYTES"
+    },
+    {
+      "path": "qualification/masks/collection-benchmark-summary.json",
+      "source": "/dev/shm/m3jdk21-work/mask-candidates/qualification/collection-benchmark-summary.json",
+      "sha256": "3eb70dc650367f46db41bcfefce8ddedc81422d56340d4f3b66db10f2f2b76d0",
+      "bytes": 14425,
+      "category": "MASK_AND_COLLECTION_SOURCE_BOUND_EVIDENCE",
+      "copy": "EXACT_BYTES"
+    },
+    {
+      "path": "qualification/masks/collection-integrated-java-jni.log",
+      "source": "/dev/shm/m3jdk21-work/mask-candidates/qualification/collection-integrated-java-jni.log",
+      "sha256": "5c50b4ecae11fc5dcc91edef84df125fb61cbfd7057a135d982974f3fdad9085",
+      "bytes": 23629,
+      "category": "MASK_AND_COLLECTION_SOURCE_BOUND_EVIDENCE",
+      "copy": "EXACT_BYTES"
+    },
+    {
+      "path": "qualification/masks/collection-integrated-java-receipt.json",
+      "source": "/dev/shm/m3jdk21-work/mask-candidates/qualification/collection-integrated-java-receipt.json",
+      "sha256": "a3c104d0d4b1155519a45760a3c822d3417b3be3df7ef86818176bd9bf747764",
+      "bytes": 1496,
+      "category": "MASK_AND_COLLECTION_SOURCE_BOUND_EVIDENCE",
+      "copy": "EXACT_BYTES"
+    },
+    {
+      "path": "qualification/masks/collection-integrated-java-resource.txt",
+      "source": "/dev/shm/m3jdk21-work/mask-candidates/qualification/collection-integrated-java-resource.txt",
+      "sha256": "2e35f156d5f82ac960e93ab4ab3341b83d83cc7b4ab5aa4813209a9058698d11",
+      "bytes": 1217,
+      "category": "MASK_AND_COLLECTION_SOURCE_BOUND_EVIDENCE",
+      "copy": "EXACT_BYTES"
+    },
+    {
+      "path": "qualification/masks/collection-integrated-java.jsonl",
+      "source": "/dev/shm/m3jdk21-work/mask-candidates/qualification/collection-integrated-java.jsonl",
+      "sha256": "2d16b5cc45060f920d7994616d36c8df17f8dd060d8f6cff4cdc348e4a5ad8ed",
+      "bytes": 6070,
+      "category": "MASK_AND_COLLECTION_SOURCE_BOUND_EVIDENCE",
+      "copy": "EXACT_BYTES"
+    },
+    {
+      "path": "qualification/masks/collection-integrated-native-jni.log",
+      "source": "/dev/shm/m3jdk21-work/mask-candidates/qualification/collection-integrated-native-jni.log",
+      "sha256": "577a818487c96e31185ac21688b7d46330d488af4f6cee28d786eff183134abd",
+      "bytes": 23736,
+      "category": "MASK_AND_COLLECTION_SOURCE_BOUND_EVIDENCE",
+      "copy": "EXACT_BYTES"
+    },
+    {
+      "path": "qualification/masks/collection-integrated-native-receipt.json",
+      "source": "/dev/shm/m3jdk21-work/mask-candidates/qualification/collection-integrated-native-receipt.json",
+      "sha256": "8479ac6f1b908282188423a47070c02deb822e0f8dc075d9a4bf57523a6e775e",
+      "bytes": 1769,
+      "category": "MASK_AND_COLLECTION_SOURCE_BOUND_EVIDENCE",
+      "copy": "EXACT_BYTES"
+    },
+    {
+      "path": "qualification/masks/collection-integrated-native-resource.txt",
+      "source": "/dev/shm/m3jdk21-work/mask-candidates/qualification/collection-integrated-native-resource.txt",
+      "sha256": "f2e565701cc8cf3fe8edcc63268bbbc43e302c60523a584d4ba6bf58e4490b08",
+      "bytes": 1357,
+      "category": "MASK_AND_COLLECTION_SOURCE_BOUND_EVIDENCE",
+      "copy": "EXACT_BYTES"
+    },
+    {
+      "path": "qualification/masks/collection-integrated-native.jsonl",
+      "source": "/dev/shm/m3jdk21-work/mask-candidates/qualification/collection-integrated-native.jsonl",
+      "sha256": "222a2752f74c569e4958ac9a90857767ccd1ceb6d0d9a4d07b45ca472efe596d",
+      "bytes": 6081,
+      "category": "MASK_AND_COLLECTION_SOURCE_BOUND_EVIDENCE",
+      "copy": "EXACT_BYTES"
+    },
+    {
+      "path": "qualification/masks/combined-snapshot-test-receipt.json",
+      "source": "/dev/shm/m3jdk21-work/mask-candidates/qualification/combined-snapshot-test-receipt.json",
+      "sha256": "59712fbf6a94a99e13b4b41630ae3564ed992913b9d54f5a53273fffab116fdd",
+      "bytes": 4136,
+      "category": "MASK_AND_COLLECTION_SOURCE_BOUND_EVIDENCE",
+      "copy": "EXACT_BYTES"
+    },
+    {
+      "path": "qualification/masks/compile-receipt.json",
+      "source": "/dev/shm/m3jdk21-work/mask-candidates/qualification/compile-receipt.json",
+      "sha256": "a68b244096b397689d615f65e7b2c1411cc32c7f1a5689527bcd1e5b72b68882",
+      "bytes": 1629,
+      "category": "MASK_AND_COLLECTION_SOURCE_BOUND_EVIDENCE",
+      "copy": "EXACT_BYTES"
+    },
+    {
+      "path": "qualification/masks/consumer-fallback-jni.log",
+      "source": "/dev/shm/m3jdk21-work/mask-candidates/qualification/consumer-fallback-jni.log",
+      "sha256": "1ba72028961858e26f4199096a44153509c998590b49ab77ce52e3405fb390cd",
+      "bytes": 22983,
+      "category": "MASK_AND_COLLECTION_SOURCE_BOUND_EVIDENCE",
+      "copy": "EXACT_BYTES"
+    },
+    {
+      "path": "qualification/masks/consumer-fallback.log",
+      "source": "/dev/shm/m3jdk21-work/mask-candidates/qualification/consumer-fallback.log",
+      "sha256": "4b657d62fff0eb65a55cb85ae7d2b9a6b812aab4a6ca5f35bb04cbeba92a1e5d",
+      "bytes": 86,
+      "category": "MASK_AND_COLLECTION_SOURCE_BOUND_EVIDENCE",
+      "copy": "EXACT_BYTES"
+    },
+    {
+      "path": "qualification/masks/consumer-java-jni.log",
+      "source": "/dev/shm/m3jdk21-work/mask-candidates/qualification/consumer-java-jni.log",
+      "sha256": "c57c33319b65bf7bd8c2df33a64188f0f702286470f5f1fe455840ff183219ad",
+      "bytes": 22983,
+      "category": "MASK_AND_COLLECTION_SOURCE_BOUND_EVIDENCE",
+      "copy": "EXACT_BYTES"
+    },
+    {
+      "path": "qualification/masks/consumer-java.log",
+      "source": "/dev/shm/m3jdk21-work/mask-candidates/qualification/consumer-java.log",
+      "sha256": "ccba82147616e768ddbfbb4abbc883f9a780232cc1c045a97bf3f8eba82fb26d",
+      "bytes": 87,
+      "category": "MASK_AND_COLLECTION_SOURCE_BOUND_EVIDENCE",
+      "copy": "EXACT_BYTES"
+    },
+    {
+      "path": "qualification/masks/consumer-native-jni.log",
+      "source": "/dev/shm/m3jdk21-work/mask-candidates/qualification/consumer-native-jni.log",
+      "sha256": "56b9e9d62b606886d5360f774a2a37c77adea8686a239b152f04bc3e26d4b728",
+      "bytes": 23090,
+      "category": "MASK_AND_COLLECTION_SOURCE_BOUND_EVIDENCE",
+      "copy": "EXACT_BYTES"
+    },
+    {
+      "path": "qualification/masks/consumer-native.log",
+      "source": "/dev/shm/m3jdk21-work/mask-candidates/qualification/consumer-native.log",
+      "sha256": "4b657d62fff0eb65a55cb85ae7d2b9a6b812aab4a6ca5f35bb04cbeba92a1e5d",
+      "bytes": 86,
+      "category": "MASK_AND_COLLECTION_SOURCE_BOUND_EVIDENCE",
+      "copy": "EXACT_BYTES"
+    },
+    {
+      "path": "qualification/masks/differential-jni.log",
+      "source": "/dev/shm/m3jdk21-work/mask-candidates/qualification/differential-jni.log",
+      "sha256": "8e1646e307868d25e845768b95034a2cac68a25239fb9de04080467bfc6d2171",
+      "bytes": 23090,
+      "category": "MASK_AND_COLLECTION_SOURCE_BOUND_EVIDENCE",
+      "copy": "EXACT_BYTES"
+    },
+    {
+      "path": "qualification/masks/differential.log",
+      "source": "/dev/shm/m3jdk21-work/mask-candidates/qualification/differential.log",
+      "sha256": "f013b94d7ce26906d6eca659e611877cd4fdf4fb0061db8c251e567342abf09d",
+      "bytes": 83,
+      "category": "MASK_AND_COLLECTION_SOURCE_BOUND_EVIDENCE",
+      "copy": "EXACT_BYTES"
+    },
+    {
+      "path": "qualification/masks/headers/java_util_M3CollectionMasks.h",
+      "source": "/dev/shm/m3jdk21-work/mask-candidates/qualification/headers/java_util_M3CollectionMasks.h",
+      "sha256": "1b3a68d41a5c54ce6d72500667333ab15d6cc4cde87c8adc9f854e31d6b5cf1d",
+      "bytes": 503,
+      "category": "MASK_AND_COLLECTION_SOURCE_BOUND_EVIDENCE",
+      "copy": "EXACT_BYTES"
+    },
+    {
+      "path": "qualification/masks/java-benchmark-receipt.json",
+      "source": "/dev/shm/m3jdk21-work/mask-candidates/qualification/java-benchmark-receipt.json",
+      "sha256": "d64367ae78c10252d979b6e8eca1a29fa9ec456c17f0add9e6d02d3e383eeace",
+      "bytes": 1935,
+      "category": "MASK_AND_COLLECTION_SOURCE_BOUND_EVIDENCE",
+      "copy": "EXACT_BYTES"
+    },
+    {
+      "path": "qualification/masks/java-benchmark-resource.txt",
+      "source": "/dev/shm/m3jdk21-work/mask-candidates/qualification/java-benchmark-resource.txt",
+      "sha256": "e43ea9f2839e3504d47889a309097b7c8aa73b1ec8119bf8ec480d180b39df62",
+      "bytes": 1134,
+      "category": "MASK_AND_COLLECTION_SOURCE_BOUND_EVIDENCE",
+      "copy": "EXACT_BYTES"
+    },
+    {
+      "path": "qualification/masks/java-benchmark.jsonl",
+      "source": "/dev/shm/m3jdk21-work/mask-candidates/qualification/java-benchmark.jsonl",
+      "sha256": "c934f842720ef2a31c4631f2b3707ec17db6a26add3901349657a5f4dce5c2f9",
+      "bytes": 9032,
+      "category": "MASK_AND_COLLECTION_SOURCE_BOUND_EVIDENCE",
+      "copy": "EXACT_BYTES"
+    },
+    {
+      "path": "qualification/masks/large-capacity-receipt.json",
+      "source": "/dev/shm/m3jdk21-work/mask-candidates/qualification/large-capacity-receipt.json",
+      "sha256": "0b137acd6b559a3225856b37c10f0510fb79a0ec2454319c37d194450145234d",
+      "bytes": 1781,
+      "category": "MASK_AND_COLLECTION_SOURCE_BOUND_EVIDENCE",
+      "copy": "EXACT_BYTES"
+    },
+    {
+      "path": "qualification/masks/large-capacity-resource.txt",
+      "source": "/dev/shm/m3jdk21-work/mask-candidates/qualification/large-capacity-resource.txt",
+      "sha256": "d5d45d843c3668715babe12f1d561dd62e2d834a85b1a979b1d30b3338dd5bde",
+      "bytes": 1022,
+      "category": "MASK_AND_COLLECTION_SOURCE_BOUND_EVIDENCE",
+      "copy": "EXACT_BYTES"
+    },
+    {
+      "path": "qualification/masks/native-benchmark-receipt.json",
+      "source": "/dev/shm/m3jdk21-work/mask-candidates/qualification/native-benchmark-receipt.json",
+      "sha256": "58db5b6c9f6f12d91440bd3fcf3aa9e9557be046394eb16cba0cd6f32fd8b288",
+      "bytes": 1938,
+      "category": "MASK_AND_COLLECTION_SOURCE_BOUND_EVIDENCE",
+      "copy": "EXACT_BYTES"
+    },
+    {
+      "path": "qualification/masks/native-benchmark-resource.txt",
+      "source": "/dev/shm/m3jdk21-work/mask-candidates/qualification/native-benchmark-resource.txt",
+      "sha256": "6fce6847118640c821b9ed785627280f02552c2e1e58d38ad31a6f1c8a9f101b",
+      "bytes": 1131,
+      "category": "MASK_AND_COLLECTION_SOURCE_BOUND_EVIDENCE",
+      "copy": "EXACT_BYTES"
+    },
+    {
+      "path": "qualification/masks/native-benchmark.jsonl",
+      "source": "/dev/shm/m3jdk21-work/mask-candidates/qualification/native-benchmark.jsonl",
+      "sha256": "f678ee18bf39d52445526333a23c4bf4a98cd8f85924c082277104c03ea33a3b",
+      "bytes": 9144,
+      "category": "MASK_AND_COLLECTION_SOURCE_BOUND_EVIDENCE",
+      "copy": "EXACT_BYTES"
+    },
+    {
+      "path": "qualification/masks/rejected-indirect/M3CollectionViewsBenchmark-compile.json",
+      "source": "/dev/shm/m3jdk21-work/mask-candidates/qualification/rejected-indirect/M3CollectionViewsBenchmark-compile.json",
+      "sha256": "bf7ab03c5912177f266c9a51a7c837f7ff0756696d5619a5b1c29acfe03b9bcd",
+      "bytes": 760,
+      "category": "MASK_AND_COLLECTION_SOURCE_BOUND_EVIDENCE",
+      "copy": "EXACT_BYTES"
+    },
+    {
+      "path": "qualification/masks/rejected-indirect/collection-baseline-jni.log",
+      "source": "/dev/shm/m3jdk21-work/mask-candidates/qualification/rejected-indirect/collection-baseline-jni.log",
+      "sha256": "04b82ab46a48d3bbb8ad16a5b0ae604df36df61811152a1ab732935cf141c576",
+      "bytes": 23629,
+      "category": "MASK_AND_COLLECTION_SOURCE_BOUND_EVIDENCE",
+      "copy": "EXACT_BYTES"
+    },
+    {
+      "path": "qualification/masks/rejected-indirect/collection-baseline-jni.log.0",
+      "source": "/dev/shm/m3jdk21-work/mask-candidates/qualification/rejected-indirect/collection-baseline-jni.log.0",
+      "sha256": "05f7708c0be498667004f95ed25e838847af7e840cab8c484a2d3d5cc6d80b93",
+      "bytes": 23629,
+      "category": "MASK_AND_COLLECTION_SOURCE_BOUND_EVIDENCE",
+      "copy": "EXACT_BYTES"
+    },
+    {
+      "path": "qualification/masks/rejected-indirect/collection-baseline-receipt.json",
+      "source": "/dev/shm/m3jdk21-work/mask-candidates/qualification/rejected-indirect/collection-baseline-receipt.json",
+      "sha256": "e8e7594acfbeee485d1871cabbc237a01bc2eaaaac3b842540a7c08ade76c26d",
+      "bytes": 1245,
+      "category": "MASK_AND_COLLECTION_SOURCE_BOUND_EVIDENCE",
+      "copy": "EXACT_BYTES"
+    },
+    {
+      "path": "qualification/masks/rejected-indirect/collection-baseline-resource.txt",
+      "source": "/dev/shm/m3jdk21-work/mask-candidates/qualification/rejected-indirect/collection-baseline-resource.txt",
+      "sha256": "fc0029ad2ba7743352a54fc54e45f78ee2e5d9d7e614e1b5304495fc9632f354",
+      "bytes": 1209,
+      "category": "MASK_AND_COLLECTION_SOURCE_BOUND_EVIDENCE",
+      "copy": "EXACT_BYTES"
+    },
+    {
+      "path": "qualification/masks/rejected-indirect/collection-baseline.jsonl",
+      "source": "/dev/shm/m3jdk21-work/mask-candidates/qualification/rejected-indirect/collection-baseline.jsonl",
+      "sha256": "65a2569fc5b0f424e9790e26d8a9c4c3927e6cd8ef36990bc87425f21b36cd6f",
+      "bytes": 6000,
+      "category": "MASK_AND_COLLECTION_SOURCE_BOUND_EVIDENCE",
+      "copy": "EXACT_BYTES"
+    },
+    {
+      "path": "qualification/masks/rejected-indirect/collection-benchmark-compile.json",
+      "source": "/dev/shm/m3jdk21-work/mask-candidates/qualification/rejected-indirect/collection-benchmark-compile.json",
+      "sha256": "c8fb0df29cc1d7437cc68951b2a6f7872a6c16b1be5abb31a63c7b9fbf447bf3",
+      "bytes": 760,
+      "category": "MASK_AND_COLLECTION_SOURCE_BOUND_EVIDENCE",
+      "copy": "EXACT_BYTES"
+    },
+    {
+      "path": "qualification/masks/rejected-indirect/collection-benchmark-patch-classes.json",
+      "source": "/dev/shm/m3jdk21-work/mask-candidates/qualification/rejected-indirect/collection-benchmark-patch-classes.json",
+      "sha256": "e9bf36bedee253ca85c7f8034e31635b054b31952b545f496a7cfa50acdadd18",
+      "bytes": 10933,
+      "category": "MASK_AND_COLLECTION_SOURCE_BOUND_EVIDENCE",
+      "copy": "EXACT_BYTES"
+    },
+    {
+      "path": "qualification/masks/rejected-indirect/collection-benchmark-summary.json",
+      "source": "/dev/shm/m3jdk21-work/mask-candidates/qualification/rejected-indirect/collection-benchmark-summary.json",
+      "sha256": "282eec12d44206ca5d53ebac612cc56f90afeb771d60c3e84ebc0fe032b79b90",
+      "bytes": 13913,
+      "category": "MASK_AND_COLLECTION_SOURCE_BOUND_EVIDENCE",
+      "copy": "EXACT_BYTES"
+    },
+    {
+      "path": "qualification/masks/rejected-indirect/collection-initial-warmup/collection-baseline-jni.log",
+      "source": "/dev/shm/m3jdk21-work/mask-candidates/qualification/rejected-indirect/collection-initial-warmup/collection-baseline-jni.log",
+      "sha256": "05f7708c0be498667004f95ed25e838847af7e840cab8c484a2d3d5cc6d80b93",
+      "bytes": 23629,
+      "category": "MASK_AND_COLLECTION_SOURCE_BOUND_EVIDENCE",
+      "copy": "EXACT_BYTES"
+    },
+    {
+      "path": "qualification/masks/rejected-indirect/collection-initial-warmup/collection-baseline-receipt.json",
+      "source": "/dev/shm/m3jdk21-work/mask-candidates/qualification/rejected-indirect/collection-initial-warmup/collection-baseline-receipt.json",
+      "sha256": "35b767ad6df9157c791d7d6eb1ba7599246acf57ca1b6b3e3382701dfef23e33",
+      "bytes": 1148,
+      "category": "MASK_AND_COLLECTION_SOURCE_BOUND_EVIDENCE",
+      "copy": "EXACT_BYTES"
+    },
+    {
+      "path": "qualification/masks/rejected-indirect/collection-initial-warmup/collection-baseline-resource.txt",
+      "source": "/dev/shm/m3jdk21-work/mask-candidates/qualification/rejected-indirect/collection-initial-warmup/collection-baseline-resource.txt",
+      "sha256": "981082762a59ed9054a9071496683c0e0013ee14800eee3c633fccb8ca0f3189",
+      "bytes": 1207,
+      "category": "MASK_AND_COLLECTION_SOURCE_BOUND_EVIDENCE",
+      "copy": "EXACT_BYTES"
+    },
+    {
+      "path": "qualification/masks/rejected-indirect/collection-initial-warmup/collection-baseline.jsonl",
+      "source": "/dev/shm/m3jdk21-work/mask-candidates/qualification/rejected-indirect/collection-initial-warmup/collection-baseline.jsonl",
+      "sha256": "258a3b077042205f2081850285630b091f08cae7ef55b82a5813e656f8105413",
+      "bytes": 5943,
+      "category": "MASK_AND_COLLECTION_SOURCE_BOUND_EVIDENCE",
+      "copy": "EXACT_BYTES"
+    },
+    {
+      "path": "qualification/masks/rejected-indirect/collection-initial-warmup/collection-benchmark-compile.json",
+      "source": "/dev/shm/m3jdk21-work/mask-candidates/qualification/rejected-indirect/collection-initial-warmup/collection-benchmark-compile.json",
+      "sha256": "c8fb0df29cc1d7437cc68951b2a6f7872a6c16b1be5abb31a63c7b9fbf447bf3",
+      "bytes": 760,
+      "category": "MASK_AND_COLLECTION_SOURCE_BOUND_EVIDENCE",
+      "copy": "EXACT_BYTES"
+    },
+    {
+      "path": "qualification/masks/rejected-indirect/collection-initial-warmup/collection-benchmark-patch-classes.json",
+      "source": "/dev/shm/m3jdk21-work/mask-candidates/qualification/rejected-indirect/collection-initial-warmup/collection-benchmark-patch-classes.json",
+      "sha256": "e9bf36bedee253ca85c7f8034e31635b054b31952b545f496a7cfa50acdadd18",
+      "bytes": 10933,
+      "category": "MASK_AND_COLLECTION_SOURCE_BOUND_EVIDENCE",
+      "copy": "EXACT_BYTES"
+    },
+    {
+      "path": "qualification/masks/rejected-indirect/collection-initial-warmup/collection-benchmark-summary.json",
+      "source": "/dev/shm/m3jdk21-work/mask-candidates/qualification/rejected-indirect/collection-initial-warmup/collection-benchmark-summary.json",
+      "sha256": "b061b8be71079eb629c5668fd949ee72977b31282b5502047daede8f3b3c3511",
+      "bytes": 13417,
+      "category": "MASK_AND_COLLECTION_SOURCE_BOUND_EVIDENCE",
+      "copy": "EXACT_BYTES"
+    },
+    {
+      "path": "qualification/masks/rejected-indirect/collection-initial-warmup/collection-integrated-java-jni.log",
+      "source": "/dev/shm/m3jdk21-work/mask-candidates/qualification/rejected-indirect/collection-initial-warmup/collection-integrated-java-jni.log",
+      "sha256": "a0377fda875eb93a7f7efb2b15b68359b006bcc46f455664e04a2b5ea0e1367d",
+      "bytes": 23629,
+      "category": "MASK_AND_COLLECTION_SOURCE_BOUND_EVIDENCE",
+      "copy": "EXACT_BYTES"
+    },
+    {
+      "path": "qualification/masks/rejected-indirect/collection-initial-warmup/collection-integrated-java-receipt.json",
+      "source": "/dev/shm/m3jdk21-work/mask-candidates/qualification/rejected-indirect/collection-initial-warmup/collection-integrated-java-receipt.json",
+      "sha256": "0d3a2e9e667ca80c1dc443801177b66abfd6584bbb8e8b6ca45e75f2bf11bad7",
+      "bytes": 1178,
+      "category": "MASK_AND_COLLECTION_SOURCE_BOUND_EVIDENCE",
+      "copy": "EXACT_BYTES"
+    },
+    {
+      "path": "qualification/masks/rejected-indirect/collection-initial-warmup/collection-integrated-java-resource.txt",
+      "source": "/dev/shm/m3jdk21-work/mask-candidates/qualification/rejected-indirect/collection-initial-warmup/collection-integrated-java-resource.txt",
+      "sha256": "0790a4be1185f603c8c7f48cf6b5b4e39b7552d00f93aaf8891951545df520aa",
+      "bytes": 1213,
+      "category": "MASK_AND_COLLECTION_SOURCE_BOUND_EVIDENCE",
+      "copy": "EXACT_BYTES"
+    },
+    {
+      "path": "qualification/masks/rejected-indirect/collection-initial-warmup/collection-integrated-java.jsonl",
+      "source": "/dev/shm/m3jdk21-work/mask-candidates/qualification/rejected-indirect/collection-initial-warmup/collection-integrated-java.jsonl",
+      "sha256": "fe0b2fea280ba273e891d50bf46094a9f5901013df4d019dc33f09b62f3796b2",
+      "bytes": 6022,
+      "category": "MASK_AND_COLLECTION_SOURCE_BOUND_EVIDENCE",
+      "copy": "EXACT_BYTES"
+    },
+    {
+      "path": "qualification/masks/rejected-indirect/collection-initial-warmup/collection-integrated-native-jni.log",
+      "source": "/dev/shm/m3jdk21-work/mask-candidates/qualification/rejected-indirect/collection-initial-warmup/collection-integrated-native-jni.log",
+      "sha256": "2e6d2c6c3222954586c6c9d7325d4f1b78798400beefed9c8d08dc78e80215ac",
+      "bytes": 23736,
+      "category": "MASK_AND_COLLECTION_SOURCE_BOUND_EVIDENCE",
+      "copy": "EXACT_BYTES"
+    },
+    {
+      "path": "qualification/masks/rejected-indirect/collection-initial-warmup/collection-integrated-native-receipt.json",
+      "source": "/dev/shm/m3jdk21-work/mask-candidates/qualification/rejected-indirect/collection-initial-warmup/collection-integrated-native-receipt.json",
+      "sha256": "640f860a76109d323135a1d926fec52a2732383054f3276b26a13edb9dc2753c",
+      "bytes": 1452,
+      "category": "MASK_AND_COLLECTION_SOURCE_BOUND_EVIDENCE",
+      "copy": "EXACT_BYTES"
+    },
+    {
+      "path": "qualification/masks/rejected-indirect/collection-initial-warmup/collection-integrated-native-resource.txt",
+      "source": "/dev/shm/m3jdk21-work/mask-candidates/qualification/rejected-indirect/collection-initial-warmup/collection-integrated-native-resource.txt",
+      "sha256": "5c98498e8844b43138ec261e2a3fd9b286e8be6d32940e941ebf0f54dde514e8",
+      "bytes": 1352,
+      "category": "MASK_AND_COLLECTION_SOURCE_BOUND_EVIDENCE",
+      "copy": "EXACT_BYTES"
+    },
+    {
+      "path": "qualification/masks/rejected-indirect/collection-initial-warmup/collection-integrated-native.jsonl",
+      "source": "/dev/shm/m3jdk21-work/mask-candidates/qualification/rejected-indirect/collection-initial-warmup/collection-integrated-native.jsonl",
+      "sha256": "576d9b599cf72f6be92a4d43785ad09f4db32c541cf1836db253d1f3dbf9309d",
+      "bytes": 6028,
+      "category": "MASK_AND_COLLECTION_SOURCE_BOUND_EVIDENCE",
+      "copy": "EXACT_BYTES"
+    },
+    {
+      "path": "qualification/masks/rejected-indirect/collection-integrated-java-jni.log",
+      "source": "/dev/shm/m3jdk21-work/mask-candidates/qualification/rejected-indirect/collection-integrated-java-jni.log",
+      "sha256": "8ec5930d553cc454a6b869ebd7341a369803d2135d58d28d36e2fb1970ce7123",
+      "bytes": 23629,
+      "category": "MASK_AND_COLLECTION_SOURCE_BOUND_EVIDENCE",
+      "copy": "EXACT_BYTES"
+    },
+    {
+      "path": "qualification/masks/rejected-indirect/collection-integrated-java-jni.log.0",
+      "source": "/dev/shm/m3jdk21-work/mask-candidates/qualification/rejected-indirect/collection-integrated-java-jni.log.0",
+      "sha256": "a0377fda875eb93a7f7efb2b15b68359b006bcc46f455664e04a2b5ea0e1367d",
+      "bytes": 23629,
+      "category": "MASK_AND_COLLECTION_SOURCE_BOUND_EVIDENCE",
+      "copy": "EXACT_BYTES"
+    },
+    {
+      "path": "qualification/masks/rejected-indirect/collection-integrated-java-receipt.json",
+      "source": "/dev/shm/m3jdk21-work/mask-candidates/qualification/rejected-indirect/collection-integrated-java-receipt.json",
+      "sha256": "572bad19584445aaa92d23348ba0ae136b0e8c4da31362679164ba59d312e3dd",
+      "bytes": 1275,
+      "category": "MASK_AND_COLLECTION_SOURCE_BOUND_EVIDENCE",
+      "copy": "EXACT_BYTES"
+    },
+    {
+      "path": "qualification/masks/rejected-indirect/collection-integrated-java-resource.txt",
+      "source": "/dev/shm/m3jdk21-work/mask-candidates/qualification/rejected-indirect/collection-integrated-java-resource.txt",
+      "sha256": "22b4e7ad703e4a8137effb4c07a9f536cec563d5550c05ada1bc8357268a0bb4",
+      "bytes": 1213,
+      "category": "MASK_AND_COLLECTION_SOURCE_BOUND_EVIDENCE",
+      "copy": "EXACT_BYTES"
+    },
+    {
+      "path": "qualification/masks/rejected-indirect/collection-integrated-java.jsonl",
+      "source": "/dev/shm/m3jdk21-work/mask-candidates/qualification/rejected-indirect/collection-integrated-java.jsonl",
+      "sha256": "c604ff679d03d6736d3844eb85866081771711e4479b709cfe1b0d9ebb29eb78",
+      "bytes": 6074,
+      "category": "MASK_AND_COLLECTION_SOURCE_BOUND_EVIDENCE",
+      "copy": "EXACT_BYTES"
+    },
+    {
+      "path": "qualification/masks/rejected-indirect/collection-integrated-native-jni.log",
+      "source": "/dev/shm/m3jdk21-work/mask-candidates/qualification/rejected-indirect/collection-integrated-native-jni.log",
+      "sha256": "72affed662ab971e6c6fc4d6b9a0044c2204dfc8c9f61f33e29307598597633c",
+      "bytes": 23736,
+      "category": "MASK_AND_COLLECTION_SOURCE_BOUND_EVIDENCE",
+      "copy": "EXACT_BYTES"
+    },
+    {
+      "path": "qualification/masks/rejected-indirect/collection-integrated-native-jni.log.0",
+      "source": "/dev/shm/m3jdk21-work/mask-candidates/qualification/rejected-indirect/collection-integrated-native-jni.log.0",
+      "sha256": "2e6d2c6c3222954586c6c9d7325d4f1b78798400beefed9c8d08dc78e80215ac",
+      "bytes": 23736,
+      "category": "MASK_AND_COLLECTION_SOURCE_BOUND_EVIDENCE",
+      "copy": "EXACT_BYTES"
+    },
+    {
+      "path": "qualification/masks/rejected-indirect/collection-integrated-native-receipt.json",
+      "source": "/dev/shm/m3jdk21-work/mask-candidates/qualification/rejected-indirect/collection-integrated-native-receipt.json",
+      "sha256": "7175db0bd8d7f07dbcbaea68644dac488781bf885414cae1028e883bce8290ca",
+      "bytes": 1549,
+      "category": "MASK_AND_COLLECTION_SOURCE_BOUND_EVIDENCE",
+      "copy": "EXACT_BYTES"
+    },
+    {
+      "path": "qualification/masks/rejected-indirect/collection-integrated-native-resource.txt",
+      "source": "/dev/shm/m3jdk21-work/mask-candidates/qualification/rejected-indirect/collection-integrated-native-resource.txt",
+      "sha256": "d37d2a8c8a5c20ae53431cabb5c968cc2a360d338b1a16e708e55d9be6c57b08",
+      "bytes": 1352,
+      "category": "MASK_AND_COLLECTION_SOURCE_BOUND_EVIDENCE",
+      "copy": "EXACT_BYTES"
+    },
+    {
+      "path": "qualification/masks/rejected-indirect/collection-integrated-native.jsonl",
+      "source": "/dev/shm/m3jdk21-work/mask-candidates/qualification/rejected-indirect/collection-integrated-native.jsonl",
+      "sha256": "1dafec1b78812d8fb8c1358ad43ba9b6860d81c0a4b751ccd4d81f951a59c8e6",
+      "bytes": 6072,
+      "category": "MASK_AND_COLLECTION_SOURCE_BOUND_EVIDENCE",
+      "copy": "EXACT_BYTES"
+    },
+    {
+      "path": "qualification/masks/rejected-indirect/disposition.json",
+      "source": "/dev/shm/m3jdk21-work/mask-candidates/qualification/rejected-indirect/disposition.json",
+      "sha256": "51794ac5f61d77f51ac0a8e5f141aba473c0858d2e158d864f80201db2929456",
+      "bytes": 358,
+      "category": "MASK_AND_COLLECTION_SOURCE_BOUND_EVIDENCE",
+      "copy": "EXACT_BYTES"
+    },
+    {
+      "path": "qualification/masks/review/MapViewCorrectionsTest.java",
+      "source": "/dev/shm/m3jdk21-work/mask-candidates/qualification/review/MapViewCorrectionsTest.java",
+      "sha256": "c71fc7cc2d3b67ffbc1aa2d90b784f9d97b81b18371af6da6fef1065b5fd4a9d",
+      "bytes": 4357,
+      "category": "MASK_AND_COLLECTION_SOURCE_BOUND_EVIDENCE",
+      "copy": "EXACT_BYTES"
+    },
+    {
+      "path": "qualification/masks/review/MapViewReview.java",
+      "source": "/dev/shm/m3jdk21-work/mask-candidates/qualification/review/MapViewReview.java",
+      "sha256": "20f3a36520a02d8d7e52c1c0a0bf08506211874c3b4aa9e9e994e77aad6483dd",
+      "bytes": 2234,
+      "category": "MASK_AND_COLLECTION_SOURCE_BOUND_EVIDENCE",
+      "copy": "EXACT_BYTES"
+    },
+    {
+      "path": "qualification/masks/review/correction-receipt.json",
+      "source": "/dev/shm/m3jdk21-work/mask-candidates/qualification/review/correction-receipt.json",
+      "sha256": "a51d7707c0fa7293f5d60a124a7edd1f282d70a5c2d4d2511608714b86062d3d",
+      "bytes": 794,
+      "category": "MASK_AND_COLLECTION_SOURCE_BOUND_EVIDENCE",
+      "copy": "EXACT_BYTES"
+    },
+    {
+      "path": "qualification/masks/review/review-receipt.json",
+      "source": "/dev/shm/m3jdk21-work/mask-candidates/qualification/review/review-receipt.json",
+      "sha256": "d6729d7f7121b3d36948dc0e50a056037594348f954f63c195d662726aaef049",
+      "bytes": 1040,
+      "category": "MASK_AND_COLLECTION_SOURCE_BOUND_EVIDENCE",
+      "copy": "EXACT_BYTES"
+    },
+    {
+      "path": "qualification/masks/snapshot-consumer-fallback-jni.log",
+      "source": "/dev/shm/m3jdk21-work/mask-candidates/qualification/snapshot-consumer-fallback-jni.log",
+      "sha256": "b764e821ba6f20fd697025d595d70e221c1515755e8530bc291f4164d171eec7",
+      "bytes": 22983,
+      "category": "MASK_AND_COLLECTION_SOURCE_BOUND_EVIDENCE",
+      "copy": "EXACT_BYTES"
+    },
+    {
+      "path": "qualification/masks/snapshot-consumer-fallback.log",
+      "source": "/dev/shm/m3jdk21-work/mask-candidates/qualification/snapshot-consumer-fallback.log",
+      "sha256": "d8721965174c7fb3f868dbba4889a6916fc0d3c5269e44a04603bf12ef350dc4",
+      "bytes": 86,
+      "category": "MASK_AND_COLLECTION_SOURCE_BOUND_EVIDENCE",
+      "copy": "EXACT_BYTES"
+    },
+    {
+      "path": "qualification/masks/snapshot-consumer-java-jni.log",
+      "source": "/dev/shm/m3jdk21-work/mask-candidates/qualification/snapshot-consumer-java-jni.log",
+      "sha256": "f047f9e8c6544c735fa95d5e9bf13ba9e72bdf94c6074b19961bda926caf0e48",
+      "bytes": 22983,
+      "category": "MASK_AND_COLLECTION_SOURCE_BOUND_EVIDENCE",
+      "copy": "EXACT_BYTES"
+    },
+    {
+      "path": "qualification/masks/snapshot-consumer-java.log",
+      "source": "/dev/shm/m3jdk21-work/mask-candidates/qualification/snapshot-consumer-java.log",
+      "sha256": "5030cebe74a29dfbfd0bff51586650ae55657ef54f8c3733f955116c59653ae6",
+      "bytes": 87,
+      "category": "MASK_AND_COLLECTION_SOURCE_BOUND_EVIDENCE",
+      "copy": "EXACT_BYTES"
+    },
+    {
+      "path": "qualification/masks/snapshot-consumer-native-jni.log",
+      "source": "/dev/shm/m3jdk21-work/mask-candidates/qualification/snapshot-consumer-native-jni.log",
+      "sha256": "8e373d5cb54f480bd9c83226fa1eaea7e036fd4baaa558701972908a4b8807d2",
+      "bytes": 23090,
+      "category": "MASK_AND_COLLECTION_SOURCE_BOUND_EVIDENCE",
+      "copy": "EXACT_BYTES"
+    },
+    {
+      "path": "qualification/masks/snapshot-consumer-native.log",
+      "source": "/dev/shm/m3jdk21-work/mask-candidates/qualification/snapshot-consumer-native.log",
+      "sha256": "d8721965174c7fb3f868dbba4889a6916fc0d3c5269e44a04603bf12ef350dc4",
+      "bytes": 86,
+      "category": "MASK_AND_COLLECTION_SOURCE_BOUND_EVIDENCE",
+      "copy": "EXACT_BYTES"
+    },
+    {
+      "path": "qualification/masks/snapshot-full-java-jni.log",
+      "source": "/dev/shm/m3jdk21-work/mask-candidates/qualification/snapshot-full-java-jni.log",
+      "sha256": "b6c2262defde33369a5d2fc107b15f8e4cea1390173cec820338eb400c2dba14",
+      "bytes": 23090,
+      "category": "MASK_AND_COLLECTION_SOURCE_BOUND_EVIDENCE",
+      "copy": "EXACT_BYTES"
+    },
+    {
+      "path": "qualification/masks/snapshot-full-java.log",
+      "source": "/dev/shm/m3jdk21-work/mask-candidates/qualification/snapshot-full-java.log",
+      "sha256": "35cda4d5f4b3f83d3033e133455e139fd1cf545c85c45e5cf15d74c1f78802f5",
+      "bytes": 83,
+      "category": "MASK_AND_COLLECTION_SOURCE_BOUND_EVIDENCE",
+      "copy": "EXACT_BYTES"
+    },
+    {
+      "path": "qualification/masks/snapshot-full-native-jni.log",
+      "source": "/dev/shm/m3jdk21-work/mask-candidates/qualification/snapshot-full-native-jni.log",
+      "sha256": "7d7738b92beec8d8ce7fd7812f565fe09865ad4531ab120a82a89722ff5679c8",
+      "bytes": 23090,
+      "category": "MASK_AND_COLLECTION_SOURCE_BOUND_EVIDENCE",
+      "copy": "EXACT_BYTES"
+    },
+    {
+      "path": "qualification/masks/snapshot-full-native.log",
+      "source": "/dev/shm/m3jdk21-work/mask-candidates/qualification/snapshot-full-native.log",
+      "sha256": "44deccf9068bea3d6b00586bee63ad9aa2e8894073f954f466b227d4c0942c25",
+      "bytes": 82,
+      "category": "MASK_AND_COLLECTION_SOURCE_BOUND_EVIDENCE",
+      "copy": "EXACT_BYTES"
+    },
+    {
+      "path": "qualification/masks/test-receipt.json",
+      "source": "/dev/shm/m3jdk21-work/mask-candidates/qualification/test-receipt.json",
+      "sha256": "8a08bcd81a118675715b5ad4dde7ea7c3a47edf8c8d5049e358ac5e1732a568d",
+      "bytes": 3224,
+      "category": "MASK_AND_COLLECTION_SOURCE_BOUND_EVIDENCE",
+      "copy": "EXACT_BYTES"
+    },
+    {
+      "path": "qualification/masks/token-donor-review.json",
+      "source": "/dev/shm/m3jdk21-work/mask-candidates/qualification/token-donor-review.json",
+      "sha256": "ddbc945484e09571ddaf7775deb49b7d20c59fabc2a0fcda434e9fdae3fb9cd7",
+      "bytes": 13666,
+      "category": "MASK_AND_COLLECTION_SOURCE_BOUND_EVIDENCE",
+      "copy": "EXACT_BYTES"
+    },
+    {
+      "path": "qualification/masks/token-encoding-collision-receipt.json",
+      "source": "/dev/shm/m3jdk21-work/mask-candidates/qualification/token-encoding-collision-receipt.json",
+      "sha256": "162406b982e2aaa4b9b8d07acc50b5c8f17bd52134aebe776fb8d43cf67fbfa6",
+      "bytes": 381,
+      "category": "MASK_AND_COLLECTION_SOURCE_BOUND_EVIDENCE",
+      "copy": "EXACT_BYTES"
+    },
+    {
+      "path": "qualification/masks/token-review/EmptyFailureProbe.java",
+      "source": "/dev/shm/m3jdk21-work/mask-candidates/qualification/token-review/EmptyFailureProbe.java",
+      "sha256": "aa3fc7b0cedeba3dc688a007c1e750f2b46142d9f9c49d2fdca79c55dba3f407",
+      "bytes": 849,
+      "category": "MASK_AND_COLLECTION_SOURCE_BOUND_EVIDENCE",
+      "copy": "EXACT_BYTES"
+    },
+    {
+      "path": "qualification/masks/token-review/empty-failure-receipt.json",
+      "source": "/dev/shm/m3jdk21-work/mask-candidates/qualification/token-review/empty-failure-receipt.json",
+      "sha256": "5c1a3639757182f9b6babf96bc29cf075a53b076197b960862d3a53495c2df51",
+      "bytes": 1156,
+      "category": "MASK_AND_COLLECTION_SOURCE_BOUND_EVIDENCE",
+      "copy": "EXACT_BYTES"
+    },
+    {
+      "path": "qualification/recipe/RECIPE_RESULTS-1.json",
+      "source": "/dev/shm/m3jdk21-work/integrated-sdk-output-1/RECIPE_RESULTS.json",
+      "sha256": "cb0b1c569a13a30f04ee3ad10b0e5694cc9d01960b24b1080869cc4a3b484dd8",
+      "bytes": 5192,
+      "category": "PRODUCTION_RECIPE_SOURCE_AND_EXECUTION_EVIDENCE",
+      "copy": "EXACT_BYTES"
+    },
+    {
+      "path": "qualification/recipe/collection-intake-1.json",
+      "source": "/dev/shm/m3jdk21-work/collection-candidates/candidate-manifest.json",
+      "sha256": "6971793040645fdaae63019a73c247e4a7d8a5873b3b052e6be11cb925893801",
+      "bytes": 3605,
+      "category": "PRODUCTION_RECIPE_SOURCE_AND_EXECUTION_EVIDENCE",
+      "copy": "EXACT_BYTES"
+    },
+    {
+      "path": "qualification/recipe/manifest-1.tsv",
+      "source": "/dev/shm/m3jdk21-work/recipe-candidates/src/main/resources/com/synexia/rewrite/m3jdk21-integrated-utilities-20261018/manifest.tsv",
+      "sha256": "a7ea777197248e5430680dd599004ca815b881890bf7a746cb156ad79950301d",
+      "bytes": 95320,
+      "category": "PRETOKEN_PRODUCTION_MANIFEST_SNAPSHOT",
+      "copy": "EXACT_BYTES"
+    },
+    {
+      "path": "qualification/recipe/mask-intake-1.json",
+      "source": "/dev/shm/m3jdk21-work/mask-candidates/manifest.json",
+      "sha256": "2e34a333f7abfa0f19f312e4ceb7b3cd2fe6440d9c8d1081a3ac97e364bdf388",
+      "bytes": 5035,
+      "category": "PRODUCTION_RECIPE_SOURCE_AND_EXECUTION_EVIDENCE",
+      "copy": "EXACT_BYTES"
+    },
+    {
+      "path": "qualification/recipe/maven-production-sdk-run-1.log",
+      "source": "/dev/shm/m3jdk21-work/maven-production-sdk-run-1.log",
+      "sha256": "2d87203f01dbaab3b8c03fa72267dd01120ef5e3193291ed6df7a2d57444d4bb",
+      "bytes": 2876,
+      "category": "PRODUCTION_RECIPE_SOURCE_AND_EXECUTION_EVIDENCE",
+      "copy": "EXACT_BYTES"
+    },
+    {
+      "path": "qualification/recipe/production-resource-assembly-1.json",
+      "source": "/dev/shm/m3jdk21-work/production-resource-assembly-1.json",
+      "sha256": "7623d201d243b999ac4f64623a4295ba74f28dfc4b51836216b54ad24b869009",
+      "bytes": 42378,
+      "category": "PRODUCTION_RECIPE_SOURCE_AND_EXECUTION_EVIDENCE",
+      "copy": "EXACT_BYTES"
+    },
+    {
+      "path": "qualification/recipe/received-collections-receipt.json",
+      "source": "/dev/shm/m3jdk21-work/received-collections-receipt.json",
+      "sha256": "c58b1bd69f935353b3d3612fd85055a0534ecb864fdb7a6b08eb886e33b8bef8",
+      "bytes": 7022,
+      "category": "PARENT_RECEIVED_CHECKOUT_EXECUTION_EVIDENCE",
+      "copy": "EXACT_BYTES"
+    },
+    {
+      "path": "qualification/recipe/received-sdk-output-1.json",
+      "source": "/dev/shm/m3jdk21-work/received-sdk-output-1.json",
+      "sha256": "e41ce9ec2f50eeffeb5043f0d4884cf4149b427db53fc40b81b5e4c50b19a1d8",
+      "bytes": 8619,
+      "category": "PRODUCTION_RECIPE_SOURCE_AND_EXECUTION_EVIDENCE",
+      "copy": "EXACT_BYTES"
+    },
+    {
+      "path": "qualification/recipe/received-utilities-receipt.json",
+      "source": "/dev/shm/m3jdk21-work/received-utilities-receipt.json",
+      "sha256": "101833357f01afc6438ad744831af392aa6eea89e91d88e1bc66d600b9bf425e",
+      "bytes": 5251,
+      "category": "PARENT_RECEIVED_CHECKOUT_EXECUTION_EVIDENCE",
+      "copy": "EXACT_BYTES"
+    },
+    {
+      "path": "qualification/utilities/behavioral-atoms.raw.json",
+      "source": "/dev/shm/m3jdk21-work/utility-candidates/behavioral-atoms.raw.json",
+      "sha256": "4769f0d38505931e0883412212e184d82059d10527ed0e5068624ef96bd92dc2",
+      "bytes": 16595,
+      "category": "UTILITY_SOURCE_BOUND_EVIDENCE",
+      "copy": "EXACT_BYTES"
+    },
+    {
+      "path": "qualification/utilities/candidate-manifest.json",
+      "source": "/dev/shm/m3jdk21-work/utility-candidates/candidate-manifest.json",
+      "sha256": "4a9954456edefe502073dadd1b8b2957113909f03eaf1bd6bedeb12bc50cc407",
+      "bytes": 3833,
+      "category": "UTILITY_SOURCE_BOUND_EVIDENCE",
+      "copy": "EXACT_BYTES"
+    },
+    {
+      "path": "qualification/utilities/contract-results.json",
+      "source": "/dev/shm/m3jdk21-work/utility-candidates/contract-results.json",
+      "sha256": "9d75b7be593de6691ad2e28debe37417ce8d635450fefb6a3d431a9281da7b13",
+      "bytes": 5302,
+      "category": "UTILITY_SOURCE_BOUND_EVIDENCE",
+      "copy": "EXACT_BYTES"
+    },
+    {
+      "path": "qualification/utilities/generic-sealer-selfcheck.json",
+      "source": "/dev/shm/m3jdk21-work/utility-candidates/atom-tool/generic-sealer-selfcheck.json",
+      "sha256": "f84db1ff584435e6e36749aa0dc89cfe5b68269b7aa7f2679b391fb95ce01b35",
+      "bytes": 12264,
+      "category": "READ_ONLY_COMPILER_PARSER_SELF_CHECK",
+      "copy": "EXACT_BYTES"
+    },
+    {
+      "path": "qualification/utilities/run-contracts.py",
+      "source": "/dev/shm/m3jdk21-work/utility-candidates/run-contracts.py",
+      "sha256": "d370b7adb5f616ad264f99d2fbb63fab8fd8e5a26953b3528a46030b163227c9",
+      "bytes": 1985,
+      "category": "UTILITY_SOURCE_BOUND_EVIDENCE",
+      "copy": "EXACT_BYTES"
+    },
+    {
+      "path": "qualification/utilities/target-paths.json",
+      "source": "/dev/shm/m3jdk21-work/utility-candidates/target-paths.json",
+      "sha256": "1e853c07e5d0b67b2c7547d9325cc379c2378db3a7522f47d3490953fd4503f0",
+      "bytes": 671,
+      "category": "UTILITY_SOURCE_BOUND_EVIDENCE",
+      "copy": "EXACT_BYTES"
+    },
+    {
+      "path": "qualification/utilities/verifier-results.json",
+      "source": "/dev/shm/m3jdk21-work/utility-candidates/verifier-results.json",
+      "sha256": "a9e38ec2fe4c6dd94e9f77f425de351b533ddcaa7d9e1a983103903bb616ec74",
+      "bytes": 5823,
+      "category": "UTILITY_SOURCE_BOUND_EVIDENCE",
+      "copy": "EXACT_BYTES"
+    },
+    {
+      "path": "tools/M3SourceAtoms.java",
+      "source": "/dev/shm/m3jdk21-work/utility-candidates/atom-tool/M3SourceAtoms.java",
+      "sha256": "5471d5a17029d7b2d654b887ce324461cabe5b7ff36c3f4b103c716e82342c8b",
+      "bytes": 7747,
+      "category": "READ_ONLY_COMPILER_PARSER_HELPER",
+      "copy": "EXACT_BYTES"
+    }
+  ],
+  "excluded_binary_or_build_files": [
+    "/dev/shm/m3jdk21-work/mask-candidates/qualification/classes/java/util/M3CollectionMasks$NativeSelection.class",
+    "/dev/shm/m3jdk21-work/mask-candidates/qualification/classes/java/util/M3CollectionMasks.class",
+    "/dev/shm/m3jdk21-work/mask-candidates/qualification/classes/java/util/M3CollectionMasksBenchmark.class",
+    "/dev/shm/m3jdk21-work/mask-candidates/qualification/classes/java/util/M3CollectionMasksTest$Selector.class",
+    "/dev/shm/m3jdk21-work/mask-candidates/qualification/classes/java/util/M3CollectionMasksTest.class",
+    "/dev/shm/m3jdk21-work/mask-candidates/qualification/collection-benchmark-classes/java/util/M3CollectionViewsBenchmark$Item.class",
+    "/dev/shm/m3jdk21-work/mask-candidates/qualification/collection-benchmark-classes/java/util/M3CollectionViewsBenchmark$Workload.class",
+    "/dev/shm/m3jdk21-work/mask-candidates/qualification/collection-benchmark-classes/java/util/M3CollectionViewsBenchmark.class",
+    "/dev/shm/m3jdk21-work/mask-candidates/qualification/review/MapViewCorrectionsTest$Flag.class",
+    "/dev/shm/m3jdk21-work/mask-candidates/qualification/review/MapViewCorrectionsTest.class",
+    "/dev/shm/m3jdk21-work/mask-candidates/qualification/review/MapViewReview.class",
+    "/dev/shm/m3jdk21-work/mask-candidates/qualification/snapshot-consumer-classes/java/util/M3CollectionMasksTest$Selector.class",
+    "/dev/shm/m3jdk21-work/mask-candidates/qualification/snapshot-consumer-classes/java/util/M3CollectionMasksTest$SnapshotValue.class",
+    "/dev/shm/m3jdk21-work/mask-candidates/qualification/snapshot-consumer-classes/java/util/M3CollectionMasksTest.class",
+    "/dev/shm/m3jdk21-work/mask-candidates/qualification/token-review/classes/EmptyFailureProbe.class"
+  ],
+  "evidence_versions": "Earlier candidate receipts and rejected-indirect data retain their original source seals; do not treat them as final receiver results or add their check counts together.",
+  "full_product_image_qualified": false
+}
