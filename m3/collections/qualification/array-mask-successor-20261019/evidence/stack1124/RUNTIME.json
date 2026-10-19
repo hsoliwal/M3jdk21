@@ -1,0 +1,330 @@
+{
+  "schema": "M3_ARRAY_MASK_1426_COMPOSED_RUNTIME_V1",
+  "target_parent": "22e7a14ccd2998d994cb9a74abcdc7abd2086201",
+  "receiving_order": [
+    "com.synexia.m3.ArrayMaskLookup20261018",
+    "array-mask-successor"
+  ],
+  "workflow_sha256": "0a7cd2f8998f2e75619f48a79ab97c3502f0057b66013edc07ed25a79ce56768",
+  "java_home": "/usr/lib/jvm/java-21-openjdk-amd64",
+  "commands": [
+    {
+      "case": "array-historical-current-check",
+      "argv": [
+        "python3",
+        "/workspace/scratch/308dd41c4be6/m3-convergence-20261019/collections/original-array-mask-20261018/receiving1426/m3/collections/qualification/array-mask-successor-20261019/verify_successor.py",
+        "--root",
+        "/workspace/scratch/308dd41c4be6/m3-convergence-20261019/collections/original-array-mask-20261018/receiving1426",
+        "--qualify-bitmap",
+        "/workspace/scratch/308dd41c4be6/m3-convergence-20261019/collections/original-array-mask-20261018/qualification/runtime1426-01/historical-installer",
+        "--java-home",
+        "/usr/lib/jvm/java-21-openjdk-amd64"
+      ],
+      "exit_code": 0,
+      "seconds": 1.858288049697876,
+      "stdout_sha256": "b0483062eeb7282cd5e1adc16a8432e3c734057fa5481af67936e8f2c7b55c4e",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "case": "array-admission-contracts",
+      "argv": [
+        "python3",
+        "/workspace/scratch/308dd41c4be6/m3-convergence-20261019/collections/original-array-mask-20261018/receiving1426/m3/collections/qualification/array-mask-successor-20261019/test_verify_successor.py",
+        "--root",
+        "/workspace/scratch/308dd41c4be6/m3-convergence-20261019/collections/original-array-mask-20261018/receiving1426",
+        "--output",
+        "/workspace/scratch/308dd41c4be6/m3-convergence-20261019/collections/original-array-mask-20261018/qualification/runtime1426-01/admission-contracts"
+      ],
+      "exit_code": 0,
+      "seconds": 0.33157873153686523,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "a32ef81cad81627496377a742a89381b68cd6685a6f7a19ba6e41341a7987714"
+    },
+    {
+      "case": "array-histogram-shell-syntax",
+      "argv": [
+        "bash",
+        "-n",
+        "m3/collections/recipe/state-mask-histogram-20261017/verify.sh"
+      ],
+      "exit_code": 0,
+      "seconds": 0.004081010818481445,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "case": "array-bitmap-java21",
+      "argv": [
+        "bash",
+        "-c",
+        "set -eu\nmkdir -p \"$RUNNER_TEMP/m3-bitmap/classes\" \"$RUNNER_TEMP/m3-bitmap/lib\"\njavac --release 21 -proc:none -Xlint:all -Werror -d \"$RUNNER_TEMP/m3-bitmap/classes\" \\\n  m3/collections/src/main/java/com/m3/collections/M3LongCollection.java \\\n  m3/collections/src/main/java/com/m3/collections/M3LongIterator.java \\\n  m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java \\\n  m3/collections/src/main/java/com/m3/collections/M3LongAddressKernel.java \\\n  m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java \\\n  m3/collections/src/main/java/com/m3/collections/M3LongBitmapFilteredSnapshot.java \\\n  m3/collections/src/test/java/com/m3/collections/M3LongBitmapFilteredSnapshotSelfTest.java\njava -cp \"$RUNNER_TEMP/m3-bitmap/classes\" com.m3.collections.M3LongBitmapFilteredSnapshotSelfTest\n"
+      ],
+      "exit_code": 0,
+      "seconds": 1.617976427078247,
+      "stdout_sha256": "9c6344ca493fd5e5cbbf0d1a5e0bcb26564dd0e59882b4529c353c497ae843f5",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "case": "array-bitmap-checked-jni",
+      "argv": [
+        "bash",
+        "-c",
+        "set -eu\ncc -std=c17 -O2 -Wall -Wextra -Werror -fPIC -shared \\\n  -fsanitize=undefined -fno-sanitize-recover=all \\\n  -I\"$JAVA_HOME/include\" -I\"$JAVA_HOME/include/linux\" \\\n  m3/collections/src/main/native/collections/m3_index_mask_compactor.c \\\n  -o \"$RUNNER_TEMP/m3-bitmap/lib/libm3_collections_mask.so\"\njava -Xcheck:jni -Djava.library.path=\"$RUNNER_TEMP/m3-bitmap/lib\" \\\n  -cp \"$RUNNER_TEMP/m3-bitmap/classes\" com.m3.collections.M3LongBitmapFilteredSnapshotSelfTest\n"
+      ],
+      "exit_code": 0,
+      "seconds": 0.5090007781982422,
+      "stdout_sha256": "9b259dcd796e158174052a6f51338a0419e785aebb1d7cc4bf74aa6b9627cadd",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "case": "array-histogram-java21-c17-ubsan-jni",
+      "argv": [
+        "bash",
+        "m3/collections/recipe/state-mask-histogram-20261017/verify.sh"
+      ],
+      "exit_code": 0,
+      "seconds": 1.6727707386016846,
+      "stdout_sha256": "0c32fb465a379ec605a7ddb3313cf7d5eb2927fe9934c000f1d10c0ca1725b9b",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "case": "doop-indexed-owners-and-jni-2",
+      "argv": [
+        "bash",
+        "-c",
+        "set -euo pipefail\nmkdir -p target/doop-convergence/classes\njavac --release 21 -Xlint:all,-serial,-module -Werror \\\n  -d target/doop-convergence/classes \\\n  -sourcepath m3/collections/src/main/java:m3/collections/src/test/java \\\n  m3/collections/src/test/java/com/m3/collections/M3ReadonlyFilteredSlotSelfTest.java \\\n  m3/collections/src/test/java/com/m3/collections/M3MutableFilteredSlotSelfTest.java \\\n  m3/collections/src/test/java/com/m3/collections/M3IndexedFilterSortFusionSelfTest.java \\\n  m3/collections/src/test/java/com/m3/collections/M3LongDeepFilterSelfTest.java\n"
+      ],
+      "exit_code": 0,
+      "seconds": 2.3097286224365234,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "case": "doop-indexed-owners-and-jni-3",
+      "argv": [
+        "bash",
+        "-c",
+        "set -euo pipefail\nfor klass in M3ReadonlyFilteredSlotSelfTest M3MutableFilteredSlotSelfTest M3IndexedFilterSortFusionSelfTest M3LongDeepFilterSelfTest; do\n  java -ea -cp target/doop-convergence/classes com.m3.collections.$klass\ndone\n"
+      ],
+      "exit_code": 0,
+      "seconds": 1.8823552131652832,
+      "stdout_sha256": "41c7ea401ee01d45241274d84d18fc4227739cb7686b983b37ff86ea30181374",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "case": "doop-indexed-owners-and-jni-4",
+      "argv": [
+        "bash",
+        "-c",
+        "set -euo pipefail\nmkdir -p target/doop-convergence/native\ngcc -std=c17 -O2 -fPIC -shared -Wall -Wextra -Werror \\\n  -I\"$JAVA_HOME/include\" -I\"$JAVA_HOME/include/linux\" \\\n  m3/collections/src/main/native/collections/m3_index_mask_compactor.c \\\n  -o target/doop-convergence/native/libm3_collections_mask.so\n"
+      ],
+      "exit_code": 0,
+      "seconds": 0.18137001991271973,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "case": "doop-indexed-owners-and-jni-5",
+      "argv": [
+        "bash",
+        "-c",
+        "set -euo pipefail\njava -ea -Xcheck:jni \\\n  -Djava.library.path=\"$PWD/target/doop-convergence/native\" \\\n  -cp target/doop-convergence/classes \\\n  com.m3.collections.M3IndexedFilterSortFusionSelfTest --native\n"
+      ],
+      "exit_code": 0,
+      "seconds": 0.16873455047607422,
+      "stdout_sha256": "5c26dd0624fe01075c115e0705a2f86d37e00e66e3d5c04a0fcd8913dbebe861",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "case": "doop-actual-javabase-2",
+      "argv": [
+        "bash",
+        "-c",
+        "set -euo pipefail\nmkdir -p target/doop-javabase/src/java/util target/doop-javabase/classes target/doop-javabase/tests\ncp src/java.base/share/classes/java/util/EnumMap.java target/doop-javabase/src/java/util/\ncp src/java.base/share/classes/java/util/IdentityHashMap.java target/doop-javabase/src/java/util/\njavac -Xlint:all,-serial,-module,-this-escape -Werror \\\n  --patch-module java.base=target/doop-javabase/src \\\n  -d target/doop-javabase/classes \\\n  target/doop-javabase/src/java/util/EnumMap.java \\\n  target/doop-javabase/src/java/util/IdentityHashMap.java\njavac --release 21 -Xlint:all,-serial -Werror \\\n  -d target/doop-javabase/tests \\\n  test/jdk/java/util/EnumMap/DirectOrdinalTraversal.java \\\n  test/jdk/java/util/IdentityHashMap/DirectOffsetString.java\n"
+      ],
+      "exit_code": 0,
+      "seconds": 2.0507049560546875,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "case": "doop-actual-javabase-3",
+      "argv": [
+        "bash",
+        "-c",
+        "set -euo pipefail\njava -ea --patch-module java.base=target/doop-javabase/classes \\\n  -cp target/doop-javabase/tests DirectOrdinalTraversal\njava -ea --patch-module java.base=target/doop-javabase/classes \\\n  -cp target/doop-javabase/tests DirectOffsetString\n"
+      ],
+      "exit_code": 0,
+      "seconds": 0.4284677505493164,
+      "stdout_sha256": "3b9af5f6c7ecc5b5df8efae18011e5a4a220bb8e9bcef366cb07b6bc31ee8e25",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "status": "PASS",
+  "full_installed_m3jdk_image": false,
+  "source_bytes_modes_mtime_unchanged": true,
+  "input_manifest": "SOURCE_INPUTS.tsv",
+  "input_manifest_sha256": "802695b9eb1f8c0c314a0a251461ba5c0084bfead3c00818d4d13fe92bb17bb9",
+  "raw_receipt_sha256": "22c1f11b5a405ac9d4ca6b4e86a07cb846ac1552d1c06eecfba66c0ccbd23a36",
+  "input_count": 354,
+  "assertion_counters": {
+    "bitmap_java": 119456,
+    "bitmap_checked_jni": 135714,
+    "histogram_java": 403492,
+    "histogram_checked_jni": 421946,
+    "readonly_slot": 266236,
+    "mutable_slot": 478161,
+    "indexed_fusion_java": 9962,
+    "deep_filter": 3119,
+    "indexed_fusion_required_jni": 19911,
+    "jdk_enum_map": 4411,
+    "jdk_identity_map": 78847
+  },
+  "logs": [
+    {
+      "path": "logs/array-admission-contracts.stderr.log",
+      "sha256": "a32ef81cad81627496377a742a89381b68cd6685a6f7a19ba6e41341a7987714",
+      "bytes": 1473,
+      "utf8": "test_each_current_source_drift_refuses (__main__.AdmissionContract.test_each_current_source_drift_refuses) ... ok\ntest_each_historical_source_drift_refuses (__main__.AdmissionContract.test_each_historical_source_drift_refuses) ... ok\ntest_exact_current_and_history_are_separate (__main__.AdmissionContract.test_exact_current_and_history_are_separate) ... ok\ntest_family_scope_retains_its_own_exact_gates (__main__.AdmissionContract.test_family_scope_retains_its_own_exact_gates) ... ok\ntest_missing_current_source_refuses (__main__.AdmissionContract.test_missing_current_source_refuses) ... ok\ntest_old_postimage_is_not_current_admission (__main__.AdmissionContract.test_old_postimage_is_not_current_admission) ... ok\ntest_path_escape_and_unknown_family_refuse (__main__.AdmissionContract.test_path_escape_and_unknown_family_refuse) ... ok\ntest_source_directory_refuses (__main__.AdmissionContract.test_source_directory_refuses) ... ok\ntest_successor_manifest_tamper_refuses (__main__.AdmissionContract.test_successor_manifest_tamper_refuses) ... ok\ntest_symlink_source_parent_refuses (__main__.AdmissionContract.test_symlink_source_parent_refuses) ... ok\ntest_symlink_source_refuses (__main__.AdmissionContract.test_symlink_source_refuses) ... ok\ntest_unchanged_histogram_owners_remain_gates (__main__.AdmissionContract.test_unchanged_histogram_owners_remain_gates) ... ok\n\n----------------------------------------------------------------------\nRan 12 tests in 0.257s\n\nOK\n"
+    },
+    {
+      "path": "logs/array-admission-contracts.stdout.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "utf8": ""
+    },
+    {
+      "path": "logs/array-bitmap-checked-jni.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "utf8": ""
+    },
+    {
+      "path": "logs/array-bitmap-checked-jni.stdout.log",
+      "sha256": "9b259dcd796e158174052a6f51338a0419e785aebb1d7cc4bf74aa6b9627cadd",
+      "bytes": 68,
+      "utf8": "PASS M3LongBitmapFilteredSnapshotSelfTest checks=135714 native=true\n"
+    },
+    {
+      "path": "logs/array-bitmap-java21.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "utf8": ""
+    },
+    {
+      "path": "logs/array-bitmap-java21.stdout.log",
+      "sha256": "9c6344ca493fd5e5cbbf0d1a5e0bcb26564dd0e59882b4529c353c497ae843f5",
+      "bytes": 69,
+      "utf8": "PASS M3LongBitmapFilteredSnapshotSelfTest checks=119456 native=false\n"
+    },
+    {
+      "path": "logs/array-histogram-java21-c17-ubsan-jni.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "utf8": ""
+    },
+    {
+      "path": "logs/array-histogram-java21-c17-ubsan-jni.stdout.log",
+      "sha256": "0c32fb465a379ec605a7ddb3313cf7d5eb2927fe9934c000f1d10c0ca1725b9b",
+      "bytes": 365,
+      "utf8": "M3_ARRAY_MASK_SUCCESSOR_PASS {\"current_successors\": 2, \"family\": \"histogram\", \"historical_inputs\": 7, \"product_sources_written\": false, \"unchanged_current_sources\": 2}\nM3StateMaskHistogramSelfTest PASS checks=403492 native=false\nM3StateMaskHistogramSelfTest PASS checks=421946 native=true\nBOUNDED_JAVA21_C17_JNI_PASS; owning module/JDK/Maven qualification separate\n"
+    },
+    {
+      "path": "logs/array-histogram-shell-syntax.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "utf8": ""
+    },
+    {
+      "path": "logs/array-histogram-shell-syntax.stdout.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "utf8": ""
+    },
+    {
+      "path": "logs/array-historical-current-check.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "utf8": ""
+    },
+    {
+      "path": "logs/array-historical-current-check.stdout.log",
+      "sha256": "b0483062eeb7282cd5e1adc16a8432e3c734057fa5481af67936e8f2c7b55c4e",
+      "bytes": 189,
+      "utf8": "M3_ARRAY_MASK_SUCCESSOR_PASS {\"current_successors\": 4, \"family\": \"all\", \"historical_commands\": 8, \"historical_inputs\": 11, \"product_sources_written\": false, \"unchanged_current_sources\": 2}\n"
+    },
+    {
+      "path": "logs/doop-actual-javabase-2.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "utf8": ""
+    },
+    {
+      "path": "logs/doop-actual-javabase-2.stdout.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "utf8": ""
+    },
+    {
+      "path": "logs/doop-actual-javabase-3.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "utf8": ""
+    },
+    {
+      "path": "logs/doop-actual-javabase-3.stdout.log",
+      "sha256": "3b9af5f6c7ecc5b5df8efae18011e5a4a220bb8e9bcef366cb07b6bc31ee8e25",
+      "bytes": 77,
+      "utf8": "PASS DirectOrdinalTraversal checks=4411\nPASS DirectOffsetString checks=78847\n"
+    },
+    {
+      "path": "logs/doop-indexed-owners-and-jni-2.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "utf8": ""
+    },
+    {
+      "path": "logs/doop-indexed-owners-and-jni-2.stdout.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "utf8": ""
+    },
+    {
+      "path": "logs/doop-indexed-owners-and-jni-3.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "utf8": ""
+    },
+    {
+      "path": "logs/doop-indexed-owners-and-jni-3.stdout.log",
+      "sha256": "41c7ea401ee01d45241274d84d18fc4227739cb7686b983b37ff86ea30181374",
+      "bytes": 209,
+      "utf8": "PASS M3ReadonlyFilteredSlotSelfTest checks=266236\nPASS M3MutableFilteredSlotSelfTest checks=478161\nPASS M3IndexedFilterSortFusionSelfTest checks=9962 JNI=false\nM3_DEEP_FILTER_PASS assertions=3119 depth=100000\n"
+    },
+    {
+      "path": "logs/doop-indexed-owners-and-jni-4.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "utf8": ""
+    },
+    {
+      "path": "logs/doop-indexed-owners-and-jni-4.stdout.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "utf8": ""
+    },
+    {
+      "path": "logs/doop-indexed-owners-and-jni-5.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "utf8": ""
+    },
+    {
+      "path": "logs/doop-indexed-owners-and-jni-5.stdout.log",
+      "sha256": "5c26dd0624fe01075c115e0705a2f86d37e00e66e3d5c04a0fcd8913dbebe861",
+      "bytes": 61,
+      "utf8": "PASS M3IndexedFilterSortFusionSelfTest checks=19911 JNI=true\n"
+    }
+  ],
+  "recipe_requalification_relation": "The composed source was executed after receiving with the 47981356 engine set. The later actual SDK run with the inherited 1124f5b7 engines emitted byte-identical six-plus-nine targets. receive1124-02 separately received those outputs from the same exact 1426 preimages and compared every inventoried output with the executed fixture."
+}

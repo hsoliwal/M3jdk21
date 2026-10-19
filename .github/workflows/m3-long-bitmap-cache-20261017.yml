@@ -6,6 +6,7 @@ on:
       - 'm3/collections/src/main/java/com/m3/collections/M3LongBitmapFilteredSnapshot.java'
       - 'm3/collections/src/test/java/com/m3/collections/M3LongBitmapFilteredSnapshotSelfTest.java'
       - 'm3/collections/qualification/m3-long-bitmap-cache-20261017/**'
+      - 'm3/collections/qualification/array-mask-successor-20261019/**'
       - '.github/workflows/m3-long-bitmap-cache-20261017.yml'
   workflow_dispatch:
 jobs:
@@ -22,7 +23,10 @@ jobs:
           set -eu
           DIR=m3/collections/qualification/m3-long-bitmap-cache-20261017/recipe
           mvn -B -ntp -f "$DIR/pom.xml" verify
-          java -cp "$DIR/target/classes" com.synexia.m3.M3LongBitmapFilteredSnapshotRecipe --check .
+          python3 m3/collections/qualification/array-mask-successor-20261019/verify_successor.py \
+            --root . --family bitmap --qualify-bitmap "$RUNNER_TEMP/m3-bitmap-historical-successor"
+          python3 m3/collections/qualification/array-mask-successor-20261019/test_verify_successor.py \
+            --root . --output "$RUNNER_TEMP/m3-array-mask-admission-tests"
       - name: Strict Java 21 selected-source contract gate
         run: |
           set -eu
@@ -31,6 +35,7 @@ jobs:
             m3/collections/src/main/java/com/m3/collections/M3LongCollection.java \
             m3/collections/src/main/java/com/m3/collections/M3LongIterator.java \
             m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java \
+            m3/collections/src/main/java/com/m3/collections/M3LongAddressKernel.java \
             m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java \
             m3/collections/src/main/java/com/m3/collections/M3LongBitmapFilteredSnapshot.java \
             m3/collections/src/test/java/com/m3/collections/M3LongBitmapFilteredSnapshotSelfTest.java

@@ -34,8 +34,8 @@ jobs:
         run: |
           set -euo pipefail
           git merge-base --is-ancestor 0efc1719ca5766aead09f4f7c49f5067975bd946 HEAD
-          test "$(git hash-object m3/collections/src/main/java/com/m3/collections/M3LongBitmapFilteredSnapshot.java)" = a5fe77001be04ca123593908fb68ca008935d543
-          test "$(git hash-object m3/collections/src/test/java/com/m3/collections/M3LongBitmapFilteredSnapshotSelfTest.java)" = 246745524719dffdd0396166282a3382f1759bf3
+          test "$(git hash-object m3/collections/qualification/m3-long-bitmap-cache-20261017/recipe/src/main/resources/templates/M3LongBitmapFilteredSnapshot.java)" = a5fe77001be04ca123593908fb68ca008935d543
+          test "$(git hash-object m3/collections/qualification/m3-long-bitmap-cache-20261017/recipe/src/main/resources/templates/M3LongBitmapFilteredSnapshotSelfTest.java)" = 246745524719dffdd0396166282a3382f1759bf3
           test "$(git hash-object m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java)" = 317136e66200db1d8fc72d47ff9f8cf52b4566b5
           test "$(git hash-object m3/collections/src/main/java/com/m3/collections/M3StateMaskArrays.java)" = 06dc86a44df0e962613273011ff7d653f20d6ea9
       - name: Compile existing three Maven source installers directly with Java 21
@@ -56,9 +56,8 @@ jobs:
           java -cp "$cp" com.synexia.m3.M3LongIndexProjectionRecipe --selftest
           java -cp "$cp" com.synexia.m3.M3LongBitmapFilteredSnapshotRecipe --selftest
           java -cp "$cp" com.synexia.m3.M3StateMaskArraysRecipe --selftest
-          java -cp "$cp" com.synexia.m3.M3LongBitmapFilteredSnapshotRecipe --check "$root"
-          java -cp "$cp" com.synexia.m3.M3LongBitmapFilteredSnapshotRecipe --apply "$root"
-          java -cp "$cp" com.synexia.m3.M3LongBitmapFilteredSnapshotRecipe --check "$root"
+          python3 m3/collections/qualification/array-mask-successor-20261019/verify_successor.py \
+            --root "$root" --family bitmap --qualify-bitmap "$RUNNER_TEMP/m3-canonical-bitmap-successor"
           for recipe in M3LongIndexProjectionRecipe M3StateMaskArraysRecipe; do
             set +e
             output="$(java -cp "$cp" com.synexia.m3.$recipe --apply "$root" 2>&1)"

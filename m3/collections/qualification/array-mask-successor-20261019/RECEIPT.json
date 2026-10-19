@@ -1,0 +1,262 @@
+{
+  "schema": "M3_ARRAY_MASK_CANONICAL_1426_STACK_QUALIFICATION_V1",
+  "status": "PASS",
+  "canonical_parent": "1124f5b72744b306884beedebafd8558d49d4c4c",
+  "canonical_parent_branch": "codex/m3jdk21-string-array-recipes-20261018-308dd41c",
+  "canonical_parent_tree": "4247615410371ff78f1e6985af3f540897a944fa",
+  "target_parent": "22e7a14ccd2998d994cb9a74abcdc7abd2086201",
+  "target_parent_branch": "m3/doop-javabase-collections-convergence-20261019",
+  "target_parent_tree": "b36ec7ff7217d1909dca145197f5065bfc9e8e54",
+  "recipes": [
+    "com.synexia.m3.ArrayMaskLookup20261018",
+    "com.synexia.m3jdk.CollectionsContractRefinement20261017"
+  ],
+  "successor_dataset": "array-mask-successor",
+  "target_files_generated": 15,
+  "original_target_split": {
+    "runtime_oracles_and_owners": 4,
+    "mapping_and_contract_docs": 2
+  },
+  "successor_target_split": {
+    "existing_gate_files": 4,
+    "new_qualification_files": 5
+  },
+  "default_inherited_canonical_owners_executed": true,
+  "engine_sources": [
+    {
+      "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+      "git_blob": "75e0a6d360e371ee54f828a405acf38b4955e15e",
+      "sha256": "d73c80e1ae6f47a827fec593bce6df30a55c5987099be44f52952442c65336b1"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedTextSnapshotRecipe.java",
+      "git_blob": "9d0788d3717e017d58345c5c3e62022c2915a3c8",
+      "sha256": "fbf1ea9efad784afef5ac201ff7fc324551f77a099ebfe2f79b70c3a17c731ef"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3ScopeInference.java",
+      "git_blob": "21efff8ab0f3d71923b13614cb9084c0008f2eaf",
+      "sha256": "be0677db4aa932e1b0d34489306e60dfa63a0140c14a6b01897b5a8bbcf00b62"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3EditScope.java",
+      "git_blob": "274360816db1e44a2f1796a3bc5cdeff6b0ce6db",
+      "sha256": "962d37d62d740c3e8055c365a048ae7ee0479c26a9f6bbfe741e540d6c1134ab"
+    }
+  ],
+  "canonical_host_files_unchanged_from_1124": [
+    "pom.xml",
+    "prepare.py",
+    "receive.py",
+    "ENGINE_SOURCES.tsv",
+    "src/test/java/com/synexia/rewrite/M3TaskRecipeTest.java",
+    "contract/test_prepare.py",
+    "contract/verify_receiver.py"
+  ],
+  "sdk_tests": {
+    "original": 5,
+    "successor": 5,
+    "failures": 0,
+    "errors": 0,
+    "skips": 0
+  },
+  "source_sealing_contract_tests": 8,
+  "successor_receiver_integrity_cases": 9,
+  "serial_receiving": "6 then 9, each preceded by check and followed by zero-change repeat",
+  "four_runtime_postimages_match_previous_1080608_check_proof": true,
+  "fresh_composed_assertion_counter_total": 1941255,
+  "fresh_composed_array_counter_total": 1080608,
+  "fresh_composed_fleet_counter_total": 860647,
+  "fresh_runtime_commands": 12,
+  "fresh_runtime_input_paths": 354,
+  "runtime_bytes_modes_mtime_unchanged": true,
+  "preserved_fleet_paths": [
+    "m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java",
+    "m3/collections/src/main/java/com/m3/collections/M3MutableFilteredViews.java",
+    "m3/collections/src/main/java/com/m3/collections/M3IndexedListSnapshot.java",
+    "src/java.base/share/classes/java/util/EnumMap.java",
+    "src/java.base/share/classes/java/util/IdentityHashMap.java"
+  ],
+  "independent_receiver_blob_pins": {
+    "M3LongIndexProjection": "317136e66200db1d8fc72d47ff9f8cf52b4566b5",
+    "M3StateMaskArrays": "06dc86a44df0e962613273011ff7d653f20d6ea9"
+  },
+  "generated_targets": [
+    {
+      "path": ".github/workflows/m3-long-bitmap-cache-20261017.yml",
+      "before": "4e59df9c60b1f95f774f156572649d345e07cc3a68e4923942f3eb2d329837c9",
+      "after": "c6c532068ada01d8ff84559a55b62bb5b5650c360c9aaf0905d5e1e16fcf8e35"
+    },
+    {
+      "path": ".github/workflows/m3-state-mask-histogram-20261017.yml",
+      "before": "18bb322c4febdcc6b0516d11f85993dceeb8105f84041ac22a85b5d45aa08e70",
+      "after": "82aa36d50393f6b1c1c471ce01189c376c1ba9e3f46a816bc4bb4db7c69b32d9"
+    },
+    {
+      "path": ".github/workflows/m3-synexia-collection-receiver-20261018.yml",
+      "before": "bc5db56cd38867b076c3ee5e84dd465752d5cded77968498556c1c467a8aa692",
+      "after": "745988da4cd74b583de3fe7133c1f972471a940681aca248e4b5acc14bc59576"
+    },
+    {
+      "path": "m3/collections/qualification/array-mask-successor-20261019/CATEGORY_REVIEW.tsv",
+      "before": "ABSENT",
+      "after": "0b52dd54299d53a058ba4b80f14e12433b213ec89d1edbe5d31caa1dfc41ee70"
+    },
+    {
+      "path": "m3/collections/qualification/array-mask-successor-20261019/README.md",
+      "before": "ABSENT",
+      "after": "b70c858f4df9efea2d7eb69f4e36e8670bf647c5aae11d27ebff4cb87e3bdbee"
+    },
+    {
+      "path": "m3/collections/qualification/array-mask-successor-20261019/SUCCESSOR.tsv",
+      "before": "ABSENT",
+      "after": "ad03213f94ae8b591ab06a75b8b1bc6a515d38609392e2de1e31bd2673bfdd49"
+    },
+    {
+      "path": "m3/collections/qualification/array-mask-successor-20261019/test_verify_successor.py",
+      "before": "ABSENT",
+      "after": "bb5e78a7c7cae5ead39a5814dcdf08d584d589bc007600d4a6d975b9656362c4"
+    },
+    {
+      "path": "m3/collections/qualification/array-mask-successor-20261019/verify_successor.py",
+      "before": "ABSENT",
+      "after": "fe98891719959e16dee0422fc2a7306b276dc6405672db6395a17d917d733faa"
+    },
+    {
+      "path": "m3/collections/recipe/state-mask-histogram-20261017/verify.sh",
+      "before": "80f8b90af15f2ea36f53f0f79aa5ae98dbcac19589b189f18679beb361f70bcb",
+      "after": "7e9da25b442bd32caab1c4f441a64a7f6d06158e3effab549fae545e7de3b3fa"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LongBitmapFilteredSnapshot.java",
+      "before": "ef4e4f4b7a8871cba0e631b96480ad3cf1e43640e5bf84a89cc91806df2d54d9",
+      "after": "9b4b095f7f51b27a76e6a56cda60c6662cbbf60bcb8b55655f82c127b4451af6"
+    },
+    {
+      "path": "m3/collections/src/main/native/collections/m3_state_mask_histogram.c",
+      "before": "2a426399b299fac7b21de78ab5938197e2b2e628b54158642c3631ee3a986033",
+      "after": "21ff3a8dade438a819d411fba96a6cb4ee8ddbd4c568409686137c42524e41bf"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3LongBitmapFilteredSnapshotSelfTest.java",
+      "before": "de0be6b6fa43ea9b824db0f79106213976e94f8f7cdf6a84f15378a6c090cc37",
+      "after": "57dcca5226299fe29f6c116f83bff76040a1c7483e5671d425c0832a1c016a4a"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3StateMaskHistogramSelfTest.java",
+      "before": "11dbbb4682fbe085b35f3dbccc11e78039c0700b47794ad0bbc244723ec6473d",
+      "after": "3386e196bccd356dd022a5dfa50e67cda6887aef08ff7b738703230cc37b37b6"
+    },
+    {
+      "path": "m3/docs/name-mapping.d/m3-array-mask-lookup-20261018.json",
+      "before": "ABSENT",
+      "after": "749608e7fc3df9bde30e7135f7319ce98fd92709bd986e4a7d8d7f1fc24f5401"
+    },
+    {
+      "path": "m3/qualification/string-index-reverse-20261018/collections/CONTRACT.md",
+      "before": "ABSENT",
+      "after": "b26eb0e37326f91dcbe4988c8c8fe23347639e5cfcbb99908687734ef50f286d"
+    }
+  ],
+  "historical_installers_templates_and_receipts_unchanged": true,
+  "earlier_trial_carrier": "evidence/history/47981356-proof.json",
+  "full_installed_m3jdk_image": "NOT_RUN",
+  "whole_module_maven": "NOT_RUN",
+  "full_reactor_or_outer_recipe_admission": "NOT_RUN",
+  "jtreg": "NOT_RUN",
+  "macos_windows_ios_execution_in_this_trial": "NOT_RUN",
+  "performance_measurement": "NOT_RUN",
+  "publication_scope": "reviewable stacked PRs; no branch merge or other fleet branch rewrite",
+  "evidence_files": [
+    {
+      "path": "evidence/history/47981356-proof.json",
+      "sha256": "e186af1b608a2fbd4cb632477b9a580c7241c6701ef3aa4548c71852436775f4",
+      "bytes": 97047
+    },
+    {
+      "path": "evidence/stack1124/DATASET_SEALING.json",
+      "sha256": "9bcd9b0df12b178bce19857173b68d65dd07340a9307320ee545e2114768b358",
+      "bytes": 1158
+    },
+    {
+      "path": "evidence/stack1124/ORIGINAL_CRATE_SEALS.json",
+      "sha256": "61e729a536898f1be3e1bcc84c1c6a60bd5e7c6902833a6093c1d75f8fbad856",
+      "bytes": 12512
+    },
+    {
+      "path": "evidence/stack1124/RECEIVER_INTEGRITY.json",
+      "sha256": "f35822f9ae548735f85ae19405eea5e5db6805ddc4a899c10cf4a1d0429f3d0a",
+      "bytes": 12315
+    },
+    {
+      "path": "evidence/stack1124/RUNTIME.json",
+      "sha256": "d845ffcb90f23767390973a3d7bddf41be13753599ec8af8d4e2e96d18b812b0",
+      "bytes": 18003
+    },
+    {
+      "path": "evidence/stack1124/SDK_RUNS.json",
+      "sha256": "66552e52498f194d5b79f2be1c455de3ed5edcff5f461819c0dd3c56f4e65af2",
+      "bytes": 2055
+    },
+    {
+      "path": "evidence/stack1124/SERIAL_RECEIVING.json",
+      "sha256": "66683421c8d932965d3791b89d8e19477feff113eadd0580c5a7c1892ae581db",
+      "bytes": 30643
+    },
+    {
+      "path": "evidence/stack1124/SOURCE_ADMISSION.tsv",
+      "sha256": "152da4aa3ee535b07b47419f9c48d1a844f4c4a337993f5e4ec598782615a0c5",
+      "bytes": 3134
+    },
+    {
+      "path": "evidence/stack1124/SOURCE_INPUTS.tsv",
+      "sha256": "802695b9eb1f8c0c314a0a251461ba5c0084bfead3c00818d4d13fe92bb17bb9",
+      "bytes": 58318
+    },
+    {
+      "path": "evidence/stack1124/SOURCE_INTAKE.json",
+      "sha256": "072f4597b644723068be317853fb0bae7efcd1626367fbdc97bafde55c345334",
+      "bytes": 109648
+    },
+    {
+      "path": "evidence/stack1124/original/SDK_INPUTS.tsv",
+      "sha256": "f68af9f27dc07aada8146cfd874f775873ed3b72ca2582024784a86be243a00d",
+      "bytes": 3811
+    },
+    {
+      "path": "evidence/stack1124/original/SDK_RESULTS.tsv",
+      "sha256": "1a5a3b65e9e8595aac873d70a1b3b5887b43ebf80192b097d4da0919fc82c8ae",
+      "bytes": 1176
+    },
+    {
+      "path": "evidence/stack1124/original/TEST-com.synexia.rewrite.M3TaskRecipeTest.xml",
+      "sha256": "ddec3fa506f2a7bcd6d43e421f8135f94aedc2115b8ac27830dcedd3f4d480f3",
+      "bytes": 20126
+    },
+    {
+      "path": "evidence/stack1124/original/maven.log",
+      "sha256": "6a7801d182f17d8e0344f90edc522ebe7d38b1ec97ece978a263c533b5ab53a2",
+      "bytes": 2489
+    },
+    {
+      "path": "evidence/stack1124/successor/SDK_INPUTS.tsv",
+      "sha256": "9c51524a0cd78c47f3b9f1e97b7d70852530575c4371a924a5b388eda2c3b35d",
+      "bytes": 5240
+    },
+    {
+      "path": "evidence/stack1124/successor/SDK_RESULTS.tsv",
+      "sha256": "e7215c4480fa480c10f0a2d795b426f4f14c7598552abb6104e4662ffbcfe65b",
+      "bytes": 1555
+    },
+    {
+      "path": "evidence/stack1124/successor/TEST-com.synexia.rewrite.M3TaskRecipeTest.xml",
+      "sha256": "4122c9fc38d87bb2a1dce947f274a19ac18ee45831dc9de24760a011c83083ae",
+      "bytes": 20590
+    },
+    {
+      "path": "evidence/stack1124/successor/maven.log",
+      "sha256": "e1b7bf85f35fe12f53e4c40cd3c84c8edc21a7298cb81c60e517c013e1c50bec",
+      "bytes": 2492
+    }
+  ]
+}
