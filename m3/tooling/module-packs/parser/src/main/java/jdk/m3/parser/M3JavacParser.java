@@ -8,7 +8,6 @@ import com.sun.source.util.JavacTask;
 import com.sun.source.util.M3AST;
 import com.sun.source.util.SourcePositions;
 import com.sun.source.util.TreeScanner;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.function.Consumer;
@@ -62,17 +61,11 @@ public final class M3JavacParser {
         int[] parents = new int[capacity];
         int[] starts = new int[capacity];
         int[] ends = new int[capacity];
-        Tree[] pending = new Tree[capacity];
-        int[] pendingParents = new int[capacity];
-        int pendingSize = 1;
-        pending[0] = unit.tree();
-        pendingParents[0] = -1;
+        DirectChildren pending = new DirectChildren(unit.tree(), capacity, maxNodes);
         int size = 0;
-        ArrayList<Tree> children = new ArrayList<>();
-        while (pendingSize != 0) {
-            Tree current = pending[--pendingSize];
-            int parent = pendingParents[pendingSize];
-            pending[pendingSize] = null;
+        while (pending.size != 0) {
+            int parent = pending.parents[pending.size - 1];
+            Tree current = pending.pop();
             if (size == maxNodes) throw new IllegalStateException("M3AST maxNodes exceeded");
             if (size == kinds.length) {
                 int next = grow(kinds.length, maxNodes);
@@ -89,17 +82,7 @@ public final class M3JavacParser {
             if (starts[row] >= 0 && ends[row] >= 0 && starts[row] > ends[row]) {
                 throw new IllegalStateException("descending javac source range");
             }
-            children.clear();
-            current.accept(new DirectChildren(maxNodes - size - pendingSize), children);
-            for (int index = children.size() - 1; index >= 0; index--) {
-                if (pendingSize == pending.length) {
-                    int next = grow(pending.length, maxNodes);
-                    pending = Arrays.copyOf(pending, next);
-                    pendingParents = Arrays.copyOf(pendingParents, next);
-                }
-                pending[pendingSize] = children.get(index);
-                pendingParents[pendingSize++] = row;
-            }
+            pending.append(current, row, maxNodes - size);
         }
         return new M3JavacTree(source, Arrays.copyOf(kinds, size), Arrays.copyOf(parents, size),
                 Arrays.copyOf(starts, size), Arrays.copyOf(ends, size));
@@ -115,16 +98,53 @@ public final class M3JavacParser {
         return (int) Math.min(limit, current + (long) (current >>> 1) + 1);
     }
 
-    /** Enumerate direct children only; the outer primitive stack owns recursion. */
-    private static final class DirectChildren extends TreeScanner<Void, ArrayList<Tree>> {
-        private final int remaining;
-        DirectChildren(int remaining) { this.remaining = remaining; }
-        @Override public Void scan(Tree tree, ArrayList<Tree> children) {
+    /** One reusable scanner appends direct children to the existing array stack. */
+    private static final class DirectChildren extends TreeScanner<Void, Void> {
+        private final int limit;
+        private Tree[] nodes;
+        private int[] parents;
+        private int size = 1;
+        private int parent;
+        private int remaining;
+
+        DirectChildren(Tree root, int capacity, int limit) {
+            this.limit = limit;
+            nodes = new Tree[capacity];
+            parents = new int[capacity];
+            nodes[0] = root;
+            parents[0] = -1;
+        }
+
+        Tree pop() {
+            Tree node = nodes[--size];
+            nodes[size] = null;
+            return node;
+        }
+
+        void append(Tree node, int parent, int remaining) {
+            this.parent = parent;
+            this.remaining = remaining;
+            int boundary = size;
+            node.accept(this, null);
+            // Reverse only the appended segment so LIFO visitation preserves javac order.
+            // All entries in this segment have the same parent row.
+            for (int left = boundary, right = size - 1; left < right; left++, right--) {
+                Tree swap = nodes[left];
+                nodes[left] = nodes[right];
+                nodes[right] = swap;
+            }
+        }
+
+        @Override public Void scan(Tree tree, Void ignored) {
             if (tree != null) {
-                if (children.size() == remaining) {
-                    throw new IllegalStateException("M3AST maxNodes exceeded");
+                if (size == remaining) throw new IllegalStateException("M3AST maxNodes exceeded");
+                if (size == nodes.length) {
+                    int next = grow(nodes.length, limit);
+                    nodes = Arrays.copyOf(nodes, next);
+                    parents = Arrays.copyOf(parents, next);
                 }
-                children.add(tree);
+                nodes[size] = tree;
+                parents[size++] = parent;
             }
             return null;
         }
