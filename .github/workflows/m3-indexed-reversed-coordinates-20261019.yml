@@ -1,0 +1,68 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3 indexed reversed-coordinate Java21 JNI receiver
+
+on:
+  pull_request:
+    paths:
+      - 'm3/collections/src/main/java/com/m3/collections/M3IndexedListSnapshot.java'
+      - 'm3/collections/src/test/java/com/m3/collections/M3IndexedReversedCoordinates20261019Test.java'
+      - 'm3/collections/qualification/indexed-reversed-coordinates-20261019/**'
+      - 'm3/collections/algorithm-catalog/indexed-reversed-coordinates-20261019.tsv'
+      - 'm3/docs/name-mapping.d/indexed-reversed-coordinates-20261019.json'
+      - '.github/workflows/m3-indexed-reversed-coordinates-20261019.yml'
+  push:
+    branches:
+      - m3/indexed-snapshot-reversed-coordinates-20261019
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  java21-masked-reversal:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: maven
+      - name: Verify current target generated postimage and diff hygiene
+        shell: bash
+        run: |
+          set -euo pipefail
+          TARGET=m3/collections/src/main/java/com/m3/collections/M3IndexedListSnapshot.java
+          test "$(git hash-object "$TARGET")" = aa49494b9216757d9547322635328b839c9eb8c3
+          git diff --check "$(git merge-base origin/master HEAD)" HEAD
+          python3 -m json.tool m3/docs/name-mapping.d/indexed-reversed-coordinates-20261019.json >/dev/null
+      - name: Bootstrap source-vendored JUnit
+        run: |
+          mvn -B -ntp -f m3/vendor/third_party/pom.xml \
+            -pl junit-jupiter-5.10.2 -am -DskipTests install
+      - name: Java 21 owner compilation and Java selection differential
+        run: |
+          mvn -B -ntp -f m3/collections/pom.xml \
+            -Dtest=M3IndexedReversedCoordinates20261019Test test
+      - name: Build existing C17 index-path JNI with UBSan
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/native"
+          gcc -std=c17 -O1 -g -Wall -Wextra -Werror -fPIC -shared \
+            -fsanitize=undefined -fno-sanitize-recover=all \
+            -I"$JAVA_HOME/include" -I"$JAVA_HOME/include/linux" \
+            m3/collections/src/main/native/collections/m3_index_path_masks.c \
+            -o "$RUNNER_TEMP/native/libm3_collections_pathmask.so"
+      - name: Mandatory actual Java and JNI negative-stride parity
+        shell: bash
+        run: |
+          set -euo pipefail
+          export JAVA_TOOL_OPTIONS="-Djava.library.path=$RUNNER_TEMP/native"
+          mvn -B -ntp -f m3/collections/pom.xml \
+            -Dm3.indexedReversedNativeRequired=true \
+            -Dtest=M3IndexedReversedCoordinates20261019Test test
