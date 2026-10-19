@@ -23,7 +23,7 @@ source Synexia owner. Repeated source rows remain separate stable record IDs
 while the downstream M3LEX image may deduplicate identical UTF-16 values.
 
 The companion `language-resource-discovery.tsv` is a searchable,
-release-aware catalogue of 186 **reference-only** candidates.
+release-aware catalogue of 193 **reference-only** candidates.
 An earlier discovery pass added 14 reference-only leads: GATITOS bilingual pairs; Swedish Flex/Kubord frequencies, LEXIN, Parole+ and given-name forms; Linguabase's English lexical graph; Bashkir frequency and n-gram indexes; EuroVoc; Czech MorfFlex; Icelandic DMII; Japanese UniDic; and Taiwan's Taigi dictionary. Every row carries its own version, identity and rights caveats. In particular, noncommercial/share-alike, no-derivatives, component-level licensing, unresolved upstream corpus rights, and release-metadata inconsistencies block payload admission. No data files were downloaded or copied.
  In addition to
 dictionaries, grammar, translation, frequency, names, units and speech sources,
@@ -121,3 +121,5 @@ M3 collections and M3 String/regex owners are reused rather than duplicated.
 This module is an **offline intake preprocessor**, not a full Java/JNI JDK
 release, automated HF-wide crawl, full grammar runtime or declaration that
 third-party datasets are redistributable. There is no production corpus in it.
+
+The latest discovery pass adds seven reference-only leads: Sindhi Open Lexicon (223,342 entries with publisher and original entry IDs, but a currently failing Hub schema preview); the historical Javanese/Kawi lexicon (32 sources, CC BY-NC and contact-gated); an Arabic/Russian/English dictionary collection whose Apache card does not establish upstream lexical-file rights and contains no Tajik entries; two distinct Tigre resources (a gated pronunciation lexicon and a VecMap-generated top-1 candidate dictionary seeded by 6,164 translations); and NICT's Japanese-English Kyoto corpus/term list under CC BY-SA 3.0. A Kaggle English frequency listing is also recorded as an unresolved-rights lead. Tigre nearest-neighbor outputs are candidates, not translation truth; all seven remain `REFERENCE_ONLY`, and no payload was downloaded.

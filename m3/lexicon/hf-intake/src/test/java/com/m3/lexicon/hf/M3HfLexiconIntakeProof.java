@@ -66,7 +66,7 @@ public final class M3HfLexiconIntakeProof {
     private static int verifyLanguageResourceDiscovery() throws IOException {
         List<String> lines = resourceLines(
                 "/com/m3/lexicon/hf/language-resource-discovery.tsv");
-        require(lines.size() == 187, "186 language-resource candidates plus header");
+        require(lines.size() == 194, "193 language-resource candidates plus header");
         List<String> expectedHeader = List.of("source_id", "resource", "category",
                 "data_shape_and_identity", "rights_and_attribution", "m3_candidate_use",
                 "admission_blockers", "state", "evidence");
@@ -275,8 +275,43 @@ public final class M3HfLexiconIntakeProof {
                 "hf-mlnorm-resources-composite",
                 "hf-multilexnorm2026-full-pub",
                 "hf-nanai-russian-dictionary",
-                "hf-haitian-creole-word-freq"
-        )), "exact 186 language-resource source IDs match the pinned catalogue");
+                "hf-haitian-creole-word-freq",
+                "hf-sindhi-open-lexicon",
+                "hf-javanese-multilingual-lexicon",
+                "hf-tajiknlp-ar-ru-en-dictionary",
+                "hf-tigre-data-lexicon",
+                "hf-tigre-generated-dictionary",
+                "nict-japanese-english-kyoto-wiki-corpus",
+                "kaggle-google-web-english-frequency-333333"
+        )), "exact 193 language-resource source IDs match the pinned catalogue");
+        String sindhi = discoveryRecord(lines, "hf-sindhi-open-lexicon");
+        require(sindhi.contains("223,342") && sindhi.contains("lexical_id")
+                && sindhi.contains("entry_id") && sindhi.contains("schema casting"),
+                "Sindhi source IDs, heterogeneous schema and license review stay explicit");
+        String jav = discoveryRecord(lines, "hf-javanese-multilingual-lexicon");
+        require(jav.contains("202,912") && jav.contains("32 historical dictionaries")
+                && jav.contains("CC BY-NC 4.0") && jav.contains("contact-gated"),
+                "Javanese original IDs, historical varieties and noncommercial gate stay explicit");
+        String tajik = discoveryRecord(lines, "hf-tajiknlp-ar-ru-en-dictionary");
+        require(tajik.contains("80,093") && tajik.contains("no Tajik-language entries")
+                && tajik.contains("underlying lexical-file rights"),
+                "Tajik publisher label, actual language pairs and source rights stay distinct");
+        String tigre = discoveryRecord(lines, "hf-tigre-data-lexicon");
+        require(tigre.contains("419,627") && tigre.contains("contact information")
+                && tigre.contains("stable source ID"),
+                "Tigre data remains gated and source identity unverified");
+        String tigreCandidates = discoveryRecord(lines, "hf-tigre-generated-dictionary");
+        require(tigreCandidates.contains("30,000+") && tigreCandidates.contains("6,164-entry")
+                && tigreCandidates.contains("not verified translation"),
+                "Tigre embedding output remains ranked candidate evidence, not gold translation");
+        String kyoto = discoveryRecord(lines, "nict-japanese-english-kyoto-wiki-corpus");
+        require(kyoto.contains("14,111") && kyoto.contains("50,000")
+                && kyoto.contains("CC BY-SA 3.0"),
+                "NICT Kyoto corpus and term-pair source coordinates stay explicit");
+        String kaggleFrequency = discoveryRecord(lines, "kaggle-google-web-english-frequency-333333");
+        require(kaggleFrequency.contains("333,333") && kaggleFrequency.contains("no license grant")
+                && kaggleFrequency.contains("no payload download"),
+                "Kaggle frequency lead remains rights-unresolved discovery only");
         String massive = discoveryRecord(lines, "massive-nlu-1-1");
         require(massive.contains("52 languages") && massive.contains("SLURP") && massive.contains("CC BY 4.0")
                 && massive.contains("not a canonical dictionary"),
@@ -856,7 +891,7 @@ public final class M3HfLexiconIntakeProof {
         require(Files.isRegularFile(catalogue), "algorithm catalogue exists at Maven invocation root");
         if (!Files.isRegularFile(catalogue)) return 0;
         List<String> lines = Files.readAllLines(catalogue, StandardCharsets.UTF_8);
-        require(lines.size() == 67, "66 algorithm patterns plus header");
+        require(lines.size() == 68, "67 algorithm patterns plus header");
         List<String> header = List.of("problem_category", "discovery_source", "candidate",
                 "decision", "owner_or_reason", "qualification");
         require(!lines.isEmpty() && List.of(splitTsv(lines.getFirst())).equals(header),
@@ -936,8 +971,9 @@ public final class M3HfLexiconIntakeProof {
                 "unicode_cldr_transliteration_precompute",
                 "orthographic_skeleton_lookup",
                 "privacy_thresholded_search_demand",
-                "observed_form_normalization"
-        )), "all 66 algorithm categories match the pinned catalogue");
+                "observed_form_normalization",
+                "cross_lingual_embedding_retrieval"
+        )), "all 67 algorithm categories match the pinned catalogue");
         for (String category : List.of("spoken_language_phoneme_morphology_alignment",
                 "medical_translation_regression", "low_resource_african_parallel_corpus",
                 "multi_source_parallel_corpus_provenance", "document_level_translation_regression",
@@ -945,7 +981,8 @@ public final class M3HfLexiconIntakeProof {
                 "unicode_cldr_transliteration_precompute",
                 "orthographic_skeleton_lookup",
                 "privacy_thresholded_search_demand",
-                "observed_form_normalization")) {
+                "observed_form_normalization",
+                "cross_lingual_embedding_retrieval")) {
             String row = lines.stream().skip(1)
                     .filter(line -> category.equals(splitTsv(line)[0]))
                     .findFirst().orElse("");
