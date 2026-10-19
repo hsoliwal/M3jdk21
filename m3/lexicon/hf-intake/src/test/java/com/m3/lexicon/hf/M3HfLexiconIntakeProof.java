@@ -118,6 +118,10 @@ public final class M3HfLexiconIntakeProof {
                 "tico-19-medical-translation", "mafand-mt-african-news",
                 "opus-100-parallel-corpus", "afridoc-mt-health", "multiconer-v2-entities")),
                 "lexicon, grammar, translation, concept, norms, archive, sign and HF leads retained");
+        String cldr = discoveryRecord(lines, "unicode-cldr-48-2");
+        require(cldr.contains("48.2") && cldr.contains("common/transforms")
+                && cldr.contains("not reversible"),
+                "CLDR transform version, source path and non-reversibility caveat remain explicit");
         String idsRecord = lines.stream().skip(1)
                 .filter(line -> "ids-intercontinental-dictionary-series".equals(splitTsv(line)[0]))
                 .findFirst().orElse("");
@@ -363,7 +367,8 @@ public final class M3HfLexiconIntakeProof {
         for (String category : List.of("spoken_language_phoneme_morphology_alignment",
                 "medical_translation_regression", "low_resource_african_parallel_corpus",
                 "multi_source_parallel_corpus_provenance", "document_level_translation_regression",
-                "named_entity_surface_candidate_spans")) {
+                "named_entity_surface_candidate_spans",
+                "unicode_cldr_transliteration_precompute")) {
             String row = lines.stream().skip(1)
                     .filter(line -> category.equals(splitTsv(line)[0]))
                     .findFirst().orElse("");
