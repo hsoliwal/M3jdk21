@@ -167,6 +167,14 @@ public final class M3FilteredSortedSetSlotSelfTest {
                                 () -> reference.add(candidate), "reference rejects hidden add");
                         expect(IllegalArgumentException.class,
                                 () -> m3.add(candidate), "M3 rejects hidden add");
+                    } else if (bounded && candidate == null) {
+                        // The source comparator accepts null, but this live range
+                        // starts at -12. A valid value type is not automatically
+                        // a valid subMap/subSet endpoint.
+                        expect(IllegalArgumentException.class,
+                                () -> reference.add(candidate), "bounded null add rejected by JDK");
+                        expect(IllegalArgumentException.class,
+                                () -> m3.add(candidate), "bounded null add rejected by M3");
                     } else {
                         same(reference.add(candidate), m3.add(candidate), "admitted add");
                     }
