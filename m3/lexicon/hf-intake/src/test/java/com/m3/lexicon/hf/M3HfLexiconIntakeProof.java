@@ -66,7 +66,7 @@ public final class M3HfLexiconIntakeProof {
     private static int verifyLanguageResourceDiscovery() throws IOException {
         List<String> lines = resourceLines(
                 "/com/m3/lexicon/hf/language-resource-discovery.tsv");
-        require(lines.size() == 126, "125 language-resource candidates plus header");
+        require(lines.size() == 135, "134 language-resource candidates plus header");
         List<String> expectedHeader = List.of("source_id", "resource", "category",
                 "data_shape_and_identity", "rights_and_attribution", "m3_candidate_use",
                 "admission_blockers", "state", "evidence");
@@ -214,8 +214,17 @@ public final class M3HfLexiconIntakeProof {
                 "hf-jnext-chinese-word-frequency",
                 "hf-google-books-ngram-pos",
                 "hf-dillm-persian-grammar-corpus",
-                "hf-pashto-grammar-100"
-        )), "exact 125 language-resource source IDs match the pinned catalogue");
+                "hf-pashto-grammar-100",
+                "hf-qor-af-soomaali-frequency",
+                "hf-kablex-kabyle-lexicon",
+                "hf-kabinflect-kabyle-morphology",
+                "hf-hmar-heritage-wordlist",
+                "hf-kencorpus-kenpos",
+                "hf-galahad-dutch-frequency",
+                "hf-sango-vocabulary-grammar",
+                "hf-haajidheere-somali-dictionary",
+                "hf-nltk-word-lists"
+        )), "exact 134 language-resource source IDs match the pinned catalogue");
         String signCompendium = discoveryRecord(lines, "sign-language-dataset-compendium-v1-5");
         require(signCompendium.contains("87") && signCompendium.contains("v1.5.0")
                 && signCompendium.contains("no blanket redistribution grant"),
@@ -250,6 +259,47 @@ public final class M3HfLexiconIntakeProof {
                 && pashtoGrammar.contains("CC BY 4.0")
                 && pashtoGrammar.contains("not comprehensive"),
                 "Pashto grammar QA remains a small fixture, not a full grammar");
+        String qorFrequency = discoveryRecord(lines, "hf-qor-af-soomaali-frequency");
+        require(qorFrequency.contains("8,971") && qorFrequency.contains("36,840")
+                && qorFrequency.contains("v0.2.1") && qorFrequency.contains("v0.4.0")
+                && qorFrequency.contains("CC BY-SA 4.0"),
+                "Somali frequency counts, stale corpus revision and share-alike terms stay explicit");
+        String kabLex = discoveryRecord(lines, "hf-kablex-kabyle-lexicon");
+        require(kabLex.contains("366,892") && kabLex.contains("17,090")
+                && kabLex.contains("per-entry licence") && kabLex.contains("94% of entries"),
+                "Kabyle lexicon scale, per-source rights and verb skew stay explicit");
+        String kabInflect = discoveryRecord(lines, "hf-kabinflect-kabyle-morphology");
+        require(kabInflect.contains("1,323") && kabInflect.contains("33,065")
+                && kabInflect.contains("0% lemma overlap") && kabInflect.contains("emphatic ṛ"),
+                "Kabyle inflection split and orthography limitation stay explicit");
+        String hmar = discoveryRecord(lines, "hf-hmar-heritage-wordlist");
+        require(hmar.contains("43,509") && hmar.contains("dictionary file, id")
+                && hmar.contains("contact information") && hmar.contains("historical print"),
+                "Hmar entry identity, gated access and source-rights caveat stay explicit");
+        String kenpos = discoveryRecord(lines, "hf-kencorpus-kenpos");
+        require(kenpos.contains("Dholuo") && kenpos.contains("Bukusu")
+                && kenpos.contains("Marachi") && kenpos.contains("Lulogooli")
+                && kenpos.contains("sentence_id") && kenpos.contains("CC BY 4.0"),
+                "KenPOS language coverage, occurrence coordinates and license stay explicit");
+        String galahad = discoveryRecord(lines, "hf-galahad-dutch-frequency");
+        require(galahad.contains("14,137") && galahad.contains("390,534")
+                && galahad.contains("share contact information")
+                && galahad.contains("no redistribution license"),
+                "Galahad frequency scale, access gate and unresolved rights stay explicit");
+        String sango = discoveryRecord(lines, "hf-sango-vocabulary-grammar");
+        require(sango.contains("590 vocabulary entries") && sango.contains("13 structured grammar rules")
+                && sango.contains("316 entries") && sango.contains("under review"),
+                "Sango grammar scope and row-level provenance/license disputes stay explicit");
+        String somaliDictionary = discoveryRecord(lines, "hf-haajidheere-somali-dictionary");
+        require(somaliDictionary.contains("239,096") && somaliDictionary.contains("single text field")
+                && somaliDictionary.contains("third-party-origin licensing")
+                && somaliDictionary.contains("ambiguous terms"),
+                "Somali dictionary scale, unstructured shape and rights/identity blockers stay explicit");
+        String nltkLists = discoveryRecord(lines, "hf-nltk-word-lists");
+        require(nltkLists.contains("235,886") && nltkLists.contains("2,809")
+                && nltkLists.contains("configuration-specific")
+                && nltkLists.contains("CC BY-SA 4.0"),
+                "NLTK word-list configurations retain their separate frequency and license semantics");
         String cldr = discoveryRecord(lines, "unicode-cldr-48-2");
         require(cldr.contains("48.2") && cldr.contains("common/transforms")
                 && cldr.contains("not reversible"),
@@ -663,8 +713,8 @@ public final class M3HfLexiconIntakeProof {
         String[] corpusFields = splitTsv(corpusPrecompute);
         require(corpusFields.length == 6 && "EVALUATE_ONLY".equals(corpusFields[3])
                 && corpusFields[1].contains("FineWeb2 v2.1.1")
-                && corpusFields[5].contains("not portable token frequencies")
-                && corpusFields[5].contains("Common Crawl terms"),
+                && corpusFields[4].contains("not interchangeable")
+                && corpusFields[5].contains("review each source's terms"),
                 "FineWeb2 remains an evaluated corpus source, not imported lexical frequency");
         return lines.size() - 1;
     }
