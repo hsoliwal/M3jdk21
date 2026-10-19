@@ -199,14 +199,14 @@ public final class M3AwtViewportList extends Panel implements ItemSelectable {
 	}
 
 	/**
-	 * Switches the selection mode. Leaving multiple mode clears the selection, as the displayed stock list does
-	 * (measured with {@code M3AwtListDifferential} on win32).
+	 * Switches the selection mode. Leaving multiple mode keeps a single selected row and clears a selection of two
+	 * or more rows, as the displayed stock list does (measured with {@code M3AwtListDifferential} on win32).
 	 */
 	public synchronized void setMultipleMode (boolean b) {
 		if (b == multipleMode) return;
 		multipleMode = b;
 		plane.setMultipleMode (b);
-		if (!b) selection.clear ();
+		if (!b && selection.selectedCount () != 1) selection.clear ();
 		syncSelection ();
 	}
 
