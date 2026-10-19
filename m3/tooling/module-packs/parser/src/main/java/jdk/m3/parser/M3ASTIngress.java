@@ -59,8 +59,12 @@ public final class M3ASTIngress {
             factory.setAttribute(XMLConstants.ACCESS_EXTERNAL_SCHEMA, "");
             Document document = factory.newDocumentBuilder().parse(
                     new InputSource(new StringReader(source.text())));
-            if (document.getDocumentElement() == null
-                    || !"project".equals(document.getDocumentElement().getLocalName())) {
+            if (document.getDocumentElement() == null) {
+                throw new IOException("XML input has no Maven POM project root");
+            }
+            String rootName = document.getDocumentElement().getLocalName();
+            if (rootName == null) rootName = document.getDocumentElement().getNodeName();
+            if (!"project".equals(rootName)) {
                 throw new IOException("XML input is not a Maven POM project root");
             }
             String namespace = document.getDocumentElement().getNamespaceURI();
