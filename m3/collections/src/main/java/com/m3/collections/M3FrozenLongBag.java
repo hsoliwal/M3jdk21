@@ -4,93 +4,165 @@
  */
 package com.m3.collections;
 
+import java.util.Arrays;
+import java.util.Objects;
+import java.util.function.LongConsumer;
+
 /**
- * M3 five-library superset scaffold {@code M3FrozenLongBag}: API group {@code FROZEN_LONG_BAG} over arrays and state masks.
+ * Immutable multiset (bag) of {@code long} values: sorted distinct element lane plus parallel occurrence-count lane.
  *
- * <p>Provider lineage (LIBRARY_API_MATRIX.tsv, run 20261017-synexia-to-public/LIB-SUPERSET):
+ * <p>Provider lineage (LIBRARY_API_MATRIX.tsv, run 20261017-synexia-to-public/LIB-SUPERSET, leaf LS2):
  * <ul>
- *   <li>GUAVA ImmutableMultiset: frozen counts; iteration = first-insert order [license Apache-2.0; NEW_OWNER (LS2 family); priority P1; matrix owner PROPOSED:M3FrozenLongBag]</li>
+ *   <li>GUAVA {@code ImmutableMultiset}: {@code size()} = total occurrences, {@code count} = occurrences (0 when
+ *       absent), {@code elementSet().size()} = distinct count, mutators throw {@link UnsupportedOperationException},
+ *       {@code hashCode} = sum of {@code Long.hashCode(element) ^ count}. GUAVA {@code ImmutableSortedMultiset}: ascending
+ *       distinct order and {@code [e x n, ...]} rendering. Insertion order of {@code ImmutableMultiset} is NOT claimed.</li>
  * </ul>
+ * Each provider contract is qualified only against that provider's own oracle; no equivalence is inferred.
  *
- * <p>DOOP mapping: lane kind LONG; lanes {@code long[] elementLane;int[] countLane}; offset scheme sorted element ordinal; count parallel; state-mask bits FROZEN; stored nodes NONE; API entry objects TRANSIENT_FACADE (transient facades over slots, never the stored representation); matrix note: frozen element+count lanes; ordinal offsets / FROZEN=1.
- *
- * <p>Status: SCAFFOLD. Every public atom throws {@link M3NotYetReceived} until this owner is received through a hash-pinned Synexia recipe with its own
- * provider oracle (never inferred from another provider). Not a {@code java.util} replacement.
+ * <p>DOOP mapping: lane kind LONG; {@code elementLane} (sorted distinct) and {@code countLane} (occurrences at the
+ * same ordinal) plus the shared FROZEN owner state word; offsets are sorted ordinals located by binary search. Stored
+ * nodes: NONE; no {@code Multiset.Entry} is stored or created. Per-element allocation: 0 (construction allocates
+ * the lanes; queries, ordinal access and {@code forEachDistinct} allocate nothing). Donor: first-party Synexia
+ * {@code PackedLongBag} / {@code PackedLongSortedBag} counted-lane pattern, adapted. Not a {@code java.util}
+ * replacement.
  */
 public final class M3FrozenLongBag {
-    /** State-mask bit {@code FROZEN} (per-slot state word, bit 0). */
+    /** Owner state bit {@code FROZEN}: every slot of both lanes is immutable. */
     static final long STATE_FROZEN = 1L << 0;
+    private static final long[] EMPTY_ELEMENTS = new long[0];
+    private static final int[] EMPTY_COUNTS = new int[0];
+    private static final long[] FROZEN_STATE = {STATE_FROZEN};
+    private static final M3FrozenLongBag EMPTY = new M3FrozenLongBag();
 
-    /** Storage lane {@code elementLane}: dynamic primitive/reference array lane. */
-    private long[] elementLane = new long[0];
-    /** Storage lane {@code countLane}: dynamic primitive/reference array lane. */
-    private int[] countLane = new int[0];
-    /** Per-slot state words (FROZEN); one bit set per slot and state. */
-    private long[] stateMaskWords = new long[0];
-    /** Live slot count. */
-    private int size;
+    /** Storage lane {@code elementLane}: sorted distinct elements. */
+    private final long[] elementLane;
+    /** Storage lane {@code countLane}: occurrences of the element at the same ordinal (always >= 1). */
+    private final int[] countLane;
+    /** Owner state word (FROZEN); shared, never mutated. */
+    private final long[] stateMaskWords;
+    /** Live slot (distinct element) count. */
+    private final int size;
+    /** Total occurrences across all slots. */
+    private final int total;
 
-    /** Creates an empty scaffold owner; lanes grow by copy once received. */
+    /** Creates an empty frozen bag. */
     public M3FrozenLongBag() {
+        this(EMPTY_ELEMENTS, EMPTY_COUNTS, 0, 0);
+    }
+
+    private M3FrozenLongBag(long[] elementLane, int[] countLane, int size, int total) {
+        this.elementLane = elementLane;
+        this.countLane = countLane;
+        this.stateMaskWords = FROZEN_STATE;
+        this.size = size;
+        this.total = total;
     }
 
     /** Reports the declared state-mask bits and lanes for ledgers; never allocates per element. */
     public static String scaffoldDescriptor() {
-        return "M3FrozenLongBag|FROZEN_LONG_BAG|LONG|FROZEN|long[] elementLane;int[] countLane";
+        return "M3FrozenLongBag|FROZEN_LONG_BAG|LONG|FROZEN|long[] elementLane;int[] countLane|RECEIVED";
     }
 
-    /** Guava ImmutableMultiset.copyOf / EC ImmutableLongBag (scaffold: not yet received). */
+    /** Guava ImmutableMultiset.copyOf: every occurrence counted, source untouched. */
     public static M3FrozenLongBag copyOf(long[] source) {
-        throw new M3NotYetReceived("M3FrozenLongBag.copyOf");
+        Objects.requireNonNull(source, "source");
+        if (source.length == 0) return EMPTY;
+        long[] sorted = source.clone();
+        Arrays.sort(sorted);
+        int[] counts = new int[sorted.length];
+        int distinct = 0;
+        for (int i = 0; i < sorted.length; i++) {
+            if (distinct > 0 && sorted[distinct - 1] == sorted[i]) {
+                counts[distinct - 1]++;
+            } else {
+                sorted[distinct] = sorted[i];
+                counts[distinct++] = 1;
+            }
+        }
+        long[] elements = distinct == sorted.length ? sorted : Arrays.copyOf(sorted, distinct);
+        int[] lane = distinct == counts.length ? counts : Arrays.copyOf(counts, distinct);
+        return new M3FrozenLongBag(elements, lane, distinct, source.length);
     }
 
-    /** Multiset.size (total occurrences) (scaffold: not yet received). */
+    /** Multiset.size: total occurrences. */
     public int size() {
-        throw new M3NotYetReceived("M3FrozenLongBag.size");
+        return total;
     }
 
-    /** Multiset.elementSet().size (scaffold: not yet received). */
+    /** Multiset.elementSet().size: distinct elements. */
     public int distinctSize() {
-        throw new M3NotYetReceived("M3FrozenLongBag.distinctSize");
+        return size;
     }
 
-    /** Multiset.count / Bag.getCount (scaffold: not yet received). */
+    /** Multiset.count: occurrences, 0 when absent. */
     public int occurrencesOf(long element) {
-        throw new M3NotYetReceived("M3FrozenLongBag.occurrencesOf");
+        int index = Arrays.binarySearch(elementLane, 0, size, element);
+        return index >= 0 ? countLane[index] : 0;
     }
 
-    /** Multiset.contains (scaffold: not yet received). */
+    /** Multiset.contains. */
     public boolean contains(long element) {
-        throw new M3NotYetReceived("M3FrozenLongBag.contains");
+        return Arrays.binarySearch(elementLane, 0, size, element) >= 0;
     }
 
-    /** sorted distinct ordinal (scaffold: not yet received). */
+    /** ImmutableSortedMultiset.elementSet().asList().get. */
     public long elementAt(int ordinal) {
-        throw new M3NotYetReceived("M3FrozenLongBag.elementAt");
+        return elementLane[Objects.checkIndex(ordinal, size)];
     }
 
-    /** count parallel to element ordinal (scaffold: not yet received). */
+    /** Occurrences of the element at the ascending distinct ordinal. */
     public int countAt(int ordinal) {
-        throw new M3NotYetReceived("M3FrozenLongBag.countAt");
+        return countLane[Objects.checkIndex(ordinal, size)];
     }
 
-    /** Multiset.elementSet().toArray (scaffold: not yet received). */
+    /** Multiset.elementSet().toArray in ascending order (defensive copy). */
     public long[] distinctToArray() {
-        throw new M3NotYetReceived("M3FrozenLongBag.distinctToArray");
+        return Arrays.copyOf(elementLane, size);
     }
 
-    /** EC forEachWithOccurrences (distinct) (scaffold: not yet received). */
-    public void forEachDistinct(java.util.function.LongConsumer action) {
-        throw new M3NotYetReceived("M3FrozenLongBag.forEachDistinct");
+    /** Distinct elements in ascending order. */
+    public void forEachDistinct(LongConsumer action) {
+        Objects.requireNonNull(action, "action");
+        for (int i = 0; i < size; i++) action.accept(elementLane[i]);
     }
 
-    /** UOE contract once received (scaffold: not yet received). */
+    /** Immutable: always throws {@link UnsupportedOperationException}. */
     public int addOccurrences(long element, int occurrences) {
-        throw new M3NotYetReceived("M3FrozenLongBag.addOccurrences");
+        throw new UnsupportedOperationException("M3FrozenLongBag is immutable");
     }
 
-    /** UOE contract once received (scaffold: not yet received). */
+    /** Immutable: always throws {@link UnsupportedOperationException}. */
     public boolean removeOccurrences(long element, int occurrences) {
-        throw new M3NotYetReceived("M3FrozenLongBag.removeOccurrences");
+        throw new UnsupportedOperationException("M3FrozenLongBag is immutable");
+    }
+
+    /** Equal to another frozen bag with the same element counts. */
+    @Override public boolean equals(Object other) {
+        return other == this || other instanceof M3FrozenLongBag bag
+                && Arrays.equals(elementLane, 0, size, bag.elementLane, 0, bag.size)
+                && Arrays.equals(countLane, 0, size, bag.countLane, 0, bag.size);
+    }
+
+    /** Guava Multiset hash contract: sum of {@code Long.hashCode(element) ^ count}. */
+    @Override public int hashCode() {
+        int hash = 0;
+        for (int i = 0; i < size; i++) hash += Long.hashCode(elementLane[i]) ^ countLane[i];
+        return hash;
+    }
+
+    /** Ascending {@code [e x n, f]} rendering (as ImmutableSortedMultiset). */
+    @Override public String toString() {
+        StringBuilder text = new StringBuilder(size * 6 + 2).append('[');
+        for (int i = 0; i < size; i++) {
+            if (i > 0) text.append(", ");
+            text.append(elementLane[i]);
+            if (countLane[i] != 1) text.append(" x ").append(countLane[i]);
+        }
+        return text.append(']').toString();
+    }
+
+    int stateWord() {
+        return (int) stateMaskWords[0];
     }
 }
