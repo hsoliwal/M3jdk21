@@ -96,6 +96,10 @@ public final class M3CrossFrontendContract {
                 room()), "XXE and DTD must fail closed");
         rejects(IOException.class, () -> M3ASTIngress.mavenPom(
                 source("pom.xml", "<project><a></project>"), room()), "invalid XML must fail");
+        rejects(IOException.class, () -> M3ASTIngress.mavenPom(
+                source("pom.xml", "<notProject/>"), room()), "foreign XML root is not a POM");
+        rejects(IOException.class, () -> M3ASTIngress.mavenPom(
+                source("pom.xml", "<project xmlns=\"urn:foreign\"/>"), room()), "foreign POM namespace");
         rejects(IllegalArgumentException.class, () -> M3ASTIngress.mavenPom(
                 source("pom.xml", pom), new M3ASTIngress.Limits(8, 100, 5)), "source budget");
     }
