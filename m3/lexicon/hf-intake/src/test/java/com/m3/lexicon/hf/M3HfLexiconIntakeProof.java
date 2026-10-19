@@ -66,7 +66,7 @@ public final class M3HfLexiconIntakeProof {
     private static int verifyLanguageResourceDiscovery() throws IOException {
         List<String> lines = resourceLines(
                 "/com/m3/lexicon/hf/language-resource-discovery.tsv");
-        require(lines.size() == 100, "99 language-resource candidates plus header");
+        require(lines.size() == 114, "113 language-resource candidates plus header");
         List<String> expectedHeader = List.of("source_id", "resource", "category",
                 "data_shape_and_identity", "rights_and_attribution", "m3_candidate_use",
                 "admission_blockers", "state", "evidence");
@@ -188,8 +188,22 @@ public final class M3HfLexiconIntakeProof {
                 "mafand-mt-african-news",
                 "opus-100-parallel-corpus",
                 "afridoc-mt-health",
-                "multiconer-v2-entities"
-        )), "exact 99 language-resource source IDs match the pinned catalogue");
+                "multiconer-v2-entities",
+                "google-smol-gatitos",
+                "sprakbanken-flex",
+                "sprakbanken-kubord-lex",
+                "sprakbanken-lexin",
+                "sprakbanken-parole-lexplus",
+                "sprakbanken-swedish-names-2023",
+                "linguabase-english-lexical-graph",
+                "bashkir-frequency-index",
+                "bashkir-word-ngram-index",
+                "eurovoc-4-24",
+                "ufal-morfflex-cz-2-1",
+                "dmii-core-icelandic",
+                "unidic-ja-3-1-0",
+                "taigi-common-use-dictionary"
+        )), "exact 113 language-resource source IDs match the pinned catalogue");
         String cldr = discoveryRecord(lines, "unicode-cldr-48-2");
         require(cldr.contains("48.2") && cldr.contains("common/transforms")
                 && cldr.contains("not reversible"),
@@ -412,6 +426,62 @@ public final class M3HfLexiconIntakeProof {
         require(multiconer.contains("13 configurations") && multiconer.contains("sample IDs")
                 && multiconer.contains("CC BY 4.0") && multiconer.contains("TBD"),
                 "MultiCoNER candidate spans retain IDs, declared terms and provenance gap");
+
+        String gatitos = discoveryRecord(lines, "google-smol-gatitos");
+        require(gatitos.contains("one-to-many") && gatitos.contains("CC BY 4.0")
+                && gatitos.contains("upstream source terms"),
+                "GATITOS translation pairs retain one-to-many shape and upstream-rights caveat");
+        String flex = discoveryRecord(lines, "sprakbanken-flex");
+        require(flex.contains("per million") && flex.contains("novels, newspapers")
+                && flex.contains("CC BY 4.0"),
+                "Flex frequencies preserve corpus domains and attribution");
+        String kubord = discoveryRecord(lines, "sprakbanken-kubord-lex");
+        require(kubord.contains("39,496,308") && kubord.contains("not necessarily unique lemmas"),
+                "Kubord record volume is not misreported as unique lemmas");
+        String lexin = discoveryRecord(lines, "sprakbanken-lexin");
+        require(lexin.contains("second edition") && lexin.contains("29,111")
+                && lexin.contains("CC BY 4.0"),
+                "LEXIN edition, coverage size and license remain pinned");
+        String parole = discoveryRecord(lines, "sprakbanken-parole-lexplus");
+        require(parole.contains("29,621") && parole.contains("JSONL")
+                && parole.contains("wordforms from lemmas"),
+                "Parole+ morphology keeps its release and form/lemma identity");
+        String names = discoveryRecord(lines, "sprakbanken-swedish-names-2023");
+        require(names.contains("160,390") && names.contains("not person identity")
+                && names.contains("CC BY 4.0"),
+                "Swedish name forms are not conflated with people");
+        String linguabase = discoveryRecord(lines, "linguabase-english-lexical-graph");
+        require(linguabase.contains("13-table") && linguabase.contains("CC0")
+                && linguabase.contains("not a canonical universal lexicon"),
+                "Linguabase graph table identities and aggregation caveat remain explicit");
+        String bashkirFrequency = discoveryRecord(lines, "bashkir-frequency-index");
+        require(bashkirFrequency.contains("document-frequency")
+                && bashkirFrequency.contains("upstream source-corpus redistribution rights"),
+                "Bashkir counts preserve field distinctions and source-rights blocker");
+        String bashkirNgrams = discoveryRecord(lines, "bashkir-word-ngram-index");
+        require(bashkirNgrams.contains("unigram/bigram/trigram")
+                && bashkirNgrams.contains("conflict on version and row/count totals"),
+                "Bashkir n-gram release inconsistencies remain a blocker");
+        String eurovoc = discoveryRecord(lines, "eurovoc-4-24");
+        require(eurovoc.contains("4.24") && eurovoc.contains("24 EU official languages")
+                && eurovoc.contains("does not state an asset-level license"),
+                "EuroVoc version, language coverage and missing license remain explicit");
+        String morfflex = discoveryRecord(lines, "ufal-morfflex-cz-2-1");
+        require(morfflex.contains("126,906,921") && morfflex.contains("CC BY-NC-SA 4.0")
+                && morfflex.contains("commercial use"),
+                "MorfFlex scale and noncommercial restriction remain explicit");
+        String dmii = discoveryRecord(lines, "dmii-core-icelandic");
+        require(dmii.contains("CC BY-SA 4.0") && dmii.contains("immutable API release")
+                && dmii.contains("GUID"),
+                "DMII identity, release and share-alike terms remain explicit");
+        String unidic = discoveryRecord(lines, "unidic-ja-3-1-0");
+        require(unidic.contains("3.1.0") && unidic.contains("GPL-2.0")
+                && unidic.contains("component-level"),
+                "UniDic package-specific licenses are not collapsed");
+        String taigi = discoveryRecord(lines, "taigi-common-use-dictionary");
+        require(taigi.contains("14,000") && taigi.contains("CC BY-ND 3.0 Taiwan")
+                && taigi.contains("do not create or redistribute derivatives"),
+                "Taigi no-derivatives term and orthography scope remain explicit");
         return lines.size() - 1;
     }
 

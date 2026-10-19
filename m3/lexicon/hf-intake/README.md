@@ -23,7 +23,9 @@ source Synexia owner. Repeated source rows remain separate stable record IDs
 while the downstream M3LEX image may deduplicate identical UTF-16 values.
 
 The companion `language-resource-discovery.tsv` is a searchable,
-release-aware catalogue of 99 **reference-only** candidates. In addition to
+release-aware catalogue of 113 **reference-only** candidates.
+This pass adds 14 reference-only leads: GATITOS bilingual pairs; Swedish Flex/Kubord frequencies, LEXIN, Parole+ and given-name forms; Linguabase's English lexical graph; Bashkir frequency and n-gram indexes; EuroVoc; Czech MorfFlex; Icelandic DMII; Japanese UniDic; and Taiwan's Taigi dictionary. Every row carries its own version, identity and rights caveats. In particular, noncommercial/share-alike, no-derivatives, component-level licensing, unresolved upstream corpus rights, and release-metadata inconsistencies block payload admission. No data files were downloaded or copied.
+ In addition to
 dictionaries, grammar, translation, frequency, names, units and speech sources,
 it covers metadata discovery (CLARIN VLO, OLAC, ELRA), cross-linguistic concept
 IDs and norms (Concepticon, NoRaRe), basic wordlists (ASJP), colexification and
