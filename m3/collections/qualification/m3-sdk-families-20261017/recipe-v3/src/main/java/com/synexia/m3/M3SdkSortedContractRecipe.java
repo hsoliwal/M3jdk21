@@ -178,8 +178,8 @@ public final class M3SdkSortedContractRecipe {
 
     private static void selfTest() throws Exception {
         Path root = Files.createTempDirectory("m3-sdk-sorted-recipe-");
+        Path file = root.resolve(MAIN + "SelfTestFixture.java");
         try {
-            Path file = root.resolve(MAIN + "SelfTestFixture.java");
             Files.createDirectories(file.getParent());
             String before = "start\n";
             String after = "done\n";
