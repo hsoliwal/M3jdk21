@@ -11,7 +11,9 @@ description: >-
   the same offsets unless M3ListRows hands the decision back to the stock loop. Both blocks run before
   the stock code they replace and fall through to it when the path is off, the UI class is outside
   java.desktop, or cellHeights is null. Default off. Applied by M3PerFileApply; a second pass must
-  report UNCHANGED.
+  report UNCHANGED. Leaf 4 (section 10): one more field, a block at the start of updateLayoutState that
+  takes the row sizes from sun.swing.list.M3ListMeasure (falling through to the stock loop when it declines),
+  and one statement at the start of each ListDataListener method of the Handler that records the event.
 recipeList:
   - com.synexia.openrewrite.viewport.M3AddMemberIfMissing:
       declaringClasses: [javax.swing.plaf.basic.BasicListUI]
