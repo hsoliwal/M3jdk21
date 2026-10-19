@@ -9,7 +9,7 @@ import jdk.internal.util.ArraysSupport;
 import static java.lang.String.LATIN1;
 import static java.lang.String.UTF16;
 
-//FLLDCIM: R5-BUILDER — composite lane first cut (pieces + flat chunks; flatten on read/edit)
+//FLLDCIM: R5-BUILDER \u2014 composite lane first cut (pieces + flat chunks; flatten on read/edit)
 /**
  * Composite lane of an {@link AbstractStringBuilder}: appended M3 Strings are kept as pieces
  * (references to the caller's immutable String plus a packed range) instead of being copied into

@@ -112,13 +112,25 @@ public enum SortAlgorithm {
         this.stable = stable;
     }
 
-    /** Returns this algorithm's problem category. */
+    /**
+     * Returns this algorithm's problem category.
+     *
+     * @return this algorithm's problem category
+     */
     public Family family() { return family; }
 
-    /** Returns whether equal keys are guaranteed to retain their input order. */
+    /**
+     * Returns whether equal keys are guaranteed to retain their input order.
+     *
+     * @return {@code true} if equal keys are guaranteed to retain their input order
+     */
     public boolean isStable() { return stable; }
 
-    /** Returns whether a numeric ordering key is required. */
+    /**
+     * Returns whether a numeric ordering key is required.
+     *
+     * @return {@code true} if this algorithm requires numeric ordering keys
+     */
     public boolean requiresNumericKeys() {
         return family == Family.DISTRIBUTION || family == Family.RADIX;
     }
