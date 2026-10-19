@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "status": "PREPARED_NOT_APPLIED",
+  "status": "SOURCE_RECEIVED_UNQUALIFIED",
   "canonical_commit": "5e972536d98ac7f4aab37fb66333ed4696584bdd",
   "target_baseline": "ffc08348874ffcf3037d1c0dcf02f7685945daea",
   "local_writes": 0,
@@ -20,11 +20,30 @@
     "full_installed_sdk": "NOT_RUN"
   },
   "blockers": [
-    "K free350613504B is below mandatory8589934592B reserve; bounded exception unanswered",
-    "Local operational bridge unavailable; trusted SSH preflight failed",
-    "Hosted workflows queued; no pass inferred"
+    "K remains below mandatory8GiB reserve; prior bounded exception unanswered",
+    "Trusted SSH endpoint unavailable",
+    "Hosted recipe job117937377232 failed with zero executed steps"
   ],
-  "production_source_changed": false,
+  "production_source_changed": true,
   "receiving_phase_advanced": false,
-  "whole_request_complete": false
+  "whole_request_complete": false,
+  "historical_preparation": {
+    "status": "PREPARED_NOT_APPLIED",
+    "production_source_changed": false,
+    "blockers": [
+      "K free350613504B is below mandatory8589934592B reserve; bounded exception unanswered",
+      "Local operational bridge unavailable; trusted SSH preflight failed",
+      "Hosted workflows queued; no pass inferred"
+    ]
+  },
+  "receiving_effect": "EXACT_CANONICAL_RESOURCE_BLOBS_RECEIVED_SERIAL_FILE_COMMITS",
+  "recipe_execution": "NEW_COMPOSITE_SDK_NOT_EXECUTED",
+  "runtime_payload_changed_after_receiving": false,
+  "current_resource_observation": {
+    "K_free_bytes": 7724888064,
+    "S_free_bytes": 18733383680,
+    "reserve_bytes": 8589934592,
+    "native_child_temp": "K:\\codex-work\\agent-temp\\",
+    "local_task_output_bytes": 0
+  }
 }

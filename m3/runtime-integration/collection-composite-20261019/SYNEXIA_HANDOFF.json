@@ -133,6 +133,7 @@
   "canonical_repository": "hsoliwal/com.synexia",
   "canonical_revision": "5e972536d98ac7f4aab37fb66333ed4696584bdd",
   "canonical_pr": "https://github.com/hsoliwal/com.synexia/pull/12474",
-  "receiving_status": "CANDIDATE_PATCH_ONLY_NOT_APPLIED_NOT_ADMITTED",
-  "recipe_application": "NOT_RUN"
+  "receiving_status": "SOURCE_RECEIVED_UNQUALIFIED",
+  "recipe_application": "EXACT_PRIOR_DONOR_POSTIMAGES_RECEIVED_NOT_NEW_COMPOSITE_SDK_EXECUTION",
+  "source_tip": "070d268422f7a2838caa7ac2c3ea52a81c65345e"
 }
