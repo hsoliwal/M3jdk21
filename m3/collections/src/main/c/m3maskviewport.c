@@ -6,6 +6,9 @@
 #include <stdint.h>
 #include <stdlib.h>
 
+/* A transfer bound, never a bound on the caller's logical window. */
+enum { REGION_SIZE = 1024 };
+
 static void raise(JNIEnv *env, const char *type, const char *message) {
     jclass cls = (*env)->FindClass(env, type);
     if (cls != NULL) {
@@ -14,11 +17,19 @@ static void raise(JNIEnv *env, const char *type, const char *message) {
 }
 
 static int matches(jint state, jint required, jint forbidden) {
-    /* Unsigned casts make bit 31 behavior explicit and avoid signed shifts. */
     uint32_t value = (uint32_t) state;
     uint32_t yes = (uint32_t) required;
     uint32_t no = (uint32_t) forbidden;
     return (value & yes) == yes && (value & no) == 0U;
+}
+
+/* Never retain a pin or copy of an entire parent-owned array. */
+static int read_region(JNIEnv *env, jintArray offsets, jintArray flags,
+        jint first, jint length, jint *src, jint *states) {
+    (*env)->GetIntArrayRegion(env, offsets, first, length, src);
+    if ((*env)->ExceptionCheck(env)) return 0;
+    (*env)->GetIntArrayRegion(env, flags, first, length, states);
+    return !(*env)->ExceptionCheck(env);
 }
 
 JNIEXPORT jint JNICALL
@@ -42,58 +53,72 @@ Java_com_m3_collections_M3MaskViewportNative_project(JNIEnv *env, jclass cls,
         raise(env, "java/lang/IndexOutOfBoundsException", "invalid array window");
         return 0;
     }
-    jint *src = (*env)->GetIntArrayElements(env, offsets, NULL);
-    if (src == NULL) {
-        return 0; /* JVM has an exception pending. */
-    }
-    jint *states = (*env)->GetIntArrayElements(env, flags, NULL);
-    if (states == NULL) {
-        (*env)->ReleaseIntArrayElements(env, offsets, src, JNI_ABORT);
-        return 0;
-    }
+    jint src[REGION_SIZE], states[REGION_SIZE], output[REGION_SIZE];
     jint selected = 0;
-    for (jint i = first; i < first + length; ++i) {
-        if (src[i] < 0) {
-            raise(env, "java/lang/IllegalArgumentException", "negative logical offset");
-            goto release;
+    const jint end = first + length;
+    /* Finish every validation before writing, including invalid unselected
+       offsets in later regions and capacity failures after a full scan. */
+    for (jint start = first; start < end;) {
+        jint n = end - start < REGION_SIZE ? end - start : REGION_SIZE;
+        if (!read_region(env, offsets, flags, start, n, src, states)) return 0;
+        for (jint i = 0; i < n; ++i) {
+            if (src[i] < 0) {
+                raise(env, "java/lang/IllegalArgumentException", "negative logical offset");
+                return 0;
+            }
+            if (matches(states[i], required, forbidden)) ++selected;
         }
-        if (matches(states[i], required, forbidden)) {
-            ++selected;
-        }
+        start += n;
     }
     if (selected > outputSize - targetOffset) {
         raise(env, "java/lang/IndexOutOfBoundsException", "destination capacity");
-        goto release;
+        return 0;
     }
-    if (selected == 0) {
-        goto release;
-    }
-    /* Never mutate the destination until every possible input validation
-       has succeeded, including aliasing of target with either input array. */
-    if ((size_t) selected > SIZE_MAX / sizeof(jint)) {
-        raise(env, "java/lang/OutOfMemoryError", "projection size overflow");
-        goto release;
-    }
-    jint *scratch = (jint *) malloc((size_t) selected * sizeof(jint));
-    if (scratch == NULL) {
-        raise(env, "java/lang/OutOfMemoryError", "projection scratch allocation");
-        goto release;
-    }
-    jint cursor = 0;
-    for (jint i = first; i < first + length; ++i) {
-        if (matches(states[i], required, forbidden)) {
-            scratch[cursor++] = src[i];
+    if (selected == 0) return 0;
+
+    /* All sums are bounded by validated array lengths. Disjoint windows on
+       one array are as safe to stream as different destination arrays. */
+    const int overlaps = targetOffset < end && first < targetOffset + selected;
+    const int snapshot = overlaps &&
+            ((*env)->IsSameObject(env, target, offsets) ||
+             (*env)->IsSameObject(env, target, flags));
+    jint *scratch = NULL;
+    if (snapshot) {
+        if ((size_t) selected > SIZE_MAX / sizeof(jint)) {
+            raise(env, "java/lang/OutOfMemoryError", "projection size overflow");
+            return 0;
+        }
+        scratch = (jint *) malloc((size_t) selected * sizeof(jint));
+        if (scratch == NULL) {
+            raise(env, "java/lang/OutOfMemoryError", "projection scratch allocation");
+            return 0;
         }
     }
-    /* Pinned/copy source elements must be released before the writeback,
-       so target-source aliasing does not let an abort undo output. */
-    (*env)->ReleaseIntArrayElements(env, flags, states, JNI_ABORT);
-    (*env)->ReleaseIntArrayElements(env, offsets, src, JNI_ABORT);
-    (*env)->SetIntArrayRegion(env, target, targetOffset, selected, scratch);
-    free(scratch);
+    jint cursor = 0;
+    for (jint start = first; start < end;) {
+        jint n = end - start < REGION_SIZE ? end - start : REGION_SIZE;
+        if (!read_region(env, offsets, flags, start, n, src, states)) {
+            free(scratch);
+            return 0;
+        }
+        jint used = 0;
+        for (jint i = 0; i < n; ++i) {
+            if (matches(states[i], required, forbidden)) {
+                if (snapshot) scratch[cursor + used] = src[i];
+                else output[used] = src[i];
+                ++used;
+            }
+        }
+        if (!snapshot && used != 0) {
+            (*env)->SetIntArrayRegion(env, target, targetOffset + cursor, used, output);
+            if ((*env)->ExceptionCheck(env)) return 0;
+        }
+        cursor += used;
+        start += n;
+    }
+    if (snapshot) {
+        (*env)->SetIntArrayRegion(env, target, targetOffset, selected, scratch);
+        free(scratch);
+    }
     return (*env)->ExceptionCheck(env) ? 0 : selected;
-release:
-    (*env)->ReleaseIntArrayElements(env, flags, states, JNI_ABORT);
-    (*env)->ReleaseIntArrayElements(env, offsets, src, JNI_ABORT);
-    return 0;
 }
