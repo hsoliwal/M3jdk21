@@ -84,6 +84,14 @@ abstract sealed class AbstractStringBuilder implements Appendable, CharSequence
      */
     int count;
 
+    /**
+     * M3 composite lane: appended M3 Strings kept as pieces, not copied. While it is attached,
+     * {@code value}/{@code count} hold only the flat chunks; {@code null} for a stock builder and
+     * always {@code null} when M3 String storage is off.
+     */
+    //FLLDCIM: R5-BUILDER — composite lane field (null unless M3 storage is active)
+    M3StringBuilderLane m3Lane;
+
     private static final byte[] EMPTYVALUE = new byte[0];
 
     /**
@@ -170,13 +178,23 @@ abstract sealed class AbstractStringBuilder implements Appendable, CharSequence
         if (this == another) {
             return 0;
         }
+        m3EnsureFlat();
 
         byte[] val1 = value;
         byte[] val2 = another.value;
         int count1 = this.count;
         int count2 = another.count;
+        byte coder2 = another.coder;
+        //FLLDCIM: R5-BUILDER — detached read of a composite peer (the peer is not locked here)
+        M3StringBuilderLane lane2 = another.m3Lane;
+        if (lane2 != null) {
+            byte flatCoder2 = coder2;
+            coder2 = lane2.logicalCoder(flatCoder2);
+            val2 = lane2.detached(val2, flatCoder2, count2, coder2);
+            count2 += lane2.units;
+        }
 
-        if (coder == another.coder) {
+        if (coder == coder2) {
             return isLatin1() ? StringLatin1.compareTo(val1, val2, count1, count2)
                               : StringUTF16.compareTo(val1, val2, count1, count2);
         }
@@ -192,7 +210,8 @@ abstract sealed class AbstractStringBuilder implements Appendable, CharSequence
      */
     @Override
     public int length() {
-        return count;
+        M3StringBuilderLane lane = m3Lane; //FLLDCIM: R5-BUILDER — pieces + flat chunks
+        return lane == null ? count : count + lane.units;
     }
 
     /**
@@ -203,7 +222,8 @@ abstract sealed class AbstractStringBuilder implements Appendable, CharSequence
      * @return  the current capacity
      */
     public int capacity() {
-        return value.length >> coder;
+        M3StringBuilderLane lane = m3Lane; //FLLDCIM: R5-BUILDER — stock capacity arithmetic
+        return lane == null ? value.length >> coder : lane.virtualCapacity;
     }
 
     /**
@@ -224,6 +244,11 @@ abstract sealed class AbstractStringBuilder implements Appendable, CharSequence
      */
     public void ensureCapacity(int minimumCapacity) {
         if (minimumCapacity > 0) {
+            M3StringBuilderLane lane = m3Lane; //FLLDCIM: R5-BUILDER — logical minimum
+            if (lane != null) {
+                lane.reserveLogical(minimumCapacity, coder);
+                return;
+            }
             ensureCapacityInternal(minimumCapacity);
         }
     }
@@ -236,6 +261,10 @@ abstract sealed class AbstractStringBuilder implements Appendable, CharSequence
      * overflow, this method throws {@code OutOfMemoryError}.
      */
     private void ensureCapacityInternal(int minimumCapacity) {
+        M3StringBuilderLane lane = m3Lane; //FLLDCIM: R5-BUILDER — flat minimum + piece units
+        if (lane != null) {
+            lane.reserve(minimumCapacity, coder);
+        }
         // overflow-conscious code
         int oldCapacity = value.length >> coder;
         if (minimumCapacity - oldCapacity > 0) {
@@ -289,6 +318,7 @@ abstract sealed class AbstractStringBuilder implements Appendable, CharSequence
      * returned by a subsequent call to the {@link #capacity()} method.
      */
     public void trimToSize() {
+        m3EnsureFlat();
         int length = count << coder;
         if (length < value.length) {
             value = Arrays.copyOf(value, length);
@@ -324,6 +354,7 @@ abstract sealed class AbstractStringBuilder implements Appendable, CharSequence
         if (newLength < 0) {
             throw new StringIndexOutOfBoundsException(newLength);
         }
+        m3EnsureFlat();
         ensureCapacityInternal(newLength);
         if (count < newLength) {
             if (isLatin1()) {
@@ -356,6 +387,7 @@ abstract sealed class AbstractStringBuilder implements Appendable, CharSequence
      */
     @Override
     public char charAt(int index) {
+        m3EnsureFlat();
         checkIndex(index, count);
         if (isLatin1()) {
             return (char)(value[index] & 0xff);
@@ -385,6 +417,7 @@ abstract sealed class AbstractStringBuilder implements Appendable, CharSequence
      *             sequence.
      */
     public int codePointAt(int index) {
+        m3EnsureFlat();
         int count = this.count;
         byte[] value = this.value;
         checkIndex(index, count);
@@ -416,6 +449,7 @@ abstract sealed class AbstractStringBuilder implements Appendable, CharSequence
      *            of this sequence.
      */
     public int codePointBefore(int index) {
+        m3EnsureFlat();
         int i = index - 1;
         checkIndex(i, count);
         if (isLatin1()) {
@@ -445,6 +479,7 @@ abstract sealed class AbstractStringBuilder implements Appendable, CharSequence
      * {@code beginIndex} is larger than {@code endIndex}.
      */
     public int codePointCount(int beginIndex, int endIndex) {
+        m3EnsureFlat();
         Preconditions.checkFromToIndex(beginIndex, endIndex, length(), null);
         if (isLatin1()) {
             return endIndex - beginIndex;
@@ -472,6 +507,7 @@ abstract sealed class AbstractStringBuilder implements Appendable, CharSequence
      *   {@code codePointOffset} code points.
      */
     public int offsetByCodePoints(int index, int codePointOffset) {
+        m3EnsureFlat();
         if (index < 0 || index > count) {
             throw new IndexOutOfBoundsException();
         }
@@ -509,6 +545,7 @@ abstract sealed class AbstractStringBuilder implements Appendable, CharSequence
      */
     public void getChars(int srcBegin, int srcEnd, char[] dst, int dstBegin)
     {
+        m3EnsureFlat();
         Preconditions.checkFromToIndex(srcBegin, srcEnd, count, Preconditions.SIOOBE_FORMATTER);  // compatible to old version
         int n = srcEnd - srcBegin;
         Preconditions.checkFromToIndex(dstBegin, dstBegin + n, dst.length, Preconditions.IOOBE_FORMATTER);
@@ -534,6 +571,7 @@ abstract sealed class AbstractStringBuilder implements Appendable, CharSequence
      *             negative or greater than or equal to {@code length()}.
      */
     public void setCharAt(int index, char ch) {
+        m3EnsureFlat();
         checkIndex(index, count);
         if (isLatin1() && StringLatin1.canEncode(ch)) {
             value[index] = (byte)ch;
@@ -584,10 +622,50 @@ abstract sealed class AbstractStringBuilder implements Appendable, CharSequence
             return appendNull();
         }
         int len = str.length();
+        //FLLDCIM: R5-BUILDER — an admitted M3 String above LIFT_UNITS becomes a piece (no copy)
+        if (M3StringBuilderLane.liftable(str, 0, len)) {
+            return m3AppendPiece(str, 0, len);
+        }
         ensureCapacityInternal(count + len);
         putStringAt(count, str);
         count += len;
         return this;
+    }
+
+    /**
+     * Appends {@code s[start, end)} as a composite piece: the caller's immutable String is
+     * referenced, its content is not copied. Callers check {@link M3StringBuilderLane#liftable}.
+     */
+    //FLLDCIM: R5-BUILDER — piece push; creates the lane on first use
+    final AbstractStringBuilder m3AppendPiece(String s, int start, int end) {
+        M3StringBuilderLane lane = m3Lane;
+        if (lane == null) {
+            lane = new M3StringBuilderLane(value.length >> coder);
+            m3Lane = lane;
+        }
+        lane.push(s, start, end - start, count, coder);
+        if (s.coder() == UTF16) {
+            maybeLatin1 = true; // a UTF16 range may hold only Latin-1 chars
+        }
+        return this;
+    }
+
+    /** Materializes a composite builder into the stock flat shape; no-op for a flat builder. */
+    final void m3EnsureFlat() {
+        M3StringBuilderLane lane = m3Lane;
+        if (lane != null) {
+            lane.flatten(this);
+        }
+    }
+
+    /** The composed M3 String of a composite builder, or {@code null} (caller takes the flat path). */
+    final String m3ComposedString() {
+        M3StringBuilderLane lane = m3Lane;
+        if (lane == null) {
+            return null;
+        }
+        M3String composed = lane.compose(value, coder, count);
+        return composed == null ? null : new String(composed);
     }
 
     /**
@@ -683,6 +761,14 @@ abstract sealed class AbstractStringBuilder implements Appendable, CharSequence
         }
         Preconditions.checkFromToIndex(start, end, s.length(), Preconditions.IOOBE_FORMATTER);
         int len = end - start;
+        //FLLDCIM: R5-BUILDER — an M3 range becomes a piece; other sources may read this builder
+        if (s instanceof String str) {
+            if (M3StringBuilderLane.liftable(str, start, end)) {
+                return m3AppendPiece(str, start, end);
+            }
+        } else {
+            m3EnsureFlat();
+        }
         ensureCapacityInternal(count + len);
         if (s instanceof String) {
             appendChars((String)s, start, end);
@@ -923,6 +1009,7 @@ abstract sealed class AbstractStringBuilder implements Appendable, CharSequence
      *             greater than {@code end}.
      */
     public AbstractStringBuilder delete(int start, int end) {
+        m3EnsureFlat();
         int count = this.count;
         if (end > count) {
             end = count;
@@ -981,6 +1068,7 @@ abstract sealed class AbstractStringBuilder implements Appendable, CharSequence
      *              {@code length()}.
      */
     public AbstractStringBuilder deleteCharAt(int index) {
+        m3EnsureFlat();
         checkIndex(index, count);
         shift(index + 1, -1);
         count--;
@@ -1008,6 +1096,7 @@ abstract sealed class AbstractStringBuilder implements Appendable, CharSequence
      *             greater than {@code end}.
      */
     public AbstractStringBuilder replace(int start, int end, String str) {
+        m3EnsureFlat();
         int count = this.count;
         if (end > count) {
             end = count;
@@ -1035,6 +1124,7 @@ abstract sealed class AbstractStringBuilder implements Appendable, CharSequence
      *             less than zero, or greater than the length of this object.
      */
     public String substring(int start) {
+        m3EnsureFlat();
         return substring(start, count);
     }
 
@@ -1083,6 +1173,7 @@ abstract sealed class AbstractStringBuilder implements Appendable, CharSequence
      *             greater than {@code end}.
      */
     public String substring(int start, int end) {
+        m3EnsureFlat();
         Preconditions.checkFromToIndex(start, end, count, Preconditions.SIOOBE_FORMATTER);
         if (isLatin1()) {
             return StringLatin1.newString(value, start, end - start);
@@ -1119,6 +1210,7 @@ abstract sealed class AbstractStringBuilder implements Appendable, CharSequence
     public AbstractStringBuilder insert(int index, char[] str, int offset,
                                         int len)
     {
+        m3EnsureFlat();
         checkOffset(index, count);
         Preconditions.checkFromToIndex(offset, offset + len, str.length, Preconditions.SIOOBE_FORMATTER);
         ensureCapacityInternal(count + len);
@@ -1183,6 +1275,7 @@ abstract sealed class AbstractStringBuilder implements Appendable, CharSequence
      * @throws     StringIndexOutOfBoundsException  if the offset is invalid.
      */
     public AbstractStringBuilder insert(int offset, String str) {
+        m3EnsureFlat();
         checkOffset(offset, count);
         if (str == null) {
             str = "null";
@@ -1220,6 +1313,7 @@ abstract sealed class AbstractStringBuilder implements Appendable, CharSequence
      * @throws     StringIndexOutOfBoundsException  if the offset is invalid.
      */
     public AbstractStringBuilder insert(int offset, char[] str) {
+        m3EnsureFlat();
         checkOffset(offset, count);
         int len = str.length;
         ensureCapacityInternal(count + len);
@@ -1307,6 +1401,7 @@ abstract sealed class AbstractStringBuilder implements Appendable, CharSequence
         if (s == null) {
             s = "null";
         }
+        m3EnsureFlat();
         checkOffset(dstOffset, count);
         Preconditions.checkFromToIndex(start, end, s.length(), Preconditions.IOOBE_FORMATTER);
         int len = end - start;
@@ -1364,6 +1459,7 @@ abstract sealed class AbstractStringBuilder implements Appendable, CharSequence
      * @throws     IndexOutOfBoundsException  if the offset is invalid.
      */
     public AbstractStringBuilder insert(int offset, char c) {
+        m3EnsureFlat();
         checkOffset(offset, count);
         ensureCapacityInternal(count + 1);
         shift(offset, 1);
@@ -1507,6 +1603,7 @@ abstract sealed class AbstractStringBuilder implements Appendable, CharSequence
      *          or {@code -1} if there is no such occurrence.
      */
     public int indexOf(String str, int fromIndex) {
+        m3EnsureFlat(); // M3NotYetReceived: composite search gates over pieces (S2 G25)
         return String.indexOf(value, coder, count, str, fromIndex);
     }
 
@@ -1526,6 +1623,7 @@ abstract sealed class AbstractStringBuilder implements Appendable, CharSequence
      *          or {@code -1} if there is no such occurrence.
      */
     public int lastIndexOf(String str) {
+        m3EnsureFlat();
         return lastIndexOf(str, count);
     }
 
@@ -1547,6 +1645,7 @@ abstract sealed class AbstractStringBuilder implements Appendable, CharSequence
      *          or {@code -1} if there is no such occurrence.
      */
     public int lastIndexOf(String str, int fromIndex) {
+        m3EnsureFlat();
         return String.lastIndexOf(value, coder, count, str, fromIndex);
     }
 
@@ -1573,6 +1672,7 @@ abstract sealed class AbstractStringBuilder implements Appendable, CharSequence
      * @return  a reference to this object.
      */
     public AbstractStringBuilder reverse() {
+        m3EnsureFlat(); // M3NotYetReceived: piece-table reverse
         byte[] val = this.value;
         int count = this.count;
         int n = count - 1;
@@ -1618,6 +1718,13 @@ abstract sealed class AbstractStringBuilder implements Appendable, CharSequence
                     byte[] val = this.value;
                     int count = this.count;
                     byte coder = this.coder;
+                    M3StringBuilderLane lane = this.m3Lane; //FLLDCIM: R5-BUILDER — detached read
+                    if (lane != null) {
+                        byte flatCoder = coder;
+                        coder = lane.logicalCoder(flatCoder);
+                        val = lane.detached(val, flatCoder, count, coder);
+                        count += lane.units;
+                    }
                     return coder == LATIN1
                            ? new StringLatin1.CharsSpliterator(val, 0, count, 0)
                            : new StringUTF16.CharsSpliterator(val, 0, count, 0);
@@ -1642,6 +1749,13 @@ abstract sealed class AbstractStringBuilder implements Appendable, CharSequence
                     byte[] val = this.value;
                     int count = this.count;
                     byte coder = this.coder;
+                    M3StringBuilderLane lane = this.m3Lane; //FLLDCIM: R5-BUILDER — detached read
+                    if (lane != null) {
+                        byte flatCoder = coder;
+                        coder = lane.logicalCoder(flatCoder);
+                        val = lane.detached(val, flatCoder, count, coder);
+                        count += lane.units;
+                    }
                     return coder == LATIN1
                            ? new StringLatin1.CharsSpliterator(val, 0, count, 0)
                            : new StringUTF16.CodePointsSpliterator(val, 0, count, 0);
@@ -1654,6 +1768,7 @@ abstract sealed class AbstractStringBuilder implements Appendable, CharSequence
      * Needed by {@code String} for the contentEquals method.
      */
     final byte[] getValue() {
+        m3EnsureFlat(); //FLLDCIM: R5-BUILDER — package readers (String ctor, contentEquals) see stock shape
         return value;
     }
 
@@ -1665,6 +1780,11 @@ abstract sealed class AbstractStringBuilder implements Appendable, CharSequence
      * @param coder     the coder of dst[]
      */
     void getBytes(byte[] dst, int dstBegin, byte coder) {
+        M3StringBuilderLane lane = m3Lane; //FLLDCIM: R5-BUILDER — copy out, never mutate the source
+        if (lane != null) {
+            lane.copyOut(value, this.coder, count, dst, dstBegin, coder);
+            return;
+        }
         if (this.coder == coder) {
             System.arraycopy(value, 0, dst, dstBegin << coder, count << coder);
         } else {        // this.coder == LATIN && coder == UTF16
@@ -1674,6 +1794,7 @@ abstract sealed class AbstractStringBuilder implements Appendable, CharSequence
 
     /* for readObject() */
     void initBytes(char[] value, int off, int len) {
+        this.m3Lane = null;
         if (String.COMPACT_STRINGS) {
             this.value = StringUTF16.compress(value, off, len);
             if (this.value != null) {
@@ -1744,7 +1865,9 @@ abstract sealed class AbstractStringBuilder implements Appendable, CharSequence
     }
 
     private void inflateIfNeededFor(AbstractStringBuilder input) {
-        if (COMPACT_STRINGS && (coder != input.getCoder())) {
+        M3StringBuilderLane lane = input.m3Lane; //FLLDCIM: R5-BUILDER — logical coder of a composite source
+        byte inputCoder = lane == null ? input.getCoder() : lane.logicalCoder(input.getCoder());
+        if (COMPACT_STRINGS && (coder != inputCoder)) {
             inflate();
         }
     }
@@ -1871,6 +1994,7 @@ abstract sealed class AbstractStringBuilder implements Appendable, CharSequence
      * @return updated accumulation of length and coder
      */
     long mix(long lengthCoder) {
+        m3EnsureFlat();
         return (lengthCoder + count) | ((long)coder << 32);
     }
 
@@ -1884,6 +2008,7 @@ abstract sealed class AbstractStringBuilder implements Appendable, CharSequence
      * @return running accumulation of length and coder minus the number of characters added
      */
     long prepend(long lengthCoder, byte[] buffer) {
+        m3EnsureFlat();
         lengthCoder -= count;
 
         if (lengthCoder < ((long)UTF16 << 32)) {
@@ -1987,6 +2112,9 @@ abstract sealed class AbstractStringBuilder implements Appendable, CharSequence
             return this;
         } else if (length == 1) {
             return repeat(cs.charAt(0), count);
+        }
+        if (!(cs instanceof String) && !(cs instanceof AbstractStringBuilder)) {
+            m3EnsureFlat(); //FLLDCIM: R5-BUILDER — a foreign CharSequence may read this builder
         }
         int offset = this.count;
         int valueLength = length << coder;
