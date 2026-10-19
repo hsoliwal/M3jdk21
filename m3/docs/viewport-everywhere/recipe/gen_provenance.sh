@@ -27,8 +27,8 @@ for module in collections viewport-core; do
         "$(sha256sum "$tfile" | cut -d' ' -f1)"
       printf '     "changes": ["Apache-2.0 header with donor attribution kept", "type rename", "package move", "%s"],\n' \
         "$([ $kind = main ] && echo 'package-private surface made public; SWT.error replaced by the identical IllegalArgumentException' || echo 'reflective class names follow the rename')"
-      printf '     "license": "Apache-2.0 (%s at source; same author)"},\n' \
-        "$([ $cls = PackedHeapGrowth ] && echo 'EPL-2.0 OR Apache-2.0' || echo 'EPL-2.0')"
+      printf '     "license": "Apache-2.0, elected from Apache-2.0 OR EPL-2.0 (extraction header %s; LICENSE_ELECTION.tsv)"},\n' \
+        "$(awk -F'\t' -v c="$cls" '$1 == c {print $4; exit}' "$(dirname "$0")/../LICENSE_ELECTION.tsv")"
     done | sed '$ s/},$/}/'
     printf '  ]\n}\n'
   } > "$out"
