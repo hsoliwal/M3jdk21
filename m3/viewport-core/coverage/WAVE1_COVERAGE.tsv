@@ -7,6 +7,9 @@ com.m3.collections.M3HeapGrowth.new M3HeapGrowth.Sampler() {...}	4	4	0	0
 com.m3.collections.M3LaneGrowth	2	2	2	2
 com.m3.collections.M3OrderStatisticForest	136	136	62	62
 com.m3.collections.M3SparseExtents	172	172	121	122
+com.m3.collections.M3SparseItemStore	175	175	85	86
+com.m3.viewport.M3ListModel	158	158	85	86
+com.m3.viewport.M3ListWidth	224	224	144	144
 com.m3.viewport.M3PlaneGeometry	14	14	22	22
 com.m3.viewport.M3RowWindowPlan	57	57	46	46
 com.m3.viewport.M3ScrollBarGeometry	27	27	34	34

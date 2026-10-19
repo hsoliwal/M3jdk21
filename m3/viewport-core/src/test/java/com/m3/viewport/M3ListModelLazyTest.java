@@ -73,6 +73,7 @@ public class M3ListModelLazyTest {
 		assertThrows (IllegalArgumentException.class, () -> model.indexOf (null, 0));
 		model.select (1);
 		assertTrue (model.isSelected (1));
+		assertFalse (model.isSelected (2));
 		assertFalse (model.isSelected (-1));
 		assertFalse (model.isSelected (4));
 	}

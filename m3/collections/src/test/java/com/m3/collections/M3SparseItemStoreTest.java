@@ -57,6 +57,9 @@ public class M3SparseItemStoreTest {
 		assertEquals ("v5", store.get (6));
 		assertThrows (IllegalArgumentException.class, () -> store.insert (-1, "x"));
 		assertThrows (NullPointerException.class, () -> store.insert (0, null));
+		M3SparseItemStore<String> empty = new M3SparseItemStore<> ();
+		empty.insert (3, "first");
+		assertEquals ("first", empty.get (3), "insert into an empty store");
 		assertEquals ("v9", store.remove (10), "remove the last item: no tail");
 		assertEquals ("new", store.remove (5));
 		assertEquals (List.of (2, 5), indices (store));

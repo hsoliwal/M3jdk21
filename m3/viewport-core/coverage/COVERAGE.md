@@ -12,13 +12,15 @@ reports were written to the regenerable scratch folder and are not committed.
 | 1: ported tests only | 111 | 2159 / 2585 = 83.52% | 1464 / 1952 = 75.00% |
 | 2: + runtime, planner, scroll and block-cache tests | 136 | 2528 / 2585 = 97.79% | 1807 / 1952 = 92.57% |
 | 3: + edge tests | 149 | 2584 / 2585 = 99.96% | 1920 / 1952 = 98.36% |
-| **4: final** | **151** | **2584 / 2585 = 99.96%** | **1933 / 1952 = 99.03%** |
+| 4: wave 1 final (reports on G:, superseded) | 151 | 2584 / 2585 = 99.96% | 1933 / 1952 = 99.03% |
+| **5: waves 1+2, regenerated on S:** | **170** | **3141 / 3142 = 99.97%** | **2247 / 2268 = 99.07%** |
 
-**Gate (99% lines and branches): MET in run 4, re-verification pending.** Run 4: BUILD SUCCESS, 0 failures
-(collections 23 tests, viewport-core 128; test results come from the Maven log on K:). The JaCoCo exec file and the
-CSV/XML reports of runs 1-4 were written to G:, which was later found unhealthy (exFAT dirty bit, random write
-failures, 2026-10-19). The coverage numbers above must be regenerated on a healthy output location before they are
-trusted. Wave 2 (M3ListModel, M3ListWidth, M3SparseItemStore) is not yet measured on a healthy location either.
+**Gate (99% lines and branches): MET (run 5).** Runs 1-4 wrote their JaCoCo exec and reports to G:, which was later
+found unhealthy (exFAT dirty bit, random write failures). Run 5 regenerated everything on `S:/m3-scratch/viewport-everywhere`
+(2026-10-19) after a fresh recipe regeneration (pass 2 UNCHANGED 66/66): BUILD SUCCESS, 170 tests, 0 failures
+(collections 28, viewport-core 142). The wave-1 per-class numbers equal those of run 4. Wave 2 adds M3ListModel,
+M3ListWidth and M3SparseItemStore. Run 5 left two reachable branches uncovered, one each in `M3ListModel.isSelected`
+and `M3SparseItemStore.insert` on an empty store; tests for both were added after run 5.
 
 ## Uncovered spots (1 line, 19 branches): all unreachable, with the reason
 
@@ -37,6 +39,7 @@ trusted. Wave 2 (M3ListModel, M3ListWidth, M3SparseItemStore) is not yet measure
 | M3TreeProjection:349, :385 (the 1 line) | loop exit without `return` | `fillWindow` returns when `written == length`, or throws on overflow |
 | M3TreeTopology:559 | `shifted < Integer.MIN_VALUE` | child indices are never negative and shifts are +1/-1 |
 | M3TreeTopology:601 | inconsistent sibling chain | defensive check: the chain and the sibling forest are updated together |
+| M3ScrollMetrics, others | (run 5) | the same 19 branches and 1 line as above; nothing new is unreachable in wave 2 |
 
 The guards stay: they are the SWT originals copied by recipe, and changing behaviour-bearing code only to raise a
 number is out of scope.
