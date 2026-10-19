@@ -66,7 +66,7 @@ public final class M3HfLexiconIntakeProof {
     private static int verifyLanguageResourceDiscovery() throws IOException {
         List<String> lines = resourceLines(
                 "/com/m3/lexicon/hf/language-resource-discovery.tsv");
-        require(lines.size() == 114, "113 language-resource candidates plus header");
+        require(lines.size() == 117, "113 language-resource candidates plus header");
         List<String> expectedHeader = List.of("source_id", "resource", "category",
                 "data_shape_and_identity", "rights_and_attribution", "m3_candidate_use",
                 "admission_blockers", "state", "evidence");
@@ -202,8 +202,11 @@ public final class M3HfLexiconIntakeProof {
                 "ufal-morfflex-cz-2-1",
                 "dmii-core-icelandic",
                 "unidic-ja-3-1-0",
-                "taigi-common-use-dictionary"
-        )), "exact 113 language-resource source IDs match the pinned catalogue");
+                "taigi-common-use-dictionary",
+                "hf-uzbek-lexicon-skeleton",
+                "hf-khmer-search-frequency",
+                "hf-afri-dict"
+        )), "exact 116 language-resource source IDs match the pinned catalogue");
         String cldr = discoveryRecord(lines, "unicode-cldr-48-2");
         require(cldr.contains("48.2") && cldr.contains("common/transforms")
                 && cldr.contains("not reversible"),
@@ -482,6 +485,20 @@ public final class M3HfLexiconIntakeProof {
         require(taigi.contains("14,000") && taigi.contains("CC BY-ND 3.0 Taiwan")
                 && taigi.contains("do not create or redistribute derivatives"),
                 "Taigi no-derivatives term and orthography scope remain explicit");
+        String uzbek = discoveryRecord(lines, "hf-uzbek-lexicon-skeleton");
+        require(uzbek.contains("4,892,125") && uzbek.contains("23,160,605")
+                && uzbek.contains("4,711,419") && uzbek.contains("CC BY 4.0")
+                && uzbek.contains("no lemmas"),
+                "Uzbek frequency, skeleton, license and surface-form limitations stay distinct");
+        String khmerDemand = discoveryRecord(lines, "hf-khmer-search-frequency");
+        require(khmerDemand.contains("9,428") && khmerDemand.contains("sessions")
+                && khmerDemand.contains("clients") && khmerDemand.contains("not corpus token counts")
+                && khmerDemand.contains("CC BY-SA 4.0"),
+                "Khmer lookup demand is not conflated with token frequency");
+        String afriDict = discoveryRecord(lines, "hf-afri-dict");
+        require(afriDict.contains("67,970") && afriDict.contains("entry_id")
+                && afriDict.contains("MIT") && afriDict.contains("do not reconcile"),
+                "Afri-Dict keeps donor identity and unresolved count/rights caveats");
         return lines.size() - 1;
     }
 
@@ -493,7 +510,7 @@ public final class M3HfLexiconIntakeProof {
         require(Files.isRegularFile(catalogue), "algorithm catalogue exists at Maven invocation root");
         if (!Files.isRegularFile(catalogue)) return 0;
         List<String> lines = Files.readAllLines(catalogue, StandardCharsets.UTF_8);
-        require(lines.size() == 64, "63 algorithm patterns plus header");
+        require(lines.size() == 66, "63 algorithm patterns plus header");
         List<String> header = List.of("problem_category", "discovery_source", "candidate",
                 "decision", "owner_or_reason", "qualification");
         require(!lines.isEmpty() && List.of(splitTsv(lines.getFirst())).equals(header),
@@ -570,13 +587,17 @@ public final class M3HfLexiconIntakeProof {
                 "multi_source_parallel_corpus_provenance",
                 "document_level_translation_regression",
                 "named_entity_surface_candidate_spans",
-                "unicode_cldr_transliteration_precompute"
-        )), "all 63 algorithm categories match the pinned catalogue");
+                "unicode_cldr_transliteration_precompute",
+                "orthographic_skeleton_lookup",
+                "privacy_thresholded_search_demand"
+        )), "all 65 algorithm categories match the pinned catalogue");
         for (String category : List.of("spoken_language_phoneme_morphology_alignment",
                 "medical_translation_regression", "low_resource_african_parallel_corpus",
                 "multi_source_parallel_corpus_provenance", "document_level_translation_regression",
                 "named_entity_surface_candidate_spans",
-                "unicode_cldr_transliteration_precompute")) {
+                "unicode_cldr_transliteration_precompute",
+                "orthographic_skeleton_lookup",
+                "privacy_thresholded_search_demand")) {
             String row = lines.stream().skip(1)
                     .filter(line -> category.equals(splitTsv(line)[0]))
                     .findFirst().orElse("");
