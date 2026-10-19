@@ -25,6 +25,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import java.util.function.Function;
+import java.util.regex.Pattern;
 
 /**
  * Differential test of the composite builder lane against an independent stock oracle.
@@ -36,7 +37,8 @@ import java.util.function.Function;
  *
  * <p>Deterministic scenario set replayed from apple/swift-collections (Apache-2.0, scenario donor
  * only, no code copied; fork hsoliwal/swift-collections at b905c889ff75; map
- * R2-MEASURED-ROPE/APPLE_TEST_MAP.tsv):
+ * R2-MEASURED-ROPE/APPLE_TEST_MAP.tsv and R5_REPLAY_SCENARIOS.tsv; first-party Java, no Swift code or
+ * sample text copied):
  * R02 TestRope.swift:134 test_build, R09 :286 test_append_item, R10 :305 test_prepend_item,
  * R11 :325 test_insert_item, R12 :351 test_remove_at_index, R13 :376 test_remove_at_inout_index,
  * R14 :404 test_remove_at_position, R15 :429 test_join, R16 :456 test_join_copy_on_write,
@@ -48,12 +50,13 @@ import java.util.function.Function;
  * B37 :1010 testSubstringMutationIndexRounding, B44 :1131 unaligned UTF-16 indices
  * (TestBigString.swift blob e2135faed7c3); S01 SampleStrings.swift:32 multilingual sample
  * (blob 563fb8f87adc); F01 CRLF split across pieces, F02 surrogate pair split across pieces,
- * F03 large random edit scripts vs the stock oracle (R2 additions).</p>
+ * F03 large random edit scripts vs the stock oracle, F05 regex find over the builder (R2 additions).</p>
  */
 public class M3CompositeBuilderTest {
     private static final Method PIECE;
     private static final Field LANE;
     private static final Method STRING_M3;
+    private static final Pattern FIND = Pattern.compile("a[^\\r]{0,3}b|\\r\\n");
     private static long checks;
     private static boolean flagOn;
 
@@ -265,6 +268,7 @@ public class M3CompositeBuilderTest {
     private static void appleScenarios() throws Throwable {
         String sample = sample();
         for (Function<Integer, Sb> kind : kinds()) {
+            chunkBuild(kind);                         // R02, R09 (1000 chunks of i % 4 + 1)
             buildAndAppend(kind, sample);             // R02, R09, B21, B22
             prependAndInsert(kind, sample);           // R10, R11, B24, B25
             removeAtIndex(kind, sample);              // R12, R13, R14
@@ -295,6 +299,20 @@ public class M3CompositeBuilderTest {
             same(s, oracle, "pieces stride");
         }
         return s;
+    }
+
+    private static void chunkBuild(Function<Integer, Sb> kind) throws Throwable {
+        String src = text(new Random(2), 2_500);
+        StringBuilder oracle = new StringBuilder(16);
+        Sb s = kind.apply(16);
+        int at = 0;
+        for (int i = 0; i < 1_000; i++) {
+            int end = at + i % 4 + 1;
+            piece(s, oracle, src, at, end, true);
+            at = end;
+            same(s, oracle, "R02/R09 chunk " + i);
+        }
+        sameContent(s, oracle, "R02/R09");
     }
 
     private static void buildAndAppend(Function<Integer, Sb> kind, String sample) throws Throwable {
@@ -356,7 +374,7 @@ public class M3CompositeBuilderTest {
     private static void join(Function<Integer, Sb> kind, String sample) throws Throwable {
         List<Sb> parts = new ArrayList<>();
         List<StringBuilder> expected = new ArrayList<>();
-        for (int i = 0; i < 400; i++) {
+        for (int i = 0; i < 2_000; i++) {
             StringBuilder o = new StringBuilder(16);
             Sb s = kind.apply(16);
             int start = (i * 7) % (sample.length() - 40);
@@ -478,6 +496,18 @@ public class M3CompositeBuilderTest {
             s.reverse();
             oracle.reverse();
             sameContent(s, oracle, "F02 reverse keeps surrogate pairs");
+            check(s.raw().toString().lines().count() == oracle.toString().lines().count(), "F01 lines across a CRLF seam");
+            // B37: a lone high surrogate ends a piece; a low surrogate inserted right after re-pairs.
+            StringBuilder o2 = new StringBuilder(16);
+            Sb s2 = kind.apply(16);
+            String lone = "edge " + hi;
+            piece(s2, o2, lone, 0, lone.length(), true);
+            check(s2.cs().codePoints().count() == o2.codePoints().count(), "B37 lone high surrogate");
+            piece(s2, o2, loPiece, 0, loPiece.length(), true);
+            check(Character.codePointAt(s2.cs(), 5) == 0x1F600, "B37 re-paired across the seam");
+            s2.insert(6, lo);
+            o2.insert(6, lo);
+            sameContent(s2, o2, "B37 insert after the re-paired seam");
         }
     }
 
@@ -561,6 +591,7 @@ public class M3CompositeBuilderTest {
             check(lastIndexOf(cs, needle, from) == o.lastIndexOf(needle, from), "lastIndexOf");
             check(cs.subSequence(a, b).toString().equals(needle), "subSequence");
         }
+        check(FIND.matcher(cs).find() == FIND.matcher(o).find(), "F05 regex find over the builder");
         int j = r.nextInt(len + 2) - 1;
         check(outcome(() -> cs.subSequence(0, j).length()).equals(outcome(() -> o.subSequence(0, j).length())), "subSequence bounds");
     }
