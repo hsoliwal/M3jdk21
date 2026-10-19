@@ -49,7 +49,7 @@ copied donor code. The first-party original indexed AVL owner is
 selected for its bounded/ranged successor/predecessor properties,
 with no node object or recursion.
 
-## Admission matrix (to be executed)
+## Executed focused Java21/JNI proof (2026-10-19)
 
 - Java 21 strict compiler for M3 collection owners with the new
   standalone selftest and the previous 860,647-check collection/JNI
@@ -63,6 +63,40 @@ with no node object or recursion.
 - JDK runtime image, complete `java.util` suite, JNI/GC,
   M3LFU/pressure and performance/allocations.
 
-Only the first two and existing JNI checks are wired into the
-focused combined workflow at initial PR submission. They are **not**
-represented as passing until GitHub Actions confirms them.
+The exact [combined GitHub Actions run 39200001645](https://github.com/hsoliwal/M3jdk21/actions/runs/39200001645)
+on the revised PR passed both `indexed-owners-and-jni` and
+`actual-javabase` jobs. Strict Java21 compiler, strict C17 native
+compiler, `-Xcheck:jni` and explicit `--native` selection were used.
+
+| Oracle | Checks | Result |
+| --- | ---: | --- |
+| Read-only filtered M3TreeMap | 266,236 | PASS |
+| Mutable filtered M3TreeMap | 478,161 | PASS |
+| Indexed filter+stable sort, Java | 9,962 | PASS |
+| Original deep predicate AVL (100,000 depth) | 3,119 | PASS |
+| **New** read-only and mutable filtered/sorted M3TreeSet | 150,626 | PASS |
+| Indexed filter+stable sort, JNI-required | 19,911 | PASS |
+| Patched actual `java.base` EnumMap | 4,411 | PASS |
+| Patched actual `java.base` IdentityHashMap | 78,847 | PASS |
+| **Total** | **1,011,273** | **PASS** |
+
+Source admission step printed
+`M3_DOOP_SET_SOURCE_SEAL_PASS rows=5` and
+`M3_DOOP_SET_SOURCE_SEAL_REFUSALS_PASS cases=2`.
+The same five product Java blobs were independently checked against
+their matching Synexia canonical source postimages and match byte for
+byte. The sealed JUnit adapter is present, but this targeted CI compiles
+the standalone oracle, not the entire Maven/JUnit reactor.
+
+A historical candidate failed because its differential oracle
+treated a comparator-accepted `null` as insertable into every bounded
+`TreeSet` view. The canonical test was repaired to assert the JDK
+and M3 range exception; the source postimage and SHA-256 manifest
+were regenerated and received. The passing run also covers the
+`SortedSet` overload separately from `NavigableSet`.
+
+**Still open:** executed composite Maven/OpenRewrite fixed-point and
+refusal gates, full M3JDK21 built-image/jtreg, whole-repository GC and
+JNI resource lifetime, M3LFU/pressure, provider integration and
+before/after performance/allocations. Focused Java/native checks
+do not certify those global gates.
