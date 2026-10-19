@@ -3,6 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  * Modified 2026: M3 receiver namespace, runtime-capability dispatch,
  * direct owner membership/removal and single-pass sorted snapshot acquisition.
+ * Modified 2026: restore operation-local callback and delivery state after nested advance.
  */
 package com.m3.collections;
 
@@ -675,6 +676,8 @@ public final class M3CollectionViews {
         @Override
         public boolean tryAdvance(Consumer<? super E> consumer) {
             Objects.requireNonNull(consumer, "action");
+            Consumer<? super E> previousAction = action;
+            boolean previousDelivered = delivered;
             action = consumer;
             delivered = false;
             try {
@@ -683,7 +686,8 @@ public final class M3CollectionViews {
                 }
                 return delivered;
             } finally {
-                action = null;
+                action = previousAction;
+                delivered = previousDelivered;
             }
         }
 
