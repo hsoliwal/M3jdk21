@@ -191,7 +191,10 @@ public final class M3FilteredViews {
             while (cursor.hasNext()) { cursor.next(); count++; }
             return count;
         }
-        @Override public boolean isEmpty() { return !iterator().hasNext(); }
+        @Override public boolean isEmpty() {
+            for (E item : source) if (predicate.test(item)) return false;
+            return true;
+        }
         @Override public boolean contains(Object value) {
             if (membershipView(source) == null) return visible(source, predicate, value);
             // Replay the existing inner membership and outer representative scans in order.
@@ -327,18 +330,6 @@ public final class M3FilteredViews {
             while (iterator.hasNext()) last = iterator.next();
             return last;
         }
-
-        // Keep the reversed half-open/comparator view on the same live backing
-        // owner, but do not expose JDK's reverse wrapper as a mutable boundary.
-        @Override public SortedSet<E> reversed() {
-            return new SortedSetView<>(sorted.reversed(), predicate);
-        }
-
-        // SortedSet's Java 21 default removeFirst/removeLast inspect the
-        // collection before attempting removal. Empty strict read-only views
-        // must refuse mutations without invoking a user predicate.
-        @Override public E removeFirst() { throw readonly(); }
-        @Override public E removeLast() { throw readonly(); }
     }
 
     private static final class NavigableSetView<E> extends SortedSetView<E>
@@ -374,8 +365,11 @@ public final class M3FilteredViews {
                     : (inclusive ? direction <= 0 : direction < 0);
         }
         private E firstVisible(Iterator<E> cursor) {
-            Iterator<E> selected = M3FilteredViews.filtered(cursor, predicate);
-            return selected.hasNext() ? selected.next() : null;
+            while (cursor.hasNext()) {
+                E item = cursor.next();
+                if (predicate.test(item)) return item;
+            }
+            return null;
         }
         private E navigate(E candidate, E query, boolean forward, boolean inclusive) {
             if (candidate == null && !nullIsCandidate(query, forward, inclusive)) return null;
@@ -414,9 +408,6 @@ public final class M3FilteredViews {
         @Override public NavigableSet<E> descendingSet() {
             return new NavigableSetView<>(nav.descendingSet(), predicate);
         }
-        // Preserve NavigableSet's covariant sequenced return type and the
-        // same strict mutation refusal inherited from SortedSetView.
-        @Override public NavigableSet<E> reversed() { return descendingSet(); }
         @Override public Iterator<E> descendingIterator() {
             return filtered(nav.descendingSet().iterator(), predicate);
         }
@@ -454,8 +445,10 @@ public final class M3FilteredViews {
             return count;
         }
         @Override public boolean isEmpty() {
-            return !filtered(sorted.entrySet().iterator(),
-                    item -> predicate.test(item.getKey(), item.getValue())).hasNext();
+            for (Entry<K, V> item : sorted.entrySet()) {
+                if (predicate.test(item.getKey(), item.getValue())) return false;
+            }
+            return true;
         }
         /**
          * Called only after containsKey has established membership. The
@@ -552,9 +545,12 @@ public final class M3FilteredViews {
          * entries are then skipped by iterator advancement instead of repeated lookup.
          */
         private Entry<K, V> firstVisible(Iterator<Entry<K, V>> cursor) {
-            Iterator<Entry<K, V>> selected = M3FilteredViews.filtered(cursor,
-                    entry -> predicate.test(entry.getKey(), entry.getValue()));
-            return selected.hasNext() ? new SimpleImmutableEntry<>(selected.next()) : null;
+            while (cursor.hasNext()) {
+                Entry<K, V> entry = cursor.next();
+                if (predicate.test(entry.getKey(), entry.getValue()))
+                    return new SimpleImmutableEntry<>(entry);
+            }
+            return null;
         }
         /**
          * Do not turn an out-of-range query on a live bounded map into a

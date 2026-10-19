@@ -6,6 +6,8 @@ package com.m3.collections;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.lang.reflect.Array;
@@ -21,8 +23,10 @@ import org.junit.jupiter.api.Test;
 /**
  * Mechanical LEAN guard: logical collection entries are not retained as structural objects.
  *
- * <p>Map.Entry is permitted only as a transient Java API projection. Canonical packed storage must
- * remain payload lanes plus primitive slot/index/topology state.</p>
+ * <p>Canonical packed storage remains payload lanes plus primitive slot/index/topology state.
+ * The incumbent bounded M3SlotMap.entryFacades cache holds only requested live API projections;
+ * detached firstEntry/navigation snapshots remain fresh. Cache bounds and lifecycle are checked
+ * separately from the canonical topology traversal.</p>
  */
 final class M3NoRetainedStructuralEntryTest {
     private static final String PACKAGE = "com.m3.collections.";
@@ -58,15 +62,16 @@ final class M3NoRetainedStructuralEntryTest {
     }
 
     @Test
-    void returnedMapEntriesAreFreshAndNeverRetainedByPackedMapStorage() {
+    void liveEntryFacadesAreBoundedOutsideCanonicalStorageAndSnapshotsStayFresh()
+            throws ReflectiveOperationException {
         var hash = new M3LinkedHashMap<Integer, Integer>();
         hash.put(1, 10);
         hash.put(2, 20);
         Map.Entry<Integer, Integer> hashEntry = hash.entrySet().iterator().next();
         Map.Entry<Integer, Integer> hashEntryAgain = hash.entrySet().iterator().next();
-        assertFalse(
-                hashEntry == hashEntryAgain,
-                "PackedHashMap reused/cached an API Entry object");
+        assertSame(
+                hashEntry, hashEntryAgain,
+                "resident hash entry facade is reused");
         assertFalse(
                 retainsIdentity(hash, hashEntry),
                 "PackedHashMap retained an entry API projection as canonical storage");
@@ -79,9 +84,9 @@ final class M3NoRetainedStructuralEntryTest {
         tree.put(2, 20);
         Map.Entry<Integer, Integer> treeEntry = tree.entrySet().iterator().next();
         Map.Entry<Integer, Integer> treeEntryAgain = tree.entrySet().iterator().next();
-        assertFalse(
-                treeEntry == treeEntryAgain,
-                "PackedTreeMap reused/cached an API Entry object");
+        assertSame(
+                treeEntry, treeEntryAgain,
+                "resident tree entry facade is reused");
         assertFalse(
                 retainsIdentity(tree, treeEntry),
                 "PackedTreeMap retained an entry API projection as canonical storage");
@@ -96,12 +101,51 @@ final class M3NoRetainedStructuralEntryTest {
 
         assertFreshBurst(hash::firstEntry, "hash firstEntry");
         assertFreshBurst(tree::firstEntry, "tree firstEntry");
-        assertFreshBurst(
+        assertFreshBurst(() -> tree.floorEntry(1), "tree floorEntry snapshot");
+        assertCachedBurst(
                 () -> hash.entrySet().iterator().next(),
                 "hash entrySet iterator projection");
-        assertFreshBurst(
+        assertCachedBurst(
                 () -> tree.entrySet().iterator().next(),
                 "tree entrySet iterator projection");
+        assertBoundedFacadeCache(new M3LinkedHashMap<>(), "hash facade cache");
+        assertBoundedFacadeCache(new M3TreeMap<>(), "tree facade cache");
+    }
+
+    private static void assertCachedBurst(
+            Supplier<? extends Map.Entry<?, ?>> supplier, String label) {
+        Map.Entry<?, ?> resident = supplier.get();
+        for (int iteration = 0; iteration < 1_024; iteration++) {
+            assertSame(resident, supplier.get(), label + " must reuse the resident facade");
+        }
+    }
+
+    private static void assertBoundedFacadeCache(M3SlotMap<Integer, Integer> map,
+            String label) throws ReflectiveOperationException {
+        Field cacheField = M3SlotMap.class.getDeclaredField("entryFacades");
+        assertTrue(cacheField.trySetAccessible(), "cannot inspect explicit facade cache");
+        assertNull(cacheField.get(map), label + " is lazy");
+        for (int key = 0; key < 129; key++) map.put(key, key);
+        assertNull(cacheField.get(map), label + " is not canonical mapping storage");
+        for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
+            assertEquals((Object) entry.getKey(), entry.getValue(), label + " live value");
+            assertFalse(retainsIdentity(map, entry), label + " leaked into canonical topology");
+        }
+        M3LFUCache<?, ?> cache = (M3LFUCache<?, ?>) cacheField.get(map);
+        assertEquals(64, cache.capacity(), label + " incumbent capacity");
+        assertEquals(64, cache.size(), label + " remains bounded after 129 projections");
+        Map.Entry<Integer, Integer> resident = map.entrySet().iterator().next();
+        Integer key = resident.getKey();
+        assertSame(resident, map.entryFacade(key), label + " identity-keyed hit");
+        int cached = cache.size();
+        map.remove(key);
+        assertEquals(cached - 1, cache.size(), label + " removal invalidates resident facade");
+        map.put(key, -1);
+        assertNotSame(resident, map.entryFacade(key), label + " reinsertion creates a new facade");
+        assertEquals(64, cache.size(), label + " reinsertion preserves bound");
+        map.clear();
+        assertEquals(0, cache.size(), label + " old cache is cleared");
+        assertNull(cacheField.get(map), label + " owner releases cleared cache");
     }
 
     private static void assertFreshBurst(
@@ -189,7 +233,8 @@ final class M3NoRetainedStructuralEntryTest {
                     return true;
                 }
                 if (element != null
-                        && element.getClass().getName().startsWith(PACKAGE)
+                        && (element.getClass().isArray()
+                            || element.getClass().getName().startsWith(PACKAGE))
                         && retainsIdentity(element, target, seen)) {
                     return true;
                 }
@@ -200,18 +245,29 @@ final class M3NoRetainedStructuralEntryTest {
             return false;
         }
 
-        for (Field field : type.getDeclaredFields()) {
-            if (Modifier.isStatic(field.getModifiers()) || field.getType().isPrimitive()) {
-                continue;
-            }
-            assertTrue(field.trySetAccessible(), () -> "cannot inspect " + type.getName() + "." + field.getName());
-            try {
-                Object retained = field.get(value);
-                if (retained == target || retainsIdentity(retained, target, seen)) {
-                    return true;
+        for (Class<?> declaring = type;
+                declaring != null && declaring.getName().startsWith(PACKAGE);
+                declaring = declaring.getSuperclass()) {
+            for (Field field : declaring.getDeclaredFields()) {
+                if (Modifier.isStatic(field.getModifiers()) || field.getType().isPrimitive()) {
+                    continue;
                 }
-            } catch (IllegalAccessException impossible) {
-                throw new AssertionError(impossible);
+                // Exclude only the explicitly qualified API cache, including when
+                // inherited. All other M3 fields and reference arrays remain traversed.
+                if (field.getDeclaringClass() == M3SlotMap.class
+                        && field.getName().equals("entryFacades")) {
+                    continue;
+                }
+                assertTrue(field.trySetAccessible(),
+                        () -> "cannot inspect " + field.getDeclaringClass().getName() + "." + field.getName());
+                try {
+                    Object retained = field.get(value);
+                    if (retained == target || retainsIdentity(retained, target, seen)) {
+                        return true;
+                    }
+                } catch (IllegalAccessException impossible) {
+                    throw new AssertionError(impossible);
+                }
             }
         }
         return false;

@@ -1,5 +1,6 @@
 /*
  * Copyright 2026 Hitesh Soliwal and contributors
+ * SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
  * SPDX-License-Identifier: Apache-2.0
  */
 package com.m3.collections;
@@ -15,6 +16,7 @@ import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadFactory;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Function;
 import java.util.stream.Stream;
@@ -91,7 +93,8 @@ public final class M3KeyedParallelismPlan<T, K> {
                 T item = iterator.next();
                 K key = keyExtractor.apply(item);
                 int lane = laneFor(key, partitionCount);
-                put(queues.get(lane), new Work<>(submitted, item, false));
+                inFlight -= admit(queues.get(lane), new Work<>(submitted, item, false),
+                        completed, results);
                 submitted++;
                 inFlight++;
             }
@@ -142,6 +145,27 @@ public final class M3KeyedParallelismPlan<T, K> {
         } catch (InterruptedException interrupted) {
             Thread.currentThread().interrupt();
         }
+    }
+
+    /**
+     * Admit one item without hiding a failed lane behind its full input queue.
+     * A one-millisecond wait applies only while that queue is saturated. Polling
+     * completions after the wait observes worker failure without requiring a
+     * mapper to finish when a dequeue has already made lane capacity available.
+     * The returned count releases only already-submitted global admission credits.
+     */
+    private static <T, R> int admit(BlockingQueue<Work<T>> queue, Work<T> work,
+                                    BlockingQueue<Completion<R>> completed,
+                                    OrderedResults<R> results) throws InterruptedException {
+        int drained = 0;
+        while (!queue.offer(work, 1, TimeUnit.MILLISECONDS)) {
+            Completion<R> completion;
+            while ((completion = completed.poll()) != null) {
+                results.accept(completion);
+                drained++;
+            }
+        }
+        return drained;
     }
 
     private static <R> Completion<R> take(BlockingQueue<Completion<R>> queue) throws InterruptedException {

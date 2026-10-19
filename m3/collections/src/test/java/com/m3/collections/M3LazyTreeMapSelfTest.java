@@ -78,8 +78,8 @@ public final class M3LazyTreeMapSelfTest {
         same(identity, snapshot.getValue()); equal(2, calls[0]);
         Object replaced = new Object(); same(identity, view.put(6, replaced));
         same(identity, snapshot.getValue()); same(replaced, map.get(6));
-        Map.Entry<Integer, Object> fresh = view.entrySet().iterator().next();
-        require(live != fresh, "entries are fresh caller projections");
+        Map.Entry<Integer, Object> repeated = view.entrySet().iterator().next();
+        require(live == repeated, "resident live entry facade is reused");
         Object explicit = new Object(); same(identity, live.setValue(explicit)); same(explicit, map.get(7));
         M3Progress progress = M3Progress.of(5); view.preload(progress);
         equal(5, calls[0]); require(progress.isDone(), "bounded preload complete");
