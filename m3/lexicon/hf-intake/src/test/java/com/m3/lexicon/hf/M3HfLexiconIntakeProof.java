@@ -66,7 +66,7 @@ public final class M3HfLexiconIntakeProof {
     private static int verifyLanguageResourceDiscovery() throws IOException {
         List<String> lines = resourceLines(
                 "/com/m3/lexicon/hf/language-resource-discovery.tsv");
-        require(lines.size() == 194, "193 language-resource candidates plus header");
+        require(lines.size() == 199, "198 language-resource candidates plus header");
         List<String> expectedHeader = List.of("source_id", "resource", "category",
                 "data_shape_and_identity", "rights_and_attribution", "m3_candidate_use",
                 "admission_blockers", "state", "evidence");
@@ -282,8 +282,13 @@ public final class M3HfLexiconIntakeProof {
                 "hf-tigre-data-lexicon",
                 "hf-tigre-generated-dictionary",
                 "nict-japanese-english-kyoto-wiki-corpus",
-                "kaggle-google-web-english-frequency-333333"
-        )), "exact 193 language-resource source IDs match the pinned catalogue");
+                "kaggle-google-web-english-frequency-333333",
+                "hf-ratman-african-stopword-frequency",
+                "hf-amharic-gemination-lexicon-v3",
+                "hf-khmer-dictionary-44k",
+                "hf-khpos-seanghay-2023",
+                "hf-sasak-benchmark-100k"
+        )), "exact 198 language-resource source IDs match the pinned catalogue");
         String sindhi = discoveryRecord(lines, "hf-sindhi-open-lexicon");
         require(sindhi.contains("223,342") && sindhi.contains("lexical_id")
                 && sindhi.contains("entry_id") && sindhi.contains("schema casting"),
@@ -312,6 +317,26 @@ public final class M3HfLexiconIntakeProof {
         require(kaggleFrequency.contains("333,333") && kaggleFrequency.contains("no license grant")
                 && kaggleFrequency.contains("no payload download"),
                 "Kaggle frequency lead remains rights-unresolved discovery only");
+        String ratman = discoveryRecord(lines, "hf-ratman-african-stopword-frequency");
+        require(ratman.contains("Lugbarati Official") && ratman.contains("incompatible schemas")
+                && ratman.contains("Apache-2.0"),
+                "Ratman preserves per-language file shapes and the viewer/license caveats");
+        String amharic = discoveryRecord(lines, "hf-amharic-gemination-lexicon-v3");
+        require(amharic.contains("86,022") && amharic.contains("8,506")
+                && amharic.contains("8,526") && amharic.contains("no source-native lexical ID"),
+                "Amharic reading ambiguity and source identity remain explicit");
+        String khmerDictionary = discoveryRecord(lines, "hf-khmer-dictionary-44k");
+        require(khmerDictionary.contains("44,706") && khmerDictionary.contains("not commercial")
+                && khmerDictionary.contains("no source-native stable entry ID"),
+                "Khmer dictionary rights and repeated-headword identity remain gated");
+        String khpos = discoveryRecord(lines, "hf-khpos-seanghay-2023");
+        require(khpos.contains("12,000 sentence records") && khpos.contains("25,626 words")
+                && khpos.contains("CC BY-NC-SA 4.0") && khpos.contains("sentence ID"),
+                "Khmer POS fixture preserves segmentation, tags, and noncommercial terms");
+        String sasak = discoveryRecord(lines, "hf-sasak-benchmark-100k");
+        require(sasak.contains("100,000") && sasak.contains("2,761")
+                && sasak.contains("meaning_id") && sasak.contains("underlying content rights"),
+                "Sasak records preserve dialect/source IDs and block unverified rights");
         String massive = discoveryRecord(lines, "massive-nlu-1-1");
         require(massive.contains("52 languages") && massive.contains("SLURP") && massive.contains("CC BY 4.0")
                 && massive.contains("not a canonical dictionary"),
@@ -891,7 +916,7 @@ public final class M3HfLexiconIntakeProof {
         require(Files.isRegularFile(catalogue), "algorithm catalogue exists at Maven invocation root");
         if (!Files.isRegularFile(catalogue)) return 0;
         List<String> lines = Files.readAllLines(catalogue, StandardCharsets.UTF_8);
-        require(lines.size() == 68, "67 algorithm patterns plus header");
+        require(lines.size() == 69, "68 algorithm patterns plus header");
         List<String> header = List.of("problem_category", "discovery_source", "candidate",
                 "decision", "owner_or_reason", "qualification");
         require(!lines.isEmpty() && List.of(splitTsv(lines.getFirst())).equals(header),
@@ -972,8 +997,9 @@ public final class M3HfLexiconIntakeProof {
                 "orthographic_skeleton_lookup",
                 "privacy_thresholded_search_demand",
                 "observed_form_normalization",
-                "cross_lingual_embedding_retrieval"
-        )), "all 67 algorithm categories match the pinned catalogue");
+                "cross_lingual_embedding_retrieval",
+                "khmer_segmentation_pos_tagging"
+        )), "all 68 algorithm categories match the pinned catalogue");
         for (String category : List.of("spoken_language_phoneme_morphology_alignment",
                 "medical_translation_regression", "low_resource_african_parallel_corpus",
                 "multi_source_parallel_corpus_provenance", "document_level_translation_regression",
@@ -982,13 +1008,24 @@ public final class M3HfLexiconIntakeProof {
                 "orthographic_skeleton_lookup",
                 "privacy_thresholded_search_demand",
                 "observed_form_normalization",
-                "cross_lingual_embedding_retrieval")) {
+                "cross_lingual_embedding_retrieval",
+                "khmer_segmentation_pos_tagging")) {
             String row = lines.stream().skip(1)
                     .filter(line -> category.equals(splitTsv(line)[0]))
                     .findFirst().orElse("");
             require(!row.isEmpty() && "EVALUATE_ONLY".equals(splitTsv(row)[3]),
                     "new dataset pattern remains evaluation-only: " + category);
         }
+        String khmerSegmentation = lines.stream().skip(1)
+                .filter(line -> "khmer_segmentation_pos_tagging".equals(splitTsv(line)[0]))
+                .findFirst().orElse("");
+        String[] khmerSegmentationFields = splitTsv(khmerSegmentation);
+        require(khmerSegmentationFields.length == 6
+                && khmerSegmentationFields[2].contains("CRF")
+                && khmerSegmentationFields[2].contains("trigram HMM")
+                && khmerSegmentationFields[2].contains("RDR")
+                && khmerSegmentationFields[5].contains("boundary precision/recall/F1"),
+                "Khmer sequence-tagging baselines remain an evaluation plan, not an implementation claim");
         String corpusPrecompute = lines.stream().skip(1)
                 .filter(line -> "offline_corpus_frequency_and_ngram_precompute".equals(splitTsv(line)[0]))
                 .findFirst().orElse("");
