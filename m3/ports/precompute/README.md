@@ -155,3 +155,11 @@ java --patch-module java.base=<regex+mindex postimage classes> \
   -cp m3/ports/precompute/target/classes:m3/ports/precompute/target/test-classes \
   com.m3.precompute.M3PatternQueryDifferential
 ```
+
+## Token-aware regex candidate (2026-10-18)
+
+`M3TokenRegex` is an isolated lexer/AST-token matcher over canonical owner references,
+parallel token-kind/atom/mask/UTF-16 offset arrays and a bounded primitive Thompson NFA.
+It does **not** replace `java.util.regex.Pattern`, tokenize source itself, or advance
+String -> arrays -> collections -> AST/compiler receiving order. See
+[Token-aware regex receiver and proof status](docs/TOKEN_AWARE_REGEX_20261018.md).
