@@ -6,6 +6,8 @@
  * @test
  * @summary Exact UTF-16 M3StringPool mapped lexicon hash admission and binary fallback
  * @run main/othervm --add-opens=java.base/java.lang=ALL-UNNAMED M3StringLexiconHashIndexTest
+ * @run main/othervm --add-opens=java.base/java.lang=ALL-UNNAMED -XX:-CompactStrings M3StringLexiconHashIndexTest
+ * @run main/othervm --add-opens=java.base/java.lang=ALL-UNNAMED -Xint M3StringLexiconHashIndexTest
  */
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -37,7 +39,7 @@ public class M3StringLexiconHashIndexTest {
                     byte[].class, int.class, int.class, byte.class);
             FIND_POINTS = method("findCodePoints",
                     int[].class, int.class, int.class, int.class);
-            SLOTS = LEXICON.getDeclaredField("hashSlots");
+            SLOTS = LEXICON.getDeclaredField("exactRows");
             SLOTS.setAccessible(true);
         } catch (ReflectiveOperationException failure) {
             throw new ExceptionInInitializerError(failure);
@@ -115,8 +117,11 @@ public class M3StringLexiconHashIndexTest {
         return file;
     }
 
-    private static void oracle(Object lexicon, List<String> words) throws Exception {
+    private static void oracle(Object lexicon, List<String> words, boolean indexed) throws Exception {
         check(((int[]) SLOTS.get(lexicon)) != null, "bounded primitive table prepared");
+        check(indexed ? ((int[]) SLOTS.get(lexicon)).length > 0
+                        : ((int[]) SLOTS.get(lexicon)).length == 0,
+                indexed ? "prepared exact metadata" : "optional exact metadata unavailable");
         for (int row = 0; row < words.size(); row++) {
             String word = words.get(row);
             check(call(FIND_CHAR, lexicon, word.toCharArray(), 0, word.length()) == row,
@@ -148,16 +153,40 @@ public class M3StringLexiconHashIndexTest {
         }
     }
 
+    private static Object withoutExactIndex(Path image) throws Exception {
+        // Use a fresh parsed owner before any lookup. The actual EMPTY metadata is the
+        // same optional state that a refused index build returns; spelling, facts and
+        // generation stay bound to their validated mapped image.
+        Object lexicon = OPEN.invoke(null, image);
+        Class<?> index = Class.forName("java.lang.M3FrozenLexiconIndex");
+        Method emptyMethod = index.getDeclaredMethod("empty");
+        Method rowsMethod = index.getDeclaredMethod("rows");
+        emptyMethod.setAccessible(true);
+        rowsMethod.setAccessible(true);
+        Object empty = emptyMethod.invoke(null);
+        int[] emptyRows = (int[]) rowsMethod.invoke(empty);
+        Field exactIndex = LEXICON.getDeclaredField("exactIndex");
+        exactIndex.setAccessible(true);
+        exactIndex.set(lexicon, empty);
+        SLOTS.set(lexicon, emptyRows);
+        check(exactIndex.get(lexicon) == empty, "fallback retains actual EMPTY index singleton");
+        check(SLOTS.get(lexicon) == emptyRows && emptyRows.length == 0,
+                "fallback row view aliases actual EMPTY rows");
+        return lexicon;
+    }
+
     public static void main(String[] args) throws Exception {
         List<String> words = spellings();
         Path image = emit(words);
         try {
             Object lexicon = OPEN.invoke(null, image);
-            oracle(lexicon, words);
+            oracle(lexicon, words, true);
+            oracle(withoutExactIndex(image), words, false);
             Path shortImage = emit(words.subList(0, 3));
             try {
-                Object small = OPEN.invoke(null, shortImage);
-                check(SLOTS.get(small) == null, "small lexicon retains binary fallback");
+                Object small = withoutExactIndex(shortImage);
+                check(((int[]) SLOTS.get(small)).length == 0,
+                        "small lexicon retains binary fallback without optional metadata");
                 for (int i = 0; i < 3; i++) {
                     String w = words.get(i);
                     check(call(FIND_CHAR, small, w.toCharArray(), 0, w.length()) == i,

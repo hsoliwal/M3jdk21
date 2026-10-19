@@ -22,11 +22,13 @@ def fail(message: str) -> None:
 
 m3 = read("src/java.base/share/classes/java/lang/M3String.java")
 pool = read("src/java.base/share/classes/java/lang/M3StringPool.java")
+frozen_index = read("src/java.base/share/classes/java/lang/M3FrozenLexiconIndex.java")
 owner = read("src/java.base/share/classes/java/lang/M3StringOwner.java")
 atom = read("src/java.base/share/classes/java/lang/M3StringAtom.java")
 tuple_ = read("src/java.base/share/classes/java/lang/M3StringTuple.java")
 facts = read("src/java.base/share/classes/java/lang/M3StringFacts.java")
 search_precompute = read("src/java.base/share/classes/java/lang/M3StringSearchPrecompute.java")
+precompute_bridge = read("src/java.base/share/classes/java/lang/M3StringPrecomputeBridge.java")
 position_precompute = read("src/java.base/share/classes/java/lang/M3StringPositionPrecompute.java")
 tq = read("src/java.base/share/classes/jdk/internal/mindex/M3TQ.java")
 string = read("src/java.base/share/classes/java/lang/String.java")
@@ -363,7 +365,7 @@ for fragment in [
     "private static int height(M3String value)",
     "private static M3String internTuple(M3String left, M3String right)",
     "private static long tupleRouteKey(",
-    "long routeKey = tupleRouteKey(left, right, javaHash, totalLength, coder);",
+    "Long routeKey = tupleRouteKey(left, right, javaHash, totalLength, coder);",
     "private static char joinedCharAt(M3String left, M3String right, int index)",
     "private static boolean sameLeafSequence(",
     "private static final class LeafCursor",
@@ -516,7 +518,7 @@ for fragment in [
 # fallback. Low-byte collisions may only reduce skips; KMP remains semantic authority.
 for fragment in [
     "int[] skip256 = new int[256];",
-    "skip256[pattern.charAt(index) & 255] = length - 1 - index;",
+    "skip256[units.at(index) & 255] = length - 1 - index;",
     "if (plan.patternLength >= 8)",
     "failedComparisonWork > (long) plan.patternLength + 2L * (at - fromIndex)",
     "return kmp(source, pattern, plan, at, endIndex);",
@@ -530,7 +532,7 @@ for fragment in [
     "private static final int SOURCE_SLOTS = 64;",
     "private static final int MAX_TRIGRAM_SOURCE_UNITS = 32_768;",
     "M3TQ.Facts trigrams;",
-    "M3TQ.precompute(source, MAX_TRIGRAM_SOURCE_UNITS)",
+    "precomputeTrigrams(source, MAX_TRIGRAM_SOURCE_UNITS)",
     "sourceFacts(source).containsAll(plan.trigrams)",
 ]:
     if fragment not in search_precompute:
@@ -570,7 +572,7 @@ for forbidden in [
 for fragment in [
     "final int[] skip256;",
     "Arrays.fill(skip256, Math.max(1, length));",
-    "skip256[pattern.charAt(index) & 255] = length - 1 - index;",
+    "skip256[units.at(index) & 255] = length - 1 - index;",
     "if (plan.patternLength >= 8)",
     "failedComparisonWork > (long) plan.patternLength + 2L * (at - fromIndex)",
     "return kmp(source, pattern, plan, at, endIndex);",
@@ -852,17 +854,17 @@ critical_surfaces = {
     "startsWith": "M3String sourceM3 = m3();",
     "hashCode": "M3String storage = m3();",
     "indexOf(String)": "M3String sourceM3 = m3();",
-    "bounded indexOf(String)": "return sourceM3.indexOf(targetM3, beginIndex, endIndex);",
+    "bounded indexOf(String)": "sourceM3, str, beginIndex, endIndex);",
     "lastIndexOf(String)": "M3String storage = m3();",
-    "prepared reverse search": "return storage.lastIndexOf(target, fromIndex);",
+    "prepared reverse search": "return M3StringPrecomputeBridge.lastIndexOf(storage, str, fromIndex);",
     "replace(char,char)": "M3String replaced = storage.replace(oldChar, newChar);",
     "replace(CharSequence,CharSequence)": "String replaced = m3Replace(storage, trgtStr, targetM3, replStr, replacementM3);",
     "replaceFirst(String,String)": "String replaced = storage.replaceLiteralRegex(this, regex, replacement, true);",
     "replaceAll(String,String)": "String replaced = storage.replaceLiteralRegex(this, regex, replacement, false);",
-    "substring": "return new String(storage.slice(beginIndex, endIndex));",
+    "substring": "return M3StringPrecomputeBridge.substring(storage, beginIndex, endIndex);",
     "concat": "m3Concat(this, str)",
-    "trim": "M3StringFacts facts = storage.facts();",
-    "strip": "facts.stripStart",
+    "trim": "return M3StringPrecomputeBridge.trim(this, storage);",
+    "strip": "return M3StringPrecomputeBridge.strip(this, storage);",
     "stripLeading": "storage.facts().stripStart",
     "stripTrailing": "storage.facts().stripEnd",
     "indexOfNonWhitespace": "storage.facts().stripStart",
@@ -931,8 +933,8 @@ if workflow.count("test/jdk/java/lang/String/M3StringRegexReplacementTest.java")
 # Require the exact comparison after coordinate/hash candidate shortcuts.
 for fragment in [
     "if (leftM3 != null || rightM3 != null)",
-    "leftM3.sameCoordinate(rightM3)",
-    "int difference = charAt(index) - anotherString.charAt(index);",
+    "return M3StringPrecomputeBridge.compareTo(",
+    "this, anotherString, leftM3, rightM3);",
     "if (charAt(toffset + index) != other.charAt(ooffset + index)) return false;",
 ]:
     if fragment not in string:
@@ -944,8 +946,8 @@ for fragment in [
     "IntStream codePointsStream()",
     "private static final class CharsSpliterator implements Spliterator.OfInt",
     "private static final class CodePointsSpliterator implements Spliterator.OfInt",
-    "Character.isLowSurrogate(source.charAt(mid))",
-    "Character.isHighSurrogate(source.charAt(mid - 1))",
+    "Character.isLowSurrogate(units.at(mid))",
+    "Character.isHighSurrogate(units.at(mid - 1))",
     "Character.toCodePoint(first, second)",
 ]:
     if fragment not in m3:
@@ -1069,7 +1071,8 @@ if ("M3String storage = m3();" not in string
 # Once a String is already M3-backed, range preservation is not optional composition.
 # substring must keep the same canonical owner+coordinate regardless of the admission/join gate.
 if ("M3String storage = m3();" not in string
-        or "return new String(storage.slice(beginIndex, endIndex));" not in string):
+        or "return M3StringPrecomputeBridge.substring(storage, beginIndex, endIndex);" not in string
+        or "return new String(source.slice(beginIndex, endIndex));" not in precompute_bridge):
     fail("M3-backed substring no longer preserves canonical owner+coordinate directly")
 
 # M3-backed constructors must store only the empty compatibility sentinel.
@@ -1188,8 +1191,11 @@ if "canonicalize(String.valueOf(mapped))" in m3 or "canonicalize(String.valueOf(
 # VM-local native atoms are weakly indexed and released exactly once when their owners die.
 # Mask Java comments and literals before checking token/brace structure so prose cannot satisfy
 # a lifecycle invariant and braces in strings cannot forge a monitor scope.
-def java_mask_non_code(source: str) -> str:
-    if re.search(r"\\u+[0-9a-fA-F]{4}", source):
+def java_mask_non_code(source: str, *, allow_non_code_unicode: bool = False) -> str:
+    unicode_escapes = {match.start(): int(match.group()[match.group().rfind("u") + 1:], 16)
+                       for match in re.finditer(r"\\u+[0-9a-fA-F]{4}", source)}
+    seen_unicode_escapes = set()
+    if unicode_escapes and not allow_non_code_unicode:
         fail("VM-local M3 pool uses Java Unicode escapes; lifecycle review required")
     chars = list(source)
     state = "code"
@@ -1202,6 +1208,17 @@ def java_mask_non_code(source: str) -> str:
     while index < len(source):
         char = source[index]
         pair = source[index:index + 2]
+        if index in unicode_escapes:
+            unit = unicode_escapes[index]
+            # Unicode translation precedes Java tokenization. Never admit a scope
+            # delimiter or a translated escape inside a quoted literal. Unicode
+            # in identifiers, code, text blocks or skipped escape positions needs
+            # a separate review; the existing String owner uses none of these.
+            if (state not in ("line_comment", "block_comment", "string", "character")
+                    or unit in (0x000A, 0x000D, 0x0022, 0x0027, 0x002A, 0x002F)
+                    or (unit == 0x005C and state not in ("line_comment", "block_comment"))):
+                fail("M3 cursor owner has a structural Java Unicode escape; review required")
+            seen_unicode_escapes.add(index)
         if state == "line_comment":
             blank(index)
             if char == "\n":
@@ -1267,6 +1284,8 @@ def java_mask_non_code(source: str) -> str:
             index += 1
     if state in ("block_comment", "string", "character", "text_block"):
         fail("VM-local M3 pool has unterminated Java comment or literal")
+    if seen_unicode_escapes != set(unicode_escapes):
+        fail("M3 cursor owner has an unreviewed Java Unicode escape position")
     return "".join(chars)
 
 pool_code = java_mask_non_code(pool)
@@ -1410,7 +1429,7 @@ for call in release_calls:
     iterated_bucket_ref = (
         "LocalBucket bucket = LOCAL.computeIfAbsent(fingerprint, ignored -> new LocalBucket());" in prefix
         and normalized_body == (
-            "synchronized(bucket){if(bucket.retired)continue;"
+            "synchronized(bucket){if(bucket.retired)continue;try{"
             "for(Iterator<LocalRef>iterator=bucket.values.iterator();iterator.hasNext();){"
             "LocalRefreference=iterator.next();M3StringAtomexisting=reference.get();"
             "if(existing==null){iterator.remove();"
@@ -1434,6 +1453,178 @@ for call in release_calls:
 if canonical_release_calls != 5 or queued_release_calls != 1:
     fail("VM-local M3 owner-to-bucket release paths changed")
 
+# The frozen index is optional metadata over exact UTF-16 payloads. Check code tokens,
+# not comments, and keep the previous native-owner lifecycle checks above intact.
+def check_pool_precompute(source: str, frozen_index_source: str) -> None:
+    from hashlib import sha256
+    code = java_mask_non_code(source)
+    compact = re.sub(r"\s+", "", code)
+
+    def require(fragment: str, label: str) -> None:
+        if fragment not in compact:
+            fail("M3 pool precompute invariant: " + label)
+
+    def body(signature: str) -> str:
+        start = code.find(signature)
+        if start < 0 or code.find(signature, start + len(signature)) >= 0:
+            fail("M3 pool precompute method missing or duplicated: " + signature)
+        opening = code.find("{", start)
+        closing = java_block_end(code, opening)
+        if opening < 0 or closing < 0:
+            fail("M3 pool precompute method scope invalid: " + signature)
+        return code[opening + 1:closing]
+
+    def normalized(signature: str) -> str:
+        return re.sub(r"\s+", "", body(signature))
+
+    local_helper = normalized("private static void retireEmptyLocalBucket(")
+    if sha256(local_helper.encode("utf-8")).hexdigest() != (
+            'b9c8a1b968d29738855a1b16a9636f932aca5a00e13d49ddcc3b9b6c3ce959d7'):
+        fail("M3 empty local bucket must retire under exact bucket identity")
+    tuple_helper = normalized("private static void retireEmptyTupleBucket(")
+    if sha256(tuple_helper.encode("utf-8")).hexdigest() != (
+            '673217bddf52b9f9c81620ed181923c12dbd6cc392054b326bc604c2fc036d72'):
+        fail("M3 empty tuple bucket must retire under exact bucket identity")
+    require("retireEmptyTupleBucket(LongrouteKey,TupleBucketbucket)",
+            "tuple cleanup reuses its existing boxed map key")
+    require("LongrouteKey=tupleRouteKey(left,right,javaHash,totalLength,coder);",
+            "tuple map key is boxed once before retries and cleanup")
+
+    for signature, retirement in [
+        ("static M3String internCodePoints(", "retireEmptyLocalBucket(fingerprint,bucket);"),
+        ("static M3String internCompactBytes(", "retireEmptyLocalBucket(fingerprint,bucket);"),
+        ("static M3String internLatin1Bytes(", "retireEmptyLocalBucket(fingerprint,bucket);"),
+        ("static M3String internChars(", "retireEmptyLocalBucket(fingerprint,bucket);"),
+        ("static M3String internUnit(", "retireEmptyLocalBucket(fingerprint,bucket);"),
+        ("private static M3String internTuple(", "retireEmptyTupleBucket(routeKey,bucket);"),
+    ]:
+        method = body(signature)
+        monitors = list(re.finditer(r"\bsynchronized\s*\(\s*bucket\s*\)\s*\{", method))
+        if len(monitors) != 1:
+            fail("M3 pool admission monitor changed: " + signature)
+        opening = method.find("{", monitors[0].start())
+        closing = java_block_end(method, opening)
+        monitor = method[opening + 1:closing]
+        if not re.match(r"\s*if\s*\(bucket\.retired\)\s*continue;\s*try\s*\{", monitor):
+            fail("M3 empty bucket retirement must retain the guarded retry before try")
+        try_open = monitor.find("{", monitor.find("try"))
+        try_close = java_block_end(monitor, try_open)
+        remainder = re.sub(r"\s+", "", monitor[try_close + 1:])
+        if remainder != "finally{" + retirement + "}":
+            fail("M3 empty bucket retirement must be unconditional inside the owner monitor")
+    if compact.count("retireEmptyLocalBucket(fingerprint,bucket);") != 5:
+        fail("M3 empty local bucket retirement call paths changed")
+    if compact.count("retireEmptyTupleBucket(routeKey,bucket);") != 1:
+        fail("M3 empty tuple bucket retirement call paths changed")
+
+    for fragment, label in [
+        ("privatefinalint[]exactRows;", "immutable primitive slots"),
+        ("privatefinalbyte[]coders;", "immutable coder rows"),
+        ("privatefinalM3FrozenLexiconIndexexactIndex;", "one frozen index owner"),
+        ("this.exactIndex=M3FrozenLexiconIndex.build(javaHashes,lengths);", "validated primitive hash reuse"),
+        ("this.exactRows=exactIndex.rows();", "same immutable row lane"),
+        ("privatestaticfinallongLATIN1_GEOMETRY=1L<<Integer.SIZE;", "coder geometry bit"),
+    ]:
+        require(fragment, label)
+
+    if sha256(normalized("private static int[] buildExactIndex(").encode("utf-8")).hexdigest() != (
+            'c72607c29367d88b05f518ce743755cfb1e51774f7cb151b2a9b46d2088962cb'):
+        fail("M3 frozen compatibility hook must reuse the same complete index owner")
+    if sha256(normalized("private static byte[] allocateCoders(").encode("utf-8")).hexdigest() != (
+            'bd68f7fee13680a70f29e9c1a7109ecd5ae19b2ae1a865b95bc021409f0c1c05'):
+        fail("M3 coder metadata allocation must retain exact fallback on optional allocation failure")
+    if sha256(normalized("private static byte coderFromGeometry(").encode("utf-8")).hexdigest() != (
+            '46e575d3f427b8c3148f0afb966f49bebb6f33aedfe4470362dfc32650bfbe4d'):
+        fail("M3 prepared coder must honor CompactStrings and validated Latin-1 geometry")
+    if sha256(normalized("private static boolean mappedLatin1(").encode("utf-8")).hexdigest() != (
+            'b57a20a8f8cfcf46f1e05f36df23726bc1fedd6a0a1d140b5f98c181872f7581'):
+        fail("M3 cold mapped coder fallback must preserve endian and exact Latin-1 eligibility")
+    geometry = normalized("private static long scanMappedGeometry(")
+    for fragment in [
+        "intat=byteOffset+(index<<1);",
+        "intfirst=mapped.get(at)&0xff;intsecond=mapped.get(at+1)&0xff;",
+        "charunit=bigEndian?(char)((first<<8)|second):(char)(first|(second<<8));",
+        "hash=31*hash+unit;latin1&=unit<=0xff;",
+        "returnInteger.toUnsignedLong(hash)|(latin1?LATIN1_GEOMETRY:0L);",
+    ]:
+        if fragment not in geometry:
+            fail("M3 mapped coder/hash validation changed: " + fragment)
+    require("longgeometry=scanMappedGeometry(mapped,(int)payload+(offset<<1),length,false);",
+            "M3LEX validated little-endian geometry")
+    require("longgeometry=scanMappedGeometry(map,position+80,units,true);",
+            "SYNARR validated big-endian geometry")
+    require("javaHashes[row]=version==2?mapped.getInt(entry+8):actualHash;",
+            "existing image Java hash authority")
+    require("if(coders!=null)coders[row]=coderFromGeometry(geometry);", "validated coder publication")
+    require("records.add(newint[]{position+80,units,hash,packedRecord});",
+            "shared sorted row coder travels with its record")
+    require("intpackedRecord=position|((geometry&LATIN1_GEOMETRY)!=0L?Integer.MIN_VALUE:0);",
+            "shared record offset packs only validated Latin-1 eligibility")
+    require("ids[i]=r[3]&Integer.MAX_VALUE;", "shared published record identity excludes geometry bit")
+    require("if(coders!=null)coders[i]=String.COMPACT_STRINGS&&r[3]<0?String.LATIN1:String.UTF16;",
+            "shared sorted row coder publication")
+    require("M3StringAtom[]atoms=newM3StringAtom[count];byte[]coders=allocateCoders(count);",
+            "normal mandatory atom lane precedes optional coder allocation")
+    require("M3StringAtom[]atoms=newM3StringAtom[n];byte[]coders=allocateCoders(n);",
+            "shared mandatory atom lane precedes optional coder allocation")
+    require("this.atoms=atoms;this.exactIndex=M3FrozenLexiconIndex.build(javaHashes,lengths);"
+            "this.exactRows=exactIndex.rows();",
+            "mandatory atom lane precedes optional slot allocation")
+    atom_body = normalized("M3StringAtom atom(int row)")
+    if ("coders!=null?coders[row]:String.COMPACT_STRINGS"
+            "&&mappedLatin1(address,lengths[row],bigEndian)?String.LATIN1:String.UTF16") not in atom_body:
+        fail("M3 reverse lookup must use prepared coder or exact CompactStrings-aware scan")
+
+    # Complete scoped bodies below use reviewed normalized SHA-256 admission identities.
+    # Owner/signature/source provenance is recorded in NORMALIZED_BODY_DIGESTS.json.
+    # Bind every caller, key, ambiguous group fallback and exact payload comparison.
+    # The old probe loop now lives in admission: runtime selects one candidate.
+    def require_owned_atom(owner_source: str, signature: str, expected_sha256: str, label: str) -> None:
+        from hashlib import sha256
+        code = java_mask_non_code(owner_source)
+        declaration = r"\s*".join(re.escape(token) for token in signature.split())
+        matches = list(re.finditer(declaration, code))
+        if len(matches) != 1:
+            fail("M3 frozen index lost unique owner declaration: " + label)
+        opening = code.find("{", matches[0].end())
+        if opening < 0 or code[matches[0].end():opening].strip():
+            fail("M3 frozen index declaration boundary changed: " + label)
+        closing = java_block_end(code, opening)
+        if closing < 0:
+            fail("M3 frozen index lost complete owner body: " + label)
+        normalized = re.sub(r"\s+", "", code[opening + 1:closing])
+        if sha256(normalized.encode("utf-8")).hexdigest() != expected_sha256:
+            fail("M3 frozen index control flow changed: " + label)
+
+    require_owned_atom(source, 'int findUnit(char unit)', 'fe4001f3be00b37d062f418271dab4e16ea210f7ce2287c95465d0739c358c7f', 'single unit exact candidate and ambiguous binary fallback')
+
+    require_owned_atom(source, 'int findCodePoints(int[] value, int offset, int count, int utf16Length)', 'a026c5c6650fcfeedb395d2fbdffe984672e111616842bb4d23827d65217d1c3', 'code point UTF-16 key and exact candidate authority')
+
+    require_owned_atom(source, 'int findCompactBytes(byte[] value, int sourceOffset, int logicalLength, byte sourceCoder)', '8170515c3aa375f793e04e35265e8e38e5273c054faf8f8ab4897378a706d416', 'compact source hash, coder and exact candidate authority')
+
+    require_owned_atom(source, 'int findLatin1Bytes(byte[] value, int offset, int logicalLength)', 'a8d50b6d06e3422020e134923170df05450cb6b0ed87638b6d471cac2291a97e', 'Latin-1 delegates the identical compact source range')
+
+    require_owned_atom(source, 'int find(char[] value, int offset, int logicalLength)', 'f058d2dbb64cfe5c7ccae535a3b784748a0483e950845b1f6fdf8c0b1dcae70e', 'char source range, key, ambiguity and exact candidate authority')
+
+    require_owned_atom(source, 'private static Lexicon openFixed(Path path, String fixed) throws IOException', '3e7ed2fdfe2a2d599cca0b24be74303b851c87ba3fbd5414fac7edfbc6adaf20', 'fixed-address SHA pin, direct index admission and unpublished cleanup')
+
+    # This small immutable owner is an explicit admission/runtime contract. It binds
+    # allocation and seed/displacement caps, complete-key grouping, ambiguity bits,
+    # aliased-base rejection, one-candidate addressing and all helper arithmetic.
+    # The constructor and field layout are included; detached good methods cannot qualify.
+    require_owned_atom(frozen_index_source, 'final class M3FrozenLexiconIndex', '32c71137646d36b55d3bc6b6b64cd605175cb019ba4b3924d01bc8d657106de5', "complete frozen displacement index owner")
+
+    if sha256(normalized("private boolean equalsChars(").encode("utf-8")).hexdigest() != (
+            'f15fc968d1250b4e3d2d12b29f1a48283c7ceb67d78d93699fb264eb8e9afe61'):
+        fail("M3 frozen char candidate must compare every exact UTF-16 unit")
+    if sha256(normalized("private boolean equalsCompactBytes(").encode("utf-8")).hexdigest() != (
+            '6b9402fbb3de800aab93f3f15ec5ab917942080178b04db31d8d0338dc4216e4'):
+        fail("M3 frozen compact candidate must compare every exact UTF-16 unit")
+
+
+check_pool_precompute(pool, frozen_index)
+
+
 for required_mechanical_name_mapping in [
     '"source": "com.synexia.indexstring.precompute.MIndexRe2MechanicalFacts"',
     '"source": "com.synexia.indexstring.precompute.MIndexLucenePostingPlan"',
@@ -1444,6 +1635,131 @@ for required_mechanical_name_mapping in [
 ]:
     if required_mechanical_name_mapping not in mapping:
         fail(f"mechanical donor name mapping missing: {required_mechanical_name_mapping}")
+
+# Frozen cursor/bridge refinements keep the original search and String contracts.
+# Bind complete small control-flow atoms after masking non-code; a stale spelling, comment,
+# detached method or fast-path name alone cannot satisfy the refined invariant.
+def check_cursor_refinements(m3: str, search_precompute: str, string: str,
+                             precompute_bridge: str) -> None:
+    sources = {
+        "m3": java_mask_non_code(m3),
+        "search_precompute": java_mask_non_code(search_precompute),
+        "string": java_mask_non_code(string, allow_non_code_unicode=True),
+        "precompute_bridge": java_mask_non_code(precompute_bridge),
+    }
+    compact = {name: re.sub(r"\s+", "", code) for name, code in sources.items()}
+
+    def require_atom(owner: str, signature: str, expected_sha256: str, label: str) -> None:
+        from hashlib import sha256
+        code = compact[owner]
+        declaration = re.sub(r"\s+", "", signature)
+        if code.count(declaration) != 1:
+            fail("M3 cursor refinement lost unique owner declaration: " + label)
+        opening = code.find(declaration) + len(declaration)
+        if opening >= len(code) or code[opening] != "{":
+            fail("M3 cursor refinement changed declaration boundary: " + label)
+        closing = java_block_end(code, opening)
+        if (closing < 0 or sha256(code[opening + 1:closing].encode("utf-8")).hexdigest()
+                != expected_sha256):
+            fail("M3 cursor refinement control flow changed: " + label)
+
+    require_atom('m3', 'static final class CodeUnitCursor', '2c2b4dcf2fa289d87c30d39e465ded6f57a0d3825d79dfc5e7fac08657d2cbe6', 'logical cursor bounds and tuple coordinate descent')
+
+    require_atom('search_precompute', 'static Plan prepare(M3String pattern)', '835ccc22c52012ec5434a5b3d203b31b0757b87921af22caf740bba0041f9a60', 'optional bounded pattern admission')
+
+    require_atom('search_precompute', 'private static Plan prepareAllocated(M3String pattern, int length)', '0b17764e3a1e06448ce5b3cf0ea4c113d9143c5dab93ea12e8bb6a6d7271a910', 'pattern cursor, exact prefix metadata and conservative BMH table')
+
+    require_atom('search_precompute', 'static boolean mayContain(M3String source, Plan plan)', 'c984cf040df4fe87577ccf9a19659dba8c4dd995d1388df777354fad0ab94548', 'optional bounded source trigram filter')
+
+    require_atom('search_precompute', 'private static M3TQ.Facts sourceFacts(M3String source)', '56b9339953f5c255702a478e68bfe9cfc06de59470d95db8d5ea5cd8bcd2b877', 'capped source dispatch and weak coordinate cache')
+
+    require_atom('search_precompute', 'private static M3TQ.Facts precomputeTrigrams(M3String value, int maxUtf16Units)', '8f06da439cfb6cbc45f3064e93525422c8ea1963090572cc152f898790ddf34b', 'trigram cursor view and unchanged caller cap')
+
+    require_atom('search_precompute', 'private static final class CursorCharSequence implements CharSequence', 'ffee73093eff63322b1d83feb95a3149cb8940f5557a619574a7218d28433123', 'temporary cursor view with exact nested offset bounds')
+
+    require_atom('string', 'public int compareTo(String anotherString)', 'fc9fa307680059debb7e613a4febc269049b804652a79b386b9d89f458d6aff4', 'String receiver binding and original flat fallback')
+
+    require_atom('precompute_bridge', 'static int compareTo( String left, String right, M3String leftStorage, M3String rightStorage)', '0992b3ec2598dc7dc05e2fbf4f5926a71a09c4a6a9a9ce2b5ee2550419a5324a', 'coordinate shortcut followed by exact UTF-16 comparison and length fallback')
+
+    require_atom('m3', 'private static final class CodePointsSpliterator implements Spliterator.OfInt', 'ed6d48af66dfddcaf739d9bc332ab0edc9a97692f49f593dfa5115e0e09f8e4a', 'both surrogate split guards, midpoint repair and exact traversal')
+
+
+    if "privatestaticfinalintFLAT_NEEDLE_GATE_UNITS=2048;" not in compact["search_precompute"]:
+        fail("M3 repeated-source flat-needle admission threshold changed")
+
+    require_atom('search_precompute', 'static boolean mayContain(M3String source, String needle)', '046e23cfce239501042ff426e18694e9e26d919183fc3e08489516f453b29cf9', 'flat needle rejection-only trigram gate, bounded source and OOME fallback')
+
+    require_atom('search_precompute', 'private static long trigramKey(String needle, int at)', '4c69bf98ae7389f99d440438b50f599de19ce03709463c348b526baee68f6636', 'exact ordered UTF-16 trigram packing')
+
+    require_atom('search_precompute', 'private static M3TQ.Facts repeatSourceFacts(M3String source)', '939f953f1031b3f29c84fd396822c106d10d524ee1a2088e7b46b5619ab0eafc', 'weak exact-owner coordinate registration then facts construction')
+
+
+
+check_cursor_refinements(m3, search_precompute, string, precompute_bridge)
+
+
+# The remaining critical surfaces dispatch through the same existing internal bridge.
+# Keep both complete caller and callee contracts; an unrelated route mention cannot qualify.
+def check_critical_surface_refinements(m3: str, string: str, precompute_bridge: str) -> None:
+    sources = {"m3": m3, "string": string, "precompute_bridge": precompute_bridge}
+    masked = {name: java_mask_non_code(source, allow_non_code_unicode=(name == "string"))
+              for name, source in sources.items()}
+
+    def require_atom(owner: str, signature: str, expected_sha256: str, empty_returns: int, label: str) -> None:
+        from hashlib import sha256
+        code = masked[owner]
+        declaration = r"\s*".join(re.escape(token) for token in signature.split())
+        matches = list(re.finditer(declaration, code))
+        if len(matches) != 1:
+            fail("M3 critical surface lost unique owner declaration: " + label)
+        opening = code.find("{", matches[0].end())
+        if opening < 0 or code[matches[0].end():opening].strip():
+            fail("M3 critical surface changed declaration boundary: " + label)
+        closing = java_block_end(code, opening)
+        if closing < 0:
+            fail("M3 critical surface lost complete owner body: " + label)
+        body = code[opening + 1:closing]
+        normalized = re.sub(r"\s+", "", body)
+        if sha256(normalized.encode("utf-8")).hexdigest() != expected_sha256:
+            fail("M3 critical surface control flow changed: " + label)
+        # Masked literals alone cannot distinguish an empty result from another String.
+        # Bind every sole-literal return slot to its raw empty literal in this same body.
+        returns = list(re.finditer(r"\breturn(?P<literal>\s+);", body))
+        if len(returns) != empty_returns:
+            fail("M3 critical surface empty-result return slots changed: " + label)
+        raw_body = sources[owner][opening + 1:closing]
+        for result in returns:
+            literal = raw_body[result.start("literal"):result.end("literal")]
+            if not re.fullmatch(r'\s*""\s*', literal):
+                fail("M3 critical surface changed the exact empty String result: " + label)
+
+    require_atom('string', 'static void checkBoundsBeginEnd(int begin, int end, int length)', '649fe826a28888c7bd00b7e59cf33504b021739ef94094b2536396de16d72de5', 0, 'String bounds exception authority')
+
+    require_atom('m3', 'M3String slice(int beginIndex, int endIndex)', 'aa7814035d0aebb50f0d35c681b0007280dc868ddd1dbf1da5c68c11b65169bd', 0, 'logical slice bounds and checked owner-relative origin')
+
+    require_atom('string', 'public int indexOf(String str, int beginIndex, int endIndex)', 'b51f427234ddf52a48dda7ca0490dc792f13a9ea3449d24ffad8d5ed9d3fc77d', 0, 'bounded forward search caller and original flat fallback')
+
+    require_atom('precompute_bridge', 'static int indexOf(M3String source, String target, int fromIndex, int endIndex)', '821943fcae9efd03e6295e5c1e993944762719f38bc33ce81e06227460922ca7', 0, 'bounded forward search exact canonical and mixed routes')
+
+    require_atom('string', 'public int lastIndexOf(String str, int fromIndex)', '6bf0c69153d198435412bb320ad0310e9594e585aead27a8f0efcd8d2aa6dc58', 0, 'reverse search null contract and receiver binding')
+
+    require_atom('precompute_bridge', 'static int lastIndexOf(M3String source, String target, int fromIndex)', '3bc28305117b304972d8b78465bad84de0a62721b4a758395788cfeebf652f53', 0, 'reverse bounds, empty target, exact candidate and canonical reuse')
+
+    require_atom('string', 'public String substring(int beginIndex, int endIndex)', 'c07fc5d6cc36fd2de8ca6d1926613dde91e81d49170e164b954ea2a24f37c59a', 1, 'substring bounds, whole identity, empty result and flat fallback')
+
+    require_atom('precompute_bridge', 'static String substring(M3String source, int beginIndex, int endIndex)', 'e0a434193a2b02623ce041a759ae949e0ae4e8daf850d6272638eac77f5e10c8', 0, 'substring unchanged canonical slice projection')
+
+    require_atom('string', 'public String trim()', 'bd8b5202c4e9f8df9565c95dd8831ec028955fd45b1e413e994f01392572225a', 0, 'trim receiver binding and original flat fallback')
+
+    require_atom('precompute_bridge', 'static String trim(String original, M3String source)', 'b569e3ca77dca7842d4bc2d9e48c6cd68f4de1700968a2268df36fe361929276', 1, 'trim geometry, unchanged identity and empty result')
+
+    require_atom('string', 'public String strip()', '58d83bfa4922c0d4416d81faad686ee6c7661605313401cb77989a82138df52a', 0, 'strip receiver binding and original flat fallback')
+
+    require_atom('precompute_bridge', 'static String strip(String original, M3String source)', 'd502ba811e71e834ec384b8bc15f7dfa4b6f33b0e807c06ee7734bc154161fde', 1, 'Unicode whitespace geometry, unchanged identity and empty result')
+
+
+check_critical_surface_refinements(m3, string, precompute_bridge)
+
 
 # Mapping authority must preserve donor->target lineage and shadow names.
 required_mapping_fragments = [

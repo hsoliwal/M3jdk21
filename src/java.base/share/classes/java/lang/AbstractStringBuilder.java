@@ -89,7 +89,7 @@ abstract sealed class AbstractStringBuilder implements Appendable, CharSequence
      * {@code value}/{@code count} hold only the flat chunks; {@code null} for a stock builder and
      * always {@code null} when M3 String storage is off.
      */
-    //FLLDCIM: R5-BUILDER — composite lane field (null unless M3 storage is active)
+    //FLLDCIM: R5-BUILDER \u2014 composite lane field (null unless M3 storage is active)
     M3StringBuilderLane m3Lane;
 
     private static final byte[] EMPTYVALUE = new byte[0];
@@ -185,7 +185,7 @@ abstract sealed class AbstractStringBuilder implements Appendable, CharSequence
         int count1 = this.count;
         int count2 = another.count;
         byte coder2 = another.coder;
-        //FLLDCIM: R5-BUILDER — detached read of a composite peer (the peer is not locked here)
+        //FLLDCIM: R5-BUILDER \u2014 detached read of a composite peer (the peer is not locked here)
         M3StringBuilderLane lane2 = another.m3Lane;
         if (lane2 != null) {
             byte flatCoder2 = coder2;
@@ -210,7 +210,7 @@ abstract sealed class AbstractStringBuilder implements Appendable, CharSequence
      */
     @Override
     public int length() {
-        M3StringBuilderLane lane = m3Lane; //FLLDCIM: R5-BUILDER — pieces + flat chunks
+        M3StringBuilderLane lane = m3Lane; //FLLDCIM: R5-BUILDER \u2014 pieces + flat chunks
         return lane == null ? count : count + lane.units;
     }
 
@@ -222,7 +222,7 @@ abstract sealed class AbstractStringBuilder implements Appendable, CharSequence
      * @return  the current capacity
      */
     public int capacity() {
-        M3StringBuilderLane lane = m3Lane; //FLLDCIM: R5-BUILDER — stock capacity arithmetic
+        M3StringBuilderLane lane = m3Lane; //FLLDCIM: R5-BUILDER \u2014 stock capacity arithmetic
         return lane == null ? value.length >> coder : lane.virtualCapacity;
     }
 
@@ -244,7 +244,7 @@ abstract sealed class AbstractStringBuilder implements Appendable, CharSequence
      */
     public void ensureCapacity(int minimumCapacity) {
         if (minimumCapacity > 0) {
-            M3StringBuilderLane lane = m3Lane; //FLLDCIM: R5-BUILDER — logical minimum
+            M3StringBuilderLane lane = m3Lane; //FLLDCIM: R5-BUILDER \u2014 logical minimum
             if (lane != null) {
                 lane.reserveLogical(minimumCapacity, coder);
                 return;
@@ -261,7 +261,7 @@ abstract sealed class AbstractStringBuilder implements Appendable, CharSequence
      * overflow, this method throws {@code OutOfMemoryError}.
      */
     private void ensureCapacityInternal(int minimumCapacity) {
-        M3StringBuilderLane lane = m3Lane; //FLLDCIM: R5-BUILDER — flat minimum + piece units
+        M3StringBuilderLane lane = m3Lane; //FLLDCIM: R5-BUILDER \u2014 flat minimum + piece units
         if (lane != null) {
             lane.reserve(minimumCapacity, coder);
         }
@@ -622,7 +622,7 @@ abstract sealed class AbstractStringBuilder implements Appendable, CharSequence
             return appendNull();
         }
         int len = str.length();
-        //FLLDCIM: R5-BUILDER — an admitted M3 String above LIFT_UNITS becomes a piece (no copy)
+        //FLLDCIM: R5-BUILDER \u2014 an admitted M3 String above LIFT_UNITS becomes a piece (no copy)
         if (M3StringBuilderLane.liftable(str, 0, len)) {
             return m3AppendPiece(str, 0, len);
         }
@@ -636,7 +636,7 @@ abstract sealed class AbstractStringBuilder implements Appendable, CharSequence
      * Appends {@code s[start, end)} as a composite piece: the caller's immutable String is
      * referenced, its content is not copied. Callers check {@link M3StringBuilderLane#liftable}.
      */
-    //FLLDCIM: R5-BUILDER — piece push; creates the lane on first use
+    //FLLDCIM: R5-BUILDER \u2014 piece push; creates the lane on first use
     final AbstractStringBuilder m3AppendPiece(String s, int start, int end) {
         M3StringBuilderLane lane = m3Lane;
         if (lane == null) {
@@ -761,7 +761,7 @@ abstract sealed class AbstractStringBuilder implements Appendable, CharSequence
         }
         Preconditions.checkFromToIndex(start, end, s.length(), Preconditions.IOOBE_FORMATTER);
         int len = end - start;
-        //FLLDCIM: R5-BUILDER — an M3 range becomes a piece; other sources may read this builder
+        //FLLDCIM: R5-BUILDER \u2014 an M3 range becomes a piece; other sources may read this builder
         if (s instanceof String str) {
             if (M3StringBuilderLane.liftable(str, start, end)) {
                 return m3AppendPiece(str, start, end);
@@ -1718,7 +1718,7 @@ abstract sealed class AbstractStringBuilder implements Appendable, CharSequence
                     byte[] val = this.value;
                     int count = this.count;
                     byte coder = this.coder;
-                    M3StringBuilderLane lane = this.m3Lane; //FLLDCIM: R5-BUILDER — detached read
+                    M3StringBuilderLane lane = this.m3Lane; //FLLDCIM: R5-BUILDER \u2014 detached read
                     if (lane != null) {
                         byte flatCoder = coder;
                         coder = lane.logicalCoder(flatCoder);
@@ -1749,7 +1749,7 @@ abstract sealed class AbstractStringBuilder implements Appendable, CharSequence
                     byte[] val = this.value;
                     int count = this.count;
                     byte coder = this.coder;
-                    M3StringBuilderLane lane = this.m3Lane; //FLLDCIM: R5-BUILDER — detached read
+                    M3StringBuilderLane lane = this.m3Lane; //FLLDCIM: R5-BUILDER \u2014 detached read
                     if (lane != null) {
                         byte flatCoder = coder;
                         coder = lane.logicalCoder(flatCoder);
@@ -1768,7 +1768,7 @@ abstract sealed class AbstractStringBuilder implements Appendable, CharSequence
      * Needed by {@code String} for the contentEquals method.
      */
     final byte[] getValue() {
-        m3EnsureFlat(); //FLLDCIM: R5-BUILDER — package readers (String ctor, contentEquals) see stock shape
+        m3EnsureFlat(); //FLLDCIM: R5-BUILDER \u2014 package readers (String ctor, contentEquals) see stock shape
         return value;
     }
 
@@ -1780,7 +1780,7 @@ abstract sealed class AbstractStringBuilder implements Appendable, CharSequence
      * @param coder     the coder of dst[]
      */
     void getBytes(byte[] dst, int dstBegin, byte coder) {
-        M3StringBuilderLane lane = m3Lane; //FLLDCIM: R5-BUILDER — copy out, never mutate the source
+        M3StringBuilderLane lane = m3Lane; //FLLDCIM: R5-BUILDER \u2014 copy out, never mutate the source
         if (lane != null) {
             lane.copyOut(value, this.coder, count, dst, dstBegin, coder);
             return;
@@ -1865,7 +1865,7 @@ abstract sealed class AbstractStringBuilder implements Appendable, CharSequence
     }
 
     private void inflateIfNeededFor(AbstractStringBuilder input) {
-        M3StringBuilderLane lane = input.m3Lane; //FLLDCIM: R5-BUILDER — logical coder of a composite source
+        M3StringBuilderLane lane = input.m3Lane; //FLLDCIM: R5-BUILDER \u2014 logical coder of a composite source
         byte inputCoder = lane == null ? input.getCoder() : lane.logicalCoder(input.getCoder());
         if (COMPACT_STRINGS && (coder != inputCoder)) {
             inflate();
@@ -2114,7 +2114,7 @@ abstract sealed class AbstractStringBuilder implements Appendable, CharSequence
             return repeat(cs.charAt(0), count);
         }
         if (!(cs instanceof String) && !(cs instanceof AbstractStringBuilder)) {
-            m3EnsureFlat(); //FLLDCIM: R5-BUILDER — a foreign CharSequence may read this builder
+            m3EnsureFlat(); //FLLDCIM: R5-BUILDER \u2014 a foreign CharSequence may read this builder
         }
         int offset = this.count;
         int valueLength = length << coder;
