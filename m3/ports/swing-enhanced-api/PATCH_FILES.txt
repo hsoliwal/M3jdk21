@@ -1,0 +1,6 @@
+# java.desktop sources of the patch (relative to src/java.desktop/share/classes)
+javax/swing/M3ItemRange.java
+javax/swing/DefaultListSelectionModel.java
+javax/swing/JList.java
+javax/swing/JTable.java
+javax/swing/JTree.java

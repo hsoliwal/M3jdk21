@@ -91,6 +91,25 @@ public class DefaultListSelectionModel implements ListSelectionModel, Cloneable,
     /** {@inheritDoc} */
     public int getMaxSelectionIndex() { return maxIndex; }
 
+    /*
+     * M3 enhanced API (M3ItemRange.ranges): the selected runs, read from the
+     * bit set one run at a time (nextSetBit/nextClearBit), O(runs) words.
+     */
+    M3ItemRange[] m3SelectionRanges() {
+        int[] runs = new int[8];
+        int count = 0;
+        for (int first = value.nextSetBit(0); first >= 0; ) {
+            int end = value.nextClearBit(first);
+            if (count + 2 > runs.length) {
+                runs = java.util.Arrays.copyOf(runs, runs.length * 2);
+            }
+            runs[count++] = first;
+            runs[count++] = end - 1;
+            first = value.nextSetBit(end);
+        }
+        return M3ItemRange.fromRuns(runs, count);
+    }
+
     /** {@inheritDoc} */
     public boolean getValueIsAdjusting() { return isAdjusting; }
 

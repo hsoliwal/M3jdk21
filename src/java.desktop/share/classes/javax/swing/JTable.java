@@ -53,6 +53,7 @@ import java.beans.BeanProperty;
 import java.beans.JavaBean;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.beans.Transient;
 import java.io.IOException;
 import java.io.InvalidObjectException;
 import java.io.ObjectInputStream;
@@ -2332,6 +2333,63 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
     @BeanProperty(bound = false)
     public int[] getSelectedRows() {
         return selectionModel.getSelectedIndices();
+    }
+
+    /**
+     * Returns the selected rows (view indices) as ranges: ascending, disjoint
+     * and not adjacent. A selection of a million consecutive rows is one
+     * range. With the default selection model the runs are read from its bit
+     * set, without listing the rows.
+     *
+     * @return the selected row ranges, or an empty array if no row is selected
+     * @see #setSelectionRanges(M3ItemRange[])
+     * @since 21
+     */
+    @Transient
+    public M3ItemRange[] getSelectionRanges() {
+        return M3ItemRange.ranges(selectionModel);
+    }
+
+    /**
+     * Replaces the row selection with the given ranges of view rows, as one
+     * change: listeners receive a single non-adjusting {@code valueChanged}.
+     * Ranges are added with {@code addSelectionInterval}, so the selection
+     * mode of the model applies; empty ranges are ignored. The column
+     * selection is not changed.
+     *
+     * @param ranges the row ranges to select
+     * @throws NullPointerException if the array or an element is null
+     * @throws IllegalArgumentException if a range ends at or beyond {@link #getRowCount()}
+     * @see #getSelectionRanges()
+     * @since 21
+     */
+    @BeanProperty(bound = false, description
+            = "The selected rows, as ranges.")
+    public void setSelectionRanges(M3ItemRange[] ranges) {
+        M3ItemRange.select(selectionModel, ranges, getRowCount());
+    }
+
+    /**
+     * Returns the view rows that are at least partly inside the visible
+     * rectangle of the table.
+     *
+     * @return the visible rows, empty when no row is visible
+     * @see #getVisibleRect()
+     * @since 21
+     */
+    @BeanProperty(bound = false)
+    public M3ItemRange getVisibleRange() {
+        Rectangle visible = getVisibleRect();
+        int count = getRowCount();
+        if (count == 0 || visible.isEmpty()) {
+            return M3ItemRange.EMPTY;
+        }
+        int first = rowAtPoint(new Point(0, visible.y));
+        if (first < 0) {
+            return M3ItemRange.EMPTY;
+        }
+        int last = rowAtPoint(new Point(0, visible.y + visible.height - 1));
+        return M3ItemRange.of(first, last < 0 ? count - 1 : last);
     }
 
     /**

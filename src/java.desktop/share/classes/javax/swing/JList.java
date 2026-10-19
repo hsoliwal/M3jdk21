@@ -2210,6 +2210,55 @@ public class JList<E> extends JComponent implements Scrollable, Accessible
         return getSelectionModel().getSelectedIndices();
     }
 
+    /**
+     * Returns the selected indices as ranges: ascending, disjoint and not
+     * adjacent. A selection of a million consecutive indices is one range.
+     * With the default selection model the runs are read from its bit set,
+     * without listing the indices.
+     *
+     * @return the selected ranges, or an empty array if nothing is selected
+     * @see #setSelectionRanges(M3ItemRange[])
+     * @see M3ItemRange#coalesce(int[])
+     * @since 21
+     */
+    @Transient
+    public M3ItemRange[] getSelectionRanges() {
+        return M3ItemRange.ranges(getSelectionModel());
+    }
+
+    /**
+     * Replaces the selection with the given ranges, as one change: listeners
+     * receive a single non-adjusting {@code valueChanged}. Ranges are added
+     * with {@code addSelectionInterval}, so the selection mode of the model
+     * applies; empty ranges are ignored.
+     *
+     * @param ranges the ranges to select
+     * @throws NullPointerException if the array or an element is null
+     * @throws IllegalArgumentException if a range ends at or beyond the model size
+     * @see #getSelectionRanges()
+     * @since 21
+     */
+    @BeanProperty(bound = false, description
+            = "The selected indices, as ranges.")
+    public void setSelectionRanges(M3ItemRange[] ranges) {
+        M3ItemRange.select(getSelectionModel(), ranges, getModel().getSize());
+    }
+
+    /**
+     * Returns the indices of the cells that are at least partly visible: from
+     * {@link #getFirstVisibleIndex()} to {@link #getLastVisibleIndex()}. For a
+     * multi-column layout ({@code VERTICAL_WRAP}, {@code HORIZONTAL_WRAP}) the
+     * range spans every index between the two.
+     *
+     * @return the visible range, empty when no cell is visible
+     * @since 21
+     */
+    @BeanProperty(bound = false)
+    public M3ItemRange getVisibleRange() {
+        int first = getFirstVisibleIndex();
+        return first < 0 ? M3ItemRange.EMPTY : M3ItemRange.of(first, getLastVisibleIndex());
+    }
+
 
     /**
      * Selects a single cell. Does nothing if the given index is greater

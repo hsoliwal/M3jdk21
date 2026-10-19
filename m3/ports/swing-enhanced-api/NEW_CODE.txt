@@ -1,0 +1,12 @@
+# new code measured for coverage: <class> * (whole class) or <class> <method>
+javax/swing/M3ItemRange *
+javax/swing/DefaultListSelectionModel m3SelectionRanges
+javax/swing/JList getSelectionRanges
+javax/swing/JList setSelectionRanges
+javax/swing/JList getVisibleRange
+javax/swing/JTable getSelectionRanges
+javax/swing/JTable setSelectionRanges
+javax/swing/JTable getVisibleRange
+javax/swing/JTree getSelectionRanges
+javax/swing/JTree setSelectionRanges
+javax/swing/JTree getVisibleRange

@@ -45,6 +45,7 @@ import java.beans.ConstructorProperties;
 import java.beans.JavaBean;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.beans.Transient;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -1940,6 +1941,90 @@ public class JTree extends JComponent implements Scrollable, Accessible
      */
     public int[] getSelectionRows() {
         return getSelectionModel().getSelectionRows();
+    }
+
+    /**
+     * Returns the selected rows as ranges: ascending, disjoint and not
+     * adjacent. Selected paths that are not visible (a collapsed ancestor)
+     * have no row and are not included.
+     *
+     * @return the selected row ranges, or an empty array if no visible row is selected
+     * @see #setSelectionRanges(M3ItemRange[])
+     * @since 21
+     */
+    @Transient
+    public M3ItemRange[] getSelectionRanges() {
+        int[] rows = getSelectionRows();
+        if (rows == null) {
+            rows = new int[0];
+        }
+        int visible = 0;
+        for (int row : rows) {
+            if (row >= 0) {
+                rows[visible++] = row;
+            }
+        }
+        return M3ItemRange.coalesce(java.util.Arrays.copyOf(rows, visible));
+    }
+
+    /**
+     * Replaces the selection with the paths of the given row ranges, as one
+     * change: listeners receive a single {@code valueChanged}. The selection
+     * mode of the selection model applies; empty ranges are ignored.
+     *
+     * @param ranges the row ranges to select
+     * @throws NullPointerException if the array or an element is null
+     * @throws IllegalArgumentException if a range ends at or beyond {@link #getRowCount()}
+     * @see #getSelectionRanges()
+     * @since 21
+     */
+    @BeanProperty(bound = false, description
+            = "The selected rows, as ranges.")
+    public void setSelectionRanges(M3ItemRange[] ranges) {
+        int rowCount = getRowCount();
+        int count = 0;
+        for (M3ItemRange range : ranges) {
+            if (!range.isEmpty() && range.end() >= rowCount) {
+                throw new IllegalArgumentException("range " + range + " beyond row count " + rowCount);
+            }
+            count += range.size();
+        }
+        TreePath[] paths = new TreePath[count];
+        int next = 0;
+        for (M3ItemRange range : ranges) {
+            for (int row = range.start(); row <= range.end(); row++) {
+                paths[next++] = getPathForRow(row);
+            }
+        }
+        setSelectionPaths(paths);
+    }
+
+    /**
+     * Returns the rows that are at least partly inside the visible rectangle
+     * of the tree.
+     *
+     * @return the visible rows, empty when no row is visible
+     * @see #getVisibleRect()
+     * @since 21
+     */
+    @BeanProperty(bound = false)
+    public M3ItemRange getVisibleRange() {
+        Rectangle visible = getVisibleRect();
+        int count = getRowCount();
+        if (count == 0 || visible.isEmpty()) {
+            return M3ItemRange.EMPTY;
+        }
+        int first = getClosestRowForLocation(visible.x, visible.y);
+        Rectangle bounds = getRowBounds(first);
+        if (bounds != null && bounds.y + bounds.height <= visible.y) {
+            first++;
+        }
+        int last = getClosestRowForLocation(visible.x, visible.y + visible.height - 1);
+        bounds = getRowBounds(last);
+        if (bounds != null && bounds.y >= visible.y + visible.height) {
+            last--;
+        }
+        return first < 0 || first >= count ? M3ItemRange.EMPTY : M3ItemRange.of(first, last);
     }
 
     /**
