@@ -26,7 +26,7 @@ COLUMNS = ("dataset", "source", "view", "rows", "distinct", "distinct_over_rows"
            "top_label", "top_count", "notes")
 
 
-def row(dataset, source, view, labels, notes=""):
+def row(dataset, source, view, labels, notes="-"):
     counts = collections.Counter(labels)
     rows = sum(counts.values())
     distinct = len(counts)
