@@ -23,7 +23,7 @@ source Synexia owner. Repeated source rows remain separate stable record IDs
 while the downstream M3LEX image may deduplicate identical UTF-16 values.
 
 The companion `language-resource-discovery.tsv` is a searchable,
-release-aware catalogue of 198 **reference-only** candidates.
+release-aware catalogue of 201 **reference-only** candidates.
 An earlier discovery pass added 14 reference-only leads: GATITOS bilingual pairs; Swedish Flex/Kubord frequencies, LEXIN, Parole+ and given-name forms; Linguabase's English lexical graph; Bashkir frequency and n-gram indexes; EuroVoc; Czech MorfFlex; Icelandic DMII; Japanese UniDic; and Taiwan's Taigi dictionary. Every row carries its own version, identity and rights caveats. In particular, noncommercial/share-alike, no-derivatives, component-level licensing, unresolved upstream corpus rights, and release-metadata inconsistencies block payload admission. No data files were downloaded or copied.
  In addition to
 dictionaries, grammar, translation, frequency, names, units and speech sources,
@@ -107,6 +107,8 @@ The next internet-source pass adds six reference-only candidates: AIATSIS Austla
 
 
 The next Hugging Face pass adds five more reference-only records. They cover an AGPL-labelled five-language lemma-frequency release derived from scraped subtitle material; the multi-component mlnorm bundle (normalization dictionaries, benchmark files, Hunspell packages, Leipzig counts and generated definitions) with per-component licenses; its gated MultiLexNorm 2026 upstream, whose files require contact-information sharing and whose card has no README; a Russian–Nanai dictionary conversion with 2,494 source term IDs, 887 missing Nanai forms and no stated data license; and a Haitian Creole frequency-list lead whose card and corpus rights could not be verified. The algorithm catalogue now records observed-form normalization as evaluation-only, distinct from semantic translation. These findings are not payload admissions; no additional files were downloaded.
+
+A further web pass adds three distinct reference-only resources: Georgian nominative/dative/ergative case-alignment contrasts (370 examples), a 100-utterance modern Lhasa Tibetan segmentation evaluation set with 2,634 inter-syllable boundary positions, and BridgeConn's Indian Sign Language gloss/video/pose dictionary. The first two are small grammar/string regression candidates; the sign dictionary is a multimodal lead whose 7.11 GB shards are deliberately not fetched. Their language, sentence, clip and gloss coordinates are not M3 lexeme IDs. Georgian's underlying UD text, Tibetan's NICT-Tib1 transcripts, and signers' media consent/rights require source-level review; all three stay `REFERENCE_ONLY`. A separate VocabRadar 42-language compact frequency list and Kencorpus KenPOS were checked and excluded as duplicates of existing entries.
 
 ## Testing, donor decisions, and limits
 

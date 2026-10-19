@@ -66,7 +66,7 @@ public final class M3HfLexiconIntakeProof {
     private static int verifyLanguageResourceDiscovery() throws IOException {
         List<String> lines = resourceLines(
                 "/com/m3/lexicon/hf/language-resource-discovery.tsv");
-        require(lines.size() == 199, "198 language-resource candidates plus header");
+        require(lines.size() == 202, "201 language-resource candidates plus header");
         List<String> expectedHeader = List.of("source_id", "resource", "category",
                 "data_shape_and_identity", "rights_and_attribution", "m3_candidate_use",
                 "admission_blockers", "state", "evidence");
@@ -287,8 +287,11 @@ public final class M3HfLexiconIntakeProof {
                 "hf-amharic-gemination-lexicon-v3",
                 "hf-khmer-dictionary-44k",
                 "hf-khpos-seanghay-2023",
-                "hf-sasak-benchmark-100k"
-        )), "exact 198 language-resource source IDs match the pinned catalogue");
+                "hf-sasak-benchmark-100k",
+                "hf-georgian-case-alignment",
+                "hf-tibetan-word-segmentation-100",
+                "hf-bridgeconn-sign-dictionary-isl"
+        )), "exact 201 language-resource source IDs match the pinned catalogue");
         String sindhi = discoveryRecord(lines, "hf-sindhi-open-lexicon");
         require(sindhi.contains("223,342") && sindhi.contains("lexical_id")
                 && sindhi.contains("entry_id") && sindhi.contains("schema casting"),
@@ -337,6 +340,18 @@ public final class M3HfLexiconIntakeProof {
         require(sasak.contains("100,000") && sasak.contains("2,761")
                 && sasak.contains("meaning_id") && sasak.contains("underlying content rights"),
                 "Sasak records preserve dialect/source IDs and block unverified rights");
+        String georgian = discoveryRecord(lines, "hf-georgian-case-alignment");
+        require(georgian.contains("370 examples") && georgian.contains("seven verb-series")
+                && georgian.contains("CC BY 4.0") && georgian.contains("not a lexeme ID"),
+                "Georgian case contrasts preserve source coordinates and grammar-only semantics");
+        String tibetan = discoveryRecord(lines, "hf-tibetan-word-segmentation-100");
+        require(tibetan.contains("100 modern Lhasa") && tibetan.contains("2,634")
+                && tibetan.contains("U+0F0B") && tibetan.contains("no inter-annotator agreement"),
+                "Tibetan segmentation retains script boundary, dialect and annotation limitations");
+        String signIsl = discoveryRecord(lines, "hf-bridgeconn-sign-dictionary-isl");
+        require(signIsl.contains("3,077 lexical items") && signIsl.contains("7.11 GB")
+                && signIsl.contains("CC BY-SA 4.0") && signIsl.contains("signer consent"),
+                "Indian Sign Language media stays reference-only pending consent and identity review");
         String massive = discoveryRecord(lines, "massive-nlu-1-1");
         require(massive.contains("52 languages") && massive.contains("SLURP") && massive.contains("CC BY 4.0")
                 && massive.contains("not a canonical dictionary"),
@@ -916,7 +931,7 @@ public final class M3HfLexiconIntakeProof {
         require(Files.isRegularFile(catalogue), "algorithm catalogue exists at Maven invocation root");
         if (!Files.isRegularFile(catalogue)) return 0;
         List<String> lines = Files.readAllLines(catalogue, StandardCharsets.UTF_8);
-        require(lines.size() == 69, "68 algorithm patterns plus header");
+        require(lines.size() == 71, "70 algorithm patterns plus header");
         List<String> header = List.of("problem_category", "discovery_source", "candidate",
                 "decision", "owner_or_reason", "qualification");
         require(!lines.isEmpty() && List.of(splitTsv(lines.getFirst())).equals(header),
@@ -998,8 +1013,10 @@ public final class M3HfLexiconIntakeProof {
                 "privacy_thresholded_search_demand",
                 "observed_form_normalization",
                 "cross_lingual_embedding_retrieval",
-                "khmer_segmentation_pos_tagging"
-        )), "all 68 algorithm categories match the pinned catalogue");
+                "khmer_segmentation_pos_tagging",
+                "georgian_case_alignment_masked_contrast",
+                "tibetan_word_segmentation_evaluation"
+        )), "all 70 algorithm categories match the pinned catalogue");
         for (String category : List.of("spoken_language_phoneme_morphology_alignment",
                 "medical_translation_regression", "low_resource_african_parallel_corpus",
                 "multi_source_parallel_corpus_provenance", "document_level_translation_regression",
@@ -1009,7 +1026,9 @@ public final class M3HfLexiconIntakeProof {
                 "privacy_thresholded_search_demand",
                 "observed_form_normalization",
                 "cross_lingual_embedding_retrieval",
-                "khmer_segmentation_pos_tagging")) {
+                "khmer_segmentation_pos_tagging",
+                "georgian_case_alignment_masked_contrast",
+                "tibetan_word_segmentation_evaluation")) {
             String row = lines.stream().skip(1)
                     .filter(line -> category.equals(splitTsv(line)[0]))
                     .findFirst().orElse("");
@@ -1026,6 +1045,20 @@ public final class M3HfLexiconIntakeProof {
                 && khmerSegmentationFields[2].contains("RDR")
                 && khmerSegmentationFields[5].contains("boundary precision/recall/F1"),
                 "Khmer sequence-tagging baselines remain an evaluation plan, not an implementation claim");
+        String georgianCase = lines.stream().skip(1)
+                .filter(line -> "georgian_case_alignment_masked_contrast".equals(splitTsv(line)[0]))
+                .findFirst().orElse("");
+        require(splitTsv(georgianCase).length == 6
+                && splitTsv(georgianCase)[2].contains("nominative/dative/ergative")
+                && splitTsv(georgianCase)[4].contains("not translation links"),
+                "Georgian case evaluation remains grammar-scoped and evaluation-only");
+        String tibetanSegmentation = lines.stream().skip(1)
+                .filter(line -> "tibetan_word_segmentation_evaluation".equals(splitTsv(line)[0]))
+                .findFirst().orElse("");
+        require(splitTsv(tibetanSegmentation).length == 6
+                && splitTsv(tibetanSegmentation)[2].contains("Botok")
+                && splitTsv(tibetanSegmentation)[5].contains("tsek U+0F0B"),
+                "Tibetan boundary evaluation retains source-script invariants");
         String corpusPrecompute = lines.stream().skip(1)
                 .filter(line -> "offline_corpus_frequency_and_ngram_precompute".equals(splitTsv(line)[0]))
                 .findFirst().orElse("");
