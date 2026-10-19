@@ -24,6 +24,7 @@ LIBRARIES = {
     'm3_collections_mask': [('m3_index_mask_compactor.c', 'M3IndexMaskCompactor'),
                             ('m3_index_mask_window.c', 'M3IndexMaskWindow')],
     'm3_collections_pathmask': [('m3_index_path_masks.c', 'M3IndexPathMasks')],
+    'm3_collections_long_path_masks': [('m3_long_index_path_masks_jni.c', 'M3LongIndexPathMasksJNI')],
     'm3_collections_address': [('m3_long_address_kernel.c', 'M3LongAddressKernel')],
     'm3_collections_span': [('m3_span_index_jni.c', 'M3SpanIndex')],
     'm3_collections_statehist': [('m3_state_mask_histogram.c', 'M3StateMaskHistogram')],
@@ -117,6 +118,10 @@ def main():
         run(cc + [native / 'm3_index_mask_window.c', MODULE / 'src/test/native' /
                   ('m3_mask_window_' + fixture + '.c'), '-o', executable])
         run([executable])
+    gather_fixture = OUT / 'native/gather-spans'
+    run(cc + [native / 'm3_long_address_kernel.c', MODULE / 'src/test/native/m3_gather_spans.c',
+              '-o', gather_fixture])
+    run([gather_fixture])
     common = ['-Xmx768m', '-XX:ActiveProcessorCount=2', '-Xcheck:jni',
               '-Dm3.collections.rank.native=true', '-Dm3.collections.signal.native=true']
     results = {}
@@ -134,7 +139,7 @@ def main():
         expected_classes = {str(p.relative_to(OUT / 'classes')) for p in (OUT / 'classes').rglob('*.class')}
         actual_classes = {name for name in archive.namelist() if name.endswith('.class')}
         if expected_classes != actual_classes: raise RuntimeError('Packaged class inventory differs from fresh compilation')
-        for name in ('LICENSE', 'NOTICE', 'provenance.json', 'synexia-donation.json', 'name-mapping.json', 'SYNEXIA-DONATION-NOTICE.txt'):
+        for name in ('LICENSE', 'NOTICE', 'provenance.json', 'synexia-donation.json', 'name-mapping.json', 'SYNEXIA-DONATION-NOTICE.txt', 'NETBEANS-NOTICE.txt'):
             if archive.read('META-INF/' + name) != (MODULE / name).read_bytes():
                 raise RuntimeError('Packaged module legal/provenance bytes differ: ' + name)
     runtime_modules = subprocess.check_output([JAVA / 'bin/jdeps', '--print-module-deps', jar], text=True).strip()
@@ -147,6 +152,8 @@ def main():
                  ('M3IndexMaskWindowRecoverySelfTest', ['--native']),
                  ('M3IndexMaskCompactorSelfTest', ['--native']),
                  ('M3IndexPathMasksSelfTest', ['--native']),
+                 ('M3LongIndexPathMasksJNISelfTest', ['--native']),
+                 ('M3LongAddressBoundedSelfTest', []),
                  ('M3IndexPathMaskWindowSelfTest', ['--native']),
                  ('M3IndexPathRankNativeSelfTest', []),
                  ('M3NativeIndexRangeSelfTest', ['range', 'sharing']),
@@ -161,8 +168,10 @@ def main():
     for name, args in contracts: run(java + ['com.m3.collections.' + name, *args])
     run([JAVA / 'bin/java', *common, '-Djava.library.path=' + str(OUT / 'missing'), '-cp', cp,
          'com.m3.collections.M3BudgetedMaskWindowContract', '--missing'])
+    run([JAVA / 'bin/java', *common, '-Djava.library.path=' + str(OUT / 'missing'), '-cp', cp,
+         'com.m3.collections.M3LongIndexPathMasksJNISelfTest'])
     native_fixtures = [MODULE / 'src/test/native' / name for name in
-                       ('m3_mask_window_spans.c', 'm3_mask_window_regions.c', 'm3_bitlane_jump_jni.c')]
+                       ('m3_mask_window_spans.c', 'm3_mask_window_regions.c', 'm3_bitlane_jump_jni.c', 'm3_gather_spans.c')]
     proof = {'status': 'PASS_OWNING_COLLECTION_JAVA_AND_JNI', 'head_sha': head,
              'scope': 'independent m3/collections; no JDK phase or challenge-corpus promotion',
              'worktree_dirty': bool(subprocess.check_output(['git', 'status', '--porcelain', '--untracked-files=no'], cwd=ROOT)),

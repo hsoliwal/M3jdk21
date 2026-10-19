@@ -1,5 +1,6 @@
 /*
  * Copyright 2026 Hitesh Soliwal and contributors
+ * Modified 2026 by Hitesh Soliwal and contributors: drain failed bounded lanes until the coordinator observes their failure and cancels workers.
  * SPDX-License-Identifier: Apache-2.0
  */
 package com.m3.collections;
@@ -136,6 +137,11 @@ public final class M3KeyedParallelismPlan<T, K> {
                     completed.put(new Completion<>(work.ordinal(), value, null));
                 } catch (RuntimeException | Error failure) {
                     completed.put(new Completion<>(work.ordinal(), null, failure));
+                    // The coordinator may be blocked admitting more work to this bounded lane.
+                    // Keep freeing its slots until the posted failure reaches the coordinator.
+                    // Global in-flight accounting makes that failure reachable before any
+                    // discarded completion is awaited; no cancelled mapper is invoked.
+                    while (!queue.take().end()) { }
                     return;
                 }
             }

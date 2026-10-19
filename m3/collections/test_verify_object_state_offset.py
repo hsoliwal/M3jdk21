@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 # SPDX-FileCopyrightText: 2026 Hitesh Soliwal and contributors
 # SPDX-License-Identifier: Apache-2.0
+# Modified 2026 by Hitesh Soliwal and contributors: preserve exact historical receipt pins and account for the second approved additive row.
 """Verify source-sealed generation-safe object-state projection and denial cases."""
 import tempfile
 import unittest
@@ -10,23 +11,35 @@ from m3_object_state_offset_receipt import (
 )
 
 
+# Exact immutable successor receipt; this unit test does not admit current owners.
+HISTORICAL_SUCCESSOR = (
+    ('m3/collections/src/main/java/com/m3/collections/M3ObjectStateSlots28.java', 'c56b6a29fd7da6ab1a1c3ac4b59cd0b6a15fc2b14a20c7c41975c12b57085c79', 'c8c8b273da8d20ace83148230c62f63e03f92efa2cf880f935f9fae8dcdd3bc2'),
+    ('m3/collections/src/test/java/com/m3/collections/M3ObjectStateSlots28SelfTest.java', 'e28893fb6734437cee712554f350fa173a3189a500feb64c80c678ca046e2f7b', 'd2e750f4b3102c4269038ebd78318efc68f721ead906522f225a915c62808c26'),
+)
+
+
 class ObjectStateOffsetReceivingTest(unittest.TestCase):
     def test_exact_two_java_postimages_and_unmodified_historical_rows(self):
         approved = approved_successor()
         self.assertEqual(2, len(approved))
+        self.assertEqual(HISTORICAL_SUCCESSOR, EXPECTED)
+        self.assertEqual(
+            "f371b00237b1219cad8d131703929c32a06a56df567943411c40549e2351d4d5",
+            sha256(RECEIPT))
         older = [("m3/collections/old.java", "a" * 64)]
         result = include_successor(older)
         self.assertEqual(older, result[:1])
         self.assertEqual({row[0] for row in EXPECTED}, {p for p, _ in result[1:]})
         for path, before, after in EXPECTED:
-            self.assertEqual(after, sha256(ROOT / path))
             self.assertEqual(after, dict(result)[path])
+            self.assertTrue((ROOT / path).is_file())
             self.assertFalse((ROOT / path).is_symlink())
 
     def test_preimage_must_match_if_historical_row_already_exists(self):
         approved = approved_successor()
         target, before, after = EXPECTED[0]
-        self.assertEqual([(target, after)], include_successor([(target, before)], approved))
+        expected = [(target, after), (EXPECTED[1][0], EXPECTED[1][2])]
+        self.assertEqual(expected, include_successor([(target, before)], approved))
         with self.assertRaises(ValueError):
             include_successor([(target, "0" * 64)], approved)
         with self.assertRaises(ValueError):
