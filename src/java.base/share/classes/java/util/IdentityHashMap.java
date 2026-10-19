@@ -678,6 +678,9 @@ public class IdentityHashMap<K,V>
             }
             return true;
         } else if (o instanceof Map<?, ?> m) {
+            // Preserve virtual entrySet() semantics when a subclass overrides it.
+            if (getClass() != IdentityHashMap.class)
+                return entrySet().equals(m.entrySet());
             // AbstractSet.equals(entrySet) checks cardinality and then
             // tests every *foreign* entry through this map's containsMapping.
             // Perform exactly those identity checks without constructing
@@ -744,6 +747,7 @@ public class IdentityHashMap<K,V>
      */
     @Override
     public String toString() {
+        if (getClass() != IdentityHashMap.class) return super.toString();
         final Object[] tab = table;
         final int expectedModCount = modCount;
         StringBuilder text = new StringBuilder("{");
