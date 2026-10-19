@@ -73,3 +73,26 @@ The strict historical-source gate now also SHA-256-pins the entire
 `SOURCE_SUCCESSORS.tsv` receipt; a changed successor row cannot silently
 authorize arbitrary map bytes without updating the canonical source-first
 recipe and source checker together. The predecessor manifest stays immutable.
+
+## Validated exact product successor — 2026-10-19
+
+Source-hash checks, strict Java 21 compilation and actual JNI C17
+`-Xcheck:jni` completed successfully in
+[M3JDK21 GitHub Actions run 39182744227](https://github.com/hsoliwal/M3jdk21/actions/runs/39182744227):
+
+| Verified product route | Assertions | Status |
+|---|---:|---|
+| Fleet primitive map and int/long masked arrays — Java | 185,549 | PASS |
+| Fleet primitive map and int/long masked arrays — JNI | 185,549 | PASS |
+| Inherited packed filtered/sorted snapshots — Java | 351,161 | PASS |
+| Inherited packed filtered/sorted snapshots — native | 11,879,132 | PASS |
+
+**12,601,391 checks** across four reported routes.
+The first stage on run 39182463854 also passed Java/C/JNI, then stopped
+before JUnit because the parent Maven POM requires a custom JUnit artifact
+not available from Maven Central; the validated successor directly executes
+the existing production `M3PackedFilterProof` via `javac` and JNI.
+This is focused functional/native qualification, **not** the full Maven
+reactor or a built modified HotSpot image. The earlier zero-key source
+checker was separately source-sealed with one fixed SHA-256 successor;
+historical Maven wrapper and unavailable custom dependency stay pending.
