@@ -227,12 +227,44 @@ public final class M3IndexedListSnapshot<E> extends AbstractList<E> implements R
             M3IndexPathMasks.Backend backend) {
         Objects.requireNonNull(physicalStates, "physicalStates");
         Objects.requireNonNull(backend, "backend");
-        if (physicalStates.length != values.length) {
-            throw new IllegalArgumentException("state words must align with physical slots");
+        return maskedByPhysicalStates(
+                new int[][] {physicalStates},
+                new int[] {requiredMask}, new int[] {forbiddenMask}, backend);
+    }
+
+    /**
+     * Multi-stage full-width selection over the physical state words of this
+     * snapshot's canonical Object[] slots. Stages are tested left-to-right
+     * without copying values, predicates or mask arrays. A single returned
+     * int[] directory preserves logical encounter order and duplicate values.
+     *
+     * <p>Each plane must be exactly one int word per canonical physical slot;
+     * required/forbidden masks retain all 32 bits, including the sign bit.
+     * The caller must not mutate a plane during selection. The resulting
+     * immutable snapshot retains neither plane nor mask vector. JNI is an
+     * explicit opt-in to the existing primitive M3IndexPathMasks kernel.
+     */
+    public M3IndexedListSnapshot<E> maskedByPhysicalStates(
+            int[][] physicalStates, int[] requiredMasks, int[] forbiddenMasks,
+            M3IndexPathMasks.Backend backend) {
+        Objects.requireNonNull(physicalStates, "physicalStates");
+        Objects.requireNonNull(requiredMasks, "requiredMasks");
+        Objects.requireNonNull(forbiddenMasks, "forbiddenMasks");
+        Objects.requireNonNull(backend, "backend");
+        if (physicalStates.length == 0
+                || physicalStates.length != requiredMasks.length
+                || physicalStates.length != forbiddenMasks.length) {
+            throw new IllegalArgumentException("unaligned physical state stages");
+        }
+        for (int stage = 0; stage < physicalStates.length; stage++) {
+            int[] plane = Objects.requireNonNull(
+                    physicalStates[stage], "physicalStates[" + stage + "]");
+            if (plane.length != values.length) {
+                throw new IllegalArgumentException("state words must align with physical slots");
+            }
         }
         int[] admitted = M3IndexPathMasks.select(
-                positions, positions, new int[][] {physicalStates},
-                new int[] {requiredMask}, new int[] {forbiddenMask},
+                positions, positions, physicalStates, requiredMasks, forbiddenMasks,
                 from, size(), 1, backend);
         return new M3IndexedListSnapshot<>(values, admitted, 0, admitted.length, null);
     }
@@ -245,8 +277,25 @@ public final class M3IndexedListSnapshot<E> extends AbstractList<E> implements R
     public M3IndexedListSnapshot<E> sortedMaskedByPhysicalState(
             int[] physicalStates, int requiredMask, int forbiddenMask,
             Comparator<? super E> comparator, M3IndexPathMasks.Backend backend) {
-        return maskedByPhysicalState(
-                physicalStates, requiredMask, forbiddenMask, backend).sorted(comparator);
+        M3IndexedListSnapshot<E> selected = maskedByPhysicalState(
+                physicalStates, requiredMask, forbiddenMask, backend);
+        selected.sortPositions(selected.positions, comparator);
+        return selected;
+    }
+
+    /**
+     * Fuses multi-plane physical-state selection with the established stable
+     * indirect int[] sorter. Only admitted Java values reach the comparator.
+     * The returned int[] index directory is private, and sorting it cannot
+     * modify any parent view or the canonical object payload.
+     */
+    public M3IndexedListSnapshot<E> sortedMaskedByPhysicalStates(
+            int[][] physicalStates, int[] requiredMasks, int[] forbiddenMasks,
+            Comparator<? super E> comparator, M3IndexPathMasks.Backend backend) {
+        M3IndexedListSnapshot<E> selected = maskedByPhysicalStates(
+                physicalStates, requiredMasks, forbiddenMasks, backend);
+        selected.sortPositions(selected.positions, comparator);
+        return selected;
     }
 
     public M3IndexedListSnapshot<E> sorted(Comparator<? super E> comparator) {
