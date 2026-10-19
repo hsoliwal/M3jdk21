@@ -62,6 +62,41 @@ public final class M3SignalDimensions {
     }
 
     /**
+     * Stable multi-dimensional order over full-width physical-slot state masks.
+     * Selection uses all 32 bits (including bit 31) before reading signal rows;
+     * only source row ordinals and primitive radix scratch are allocated.
+     * The caller's state and signal lanes are never modified or retained.
+     */
+    public static int[] filtered32(double[][] columns, boolean[] descending,
+            int[] states, int requiredMask, int excludedMask,
+            M3SignalOrder.Backend backend) {
+        int length = validate(columns, descending);
+        Objects.requireNonNull(backend, "backend");
+        Objects.requireNonNull(states, "states");
+        if (states.length != length) {
+            throw new IllegalArgumentException("state array length mismatch");
+        }
+        if (backend == M3SignalOrder.Backend.NATIVE_REQUIRED
+                && !M3SignalOrderNative.available()) {
+            throw new UnsatisfiedLinkError("m3signalorder JNI is unavailable");
+        }
+        int selected = 0;
+        for (int row = 0; row < length; row++) {
+            int flags = states[row];
+            if ((flags & requiredMask) == requiredMask
+                    && (flags & excludedMask) == 0) selected++;
+        }
+        int[] rows = new int[selected];
+        int count = 0;
+        for (int row = 0; row < length; row++) {
+            int flags = states[row];
+            if ((flags & requiredMask) == requiredMask
+                    && (flags & excludedMask) == 0) rows[count++] = row;
+        }
+        return orderSelected(columns, descending, backend, rows);
+    }
+
+    /**
      * Extract each source-row projection only once per selected row and dimension.
      * The caller's provider remains the value owner; only primitive lanes enter radix passes.
      */
