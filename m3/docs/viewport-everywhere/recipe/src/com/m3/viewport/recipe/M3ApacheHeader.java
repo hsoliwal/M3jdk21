@@ -8,7 +8,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import org.openrewrite.ExecutionContext;
+import org.openrewrite.Option;
 import org.openrewrite.Recipe;
 import org.openrewrite.TreeVisitor;
 import org.openrewrite.java.JavaIsoVisitor;
@@ -29,7 +33,26 @@ public final class M3ApacheHeader extends Recipe {
 	private static final Pattern DROPPED = Pattern.compile (
 			"^\\s*\\*?\\s*Copyright|SPDX-License-Identifier|Eclipse Public License|accompanies this distribution|"
 			+ "is available at|epl-2\\.0|program and the accompanying|Dual-licensed|apache\\.org/licenses|"
+			+ "terms of the Apache License|which are available at|^\\s*\\*?\\s*Contributors:\\s*$|"
 			+ "^\\s*\\*?\\s*\\**/?\\s*$");
+
+	/** Source repository and commit named in the header; the SWT extraction commit when not set. */
+	@Option(displayName = "Origin", description = "Source repository and commit.", required = false,
+			example = "hsoliwal/nebula 79fdab533b25bd228e96a70feed55c905ab9aefb")
+	private final String origin;
+
+	public M3ApacheHeader () {
+		this (null);
+	}
+
+	@JsonCreator
+	public M3ApacheHeader (@JsonProperty("origin") String origin) {
+		this.origin = origin == null ? ORIGIN : origin;
+	}
+
+	public String getOrigin () {
+		return origin;
+	}
 
 	@Override
 	public String getDisplayName () {
@@ -53,7 +76,7 @@ public final class M3ApacheHeader extends Recipe {
 				if (!comments.isEmpty () && comments.get (0) instanceof TextComment first
 						&& first.getText ().startsWith ("\n" + COPYRIGHT)) return cu;
 				String source = cu.getClasses ().isEmpty () ? "?" : cu.getClasses ().get (0).getSimpleName ();
-				String text = header (source, kept (comments));
+				String text = header (origin, source, kept (comments));
 				TextComment comment = new TextComment (true, text, "\n", Markers.EMPTY);
 				return cu.withPrefix (Space.EMPTY).withPackageDeclaration (pkg.withPrefix (Space.build ("", List.of (comment))));
 			}
@@ -69,10 +92,10 @@ public final class M3ApacheHeader extends Recipe {
 		return lines;
 	}
 
-	static String header (String source, List<String> kept) {
+	static String header (String origin, String source, List<String> kept) {
 		StringBuilder b = new StringBuilder ("\n").append (COPYRIGHT).append ('\n');
 		b.append (" * SPDX-License-Identifier: Apache-2.0\n *\n");
-		b.append (" * Derived by recipe (m3/docs/viewport-everywhere/recipe) from ").append (ORIGIN).append (",\n");
+		b.append (" * Derived by recipe (m3/docs/viewport-everywhere/recipe) from ").append (origin).append (",\n");
 		b.append (" * ").append (source).append (".java; Apache-2.0 elected from its Apache-2.0 OR EPL-2.0 publication\n");
 		b.append (" * (m3/docs/viewport-everywhere/LICENSE_ELECTION.tsv).\n");
 		for (String line : kept) b.append (line).append ('\n');
