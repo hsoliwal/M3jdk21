@@ -410,6 +410,31 @@ public final class SwingViewportBench {
         row("insert_first_relayout", (System.nanoTime() - t0) / 1_000_000, "ms", "add(0) + getPreferredSize, "
                 + pref2.height);
         frames(list, pref.height / n, pref2.height);
+        relayouts(list, model, n);
+    }
+
+    /** Leaf 4: one model edit + getPreferredSize, median of 11 per kind of edit. */
+    static void relayouts(JList<String> list, DefaultListModel<String> model, int n) {
+        String[] kinds = {"insert_front", "set_middle", "append", "remove_front"};
+        for (String kind : kinds) {
+            long[] t = new long[11];
+            int h = 0;
+            for (int i = 0; i < t.length; i++) {
+                long t0 = System.nanoTime();
+                switch (kind) {
+                    case "insert_front" -> model.add(0, "front " + i);
+                    case "set_middle" -> model.set(n / 2, "<html>middle " + i + "<br>two</html>");
+                    case "append" -> model.addElement("appended " + i);
+                    default -> model.remove(0);
+                }
+                h = list.getPreferredSize().height;
+                t[i] = System.nanoTime() - t0;
+            }
+            java.util.Arrays.sort(t);
+            row("relayout_" + kind, String.format("%.3f", t[5] / 1e6), "ms p50",
+                    "one edit + getPreferredSize, 11 runs; min " + String.format("%.3f", t[0] / 1e6) + " max "
+                    + String.format("%.3f", t[10] / 1e6) + "; height " + h);
+        }
     }
 
     static void table() {
