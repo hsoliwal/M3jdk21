@@ -4,6 +4,7 @@
  *
  * @test
  * @summary M3 String ranges retain owners without a second Java spelling payload and local native atoms are weakly reclaimable
+ * @library /test/lib
  * @run main/othervm --add-opens=java.base/java.lang=ALL-UNNAMED -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage M3StringOwnerRangeLifetimeTest
  * @run main/othervm --add-opens=java.base/java.lang=ALL-UNNAMED -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage -XX:-CompactStrings M3StringOwnerRangeLifetimeTest
  * @run main/othervm/timeout=90 --add-opens=java.base/java.lang=ALL-UNNAMED -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage -Xmx128m -Xint M3StringOwnerRangeLifetimeTest
@@ -25,6 +26,8 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
+
+import jdk.test.lib.Utils;
 
 public class M3StringOwnerRangeLifetimeTest {
     private static final Field STRING_M3;
@@ -205,7 +208,7 @@ public class M3StringOwnerRangeLifetimeTest {
         AtomicReference<Throwable> backgroundFailure = new AtomicReference<>();
         AtomicInteger completedPressureEpochs = new AtomicInteger();
         Phaser phases = new Phaser(2);
-        long measuredDeadline = System.nanoTime() + TimeUnit.SECONDS.toNanos(35L);
+        long measuredDeadline = System.nanoTime() + TimeUnit.MILLISECONDS.toNanos(Utils.adjustTimeout(35_000L));
         Thread pressure = new Thread(() -> {
             try {
                 for (int epoch = 0; epoch < LAST_USE_EPOCHS && !stop.get(); epoch++) {
@@ -261,7 +264,7 @@ public class M3StringOwnerRangeLifetimeTest {
             stop.set(true);
             if (!measuredComplete) phases.forceTermination();
             pressure.interrupt();
-            pressure.join(5000L);
+            pressure.join(Utils.adjustTimeout(5000L));
             phases.forceTermination();
             check(!pressure.isAlive(), "owned pressure thread must finish within join budget");
         }
@@ -360,7 +363,7 @@ public class M3StringOwnerRangeLifetimeTest {
 
     private static void retireLastUseAdmissionProbes(List<WeakReference<Object>> probes)
             throws Exception {
-        long deadline = System.nanoTime() + TimeUnit.SECONDS.toNanos(5L);
+        long deadline = System.nanoTime() + TimeUnit.MILLISECONDS.toNanos(Utils.adjustTimeout(5_000L));
         for (int attempt = 0; attempt < 40 && System.nanoTime() < deadline; attempt++) {
             System.gc();
             EXPUNGE_LOCALS.invoke(null);
@@ -378,7 +381,7 @@ public class M3StringOwnerRangeLifetimeTest {
     }
 
     private static int warmUpLastUseReads() {
-        long deadline = System.nanoTime() + TimeUnit.SECONDS.toNanos(15L);
+        long deadline = System.nanoTime() + TimeUnit.MILLISECONDS.toNanos(Utils.adjustTimeout(15_000L));
         int[] lengths = {0, 1, 2, 7, 33, 257, 4097};
         int cases = 0;
         for (int round = 0; round < LAST_USE_WARMUP_ROUNDS; round++) {
