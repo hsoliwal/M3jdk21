@@ -340,6 +340,10 @@ public class M3FixedHeightLayoutCache extends FixedHeightLayoutCache {
             unmap(changedNode);
             if (wasVisible && wasExpanded) {
                 expand(newState(p, mi));
+                // as the stock: reset again, also when the node is now a leaf and expand did nothing
+                if (treeSelectionModel != null) {
+                    treeSelectionModel.resetRowSelection();
+                }
             }
         }
     }
