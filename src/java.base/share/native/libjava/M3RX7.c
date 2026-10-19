@@ -198,29 +198,31 @@ JNIEXPORT void JNICALL Java_jdk_internal_mindex_M3RX7Transitions_repeat0(
         invalid(env, "invalid DFA transfer state");
         goto done;
     }
-    workspace = (jshort *) malloc((size_t) states * 3 * sizeof(jshort));
+    workspace = (jshort *) malloc((size_t) states * 2 * sizeof(jshort));
     if (workspace == NULL) {
         allocation_failed(env);
         goto done;
     }
     jshort *result = workspace;
-    jshort *power = workspace + states;
-    jshort *scratch = workspace + 2 * states;
+    jshort *scratch = workspace + states;
     for (jsize state = 0; state < states; state++) {
-        result[state] = (jshort) state;
-        power[state] = rows[state];
+        result[state] = count == 0 ? (jshort) state : rows[state];
     }
-    for (uint64_t remaining = (uint64_t) count; remaining != 0; remaining >>= 1) {
-        if ((remaining & 1) != 0) {
-            compose_transfer(result, power, scratch, states);
-            jshort *previous = result;
+    /* The leading set bit is represented by rows. Unsigned shifts are defined
+       even for the highest admitted exponent, INT64_MAX. */
+    uint64_t bit = 0;
+    for (uint64_t remaining = (uint64_t) count; remaining > 1; remaining >>= 1) {
+        bit = bit == 0 ? UINT64_C(1) : bit << 1;
+    }
+    for (; bit != 0; bit >>= 1) {
+        compose_transfer(result, result, scratch, states);
+        jshort *previous = result;
+        result = scratch;
+        scratch = previous;
+        if (((uint64_t) count & bit) != 0) {
+            compose_transfer(result, rows, scratch, states);
+            previous = result;
             result = scratch;
-            scratch = previous;
-        }
-        if (remaining > 1) {
-            compose_transfer(power, power, scratch, states);
-            jshort *previous = power;
-            power = scratch;
             scratch = previous;
         }
     }

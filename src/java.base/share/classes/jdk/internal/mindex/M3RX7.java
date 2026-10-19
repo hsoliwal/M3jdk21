@@ -512,6 +512,7 @@ public final class M3RX7 {
         private final int[] forbiddenFlags;
         private final byte[] accepting;
         private final long[] closures;
+        private final long[] acceptanceOrigins;
 
         private LexicalPlan(String programRoot, int start, int[] offsets,
                 int[] targets, int[] kinds, long[] spellingIds, int[] requiredFlags,
@@ -529,6 +530,7 @@ public final class M3RX7 {
             this.accepting = accepting;
             validateTopology();
             this.closures = epsilonClosures();
+            this.acceptanceOrigins = acceptanceOrigins();
         }
 
         private void validateTopology() {
@@ -587,7 +589,8 @@ public final class M3RX7 {
         public long retainedPrimitiveBytes() {
             return (long) offsets.length * Integer.BYTES
                     + (long) targets.length * (4 * Integer.BYTES + Long.BYTES)
-                    + accepting.length + (long) closures.length * Long.BYTES;
+                    + accepting.length + ((long) closures.length
+                        + acceptanceOrigins.length) * Long.BYTES;
         }
 
         /** Fresh caller-owned epsilon-closed frontier for incremental token partitions. */
@@ -603,21 +606,32 @@ public final class M3RX7 {
             }
         }
 
+        /** Prepare accepting origins once, including non-epsilon-closed frontiers. */
+        private long[] acceptanceOrigins() {
+            long[] origins = new long[words];
+            long[] finalStates = new long[words];
+            for (int state = 0; state < states; state++) {
+                if (accepting[state] != 0) {
+                    finalStates[state >>> 6] |= 1L << (state & 63);
+                }
+            }
+            for (int state = 0; state < states; state++) {
+                int base = state * words;
+                for (int word = 0; word < words; word++) {
+                    if ((closures[base + word] & finalStates[word]) != 0) {
+                        origins[state >>> 6] |= 1L << (state & 63);
+                        break;
+                    }
+                }
+            }
+            return origins;
+        }
+
         /** Acceptance of the current frontier, including epsilon-reachable final states. */
         public boolean accepts(long[] frontier) {
             validateFrontier(frontier);
             for (int word = 0; word < words; word++) {
-                long bits = frontier[word];
-                while (bits != 0) {
-                    int state = (word << 6) + Long.numberOfTrailingZeros(bits);
-                    int base = state * words;
-                    for (int target = 0; target < states; target++) {
-                        if (accepting[target] != 0
-                                && (closures[base + (target >>> 6)]
-                                    & (1L << (target & 63))) != 0) return true;
-                    }
-                    bits &= bits - 1;
-                }
+                if ((frontier[word] & acceptanceOrigins[word]) != 0) return true;
             }
             return false;
         }

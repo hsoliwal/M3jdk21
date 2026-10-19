@@ -5,8 +5,8 @@ set -eu
 ROOT=$(CDPATH='' cd -- "$(dirname "$0")/../.." && pwd)
 PROD="$ROOT/src/java.base/share/classes/jdk/internal/mindex"
 (cd "$ROOT" && sha256sum -c - <<'M3_PINNED_SOURCES'
-3005574994ae3ea854f15469a40d68057b0eae709323a042285e463c2871ad98  src/java.base/share/classes/jdk/internal/mindex/M3RX7.java
-0b513cce6893fb697e7784d2556a9081b5b391abf20008493f1ba35de7a0ff9e  src/java.base/share/classes/jdk/internal/mindex/M3RX7Transitions.java
+fa5ecdb1a0c28813397343ee62d4ef5924d57f2738bb786e6e3af6aa99289821  src/java.base/share/classes/jdk/internal/mindex/M3RX7.java
+4242a99703fc40e351030603a8faffebe03fb5509ae615c63744ed1c88693018  src/java.base/share/classes/jdk/internal/mindex/M3RX7Transitions.java
 0c7d8ef062693a987d57c8fc36d7a69f015e08b12662d5a5774164276697d634  test/jdk/java/util/regex/M3RX7Test.java
 9f240084b8b072ae63b076cd5eb7b6b3d34b5035a573f611c7f23000216b6f9d  m3/docs/name-mapping.d/m3-regex-v7-dfa.json
 M3_PINNED_SOURCES

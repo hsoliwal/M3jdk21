@@ -118,20 +118,19 @@ final class M3RX7Transitions {
         if (count < 0) throw new IllegalArgumentException("negative repeat count");
         if (count == 0) return identity(states);
         if (count == 1) return rows.clone();
-        short[] result = identity(states);
-        short[] power = rows.clone();
+        // Read exponent bits from most to least significant. The leading one is
+        // already represented by rows; only result and scratch require storage.
+        short[] result = rows.clone();
         short[] scratch = new short[states];
-        for (long remaining = count; remaining != 0; remaining >>>= 1) {
-            if ((remaining & 1) != 0) {
-                composeJava(result, power, scratch);
-                short[] previous = result;
+        for (long bit = Long.highestOneBit(count) >>> 1; bit != 0; bit >>>= 1) {
+            composeJava(result, result, scratch);
+            short[] previous = result;
+            result = scratch;
+            scratch = previous;
+            if ((count & bit) != 0) {
+                composeJava(result, rows, scratch);
+                previous = result;
                 result = scratch;
-                scratch = previous;
-            }
-            if (remaining > 1) {
-                composeJava(power, power, scratch);
-                short[] previous = power;
-                power = scratch;
                 scratch = previous;
             }
         }
