@@ -42,6 +42,25 @@ public final class M3LongBitmapFilteredSnapshotSelfTest {
         throw new AssertionError("expected failure: " + expected);
     }
 
+    private static void membershipOracle(M3LongBitmapFilteredSnapshot snapshot) {
+        long[] values = snapshot.toArray();
+        long[] probes = {Long.MIN_VALUE, Long.MIN_VALUE + 1, Long.MAX_VALUE - 1,
+                Long.MAX_VALUE, -17, -1, 0, 1, 17};
+        for (long value : values) {
+            membershipProbe(snapshot, values, value);
+            if (value > Long.MIN_VALUE) membershipProbe(snapshot, values, value - 1);
+            if (value < Long.MAX_VALUE) membershipProbe(snapshot, values, value + 1);
+        }
+        for (long value : probes) membershipProbe(snapshot, values, value);
+    }
+
+    private static void membershipProbe(M3LongBitmapFilteredSnapshot snapshot,
+                                         long[] values, long probe) {
+        boolean expected = false;
+        for (long value : values) if (value == probe) expected = true;
+        check(snapshot.contains(probe) == expected, "primitive membership " + probe);
+    }
+
     private static long[] valuesFrom(List<Integer> selected, long[] original) {
         long[] values = new long[selected.size()];
         for (int i = 0; i < selected.size(); i++) values[i] = original[selected.get(i)];
@@ -74,6 +93,7 @@ public final class M3LongBitmapFilteredSnapshotSelfTest {
             check(cached.get(i) == original[filteredIds.get(i)], "ordinal value");
             check(cached.includesPhysicalIndex(filteredIds.get(i)), "physical membership");
         }
+        membershipOracle(cached);
         long[] selected = cached.toArray();
         M3LongBitmapFilteredSnapshot ascending = cached.sortedAscending();
         M3LongBitmapFilteredSnapshot descendingView = cached.sortedDescending();
@@ -88,15 +108,20 @@ public final class M3LongBitmapFilteredSnapshotSelfTest {
             descendingOracle[descendingOracle.length - 1 - i] = temp;
         }
         equal(descendingOracle, descendingView.toArray(), "descending cached selection");
+        membershipOracle(ascending);
+        membershipOracle(descendingView);
         M3LongBitmapFilteredSnapshot sliced = ascending.slice(0, ascending.size());
         check(sliced == ascending, "full range is metadata identity");
         M3LongBitmapFilteredSnapshot tail = ascending.slice(ascending.size(), 0);
         check(tail.size() == 0 && tail.physicalMaskCopy().isEmpty(), "empty tail bitmap");
+        membershipOracle(tail);
         if (ascending.size() > 2) {
             M3LongBitmapFilteredSnapshot section = ascending.slice(1, ascending.size() - 2);
             equal(Arrays.copyOfRange(ascendingOracle, 1, ascendingOracle.length - 1),
                     section.toArray(), "offset selection");
             check(section.physicalMaskCopy().cardinality() == section.size(), "range bit set");
+            membershipOracle(section);
+            membershipOracle(descendingView.slice(1, descendingView.size() - 2));
         }
         BitSet leaked = cached.physicalMaskCopy();
         leaked.clear();
@@ -127,6 +152,7 @@ public final class M3LongBitmapFilteredSnapshotSelfTest {
         });
         check(nextCalls.get() == cached.size(), "only previously accepted values retested");
         check(refined.size() <= cached.size(), "refinement is monotone");
+        membershipOracle(refined);
         for (long value : refined.toArray()) check((value & 1) == 0, "refinement retained value");
         check(calls[0] == size, "previous predicate never recomputed by refinement");
 
@@ -136,6 +162,7 @@ public final class M3LongBitmapFilteredSnapshotSelfTest {
                     sorted, v -> { nativeCalls.incrementAndGet(); return v % divisor == 0; },
                     M3IndexMaskCompactor.Backend.NATIVE_REQUIRED);
             equal(cached.toArray(), jni.toArray(), "actual JNI primitive selection parity");
+            membershipOracle(jni);
             check(Arrays.equals(cached.physicalMaskCopy().toLongArray(),
                     jni.physicalMaskCopy().toLongArray()), "native bitmap parity");
             check(nativeCalls.get() == size, "JNI cannot call Java predicate again");
@@ -229,7 +256,22 @@ public final class M3LongBitmapFilteredSnapshotSelfTest {
         check(empty.isEmpty(), "empty snapshot");
         check(empty.physicalMaskCopy().isEmpty(), "empty mask");
         check(!empty.includesPhysicalIndex(-1), "negative physical handle");
+        membershipOracle(empty);
+        membershipOracle(empty.sortedAscending());
+        membershipOracle(empty.sortedDescending());
+        M3LongBitmapFilteredSnapshot singleton = M3LongBitmapFilteredSnapshot.snapshot(
+                new long[]{Long.MAX_VALUE}, v -> true);
+        membershipOracle(singleton);
+        membershipOracle(singleton.sortedAscending());
+        membershipOracle(singleton.sortedDescending());
         long[] extremes = {Long.MIN_VALUE, Long.MIN_VALUE, 0, 1, 1, Long.MAX_VALUE, -1};
+        M3LongBitmapFilteredSnapshot encounter = M3LongBitmapFilteredSnapshot.snapshot(
+                extremes, v -> true);
+        membershipOracle(encounter);
+        membershipOracle(encounter.slice(1, extremes.length - 2));
+        membershipOracle(encounter.filtered(v -> v != 0));
+        selectedOracle(extremes, 0, extremes.length, false, 1);
+        selectedOracle(extremes, 0, extremes.length, true, 1);
         selectedOracle(extremes, 0, extremes.length, false, 2);
         selectedOracle(extremes, 1, 4, true, 3);
         long[] original = {1, 2, 2, 3, 4};
@@ -237,6 +279,7 @@ public final class M3LongBitmapFilteredSnapshotSelfTest {
                 original, v -> (v & 1) == 0);
         Arrays.fill(original, 0L);
         equal(new long[]{2, 2, 4}, immutable.toArray(), "caller array isolation");
+        membershipOracle(immutable);
         check(immutable.physicalMaskCopy().get(1), "physical slot maps first duplicate");
         check(immutable.physicalMaskCopy().get(2), "physical slot maps second duplicate");
         verifyEpoch();
