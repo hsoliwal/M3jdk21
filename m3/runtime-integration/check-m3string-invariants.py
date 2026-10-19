@@ -363,7 +363,7 @@ for fragment in [
     "private static int height(M3String value)",
     "private static M3String internTuple(M3String left, M3String right)",
     "private static long tupleRouteKey(",
-    "long routeKey = tupleRouteKey(left, right, javaHash, totalLength, coder);",
+    "Long routeKey = tupleRouteKey(left, right, javaHash, totalLength, coder);",
     "private static char joinedCharAt(M3String left, M3String right, int index)",
     "private static boolean sameLeafSequence(",
     "private static final class LeafCursor",
@@ -1410,7 +1410,7 @@ for call in release_calls:
     iterated_bucket_ref = (
         "LocalBucket bucket = LOCAL.computeIfAbsent(fingerprint, ignored -> new LocalBucket());" in prefix
         and normalized_body == (
-            "synchronized(bucket){if(bucket.retired)continue;"
+            "synchronized(bucket){if(bucket.retired)continue;try{"
             "for(Iterator<LocalRef>iterator=bucket.values.iterator();iterator.hasNext();){"
             "LocalRefreference=iterator.next();M3StringAtomexisting=reference.get();"
             "if(existing==null){iterator.remove();"
@@ -1433,6 +1433,182 @@ for call in release_calls:
         fail("VM-local M3 release is not protected by its LocalRef-owning bucket")
 if canonical_release_calls != 5 or queued_release_calls != 1:
     fail("VM-local M3 owner-to-bucket release paths changed")
+
+# The frozen index is optional metadata over exact UTF-16 payloads. Check code tokens,
+# not comments, and keep the previous native-owner lifecycle checks above intact.
+def check_pool_precompute(source: str) -> None:
+    code = java_mask_non_code(source)
+    compact = re.sub(r"\s+", "", code)
+
+    def require(fragment: str, label: str) -> None:
+        if fragment not in compact:
+            fail("M3 pool precompute invariant: " + label)
+
+    def body(signature: str) -> str:
+        start = code.find(signature)
+        if start < 0 or code.find(signature, start + len(signature)) >= 0:
+            fail("M3 pool precompute method missing or duplicated: " + signature)
+        opening = code.find("{", start)
+        closing = java_block_end(code, opening)
+        if opening < 0 or closing < 0:
+            fail("M3 pool precompute method scope invalid: " + signature)
+        return code[opening + 1:closing]
+
+    def normalized(signature: str) -> str:
+        return re.sub(r"\s+", "", body(signature))
+
+    local_helper = normalized("private static void retireEmptyLocalBucket(")
+    if local_helper != (
+            "if(bucket.values.isEmpty()&&LOCAL.remove(fingerprint,bucket)){bucket.retired=true;}"):
+        fail("M3 empty local bucket must retire under exact bucket identity")
+    tuple_helper = normalized("private static void retireEmptyTupleBucket(")
+    if tuple_helper != (
+            "if(bucket.values.isEmpty()&&TUPLES.remove(routeKey,bucket)){bucket.retired=true;}"):
+        fail("M3 empty tuple bucket must retire under exact bucket identity")
+    require("retireEmptyTupleBucket(LongrouteKey,TupleBucketbucket)",
+            "tuple cleanup reuses its existing boxed map key")
+    require("LongrouteKey=tupleRouteKey(left,right,javaHash,totalLength,coder);",
+            "tuple map key is boxed once before retries and cleanup")
+
+    for signature, retirement in [
+        ("static M3String internCodePoints(", "retireEmptyLocalBucket(fingerprint,bucket);"),
+        ("static M3String internCompactBytes(", "retireEmptyLocalBucket(fingerprint,bucket);"),
+        ("static M3String internLatin1Bytes(", "retireEmptyLocalBucket(fingerprint,bucket);"),
+        ("static M3String internChars(", "retireEmptyLocalBucket(fingerprint,bucket);"),
+        ("static M3String internUnit(", "retireEmptyLocalBucket(fingerprint,bucket);"),
+        ("private static M3String internTuple(", "retireEmptyTupleBucket(routeKey,bucket);"),
+    ]:
+        method = body(signature)
+        monitors = list(re.finditer(r"\bsynchronized\s*\(\s*bucket\s*\)\s*\{", method))
+        if len(monitors) != 1:
+            fail("M3 pool admission monitor changed: " + signature)
+        opening = method.find("{", monitors[0].start())
+        closing = java_block_end(method, opening)
+        monitor = method[opening + 1:closing]
+        if not re.match(r"\s*if\s*\(bucket\.retired\)\s*continue;\s*try\s*\{", monitor):
+            fail("M3 empty bucket retirement must retain the guarded retry before try")
+        try_open = monitor.find("{", monitor.find("try"))
+        try_close = java_block_end(monitor, try_open)
+        remainder = re.sub(r"\s+", "", monitor[try_close + 1:])
+        if remainder != "finally{" + retirement + "}":
+            fail("M3 empty bucket retirement must be unconditional inside the owner monitor")
+    if compact.count("retireEmptyLocalBucket(fingerprint,bucket);") != 5:
+        fail("M3 empty local bucket retirement call paths changed")
+    if compact.count("retireEmptyTupleBucket(routeKey,bucket);") != 1:
+        fail("M3 empty tuple bucket retirement call paths changed")
+
+    for fragment, label in [
+        ("privatestaticfinalintMAX_EXACT_INDEX_SLOTS=1<<22;", "slot allocation cap"),
+        ("privatestaticfinalintMAX_EXACT_PROBES=64;", "probe budget"),
+        ("privatefinalint[]exactRows;", "immutable primitive slots"),
+        ("privatefinalbyte[]coders;", "immutable coder rows"),
+        ("this.exactRows=buildExactIndex(javaHashes,lengths);", "validated primitive hash reuse"),
+        ("privatestaticfinallongLATIN1_GEOMETRY=1L<<Integer.SIZE;", "coder geometry bit"),
+    ]:
+        require(fragment, label)
+
+    index = normalized("private static int[] buildExactIndex(")
+    for fragment in [
+        "if(count==0||count>MAX_EXACT_INDEX_SLOTS/2)returnNO_EXACT_INDEX;",
+        "while(capacity<count*2)capacity<<=1;",
+        "try{rows=newint[capacity];}catch(OutOfMemoryErrorunavailable){returnNO_EXACT_INDEX;}",
+        "while(probe<MAX_EXACT_PROBES&&rows[slot]!=0){",
+        "intexisting=(rows[slot]&Integer.MAX_VALUE)-1;",
+        "if(hashes[existing]==hashes[row]&&lengths[existing]==lengths[row]){"
+        "rows[slot]|=Integer.MIN_VALUE;ambiguous=true;}",
+        "slot=(slot+1)&mask;probe++;",
+        "if(probe==MAX_EXACT_PROBES)returnNO_EXACT_INDEX;",
+        "rows[slot]=(row+1)|(ambiguous?Integer.MIN_VALUE:0);",
+    ]:
+        if fragment not in index:
+            fail("M3 frozen index bounded construction or ambiguity preservation changed: " + fragment)
+    if normalized("private static byte[] allocateCoders(") != (
+            "try{returnnewbyte[count];}catch(OutOfMemoryErrorunavailable){returnnull;}"):
+        fail("M3 coder metadata allocation must retain exact fallback on optional allocation failure")
+    if normalized("private static byte coderFromGeometry(") != (
+            "returnString.COMPACT_STRINGS&&(geometry&LATIN1_GEOMETRY)!=0L?String.LATIN1:String.UTF16;"):
+        fail("M3 prepared coder must honor CompactStrings and validated Latin-1 geometry")
+    if normalized("private static boolean mappedLatin1(") != (
+            "for(intindex=0;index<length;index++){longat=address+((long)index<<1);"
+            "intfirst=UNSAFE.getByte(at)&0xff;intsecond=UNSAFE.getByte(at+1L)&0xff;"
+            "charunit=bigEndian?(char)((first<<8)|second):(char)(first|(second<<8));"
+            "if(unit>0xff)returnfalse;}returntrue;"):
+        fail("M3 cold mapped coder fallback must preserve endian and exact Latin-1 eligibility")
+    geometry = normalized("private static long scanMappedGeometry(")
+    for fragment in [
+        "intat=byteOffset+(index<<1);",
+        "intfirst=mapped.get(at)&0xff;intsecond=mapped.get(at+1)&0xff;",
+        "charunit=bigEndian?(char)((first<<8)|second):(char)(first|(second<<8));",
+        "hash=31*hash+unit;latin1&=unit<=0xff;",
+        "returnInteger.toUnsignedLong(hash)|(latin1?LATIN1_GEOMETRY:0L);",
+    ]:
+        if fragment not in geometry:
+            fail("M3 mapped coder/hash validation changed: " + fragment)
+    require("longgeometry=scanMappedGeometry(mapped,(int)payload+(offset<<1),length,false);",
+            "M3LEX validated little-endian geometry")
+    require("longgeometry=scanMappedGeometry(map,position+80,units,true);",
+            "SYNARR validated big-endian geometry")
+    require("javaHashes[row]=version==2?mapped.getInt(entry+8):actualHash;",
+            "existing image Java hash authority")
+    require("if(coders!=null)coders[row]=coderFromGeometry(geometry);", "validated coder publication")
+    require("records.add(newint[]{position+80,units,hash,packedRecord});",
+            "shared sorted row coder travels with its record")
+    require("intpackedRecord=position|((geometry&LATIN1_GEOMETRY)!=0L?Integer.MIN_VALUE:0);",
+            "shared record offset packs only validated Latin-1 eligibility")
+    require("ids[i]=r[3]&Integer.MAX_VALUE;", "shared published record identity excludes geometry bit")
+    require("if(coders!=null)coders[i]=String.COMPACT_STRINGS&&r[3]<0?String.LATIN1:String.UTF16;",
+            "shared sorted row coder publication")
+    require("M3StringAtom[]atoms=newM3StringAtom[count];byte[]coders=allocateCoders(count);",
+            "normal mandatory atom lane precedes optional coder allocation")
+    require("M3StringAtom[]atoms=newM3StringAtom[n];byte[]coders=allocateCoders(n);",
+            "shared mandatory atom lane precedes optional coder allocation")
+    require("this.atoms=atoms;this.exactRows=buildExactIndex(javaHashes,lengths);",
+            "mandatory atom lane precedes optional slot allocation")
+    atom_body = normalized("M3StringAtom atom(int row)")
+    if ("coders!=null?coders[row]:String.COMPACT_STRINGS"
+            "&&mappedLatin1(address,lengths[row],bigEndian)?String.LATIN1:String.UTF16") not in atom_body:
+        fail("M3 reverse lookup must use prepared coder or exact CompactStrings-aware scan")
+
+    for signature, fallback, length, exact in [
+        ("int findUnit(char unit)", "findUnitBinary(unit)", "1", "mappedUnit(offsets[row],0)==unit"),
+        ("int findCodePoints(int[] value", "findCodePointsBinary(value,offset,count,utf16Length)",
+         "utf16Length", "compareCodePoints(value,offset,count,utf16Length,offsets[row],lengths[row])==0"),
+        ("int findCompactBytes(byte[] value", "findCompactBytesBinary(value,sourceOffset,logicalLength,sourceCoder)",
+         "logicalLength", "equalsCompactBytes(value,sourceOffset,logicalLength,sourceCoder,offsets[row])"),
+        ("int findLatin1Bytes(byte[] value", "findLatin1BytesBinary(value,offset,logicalLength)",
+         "logicalLength", "equalsCompactBytes(value,offset,logicalLength,String.LATIN1,offsets[row])"),
+        ("int find(char[] value", "findBinary(value,offset,logicalLength)",
+         "logicalLength", "equalsChars(value,offset,logicalLength,offsets[row])"),
+    ]:
+        find = normalized(signature)
+        if not find.startswith("if(exactRows.length==0)return" + fallback + ";"):
+            fail("M3 frozen lookup lost exact no-index fallback: " + signature)
+        for fragment in [
+            "intslot=exactSlot(hash," + length + ",mask);",
+            "for(intprobe=0;probe<MAX_EXACT_PROBES;probe++){",
+            "intencoded=exactRows[slot];if(encoded==0)return-1;",
+            "introw=(encoded&Integer.MAX_VALUE)-1;",
+            "if(javaHashes[row]==hash&&lengths[row]==" + length + "){"
+            "if(encoded<0)return" + fallback + ";if(" + exact + ")returnrow;}",
+            "slot=(slot+1)&mask;",
+        ]:
+            if fragment not in find:
+                fail("M3 frozen exact candidate/budget/ambiguity guard changed: " + signature)
+        if not find.endswith("return" + fallback + ";"):
+            fail("M3 frozen lookup lost exact exhausted-probe fallback: " + signature)
+    if normalized("private boolean equalsChars(") != (
+            "for(intindex=0;index<length;index++){"
+            "if(value[offset+index]!=mappedUnit(mappedOffset,index))returnfalse;}returntrue;"):
+        fail("M3 frozen char candidate must compare every exact UTF-16 unit")
+    if normalized("private boolean equalsCompactBytes(") != (
+            "for(intindex=0;index<length;index++){charunit=coder==String.LATIN1?"
+            "(char)(value[offset+index]&0xff):StringUTF16.charAt(value,offset+index);"
+            "if(unit!=mappedUnit(mappedOffset,index))returnfalse;}returntrue;"):
+        fail("M3 frozen compact candidate must compare every exact UTF-16 unit")
+
+
+check_pool_precompute(pool)
+
 
 for required_mechanical_name_mapping in [
     '"source": "com.synexia.indexstring.precompute.MIndexRe2MechanicalFacts"',
