@@ -66,7 +66,7 @@ public final class M3HfLexiconIntakeProof {
     private static int verifyLanguageResourceDiscovery() throws IOException {
         List<String> lines = resourceLines(
                 "/com/m3/lexicon/hf/language-resource-discovery.tsv");
-        require(lines.size() == 202, "201 language-resource candidates plus header");
+        require(lines.size() == 208, "207 language-resource candidates plus header");
         List<String> expectedHeader = List.of("source_id", "resource", "category",
                 "data_shape_and_identity", "rights_and_attribution", "m3_candidate_use",
                 "admission_blockers", "state", "evidence");
@@ -290,8 +290,14 @@ public final class M3HfLexiconIntakeProof {
                 "hf-sasak-benchmark-100k",
                 "hf-georgian-case-alignment",
                 "hf-tibetan-word-segmentation-100",
-                "hf-bridgeconn-sign-dictionary-isl"
-        )), "exact 201 language-resource source IDs match the pinned catalogue");
+                "hf-bridgeconn-sign-dictionary-isl",
+                "hf-hmar-numeral-words",
+                "hf-hmar-unigrams",
+                "hf-hmar-corpus-archive",
+                "hf-robinson-hausa-en-1914",
+                "hf-african-tokenizer-challenge-v1",
+                "hf-naath-en-nuer-dinka-sw-corpus"
+        )), "exact 207 language-resource source IDs match the pinned catalogue");
         String sindhi = discoveryRecord(lines, "hf-sindhi-open-lexicon");
         require(sindhi.contains("223,342") && sindhi.contains("lexical_id")
                 && sindhi.contains("entry_id") && sindhi.contains("schema casting"),
@@ -352,6 +358,31 @@ public final class M3HfLexiconIntakeProof {
         require(signIsl.contains("3,077 lexical items") && signIsl.contains("7.11 GB")
                 && signIsl.contains("CC BY-SA 4.0") && signIsl.contains("signer consent"),
                 "Indian Sign Language media stays reference-only pending consent and identity review");
+        String hmarNumerals = discoveryRecord(lines, "hf-hmar-numeral-words");
+        require(hmarNumerals.contains("999,999") && hmarNumerals.contains("zero is omitted")
+                && hmarNumerals.contains("Apache-2.0") && hmarNumerals.contains("REFERENCE_ONLY"),
+                "Hmar number forms stay language-scoped, observed-only, and gated");
+        String hmarUnigrams = discoveryRecord(lines, "hf-hmar-unigrams");
+        require(hmarUnigrams.contains("110,603") && hmarUnigrams.contains("4,832,070")
+                && hmarUnigrams.contains("ṭ/ț") && hmarUnigrams.contains("raw counts"),
+                "Hmar raw counts preserve exact orthography and remain distinct from Zipf scores");
+        String hmarArchive = discoveryRecord(lines, "hf-hmar-corpus-archive");
+        require(hmarArchive.contains("0001..0012") && hmarArchive.contains("CC BY-NC-SA 4.0")
+                && hmarArchive.contains("per-item source/license/community review"),
+                "Hmar archive IDs do not transfer rights to linked payloads");
+        String robinson = discoveryRecord(lines, "hf-robinson-hausa-en-1914");
+        require(robinson.contains("20,628") && robinson.contains("robinson_1914_vol2")
+                && robinson.contains("no stable source-entry ID") && robinson.contains("OCR"),
+                "Robinson Hausa entries remain historical OCR candidates pending source identity and rights review");
+        String tokenizer = discoveryRecord(lines, "hf-african-tokenizer-challenge-v1");
+        require(tokenizer.contains("240,000-train/24,000-validation")
+                && tokenizer.contains("b04c8d1ceb2f5cd4588862100d08de323dccfbaa")
+                && tokenizer.contains("not a gold word-segmentation lexicon"),
+                "African tokenizer data remain source-addressed text diagnostics, not lexical gold labels");
+        String naath = discoveryRecord(lines, "hf-naath-en-nuer-dinka-sw-corpus");
+        require(naath.contains("803k") && naath.contains("CC BY-NC-SA 4.0")
+                && naath.contains("no source-native row ID"),
+                "Naath sentence pairs remain noncommercial sentence-level fixtures, not M3 lexeme IDs");
         String massive = discoveryRecord(lines, "massive-nlu-1-1");
         require(massive.contains("52 languages") && massive.contains("SLURP") && massive.contains("CC BY 4.0")
                 && massive.contains("not a canonical dictionary"),
@@ -931,7 +962,7 @@ public final class M3HfLexiconIntakeProof {
         require(Files.isRegularFile(catalogue), "algorithm catalogue exists at Maven invocation root");
         if (!Files.isRegularFile(catalogue)) return 0;
         List<String> lines = Files.readAllLines(catalogue, StandardCharsets.UTF_8);
-        require(lines.size() == 71, "70 algorithm patterns plus header");
+        require(lines.size() == 72, "71 algorithm patterns plus header");
         List<String> header = List.of("problem_category", "discovery_source", "candidate",
                 "decision", "owner_or_reason", "qualification");
         require(!lines.isEmpty() && List.of(splitTsv(lines.getFirst())).equals(header),
@@ -1015,8 +1046,9 @@ public final class M3HfLexiconIntakeProof {
                 "cross_lingual_embedding_retrieval",
                 "khmer_segmentation_pos_tagging",
                 "georgian_case_alignment_masked_contrast",
-                "tibetan_word_segmentation_evaluation"
-        )), "all 70 algorithm categories match the pinned catalogue");
+                "tibetan_word_segmentation_evaluation",
+                "balanced_multilingual_tokenizer_fertility"
+        )), "all 71 algorithm categories match the pinned catalogue");
         for (String category : List.of("spoken_language_phoneme_morphology_alignment",
                 "medical_translation_regression", "low_resource_african_parallel_corpus",
                 "multi_source_parallel_corpus_provenance", "document_level_translation_regression",
@@ -1028,7 +1060,8 @@ public final class M3HfLexiconIntakeProof {
                 "cross_lingual_embedding_retrieval",
                 "khmer_segmentation_pos_tagging",
                 "georgian_case_alignment_masked_contrast",
-                "tibetan_word_segmentation_evaluation")) {
+                "tibetan_word_segmentation_evaluation",
+                "balanced_multilingual_tokenizer_fertility")) {
             String row = lines.stream().skip(1)
                     .filter(line -> category.equals(splitTsv(line)[0]))
                     .findFirst().orElse("");
@@ -1059,6 +1092,15 @@ public final class M3HfLexiconIntakeProof {
                 && splitTsv(tibetanSegmentation)[2].contains("Botok")
                 && splitTsv(tibetanSegmentation)[5].contains("tsek U+0F0B"),
                 "Tibetan boundary evaluation retains source-script invariants");
+        String tokenizerFertility = lines.stream().skip(1)
+                .filter(line -> "balanced_multilingual_tokenizer_fertility".equals(splitTsv(line)[0]))
+                .findFirst().orElse("");
+        require(splitTsv(tokenizerFertility).length == 6
+                && "EVALUATE_ONLY".equals(splitTsv(tokenizerFertility)[3])
+                && splitTsv(tokenizerFertility)[4].contains("not gold word-boundary accuracy")
+                && splitTsv(tokenizerFertility)[5].contains("b04c8d1ceb2f5cd4588862100d08de323dccfbaa")
+                && splitTsv(tokenizerFertility)[5].contains("no train/validation leakage"),
+                "tokenizer-fertility comparison stays evaluation-only and split-safe");
         String corpusPrecompute = lines.stream().skip(1)
                 .filter(line -> "offline_corpus_frequency_and_ngram_precompute".equals(splitTsv(line)[0]))
                 .findFirst().orElse("");

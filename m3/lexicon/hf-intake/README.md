@@ -23,7 +23,7 @@ source Synexia owner. Repeated source rows remain separate stable record IDs
 while the downstream M3LEX image may deduplicate identical UTF-16 values.
 
 The companion `language-resource-discovery.tsv` is a searchable,
-release-aware catalogue of 201 **reference-only** candidates.
+release-aware catalogue of 207 **reference-only** candidates.
 An earlier discovery pass added 14 reference-only leads: GATITOS bilingual pairs; Swedish Flex/Kubord frequencies, LEXIN, Parole+ and given-name forms; Linguabase's English lexical graph; Bashkir frequency and n-gram indexes; EuroVoc; Czech MorfFlex; Icelandic DMII; Japanese UniDic; and Taiwan's Taigi dictionary. Every row carries its own version, identity and rights caveats. In particular, noncommercial/share-alike, no-derivatives, component-level licensing, unresolved upstream corpus rights, and release-metadata inconsistencies block payload admission. No data files were downloaded or copied.
  In addition to
 dictionaries, grammar, translation, frequency, names, units and speech sources,
@@ -130,3 +130,6 @@ A prior discovery pass added seven reference-only leads: Sindhi Open Lexicon (22
 The latest discovery pass adds five distinct reference-only resources: African Storybook-derived stopword/frequency files (eight language codes plus a Lugbarati variant, with incompatible file schemas); an Amharic gemination lexicon with nested readings and unresolved ambiguous-count discrepancy; a 44,706-row Khmer dictionary whose card says research-only/noncommercial; the Khmer khPOS segmentation/POS corpus under CC BY-NC-SA 4.0; and a Sasak morphology/lexicon bundle whose MIT tag does not settle underlying dictionary/corpus rights. All remain `REFERENCE_ONLY`: source-native identities, per-row rights, or commercial/privacy constraints must be cleared before payload admission. No corpus payload was downloaded.
 
 The algorithm catalogue also adds `khmer_segmentation_pos_tagging` as `EVALUATE_ONLY`: reproduce the source's CRF, trigram-HMM, SVM, maximum-entropy and RDR baselines under the same split, compare boundary F1/POS accuracy/exact sequences, and keep the NC-SA corpus out of any default production payload.
+
+
+The latest internet pass adds six reference-only resources: Hmar number forms (1..999,999; zero absent), Hmar unigram counts and an experimental archive index; a 1914 English–Hausa dictionary OCR conversion; a six-language African tokenizer challenge corpus; and an English–Nuer–Dinka–Swahili sentence corpus. These enrich numeral, frequency, archive discovery, historical bilingual, Unicode/tokenizer and low-resource sentence-regression coverage without minting lexeme IDs. Contact gates, noncommercial/share-alike terms, unresolved source/derivative rights, unstable row identity and OCR errors are preserved as blockers. Tokenizer segments are not gold word boundaries. All six remain `REFERENCE_ONLY`, all new patterns remain `EVALUATE_ONLY`, and no payload was downloaded.
