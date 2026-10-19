@@ -586,7 +586,6 @@
       "source_revision_receipt": "m3/tooling/module-packs/nlp-search/SOURCE_REF.json",
       "target_rule": "Actual upstream tool implementations and APIs retained. M3-owned internal source recipes; no shadow implementation, API rename, java.base replacement or runtime phase advancement.",
       "license": "Preserve Apache and embedded notices; SLF4J MIT; first-party recipe/integration Apache-2.0"
-
     },
     {
       "source": "Existing Synexia MIndexString code-point geometry/rank taxonomy and canonical recipe",
@@ -9120,6 +9119,19 @@
       "target_proof": "m3/tooling/module-packs/collections/build.py",
       "existing_generic_module": "com.m3.collections",
       "optional_exported_package": "com.m3.util"
+    },
+    {
+      "module": "jdk.m3.jackson",
+      "optional_compiler_module": "jdk.m3.jackson.compiler",
+      "mapping": "m3/docs/name-mapping.d/m3-jackson-jmod-full-20261018.json",
+      "intake_mode": "INDEPENDENT_APACHE_MODULE",
+      "receiving_sequence_advanced": false,
+      "canonical_recipe": "com.synexia.rewrite.M3JacksonJmodFullRecipe",
+      "target_proof": "m3/tooling/module-packs/jackson/build.py",
+      "compiler_proof": "m3/tooling/module-packs/jackson/compiler-build.py",
+      "upstream_version": "2.19.2",
+      "optional_exported_package": "jdk.m3.jackson",
+      "upstream_proof": "m3/tooling/module-packs/jackson/upstream-qualification.py"
     }
   ]
 }
