@@ -41,7 +41,7 @@ com.google.common.collect.ConcurrentHashMultiset	OPEN	-	-	core M3CountedBag + M3
 org.apache.commons.collections4.bag.HashBag	DONE #1421	com.m3.collections.apache.M3HashBag	PR #1421: implementations/apache-hash-bag + qualification/owned-apache-hash-bag-20261019	interop M3ApacheBag; core M3CountedBag	fill order b
 org.apache.commons.collections4.multiset.HashMultiSet	OPEN	-	adapter work in open PR #1271	#1271 M3ApacheMultiSet; core M3CountedBag	fill order b
 org.apache.commons.collections4.bag.TreeBag	OPEN	-	-	core M3CountedBag + M3TreeMap	-
-com.google.common.collect.EnumBiMap	OPEN	-	-	guava M3HashBiMap; core M3EnumLongMap	fill order c
+com.google.common.collect.EnumBiMap	DONE #1462	com.m3.collections.guava.M3EnumBiMap	PR #1462: implementations/guava-enum-bi-map + qualification/owned-guava-enum-bi-map-20261019	guava M3HashBiMap; core M3EnumLongMap	fill order c
 com.google.common.collect.EnumHashBiMap	DONE #1460	com.m3.collections.guava.M3EnumHashBiMap	PR #1460: implementations/guava-enum-hash-bi-map + qualification/owned-guava-enum-hash-bi-map-20261019	guava M3HashBiMap	fill order c
 org.apache.commons.collections4.bidimap.DualLinkedHashBidiMap	OPEN	-	-	apache M3BidiMap	fill order c
 org.apache.commons.collections4.bidimap.DualTreeBidiMap	OPEN	-	-	apache M3BidiMap + core M3TreeMap	fill order c
