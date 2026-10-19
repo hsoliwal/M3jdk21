@@ -1,0 +1,22 @@
+M3FS — M3JDK21 runtime filesystem
+Copyright 2026 Hitesh Soliwal and contributors
+SPDX-License-Identifier: Apache-2.0
+
+Adapted from the Apache-2.0 MIndexFS and M3 filesystem owners in
+hsoliwal/com.synexia at 289e32f130c9c8e4a1cf0edc1066327d699393bf.
+Exact source paths, Git blobs, SHA-256 hashes and receiving dispositions are
+recorded in qualification/port-20261018/DONORS.tsv and SOURCE.json.
+
+The adaptation moves the delivered filesystem, native/JNI execution,
+precompute storage and Eclipse Resources consumer into M3JDK21. Internal
+metadata uses primitive and String-reference arrays. Public API projections
+materialize content identities, references, rows, records and collections.
+SQLite schema version 1 and the pinned MIndex/format-1 image encodings remain
+compatibility contracts; historical format names are retained where needed.
+
+Reusable Maven/OpenRewrite task recipes and their reviewed templates remain
+canonically owned by hsoliwal/com.synexia. Runtime execution does not require
+any Synexia service, Maven artifact or package.
+
+This notice does not change OpenJDK, Eclipse, SQLite or other upstream rights.
+Abstract algorithms and ideas are not relabeled as copyrighted expression.
