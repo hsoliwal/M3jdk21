@@ -1,0 +1,22 @@
+{
+  "command": [
+    "java",
+    "-Xms256m",
+    "-Xmx256m",
+    "-Djava.awt.headless=true",
+    "--add-modules",
+    "java.management,jdk.management",
+    "--add-reads",
+    "java.desktop=java.management",
+    "--add-reads",
+    "java.desktop=jdk.management",
+    "--patch-module",
+    "java.desktop=/workspace/scratch/48c1329dbda8/netbeans-gap-20261019/trial-04/baseline/classes:/workspace/scratch/48c1329dbda8/netbeans-gap-20261019/trial-04/baseline/test-classes:/workspace/scratch/48c1329dbda8/netbeans-gap-20261019/trial-04/baseline/bench",
+    "javax.swing.text.GapContentMarkBenchmark"
+  ],
+  "exit": 0,
+  "log_sha256": "f2908e8c286175fb2f854790ad5c847715db7cfd51b7230d6b3407c820c4344b",
+  "user_seconds": 2.779286,
+  "system_seconds": 0.19056399999999998,
+  "max_rss_kib_linux": 64492
+}
