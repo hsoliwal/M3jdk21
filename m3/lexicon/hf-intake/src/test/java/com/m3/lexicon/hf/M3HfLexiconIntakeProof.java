@@ -66,7 +66,7 @@ public final class M3HfLexiconIntakeProof {
     private static int verifyLanguageResourceDiscovery() throws IOException {
         List<String> lines = resourceLines(
                 "/com/m3/lexicon/hf/language-resource-discovery.tsv");
-        require(lines.size() == 146, "145 language-resource candidates plus header");
+        require(lines.size() == 162, "161 language-resource candidates plus header");
         List<String> expectedHeader = List.of("source_id", "resource", "category",
                 "data_shape_and_identity", "rights_and_attribution", "m3_candidate_use",
                 "admission_blockers", "state", "evidence");
@@ -234,8 +234,24 @@ public final class M3HfLexiconIntakeProof {
                 "madlad-400-v1-5",
                 "hf-wikidata-label-maps-2025",
                 "ai4bharat-bhasaanuvaad",
-                "iate-eu-terminology"
-        )), "exact 145 language-resource source IDs match the pinned catalogue");
+                "iate-eu-terminology",
+                "crossgram-magram",
+                "gff-geez-data-archive",
+                "kelly-language-frequency-lists",
+                "clear-global-gamayun-kits",
+                "afrispeech-africa-corpus",
+                "ldc-global-yoruba-lexical-database",
+                "frequencywords-opensubtitles",
+                "lexique-fr-4-10",
+                "fao-agrovoc",
+                "gemet-environment-thesaurus",
+                "google-dakshina-v1",
+                "lexibank-cldf-v2-2",
+                "lexibank-austronesian-comparative-dictionary",
+                "dictionaria-teanu",
+                "shabd-cstt-indian-technical-terminology",
+                "iwn-en-indowordnet"
+        )), "exact 161 language-resource source IDs match the pinned catalogue");
         String massive = discoveryRecord(lines, "massive-nlu-1-1");
         require(massive.contains("52 languages") && massive.contains("SLURP") && massive.contains("CC BY 4.0")
                 && massive.contains("not a canonical dictionary"),
@@ -277,6 +293,43 @@ public final class M3HfLexiconIntakeProof {
         require(iate.contains("7 million terms") && iate.contains("24 official EU languages plus Latin")
                 && iate.contains("no dataset-wide license is inferred"),
                 "IATE term identities, language coverage and reuse gate stay explicit");
+        String gf = discoveryRecord(lines, "gf-resource-grammar-library");
+        require(gf.contains("over 30 languages") && gf.contains("LGPL-3.0 and BSD")
+                && gf.contains("file-specific external sources"), "GF source licensing and scope");
+        String magram = discoveryRecord(lines, "crossgram-magram");
+        require(magram.contains("992 grammaticalization paths") && magram.contains("CC BY 4.0"), "MAGRAM scope/rights");
+        String gff = discoveryRecord(lines, "gff-geez-data-archive");
+        require(gff.contains("8,743-name list") && gff.contains("preliminary"), "Ge'ez archive caveat");
+        String kelly = discoveryRecord(lines, "kelly-language-frequency-lists");
+        require(kelly.contains("74,258 lemmas") && kelly.contains("artifact-specific"), "KELLY rights/coverage");
+        String gamayun = discoveryRecord(lines, "clear-global-gamayun-kits");
+        require(gamayun.contains("CC BY-SA 4.0") && gamayun.contains("Tatoeba"), "Gamayun rights/source");
+        String afrispeech = discoveryRecord(lines, "afrispeech-africa-corpus");
+        require(afrispeech.contains("693 African languages") && afrispeech.contains("builder code"), "AfriSpeech rights");
+        String ldc = discoveryRecord(lines, "ldc-global-yoruba-lexical-database");
+        require(ldc.contains("LDC User Agreement") && ldc.contains("tone/diacritics"), "Yoruba data constraints");
+        String freqwords = discoveryRecord(lines, "frequencywords-opensubtitles");
+        require(freqwords.contains("CC BY-SA 4.0") && freqwords.contains("MIT generator code"), "FrequencyWords license split");
+        String lexique = discoveryRecord(lines, "lexique-fr-4-10");
+        require(lexique.contains("190,000 French forms") && lexique.contains("CC BY-SA 4.0"), "Lexique release/rights");
+        String agrovoc = discoveryRecord(lines, "fao-agrovoc");
+        require(agrovoc.contains("CC BY IGO 3.0") && agrovoc.contains("contributor institutions"), "AGROVOC per-language rights");
+        String gemet = discoveryRecord(lines, "gemet-environment-thesaurus");
+        require(gemet.contains("37 languages") && gemet.contains("uneven translation completeness"), "GEMET coverage caveat");
+        String dakshina = discoveryRecord(lines, "google-dakshina-v1");
+        require(dakshina.contains("Twelve languages") && dakshina.contains("CC BY-SA 4.0")
+                && dakshina.contains("not semantic translation"), "Dakshina romanization scope");
+        String lexibank = discoveryRecord(lines, "lexibank-cldf-v2-2");
+        require(lexibank.contains("134 datasets") && lexibank.contains("component/source"), "Lexibank component rights");
+        String acd = discoveryRecord(lines, "lexibank-austronesian-comparative-dictionary");
+        require(acd.contains("146,733 lexemes") && acd.contains("38,249 records"), "ACD missing-source caveat");
+        String teanu = discoveryRecord(lines, "dictionaria-teanu");
+        require(teanu.contains("1,900 entries") && teanu.contains("2,800 sense definitions"), "Teanu sense structure");
+        String shabd = discoveryRecord(lines, "shabd-cstt-indian-technical-terminology");
+        require(shabd.contains("3M+ cumulative headwords")
+                && shabd.contains("license/redistribution grant was not established"), "CSTT no implied data license");
+        String iwn = discoveryRecord(lines, "iwn-en-indowordnet");
+        require(iwn.contains("CC BY-NC-SA 4.0") && iwn.contains("native synset IDs"), "IndoWordnet rights/identity");
         String signCompendium = discoveryRecord(lines, "sign-language-dataset-compendium-v1-5");
         require(signCompendium.contains("87") && signCompendium.contains("v1.5.0")
                 && signCompendium.contains("no blanket redistribution grant"),
