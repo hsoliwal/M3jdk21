@@ -8,6 +8,8 @@
  */
 
 import java.util.IdentityHashMap;
+import java.util.HashMap;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Objects;
@@ -78,6 +80,38 @@ public final class DirectOffsetString {
         }
     }
 
+    private static void foreignMapEquality() {
+        Random random = new Random(0x4d334944454e4551L);
+        for (int trial = 0; trial < 280; trial++) {
+            IdentityHashMap<Object, Object> identity = new IdentityHashMap<>();
+            HashMap<Object, Object> ordinary = new HashMap<>();
+            Key[] keys = new Key[22];
+            for (int i = 0; i < keys.length; i++) keys[i] = new Key(i % 9);
+            for (int i = 0; i < 120; i++) {
+                Key key = keys[random.nextInt(keys.length)];
+                Object value = random.nextInt(6) == 0 ? null : new Key(random.nextInt(30));
+                if (random.nextBoolean()) {
+                    identity.put(key, value);
+                    ordinary.put(key, value);
+                } else {
+                    identity.remove(key);
+                    ordinary.remove(key);
+                }
+                boolean baseline = identity.entrySet().equals(ordinary.entrySet());
+                check(baseline == identity.equals(ordinary),
+                        "foreign Map identity equality matches old EntrySet semantics");
+                check(baseline == identity.equals(Collections.unmodifiableMap(ordinary)),
+                        "unmodifiable foreign Map entry contract");
+            }
+            identity.put(null, null);
+            ordinary.put(null, null);
+            check(identity.entrySet().equals(ordinary.entrySet())
+                            == identity.equals(ordinary), "null mapping identity");
+            check(identity.equals(identity), "reflexive identity shortcut");
+            check(!identity.equals(null), "null not a Map");
+        }
+    }
+
     private static void failFastAfterUserString() {
         IdentityHashMap<Object, Object> map = new IdentityHashMap<>();
         Object first = new Object(), second = new Object(), third = new Object();
@@ -107,6 +141,7 @@ public final class DirectOffsetString {
         IdentityHashMap<Object, Object> empty = new IdentityHashMap<>();
         eq("{}", empty.toString(), "empty");
         randomized();
+        foreignMapEquality();
         failFastAfterUserString();
         System.out.println("PASS DirectOffsetString checks=" + checks);
     }
