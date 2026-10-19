@@ -530,3 +530,74 @@ result.
    every stock path. Release note: what changed, the heap deltas, the differences table, the kill switch.
 5. **Only if CI finds a leaf-specific regression:** one switch per leaf, `m3.swing.viewport.<leaf>=false`, so the
    other leaves stay on while it is fixed. Not proposed otherwise; one switch is simpler to support.
+
+## 13. Leaf 6: model events as deltas, and the stores the views keep beside the model (measured, proposal)
+
+Principle (user, 2026-10-19): one model, deltas end to end. A `TableModelEvent`, `TreeModelEvent` or `ListDataEvent` is
+a delta, and a cache must apply it incrementally:
+- inside the window: repaint the affected rows;
+- outside it: update only the extents and the scroll bar, through the prefix lanes;
+- never a full relayout.
+
+Stores the views keep beside the model's are counted and, where possible, removed. `bench/DELTA_20261019.tsv`
+measures both at 10^6 rows. Each scenario applies the same edit twice: once announced with the full event, once with
+the delta event, each followed by the lazy layout, `validate` and one 800x600 frame.
+
+**What the full events cost, and what the deltas cost** (p50, stock / M3):
+
+| View | Full event | Delta event for the same edit |
+|---|---|---|
+| `JTable`, no sorter | `fireTableDataChanged` 0.014 / 0.013 ms, but the selection is cleared | `fireTableCellUpdated` 0.009 / 0.009 ms |
+| `JTable` sorted | `fireTableDataChanged` 70-113 / 82-130 ms: full re-sort, selection cleared | `fireTableRowsUpdated` (100 rows) 0.03-0.05 / 0.03-0.05 ms |
+| `JTable` | `fireTableStructureChanged` 0.05-0.11 ms: columns recreated, sort keys and selection reset | none needed |
+| `JTree`, 1,001,001 nodes, all expanded | `reload()` + re-expand 1,118 / 421 ms | `nodesChanged` (100 nodes) 21.8 / **0.12** ms; `nodeChanged` (1) 6.2 / **0.08** ms |
+| `JTree` | `nodeStructureChanged(group)` + re-expand 105 / **1.3** ms | as above |
+| `JList`, 10^6 rows | `contentsChanged(0, n - 1)` 3,021 / 2,865 ms | `contentsChanged` over the edit, 1 row: 2,788 / **3.2** ms; 100 rows: 2,979 / **4.1** ms |
+
+**What this shows:**
+- **The M3 caches already apply deltas incrementally:**
+  - leaf 1 and leaf 2: the y origins and row counts of the tree;
+  - leaf 4: the measured rows of the list;
+  - leaf 5: the expansion table;
+  - the prefix lanes of leaves 1-3: extents and scroll bar.
+
+  Stock does not. A one-row list edit re-measures all 10^6 rows, and `nodeChanged` shifts the y origin of every
+  following row.
+- **The full events are full by contract.** A `JTable` with a sorter must re-sort after `fireTableDataChanged`,
+  because any row may have changed. Likewise `reload()` must rebuild the tree, and `contentsChanged(0, n - 1)` must
+  re-measure every row.
+- **Inferring the delta from a full event is not safe.** For example, the list cache could compare each row's value
+  with the one it measured. But a model that mutates its row objects in place and then fires the full event is
+  common and legal: the values compare equal while their text has changed. Stock re-measures those rows, so the
+  inference would diverge from stock. Leaf 6 therefore does not change any full-event path.
+
+**The delta path offered** (`ENHANCED_API_MAP.tsv` row `MODEL-ROW-DELTAS`, P1, for the user to decide, since it is
+public API):
+- Models fire full events when their edited rows are scattered, because the stock events carry one interval.
+- The proposal: `AbstractTableModel.fireTableRowsUpdated(int[] sortedModelRows)` and
+  `AbstractListModel.fireContentsChanged(Object, int[] sortedRows)`. Each delivers one event that carries a sorted int
+  lane of rows.
+- The event is a subclass whose interval is the lane's span, so old listeners keep working on a valid, wider event.
+- `JTable`, `DefaultRowSorter`, `BasicListUI` and the M3 caches read the lane and apply only those rows.
+- `DefaultTreeModel.nodesChanged(parent, int[])` already exists for trees.
+
+**Stores beside the model, at 10^6 rows** (heap after GC, MB, stock / M3):
+
+| Store | stock | M3 | Note |
+|---|---:|---:|---|
+| `DefaultTableModel` 10^6 x 3 (the model) | 132.0 | 132.0 | |
+| `JTable`, uniform rows | 0.8 | 0.8 | no per-row store |
+| `TableRowSorter`, sorted | 32.0 | 32.0 | one `Row` object per model row, plus two int lanes; the objects duplicate the model's row identity |
+| 1,000 custom row heights with a sorter | 8.0 | 8.0 | two dense `SizeSequence`s, view order (`rowModel`) and model order (`modelRowSizes`): the same heights twice, dense for 1,000 entries |
+| `DefaultMutableTreeNode` x 1,001,001 (the model) | 93.3 | 93.3 | |
+| `JTree` expanded: layout cache + expansion table | 129.1 | **20.7** | stock keeps one `TreeStateNode` per row; M3 keeps lanes (leaves 1, 5) |
+| 10^6 strings (the list model) | 60.2 | 60.2 | |
+| `JList` laid out | 4.5 | 12.5 | stock `cellHeights`; M3 adds the leaf 3 offset lane (4 MB) and the leaf 4 width lane (4 MB) |
+
+**Next leaves, all without API change.** Each is opt-in, with a differential against stock:
+1. `DefaultRowSorter` order as two int lanes, with no `Row` objects: 32 MB -> 8 MB per 10^6 rows. Ties keep
+   the stock order (the model index decides).
+2. `JTable` custom row heights as one sparse model-order lane, with the view order derived through the sorter's lane:
+   8 MB -> about 16 KB for 1,000 entries.
+3. The leaf 4 width lane as 16-bit values, with an int lane only when a width exceeds 32,767: 4 MB -> 2 MB. The leaf
+   3 offset lane stays, because `cellHeights` is a protected stock field and must keep its form.
