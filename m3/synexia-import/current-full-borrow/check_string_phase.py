@@ -128,6 +128,24 @@ EXPECTED_STRING_CHAIN = (
      "4fb87fd70ffe5c8d75d17db9c28b44bc9b574704", "11220", "862"),
     ("4fb87fd70ffe5c8d75d17db9c28b44bc9b574704",
      "42399d411c1516a56a47dcdb10242960157b4677", "11247", "864"),
+    ("42399d411c1516a56a47dcdb10242960157b4677",
+     "35ed998540e044eed8cb7596e2e2c019ae369bd3", "11448", "898"),
+)
+
+
+# Exact later source observations are separate from the immutable historical
+# successor tables. These records never grant runtime or receiving-phase acceptance.
+CURRENT_SOURCE_OBSERVATIONS = Path(__file__).with_name(
+    "string-current-source-observations-20261019.tsv"
+)
+CURRENT_SOURCE_HEADER = ['schema', 'sequence', 'target_path', 'predecessor_git_blob', 'observed_git_blob', 'evidence_kind', 'evidence_ref', 'state']
+EXPECTED_CURRENT_SOURCE_OBSERVATIONS = (
+    ('M3JDK21_STRING_SOURCE_OBSERVATION_V1', '1', 'src/java.base/share/classes/java/lang/M3String.java', '35ed998540e044eed8cb7596e2e2c019ae369bd3', 'e3bffdb11669a80a8fe8e1ba127b23fb7efc3c1e', 'COMMITTED_TARGET_SOURCE', 'hsoliwal/M3JDK21@c21a3d2bf8245109634ea70f8114b742d646a421', 'SOURCE_OBSERVATION_NOT_RUNTIME_ACCEPTED'),
+    ('M3JDK21_STRING_SOURCE_OBSERVATION_V1', '2', 'src/java.base/share/classes/java/lang/M3StringFacts.java', 'fcd108ab6181fec11d16eda811b29d18298f3fb1', '3e76b8c52eefc3b1983c701a0b9dfc953262a554', 'COMMITTED_TARGET_SOURCE', 'hsoliwal/M3JDK21@c21a3d2bf8245109634ea70f8114b742d646a421', 'SOURCE_OBSERVATION_NOT_RUNTIME_ACCEPTED'),
+    ('M3JDK21_STRING_SOURCE_OBSERVATION_V1', '3', 'src/java.base/share/classes/java/lang/M3StringCodePointPrecompute.java', '6cbb277119f387aac772373d31621af64bea68d5', '011377436faba14db9fb15bb8f63ecbbf7501dae', 'COMMITTED_TARGET_SOURCE', 'hsoliwal/M3JDK21@e753cfb6628af058c62c34222cc233acb6802514', 'SOURCE_OBSERVATION_NOT_RUNTIME_ACCEPTED'),
+    ('M3JDK21_STRING_SOURCE_OBSERVATION_V1', '4', 'src/java.base/share/classes/java/lang/M3StringPool.java', '514247a2e6c3704e03a9b47682f74e481f66585f', '0905414556ad0b698a5b5f835f53d12bc040bc8c', 'COMMITTED_TARGET_SOURCE', 'hsoliwal/M3JDK21@0fe08b29befd56e3245fa411095674767ee146dd', 'SOURCE_OBSERVATION_NOT_RUNTIME_ACCEPTED'),
+    ('M3JDK21_STRING_SOURCE_OBSERVATION_V1', '5', 'src/java.base/share/classes/java/lang/M3StringPool.java', '0905414556ad0b698a5b5f835f53d12bc040bc8c', '1832f47265330a2693154a7c8a801afbf8de7428', 'PUBLISHED_TARGET_CANDIDATE', 'hsoliwal/M3JDK21@672e29f20bd039acaaeeb97ea17eee2939fcc8e4', 'SOURCE_OBSERVATION_NOT_RUNTIME_ACCEPTED'),
+    ('M3JDK21_STRING_SOURCE_OBSERVATION_V1', '6', 'src/java.base/share/classes/java/lang/M3StringPool.java', '1832f47265330a2693154a7c8a801afbf8de7428', '56cb36e509ff4b700cbc4fc3064289402553fdf8', 'SDK_EMITTED_SOURCE_CANDIDATE', 'com.synexia.m3jdk.FixedLexiconConvergence20261019@sha256:00645607a655f1c22f74fc2baa8503f3d1c3f4ed2dbf94be66a4e921ec1901f9', 'SOURCE_OBSERVATION_NOT_RUNTIME_ACCEPTED'),
 )
 
 SUCCESSOR_MARKERS = {
@@ -284,6 +302,34 @@ def current_successor_blobs(mapping_rows: list[dict[str, str]]) -> dict[str, str
         current[M3_STRING_PATH] = after
     return current
 
+
+
+def observed_candidate_blobs(mapping_rows: list[dict[str, str]]) -> dict[str, str]:
+    """Bind reviewed current bytes without rewriting history or promoting a phase.
+
+    The six fixed observations distinguish committed owners, a published candidate,
+    and a newly emitted SDK candidate. Each predecessor must match the preceding
+    exact source identity; arbitrary live hashes and altered provenance are refused.
+    """
+    current = current_successor_blobs(mapping_rows)
+    historical = {row["target_path"]: row["target_git_blob"] for row in mapping_rows}
+    observations = load_tsv(CURRENT_SOURCE_OBSERVATIONS, CURRENT_SOURCE_HEADER)
+    if len(observations) != len(EXPECTED_CURRENT_SOURCE_OBSERVATIONS):
+        raise ValueError("current String source observation cardinality drift")
+    for index, (row, expected) in enumerate(
+            zip(observations, EXPECTED_CURRENT_SOURCE_OBSERVATIONS), start=1):
+        if set(row) != set(CURRENT_SOURCE_HEADER):
+            raise ValueError(f"current String source observation row arity drift: {index}")
+        if tuple(row[field] for field in CURRENT_SOURCE_HEADER) != expected:
+            raise ValueError(f"unreviewed current String source observation: {index}")
+        path = row["target_path"]
+        if path not in historical:
+            raise ValueError("current String observation escaped source map: " + path)
+        before = current.get(path, historical[path])
+        if before != row["predecessor_git_blob"]:
+            raise ValueError(f"discontinuous current String source observation: {index}")
+        current[path] = row["observed_git_blob"]
+    return current
 
 
 def load_precompute_observation() -> dict[str, str]:
@@ -490,7 +536,7 @@ def main(argv: list[str]) -> int:
 
     rows = load_tsv(MAP, HEADER)
     successors = approved_successors(rows)
-    current_blobs = current_successor_blobs(rows)
+    current_blobs = observed_candidate_blobs(rows)
     precompute_observation = load_precompute_observation()
     validate_precompute_mapping(rows, precompute_observation)
     if precompute_observation["target_path"] in current_blobs:

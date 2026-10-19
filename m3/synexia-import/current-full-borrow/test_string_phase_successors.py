@@ -51,7 +51,7 @@ class StringTargetSuccessorTest(unittest.TestCase):
         for target, row in receipts.items():
             path = phase.ROOT / target
             self.assertTrue(path.is_file(), target)
-            self.assertEqual(phase.current_successor_blobs(self.mapping())[target],
+            self.assertEqual(phase.observed_candidate_blobs(self.mapping())[target],
                              phase.git_blob(path), target)
             phase.validate_successor_source(target, path.read_text(encoding="utf-8"))
 
@@ -282,8 +282,16 @@ class StringTargetSuccessorTest(unittest.TestCase):
                 self.assertEqual(row["source_git_blob"] if key == "source_path"
                                  else row["cache_git_blob"],
                                  phase.git_blob(path), key)
-        self.assertEqual("4ef13745f3fdc265fc8df3f2d84a9f2ecd3b7516",
+        self.assertEqual("75d949e5aa2c8ff4e5c70d648e81fc0d37b68651",
                          phase.git_blob(phase.SUCCESSOR_CHAIN))
+        # The third row was already published. The original two-step receipt
+        # remains an exact byte prefix; check both generations independently.
+        with tempfile.TemporaryDirectory() as temporary:
+            prefix = Path(temporary) / "historical-two-step-chain.tsv"
+            prefix.write_bytes(b"".join(
+                phase.SUCCESSOR_CHAIN.read_bytes().splitlines(keepends=True)[:3]))
+            self.assertEqual("4ef13745f3fdc265fc8df3f2d84a9f2ecd3b7516",
+                             phase.git_blob(prefix))
 
 
     def test_live_precompute_target_matches_current_receipt_when_present(self):
@@ -292,6 +300,109 @@ class StringTargetSuccessorTest(unittest.TestCase):
         if not target.is_file():
             self.skipTest("M3JDK receiver source tree is not present")
         self.assertEqual(row["current_target_git_blob"], phase.git_blob(target))
+
+
+    def read_observations(self):
+        with phase.CURRENT_SOURCE_OBSERVATIONS.open(encoding="utf-8", newline="") as handle:
+            return list(csv.DictReader(handle, delimiter="\t"))
+
+    def with_observations(self, changed, callback):
+        with tempfile.TemporaryDirectory() as temporary:
+            path = Path(temporary) / "observations.tsv"
+            with path.open("w", encoding="utf-8", newline="") as handle:
+                writer = csv.DictWriter(handle, fieldnames=phase.CURRENT_SOURCE_HEADER,
+                                        delimiter="\t", lineterminator="\n")
+                writer.writeheader()
+                writer.writerows(changed)
+            with patch.object(phase, "CURRENT_SOURCE_OBSERVATIONS", path):
+                callback()
+
+    def test_current_observations_preserve_exact_historical_final(self):
+        mapping = self.mapping()
+        historical = phase.current_successor_blobs(mapping)
+        current = phase.observed_candidate_blobs(mapping)
+        self.assertEqual("35ed998540e044eed8cb7596e2e2c019ae369bd3",
+                         historical[phase.M3_STRING_PATH])
+        self.assertEqual("e3bffdb11669a80a8fe8e1ba127b23fb7efc3c1e",
+                         current[phase.M3_STRING_PATH])
+        self.assertEqual("56cb36e509ff4b700cbc4fc3064289402553fdf8",
+                         current["src/java.base/share/classes/java/lang/M3StringPool.java"])
+        self.assertEqual(4, len(historical))
+        self.assertEqual(5, len(current))
+        self.assertEqual("75d949e5aa2c8ff4e5c70d648e81fc0d37b68651",
+                         phase.git_blob(phase.SUCCESSOR_CHAIN))
+
+    def test_each_observation_field_refuses_drift(self):
+        good = self.read_observations()
+        mutations = 0
+        for index in range(len(good)):
+            for field in phase.CURRENT_SOURCE_HEADER:
+                changed = [row.copy() for row in good]
+                changed[index][field] = "UNREVIEWED"
+                with self.subTest(row=index, field=field):
+                    self.with_observations(changed, lambda: self.assertRaises(
+                        ValueError, phase.observed_candidate_blobs, self.mapping()))
+                mutations += 1
+        self.assertEqual(48, mutations)
+
+    def test_observation_missing_duplicate_reordered_and_promotion_refuse(self):
+        good = self.read_observations()
+        cases = [good[:-1], good + [good[-1].copy()], list(reversed(good)), []]
+        for field in ("state", "evidence_kind"):
+            changed = [row.copy() for row in good]
+            changed[-1][field] = "RUNTIME_ACCEPTED"
+            cases.append(changed)
+        for changed in cases:
+            self.with_observations(changed, lambda: self.assertRaises(
+                ValueError, phase.observed_candidate_blobs, self.mapping()))
+
+    def test_observation_map_escape_and_predecessor_drift_refuse(self):
+        mapping = self.mapping()
+        target = "src/java.base/share/classes/java/lang/M3StringCodePointPrecompute.java"
+        removed = [row for row in mapping if row["target_path"] != target]
+        with self.assertRaisesRegex(ValueError, "escaped source map"):
+            phase.observed_candidate_blobs(removed)
+        changed = [row.copy() for row in mapping]
+        for row in changed:
+            if row["target_path"] == target:
+                row["target_git_blob"] = "0" * 40
+        with self.assertRaisesRegex(ValueError, "discontinuous"):
+            phase.observed_candidate_blobs(changed)
+
+    def test_complete_current_source_gate_preserves_no_promotion(self):
+        self.assertEqual(0, phase.main([str(SCRIPT)]))
+        self.assertEqual(2, phase.main([str(SCRIPT), "unexpected"]))
+
+    def test_current_source_drift_refuses_in_complete_gate(self):
+        # Copy only the fixed source-map owners. The full checker still validates
+        # all historical metadata and naming/phase/work-order responsibilities.
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            paths = {row["target_path"] for row in self.mapping()}
+            for relative in paths:
+                destination = root / relative
+                destination.parent.mkdir(parents=True, exist_ok=True)
+                destination.write_bytes((phase.ROOT / relative).read_bytes())
+            path = root / "src/java.base/share/classes/java/lang/M3StringPool.java"
+            path.write_bytes(path.read_bytes() + b"\n// unreviewed drift\n")
+            with patch.object(phase, "ROOT", root):
+                with self.assertRaisesRegex(ValueError, "target owner drift"):
+                    phase.main([str(SCRIPT)])
+
+
+    def test_every_observation_row_refuses_nonempty_and_empty_extra_cells(self):
+        good = phase.CURRENT_SOURCE_OBSERVATIONS.read_text(encoding="utf-8").splitlines()
+        for index in range(1, len(good)):
+            for extra in ("UNREVIEWED", ""):
+                changed = good.copy()
+                changed[index] += "\t" + extra
+                with tempfile.TemporaryDirectory() as temporary:
+                    path = Path(temporary) / "extra-cell.tsv"
+                    path.write_text("\n".join(changed) + "\n", encoding="utf-8")
+                    with patch.object(phase, "CURRENT_SOURCE_OBSERVATIONS", path):
+                        with self.assertRaisesRegex(ValueError, "row arity drift"):
+                            phase.observed_candidate_blobs(self.mapping())
+
 
 
 if __name__ == "__main__":
