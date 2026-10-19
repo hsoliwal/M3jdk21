@@ -34,18 +34,22 @@ package sun.swing.list;
  * measurement (m3/docs/swing-viewport/ALGORITHM_CATALOGUE.tsv). Design: DESIGN.md section 10.
  */
 //FLLDCIM: M3 swing-viewport leaf 4 - piece table over the rows measured at the last layout
-final class M3RowPieces {
+public final class M3RowPieces {
 
     /** The start of a piece of rows that were not measured at the last layout. */
-    static final int NEW = -1;
+    public static final int NEW = -1;
 
     private int[] start = new int[8];
     private int[] len = new int[8];
     private int count;
     private int size;
 
+    /** Creates an empty piece table. */
+    public M3RowPieces() {
+    }
+
     /** Forgets every edit: rows {@code 0 .. n - 1} are the old rows in order. */
-    void reset(int n) {
+    public void reset(int n) {
         count = 0;
         size = n;
         if (n > 0) {
@@ -56,27 +60,27 @@ final class M3RowPieces {
     }
 
     /** The number of rows after the edits. */
-    int size() {
+    public int size() {
         return size;
     }
 
     /** The number of pieces. */
-    int count() {
+    public int count() {
         return count;
     }
 
     /** The old row of the first row of piece {@code i}, or {@link #NEW}. */
-    int start(int i) {
+    public int start(int i) {
         return start[i];
     }
 
     /** The number of rows in piece {@code i}. */
-    int length(int i) {
+    public int length(int i) {
         return len[i];
     }
 
     /** Inserts {@code k > 0} new rows before row {@code at}, {@code 0 <= at <= size()}. */
-    void insert(int at, int k) {
+    public void insert(int at, int k) {
         int i = split(at);
         if (i > 0 && start[i - 1] == NEW) {
             len[i - 1] += k;
@@ -91,7 +95,7 @@ final class M3RowPieces {
     }
 
     /** Removes rows {@code from .. to}, {@code 0 <= from <= to < size()}. */
-    void remove(int from, int to) {
+    public void remove(int from, int to) {
         int i = split(from);
         int j = split(to + 1);
         System.arraycopy(start, j, start, i, count - j);
@@ -101,7 +105,7 @@ final class M3RowPieces {
     }
 
     /** Marks rows {@code from .. to} as new, {@code 0 <= from <= to < size()}. */
-    void change(int from, int to) {
+    public void change(int from, int to) {
         remove(from, to);
         insert(from, to - from + 1);
     }

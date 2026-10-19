@@ -88,6 +88,7 @@ public final class M3JListViewportDifferential {
     }
 
     /** A DefaultListCellRenderer subclass: outside the classes M3ListMeasure accepts. */
+    @SuppressWarnings("serial")
     static final class OtherRenderer extends DefaultListCellRenderer {
     }
 
@@ -366,6 +367,28 @@ public final class M3JListViewportDifferential {
         if (offsetsBuilt()) {
             m3Steps++;
         }
+        countPartialLayout();
+    }
+
+    private Object lastHeights;
+
+    /** Counts layouts of the M3 list that measured fewer rows than it has (evidence for leaf 4). */
+    void countPartialLayout() {
+        try {
+            Field h = BasicListUI.class.getDeclaredField("cellHeights");
+            h.setAccessible(true);
+            Object heights = h.get(m3.getUI());
+            Field f = BasicListUI.class.getDeclaredField("m3Measure");
+            f.setAccessible(true);
+            Object measure = f.get(m3.getUI());
+            int measured = (int) measure.getClass().getMethod("remeasured").invoke(measure);
+            if (heights != null && heights != lastHeights && measured < model.getSize()) {
+                partialLayouts++;
+            }
+            lastHeights = heights;
+        } catch (ReflectiveOperationException e) {
+            throw new IllegalStateException("M3 measure path not installed", e);
+        }
     }
 
     /** A hash of the list painted into a 320 x 240 image whose top is {@code y}. */
@@ -433,6 +456,6 @@ public final class M3JListViewportDifferential {
         });
         return "M3JListViewportDifferential seeds " + seeds + " steps " + steps + " passed " + passed[0]
                 + " failed " + failures.size() + " " + failures + "; pixel comparisons " + pixelChecks
-                + "; checks on M3 offsets " + m3Steps;
+                + "; checks on M3 offsets " + m3Steps + "; partial M3 layouts " + partialLayouts;
     }
 }
