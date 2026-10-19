@@ -1,0 +1,19 @@
+Picked up JAVA_TOOL_OPTIONS: -Djavax.net.ssl.trustStore=/etc/ssl/certs/java/cacerts
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ----< com.synexia.m3.recipes:m3jdk21-integrated-utilities-20261018 >----
+[INFO] Building M3JDK21 integrated utility source recipe 1.0.0-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- exec:3.5.0:java (default-cli) @ m3jdk21-integrated-utilities-20261018 ---
+SLF4J(W): No SLF4J providers were found.
+SLF4J(W): Defaulting to no-operation (NOP) logger implementation
+SLF4J(W): See https://www.slf4j.org/codes.html#noProviders for further details.
+ActualOpenRewriteResults=0 secondSdkRunChanges=0 runtimeContracts=not-run-by-recipe-engine
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  40.680 s
+[INFO] Finished at: 2026-10-19T10:30:50+05:30
+[INFO] ------------------------------------------------------------------------

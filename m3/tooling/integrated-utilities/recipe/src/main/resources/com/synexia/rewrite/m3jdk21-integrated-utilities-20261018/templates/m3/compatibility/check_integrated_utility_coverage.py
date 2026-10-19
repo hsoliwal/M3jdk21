@@ -82,11 +82,18 @@ def candidate_source(repository: Path, overlay: Path | None, candidate: dict) ->
     missing = [method for method in methods if not re.search(
         r"(?m)^\s*public\s+(?:(?:static|final|synchronized|native|abstract)\s+)*[^;{}]*\b"
         + re.escape(method) + r"\s*\(", text)]
-    return {"api": candidate["public_api"], "source_observed": declaration and package_ok and not missing,
-            "source_path": path, "sha256": hashlib.sha256(source.read_bytes()).hexdigest(),
+    actual_sha256 = hashlib.sha256(source.read_bytes()).hexdigest()
+    expected_sha256 = candidate.get("candidate_source_sha256")
+    source_hash_matches = expected_sha256 is None or actual_sha256 == expected_sha256
+    missing_declarations = [token for token in candidate.get("declaration_tokens", []) if token not in text]
+    return {"api": candidate["public_api"],
+            "source_observed": declaration and package_ok and not missing and source_hash_matches and not missing_declarations,
+            "source_path": path, "sha256": actual_sha256,
+            "expected_sha256": expected_sha256, "source_hash_matches": source_hash_matches,
             "public_declaration": declaration, "package_declaration": package_ok,
             "missing_candidate_method_tokens": missing,
-            "evidence": "DECLARATION_TOKENS_ONLY_NOT_SIGNATURE_OR_RUNTIME_CONFORMANCE"}
+            "missing_candidate_declaration_tokens": missing_declarations,
+            "evidence": "SOURCE_HASH_AND_DECLARATION_TOKENS_ONLY_NOT_SIGNATURE_OR_RUNTIME_CONFORMANCE"}
 
 
 def internal_source(repository: Path, overlay: Path | None, candidate: dict) -> dict:
@@ -243,6 +250,32 @@ def verify_module_index(repository: Path, overlay: Path | None, fragment: dict, 
             require(slot["public_owner"] is None and slot["public_signatures"] is None and slot["proof"] is None
                     and slot["status"] == "PENDING_DONOR_RIGHTS_OWNER_AND_CONTRACT_SELECTION"
                     and slot["receiving_sequence_advanced"] is False, "pending token slot fabricates an API or qualification")
+    regex = next(family for family in fragment["families"] if family["id"] == "regex")
+    token = regex.get("token_sequence_extension")
+    require(isinstance(token, dict), "missing token sequence contract extension")
+    expected_token_owners = ["java.util.regex.TokenPattern", "java.util.regex.TokenMatcher"]
+    require(token["public_owners"] == expected_token_owners
+            and [row["public_api"] for row in regex["new_candidates"]] == expected_token_owners,
+            "token sequence public owner drift")
+    require(token["aspect"] == "TOKEN_SEQUENCE_MATCHING"
+            and token["target_module"] == "java.base" and token["target_package"] == "java.util.regex",
+            "token sequence receiving ownership drift")
+    require(token["status"] == CANDIDATE_STATUS and token["proof"] is None
+            and token["runtime_qualified"] is False and token["performance_qualified"] is False
+            and token["receiving_sequence_advanced"] is False,
+            "token sequence inventory cannot claim runtime or performance qualification")
+    require(token["engine_owner_sources"] == ["java.util.regex.Pattern", "java.util.regex.Matcher"]
+            and token["existing_character_owners_unchanged"] is True
+            and token["named_character_groups_are_token_aware"] is False,
+            "character regex must remain distinct from token sequence matching")
+    require(token["unit"] == "ONE_LIST_ELEMENT_NO_STRING_SERIALIZATION"
+            and token["span_positions"] == "ABSOLUTE_HALF_OPEN_TOKEN_INDICES",
+            "token sequence unit or span contract drift")
+    require(not regex.get("pending_extension_slots"), "selected token owners cannot remain a fabricated pending slot")
+    for candidate in regex["new_candidates"]:
+        require(re.fullmatch(r"[0-9a-f]{64}", candidate.get("candidate_source_sha256", "")) is not None
+                and bool(candidate.get("declaration_tokens")),
+                "token candidate lacks exact source and declaration seals")
     exports = sum(len(row["unqualified_exports"]) for row in rows)
     require(index["exported_package_count"] == exports, "module exported-package count drift")
     return {"source_modules": len(rows), "unqualified_exported_packages": exports,

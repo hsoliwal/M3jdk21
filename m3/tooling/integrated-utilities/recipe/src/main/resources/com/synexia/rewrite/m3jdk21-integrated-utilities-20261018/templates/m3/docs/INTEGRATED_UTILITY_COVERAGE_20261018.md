@@ -236,14 +236,37 @@ unbounded transfers, exact reads/skips, equality and explicit charset conversion
 extends its existing owner with source adaptation and serial zip. The source verifier records
 member declaration tokens only and does not infer overload signatures or runtime contracts.
 
-## Token-aware regex candidate slot
+## Token sequence APIs in the owning regex package
 
-The existing `java.util.regex.Pattern` and `Matcher` own character-sequence regular expressions.
-Named capture groups do not make those APIs token-aware. The same family fragment records a
-bounded token-sequence matching extension slot in `java.base` / `java.util.regex`; the public
-owner, signatures, donor rights and exact token/capture/resource contract remain pending the
-active source review. This slot is not an implemented or qualified API and introduces no guessed
-public name. Any selected receiver must preserve existing character regex behavior.
+The additive candidates are `java.util.regex.TokenPattern<T>` and `TokenMatcher<T>`
+in `java.base`. Existing `Pattern` and `Matcher` continue to own character regex.
+The token owners reuse the JDK graph and match state with a predicate atom consuming one
+whole input-list element. Tokens, including null, are never serialized, converted with
+`toString`, or lexed to infer boundaries. A matcher takes a shallow defensive snapshot;
+all regions, capture spans and search positions are absolute half-open token indices.
+
+The finite builder contract covers literal/any/empty/predicate atoms, sequences, ordered
+alternatives, greedy/reluctant/possessive repetition, and numbered or named captures.
+Nested public owners are `TokenPattern.Quantifier` and `TokenMatcher.Span`. Text grammar,
+lexing, backreference/lookaround builders and the full T-Rex language are outside this
+packet. Backtracking and stack resource costs remain; this catalogue makes no general
+linear-time, JNI acceleration or performance claim.
+
+The same family fragment pins both product hashes and exact declaration tokens. The
+contract catalogue and compiler-derived 68-method source seal live under
+`m3/runtime-integration/token-regex/`. Those observations do not promote the baseline
+source inventory into executed runtime or product-image acceptance. Fresh source-bound
+contract receipts belong to the canonical recipe's token qualification packet.
+
+The current follow-up was reconstructed after transient staging was lost. Its two
+production source hashes match the prior recorded hashes. The test source and execution
+receipts were recreated and rerun; unavailable historical receipt bytes are not claimed
+as recovered. Existing character `Pattern` and `Matcher` sources remain unchanged.
+
+The donor decision rows distinguish JDK graph reuse from reference-only T-Rex, NLTK and
+Synexia algorithms. Named character groups do not make character regex token-aware.
+Delimiter serialization is rejected because it can map different token sequences to the
+same character string. No Apache donor implementation text is imported into JDK files.
 
 ## Source verification
 

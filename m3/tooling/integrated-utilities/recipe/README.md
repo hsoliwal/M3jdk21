@@ -44,7 +44,9 @@ catalogue's baseline source atoms. Templates are exact UTF-8 source postimages;
 the SDK operates on sealed `PlainText` for the mixed Java, C, JSON, TSV and document
 dataset. Java and native behavior are qualified by separate source-bound receivers.
 
-The assembled dataset pins M3JDK21 baseline
+The current serial dataset receives the core source checkpoint
+`2717d156ad2aba73dfdfcfc6a58b59a82371798e` and changes 13 target paths while
+sealing 477 unchanged targets. The historical baseline for source ownership remains
 `2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49`. The assembly receipt and actual
 `RECIPE_RESULTS.json` are preserved under `qualification/recipe/`. The latter is
 written only after successful actual SDK execution and its second-run fixed point.
@@ -88,8 +90,11 @@ materialization are preserved separately from the successful run.
 The source catalogue accounts for all 70 observed source modules and representative
 public owners at the pinned baseline. It does not enumerate every public type or
 method or claim universal utility completeness. The receiving phase order remains
-unchanged. Token-sequence matching remains a pending catalogue extension until its
-own final source and contract intake is admitted.
+unchanged. The token follow-up adds `java.util.regex.TokenPattern` and `TokenMatcher`,
+reusing existing JDK graph owners. Their two production files were recovered against
+exact prior hashes after transient staging was lost. Fresh tests and receipts were
+executed; unavailable historical token receipt bytes are explicitly not recreated.
+The current pass is separate from the 33-Result core receipt retained in qualification.
 
 The selected detached snapshot sorter reuses `Arrays.sort` over its own captured
 visible `Object[]`. Selected physical indices are transient construction inputs;
