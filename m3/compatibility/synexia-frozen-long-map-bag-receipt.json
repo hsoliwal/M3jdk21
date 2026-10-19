@@ -1,0 +1,97 @@
+{
+  "schema": "M3JDK21_SYNEXIA_FROZEN_LONG_MAP_BAG_RECEIVER_V1",
+  "copyright": "Copyright 2026 Hitesh Soliwal and contributors",
+  "receivedLicense": "Apache-2.0",
+  "canonicalSource": {
+    "repository": "hsoliwal/com.synexia",
+    "branch": "codex/m3-frozen-long-map-bag-20261018",
+    "pullRequest": 12415,
+    "commit": "1f048186ac95090b09c498e2cf868e4e71afa775",
+    "recipe": "com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe",
+    "declarativeRecipe": "com.synexia.m3.FrozenLongMapBag",
+    "crate": "m3-frozen-long-map-bag",
+    "fossReuseDecisionRow": "collections.superset.ls2-frozen-long-map-bag",
+    "donors": [
+      {
+        "path": "synexia-common/src/main/java/com/synexia/common/collections/PackedFrozenLongMap.java",
+        "blob": "50729509d91638586f3c09a5dbce4def8a54cd8b",
+        "developCommit": "11c94feb18155a53cc213708c353791132edc4a7",
+        "target": "com.m3.collections.M3FrozenLongMap",
+        "mechanics": "frozen parallel key/value lanes"
+      },
+      {
+        "path": "synexia-common/src/main/java/com/synexia/common/collections/PackedLongBag.java",
+        "blob": "414766cab26384d4d88d102b62f6687ae54dba85",
+        "developCommit": "11c94feb18155a53cc213708c353791132edc4a7",
+        "target": "com.m3.collections.M3FrozenLongBag",
+        "mechanics": "counted element lanes"
+      },
+      {
+        "path": "synexia-common/src/main/java/com/synexia/common/collections/PackedLongSortedBag.java",
+        "blob": "2578a67896a8bdbdb95919302b7c8e5fac562511",
+        "developCommit": "11c94feb18155a53cc213708c353791132edc4a7",
+        "target": "com.m3.collections.M3FrozenLongBag",
+        "mechanics": "sorted counted lanes"
+      }
+    ],
+    "license": "Apache-2.0 first-party; provider libraries are test-scope oracles only",
+    "disposition": "ADAPT over the five-library scaffold preimages (M3FrozenLongMap 4c1fb895..., M3FrozenLongBag aec49582...)"
+  },
+  "target": {
+    "repository": "hsoliwal/M3jdk21",
+    "base": "d4bd1dbd16178d29ab2bfa437639f04278bf84f5",
+    "stackedOn": "hsoliwal/M3jdk21#1409",
+    "owners": [
+      "com.m3.collections.M3FrozenLongMap",
+      "com.m3.collections.M3FrozenLongBag"
+    ],
+    "publicJdkReplacement": false
+  },
+  "runtimeDependencyOnSynexia": false,
+  "publicJdkReplacement": false,
+  "perElementAllocation": "0 (field-shape tests + ThreadMXBean steady-state 0 bytes)",
+  "gates": {
+    "synexiaCrateTest": "PASS 3/3",
+    "m3CollectionsSuite": "PASS 172/172 (combined LS1-LS3 tree)",
+    "interopProviderTests": "PASS 6/6 (combined LS1-LS3 tree)",
+    "fullInteropSuite": "NOT_RUN"
+  },
+  "targets": [
+    {
+      "path": "m3/collections/interop/src/test/java/com/m3/collections/interop/M3FrozenLongBagProviderTest.java",
+      "before": "ABSENT",
+      "after": "e271d2b4b99822fc78b4ed4a44dcdbbab086c61a66bc6d4cfc2eac8b1abfa6c9",
+      "resource": "05-M3FrozenLongBagProviderTest.java.txt"
+    },
+    {
+      "path": "m3/collections/interop/src/test/java/com/m3/collections/interop/M3FrozenLongMapProviderTest.java",
+      "before": "ABSENT",
+      "after": "0515a1fa72b7d3f4a1bd1ee117cb91dde69e667bec1a5f1a887c1348b697d486",
+      "resource": "04-M3FrozenLongMapProviderTest.java.txt"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3FrozenLongBag.java",
+      "before": "aec4958213b720f65becea02ac4b3fa2909fe42b49da1f0c51548cac76edf5d1",
+      "after": "8f25639780522bede42b3e9ec986111d80e9b5be73293b5fee6cca73ba11a50e",
+      "resource": "01-M3FrozenLongBag.java.txt"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3FrozenLongMap.java",
+      "before": "4c1fb895927f3baf39ff596b0b856d504c514aa44052936ed27f18ba34684fbc",
+      "after": "0361694a96c98119d3be6be3561478104622c7e7a109a3778b0b9bcc7ec33b48",
+      "resource": "00-M3FrozenLongMap.java.txt"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3FrozenLongBagTest.java",
+      "before": "ABSENT",
+      "after": "1d84b2a341fc3b50a242c1f6d86530263b891e751b8bc08bf0f24ac50ba73cd0",
+      "resource": "03-M3FrozenLongBagTest.java.txt"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3FrozenLongMapTest.java",
+      "before": "ABSENT",
+      "after": "672990b5627ce23d75fb2d11f9313d651df6053c9461feb3c5e7a4793e14e410",
+      "resource": "02-M3FrozenLongMapTest.java.txt"
+    }
+  ]
+}

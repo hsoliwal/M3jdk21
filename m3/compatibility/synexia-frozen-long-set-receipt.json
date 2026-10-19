@@ -1,0 +1,64 @@
+{
+  "schema": "M3JDK21_SYNEXIA_FROZEN_LONG_SET_RECEIVER_V1",
+  "copyright": "Copyright 2026 Hitesh Soliwal and contributors",
+  "receivedLicense": "Apache-2.0",
+  "canonicalSource": {
+    "repository": "hsoliwal/com.synexia",
+    "branch": "codex/m3-frozen-long-set-20261018",
+    "pullRequest": 12400,
+    "commit": "a73081459b3629e0e70a7ca1f04131360adc2f6a",
+    "recipe": "com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe",
+    "declarativeRecipe": "com.synexia.m3.FrozenLongSet",
+    "crate": "m3-frozen-long-set",
+    "fossReuseDecisionRow": "collections.superset.ls1-frozen-long-set",
+    "donors": [
+      {
+        "path": "synexia-common/src/main/java/com/synexia/common/collections/PackedFrozenLongSet.java",
+        "blob": "e2efeecf9c033c0d726eee62ab155fa6863df982",
+        "developCommit": "11c94feb18155a53cc213708c353791132edc4a7",
+        "target": "com.m3.collections.M3FrozenLongSet",
+        "mechanics": "sort + in-place dedupe, binary-search membership, ordinal get, defensive export"
+      }
+    ],
+    "license": "Apache-2.0 first-party; provider libraries are test-scope oracles only",
+    "disposition": "ADAPT over the five-library scaffold preimage (sha 4fc3c489...8715)"
+  },
+  "target": {
+    "repository": "hsoliwal/M3jdk21",
+    "base": "43152c6b09b90d0734d19db45c9f6b59c2454d5b",
+    "stackedOn": "hsoliwal/M3jdk21#1385",
+    "owners": [
+      "com.m3.collections.M3FrozenLongSet"
+    ],
+    "publicJdkReplacement": false
+  },
+  "runtimeDependencyOnSynexia": false,
+  "publicJdkReplacement": false,
+  "perElementAllocation": "0 (field-shape test + ThreadMXBean steady-state 0 bytes)",
+  "gates": {
+    "synexiaCrateTest": "PASS 3/3",
+    "m3CollectionsSuite": "PASS 160/160",
+    "interopProviderTest": "PASS 2/2 (Guava ImmutableSortedSet, Eclipse ImmutableLongSet, >=40k ops each)",
+    "fullInteropSuite": "NOT_RUN"
+  },
+  "targets": [
+    {
+      "path": "m3/collections/interop/src/test/java/com/m3/collections/interop/M3FrozenLongSetProviderTest.java",
+      "before": "ABSENT",
+      "after": "80e0b77589a102a71ba81cbf7e4556a453601a388129f7525385300e1dca9a7a",
+      "resource": "02-M3FrozenLongSetProviderTest.java.txt"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3FrozenLongSet.java",
+      "before": "4fc3c4898115c784d695bee275a1c9ae4e7d4ba7a5cd4b8968e8286747608715",
+      "after": "e27ea26caab4549e1cd364b96e62022d6716848233844ad714664a45b1875d79",
+      "resource": "00-M3FrozenLongSet.java.txt"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3FrozenLongSetTest.java",
+      "before": "ABSENT",
+      "after": "fbfc1efa44622a644d627276625e061db1c861e91ab32b86c2455ea14b1630fc",
+      "resource": "01-M3FrozenLongSetTest.java.txt"
+    }
+  ]
+}

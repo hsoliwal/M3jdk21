@@ -4,111 +4,358 @@
  */
 package com.m3.collections;
 
+import java.util.AbstractMap;
+import java.util.AbstractSet;
+import java.util.Arrays;
+import java.util.ConcurrentModificationException;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.NoSuchElementException;
+import java.util.Objects;
+import java.util.Set;
+
 /**
- * M3 five-library superset scaffold {@code M3LruMap}: API group {@code LRU_MAP} over arrays and state masks.
+ * Bounded least-recently-used map over open-addressed reference slot lanes, a cached-hash lane and a recency link lane.
  *
- * <p>Provider lineage (LIBRARY_API_MATRIX.tsv, run 20261017-synexia-to-public/LIB-SUPERSET):
+ * <p>Provider lineage (LIBRARY_API_MATRIX.tsv, run 20261017-synexia-to-public/LIB-SUPERSET, leaf LS4):
  * <ul>
- *   <li>COMMONS LRUMap: bounded map; access-order eviction; get mutates order [license Apache-2.0; NEW_OWNER (LS2); priority P2; matrix owner PROPOSED:M3LruLongLongMap (donor PackedLongLongLruCache@3f4b2be6)]</li>
+ *   <li>COMMONS {@code LRUMap}: fixed {@code maxSize} (>= 1); {@code get} moves the key to the MRU end,
+ *       {@code get(key, false)} and {@code containsKey} do not; {@code put} of a present key replaces the value and moves
+ *       it to MRU; {@code put} of a new key into a full map evicts the LRU entry first; {@code firstKey}/{@code lastKey}
+ *       are the LRU/MRU ends ({@link NoSuchElementException} when empty); null keys and values are allowed; iteration
+ *       runs LRU to MRU.</li>
  * </ul>
+ * Qualified only against Commons {@code LRUMap}; no equivalence with other caches is inferred.
  *
- * <p>DOOP mapping: lane kind OBJECT; lanes {@code Object[] keyLane;Object[] valueLane;int[] prevLane;int[] nextLane;int[] hashIndexLane}; offset scheme slot + recency link lanes with head/tail; state-mask bits OCCUPIED,DELETED; stored nodes NONE; API entry objects TRANSIENT_FACADE (transient facades over slots, never the stored representation); matrix note: key+value lanes + prev/next recency link lanes; slot offsets / occupancy mask; recency head/tail.
+ * <p>DOOP mapping: lane kind OBJECT; slot lanes {@code keyLane}/{@code valueLane}, {@code hashIndexLane} (cached spread
+ * hash per slot), recency link lanes {@code prevLane}/{@code nextLane} with {@code head} (LRU) / {@code tail} (MRU)
+ * offsets, per-slot state bits (2 bits per slot) in {@code stateMaskWords}; linear probing with backward-shift
+ * deletion. Stored nodes: NONE. Per-element allocation: 0 for get/put/evict/remove (lanes are allocated once). API
+ * entry objects: TRANSIENT_FACADE only — {@link #asMap()} iteration hands out slot-bound {@code Map.Entry} views, never
+ * stored. Donor: first-party Synexia {@code PackedLongLongLruCache} (blob 3f4b2be64db5), adapted to references.
  *
- * <p>Status: SCAFFOLD. Every public atom throws {@link M3NotYetReceived} until this owner is received through a hash-pinned Synexia recipe with its own
- * provider oracle (never inferred from another provider). Not a {@code java.util} replacement.
+ * @param <K> key type
+ * @param <V> value type
  */
 public final class M3LruMap<K, V> {
-    /** State-mask bit {@code OCCUPIED} (per-slot state word, bit 0). */
+    /** Slot state bit {@code OCCUPIED}. */
     static final long STATE_OCCUPIED = 1L << 0;
-    /** State-mask bit {@code DELETED} (per-slot state word, bit 1). */
+    /** Slot state bit {@code DELETED}: reserved; backward-shift deletion never leaves tombstones. */
     static final long STATE_DELETED = 1L << 1;
+    private static final int NIL = -1;
+    private static final Object NULL_KEY = new Object();
 
-    /** Storage lane {@code keyLane}: dynamic primitive/reference array lane. */
-    private Object[] keyLane = new Object[0];
-    /** Storage lane {@code valueLane}: dynamic primitive/reference array lane. */
-    private Object[] valueLane = new Object[0];
-    /** Storage lane {@code prevLane}: dynamic primitive/reference array lane. */
-    private int[] prevLane = new int[0];
-    /** Storage lane {@code nextLane}: dynamic primitive/reference array lane. */
-    private int[] nextLane = new int[0];
-    /** Storage lane {@code hashIndexLane}: dynamic primitive/reference array lane. */
-    private int[] hashIndexLane = new int[0];
-    /** Per-slot state words (OCCUPIED,DELETED); one bit set per slot and state. */
-    private long[] stateMaskWords = new long[0];
+    /** Storage lane {@code keyLane}: key per slot (null key stored as a private sentinel). */
+    private final Object[] keyLane;
+    /** Storage lane {@code valueLane}: value per slot. */
+    private final Object[] valueLane;
+    /** Recency lane {@code prevLane}. */
+    private final int[] prevLane;
+    /** Recency lane {@code nextLane}. */
+    private final int[] nextLane;
+    /** Cached spread hash per slot. */
+    private final int[] hashIndexLane;
+    /** Per-slot state words: 2 bits per slot (OCCUPIED, DELETED). */
+    private final long[] stateMaskWords;
+    private final int mask;
+    private final int maxSize;
     /** Live slot count. */
     private int size;
+    private int head = NIL;
+    private int tail = NIL;
+    private int modCount;
 
-    /** Creates an empty scaffold owner; lanes grow by copy once received. */
+    /** Commons LRUMap default: {@code maxSize} 100. */
     public M3LruMap() {
+        this(100);
+    }
+
+    /** Bounded map with the given {@code maxSize} (>= 1). */
+    public M3LruMap(int maxSize) {
+        if (maxSize < 1 || maxSize > (1 << 29)) throw new IllegalArgumentException("maxSize must be in [1, 2^29]: " + maxSize);
+        int capacity = Integer.highestOneBit(Math.max(4, maxSize * 2 - 1)) << 1;
+        this.keyLane = new Object[capacity];
+        this.valueLane = new Object[capacity];
+        this.prevLane = new int[capacity];
+        this.nextLane = new int[capacity];
+        this.hashIndexLane = new int[capacity];
+        this.stateMaskWords = new long[(capacity + 31) >>> 5];
+        this.mask = capacity - 1;
+        this.maxSize = maxSize;
     }
 
     /** Reports the declared state-mask bits and lanes for ledgers; never allocates per element. */
     public static String scaffoldDescriptor() {
-        return "M3LruMap|LRU_MAP|OBJECT|OCCUPIED,DELETED|Object[] keyLane;Object[] valueLane;int[] prevLane;int[] nextLane;int[] hashIndexLane";
+        return "M3LruMap|LRU_MAP|OBJECT|OCCUPIED,DELETED|Object[] keyLane;Object[] valueLane;int[] prevLane;int[] nextLane;int[] hashIndexLane|RECEIVED";
     }
 
-    /** LRUMap.maxSize (scaffold: not yet received). */
+    /** LRUMap.maxSize. */
     public int maxSize() {
-        throw new M3NotYetReceived("M3LruMap.maxSize");
+        return maxSize;
     }
 
-    /** LRUMap.isFull (scaffold: not yet received). */
+    /** LRUMap.isFull. */
     public boolean isFull() {
-        throw new M3NotYetReceived("M3LruMap.isFull");
+        return size >= maxSize;
     }
 
-    /** LRUMap.get (moves to MRU) (scaffold: not yet received). */
+    /** LRUMap.get: a hit moves the key to the MRU end. */
     public V get(Object key) {
-        throw new M3NotYetReceived("M3LruMap.get");
+        return get(key, true);
     }
 
-    /** LRUMap.get(key, updateToMRU) (scaffold: not yet received). */
+    /** LRUMap.get(key, updateToMRU). */
     public V get(Object key, boolean updateToMRU) {
-        throw new M3NotYetReceived("M3LruMap.get");
+        int slot = find(key);
+        if (slot < 0) return null;
+        if (updateToMRU) moveToTail(slot);
+        return value(slot);
     }
 
-    /** LRUMap.put (evicts LRU when full) (scaffold: not yet received). */
+    /** LRUMap.put: previous value or null; evicts the LRU entry when full and the key is new. */
     public V put(K key, V value) {
-        throw new M3NotYetReceived("M3LruMap.put");
+        int slot = find(key);
+        if (slot >= 0) {
+            V previous = value(slot);
+            valueLane[slot] = value;
+            moveToTail(slot);
+            return previous;
+        }
+        if (size >= maxSize) deleteSlot(head);
+        int hash = spread(key);
+        slot = hash & mask;
+        while (occupied(slot)) slot = (slot + 1) & mask;
+        keyLane[slot] = key == null ? NULL_KEY : key;
+        valueLane[slot] = value;
+        hashIndexLane[slot] = hash;
+        setOccupied(slot, true);
+        linkLast(slot);
+        size++;
+        modCount++;
+        return null;
     }
 
-    /** LRUMap.remove (scaffold: not yet received). */
+    /** LRUMap.remove: previous value or null. */
     public V remove(Object key) {
-        throw new M3NotYetReceived("M3LruMap.remove");
+        int slot = find(key);
+        if (slot < 0) return null;
+        V previous = value(slot);
+        deleteSlot(slot);
+        return previous;
     }
 
-    /** Map.containsKey (scaffold: not yet received). */
+    /** Map.containsKey; recency unchanged. */
     public boolean containsKey(Object key) {
-        throw new M3NotYetReceived("M3LruMap.containsKey");
+        return find(key) >= 0;
     }
 
-    /** OrderedMap.firstKey (LRU end) (scaffold: not yet received). */
+    /** OrderedMap.firstKey: least-recently-used key. */
     public K firstKey() {
-        throw new M3NotYetReceived("M3LruMap.firstKey");
+        if (size == 0) throw new NoSuchElementException();
+        return key(head);
     }
 
-    /** OrderedMap.lastKey (MRU end) (scaffold: not yet received). */
+    /** OrderedMap.lastKey: most-recently-used key. */
     public K lastKey() {
-        throw new M3NotYetReceived("M3LruMap.lastKey");
+        if (size == 0) throw new NoSuchElementException();
+        return key(tail);
     }
 
-    /** java.util.Map facade (scaffold: not yet received). */
-    public java.util.Map<K, V> asMap() {
-        throw new M3NotYetReceived("M3LruMap.asMap");
+    /** Live {@code java.util.Map} facade (LRU-to-MRU iteration; Map.get moves to MRU as LRUMap.get). */
+    public Map<K, V> asMap() {
+        return new MapView();
     }
 
-    /** Map.size (scaffold: not yet received). */
+    /** Map.size. */
     public int size() {
-        throw new M3NotYetReceived("M3LruMap.size");
+        return size;
     }
 
-    /** Map.isEmpty (scaffold: not yet received). */
+    /** Map.isEmpty. */
     public boolean isEmpty() {
-        throw new M3NotYetReceived("M3LruMap.isEmpty");
+        return size == 0;
     }
 
-    /** Map.clear (scaffold: not yet received). */
+    /** Map.clear. */
     public void clear() {
-        throw new M3NotYetReceived("M3LruMap.clear");
+        Arrays.fill(keyLane, null);
+        Arrays.fill(valueLane, null);
+        Arrays.fill(stateMaskWords, 0L);
+        size = 0;
+        head = NIL;
+        tail = NIL;
+        modCount++;
+    }
+
+    @SuppressWarnings("unchecked")
+    private K key(int slot) {
+        Object key = keyLane[slot];
+        return key == NULL_KEY ? null : (K) key;
+    }
+
+    @SuppressWarnings("unchecked")
+    private V value(int slot) {
+        return (V) valueLane[slot];
+    }
+
+    private int spread(Object key) {
+        int h = key == null ? 0 : key.hashCode();
+        h *= 0x9E3779B9;
+        return h ^ (h >>> 16);
+    }
+
+    private int find(Object key) {
+        int hash = spread(key);
+        Object probe = key == null ? NULL_KEY : key;
+        for (int slot = hash & mask; occupied(slot); slot = (slot + 1) & mask) {
+            if (hashIndexLane[slot] == hash && (keyLane[slot] == probe || probe != NULL_KEY && probe.equals(keyLane[slot]))) return slot;
+        }
+        return -1;
+    }
+
+    private boolean occupied(int slot) {
+        return (stateMaskWords[slot >>> 5] & (STATE_OCCUPIED << ((slot & 31) << 1))) != 0;
+    }
+
+    private void setOccupied(int slot, boolean on) {
+        long bit = STATE_OCCUPIED << ((slot & 31) << 1);
+        if (on) stateMaskWords[slot >>> 5] |= bit;
+        else stateMaskWords[slot >>> 5] &= ~bit;
+    }
+
+    private void linkLast(int slot) {
+        prevLane[slot] = tail;
+        nextLane[slot] = NIL;
+        if (tail != NIL) nextLane[tail] = slot;
+        else head = slot;
+        tail = slot;
+    }
+
+    private void unlink(int slot) {
+        int before = prevLane[slot], after = nextLane[slot];
+        if (before != NIL) nextLane[before] = after;
+        else head = after;
+        if (after != NIL) prevLane[after] = before;
+        else tail = before;
+    }
+
+    private void moveToTail(int slot) {
+        if (slot == tail) return;
+        unlink(slot);
+        linkLast(slot);
+        modCount++;
+    }
+
+    private void deleteSlot(int slot) {
+        unlink(slot);
+        int gap = slot;
+        for (int probe = (gap + 1) & mask; occupied(probe); probe = (probe + 1) & mask) {
+            int origin = hashIndexLane[probe] & mask;
+            boolean stays = gap <= probe ? gap < origin && origin <= probe : gap < origin || origin <= probe;
+            if (stays) continue;
+            relocate(probe, gap);
+            gap = probe;
+        }
+        keyLane[gap] = null;
+        valueLane[gap] = null;
+        setOccupied(gap, false);
+        size--;
+        modCount++;
+    }
+
+    private void relocate(int from, int to) {
+        keyLane[to] = keyLane[from];
+        valueLane[to] = valueLane[from];
+        hashIndexLane[to] = hashIndexLane[from];
+        int before = prevLane[from], after = nextLane[from];
+        prevLane[to] = before;
+        nextLane[to] = after;
+        if (before != NIL) nextLane[before] = to;
+        else head = to;
+        if (after != NIL) prevLane[after] = to;
+        else tail = to;
+    }
+
+    /** Transient facade over the owner; holds no entries. */
+    private final class MapView extends AbstractMap<K, V> {
+        @Override public int size() { return size; }
+        @Override public V get(Object key) { return M3LruMap.this.get(key); }
+        @Override public boolean containsKey(Object key) { return M3LruMap.this.containsKey(key); }
+        @Override public V put(K key, V value) { return M3LruMap.this.put(key, value); }
+        @Override public V remove(Object key) { return M3LruMap.this.remove(key); }
+        @Override public void clear() { M3LruMap.this.clear(); }
+
+        @Override public Set<Map.Entry<K, V>> entrySet() {
+            return new AbstractSet<>() {
+                @Override public int size() { return size; }
+
+                @Override public Iterator<Map.Entry<K, V>> iterator() {
+                    return new Iterator<>() {
+                        private int next = head;
+                        private int last = NIL;
+                        private int expected = modCount;
+
+                        @Override public boolean hasNext() { return next != NIL; }
+
+                        @Override public Map.Entry<K, V> next() {
+                            if (modCount != expected) throw new ConcurrentModificationException();
+                            if (next == NIL) throw new NoSuchElementException();
+                            last = next;
+                            next = nextLane[next];
+                            return new SlotEntry(last, expected);
+                        }
+
+                        @Override public void remove() {
+                            if (last == NIL) throw new IllegalStateException();
+                            if (modCount != expected) throw new ConcurrentModificationException();
+                            K key = key(last);
+                            int following = next == NIL ? NIL : next;
+                            Object followingKey = following == NIL ? null : keyLane[following];
+                            M3LruMap.this.remove(key);
+                            next = following == NIL ? NIL : find(followingKey == NULL_KEY ? null : followingKey);
+                            last = NIL;
+                            expected = modCount;
+                        }
+                    };
+                }
+            };
+        }
+    }
+
+    /** Slot-bound transient entry facade; valid until the next structural modification. */
+    private final class SlotEntry implements Map.Entry<K, V> {
+        private final int slot;
+        private final int stamp;
+
+        SlotEntry(int slot, int stamp) {
+            this.slot = slot;
+            this.stamp = stamp;
+        }
+
+        private void check() {
+            if (modCount != stamp) throw new ConcurrentModificationException();
+        }
+
+        @Override public K getKey() { check(); return key(slot); }
+        @Override public V getValue() { check(); return value(slot); }
+
+        @Override public V setValue(V value) {
+            check();
+            V previous = value(slot);
+            valueLane[slot] = value;
+            return previous;
+        }
+
+        @Override public boolean equals(Object other) {
+            return other instanceof Map.Entry<?, ?> e && Objects.equals(getKey(), e.getKey()) && Objects.equals(getValue(), e.getValue());
+        }
+
+        @Override public int hashCode() {
+            return Objects.hashCode(getKey()) ^ Objects.hashCode(getValue());
+        }
+
+        @Override public String toString() {
+            return getKey() + "=" + getValue();
+        }
     }
 }
