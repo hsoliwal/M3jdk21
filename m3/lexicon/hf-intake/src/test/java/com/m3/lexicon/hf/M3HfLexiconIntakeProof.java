@@ -44,7 +44,105 @@ public final class M3HfLexiconIntakeProof {
 
     @FunctionalInterface private interface IoAction { void run() throws Exception; }
 
+    private static List<String> resourceLines(String resource) throws IOException {
+        try (var input = M3HfLexiconIntakeProof.class.getResourceAsStream(resource)) {
+            require(input != null, "catalogue resource exists: " + resource);
+            if (input == null) return List.of();
+            return new String(input.readAllBytes(), StandardCharsets.UTF_8).lines()
+                    .filter(line -> !line.isBlank() && !line.startsWith("#")).toList();
+        }
+    }
+
+    private static int verifyLanguageResourceDiscovery() throws IOException {
+        List<String> lines = resourceLines(
+                "/com/m3/lexicon/hf/language-resource-discovery.tsv");
+        require(lines.size() == 40, "39 language-resource candidates plus header");
+        String expectedHeader = "source_id\\tresource\\tcategory\\tdata_shape_and_identity"
+                + "\\trights_and_attribution\\tm3_candidate_use\\t admission_blockers"
+                .replace("\\t ", "\\t")
+                + "\\tstate\\tevidence";
+        require(lines.getFirst().equals(expectedHeader), "language-resource catalogue schema");
+        java.util.Set<String> sourceIds = new java.util.HashSet<>();
+        for (int i = 1; i < lines.size(); i++) {
+            String[] fields = lines.get(i).split("\\t", -1);
+            require(fields.length == 9, "language-resource row has nine fields: " + i);
+            if (fields.length != 9) continue;
+            require(!fields[0].isBlank() && sourceIds.add(fields[0]),
+                    "unique nonempty language-resource source ID: " + i);
+            require(!fields[1].isBlank() && !fields[2].isBlank()
+                    && !fields[3].isBlank() && !fields[4].isBlank()
+                    && !fields[5].isBlank() && !fields[6].isBlank(),
+                    "catalogue row has data shape, rights, fit and blockers: " + i);
+            require("REFERENCE_ONLY".equals(fields[7]),
+                    "discovery never implies data admission: " + fields[0]);
+            require(java.util.Arrays.stream(fields[8].split(";", -1))
+                    .allMatch(uri -> uri.startsWith("https://")),
+                    "catalogue evidence links are HTTPS: " + fields[0]);
+        }
+        require(sourceIds.containsAll(List.of("wikidata-lexemes", "universal-dependencies",
+                "glottolog-5-3", "dgt-tm", "geonames", "bipm-si-brochure-2026",
+                "hf-langdex", "hf-langdex-dictionaries", "kaggle-langdex-notebook")),
+                "lexicon, grammar, translation, names, standards and HF/Kaggle leads retained");
+        String panlex = lines.stream().filter(line -> line.startsWith("panlex\\t"))
+                .findFirst().orElse("");
+        require(panlex.contains("CC BY-NC-SA 4.0") && panlex.contains("CC0")
+                && panlex.contains("clarification"),
+                "conflicting PanLex license statements remain unresolved and conservative");
+        String langdex = lines.stream().filter(line -> line.startsWith("hf-langdex\\t"))
+                .findFirst().orElse("");
+        require(langdex.contains("preserve donor IDs and reject ambiguous rows")
+                && langdex.contains("occurrence-coordinate"),
+                "LangDex keeps native IDs and rejects ambiguous row identity");
+        return lines.size() - 1;
+    }
+
+    private static int verifyLangDexTableAudit() throws IOException {
+        List<String> lines = resourceLines(
+                "/com/m3/lexicon/hf/langdex-table-admission.tsv");
+        String expectedHeader = String.join("\\t", "dataset", "revision", "table",
+                "reported_rows", "native_id_candidate", "identity_evidence",
+                "null_duplicate_audit", "upstream_license", "combined_release_license",
+                "admission_state", "blockers", "evidence");
+        require(lines.size() == 12, "11 audited LangDex tables plus header");
+        require(lines.getFirst().equals(expectedHeader), "LangDex audit table schema");
+        java.util.Set<String> tables = new java.util.HashSet<>();
+        for (int i = 1; i < lines.size(); i++) {
+            String[] fields = lines.get(i).split("\\t", -1);
+            require(fields.length == 12, "LangDex audit row has twelve fields: " + i);
+            if (fields.length != 12) continue;
+            require("Asakiri/langdex".equals(fields[0])
+                    && "e4e1d8aacd13eff1f8ba7f3df89bc872ba68f349".equals(fields[1]),
+                    "LangDex source revision pinned: " + i);
+            require(tables.add(fields[2]), "unique LangDex table name: " + fields[2]);
+            require(Long.parseLong(fields[3]) > 0, "positive reported LangDex table count");
+            require("NOT_AUDITED".equals(fields[6])
+                    && "REFERENCE_ONLY".equals(fields[9]),
+                    "unproven identity constraints cannot be admitted: " + fields[2]);
+            require(fields[8].contains("CC-BY-SA-3.0")
+                    && fields[11].startsWith("https://"),
+                    "composite attribution and evidence retained: " + fields[2]);
+            require(!fields[4].toLowerCase(java.util.Locale.ROOT).contains("occurrence"),
+                    "do not substitute occurrence coordinates for donor IDs: " + fields[2]);
+            if ("etymology".equals(fields[2])) {
+                require(fields[10].contains("never synthesize occurrence coordinates"),
+                        "ambiguous LangDex edges are rejected, not renumbered");
+            }
+            if ("cognate_sets".equals(fields[2])) {
+                require(fields[5].contains("reversible")
+                        && fields[10].contains("do not strip prefixes or invent row IDs"),
+                        "native cognate ID must round-trip exactly");
+            }
+            if ("lexeme_concept".equals(fields[2])) {
+                require(fields[10].contains("reject ambiguous duplicate pairs"),
+                        "ambiguous duplicate donor mappings are rejected");
+            }
+        }
+        return tables.size();
+    }
+
     public static void main(String[] args) throws Exception {
+        int discoveredSources = verifyLanguageResourceDiscovery();
+        int auditedTables = verifyLangDexTableAudit();
         Path scratch = Files.createTempDirectory("m3-hf-intake-proof-");
         try {
             byte[] frequency = "अदरक\t34\nß\t7\nss\t5\nß\t8\n".getBytes(StandardCharsets.UTF_8);
@@ -135,7 +233,8 @@ public final class M3HfLexiconIntakeProof {
                     scratch.resolve("empty-out.tsv")), "no empty lexical image admitted");
             require(!Files.exists(scratch.resolve("empty-out.tsv")), "empty image not published");
             require(approval.pinnedUrl().toString().contains(REVISION), "immutable Hugging Face address");
-            System.out.println("M3_HF_INTAKE_PROOF_PASS|checks=" + checks + "|types=3|jni_owner=reused");
+            System.out.println("M3_HF_INTAKE_PROOF_PASS|checks=" + checks + "|types=3|language_sources="
+                    + discoveredSources + "|langdex_tables=" + auditedTables + "|jni_owner=reused");
         } finally {
             try (var files = Files.walk(scratch)) {
                 for (var path : files.sorted(java.util.Comparator.reverseOrder()).toList()) {
