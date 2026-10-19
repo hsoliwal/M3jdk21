@@ -66,7 +66,7 @@ public final class M3HfLexiconIntakeProof {
     private static int verifyLanguageResourceDiscovery() throws IOException {
         List<String> lines = resourceLines(
                 "/com/m3/lexicon/hf/language-resource-discovery.tsv");
-        require(lines.size() == 117, "116 language-resource candidates plus header");
+        require(lines.size() == 118, "117 language-resource candidates plus header");
         List<String> expectedHeader = List.of("source_id", "resource", "category",
                 "data_shape_and_identity", "rights_and_attribution", "m3_candidate_use",
                 "admission_blockers", "state", "evidence");
@@ -205,7 +205,8 @@ public final class M3HfLexiconIntakeProof {
                 "taigi-common-use-dictionary",
                 "hf-uzbek-lexicon-skeleton",
                 "hf-khmer-search-frequency",
-                "hf-afri-dict"
+                "hf-afri-dict",
+                "hf-fineweb-2"
         )), "exact 116 language-resource source IDs match the pinned catalogue");
         String cldr = discoveryRecord(lines, "unicode-cldr-48-2");
         require(cldr.contains("48.2") && cldr.contains("common/transforms")
@@ -499,6 +500,16 @@ public final class M3HfLexiconIntakeProof {
         require(afriDict.contains("67,970") && afriDict.contains("entry_id")
                 && afriDict.contains("MIT") && afriDict.contains("do not reconcile"),
                 "Afri-Dict keeps donor identity and unresolved count/rights caveats");
+        String fineWeb2 = discoveryRecord(lines, "hf-fineweb-2");
+        require(fineWeb2.contains("1,868 filtered language-script pairs")
+                && fineWeb2.contains("5,018,505,566 documents")
+                && fineWeb2.contains("3,339,271,691,958 assigned-word-tokenizer word counts"),
+                "FineWeb2 corpus scale and assigned word-count semantics stay explicit");
+        require(fineWeb2.contains("ODC-By 1.0")
+                && fineWeb2.contains("Common Crawl Terms of Use")
+                && fineWeb2.contains("pin immutable dataset commit")
+                && fineWeb2.contains("REFERENCE_ONLY"),
+                "FineWeb2 rights, immutable source pin, and no-ingestion state stay explicit");
         return lines.size() - 1;
     }
 
@@ -604,6 +615,15 @@ public final class M3HfLexiconIntakeProof {
             require(!row.isEmpty() && "EVALUATE_ONLY".equals(splitTsv(row)[3]),
                     "new dataset pattern remains evaluation-only: " + category);
         }
+        String corpusPrecompute = lines.stream().skip(1)
+                .filter(line -> "offline_corpus_frequency_and_ngram_precompute".equals(splitTsv(line)[0]))
+                .findFirst().orElse("");
+        String[] corpusFields = splitTsv(corpusPrecompute);
+        require(corpusFields.length == 6 && "EVALUATE_ONLY".equals(corpusFields[3])
+                && corpusFields[1].contains("FineWeb2 v2.1.1")
+                && corpusFields[5].contains("not portable token frequencies")
+                && corpusFields[5].contains("Common Crawl terms"),
+                "FineWeb2 remains an evaluated corpus source, not imported lexical frequency");
         return lines.size() - 1;
     }
 
