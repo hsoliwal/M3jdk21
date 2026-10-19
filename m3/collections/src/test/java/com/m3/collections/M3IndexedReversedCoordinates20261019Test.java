@@ -119,6 +119,28 @@ final class M3IndexedReversedCoordinates20261019Test {
                 "returned index directory must not retain caller mask arrays");
     }
 
+    @Test void nullAndEqualButDistinctOccurrencesKeepTheirOwnPhysicalSlots() {
+        String first = new String("same");
+        String second = new String("same");
+        assertEquals(first, second);
+        assertNotSame(first, second);
+        M3IndexedListSnapshot<String> reverse =
+                M3IndexedListSnapshot.copyOf(new String[] {
+                    first, null, second, null
+                }).reversed();
+        assertSame(second, reverse.get(1));
+        assertSame(first, reverse.get(3));
+        assertArrayEquals(new int[] {3, 2, 1, 0}, reverse.physicalIndices());
+        assertArrayEquals(new int[] {3, 1}, reverse.filtered(
+                java.util.Objects::isNull).physicalIndices());
+        assertArrayEquals(new int[] {3, 1, 2, 0},
+                reverse.sorted(Comparator.nullsFirst(
+                        Comparator.naturalOrder())).physicalIndices());
+        assertArrayEquals(new int[] {3, 1},
+                reverse.maskedByPhysicalState(new int[] {0, 1, 0, 1},
+                        1, 0, M3IndexPathMasks.Backend.JAVA).physicalIndices());
+    }
+
     @Test void noOpMutationsAlwaysRefuseWithoutCallback() {
         M3IndexedListSnapshot<Item> empty = sample().subList(0, 0).reversed();
         AtomicInteger calls = new AtomicInteger();
