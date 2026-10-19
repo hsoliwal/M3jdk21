@@ -66,7 +66,7 @@ public final class M3HfLexiconIntakeProof {
     private static int verifyLanguageResourceDiscovery() throws IOException {
         List<String> lines = resourceLines(
                 "/com/m3/lexicon/hf/language-resource-discovery.tsv");
-        require(lines.size() == 208, "207 language-resource candidates plus header");
+        require(lines.size() == 213, "212 language-resource candidates plus header");
         List<String> expectedHeader = List.of("source_id", "resource", "category",
                 "data_shape_and_identity", "rights_and_attribution", "m3_candidate_use",
                 "admission_blockers", "state", "evidence");
@@ -296,8 +296,13 @@ public final class M3HfLexiconIntakeProof {
                 "hf-hmar-corpus-archive",
                 "hf-robinson-hausa-en-1914",
                 "hf-african-tokenizer-challenge-v1",
-                "hf-naath-en-nuer-dinka-sw-corpus"
-        )), "exact 207 language-resource source IDs match the pinned catalogue");
+                "hf-naath-en-nuer-dinka-sw-corpus",
+                "hf-dusun-dictionary-corpus",
+                "hf-okinawan-dictionary-index",
+                "hf-tigre-parallel-multilingual",
+                "hf-multilingual-endangered-cultural-heritage",
+                "hf-nenets-mixed-schema"
+        )), "exact 212 language-resource source IDs match the pinned catalogue");
         String sindhi = discoveryRecord(lines, "hf-sindhi-open-lexicon");
         require(sindhi.contains("223,342") && sindhi.contains("lexical_id")
                 && sindhi.contains("entry_id") && sindhi.contains("schema casting"),
@@ -383,6 +388,27 @@ public final class M3HfLexiconIntakeProof {
         require(naath.contains("803k") && naath.contains("CC BY-NC-SA 4.0")
                 && naath.contains("no source-native row ID"),
                 "Naath sentence pairs remain noncommercial sentence-level fixtures, not M3 lexeme IDs");
+        String dusun = discoveryRecord(lines, "hf-dusun-dictionary-corpus");
+        require(dusun.contains("24,000") && dusun.contains("9,000 dictionary words")
+                && dusun.contains("15,000 phrases/sentences") && dusun.contains("no stable row-ID column"),
+                "Dusun bilingual word and phrase rows stay separated and source identity is not invented");
+        String okinawan = discoveryRecord(lines, "hf-okinawan-dictionary-index");
+        require(okinawan.contains("9.25k") && okinawan.contains("ninjal_sakuin_00001-style")
+                && okinawan.contains("Shuri dialect only") && okinawan.contains("CC BY 4.0"),
+                "Okinawan index preserves NINJAL row IDs, page and dialect-specific scope");
+        String tigreParallel = discoveryRecord(lines, "hf-tigre-parallel-multilingual");
+        require(tigreParallel.contains("66.1k") && tigreParallel.contains("132,288")
+                && tigreParallel.contains("CC BY 2.0 FR") && tigreParallel.contains("no row ID field"),
+                "Tigre parallel corpus preserves mixed source licenses and unresolved count discrepancy");
+        String endangered = discoveryRecord(lines, "hf-multilingual-endangered-cultural-heritage");
+        require(endangered.contains("1,050") && endangered.contains("269 source-described real")
+                && endangered.contains("745 synthetic") && endangered.contains("CC0 1.0"),
+                "endangered-language material keeps synthetic and source-described records separate");
+        String nenets = discoveryRecord(lines, "hf-nenets-mixed-schema");
+        require(nenets.contains("653275c014918400943f924f035089ea9e4a4755")
+                && nenets.contains("articles_yamal_expedition.csv")
+                && nenets.contains("source/example_nn/example_ru") && nenets.contains("text/title/link"),
+                "Nenets cast failure remains an explicit schema-refusal discovery, not an ingested lexicon");
         String massive = discoveryRecord(lines, "massive-nlu-1-1");
         require(massive.contains("52 languages") && massive.contains("SLURP") && massive.contains("CC BY 4.0")
                 && massive.contains("not a canonical dictionary"),
@@ -1061,13 +1087,48 @@ public final class M3HfLexiconIntakeProof {
                 "khmer_segmentation_pos_tagging",
                 "georgian_case_alignment_masked_contrast",
                 "tibetan_word_segmentation_evaluation",
-                "balanced_multilingual_tokenizer_fertility")) {
+                "balanced_multilingual_tokenizer_fertility",
+                "bilingual_dictionary_regression",
+                "multilingual_translation_regression",
+                "language_resource_discovery")) {
             String row = lines.stream().skip(1)
                     .filter(line -> category.equals(splitTsv(line)[0]))
                     .findFirst().orElse("");
             require(!row.isEmpty() && "EVALUATE_ONLY".equals(splitTsv(row)[3]),
-                    "new dataset pattern remains evaluation-only: " + category);
+                    "algorithm candidate remains evaluation-only: " + category);
         }
+        String bilingual = lines.stream().skip(1)
+                .filter(line -> "bilingual_dictionary_regression".equals(splitTsv(line)[0]))
+                .findFirst().orElse("");
+        require(splitTsv(bilingual).length == 6
+                && splitTsv(bilingual)[1].contains("DusunDictionary.com")
+                && splitTsv(bilingual)[1].contains("NINJAL Okinawa")
+                && splitTsv(bilingual)[4].contains("lack row IDs"),
+                "bilingual candidates retain source-native IDs, direction and type distinctions");
+        String tigrePattern = lines.stream().skip(1)
+                .filter(line -> "low_resource_african_parallel_corpus".equals(splitTsv(line)[0]))
+                .findFirst().orElse("");
+        require(splitTsv(tigrePattern).length == 6
+                && splitTsv(tigrePattern)[1].contains("BeitTigreAI")
+                && splitTsv(tigrePattern)[5].contains("66.1k vs 132,288")
+                && splitTsv(tigrePattern)[5].contains("source-specific licenses"),
+                "African parallel evaluation records Tigre source/count/license boundaries");
+        String endangeredPattern = lines.stream().skip(1)
+                .filter(line -> "multilingual_translation_regression".equals(splitTsv(line)[0]))
+                .findFirst().orElse("");
+        require(splitTsv(endangeredPattern).length == 6
+                && splitTsv(endangeredPattern)[1].contains("Multilingual Endangered Languages")
+                && splitTsv(endangeredPattern)[4].contains("synthetic records")
+                && splitTsv(endangeredPattern)[5].contains("isolate synthetic"),
+                "multilingual translation evaluation isolates synthetic text and provenance");
+        String nenetsPattern = lines.stream().skip(1)
+                .filter(line -> "language_resource_discovery".equals(splitTsv(line)[0]))
+                .findFirst().orElse("");
+        require(splitTsv(nenetsPattern).length == 6
+                && splitTsv(nenetsPattern)[1].contains("shnyakov/nenets")
+                && splitTsv(nenetsPattern)[4].contains("viewer currently fails")
+                && splitTsv(nenetsPattern)[5].contains("refusal test"),
+                "schema-discovery catalogue preserves the observed Nenets fail-closed path");
         String khmerSegmentation = lines.stream().skip(1)
                 .filter(line -> "khmer_segmentation_pos_tagging".equals(splitTsv(line)[0]))
                 .findFirst().orElse("");
