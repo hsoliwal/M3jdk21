@@ -35,7 +35,7 @@ com.google.common.collect.LinkedListMultimap	OPEN	-	-	core M3LinkedList link lan
 com.google.common.collect.TreeMultimap	OPEN	-	-	core M3TreeMap + M3TreeSet	-
 com.google.common.collect.HashMultiset	OPEN	-	adapter work in open PR #1271; interop adapter on master	#1271 M3GuavaMultiset; core M3CountedBag	fill order b; reuse counts lanes
 com.google.common.collect.LinkedHashMultiset	OPEN	-	-	core M3CountedBag + M3LinkedHashMap	-
-com.google.common.collect.TreeMultiset	OPEN	-	-	core M3CountedBag; viewport order-statistic tree + Fenwick prefix sums	range counts via viewport owners
+com.google.common.collect.TreeMultiset	OPEN	-	-	core M3CountedBag; #1403 M3OrderStatisticForest + M3SparseExtents	range counts via viewport owners
 com.google.common.collect.EnumMultiset	OPEN	-	-	core M3EnumLongMap counts by ordinal	-
 com.google.common.collect.ConcurrentHashMultiset	OPEN	-	-	core M3CountedBag + M3LockedMap	-
 org.apache.commons.collections4.bag.HashBag	OPEN	-	interop adapter on master	interop M3ApacheBag; core M3CountedBag	fill order b
@@ -49,16 +49,16 @@ org.apache.commons.collections4.bidimap.TreeBidiMap	OPEN	-	-	core M3TreeMap twic
 com.google.common.collect.HashBasedTable	OPEN	-	-	core M3IndexedTable; viewport int-pair-keyed map	-
 com.google.common.collect.TreeBasedTable	OPEN	-	-	core M3IndexedTable; interop M3GuavaRowSortedTable; viewport Grid row tree	-
 com.google.common.collect.ArrayTable	OPEN	-	-	core M3IndexedTable; viewport packed lanes	-
-com.google.common.collect.TreeRangeSet	OPEN	-	-	core M3LongRangeSet; viewport order-statistic tree	-
-com.google.common.collect.ImmutableRangeSet	OPEN	-	-	core M3LongRangeSet	-
+com.google.common.collect.TreeRangeSet	OPEN	-	-	#1403 M3RangeSet + M3OrderStatisticForest; core M3LongRangeSet	-
+com.google.common.collect.ImmutableRangeSet	OPEN	-	-	#1403 M3RangeSet; core M3LongRangeSet	-
 com.google.common.collect.ImmutableRangeMap	OPEN	-	-	#1264 M3ObjectRangeMap	-
 org.springframework.util.MultiValueMapAdapter	OPEN	-	-	spring M3MultiValueMap	fill order e (LinkedMultiValueMap already owned)
 org.apache.commons.collections4.map.CaseInsensitiveMap	OPEN	-	-	#1269 casefold lanes	-
 org.apache.commons.collections4.map.LinkedMap	OPEN	-	-	core M3LinkedHashMap	-
 org.apache.commons.collections4.map.ListOrderedMap	OPEN	-	-	core M3LinkedHashMap	-
-org.apache.commons.collections4.map.LRUMap	OPEN	-	-	core M3LinkedHashMap(accessOrder)	-
+org.apache.commons.collections4.map.LRUMap	OPEN	-	-	core M3LinkedHashMap(accessOrder); #1403 M3BlockCache/M3BoundedCache	-
 org.apache.commons.collections4.map.HashedMap	OPEN	-	-	core M3LinkedHashMap table	-
-org.apache.commons.collections4.list.TreeList	OPEN	-	-	viewport order-statistic tree	-
+org.apache.commons.collections4.list.TreeList	OPEN	-	-	#1403 M3OrderStatisticForest	-
 org.apache.commons.collections4.list.CursorableLinkedList	OPEN	-	-	core M3LinkedList	-
 org.apache.commons.collections4.list.NodeCachingLinkedList	OPEN	-	-	core M3LinkedList	-
 org.apache.commons.collections4.trie.PatriciaTrie	OPEN	-	-	core M3TreeMap sorted key lanes	-
@@ -71,3 +71,8 @@ java.util.concurrent.ConcurrentSkipListSet	OPEN	-	-	core M3LockedTreeSet	-
 java.util.concurrent.ArrayBlockingQueue	OPEN	-	-	core M3BlockingDeque ring	-
 java.util.concurrent.LinkedBlockingQueue	OPEN	-	-	core M3BlockingDeque ring	-
 java.util.concurrent.CopyOnWriteArrayList	OPEN	-	-	core M3ArrayList	-
+org.apache.commons.collections4.collection.CompositeCollection	OPEN	-	-	#1403 M3FlatteningView (view of views, no copy)	compose, do not duplicate
+org.apache.commons.collections4.set.CompositeSet	OPEN	-	-	#1403 M3FlatteningView	compose, do not duplicate
+org.apache.commons.collections4.map.CompositeMap	OPEN	-	-	#1403 M3FlatteningView	compose, do not duplicate
+org.apache.commons.collections4.list.LazyList	OPEN	-	-	#1403 M3SparseItemStore	-
+org.apache.commons.collections4.list.GrowthList	OPEN	-	-	#1403 M3SparseItemStore	-

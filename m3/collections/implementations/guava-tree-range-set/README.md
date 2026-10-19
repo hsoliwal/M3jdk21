@@ -11,7 +11,7 @@ Entry-shaped value demanded by the provider API is a boundary flyweight created 
 
 Planned lanes: `Object[] lowerBounds`, `Object[] upperBounds`, `long[] boundTypeMask`, `Object[] values`, `int size`, `int modCount`.
 
-Reuse when filling: core M3LongRangeSet; viewport order-statistic tree.
+Reuse when filling: #1403 M3RangeSet + M3OrderStatisticForest; core M3LongRangeSet.
 
 The row in `m3/collections/qualification/five-provider-inventory-20261018/INVENTORY.tsv` is `SCAFFOLD`;
 the owning PR flips it to `DONE #PR`. Regenerate with the generator in that directory rather than editing

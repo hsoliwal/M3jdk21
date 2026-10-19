@@ -11,7 +11,7 @@ Entry-shaped value demanded by the provider API is a boundary flyweight created 
 
 Planned lanes: `Object[] keys`, `Object[] values`, `int[] hashes`, `int[] index`, `long[] liveMask`, `int size`, `int modCount`.
 
-Reuse when filling: core M3LinkedHashMap(accessOrder); peer native skeleton M3LruLongLongMap (m3/five-library-scaffold-20261018@bec1ebbaa352), M3LruMap (m3/five-library-scaffold-20261018@bec1ebbaa352).
+Reuse when filling: core M3LinkedHashMap(accessOrder); #1403 M3BlockCache/M3BoundedCache; peer native skeleton M3LruLongLongMap (m3/five-library-scaffold-20261018@bec1ebbaa352), M3LruMap (m3/five-library-scaffold-20261018@bec1ebbaa352).
 
 The row in `m3/collections/qualification/five-provider-inventory-20261018/INVENTORY.tsv` is `SCAFFOLD`;
 the owning PR flips it to `DONE #PR`. Regenerate with the generator in that directory rather than editing

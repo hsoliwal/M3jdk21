@@ -4,13 +4,13 @@
 
 `INVENTORY.tsv` lists every collection type in the pinned #1278 universe (740 public concrete
 root types across JDK 21, Guava 33.4.8-jre, Commons Collections 4.5.0, Eclipse Collections 11.1.0
-and Spring 6.2.0) plus eight first-party rows. Each row has one `owned_status`:
+and Spring 6.2.0) plus sixteen first-party rows. Each row has one `owned_status`:
 
 | status | meaning | rows |
 |---|---|---|
 | `DONE #PR` / `DONE master` | owned array/mask implementation already on master | 9 provider + 2 first-party |
 | `EXISTING` | core JDK-shaped M3 owner already on master; no scaffold (NO-DUP) | 10 |
-| `CLAIMED #PR` / `CLAIMED viewport-everywhere` | an open PR or the viewport agent owns it; do not build | 10 provider + 6 first-party |
+| `CLAIMED #PR` / `CLAIMED viewport-everywhere` | an open PR or the viewport agent owns it; do not build | 10 provider + 14 first-party |
 | `SCAFFOLD` | generated skeleton module exists; bodies throw `UnsupportedOperationException` | 133 |
 | `PATTERN_ONLY` | Eclipse Collections (EPL-1.0/EDL-1.0): never copied, never a dependency | 578 |
 
@@ -71,3 +71,15 @@ only; the core `m3/collections` module is unchanged and still depends on `java.b
 3. Guava `EnumHashBiMap`/`EnumBiMap`, Commons `DualLinkedHashBidiMap` over the owned `M3HashBiMap`/`M3BidiMap`.
 4. Filtered/sorted wrappers are already claimed (#1362, #1365, #1366, #1367, viewport selection lists): no scaffold.
 5. Spring `MultiValueMapAdapter` over the owned `M3MultiValueMap` (`LinkedMultiValueMap` is DONE).
+
+## Viewport-derived views (2026-10-19)
+
+All viewport logic is folded into `m3/collections` as general collection views by the viewport-everywhere
+agent (PR #1403, branch `m3/viewport-everywhere-20261018`). `FIRST_PARTY_ROWS.tsv` records them as
+`CLAIMED viewport-everywhere` with `source=first-party-viewport`: present in the PR head are
+`M3OrderStatisticForest`, `M3SparseExtents`, `M3SparseItemStore`/`M3BlockStore`, `M3BlockCache`,
+`M3BitLanes`/`M3ColumnarLanes`, `M3LaneGrowth`/`M3HeapGrowth`, `M3SelectionItem`, `M3RowTreeItem`; announced are
+`M3WindowView`, `M3FlatteningView`, `M3ListDiff`/`M3Patch`, `M3BoundedCache` and `M3RangeSet`. The rows name the
+provider surfaces they cover (JDK `subList`, Guava `Lists.partition`/`RangeSet`, Apache `ListUtils`/
+`CompositeCollection`/`TreeList`/`LRUMap`), and the matching scaffold rows carry them as reuse hints.
+Filtered/sorted wrappers compose over these views (a view of a view) instead of duplicating them.
