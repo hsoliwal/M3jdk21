@@ -31,7 +31,7 @@ public final class M3LinkedHashMap<K, V> extends M3OrderedSlotMap<K, V> {
     @Override V writeAt(int slot, V value) {
         V old = valueAt(slot); if (!table.keyOnly) { table.values[slot] = value; } return old;
     }
-    @Override V eraseAt(int slot) { V old = valueAt(slot); table.erase(slot); return old; }
+    @Override V eraseAt(int slot) { V old = valueAt(slot); forgetEntryFacade(keyAt(slot)); table.erase(slot); return old; }
     @Override void accessed(int slot) { if (table.accessOrder) { table.move(slot, false); } }
     @Override public int size() { return table.size; }
     @Override public V put(K key, V value) {
@@ -52,7 +52,7 @@ public final class M3LinkedHashMap<K, V> extends M3OrderedSlotMap<K, V> {
     @Override public Entry<K, V> pollFirstEntry() { return poll(firstSlot()); }
     @Override public Entry<K, V> pollLastEntry() { return poll(lastSlot()); }
     @Override public M3LinkedHashMap<K, V> reversed() { return new M3LinkedHashMap<>(table, !reversed); }
-    @Override public void clear() { table.clear(); }
+    @Override public void clear() { table.clear(); clearEntryFacades(); }
     /** Validate index membership, encounter links and free-slot ownership. */
     public void verifyInvariants() { table.verify(); }
 

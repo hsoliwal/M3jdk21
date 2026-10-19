@@ -107,7 +107,7 @@ public final class M3TreeMap<K, V> extends M3OrderedSlotMap<K, V> implements Nav
         if (tree.lazy != null) { tree.lazy.admitted(slot, true); }
         return old;
     }
-    @Override V eraseAt(int slot) { tree.writable(); V old = valueAt(slot); tree.erase(slot); return old; }
+    @Override V eraseAt(int slot) { tree.writable(); V old = valueAt(slot); forgetEntryFacade(keyAt(slot)); tree.erase(slot); return old; }
     @Override int revision() { return tree.modifications; }
     @Override public int size() {
         if (!hasLow && !hasHigh) { return tree.size; }
@@ -127,6 +127,7 @@ public final class M3TreeMap<K, V> extends M3OrderedSlotMap<K, V> implements Nav
     }
     @Override public void clear() {
         tree.writable();
+        clearEntryFacades();
         if (!hasLow && !hasHigh) { tree.clear(); return; }
         int s = firstSlot();
         while (s >= 0) { int next = nextSlot(s); tree.erase(s); s = next; }

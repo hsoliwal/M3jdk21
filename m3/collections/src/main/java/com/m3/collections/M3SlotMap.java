@@ -18,8 +18,13 @@ import java.util.function.BiConsumer;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 
-/** Shared JDK semantics over integer slots; internal traversal never constructs entries. */
+/**
+ * Shared JDK semantics over integer slots. Internal operations use slots and arrays;
+ * public entry views alone request live facades, bounded and reused through M3LFUCache.
+ */
 abstract class M3SlotMap<K, V> extends AbstractMap<K, V> {
+    private static final int ENTRY_FACADE_CACHE_CAPACITY = 64;
+    private M3LFUCache<K, LiveEntry> entryFacades;
     abstract int firstSlot();
     abstract int nextSlot(int slot);
     abstract int findSlot(Object key);
@@ -32,6 +37,28 @@ abstract class M3SlotMap<K, V> extends AbstractMap<K, V> {
     void accessed(int slot) { }
     final void check(int expected) {
         if (revision() != expected) { throw new ConcurrentModificationException(); }
+    }
+    /** Weak-key owners opt out so facade caching cannot keep keys reachable. */
+    protected boolean cacheEntryFacades() { return true; }
+    final Entry<K, V> entryFacade(K key) {
+        if (!cacheEntryFacades()) { return new LiveEntry(key); }
+        M3LFUCache<K, LiveEntry> cache = entryFacades;
+        if (cache == null) {
+            cache = new M3LFUCache<>(ENTRY_FACADE_CACHE_CAPACITY);
+            entryFacades = cache;
+        }
+        return cache.getOrCreate(key, candidate -> new LiveEntry(candidate));
+    }
+    final void forgetEntryFacade(K key) {
+        M3LFUCache<K, LiveEntry> cache = entryFacades;
+        if (cache != null) { cache.removeIdentity(key); }
+    }
+    final void clearEntryFacades() {
+        M3LFUCache<K, LiveEntry> cache = entryFacades;
+        if (cache != null) {
+            cache.clear();
+            entryFacades = null;
+        }
     }
     @Override public boolean containsKey(Object key) { return findSlot(key) >= 0; }
     @Override public V get(Object key) { return getOrDefault(key, null); }
@@ -189,7 +216,7 @@ abstract class M3SlotMap<K, V> extends AbstractMap<K, V> {
             @Override @SuppressWarnings("unchecked") public T next() {
                 if (!hasNext()) { throw new NoSuchElementException(); }
                 last = cursor; lastKey = heldKey; cursor = nextSlot(cursor); prepared = false;
-                Object result = kind == 0 ? heldKey : kind == 1 ? valueAt(last) : new LiveEntry(heldKey);
+                Object result = kind == 0 ? heldKey : kind == 1 ? valueAt(last) : entryFacade(heldKey);
                 heldKey = null; return (T) result;
             }
             @Override public void remove() {
