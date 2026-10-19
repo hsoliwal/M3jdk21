@@ -15,7 +15,7 @@
 
 /*
  * @test
- * @summary Frozen UTF-16 row lookup, prepared coders, collision fallback and image validation
+ * @summary Frozen UTF-16 one-candidate row lookup, collision authority and image validation
  * @modules java.base/java.lang:+open
  * @run main/othervm M3StringFrozenLexiconIndexTest
  * @run main/othervm -XX:-CompactStrings M3StringFrozenLexiconIndexTest
@@ -38,6 +38,7 @@ import java.util.zip.CRC32C;
 
 public class M3StringFrozenLexiconIndexTest {
     private static final Class<?> LEXICON;
+    private static final Class<?> DIRECT_INDEX;
     private static final Method OPEN;
     private static final Method FIND;
     private static final Method FIND_COMPACT;
@@ -47,6 +48,10 @@ public class M3StringFrozenLexiconIndexTest {
     private static final Method ATOM;
     private static final Method ATOM_CHAR;
     private static final Method UTF16_BYTES;
+    private static final Method DIRECT_BUILD;
+    private static final Method DIRECT_CANDIDATE;
+    private static final Method DIRECT_ROWS;
+    private static final Method DIRECT_DISPLACEMENTS;
     private static final Field CODER;
     private static final boolean COMPACT;
     private static final List<Path> FILES = new ArrayList<>();
@@ -55,6 +60,7 @@ public class M3StringFrozenLexiconIndexTest {
     static {
         try {
             LEXICON = Class.forName("java.lang.M3StringPool$Lexicon");
+            DIRECT_INDEX = Class.forName("java.lang.M3FrozenLexiconIndex");
             OPEN = method(LEXICON, "open", Path.class);
             FIND = method(LEXICON, "find", char[].class, int.class, int.class);
             FIND_COMPACT = method(LEXICON, "findCompactBytes", byte[].class,
@@ -67,6 +73,10 @@ public class M3StringFrozenLexiconIndexTest {
             ATOM_CHAR = method(Class.forName("java.lang.M3StringAtom"), "charAt", int.class);
             UTF16_BYTES = method(Class.forName("java.lang.StringUTF16"), "toBytes",
                     char[].class, int.class, int.class);
+            DIRECT_BUILD = method(DIRECT_INDEX, "build", int[].class, int[].class);
+            DIRECT_CANDIDATE = method(DIRECT_INDEX, "candidate", int.class, int.class);
+            DIRECT_ROWS = method(DIRECT_INDEX, "rows");
+            DIRECT_DISPLACEMENTS = method(DIRECT_INDEX, "displacements");
             CODER = field(Class.forName("java.lang.M3StringOwner"), "coder");
             COMPACT = field(String.class, "COMPACT_STRINGS").getBoolean(null);
         } catch (ReflectiveOperationException failure) {
@@ -92,7 +102,8 @@ public class M3StringFrozenLexiconIndexTest {
             check(rows(empty).length == 0, "empty image uses binary fallback");
             query(empty, new String[0], "");
             query(empty, new String[0], "missing");
-            collisionBudget();
+            collisionAuthority();
+            scaleHeadroom();
             allocationBounds();
             String[] shared = sorted("alpha", "duplicate", "duplicate", "\u00e9", "\ud800");
             Object arena = open(sharedImage(shared));
@@ -180,7 +191,7 @@ public class M3StringFrozenLexiconIndexTest {
         return -1;
     }
 
-    private static void collisionBudget() throws Exception {
+    private static void collisionAuthority() throws Exception {
         String[] collisions = new String[128];
         for (int value = 0; value < collisions.length; value++) {
             StringBuilder word = new StringBuilder();
@@ -190,8 +201,35 @@ public class M3StringFrozenLexiconIndexTest {
         Arrays.sort(collisions);
         for (String word : collisions) check(word.hashCode() == collisions[0].hashCode(), "collision fixture");
         Object lexicon = open(image(collisions, 2));
-        check(rows(lexicon).length == 0, "construction probe budget chooses exact binary fallback");
+        check(rows(lexicon).length > 0, "ambiguous key keeps direct address geometry");
+        check(Arrays.stream(rows(lexicon)).anyMatch(row -> row < 0),
+                "ambiguous key marks exact binary authority");
         verify(lexicon, collisions);
+    }
+
+    private static void scaleHeadroom() throws Exception {
+        for (int size : new int[] {60_000, 600_000}) {
+            int[] hashes = new int[size];
+            int[] lengths = new int[size];
+            for (int index = 0; index < size; index++) {
+                hashes[index] =
+                        Integer.rotateLeft(index * 0x9e3779b9, 11) ^ 0x85ebca6b;
+                lengths[index] = 1 + (index & 31);
+            }
+            Object direct = DIRECT_BUILD.invoke(null, hashes, lengths);
+            int[] directRows = (int[]) DIRECT_ROWS.invoke(direct);
+            int[] displacements = (int[]) DIRECT_DISPLACEMENTS.invoke(direct);
+            check(directRows.length >= size, "direct row headroom " + size);
+            check(directRows.length <= (1 << 22), "direct row cap " + size);
+            check(displacements.length > 0, "direct displacement geometry " + size);
+            int stride = Math.max(1, size / 4096);
+            for (int row = 0; row < size; row += stride) {
+                int encoded =
+                        (int) DIRECT_CANDIDATE.invoke(
+                                direct, hashes[row], lengths[row]);
+                check(encoded == row + 1, "single direct candidate " + size + ":" + row);
+            }
+        }
     }
 
     private static void allocationBounds() throws Exception {
