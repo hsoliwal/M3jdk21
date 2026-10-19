@@ -1,9 +1,11 @@
 class	lines_covered	lines_total	branches_covered	branches_total
 com.m3.collections.M3BitLanes	182	182	186	190
 com.m3.collections.M3BlockCache	130	130	100	100
+com.m3.collections.M3BoundedCache	99	99	40	40
 com.m3.collections.M3CellPoint	7	7	6	6
 com.m3.collections.M3CellSelectionCounts	80	80	44	44
 com.m3.collections.M3ColumnarLanes	136	136	160	160
+com.m3.collections.M3FlatteningView	32	32	14	14
 com.m3.collections.M3HeapGrowth	24	24	30	30
 com.m3.collections.M3HeapGrowth.new M3HeapGrowth.Sampler() {...}	4	4	0	0
 com.m3.collections.M3HeapSampler	3	3	0	0
@@ -41,3 +43,4 @@ com.m3.collections.M3WindowRuntime.PixelLayout	1	1	0	0
 com.m3.collections.M3WindowRuntime.RowLayout	1	1	0	0
 com.m3.collections.M3WindowRuntime.RowWindow	76	76	74	74
 com.m3.collections.M3WindowRuntime.Selection	211	211	167	170
+com.m3.collections.M3WindowView	39	39	18	18

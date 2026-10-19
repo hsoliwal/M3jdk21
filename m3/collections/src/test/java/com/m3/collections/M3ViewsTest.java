@@ -177,6 +177,9 @@ public class M3ViewsTest {
 		rows.move (18, 5);
 		assertEquals ("n18", rows.get (0).name);
 		assertEquals (2, rows.size (), "a window over a flattening view");
+		flat.collapse (3);
+		assertEquals (20, flat.size (), "collapsing a never-expanded row changes nothing");
+		assertEquals (0, flat.materializedCount ());
 	}
 
 	@Test
