@@ -7,7 +7,7 @@
 custody mode with crate `owned-apache-dual-linked-hash-bidi-map`.
 
 Manifest: the generated scaffold preimage (SHA-256 `9f7a911b...`, 6839 bytes) is replaced by the owned
-postimage (SHA-256 `335d0736...`, 32532 bytes); an existing owned postimage is accepted unchanged.
+postimage (SHA-256 `b476fb9f...`, 35741 bytes); an existing owned postimage is accepted unchanged.
 A missing target, drift on either side and duplicate targets are refused before any output.
 
 `mvn -f pom.xml test`: 2 tests. The first covers 8 executions (preimage or postimage, both source orders,
