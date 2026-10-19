@@ -1,3 +1,4 @@
+// Modified 2026 by Hitesh Soliwal and contributors: preserve comparator metadata across filtered splits.
 // SPDX-License-Identifier: Apache-2.0
 package com.m3.collections;
 
@@ -8,6 +9,7 @@ import java.util.Iterator;
 import java.util.NavigableSet;
 import java.util.Objects;
 import java.util.SortedSet;
+import java.util.Spliterator;
 import java.util.function.Predicate;
 
 /**
@@ -44,6 +46,7 @@ public final class M3FilteredNavigableSet<E> extends AbstractSet<E> implements N
 
     @Override public Comparator<? super E> comparator() { return delegate.comparator(); }
     @Override public Iterator<E> iterator() { return delegate.iterator(); }
+    @Override public Spliterator<E> spliterator() { return delegate.spliterator(); }
     @Override public Iterator<E> descendingIterator() { return delegate.descendingIterator(); }
     @Override public int size() { return delegate.size(); }
     @Override public boolean isEmpty() { return delegate.isEmpty(); }

@@ -1,0 +1,84 @@
+{
+  "schema": 1,
+  "source": "hsoliwal/com.synexia",
+  "recipe_pr": 12311,
+  "recipe": "com.synexia.m3.SwiftDequeSpans20261018",
+  "recipe_commit": "f8927855894d35a94b22c73f5b9e0cf33ec186f6",
+  "target_baseline": "7c6b3b51094c50c84746b819d79665e5f003bbdf",
+  "targets": [
+    "m3/collections/src/main/java/com/m3/collections/M3LongArrayDeque.java",
+    "m3/collections/algorithm-catalog/swift-collections-20261018.tsv"
+  ],
+  "public_names": "unchanged; one private helper and no new JNI symbol",
+  "implementation": "existing ring owner and System.arraycopy; up to two contiguous copy spans",
+  "canonical_ownership": "Synexia owns reusable recipe/templates; target owns product and receiving qualification",
+  "license": "First-party Apache-2.0; Swift algorithm lineage and exact Apache-2.0 WITH Swift-exception license custody",
+  "status": "DRAFT_PENDING_HOSTED_EXACT_HEAD",
+  "donor_repository": "apple/swift-collections",
+  "donor_revision": "b905c889ff75059b8ef0bde480fe55948147b1e6",
+  "canonical_crate": "synexia-openrewrite-recipes/recipe-crates/m3-swift-deque-spans-20261018",
+  "source_hashes": [
+    {
+      "target_path": "m3/collections/src/main/java/com/m3/collections/M3LongArrayDeque.java",
+      "before_sha256": "67a1118b2df4cff80430e47700d6243e5135048abfa26ffdeffa66dc8f2e76cc",
+      "after_sha256": "ee2ce70df68f11d14ba85a7da8485c9e82e7bc38c08601b57b69d1f39d3bdd2a",
+      "canonical_template": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-swift-deque-spans-20261018/m3__collections__src__main__java__com__m3__collections__M3LongArrayDeque.java.txt"
+    },
+    {
+      "target_path": "m3/collections/src/test/java/com/m3/collections/M3DequeSpanCopyTest.java",
+      "before_sha256": "ABSENT",
+      "after_sha256": "ace325fb05470e1b8b52d2f650c69dc339abf32d7402d6a73cbf718b9cdc1cbd",
+      "canonical_template": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-swift-deque-spans-20261018/m3__collections__src__test__java__com__m3__collections__M3DequeSpanCopyTest.java.txt"
+    },
+    {
+      "target_path": "m3/collections/algorithm-catalog/swift-collections-20261018.tsv",
+      "before_sha256": "ABSENT",
+      "after_sha256": "eb6c28af76ad53b68708f856ee76122c45b47abe006439b9484acdfa6afddddd",
+      "canonical_template": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-swift-deque-spans-20261018/m3__collections__algorithm-catalog__swift-collections-20261018.tsv.txt"
+    },
+    {
+      "target_path": "m3/collections/qualification/swift-deque-spans-20261018/SOURCES.tsv",
+      "before_sha256": "ABSENT",
+      "after_sha256": "af6da42aa859aa7c0ee6d43c0d1c35f6461994d5554a8999822cf1c1164a45c9",
+      "canonical_template": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-swift-deque-spans-20261018/m3__collections__qualification__swift-deque-spans-20261018__SOURCES.tsv.txt"
+    },
+    {
+      "target_path": "m3/collections/qualification/swift-deque-spans-20261018/SWIFT-LICENSE.txt",
+      "before_sha256": "ABSENT",
+      "after_sha256": "770af8291f708538d8ff885a0bbc4e045cd700531741c4f99528d435c14d7f55",
+      "canonical_template": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-swift-deque-spans-20261018/m3__collections__qualification__swift-deque-spans-20261018__SWIFT-LICENSE.txt.txt"
+    },
+    {
+      "target_path": "m3/collections/qualification/swift-deque-spans-20261018/NOTICE.txt",
+      "before_sha256": "ABSENT",
+      "after_sha256": "734e46ccebfed7247fd5eed4f3e80cc4b1807e3b77884b0bbc8da7656dd42704",
+      "canonical_template": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-swift-deque-spans-20261018/m3__collections__qualification__swift-deque-spans-20261018__NOTICE.txt.txt"
+    },
+    {
+      "target_path": "m3/collections/qualification/swift-deque-spans-20261018/README.md",
+      "before_sha256": "ABSENT",
+      "after_sha256": "b2ba17e0d1199a2b3ddffacb71cfb84bff8bc99964789f10f22fa07e0b9f4e98",
+      "canonical_template": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-swift-deque-spans-20261018/m3__collections__qualification__swift-deque-spans-20261018__README.md.txt"
+    },
+    {
+      "target_path": "m3/collections/README.md",
+      "before_sha256": "e72ff3d256fa47d49d5478532974e837af1a7a53d399655283c79fbd482d9dd0",
+      "after_sha256": "47f7da05b5fc2b80b910b9655367c1a9f912113121bd9a80d13b211a7de5ae89",
+      "canonical_template": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-swift-deque-spans-20261018/m3__collections__README.md.txt"
+    }
+  ],
+  "evidence": {
+    "COST.json": {
+      "sha256": "fc075345a426f2aee9390aa7ec4bb132dfd02338fb6d39f5f29832fb8ae7a0c9",
+      "canonical_path": "synexia-openrewrite-recipes/recipe-crates/m3-swift-deque-spans-20261018/evidence/COST.json"
+    },
+    "EXECUTION.json": {
+      "sha256": "87c70f6b163f85b6ceedda975ad3807411226987ae5da4a660420c98c98fcc0e",
+      "canonical_path": "synexia-openrewrite-recipes/recipe-crates/m3-swift-deque-spans-20261018/evidence/EXECUTION.json"
+    },
+    "LOCAL_VERIFICATION.md": {
+      "sha256": "9da4b15108ef55ad7999967f369d19f7955616d6868d8034269ad50562203967",
+      "canonical_path": "synexia-openrewrite-recipes/recipe-crates/m3-swift-deque-spans-20261018/evidence/LOCAL_VERIFICATION.md"
+    }
+  }
+}
