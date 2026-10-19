@@ -526,6 +526,47 @@ public class DefaultListModel<E> extends AbstractListModel<E>
     }
 
     /**
+     * Applies a delta: the elements of each remove run go, each inserted and each updated element is
+     * the one {@code elementAt} answers for its final index, and the listeners receive one event
+     * per run ({@code intervalRemoved}, {@code intervalAdded}, {@code contentsChanged}), so a list
+     * sees the delta in O(changed elements).
+     *
+     * @param patch the delta of this model's elements
+     * @param elementAt the element at a final index, for inserted and updated elements
+     * @throws NullPointerException if an argument is null
+     * @throws IndexOutOfBoundsException if a run does not fit the elements
+     * @see M3Patch
+     * @since 21
+     */
+    public void apply(M3Patch patch, java.util.function.IntFunction<? extends E> elementAt) {
+        java.util.Objects.requireNonNull(elementAt);
+        patch.apply(new long[delegate.size()]);
+        patch.applyTo(new M3Patch.Target() {
+            @Override
+            public void remove(int index, int count) {
+                delegate.subList(index, index + count).clear();
+                fireIntervalRemoved(DefaultListModel.this, index, index + count - 1);
+            }
+
+            @Override
+            public void insert(int index, int count) {
+                for (int k = 0; k < count; k++) {
+                    delegate.add(index + k, elementAt.apply(index + k));
+                }
+                fireIntervalAdded(DefaultListModel.this, index, index + count - 1);
+            }
+
+            @Override
+            public void update(int index, int count) {
+                for (int k = 0; k < count; k++) {
+                    delegate.set(index + k, elementAt.apply(index + k));
+                }
+                fireContentsChanged(DefaultListModel.this, index, index + count - 1);
+            }
+        });
+    }
+
+    /**
      * Adds all of the elements present in the collection to the list.
      *
      * @param c the collection which contains the elements to add

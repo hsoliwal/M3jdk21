@@ -384,6 +384,45 @@ public class DefaultTableModel extends AbstractTableModel implements Serializabl
     }
 
     /**
+     * Applies a delta: the rows of each remove run go, each inserted row and each updated row takes
+     * the values {@code rowAt} answers for its final index (justified to the column count), and the
+     * listeners receive one event per run ({@link #firePatch}).
+     *
+     * @param patch the delta of this model's rows
+     * @param rowAt the values of the row at a final index, for inserted and updated rows
+     * @throws NullPointerException if an argument is null
+     * @throws IndexOutOfBoundsException if a run does not fit the rows
+     * @see javax.swing.M3Patch
+     * @since 21
+     */
+    public void apply(javax.swing.M3Patch patch, java.util.function.IntFunction<Object[]> rowAt) {
+        java.util.Objects.requireNonNull(rowAt);
+        patch.apply(new long[getRowCount()]);
+        firePatch(patch, new javax.swing.M3Patch.Target() {
+            @Override
+            public void remove(int index, int count) {
+                dataVector.subList(index, index + count).clear();
+            }
+
+            @Override
+            public void insert(int index, int count) {
+                for (int k = 0; k < count; k++) {
+                    dataVector.add(index + k, convertToVector(rowAt.apply(index + k)));
+                }
+                justifyRows(index, index + count);
+            }
+
+            @Override
+            public void update(int index, int count) {
+                for (int k = 0; k < count; k++) {
+                    dataVector.set(index + k, convertToVector(rowAt.apply(index + k)));
+                }
+                justifyRows(index, index + count);
+            }
+        });
+    }
+
+    /**
      *  Inserts a row at <code>row</code> in the model.  The new row
      *  will contain <code>null</code> values unless <code>rowData</code>
      *  is specified.  Notification of the row being added will be generated.

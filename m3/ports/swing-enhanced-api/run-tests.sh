@@ -59,7 +59,7 @@ case "${1:-test}" in
   coverage)
     compile
     rm -f "$out/cov.exec"
-    junit_run "-javaagent:$agent=destfile=$out/cov.exec,inclbootstrapclasses=true,includes=javax.swing.M3*:javax.swing.JList*:javax.swing.JTable*:javax.swing.JTree*:javax.swing.DefaultListSelectionModel"
+    junit_run "-javaagent:$agent=destfile=$out/cov.exec,inclbootstrapclasses=true,includes=javax.swing.M3*:javax.swing.JList*:javax.swing.JTable*:javax.swing.JTree*:javax.swing.DefaultListSelectionModel:javax.swing.DefaultListModel*:javax.swing.table.AbstractTableModel*:javax.swing.table.DefaultTableModel*:javax.swing.tree.DefaultTreeModel*"
     "$jdk/bin/java" -jar "$cli" report "$out/cov.exec" --classfiles "$out/patch" --sourcefiles "$out/stage" \
       --xml "$out/cov.xml" --csv "$out/cov.csv" --html "$out/cov-html" > /dev/null
     bash "$here/new-code-coverage.sh" "$out/cov.xml" "$here/NEW_CODE.txt" ;;

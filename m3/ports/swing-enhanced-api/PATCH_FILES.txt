@@ -4,3 +4,8 @@ javax/swing/DefaultListSelectionModel.java
 javax/swing/JList.java
 javax/swing/JTable.java
 javax/swing/JTree.java
+javax/swing/M3Patch.java
+javax/swing/table/AbstractTableModel.java
+javax/swing/table/DefaultTableModel.java
+javax/swing/DefaultListModel.java
+javax/swing/tree/DefaultTreeModel.java

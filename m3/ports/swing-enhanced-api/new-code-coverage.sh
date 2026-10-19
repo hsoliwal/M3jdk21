@@ -12,7 +12,7 @@ sed 's/>/>\n/g' "$xml" | awk -v list="$list" '
   /<\/method>/ { method = ""; next }
   /<counter type="(LINE|BRANCH)"/ && method != "" {
     outer = cls; sub(/\$.*/, "", outer)
-    if (!((outer " *") in want) && !((cls " " method) in want)) next
+    if (!((outer " *") in want) && !((cls " *") in want) && !((cls " " method) in want)) next
     match($0, /type="[A-Z]*"/); t = substr($0, RSTART + 6, RLENGTH - 7)
     match($0, /missed="[0-9]*"/); m = substr($0, RSTART + 8, RLENGTH - 9)
     match($0, /covered="[0-9]*"/); c = substr($0, RSTART + 9, RLENGTH - 10)

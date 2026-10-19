@@ -46,6 +46,7 @@ Oracle files keep Oracle's header and are listed in `API_DECISIONS.tsv`.
 | S5 | `M3TypeAhead` (`indexOf` with prefix/exact and wrap; JTable included) | planned |
 | S6 | `M3DiffApply` (identity diff onto DefaultListModel / DefaultTableModel / DefaultTreeModel) | planned |
 | S7 | sort and filter binding of the sort-filter design (multi-key permutation index, bitmask filters) | planned |
+| S8 | the one-model seam: `M3Patch`; `AbstractTableModel.firePatch`, `DefaultTableModel` / `DefaultListModel` / `DefaultTreeModel` `apply`: deltas reach JTable, JList, JTree as row events, never as whole-model changes | done: 22 tests in all, new code 100% lines / 97.2% branches, differential equal |
 
 Examples: `examples/` has the JTable, JList and JTree demos of the shared scenario (SWT twin snippets in
 `org.eclipse.swt.snippets.m3`).

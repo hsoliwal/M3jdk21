@@ -389,6 +389,61 @@ public class DefaultTreeModel implements Serializable, TreeModel {
     }
 
     /**
+     * Applies a delta to the children of one node and notifies the listeners run by run: each remove
+     * run's children are removed and announced with one {@code nodesWereRemoved}, each insert run's
+     * nodes ({@code nodeAt} of their final index) are inserted and announced with one
+     * {@code nodesWereInserted}, and each update run is announced with one {@code nodesChanged}
+     * (the nodes are the store: change their values before applying). A tree therefore keeps the
+     * expansion and selection of every untouched node, and never sees a structure change of the
+     * parent.
+     *
+     * @param patch the delta of the children of {@code parent}
+     * @param parent the parent node
+     * @param nodeAt the node to insert at a final index
+     * @throws NullPointerException if an argument is null
+     * @throws IndexOutOfBoundsException if a run does not fit the children
+     * @see javax.swing.M3Patch
+     * @since 21
+     */
+    public void apply(javax.swing.M3Patch patch, MutableTreeNode parent,
+                      java.util.function.IntFunction<? extends MutableTreeNode> nodeAt) {
+        java.util.Objects.requireNonNull(nodeAt);
+        patch.apply(new long[parent.getChildCount()]);
+        patch.applyTo(new javax.swing.M3Patch.Target() {
+            @Override
+            public void remove(int index, int count) {
+                int[] indices = new int[count];
+                Object[] removed = new Object[count];
+                for (int k = count - 1; k >= 0; k--) {
+                    indices[k] = index + k;
+                    removed[k] = parent.getChildAt(index + k);
+                    parent.remove(index + k);
+                }
+                nodesWereRemoved(parent, indices, removed);
+            }
+
+            @Override
+            public void insert(int index, int count) {
+                int[] indices = new int[count];
+                for (int k = 0; k < count; k++) {
+                    indices[k] = index + k;
+                    parent.insert(nodeAt.apply(index + k), index + k);
+                }
+                nodesWereInserted(parent, indices);
+            }
+
+            @Override
+            public void update(int index, int count) {
+                int[] indices = new int[count];
+                for (int k = 0; k < count; k++) {
+                    indices[k] = index + k;
+                }
+                nodesChanged(parent, indices);
+            }
+        });
+    }
+
+    /**
       * Invoke this method if you've totally changed the children of
       * node and its children's children...  This will post a
       * treeStructureChanged event.

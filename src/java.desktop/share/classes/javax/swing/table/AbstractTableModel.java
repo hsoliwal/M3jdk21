@@ -269,6 +269,43 @@ public abstract class AbstractTableModel implements TableModel, Serializable
     }
 
     /**
+     * Applies a delta to the store of this model and notifies the listeners run by run: for each
+     * remove run (highest first) {@code store.remove} then one {@link TableModelEvent#DELETE}
+     * event, for each insert run (lowest first) {@code store.insert} then one
+     * {@link TableModelEvent#INSERT} event, for each update run {@code store.update} then one
+     * {@link TableModelEvent#UPDATE} event of its rows. A table therefore sees the delta as row
+     * inserts, removals and updates in O(changed rows), never as {@code fireTableDataChanged}.
+     *
+     * @param patch the delta
+     * @param store the edits of this model's store, called before each event
+     * @throws NullPointerException if an argument is null
+     * @see javax.swing.M3Patch
+     * @since 21
+     */
+    public void firePatch(M3Patch patch, M3Patch.Target store) {
+        java.util.Objects.requireNonNull(store);
+        patch.applyTo(new M3Patch.Target() {
+            @Override
+            public void remove(int index, int count) {
+                store.remove(index, count);
+                fireTableRowsDeleted(index, index + count - 1);
+            }
+
+            @Override
+            public void insert(int index, int count) {
+                store.insert(index, count);
+                fireTableRowsInserted(index, index + count - 1);
+            }
+
+            @Override
+            public void update(int index, int count) {
+                store.update(index, count);
+                fireTableRowsUpdated(index, index + count - 1);
+            }
+        });
+    }
+
+    /**
      * Notifies all listeners that the value of the cell at
      * <code>[row, column]</code> has been updated.
      *

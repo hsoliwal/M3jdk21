@@ -10,3 +10,12 @@ javax/swing/JTable getVisibleRange
 javax/swing/JTree getSelectionRanges
 javax/swing/JTree setSelectionRanges
 javax/swing/JTree getVisibleRange
+javax/swing/M3Patch *
+javax/swing/table/AbstractTableModel firePatch
+javax/swing/table/DefaultTableModel apply
+javax/swing/DefaultListModel apply
+javax/swing/tree/DefaultTreeModel apply
+javax/swing/table/AbstractTableModel$1 *
+javax/swing/table/DefaultTableModel$1 *
+javax/swing/DefaultListModel$1 *
+javax/swing/tree/DefaultTreeModel$1 *
