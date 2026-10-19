@@ -4,7 +4,7 @@ package com.m3.eclipse.framework;
 
 import com.m3.collections.M3Collections;
 import com.m3.collections.M3LongArrayList;
-import java.util.IdentityHashMap;
+import com.m3.collections.M3ObjectIdentitySet;
 import java.util.List;
 import java.util.Objects;
 import org.eclipse.core.resources.IResourceDelta;
@@ -30,10 +30,10 @@ public final class M3EclipseResourceDeltaSnapshot {
         Objects.requireNonNull(root, "root");
         if (maxNodes < 1) throw new IllegalArgumentException("maxNodes must be positive");
         M3EclipseResourceDeltaSnapshot snapshot = new M3EclipseResourceDeltaSnapshot();
-        IdentityHashMap<IResourceDelta, Boolean> seen = M3Collections.identityMap();
+        M3ObjectIdentitySet<IResourceDelta> seen = new M3ObjectIdentitySet<>();
         snapshot.rows.add(root, kindMask(root));
         snapshot.parents.add(-1L);
-        seen.put(root, Boolean.TRUE);
+        seen.add(root);
         for (int ordinal = 0; ordinal < snapshot.rows.size(); ordinal++) {
             IResourceDelta[] children = snapshot.rows.at(ordinal).getAffectedChildren();
             if (children == null) {
@@ -41,7 +41,7 @@ public final class M3EclipseResourceDeltaSnapshot {
             }
             for (IResourceDelta child : children) {
                 Objects.requireNonNull(child, "child resource delta");
-                if (seen.containsKey(child)) {
+                if (seen.contains(child)) {
                     throw new IllegalStateException("cyclic/shared Eclipse resource delta");
                 }
                 if (snapshot.rows.size() >= maxNodes) {
@@ -49,7 +49,7 @@ public final class M3EclipseResourceDeltaSnapshot {
                 }
                 snapshot.rows.add(child, kindMask(child));
                 snapshot.parents.add(ordinal);
-                seen.put(child, Boolean.TRUE);
+                seen.add(child);
             }
         }
         return snapshot;
