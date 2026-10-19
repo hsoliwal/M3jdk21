@@ -45,12 +45,13 @@ jobs:
             m3/collections/src/test/java/com/m3/collections/M3ReadonlyFilteredSlotSelfTest.java \
             m3/collections/src/test/java/com/m3/collections/M3MutableFilteredSlotSelfTest.java \
             m3/collections/src/test/java/com/m3/collections/M3IndexedFilterSortFusionSelfTest.java \
-            m3/collections/src/test/java/com/m3/collections/M3LongDeepFilterSelfTest.java
+            m3/collections/src/test/java/com/m3/collections/M3LongDeepFilterSelfTest.java \
+            m3/collections/src/test/java/com/m3/collections/M3FilteredSortedSetSlotSelfTest.java
       - name: Direct-slot / offset / mask contract oracles (Java)
         shell: bash
         run: |
           set -euo pipefail
-          for klass in M3ReadonlyFilteredSlotSelfTest M3MutableFilteredSlotSelfTest M3IndexedFilterSortFusionSelfTest M3LongDeepFilterSelfTest; do
+          for klass in M3ReadonlyFilteredSlotSelfTest M3MutableFilteredSlotSelfTest M3IndexedFilterSortFusionSelfTest M3LongDeepFilterSelfTest M3FilteredSortedSetSlotSelfTest; do
             java -ea -cp target/doop-convergence/classes com.m3.collections.$klass
           done
       - name: Build existing M3JNI primitive-mask implementation with strict C17
