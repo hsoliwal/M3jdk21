@@ -88,6 +88,8 @@ final class M3StringPrecomputeBridge {
 
         M3StringFacts prepared = source.factsIfPrepared();
         if (prepared != null && !prepared.mayContain(target)) return -1;
+        // The exact-trigram gate of the source's repeat use (A42): absence answers without a scan.
+        if (!M3StringSearchPrecompute.mayContain(source, target)) return -1;
 
         int limit = end - targetLength;
         char first = target.charAt(0);
@@ -116,6 +118,8 @@ final class M3StringPrecomputeBridge {
 
         M3StringFacts prepared = source.factsIfPrepared();
         if (prepared != null && !prepared.mayContain(target)) return -1;
+        // The exact-trigram gate of the source's repeat use (A42): absence answers without a scan.
+        if (!M3StringSearchPrecompute.mayContain(source, target)) return -1;
 
         for (int candidate = start; candidate >= 0; candidate--) {
             int index = 0;

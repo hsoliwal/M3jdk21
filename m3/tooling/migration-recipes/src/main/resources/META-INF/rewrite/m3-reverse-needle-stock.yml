@@ -1,0 +1,23 @@
+# SPDX-License-Identifier: Apache-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.ReverseNeedleStock
+displayName: M3JDK21 reverse search of an M3 needle over a flat haystack in the stock shape
+description: >-
+  lastIndexOf of an M3 needle of 16 units and up over a flat String or StringBuilder ran the
+  reverse KMP of the needle's plan per source unit through bounds-checked accessors, 2.3x..5x the
+  stock reverse search at every needle length (a 64-unit needle absent from 16384 letters:
+  31,948 ns against 12,939 flat). M3StringSearchPrecompute.lastIndexOf now takes the stock reverse
+  search's shape, the needle's last unit sought backwards in a tight loop per coder and each
+  candidate verified backwards, over the needle's bulk-read units with raw source reads (a needle
+  with a unit above 0xff absent from a Latin-1 source at once), and hands the rest of the scan to the
+  reverse KMP when candidates verify long and often (eight candidates and the units verified
+  reaching the units walked), so a degenerate text never costs more than the KMP did. Epoch 2
+  (2026-10-18, M3JDK21 master 970a34350eb): master has no bulk needle read (A21 never landed), so
+  the lane reads the needle once itself (units, null on allocation failure -> the master per-unit
+  search) for every M3 needle length, and reads the source raw only inside the lane (rawUnit); the
+  shared bounds-checked sourceUnit stays for the forward lanes. Java step:
+  M3StringSearchPrecompute and the jtreg proof; no upstream file changed. Stacks on crate
+  m3-flat-needle-gate epoch 2; the M3StringSearchPrecompute preimage is its postimage.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: m3-reverse-needle-stock

@@ -49,19 +49,40 @@ Java_com_m3_collections_M3StateMaskHistogram_tallyNative(
             jint begin = stride == 1 ? first + offset : first - offset - take + 1;
             (*env)->GetByteArrayRegion(env, source, begin, take, chunk);
             if ((*env)->ExceptionCheck(env)) return;
+            /* Histogram counts are independent of the copied chunk's visit order. */
             for (jint i = 0; i < take; i++) {
-                jint cell = stride == 1 ? i : take - i - 1;
-                buckets[(unsigned char) chunk[cell]]++;
+                buckets[(unsigned char) chunk[i]]++;
             }
             offset += take;
         }
-    } else {
+    } else if (count < 2 || stride >= M3_STATE_CHUNK || stride <= -M3_STATE_CHUNK) {
+        /* No two selected points fit in one scratch region: retain the scalar path. */
         jlong at = first;
         for (jint i = 0; i < count; i++, at += stride) {
             jbyte state = 0;
             (*env)->GetByteArrayRegion(env, source, (jsize) at, 1, &state);
             if ((*env)->ExceptionCheck(env)) return;
             buckets[(unsigned char) state]++;
+        }
+    } else {
+        /* Batch selected points into the existing bounded scratch region. Cast before
+         * negation so even INT_MIN strides are safe for empty/singleton paths. */
+        jlong magnitude = stride > 0 ? (jlong) stride : -(jlong) stride;
+        jint batch_limit = (jint) (INT64_C(1) + (M3_STATE_CHUNK - 1) / magnitude);
+        for (jint offset = 0; offset < count;) {
+            jint take = count - offset;
+            if (take > batch_limit) take = batch_limit;
+            jlong span = INT64_C(1) + ((jlong) take - INT64_C(1)) * magnitude;
+            jlong at = (jlong) first + (jlong) offset * (jlong) stride;
+            jlong begin = stride > 0 ? at : at - (span - INT64_C(1));
+            (*env)->GetByteArrayRegion(env, source, (jsize) begin, (jsize) span, chunk);
+            if ((*env)->ExceptionCheck(env)) return;
+            for (jint i = 0; i < take; i++) {
+                jlong cell = stride > 0 ? (jlong) i * magnitude
+                        : span - INT64_C(1) - (jlong) i * magnitude;
+                buckets[(unsigned char) chunk[(jsize) cell]]++;
+            }
+            offset += take;
         }
     }
     (*env)->SetIntArrayRegion(env, result, 0, M3_STATE_COUNT, buckets);
