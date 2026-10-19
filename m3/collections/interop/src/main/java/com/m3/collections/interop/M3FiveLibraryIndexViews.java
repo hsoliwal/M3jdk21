@@ -9,6 +9,7 @@ import com.google.common.collect.ListMultimap;
 import com.google.common.collect.SetMultimap;
 import com.google.common.collect.SortedSetMultimap;
 import com.m3.collections.M3IndexMaskCompactor;
+import com.m3.collections.M3ArrayifiedIndexOps;
 import com.m3.collections.M3IndexMaskWindow;
 import com.m3.collections.M3IndexPathMasks;
 import java.util.Arrays;
@@ -84,6 +85,68 @@ public final class M3FiveLibraryIndexViews<K, V> {
         int[] rowCopy = orderedRows.clone();
         return new M3FiveLibraryIndexViews<>(keyCopy, valueCopy, stateCopy,
                 rowCopy, 0, rowCopy.length);
+    }
+
+
+    /**
+     * LeetCode #1920-style ordinal gather into a detached int[] index lane.
+     * Repeated ordinals intentionally retain repeated logical occurrences;
+     * payload keys/values/states remain in the same privately captured arrays.
+     */
+    public M3FiveLibraryIndexViews<K, V> takeOrdinals(int[] ordinals) {
+        int[] selected = M3ArrayifiedIndexOps.gather(rows, from, to, ordinals);
+        return new M3FiveLibraryIndexViews<>(keys, values, states, selected, 0, selected.length);
+    }
+
+    /** LeetCode #189: triple-reversal rotation on an index window only. */
+    public M3FiveLibraryIndexViews<K, V> rotated(int distance) {
+        int[] selected = M3ArrayifiedIndexOps.rotated(rows, from, to, distance);
+        return new M3FiveLibraryIndexViews<>(keys, values, states, selected, 0, selected.length);
+    }
+
+    /**
+     * LeetCode #27 two-pointer selection over per-logical-occurrence mask bytes.
+     * Unlike the existing physical-state filter, repeated physical rows may
+     * have different occurrence-level states. Explicit JNI reuses the existing
+     * mask position selector; no objects or Java callbacks cross JNI.
+     */
+    public M3FiveLibraryIndexViews<K, V> selectedByOccurrenceStates(
+            byte[] occurrenceStates, int required, int excluded,
+            M3IndexMaskCompactor.Backend backend) {
+        Objects.requireNonNull(occurrenceStates, "occurrenceStates");
+        if (occurrenceStates.length != size()) {
+            throw new IllegalArgumentException("state mask must align with logical occurrences");
+        }
+        int[] selected = M3ArrayifiedIndexOps.selected(rows, from, to,
+                occurrenceStates, 0, required, excluded, backend);
+        return new M3FiveLibraryIndexViews<>(keys, values, states, selected, 0, selected.length);
+    }
+
+    /** Java-only default; never silently changes to JNI. */
+    public M3FiveLibraryIndexViews<K, V> selectedByOccurrenceStates(
+            byte[] occurrenceStates, int required, int excluded) {
+        return selectedByOccurrenceStates(
+                occurrenceStates, required, excluded, M3IndexMaskCompactor.Backend.JAVA);
+    }
+
+    /**
+     * LeetCode #88: merge two comparator-sorted occurrence windows while
+     * retaining stable ties and repeated physical IDs. A shared captured
+     * payload is mandatory; separate source identities cannot be confused
+     * even when their reference values compare equal. Input sortedness is
+     * checked before the result is published.
+     */
+    public M3FiveLibraryIndexViews<K, V> mergeSortedByKey(
+            M3FiveLibraryIndexViews<K, V> right, Comparator<? super K> comparator) {
+        Objects.requireNonNull(right, "right");
+        Objects.requireNonNull(comparator, "comparator");
+        if (keys != right.keys || values != right.values || states != right.states) {
+            throw new IllegalArgumentException("cannot merge unrelated M3 captured payloads");
+        }
+        int[] selected = M3ArrayifiedIndexOps.mergeSorted(
+                rows, from, to, right.rows, right.from, right.to,
+                (a, b) -> comparator.compare(keyAtPhysical(a), keyAtPhysical(b)));
+        return new M3FiveLibraryIndexViews<>(keys, values, states, selected, 0, selected.length);
     }
 
     public int size() { return to - from; }
