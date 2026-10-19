@@ -1,7 +1,7 @@
 {
   "schema": 2,
   "repository": "hsoliwal/com.synexia",
-  "sourceCommit": "7f034c7d526c2486fe43e8470a082af5dbcd8a12",
+  "sourceCommit": "eb7a68aa2a2257435726bf9cd075b59c6737797b",
   "sourcePullRequest": 12447,
   "receiverRepository": "hsoliwal/M3jdk21",
   "receiverBase": "a7cfe4931f2258e01b3fd129db518ade6fbb4ff4",
@@ -29,8 +29,8 @@
     {
       "sourcePath": "synexia-openrewrite-recipes/tasks/source-qualified-tq-reactor-20261019/build/qualification.yml",
       "targetPath": ".github/workflows/m3-source-qualified-tq-build.yml",
-      "gitBlob": "23f964c9e4d6de3e999bc6b1970fe58d0f23d185",
-      "bytes": 33693
+      "gitBlob": "b457f3f79cc7665f8c3b79c30c14b43c4c685344",
+      "bytes": 33730
     },
     {
       "sourcePath": "synexia-openrewrite-recipes/tasks/source-qualified-tq-reactor-20261019/recipe/README.md",
@@ -131,5 +131,14 @@
     "beforeGitBlob": "7ab4f8169a2473ea6df9b2f74952cfffff01a0b2",
     "afterGitBlob": "af4935f91d039791ff8c5861e02a784637d109fc",
     "namedReplay": "NOT_RUN_REQUIRED_BY_HOSTED_JOB"
+  },
+  "checkoutRepair": {
+    "priorRun": 39210177905,
+    "priorHead": "b2a278bf653b8c1d861b589ddf731f626c551826",
+    "beforeExpansionBindingStrict": true,
+    "addedPattern": "/m3/tooling/tq-sync/src/",
+    "boundInputsCovered": 19,
+    "sourceReview": "CLEAR_SOURCE_ONLY",
+    "actualExecution": "PENDING"
   }
 }

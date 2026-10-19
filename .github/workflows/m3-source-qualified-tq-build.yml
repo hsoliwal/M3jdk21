@@ -90,6 +90,7 @@ jobs:
             /m3/tooling/tq-sync/pom.xml
             /m3/tooling/tq-sync/source-reactor/
             /m3/tooling/tq-sync/source-build/
+            /m3/tooling/tq-sync/src/
             /.m3/task-crates/dependency-source-inline-20261010/verify_crate.py
       - name: Build existing source producers and verify TQ sync fixtures
         shell: bash
