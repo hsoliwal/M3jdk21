@@ -35,8 +35,19 @@ import javax.swing.tree.TreeSelectionModel;
 public final class M3TreeSelectionContinuityTest {
 
     public static void main(String[] args) {
-        modelWithRowMapper();
-        jtreeInsertBetweenSelectedRows();
+        StringBuilder failures = new StringBuilder();
+        for (Runnable r : new Runnable[] {M3TreeSelectionContinuityTest::modelWithRowMapper,
+                M3TreeSelectionContinuityTest::jtreeInsertBetweenSelectedRows}) {
+            try {
+                r.run();
+            } catch (RuntimeException e) {
+                StackTraceElement top = e.getStackTrace().length > 0 ? e.getStackTrace()[0] : null;
+                failures.append(e).append(" at ").append(top).append('\n');
+            }
+        }
+        if (failures.length() > 0) {
+            throw new RuntimeException("failed:\n" + failures);
+        }
         System.out.println("passed");
     }
 
