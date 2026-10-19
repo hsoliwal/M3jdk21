@@ -60,7 +60,7 @@ public final class M3HfLexiconIntakeProof {
     private static int verifyLanguageResourceDiscovery() throws IOException {
         List<String> lines = resourceLines(
                 "/com/m3/lexicon/hf/language-resource-discovery.tsv");
-        require(lines.size() == 91, "90 language-resource candidates plus header");
+        require(lines.size() == 92, "91 language-resource candidates plus header");
         List<String> expectedHeader = List.of("source_id", "resource", "category",
                 "data_shape_and_identity", "rights_and_attribution", "m3_candidate_use",
                 "admission_blockers", "state", "evidence");
@@ -89,7 +89,7 @@ public final class M3HfLexiconIntakeProof {
                 "clarin-vlo-api-4-15", "olac-archive-network-2026",
                 "elra-language-resource-catalogue", "concepticon-3-4", "norare-1-0",
                 "asjp-database", "clics-4", "wold", "asl-lex-2", "mudidi-hf-2026",
-                "openslr-beep", "dobes-archive", "elar-archive", "elarspeech-preprint-2026", "ai4bharat-indic-frequency-lists",
+                "openslr-beep", "wikipron-pronunciation-lexicons", "dobes-archive", "elar-archive", "elarspeech-preprint-2026", "ai4bharat-indic-frequency-lists",
                 "morphynet-multilingual-morphology",
                 "cmudict-us-english-pronunciations", "hunspell-language-dictionaries",
                 "global-wordnet-discovery-index", "babelnet-restricted-lexical-graph",
@@ -264,6 +264,17 @@ public final class M3HfLexiconIntakeProof {
         String masakha = lines.stream().skip(1).filter(line -> "masakhaner2-african-20".equals(splitTsv(line)[0])).findFirst().orElse("");
         require(masakha.contains("20 African languages") && masakha.contains("AFL 3.0")
                 && masakha.contains("source-text rights"), "MasakhaNER artifact terms and source rights remain explicit");
+        String wikipron = lines.stream().skip(1)
+                .filter(line -> "wikipron-pronunciation-lexicons".equals(splitTsv(line)[0]))
+                .findFirst().orElse("");
+        require(wikipron.contains("v2.2.0")
+                && wikipron.contains("d282e848a211ea31cfd730f0ced8bc8cdab9e83d")
+                && wikipron.contains("5 million") && wikipron.contains("348 languages"),
+                "WikiPron source release, scale and language coverage stay pinned");
+        require(wikipron.contains("Apache-2.0")
+                && wikipron.contains("separate licensing terms")
+                && wikipron.contains("do not treat software license as payload license"),
+                "WikiPron software and Wiktionary-derived data rights remain distinct");
         return lines.size() - 1;
     }
 
