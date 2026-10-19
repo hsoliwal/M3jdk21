@@ -29,7 +29,7 @@ package com.m3.collections;
  * required length is always returned, nothing is evicted and no GC is forced.</p>
  *
  * <p>{@link #choose} is pure (GWT-safe). {@link #capacity} samples the heap through
- * {@link HeapSampler}, which a GWT build replaces with a sampler that reports no information.</p>
+ * {@link M3HeapSampler}, which a GWT build replaces with a sampler that reports no information.</p>
  */
 public final class M3WarmHeapGrowth {
 
@@ -47,7 +47,7 @@ public final class M3WarmHeapGrowth {
 	 *         pressure
 	 */
 	public static int capacity(final int current, final int minimum, final int elementBytes) {
-		return choose(current, minimum, elementBytes, HeapSampler.maxMemory(), HeapSampler.usedMemory());
+		return choose(current, minimum, elementBytes, M3HeapSampler.maxMemory(), M3HeapSampler.usedMemory());
 	}
 
 	/**
