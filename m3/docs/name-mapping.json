@@ -8325,6 +8325,26 @@
         "source_license": "Apache-2.0",
         "target_license_rule": "Preserve per-file OpenJDK and third-party rights; no Synexia runtime dependency."
       }
+    },
+    {
+      "source_family": "Existing public JDK utility owners and source-qualified utility/view candidate atoms",
+      "target_family": "Integrated utility families in their owning JDK modules",
+      "public_api": "Existing JDK names plus the explicit additive candidates recorded in the referenced fragment; no M3 companion public API",
+      "target_owners": [
+        "java.util.Objects",
+        "java.util.Strings",
+        "java.util.Arrays",
+        "java.util.Collections",
+        "java.util.stream.Collectors",
+        "java.util.stream.Streams",
+        "java.io.IOUtils",
+        "java.lang.reflect.Reflection"
+      ],
+      "mapping": "m3/docs/name-mapping.d/m3-integrated-utility-families-20261018.json",
+      "module_wide_mapping": "m3/docs/name-mapping.d/m3-jdk-module-owners-20261018.json",
+      "rule": "Reuse existing JDK owners and source-bound contracts; distinguish baseline source presence from new candidate and executed target qualification. Preserve all earlier mappings and receiving phase states.",
+      "receiving_sequence_advanced": false,
+      "family_completion": false
     }
   ],
   "recipe_authority": {
