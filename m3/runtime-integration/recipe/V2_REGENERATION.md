@@ -99,3 +99,10 @@ image untouched. The immediate-string owner commit changed eight sealed targets 
 `M3StringOwner.java`, `M3StringPool.java`, `javaClasses.cpp`, `javaClasses.hpp`, `javaClasses.inline.hpp`,
 `vmClassMacros.hpp`, `vmSymbols.hpp`); their new hashes are recorded as `superseded`. Pre-existing
 drift on master (`M3StringFacts.java`, pinned by `apply.py` `MUTF8_FANIN`) is unchanged by this leaf.
+
+Correction (same leaf): `javaClasses.cpp`, `javaClasses.hpp` and `javaClasses.inline.hpp` are three of the four
+modified-UTF-8 fan-in owners whose `superseded` lists `apply.py` pins exactly (`MUTF8_FANIN`, with
+`M3StringFacts.java`), so their new hashes are NOT recorded: five targets are re-sealed (`M3String.java`,
+`M3StringOwner.java`, `M3StringPool.java`, `vmClassMacros.hpp`, `vmSymbols.hpp`). `apply.py --check` on this
+branch reports `modified UTF-8 source drift: .../javaClasses.cpp`; advancing the fan-in needs the fan-in owner
+recipe for all four owners together (live master already fails the check on `M3StringFacts.java`).

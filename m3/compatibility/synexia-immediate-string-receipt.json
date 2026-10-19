@@ -36,7 +36,7 @@
       "vmClasses M3StringImmediate_klass"
     ],
     "publicJdkApiChange": false,
-    "runtimeRecipe": "RESEALED_SUPERSEDED: new postimage hashes of the 8 sealed targets appended to superseded; pre-existing M3StringFacts.java drift unchanged"
+    "runtimeRecipe": "RESEALED_SUPERSEDED (5 targets: M3String, M3StringOwner, M3StringPool, vmClassMacros.hpp, vmSymbols.hpp); javaClasses.cpp/.hpp/.inline.hpp are MUTF8_FANIN-pinned in apply.py and stay PENDING_FANIN_RESEAL (apply.py --check: modified UTF-8 source drift), together with the pre-existing M3StringFacts.java drift"
   },
   "gates": {
     "G1": "Synexia RecipeTest 3/3 PASS",
