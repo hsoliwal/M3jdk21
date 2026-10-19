@@ -15,6 +15,7 @@ import java.util.NavigableSet;
 import java.util.NoSuchElementException;
 import java.util.Objects;
 import java.util.Random;
+import java.util.SortedSet;
 import java.util.TreeSet;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Predicate;
@@ -229,6 +230,49 @@ public final class M3FilteredSortedSetSlotSelfTest {
         }
     }
 
+    private static void checkSortedOnly(
+            SortedSet<Integer> jdk, SortedSet<Integer> m3, String context) {
+        same(new ArrayList<>(jdk), new ArrayList<>(m3), context + " encounter order");
+        same(jdk.size(), m3.size(), context + " size");
+        same(jdk.isEmpty(), m3.isEmpty(), context + " empty");
+        same(jdk.hashCode(), m3.hashCode(), context + " hash code");
+        for (Integer probe : Arrays.asList(null, -30, -12, -7, -3, 0, 5, 6, 17, 24)) {
+            same(jdk.contains(probe), m3.contains(probe), context + " contains " + probe);
+        }
+        if (!jdk.isEmpty()) {
+            same(jdk.first(), m3.first(), context + " first");
+            same(jdk.last(), m3.last(), context + " last");
+        } else {
+            expect(NoSuchElementException.class, jdk::first, context + " empty first ref");
+            expect(NoSuchElementException.class, m3::first, context + " empty first M3");
+        }
+        expect(UnsupportedOperationException.class, () -> m3.add(6),
+                context + " immutable sorted add");
+    }
+
+    /** Exercise SortedSet overload independently of NavigableSet dispatch. */
+    private static void sortedOnlyContracts() {
+        Comparator<Integer> comparator = Comparator.nullsFirst(Integer::compare);
+        TreeSet<Integer> jdk = new TreeSet<>(comparator);
+        M3TreeSet<Integer> m3 = new M3TreeSet<>(comparator);
+        seed(jdk, m3);
+        SortedSet<Integer> reference =
+                M3FilteredViews.filter((SortedSet<Integer>) jdk, VISIBLE);
+        SortedSet<Integer> product =
+                M3FilteredViews.filter((SortedSet<Integer>) m3, VISIBLE);
+        checkSortedOnly(reference, product, "SortedSet base");
+        checkSortedOnly(reference.headSet(-3), product.headSet(-3), "SortedSet head");
+        checkSortedOnly(reference.tailSet(3), product.tailSet(3), "SortedSet tail");
+        checkSortedOnly(reference.subSet(-9, 10), product.subSet(-9, 10),
+                "SortedSet bounded");
+        jdk.add(21);
+        m3.add(21);
+        jdk.remove(-6);
+        m3.remove(-6);
+        checkSortedOnly(reference, product, "SortedSet live after owner writes");
+        m3.verifyInvariants();
+    }
+
     private static void retainedRepresentative() {
         Comparator<String> order = String.CASE_INSENSITIVE_ORDER;
         TreeSet<String> baseline = new TreeSet<>(order);
@@ -288,6 +332,7 @@ public final class M3FilteredSortedSetSlotSelfTest {
         mutable(true, false, 0x4D3353455412L);
         mutable(false, true, 0x4D3353455413L);
         mutable(true, true, 0x4D3353455414L);
+        sortedOnlyContracts();
         retainedRepresentative();
         iteratorState();
         System.out.println("PASS M3FilteredSortedSetSlotSelfTest checks=" + checks);
