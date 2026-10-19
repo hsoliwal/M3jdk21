@@ -1,0 +1,45 @@
+{
+  "schema": 1,
+  "repository": "hsoliwal/com.synexia",
+  "sourceCommit": "4b89cc8af1fd70f081a50ffb151a767d6039d85f",
+  "sourcePullRequest": 12447,
+  "receiverRepository": "hsoliwal/M3jdk21",
+  "receiverBase": "a3e88976ee8664d1ef5d0cade96aec1206b2133d",
+  "mode": "INDEPENDENT_APACHE_MODULE",
+  "payload": "Canonical first-party Maven recipe authoring/proof inputs only; no generated product postimages.",
+  "files": [
+    {
+      "sourcePath": "synexia-openrewrite-recipes/tasks/source-qualified-tq-reactor-20261019/recipe/README.md",
+      "targetPath": "m3/tooling/tq-sync/source-reactor/README.md",
+      "gitBlob": "26146304d14884ac1ebf3b487e4fb290a0fe24fc",
+      "bytes": 1984
+    },
+    {
+      "sourcePath": "synexia-openrewrite-recipes/tasks/source-qualified-tq-reactor-20261019/recipe/expected-projects.json",
+      "targetPath": "m3/tooling/tq-sync/source-reactor/expected-projects.json",
+      "gitBlob": "8c33eaac82b481fda334bf4fd529e2a2a293e269",
+      "bytes": 35243
+    },
+    {
+      "sourcePath": "synexia-openrewrite-recipes/tasks/source-qualified-tq-reactor-20261019/recipe/pom.xml",
+      "targetPath": "m3/tooling/tq-sync/source-reactor/pom.xml",
+      "gitBlob": "67f9d07050c93e4268fd6d09b93b6c967a93050b",
+      "bytes": 836
+    },
+    {
+      "sourcePath": "synexia-openrewrite-recipes/tasks/source-qualified-tq-reactor-20261019/recipe/qualification.yml",
+      "targetPath": ".github/workflows/m3-source-qualified-tq-model.yml",
+      "gitBlob": "9b00cde80d76361dafc8961d33300e29c1da5900",
+      "bytes": 16076
+    },
+    {
+      "sourcePath": "synexia-openrewrite-recipes/tasks/source-qualified-tq-reactor-20261019/recipe/test_reactor.py",
+      "targetPath": "m3/tooling/tq-sync/source-reactor/test_reactor.py",
+      "gitBlob": "e92978b80d8f1ac49d8b255fe9d99e307d95e7cf",
+      "bytes": 9823
+    }
+  ],
+  "runtimeApplied": false,
+  "phaseAdvanced": false,
+  "qualification": "PENDING_ACTUAL_EXACT_MAVEN_3_10_MODEL_ONLY; historical3.9 NOT_RUN; no compilation/JUnit/native/original-model claims"
+}

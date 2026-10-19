@@ -1,0 +1,258 @@
+# SPDX-License-Identifier: Apache-2.0
+# Reuses the source-qualified Maven recipe and existing monitored hosted lane.
+name: M3 source-built producers and TQ sync fixtures
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/m3-source-qualified-tq-build.yml'
+      - 'm3/vendor/third_party/**'
+      - 'm3/tooling/tq-sync/**'
+      - 'm3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3Jdk21HashPinnedSnapshotRecipe.java'
+      - 'm3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java'
+      - '.m3/task-crates/dependency-source-inline-20261010/verify_crate.py'
+permissions:
+  contents: read
+jobs:
+  source-qualified-tq-build:
+    name: Source producers and TQ sync fixture JUnit
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - name: Reserve storage and select existing toolchains
+        env:
+          M3_PROOF_ROOT: ${{ runner.temp }}/m3-source-qualified-tq-build-${{ github.run_id }}-${{ github.run_attempt }}
+          M3_SOURCE_ROOT: ${{ github.workspace }}/m3-source-qualified-tq-build-source
+          TMPDIR: ${{ runner.temp }}/m3-source-qualified-tq-build-${{ github.run_id }}-${{ github.run_attempt }}/tmp
+          TEMP: ${{ runner.temp }}/m3-source-qualified-tq-build-${{ github.run_id }}-${{ github.run_attempt }}/tmp
+          TMP: ${{ runner.temp }}/m3-source-qualified-tq-build-${{ github.run_id }}-${{ github.run_attempt }}/tmp
+          XDG_CACHE_HOME: ${{ runner.temp }}/m3-source-qualified-tq-build-${{ github.run_id }}-${{ github.run_attempt }}/cache
+          XDG_CONFIG_HOME: ${{ runner.temp }}/m3-source-qualified-tq-build-${{ github.run_id }}-${{ github.run_attempt }}/config
+          XDG_DATA_HOME: ${{ runner.temp }}/m3-source-qualified-tq-build-${{ github.run_id }}-${{ github.run_attempt }}/data
+        id: preflight
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -I -S -B - <<'PY'
+          import os,pathlib,re
+          reserve,cap=8*1024**3,512*1024**2
+          for key in ("RUNNER_TEMP","GITHUB_WORKSPACE"):
+              base=pathlib.Path(os.environ[key])
+              if not base.is_dir() or any(p.is_symlink() for p in [base,*base.parents]):raise SystemExit("redirected/missing runner storage")
+              st=os.statvfs(base)
+              if st.f_bavail*st.f_frsize<reserve+cap:raise SystemExit("HOLD_STORAGE 8GiB after512MiB")
+          root=pathlib.Path(os.environ["M3_PROOF_ROOT"]);source=pathlib.Path(os.environ["M3_SOURCE_ROOT"])
+          if root.exists() or source.exists():raise SystemExit("owned output paths must be fresh")
+          cache=pathlib.Path(os.environ["RUNNER_TOOL_CACHE"])
+          javas=[]
+          for version in (cache/"Java_Temurin-Hotspot_jdk").glob("21.*"):
+              home=version/"x64"
+              if re.fullmatch(r"21\.\d+\.\d+-\d+(?:\.\d+)*",version.name) and (version/"x64.complete").is_file() and all(os.access(home/"bin"/name,os.X_OK) for name in ("java","javac")):javas.append(home)
+          pythons=[]
+          for version in (cache/"Python").glob("3.12.*"):
+              home=version/"x64";python=home/"bin/python3.12"
+              if re.fullmatch(r"3\.12\.\d+",version.name) and (version/"x64.complete").is_file() and os.access(python,os.X_OK) and (home/"lib/python3.12/venv/__init__.py").is_file() and (home/"lib/python3.12/ensurepip/__init__.py").is_file():pythons.append(python)
+          if not javas or not pythons:raise SystemExit("HOLD_TOOLCHAIN preinstalled JDK21/CPython3.12 required; no setup/download fallback")
+          java=sorted(javas)[-1].resolve();python=sorted(pythons)[-1].resolve()
+          for directory in ("home/.m2","m2","tmp","cache","config","data"):(root/directory).mkdir(parents=True,exist_ok=False)
+          settings='<settings xmlns="http://maven.apache.org/SETTINGS/1.2.0"/>\n'
+          for name in ("settings.xml","global-settings.xml"):(root/"home/.m2"/name).write_text(settings,encoding="utf-8")
+          with open(os.environ["GITHUB_OUTPUT"],"a",encoding="utf-8") as f:
+              f.write("java="+str(java)+"\npython="+str(python)+"\npython-bin="+str(python.parent)+"\n")
+
+          PY
+      - name: Narrow exact-head checkout
+        env:
+          M3_PROOF_ROOT: ${{ runner.temp }}/m3-source-qualified-tq-build-${{ github.run_id }}-${{ github.run_attempt }}
+          M3_SOURCE_ROOT: ${{ github.workspace }}/m3-source-qualified-tq-build-source
+          TMPDIR: ${{ runner.temp }}/m3-source-qualified-tq-build-${{ github.run_id }}-${{ github.run_attempt }}/tmp
+          TEMP: ${{ runner.temp }}/m3-source-qualified-tq-build-${{ github.run_id }}-${{ github.run_attempt }}/tmp
+          TMP: ${{ runner.temp }}/m3-source-qualified-tq-build-${{ github.run_id }}-${{ github.run_attempt }}/tmp
+          XDG_CACHE_HOME: ${{ runner.temp }}/m3-source-qualified-tq-build-${{ github.run_id }}-${{ github.run_attempt }}/cache
+          XDG_CONFIG_HOME: ${{ runner.temp }}/m3-source-qualified-tq-build-${{ github.run_id }}-${{ github.run_attempt }}/config
+          XDG_DATA_HOME: ${{ runner.temp }}/m3-source-qualified-tq-build-${{ github.run_id }}-${{ github.run_attempt }}/data
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          path: m3-source-qualified-tq-build-source
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          fetch-depth: 1
+          fetch-tags: false
+          lfs: false
+          submodules: false
+          persist-credentials: false
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /.gitattributes
+            /.github/workflows/m3-source-qualified-tq-model.yml
+            /.github/workflows/m3-source-qualified-tq-build.yml
+            /m3/vendor/third_party/.gitattributes
+            /m3/vendor/third_party/pom.xml
+            /m3/vendor/third_party/*/pom.xml
+            /m3/tooling/tq-sync/pom.xml
+            /m3/tooling/tq-sync/source-reactor/
+            /m3/tooling/tq-sync/source-build/
+            /.m3/task-crates/dependency-source-inline-20261010/verify_crate.py
+      - name: Build existing source producers and verify TQ sync fixtures
+        shell: bash
+        env:
+          M3_PROOF_ROOT: ${{ runner.temp }}/m3-source-qualified-tq-build-${{ github.run_id }}-${{ github.run_attempt }}
+          M3_SOURCE_ROOT: ${{ github.workspace }}/m3-source-qualified-tq-build-source
+          TMPDIR: ${{ runner.temp }}/m3-source-qualified-tq-build-${{ github.run_id }}-${{ github.run_attempt }}/tmp
+          TEMP: ${{ runner.temp }}/m3-source-qualified-tq-build-${{ github.run_id }}-${{ github.run_attempt }}/tmp
+          TMP: ${{ runner.temp }}/m3-source-qualified-tq-build-${{ github.run_id }}-${{ github.run_attempt }}/tmp
+          XDG_CACHE_HOME: ${{ runner.temp }}/m3-source-qualified-tq-build-${{ github.run_id }}-${{ github.run_attempt }}/cache
+          XDG_CONFIG_HOME: ${{ runner.temp }}/m3-source-qualified-tq-build-${{ github.run_id }}-${{ github.run_attempt }}/config
+          XDG_DATA_HOME: ${{ runner.temp }}/m3-source-qualified-tq-build-${{ github.run_id }}-${{ github.run_attempt }}/data
+          M3_JAVA_HOME: ${{ steps.preflight.outputs.java }}
+          M3_PYTHON: ${{ steps.preflight.outputs.python }}
+          M3_PYTHON_BIN: ${{ steps.preflight.outputs.python-bin }}
+          EXPECTED_SOURCE_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+          GIT_OPTIONAL_LOCKS: '0'
+          GIT_NO_LAZY_FETCH: '1'
+          GIT_TERMINAL_PROMPT: '0'
+          GCM_INTERACTIVE: never
+        run: |
+          set -euo pipefail
+          python3 -I -S -B - <<'PY'
+          import hashlib,json,os,pathlib,re,shutil,signal,subprocess,time
+          reserve,cap=8*1024**3,512*1024**2
+          root=pathlib.Path(os.environ["M3_PROOF_ROOT"])
+          source=pathlib.Path(os.environ["M3_SOURCE_ROOT"])
+          start=time.monotonic()
+          def traversal_error(error):raise RuntimeError("storage census failed") from error
+          def gate(limit=480*1024**2):
+              used=0
+              for base in (pathlib.Path(os.environ["RUNNER_TEMP"]),source):
+                  if not base.is_dir() or base.is_symlink():raise RuntimeError("missing/redirected storage")
+                  for folder,names,files in os.walk(base,followlinks=False,onerror=traversal_error):
+                      for name in names+files:
+                          try:info=os.lstat(pathlib.Path(folder)/name)
+                          except FileNotFoundError:continue
+                          used+=max(info.st_size,info.st_blocks*512)
+              if used>limit:raise RuntimeError("512MiB aggregate task limit (32MiB artifact reserve)")
+              for base in (root,source):
+                  st=os.statvfs(base)
+                  if st.f_bavail*st.f_frsize<reserve+cap-used:raise RuntimeError("8GiB-after-output reserve")
+              return used
+          def getgit(*args):
+              return subprocess.check_output(["git",*args],cwd=source,text=True,timeout=15).strip()
+          gate()
+          head=getgit("rev-parse","HEAD")
+          if head!=os.environ["EXPECTED_SOURCE_SHA"] or not re.fullmatch("[0-9a-f]{40}",head):raise RuntimeError("checkout is not exact candidate head")
+          env=os.environ.copy()
+          for name in list(env):
+              if name in ("GITHUB_TOKEN","GH_TOKEN") or name.startswith(("PIP_","PYTHON","MAVEN_","JAVA_TOOL_OPTIONS","JDK_JAVA_OPTIONS")):env.pop(name,None)
+          env.update(HOME=str(root/"home"),USERPROFILE=str(root/"home"),MAVEN_USER_HOME=str(root/"home/.m2"),TMPDIR=str(root/"tmp"),TEMP=str(root/"tmp"),TMP=str(root/"tmp"),JAVA_HOME=os.environ["M3_JAVA_HOME"],PATH=os.environ["M3_PYTHON_BIN"]+os.pathsep+os.environ["M3_JAVA_HOME"]+"/bin"+os.pathsep+env["PATH"],MAVEN_OPTS="-Xmx512m -Dfile.encoding=UTF-8 -Djava.io.tmpdir="+str(root/"tmp")+" -Duser.home="+str(root/"home"),JAVA_TOOL_OPTIONS="-Dfile.encoding=UTF-8 -Djava.io.tmpdir="+str(root/"tmp")+" -Duser.home="+str(root/"home")+" -XX:+PerfDisableSharedMem",PIP_CONFIG_FILE=os.devnull,PIP_DISABLE_PIP_VERSION_CHECK="1",PIP_NO_CACHE_DIR="1",PYTHONDONTWRITEBYTECODE="1",GIT_OPTIONAL_LOCKS="0",GIT_NO_LAZY_FETCH="1",GIT_TERMINAL_PROMPT="0")
+          records=[]
+          def cleanup(child):
+              # The qualifier wrappers start no nested sessions; fence this owned group.
+              for sig,seconds in ((signal.SIGTERM,2),(signal.SIGKILL,3)):
+                  try:os.killpg(child.pid,sig)
+                  except ProcessLookupError:pass
+                  end=time.monotonic()+seconds
+                  while time.monotonic()<end:
+                      try:os.killpg(child.pid,0)
+                      except ProcessLookupError:return
+                      time.sleep(.05)
+              raise RuntimeError("owned process group terminal state unproved")
+          def run(name,command,deadline=300):
+              if time.monotonic()-start>1500:raise RuntimeError("global deadline before launch")
+              gate()
+              child=None;code=None
+              log=root/(name+".log")
+              launched=time.time()
+              with log.open("xb") as out:
+                  try:
+                      child=subprocess.Popen(command,cwd=source,env=env,stdin=subprocess.DEVNULL,stdout=out,stderr=subprocess.STDOUT,start_new_session=True)
+                      command_start=time.monotonic()
+                      while child.poll() is None:
+                          gate()
+                          if time.monotonic()-command_start>deadline or time.monotonic()-start>1500:raise RuntimeError("owned command deadline")
+                          time.sleep(.5)
+                      code=child.wait()
+                      if time.monotonic()-start>1500:raise RuntimeError("global deadline after child exit")
+                  finally:
+                      if child is not None:
+                          if child.poll() is None:
+                              try:os.killpg(child.pid,signal.SIGTERM)
+                              except ProcessLookupError:pass
+                              try:child.wait(timeout=2)
+                              except subprocess.TimeoutExpired:
+                                  try:os.killpg(child.pid,signal.SIGKILL)
+                                  except ProcessLookupError:pass
+                                  child.wait(timeout=5)
+                          cleanup(child)
+                          records.append({"name":name,"argv":command,"returncode":child.returncode,"startedUtc":time.strftime("%Y-%m-%dT%H:%M:%SZ",time.gmtime(launched)),"completedUtc":time.strftime("%Y-%m-%dT%H:%M:%SZ",time.gmtime()),"log":log.name,"logBytes":log.stat().st_size,"parentReaped":True,"ownedSessionAbsent":True})
+              gate()
+              if code:raise RuntimeError(name+" failed with "+str(code))
+          py=[os.environ["M3_PYTHON"],"-I","-S","-B"]
+          env["M3_QUALIFICATION_ROOT"]=str(root)
+          qualifier=source/"m3/tooling/tq-sync/source-build/qualify.py"
+          settings=root/"home/.m2"
+          maven=["mvn","-B","-ntp","-s",str(settings/"settings.xml"),"-gs",str(settings/"global-settings.xml"),"-Dmaven.repo.local="+str(root/"m2"),"-Dstyle.color=never"]
+          try:
+              run("binding",py+[str(qualifier),"binding"],deadline=60)
+              run("model-contract",py+[str(source/"m3/tooling/tq-sync/source-reactor/test_reactor.py")],deadline=90)
+              model=json.loads((root/"model-receipt.json").read_bytes())
+              if model["tests"]!=6 or model["errors"] or model["failures"] or model["skips"] or not model["successful"]:raise RuntimeError("exact prior model contract required")
+              run("sparse-expansion",py+[str(qualifier),"expand"],deadline=180)
+              run("source-custody-before",py+[str(qualifier),"before"],deadline=180)
+              inputs=json.loads((qualifier.parent/"build-inputs.json").read_bytes())
+              run("producer-install",maven+["-f",str(source/"m3/vendor/third_party/pom.xml"),"-pl",",".join(inputs["producerSelectors"]),"-am","install"],deadline=900)
+              run("installed-artifacts",py+[str(qualifier),"installed"],deadline=90)
+              run("tq-verify",maven+["-f",str(source/"m3/tooling/tq-sync/source-reactor/pom.xml"),"-Dm3.receiver.relative=../../../..","-pl","com.m3:tq-sync","-DskipTests=false","-Dmaven.test.skip=false","verify"],deadline=300)
+              run("build-report",py+[str(qualifier),"report"],deadline=180)
+              receipt=json.loads((root/"build-receipt.json").read_bytes())
+              if receipt["producerBuildQualified"] is not True or receipt["tqSyncFixtureJUnitQualified"] is not True:raise RuntimeError("actual build and TQ sync test proof required")
+              for key in ("currentProductCustodyQualified","runtimeTqJniQualified","originalPrivateModelQualified","canonicalOverflowQualified","matchedJdkQualified","performanceRetentionQualified","phaseAdvanced"):
+                  if receipt[key] is not False:raise RuntimeError("source-build scope drift")
+              hosted={"schema":"M3_TQ_SOURCE_BUILD_HOSTED_V1","checkoutCommit":head,"commands":records,"buildReceiptSha256":hashlib.sha256((root/"build-receipt.json").read_bytes()).hexdigest(),"aggregateBytes":gate(),"phaseAdvanced":False}
+              (root/"hosted-build-receipt.json").write_text(json.dumps(hosted,indent=2)+"\n",encoding="utf-8")
+          finally:
+              # Preserve full bounded command logs; a tail is additional failure context.
+              last=root/(records[-1]["log"] if records else "binding.log")
+              tail=b""
+              if last.is_file() and not last.is_symlink():
+                  with last.open("rb") as f:f.seek(max(0,last.stat().st_size-32768));tail=f.read(32768)
+              try:
+                  before=gate(496*1024**2)
+                  selected=sorted(root.glob("*.json"))+sorted(root.glob("*.log"))
+                  selected+=sorted((source/"m3/tooling/tq-sync/target/surefire-reports").glob("TEST-*.xml"))
+                  selected+=sorted((source/"m3/tooling/tq-sync/target/surefire-reports").glob("*.txt"))
+                  selected+=[qualifier.parent/"source-binding.json"]
+                  selected=[p for p in selected if p.is_file()]
+                  if len(selected)>56 or len({p.name for p in selected})!=len(selected) or any(any(q.is_symlink() for q in [p,*p.parents]) for p in selected):raise RuntimeError("closed artifact source fence")
+                  planned=sum(p.stat().st_size for p in selected)+len(tail)
+                  if planned>8*1024**2 or before+planned+1024**2>496*1024**2:raise RuntimeError("full qualifying logs exceed closed artifact budget")
+              except BaseException:
+                  print(tail.decode("utf-8",errors="replace"));raise
+              bundle=root/"artifacts";bundle.mkdir(exist_ok=False)
+              inventory={}
+              for path in selected:
+                  gate(496*1024**2);shutil.copyfile(path,bundle/path.name)
+                  with path.open("rb") as f:digest=hashlib.file_digest(f,"sha256").hexdigest()
+                  inventory[path.name]={"bytes":path.stat().st_size,"sha256":digest,"source":str(path.relative_to(root)) if root in path.parents else str(path.relative_to(source))}
+              (bundle/"commands.json").write_text(json.dumps(records,indent=2)+"\n",encoding="utf-8")
+              (bundle/"inventory.json").write_text(json.dumps(inventory,indent=2)+"\n",encoding="utf-8")
+              (bundle/"log-tail.txt").write_bytes(tail)
+              print(tail.decode("utf-8",errors="replace"))
+              print("Final aggregate bytes before artifact upload:",gate(496*1024**2))
+          PY
+      - name: Retain complete bounded source build logs and fixture receipts
+        env:
+          M3_PROOF_ROOT: ${{ runner.temp }}/m3-source-qualified-tq-build-${{ github.run_id }}-${{ github.run_attempt }}
+          M3_SOURCE_ROOT: ${{ github.workspace }}/m3-source-qualified-tq-build-source
+          TMPDIR: ${{ runner.temp }}/m3-source-qualified-tq-build-${{ github.run_id }}-${{ github.run_attempt }}/tmp
+          TEMP: ${{ runner.temp }}/m3-source-qualified-tq-build-${{ github.run_id }}-${{ github.run_attempt }}/tmp
+          TMP: ${{ runner.temp }}/m3-source-qualified-tq-build-${{ github.run_id }}-${{ github.run_attempt }}/tmp
+          XDG_CACHE_HOME: ${{ runner.temp }}/m3-source-qualified-tq-build-${{ github.run_id }}-${{ github.run_attempt }}/cache
+          XDG_CONFIG_HOME: ${{ runner.temp }}/m3-source-qualified-tq-build-${{ github.run_id }}-${{ github.run_attempt }}/config
+          XDG_DATA_HOME: ${{ runner.temp }}/m3-source-qualified-tq-build-${{ github.run_id }}-${{ github.run_attempt }}/data
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: m3-source-qualified-tq-build-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/m3-source-qualified-tq-build-${{ github.run_id }}-${{ github.run_attempt }}/artifacts/
+          include-hidden-files: true
+          compression-level: 0
+          retention-days: 90
+          if-no-files-found: error
