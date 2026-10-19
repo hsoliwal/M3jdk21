@@ -1,0 +1,47 @@
+{
+  "base_revision": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
+  "targets": [
+    {
+      "path": "m3/runtime-integration/token-regex/README.md",
+      "candidate": "/workspace/scratch/0125adabf4e6/m3jdk21-work/token-candidates/postimages/m3/runtime-integration/token-regex/README.md",
+      "pre_sha256": null,
+      "post_sha256": "695ed953a1b31c3b382dca3cac2901e3d5071fe8328212a8ca166c3072db9a19"
+    },
+    {
+      "path": "m3/runtime-integration/token-regex/behavioral-atoms.json",
+      "candidate": "/workspace/scratch/0125adabf4e6/m3jdk21-work/token-candidates/postimages/m3/runtime-integration/token-regex/behavioral-atoms.json",
+      "pre_sha256": null,
+      "post_sha256": "97d379a6380173a759275dd55bc5f541ddc9d1771e29b40797556770542cdf20"
+    },
+    {
+      "path": "m3/runtime-integration/token-regex/contract-catalogue.json",
+      "candidate": "/workspace/scratch/0125adabf4e6/m3jdk21-work/token-candidates/postimages/m3/runtime-integration/token-regex/contract-catalogue.json",
+      "pre_sha256": null,
+      "post_sha256": "3e1bfbf638ecf134ab2f0d81619ce2cb05472c7e12f1497b41ef54a01fbb16df"
+    },
+    {
+      "path": "m3/runtime-integration/token-regex/verify.py",
+      "candidate": "/workspace/scratch/0125adabf4e6/m3jdk21-work/token-candidates/postimages/m3/runtime-integration/token-regex/verify.py",
+      "pre_sha256": null,
+      "post_sha256": "0d605a28b5fd82374dbb19b2ae9f3d1fdc13dddb1dda52ccaed10bd780e39849"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/regex/TokenMatcher.java",
+      "candidate": "/workspace/scratch/0125adabf4e6/m3jdk21-work/token-candidates/postimages/src/java.base/share/classes/java/util/regex/TokenMatcher.java",
+      "pre_sha256": null,
+      "post_sha256": "cc0ab3c5c7d8be51fc3a699d4215a2e667d814301d9a8f0d49f311f750f984a2"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/regex/TokenPattern.java",
+      "candidate": "/workspace/scratch/0125adabf4e6/m3jdk21-work/token-candidates/postimages/src/java.base/share/classes/java/util/regex/TokenPattern.java",
+      "pre_sha256": null,
+      "post_sha256": "ec99da6337bbef8db8becf07169373789bfa04da298288103ae26161ee27e24a"
+    },
+    {
+      "path": "test/jdk/java/util/regex/TokenPattern/TokenPatternTest.java",
+      "candidate": "/workspace/scratch/0125adabf4e6/m3jdk21-work/token-candidates/postimages/test/jdk/java/util/regex/TokenPattern/TokenPatternTest.java",
+      "pre_sha256": null,
+      "post_sha256": "6d9a127c3f1159a1323a7ce6129c25d91eb6d4486016bf0ac0dc05d0f43cd56f"
+    }
+  ]
+}

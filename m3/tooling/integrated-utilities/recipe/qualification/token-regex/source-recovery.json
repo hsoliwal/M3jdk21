@@ -1,0 +1,19 @@
+{
+  "schema": "M3_TOKEN_SOURCE_RECOVERY_V1",
+  "date": "2026-10-19",
+  "reason": "Transient executor reset removed uncommitted local memory staging.",
+  "canonical_checkpoint": "hsoliwal/com.synexia@4de06d536308121b64bbe714096f7cad6bc0b908",
+  "product_recovery": "Exact source text recovered from prior full tool outputs and recorded edits, SHA256 matched before compilation.",
+  "product_sha256": {
+    "src/java.base/share/classes/java/util/regex/TokenPattern.java": "ec99da6337bbef8db8becf07169373789bfa04da298288103ae26161ee27e24a",
+    "src/java.base/share/classes/java/util/regex/TokenMatcher.java": "cc0ab3c5c7d8be51fc3a699d4215a2e667d814301d9a8f0d49f311f750f984a2"
+  },
+  "previous_test_sha256": "6bf2f7a633ee5e45ce87a60362cdb0ceee4f389527805629edf63cd8c2640ae2",
+  "new_test_sha256": "6d9a127c3f1159a1323a7ce6129c25d91eb6d4486016bf0ac0dc05d0f43cd56f",
+  "test_recovery": "Fresh comprehensive test authored against documented contracts; historical test bytes unavailable.",
+  "previous_raw_receipts": "UNRECOVERED_NOT_RECREATED",
+  "fresh_execution_receipt": "contract-results.json",
+  "fresh_execution_receipt_sha256": "087083289e2b681872438c74c43ccbd86daa55edbeee5252485b7f7f7f74fbfc",
+  "atom_parser": "Exact canonical tools/M3SourceAtoms.java blob35f0150f4c9c9eea9acb7c181da6fcabbc5a57ec",
+  "atom_recovery": "Regenerated all 68 atoms from exact product sources and verified source-range hashes."
+}

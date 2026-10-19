@@ -1,0 +1,47 @@
+{
+  "schema": "M3_TOKEN_REGEX_RECIPE_INTAKE_V1",
+  "status": "READY_FROZEN_RECOVERED_EXACT_PRODUCTS_FRESH_TESTS",
+  "candidate_manifest": "candidate-manifest.json",
+  "target_paths": "target-paths.json",
+  "expected_added_paths": 7,
+  "modified_existing_owners": [],
+  "public_owner_tokens": {
+    "src/java.base/share/classes/java/util/regex/TokenPattern.java": [
+      "public final class TokenPattern<T>",
+      "public enum Quantifier",
+      "public static <T> TokenPattern<T> token(Predicate<? super T> predicate)",
+      "public static <T> TokenPattern<T> sequence(TokenPattern<? super T>... expressions)",
+      "public TokenPattern<T> repeat(int minimum, int maximum, Quantifier quantifier)",
+      "public TokenPattern<T> capture(String name)",
+      "public TokenMatcher<T> matcher(List<? extends T> input)"
+    ],
+    "src/java.base/share/classes/java/util/regex/TokenMatcher.java": [
+      "public final class TokenMatcher<T>",
+      "public boolean find()",
+      "public boolean find(int start)",
+      "public TokenMatcher<T> reset(List<? extends T> tokens)",
+      "public TokenMatcher<T> region(int start, int end)",
+      "public List<T> group(String name)",
+      "public Span span(String name)",
+      "public record Span(int start, int end)"
+    ]
+  },
+  "atoms": {
+    "count": 68,
+    "path": "m3/runtime-integration/token-regex/behavioral-atoms.json",
+    "parser": "JDK21_JAVAC_COMPILER_TREE_API"
+  },
+  "qualification": {
+    "primary": "contract-results.json",
+    "recovery": "source-recovery.json",
+    "assertions_per_mode": 522729,
+    "modes": [
+      "mixed",
+      "-Xint"
+    ],
+    "differential_cases_per_mode": 7586,
+    "independent_language_cases_per_mode": 6867,
+    "full_fork_image": "PENDING"
+  },
+  "provenance_notes": "TokenPattern GPL2+Classpath Pattern.group0 orchestration adaptation with Oracle notice. TokenMatcher target-authored GPL2+Classpath. Test GPL2-only. Metadata/proof Apache2. Reference-only Apache/proprietary donors; no expression import."
+}

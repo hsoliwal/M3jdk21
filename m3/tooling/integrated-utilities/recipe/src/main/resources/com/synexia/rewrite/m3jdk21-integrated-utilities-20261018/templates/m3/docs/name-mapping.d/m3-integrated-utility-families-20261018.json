@@ -534,10 +534,86 @@
     {
       "id": "regex",
       "family": "Regular expressions",
-      "utility_entry_point": "java.util.regex.Pattern factories and Matcher execution",
+      "utility_entry_point": "Existing java.util.regex.Pattern/Matcher for characters; additive TokenPattern/TokenMatcher candidates for object-token sequences",
       "baseline_functionality": "Pattern compilation, quoting, matching, finding, groups and replacement remain canonical regex APIs.",
-      "remaining_scope": "Prepared masks and restricted DP/DFA forms are accelerators or separately scoped algorithms; they cannot replace full Pattern/Matcher semantics without exact proof.",
-      "new_candidates": [],
+      "remaining_scope": "Token builders are a finite object-predicate/capture/repetition API. They do not supply a lexer, textual grammar, backreference/lookaround builders or the full T-Rex language. Existing backtracking and stack costs remain; full fork-image, platforms and performance acceptance are pending.",
+      "new_candidates": [
+        {
+          "public_api": "java.util.regex.TokenPattern",
+          "target_module": "java.base",
+          "target_path": "src/java.base/share/classes/java/util/regex/TokenPattern.java",
+          "kind": "NEW_ADDITIVE_PUBLIC_TOKEN_SEQUENCE_API",
+          "status": "CANDIDATE_REQUIRES_SOURCE_AND_RUNTIME_QUALIFICATION",
+          "proof": null,
+          "receiving_sequence_advanced": false,
+          "proposed_methods": [
+            "alternation",
+            "anyToken",
+            "capture",
+            "empty",
+            "groupCount",
+            "literal",
+            "matcher",
+            "namedGroups",
+            "oneOrMore",
+            "optional",
+            "or",
+            "repeat",
+            "sequence",
+            "then",
+            "token",
+            "zeroOrMore"
+          ],
+          "candidate_source_sha256": "ec99da6337bbef8db8becf07169373789bfa04da298288103ae26161ee27e24a",
+          "declaration_tokens": [
+            "public final class TokenPattern<T>",
+            "public enum Quantifier",
+            "public static <T> TokenPattern<T> token(Predicate<? super T> predicate)",
+            "public static <T> TokenPattern<T> sequence(TokenPattern<? super T>... expressions)",
+            "public TokenPattern<T> repeat(int minimum, int maximum, Quantifier quantifier)",
+            "public TokenPattern<T> capture(String name)",
+            "public TokenMatcher<T> matcher(List<? extends T> input)"
+          ]
+        },
+        {
+          "public_api": "java.util.regex.TokenMatcher",
+          "target_module": "java.base",
+          "target_path": "src/java.base/share/classes/java/util/regex/TokenMatcher.java",
+          "kind": "NEW_ADDITIVE_PUBLIC_TOKEN_SEQUENCE_API",
+          "status": "CANDIDATE_REQUIRES_SOURCE_AND_RUNTIME_QUALIFICATION",
+          "proof": null,
+          "receiving_sequence_advanced": false,
+          "proposed_methods": [
+            "end",
+            "find",
+            "group",
+            "groupCount",
+            "hasMatch",
+            "input",
+            "lookingAt",
+            "matches",
+            "namedGroups",
+            "pattern",
+            "region",
+            "regionEnd",
+            "regionStart",
+            "reset",
+            "span",
+            "start"
+          ],
+          "candidate_source_sha256": "cc0ab3c5c7d8be51fc3a699d4215a2e667d814301d9a8f0d49f311f750f984a2",
+          "declaration_tokens": [
+            "public final class TokenMatcher<T>",
+            "public boolean find()",
+            "public boolean find(int start)",
+            "public TokenMatcher<T> reset(List<? extends T> tokens)",
+            "public TokenMatcher<T> region(int start, int end)",
+            "public List<T> group(String name)",
+            "public Span span(String name)",
+            "public record Span(int start, int end)"
+          ]
+        }
+      ],
       "evidence_level": "BASELINE_SOURCE_INVENTORY_ONLY",
       "family_completion": false,
       "owning_modules": [
@@ -548,20 +624,55 @@
         "java.util.regex.Matcher"
       ],
       "related_module_owner_refs": [],
-      "pending_extension_slots": [
-        {
-          "aspect": "TOKEN_SEQUENCE_MATCHING",
-          "target_module": "java.base",
-          "target_package": "java.util.regex",
-          "public_owner": null,
-          "public_signatures": null,
-          "status": "PENDING_DONOR_RIGHTS_OWNER_AND_CONTRACT_SELECTION",
-          "proof": null,
-          "receiving_sequence_advanced": false,
-          "contract_boundary": "Existing Pattern and Matcher consume character sequences; named capture groups do not make them token-aware. A bounded token-sequence matcher needs an explicit token/predicate/capture/zero-width/resource contract while preserving existing character regex behavior.",
-          "research_state": "Existing Synexia token owners and square/t-rex algorithm/source rights are under review. No source transplantation or algorithm selection is claimed here."
-        }
-      ]
+      "pending_extension_slots": [],
+      "token_sequence_extension": {
+        "aspect": "TOKEN_SEQUENCE_MATCHING",
+        "target_module": "java.base",
+        "target_package": "java.util.regex",
+        "public_owners": [
+          "java.util.regex.TokenPattern",
+          "java.util.regex.TokenMatcher"
+        ],
+        "engine_owner_sources": [
+          "java.util.regex.Pattern",
+          "java.util.regex.Matcher"
+        ],
+        "status": "CANDIDATE_REQUIRES_SOURCE_AND_RUNTIME_QUALIFICATION",
+        "proof": null,
+        "runtime_qualified": false,
+        "performance_qualified": false,
+        "receiving_sequence_advanced": false,
+        "existing_character_owners_unchanged": true,
+        "named_character_groups_are_token_aware": false,
+        "unit": "ONE_LIST_ELEMENT_NO_STRING_SERIALIZATION",
+        "span_positions": "ABSOLUTE_HALF_OPEN_TOKEN_INDICES",
+        "nested_types": [
+          "java.util.regex.TokenPattern.Quantifier",
+          "java.util.regex.TokenMatcher.Span"
+        ],
+        "features": [
+          "object predicates",
+          "literal and any token",
+          "empty expression",
+          "sequence",
+          "ordered alternative",
+          "greedy/reluctant/possessive bounded and unbounded repetition",
+          "numbered and named captures",
+          "defensive shallow input snapshot",
+          "token-index region and search"
+        ],
+        "excluded": [
+          "lexer",
+          "textual grammar/parser",
+          "backreference/lookaround builders",
+          "full T-Rex grammar",
+          "linear-time guarantee",
+          "token JNI acceleration"
+        ],
+        "canonical_contract_catalogue": "m3/runtime-integration/token-regex/contract-catalogue.json",
+        "behavioral_atom_seal": "m3/runtime-integration/token-regex/behavioral-atoms.json",
+        "source_evidence": "Exact frozen product SHA and declaration tokens; executed contracts remain in a separate source-bound receiver packet."
+      }
     },
     {
       "id": "numbers",
