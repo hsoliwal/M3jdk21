@@ -60,7 +60,7 @@ public final class M3HfLexiconIntakeProof {
     private static int verifyLanguageResourceDiscovery() throws IOException {
         List<String> lines = resourceLines(
                 "/com/m3/lexicon/hf/language-resource-discovery.tsv");
-        require(lines.size() == 70, "69 language-resource candidates plus header");
+        require(lines.size() == 76, "75 language-resource candidates plus header");
         List<String> expectedHeader = List.of("source_id", "resource", "category",
                 "data_shape_and_identity", "rights_and_attribution", "m3_candidate_use",
                 "admission_blockers", "state", "evidence");
@@ -97,7 +97,10 @@ public final class M3HfLexiconIntakeProof {
                 "gf-resource-grammar-library", "sigmorphon-2022-segmentation",
                 "hf-world-languages-7130", "wordfreq-3-0-2-data",
                 "reflex-africa-v1-0", "opus-corpus-index-2026",
-                "google-fleurs-102", "google-waxalnlp")),
+                "google-fleurs-102", "google-waxalnlp", "dictionaria-cldf-dictionaries",
+                "nchlt-south-african-resource-bundles", "sails-south-american-grammar",
+                "word2word-bilingual-lexicons", "wordhoard-frequency-morphology",
+                "muse-bilingual-dictionary-benchmarks")),
                 "lexicon, grammar, translation, concept, norms, archive, sign and HF leads retained");
         String paranames = lines.stream().skip(1)
                 .filter(line -> "hf-paranames-1-0".equals(splitTsv(line)[0]))
@@ -184,6 +187,24 @@ public final class M3HfLexiconIntakeProof {
         require(waxal.contains("CC BY-SA 4.0") && waxal.contains("CC BY 4.0")
                 && waxal.contains("unresolved"),
                 "WAXAL license metadata conflict remains unresolved and non-admitted");
+        String dictionaria = lines.stream().skip(1).filter(line -> "dictionaria-cldf-dictionaries".equals(splitTsv(line)[0])).findFirst().orElse("");
+        require(dictionaria.contains("CLDF") && dictionaria.contains("CC BY 4.0")
+                && dictionaria.contains("dictionary-scoped"), "Dictionaria local IDs and rights scope remain explicit");
+        String nchlt = lines.stream().skip(1).filter(line -> "nchlt-south-african-resource-bundles".equals(splitTsv(line)[0])).findFirst().orElse("");
+        require(nchlt.contains("CC BY 2.5 South Africa") && nchlt.contains("frequency list")
+                && nchlt.contains("20.500.12185/321"), "NCHLT artifact license and source handle remain explicit");
+        String sails = lines.stream().skip(1).filter(line -> "sails-south-american-grammar".equals(splitTsv(line)[0])).findFirst().orElse("");
+        require(sails.contains("CC BY-NC-ND 2.0 Germany") && sails.contains("non-uniform")
+                && sails.contains("REFERENCE_ONLY"), "SAILS domain and restrictive terms remain visible");
+        String word2word = lines.stream().skip(1).filter(line -> "word2word-bilingual-lexicons".equals(splitTsv(line)[0])).findFirst().orElse("");
+        require(word2word.contains("3,564") && word2word.contains("62 languages")
+                && word2word.contains("no separate license"), "word2word coverage and unresolved payload rights remain explicit");
+        String wordhoard = lines.stream().skip(1).filter(line -> "wordhoard-frequency-morphology".equals(splitTsv(line)[0])).findFirst().orElse("");
+        require(wordhoard.contains("CC BY-SA 4.0") && wordhoard.contains("MIT")
+                && wordhoard.contains("five implemented languages"), "WordHoard code/data rights and scope remain explicit");
+        String muse = lines.stream().skip(1).filter(line -> "muse-bilingual-dictionary-benchmarks".equals(splitTsv(line)[0])).findFirst().orElse("");
+        require(muse.contains("110 directed") && muse.contains("CC BY-NC 4.0")
+                && muse.contains("archived read-only"), "MUSE evaluation scope and noncommercial limit remain explicit");
         return lines.size() - 1;
     }
 
