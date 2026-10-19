@@ -27,14 +27,14 @@ Enum-keyed maps hold at most one mapping per constant, so their footprint row co
 
 | module | example | provider B/op | m3 B/op | provider B/element | m3 B/element | elements |
 |---|---|---|---|---|---|---|
-| `guava-array-list-multimap` | [`ArrayListMultimapExample`](implementations/guava-array-list-multimap/examples/ArrayListMultimapExample.java) | 32.6 | 40.0 | footprint | footprint | B/element |
-| `guava-hash-multiset` | [`HashMultisetExample`](implementations/guava-hash-multiset/examples/HashMultisetExample.java) | 0.0 | 0.0 | footprint | footprint | B/element |
-| `apache-hash-bag` | [`HashBagExample`](implementations/apache-hash-bag/examples/HashBagExample.java) | 0.0 | 0.0 | footprint | footprint | B/element |
-| `guava-enum-hash-bi-map` | [`EnumHashBiMapExample`](implementations/guava-enum-hash-bi-map/examples/EnumHashBiMapExample.java) | 0.0 | 0.0 | footprint | footprint | B/element |
-| `guava-enum-bi-map` | [`EnumBiMapExample`](implementations/guava-enum-bi-map/examples/EnumBiMapExample.java) | 0.0 | 0.0 | footprint | footprint | B/element |
-| `apache-dual-linked-hash-bidi-map` | [`DualLinkedHashBidiMapExample`](implementations/apache-dual-linked-hash-bidi-map/examples/DualLinkedHashBidiMapExample.java) | 40.0 | 0.0 | footprint | footprint | B/element |
-| `spring-multi-value-map-adapter` | [`MultiValueMapAdapterExample`](implementations/spring-multi-value-map-adapter/examples/MultiValueMapAdapterExample.java) | 0.0 | 0.0 | footprint | footprint | B/element |
-| `guava-enum-multiset` | [`EnumMultisetExample`](implementations/guava-enum-multiset/examples/EnumMultisetExample.java) | 0.0 | 0.0 | footprint | footprint | B/element |
+| `guava-array-list-multimap` | [`ArrayListMultimapExample`](implementations/guava-array-list-multimap/examples/ArrayListMultimapExample.java) | 32.6 | 40.0 | 13.6 | 12.7 | 10000 |
+| `guava-hash-multiset` | [`HashMultisetExample`](implementations/guava-hash-multiset/examples/HashMultisetExample.java) | 0.0 | 0.0 | 45.9 | 26.0 | 10000 |
+| `apache-hash-bag` | [`HashBagExample`](implementations/apache-hash-bag/examples/HashBagExample.java) | 0.0 | 0.0 | 45.9 | 21.1 | 10000 |
+| `guava-enum-hash-bi-map` | [`EnumHashBiMapExample`](implementations/guava-enum-hash-bi-map/examples/EnumHashBiMapExample.java) | 0.0 | 0.0 | 47.1 | 22.7 | 64 |
+| `guava-enum-bi-map` | [`EnumBiMapExample`](implementations/guava-enum-bi-map/examples/EnumBiMapExample.java) | 0.0 | 0.0 | 11.0 | 19.0 | 64 |
+| `apache-dual-linked-hash-bidi-map` | [`DualLinkedHashBidiMapExample`](implementations/apache-dual-linked-hash-bidi-map/examples/DualLinkedHashBidiMapExample.java) | 40.0 | 0.0 | 93.1 | 91.7 | 10000 |
+| `spring-multi-value-map-adapter` | [`MultiValueMapAdapterExample`](implementations/spring-multi-value-map-adapter/examples/MultiValueMapAdapterExample.java) | 0.0 | 0.0 | 14.4 | 14.4 | 10000 |
+| `guava-enum-multiset` | [`EnumMultisetExample`](implementations/guava-enum-multiset/examples/EnumMultisetExample.java) | 0.0 | 0.0 | 0.1 | 0.0 | 10000 |
 
 Reading the table:
 - `ArrayListMultimap`: both allocate on the steady-state path because `get(k)` returns a list view object in
