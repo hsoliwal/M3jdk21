@@ -557,7 +557,8 @@ public class M3FixedHeightLayoutCache extends FixedHeightLayoutCache {
         int removed = tot[n];
         propagate(n, -removed);
         flags[n] &= ~EXPANDED;
-        if (adjust && removed > 0 && treeSelectionModel != null) {
+        // the stock resets also when no row was removed (an expanded node without children)
+        if (adjust && treeSelectionModel != null) {
             treeSelectionModel.resetRowSelection();
         }
     }
