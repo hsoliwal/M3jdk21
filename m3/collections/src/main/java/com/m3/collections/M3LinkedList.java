@@ -1,3 +1,4 @@
+// Modified 2026 by Hitesh Soliwal and contributors: adaptive clearing of reusable linked slots.
 // Modified 2026 by Hitesh Soliwal and Contributors to the Synexia Project: Synexia-to-M3 package/type adaptation.
 // SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
 // Modified 2026 by Hitesh Soliwal and Contributors to the Synexia Project: late-binding list spliterator.
@@ -75,7 +76,18 @@ public final class M3LinkedList<E> extends AbstractSequentialList<E> implements 
     }
     @Override public void clear() {
         if (isEmpty()) { return; }
-        Arrays.fill(storage.values, null); Arrays.fill(storage.liveMask, 0L);
+        // Reuse capacity without scanning every retained cell after a sparse drain.
+        // Free and never-used payload slots are already null. Physical links work
+        // for both the forward owner and its reversed facade.
+        if (storage.size <= (storage.values.length >>> 6)) {
+            for (int s = storage.first; s >= 0; s = storage.after[s]) {
+                storage.values[s] = null;
+                storage.liveMask[s >>> 6] = 0L;
+            }
+        } else {
+            Arrays.fill(storage.values, null);
+            Arrays.fill(storage.liveMask, 0L);
+        }
         storage.first = -1; storage.last = -1; storage.free = -1;
         storage.size = 0; storage.used = 0; changed();
     }
