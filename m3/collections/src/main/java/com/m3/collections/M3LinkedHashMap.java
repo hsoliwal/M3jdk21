@@ -1,3 +1,4 @@
+// Modified 2026 by Hitesh Soliwal and contributors: adaptive clearing of reusable linked slots.
 // SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
 // Modified 2026 by Hitesh Soliwal and Contributors to the Synexia Project: Synexia-to-M3 package/type adaptation.
 // SPDX-License-Identifier: Apache-2.0
@@ -125,7 +126,17 @@ public final class M3LinkedHashMap<K, V> extends M3OrderedSlotMap<K, V> {
         }
         void clear() {
             if (size == 0) { return; }
-            Arrays.fill(keys, null); Arrays.fill(values, null); Arrays.fill(index, 0);
+            // Free slots already hold null; reuse encounter links when few slots remain.
+            if (size <= (keys.length >>> 6)) {
+                for (int s = first; s >= 0; s = after[s]) {
+                    keys[s] = null;
+                    if (!keyOnly) { values[s] = null; }
+                }
+            } else {
+                Arrays.fill(keys, null); Arrays.fill(values, null);
+            }
+            // Tombstones are not in the live links, so reset the complete hash index.
+            Arrays.fill(index, 0);
             first = -1; last = -1; free = -1; used = 0; occupied = 0; size = 0; modifications++;
         }
         void verify() {

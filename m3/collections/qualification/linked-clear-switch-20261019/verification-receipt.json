@@ -1,0 +1,63 @@
+{
+  "schema": 1,
+  "canonicalRecipe": "com.synexia.m3.LinkedClearSwitch20261019",
+  "canonicalEngineBase": "6291b100548f7850279f49e693621d6460be25f9",
+  "publicationIntegrationBase": "47981356df68c2e12c658d2d6fe3969b695aa2fe",
+  "receiverBase": "a3e88976ee8664d1ef5d0cade96aec1206b2133d",
+  "candidateDisposition": "DRAFT_BOUNDED_SPARSE_CLEAR_BENEFIT",
+  "productionPostimages": [
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LinkedHashMap.java",
+      "beforeSha256": "5495a8200ff4030a8faa66fde2f8bb9ccca52bdcbccd200a76147698289c2c0c",
+      "afterSha256": "f896c9430ab72bcfd1755177834f6d91f53eb2e685163e59c41ec2036fa4b3ef",
+      "template": "M3LinkedHashMap.java.txt"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LinkedList.java",
+      "beforeSha256": "1f9a2315db0f9a695402b47a7f6f1e124ed08e186e3460f9ce9757b324bd43c0",
+      "afterSha256": "aa9c945cad639f057925d3c20b17c6c8a6067f90cf0feb020677fc80e1f3fc78",
+      "template": "M3LinkedList.java.txt"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3LinkedClearContract.java",
+      "beforeSha256": "ABSENT",
+      "afterSha256": "91415e534cdbdbf08516a8db74ca9541c478cc54874a5202636bb6717ab60acf",
+      "template": "M3LinkedClearContract.java.txt"
+    }
+  ],
+  "sdkExecution": "PASSED",
+  "sdkTests": 5,
+  "sdkSecondPass": "UNCHANGED",
+  "strictJava21Lint": "PASSED_BASELINE_AND_CANDIDATE",
+  "publicProtectedApi": "IDENTICAL_LIST_MAP_SET",
+  "behaviorChecksPerVersion": 1472788,
+  "clearContractChecksPerVersion": 1306068,
+  "liveMaskChecksPerVersion": 166720,
+  "candidateAdditionalModes": [
+    "INTERPRETER_PASSED",
+    "C1_PASSED",
+    "SERIAL_GC_64MB_PASSED"
+  ],
+  "existingBorrowJUnitTestsPassed": 4,
+  "referenceCountImplementationChanged": false,
+  "freshJvmDiagnosticProcesses": {
+    "completeSweep": 108,
+    "focusedSameCpu": 36
+  },
+  "structuralStorage": "IDENTICAL_MEASURED_CLOSURE",
+  "retainedHeapReductionClaimed": false,
+  "priorRingSdkTestsNowPassed": 4,
+  "priorRingPerformanceDisposition": "REJECTED_UNCHANGED",
+  "offlineClasspathBinaryHashesMatched": 29,
+  "offlineFullSourceLicenseCustody": "PENDING",
+  "fullReactor": "NOT_RUN",
+  "owningProductMavenSuite": "NOT_RUN",
+  "JMH": "NOT_RUN",
+  "JDKImageJtregJCK": "NOT_RUN",
+  "nativeConcurrencySmallDeviceQualification": "NOT_RUN",
+  "fleetWideCompletion": false,
+  "evidenceArchiveSha256": "d7729eb7c5ffd9bb679debde7e0d0b2a0dbcd6b26131b921a67038103a80bb8d",
+  "evidenceBase64Sha256": "c08eceb89c4bf6afa86d9f99c7cd6b07fbb1c580e0a0701ea4b512be5def4e34",
+  "benchmarkSummarySha256": "f0c51cd8b45fbccc47a9fe23d34e7d7705ec4e6a622c4c084ecc224b1f419dcc",
+  "probeSha256": "3cec9f48acc54dbda7da56fe8b11db9c26275c164d0d0d672f97bc36bd40dcc0"
+}
