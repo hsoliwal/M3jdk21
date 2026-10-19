@@ -1,0 +1,63 @@
+# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and contributors
+# SPDX-License-Identifier: Apache-2.0
+name: M3 physical-state additive recovery Java21 JNI
+on:
+  pull_request:
+    paths:
+      - 'm3/collections/src/main/java/com/m3/collections/M3IndexedListSnapshot.java'
+      - 'm3/collections/src/main/java/com/m3/collections/M3ObjectIndexSnapshot.java'
+      - 'm3/collections/src/test/java/com/m3/collections/M3PhysicalStateSnapshot*.java'
+      - 'm3/collections/src/test/java/com/m3/collections/M3ObjectPhysicalMask*.java'
+      - '.github/workflows/m3-physical-state-superset-20261019.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  current-owner-java-jni:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Verify source-sealed exact additive postimages
+        shell: bash
+        run: |
+          set -euo pipefail
+          check() { actual=$(git hash-object "$2"); test "$actual" = "$1" || { echo "SOURCE DRIFT: $2 expected=$1 actual=$actual"; exit 1; }; }
+          check 217700023c2a6456a505b07b311290f8da8c02e2 m3/collections/src/main/java/com/m3/collections/M3IndexedListSnapshot.java
+          check e2cff159750d9b7f45cd438a8d517aff8d5bff43 m3/collections/src/main/java/com/m3/collections/M3ObjectIndexSnapshot.java
+          check 01945ebc69137affa7ab3ef708fcbb0cd95a5c24 m3/collections/src/test/java/com/m3/collections/M3ObjectPhysicalMaskSelfTest.java
+          check 10931f3f8316b3cecd0f27cbf25e468175022b19 m3/collections/src/test/java/com/m3/collections/M3ObjectPhysicalMaskTest.java
+          check 3b2d4277500da38f74335aa162064aaf5a14cdb5 m3/collections/src/test/java/com/m3/collections/M3PhysicalStateSnapshotProof.java
+          check 09dbe9c3d52bd96f2d98c9d634e1327878d70579 m3/collections/src/test/java/com/m3/collections/M3PhysicalStateSnapshotTest.java
+      - name: Strict compile the current M3 collection owners and both direct proofs
+        shell: bash
+        run: |
+          set -euo pipefail
+          out="$RUNNER_TEMP/m3-physical-additive/classes"
+          mkdir -p "$out"
+          find m3/collections/src/main/java/com/m3/collections -name '*.java' -print | sort > "$RUNNER_TEMP/m3-physical-additive-sources"
+          javac --release 21 -proc:none -Xlint:all -Werror -encoding UTF-8 -d "$out" @"$RUNNER_TEMP/m3-physical-additive-sources"
+          javac --release 21 -proc:none -Xlint:all -Werror -encoding UTF-8 -cp "$out" -d "$out" \
+            m3/collections/src/test/java/com/m3/collections/M3ObjectPhysicalMaskSelfTest.java \
+            m3/collections/src/test/java/com/m3/collections/M3PhysicalStateSnapshotProof.java
+          java -Xcheck:jni -cp "$out" com.m3.collections.M3ObjectPhysicalMaskSelfTest
+          java -Xcheck:jni -cp "$out" com.m3.collections.M3PhysicalStateSnapshotProof
+      - name: Strict C17 JNI build and native-required differential
+        shell: bash
+        run: |
+          set -euo pipefail
+          out="$RUNNER_TEMP/m3-physical-additive/classes"
+          native="$RUNNER_TEMP/m3-physical-additive/native"
+          mkdir -p "$native"
+          gcc -std=c17 -Wall -Wextra -Werror -fPIC -shared \
+            -I"$JAVA_HOME/include" -I"$JAVA_HOME/include/linux" \
+            m3/collections/src/main/native/collections/m3_index_path_masks.c \
+            -o "$native/libm3_collections_pathmask.so"
+          java -Xcheck:jni -Djava.library.path="$native" -cp "$out" com.m3.collections.M3ObjectPhysicalMaskSelfTest --native
+          java -Xcheck:jni -Djava.library.path="$native" -cp "$out" com.m3.collections.M3PhysicalStateSnapshotProof --native
