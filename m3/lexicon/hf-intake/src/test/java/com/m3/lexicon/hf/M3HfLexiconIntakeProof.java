@@ -1150,7 +1150,10 @@ public final class M3HfLexiconIntakeProof {
                 "cefr_level_frequency_precompute",
                 "cross_lingual_neighborhood_precompute",
                 "child_directed_lexical_signal_precompute",
-                "multiword_ngram_frequency_index"
+                "multiword_ngram_frequency_index",
+                "regional_parallel_pair_views",
+                "african_sud_treebank_precompute",
+                "indigenous_language_task_partitioned_regression"
         )), "all 78 algorithm categories match the pinned catalogue");
         for (String category : List.of("spoken_language_phoneme_morphology_alignment",
                 "medical_translation_regression", "low_resource_african_parallel_corpus",
@@ -1171,7 +1174,10 @@ public final class M3HfLexiconIntakeProof {
                 "cefr_level_frequency_precompute",
                 "cross_lingual_neighborhood_precompute",
                 "child_directed_lexical_signal_precompute",
-                "multiword_ngram_frequency_index")) {
+                "multiword_ngram_frequency_index",
+                "regional_parallel_pair_views",
+                "african_sud_treebank_precompute",
+                "indigenous_language_task_partitioned_regression")) {
             String row = lines.stream().skip(1)
                     .filter(line -> category.equals(splitTsv(line)[0]))
                     .findFirst().orElse("");
