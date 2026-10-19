@@ -1,0 +1,180 @@
+{
+  "scope": "GENERATED_SOURCE_JAVA21_PATCH_MODULE_AND_LINUX_JNI",
+  "full_product_image": "PENDING",
+  "other_operating_systems": "PENDING",
+  "source_sha256": {
+    "src/java.base/share/classes/java/util/Collections.java": "4227019cc64ce600908eace9425718d8fe49ec4f4028a638cb70cd17a2f2917a",
+    "src/java.base/share/classes/java/util/M3CollectionViews.java": "3818e50c23166b20c0516b4a6f9cb3c12ed9fe7f73ca1d55c38f616a5c4ac4f7",
+    "src/java.base/share/classes/java/util/M3CollectionMasks.java": "1337bb1e4c03c974bd4e335f7201c19186ab345548479ba29cebe639310c4017",
+    "src/java.base/share/native/libjava/M3CollectionMasks.c": "7ecac17c362d2bce127b08c930b4beb263d06bd79439fcffcdcc5801ca7718a7",
+    "test/jdk/java/util/Collections/M3CollectionViewsTest.java": "7a245f98feee1590a6c01cec79b779441c85a72a30838d9bbec949024fed1878",
+    "test/jdk/java/util/Collections/M3CollectionMasksTest.java": "09283aa9f8e6f184f9f2e50f2967be6fc47654b591d3de0908751d84d622ce17"
+  },
+  "commands": [
+    {
+      "command": [
+        "/tmp/m3-toolchain/jdk-21.0.12.1+1/bin/java",
+        "-version"
+      ],
+      "exit_code": 0,
+      "output": "openjdk version \"21.0.12.1\" 2026-08-18 LTS\nOpenJDK Runtime Environment Temurin-21.0.12.1+1 (build 21.0.12.1+1-LTS)\nOpenJDK 64-Bit Server VM Temurin-21.0.12.1+1 (build 21.0.12.1+1-LTS, mixed mode, sharing)\n"
+    },
+    {
+      "command": [
+        "/tmp/m3-toolchain/jdk-21.0.12.1+1/bin/javac",
+        "-J-Xmx256m",
+        "--patch-module",
+        "java.base=/dev/shm/m3jdk21-work/m3-collections-i58zusa_/source",
+        "-h",
+        "/dev/shm/m3jdk21-work/m3-collections-i58zusa_/headers",
+        "-d",
+        "/dev/shm/m3jdk21-work/m3-collections-i58zusa_/classes",
+        "/dev/shm/m3jdk21-work/m3-collections-i58zusa_/source/java/util/Collections.java",
+        "/dev/shm/m3jdk21-work/m3-collections-i58zusa_/source/java/util/M3CollectionViews.java",
+        "/dev/shm/m3jdk21-work/m3-collections-i58zusa_/source/java/util/M3CollectionMasks.java"
+      ],
+      "exit_code": 0,
+      "output": ""
+    },
+    {
+      "command": [
+        "cc",
+        "-O3",
+        "-std=c17",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-fPIC",
+        "-shared",
+        "-I/tmp/m3-toolchain/jdk-21.0.12.1+1/include",
+        "-I/tmp/m3-toolchain/jdk-21.0.12.1+1/include/linux",
+        "-I/dev/shm/m3jdk21-work/m3-collections-i58zusa_/headers",
+        "/dev/shm/m3jdk21-work/collection-candidates/postimages/src/java.base/share/native/libjava/M3CollectionMasks.c",
+        "-o",
+        "/tmp/m3-collections-native-69okgvo8/libM3CollectionMasksQualification.so"
+      ],
+      "exit_code": 0,
+      "output": ""
+    },
+    {
+      "command": [
+        "nm",
+        "-D",
+        "--defined-only",
+        "/tmp/m3-collections-native-69okgvo8/libM3CollectionMasksQualification.so"
+      ],
+      "exit_code": 0,
+      "output": "0000000000001120 T Java_java_util_M3CollectionMasks_selected0\n"
+    },
+    {
+      "command": [
+        "/tmp/m3-toolchain/jdk-21.0.12.1+1/bin/javac",
+        "-J-Xmx256m",
+        "--patch-module",
+        "java.base=/dev/shm/m3jdk21-work/m3-collections-i58zusa_/classes",
+        "-d",
+        "/dev/shm/m3jdk21-work/m3-collections-i58zusa_/tests",
+        "/dev/shm/m3jdk21-work/collection-candidates/postimages/test/jdk/java/util/Collections/M3CollectionViewsTest.java"
+      ],
+      "exit_code": 0,
+      "output": ""
+    },
+    {
+      "command": [
+        "/tmp/m3-toolchain/jdk-21.0.12.1+1/bin/javac",
+        "-J-Xmx256m",
+        "--patch-module",
+        "java.base=/dev/shm/m3jdk21-work/m3-collections-i58zusa_/classes:/dev/shm/m3jdk21-work/m3-collections-i58zusa_/bootstrap-source",
+        "-d",
+        "/dev/shm/m3jdk21-work/m3-collections-i58zusa_/bootstrap-classes",
+        "/dev/shm/m3jdk21-work/m3-collections-i58zusa_/bootstrap-source/java/util/M3CollectionMasksTest.java"
+      ],
+      "exit_code": 0,
+      "output": ""
+    },
+    {
+      "command": [
+        "/tmp/m3-toolchain/jdk-21.0.12.1+1/bin/java",
+        "-Xmx256m",
+        "--patch-module",
+        "java.base=/dev/shm/m3jdk21-work/m3-collections-i58zusa_/classes",
+        "-cp",
+        "/dev/shm/m3jdk21-work/m3-collections-i58zusa_/tests",
+        "M3CollectionViewsTest"
+      ],
+      "exit_code": 0,
+      "output": "M3CollectionViewsTest checks=15288\n"
+    },
+    {
+      "command": [
+        "/tmp/m3-toolchain/jdk-21.0.12.1+1/bin/java",
+        "-Xmx256m",
+        "-Xint",
+        "--patch-module",
+        "java.base=/dev/shm/m3jdk21-work/m3-collections-i58zusa_/classes",
+        "-cp",
+        "/dev/shm/m3jdk21-work/m3-collections-i58zusa_/tests",
+        "M3CollectionViewsTest"
+      ],
+      "exit_code": 0,
+      "output": "M3CollectionViewsTest checks=15288\n"
+    },
+    {
+      "command": [
+        "/tmp/m3-toolchain/jdk-21.0.12.1+1/bin/java",
+        "-Xmx256m",
+        "-Xcheck:jni",
+        "--patch-module",
+        "java.base=/dev/shm/m3jdk21-work/m3-collections-i58zusa_/classes:/dev/shm/m3jdk21-work/m3-collections-i58zusa_/bootstrap-classes",
+        "-Dtest.m3.masks.native.library=/tmp/m3-collections-native-69okgvo8/libM3CollectionMasksQualification.so",
+        "java.util.M3CollectionMasksTest",
+        "full"
+      ],
+      "exit_code": 0,
+      "output": "M3CollectionMasksTest PASS cases=50266 selectors=4 mode=full nativeRequested=false\n"
+    },
+    {
+      "command": [
+        "/tmp/m3-toolchain/jdk-21.0.12.1+1/bin/java",
+        "-Xmx256m",
+        "-Xcheck:jni",
+        "--patch-module",
+        "java.base=/dev/shm/m3jdk21-work/m3-collections-i58zusa_/classes:/dev/shm/m3jdk21-work/m3-collections-i58zusa_/bootstrap-classes",
+        "java.util.M3CollectionMasksTest",
+        "consumer"
+      ],
+      "exit_code": 0,
+      "output": "M3CollectionMasksTest PASS cases=12667 selectors=1 mode=consumer nativeRequested=false\n"
+    },
+    {
+      "command": [
+        "/tmp/m3-toolchain/jdk-21.0.12.1+1/bin/java",
+        "-Xmx256m",
+        "-Xcheck:jni",
+        "--patch-module",
+        "java.base=/dev/shm/m3jdk21-work/m3-collections-i58zusa_/classes:/dev/shm/m3jdk21-work/m3-collections-i58zusa_/bootstrap-classes",
+        "-Djdk.m3.collectionMasks.native=true",
+        "-Dtest.m3.masks.native.library=/tmp/m3-collections-native-69okgvo8/libM3CollectionMasksQualification.so",
+        "java.util.M3CollectionMasksTest",
+        "consumer"
+      ],
+      "exit_code": 0,
+      "output": "M3CollectionMasksTest PASS cases=12667 selectors=1 mode=consumer nativeRequested=true\n"
+    },
+    {
+      "command": [
+        "/tmp/m3-toolchain/jdk-21.0.12.1+1/bin/java",
+        "-Xmx256m",
+        "-Xcheck:jni",
+        "--patch-module",
+        "java.base=/dev/shm/m3jdk21-work/m3-collections-i58zusa_/classes:/dev/shm/m3jdk21-work/m3-collections-i58zusa_/bootstrap-classes",
+        "-Djdk.m3.collectionMasks.native=true",
+        "java.util.M3CollectionMasksTest",
+        "consumer"
+      ],
+      "exit_code": 0,
+      "output": "M3CollectionMasksTest PASS cases=12667 selectors=1 mode=consumer nativeRequested=true\n"
+    }
+  ],
+  "status": "PASSED"
+}

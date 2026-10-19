@@ -1,0 +1,47 @@
+[
+  {
+    "command": [
+      "/tmp/m3-toolchain/jdk-21.0.12.1+1/bin/javac",
+      "--add-modules",
+      "java.management,jdk.management",
+      "--add-reads",
+      "java.base=java.management",
+      "--add-reads",
+      "java.base=jdk.management",
+      "--patch-module",
+      "java.base=/dev/shm/m3jdk21-work/mask-candidates/src/java.base/share/classes:/dev/shm/m3jdk21-work/mask-candidates/test/jdk/java/util/Collections",
+      "-d",
+      "/dev/shm/m3jdk21-work/mask-candidates/qualification/classes",
+      "-h",
+      "/dev/shm/m3jdk21-work/mask-candidates/qualification/headers",
+      "/dev/shm/m3jdk21-work/mask-candidates/src/java.base/share/classes/java/util/M3CollectionMasks.java",
+      "/dev/shm/m3jdk21-work/mask-candidates/test/jdk/java/util/Collections/M3CollectionMasksTest.java",
+      "/dev/shm/m3jdk21-work/mask-candidates/test/jdk/java/util/Collections/M3CollectionMasksBenchmark.java"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 1.133462905883789,
+    "output": ""
+  },
+  {
+    "command": [
+      "cc",
+      "-shared",
+      "-fPIC",
+      "-O3",
+      "-std=c11",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-pipe",
+      "-I/tmp/m3-toolchain/jdk-21.0.12.1+1/include",
+      "-I/tmp/m3-toolchain/jdk-21.0.12.1+1/include/linux",
+      "-I/dev/shm/m3jdk21-work/mask-candidates/qualification/headers",
+      "/dev/shm/m3jdk21-work/mask-candidates/src/java.base/share/native/libjava/M3CollectionMasks.c",
+      "-o",
+      "/tmp/m3jdk21-integrated-native/libM3CollectionMasksQualification.so"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 0.1501157283782959,
+    "output": ""
+  }
+]

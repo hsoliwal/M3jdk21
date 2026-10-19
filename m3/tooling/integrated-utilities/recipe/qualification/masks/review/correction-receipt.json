@@ -1,0 +1,29 @@
+[
+  {
+    "command": [
+      "/tmp/m3-toolchain/jdk-21.0.12.1+1/bin/javac",
+      "--patch-module",
+      "java.base=/dev/shm/m3jdk21-work/collection-classes",
+      "-d",
+      "/dev/shm/m3jdk21-work/mask-candidates/qualification/review",
+      "/dev/shm/m3jdk21-work/mask-candidates/qualification/review/MapViewCorrectionsTest.java"
+    ],
+    "exit_code": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "/tmp/m3-toolchain/jdk-21.0.12.1+1/bin/java",
+      "-Xmx64m",
+      "--patch-module",
+      "java.base=/dev/shm/m3jdk21-work/collection-classes",
+      "-cp",
+      "/dev/shm/m3jdk21-work/mask-candidates/qualification/review",
+      "MapViewCorrectionsTest"
+    ],
+    "exit_code": 0,
+    "stdout": "MapViewCorrectionsTest PASS cases=55\n",
+    "stderr": ""
+  }
+]
