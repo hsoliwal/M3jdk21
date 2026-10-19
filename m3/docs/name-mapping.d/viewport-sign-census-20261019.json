@@ -1,0 +1,32 @@
+{
+  "schema": 1,
+  "status": "EXISTING_OWNER_SOURCE_CANDIDATE_RESOURCE_HOLD",
+  "source_repo": "hsoliwal/com.synexia",
+  "source_commit": "1fbc3c61f1b9b5e1fb08fe19979cb6b082591319",
+  "source_pr": 12516,
+  "recipe": "com.synexia.rewrite.M3Jdk21ViewportSignCensusRecipe",
+  "target_base": "adc10e96af417655a7f1fc61b07c0ca8789c83da",
+  "mappings": [
+    {
+      "source": "existing M3RowTree stored-weight sign aggregate",
+      "target": "com.m3.collections.M3RowTree",
+      "disposition": "one scalar; no per-row lane; public contracts retained"
+    },
+    {
+      "source": "first-party m3_verify_empty helper; donor49e8bac26e4017a262f18f202298350239f1133b",
+      "target": "m3/collections/src/main/native/collections/m3_index_mask_compactor.c",
+      "disposition": "three empty-result atoms; nine existing exports retained"
+    }
+  ],
+  "public_and_native_abi": "UNCHANGED",
+  "private_layout": "ONE_ADDED_INT",
+  "runtime_dependency": "NONE",
+  "receiving_phase": "STRING_ACTIVE_UNCHANGED",
+  "pending": [
+    "custom Maven/OpenRewrite reactor",
+    "full owning module and JDK image",
+    "jtreg/JCK",
+    "native widgets/platforms",
+    "live wrapper and web/renderer full scope"
+  ]
+}

@@ -1,0 +1,68 @@
+[
+  {
+    "path": "m3/collections/src/main/java/com/m3/collections/M3HeapSampler.java",
+    "before": "19a492be5a1b19bbd59681192948947fe99ecc79061b6e07e7c4080bee114dc4",
+    "after": "19a492be5a1b19bbd59681192948947fe99ecc79061b6e07e7c4080bee114dc4",
+    "template": "KEEP"
+  },
+  {
+    "path": "m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java",
+    "before": "ed76ad01f7b89f064846d0dc35a1a705f461abe17772694c1be8223dbed2156c",
+    "after": "ed76ad01f7b89f064846d0dc35a1a705f461abe17772694c1be8223dbed2156c",
+    "template": "KEEP"
+  },
+  {
+    "path": "m3/collections/src/main/java/com/m3/collections/M3RowIndex.java",
+    "before": "80841d1bc93b49819f8fa0f0cb357aef9a16017f7e0007fbab8269ccaa8729cd",
+    "after": "80841d1bc93b49819f8fa0f0cb357aef9a16017f7e0007fbab8269ccaa8729cd",
+    "template": "KEEP"
+  },
+  {
+    "path": "m3/collections/src/main/java/com/m3/collections/M3RowTree.java",
+    "before": "11e448e0f92eb751f8399affda3e5f4d95a5a8856e7719eb69446e35fa037233",
+    "after": "0ed336fa5e68e405ae1fc0a739778e953e081a1c0fa1b22f6860235fe57d6bc9",
+    "template": "M3RowTree.java"
+  },
+  {
+    "path": "m3/collections/src/main/java/com/m3/collections/M3RowTreeItem.java",
+    "before": "a88a03137ec4f36a23c7aa0ebdd1472a1ef5fcd025950a929ff0cc999ff3aaf4",
+    "after": "a88a03137ec4f36a23c7aa0ebdd1472a1ef5fcd025950a929ff0cc999ff3aaf4",
+    "template": "KEEP"
+  },
+  {
+    "path": "m3/collections/src/main/java/com/m3/collections/M3WarmHeapGrowth.java",
+    "before": "011fda776ea1b3c03020f7792ee5e5d59c9759441e293e7e6b2be5aacfec1c23",
+    "after": "011fda776ea1b3c03020f7792ee5e5d59c9759441e293e7e6b2be5aacfec1c23",
+    "template": "KEEP"
+  },
+  {
+    "path": "m3/collections/src/main/java/com/m3/collections/M3WindowPlan.java",
+    "before": "5a4d7bbd92429d2e3daf8c3a857abfd79189bbf1fc9450915f9ca89d8742421e",
+    "after": "5a4d7bbd92429d2e3daf8c3a857abfd79189bbf1fc9450915f9ca89d8742421e",
+    "template": "KEEP"
+  },
+  {
+    "path": "m3/collections/src/main/native/collections/m3_index_mask_compactor.c",
+    "before": "d1c300832aa9bf44cd7b7199cff593beb2a9464fbb52c9c8448da7773eaf0aef",
+    "after": "054a02ee07f6ac860d123e0993c79abf00bccd2f36c8cd421a656df0ea41ff9a",
+    "template": "m3_index_mask_compactor.c"
+  },
+  {
+    "path": "m3/collections/src/test/java/com/m3/collections/M3ViewportSignCensusProof.java",
+    "before": "ABSENT",
+    "after": "88f1d8cb1e890b62b9b898f0d745703f87075f30fd7ea26ee2d041eb4a53f2e7",
+    "template": "M3ViewportSignCensusProof.java"
+  },
+  {
+    "path": "m3/collections/src/test/java/com/m3/collections/M3ViewportMaskParityProof.java",
+    "before": "ABSENT",
+    "after": "ce7412e84c63c44208d5c230808d728ea3bc287c62bff6a617714d227de84bd3",
+    "template": "M3ViewportMaskParityProof.java"
+  },
+  {
+    "path": "m3/collections/src/test/java/com/m3/collections/M3ViewportSignCensusTest.java",
+    "before": "ABSENT",
+    "after": "603a6576e65592dbce0633b53e7684b9b2635d671759ed6893b6d2bed9096a57",
+    "template": "M3ViewportSignCensusTest.java"
+  }
+]
