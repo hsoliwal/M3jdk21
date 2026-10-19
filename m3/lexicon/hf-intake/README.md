@@ -23,7 +23,7 @@ source Synexia owner. Repeated source rows remain separate stable record IDs
 while the downstream M3LEX image may deduplicate identical UTF-16 values.
 
 The companion `language-resource-discovery.tsv` is a searchable,
-release-aware catalogue of 84 **reference-only** candidates. In addition to
+release-aware catalogue of 90 **reference-only** candidates. In addition to
 dictionaries, grammar, translation, frequency, names, units and speech sources,
 it covers metadata discovery (CLARIN VLO, OLAC, ELRA), cross-linguistic concept
 IDs and norms (Concepticon, NoRaRe), basic wordlists (ASJP), colexification and
@@ -37,6 +37,8 @@ The expanded catalogue also records the Hugging Face World Languages metadata pa
 New reference-only material adds Dictionaria's source-linked CLDF dictionaries, SADiLaR's NCHLT isiZulu corpus/lexicon/frequency/name bundle, and SAILS typological grammar tables. Word2word adds a 3,564-directed-pair translation-candidate reference with unresolved payload rights; WordHoard provides a five-language frequency/morphology schema under CC BY-SA data terms; MUSE contributes noncommercial-only bilingual evaluation dictionaries. These remain unadmitted, and their native dictionary, corpus, pair, and language-variety coordinates stay distinct.
 
 The latest discovery pass adds two numeral-system sources (Chan's 5,332-variety dataset has only 100 concepts, so it does not provide complete 0–10,000 forms; CoSiNuS provides composition/morpheme annotations), Aksharantar's mixed-rights Indic transliteration pairs, Samanantar's source-split parallel corpora, IndicCorpV2's versioned corpus for locally-derived frequency counts, Naamapadam and MasakhaNER named-entity token annotations, Common Voice's 19M-sentence/300+ language text-LID set, and DBnary's OntoLex RDF output. All nine remain reference-only. In particular, transliteration is not semantic translation; sentence-pair alignment is not lexeme equivalence; named-entity surface strings are not entity identity; and CC0 packaging does not necessarily clear upstream text rights.
+
+A further source pass added six reference-only leads: IDS contributes concept-aligned lexical rows across 319 varieties but most records in the published export lack row-level source citations; Apertium provides package-specific finite-state morphology and bilingual transfer data with GPL/data-license review required per package; AUTOTYP and APiCS add separately identified typological and creole-grammar feature tables; D-PLACE joins language, culture and environment data but its download page and repository advertise conflicting license terms; and PARSEME 2.0 offers span-annotated multilingual multiword-expression evaluation data whose exact artifact and per-language licenses still need review. These six are not payload admissions, are represented in the Maven proof and algorithm catalogue, and preserve source-native IDs and evidence.
 
 The catalogue is discovery, not an import adapter: Parquet, Arrow, JSONL,
 streaming CSV quotations, proprietary/gated corpora, grammar models and
