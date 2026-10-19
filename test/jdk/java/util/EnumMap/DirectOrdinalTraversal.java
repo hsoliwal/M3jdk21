@@ -129,6 +129,31 @@ public final class DirectOrdinalTraversal {
         }
     }
 
+    /** A public subclass is entitled to override the entrySet contract. */
+    private static final class EntryHidingEnumMap extends EnumMap<K, Integer> {
+        EntryHidingEnumMap() { super(K.class); }
+        @Override public java.util.Set<Map.Entry<K, Integer>> entrySet() {
+            return java.util.Collections.emptySet();
+        }
+    }
+
+    private static void subclassContract() {
+        EntryHidingEnumMap subclass = new EntryHidingEnumMap();
+        subclass.put(K.A, 1);
+        subclass.put(K.B, null);
+        equal("{}", subclass.toString(), "inherited AbstractMap string uses overridden entrySet");
+        AtomicInteger visits = new AtomicInteger();
+        subclass.forEach((k, v) -> visits.incrementAndGet());
+        equal(0, visits.get(), "Map default forEach uses overridden entrySet");
+        subclass.replaceAll((k, v) -> {
+            visits.incrementAndGet();
+            return 99;
+        });
+        equal(0, visits.get(), "Map default replaceAll uses overridden entrySet");
+        equal(1, subclass.get(K.A), "subclass bulk defaults preserve hidden mappings");
+        check(subclass.containsKey(K.B), "subclass present null value");
+    }
+
     private static void selfReferenceAndEmpty() {
         EnumMap<K, Object> self = new EnumMap<>(K.class);
         equal("{}", self.toString(), "empty enum map");
@@ -145,6 +170,7 @@ public final class DirectOrdinalTraversal {
 
     public static void main(String[] args) {
         selfReferenceAndEmpty();
+        subclassContract();
         randomized();
         System.out.println("PASS DirectOrdinalTraversal checks=" + checks);
     }
