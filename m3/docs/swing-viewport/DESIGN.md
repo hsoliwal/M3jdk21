@@ -114,6 +114,21 @@ the answers are the same (such sizes stay 0), the call counts are not. (3) After
   would hand a row -1 to `resetRowSelection` during node removal (the UI's model listener runs before `JTree`'s) and
   expose D2 in CONTIGUOUS selections of large-model trees that do not throw today.
 
+- **D5, JDK-8366188** (fixed 2026-10-19, unconditionally): with a `RowFilter` that hides rows, `JTable.SortManager`
+  keeps the selection in model terms after a sorter event, and shifts it on an insert with
+  `insertIndexInterval(start, length, true)`. That call selects the new indices when the insertion point is selected,
+  so a row inserted at the selected model row came back selected too: the report's selection [2] becomes [1, 2].
+  Without a filter the same insert keeps one row. The inserted model rows are now deselected right after the
+  shift, keeping the cache's lead and anchor.
+- **D6, JDK-6727200** (fixed 2026-10-19, unconditionally; closed upstream in 2011 as "Cannot Reproduce"): every
+  table change caches the selection in `lastModelSelection`, but only a re-sort consumed it. After an update that
+  does not re-sort, the stale cache won over the current selection at the next sorter event with a filter.
+  `processChange` now drops it at its end. Found by the seeded filtered-vs-unfiltered scripts of
+  `M3TableFilterInsertSelectionTest`.
+- **Both:** one recipe, `M3SwingTableSortManagerSelection`. The test fails on stock and passes on the patched JDK.
+  JetBrainsRuntime changes only `JTable.processKeyBinding` (donor wave `JBR_DIFF.tsv`, `JBR_LINEAGE.tsv`), so there
+  is nothing to port.
+
 ## 5. Proof
 
 | Test | What it compares | Result (2026-10-17, JDK 21.0.9, stock + patch) |
@@ -492,7 +507,8 @@ M3 match stock, or keep that leaf opt-in.
 | leaf 5 | 5 | a path component whose `hashCode` changes while the tree shows it can make the index miss keys the stock loop finds | accept (the stock `Hashtable` breaks under the same misuse) |
 
 Already unconditional, so they apply whichever way the user decides: D3 (JDK-8299722,
-`DefaultRowSorter.getComparator`) and D2 (`insureRowContinuity`). Both turned an exception into the documented
+`DefaultRowSorter.getComparator`), D2 (`insureRowContinuity`), D5 (JDK-8366188) and D6 (JDK-6727200). Each turned an
+exception or a wrong selection into the documented
 result.
 
 **Exit criteria. All must hold before the flip:**
