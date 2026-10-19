@@ -1,0 +1,104 @@
+{
+  "schema": "SYNEXIA_M3JDK21_REFINEMENT_HANDOFF_V1",
+  "SPDX-FileCopyrightText": "2026 Hitesh Soliwal and contributors",
+  "SPDX-License-Identifier": "Apache-2.0",
+  "target_repository": "hsoliwal/M3jdk21",
+  "target_base": "a3e88976ee8664d1ef5d0cade96aec1206b2133d",
+  "canonical_repository": "hsoliwal/com.synexia",
+  "canonical_commit": "4478938495704c659cfe09f1e23bcd44806f5ea7",
+  "canonical_pull_request": "https://github.com/hsoliwal/com.synexia/pull/12451",
+  "recipe": "com.synexia.rewrite.M3Jdk21BuildPrerequisitesRecipe",
+  "recipe_sha256": "acd8dc21e7e1c01aecbbac7382154d4a1bb8388998016d43cbfafc1ca452b0b7",
+  "crate": "m3jdk21-build-prerequisites-20261019",
+  "manifest_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-build-prerequisites-20261019/manifest.tsv",
+  "manifest_sha256": "7a5f0ac7f308b5359612b37b78937141058af667215caffef62a94eca6b03244",
+  "canonical_evidence_root": "synexia-openrewrite-recipes/verification/m3jdk21-string-family-20261019",
+  "application_log": "evidence/20261019/recipe/build-prerequisite-application.log",
+  "application_log_sha256": "46d3d9ea30b62e0039966f9b69d7d24abd26289212ab5e63cbc910b4cb3151d2",
+  "qualification": {
+    "actual_recipe": "PASS",
+    "preimage_and_postimage_identity": "PASS",
+    "receiving_readback_fixed_point": "PASS",
+    "unrelated_source_identity": "PASS",
+    "missing_duplicate_drift_and_occupied_absent_refusal": "PASS",
+    "strict_component_compile": "PASS_ZERO_WARNINGS",
+    "component_cancellation_cleanup_assertions_per_mode": 303,
+    "component_modes": [
+      "default",
+      "-Xint"
+    ],
+    "behavioral_mutants": "REFUSED",
+    "normal_m3jdk21_image_at_receipt": "RUNNING",
+    "actual_source_built_jtreg_at_receipt": "PENDING",
+    "complete_string_family_semantics": "NOT_CLAIMED",
+    "full_canonical_source_only_reactor": "NOT_QUALIFIED"
+  },
+  "targets": [
+    {
+      "path": "src/java.base/share/classes/java/lang/Runnable.java",
+      "preimage_sha256": "bad73b8ae0b17e2160845c41058ebdda55fb755affecad51ef37fbc8e0d25534",
+      "postimage_sha256": "d87ea1cad53c2e6836534a791093e68946a6d4db4fa110df908a11cc8c92cc23"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/Strings.java",
+      "preimage_sha256": "cbadcbce521f89c53fbd92d9644402e7a72bb5e7e56e8943e8c29fbdc0fadb9d",
+      "postimage_sha256": "146999756be017c2000b69bb9ea8314733a95cc16273486980eed14a566e578a"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/concurrent/Callable.java",
+      "preimage_sha256": "a9d2d8cc73583297fb6c07dee24765473aaaeeaae2651a0b54eb411ed2d46261",
+      "postimage_sha256": "abb68d6ccafa580d7679f82d8732cbc0e284eedbc96f0eeba618c0f4720aa0d9"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/concurrent/Executor.java",
+      "preimage_sha256": "63f808755d552e372f9669c47041b2aeb52f5e34d0f92428aa5899273e4515d4",
+      "postimage_sha256": "215363d6d7c9a40502bf44603f2af2d249e31c799c46b1e462a8cf456a9a7729"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/concurrent/ExecutorService.java",
+      "preimage_sha256": "ca9342b2227960f32bde645c6df74dcd993d23deafad1429fac6521816daa868",
+      "postimage_sha256": "603a040298a0e5676ad5e51334d24c5f76c303bc774c8ed576a176cdded140e2"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/concurrent/MonitoredCallable.java",
+      "preimage_sha256": "a402533489745504fa3e9b8ca667be9b0d9cc3a370bbe2092c70f20051afb2f7",
+      "postimage_sha256": "c29370ae600e6e2f6c34a440eaa4881f9ca873dc2063581fd9c2f791f0ef4e03"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/concurrent/MonitoredRunnable.java",
+      "preimage_sha256": "8c975815e833bca4c214313efde24acf776a1ef676140701f9a5293ef4b5415b",
+      "postimage_sha256": "f7c78856a741a86a137e79f200837214b029e84486f6ec97a478e1fcf2b267ea"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/concurrent/ProgressMonitor.java",
+      "preimage_sha256": "58d084535f0e1c76adc102cffd1eff2cadae5c80877812908281699a55ce88b3",
+      "postimage_sha256": "291e5eeff30e782be6401f4aa01dc3e0f3266653f924d8e293766c41e5edd05c"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/concurrent/ProgressMonitors.java",
+      "preimage_sha256": "5073890ccf101b597e656b2516be70b83f0b77f9accdc157d75fc8d6f525a359",
+      "postimage_sha256": "9aab3409ac0cb78efe97b1ba16e161410ad839f872b109abb3951dccbc8a685b"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/function/Consumer.java",
+      "preimage_sha256": "4de2f5ed281ed6f56b872bd4ae9cc832ffb11b6c78e84a0774d7d6058a4a31fc",
+      "postimage_sha256": "7100ef2e42e4c80036b8dc4feeac7cc02845e47e91aa3c8f298aedee40309209"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/function/Function.java",
+      "preimage_sha256": "7943afca3f9a3816e8f75a62b9c6104c31b883a1a1e614fb795a8fc85333c744",
+      "postimage_sha256": "2a85cee3dcbea52cdb28cfb643fdf7a51b7b9a97da42beda761dd6e0f3c4171b"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/function/Supplier.java",
+      "preimage_sha256": "49c58acaea3e70e81ec7187b47551d1e0cf6906443bcf3d71e8c9cbba4d032c6",
+      "postimage_sha256": "11d0a170dfaafe6836f7fda2de8c19e25219f193dcd9c3b1ad197881e8a11bdf"
+    },
+    {
+      "path": "test/jdk/java/util/concurrent/ProgressMonitors/ProgressScopeCancellationTest.java",
+      "preimage_sha256": "ABSENT",
+      "postimage_sha256": "3c31ca5334bc503390d1b30ddf6d912a2ef98f7af05c9263dfbe3950ac9a80b2"
+    }
+  ],
+  "ownership": "Runtime Java remains in existing M3JDK21 owners. Recipes and reusable proof remain canonical in Synexia. Original per-file licenses remain unchanged."
+}
