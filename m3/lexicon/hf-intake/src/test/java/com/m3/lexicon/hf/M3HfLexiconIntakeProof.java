@@ -57,14 +57,14 @@ public final class M3HfLexiconIntakeProof {
         List<String> lines = resourceLines(
                 "/com/m3/lexicon/hf/language-resource-discovery.tsv");
         require(lines.size() == 40, "39 language-resource candidates plus header");
-        String expectedHeader = "source_id\\tresource\\tcategory\\tdata_shape_and_identity"
-                + "\\trights_and_attribution\\tm3_candidate_use\\t admission_blockers"
-                .replace("\\t ", "\\t")
-                + "\\tstate\\tevidence";
-        require(lines.getFirst().equals(expectedHeader), "language-resource catalogue schema");
+        List<String> expectedHeader = List.of("source_id", "resource", "category",
+                "data_shape_and_identity", "rights_and_attribution", "m3_candidate_use",
+                "admission_blockers", "state", "evidence");
+        String[] header = lines.getFirst().split("\\\\t", -1);
+        require(List.of(header).equals(expectedHeader), "language-resource catalogue schema");
         java.util.Set<String> sourceIds = new java.util.HashSet<>();
         for (int i = 1; i < lines.size(); i++) {
-            String[] fields = lines.get(i).split("\\t", -1);
+            String[] fields = lines.get(i).split("\\\\t", -1);
             require(fields.length == 9, "language-resource row has nine fields: " + i);
             if (fields.length != 9) continue;
             require(!fields[0].isBlank() && sourceIds.add(fields[0]),
@@ -83,12 +83,12 @@ public final class M3HfLexiconIntakeProof {
                 "glottolog-5-3", "dgt-tm", "geonames", "bipm-si-brochure-2026",
                 "hf-langdex", "hf-langdex-dictionaries", "kaggle-langdex-notebook")),
                 "lexicon, grammar, translation, names, standards and HF/Kaggle leads retained");
-        String panlex = lines.stream().filter(line -> line.startsWith("panlex\\t"))
+        String panlex = lines.stream().filter(line -> line.startsWith("panlex\\\\t"))
                 .findFirst().orElse("");
         require(panlex.contains("CC BY-NC-SA 4.0") && panlex.contains("CC0")
                 && panlex.contains("clarification"),
                 "conflicting PanLex license statements remain unresolved and conservative");
-        String langdex = lines.stream().filter(line -> line.startsWith("hf-langdex\\t"))
+        String langdex = lines.stream().filter(line -> line.startsWith("hf-langdex\\\\t"))
                 .findFirst().orElse("");
         require(langdex.contains("preserve donor IDs and reject ambiguous rows")
                 && langdex.contains("occurrence-coordinate"),
@@ -99,15 +99,16 @@ public final class M3HfLexiconIntakeProof {
     private static int verifyLangDexTableAudit() throws IOException {
         List<String> lines = resourceLines(
                 "/com/m3/lexicon/hf/langdex-table-admission.tsv");
-        String expectedHeader = String.join("\\t", "dataset", "revision", "table",
+        require(lines.size() == 12, "11 audited LangDex tables plus header");
+        List<String> expectedHeader = List.of("dataset", "revision", "table",
                 "reported_rows", "native_id_candidate", "identity_evidence",
                 "null_duplicate_audit", "upstream_license", "combined_release_license",
                 "admission_state", "blockers", "evidence");
-        require(lines.size() == 12, "11 audited LangDex tables plus header");
-        require(lines.getFirst().equals(expectedHeader), "LangDex audit table schema");
+        String[] header = lines.getFirst().split("\\\\t", -1);
+        require(List.of(header).equals(expectedHeader), "LangDex audit table schema");
         java.util.Set<String> tables = new java.util.HashSet<>();
         for (int i = 1; i < lines.size(); i++) {
-            String[] fields = lines.get(i).split("\\t", -1);
+            String[] fields = lines.get(i).split("\\\\t", -1);
             require(fields.length == 12, "LangDex audit row has twelve fields: " + i);
             if (fields.length != 12) continue;
             require("Asakiri/langdex".equals(fields[0])
