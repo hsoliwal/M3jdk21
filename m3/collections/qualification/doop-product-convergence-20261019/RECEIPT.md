@@ -26,6 +26,34 @@ representation, or Synexia runtime jar is introduced.
   merge commit `489544371474e6d0c4c4ae212ad5236194bd22a0`.
   The merge has both parent commits and retains their additive histories.
 
+## Additional primitive filtered/sorted predicate source reconciliation
+
+A subsequent additive merge on this branch receives
+[M3JDK21 #1413](https://github.com/hsoliwal/M3jdk21/pull/1413)
+without overwriting any of the previous combined owners:
+
+- Parent A `a48a2a7b16b9fdd05ca2339a32b6b499f2e7bdff`,
+  the original combined product head.
+- Parent B `45008413898bc27a4dc61c2bf19e1d433a84db01`,
+  the original recipe-received balanced `M3LongPredicates` owner.
+- Second additive merge commit `a80c4f3859fc73781b7bfc527c067759afc661e0`.
+- Exactly three files transferred: original `M3LongPredicates.java`,
+  original `M3LongDeepFilterSelfTest.java`, and its qualification
+  receipt. These paths do not overlap the earlier merge and both
+  existing Java source preimages were verified byte-identical to
+  `master` before receiving the donor postimages.
+
+The incumbent primitive predicate composition now maintains bounded
+persistent AVL depth, exact left-to-right callback/short-circuit
+behavior and stack-safe deeply nested filtered/sorted wrappers.
+No per-row `Map.Entry`, second reference store, JNI export or public
+API alteration was added. Synexia [#12408](https://github.com/hsoliwal/com.synexia/pull/12408)
+remains the canonical recipe and catalogue authority.
+
+The new integrated CI also runs `M3LongDeepFilterSelfTest`. Its
+success/failure must be read from the **latest integration head**
+rather than inferred from the original independent test results.
+
 ## Canonical existing physical owners
 
 | Family | Logical operations | Physical layout / allocation |
