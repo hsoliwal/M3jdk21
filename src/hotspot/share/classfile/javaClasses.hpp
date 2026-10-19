@@ -209,7 +209,8 @@ class java_lang_String : AllStatic {
  * VM access to java.lang.M3String and its canonical owner graph.
  *
  * M3String itself is exactly owner + packed range coordinate. Payload arrays are
- * not part of this layout. Atom owners address native/mapped bytes; tuple owners
+ * not part of this layout. Atom owners address native/mapped bytes; immediate owners
+ * carry their whole short text in one packed long; tuple owners
  * retain only child M3String coordinates.
  */
 class java_lang_M3String : AllStatic {
@@ -232,6 +233,8 @@ class java_lang_M3String : AllStatic {
   static int _tuple_left_offset;
   static int _tuple_right_offset;
 
+  static int _immediate_packed_offset;
+
   static void copy_owner_chars(
       oop owner, int start, int len, jchar* destination);
 
@@ -248,6 +251,8 @@ class java_lang_M3String : AllStatic {
   static inline jint java_hash(oop value);
   static inline int utf8_length_if_precomputed(oop value);
   static inline jchar char_at(oop value, int index);
+  // Unit of a packed java.lang.M3StringImmediate value (same layout as the Java owner).
+  static inline jchar immediate_char_at(jlong packed, int index);
   static void copy_chars(oop value, int start, int len, jchar* destination);
 };
 

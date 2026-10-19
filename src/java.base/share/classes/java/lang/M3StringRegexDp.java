@@ -134,7 +134,9 @@ final class M3StringRegexDp {
                         length - leftCount, plan, outgoing, cache, depth + 1);
             }
         } else {
-            outgoing = advance((M3StringAtom) owner, start, length, plan, incoming);
+            outgoing = owner instanceof M3StringAtom atom
+                    ? advance(atom, start, length, plan, incoming)
+                    : advanceJava(owner, start, length, plan, incoming);
         }
         if (retain) cache.effects.set(slot,
                 new Effect(new WeakReference<>(owner), coordinate, plan, incoming, outgoing));

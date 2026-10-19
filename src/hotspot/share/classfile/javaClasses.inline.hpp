@@ -221,6 +221,24 @@ jint java_lang_M3String::java_hash(oop value) {
   return hash;
 }
 
+// Mirrors java.lang.M3StringImmediate: bits 63..61 tag (1 = LATIN1, 2 = IDENT).
+// LATIN1: unit i at bits 8i..8i+7. IDENT: bijective base-64 over bits 60..0,
+// least significant digit first, digit = 1 + index in "0-9 A-Z a-z _ $".
+jchar java_lang_M3String::immediate_char_at(jlong packed, int index) {
+  const julong bits = (julong)packed;
+  if ((bits >> 61) == 1) {
+    return (jchar)((bits >> (index << 3)) & 0xff);
+  }
+  assert((bits >> 61) == 2, "M3 immediate profile");
+  static const char ident[] =
+      "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz_$";
+  julong digits = bits & ((CONST64(1) << 61) - 1);
+  for (int skip = 0; skip < index; skip++) {
+    digits = (digits - 1) >> 6;
+  }
+  return (jchar)(unsigned char)ident[(digits - 1) & 63];
+}
+
 jchar java_lang_M3String::char_at(oop value, int index) {
   const int value_length = length(value);
   assert(index >= 0 && index < value_length, "M3String index out of bounds");
@@ -244,7 +262,11 @@ jchar java_lang_M3String::char_at(oop value, int index) {
         : (jchar)(first | (second << 8));
   }
 
-  assert(o->klass() == vmClasses::M3StringTuple_klass(), "M3 owner must be atom or tuple");
+  if (o->klass() == vmClasses::M3StringImmediate_klass()) {
+    return immediate_char_at(o->long_field(_immediate_packed_offset), logical);
+  }
+
+  assert(o->klass() == vmClasses::M3StringTuple_klass(), "M3 owner must be atom, immediate or tuple");
   oop left = o->obj_field(_tuple_left_offset);
   oop right = o->obj_field(_tuple_right_offset);
   const int left_length = length(left);

@@ -7,9 +7,10 @@ package java.lang;
 import java.util.Objects;
 
 /** Canonical owner node for M3String. Text payload never lives in M3String itself. */
-abstract sealed class M3StringOwner permits M3StringAtom, M3StringTuple {
+abstract sealed class M3StringOwner permits M3StringAtom, M3StringTuple, M3StringImmediate {
     static final byte ATOM = 1;
     static final byte TUPLE = 2;
+    static final byte IMMEDIATE = 3;
 
     final byte kind;
     final int length;
