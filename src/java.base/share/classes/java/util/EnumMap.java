@@ -379,6 +379,21 @@ public class EnumMap<K extends Enum<K>, V> extends AbstractMap<K, V>
     @Override
     public void forEach(BiConsumer<? super K, ? super V> action) {
         Objects.requireNonNull(action);
+        // Preserve inherited Map defaults for subclasses overriding entrySet().
+        if (getClass() != EnumMap.class) {
+            for (Map.Entry<K, V> entry : entrySet()) {
+                K key;
+                V value;
+                try {
+                    key = entry.getKey();
+                    value = entry.getValue();
+                } catch (IllegalStateException removed) {
+                    throw new ConcurrentModificationException(removed);
+                }
+                action.accept(key, value);
+            }
+            return;
+        }
         final Object[] values = vals;
         final K[] keys = keyUniverse;
         for (int offset = 0; offset < values.length; offset++) {
@@ -397,6 +412,27 @@ public class EnumMap<K extends Enum<K>, V> extends AbstractMap<K, V>
     @Override
     public void replaceAll(BiFunction<? super K, ? super V, ? extends V> function) {
         Objects.requireNonNull(function);
+        if (getClass() != EnumMap.class) {
+            // An EnumMap subclass can redefine entrySet(); its inherited Map
+            // default must keep consulting that virtual API.
+            for (Map.Entry<K, V> entry : entrySet()) {
+                K key;
+                V old;
+                try {
+                    key = entry.getKey();
+                    old = entry.getValue();
+                } catch (IllegalStateException removed) {
+                    throw new ConcurrentModificationException(removed);
+                }
+                V value = function.apply(key, old);
+                try {
+                    entry.setValue(value);
+                } catch (IllegalStateException removed) {
+                    throw new ConcurrentModificationException(removed);
+                }
+            }
+            return;
+        }
         final Object[] values = vals;
         final K[] keys = keyUniverse;
         for (int offset = 0; offset < values.length; offset++) {
@@ -762,6 +798,7 @@ public class EnumMap<K extends Enum<K>, V> extends AbstractMap<K, V>
      */
     @Override
     public String toString() {
+        if (getClass() != EnumMap.class) return super.toString();
         StringBuilder buffer = new StringBuilder("{");
         boolean separator = false;
         final Object[] values = vals;
