@@ -1,3 +1,4 @@
+// SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
 /* SPDX-License-Identifier: Apache-2.0
  * SPDX-FileCopyrightText: 2026 Hitesh Soliwal and contributors
  * Adapted from M3CollectionsContinuityRecipeTest, Git blob
@@ -6,7 +7,9 @@ package com.m3.rewrite.backport;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.net.URI;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.LinkOption;
@@ -21,14 +24,19 @@ import java.util.HashSet;
 import java.util.HexFormat;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
 import org.junit.jupiter.api.Test;
 import org.openrewrite.InMemoryExecutionContext;
+import org.openrewrite.Recipe;
 import org.openrewrite.Result;
 import org.openrewrite.SourceFile;
 import org.openrewrite.Tree;
+import org.openrewrite.config.DeclarativeRecipe;
+import org.openrewrite.config.Environment;
+import org.openrewrite.config.YamlResourceLoader;
 import org.openrewrite.internal.InMemoryLargeSourceSet;
 import org.openrewrite.internal.RecipeRunException;
 import org.openrewrite.marker.Markers;
@@ -68,6 +76,43 @@ final class M3OriginalCliProviderRecipeTest {
         } catch (IOException error) {
             throw new IllegalStateException(error);
         }
+    }
+
+    private static Recipe namedRecipe() {
+        String descriptorPath =
+                "/META-INF/rewrite/m3-original-mapping-provider-20261017.yml";
+        String descriptor = resource(descriptorPath);
+        assertEquals(503, descriptor.getBytes(StandardCharsets.UTF_8).length,
+                "exact owned descriptor byte count");
+        assertEquals("da4f0f273a351a4397ddae750d4deee1502cb90f7fe3cad9f9e3ad0ff66aa15e",
+                sha(descriptor), "exact independently pinned descriptor");
+        Environment environment = Environment.builder()
+                .load(new YamlResourceLoader(
+                        new ByteArrayInputStream(descriptor.getBytes(StandardCharsets.UTF_8)),
+                        URI.create("classpath:" + descriptorPath), new Properties(),
+                        M3Jdk21HashPinnedTextSnapshotRecipe.class.getClassLoader()))
+                .build();
+        String name = "com.synexia.m3.OriginalMappingProvider20261017";
+        Recipe activated = environment.activateRecipes(name);
+        assertTrue(activated.validate().isValid(), "named descriptor must validate");
+        assertEquals(1, activated.getRecipeList().size(), "single named activation");
+        Recipe declarative = activated.getRecipeList().get(0);
+        assertEquals(DeclarativeRecipe.class, declarative.getClass(),
+                "descriptor must activate as the existing declarative recipe");
+        assertEquals(name, declarative.getName(), "exact declared recipe name");
+        assertEquals(1, declarative.getRecipeList().size(), "single declared engine");
+        Recipe concrete = declarative.getRecipeList().get(0);
+        assertEquals(M3Jdk21HashPinnedTextSnapshotRecipe.class, concrete.getClass(),
+                "exact existing recipe engine class");
+        M3Jdk21HashPinnedTextSnapshotRecipe owner =
+                (M3Jdk21HashPinnedTextSnapshotRecipe) concrete;
+        assertEquals(CRATE, owner.getCrateName(), "descriptor config selects this crate");
+        assertEquals(ROWS.stream().map(Row::path).toList(), owner.targetPaths(),
+                "named descriptor owns the same exact manifest paths");
+        assertThrows(org.openrewrite.RecipeException.class,
+                () -> environment.activateRecipes(name + ".missing"),
+                "unknown recipe name must refuse after successful named activation");
+        return activated;
     }
 
     private static String sha(String value) {
@@ -149,8 +194,12 @@ final class M3OriginalCliProviderRecipeTest {
     }
 
     private static List<Result> run(Scenario source) {
+        return run(recipe(), source);
+    }
+
+    private static List<Result> run(Recipe selected, Scenario source) {
         var ctx = context();
-        List<Result> result = recipe().run(new InMemoryLargeSourceSet(source.files()), ctx, 1)
+        List<Result> result = selected.run(new InMemoryLargeSourceSet(source.files()), ctx, 1)
                 .getChangeset().getAllResults();
         assertEquals(SEED, source.seed().printAll());
         for (Result change : result) {
@@ -161,6 +210,11 @@ final class M3OriginalCliProviderRecipeTest {
     }
 
     private static Map<String, String> assertReplay(Map<String, String> partial, boolean reverse) {
+        return assertReplay(recipe(), partial, reverse);
+    }
+
+    private static Map<String, String> assertReplay(
+            Recipe selected, Map<String, String> partial, boolean reverse) {
         Map<String, String> expected = images();
         Scenario source = sources(partial, reverse);
         Map<String, String> complete = new TreeMap<>();
@@ -174,7 +228,7 @@ final class M3OriginalCliProviderRecipeTest {
             if (!row.text().equals(partial.get(row.path()))) wanted.add(row.path());
         }
         Set<String> observed = new TreeSet<>();
-        for (Result result : run(source)) {
+        for (Result result : run(selected, source)) {
             SourceFile after = result.getAfter();
             assertInstanceOf(PlainText.class, after);
             String name = path(after);
@@ -192,7 +246,8 @@ final class M3OriginalCliProviderRecipeTest {
         }
         assertEquals(wanted, observed, "actual changed owners");
         assertEquals(expected, complete, "actual input-plus-results overlay");
-        assertTrue(run(sources(complete, reverse)).isEmpty(), "actual second recipe fixed point");
+        assertTrue(run(selected, sources(complete, reverse)).isEmpty(),
+                "actual second recipe fixed point");
         return complete;
     }
 
@@ -487,13 +542,20 @@ final class M3OriginalCliProviderRecipeTest {
         String before = beforeText(mapping);
         String after = assertReplay(state(0), false).get(name);
         assertNotNull(after, "actual recipe overlay must contain the canonical map");
+        Recipe named = namedRecipe();
+        for (boolean reverse : List.of(false, true)) {
+            assertEquals(after, assertReplay(named, state(0), reverse).get(name),
+                    "named descriptor before-to-after overlay in each source order");
+            assertEquals(after, assertReplay(named, images(), reverse).get(name),
+                    "named descriptor converged overlay in each source order");
+        }
         assertEquals("4247c5648cf6a5599f8840a7171f147f5c343bf9b97e7a386eb7f351f978c4f3",
                 sha(before), "exact current receiver map preimage");
 
         // These reviewed spans cover the JSON object value, excluding its property label/comma.
         int valueStart = 40_771;
         int beforeValueEnd = 377_326;
-        int afterValueEnd = 414_297;
+        int afterValueEnd = 427_128;
         assertEquals('{', before.charAt(valueStart));
         assertEquals('{', after.charAt(valueStart));
         assertEquals('}', before.charAt(beforeValueEnd - 1));
@@ -501,9 +563,11 @@ final class M3OriginalCliProviderRecipeTest {
         assertEquals("9ed985fa03ee732c8c9d15c3b6e082764dd1e3c4e258ad4d29188bf008ded449",
                 sha(before.substring(valueStart, beforeValueEnd)),
                 "original A56 migration object value");
-        assertEquals("128762e785aa39ac3c9ec7cb8c6fb797f3ed50cd213d9c19323c332930c9bf46",
+        assertEquals("298cb87b860ac4f320b223274ecbf0644810dfc4943889aad3ce74c61cb98dae",
                 sha(after.substring(valueStart, afterValueEnd)),
-                "independently reviewed D60 migration object value");
+                "independently reviewed pending-contract D60 migration object value");
+        assertEquals("051debeca7331c8aab5c636c0d8cd200c61d60e5c3a64362597f96c17751ab17",
+                sha(after), "exact independently reviewed complete canonical map");
         assertArrayEquals(before.substring(0, valueStart).getBytes(StandardCharsets.UTF_8),
                 after.substring(0, valueStart).getBytes(StandardCharsets.UTF_8),
                 "every byte before the migration value is preserved");
@@ -560,7 +624,10 @@ final class M3OriginalCliProviderRecipeTest {
                 "synexia.counterpart.MIndexRegexTrigramQuery",
                 Set.of("targets", "sync", "lineage", "observation"),
                 "synexia.counterpart.MIndexRegexTrigramQuery.sparseLookup",
-                Set.of("sources", "recipe", "sync", "observation"));
+                Set.of("sources", "recipe", "sync", "observation"),
+                "family.substring-conflict",
+                Set.of("reason", "sources", "contract", "format", "materialization",
+                        "recipe", "provenance", "sync", "source_state", "observation"));
         int unchanged = 0;
         int changed = 0;
         for (var entry : beforeRecords.entrySet()) {
@@ -576,8 +643,206 @@ final class M3OriginalCliProviderRecipeTest {
                 unchanged++;
             }
         }
-        assertEquals(54, unchanged);
-        assertEquals(2, changed);
+        assertEquals(53, unchanged);
+        assertEquals(3, changed);
+        assertPendingSubstringRecord(beforeRecords.get("family.substring-conflict"),
+                afterRecords.get("family.substring-conflict"), after, json);
+    }
+
+    private static void assertPendingSubstringRecord(
+            com.fasterxml.jackson.databind.JsonNode previous,
+            com.fasterxml.jackson.databind.JsonNode current,
+            String completeMap, com.fasterxml.jackson.databind.ObjectMapper json)
+            throws IOException {
+        assertNotNull(previous);
+        assertNotNull(current);
+        assertEquals("family.substring-conflict", current.path("id").asText());
+        assertEquals("pending", current.path("kind").asText());
+        assertEquals("pending", current.path("status").asText());
+        assertEquals("partial", current.path("source_state").asText());
+        for (String field : List.of("id", "kind", "status", "targets", "owner", "identity",
+                "dependencies", "tests", "lineage")) {
+            assertEquals(previous.get(field), current.get(field),
+                    "pending substring field must retain its original contract: " + field);
+        }
+        for (String field : List.of("targets", "tests", "dependencies")) {
+            assertTrue(current.path(field).isArray(), field);
+            assertTrue(current.path(field).isEmpty(), field + " remains unowned/unexecuted");
+        }
+        for (String field : List.of("id", "version", "path", "sha256")) {
+            assertTrue(current.path("recipe").has(field), "receiving recipe field: " + field);
+            assertTrue(current.path("recipe").path(field).isNull(),
+                    "no target receiving recipe admitted: " + field);
+        }
+        assertEquals(previous.path("recipe").path("rollback"),
+                current.path("recipe").path("rollback"), "no target mutation rollback");
+        for (String field : List.of("schema", "abi")) {
+            assertEquals(previous.path("format").get(field), current.path("format").get(field),
+                    "no target format or ABI admission: " + field);
+        }
+        for (String field : List.of("source_revision", "target_revision", "direction",
+                "target_adaptations")) {
+            assertEquals(previous.path("sync").get(field), current.path("sync").get(field),
+                    "historical synchronization metadata is retained: " + field);
+        }
+        assertFalse(current.path("sync").path("pending").isEmpty(),
+                "source/target application and dependency closure remain pending");
+        assertFalse(current.path("sync").path("conflicts").isEmpty(),
+                "strict and UTF16/empty/metadata contracts require explicit adaptation");
+        assertFalse(current.path("provenance").path("copied_code").asBoolean(true),
+                "comparison pins do not copy target implementation bodies");
+
+        // This exact canonical block is a byte oracle, independent of Jackson serialization.
+        String rawRecord = completeMap.substring(106_205, 121_326);
+        assertEquals(15_121, rawRecord.getBytes(StandardCharsets.UTF_8).length);
+        assertEquals("3c8f7e34dcfbc5372bf6a63d0da16975e26e2e44c6f65aa38b801c86f3ee68ac",
+                sha(rawRecord), "complete independently reviewed pending substring record");
+        assertEquals(current, json.readTree(rawRecord),
+                "the pinned raw block is the unique parsed substring record");
+
+        var sources = current.path("sources");
+        assertTrue(sources.isArray());
+        assertEquals(4, sources.size(), "only the four actual inspected source owners");
+        assertPinnedArtifact(sources.get(0),
+                "hsoliwal/com.synexia", "6291b100548f7850279f49e693621d6460be25f9",
+                "synexia-mindex/runtime",
+                "synexia-mindex/runtime/src/main/java/com/synexia/mindex/SubMIndexString.java",
+                "com.synexia.mindex.SubMIndexString",
+                "92fa09754c4f5f85f29509a7e6077a9f0ad08f8d",
+                "80625746ec369c7071d97685e7742359e80b73f7c8b246de76e59655fa1289b7",
+                List.of("SubMIndexString of(MIndexString,int,int)",
+                        "SubMIndexString ofUtf16(MIndexString,int,int)",
+                        "SubMIndexString ofCodePointSafe(MIndexString,int,int)",
+                        "SubMIndexString subSequence(int,int)",
+                        "MIndexString parent()",
+                        "int start()",
+                        "int end()",
+                        "MIndexString intern()"),
+                "refs/heads/develop");
+        assertPinnedArtifact(sources.get(1),
+                "hsoliwal/com.synexia", "6291b100548f7850279f49e693621d6460be25f9",
+                "synexia-indexstring",
+                "synexia-indexstring/src/main/java/com/synexia/indexstring/SubMIndexString.java",
+                "com.synexia.indexstring.SubMIndexString",
+                "1f6c1ae0bfdeeae4b7aec49549f05866ce46bd45",
+                "718e4514f2a09d708a33412ca1ef46b07ac9132cf21b7a3fdbd9036b711a0f36",
+                List.of("MIndexString source()",
+                        "int beginIndex()",
+                        "int endIndex()",
+                        "SubMIndexString subSequence(int,int)",
+                        "SubMIndexString view(int,int)",
+                        "String materialize()",
+                        "MIndexString detach()"),
+                "refs/heads/develop");
+        assertPinnedArtifact(sources.get(2),
+                "hsoliwal/com.synexia", "6291b100548f7850279f49e693621d6460be25f9",
+                "synexia-mindex/runtime",
+                "synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexCharSequence.java",
+                "com.synexia.mindex.MIndexCharSequence",
+                "6c0821756c4ac4241ab22c97ca336f07b92cfd2e",
+                "4d435e90316b69b5d4a67bdc5a46db1bf2e8d4db17e25efeb42fa899b1b37313",
+                List.of("MIndexCharSequence of(MIndexString...)",
+                        "MIndexCharSequence of(MIndexCompositeString)",
+                        "int segmentCount()",
+                        "char charAt(int)",
+                        "MIndexCharSequence subSequence(int,int)",
+                        "void copyTo(int,char[],int,int)",
+                        "byte[] encode(Charset)"),
+                "refs/heads/develop");
+        assertPinnedArtifact(sources.get(3),
+                "hsoliwal/com.synexia", "6291b100548f7850279f49e693621d6460be25f9",
+                "synexia-mindex/runtime",
+                "synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexCompositeString.java",
+                "com.synexia.mindex.MIndexCompositeString",
+                "71d1fcada1cec89c1b0d5f0122ca7707d0b1dd58",
+                "8037a689789fc351ccdeef8105122a961a6722bb27e8f54cfe42cfd2370365e3",
+                List.of("Segment sourceSegment(int)",
+                        "SubMIndexString segmentView(int)",
+                        "SubMIndexString segmentViewUtf16(int)",
+                        "MIndexString subSequence(int,int)",
+                        "SubMIndexCompositeString view(int,int)",
+                        "int segmentCount()",
+                        "MIndexStringMetadata segmentMetadata(int)",
+                        "MIndexString materialize()"),
+                "refs/heads/develop");
+
+        String observation = current.path("observation").asText();
+        assertTrue(observation.startsWith("RELATED_TARGET_REFERENCE_ONLY."));
+        assertTrue(observation.contains("dependencies[] is UNASSESSED"));
+        assertTrue(observation.contains("NOT_APPLIED and NOT_RUN"));
+        assertTrue(observation.contains("PR12419@dc2ff40d771dae3205dc3212bc8842bdf8da8a73"));
+        assertTrue(observation.contains("PR12426@b2e34ffd776aec7982c853bce3fc42d78deadcd2"));
+        String prefix = "Exact inspected comparison surfaces, not target artifacts or a port: ";
+        int begin = observation.indexOf(prefix);
+        assertTrue(begin >= 0, "comparison reference prefix");
+        begin += prefix.length();
+        int end = observation.indexOf("]. sources[]", begin);
+        assertTrue(end >= begin, "comparison reference boundary");
+        var references = json.readTree(observation.substring(begin, end + 1));
+        assertTrue(references.isArray());
+        assertEquals(3, references.size(), "comparison references reserve no target ownership");
+        assertPinnedArtifact(references.get(0),
+                "hsoliwal/M3jdk21", "a3e88976ee8664d1ef5d0cade96aec1206b2133d",
+                "java.base",
+                "src/java.base/share/classes/java/lang/M3String.java",
+                "java.lang.M3String",
+                "e3bffdb11669a80a8fe8e1ba127b23fb7efc3c1e",
+                "fad8274a84532ce29bd2b2fbdcb62474cfce32a6fb8eee89b885e5a611ea46f0",
+                List.of("slice(int,int): M3String (package-private)",
+                        "subSequence(int,int): M3String (public member of package-private class)"),
+                "refs/heads/master");
+        assertPinnedArtifact(references.get(1),
+                "hsoliwal/M3jdk21", "a3e88976ee8664d1ef5d0cade96aec1206b2133d",
+                "java.base",
+                "src/java.base/share/classes/java/lang/M3StringTuple.java",
+                "java.lang.M3StringTuple",
+                "0d4cfb75317e68d54244588a474eba98bf7df27b",
+                "0788834635dee7c22e94b92fc7d1b42bdc42c7b1d8948efabc4e94062173d4b9",
+                List.of("charAt(int): char (package-private)",
+                        "getChars(int,int,char[],int): void (package-private)"),
+                "refs/heads/master");
+        assertPinnedArtifact(references.get(2),
+                "hsoliwal/M3jdk21", "a3e88976ee8664d1ef5d0cade96aec1206b2133d",
+                "java.base",
+                "src/java.base/share/classes/java/lang/String.java",
+                "java.lang.String",
+                "db3fd603765644fffe9edd92511624b944914068",
+                "abd9604058045fd77cb5985a14f56487726b823f468990d5dc4277d6391de0cd",
+                List.of("substring(int): String",
+                        "substring(int,int): String",
+                        "subSequence(int,int): CharSequence"),
+                "refs/heads/master");
+    }
+
+    private static void assertPinnedArtifact(
+            com.fasterxml.jackson.databind.JsonNode artifact,
+            String repository, String commit, String module, String artifactPath, String symbol,
+            String gitBlob, String sha256, List<String> signatures, String trackingRef) {
+        assertNotNull(artifact);
+        assertTrue(artifact.isObject());
+        Set<String> fields = new TreeSet<>();
+        artifact.fieldNames().forEachRemaining(fields::add);
+        assertEquals(Set.of("repo", "commit", "module", "path", "symbol", "signatures",
+                "sha256", "git_blob_sha1", "fingerprint", "revision_role", "tracking_ref"),
+                fields, "exact inspected artifact schema");
+        assertEquals(repository, artifact.path("repo").asText());
+        assertEquals(commit, artifact.path("commit").asText());
+        assertEquals(module, artifact.path("module").asText());
+        assertEquals(artifactPath, artifact.path("path").asText());
+        assertEquals(symbol, artifact.path("symbol").asText());
+        assertEquals(gitBlob, artifact.path("git_blob_sha1").asText());
+        assertEquals(sha256, artifact.path("sha256").asText());
+        assertTrue(artifact.path("fingerprint").isNull(),
+                "no semantic fingerprint was computed for a source-only reference");
+        assertEquals("pinned", artifact.path("revision_role").asText());
+        assertEquals(trackingRef, artifact.path("tracking_ref").asText());
+        assertTrue(artifact.path("signatures").isArray());
+        List<String> actualSignatures = new ArrayList<>();
+        artifact.path("signatures").forEach(signature -> {
+            assertTrue(signature.isTextual(), "signature must be text");
+            actualSignatures.add(signature.textValue());
+        });
+        assertEquals(signatures, actualSignatures, "exact inspected source/member signatures");
     }
 
     private static Map<String, com.fasterxml.jackson.databind.JsonNode> mappingRecordsById(

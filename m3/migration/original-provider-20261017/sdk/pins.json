@@ -7,7 +7,7 @@
   "receiverBaseEquivalence": "Original55-input4e29/d47 equivalence is historical. Fresh4598 audit: all54KEEP exact; workflow alreadyAFTER,4ADD absent; currentA56 migration raw equals oldA while59top mappings/optional fields are preserved by reviewed value-only successor.",
   "originalCliGitBlob": "d976f4a5d7f8983ade85d5d2cf608e3f6b2885d7",
   "canonicalBeforeGitBlob": "4f5911d625090913d85f9cf41b1ead1694dffade",
-  "canonicalAfterGitBlob": "853607c6fef4b08ba2a3fd6df35121ac0594db30",
+  "canonicalAfterGitBlob": "a90f96ed14bdb8c2ce3310d3ed4a3e40cea28f4f",
   "targets": [
     {
       "path": ".github/workflows/m3-original-mapping-provider-qualification.yml",
@@ -66,7 +66,7 @@
     {
       "path": "m3/docs/name-mapping.json",
       "before": "4247c5648cf6a5599f8840a7171f147f5c343bf9b97e7a386eb7f351f978c4f3",
-      "after": "216e2de854195c9f8363f2113e166955d5df22b6cea1d7d48721b18c2d28edf8",
+      "after": "051debeca7331c8aab5c636c0d8cd200c61d60e5c3a64362597f96c17751ab17",
       "resource": "after-009.txt"
     },
     {
@@ -481,9 +481,9 @@
     },
     {
       "path": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-original-mapping-provider-20261017/after-009.txt",
-      "gitBlob": "853607c6fef4b08ba2a3fd6df35121ac0594db30",
-      "sha256": "216e2de854195c9f8363f2113e166955d5df22b6cea1d7d48721b18c2d28edf8",
-      "bytes": 441047
+      "gitBlob": "a90f96ed14bdb8c2ce3310d3ed4a3e40cea28f4f",
+      "sha256": "051debeca7331c8aab5c636c0d8cd200c61d60e5c3a64362597f96c17751ab17",
+      "bytes": 453878
     },
     {
       "path": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-original-mapping-provider-20261017/after-010.txt",
@@ -793,15 +793,15 @@
     },
     {
       "path": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-original-mapping-provider-20261017/manifest.tsv",
-      "gitBlob": "0f19af2488cd099a71957330a2898a09d880df29",
-      "sha256": "8b168c5da07b47b83a4618efacabae8323a8476b457001fa20e39d7dab77944d",
+      "gitBlob": "b26de7b52b8fdb89913ce3362c326b47bbafc5f6",
+      "sha256": "3d52b74babc843461aa20b27f39d064a2de93608e30206ce899b344ff4581ea7",
       "bytes": 11923
     },
     {
       "path": "src/test/java/com/m3/rewrite/backport/M3OriginalCliProviderRecipeTest.java",
-      "gitBlob": "d967dd7abe1acc2b1df5a92fdd909f145288da18",
-      "sha256": "0724e16491c2cd7a67c9258a4822b04f5eb88e9596a5cbacd84dcbdce635e59b",
-      "bytes": 30136
+      "gitBlob": "a09227509be476e87a2fa8772a97007ff5f9be84",
+      "sha256": "c9887254606d9f17fb60227dc4c7153cbaf988bd0dafc6199a2b5ebf2c7ce083",
+      "bytes": 46173
     },
     {
       "path": "verify.py",
