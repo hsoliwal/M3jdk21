@@ -183,4 +183,10 @@ public final class M3LibraryCollections {
         return new M3ApacheBidiMap<>();
     }
 
+    /** Spring 6.2 case-insensitive Map semantics over two existing M3 index maps.
+     * Does not impersonate Spring's concrete LinkedCaseInsensitiveMap class. */
+    public static <V> Map<String, V> springCaseInsensitiveMap(java.util.Locale locale) {
+        return new M3SpringCaseInsensitiveMap<>(Objects.requireNonNull(locale, "locale"));
+    }
+
 }

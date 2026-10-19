@@ -1,0 +1,10 @@
+# SPDX-License-Identifier: Apache-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.SpringCaseSdkReceiving20261018
+displayName: Reuse installed Spring M3 casefold owner in the five-provider SDK
+description: Exact hash-pinned Java LST factory and SDK tests plus source-sealed TSV/doc records.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: m3-spring-case-sdk-20261018
+  - com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe:
+      crateName: m3-spring-case-sdk-metadata-20261018

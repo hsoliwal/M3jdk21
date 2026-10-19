@@ -10,7 +10,7 @@ mappings and have different absent/empty and view behavior. Keep their contracts
 The historical `name-mapping.json` remains the source-migration authority. The accompanying
 `sdk-family-bindings.tsv` maps **this factory surface** to exact API names and physical
 owners; it does not replace that migration history or the accumulated algorithm catalogue.
-There are 22 mapped factories, not 22 complete donor libraries or an exhaustive API census.
+There are 23 mapped factories, not 22 complete donor libraries or an exhaustive API census.
 All other APIs remain outside this packet's qualification boundary.
 
 ## Names and storage
@@ -35,6 +35,7 @@ All other APIs remain outside this packet's qualification boundary.
 | SPRING_FRAMEWORK | `springMultiValueMap` | `org.springframework.util.MultiValueMap` | `com.m3.collections.M3LinkedHashMap`, `com.m3.collections.M3LinkedList` |
 | SPRING_FRAMEWORK | `springSingleValueMap` | `org.springframework.util.MultiValueMap` | `com.m3.collections.M3LinkedHashMap` |
 | SPRING_FRAMEWORK | `springAutoPopulatingList` | `java.util.List` | `com.m3.collections.M3LinkedList` |
+| SPRING_FRAMEWORK | `springCaseInsensitiveMap` | `java.util.Map` | `com.m3.collections.M3LinkedHashMap` (original payload owner plus folded-key index) |
 | APACHE_COMMONS_COLLECTIONS | `apacheListValuedMap` | `org.apache.commons.collections4.ListValuedMap` | `com.m3.collections.M3LinkedHashMap`, `com.m3.collections.M3LinkedList` |
 | APACHE_COMMONS_COLLECTIONS | `apacheSetValuedMap` | `org.apache.commons.collections4.SetValuedMap` | `com.m3.collections.M3LinkedHashMap`, `com.m3.collections.M3LinkedHashSet` |
 | GUAVA | `guavaFilteredCollection` | `java.util.Collection` | `com.m3.collections.M3LinkedList` |
