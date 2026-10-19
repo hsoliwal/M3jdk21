@@ -68,3 +68,8 @@ bytes or an invalid/foreign successor manifest still refuse admission.
 The older zero-key workflow's distinct module-JUnit job calls a missing
 `./mvnw`; this source-admission repair does not claim to solve that
 runner/build dependency or make JUnit pass.
+
+The strict historical-source gate now also SHA-256-pins the entire
+`SOURCE_SUCCESSORS.tsv` receipt; a changed successor row cannot silently
+authorize arbitrary map bytes without updating the canonical source-first
+recipe and source checker together. The predecessor manifest stays immutable.
