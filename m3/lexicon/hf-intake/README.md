@@ -42,6 +42,8 @@ A further source pass added six reference-only leads: IDS contributes concept-al
 
 WikiPron v2.2.0 adds a pinned pronunciation resource: the upstream reports more than five million word/IPA pairs across 348 languages. Its tool is Apache-2.0, but its README says the Wiktionary-derived data has separate terms; the source is therefore a phonetic-index evaluation lead only, not an approved data payload.
 
+Two additional primary-source candidates extend the catalogue: HPLT Monolingual 3.0 reports roughly 50 TB across 198 languages and labels its per-language shards CC0, making it a possible offline frequency/n-gram precompute source only after shard-level provenance and quality review; FLORES+ 4.6 reports 230 language varieties and provides sentence-level translation evaluation, but is gated, CC BY-SA 4.0, not for training, and subject to anti-scraping redistribution conditions. Both remain reference-only; neither is a lexical mapping payload.
+
 The catalogue is discovery, not an import adapter: Parquet, Arrow, JSONL,
 streaming CSV quotations, proprietary/gated corpora, grammar models and
 arbitrary Hub file types are not yet supported by the tested importer.
