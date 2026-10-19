@@ -1,0 +1,77 @@
+{
+  "schema": "M3JDK21_SYNEXIA_REVERSE_NEEDLE_STOCK_RECEIVER_V2",
+  "copyright": "Copyright 2026 Hitesh Soliwal and contributors",
+  "receivedLicense": "GPLv2 with the Classpath exception for the src/** postimages (TARGET_OWNED_PORT); Apache-2.0 for the test/jdk M3 tests",
+  "epoch": 2,
+  "supersedesEpoch": {
+    "m3jdk21PullRequest": 678,
+    "synexiaPullRequest": 10171,
+    "synexiaCommit": "60b8a31d7c09bc073deb2c879ad8b64a80661067",
+    "state": "CLOSED 2026-10-11 with the A33..A43 stack; preimage assumed A21 (M3String.units(), LONG_NEEDLE), never on master"
+  },
+  "canonicalSource": {
+    "repository": "hsoliwal/com.synexia",
+    "branch": "codex/m3-precompute-reland-20261018",
+    "pullRequest": 12397,
+    "commit": "d8c8d39b57e7bed51bcc8503f526b711023eca1c",
+    "localChainCommit": "dc2a7a047e80e75539aea66b89c171753186ded8",
+    "recipe": "com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe",
+    "declarativeRecipe": "com.synexia.m3.ReverseNeedleStock",
+    "crate": "m3-reverse-needle-stock",
+    "fossReuseDecisionRow": "string.search.reverse-needle-stock-lane",
+    "donors": [
+      {
+        "path": "src/java.base/share/classes/java/lang/StringLatin1.java lastIndexOf / StringUTF16.java lastIndexOf",
+        "commit": "970a34350ebdf6a3f1c5ff5acc8445d0f3515f55",
+        "target": "java.lang.M3StringSearchPrecompute.lastIndexOf(byte[], byte, int, M3String, int) / seekBackwards / reverseSkipSearch / rawUnit / units / perUnitLastIndexOf / DENSE_CANDIDATES",
+        "mechanics": "the in-tree stock reverse search's seek-and-verify shape per coder over the needle's bulk-read units; the plan's reverse KMP as the hand-off for texts whose candidates verify long and often"
+      }
+    ],
+    "license": "first-party M3 owner over in-tree JDK donors (GPLv2+CPE)",
+    "disposition": "ADAPT: the same index as the flat String for every M3 needle over every flat haystack; no public API change"
+  },
+  "target": {
+    "repository": "hsoliwal/M3jdk21",
+    "base": "m3/precompute-reland-20261018 after the A42 re-seal 1fddd1b88b49 (master 970a34350eb)",
+    "branch": "m3/precompute-reland-20261018",
+    "pullRequest": 1399,
+    "ownerCommit": "288a95d0306e02eb62415d8c03d42d2e2e038827",
+    "owners": [
+      "java.lang.M3StringSearchPrecompute"
+    ],
+    "publicJdkApiChange": false
+  },
+  "runtimeDependencyOnSynexia": false,
+  "publicJdkReplacement": false,
+  "targets": [
+    {
+      "path": "src/java.base/share/classes/java/lang/M3StringSearchPrecompute.java",
+      "before": "eb34890dc50abe2f384f9522d82fc4fd2c9c8cfebaac6ecd154ed10f6669f6ba",
+      "after": "50b9e74dcc509092e40b893b99cd259deee8baf1d63aec2dd1a0881d31dc11a4",
+      "resource": "hash-pinned-java/00-M3StringSearchPrecompute.java.txt"
+    },
+    {
+      "path": "test/jdk/java/lang/String/M3ReverseNeedleTest.java",
+      "before": "ABSENT",
+      "after": "360b40db932ff12f1e371cb9ac8af08f15dee042112ca69d2708ee2671d3905a",
+      "resource": "hash-pinned-java/01-M3ReverseNeedleTest.java.txt"
+    }
+  ],
+  "gates": {
+    "recipeFixedPointAndRefusal": "PASS_WINDOWS Synexia crate test M3ReverseNeedleStockRecipeTest 2/2 (mvn -o test; log sha256 5cb68440d71fd3a5)",
+    "g7PatchModuleCompile": "PASS_WINDOWS javac --release 21 -Xlint:all,-module -Werror --patch-module java.base (65 files, 201 classes)",
+    "gateTestLocal": "PASS_WINDOWS flag-off on the patched module: M3ReverseNeedleTest 428,544 checks (log sha256 bc792a68c776e9a6); M3FlatNeedleGateTest 172,125 checks (aa180224c5376eaf)",
+    "gitDiffCheck": "PASS_WINDOWS",
+    "flagOnDifferential": "PENDING_LINUX (M3ReverseNeedleTest under -XX:+UseM3StringStorage)",
+    "ci": "PENDING_CI"
+  },
+  "closesLedgerRows": [
+    "S2 GATE_DETAIL G18 reverse lane (String static lastIndexOf with an M3 needle over flat bytes: reverse KMP with per-unit pattern.charAt and bounds-checked source reads)"
+  ],
+  "semanticDecisions": [
+    "every candidate is verified in full before it answers, so the result is the stock rightmost index for every needle and haystack",
+    "a needle with a unit above 0xff cannot occur in a Latin-1 source: -1 at once, as the stock coder dispatch answers",
+    "the hand-off to the reverse KMP continues below the failed candidate with nothing matched; every match ending above it was ruled out by the seek-and-verify scan",
+    "the needle copy is the only allocation; when it cannot be allocated the previous per-unit search answers, precompute is never semantic authority"
+  ]
+}
