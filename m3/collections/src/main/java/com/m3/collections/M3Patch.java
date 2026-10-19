@@ -114,18 +114,22 @@ public final class M3Patch {
 
 	/** Applies the patch to {@code before}, taking inserted keys from {@code after}; answers {@code after}'s keys. */
 	public long [] apply (long [] before, long [] after) {
-		M3LongArrayList list = M3LongArrayList.copyOf (before);
+		long [] lane = Arrays.copyOf (before, before.length + inserted);
+		int [] size = {before.length};
 		applyTo (new Target () {
 			@Override
 			public void remove (int index, int count) {
-				for (int k = 0; k < count; k++) list.removeAt (index);
+				System.arraycopy (lane, index + count, lane, index, size [0] - index - count);
+				size [0] -= count;
 			}
 
 			@Override
 			public void insert (int index, int count) {
-				for (int k = 0; k < count; k++) list.add (index + k, after [index + k]);
+				System.arraycopy (lane, index, lane, index + count, size [0] - index);
+				System.arraycopy (after, index, lane, index, count);
+				size [0] += count;
 			}
 		});
-		return list.toArray ();
+		return Arrays.copyOf (lane, size [0]);
 	}
 }

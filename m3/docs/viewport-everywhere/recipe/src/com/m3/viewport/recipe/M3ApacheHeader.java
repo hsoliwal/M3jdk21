@@ -41,17 +41,26 @@ public final class M3ApacheHeader extends Recipe {
 			example = "hsoliwal/nebula 79fdab533b25bd228e96a70feed55c905ab9aefb")
 	private final String origin;
 
+	/** Header style: {@code m3} (Apache-2.0, the m3/** modules) or {@code swt} (the Synexia dual header of the SWT fork). */
+	@Option(displayName = "Style", description = "m3 or swt.", required = false, example = "swt")
+	private final String style;
+
 	public M3ApacheHeader () {
-		this (null);
+		this (null, null);
 	}
 
 	@JsonCreator
-	public M3ApacheHeader (@JsonProperty("origin") String origin) {
+	public M3ApacheHeader (@JsonProperty("origin") String origin, @JsonProperty("style") String style) {
 		this.origin = origin == null ? ORIGIN : origin;
+		this.style = style == null ? "m3" : style;
 	}
 
 	public String getOrigin () {
 		return origin;
+	}
+
+	public String getStyle () {
+		return style;
 	}
 
 	@Override
@@ -73,14 +82,34 @@ public final class M3ApacheHeader extends Recipe {
 				if (pkg == null) return cu;
 				List<Comment> comments = new ArrayList<> (cu.getPrefix ().getComments ());
 				comments.addAll (pkg.getPrefix ().getComments ());
+				boolean swt = "swt".equals (style);
 				if (!comments.isEmpty () && comments.get (0) instanceof TextComment first
-						&& first.getText ().startsWith ("\n" + COPYRIGHT)) return cu;
+						&& first.getText ().startsWith (swt ? SWT_COPYRIGHT : "\n" + COPYRIGHT)) return cu;
 				String source = cu.getClasses ().isEmpty () ? "?" : cu.getClasses ().get (0).getSimpleName ();
-				String text = header (origin, source, kept (comments));
+				String text = swt ? swtHeader (origin, source, kept (comments)) : header (origin, source, kept (comments));
 				TextComment comment = new TextComment (true, text, "\n", Markers.EMPTY);
 				return cu.withPrefix (Space.EMPTY).withPackageDeclaration (pkg.withPrefix (Space.build ("", List.of (comment))));
 			}
 		};
+	}
+
+	static final String SWT_COPYRIGHT = "******************************************************************************\n"
+			+ " * Copyright (c) 2026 Synexia, Hitesh Soliwal (hsoliwal@gmail.com) and others.";
+
+	/** The Synexia header of the SWT fork (C:/m3-superset/tools/SYNEXIA_HEADER.java.txt) plus the derivation line. */
+	static String swtHeader (String origin, String source, List<String> kept) {
+		StringBuilder b = new StringBuilder (SWT_COPYRIGHT).append ("\n *\n");
+		b.append (" * This program and the accompanying materials are made available under the\n");
+		b.append (" * terms of the Apache License, Version 2.0, or (at your option) the Eclipse\n");
+		b.append (" * Public License 2.0, which are available at\n");
+		b.append (" * https://www.apache.org/licenses/LICENSE-2.0 and\n");
+		b.append (" * https://www.eclipse.org/legal/epl-2.0/\n *\n");
+		b.append (" * SPDX-License-Identifier: Apache-2.0 OR EPL-2.0\n *\n");
+		b.append (" * Derived by recipe (M3jdk21 m3/docs/viewport-everywhere/recipe, SwtHome) from ").append (origin).append (",\n");
+		b.append (" * com.m3.collections.").append (source).append (" (same author; the SWT copy of the viewport collections).\n");
+		for (String line : kept) if (!line.contains ("initial API and implementation")) b.append (line).append ('\n');
+		b.append (" *\n * Contributors:\n *     Hitesh Soliwal (Synexia) - initial API and implementation\n");
+		return b.append (" ******************************************************************************").toString ();
 	}
 
 	static List<String> kept (List<Comment> comments) {
