@@ -1,0 +1,22 @@
+{
+  "product": "M3JDK21",
+  "jdk_module": "java.base",
+  "runtime_target": "src/java.base/share/classes/jdk/internal/util/M3PipelinePlan.java",
+  "base_commit": "677437be295b23f7ccf7409be287008944d0e8b0",
+  "input_git_blob": "908919ddf1de4984839d7ff6ea4181a24d69166d",
+  "output_git_blob": "803b3d3a0850c0b01c909a61104cec0ddeb2c746",
+  "input_sha256": "c8b8614c7794e1f6e8da56d62f5ab048903b4593b63de2f623a379971535acd4",
+  "output_sha256": "5643bbdf19e67830926ea0b24cfa16e7d8bd61c85017ea41a22c34824a607d0f",
+  "canonical_recipe_pr": "https://github.com/hsoliwal/com.synexia/pull/12494",
+  "canonical_recipe_commit": "63d5456804a5f73924672bc3956c76c8f81376df",
+  "public_api_diff": "IDENTICAL",
+  "local_jdk21_patch_module": "PASS",
+  "local_focused_assertions": 14,
+  "local_seeded_stream_differentials": 1500,
+  "local_recipe_unit_tests": 5,
+  "recipe_fixed_point": "UNCHANGED",
+  "maven_run": "NOT_RUN",
+  "jtreg_installed_m3jdk21": "NOT_RUN",
+  "native_jni": "UNCHANGED_NOT_RUN",
+  "mobile_android_ios": "NOT_RUN"
+}
