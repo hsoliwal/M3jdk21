@@ -1,0 +1,148 @@
+[
+  {
+    "gate": "baseline-compile",
+    "command": [
+      "/tmp/m3-toolchain/jdk-21.0.12.1+1/bin/javac",
+      "--release",
+      "21",
+      "-proc:none",
+      "-Xlint:all",
+      "-Werror",
+      "-d",
+      "/workspace/scratch/8762dba320ce/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-long-pathmask-bridge-20261018/proof/baseline-classes",
+      "/workspace/scratch/8762dba320ce/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-long-pathmask-bridge-20261018/baseline/m3/collections/src/main/java/com/m3/collections/M3LongIndexPathMasks.java",
+      "/workspace/scratch/8762dba320ce/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/candidates/m3/collections/src/main/java/com/m3/collections/M3IndexPathMasks.java",
+      "/workspace/scratch/8762dba320ce/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-long-pathmask-bridge-20261018/baseline/m3/collections/src/test/java/com/m3/collections/M3LongIndexPathMasksSelfTest.java",
+      "/workspace/scratch/8762dba320ce/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-long-pathmask-bridge-20261018/proof/src/test/java/com/m3/collections/M3LongPathBridgeBehaviorProbe.java"
+    ],
+    "exit_code": 0,
+    "seconds": 2.367,
+    "log": "baseline-compile.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "gate": "baseline-existing-self-test",
+    "command": [
+      "/tmp/m3-toolchain/jdk-21.0.12.1+1/bin/java",
+      "-Xmx256m",
+      "-Xss256k",
+      "-cp",
+      "/workspace/scratch/8762dba320ce/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-long-pathmask-bridge-20261018/proof/baseline-classes",
+      "com.m3.collections.M3LongIndexPathMasksSelfTest"
+    ],
+    "exit_code": 0,
+    "seconds": 0.119,
+    "log": "baseline-existing-self-test.log",
+    "sha256": "22ed0714ae1e45ad173a9b8b997a3098cc36908ff11619171ee1cb430915c623"
+  },
+  {
+    "gate": "baseline-behavior",
+    "command": [
+      "/tmp/m3-toolchain/jdk-21.0.12.1+1/bin/java",
+      "-Xmx256m",
+      "-Xss256k",
+      "-cp",
+      "/workspace/scratch/8762dba320ce/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-long-pathmask-bridge-20261018/proof/baseline-classes",
+      "com.m3.collections.M3LongPathBridgeBehaviorProbe"
+    ],
+    "exit_code": 0,
+    "seconds": 0.188,
+    "log": "baseline-behavior.log",
+    "sha256": "d23825aed62d05aef89e36566919e971ac1084d29cb33802f51995b27fe32548"
+  },
+  {
+    "gate": "baseline-public-api",
+    "command": [
+      "/tmp/m3-toolchain/jdk-21.0.12.1+1/bin/javap",
+      "-classpath",
+      "/workspace/scratch/8762dba320ce/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-long-pathmask-bridge-20261018/proof/baseline-classes",
+      "-public",
+      "-s",
+      "-constants",
+      "com.m3.collections.M3LongIndexPathMasks"
+    ],
+    "exit_code": 0,
+    "seconds": 0.352,
+    "log": "baseline-public-api.log",
+    "sha256": "66d799b1daedbd2e4444733bb75821fbdf5c9a989aa7f966ed9d1efaed458f1e"
+  },
+  {
+    "gate": "candidate-compile",
+    "command": [
+      "/tmp/m3-toolchain/jdk-21.0.12.1+1/bin/javac",
+      "--release",
+      "21",
+      "-proc:none",
+      "-Xlint:all",
+      "-Werror",
+      "-d",
+      "/workspace/scratch/8762dba320ce/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-long-pathmask-bridge-20261018/proof/candidate-classes",
+      "/workspace/scratch/8762dba320ce/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-long-pathmask-bridge-20261018/candidates/m3/collections/src/main/java/com/m3/collections/M3LongIndexPathMasks.java",
+      "/workspace/scratch/8762dba320ce/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/candidates/m3/collections/src/main/java/com/m3/collections/M3IndexPathMasks.java",
+      "/workspace/scratch/8762dba320ce/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-long-pathmask-bridge-20261018/baseline/m3/collections/src/test/java/com/m3/collections/M3LongIndexPathMasksSelfTest.java",
+      "/workspace/scratch/8762dba320ce/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-long-pathmask-bridge-20261018/proof/src/test/java/com/m3/collections/M3LongPathBridgeBehaviorProbe.java"
+    ],
+    "exit_code": 0,
+    "seconds": 1.592,
+    "log": "candidate-compile.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "gate": "candidate-existing-self-test",
+    "command": [
+      "/tmp/m3-toolchain/jdk-21.0.12.1+1/bin/java",
+      "-Xmx256m",
+      "-Xss256k",
+      "-cp",
+      "/workspace/scratch/8762dba320ce/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-long-pathmask-bridge-20261018/proof/candidate-classes",
+      "com.m3.collections.M3LongIndexPathMasksSelfTest"
+    ],
+    "exit_code": 0,
+    "seconds": 0.189,
+    "log": "candidate-existing-self-test.log",
+    "sha256": "22ed0714ae1e45ad173a9b8b997a3098cc36908ff11619171ee1cb430915c623"
+  },
+  {
+    "gate": "candidate-behavior",
+    "command": [
+      "/tmp/m3-toolchain/jdk-21.0.12.1+1/bin/java",
+      "-Xmx256m",
+      "-Xss256k",
+      "-cp",
+      "/workspace/scratch/8762dba320ce/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-long-pathmask-bridge-20261018/proof/candidate-classes",
+      "com.m3.collections.M3LongPathBridgeBehaviorProbe"
+    ],
+    "exit_code": 0,
+    "seconds": 0.239,
+    "log": "candidate-behavior.log",
+    "sha256": "d23825aed62d05aef89e36566919e971ac1084d29cb33802f51995b27fe32548"
+  },
+  {
+    "gate": "candidate-public-api",
+    "command": [
+      "/tmp/m3-toolchain/jdk-21.0.12.1+1/bin/javap",
+      "-classpath",
+      "/workspace/scratch/8762dba320ce/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-long-pathmask-bridge-20261018/proof/candidate-classes",
+      "-public",
+      "-s",
+      "-constants",
+      "com.m3.collections.M3LongIndexPathMasks"
+    ],
+    "exit_code": 0,
+    "seconds": 0.399,
+    "log": "candidate-public-api.log",
+    "sha256": "66d799b1daedbd2e4444733bb75821fbdf5c9a989aa7f966ed9d1efaed458f1e"
+  },
+  {
+    "gate": "existing-self-test-exact-equality",
+    "passed": true
+  },
+  {
+    "gate": "behavior-exact-equality",
+    "passed": true
+  },
+  {
+    "gate": "public-api-exact-equality",
+    "passed": true
+  }
+]

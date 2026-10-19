@@ -3,6 +3,30 @@
   "policy": "additive; no blind renames or unverified compatibility claims; Synexia donor names do not define M3JDK target ABI; precompute is internal-only",
   "mappings": [
     {
+      "source": "com.synexia.indexstring.projection.MIndexDerivativeRegex / MIndexPredicateAlphabet / native derivative power ABI",
+      "source_commit": "892e3f6c51d78bc0948e8a8cf736055b4c70eafa",
+      "source_blob": "292675e404c5a087e0039e20bf2b63f22bb97bfe",
+      "target": "com.m3.precompute.M3RegexDerivative / M3RegexPredicateAlphabet / M3RegexDerivativeNative",
+      "target_module": "m3/ports/precompute",
+      "status": "ISOLATED_TARGET_CANDIDATE_NO_JAVA_BASE_PROMOTION",
+      "recipe": "com.synexia.rewrite.M3Jdk21DerivativeRegexReceiver",
+      "license": "Apache-2.0; Copyright 2026 Hitesh Soliwal and contributors; preserve OpenJDK licenses",
+      "adaptation": "target owned M3 naming, M3Progress, shared precompute native load path, symbolic predicates, existing M3RegexDfaEffects ASCII effect bridge",
+      "restrictions": "restricted non-surrogate BMP algebraic full matches; no captures/lookarounds/backreferences; Java Pattern/Matcher remain authoritative",
+      "gates": "receiver recipe fixed-point and drift refusal; Maven Java 21; native C11/JNI tests; differential Java Pattern fixtures; unicode refusal; full JDK jtreg and CPU/heap/JNI resource measurements PENDING",
+      "collections": "filtered/sorted collections remain separately gated after String stage; no public java.util contract changes"
+    },
+    {
+      "source": "com.synexia.indexstring.MIndexRegexProgram / LeetCode 10 and GeeksForGeeks dot-star matching taxonomy",
+      "target": "java.lang.M3StringRegexDp and java.lang.String.matches",
+      "status": "additive bounded M3JDK21 runtime candidate; JDK product qualification pending",
+      "source_role": "Synexia automaton is implementation reference; LeetCode/GeeksForGeeks are problem-contract taxonomy only, not imported solutions",
+      "recipe": "com.synexia.rewrite.M3Jdk21RegexDotStarDp",
+      "target_rule": "For existing M3-backed String.matches receivers only, admit validated ASCII literal/dot/star full-match patterns with no flags, captures or supplementary input; use two rolling DP rows and ephemeral token states, delegate all refused cases unchanged to java.util.regex.Pattern; preserve owner+coordinate and JNI shadow boundaries",
+      "precompute_disposition": "bounded ephemeral compiled token lane only; persistent image/caching must use existing internal regex precompute owners after separate evidence",
+      "gate": "Java 21, real jtreg M3 on/off/CompactStrings, OpenRewrite fixed point and source refusal, full java.util.regex compatibility, source-first promotion, CPU/heap benchmark"
+    },
+    {
       "source": "com.synexia.indexstring.IndexStringTuple",
       "source_commit": "9963cc08ff13922b92a0e3db7c30f56fddacba7d",
       "target": "java.lang.M3StringTuple",
@@ -60,6 +84,15 @@
         "VM-local native scalar lookup is weak; dead native payload is reclaimable",
         "tuple composition is bounded-height and canonical by ordered terminal M3 owner/range sequence independent of concat parenthesization"
       ]
+    },
+    {
+      "source": "com.synexia.m3index.jdk.M3JdkStringBridge / com.synexia.mindex.MIndexStringPrecomputeBridge",
+      "target": "java.lang.M3StringPrecomputeBridge",
+      "status": "target-internal String precompute dispatch membrane",
+      "source_role": "Synexia canonical bridge policy/recipe donor",
+      "recipe": "com.synexia.rewrite.M3Jdk21StringPrecomputeBridgeReceiverRecipe",
+      "recipe_blob": "8879983c1c1eea32537ee92c3cb953143b5ea748",
+      "target_rule": "Package-private java.lang coordinator only; owns no cache or spelling payload, never admits a flat String merely for an optimization hit, and delegates to existing M3String facts/search/range owners with exact fallback semantics."
     },
     {
       "source": "com.synexia.indexstring.MIndexStringBacking",
@@ -243,6 +276,342 @@
       "source_blob_sha1": "1a6c8a8cafd9297bc6cec3730b81edc5b7f9cb47",
       "source_commit": "5648dec28cb9a86a9908c190ce2af3d71515b953",
       "source_tracking_ref": "refs/heads/develop"
+    },
+    {
+      "source": "com.synexia.indexstring.precompute.MIndexPrecomputeEngine / Context / Session / Plan / Pass / Artifact / Cache / Catalog / Limits / Scope / Key",
+      "target": "M3 internal precompute framework (target-owned, non-public)",
+      "status": "inventory mapping",
+      "source_role": "Synexia generic precompute control/data plane",
+      "target_rule": "Preserve owner/key/scope/budget/pass/artifact/lifecycle semantics internally; never expose this machinery through java.lang.String public API and never add a Synexia runtime dependency."
+    },
+    {
+      "source": "com.synexia.mindex.precompute.MIndexUniversalPrecompute family",
+      "target": "separate M3 internal universal precompute service/image plane",
+      "status": "inventory mapping",
+      "source_role": "Synexia universal snapshot/source/image/limits layer",
+      "target_rule": "May supply validated artifacts to JDK-internal consumers, but universal images and lifecycle never become canonical String payload."
+    },
+    {
+      "source": "com.synexia.indexstring.MIndexStringRelationPrecompute / MIndexStringUnaryProjectionPrecompute / MIndexStringPrecomputeImage",
+      "target": "review-required internal M3 String-adjacent lanes",
+      "status": "inventory mapping",
+      "source_role": "Synexia String-adjacent relation/projection precompute",
+      "target_rule": "Inventory exact facts, memory shape, invalidation and concrete JDK consumer before porting; do not infer target class name mechanically."
+    },
+    {
+      "source": "com.synexia.indexstring.ast.MIndexAST*Precompute family",
+      "target": "M3 compiler/tooling AST precompute plane",
+      "status": "inventory mapping",
+      "source_role": "Synexia AST/pattern/spec/tree precompute",
+      "target_rule": "Keep outside java.lang.String; only shared primitive algorithms may be adapted behind compiler/tooling-owned M3 classes."
+    },
+    {
+      "source": "com.synexia.indexstring.file.MIndexFile*Facts family",
+      "target": "M3 file/m3fs fact plane",
+      "status": "inventory mapping",
+      "source_role": "Synexia file-byte/source/lexicon facts",
+      "target_rule": "Key by file content/generation identity; never reuse String owner coordinates as file identity."
+    },
+    {
+      "source": "com.synexia.indexstring regex/search precompute families",
+      "target": "java.util.regex/internal M3 candidate-plan lanes where justified",
+      "status": "inventory mapping",
+      "source_role": "MIndex regex/search plans, postings, execution DAGs, composition images and native accelerators",
+      "target_rule": "Exact Java regex semantics remain authority; plans/accelerators are candidate/preparation layers and hardware/native absence must fail open."
+    },
+    {
+      "source": "com.synexia.indexstring MIndexPrefixZ / palindrome / suffix / LCP families",
+      "target": "no default java.lang target",
+      "status": "inventory mapping",
+      "source_role": "length-proportional text-analysis precompute",
+      "target_rule": "Port only behind a named JDK consumer and explicit retention budget; never add as fields of M3String/M3StringOwner/M3StringFacts."
+    },
+    {
+      "source": "com.synexia.indexstring lexical / word / bigram / semantic signal images",
+      "target": "separate M3 lexicon/language/relation image planes",
+      "status": "inventory mapping",
+      "source_role": "IndexWordFacts, signal indexes, bigram/relation/semantic images",
+      "target_rule": "Carry namespace/generation/provenance; do not collapse into java.lang.String canonical identity."
+    },
+    {
+      "source": "com.synexia.mindex Jini / Coral TPU / LiteRT NPU / Tornado precompute families",
+      "target": "optional external/offline M3 accelerators",
+      "status": "inventory mapping",
+      "source_role": "distributed/hardware precompute execution",
+      "target_rule": "M3JDK java.base must not depend on Jini/TPU/NPU/Tornado runtimes; import only validated precompute products through target-owned internal boundaries."
+    },
+    {
+      "source": "com.synexia.indexstring.precompute.MIndexRe2MechanicalFacts",
+      "target": "java.util.regex internal candidate/cost evidence + jdk.internal.mindex.M3TQ where semantically safe",
+      "status": "selective internal mapping; no RE2/J runtime dependency",
+      "source_role": "Synexia donor/reference mechanical regex precompute",
+      "source_revision": "f07aa85ba83749bbb2b6fa4a7a169b38aaac8ba2",
+      "target_rule": "program size, capture count and named-group geometry are advisory planning evidence only; stock Pattern/Matcher remains semantic authority; never retain on M3String"
+    },
+    {
+      "source": "com.synexia.indexstring.precompute.MIndexLucenePostingPlan",
+      "target": "no java.lang.String owner; target search/index service only after separate consumer admission",
+      "status": "do not port to java.lang.String",
+      "source_role": "Synexia donor/reference posting planner",
+      "source_revision": "f07aa85ba83749bbb2b6fa4a7a169b38aaac8ba2",
+      "target_rule": "cost-led conjunction/disjunction schedules remain higher-layer routing metadata; no Lucene runtime dependency or String field"
+    },
+    {
+      "source": "com.synexia.indexstring.precompute.MIndexTweetyGraphQueryIndex",
+      "target": "no java.base String owner; target reasoning/query service only after separate product admission",
+      "status": "do not port to java.lang.String",
+      "source_role": "Synexia clean-room Tweety-inspired reasoning precompute",
+      "source_revision": "f07aa85ba83749bbb2b6fa4a7a169b38aaac8ba2",
+      "target_rule": "closure/SCC/parity/argumentation/reasoning facts remain reasoning-layer metadata and never become M3String fields or public String API"
+    },
+    {
+      "source": "com.synexia.indexstring.MIndexByteArrayView",
+      "source_commit": "8e1f56d448fd31ee5b666c922947e39c2036d4fd",
+      "target": "com.m3.arrays.M3ByteArrayView",
+      "status": "candidate first array substrate slice",
+      "source_role": "Synexia immutable byte view donor/reference",
+      "target_rule": "internal immutable snapshot/range/join view; ordinary byte[] remains mutable caller-owned Java array"
+    },
+    {
+      "source": "com.synexia.indexstring.MIndexUtf16ArrayView",
+      "source_commit": "8e1f56d448fd31ee5b666c922947e39c2036d4fd",
+      "target": "com.m3.arrays.M3Utf16ArrayView + com.m3.arrays.M3Utf16Facts",
+      "status": "candidate first array substrate slice",
+      "source_role": "Synexia immutable UTF-16 view/fact donor/reference",
+      "target_rule": "exact UTF-16 internal value view with seam-correct facts; ordinary char[] remains explicit materialization"
+    },
+    {
+      "source": "com.synexia.indexstring.MIndexNativeArrayBoundaries / nativebridge.MIndexNativeArrayFlatten",
+      "source_commit": "8e1f56d448fd31ee5b666c922947e39c2036d4fd",
+      "target": "com.m3.arrays.M3ArrayNative",
+      "status": "candidate optional JNI boundary",
+      "source_role": "Synexia native array materialization donor/reference",
+      "target_rule": "target-owned JNI symbols; no retained Java heap pointer; Java exact fallback; native absence never changes semantics"
+    },
+    {
+      "source": "com.synexia.indexstring.MatSegmentedIntArray / MatSegmentedLongArray",
+      "source_commit": "8e1f56d448fd31ee5b666c922947e39c2036d4fd",
+      "target": "com.m3.arrays.M3IntArrayView / M3LongArrayView",
+      "status": "candidate immutable value-plane adaptation",
+      "source_role": "Synexia segmented primitive array donor/reference",
+      "target_rule": "first slice exposes immutable snapshot/range/join values only; mutable lane/storage responsibility remains with qualified collection owners"
+    },
+    {
+      "source": "com.synexia.indexstring.MIndexDirectArrayView / MIndexMaskedUtf16ArrayView / shared.SharedArray*",
+      "source_commit": "8e1f56d448fd31ee5b666c922947e39c2036d4fd",
+      "target": "future com.m3.arrays direct/mask/shared owners",
+      "status": "PENDING",
+      "source_role": "Synexia direct/masked/shared immutable array owners",
+      "target_rule": "requires first-slice qualification plus retention, namespace/generation, native lifetime, mapping replacement/corruption and cross-process proof"
+    },
+    {
+      "source": "com.synexia.indexstring.MatSegmentedObjectArray",
+      "source_commit": "8e1f56d448fd31ee5b666c922947e39c2036d4fd",
+      "target": "future M3 internal reference-array value plane",
+      "status": "PENDING",
+      "source_role": "Synexia segmented object-array donor/reference",
+      "target_rule": "no port until covariance, ArrayStoreException, runtime component type, clone/reflection/serialization, GC and JMM obligations are explicit"
+    },
+    {
+      "source": "com.synexia.indexstring.MIndexCodeTextSignalTrialImage",
+      "source_commit": "7a41c084fa80dd60cb0cffdfb9dc3db50b49e71b",
+      "source_blob_sha1": "75cbb4942e96d51d7cf43a13327c0b254a448394",
+      "target": "com.m3.precompute.M3RegexStringTrialImage",
+      "status": "implemented isolated M3 port candidate",
+      "source_role": "Synexia bounded regex x String static trial image and hard-case ranking",
+      "target_rule": "M3-owned name and API; JDK Pattern remains exact regex oracle; existing M3 code-text Java/JNI provider supplies approximate signal lanes; no java.base promotion"
+    },
+    {
+      "source": "com.synexia.rewrite.M3RegexStringPrecomputeSignals",
+      "source_commit": "6f6fafa01ce78b6f6187d50305b3e9c2829a7eca",
+      "source_blob_sha1": "7ce69fea2328136f04e5160dfd43ef32cdcf02c5",
+      "target": "com.m3.precompute.M3RegexStringSignals",
+      "status": "implemented isolated M3 port candidate",
+      "source_role": "Synexia static regex/String syntax and exact plain-literal fact packet",
+      "target_rule": "plain-literal index/equality facts are exact and JDK-Pattern-verified; all general-regex features are candidate evidence only"
+    },
+    {
+      "source": "com.synexia.rewrite.M3RegexStringNativeSignals",
+      "source_commit": "6f6fafa01ce78b6f6187d50305b3e9c2829a7eca",
+      "source_blob_sha1": "2ca773507503bf59c6921f59faa5099ca041662d",
+      "target": "com.m3.precompute.M3CodeTextSignalBatchNative",
+      "status": "no direct port; reuse existing target native owner",
+      "source_role": "Synexia dedicated recipe-mastery regex/String static-signal JNI ABI",
+      "target_rule": "do not introduce a second M3 native ABI; reuse existing M3 code-text signal JNI provider and retain JDK Pattern regex semantics on Java side"
+    },
+    {
+      "source": "com.synexia.indexstring.shared.SharedArrayNative.compare / hash32 / metrics / copyTo; SharedSegments.preparedBuffers",
+      "source_commit": "857c4cc0ddeb73e5ea5269a1d0ef2d30057dcfa8",
+      "source_blob_sha1": "SharedArrayNative.java:62c2e6e089b6a203b22d5aae4e15a834876f08d1;SharedSegments.java:2912e2afbc13a981ed6f6ef704b8b17047481fea;shared_arrays.cpp:8b85031cfbe1d64f43c93a1453f8670cc65dbafe;shared_string_compare.cpp:c0bf741d48304dceb73fddd0352ab510d1f2265f",
+      "target": "java.lang.String.compareTo(String) -> java.lang.M3String / M3StringOwner / M3StringAtom.address; JNI projections -> M3String.getChars/getBytes and nativeCharShadow/nativeByteShadow",
+      "status": "Apache source custody pinned; target direct-address fast path not implemented",
+      "source_role": "shared-segment JNI compare, hash, metric and caller-owned range-copy kernels over direct ByteBuffer owners",
+      "target_rule": "M3String keeps canonical owner+packed coordinate; scalar M3StringAtom already owns a native address and tuples remain a reference DAG. Do not add a parallel ByteBuffer[] payload/descriptor owner or Synexia runtime dependency. Any direct-address target optimization stays target-specific and must preserve exact JDK semantics and pass matched runtime benchmarks.",
+      "historical_evidence": "Synexia PR #9579 merged at 1a5f6c9abbf00887550f7c3d5647ebb20ef7ad99 with an owned UTF-16 address directory; that cache is absent from current develop at the pinned source revision.",
+      "source_license": "Apache-2.0",
+      "target_license": "GPL-2.0-with-Classpath-exception for the existing java.base files; no target source file changed by this intake"
+    },
+    {
+      "source": "com.synexia.indexstring.MIndexTupleReferences.Node.textMetrics / Node.bitSignal64",
+      "source_commit": "e8f16525b04d26c80973b08aaf01df0068a797c6",
+      "target": "java.lang.M3StringTuple.computeFacts / java.lang.M3StringFacts",
+      "status": "source pin only; target reentrancy not demonstrated; no runtime port admitted",
+      "source_role": "Synexia Apache-2.0 recipe/tooling donor and mixed-license production reference",
+      "target_rule": "Do not mechanically copy the resolver-scoped Derived record. The inspected M3StringTuple.computeFacts path composes target-owned child facts without the external resolver callback that triggers the donor defect. Run a target-owned reentrancy test if such a callback is later introduced; otherwise retain source-only applicability record. No Synexia runtime dependency.",
+      "lineage": {
+        "donor_repo": "hsoliwal/com.synexia",
+        "source_pr": 10406,
+        "merge_commit": "b57663033e5de3d21dcdcbcc6b5b35f6142bd88d",
+        "source_path": "synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexTupleReferences.java",
+        "source_blob": "d1030ade51d01121e30977f37e6241bc95b71b61",
+        "recipe": "com.synexia.rewrite.M3StringDerivedCacheRecipe",
+        "recipe_blob": "403fbbf278405a9452db0d5a1c33e43aa3c6f66a",
+        "recipe_manifest_blob": "0bd222a8566d0be10c04d7f3475a2a795770c2a3",
+        "source_regression_blob": "6b6276bedf9adc6ecd46f097c7714ac14f73c16b",
+        "recipe_regression_blob": "07d7df2af3c09d1d8eb3a4cc413491f5f116aa17",
+        "target_owner_blob": "0d4cfb75317e68d54244588a474eba98bf7df27b",
+        "target_facts_blob": "fcd108ab6181fec11d16eda811b29d18298f3fb1",
+        "target_disposition": "SOURCE_PIN_ONLY",
+        "license": "Apache-2.0 for recipe/tooling; mixed Apache-2.0 AND BSD-3-Clause for production donor",
+        "target_runtime_dependency": false
+      }
+    },
+    {
+      "source": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3jdk21-string-concat-typed-stringifier-invariant-20261009/00-check-m3string-concat-reference-dag.py.txt",
+      "source_commit": "e243e183d72bf42d57b2f946e332c8dc49a75ae9",
+      "target": "m3/runtime-integration/check-m3string-concat-reference-dag.py",
+      "status": "received exact hash-pinned Synexia checker snapshot; runtime verification pending",
+      "source_role": "canonical Synexia OpenRewrite recipe output",
+      "target_rule": "Keep the Synexia m3Append/String[] checker postimage byte-identical; M3JDK checker/build gates own runtime qualification.",
+      "lineage": {
+        "donor_repo": "hsoliwal/com.synexia",
+        "donor_pr": 10963,
+        "donor_merge_commit": "e243e183d72bf42d57b2f946e332c8dc49a75ae9",
+        "manifest_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3jdk21-string-concat-typed-stringifier-invariant-20261009/manifest.tsv",
+        "manifest_git_blob": "9cfa92fb8edc158620fcd0cb1bb40eab052167d3",
+        "source_resource_git_blob": "bddd68cc9b36439fda39fe2fd655b8819fae7e0e",
+        "source_resource_sha256": "9fd82a96ad813f11c90e593c8cd3b93feae9d5658a7b7b68ca48e95f035b19fa",
+        "receiver_receipt": "m3/compatibility/synexia-string-concat-dag-successor-20261013.json"
+      }
+    },
+    {
+      "source": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3jdk21-string-concat-reference-dag-jtreg-20261013/00-M3StringConcatReferenceDagTest.java.txt",
+      "source_commit": "48900593efc773183594ac02e9ff0cf1928db197",
+      "target": "test/jdk/java/lang/String/M3StringConcatReferenceDagTest.java",
+      "status": "received exact hash-pinned Synexia jtreg snapshot; jtreg verification pending",
+      "source_role": "canonical Synexia OpenRewrite recipe output",
+      "target_rule": "Preserve String[] helper contract and Java concat conversion coverage; M3JDK jtreg/build gates own runtime qualification.",
+      "lineage": {
+        "donor_repo": "hsoliwal/com.synexia",
+        "donor_pr": 10970,
+        "donor_merge_commit": "48900593efc773183594ac02e9ff0cf1928db197",
+        "manifest_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3jdk21-string-concat-reference-dag-jtreg-20261013/manifest.tsv",
+        "manifest_git_blob": "37f0e594f1dc06045cd20305c3c06f7a30da27e1",
+        "source_resource_git_blob": "edf35d940739581b76b73d7b431989ec4ff0d966",
+        "source_resource_sha256": "e4624f56a93d68cd04337e39ed2cd3896867149908f287d5839ddff9b965ae95",
+        "receiver_receipt": "m3/compatibility/synexia-string-concat-dag-successor-20261013.json"
+      }
+    },
+    {
+      "source": "com.synexia.unix4jm3",
+      "source_base": "29da7f266f2b88fe175536318ae0d313ba058e7f",
+      "target": "jdk.m3.text",
+      "module": "jdk.m3.text",
+      "public_sdk_types": [
+        "TextTools",
+        "M3UnixRuntime",
+        "TextFrame"
+      ],
+      "status": "candidate source receiver; local Linux Java21 linked-image qualified; product acceptance pending",
+      "recipe": "synexia-openrewrite-recipes/crates/m3-text-jmods/pom.xml",
+      "receiver": "m3/tooling/module-packs/text-tools",
+      "source_revision_receipt": "m3/tooling/module-packs/text-tools/SOURCE_REF.json",
+      "target_rule": "Opt-in fork SDK extension; preserve all Java SE names/contracts; no java.base replacement or phase advancement.",
+      "license": "Apache-2.0 first-party only; OpenJDK and third-party rights retained",
+      "internal_optimization_owners": [
+        "jdk.m3.text.Canonical",
+        "jdk.m3.text.TextLine",
+        "jdk.m3.text.Utf8Segments"
+      ],
+      "optimization_source_commit": "36de32dcf1431e0ce1a43e8bd2e6ee6ac8c240cc",
+      "optimization": "Bounded UTF-8 digest chunks and allocation-free UTF-8 byte counting; one canonical String input; original public SDK APIs preserved."
+    },
+    {
+      "source": "com.synexia.unix4jm3.io",
+      "source_base": "29da7f266f2b88fe175536318ae0d313ba058e7f",
+      "target": "jdk.m3.io",
+      "module": "jdk.m3.io",
+      "public_sdk_types": [
+        "FileTools"
+      ],
+      "status": "candidate source receiver; local Linux Java21 linked-image qualified; product acceptance pending",
+      "recipe": "synexia-openrewrite-recipes/crates/m3-text-jmods/pom.xml",
+      "receiver": "m3/tooling/module-packs/text-tools",
+      "source_revision_receipt": "m3/tooling/module-packs/text-tools/SOURCE_REF.json",
+      "target_rule": "Opt-in fork SDK extension; preserve all Java SE names/contracts; no java.base replacement or phase advancement.",
+      "license": "Apache-2.0 first-party only; OpenJDK and third-party rights retained"
+    },
+    {
+      "source": "Apache OpenNLP Tools 2.4.0",
+      "target": "Apache OpenNLP Tools 2.4.0",
+      "modules": [
+        "org.apache.opennlp.tools"
+      ],
+      "internal_optimization_owners": [
+        "opennlp.tools.util.StringList"
+      ],
+      "status": "full tool source compiled; local Java21 behavior/API/JMOD proof; product acceptance pending",
+      "recipe": "synexia-openrewrite-recipes/crates/m3-nlp-search/pom.xml",
+      "receiver": "m3/tooling/module-packs/nlp-search",
+      "source_revision_receipt": "m3/tooling/module-packs/nlp-search/SOURCE_REF.json",
+      "target_rule": "Actual upstream tool implementations and APIs retained. M3-owned internal source recipes; no shadow implementation, API rename, java.base replacement or runtime phase advancement.",
+      "license": "Preserve Apache and embedded notices; SLF4J MIT; first-party recipe/integration Apache-2.0"
+    },
+    {
+      "source": "Apache Lucene 9.10.0",
+      "target": "Apache Lucene 9.10.0",
+      "modules": [
+        "org.apache.lucene.core",
+        "org.apache.lucene.analysis.common",
+        "org.apache.lucene.queries",
+        "org.apache.lucene.sandbox",
+        "org.apache.lucene.queryparser"
+      ],
+      "internal_optimization_owners": [
+        "org.apache.lucene.queryparser.classic.QueryParserBase"
+      ],
+      "status": "full tool source compiled; local Java21 behavior/API/JMOD proof; product acceptance pending",
+      "recipe": "synexia-openrewrite-recipes/crates/m3-nlp-search/pom.xml",
+      "receiver": "m3/tooling/module-packs/nlp-search",
+      "source_revision_receipt": "m3/tooling/module-packs/nlp-search/SOURCE_REF.json",
+      "target_rule": "Actual upstream tool implementations and APIs retained. M3-owned internal source recipes; no shadow implementation, API rename, java.base replacement or runtime phase advancement.",
+      "license": "Preserve Apache and embedded notices; SLF4J MIT; first-party recipe/integration Apache-2.0"
+    },
+    {
+      "source": "Existing Synexia MIndexString code-point geometry/rank taxonomy and canonical recipe",
+      "source_role": "Algorithm/recipe authority in hsoliwal/com.synexia, not M3 runtime code dependency",
+      "target": "java.lang.M3StringCodePointPrecompute.Geometry",
+      "target_path": "src/java.base/share/classes/java/lang/M3StringCodePointPrecompute.java",
+      "recipe": "com.synexia.m3.Jdk21CodePointRankCursor20261017",
+      "canonical_recipe_pr": "hsoliwal/com.synexia#11966",
+      "receiver_test": "test/jdk/java/lang/String/M3StringCodePointRankCursorTest.java",
+      "status": "source-sealed exact Java21 rank/select candidate and host reference A/B passed; matched M3JDK21 java.base/HotSpot jtreg and resource gates pending",
+      "target_rule": "No public String ABI, duplicate payload owner, JNI symbol or retained per-value metadata changes; preserve unpaired UTF-16 surrogate semantics and fallback."
+    },
+    {
+      "source": "OpenJDK JDK-8371656 HashMap.putAll optimizations (27 GA)",
+      "source_revision": "13c92d0d4d137c7d83a946d1fcd2dfc5686e7b51",
+      "source_git_repo": "openjdk/jdk",
+      "source_path": "src/java.base/share/classes/java/util/HashMap.java",
+      "source_license": "GPLv2 with Classpath exception",
+      "target": "java.util.HashMap",
+      "target_path": "src/java.base/share/classes/java/util/HashMap.java",
+      "internal_optimization_owner": "java.util.HashMap.putHashMapEntries",
+      "recipe": "com.synexia.m3.Jdk27HashMapBulk20261017",
+      "canonical_recipe_pr": "hsoliwal/com.synexia#11969",
+      "receiver_test": "test/jdk/java/util/HashMap/M3HashMapBulkCopyTest.java",
+      "status": "candidate backport installed on draft branch; java.base patch testing and target runtime/jtreg gates pending; String-first receiving priority unchanged",
+      "target_rule": "Preserve public Map contracts and fallback for nonexact HashMap source types; no Synexia runtime dependency, no new M3 payload owner or native ABI."
     }
   ],
   "imported_donor_sources": [],
@@ -4984,33 +5353,189 @@
         "id": "synexia.jcc-recipe-laboratory",
         "kind": "dependency-reuse",
         "status": "blocked",
-        "reason": "Blocked source-qualified JCC laboratory handoff with an independently authored destination candidate tooling fixture. Its finite four-test proof is linked separately; source export, owning-module coverage, JDK gates and committed capability acceptance remain unadmitted.",
+        "reason": "Current 20-owner source publication is bound after exact readback; historical source and receiving work is retained. Source export, whole owning-module coverage and applicable M3JDK21 runtime/JNI/platform gates remain unadmitted.",
         "sources": [
           {
             "repo": "hsoliwal/com.synexia",
-            "commit": "0b8dc32b9e8a616b7b7141bbdd88722839dc64bc",
+            "commit": "bc06298218dd88f0164ed9b67e74fd8234ed70b2",
             "module": "synexia-openrewrite-recipes",
             "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3RecipeMasteryLab.java",
             "symbol": "com.synexia.rewrite.M3RecipeMasteryLab",
             "signatures": [],
-            "sha256": "0054ddf028c5a83c270c1a53795373c7cd8fa77395d23be7fd70424b644b0a3e",
-            "git_blob_sha1": "ee8adf451105c34d0afa228fe05b7dabb3b1e264",
+            "sha256": "af846d370fca10d2eb088650ae4829c6315ccffde23c0838f5d437955528d41e",
+            "git_blob_sha1": "2a79148c50889767a9ac75116a3ddb6a4b96f33f",
             "fingerprint": null,
             "revision_role": "pinned",
-            "tracking_ref": "refs/heads/develop"
+            "tracking_ref": "refs/heads/aix/jcc-qualified-recipes-20261006"
           },
           {
             "repo": "hsoliwal/com.synexia",
-            "commit": "0b8dc32b9e8a616b7b7141bbdd88722839dc64bc",
+            "commit": "bc06298218dd88f0164ed9b67e74fd8234ed70b2",
             "module": "synexia-openrewrite-recipes",
             "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3RecipeMasterySchedulePlanner.java",
             "symbol": "com.synexia.rewrite.M3RecipeMasterySchedulePlanner",
             "signatures": [],
-            "sha256": "b0a7e5236a3e2bcfd593aee081c01650d920a49cf2e7254679cf8b23e67238cb",
-            "git_blob_sha1": "7f8cc7134df7ea5d019a9a78ce3cfce7809135fc",
+            "sha256": "77af0c2460ea075d1103b551f04fb046852065f5ec05745d0647bb25dda12ce8",
+            "git_blob_sha1": "2cd0b6ec34ea12a5443f5c8959360c9e7c9e5908",
             "fingerprint": null,
             "revision_role": "pinned",
-            "tracking_ref": "refs/heads/develop"
+            "tracking_ref": "refs/heads/aix/jcc-qualified-recipes-20261006"
+          },
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "bc06298218dd88f0164ed9b67e74fd8234ed70b2",
+            "module": "synexia-openrewrite-recipes",
+            "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+            "symbol": "com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe",
+            "signatures": [],
+            "sha256": "824e51c244d70b802cfe1f95e37503925cf271e9cc703d433b537c528a129c66",
+            "git_blob_sha1": "d1c607f5d944e82d15856ec16cad9f163558aee3",
+            "fingerprint": null,
+            "revision_role": "pinned",
+            "tracking_ref": "refs/heads/aix/jcc-qualified-recipes-20261006"
+          },
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "bc06298218dd88f0164ed9b67e74fd8234ed70b2",
+            "module": "synexia-openrewrite-recipes",
+            "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3OpenRewriteRuntimeRecipeInventoryRecipe.java",
+            "symbol": "com.synexia.rewrite.M3OpenRewriteRuntimeRecipeInventoryRecipe",
+            "signatures": [],
+            "sha256": "f498b969bb9e5a79f66bb87d8232d0045144145d0167751dc342ba85b0ff4d15",
+            "git_blob_sha1": "3351a83e4429c4ac172f5af09998777c6b69c645",
+            "fingerprint": null,
+            "revision_role": "pinned",
+            "tracking_ref": "refs/heads/aix/jcc-qualified-recipes-20261006"
+          },
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "bc06298218dd88f0164ed9b67e74fd8234ed70b2",
+            "module": "synexia-openrewrite-recipes",
+            "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3OpenRewriteTranspiler.java",
+            "symbol": "com.synexia.rewrite.M3OpenRewriteTranspiler",
+            "signatures": [],
+            "sha256": "ca98114b1f46cc0858d674393f7ac86d3e92cbbb66842cc511709e725239c911",
+            "git_blob_sha1": "d06c42aa8ad27118497cd057d1aef8168e4e97f5",
+            "fingerprint": null,
+            "revision_role": "pinned",
+            "tracking_ref": "refs/heads/aix/jcc-qualified-recipes-20261006"
+          },
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "bc06298218dd88f0164ed9b67e74fd8234ed70b2",
+            "module": "synexia-openrewrite-recipes",
+            "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3RecipeCrateSerialAtomReview.java",
+            "symbol": "com.synexia.rewrite.M3RecipeCrateSerialAtomReview",
+            "signatures": [],
+            "sha256": "ead5c49ad51cf5325c5725595bf058ca73daceef092621d671aef7108f9409cc",
+            "git_blob_sha1": "7d5535a3b8deb1ad0c9f604f1f94b62194ac3e11",
+            "fingerprint": null,
+            "revision_role": "pinned",
+            "tracking_ref": "refs/heads/aix/jcc-qualified-recipes-20261006"
+          },
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "bc06298218dd88f0164ed9b67e74fd8234ed70b2",
+            "module": "synexia-openrewrite-recipes",
+            "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3SemanticCodeInventoryRecipe.java",
+            "symbol": "com.synexia.rewrite.M3SemanticCodeInventoryRecipe",
+            "signatures": [],
+            "sha256": "3a475b5a1ea098b0ce07368e4ef1080f8c888d7166ceefe85716a12d735b21cc",
+            "git_blob_sha1": "d02f33fe0be66066efb5148d0694763cfaea2392",
+            "fingerprint": null,
+            "revision_role": "pinned",
+            "tracking_ref": "refs/heads/aix/jcc-qualified-recipes-20261006"
+          },
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "bc06298218dd88f0164ed9b67e74fd8234ed70b2",
+            "module": "synexia-openrewrite-recipes",
+            "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3TranspilePass.java",
+            "symbol": "com.synexia.rewrite.M3TranspilePass",
+            "signatures": [],
+            "sha256": "f68f4db3d6a849d172f9b168e81138429a6c16aa18745c518058436e0e8efca6",
+            "git_blob_sha1": "ef8c0ed9e64adc66dbb663fd36fa3d8a7486123c",
+            "fingerprint": null,
+            "revision_role": "pinned",
+            "tracking_ref": "refs/heads/aix/jcc-qualified-recipes-20261006"
+          },
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "bc06298218dd88f0164ed9b67e74fd8234ed70b2",
+            "module": "synexia-openrewrite-recipes",
+            "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3TranspilePassResult.java",
+            "symbol": "com.synexia.rewrite.M3TranspilePassResult",
+            "signatures": [],
+            "sha256": "596c420fbc30eb07867c03d48b56af6fab1dc6891114362dabc9e0f8ff7bbb4f",
+            "git_blob_sha1": "977b8f683dd2ab76ca2256533989f12a2814f044",
+            "fingerprint": null,
+            "revision_role": "pinned",
+            "tracking_ref": "refs/heads/aix/jcc-qualified-recipes-20261006"
+          },
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "bc06298218dd88f0164ed9b67e74fd8234ed70b2",
+            "module": "synexia-openrewrite-recipes",
+            "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3TranspilePlan.java",
+            "symbol": "com.synexia.rewrite.M3TranspilePlan",
+            "signatures": [],
+            "sha256": "3073058ea8237577b4506ce3222ee83914f68c7451db83bb3f7f8792abf8d13a",
+            "git_blob_sha1": "290b11dc5be769119cdb202262f0336ee3612313",
+            "fingerprint": null,
+            "revision_role": "pinned",
+            "tracking_ref": "refs/heads/aix/jcc-qualified-recipes-20261006"
+          },
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "bc06298218dd88f0164ed9b67e74fd8234ed70b2",
+            "module": "synexia-openrewrite-recipes",
+            "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3TranspileRun.java",
+            "symbol": "com.synexia.rewrite.M3TranspileRun",
+            "signatures": [],
+            "sha256": "0be8b21e6fd0ec16b21c781e6ee9d9248fa8413a4010984246fb69cf72ffd485",
+            "git_blob_sha1": "14284e82051ac5936dd82d93881228a914906c84",
+            "fingerprint": null,
+            "revision_role": "pinned",
+            "tracking_ref": "refs/heads/aix/jcc-qualified-recipes-20261006"
+          },
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "bc06298218dd88f0164ed9b67e74fd8234ed70b2",
+            "module": "synexia-openrewrite-recipes",
+            "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3MasteryClassLoader.java",
+            "symbol": "com.synexia.rewrite.M3MasteryClassLoader",
+            "signatures": [],
+            "sha256": "e2fee64f28c2fd71db1d0f2fba8a9bf3bd4c3d210119d4e12823b7d01a98ec0a",
+            "git_blob_sha1": "b4081310a343cbd067c7deb5e907031598e82536",
+            "fingerprint": null,
+            "revision_role": "pinned",
+            "tracking_ref": "refs/heads/aix/jcc-qualified-recipes-20261006"
+          },
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "bc06298218dd88f0164ed9b67e74fd8234ed70b2",
+            "module": "synexia-openrewrite-recipes",
+            "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3MasteryContractSurface.java",
+            "symbol": "com.synexia.rewrite.M3MasteryContractSurface",
+            "signatures": [],
+            "sha256": "d825d59df9ca7839ad06af2fd5c6ae386ce373f24eecc9184d23d1fe3261d8b1",
+            "git_blob_sha1": "0d3aed858efcc450cf24822567f4ee605e84a18d",
+            "fingerprint": null,
+            "revision_role": "pinned",
+            "tracking_ref": "refs/heads/aix/jcc-qualified-recipes-20261006"
+          },
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "bc06298218dd88f0164ed9b67e74fd8234ed70b2",
+            "module": "synexia-openrewrite-recipes",
+            "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3IopPatternMechanicalPasses.java",
+            "symbol": "com.synexia.rewrite.M3IopPatternMechanicalPasses",
+            "signatures": [],
+            "sha256": "65ed79d4af2f48ba931d5eb5dee7710eb40e823f2c0cdbad06f45e228767b4eb",
+            "git_blob_sha1": "eaacc9846285222938eee09bb91827ed22020b1b",
+            "fingerprint": null,
+            "revision_role": "pinned",
+            "tracking_ref": "refs/heads/aix/jcc-qualified-recipes-20261006"
           }
         ],
         "targets": [
@@ -5148,16 +5673,16 @@
           "cached_facts": "Finite source receipts stay bound to their original source epoch and require target re-execution. The linked original receiving fixture has its own exact destination input hashes and four-test receipt; no source PASS count is transferred."
         },
         "recipe": {
-          "id": "com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe/jcc-handoff-20261005",
+          "id": "com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe/jcc-merge-recovery-20261006-mapping-v04",
           "version": "0.1.0-SNAPSHOT",
           "path": "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
           "sha256": "8015207ce502d22955f7f77697177e5939fa1e25be7cd74be89c639335ae48e6",
           "preconditions": [
-            "Exact canonical map preimage 67d40925b97a38c3c1a85f337806524ac590a540bd39647b3e4b0988f2ae3fbb.",
-            "Use the retained text transformer and sealed-install/1 replay owner for reviewed ledger bytes.",
-            "An admitted source-canon export and destination fixture/API proof remain mandatory before any capability promotion."
+            "Four exact reviewed current mapping preimages at 09075810b55229662329a158923287e8a7118f86.",
+            "Preserve all 55 ordered IDs, 53 non-JCC records, all 34 current top-level mapping objects, precompute ownership and 20 existing gates.",
+            "Require actual verified current source publication; history-only and fixture publication identities refuse."
           ],
-          "rollback": "The paired existing recipe.py sealed plan restores exact receipt-owned preimages and refuses foreign edits; no product rollback is implied."
+          "rollback": "Existing recipe.py sealed rollback restores exact receipt-owned preimages and refuses foreign edits."
         },
         "tests": [],
         "provenance": {
@@ -5166,38 +5691,486 @@
           "copied_code": false
         },
         "sync": {
-          "source_revision": "0b8dc32b9e8a616b7b7141bbdd88722839dc64bc",
-          "target_revision": "da958d00d24154c0db87beca0ec80a7df2b43b73",
+          "source_revision": "bc06298218dd88f0164ed9b67e74fd8234ed70b2",
+          "target_revision": "09075810b55229662329a158923287e8a7118f86",
           "direction": "source-to-target",
           "target_adaptations": [
             "Reuse existing destination compiler/atom owners and their narrower interfaces."
           ],
           "pending": [
-            "Seal current source recipe/template/output parity and execute its real source-canon checkpoint/history/pattern audit.",
-            "Require all eleven source verification gates at the same source execution root.",
-            "Complete source-qualified fixture applicability and receiving review. The original candidate fixture passed only its bounded tooling proof; complete owning-module 99% line/branch, image and applicable JNI gates remain.",
-            "Read back the final destination objects and PR state; no automatic cross-repository synchronization exists.",
-            "Bind candidate receiving artifacts to their actual committed objects after publication; null commit and candidate revision_role remain deliberate until separate read-back evidence exists."
+            "Complete the existing source-canon checkpoint, same-root verification gates, offline dependency/source closure and whole-repository review before source export.",
+            "Carry only source-qualified applicable behavior into existing M3 owners and execute unchanged owning-module coverage plus applicable image/runtime/JNI/platform gates.",
+            "Verify the actual resulting merge tree and its required CI, retaining every historical custody obligation; commit ancestry alone does not deliver files."
           ],
           "conflicts": []
         },
         "lineage": {
-          "previous_sources": [],
-          "previous_targets": [],
+          "previous_sources": [
+            {
+              "repo": "hsoliwal/com.synexia",
+              "commit": "0b8dc32b9e8a616b7b7141bbdd88722839dc64bc",
+              "module": "synexia-openrewrite-recipes",
+              "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3RecipeMasteryLab.java",
+              "symbol": "com.synexia.rewrite.M3RecipeMasteryLab",
+              "signatures": [],
+              "sha256": "0054ddf028c5a83c270c1a53795373c7cd8fa77395d23be7fd70424b644b0a3e",
+              "git_blob_sha1": "ee8adf451105c34d0afa228fe05b7dabb3b1e264",
+              "fingerprint": null,
+              "revision_role": "pinned",
+              "tracking_ref": "refs/heads/develop"
+            },
+            {
+              "repo": "hsoliwal/com.synexia",
+              "commit": "0b8dc32b9e8a616b7b7141bbdd88722839dc64bc",
+              "module": "synexia-openrewrite-recipes",
+              "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3RecipeMasterySchedulePlanner.java",
+              "symbol": "com.synexia.rewrite.M3RecipeMasterySchedulePlanner",
+              "signatures": [],
+              "sha256": "b0a7e5236a3e2bcfd593aee081c01650d920a49cf2e7254679cf8b23e67238cb",
+              "git_blob_sha1": "7f8cc7134df7ea5d019a9a78ce3cfce7809135fc",
+              "fingerprint": null,
+              "revision_role": "pinned",
+              "tracking_ref": "refs/heads/develop"
+            },
+            {
+              "repo": "hsoliwal/com.synexia",
+              "commit": "d1cf2d81ee74a4a837f78e0cd2e4ccae2b3d4906",
+              "module": "synexia-openrewrite-recipes",
+              "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3RecipeMasteryLab.java",
+              "symbol": "com.synexia.rewrite.M3RecipeMasteryLab",
+              "signatures": [],
+              "sha256": "0054ddf028c5a83c270c1a53795373c7cd8fa77395d23be7fd70424b644b0a3e",
+              "git_blob_sha1": "ee8adf451105c34d0afa228fe05b7dabb3b1e264",
+              "fingerprint": null,
+              "revision_role": "pinned",
+              "tracking_ref": "refs/heads/aix/jcc-canonical-integration-20261005"
+            },
+            {
+              "repo": "hsoliwal/com.synexia",
+              "commit": "d1cf2d81ee74a4a837f78e0cd2e4ccae2b3d4906",
+              "module": "synexia-openrewrite-recipes",
+              "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3RecipeMasterySchedulePlanner.java",
+              "symbol": "com.synexia.rewrite.M3RecipeMasterySchedulePlanner",
+              "signatures": [],
+              "sha256": "b0a7e5236a3e2bcfd593aee081c01650d920a49cf2e7254679cf8b23e67238cb",
+              "git_blob_sha1": "7f8cc7134df7ea5d019a9a78ce3cfce7809135fc",
+              "fingerprint": null,
+              "revision_role": "pinned",
+              "tracking_ref": "refs/heads/aix/jcc-canonical-integration-20261005"
+            },
+            {
+              "repo": "hsoliwal/com.synexia",
+              "commit": "d1cf2d81ee74a4a837f78e0cd2e4ccae2b3d4906",
+              "module": "synexia-openrewrite-recipes",
+              "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+              "symbol": "com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe",
+              "signatures": [],
+              "sha256": "fc13f8457af623c610651e33507aef7d74d26a3ca31f64061136f8b6540cb729",
+              "git_blob_sha1": "212086793a5dd621f4e13d096d805a74bfc04782",
+              "fingerprint": null,
+              "revision_role": "pinned",
+              "tracking_ref": "refs/heads/aix/jcc-canonical-integration-20261005"
+            },
+            {
+              "repo": "hsoliwal/com.synexia",
+              "commit": "d1cf2d81ee74a4a837f78e0cd2e4ccae2b3d4906",
+              "module": "synexia-openrewrite-recipes",
+              "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3OpenRewriteRuntimeRecipeInventoryRecipe.java",
+              "symbol": "com.synexia.rewrite.M3OpenRewriteRuntimeRecipeInventoryRecipe",
+              "signatures": [],
+              "sha256": "337de272aaf58c3421b1d68870e3e83c86c629ec8d23f418e2c6129db08c99db",
+              "git_blob_sha1": "18f8dd15fb8dcb58873977ac842f662bec303908",
+              "fingerprint": null,
+              "revision_role": "pinned",
+              "tracking_ref": "refs/heads/aix/jcc-canonical-integration-20261005"
+            },
+            {
+              "repo": "hsoliwal/com.synexia",
+              "commit": "d1cf2d81ee74a4a837f78e0cd2e4ccae2b3d4906",
+              "module": "synexia-openrewrite-recipes",
+              "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3OpenRewriteTranspiler.java",
+              "symbol": "com.synexia.rewrite.M3OpenRewriteTranspiler",
+              "signatures": [],
+              "sha256": "cc4e0b24f50b0a6f462c8aa1ff1ddee2eea67d6043158b9e7a8f5a1e91b9e4c9",
+              "git_blob_sha1": "fd2134586b5369a0dcd62d207dbc6208168dd72f",
+              "fingerprint": null,
+              "revision_role": "pinned",
+              "tracking_ref": "refs/heads/aix/jcc-canonical-integration-20261005"
+            },
+            {
+              "repo": "hsoliwal/com.synexia",
+              "commit": "d1cf2d81ee74a4a837f78e0cd2e4ccae2b3d4906",
+              "module": "synexia-openrewrite-recipes",
+              "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3RecipeCrateSerialAtomReview.java",
+              "symbol": "com.synexia.rewrite.M3RecipeCrateSerialAtomReview",
+              "signatures": [],
+              "sha256": "b11640b4d97f95e3c12299f85cf0dbba081ae70b7b6c2c4ff8b2135446be1337",
+              "git_blob_sha1": "1b4edfccece8a7e9bb5df3212e3061470f7c13d9",
+              "fingerprint": null,
+              "revision_role": "pinned",
+              "tracking_ref": "refs/heads/aix/jcc-canonical-integration-20261005"
+            },
+            {
+              "repo": "hsoliwal/com.synexia",
+              "commit": "d1cf2d81ee74a4a837f78e0cd2e4ccae2b3d4906",
+              "module": "synexia-openrewrite-recipes",
+              "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3SemanticCodeInventoryRecipe.java",
+              "symbol": "com.synexia.rewrite.M3SemanticCodeInventoryRecipe",
+              "signatures": [],
+              "sha256": "62be21443ad260be15f7c78ed6ceafc36cec91ba3fc0c6c7f2574b7413d095ce",
+              "git_blob_sha1": "403cf572b2eefe511d5900803098b6c782bb7b48",
+              "fingerprint": null,
+              "revision_role": "pinned",
+              "tracking_ref": "refs/heads/aix/jcc-canonical-integration-20261005"
+            },
+            {
+              "repo": "hsoliwal/com.synexia",
+              "commit": "d1cf2d81ee74a4a837f78e0cd2e4ccae2b3d4906",
+              "module": "synexia-openrewrite-recipes",
+              "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3TranspilePass.java",
+              "symbol": "com.synexia.rewrite.M3TranspilePass",
+              "signatures": [],
+              "sha256": "f68f4db3d6a849d172f9b168e81138429a6c16aa18745c518058436e0e8efca6",
+              "git_blob_sha1": "ef8c0ed9e64adc66dbb663fd36fa3d8a7486123c",
+              "fingerprint": null,
+              "revision_role": "pinned",
+              "tracking_ref": "refs/heads/aix/jcc-canonical-integration-20261005"
+            },
+            {
+              "repo": "hsoliwal/com.synexia",
+              "commit": "d1cf2d81ee74a4a837f78e0cd2e4ccae2b3d4906",
+              "module": "synexia-openrewrite-recipes",
+              "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3TranspilePassResult.java",
+              "symbol": "com.synexia.rewrite.M3TranspilePassResult",
+              "signatures": [],
+              "sha256": "596c420fbc30eb07867c03d48b56af6fab1dc6891114362dabc9e0f8ff7bbb4f",
+              "git_blob_sha1": "977b8f683dd2ab76ca2256533989f12a2814f044",
+              "fingerprint": null,
+              "revision_role": "pinned",
+              "tracking_ref": "refs/heads/aix/jcc-canonical-integration-20261005"
+            },
+            {
+              "repo": "hsoliwal/com.synexia",
+              "commit": "d1cf2d81ee74a4a837f78e0cd2e4ccae2b3d4906",
+              "module": "synexia-openrewrite-recipes",
+              "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3TranspilePlan.java",
+              "symbol": "com.synexia.rewrite.M3TranspilePlan",
+              "signatures": [],
+              "sha256": "3073058ea8237577b4506ce3222ee83914f68c7451db83bb3f7f8792abf8d13a",
+              "git_blob_sha1": "290b11dc5be769119cdb202262f0336ee3612313",
+              "fingerprint": null,
+              "revision_role": "pinned",
+              "tracking_ref": "refs/heads/aix/jcc-canonical-integration-20261005"
+            },
+            {
+              "repo": "hsoliwal/com.synexia",
+              "commit": "d1cf2d81ee74a4a837f78e0cd2e4ccae2b3d4906",
+              "module": "synexia-openrewrite-recipes",
+              "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3TranspileRun.java",
+              "symbol": "com.synexia.rewrite.M3TranspileRun",
+              "signatures": [],
+              "sha256": "0be8b21e6fd0ec16b21c781e6ee9d9248fa8413a4010984246fb69cf72ffd485",
+              "git_blob_sha1": "14284e82051ac5936dd82d93881228a914906c84",
+              "fingerprint": null,
+              "revision_role": "pinned",
+              "tracking_ref": "refs/heads/aix/jcc-canonical-integration-20261005"
+            },
+            {
+              "repo": "hsoliwal/com.synexia",
+              "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
+              "module": "synexia-openrewrite-recipes",
+              "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3RecipeMasteryLab.java",
+              "symbol": "com.synexia.rewrite.M3RecipeMasteryLab",
+              "signatures": [],
+              "sha256": "f6d5ce57ca487bb56d412c0da39bd5ac8956c64aafb056231e67e331d22caeae",
+              "git_blob_sha1": "0623297a95e17528b62129b207661b4962752393",
+              "fingerprint": null,
+              "revision_role": "pinned",
+              "tracking_ref": "refs/heads/aix/jcc-source-merge-recovery-20261005"
+            },
+            {
+              "repo": "hsoliwal/com.synexia",
+              "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
+              "module": "synexia-openrewrite-recipes",
+              "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3RecipeMasterySchedulePlanner.java",
+              "symbol": "com.synexia.rewrite.M3RecipeMasterySchedulePlanner",
+              "signatures": [],
+              "sha256": "b0a7e5236a3e2bcfd593aee081c01650d920a49cf2e7254679cf8b23e67238cb",
+              "git_blob_sha1": "7f8cc7134df7ea5d019a9a78ce3cfce7809135fc",
+              "fingerprint": null,
+              "revision_role": "pinned",
+              "tracking_ref": "refs/heads/aix/jcc-source-merge-recovery-20261005"
+            },
+            {
+              "repo": "hsoliwal/com.synexia",
+              "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
+              "module": "synexia-openrewrite-recipes",
+              "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+              "symbol": "com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe",
+              "signatures": [],
+              "sha256": "adee46f08cd93edb1f97c30be904d0b686cc6426f56c1fae0ee6d670693526df",
+              "git_blob_sha1": "dad21d3e762dabdfeb71f2d8815c25b401079994",
+              "fingerprint": null,
+              "revision_role": "pinned",
+              "tracking_ref": "refs/heads/aix/jcc-source-merge-recovery-20261005"
+            },
+            {
+              "repo": "hsoliwal/com.synexia",
+              "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
+              "module": "synexia-openrewrite-recipes",
+              "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3OpenRewriteRuntimeRecipeInventoryRecipe.java",
+              "symbol": "com.synexia.rewrite.M3OpenRewriteRuntimeRecipeInventoryRecipe",
+              "signatures": [],
+              "sha256": "f498b969bb9e5a79f66bb87d8232d0045144145d0167751dc342ba85b0ff4d15",
+              "git_blob_sha1": "3351a83e4429c4ac172f5af09998777c6b69c645",
+              "fingerprint": null,
+              "revision_role": "pinned",
+              "tracking_ref": "refs/heads/aix/jcc-source-merge-recovery-20261005"
+            },
+            {
+              "repo": "hsoliwal/com.synexia",
+              "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
+              "module": "synexia-openrewrite-recipes",
+              "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3OpenRewriteTranspiler.java",
+              "symbol": "com.synexia.rewrite.M3OpenRewriteTranspiler",
+              "signatures": [],
+              "sha256": "e86f43f32599de822191a233f1e3802e4f8120cd415ee2c90bcf67a56d4e6951",
+              "git_blob_sha1": "d1c3303969a0eae68d571aa12157ae23010e36af",
+              "fingerprint": null,
+              "revision_role": "pinned",
+              "tracking_ref": "refs/heads/aix/jcc-source-merge-recovery-20261005"
+            },
+            {
+              "repo": "hsoliwal/com.synexia",
+              "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
+              "module": "synexia-openrewrite-recipes",
+              "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3RecipeCrateSerialAtomReview.java",
+              "symbol": "com.synexia.rewrite.M3RecipeCrateSerialAtomReview",
+              "signatures": [],
+              "sha256": "ead5c49ad51cf5325c5725595bf058ca73daceef092621d671aef7108f9409cc",
+              "git_blob_sha1": "7d5535a3b8deb1ad0c9f604f1f94b62194ac3e11",
+              "fingerprint": null,
+              "revision_role": "pinned",
+              "tracking_ref": "refs/heads/aix/jcc-source-merge-recovery-20261005"
+            },
+            {
+              "repo": "hsoliwal/com.synexia",
+              "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
+              "module": "synexia-openrewrite-recipes",
+              "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3SemanticCodeInventoryRecipe.java",
+              "symbol": "com.synexia.rewrite.M3SemanticCodeInventoryRecipe",
+              "signatures": [],
+              "sha256": "3a475b5a1ea098b0ce07368e4ef1080f8c888d7166ceefe85716a12d735b21cc",
+              "git_blob_sha1": "d02f33fe0be66066efb5148d0694763cfaea2392",
+              "fingerprint": null,
+              "revision_role": "pinned",
+              "tracking_ref": "refs/heads/aix/jcc-source-merge-recovery-20261005"
+            },
+            {
+              "repo": "hsoliwal/com.synexia",
+              "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
+              "module": "synexia-openrewrite-recipes",
+              "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3TranspilePass.java",
+              "symbol": "com.synexia.rewrite.M3TranspilePass",
+              "signatures": [],
+              "sha256": "f68f4db3d6a849d172f9b168e81138429a6c16aa18745c518058436e0e8efca6",
+              "git_blob_sha1": "ef8c0ed9e64adc66dbb663fd36fa3d8a7486123c",
+              "fingerprint": null,
+              "revision_role": "pinned",
+              "tracking_ref": "refs/heads/aix/jcc-source-merge-recovery-20261005"
+            },
+            {
+              "repo": "hsoliwal/com.synexia",
+              "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
+              "module": "synexia-openrewrite-recipes",
+              "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3TranspilePassResult.java",
+              "symbol": "com.synexia.rewrite.M3TranspilePassResult",
+              "signatures": [],
+              "sha256": "596c420fbc30eb07867c03d48b56af6fab1dc6891114362dabc9e0f8ff7bbb4f",
+              "git_blob_sha1": "977b8f683dd2ab76ca2256533989f12a2814f044",
+              "fingerprint": null,
+              "revision_role": "pinned",
+              "tracking_ref": "refs/heads/aix/jcc-source-merge-recovery-20261005"
+            },
+            {
+              "repo": "hsoliwal/com.synexia",
+              "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
+              "module": "synexia-openrewrite-recipes",
+              "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3TranspilePlan.java",
+              "symbol": "com.synexia.rewrite.M3TranspilePlan",
+              "signatures": [],
+              "sha256": "3073058ea8237577b4506ce3222ee83914f68c7451db83bb3f7f8792abf8d13a",
+              "git_blob_sha1": "290b11dc5be769119cdb202262f0336ee3612313",
+              "fingerprint": null,
+              "revision_role": "pinned",
+              "tracking_ref": "refs/heads/aix/jcc-source-merge-recovery-20261005"
+            },
+            {
+              "repo": "hsoliwal/com.synexia",
+              "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
+              "module": "synexia-openrewrite-recipes",
+              "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3TranspileRun.java",
+              "symbol": "com.synexia.rewrite.M3TranspileRun",
+              "signatures": [],
+              "sha256": "0be8b21e6fd0ec16b21c781e6ee9d9248fa8413a4010984246fb69cf72ffd485",
+              "git_blob_sha1": "14284e82051ac5936dd82d93881228a914906c84",
+              "fingerprint": null,
+              "revision_role": "pinned",
+              "tracking_ref": "refs/heads/aix/jcc-source-merge-recovery-20261005"
+            },
+            {
+              "repo": "hsoliwal/com.synexia",
+              "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
+              "module": "synexia-openrewrite-recipes",
+              "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3MasteryClassLoader.java",
+              "symbol": "com.synexia.rewrite.M3MasteryClassLoader",
+              "signatures": [],
+              "sha256": "e2fee64f28c2fd71db1d0f2fba8a9bf3bd4c3d210119d4e12823b7d01a98ec0a",
+              "git_blob_sha1": "b4081310a343cbd067c7deb5e907031598e82536",
+              "fingerprint": null,
+              "revision_role": "pinned",
+              "tracking_ref": "refs/heads/aix/jcc-source-merge-recovery-20261005"
+            },
+            {
+              "repo": "hsoliwal/com.synexia",
+              "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
+              "module": "synexia-openrewrite-recipes",
+              "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3MasteryContractSurface.java",
+              "symbol": "com.synexia.rewrite.M3MasteryContractSurface",
+              "signatures": [],
+              "sha256": "d825d59df9ca7839ad06af2fd5c6ae386ce373f24eecc9184d23d1fe3261d8b1",
+              "git_blob_sha1": "0d3aed858efcc450cf24822567f4ee605e84a18d",
+              "fingerprint": null,
+              "revision_role": "pinned",
+              "tracking_ref": "refs/heads/aix/jcc-source-merge-recovery-20261005"
+            }
+          ],
+          "previous_targets": [
+            {
+              "repo": "hsoliwal/M3jdk21",
+              "commit": "da958d00d24154c0db87beca0ec80a7df2b43b73",
+              "module": "m3/tooling/migration-recipes",
+              "path": "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/M3Java21ConvergenceRecipe.java",
+              "symbol": "com.m3.rewrite.M3Java21ConvergenceRecipe",
+              "signatures": [
+                "java.util.List<org.openrewrite.Recipe> getRecipeList()"
+              ],
+              "sha256": "15e44e92ba509b405ed2e12ddc4c6bf2a427f59cdca95d7e8e960357732266e9",
+              "git_blob_sha1": "2f59c7f0756e5618343a88161040201ccb1af39d",
+              "fingerprint": null,
+              "revision_role": "pinned",
+              "tracking_ref": "refs/heads/master"
+            },
+            {
+              "repo": "hsoliwal/M3jdk21",
+              "commit": "da958d00d24154c0db87beca0ec80a7df2b43b73",
+              "module": "m3/tooling/migration-recipes",
+              "path": "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3PureIntConvergenceRecipe.java",
+              "symbol": "com.m3.rewrite.atom.M3PureIntConvergenceRecipe",
+              "signatures": [
+                "java.util.List<org.openrewrite.Recipe> getRecipeList()"
+              ],
+              "sha256": "ba078715aa83969fc6c04fcd0d9d226ff0d0ad7f46f38ebede6f5b312504e534",
+              "git_blob_sha1": "a1a745a4ea8617937d8ecbb61eb17973dac0948f",
+              "fingerprint": null,
+              "revision_role": "pinned",
+              "tracking_ref": "refs/heads/master"
+            },
+            {
+              "repo": "hsoliwal/M3jdk21",
+              "commit": "da958d00d24154c0db87beca0ec80a7df2b43b73",
+              "module": "m3/tooling/migration-recipes",
+              "path": "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3PureIntAtomEligibility.java",
+              "symbol": "com.m3.rewrite.atom.M3PureIntAtomEligibility",
+              "signatures": [
+                "package-private static boolean eligible(J.MethodDeclaration)",
+                "package-private static boolean atomized(J.MethodDeclaration)"
+              ],
+              "sha256": "ea31026be2f699923e4dfcc6fa906cee77eb5a46bdb9a32948948bfdfe19cebb",
+              "git_blob_sha1": "0041adab5913304874f5063fc2b982ff3cc1e065",
+              "fingerprint": null,
+              "revision_role": "pinned",
+              "tracking_ref": "refs/heads/master"
+            },
+            {
+              "repo": "hsoliwal/M3jdk21",
+              "commit": "da958d00d24154c0db87beca0ec80a7df2b43b73",
+              "module": "m3/tooling/migration-recipes",
+              "path": "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/atom/MemJava.java",
+              "symbol": "com.m3.rewrite.atom.MemJava",
+              "signatures": [
+                "package-private static java.lang.ClassLoader compile(java.util.Map<String,String>)"
+              ],
+              "sha256": "c2a204144a4ff7fe2f4abfa151a744e7114961b83b7f006e019e595f4569e238",
+              "git_blob_sha1": "341b55a500964906d15c88ccef9f3e05f2a1c025",
+              "fingerprint": null,
+              "revision_role": "pinned",
+              "tracking_ref": "refs/heads/master"
+            },
+            {
+              "repo": "hsoliwal/M3jdk21",
+              "commit": "da958d00d24154c0db87beca0ec80a7df2b43b73",
+              "module": "m3/tooling/migration-recipes",
+              "path": "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/atom/M3IntRecipeProjectTest.java",
+              "symbol": "com.m3.rewrite.atom.M3IntRecipeProjectTest",
+              "signatures": [
+                "package-private JUnit proof owner; no product API"
+              ],
+              "sha256": "004de5f30e2a3c54d439b36493e8733dc73fdae8a288ba18238423ded5afcbed",
+              "git_blob_sha1": "d3cd2a28b3635340c9035b6287650bdf44f975ac",
+              "fingerprint": null,
+              "revision_role": "pinned",
+              "tracking_ref": "refs/heads/master"
+            },
+            {
+              "repo": "hsoliwal/M3jdk21",
+              "commit": null,
+              "module": "m3/tooling/migration-recipes",
+              "path": "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/atom/JccReceivingFixtureTest.java",
+              "symbol": "com.m3.rewrite.atom.JccReceivingFixtureTest",
+              "signatures": [
+                "void eachScheduleCompilesAndMatchesFrozenOraclesAtEveryIntermediate() throws java.lang.Exception",
+                "void actualCanonicalCompositeAgreesWithItsDeclaredChildrenAndFreshReplay() throws java.lang.Exception",
+                "void opaqueStringObserversAndIndependentClassStateRemainIntact() throws java.lang.Exception",
+                "void compilerAndBothObservationOraclesRejectCuratedMutants() throws java.lang.Exception"
+              ],
+              "sha256": "b034673ea218515cc12ab0b4173eabf06732f29e8a456be45b5ba0d00489ab39",
+              "git_blob_sha1": "3332012bbd7f3842279f40fdf0f1eaf123392957",
+              "fingerprint": null,
+              "revision_role": "candidate"
+            },
+            {
+              "repo": "hsoliwal/M3jdk21",
+              "commit": "df06cdee5a8526f573b3ad89622824d0b49e2f25",
+              "module": "m3/tooling/migration-recipes",
+              "path": "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/atom/JccReceivingFixtureTest.java",
+              "symbol": "com.m3.rewrite.atom.JccReceivingFixtureTest",
+              "signatures": [
+                "void eachScheduleCompilesAndMatchesFrozenOraclesAtEveryIntermediate() throws java.lang.Exception",
+                "void actualCanonicalCompositeAgreesWithItsDeclaredChildrenAndFreshReplay() throws java.lang.Exception",
+                "void opaqueStringObserversAndIndependentClassStateRemainIntact() throws java.lang.Exception",
+                "void compilerAndBothObservationOraclesRejectCuratedMutants() throws java.lang.Exception"
+              ],
+              "sha256": "b034673ea218515cc12ab0b4173eabf06732f29e8a456be45b5ba0d00489ab39",
+              "git_blob_sha1": "3332012bbd7f3842279f40fdf0f1eaf123392957",
+              "fingerprint": null,
+              "revision_role": "pinned"
+            }
+          ],
           "supersedes": []
         },
         "source_state": "partial",
-        "observation": "Review and explicit root coverage obligations: m3/docs/jcc-source-handoff.md and m3/migration/evidence/jcc-handoff-20261005/source-destination-bindings.json. Ledger replay tests are separate from capability acceptance; tests is empty intentionally. Independently authored receiving-fixture evidence is linked under m3/migration/evidence/jcc-handoff-20261005/source-destination-bindings.json#independent_receiving_fixture; it does not promote this blocked capability."
+        "observation": "Current source bc06298218dd88f0164ed9b67e74fd8234ed70b2 / root a72565e0e67f330f12c712dcc7a3fcbe1d80d24e binds 14 laboratory and 6 Java/JNI owners. Historical 0b/d1/0c53 and donor 4990 results retain their original epochs. The 443 restored receiving files and retention checks establish artifact custody only. Current source execution receipts are separately linked in m3/migration/evidence/jcc-handoff-20261005/source-destination-bindings.json; no rebuilt-JDK acceptance or Synexia runtime dependency is introduced."
       },
       {
         "id": "synexia.jcc-java-jni-regression",
         "kind": "pending",
         "status": "blocked",
-        "reason": "Java/regex/opaque-source/JNI regression applicability remains unreviewed against the destination's narrower domain. No destination JNI or regex implementation is inferred from source receipts.",
+        "reason": "Current 20-owner source publication is bound after exact readback; historical source and receiving work is retained. Source export, whole owning-module coverage and applicable M3JDK21 runtime/JNI/platform gates remain unadmitted.",
         "sources": [
           {
             "repo": "hsoliwal/com.synexia",
-            "commit": "0b8dc32b9e8a616b7b7141bbdd88722839dc64bc",
+            "commit": "bc06298218dd88f0164ed9b67e74fd8234ed70b2",
             "module": "synexia-openrewrite-recipes",
             "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3AtomPatternSignalChainRecipe.java",
             "symbol": "com.synexia.rewrite.M3AtomPatternSignalChainRecipe",
@@ -5206,11 +6179,11 @@
             "git_blob_sha1": "09df87a872817787fc8607bf11805cfa26c53aed",
             "fingerprint": null,
             "revision_role": "pinned",
-            "tracking_ref": "refs/heads/develop"
+            "tracking_ref": "refs/heads/aix/jcc-qualified-recipes-20261006"
           },
           {
             "repo": "hsoliwal/com.synexia",
-            "commit": "0b8dc32b9e8a616b7b7141bbdd88722839dc64bc",
+            "commit": "bc06298218dd88f0164ed9b67e74fd8234ed70b2",
             "module": "synexia-openrewrite-recipes",
             "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3CodeSignalChain.java",
             "symbol": "com.synexia.rewrite.M3CodeSignalChain",
@@ -5219,7 +6192,59 @@
             "git_blob_sha1": "2ecb4c0548f8864f4a71936531e0cd1a4cf0b2b6",
             "fingerprint": null,
             "revision_role": "pinned",
-            "tracking_ref": "refs/heads/develop"
+            "tracking_ref": "refs/heads/aix/jcc-qualified-recipes-20261006"
+          },
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "bc06298218dd88f0164ed9b67e74fd8234ed70b2",
+            "module": "m3-fast-search",
+            "path": "m3-fast-search/src/main/java/com/synexia/m3/search/CompetitiveProblemReview.java",
+            "symbol": "com.synexia.m3.search.CompetitiveProblemReview",
+            "signatures": [],
+            "sha256": "83dad41fa4ce50b70f1e2e6800241b69b5136807902fd2fc6a6d024024894ac4",
+            "git_blob_sha1": "baa84c13b7fd330eab6b1832dab1b4b523bfd8ce",
+            "fingerprint": null,
+            "revision_role": "pinned",
+            "tracking_ref": "refs/heads/aix/jcc-qualified-recipes-20261006"
+          },
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "bc06298218dd88f0164ed9b67e74fd8234ed70b2",
+            "module": "synexia-algo",
+            "path": "synexia-algo/src/main/java/com/synexia/algorithms/corpus/ChallengeDonorPassLedger.java",
+            "symbol": "com.synexia.algorithms.corpus.ChallengeDonorPassLedger",
+            "signatures": [],
+            "sha256": "a089808e8563bac1f2d57aa1cc9f131e609c1d01ffcb1af8b302579adb00c346",
+            "git_blob_sha1": "074dd60249893e4c606e68823fdebf191f98f269",
+            "fingerprint": null,
+            "revision_role": "pinned",
+            "tracking_ref": "refs/heads/aix/jcc-qualified-recipes-20261006"
+          },
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "bc06298218dd88f0164ed9b67e74fd8234ed70b2",
+            "module": "synexia-algo",
+            "path": "synexia-algo/src/main/java/com/synexia/algorithms/corpus/CompetitiveCapabilityPlanIndex.java",
+            "symbol": "com.synexia.algorithms.corpus.CompetitiveCapabilityPlanIndex",
+            "signatures": [],
+            "sha256": "59742f333ab2a04c3cd5b12061bff182e9a2114549117ce323928d391c10fafa",
+            "git_blob_sha1": "e4e55dbc3f9255ad71dfa391c43c352b31472622",
+            "fingerprint": null,
+            "revision_role": "pinned",
+            "tracking_ref": "refs/heads/aix/jcc-qualified-recipes-20261006"
+          },
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "bc06298218dd88f0164ed9b67e74fd8234ed70b2",
+            "module": "synexia-donor-inventory",
+            "path": "synexia-donor-inventory/src/main/java/com/synexia/donor/DonorMechanicalShapeCatalog.java",
+            "symbol": "com.synexia.donor.DonorMechanicalShapeCatalog",
+            "signatures": [],
+            "sha256": "32ad3ecb53a611de29ce8bdcf4079d77576b3b6d5a56a847b67c9cbd5c91b326",
+            "git_blob_sha1": "108514ff8960adc20c9fd88d4fd01ba55cc2f3c8",
+            "fingerprint": null,
+            "revision_role": "pinned",
+            "tracking_ref": "refs/heads/aix/jcc-qualified-recipes-20261006"
           }
         ],
         "targets": [],
@@ -5272,16 +6297,16 @@
           "cached_facts": "Finite source receipts stay bound to their original source epoch and require target re-execution."
         },
         "recipe": {
-          "id": "com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe/jcc-handoff-20261005",
+          "id": "com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe/jcc-merge-recovery-20261006-mapping-v04",
           "version": "0.1.0-SNAPSHOT",
           "path": "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
           "sha256": "8015207ce502d22955f7f77697177e5939fa1e25be7cd74be89c639335ae48e6",
           "preconditions": [
-            "Exact canonical map preimage 67d40925b97a38c3c1a85f337806524ac590a540bd39647b3e4b0988f2ae3fbb.",
-            "Use the retained text transformer and sealed-install/1 replay owner for reviewed ledger bytes.",
-            "An admitted source-canon export and destination fixture/API proof remain mandatory before any capability promotion."
+            "Four exact reviewed current mapping preimages at 09075810b55229662329a158923287e8a7118f86.",
+            "Preserve all 55 ordered IDs, 53 non-JCC records, all 34 current top-level mapping objects, precompute ownership and 20 existing gates.",
+            "Require actual verified current source publication; history-only and fixture publication identities refuse."
           ],
-          "rollback": "The paired existing recipe.py sealed plan restores exact receipt-owned preimages and refuses foreign edits; no product rollback is implied."
+          "rollback": "Existing recipe.py sealed rollback restores exact receipt-owned preimages and refuses foreign edits."
         },
         "tests": [],
         "provenance": {
@@ -5290,30 +6315,671 @@
           "copied_code": false
         },
         "sync": {
-          "source_revision": "0b8dc32b9e8a616b7b7141bbdd88722839dc64bc",
-          "target_revision": "da958d00d24154c0db87beca0ec80a7df2b43b73",
+          "source_revision": "bc06298218dd88f0164ed9b67e74fd8234ed70b2",
+          "target_revision": "09075810b55229662329a158923287e8a7118f86",
           "direction": "source-to-target",
           "target_adaptations": [
             "Reuse existing destination compiler/atom owners and their narrower interfaces."
           ],
           "pending": [
-            "Seal current source recipe/template/output parity and execute its real source-canon checkpoint/history/pattern audit.",
-            "Require all eleven source verification gates at the same source execution root.",
-            "Review and materialize only applicable fixtures through existing destination owners; rerun exact target proof and required module/image/JNI gates.",
-            "Read back the final destination objects and PR state; no automatic cross-repository synchronization exists."
+            "Complete the existing source-canon checkpoint, same-root verification gates, offline dependency/source closure and whole-repository review before source export.",
+            "Carry only source-qualified applicable behavior into existing M3 owners and execute unchanged owning-module coverage plus applicable image/runtime/JNI/platform gates.",
+            "Verify the actual resulting merge tree and its required CI, retaining every historical custody obligation; commit ancestry alone does not deliver files."
           ],
           "conflicts": []
         },
         "lineage": {
-          "previous_sources": [],
+          "previous_sources": [
+            {
+              "repo": "hsoliwal/com.synexia",
+              "commit": "0b8dc32b9e8a616b7b7141bbdd88722839dc64bc",
+              "module": "synexia-openrewrite-recipes",
+              "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3AtomPatternSignalChainRecipe.java",
+              "symbol": "com.synexia.rewrite.M3AtomPatternSignalChainRecipe",
+              "signatures": [],
+              "sha256": "876929d5e8caa03ea1e3af6d8d1d4d575d15aee3014a5f2ca425f4786eda5e98",
+              "git_blob_sha1": "09df87a872817787fc8607bf11805cfa26c53aed",
+              "fingerprint": null,
+              "revision_role": "pinned",
+              "tracking_ref": "refs/heads/develop"
+            },
+            {
+              "repo": "hsoliwal/com.synexia",
+              "commit": "0b8dc32b9e8a616b7b7141bbdd88722839dc64bc",
+              "module": "synexia-openrewrite-recipes",
+              "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3CodeSignalChain.java",
+              "symbol": "com.synexia.rewrite.M3CodeSignalChain",
+              "signatures": [],
+              "sha256": "a15825aef2a00641d74fba761c4858f449d6924a1286aa1eb71b1d81932351fa",
+              "git_blob_sha1": "2ecb4c0548f8864f4a71936531e0cd1a4cf0b2b6",
+              "fingerprint": null,
+              "revision_role": "pinned",
+              "tracking_ref": "refs/heads/develop"
+            },
+            {
+              "repo": "hsoliwal/com.synexia",
+              "commit": "d1cf2d81ee74a4a837f78e0cd2e4ccae2b3d4906",
+              "module": "synexia-openrewrite-recipes",
+              "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3AtomPatternSignalChainRecipe.java",
+              "symbol": "com.synexia.rewrite.M3AtomPatternSignalChainRecipe",
+              "signatures": [],
+              "sha256": "876929d5e8caa03ea1e3af6d8d1d4d575d15aee3014a5f2ca425f4786eda5e98",
+              "git_blob_sha1": "09df87a872817787fc8607bf11805cfa26c53aed",
+              "fingerprint": null,
+              "revision_role": "pinned",
+              "tracking_ref": "refs/heads/aix/jcc-canonical-integration-20261005"
+            },
+            {
+              "repo": "hsoliwal/com.synexia",
+              "commit": "d1cf2d81ee74a4a837f78e0cd2e4ccae2b3d4906",
+              "module": "synexia-openrewrite-recipes",
+              "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3CodeSignalChain.java",
+              "symbol": "com.synexia.rewrite.M3CodeSignalChain",
+              "signatures": [],
+              "sha256": "a15825aef2a00641d74fba761c4858f449d6924a1286aa1eb71b1d81932351fa",
+              "git_blob_sha1": "2ecb4c0548f8864f4a71936531e0cd1a4cf0b2b6",
+              "fingerprint": null,
+              "revision_role": "pinned",
+              "tracking_ref": "refs/heads/aix/jcc-canonical-integration-20261005"
+            },
+            {
+              "repo": "hsoliwal/com.synexia",
+              "commit": "d1cf2d81ee74a4a837f78e0cd2e4ccae2b3d4906",
+              "module": "m3-fast-search",
+              "path": "m3-fast-search/src/main/java/com/synexia/m3/search/CompetitiveProblemReview.java",
+              "symbol": "com.synexia.m3.search.CompetitiveProblemReview",
+              "signatures": [],
+              "sha256": "c0f9acc4a64229fb911a5a8e0b211473b058fe67739fc38fca72a4c49c9e4046",
+              "git_blob_sha1": "f460f84bc5c0dc1a0970af3c6081c23875aa4067",
+              "fingerprint": null,
+              "revision_role": "pinned",
+              "tracking_ref": "refs/heads/aix/jcc-canonical-integration-20261005"
+            },
+            {
+              "repo": "hsoliwal/com.synexia",
+              "commit": "d1cf2d81ee74a4a837f78e0cd2e4ccae2b3d4906",
+              "module": "synexia-algo",
+              "path": "synexia-algo/src/main/java/com/synexia/algorithms/corpus/ChallengeDonorPassLedger.java",
+              "symbol": "com.synexia.algorithms.corpus.ChallengeDonorPassLedger",
+              "signatures": [],
+              "sha256": "a089808e8563bac1f2d57aa1cc9f131e609c1d01ffcb1af8b302579adb00c346",
+              "git_blob_sha1": "074dd60249893e4c606e68823fdebf191f98f269",
+              "fingerprint": null,
+              "revision_role": "pinned",
+              "tracking_ref": "refs/heads/aix/jcc-canonical-integration-20261005"
+            },
+            {
+              "repo": "hsoliwal/com.synexia",
+              "commit": "d1cf2d81ee74a4a837f78e0cd2e4ccae2b3d4906",
+              "module": "synexia-algo",
+              "path": "synexia-algo/src/main/java/com/synexia/algorithms/corpus/CompetitiveCapabilityPlanIndex.java",
+              "symbol": "com.synexia.algorithms.corpus.CompetitiveCapabilityPlanIndex",
+              "signatures": [],
+              "sha256": "59742f333ab2a04c3cd5b12061bff182e9a2114549117ce323928d391c10fafa",
+              "git_blob_sha1": "e4e55dbc3f9255ad71dfa391c43c352b31472622",
+              "fingerprint": null,
+              "revision_role": "pinned",
+              "tracking_ref": "refs/heads/aix/jcc-canonical-integration-20261005"
+            },
+            {
+              "repo": "hsoliwal/com.synexia",
+              "commit": "d1cf2d81ee74a4a837f78e0cd2e4ccae2b3d4906",
+              "module": "synexia-donor-inventory",
+              "path": "synexia-donor-inventory/src/main/java/com/synexia/donor/DonorMechanicalShapeCatalog.java",
+              "symbol": "com.synexia.donor.DonorMechanicalShapeCatalog",
+              "signatures": [],
+              "sha256": "32ad3ecb53a611de29ce8bdcf4079d77576b3b6d5a56a847b67c9cbd5c91b326",
+              "git_blob_sha1": "108514ff8960adc20c9fd88d4fd01ba55cc2f3c8",
+              "fingerprint": null,
+              "revision_role": "pinned",
+              "tracking_ref": "refs/heads/aix/jcc-canonical-integration-20261005"
+            },
+            {
+              "repo": "hsoliwal/com.synexia",
+              "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
+              "module": "synexia-openrewrite-recipes",
+              "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3AtomPatternSignalChainRecipe.java",
+              "symbol": "com.synexia.rewrite.M3AtomPatternSignalChainRecipe",
+              "signatures": [],
+              "sha256": "876929d5e8caa03ea1e3af6d8d1d4d575d15aee3014a5f2ca425f4786eda5e98",
+              "git_blob_sha1": "09df87a872817787fc8607bf11805cfa26c53aed",
+              "fingerprint": null,
+              "revision_role": "pinned",
+              "tracking_ref": "refs/heads/aix/jcc-source-merge-recovery-20261005"
+            },
+            {
+              "repo": "hsoliwal/com.synexia",
+              "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
+              "module": "synexia-openrewrite-recipes",
+              "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3CodeSignalChain.java",
+              "symbol": "com.synexia.rewrite.M3CodeSignalChain",
+              "signatures": [],
+              "sha256": "a15825aef2a00641d74fba761c4858f449d6924a1286aa1eb71b1d81932351fa",
+              "git_blob_sha1": "2ecb4c0548f8864f4a71936531e0cd1a4cf0b2b6",
+              "fingerprint": null,
+              "revision_role": "pinned",
+              "tracking_ref": "refs/heads/aix/jcc-source-merge-recovery-20261005"
+            },
+            {
+              "repo": "hsoliwal/com.synexia",
+              "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
+              "module": "m3-fast-search",
+              "path": "m3-fast-search/src/main/java/com/synexia/m3/search/CompetitiveProblemReview.java",
+              "symbol": "com.synexia.m3.search.CompetitiveProblemReview",
+              "signatures": [],
+              "sha256": "83dad41fa4ce50b70f1e2e6800241b69b5136807902fd2fc6a6d024024894ac4",
+              "git_blob_sha1": "baa84c13b7fd330eab6b1832dab1b4b523bfd8ce",
+              "fingerprint": null,
+              "revision_role": "pinned",
+              "tracking_ref": "refs/heads/aix/jcc-source-merge-recovery-20261005"
+            },
+            {
+              "repo": "hsoliwal/com.synexia",
+              "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
+              "module": "synexia-algo",
+              "path": "synexia-algo/src/main/java/com/synexia/algorithms/corpus/ChallengeDonorPassLedger.java",
+              "symbol": "com.synexia.algorithms.corpus.ChallengeDonorPassLedger",
+              "signatures": [],
+              "sha256": "a089808e8563bac1f2d57aa1cc9f131e609c1d01ffcb1af8b302579adb00c346",
+              "git_blob_sha1": "074dd60249893e4c606e68823fdebf191f98f269",
+              "fingerprint": null,
+              "revision_role": "pinned",
+              "tracking_ref": "refs/heads/aix/jcc-source-merge-recovery-20261005"
+            },
+            {
+              "repo": "hsoliwal/com.synexia",
+              "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
+              "module": "synexia-algo",
+              "path": "synexia-algo/src/main/java/com/synexia/algorithms/corpus/CompetitiveCapabilityPlanIndex.java",
+              "symbol": "com.synexia.algorithms.corpus.CompetitiveCapabilityPlanIndex",
+              "signatures": [],
+              "sha256": "59742f333ab2a04c3cd5b12061bff182e9a2114549117ce323928d391c10fafa",
+              "git_blob_sha1": "e4e55dbc3f9255ad71dfa391c43c352b31472622",
+              "fingerprint": null,
+              "revision_role": "pinned",
+              "tracking_ref": "refs/heads/aix/jcc-source-merge-recovery-20261005"
+            },
+            {
+              "repo": "hsoliwal/com.synexia",
+              "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
+              "module": "synexia-donor-inventory",
+              "path": "synexia-donor-inventory/src/main/java/com/synexia/donor/DonorMechanicalShapeCatalog.java",
+              "symbol": "com.synexia.donor.DonorMechanicalShapeCatalog",
+              "signatures": [],
+              "sha256": "32ad3ecb53a611de29ce8bdcf4079d77576b3b6d5a56a847b67c9cbd5c91b326",
+              "git_blob_sha1": "108514ff8960adc20c9fd88d4fd01ba55cc2f3c8",
+              "fingerprint": null,
+              "revision_role": "pinned",
+              "tracking_ref": "refs/heads/aix/jcc-source-merge-recovery-20261005"
+            }
+          ],
           "previous_targets": [],
           "supersedes": []
         },
         "source_state": "partial",
-        "observation": "Review and explicit root coverage obligations: m3/docs/jcc-source-handoff.md and m3/migration/evidence/jcc-handoff-20261005/source-destination-bindings.json. Ledger replay tests are separate from capability acceptance; tests is empty intentionally."
+        "observation": "Current source bc06298218dd88f0164ed9b67e74fd8234ed70b2 / root a72565e0e67f330f12c712dcc7a3fcbe1d80d24e binds 14 laboratory and 6 Java/JNI owners. Historical 0b/d1/0c53 and donor 4990 results retain their original epochs. The 443 restored receiving files and retention checks establish artifact custody only. Current source execution receipts are separately linked in m3/migration/evidence/jcc-handoff-20261005/source-destination-bindings.json; no rebuilt-JDK acceptance or Synexia runtime dependency is introduced."
       }
     ]
   },
   "precompute_port_map": "m3/docs/synexia-string-precompute-port-map.tsv",
-  "precompute_scope_rule": "Only String-semantic and String-search donor precompute maps into M3JDK String/runtime internals; Synexia language, semantic, DAG, probabilistic and reasoning precompute must not be transplanted into java.lang.String."
+  "precompute_scope_rule": "Only String-semantic and String-search donor precompute maps into M3JDK String/runtime internals; Synexia language, semantic, DAG, probabilistic and reasoning precompute must not be transplanted into java.lang.String.",
+  "porting_invariant": {
+    "id": "M3-JDK-PORT-1",
+    "authority": "M3JDK21",
+    "source_workspace": "hsoliwal/com.synexia",
+    "target_repository": "hsoliwal/M3jdk21",
+    "source_role": "convergence workspace, donor/reference implementation, recipe and evidence producer",
+    "target_role": "self-contained product/runtime destination",
+    "naming_analogy": "MIndexString -> java.lang.M3String while public java.lang.String remains String",
+    "rules": [
+      "Public JDK APIs retain JDK names and contracts.",
+      "Internal target replacements reuse established M3JDK21 M3 names before creating new owners.",
+      "MIndex and MatIndex prefixes are source provenance, not target ABI naming instructions.",
+      "Map capability and ownership, not prefixes: one donor may split and multiple donors may consolidate.",
+      "Precompute is internal derived state keyed to canonical target identity and never owns a second canonical payload.",
+      "Batch, fuzzy, GPU, posting and search images require a concrete target consumer and do not become public java.lang or java.util state by default.",
+      "JNI and native code are adapted to target symbols, lifetime, ABI and target-side tests.",
+      "Maven and OpenRewrite recipes are first-class donor artifacts, remain authoring/proof tooling, and are not M3JDK21 runtime dependencies.",
+      "The whole qualified Synexia workspace is a candidate donor universe: source, native code, recipes, generated postimages, tests, fixtures, docs, schemas, proof crates, algorithms and independently reimplemented ideas.",
+      "License and NOTICE lineage follows every copied/adapted artifact; third-party material is never relicensed merely by transit through Synexia.",
+      "Every admitted port updates this mapping and is materialized through a reviewed recipe crate.",
+      "Synexia success is donor evidence only; target compiler, JUnit/jtreg, JNI/native and image gates decide M3JDK21 admission."
+    ],
+    "canonical_document": "m3/docs/m3jdk21-porting-invariant.md",
+    "receiving_sequence": {
+      "schema": "M3_RECEIVING_SEQUENCE_V1",
+      "order": [
+        "STRING",
+        "ARRAYS",
+        "COLLECTIONS",
+        "AST_COMPILER",
+        "REMAINING_FAMILIES"
+      ],
+      "active_phase": "STRING",
+      "scope": "ORDERED_QUALIFICATION_PLAN_NOT_RUNTIME_ACCEPTANCE",
+      "public_jdk_names_unchanged": true,
+      "canonical_payload_owner_unchanged": true,
+      "recipe_first": true,
+      "serial_file_atom_replacement": true,
+      "first_party_license": "Apache-2.0",
+      "copyright_notice": "Copyright 2026 Hitesh Soliwal and contributors",
+      "abstract_ideas": "PROVENANCE_NOT_COPYRIGHTED_EXPRESSION",
+      "third_party_and_openjdk": "PRESERVE_PER_FILE_LICENSE_COPYRIGHT_NOTICE",
+      "automatic_application": false,
+      "family_completion": false,
+      "repository_completion": false,
+      "source_inventory_revision": "7d2133f1412a9e7295296c3f86baae577bb3251c",
+      "source_inventory_named_paths": 4770,
+      "source_inventory_checked_roots": 13,
+      "source_inventory_disposition": "NOT_EVALUATED_IN_THIS_LEDGER",
+      "target_baseline": "a694bbd2b3c382a40d401a813ae547293c9d1074",
+      "donor_review_order": [
+        "EXISTING_CATALOGUE_AND_FIRST_PARTY",
+        "LEETCODE",
+        "HACKERRANK",
+        "GEEKSFORGEEKS",
+        "LICENSED_PINNED_GITHUB"
+      ],
+      "donor_dispositions": [
+        "COPY",
+        "ADAPT",
+        "CLEAN_ROOM",
+        "EVIDENCE_ONLY",
+        "REJECT"
+      ],
+      "atom_evidence": [
+        "source_revision_path_blob_sha256",
+        "license_copyright_notice_and_intake_mode",
+        "dependency_effect_and_history_inventory",
+        "target_owner_preimage_postimage",
+        "synexia_recipe_revision_and_manifest",
+        "locked_api_behavior_and_failure_oracle",
+        "executed_build_contract_and_applicable_target_gates",
+        "fixed_point_replay_and_drift_refusal",
+        "cpu_heap_native_memory_and_cold_warm_results",
+        "pending_or_excluded_reason"
+      ],
+      "phases": [
+        {
+          "id": "STRING",
+          "predecessor": null,
+          "state": "QUALIFICATION_REQUIRED",
+          "scope": "MIndexString -> existing M3String, canonical atoms/ranges, storage, facts, exact search/regex and JNI projections; retain admitted v7 and hold V8 full-query.",
+          "required_gates": [
+            "canonical_owner_and_utf16_contract",
+            "regex_v7_codec_and_bootstrap_closure",
+            "java_jni_parity_and_lifetimes",
+            "jdk_build_jtreg_interpreter_c1_c2_gc_cds",
+            "cold_warm_cpu_heap_native_memory"
+          ],
+          "acceptance_receipts": []
+        },
+        {
+          "id": "ARRAYS",
+          "predecessor": "STRING",
+          "state": "WAITING_FOR_PREDECESSOR",
+          "scope": "Primitive/address/bit lanes and array operations after String qualification; public Java arrays retain VM type, fixed length and identity.",
+          "required_gates": [
+            "fixed_length_reified_type_and_array_store",
+            "bounds_overlap_clone_and_arraycopy",
+            "gc_barriers_and_jni_acquire_release",
+            "jdk_build_jtreg_interpreter_c1_c2",
+            "cold_warm_cpu_heap_native_memory"
+          ],
+          "acceptance_receipts": []
+        },
+        {
+          "id": "COLLECTIONS",
+          "predecessor": "ARRAYS",
+          "state": "WAITING_FOR_PREDECESSOR",
+          "scope": "Existing MIndex/M3Index collection and data-structure owners, one concrete JDK collection backend at a time.",
+          "required_gates": [
+            "per_concrete_type_contract",
+            "null_equality_identity_order_views_iterators",
+            "serialization_subclass_jmm_concurrency",
+            "no_retained_per_element_structural_objects",
+            "jdk_build_jtreg_and_resource_measurements"
+          ],
+          "acceptance_receipts": []
+        },
+        {
+          "id": "AST_COMPILER",
+          "predecessor": "COLLECTIONS",
+          "state": "WAITING_FOR_PREDECESSOR",
+          "scope": "MIndexAST, class/compiler facts, atomizer/patternizer recipes and compiler precompute through existing M3/javac owners.",
+          "required_gates": [
+            "consumer_format_version_and_invalidation",
+            "jdk_compiler_module_boundary",
+            "attributed_multipass_behavior_and_opaque_payloads",
+            "java21_source_classfile_and_bootstrap",
+            "bounded_precompute_and_resource_measurements"
+          ],
+          "acceptance_receipts": []
+        },
+        {
+          "id": "REMAINING_FAMILIES",
+          "predecessor": "AST_COMPILER",
+          "state": "WAITING_FOR_PREDECESSOR",
+          "scope": "File/source/storage/DB, tree/DAG/relations, generic/universal precompute, schemas, images, domain/distributed/hardware families and non-prefix closure.",
+          "required_gates": [
+            "complete_path_and_non_prefix_dependency_accounting",
+            "consumer_module_and_lifetime_contract",
+            "file_generation_dag_effects_and_image_invalidation",
+            "domain_distributed_hardware_explicit_disposition",
+            "target_platform_runtime_and_resource_measurements"
+          ],
+          "acceptance_receipts": []
+        }
+      ],
+      "advance_rule": "Advance only through a reviewed successor recipe binding accepted target receipts for the sealed predecessor scope. This qualification-only baseline cannot accept self-reported completion.",
+      "dependency_rule": "A minimal later-family dependency may be qualified inside the current atom closure with explicit ownership and proof; it does not promote that later family.",
+      "enforcement_boundary": "The existing target policy checker validates this declared plan. It does not authenticate runtime evidence or establish behavioral equivalence."
+    }
+  },
+  "donor_artifact_policy": {
+    "id": "M3-JDK-DONOR-ARTIFACTS-1",
+    "candidate_source": "whole qualified hsoliwal/com.synexia workspace",
+    "artifact_classes": [
+      "source",
+      "jni-native",
+      "recipe",
+      "generated-postimage",
+      "test-fixture-oracle",
+      "documentation-schema-mapping",
+      "proof-receipt-ci-gate",
+      "precompute-index-collection-search-layout",
+      "algorithm-architecture-idea-reference"
+    ],
+    "recipe_rule": "Qualified Synexia recipes and their proof crates may be copied or adapted into target tooling; recipe execution is never a Synexia runtime dependency.",
+    "generated_output_rule": "A recipe license does not relicense its inputs or outputs; generated postimages must satisfy source provenance and destination licensing.",
+    "first_party_rule": "Synexia-original Apache-2.0 material is a target donor candidate; contribution under different target terms requires actual rights and an explicit target-side licensing decision.",
+    "third_party_rule": "Third-party material retains its original copyright, license and NOTICE obligations and is never made Apache-2.0 merely by Synexia wrapping, atomization, testing or convergence.",
+    "idea_rule": "Ideas, algorithms, behaviors and architecture patterns may be independently reimplemented under target ownership while retaining donor provenance as engineering evidence.",
+    "target_license_rule": "M3JDK21 follows OpenJDK per-file/module licensing and must not blindly commingle license-incompatible source.",
+    "runtime_dependency_rule": "M3JDK21 runtime has no dependency on Synexia modules, services or build tooling.",
+    "canonical_document": "m3/docs/m3jdk21-porting-invariant.md"
+  },
+  "family_name_mapping": [
+    {
+      "source_family": "com.synexia.indexstring.MIndexString and canonical String owners",
+      "target_family": "java.lang.M3String family",
+      "public_api": "java.lang.String remains java.lang.String",
+      "target_owners": [
+        "java.lang.M3String",
+        "java.lang.M3StringOwner",
+        "java.lang.M3StringAtom",
+        "java.lang.M3StringPool",
+        "java.lang.M3StringTuple"
+      ],
+      "rule": "Preserve owner+coordinate and canonical composition semantics; no second text payload."
+    },
+    {
+      "source_family": "MIndexString*Facts / *Precomputation / prepared String search facts",
+      "target_family": "M3 String internal precompute",
+      "public_api": "no new public precompute API",
+      "target_owners": [
+        "java.lang.M3StringFacts",
+        "java.lang.M3StringSearchPrecompute",
+        "java.lang.M3StringPositionPrecompute",
+        "jdk.internal.mindex.M3TQ",
+        "M3StringOwner.rangeFacts"
+      ],
+      "rule": "Split by concrete consumer; candidate facts never replace exact String/regex semantics."
+    },
+    {
+      "source_family": "MIndex/MatIndex primitive address, lane, bitmap and packed storage",
+      "target_family": "M3 primitive storage",
+      "public_api": "implementation-internal",
+      "target_owners": [
+        "jdk.internal.mindex.M3Address28",
+        "jdk.internal.mindex.M3IntLane28",
+        "jdk.internal.mindex.M3LongLane28",
+        "jdk.internal.mindex.M3BitLane28",
+        "jdk.internal.mindex.M3Bits",
+        "com.m3.collections M3 lane owners"
+      ],
+      "rule": "Reuse existing target lane/address owners; preserve range, alias, sparse, concurrency and native ABI contracts."
+    },
+    {
+      "source_family": "Synexia lean collections / MIndex collection families",
+      "target_family": "per-concrete JDK collection backend",
+      "public_api": "ArrayList/HashMap/TreeMap/ConcurrentHashMap/etc keep JDK names",
+      "target_owners": [
+        "existing java.util concrete implementation",
+        "existing java.util.concurrent concrete implementation",
+        "com.m3.collections proving-ground owners where not yet promoted"
+      ],
+      "rule": "Never create one universal M3 Collection replacement; backend substitutions are contract-specific.",
+      "heap_growth_donor_evidence": {
+        "source_repository": "hsoliwal/com.synexia",
+        "source_pr": 11043,
+        "source_commit": "0c2c4f6ee1ce01418ffd158485d7ddb0342f900a",
+        "source_owners": [
+          "com.synexia.mindex.collections.M3PreGc",
+          "com.synexia.mindex.collections.MIndexPriorityQueue"
+        ],
+        "source_recipe": "com.synexia.m3.MIndexAutoHeapGrowth",
+        "source_crate": "mindex-auto-heap-growth-20261014",
+        "evidence_path": "synexia-openrewrite-recipes/recipes/mindex-auto-heap-growth-20261014/QUALIFICATION.md",
+        "status": "DONOR_QUALIFIED_TARGET_PORT_PENDING",
+        "public_api": "java.util.PriorityQueue keeps its name and its own ordering, comparator, iterator and serialization contracts",
+        "fit_boundary": "The donor stores IDs, priorities and FIFO serials in three primitive lanes. This is not the JDK PriorityQueue object-array representation; no direct body substitution or runtime acceptance is implied.",
+        "target_gate": "Target-specific preimages, API/behavior, allocation/retention, concurrency where applicable, matched JDK build and jtreg required. Ordered receiving remains String -> arrays -> collections."
+      }
+    },
+    {
+      "source_family": "MIndexClass* / class precompute",
+      "target_family": "M3 class bridge/index/context",
+      "public_api": "java.lang.Class remains Class",
+      "target_owners": [
+        "jdk.internal.mindex.M3Class",
+        "jdk.internal.mindex.M3CI",
+        "jdk.internal.mindex.M3CB",
+        "jdk.internal.mindex.M3PC"
+      ],
+      "rule": "Preserve defining-loader/module/lifecycle identity."
+    },
+    {
+      "source_family": "MIndexAST*",
+      "target_family": "M3 AST",
+      "public_api": "compiler/JDK APIs retain existing names",
+      "target_owners": [
+        "jdk.internal.mindex.M3AST",
+        "jdk.internal.mindex.M3ASTPC"
+      ],
+      "rule": "Reserved/internal until source-position, type, format and consumer gates pass."
+    },
+    {
+      "source_family": "MIndexCompilerASTPrecompute and compiler-only facts",
+      "target_family": "javac M3 precompute",
+      "public_api": "javac APIs retain existing names",
+      "target_owners": [
+        "com.sun.tools.javac.m3.M3ASTPC"
+      ],
+      "rule": "Compiler dependencies stay in jdk.compiler and never leak into java.base."
+    },
+    {
+      "source_family": "MIndex JNI/native mapped/string/search accelerators",
+      "target_family": "target-owned JDK/native accelerator",
+      "public_api": "existing JDK API remains authoritative",
+      "target_owners": [
+        "src/java.base/share/native/libjava",
+        "jdk.internal.mindex internal accelerators",
+        "HotSpot owners only after dedicated admission"
+      ],
+      "rule": "Adapt symbols, headers, lifetime and ABI; donor JNI proof is not target proof."
+    },
+    {
+      "source_family": "MIndexTextSignals / MIndexCodeTextSignals / MIndexStringEditDistancePlan / scalar fuzzy precompute",
+      "target_family": "M3 second-pass precompute",
+      "public_api": "none; never a java.lang.String surface",
+      "target_owners": [
+        "com.m3.precompute.M3TextMetrics",
+        "com.m3.precompute.M3TextSignals",
+        "com.m3.precompute.M3RegexShape",
+        "com.m3.precompute.M3EditDistancePlan",
+        "com.m3.precompute.M3CodeTextSignals",
+        "com.m3.precompute.M3SimilarityPrecompute",
+        "com.m3.precompute M3 Java/JNI batch providers"
+      ],
+      "rule": "First land broad reusable donor facts in m3/ports/precompute under M3 names. Approximate signals rank or nominate only; exact negative bounds may prune only under their mathematical contract. Promote into JDK modules only for a concrete consumer with independent compatibility, retention and performance proof."
+    },
+    {
+      "source_family": "MIndex batch/search/posting/fuzzy/GPU/truth images",
+      "target_family": "optional internal module or deferred donor capability",
+      "public_api": "none by default",
+      "target_owners": [],
+      "rule": "Do not attach whole-corpus images to java.lang.String or java.util collections without a concrete bounded JDK consumer."
+    },
+    {
+      "source_family": "Synexia bulk executor/provider/scheduler + TornadoVM verified RV32IM provider",
+      "target_family": "M3 internal bulk scheduler",
+      "public_api": "none; internal jdk.internal.vm.parallel candidate",
+      "target_owners": [
+        "jdk.internal.vm.parallel.BulkTask",
+        "jdk.internal.vm.parallel.BulkExecutor",
+        "jdk.internal.vm.parallel.BulkExecution",
+        "jdk.internal.vm.parallel.BulkExecutorProvider",
+        "jdk.internal.vm.parallel.BulkScheduler",
+        "com.m3.tornado.Rv32iBulkExecutorAdapter"
+      ],
+      "rule": "One reviewed operation over bounded independent work items; deterministic provider order is priority descending then provider ID; arbitrary Runnable is not accelerator admission; providers remain outside java.base and accelerated success requires provider-specific proof."
+    },
+    {
+      "source_family": "Synexia/M3JDK reviewed bulk executor plus M3 parallel fabric",
+      "target_family": "optional M3 parallel bulk provider",
+      "public_api": "none; optional independent m3/ports module",
+      "target_owners": [
+        "com.m3.parallel.bulk.M3ParallelIntAddProvider",
+        "jdk.internal.vm.parallel.BulkScheduler",
+        "com.m3.parallel.Plan",
+        "com.m3.parallel.Verified"
+      ],
+      "rule": "One reviewed bounded integer lane; no arbitrary Runnable; snapshotted inputs; required accelerators fail closed; full independent Java parity; no java.base dependency on the M3 parallel provider."
+    },
+    {
+      "source_family": "MIndexHugeJsonIndex / MIndexHugeJsonViewport optional text admission",
+      "target_family": "viewport text admission; concrete target consumer pending",
+      "public_api": "Existing JDK/Swing APIs retain their names and observable contracts.",
+      "target_owners": [],
+      "status": "DONOR_QUALIFIED_TARGET_CONSUMER_PENDING",
+      "rule": "Use indexed text bounds before optional payload decode. Mandatory visible rows, exposed identity and canonical payload remain authoritative. No universal object swapping or new public M3 API is implied.",
+      "donor_evidence": {
+        "source_repository": "hsoliwal/com.synexia",
+        "source_base_revision": "9f9990595afd885e23b9c23ee4cad795293ed5fc",
+        "source_recipe": "com.synexia.rewrite.M3HugeJsonViewportTextBudgetRecipe",
+        "source_crate": "m3-huge-json-viewport-text-budget-20261014-v3",
+        "source_postimage_sha256": {
+          "synexia-mindex/viewer/src/main/java/com/synexia/mindex/viewer/MIndexHugeJsonIndex.java": "60416f93d43fd1d11b194bc907170f70b02c640bd8e93863e9bf6f6ff8bf31bb",
+          "synexia-mindex/viewer/src/main/java/com/synexia/mindex/viewer/MIndexHugeJsonViewport.java": "f77f5f36ca33e071437b33c8d75834471025f5b62a5d52b67016f6f93b3fa33d",
+          "synexia-mindex/viewer/src/test/java/com/synexia/mindex/viewer/MIndexHugeJsonViewportTest.java": "61dce9e67cd70969a57aa328c7a38349b018d36715fd2925b10c3a08cb70927a"
+        },
+        "source_evidence_path": "synexia-openrewrite-recipes/recipes/huge-json-viewport-20261014/QUALIFICATION.md",
+        "target_receipt": "m3/runtime-integration/evidence/20261014-viewport-admission/receipt.json",
+        "fit_boundary": "File-backed JSON viewport implementation is a higher-layer donor, not a direct java.base, Swing or HotSpot replacement. Select and prove a concrete existing consumer before runtime adaptation.",
+        "executed_source_gates": [
+          "Java 21 compiler: five real production sources and three JUnit classes",
+          "16 retained baseline and 19 candidate behavior tests",
+          "Public/protected surface and generated JNI headers unchanged",
+          "Metadata-bound Unicode/escape/truncation corpus",
+          "Rejected optional payload read refused before decode",
+          "Fixed workload thread-allocation comparison; no universal speedup claim"
+        ],
+        "pending_target_gates": [
+          "Concrete consumer and target-native contract mapping",
+          "Exact target runtime preimages and recipe adaptation",
+          "Matched JDK build and applicable jtreg, UI-thread, lifecycle and JNI/runtime proof",
+          "Cold/warm CPU, retained heap and native/process memory on target"
+        ],
+        "phase_rule": "String remains the active phase; remaining-family runtime promotion waits for predecessor evidence.",
+        "source_license": "Apache-2.0",
+        "target_license_rule": "Preserve target/OpenJDK rights; no direct relicensing or Synexia runtime dependency."
+      }
+    },
+    {
+      "source_family": "M3TransientFacadeStore / parent-owned internal leases",
+      "target_family": "parent-owned facade lifecycle; concrete target consumer pending",
+      "public_api": "Existing JDK and Swing API names and identity contracts remain unchanged.",
+      "target_owners": [],
+      "status": "DONOR_QUALIFIED_TARGET_CONSUMER_PENDING",
+      "rule": "Pressure may evict only inactive, unexposed facades. Preserve parent payload and exposed identity; no universal Java-object destruction or swapping is implied.",
+      "donor_evidence": {
+        "source_repository": "hsoliwal/com.synexia",
+        "source_base_revision": "29da7f266f2b88fe175536318ae0d313ba058e7f",
+        "source_recipe": "com.synexia.rewrite.M3TransientFacadeProjectionRecipe",
+        "source_crate": "m3-transient-facade-lifecycle-20261014-v2",
+        "source_postimage_sha256": {
+          "synexia-primitives/src/main/java/com/synexia/primitives/M3ResidentTrimPlanner.java": "d77939d7166ef6f15eef20f422f25f3305154514883f33a74ca1d95305283566",
+          "synexia-primitives/src/main/java/com/synexia/primitives/M3TransientFacadeStore.java": "b04930379b5eebc60314777e6265edf5726c90da7b38536d3c20397f21a1525e",
+          "synexia-primitives/src/test/java/com/synexia/primitives/M3TransientFacadePressureTest.java": "903653cec02ae78ccb55fd4301cf1be9ef569fbfe15af3c05605772aae1d6bbf"
+        },
+        "source_evidence_path": "synexia-openrewrite-recipes/recipes/facade-lifecycle-20261014/QUALIFICATION.md",
+        "target_receipt": "m3/runtime-integration/evidence/20261014-facade-lifecycle/receipt.json",
+        "executed_source_gates": [
+          "Actual OpenRewrite SDK: serial/reversed/two-worker replay, fixed point and refusals",
+          "Java 21: 12 real production sources; 17 baseline and 25 candidate tests",
+          "Two old-store counterexamples fail on active-lease disposal",
+          "Public/protected surface parity; no JNI declarations in affected closure"
+        ],
+        "pending_target_gates": [
+          "Concrete existing consumer and naming adaptation",
+          "Matched JDK build and applicable jtreg/UI-thread/GC/JNI lifecycle qualification",
+          "CPU, retained heap and process/native memory measurements"
+        ],
+        "phase_rule": "String remains active; arrays, collections, AST/compiler and remaining families retain ordered promotion.",
+        "sdk_direction": "M3JDK21 may underpin a wider Java-facing M3SDK; preserve existing namespace authority and separate SDK modules from Java SE public APIs.",
+        "source_license": "Apache-2.0",
+        "target_license_rule": "Preserve per-file OpenJDK and third-party rights; no Synexia runtime dependency."
+      }
+    }
+  ],
+  "recipe_authority": {
+    "recipe_id": "synexia.m3jdk.string.canonical-dag.20261006",
+    "source_repo": "hsoliwal/com.synexia",
+    "source_path": "synexia-indexstring/recipes/m3jdk-string-canonical-dag-20261006",
+    "source_tracking_ref": "refs/heads/develop",
+    "source_pr": "hsoliwal/com.synexia#9489",
+    "target_packet_role": "generated executable/hash-pinned application copy",
+    "target_repo": "hsoliwal/M3jdk21",
+    "target_owns": [
+      "M3JDK names",
+      "ABI/layout/bootstrap",
+      "JDK compatibility",
+      "build/runtime/JNI tests",
+      "final promotion"
+    ],
+    "portable_semantics_owner": "Synexia",
+    "source_origin_commit": "1b954f886f0a40684c84bac443851d9fe4af1764",
+    "source_pr_status": "hsoliwal/com.synexia#9489 closed historical review; canonical packet is present on develop",
+    "executable_verifier_recipe": "com.synexia.rewrite.M3StringCanonicalDagInvariant",
+    "executable_verifier_path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3StringCanonicalDagInvariantRecipe.java",
+    "executable_verifier_pr": "hsoliwal/com.synexia#9524",
+    "executable_verifier_role": "Synexia-owned executable verification/mastery engine for the canonical packet; no M3JDK runtime dependency",
+    "source_lock_path": "synexia-indexstring/recipes/m3jdk-string-canonical-dag-20261006/source-lock.json",
+    "source_lock_commit": "5fb52a051fa0e2722c2f69f2e22ac7f330c91ce2",
+    "source_lock_blob": "0230b1a0864266d9243c161f7541c01492c9626e",
+    "executable_verifier_implementation_blob": "5129fe4f7367486496f028a4d0339b84998cf7a0",
+    "executable_verifier_declarative_blob": "a4e7a9f358f19be12109a39281882cb0b937db94",
+    "history_convergence_recipe": "com.synexia.rewrite.M3Jdk21StringHistoryConvergence",
+    "history_convergence_descriptor": "synexia-openrewrite-recipes/src/main/resources/META-INF/rewrite/m3jdk21-string-history-convergence.yml",
+    "history_convergence_task_crate": "synexia-m3-recipe/task-crates/m3jdk21-string-history-convergence-20261007.yaml",
+    "history_convergence_ledger": "synexia-indexstring/recipes/m3jdk-string-canonical-dag-20261006/HISTORY-CONVERGENCE.tsv",
+    "history_convergence_review_pr": "hsoliwal/com.synexia#9668",
+    "history_convergence_review_head": "5b2cbde34976ff5fe8bf6275bfbd9c58de6c34b0",
+    "absorbed_product_evidence": "hsoliwal/M3jdk21#153@b11611609d378abba3a8a9e10edf9839a5c5676a",
+    "runtime_dependency_rule": "M3JDK21 must not depend on Synexia at runtime; Synexia owns portable recipe/provenance only."
+  },
+  "optional_module_mappings": [
+    {
+      "module": "jdk.m3.collections",
+      "maven_profile": "m3-collections",
+      "mapping": "m3/docs/name-mapping.d/m3-filtered-collection-pack-20261017.json",
+      "intake_mode": "INDEPENDENT_APACHE_MODULE",
+      "receiving_sequence_advanced": false,
+      "canonical_recipe": "com.synexia.m3.M3JdkCollectionPublicationOwners20261017",
+      "target_proof": "m3/tooling/module-packs/collections/build.py",
+      "existing_generic_module": "com.m3.collections",
+      "optional_exported_package": "com.m3.util"
+    }
+  ]
 }

@@ -1,0 +1,486 @@
+{
+  "repo": "hsoliwal/M3JDK21",
+  "pr": 1320,
+  "head": "7f0cd03024155b11f22c88990192f11e1d1014b7",
+  "tested_checkout": "b30c9ebefbe89c295a59544770a07dd5a03eb53d",
+  "tested_tree": "b9cbf0825d9b388d42357cf5cd7a96cc704136b9",
+  "run_id": 39112943825,
+  "job_id": 117632734743,
+  "artifact_id": 12133424256,
+  "artifact_sha256": "96bad91271a480e52b571b868398313756bc5bc9ad7caf7135d718ba4e8b26be",
+  "test_source": {
+    "path": "m3/tooling/tq/src/test/java/com/m3/tq/TQTest.java",
+    "git_blob": "0e5cf27d3d268f485d4befe27d26da4df381b477",
+    "sha256": "7ce7e90af7f0011c133ef71f2b75b01f17b02a102d3b2b70bd01856092467c8c"
+  },
+  "source_pins": [
+    {
+      "path": "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3Jdk21HashPinnedSnapshotRecipe.java",
+      "blob": "7c11497c0183d04e66baa41ee5391de682175360",
+      "sha256": "54fd1fa51872048d8427594691838e27912187ae539463fde51aea5c62e46831",
+      "bytes": 15152
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
+      "blob": "4a38e39d0755462d40c2b22548b87abde938ea0b",
+      "sha256": "8133bcf7e9f750c714cdd42784bdf30b60f67dd957b2831cd54cb01c9a2cfc3a",
+      "bytes": 12355
+    },
+    {
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3TQ.java",
+      "blob": "533a07b77061e757d476627557413f6df1067d34",
+      "sha256": "78aa154b8aa25134edd9a16c746e4fdc7bcd3984b8f76cc96ef81437247e08d4",
+      "bytes": 17919
+    },
+    {
+      "path": "test/jdk/java/lang/String/M3TQTest.java",
+      "blob": "aa1931597c49437540fa18e4c69046768cadc190",
+      "sha256": "f587cc74f8dcd9914827cb7d03b1e3aa5eb420851d7de231e5624885aff8782f",
+      "bytes": 17321
+    },
+    {
+      "path": "test/jdk/java/lang/String/M3TQSparseContainmentTest.java",
+      "blob": "5ab8efc87034af87166c6ba9164c5444b60876da",
+      "sha256": "94a1b87f6702a780173c14b9676400522c980b2da328b13321650f0df656c790",
+      "bytes": 4159
+    }
+  ],
+  "input_binding": {
+    "path": "m3/tooling/tq/inputs.tsv",
+    "git_blob": "c862ebf9621d0979bbcaf53838d2e986dd349c64",
+    "sha256": "6f602866bae4dc215675311740a6f3d9b7795c866674e3f1f813c37ad07c075a",
+    "rows": {
+      "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3Jdk21HashPinnedSnapshotRecipe.java": "54fd1fa51872048d8427594691838e27912187ae539463fde51aea5c62e46831",
+      "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java": "8133bcf7e9f750c714cdd42784bdf30b60f67dd957b2831cd54cb01c9a2cfc3a",
+      ".m3/openrewrite-recipes/src/main/java/com/synexia/m3/bootstrap/M3BootstrapTaskRecipe.java": "58bac6968ebd2cce6f43f338c289db14435b3ef05ed2abc13402275285b89462",
+      ".m3/openrewrite-recipes/src/main/java/com/synexia/m3/bootstrap/M3BootstrapInventoryRecipe.java": "05ac05e7f3cb7549d26866a61dec0edf19515317c95f73db82d1c517cad88ef5",
+      "src/java.base/share/classes/jdk/internal/mindex/M3StringBacking.java": "bcd2fe86a21464f7c65fd582368362d327e54b143dc05df13b31c1a029ecb251",
+      "src/java.base/share/classes/jdk/internal/mindex/M3MappedStringBacking.java": "f84d4d7763156d615d32b7a1024931e18073a1122227d8228d8638332407bd01",
+      "test/jdk/java/lang/String/M3MappedStringBackingTest.java": "9f42d1bdd6e174f5eac44e72afae2154ac140c9773c540b3073a06a8c2da827d",
+      "test/jdk/java/lang/String/MapFactsTest.java": "07f1de47de88624740a0b4e0e7fb30a05627f37054cbd11dad0e3c3298401059",
+      "m3/tooling/tq/donor/LICENSE": "1eb85fc97224598dad1852b5d6483bbcf0aa8608790dcc657a5a2a761ae9c8c6",
+      "m3/tooling/tq/donor/MIndexRegexTrigramQuery.java.txt": "428cb5cdd1afc83449ad35cbc228883dc36d3f1c36ceba8c208a6aa3aa0f400f",
+      "m3/tooling/tq/donor/NOTICE": "31cec4f2c4936b0e7a71a77847a3c20b0959e119a02ef5cf537f4f707fff9427",
+      "m3/tooling/tq/donor/trigram-oracle.cpp.txt": "5cc3a6d227b44b234b0883dc7c3790ee522b153013f3f302233ef42ae01f3d89",
+      "src/java.base/share/classes/jdk/internal/mindex/M3TQ.java": "78aa154b8aa25134edd9a16c746e4fdc7bcd3984b8f76cc96ef81437247e08d4",
+      "test/jdk/java/lang/String/M3TQTest.java": "f587cc74f8dcd9914827cb7d03b1e3aa5eb420851d7de231e5624885aff8782f",
+      "test/jdk/java/lang/String/M3TQSparseContainmentTest.java": "94a1b87f6702a780173c14b9676400522c980b2da328b13321650f0df656c790"
+    },
+    "binding_gate": "TQTest.prepare asserts each source SHA256 before recipe or runtime compilation"
+  },
+  "mutant_outputs": [
+    {
+      "path": "native-mutant.log",
+      "output": "Exception in thread \"main\" java.lang.AssertionError: native whole\n\tat M3TQTest.check(M3TQTest.java:307)\n\tat M3TQTest.equal(M3TQTest.java:296)\n\tat M3TQTest.main(M3TQTest.java:50)"
+    },
+    {
+      "path": "seam-mutant.log",
+      "output": "Exception in thread \"main\" java.lang.AssertionError: seam composition\n\tat M3TQTest.check(M3TQTest.java:307)\n\tat M3TQTest.equal(M3TQTest.java:296)\n\tat M3TQTest.range(M3TQTest.java:98)\n\tat M3TQTest.main(M3TQTest.java:54)"
+    },
+    {
+      "path": "containment-mutant.log",
+      "output": "Exception in thread \"main\" java.lang.AssertionError: containment set oracle\n\tat M3TQTest.check(M3TQTest.java:307)\n\tat M3TQTest.containment(M3TQTest.java:136)\n\tat M3TQTest.main(M3TQTest.java:59)"
+    }
+  ],
+  "schema": "M3JDK21_HOSTED_TQ_OBSERVATION_V1",
+  "state": "BOUNDED_HOSTED_TQ_TESTS_PASSED_GUARD_RECONCILIATION_PENDING",
+  "tested_merge_tree_equals_head_tree": true,
+  "suites": [
+    {
+      "name": "com.m3.tq.TQSyncTest",
+      "tests": "3",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "time": "0.27",
+      "cases": [
+        "retainsUnrelatedFiles",
+        "exactBytesAndFixedPoint",
+        "refusesDriftMissingAndDuplicate"
+      ]
+    },
+    {
+      "name": "com.m3.tq.TQTest",
+      "tests": "19",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "time": "24.34",
+      "cases": [
+        "refusesOccupiedWrongParserAndDuplicateJava",
+        "bootstrapInventoryAndModuleBoundary",
+        "currentRuntimeModes",
+        "currentRuntimeModes",
+        "currentRuntimeModes",
+        "currentRuntimeModes",
+        "refusesTextDriftMissingAndDuplicate",
+        "rejectsJavaSeamMutant",
+        "rejectsContainmentMutant",
+        "preservesUnrelatedSourceAndRejectsTemplateTampering",
+        "currentPublicProtectedApiMatchesLegacy",
+        "unchangedMappedRegressions",
+        "currentMappedRegressionsAndModuleBoundary",
+        "rejectsNativeUnicodeMutant",
+        "runtimeModes",
+        "runtimeModes",
+        "runtimeModes",
+        "runtimeModes",
+        "exactRecipeAndFixedPoint"
+      ]
+    }
+  ],
+  "current_runtime_modes": [
+    {
+      "path": "tq/target/current-c1-M3TQSparseContainmentTest.log",
+      "required_output": "TQ_SPARSE_CONTAINMENT_PASS checks=31011 warmPayloadReads=0",
+      "observed_output": "CompileCommand: dontinline jdk/internal/mindex/M3TQ$Facts.containsAll bool dontinline = true\nTQ_SPARSE_CONTAINMENT_PASS checks=31011 warmPayloadReads=0"
+    },
+    {
+      "path": "tq/target/current-c1-M3TQTest.log",
+      "required_output": "TQ checks=308649 ",
+      "observed_output": "CompileCommand: dontinline jdk/internal/mindex/M3TQ$Facts.containsAll bool dontinline = true\nTQ checks=308649 strings=410 ranges=4040 compositions=8331 nativeCalls=4458 coldReads=4291 mappedRanges=174 containmentPairs=201601 warmPayloadReads=0"
+    },
+    {
+      "path": "tq/target/current-c2-M3TQSparseContainmentTest.log",
+      "required_output": "TQ_SPARSE_CONTAINMENT_PASS checks=31011 warmPayloadReads=0",
+      "observed_output": "CompileCommand: dontinline jdk/internal/mindex/M3TQ$Facts.containsAll bool dontinline = true\nTQ_SPARSE_CONTAINMENT_PASS checks=31011 warmPayloadReads=0"
+    },
+    {
+      "path": "tq/target/current-c2-M3TQTest.log",
+      "required_output": "TQ checks=308649 ",
+      "observed_output": "CompileCommand: dontinline jdk/internal/mindex/M3TQ$Facts.containsAll bool dontinline = true\nTQ checks=308649 strings=410 ranges=4040 compositions=8331 nativeCalls=4458 coldReads=4291 mappedRanges=174 containmentPairs=201601 warmPayloadReads=0"
+    },
+    {
+      "path": "tq/target/current-interpreter-M3TQSparseContainmentTest.log",
+      "required_output": "TQ_SPARSE_CONTAINMENT_PASS checks=31011 warmPayloadReads=0",
+      "observed_output": "TQ_SPARSE_CONTAINMENT_PASS checks=31011 warmPayloadReads=0"
+    },
+    {
+      "path": "tq/target/current-interpreter-M3TQTest.log",
+      "required_output": "TQ checks=308649 ",
+      "observed_output": "TQ checks=308649 strings=410 ranges=4040 compositions=8331 nativeCalls=4458 coldReads=4291 mappedRanges=174 containmentPairs=201601 warmPayloadReads=0"
+    },
+    {
+      "path": "tq/target/current-mixed-M3TQSparseContainmentTest.log",
+      "required_output": "TQ_SPARSE_CONTAINMENT_PASS checks=31011 warmPayloadReads=0",
+      "observed_output": "TQ_SPARSE_CONTAINMENT_PASS checks=31011 warmPayloadReads=0"
+    },
+    {
+      "path": "tq/target/current-mixed-M3TQTest.log",
+      "required_output": "TQ checks=308649 ",
+      "observed_output": "TQ checks=308649 strings=410 ranges=4040 compositions=8331 nativeCalls=4458 coldReads=4291 mappedRanges=174 containmentPairs=201601 warmPayloadReads=0"
+    }
+  ],
+  "compiler_witnesses": [
+    {
+      "path": "tq/target/current-c1-M3TQSparseContainmentTest-compilation.xml",
+      "compiler": "c1",
+      "containsAll_nmethod": "<nmethod compile_id='596' compile_kind='osr' compiler='c1' level='1' entry='0x00007f5be0a08820' size='2848' address='0x00007f5be0a08610' relocation_offset='344' insts_offset='528' stub_offset='1896' scopes_data_offset='2016' scopes_pcs_offset='2336' dependencies_offset='2736' nul_chk_table_offset='2744' oops_offset='1984' metadata_offset='1992' method='jdk.internal.mindex.M3TQ$Facts containsAll (Ljdk/internal/mindex/M3TQ$Facts;)Z' bytes='239' count='79' backedge_count='1024' iicount='79' stamp='0.208'/>"
+    },
+    {
+      "path": "tq/target/current-c1-M3TQTest-compilation.xml",
+      "compiler": "c1",
+      "containsAll_nmethod": "<nmethod compile_id='724' compiler='c1' level='1' entry='0x00007f62f9237c20' size='2408' address='0x00007f62f9237a10' relocation_offset='344' insts_offset='528' stub_offset='1664' scopes_data_offset='1784' scopes_pcs_offset='2056' dependencies_offset='2344' nul_chk_table_offset='2352' oops_offset='1752' metadata_offset='1760' method='jdk.internal.mindex.M3TQ$Facts containsAll (Ljdk/internal/mindex/M3TQ$Facts;)Z' bytes='239' count='128' iicount='128' stamp='0.208'/>",
+      "kernel_nmethod": "<nmethod compile_id='566' compiler='c1' level='1' entry='0x00007f62f91f2fa0' size='832' address='0x00007f62f91f2e10' relocation_offset='344' insts_offset='400' stub_offset='664' scopes_data_offset='736' scopes_pcs_offset='760' dependencies_offset='824' metadata_offset='728' method='jdk.internal.mindex.M3TQ requireFactBudget (II)V' bytes='24' count='128' iicount='128' stamp='0.168'/>"
+    },
+    {
+      "path": "tq/target/current-c2-M3TQSparseContainmentTest-compilation.xml",
+      "compiler": "c2",
+      "containsAll_nmethod": "<nmethod compile_id='554' compile_kind='osr' compiler='c2' entry='0x00007fb9e09bad20' size='1488' address='0x00007fb9e09bab90' relocation_offset='344' insts_offset='400' stub_offset='1152' scopes_data_offset='1192' scopes_pcs_offset='1312' dependencies_offset='1440' nul_chk_table_offset='1448' metadata_offset='1176' method='jdk.internal.mindex.M3TQ$Facts containsAll (Ljdk/internal/mindex/M3TQ$Facts;)Z' bytes='239' count='103' backedge_count='1614' iicount='103' stamp='0.955'/>"
+    },
+    {
+      "path": "tq/target/current-c2-M3TQTest-compilation.xml",
+      "compiler": "c2",
+      "containsAll_nmethod": "<nmethod compile_id='687' compiler='c2' entry='0x00007f36849f3a20' size='1024' address='0x00007f36849f3890' relocation_offset='344' insts_offset='400' stub_offset='688' scopes_data_offset='736' scopes_pcs_offset='872' dependencies_offset='984' nul_chk_table_offset='992' oops_offset='712' metadata_offset='720' method='jdk.internal.mindex.M3TQ$Facts containsAll (Ljdk/internal/mindex/M3TQ$Facts;)Z' bytes='239' count='192' iicount='192' stamp='1.158'/>",
+      "kernel_nmethod": "<nmethod compile_id='517' compiler='c2' entry='0x00007f3684996120' size='728' address='0x00007f3684995f90' relocation_offset='344' insts_offset='400' stub_offset='560' scopes_data_offset='592' scopes_pcs_offset='640' dependencies_offset='720' metadata_offset='584' method='jdk.internal.mindex.M3TQ requireFactBudget (II)V' bytes='24' count='192' iicount='192' stamp='0.734'/>"
+    }
+  ],
+  "public_protected_api": [
+    {
+      "symbol": "M3TQ",
+      "protected_descriptor_bytes_equal": true,
+      "sha256": "14b77cdc0501b9b2ca4b036a96a5c5131891ff02d0fe19a9da18bc6ceb0880ef"
+    },
+    {
+      "symbol": "M3TQ-Facts",
+      "protected_descriptor_bytes_equal": true,
+      "sha256": "e6efac2cfb72f5511f5f81b05858c6f977d87803adfb9dbd4b003bebb0e33adf"
+    },
+    {
+      "symbol": "M3TQ-Op",
+      "protected_descriptor_bytes_equal": true,
+      "sha256": "a3d0ac8c0f8274356114a0456f028b0f4833f1160811c6fcfc566ddbb68e93dd"
+    }
+  ],
+  "artifact_inventory": [
+    {
+      "path": "tq-sync/target/surefire-reports/TEST-com.m3.tq.TQSyncTest.xml",
+      "bytes": 14820,
+      "sha256": "99e975731daf8f2d2e792a6137bf6e25d96bfa61d5180e8e326b2fb5c047960a"
+    },
+    {
+      "path": "tq/target/api-M3TQ-Facts-legacy.log",
+      "bytes": 600,
+      "sha256": "e6efac2cfb72f5511f5f81b05858c6f977d87803adfb9dbd4b003bebb0e33adf"
+    },
+    {
+      "path": "tq-sync/target/surefire-reports/com.m3.tq.TQSyncTest.txt",
+      "bytes": 290,
+      "sha256": "d88a330db3a3e87150ae11c6f782ef93da68406142dbe626fc5143a33a93a0fd"
+    },
+    {
+      "path": "tq/target/api-M3TQ-Facts-current.log",
+      "bytes": 600,
+      "sha256": "e6efac2cfb72f5511f5f81b05858c6f977d87803adfb9dbd4b003bebb0e33adf"
+    },
+    {
+      "path": "tq/target/api-M3TQ-Op-current.log",
+      "bytes": 776,
+      "sha256": "a3d0ac8c0f8274356114a0456f028b0f4833f1160811c6fcfc566ddbb68e93dd"
+    },
+    {
+      "path": "tq/target/api-M3TQ-Op-legacy.log",
+      "bytes": 776,
+      "sha256": "a3d0ac8c0f8274356114a0456f028b0f4833f1160811c6fcfc566ddbb68e93dd"
+    },
+    {
+      "path": "tq/target/api-M3TQ-current.log",
+      "bytes": 1985,
+      "sha256": "14b77cdc0501b9b2ca4b036a96a5c5131891ff02d0fe19a9da18bc6ceb0880ef"
+    },
+    {
+      "path": "tq/target/api-M3TQ-legacy.log",
+      "bytes": 1985,
+      "sha256": "14b77cdc0501b9b2ca4b036a96a5c5131891ff02d0fe19a9da18bc6ceb0880ef"
+    },
+    {
+      "path": "tq/target/c1-compilation.xml",
+      "bytes": 3921923,
+      "sha256": "0f5a1dd70dd75cf652c3d32b1d7ca3d45eb72dca66958f54c5a23a196212d431"
+    },
+    {
+      "path": "tq/target/c1.log",
+      "bytes": 244,
+      "sha256": "3bc7e102ad599f74e129a78515e43312d2a6ee690d0258265bcd5ff0570ebf15"
+    },
+    {
+      "path": "tq/target/c2-compilation.xml",
+      "bytes": 6003368,
+      "sha256": "6077cf75c40387187d6e19b740b3254407488dae703c0a42aac4ff11516ae2e9"
+    },
+    {
+      "path": "tq/target/c2.log",
+      "bytes": 244,
+      "sha256": "3bc7e102ad599f74e129a78515e43312d2a6ee690d0258265bcd5ff0570ebf15"
+    },
+    {
+      "path": "tq/target/compile-bootstrap.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "tq/target/compile-current-probes.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "tq/target/compile-current-product.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "tq/target/compile-native.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "tq/target/compile-probes.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "tq/target/compile-product.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "tq/target/containment-mutant-compile.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "tq/target/containment-mutant.log",
+      "bytes": 194,
+      "sha256": "7f0c04664c781d698bc64035a099fd8c2e567d58c05f3f77ed439df099bafb32"
+    },
+    {
+      "path": "tq/target/current-c1-M3TQSparseContainmentTest-compilation.xml",
+      "bytes": 2510881,
+      "sha256": "8dc4224aab76d15baf72fa9cf4d1d861d311d1708b2778c7c4356fc67b2b031b"
+    },
+    {
+      "path": "tq/target/current-c1-M3TQSparseContainmentTest.log",
+      "bytes": 152,
+      "sha256": "37b09077e45b2e4316c77369c17b2f0cd5f33fedd2b04c1fbd426e03ba90c7c5"
+    },
+    {
+      "path": "tq/target/current-c1-M3TQTest-compilation.xml",
+      "bytes": 3923152,
+      "sha256": "785097b6c1fcdd9a5ca966bbf5bcc85b144a51d465c28378a3bb27194eacf264"
+    },
+    {
+      "path": "tq/target/current-c1-M3TQTest.log",
+      "bytes": 244,
+      "sha256": "3bc7e102ad599f74e129a78515e43312d2a6ee690d0258265bcd5ff0570ebf15"
+    },
+    {
+      "path": "tq/target/current-c2-M3TQSparseContainmentTest-compilation.xml",
+      "bytes": 3710750,
+      "sha256": "35ba5c658995f3781aecc1d62da911da7941b072067d9f7751b1e3c4e50db177"
+    },
+    {
+      "path": "tq/target/current-c2-M3TQSparseContainmentTest.log",
+      "bytes": 152,
+      "sha256": "37b09077e45b2e4316c77369c17b2f0cd5f33fedd2b04c1fbd426e03ba90c7c5"
+    },
+    {
+      "path": "tq/target/current-c2-M3TQTest-compilation.xml",
+      "bytes": 6013037,
+      "sha256": "be11f635aabaddfc3bf5101261a11415b1ee22fff5a398c1399e28b8bc1895a1"
+    },
+    {
+      "path": "tq/target/current-c2-M3TQTest.log",
+      "bytes": 244,
+      "sha256": "3bc7e102ad599f74e129a78515e43312d2a6ee690d0258265bcd5ff0570ebf15"
+    },
+    {
+      "path": "tq/target/current-facts.log",
+      "bytes": 64,
+      "sha256": "6a9cb37c7a5ea5efd84b4e379bb68d1a2cf771cdfa42568ebef29c3435a805f8"
+    },
+    {
+      "path": "tq/target/current-interpreter-M3TQSparseContainmentTest.log",
+      "bytes": 59,
+      "sha256": "ea767dfc21f266cc161a4739b58a8041440ce678b4325efc3a18426d151813a2"
+    },
+    {
+      "path": "tq/target/current-interpreter-M3TQTest.log",
+      "bytes": 151,
+      "sha256": "55695bb123fd489212c094f5cda1b5b442de93f6c2eb9791b57c638fcbf29df6"
+    },
+    {
+      "path": "tq/target/current-jdeps.log",
+      "bytes": 27,
+      "sha256": "416c16c56ab6224e82c2a9d17257ce1be0934926efd7e428456662f1c93f08c1"
+    },
+    {
+      "path": "tq/target/current-mapped.log",
+      "bytes": 68,
+      "sha256": "644d37e1a97e8db0109769bbf3b39c0b4a77738afc83ced1e09e9dd3a9407939"
+    },
+    {
+      "path": "tq/target/current-mixed-M3TQSparseContainmentTest.log",
+      "bytes": 59,
+      "sha256": "ea767dfc21f266cc161a4739b58a8041440ce678b4325efc3a18426d151813a2"
+    },
+    {
+      "path": "tq/target/current-mixed-M3TQTest.log",
+      "bytes": 151,
+      "sha256": "55695bb123fd489212c094f5cda1b5b442de93f6c2eb9791b57c638fcbf29df6"
+    },
+    {
+      "path": "tq/target/interpreter.log",
+      "bytes": 151,
+      "sha256": "55695bb123fd489212c094f5cda1b5b442de93f6c2eb9791b57c638fcbf29df6"
+    },
+    {
+      "path": "tq/target/jdeps.log",
+      "bytes": 19,
+      "sha256": "340c89d6b34a8001f98fe9905e786ee8b711c0804a62e3b74efea017754cd6a3"
+    },
+    {
+      "path": "tq/target/mixed.log",
+      "bytes": 151,
+      "sha256": "55695bb123fd489212c094f5cda1b5b442de93f6c2eb9791b57c638fcbf29df6"
+    },
+    {
+      "path": "tq/target/native-mutant-compile.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "tq/target/native-mutant.log",
+      "bytes": 178,
+      "sha256": "984f6dc4ad57799abaea78d6afb4a329f3104c64e71f97e4afa68fdfa8342de0"
+    },
+    {
+      "path": "tq/target/original-facts.log",
+      "bytes": 64,
+      "sha256": "6a9cb37c7a5ea5efd84b4e379bb68d1a2cf771cdfa42568ebef29c3435a805f8"
+    },
+    {
+      "path": "tq/target/original-mapped.log",
+      "bytes": 68,
+      "sha256": "644d37e1a97e8db0109769bbf3b39c0b4a77738afc83ced1e09e9dd3a9407939"
+    },
+    {
+      "path": "tq/target/seam-mutant-compile.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "tq/target/seam-mutant.log",
+      "bytes": 219,
+      "sha256": "289986e5963a660ed1f13895c78e6a2e63d976a8fa9550bcf983741fbb985bf9"
+    },
+    {
+      "path": "tq/target/surefire-reports/TEST-com.m3.tq.TQTest.xml",
+      "bytes": 16233,
+      "sha256": "c3c5a023ad7e3b0e31e1c9a77a731276454ff29ab2b4f4afaf9a3b3c4ec9c894"
+    },
+    {
+      "path": "tq/target/surefire-reports/com.m3.tq.TQTest.txt",
+      "bytes": 283,
+      "sha256": "a4e044a2494d6d200896d23496ae1e9245166faa0c1dbdbeea5f9d60d8189631"
+    }
+  ],
+  "pending": [
+    "Retained source guard reconciliation and exact receiver custody",
+    "Native undefined-behavior rerun",
+    "Matched complete M3JDK21 image",
+    "New Matcher/prepared-String facts jtreg and bootstrap qualification",
+    "Allocation and performance measurement"
+  ],
+  "not_authority": [
+    "No phase promotion",
+    "No new Matcher or full String runtime acceptance",
+    "No full DAG acceptance"
+  ],
+  "run_url": "https://github.com/hsoliwal/M3JDK21/actions/runs/39112943825",
+  "job_url": "https://github.com/hsoliwal/M3JDK21/actions/runs/39112943825/job/117632734743",
+  "artifact_url": "https://github.com/hsoliwal/M3JDK21/actions/runs/39112943825/artifacts/12133424256",
+  "later_guard_failure": {
+    "step": "TQ successor recipe and custody",
+    "script": "m3/tooling/tq-sync/verify-plan.py",
+    "refusal": "dependency guard drift: m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3Jdk21HashPinnedSnapshotRecipe.java"
+  },
+  "not_run": [
+    "Native undefined-behavior gate",
+    "Installed bytes and retained mapping",
+    "Complete fastdebug image job",
+    "New Matcher/prepared-String facts jtreg and image integration"
+  ],
+  "guard_frontier": [
+    "m3/tooling/tq/plan.json",
+    "m3/tooling/tq-sync/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/11-plan.json.txt",
+    "m3/tooling/tq-sync/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/manifest.tsv",
+    "m3/tooling/tq-sync/plan.json"
+  ],
+  "metadata_copyright": "2026 Hitesh Soliwal and Contributors to the Synexia Project",
+  "metadata_license": "Apache-2.0",
+  "preserved_payload_rights": "Artifact contents retain their original per-file and upstream rights; observation metadata does not relicense source, logs or reports.",
+  "head_commit_url": "https://github.com/hsoliwal/M3JDK21/commit/7f0cd03024155b11f22c88990192f11e1d1014b7",
+  "tested_checkout_url": "https://github.com/hsoliwal/M3JDK21/commit/b30c9ebefbe89c295a59544770a07dd5a03eb53d",
+  "tested_tree_url": "https://github.com/hsoliwal/M3JDK21/tree/b9cbf0825d9b388d42357cf5cd7a96cc704136b9",
+  "receipt_creation": "Observed hosted-run evidence, independently inspected from the downloaded original artifact; not a new local execution claim."
+}

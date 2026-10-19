@@ -65,11 +65,18 @@ public interface Consumer<T> {
         return (T t) -> { accept(t); after.accept(t); };
     }
 
-    /** Execute with an explicit borrowed monitor, retaining the original SAM. */
+    /**
+     * Executes with an explicit borrowed monitor, retaining the original SAM.
+     *
+     * @param value the input value
+     * @param monitor the non-null monitor borrowed for this invocation
+     * @throws NullPointerException if {@code monitor} is null
+     */
     default void accept(T value, java.util.concurrent.ProgressMonitor monitor) {
         java.util.Objects.requireNonNull(monitor, "monitor");
-        try (java.util.concurrent.ProgressMonitors.Scope ignored =
-                     java.util.concurrent.ProgressMonitors.bind(monitor)) {
+        java.util.concurrent.ProgressMonitors.Scope scope =
+                java.util.concurrent.ProgressMonitors.bind(monitor);
+        try (scope) {
             monitor.checkCancelled();
             accept(value);
             monitor.checkCancelled();

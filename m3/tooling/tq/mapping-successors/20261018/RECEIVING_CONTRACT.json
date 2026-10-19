@@ -1,0 +1,193 @@
+{
+  "schema": "M3_MAPPING_METADATA_RECEIVING_CONTRACT_V1",
+  "baseline": "c857a9ecf07270e9cd0b199221fd9d1d8d8aa744",
+  "pipeline": [
+    "Existing canonical B OpenRewrite TEXT SDK emits only versioned sealed plan and exact resource payloads",
+    "Existing unchanged m3/migration/recipe.py applies final metadata after full exact-state admission"
+  ],
+  "final_files_are_direct_B_results": false,
+  "runtime_source_writes": false,
+  "statuses": {
+    "m3.prefix-z": "implemented-tested",
+    "m3.p0-view-dependencies": "pending",
+    "synexia.frozen-chars": "pending",
+    "synexia.inventory-producer": "pending",
+    "synexia.inventory-cli": "pending",
+    "bridge.MIndexCanonicalBridge": "pending",
+    "bridge.MIndexDagDeferredSwap": "pending",
+    "bridge.MIndexDagPage": "pending",
+    "bridge.MIndexDagPageCodec": "pending",
+    "bridge.MIndexKnowledgeArgumentCompiler": "pending",
+    "bridge.MIndexKnowledgeArguments": "pending",
+    "bridge.MIndexLexiconCoordinateCompilerCli": "pending",
+    "bridge.MIndexLexiconCoordinateManifest": "pending",
+    "bridge.MIndexLexiconCoordinatePublisher": "pending",
+    "bridge.MIndexLexiconCoordinateSpace": "pending",
+    "bridge.MIndexRuntimeStructuralAdapterProvider": "pending",
+    "bridge.MIndexStringConversionBridge": "pending",
+    "family.entire-source-closure": "pending",
+    "family.structural-owners": "pending",
+    "family.substring-conflict": "pending",
+    "family.word-facts": "pending",
+    "family.application-structures": "pending",
+    "route-a.canonical-storage": "pending",
+    "route-b.compiler-lowering": "pending",
+    "route-c.complete-jdk": "pending",
+    "synexia.counterpart.MIndexVersionTable": "implemented-unverified",
+    "synexia.counterpart.MIndexLibraryRelease": "implemented-unverified",
+    "synexia.counterpart.MIndexVmSession": "implemented-unverified",
+    "synexia.counterpart.MIndexVmPrecomputeKey": "implemented-unverified",
+    "synexia.counterpart.MIndexClass": "implemented-unverified",
+    "synexia.counterpart.MIndexClassIndex": "implemented-unverified",
+    "synexia.counterpart.MIndexAST": "pending",
+    "synexia.counterpart.MIndexASTPrecompute": "pending",
+    "synexia.counterpart.MIndexCompilerASTPrecompute": "pending",
+    "synexia.counterpart.MIndexClassBoundary": "implemented-unverified",
+    "synexia.counterpart.MIndexJvmDescriptor": "implemented-unverified",
+    "synexia.counterpart.MIndexMember": "implemented-unverified",
+    "synexia.counterpart.MIndexMemberKind": "implemented-unverified",
+    "synexia.counterpart.MIndexMemberFlags": "implemented-unverified",
+    "synexia.counterpart.MIndexClassFlags": "implemented-unverified",
+    "synexia.counterpart.MIndexField": "implemented-unverified",
+    "synexia.counterpart.MIndexMethod": "implemented-unverified",
+    "synexia.counterpart.MIndexConstructor": "implemented-unverified",
+    "synexia.counterpart.MIndexRecordComponent": "implemented-unverified",
+    "synexia.jcc-recipe-laboratory": "blocked",
+    "synexia.jcc-java-jni-regression": "blocked",
+    "synexia.counterpart.MIndexRegexTrigramQuery": "implemented-unverified",
+    "synexia.collections.SegmentedAddress28": "implemented-unverified",
+    "synexia.collections.SegmentedIntLane28": "implemented-unverified",
+    "synexia.collections.SegmentedLongLane28": "implemented-unverified",
+    "synexia.collections.SegmentedBitLane28": "implemented-unverified",
+    "synexia.collections.PackedBitAtoms": "implemented-unverified",
+    "synexia.regex.mr": "implemented-unverified",
+    "synexia.regex.rxm": "pending",
+    "synexia.regex.rxa": "pending",
+    "synexia.counterpart.MIndexRegexTrigramQuery.sparseLookup": "implemented-unverified"
+  },
+  "gates": [
+    {
+      "id": "source-inventory",
+      "status": "blocked",
+      "reason": "Connector inspection is partial; local clone DNS failed, and the full existing InventoryWriter scan has not run."
+    },
+    {
+      "id": "ownership-naming",
+      "status": "open",
+      "reason": "Legacy naming history preserved; canonical owners and substring contract conflict remain unresolved."
+    },
+    {
+      "id": "scoped-prefix-and-tool-tests",
+      "status": "passed",
+      "reason": "Local Java21 normal/interpreter prefix and interop, 45 recipe checks and 26 validator tests passed; see local-20261002-final receipts."
+    },
+    {
+      "id": "source-owner-differential",
+      "status": "open",
+      "reason": "Independent stock String oracle tested. Full original MIndex owner module tests not executed."
+    },
+    {
+      "id": "maven-recipe-lifecycle",
+      "status": "blocked",
+      "reason": "Maven unavailable locally; dependency-free Java recipe compiled/run directly. POM is unexecuted."
+    },
+    {
+      "id": "route-a-canonical-storage",
+      "status": "open",
+      "reason": "P0 views reused; canonical interning/sharing/lifetime not accepted."
+    },
+    {
+      "id": "route-b-lowering",
+      "status": "open",
+      "reason": "Not implemented/tested in this tranche."
+    },
+    {
+      "id": "route-c-complete-image",
+      "status": "open",
+      "reason": "No exact-candidate complete JDK image built."
+    },
+    {
+      "id": "runtime-flag-off",
+      "status": "open",
+      "reason": "Historical 86 tests belong to PR6 head3776, not this candidate."
+    },
+    {
+      "id": "runtime-enabled",
+      "status": "failed",
+      "reason": "Historical PR6 enabled16 pass and2 StringJoiner OOME failures remain unresolved; no fresh runtime result."
+    },
+    {
+      "id": "jit-intrinsics",
+      "status": "open",
+      "reason": "PR6 enabled execution is interpreter-only; stock-JVM algorithm tests do not close this gate."
+    },
+    {
+      "id": "gc-intern-jni-jvmti",
+      "status": "open",
+      "reason": "Owner lifetime, VM StringTable, JNI modified UTF-8/release paths and JVMTI require exact-head runtime tests."
+    },
+    {
+      "id": "cds-serialization-serviceability",
+      "status": "open",
+      "reason": "No candidate acceptance."
+    },
+    {
+      "id": "string-unicode-regex",
+      "status": "open",
+      "reason": "Focused stock view regex/codepoint tests passed; exhaustive Java21 String behavior coverage remains open."
+    },
+    {
+      "id": "shared-generation-cross-process",
+      "status": "open",
+      "reason": "Atomic immutable generations, malformed/truncated mappings, close/eviction and platform replacement not accepted."
+    },
+    {
+      "id": "windows-native",
+      "status": "open",
+      "reason": "No Windows execution; no WSL used."
+    },
+    {
+      "id": "performance-memory",
+      "status": "open",
+      "reason": "No benchmarks or retained heap/native/mapped memory measurements; no speed claim."
+    },
+    {
+      "id": "independent-audit",
+      "status": "open",
+      "reason": "Self-review and negative tests performed; no independent reviewer or complete omission audit."
+    },
+    {
+      "id": "future-port-full-closure",
+      "status": "open",
+      "reason": "Three-way TSV review implemented; full pinned scan, symbol resolution and complete CI wiring remain unexecuted."
+    },
+    {
+      "id": "target-baseline-drift",
+      "status": "blocked",
+      "reason": "PR #16 creation observed master aceb243be751f327c8d59f6d2ebcbeb126db531b; pinned candidate is based on d639. Reconcile current master before merge; no blind overwrite."
+    }
+  ],
+  "coverage": {
+    "source_tree_complete": false,
+    "dependency_closure_complete": false,
+    "inventory_receipt": null,
+    "uninspected_domains": [
+      "whole source tree and non-prefix dependency closure",
+      "complete Java/MatIndex primitive/tuple/collection APIs",
+      "structural owners and all bridges",
+      "compiler lowering and native ABI",
+      "shared storage and cross-process generation lifetime",
+      "all test/resource/generated-source owners"
+    ]
+  },
+  "fixed_verifier_hashes": {
+    "m3/tooling/tq/verify-plan.py": "ff2c31f57aac81a7049612557a3757781927563bd2d7a7b598aa62a116e1d978",
+    "m3/tooling/tq-sync/verify-plan.py": "905fb42c90ef44cbc5d4449218b825eca025fd23ae169b15606b0b95de359793",
+    "m3/migration/migration.py": "fd54e5fade1fc3050816265f2317967dd4176e7bb5e0bc55e6f620878026e88e",
+    "m3/migration/recipe.py": "453d976a5f29526432be138b357d3f52f868fcc40a4ee697d969cc0836359628"
+  },
+  "structural_custody_scope": "Current target/source/recipe metadata only; no completed-family or image acceptance",
+  "lane28_guard_drift": "Retained separate existing Java/text recipe-source guard hold; not refreshed",
+  "complete_phase_promotion": false,
+  "matcher_or_full_image_promotion": false
+}

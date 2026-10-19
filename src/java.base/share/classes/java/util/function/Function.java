@@ -98,11 +98,19 @@ public interface Function<T, R> {
         return t -> t;
     }
 
-    /** Execute with an explicit borrowed monitor, retaining the original SAM. */
+    /**
+     * Executes with an explicit borrowed monitor, retaining the original SAM.
+     *
+     * @param value the input value
+     * @param monitor the non-null monitor borrowed for this invocation
+     * @return the result of applying this function
+     * @throws NullPointerException if {@code monitor} is null
+     */
     default R apply(T value, java.util.concurrent.ProgressMonitor monitor) {
         java.util.Objects.requireNonNull(monitor, "monitor");
-        try (java.util.concurrent.ProgressMonitors.Scope ignored =
-                     java.util.concurrent.ProgressMonitors.bind(monitor)) {
+        java.util.concurrent.ProgressMonitors.Scope scope =
+                java.util.concurrent.ProgressMonitors.bind(monitor);
+        try (scope) {
             monitor.checkCancelled();
             R result = apply(value);
             monitor.checkCancelled();

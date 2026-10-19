@@ -11,7 +11,11 @@ package java.util.concurrent;
  */
 @FunctionalInterface
 public interface MonitoredRunnable extends Runnable {
-    /** Replaceable task body; implementations report progress through monitor. */
+    /**
+     * Replaceable task body; implementations report progress through monitor.
+     *
+     * @param monitor the monitor supplied to the execution body
+     */
     void runMonitored(ProgressMonitor monitor);
 
     /** Template method: inherit monitor, check cancellation, dispatch body. */

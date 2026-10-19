@@ -1,0 +1,52 @@
+{
+  "libm3_collections_mask.so": {
+    "exports": [
+      "Java_com_m3_collections_M3IndexMaskCompactor_positionsAbiNative",
+      "Java_com_m3_collections_M3IndexMaskCompactor_rangeAbiNative",
+      "Java_com_m3_collections_M3IndexMaskCompactor_selectLongWindowNative",
+      "Java_com_m3_collections_M3IndexMaskCompactor_selectNative",
+      "Java_com_m3_collections_M3IndexMaskCompactor_selectPositionsNative",
+      "Java_com_m3_collections_M3IndexMaskCompactor_selectRangeNative",
+      "Java_com_m3_collections_M3IndexMaskCompactor_selectWindowNative",
+      "Java_com_m3_collections_M3IndexMaskWindow_scanBoundedNative",
+      "Java_com_m3_collections_M3IndexMaskWindow_scanNative"
+    ],
+    "prototypes": {
+      "Java_com_m3_collections_M3IndexMaskCompactor_positionsAbiNative": "jint (JNIEnv *, jclass)",
+      "Java_com_m3_collections_M3IndexMaskCompactor_rangeAbiNative": "jint (JNIEnv *, jclass)",
+      "Java_com_m3_collections_M3IndexMaskCompactor_selectLongWindowNative": "jlongArray (JNIEnv *, jclass, jlongArray, jint, jbyteArray, jint, jint, jint)",
+      "Java_com_m3_collections_M3IndexMaskCompactor_selectNative": "jintArray (JNIEnv *, jclass, jintArray, jbyteArray, jint)",
+      "Java_com_m3_collections_M3IndexMaskCompactor_selectPositionsNative": "jintArray (JNIEnv *, jclass, jbyteArray, jint)",
+      "Java_com_m3_collections_M3IndexMaskCompactor_selectRangeNative": "jintArray (JNIEnv *, jclass, jintArray, jbyteArray, jint, jint, jint)",
+      "Java_com_m3_collections_M3IndexMaskCompactor_selectWindowNative": "jintArray (JNIEnv *, jclass, jintArray, jint, jbyteArray, jint, jint, jint)",
+      "Java_com_m3_collections_M3IndexMaskWindow_scanBoundedNative": "jlong (JNIEnv *, jclass, jintArray, jbyteArray, jint, jint, jint, jint, jintArray, jint, jint)",
+      "Java_com_m3_collections_M3IndexMaskWindow_scanNative": "jlong (JNIEnv *, jclass, jintArray, jbyteArray, jint, jint, jint, jintArray, jint, jint)"
+    },
+    "retained_preimage_prototypes": {
+      "Java_com_m3_collections_M3IndexMaskCompactor_positionsAbiNative": "jint (JNIEnv *, jclass)",
+      "Java_com_m3_collections_M3IndexMaskCompactor_rangeAbiNative": "jint (JNIEnv *, jclass)",
+      "Java_com_m3_collections_M3IndexMaskCompactor_selectLongWindowNative": "jlongArray (JNIEnv *, jclass, jlongArray, jint, jbyteArray, jint, jint, jint)",
+      "Java_com_m3_collections_M3IndexMaskCompactor_selectNative": "jintArray (JNIEnv *, jclass, jintArray, jbyteArray, jint)",
+      "Java_com_m3_collections_M3IndexMaskCompactor_selectPositionsNative": "jintArray (JNIEnv *, jclass, jbyteArray, jint)",
+      "Java_com_m3_collections_M3IndexMaskCompactor_selectRangeNative": "jintArray (JNIEnv *, jclass, jintArray, jbyteArray, jint, jint, jint)",
+      "Java_com_m3_collections_M3IndexMaskCompactor_selectWindowNative": "jintArray (JNIEnv *, jclass, jintArray, jint, jbyteArray, jint, jint, jint)",
+      "Java_com_m3_collections_M3IndexMaskWindow_scanBoundedNative": "jlong (JNIEnv *, jclass, jintArray, jbyteArray, jint, jint, jint, jint, jintArray, jint, jint)",
+      "Java_com_m3_collections_M3IndexMaskWindow_scanNative": "jlong (JNIEnv *, jclass, jintArray, jbyteArray, jint, jint, jint, jintArray, jint, jint)"
+    },
+    "sha256": "cab4a9334b538e37839af4d14976550634b8a92b1c80f0d827a1abf3c949c82f"
+  },
+  "libm3_collections_pathmask.so": {
+    "exports": [
+      "Java_com_m3_collections_M3IndexPathMasks_selectLongNative",
+      "Java_com_m3_collections_M3IndexPathMasks_selectNative"
+    ],
+    "prototypes": {
+      "Java_com_m3_collections_M3IndexPathMasks_selectLongNative": "jlongArray (JNIEnv *, jclass, jlongArray, jintArray, jobjectArray, jintArray, jintArray, jint, jint, jint)",
+      "Java_com_m3_collections_M3IndexPathMasks_selectNative": "jintArray (JNIEnv *, jclass, jintArray, jintArray, jobjectArray, jintArray, jintArray, jint, jint, jint)"
+    },
+    "retained_preimage_prototypes": {
+      "Java_com_m3_collections_M3IndexPathMasks_selectNative": "jintArray (JNIEnv *, jclass, jintArray, jintArray, jobjectArray, jintArray, jintArray, jint, jint, jint)"
+    },
+    "sha256": "d7f1736954ab311dbc39600e4b5f09f3c2f4c79d64415d9e3a6587b85c3a5ed5"
+  }
+}

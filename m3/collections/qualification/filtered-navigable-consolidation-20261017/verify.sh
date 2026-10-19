@@ -9,8 +9,8 @@ check_blob() {
   actual=$(git hash-object "$path")
   [[ "$actual" == "$expected" ]] || { echo "blob mismatch $path: $actual != $expected" >&2; exit 1; }
 }
-check_blob 10bc8328c0aef2cab69ba0d55f7f566fc4e60df3 m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java
-check_blob ccf65b212b756fe2147b68d3c1d6655e87bb3103 m3/collections/src/main/java/com/m3/collections/M3FilteredNavigableSet.java
+check_blob 64d6b7967b360cfa2477b8912e53732ae33203e1 m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java
+check_blob 9c61e182e96c129e161fdd179d38eb1aac35c48b m3/collections/src/main/java/com/m3/collections/M3FilteredNavigableSet.java
 check_blob a2adc60332d2983d5a830bdcd07ceb2c34984691 m3/collections/src/test/java/com/m3/collections/M3FilteredNavigableFacadeSelfTest.java
 build=$(mktemp -d)
 trap 'rm -rf -- "$build"' EXIT
