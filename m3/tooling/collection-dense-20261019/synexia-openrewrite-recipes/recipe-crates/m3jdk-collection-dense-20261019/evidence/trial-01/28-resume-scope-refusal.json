@@ -1,0 +1,7 @@
+{
+  "stage": "performance-resume",
+  "status": "FAILED_HARNESS",
+  "error": "NameError: management is not defined",
+  "product_failure": false,
+  "correction": "move immutable management compiler/runtime options before resume branch; no semantic change"
+}

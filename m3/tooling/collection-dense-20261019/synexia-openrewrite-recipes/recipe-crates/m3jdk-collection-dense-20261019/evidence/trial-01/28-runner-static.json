@@ -1,0 +1,5 @@
+{
+  "syntax_ast": "PASS",
+  "bytecode_compile": "PASS",
+  "resume_context_before_branch": true
+}
