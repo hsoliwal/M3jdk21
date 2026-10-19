@@ -80,6 +80,23 @@ public final class DirectOffsetString {
         }
     }
 
+    private static final class EntryHidingIdentityMap extends IdentityHashMap<Object, Object> {
+        @Override public java.util.Set<Map.Entry<Object, Object>> entrySet() {
+            return java.util.Collections.emptySet();
+        }
+    }
+
+    private static void subclassContract() {
+        EntryHidingIdentityMap subclass = new EntryHidingIdentityMap();
+        subclass.put(new Object(), "retained");
+        eq("{}", subclass.toString(), "inherited AbstractMap string uses virtual EntrySet");
+        check(subclass.equals(Collections.emptyMap()),
+                "generic foreign-map equality uses subclass EntrySet semantics");
+        check(!subclass.equals(Map.of("a", "b")),
+                "subclass virtual empty EntrySet differs from nonempty foreign map");
+        check(subclass.size() == 1, "physical mappings stay authoritative");
+    }
+
     private static void foreignMapEquality() {
         Random random = new Random(0x4d334944454e4551L);
         for (int trial = 0; trial < 280; trial++) {
@@ -141,6 +158,7 @@ public final class DirectOffsetString {
         IdentityHashMap<Object, Object> empty = new IdentityHashMap<>();
         eq("{}", empty.toString(), "empty");
         randomized();
+        subclassContract();
         foreignMapEquality();
         failFastAfterUserString();
         System.out.println("PASS DirectOffsetString checks=" + checks);
