@@ -185,8 +185,10 @@ public final class M3TableFilterInsertSelectionTest {
             TableRowSorter<Rows> sb = new TableRowSorter<>(mb);
             sb.setSortKeys(List.of(new javax.swing.RowSorter.SortKey(0, SortOrder.ASCENDING)));
             b.setRowSorter(sb);
+            List<String> log = new ArrayList<>();
             for (int step = 0; step < 200; step++) {
                 int op = rnd.nextInt(10);
+                String what = "";
                 int size = ma.getRowCount();
                 if (op < 3 && a.getRowCount() > 0) {
                     int v0 = rnd.nextInt(a.getRowCount());
@@ -217,9 +219,11 @@ public final class M3TableFilterInsertSelectionTest {
                 } else if (op < 9) {
                     if (rnd.nextBoolean()) {
                         SortOrder o = rnd.nextBoolean() ? SortOrder.ASCENDING : SortOrder.DESCENDING;
+                        what = "sort " + o + " (was " + a.getRowSorter().getSortKeys() + ")";
                         a.getRowSorter().setSortKeys(List.of(new javax.swing.RowSorter.SortKey(0, o)));
                         b.getRowSorter().setSortKeys(List.of(new javax.swing.RowSorter.SortKey(0, o)));
                     } else {
+                        what = "refilter";
                         refilter(a);
                     }
                 } else if (size > 0) {
@@ -230,14 +234,26 @@ public final class M3TableFilterInsertSelectionTest {
                     ma.fireTableRowsUpdated(at, at);
                     mb.fireTableRowsUpdated(at, at);
                 }
+                log.add(step + " op " + op + " " + what + " A " + selectedModel(a) + " lead " + a.getSelectionModel().getLeadSelectionIndex() + " anchor " + a.getSelectionModel().getAnchorSelectionIndex() + " B " + selectedModel(b));
                 for (int v = 0; v < a.getRowCount(); v++) {
                     int m = a.convertRowIndexToModel(v);
                     boolean sa = a.isRowSelected(v);
                     boolean sbv = b.isRowSelected(b.convertRowIndexToView(m));
                     check(sa == sbv, "seed " + seed + " step " + step + " op " + op + ": model row " + m
-                            + " selected filtered " + sa + " unfiltered " + sbv);
+                            + " selected filtered " + sa + " unfiltered " + sbv + "\n"
+                            + String.join("\n", log.subList(Math.max(0, log.size() - 6), log.size())));
                 }
             }
         }
+    }
+
+    /** The selected rows of {@code t} as sorted model indices. */
+    static String selectedModel(JTable t) {
+        int[] rows = t.getSelectedRows();
+        for (int i = 0; i < rows.length; i++) {
+            rows[i] = t.convertRowIndexToModel(rows[i]);
+        }
+        Arrays.sort(rows);
+        return Arrays.toString(rows);
     }
 }

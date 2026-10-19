@@ -1,0 +1,22 @@
+# Copyright 2026 Hitesh Soliwal and contributors
+# SPDX-License-Identifier: Apache-2.0
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.openrewrite.viewport.M3SwingTableFilterInsertSelection
+displayName: JTable keeps rows inserted at a selected model index unselected when a filter hides rows (JDK-8366188)
+description: >-
+  JDK-8366188 (m3/docs/swing-viewport/UPSTREAM_DEFECTS.tsv D5). With a filter that hides rows, JTable's
+  SortManager keeps the selection in model terms after a sorter event and shifts it on an insert with
+  DefaultListSelectionModel.insertIndexInterval(start, length, true), which selects the new indices when the
+  index at the insertion point is selected. A row inserted at the selected model index then came back selected
+  too, while the same insert without a filter keeps one selected row. The inserted model rows are deselected
+  right after the shift, and the cache's lead and anchor restored. Unconditional, like the JDK-8299722 fix.
+  Applied by M3PerFileApply; a second pass must report UNCHANGED.
+recipeList:
+  - com.synexia.openrewrite.viewport.M3InsertStatements:
+      declaringClasses: [javax.swing.JTable$SortManager, javax.swing.JTable.SortManager]
+      methodName: cacheSelection
+      parameterCount: 2
+      anchor: "modelSelection.insertIndexInterval(change.startModelIndex,"
+      position: AFTER
+      statements: "                    // M3 (JDK-8366188): rows the model inserted are new rows, never selected;\n                    // insertIndexInterval selects them when the row at the insertion point was.\n                    if (modelSelection.isSelectedIndex(change.startModelIndex)) {\n                        int lead = modelSelection.getLeadSelectionIndex();\n                        int anchor = modelSelection.getAnchorSelectionIndex();\n                        modelSelection.removeSelectionInterval(change.startModelIndex,\n                                                               change.endModelIndex);\n                        SwingUtilities2.setLeadAnchorWithoutSelection(\n                                modelSelection, lead, anchor);\n                    }"

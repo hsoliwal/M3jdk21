@@ -4018,6 +4018,16 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
                     modelSelection.insertIndexInterval(change.startModelIndex,
                                                        change.length,
                                                        true);
+                    // M3 (JDK-8366188): rows the model inserted are new rows, never selected;
+                    // insertIndexInterval selects them when the row at the insertion point was.
+                    if (modelSelection.isSelectedIndex(change.startModelIndex)) {
+                        int lead = modelSelection.getLeadSelectionIndex();
+                        int anchor = modelSelection.getAnchorSelectionIndex();
+                        modelSelection.removeSelectionInterval(change.startModelIndex,
+                                                               change.endModelIndex);
+                        SwingUtilities2.setLeadAnchorWithoutSelection(
+                                modelSelection, lead, anchor);
+                    }
                     break;
                 default:
                     break;
