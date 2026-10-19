@@ -4,6 +4,8 @@
  */
 package com.m3.viewport;
 
+import com.m3.collections.M3ItemState;
+
 /**
  * The cross-toolkit row painter of the M3 renderer (see {@code m3/docs/viewport-everywhere/DESIGN.md} section 6).
  * <p>Drawn modes paint rows themselves: one implementation per drawing backend (the M3 drawn-mode backend for SWT and

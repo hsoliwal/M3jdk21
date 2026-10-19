@@ -6,11 +6,11 @@
 # Usage: gen_provenance.sh <donor-dir> <worktree-m3-dir>
 #   <donor-dir> holds swt/<Class>.java and swt-tests/<Class>.java exported from the source commit.
 set -eu
-DONOR=$1; M3=$2; MAP=$(dirname "$0")/WAVE1_MAP.tsv
+DONOR=$1; M3=$2; MAP=$(dirname "$0")/WAVE1_MAP.tsv; ELECTION=$(dirname "$0")/../LICENSE_ELECTION.tsv
 SRC=553eefd41d9961d303c41e0e4e181712e64a1e45
 BASE="bundles/org.eclipse.swt/Eclipse SWT/common/org/eclipse/swt"
 TESTS="tests/org.eclipse.swt.tests/JUnit Tests/org/eclipse/swt/tests/junit"
-for module in collections viewport-core; do
+for module in collections; do
   pkg=$([ $module = collections ] && echo collections || echo viewport)
   out="$M3/$module/provenance-viewport-20261018.json"
   {
@@ -28,7 +28,7 @@ for module in collections viewport-core; do
       printf '     "changes": ["Apache-2.0 header with donor attribution kept", "type rename", "package move", "%s"],\n' \
         "$([ $kind = main ] && echo 'package-private surface made public; SWT.error replaced by the identical IllegalArgumentException' || echo 'reflective class names follow the rename')"
       printf '     "license": "Apache-2.0, elected from Apache-2.0 OR EPL-2.0 (extraction header %s; LICENSE_ELECTION.tsv)"},\n' \
-        "$(awk -F'\t' -v c="$cls" '$1 == c {print $4; exit}' "$(dirname "$0")/../LICENSE_ELECTION.tsv")"
+        "$(awk -F'\t' -v c="$cls" '$1 == c {print $4; exit}' "$ELECTION")"
     done | sed '$ s/},$/}/'
     printf '  ]\n}\n'
   } > "$out"

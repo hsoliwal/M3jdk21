@@ -102,6 +102,8 @@ public class M3GridSelectionsTest {
 		assertFalse (selection.remove ("other"));
 		Item stranger = new Item (99);
 		stranger.position = 3;
+		assertFalse (selection.contains (stranger), "a position inside the window but another item");
+		stranger.position = 1000;
 		assertFalse (selection.contains (stranger), "a foreign position is not membership");
 		for (int i = 0; i < 30; i++) assertTrue (selection.remove (items.get (i)));
 		assertEquals (10, selection.size ());
@@ -170,8 +172,13 @@ public class M3GridSelectionsTest {
 		out [0].y = 8;
 		assertTrue (cells.contains (new M3CellPoint (2, 3)), "toArray hands out copies");
 		cells.get (0).x = 4;
+		cells.add (new M3CellPoint (6, 6));
+		cells.get (1).x = 7;
+		assertEquals (new M3CellPoint (7, 6), cells.remove (1), "removing a point changed in place before reindex");
+		assertTrue (cells.contains (new M3CellPoint (6, 6)), "a count changed in place stays until reindex");
 		cells.reindex ();
 		assertTrue (cells.contains (new M3CellPoint (4, 3)), "reindex after an in-place change");
+		assertFalse (cells.contains (new M3CellPoint (6, 6)));
 		assertFalse (cells.removeAll (List.of ("not a point")));
 		assertFalse (cells.retainAll (List.of (new M3CellPoint (4, 3), "not a point")));
 		assertEquals ("M3CellPoint {4, 3}", cells.get (0).toString ());

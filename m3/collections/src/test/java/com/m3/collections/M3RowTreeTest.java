@@ -184,6 +184,20 @@ public class M3RowTreeTest {
 		assertThrows (IndexOutOfBoundsException.class, () -> tree.add (100, new Item (1)));
 		assertThrows (IndexOutOfBoundsException.class, () -> tree.remove (39));
 		assertThrows (IndexOutOfBoundsException.class, () -> tree.set (39, new Item (1)));
+		Item member = (Item) tree.get (3);
+		assertTrue (tree.contains (member));
+		long extent = tree.totalExtent ();
+		tree.update (member);
+		assertEquals (extent, tree.totalExtent (), "an unchanged item needs no reweigh");
+		int seen = 0;
+		for (Iterator<M3RowTreeItem> it = tree.iterator (); it.hasNext (); it.next ()) seen++;
+		assertEquals (tree.size (), seen);
+		M3RowTree empty = new M3RowTree ();
+		assertFalse (empty.iterator ().hasNext ());
+		Item single = new Item (1);
+		empty.add (single);
+		assertSame (single, empty.remove (0));
+		assertEquals (0, empty.size (), "removing the only item empties the tree");
 	}
 
 	@Test
