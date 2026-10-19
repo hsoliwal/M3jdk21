@@ -6,6 +6,10 @@ on:
       - 'm3/tooling/migration-recipes/**'
       - 'm3/tooling/module-packs/**'
       - '.github/workflows/m3-class-ver.yml'
+      - 'm3/migration/classver.py'
+      - 'm3/migration/classver-evidence.json'
+      - 'm3/migration/test/test_classver.py'
+      - 'm3/migration/recipe.py'
   workflow_dispatch:
 permissions:
   contents: read
@@ -28,7 +32,8 @@ jobs:
           set -euo pipefail
           mkdir m3-class-ver-proof
           git rev-parse HEAD > m3-class-ver-proof/commit.txt
-          git diff --check HEAD^ HEAD
+          python3 -S -m unittest -v m3/migration/test/test_classver.py
+          python3 -S m3/migration/classver.py > m3-class-ver-proof/whitespace.json
           java -version 2> m3-class-ver-proof/java.txt
           mvn -version > m3-class-ver-proof/maven.txt
       - name: Execute actual ClassVer parser and scheduler tests
