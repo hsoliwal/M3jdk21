@@ -1,4 +1,5 @@
 /* Copyright 2026 Hitesh Soliwal and contributors. SPDX-License-Identifier: Apache-2.0 */
+/* Modified 2026: compare available JNI selection and retain explicit unavailable-library refusal. */
 package com.m3.collections;
 
 import java.util.ArrayList;
@@ -160,8 +161,27 @@ public final class M3ObjectRangeMapSelfTest {
                 () -> map.updateState(5, 4, 4), "overlap states");
         fails(IllegalArgumentException.class, () -> map.spans().selected(1,1,
                 M3IndexPathMasks.Backend.JAVA), "contradictory selected stages");
-        fails(UnsatisfiedLinkError.class, () -> map.spans().selected(1,0,
-                M3IndexPathMasks.Backend.NATIVE_REQUIRED), "explicit no JNI fallback");
+        if (M3IndexPathMasks.nativeAvailable()) {
+            for (var index : List.of(map.spans(), map.spans().reversed())) {
+                for (int[] masks : new int[][] {{1, 0}, {Integer.MIN_VALUE, 2},
+                        {2, 4}, {0, Integer.MIN_VALUE}}) {
+                    var javaSelected = index.selected(masks[0], masks[1], M3IndexPathMasks.Backend.JAVA);
+                    var nativeSelected = index.selected(masks[0], masks[1],
+                            M3IndexPathMasks.Backend.NATIVE_REQUIRED);
+                    eq(javaSelected.size(), nativeSelected.size(), "native selected size");
+                    for (int i = 0; i < javaSelected.size(); i++) {
+                        eq(javaSelected.physicalAt(i), nativeSelected.physicalAt(i), "native selected order");
+                        eq(javaSelected.startAt(i), nativeSelected.startAt(i), "native selected start");
+                        eq(javaSelected.endAt(i), nativeSelected.endAt(i), "native selected end");
+                        ok(javaSelected.valueAt(i) == nativeSelected.valueAt(i), "native value identity");
+                        eq(javaSelected.stateAt(i), nativeSelected.stateAt(i), "native full32 state");
+                    }
+                }
+            }
+        } else {
+            fails(UnsatisfiedLinkError.class, () -> map.spans().selected(1,0,
+                    M3IndexPathMasks.Backend.NATIVE_REQUIRED), "explicit no JNI fallback");
+        }
         ok(map.remove(0,20), "delete all");
         eq(0, map.spanCount(), "empty map");
         var nullable = new M3ObjectRangeMap<Integer, Integer>(Comparator.nullsFirst(Integer::compareTo));
