@@ -1,0 +1,8 @@
+# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
+# SPDX-License-Identifier: Apache-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3jdk.JavaBaseDoclint20261018
+displayName: M3 java.base public documentation prerequisites
+description: Repairs only Javadoc comments on twelve sealed public java.base source owners; executable syntax, APIs and compiler policy are preserved.
+recipeList:
+  - com.synexia.rewrite.M3JavaBaseDoclintRecipe

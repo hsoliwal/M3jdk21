@@ -1,0 +1,45 @@
+Using exact match for CONF=m3-p0 (other matches are possible)
+Building target 'images' in configuration 'm3-p0'
+Compiling up to 4 files for BUILD_JIGSAW_TOOLS
+Connection attempt failed: Connection refused
+Connection attempt failed: Connection refused
+Connection attempt failed: Connection refused
+Giving up
+IOException caught during compilation: Could not connect to server
+gmake[3]: *** [CompileModuleTools.gmk:48: /workspace/scratch/87fb3604f641/m3-implementation/M3jdk21/build/m3-p0/buildtools/tools_jigsaw_classes/_the.BUILD_JIGSAW_TOOLS_batch] Error 1
+gmake[2]: *** [make/Main.gmk:91: buildtools-modules] Error 2
+
+ERROR: Build failed for target 'images' in configuration 'm3-p0' (exit code 2) 
+Stopping javac server
+
+=== Output from failing command(s) repeated here ===
+* For target buildtools_tools_jigsaw_classes__the.BUILD_JIGSAW_TOOLS_batch:
+Connection attempt failed: Connection refused
+Connection attempt failed: Connection refused
+Connection attempt failed: Connection refused
+Giving up
+IOException caught during compilation: Could not connect to server
+* For target support_native_java.desktop_libjsound_BUILD_LIBJSOUND_link:
+/usr/bin/ld: cannot find -lasound: No such file or directory
+collect2: error: ld returned 1 exit status
+* For target support_native_java.desktop_libsplashscreen_BUILD_LIBSPLASHSCREEN_link:
+/usr/bin/ld: /tmp/m3-toolchain/sysroot/usr/lib/x86_64-linux-gnu/libXext.a(Xge.o): warning: relocation against `stderr@@GLIBC_2.2.5' in read-only section `.text'
+/usr/bin/ld: /tmp/m3-toolchain/sysroot/usr/lib/x86_64-linux-gnu/libX11.a(OpenDis.o): in function `OutOfMemory':
+(.text+0x3fc): undefined reference to `xcb_disconnect'
+/usr/bin/ld: /tmp/m3-toolchain/sysroot/usr/lib/x86_64-linux-gnu/libX11.a(OpenDis.o): in function `XOpenDisplay':
+(.text+0x894): undefined reference to `xcb_get_setup'
+/usr/bin/ld: (.text+0xd51): undefined reference to `xcb_get_maximum_request_length'
+/usr/bin/ld: (.text+0xdef): undefined reference to `xcb_disconnect'
+/usr/bin/ld: /tmp/m3-toolchain/sysroot/usr/lib/x86_64-linux-gnu/libX11.a(OpenDis.o): relocation R_X86_64_PC32 against symbol `stderr@@GLIBC_2.2.5' can not be used when making a shared object; recompile with -fPIC
+/usr/bin/ld: final link failed: bad value
+collect2: error: ld returned 1 exit status
+
+* All command lines available in /workspace/scratch/87fb3604f641/m3-implementation/M3jdk21/build/m3-p0/make-support/failure-logs.
+=== End of repeated output ===
+
+No indication of failed target found.
+HELP: Try searching the build log for '] Error'.
+HELP: Run 'make doctor' to diagnose build problems.
+
+make[1]: *** [/workspace/scratch/87fb3604f641/m3-implementation/M3jdk21/make/Init.gmk:320: main] Error 2
+make: *** [/workspace/scratch/87fb3604f641/m3-implementation/M3jdk21/make/Init.gmk:186: images] Error 2

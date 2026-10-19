@@ -1,0 +1,2 @@
+class java.util.concurrent.ProgressMonitor$1 implements java.util.concurrent.ProgressMonitor {
+}
