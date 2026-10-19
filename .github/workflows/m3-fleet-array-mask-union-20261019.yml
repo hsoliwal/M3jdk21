@@ -42,4 +42,15 @@ jobs:
           cc -std=c17 -O2 -fPIC -shared -Wall -Wextra -Wconversion -Wshadow -Werror             -I"$JAVA_HOME/include" -I"$JAVA_HOME/include/linux"             m3/collections/src/main/native/collections/m3_index_mask_compactor.c             -o "$OUT/native/libm3_collections_mask.so"
           java -ea -Xcheck:jni -Djava.library.path="$OUT/native" -cp "$OUT/classes"             com.m3.collections.M3FleetArrayMaskUnionSelfTest --native
       - name: Exercise existing immutable filtered-sorted snapshot regression
-        run: mvn -B -ntp -f m3/collections/pom.xml           -Dtest=M3PackedFilterTest,M3FleetArrayMaskUnionTest test
+        shell: bash
+        run: |
+          set -euo pipefail
+          OUT="$RUNNER_TEMP/m3fleet"
+          SRC=m3/collections/src/main/java/com/m3/collections
+          TEST=m3/collections/src/test/java/com/m3/collections
+          javac --release 21 -proc:none -Xlint:all -Werror -cp "$OUT/classes" -d "$OUT/classes" \
+            "$SRC/M3IndexPathMasks.java" "$SRC/M3IndexedListSnapshot.java" \
+            "$TEST/M3PackedFilterProof.java"
+          java -ea -cp "$OUT/classes" com.m3.collections.M3PackedFilterProof java
+          java -ea -Xcheck:jni -Djava.library.path="$OUT/native" -cp "$OUT/classes" \
+            com.m3.collections.M3PackedFilterProof native
