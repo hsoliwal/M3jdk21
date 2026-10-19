@@ -1,0 +1,238 @@
+{
+  "schema": "M3_RX7_CODEC_CAP_TASK_STATUS_V1",
+  "observedUtc": "2026-10-18 05:57:20 UTC",
+  "goalActive": true,
+  "completeOriginalObjectivePreserved": true,
+  "originalSpecificationSha256": "4855609bc3b6894d95991720375a36087e537c631a2ef4d59bc4d4be5e9f3e9d",
+  "passes": 12,
+  "sourceBase": "50f48cbbe11f17fb8dc209bac3812f8940a1e267",
+  "receiverBase": "f29b0afe7ad253cc0562bc8dfdd48fc1acec710e",
+  "canonicalHome": "synexia-openrewrite-recipes/tasks/regex-v7-cold-free-projection-20261007/codec-cap-20261018",
+  "scope": "Qualify receiver cap successor without applying unexecuted production output; retain source/vendor producer followups",
+  "storage": {
+    "active": true,
+    "bulkOutput": "HOLD",
+    "localOutputAllowance": 0,
+    "executionLane": "EXISTING_HOSTED_RX7_WORKFLOW_ONLY_AFTER_EXACT_PACKET_REVIEW"
+  },
+  "recipe": {
+    "javaCrate": "m3-rx7-codec-cap-20261018",
+    "textCrate": "m3-rx7-codec-cap-launcher-20261018",
+    "javaTargets": 6,
+    "javaChange": 1,
+    "javaAdd": 1,
+    "javaKeep": 4,
+    "textTargets": 2,
+    "frozen61Changed": false,
+    "inverseDeletesAdd": false
+  },
+  "plannedGates": {
+    "namedJUnitMethods": 3,
+    "javaForwardStates": 8,
+    "javaInverseStates": 4,
+    "javaFixedPoints": 12,
+    "textForwardStates": 8,
+    "textInverseStates": 8,
+    "textFixedPoints": 16,
+    "strictSourceCompiles": 3,
+    "originalOracles": 2,
+    "javaExports": 2,
+    "boundedHeapBytes": 100663296,
+    "oversizedInputBytes": 67108865,
+    "oracleLogControls": 4
+  },
+  "execution": {
+    "maven": "NOT_RUN_LOG_CONTROL_SUCCESSOR; PREVIOUS_UNCHANGED_QUALIFIER_3PASS",
+    "strictCompiler": "NOT_RUN_CURRENT_PACKET; PREVIOUS_EXACT_EXPORT_PASS",
+    "baselineCloneOom": "PREVIOUS_EXACT_CODEC_INPUT_READY_CLONE_OOM_PASS; CURRENT_PACKET_NOT_RUN",
+    "candidate96MiB": "PARTIAL_PREVIOUS_FIRST_ORACLE_ONLY; NEW_FULL_GATE_NOT_RUN",
+    "formalAutoreviewHelper": "NOT_RUN_STORAGE_HOLD"
+  },
+  "runtimeApplied": false,
+  "phaseAdvanced": false,
+  "fullMigrationComplete": false,
+  "sdkTree": "e89f12783efeb9b6302aa0d02219651c8aeb9b5d",
+  "sdkFiles": 35,
+  "sdkBytes": 288812,
+  "pinsSha256": "2e6d6bc1958671416fb944d6e045a3675242db3a6b2f9580164353e375569c27",
+  "sourceReview": "INDEPENDENT_LAUNCHER_REPAIR_SOURCE_REVIEW_CLEAR; NEW_EXECUTION_PENDING",
+  "previousAttempt": {
+    "sourceCommit": "20171dc109a1ad8a34d5cde16f33456f498e6f31",
+    "receiverCommit": "bfc5acb755037a656344b07f39c82fa4ee863b4d",
+    "sdkTree": "b933056d76cf58c94182e429526c297de3bc5a0c",
+    "run": 39101824825,
+    "job": 117599491971,
+    "conclusion": "FAILURE",
+    "maven": {
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "result": "BUILD_SUCCESS",
+      "logSha256": "f81f04464aa43d584a8dfd5a7cf380639f84baa9328e93c623d5cc80d9546ff3"
+    },
+    "sourceExport": {
+      "files": 2,
+      "codecSha256": "8f224f3fb094f1b99a9a16a72c694bbb6914dfb629e1ad6421da2aa3364f7f5d",
+      "boundsSha256": "4b7902424a6f6ad2640f38ffbdd5220a8cbbbfdecf7d0f1a0ca065e78eac1575"
+    },
+    "strictCompiles": "PASS_FROM_ACTUAL_RECIPE_RESULTS_AND_UNCHANGED_ORACLES",
+    "baselineCloneOom": {
+      "result": "PASS_EXPECTED_EXIT1_AFTER_INPUT_READY",
+      "inputBytes": 67108865,
+      "heapBytes": 100663296,
+      "interpreter": true,
+      "stack": "java.lang.Object.clone -> M3RX7Codec.decodePrecomputed",
+      "logSha256": "bb25ef18091231e1ce11d0a70fc51c285230d8836b52c137929231998f820cfb"
+    },
+    "candidate": {
+      "firstOracle": "M3RX7Test mixed96MiB exit0;2165checksPASS",
+      "firstOracleLogSha256": "cf778a5020f3c00f137de5dece8fe9e79f729dc235ae833875c3e4badd79b7f9",
+      "otherOracleAndBounds": "NOT_REACHED",
+      "interpreter": "NOT_REACHED"
+    },
+    "failure": "Bare OutOfMemoryError substring search rejected the benign -XX:-HeapDumpOnOutOfMemoryError option banner despite an anchored valid oracle PASS line",
+    "artifact": {
+      "id": 12126817719,
+      "zipBytes": 55221,
+      "sha256": "d6ed988fe1854cff527dab30892c806032c1f9cdde4522efecf8e8021b6a314d",
+      "members": 23,
+      "expandedBytes": 51945,
+      "receiptSha256": "8d6c210f36964058da7f058eae7372bedf9cb0c1fbd7c15af98006516c92e38f",
+      "readback": "RAM_ONLY_HASH_AND_SAFE_MEMBERS_VERIFIED"
+    },
+    "supervision": {
+      "observedCommands": 17,
+      "reaped": 17,
+      "originalGroupsAbsent": 17,
+      "terminationRequests": 0
+    },
+    "sourceProvenance": {
+      "run": 39101823598,
+      "job": 117599488643,
+      "conclusion": "FAILURE",
+      "executedSteps": null,
+      "cause": "UNKNOWN_LOG_UNAVAILABLE"
+    },
+    "runtimeApplied": false,
+    "phaseAdvanced": false
+  },
+  "failedHistory": [
+    {
+      "sourceCommit": "32ecf17ddba26ae29a29de5996cf709fc65c7512",
+      "receiverCommit": "5b3bbdbcda747839e407cbd111a541f62e070063",
+      "sdkTree": "fdb50b042a35497790ccdc97132eb898c24f171b",
+      "run": 39100818657,
+      "job": 117596539931,
+      "conclusion": "FAILURE",
+      "storagePreflight": "PASS",
+      "exactCheckout": "PASS",
+      "java21Enforcer": "PASS",
+      "mainCompile": "PASS_4_SOURCES",
+      "testCompile": "PASS_1_SOURCE",
+      "junit": {
+        "tests": 3,
+        "failures": 1,
+        "errors": 2,
+        "skipped": 0
+      },
+      "causes": [
+        "Full marker equality rejected the legitimate RecipesThatMadeChanges marker added by Recipe.run",
+        "Ambient scanClassLoader did not discover the four pinned named YAML descriptors"
+      ],
+      "sourceExport": "NOT_REACHED",
+      "strictSourceCompiler": "NOT_REACHED",
+      "baselineCloneOom": "NOT_REACHED",
+      "candidate96MiB": "NOT_REACHED",
+      "artifact": {
+        "id": 12126885722,
+        "zipBytes": 16419,
+        "expandedBytes": 14593,
+        "members": 14,
+        "sha256": "62bf1fe0d797a2b0ddd9e0f044c2c6362e8a9c9d3e7cf8425c112501bad83a71",
+        "mavenLogSha256": "65029af9e14ef765649f1d3d394fc8dc5a88059793ae7ca0d16ae03652f0de6c",
+        "receiptSha256": "cb9d52d97e289455bad1feb3cb47cc40f91d8274602ae36fd5e5ce0cfb28931c",
+        "readback": "RAM_ONLY_HASH_AND_SAFE_MEMBERS_VERIFIED"
+      },
+      "supervision": {
+        "observedCommands": 11,
+        "reaped": 11,
+        "originalGroupsAbsent": 11,
+        "terminationRequests": 0,
+        "mavenExit": 1
+      },
+      "sourceProvenance": {
+        "run": 39100739151,
+        "job": 117596315389,
+        "conclusion": "FAILURE",
+        "executedSteps": null,
+        "cause": "UNKNOWN_LOG_UNAVAILABLE"
+      },
+      "runtimeApplied": false,
+      "phaseAdvanced": false
+    },
+    {
+      "sourceCommit": "20171dc109a1ad8a34d5cde16f33456f498e6f31",
+      "receiverCommit": "bfc5acb755037a656344b07f39c82fa4ee863b4d",
+      "sdkTree": "b933056d76cf58c94182e429526c297de3bc5a0c",
+      "run": 39101824825,
+      "job": 117599491971,
+      "conclusion": "FAILURE",
+      "maven": {
+        "tests": 3,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "result": "BUILD_SUCCESS",
+        "logSha256": "f81f04464aa43d584a8dfd5a7cf380639f84baa9328e93c623d5cc80d9546ff3"
+      },
+      "sourceExport": {
+        "files": 2,
+        "codecSha256": "8f224f3fb094f1b99a9a16a72c694bbb6914dfb629e1ad6421da2aa3364f7f5d",
+        "boundsSha256": "4b7902424a6f6ad2640f38ffbdd5220a8cbbbfdecf7d0f1a0ca065e78eac1575"
+      },
+      "strictCompiles": "PASS_FROM_ACTUAL_RECIPE_RESULTS_AND_UNCHANGED_ORACLES",
+      "baselineCloneOom": {
+        "result": "PASS_EXPECTED_EXIT1_AFTER_INPUT_READY",
+        "inputBytes": 67108865,
+        "heapBytes": 100663296,
+        "interpreter": true,
+        "stack": "java.lang.Object.clone -> M3RX7Codec.decodePrecomputed",
+        "logSha256": "bb25ef18091231e1ce11d0a70fc51c285230d8836b52c137929231998f820cfb"
+      },
+      "candidate": {
+        "firstOracle": "M3RX7Test mixed96MiB exit0;2165checksPASS",
+        "firstOracleLogSha256": "cf778a5020f3c00f137de5dece8fe9e79f729dc235ae833875c3e4badd79b7f9",
+        "otherOracleAndBounds": "NOT_REACHED",
+        "interpreter": "NOT_REACHED"
+      },
+      "failure": "Bare OutOfMemoryError substring search rejected the benign -XX:-HeapDumpOnOutOfMemoryError option banner despite an anchored valid oracle PASS line",
+      "artifact": {
+        "id": 12126817719,
+        "zipBytes": 55221,
+        "sha256": "d6ed988fe1854cff527dab30892c806032c1f9cdde4522efecf8e8021b6a314d",
+        "members": 23,
+        "expandedBytes": 51945,
+        "receiptSha256": "8d6c210f36964058da7f058eae7372bedf9cb0c1fbd7c15af98006516c92e38f",
+        "readback": "RAM_ONLY_HASH_AND_SAFE_MEMBERS_VERIFIED"
+      },
+      "supervision": {
+        "observedCommands": 17,
+        "reaped": 17,
+        "originalGroupsAbsent": 17,
+        "terminationRequests": 0
+      },
+      "sourceProvenance": {
+        "run": 39101823598,
+        "job": 117599488643,
+        "conclusion": "FAILURE",
+        "executedSteps": null,
+        "cause": "UNKNOWN_LOG_UNAVAILABLE"
+      },
+      "runtimeApplied": false,
+      "phaseAdvanced": false
+    }
+  ],
+  "canonicalSourceCommit": "6871e87e278f3eadf1176c986dc7de74e5293e2d",
+  "receivingScope": "SDK_AND_EXISTING_CONTROL_PLANE_ONLY; PRODUCTION_CODEC_AND_ADDITIVE_TEST_NOT_APPLIED"
+}

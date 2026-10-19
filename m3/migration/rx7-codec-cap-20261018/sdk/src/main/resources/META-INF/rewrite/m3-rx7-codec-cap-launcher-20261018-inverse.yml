@@ -1,0 +1,9 @@
+# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
+# SPDX-License-Identifier: Apache-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.RX7CodecCapLauncher20261018Inverse
+displayName: Restore previous RX7 receiver launcher and workflow
+description: Restore exact original metadata owners; Java sources remain separately owned.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe:
+      crateName: m3-rx7-codec-cap-launcher-20261018-inverse
