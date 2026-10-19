@@ -22,7 +22,7 @@ The sequence is a target map, not a claim that any target has passed its build o
 | --- | --- | --- |
 | Indexed coordinates, offsets, stable slots, masks and primitive sidecars | Existing M3Index/M3 collection and array owners; `m3/collections/` and the operational mapping in `m3/docs/name-mapping.json` | Use owner+generation-aware coordinates. Never treat a raw integer slot as a durable/global identity. Preserve sparse-zero versus absent semantics, order, mutation visibility and stale-handle behavior. |
 | Immutable text, ranges, concatenation and reusable text facts | Existing `java.lang.M3String` runtime candidate, `M3StringOwner`, `M3StringTuple`, `M3StringFacts`, and the independent `com.m3.text` foundation | Public Eclipse/JDK String APIs remain authoritative. Keep UTF-16 code-unit, equality, hash, interning, serialization, reflection and JNI materialization semantics exact. No duplicate spelling store or Synexia runtime dependency. |
-| File and mapped-resource access | **Inventory required**: locate the canonical M3File implementation and its Synexia recipe/source mapping before adding or porting a type | Do not invent a second file owner. Preserve Path/File/URI conversion, symlink and provider behavior, permissions, exceptions, close/lifetime rules, mapping bounds, external mutation and resource refresh semantics. Read-only mapping alone is not immutability. |
+| File and mapped-resource access | `com.m3.file.M3File` **read-only edge candidate**, adapted from canonical Synexia `MIndexResourceAccess` (Apache-2.0; source blob `1b4eb18b102f52be2d1e13589195b47e37f3b090`); full `MIndexResourceWorkspace` remains unported | Keep original NIO `Path`/provider authority, NOFOLLOW symlink rules, external mutation, failure and channel-close behavior. This candidate does **not** replace linked resources, markers, workspace writes, watchers or native mapped-resource lifetime. |
 | Filtered/sorted/navigable views | Existing M3 filtered-view owners and JDK differential tests | Preserve backed-view behavior, comparator equivalence, null-friendly comparators, descending order, bounded navigation, bulk mutation and unmodifiable wrappers. Reuse the existing owner instead of adding wrapper stacks. |
 | JNI/native fast paths | Existing native selector and String JNI boundary implementations | Native code may accelerate primitive, bounded operations only. Arbitrary Java predicates/comparators must remain Java-side. Preserve old ABI behavior or explicitly version the ABI with a tested fallback. |
 
@@ -54,7 +54,7 @@ Keep each slice independently reviewable and reversible.
 
 ### E3 — file/resource metadata
 
-- Do not start until E0 resolves M3File's real API, source owner, license, recipe, lifetime and mutation contract.
+- The read-only `M3File` access edge is now a distinct recipe-sealed candidate in `m3/file`, sourced from Synexia `MIndexResourceAccess`. Full file index/refresh/workspace mutation remains gated by E0 owner and license/provenance inventory.
 - Prototype only an explicitly bounded metadata/index sidecar. The original file provider remains authoritative for reads, writes, permissions, watching, locking, symlinks and failure behavior.
 - Test external file mutation, atomic replacement, truncation, mapped-region bounds, descriptor cleanup, refresh and recovery after invalidation.
 
@@ -96,3 +96,8 @@ Atomize a source file only where a behavior is independently replaceable and tes
 ## Current limitation
 
 This contract PR deliberately changes no production Java/JNI/Eclipse source. It establishes the boundary for the first implementation slice. It does not assert that the full Eclipse base framework, M3File, or any of the listed Eclipse forks has been fully implemented or qualified by M3JDK21.
+
+## 2026-10-18 optional JMOD receiver status
+
+The narrow `M3File` read-only edge and optional `com.m3.eclipse.core` JMOD are implementation candidates with their own source receipts; full Eclipse Platform, SWT, Nebula and GEF parity remains unqualified.
+See `m3/eclipse/optional-jmod/README.md` and the canonical Synexia recipe.
