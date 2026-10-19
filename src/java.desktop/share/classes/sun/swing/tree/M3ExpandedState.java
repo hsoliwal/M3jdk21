@@ -96,6 +96,7 @@ public final class M3ExpandedState extends Hashtable<TreePath, Boolean> {
         final Node parent;
         final ArrayList<Node> children = new ArrayList<>(2);
         boolean toggled;
+        int hash;
         int slot;
 
         Node(TreePath path, Node parent) {
@@ -119,13 +120,35 @@ public final class M3ExpandedState extends Hashtable<TreePath, Boolean> {
         return ENABLED && STOCK_TOGGLED_PATHS.get(jtreeClass);
     }
 
+    /** The number of buckets of the table, mirrored from {@code Hashtable} (for tests). */
+    public synchronized int bucketCount() {
+        return capacity;
+    }
+
     @Override
     public synchronized Boolean put(TreePath key, Boolean value) {
+        int before = size();
         Boolean old = super.put(key, value);
         if (old == null) {
+            if (before >= threshold) {
+                grow();
+            }
             link(key);
         }
         return old;
+    }
+
+    /** Mirrors {@code Hashtable.rehash}, which a put of a new key runs when the count reached the threshold. */
+    private void grow() {
+        int next = (capacity << 1) + 1;
+        if (next - MAX_ARRAY_SIZE > 0) {
+            if (capacity == MAX_ARRAY_SIZE) {
+                return;
+            }
+            next = MAX_ARRAY_SIZE;
+        }
+        capacity = next;
+        threshold = (int) Math.min(next * LOAD_FACTOR, MAX_ARRAY_SIZE + 1);
     }
 
     @Override
@@ -150,31 +173,51 @@ public final class M3ExpandedState extends Hashtable<TreePath, Boolean> {
     }
 
     /**
-     * Whether the stock {@code getExpandedDescendants} scan could find a path: an expanded key in
-     * the subtree of {@code parent} other than {@code parent} itself (an equal key is counted when it
-     * is a different instance, as the stock {@code path != parent} test does). Answers true when the
-     * index cannot decide.
+     * The keys that the stock {@code getExpandedDescendants} loop tests with {@code isVisible} for
+     * {@code parent}, in the order of {@code keys()}: the keys equal to or below {@code parent}
+     * whose value is {@code TRUE}, except {@code parent} itself by identity (the stock
+     * {@code path != parent}). {@code keys()} walks the buckets from the last to the first, so the
+     * keys are sorted by bucket; null when two of them share a bucket (their order in the bucket's
+     * chain is not mirrored) or the index missed a mutation, and the caller runs the stock loop.
      */
-    public synchronized boolean hasExpandedDescendant(TreePath parent) {
-        Node n = parent == null ? null : nodes.get(parent);
+    public synchronized TreePath[] expandedKeysBelow(TreePath parent) {
         if (!indexed()) {
-            return true;
+            return null;
         }
+        Node n = parent == null ? null : nodes.get(parent);
         if (n == null) {
-            return false;
+            return NONE;
         }
+        ArrayList<Node> found = new ArrayList<>();
         if (n.toggled && n.path != parent && Boolean.TRUE.equals(get(n.path))) {
-            return true;
+            found.add(n);
         }
         ArrayList<Node> todo = new ArrayList<>(n.children);
         while (!todo.isEmpty()) {
             Node c = todo.remove(todo.size() - 1);
             if (c.toggled && Boolean.TRUE.equals(get(c.path))) {
-                return true;
+                found.add(c);
             }
             todo.addAll(c.children);
         }
-        return false;
+        int k = found.size();
+        if (k == 0) {
+            return NONE;
+        }
+        long[] order = new long[k];
+        for (int i = 0; i < k; i++) {
+            order[i] = (long) ((found.get(i).hash & 0x7FFFFFFF) % capacity) << 32 | i;
+        }
+        Arrays.sort(order);
+        TreePath[] keys = new TreePath[k];
+        for (int i = 0; i < k; i++) {
+            long o = order[k - 1 - i];
+            if (i > 0 && o >>> 32 == order[k - i] >>> 32) {
+                return null;
+            }
+            keys[i] = found.get((int) o).path;
+        }
+        return keys;
     }
 
     /**
@@ -217,6 +260,7 @@ public final class M3ExpandedState extends Hashtable<TreePath, Boolean> {
             }
         }
         n.path = key;
+        n.hash = key.hashCode();
         n.toggled = true;
         toggled++;
     }
@@ -256,6 +300,3 @@ public final class M3ExpandedState extends Hashtable<TreePath, Boolean> {
                 }
             }
             n = p;
-        }
-    }
-}
