@@ -1,0 +1,108 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3JDK21 additive collections superset proof
+on:
+  pull_request:
+    paths:
+      - 'm3/collections/src/main/java/com/m3/collections/**'
+      - 'm3/collections/src/test/java/com/m3/collections/**'
+      - 'm3/collections/qualification/doop-additive-superset-20261019/**'
+      - '.github/workflows/m3-collections-additive-superset-20261019.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  source-ancestry-and-hashes:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          filter: blob:none
+          sparse-checkout: |
+            m3/collections/src/main/java
+            m3/collections/src/test/java
+            m3/collections/src/main/native
+            m3/collections/qualification/doop-additive-superset-20261019
+            m3/collections/algorithm-catalogue/public-forks-20261019
+            src/java.base/share/classes/java/util
+          sparse-checkout-cone-mode: true
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: Refuse modified product sources, unmerged donors and fake receipts
+        run: python3 m3/collections/qualification/doop-additive-superset-20261019/verify_additive_union.py --self-test
+
+  java21-array-index-mask-contracts:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          sparse-checkout: |
+            m3/collections/src/main/java
+            m3/collections/src/test/java
+            m3/collections/verification/primitive-filtered-sequences-20261017
+          sparse-checkout-cone-mode: true
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Compile original M3JDK21 array/offset/mask owners and oracles
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p target/m3-superset/classes
+          javac --release 21 -proc:none -Xlint:all,-module,-serial -Werror \
+            -d target/m3-superset/classes \
+            -sourcepath m3/collections/src/main/java:m3/collections/src/test/java \
+            m3/collections/src/test/java/com/m3/collections/M3ReadonlyFilteredSlotSelfTest.java \
+            m3/collections/src/test/java/com/m3/collections/M3MutableFilteredSlotSelfTest.java \
+            m3/collections/src/test/java/com/m3/collections/M3IndexedFilterSortFusionSelfTest.java \
+            m3/collections/src/test/java/com/m3/collections/M3LongDeepFilterSelfTest.java \
+            m3/collections/src/test/java/com/m3/collections/M3FilteredSortedSetSlotSelfTest.java \
+            m3/collections/src/test/java/com/m3/collections/M3FilteredDequeDispatchProof.java \
+            m3/collections/src/test/java/com/m3/collections/M3LinkedClearContract.java
+      - name: Verify exact JDK collection behavior without per-element objects
+        shell: bash
+        run: |
+          set -euo pipefail
+          for klass in M3ReadonlyFilteredSlotSelfTest M3MutableFilteredSlotSelfTest M3IndexedFilterSortFusionSelfTest M3LongDeepFilterSelfTest M3FilteredSortedSetSlotSelfTest M3FilteredDequeDispatchProof M3LinkedClearContract; do
+            java -ea -Xmx256m -cp target/m3-superset/classes com.m3.collections.$klass
+          done
+      - name: Verify existing primitive filtered-sequence contract in same union
+        run: bash m3/collections/verification/primitive-filtered-sequences-20261017/verify.sh
+
+  java21-native-batch-mask:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          sparse-checkout: |
+            m3/collections/src/main/java
+            m3/collections/src/test/java
+            m3/collections/src/main/native
+          sparse-checkout-cone-mode: true
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Compile existing collection owner and primitive JNI comparator
+        run: |
+          set -euo pipefail
+          mkdir -p target/m3-superset/classes target/m3-superset/native
+          javac --release 21 -proc:none -Xlint:all,-module,-serial -Werror \
+            -d target/m3-superset/classes \
+            -sourcepath m3/collections/src/main/java:m3/collections/src/test/java \
+            m3/collections/src/test/java/com/m3/collections/M3IndexedFilterSortFusionSelfTest.java
+          gcc -std=c17 -O2 -fPIC -shared -Wall -Wextra -Werror \
+            -I"$JAVA_HOME/include" -I"$JAVA_HOME/include/linux" \
+            m3/collections/src/main/native/collections/m3_index_mask_compactor.c \
+            -o target/m3-superset/native/libm3_collections_mask.so
+          java -ea -Xcheck:jni \
+            -Djava.library.path="$PWD/target/m3-superset/native" \
+            -cp target/m3-superset/classes \
+            com.m3.collections.M3IndexedFilterSortFusionSelfTest --native

@@ -1,0 +1,6 @@
+pr_number	merge_role	commit_sha	canonical_synexia_source	contract
+1426	BASE_PRODUCT_DOOP_MAP_SET_JNI	22e7a14ccd2998d994cb9a74abcdc7abd2086201	12423;12407;12412	Keep original java.base Map/JNI ownership and array slots
+1428	BASE_PRODUCT_AVL_SET	c4bd4b882dc93135d7a376dafce8fd70d9ce4689	12434	Keep original set/tree slots with JDK sorted filter contracts
+1434	TWO_PARENT_SOURCE_MERGE	239989a18f2366a1f65d91a4d8e3974b755a7f0e	12439	Preserve backing addFirst/addLast exception and predicate dispatch
+1431	TWO_PARENT_SOURCE_MERGE	4f33ce9281c8df8566c0a6731d9a06570bbec6db	12421	Sparse clear only active physical array slots and clear tombstones
+1429	TWO_PARENT_CATALOGUE_MERGE	5c9b930228f7b3a9b8548eb9ba44cadd4d0312c7	12411	License aware donor catalogue, no source copied

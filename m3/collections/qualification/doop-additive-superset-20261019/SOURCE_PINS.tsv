@@ -1,0 +1,15 @@
+path	git_blob_sha1	category	product_pr	source_license
+m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java	f6c134f78327dea6af4e9a9c4be29c23f3a61227	DOOP_FILTERED_MAP	1428	Apache-2.0
+m3/collections/src/main/java/com/m3/collections/M3MutableFilteredViews.java	92bc7b2fe188f952bf0ffeec4f38e778f94c312f	DOOP_MUTABLE_MAP_SET	1428	Apache-2.0
+m3/collections/src/main/java/com/m3/collections/M3TreeMap.java	0843c2f478510f63deb2122dc751934de74a28c7	AVL_SLOT_MAP	1426	Apache-2.0
+m3/collections/src/main/java/com/m3/collections/M3TreeSet.java	bf83df1bc411bca95472c997b0f8f303f5714548	AVL_SLOT_SET	1428	Apache-2.0
+m3/collections/src/main/java/com/m3/collections/M3PrimitiveFilteredSequences.java	2c70b653b38c467998de97c0f84e4c0cdfdda6c8	FILTERED_DEQUE_THROWING	1434	Apache-2.0
+m3/collections/src/main/java/com/m3/collections/M3LinkedList.java	909efd0b1153ffa64909eab1c26f321bfe9a75d5	LINKED_SPARSE_CLEAR	1431	Apache-2.0
+m3/collections/src/main/java/com/m3/collections/M3LinkedHashMap.java	3fe76f3a995ddb2f48dd5a0537d0c53c62d14f44	LINKED_MAP_SPARSE_CLEAR	1431	Apache-2.0
+src/java.base/share/classes/java/util/EnumMap.java	6529acef8931cfa3a7440baeb3001a69c6c8f74d	JAVA_BASE_ORDINAL_MAP	1426	GPLv2+Classpath
+src/java.base/share/classes/java/util/IdentityHashMap.java	208838b3c9508f86e5ceaebbee30609c4118ae0e	JAVA_BASE_IDENTITY_MAP	1426	GPLv2+Classpath
+m3/collections/src/main/native/collections/m3_index_mask_compactor.c	aaa74686949de59b44b363741ef1c414fe3e95d0	JNI_BOUNDED_MASK	1426	Apache-2.0
+m3/collections/src/test/java/com/m3/collections/M3FilteredSortedSetSlotSelfTest.java	7c68cb5144a2324bdce761e0111f0dc249f8d793	JDK_SET_DIFFERENTIAL	1428	Apache-2.0
+m3/collections/src/test/java/com/m3/collections/M3FilteredDequeDispatchProof.java	857f21fbb63b7b1700cf2d41c28d861596b07d36	DEQUE_THROW_DIFFERENTIAL	1434	Apache-2.0
+m3/collections/src/test/java/com/m3/collections/M3LinkedClearContract.java	8613db4f70c7200eabf07e4b5eecc56499e79e4d	LINKED_CLEAR_DIFFERENTIAL	1431	Apache-2.0
+m3/collections/algorithm-catalogue/public-forks-20261019/PUBLIC_FORKS.tsv	422ef92c2e3c4afb2c2ddddf88ee81a8c7406541	LICENSED_DONOR_CATALOGUE	1429	Apache-2.0
