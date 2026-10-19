@@ -122,6 +122,19 @@ public class SelectionRangesTest {
     }
 
     @Test
+    public void newBeanPropertiesAreTransientOrReadOnly() throws Exception {
+        for (Class<?> type : new Class<?>[] {JList.class, JTable.class, JTree.class}) {
+            java.util.Map<String, java.beans.PropertyDescriptor> byName = new java.util.HashMap<>();
+            for (java.beans.PropertyDescriptor d : java.beans.Introspector.getBeanInfo(type).getPropertyDescriptors()) {
+                byName.put(d.getName(), d);
+            }
+            /* XMLEncoder skips transient properties: persisted components are written as before */
+            assertEquals(Boolean.TRUE, byName.get("selectionRanges").getValue("transient"), type.getName());
+            assertNull(byName.get("visibleRange").getWriteMethod(), type.getName());
+        }
+    }
+
+    @Test
     public void treeRangesAreVisibleRows() {
         JTree tree = Fixtures.tree();
         tree.getSelectionModel().setSelectionMode(TreeSelectionModel.DISCONTIGUOUS_TREE_SELECTION);

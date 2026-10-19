@@ -70,8 +70,9 @@ public class VisibleRangeTest {
         JViewport viewport = viewport(table, 300, 400);
         table.setSize(300, 400);
         assertEquals(M3ItemRange.of(0, 2), table.getVisibleRange());
-        viewport.setViewPosition(new Point(0, 0));
-        table.setLocation(0, -1000);
+        /* the component is taller than its rows: the viewport shows only the empty area below them */
+        viewport.setSize(300, 100);
+        viewport.setViewPosition(new Point(0, 300));
         assertTrue(table.getVisibleRange().isEmpty(), "scrolled past the rows");
     }
 

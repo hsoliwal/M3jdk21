@@ -6,8 +6,10 @@ package m3.swing.api;
 
 import java.awt.Point;
 import java.awt.image.BufferedImage;
-import java.beans.XMLEncoder;
-import java.io.ByteArrayOutputStream;
+import java.beans.Introspector;
+import java.beans.PropertyDescriptor;
+import java.util.Set;
+import java.util.TreeSet;
 import java.util.Arrays;
 import java.util.Random;
 import java.util.zip.CRC32;
@@ -24,7 +26,7 @@ import javax.swing.tree.TreeSelectionModel;
 
 /**
  * Differential behaviour probe (not a JUnit test): drives JList, JTable and JTree through stock API only and prints
- * a deterministic trace (selection, geometry, events, painted pixels, XMLEncoder output). run-tests.sh diff runs it
+ * a deterministic trace (selection, geometry, events, painted pixels, bean descriptors). run-tests.sh diff runs it
  * against master's classes and against this branch's; equal output shows the new API changes nothing when unused.
  */
 public final class M3SwingBehaviourProbe {
@@ -71,18 +73,24 @@ public final class M3SwingBehaviourProbe {
         return crc.getValue();
     }
 
-    private static String xml(Object bean) {
-        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-        try (XMLEncoder encoder = new XMLEncoder(bytes)) {
-            encoder.setExceptionListener(e -> line("xml-exception", e.getClass().getName()));
-            encoder.writeObject(bean);
+    /* properties added by the enhanced API; every other property must keep its descriptor */
+    private static final Set<String> NEW_PROPERTIES = Set.of("selectionRanges", "visibleRange");
+
+    private static String beans(Class<?> type) throws Exception {
+        TreeSet<String> properties = new TreeSet<>();
+        for (PropertyDescriptor descriptor : Introspector.getBeanInfo(type).getPropertyDescriptors()) {
+            if (NEW_PROPERTIES.contains(descriptor.getName())) {
+                continue;
+            }
+            properties.add(descriptor.getName() + ":" + descriptor.getPropertyType() + ":" + descriptor.isBound()
+                    + ":" + descriptor.getValue("transient") + ":" + (descriptor.getWriteMethod() != null));
         }
         CRC32 crc = new CRC32();
-        crc.update(bytes.toByteArray());
-        return bytes.size() + ":" + Long.toHexString(crc.getValue());
+        crc.update(String.join("\n", properties).getBytes(java.nio.charset.StandardCharsets.UTF_8));
+        return properties.size() + ":" + Long.toHexString(crc.getValue());
     }
 
-    private static void probeList(Random random) {
+    private static void probeList(Random random) throws Exception {
         JList<String> list = Fixtures.list(300);
         list.addListSelectionListener(e -> line("list-event", e.getFirstIndex() + "," + e.getLastIndex() + "," + e.getValueIsAdjusting()));
         JViewport viewport = show(list, 180, 150);
@@ -99,10 +107,10 @@ public final class M3SwingBehaviourProbe {
             line("list-visible", list.getFirstVisibleIndex() + ".." + list.getLastVisibleIndex());
         }
         line("list-pixels", pixels(list));
-        line("list-xml", xml(list));
+        line("list-beans", beans(JList.class));
     }
 
-    private static void probeTable(Random random) {
+    private static void probeTable(Random random) throws Exception {
         JTable table = Fixtures.table(400);
         table.getSelectionModel().addListSelectionListener(e -> line("table-event", e.getFirstIndex() + "," + e.getLastIndex() + "," + e.getValueIsAdjusting()));
         JViewport viewport = show(table, 300, 200);
@@ -120,10 +128,10 @@ public final class M3SwingBehaviourProbe {
             line("table-rows", table.rowAtPoint(new Point(0, table.getVisibleRect().y)) + " h " + table.getHeight());
         }
         line("table-pixels", pixels(table));
-        line("table-xml", xml(table));
+        line("table-beans", beans(JTable.class));
     }
 
-    private static void probeTree(Random random) {
+    private static void probeTree(Random random) throws Exception {
         JTree tree = Fixtures.tree();
         tree.getSelectionModel().setSelectionMode(TreeSelectionModel.DISCONTIGUOUS_TREE_SELECTION);
         tree.addTreeSelectionListener(e -> line("tree-event", e.getPaths().length + "," + e.getNewLeadSelectionPath()));
@@ -143,6 +151,6 @@ public final class M3SwingBehaviourProbe {
             line("tree-sel", Arrays.toString(tree.getSelectionRows()) + " rows " + tree.getRowCount());
         }
         line("tree-pixels", pixels(tree));
-        line("tree-xml", xml(tree));
+        line("tree-beans", beans(JTree.class));
     }
 }
