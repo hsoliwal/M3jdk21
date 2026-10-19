@@ -1,0 +1,13 @@
+{
+  "owner": "com.m3.collections.apache.M3DualLinkedHashBidiMap",
+  "provider_contract": "org.apache.commons.collections4.bidimap.DualLinkedHashBidiMap (Commons Collections 4.5.0)",
+  "inventory_row": "DONE #1468",
+  "source_sha256": "335d0736c3c3c4c9d4d60c1eb643ce0f8b4bd8565cadadcec6cdbb62fefc1705",
+  "scaffold_preimage_sha256": "9f7a911be9d9c0bbb3f2112574802e6cea9ea3e26ad922f0d68e8c6e441a23b1",
+  "module_tests": {"tests": 19, "failures": 0, "differential_seeds": 8, "differential_operations": 96000, "differential_checks": 960102},
+  "coverage": {"tool": "JaCoCo 0.8.12", "classes": 12, "line": "434/434", "branch": "234/234", "gate": "CLASS LINE and BRANCH COVEREDRATIO >= 0.99"},
+  "allocation_probe_bytes": 0,
+  "recipe_tests": {"tests": 2, "fixed_point_executions": 8, "refusals": 4},
+  "environment": "local Windows 11, JDK 21, Maven 3.9.14; hosted CI not run",
+  "not_claimed": ["Commons serialized form", "Commons' inconsistent inverse after a values-iterator remove that follows a concurrent value replacement", "performance comparison", "JNI path"]
+}
