@@ -1,0 +1,5 @@
+# target_path	before_sha256	after_sha256	template
+org.eclipse.jdt.core.tests.model/src/org/eclipse/jdt/core/tests/dom/ASTNodeListArrayTest.java	ABSENT	a87164bca373978baec312600886aac0cb316b755146b9c6e00624e6c87729df	ASTNodeListArrayTest.java.txt
+org.eclipse.jdt.core.tests.model/src/org/eclipse/jdt/core/tests/dom/ASTNodeListStorageProbe.java	ABSENT	fd19612bd6183826511aa62bd14d68844666261be7b3066e7ce49ed73fddcf88	ASTNodeListStorageProbe.java.txt
+org.eclipse.jdt.core.tests.model/src/org/eclipse/jdt/core/tests/dom/RunAllTests.java	8933ce457f4c343018c799e698a301986c0fa317e8d72a3ca702d0517fde45f5	a5457ed99c4bc570baadf43646f414fbde055ea7e0ea271aa4f5abb64789510a	RunAllTests.java.txt
+org.eclipse.jdt.core/dom/org/eclipse/jdt/core/dom/ASTNode.java	df00f7e67e22bf95487d74a16ffbd6c1766f11d2009d5a70386066b8436e6853	5bb9b42e051363792a450bc74faf9d8b778b933f1f06c78b7f8a1cbc904d7254	ASTNode.java.txt
