@@ -22,13 +22,37 @@ case, canonical equivalence, unknown words and token identity remain with the
 source Synexia owner. Repeated source rows remain separate stable record IDs
 while the downstream M3LEX image may deduplicate identical UTF-16 values.
 
-To be discovered/evaluated in the wider programme: language dictionaries,
-frequency tables, translations, thesauri, antonyms, WordNet resources,
-Wiktionary/WikiPron, Universal Dependencies, n-grams, POS and inflection rules,
-transliteration, phonemes, names and domain vocabularies. Parquet, Arrow,
-JSONL, streaming CSV quotations, proprietary/gated corpora, grammar models and
-arbitrary Hub file types **are not yet import adapters**. A Hub dataset card
-and license tag are discovery metadata, not a source-specific rights grant.
+The companion `language-resource-discovery.tsv` is a searchable,
+release-aware catalogue of 113 **reference-only** candidates.
+This pass adds 14 reference-only leads: GATITOS bilingual pairs; Swedish Flex/Kubord frequencies, LEXIN, Parole+ and given-name forms; Linguabase's English lexical graph; Bashkir frequency and n-gram indexes; EuroVoc; Czech MorfFlex; Icelandic DMII; Japanese UniDic; and Taiwan's Taigi dictionary. Every row carries its own version, identity and rights caveats. In particular, noncommercial/share-alike, no-derivatives, component-level licensing, unresolved upstream corpus rights, and release-metadata inconsistencies block payload admission. No data files were downloaded or copied.
+ In addition to
+dictionaries, grammar, translation, frequency, names, units and speech sources,
+it covers metadata discovery (CLARIN VLO, OLAC, ELRA), cross-linguistic concept
+IDs and norms (Concepticon, NoRaRe), basic wordlists (ASJP), colexification and
+loanword signals (CLICS⁴, WOLD), signed-language features (ASL-LEX), dictionary
+digitization evaluation (MUDIDI), pronunciation dictionaries (OpenSLR), and
+endangered-language archives and speech leads (DOBES, ELAR, ELARSpeech), Indic frequency lists, MorphyNet, Hunspell language dictionaries, CMUdict, the Global WordNet directory and the restricted BabelNet lead.
+
+Additional candidates now include ParaNames for multilingual entity labels, GiellaLT language-specific finite-state lexicons and grammar, the GF Resource Grammar Library, and SIGMORPHON morphology fixtures. ParaNames' Hugging Face card and paper report conflicting license labels, so it remains explicitly blocked pending clarification. Every catalogue entry remains `REFERENCE_ONLY`: no corpus payload has been downloaded or admitted, and no catalogued license is treated as a blanket redistribution grant. Metadata aggregators point to source records; access, consent, source IDs, licenses, attribution, release hashes and any community conditions must still be checked at the individual resource or deposit level.
+The expanded catalogue also records the Hugging Face World Languages metadata package (7,130 reported records; language-identity and upstream-rights checks remain open) and the upstream `wordfreq` 3.0.2 frequency data (CC BY-SA 4.0 data, frozen around 2021; no bare-CSV export). Both remain reference-only. RefLex CLLD adds a source-linked African lexicon but carries CC BY-NC-SA 4.0 terms; OPUS is a corpus-by-corpus discovery index rather than a blanket-licensed corpus. Google FLEURS contributes parallel speech/transcription fixtures under a CC BY 4.0 Hub declaration, with FLoRes provenance to review. WAXAL NLP is a new African speech lead whose Hub card lists both CC BY-SA 4.0 and CC BY 4.0, so its exact-artifact rights remain unresolved.
+
+New reference-only material adds Dictionaria's source-linked CLDF dictionaries, SADiLaR's NCHLT isiZulu corpus/lexicon/frequency/name bundle, and SAILS typological grammar tables. Word2word adds a 3,564-directed-pair translation-candidate reference with unresolved payload rights; WordHoard provides a five-language frequency/morphology schema under CC BY-SA data terms; MUSE contributes noncommercial-only bilingual evaluation dictionaries. These remain unadmitted, and their native dictionary, corpus, pair, and language-variety coordinates stay distinct.
+
+The latest discovery pass adds two numeral-system sources (Chan's 5,332-variety dataset has only 100 concepts, so it does not provide complete 0–10,000 forms; CoSiNuS provides composition/morpheme annotations), Aksharantar's mixed-rights Indic transliteration pairs, Samanantar's source-split parallel corpora, IndicCorpV2's versioned corpus for locally-derived frequency counts, Naamapadam and MasakhaNER named-entity token annotations, Common Voice's 19M-sentence/300+ language text-LID set, and DBnary's OntoLex RDF output. All nine remain reference-only. In particular, transliteration is not semantic translation; sentence-pair alignment is not lexeme equivalence; named-entity surface strings are not entity identity; and CC0 packaging does not necessarily clear upstream text rights.
+
+A further source pass added six reference-only leads: IDS contributes concept-aligned lexical rows across 319 varieties but most records in the published export lack row-level source citations; Apertium provides package-specific finite-state morphology and bilingual transfer data with GPL/data-license review required per package; AUTOTYP and APiCS add separately identified typological and creole-grammar feature tables; D-PLACE joins language, culture and environment data but its download page and repository advertise conflicting license terms; and PARSEME 2.0 offers span-annotated multilingual multiword-expression evaluation data whose exact artifact and per-language licenses still need review. These six are not payload admissions, are represented in the Maven proof and algorithm catalogue, and preserve source-native IDs and evidence.
+
+WikiPron v2.2.0 adds a pinned pronunciation resource: the upstream reports more than five million word/IPA pairs across 348 languages. Its tool is Apache-2.0, but its README says the Wiktionary-derived data has separate terms; the source is therefore a phonetic-index evaluation lead only, not an approved data payload.
+
+Two additional primary-source candidates extend the catalogue: HPLT Monolingual 3.0 reports roughly 50 TB across 198 languages and labels its per-language shards CC0, making it a possible offline frequency/n-gram precompute source only after shard-level provenance and quality review; FLORES+ 4.6 reports 230 language varieties and provides sentence-level translation evaluation, but is gated, CC BY-SA 4.0, not for training, and subject to anti-scraping redistribution conditions. Both remain reference-only; neither is a lexical mapping payload.
+
+A focused source pass adds six more reference-only resources: DoReCo 2.0 for phoneme-aligned documentary data and a subset with morpheme annotations; TICO-19 for 37-language medical translation regression; MAFAND-MT for low-resource African news bitext; OPUS-100 as a heterogeneous 100-language parallel-corpus index; AFRIDOC-MT's currently available health subset for document-context tests; and MultiCoNER v2 for fine-grained named-entity surface-span evaluation. MAFAND-MT is marked noncommercial and has source-specific restrictions; AFRIDOC-MT's technology subset was removed over permissions; OPUS-100 has no aggregate license grant on its overview; TICO rows preserve source URLs/licenses; and MultiCoNER's data-creation provenance remains incomplete. All six stay `REFERENCE_ONLY`; do not turn benchmark mentions or sentence pairs into canonical lexemes or entity identities.
+
+CLDR 48.2's pinned transform rules are also catalogued as a script-conversion precompute candidate, not as translation: transform direction, locale selection, collisions and reversibility must be tested per rule, and Unicode attribution remains attached.
+
+The catalogue is discovery, not an import adapter: Parquet, Arrow, JSONL,
+streaming CSV quotations, proprietary/gated corpora, grammar models and
+arbitrary Hub file types are not yet supported by the tested importer.
 
 `approval.tsv` must contain exactly this header and one line of metadata:
 
