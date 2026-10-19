@@ -66,6 +66,14 @@ public final class M3CrossFrontendContract {
         eq(right, index.nextSibling(a), "sibling chain");
         eq(-1, index.nextSibling(right), "last sibling sentinel");
         eq(a, index.parent(n), "direct child belongs to class");
+        M3ASTIndex.Builder invalid = M3ASTIndex.builder(input,
+                M3ASTIndex.Domain.ECLIPSE_JDT, 3);
+        int invalidRoot = invalid.add(-1, "ROOT", 0, input.length(), M3ASTIndex.EXACT_RANGE);
+        int unknown = invalid.add(invalidRoot, "UNKNOWN", -1, -1, M3ASTIndex.SYNTAX_ONLY);
+        invalid.add(unknown, "CHILD", 7, 8, M3ASTIndex.EXACT_RANGE);
+        rejects(IllegalArgumentException.class,
+                () -> invalid.completeRange(unknown, 0, 5, true),
+                "cannot complete parent range excluding an existing child");
     }
 
     private static void mavenPom() throws IOException {
@@ -77,6 +85,10 @@ public final class M3CrossFrontendContract {
                 + "<properties><hello><![CDATA[<literal>]]></hello></properties></project>";
         M3ASTIndex index = M3ASTIngress.mavenPom(source("pom.xml", pom), room());
         eq(M3ASTIndex.Domain.MAVEN_POM, index.domain(), "POM domain");
+        M3ASTIndex unqualified = M3ASTIngress.mavenPom(
+                source("pom.xml", "<project><modelVersion>4.0.0</modelVersion></project>"), room());
+        eq(M3ASTIndex.Domain.MAVEN_POM, unqualified.domain(),
+                "Maven accepts namespace-free legacy POM input");
         ok(index.nodeCount() > 12, "POM XML elements, text, attrs, comments and CDATA");
         eq("XML_DOCUMENT", index.kind(0), "original XML document owner");
         ok(index.hasExactRange(0), "entire source envelope exact");
