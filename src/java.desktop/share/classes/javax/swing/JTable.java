@@ -4074,6 +4074,9 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
                 setViewRowHeightsFromModel();
                 restoreSelection(change);
             }
+            // M3 (JDK-6727200): the cache belongs to this change; without a re-sort it is not
+            // restored and must not be restored by a later sorter event.
+            lastModelSelection = null;
         }
 
         /**
