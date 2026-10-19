@@ -274,3 +274,45 @@ or records why not):
 | wave 1 build | local reactor `mvn -o verify`, `-Xlint:all,-module -Werror` | BUILD SUCCESS; 151 tests after the direct tests, 0 failures |
 | wave 1 coverage | JaCoCo 0.8.15 agent | 99.96% lines, 99.03% branches (reports were on G:, flagged for regeneration; see `m3/viewport-core/coverage/COVERAGE.md`) |
 | wave 2 recipe | same recipe, 3 more classes + 2 tests | pass 2 UNCHANGED 66/66; build 161 tests, 0 failures; coverage not yet measured on a healthy location |
+
+## 11. Fold into m3/collections (user, 2026-10-19)
+
+User: "if you want to fold all of your viewport logic into collection, go ahead". This supersedes the 3a/3b split.
+The viewport logic becomes general collection views in `com.m3.collections`, usable without any UI. `m3/viewport-core`
+keeps only the toolkit seam (`M3RowHost`, `M3RowEvents`, `M3RowPainter`) and thin glue. An adapter is now collection
+views plus a host.
+
+**Step 1: move by recipe** (`ChangeType` rows `com.m3.viewport.X -> com.m3.collections.Y`; provenance kept; pass 2
+UNCHANGED).
+
+| Now (`com.m3.viewport`) | After the fold (`com.m3.collections`) |
+|---|---|
+| M3ViewportRuntime (RowWindow, Selection, scroll fixed point) | M3WindowRuntime |
+| M3RowWindowPlan | M3WindowPlan |
+| M3SelectionModel | M3RangeSet |
+| M3TreeResidentPlan | M3TreeWindowPlan, with its two boxed `HashMap<Long,Integer>` replaced by M3LongLongHashMap keyed `parentId << 32 \| childIndex` |
+| M3TreeViewport | M3TreeWindow |
+| M3ViewportPlanner (+ HorizontalWindow) | M3WindowPlanner |
+| M3TreeTopology, M3TreeProjection, M3ItemState, M3ListModel, M3ListWidth, M3ScrollMetrics, M3ScrollLayout, M3ScrollBarGeometry, M3PlaneGeometry | same names |
+
+**Step 2: general views** (new code, only the gap; each with JUnit and oracle tests; arrays + offsets + masks, no
+entry objects). They compose, so a view can wrap another view:
+
+| View | What | Built on |
+|---|---|---|
+| M3WindowView | sliding window `[first, first + size)` over any indexed sequence, with a residency mask lane; a move answers the head/tail delta | M3WindowPlan, M3BitLanes |
+| M3FlatteningView | tree-to-list flattening with expand masks over the order-statistic forest; also a filtered view | M3TreeTopology, M3TreeProjection, M3OrderStatisticForest |
+| M3ListDiff / M3Patch | diff between two keyed snapshots, as remove/insert/move runs (diffable-snapshot pattern; rule 21 catalogue) | sorted int lanes, longest increasing subsequence |
+| M3BoundedCache | bounded cache with clock (second-chance) reference bits | int/long lanes, M3BitLanes |
+| M3RangeSet | selection as ranges with a bitset fallback | the folded M3SelectionModel |
+| M3SparseExtents | scroll geometry (done) | Fenwick |
+
+The collections-superset INVENTORY lists all of these as first-party viewport types CLAIMED by viewport-everywhere
+(`m3/collections/recipe/viewport-everywhere-20261018/CLAIMED.tsv`).
+
+**Consumers re-pointed:**
+- SWT Tree/Table/List: an M3WindowView or M3TreeWindow plus an SWT `M3RowHost`.
+- Nebula Grid: M3RowTree, M3PositionMarkedSelection and M3CellSelectionCounts.
+- Swing/SwingX/IntelliJ: M3FlatteningView plus M3SparseExtents for layout.
+- AWT: M3WindowView over the item lane.
+- RWT: M3WindowView over the server-side flattening.

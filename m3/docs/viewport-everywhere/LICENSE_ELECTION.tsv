@@ -41,3 +41,9 @@ Test_ViewportSelectionEnumeration	tests	9111c907b18f	Apache-2.0	b286190ba688	Apa
 Test_ViewportPlaneGeometry	tests	c9039203f725	EPL-2.0	7287f2d88d4c	Apache-2.0 OR EPL-2.0	BODY_EQUAL (104/104 lines)	ELECTED_FROM_DUAL (same body published dual in PR #204)
 Test_VirtualListModel	tests	1086a0c951c5	Apache-2.0	78cfb8d9069d	Apache-2.0 OR EPL-2.0	BODY_EQUAL (313/313 lines)	APACHE_AT_SOURCE
 Test_VirtualListWidth	tests	6f7224d17920	Apache-2.0 OR EPL-2.0	-	absent	-	ELECTED_FROM_DUAL (dual at source)
+GridRowTree	nebula-main	6b3dac2acb24	Apache-2.0 OR EPL-2.0	-	-	-	ELECTED_FROM_DUAL (dual at source)
+GridRowIndex	nebula-main	bea69a4b8f81	Apache-2.0 OR EPL-2.0	-	-	-	ELECTED_FROM_DUAL (dual at source)
+HeapGrowth	nebula-main	3c5a9446a230	Apache-2.0	-	-	-	APACHE_AT_SOURCE
+GridSelectionList	nebula-main	e3ecd71dcb7d	Apache-2.0 OR EPL-2.0	-	-	-	ELECTED_FROM_DUAL (dual at source)
+GridCellSelectionList	nebula-main	90b690b8fd8b	Apache-2.0 OR EPL-2.0	-	-	-	ELECTED_FROM_DUAL (dual at source)
+HeapSampler	nebula-main	45d11ca71066	EPL-2.0	-	-	-	NOT_COPIED (EPL-2.0 alone; M3HeapSampler written new)
