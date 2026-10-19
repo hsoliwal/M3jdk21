@@ -68,13 +68,63 @@ final class M3DualLinkedHashBidiMapContractTest {
     }
 
     private static void both(String name, Scenario s) {
+        M3DualLinkedHashBidiMap<String, String> o = compare(name, s);
+        o.verifyInvariants();
+    }
+
+    /** For provider quirks that leave the two directions out of step: only per-table structure is checked. */
+    private static void bothUnmirrored(String name, Scenario s) {
+        M3DualLinkedHashBidiMap<String, String> o = compare(name, s);
+        o.verifyStructure();
+        assertThrows(AssertionError.class, o::verifyInvariants, name + " leaves the directions out of step");
+    }
+
+    private static M3DualLinkedHashBidiMap<String, String> compare(String name, Scenario s) {
         BidiMap<String, String> c = new DualLinkedHashBidiMap<>(seed());
         M3DualLinkedHashBidiMap<String, String> o = new M3DualLinkedHashBidiMap<>(seed());
         assertEquals(outcome(s, c), outcome(s, o), name);
         assertEquals(c.toString(), o.toString(), name + " forward");
         assertEquals(c.inverseBidiMap().toString(), o.inverseBidiMap().toString(), name + " inverse");
-        o.verifyInvariants();
         M3DualLinkedHashBidiMapDifferentialTest.CHECKS.addAndGet(3);
+        return o;
+    }
+
+    @Test
+    void providerQuirksMatchCommons() {
+        bothUnmirrored("raw array entry skips ownership and inverse", b -> {
+            @SuppressWarnings("unchecked") Map.Entry<String, String> e = (Map.Entry<String, String>) b.entrySet().toArray()[0];
+            return e.setValue("2") + " " + e + " " + b.getKey("2") + " " + b.containsValue("1") + " " + b.values().containsAll(List.of("2", "2"))
+                    + b.values().containsAll(List.of("1")) + " " + b.values().contains("1");
+        });
+        bothUnmirrored("typed array entry, then removal detaches it", b -> {
+            @SuppressWarnings({"unchecked", "rawtypes"}) Map.Entry<String, String>[] a = b.entrySet().toArray(new Map.Entry[0]);
+            String first = a[1].setValue("9") + " " + a[1];
+            b.remove("c");
+            return first + " " + a[1].setValue("10") + " " + a[1] + " " + b;
+        });
+        both("typed array sizes", b -> {
+            Object[] big = new Object[b.size() + 2];
+            Arrays.fill(big, "x");
+            Object[] same = b.entrySet().toArray(big);
+            String wrongType = assertThrows(ArrayStoreException.class, () -> b.entrySet().toArray(new String[0])).getClass().getName();
+            return (same == big) + " " + Arrays.asList(same) + " " + wrongType + " " + b.entrySet().toArray(new Object[b.size()]).length;
+        });
+        bothUnmirrored("values iterator removes the delivered value", b -> {
+            Iterator<String> it = b.values().iterator();
+            String delivered = it.next();
+            b.put("a", "11");
+            it.remove();
+            return delivered + " " + b.inverseBidiMap() + " " + b.containsValue("11") + " " + b.getKey("11");
+        });
+        both("values iterator after structural change", b -> {
+            Iterator<String> it = b.values().iterator();
+            it.next();
+            b.put("a", "2");
+            return outcome(x -> {
+                it.remove();
+                return null;
+            }, b);
+        });
     }
 
     @Test
@@ -423,8 +473,8 @@ final class M3DualLinkedHashBidiMapContractTest {
         expectBroken("links", (m, t, o) -> t.before[t.after[t.first]] = 5);
         expectBroken("links", (m, t, o) -> t.positions[t.first] = emptyBucket(t));
         expectBroken("links", (m, t, o) -> t.hashes[t.first] ^= 1);
-        expectBroken("links", (m, t, o) -> o.erase(o.first));
-        expectBroken("links", (m, t, o) -> o.values[o.first] = "zz");
+        expectBroken("mirror", (m, t, o) -> o.erase(o.first));
+        expectBroken("mirror", (m, t, o) -> o.values[o.first] = "zz");
         expectBroken("size", (m, t, o) -> t.size = 99);
         expectBroken("size", (m, t, o) -> t.last = t.first);
         expectBroken("free", (m, t, o) -> t.free = t.first);

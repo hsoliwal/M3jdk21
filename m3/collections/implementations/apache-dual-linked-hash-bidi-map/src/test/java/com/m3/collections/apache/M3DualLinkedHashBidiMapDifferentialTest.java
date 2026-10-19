@@ -21,6 +21,7 @@ import java.util.Random;
 import java.util.Set;
 import java.util.concurrent.Callable;
 import java.util.concurrent.atomic.AtomicLong;
+import java.util.logging.Logger;
 import java.util.function.Predicate;
 import org.apache.commons.collections4.BidiMap;
 import org.apache.commons.collections4.MapIterator;
@@ -39,6 +40,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 final class M3DualLinkedHashBidiMapDifferentialTest {
     static final AtomicLong CHECKS = new AtomicLong();
     static final AtomicLong OPERATIONS = new AtomicLong();
+    private static final Logger LOG = Logger.getLogger(M3DualLinkedHashBidiMapDifferentialTest.class.getName());
     private static final int OPS_PER_SEED = 12_000;
 
     private final BidiMap<Integer, Integer> oracle = new DualLinkedHashBidiMap<>();
@@ -46,7 +48,7 @@ final class M3DualLinkedHashBidiMapDifferentialTest {
 
     @AfterAll
     static void report() {
-        System.out.println("M3DualLinkedHashBidiMap differential: operations=" + OPERATIONS.get() + " checks=" + CHECKS.get());
+        LOG.info(() -> "M3DualLinkedHashBidiMap differential: operations=" + OPERATIONS.get() + " checks=" + CHECKS.get());
     }
 
     @ParameterizedTest
@@ -54,7 +56,7 @@ final class M3DualLinkedHashBidiMapDifferentialTest {
     void seededOperationsMatchCommons(long seed) {
         Random random = new Random(seed);
         for (int step = 0; step < OPS_PER_SEED; step++) {
-            int op = random.nextInt(34);
+            int op = random.nextInt(37);
             long opSeed = random.nextLong();
             same("op" + op + "@" + step, () -> apply(oracle, op, opSeed), () -> apply(m3, op, opSeed));
             OPERATIONS.incrementAndGet();
@@ -120,8 +122,41 @@ final class M3DualLinkedHashBidiMapDifferentialTest {
                 if (r.nextBoolean()) { b.keySet().removeAll(List.of()); return b.values().retainAll(list); }
                 return b.entrySet().removeAll(List.of(new AbstractMap.SimpleEntry<>(k, v), "x"));
             }
+            case 34: return rawEntryWrite(b.entrySet().toArray(), r, v);
+            case 35: {
+                Object[] typed = b.entrySet().toArray(new Map.Entry<?, ?>[r.nextInt(3) == 0 ? b.size() + 2 : 0]);
+                return List.of(typed.length, String.valueOf(rawEntryWrite(typed, r, v)));
+            }
+            case 36: return staleValueRemoval(b, v);
             default: throw new AssertionError(op);
         }
+    }
+
+    /**
+     * Commons' entry-set arrays hold the backing LinkedHashMap nodes: their setValue skips the ownership check
+     * and the inverse. One write in four, so most steps still start from a mirrored state.
+     */
+    private static Object rawEntryWrite(Object[] entries, Random r, Integer v) {
+        List<Object> out = new ArrayList<>();
+        for (Object o : entries) { out.add(String.valueOf(o)); }
+        if (entries.length > 0 && entries[0] != null && r.nextInt(4) == 0) {
+            @SuppressWarnings("unchecked") Map.Entry<Integer, Integer> e = (Map.Entry<Integer, Integer>) entries[0];
+            out.add(String.valueOf(e.setValue(v)));
+            out.add(e.toString());
+        }
+        return out;
+    }
+
+    /** Values iterator removal after a concurrent replacement of the delivered value (Commons drops the stale value). */
+    private static Object staleValueRemoval(BidiMap<Integer, Integer> b, Integer v) {
+        Iterator<Integer> it = b.values().iterator();
+        if (!it.hasNext()) { return "empty"; }
+        Integer delivered = it.next();
+        b.put(b.keySet().iterator().next(), v);
+        return delivered + " " + outcome(() -> {
+            it.remove();
+            return null;
+        });
     }
 
     /** Map-iterator walk: reads, setValue (possibly refused) and remove, recorded step by step. */
@@ -221,7 +256,7 @@ final class M3DualLinkedHashBidiMapDifferentialTest {
     }
 
     private void compareState(int step) {
-        m3.verifyInvariants();
+        m3.verifyStructure();
         BidiMap<Integer, Integer> oi = oracle.inverseBidiMap();
         BidiMap<Integer, Integer> mi = m3.inverseBidiMap();
         assertEquals(oracle.toString(), m3.toString(), "forward order@" + step);
