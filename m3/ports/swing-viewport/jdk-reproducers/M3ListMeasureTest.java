@@ -22,6 +22,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.awt.ComponentOrientation;
 import java.awt.Dimension;
+import java.awt.Insets;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -241,11 +242,14 @@ public class M3ListMeasureTest {
         }
         Object old = UIManager.get("List.cellNoFocusBorder");
         try {
-            for (boolean atEnd : new boolean[] {false, true}) {
+            for (int kind = 0; kind < 3; kind++) {
+                boolean atEnd = kind == 1;
                 DefaultListModel<Object> model = strings(50);
                 List<JList<Object>> p = pair(model);
                 layout(p);
-                Border b = new EmptyBorder(atEnd ? 6 : 3, 2, 5, 2);
+                Insets in = ((JLabel) p.get(1).getCellRenderer()).getInsets();
+                Border b = kind == 2 ? new EmptyBorder(in.top + 4, in.left, in.bottom, in.right)
+                        : new EmptyBorder(atEnd ? 6 : 3, 2, 5, 2);
                 UIManager.put("List.cellNoFocusBorder", b);
                 if (atEnd) {
                     model.addElement("end");
@@ -347,10 +351,22 @@ public class M3ListMeasureTest {
                         m.rows.add(3 * i, "e" + i);
                         m.added(3 * i, 3 * i);
                     }
+                },
+                m -> {
+                    for (int i = 0; i < 1100; i++) {
+                        m.rows.remove(i);
+                        m.removed(i, i);
+                    }
+                },
+                m -> {
+                    for (int i = 0; i < 600; i++) {
+                        m.rows.set(2 * i + 1, "c" + i);
+                        m.changed(2 * i + 1, 2 * i + 1);
+                    }
                 });
         for (int i = 0; i < events.size(); i++) {
             Model model = new Model();
-            for (int r = 0; r < 1500; r++) {
+            for (int r = 0; r < 3000; r++) {
                 model.rows.add("row " + r);
             }
             List<JList<Object>> p = pair(model);
