@@ -50,6 +50,17 @@ describe reusable shapes and do not implement every named execution backend.
 `M3FsRegexImage` accepts an already compiled automaton. A bridge from the target
 regex compiler to that image producer is not implemented by this port.
 
+For a valid capture-free compiled image, `M3FS.nativeRegex` can resolve native
+unsupported values automatically using JDK Pattern or the internally owned
+RE2J1.8 backend according to the image's semantics. It compiles the fallback
+once per operation, after native matching and exact persisted-image binding,
+and retains one read snapshot while consuming all values. The explicit caller
+fallback overload remains available. The RE2 implementation is not exported by
+the Java module or OSGi bundle; production still requires only `java.base`.
+Original RE2J/Go copyright and BSD terms are packaged with the runtime. This
+restores the donor fallback convenience contract without claiming a new regex
+compiler or an array-only rewrite of the donated regex engine.
+
 ## Commit and lifetime behavior
 
 The native owner uses SQLite WAL and `synchronous=FULL`. Read and write operations

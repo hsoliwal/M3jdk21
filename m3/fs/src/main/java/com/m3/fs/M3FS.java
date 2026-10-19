@@ -627,25 +627,43 @@ public final class M3FS implements AutoCloseable {
   }
 
   /**
-   * Resolves unsupported values using this JDK's Pattern implementation. The supplied image is
+   * Resolves unsupported values with the matching JDK or RE2 semantics. The supplied image is
    * byte-for-byte bound to the persisted image in the same retained view used by native matching.
-   * RE2 semantics require the overload accepting an authoritative caller-supplied fallback.
+   * The selected fallback is compiled once, only after a value actually requires it.
    */
   public synchronized NativeRegexResult nativeRegex(
       String path, M3FsRegexImage program, RegexMode mode, M3FsIndexImage javaValues)
       throws IOException {
     Objects.requireNonNull(program, "program");
-    return nativeRegex(path, program, mode, javaValues, (value, operation) -> {
-      if (program.semantics() != M3FsRegexImage.Semantics.JDK) {
-        throw new UnsupportedOperationException("RE2 fallback backend must be supplied by the caller");
+    return nativeRegex(path, program, mode, javaValues, new DefaultRegexFallback(program));
+  }
+
+  /** Call-local lazy compilation preserves image/native admission and exception ordering. */
+  private static final class DefaultRegexFallback implements BiPredicate<CharSequence, RegexMode> {
+    private final M3FsRegexImage program;
+    private java.util.regex.Pattern jdk;
+    private com.m3.fs.internal.re2j.Pattern re2;
+
+    private DefaultRegexFallback(M3FsRegexImage program) { this.program = program; }
+
+    @Override public boolean test(CharSequence value, RegexMode operation) {
+      if (program.semantics() == M3FsRegexImage.Semantics.JDK) {
+        if (jdk == null) jdk = java.util.regex.Pattern.compile(program.expression());
+        java.util.regex.Matcher matcher = jdk.matcher(value);
+        return switch (operation) {
+          case MATCHES -> matcher.matches();
+          case FIND -> matcher.find();
+          case LOOKING_AT -> matcher.lookingAt();
+        };
       }
-      java.util.regex.Matcher matcher = java.util.regex.Pattern.compile(program.expression()).matcher(value);
+      if (re2 == null) re2 = com.m3.fs.internal.re2j.Pattern.compile(program.expression());
+      com.m3.fs.internal.re2j.Matcher matcher = re2.matcher(value);
       return switch (operation) {
         case MATCHES -> matcher.matches();
         case FIND -> matcher.find();
         case LOOKING_AT -> matcher.lookingAt();
       };
-    });
+    }
   }
 
   /** Admits an authoritative fallback without installing a second regex compiler in M3FS. */
