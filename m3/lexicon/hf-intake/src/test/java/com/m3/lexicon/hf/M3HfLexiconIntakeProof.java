@@ -219,8 +219,8 @@ public final class M3HfLexiconIntakeProof {
         require(aksharantar.contains("manual") && aksharantar.contains("mined")
                 && aksharantar.contains("CC0"), "Aksharantar source-specific mixed licensing remains visible");
         String samanantar = lines.stream().skip(1).filter(line -> "ai4bharat-samanantar-v0-3".equals(splitTsv(line)[0])).findFirst().orElse("");
-        require(samanantar.contains("49.6M") && samanantar.contains("existing")
-                && samanantar.contains("no uniform license"), "Samanantar alignment and rights are source-scoped");
+        require(samanantar.contains("49.6M") && samanantar.contains("source files are grouped as existing or created")
+                && samanantar.contains("does not establish one uniform license"), "Samanantar alignment and rights are source-scoped");
         String indicCorpV2 = lines.stream().skip(1).filter(line -> "ai4bharat-indiccorp-v2".equals(splitTsv(line)[0])).findFirst().orElse("");
         require(indicCorpV2.contains("20.9B tokens") && indicCorpV2.contains("24 languages")
                 && indicCorpV2.contains("source text"), "IndicCorpV2 is a versioned corpus, not a lexical-ID source");
@@ -231,7 +231,7 @@ public final class M3HfLexiconIntakeProof {
         require(textLid.contains("19M") && textLid.contains("300 languages")
                 && textLid.contains("sentence plus language"), "Common Voice LID label and dedupe scope remain explicit");
         String dbnary = lines.stream().skip(1).filter(line -> "dbnary-ontolex-wiktionary-26".equals(splitTsv(line)[0])).findFirst().orElse("");
-        require(dbnary.contains("OntoLex RDF") && dbnary.contains("26 language editions")
+        require(dbnary.contains("OntoLex RDF") && dbnary.contains("about 26 Wiktionary language editions")
                 && dbnary.contains("CC BY-SA 3.0"), "DBnary data and extractor licenses remain separated");
         String masakha = lines.stream().skip(1).filter(line -> "masakhaner2-african-20".equals(splitTsv(line)[0])).findFirst().orElse("");
         require(masakha.contains("20 African languages") && masakha.contains("AFL 3.0")
