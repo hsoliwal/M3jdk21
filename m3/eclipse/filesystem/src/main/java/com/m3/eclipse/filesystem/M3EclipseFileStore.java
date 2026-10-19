@@ -25,6 +25,7 @@ import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.MultiStatus;
 import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.core.runtime.Status;
+import org.eclipse.core.runtime.SubMonitor;
 
 /** A requested Eclipse handle; no inode or child metadata is cached here. */
 final class M3EclipseFileStore extends FileStore {
@@ -267,8 +268,14 @@ catch (NoSuchFileException | NotDirectoryException missing) { return new FileInf
         canceled(monitor);
         synchronized (mounts) {
             try {
-                M3FS image = writable();
+                M3FS image = image();
                 if (path.equals("/")) return this;
+                try {
+                    if (image.stat(resolve(image, path, true)).kind() == M3FS.Kind.DIRECTORY) return this;
+                } catch (NoSuchFileException absent) {
+                    // Creation is needed; write authorization follows the no-op check.
+                }
+                writable();
                 if ((options & EFS.SHALLOW) != 0) {
                     String actual = parents(image, path);
                     try { image.mkdir(actual, 0755); }
@@ -301,7 +308,9 @@ catch (NoSuchFileException | NotDirectoryException missing) { return new FileInf
         canceled(monitor);
         synchronized (mounts) {
             try {
-                M3FS image = writable();
+                M3FS image = image();
+                if (options == EFS.NONE) return;
+                writable();
                 String actual = resolve(image, path, true);
                 M3FS.Stat stat = image.stat(actual);
                 int mode = stat.mode();
@@ -328,11 +337,14 @@ catch (NoSuchFileException | NotDirectoryException missing) { return new FileInf
         if (path.equals("/")) throw failure(EFS.ERROR_DELETE, "Cannot delete the M3FS root", null);
         synchronized (mounts) {
             try {
-                M3FS image = writable();
+                M3FS image = image();
+                String actual = parents(image, path);
+                image.stat(actual); // A missing target is a no-op, even on a read-only image.
+                writable();
                 String[] paths = new String[32];
                 boolean[] visited = new boolean[32];
                 int size = 1;
-                paths[0] = parents(image, path);
+                paths[0] = actual;
                 MultiStatus failures = null;
                 while (size != 0) {
                     canceled(monitor);
@@ -435,6 +447,30 @@ catch (NoSuchFileException | NotDirectoryException missing) { return new FileInf
                 if (root) COPY_PATH.remove();
             }
         }
+    }
+
+    /** Retain inherited directory admission/attributes while reporting all independent child failures. */
+    @Override protected void copyDirectory(IFileInfo sourceInfo, IFileStore destination,
+                                           int options, IProgressMonitor monitor) throws CoreException {
+        if ((options & EFS.SHALLOW) != 0) {
+            super.copyDirectory(sourceInfo, destination, options, monitor);
+            return;
+        }
+        IFileStore[] children = childStores(EFS.NONE, null);
+        SubMonitor progress = SubMonitor.convert(monitor, children.length + 1);
+        super.copyDirectory(sourceInfo, destination, options | EFS.SHALLOW, progress.newChild(1));
+        MultiStatus failures = null;
+        for (IFileStore child : children) {
+            canceled(progress);
+            try {
+                child.copy(destination.getChild(child.getName()), options, progress.newChild(1));
+            } catch (CoreException problem) {
+                if (failures == null) failures = new MultiStatus(M3EclipseFileSystem.PLUGIN_ID,
+                        EFS.ERROR_WRITE, "M3FS recursive copy failed", null);
+                failures.add(problem.getStatus());
+            }
+        }
+        if (failures != null) throw new CoreException(failures);
     }
 
     @Override public void move(IFileStore destination, int options, IProgressMonitor monitor) throws CoreException {
