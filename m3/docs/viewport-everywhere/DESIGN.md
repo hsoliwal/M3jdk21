@@ -350,3 +350,30 @@ hook in `java.awt.List`). Swing receivers follow, coordinated with the M3JDK Swi
 The relicence of the Apache-2.0 proving-ground copies into GPLv2+CPE needs the same explicit record as the
 item-residency engine (`m3/docs/m3-item-residency-explicit-relicense.md`). The rights holder is the same person for
 every listed class, see `LICENSE_ELECTION.tsv`.
+
+## 13. Model-to-render protocol (user, 2026-10-19: "the CPU model and the GPU model must have an interactive perfect model")
+
+The toolkit-neutral half is in `m3/collections` and stays small. The render-modes agent builds the GPU side against it.
+
+| Type | Role |
+|---|---|
+| `M3Snapshot` | one generation of the model as a renderer sees it: window `[first, first + size)`, an `int` state lane and a `long` key lane aligned with the window rows, and the damage as `[start, end)` row ranges; read-only outside the publisher |
+| `M3SnapshotPublisher` | one CPU writer (`begin`, `set`, `damage`, `publish`); any number of readers (`latest` + `stillValid`, or `consume(Reader)`) |
+
+Invariants (each tested in `M3SnapshotTest`):
+- **Monotonic generations.** Each `publish` answers the previous generation + 1. A reader never sees a generation go
+  back.
+- **No torn reads.** Three preallocated buffers are recycled round-robin, so the writer never rewrites the published
+  buffer.
+  - A recycled buffer is marked -1 first (seqlock style), with a store-store fence before the lane writes.
+  - Readers re-validate the generation after a load-load fence.
+  - `consume` retries on a mismatch, and a reader that validates never accepts a mixed buffer.
+  - The concurrent test runs 200,000 publishes against 3 readers. Every delivered snapshot must be internally
+    consistent (rows, window and damage all of one generation).
+- **O(window) consume.** A reader touches only the window rows and the damage ranges. There are no locks on the read
+  path and no allocation per frame.
+
+Consumers: SWT native (the mediator binds rows from a snapshot), the drawn/GPU modes (the render-modes agent),
+Swing/AWT (a model listener repaints the damaged row rectangles) and Draw2d. Interned labels, text extents and tree
+paths come from the ui-interning agent (`M3LabelPool`, `M3TextExtentCache`, `M3TreePathTrie` on
+`m3/ui-interning-20261019`). This branch does not duplicate them. The `long` key lane carries their ids.
