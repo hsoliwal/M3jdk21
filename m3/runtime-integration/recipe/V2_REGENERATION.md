@@ -80,3 +80,14 @@ Superseded-custody re-seal against e977631b9f (receiver of Synexia #12397): `run
 `after` image untouched (66 targets); `M3StringSearchPrecompute.java` records its A43 owner as a reviewed
 `superseded` hash; no other target changed. `apply.py --check` state=superseded and `test_recipe.py` 8/8
 on the 66 targets of e977631b9f.
+
+## 2026-10-19 re-seal (A42 epoch 3 after the master merge, leaf REGEX-RELAND)
+
+Superseded-custody re-seal against 49b7e0cb99 (master 2f2beb2eff7a merged in 370b5cfc30): `runtime.patch`
+and every `after` image untouched (66 targets). Master changed `M3String.java`,
+`M3StringCodePointPrecompute.java` and `String.java` after the 2026-10-18 seals; their master hashes are
+recorded as `superseded` (PRE_EXISTING_DRIFT). `M3StringFacts.java` also changed on master (34663f5b), but it
+is one of the four modified-UTF-8 fan-in owners whose `superseded` list `apply.py` pins exactly
+(`MUTF8_FANIN`), so it is NOT recorded here: `apply.py --check` stays `source drift: .../M3StringFacts.java`
+on this branch (live master 2f2beb2eff7a fails the same check with 8 drifted targets, first
+`.../M3String.java`). Advancing that entry needs the fan-in owner's recipe, not this re-seal.

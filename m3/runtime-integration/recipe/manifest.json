@@ -2,7 +2,7 @@
   "schema": "M3_RUNTIME_INTEGRATION_RECIPE_V2",
   "base_commit": "890adb6410dab4606a4f26a942aed02fb2f55387",
   "upstream_commit": "890adb6410dab4606a4f26a942aed02fb2f55387",
-  "target_commit": "e977631b9f9811251362a59d056106dbe8588ecc",
+  "target_commit": "49b7e0cb9905b8ca933ae2b84d4aba54f68c076e",
   "patch_sha256": "bfc58c6eb3c7540808839e937a0f64788d65eb64097d10407ecccf899560d0eb",
   "scope": "M3 String runtime integration: every src/** file whose upstream->master delta carries M3/mindex tokens plus the four token-free String-runtime hooks; JEP/backport files owned by other hash-pinned crates are excluded",
   "files": {
@@ -101,7 +101,8 @@
       "superseded": [
         "f88c545538e250c057809d86cb0727cbeb07bed69508b0c85197b0084247fa5c",
         "24ac1f87c1b2022b08d695ae6b116e9376dad59ed0ffb86f52da0003dd3e036d",
-        "cd1192e27c981da03aeae2385d3d54ad31d912f043cf8c7dfba18c7b9106b728"
+        "cd1192e27c981da03aeae2385d3d54ad31d912f043cf8c7dfba18c7b9106b728",
+        "fad8274a84532ce29bd2b2fbdcb62474cfce32a6fb8eee89b885e5a611ea46f0"
       ]
     },
     "src/java.base/share/classes/java/lang/M3StringAtom.java": {
@@ -115,7 +116,8 @@
       "before": null,
       "after": "50e1fe55cd5e8a53b72aa8a4772f826f712c7e3edb3239514f9504819a0b0257",
       "superseded": [
-        "50e1fe55cd5e8a53b72aa8a4772f826f712c7e3edb3239514f9504819a0b0257"
+        "50e1fe55cd5e8a53b72aa8a4772f826f712c7e3edb3239514f9504819a0b0257",
+        "43f65f6e578dc5b3ad59046a52ea70bffae3bbff855c861bc2ffd24d1f4bf3d2"
       ]
     },
     "src/java.base/share/classes/java/lang/M3StringFacts.java": {
@@ -172,7 +174,8 @@
       "after": "c49e422dfe0e6b83a2d51155f0d36b5223719dfefd211a96313705bc3ee253ca",
       "superseded": [
         "eed88205feda9f64b03515603e5807e3f83961ddeb99dae4ef84bd2034d6f568",
-        "5a6334431c2bf06a88914037e93a9739e507ed06f9b576699b59398723fde10a"
+        "5a6334431c2bf06a88914037e93a9739e507ed06f9b576699b59398723fde10a",
+        "abd9604058045fd77cb5985a14f56487726b823f468990d5dc4277d6391de0cd"
       ]
     },
     "src/java.base/share/classes/java/lang/StringConcatHelper.java": {
