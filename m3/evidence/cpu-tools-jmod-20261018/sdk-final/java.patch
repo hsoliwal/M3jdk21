@@ -1,0 +1,3554 @@
+diff --git a/m3/tooling/module-packs/cpu-tools/fixtures/M3CpuToolsTest.java b/m3/tooling/module-packs/cpu-tools/fixtures/M3CpuToolsTest.java
+new file mode 100644
+index 0000000..a7d37b7
+--- /dev/null
++++ b/m3/tooling/module-packs/cpu-tools/fixtures/M3CpuToolsTest.java
+@@ -0,0 +1,323 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
++// SPDX-License-Identifier: Apache-2.0
++// Copyright 2026 Hitesh Soliwal and contributors
++import com.m3.tools.cpu.CpuTools;
++import com.m3.tools.cpu.CpuToolsCli;
++import java.io.ByteArrayOutputStream;
++import java.io.PrintStream;
++import java.nio.charset.StandardCharsets;
++import java.nio.file.Files;
++import java.nio.file.Path;
++import java.util.ArrayList;
++import java.util.Arrays;
++import java.util.List;
++import java.util.Random;
++import java.util.concurrent.CancellationException;
++import java.util.concurrent.ProgressMonitor;
++import jdk.m3.io.M3File;
++import jdk.m3.text.ExecutionResult;
++import jdk.m3.text.Limits;
++import jdk.m3.text.Node;
++import jdk.m3.text.Plan;
++import jdk.m3.text.Receipt;
++import jdk.m3.text.TextFrame;
++
++/** Composition, admission, replay, literal-search oracle and linked CLI integration. */
++public final class M3CpuToolsTest {
++    private static int checks;
++    private M3CpuToolsTest() { }
++
++    public static void main(String[] args) throws Exception {
++        Path work = Files.createTempDirectory("m3-cpu-integration-");
++        try {
++            registryAndOperations();
++            dagAndReplay();
++            budgetsAndCancellation();
++            fileAndLiteral(work);
++            cli(work);
++            System.out.println("M3_CPU_INTEGRATION_PASS checks=" + checks
++                    + " storage=" + Boolean.getBoolean("m3.test.requireStorage"));
++        } finally {
++            try (var paths = Files.walk(work)) {
++                for (Path path : paths.sorted(java.util.Comparator.reverseOrder()).toList()) Files.delete(path);
++            }
++        }
++    }
++
++    private static void registryAndOperations() {
++        var session = CpuTools.session();
++        var ids = session.registry().bindings().stream().map(b -> b.id()).toList();
++        check(ids.size() == 22, "exact registry admission");
++        check(ids.equals(ids.stream().sorted().distinct().toList()), "stable unique operation inventory");
++        check(CpuTools.implementationSha256().matches("[0-9a-f]{64}"), "actual module-set seal");
++        check(session.registry().sha256().equals(CpuTools.session().registry().sha256()), "repeatable registry");
++        check(!session.registry().sha256().equals(CpuTools.session(new Limits(4, 4, 10, 1000), null)
++                .registry().sha256()), "binding identity includes budgets");
++        long modules = ModuleLayer.boot().modules().stream().map(Module::getName)
++                .filter(n -> n.startsWith("com.m3.tools.") || n.startsWith("jdk.m3.")).count();
++        check(modules == 20, "all twenty tool modules resolved");
++
++        expectText("b\r\na\rb\n", List.of("text.identity"), "b\r\na\rb\n");
++        expectText("b\na\nb\n", List.of("text.sort", "text.uniq"), "a\nb\n");
++        expectText("b\na\nc\n", List.of("text.sort.reverse"), "c\nb\na\n");
++        expectText("cafe\u0301 beta caf\u00e9\n", List.of("text.normalize.nfc", "text.words", "text.frequency"),
++                "beta\t1\ncaf\u00e9\t2\n");
++        expectText("\uff21\uff22\uff23\r\n", List.of("text.normalize.nfkc"), "ABC\r\n");
++        expectText("a\ta\na\\b\na\ta\n", List.of("text.frequency"), "a\\ta\t2\na\\\\b\t1\n");
++        expectText("A\ud83d\ude42B", List.of("text.ngram.2"), "A\\ud83d\t1\n\ud83d\ude42\t1\n\\ude42B\t1\n");
++        expectText("A\ud83d\ude42B", List.of("text.ngram.3"), "A\ud83d\ude42\t1\n\ud83d\ude42B\t1\n");
++        check(CpuTools.escape("\\uD800\ud800\t\r\n").equals("\\\\uD800\\ud800\\t\\r\\n"), "unambiguous escaped UTF-16 fields");
++        expectText("abc", List.of("hash.sha256.utf8"),
++                "ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad\n");
++        expectText("0\n127\n128\n16384\n9223372036854775807\n", List.of("codec.varint.encode"),
++                "00\n7f\n8001\n808001\nffffffffffffffff7f\n");
++        expectText("0\n127\n128\n16384\n9223372036854775807\n",
++                List.of("codec.varint.encode", "codec.varint.decode"),
++                "0\n127\n128\n16384\n9223372036854775807\n");
++        refuseOperation("codec.varint.encode", "9223372036854775808\n");
++        refuseOperation("codec.varint.encode", "-1\n");
++        refuseOperation("codec.varint.decode", "8000\n");
++        refuseOperation("codec.varint.decode", "ffffffffffffffffff01\n");
++        expectText("4\n0\t2\n1\t2\n2\t3\n", List.of("graph.topology"), "0\n1\n2\n3\n");
++        expectText("0\n", List.of("graph.topology"), "");
++        refuseOperation("graph.topology", "2\n0\t1\n1\t0\n");
++        refuseOperation("graph.topology", "2\n0\t2\n");
++        refuseOperation("graph.topology", "2\n0 1\n");
++        expectText("5\t0\n0\t1\t9\n0\t2\t2\n2\t1\t3\n1\t3\t1\n",
++                List.of("graph.shortest-paths"), "0\t0\n1\t5\n2\t2\n3\t6\n4\t9223372036854775807\n");
++        refuseOperation("graph.shortest-paths", "2\t0\n0\t1\t-1\n");
++        refuseOperation("graph.shortest-paths", "2\t2\n");
++        expectText("alpha beta\nbeta gamma\n", List.of("graph.tsort"), "alpha\nbeta\ngamma\n");
++        expectText("1\n2\n3\n4\n", List.of("statistics.moments"),
++                "count\t4\nmean\t2.5\npopulationVariance\t1.25\nmin\t1.0\nmax\t4.0\n");
++        refuseOperation("statistics.moments", "NaN\n");
++        refuseOperation("statistics.moments", "Infinity\n");
++        expectText("name,age\r\nAda,36\r\n", List.of("structured.csv.first-column"), "name\nAda\n");
++        expectText("name\tage\nAda\t36\n", List.of("structured.tsv.first-column"), "name\nAda\n");
++        expectText("B=two\nA=one\n", List.of("structured.env"), "A\tone\nB\ttwo\n");
++        expectText("x\ny\n", List.of("text.number"), "1\tx\n2\ty\n");
++        expectText("a".repeat(81) + "\n", List.of("text.fold.80"), "a".repeat(80) + "\na\n");
++    }
++
++    private static void dagAndReplay() {
++        var session = CpuTools.session();
++        var identity = session.registry().require("text.identity");
++        var reverse = session.registry().require("text.sort.reverse");
++        var a = Node.of("a", identity);
++        var b = Node.of("b", reverse);
++        var c = Node.of("c", identity, "a", "b");
++        var plan = new Plan(List.of(c, b, a), "c");
++        var input = TextFrame.fromString("a\nb\n");
++        var result = session.execute(plan, input);
++        check(result.output().text().equals("a\nb\nb\na\n"), "ordered fan-in uses incumbent DAG");
++        check(result.receipt().steps().size() == 3, "one receipt for each executed atom");
++        check(session.replay(plan, input, result).equals(result), "exact re-execution");
++        check(session.execute(new Plan(List.of(a, c, b), "c"), input).equals(result), "input node order has no semantic effect");
++        expect(IllegalArgumentException.class, () -> session.replay(plan, TextFrame.fromString("b\na\n"), result));
++        var receipt = result.receipt();
++        var steps = new ArrayList<>(receipt.steps());
++        java.util.Collections.reverse(steps);
++        var forged = new ExecutionResult(result.output(), new Receipt(receipt.planSha256(), receipt.registrySha256(),
++                receipt.policySha256(), receipt.inputSha256(), receipt.outputSha256(), steps));
++        expect(IllegalStateException.class, () -> session.replay(plan, input, forged));
++        var monitor = new CountMonitor();
++        var checked = CpuTools.session(Limits.standard(), monitor);
++        expect(IllegalArgumentException.class, () -> checked.execute(new Plan(List.of(
++                new Node("a", identity.id(), "0".repeat(64), List.of())), "a"), input));
++        expect(IllegalArgumentException.class, () -> checked.execute(new Plan(List.of(
++                Node.of("a", identity, "b"), Node.of("b", identity, "a")), "a"), input));
++        expect(IllegalArgumentException.class, () -> checked.execute(new Plan(List.of(Node.of("a", identity),
++                Node.of("unused", identity)), "a"), input));
++        check(monitor.messages == 0 && monitor.work == 0, "whole graph refusal precedes any atom invocation");
++        expect(IllegalArgumentException.class, () -> session.pipeline(List.of("missing")));
++        expect(IllegalArgumentException.class, () -> session.pipeline(List.of()));
++    }
++
++    private static void budgetsAndCancellation() {
++        var input = TextFrame.fromString("one two three");
++        var small = CpuTools.session(new Limits(4, 3, 2, 100), null);
++        expect(IllegalArgumentException.class, () -> small.execute(small.pipeline(List.of("text.words")), input));
++        var bytes = CpuTools.session(new Limits(4, 3, 5, 2), null);
++        expect(IllegalArgumentException.class, () -> bytes.execute(bytes.pipeline(List.of("text.identity")), input));
++        var edges = CpuTools.session(new Limits(4, 0, 5, 100), null);
++        expect(IllegalArgumentException.class, () -> edges.execute(edges.pipeline(List.of("graph.topology")),
++                TextFrame.fromString("2\n0\t1\n")));
++        expect(IllegalArgumentException.class, () -> small.pipeline(List.of("text.identity", "text.identity",
++                "text.identity", "text.identity", "text.identity")));
++        var monitor = new CountMonitor();
++        var session = CpuTools.session(Limits.standard(), monitor);
++        var plan = session.pipeline(List.of("text.identity", "text.sort"));
++        monitor.cancelled = true;
++        expect(CancellationException.class, () -> session.execute(plan, input));
++        check(monitor.messages == 0, "cancel before operation");
++        monitor.cancelled = false;
++        monitor.cancelAfterWork = true;
++        expect(CancellationException.class, () -> session.execute(plan, input));
++        check(monitor.work == 1 && monitor.messages == 1, "cancel between atoms without success receipt");
++        check(monitor.finished == 0, "session never completes borrowed monitor");
++    }
++
++    private static void fileAndLiteral(Path work) throws Exception {
++        Path path = work.resolve("source.txt");
++        Files.writeString(path, "ababa\ud83d\ude42\r\n", StandardCharsets.UTF_8);
++        M3File source = M3File.load(path);
++        var session = CpuTools.session();
++        var result = session.execute(List.of("text.identity"), source);
++        check(CpuTools.sourceReceipt(source, result).matches("[0-9a-f]{64}"), "source-bound DAG receipt");
++        check(CpuTools.sourceReceipt(source, result).equals(CpuTools.sourceReceipt(source, result)), "repeat source seal");
++        Path copied = work.resolve("copied.txt");
++        Files.copy(path, copied);
++        check(!CpuTools.sourceReceipt(source, result).equals(CpuTools.sourceReceipt(M3File.load(copied), result)),
++                "source receipt binds file location as well as bytes");
++        Files.writeString(path, "changed on disk");
++        check(session.execute(List.of("text.identity"), source).equals(result), "execution uses admitted snapshot without reopen");
++        var changed = M3File.load(path);
++        expect(IllegalArgumentException.class, () -> CpuTools.sourceReceipt(changed, result));
++        var zeroLines = CpuTools.session(new Limits(4, 4, 0, 100), null);
++        expect(IllegalArgumentException.class, () -> zeroLines.execute(List.of("text.identity"), source));
++        Path mixed = work.resolve("mixed-endings.txt");
++        Files.writeString(mixed, "a\r\nb\rc\n");
++        M3File threeLines = M3File.load(mixed);
++        var twoLines = CpuTools.session(new Limits(4, 4, 2, 100), null);
++        expect(IllegalArgumentException.class, () -> twoLines.execute(List.of("text.identity"), threeLines));
++        var hits = CpuTools.literal(source, "aba", 1);
++        check(Arrays.equals(hits.positions(), new int[]{0}) && !hits.complete(), "overlapping capped prefix");
++        int[] mutable = hits.positions();
++        mutable[0] = 100;
++        check(hits.positions()[0] == 0, "immutable match positions");
++        check(CpuTools.verifyLiteral(source, "aba", 1, hits, null), "search re-execution receipt");
++        check(!CpuTools.verifyLiteral(source, "aba", 2, hits, null), "cap is receipt-bound");
++        check(!CpuTools.verifyLiteral(changed, "aba", 1, hits, null), "source is receipt-bound");
++        expect(IllegalArgumentException.class, () -> CpuTools.literal(source, "", -1));
++        expect(IllegalArgumentException.class, () -> CpuTools.literal(source, "", 1_000_001));
++        CountMonitor cancelled = new CountMonitor();
++        cancelled.cancelled = true;
++        expect(CancellationException.class, () -> CpuTools.literal(source, "aba", 2, cancelled));
++        cancelled.cancelled = false;
++        cancelled.cancelAfterWork = true;
++        expect(CancellationException.class, () -> CpuTools.literal(source, "aba", 2, cancelled));
++
++        Random random = new Random(612721L);
++        String[] alphabet = {"a", "b", "\ud83d\ude42", "\u03c0", "\r\n", "\u0000"};
++        for (int round = 0; round < 240; round++) {
++            StringBuilder text = new StringBuilder();
++            for (int i = random.nextInt(60); i > 0; i--) text.append(alphabet[random.nextInt(alphabet.length)]);
++            String spelling = text.toString();
++            Files.writeString(path, spelling, StandardCharsets.UTF_8);
++            M3File file = M3File.load(path);
++            String needle;
++            if (round % 3 == 0) needle = "";
++            else if (round % 3 == 1 && !spelling.isEmpty()) {
++                int start = random.nextInt(spelling.length());
++                needle = spelling.substring(start, Math.min(spelling.length(), start + random.nextInt(5) + 1));
++            } else needle = "aba";
++            List<Integer> oracle = new ArrayList<>();
++            for (int i = 0; i <= spelling.length() - needle.length(); i++) {
++                boolean matches = true;
++                for (int j = 0; j < needle.length(); j++) {
++                    if (spelling.charAt(i + j) != needle.charAt(j)) { matches = false; break; }
++                }
++                if (matches) oracle.add(i);
++            }
++            for (int cap : new int[]{0, 1, 3, 100}) {
++                var actual = CpuTools.literal(file, needle, cap);
++                check(Arrays.equals(actual.positions(), oracle.stream().limit(cap).mapToInt(Integer::intValue).toArray()),
++                        "independent exhaustive UTF-16 literal oracle");
++                check(actual.complete() == (oracle.size() <= cap), "exact truncation bit");
++                check(CpuTools.verifyLiteral(file, needle, cap, actual, null), "random source receipt replay");
++            }
++        }
++        requireStorage(source.text());
++        requireStorage(result.output().text());
++        requireStorage(String.join("|", source.text(), source.text()));
++    }
++
++    private static void cli(Path work) throws Exception {
++        check(invoke("--help").code == 0, "CLI help");
++        check(invoke().code == 2 && invoke("--missing").code == 2, "CLI usage failure");
++        var first = invoke("--list");
++        check(first.code == 0 && first.output.lines().count() == 22, "CLI exact operation listing");
++        check(first.equals(invoke("--list")), "repeatable CLI listing");
++        check(invoke("--self-test").equals(invoke("--self-test")), "repeatable CLI self-test");
++        check(invoke("--self-test").code == 0, "CLI self-test succeeds");
++        Path text = work.resolve("cli.txt");
++        Files.writeString(text, "b\na\nb\n");
++        var run = invoke("--run", "text.sort,text.uniq", text.toString());
++        check(run.code == 0 && run.output.equals("a\nb\n") && run.error.contains("receipt\tdag="), "CLI M3File pipeline");
++        check(run.equals(invoke("--run", "text.sort,text.uniq", text.toString())), "CLI source receipt repeat");
++        var find = invoke("--find", "b", text.toString(), "1");
++        check(find.code == 0 && find.output.equals("0\n") && find.error.contains("complete=false"), "CLI explicit search truncation");
++        var invalid = invoke("--run", "missing", work.resolve("absent.txt").toString());
++        check(invalid.code == 1 && invalid.error.contains("unknown binding"), "binding refusal precedes file read");
++        Files.writeString(text, "1\n0\t1\n");
++        var invalidGraph = invoke("--run", "graph.topology", text.toString());
++        check(invalidGraph.code == 1 && invalidGraph.output.isEmpty()
++                && invalidGraph.error.contains("CPU_TOOLS_REFUSED"), "invalid graph is a CLI refusal, not an uncaught exception");
++        Path java = work.resolve("CliSource.java");
++        Files.writeString(java, "class CliSource { int value; int sum(int a) { return a + value; } }\n");
++        var ast = invoke("--ast", java.toString());
++        check(ast.code == 0 && ast.output.contains("method\tsum\t1\tfalse")
++                && ast.error.contains("receipt\tast=") && ast.error.contains("phase=PARSED"), "CLI real M3AST syntax inventory");
++        check(ast.equals(invoke("--ast", java.toString())), "CLI AST source and fact receipt repeat");
++        check(!Files.exists(work.resolve("CliSource.class")), "CLI parse emits no classes");
++    }
++
++    private record CliResult(int code, String output, String error) { }
++    private static CliResult invoke(String... args) {
++        var output = new ByteArrayOutputStream();
++        var error = new ByteArrayOutputStream();
++        int code;
++        try (var out = new PrintStream(output, true, StandardCharsets.UTF_8);
++             var err = new PrintStream(error, true, StandardCharsets.UTF_8)) {
++            code = CpuToolsCli.run(args, out, err);
++        }
++        return new CliResult(code, output.toString(StandardCharsets.UTF_8), error.toString(StandardCharsets.UTF_8));
++    }
++
++    private static void requireStorage(String text) throws Exception {
++        if (!Boolean.getBoolean("m3.test.requireStorage")) return;
++        var field = String.class.getDeclaredField("m3");
++        field.setAccessible(true);
++        check(!text.isEmpty() && field.get(text) != null, "actual M3String storage, not only API presence");
++    }
++
++    private static void expectText(String input, List<String> operations, String expected) {
++        var session = CpuTools.session();
++        var plan = session.pipeline(operations);
++        var frame = TextFrame.fromString(input);
++        var result = session.execute(plan, frame);
++        check(result.output().text().equals(expected), operations + " golden output; actual=" + CpuTools.escape(result.output().text()));
++        check(session.replay(plan, frame, result).equals(result), "operator output and receipt replay " + operations);
++    }
++
++    private static void refuseOperation(String operation, String text) {
++        var session = CpuTools.session();
++        expect(IllegalArgumentException.class, () -> session.execute(session.pipeline(List.of(operation)), TextFrame.fromString(text)));
++    }
++
++    private static void check(boolean condition, String message) {
++        checks++;
++        if (!condition) throw new AssertionError(message);
++    }
++    @FunctionalInterface private interface Checked { void run() throws Exception; }
++    private static void expect(Class<? extends Throwable> type, Checked operation) {
++        checks++;
++        try { operation.run(); }
++        catch (Throwable failure) {
++            if (type.isInstance(failure)) return;
++            throw new AssertionError("expected " + type.getName() + " but got " + failure, failure);
++        }
++        throw new AssertionError("expected " + type.getName());
++    }
++
++    private static final class CountMonitor implements ProgressMonitor {
++        boolean cancelled;
++        boolean cancelAfterWork;
++        int messages;
++        long work;
++        int finished;
++        @Override public boolean isCancelled() { return cancelled; }
++        @Override public void message(String ignored) { messages++; }
++        @Override public void worked(long amount) { work += amount; if (cancelAfterWork) cancelled = true; }
++        @Override public void done() { finished++; }
++    }
++}
+diff --git a/m3/tooling/module-packs/cpu-tools/fixtures/M3DonorToolsTest.java b/m3/tooling/module-packs/cpu-tools/fixtures/M3DonorToolsTest.java
+new file mode 100644
+index 0000000..d94b637
+--- /dev/null
++++ b/m3/tooling/module-packs/cpu-tools/fixtures/M3DonorToolsTest.java
+@@ -0,0 +1,362 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
++// Copyright 2026 Hitesh Soliwal and contributors
++// SPDX-License-Identifier: Apache-2.0
++// Independent contract witnesses for the 16 pinned CPU-tool receiving modules.
++import com.m3.tools.codec.varint.VarInts;
++import com.m3.tools.constraint.interval.Intervals;
++import com.m3.tools.graph.paths.ShortestPaths;
++import com.m3.tools.graph.topology.TopologicalOrder;
++import com.m3.tools.plan.priority.StablePriorityQueue;
++import com.m3.tools.stats.streaming.RunningStatistics;
++import com.m3.tools.text.diff.TextDelta;
++import com.m3.tools.text.frequency.TermFrequency;
++import com.m3.tools.text.index.InvertedIndex;
++import com.m3.tools.text.ngram.NGrams;
++import com.m3.tools.text.normalize.UnicodeNormalizer;
++import com.m3.tools.text.regex.RegexMatcher;
++import com.m3.tools.text.search.ExactSearch;
++import com.m3.tools.text.similarity.EditDistance;
++import com.m3.tools.text.tokenize.WordTokenizer;
++import com.m3.tools.verify.sha256.Sha256;
++import java.math.BigInteger;
++import java.text.BreakIterator;
++import java.text.Normalizer;
++import java.util.ArrayList;
++import java.util.Arrays;
++import java.util.Collections;
++import java.util.Comparator;
++import java.util.HashMap;
++import java.util.List;
++import java.util.Locale;
++import java.util.Map;
++import java.util.PriorityQueue;
++import java.util.Set;
++import java.util.SplittableRandom;
++import java.util.TreeMap;
++import java.util.TreeSet;
++import java.util.regex.Pattern;
++import java.util.regex.PatternSyntaxException;
++
++public final class M3DonorToolsTest {
++    private static long assertions;
++    private static final SplittableRandom RANDOM = new SplittableRandom(20261018);
++    private M3DonorToolsTest() { }
++
++    public static void main(String[] args) throws Exception {
++        text(); graphs(); postings(); numeric(); priority(); refusals();
++        System.out.println("M3_DONOR_TOOLS_PASS assertions=" + assertions
++                + " tools=16 graph_exhaustive=531 graph_random=600 priority_operations=30000");
++    }
++
++    private static void check(boolean condition, String message) {
++        assertions++;
++        if (!condition) throw new AssertionError(message);
++    }
++
++    @FunctionalInterface private interface Checked { void run() throws Exception; }
++
++    private static void rejects(Class<? extends Throwable> type, Checked action) throws Exception {
++        try { action.run(); }
++        catch (Throwable failure) {
++            check(type.isInstance(failure), "expected " + type.getName() + ", got " + failure);
++            return;
++        }
++        throw new AssertionError("missing " + type.getName());
++    }
++
++    private static String randomText(int maximum) {
++        char[] alphabet = {'a', 'b', ' ', '\n', '\r', '\0', '\u00e9', '\u0301', '\ud83d', '\ude00'};
++        char[] result = new char[RANDOM.nextInt(maximum + 1)];
++        for (int i = 0; i < result.length; i++) result[i] = alphabet[RANDOM.nextInt(alphabet.length)];
++        return new String(result);
++    }
++
++    private static void text() {
++        String[] corpus = {"", "Hello, 42 world", "e\u0301 \uff21\u030a", "a\r\nb\n",
++                "\ud83d\ude00a\ud83d", "\0ab ab", "alpha beta"};
++        for (String value : corpus) {
++            for (Normalizer.Form form : Normalizer.Form.values())
++                check(UnicodeNormalizer.normalize(value, form).equals(Normalizer.normalize(value, form)), "normalization");
++            check(UnicodeNormalizer.nfkc(value).equals(Normalizer.normalize(value, Normalizer.Form.NFKC)), "NFKC");
++            BreakIterator boundaries = BreakIterator.getWordInstance(Locale.ROOT);
++            boundaries.setText(value);
++            List<String> expected = new ArrayList<>();
++            int start = boundaries.first();
++            for (int end = boundaries.next(); end != BreakIterator.DONE; start = end, end = boundaries.next()) {
++                String token = value.substring(start, end);
++                boolean word = false;
++                for (int at = 0; at < token.length();) {
++                    int point = token.codePointAt(at);
++                    word |= Character.isLetterOrDigit(point); at += Character.charCount(point);
++                }
++                if (word) expected.add(token);
++            }
++            check(WordTokenizer.words(value).equals(expected), "word boundaries");
++            for (String regex : new String[]{"", "a+", "(?=a)", "(ab)|b", "\\X", "[\\s\\S]"}) {
++                for (int limit : new int[]{0, 1, 3, 100}) {
++                    var matcher = Pattern.compile(regex).matcher(value);
++                    var actual = RegexMatcher.find(regex, value, limit);
++                    int count = 0;
++                    while (count < limit && matcher.find()) {
++                        var hit = actual.get(count++);
++                        check(hit.start() == matcher.start() && hit.end() == matcher.end()
++                                && hit.group().equals(matcher.group()), "regex offsets/groups");
++                    }
++                    check(actual.size() == count, "regex limit");
++                }
++            }
++        }
++        for (int trial = 0; trial < 500; trial++) {
++            String left = randomText(24), right = randomText(12);
++            int limit = RANDOM.nextInt(20);
++            List<Integer> positions = new ArrayList<>();
++            for (int at = 0; at <= left.length() && positions.size() < limit; at++)
++                if (left.startsWith(right, at)) positions.add(at);
++            check(Arrays.equals(ExactSearch.positions(left, right, limit),
++                    positions.stream().mapToInt(Integer::intValue).toArray()), "literal positions");
++            for (int bound = 0; bound <= 5; bound++)
++                check(EditDistance.within(left, right, bound) == Math.min(distance(left, right), bound + 1), "Levenshtein");
++            var delta = TextDelta.changedSpan(left, right);
++            String rebuilt = left.substring(0, delta.fromStart()) + right.substring(delta.toStart(), delta.toEnd())
++                    + left.substring(delta.fromEnd());
++            check(rebuilt.equals(right), "delta reconstruction");
++            check(delta.fromStart() == delta.toStart(), "delta prefix coordinates");
++            if (delta.fromStart() < Math.min(left.length(), right.length()))
++                check(left.charAt(delta.fromStart()) != right.charAt(delta.toStart()), "maximal common prefix");
++            for (int n = 1; n <= 5; n++) {
++                Map<String, Integer> expected = new TreeMap<>();
++                for (int at = 0; at + n <= left.length(); at++)
++                    expected.compute(left.substring(at, at + n), (key, count) -> count == null ? 1 : count + 1);
++                check(NGrams.count(left, n).equals(expected), "n-gram counts");
++            }
++            List<String> tokens = Arrays.asList(left.split(" ", -1));
++            Map<String, Long> counts = tokens.stream().collect(java.util.stream.Collectors.groupingBy(
++                    java.util.function.Function.identity(), java.util.stream.Collectors.counting()));
++            var actual = TermFrequency.count(tokens);
++            check(actual.size() == counts.size(), "term cardinality");
++            counts.forEach((term, count) -> check(actual.get(term).longValue() == count, "term count"));
++        }
++        check(Sha256.utf8("").equals("e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"), "empty SHA");
++        check(Sha256.utf8("abc").equals("ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad"), "abc SHA");
++        check(Sha256.utf8("\ud83d\ude00").equals(Sha256.hex(new byte[]{(byte) 0xf0, (byte) 0x9f,
++                (byte) 0x98, (byte) 0x80})), "UTF8 byte identity");
++    }
++
++    private static int distance(String left, String right) {
++        int[][] matrix = new int[left.length() + 1][right.length() + 1];
++        for (int i = 0; i <= left.length(); i++) matrix[i][0] = i;
++        for (int j = 0; j <= right.length(); j++) matrix[0][j] = j;
++        for (int i = 1; i <= left.length(); i++) for (int j = 1; j <= right.length(); j++) {
++            matrix[i][j] = Math.min(matrix[i - 1][j] + 1, Math.min(matrix[i][j - 1] + 1,
++                    matrix[i - 1][j - 1] + (left.charAt(i - 1) == right.charAt(j - 1) ? 0 : 1)));
++        }
++        return matrix[left.length()][right.length()];
++    }
++
++    private static void graphs() {
++        for (int vertices = 0; vertices <= 3; vertices++) {
++            for (int mask = 0; mask < (1 << (vertices * vertices)); mask++) {
++                List<TopologicalOrder.Arc> arcs = new ArrayList<>();
++                for (int from = 0; from < vertices; from++) for (int to = 0; to < vertices; to++)
++                    if ((mask & (1 << (from * vertices + to))) != 0) arcs.add(new TopologicalOrder.Arc(from, to));
++                topology(vertices, arcs);
++            }
++        }
++        for (int trial = 0; trial < 600; trial++) {
++            int vertices = 1 + RANDOM.nextInt(10);
++            List<TopologicalOrder.Arc> arcs = new ArrayList<>();
++            List<ShortestPaths.Edge> edges = new ArrayList<>();
++            for (int i = 0, count = RANDOM.nextInt(50); i < count; i++) {
++                int from = RANDOM.nextInt(vertices), to = RANDOM.nextInt(vertices);
++                arcs.add(new TopologicalOrder.Arc(from, to));
++                long weight = switch (RANDOM.nextInt(12)) {
++                    case 0 -> Long.MAX_VALUE;
++                    case 1 -> Long.MAX_VALUE - 1;
++                    default -> RANDOM.nextInt(20);
++                };
++                edges.add(new ShortestPaths.Edge(from, to, weight));
++            }
++            topology(vertices, arcs);
++            int source = RANDOM.nextInt(vertices);
++            check(Arrays.equals(ShortestPaths.distances(vertices, edges, source), bellman(vertices, edges, source)), "Dijkstra");
++            Collections.reverse(arcs); topology(vertices, arcs);
++        }
++        check(Arrays.equals(ShortestPaths.distances(3, List.of(new ShortestPaths.Edge(0, 1, Long.MAX_VALUE - 1),
++                new ShortestPaths.Edge(1, 2, 1)), 0), new long[]{0, Long.MAX_VALUE - 1, Long.MAX_VALUE}), "sentinel");
++        List<TopologicalOrder.Arc> path = new ArrayList<>();
++        for (int i = 0; i < 4095; i++) path.add(new TopologicalOrder.Arc(i, i + 1));
++        int[] order = TopologicalOrder.sort(4096, path);
++        for (int i = 0; i < order.length; i++) check(order[i] == i, "deep iterative topology");
++    }
++
++    private static void topology(int vertices, List<TopologicalOrder.Arc> arcs) {
++        // Independent repeated full edge scans; no CSR, priority queue or shared heap code.
++        boolean[] done = new boolean[vertices]; int[] expected = new int[vertices];
++        int written = 0;
++        while (written < vertices) {
++            int selected = -1;
++            for (int candidate = 0; candidate < vertices; candidate++) {
++                if (done[candidate]) continue;
++                boolean ready = true;
++                for (var arc : arcs) if (arc.to() == candidate && !done[arc.from()]) { ready = false; break; }
++                if (ready) { selected = candidate; break; }
++            }
++            if (selected < 0) break;
++            expected[written++] = selected; done[selected] = true;
++        }
++        try {
++            int[] actual = TopologicalOrder.sort(vertices, arcs);
++            check(written == vertices, "cycle accepted");
++            check(Arrays.equals(actual, expected), "lexicographic Kahn order");
++        } catch (IllegalArgumentException cyclic) {
++            check(written != vertices, "acyclic graph rejected");
++        }
++    }
++
++    private static long[] bellman(int vertices, List<ShortestPaths.Edge> edges, int source) {
++        BigInteger[] distance = new BigInteger[vertices]; distance[source] = BigInteger.ZERO;
++        for (int pass = 0; pass < vertices; pass++) {
++            boolean changed = false;
++            for (var edge : edges) {
++                if (distance[edge.from()] == null) continue;
++                BigInteger candidate = distance[edge.from()].add(BigInteger.valueOf(edge.weight()));
++                if (distance[edge.to()] == null || candidate.compareTo(distance[edge.to()]) < 0) {
++                    distance[edge.to()] = candidate; changed = true;
++                }
++            }
++            if (!changed) break;
++        }
++        long[] result = new long[vertices]; BigInteger maximum = BigInteger.valueOf(Long.MAX_VALUE);
++        for (int i = 0; i < vertices; i++)
++            result[i] = distance[i] == null || distance[i].compareTo(maximum) >= 0 ? Long.MAX_VALUE : distance[i].longValueExact();
++        return result;
++    }
++
++    private static void postings() throws Exception {
++        String[] vocabulary = {"", "a", "b", "Aa", "BB", "\u00e9", "\ud83d\ude00", "\ud83d"};
++        for (int trial = 0; trial < 400; trial++) {
++            List<List<String>> documents = new ArrayList<>();
++            Map<String, TreeSet<Integer>> expected = new TreeMap<>();
++            for (int id = 0, count = RANDOM.nextInt(20); id < count; id++) {
++                List<String> document = new ArrayList<>();
++                for (int j = 0, words = RANDOM.nextInt(30); j < words; j++) {
++                    String term = vocabulary[RANDOM.nextInt(vocabulary.length)];
++                    document.add(term); expected.computeIfAbsent(term, key -> new TreeSet<>()).add(id);
++                }
++                documents.add(document);
++            }
++            InvertedIndex index = InvertedIndex.build(documents);
++            check(index.terms().equals(expected.keySet()), "term set");
++            for (String term : vocabulary) {
++                int[] wanted = expected.getOrDefault(term, new TreeSet<>()).stream().mapToInt(Integer::intValue).toArray();
++                check(Arrays.equals(index.documents(term), wanted), "posting list");
++                int[] returned = index.documents(term);
++                if (returned.length > 0) returned[0] = -1;
++                check(Arrays.equals(index.documents(term), wanted), "detached posting");
++            }
++            for (List<String> document : documents) document.clear();
++            check(index.terms().equals(expected.keySet()), "input containers detached");
++            rejects(UnsupportedOperationException.class, () -> index.terms().remove("missing"));
++            rejects(NullPointerException.class, () -> index.terms().contains(null));
++        }
++        rejects(NullPointerException.class, () -> InvertedIndex.build(List.of(Arrays.asList("a", null))));
++        rejects(UnsupportedOperationException.class, () -> NGrams.count("abc", 1).put("x", 1));
++        rejects(UnsupportedOperationException.class, () -> TermFrequency.count(List.of("a")).clear());
++        check(Arrays.stream(InvertedIndex.class.getDeclaredFields()).noneMatch(
++                field -> Map.class.isAssignableFrom(field.getType())), "no retained map entry structure");
++    }
++
++    private static void numeric() throws Exception {
++        for (long value : new long[]{0, 1, 127, 128, 16383, 16384, Integer.MAX_VALUE, Long.MAX_VALUE}) varint(value);
++        for (int i = 0; i < 10000; i++) varint(RANDOM.nextLong() & Long.MAX_VALUE);
++        for (byte[] bad : new byte[][]{{}, {(byte) 0x80}, {(byte) 0x80, 0}, {0, 1},
++                {(byte) 0x80, (byte) 0x80, (byte) 0x80, (byte) 0x80, (byte) 0x80,
++                        (byte) 0x80, (byte) 0x80, (byte) 0x80, (byte) 0x80}})
++            rejects(IllegalArgumentException.class, () -> VarInts.decode(bad));
++        for (int trial = 0; trial < 1000; trial++) {
++            long a = RANDOM.nextInt(-15, 16), b = a + RANDOM.nextInt(12);
++            long c = RANDOM.nextInt(-15, 16), d = c + RANDOM.nextInt(12);
++            var first = new Intervals.Span(a, b); var second = new Intervals.Span(c, d);
++            boolean expected = false;
++            for (long point = -15; point < 28; point++) if (a <= point && point < b && c <= point && point < d) expected = true;
++            check(Intervals.intersects(first, second) == expected, "half-open overlap");
++            check(Intervals.conflicting(List.of(first), second).equals(expected ? List.of(0) : List.of()), "conflicts");
++        }
++        check(!Intervals.intersects(new Intervals.Span(Long.MIN_VALUE, 0), new Intervals.Span(0, Long.MAX_VALUE)), "extreme interval");
++        RunningStatistics empty = new RunningStatistics();
++        check(empty.count() == 0 && Double.isNaN(empty.mean()) && Double.isNaN(empty.populationVariance()), "empty statistics");
++        for (int trial = 0; trial < 200; trial++) {
++            double[] samples = new double[1 + RANDOM.nextInt(100)];
++            RunningStatistics statistics = new RunningStatistics();
++            double sum = 0, min = Double.POSITIVE_INFINITY, max = Double.NEGATIVE_INFINITY;
++            for (int i = 0; i < samples.length; i++) {
++                double value = RANDOM.nextInt(-1000, 1001);
++                samples[i] = value; statistics.accept(value); sum += value; min = Math.min(min, value); max = Math.max(max, value);
++            }
++            double mean = sum / samples.length, variance = 0;
++            for (double value : samples) variance += (value - mean) * (value - mean);
++            variance /= samples.length;
++            check(statistics.count() == samples.length && Math.abs(statistics.mean() - mean) < 1e-9, "Welford mean");
++            check(Math.abs(statistics.populationVariance() - variance) < 1e-7, "Welford variance");
++            check(statistics.min() == min && statistics.max() == max, "extrema");
++            long count = statistics.count();
++            rejects(IllegalArgumentException.class, () -> statistics.accept(Double.NaN));
++            check(statistics.count() == count, "rejected sample unchanged");
++        }
++    }
++
++    private static void varint(long value) {
++        byte[] encoded = VarInts.encode(value);
++        check(VarInts.decode(encoded) == value, "varint roundtrip");
++        BigInteger oracle = BigInteger.ZERO;
++        for (int i = 0; i < encoded.length; i++)
++            oracle = oracle.add(BigInteger.valueOf(encoded[i] & 127).shiftLeft(7 * i));
++        check(oracle.equals(BigInteger.valueOf(value)), "LEB128 value");
++        check(encoded.length == Math.max(1, (64 - Long.numberOfLeadingZeros(value) + 6) / 7), "minimal LEB128");
++    }
++
++    private record Offered(Object value, double score, long sequence) { }
++
++    private static void priority() throws Exception {
++        StablePriorityQueue<Object> actual = new StablePriorityQueue<>();
++        PriorityQueue<Offered> oracle = new PriorityQueue<>(Comparator.comparingDouble(Offered::score).thenComparingLong(Offered::sequence));
++        for (int i = 0; i < 30000; i++) {
++            if (oracle.isEmpty() || RANDOM.nextInt(5) < 3) {
++                Object value = new Object();
++                double score = switch (RANDOM.nextInt(12)) {
++                    case 0 -> -0.0;
++                    case 1 -> 0.0;
++                    case 2 -> Double.MAX_VALUE;
++                    case 3 -> -Double.MAX_VALUE;
++                    default -> RANDOM.nextInt(-20, 21);
++                };
++                actual.offer(value, score); oracle.add(new Offered(value, score, i));
++            } else check(actual.poll() == oracle.remove().value(), "stable priority identity");
++            check(actual.size() == oracle.size(), "queue size");
++        }
++        while (!oracle.isEmpty()) check(actual.poll() == oracle.remove().value(), "priority drain");
++        check(actual.poll() == null && actual.size() == 0, "empty priority");
++        rejects(NullPointerException.class, () -> actual.offer(null, 0));
++        rejects(IllegalArgumentException.class, () -> actual.offer(new Object(), Double.NaN));
++        rejects(IllegalArgumentException.class, () -> actual.offer(new Object(), Double.POSITIVE_INFINITY));
++        check(actual.size() == 0, "refused offers atomic");
++        check(Arrays.stream(StablePriorityQueue.class.getDeclaredFields()).noneMatch(
++                field -> java.util.Collection.class.isAssignableFrom(field.getType())), "no retained Entry queue");
++    }
++
++    private static void refusals() throws Exception {
++        rejects(NullPointerException.class, () -> UnicodeNormalizer.nfkc(null));
++        rejects(NullPointerException.class, () -> WordTokenizer.words(null));
++        rejects(PatternSyntaxException.class, () -> RegexMatcher.find("[", "", 0));
++        rejects(IllegalArgumentException.class, () -> RegexMatcher.find("a", "a", -1));
++        rejects(IllegalArgumentException.class, () -> ExactSearch.positions("", "", -1));
++        rejects(IllegalArgumentException.class, () -> NGrams.count("x", 0));
++        rejects(IllegalArgumentException.class, () -> EditDistance.within("", "", -1));
++        rejects(IllegalArgumentException.class, () -> VarInts.encode(-1));
++        rejects(IllegalArgumentException.class, () -> VarInts.decode(null));
++        rejects(IllegalArgumentException.class, () -> TopologicalOrder.sort(-1, List.of()));
++        rejects(IndexOutOfBoundsException.class, () -> TopologicalOrder.sort(1, List.of(new TopologicalOrder.Arc(0, 1))));
++        rejects(IllegalArgumentException.class, () -> ShortestPaths.distances(2, List.of(new ShortestPaths.Edge(0, 1, -1)), 0));
++        rejects(IllegalArgumentException.class, () -> new Intervals.Span(1, 0));
++        rejects(NullPointerException.class, () -> Sha256.hex(null));
++    }
++}
+diff --git a/m3/tooling/module-packs/cpu-tools/fixtures/M3SourceToolsTest.java b/m3/tooling/module-packs/cpu-tools/fixtures/M3SourceToolsTest.java
+new file mode 100644
+index 0000000..21c3bc1
+--- /dev/null
++++ b/m3/tooling/module-packs/cpu-tools/fixtures/M3SourceToolsTest.java
+@@ -0,0 +1,348 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
++// SPDX-License-Identifier: Apache-2.0
++// Copyright 2026 Hitesh Soliwal and contributors
++import com.m3.tools.cpu.M3AstTools;
++import com.sun.source.util.JavacTask;
++import com.sun.source.util.M3AST;
++import java.io.IOException;
++import java.net.URI;
++import java.nio.ByteBuffer;
++import java.nio.charset.StandardCharsets;
++import java.nio.file.Files;
++import java.nio.file.Path;
++import java.nio.file.attribute.FileTime;
++import java.security.MessageDigest;
++import java.util.ArrayList;
++import java.util.HexFormat;
++import java.util.List;
++import java.util.Random;
++import java.util.concurrent.CancellationException;
++import java.util.concurrent.ProgressMonitor;
++import java.util.concurrent.ProgressMonitors;
++import javax.tools.JavaFileObject;
++import javax.tools.SimpleJavaFileObject;
++import javax.tools.ToolProvider;
++import jdk.m3.io.M3File;
++
++/** Independent byte/UTF-16 digest oracles and actual M3 compiler lifecycle tests. */
++public final class M3SourceToolsTest {
++    private static int checks;
++
++    private M3SourceToolsTest() { }
++
++    public static void main(String[] args) throws Exception {
++        Path work = Files.createTempDirectory("m3-source-tools-fixtures-");
++        try {
++            fileContracts(work);
++            sourceChangeContracts(work);
++            astContracts(work);
++            compilerLifetimeContracts(work);
++            cancellationContracts(work);
++            System.out.println("M3_SOURCE_TOOLS_PASS checks=" + checks
++                    + " storage=" + Boolean.getBoolean("m3.test.requireStorage"));
++        } finally {
++            try (var paths = Files.walk(work)) {
++                for (Path path : paths.sorted(java.util.Comparator.reverseOrder()).toList()) Files.delete(path);
++            }
++        }
++    }
++
++    private static void fileContracts(Path work) throws Exception {
++        Path path = work.resolve("unicode.txt");
++        String text = "\uFEFF\u03c0 A\ud83d\ude42\r\nline\rthree\n\u0000tail";
++        byte[] bytes = text.getBytes(StandardCharsets.UTF_8);
++        Files.write(path, bytes);
++        CountMonitor progress = new CountMonitor();
++        M3File file = M3File.load(path, bytes.length, progress);
++        check(file.text().equals(text), "strict decoder preserves BOM, NUL and line endings");
++        check(file.path().equals(path.toAbsolutePath().normalize()) && file.uri().equals(path.toUri()), "path identity");
++        check(file.text() == file.toString(), "one retained public String reference");
++        check(file.byteLength() == bytes.length && file.length() == text.length(), "byte/character geometry");
++        check(file.rawSha256().equals(sha(bytes)), "independent raw SHA oracle");
++        check(file.utf16Sha256().equals(utf16(text)), "independent UTF-16 SHA oracle");
++        check(!file.rawSha256().equals(file.utf16Sha256()), "byte and character seals are distinct");
++        check(progress.begun == 1 && progress.finished == 1 && progress.worked == bytes.length, "one stream's byte progress");
++        file.verifyUnchanged();
++        for (int start = 0; start <= text.length(); start++) {
++            for (int end = start; end <= text.length(); end++) {
++                var range = file.range(start, end);
++                check(range.source() == file && range.length() == end - start, "range retains original owner");
++                for (int i = 0; i < range.length(); i++) check(range.charAt(i) == text.charAt(start + i), "shared range characters");
++                check(range.utf16Sha256().equals(utf16(text.substring(start, end))), "range digest including split surrogates");
++                check(range.subSequence(0, range.length()).source() == file, "nested range retains original owner");
++            }
++        }
++        expect(IndexOutOfBoundsException.class, () -> file.range(-1, 0));
++        expect(IndexOutOfBoundsException.class, () -> file.range(0, file.length() + 1));
++        expect(IndexOutOfBoundsException.class, () -> file.range(1, 1).charAt(0));
++        expect(IOException.class, () -> M3File.load(path, bytes.length - 1));
++        expect(IllegalArgumentException.class, () -> M3File.load(path, -1));
++        expect(IllegalArgumentException.class, () -> M3File.load(path, M3File.MAX_BYTES + 1));
++        expect(IOException.class, () -> M3File.load(work));
++
++        Path empty = work.resolve("empty.txt");
++        Files.write(empty, new byte[0]);
++        M3File zero = M3File.load(empty, 0);
++        check(zero.length() == 0 && zero.byteLength() == 0, "empty zero-budget source");
++        check(zero.rawSha256().equals(sha(new byte[0])) && zero.utf16Sha256().equals(utf16("")), "empty digests");
++        for (byte[] invalid : List.of(new byte[] {(byte) 0xc0, (byte) 0xaf},
++                new byte[] {(byte) 0xed, (byte) 0xa0, (byte) 0x80},
++                new byte[] {(byte) 0xf0, (byte) 0x9f, (byte) 0x98})) {
++            Files.write(work.resolve("invalid.txt"), invalid);
++            expect(IOException.class, () -> M3File.load(work.resolve("invalid.txt")));
++        }
++
++        Random random = new Random(711204L);
++        for (int round = 0; round < 24; round++) {
++            StringBuilder generated = new StringBuilder("a".repeat(8189 + round));
++            for (int i = 0; i < 80; i++) {
++                int codePoint;
++                do { codePoint = random.nextInt(0x110000); }
++                while (codePoint >= 0xd800 && codePoint <= 0xdfff);
++                generated.appendCodePoint(codePoint);
++            }
++            byte[] encoded = generated.toString().getBytes(StandardCharsets.UTF_8);
++            Files.write(work.resolve("buffer-boundary.txt"), encoded);
++            M3File observed = M3File.load(work.resolve("buffer-boundary.txt"));
++            check(observed.text().contentEquals(generated), "UTF-8 decoder buffer seam");
++            check(observed.rawSha256().equals(sha(encoded)), "random raw digest");
++            check(observed.utf16Sha256().equals(utf16(generated)), "random UTF-16 digest");
++        }
++
++        for (var field : M3File.class.getDeclaredFields()) {
++            check(field.getType() != byte[].class && field.getType() != char[].class, "no retained duplicate byte/char payload");
++        }
++        Path link = work.resolve("source-link.txt");
++        Files.createSymbolicLink(link, path.getFileName());
++        expect(IOException.class, () -> M3File.load(link));
++        Path realDirectory = Files.createDirectory(work.resolve("real-directory"));
++        Files.writeString(realDirectory.resolve("child.txt"), "child");
++        Path directoryLink = work.resolve("directory-link");
++        Files.createSymbolicLink(directoryLink, realDirectory.getFileName());
++        expect(IOException.class, () -> M3File.load(directoryLink.resolve("child.txt")));
++        checkStorage(file.text());
++        checkStorage(String.join("|", file.text(), file.text()));
++    }
++
++    private static void sourceChangeContracts(Path work) throws Exception {
++        Path path = work.resolve("changed.txt");
++        Files.writeString(path, "original", StandardCharsets.UTF_8);
++        M3File before = M3File.load(path);
++        FileTime modified = Files.getLastModifiedTime(path);
++        Files.writeString(path, "modified", StandardCharsets.UTF_8);
++        Files.setLastModifiedTime(path, modified);
++        expect(IOException.class, before::verifyUnchanged);
++        check(before.text().equals("original"), "snapshot remains immutable after external edit");
++        Files.writeString(path, "x".repeat(30_000), StandardCharsets.UTF_8);
++        FileTime initialTime = Files.getLastModifiedTime(path);
++        ProgressMonitor changing = new ProgressMonitor() {
++            private boolean changed;
++            @Override public void worked(long ignored) {
++                if (!changed) {
++                    changed = true;
++                    try {
++                        Files.writeString(path, "y".repeat(30_000), StandardCharsets.UTF_8);
++                        Files.setLastModifiedTime(path, FileTime.fromMillis(initialTime.toMillis() + 20_000));
++                    } catch (IOException failure) { throw new java.io.UncheckedIOException(failure); }
++                }
++            }
++        };
++        expect(IOException.class, () -> M3File.load(path, changing));
++    }
++
++    private static void astContracts(Path work) throws Exception {
++        Path source = work.resolve("Example.java");
++        String code = "package demo;\r\nimport java.util.List;\r\nimport static java.lang.Math.max;\r\n"
++                + "/* \ud83d\ude42 source coordinates */ public class Example<T> {\r\n"
++                + "  private int value; public Example(int value) { this.value = value; }\r\n"
++                + "  public int sum(int n) { String fake = \"class Bogus {}\"; return max(value,n); }\r\n"
++                + "  String block = \"\"\"\nclass Shadow {}\n\"\"\";\r\n"
++                + "  class Nested { void run() {} }\r\n}\r\n";
++        Files.writeString(source, code, StandardCharsets.UTF_8);
++        M3File file = M3File.load(source);
++        CountMonitor progress = new CountMonitor();
++        var all = M3AstTools.parse(List.of(file), progress);
++        check(all.size() == 1, "one snapshot per compiler input");
++        var snapshot = all.get(0);
++        check(snapshot.phase() == M3AST.Phase.PARSED, "syntax facts are explicitly parse-phase");
++        check(snapshot.source().uri().equals(file.uri()), "AST source URI");
++        check(snapshot.source().rawSha256().orElseThrow().equals(file.rawSha256()), "exact file byte binding");
++        check(snapshot.source().utf16Sha256().equals(file.utf16Sha256()), "exact compiler character binding");
++        check(snapshot.visitedNodes() == snapshot.structureCount() + snapshot.unpositionedNodes(), "position accounting");
++        check(snapshot.structureCount() > 25 && snapshot.retainedPrimitiveBytes() > 0, "structural primitive plane");
++        for (int i = 0; i < snapshot.structureCount(); i++) {
++            var fact = snapshot.structure(i);
++            check(fact.span().start() >= 0 && fact.span().end() <= file.length(), "source-bound UTF-16 range");
++            check(fact.parent() < i && fact.depth() <= M3AstTools.MAX_DEPTH, "parent precedes child");
++        }
++        check(snapshot.imports().size() == 2, "import inventory");
++        check(snapshot.imports().get(0).qualifiedName().equals("java.util.List"), "qualified import name");
++        check(!snapshot.imports().get(0).staticImport() && snapshot.imports().get(1).staticImport(), "static import distinction");
++        check(snapshot.symbols().stream().anyMatch(s -> s.name().equals("Example") && s.kind().equals("CLASS")), "declared class");
++        check(snapshot.symbols().stream().anyMatch(s -> s.name().equals("T") && s.kind().equals("TYPE_PARAMETER")), "type parameter");
++        check(snapshot.symbols().stream().noneMatch(s -> s.name().equals("Bogus") || s.name().equals("Shadow")), "opaque strings and text blocks");
++        check(snapshot.methods().size() == 3, "constructors and nested methods");
++        check(snapshot.methods().stream().anyMatch(m -> m.constructor() && m.parameterCount() == 1), "constructor fact");
++        var sum = snapshot.methods().stream().filter(m -> m.name().equals("sum")).findFirst().orElseThrow();
++        check(sum.parameterCount() == 1 && sum.body().isPresent(), "method shape");
++        check(file.range(sum.span().start(), sum.span().end()).toString().contains("int sum"), "method range is source text");
++        check(progress.begun == 1 && progress.finished == 1 && progress.worked == snapshot.visitedNodes(), "compiler capture progress");
++        expect(UnsupportedOperationException.class, () -> snapshot.methods().clear());
++        expect(UnsupportedOperationException.class, () -> snapshot.structures().set(0, snapshot.structure(0)));
++        expect(IllegalArgumentException.class, () -> M3AstTools.parse(List.of(file, file)));
++        var replay = M3AstTools.parse(List.of(file)).get(0);
++        check(snapshot.structures().equals(replay.structures()) && snapshot.symbols().equals(replay.symbols())
++                && snapshot.methods().equals(replay.methods()), "deterministic detached syntax replay");
++        check(snapshot.sha256().matches("[0-9a-f]{64}") && snapshot.sha256().equals(replay.sha256()),
++                "actual fresh compiler parse reproduces source/inventory receipt");
++        Files.writeString(source, code.replace("source coordinates", "source coordinateX"), StandardCharsets.UTF_8);
++        var differentSource = M3AstTools.parse(List.of(M3File.load(source))).get(0);
++        check(snapshot.structures().equals(differentSource.structures())
++                && snapshot.symbols().equals(differentSource.symbols()), "same syntax shape at same URI after comment edit");
++        check(!snapshot.sha256().equals(differentSource.sha256()), "receipt distinguishes exact source despite identical syntax facts");
++        check(!Files.exists(work.resolve("Example.class")) && !Files.exists(work.resolve("demo")), "parse does not generate classes");
++        Files.writeString(source, "broken current disk contents", StandardCharsets.UTF_8);
++        var retained = M3AstTools.parse(List.of(file)).get(0);
++        check(retained.source().equals(snapshot.source()), "compiler uses admitted snapshot without reopening file");
++        check(retained.sha256().equals(snapshot.sha256()), "frozen source receipt survives unrelated disk change");
++        expect(IOException.class, file::verifyUnchanged);
++        Path invalid = work.resolve("Invalid.java");
++        Files.writeString(invalid, "class Invalid { void broken( {", StandardCharsets.UTF_8);
++        expect(IOException.class, () -> M3AstTools.parse(List.of(M3File.load(invalid))));
++        Path deep = work.resolve("Deep.java");
++        Files.writeString(deep, "class Deep { void f() {" + "{".repeat(M3AstTools.MAX_DEPTH + 8)
++                + ";" + "}".repeat(M3AstTools.MAX_DEPTH + 8) + "} }", StandardCharsets.UTF_8);
++        expect(IllegalArgumentException.class, () -> M3AstTools.parse(List.of(M3File.load(deep))));
++        check(M3AstTools.parse(List.of()).isEmpty(), "empty source set");
++    }
++
++    private static void compilerLifetimeContracts(Path work) throws Exception {
++        Path path = work.resolve("Lifetime.java");
++        Files.writeString(path, "class Lifetime { int value; void method() {} }", StandardCharsets.UTF_8);
++        M3File file = M3File.load(path);
++        Files.writeString(path, "class Changed {}", StandardCharsets.UTF_8);
++        M3File wrongGeneration = M3File.load(path);
++        var compiler = ToolProvider.getSystemJavaCompiler();
++        var snapshots = new ArrayList<M3AstTools.Snapshot>();
++        M3AST.Unit[] expired = new M3AST.Unit[1];
++        try (var manager = compiler.getStandardFileManager(null, null, StandardCharsets.UTF_8)) {
++            var task = (JavacTask) compiler.getTask(null, manager, null, List.of("-proc:none"), null,
++                    List.of(input(file.uri(), file.text())));
++            try (M3AST frontend = M3AST.open(task, true)) {
++                frontend.addConsumer(M3AstTools.consumer(snapshots::add));
++                frontend.addConsumer(new M3AST.Consumer() {
++                    @Override public void parsed(M3AST.Unit unit) throws Exception {
++                        expired[0] = unit;
++                        expect(IllegalArgumentException.class,
++                                () -> M3AstTools.capture(unit, wrongGeneration, ProgressMonitor.NONE));
++                        var bound = M3AstTools.capture(unit, file, ProgressMonitor.NONE);
++                        check(bound.source().rawSha256().orElseThrow().equals(file.rawSha256()), "exact source binding inside live callback");
++                        var boundReplay = M3AstTools.capture(unit, file, ProgressMonitor.NONE);
++                        check(bound.sha256().equals(boundReplay.sha256()), "repeated live capture receipt");
++                        check(!bound.sha256().equals(snapshots.get(0).sha256()), "receipt distinguishes raw-byte binding presence");
++                        check(M3AstTools.capture(unit).sha256().equals(snapshots.get(0).sha256()),
++                                "two consumers of one actual compiler unit reproduce receipt");
++                    }
++                });
++                task.parse();
++                check(frontend.summary().parsedUnits() == 1, "existing task parsed once for multiple consumers");
++            }
++        }
++        check(snapshots.size() == 1 && snapshots.get(0).source().rawSha256().isEmpty(), "unbound compiler source does not invent byte digest");
++        expect(IllegalStateException.class, () -> expired[0].tree());
++        check(!snapshots.get(0).methods().isEmpty(), "facts remain usable after compiler lifetime");
++        for (var field : M3AstTools.Snapshot.class.getDeclaredFields()) {
++            String name = field.getType().getName();
++            check(!name.startsWith("com.sun.source.") || field.getType() == M3AST.Phase.class,
++                    "snapshot retains no compiler tree, type or session");
++        }
++
++        String unpaired = "class Surrogate { /* " + (char) 0xd800 + " */ void ok() {} }";
++        var unicode = new ArrayList<M3AstTools.Snapshot>();
++        try (var manager = compiler.getStandardFileManager(null, null, StandardCharsets.UTF_8)) {
++            var task = (JavacTask) compiler.getTask(null, manager, null, List.of("-proc:none"), null,
++                    List.of(input(URI.create("string:///Surrogate.java"), unpaired)));
++            try (M3AST frontend = M3AST.open(task, true)) {
++                frontend.addConsumer(M3AstTools.consumer(unicode::add));
++                task.parse();
++            }
++        }
++        check(unicode.get(0).source().utf16Sha256().equals(utf16(unpaired)), "compiler seal preserves unpaired UTF-16 code units");
++        check(unicode.get(0).sha256().matches("[0-9a-f]{64}"), "receipt accepts compiler source containing isolated surrogate");
++    }
++
++    private static void cancellationContracts(Path work) throws Exception {
++        Path file = work.resolve("Cancel.java");
++        Files.writeString(file, "class Cancel { int value; }", StandardCharsets.UTF_8);
++        M3File source = M3File.load(file);
++        ProgressMonitor cancelled = new ProgressMonitor() {
++            @Override public boolean isCancelled() { return true; }
++        };
++        expect(CancellationException.class, () -> M3File.load(file, cancelled));
++        expect(CancellationException.class, () -> source.range(0, 1, cancelled));
++        expect(CancellationException.class, () -> source.range(0, 1).utf16Sha256(cancelled));
++        expect(CancellationException.class, () -> source.verifyUnchanged(cancelled));
++        expect(CancellationException.class, () -> M3AstTools.parse(List.of(source), cancelled));
++        try (var scope = ProgressMonitors.bind(cancelled)) {
++            check(scope != null, "bound default monitor");
++            expect(CancellationException.class, () -> M3File.load(file));
++            expect(CancellationException.class, () -> M3File.load(file, (ProgressMonitor) null));
++            expect(CancellationException.class, () -> M3AstTools.parse(List.of(source)));
++        }
++        CountMonitor midParse = new CountMonitor() {
++            @Override public boolean isCancelled() { return worked >= 3; }
++        };
++        expect(CancellationException.class, () -> M3AstTools.parse(List.of(source), midParse));
++        check(midParse.finished == 1, "mid-compiler cancellation closes progress");
++        Thread.currentThread().interrupt();
++        try { expect(CancellationException.class, () -> M3File.load(file)); }
++        finally { check(Thread.interrupted(), "interruption remains observable"); }
++    }
++
++    private static SimpleJavaFileObject input(URI uri, String text) {
++        return new SimpleJavaFileObject(uri, JavaFileObject.Kind.SOURCE) {
++            @Override public CharSequence getCharContent(boolean ignoreEncodingErrors) { return text; }
++        };
++    }
++
++    private static void checkStorage(String text) throws Exception {
++        if (!Boolean.getBoolean("m3.test.requireStorage")) return;
++        check(!text.isEmpty(), "storage witness must be nonempty");
++        var field = String.class.getDeclaredField("m3");
++        field.setAccessible(true);
++        check(field.get(text) != null, "file and joined Strings have actual canonical M3 storage");
++    }
++
++    private static String sha(byte[] input) throws Exception {
++        return HexFormat.of().formatHex(MessageDigest.getInstance("SHA-256").digest(input));
++    }
++
++    private static String utf16(CharSequence text) throws Exception {
++        ByteBuffer units = ByteBuffer.allocate(text.length() * Character.BYTES);
++        for (int i = 0; i < text.length(); i++) units.putChar(text.charAt(i));
++        return sha(units.array());
++    }
++
++    private static void check(boolean condition, String message) {
++        checks++;
++        if (!condition) throw new AssertionError(message);
++    }
++
++    @FunctionalInterface private interface Checked { void run() throws Exception; }
++
++    private static void expect(Class<? extends Throwable> expected, Checked operation) throws Exception {
++        try { operation.run(); }
++        catch (Throwable failure) {
++            check(expected.isInstance(failure), "expected " + expected.getSimpleName() + ", got " + failure);
++            return;
++        }
++        throw new AssertionError("expected " + expected.getSimpleName());
++    }
++
++    private static class CountMonitor implements ProgressMonitor {
++        int begun, finished;
++        long worked;
++        @Override public void begin(String task, long totalWork) { begun++; }
++        @Override public void worked(long amount) { worked += amount; }
++        @Override public void done() { finished++; }
++    }
++}
+diff --git a/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.codec.varint/com/m3/tools/codec/varint/VarInts.java b/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.codec.varint/com/m3/tools/codec/varint/VarInts.java
+new file mode 100644
+index 0000000..54f23c9
+--- /dev/null
++++ b/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.codec.varint/com/m3/tools/codec/varint/VarInts.java
+@@ -0,0 +1,43 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
++// Copyright 2026 Hitesh Soliwal and contributors
++// Modified 2026-10-18: map the pinned Synexia CPU tool into its existing M3JDK21 module name.
++// SPDX-License-Identifier: Apache-2.0
++package com.m3.tools.codec.varint;
++import java.util.Arrays;
++/** Canonical nonnegative signed-long LEB128 with strict overflow and trailing-data rejection. */
++public final class VarInts {
++    private VarInts() { }
++    public static byte[] encode(long value) {
++        if(value<0)throw new IllegalArgumentException("negative unsigned varint");
++        byte[] data=new byte[9];int used=0;
++        do{
++            int part=(int)(value&127);
++            value>>>=7;
++            data[used++]=(byte)(part|(value!=0?128:0));
++        }while(value!=0);
++        return Arrays.copyOf(data,used);
++    }
++    public static long decode(byte[] data) {
++        if(data==null||data.length==0||data.length>9)throw new IllegalArgumentException("encoded length");
++        long value=0;
++        for(int i=0;i<data.length;i++){
++            int part=data[i]&255;
++            value|=(long)(part&127)<<(i*7);
++            if((part&128)==0){
++                if(i!=data.length-1)throw new IllegalArgumentException("trailing data");
++                if(data.length!=encode(value).length)throw new IllegalArgumentException("overlong encoding");
++                return value;
++            }
++        }
++        throw new IllegalArgumentException("unterminated/overflow");
++    }
++    public static void main(String[] args){
++        if(args.length==1&&args[0].equals("--self-test")){
++            for(long n:new long[]{0,1,127,128,16384,Long.MAX_VALUE})
++                if(decode(encode(n))!=n)throw new AssertionError("roundtrip "+n);
++            try{decode(new byte[]{(byte)0x80,0});throw new AssertionError("overlong");}
++            catch(IllegalArgumentException expected){}
++            System.out.println("M3_JMOD_TEST_PASS codec.varint");
++        }else if(args.length==1)System.out.println(Arrays.toString(encode(Long.parseLong(args[0]))));
++        else throw new IllegalArgumentException("value required");
++    }
++}
+diff --git a/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.codec.varint/module-info.java b/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.codec.varint/module-info.java
+new file mode 100644
+index 0000000..a6b14ca
+--- /dev/null
++++ b/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.codec.varint/module-info.java
+@@ -0,0 +1,6 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
++// Copyright 2026 Hitesh Soliwal and contributors
++// Modified 2026-10-18: map the pinned Synexia CPU tool into its existing M3JDK21 module name.
++// SPDX-License-Identifier: Apache-2.0
++module com.m3.tools.codec.varint {
++    exports com.m3.tools.codec.varint;
++}
+diff --git a/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.constraint.interval/com/m3/tools/constraint/interval/Intervals.java b/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.constraint.interval/com/m3/tools/constraint/interval/Intervals.java
+new file mode 100644
+index 0000000..8dfef0b
+--- /dev/null
++++ b/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.constraint.interval/com/m3/tools/constraint/interval/Intervals.java
+@@ -0,0 +1,33 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
++// Copyright 2026 Hitesh Soliwal and contributors
++// Modified 2026-10-18: map the pinned Synexia CPU tool into its existing M3JDK21 module name.
++// SPDX-License-Identifier: Apache-2.0
++package com.m3.tools.constraint.interval;
++import java.util.ArrayList;
++import java.util.List;
++import java.util.Objects;
++/** Half-open [start,end) time or offset intervals, no OS-specific clock dependency. */
++public final class Intervals {
++    private Intervals() { }
++    public record Span(long start,long end) {
++        public Span {if(end<start)throw new IllegalArgumentException("inverted interval");}
++    }
++    public static boolean intersects(Span a,Span b) {
++        Objects.requireNonNull(a);Objects.requireNonNull(b);
++        return a.start()<a.end()&&b.start()<b.end()&&a.start()<b.end()&&b.start()<a.end();
++    }
++    public static List<Integer> conflicting(List<Span> intervals,Span request){
++        Objects.requireNonNull(intervals);Objects.requireNonNull(request);
++        List<Integer> ids=new ArrayList<>();
++        for(int i=0;i<intervals.size();i++)if(intersects(Objects.requireNonNull(intervals.get(i)),request))ids.add(i);
++        return List.copyOf(ids);
++    }
++    public static void main(String[] args) {
++        if(args.length==1&&args[0].equals("--self-test")){
++            if(intersects(new Span(0,2),new Span(2,3)))throw new AssertionError("touching boundary");
++            if(!intersects(new Span(0,3),new Span(2,4)))throw new AssertionError("overlap");
++            if(!conflicting(List.of(new Span(0,3),new Span(4,8)),new Span(2,5))
++                    .equals(List.of(0,1)))throw new AssertionError("conflicts");
++            System.out.println("M3_JMOD_TEST_PASS constraint.interval");
++        }else throw new IllegalArgumentException("--self-test");
++    }
++}
+diff --git a/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.constraint.interval/module-info.java b/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.constraint.interval/module-info.java
+new file mode 100644
+index 0000000..edb8505
+--- /dev/null
++++ b/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.constraint.interval/module-info.java
+@@ -0,0 +1,6 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
++// Copyright 2026 Hitesh Soliwal and contributors
++// Modified 2026-10-18: map the pinned Synexia CPU tool into its existing M3JDK21 module name.
++// SPDX-License-Identifier: Apache-2.0
++module com.m3.tools.constraint.interval {
++    exports com.m3.tools.constraint.interval;
++}
+diff --git a/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.cpu/com/m3/tools/cpu/CpuTools.java b/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.cpu/com/m3/tools/cpu/CpuTools.java
+new file mode 100644
+index 0000000..36f29eb
+--- /dev/null
++++ b/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.cpu/com/m3/tools/cpu/CpuTools.java
+@@ -0,0 +1,447 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
++// SPDX-License-Identifier: Apache-2.0
++// Copyright 2026 Hitesh Soliwal and contributors
++package com.m3.tools.cpu;
++
++import com.m3.tools.codec.varint.VarInts;
++import com.m3.tools.graph.paths.ShortestPaths;
++import com.m3.tools.graph.topology.TopologicalOrder;
++import com.m3.tools.stats.streaming.RunningStatistics;
++import com.m3.tools.text.frequency.TermFrequency;
++import com.m3.tools.text.ngram.NGrams;
++import com.m3.tools.text.normalize.UnicodeNormalizer;
++import com.m3.tools.text.search.ExactSearch;
++import com.m3.tools.text.tokenize.WordTokenizer;
++import com.m3.tools.verify.sha256.Sha256;
++import java.io.IOException;
++import java.io.UncheckedIOException;
++import java.lang.module.ModuleReader;
++import java.nio.ByteBuffer;
++import java.security.MessageDigest;
++import java.security.NoSuchAlgorithmException;
++import java.text.Normalizer;
++import java.util.ArrayList;
++import java.util.Arrays;
++import java.util.HexFormat;
++import java.util.List;
++import java.util.Map;
++import java.util.Objects;
++import java.util.Set;
++import java.util.concurrent.ProgressMonitor;
++import java.util.concurrent.ProgressMonitors;
++import java.util.function.Consumer;
++import jdk.m3.io.M3File;
++import jdk.m3.structured.StructuredTextTools;
++import jdk.m3.text.Atom;
++import jdk.m3.text.Binding;
++import jdk.m3.text.Canonical;
++import jdk.m3.text.Capability;
++import jdk.m3.text.ExecutionResult;
++import jdk.m3.text.Limits;
++import jdk.m3.text.M3UnixRuntime;
++import jdk.m3.text.Node;
++import jdk.m3.text.Plan;
++import jdk.m3.text.Registry;
++import jdk.m3.text.TextFrame;
++import jdk.m3.text.TextLine;
++import jdk.m3.text.TextTools;
++
++/**
++ * CPU-tool bindings over the existing M3 text DAG and separately named algorithm modules.
++ * String/CharSequence remains the public boundary to M3String; no second string pool exists here.
++ * The existing Limits bounds input/output frames and plan geometry, not process RSS or arbitrary
++ * Java instruction counts. Cancellation is cooperative at operation and emission boundaries.
++ */
++public final class CpuTools {
++    private CpuTools() { }
++
++    public static Session session() { return session(Limits.standard(), null); }
++
++    public static Session session(Limits limits, ProgressMonitor monitor) {
++        return new Session(limits, monitor);
++    }
++
++    /**
++     * Immutable binding set and policy. The borrowed monitor is captured at construction;
++     * callers sharing a Session across threads must supply a thread-safe monitor.
++     * No operation completes a borrowed monitor. Every execution uses the incumbent runtime.
++     */
++    public static final class Session {
++        private final Limits limits;
++        private final ProgressMonitor monitor;
++        private final Registry registry;
++        private final M3UnixRuntime runtime;
++
++        private Session(Limits limits, ProgressMonitor monitor) {
++            this.limits = Objects.requireNonNull(limits, "limits");
++            this.monitor = effective(monitor);
++            this.monitor.checkCancelled();
++            this.registry = bindings(limits, this.monitor);
++            this.runtime = new M3UnixRuntime(registry, limits, Set.of(Capability.TEXT));
++        }
++
++        public Registry registry() { return registry; }
++        public Limits limits() { return limits; }
++
++        /** Builds a linear composition in the existing DAG representation. */
++        public Plan pipeline(List<String> operations) {
++            Objects.requireNonNull(operations, "operations");
++            if (operations.isEmpty() || operations.size() > limits.maxNodes()) {
++                throw new IllegalArgumentException("pipeline node budget");
++            }
++            List<Node> nodes = new ArrayList<>(operations.size());
++            String previous = null;
++            for (int i = 0; i < operations.size(); i++) {
++                monitor.checkCancelled();
++                String id = "step-" + i;
++                Binding binding = registry.require(operations.get(i));
++                nodes.add(previous == null ? Node.of(id, binding) : Node.of(id, binding, previous));
++                previous = id;
++            }
++            return new Plan(nodes, previous);
++        }
++
++        public ExecutionResult execute(Plan plan, TextFrame input) {
++            monitor.checkCancelled();
++            ExecutionResult result = runtime.execute(Objects.requireNonNull(plan, "plan"), input);
++            monitor.checkCancelled();
++            return result;
++        }
++
++        /** Reads no file again: every stage consumes this immutable decoded source snapshot. */
++        public ExecutionResult execute(List<String> operations, M3File source) {
++            Plan plan = pipeline(operations);
++            return execute(plan, frame(source, limits, monitor));
++        }
++
++        /** Re-executes the same bindings and compares exact frames plus all receipt fields. */
++        public ExecutionResult replay(Plan plan, TextFrame input, ExecutionResult expected) {
++            monitor.checkCancelled();
++            ExecutionResult result = runtime.replay(plan, input, expected);
++            monitor.checkCancelled();
++            return result;
++        }
++    }
++
++    private static Registry bindings(Limits limits, ProgressMonitor monitor) {
++        List<Binding> result = new ArrayList<>();
++        bind(result, "text.identity", "Retain original line content and CR/LF/CRLF endings", limits, monitor,
++                (input, output) -> input.lines().forEach(output));
++        bind(result, "text.sort", "Stable natural UTF-16 line-content ordering", limits, monitor,
++                (input, output) -> TextTools.sort(input, false, limits).lines().forEach(output));
++        bind(result, "text.sort.reverse", "Stable reverse UTF-16 line-content ordering", limits, monitor,
++                (input, output) -> TextTools.sort(input, true, limits).lines().forEach(output));
++        bind(result, "text.uniq", "Collapse adjacent equal-content lines under the existing TextTools contract", limits, monitor,
++                (input, output) -> TextTools.uniq(input, limits).lines().forEach(output));
++        bind(result, "text.normalize.nfc", "JDK Unicode NFC; preserve resulting line endings", limits, monitor,
++                (input, output) -> TextFrame.fromString(UnicodeNormalizer.normalize(input.text(), Normalizer.Form.NFC))
++                        .lines().forEach(output));
++        bind(result, "text.normalize.nfkc", "JDK Unicode NFKC; preserve resulting line endings", limits, monitor,
++                (input, output) -> TextFrame.fromString(UnicodeNormalizer.nfkc(input.text())).lines().forEach(output));
++        bind(result, "text.words", "Locale.ROOT JDK word breaks; retain spans containing a letter or digit; LF output", limits, monitor,
++                (input, output) -> WordTokenizer.words(input.text()).forEach(word -> line(output, word)));
++        bind(result, "text.frequency", "Count each input line as one exact term; sorted term TAB count output", limits, monitor,
++                (input, output) -> counts(TermFrequency.count(input.lines().stream().map(TextLine::content).toList()), output));
++        bind(result, "text.ngram.2", "Count overlapping UTF-16 code-unit bigrams; sorted escaped gram TAB count output", limits, monitor,
++                (input, output) -> counts(NGrams.count(input.text(), 2), output));
++        bind(result, "text.ngram.3", "Count overlapping UTF-16 code-unit trigrams; sorted escaped gram TAB count output", limits, monitor,
++                (input, output) -> counts(NGrams.count(input.text(), 3), output));
++        bind(result, "text.fold.80", "Existing code-point fold at width 80", limits, monitor,
++                (input, output) -> TextTools.fold(input, 80, limits).lines().forEach(output));
++        bind(result, "text.number", "Existing nl with first=1 and step=1", limits, monitor,
++                (input, output) -> TextTools.nl(input, 1L, 1L, limits).lines().forEach(output));
++        bind(result, "graph.topology", "First line vertex-count; remaining lines from TAB to; deterministic integer topological order", limits, monitor,
++                (input, output) -> topology(input, output, limits, monitor));
++        bind(result, "graph.shortest-paths", "First line vertex-count TAB source; edges from TAB to TAB nonnegative-weight; node TAB distance; MAX means unreachable-or-overflow", limits, monitor,
++                (input, output) -> paths(input, output, limits, monitor));
++        bind(result, "graph.tsort", "Existing TextTools tsort over whitespace-separated named edges", limits, monitor,
++                (input, output) -> TextTools.tsort(input, limits).lines().forEach(output));
++        bind(result, "statistics.moments", "One finite double per line; count/mean/population-variance/min/max using existing Welford owner", limits, monitor,
++                (input, output) -> moments(input, output, monitor));
++        bind(result, "hash.sha256.utf8", "SHA-256 of exact reassembled frame UTF-8 bytes, including line endings", limits, monitor,
++                (input, output) -> line(output, Sha256.utf8(input.text())));
++        bind(result, "codec.varint.encode", "One decimal in [0,Long.MAX_VALUE] per line -> canonical hexadecimal LEB128", limits, monitor,
++                (input, output) -> input.lines().forEach(value -> line(output,
++                        HexFormat.of().formatHex(VarInts.encode(Long.parseLong(value.content()))))));
++        bind(result, "codec.varint.decode", "One hexadecimal canonical LEB128 in [0,Long.MAX_VALUE] per line -> decimal", limits, monitor,
++                (input, output) -> input.lines().forEach(value -> line(output,
++                        Long.toString(VarInts.decode(HexFormat.of().parseHex(value.content()))))));
++        bind(result, "structured.csv.first-column", "Existing strict CSV projection of column zero with LF record output", limits, monitor,
++                (input, output) -> StructuredTextTools.selectDelimited(input, ',', new int[]{0}, limits).lines().forEach(output));
++        bind(result, "structured.tsv.first-column", "Existing strict TSV projection of column zero with LF record output", limits, monitor,
++                (input, output) -> StructuredTextTools.selectDelimited(input, '\t', new int[]{0}, limits).lines().forEach(output));
++        bind(result, "structured.env", "Existing strict dotenv subset -> sorted escaped key TAB value rows; no expansion", limits, monitor,
++                (input, output) -> StructuredTextTools.dotenv(input, limits).entrySet().stream()
++                        .sorted(Map.Entry.comparingByKey()).forEach(entry -> line(output,
++                                escape(entry.getKey()) + "\t" + escape(entry.getValue()))));
++        return new Registry(result);
++    }
++
++    private static void bind(List<Binding> bindings, String id, String definition, Limits limits,
++                             ProgressMonitor monitor, Atom atom) {
++        bindings.add(new Binding(id, definition + "\nlimits=" + limits.sha256(), Implementation.ROOT,
++                Set.of(Capability.TEXT), (input, output) -> {
++                    monitor.checkCancelled();
++                    limits.check(input);
++                    monitor.message(id);
++                    atom.execute(input, value -> {
++                        monitor.checkCancelled();
++                        output.accept(value);
++                    });
++                    monitor.checkCancelled();
++                    monitor.worked(1);
++                }));
++    }
++
++    private static void counts(Map<String, Integer> values, Consumer<TextLine> output) {
++        values.entrySet().stream().sorted(Map.Entry.comparingByKey()).forEach(entry ->
++                line(output, escape(entry.getKey()) + "\t" + entry.getValue()));
++    }
++
++    private static void line(Consumer<TextLine> output, String content) { output.accept(new TextLine(content, "\n")); }
++
++    /** Admit line geometry before TextFrame allocates a retained row for every source line. */
++    private static TextFrame frame(M3File source, Limits limits, ProgressMonitor monitor) {
++        Objects.requireNonNull(source, "source");
++        monitor.checkCancelled();
++        if (source.byteLength() > limits.maxBytes()) throw new IllegalArgumentException("source byte budget");
++        String text = source.text();
++        int lines = 0;
++        int start = 0;
++        for (int i = 0; i < text.length(); i++) {
++            if ((i & 8191) == 0) monitor.checkCancelled();
++            char c = text.charAt(i);
++            if (c == '\r' || c == '\n') {
++                if (++lines > limits.maxLines()) throw new IllegalArgumentException("source line budget");
++                if (c == '\r' && i + 1 < text.length() && text.charAt(i + 1) == '\n') i++;
++                start = i + 1;
++            }
++        }
++        if (start < text.length() && ++lines > limits.maxLines()) throw new IllegalArgumentException("source line budget");
++        monitor.checkCancelled();
++        TextFrame result = TextFrame.fromString(text);
++        monitor.checkCancelled();
++        return result;
++    }
++
++    /** Escaped TSV field, reversible without confusing a gram's newline with a record boundary. */
++    public static String escape(String value) {
++        Objects.requireNonNull(value, "value");
++        StringBuilder result = new StringBuilder(value.length());
++        for (int i = 0; i < value.length(); i++) {
++            char c = value.charAt(i);
++            switch (c) {
++                case '\\' -> result.append("\\\\");
++                case '\t' -> result.append("\\t");
++                case '\r' -> result.append("\\r");
++                case '\n' -> result.append("\\n");
++                default -> {
++                    if (Character.isHighSurrogate(c) && i + 1 < value.length()
++                            && Character.isLowSurrogate(value.charAt(i + 1))) {
++                        result.append(c).append(value.charAt(++i));
++                    } else if (Character.isSurrogate(c)) {
++                        result.append("\\u");
++                        for (int shift = 12; shift >= 0; shift -= 4) {
++                            result.append("0123456789abcdef".charAt((c >>> shift) & 15));
++                        }
++                    } else result.append(c);
++                }
++            }
++        }
++        return result.toString();
++    }
++
++    private static int vertices(TextFrame input, Limits limits, boolean withSource) {
++        if (input.lines().isEmpty()) throw new IllegalArgumentException("graph header required");
++        String[] header = fields(input.lines().getFirst(), withSource ? 2 : 1);
++        int vertices = Integer.parseInt(header[0]);
++        if (vertices < (withSource ? 1 : 0) || vertices > Math.min(1_000_000, limits.maxLines())) {
++            throw new IllegalArgumentException("vertex budget");
++        }
++        if (input.lines().size() - 1 > limits.maxEdges()) throw new IllegalArgumentException("graph edge budget");
++        return vertices;
++    }
++
++    private static String[] fields(TextLine line, int count) {
++        String[] values = line.content().split("\t", -1);
++        if (values.length != count) throw new IllegalArgumentException("expected " + count + " tab-separated fields");
++        return values;
++    }
++
++    private static void topology(TextFrame input, Consumer<TextLine> output, Limits limits, ProgressMonitor monitor) {
++        int vertices = vertices(input, limits, false);
++        List<TopologicalOrder.Arc> edges = new ArrayList<>(input.lines().size() - 1);
++        for (int i = 1; i < input.lines().size(); i++) {
++            monitor.checkCancelled();
++            String[] row = fields(input.lines().get(i), 2);
++            int from = Integer.parseInt(row[0]);
++            int to = Integer.parseInt(row[1]);
++            endpoints(vertices, from, to);
++            edges.add(new TopologicalOrder.Arc(from, to));
++        }
++        for (int vertex : TopologicalOrder.sort(vertices, edges)) line(output, Integer.toString(vertex));
++    }
++
++    private static void paths(TextFrame input, Consumer<TextLine> output, Limits limits, ProgressMonitor monitor) {
++        int vertices = vertices(input, limits, true);
++        int source = Integer.parseInt(fields(input.lines().getFirst(), 2)[1]);
++        if (source < 0 || source >= vertices) throw new IllegalArgumentException("source outside graph");
++        List<ShortestPaths.Edge> edges = new ArrayList<>(input.lines().size() - 1);
++        for (int i = 1; i < input.lines().size(); i++) {
++            monitor.checkCancelled();
++            String[] row = fields(input.lines().get(i), 3);
++            int from = Integer.parseInt(row[0]);
++            int to = Integer.parseInt(row[1]);
++            endpoints(vertices, from, to);
++            edges.add(new ShortestPaths.Edge(from, to, Long.parseLong(row[2])));
++        }
++        long[] distances = ShortestPaths.distances(vertices, edges, source);
++        for (int i = 0; i < distances.length; i++) line(output, i + "\t" + distances[i]);
++    }
++
++    private static void endpoints(int vertices, int from, int to) {
++        if (from < 0 || from >= vertices || to < 0 || to >= vertices) {
++            throw new IllegalArgumentException("edge endpoint outside graph");
++        }
++    }
++
++    private static void moments(TextFrame input, Consumer<TextLine> output, ProgressMonitor monitor) {
++        RunningStatistics stats = new RunningStatistics();
++        for (TextLine line : input.lines()) {
++            monitor.checkCancelled();
++            stats.accept(Double.parseDouble(line.content()));
++        }
++        line(output, "count\t" + stats.count());
++        line(output, "mean\t" + stats.mean());
++        line(output, "populationVariance\t" + stats.populationVariance());
++        line(output, "min\t" + stats.min());
++        line(output, "max\t" + stats.max());
++    }
++
++    /** Immutable, source-bound exact-search result. Truncation is explicit. */
++    public static final class Search {
++        private final int[] positions;
++        private final boolean complete;
++        private final String sha256;
++
++        private Search(int[] positions, boolean complete, String sha256) {
++            this.positions = positions.clone();
++            this.complete = complete;
++            this.sha256 = sha256;
++        }
++        public int[] positions() { return positions.clone(); }
++        public int size() { return positions.length; }
++        public boolean complete() { return complete; }
++        public String sha256() { return sha256; }
++    }
++
++    public static Search literal(M3File source, String needle, int maxHits) {
++        return literal(source, needle, maxHits, null);
++    }
++
++    /** Exact UTF-16 matching across M3String components, including overlaps and empty needles. */
++    public static Search literal(M3File source, String needle, int maxHits, ProgressMonitor monitor) {
++        Objects.requireNonNull(source, "source");
++        Objects.requireNonNull(needle, "needle");
++        if (maxHits < 0 || maxHits > 1_000_000) throw new IllegalArgumentException("match budget");
++        if (needle.length() > M3File.MAX_BYTES) throw new IllegalArgumentException("needle UTF-16 budget");
++        ProgressMonitor progress = effective(monitor);
++        progress.checkCancelled();
++        // One additional observation distinguishes a complete result from a capped prefix.
++        int[] observed = ExactSearch.positions(source.text(), needle, maxHits + 1);
++        progress.checkCancelled();
++        boolean complete = observed.length <= maxHits;
++        int[] positions = complete ? observed : Arrays.copyOf(observed, maxHits);
++        Canonical hash = new Canonical("m3-cpu-literal-result-v1").text(Implementation.ROOT)
++                .text(source.uri().toASCIIString()).text(source.rawSha256()).text(source.utf16Sha256())
++                .number(source.length()).number(maxHits).number(complete ? 1 : 0);
++        // UTF-16 framing also represents a legal Java needle containing isolated surrogates.
++        hash.number(needle.length());
++        for (int i = 0; i < needle.length(); i++) {
++            if ((i & 8191) == 0) progress.checkCancelled();
++            hash.number(needle.charAt(i));
++        }
++        hash.number(positions.length);
++        for (int i = 0; i < positions.length; i++) {
++            if ((i & 8191) == 0) progress.checkCancelled();
++            hash.number(positions[i]);
++        }
++        progress.worked(1);
++        progress.checkCancelled();
++        return new Search(positions, complete, hash.finish());
++    }
++
++    /** A receipt is evidence of identity; this explicit independent re-execution checks it. */
++    public static boolean verifyLiteral(M3File source, String needle, int maxHits, Search expected,
++                                        ProgressMonitor monitor) {
++        Objects.requireNonNull(expected, "expected");
++        Search actual = literal(source, needle, maxHits, monitor);
++        return actual.complete == expected.complete && actual.sha256.equals(expected.sha256)
++                && Arrays.equals(actual.positions, expected.positions);
++    }
++
++    /**
++     * Binds an existing DAG receipt to an admitted file's bytes, characters and location.
++     * The check prevents attaching a receipt for different input text to this source.
++     * This is an integrity receipt, not a signature or a substitute for replay.
++     */
++    public static String sourceReceipt(M3File source, ExecutionResult result) {
++        return sourceReceipt(source, result, Limits.standard(), null);
++    }
++
++    /** Same source binding with explicit input budgets and cooperative cancellation. */
++    public static String sourceReceipt(M3File source, ExecutionResult result, Limits limits, ProgressMonitor monitor) {
++        Objects.requireNonNull(source, "source");
++        Objects.requireNonNull(result, "result");
++        Objects.requireNonNull(limits, "limits");
++        ProgressMonitor progress = effective(monitor);
++        if (!frame(source, limits, progress).sha256().equals(result.receipt().inputSha256())) {
++            throw new IllegalArgumentException("source does not match execution input");
++        }
++        String receipt = new Canonical("m3-cpu-file-execution-v1").text(Implementation.ROOT)
++                .text(source.uri().toASCIIString()).text(source.rawSha256()).text(source.utf16Sha256())
++                .number(source.byteLength()).number(source.length()).text(result.receipt().sha256()).finish();
++        progress.worked(1);
++        progress.checkCancelled();
++        return receipt;
++    }
++
++    private static ProgressMonitor effective(ProgressMonitor monitor) {
++        return monitor == null ? ProgressMonitors.current() : monitor;
++    }
++
++    /** Digest of actual linked tool class/resource bytes, computed once per class-loader lifetime. */
++    public static String implementationSha256() { return Implementation.ROOT; }
++
++    private static final class Implementation {
++        private static final String ROOT = root();
++        private static String root() {
++            Module module = CpuTools.class.getModule();
++            ModuleLayer layer = module.getLayer();
++            if (!module.isNamed() || layer == null) throw new IllegalStateException("named CPU-tools module required");
++            List<String> names = new ArrayList<>(module.getDescriptor().requires().stream().map(r -> r.name())
++                    .filter(name -> name.startsWith("com.m3.tools.") || name.startsWith("jdk.m3.")).toList());
++            names.add(module.getName());
++            names.sort(String::compareTo);
++            Canonical root = new Canonical("m3-cpu-module-set-v1").text(System.getProperty("java.runtime.version"))
++                    .text(System.getProperty("java.vm.version")).number(names.size());
++            for (String name : names) {
++                var resolved = layer.configuration().findModule(name).orElseThrow();
++                root.text(name);
++                try (ModuleReader reader = resolved.reference().open(); var entries = reader.list()) {
++                    List<String> resources = entries.filter(entry -> !entry.endsWith("/")).sorted().toList();
++                    root.number(resources.size());
++                    for (String resource : resources) {
++                        ByteBuffer bytes = reader.read(resource).orElseThrow(() -> new IOException("missing module resource"));
++                        try {
++                            MessageDigest digest = MessageDigest.getInstance("SHA-256");
++                            digest.update(bytes.duplicate());
++                            root.text(resource).text(HexFormat.of().formatHex(digest.digest()));
++                        } finally { reader.release(bytes); }
++                    }
++                } catch (IOException failure) { throw new UncheckedIOException(failure); }
++                catch (NoSuchAlgorithmException impossible) { throw new IllegalStateException(impossible); }
++            }
++            return root.finish();
++        }
++    }
++}
+diff --git a/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.cpu/com/m3/tools/cpu/CpuToolsCli.java b/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.cpu/com/m3/tools/cpu/CpuToolsCli.java
+new file mode 100644
+index 0000000..7f10d67
+--- /dev/null
++++ b/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.cpu/com/m3/tools/cpu/CpuToolsCli.java
+@@ -0,0 +1,151 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
++// SPDX-License-Identifier: Apache-2.0
++// Copyright 2026 Hitesh Soliwal and contributors
++package com.m3.tools.cpu;
++
++import java.io.IOException;
++import java.io.PrintStream;
++import java.nio.file.Path;
++import java.util.ArrayList;
++import java.util.Arrays;
++import java.util.List;
++import java.util.Objects;
++import jdk.m3.io.M3File;
++import jdk.m3.text.TextFrame;
++
++/** Read-only command-line entry point for the linked CPU-tools image. */
++public final class CpuToolsCli {
++    private CpuToolsCli() { }
++
++    public static void main(String[] args) {
++        int code = run(args, System.out, System.err);
++        if (code != 0) System.exit(code);
++    }
++
++    /** Returns 0 on success, 1 on refused execution and 2 on command syntax errors. */
++    public static int run(String[] args, PrintStream output, PrintStream diagnostics) {
++        Objects.requireNonNull(args, "args");
++        Objects.requireNonNull(output, "output");
++        Objects.requireNonNull(diagnostics, "diagnostics");
++        if (args.length == 0) return usage(diagnostics, 2);
++        try {
++            switch (args[0]) {
++                case "--help" -> { return usage(output, args.length == 1 ? 0 : 2); }
++                case "--list" -> {
++                    if (args.length != 1) return usage(diagnostics, 2);
++                    for (var binding : CpuTools.session().registry().bindings()) {
++                        output.println(binding.id() + "\t" + CpuTools.escape(binding.definition()));
++                    }
++                }
++                case "--self-test" -> {
++                    if (args.length != 1) return usage(diagnostics, 2);
++                    selfTest(output);
++                }
++                case "--run" -> {
++                    if (args.length != 3) return usage(diagnostics, 2);
++                    List<String> operations = Arrays.asList(args[1].split(",", -1));
++                    var session = CpuTools.session();
++                    // Validate every binding before the source is opened.
++                    session.pipeline(operations);
++                    M3File file = M3File.load(Path.of(args[2]));
++                    var result = session.execute(operations, file);
++                    output.print(result.output().text());
++                    diagnostics.println("source\t" + file.uri().toASCIIString()
++                            + "\trawSha256=" + file.rawSha256() + "\tutf16Sha256=" + file.utf16Sha256());
++                    diagnostics.println("receipt\tdag=" + result.receipt().sha256()
++                            + "\tfile=" + CpuTools.sourceReceipt(file, result));
++                }
++                case "--find" -> {
++                    if (args.length < 3 || args.length > 4) return usage(diagnostics, 2);
++                    int maxHits = args.length == 4 ? Integer.parseInt(args[3]) : 1000;
++                    if (maxHits < 0 || maxHits > 1_000_000) throw new IllegalArgumentException("match budget");
++                    M3File file = M3File.load(Path.of(args[2]));
++                    var result = CpuTools.literal(file, args[1], maxHits);
++                    for (int position : result.positions()) output.println(position);
++                    diagnostics.println("receipt\tliteral=" + result.sha256()
++                            + "\thits=" + result.size() + "\tcomplete=" + result.complete()
++                            + "\tcoordinates=UTF-16");
++                }
++                case "--ast" -> {
++                    if (args.length < 2 || args.length - 1 > M3AstTools.MAX_FILES) return usage(diagnostics, 2);
++                    var files = new ArrayList<M3File>(args.length - 1);
++                    long totalUtf16 = 0;
++                    for (int i = 1; i < args.length; i++) {
++                        M3File file = M3File.load(Path.of(args[i]));
++                        totalUtf16 += file.length();
++                        if (totalUtf16 > M3AstTools.MAX_TOTAL_UTF16) {
++                            throw new IllegalArgumentException("aggregate source UTF-16 budget");
++                        }
++                        files.add(file);
++                    }
++                    for (var snapshot : M3AstTools.parse(files)) printAst(snapshot, output, diagnostics);
++                }
++                default -> { return usage(diagnostics, 2); }
++            }
++            if (output.checkError() || diagnostics.checkError()) return 1;
++            return 0;
++        } catch (IOException | IllegalArgumentException | IllegalStateException failure) {
++            diagnostics.println("CPU_TOOLS_REFUSED\t" + CpuTools.escape(
++                    Objects.toString(failure.getMessage(), failure.getClass().getSimpleName())));
++            return 1;
++        }
++    }
++
++    private static void printAst(M3AstTools.Snapshot snapshot, PrintStream output, PrintStream diagnostics) {
++        var identity = snapshot.source();
++        output.println("source\t" + identity.uri().toASCIIString() + "\t" + identity.utf16Length()
++                + "\t" + identity.utf16Sha256() + "\t" + identity.rawSha256().orElse("-"));
++        for (int i = 0; i < snapshot.structureCount(); i++) {
++            var node = snapshot.structure(i);
++            output.println("node\t" + i + "\t" + node.kind() + "\t" + node.span().start()
++                    + "\t" + node.span().end() + "\t" + node.parent() + "\t" + node.depth());
++        }
++        for (var symbol : snapshot.symbols()) {
++            output.println("symbol\t" + symbol.kind() + "\t" + CpuTools.escape(symbol.name())
++                    + "\t" + symbol.span().start() + "\t" + symbol.span().end());
++        }
++        for (var imported : snapshot.imports()) {
++            output.println("import\t" + imported.staticImport() + "\t" + CpuTools.escape(imported.qualifiedName())
++                    + "\t" + imported.span().start() + "\t" + imported.span().end());
++        }
++        for (var method : snapshot.methods()) {
++            output.println("method\t" + CpuTools.escape(method.name()) + "\t" + method.parameterCount()
++                    + "\t" + method.constructor() + "\t" + method.span().start() + "\t" + method.span().end()
++                    + "\t" + method.body().map(M3AstTools.Span::start).orElse(-1)
++                    + "\t" + method.body().map(M3AstTools.Span::end).orElse(-1));
++        }
++        diagnostics.println("receipt\tast=" + snapshot.sha256() + "\tphase=" + snapshot.phase()
++                + "\tvisited=" + snapshot.visitedNodes() + "\tunpositioned=" + snapshot.unpositionedNodes());
++    }
++
++    private static void selfTest(PrintStream output) {
++        var session = CpuTools.session();
++        var plan = session.pipeline(List.of("text.normalize.nfc", "text.words", "text.frequency"));
++        var input = TextFrame.fromString("cafe\u0301 beta caf\u00e9\n");
++        var result = session.execute(plan, input);
++        if (!result.output().text().equals("beta\t1\ncaf\u00e9\t2\n")) {
++            throw new IllegalStateException("text composition self-test failed");
++        }
++        if (!session.replay(plan, input, result).equals(result)) {
++            throw new IllegalStateException("receipt replay self-test failed");
++        }
++        var graph = session.execute(session.pipeline(List.of("graph.topology")),
++                TextFrame.fromString("4\n0\t2\n1\t2\n2\t3\n"));
++        if (!graph.output().text().equals("0\n1\n2\n3\n")) {
++            throw new IllegalStateException("graph self-test failed");
++        }
++        output.println("M3_CPU_TOOLS_PASS modules=20 bindings=" + session.registry().bindings().size());
++        output.println("implementationSha256=" + CpuTools.implementationSha256());
++        output.println("receiptSha256=" + result.receipt().sha256());
++    }
++
++    private static int usage(PrintStream output, int code) {
++        output.println("Usage: java -m com.m3.tools.cpu/com.m3.tools.cpu.CpuToolsCli COMMAND");
++        output.println("  --list                            List exact registry operations and contracts");
++        output.println("  --run OP[,OP...] FILE              Execute a text DAG over one UTF-8 M3File snapshot");
++        output.println("  --find NEEDLE FILE [MAX_HITS]       Exact UTF-16 offsets; explicit completeness receipt");
++        output.println("  --ast FILE.java [FILE.java...]     Detached syntax facts from the existing M3AST frontend");
++        output.println("  --self-test                       Deterministic composition and replay smoke test");
++        output.println("  --help                            Show this help");
++        return code;
++    }
++}
+diff --git a/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.cpu/com/m3/tools/cpu/M3AstTools.java b/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.cpu/com/m3/tools/cpu/M3AstTools.java
+new file mode 100644
+index 0000000..d719939
+--- /dev/null
++++ b/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.cpu/com/m3/tools/cpu/M3AstTools.java
+@@ -0,0 +1,538 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
++// SPDX-License-Identifier: Apache-2.0
++// Copyright 2026 Hitesh Soliwal and contributors
++package com.m3.tools.cpu;
++
++import com.sun.source.tree.ClassTree;
++import com.sun.source.tree.CompilationUnitTree;
++import com.sun.source.tree.ImportTree;
++import com.sun.source.tree.MethodTree;
++import com.sun.source.tree.ModuleTree;
++import com.sun.source.tree.PackageTree;
++import com.sun.source.tree.Tree;
++import com.sun.source.tree.TypeParameterTree;
++import com.sun.source.tree.VariableTree;
++import com.sun.source.util.JavacTask;
++import com.sun.source.util.M3AST;
++import com.sun.source.util.SourcePositions;
++import com.sun.source.util.TreeScanner;
++import java.io.IOException;
++import java.net.URI;
++import java.nio.charset.StandardCharsets;
++import java.util.AbstractList;
++import java.util.ArrayList;
++import java.util.Arrays;
++import java.util.LinkedHashMap;
++import java.util.List;
++import java.util.Map;
++import java.util.Objects;
++import java.util.Optional;
++import java.util.RandomAccess;
++import java.util.concurrent.ProgressMonitor;
++import java.util.concurrent.ProgressMonitors;
++import java.util.function.Consumer;
++import javax.tools.Diagnostic;
++import javax.tools.DiagnosticCollector;
++import javax.tools.JavaFileObject;
++import javax.tools.SimpleJavaFileObject;
++import javax.tools.ToolProvider;
++import jdk.m3.io.M3File;
++import jdk.m3.text.Canonical;
++
++/**
++ * Detached syntax inventories from javac's existing M3AST callback.
++ *
++ * <p>Capture never starts a parser, asks for attribution, or retains a tree,
++ * compiler task, type, element, Unit or Trees object. Structural coordinates
++ * occupy flat primitive tables; public fact records are created on access.
++ * Symbol names here are declared syntax names, not resolved bindings or a
++ * portable semantic-analysis cache. Missing compiler positions are counted
++ * explicitly rather than fabricated.</p>
++ */
++public final class M3AstTools {
++    public static final int MAX_NODES = 100_000;
++    public static final int MAX_DEPTH = 256;
++    public static final int MAX_FILES = 1024;
++    public static final int MAX_UTF16 = 16 * 1024 * 1024;
++    public static final long MAX_TOTAL_UTF16 = 64L * 1024 * 1024;
++    private static final Tree.Kind[] KINDS = Tree.Kind.values();
++
++    private M3AstTools() { }
++
++    public record Span(int start, int end) {
++        public Span {
++            if (start < 0 || end < start) throw new IllegalArgumentException("invalid UTF-16 range");
++        }
++        public int length() { return end - start; }
++    }
++
++    /** Raw SHA is present only when an actual M3File was exactly bound to the compiler input. */
++    public record SourceIdentity(URI uri, String utf16Sha256, int utf16Length,
++                                 Optional<String> rawSha256) {
++        public SourceIdentity {
++            Objects.requireNonNull(uri, "uri");
++            checkDigest(utf16Sha256);
++            Objects.requireNonNull(rawSha256, "rawSha256").ifPresent(M3AstTools::checkDigest);
++            if (utf16Length < 0 || utf16Length > MAX_UTF16) {
++                throw new IllegalArgumentException("source UTF-16 budget");
++            }
++        }
++    }
++
++    public record StructuralFact(Tree.Kind kind, Span span, int parent, int depth) {
++        public StructuralFact {
++            Objects.requireNonNull(kind, "kind");
++            Objects.requireNonNull(span, "span");
++            if (parent < -1 || depth < 0) throw new IllegalArgumentException("structural coordinate");
++        }
++    }
++
++    public record SymbolFact(String name, String kind, Span span) {
++        public SymbolFact {
++            Objects.requireNonNull(name, "name");
++            Objects.requireNonNull(kind, "kind");
++            Objects.requireNonNull(span, "span");
++        }
++    }
++
++    public record ImportFact(String qualifiedName, boolean staticImport, Span span) {
++        public ImportFact {
++            Objects.requireNonNull(qualifiedName, "qualifiedName");
++            Objects.requireNonNull(span, "span");
++        }
++    }
++
++    public record MethodFact(String name, int parameterCount, boolean constructor,
++                             Span span, Optional<Span> body) {
++        public MethodFact {
++            Objects.requireNonNull(name, "name");
++            Objects.requireNonNull(span, "span");
++            Objects.requireNonNull(body, "body");
++            if (parameterCount < 0) throw new IllegalArgumentException("parameter count");
++        }
++    }
++
++    /** Immutable source-bound arrays. List access creates projections without a retained node cache. */
++    public static final class Snapshot {
++        private final SourceIdentity source;
++        private final M3AST.Phase phase;
++        private final int visited;
++        private final int unpositioned;
++        private final int[] structures;
++        private final String[] symbolNames;
++        private final String[] symbolKinds;
++        private final int[] symbolNodes;
++        private final String[] importNames;
++        private final int[] importNodes;
++        private final String[] methodNames;
++        private final int[] methodRows;
++        private final String sha256;
++
++        private Snapshot(SourceIdentity source, M3AST.Phase phase, Capture captured,
++                         ProgressMonitor progress) {
++            this.source = source;
++            this.phase = phase;
++            this.visited = captured.visited;
++            this.unpositioned = captured.unpositioned;
++            this.structures = captured.structures.freeze();
++            this.symbolNames = captured.symbolNames.toArray(String[]::new);
++            this.symbolKinds = captured.symbolKinds.toArray(String[]::new);
++            this.symbolNodes = captured.symbolNodes.freeze();
++            this.importNames = captured.importNames.toArray(String[]::new);
++            this.importNodes = captured.importNodes.freeze();
++            this.methodNames = captured.methodNames.toArray(String[]::new);
++            this.methodRows = captured.methodRows.freeze();
++            this.sha256 = receipt(progress);
++        }
++
++        public SourceIdentity source() { return source; }
++        public M3AST.Phase phase() { return phase; }
++        public int visitedNodes() { return visited; }
++        public int unpositionedNodes() { return unpositioned; }
++        public int structureCount() { return structures.length / 5; }
++        /**
++         * Deterministic identity receipt for the exact source, syntax inventory and linked
++         * CPU-tool implementation. It is neither a signature nor evidence that the facts
++         * are semantically correct; compare a fresh actual compiler capture when replaying.
++         */
++        public String sha256() { return sha256; }
++        /** Counter payload only, excluding arrays' headers, String metadata and caller projections. */
++        public long retainedPrimitiveBytes() {
++            return 4L * (structures.length + symbolNodes.length + importNodes.length + methodRows.length);
++        }
++
++        public StructuralFact structure(int ordinal) {
++            int at = Objects.checkIndex(ordinal, structureCount()) * 5;
++            return new StructuralFact(KINDS[structures[at]],
++                    new Span(structures[at + 1], structures[at + 2]),
++                    structures[at + 3], structures[at + 4]);
++        }
++
++        public List<StructuralFact> structures() { return new FactList<>(structureCount(), this::structure); }
++
++        public List<SymbolFact> symbols() {
++            return new FactList<>(symbolNames.length, ordinal -> new SymbolFact(
++                    symbolNames[ordinal], symbolKinds[ordinal], span(symbolNodes[ordinal])));
++        }
++
++        public List<ImportFact> imports() {
++            return new FactList<>(importNames.length, ordinal -> new ImportFact(
++                    importNames[ordinal], (importNodes[ordinal] & 1) != 0,
++                    span(importNodes[ordinal] >>> 1)));
++        }
++
++        public List<MethodFact> methods() {
++            return new FactList<>(methodNames.length, ordinal -> {
++                int at = ordinal * 5;
++                Optional<Span> body = methodRows[at + 3] < 0 ? Optional.empty()
++                        : Optional.of(new Span(methodRows[at + 3], methodRows[at + 4]));
++                return new MethodFact(methodNames[ordinal], methodRows[at + 1],
++                        methodRows[at + 2] != 0, span(methodRows[at]), body);
++            });
++        }
++
++        private Span span(int node) {
++            int at = Objects.checkIndex(node, structureCount()) * 5;
++            return new Span(structures[at + 1], structures[at + 2]);
++        }
++
++        private String receipt(ProgressMonitor progress) {
++            progress.checkCancelled();
++            Canonical hash = new Canonical("m3-cpu-ast-snapshot-v1")
++                    .text(CpuTools.implementationSha256())
++                    .text(source.uri().toASCIIString()).text(source.utf16Sha256())
++                    .number(source.utf16Length()).number(source.rawSha256().isPresent() ? 1 : 0);
++            source.rawSha256().ifPresent(hash::text);
++            hash.text(phase.name()).number(visited).number(unpositioned).number(structureCount());
++            for (int at = 0; at < structures.length; at += 5) {
++                progress.checkCancelled();
++                hash.text(KINDS[structures[at]].name());
++                for (int field = 1; field < 5; field++) hash.number(structures[at + field]);
++            }
++            hash.number(symbolNames.length);
++            for (int i = 0; i < symbolNames.length; i++) {
++                progress.checkCancelled();
++                utf16(hash, symbolNames[i], progress);
++                utf16(hash, symbolKinds[i], progress);
++                hash.number(symbolNodes[i]);
++            }
++            hash.number(importNames.length);
++            for (int i = 0; i < importNames.length; i++) {
++                progress.checkCancelled();
++                utf16(hash, importNames[i], progress);
++                hash.number(importNodes[i]);
++            }
++            hash.number(methodNames.length);
++            for (int i = 0; i < methodNames.length; i++) {
++                progress.checkCancelled();
++                utf16(hash, methodNames[i], progress);
++                for (int field = 0; field < 5; field++) hash.number(methodRows[i * 5 + field]);
++            }
++            progress.checkCancelled();
++            return hash.finish();
++        }
++    }
++
++    public static Snapshot capture(M3AST.Unit unit) throws IOException {
++        return capture(unit, null, ProgressMonitors.current());
++    }
++
++    public static Snapshot capture(M3AST.Unit unit, ProgressMonitor monitor) throws IOException {
++        return capture(unit, null, monitor);
++    }
++
++    /** Optional file binding checks URI, exact characters and the distinct character digest. */
++    public static Snapshot capture(M3AST.Unit unit, M3File file, ProgressMonitor monitor) throws IOException {
++        ProgressMonitor progress = progress(monitor);
++        progress.checkCancelled();
++        progress.begin("Capture shared compiler source", ProgressMonitor.UNKNOWN_WORK);
++        try { return captureSource(unit, file, progress); }
++        finally { progress.done(); }
++    }
++
++    public static M3AST.Consumer consumer(Consumer<? super Snapshot> sink) {
++        return consumer(sink, ProgressMonitors.current());
++    }
++
++    /** Register this on an existing M3AST handle before the caller starts its compiler task. */
++    public static M3AST.Consumer consumer(Consumer<? super Snapshot> sink, ProgressMonitor monitor) {
++        Objects.requireNonNull(sink, "sink");
++        ProgressMonitor progress = progress(monitor);
++        progress.checkCancelled();
++        return new M3AST.Consumer() {
++            @Override public void parsed(M3AST.Unit unit) throws IOException {
++                sink.accept(capture(unit, progress));
++            }
++        };
++    }
++
++    public static List<Snapshot> parse(List<M3File> files) throws IOException {
++        return parse(files, ProgressMonitors.current());
++    }
++
++    /**
++     * Explicit convenience task: syntax only, -proc:none, no attribution or code generation.
++     * The admitted immutable String references are supplied directly to javac; files are not
++     * reopened. Captured hashes describe these snapshots even if their paths later change.
++     * Source and detached-fact budgets do not bound javac's parsing CPU or peak memory.
++     */
++    public static List<Snapshot> parse(List<M3File> files, ProgressMonitor monitor) throws IOException {
++        ProgressMonitor progress = progress(monitor);
++        progress.checkCancelled();
++        Map<URI, M3File> sources = sources(files);
++        if (sources.isEmpty()) return List.of();
++        var compiler = ToolProvider.getSystemJavaCompiler();
++        if (compiler == null) throw new IllegalStateException("M3 jdk.compiler is required");
++        var diagnostics = new DiagnosticCollector<JavaFileObject>();
++        var results = new ArrayList<Snapshot>(sources.size());
++        var inputs = new ArrayList<JavaFileObject>(sources.size());
++        for (M3File source : sources.values()) inputs.add(new SnapshotInput(source));
++        progress.begin("Parse immutable source snapshots", ProgressMonitor.UNKNOWN_WORK);
++        try (var manager = compiler.getStandardFileManager(diagnostics, null, StandardCharsets.UTF_8)) {
++            var task = (JavacTask) compiler.getTask(null, manager, diagnostics,
++                    List.of("-proc:none", "-source", "21"), null, inputs);
++            try (M3AST frontend = M3AST.open(task, true)) {
++                Exception[] callbackFailure = new Exception[1];
++                frontend.addConsumer(new M3AST.Consumer() {
++                    @Override public void parsed(M3AST.Unit unit) throws IOException {
++                        try {
++                            progress.checkCancelled();
++                            if (!hasErrors(diagnostics)) {
++                                M3File file = sources.get(unit.source().uri());
++                                if (file == null) throw new IOException("compiler introduced an unbound source");
++                                results.add(captureSource(unit, file, progress));
++                            }
++                        } catch (IOException | RuntimeException failure) {
++                            callbackFailure[0] = failure;
++                            throw failure;
++                        }
++                    }
++                });
++                try {
++                    task.parse();
++                } catch (RuntimeException compilerFailure) {
++                    // javac wraps listener failures. Restore only this callback's own
++                    // refusal, preserving the public admission/cancellation contract.
++                    if (callbackFailure[0] instanceof IOException io) throw io;
++                    if (callbackFailure[0] instanceof RuntimeException runtime) throw runtime;
++                    throw compilerFailure;
++                }
++                progress.checkCancelled();
++                for (var diagnostic : diagnostics.getDiagnostics()) {
++                    if (diagnostic.getKind() == Diagnostic.Kind.ERROR) {
++                        throw new IOException("Java syntax rejected at " + diagnostic.getPosition()
++                                + ": " + diagnostic.getCode());
++                    }
++                }
++                if (results.size() != sources.size()) throw new IOException("incomplete compiler source capture");
++            }
++            return List.copyOf(results);
++        } finally {
++            progress.done();
++        }
++    }
++
++    private static Snapshot captureSource(M3AST.Unit unit, M3File file, ProgressMonitor progress) throws IOException {
++        Objects.requireNonNull(unit, "unit");
++        progress.checkCancelled();
++        M3AST.Source source = unit.source();
++        if (source.text().length() > MAX_UTF16) throw new IllegalArgumentException("source UTF-16 budget");
++        if (file != null && (!file.uri().equals(source.uri())
++                || !file.utf16Sha256().equals(source.utf16Sha256())
++                || !file.text().equals(source.text()))) {
++            throw new IllegalArgumentException("M3File does not match this exact compiler source");
++        }
++        SourceIdentity identity = new SourceIdentity(source.uri(), source.utf16Sha256(),
++                source.text().length(), file == null ? Optional.empty() : Optional.of(file.rawSha256()));
++        Capture captured = new Capture(unit.tree(), unit.trees().getSourcePositions(),
++                source.text().length(), progress);
++        captured.scan(unit.tree(), null);
++        progress.checkCancelled();
++        return new Snapshot(identity, unit.phase(), captured, progress);
++    }
++
++    private static Map<URI, M3File> sources(List<M3File> files) {
++        Objects.requireNonNull(files, "files");
++        if (files.size() > MAX_FILES) throw new IllegalArgumentException("source file count budget");
++        Map<URI, M3File> sources = new LinkedHashMap<>();
++        long total = 0;
++        for (M3File file : files) {
++            Objects.requireNonNull(file, "file");
++            if (sources.putIfAbsent(file.uri(), file) != null) throw new IllegalArgumentException("duplicate source URI");
++            total += file.length();
++            if (total > MAX_TOTAL_UTF16) throw new IllegalArgumentException("total source UTF-16 budget");
++        }
++        return sources;
++    }
++
++    private static boolean hasErrors(DiagnosticCollector<JavaFileObject> diagnostics) {
++        return diagnostics.getDiagnostics().stream().anyMatch(d -> d.getKind() == Diagnostic.Kind.ERROR);
++    }
++
++    private static final class SnapshotInput extends SimpleJavaFileObject {
++        private final M3File file;
++        SnapshotInput(M3File file) { super(file.uri(), Kind.SOURCE); this.file = file; }
++        @Override public CharSequence getCharContent(boolean ignoreEncodingErrors) { return file.text(); }
++    }
++
++    private static final class Capture extends TreeScanner<Void, Void> {
++        private final CompilationUnitTree root;
++        private final SourcePositions positions;
++        private final int length;
++        private final ProgressMonitor progress;
++        private final Rows structures = new Rows();
++        private final ArrayList<String> symbolNames = new ArrayList<>();
++        private final ArrayList<String> symbolKinds = new ArrayList<>();
++        private final Ints symbolNodes = new Ints();
++        private final ArrayList<String> importNames = new ArrayList<>();
++        private final Ints importNodes = new Ints();
++        private final ArrayList<String> methodNames = new ArrayList<>();
++        private final Rows methodRows = new Rows();
++        private int visited, unpositioned, depth = -1, parent = -1, index = -1;
++
++        Capture(CompilationUnitTree root, SourcePositions positions, int length, ProgressMonitor progress) {
++            this.root = root;
++            this.positions = positions;
++            this.length = length;
++            this.progress = progress;
++        }
++
++        @Override public Void scan(Tree tree, Void unused) {
++            if (tree == null) return null;
++            progress.checkCancelled();
++            if (++visited > MAX_NODES || ++depth > MAX_DEPTH) {
++                throw new IllegalArgumentException("AST node/depth budget exceeded");
++            }
++            progress.worked(1);
++            int previousParent = parent, previousIndex = index;
++            Span span = tree == root ? new Span(0, length) : position(tree);
++            if (span == null) {
++                unpositioned++;
++                index = -1;
++            } else {
++                index = structures.add(tree.getKind().ordinal(), span.start(), span.end(), parent, depth);
++                parent = index;
++            }
++            try { return super.scan(tree, unused); }
++            finally { parent = previousParent; index = previousIndex; depth--; }
++        }
++
++        private Span position(Tree tree) {
++            long start = positions.getStartPosition(root, tree);
++            long end = positions.getEndPosition(root, tree);
++            if (start == -1 || end == -1) return null;
++            if (start < 0 || end < start || end > length) {
++                throw new IllegalArgumentException("compiler range outside frozen UTF-16 source");
++            }
++            return new Span((int) start, (int) end);
++        }
++
++        private void symbol(String name, String kind) {
++            if (index >= 0) {
++                symbolNames.add(name);
++                symbolKinds.add(kind);
++                symbolNodes.add(index);
++            }
++        }
++
++        @Override public Void visitClass(ClassTree node, Void unused) {
++            if (!node.getSimpleName().isEmpty()) symbol(node.getSimpleName().toString(), node.getKind().name());
++            return super.visitClass(node, unused);
++        }
++
++        @Override public Void visitMethod(MethodTree node, Void unused) {
++            String name = node.getName().toString();
++            symbol(name, "METHOD");
++            if (index >= 0) {
++                Span body = node.getBody() == null ? null : position(node.getBody());
++                methodNames.add(name);
++                methodRows.add(index, node.getParameters().size(), node.getReturnType() == null ? 1 : 0,
++                        body == null ? -1 : body.start(), body == null ? -1 : body.end());
++            }
++            return super.visitMethod(node, unused);
++        }
++
++        @Override public Void visitVariable(VariableTree node, Void unused) {
++            symbol(node.getName().toString(), "VARIABLE");
++            return super.visitVariable(node, unused);
++        }
++
++        @Override public Void visitTypeParameter(TypeParameterTree node, Void unused) {
++            symbol(node.getName().toString(), "TYPE_PARAMETER");
++            return super.visitTypeParameter(node, unused);
++        }
++
++        @Override public Void visitImport(ImportTree node, Void unused) {
++            if (index >= 0) {
++                importNames.add(node.getQualifiedIdentifier().toString());
++                importNodes.add((index << 1) | (node.isStatic() ? 1 : 0));
++            }
++            return super.visitImport(node, unused);
++        }
++
++        @Override public Void visitModule(ModuleTree node, Void unused) {
++            symbol(node.getName().toString(), "MODULE");
++            return super.visitModule(node, unused);
++        }
++
++        @Override public Void visitPackage(PackageTree node, Void unused) {
++            symbol(node.getPackageName().toString(), "PACKAGE");
++            return super.visitPackage(node, unused);
++        }
++    }
++
++    private static final class Rows {
++        private int[] values = new int[320];
++        private int size;
++        int add(int a, int b, int c, int d, int e) {
++            if (size / 5 == MAX_NODES) throw new IllegalArgumentException("fact count budget");
++            if (size + 5 > values.length) values = Arrays.copyOf(values, Math.min(MAX_NODES * 5, values.length * 2));
++            int row = size / 5;
++            values[size++] = a; values[size++] = b; values[size++] = c;
++            values[size++] = d; values[size++] = e;
++            return row;
++        }
++        int[] freeze() { return Arrays.copyOf(values, size); }
++    }
++
++    private static final class Ints {
++        private int[] values = new int[64];
++        private int size;
++        void add(int value) {
++            if (size == MAX_NODES) throw new IllegalArgumentException("fact count budget");
++            if (size == values.length) values = Arrays.copyOf(values, Math.min(MAX_NODES, values.length * 2));
++            values[size++] = value;
++        }
++        int[] freeze() { return Arrays.copyOf(values, size); }
++    }
++
++    private static final class FactList<T> extends AbstractList<T> implements RandomAccess {
++        private final int size;
++        private final java.util.function.IntFunction<T> at;
++        FactList(int size, java.util.function.IntFunction<T> at) { this.size = size; this.at = at; }
++        @Override public T get(int index) { return at.apply(Objects.checkIndex(index, size)); }
++        @Override public int size() { return size; }
++    }
++
++    private static ProgressMonitor progress(ProgressMonitor monitor) {
++        return monitor == null ? ProgressMonitors.current() : monitor;
++    }
++
++    /** Length-framed UTF-16 units preserve even isolated surrogates in compiler metadata. */
++    private static void utf16(Canonical hash, String text, ProgressMonitor progress) {
++        hash.number(text.length());
++        for (int i = 0; i < text.length(); i++) {
++            if ((i & 1023) == 0) progress.checkCancelled();
++            hash.number(text.charAt(i));
++        }
++    }
++
++    private static void checkDigest(String value) {
++        if (value == null || value.length() != 64) throw new IllegalArgumentException("SHA-256 encoding");
++        for (int i = 0; i < value.length(); i++) {
++            char ch = value.charAt(i);
++            if (!(ch >= '0' && ch <= '9') && !(ch >= 'a' && ch <= 'f')) {
++                throw new IllegalArgumentException("SHA-256 encoding");
++            }
++        }
++    }
++}
+diff --git a/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.cpu/module-info.java b/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.cpu/module-info.java
+new file mode 100644
+index 0000000..70641b2
+--- /dev/null
++++ b/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.cpu/module-info.java
+@@ -0,0 +1,27 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
++// SPDX-License-Identifier: Apache-2.0
++// Copyright 2026 Hitesh Soliwal and contributors
++/** M3 CPU tools, sharing the existing text DAG, file source and javac owners. */
++module com.m3.tools.cpu {
++    requires transitive jdk.m3.text;
++    requires transitive jdk.m3.io;
++    requires transitive jdk.m3.structured;
++    requires transitive jdk.compiler;
++    requires transitive java.compiler;
++    requires transitive com.m3.tools.text.normalize;
++    requires transitive com.m3.tools.text.tokenize;
++    requires transitive com.m3.tools.text.regex;
++    requires transitive com.m3.tools.text.search;
++    requires transitive com.m3.tools.text.ngram;
++    requires transitive com.m3.tools.text.frequency;
++    requires transitive com.m3.tools.text.similarity;
++    requires transitive com.m3.tools.text.diff;
++    requires transitive com.m3.tools.text.index;
++    requires transitive com.m3.tools.graph.topology;
++    requires transitive com.m3.tools.graph.paths;
++    requires transitive com.m3.tools.stats.streaming;
++    requires transitive com.m3.tools.constraint.interval;
++    requires transitive com.m3.tools.codec.varint;
++    requires transitive com.m3.tools.verify.sha256;
++    requires transitive com.m3.tools.plan.priority;
++    exports com.m3.tools.cpu;
++}
+diff --git a/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.graph.paths/com/m3/tools/graph/paths/ShortestPaths.java b/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.graph.paths/com/m3/tools/graph/paths/ShortestPaths.java
+new file mode 100644
+index 0000000..05ea4eb
+--- /dev/null
++++ b/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.graph.paths/com/m3/tools/graph/paths/ShortestPaths.java
+@@ -0,0 +1,95 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
++// Copyright 2026 Hitesh Soliwal and contributors
++// SPDX-License-Identifier: Apache-2.0
++// Modified 2026-10-18: mapped receiver with packed primitive storage; see DONOR_CHANGES.tsv.
++package com.m3.tools.graph.paths;
++
++import java.util.Arrays;
++import java.util.List;
++import java.util.Objects;
++
++/** Nonnegative Dijkstra with primitive lanes and stable vertex tie breaking. */
++public final class ShortestPaths {
++    private ShortestPaths() { }
++    public record Edge(int from, int to, long weight) { }
++
++    /**
++     * Long.MAX_VALUE is the legacy unreachable/saturated sentinel. An exact distance equal
++     * to that sentinel is indistinguishable from unreachable; overflowing paths are ignored.
++     * The returned distances are detached. Caller edge records are never retained.
++     */
++    public static long[] distances(int vertices, List<Edge> edges, int source) {
++        if (vertices < 1 || source < 0 || source >= vertices) throw new IllegalArgumentException("vertex");
++        Objects.requireNonNull(edges);
++        int[] starts = new int[Math.addExact(vertices, 1)];
++        int[] from = new int[edges.size()], to = new int[edges.size()];
++        long[] weight = new long[edges.size()];
++        for (int i = 0; i < from.length; i++) {
++            Edge edge = Objects.requireNonNull(edges.get(i));
++            if (edge.from() < 0 || edge.to() < 0 || edge.from() >= vertices
++                    || edge.to() >= vertices || edge.weight() < 0)
++                throw new IllegalArgumentException("negative weight or invalid vertex");
++            from[i] = edge.from(); to[i] = edge.to(); weight[i] = edge.weight();
++            starts[edge.from() + 1] = Math.addExact(starts[edge.from() + 1], 1);
++        }
++        for (int i = 1; i <= vertices; i++) starts[i] = Math.addExact(starts[i], starts[i - 1]);
++        int[] next = starts.clone(), targets = new int[from.length];
++        long[] weights = new long[from.length];
++        for (int i = 0; i < from.length; i++) {
++            int at = next[from[i]]++; targets[at] = to[i]; weights[at] = weight[i];
++        }
++        long[] distances = new long[vertices]; Arrays.fill(distances, Long.MAX_VALUE);
++        int[] heap = new int[vertices], positions = new int[vertices]; Arrays.fill(positions, -1);
++        distances[source] = 0; heap[0] = source; positions[source] = 0;
++        int size = 1;
++        while (size > 0) {
++            int vertex = heap[0];
++            remove(heap, positions, distances, --size);
++            for (int at = starts[vertex]; at < starts[vertex + 1]; at++) {
++                if (distances[vertex] > Long.MAX_VALUE - weights[at]) continue;
++                long candidate = distances[vertex] + weights[at];
++                int successor = targets[at];
++                if (candidate >= distances[successor]) continue;
++                distances[successor] = candidate;
++                int position = positions[successor];
++                if (position < 0) { position = size++; heap[position] = successor; }
++                rise(heap, positions, distances, position, successor);
++            }
++        }
++        return distances;
++    }
++
++    private static boolean before(int left, int right, long[] distances) {
++        int order = Long.compare(distances[left], distances[right]);
++        return order < 0 || (order == 0 && left < right);
++    }
++
++    private static void rise(int[] heap, int[] positions, long[] distances, int at, int vertex) {
++        while (at > 0) {
++            int parent = (at - 1) >>> 1, ancestor = heap[parent];
++            if (!before(vertex, ancestor, distances)) break;
++            heap[at] = ancestor; positions[ancestor] = at; at = parent;
++        }
++        heap[at] = vertex; positions[vertex] = at;
++    }
++
++    private static void remove(int[] heap, int[] positions, long[] distances, int size) {
++        positions[heap[0]] = -1;
++        if (size == 0) return;
++        int vertex = heap[size], at = 0, half = size >>> 1;
++        while (at < half) {
++            int child = 2 * at + 1;
++            if (child + 1 < size && before(heap[child + 1], heap[child], distances)) child++;
++            if (!before(heap[child], vertex, distances)) break;
++            heap[at] = heap[child]; positions[heap[at]] = at; at = child;
++        }
++        heap[at] = vertex; positions[vertex] = at;
++    }
++
++    public static void main(String[] args) {
++        if (args.length != 1 || !args[0].equals("--self-test"))
++            throw new IllegalArgumentException("--self-test");
++        long[] result = distances(4, List.of(new Edge(0, 1, 4), new Edge(0, 2, 1), new Edge(2, 1, 2)), 0);
++        if (!Arrays.equals(result, new long[]{0, 3, 1, Long.MAX_VALUE})) throw new AssertionError("paths");
++        System.out.println("M3_JMOD_TEST_PASS graph.paths");
++    }
++}
+diff --git a/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.graph.paths/module-info.java b/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.graph.paths/module-info.java
+new file mode 100644
+index 0000000..7250ce6
+--- /dev/null
++++ b/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.graph.paths/module-info.java
+@@ -0,0 +1,6 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
++// Copyright 2026 Hitesh Soliwal and contributors
++// Modified 2026-10-18: map the pinned Synexia CPU tool into its existing M3JDK21 module name.
++// SPDX-License-Identifier: Apache-2.0
++module com.m3.tools.graph.paths {
++    exports com.m3.tools.graph.paths;
++}
+diff --git a/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.graph.topology/com/m3/tools/graph/topology/TopologicalOrder.java b/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.graph.topology/com/m3/tools/graph/topology/TopologicalOrder.java
+new file mode 100644
+index 0000000..8e41a88
+--- /dev/null
++++ b/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.graph.topology/com/m3/tools/graph/topology/TopologicalOrder.java
+@@ -0,0 +1,78 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
++// Copyright 2026 Hitesh Soliwal and contributors
++// SPDX-License-Identifier: Apache-2.0
++// Modified 2026-10-18: mapped receiver with packed primitive storage; see DONOR_CHANGES.tsv.
++package com.m3.tools.graph.topology;
++
++import java.util.List;
++import java.util.Objects;
++
++/** Deterministic Kahn order over primitive lanes; the smallest ready vertex wins. */
++public final class TopologicalOrder {
++    private TopologicalOrder() { }
++    public record Arc(int from, int to) { }
++
++    /** Accepts duplicate arcs and isolated vertices; a cycle rejects the complete result. */
++    public static int[] sort(int vertices, List<Arc> arcs) {
++        if (vertices < 0) throw new IllegalArgumentException("negative vertices");
++        Objects.requireNonNull(arcs);
++        int[] starts = new int[Math.addExact(vertices, 1)], indegree = new int[vertices];
++        int[] from = new int[arcs.size()], to = new int[arcs.size()];
++        for (int i = 0; i < from.length; i++) {
++            Arc arc = Objects.requireNonNull(arcs.get(i));
++            if (arc.from() < 0 || arc.from() >= vertices || arc.to() < 0 || arc.to() >= vertices)
++                throw new IndexOutOfBoundsException("graph vertex");
++            from[i] = arc.from(); to[i] = arc.to();
++            starts[arc.from() + 1] = Math.addExact(starts[arc.from() + 1], 1);
++            indegree[arc.to()] = Math.addExact(indegree[arc.to()], 1);
++        }
++        for (int i = 1; i <= vertices; i++) starts[i] = Math.addExact(starts[i], starts[i - 1]);
++        int[] next = starts.clone(), edges = new int[from.length];
++        for (int i = 0; i < from.length; i++) edges[next[from[i]]++] = to[i];
++        int[] ready = new int[vertices], result = new int[vertices];
++        int size = 0, written = 0;
++        for (int vertex = 0; vertex < vertices; vertex++)
++            if (indegree[vertex] == 0) offer(ready, size++, vertex);
++        while (size > 0) {
++            int vertex = ready[0];
++            remove(ready, --size);
++            result[written++] = vertex;
++            for (int edge = starts[vertex]; edge < starts[vertex + 1]; edge++) {
++                int successor = edges[edge];
++                if (--indegree[successor] == 0) offer(ready, size++, successor);
++            }
++        }
++        if (written != vertices) throw new IllegalArgumentException("cycle detected");
++        return result;
++    }
++
++    private static void offer(int[] heap, int at, int value) {
++        while (at > 0) {
++            int parent = (at - 1) >>> 1;
++            if (heap[parent] <= value) break;
++            heap[at] = heap[parent]; at = parent;
++        }
++        heap[at] = value;
++    }
++
++    private static void remove(int[] heap, int size) {
++        if (size == 0) return;
++        int value = heap[size], at = 0, half = size >>> 1;
++        while (at < half) {
++            int child = 2 * at + 1;
++            if (child + 1 < size && heap[child + 1] < heap[child]) child++;
++            if (value <= heap[child]) break;
++            heap[at] = heap[child]; at = child;
++        }
++        heap[at] = value;
++    }
++
++    public static void main(String[] args) {
++        if (args.length != 1 || !args[0].equals("--self-test"))
++            throw new IllegalArgumentException("--self-test");
++        int[] nodes = sort(4, List.of(new Arc(0, 2), new Arc(1, 2), new Arc(2, 3)));
++        if (!java.util.Arrays.equals(nodes, new int[]{0, 1, 2, 3})) throw new AssertionError("topology");
++        try { sort(2, List.of(new Arc(0, 1), new Arc(1, 0))); throw new AssertionError("cycle"); }
++        catch (IllegalArgumentException expected) { }
++        System.out.println("M3_JMOD_TEST_PASS graph.topology");
++    }
++}
+diff --git a/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.graph.topology/module-info.java b/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.graph.topology/module-info.java
+new file mode 100644
+index 0000000..865eb89
+--- /dev/null
++++ b/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.graph.topology/module-info.java
+@@ -0,0 +1,6 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
++// Copyright 2026 Hitesh Soliwal and contributors
++// Modified 2026-10-18: map the pinned Synexia CPU tool into its existing M3JDK21 module name.
++// SPDX-License-Identifier: Apache-2.0
++module com.m3.tools.graph.topology {
++    exports com.m3.tools.graph.topology;
++}
+diff --git a/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.plan.priority/com/m3/tools/plan/priority/StablePriorityQueue.java b/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.plan.priority/com/m3/tools/plan/priority/StablePriorityQueue.java
+new file mode 100644
+index 0000000..8fc692a
+--- /dev/null
++++ b/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.plan.priority/com/m3/tools/plan/priority/StablePriorityQueue.java
+@@ -0,0 +1,91 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
++// Copyright 2026 Hitesh Soliwal and contributors
++// SPDX-License-Identifier: Apache-2.0
++// Modified 2026-10-18: mapped receiver with packed primitive storage; see DONOR_CHANGES.tsv.
++package com.m3.tools.plan.priority;
++
++import java.util.Arrays;
++import java.util.Objects;
++
++/** Stable score queue; caller values occupy parallel lanes with no per-value structural wrapper. */
++public final class StablePriorityQueue<T> {
++    private Object[] values = new Object[0];
++    private double[] scores = new double[0];
++    private long[] sequences = new long[0];
++    private int size;
++    private long next;
++
++    public StablePriorityQueue() { }
++
++    /** Rejects null/nonfinite scores; equal scores retain offer order, including duplicate values. */
++    public void offer(T item, double score) {
++        Objects.requireNonNull(item);
++        if (!Double.isFinite(score)) throw new IllegalArgumentException("nonfinite score");
++        if (next == Long.MAX_VALUE) throw new IllegalStateException("sequence exhausted");
++        grow();
++        long sequence = next++;
++        int at = size++;
++        while (at > 0) {
++            int parent = (at - 1) >>> 1;
++            if (!before(score, sequence, scores[parent], sequences[parent])) break;
++            copy(parent, at); at = parent;
++        }
++        put(at, item, score, sequence);
++    }
++
++    @SuppressWarnings("unchecked")
++    public T poll() {
++        if (size == 0) return null;
++        T result = (T) values[0];
++        int last = --size;
++        Object item = values[last]; double score = scores[last]; long sequence = sequences[last];
++        values[last] = null;
++        if (size > 0) {
++            int at = 0, half = size >>> 1;
++            while (at < half) {
++                int child = 2 * at + 1;
++                if (child + 1 < size && before(scores[child + 1], sequences[child + 1],
++                        scores[child], sequences[child])) child++;
++                if (!before(scores[child], sequences[child], score, sequence)) break;
++                copy(child, at); at = child;
++            }
++            put(at, item, score, sequence);
++        }
++        return result;
++    }
++
++    public int size() { return size; }
++
++    private static boolean before(double leftScore, long leftSequence, double rightScore, long rightSequence) {
++        int order = Double.compare(leftScore, rightScore);
++        return order < 0 || (order == 0 && leftSequence < rightSequence);
++    }
++
++    private void copy(int from, int to) {
++        put(to, values[from], scores[from], sequences[from]);
++    }
++
++    private void put(int at, Object value, double score, long sequence) {
++        values[at] = value; scores[at] = score; sequences[at] = sequence;
++    }
++
++    private void grow() {
++        if (size < values.length) return;
++        long requested = Math.max(8L, (long) size + (size >>> 1) + 1L);
++        if (requested > Integer.MAX_VALUE - 8L) throw new OutOfMemoryError("queue capacity");
++        int capacity = (int) requested;
++        Object[] newValues = Arrays.copyOf(values, capacity);
++        double[] newScores = Arrays.copyOf(scores, capacity);
++        long[] newSequences = Arrays.copyOf(sequences, capacity);
++        values = newValues; scores = newScores; sequences = newSequences;
++    }
++
++    public static void main(String[] args) {
++        if (args.length != 1 || !args[0].equals("--self-test"))
++            throw new IllegalArgumentException("--self-test");
++        var queue = new StablePriorityQueue<String>();
++        queue.offer("late", 3); queue.offer("first", 1); queue.offer("second", 1);
++        if (!"first".equals(queue.poll()) || !"second".equals(queue.poll()) || !"late".equals(queue.poll()))
++            throw new AssertionError("stable order");
++        System.out.println("M3_JMOD_TEST_PASS plan.priority");
++    }
++}
+diff --git a/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.plan.priority/module-info.java b/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.plan.priority/module-info.java
+new file mode 100644
+index 0000000..572db2a
+--- /dev/null
++++ b/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.plan.priority/module-info.java
+@@ -0,0 +1,6 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
++// Copyright 2026 Hitesh Soliwal and contributors
++// Modified 2026-10-18: map the pinned Synexia CPU tool into its existing M3JDK21 module name.
++// SPDX-License-Identifier: Apache-2.0
++module com.m3.tools.plan.priority {
++    exports com.m3.tools.plan.priority;
++}
+diff --git a/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.stats.streaming/com/m3/tools/stats/streaming/RunningStatistics.java b/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.stats.streaming/com/m3/tools/stats/streaming/RunningStatistics.java
+new file mode 100644
+index 0000000..65fc047
+--- /dev/null
++++ b/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.stats.streaming/com/m3/tools/stats/streaming/RunningStatistics.java
+@@ -0,0 +1,32 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
++// Copyright 2026 Hitesh Soliwal and contributors
++// Modified 2026-10-18: map the pinned Synexia CPU tool into its existing M3JDK21 module name.
++// SPDX-License-Identifier: Apache-2.0
++package com.m3.tools.stats.streaming;
++/** Welford streaming moments, CPU-first bounded state. */
++public final class RunningStatistics {
++    public RunningStatistics() { }
++    private long count;
++    private double mean,m2,min=Double.POSITIVE_INFINITY,max=Double.NEGATIVE_INFINITY;
++    public void accept(double number){
++        if(!Double.isFinite(number))throw new IllegalArgumentException("nonfinite sample");
++        if(count==Long.MAX_VALUE)throw new ArithmeticException("count overflow");
++        count++;
++        double delta=number-mean;
++        mean+=delta/count;
++        m2+=delta*(number-mean);
++        min=Math.min(min,number);max=Math.max(max,number);
++    }
++    public long count(){return count;}
++    public double mean(){return count==0?Double.NaN:mean;}
++    public double populationVariance(){return count==0?Double.NaN:m2/count;}
++    public double min(){return count==0?Double.NaN:min;}
++    public double max(){return count==0?Double.NaN:max;}
++    public static void main(String[] args){
++        if(args.length==1&&args[0].equals("--self-test")){
++            var s=new RunningStatistics();for(double x:new double[]{1,2,3})s.accept(x);
++            if(s.count()!=3||s.mean()!=2.0||Math.abs(s.populationVariance()-2.0/3)>1e-12)
++                throw new AssertionError("moments");
++            System.out.println("M3_JMOD_TEST_PASS stats.streaming");
++        }else{var s=new RunningStatistics();for(String a:args)s.accept(Double.parseDouble(a));System.out.println(s.mean());}
++    }
++}
+diff --git a/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.stats.streaming/module-info.java b/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.stats.streaming/module-info.java
+new file mode 100644
+index 0000000..54f43f2
+--- /dev/null
++++ b/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.stats.streaming/module-info.java
+@@ -0,0 +1,6 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
++// Copyright 2026 Hitesh Soliwal and contributors
++// Modified 2026-10-18: map the pinned Synexia CPU tool into its existing M3JDK21 module name.
++// SPDX-License-Identifier: Apache-2.0
++module com.m3.tools.stats.streaming {
++    exports com.m3.tools.stats.streaming;
++}
+diff --git a/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.text.diff/com/m3/tools/text/diff/TextDelta.java b/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.text.diff/com/m3/tools/text/diff/TextDelta.java
+new file mode 100644
+index 0000000..a7f92ab
+--- /dev/null
++++ b/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.text.diff/com/m3/tools/text/diff/TextDelta.java
+@@ -0,0 +1,26 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
++// Copyright 2026 Hitesh Soliwal and contributors
++// Modified 2026-10-18: map the pinned Synexia CPU tool into its existing M3JDK21 module name.
++// SPDX-License-Identifier: Apache-2.0
++package com.m3.tools.text.diff;
++import java.util.Objects;
++/** Minimal single replacement bounds, not a general Myers or semantic diff. */
++public final class TextDelta {
++    private TextDelta() { }
++    public record Replacement(int fromStart,int fromEnd,int toStart,int toEnd) { }
++    public static Replacement changedSpan(String before,String after) {
++        Objects.requireNonNull(before);Objects.requireNonNull(after);
++        int prefix=0,limit=Math.min(before.length(),after.length());
++        while(prefix<limit&&before.charAt(prefix)==after.charAt(prefix))prefix++;
++        int suffix=0,remaining=Math.min(before.length()-prefix,after.length()-prefix);
++        while(suffix<remaining&&before.charAt(before.length()-1-suffix)==after.charAt(after.length()-1-suffix))suffix++;
++        return new Replacement(prefix,before.length()-suffix,prefix,after.length()-suffix);
++    }
++    public static void main(String[] args) {
++        if(args.length==1&&args[0].equals("--self-test")){
++            if(!changedSpan("abcde","abXde").equals(new Replacement(2,3,2,3)))throw new AssertionError("span");
++            if(!changedSpan("abc","abc").equals(new Replacement(3,3,3,3)))throw new AssertionError("identical");
++            System.out.println("M3_JMOD_TEST_PASS text.diff");
++        }else if(args.length==2)System.out.println(changedSpan(args[0],args[1]));
++        else throw new IllegalArgumentException("before and after required");
++    }
++}
+diff --git a/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.text.diff/module-info.java b/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.text.diff/module-info.java
+new file mode 100644
+index 0000000..d4d7ad7
+--- /dev/null
++++ b/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.text.diff/module-info.java
+@@ -0,0 +1,6 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
++// Copyright 2026 Hitesh Soliwal and contributors
++// Modified 2026-10-18: map the pinned Synexia CPU tool into its existing M3JDK21 module name.
++// SPDX-License-Identifier: Apache-2.0
++module com.m3.tools.text.diff {
++    exports com.m3.tools.text.diff;
++}
+diff --git a/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.text.frequency/com/m3/tools/text/frequency/TermFrequency.java b/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.text.frequency/com/m3/tools/text/frequency/TermFrequency.java
+new file mode 100644
+index 0000000..76ffa0b
+--- /dev/null
++++ b/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.text.frequency/com/m3/tools/text/frequency/TermFrequency.java
+@@ -0,0 +1,25 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
++// Copyright 2026 Hitesh Soliwal and contributors
++// Modified 2026-10-18: map the pinned Synexia CPU tool into its existing M3JDK21 module name.
++// SPDX-License-Identifier: Apache-2.0
++package com.m3.tools.text.frequency;
++import java.util.LinkedHashMap;
++import java.util.List;
++import java.util.Map;
++import java.util.Objects;
++/** Term counts over caller-supplied tokens; canonical tokenization remains separate. */
++public final class TermFrequency {
++    private TermFrequency() { }
++    public static Map<String,Integer> count(List<String> tokens) {
++        Objects.requireNonNull(tokens);
++        Map<String,Integer> output=new LinkedHashMap<>();
++        for(String token:tokens) output.merge(Objects.requireNonNull(token),1,Math::addExact);
++        return Map.copyOf(output);
++    }
++    public static void main(String[] args) {
++        if(args.length==1&&args[0].equals("--self-test")) {
++            if(count(List.of("a","b","a")).get("a")!=2) throw new AssertionError("term count");
++            if(!count(List.of()).isEmpty()) throw new AssertionError("empty");
++            System.out.println("M3_JMOD_TEST_PASS text.frequency");
++        } else System.out.println(count(List.of(args)));
++    }
++}
+diff --git a/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.text.frequency/module-info.java b/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.text.frequency/module-info.java
+new file mode 100644
+index 0000000..73d8888
+--- /dev/null
++++ b/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.text.frequency/module-info.java
+@@ -0,0 +1,6 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
++// Copyright 2026 Hitesh Soliwal and contributors
++// Modified 2026-10-18: map the pinned Synexia CPU tool into its existing M3JDK21 module name.
++// SPDX-License-Identifier: Apache-2.0
++module com.m3.tools.text.frequency {
++    exports com.m3.tools.text.frequency;
++}
+diff --git a/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.text.index/com/m3/tools/text/index/InvertedIndex.java b/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.text.index/com/m3/tools/text/index/InvertedIndex.java
+new file mode 100644
+index 0000000..d420844
+--- /dev/null
++++ b/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.text.index/com/m3/tools/text/index/InvertedIndex.java
+@@ -0,0 +1,97 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
++// Copyright 2026 Hitesh Soliwal and contributors
++// SPDX-License-Identifier: Apache-2.0
++// Modified 2026-10-18: mapped receiver with packed primitive storage; see DONOR_CHANGES.tsv.
++package com.m3.tools.text.index;
++
++import java.util.AbstractSet;
++import java.util.Arrays;
++import java.util.Collections;
++import java.util.Iterator;
++import java.util.List;
++import java.util.NoSuchElementException;
++import java.util.Objects;
++import java.util.Set;
++
++/** Immutable exact postings over canonical String references and one contiguous primitive lane. */
++public final class InvertedIndex {
++    private final String[] vocabulary;
++    private final int[] starts;
++    private final int[] postings;
++    private final Set<String> terms;
++
++    private InvertedIndex(String[] vocabulary, int[] starts, int[] postings) {
++        this.vocabulary = vocabulary; this.starts = starts; this.postings = postings;
++        this.terms = Collections.unmodifiableSet(new AbstractSet<>() {
++            @Override public int size() { return vocabulary.length; }
++            @Override public boolean contains(Object value) {
++                Objects.requireNonNull(value);
++                return value instanceof String text && Arrays.binarySearch(vocabulary, text) >= 0;
++            }
++            @Override public Iterator<String> iterator() {
++                return new Iterator<>() {
++                    private int next;
++                    @Override public boolean hasNext() { return next < vocabulary.length; }
++                    @Override public String next() {
++                        if (!hasNext()) throw new NoSuchElementException();
++                        return vocabulary[next++];
++                    }
++                };
++            }
++        });
++    }
++
++    /** Keeps distinct document IDs per term, in ascending document order; no input container is retained. */
++    public static InvertedIndex build(List<? extends List<String>> documents) {
++        Objects.requireNonNull(documents);
++        int total = 0;
++        for (List<String> document : documents) total = Math.addExact(total, Objects.requireNonNull(document).size());
++        String[] tokens = new String[total]; int[] documentIds = new int[total];
++        int at = 0;
++        for (int id = 0; id < documents.size(); id++) {
++            for (String term : documents.get(id)) {
++                tokens[at] = Objects.requireNonNull(term); documentIds[at++] = id;
++            }
++        }
++        String[] sorted = tokens.clone(); Arrays.sort(sorted);
++        int unique = 0;
++        for (String term : sorted) {
++            if (unique == 0 || !term.equals(sorted[unique - 1])) sorted[unique++] = term;
++        }
++        String[] vocabulary = Arrays.copyOf(sorted, unique);
++        int[] starts = new int[Math.addExact(unique, 1)], lastDocument = new int[unique];
++        Arrays.fill(lastDocument, -1);
++        for (int i = 0; i < total; i++) {
++            int term = Arrays.binarySearch(vocabulary, tokens[i]);
++            if (lastDocument[term] != documentIds[i]) { starts[term + 1]++; lastDocument[term] = documentIds[i]; }
++        }
++        for (int i = 1; i <= unique; i++) starts[i] = Math.addExact(starts[i], starts[i - 1]);
++        int[] cursor = starts.clone(), postings = new int[starts[unique]];
++        Arrays.fill(lastDocument, -1);
++        for (int i = 0; i < total; i++) {
++            int term = Arrays.binarySearch(vocabulary, tokens[i]);
++            if (lastDocument[term] != documentIds[i]) {
++                postings[cursor[term]++] = documentIds[i]; lastDocument[term] = documentIds[i];
++            }
++        }
++        return new InvertedIndex(vocabulary, starts, postings);
++    }
++
++    public int[] documents(String term) {
++        int at = Arrays.binarySearch(vocabulary, Objects.requireNonNull(term));
++        return at < 0 ? new int[0] : Arrays.copyOfRange(postings, starts[at], starts[at + 1]);
++    }
++
++    /** Immutable lexicographically ordered view; elements remain the original String values. */
++    public Set<String> terms() { return terms; }
++
++    public static void main(String[] args) {
++        if (args.length != 1 || !args[0].equals("--self-test"))
++            throw new IllegalArgumentException("--self-test");
++        InvertedIndex index = build(List.of(List.of("m3", "search", "m3"), List.of("search"), List.of()));
++        if (!Arrays.equals(index.documents("m3"), new int[]{0})) throw new AssertionError("posting dedup");
++        if (!Arrays.equals(index.documents("search"), new int[]{0, 1})) throw new AssertionError("posting order");
++        int[] mutable = index.documents("search"); mutable[0] = 99;
++        if (index.documents("search")[0] != 0) throw new AssertionError("defensive");
++        System.out.println("M3_JMOD_TEST_PASS text.index");
++    }
++}
+diff --git a/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.text.index/module-info.java b/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.text.index/module-info.java
+new file mode 100644
+index 0000000..b2f41a6
+--- /dev/null
++++ b/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.text.index/module-info.java
+@@ -0,0 +1,6 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
++// Copyright 2026 Hitesh Soliwal and contributors
++// Modified 2026-10-18: map the pinned Synexia CPU tool into its existing M3JDK21 module name.
++// SPDX-License-Identifier: Apache-2.0
++module com.m3.tools.text.index {
++    exports com.m3.tools.text.index;
++}
+diff --git a/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.text.ngram/com/m3/tools/text/ngram/NGrams.java b/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.text.ngram/com/m3/tools/text/ngram/NGrams.java
+new file mode 100644
+index 0000000..8318922
+--- /dev/null
++++ b/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.text.ngram/com/m3/tools/text/ngram/NGrams.java
+@@ -0,0 +1,26 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
++// Copyright 2026 Hitesh Soliwal and contributors
++// Modified 2026-10-18: map the pinned Synexia CPU tool into its existing M3JDK21 module name.
++// SPDX-License-Identifier: Apache-2.0
++package com.m3.tools.text.ngram;
++import java.util.LinkedHashMap;
++import java.util.Map;
++import java.util.Objects;
++/** Deterministic UTF-16 n-gram frequency; exact corpus fact, not fuzzy proof. */
++public final class NGrams {
++    private NGrams() { }
++    public static Map<String,Integer> count(String text, int n) {
++        Objects.requireNonNull(text);
++        if (n < 1 || n > 64) throw new IllegalArgumentException("n outside 1..64");
++        Map<String,Integer> result = new LinkedHashMap<>();
++        for(int i=0;i<=text.length()-n;i++) result.merge(text.substring(i,i+n),1,Integer::sum);
++        return Map.copyOf(result);
++    }
++    public static void main(String[] args) {
++        if(args.length==1&&args[0].equals("--self-test")){
++            if(!count("banana",2).get("an").equals(2)) throw new AssertionError("gram count");
++            if(!count("",3).isEmpty()) throw new AssertionError("empty");
++            System.out.println("M3_JMOD_TEST_PASS text.ngram");
++        } else if(args.length>=2) System.out.println(count(args[0],Integer.parseInt(args[1])));
++        else throw new IllegalArgumentException("text and gram length required");
++    }
++}
+diff --git a/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.text.ngram/module-info.java b/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.text.ngram/module-info.java
+new file mode 100644
+index 0000000..a9c2709
+--- /dev/null
++++ b/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.text.ngram/module-info.java
+@@ -0,0 +1,6 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
++// Copyright 2026 Hitesh Soliwal and contributors
++// Modified 2026-10-18: map the pinned Synexia CPU tool into its existing M3JDK21 module name.
++// SPDX-License-Identifier: Apache-2.0
++module com.m3.tools.text.ngram {
++    exports com.m3.tools.text.ngram;
++}
+diff --git a/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.text.normalize/com/m3/tools/text/normalize/UnicodeNormalizer.java b/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.text.normalize/com/m3/tools/text/normalize/UnicodeNormalizer.java
+new file mode 100644
+index 0000000..eb6db25
+--- /dev/null
++++ b/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.text.normalize/com/m3/tools/text/normalize/UnicodeNormalizer.java
+@@ -0,0 +1,21 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
++// Copyright 2026 Hitesh Soliwal and contributors
++// Modified 2026-10-18: map the pinned Synexia CPU tool into its existing M3JDK21 module name.
++// SPDX-License-Identifier: Apache-2.0
++package com.m3.tools.text.normalize;
++import java.text.Normalizer;
++import java.util.Objects;
++/** Unicode normalization is explicit: no hidden alteration of M3 String identity. */
++public final class UnicodeNormalizer {
++    private UnicodeNormalizer() { }
++    public static String normalize(String text, Normalizer.Form form) {
++        return Normalizer.normalize(Objects.requireNonNull(text), Objects.requireNonNull(form));
++    }
++    public static String nfkc(String text) { return normalize(text, Normalizer.Form.NFKC); }
++    public static void main(String[] args) {
++        if (args.length == 1 && args[0].equals("--self-test")) {
++            if (!nfkc("Ａ̊").equals("Å")) throw new AssertionError("NFKC");
++            if (!normalize("é", Normalizer.Form.NFC).equals("é")) throw new AssertionError("NFC");
++            System.out.println("M3_JMOD_TEST_PASS text.normalize");
++        } else { System.out.println(nfkc(String.join(" ", args))); }
++    }
++}
+diff --git a/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.text.normalize/module-info.java b/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.text.normalize/module-info.java
+new file mode 100644
+index 0000000..f9cc605
+--- /dev/null
++++ b/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.text.normalize/module-info.java
+@@ -0,0 +1,6 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
++// Copyright 2026 Hitesh Soliwal and contributors
++// Modified 2026-10-18: map the pinned Synexia CPU tool into its existing M3JDK21 module name.
++// SPDX-License-Identifier: Apache-2.0
++module com.m3.tools.text.normalize {
++    exports com.m3.tools.text.normalize;
++}
+diff --git a/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.text.regex/com/m3/tools/text/regex/RegexMatcher.java b/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.text.regex/com/m3/tools/text/regex/RegexMatcher.java
+new file mode 100644
+index 0000000..6b556bb
+--- /dev/null
++++ b/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.text.regex/com/m3/tools/text/regex/RegexMatcher.java
+@@ -0,0 +1,32 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
++// Copyright 2026 Hitesh Soliwal and contributors
++// Modified 2026-10-18: map the pinned Synexia CPU tool into its existing M3JDK21 module name.
++// SPDX-License-Identifier: Apache-2.0
++package com.m3.tools.text.regex;
++import java.util.ArrayList;
++import java.util.List;
++import java.util.Objects;
++import java.util.regex.Pattern;
++/** Uses the canonical JDK Pattern/Matcher contract, including zero-length matches. */
++public final class RegexMatcher {
++    private RegexMatcher() { }
++    public record Hit(int start, int end, String group) { }
++    public static List<Hit> find(String regex, CharSequence input, int maxMatches) {
++        Objects.requireNonNull(regex); Objects.requireNonNull(input);
++        if (maxMatches < 0) throw new IllegalArgumentException("negative match budget");
++        var matcher = Pattern.compile(regex).matcher(input);
++        List<Hit> hits = new ArrayList<>();
++        while (hits.size() < maxMatches && matcher.find())
++            hits.add(new Hit(matcher.start(), matcher.end(), matcher.group()));
++        return List.copyOf(hits);
++    }
++    public static void main(String[] args) {
++        if (args.length == 1 && args[0].equals("--self-test")) {
++            if (find("a+", "baaa ac", 3).size() != 2) throw new AssertionError("regex count");
++            if (find("", "ab", 9).size() != 3) throw new AssertionError("empty pattern");
++            if (!find("a", "aba", 0).isEmpty()) throw new AssertionError("bounded");
++            System.out.println("M3_JMOD_TEST_PASS text.regex");
++        } else if (args.length >= 2) {
++            find(args[0], args[1], 1000).forEach(h -> System.out.println(h.start()+"\t"+h.end()+"\t"+h.group()));
++        } else { throw new IllegalArgumentException("regex and text arguments required"); }
++    }
++}
+diff --git a/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.text.regex/module-info.java b/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.text.regex/module-info.java
+new file mode 100644
+index 0000000..e86140b
+--- /dev/null
++++ b/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.text.regex/module-info.java
+@@ -0,0 +1,6 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
++// Copyright 2026 Hitesh Soliwal and contributors
++// Modified 2026-10-18: map the pinned Synexia CPU tool into its existing M3JDK21 module name.
++// SPDX-License-Identifier: Apache-2.0
++module com.m3.tools.text.regex {
++    exports com.m3.tools.text.regex;
++}
+diff --git a/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.text.search/com/m3/tools/text/search/ExactSearch.java b/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.text.search/com/m3/tools/text/search/ExactSearch.java
+new file mode 100644
+index 0000000..cae4058
+--- /dev/null
++++ b/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.text.search/com/m3/tools/text/search/ExactSearch.java
+@@ -0,0 +1,37 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
++// Copyright 2026 Hitesh Soliwal and contributors
++// Modified 2026-10-18: map the pinned Synexia CPU tool into its existing M3JDK21 module name.
++// SPDX-License-Identifier: Apache-2.0
++package com.m3.tools.text.search;
++import java.util.Arrays;
++import java.util.Objects;
++/** Exact UTF-16 String.indexOf semantics; overlapping hits and bounded output. */
++public final class ExactSearch {
++    private ExactSearch() { }
++    public static int[] positions(String text, String needle, int maxHits) {
++        Objects.requireNonNull(text); Objects.requireNonNull(needle);
++        if (maxHits < 0) throw new IllegalArgumentException("negative limit");
++        int[] buffer = new int[Math.min(maxHits, 16)];
++        int used = 0, next = 0;
++        while (used < maxHits && next <= text.length()) {
++            int at = text.indexOf(needle, next);
++            if (at < 0) break;
++            if (used == buffer.length) buffer = Arrays.copyOf(buffer, (int) Math.min(maxHits, 2L * used + 1L));
++            buffer[used++] = at;
++            if (at == text.length()) break;
++            next = at + 1;
++        }
++        return Arrays.copyOf(buffer, used);
++    }
++    public static void main(String[] args) {
++        if (args.length == 1 && args[0].equals("--self-test")) {
++            if (!Arrays.equals(positions("aaaa","aa",99),new int[]{0,1,2}))
++                throw new AssertionError("overlap");
++            if (!Arrays.equals(positions("xy","",99),new int[]{0,1,2}))
++                throw new AssertionError("empty needle");
++            if (positions("a","a",0).length != 0) throw new AssertionError("bounded");
++            System.out.println("M3_JMOD_TEST_PASS text.search");
++        } else if (args.length >= 2) {
++            System.out.println(Arrays.toString(positions(args[0],args[1],1000)));
++        } else { throw new IllegalArgumentException("text and needle required"); }
++    }
++}
+diff --git a/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.text.search/module-info.java b/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.text.search/module-info.java
+new file mode 100644
+index 0000000..97a9fe4
+--- /dev/null
++++ b/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.text.search/module-info.java
+@@ -0,0 +1,6 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
++// Copyright 2026 Hitesh Soliwal and contributors
++// Modified 2026-10-18: map the pinned Synexia CPU tool into its existing M3JDK21 module name.
++// SPDX-License-Identifier: Apache-2.0
++module com.m3.tools.text.search {
++    exports com.m3.tools.text.search;
++}
+diff --git a/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.text.similarity/com/m3/tools/text/similarity/EditDistance.java b/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.text.similarity/com/m3/tools/text/similarity/EditDistance.java
+new file mode 100644
+index 0000000..9707934
+--- /dev/null
++++ b/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.text.similarity/com/m3/tools/text/similarity/EditDistance.java
+@@ -0,0 +1,39 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
++// Copyright 2026 Hitesh Soliwal and contributors
++// Modified 2026-10-18: map the pinned Synexia CPU tool into its existing M3JDK21 module name.
++// SPDX-License-Identifier: Apache-2.0
++package com.m3.tools.text.similarity;
++import java.util.Objects;
++/** Bounded UTF-16 Levenshtein oracle with O(min(length)) primitive workspace. */
++public final class EditDistance {
++    private EditDistance() { }
++    public static int within(String left, String right, int bound) {
++        Objects.requireNonNull(left); Objects.requireNonNull(right);
++        if(bound<0||bound>1_000_000) throw new IllegalArgumentException("distance bound");
++        if(left.length()<right.length()){String swap=left;left=right;right=swap;}
++        int a=left.length(),b=right.length();
++        if(a-b>bound)return bound+1;
++        if((long)a*b>10_000_000L)throw new IllegalArgumentException("work budget");
++        int[] previous=new int[b+1],current=new int[b+1];
++        for(int j=0;j<=b;j++)previous[j]=j;
++        for(int i=1;i<=a;i++){
++            current[0]=i;int min=current[0];
++            for(int j=1;j<=b;j++){
++                int sub=previous[j-1]+(left.charAt(i-1)==right.charAt(j-1)?0:1);
++                current[j]=Math.min(sub,Math.min(previous[j]+1,current[j-1]+1));
++                min=Math.min(min,current[j]);
++            }
++            if(min>bound)return bound+1;
++            int[] swap=previous;previous=current;current=swap;
++        }
++        return Math.min(previous[b],bound+1);
++    }
++    public static void main(String[] args) {
++        if(args.length==1&&args[0].equals("--self-test")){
++            if(within("kitten","sitting",3)!=3)throw new AssertionError("distance");
++            if(within("abc","xyz",1)!=2)throw new AssertionError("bounded");
++            if(within("","",0)!=0)throw new AssertionError("empty");
++            System.out.println("M3_JMOD_TEST_PASS text.similarity");
++        } else if(args.length==3)System.out.println(within(args[0],args[1],Integer.parseInt(args[2])));
++        else throw new IllegalArgumentException("left right bound");
++    }
++}
+diff --git a/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.text.similarity/module-info.java b/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.text.similarity/module-info.java
+new file mode 100644
+index 0000000..2eed457
+--- /dev/null
++++ b/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.text.similarity/module-info.java
+@@ -0,0 +1,6 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
++// Copyright 2026 Hitesh Soliwal and contributors
++// Modified 2026-10-18: map the pinned Synexia CPU tool into its existing M3JDK21 module name.
++// SPDX-License-Identifier: Apache-2.0
++module com.m3.tools.text.similarity {
++    exports com.m3.tools.text.similarity;
++}
+diff --git a/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.text.tokenize/com/m3/tools/text/tokenize/WordTokenizer.java b/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.text.tokenize/com/m3/tools/text/tokenize/WordTokenizer.java
+new file mode 100644
+index 0000000..04cf09a
+--- /dev/null
++++ b/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.text.tokenize/com/m3/tools/text/tokenize/WordTokenizer.java
+@@ -0,0 +1,32 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
++// Copyright 2026 Hitesh Soliwal and contributors
++// Modified 2026-10-18: map the pinned Synexia CPU tool into its existing M3JDK21 module name.
++// SPDX-License-Identifier: Apache-2.0
++package com.m3.tools.text.tokenize;
++import java.text.BreakIterator;
++import java.util.ArrayList;
++import java.util.List;
++import java.util.Locale;
++import java.util.Objects;
++/** JDK word-break semantics; no per-language model and no hidden tokenizer state. */
++public final class WordTokenizer {
++    private WordTokenizer() { }
++    public static List<String> words(String text) {
++        Objects.requireNonNull(text);
++        BreakIterator iterator = BreakIterator.getWordInstance(Locale.ROOT);
++        iterator.setText(text);
++        List<String> result = new ArrayList<>();
++        int start = iterator.first();
++        for (int end = iterator.next(); end != BreakIterator.DONE; start = end, end = iterator.next()) {
++            String span = text.substring(start, end);
++            if (span.codePoints().anyMatch(Character::isLetterOrDigit)) result.add(span);
++        }
++        return List.copyOf(result);
++    }
++    public static void main(String[] args) {
++        if (args.length == 1 && args[0].equals("--self-test")) {
++            if (!words("Hello, 42 world").equals(List.of("Hello","42","world")))
++                throw new AssertionError("word boundaries");
++            System.out.println("M3_JMOD_TEST_PASS text.tokenize");
++        } else { words(String.join(" ", args)).forEach(System.out::println); }
++    }
++}
+diff --git a/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.text.tokenize/module-info.java b/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.text.tokenize/module-info.java
+new file mode 100644
+index 0000000..481c02d
+--- /dev/null
++++ b/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.text.tokenize/module-info.java
+@@ -0,0 +1,6 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
++// Copyright 2026 Hitesh Soliwal and contributors
++// Modified 2026-10-18: map the pinned Synexia CPU tool into its existing M3JDK21 module name.
++// SPDX-License-Identifier: Apache-2.0
++module com.m3.tools.text.tokenize {
++    exports com.m3.tools.text.tokenize;
++}
+diff --git a/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.verify.sha256/com/m3/tools/verify/sha256/Sha256.java b/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.verify.sha256/com/m3/tools/verify/sha256/Sha256.java
+new file mode 100644
+index 0000000..68c1689
+--- /dev/null
++++ b/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.verify.sha256/com/m3/tools/verify/sha256/Sha256.java
+@@ -0,0 +1,26 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
++// Copyright 2026 Hitesh Soliwal and contributors
++// Modified 2026-10-18: map the pinned Synexia CPU tool into its existing M3JDK21 module name.
++// SPDX-License-Identifier: Apache-2.0
++package com.m3.tools.verify.sha256;
++import java.nio.charset.StandardCharsets;
++import java.security.MessageDigest;
++import java.security.NoSuchAlgorithmException;
++import java.util.HexFormat;
++import java.util.Objects;
++/** Standard JDK SHA-256 content identity; no native dependency. */
++public final class Sha256 {
++    private Sha256() { }
++    public static String hex(byte[] bytes) {
++        Objects.requireNonNull(bytes);
++        try{return HexFormat.of().formatHex(MessageDigest.getInstance("SHA-256").digest(bytes));}
++        catch(NoSuchAlgorithmException impossible){throw new ExceptionInInitializerError(impossible);}
++    }
++    public static String utf8(String text){return hex(Objects.requireNonNull(text).getBytes(StandardCharsets.UTF_8));}
++    public static void main(String[] args){
++        if(args.length==1&&args[0].equals("--self-test")){
++            if(!utf8("abc").equals("ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad"))
++                throw new AssertionError("SHA256");
++            System.out.println("M3_JMOD_TEST_PASS verify.sha256");
++        }else System.out.println(utf8(String.join(" ",args)));
++    }
++}
+diff --git a/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.verify.sha256/module-info.java b/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.verify.sha256/module-info.java
+new file mode 100644
+index 0000000..9aadb46
+--- /dev/null
++++ b/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.verify.sha256/module-info.java
+@@ -0,0 +1,6 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
++// Copyright 2026 Hitesh Soliwal and contributors
++// Modified 2026-10-18: map the pinned Synexia CPU tool into its existing M3JDK21 module name.
++// SPDX-License-Identifier: Apache-2.0
++module com.m3.tools.verify.sha256 {
++    exports com.m3.tools.verify.sha256;
++}
+diff --git a/m3/tooling/module-packs/text-tools/src/jdk.m3.io/jdk/m3/io/M3File.java b/m3/tooling/module-packs/text-tools/src/jdk.m3.io/jdk/m3/io/M3File.java
+new file mode 100644
+index 0000000..abda4ab
+--- /dev/null
++++ b/m3/tooling/module-packs/text-tools/src/jdk.m3.io/jdk/m3/io/M3File.java
+@@ -0,0 +1,289 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
++// SPDX-License-Identifier: Apache-2.0
++// Copyright 2026 Hitesh Soliwal and contributors
++package jdk.m3.io;
++
++import java.io.IOException;
++import java.io.InputStream;
++import java.io.InputStreamReader;
++import java.io.Reader;
++import java.net.URI;
++import java.nio.charset.CodingErrorAction;
++import java.nio.charset.StandardCharsets;
++import java.nio.file.Files;
++import java.nio.file.LinkOption;
++import java.nio.file.Path;
++import java.nio.file.StandardOpenOption;
++import java.nio.file.attribute.BasicFileAttributes;
++import java.nio.file.attribute.FileTime;
++import java.security.MessageDigest;
++import java.security.NoSuchAlgorithmException;
++import java.util.HexFormat;
++import java.util.Objects;
++import java.util.concurrent.ProgressMonitor;
++import java.util.concurrent.ProgressMonitors;
++
++/**
++ * An immutable, bounded, strictly decoded file snapshot for M3 SDK tools.
++ *
++ * <p>This target adapter follows MIndexFileStreamIndexer's one-stream admission:
++ * raw bytes update SHA-256 as a strict UTF-8 decoder consumes them, followed by
++ * a before/after metadata and byte-count check. It retains one ordinary String,
++ * whose representation remains owned by the running JDK's String/M3String
++ * implementation. It retains no raw-byte copy, token dictionary or postings.
++ * It is not the complete donor MIndexFile token/occurrence plane.</p>
++ *
++ * <p>Path components are checked without following symbolic links, and the
++ * final file is opened with NOFOLLOW_LINKS. The metadata check is not an atomic
++ * filesystem snapshot or protection against concurrent ancestor replacement or
++ * writes that restore metadata. The digests identify exactly the bytes and
++ * characters observed. No file handle remains open after admission.</p>
++ */
++public final class M3File implements CharSequence {
++    public static final int MAX_BYTES = 16 * 1024 * 1024;
++    private static final int BUFFER_SIZE = 8192;
++
++    private final Path path;
++    private final URI uri;
++    private final String text;
++    private final String rawSha256;
++    private final String utf16Sha256;
++    private final Stamp stamp;
++
++    private M3File(Path path, String text, String rawSha256, String utf16Sha256, Stamp stamp) {
++        this.path = path;
++        this.uri = path.toUri();
++        this.text = text;
++        this.rawSha256 = rawSha256;
++        this.utf16Sha256 = utf16Sha256;
++        this.stamp = stamp;
++    }
++
++    public static M3File load(Path path) throws IOException {
++        return load(path, MAX_BYTES, ProgressMonitors.current());
++    }
++
++    public static M3File load(Path path, ProgressMonitor monitor) throws IOException {
++        return load(path, MAX_BYTES, monitor);
++    }
++
++    public static M3File load(Path path, int maxBytes) throws IOException {
++        return load(path, maxBytes, ProgressMonitors.current());
++    }
++
++    /** Decode once; malformed UTF-8, observed source changes and excess input refuse publication. */
++    public static M3File load(Path path, int maxBytes, ProgressMonitor monitor) throws IOException {
++        if (maxBytes < 0 || maxBytes > MAX_BYTES) {
++            throw new IllegalArgumentException("file byte budget must be in [0," + MAX_BYTES + "]");
++        }
++        ProgressMonitor progress = progress(monitor);
++        progress.checkCancelled();
++        Path source = Objects.requireNonNull(path, "path").toAbsolutePath().normalize();
++        Stamp before = stamp(source);
++        if (before.size() > maxBytes) throw new IOException("file exceeds byte budget: " + source);
++        progress.begin("Read UTF-8 source", before.size());
++        try {
++            MessageDigest rawDigest = digest();
++            MessageDigest characterDigest = digest();
++            StringBuilder decoded = new StringBuilder((int) Math.min(before.size(), BUFFER_SIZE));
++            ObservedInputStream bytes = new ObservedInputStream(
++                    Files.newInputStream(source, StandardOpenOption.READ, LinkOption.NOFOLLOW_LINKS),
++                    rawDigest, maxBytes, progress);
++            var decoder = StandardCharsets.UTF_8.newDecoder()
++                    .onMalformedInput(CodingErrorAction.REPORT)
++                    .onUnmappableCharacter(CodingErrorAction.REPORT);
++            try (Reader reader = new InputStreamReader(bytes, decoder)) {
++                char[] buffer = new char[BUFFER_SIZE];
++                for (int count; (count = reader.read(buffer)) != -1;) {
++                    progress.checkCancelled();
++                    decoded.append(buffer, 0, count);
++                    for (int i = 0; i < count; i++) updateUtf16(characterDigest, buffer[i]);
++                }
++            }
++            Stamp after = stamp(source);
++            requireStable(before, after, bytes.count);
++            progress.checkCancelled();
++            return new M3File(source, decoded.toString(), hex(rawDigest), hex(characterDigest), after);
++        } finally {
++            progress.done();
++        }
++    }
++
++    public Path path() { return path; }
++    public URI uri() { return uri; }
++    public long byteLength() { return stamp.size(); }
++    public String rawSha256() { return rawSha256; }
++    /** SHA-256 of exact big-endian UTF-16 code units, distinct from the raw file digest. */
++    public String utf16Sha256() { return utf16Sha256; }
++    /** The same canonical public String reference; this accessor does not decode or copy. */
++    public String text() { return text; }
++    @Override public int length() { return text.length(); }
++    @Override public char charAt(int index) { return text.charAt(index); }
++    @Override public String toString() { return text; }
++    @Override public Range subSequence(int start, int end) { return range(start, end); }
++
++    public Range range(int start, int end) {
++        return range(start, end, ProgressMonitors.current());
++    }
++
++    public Range range(int start, int end, ProgressMonitor monitor) {
++        progress(monitor).checkCancelled();
++        return new Range(this, start, end);
++    }
++
++    public void verifyUnchanged() throws IOException {
++        verifyUnchanged(ProgressMonitors.current());
++    }
++
++    /** Explicitly reread and compare a file; the immutable snapshot itself never changes. */
++    public void verifyUnchanged(ProgressMonitor monitor) throws IOException {
++        ProgressMonitor progress = progress(monitor);
++        progress.checkCancelled();
++        Stamp before = stamp(path);
++        if (!stamp.equals(before)) throw new IOException("file metadata differs from snapshot: " + path);
++        progress.begin("Verify source bytes", before.size());
++        try {
++            MessageDigest rawDigest = digest();
++            long count;
++            try (ObservedInputStream bytes = new ObservedInputStream(
++                    Files.newInputStream(path, StandardOpenOption.READ, LinkOption.NOFOLLOW_LINKS),
++                    rawDigest, (int) stamp.size(), progress)) {
++                byte[] buffer = new byte[BUFFER_SIZE];
++                while (bytes.read(buffer, 0, buffer.length) != -1) progress.checkCancelled();
++                count = bytes.count;
++            }
++            requireStable(before, stamp(path), count);
++            if (!rawSha256.equals(hex(rawDigest))) {
++                throw new IOException("file bytes differ from snapshot: " + path);
++            }
++            progress.checkCancelled();
++        } finally {
++            progress.done();
++        }
++    }
++
++    /** A UTF-16 range shares the snapshot owner and does not retain another spelling store. */
++    public record Range(M3File source, int start, int end) implements CharSequence {
++        public Range {
++            Objects.requireNonNull(source, "source");
++            Objects.checkFromToIndex(start, end, source.length());
++        }
++
++        @Override public int length() { return end - start; }
++        @Override public char charAt(int index) {
++            return source.charAt(start + Objects.checkIndex(index, length()));
++        }
++        @Override public Range subSequence(int from, int to) {
++            Objects.checkFromToIndex(from, to, length());
++            return new Range(source, start + from, start + to);
++        }
++        /** Explicit String projection; ordinary range traversal does not call this method. */
++        @Override public String toString() { return source.text.substring(start, end); }
++        public String utf16Sha256() { return utf16Sha256(ProgressMonitors.current()); }
++        public String utf16Sha256(ProgressMonitor monitor) {
++            ProgressMonitor progress = progress(monitor);
++            progress.checkCancelled();
++            progress.begin("Hash UTF-16 range", length());
++            try {
++                MessageDigest digest = digest();
++                for (int i = start; i < end; i++) {
++                    if ((i - start) % BUFFER_SIZE == 0) progress.checkCancelled();
++                    updateUtf16(digest, source.text.charAt(i));
++                }
++                progress.worked(length());
++                progress.checkCancelled();
++                return hex(digest);
++            } finally {
++                progress.done();
++            }
++        }
++    }
++
++    private record Stamp(long size, FileTime modified, FileTime created, Object fileKey) { }
++
++    private static Stamp stamp(Path path) throws IOException {
++        Path current = path.getRoot();
++        if (current == null) throw new IOException("absolute file path required");
++        for (int i = 0; i < path.getNameCount(); i++) {
++            current = current.resolve(path.getName(i));
++            BasicFileAttributes attributes = Files.readAttributes(
++                    current, BasicFileAttributes.class, LinkOption.NOFOLLOW_LINKS);
++            if (attributes.isSymbolicLink()) throw new IOException("symbolic source component: " + current);
++            boolean leaf = i + 1 == path.getNameCount();
++            if (!leaf && !attributes.isDirectory()) throw new IOException("non-directory source component: " + current);
++            if (leaf) {
++                if (!attributes.isRegularFile()) throw new IOException("source is not a regular file: " + path);
++                return new Stamp(attributes.size(), attributes.lastModifiedTime(),
++                        attributes.creationTime(), attributes.fileKey());
++            }
++        }
++        throw new IOException("source is not a regular file: " + path);
++    }
++
++    private static void requireStable(Stamp before, Stamp after, long count) throws IOException {
++        if (!before.equals(after) || count != before.size() || count != after.size()) {
++            throw new IOException("source changed during one-stream admission");
++        }
++    }
++
++    private static ProgressMonitor progress(ProgressMonitor monitor) {
++        return monitor == null ? ProgressMonitors.current() : monitor;
++    }
++
++    private static MessageDigest digest() {
++        try { return MessageDigest.getInstance("SHA-256"); }
++        catch (NoSuchAlgorithmException impossible) { throw new IllegalStateException(impossible); }
++    }
++
++    private static void updateUtf16(MessageDigest digest, char value) {
++        digest.update((byte) (value >>> 8));
++        digest.update((byte) value);
++    }
++
++    private static String hex(MessageDigest digest) { return HexFormat.of().formatHex(digest.digest()); }
++
++    private static final class ObservedInputStream extends InputStream {
++        private final InputStream input;
++        private final MessageDigest digest;
++        private final int budget;
++        private final ProgressMonitor progress;
++        private long count;
++
++        ObservedInputStream(InputStream input, MessageDigest digest, int budget, ProgressMonitor progress) {
++            this.input = input;
++            this.digest = digest;
++            this.budget = budget;
++            this.progress = progress;
++        }
++
++        @Override public int read() throws IOException {
++            progress.checkCancelled();
++            int value = input.read();
++            if (value >= 0) {
++                count++;
++                if (count > budget) throw new IOException("file grew beyond byte budget");
++                digest.update((byte) value);
++                progress.worked(1);
++                progress.checkCancelled();
++            }
++            return value;
++        }
++
++        @Override public int read(byte[] buffer, int offset, int length) throws IOException {
++            Objects.checkFromIndexSize(offset, length, buffer.length);
++            if (length == 0) return 0;
++            progress.checkCancelled();
++            int allowed = (int) Math.min(length, (long) budget - count + 1L);
++            int read = input.read(buffer, offset, allowed);
++            if (read > 0) {
++                count += read;
++                if (count > budget) throw new IOException("file grew beyond byte budget");
++                digest.update(buffer, offset, read);
++                progress.worked(read);
++                progress.checkCancelled();
++            }
++            return read;
++        }
++
++        @Override public void close() throws IOException { input.close(); }
++    }
++}

@@ -1,0 +1,12 @@
+Traceback (most recent call last):
+  File "/workspace/scratch/f4826e049195/com.synexia/synexia-openrewrite-recipes/recipes/m3-cpu-tools-jmod-20261018/target/current/receiver-proof/isolated-tgfn9eio/symlink/crate/receive.py", line 197, in <module>
+    main()
+  File "/workspace/scratch/f4826e049195/com.synexia/synexia-openrewrite-recipes/recipes/m3-cpu-tools-jmod-20261018/target/current/receiver-proof/isolated-tgfn9eio/symlink/crate/receive.py", line 192, in main
+    result = receive(crate, args.dataset, owner.absolute(), args.target.absolute(), args.check)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/scratch/f4826e049195/com.synexia/synexia-openrewrite-recipes/recipes/m3-cpu-tools-jmod-20261018/target/current/receiver-proof/isolated-tgfn9eio/symlink/crate/receive.py", line 152, in receive
+    path = contained(target, relative)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/scratch/f4826e049195/com.synexia/synexia-openrewrite-recipes/recipes/m3-cpu-tools-jmod-20261018/target/current/receiver-proof/isolated-tgfn9eio/symlink/crate/receive.py", line 50, in contained
+    raise ValueError("symlink target or parent is not admitted: " + relative)
+ValueError: symlink target or parent is not admitted: m3/tooling/module-packs/text-tools/src/jdk.m3.io/jdk/m3/io/M3File.java

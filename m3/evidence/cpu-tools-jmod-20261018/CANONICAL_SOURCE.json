@@ -1,0 +1,44 @@
+{
+  "schema": "M3_CPU_CANONICAL_SOURCE_V1",
+  "canonical": {
+    "repository": "hsoliwal/com.synexia",
+    "baseline_commit": "50f48cbbe11f17fb8dc209bac3812f8940a1e267",
+    "baseline_tree": "5dac37796c011115cb16321e795324dce9b2b0cb",
+    "commit": "fd90cb89476b3da556a2ee89a827c36a9a56a18c",
+    "tree": "2aeb4e14ba4e1e222976015f9dca39f6e99d5257",
+    "branch": "m3/cpu-tools-jmod-20261018",
+    "base_branch": "develop",
+    "base_sha_at_publication": "140c263a90f9803b9c46103c63355a286e0515f0",
+    "pull_request": {
+      "number": 12349,
+      "url": "https://github.com/hsoliwal/com.synexia/pull/12349",
+      "state": "open",
+      "draft": true,
+      "head_sha": "fd90cb89476b3da556a2ee89a827c36a9a56a18c"
+    },
+    "manifest_sha256": "afbbdb036e9d02817ea753eaff8ce5037dce153273b2e581f85d0b2ea305162b",
+    "published_files": 543,
+    "tree_verification_sha256": "d9b569da26aec110403d9c746d7e4032622a66fd0ece0c7fcd7e8af9d9c8666d",
+    "full_tree_readback": "EXACT_BASELINE_PLUS_MANIFEST_TREE_MATCH"
+  },
+  "canonical_report": {
+    "path": "synexia-openrewrite-recipes/recipes/m3-cpu-tools-jmod-20261018/QUALIFICATION.md",
+    "sha256": "5654b1c759aef03451f3b9c4b5f18acb919b5f920a530014065c9b88c916b75d"
+  },
+  "receiving_report": {
+    "path": "m3/evidence/cpu-tools-jmod-20261018/QUALIFICATION.md",
+    "sha256": "60c0f41304ac080d43d4a6e3fea0f91c858fa24cda36c666723381ef744a2db9",
+    "change": "Relative links relocated; canonical publication attribution added."
+  },
+  "product_source_transition_order": [
+    "current",
+    "native-link",
+    "linker-temp"
+  ],
+  "final_received_product_files": 61,
+  "final_qualification": {
+    "path": "FINAL_QUALIFICATION.json",
+    "sha256": "61c176521b2375359d708821a437c5eb7f86624cbb34e541089ab880db07fece"
+  },
+  "product_source_edits_for_publication": 0
+}

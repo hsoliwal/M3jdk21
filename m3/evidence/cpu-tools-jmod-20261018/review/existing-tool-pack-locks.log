@@ -1,0 +1,24 @@
+test_asset_file_directory_conflict_refused (test_tool_packs.ToolPackLockTests.test_asset_file_directory_conflict_refused) ... ok
+test_asset_mode_must_be_boolean (test_tool_packs.ToolPackLockTests.test_asset_mode_must_be_boolean) ... ok
+test_checksum_mismatch_and_missing_file_refused (test_tool_packs.ToolPackLockTests.test_checksum_mismatch_and_missing_file_refused) ... ok
+test_conflicting_pack_assets_refused (test_tool_packs.ToolPackLockTests.test_conflicting_pack_assets_refused) ... ok
+test_default_is_empty (test_tool_packs.ToolPackLockTests.test_default_is_empty) ... ok
+test_distribution_inventory_refuses_omission_or_changed_identity (test_tool_packs.ToolPackLockTests.test_distribution_inventory_refuses_omission_or_changed_identity) ... ok
+test_drift_after_lock_and_during_copy_refused (test_tool_packs.ToolPackLockTests.test_drift_after_lock_and_during_copy_refused) ... ok
+test_duplicate_and_misnamed_locked_modules_refused (test_tool_packs.ToolPackLockTests.test_duplicate_and_misnamed_locked_modules_refused) ... ok
+test_generated_distribution_inventory_accepts_nested_prefix_paths (test_tool_packs.ToolPackLockTests.test_generated_distribution_inventory_accepts_nested_prefix_paths) ... ok
+test_image_collision_precedes_all_copying (test_tool_packs.ToolPackLockTests.test_image_collision_precedes_all_copying) ... ok
+test_installed_bytes_modes_and_honest_receipt (test_tool_packs.ToolPackLockTests.test_installed_bytes_modes_and_honest_receipt) ... ok
+test_lock_never_selects_everything_implicitly (test_tool_packs.ToolPackLockTests.test_lock_never_selects_everything_implicitly) ... ok
+test_provenance_and_explicit_roots_required (test_tool_packs.ToolPackLockTests.test_provenance_and_explicit_roots_required) ... ok
+test_schema_boolean_is_not_version_one (test_tool_packs.ToolPackLockTests.test_schema_boolean_is_not_version_one) ... ok
+test_selection_order_and_repetition_are_deterministic (test_tool_packs.ToolPackLockTests.test_selection_order_and_repetition_are_deterministic) ... ok
+test_symlink_parent_refused (test_tool_packs.ToolPackLockTests.test_symlink_parent_refused) ... ok
+test_traversal_absolute_and_ambiguous_targets_refused (test_tool_packs.ToolPackLockTests.test_traversal_absolute_and_ambiguous_targets_refused) ... ok
+test_unknown_selection_and_duplicate_pack_refused (test_tool_packs.ToolPackLockTests.test_unknown_selection_and_duplicate_pack_refused) ... ok
+test_unselected_pack_may_have_unavailable_payload (test_tool_packs.ToolPackLockTests.test_unselected_pack_may_have_unavailable_payload) ... ok
+
+----------------------------------------------------------------------
+Ran 19 tests in 0.072s
+
+OK
