@@ -23,6 +23,12 @@
  * questions.
  */
 
+/*
+ * M3JDK21 direct-ordinal collection refinements Copyright 2026
+ * Hitesh Soliwal and contributors. Original OpenJDK GPLv2 with
+ * Classpath Exception notices and conditions remain in force.
+ */
+
 package java.util;
 
 import jdk.internal.access.SharedSecrets;
