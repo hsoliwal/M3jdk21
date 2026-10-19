@@ -1,0 +1,9 @@
+$ ["/workspace/scratch/a0f19f379302/jdk-21.0.12.1+1/bin/jmod","describe","/workspace/scratch/a0f19f379302/parser-target-proof-2/pack/jmods/jdk.m3.parser.jmod"]
+jdk.m3.parser
+exports jdk.m3.parser
+exports jdk.m3.parser.grammar
+requires java.base mandated
+requires jdk.compiler transitive
+
+
+EXIT 0

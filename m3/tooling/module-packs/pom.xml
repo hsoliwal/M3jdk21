@@ -43,6 +43,10 @@
   </plugins></build>
   <profiles>
     <profile>
+      <id>m3-parser</id>
+      <modules><module>parser</module></modules>
+    </profile>
+    <profile>
       <id>m3-collections</id>
       <modules><module>../../collections</module><module>collections</module></modules>
     </profile>
