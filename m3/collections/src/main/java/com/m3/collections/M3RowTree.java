@@ -35,6 +35,9 @@ public final class M3RowTree extends AbstractList<M3RowTreeItem> implements M3Ro
 	private static final int SLOT_BYTES = 45;
 
 	private int root = NONE;
+	/* Negative linked weights, not visibility flags. Zero/hidden rows are harmless
+	 * to prefix monotonicity; one scalar avoids another per-row metadata lane. */
+	private int negativeWeights;
 	private int[] left = new int[0];
 	private int[] right = new int[0];
 	private int[] up = new int[0];
@@ -72,6 +75,8 @@ public final class M3RowTree extends AbstractList<M3RowTreeItem> implements M3Ro
 		weights[slot] = extentOf(item);
 		root = insertAt(root, index, slot);
 		up[root] = NONE;
+		// Publish the census before the existing callback observes the linked row.
+		negativeWeights += weights[slot] >>> 31;
 		item.enteredRowTree(slot);
 		modCount++;
 	}
@@ -137,6 +142,7 @@ public final class M3RowTree extends AbstractList<M3RowTreeItem> implements M3Ro
 			items[slot].leftRowTree(row++);
 		}
 		root = NONE;
+		negativeWeights = 0;
 		Arrays.fill(items, 0, nextSlot, null);
 		nextSlot = 0;
 		freeCount = 0;
@@ -296,10 +302,9 @@ public final class M3RowTree extends AbstractList<M3RowTreeItem> implements M3Ro
 		if (offset < 0) {
 			return -1;
 		}
-		// The count equality proves every weight is positive (or the tree is empty).
-		// Unlike the Fenwick donor, custom item heights can produce negative int
-		// weights; preserve the original descent whenever that proof is unavailable.
-		if (offset >= sum(root) && visible(root) == size(root)) return visible(root);
+		// Hidden rows have zero weight. Only a negative stored weight invalidates
+		// the monotone-prefix proof; custom signed height+1 keeps its old descent.
+		if (negativeWeights == 0 && offset >= sum(root)) return visible(root);
 		int rank = 0;
 		long extent = 0;
 		int node = root;
@@ -378,6 +383,7 @@ public final class M3RowTree extends AbstractList<M3RowTreeItem> implements M3Ro
 		if (delta == 0 && visibleDelta == 0) {
 			return;
 		}
+		negativeWeights += (weight >>> 31) - (weights[slot] >>> 31);
 		weights[slot] = weight;
 		for (int node = slot; node != NONE; node = up[node]) {
 			sums[node] += delta;
@@ -558,6 +564,7 @@ public final class M3RowTree extends AbstractList<M3RowTreeItem> implements M3Ro
 	}
 
 	private void release(final int slot) {
+		negativeWeights -= weights[slot] >>> 31;
 		items[slot] = null;
 		weights[slot] = 0;
 		if (freeCount == free.length) {
