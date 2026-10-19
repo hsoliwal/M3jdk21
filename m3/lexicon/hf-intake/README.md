@@ -23,7 +23,7 @@ source Synexia owner. Repeated source rows remain separate stable record IDs
 while the downstream M3LEX image may deduplicate identical UTF-16 values.
 
 The companion `language-resource-discovery.tsv` is a searchable,
-release-aware catalogue of 59 **reference-only** candidates. In addition to
+release-aware catalogue of 63 **reference-only** candidates. In addition to
 dictionaries, grammar, translation, frequency, names, units and speech sources,
 it covers metadata discovery (CLARIN VLO, OLAC, ELRA), cross-linguistic concept
 IDs and norms (Concepticon, NoRaRe), basic wordlists (ASJP), colexification and
@@ -31,11 +31,7 @@ loanword signals (CLICS⁴, WOLD), signed-language features (ASL-LEX), dictionar
 digitization evaluation (MUDIDI), pronunciation dictionaries (OpenSLR), and
 endangered-language archives and speech leads (DOBES, ELAR, ELARSpeech), Indic frequency lists, MorphyNet, Hunspell language dictionaries, CMUdict, the Global WordNet directory and the restricted BabelNet lead.
 
-The six new leads add Indic token counts, derivational/inflectional morphology, affix-rule dictionaries, pronunciation variants, a WordNet source directory and one license-restricted semantic graph. Every catalogue entry remains `REFERENCE_ONLY`: no corpus payload has been
-downloaded or admitted, and no catalogued license is treated as a blanket
-redistribution grant. Metadata aggregators point to source records; access,
-consent, source IDs, licenses, attribution, release hashes and any community
-conditions must still be checked at the individual resource or deposit level.
+Additional candidates now include ParaNames for multilingual entity labels, GiellaLT language-specific finite-state lexicons and grammar, the GF Resource Grammar Library, and SIGMORPHON morphology fixtures. ParaNames' Hugging Face card and paper report conflicting license labels, so it remains explicitly blocked pending clarification. Every catalogue entry remains `REFERENCE_ONLY`: no corpus payload has been downloaded or admitted, and no catalogued license is treated as a blanket redistribution grant. Metadata aggregators point to source records; access, consent, source IDs, licenses, attribution, release hashes and any community conditions must still be checked at the individual resource or deposit level.
 The catalogue is discovery, not an import adapter: Parquet, Arrow, JSONL,
 streaming CSV quotations, proprietary/gated corpora, grammar models and
 arbitrary Hub file types are not yet supported by the tested importer.
