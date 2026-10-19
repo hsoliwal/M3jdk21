@@ -1,7 +1,7 @@
 {
   "schema": 1,
   "repository": "hsoliwal/com.synexia",
-  "sourceCommit": "294c6bf0a7353dcb95df73e7a67f576ef9aee1ac",
+  "sourceCommit": "ec68042d2bb7433807ea5d99daff2fd38aeb7f80",
   "sourcePullRequest": 12447,
   "receiverRepository": "hsoliwal/M3jdk21",
   "receiverBase": "a3e88976ee8664d1ef5d0cade96aec1206b2133d",
@@ -17,8 +17,8 @@
     {
       "sourcePath": "synexia-openrewrite-recipes/tasks/source-qualified-tq-reactor-20261019/recipe/expected-projects.json",
       "targetPath": "m3/tooling/tq-sync/source-reactor/expected-projects.json",
-      "gitBlob": "5cfbf49c56b1117f4ee1d93f79d23a00d4a08edb",
-      "bytes": 35019
+      "gitBlob": "8c33eaac82b481fda334bf4fd529e2a2a293e269",
+      "bytes": 35243
     },
     {
       "sourcePath": "synexia-openrewrite-recipes/tasks/source-qualified-tq-reactor-20261019/recipe/pom.xml",
@@ -35,11 +35,11 @@
     {
       "sourcePath": "synexia-openrewrite-recipes/tasks/source-qualified-tq-reactor-20261019/recipe/test_reactor.py",
       "targetPath": "m3/tooling/tq-sync/source-reactor/test_reactor.py",
-      "gitBlob": "0a2fac0c14149c6807b9265a8f29257a9c74efb7",
-      "bytes": 9465
+      "gitBlob": "03d17294c609ab8c82078619c71cfd04bcaa2d38",
+      "bytes": 9628
     }
   ],
   "runtimeApplied": false,
   "phaseAdvanced": false,
-  "qualification": "PENDING_ACTUAL_OFFLINE_MODEL_ONLY; no compilation/JUnit/native/original-model claims"
+  "qualification": "PENDING_ACTUAL_EXACT_MAVEN_3_10_MODEL_ONLY; historical3.9 NOT_RUN; no compilation/JUnit/native/original-model claims"
 }

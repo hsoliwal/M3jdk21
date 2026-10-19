@@ -964,5 +964,7 @@
     "org.tukaani:xz:1.10-m3-source-1",
     "org.xerial.snappy:snappy-java:1.1.10.5-m3-source-1",
     "org.yaml:snakeyaml:2.2-m3-source-1"
-  ]
+  ],
+  "qualifiedMavenIdentity": "Apache Maven 3.10.0 (c43a36b8d67be7e0805a411bc0898af1a51f5472)",
+  "historicalMaven39Qualification": "NOT_RUN; historical exact3.9-only route refused the provisioned3.10 toolchain before tests"
 }
