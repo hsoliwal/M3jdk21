@@ -60,7 +60,7 @@ public final class M3HfLexiconIntakeProof {
     private static int verifyLanguageResourceDiscovery() throws IOException {
         List<String> lines = resourceLines(
                 "/com/m3/lexicon/hf/language-resource-discovery.tsv");
-        require(lines.size() == 66, "65 language-resource candidates plus header");
+        require(lines.size() == 70, "69 language-resource candidates plus header");
         List<String> expectedHeader = List.of("source_id", "resource", "category",
                 "data_shape_and_identity", "rights_and_attribution", "m3_candidate_use",
                 "admission_blockers", "state", "evidence");
@@ -95,7 +95,9 @@ public final class M3HfLexiconIntakeProof {
                 "global-wordnet-discovery-index", "babelnet-restricted-lexical-graph",
                 "hf-paranames-1-0", "giellalt-language-repositories",
                 "gf-resource-grammar-library", "sigmorphon-2022-segmentation",
-                "hf-world-languages-7130", "wordfreq-3-0-2-data")),
+                "hf-world-languages-7130", "wordfreq-3-0-2-data",
+                "reflex-africa-v1-0", "opus-corpus-index-2026",
+                "google-fleurs-102", "google-waxalnlp")),
                 "lexicon, grammar, translation, concept, norms, archive, sign and HF leads retained");
         String paranames = lines.stream().skip(1)
                 .filter(line -> "hf-paranames-1-0".equals(splitTsv(line)[0]))
@@ -158,6 +160,30 @@ public final class M3HfLexiconIntakeProof {
         require(wordfreq.contains("CC BY-SA 4.0") && wordfreq.contains("Apache-2.0")
                 && wordfreq.contains("2021") && wordfreq.contains("bare CSV"),
                 "wordfreq data/code rights, vintage and attribution constraints remain explicit");
+        String reflex = lines.stream().skip(1)
+                .filter(line -> "reflex-africa-v1-0".equals(splitTsv(line)[0]))
+                .findFirst().orElse("");
+        require(reflex.contains("927,845") && reflex.contains("815")
+                && reflex.contains("CC BY-NC-SA 4.0"),
+                "RefLex scale, languoid scope and noncommercial share-alike rights remain explicit");
+        String opus = lines.stream().skip(1)
+                .filter(line -> "opus-corpus-index-2026".equals(splitTsv(line)[0]))
+                .findFirst().orElse("");
+        require(opus.contains("1,214") && opus.contains("1,038")
+                && opus.contains("blanket license"),
+                "OPUS scale and corpus-specific rights remain explicit");
+        String fleurs = lines.stream().skip(1)
+                .filter(line -> "google-fleurs-102".equals(splitTsv(line)[0]))
+                .findFirst().orElse("");
+        require(fleurs.contains("102-language") && fleurs.contains("CC BY 4.0")
+                && fleurs.contains("FLoRes"),
+                "FLEURS language coverage, license and upstream text provenance remain explicit");
+        String waxal = lines.stream().skip(1)
+                .filter(line -> "google-waxalnlp".equals(splitTsv(line)[0]))
+                .findFirst().orElse("");
+        require(waxal.contains("CC BY-SA 4.0") && waxal.contains("CC BY 4.0")
+                && waxal.contains("unresolved"),
+                "WAXAL license metadata conflict remains unresolved and non-admitted");
         return lines.size() - 1;
     }
 
