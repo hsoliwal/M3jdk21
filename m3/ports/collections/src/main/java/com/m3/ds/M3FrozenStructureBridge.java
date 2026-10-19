@@ -1,0 +1,43 @@
+// Copyright 2026 Hitesh Soliwal and contributors
+// SPDX-License-Identifier: Apache-2.0
+package com.m3.ds;
+
+import com.m3.util.M3NotYetReceived;
+
+/**
+ * M3 SDK scaffold of {@code com.synexia.indexstring.structure.MIndexFrozenStructureBridge}: declarations received, atoms not yet received.
+ * Every member body throws {@link M3NotYetReceived}.
+ *
+ * <p>Lineage: Synexia {@code synexia-indexstring/src/main/java/com/synexia/indexstring/structure/MIndexFrozenStructureBridge.java}
+ * blob {@code 6d27bbbf668d701b66502e20553b2fc69bc36b99} at develop {@code 11c94feb18155a53cc213708c353791132edc4a7},
+ * source SHA-256 {@code 28f1f6549b85345611a57b3fd7dab6dbf751db72bb87e84f1114304573d3991a}.
+ * Copy contract {@code com.synexia.rewrite.M3CopyMIndexDeclarationRecipe} (same-package
+ * {@code com.synexia.indexstring.structure.M3FrozenStructureBridge}); projection
+ * {@code com.synexia.rewrite.M3MIndexScaffoldSkeletonRecipe} batch {@code S13}.
+ * Map family {@code DATA_STRUCTURE}; naming-law family {@code SPECIALIZED_DATA_STRUCTURES}.
+ *
+ * <p>DOOP mapping: slots are addressed by offset in growable primitive lanes bounded by
+ * {@code m3SlotCount}; per-slot state lives in {@code m3StateMask} bits, 64 slots per
+ * word; source primitive fields keep their element type as lanes and source reference
+ * fields become int handle lanes into parent-owned storage. No stored entry or node
+ * objects; API facades are transient and parent-owned.
+ *
+ * <p>Not yet received:
+ * <ul>
+ *   <li>{@code nested types not received: FrozenProjection}</li>
+ *   <li>{@code member toStore(MIndexStructure, MIndexStructuralStore) (return type)}</li>
+ *   <li>{@code member toFrozen(MIndexNodeRef) (return type)}</li>
+ *   <li>{@code member toFrozen(MIndexDocument) (return type)}</li>
+ * </ul>
+ */
+public final class M3FrozenStructureBridge {
+    /** DOOP slot bound: number of live slots addressed by offset in every lane. */
+    private int m3SlotCount;
+
+    /** DOOP per-slot state bits (live, deleted, frozen, dirty, resident); 64 slots per word. */
+    private long[] m3StateMask;
+
+    private M3FrozenStructureBridge() {
+        throw new M3NotYetReceived("M3FrozenStructureBridge#<init>/0");
+    }
+}
