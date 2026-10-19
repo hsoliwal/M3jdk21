@@ -156,10 +156,52 @@ class SourceCoverageTest(unittest.TestCase):
         row["standard_entry_point_refs"].remove("java.util.spi.ToolProvider")
         self.refused("declared public provider service owner is missing")
 
-    def test_pending_token_slot_cannot_fabricate_public_owner(self) -> None:
-        row = next(row for row in self.fragment["families"] if row["id"] == "regex")
-        row["pending_extension_slots"][0]["public_owner"] = "java.util.regex.UnreviewedTokens"
-        self.refused("pending token slot fabricates an API or qualification")
+    def token_extension(self) -> dict:
+        return next(row for row in self.fragment["families"] if row["id"] == "regex")["token_sequence_extension"]
+
+    def test_token_extension_cannot_fabricate_public_owner(self) -> None:
+        self.token_extension()["public_owners"][0] = "java.util.regex.UnreviewedTokens"
+        self.refused("token sequence public owner drift")
+
+    def test_token_inventory_cannot_claim_runtime_qualification(self) -> None:
+        self.token_extension()["runtime_qualified"] = True
+        self.refused("token sequence inventory cannot claim runtime or performance qualification")
+
+    def test_named_character_groups_are_not_token_matching(self) -> None:
+        self.token_extension()["named_character_groups_are_token_aware"] = True
+        self.refused("character regex must remain distinct from token sequence matching")
+
+    def test_serialized_characters_cannot_be_labeled_token_units(self) -> None:
+        self.token_extension()["unit"] = "STRING_DELIMITER_ENCODING"
+        self.refused("token sequence unit or span contract drift")
+
+    def test_token_candidate_needs_a_source_seal(self) -> None:
+        regex = next(row for row in self.fragment["families"] if row["id"] == "regex")
+        regex["new_candidates"][0]["candidate_source_sha256"] = ""
+        self.refused("token candidate lacks exact source and declaration seals")
+
+    def test_observed_candidate_hash_drift_is_not_admitted(self) -> None:
+        path = "src/java.base/share/classes/example/Utility.java"
+        source = self.overlay / path
+        source.parent.mkdir(parents=True, exist_ok=True)
+        source.write_text("package example;\npublic final class Utility { public static int value() { return 1; } }\n")
+        candidate = {"target_path": path, "public_api": "example.Utility", "proposed_methods": [],
+                     "candidate_source_sha256": "0" * 64, "declaration_tokens": ["public final class Utility"]}
+        report = coverage.candidate_source(REPOSITORY, self.overlay, candidate)
+        self.assertTrue(report["public_declaration"])
+        self.assertFalse(report["source_hash_matches"])
+        self.assertFalse(report["source_observed"])
+
+    def test_missing_nested_public_declaration_is_not_admitted(self) -> None:
+        path = "src/java.base/share/classes/example/Utility.java"
+        source = self.overlay / path
+        source.parent.mkdir(parents=True, exist_ok=True)
+        source.write_text("package example;\npublic final class Utility {}\n")
+        candidate = {"target_path": path, "public_api": "example.Utility", "proposed_methods": [],
+                     "declaration_tokens": ["public enum Quantifier"]}
+        report = coverage.candidate_source(REPOSITORY, self.overlay, candidate)
+        self.assertTrue(report["public_declaration"])
+        self.assertFalse(report["source_observed"])
 
     def test_extra_aspect_cannot_reference_invented_utility(self) -> None:
         self.module_index["additional_aspect_ownership"][0]["owner_source_refs"].append("java.awt.DesktopUtils")
