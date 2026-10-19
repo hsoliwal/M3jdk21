@@ -22,13 +22,23 @@ case, canonical equivalence, unknown words and token identity remain with the
 source Synexia owner. Repeated source rows remain separate stable record IDs
 while the downstream M3LEX image may deduplicate identical UTF-16 values.
 
-To be discovered/evaluated in the wider programme: language dictionaries,
-frequency tables, translations, thesauri, antonyms, WordNet resources,
-Wiktionary/WikiPron, Universal Dependencies, n-grams, POS and inflection rules,
-transliteration, phonemes, names and domain vocabularies. Parquet, Arrow,
-JSONL, streaming CSV quotations, proprietary/gated corpora, grammar models and
-arbitrary Hub file types **are not yet import adapters**. A Hub dataset card
-and license tag are discovery metadata, not a source-specific rights grant.
+The companion `language-resource-discovery.tsv` is a searchable,
+release-aware catalogue of 53 **reference-only** candidates. In addition to
+dictionaries, grammar, translation, frequency, names, units and speech sources,
+it covers metadata discovery (CLARIN VLO, OLAC, ELRA), cross-linguistic concept
+IDs and norms (Concepticon, NoRaRe), basic wordlists (ASJP), colexification and
+loanword signals (CLICS⁴, WOLD), signed-language features (ASL-LEX), dictionary
+digitization evaluation (MUDIDI), pronunciation dictionaries (OpenSLR), and
+endangered-language archives and speech leads (DOBES, ELAR, ELARSpeech).
+
+Every catalogue entry remains `REFERENCE_ONLY`: no corpus payload has been
+downloaded or admitted, and no catalogued license is treated as a blanket
+redistribution grant. Metadata aggregators point to source records; access,
+consent, source IDs, licenses, attribution, release hashes and any community
+conditions must still be checked at the individual resource or deposit level.
+The catalogue is discovery, not an import adapter: Parquet, Arrow, JSONL,
+streaming CSV quotations, proprietary/gated corpora, grammar models and
+arbitrary Hub file types are not yet supported by the tested importer.
 
 `approval.tsv` must contain exactly this header and one line of metadata:
 
