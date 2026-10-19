@@ -10,13 +10,14 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import java.util.TreeMap;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadFactory;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Function;
 import java.util.stream.Stream;
 
@@ -27,7 +28,8 @@ import java.util.stream.Stream;
  * lane using its hash. A lane has one worker, so equal keys are processed in source
  * order (assuming the Java equals/hashCode contract). Work admission is globally
  * bounded by maxInFlight, even when a partition is slow. Results are merged by
- * source ordinal, not by worker completion order. No unbounded task queue, hidden
+ * source ordinal through a bounded primitive-mask ring, not by worker completion order.
+ * The admission window also bounds retained out-of-order results. No unbounded task queue, hidden
  * common pool, retries, or implicit parallel reduction is used.</p>
  *
  * <p>Mapper code for different lanes may run concurrently. Shared state and external
@@ -73,26 +75,30 @@ public final class M3KeyedParallelismPlan<T, K> {
             queues.add(new ArrayBlockingQueue<>(perLaneCapacity));
         }
         BlockingQueue<Completion<R>> completed = new ArrayBlockingQueue<>(maxInFlight);
+        AtomicReference<Throwable> laneFailure = new AtomicReference<>();
         for (int lane = 0; lane < partitionCount; lane++) {
             final BlockingQueue<Work<T>> queue = queues.get(lane);
-            workers.execute(() -> runLane(queue, completed, mapper));
+            workers.execute(() -> runLane(queue, completed, mapper, laneFailure));
         }
 
-        OrderedResults<R> results = new OrderedResults<>();
+        OrderedResults<R> results = new OrderedResults<>(maxInFlight);
         int inFlight = 0;
         long submitted = 0;
         try (Stream<T> input = source.stream()) {
             var iterator = input.iterator();
             while (iterator.hasNext()) {
                 if (submitted >= maxElements) throw new IllegalStateException("parallel result budget exceeded");
-                while (inFlight >= maxInFlight) {
+                // Bound ordinal distance as well as active work. Otherwise a slow first
+                // ordinal lets later completions accumulate without limit in the merger.
+                while (inFlight >= maxInFlight
+                        || submitted - results.nextOrdinal >= maxInFlight) {
                     results.accept(take(completed));
                     inFlight--;
                 }
                 T item = iterator.next();
                 K key = keyExtractor.apply(item);
                 int lane = laneFor(key, partitionCount);
-                put(queues.get(lane), new Work<>(submitted, item, false));
+                put(queues.get(lane), new Work<>(submitted, item, false), laneFailure);
                 submitted++;
                 inFlight++;
             }
@@ -100,7 +106,9 @@ public final class M3KeyedParallelismPlan<T, K> {
                 results.accept(take(completed));
                 inFlight--;
             }
-            for (BlockingQueue<Work<T>> queue : queues) put(queue, new Work<>(-1, null, true));
+            for (BlockingQueue<Work<T>> queue : queues) {
+                put(queue, new Work<>(-1, null, true), laneFailure);
+            }
             workers.shutdown();
             awaitWorkers(workers);
             return Collections.unmodifiableList(results.ordered);
@@ -127,7 +135,8 @@ public final class M3KeyedParallelismPlan<T, K> {
 
     private static <T, R> void runLane(BlockingQueue<Work<T>> queue,
                                        BlockingQueue<Completion<R>> completed,
-                                       Function<? super T, ? extends R> mapper) {
+                                       Function<? super T, ? extends R> mapper,
+                                       AtomicReference<Throwable> laneFailure) {
         try {
             for (;;) {
                 Work<T> work = queue.take();
@@ -136,6 +145,7 @@ public final class M3KeyedParallelismPlan<T, K> {
                     R value = mapper.apply(work.value());
                     completed.put(new Completion<>(work.ordinal(), value, null));
                 } catch (RuntimeException | Error failure) {
+                    laneFailure.compareAndSet(null, failure);
                     completed.put(new Completion<>(work.ordinal(), null, failure));
                     // The coordinator may be blocked admitting more work to this bounded lane.
                     // Keep freeing its slots until the posted failure reaches the coordinator.
@@ -154,8 +164,25 @@ public final class M3KeyedParallelismPlan<T, K> {
         return queue.take();
     }
 
-    private static <E> void put(BlockingQueue<E> queue, E value) throws InterruptedException {
-        queue.put(value);
+    /**
+     * Fast path is a nonblocking queue admission. When a lane is full, bounded timed
+     * retries observe failed workers so a dead lane cannot strand the coordinator.
+     */
+    private static <E> void put(BlockingQueue<E> queue, E value,
+                                AtomicReference<Throwable> laneFailure)
+            throws InterruptedException {
+        if (queue.offer(value)) return;
+        do {
+            checkFailure(laneFailure.get());
+        } while (!queue.offer(value, 25, TimeUnit.MILLISECONDS));
+        checkFailure(laneFailure.get());
+    }
+
+    private static void checkFailure(Throwable failure) {
+        if (failure instanceof RuntimeException runtime) throw runtime;
+        if (failure instanceof Error error) throw error;
+        if (failure != null) throw new IllegalStateException(
+                "keyed M3 stream worker failed", failure);
     }
 
     private static void awaitWorkers(ExecutorService workers) throws InterruptedException {
@@ -171,21 +198,54 @@ public final class M3KeyedParallelismPlan<T, K> {
     private record Work<T>(long ordinal, T value, boolean end) { }
     private record Completion<R>(long ordinal, R value, Throwable failure) { }
 
+    /**
+     * One bounded Object[] value lane and one primitive 64-bit occupancy mask.
+     * Ordinals are masked into power-of-two slots; no TreeMap entries, sorting,
+     * retained per-result nodes or modulo division are required.
+     */
     private static final class OrderedResults<R> {
-        private final TreeMap<Long, R> outOfOrder = new TreeMap<>();
+        private final Object[] pending;
+        private final long[] occupied;
+        private final int indexMask;
         private final ArrayList<R> ordered = new ArrayList<>();
         private long nextOrdinal;
 
-        private void accept(Completion<R> result) {
-            if (result.failure() != null) rethrow(result.failure());
-            outOfOrder.put(result.ordinal(), result.value());
-            while (outOfOrder.containsKey(nextOrdinal)) ordered.add(outOfOrder.remove(nextOrdinal++));
+        private OrderedResults(int maxInFlight) {
+            int capacity = 1;
+            while (capacity < maxInFlight) capacity <<= 1;
+            this.pending = new Object[capacity];
+            this.occupied = new long[(capacity + Long.SIZE - 1) / Long.SIZE];
+            this.indexMask = capacity - 1;
         }
 
-        private static void rethrow(Throwable failure) {
-            if (failure instanceof RuntimeException runtime) throw runtime;
-            if (failure instanceof Error error) throw error;
-            throw new IllegalStateException("keyed M3 stream worker failed", failure);
+        @SuppressWarnings("unchecked")
+        private void accept(Completion<R> result) {
+            checkFailure(result.failure());
+            long ordinal = result.ordinal();
+            long distance = ordinal - nextOrdinal;
+            if (distance < 0 || distance >= pending.length) {
+                throw new IllegalStateException("completion outside bounded ordinal window");
+            }
+            int slot = (int) ordinal & indexMask;
+            int word = slot >>> 6;
+            long bit = 1L << slot;
+            if ((occupied[word] & bit) != 0L) {
+                throw new IllegalStateException("duplicate keyed stream completion");
+            }
+            pending[slot] = result.value();
+            occupied[word] |= bit;
+
+            for (;;) {
+                int first = (int) nextOrdinal & indexMask;
+                int firstWord = first >>> 6;
+                long firstBit = 1L << first;
+                if ((occupied[firstWord] & firstBit) == 0L) return;
+                R value = (R) pending[first];
+                pending[first] = null;
+                occupied[firstWord] &= ~firstBit;
+                ordered.add(value);
+                nextOrdinal++;
+            }
         }
     }
 }
