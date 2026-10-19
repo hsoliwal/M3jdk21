@@ -36,6 +36,23 @@ formatting or callback invocation; object references stay GC-traced
 in the original Java arrays. Optional JNI mask compaction belongs
 to the previously established M3 collections native owner.
 
+## Subclass polymorphism contract
+
+Both `EnumMap` and `IdentityHashMap` are subclassable. A subclass
+can override `entrySet()` and thereby change the behavior of the
+Map default bulk methods and the inherited AbstractMap formatter.
+The optimized direct-array fast paths therefore apply when the
+concrete runtime class is the incumbent JDK class itself. Subclasses
+retain the original virtual-entrySet semantics for `forEach`,
+`replaceAll`, `toString`, and the identity map's generic
+`equals(Map)` fallback. This qualification avoids trading
+compatibility for an allocation claim.
+
+Additional jtreg regression cases use an EnumMap or IdentityHashMap
+subclass with a deliberately custom entrySet to verify that its
+observable behavior is not silently bypassed. This still avoids
+any persisted per-key/node storage in the JDK owners.
+
 ## Verification surfaces
 
 - New OpenJDK jtreg-style tests `DirectOrdinalTraversal` and
@@ -66,3 +83,13 @@ conversions. Do not describe those as complete.
 Source rights: `EnumMap.java` and `IdentityHashMap.java` retain
 their GPLv2 with Classpath Exception terms; jtreg tests use
 GPL-2.0-only. Metadata in this document is Apache-2.0.
+
+## Local algorithmic parity (not a java.base build)
+
+A separate Java 21 reflection-backed probe compared the proposed
+ordinal-array and alternating-slot algorithms with the unmodified
+Java 21 Map defaults over 2,000 seeded cases: **10,000 checks passed**.
+This exercise validates algorithmic equivalence on the host JDK; it
+does **not** compile the actual changed java.base sources and must not
+be reported as an installed-image or jtreg pass. The focused
+patch-module workflow remains the acceptance authority.
