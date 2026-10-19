@@ -1,0 +1,30 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3 LeetCoder receiver inventory
+
+on:
+  pull_request:
+    paths:
+      - 'm3/pom.xml'
+      - 'm3/tooling/recipe-catalogue.tsv'
+      - 'm3/backports/ALGORITHM_CATALOGUE.tsv'
+      - 'm3/docs/leetcoder-shape-receiver-20261019.md'
+      - 'm3/tooling/a3/verify_leetcoder_receiver.py'
+      - '.github/workflows/m3-leetcoder-receiver.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  candidate-inventory:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check whitespace and conflict markers
+        if: github.event_name == 'pull_request'
+        run: git diff --check "${{ github.event.pull_request.base.sha }}...HEAD"
+      - name: Validate target receiving boundaries (not source qualification)
+        run: python3 m3/tooling/a3/verify_leetcoder_receiver.py
+      - name: Parse receiver script
+        run: python3 -m py_compile m3/tooling/a3/verify_leetcoder_receiver.py
