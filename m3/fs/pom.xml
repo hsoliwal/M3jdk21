@@ -15,11 +15,17 @@
     <m3.fs.native.fuse>OFF</m3.fs.native.fuse><m3.fs.native.prefix></m3.fs.native.prefix>
   </properties>
   <dependencies>
+    <dependency><groupId>com.google.re2j</groupId><artifactId>re2j</artifactId><version>1.8</version><scope>test</scope></dependency>
     <dependency><groupId>org.junit.jupiter</groupId><artifactId>junit-jupiter</artifactId><version>5.10.2</version><scope>test</scope></dependency>
     <dependency><groupId>org.xerial</groupId><artifactId>sqlite-jdbc</artifactId><version>3.45.1.0</version><scope>test</scope></dependency>
     <dependency><groupId>org.slf4j</groupId><artifactId>slf4j-simple</artifactId><version>1.7.36</version><scope>test</scope></dependency>
   </dependencies>
-  <build><plugins>
+  <build>
+    <resources>
+      <resource><directory>src/main/resources</directory><filtering>false</filtering></resource>
+      <resource><directory>legal</directory><targetPath>META-INF/m3fs-legal</targetPath><filtering>false</filtering></resource>
+    </resources>
+    <plugins>
     <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-compiler-plugin</artifactId><version>3.13.0</version>
       <configuration><compilerArgs><arg>-Xlint:all</arg><arg>-Werror</arg></compilerArgs></configuration>
     </plugin>
