@@ -70,7 +70,9 @@ promotion.
   inheritance matrices.
 - End-to-end Gradle Groovy/Kotlin daemon worker and incremental/build-cache
   orchestration, beyond the real Tooling project smoke.
-- Jackson direct primitive-pool indexing and combined 100 MB JSON search
-  throughput. Previous exact 100 MB and 100 MiB Jackson parse/round-trip CI
-  did pass, but this new integration has not established the 100 MB index path.
+- Jackson full M3AST pool-based zero-wrapper indexing and low-allocation
+  string/source-span authority. A separate adapter now consumes the **real**
+  Jackson JsonParser into primitive M3ASTIndex occurrences; an exact 100 MB and
+  100 MiB index benchmark is wired into CI, but remains unverified until run.
+  Earlier Jackson AST 100 MB/100 MiB round-trip CI passed independently.
 - Full rebuilt M3JDK21/HotSpot/jtreg/JCK and cross-platform JNI.
