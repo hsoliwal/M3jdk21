@@ -1,0 +1,26 @@
+{
+  "schema": 1,
+  "source": "hsoliwal/com.synexia synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3IndexedSnapshotReversedCoordinatesRecipe.java",
+  "recipe_branch": "m3/recipe-indexed-snapshot-reversed-coordinates-20261019",
+  "recipe_commit": "2da9dfeb9975d1537d6afe33e13971555945460a",
+  "recipe": "com.synexia.rewrite.M3IndexedSnapshotReversedCoordinatesRecipe",
+  "target": "m3/collections/src/main/java/com/m3/collections/M3IndexedListSnapshot.java",
+  "target_preimage_git_blob": "06e8f656cad998472d759d9a385592329121cf6d",
+  "target_postimage_git_blob": "aa49494b9216757d9547322635328b839c9eb8c3",
+  "source_role": "canonical reusable build-time transformation recipe; no runtime dependency",
+  "target_owner": "M3JDK21 com.m3.collections indexed Object[]/int[] snapshot, no new owner or native symbol",
+  "target_rule": "List.reversed returns same concrete immutable indexed snapshot type with O(1) orientation toggle; inverse logical path applied to all physical-index and Java/C17 JNI negative-stride mask operations",
+  "api": "covariant M3IndexedListSnapshot<E> reversed(), bridge preserves erased Java 21 List method contract",
+  "order": "String -> arrays -> collections; module is a proving ground and not java.base promotion",
+  "status": "STACKED_REVIEW_PENDING_SOURCE_BUILT_SDK_AND_REAL_JNI_PARITY",
+  "gates": [
+    "canonical recipe fixed-point+refusal",
+    "Java21 Maven JUnit",
+    "signed-stride real C17 JNI parity",
+    "JDK installed-image/jtreg",
+    "CPU/heap/native accounting"
+  ],
+  "donors": "JDK21 SequencedCollection semantics; LeetCode/HackerRank/GeeksforGeeks problem categories only",
+  "license": "Apache-2.0 first-party module and recipe; OpenJDK/third-party source rights unchanged",
+  "copyright": "Copyright 2026 Hitesh Soliwal and contributors"
+}
