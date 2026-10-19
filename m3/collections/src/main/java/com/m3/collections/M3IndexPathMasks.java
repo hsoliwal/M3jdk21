@@ -1,6 +1,7 @@
 /*
  * Copyright 2026 Hitesh Soliwal and contributors
  * SPDX-License-Identifier: Apache-2.0
+ * Modified 2026: refuse output aliasing mask vectors before selection or JNI dispatch.
  */
 package com.m3.collections;
 
@@ -96,7 +97,9 @@ public final class M3IndexPathMasks {
      * callbacks or mutable/live collection membership.
      *
      * <p>All path geometry, stage alignment, output bounds and aliases are checked before
-     * writes. Only offsets encountered in this window are checked: later offsets are
+     * writes. Output cannot alias any input integer array, including required or forbidden
+     * mask vectors, even when the window is empty or its limit is zero.
+     * Only offsets encountered in this window are checked: later offsets are
      * validated when their respective window is visited. A zero limit performs no scans
      * or writes and leaves {@code next} unchanged. The returned high 32 bits contain the
      * next ordinal in {@code [0,count]}, low 32 contain written count. All arrays must
@@ -122,7 +125,8 @@ public final class M3IndexPathMasks {
             throw new IllegalArgumentException("output limit exceeds bounded window");
         }
         Objects.checkFromIndexSize(outputOffset, limit, output.length);
-        if (output == orderedRows || output == physicalOffsets) {
+        if (output == orderedRows || output == physicalOffsets
+                || output == requiredMasks || output == forbiddenMasks) {
             throw new IllegalArgumentException("source/output metadata alias");
         }
         for (int[] plane : statePlanes) {
