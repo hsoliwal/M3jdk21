@@ -678,7 +678,23 @@ public class IdentityHashMap<K,V>
             }
             return true;
         } else if (o instanceof Map<?, ?> m) {
-            return entrySet().equals(m.entrySet());
+            // AbstractSet.equals(entrySet) checks cardinality and then
+            // tests every *foreign* entry through this map's containsMapping.
+            // Perform exactly those identity checks without constructing
+            // our EntrySet, EntryIterator or one Entry per owned slot.
+            Set<?> foreignEntries = m.entrySet();
+            if (foreignEntries == null || foreignEntries.size() != size)
+                return false;
+            try {
+                for (Object candidate : foreignEntries) {
+                    if (!(candidate instanceof Map.Entry<?, ?> e)
+                            || !containsMapping(e.getKey(), e.getValue()))
+                        return false;
+                }
+            } catch (ClassCastException | NullPointerException ignored) {
+                return false;
+            }
+            return true;
         } else {
             return false;  // o is not a Map
         }
