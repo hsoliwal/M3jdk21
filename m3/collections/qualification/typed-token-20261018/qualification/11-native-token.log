@@ -1,0 +1,4 @@
+[0.133s][warning][jni,resolve] Re-registering of platform native method: jdk.internal.mindex.M3RegexDpPlan.compose0([J[J)[J from code in a different classloader
+[0.133s][warning][jni,resolve] Re-registering of platform native method: jdk.internal.mindex.M3RegexDpPlan.composeStructured0([J[J)[J from code in a different classloader
+[0.133s][warning][jni,resolve] Re-registering of platform native method: jdk.internal.mindex.M3RegexDpPlan.repeat0([JJZ)[J from code in a different classloader
+M3TokenRegexPlanContract PASS checks=176710 native=true

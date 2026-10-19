@@ -3,6 +3,19 @@
   "policy": "additive; no blind renames or unverified compatibility claims; Synexia donor names do not define M3JDK target ABI; precompute is internal-only",
   "mappings": [
     {
+      "source": "com.synexia.indexstring.MIndexTokenPattern / IndexRegex / ast.MIndexASTQuery; existing M3RegexDpPlan predicate-state atoms",
+      "source_commit": "140c263a90f9803b9c46103c63355a286e0515f0",
+      "target": "jdk.internal.mindex.M3TokenRegexPlan",
+      "target_module": "java.base",
+      "status": "ADDITIVE_INTERNAL_TYPED_TOKEN_CANDIDATE",
+      "recipe": "com.synexia.m3jdk.CollectionsContractRefinement20261017; typed-token-20261018",
+      "target_rule": "Domain-bound immutable primitive token columns; kind/symbol/required/forbidden flag predicates; sequence and per-predicate zero-or-more; earliest-start shortest-end find; existing M3RegexDpPlan Java/JNI effect algebra",
+      "restrictions": "At most 63 predicates; no captures, arbitrary alternation, lookaround or backreferences; lexical name IDs do not authorize semantic renaming",
+      "compatibility": "Existing M3RegexDpPlan public/protected descriptors and native ABI unchanged; package-only typed-mask entries added; exported JDK APIs unchanged",
+      "license": "New first-party facade Apache-2.0 with Synexia attribution; existing GPLv2 Classpath plan/native headers preserved",
+      "gates": "Exact recipe/source seals; compiler/DP/lexical/JNI/interpreter/API proofs; source-built full JDK/platform acceptance pending"
+    },
+    {
       "source": "com.synexia.indexstring.projection.MIndexDerivativeRegex / MIndexPredicateAlphabet / native derivative power ABI",
       "source_commit": "892e3f6c51d78bc0948e8a8cf736055b4c70eafa",
       "source_blob": "292675e404c5a087e0039e20bf2b63f22bb97bfe",
