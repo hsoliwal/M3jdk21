@@ -148,6 +148,11 @@ public final class M3ASTIndex {
                     && (start < starts[parent] || end > ends[parent])) {
                 throw new IllegalArgumentException("completed range escapes parent");
             }
+            for (int child = first[node]; child >= 0; child = next[child]) {
+                if (starts[child] >= 0 && (starts[child] < start || ends[child] > end)) {
+                    throw new IllegalArgumentException("completed AST range excludes an indexed child");
+                }
+            }
             starts[node] = start;
             ends[node] = end;
             if (exact) flags[node] |= EXACT_RANGE;
