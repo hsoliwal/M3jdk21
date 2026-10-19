@@ -37,3 +37,19 @@ M3PackedFilterTest, all owning module tests, JNI UBSan/ASan, ABI comparison,
 Maven/OpenRewrite fixed point and broader modified JDK/HotSpot validation
 before promotion. Never discard other fleet PR atoms; #1389's
 M3FilteredViews / M3IndexPathMasks changes require separate per-atom analysis.
+
+## Executed receiving iteration (M3JDK21 run 39182463854)
+
+Original owner hash seal PASS. Strict Java21 compiler and independent map/mask
+differential: `M3_FLEET_ARRAY_MASK_UNION_PASS backend=java checks=185549`.
+Existing C17 JNI compiled with -Wconversion/-Wshadow/-Werror and
+`-Xcheck:jni` passed the **same 185549 checks**.
+
+The inherited JUnit Maven stage was NOT RUN: the parent owning-module POM
+depends on `org.junit.jupiter:junit-jupiter:5.10.2-m3-source-1` (not
+published to Maven Central). Do **not** reinterpret dependency-resolution
+failure as a behavioral test failure or use a fabricated JUnit artifact.
+Source-sealed workflow successor invokes the actual existing
+`M3PackedFilterProof` with direct javac and existing checked-JNI library
+so original-owner sorted/filtered regression can execute independently.
+The full custom Maven dependency issue remains a separate build gate.
