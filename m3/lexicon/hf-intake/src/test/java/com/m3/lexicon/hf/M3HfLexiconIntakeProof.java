@@ -66,7 +66,7 @@ public final class M3HfLexiconIntakeProof {
     private static int verifyLanguageResourceDiscovery() throws IOException {
         List<String> lines = resourceLines(
                 "/com/m3/lexicon/hf/language-resource-discovery.tsv");
-        require(lines.size() == 135, "134 language-resource candidates plus header");
+        require(lines.size() == 136, "135 language-resource candidates plus header");
         List<String> expectedHeader = List.of("source_id", "resource", "category",
                 "data_shape_and_identity", "rights_and_attribution", "m3_candidate_use",
                 "admission_blockers", "state", "evidence");
@@ -223,8 +223,9 @@ public final class M3HfLexiconIntakeProof {
                 "hf-galahad-dutch-frequency",
                 "hf-sango-vocabulary-grammar",
                 "hf-haajidheere-somali-dictionary",
-                "hf-nltk-word-lists"
-        )), "exact 134 language-resource source IDs match the pinned catalogue");
+                "hf-nltk-word-lists",
+                "hf-nltk-swadesh-24"
+        )), "exact 135 language-resource source IDs match the pinned catalogue");
         String signCompendium = discoveryRecord(lines, "sign-language-dataset-compendium-v1-5");
         require(signCompendium.contains("87") && signCompendium.contains("v1.5.0")
                 && signCompendium.contains("no blanket redistribution grant"),
@@ -300,6 +301,11 @@ public final class M3HfLexiconIntakeProof {
                 && nltkLists.contains("configuration-specific")
                 && nltkLists.contains("CC BY-SA 4.0"),
                 "NLTK word-list configurations retain their separate frequency and license semantics");
+        String swadesh = discoveryRecord(lines, "hf-nltk-swadesh-24");
+        require(swadesh.contains("24 languages") && swadesh.contains("207 Swadesh concept indices")
+                && swadesh.contains("Church Slavonic has 174 rows")
+                && swadesh.contains("CC BY-SA 3.0"),
+                "Swadesh concept/language coverage and share-alike provenance stay explicit");
         String cldr = discoveryRecord(lines, "unicode-cldr-48-2");
         require(cldr.contains("48.2") && cldr.contains("common/transforms")
                 && cldr.contains("not reversible"),
