@@ -241,6 +241,11 @@ public class M3ViewsTest {
 		assertNull (cache.get (1));
 		assertThrows (NullPointerException.class, () -> cache.put (1, null));
 		assertThrows (IllegalArgumentException.class, () -> new M3BoundedCache<Integer, String> (0));
+		assertThrows (IllegalArgumentException.class, () -> new M3BoundedCache<Integer, String> ((1 << 29) + 1));
+		M3BoundedCache<Integer, String> wide = new M3BoundedCache<> (100);
+		for (int i = 0; i < 70; i++) wide.put (i, "w" + i);
+		assertEquals (70, wide.size (), "free slots beyond the first bit word");
+		assertEquals ("w69", wide.get (69));
 		M3BoundedCache<Integer, String> plain = new M3BoundedCache<> (1);
 		plain.put (1, "a");
 		plain.put (2, "b");
