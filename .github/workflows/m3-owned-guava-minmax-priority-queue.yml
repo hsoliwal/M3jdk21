@@ -1,0 +1,41 @@
+name: Complete owned Guava MinMaxPriorityQueue
+on:
+  pull_request:
+    paths: ['m3/collections/**', '.github/workflows/m3-owned-guava-minmax-priority-queue.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  full-java-and-module:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            m3/collections
+            .github/workflows
+      - uses: actions/setup-java@v4
+        with: {distribution: temurin, java-version: '21'}
+      - run: python3 -I -S -B m3/collections/qualification/owned-guava-minmax-priority-queue-20261018/run.py --root . --out "$RUNNER_TEMP/minmax-java" --job java
+  snapshot-jni-projection:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            m3/collections
+            .github/workflows
+      - uses: actions/setup-java@v4
+        with: {distribution: temurin, java-version: '21'}
+      - run: python3 -I -S -B m3/collections/qualification/owned-guava-minmax-priority-queue-20261018/run.py --root . --out "$RUNNER_TEMP/minmax-jni" --job jni
+  original-receiving-contract:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            m3/collections
+            .github/workflows
+      - uses: actions/setup-java@v4
+        with: {distribution: temurin, java-version: '21'}
+      - run: python3 -I -S -B m3/collections/qualification/owned-guava-minmax-priority-queue-20261018/run.py --root . --out "$RUNNER_TEMP/minmax-receiving" --job receiving
