@@ -221,22 +221,30 @@ jint java_lang_M3String::java_hash(oop value) {
   return hash;
 }
 
-// Mirrors java.lang.M3StringImmediate: bits 63..61 tag (1 = LATIN1, 2 = IDENT).
-// LATIN1: unit i at bits 8i..8i+7. IDENT: bijective base-64 over bits 60..0,
+// Mirrors java.lang.M3StringImmediate: the field widths below are the same named constants.
+// LATIN1: unit i at bits 8i..8i+7. IDENT: bijective base-64 over the payload bits,
 // least significant digit first, digit = 1 + index in "0-9 A-Z a-z _ $".
 jchar java_lang_M3String::immediate_char_at(jlong packed, int index) {
-  const julong bits = (julong)packed;
-  if ((bits >> 61) == 1) {
-    return (jchar)((bits >> (index << 3)) & 0xff);
-  }
-  assert((bits >> 61) == 2, "M3 immediate profile");
+  const int tag_bits = 3;
+  const int tag_shift = BitsPerLong - tag_bits;
+  const julong tag_latin1 = 1;
+  const julong tag_ident = 2;
+  const julong latin1_unit_mask = 0xff;
+  const int digit_bits = 6;
+  const julong digit_mask = (CONST64(1) << digit_bits) - 1;
+  const julong payload_mask = (CONST64(1) << tag_shift) - 1;
   static const char ident[] =
       "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz_$";
-  julong digits = bits & ((CONST64(1) << 61) - 1);
-  for (int skip = 0; skip < index; skip++) {
-    digits = (digits - 1) >> 6;
+  const julong bits = (julong)packed;
+  if ((bits >> tag_shift) == tag_latin1) {
+    return (jchar)((bits >> (index * BitsPerByte)) & latin1_unit_mask);
   }
-  return (jchar)(unsigned char)ident[(digits - 1) & 63];
+  assert((bits >> tag_shift) == tag_ident, "M3 immediate profile");
+  julong digits = bits & payload_mask;
+  for (int skip = 0; skip < index; skip++) {
+    digits = (digits - 1) >> digit_bits;
+  }
+  return (jchar)(unsigned char)ident[(digits - 1) & digit_mask];
 }
 
 jchar java_lang_M3String::char_at(oop value, int index) {

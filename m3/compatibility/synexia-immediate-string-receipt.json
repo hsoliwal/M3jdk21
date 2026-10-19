@@ -20,7 +20,8 @@
       "m3-immediate-string.latin1x7-ident64x10 (first party gap)"
     ],
     "license": "first-party (JDK GPLv2+CPE owners and HotSpot files); pattern donors MIT / MIT OR Apache-2.0, no donor text copied",
-    "disposition": "ADAPT: third canonical owner kind; java.lang contracts preserved (content, hashCode, equality, JNI chars)"
+    "disposition": "ADAPT: third canonical owner kind; java.lang contracts preserved (content, hashCode, equality, JNI chars)",
+    "note": "E14 follow-up: M3StringImmediate and the HotSpot decoder carry no magic numbers (named constants), pattern/role anchors added; gates re-run: G7 PASS, test 13282588 checks, decoder differential 0/650274, RecipeTest 3/3"
   },
   "target": {
     "repository": "hsoliwal/M3jdk21",
@@ -56,7 +57,7 @@
     {
       "path": "src/java.base/share/classes/java/lang/M3StringImmediate.java",
       "before": null,
-      "after": "8694c98ec8130d0cdb84dee496c22ff50b63d0380f87f8e01293422c8b4b90ff"
+      "after": "327ac7a55b80631378a822c2133729bd027f1f26bc53224020c3e1fad01109e3"
     },
     {
       "path": "src/java.base/share/classes/java/lang/M3StringOwner.java",
@@ -91,7 +92,7 @@
     {
       "path": "src/hotspot/share/classfile/javaClasses.inline.hpp",
       "before": "bbe505ccc6b5ab1482f0e0235284d625f0cc75181a7b0d418f2fb3c722d30cdf",
-      "after": "a2df6f94570dd3443070b1f2632962b8fae356ade95e45e735c116c885bfa3bb"
+      "after": "670e6327a740eef2f384c32d51d08936389abbaa3e7efddcd8c9a804851e485f"
     },
     {
       "path": "src/hotspot/share/classfile/vmClassMacros.hpp",

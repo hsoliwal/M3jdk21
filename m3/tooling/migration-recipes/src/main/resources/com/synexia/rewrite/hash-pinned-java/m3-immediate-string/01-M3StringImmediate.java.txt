@@ -34,28 +34,52 @@ import java.util.Objects;
  * <p>HotSpot decodes the same layout in {@code java_lang_M3String::immediate_char_at}
  * (javaClasses.cpp); both sides change together.</p>
  */
+//FLLDCIM: IOP — pattern=M3StringOwnerKinds role=ImmediateOwner contract=M3StringOwner(charAt,getChars,computeFacts,computeRangeFacts)
 //FLLDCIM: HPCPOP — hot path; pack/unit/charAt allocate nothing
-//FLLDCIM: IOP — third canonical owner kind beside atom and tuple; M3String stays owner + coordinate
+//FLLDCIM: E14 — no magic numbers: every width, mask and multiplier below is a named constant
 final class M3StringImmediate extends M3StringOwner {
-    static final int TAG_SHIFT = 61;
-    static final long TAG_MASK = 7L << TAG_SHIFT;
+    static final int TAG_BITS = 3;
+    static final int TAG_SHIFT = Long.SIZE - TAG_BITS;
+    static final long TAG_MASK = ((1L << TAG_BITS) - 1L) << TAG_SHIFT;
     static final long TAG_LATIN1 = 1L << TAG_SHIFT;
     static final long TAG_IDENT = 2L << TAG_SHIFT;
     static final long PAYLOAD_MASK = (1L << TAG_SHIFT) - 1L;
-    static final int LATIN1_MAX = 7;
-    static final int LATIN1_LENGTH_SHIFT = 56;
-    static final int IDENT_MAX = 10;
     /** Never a packed value: every admitted value carries a non-zero tag. */
     static final long NONE = 0L;
+
+    static final int LATIN1_MAX = 7;
+    static final int LATIN1_LENGTH_SHIFT = LATIN1_MAX * Byte.SIZE;
+    static final int LATIN1_LENGTH_BITS = 3;
+    static final long LATIN1_LENGTH_MASK = (1L << LATIN1_LENGTH_BITS) - 1L;
+    static final int LATIN1_UNIT_MASK = 0xff;
+
+    static final int IDENT_MAX = 10;
+    static final int DIGIT_BITS = 6;
+    static final long DIGIT_MASK = (1L << DIGIT_BITS) - 1L;
+    /** Units below this bound are looked up in the identifier alphabet (ASCII). */
+    private static final int IDENT_CODE_LIMIT = 128;
+    private static final byte NO_CODE = -1;
+    private static final String IDENT_ALPHABET =
+            "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz_$";
+    private static final char[] IDENT_CHARS = IDENT_ALPHABET.toCharArray();
+    private static final byte[] IDENT_CODE = identCodes();
+
+    /** {@link String#hashCode()} polynomial multiplier. */
+    private static final int JAVA_HASH_MULTIPLIER = 31;
+    /** splitmix64 finalizer (structural hash only; never content identity). */
+    private static final long MIX_GAMMA = 0x9e3779b97f4a7c15L;
+    private static final long MIX_MULTIPLIER_1 = 0xbf58476d1ce4e5b9L;
+    private static final long MIX_MULTIPLIER_2 = 0x94d049bb133111ebL;
+    private static final int MIX_SHIFT_1 = 30;
+    private static final int MIX_SHIFT_2 = 27;
+    private static final int MIX_SHIFT_3 = 31;
 
     private static final int KIND_LATIN1_BYTES = 0;
     private static final int KIND_UTF16_BYTES = 1;
     private static final int KIND_CHARS = 2;
     private static final int KIND_CODE_POINTS = 3;
-
-    private static final char[] IDENT_CHARS =
-            "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz_$".toCharArray();
-    private static final byte[] IDENT_CODE = identCodes();
+    /** A code point that no profile admits (any supplementary point maps here). */
+    private static final int REFUSED_UNIT = Integer.MAX_VALUE;
 
     final long packed;
 
@@ -65,23 +89,25 @@ final class M3StringImmediate extends M3StringOwner {
     }
 
     /** The owner for an admitted packed value; {@code packed} must come from a pack method. */
+    //FLLDCIM: ATOM — of: packed -> owner (length + String.hashCode parity)
     static M3StringImmediate of(long packed) {
         int length = length(packed);
         int hash = 0;
-        if ((packed & TAG_MASK) == TAG_LATIN1) {
+        if (isLatin1(packed)) {
             for (int index = 0; index < length; index++) {
-                hash = 31 * hash + (int) ((packed >>> (index << 3)) & 0xff);
+                hash = JAVA_HASH_MULTIPLIER * hash + latin1Unit(packed, index);
             }
         } else {
             long digits = packed & PAYLOAD_MASK;
             for (int index = 0; index < length; index++) {
-                hash = 31 * hash + IDENT_CHARS[(int) ((digits - 1L) & 63L)];
-                digits = (digits - 1L) >>> 6;
+                hash = JAVA_HASH_MULTIPLIER * hash + digitChar(digits);
+                digits = nextDigits(digits);
             }
         }
         return new M3StringImmediate(packed, length, hash);
     }
 
+    //FLLDCIM: ATOM — pack: four source kinds, one canonical packed value or NONE
     static long packCompactBytes(byte[] source, int offset, int length, byte coder) {
         return pack(coder == String.LATIN1 ? KIND_LATIN1_BYTES : KIND_UTF16_BYTES,
                 source, offset, length);
@@ -97,34 +123,37 @@ final class M3StringImmediate extends M3StringOwner {
     }
 
     /** Unit count of an admitted packed value. */
+    //FLLDCIM: ATOM — length: LATIN1 field, IDENT digit count
     static int length(long packed) {
         long tag = packed & TAG_MASK;
         if (tag == TAG_LATIN1) {
-            return (int) ((packed >>> LATIN1_LENGTH_SHIFT) & 7L);
+            return (int) ((packed >>> LATIN1_LENGTH_SHIFT) & LATIN1_LENGTH_MASK);
         }
         if (tag != TAG_IDENT) {
             throw new IllegalArgumentException("not an M3 immediate String value");
         }
         int length = 0;
-        for (long digits = packed & PAYLOAD_MASK; digits != 0L; digits = (digits - 1L) >>> 6) {
+        for (long digits = packed & PAYLOAD_MASK; digits != 0L; digits = nextDigits(digits)) {
             length++;
         }
         return length;
     }
 
     /** Unit {@code index} of an admitted packed value; the bounds are the caller's. */
+    //FLLDCIM: ATOM — unit: O(1) LATIN1 shift, O(index) IDENT digit walk (index below IDENT_MAX)
     static char unit(long packed, int index) {
-        if ((packed & TAG_MASK) == TAG_LATIN1) {
-            return (char) ((packed >>> (index << 3)) & 0xff);
+        if (isLatin1(packed)) {
+            return latin1Unit(packed, index);
         }
         long digits = packed & PAYLOAD_MASK;
         for (int skip = 0; skip < index; skip++) {
-            digits = (digits - 1L) >>> 6;
+            digits = nextDigits(digits);
         }
-        return IDENT_CHARS[(int) ((digits - 1L) & 63L)];
+        return digitChar(digits);
     }
 
     /** Equal text of two whole immediate owners is equal packed values (canonical profile). */
+    //FLLDCIM: ATOM — sameText: identity of text = equality of packed words
     static boolean sameText(M3StringOwner left, M3StringOwner right) {
         return left instanceof M3StringImmediate a
                 && right instanceof M3StringImmediate b
@@ -141,19 +170,19 @@ final class M3StringImmediate extends M3StringOwner {
     void getChars(int start, int end, char[] destination, int destinationStart) {
         Objects.checkFromToIndex(start, end, length);
         Objects.checkFromIndexSize(destinationStart, end - start, destination.length);
-        if ((packed & TAG_MASK) == TAG_LATIN1) {
+        if (isLatin1(packed)) {
             for (int source = start, target = destinationStart; source < end; source++, target++) {
-                destination[target] = (char) ((packed >>> (source << 3)) & 0xff);
+                destination[target] = latin1Unit(packed, source);
             }
             return;
         }
         long digits = packed & PAYLOAD_MASK;
         for (int skip = 0; skip < start; skip++) {
-            digits = (digits - 1L) >>> 6;
+            digits = nextDigits(digits);
         }
         for (int target = destinationStart, source = start; source < end; source++, target++) {
-            destination[target] = IDENT_CHARS[(int) ((digits - 1L) & 63L)];
-            digits = (digits - 1L) >>> 6;
+            destination[target] = digitChar(digits);
+            digits = nextDigits(digits);
         }
     }
 
@@ -169,6 +198,24 @@ final class M3StringImmediate extends M3StringOwner {
         return M3StringFacts.scan(M3String.range(this, start, length));
     }
 
+    private static boolean isLatin1(long packed) {
+        return (packed & TAG_MASK) == TAG_LATIN1;
+    }
+
+    private static char latin1Unit(long packed, int index) {
+        return (char) ((packed >>> (index * Byte.SIZE)) & LATIN1_UNIT_MASK);
+    }
+
+    /** Lowest bijective base-64 digit as its alphabet character. */
+    private static char digitChar(long digits) {
+        return IDENT_CHARS[(int) ((digits - 1L) & DIGIT_MASK)];
+    }
+
+    /** Drops the lowest bijective base-64 digit. */
+    private static long nextDigits(long digits) {
+        return (digits - 1L) >>> DIGIT_BITS;
+    }
+
     /**
      * One forward scan decides both profiles. LATIN1 wins when eligible; IDENT is kept only for
      * lengths LATIN1 cannot hold, which makes the chosen packed value unique for the text.
@@ -180,13 +227,13 @@ final class M3StringImmediate extends M3StringOwner {
         long digits = 0L;
         for (int index = 0; index < length; index++) {
             int unit = unitOf(kind, source, offset + index);
-            if (unit > 0xff) return NONE;
+            if (unit > LATIN1_UNIT_MASK) return NONE;
             if (latin1) {
-                bytes |= (long) unit << (index << 3);
+                bytes |= (long) unit << (index * Byte.SIZE);
             } else {
-                int code = unit < IDENT_CODE.length ? IDENT_CODE[unit] : -1;
-                if (code < 0) return NONE;
-                digits += (long) (code + 1) << (6 * index);
+                int code = unit < IDENT_CODE_LIMIT ? IDENT_CODE[unit] : NO_CODE;
+                if (code == NO_CODE) return NONE;
+                digits += (long) (code + 1) << (DIGIT_BITS * index);
             }
         }
         if (latin1) {
@@ -197,19 +244,19 @@ final class M3StringImmediate extends M3StringOwner {
 
     private static int unitOf(int kind, Object source, int at) {
         return switch (kind) {
-            case KIND_LATIN1_BYTES -> ((byte[]) source)[at] & 0xff;
+            case KIND_LATIN1_BYTES -> ((byte[]) source)[at] & LATIN1_UNIT_MASK;
             case KIND_UTF16_BYTES -> StringUTF16.charAt((byte[]) source, at);
             case KIND_CHARS -> ((char[]) source)[at];
             default -> {
                 int codePoint = ((int[]) source)[at];
-                yield codePoint <= 0xffff ? codePoint : Integer.MAX_VALUE;
+                yield codePoint <= Character.MAX_VALUE ? codePoint : REFUSED_UNIT;
             }
         };
     }
 
     private static byte[] identCodes() {
-        byte[] codes = new byte[128];
-        Arrays.fill(codes, (byte) -1);
+        byte[] codes = new byte[IDENT_CODE_LIMIT];
+        Arrays.fill(codes, NO_CODE);
         for (int index = 0; index < IDENT_CHARS.length; index++) {
             codes[IDENT_CHARS[index]] = (byte) index;
         }
@@ -217,9 +264,9 @@ final class M3StringImmediate extends M3StringOwner {
     }
 
     private static long mix64(long value) {
-        long mixed = value ^ 0x9e3779b97f4a7c15L;
-        mixed = (mixed ^ (mixed >>> 30)) * 0xbf58476d1ce4e5b9L;
-        mixed = (mixed ^ (mixed >>> 27)) * 0x94d049bb133111ebL;
-        return mixed ^ (mixed >>> 31);
+        long mixed = value ^ MIX_GAMMA;
+        mixed = (mixed ^ (mixed >>> MIX_SHIFT_1)) * MIX_MULTIPLIER_1;
+        mixed = (mixed ^ (mixed >>> MIX_SHIFT_2)) * MIX_MULTIPLIER_2;
+        return mixed ^ (mixed >>> MIX_SHIFT_3);
     }
 }
