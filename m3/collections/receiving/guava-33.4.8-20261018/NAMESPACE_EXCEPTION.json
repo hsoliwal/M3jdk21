@@ -1,0 +1,35 @@
+{
+  "schema": "guava-namespace-identity-exception-v2",
+  "sourceNamespace": "com.google.common",
+  "targetNamespace": "com.m3.collections.guava",
+  "authorizedScope": "User requested package-first renaming across all collections libraries",
+  "identitiesChanged": [
+    "declared qualified names",
+    "reflection names",
+    "module/GWT/package/resource references",
+    "service-provider names",
+    "serialized descriptors",
+    "explicit qualified-name diagnostics"
+  ],
+  "preserved": [
+    "original method and storage algorithms under name mapping",
+    "original source headers and license/notice bytes",
+    "unrelated Maven GAV/reactor/artifact identities",
+    "external provenance URLs"
+  ],
+  "notClaimed": [
+    "original qualified assignability",
+    "original wire compatibility",
+    "Maven Central artifact publication",
+    "whole-library arrays or JNI completion"
+  ],
+  "ownedHelperMapping": {
+    "source": "com.google.thirdparty.publicsuffix",
+    "target": "com.m3.collections.guava.thirdparty.publicsuffix"
+  },
+  "externalProviderExclusions": [
+    "com.google.common.truth",
+    "com.google.common.jimfs"
+  ],
+  "buildQuarantineException": "Original coordinates retained as provenance;14 donor POMs now skip normal install/deploy until a target-owned build is qualified."
+}
