@@ -62,6 +62,7 @@ class ReactorContract(unittest.TestCase):
         version = subprocess.check_output(["mvn", "-B", "-ntp", "-Dstyle.color=never", "-version"], text=True, timeout=20)
         (ROOT / "toolchain.log").write_text(version, encoding="utf-8")
         print(version, flush=True)
+        cls.observed_maven_identity = version.splitlines()[0] if version.splitlines() else None
         if version.splitlines()[:1] != [ORACLE["qualifiedMavenIdentity"]]:
             raise RuntimeError("exact inventoried preinstalled Maven identity required, no download fallback")
         if not re.search(r"Java version: 21(?:\.|,)", version):
@@ -171,7 +172,8 @@ if __name__ == "__main__":
                "checkoutCommit": os.environ["EXPECTED_SOURCE_SHA"],
                "canonicalSourceCommit": json.loads((HERE / "source-binding.json").read_bytes())["sourceCommit"],
                "sourceBindingSha256": hashlib.sha256((HERE / "source-binding.json").read_bytes()).hexdigest(),
-               "mavenIdentity": ORACLE["qualifiedMavenIdentity"],
+               "mavenIdentity": getattr(ReactorContract, "observed_maven_identity", None),
+               "expectedMavenIdentity": ORACLE["qualifiedMavenIdentity"],
                "historicalMaven39Qualification": "NOT_RUN",
                "tests": result.testsRun, "failures": len(result.failures),
                "errors": len(result.errors), "skips": len(result.skipped),
