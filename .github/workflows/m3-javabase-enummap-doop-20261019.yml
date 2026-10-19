@@ -1,0 +1,48 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3JDK21 java.base EnumMap direct-array contracts
+on:
+  pull_request:
+    paths:
+      - src/java.base/share/classes/java/util/EnumMap.java
+      - test/jdk/java/util/EnumMap/DirectOrdinalTraversal.java
+      - .github/workflows/m3-javabase-enummap-doop-20261019.yml
+  push:
+    branches:
+      - m3/java-base-enummap-doop-20261019
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  java-base-enummap:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          sparse-checkout: |
+            src/java.base/share/classes/java/util
+            test/jdk/java/util/EnumMap
+          sparse-checkout-cone-mode: true
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Compile patched java.base source directly
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p target/m3-enummap-patch target/m3-enummap-tests
+          javac -Xlint:all,-serial,-module -Werror \
+            --patch-module java.base=src/java.base/share/classes \
+            -d target/m3-enummap-patch \
+            src/java.base/share/classes/java/util/EnumMap.java
+          javac -Xlint:all,-serial -Werror \
+            -d target/m3-enummap-tests \
+            test/jdk/java/util/EnumMap/DirectOrdinalTraversal.java
+      - name: Execute JDK21 test against the modified java.base class
+        shell: bash
+        run: |
+          set -euo pipefail
+          java -ea --patch-module java.base=target/m3-enummap-patch \
+            -cp target/m3-enummap-tests DirectOrdinalTraversal
