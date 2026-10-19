@@ -1,0 +1,30 @@
+{
+  "schema": 1,
+  "status": "PREPARED_NOT_APPLIED",
+  "canonical_commit": "5e972536d98ac7f4aab37fb66333ed4696584bdd",
+  "target_baseline": "ffc08348874ffcf3037d1c0dcf02f7685945daea",
+  "local_writes": 0,
+  "source_checks": {
+    "preimages": "PASS_IN_MEMORY",
+    "added_paths_absent": "PASS",
+    "donor_postimages": "PASS_IN_MEMORY",
+    "nullable_atom_reconstruction": "PASS"
+  },
+  "executed_gates": {
+    "maven_openrewrite": "NOT_RUN",
+    "composite_java21": "NOT_RUN",
+    "composite_jni": "NOT_RUN",
+    "api_abi": "NOT_RUN",
+    "performance": "NOT_RUN",
+    "formal_autoreview": "NOT_RUN",
+    "full_installed_sdk": "NOT_RUN"
+  },
+  "blockers": [
+    "K free350613504B is below mandatory8589934592B reserve; bounded exception unanswered",
+    "Local operational bridge unavailable; trusted SSH preflight failed",
+    "Hosted workflows queued; no pass inferred"
+  ],
+  "production_source_changed": false,
+  "receiving_phase_advanced": false,
+  "whole_request_complete": false
+}

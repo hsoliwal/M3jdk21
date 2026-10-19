@@ -1,0 +1,14 @@
+requirement	state	evidence_or_next_gate
+M3JDK21 integrated product ownership	RETAINED	Existing java.util and libjava owners from parent PR1447; no new runtime layer
+dynamic arrays offsets indexes object-state masks	CANDIDATE_COMPOSITION	Exact seven-file production patch, existing primitive lanes and two JNI C refinements
+filtered and sorted wrappers	CANDIDATE_COMPOSITION	Nullable navigation and stable index ordering; prior integrated live/snapshot contracts retained
+catalogue-driven GitHub donor comparison	PREPARED	CATALOGUE.tsv and canonical FOSS_REUSE_DECISION.tsv
+LeetCode HackerRank GeeksforGeeks discovery	SOURCE_REVIEWED	Problem/category references only; no solution/editorial source copied
+reusable transformation invariant	EXISTING_POLICY_REUSED	AGENTS.md and m3/docs/m3jdk21-porting-invariant.md; Synexia serial file atom and recipe mastery policies
+serial per-file recipe and replaceable atoms	PREPARED_NOT_EXECUTED	com.synexia.m3.CollectionComposite20261019; exact13 source seals and bounded schedule fixtures
+shortstring donor	REFERENCE_ONLY	Unsigned base36 and tools4j alphanumeric contracts differ; target consumer/admission proof remains open
+new composite Java21 JNI ABI behavior proof	NOT_RUN	Requires recipe SDK then actual target compile and checked JNI tests
+performance CPU allocation retained heap native memory	NOT_RUN	Original donor observations are not upgraded to this composition
+comprehensive all-operation all-file review	INCOMPLETE	This sealed pass covers13 paths; all other files and families remain open
+full source-built M3JDK21 installed image jtreg platforms	NOT_RUN	Global ordered receiving/release gates retained
+reviewable PR submission	DRAFT	Canonical recipe PR12474 and this target review packet; no automatic merge
