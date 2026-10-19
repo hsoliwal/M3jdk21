@@ -5,6 +5,7 @@ on:
     paths:
       - 'm3/collections/src/main/java/com/m3/collections/**'
       - 'm3/collections/src/main/native/collections/m3_index_mask_compactor.c'
+      - 'm3/collections/src/main/java/com/m3/collections/M3LongPredicates.java'
       - 'm3/collections/src/test/java/com/m3/collections/**'
       - 'src/java.base/share/classes/java/util/EnumMap.java'
       - 'src/java.base/share/classes/java/util/IdentityHashMap.java'
@@ -43,12 +44,13 @@ jobs:
             -sourcepath m3/collections/src/main/java:m3/collections/src/test/java \
             m3/collections/src/test/java/com/m3/collections/M3ReadonlyFilteredSlotSelfTest.java \
             m3/collections/src/test/java/com/m3/collections/M3MutableFilteredSlotSelfTest.java \
-            m3/collections/src/test/java/com/m3/collections/M3IndexedFilterSortFusionSelfTest.java
+            m3/collections/src/test/java/com/m3/collections/M3IndexedFilterSortFusionSelfTest.java \
+            m3/collections/src/test/java/com/m3/collections/M3LongDeepFilterSelfTest.java
       - name: Direct-slot / offset / mask contract oracles (Java)
         shell: bash
         run: |
           set -euo pipefail
-          for klass in M3ReadonlyFilteredSlotSelfTest M3MutableFilteredSlotSelfTest M3IndexedFilterSortFusionSelfTest; do
+          for klass in M3ReadonlyFilteredSlotSelfTest M3MutableFilteredSlotSelfTest M3IndexedFilterSortFusionSelfTest M3LongDeepFilterSelfTest; do
             java -ea -cp target/doop-convergence/classes com.m3.collections.$klass
           done
       - name: Build existing M3JNI primitive-mask implementation with strict C17
