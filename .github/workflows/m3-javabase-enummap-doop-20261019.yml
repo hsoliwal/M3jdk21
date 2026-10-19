@@ -35,12 +35,16 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          mkdir -p target/m3-enummap-patch target/m3-enummap-tests
+          mkdir -p target/m3-enummap-patch target/m3-enummap-tests target/m3-javabase-src/java/util
+          # Isolate the two exact java.base inputs. Passing the whole source
+          # tree to javac would implicitly compile unrelated M3 regex sources.
+          cp src/java.base/share/classes/java/util/EnumMap.java target/m3-javabase-src/java/util/
+          cp src/java.base/share/classes/java/util/IdentityHashMap.java target/m3-javabase-src/java/util/
           javac -Xlint:all,-serial,-module -Werror \
-            --patch-module java.base=src/java.base/share/classes \
+            --patch-module java.base=target/m3-javabase-src \
             -d target/m3-enummap-patch \
-            src/java.base/share/classes/java/util/EnumMap.java \
-            src/java.base/share/classes/java/util/IdentityHashMap.java
+            target/m3-javabase-src/java/util/EnumMap.java \
+            target/m3-javabase-src/java/util/IdentityHashMap.java
           javac -Xlint:all,-serial -Werror \
             -d target/m3-enummap-tests \
             test/jdk/java/util/EnumMap/DirectOrdinalTraversal.java \
