@@ -66,7 +66,7 @@ public final class M3HfLexiconIntakeProof {
     private static int verifyLanguageResourceDiscovery() throws IOException {
         List<String> lines = resourceLines(
                 "/com/m3/lexicon/hf/language-resource-discovery.tsv");
-        require(lines.size() == 166, "165 language-resource candidates plus header");
+        require(lines.size() == 175, "174 language-resource candidates plus header");
         List<String> expectedHeader = List.of("source_id", "resource", "category",
                 "data_shape_and_identity", "rights_and_attribution", "m3_candidate_use",
                 "admission_blockers", "state", "evidence");
@@ -254,8 +254,17 @@ public final class M3HfLexiconIntakeProof {
                 "multilingual-open-text-mot-release1",
                 "multi-simlex-12-language",
                 "tsammalex-v0-3",
-                "dicovalence-french-valency-v2"
-        )), "exact 165 language-resource source IDs match the pinned catalogue");
+                "dicovalence-french-valency-v2",
+                "morphalou-3-1",
+                "rl-fr-2025-03",
+                "bel-rl-fr-3-1",
+                "prolexbase-2-2",
+                "unicode-unilex",
+                "polyglotta-africana-cldf-v2-0",
+                "lexik-fr-1-0-2026-10",
+                "ealex-east-african-lexome-2026",
+                "nzonza-cialr-44"
+        )), "exact 174 language-resource source IDs match the pinned catalogue");
         String massive = discoveryRecord(lines, "massive-nlu-1-1");
         require(massive.contains("52 languages") && massive.contains("SLURP") && massive.contains("CC BY 4.0")
                 && massive.contains("not a canonical dictionary"),
@@ -733,6 +742,44 @@ public final class M3HfLexiconIntakeProof {
                 && fineWeb2.contains("pin immutable dataset commit")
                 && fineWeb2.contains("REFERENCE_ONLY"),
                 "FineWeb2 rights, immutable source pin, and no-ingestion state stay explicit");
+        String morphalou = discoveryRecord(lines, "morphalou-3-1");
+        require(morphalou.contains("159,271 lemmas") && morphalou.contains("976,570")
+                && morphalou.contains("522,662") && morphalou.contains("LGPL-LR"),
+                "Morphalou form/phonetic counts, provenance and data license stay explicit");
+        String rlfr = discoveryRecord(lines, "rl-fr-2025-03");
+        require(rlfr.contains("7 March 2025") && rlfr.contains("polysemy")
+                && rlfr.contains("CC BY 4.0") && rlfr.contains("not translations"),
+                "RL-fr version, typed lexical relations and scope stay explicit");
+        String bel = discoveryRecord(lines, "bel-rl-fr-3-1");
+        require(bel.contains("31,987 citations") && bel.contains("53,013")
+                && bel.contains("source rights") && bel.contains("REFERENCE_ONLY"),
+                "BEL-RL citation identity and per-source rights remain gated");
+        String prolexbase = discoveryRecord(lines, "prolexbase-2-2");
+        require(prolexbase.contains("67,000") && prolexbase.contains("65,500")
+                && prolexbase.contains("2.0 instead carries CC BY-SA")
+                && prolexbase.contains("LGPL-LR"),
+                "Prolexbase release-specific identity and licensing stay distinct");
+        String unilex = discoveryRecord(lines, "unicode-unilex");
+        require(unilex.contains("limited") && unilex.contains("Unicode Terms of Use")
+                && unilex.contains("final format is undecided"),
+                "Unilex remains sparse, versioned and not a complete vocabulary");
+        String polyglotta = discoveryRecord(lines, "polyglotta-africana-cldf-v2-0");
+        require(polyglotta.contains("200 language varieties") && polyglotta.contains("57,593")
+                && polyglotta.contains("CC BY 4.0") && polyglotta.contains("1854"),
+                "Polyglotta retains historical variety/concept identity and citation");
+        String lexik = discoveryRecord(lines, "lexik-fr-1-0-2026-10");
+        require(lexik.contains("839,262") && lexik.contains("2,580,286")
+                && lexik.contains("400,000") && lexik.contains("CC BY-SA 4.0")
+                && lexik.contains("unverified"),
+                "LeXiK special forms, names, provenance and share-alike remain visible");
+        String ealex = discoveryRecord(lines, "ealex-east-african-lexome-2026");
+        require(ealex.contains("420-language inventory") && ealex.contains("1,737-item")
+                && ealex.contains("in progress") && ealex.contains("REFERENCE_ONLY"),
+                "EALex inventory is not misreported as completed lexical coverage");
+        String nzonza = discoveryRecord(lines, "nzonza-cialr-44");
+        require(nzonza.contains("90,000+") && nzonza.contains("44 languages")
+                && nzonza.contains("no dataset-wide license") && nzonza.contains("prohibit scraping"),
+                "Nzonza remains a consent- and license-gated discovery lead");
         return lines.size() - 1;
     }
 
