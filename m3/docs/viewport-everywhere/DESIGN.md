@@ -9,6 +9,25 @@ everything now has a viewport. Skija will help us map across the libs. Viewport 
 anyway." Follow-up: "if you have collections shaped for the viewport you can abstract them out and M3JDK can use
 those too".
 
+## 0. Invariant #1: one model, deltas end to end (user, 2026-10-19)
+
+The user's anti-pattern: "why 10 models and 10 hash maps". There is ONE model across SWT, JFace, data binding, Swing,
+AWT, IntelliJ and RWT:
+- **Single store.** The collection views of `com.m3.collections` (lanes, masks, order-statistic and Fenwick indexes)
+  hold the rows once. Toolkit layers keep no copy and no parallel map.
+- **One delta protocol.** `M3ListDiff` / `M3Patch` is the delta protocol: every change, from a model replacement, a
+  sort, a filter or a structural edit, travels as remove/insert runs plus moves. A layer that receives a whole new list
+  first diffs it into a patch.
+- **Deferred-object views (DOOP = data-oriented + deferred objects).** Each toolkit layer is a view over the store.
+  Toolkit objects (items, nodes, cells, renderer stamps) are created only when a caller asks for one, identified by an
+  int id, and released under pressure (`M3SparseItemStore`, `M3BoundedCache`).
+- **Visible / off-screen rule.** A patch run inside the resident window touches rows: native rows, facades, repaint
+  of row rectangles (`M3WindowView`, `M3WindowPlan`, `M3TreeWindowPlan`). A run outside the window touches only
+  `M3SparseExtents` (row count and offsets) and the scroll metrics, with no native or object work. Cost per patch:
+  O(window + runs x log n).
+- **Render snapshots.** What a renderer consumes is an `M3Snapshot` published per generation (section 13), never the
+  store directly.
+
 ## 1. Shape
 
 ```
