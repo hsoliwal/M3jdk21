@@ -200,6 +200,10 @@ final class M3IndexedReversedCoordinates20261019Test {
         int[] expected = reversed.maskedByPhysicalState(
                 states, Integer.MIN_VALUE, 0, M3IndexPathMasks.Backend.JAVA)
                 .physicalIndices();
+        if (Boolean.getBoolean("m3.indexedReversedNativeRequired")) {
+            assertTrue(M3IndexPathMasks.nativeAvailable(),
+                    "real native library required for this JNI parity qualification");
+        }
         if (M3IndexPathMasks.nativeAvailable()) {
             int[] nativeResult = reversed.maskedByPhysicalState(
                     states, Integer.MIN_VALUE, 0,
