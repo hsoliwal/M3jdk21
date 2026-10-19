@@ -12,7 +12,13 @@ package java.util.concurrent;
  */
 @FunctionalInterface
 public interface MonitoredCallable<V> extends Callable<V> {
-    /** Replaceable checked body, with no ownership over monitor completion. */
+    /**
+     * Replaceable checked body, with no ownership over monitor completion.
+     *
+     * @param monitor the borrowed progress monitor for the task
+     * @return the computed result
+     * @throws Exception if the task cannot compute a result
+     */
     V callMonitored(ProgressMonitor monitor) throws Exception;
 
     /** Template method: inherit monitor, check cancellation, dispatch body. */

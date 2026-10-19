@@ -138,6 +138,9 @@ public interface Executor {
     /**
      * An overload for monitored dispatch. Captures the caller-selected monitor
      * before switching threads. Existing execute(Runnable) is unchanged.
+     *
+     * @param command the non-null task to execute
+     * @param monitor the non-null monitor to bind while the task executes
      */
     default void execute(Runnable command, ProgressMonitor monitor) {
         java.util.Objects.requireNonNull(command, "command");
@@ -145,7 +148,11 @@ public interface Executor {
         execute(() -> ProgressMonitors.run(command, monitor));
     }
 
-    /** Capture the current lexical or process-wide monitor at submission. */
+    /**
+     * Capture the current lexical or process-wide monitor at submission.
+     *
+     * @param command the non-null task to execute with the captured monitor
+     */
     default void executeWithProgress(Runnable command) {
         execute(command, ProgressMonitors.current());
     }

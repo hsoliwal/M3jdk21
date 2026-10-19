@@ -64,7 +64,13 @@ public interface Callable<V> {
      */
     V call() throws Exception;
 
-    /** A borrowed monitor is scoped for this call; call() remains abstract. */
+    /**
+     * A borrowed monitor is scoped for this call; call() remains abstract.
+     *
+     * @param monitor the non-null monitor to bind for this call
+     * @return the result computed by this task
+     * @throws Exception if the task cannot compute a result
+     */
     default V call(ProgressMonitor monitor) throws Exception {
         return ProgressMonitors.call(this, monitor);
     }
