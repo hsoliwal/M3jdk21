@@ -1,0 +1,23 @@
+	Command being timed: "make CONF=m3-feature-fastdebug images"
+	User time (seconds): 5281.29
+	System time (seconds): 559.30
+	Percent of CPU this job got: 289%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 33:36.30
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 1230784
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 278
+	Minor (reclaiming a frame) page faults: 84249499
+	Voluntary context switches: 1071700
+	Involuntary context switches: 2486682
+	Swaps: 0
+	File system inputs: 3451768
+	File system outputs: 11902352
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0

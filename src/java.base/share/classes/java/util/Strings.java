@@ -21,24 +21,43 @@ package java.util;
 public final class Strings {
     private Strings() { throw new AssertionError("no instances"); }
 
-    /** True when the supplied sequence is null or has no UTF-16 units. */
+    /**
+     * Returns whether the sequence is null or has no UTF-16 code units.
+     *
+     * @param source the sequence to inspect, or null
+     * @return true if the sequence is null or empty
+     */
     public static boolean isNullOrEmpty(CharSequence source) {
         return source == null || source.length() == 0;
     }
 
-    /** Normalizes a null reference to the canonical empty String. */
+    /**
+     * Returns the empty string for a null reference.
+     *
+     * @param source the string to normalize, or null
+     * @return the source itself when non-null, otherwise the empty string
+     */
     public static String nullToEmpty(String source) {
         return source == null ? "" : source;
     }
 
-    /** Converts an empty String to null, leaving nonempty identity untouched. */
+    /**
+     * Converts an empty string to null, retaining nonempty string identity.
+     *
+     * @param source the string to normalize, or null
+     * @return null for a null or empty source, otherwise the source itself
+     */
     public static String emptyToNull(String source) {
         return source == null || source.isEmpty() ? null : source;
     }
 
     /**
-     * True for null or for text with no Unicode code point classified as whitespace by
-     * {@link Character#isWhitespace(int)} (the rule also used by String.isBlank).
+     * Returns whether the sequence is null, empty, or contains only code points
+     * classified as whitespace by {@link Character#isWhitespace(int)}.
+     * This is the whitespace rule used by {@link String#isBlank()}.
+     *
+     * @param source the sequence to inspect, or null
+     * @return true if the sequence has no non-whitespace code point
      */
     public static boolean isNullOrBlank(CharSequence source) {
         if (source == null) return true;
@@ -50,27 +69,62 @@ public final class Strings {
         return true;
     }
 
-    /** True for non-null text containing at least one non-whitespace code point. */
+    /**
+     * Returns whether the sequence contains a non-whitespace code point.
+     *
+     * @param source the sequence to inspect, or null
+     * @return true if the source is non-null and is not blank
+     */
     public static boolean hasText(CharSequence source) {
         return !isNullOrBlank(source);
     }
 
-    /** Returns fallback only for null/empty text. The fallback itself may be null. */
+    /**
+     * Returns the fallback for a null or empty source.
+     *
+     * @param source the string to inspect, or null
+     * @param fallback the replacement, which may be null
+     * @return the fallback if the source is null or empty, otherwise the source
+     */
     public static String defaultIfEmpty(String source, String fallback) {
         return source == null || source.isEmpty() ? fallback : source;
     }
 
-    /** Returns fallback only for null/blank text. The fallback itself may be null. */
+    /**
+     * Returns the fallback for a null or blank source.
+     *
+     * @param source the string to inspect, or null
+     * @param fallback the replacement, which may be null
+     * @return the fallback if the source is null or blank, otherwise the source
+     */
     public static String defaultIfBlank(String source, String fallback) {
         return isNullOrBlank(source) ? fallback : source;
     }
 
-    /** Delegates repetition to String's canonical runtime owner. */
+    /**
+     * Repeats the source through {@link String#repeat(int)}.
+     *
+     * @param source the string to repeat
+     * @param copies the nonnegative number of copies
+     * @return the repeated string
+     * @throws NullPointerException if the source is null
+     * @throws IllegalArgumentException if the number of copies is negative
+     */
     public static String repeat(String source, int copies) {
         return Objects.requireNonNull(source, "source").repeat(copies);
     }
 
-    /** Pads to at least minLength UTF-16 units; a larger source is returned unchanged. */
+    /**
+     * Pads the start of the source to at least the requested UTF-16 length.
+     * A source already meeting that length is returned unchanged.
+     *
+     * @param source the string to pad
+     * @param minLength the nonnegative minimum number of UTF-16 code units
+     * @param pad the UTF-16 code unit to prepend as needed
+     * @return the padded string, or the source itself if no padding is needed
+     * @throws NullPointerException if the source is null
+     * @throws IllegalArgumentException if the minimum length is negative
+     */
     public static String padStart(String source, int minLength, char pad) {
         Objects.requireNonNull(source, "source");
         if (minLength < 0) throw new IllegalArgumentException("negative minLength");
@@ -78,7 +132,17 @@ public final class Strings {
         return String.valueOf(pad).repeat(minLength - source.length()).concat(source);
     }
 
-    /** Pads to at least minLength UTF-16 units; a larger source is returned unchanged. */
+    /**
+     * Pads the end of the source to at least the requested UTF-16 length.
+     * A source already meeting that length is returned unchanged.
+     *
+     * @param source the string to pad
+     * @param minLength the nonnegative minimum number of UTF-16 code units
+     * @param pad the UTF-16 code unit to append as needed
+     * @return the padded string, or the source itself if no padding is needed
+     * @throws NullPointerException if the source is null
+     * @throws IllegalArgumentException if the minimum length is negative
+     */
     public static String padEnd(String source, int minLength, char pad) {
         Objects.requireNonNull(source, "source");
         if (minLength < 0) throw new IllegalArgumentException("negative minLength");
@@ -87,8 +151,13 @@ public final class Strings {
     }
 
     /**
-     * Longest equal UTF-16 prefix that does not split a valid surrogate pair in either
-     * source. Other code units, including unpaired surrogates, retain String semantics.
+     * Returns the longest equal UTF-16 prefix that does not split a valid
+     * surrogate pair in either source. Unpaired surrogates retain String semantics.
+     *
+     * @param first the first string
+     * @param second the second string
+     * @return their common prefix, or the empty string when they have none
+     * @throws NullPointerException if either argument is null
      */
     public static String commonPrefix(String first, String second) {
         Objects.requireNonNull(first, "first");
@@ -100,7 +169,15 @@ public final class Strings {
         return first.substring(0, i);
     }
 
-    /** Longest equal UTF-16 suffix, without splitting a paired surrogate in either source. */
+    /**
+     * Returns the longest equal UTF-16 suffix that does not split a valid
+     * surrogate pair in either source. Unpaired surrogates retain String semantics.
+     *
+     * @param first the first string
+     * @param second the second string
+     * @return their common suffix, or the empty string when they have none
+     * @throws NullPointerException if either argument is null
+     */
     public static String commonSuffix(String first, String second) {
         Objects.requireNonNull(first, "first");
         Objects.requireNonNull(second, "second");
@@ -114,14 +191,28 @@ public final class Strings {
         return first.substring(first.length() - count);
     }
 
-    /** Returns source itself when prefix does not match. */
+    /**
+     * Removes a matching prefix, using String's case-sensitive comparison.
+     *
+     * @param source the string to inspect
+     * @param prefix the prefix to remove
+     * @return the suffix following a match, otherwise the source itself
+     * @throws NullPointerException if either argument is null
+     */
     public static String removePrefix(String source, String prefix) {
         Objects.requireNonNull(source, "source");
         Objects.requireNonNull(prefix, "prefix");
         return source.startsWith(prefix) ? source.substring(prefix.length()) : source;
     }
 
-    /** Returns source itself when suffix does not match. */
+    /**
+     * Removes a matching suffix, using String's case-sensitive comparison.
+     *
+     * @param source the string to inspect
+     * @param suffix the suffix to remove
+     * @return the prefix preceding a match, otherwise the source itself
+     * @throws NullPointerException if either argument is null
+     */
     public static String removeSuffix(String source, String suffix) {
         Objects.requireNonNull(source, "source");
         Objects.requireNonNull(suffix, "suffix");
@@ -129,7 +220,15 @@ public final class Strings {
                 : source;
     }
 
-    /** Returns the part before the first delimiter, or the original text when absent. */
+    /**
+     * Returns the part before the first delimiter, or the source when absent.
+     * An empty delimiter produces the empty string.
+     *
+     * @param source the string to inspect
+     * @param delimiter the case-sensitive delimiter
+     * @return the part before the first match, or the source if there is no match
+     * @throws NullPointerException if either argument is null
+     */
     public static String substringBefore(String source, String delimiter) {
         Objects.requireNonNull(source, "source");
         Objects.requireNonNull(delimiter, "delimiter");
@@ -137,7 +236,15 @@ public final class Strings {
         return at < 0 ? source : source.substring(0, at);
     }
 
-    /** Returns the part after the first delimiter, or empty text when absent. */
+    /**
+     * Returns the part after the first delimiter, or the empty string when absent.
+     * An empty delimiter produces the full source.
+     *
+     * @param source the string to inspect
+     * @param delimiter the case-sensitive delimiter
+     * @return the part after the first match, or the empty string if absent
+     * @throws NullPointerException if either argument is null
+     */
     public static String substringAfter(String source, String delimiter) {
         Objects.requireNonNull(source, "source");
         Objects.requireNonNull(delimiter, "delimiter");
@@ -145,7 +252,15 @@ public final class Strings {
         return at < 0 ? "" : source.substring(at + delimiter.length());
     }
 
-    /** Returns the part before the last delimiter, or original text when absent. */
+    /**
+     * Returns the part before the last delimiter, or the source when absent.
+     * An empty delimiter produces the full source.
+     *
+     * @param source the string to inspect
+     * @param delimiter the case-sensitive delimiter
+     * @return the part before the last match, or the source if absent or empty
+     * @throws NullPointerException if either argument is null
+     */
     public static String substringBeforeLast(String source, String delimiter) {
         Objects.requireNonNull(source, "source");
         Objects.requireNonNull(delimiter, "delimiter");
@@ -154,7 +269,15 @@ public final class Strings {
         return at < 0 ? source : source.substring(0, at);
     }
 
-    /** Returns the part after the last delimiter, or empty text when absent. */
+    /**
+     * Returns the part after the last delimiter, or the empty string when absent.
+     * An empty delimiter produces the empty string.
+     *
+     * @param source the string to inspect
+     * @param delimiter the case-sensitive delimiter
+     * @return the part after the last match, or the empty string if absent or empty
+     * @throws NullPointerException if either argument is null
+     */
     public static String substringAfterLast(String source, String delimiter) {
         Objects.requireNonNull(source, "source");
         Objects.requireNonNull(delimiter, "delimiter");
@@ -163,7 +286,15 @@ public final class Strings {
         return at < 0 ? "" : source.substring(at + delimiter.length());
     }
 
-    /** Non-overlapping, case-sensitive occurrences; an empty needle yields zero. */
+    /**
+     * Counts non-overlapping, case-sensitive occurrences of the needle.
+     * An empty needle has zero occurrences for this operation.
+     *
+     * @param source the string to search
+     * @param needle the text to count
+     * @return the number of non-overlapping matches
+     * @throws NullPointerException if either argument is null
+     */
     public static int countOccurrences(String source, String needle) {
         Objects.requireNonNull(source, "source");
         Objects.requireNonNull(needle, "needle");
@@ -179,14 +310,30 @@ public final class Strings {
         return count;
     }
 
-    /** JDK regionMatches(ignoreCase) semantics; no locale-sensitive case rewriting. */
+    /**
+     * Tests the prefix using {@link String#regionMatches(boolean,int,String,int,int)}
+     * with case ignored, without locale-sensitive case rewriting.
+     *
+     * @param source the string to inspect
+     * @param prefix the prefix to test
+     * @return true if the prefix matches while ignoring case
+     * @throws NullPointerException if either argument is null
+     */
     public static boolean startsWithIgnoreCase(String source, String prefix) {
         Objects.requireNonNull(source, "source");
         Objects.requireNonNull(prefix, "prefix");
         return source.regionMatches(true, 0, prefix, 0, prefix.length());
     }
 
-    /** JDK regionMatches(ignoreCase) semantics; no locale-sensitive case rewriting. */
+    /**
+     * Tests the suffix using {@link String#regionMatches(boolean,int,String,int,int)}
+     * with case ignored, without locale-sensitive case rewriting.
+     *
+     * @param source the string to inspect
+     * @param suffix the suffix to test
+     * @return true if the suffix matches while ignoring case
+     * @throws NullPointerException if either argument is null
+     */
     public static boolean endsWithIgnoreCase(String source, String suffix) {
         Objects.requireNonNull(source, "source");
         Objects.requireNonNull(suffix, "suffix");
@@ -195,7 +342,17 @@ public final class Strings {
                         suffix, 0, suffix.length());
     }
 
-    /** An empty needle occurs at the clamped starting position. */
+    /**
+     * Finds the first match from the requested UTF-16 index using String's
+     * region comparison with case ignored. Negative starting indices become zero.
+     * An empty needle matches at the starting index clamped to the source length.
+     *
+     * @param source the string to search
+     * @param needle the text to find
+     * @param fromIndex the first UTF-16 index to inspect
+     * @return the first matching index, or -1 if no match exists
+     * @throws NullPointerException if either string is null
+     */
     public static int indexOfIgnoreCase(String source, String needle, int fromIndex) {
         Objects.requireNonNull(source, "source");
         Objects.requireNonNull(needle, "needle");
@@ -208,29 +365,63 @@ public final class Strings {
         return -1;
     }
 
+    /**
+     * Finds the first match with case ignored, starting at index zero.
+     *
+     * @param source the string to search
+     * @param needle the text to find
+     * @return the first matching UTF-16 index, or -1 if no match exists
+     * @throws NullPointerException if either argument is null
+     */
     public static int indexOfIgnoreCase(String source, String needle) {
         return indexOfIgnoreCase(source, needle, 0);
     }
 
+    /**
+     * Tests whether the source contains a match with case ignored.
+     * An empty needle is contained in every non-null source.
+     *
+     * @param source the string to search
+     * @param needle the text to find
+     * @return true if a match exists
+     * @throws NullPointerException if either argument is null
+     */
     public static boolean containsIgnoreCase(String source, String needle) {
         return indexOfIgnoreCase(source, needle) >= 0;
     }
 
-    /** Preserve paired UTF-16 surrogate units, as StringBuilder.reverse() does. */
+    /**
+     * Reverses the source through {@link StringBuilder#reverse()}, preserving
+     * valid UTF-16 surrogate pairs according to that operation's contract.
+     *
+     * @param source the string to reverse
+     * @return the reversed string, or the source itself when shorter than two units
+     * @throws NullPointerException if the source is null
+     */
     public static String reverse(String source) {
         Objects.requireNonNull(source, "source");
         if (source.length() < 2) return source;
         return new StringBuilder(source).reverse().toString();
     }
 
-    /** Reuse java.lang.String.strip, including its Unicode whitespace semantics. */
+    /**
+     * Strips surrounding Unicode whitespace using {@link String#strip()}.
+     *
+     * @param source the string to strip, or null
+     * @return null for a null source or empty stripped result, otherwise the result
+     */
     public static String stripToNull(String source) {
         if (source == null) return null;
         String trimmed = source.strip();
         return trimmed.isEmpty() ? null : trimmed;
     }
 
-    /** Null becomes empty; strip results reuse the underlying JDK String route. */
+    /**
+     * Strips surrounding Unicode whitespace using {@link String#strip()}.
+     *
+     * @param source the string to strip, or null
+     * @return the empty string for null, otherwise the stripped result
+     */
     public static String stripToEmpty(String source) {
         return source == null ? "" : source.strip();
     }

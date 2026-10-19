@@ -1,0 +1,407 @@
+{
+  "schema": "M3_FEATURE_UNPATCHED_IMAGE_EXECUTION_V1",
+  "status": "PASS",
+  "image": "/workspace/scratch/2b4d1cb957a7/M3jdk21-features/build/m3-feature-fastdebug/images/jdk",
+  "repository": "/workspace/scratch/2b4d1cb957a7/M3jdk21-feature-current",
+  "source_baseline": "07ba6e383343d32c83cfdaf641387bbe72bf325d",
+  "patch_module_used": false,
+  "commands": [
+    {
+      "label": "java-version",
+      "command": [
+        "/workspace/scratch/2b4d1cb957a7/M3jdk21-features/build/m3-feature-fastdebug/images/jdk/bin/java",
+        "-version"
+      ],
+      "exit": 0,
+      "seconds": 0.17870831489562988,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "6e11fb1ae27be2c08e7c54a8d9af01301512fa7e6dc22beeb4b405eb8aa14db1"
+    },
+    {
+      "label": "javac-version",
+      "command": [
+        "/workspace/scratch/2b4d1cb957a7/M3jdk21-features/build/m3-feature-fastdebug/images/jdk/bin/javac",
+        "-version"
+      ],
+      "exit": 0,
+      "seconds": 1.4357149600982666,
+      "stdout_sha256": "7679022cc3fd304a50246bc26ac556f3aab9131b44b1daf00c292eda6b80e49b",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "compile-existing-tests",
+      "command": [
+        "/workspace/scratch/2b4d1cb957a7/M3jdk21-features/build/m3-feature-fastdebug/images/jdk/bin/javac",
+        "-g:none",
+        "-proc:none",
+        "-Xlint:all",
+        "-Werror",
+        "--add-exports",
+        "java.base/jdk.internal.mindex=ALL-UNNAMED",
+        "-cp",
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/progress-job/donors/eclipse-3.35.0/org.eclipse.equinox.common-3.21.0.jar:/workspace/scratch/2b4d1cb957a7/runtime-refinement/progress-job/donors/eclipse-3.35.0/org.eclipse.osgi-3.24.300.jar",
+        "-d",
+        "/workspace/scratch/2b4d1cb957a7/build-proof/feature-image-execution/classes",
+        "/workspace/scratch/2b4d1cb957a7/M3jdk21-feature-current/test/jdk/java/lang/Runtime/M3RuntimeProgressFacade.java",
+        "/workspace/scratch/2b4d1cb957a7/M3jdk21-feature-current/test/jdk/java/util/concurrent/ProgressJob/M3ProgressJob.java",
+        "/workspace/scratch/2b4d1cb957a7/M3jdk21-feature-current/m3/runtime-integration/progress-job-20261018/src/test/java/EclipseStatusIdentity.java",
+        "/workspace/scratch/2b4d1cb957a7/M3jdk21-feature-current/test/jdk/jdk/internal/mindex/M3PrimitiveIdentityTest.java",
+        "/workspace/scratch/2b4d1cb957a7/M3jdk21-feature-current/test/jdk/jdk/internal/mindex/M3PrimitiveFixedArenaProbe.java"
+      ],
+      "exit": 0,
+      "seconds": 6.334733963012695,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "default-M3RuntimeProgressFacade",
+      "command": [
+        "/workspace/scratch/2b4d1cb957a7/M3jdk21-features/build/m3-feature-fastdebug/images/jdk/bin/java",
+        "-Xmx256m",
+        "-ea",
+        "-Xcheck:jni",
+        "-cp",
+        "/workspace/scratch/2b4d1cb957a7/build-proof/feature-image-execution/classes:/workspace/scratch/2b4d1cb957a7/runtime-refinement/progress-job/donors/eclipse-3.35.0/org.eclipse.equinox.common-3.21.0.jar:/workspace/scratch/2b4d1cb957a7/runtime-refinement/progress-job/donors/eclipse-3.35.0/org.eclipse.osgi-3.24.300.jar",
+        "M3RuntimeProgressFacade"
+      ],
+      "exit": 0,
+      "seconds": 0.43552422523498535,
+      "stdout_sha256": "ca21da6a4fd8ffaa44420d34730e4bd8c9dae40ceef55892b86a6c7dd894ed05",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "default-M3ProgressJob",
+      "command": [
+        "/workspace/scratch/2b4d1cb957a7/M3jdk21-features/build/m3-feature-fastdebug/images/jdk/bin/java",
+        "-Xmx256m",
+        "-ea",
+        "-Xcheck:jni",
+        "-cp",
+        "/workspace/scratch/2b4d1cb957a7/build-proof/feature-image-execution/classes:/workspace/scratch/2b4d1cb957a7/runtime-refinement/progress-job/donors/eclipse-3.35.0/org.eclipse.equinox.common-3.21.0.jar:/workspace/scratch/2b4d1cb957a7/runtime-refinement/progress-job/donors/eclipse-3.35.0/org.eclipse.osgi-3.24.300.jar",
+        "M3ProgressJob"
+      ],
+      "exit": 0,
+      "seconds": 0.43683838844299316,
+      "stdout_sha256": "202d13ceff7f76f4e527b9cf0b0f792deff8025b8d0809be7f01377be35044f0",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "default-EclipseStatusIdentity",
+      "command": [
+        "/workspace/scratch/2b4d1cb957a7/M3jdk21-features/build/m3-feature-fastdebug/images/jdk/bin/java",
+        "-Xmx256m",
+        "-ea",
+        "-Xcheck:jni",
+        "-cp",
+        "/workspace/scratch/2b4d1cb957a7/build-proof/feature-image-execution/classes:/workspace/scratch/2b4d1cb957a7/runtime-refinement/progress-job/donors/eclipse-3.35.0/org.eclipse.equinox.common-3.21.0.jar:/workspace/scratch/2b4d1cb957a7/runtime-refinement/progress-job/donors/eclipse-3.35.0/org.eclipse.osgi-3.24.300.jar",
+        "EclipseStatusIdentity"
+      ],
+      "exit": 0,
+      "seconds": 1.130953311920166,
+      "stdout_sha256": "58db2e93e86b038895eb740e9effdb17697e78b6a1bd934d78d0037827774587",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "interpreter-M3RuntimeProgressFacade",
+      "command": [
+        "/workspace/scratch/2b4d1cb957a7/M3jdk21-features/build/m3-feature-fastdebug/images/jdk/bin/java",
+        "-Xmx256m",
+        "-ea",
+        "-Xcheck:jni",
+        "-Xint",
+        "-cp",
+        "/workspace/scratch/2b4d1cb957a7/build-proof/feature-image-execution/classes:/workspace/scratch/2b4d1cb957a7/runtime-refinement/progress-job/donors/eclipse-3.35.0/org.eclipse.equinox.common-3.21.0.jar:/workspace/scratch/2b4d1cb957a7/runtime-refinement/progress-job/donors/eclipse-3.35.0/org.eclipse.osgi-3.24.300.jar",
+        "M3RuntimeProgressFacade"
+      ],
+      "exit": 0,
+      "seconds": 0.3110356330871582,
+      "stdout_sha256": "ca21da6a4fd8ffaa44420d34730e4bd8c9dae40ceef55892b86a6c7dd894ed05",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "interpreter-M3ProgressJob",
+      "command": [
+        "/workspace/scratch/2b4d1cb957a7/M3jdk21-features/build/m3-feature-fastdebug/images/jdk/bin/java",
+        "-Xmx256m",
+        "-ea",
+        "-Xcheck:jni",
+        "-Xint",
+        "-cp",
+        "/workspace/scratch/2b4d1cb957a7/build-proof/feature-image-execution/classes:/workspace/scratch/2b4d1cb957a7/runtime-refinement/progress-job/donors/eclipse-3.35.0/org.eclipse.equinox.common-3.21.0.jar:/workspace/scratch/2b4d1cb957a7/runtime-refinement/progress-job/donors/eclipse-3.35.0/org.eclipse.osgi-3.24.300.jar",
+        "M3ProgressJob"
+      ],
+      "exit": 0,
+      "seconds": 0.32961440086364746,
+      "stdout_sha256": "202d13ceff7f76f4e527b9cf0b0f792deff8025b8d0809be7f01377be35044f0",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "interpreter-EclipseStatusIdentity",
+      "command": [
+        "/workspace/scratch/2b4d1cb957a7/M3jdk21-features/build/m3-feature-fastdebug/images/jdk/bin/java",
+        "-Xmx256m",
+        "-ea",
+        "-Xcheck:jni",
+        "-Xint",
+        "-cp",
+        "/workspace/scratch/2b4d1cb957a7/build-proof/feature-image-execution/classes:/workspace/scratch/2b4d1cb957a7/runtime-refinement/progress-job/donors/eclipse-3.35.0/org.eclipse.equinox.common-3.21.0.jar:/workspace/scratch/2b4d1cb957a7/runtime-refinement/progress-job/donors/eclipse-3.35.0/org.eclipse.osgi-3.24.300.jar",
+        "EclipseStatusIdentity"
+      ],
+      "exit": 0,
+      "seconds": 1.2296712398529053,
+      "stdout_sha256": "58db2e93e86b038895eb740e9effdb17697e78b6a1bd934d78d0037827774587",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "c1-M3RuntimeProgressFacade",
+      "command": [
+        "/workspace/scratch/2b4d1cb957a7/M3jdk21-features/build/m3-feature-fastdebug/images/jdk/bin/java",
+        "-Xmx256m",
+        "-ea",
+        "-Xcheck:jni",
+        "-XX:TieredStopAtLevel=1",
+        "-cp",
+        "/workspace/scratch/2b4d1cb957a7/build-proof/feature-image-execution/classes:/workspace/scratch/2b4d1cb957a7/runtime-refinement/progress-job/donors/eclipse-3.35.0/org.eclipse.equinox.common-3.21.0.jar:/workspace/scratch/2b4d1cb957a7/runtime-refinement/progress-job/donors/eclipse-3.35.0/org.eclipse.osgi-3.24.300.jar",
+        "M3RuntimeProgressFacade"
+      ],
+      "exit": 0,
+      "seconds": 0.36980319023132324,
+      "stdout_sha256": "ca21da6a4fd8ffaa44420d34730e4bd8c9dae40ceef55892b86a6c7dd894ed05",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "c1-M3ProgressJob",
+      "command": [
+        "/workspace/scratch/2b4d1cb957a7/M3jdk21-features/build/m3-feature-fastdebug/images/jdk/bin/java",
+        "-Xmx256m",
+        "-ea",
+        "-Xcheck:jni",
+        "-XX:TieredStopAtLevel=1",
+        "-cp",
+        "/workspace/scratch/2b4d1cb957a7/build-proof/feature-image-execution/classes:/workspace/scratch/2b4d1cb957a7/runtime-refinement/progress-job/donors/eclipse-3.35.0/org.eclipse.equinox.common-3.21.0.jar:/workspace/scratch/2b4d1cb957a7/runtime-refinement/progress-job/donors/eclipse-3.35.0/org.eclipse.osgi-3.24.300.jar",
+        "M3ProgressJob"
+      ],
+      "exit": 0,
+      "seconds": 0.33375048637390137,
+      "stdout_sha256": "202d13ceff7f76f4e527b9cf0b0f792deff8025b8d0809be7f01377be35044f0",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "c1-EclipseStatusIdentity",
+      "command": [
+        "/workspace/scratch/2b4d1cb957a7/M3jdk21-features/build/m3-feature-fastdebug/images/jdk/bin/java",
+        "-Xmx256m",
+        "-ea",
+        "-Xcheck:jni",
+        "-XX:TieredStopAtLevel=1",
+        "-cp",
+        "/workspace/scratch/2b4d1cb957a7/build-proof/feature-image-execution/classes:/workspace/scratch/2b4d1cb957a7/runtime-refinement/progress-job/donors/eclipse-3.35.0/org.eclipse.equinox.common-3.21.0.jar:/workspace/scratch/2b4d1cb957a7/runtime-refinement/progress-job/donors/eclipse-3.35.0/org.eclipse.osgi-3.24.300.jar",
+        "EclipseStatusIdentity"
+      ],
+      "exit": 0,
+      "seconds": 1.1604013442993164,
+      "stdout_sha256": "58db2e93e86b038895eb740e9effdb17697e78b6a1bd934d78d0037827774587",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "c2-M3RuntimeProgressFacade",
+      "command": [
+        "/workspace/scratch/2b4d1cb957a7/M3jdk21-features/build/m3-feature-fastdebug/images/jdk/bin/java",
+        "-Xmx256m",
+        "-ea",
+        "-Xcheck:jni",
+        "-XX:-TieredCompilation",
+        "-Xbatch",
+        "-cp",
+        "/workspace/scratch/2b4d1cb957a7/build-proof/feature-image-execution/classes:/workspace/scratch/2b4d1cb957a7/runtime-refinement/progress-job/donors/eclipse-3.35.0/org.eclipse.equinox.common-3.21.0.jar:/workspace/scratch/2b4d1cb957a7/runtime-refinement/progress-job/donors/eclipse-3.35.0/org.eclipse.osgi-3.24.300.jar",
+        "M3RuntimeProgressFacade"
+      ],
+      "exit": 0,
+      "seconds": 0.5799028873443604,
+      "stdout_sha256": "ca21da6a4fd8ffaa44420d34730e4bd8c9dae40ceef55892b86a6c7dd894ed05",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "c2-M3ProgressJob",
+      "command": [
+        "/workspace/scratch/2b4d1cb957a7/M3jdk21-features/build/m3-feature-fastdebug/images/jdk/bin/java",
+        "-Xmx256m",
+        "-ea",
+        "-Xcheck:jni",
+        "-XX:-TieredCompilation",
+        "-Xbatch",
+        "-cp",
+        "/workspace/scratch/2b4d1cb957a7/build-proof/feature-image-execution/classes:/workspace/scratch/2b4d1cb957a7/runtime-refinement/progress-job/donors/eclipse-3.35.0/org.eclipse.equinox.common-3.21.0.jar:/workspace/scratch/2b4d1cb957a7/runtime-refinement/progress-job/donors/eclipse-3.35.0/org.eclipse.osgi-3.24.300.jar",
+        "M3ProgressJob"
+      ],
+      "exit": 0,
+      "seconds": 0.30060529708862305,
+      "stdout_sha256": "202d13ceff7f76f4e527b9cf0b0f792deff8025b8d0809be7f01377be35044f0",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "c2-EclipseStatusIdentity",
+      "command": [
+        "/workspace/scratch/2b4d1cb957a7/M3jdk21-features/build/m3-feature-fastdebug/images/jdk/bin/java",
+        "-Xmx256m",
+        "-ea",
+        "-Xcheck:jni",
+        "-XX:-TieredCompilation",
+        "-Xbatch",
+        "-cp",
+        "/workspace/scratch/2b4d1cb957a7/build-proof/feature-image-execution/classes:/workspace/scratch/2b4d1cb957a7/runtime-refinement/progress-job/donors/eclipse-3.35.0/org.eclipse.equinox.common-3.21.0.jar:/workspace/scratch/2b4d1cb957a7/runtime-refinement/progress-job/donors/eclipse-3.35.0/org.eclipse.osgi-3.24.300.jar",
+        "EclipseStatusIdentity"
+      ],
+      "exit": 0,
+      "seconds": 2.357309579849243,
+      "stdout_sha256": "58db2e93e86b038895eb740e9effdb17697e78b6a1bd934d78d0037827774587",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "frozen-stock-callable-client",
+      "command": [
+        "/workspace/scratch/2b4d1cb957a7/M3jdk21-features/build/m3-feature-fastdebug/images/jdk/bin/java",
+        "-Xmx256m",
+        "-ea",
+        "-Xcheck:jni",
+        "-cp",
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/progress-job/proof/behavior-v2/frozen-stock-client",
+        "OldCallableClient"
+      ],
+      "exit": 0,
+      "seconds": 0.2588820457458496,
+      "stdout_sha256": "c895dc7a1955765bbee2ea3f673879d2097e29649b2edf7ed8da582b2eea9907",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "compile-primitive-image",
+      "command": [
+        "/workspace/scratch/2b4d1cb957a7/M3jdk21-features/build/m3-feature-fastdebug/images/jdk/bin/java",
+        "-Xcheck:jni",
+        "-m",
+        "jdk.compiler/com.sun.tools.javac.m3.M3PrimitiveImageCompiler",
+        "--out",
+        "/workspace/scratch/2b4d1cb957a7/build-proof/feature-image-execution/canonical.m3prim",
+        "--slots",
+        "/workspace/scratch/2b4d1cb957a7/build-proof/feature-image-execution/canonical.tsv",
+        "/workspace/scratch/2b4d1cb957a7/build-proof/native-image-execution/PrimitiveFixture.java"
+      ],
+      "exit": 0,
+      "seconds": 4.017411231994629,
+      "stdout_sha256": "496e9299515292007405c2d0d4f2dd8ce4b1ead78d32983d0d94400608b7137f",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "primitive-identity",
+      "command": [
+        "/workspace/scratch/2b4d1cb957a7/M3jdk21-features/build/m3-feature-fastdebug/images/jdk/bin/java",
+        "-Xmx256m",
+        "-Xcheck:jni",
+        "--add-exports",
+        "java.base/jdk.internal.mindex=ALL-UNNAMED",
+        "-cp",
+        "/workspace/scratch/2b4d1cb957a7/build-proof/feature-image-execution/classes",
+        "M3PrimitiveIdentityTest",
+        "/workspace/scratch/2b4d1cb957a7/build-proof/feature-image-execution/canonical.m3prim"
+      ],
+      "exit": 0,
+      "seconds": 0.6473028659820557,
+      "stdout_sha256": "c687529c36e5caa9aa78dc549223585aee98b5f50fb3214ed054977fa03bf660",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "native-mapping-0",
+      "command": [
+        "/workspace/scratch/2b4d1cb957a7/M3jdk21-features/build/m3-feature-fastdebug/images/jdk/bin/java",
+        "-Xmx256m",
+        "-Xcheck:jni",
+        "--add-exports",
+        "java.base/jdk.internal.mindex=ALL-UNNAMED",
+        "-cp",
+        "/workspace/scratch/2b4d1cb957a7/build-proof/feature-image-execution/classes",
+        "M3PrimitiveFixedArenaProbe",
+        "/workspace/scratch/2b4d1cb957a7/build-proof/feature-image-execution/canonical.m3prim",
+        "/workspace/scratch/2b4d1cb957a7/M3jdk21-features/build/m3-feature-fastdebug/images/jdk/lib/libjava.so"
+      ],
+      "exit": 0,
+      "seconds": 0.6990776062011719,
+      "stdout_sha256": "c90b35332df43494a461de84bdf8a88d11ac8a55b85713904e213d038a0d21a2",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "native-mapping-1",
+      "command": [
+        "/workspace/scratch/2b4d1cb957a7/M3jdk21-features/build/m3-feature-fastdebug/images/jdk/bin/java",
+        "-Xmx256m",
+        "-Xcheck:jni",
+        "--add-exports",
+        "java.base/jdk.internal.mindex=ALL-UNNAMED",
+        "-cp",
+        "/workspace/scratch/2b4d1cb957a7/build-proof/feature-image-execution/classes",
+        "M3PrimitiveFixedArenaProbe",
+        "/workspace/scratch/2b4d1cb957a7/build-proof/feature-image-execution/canonical.m3prim",
+        "/workspace/scratch/2b4d1cb957a7/M3jdk21-features/build/m3-feature-fastdebug/images/jdk/lib/libjava.so"
+      ],
+      "exit": 0,
+      "seconds": 0.48170948028564453,
+      "stdout_sha256": "c90b35332df43494a461de84bdf8a88d11ac8a55b85713904e213d038a0d21a2",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "scope": "Existing Runtime, ProgressJob, real Eclipse status and JNI witnesses; finite qualification, no JCK or phase promotion",
+  "image_files": {
+    "bin/java": "543ce6b75484dfe725b0fd8762d218f2837c2a743941c917e3dbc47872632a42",
+    "bin/javac": "64bf95cd80282acd4c8cbc0d7db7f042501993b4a69666eba38cf3b617ca3c05",
+    "release": "c46512b068622d5b44cf9dc6f756798245fccc348cffb6830bb04804b0ce5b57",
+    "lib/libjava.so": "1773a5e8de075a6336a11c09b572da2ceddcf34df4e13e6ec564c0896b429b26",
+    "lib/server/libjvm.so": "22ac9164c458a3915591eff7c6130fb66787fef3ca92b27e6073e42985e74447",
+    "lib/modules": "f58365e287ba18548e6ce609d4df57eb2bb399016f05ee130824843ab058c236"
+  },
+  "eclipse_jars": [
+    {
+      "name": "org.eclipse.equinox.common-3.21.0.jar",
+      "sha256": "2545ed27d408f19882695703097e5998bf25652bd0dac76a8e6d1391ec228ab7"
+    },
+    {
+      "name": "org.eclipse.osgi-3.24.300.jar",
+      "sha256": "4a770aa4a78df653af871073c8b4ddd56884895f5fc71d10c40b4289ac7c8b9f"
+    }
+  ],
+  "source_files": {
+    "test/jdk/java/lang/Runtime/M3RuntimeProgressFacade.java": "2eb18c42e8d6ad7ce0456f88f07e7c2572ff1f02a8c9989dbec2a90afd5a7a3c",
+    "test/jdk/java/util/concurrent/ProgressJob/M3ProgressJob.java": "c8a20e2143ab2a1ab4ca3437ca2bf79c1ab486596247e0aecd6c1cde3b0dd609",
+    "m3/runtime-integration/progress-job-20261018/src/test/java/EclipseStatusIdentity.java": "9c5636c1c12363d9d05767b80cd589f9c9cedb55b0b3b7e073c8c25a114509e9",
+    "test/jdk/jdk/internal/mindex/M3PrimitiveIdentityTest.java": "613ed2c24259fbf08341c14ab762a1a42d4347a8d7b3514d8baa9f2b981329c5",
+    "test/jdk/jdk/internal/mindex/M3PrimitiveFixedArenaProbe.java": "2b8362b67dc89fdb50d1fdf8db42551469821f039f24a7cbbc347a3bb2a7a214"
+  },
+  "feature_outputs": {
+    "default-M3RuntimeProgressFacade": "M3_RUNTIME_PROGRESS_FACADE_PASS checks=84\n",
+    "default-M3ProgressJob": "PASS ProgressJob checks=81; new API=PENDING; Object universal compatibility=HOLD; STRING phase unchanged\n",
+    "default-EclipseStatusIdentity": "PASS real Eclipse IStatus/Status/MultiStatus checks=37; status return preserved; cancellation follows existing MonitoredCallable contract\n",
+    "interpreter-M3RuntimeProgressFacade": "M3_RUNTIME_PROGRESS_FACADE_PASS checks=84\n",
+    "interpreter-M3ProgressJob": "PASS ProgressJob checks=81; new API=PENDING; Object universal compatibility=HOLD; STRING phase unchanged\n",
+    "interpreter-EclipseStatusIdentity": "PASS real Eclipse IStatus/Status/MultiStatus checks=37; status return preserved; cancellation follows existing MonitoredCallable contract\n",
+    "c1-M3RuntimeProgressFacade": "M3_RUNTIME_PROGRESS_FACADE_PASS checks=84\n",
+    "c1-M3ProgressJob": "PASS ProgressJob checks=81; new API=PENDING; Object universal compatibility=HOLD; STRING phase unchanged\n",
+    "c1-EclipseStatusIdentity": "PASS real Eclipse IStatus/Status/MultiStatus checks=37; status return preserved; cancellation follows existing MonitoredCallable contract\n",
+    "c2-M3RuntimeProgressFacade": "M3_RUNTIME_PROGRESS_FACADE_PASS checks=84\n",
+    "c2-M3ProgressJob": "PASS ProgressJob checks=81; new API=PENDING; Object universal compatibility=HOLD; STRING phase unchanged\n",
+    "c2-EclipseStatusIdentity": "PASS real Eclipse IStatus/Status/MultiStatus checks=37; status return preserved; cancellation follows existing MonitoredCallable contract\n"
+  },
+  "frozen_stock_client_sha256": {
+    "OldCallableClient$1.class": "8f9efd68f91311ab5d4a482bc910966b2955481227446c307c15e1274a4a07f1",
+    "OldCallableClient$Dual.class": "46d38dbe6f44608de897440d7814c3b6ee2fb0dde642b8127ca3994c09cb1a4b",
+    "OldCallableClient.class": "1ad45f87d94f22596d3d430eb14507cece6e4e4dc1717aac521c4a4b345f1fde"
+  },
+  "old_client_output": "PASS old Callable lambda/anonymous/class/dual Runnable and checked exception identity; finite client witness\n",
+  "primitive_fixture_sha256": "d1e787fb4fe0ec277e4ed097c41bec54e713c68be3aa5074db803ee4abdaf94a",
+  "primitive_output": "M3_NAMESPACE=6dc3b1770d9e6c0b24a442b9ef6045b1705157b433496b60188ff6ba0788eab8\nM3_PRIMITIVE_TEST checks=131403\n",
+  "native_outputs": [
+    "M3_FIXED_ARENA_OK base=0x600000000000 namespace=6dc3b1770d9e6c0b24a442b9ef6045b1705157b433496b60188ff6ba0788eab8\n",
+    "M3_FIXED_ARENA_OK base=0x600000000000 namespace=6dc3b1770d9e6c0b24a442b9ef6045b1705157b433496b60188ff6ba0788eab8\n"
+  ],
+  "independent_processes": 2,
+  "concurrent_processes": false,
+  "collision_refusal": "Asserted by existing probe in each process",
+  "primitive_image_sha256": "c9de5bd62eba0668fbc6725bb2d3a1eb82272dae180218eaa059191d5c93f645"
+}

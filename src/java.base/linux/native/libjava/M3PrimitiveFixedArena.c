@@ -8,7 +8,9 @@
  * particular file as subject to the "Classpath" exception as provided
  * by Oracle in the LICENSE file that accompanied this code.
  */
+#ifndef _GNU_SOURCE
 #define _GNU_SOURCE
+#endif
 #include <jni.h>
 #include <errno.h>
 #include <fcntl.h>

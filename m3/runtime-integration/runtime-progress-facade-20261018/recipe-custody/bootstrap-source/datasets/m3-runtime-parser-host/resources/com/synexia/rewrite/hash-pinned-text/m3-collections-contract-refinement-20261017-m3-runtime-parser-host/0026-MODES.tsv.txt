@@ -1,0 +1,6 @@
+m3/runtime-integration/runtime-progress-facade-20261018/CATALOGUE.tsv	0644
+m3/runtime-integration/runtime-progress-facade-20261018/README.md	0644
+m3/runtime-integration/runtime-progress-facade-20261018/RECEIVING-MAP.json	0644
+src/java.base/share/classes/java/lang/Runtime.java	0644
+test/jdk/java/lang/Runtime/M3RuntimeLegacyClient.java	0644
+test/jdk/java/lang/Runtime/M3RuntimeProgressFacade.java	0644
