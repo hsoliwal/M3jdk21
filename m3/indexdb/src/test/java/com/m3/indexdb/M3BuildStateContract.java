@@ -92,6 +92,14 @@ public final class M3BuildStateContract {
                 new String[]{"A.java"}, new byte[]{1}, hashes(1), hashes(11),
                 new byte[]{1}, new int[0], new int[0]);
         rows(fresh.planAfter(oldSingle), 1);
+        M3BuildState revisedEdges = M3BuildState.of(digest(7),
+                new String[]{"A.java", "B.java", "C.java", "External.class", "pom.xml"},
+                new byte[]{1, 1, 1, 2, 3}, hashes(1, 2, 3, 4, 5),
+                hashes(11, 12, 13, 14, 0), new byte[]{1, 1, 1, 1, 0},
+                new int[]{0, 1, 2}, new int[]{3, 0, 0});
+        M3BuildState.Plan edgePlan = revisedEdges.planAfter(old);
+        rows(edgePlan, 2);
+        check((edgePlan.reasonAt(2) & M3BuildState.GRAPH_CHANGED) != 0);
         refusal(IllegalArgumentException.class, () -> M3BuildState.of(digest(0),
                 new String[]{"z","a"}, new byte[]{1,1}, hashes(1,2), hashes(1,2),
                 new byte[]{1,1}, new int[0], new int[0]));
