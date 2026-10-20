@@ -359,7 +359,7 @@ public final class M3HfLexiconIntakeProof {
                 "CLTS version, transcription coverage, feature schemes and attribution stay explicit");
         String multext = discoveryRecord(lines, "multext-east-v6-morphosyntax");
         require(multext.contains("2022-06-24") && multext.contains("compact MSD tag")
-                && multext.contains("no blanket redistribution license")
+                && multext.contains("does not establish one blanket redistribution license")
                 && multext.contains("unknown versus absent"),
                 "MULTEXT-East versioned language-specific grammar specs and rights stay explicit");
         String sindhi = discoveryRecord(lines, "hf-sindhi-open-lexicon");
