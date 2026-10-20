@@ -3,6 +3,16 @@
   "policy": "additive; no blind renames or unverified compatibility claims; Synexia donor names do not define M3JDK target ABI; precompute is internal-only",
   "mappings": [
     {
+        "source": "Synexia MIndexString owner/range interning; tools4j/shortstring primitive-codec technique (MIT, no code copied)",
+        "source_commit": "383d2d17d5d1942673976db34cda3695991ca422",
+        "target": "java.lang.M3StringImmediate with HotSpot java_lang_M3String native char/copy adapter",
+        "status": "DRAFT_FIXED_ARRAY_IMMEDIATE_RECEIVER_NOT_RUNTIME_QUALIFIED",
+        "recipe": "com.synexia.rewrite.m3fixedshort.M3FixedArrayShortStringRecipe",
+        "target_rule": "Fixed long[32] pages own packed immediate words; weak index and slot owners; preserve java.lang.String, existing owner/range/tuple view, Unicode refusal and JNI compatibility",
+        "gates": "Source-sealed, fixed point/refusal fixture, JDK21 patch compile, HotSpot native build, jtreg, GC/CDS and CPU/heap/native evidence required; no runtime promotion before proof",
+        "provenance": "tools4j MIT copyright 2023 tools4j.org (Marco Terzer); target Java/HotSpot licenses unchanged"
+    },
+    {
       "source": "com.synexia.indexstring.projection.MIndexDerivativeRegex / MIndexPredicateAlphabet / native derivative power ABI",
       "source_commit": "892e3f6c51d78bc0948e8a8cf736055b4c70eafa",
       "source_blob": "292675e404c5a087e0039e20bf2b63f22bb97bfe",
