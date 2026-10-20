@@ -69,6 +69,7 @@ public final class M3JacksonContract {
         Files.createDirectory(output);
         run("original-objectmapper", M3JacksonContract::originalObjectMapper);
         run("character-and-ast-overloads", M3JacksonContract::characterAndAstOverloads);
+        run("direct-ast-token-binding", M3ASTBindingContract::verify);
         run("registered-datatype-and-null", M3JacksonContract::registeredDatatypeAndNull);
         run("enclosing-parser-cursor", M3JacksonContract::enclosingParserCursor);
         run("ordered-duplicate-and-shared-subtrees", M3JacksonContract::orderedSharedSubtrees);

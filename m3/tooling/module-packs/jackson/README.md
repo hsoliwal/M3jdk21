@@ -37,7 +37,7 @@ import jdk.m3.jackson.M3ObjectMapper;
 M3File file = M3File.read(Path.of("input.json"), StandardCharsets.UTF_8, 8_388_608);
 M3ObjectMapper mapper = new M3ObjectMapper();
 M3AST ast = mapper.readAST(file);
-var value = mapper.readValue(file, java.util.Map.class);
+var value = mapper.readTreeValue(ast, java.util.Map.class);
 ```
 
 `M3File` is an immutable, bounded source receiver. It snapshots mutable character
@@ -72,20 +72,68 @@ pool indexes and scope are not claimed equivalent to those other AST families.
 expanded UTF-16 text, and container depth. Output traversal also checks expanded
 work so shared DAGs cannot bypass those limits. Non-finite numbers and embedded
 Java-object tokens are outside this finite JSON AST contract. Numeric text is the
-lexeme exposed by Jackson, which may normalize permissive source syntax. A strict
-Jackson parser independently admits each retained numeric lexeme before it can
-reach numeric output; text such as `.5` or `1.` is refused. Ordinary inherited
+lexeme exposed by Jackson, which may normalize permissive source syntax. The existing
+strict numeric-lexeme check validates Jackson's token text without creating a
+second parser; text such as `.5` or `1.` is refused. Ordinary inherited
 ObjectMapper methods retain their existing support and configuration.
 
 `readAST` requires exactly one complete root. M3AST property deserialization consumes
 one value within its enclosing document. Existing ObjectMapper trailing-token,
 duplicate-key, coercion, annotation and polymorphic behavior remains unchanged.
-Binding an M3AST to a POJO uses an explicit JSON String projection through Jackson;
-it is an observable materialization boundary, not a zero-allocation claim.
+The existing `readValue(M3AST, ...)` overloads use an explicit JSON String projection
+through Jackson and preserve registered M3AST serializers. Use the explicit
+`readTreeValue` operation below when the authoritative tree itself is the value to bind.
 Jackson TokenBuffer output uses its integer-aware writer to preserve numeric token
 kinds in `valueToTree` and `convertValue`. Polymorphic type metadata on M3AST itself
 is not part of this new datatype contract; Jackson reports its ordinary unsupported
 type-id diagnostic. Existing POJO polymorphic serializers remain Jackson-owned.
+
+## Bind the authoritative tree without reading or parsing its source again
+
+```java
+M3ObjectMapper mapper = new M3ObjectMapper();
+M3AST ast = mapper.readAST("{\"items\":[1,2,3]}"); // authoritative parse
+var first = mapper.readTreeValue(ast, java.util.Map.class);
+var again = mapper.readTreeValue(ast, new com.fasterxml.jackson.core.type.TypeReference<
+        java.util.Map<String, java.util.List<Integer>>>() { });
+```
+
+`readTreeValue(M3AST, Class/TypeReference/JavaType)` binds directly from the existing
+sealed atom lanes. Its private Jackson token cursor emits every ordered occurrence,
+including duplicate fields and shared subtrees. It opens no source, invokes no JSON
+generator or grammar parser, and builds no TokenBuffer, JsonNode intermediary,
+second atom pool or document-wide scalar copy. An existing `M3ASTAtom.asAST()`
+subtree view can be bound independently using the same retained document.
+
+The cursor retains two primitive container/child-ordinal stacks and Jackson's reused
+contexts proportional to open depth. Text getters return the existing String.
+Character-array access and numeric coercion may use Jackson's reusable current-token
+buffer. Requested POJOs/collections are ordinary binding output; optional strict
+duplicate detection retains Jackson's normal per-object name set. This is a bounded
+storage design and an observed absence of source parsing, not a zero-allocation or
+measured speedup claim.
+
+The operation uses this mapper's real deserializers, type construction, naming,
+coercion, object-identity resolution, numeric conversion and duplicate-detection
+features. M3 retained-state, expanded token/text and depth bounds still apply, as do
+Jackson's token-kind length, nesting and token-count read constraints. There is no
+source stream for a byte/character document-length limit or source decorator to
+process. Error locations are explicitly unavailable because this JSON AST does not
+retain source positions. Errors and closure remain owned by Jackson binding.
+
+This explicit tree operation bypasses M3AST serialization and generator settings.
+Existing `readValue(M3AST, ...)` methods retain their serializer-based JSON
+materialization behavior; custom serializers can intentionally produce a different
+value. Neither a text-ingress overload nor a format-specific byte/character parser
+is silently redirected to the new operation.
+
+The original `M3JacksonContract` now invokes `M3ASTBindingContract` in both host
+and linked-image qualification. Its real Jackson cases cover all three overloads,
+source-parser/generator refusal counters, unchanged legacy serializer behavior,
+numeric coercion/overflow, Unicode, duplicate/shared occurrences, independent
+subtrees, configured deserializers and object identities, token contexts, failure
+closure, resource limits and 3,000 nested containers. Focused host receipts must be
+reported separately from the full source/JMOD and modified M3JDK runtime gates.
 
 ## Build and proof boundary
 
