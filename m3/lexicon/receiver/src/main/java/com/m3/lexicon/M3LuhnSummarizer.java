@@ -281,7 +281,10 @@ public final class M3LuhnSummarizer {
     private static ClusterValue cluster(int first, int last, int significant) {
         int span = last - first + 1;
         long numerator = (long) significant * significant;
-        return new ClusterValue((numerator << 20) / span, span);
+        long score = numerator > (Long.MAX_VALUE >>> 20)
+                ? Long.MAX_VALUE / span
+                : (numerator << 20) / span;
+        return new ClusterValue(score, span);
     }
 
     private static long weight(long scoreQ20, int weightQ10) {
