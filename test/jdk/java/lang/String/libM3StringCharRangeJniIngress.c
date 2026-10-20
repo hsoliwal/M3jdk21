@@ -1,4 +1,7 @@
-/* SPDX-License-Identifier: Apache-2.0 */
+/*
+ * Copyright (c) 2026, Hitesh Soliwal and contributors. All rights reserved.
+ * GPLv2 with the Classpath exception.
+ */
 
 #include "jni.h"
 
