@@ -1,0 +1,9 @@
+category	candidate	selection	rationale
+Input provider	Original NIO Path/M3File	REUSE	No filesystem object graph
+Layered parsing	One source + parent-owned 8KiB dynamic pages + cursor offsets	SELECT	Single physical IO, bounded retained operation pages
+Output mirroring	Synchronous write-through to optional shadow	SELECT_CAVEAT	No atomicity claim across independent outputs
+Subprogress	Default methods and bounded child monitors	SELECT	No external monitor dependency
+Javac AST	Original javac task + M3AST index	HOLD	No second parser or AST store
+Attribute-based file delta	Existing M3File metadata and delta PRs	REUSE_LATER	Provider generation needed to safely avoid hashing
+JNI stream duplication	Standalone native shadow IO	REJECT_UNMEASURED	Prefer existing checked JNI selectors only if measured
+Educational algorithms	LeetCode/HackerRank/GeeksforGeeks categories	REFERENCE_ONLY	No imported challenge implementation

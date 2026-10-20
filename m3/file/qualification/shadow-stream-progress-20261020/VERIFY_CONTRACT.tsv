@@ -1,0 +1,9 @@
+stage	state	evidence
+diff	PASS_LOCAL	Existing M3File original methods unchanged, additive overloads/classes
+linter	PASS_LOCAL	javac -Xlint:all,-module -Werror
+compile	PASS_LOCAL	OpenJDK 21 named module
+tests	PASS_LOCAL	43 assertions, normal and interpreter modes
+runtime	PASS_LOCAL	Original NIO provider, symlink refusal and shadow cursor contract
+canonical_recipe	NOT_EXECUTED	Missing Maven executable and dependencies in local environment
+native_compiler_and_jni	NO_NATIVE_CHANGE	No JNI symbols; require measured reason to add
+full_sdk	NOT_EXECUTED	Native/HotSpot/JTReg/JCK outstanding

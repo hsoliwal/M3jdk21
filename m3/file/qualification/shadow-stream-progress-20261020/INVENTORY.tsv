@@ -1,0 +1,5 @@
+path	preimage	postimage	purpose
+m3/file/src/main/java/com/m3/file/M3File.java	22b6c0e7f2a136b2d43e765ec4a0669c2bc564a7d81f0b31f4f0a13f184e36e4	93864fe41040396ffa40775ed7489f8e97ae6ee058538294e0626d046b12915c	Add two IO progress/shadow overloads, preserve old API
+m3/file/src/main/java/com/m3/file/M3StreamProgress.java	ABSENT	e7258d79c6dcfb65c2598ae1480f5d7078a31fde921c4842ea8ab4209754362d	Functional subprogress default methods
+m3/file/src/main/java/com/m3/file/M3ShadowStreams.java	ABSENT	b934019aa4a89835d54a991090379abe3c22ca6487e58b3568389b3cabb85afa	Shared one-source byte pages/cursors and mirrored output
+m3/file/src/test/java/com/m3/file/M3ShadowStreamsContract.java	ABSENT	cc3d5ab685c44ed01436404e782adcbfcb85aae2ab088df11449a0a0b116140a	43-contract executable test

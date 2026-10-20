@@ -1,0 +1,9 @@
+item	status	evidence
+source_inventory	PASS	original M3File Git blob c182a3b1526f9fd0ca20c631d97df3048076defd
+canonical_synexia_recipe	AUTHORED_NOT_EXECUTED	Synexia #12598, OpenRewrite JUnit with source-sealed exact postimages
+java21_strict_compile	PASS_LOCAL	javac --release 21 -proc:none -Xlint:all,-module -Werror
+normal_named_module_runtime	PASS_LOCAL	M3_SHADOW_STREAM_PASS checks=43
+interpreted_named_module_runtime	PASS_LOCAL	M3_SHADOW_STREAM_PASS checks=43
+native_jni	NOT_APPLICABLE_NO_NEW_SYMBOL	Java-only stream methods, not JNI proof
+full_m3jdk21_hotspot	NOT_EXECUTED	Full SDK bootstrap and jtreg gates pending
+maven_gradle_analyzer_wiring	NOT_EXECUTED	Original task/AST receiver not yet wired
