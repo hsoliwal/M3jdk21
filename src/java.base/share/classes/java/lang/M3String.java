@@ -764,6 +764,24 @@ final class M3String implements CharSequence {
         } else if (other.length() != length()) {
             return false;
         }
+        // A composite is already an immutable indexed tree. Sequential comparisons
+        // visit a cached scalar leaf run instead of descending the tree per UTF-16 unit.
+        // Keep the old allocation-free scalar route for short or flat comparisons.
+        if (length() >= 32
+                && (owner instanceof M3StringTuple
+                        || (that != null && that.owner instanceof M3StringTuple))) {
+            CodeUnitCursor left =
+                    owner instanceof M3StringTuple ? new CodeUnitCursor(this) : null;
+            CodeUnitCursor right =
+                    that != null && that.owner instanceof M3StringTuple
+                            ? new CodeUnitCursor(that) : null;
+            for (int index = 0; index < length(); index++) {
+                char first = left == null ? charAt(index) : left.at(index);
+                char second = right == null ? other.charAt(index) : right.at(index);
+                if (first != second) return false;
+            }
+            return true;
+        }
         for (int index = 0; index < length(); index++) {
             if (charAt(index) != other.charAt(index)) return false;
         }
@@ -1061,6 +1079,25 @@ final class M3String implements CharSequence {
             if (offset == length() - checked.length() && !sourceFacts.suffixMayMatch(prefixFacts)) {
                 return false;
             }
+        }
+        // Prefix/range checks over a tuple use the same canonical leaf cursor as
+        // streaming and search; no duplicate String or character array is created.
+        if (checked.length() >= 32
+                && (owner instanceof M3StringTuple
+                        || checked.owner instanceof M3StringTuple)) {
+            CodeUnitCursor sourceUnits =
+                    owner instanceof M3StringTuple ? new CodeUnitCursor(this) : null;
+            CodeUnitCursor prefixUnits =
+                    checked.owner instanceof M3StringTuple ? new CodeUnitCursor(checked) : null;
+            for (int index = 0; index < checked.length(); index++) {
+                char actual =
+                        sourceUnits == null ? charAt(offset + index)
+                                : sourceUnits.at(offset + index);
+                char wanted =
+                        prefixUnits == null ? checked.charAt(index) : prefixUnits.at(index);
+                if (actual != wanted) return false;
+            }
+            return true;
         }
         for (int index = 0; index < checked.length(); index++) {
             if (charAt(offset + index) != checked.charAt(index)) return false;
