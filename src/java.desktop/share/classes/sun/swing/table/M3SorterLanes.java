@@ -432,33 +432,95 @@ public final class M3SorterLanes {
 
     // ---- sorting an int lane with the host's order -----------------------------------------------
 
+    /** Runs shorter than this are extended by binary insertion, as TimSort does. */
+    private static final int MIN_RUN = 32;
+
     /**
-     * Sorts {@code a[0 .. n)} by the host's order: a merge sort that skips a merge whose halves are
-     * already in order, so an ordered lane costs n - 1 comparisons, as the stock TimSort does.
-     * Public for the unit test.
+     * Sorts {@code a[0 .. n)} by the host's order with a natural merge sort, the shape of the stock
+     * TimSort: ascending runs are kept, strictly descending runs reversed, runs shorter than 32
+     * extended by binary insertion, and the runs merged pairwise, skipping a merge whose halves are
+     * already in order. An ordered or reversed lane costs n - 1 comparisons and no buffer; the
+     * merge buffer is allocated only when there are two runs or more. The order is strict, so the
+     * permutation is the one any comparison sort gives. Public for the unit test.
      */
     public void sortLane(int[] a, int n) {
-        if (n > 1) {
-            mergeSort(a, new int[n], 0, n);
+        if (n < 2) {
+            return;
+        }
+        int[] starts = new int[n / MIN_RUN + 2];
+        int runs = 0;
+        int lo = 0;
+        while (lo < n) {
+            int hi = runEnd(a, lo, n);
+            if (hi - lo < MIN_RUN) {
+                int force = Math.min(n, lo + MIN_RUN);
+                binaryInsertion(a, lo, force, hi);
+                hi = force;
+            }
+            starts[runs++] = lo;
+            lo = hi;
+        }
+        starts[runs] = n;
+        int[] tmp = runs > 1 ? new int[n] : null;
+        while (runs > 1) {
+            int w = 0;
+            for (int r = 0; r < runs; r += 2) {
+                if (r + 1 < runs) {
+                    merge(a, tmp, starts[r], starts[r + 1], starts[r + 2]);
+                }
+                starts[w++] = starts[r];
+            }
+            starts[w] = n;
+            runs = w;
         }
     }
 
-    private void mergeSort(int[] a, int[] tmp, int lo, int hi) {
-        if (hi - lo <= 16) {
-            for (int i = lo + 1; i < hi; i++) {
-                int v = a[i];
-                int j = i - 1;
-                while (j >= lo && host.compare(a[j], v) > 0) {
-                    a[j + 1] = a[j];
-                    j--;
-                }
-                a[j + 1] = v;
-            }
-            return;
+    /** The end of the run at {@code lo}; a strictly descending run is reversed in place. */
+    private int runEnd(int[] a, int lo, int n) {
+        int hi = lo + 1;
+        if (hi == n) {
+            return n;
         }
-        int mid = (lo + hi) >>> 1;
-        mergeSort(a, tmp, lo, mid);
-        mergeSort(a, tmp, mid, hi);
+        if (host.compare(a[hi], a[lo]) < 0) {
+            hi++;
+            while (hi < n && host.compare(a[hi], a[hi - 1]) < 0) {
+                hi++;
+            }
+            for (int i = lo, j = hi - 1; i < j; i++, j--) {
+                int t = a[i];
+                a[i] = a[j];
+                a[j] = t;
+            }
+        } else {
+            hi++;
+            while (hi < n && host.compare(a[hi], a[hi - 1]) >= 0) {
+                hi++;
+            }
+        }
+        return hi;
+    }
+
+    /** Inserts {@code a[start .. hi)} into the sorted {@code a[lo .. start)} by binary search. */
+    private void binaryInsertion(int[] a, int lo, int hi, int start) {
+        for (int i = start; i < hi; i++) {
+            int v = a[i];
+            int l = lo;
+            int r = i;
+            while (l < r) {
+                int m = (l + r) >>> 1;
+                if (host.compare(v, a[m]) < 0) {
+                    r = m;
+                } else {
+                    l = m + 1;
+                }
+            }
+            System.arraycopy(a, l, a, l + 1, i - l);
+            a[l] = v;
+        }
+    }
+
+    /** Merges the sorted {@code a[lo .. mid)} and {@code a[mid .. hi)}. */
+    private void merge(int[] a, int[] tmp, int lo, int mid, int hi) {
         if (host.compare(a[mid - 1], a[mid]) <= 0) {
             return;
         }

@@ -172,6 +172,16 @@ public class M3SorterLanesTest {
                 s.compares = 0;
                 s.lanes.sortLane(lane, n);
                 assertEquals(Math.max(0, n - 1), s.compares, "sorted lane, n " + n);
+                int[] sorted = lane.clone();
+                for (int i = 0, j = n - 1; i < j; i++, j--) {
+                    int t = lane[i];
+                    lane[i] = lane[j];
+                    lane[j] = t;
+                }
+                s.compares = 0;
+                s.lanes.sortLane(lane, n);
+                assertArrayEquals(sorted, lane, "reversed lane, n " + n);
+                assertEquals(Math.max(0, n - 1), s.compares, "reversed lane is one run, n " + n);
             }
         }
     }

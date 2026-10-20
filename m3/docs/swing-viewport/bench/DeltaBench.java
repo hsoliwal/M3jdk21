@@ -40,7 +40,7 @@ import javax.swing.tree.TreePath;
  */
 public final class DeltaBench {
 
-    static final int N = 1_000_000;
+    static final int N = Integer.getInteger("n", 1_000_000);
     static String impl = "stock";
     static String kase = "";
     static long sink;
@@ -161,7 +161,7 @@ public final class DeltaBench {
             s.setSortKeys(null);
             s.setSortKeys(List.of(new RowSorter.SortKey(1, SortOrder.DESCENDING)));
         }, "setSortKeys(null) then one key: drop the lanes, build and sort them");
-        time("insert_one_row", r -> m.insertRow(mid, new Object[] {"ins" + r, 500_000, true}),
+        time("insert_one_row", r -> m.insertRow(mid, new Object[] {"ins" + r, N / 2, true}),
                 "DefaultTableModel.insertRow at the middle: rowsInserted0");
         time("remove_one_row", r -> m.removeRow(mid), "DefaultTableModel.removeRow at the middle: rowsDeleted0");
         s.setSortsOnUpdates(true);
@@ -172,23 +172,30 @@ public final class DeltaBench {
             }
             m.fireTableRowsUpdated(mid, mid + 999);
         }, "fireTableRowsUpdated over 1,000 rows with sortsOnUpdates: rowsUpdated0");
-        time("set_filter", r -> s.setRowFilter(RowFilter.numberFilter(RowFilter.ComparisonType.AFTER, r % 2 == 0 ? 500_000 : 250_000, 1)),
+        time("set_filter", r -> s.setRowFilter(RowFilter.numberFilter(RowFilter.ComparisonType.AFTER, r % 2 == 0 ? N / 2 : N / 4, 1)),
                 "setRowFilter: initializeFilteredMapping + sort");
         time("update_one_row_filtered", r -> m.setValueAt(r, mid, 1), "setValueAt with a filter and sortsOnUpdates");
         row("view_rows", s.getViewRowCount(), "rows", "after the filter");
     }
 
-    /** Median of 7 runs of {@code edit}, in ms. */
+    /** Median of 7 runs of {@code edit}, in ms, and the median bytes the thread allocated per run. */
     static void time(String metric, Edit edit, String note) {
+        com.sun.management.ThreadMXBean mx =
+                (com.sun.management.ThreadMXBean) java.lang.management.ManagementFactory.getThreadMXBean();
         long[] ns = new long[7];
+        long[] bytes = new long[7];
         for (int r = 0; r < ns.length; r++) {
+            long a0 = mx.getCurrentThreadAllocatedBytes();
             long t0 = System.nanoTime();
             edit.run(r);
             ns[r] = System.nanoTime() - t0;
+            bytes[r] = mx.getCurrentThreadAllocatedBytes() - a0;
         }
         Arrays.sort(ns);
+        Arrays.sort(bytes);
         row(metric, String.format("%.3f", ns[3] / 1e6), "ms p50", note + "; min " + String.format("%.3f", ns[0] / 1e6)
                 + " max " + String.format("%.3f", ns[6] / 1e6));
+        row(metric + "_alloc", String.format("%.3f", bytes[3] / 1e6), "MB p50", "bytes the thread allocated per run");
     }
 
     // ---- JTree ------------------------------------------------------------------------------------
