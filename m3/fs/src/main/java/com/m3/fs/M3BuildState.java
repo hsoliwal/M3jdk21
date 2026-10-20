@@ -180,7 +180,8 @@ public final class M3BuildState {
                 reverse[cursor[dependencies[p]]++] = owner;
             }
         }
-        int[] queue = new int[n]; int head = 0, tail = 0;
+        int[] queue = new int[n]; long[] enqueued = new long[words];
+        int head = 0, tail = 0;
         for (int row = 0; row < n; row++) {
             int old = previous.find(paths[row], roles[row]);
             boolean bytesChanged = old < 0 || lengths[row] != previous.lengths[old] ||
@@ -194,15 +195,17 @@ public final class M3BuildState {
                 // proven ABI, and an unchanged dependency graph.
                 boolean canStop = old >= 0 && !edgesChanged && !abiChanged &&
                         (roles[row] == SOURCE || roles[row] == CLASS) && abiAt(row);
-                if (!canStop) queue[tail++] = row;
+                if (!canStop) { set(enqueued, row); queue[tail++] = row; }
             }
         }
         while (head < tail) {
             int current = queue[head++];
             for (int p = reverseOffsets[current]; p < reverseOffsets[current + 1]; p++) {
                 int dependent = reverse[p];
-                if (!bit(affected, dependent)) {
-                    set(affected, dependent);
+                // Being directly dirty is not the same as having traversed its
+                // reverse edges. Track the actual worklist separately.
+                if (!bit(enqueued, dependent)) {
+                    set(affected, dependent); set(enqueued, dependent);
                     queue[tail++] = dependent;
                 }
             }
