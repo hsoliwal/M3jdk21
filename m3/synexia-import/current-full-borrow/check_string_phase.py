@@ -128,12 +128,17 @@ EXPECTED_STRING_CHAIN = (
      "4fb87fd70ffe5c8d75d17db9c28b44bc9b574704", "11220", "862"),
     ("4fb87fd70ffe5c8d75d17db9c28b44bc9b574704",
      "42399d411c1516a56a47dcdb10242960157b4677", "11247", "864"),
+    ("42399d411c1516a56a47dcdb10242960157b4677",
+     "35ed998540e044eed8cb7596e2e2c019ae369bd3", "11448", "898"),
+    ("35ed998540e044eed8cb7596e2e2c019ae369bd3",
+     "1e6c5c33569dbfd17cb75de2ceb61f567e6767af", "10774", "1530"),
 )
 
 SUCCESSOR_MARKERS = {
     "src/java.base/share/classes/java/lang/M3String.java": (
         "private final M3StringOwner owner;",
         "private final long value;",
+        "static M3String joinCharRanges(char[][] sources, int[] starts, int[] lengths)",
         "static M3String joinDesignated(",
         "M3String left = canonicalize(first);",
         "if (left == null) return null;",

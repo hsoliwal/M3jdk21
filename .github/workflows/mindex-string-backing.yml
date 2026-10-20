@@ -89,6 +89,8 @@ jobs:
         with:
           distribution: temurin
           java-version: '21'
+      - name: Prove recipe-first M3 String char-range ingress
+        run: mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml -Dtest=M3StringCharRangeIngressRecipeTest test
       - name: Verify String Phase-1 checkout root and integrity
         run: python3 m3/synexia-import/current-full-borrow/test_string_phase_root.py -v
       - name: Verify STRING target successor refusal controls
@@ -121,8 +123,6 @@ jobs:
         run: mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml -Dtest=M3StringCanonicalDagMasterRepairRecipeTest test
       - name: Prove direct M3 String stream traversal recipe
         run: mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml -Dtest=M3StringDirectStreamTraversalRecipeTest test
-      - name: Prove recipe-first M3 String char-range ingress
-        run: mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml -Dtest=M3StringCharRangeIngressRecipeTest test
       - name: Prove immutable Matcher fact reuse
         run: mvn -B -ntp -f m3/tooling/mr/pom.xml test
       - name: Verify current M3 String concat length and updated jtreg contract
