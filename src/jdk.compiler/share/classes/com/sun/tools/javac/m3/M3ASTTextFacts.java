@@ -7,7 +7,7 @@
 package com.sun.tools.javac.m3;
 
 import java.util.Objects;
-import jdk.internal.access.M3StringAccess;
+import java.lang.reflect.Method;
 import jdk.internal.access.SharedSecrets;
 
 /**
@@ -73,41 +73,114 @@ public final class M3ASTTextFacts {
         String checked = Objects.requireNonNull(source, "source");
         Objects.checkFromToIndex(beginIndex, endIndex, checked.length());
 
-        M3StringAccess access = SharedSecrets.getM3StringAccess();
-        if (access != null) {
-            M3StringAccess.Facts facts = access.facts(checked, beginIndex, endIndex);
-            if (facts != null) return fromM3(facts);
-        }
-        return scanFallback(checked, beginIndex, endIndex);
+        Facts m3 = M3Bridge.facts(checked, beginIndex, endIndex);
+        return m3 != null ? m3 : scanFallback(checked, beginIndex, endIndex);
     }
 
-    private static Facts fromM3(M3StringAccess.Facts facts) {
-        return new Facts(
-                facts.utf16Length(),
-                facts.utf8Length(),
-                facts.modifiedUtf8Length(),
-                facts.codePointCount(),
-                facts.unpairedSurrogateCount(),
-                facts.javaHash(),
-                facts.hash31Power(),
-                facts.bitSignal64(),
-                facts.ascii(),
-                facts.latin1(),
-                facts.asciiUpperHash(),
-                facts.asciiLowerHash(),
-                facts.asciiTitleHash(),
-                facts.prefix4(),
-                facts.suffix4(),
-                facts.bigramSignal64(),
-                facts.trigramSignal64(),
-                facts.trimStart(),
-                facts.trimEnd(),
-                facts.stripStart(),
-                facts.stripEnd(),
-                facts.ownerStructuralHash64(),
-                facts.coordinate(),
-                true,
-                true);
+    /**
+     * Late-bound bridge so this source remains compilable by the stock-JDK parser qualification.
+     * The M3JDK image publishes the shared secret; stock JDKs simply use the exact fallback scan.
+     */
+    private static final class M3Bridge {
+        private static final Method GET_ACCESS;
+        private static final Method FACTS;
+        private static final Method[] COMPONENTS;
+
+        static {
+            Method getAccess = null;
+            Method facts = null;
+            Method[] components = null;
+            try {
+                Class<?> accessType =
+                        Class.forName("jdk.internal.access.M3StringAccess", false, null);
+                Class<?> factsType =
+                        Class.forName("jdk.internal.access.M3StringAccess$Facts", false, null);
+                getAccess = SharedSecrets.class.getMethod("getM3StringAccess");
+                facts = accessType.getMethod(
+                        "facts", String.class, int.class, int.class);
+                String[] names = {
+                    "utf16Length",
+                    "utf8Length",
+                    "modifiedUtf8Length",
+                    "codePointCount",
+                    "unpairedSurrogateCount",
+                    "javaHash",
+                    "hash31Power",
+                    "bitSignal64",
+                    "ascii",
+                    "latin1",
+                    "asciiUpperHash",
+                    "asciiLowerHash",
+                    "asciiTitleHash",
+                    "prefix4",
+                    "suffix4",
+                    "bigramSignal64",
+                    "trigramSignal64",
+                    "trimStart",
+                    "trimEnd",
+                    "stripStart",
+                    "stripEnd",
+                    "ownerStructuralHash64",
+                    "coordinate"
+                };
+                components = new Method[names.length];
+                for (int i = 0; i < names.length; i++) {
+                    components[i] = factsType.getMethod(names[i]);
+                }
+            } catch (ClassNotFoundException | NoSuchMethodException unavailable) {
+                getAccess = null;
+                facts = null;
+                components = null;
+            }
+            GET_ACCESS = getAccess;
+            FACTS = facts;
+            COMPONENTS = components;
+        }
+
+        private M3Bridge() { }
+
+        static Facts facts(String source, int beginIndex, int endIndex) {
+            if (GET_ACCESS == null) return null;
+            try {
+                Object access = GET_ACCESS.invoke(null);
+                if (access == null) return null;
+                Object value = FACTS.invoke(access, source, beginIndex, endIndex);
+                if (value == null) return null;
+                Object[] fields = new Object[COMPONENTS.length];
+                for (int i = 0; i < fields.length; i++) {
+                    fields[i] = COMPONENTS[i].invoke(value);
+                }
+                return new Facts(
+                        (Integer) fields[0],
+                        (Integer) fields[1],
+                        (Integer) fields[2],
+                        (Integer) fields[3],
+                        (Integer) fields[4],
+                        (Integer) fields[5],
+                        (Integer) fields[6],
+                        (Long) fields[7],
+                        (Boolean) fields[8],
+                        (Boolean) fields[9],
+                        (Integer) fields[10],
+                        (Integer) fields[11],
+                        (Integer) fields[12],
+                        (Long) fields[13],
+                        (Long) fields[14],
+                        (Long) fields[15],
+                        (Long) fields[16],
+                        (Integer) fields[17],
+                        (Integer) fields[18],
+                        (Integer) fields[19],
+                        (Integer) fields[20],
+                        (Long) fields[21],
+                        (Long) fields[22],
+                        true,
+                        true);
+            } catch (ReflectiveOperationException failure) {
+                throw new IllegalStateException(
+                        "M3 String shared-secret contract drift", failure);
+            }
+        }
     }
 
     /**
