@@ -29,7 +29,8 @@ import org.openrewrite.java.tree.TextComment;
  * The class itself is renamed by a {@code ChangeType} row before this recipe runs.
  */
 public final class M3WordWidthVariant extends Recipe {
-	static final String VARIANT_LINE = " int-word variant generated from the long-word template by M3WordWidthVariant (TmOP; GWT/RAP builds).";
+	static final String VARIANT_LINE = " int-word variant generated from the long-word template M3BitMask by M3WordWidthVariant (TmOP; GWT/RAP builds);\n"
+			+ " * in the comments below read long as int, 64 as 32, 63 as 31 and >>> 6 as >>> 5.";
 
 	@Override
 	public String getDisplayName () {
@@ -45,18 +46,14 @@ public final class M3WordWidthVariant extends Recipe {
 	public TreeVisitor<?, ExecutionContext> getVisitor () {
 		return new JavaIsoVisitor<ExecutionContext> () {
 			@Override
-			public J.CompilationUnit visitCompilationUnit (J.CompilationUnit cu, ExecutionContext ctx) {
-				J.CompilationUnit c = super.visitCompilationUnit (cu, ctx);
-				J.Package pkg = c.getPackageDeclaration ();
-				if (pkg == null || pkg.getPrefix ().getComments ().isEmpty ()
-						|| !(pkg.getPrefix ().getComments ().get (0) instanceof TextComment first)
-						|| first.getText ().contains (VARIANT_LINE)) return c;
-				String text = first.getText ();
-				int end = text.lastIndexOf ('\n');
-				String marked = text.substring (0, end) + "\n *" + VARIANT_LINE + text.substring (end);
-				List<Comment> comments = new ArrayList<> (pkg.getPrefix ().getComments ());
-				comments.set (0, first.withText (marked));
-				return c.withPackageDeclaration (pkg.withPrefix (pkg.getPrefix ().withComments (comments)));
+			public J.ClassDeclaration visitClassDeclaration (J.ClassDeclaration classDecl, ExecutionContext ctx) {
+				J.ClassDeclaration c = super.visitClassDeclaration (classDecl, ctx);
+				if (!(getCursor ().getParentTreeCursor ().getValue () instanceof J.CompilationUnit)) return c;
+				List<Comment> comments = new ArrayList<> (c.getPrefix ().getComments ());
+				if (comments.isEmpty () || !(comments.get (0) instanceof TextComment first)
+						|| first.getText ().contains ("int-word variant")) return c;
+				comments.set (0, first.withText ("\n *" + VARIANT_LINE + first.getText ()));
+				return c.withPrefix (c.getPrefix ().withComments (comments));
 			}
 
 			@Override
@@ -66,12 +63,17 @@ public final class M3WordWidthVariant extends Recipe {
 			}
 
 			@Override
-			public J.Identifier visitIdentifier (J.Identifier identifier, ExecutionContext ctx) {
-				J.Identifier id = super.visitIdentifier (identifier, ctx);
-				if (!"Long".equals (id.getSimpleName ())) return id;
-				J parent = getCursor ().getParentOrThrow ().getValue ();
-				boolean target = parent instanceof J.FieldAccess f && f.getTarget () == identifier;
-				return target ? id.withSimpleName ("Integer") : id;
+			public J.MethodInvocation visitMethodInvocation (J.MethodInvocation method, ExecutionContext ctx) {
+				J.MethodInvocation m = super.visitMethodInvocation (method, ctx);
+				return m.getSelect () instanceof J.Identifier s && "Long".equals (s.getSimpleName ())
+						? m.withSelect (s.withSimpleName ("Integer")) : m;
+			}
+
+			@Override
+			public J.FieldAccess visitFieldAccess (J.FieldAccess fieldAccess, ExecutionContext ctx) {
+				J.FieldAccess f = super.visitFieldAccess (fieldAccess, ctx);
+				return f.getTarget () instanceof J.Identifier t && "Long".equals (t.getSimpleName ())
+						? f.withTarget (t.withSimpleName ("Integer")) : f;
 			}
 
 			@Override
