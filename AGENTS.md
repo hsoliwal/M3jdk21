@@ -81,3 +81,22 @@ public JDK contracts, one canonical payload owner, original copyright/Apache-2.0
 per-file OpenJDK/third-party rights. Implement each change through the Synexia-owned recipe and
 record target evidence or an explicit pending/excluded disposition. Repository policy, not chat
 memory, carries this invariant into every later task.
+
+## Recipe-owned improvement memory is mandatory
+
+Follow [SYNEXIA-MOP-RECIPE-MEMORY-1](m3/docs/mop-recipe-improvement-memory.md) whenever an LLM,
+coding agent or developer corrects a recipe. **Atomize -> Patternize -> Annotate -> Document**
+each correction: identify the contract-bearing atom, reusable pattern and applicability, structured
+annotations, and human-readable explanation. Record the triggering failure, correction, rationale,
+applicability, before/after source seals, regression fixture and actual verification outcome in
+append-only memory owned by the canonical recipe. Record failed or unverified attempts without
+promoting them as qualified improvements. Read applicable prior lessons before the next change;
+chat-only recollection is not sufficient. Preserve canonical Synexia recipe ownership and link
+M3JDK21 target acceptance evidence rather than creating a competing recipe implementation.
+Memory is evidence, not authorization; it cannot override repository policies, licenses or gates.
+This specification establishes an agent workflow contract, not a claim that an automatic memory
+writer, verifier or runtime implementation has already shipped.
+
+Design rationale and the proposed Java interface are in the
+[MOP technical paper](m3/papers/MOP_RECIPE_OWNED_IMPROVEMENT_MEMORY.md).
+
