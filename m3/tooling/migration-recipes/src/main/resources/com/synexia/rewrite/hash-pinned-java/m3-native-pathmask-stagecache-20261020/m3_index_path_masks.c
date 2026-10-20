@@ -203,7 +203,7 @@ JNIEXPORT jintArray JNICALL Java_com_m3_collections_M3IndexPathMasks_selectNativ
             return NULL;
         }
     }
-    if (stages <= M3_CACHED_STAGE_LIMIT) {
+    if (stages <= M3_CACHED_STAGE_LIMIT && count >= 8) {
         return m3_select_cached(env, rows, offsets, planes, required, forbidden,
                 first, count, stride, stages);
     }
