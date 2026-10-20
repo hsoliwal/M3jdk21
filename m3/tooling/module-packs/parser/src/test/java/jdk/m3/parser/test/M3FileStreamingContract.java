@@ -28,7 +28,7 @@ public final class M3FileStreamingContract {
         catch (IOException expected) { return; }
         throw new AssertionError("missing input decoding/budget refusal: " + reason);
     }
-    @FunctionalInterface private interface Checked { void execute() throws Exception; }
+    @FunctionalInterface private interface Checked { void execute() throws IOException; }
 
     private static String utf16Sha(String text) throws Exception {
         MessageDigest digest = MessageDigest.getInstance("SHA-256");
