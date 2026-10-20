@@ -44,6 +44,18 @@ public final class M3ASTIngress {
 
     private M3ASTIngress() { }
 
+    /**
+     * Index the javac compilation unit already produced by its owning task.
+     * This consumes the original Trees/LineMap and does not invoke another parser.
+     * Caller must supply the exact M3File source generation used for that unit;
+     * URI equality alone is not cryptographic source-content attestation.
+     */
+    public static M3ASTIndex javac(M3File source,
+            com.sun.source.tree.CompilationUnitTree unit,
+            com.sun.source.util.Trees trees, Limits limits) {
+        return M3JavacIndexIngress.javac(source, unit, trees, limits);
+    }
+
     /** Secure, complete POM XML parsing; exact element byte offsets are unavailable. */
     public static M3ASTIndex mavenPom(M3File source, Limits limits) throws IOException {
         check(source, limits);
