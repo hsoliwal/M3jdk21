@@ -50,8 +50,8 @@ class M3RecipeAgentTest {
             var target = new M3RecipeAgent.Target(M3RecipeAgent.TargetKind.FOLDER, "src", "*.java");
             Map<String, String> seals = agent.seal(workspace, target);
             assertEquals(Set.of("src/A.java", "src/B.java"), seals.keySet());
-            var recipe = new M3RecipeAgent.Action("package-shared", M3RecipeAgent.Operation.LITERAL,
-                    target, "class", "final class", "", seals, 2, List.of(),
+            var recipe = new M3RecipeAgent.Action("package-shared", M3RecipeAgent.Operation.REGEX,
+                    target, "(?m)^class ([A-Z])", "final class $1", "", seals, 2, List.of(),
                     M3RecipeAgent.Authority.FOLDER, "");
             var dryRun = agent.preview(workspace, List.of(recipe));
             assertEquals(2, dryRun.changes().size());
