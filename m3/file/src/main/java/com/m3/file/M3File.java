@@ -73,6 +73,31 @@ public final class M3File {
         }
     }
 
+    /**
+     * Lazily walks this provider's tree in depth-first encounter order without
+     * following symbolic links. The caller MUST close the returned stream,
+     * including after short-circuiting. The filter selects results; it does not
+     * prune descendant directories. Sibling order belongs to the provider.
+     *
+     * <p>The filter sees the original provider Path before an M3File is created.
+     * It can select extensions such as .txt, .json or .bin without reading file
+     * contents. Further stream filters compose traversal layers without building
+     * a second filesystem tree. The root has depth zero.
+     *
+     * @param maxDepth maximum traversal depth, nonnegative
+     * @param filter selection predicate over original provider paths
+     * @return caller-owned lazy stream of selected files and directories
+     * @throws IOException if the initial traversal cannot be opened
+     * @throws java.io.UncheckedIOException if later traversal I/O fails
+     * @throws IllegalArgumentException if maxDepth is negative
+     * @throws NullPointerException if filter is null
+     */
+    public java.util.stream.Stream<M3File> walk(int maxDepth,
+            java.util.function.Predicate<? super Path> filter) throws IOException {
+        Objects.requireNonNull(filter, "filter");
+        return Files.walk(path, maxDepth).filter(filter).map(M3File::of);
+    }
+
     private void requireRegular() throws IOException {
         if (!metadata().regularFile()) {
             throw new IOException("resource is not a regular file");

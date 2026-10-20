@@ -1,0 +1,43 @@
+{
+  "schema": "M3_STREAM_SHADOW_QUALIFICATION_V1",
+  "target_baseline": "065e3626aac2de62d2f531aec3bed2fca533c9f9",
+  "canonical_baseline": "7b849eaae565d5afccc98e0c8d46d0f02ebd9ca4",
+  "dataset": "streams-files-20261020",
+  "product_sources": {
+    "m3/file/src/main/java/com/m3/file/M3File.java": "89dda37a111a273789998e073e4526c4cef5b6abc5c15b5012c64931ca9b1c89",
+    "m3/file/src/test/java/com/m3/file/M3FileTraversalTest.java": "105e560d615760e2473796b7b17185bd2f3dadd1446bc2e63a7f461ec528a179",
+    "src/java.base/share/classes/java/io/InputStream.java": "f48ebb4233436b882f046d7d58ad44f5b1edff7ce808a3e236754f6ae8a36531",
+    "src/java.base/share/classes/java/io/OutputStream.java": "92adb9c2a5f62e87088ab7158c8e503c87745a60b5076ca4c3bd08c5823cdce6",
+    "src/java.base/share/classes/java/io/ShadowInputStream.java": "81cfe0dd83132e550ad5f7efb858d0c1cf34fff33074bb786141fc4976fc6fd1",
+    "src/java.base/share/classes/java/util/concurrent/ProgressMonitor.java": "368f6b70ca1639ed193c477d1523a1707cf9ec65d056275552e8ca42f500ae93",
+    "src/java.base/share/classes/java/util/concurrent/ProgressMonitors.java": "48b06f44b71fd22a2bafc4e8a99d7542d280830043d929ce1d26ae338f3b4efc",
+    "src/java.base/share/classes/jdk/internal/m3/io/M3IO.java": "76482eea6d15f0e4f95361cb5315e26ca04abb89919dcbf984035766a08d41b4",
+    "test/jdk/java/io/InputStream/M3StreamProgressShadow.java": "4776d5f0bb4192fd349233077a069e753bd11f08ba9bf543ba2ef4056f6839c1"
+  },
+  "sdk_tests": 5,
+  "input_sealing_tests": 8,
+  "receiver_cases": 9,
+  "parser_artifact_checks": 4,
+  "parser_junit_tests": 7,
+  "stream_checks_per_mode": 131326,
+  "runtime_modes": [
+    "Java21 mixed -Xcheck:jni",
+    "Java21 interpreted -Xcheck:jni"
+  ],
+  "traversal_checks": 23,
+  "legacy_io_checks_per_variant": 1029,
+  "memory_integrity_tests": 4,
+  "receiver_replay_changes": 0,
+  "public_api": "InputStream.withProgress and OutputStream.withProgress additive; existing descriptors unchanged; ShadowInputStream new; M3File.walk additive",
+  "native": "No new symbols; actual native file provider smoke with JNI checks; M3FS JNI-specific qualification NOT_RUN",
+  "full_image": "BLOCKED: existing local M3 image missing lib/server/libjvm.so; full source rebuild NOT_RUN",
+  "performance": "NOT_MEASURED; only structural fixed ring bound claimed",
+  "phase": "STRING; not advanced",
+  "coverage": "Finite streams/traversal and parser-correction qualification; not complete M3File/AST/delta/provider/MOP integration",
+  "canonical_recipe_repository": "hsoliwal/com.synexia",
+  "canonical_recipe_commit": "652172556cdcc748c22829ace9075404445712a2",
+  "canonical_recipe_pr": "https://github.com/hsoliwal/com.synexia/pull/12609",
+  "canonical_recipe_path": "synexia-openrewrite-recipes/recipe-crates/m3-runtime-progress-facade-20261018",
+  "recipe": "com.synexia.m3jdk.CollectionsContractRefinement20261017",
+  "attribution": "Copyright 2026 Hitesh Soliwal and contributors; Synexia MOP. Recipe metadata Apache-2.0; product/OpenJDK payload rights unchanged."
+}
