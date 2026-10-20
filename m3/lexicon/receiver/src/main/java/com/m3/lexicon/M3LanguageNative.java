@@ -9,6 +9,9 @@ package com.m3.lexicon;
  * mutate language state, or allocate semantic objects. Java remains the behavioral oracle.</p>
  */
 public final class M3LanguageNative {
+    private static final int MAX_NATIVE_WORDS = 1 << 20;
+    private static final int MAX_NATIVE_TOKENS = 1 << 20;
+    private static final int MAX_NATIVE_SENTENCES = 1 << 16;
     private static final Object LOAD_LOCK = new Object();
     private static volatile int loadState; // 0 unknown, 1 loaded, -1 unavailable
 
@@ -44,6 +47,11 @@ public final class M3LanguageNative {
             long[] scoreQ20,
             int[] significantWords,
             int[] strongestSpan) {
+        if (geometry.wordCount() > MAX_NATIVE_WORDS
+                || wordIds.length > MAX_NATIVE_TOKENS
+                || sentenceEnds.length > MAX_NATIVE_SENTENCES) {
+            return false;
+        }
         if (!available()) return false;
         int code = scoreLuhnClusters0(
                 wordIds,
