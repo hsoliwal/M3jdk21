@@ -31,8 +31,22 @@ public final class M3KotlinPsiSmoke {
             Class<?> configKey = Class.forName("org.jetbrains.kotlin.config.CompilerConfigurationKey");
             Class<?> messageKeys = Class.forName("org.jetbrains.kotlin.cli.common.CLIConfigurationKeys");
             Field messageKey = messageKeys.getField("MESSAGE_COLLECTOR_KEY");
-            Object none = Class.forName("org.jetbrains.kotlin.cli.common.messages.MessageCollector")
-                    .getField("NONE").get(null);
+            // Kotlin 2.0.21 does not expose MessageCollector.NONE as a public Java field.
+            // Supply the same quiet semantics through the actual loaded interface instead.
+            Class<?> collectorType = Class.forName(
+                    "org.jetbrains.kotlin.cli.common.messages.MessageCollector");
+            Object none = java.lang.reflect.Proxy.newProxyInstance(
+                    collectorType.getClassLoader(),
+                    new Class<?>[] {collectorType},
+                    (proxy, method, parameters) -> switch (method.getName()) {
+                        case "clear", "report" -> null;
+                        case "hasErrors" -> false;
+                        case "toString" -> "M3KotlinPsiSmoke quiet MessageCollector";
+                        case "hashCode" -> System.identityHashCode(proxy);
+                        case "equals" -> proxy == parameters[0];
+                        default -> throw new IllegalStateException(
+                                "Unexpected MessageCollector method: " + method.getName());
+                    });
             config.getClass().getMethod("put", configKey, Object.class)
                     .invoke(config, messageKey.get(null), none);
             Class<?> environmentType = Class.forName(
