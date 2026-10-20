@@ -12,3 +12,4 @@ FAST_HASH	java.util.zip.CRC32C	REUSE_EXACT	intrinsic CRC32C as the fast per-entr
 PROGRESS_MONITOR	org.eclipse.core.runtime.SubMonitor	SHAPE_ONLY	split/worked/cancel shape; no Eclipse code or dependency in m3/file	eclipse.platform runtime (EPL-2.0)	EPL-2.0	NO_CODE_COPIED
 CONTENT_FINGERPRINT	M3File.fingerprint/Fingerprint/contentDelta (PR #1567)	REUSE_WHEN_MERGED	raw-byte SHA-256 record and ADDED/REMOVED/CONTENT_CHANGED values; S5 rebases on it; must use path() not the lazy path field	refs/pull/1567/head	Apache-2.0	OPEN_PR
 BUILD_DELTA_LEDGER	M3FileDeltaLedger (PR #1568)	CONSUME_DOWNSTREAM	sealed source/class build-fact snapshots; tree delta hands it changed paths, no second ledger	refs/pull/1568/head	Apache-2.0	OPEN_PR
+ARCHIVE_READ	java.util.zip.ZipFile + ZipInputStream	REUSE_EXACT	central directory for archive roots, streaming listing for nested archives; no extraction, no temp files, no zipfs	java.base (M3jdk21)	GPL-2.0-with-classpath-exception	JDK_OWNED

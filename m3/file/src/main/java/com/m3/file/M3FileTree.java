@@ -2,8 +2,12 @@
 // SPDX-License-Identifier: Apache-2.0
 package com.m3.file;
 
+import java.io.Closeable;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InterruptedIOException;
+import java.nio.file.Files;
+import java.nio.file.LinkOption;
 import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.BitSet;
@@ -27,12 +31,14 @@ import java.util.stream.IntStream;
  * the subtree of {@code id} is exactly {@code [id, subtreeEnd(id))}; {@link M3FileFlag#DELETED} rows
  * keep their lanes and are skipped by {@link #ids()} and walks.</p>
  */
-public final class M3FileTree {
+public final class M3FileTree implements Closeable {
     static final int DEFAULT_RESIDENCY = 4096;
     private static final int INITIAL_ROWS = 64;
-    private static final M3FileTree DETACHED = new M3FileTree(Path.of(""), 1);
+    private static final M3FileTree DETACHED = new M3FileTree(Path.of(""), 1, M3FileSource.FILESYSTEM);
 
     private final Path root;
+    private final M3FileSource source;
+    private final String separator;
     private final BitSet[] flags = new BitSet[M3FileFlag.VALUES.length];
     private final M3FileResidency residency;
     private final M3FileNames names = new M3FileNames(INITIAL_ROWS);
@@ -51,21 +57,28 @@ public final class M3FileTree {
     private int rows;
     private int childTop;
 
-    private M3FileTree(Path root, int residencyCapacity) {
+    private M3FileTree(Path root, int residencyCapacity, M3FileSource source) {
         this.root = Objects.requireNonNull(root, "root");
+        this.source = Objects.requireNonNull(source, "source");
+        this.separator = source.separator(root);
         this.residency = new M3FileResidency(residencyCapacity);
         for (int i = 0; i < flags.length; i++) flags[i] = new BitSet();
         types.intern("");
     }
 
-    /** Eager scan of {@code root} with {@code NOFOLLOW_LINKS} and unbounded depth. */
+    /**
+     * Eager scan of {@code root}: a directory tree with {@code NOFOLLOW_LINKS} and unbounded depth, or,
+     * when {@code root} is a zip/jar (by signature or extension), the archive's central directory with
+     * nested archives as sub-trees and no extraction. Close the tree to release an archive.
+     */
     public static M3FileTree open(Path root) throws IOException {
         return open(root, DEFAULT_RESIDENCY);
     }
 
     /** As {@link #open(Path)} with an explicit facade residency capacity (power of two). */
     public static M3FileTree open(Path root, int residencyCapacity) throws IOException {
-        return M3FileTreeScanner.scan(new M3FileTree(root, residencyCapacity));
+        if (isArchive(root)) return M3FileZipScanner.scan(root, residencyCapacity);
+        return M3FileTreeScanner.scan(new M3FileTree(root, residencyCapacity, M3FileSource.FILESYSTEM));
     }
 
     /** Shared empty tree behind {@link M3File#of(Path)}; it has no rows. */
@@ -73,8 +86,34 @@ public final class M3FileTree {
         return DETACHED;
     }
 
+    static M3FileTree create(Path root, int residencyCapacity, M3FileSource source) {
+        return new M3FileTree(root, residencyCapacity, source);
+    }
+
+    /** Regular file starting with a zip signature, or named like an archive. */
+    static boolean isArchive(Path path) throws IOException {
+        if (!Files.isRegularFile(path, LinkOption.NOFOLLOW_LINKS)) return false;
+        if (M3FileZipScanner.ARCHIVE_TYPES.contains(extension(M3FileTreeScanner.nameOf(path)))) return true;
+        try (InputStream in = Files.newInputStream(path, LinkOption.NOFOLLOW_LINKS)) {
+            byte[] magic = in.readNBytes(4);
+            return magic.length == 4 && magic[0] == 'P' && magic[1] == 'K'
+                    && ((magic[2] == 3 && magic[3] == 4) || (magic[2] == 5 && magic[3] == 6));
+        }
+    }
+
     public Path root() {
         return root;
+    }
+
+    /** Where rows and bytes come from (file system, archive). */
+    public M3FileSource source() {
+        return source;
+    }
+
+    /** Releases the source (an open archive); file-system trees hold nothing. */
+    @Override
+    public void close() throws IOException {
+        source.close();
     }
 
     public M3File rootFile() {
@@ -223,6 +262,12 @@ public final class M3FileTree {
         return hashes.structure(id);
     }
 
+    /** CRC32 recorded by an archive's directory for this entry, {@code -1} when the source has none. */
+    public long entryCrc(int id) {
+        checkId(id);
+        return hashes.entryCrc(id);
+    }
+
     /** Hash of the scan-time {@code BasicFileAttributes.fileKey()}, {@code 0} when the provider has none. */
     public int fileKeyHash(int id) {
         checkId(id);
@@ -308,7 +353,7 @@ public final class M3FileTree {
         if (id == from) return;
         if (parent[id] != from) {
             appendRelative(from, parent[id], out);
-            out.append(root.getFileSystem().getSeparator());
+            out.append(separator);
         }
         appendName(id, out);
     }

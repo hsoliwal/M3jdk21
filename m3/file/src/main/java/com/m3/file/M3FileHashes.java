@@ -16,6 +16,7 @@ import java.util.Optional;
  * structure layer. A failed observation sets {@link M3FileFlag#FAILED} and clears the hash flags.</p>
  */
 final class M3FileHashes {
+    private static final long ENTRY_CRC_KNOWN = 1L << 40;
     private static final M3FileFlag[] CONTENT_FLAGS = {M3FileFlag.HASHED, M3FileFlag.TOKEN_HASHED, M3FileFlag.STRUCT_HASHED};
 
     private long[] crc;
@@ -23,6 +24,7 @@ final class M3FileHashes {
     private long[] tokens;
     private long[] structure;
     private int[] fileKey;
+    private long[] entryCrc;
 
     M3FileHashes(int capacity) {
         crc = new long[capacity];
@@ -30,6 +32,7 @@ final class M3FileHashes {
         tokens = new long[capacity];
         structure = new long[capacity];
         fileKey = new int[capacity];
+        entryCrc = new long[capacity];
     }
 
     void grow(int capacity) {
@@ -38,6 +41,7 @@ final class M3FileHashes {
         tokens = Arrays.copyOf(tokens, capacity);
         structure = Arrays.copyOf(structure, capacity);
         fileKey = Arrays.copyOf(fileKey, capacity);
+        entryCrc = Arrays.copyOf(entryCrc, capacity);
     }
 
     long crc(int id) {
@@ -62,6 +66,16 @@ final class M3FileHashes {
 
     void fileKey(int id, Object key) {
         fileKey[id] = key == null ? 0 : key.hashCode();
+    }
+
+    /** Archive-directory CRC32, {@code -1} unknown (lane keeps a presence bit above the 32 CRC bits). */
+    long entryCrc(int id) {
+        long value = entryCrc[id];
+        return (value & ENTRY_CRC_KNOWN) == 0 ? -1 : value & 0xffffffffL;
+    }
+
+    void entryCrc(int id, long crc32) {
+        entryCrc[id] = crc32 < 0 ? 0 : ENTRY_CRC_KNOWN | (crc32 & 0xffffffffL);
     }
 
     boolean sameSha(int id, M3FileHashes other, int otherId) {

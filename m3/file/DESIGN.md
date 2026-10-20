@@ -115,8 +115,8 @@ Cursor: `nextId()` (`-1` at end), `nextEntry()` (`Optional<M3File>`), `hasNext()
 | S4 | `M3FileNames` interner, `M3FileTypes`, `nameId`/`typeId` lanes, `types(...)` walk filter | repeated names stored once; type ids stable; S1/S2 tests unchanged |
 | S5 | change gate + hash lanes, `M3FileChangeProvider`; rebase onto #1567 `Fingerprint` once merged | gate skips reads for unchanged attributes; hash lanes equal #1567 fingerprint |
 | S6 | `M3FileTreeDelta`, `M3FileChange` | delta of scan/edit/rescan equals expected ADDED/REMOVED/CHANGED; paths feed #1568 ledger |
-| S7 | zip/jar sources through `M3FileTree.open` (central directory, no extraction, nested zip-in-zip sub-trees), entry content via `ZipFile.getInputStream` with byte limits | differential vs `ZipFile.entries()` |
-| S8 | `M3FileScanSpec` maxDepth, lazy `scanChildren(id)` | lazy expansion test; scanned dirs never re-scanned |
+| S7 | `M3FileSource` (one abstract method; FILESYSTEM and zip sources), zip/jar roots through `M3FileTree.open` (central directory, implied dirs, nested zip-in-zip sub-trees via streaming, `ARCHIVE` flag, `entryCrc` lane gating), entry content via `ZipFile.getInputStream` with byte limits | differential vs `ZipFile.entries()` + `ZipInputStream` |
+| S8 | `M3FileScanSpec` maxDepth, lazy `scanChildren(id)`, `expandArchives` (archives below a directory root become sub-trees; S7 expands only an archive root) | lazy expansion test; scanned dirs never re-scanned |
 | S9 | unix-style ops (`du`, `find`, `wc` over walks), zip writing, error modes | per-op differential tests |
 | S10 | viewport row host over `com.m3.viewport.M3RowHost` | 100k rows, O(window) per frame |
 | S11 | lane image (little-endian lanes + name pool), content-addressed | round-trip equal; open without re-scan |

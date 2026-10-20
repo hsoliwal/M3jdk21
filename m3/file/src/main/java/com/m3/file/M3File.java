@@ -5,13 +5,8 @@ package com.m3.file;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.nio.channels.Channels;
 import java.nio.channels.SeekableByteChannel;
-import java.nio.file.Files;
-import java.nio.file.LinkOption;
 import java.nio.file.Path;
-import java.nio.file.StandardOpenOption;
-import java.nio.file.attribute.BasicFileAttributes;
 import java.nio.file.attribute.FileTime;
 import java.util.Objects;
 import java.util.Optional;
@@ -26,7 +21,9 @@ import java.util.stream.Stream;
  * their {@link Path} lazily from the name lanes. Identity is the row, not the instance: the tree may
  * drop and recreate facades at will ({@link M3FileResidency}). {@link #of(Path)} keeps the original
  * detached edge: no tree, no interned path table, no retained descriptor. Metadata is a point-in-time
- * observation. Symbolic links are never followed by the file-open operations.</p>
+ * observation. Symbolic links are never followed by the file-open operations. Reads go through the
+ * tree's {@link M3FileSource}; for archive entries {@link #path()} is a logical path below the archive
+ * file (use the read methods here, not {@code Files}).</p>
  *
  * <p>Detached read edge adapted from Synexia MIndexResourceAccess file-edge semantics.</p>
  */
@@ -111,24 +108,24 @@ public final class M3File {
     /** Last-modified epoch millis observed at scan time; {@code Long.MIN_VALUE} unknown. */
     public long lastModified() { return tree.mtime(entryId()); }
 
-    /** Every invocation refreshes metadata with NOFOLLOW_LINKS. */
+    /**
+     * Metadata from the tree's {@link M3FileSource}: for the file system every invocation refreshes
+     * with NOFOLLOW_LINKS; archive entries report their central-directory observation.
+     */
     public Metadata metadata() throws IOException {
-        BasicFileAttributes attributes = Files.readAttributes(
-                path(), BasicFileAttributes.class, LinkOption.NOFOLLOW_LINKS);
-        return new Metadata(attributes.isRegularFile(), attributes.isDirectory(),
-                attributes.isSymbolicLink(), attributes.size(),
-                attributes.lastModifiedTime());
+        return tree.source().metadata(this);
     }
 
-    /** Opens a caller-owned channel; the caller MUST close it. */
+    /** Opens a caller-owned channel; the caller MUST close it. Archive entries have none. */
     public SeekableByteChannel openReadChannel() throws IOException {
         requireRegular();
-        return Files.newByteChannel(path(), StandardOpenOption.READ, LinkOption.NOFOLLOW_LINKS);
+        return tree.source().openChannel(this);
     }
 
-    /** Caller owns the returned stream and closes the underlying channel. */
+    /** Caller owns the returned stream and closes the underlying channel or entry stream. */
     public InputStream openInputStream() throws IOException {
-        return Channels.newInputStream(openReadChannel());
+        requireRegular();
+        return tree.source().openContent(this);
     }
 
     /**
@@ -166,20 +163,18 @@ public final class M3File {
         if (!observed.regularFile()) throw new IOException("resource is not a regular file");
         if (observed.size() > maxBytes) throw new IOException("resource exceeds configured read limit");
         progress.begin(path().toString(), observed.size());
-        InputStream input = Channels.newInputStream(
-                Files.newByteChannel(path(), StandardOpenOption.READ, LinkOption.NOFOLLOW_LINKS));
-        return new M3FileShadowInputStream(input, maxBytes, progress, shadows);
+        return new M3FileShadowInputStream(tree.source().openContent(this), maxBytes, progress, shadows);
     }
 
     /**
      * Caller-closed output stream (create or truncate, links not followed) with a sub-progress monitor
-     * and shadows that move as it is written. Tree lanes are a scan-time observation and do not change.
+     * and shadows that move as it is written; read-only sources refuse. Tree lanes are a scan-time
+     * observation and do not change.
      */
     public M3FileShadowOutputStream openOutputStream(M3FileProgress progress, M3FileShadow... shadows)
             throws IOException {
+        OutputStream output = tree.source().openOutput(this);
         progress.begin(path().toString(), 0);
-        OutputStream output = Files.newOutputStream(path(), StandardOpenOption.CREATE,
-                StandardOpenOption.TRUNCATE_EXISTING, StandardOpenOption.WRITE, LinkOption.NOFOLLOW_LINKS);
         return new M3FileShadowOutputStream(output, Long.MAX_VALUE, progress, shadows);
     }
 

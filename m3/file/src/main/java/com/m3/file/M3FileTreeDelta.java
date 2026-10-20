@@ -112,8 +112,8 @@ public final class M3FileTreeDelta {
     private void pair(int b, int a) throws InterruptedIOException {
         int change = provider.change(before, b, after, a, maxBytes, progress.split(Math.max(0, after.size(a))));
         if (change != 0) add(b, a, change);
-        boolean beforeDir = before.flag(M3FileFlag.DIR, b);
-        boolean afterDir = after.flag(M3FileFlag.DIR, a);
+        boolean beforeDir = before.flag(M3FileFlag.DIR, b) || before.flag(M3FileFlag.ARCHIVE, b);
+        boolean afterDir = after.flag(M3FileFlag.DIR, a) || after.flag(M3FileFlag.ARCHIVE, a);
         if (beforeDir && afterDir) {
             merge(b, a);
             return;

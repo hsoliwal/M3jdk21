@@ -11,28 +11,23 @@ import java.nio.file.Path;
 import java.nio.file.SimpleFileVisitor;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.nio.file.attribute.DosFileAttributes;
-import java.util.Arrays;
 import java.util.EnumSet;
 
 /**
  * Fills an {@link M3FileTree} from {@link Files#walkFileTree} in pre-order.
  *
- * <p>Links are never followed. Each directory opens a frame on an {@code int} stack; its direct
- * child ids are collected there, heap-sorted by name (no allocation) and written as one CSR slice
- * when the directory closes. Hidden state comes from the attributes the walk already read, so no
- * second stat is issued. An entry whose attributes cannot be read is still recorded, with unknown
- * size and time and no flags.</p>
+ * <p>Links are never followed. Frames, child collection and CSR slices come from
+ * {@link M3FileTreeBuilder}. Hidden state comes from the attributes the walk already read. An entry
+ * whose attributes cannot be read is still recorded, with unknown size and time and kind
+ * {@link M3FileKind#OTHER}.</p>
  */
 final class M3FileTreeScanner extends SimpleFileVisitor<Path> {
     private final M3FileTree tree;
-    private int[] pending = new int[256];
-    private int[] frameStart = new int[32];
-    private int[] frameDir = new int[32];
-    private int pendingTop;
-    private int frames;
+    private final M3FileTreeBuilder builder;
 
     private M3FileTreeScanner(M3FileTree tree) {
         this.tree = tree;
+        this.builder = new M3FileTreeBuilder(tree);
     }
 
     static M3FileTree scan(M3FileTree tree) throws IOException {
@@ -44,7 +39,7 @@ final class M3FileTreeScanner extends SimpleFileVisitor<Path> {
 
     @Override
     public FileVisitResult preVisitDirectory(Path dir, BasicFileAttributes attrs) {
-        openFrame(append(dir, fresh(dir, attrs)));
+        builder.openFrame(append(dir, fresh(dir, attrs)));
         return FileVisitResult.CONTINUE;
     }
 
@@ -57,13 +52,13 @@ final class M3FileTreeScanner extends SimpleFileVisitor<Path> {
     @Override
     public FileVisitResult visitFileFailed(Path file, IOException exc) {
         String name = nameOf(file);
-        enlist(tree.append(parentId(), name, M3FileKind.OTHER, dotName(name), -1L, Long.MIN_VALUE));
+        builder.append(name, M3FileKind.OTHER, dotName(name), -1L, Long.MIN_VALUE);
         return FileVisitResult.CONTINUE;
     }
 
     @Override
     public FileVisitResult postVisitDirectory(Path dir, IOException exc) {
-        closeFrame();
+        builder.closeFrame();
         return FileVisitResult.CONTINUE;
     }
 
@@ -82,77 +77,18 @@ final class M3FileTreeScanner extends SimpleFileVisitor<Path> {
 
     private int append(Path path, BasicFileAttributes attrs) {
         String name = nameOf(path);
-        M3FileKind kind = M3FileKind.of(attrs);
         boolean hidden = dotName(name) || (attrs instanceof DosFileAttributes dos && dos.isHidden());
-        int id = tree.append(parentId(), name, kind, hidden,
-                attrs.size(), attrs.lastModifiedTime().toMillis());
+        int id = builder.append(name, M3FileKind.of(attrs), hidden, attrs.size(), attrs.lastModifiedTime().toMillis());
         tree.hashes().fileKey(id, attrs.fileKey());
-        enlist(id);
         return id;
     }
 
-    private static String nameOf(Path path) {
+    static String nameOf(Path path) {
         Path name = path.getFileName();
         return name == null ? path.toString() : name.toString();
     }
 
-    private static boolean dotName(String name) {
+    static boolean dotName(String name) {
         return name.length() > 1 && name.charAt(0) == '.' && !".".equals(name) && !"..".equals(name);
-    }
-
-    private int parentId() {
-        return frames == 0 ? -1 : frameDir[frames - 1];
-    }
-
-    private void enlist(int id) {
-        if (frames == 0) return;
-        if (pendingTop == pending.length) pending = Arrays.copyOf(pending, pendingTop * 2);
-        pending[pendingTop++] = id;
-    }
-
-    private void openFrame(int dirId) {
-        if (frames == frameStart.length) {
-            frameStart = Arrays.copyOf(frameStart, frames * 2);
-            frameDir = Arrays.copyOf(frameDir, frames * 2);
-        }
-        frameStart[frames] = pendingTop;
-        frameDir[frames] = dirId;
-        frames++;
-    }
-
-    private void closeFrame() {
-        frames--;
-        int from = frameStart[frames];
-        heapSort(pending, from, pendingTop);
-        tree.closeDirectory(frameDir[frames], pending, from, pendingTop);
-        pendingTop = from;
-    }
-
-    /** In-place heap sort of {@code a[from, to)} by {@link M3FileTree#compareNames}; names in one directory are unique. */
-    private void heapSort(int[] a, int from, int to) {
-        int n = to - from;
-        for (int i = n / 2 - 1; i >= 0; i--) siftDown(a, from, i, n);
-        for (int end = n - 1; end > 0; end--) {
-            swap(a, from, from + end);
-            siftDown(a, from, 0, end);
-        }
-    }
-
-    private void siftDown(int[] a, int base, int root, int n) {
-        int i = root;
-        while (true) {
-            int left = 2 * i + 1;
-            if (left >= n) return;
-            int child = left + 1 < n && tree.compareNames(a[base + left + 1], a[base + left]) > 0 ? left + 1 : left;
-            if (tree.compareNames(a[base + child], a[base + i]) <= 0) return;
-            swap(a, base + i, base + child);
-            i = child;
-        }
-    }
-
-    private static void swap(int[] a, int i, int j) {
-        int t = a[i];
-        a[i] = a[j];
-        a[j] = t;
     }
 }

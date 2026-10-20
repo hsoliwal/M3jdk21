@@ -24,13 +24,19 @@ public interface M3FileChangeProvider {
     M3FileChangeProvider ATTRIBUTES = new M3FileChangeProvider() {
     };
 
-    /** {@link M3FileChange} bits from lanes alone; {@code 0} keeps the gate closed. */
+    /**
+     * {@link M3FileChange} bits from lanes alone; {@code 0} keeps the gate closed. Archive rows also
+     * compare their central-directory CRC32 ({@link M3FileTree#entryCrc}): a differing CRC is content.
+     */
     default int attributeChange(M3FileTree before, int beforeId, M3FileTree after, int afterId) {
         int bits = 0;
         if (before.kind(beforeId) != after.kind(afterId)) bits |= M3FileChange.KIND;
         if (before.size(beforeId) != after.size(afterId)) bits |= M3FileChange.SIZE;
         if (before.mtime(beforeId) != after.mtime(afterId)) bits |= M3FileChange.MTIME;
         if (before.fileKeyHash(beforeId) != after.fileKeyHash(afterId)) bits |= M3FileChange.FILE_KEY;
+        long beforeCrc = before.entryCrc(beforeId);
+        long afterCrc = after.entryCrc(afterId);
+        if (beforeCrc >= 0 && afterCrc >= 0 && beforeCrc != afterCrc) bits |= M3FileChange.CONTENT_CHANGED;
         return bits;
     }
 

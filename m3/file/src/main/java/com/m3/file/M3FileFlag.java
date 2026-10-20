@@ -15,6 +15,8 @@ public enum M3FileFlag {
     REGULAR,
     /** Row is a symbolic link; never followed and never {@link #DIR}. */
     LINK,
+    /** Row is an archive (zip, jar, nested archive): a regular file whose entries are its children. */
+    ARCHIVE,
     /** Dot-name or DOS hidden attribute observed during the scan. */
     HIDDEN,
     /** Directory whose child slice is populated. */
