@@ -1,0 +1,9 @@
+problem_category	current_owner	candidate	complexity	decision	contract_and_evidence	rights
+Source/class exact-change observation	M3FileDeltaLedger PR1568	Use original byte SHA-256 columns	O(bytes)	REUSE	Avoid timestamp-only shortcuts; do not duplicate M3File scan	First-party Apache-2.0
+Persistent recorded build state	M3IndexDB	M3BuildState fixed-format content-addressed artifact	O(bytes)	SELECT	Uses unchanged original M3IndexDB blob/ref storage; no replacement JNI or SQL database	First-party Apache-2.0
+Physical row identity	M3 dynamic arrays	String[] paths with byte[] kind/hash/ABI certainty masks	O(V)	SELECT	No per-node Entry object; caller normalizes identity, order checked	First-party Apache-2.0
+Lookup of prior rows	Java21 Arrays.binarySearch	Sorted immutable names	O(log V)	SELECT	Deterministic across processes; no Map reconstruction or second parser	JDK Java21
+Reverse impacted-dependency walk	HackerRank/GFG graph BFS and LeetCode Course Schedule category	Reverse CSR packed offset/int[] lanes and queue/seen arrays	O(V+E)	SELECT	Finite on cycles, tests for direct and transitive changes; no donor algorithm code copied	First-party Apache-2.0
+ABI certainty	Javac authoritative compilation facts	Separate content and compiler supplied ABI hash with trusted/unknown mask	O(V)	SELECT	Equal ABI and changed body skips dependents; unknown on changed input propagates; no homemade classfile parser	First-party Apache-2.0
+Output skip decision	Gradle up-to-date checks / Maven Build Cache	Do not infer from planner alone	N/A	DEFER	Output presence, processors, plugin side effects and toolchain fingerprints must be validated by actual build execution	Docs/reference only
+Filtered sorted wrappers	M3FilteredViews and M3LongIndexProjection active PR1451/1549/1577	Keep authoritative backed view and native masks	N/A	REUSE_NOT_TOUCH	No conflicting clone of current collections or JNI owners	Existing first-party
