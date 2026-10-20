@@ -4,6 +4,8 @@
 #   run-tests.sh compile    patch classes (PATCH_FILES.txt, compiled alone against the JDK's java.desktop) + tests
 #   run-tests.sh test       JUnit, headless, --patch-module java.desktop=<patch>
 #   run-tests.sh coverage   the same under JaCoCo; report of the new code (NEW_CODE.txt)
+#   run-tests.sh ui         JUnit on the invisible desktop (ui_lock + hidden_java), not headless: the frame tests run too
+#   run-tests.sh uicoverage the ui run under JaCoCo; report of the new code
 #   run-tests.sh diff       behaviour probe against master's classes and against this branch's; outputs must be equal
 #   run-tests.sh bench <leaf> <sizes...>   M3SwingBench (plain API vs enhanced API, median ns/op and bytes/op), log in $OUT/bench
 # Env: M3_JDK21 (JDK 21 home), OUT (output dir, default S:/m3-scratch/enhanced-api/swing), BASE (git ref, default origin/master).
@@ -53,6 +55,19 @@ junit_run() {
     -jar "$junit" execute -cp "$out/test-classes" --disable-banner --details=tree --scan-classpath \
     --exclude-classname '.*Probe.*'
 }
+# ui_junit [java args]: the same JUnit run on the invisible desktop, not headless (components in real frames), one ui_lock slot
+ui_junit() {
+  local log="$out/ui-$(date +%Y%m%d-%H%M%S).log"
+  bash C:/m3-superset/tools/ui_lock.sh swing-api bash C:/m3-superset/tools/hidden_java.sh 1500 "$log" \n    -Xmx1g --patch-module "java.desktop=$out/patch" "$@" -jar "$junit" execute -cp "$out/test-classes" \n    --disable-banner --details=tree --scan-classpath --exclude-classname ".*Probe.*"
+  cat "$log"
+}
+report() {
+  "$jdk/bin/java" -jar "$cli" report "$out/cov.exec" --classfiles "$out/patch" --sourcefiles "$out/stage" \n    --xml "$out/cov.xml" --csv "$out/cov.csv" --html "$out/cov-html" > /dev/null
+  bash "$here/new-code-coverage.sh" "$out/cov.xml" "$here/NEW_CODE.txt"
+}
+agent_args() {
+  echo "-javaagent:$agent=destfile=$out/cov.exec,inclbootstrapclasses=true,includes=javax.swing.M3*:javax.swing.JList*:javax.swing.JTable*:javax.swing.JTree*:javax.swing.DefaultListSelectionModel:javax.swing.DefaultListModel*:javax.swing.table.AbstractTableModel*:javax.swing.table.DefaultTableModel*:javax.swing.tree.DefaultTreeModel*"
+}
 
 case "${1:-test}" in
   compile) compile ;;
@@ -60,10 +75,14 @@ case "${1:-test}" in
   coverage)
     compile
     rm -f "$out/cov.exec"
-    junit_run "-javaagent:$agent=destfile=$out/cov.exec,inclbootstrapclasses=true,includes=javax.swing.M3*:javax.swing.JList*:javax.swing.JTable*:javax.swing.JTree*:javax.swing.DefaultListSelectionModel:javax.swing.DefaultListModel*:javax.swing.table.AbstractTableModel*:javax.swing.table.DefaultTableModel*:javax.swing.tree.DefaultTreeModel*"
-    "$jdk/bin/java" -jar "$cli" report "$out/cov.exec" --classfiles "$out/patch" --sourcefiles "$out/stage" \
-      --xml "$out/cov.xml" --csv "$out/cov.csv" --html "$out/cov-html" > /dev/null
-    bash "$here/new-code-coverage.sh" "$out/cov.xml" "$here/NEW_CODE.txt" ;;
+    junit_run "$(agent_args)"
+    report ;;
+  ui) compile; ui_junit ;;
+  uicoverage)
+    compile
+    rm -f "$out/cov.exec"
+    ui_junit "$(agent_args)"
+    report ;;
   diff)
     compile
     stage "$out/stage-base" base
