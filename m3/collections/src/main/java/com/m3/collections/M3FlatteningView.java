@@ -38,6 +38,8 @@ public final class M3FlatteningView<N> extends AbstractList<N> implements Random
 	public M3FlatteningView (Source<N> source) {
 		this.source = Objects.requireNonNull (source, "source");
 		topology.setChildCount (M3TreeTopology.ROOT, source.childCount (null));
+		// a discarded subtree releases its node objects (ids are never reused)
+		topology.onDiscard (id -> nodes [id] = null);
 	}
 
 	@Override
@@ -81,6 +83,30 @@ public final class M3FlatteningView<N> extends AbstractList<N> implements Random
 	/** Number of materialized (once expanded) nodes. */
 	public int materializedCount () {
 		return topology.materializedCount ();
+	}
+
+	/**
+	 * Applies a patch of the children of the node at {@code row} (old child list to new; row -1 stands for the roots):
+	 * the only structural update path of this view (brief rule 24). Later siblings shift lazily, removed subtrees are
+	 * dropped, child counts and row counts are refreshed along the ancestors: O(runs log k + discarded nodes), no
+	 * rebuild and no re-read of unchanged children. A moved child that was expanded keeps its subtree and expansion.
+	 * The node at {@code row} must be expanded (or have been: a collapsed node with known children takes the patch too).
+	 */
+	public void apply (int row, M3Patch patch) {
+		int parentId = M3TreeTopology.ROOT;
+		if (row >= 0) {
+			parentId = rowAt (row).materializedId ();
+			if (parentId < 0 || !topology.childCountKnown (parentId)) {
+				throw new IllegalArgumentException ("the node at row " + row + " was never expanded");
+			}
+		}
+		topology.apply (parentId, patch);
+		modCount++;
+	}
+
+	/** Nodes visited by the sibling index since this view was created (the cost counter of brief rule 24). */
+	public long work () {
+		return topology.indexWork ();
 	}
 
 	private M3TreeProjection.Row rowAt (int row) {

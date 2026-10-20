@@ -14,6 +14,7 @@ import java.awt.Panel;
 import java.awt.Scrollbar;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.HierarchyEvent;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.util.AbstractList;
@@ -21,6 +22,7 @@ import java.util.Arrays;
 import java.util.Objects;
 
 import com.m3.collections.M3BitMask;
+import com.m3.collections.M3Patch;
 import com.m3.collections.M3RangeSet;
 import com.m3.collections.M3WindowPlan;
 import com.m3.collections.M3WindowView;
@@ -28,8 +30,12 @@ import com.m3.collections.M3WindowView;
 /**
  * A viewport {@code java.awt.List}: the {@link java.awt.List} API over lanes, with a native list as a content plane
  * that holds only the resident rows and a {@link Scrollbar} that owns the logical scroll position (the SWT viewport
- * pattern, in AWT). Items live in one {@code String} lane, the selection in an {@link M3RangeSet}, and a scroll move
- * edits the plane through the head/tail delta of an {@link M3WindowView}, so native work per move is O(window).
+ * pattern, in AWT). Items live in one {@code String} lane, the selection in an {@link M3RangeSet}.
+ * <p>Every structural edit reaches the plane through the core {@link M3WindowView} only (brief rule 24): an edit is an
+ * {@link M3Patch} run on the window, which hands the plane the entry-level removes and inserts of the resident rows;
+ * a scroll or resize is a window move whose head/tail delta the plane applies. Edits past the resident rows cost the
+ * plane nothing and the scroll bar one coalesced update. While the list is not showing the window is hidden: edits
+ * update the lanes and a dirty span only, and becoming visible applies one window patch and paints once.</p>
  * <p>Selection follows the displayed stock list: indices shift with inserts and removes, and
  * {@link #getSelectedIndexes()} answers in ascending order.</p>
  */
@@ -64,11 +70,29 @@ public final class M3AwtViewportList extends Panel implements ItemSelectable {
 	private boolean syncing;
 	/* mirror of the plane's native selection (bit i = plane row i): syncing compares lanes, it asks the peer nothing */
 	private long [] planeSelected = new long [1];
-	/* an edit reached the resident rows since the last refresh; edits past the window touch only the scrollbar */
-	private boolean residentDirty = true;
+	/* plane edits since the last pin of the native scroll position */
+	private int planeEdits;
 	private boolean barPending;
 	/* calls that reach the native peers (plane and scroll bar), for the per-row overhead measurement */
 	long nativeCalls;
+	/* entry-level edits the window hands the plane (window patches), for the hidden-viewport measurement */
+	long planePatchCalls;
+	/* window patches applied on becoming visible (one per hidden period) */
+	long showApplies;
+	/* the plane as the receiver of window patches: entry-level removes and inserts of resident rows */
+	private final transient M3Patch.Target planeHost = new M3Patch.Target () {
+		@Override
+		public void remove (int index, int count) {
+			planePatchCalls++;
+			for (int i = 0; i < count; i++) planeRemove (index);
+		}
+
+		@Override
+		public void insert (int index, int count) {
+			planePatchCalls++;
+			for (int i = 0; i < count; i++) planeAdd (window.get (index + i), index + i);
+		}
+	};
 
 	public M3AwtViewportList () {
 		this (0, false);
@@ -88,6 +112,11 @@ public final class M3AwtViewportList extends Panel implements ItemSelectable {
 		bar.addAdjustmentListener (e -> scrollTo (e.getValue ()));
 		plane.addItemListener (this::planeItem);
 		plane.addActionListener (e -> fireAction (plane.getSelectedIndex ()));
+		window.host (planeHost);
+		window.hide ();
+		addHierarchyListener (e -> {
+			if ((e.getChangeFlags () & HierarchyEvent.SHOWING_CHANGED) != 0) showingChanged (isShowing ());
+		});
 		refresh ();
 	}
 
@@ -119,8 +148,7 @@ public final class M3AwtViewportList extends Panel implements ItemSelectable {
 		count++;
 		selection.insert (at, 1);
 		// the native caret keeps its index across an insertion (M3AwtCaretProbe P06/P07)
-		if (at < window.first () + window.size ()) residentDirty = true;
-		refresh ();
+		edit (true, at, 1);
 	}
 
 	public synchronized void replaceItem (String newValue, int index) {
@@ -129,14 +157,15 @@ public final class M3AwtViewportList extends Panel implements ItemSelectable {
 	}
 
 	public synchronized void removeAll () {
+		int removed = count;
 		Arrays.fill (items, 0, count, null);
 		count = 0;
 		selection.clear ();
 		selection.setLogicalCount (0);
 		top = 0;
 		caret = 0;
-		residentDirty = true;
-		refresh ();
+		if (removed > 0) edit (false, 0, removed);
+		else refresh ();
 	}
 
 	public synchronized void remove (String item) {
@@ -164,8 +193,7 @@ public final class M3AwtViewportList extends Panel implements ItemSelectable {
 			if (caret == start) caret = Math.max (0, caret - 1);
 			else if (caret >= left) caret = Math.max (0, left - 1);
 		}
-		if (start < window.first () + window.size ()) residentDirty = true;
-		refresh ();
+		edit (false, start, removed);
 	}
 
 	public synchronized int getSelectedIndex () {
@@ -294,6 +322,18 @@ public final class M3AwtViewportList extends Panel implements ItemSelectable {
 		return plane.getItemCount ();
 	}
 
+	/* test hook: the plane holds exactly the window rows of the model (Java-side reads of the plane, no peer call) */
+	synchronized boolean planeMatchesModel () {
+		if (plane.getItemCount () != window.size ()) return false;
+		for (int i = 0; i < window.size (); i++) if (!plane.getItem (i).equals (items [window.first () + i])) return false;
+		return true;
+	}
+
+	/** Whether the plane is behind the model because the list is not showing (its window is hidden). */
+	public boolean isPlaneDeferred () {
+		return window.isHidden ();
+	}
+
 	private int indexOf (String item) {
 		for (int i = 0; i < count; i++) if (items [i].equals (item)) return i;
 		return -1;
@@ -305,23 +345,47 @@ public final class M3AwtViewportList extends Panel implements ItemSelectable {
 		refresh ();
 	}
 
-	/* moves the resident window and edits the plane with the head/tail delta only */
+	/* one patch run on the window (the plane gets the resident part, or nothing while hidden), then the window move */
+	private void edit (boolean insert, int at, int n) {
+		syncing = true;
+		try {
+			if (insert) window.insert (at, n);
+			else window.remove (at, n);
+		} finally {
+			syncing = false;
+		}
+		refresh ();
+	}
+
+	/* the list became visible or hidden: hidden, the window folds edits; visible, one window patch catches up */
+	private synchronized void showingChanged (boolean showing) {
+		if (!showing) {
+			window.hide ();
+			return;
+		}
+		if (!window.isHidden ()) return;
+		M3Patch catchUp = window.show ();
+		syncing = true;
+		try {
+			catchUp.applyTo (planeHost);
+			showApplies++;
+		} finally {
+			syncing = false;
+		}
+		refresh ();
+	}
+
+	/* moves the resident window and edits the plane with the head/tail delta only; hidden, only the lanes move */
 	private void refresh () {
 		top = Math.max (0, Math.min (top, Math.max (0, count - rows)));
 		int first = Math.max (0, top - OVERSCAN);
 		int size = Math.max (0, Math.min (count - first, rows + 2 * OVERSCAN));
-		if (!residentDirty && first == window.first () && size == window.size () && plane.getItemCount () == size) {
-			// a delta outside the resident rows: only the scroll extent changes (invariant #1)
-			setBar ();
-			return;
-		}
-		residentDirty = false;
-		boolean structural = plane.getItemCount () != window.size () || !residentMatches ();
 		M3WindowPlan plan = window.move (first, size);
+		if (window.isHidden ()) return;
 		syncing = true;
 		try {
-			if (structural || plan.replaced ()) {
-				planeClear ();
+			if (plan.replaced ()) {
+				if (plane.getItemCount () > 0) planeClear ();
 				for (int i = 0; i < window.size (); i++) planeAdd (window.get (i), -1);
 			} else {
 				for (int i = 0; i < plan.retiredTail (); i++) planeRemove (plane.getItemCount () - 1);
@@ -331,9 +395,13 @@ public final class M3AwtViewportList extends Panel implements ItemSelectable {
 			}
 			setBar ();
 			syncSelectionLocked ();
-			if (count > 0) plane.makeVisible (Math.min (window.size () - 1, top - first + rows - 1));
-			if (count > 0) plane.makeVisible (top - first);
-			if (count > 0) nativeCalls += 2;
+			if (planeEdits > 0 && count > 0) {
+				// pin the native scroll position of the plane to the logical top once per changed plane
+				plane.makeVisible (Math.min (window.size () - 1, top - first + rows - 1));
+				plane.makeVisible (top - first);
+				nativeCalls += 2;
+			}
+			planeEdits = 0;
 		} finally {
 			syncing = false;
 		}
@@ -350,6 +418,7 @@ public final class M3AwtViewportList extends Panel implements ItemSelectable {
 		int value, visible, maximum;
 		synchronized (this) {
 			barPending = false;
+			if (window.isHidden ()) return;
 			value = top;
 			visible = Math.min (rows, Math.max (1, count));
 			maximum = Math.max (count, 1);
@@ -361,21 +430,24 @@ public final class M3AwtViewportList extends Panel implements ItemSelectable {
 	private void planeAdd (String item, int index) {
 		int n = plane.getItemCount ();
 		planeSelected = M3BitMask.ensure (planeSelected, n + 1);
-		M3BitMask.insert (planeSelected, n, index < 0 ? n : index, 1);
+		M3BitMask.insert (planeSelected, n, index < 0 || index > n ? n : index, 1);
 		plane.add (item, index);
 		nativeCalls++;
+		planeEdits++;
 	}
 
 	private void planeRemove (int index) {
 		M3BitMask.remove (planeSelected, plane.getItemCount (), index, 1);
 		plane.remove (index);
 		nativeCalls++;
+		planeEdits++;
 	}
 
 	private void planeClear () {
 		Arrays.fill (planeSelected, 0L);
 		plane.removeAll ();
 		nativeCalls++;
+		planeEdits++;
 	}
 
 	private void planeSelect (int index, boolean selected) {
@@ -386,16 +458,8 @@ public final class M3AwtViewportList extends Panel implements ItemSelectable {
 		nativeCalls++;
 	}
 
-	/* the plane must hold exactly the window's rows; a structural edit inside the window breaks that */
-	private boolean residentMatches () {
-		for (int i = 0; i < plane.getItemCount (); i++) {
-			int row = window.rowOf (i);
-			if (row < 0 || !items [row].equals (plane.getItem (i))) return false;
-		}
-		return true;
-	}
-
 	private void syncSelection () {
+		if (window.isHidden ()) return;
 		syncing = true;
 		try {
 			syncSelectionLocked ();

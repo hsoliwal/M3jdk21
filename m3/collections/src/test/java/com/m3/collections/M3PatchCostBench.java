@@ -61,6 +61,57 @@ public final class M3PatchCostBench {
 				}
 				return extents.offsetOf (n / 2);
 			});
+			report ("extents first measurement in the middle (+ clear)", n, 50, ops -> {
+				for (int i = 0; i < ops; i++) {
+					extents.clearExtent (n / 2);
+					extents.setExtent (n / 2, 21);
+				}
+				return extents.offsetOf (n - 1);
+			});
+			java.util.List<Integer> source = new java.util.AbstractList<Integer> () {
+				@Override
+				public Integer get (int index) {
+					return index;
+				}
+
+				@Override
+				public int size () {
+					return n;
+				}
+			};
+			for (int w : new int [] {64, 4096}) {
+				M3WindowView<Integer> window = new M3WindowView<> (source);
+				window.move (n / 2, w);
+				int [] at = {n / 2};
+				report ("window move by one row, window " + w, n, 10_000, ops -> {
+					for (int i = 0; i < ops; i++) {
+						at [0] += (i & 1) == 0 ? 1 : -1;
+						window.move (at [0], w);
+					}
+					return window.first ();
+				});
+			}
+			if (n <= 100_000) {
+				report ("flattening rebuild (new view, re-expand every root) as the no-delta baseline", n, 1, ops -> {
+					long s = 0;
+					for (int i = 0; i < ops; i++) {
+						M3FlatteningView<Integer> view = new M3FlatteningView<> (new M3FlatteningView.Source<Integer> () {
+							@Override
+							public int childCount (Integer parent) {
+								return parent == null ? n : parent < n ? 1 : 0;
+							}
+
+							@Override
+							public Integer child (Integer parent, int index) {
+								return parent == null ? index : n + parent;
+							}
+						});
+						for (int row = n - 1; row >= 0; row--) view.expand (row);
+						s += view.size ();
+					}
+					return s;
+				});
+			}
 		}
 	}
 

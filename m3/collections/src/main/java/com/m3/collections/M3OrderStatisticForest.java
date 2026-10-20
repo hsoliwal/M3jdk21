@@ -57,7 +57,7 @@ public final class M3OrderStatisticForest {
 	private int [] keys = new int [0];
 	private long [] weights = new long [0];
 	private long seekBefore;
-	private int seekRank;
+	private int seekRank, seekKey;
 	private int splitLeft, splitRight, firstNode;
 	private long work;
 
@@ -211,6 +211,27 @@ public final class M3OrderStatisticForest {
 		return result;
 	}
 
+	/** {@link #prefix(int, int)} and {@link #rank(int, int)} in one walk: answers the prefix, {@link #seekRank()} the rank. */
+	public long prefixRank (int parentId, int key) {
+		long result = 0;
+		int count = 0;
+		int node = roots [parentId + 1], acc = 0;
+		while (node != NONE) {
+			work++;
+			boolean below = keys [node] + acc < key;
+			acc += shifts [node];
+			if (below) {
+				result += sums [node] - sum (right [node]);
+				count += sizeOf (left [node]) + 1;
+				node = right [node];
+			} else {
+				node = left [node];
+			}
+		}
+		seekRank = count;
+		return result;
+	}
+
 	/** Number of children of {@code parentId} whose key is below {@code key}. */
 	public int rank (int parentId, int key) {
 		int result = 0;
@@ -293,6 +314,7 @@ public final class M3OrderStatisticForest {
 			long leftSum = before + sum (left [node]);
 			if ((key - (long) leftRank) * slope + leftSum <= offset) {
 				found = node;
+				seekKey = key;
 				foundRank = leftRank;
 				foundBefore = leftSum;
 				rank = leftRank + 1;
@@ -312,9 +334,14 @@ public final class M3OrderStatisticForest {
 		return seekBefore;
 	}
 
-	/** Rank of the child returned by the last {@link #seekOffset(int, long, long)}. */
+	/** Rank of the child returned by the last {@link #seekOffset(int, long, long)} (or of the key of {@link #prefixRank(int, int)}). */
 	public int seekRank () {
 		return seekRank;
+	}
+
+	/** Absolute key of the child returned by the last {@link #seekOffset(int, long, long)}. */
+	public int seekKey () {
+		return seekKey;
 	}
 
 	/**

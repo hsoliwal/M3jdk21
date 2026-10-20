@@ -38,6 +38,7 @@ public final class M3AwtListDifferential {
 			EventQueue.invokeAndWait (() -> runSeed (frame, s, steps, totals));
 		}
 		EventQueue.invokeAndWait (() -> bulk (frame, bulk));
+		EventQueue.invokeAndWait (() -> hidden (frame, totals));
 		for (int i = 3; i < args.length; i++) {
 			int rows = Integer.parseInt (args [i]);
 			EventQueue.invokeAndWait (() -> viewportScale (frame, rows));
@@ -65,6 +66,7 @@ public final class M3AwtListDifferential {
 			String a = answers (stock), b = answers (viewport);
 			maxResident = Math.max (maxResident, viewport.residentRows ());
 			if (!a.equals (b)) failure = "step " + step + " op " + op + "\n  stock    " + a + "\n  viewport " + b;
+			else if (!viewport.planeMatchesModel ()) failure = "step " + step + " op " + op + ": the plane does not hold the window rows";
 			totals [2]++;
 		}
 		frame.remove (stock);
@@ -195,6 +197,38 @@ public final class M3AwtListDifferential {
 				+ " stockNsPerRow=" + (t1 - t0) / rows + " viewportNsPerRow=" + (t2 - t1) / rows + " viewportNativeCallsPerRow=" + (double) addCalls / rows
 				+ " stockNsPerJump=" + (t4 - t3) / jumps + " viewportNsPerJump=" + (t5 - t4) / jumps + " viewportNativeCallsPerJump=" + (double) jumpCalls / jumps));
 		frame.remove (stock);
+		frame.remove (viewport);
+	}
+
+	/*
+	 * Hidden viewport (brief rule 24): while the list is not showing, 10^4 edits make no plane call; becoming visible
+	 * applies one window patch, after which the plane holds exactly the resident rows of the model.
+	 */
+	private static void hidden (Frame frame, int [] totals) {
+		M3AwtViewportList viewport = new M3AwtViewportList (8, false);
+		frame.add (viewport);
+		frame.validate ();
+		for (int i = 0; i < 100; i++) viewport.add ("row " + i);
+		viewport.makeVisible (50);
+		viewport.setVisible (false);
+		long patches = viewport.planePatchCalls, natives = viewport.nativeCalls, applies = viewport.showApplies;
+		Random random = new Random (24);
+		for (int i = 0; i < 10_000; i++) {
+			int at = 40 + random.nextInt (30);
+			if (random.nextBoolean () && viewport.getItemCount () > 60) viewport.remove (at);
+			else viewport.add ("h" + i, at);
+		}
+		long patchesWhileHidden = viewport.planePatchCalls - patches, nativesWhileHidden = viewport.nativeCalls - natives;
+		boolean deferred = viewport.isPlaneDeferred ();
+		viewport.setVisible (true);
+		long appliesAfterShow = viewport.showApplies - applies;
+		int top = viewport.getTopIndex (), first = Math.max (0, top - M3AwtViewportList.OVERSCAN);
+		boolean match = viewport.planeMatchesModel () && viewport.residentRows () == Math.min (viewport.getItemCount () - first, 8 + 2 * M3AwtViewportList.OVERSCAN);
+		boolean ok = deferred && patchesWhileHidden == 0 && nativesWhileHidden == 0 && appliesAfterShow == 1 && match;
+		if (!ok) totals [1]++;
+		LOG.log (System.Logger.Level.INFO, String.valueOf ("HIDDEN " + (ok ? "OK" : "MISMATCH") + " edits=10000 planePatchCallsWhileHidden=" + patchesWhileHidden
+				+ " nativeCallsWhileHidden=" + nativesWhileHidden + " deferred=" + deferred + " showApplies=" + appliesAfterShow
+				+ " residentRows=" + viewport.residentRows () + " rows=" + viewport.getItemCount () + " top=" + top));
 		frame.remove (viewport);
 	}
 

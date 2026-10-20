@@ -90,13 +90,14 @@ public class M3PatchCostTest {
 					assertEquals (expected, f.index.countRange (P, from, to));
 					int removed = f.index.removeRange (P, from, to, out);
 					assertEquals (expected, removed);
-					int i = 0;
-					for (Map.Entry<Integer, Integer> e : new ArrayList<> (oracle.subMap (from, to).entrySet ())) {
-						assertEquals (e.getValue (), out [i++], "removed in key order");
-						assertEquals (e.getKey (), f.keys [e.getValue ()], "a removed id keeps its absolute key");
-						oracle.remove (e.getKey ());
-						weight.remove (e.getValue ());
-						free.add (e.getValue ());
+					// copy keys first: a TreeMap entry may take its successor's key when a node is deleted
+					List<Integer> doomed = new ArrayList<> (oracle.subMap (from, to).keySet ());
+					for (int i = 0; i < doomed.size (); i++) {
+						int key = doomed.get (i), id = oracle.remove (key);
+						assertEquals (id, out [i], "removed in key order");
+						assertEquals (key, f.keys [id], "a removed id keeps its absolute key");
+						weight.remove (id);
+						free.add (id);
 					}
 				} else {
 					f.index.flush (P);

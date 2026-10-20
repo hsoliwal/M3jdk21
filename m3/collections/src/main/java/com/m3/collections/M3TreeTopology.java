@@ -517,7 +517,7 @@ public final class M3TreeTopology {
 		int removed = siblings.countRange (parentId, from, to);
 		if (removed == 0) return;
 		int previous = siblings.lower (parentId, from);
-		if (scratch.length < removed) scratch = new int [M3LaneGrowth.capacity (scratch.length, removed, 16)];
+		if (scratch.length < removed) scratch = new int [M3LaneGrowth.capacity (scratch.length, removed, 4)];
 		int [] ids = scratch;
 		siblings.removeRange (parentId, from, to, ids);
 		int next = nextSiblingIds [ids [removed - 1]];
