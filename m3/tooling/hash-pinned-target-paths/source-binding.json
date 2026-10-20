@@ -2,7 +2,7 @@
   "schema": 1,
   "repository": "hsoliwal/com.synexia",
   "receiverRepository": "hsoliwal/M3jdk21",
-  "sourceCommit": "aabf1f8368d0fa3c72d5acf9a877f558f48e50b1",
+  "sourceCommit": "fbdb0f7e4ee0721affec405cc8059ac8dda251a9",
   "admissionCommit": "7948eaa7c2e739aaab4906cfc68c61236811b281",
   "hostAdmissionCommit": "2827450ce4caac940894d152874e5ca4085629ad",
   "receiverBase": "d6d76b563050fc13c4fa79bc494edf29f1614b37",
@@ -234,10 +234,10 @@
     },
     {
       "targetPath": ".github/workflows/m3-hash-pinned-target-paths.yml",
-      "sourcePath": "synexia-openrewrite-recipes/tasks/hash-pinned-target-paths-20261020/hosted/qualification.yml",
-      "gitBlob": "2c87b2d062d3834e7144255c2db6b5f09d45ca18",
-      "bytes": 32221,
-      "sha256": "14001ea7f34899f48b146fdee057a0bcfd8843641b49cc88b32e10ffe28e6059"
+      "sourcePath": "synexia-openrewrite-recipes/tasks/recipe-authority-conformance-20261020/hosted/qualification.yml",
+      "gitBlob": "46ad507db06c8e5d001ef21e8ef9f9294514cebf",
+      "bytes": 36894,
+      "sha256": "0c0fa26bd10a02caddda13d39e66a720c8645df90b99429f37e0633f87347f57"
     }
   ],
   "receiverOriginalOwners": [

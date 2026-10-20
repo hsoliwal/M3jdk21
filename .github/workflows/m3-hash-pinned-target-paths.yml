@@ -123,12 +123,16 @@ jobs:
         run: |
           set -euo pipefail
           python3 -I -S -B - <<'PY'
-          import errno,hashlib,json,os,pathlib,re,shutil,signal,subprocess,time
+          import errno,hashlib,json,os,pathlib,re,runpy,shutil,signal,subprocess,time
           reserve,cap=8*1024**3,512*1024**2
           root=pathlib.Path(os.environ["M3_PROOF_ROOT"])
           source=pathlib.Path(os.environ["M3_SOURCE_ROOT"])
           bundle=root/"artifacts";bundle.mkdir(exist_ok=False)
           sdk=source/"m3/tooling/hash-pinned-target-paths/sdk"
+          authority=source/"m3/tooling/hash-pinned-target-paths/authority-conformance"
+          lanes={"sdk":sdk,"scope":authority/"scope-sdk","manifest":authority/"manifest-sdk"}
+          phase_sdks={lane+"-"+phase:folder for lane,folder in lanes.items() for phase in ("inputs","maven")}
+          completed=False
           start=time.monotonic()
           active_command=None
           class CensusRescan(RuntimeError):pass
@@ -137,10 +141,10 @@ jobs:
               if error.errno==errno.ENOENT and error.filename:
                   missing=pathlib.Path(error.filename)
                   temporary=root/"tmp"
-                  if active_command in ("sdk-inputs","sdk-maven","native-proof") and temporary in missing.parents:
+                  if active_command in phase_sdks and temporary in missing.parents:
                       allowed=True
-                  if active_command in ("sdk-inputs","sdk-maven"):
-                      target=sdk/"target"
+                  if active_command in phase_sdks:
+                      target=phase_sdks[active_command]/"target"
                       if target in missing.parents:
                           child=missing.relative_to(target).parts[0]
                           if re.fullmatch(r"tmp[a-z0-9_]{8}",child):allowed=True
@@ -180,12 +184,12 @@ jobs:
               global active_command
               previous_command=active_command
               cases=[]
-              def exercise(name,kind,phase="sdk-inputs",expected=None,repeat=False,size=0,available=None):
+              def exercise(name,kind,phase="sdk-inputs",expected=None,repeat=False,size=0,available=None,folder=sdk):
                   global active_command
                   counts={"walks":0,"stats":0}
-                  missing={"sdk":sdk/"target/tmpabcdefgh/child","tmp":root/"tmp/java-owned/child",
-                           "m2":root/"m2/missing-directory","source":sdk/"pinned-engine/missing-directory",
-                           "target":sdk/"target/classes/missing-directory"}.get(kind,source/"ordinary-output")
+                  missing={"sdk":folder/"target/tmpabcdefgh/child","tmp":root/"tmp/java-owned/child",
+                           "m2":root/"m2/missing-directory","source":folder/"pinned-engine/missing-directory",
+                           "target":folder/"target/classes/missing-directory"}.get(kind,source/"ordinary-output")
                   owner=pathlib.Path(os.environ["RUNNER_TEMP"]) if kind in ("tmp","m2") else source
                   def walk(base,**options):
                       if pathlib.Path(base)!=owner:return iter(())
@@ -210,7 +214,7 @@ jobs:
                           if expected is None or expected not in str(error):raise AssertionError(name+" rejected incorrectly") from error
                       else:
                           if expected is not None:raise AssertionError(name+" unexpectedly admitted")
-                  if name in ("sdk-selftest-rescan","owned-java-temp-rescan") and counts["walks"]!=2:raise AssertionError("complete census did not restart")
+                  if (name in ("sdk-selftest-rescan","owned-java-temp-rescan") or name.endswith("-own-input-rescan") or name.endswith("-own-maven-rescan")) and counts["walks"]!=2:raise AssertionError("complete census did not restart")
                   if name=="three-rescan-bound" and counts["walks"]!=3:raise AssertionError("census retry bound changed")
                   cases.append(name)
               try:
@@ -225,12 +229,17 @@ jobs:
                   exercise("three-rescan-bound","sdk",expected="three full rescan attempts",repeat=True)
                   exercise("cap-exhaustion-refused","size",size=480*1024**2+1,expected="aggregate task limit")
                   exercise("reserve-exhaustion-refused","size",available=0,expected="8GiB-after-output reserve")
+                  for lane,other in (("scope","manifest"),("manifest","scope")):
+                      exercise(lane+"-own-input-rescan","sdk",phase=lane+"-inputs",folder=lanes[lane])
+                      exercise(lane+"-own-maven-rescan","sdk",phase=lane+"-maven",folder=lanes[lane])
+                      exercise(lane+"-cross-lane-refused","sdk",phase=lane+"-inputs",folder=lanes[other],expected="storage census failed")
+                      exercise(lane+"-ordinary-target-refused","target",phase=lane+"-maven",folder=lanes[lane],expected="storage census failed")
               finally:active_command=previous_command
-              if len(cases)!=11:raise RuntimeError("eleven storage guard discriminator cases required")
+              if len(cases)!=19:raise RuntimeError("nineteen storage guard discriminator cases required")
               gate()
               receipt={"schema":"M3_HASH_PINNED_TARGET_PATHS_COMPAT_STORAGE_GUARD_DISCRIMINATORS_V1","tests":len(cases),"failures":0,"cases":cases,"scope":"SAME_INLINE_GATE_WITH_MOCKED_METADATA_NO_REAL_TARGET_MUTATION"}
               (bundle/"storage-guard-receipt.json").write_text(json.dumps(receipt,indent=2)+"\n",encoding="utf-8")
-              print("PASS: eleven actual-inline mocked storage guard discriminators")
+              print("PASS: nineteen actual-inline mocked storage guard discriminators")
           def getgit(*args):
               return subprocess.check_output(["git",*args],cwd=source,text=True,timeout=15).strip()
           gate()
@@ -294,6 +303,7 @@ jobs:
           maven=["mvn","-B","-ntp","-s",str(settings/"settings.xml"),"-gs",str(settings/"global-settings.xml"),"-Dmaven.repo.local="+str(root/"m2"),"-Dstyle.color=never"]
           try:
               run("binding",py+[str(qualifier),"binding"],deadline=60)
+              run("authority-binding",py+[str(authority/"qualify.py"),"binding"],deadline=90)
               run("toolchain",maven+["-version"],deadline=30)
               version=(bundle/"toolchain.log").read_text(encoding="utf-8")
               expected="Apache Maven 3.10.0 (c43a36b8d67be7e0805a411bc0898af1a51f5472)"
@@ -302,16 +312,31 @@ jobs:
               if identities!=[expected] or not re.search(r"Java version: 21(?:\.|,)",version):raise RuntimeError("exact inventoried Maven3.10/JDK21 required; no setup/download fallback")
               storage_guard_discriminators()
               run("sdk-inputs",py+[str(sdk/"verify.py"),"--inputs","--self-test"],deadline=120)
-              if any((sdk/"target"/name).exists() for name in ("classes","test-classes","surefire-reports")):raise RuntimeError("SDK compilation and test outputs must start absent")
+              run("scope-inputs",py+[str(lanes["scope"]/"verify.py"),"--inputs","--self-test"],deadline=120)
+              run("manifest-inputs",py+[str(lanes["manifest"]/"verify.py"),"--inputs","--self-test"],deadline=120)
+              for folder in lanes.values():
+                  if any((folder/"target"/name).exists() for name in ("classes","test-classes","surefire-reports")):raise RuntimeError("all three SDK compilation and test outputs must start absent")
               run("sdk-maven",maven+["-f",str(sdk/"pom.xml"),"-DskipTests=false","-Dmaven.test.skip=false","test"],deadline=600)
               run("sdk-reports",py+[str(sdk/"verify.py"),"--reports"],deadline=90)
+              run("scope-maven",maven+["-f",str(lanes["scope"]/"pom.xml"),"-DskipTests=false","-Dmaven.test.skip=false","test"],deadline=600)
+              run("scope-reports",py+[str(lanes["scope"]/"verify.py"),"--reports"],deadline=90)
+              run("manifest-maven",maven+["-f",str(lanes["manifest"]/"pom.xml"),"-DskipTests=false","-Dmaven.test.skip=false","test"],deadline=600)
+              run("manifest-reports",py+[str(lanes["manifest"]/"verify.py"),"--reports"],deadline=90)
               run("sdk-report",py+[str(qualifier),"report"],deadline=90)
+              run("authority-report",py+[str(authority/"qualify.py"),"report"],deadline=120)
+              commands_expected=["binding","authority-binding","toolchain","sdk-inputs","scope-inputs","manifest-inputs","sdk-maven","sdk-reports","scope-maven","scope-reports","manifest-maven","manifest-reports","sdk-report","authority-report"]
+              if [r["name"] for r in records]!=commands_expected or any(r["returncode"]!=0 or not r["parentReaped"] or not r["ownedSessionAbsent"] for r in records):raise RuntimeError("fourteen exact successful owned commands required")
+              authority_receipt=json.loads((bundle/"authority-qualification-receipt.json").read_bytes())
+              if authority_receipt["recipeSdksQualified"] is not True or authority_receipt["sourceOnly"] is not True or authority_receipt["artifactMembers"]!=46:raise RuntimeError("actual two-SDK source qualification required")
+              for key in ("originalReceivingMavenModelQualified","canonicalModuleQualified","fullMatchedJdkQualified","windowsQualified","performanceRetentionQualified","productTargetApplied","runtimeApplied","phaseAdvanced","promotionAuthority"):
+                  if authority_receipt[key] is not False:raise RuntimeError("authority source SDK scope drift")
               receipt=json.loads((bundle/"qualification-receipt.json").read_bytes())
               if receipt["sdkRecipeJUnitQualified"] is not True or receipt["knownOwnerSourceReplayQualified"] is not True:raise RuntimeError("actual recipe and exact known owner proof required")
               for key in ("originalPrivateModelQualified","stringDispatchQualified","fullNativeTargetQualified","windowsQualified","fullMatchedJdkQualified","performanceRetentionQualified","productTargetApplied","phaseAdvanced"):
                   if receipt[key] is not False:raise RuntimeError("source SDK scope drift")
-              hosted={"schema":"M3_HASH_PINNED_TARGET_PATHS_COMPAT_HOSTED_V1","checkoutCommit":head,"commands":records,"qualificationReceiptSha256":hashlib.sha256((bundle/"qualification-receipt.json").read_bytes()).hexdigest(),"aggregateBytes":gate(),"storageGuardReceiptSha256":hashlib.sha256((bundle/"storage-guard-receipt.json").read_bytes()).hexdigest(),"mavenIdentity":observed,"phaseAdvanced":False}
+              hosted={"schema":"M3_HASH_PINNED_TARGET_PATHS_COMPAT_HOSTED_V1","checkoutCommit":head,"commands":records,"qualificationReceiptSha256":hashlib.sha256((bundle/"qualification-receipt.json").read_bytes()).hexdigest(),"aggregateBytes":gate(),"storageGuardReceiptSha256":hashlib.sha256((bundle/"storage-guard-receipt.json").read_bytes()).hexdigest(),"mavenIdentity":observed,"authorityQualificationReceiptSha256":hashlib.sha256((bundle/"authority-qualification-receipt.json").read_bytes()).hexdigest(),"artifactMembers":46,"phaseAdvanced":False}
               (bundle/"hosted-receipt.json").write_text(json.dumps(hosted,indent=2)+"\n",encoding="utf-8")
+              completed=True
           finally:
               # Command logs already reside in the upload directory if storage refuses new copies.
               last=bundle/(records[-1]["log"] if records else "binding.log")
@@ -327,6 +352,10 @@ jobs:
                   external+=[sdk/"target/sdk-receipt.json",sdk/"target/recipe-test-counters.json",qualifier.parent/"source-binding.json"]
                   external+=[sdk/"target/emitted/m3/tooling/migration-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java",sdk/"target/inverse-emitted/m3/tooling/migration-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java"]
                   aliases={sdk/"target/emitted/m3/tooling/migration-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java":"emitted-product-provider.java",sdk/"target/inverse-emitted/m3/tooling/migration-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java":"emitted-inverse-provider.java"}
+                  child=runpy.run_path(str(authority/"qualify.py"),run_name="m3_authority_artifact_contract")
+                  new_sources=child["artifact_sources"]()
+                  aliases.update(dict(new_sources))
+                  external.extend(path for path,name in new_sources)
                   selected=present+[p for p in external if p.is_file()]
                   if any(not p.is_file() or any(q.is_symlink() for q in [p,*p.parents]) for p in selected):raise RuntimeError("closed artifact source fence")
                   by_name={}
@@ -346,6 +375,12 @@ jobs:
                   payload=sum(p.stat().st_size for p in by_name.values())+len(tail)+len(commands)
                   planned=sum(p.stat().st_size for p,d in copies)+len(tail)+len(commands)
                   if len(by_name)+3>64 or payload+1024**2>8*1024**2 or before+planned+1024**2>496*1024**2:raise RuntimeError("complete artifact payload exceeds closed budget")
+                  if completed:
+                      api_suite="com.synexia.rewrite.M3HashPinnedTargetPathsCompatRecipeTest"
+                      original_members={"binding.log","toolchain.log","sdk-inputs.log","sdk-maven.log","sdk-reports.log","sdk-report.log","binding-receipt.json","qualification-receipt.json","storage-guard-receipt.json","hosted-receipt.json","TEST-"+api_suite+".xml",api_suite+".txt","sdk-receipt.json","recipe-test-counters.json","source-binding.json","emitted-product-provider.java","emitted-inverse-provider.java"}
+                      added_logs={name+".log" for name in ("authority-binding","scope-inputs","manifest-inputs","scope-maven","scope-reports","manifest-maven","manifest-reports","authority-report")}
+                      expected_members=original_members|added_logs|{"authority-binding-receipt.json","authority-qualification-receipt.json"}|{name for path,name in new_sources}
+                      if len(expected_members)+3!=46 or set(by_name)!=expected_members:raise RuntimeError("exact original20 and complete46member success artifact closure required")
               except BaseException:
                   print(tail.decode("utf-8",errors="replace"));raise
               for path,destination in copies:
