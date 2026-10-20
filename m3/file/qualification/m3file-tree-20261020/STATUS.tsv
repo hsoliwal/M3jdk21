@@ -3,4 +3,5 @@ S0	DESIGN.md DRAFT-1/2 + FOSS_REUSE_DECISION.tsv	DONE	d3f2dcafe7d	-	-
 S1	lanes, scanner, residency, M3File entry role	DONE	ed2036b9f92	6/6	S:/m3-scratch/m3file/mvn-test-2.log
 S1.1	DESIGN.md DRAFT-3: user directions D1-D7, slices S2-S12, #1567/#1568 coordination	DONE	2ad42ab9134	-	-
 S2	M3FileTraversal (default methods), M3FileWalk, M3FileCursor, M3FileKind, id/facade spliterators, subtreeEnd lane, REGULAR flag	DONE	845c457716e	17/17 (6 tree + 11 walk; symlink test ran)	S:/m3-scratch/m3file/mvn-s2-test-1.log
-S3	M3FileProgress (+split child), M3FileShadow/M3FileCharShadow (default methods), shadow input/output streams, SHA-256, CRC32C, line index, UTF-8 layer, token hash, text	DONE	(this commit)	25/25 (6 tree + 11 walk + 8 shadow)	S:/m3-scratch/m3file/mvn-s3-test-1.log
+S3	M3FileProgress (+split child), M3FileShadow/M3FileCharShadow (default methods), shadow input/output streams, SHA-256, CRC32C, line index, UTF-8 layer, token hash, text	DONE	d061c5495d0	25/25 (6 tree + 11 walk + 8 shadow)	S:/m3-scratch/m3file/mvn-s3-test-1.log
+S4	M3FileNames interner (names + types), nameId/typeId lanes, walk types(...), M3File type()/typeId()	DONE	(this commit)	28/28 (+3 names; Windows strips trailing dots, rule unit-tested)	S:/m3-scratch/m3file/mvn-s4-test-2.log

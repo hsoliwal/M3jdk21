@@ -4,6 +4,8 @@ package com.m3.file;
 
 import java.nio.file.PathMatcher;
 import java.util.Arrays;
+import java.util.BitSet;
+import java.util.Locale;
 import java.util.Objects;
 import java.util.Spliterator;
 import java.util.function.IntPredicate;
@@ -16,7 +18,7 @@ import java.util.regex.Pattern;
  *
  * <p>Encounter order is pre-order scan order, the order of {@code Files.walk} over the same directory
  * state. Each configuration method returns a new walk; filters compose with AND, prunes with OR.
- * Depths are relative to the walk root (root = 0). {@code prune} stops descent below a matching
+ * Depths are relative to the walk root (root = 0). Kind and type filters are lane tests. {@code prune} stops descent below a matching
  * directory while the directory itself still meets the filters ({@code find -prune}); pruned and
  * depth-capped subtrees are skipped in one jump through the {@code subtreeEnd} lane. Lane tests (depth,
  * kind, {@code filterIds}, name and path patterns) run before facade predicates, so most rejected
@@ -32,6 +34,7 @@ public final class M3FileWalk implements M3FileTraversal {
     private final int minDepth;
     private final int maxDepth;
     private final int kindMask;
+    private final BitSet types;
     private final PathMatcher glob;
     private final Pattern[] pathRegex;
     private final Pattern[] nameRegex;
@@ -41,11 +44,11 @@ public final class M3FileWalk implements M3FileTraversal {
     private final Predicate<M3File> filter;
 
     M3FileWalk(M3FileTree tree, int root) {
-        this(tree, root, 0, Integer.MAX_VALUE, M3FileKind.ALL, null, NO_PATTERNS, NO_PATTERNS,
+        this(tree, root, 0, Integer.MAX_VALUE, M3FileKind.ALL, null, null, NO_PATTERNS, NO_PATTERNS,
                 null, null, null, null);
     }
 
-    private M3FileWalk(M3FileTree tree, int root, int minDepth, int maxDepth, int kindMask,
+    private M3FileWalk(M3FileTree tree, int root, int minDepth, int maxDepth, int kindMask, BitSet types,
             PathMatcher glob, Pattern[] pathRegex, Pattern[] nameRegex, IntPredicate pruneIds,
             Predicate<M3File> prune, IntPredicate filterIds, Predicate<M3File> filter) {
         this.tree = tree;
@@ -54,6 +57,7 @@ public final class M3FileWalk implements M3FileTraversal {
         this.minDepth = minDepth;
         this.maxDepth = maxDepth;
         this.kindMask = kindMask;
+        this.types = types;
         this.glob = glob;
         this.pathRegex = pathRegex;
         this.nameRegex = nameRegex;
@@ -74,13 +78,13 @@ public final class M3FileWalk implements M3FileTraversal {
 
     /** Emits only entries at relative depth {@code >= depth}. */
     public M3FileWalk minDepth(int depth) {
-        return new M3FileWalk(tree, root, requireDepth(depth), maxDepth, kindMask, glob, pathRegex,
+        return new M3FileWalk(tree, root, requireDepth(depth), maxDepth, kindMask, types, glob, pathRegex,
                 nameRegex, pruneIds, prune, filterIds, filter);
     }
 
     /** Does not descend below relative depth {@code depth}, like {@code Files.walk(start, depth)}. */
     public M3FileWalk maxDepth(int depth) {
-        return new M3FileWalk(tree, root, minDepth, requireDepth(depth), kindMask, glob, pathRegex,
+        return new M3FileWalk(tree, root, minDepth, requireDepth(depth), kindMask, types, glob, pathRegex,
                 nameRegex, pruneIds, prune, filterIds, filter);
     }
 
@@ -91,7 +95,23 @@ public final class M3FileWalk implements M3FileTraversal {
     /** Emits only entries whose {@link M3FileKind#bit()} is in {@code mask}. */
     public M3FileWalk kindMask(int mask) {
         if ((mask & ~M3FileKind.ALL) != 0) throw new IllegalArgumentException("unknown kind bits: " + mask);
-        return new M3FileWalk(tree, root, minDepth, maxDepth, mask, glob, pathRegex, nameRegex,
+        return new M3FileWalk(tree, root, minDepth, maxDepth, mask, types, glob, pathRegex, nameRegex,
+                pruneIds, prune, filterIds, filter);
+    }
+
+    /**
+     * Emits only entries whose interned type (lower-case extension, leading dot optional, {@code ""} for
+     * none and for directories) is one of {@code extensions}; a lane test on {@code typeId}.
+     */
+    public M3FileWalk types(String... extensions) {
+        BitSet wanted = new BitSet();
+        for (String extension : extensions) {
+            String key = extension.startsWith(".") ? extension.substring(1) : extension;
+            int id = tree.types().find(key.toLowerCase(Locale.ROOT));
+            if (id >= 0) wanted.set(id);
+        }
+        if (types != null) wanted.and(types);
+        return new M3FileWalk(tree, root, minDepth, maxDepth, kindMask, wanted, glob, pathRegex, nameRegex,
                 pruneIds, prune, filterIds, filter);
     }
 
@@ -100,7 +120,7 @@ public final class M3FileWalk implements M3FileTraversal {
         PathMatcher next = tree.root().getFileSystem().getPathMatcher("glob:" + pattern);
         PathMatcher previous = glob;
         PathMatcher composed = previous == null ? next : p -> previous.matches(p) && next.matches(p);
-        return new M3FileWalk(tree, root, minDepth, maxDepth, kindMask, composed, pathRegex, nameRegex,
+        return new M3FileWalk(tree, root, minDepth, maxDepth, kindMask, types, composed, pathRegex, nameRegex,
                 pruneIds, prune, filterIds, filter);
     }
 
@@ -110,7 +130,7 @@ public final class M3FileWalk implements M3FileTraversal {
 
     /** Full match over the relative path string (platform separator, as {@code root.relativize(p).toString()}). */
     public M3FileWalk regex(Pattern pattern) {
-        return new M3FileWalk(tree, root, minDepth, maxDepth, kindMask, glob, plus(pathRegex, pattern),
+        return new M3FileWalk(tree, root, minDepth, maxDepth, kindMask, types, glob, plus(pathRegex, pattern),
                 nameRegex, pruneIds, prune, filterIds, filter);
     }
 
@@ -120,34 +140,34 @@ public final class M3FileWalk implements M3FileTraversal {
 
     /** Full match over the entry name; matched in place over the name lanes. */
     public M3FileWalk nameRegex(Pattern pattern) {
-        return new M3FileWalk(tree, root, minDepth, maxDepth, kindMask, glob, pathRegex,
+        return new M3FileWalk(tree, root, minDepth, maxDepth, kindMask, types, glob, pathRegex,
                 plus(nameRegex, pattern), pruneIds, prune, filterIds, filter);
     }
 
     /** Does not descend into directories matching {@code predicate}. */
     public M3FileWalk prune(Predicate<? super M3File> predicate) {
         Predicate<M3File> next = Objects.requireNonNull(predicate, "predicate")::test;
-        return new M3FileWalk(tree, root, minDepth, maxDepth, kindMask, glob, pathRegex, nameRegex,
+        return new M3FileWalk(tree, root, minDepth, maxDepth, kindMask, types, glob, pathRegex, nameRegex,
                 pruneIds, prune == null ? next : prune.or(next), filterIds, filter);
     }
 
     /** Lane-level {@link #prune}: tested on row ids, no facade. */
     public M3FileWalk pruneIds(IntPredicate predicate) {
         Objects.requireNonNull(predicate, "predicate");
-        return new M3FileWalk(tree, root, minDepth, maxDepth, kindMask, glob, pathRegex, nameRegex,
+        return new M3FileWalk(tree, root, minDepth, maxDepth, kindMask, types, glob, pathRegex, nameRegex,
                 pruneIds == null ? predicate : pruneIds.or(predicate), prune, filterIds, filter);
     }
 
     public M3FileWalk filter(Predicate<? super M3File> predicate) {
         Predicate<M3File> next = Objects.requireNonNull(predicate, "predicate")::test;
-        return new M3FileWalk(tree, root, minDepth, maxDepth, kindMask, glob, pathRegex, nameRegex,
+        return new M3FileWalk(tree, root, minDepth, maxDepth, kindMask, types, glob, pathRegex, nameRegex,
                 pruneIds, prune, filterIds, filter == null ? next : filter.and(next));
     }
 
     /** Lane-level {@link #filter}: tested on row ids, no facade. */
     public M3FileWalk filterIds(IntPredicate predicate) {
         Objects.requireNonNull(predicate, "predicate");
-        return new M3FileWalk(tree, root, minDepth, maxDepth, kindMask, glob, pathRegex, nameRegex,
+        return new M3FileWalk(tree, root, minDepth, maxDepth, kindMask, types, glob, pathRegex, nameRegex,
                 pruneIds, prune, filterIds == null ? predicate : filterIds.and(predicate), filter);
     }
 
@@ -168,7 +188,7 @@ public final class M3FileWalk implements M3FileTraversal {
     /** Unfiltered walk over a tree without tombstones: every id in range is emitted. */
     boolean plain() {
         return minDepth == 0 && maxDepth == Integer.MAX_VALUE && kindMask == M3FileKind.ALL
-                && glob == null && pathRegex.length == 0 && nameRegex.length == 0 && pruneIds == null
+                && types == null && glob == null && pathRegex.length == 0 && nameRegex.length == 0 && pruneIds == null
                 && prune == null && filterIds == null && filter == null && tree.tombstones() == 0;
     }
 
@@ -218,7 +238,7 @@ public final class M3FileWalk implements M3FileTraversal {
 
         boolean accepts(int id) {
             if (tree.deleted(id) || tree.depth(id) - rootDepth < minDepth) return false;
-            if ((kindMask & tree.kindBit(id)) == 0) return false;
+            if ((kindMask & tree.kindBit(id)) == 0 || (types != null && !types.get(tree.typeId(id)))) return false;
             if (filterIds != null && !filterIds.test(id)) return false;
             if (name.length > 0 && !matchesName(id)) return false;
             if ((path.length > 0 || glob != null) && !matchesPath(id)) return false;

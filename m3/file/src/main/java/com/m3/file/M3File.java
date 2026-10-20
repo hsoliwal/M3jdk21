@@ -93,6 +93,11 @@ public final class M3File {
 
     public M3FileKind kind() { return tree.kind(entryId()); }
 
+    /** Interned lower-case extension, {@code ""} for none and for directories. */
+    public String type() { return tree.type(entryId()); }
+
+    public int typeId() { return tree.typeId(entryId()); }
+
     /** Walk over this entry and its descendants. */
     public M3FileWalk walk() { return tree.walk(entryId()); }
 

@@ -24,7 +24,7 @@ Entry type is `M3File` everywhere. Small interfaces carry behaviour in default m
 | `M3FileCharShadow` | interface | char-level layer fed by a UTF-8 decoding shadow | `Decoder` |
 | `M3FileShadowInputStream` / `M3FileShadowOutputStream` | class | main stream + progress + shadows; one I/O pass feeds every layer | `HashingStream` |
 | `M3FileNames` | class | per-tree name/segment interner: name id -> pool range (TIL, int ids) | `String.intern` |
-| `M3FileTypes` | class | interned type ids by extension (`txt`, `json`, `bin`, ``) | `MimeMap` |
+| `tree.types()` | `M3FileNames` | second interner: lower-case extension type ids (`txt`, `json`, `bin`; id 0 = none or directory); no separate class (S4 decision) | `MimeMap` |
 | `M3FileChangeProvider` | interface | change detection; defaults = attribute gate then hash; native providers override | `Watcher` |
 | `M3FileTreeDelta` | class | two scans -> change lanes + `Stream<M3FileChange>` | `FileDiff` |
 | `M3FileChange` | class | facade over one delta row: before/after `M3File`, change bits | `FileEvent` |
@@ -63,12 +63,12 @@ Ids dense, pre-order (scan order = `Files.walk` order); `0` = root; `rows()` = n
 |------|------|---------|-------|
 | `parent` | `int[]` | parent id; `-1` root | S1 |
 | `depth` | `short[]` | root `0` | S1 |
-| `nameOff` / `namePool` | `int[rows+1]` / `char[]` | name chars of each row (replaced by `nameId` in S4) | S1 |
+| `nameOff` / `namePool` | `int[rows+1]` / `char[]` | per-row name chars; removed in S4 (now `nameId` + `M3FileNames` pool) | S1 |
 | `childStart` / `childCount` / `childIds` | `int[]` | CSR, slices sorted by name | S1 |
 | `subtreeEnd` | `int[]` | exclusive end of the pre-order subtree range `[id, subtreeEnd)` | S2 |
 | `size` / `mtime` | `long[]` | bytes; epoch millis | S1 |
 | `nameId` | `int[]` | interned name id (`M3FileNames`) | S4 |
-| `typeId` | `short[]` | interned extension type id (`M3FileTypes`) | S4 |
+| `typeId` | `int[]` | interned extension type id (`tree.types()`) | S4 |
 | `fileKey` | `int[]` | interned `BasicFileAttributes.fileKey()` id, `0` none | S5 |
 | `crc` | `long[]` | CRC32C of raw bytes (fast hash) | S5 |
 | `sha` | `long[4*rows]` | SHA-256 words of raw bytes, big-endian (#1567 `Fingerprint` order) | S5 |

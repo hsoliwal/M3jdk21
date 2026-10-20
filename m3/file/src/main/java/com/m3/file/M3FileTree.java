@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.BitSet;
+import java.util.Locale;
 import java.util.Objects;
 import java.util.stream.IntStream;
 
@@ -13,11 +14,12 @@ import java.util.stream.IntStream;
  * Owner of one rooted directory tree held in structure-of-arrays lanes ({@code m3/file/DESIGN.md}).
  *
  * <p>Row ids are dense and allocated in pre-order (the scan order of {@code Files.walk}); {@code 0}
- * is the root. Lanes: {@code parent}, {@code depth}, a {@code char[]} name pool with per-row offsets
- * (pattern of {@code com.m3.fs.M3DirectoryTable}), CSR child slices, {@code subtreeEnd}, {@code size},
- * {@code mtime}, and one {@link BitSet} per {@link M3FileFlag}. {@link M3File} facades are thin
- * {@code (tree, id)} handles produced by {@link #file(int)} and kept in a bounded
- * {@link M3FileResidency}; a {@code String} or {@code Path} is only built when a caller asks.</p>
+ * is the root. Lanes: {@code parent}, {@code depth}, {@code nameId} into the tree's
+ * {@link M3FileNames} interner (each distinct segment stored once), {@code typeId} into a second
+ * interner of lower-case extensions (id {@code 0} = none or directory), CSR child slices,
+ * {@code subtreeEnd}, {@code size}, {@code mtime}, and one {@link BitSet} per {@link M3FileFlag}.
+ * Nothing else of the file system is retained (DOOP). {@link M3File} facades are thin
+ * {@code (tree, id)} handles from {@link #file(int)}, kept in a bounded {@link M3FileResidency}.</p>
  *
  * <p>Invariants: {@code parent[id] < id}; {@code depth[id] == depth[parent[id]] + 1}; every child
  * slice is sorted by {@link #compareNames}; {@code childIds} holds every non-root id exactly once;
@@ -32,10 +34,12 @@ public final class M3FileTree {
     private final Path root;
     private final BitSet[] flags = new BitSet[M3FileFlag.VALUES.length];
     private final M3FileResidency residency;
+    private final M3FileNames names = new M3FileNames(INITIAL_ROWS);
+    private final M3FileNames types = new M3FileNames(8);
     private int[] parent = new int[INITIAL_ROWS];
     private short[] depth = new short[INITIAL_ROWS];
-    private int[] nameOff = new int[INITIAL_ROWS + 1];
-    private char[] namePool = new char[INITIAL_ROWS * 16];
+    private int[] nameId = new int[INITIAL_ROWS];
+    private int[] typeId = new int[INITIAL_ROWS];
     private int[] childStart = new int[INITIAL_ROWS];
     private int[] childCount = new int[INITIAL_ROWS];
     private int[] childIds = new int[INITIAL_ROWS];
@@ -44,12 +48,12 @@ public final class M3FileTree {
     private long[] mtime = new long[INITIAL_ROWS];
     private int rows;
     private int childTop;
-    private int nameTop;
 
     private M3FileTree(Path root, int residencyCapacity) {
         this.root = Objects.requireNonNull(root, "root");
         this.residency = new M3FileResidency(residencyCapacity);
         for (int i = 0; i < flags.length; i++) flags[i] = new BitSet();
+        types.intern("");
     }
 
     /** Eager scan of {@code root} with {@code NOFOLLOW_LINKS} and unbounded depth. */
@@ -111,6 +115,16 @@ public final class M3FileTree {
         return residency.residentCount();
     }
 
+    /** Interned name segments of this tree. */
+    public M3FileNames names() {
+        return names;
+    }
+
+    /** Interned lower-case extensions of this tree; id {@code 0} is the empty type. */
+    public M3FileNames types() {
+        return types;
+    }
+
     public int parent(int id) {
         checkId(id);
         return parent[id];
@@ -165,34 +179,39 @@ public final class M3FileTree {
         return M3FileKind.VALUES[Integer.numberOfTrailingZeros(kindBit(id))];
     }
 
-    public int nameLength(int id) {
+    /** Interned name id of row {@code id} in {@link #names()}. */
+    public int nameId(int id) {
         checkId(id);
-        return nameOff[id + 1] - nameOff[id];
+        return nameId[id];
+    }
+
+    /** Interned type id of row {@code id} in {@link #types()}; {@code 0} for none and for directories. */
+    public int typeId(int id) {
+        checkId(id);
+        return typeId[id];
+    }
+
+    /** Cold: lower-case extension of row {@code id}, {@code ""} for none. */
+    public String type(int id) {
+        return types.name(typeId(id));
+    }
+
+    public int nameLength(int id) {
+        return names.length(nameId(id));
     }
 
     public char nameCharAt(int id, int index) {
-        Objects.checkIndex(index, nameLength(id));
-        return namePool[nameOff[id] + index];
+        return names.charAt(nameId(id), index);
     }
 
     /** Cold: materialises the name of {@code id}. */
     public String name(int id) {
-        checkId(id);
-        return new String(namePool, nameOff[id], nameOff[id + 1] - nameOff[id]);
+        return names.name(nameId(id));
     }
 
     /** UTF-16 code unit order, then length; locale-free and allocation-free. */
     public int compareNames(int a, int b) {
-        int lengthA = nameLength(a);
-        int lengthB = nameLength(b);
-        int offA = nameOff[a];
-        int offB = nameOff[b];
-        int common = Math.min(lengthA, lengthB);
-        for (int i = 0; i < common; i++) {
-            int difference = namePool[offA + i] - namePool[offB + i];
-            if (difference != 0) return difference;
-        }
-        return lengthA - lengthB;
+        return names.compare(nameId(a), nameId(b));
     }
 
     /** Cold: {@code root} for id {@code 0}, otherwise {@code root.resolve(names joined by the separator)}. */
@@ -202,6 +221,12 @@ public final class M3FileTree {
         StringBuilder relative = new StringBuilder();
         appendRelative(0, id, relative);
         return root.resolve(relative.toString());
+    }
+
+    /** Lower-case extension after the last dot of a name; {@code ""} for none, dot-names and trailing dots. */
+    static String extension(String name) {
+        int dot = name.lastIndexOf('.');
+        return dot <= 0 || dot == name.length() - 1 ? "" : name.substring(dot + 1).toLowerCase(Locale.ROOT);
     }
 
     /** Kind bit of {@code id} ({@link M3FileKind#bit()}); a link is never a directory or file. */
@@ -222,7 +247,7 @@ public final class M3FileTree {
 
     /** Appends the name chars of {@code id}; no intermediate String. */
     void appendName(int id, StringBuilder out) {
-        out.append(namePool, nameOff[id], nameOff[id + 1] - nameOff[id]);
+        names.appendTo(nameId[id], out);
     }
 
     /** Appends the path of {@code id} relative to its ancestor-or-self {@code from}; empty when equal. */
@@ -248,8 +273,8 @@ public final class M3FileTree {
         subtreeEnd[id] = id + 1;
         size[id] = bytes;
         mtime[id] = modified;
-        appendName(name);
-        nameOff[id + 1] = nameTop;
+        nameId[id] = names.intern(name);
+        typeId[id] = kind == M3FileKind.DIRECTORY ? 0 : types.intern(extension(name));
         setFlag(M3FileFlag.DIR, id, kind == M3FileKind.DIRECTORY);
         setFlag(M3FileFlag.REGULAR, id, kind == M3FileKind.FILE);
         setFlag(M3FileFlag.LINK, id, kind == M3FileKind.SYMLINK);
@@ -271,21 +296,13 @@ public final class M3FileTree {
         setFlag(M3FileFlag.SCANNED, dirId, true);
     }
 
-    private void appendName(String name) {
-        int length = name.length();
-        if (nameTop + length > namePool.length) {
-            namePool = Arrays.copyOf(namePool, Math.max(namePool.length * 2, nameTop + length));
-        }
-        name.getChars(0, length, namePool, nameTop);
-        nameTop += length;
-    }
-
     private void ensureRows(int needed) {
         if (needed <= parent.length) return;
         int capacity = Math.max(parent.length * 2, needed);
         parent = Arrays.copyOf(parent, capacity);
         depth = Arrays.copyOf(depth, capacity);
-        nameOff = Arrays.copyOf(nameOff, capacity + 1);
+        nameId = Arrays.copyOf(nameId, capacity);
+        typeId = Arrays.copyOf(typeId, capacity);
         childStart = Arrays.copyOf(childStart, capacity);
         childCount = Arrays.copyOf(childCount, capacity);
         subtreeEnd = Arrays.copyOf(subtreeEnd, capacity);
