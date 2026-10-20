@@ -1,0 +1,15 @@
+leaf	operation	size	before	after	unit	method	catalogue_id	commit	evidence_path
+L1 VariableHeightLayoutCache lanes	JTree getRowForPath, last row, wide shape	10^6	174-214	0.95-2.9	us	per-node Fenwick lanes instead of TreeStateNode objects	fenwick-tree	(leaf 1, PR #1001 lineage)	bench/BENCH_20261017.tsv
+L1 VariableHeightLayoutCache lanes	JTree view heap, expanded	10^6	129.1	20.7	MB	lanes, objects only when an API asks	dense-lanes	(leaf 1)	bench/DELTA_20261019.tsv
+L3 JList row offsets	locationToIndex, last row	10^6	405-626	2.0-3.2	us	int prefix lane over cellHeights	prefix-sums	9a33e82405d	bench/LIST_20261019.tsv
+L4 JList measure deltas	one edit + relayout (insert at front)	10^6	564-584	6.3	ms	piece table of measured rows, probe	piece-table	f2ef95dd8ff	bench/LIST_MEASURE_20261019.tsv
+L4 JList measure deltas	contentsChanged one row + layout + frame	10^6	2788	3.2	ms	piece table of measured rows, probe	piece-table	f2ef95dd8ff	bench/DELTA_20261019.tsv
+L5 JTree expansion index	expand every inner node in preorder, deep shape	1.1*10^6 nodes	30752 of 111111 in 120 s	111111 in 776-1226 ms	expansions	trie by parent + mirrored Hashtable bucket and chain order	trie+ordered-mirror	(PR #1466)	bench/JTREE_EXPANSION_20261019.tsv
+L5 JTree expansion index	getExpandedDescendants, fresh expansion	11111 keys	755	1.6	us	trie by parent	trie+ordered-mirror	(PR #1466)	bench/EXPANSION_TABLE_20261019.tsv
+L7 TableRowSorter permutation lanes	retained sorter heap, sorted	10^6	32.0	8.0	MB	viewToModel and modelToView int lanes, no Row objects	permutation-lane	98ea56c6a39 (code in sweep commits 667f05b439f, 623a0d67c0a, 81ca335cbe1)	bench/DELTA_20261019.tsv; heap run 2026-10-19
+L7 TableRowSorter permutation lanes	allocation of a sort from unsorted	10^5	3.602	1.213	MB	int lanes, natural-run merge sort	timsort-shape-merge	98ea56c6a39	bench/SORTER_LANES_20261020.tsv
+L7 TableRowSorter permutation lanes	allocation of a sort from unsorted	10^6	36.002	12.125	MB	int lanes, natural-run merge sort	timsort-shape-merge	98ea56c6a39	bench/SORTER_LANES_20261020.tsv
+L7 TableRowSorter permutation lanes	sort by an Integer column (setSortKeys)	10^6	140-383	200-238	ms	natural-run merge sort (measured no: equal within noise)	timsort-shape-merge	98ea56c6a39	bench/SORTER_LANES_20261020.tsv
+L7 TableRowSorter permutation lanes	1,000-row update with sortsOnUpdates	10^6	24.2-28.4	10.4-18.2	ms	merge of the updated rows into the int lane	k-way-merge	98ea56c6a39	bench/SORTER_LANES_20261020.tsv
+L7 TableRowSorter permutation lanes	one-row insert	10^6	32.2-41.9	21.2-34.5	ms	int lane insertInOrder	sorted-insert	98ea56c6a39	bench/SORTER_LANES_20261020.tsv
+L7 TableRowSorter permutation lanes	first lane sort (top-down merge sort), rejected	10^6	140-383	3000	ms	replaced by the natural-run merge sort in the same leaf	merge-sort	98ea56c6a39	S:/m3-scratch/swing/logs/sorter_bench.tsv

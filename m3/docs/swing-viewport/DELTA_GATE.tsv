@@ -1,0 +1,6 @@
+component	delta_events	full_rebuild_paths_on_deltas	counter_in_differential	status	evidence
+JTree (VariableHeightLayoutCache path)	TreeModelEvent nodesChanged/nodesInserted/nodesRemoved; expand/collapse	none in M3VariableHeightLayoutCache (rebuild only on setModel, setRootVisible, treeStructureChanged of the root, as the stock)	PENDING (rule 24 counter to add to M3TreeLayoutCacheDifferential and M3JTreeViewportDifferential)	OPEN	DESIGN.md sections 3, 13
+JTree (FixedHeightLayoutCache path)	same	none in M3FixedHeightLayoutCache (rebuild only as the stock)	PENDING	OPEN	DESIGN.md section 7
+JTree expansion table	expand, collapse, nodes removed	none (trie edits per key)	PENDING (M3JTreeExpansionDifferential)	OPEN	DESIGN.md section 11
+JList	ListDataEvent intervalAdded/intervalRemoved/contentsChanged(i, j)	every row re-measured on contentsChanged(-1, -1), a probe mismatch, untrackable indices or more than 1,024 pieces (all stock semantics; contentsChanged(0, n - 1) re-measures every row by contract)	PENDING (M3JListViewportDifferential)	OPEN	DESIGN.md sections 10, 13
+JTable + TableRowSorter	TableModelEvent INSERT/DELETE/UPDATE	stock shouldOptimizeChange sorts in full when more than 10% of the rows change or the view was not sorted; kept for identical answers	PENDING (M3RowSorterLanesDifferential)	OPEN	DESIGN.md section 14
