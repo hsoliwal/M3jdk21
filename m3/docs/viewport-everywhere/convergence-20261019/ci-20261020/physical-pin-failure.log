@@ -1,0 +1,294 @@
+﻿2026-10-20T01:54:51.1450382Z Current runner version: '2.337.0'
+2026-10-20T01:54:51.1475165Z ##[group]Runner Image Provisioner
+2026-10-20T01:54:51.1476525Z Hosted Compute Agent
+2026-10-20T01:54:51.1477154Z Version: 20261012.601
+2026-10-20T01:54:51.1477823Z Commit: f3dc54e1fb89da6852db922499a0233137369e1d
+2026-10-20T01:54:51.1478561Z Build Date: 2026-10-12T17:48:21Z
+2026-10-20T01:54:51.1479243Z Worker ID: {93961038-d1cd-4c0a-97e8-334aa6592848}
+2026-10-20T01:54:51.1480004Z Region: eastus
+2026-10-20T01:54:51.1480608Z Cloud: Azure
+2026-10-20T01:54:51.1481182Z ##[endgroup]
+2026-10-20T01:54:51.1482671Z ##[group]Operating System
+2026-10-20T01:54:51.1483302Z Ubuntu
+2026-10-20T01:54:51.1483950Z 24.04.5
+2026-10-20T01:54:51.1484494Z LTS
+2026-10-20T01:54:51.1484991Z ##[endgroup]
+2026-10-20T01:54:51.1485599Z ##[group]Runner Image
+2026-10-20T01:54:51.1486396Z Image: ubuntu-24.04
+2026-10-20T01:54:51.1487008Z Version: 20261012.334.1
+2026-10-20T01:54:51.1488318Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20261012.334/images/ubuntu/Ubuntu2404-Readme.md
+2026-10-20T01:54:51.1490021Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20261012.334
+2026-10-20T01:54:51.1490979Z ##[endgroup]
+2026-10-20T01:54:51.1492174Z ##[group]GITHUB_TOKEN Permissions
+2026-10-20T01:54:51.1494366Z Contents: read
+2026-10-20T01:54:51.1495343Z Metadata: read
+2026-10-20T01:54:51.1495917Z ##[endgroup]
+2026-10-20T01:54:51.1498766Z Secret source: Actions
+2026-10-20T01:54:51.1499874Z Cache mode: write
+2026-10-20T01:54:51.1500781Z Prepare workflow directory
+2026-10-20T01:54:51.1830185Z Prepare all required actions
+2026-10-20T01:54:51.1878166Z Getting action download info
+2026-10-20T01:54:51.3943708Z Download action repository 'actions/checkout@v4' (SHA:11d5960a326750d5838078e36cf38b85af677262)
+2026-10-20T01:54:51.4934043Z Download action repository 'actions/setup-java@v4' (SHA:cf277c60eb25467037889841efdb72551f06f6c3)
+2026-10-20T01:54:51.8514442Z Complete job name: current-owner-java-jni
+2026-10-20T01:54:51.9345822Z ##[group]Run actions/checkout@v4
+2026-10-20T01:54:51.9347033Z with:
+2026-10-20T01:54:51.9347490Z   persist-credentials: false
+2026-10-20T01:54:51.9348018Z   repository: hsoliwal/M3jdk21
+2026-10-20T01:54:51.9352048Z   token: ***
+2026-10-20T01:54:51.9352476Z   ssh-strict: true
+2026-10-20T01:54:51.9352910Z   ssh-user: git
+2026-10-20T01:54:51.9353327Z   clean: true
+2026-10-20T01:54:51.9353766Z   sparse-checkout-cone-mode: true
+2026-10-20T01:54:51.9354281Z   fetch-depth: 1
+2026-10-20T01:54:51.9354702Z   fetch-tags: false
+2026-10-20T01:54:51.9355139Z   show-progress: true
+2026-10-20T01:54:51.9355574Z   lfs: false
+2026-10-20T01:54:51.9356158Z   submodules: false
+2026-10-20T01:54:51.9356620Z   set-safe-directory: true
+2026-10-20T01:54:51.9357120Z   allow-unsafe-pr-checkout: false
+2026-10-20T01:54:51.9357900Z ##[endgroup]
+2026-10-20T01:54:52.0394017Z Syncing repository: hsoliwal/M3jdk21
+2026-10-20T01:54:52.0397072Z ##[group]Getting Git version info
+2026-10-20T01:54:52.0398301Z Working directory is '/home/runner/work/M3jdk21/M3jdk21'
+2026-10-20T01:54:52.0399917Z [command]/usr/bin/git version
+2026-10-20T01:54:52.0479819Z git version 2.55.0
+2026-10-20T01:54:52.0502216Z ##[endgroup]
+2026-10-20T01:54:52.0523957Z Temporarily overriding HOME='/home/runner/work/_temp/d5cfeb88-cf3e-4949-b317-7983ec257c3d' before making global git config changes
+2026-10-20T01:54:52.0527203Z Adding repository directory to the temporary git global config as a safe directory
+2026-10-20T01:54:52.0531021Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/M3jdk21/M3jdk21
+2026-10-20T01:54:52.0583427Z Deleting the contents of '/home/runner/work/M3jdk21/M3jdk21'
+2026-10-20T01:54:52.0588274Z ##[group]Initializing the repository
+2026-10-20T01:54:52.0592245Z [command]/usr/bin/git init /home/runner/work/M3jdk21/M3jdk21
+2026-10-20T01:54:52.0734543Z hint: Using 'master' as the name for the initial branch. This default branch name
+2026-10-20T01:54:52.0736593Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+2026-10-20T01:54:52.0738107Z hint: to use in all of your new repositories, which will suppress this warning,
+2026-10-20T01:54:52.0739468Z hint: call:
+2026-10-20T01:54:52.0740574Z hint:
+2026-10-20T01:54:52.0741485Z hint: 	git config --global init.defaultBranch <name>
+2026-10-20T01:54:52.0742635Z hint:
+2026-10-20T01:54:52.0743791Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+2026-10-20T01:54:52.0745530Z hint: 'development'. The just-created branch can be renamed via this command:
+2026-10-20T01:54:52.0747164Z hint:
+2026-10-20T01:54:52.0747924Z hint: 	git branch -m <name>
+2026-10-20T01:54:52.0748735Z hint:
+2026-10-20T01:54:52.0749812Z hint: Disable this message with "git config set advice.defaultBranchName false"
+2026-10-20T01:54:52.0751876Z Initialized empty Git repository in /home/runner/work/M3jdk21/M3jdk21/.git/
+2026-10-20T01:54:52.0754789Z [command]/usr/bin/git remote add origin https://github.com/hsoliwal/M3jdk21
+2026-10-20T01:54:52.0807594Z ##[endgroup]
+2026-10-20T01:54:52.0808915Z ##[group]Disabling automatic garbage collection
+2026-10-20T01:54:52.0813043Z [command]/usr/bin/git config --local gc.auto 0
+2026-10-20T01:54:52.0848026Z ##[endgroup]
+2026-10-20T01:54:52.0849743Z ##[group]Setting up auth
+2026-10-20T01:54:52.0856365Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-10-20T01:54:52.0891514Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-10-20T01:54:52.1317803Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-10-20T01:54:52.1354007Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-10-20T01:54:52.1606944Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-10-20T01:54:52.1648245Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-10-20T01:54:52.1906289Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+2026-10-20T01:54:52.1951207Z ##[endgroup]
+2026-10-20T01:54:52.1953099Z ##[group]Fetching the repository
+2026-10-20T01:54:52.1963708Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +43be621dd4f524dffa2862de1ec4b66e12e66974:refs/remotes/pull/1522/merge
+2026-10-20T01:55:22.1393267Z From https://github.com/hsoliwal/M3jdk21
+2026-10-20T01:55:22.1394626Z  * [new ref]             43be621dd4f524dffa2862de1ec4b66e12e66974 -> pull/1522/merge
+2026-10-20T01:55:22.1400360Z ##[endgroup]
+2026-10-20T01:55:22.1401245Z ##[group]Determining the checkout info
+2026-10-20T01:55:22.1403168Z ##[endgroup]
+2026-10-20T01:55:22.1410429Z [command]/usr/bin/git sparse-checkout disable
+2026-10-20T01:55:22.1474597Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+2026-10-20T01:55:22.1517551Z ##[group]Checking out the ref
+2026-10-20T01:55:22.1521308Z [command]/usr/bin/git checkout --progress --force refs/remotes/pull/1522/merge
+2026-10-20T01:55:23.3478023Z Updating files:  11% (13530/119156)
+2026-10-20T01:55:23.4771109Z Updating files:  12% (14299/119156)
+2026-10-20T01:55:23.5972301Z Updating files:  13% (15491/119156)
+2026-10-20T01:55:23.7425053Z Updating files:  14% (16682/119156)
+2026-10-20T01:55:23.9671797Z Updating files:  15% (17874/119156)
+2026-10-20T01:55:24.0445945Z Updating files:  16% (19065/119156)
+2026-10-20T01:55:24.1383885Z Updating files:  17% (20257/119156)
+2026-10-20T01:55:24.2414369Z Updating files:  18% (21449/119156)
+2026-10-20T01:55:24.2813103Z Updating files:  19% (22640/119156)
+2026-10-20T01:55:24.3277733Z Updating files:  19% (23184/119156)
+2026-10-20T01:55:24.4034041Z Updating files:  20% (23832/119156)
+2026-10-20T01:55:24.5110052Z Updating files:  21% (25023/119156)
+2026-10-20T01:55:24.5728151Z Updating files:  22% (26215/119156)
+2026-10-20T01:55:24.6403287Z Updating files:  23% (27406/119156)
+2026-10-20T01:55:24.7156961Z Updating files:  24% (28598/119156)
+2026-10-20T01:55:24.7893733Z Updating files:  25% (29789/119156)
+2026-10-20T01:55:24.8517985Z Updating files:  26% (30981/119156)
+2026-10-20T01:55:24.9057286Z Updating files:  27% (32173/119156)
+2026-10-20T01:55:24.9555620Z Updating files:  28% (33364/119156)
+2026-10-20T01:55:25.0214243Z Updating files:  29% (34556/119156)
+2026-10-20T01:55:25.0780091Z Updating files:  30% (35747/119156)
+2026-10-20T01:55:25.1228339Z Updating files:  31% (36939/119156)
+2026-10-20T01:55:25.2091587Z Updating files:  32% (38130/119156)
+2026-10-20T01:55:25.2813342Z Updating files:  33% (39322/119156)
+2026-10-20T01:55:25.2855713Z Updating files:  33% (40425/119156)
+2026-10-20T01:55:25.3777067Z Updating files:  34% (40514/119156)
+2026-10-20T01:55:25.4655868Z Updating files:  35% (41705/119156)
+2026-10-20T01:55:25.5365951Z Updating files:  36% (42897/119156)
+2026-10-20T01:55:25.6198309Z Updating files:  37% (44088/119156)
+2026-10-20T01:55:25.6954333Z Updating files:  38% (45280/119156)
+2026-10-20T01:55:25.7661939Z Updating files:  39% (46471/119156)
+2026-10-20T01:55:25.8480448Z Updating files:  40% (47663/119156)
+2026-10-20T01:55:25.9174951Z Updating files:  41% (48854/119156)
+2026-10-20T01:55:26.2821572Z Updating files:  42% (50046/119156)
+2026-10-20T01:55:26.3867091Z Updating files:  42% (50492/119156)
+2026-10-20T01:55:26.5869115Z Updating files:  43% (51238/119156)
+2026-10-20T01:55:26.6857921Z Updating files:  44% (52429/119156)
+2026-10-20T01:55:26.7945372Z Updating files:  45% (53621/119156)
+2026-10-20T01:55:26.8851850Z Updating files:  46% (54812/119156)
+2026-10-20T01:55:26.9877605Z Updating files:  47% (56004/119156)
+2026-10-20T01:55:27.0953554Z Updating files:  48% (57195/119156)
+2026-10-20T01:55:27.1962661Z Updating files:  49% (58387/119156)
+2026-10-20T01:55:27.2813020Z Updating files:  50% (59578/119156)
+2026-10-20T01:55:27.2980176Z Updating files:  50% (60587/119156)
+2026-10-20T01:55:27.4098846Z Updating files:  51% (60770/119156)
+2026-10-20T01:55:27.5044464Z Updating files:  52% (61962/119156)
+2026-10-20T01:55:27.5984780Z Updating files:  53% (63153/119156)
+2026-10-20T01:55:27.7035214Z Updating files:  54% (64345/119156)
+2026-10-20T01:55:27.8080175Z Updating files:  55% (65536/119156)
+2026-10-20T01:55:27.9013710Z Updating files:  56% (66728/119156)
+2026-10-20T01:55:27.9873827Z Updating files:  57% (67919/119156)
+2026-10-20T01:55:28.0818900Z Updating files:  58% (69111/119156)
+2026-10-20T01:55:28.1884420Z Updating files:  59% (70303/119156)
+2026-10-20T01:55:28.2606190Z Updating files:  60% (71494/119156)
+2026-10-20T01:55:28.2814499Z Updating files:  61% (72686/119156)
+2026-10-20T01:55:28.3772167Z Updating files:  61% (72839/119156)
+2026-10-20T01:55:28.4567336Z Updating files:  62% (73877/119156)
+2026-10-20T01:55:28.5391286Z Updating files:  63% (75069/119156)
+2026-10-20T01:55:28.6350966Z Updating files:  64% (76260/119156)
+2026-10-20T01:55:28.7060158Z Updating files:  65% (77452/119156)
+2026-10-20T01:55:28.7765576Z Updating files:  66% (78643/119156)
+2026-10-20T01:55:28.8447234Z Updating files:  67% (79835/119156)
+2026-10-20T01:55:28.9196703Z Updating files:  68% (81027/119156)
+2026-10-20T01:55:29.0064785Z Updating files:  69% (82218/119156)
+2026-10-20T01:55:29.0869690Z Updating files:  70% (83410/119156)
+2026-10-20T01:55:29.1662836Z Updating files:  71% (84601/119156)
+2026-10-20T01:55:29.2427966Z Updating files:  72% (85793/119156)
+2026-10-20T01:55:29.2812231Z Updating files:  73% (86984/119156)
+2026-10-20T01:55:29.3135565Z Updating files:  73% (87647/119156)
+2026-10-20T01:55:29.4100123Z Updating files:  74% (88176/119156)
+2026-10-20T01:55:29.4893080Z Updating files:  75% (89367/119156)
+2026-10-20T01:55:29.5533627Z Updating files:  76% (90559/119156)
+2026-10-20T01:55:29.6263887Z Updating files:  77% (91751/119156)
+2026-10-20T01:55:29.7042840Z Updating files:  78% (92942/119156)
+2026-10-20T01:55:29.7797809Z Updating files:  79% (94134/119156)
+2026-10-20T01:55:29.8701600Z Updating files:  80% (95325/119156)
+2026-10-20T01:55:30.0906743Z Updating files:  81% (96517/119156)
+2026-10-20T01:55:30.1738862Z Updating files:  82% (97708/119156)
+2026-10-20T01:55:30.2450319Z Updating files:  83% (98900/119156)
+2026-10-20T01:55:30.2812898Z Updating files:  84% (100092/119156)
+2026-10-20T01:55:30.3387043Z Updating files:  84% (100455/119156)
+2026-10-20T01:55:30.5607286Z Updating files:  85% (101283/119156)
+2026-10-20T01:55:30.6310863Z Updating files:  86% (102475/119156)
+2026-10-20T01:55:30.7108736Z Updating files:  87% (103666/119156)
+2026-10-20T01:55:30.7900847Z Updating files:  88% (104858/119156)
+2026-10-20T01:55:30.8702888Z Updating files:  89% (106049/119156)
+2026-10-20T01:55:31.0241165Z Updating files:  90% (107241/119156)
+2026-10-20T01:55:31.1078541Z Updating files:  91% (108432/119156)
+2026-10-20T01:55:31.1869096Z Updating files:  92% (109624/119156)
+2026-10-20T01:55:31.2508983Z Updating files:  93% (110816/119156)
+2026-10-20T01:55:31.2812032Z Updating files:  94% (112007/119156)
+2026-10-20T01:55:31.3109385Z Updating files:  94% (112561/119156)
+2026-10-20T01:55:31.3753094Z Updating files:  95% (113199/119156)
+2026-10-20T01:55:31.4313914Z Updating files:  96% (114390/119156)
+2026-10-20T01:55:31.5786417Z Updating files:  97% (115582/119156)
+2026-10-20T01:55:31.6451775Z Updating files:  98% (116773/119156)
+2026-10-20T01:55:31.7133482Z Updating files:  99% (117965/119156)
+2026-10-20T01:55:31.7134472Z Updating files: 100% (119156/119156)
+2026-10-20T01:55:31.7135161Z Updating files: 100% (119156/119156), done.
+2026-10-20T01:55:31.8713132Z Note: switching to 'refs/remotes/pull/1522/merge'.
+2026-10-20T01:55:31.8713686Z 
+2026-10-20T01:55:31.8714015Z You are in 'detached HEAD' state. You can look around, make experimental
+2026-10-20T01:55:31.8714877Z changes and commit them, and you can discard any commits you make in this
+2026-10-20T01:55:31.8716228Z state without impacting any branches by switching back to a branch.
+2026-10-20T01:55:31.8716766Z 
+2026-10-20T01:55:31.8717106Z If you want to create a new branch to retain commits you create, you may
+2026-10-20T01:55:31.8717875Z do so (now or later) by using -c with the switch command. Example:
+2026-10-20T01:55:31.8718328Z 
+2026-10-20T01:55:31.8718512Z   git switch -c <new-branch-name>
+2026-10-20T01:55:31.8718817Z 
+2026-10-20T01:55:31.8718990Z Or undo this operation with:
+2026-10-20T01:55:31.8719258Z 
+2026-10-20T01:55:31.8719410Z   git switch -
+2026-10-20T01:55:31.8719609Z 
+2026-10-20T01:55:31.8719940Z Turn off this advice by setting config variable advice.detachedHead to false
+2026-10-20T01:55:31.8720266Z 
+2026-10-20T01:55:31.8720628Z HEAD is now at 43be621dd Merge 066b7a15c29388f3444ab3cf0550ecf1df698c6d into df532e779056dbec203dde20030657c3d144f5b5
+2026-10-20T01:55:31.8839043Z ##[endgroup]
+2026-10-20T01:55:31.8883889Z [command]/usr/bin/git log -1 --format=%H
+2026-10-20T01:55:31.8914578Z 43be621dd4f524dffa2862de1ec4b66e12e66974
+2026-10-20T01:55:31.8924887Z ##[group]Removing auth
+2026-10-20T01:55:31.8929766Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-10-20T01:55:31.8963195Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-10-20T01:55:31.9308957Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-10-20T01:55:31.9337910Z http.https://github.com/.extraheader
+2026-10-20T01:55:31.9345355Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+2026-10-20T01:55:31.9381843Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-10-20T01:55:31.9724060Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-10-20T01:55:31.9759578Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-10-20T01:55:32.0098866Z ##[endgroup]
+2026-10-20T01:55:32.0371890Z ##[group]Run actions/setup-java@v4
+2026-10-20T01:55:32.0372206Z with:
+2026-10-20T01:55:32.0372423Z   distribution: temurin
+2026-10-20T01:55:32.0372658Z   java-version: 21
+2026-10-20T01:55:32.0372866Z   java-package: jdk
+2026-10-20T01:55:32.0373083Z   check-latest: false
+2026-10-20T01:55:32.0373298Z   server-id: github
+2026-10-20T01:55:32.0373518Z   server-username: GITHUB_ACTOR
+2026-10-20T01:55:32.0373780Z   server-password: GITHUB_TOKEN
+2026-10-20T01:55:32.0374032Z   overwrite-settings: true
+2026-10-20T01:55:32.0374268Z   job-status: success
+2026-10-20T01:55:32.0377222Z   token: ***
+2026-10-20T01:55:32.0377438Z ##[endgroup]
+2026-10-20T01:55:32.2051705Z ##[warning]setup-java v4 is deprecated and will no longer receive updates. Please migrate to actions/setup-java@v5.
+2026-10-20T01:55:32.2059453Z ##[group]Installed distributions
+2026-10-20T01:55:32.2100567Z Resolved Java 21.0.12+1 from tool-cache
+2026-10-20T01:55:32.2101114Z Setting Java 21.0.12+1 as the default
+2026-10-20T01:55:32.2111668Z (node:2411) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-10-20T01:55:32.2112626Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-10-20T01:55:32.2115831Z Creating toolchains.xml for JDK version 21 from temurin
+2026-10-20T01:55:32.2192575Z Writing to /home/runner/.m2/toolchains.xml
+2026-10-20T01:55:32.2193035Z 
+2026-10-20T01:55:32.2193231Z Java configuration:
+2026-10-20T01:55:32.2193685Z   Distribution: temurin
+2026-10-20T01:55:32.2194146Z   Version: 21.0.12+1
+2026-10-20T01:55:32.2194828Z   Path: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/21.0.12-1/x64
+2026-10-20T01:55:32.2195407Z 
+2026-10-20T01:55:32.2196167Z ##[endgroup]
+2026-10-20T01:55:32.2211473Z Creating settings.xml with server-id: github
+2026-10-20T01:55:32.2239135Z Writing to /home/runner/.m2/settings.xml
+2026-10-20T01:55:32.2407731Z ##[group]Run set -euo pipefail
+2026-10-20T01:55:32.2408123Z [36;1mset -euo pipefail[0m
+2026-10-20T01:55:32.2408689Z [36;1mcheck() { actual=$(git hash-object "$2"); test "$actual" = "$1" || { echo "SOURCE DRIFT: $2 expected=$1 actual=$actual"; exit 1; }; }[0m
+2026-10-20T01:55:32.2409581Z [36;1mcheck 217700023c2a6456a505b07b311290f8da8c02e2 m3/collections/src/main/java/com/m3/collections/M3IndexedListSnapshot.java[0m
+2026-10-20T01:55:32.2410512Z [36;1mcheck e2cff159750d9b7f45cd438a8d517aff8d5bff43 m3/collections/src/main/java/com/m3/collections/M3ObjectIndexSnapshot.java[0m
+2026-10-20T01:55:32.2411485Z [36;1mcheck 01945ebc69137affa7ab3ef708fcbb0cd95a5c24 m3/collections/src/test/java/com/m3/collections/M3ObjectPhysicalMaskSelfTest.java[0m
+2026-10-20T01:55:32.2412454Z [36;1mcheck 10931f3f8316b3cecd0f27cbf25e468175022b19 m3/collections/src/test/java/com/m3/collections/M3ObjectPhysicalMaskTest.java[0m
+2026-10-20T01:55:32.2413446Z [36;1mcheck 3b2d4277500da38f74335aa162064aaf5a14cdb5 m3/collections/src/test/java/com/m3/collections/M3PhysicalStateSnapshotProof.java[0m
+2026-10-20T01:55:32.2414486Z [36;1mcheck 09dbe9c3d52bd96f2d98c9d634e1327878d70579 m3/collections/src/test/java/com/m3/collections/M3PhysicalStateSnapshotTest.java[0m
+2026-10-20T01:55:32.2736894Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2026-10-20T01:55:32.2737280Z env:
+2026-10-20T01:55:32.2737611Z   JAVA_HOME: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/21.0.12-1/x64
+2026-10-20T01:55:32.2738135Z   JAVA_HOME_21_X64: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/21.0.12-1/x64
+2026-10-20T01:55:32.2738535Z ##[endgroup]
+2026-10-20T01:55:32.2870208Z SOURCE DRIFT: m3/collections/src/main/java/com/m3/collections/M3IndexedListSnapshot.java expected=217700023c2a6456a505b07b311290f8da8c02e2 actual=2caf4faf78ea20ccb41de9a61b08790855b4edd4
+2026-10-20T01:55:32.2877040Z ##[error]Process completed with exit code 1.
+2026-10-20T01:55:32.3005453Z Post job cleanup.
+2026-10-20T01:55:32.4342115Z (node:2425) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-10-20T01:55:32.4343218Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-10-20T01:55:32.4572286Z Post job cleanup.
+2026-10-20T01:55:32.5487163Z [command]/usr/bin/git version
+2026-10-20T01:55:32.5546774Z git version 2.55.0
+2026-10-20T01:55:32.5611642Z Temporarily overriding HOME='/home/runner/work/_temp/aeeb23c3-91a6-4ade-b3d4-0ca81eed0618' before making global git config changes
+2026-10-20T01:55:32.5613279Z Adding repository directory to the temporary git global config as a safe directory
+2026-10-20T01:55:32.5621506Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/M3jdk21/M3jdk21
+2026-10-20T01:55:32.5667731Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-10-20T01:55:32.5708589Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-10-20T01:55:32.6084992Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-10-20T01:55:32.6134979Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-10-20T01:55:32.6685116Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-10-20T01:55:32.6727324Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-10-20T01:55:32.7297370Z Cleaning up orphan processes
+2026-10-20T01:55:32.7693424Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@v4, actions/setup-java@v4. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/

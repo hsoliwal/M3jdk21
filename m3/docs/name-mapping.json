@@ -748,6 +748,1721 @@
       "source_license": "GPL-2.0-only WITH Classpath-exception-2.0; existing target notices retained",
       "recipe_owner": "synexia-openrewrite-recipes/recipe-crates/m3jdk21-fixed-lexicon-convergence-20261019/datasets/indexed-views-20261019",
       "scope_limit": "Refines one existing owner; public collection APIs and the current STRING qualification phase remain unchanged."
+    },
+    {
+      "source": "hsoliwal/M3JDK21 / m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java",
+      "source_commit": "63bc1db1c6ef1c701aa5e25629288c0c4139a64d",
+      "source_path": "m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java",
+      "source_blob": "4191858c5aa6e0c1961376e2724fccef0a1d6bcb",
+      "source_sha256": "a29b0bc589565924611538c6fabe15a70d3629bc4eb3db0977d19f411ef4eb4e",
+      "source_role": "COPY exact published first-party target source",
+      "target": "com.m3.collections.M3LongIndexProjection",
+      "target_path": "m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java",
+      "target_module": "m3/collections",
+      "target_base_commit": "9a164c31b38c7013c179a3ff38b0bb60c199c7fd",
+      "target_preimage_sha256": "77ef7d6197ef936f5ae9f62c35accf2f5f3ff690dcc55ca3fd4d8f545a007545",
+      "target_postimage_sha256": "a29b0bc589565924611538c6fabe15a70d3629bc4eb3db0977d19f411ef4eb4e",
+      "target_postimage_git_blob": "4191858c5aa6e0c1961376e2724fccef0a1d6bcb",
+      "target_rule": "Reuse the existing immutable projection and canonical values owner. Convert a proven opposite sort direction by reversing equal-key runs while retaining stable occurrence order; preserve unordered merge sort, active offsets, slices and filters.",
+      "public_api": "Existing M3LongIndexProjection and nested Order public/protected descriptors unchanged; no public java.util replacement or JNI symbol change.",
+      "status": "CURRENT_SOURCE_BOUNDED_OWNER_QUALIFIED_RECEIVING_PR_OPEN_DRAFT_NO_PHASE_PROMOTION",
+      "license": "Apache-2.0",
+      "copyright": "Existing per-file copyright retained; see SOURCE_RIGHTS.tsv",
+      "source_rights": "Existing first-party Apache-2.0 owner; retain m3 module LICENSE/NOTICE; no new donor grant inferred",
+      "canonical_recipe": {
+        "name": "com.synexia.rewrite.M3CurrentMasterConvergence20261019",
+        "source_path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3CurrentMasterConvergence20261019.java",
+        "source_sha256": "747023751892d1e8fe4e501411ab1aaf270abbd6cce3180a595717f7bcc85f6f",
+        "manifest_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/m3-current-master-convergence-20261019/manifest.tsv",
+        "manifest_sha256": "5bb24c679cea5b4d6daddd870323401466419f90ad105a845efe94352e708819",
+        "canonical_repository": "hsoliwal/com.synexia",
+        "canonical_commit": "74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd",
+        "canonical_pr_url": "https://github.com/hsoliwal/com.synexia/pull/12528",
+        "publication_state": "PUBLISHED_CANONICAL_PR_OPEN_DRAFT",
+        "owner": "Existing M3GpuToolJoinRecipe / M3GpuToolJoinManifest",
+        "sdk": {
+          "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/current-master-sdk/receipt.json",
+          "canonical_commit": "74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd",
+          "canonical_pr_url": "https://github.com/hsoliwal/com.synexia/pull/12528",
+          "canonical_url": "https://github.com/hsoliwal/com.synexia/blob/74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/current-master-sdk/receipt.json",
+          "sha256": "2fa15d17940e8e0b8e6afa2b63bb344523704c3b251b8e02d835c86aed8d03b3",
+          "git_blob_sha1": "9140ed440e67f96c2ea1e978f2594cde743ca8ab",
+          "publication_state": "PUBLISHED_CANONICAL_PR_OPEN_DRAFT",
+          "state": "PASS_CURRENT_MASTER_BOUNDED_PLAINTEXT",
+          "source_commit": "9a164c31b38c7013c179a3ff38b0bb60c199c7fd",
+          "engine": "OpenRewrite 8.17.1 PlainText ScanningRecipe",
+          "tests": 3,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "java_lst": "NOT_RUN",
+          "whole_reactor": "NOT_RUN",
+          "manifest_sha256": "5bb24c679cea5b4d6daddd870323401466419f90ad105a845efe94352e708819",
+          "log_sha256": "d6bf20f3fd1ae04177b406b727c8679f8266880ed0800b057d31dcb6fde2e191"
+        }
+      },
+      "verification": {
+        "source": "PASS exact current-master preimage/postimage against the unified 60-target manifest",
+        "java21": "PASS complete unchanged-POM module: 268 main and 264 test Java sources; Maven 477 tests with zero failures/errors and two native-only assumptions; independent console 475 successful and two aborted",
+        "jni": "PASS current-class complete scan: 477 successful, zero failures/errors/skips/aborts; 11 C units, ten libraries and 21 generated-header JNI exports; strict C17, fatal UBSan and Java 21 -Xcheck:jni",
+        "resources": "Historical owner measurements retained separately; no resource rerun or broader performance claim from metadata recovery",
+        "final_selected_module_and_all_native": "PASS_CURRENT_MASTER_9A164C31_MANIFEST_5BB24C67"
+      },
+      "pending_gates": [
+        "Full source-built and installed M3JDK21 image",
+        "Applicable jtreg and JCK",
+        "Android/iOS runtime, native surface, lifecycle, input, packaging and device/simulator execution",
+        "Matched workload, cold/warm CPU, allocation, retained-heap and native-memory acceptance"
+      ],
+      "receiving_sequence": {
+        "active_phase": "STRING",
+        "active_state": "QUALIFICATION_REQUIRED",
+        "phase_promotion": false,
+        "scope": "BOUNDED_OWNER_QUALIFICATION_ONLY",
+        "public_jdk_names_unchanged": true,
+        "canonical_payload_owner_unchanged": true
+      },
+      "receiving_pr_url": "https://github.com/hsoliwal/M3jdk21/pull/1522",
+      "evidence": [
+        {
+          "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/collection-order-validation/receipt.json",
+          "sha256": "9933e9e71f317054df2721ecf0b4508f1d8eb12af5a4f8f1b57d897ba30915c6",
+          "publication_state": "PUBLISHED_CANONICAL_PR_OPEN_DRAFT",
+          "canonical_commit": "74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd",
+          "canonical_pr_url": "https://github.com/hsoliwal/com.synexia/pull/12528",
+          "canonical_url": "https://github.com/hsoliwal/com.synexia/blob/74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/collection-order-validation/receipt.json"
+        },
+        {
+          "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/current-master-sdk/receipt.json",
+          "canonical_commit": "74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd",
+          "canonical_pr_url": "https://github.com/hsoliwal/com.synexia/pull/12528",
+          "canonical_url": "https://github.com/hsoliwal/com.synexia/blob/74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/current-master-sdk/receipt.json",
+          "sha256": "2fa15d17940e8e0b8e6afa2b63bb344523704c3b251b8e02d835c86aed8d03b3",
+          "git_blob_sha1": "9140ed440e67f96c2ea1e978f2594cde743ca8ab",
+          "publication_state": "PUBLISHED_CANONICAL_PR_OPEN_DRAFT",
+          "state": "PASS_CURRENT_MASTER_BOUNDED_PLAINTEXT",
+          "source_commit": "9a164c31b38c7013c179a3ff38b0bb60c199c7fd",
+          "engine": "OpenRewrite 8.17.1 PlainText ScanningRecipe",
+          "tests": 3,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "java_lst": "NOT_RUN",
+          "whole_reactor": "NOT_RUN",
+          "manifest_sha256": "5bb24c679cea5b4d6daddd870323401466419f90ad105a845efe94352e708819",
+          "log_sha256": "d6bf20f3fd1ae04177b406b727c8679f8266880ed0800b057d31dcb6fde2e191"
+        },
+        {
+          "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/current-master-reconciliation/verification/receipt.json",
+          "canonical_commit": "74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd",
+          "canonical_pr_url": "https://github.com/hsoliwal/com.synexia/pull/12528",
+          "canonical_url": "https://github.com/hsoliwal/com.synexia/blob/74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/current-master-reconciliation/verification/receipt.json",
+          "sha256": "99813f6c392f0586835b96a3b7ff4f266f7cce16dc999d4d6f82495aa3c24b11",
+          "git_blob_sha1": "78a8f1e2c7eb5aec2ad6c822bf02d74cc4100631",
+          "publication_state": "PUBLISHED_CANONICAL_PR_OPEN_DRAFT",
+          "state": "PASS",
+          "source_commit": "9a164c31b38c7013c179a3ff38b0bb60c199c7fd",
+          "manifest_sha256": "5bb24c679cea5b4d6daddd870323401466419f90ad105a845efe94352e708819",
+          "files": 657,
+          "main_java": 268,
+          "test_java": 264,
+          "maven_tests": 477,
+          "maven_failures": 0,
+          "maven_errors": 0,
+          "maven_skipped": 2,
+          "console_successful": 475,
+          "console_aborted": 2
+        },
+        {
+          "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/current-master-reconciliation/VERIFIER_EXECUTION.json",
+          "canonical_commit": "74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd",
+          "canonical_pr_url": "https://github.com/hsoliwal/com.synexia/pull/12528",
+          "canonical_url": "https://github.com/hsoliwal/com.synexia/blob/74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/current-master-reconciliation/VERIFIER_EXECUTION.json",
+          "sha256": "394ca5a405c1ded6721e8c7bc295a41f244e140767bb35bb73a7f0ab20306007",
+          "git_blob_sha1": "dbeddc25b2ceb607e6fa430cd819e5d71d19f4f9",
+          "publication_state": "PUBLISHED_CANONICAL_PR_OPEN_DRAFT"
+        },
+        {
+          "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/current-native-convergence-attempt01/execution/RECEIPT.json",
+          "canonical_commit": "74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd",
+          "canonical_pr_url": "https://github.com/hsoliwal/com.synexia/pull/12528",
+          "canonical_url": "https://github.com/hsoliwal/com.synexia/blob/74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/current-native-convergence-attempt01/execution/RECEIPT.json",
+          "sha256": "1273fdae7e8d571a4a517632bc59b5fb901900cdfb04f02d665c899dd926dae8",
+          "git_blob_sha1": "9008855e2b962d997459a0b3a292088836974b09",
+          "publication_state": "PUBLISHED_CANONICAL_PR_OPEN_DRAFT",
+          "state": "PASS",
+          "source_commit": "9a164c31b38c7013c179a3ff38b0bb60c199c7fd",
+          "manifest_sha256": "5bb24c679cea5b4d6daddd870323401466419f90ad105a845efe94352e708819",
+          "tests": 477,
+          "successful": 477,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "aborted": 0,
+          "production_c": 11,
+          "libraries": 10,
+          "jni_exports": 21,
+          "mode": "Java 21 -Xcheck:jni; generated-header export parity; strict C17 with fatal UBSan; required native opt-ins",
+          "scope": "Complete collections JUnit suite with ten required production libraries; tests may explicitly exercise Java paths. No native UI or mobile execution."
+        },
+        {
+          "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/current-native-convergence-attempt01/execution/canonical-output/receipt.json",
+          "canonical_commit": "74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd",
+          "canonical_pr_url": "https://github.com/hsoliwal/com.synexia/pull/12528",
+          "canonical_url": "https://github.com/hsoliwal/com.synexia/blob/74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/current-native-convergence-attempt01/execution/canonical-output/receipt.json",
+          "sha256": "826e292b21763ce788aaf81c928b91cdbde45db9bf201189e2fa160c87b74261",
+          "git_blob_sha1": "59b6d70e92b8719bb6a1f796625384b2945fc67b",
+          "publication_state": "PUBLISHED_CANONICAL_PR_OPEN_DRAFT"
+        }
+      ],
+      "proof_paths": [
+        "m3/collections/src/test/java/com/m3/collections/M3ProjectionRefinementProbe.java",
+        "m3/collections/src/test/java/com/m3/collections/M3LongProjectionOrderConvergenceTest.java"
+      ],
+      "source_rights_crosswalk": "m3/docs/viewport-everywhere/convergence-20261019/SOURCE_RIGHTS.tsv",
+      "historical_qualification_parent": "c2a8733f6eebaadcc206a61d08906bfd8b6d60dc",
+      "historical_canonical_recipe": {
+        "name": "com.synexia.rewrite.M3ViewConvergence20261019",
+        "source_path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3ViewConvergence20261019.java",
+        "source_sha256": "fad0237f22539813bd0000a93b7e41e97a13ff0652da30f5a9233ce0fe6ac002",
+        "manifest_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/m3-view-convergence-20261019/manifest.tsv",
+        "manifest_sha256": "eefba93f1322bf0470add185ef2a72904346b8bec45814c7a4d422e5773a0eb4",
+        "canonical_repository": "hsoliwal/com.synexia",
+        "canonical_commit": "74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd",
+        "canonical_pr_url": "https://github.com/hsoliwal/com.synexia/pull/12528",
+        "publication_state": "PUBLISHED_CANONICAL_PR_OPEN_DRAFT",
+        "owner": "Existing M3GpuToolJoinRecipe / M3GpuToolJoinManifest",
+        "sdk": {
+          "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/successor-sdk-final-selection/receipt.json",
+          "sha256": "2b2e935ceb68b54d4d1a3d053533e1fec31b0e72c2ca1d481c3845e4733db82c",
+          "publication_state": "PUBLISHED_CANONICAL_PR_OPEN_DRAFT",
+          "canonical_commit": "74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd",
+          "state": "PASS_FINAL_SELECTED_MANIFEST_BOUNDED_PLAINTEXT",
+          "engine": "OpenRewrite 8.17.1 actual ScanningRecipe SDK",
+          "tests": 9,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "java_lst": "NOT_RUN",
+          "final_manifest_rule": "PASS for final view 21 targets / 8 changes with RowTree EXACT_KEEP, binding 7 targets / 3 changes, and Swing UI 12 targets / 12 changes. Requalify any later source or manifest change.",
+          "final_view_manifest_sha256": "eefba93f1322bf0470add185ef2a72904346b8bec45814c7a4d422e5773a0eb4",
+          "log_sha256": "a0d752f6748c8c4aa27cf564b18343951481d9e06a6c9bfc277509c5ccea55de",
+          "canonical_pr_url": "https://github.com/hsoliwal/com.synexia/pull/12528",
+          "canonical_url": "https://github.com/hsoliwal/com.synexia/blob/74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/successor-sdk-final-selection/receipt.json"
+        }
+      },
+      "historical_owner_verification": {
+        "source_base_commit": "c2a8733f6eebaadcc206a61d08906bfd8b6d60dc",
+        "source": "PASS exact donor/preimage/postimage",
+        "java21": "PASS strict compile and descriptor comparison; Java mode 282479 checks per baseline/candidate, zero failures",
+        "jni": "PASS NATIVE_REQUIRED with -Xcheck:jni and fatal UBSan: 287107 checks per baseline/candidate; generated-header/export parity; missing-library refusal 4 checks per side",
+        "resources": "Bounded known-direction conversion measured in three JVMs per side: 40 conversions of 262144 entries; median allocated bytes 83888952 -> 41945112. This is not general sort, retained-heap or mobile resource acceptance."
+      },
+      "current_source_admission": {
+        "state": "PASS",
+        "source_commit": "9a164c31b38c7013c179a3ff38b0bb60c199c7fd",
+        "manifest_sha256": "5bb24c679cea5b4d6daddd870323401466419f90ad105a845efe94352e708819",
+        "before_sha256": "77ef7d6197ef936f5ae9f62c35accf2f5f3ff690dcc55ca3fd4d8f545a007545",
+        "after_sha256": "a29b0bc589565924611538c6fabe15a70d3629bc4eb3db0977d19f411ef4eb4e",
+        "canonical_before_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/current-master/before/m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java",
+        "canonical_after_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/m3-current-master-convergence-20261019/templates/m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java",
+        "disposition": "CHANGE"
+      },
+      "receiving_metadata_pr_url": "https://github.com/hsoliwal/M3jdk21/pull/1525"
+    },
+    {
+      "source": "hsoliwal/M3JDK21 / m3/collections/src/main/java/com/m3/collections/M3WindowPlan.java",
+      "source_commit": "dca362808e9dd533c1f6d7a99f671d4ccdd59a86",
+      "source_path": "m3/collections/src/main/java/com/m3/collections/M3WindowPlan.java",
+      "source_blob": "de534edb6fcd76ca188b1c61a2d30b7be47c98da",
+      "source_sha256": "5a4d7bbd92429d2e3daf8c3a857abfd79189bbf1fc9450915f9ca89d8742421e",
+      "source_role": "EVIDENCE_ONLY historical donor lineage; its exact postimage is already present in current master and remains KEEP",
+      "target": "com.m3.collections.M3WindowPlan",
+      "target_path": "m3/collections/src/main/java/com/m3/collections/M3WindowPlan.java",
+      "target_module": "m3/collections",
+      "target_base_commit": "9a164c31b38c7013c179a3ff38b0bb60c199c7fd",
+      "target_preimage_sha256": "5a4d7bbd92429d2e3daf8c3a857abfd79189bbf1fc9450915f9ca89d8742421e",
+      "target_postimage_sha256": "5a4d7bbd92429d2e3daf8c3a857abfd79189bbf1fc9450915f9ca89d8742421e",
+      "target_postimage_git_blob": "de534edb6fcd76ca188b1c61a2d30b7be47c98da",
+      "target_rule": "KEEP the current checked endpoint and resident-window arithmetic byte for byte. The historical overflow repair is not reapplied; retain zero-count, valid edit and refusal-before-mutation behavior.",
+      "public_api": "Existing M3WindowPlan public/protected descriptors unchanged; no widget or native host API is introduced.",
+      "status": "ALREADY_RECEIVED_KEEP_RECEIVING_METADATA_PR_OPEN_DRAFT_NO_PHASE_PROMOTION",
+      "license": "Apache-2.0",
+      "copyright": "Existing per-file copyright retained; see SOURCE_RIGHTS.tsv",
+      "source_rights": "Existing first-party Apache-2.0 owner; retain m3 module LICENSE/NOTICE; no new donor grant inferred",
+      "canonical_recipe": {
+        "name": "com.synexia.rewrite.M3CurrentMasterConvergence20261019",
+        "source_path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3CurrentMasterConvergence20261019.java",
+        "source_sha256": "747023751892d1e8fe4e501411ab1aaf270abbd6cce3180a595717f7bcc85f6f",
+        "manifest_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/m3-current-master-convergence-20261019/manifest.tsv",
+        "manifest_sha256": "5bb24c679cea5b4d6daddd870323401466419f90ad105a845efe94352e708819",
+        "canonical_repository": "hsoliwal/com.synexia",
+        "canonical_commit": "74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd",
+        "canonical_pr_url": "https://github.com/hsoliwal/com.synexia/pull/12528",
+        "publication_state": "PUBLISHED_CANONICAL_PR_OPEN_DRAFT",
+        "owner": "Existing M3GpuToolJoinRecipe / M3GpuToolJoinManifest",
+        "sdk": {
+          "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/current-master-sdk/receipt.json",
+          "canonical_commit": "74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd",
+          "canonical_pr_url": "https://github.com/hsoliwal/com.synexia/pull/12528",
+          "canonical_url": "https://github.com/hsoliwal/com.synexia/blob/74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/current-master-sdk/receipt.json",
+          "sha256": "2fa15d17940e8e0b8e6afa2b63bb344523704c3b251b8e02d835c86aed8d03b3",
+          "git_blob_sha1": "9140ed440e67f96c2ea1e978f2594cde743ca8ab",
+          "publication_state": "PUBLISHED_CANONICAL_PR_OPEN_DRAFT",
+          "state": "PASS_CURRENT_MASTER_BOUNDED_PLAINTEXT",
+          "source_commit": "9a164c31b38c7013c179a3ff38b0bb60c199c7fd",
+          "engine": "OpenRewrite 8.17.1 PlainText ScanningRecipe",
+          "tests": 3,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "java_lst": "NOT_RUN",
+          "whole_reactor": "NOT_RUN",
+          "manifest_sha256": "5bb24c679cea5b4d6daddd870323401466419f90ad105a845efe94352e708819",
+          "log_sha256": "d6bf20f3fd1ae04177b406b727c8679f8266880ed0800b057d31dcb6fde2e191"
+        }
+      },
+      "verification": {
+        "source": "PASS exact current-master preimage/postimage against the unified 60-target manifest",
+        "java21": "PASS complete unchanged-POM module: 268 main and 264 test Java sources; Maven 477 tests with zero failures/errors and two native-only assumptions; independent console 475 successful and two aborted",
+        "jni": "PASS current-class complete scan: 477 successful, zero failures/errors/skips/aborts; 11 C units, ten libraries and 21 generated-header JNI exports; strict C17, fatal UBSan and Java 21 -Xcheck:jni",
+        "resources": "Historical owner measurements retained separately; no resource rerun or broader performance claim from metadata recovery",
+        "final_selected_module_and_all_native": "PASS_CURRENT_MASTER_9A164C31_MANIFEST_5BB24C67"
+      },
+      "pending_gates": [
+        "Full source-built and installed M3JDK21 image",
+        "Applicable jtreg and JCK",
+        "Android/iOS runtime, native surface, lifecycle, input, packaging and device/simulator execution",
+        "Matched workload, cold/warm CPU, allocation, retained-heap and native-memory acceptance"
+      ],
+      "receiving_sequence": {
+        "active_phase": "STRING",
+        "active_state": "QUALIFICATION_REQUIRED",
+        "phase_promotion": false,
+        "scope": "BOUNDED_OWNER_QUALIFICATION_ONLY",
+        "public_jdk_names_unchanged": true,
+        "canonical_payload_owner_unchanged": true
+      },
+      "receiving_pr_url": "https://github.com/hsoliwal/M3jdk21/pull/1522",
+      "evidence": [
+        {
+          "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/viewport-geometry-validation/receipt.json",
+          "sha256": "d6cbb8e9133a3d61b6ea5fdfb4c5a28cce8fedf5f94be265e4e27ddcb1f580fa",
+          "publication_state": "PUBLISHED_CANONICAL_PR_OPEN_DRAFT",
+          "canonical_commit": "74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd",
+          "canonical_pr_url": "https://github.com/hsoliwal/com.synexia/pull/12528",
+          "canonical_url": "https://github.com/hsoliwal/com.synexia/blob/74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/viewport-geometry-validation/receipt.json"
+        },
+        {
+          "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/current-master-sdk/receipt.json",
+          "canonical_commit": "74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd",
+          "canonical_pr_url": "https://github.com/hsoliwal/com.synexia/pull/12528",
+          "canonical_url": "https://github.com/hsoliwal/com.synexia/blob/74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/current-master-sdk/receipt.json",
+          "sha256": "2fa15d17940e8e0b8e6afa2b63bb344523704c3b251b8e02d835c86aed8d03b3",
+          "git_blob_sha1": "9140ed440e67f96c2ea1e978f2594cde743ca8ab",
+          "publication_state": "PUBLISHED_CANONICAL_PR_OPEN_DRAFT",
+          "state": "PASS_CURRENT_MASTER_BOUNDED_PLAINTEXT",
+          "source_commit": "9a164c31b38c7013c179a3ff38b0bb60c199c7fd",
+          "engine": "OpenRewrite 8.17.1 PlainText ScanningRecipe",
+          "tests": 3,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "java_lst": "NOT_RUN",
+          "whole_reactor": "NOT_RUN",
+          "manifest_sha256": "5bb24c679cea5b4d6daddd870323401466419f90ad105a845efe94352e708819",
+          "log_sha256": "d6bf20f3fd1ae04177b406b727c8679f8266880ed0800b057d31dcb6fde2e191"
+        },
+        {
+          "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/current-master-reconciliation/verification/receipt.json",
+          "canonical_commit": "74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd",
+          "canonical_pr_url": "https://github.com/hsoliwal/com.synexia/pull/12528",
+          "canonical_url": "https://github.com/hsoliwal/com.synexia/blob/74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/current-master-reconciliation/verification/receipt.json",
+          "sha256": "99813f6c392f0586835b96a3b7ff4f266f7cce16dc999d4d6f82495aa3c24b11",
+          "git_blob_sha1": "78a8f1e2c7eb5aec2ad6c822bf02d74cc4100631",
+          "publication_state": "PUBLISHED_CANONICAL_PR_OPEN_DRAFT",
+          "state": "PASS",
+          "source_commit": "9a164c31b38c7013c179a3ff38b0bb60c199c7fd",
+          "manifest_sha256": "5bb24c679cea5b4d6daddd870323401466419f90ad105a845efe94352e708819",
+          "files": 657,
+          "main_java": 268,
+          "test_java": 264,
+          "maven_tests": 477,
+          "maven_failures": 0,
+          "maven_errors": 0,
+          "maven_skipped": 2,
+          "console_successful": 475,
+          "console_aborted": 2
+        },
+        {
+          "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/current-master-reconciliation/VERIFIER_EXECUTION.json",
+          "canonical_commit": "74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd",
+          "canonical_pr_url": "https://github.com/hsoliwal/com.synexia/pull/12528",
+          "canonical_url": "https://github.com/hsoliwal/com.synexia/blob/74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/current-master-reconciliation/VERIFIER_EXECUTION.json",
+          "sha256": "394ca5a405c1ded6721e8c7bc295a41f244e140767bb35bb73a7f0ab20306007",
+          "git_blob_sha1": "dbeddc25b2ceb607e6fa430cd819e5d71d19f4f9",
+          "publication_state": "PUBLISHED_CANONICAL_PR_OPEN_DRAFT"
+        },
+        {
+          "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/current-native-convergence-attempt01/execution/RECEIPT.json",
+          "canonical_commit": "74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd",
+          "canonical_pr_url": "https://github.com/hsoliwal/com.synexia/pull/12528",
+          "canonical_url": "https://github.com/hsoliwal/com.synexia/blob/74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/current-native-convergence-attempt01/execution/RECEIPT.json",
+          "sha256": "1273fdae7e8d571a4a517632bc59b5fb901900cdfb04f02d665c899dd926dae8",
+          "git_blob_sha1": "9008855e2b962d997459a0b3a292088836974b09",
+          "publication_state": "PUBLISHED_CANONICAL_PR_OPEN_DRAFT",
+          "state": "PASS",
+          "source_commit": "9a164c31b38c7013c179a3ff38b0bb60c199c7fd",
+          "manifest_sha256": "5bb24c679cea5b4d6daddd870323401466419f90ad105a845efe94352e708819",
+          "tests": 477,
+          "successful": 477,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "aborted": 0,
+          "production_c": 11,
+          "libraries": 10,
+          "jni_exports": 21,
+          "mode": "Java 21 -Xcheck:jni; generated-header export parity; strict C17 with fatal UBSan; required native opt-ins",
+          "scope": "Complete collections JUnit suite with ten required production libraries; tests may explicitly exercise Java paths. No native UI or mobile execution."
+        },
+        {
+          "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/current-native-convergence-attempt01/execution/canonical-output/receipt.json",
+          "canonical_commit": "74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd",
+          "canonical_pr_url": "https://github.com/hsoliwal/com.synexia/pull/12528",
+          "canonical_url": "https://github.com/hsoliwal/com.synexia/blob/74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/current-native-convergence-attempt01/execution/canonical-output/receipt.json",
+          "sha256": "826e292b21763ce788aaf81c928b91cdbde45db9bf201189e2fa160c87b74261",
+          "git_blob_sha1": "59b6d70e92b8719bb6a1f796625384b2945fc67b",
+          "publication_state": "PUBLISHED_CANONICAL_PR_OPEN_DRAFT"
+        }
+      ],
+      "proof_paths": [
+        "m3/collections/src/test/java/com/m3/collections/M3ViewportPlanProof.java",
+        "m3/collections/src/test/java/com/m3/collections/M3ViewportReceivingTest.java"
+      ],
+      "source_rights_crosswalk": "m3/docs/viewport-everywhere/convergence-20261019/SOURCE_RIGHTS.tsv",
+      "historical_qualification_parent": "c2a8733f6eebaadcc206a61d08906bfd8b6d60dc",
+      "historical_canonical_recipe": {
+        "name": "com.synexia.rewrite.M3ViewConvergence20261019",
+        "source_path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3ViewConvergence20261019.java",
+        "source_sha256": "fad0237f22539813bd0000a93b7e41e97a13ff0652da30f5a9233ce0fe6ac002",
+        "manifest_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/m3-view-convergence-20261019/manifest.tsv",
+        "manifest_sha256": "eefba93f1322bf0470add185ef2a72904346b8bec45814c7a4d422e5773a0eb4",
+        "canonical_repository": "hsoliwal/com.synexia",
+        "canonical_commit": "74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd",
+        "canonical_pr_url": "https://github.com/hsoliwal/com.synexia/pull/12528",
+        "publication_state": "PUBLISHED_CANONICAL_PR_OPEN_DRAFT",
+        "owner": "Existing M3GpuToolJoinRecipe / M3GpuToolJoinManifest",
+        "sdk": {
+          "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/successor-sdk-final-selection/receipt.json",
+          "sha256": "2b2e935ceb68b54d4d1a3d053533e1fec31b0e72c2ca1d481c3845e4733db82c",
+          "publication_state": "PUBLISHED_CANONICAL_PR_OPEN_DRAFT",
+          "canonical_commit": "74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd",
+          "state": "PASS_FINAL_SELECTED_MANIFEST_BOUNDED_PLAINTEXT",
+          "engine": "OpenRewrite 8.17.1 actual ScanningRecipe SDK",
+          "tests": 9,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "java_lst": "NOT_RUN",
+          "final_manifest_rule": "PASS for final view 21 targets / 8 changes with RowTree EXACT_KEEP, binding 7 targets / 3 changes, and Swing UI 12 targets / 12 changes. Requalify any later source or manifest change.",
+          "final_view_manifest_sha256": "eefba93f1322bf0470add185ef2a72904346b8bec45814c7a4d422e5773a0eb4",
+          "log_sha256": "a0d752f6748c8c4aa27cf564b18343951481d9e06a6c9bfc277509c5ccea55de",
+          "canonical_pr_url": "https://github.com/hsoliwal/com.synexia/pull/12528",
+          "canonical_url": "https://github.com/hsoliwal/com.synexia/blob/74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/successor-sdk-final-selection/receipt.json"
+        }
+      },
+      "historical_owner_verification": {
+        "source_base_commit": "c2a8733f6eebaadcc206a61d08906bfd8b6d60dc",
+        "source": "PASS exact donor/preimage/postimage",
+        "java21": "PASS strict compile and descriptor parity; ordinary corpus 6758400 checks; window-only boundary corpus 6758426 checks. Frozen baseline witness failed because a wrapped removal changed an unrelated viewport.",
+        "jni": "No JNI source or symbol changes in this owner. Separate composed optional RowTree JNI evidence does not select that candidate.",
+        "resources": "Not measured for this changed owner; pending."
+      },
+      "current_source_admission": {
+        "state": "PASS",
+        "source_commit": "9a164c31b38c7013c179a3ff38b0bb60c199c7fd",
+        "manifest_sha256": "5bb24c679cea5b4d6daddd870323401466419f90ad105a845efe94352e708819",
+        "before_sha256": "5a4d7bbd92429d2e3daf8c3a857abfd79189bbf1fc9450915f9ca89d8742421e",
+        "after_sha256": "5a4d7bbd92429d2e3daf8c3a857abfd79189bbf1fc9450915f9ca89d8742421e",
+        "canonical_before_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/current-master/before/m3/collections/src/main/java/com/m3/collections/M3WindowPlan.java",
+        "canonical_after_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/current-master/before/m3/collections/src/main/java/com/m3/collections/M3WindowPlan.java",
+        "disposition": "KEEP"
+      },
+      "receiving_metadata_pr_url": "https://github.com/hsoliwal/M3jdk21/pull/1525"
+    },
+    {
+      "source": "hsoliwal/M3JDK21 / m3/ports/swing-viewport/src/main/java/com/m3/swing/viewport/M3ViewportBinding.java",
+      "source_commit": "c2a8733f6eebaadcc206a61d08906bfd8b6d60dc",
+      "source_path": "m3/ports/swing-viewport/src/main/java/com/m3/swing/viewport/M3ViewportBinding.java",
+      "source_blob": "33a73cef5b34ad9aceb73799e996b5e5a2726fa3",
+      "source_sha256": "94101f8fe12a9dc4d5856fc3aff1006fbbd5722cbca17b7cede65b3d5a669b21",
+      "source_role": "ADAPT existing first-party target owner; new private lifetime repair expressed by the canonical successor recipe",
+      "target": "com.m3.swing.viewport.M3ViewportBinding",
+      "target_path": "m3/ports/swing-viewport/src/main/java/com/m3/swing/viewport/M3ViewportBinding.java",
+      "target_module": "m3/ports/swing-viewport",
+      "target_base_commit": "9a164c31b38c7013c179a3ff38b0bb60c199c7fd",
+      "target_preimage_sha256": "94101f8fe12a9dc4d5856fc3aff1006fbbd5722cbca17b7cede65b3d5a669b21",
+      "target_postimage_sha256": "b5954005074667174f2254c77cbe531c41ed7dcf12a8c05811b5e341d0a11115",
+      "target_postimage_git_blob": "b5027954f28caf5deefa0163a32b6407ee03f783",
+      "target_rule": "Keep one private subscribed-JViewport reference. Reconcile installation and parent changes by detaching the former listener and attaching the actual new parent exactly once; detached components have no obsolete viewport subscription. Geometry and sync bodies remain unchanged.",
+      "public_api": "Existing binding and nested Target public/protected descriptors unchanged; no public close/dispose API, replacement viewport or mobile host.",
+      "status": "CURRENT_SOURCE_ADMITTED_REUSE_BOUNDED_EXECUTION_RECEIVING_PR_OPEN_DRAFT_NO_PHASE_PROMOTION",
+      "license": "Apache-2.0",
+      "copyright": "Existing per-file copyright retained; see SOURCE_RIGHTS.tsv",
+      "source_rights": "Existing first-party Apache-2.0 owner; retain m3 module LICENSE/NOTICE; no new donor grant inferred",
+      "canonical_recipe": {
+        "name": "com.synexia.rewrite.M3SwingConvergence20261019",
+        "source_path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3SwingConvergence20261019.java",
+        "source_sha256": "0c3f9ca25cd7180ea5e4ba4bf98a996a69bb5a3965aa7855d31cfbe7e0a567fd",
+        "manifest_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/m3-swing-convergence-20261019/manifest.tsv",
+        "manifest_sha256": "11f3d4890741deaa42323a11069c8c2287613dbf1f57db450e80cd8404d3781f",
+        "canonical_repository": "hsoliwal/com.synexia",
+        "canonical_commit": "74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd",
+        "canonical_pr_url": "https://github.com/hsoliwal/com.synexia/pull/12528",
+        "publication_state": "PUBLISHED_CANONICAL_PR_OPEN_DRAFT",
+        "owner": "Existing M3GpuToolJoinRecipe / M3GpuToolJoinManifest",
+        "sdk": {
+          "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/successor-sdk-final-selection/receipt.json",
+          "sha256": "2b2e935ceb68b54d4d1a3d053533e1fec31b0e72c2ca1d481c3845e4733db82c",
+          "publication_state": "PUBLISHED_CANONICAL_PR_OPEN_DRAFT",
+          "canonical_commit": "74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd",
+          "state": "PASS_FINAL_SELECTED_MANIFEST_BOUNDED_PLAINTEXT",
+          "engine": "OpenRewrite 8.17.1 actual ScanningRecipe SDK",
+          "tests": 9,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "java_lst": "NOT_RUN",
+          "final_manifest_rule": "PASS for final view 21 targets / 8 changes with RowTree EXACT_KEEP, binding 7 targets / 3 changes, and Swing UI 12 targets / 12 changes. Requalify any later source or manifest change.",
+          "final_view_manifest_sha256": "eefba93f1322bf0470add185ef2a72904346b8bec45814c7a4d422e5773a0eb4",
+          "log_sha256": "a0d752f6748c8c4aa27cf564b18343951481d9e06a6c9bfc277509c5ccea55de",
+          "canonical_pr_url": "https://github.com/hsoliwal/com.synexia/pull/12528",
+          "canonical_url": "https://github.com/hsoliwal/com.synexia/blob/74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/successor-sdk-final-selection/receipt.json"
+        }
+      },
+      "verification": {
+        "source": "PASS exact current-owner preimage and source-sealed first-party repair",
+        "java21_headless": "PASS 603 real Swing EDT lifecycle checks; baseline fails former-viewport listener count (expected 0, got 1); original desktop control 20 checks on each side; javap parity",
+        "original_maven_module": "PASS unchanged m3/ports/swing-viewport/pom.xml: 18 tests, zero failures/errors/skips, using existing 5.10.2-m3-source-1 JUnit coordinates",
+        "jni": "No changed native source or Java/JNI signature; not a native UI proof",
+        "resources": "Obsolete listener edge removed and one private reference added; no broad CPU/heap/native-memory measurement"
+      },
+      "pending_gates": [
+        "Full source-built and installed M3JDK21 image",
+        "Applicable jtreg and JCK",
+        "Android/iOS runtime, native surface, lifecycle, input, packaging and device/simulator execution",
+        "Matched workload, cold/warm CPU, allocation, retained-heap and native-memory acceptance"
+      ],
+      "receiving_sequence": {
+        "active_phase": "STRING",
+        "active_state": "QUALIFICATION_REQUIRED",
+        "phase_promotion": false,
+        "scope": "BOUNDED_OWNER_QUALIFICATION_ONLY",
+        "public_jdk_names_unchanged": true,
+        "canonical_payload_owner_unchanged": true
+      },
+      "receiving_pr_url": "https://github.com/hsoliwal/M3jdk21/pull/1525",
+      "evidence": [
+        {
+          "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/swing-lifecycle-validation/RECEIPT.json",
+          "sha256": "0e66d1441c298f3d003a2adc8a591914be44a2a63d4a4c1c8c07daa2d630027b",
+          "publication_state": "PUBLISHED_CANONICAL_PR_OPEN_DRAFT",
+          "canonical_commit": "74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd",
+          "canonical_pr_url": "https://github.com/hsoliwal/com.synexia/pull/12528",
+          "canonical_url": "https://github.com/hsoliwal/com.synexia/blob/74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/swing-lifecycle-validation/RECEIPT.json"
+        },
+        {
+          "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/swing-lifecycle-validation/MAVEN_RUNTIME.json",
+          "sha256": "89615bd0b831f7a440e8ce2e46cf615c23b88911640099aef2b1fa013bf9392e",
+          "publication_state": "PUBLISHED_CANONICAL_PR_OPEN_DRAFT",
+          "canonical_commit": "74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd",
+          "canonical_pr_url": "https://github.com/hsoliwal/com.synexia/pull/12528",
+          "canonical_url": "https://github.com/hsoliwal/com.synexia/blob/74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/swing-lifecycle-validation/MAVEN_RUNTIME.json"
+        },
+        {
+          "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/delivery-metadata/current-swing-9a164c31/ADMISSION.json",
+          "canonical_commit": "74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd",
+          "canonical_pr_url": "https://github.com/hsoliwal/com.synexia/pull/12528",
+          "canonical_url": "https://github.com/hsoliwal/com.synexia/blob/74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/delivery-metadata/current-swing-9a164c31/ADMISSION.json",
+          "sha256": "af080f1d211aa7082f4efa6b3f7b138733e2f0bfae1064b0195d39199f025a93",
+          "git_blob_sha1": "5b3b05a8272fc80c7a2e49ddb8e2afe865b4fa36",
+          "publication_state": "PUBLISHED_CANONICAL_PR_OPEN_DRAFT"
+        },
+        {
+          "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/delivery-metadata/current-swing-9a164c31/MODULE_ADMISSION.json",
+          "canonical_commit": "74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd",
+          "canonical_pr_url": "https://github.com/hsoliwal/com.synexia/pull/12528",
+          "canonical_url": "https://github.com/hsoliwal/com.synexia/blob/74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/delivery-metadata/current-swing-9a164c31/MODULE_ADMISSION.json",
+          "sha256": "e996fa1ab799a1017b4175d14f13d1ab6e8e4b41eaf3b05a836b017d221a4208",
+          "git_blob_sha1": "8a3c49e57d69093b98ff6d6b63f87d37635ad361",
+          "publication_state": "PUBLISHED_CANONICAL_PR_OPEN_DRAFT"
+        }
+      ],
+      "proof_paths": [
+        "m3/ports/swing-viewport/src/test/java/com/m3/swing/viewport/M3ViewportBindingLifecycleProof.java",
+        "m3/ports/swing-viewport/src/test/java/com/m3/swing/viewport/M3ViewportBindingLifecycleTest.java",
+        "m3/ports/swing-viewport/src/test/java/com/m3/swing/viewport/M3DesktopViewportProof.java"
+      ],
+      "receiving_document": "m3/ports/swing-viewport/receiving-20261019/RECEIVING.md",
+      "original_pom_sha256": "54448ae1defe035ed9f4ac6ead6f4c9eafd47a1340b173c3fdb95d4bf0a18da1",
+      "source_rights_crosswalk": "m3/docs/viewport-everywhere/convergence-20261019/SOURCE_RIGHTS.tsv",
+      "historical_qualification_parent": "c2a8733f6eebaadcc206a61d08906bfd8b6d60dc",
+      "current_source_admission": {
+        "state": "PASS_EXACT_SOURCE_IDENTITY_REUSE_EARLIER_EXECUTION",
+        "source_commit": "9a164c31b38c7013c179a3ff38b0bb60c199c7fd",
+        "historical_execution_parent": "c2a8733f6eebaadcc206a61d08906bfd8b6d60dc",
+        "runtime_or_sdk_rerun": "NOT_RUN_BY_METADATA_RECOVERY",
+        "admission": {
+          "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/delivery-metadata/current-swing-9a164c31/ADMISSION.json",
+          "canonical_commit": "74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd",
+          "canonical_pr_url": "https://github.com/hsoliwal/com.synexia/pull/12528",
+          "canonical_url": "https://github.com/hsoliwal/com.synexia/blob/74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/delivery-metadata/current-swing-9a164c31/ADMISSION.json",
+          "sha256": "af080f1d211aa7082f4efa6b3f7b138733e2f0bfae1064b0195d39199f025a93",
+          "git_blob_sha1": "5b3b05a8272fc80c7a2e49ddb8e2afe865b4fa36",
+          "publication_state": "PUBLISHED_CANONICAL_PR_OPEN_DRAFT"
+        },
+        "module_admission": {
+          "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/delivery-metadata/current-swing-9a164c31/MODULE_ADMISSION.json",
+          "canonical_commit": "74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd",
+          "canonical_pr_url": "https://github.com/hsoliwal/com.synexia/pull/12528",
+          "canonical_url": "https://github.com/hsoliwal/com.synexia/blob/74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/delivery-metadata/current-swing-9a164c31/MODULE_ADMISSION.json",
+          "sha256": "e996fa1ab799a1017b4175d14f13d1ab6e8e4b41eaf3b05a836b017d221a4208",
+          "git_blob_sha1": "8a3c49e57d69093b98ff6d6b63f87d37635ad361",
+          "publication_state": "PUBLISHED_CANONICAL_PR_OPEN_DRAFT"
+        },
+        "module_source_scope": {
+          "baseline_tracked_files": 73,
+          "earlier_executed_binding_only_candidate_files": 75,
+          "binding_proof_additions": 2,
+          "ui_jdk_reproducer_additions": 5,
+          "combined_receiving_source_module_files": 80,
+          "fresh_combined_80_file_maven_execution": "NOT_RUN",
+          "rule": "The existing 75-file execution receipt covers the binding-only candidate. The two combined recipes add seven module files to the 73-file baseline, yielding 80 tracked files. Separate java.desktop source qualification remains separately recorded."
+        },
+        "rule": "Unchanged recipe/source bytes reuse earlier execution; current collection receipts do not extend Swing platform qualification."
+      },
+      "receiving_metadata_pr_url": "https://github.com/hsoliwal/M3jdk21/pull/1525"
+    },
+    {
+      "source": "hsoliwal/M3JDK21 / src/java.desktop/share/classes/javax/swing/plaf/basic/BasicListUI.java",
+      "source_commit": "ad919bf89163eb537b3852f278033d6db8bda2e7",
+      "source_path": "src/java.desktop/share/classes/javax/swing/plaf/basic/BasicListUI.java",
+      "source_blob": "68913e5ac16edaa8d4c94a6b91b1fd1766808ea7",
+      "source_sha256": "2805b2e26a7f37d37b2ef3861c3736e1c020bd9a306d272f15bf73140c48bbd9",
+      "source_role": "COPY exact published first-party target source",
+      "target": "javax.swing.plaf.basic.BasicListUI",
+      "target_path": "src/java.desktop/share/classes/javax/swing/plaf/basic/BasicListUI.java",
+      "target_module": "java.desktop",
+      "target_base_commit": "9a164c31b38c7013c179a3ff38b0bb60c199c7fd",
+      "target_preimage_sha256": "8b7a1c3fe33d20512298188f28918ce363915a13d4254032725a4ce24a79c6cf",
+      "target_postimage_sha256": "2805b2e26a7f37d37b2ef3861c3736e1c020bd9a306d272f15bf73140c48bbd9",
+      "target_postimage_git_blob": "68913e5ac16edaa8d4c94a6b91b1fd1766808ea7",
+      "target_rule": "Receive existing private M3ListRows/M3ListMeasure state and geometry/layout/ListDataListener hooks; preserve all public/protected interfaces, stock fallbacks and the default-off switch.",
+      "public_api": "Java SE JList/BasicListUI and existing public/protected owner descriptors unchanged; sun.swing helper types remain non-exported; m3.swing.viewport defaults to false.",
+      "status": "CURRENT_SOURCE_ADMITTED_REUSE_BOUNDED_EXECUTION_RECEIVING_PR_OPEN_DRAFT_NO_PHASE_PROMOTION",
+      "license": "GPL-2.0-only WITH Classpath-exception-2.0",
+      "copyright": "Existing per-file copyright retained; see SOURCE_RIGHTS.tsv",
+      "source_rights": "Published target-owned GPLv2 with Classpath exception source; retain exact header, root LICENSE and ADDITIONAL_LICENSE_INFO. Donor LICENSE_DECISIONS.tsv records leaf-3/fixed-cache authority; no separate leaf-4 rows are invented.",
+      "canonical_recipe": {
+        "name": "com.synexia.rewrite.M3SwingUiConvergence20261019",
+        "source_path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3SwingUiConvergence20261019.java",
+        "source_sha256": "03e17219365378a2f1773c36bccf52f54c49ca3e2a343a8cb137276532ee5f3e",
+        "manifest_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/m3-swing-ui-convergence-20261019/manifest.tsv",
+        "manifest_sha256": "8700ab0a685f1d8ac2890874d13a440461d1a496e92907759cc718a6dc7b6d16",
+        "canonical_repository": "hsoliwal/com.synexia",
+        "canonical_commit": "74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd",
+        "canonical_pr_url": "https://github.com/hsoliwal/com.synexia/pull/12528",
+        "publication_state": "PUBLISHED_CANONICAL_PR_OPEN_DRAFT",
+        "owner": "Existing M3GpuToolJoinRecipe / M3GpuToolJoinManifest",
+        "sdk": {
+          "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/successor-sdk-final-selection/receipt.json",
+          "sha256": "2b2e935ceb68b54d4d1a3d053533e1fec31b0e72c2ca1d481c3845e4733db82c",
+          "publication_state": "PUBLISHED_CANONICAL_PR_OPEN_DRAFT",
+          "canonical_commit": "74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd",
+          "state": "PASS_FINAL_SELECTED_MANIFEST_BOUNDED_PLAINTEXT",
+          "engine": "OpenRewrite 8.17.1 actual ScanningRecipe SDK",
+          "tests": 9,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "java_lst": "NOT_RUN",
+          "final_manifest_rule": "PASS for final view 21 targets / 8 changes with RowTree EXACT_KEEP, binding 7 targets / 3 changes, and Swing UI 12 targets / 12 changes. Requalify any later source or manifest change.",
+          "final_view_manifest_sha256": "eefba93f1322bf0470add185ef2a72904346b8bec45814c7a4d422e5773a0eb4",
+          "log_sha256": "a0d752f6748c8c4aa27cf564b18343951481d9e06a6c9bfc277509c5ccea55de",
+          "canonical_pr_url": "https://github.com/hsoliwal/com.synexia/pull/12528",
+          "canonical_url": "https://github.com/hsoliwal/com.synexia/blob/74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/successor-sdk-final-selection/receipt.json"
+        }
+      },
+      "verification": {
+        "source": "PASS exact published donor Git blob/raw SHA-256; two receiver preimages and ten absent proof/helper additions verified",
+        "canonical_kernel": "PASS 53640 checks / 4096 before-post subsets; 12 CREATED then 12 UNCHANGED for the complete runtime/proof packet",
+        "java21_headless": "PASS 28 JUnit checks; stock/receiver/default-unset/false/true public transcripts identical; exact donor differential 40 seeds x 300 steps per false/true with 1240 pixel comparisons each",
+        "api": "BasicListUI and M3FixedHeightLayoutCache javap -protected -s match receiver; BasicListUI matches stock Java21",
+        "jni": "Not applicable to these Java source changes; no native UI/device execution",
+        "resources": "Not measured; per-UI metadata and two initial int[8] lanes remain allocated even when the flag is off"
+      },
+      "pending_gates": [
+        "Full source-built and installed M3JDK21 image",
+        "Applicable jtreg and JCK",
+        "Android/iOS runtime, native surface, lifecycle, input, packaging and device/simulator execution",
+        "Matched workload, cold/warm CPU, allocation, retained-heap and native-memory acceptance"
+      ],
+      "receiving_sequence": {
+        "active_phase": "STRING",
+        "active_state": "QUALIFICATION_REQUIRED",
+        "phase_promotion": false,
+        "scope": "BOUNDED_OWNER_QUALIFICATION_ONLY",
+        "public_jdk_names_unchanged": true,
+        "canonical_payload_owner_unchanged": true
+      },
+      "receiving_pr_url": "https://github.com/hsoliwal/M3jdk21/pull/1525",
+      "evidence": [
+        {
+          "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/swing-ui/QUALIFICATION.json",
+          "sha256": "89caed5b70931312775d451f5f65225898d1a2cfa1d12152536f4636ff98bcbc",
+          "publication_state": "PUBLISHED_CANONICAL_PR_OPEN_DRAFT",
+          "canonical_commit": "74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd",
+          "canonical_pr_url": "https://github.com/hsoliwal/com.synexia/pull/12528",
+          "canonical_url": "https://github.com/hsoliwal/com.synexia/blob/74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/swing-ui/QUALIFICATION.json"
+        },
+        {
+          "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/swing-ui/QUALIFICATION.md",
+          "sha256": "133a02765dd8ccb7448fd1ced7bc3c2a0309881012857694937d435b5d7634cd",
+          "publication_state": "PUBLISHED_CANONICAL_PR_OPEN_DRAFT",
+          "canonical_commit": "74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd",
+          "canonical_pr_url": "https://github.com/hsoliwal/com.synexia/pull/12528",
+          "canonical_url": "https://github.com/hsoliwal/com.synexia/blob/74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/swing-ui/QUALIFICATION.md"
+        },
+        {
+          "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/delivery-metadata/current-swing-9a164c31/ADMISSION.json",
+          "canonical_commit": "74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd",
+          "canonical_pr_url": "https://github.com/hsoliwal/com.synexia/pull/12528",
+          "canonical_url": "https://github.com/hsoliwal/com.synexia/blob/74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/delivery-metadata/current-swing-9a164c31/ADMISSION.json",
+          "sha256": "af080f1d211aa7082f4efa6b3f7b138733e2f0bfae1064b0195d39199f025a93",
+          "git_blob_sha1": "5b3b05a8272fc80c7a2e49ddb8e2afe865b4fa36",
+          "publication_state": "PUBLISHED_CANONICAL_PR_OPEN_DRAFT"
+        },
+        {
+          "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/delivery-metadata/current-swing-9a164c31/MODULE_ADMISSION.json",
+          "canonical_commit": "74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd",
+          "canonical_pr_url": "https://github.com/hsoliwal/com.synexia/pull/12528",
+          "canonical_url": "https://github.com/hsoliwal/com.synexia/blob/74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/delivery-metadata/current-swing-9a164c31/MODULE_ADMISSION.json",
+          "sha256": "e996fa1ab799a1017b4175d14f13d1ab6e8e4b41eaf3b05a836b017d221a4208",
+          "git_blob_sha1": "8a3c49e57d69093b98ff6d6b63f87d37635ad361",
+          "publication_state": "PUBLISHED_CANONICAL_PR_OPEN_DRAFT"
+        }
+      ],
+      "receiving_document": "m3/docs/swing-viewport/convergence-20261019/RECEIVING.md",
+      "preserved_limits": [
+        "Opt-in unnotified value mutation can retain old row sizes; exact donor divergence test passes.",
+        "Donor partial-layout counter prints 1064 with flag false / 990 with true and is not valid activation evidence; exact measurement assertions supply leaf-4 evidence.",
+        "Fixed-cache differential preserves same-exception-class and rebuild protocol; D2 and D4 remain; no full post-exception identity claim."
+      ],
+      "proof_paths": [
+        "m3/ports/swing-viewport/jdk-reproducers/M3ListRowsTest.java",
+        "m3/ports/swing-viewport/jdk-reproducers/M3ListMeasureTest.java",
+        "m3/ports/swing-viewport/jdk-reproducers/M3JListViewportDifferential.java",
+        "m3/ports/swing-viewport/jdk-reproducers/M3FixedHeightSelectionResetTest.java",
+        "m3/ports/swing-viewport/jdk-reproducers/M3JListPublicObservation.java"
+      ],
+      "source_rights_crosswalk": "m3/docs/viewport-everywhere/convergence-20261019/SOURCE_RIGHTS.tsv",
+      "historical_qualification_parent": "c2a8733f6eebaadcc206a61d08906bfd8b6d60dc",
+      "current_source_admission": {
+        "state": "PASS_EXACT_SOURCE_IDENTITY_REUSE_EARLIER_EXECUTION",
+        "source_commit": "9a164c31b38c7013c179a3ff38b0bb60c199c7fd",
+        "historical_execution_parent": "c2a8733f6eebaadcc206a61d08906bfd8b6d60dc",
+        "runtime_or_sdk_rerun": "NOT_RUN_BY_METADATA_RECOVERY",
+        "admission": {
+          "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/delivery-metadata/current-swing-9a164c31/ADMISSION.json",
+          "canonical_commit": "74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd",
+          "canonical_pr_url": "https://github.com/hsoliwal/com.synexia/pull/12528",
+          "canonical_url": "https://github.com/hsoliwal/com.synexia/blob/74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/delivery-metadata/current-swing-9a164c31/ADMISSION.json",
+          "sha256": "af080f1d211aa7082f4efa6b3f7b138733e2f0bfae1064b0195d39199f025a93",
+          "git_blob_sha1": "5b3b05a8272fc80c7a2e49ddb8e2afe865b4fa36",
+          "publication_state": "PUBLISHED_CANONICAL_PR_OPEN_DRAFT"
+        },
+        "module_admission": {
+          "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/delivery-metadata/current-swing-9a164c31/MODULE_ADMISSION.json",
+          "canonical_commit": "74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd",
+          "canonical_pr_url": "https://github.com/hsoliwal/com.synexia/pull/12528",
+          "canonical_url": "https://github.com/hsoliwal/com.synexia/blob/74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/delivery-metadata/current-swing-9a164c31/MODULE_ADMISSION.json",
+          "sha256": "e996fa1ab799a1017b4175d14f13d1ab6e8e4b41eaf3b05a836b017d221a4208",
+          "git_blob_sha1": "8a3c49e57d69093b98ff6d6b63f87d37635ad361",
+          "publication_state": "PUBLISHED_CANONICAL_PR_OPEN_DRAFT"
+        },
+        "module_source_scope": {
+          "baseline_tracked_files": 73,
+          "earlier_executed_binding_only_candidate_files": 75,
+          "binding_proof_additions": 2,
+          "ui_jdk_reproducer_additions": 5,
+          "combined_receiving_source_module_files": 80,
+          "fresh_combined_80_file_maven_execution": "NOT_RUN",
+          "rule": "The existing 75-file execution receipt covers the binding-only candidate. The two combined recipes add seven module files to the 73-file baseline, yielding 80 tracked files. Separate java.desktop source qualification remains separately recorded."
+        },
+        "rule": "Unchanged recipe/source bytes reuse earlier execution; current collection receipts do not extend Swing platform qualification."
+      },
+      "receiving_metadata_pr_url": "https://github.com/hsoliwal/M3jdk21/pull/1525"
+    },
+    {
+      "source": "hsoliwal/M3JDK21 / src/java.desktop/share/classes/sun/swing/list/M3ListMeasure.java",
+      "source_commit": "ad919bf89163eb537b3852f278033d6db8bda2e7",
+      "source_path": "src/java.desktop/share/classes/sun/swing/list/M3ListMeasure.java",
+      "source_blob": "628fbcc54d96d2787e025894858d03448f6172be",
+      "source_sha256": "2300061166197f13f9cc5da8eeaed76147144b756ad684dfd501c70b6680e4cf",
+      "source_role": "COPY exact published first-party target source",
+      "target": "sun.swing.list.M3ListMeasure",
+      "target_path": "src/java.desktop/share/classes/sun/swing/list/M3ListMeasure.java",
+      "target_module": "java.desktop",
+      "target_base_commit": "9a164c31b38c7013c179a3ff38b0bb60c199c7fd",
+      "target_preimage_sha256": "ABSENT",
+      "target_postimage_sha256": "2300061166197f13f9cc5da8eeaed76147144b756ad684dfd501c70b6680e4cf",
+      "target_postimage_git_blob": "628fbcc54d96d2787e025894858d03448f6172be",
+      "target_rule": "Existing opt-in vertical variable-height DefaultListCellRenderer measurement closure; event-bearing changes and invalidation/probe fallback retained; documented eventless-mutation divergence remains.",
+      "public_api": "Java SE JList/BasicListUI and existing public/protected owner descriptors unchanged; sun.swing helper types remain non-exported; m3.swing.viewport defaults to false.",
+      "status": "CURRENT_SOURCE_ADMITTED_REUSE_BOUNDED_EXECUTION_RECEIVING_PR_OPEN_DRAFT_NO_PHASE_PROMOTION",
+      "license": "GPL-2.0-only WITH Classpath-exception-2.0",
+      "copyright": "Existing per-file copyright retained; see SOURCE_RIGHTS.tsv",
+      "source_rights": "Published target-owned GPLv2 with Classpath exception source; retain exact header, root LICENSE and ADDITIONAL_LICENSE_INFO. Donor LICENSE_DECISIONS.tsv records leaf-3/fixed-cache authority; no separate leaf-4 rows are invented.",
+      "canonical_recipe": {
+        "name": "com.synexia.rewrite.M3SwingUiConvergence20261019",
+        "source_path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3SwingUiConvergence20261019.java",
+        "source_sha256": "03e17219365378a2f1773c36bccf52f54c49ca3e2a343a8cb137276532ee5f3e",
+        "manifest_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/m3-swing-ui-convergence-20261019/manifest.tsv",
+        "manifest_sha256": "8700ab0a685f1d8ac2890874d13a440461d1a496e92907759cc718a6dc7b6d16",
+        "canonical_repository": "hsoliwal/com.synexia",
+        "canonical_commit": "74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd",
+        "canonical_pr_url": "https://github.com/hsoliwal/com.synexia/pull/12528",
+        "publication_state": "PUBLISHED_CANONICAL_PR_OPEN_DRAFT",
+        "owner": "Existing M3GpuToolJoinRecipe / M3GpuToolJoinManifest",
+        "sdk": {
+          "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/successor-sdk-final-selection/receipt.json",
+          "sha256": "2b2e935ceb68b54d4d1a3d053533e1fec31b0e72c2ca1d481c3845e4733db82c",
+          "publication_state": "PUBLISHED_CANONICAL_PR_OPEN_DRAFT",
+          "canonical_commit": "74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd",
+          "state": "PASS_FINAL_SELECTED_MANIFEST_BOUNDED_PLAINTEXT",
+          "engine": "OpenRewrite 8.17.1 actual ScanningRecipe SDK",
+          "tests": 9,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "java_lst": "NOT_RUN",
+          "final_manifest_rule": "PASS for final view 21 targets / 8 changes with RowTree EXACT_KEEP, binding 7 targets / 3 changes, and Swing UI 12 targets / 12 changes. Requalify any later source or manifest change.",
+          "final_view_manifest_sha256": "eefba93f1322bf0470add185ef2a72904346b8bec45814c7a4d422e5773a0eb4",
+          "log_sha256": "a0d752f6748c8c4aa27cf564b18343951481d9e06a6c9bfc277509c5ccea55de",
+          "canonical_pr_url": "https://github.com/hsoliwal/com.synexia/pull/12528",
+          "canonical_url": "https://github.com/hsoliwal/com.synexia/blob/74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/successor-sdk-final-selection/receipt.json"
+        }
+      },
+      "verification": {
+        "source": "PASS exact published donor Git blob/raw SHA-256; two receiver preimages and ten absent proof/helper additions verified",
+        "canonical_kernel": "PASS 53640 checks / 4096 before-post subsets; 12 CREATED then 12 UNCHANGED for the complete runtime/proof packet",
+        "java21_headless": "PASS 28 JUnit checks; stock/receiver/default-unset/false/true public transcripts identical; exact donor differential 40 seeds x 300 steps per false/true with 1240 pixel comparisons each",
+        "api": "BasicListUI and M3FixedHeightLayoutCache javap -protected -s match receiver; BasicListUI matches stock Java21",
+        "jni": "Not applicable to these Java source changes; no native UI/device execution",
+        "resources": "Not measured; per-UI metadata and two initial int[8] lanes remain allocated even when the flag is off"
+      },
+      "pending_gates": [
+        "Full source-built and installed M3JDK21 image",
+        "Applicable jtreg and JCK",
+        "Android/iOS runtime, native surface, lifecycle, input, packaging and device/simulator execution",
+        "Matched workload, cold/warm CPU, allocation, retained-heap and native-memory acceptance"
+      ],
+      "receiving_sequence": {
+        "active_phase": "STRING",
+        "active_state": "QUALIFICATION_REQUIRED",
+        "phase_promotion": false,
+        "scope": "BOUNDED_OWNER_QUALIFICATION_ONLY",
+        "public_jdk_names_unchanged": true,
+        "canonical_payload_owner_unchanged": true
+      },
+      "receiving_pr_url": "https://github.com/hsoliwal/M3jdk21/pull/1525",
+      "evidence": [
+        {
+          "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/swing-ui/QUALIFICATION.json",
+          "sha256": "89caed5b70931312775d451f5f65225898d1a2cfa1d12152536f4636ff98bcbc",
+          "publication_state": "PUBLISHED_CANONICAL_PR_OPEN_DRAFT",
+          "canonical_commit": "74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd",
+          "canonical_pr_url": "https://github.com/hsoliwal/com.synexia/pull/12528",
+          "canonical_url": "https://github.com/hsoliwal/com.synexia/blob/74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/swing-ui/QUALIFICATION.json"
+        },
+        {
+          "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/swing-ui/QUALIFICATION.md",
+          "sha256": "133a02765dd8ccb7448fd1ced7bc3c2a0309881012857694937d435b5d7634cd",
+          "publication_state": "PUBLISHED_CANONICAL_PR_OPEN_DRAFT",
+          "canonical_commit": "74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd",
+          "canonical_pr_url": "https://github.com/hsoliwal/com.synexia/pull/12528",
+          "canonical_url": "https://github.com/hsoliwal/com.synexia/blob/74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/swing-ui/QUALIFICATION.md"
+        },
+        {
+          "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/delivery-metadata/current-swing-9a164c31/ADMISSION.json",
+          "canonical_commit": "74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd",
+          "canonical_pr_url": "https://github.com/hsoliwal/com.synexia/pull/12528",
+          "canonical_url": "https://github.com/hsoliwal/com.synexia/blob/74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/delivery-metadata/current-swing-9a164c31/ADMISSION.json",
+          "sha256": "af080f1d211aa7082f4efa6b3f7b138733e2f0bfae1064b0195d39199f025a93",
+          "git_blob_sha1": "5b3b05a8272fc80c7a2e49ddb8e2afe865b4fa36",
+          "publication_state": "PUBLISHED_CANONICAL_PR_OPEN_DRAFT"
+        },
+        {
+          "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/delivery-metadata/current-swing-9a164c31/MODULE_ADMISSION.json",
+          "canonical_commit": "74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd",
+          "canonical_pr_url": "https://github.com/hsoliwal/com.synexia/pull/12528",
+          "canonical_url": "https://github.com/hsoliwal/com.synexia/blob/74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/delivery-metadata/current-swing-9a164c31/MODULE_ADMISSION.json",
+          "sha256": "e996fa1ab799a1017b4175d14f13d1ab6e8e4b41eaf3b05a836b017d221a4208",
+          "git_blob_sha1": "8a3c49e57d69093b98ff6d6b63f87d37635ad361",
+          "publication_state": "PUBLISHED_CANONICAL_PR_OPEN_DRAFT"
+        }
+      ],
+      "receiving_document": "m3/docs/swing-viewport/convergence-20261019/RECEIVING.md",
+      "preserved_limits": [
+        "Opt-in unnotified value mutation can retain old row sizes; exact donor divergence test passes.",
+        "Donor partial-layout counter prints 1064 with flag false / 990 with true and is not valid activation evidence; exact measurement assertions supply leaf-4 evidence.",
+        "Fixed-cache differential preserves same-exception-class and rebuild protocol; D2 and D4 remain; no full post-exception identity claim."
+      ],
+      "proof_paths": [
+        "m3/ports/swing-viewport/jdk-reproducers/M3ListRowsTest.java",
+        "m3/ports/swing-viewport/jdk-reproducers/M3ListMeasureTest.java",
+        "m3/ports/swing-viewport/jdk-reproducers/M3JListViewportDifferential.java",
+        "m3/ports/swing-viewport/jdk-reproducers/M3FixedHeightSelectionResetTest.java",
+        "m3/ports/swing-viewport/jdk-reproducers/M3JListPublicObservation.java"
+      ],
+      "source_rights_crosswalk": "m3/docs/viewport-everywhere/convergence-20261019/SOURCE_RIGHTS.tsv",
+      "historical_qualification_parent": "c2a8733f6eebaadcc206a61d08906bfd8b6d60dc",
+      "current_source_admission": {
+        "state": "PASS_EXACT_SOURCE_IDENTITY_REUSE_EARLIER_EXECUTION",
+        "source_commit": "9a164c31b38c7013c179a3ff38b0bb60c199c7fd",
+        "historical_execution_parent": "c2a8733f6eebaadcc206a61d08906bfd8b6d60dc",
+        "runtime_or_sdk_rerun": "NOT_RUN_BY_METADATA_RECOVERY",
+        "admission": {
+          "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/delivery-metadata/current-swing-9a164c31/ADMISSION.json",
+          "canonical_commit": "74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd",
+          "canonical_pr_url": "https://github.com/hsoliwal/com.synexia/pull/12528",
+          "canonical_url": "https://github.com/hsoliwal/com.synexia/blob/74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/delivery-metadata/current-swing-9a164c31/ADMISSION.json",
+          "sha256": "af080f1d211aa7082f4efa6b3f7b138733e2f0bfae1064b0195d39199f025a93",
+          "git_blob_sha1": "5b3b05a8272fc80c7a2e49ddb8e2afe865b4fa36",
+          "publication_state": "PUBLISHED_CANONICAL_PR_OPEN_DRAFT"
+        },
+        "module_admission": {
+          "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/delivery-metadata/current-swing-9a164c31/MODULE_ADMISSION.json",
+          "canonical_commit": "74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd",
+          "canonical_pr_url": "https://github.com/hsoliwal/com.synexia/pull/12528",
+          "canonical_url": "https://github.com/hsoliwal/com.synexia/blob/74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/delivery-metadata/current-swing-9a164c31/MODULE_ADMISSION.json",
+          "sha256": "e996fa1ab799a1017b4175d14f13d1ab6e8e4b41eaf3b05a836b017d221a4208",
+          "git_blob_sha1": "8a3c49e57d69093b98ff6d6b63f87d37635ad361",
+          "publication_state": "PUBLISHED_CANONICAL_PR_OPEN_DRAFT"
+        },
+        "module_source_scope": {
+          "baseline_tracked_files": 73,
+          "earlier_executed_binding_only_candidate_files": 75,
+          "binding_proof_additions": 2,
+          "ui_jdk_reproducer_additions": 5,
+          "combined_receiving_source_module_files": 80,
+          "fresh_combined_80_file_maven_execution": "NOT_RUN",
+          "rule": "The existing 75-file execution receipt covers the binding-only candidate. The two combined recipes add seven module files to the 73-file baseline, yielding 80 tracked files. Separate java.desktop source qualification remains separately recorded."
+        },
+        "rule": "Unchanged recipe/source bytes reuse earlier execution; current collection receipts do not extend Swing platform qualification."
+      },
+      "receiving_metadata_pr_url": "https://github.com/hsoliwal/M3jdk21/pull/1525"
+    },
+    {
+      "source": "hsoliwal/M3JDK21 / src/java.desktop/share/classes/sun/swing/list/M3ListRows.java",
+      "source_commit": "ad919bf89163eb537b3852f278033d6db8bda2e7",
+      "source_path": "src/java.desktop/share/classes/sun/swing/list/M3ListRows.java",
+      "source_blob": "7da86fd4b6e798f09168f72e9762bc853a3c6f10",
+      "source_sha256": "5d0dfbe86c7909914ee4a52a6a29aa2b246b3ce078cca7946657e03bb7994b7a",
+      "source_role": "COPY exact published first-party target source",
+      "target": "sun.swing.list.M3ListRows",
+      "target_path": "src/java.desktop/share/classes/sun/swing/list/M3ListRows.java",
+      "target_module": "java.desktop",
+      "target_base_commit": "9a164c31b38c7013c179a3ff38b0bb60c199c7fd",
+      "target_preimage_sha256": "ABSENT",
+      "target_postimage_sha256": "5d0dfbe86c7909914ee4a52a6a29aa2b246b3ce078cca7946657e03bb7994b7a",
+      "target_postimage_git_blob": "7da86fd4b6e798f09168f72e9762bc853a3c6f10",
+      "target_rule": "Index each accepted immutable cellHeights array identity through existing internal prefix metadata; external UI subclasses keep stock loops; preserve wrapped sums and fallback.",
+      "public_api": "Java SE JList/BasicListUI and existing public/protected owner descriptors unchanged; sun.swing helper types remain non-exported; m3.swing.viewport defaults to false.",
+      "status": "CURRENT_SOURCE_ADMITTED_REUSE_BOUNDED_EXECUTION_RECEIVING_PR_OPEN_DRAFT_NO_PHASE_PROMOTION",
+      "license": "GPL-2.0-only WITH Classpath-exception-2.0",
+      "copyright": "Existing per-file copyright retained; see SOURCE_RIGHTS.tsv",
+      "source_rights": "Published target-owned GPLv2 with Classpath exception source; retain exact header, root LICENSE and ADDITIONAL_LICENSE_INFO. Donor LICENSE_DECISIONS.tsv records leaf-3/fixed-cache authority; no separate leaf-4 rows are invented.",
+      "canonical_recipe": {
+        "name": "com.synexia.rewrite.M3SwingUiConvergence20261019",
+        "source_path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3SwingUiConvergence20261019.java",
+        "source_sha256": "03e17219365378a2f1773c36bccf52f54c49ca3e2a343a8cb137276532ee5f3e",
+        "manifest_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/m3-swing-ui-convergence-20261019/manifest.tsv",
+        "manifest_sha256": "8700ab0a685f1d8ac2890874d13a440461d1a496e92907759cc718a6dc7b6d16",
+        "canonical_repository": "hsoliwal/com.synexia",
+        "canonical_commit": "74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd",
+        "canonical_pr_url": "https://github.com/hsoliwal/com.synexia/pull/12528",
+        "publication_state": "PUBLISHED_CANONICAL_PR_OPEN_DRAFT",
+        "owner": "Existing M3GpuToolJoinRecipe / M3GpuToolJoinManifest",
+        "sdk": {
+          "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/successor-sdk-final-selection/receipt.json",
+          "sha256": "2b2e935ceb68b54d4d1a3d053533e1fec31b0e72c2ca1d481c3845e4733db82c",
+          "publication_state": "PUBLISHED_CANONICAL_PR_OPEN_DRAFT",
+          "canonical_commit": "74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd",
+          "state": "PASS_FINAL_SELECTED_MANIFEST_BOUNDED_PLAINTEXT",
+          "engine": "OpenRewrite 8.17.1 actual ScanningRecipe SDK",
+          "tests": 9,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "java_lst": "NOT_RUN",
+          "final_manifest_rule": "PASS for final view 21 targets / 8 changes with RowTree EXACT_KEEP, binding 7 targets / 3 changes, and Swing UI 12 targets / 12 changes. Requalify any later source or manifest change.",
+          "final_view_manifest_sha256": "eefba93f1322bf0470add185ef2a72904346b8bec45814c7a4d422e5773a0eb4",
+          "log_sha256": "a0d752f6748c8c4aa27cf564b18343951481d9e06a6c9bfc277509c5ccea55de",
+          "canonical_pr_url": "https://github.com/hsoliwal/com.synexia/pull/12528",
+          "canonical_url": "https://github.com/hsoliwal/com.synexia/blob/74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/successor-sdk-final-selection/receipt.json"
+        }
+      },
+      "verification": {
+        "source": "PASS exact published donor Git blob/raw SHA-256; two receiver preimages and ten absent proof/helper additions verified",
+        "canonical_kernel": "PASS 53640 checks / 4096 before-post subsets; 12 CREATED then 12 UNCHANGED for the complete runtime/proof packet",
+        "java21_headless": "PASS 28 JUnit checks; stock/receiver/default-unset/false/true public transcripts identical; exact donor differential 40 seeds x 300 steps per false/true with 1240 pixel comparisons each",
+        "api": "BasicListUI and M3FixedHeightLayoutCache javap -protected -s match receiver; BasicListUI matches stock Java21",
+        "jni": "Not applicable to these Java source changes; no native UI/device execution",
+        "resources": "Not measured; per-UI metadata and two initial int[8] lanes remain allocated even when the flag is off"
+      },
+      "pending_gates": [
+        "Full source-built and installed M3JDK21 image",
+        "Applicable jtreg and JCK",
+        "Android/iOS runtime, native surface, lifecycle, input, packaging and device/simulator execution",
+        "Matched workload, cold/warm CPU, allocation, retained-heap and native-memory acceptance"
+      ],
+      "receiving_sequence": {
+        "active_phase": "STRING",
+        "active_state": "QUALIFICATION_REQUIRED",
+        "phase_promotion": false,
+        "scope": "BOUNDED_OWNER_QUALIFICATION_ONLY",
+        "public_jdk_names_unchanged": true,
+        "canonical_payload_owner_unchanged": true
+      },
+      "receiving_pr_url": "https://github.com/hsoliwal/M3jdk21/pull/1525",
+      "evidence": [
+        {
+          "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/swing-ui/QUALIFICATION.json",
+          "sha256": "89caed5b70931312775d451f5f65225898d1a2cfa1d12152536f4636ff98bcbc",
+          "publication_state": "PUBLISHED_CANONICAL_PR_OPEN_DRAFT",
+          "canonical_commit": "74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd",
+          "canonical_pr_url": "https://github.com/hsoliwal/com.synexia/pull/12528",
+          "canonical_url": "https://github.com/hsoliwal/com.synexia/blob/74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/swing-ui/QUALIFICATION.json"
+        },
+        {
+          "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/swing-ui/QUALIFICATION.md",
+          "sha256": "133a02765dd8ccb7448fd1ced7bc3c2a0309881012857694937d435b5d7634cd",
+          "publication_state": "PUBLISHED_CANONICAL_PR_OPEN_DRAFT",
+          "canonical_commit": "74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd",
+          "canonical_pr_url": "https://github.com/hsoliwal/com.synexia/pull/12528",
+          "canonical_url": "https://github.com/hsoliwal/com.synexia/blob/74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/swing-ui/QUALIFICATION.md"
+        },
+        {
+          "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/delivery-metadata/current-swing-9a164c31/ADMISSION.json",
+          "canonical_commit": "74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd",
+          "canonical_pr_url": "https://github.com/hsoliwal/com.synexia/pull/12528",
+          "canonical_url": "https://github.com/hsoliwal/com.synexia/blob/74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/delivery-metadata/current-swing-9a164c31/ADMISSION.json",
+          "sha256": "af080f1d211aa7082f4efa6b3f7b138733e2f0bfae1064b0195d39199f025a93",
+          "git_blob_sha1": "5b3b05a8272fc80c7a2e49ddb8e2afe865b4fa36",
+          "publication_state": "PUBLISHED_CANONICAL_PR_OPEN_DRAFT"
+        },
+        {
+          "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/delivery-metadata/current-swing-9a164c31/MODULE_ADMISSION.json",
+          "canonical_commit": "74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd",
+          "canonical_pr_url": "https://github.com/hsoliwal/com.synexia/pull/12528",
+          "canonical_url": "https://github.com/hsoliwal/com.synexia/blob/74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/delivery-metadata/current-swing-9a164c31/MODULE_ADMISSION.json",
+          "sha256": "e996fa1ab799a1017b4175d14f13d1ab6e8e4b41eaf3b05a836b017d221a4208",
+          "git_blob_sha1": "8a3c49e57d69093b98ff6d6b63f87d37635ad361",
+          "publication_state": "PUBLISHED_CANONICAL_PR_OPEN_DRAFT"
+        }
+      ],
+      "receiving_document": "m3/docs/swing-viewport/convergence-20261019/RECEIVING.md",
+      "preserved_limits": [
+        "Opt-in unnotified value mutation can retain old row sizes; exact donor divergence test passes.",
+        "Donor partial-layout counter prints 1064 with flag false / 990 with true and is not valid activation evidence; exact measurement assertions supply leaf-4 evidence.",
+        "Fixed-cache differential preserves same-exception-class and rebuild protocol; D2 and D4 remain; no full post-exception identity claim."
+      ],
+      "proof_paths": [
+        "m3/ports/swing-viewport/jdk-reproducers/M3ListRowsTest.java",
+        "m3/ports/swing-viewport/jdk-reproducers/M3ListMeasureTest.java",
+        "m3/ports/swing-viewport/jdk-reproducers/M3JListViewportDifferential.java",
+        "m3/ports/swing-viewport/jdk-reproducers/M3FixedHeightSelectionResetTest.java",
+        "m3/ports/swing-viewport/jdk-reproducers/M3JListPublicObservation.java"
+      ],
+      "source_rights_crosswalk": "m3/docs/viewport-everywhere/convergence-20261019/SOURCE_RIGHTS.tsv",
+      "historical_qualification_parent": "c2a8733f6eebaadcc206a61d08906bfd8b6d60dc",
+      "current_source_admission": {
+        "state": "PASS_EXACT_SOURCE_IDENTITY_REUSE_EARLIER_EXECUTION",
+        "source_commit": "9a164c31b38c7013c179a3ff38b0bb60c199c7fd",
+        "historical_execution_parent": "c2a8733f6eebaadcc206a61d08906bfd8b6d60dc",
+        "runtime_or_sdk_rerun": "NOT_RUN_BY_METADATA_RECOVERY",
+        "admission": {
+          "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/delivery-metadata/current-swing-9a164c31/ADMISSION.json",
+          "canonical_commit": "74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd",
+          "canonical_pr_url": "https://github.com/hsoliwal/com.synexia/pull/12528",
+          "canonical_url": "https://github.com/hsoliwal/com.synexia/blob/74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/delivery-metadata/current-swing-9a164c31/ADMISSION.json",
+          "sha256": "af080f1d211aa7082f4efa6b3f7b138733e2f0bfae1064b0195d39199f025a93",
+          "git_blob_sha1": "5b3b05a8272fc80c7a2e49ddb8e2afe865b4fa36",
+          "publication_state": "PUBLISHED_CANONICAL_PR_OPEN_DRAFT"
+        },
+        "module_admission": {
+          "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/delivery-metadata/current-swing-9a164c31/MODULE_ADMISSION.json",
+          "canonical_commit": "74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd",
+          "canonical_pr_url": "https://github.com/hsoliwal/com.synexia/pull/12528",
+          "canonical_url": "https://github.com/hsoliwal/com.synexia/blob/74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/delivery-metadata/current-swing-9a164c31/MODULE_ADMISSION.json",
+          "sha256": "e996fa1ab799a1017b4175d14f13d1ab6e8e4b41eaf3b05a836b017d221a4208",
+          "git_blob_sha1": "8a3c49e57d69093b98ff6d6b63f87d37635ad361",
+          "publication_state": "PUBLISHED_CANONICAL_PR_OPEN_DRAFT"
+        },
+        "module_source_scope": {
+          "baseline_tracked_files": 73,
+          "earlier_executed_binding_only_candidate_files": 75,
+          "binding_proof_additions": 2,
+          "ui_jdk_reproducer_additions": 5,
+          "combined_receiving_source_module_files": 80,
+          "fresh_combined_80_file_maven_execution": "NOT_RUN",
+          "rule": "The existing 75-file execution receipt covers the binding-only candidate. The two combined recipes add seven module files to the 73-file baseline, yielding 80 tracked files. Separate java.desktop source qualification remains separately recorded."
+        },
+        "rule": "Unchanged recipe/source bytes reuse earlier execution; current collection receipts do not extend Swing platform qualification."
+      },
+      "receiving_metadata_pr_url": "https://github.com/hsoliwal/M3jdk21/pull/1525"
+    },
+    {
+      "source": "hsoliwal/M3JDK21 / src/java.desktop/share/classes/sun/swing/list/M3PrefixRowOffsets.java",
+      "source_commit": "ad919bf89163eb537b3852f278033d6db8bda2e7",
+      "source_path": "src/java.desktop/share/classes/sun/swing/list/M3PrefixRowOffsets.java",
+      "source_blob": "f85fe6236a32d1d2c694da73ab9f1cc0bcc8d5ca",
+      "source_sha256": "a202c36d1d3e939f0457e8e0ecedbb3e07891b15446be9a251bc7ce9faee331e",
+      "source_role": "COPY exact published first-party target source",
+      "target": "sun.swing.list.M3PrefixRowOffsets",
+      "target_path": "src/java.desktop/share/classes/sun/swing/list/M3PrefixRowOffsets.java",
+      "target_module": "java.desktop",
+      "target_base_commit": "9a164c31b38c7013c179a3ff38b0bb60c199c7fd",
+      "target_preimage_sha256": "ABSENT",
+      "target_postimage_sha256": "a202c36d1d3e939f0457e8e0ecedbb3e07891b15446be9a251bc7ce9faee331e",
+      "target_postimage_git_blob": "f85fe6236a32d1d2c694da73ab9f1cc0bcc8d5ca",
+      "target_rule": "Exact existing internal prefix-sum lane; preserve zero/negative/overflow handling and monotonicity refusal.",
+      "public_api": "Java SE JList/BasicListUI and existing public/protected owner descriptors unchanged; sun.swing helper types remain non-exported; m3.swing.viewport defaults to false.",
+      "status": "CURRENT_SOURCE_ADMITTED_REUSE_BOUNDED_EXECUTION_RECEIVING_PR_OPEN_DRAFT_NO_PHASE_PROMOTION",
+      "license": "GPL-2.0-only WITH Classpath-exception-2.0",
+      "copyright": "Existing per-file copyright retained; see SOURCE_RIGHTS.tsv",
+      "source_rights": "Published target-owned GPLv2 with Classpath exception source; retain exact header, root LICENSE and ADDITIONAL_LICENSE_INFO. Donor LICENSE_DECISIONS.tsv records leaf-3/fixed-cache authority; no separate leaf-4 rows are invented.",
+      "canonical_recipe": {
+        "name": "com.synexia.rewrite.M3SwingUiConvergence20261019",
+        "source_path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3SwingUiConvergence20261019.java",
+        "source_sha256": "03e17219365378a2f1773c36bccf52f54c49ca3e2a343a8cb137276532ee5f3e",
+        "manifest_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/m3-swing-ui-convergence-20261019/manifest.tsv",
+        "manifest_sha256": "8700ab0a685f1d8ac2890874d13a440461d1a496e92907759cc718a6dc7b6d16",
+        "canonical_repository": "hsoliwal/com.synexia",
+        "canonical_commit": "74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd",
+        "canonical_pr_url": "https://github.com/hsoliwal/com.synexia/pull/12528",
+        "publication_state": "PUBLISHED_CANONICAL_PR_OPEN_DRAFT",
+        "owner": "Existing M3GpuToolJoinRecipe / M3GpuToolJoinManifest",
+        "sdk": {
+          "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/successor-sdk-final-selection/receipt.json",
+          "sha256": "2b2e935ceb68b54d4d1a3d053533e1fec31b0e72c2ca1d481c3845e4733db82c",
+          "publication_state": "PUBLISHED_CANONICAL_PR_OPEN_DRAFT",
+          "canonical_commit": "74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd",
+          "state": "PASS_FINAL_SELECTED_MANIFEST_BOUNDED_PLAINTEXT",
+          "engine": "OpenRewrite 8.17.1 actual ScanningRecipe SDK",
+          "tests": 9,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "java_lst": "NOT_RUN",
+          "final_manifest_rule": "PASS for final view 21 targets / 8 changes with RowTree EXACT_KEEP, binding 7 targets / 3 changes, and Swing UI 12 targets / 12 changes. Requalify any later source or manifest change.",
+          "final_view_manifest_sha256": "eefba93f1322bf0470add185ef2a72904346b8bec45814c7a4d422e5773a0eb4",
+          "log_sha256": "a0d752f6748c8c4aa27cf564b18343951481d9e06a6c9bfc277509c5ccea55de",
+          "canonical_pr_url": "https://github.com/hsoliwal/com.synexia/pull/12528",
+          "canonical_url": "https://github.com/hsoliwal/com.synexia/blob/74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/successor-sdk-final-selection/receipt.json"
+        }
+      },
+      "verification": {
+        "source": "PASS exact published donor Git blob/raw SHA-256; two receiver preimages and ten absent proof/helper additions verified",
+        "canonical_kernel": "PASS 53640 checks / 4096 before-post subsets; 12 CREATED then 12 UNCHANGED for the complete runtime/proof packet",
+        "java21_headless": "PASS 28 JUnit checks; stock/receiver/default-unset/false/true public transcripts identical; exact donor differential 40 seeds x 300 steps per false/true with 1240 pixel comparisons each",
+        "api": "BasicListUI and M3FixedHeightLayoutCache javap -protected -s match receiver; BasicListUI matches stock Java21",
+        "jni": "Not applicable to these Java source changes; no native UI/device execution",
+        "resources": "Not measured; per-UI metadata and two initial int[8] lanes remain allocated even when the flag is off"
+      },
+      "pending_gates": [
+        "Full source-built and installed M3JDK21 image",
+        "Applicable jtreg and JCK",
+        "Android/iOS runtime, native surface, lifecycle, input, packaging and device/simulator execution",
+        "Matched workload, cold/warm CPU, allocation, retained-heap and native-memory acceptance"
+      ],
+      "receiving_sequence": {
+        "active_phase": "STRING",
+        "active_state": "QUALIFICATION_REQUIRED",
+        "phase_promotion": false,
+        "scope": "BOUNDED_OWNER_QUALIFICATION_ONLY",
+        "public_jdk_names_unchanged": true,
+        "canonical_payload_owner_unchanged": true
+      },
+      "receiving_pr_url": "https://github.com/hsoliwal/M3jdk21/pull/1525",
+      "evidence": [
+        {
+          "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/swing-ui/QUALIFICATION.json",
+          "sha256": "89caed5b70931312775d451f5f65225898d1a2cfa1d12152536f4636ff98bcbc",
+          "publication_state": "PUBLISHED_CANONICAL_PR_OPEN_DRAFT",
+          "canonical_commit": "74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd",
+          "canonical_pr_url": "https://github.com/hsoliwal/com.synexia/pull/12528",
+          "canonical_url": "https://github.com/hsoliwal/com.synexia/blob/74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/swing-ui/QUALIFICATION.json"
+        },
+        {
+          "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/swing-ui/QUALIFICATION.md",
+          "sha256": "133a02765dd8ccb7448fd1ced7bc3c2a0309881012857694937d435b5d7634cd",
+          "publication_state": "PUBLISHED_CANONICAL_PR_OPEN_DRAFT",
+          "canonical_commit": "74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd",
+          "canonical_pr_url": "https://github.com/hsoliwal/com.synexia/pull/12528",
+          "canonical_url": "https://github.com/hsoliwal/com.synexia/blob/74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/swing-ui/QUALIFICATION.md"
+        },
+        {
+          "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/delivery-metadata/current-swing-9a164c31/ADMISSION.json",
+          "canonical_commit": "74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd",
+          "canonical_pr_url": "https://github.com/hsoliwal/com.synexia/pull/12528",
+          "canonical_url": "https://github.com/hsoliwal/com.synexia/blob/74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/delivery-metadata/current-swing-9a164c31/ADMISSION.json",
+          "sha256": "af080f1d211aa7082f4efa6b3f7b138733e2f0bfae1064b0195d39199f025a93",
+          "git_blob_sha1": "5b3b05a8272fc80c7a2e49ddb8e2afe865b4fa36",
+          "publication_state": "PUBLISHED_CANONICAL_PR_OPEN_DRAFT"
+        },
+        {
+          "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/delivery-metadata/current-swing-9a164c31/MODULE_ADMISSION.json",
+          "canonical_commit": "74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd",
+          "canonical_pr_url": "https://github.com/hsoliwal/com.synexia/pull/12528",
+          "canonical_url": "https://github.com/hsoliwal/com.synexia/blob/74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/delivery-metadata/current-swing-9a164c31/MODULE_ADMISSION.json",
+          "sha256": "e996fa1ab799a1017b4175d14f13d1ab6e8e4b41eaf3b05a836b017d221a4208",
+          "git_blob_sha1": "8a3c49e57d69093b98ff6d6b63f87d37635ad361",
+          "publication_state": "PUBLISHED_CANONICAL_PR_OPEN_DRAFT"
+        }
+      ],
+      "receiving_document": "m3/docs/swing-viewport/convergence-20261019/RECEIVING.md",
+      "preserved_limits": [
+        "Opt-in unnotified value mutation can retain old row sizes; exact donor divergence test passes.",
+        "Donor partial-layout counter prints 1064 with flag false / 990 with true and is not valid activation evidence; exact measurement assertions supply leaf-4 evidence.",
+        "Fixed-cache differential preserves same-exception-class and rebuild protocol; D2 and D4 remain; no full post-exception identity claim."
+      ],
+      "proof_paths": [
+        "m3/ports/swing-viewport/jdk-reproducers/M3ListRowsTest.java",
+        "m3/ports/swing-viewport/jdk-reproducers/M3ListMeasureTest.java",
+        "m3/ports/swing-viewport/jdk-reproducers/M3JListViewportDifferential.java",
+        "m3/ports/swing-viewport/jdk-reproducers/M3FixedHeightSelectionResetTest.java",
+        "m3/ports/swing-viewport/jdk-reproducers/M3JListPublicObservation.java"
+      ],
+      "source_rights_crosswalk": "m3/docs/viewport-everywhere/convergence-20261019/SOURCE_RIGHTS.tsv",
+      "historical_qualification_parent": "c2a8733f6eebaadcc206a61d08906bfd8b6d60dc",
+      "current_source_admission": {
+        "state": "PASS_EXACT_SOURCE_IDENTITY_REUSE_EARLIER_EXECUTION",
+        "source_commit": "9a164c31b38c7013c179a3ff38b0bb60c199c7fd",
+        "historical_execution_parent": "c2a8733f6eebaadcc206a61d08906bfd8b6d60dc",
+        "runtime_or_sdk_rerun": "NOT_RUN_BY_METADATA_RECOVERY",
+        "admission": {
+          "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/delivery-metadata/current-swing-9a164c31/ADMISSION.json",
+          "canonical_commit": "74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd",
+          "canonical_pr_url": "https://github.com/hsoliwal/com.synexia/pull/12528",
+          "canonical_url": "https://github.com/hsoliwal/com.synexia/blob/74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/delivery-metadata/current-swing-9a164c31/ADMISSION.json",
+          "sha256": "af080f1d211aa7082f4efa6b3f7b138733e2f0bfae1064b0195d39199f025a93",
+          "git_blob_sha1": "5b3b05a8272fc80c7a2e49ddb8e2afe865b4fa36",
+          "publication_state": "PUBLISHED_CANONICAL_PR_OPEN_DRAFT"
+        },
+        "module_admission": {
+          "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/delivery-metadata/current-swing-9a164c31/MODULE_ADMISSION.json",
+          "canonical_commit": "74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd",
+          "canonical_pr_url": "https://github.com/hsoliwal/com.synexia/pull/12528",
+          "canonical_url": "https://github.com/hsoliwal/com.synexia/blob/74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/delivery-metadata/current-swing-9a164c31/MODULE_ADMISSION.json",
+          "sha256": "e996fa1ab799a1017b4175d14f13d1ab6e8e4b41eaf3b05a836b017d221a4208",
+          "git_blob_sha1": "8a3c49e57d69093b98ff6d6b63f87d37635ad361",
+          "publication_state": "PUBLISHED_CANONICAL_PR_OPEN_DRAFT"
+        },
+        "module_source_scope": {
+          "baseline_tracked_files": 73,
+          "earlier_executed_binding_only_candidate_files": 75,
+          "binding_proof_additions": 2,
+          "ui_jdk_reproducer_additions": 5,
+          "combined_receiving_source_module_files": 80,
+          "fresh_combined_80_file_maven_execution": "NOT_RUN",
+          "rule": "The existing 75-file execution receipt covers the binding-only candidate. The two combined recipes add seven module files to the 73-file baseline, yielding 80 tracked files. Separate java.desktop source qualification remains separately recorded."
+        },
+        "rule": "Unchanged recipe/source bytes reuse earlier execution; current collection receipts do not extend Swing platform qualification."
+      },
+      "receiving_metadata_pr_url": "https://github.com/hsoliwal/M3jdk21/pull/1525"
+    },
+    {
+      "source": "hsoliwal/M3JDK21 / src/java.desktop/share/classes/sun/swing/list/M3RowOffsets.java",
+      "source_commit": "ad919bf89163eb537b3852f278033d6db8bda2e7",
+      "source_path": "src/java.desktop/share/classes/sun/swing/list/M3RowOffsets.java",
+      "source_blob": "1917002b39c1027fad68d94db76a2bf2901ad292",
+      "source_sha256": "1d98b1d50993207f3508849f97d407ccba1c91158077c4939fd9844dd5c05d84",
+      "source_role": "COPY exact published first-party target source",
+      "target": "sun.swing.list.M3RowOffsets",
+      "target_path": "src/java.desktop/share/classes/sun/swing/list/M3RowOffsets.java",
+      "target_module": "java.desktop",
+      "target_base_commit": "9a164c31b38c7013c179a3ff38b0bb60c199c7fd",
+      "target_preimage_sha256": "ABSENT",
+      "target_postimage_sha256": "1d98b1d50993207f3508849f97d407ccba1c91158077c4939fd9844dd5c05d84",
+      "target_postimage_git_blob": "1917002b39c1027fad68d94db76a2bf2901ad292",
+      "target_rule": "Existing internal row-offset contract used by the accepted BasicListUI closure; no new module export.",
+      "public_api": "Java SE JList/BasicListUI and existing public/protected owner descriptors unchanged; sun.swing helper types remain non-exported; m3.swing.viewport defaults to false.",
+      "status": "CURRENT_SOURCE_ADMITTED_REUSE_BOUNDED_EXECUTION_RECEIVING_PR_OPEN_DRAFT_NO_PHASE_PROMOTION",
+      "license": "GPL-2.0-only WITH Classpath-exception-2.0",
+      "copyright": "Existing per-file copyright retained; see SOURCE_RIGHTS.tsv",
+      "source_rights": "Published target-owned GPLv2 with Classpath exception source; retain exact header, root LICENSE and ADDITIONAL_LICENSE_INFO. Donor LICENSE_DECISIONS.tsv records leaf-3/fixed-cache authority; no separate leaf-4 rows are invented.",
+      "canonical_recipe": {
+        "name": "com.synexia.rewrite.M3SwingUiConvergence20261019",
+        "source_path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3SwingUiConvergence20261019.java",
+        "source_sha256": "03e17219365378a2f1773c36bccf52f54c49ca3e2a343a8cb137276532ee5f3e",
+        "manifest_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/m3-swing-ui-convergence-20261019/manifest.tsv",
+        "manifest_sha256": "8700ab0a685f1d8ac2890874d13a440461d1a496e92907759cc718a6dc7b6d16",
+        "canonical_repository": "hsoliwal/com.synexia",
+        "canonical_commit": "74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd",
+        "canonical_pr_url": "https://github.com/hsoliwal/com.synexia/pull/12528",
+        "publication_state": "PUBLISHED_CANONICAL_PR_OPEN_DRAFT",
+        "owner": "Existing M3GpuToolJoinRecipe / M3GpuToolJoinManifest",
+        "sdk": {
+          "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/successor-sdk-final-selection/receipt.json",
+          "sha256": "2b2e935ceb68b54d4d1a3d053533e1fec31b0e72c2ca1d481c3845e4733db82c",
+          "publication_state": "PUBLISHED_CANONICAL_PR_OPEN_DRAFT",
+          "canonical_commit": "74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd",
+          "state": "PASS_FINAL_SELECTED_MANIFEST_BOUNDED_PLAINTEXT",
+          "engine": "OpenRewrite 8.17.1 actual ScanningRecipe SDK",
+          "tests": 9,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "java_lst": "NOT_RUN",
+          "final_manifest_rule": "PASS for final view 21 targets / 8 changes with RowTree EXACT_KEEP, binding 7 targets / 3 changes, and Swing UI 12 targets / 12 changes. Requalify any later source or manifest change.",
+          "final_view_manifest_sha256": "eefba93f1322bf0470add185ef2a72904346b8bec45814c7a4d422e5773a0eb4",
+          "log_sha256": "a0d752f6748c8c4aa27cf564b18343951481d9e06a6c9bfc277509c5ccea55de",
+          "canonical_pr_url": "https://github.com/hsoliwal/com.synexia/pull/12528",
+          "canonical_url": "https://github.com/hsoliwal/com.synexia/blob/74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/successor-sdk-final-selection/receipt.json"
+        }
+      },
+      "verification": {
+        "source": "PASS exact published donor Git blob/raw SHA-256; two receiver preimages and ten absent proof/helper additions verified",
+        "canonical_kernel": "PASS 53640 checks / 4096 before-post subsets; 12 CREATED then 12 UNCHANGED for the complete runtime/proof packet",
+        "java21_headless": "PASS 28 JUnit checks; stock/receiver/default-unset/false/true public transcripts identical; exact donor differential 40 seeds x 300 steps per false/true with 1240 pixel comparisons each",
+        "api": "BasicListUI and M3FixedHeightLayoutCache javap -protected -s match receiver; BasicListUI matches stock Java21",
+        "jni": "Not applicable to these Java source changes; no native UI/device execution",
+        "resources": "Not measured; per-UI metadata and two initial int[8] lanes remain allocated even when the flag is off"
+      },
+      "pending_gates": [
+        "Full source-built and installed M3JDK21 image",
+        "Applicable jtreg and JCK",
+        "Android/iOS runtime, native surface, lifecycle, input, packaging and device/simulator execution",
+        "Matched workload, cold/warm CPU, allocation, retained-heap and native-memory acceptance"
+      ],
+      "receiving_sequence": {
+        "active_phase": "STRING",
+        "active_state": "QUALIFICATION_REQUIRED",
+        "phase_promotion": false,
+        "scope": "BOUNDED_OWNER_QUALIFICATION_ONLY",
+        "public_jdk_names_unchanged": true,
+        "canonical_payload_owner_unchanged": true
+      },
+      "receiving_pr_url": "https://github.com/hsoliwal/M3jdk21/pull/1525",
+      "evidence": [
+        {
+          "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/swing-ui/QUALIFICATION.json",
+          "sha256": "89caed5b70931312775d451f5f65225898d1a2cfa1d12152536f4636ff98bcbc",
+          "publication_state": "PUBLISHED_CANONICAL_PR_OPEN_DRAFT",
+          "canonical_commit": "74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd",
+          "canonical_pr_url": "https://github.com/hsoliwal/com.synexia/pull/12528",
+          "canonical_url": "https://github.com/hsoliwal/com.synexia/blob/74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/swing-ui/QUALIFICATION.json"
+        },
+        {
+          "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/swing-ui/QUALIFICATION.md",
+          "sha256": "133a02765dd8ccb7448fd1ced7bc3c2a0309881012857694937d435b5d7634cd",
+          "publication_state": "PUBLISHED_CANONICAL_PR_OPEN_DRAFT",
+          "canonical_commit": "74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd",
+          "canonical_pr_url": "https://github.com/hsoliwal/com.synexia/pull/12528",
+          "canonical_url": "https://github.com/hsoliwal/com.synexia/blob/74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/swing-ui/QUALIFICATION.md"
+        },
+        {
+          "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/delivery-metadata/current-swing-9a164c31/ADMISSION.json",
+          "canonical_commit": "74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd",
+          "canonical_pr_url": "https://github.com/hsoliwal/com.synexia/pull/12528",
+          "canonical_url": "https://github.com/hsoliwal/com.synexia/blob/74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/delivery-metadata/current-swing-9a164c31/ADMISSION.json",
+          "sha256": "af080f1d211aa7082f4efa6b3f7b138733e2f0bfae1064b0195d39199f025a93",
+          "git_blob_sha1": "5b3b05a8272fc80c7a2e49ddb8e2afe865b4fa36",
+          "publication_state": "PUBLISHED_CANONICAL_PR_OPEN_DRAFT"
+        },
+        {
+          "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/delivery-metadata/current-swing-9a164c31/MODULE_ADMISSION.json",
+          "canonical_commit": "74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd",
+          "canonical_pr_url": "https://github.com/hsoliwal/com.synexia/pull/12528",
+          "canonical_url": "https://github.com/hsoliwal/com.synexia/blob/74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/delivery-metadata/current-swing-9a164c31/MODULE_ADMISSION.json",
+          "sha256": "e996fa1ab799a1017b4175d14f13d1ab6e8e4b41eaf3b05a836b017d221a4208",
+          "git_blob_sha1": "8a3c49e57d69093b98ff6d6b63f87d37635ad361",
+          "publication_state": "PUBLISHED_CANONICAL_PR_OPEN_DRAFT"
+        }
+      ],
+      "receiving_document": "m3/docs/swing-viewport/convergence-20261019/RECEIVING.md",
+      "preserved_limits": [
+        "Opt-in unnotified value mutation can retain old row sizes; exact donor divergence test passes.",
+        "Donor partial-layout counter prints 1064 with flag false / 990 with true and is not valid activation evidence; exact measurement assertions supply leaf-4 evidence.",
+        "Fixed-cache differential preserves same-exception-class and rebuild protocol; D2 and D4 remain; no full post-exception identity claim."
+      ],
+      "proof_paths": [
+        "m3/ports/swing-viewport/jdk-reproducers/M3ListRowsTest.java",
+        "m3/ports/swing-viewport/jdk-reproducers/M3ListMeasureTest.java",
+        "m3/ports/swing-viewport/jdk-reproducers/M3JListViewportDifferential.java",
+        "m3/ports/swing-viewport/jdk-reproducers/M3FixedHeightSelectionResetTest.java",
+        "m3/ports/swing-viewport/jdk-reproducers/M3JListPublicObservation.java"
+      ],
+      "source_rights_crosswalk": "m3/docs/viewport-everywhere/convergence-20261019/SOURCE_RIGHTS.tsv",
+      "historical_qualification_parent": "c2a8733f6eebaadcc206a61d08906bfd8b6d60dc",
+      "current_source_admission": {
+        "state": "PASS_EXACT_SOURCE_IDENTITY_REUSE_EARLIER_EXECUTION",
+        "source_commit": "9a164c31b38c7013c179a3ff38b0bb60c199c7fd",
+        "historical_execution_parent": "c2a8733f6eebaadcc206a61d08906bfd8b6d60dc",
+        "runtime_or_sdk_rerun": "NOT_RUN_BY_METADATA_RECOVERY",
+        "admission": {
+          "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/delivery-metadata/current-swing-9a164c31/ADMISSION.json",
+          "canonical_commit": "74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd",
+          "canonical_pr_url": "https://github.com/hsoliwal/com.synexia/pull/12528",
+          "canonical_url": "https://github.com/hsoliwal/com.synexia/blob/74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/delivery-metadata/current-swing-9a164c31/ADMISSION.json",
+          "sha256": "af080f1d211aa7082f4efa6b3f7b138733e2f0bfae1064b0195d39199f025a93",
+          "git_blob_sha1": "5b3b05a8272fc80c7a2e49ddb8e2afe865b4fa36",
+          "publication_state": "PUBLISHED_CANONICAL_PR_OPEN_DRAFT"
+        },
+        "module_admission": {
+          "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/delivery-metadata/current-swing-9a164c31/MODULE_ADMISSION.json",
+          "canonical_commit": "74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd",
+          "canonical_pr_url": "https://github.com/hsoliwal/com.synexia/pull/12528",
+          "canonical_url": "https://github.com/hsoliwal/com.synexia/blob/74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/delivery-metadata/current-swing-9a164c31/MODULE_ADMISSION.json",
+          "sha256": "e996fa1ab799a1017b4175d14f13d1ab6e8e4b41eaf3b05a836b017d221a4208",
+          "git_blob_sha1": "8a3c49e57d69093b98ff6d6b63f87d37635ad361",
+          "publication_state": "PUBLISHED_CANONICAL_PR_OPEN_DRAFT"
+        },
+        "module_source_scope": {
+          "baseline_tracked_files": 73,
+          "earlier_executed_binding_only_candidate_files": 75,
+          "binding_proof_additions": 2,
+          "ui_jdk_reproducer_additions": 5,
+          "combined_receiving_source_module_files": 80,
+          "fresh_combined_80_file_maven_execution": "NOT_RUN",
+          "rule": "The existing 75-file execution receipt covers the binding-only candidate. The two combined recipes add seven module files to the 73-file baseline, yielding 80 tracked files. Separate java.desktop source qualification remains separately recorded."
+        },
+        "rule": "Unchanged recipe/source bytes reuse earlier execution; current collection receipts do not extend Swing platform qualification."
+      },
+      "receiving_metadata_pr_url": "https://github.com/hsoliwal/M3jdk21/pull/1525"
+    },
+    {
+      "source": "hsoliwal/M3JDK21 / src/java.desktop/share/classes/sun/swing/list/M3RowPieces.java",
+      "source_commit": "ad919bf89163eb537b3852f278033d6db8bda2e7",
+      "source_path": "src/java.desktop/share/classes/sun/swing/list/M3RowPieces.java",
+      "source_blob": "e0d68463e10da47f6ab9ab88387e868973e3cf7e",
+      "source_sha256": "fda7a29d4be6c7f5198955d46c7d894d849568698c1d39694a8d4d09323cb28b",
+      "source_role": "COPY exact published first-party target source",
+      "target": "sun.swing.list.M3RowPieces",
+      "target_path": "src/java.desktop/share/classes/sun/swing/list/M3RowPieces.java",
+      "target_module": "java.desktop",
+      "target_base_commit": "9a164c31b38c7013c179a3ff38b0bb60c199c7fd",
+      "target_preimage_sha256": "ABSENT",
+      "target_postimage_sha256": "fda7a29d4be6c7f5198955d46c7d894d849568698c1d39694a8d4d09323cb28b",
+      "target_postimage_git_blob": "e0d68463e10da47f6ab9ab88387e868973e3cf7e",
+      "target_rule": "Existing private measurement edit-directory lanes and 1024-piece full-measure fallback; no alternate payload owner.",
+      "public_api": "Java SE JList/BasicListUI and existing public/protected owner descriptors unchanged; sun.swing helper types remain non-exported; m3.swing.viewport defaults to false.",
+      "status": "CURRENT_SOURCE_ADMITTED_REUSE_BOUNDED_EXECUTION_RECEIVING_PR_OPEN_DRAFT_NO_PHASE_PROMOTION",
+      "license": "GPL-2.0-only WITH Classpath-exception-2.0",
+      "copyright": "Existing per-file copyright retained; see SOURCE_RIGHTS.tsv",
+      "source_rights": "Published target-owned GPLv2 with Classpath exception source; retain exact header, root LICENSE and ADDITIONAL_LICENSE_INFO. Donor LICENSE_DECISIONS.tsv records leaf-3/fixed-cache authority; no separate leaf-4 rows are invented.",
+      "canonical_recipe": {
+        "name": "com.synexia.rewrite.M3SwingUiConvergence20261019",
+        "source_path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3SwingUiConvergence20261019.java",
+        "source_sha256": "03e17219365378a2f1773c36bccf52f54c49ca3e2a343a8cb137276532ee5f3e",
+        "manifest_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/m3-swing-ui-convergence-20261019/manifest.tsv",
+        "manifest_sha256": "8700ab0a685f1d8ac2890874d13a440461d1a496e92907759cc718a6dc7b6d16",
+        "canonical_repository": "hsoliwal/com.synexia",
+        "canonical_commit": "74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd",
+        "canonical_pr_url": "https://github.com/hsoliwal/com.synexia/pull/12528",
+        "publication_state": "PUBLISHED_CANONICAL_PR_OPEN_DRAFT",
+        "owner": "Existing M3GpuToolJoinRecipe / M3GpuToolJoinManifest",
+        "sdk": {
+          "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/successor-sdk-final-selection/receipt.json",
+          "sha256": "2b2e935ceb68b54d4d1a3d053533e1fec31b0e72c2ca1d481c3845e4733db82c",
+          "publication_state": "PUBLISHED_CANONICAL_PR_OPEN_DRAFT",
+          "canonical_commit": "74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd",
+          "state": "PASS_FINAL_SELECTED_MANIFEST_BOUNDED_PLAINTEXT",
+          "engine": "OpenRewrite 8.17.1 actual ScanningRecipe SDK",
+          "tests": 9,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "java_lst": "NOT_RUN",
+          "final_manifest_rule": "PASS for final view 21 targets / 8 changes with RowTree EXACT_KEEP, binding 7 targets / 3 changes, and Swing UI 12 targets / 12 changes. Requalify any later source or manifest change.",
+          "final_view_manifest_sha256": "eefba93f1322bf0470add185ef2a72904346b8bec45814c7a4d422e5773a0eb4",
+          "log_sha256": "a0d752f6748c8c4aa27cf564b18343951481d9e06a6c9bfc277509c5ccea55de",
+          "canonical_pr_url": "https://github.com/hsoliwal/com.synexia/pull/12528",
+          "canonical_url": "https://github.com/hsoliwal/com.synexia/blob/74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/successor-sdk-final-selection/receipt.json"
+        }
+      },
+      "verification": {
+        "source": "PASS exact published donor Git blob/raw SHA-256; two receiver preimages and ten absent proof/helper additions verified",
+        "canonical_kernel": "PASS 53640 checks / 4096 before-post subsets; 12 CREATED then 12 UNCHANGED for the complete runtime/proof packet",
+        "java21_headless": "PASS 28 JUnit checks; stock/receiver/default-unset/false/true public transcripts identical; exact donor differential 40 seeds x 300 steps per false/true with 1240 pixel comparisons each",
+        "api": "BasicListUI and M3FixedHeightLayoutCache javap -protected -s match receiver; BasicListUI matches stock Java21",
+        "jni": "Not applicable to these Java source changes; no native UI/device execution",
+        "resources": "Not measured; per-UI metadata and two initial int[8] lanes remain allocated even when the flag is off"
+      },
+      "pending_gates": [
+        "Full source-built and installed M3JDK21 image",
+        "Applicable jtreg and JCK",
+        "Android/iOS runtime, native surface, lifecycle, input, packaging and device/simulator execution",
+        "Matched workload, cold/warm CPU, allocation, retained-heap and native-memory acceptance"
+      ],
+      "receiving_sequence": {
+        "active_phase": "STRING",
+        "active_state": "QUALIFICATION_REQUIRED",
+        "phase_promotion": false,
+        "scope": "BOUNDED_OWNER_QUALIFICATION_ONLY",
+        "public_jdk_names_unchanged": true,
+        "canonical_payload_owner_unchanged": true
+      },
+      "receiving_pr_url": "https://github.com/hsoliwal/M3jdk21/pull/1525",
+      "evidence": [
+        {
+          "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/swing-ui/QUALIFICATION.json",
+          "sha256": "89caed5b70931312775d451f5f65225898d1a2cfa1d12152536f4636ff98bcbc",
+          "publication_state": "PUBLISHED_CANONICAL_PR_OPEN_DRAFT",
+          "canonical_commit": "74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd",
+          "canonical_pr_url": "https://github.com/hsoliwal/com.synexia/pull/12528",
+          "canonical_url": "https://github.com/hsoliwal/com.synexia/blob/74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/swing-ui/QUALIFICATION.json"
+        },
+        {
+          "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/swing-ui/QUALIFICATION.md",
+          "sha256": "133a02765dd8ccb7448fd1ced7bc3c2a0309881012857694937d435b5d7634cd",
+          "publication_state": "PUBLISHED_CANONICAL_PR_OPEN_DRAFT",
+          "canonical_commit": "74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd",
+          "canonical_pr_url": "https://github.com/hsoliwal/com.synexia/pull/12528",
+          "canonical_url": "https://github.com/hsoliwal/com.synexia/blob/74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/swing-ui/QUALIFICATION.md"
+        },
+        {
+          "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/delivery-metadata/current-swing-9a164c31/ADMISSION.json",
+          "canonical_commit": "74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd",
+          "canonical_pr_url": "https://github.com/hsoliwal/com.synexia/pull/12528",
+          "canonical_url": "https://github.com/hsoliwal/com.synexia/blob/74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/delivery-metadata/current-swing-9a164c31/ADMISSION.json",
+          "sha256": "af080f1d211aa7082f4efa6b3f7b138733e2f0bfae1064b0195d39199f025a93",
+          "git_blob_sha1": "5b3b05a8272fc80c7a2e49ddb8e2afe865b4fa36",
+          "publication_state": "PUBLISHED_CANONICAL_PR_OPEN_DRAFT"
+        },
+        {
+          "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/delivery-metadata/current-swing-9a164c31/MODULE_ADMISSION.json",
+          "canonical_commit": "74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd",
+          "canonical_pr_url": "https://github.com/hsoliwal/com.synexia/pull/12528",
+          "canonical_url": "https://github.com/hsoliwal/com.synexia/blob/74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/delivery-metadata/current-swing-9a164c31/MODULE_ADMISSION.json",
+          "sha256": "e996fa1ab799a1017b4175d14f13d1ab6e8e4b41eaf3b05a836b017d221a4208",
+          "git_blob_sha1": "8a3c49e57d69093b98ff6d6b63f87d37635ad361",
+          "publication_state": "PUBLISHED_CANONICAL_PR_OPEN_DRAFT"
+        }
+      ],
+      "receiving_document": "m3/docs/swing-viewport/convergence-20261019/RECEIVING.md",
+      "preserved_limits": [
+        "Opt-in unnotified value mutation can retain old row sizes; exact donor divergence test passes.",
+        "Donor partial-layout counter prints 1064 with flag false / 990 with true and is not valid activation evidence; exact measurement assertions supply leaf-4 evidence.",
+        "Fixed-cache differential preserves same-exception-class and rebuild protocol; D2 and D4 remain; no full post-exception identity claim."
+      ],
+      "proof_paths": [
+        "m3/ports/swing-viewport/jdk-reproducers/M3ListRowsTest.java",
+        "m3/ports/swing-viewport/jdk-reproducers/M3ListMeasureTest.java",
+        "m3/ports/swing-viewport/jdk-reproducers/M3JListViewportDifferential.java",
+        "m3/ports/swing-viewport/jdk-reproducers/M3FixedHeightSelectionResetTest.java",
+        "m3/ports/swing-viewport/jdk-reproducers/M3JListPublicObservation.java"
+      ],
+      "source_rights_crosswalk": "m3/docs/viewport-everywhere/convergence-20261019/SOURCE_RIGHTS.tsv",
+      "historical_qualification_parent": "c2a8733f6eebaadcc206a61d08906bfd8b6d60dc",
+      "current_source_admission": {
+        "state": "PASS_EXACT_SOURCE_IDENTITY_REUSE_EARLIER_EXECUTION",
+        "source_commit": "9a164c31b38c7013c179a3ff38b0bb60c199c7fd",
+        "historical_execution_parent": "c2a8733f6eebaadcc206a61d08906bfd8b6d60dc",
+        "runtime_or_sdk_rerun": "NOT_RUN_BY_METADATA_RECOVERY",
+        "admission": {
+          "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/delivery-metadata/current-swing-9a164c31/ADMISSION.json",
+          "canonical_commit": "74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd",
+          "canonical_pr_url": "https://github.com/hsoliwal/com.synexia/pull/12528",
+          "canonical_url": "https://github.com/hsoliwal/com.synexia/blob/74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/delivery-metadata/current-swing-9a164c31/ADMISSION.json",
+          "sha256": "af080f1d211aa7082f4efa6b3f7b138733e2f0bfae1064b0195d39199f025a93",
+          "git_blob_sha1": "5b3b05a8272fc80c7a2e49ddb8e2afe865b4fa36",
+          "publication_state": "PUBLISHED_CANONICAL_PR_OPEN_DRAFT"
+        },
+        "module_admission": {
+          "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/delivery-metadata/current-swing-9a164c31/MODULE_ADMISSION.json",
+          "canonical_commit": "74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd",
+          "canonical_pr_url": "https://github.com/hsoliwal/com.synexia/pull/12528",
+          "canonical_url": "https://github.com/hsoliwal/com.synexia/blob/74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/delivery-metadata/current-swing-9a164c31/MODULE_ADMISSION.json",
+          "sha256": "e996fa1ab799a1017b4175d14f13d1ab6e8e4b41eaf3b05a836b017d221a4208",
+          "git_blob_sha1": "8a3c49e57d69093b98ff6d6b63f87d37635ad361",
+          "publication_state": "PUBLISHED_CANONICAL_PR_OPEN_DRAFT"
+        },
+        "module_source_scope": {
+          "baseline_tracked_files": 73,
+          "earlier_executed_binding_only_candidate_files": 75,
+          "binding_proof_additions": 2,
+          "ui_jdk_reproducer_additions": 5,
+          "combined_receiving_source_module_files": 80,
+          "fresh_combined_80_file_maven_execution": "NOT_RUN",
+          "rule": "The existing 75-file execution receipt covers the binding-only candidate. The two combined recipes add seven module files to the 73-file baseline, yielding 80 tracked files. Separate java.desktop source qualification remains separately recorded."
+        },
+        "rule": "Unchanged recipe/source bytes reuse earlier execution; current collection receipts do not extend Swing platform qualification."
+      },
+      "receiving_metadata_pr_url": "https://github.com/hsoliwal/M3jdk21/pull/1525"
+    },
+    {
+      "source": "hsoliwal/M3JDK21 / src/java.desktop/share/classes/sun/swing/tree/M3FixedHeightLayoutCache.java",
+      "source_commit": "ad919bf89163eb537b3852f278033d6db8bda2e7",
+      "source_path": "src/java.desktop/share/classes/sun/swing/tree/M3FixedHeightLayoutCache.java",
+      "source_blob": "5395b63d8f810ab86544882c60efbfd6e4d7461b",
+      "source_sha256": "54419a7d6d075aeabf81b0c28e93140118c3300b762d6391f1e023c729cb1eab",
+      "source_role": "COPY exact published first-party target source",
+      "target": "sun.swing.tree.M3FixedHeightLayoutCache",
+      "target_path": "src/java.desktop/share/classes/sun/swing/tree/M3FixedHeightLayoutCache.java",
+      "target_module": "java.desktop",
+      "target_base_commit": "9a164c31b38c7013c179a3ff38b0bb60c199c7fd",
+      "target_preimage_sha256": "8a070dc0a1df946746b9a5563b0d7bd1b2b82a2e3f46bb7a9d7ae28a6d3f6205",
+      "target_postimage_sha256": "54419a7d6d075aeabf81b0c28e93140118c3300b762d6391f1e023c729cb1eab",
+      "target_postimage_git_blob": "5395b63d8f810ab86544882c60efbfd6e4d7461b",
+      "target_rule": "Receive only two private resetRowSelection atoms: structure re-expansion even if the node became a leaf, and collapse with zero removed rows. Preserve D2/D4 frontiers.",
+      "public_api": "Java SE JList/BasicListUI and existing public/protected owner descriptors unchanged; sun.swing helper types remain non-exported; m3.swing.viewport defaults to false.",
+      "status": "CURRENT_SOURCE_ADMITTED_REUSE_BOUNDED_EXECUTION_RECEIVING_PR_OPEN_DRAFT_NO_PHASE_PROMOTION",
+      "license": "GPL-2.0-only WITH Classpath-exception-2.0",
+      "copyright": "Existing per-file copyright retained; see SOURCE_RIGHTS.tsv",
+      "source_rights": "Published target-owned GPLv2 with Classpath exception source; retain exact header, root LICENSE and ADDITIONAL_LICENSE_INFO. Donor LICENSE_DECISIONS.tsv records leaf-3/fixed-cache authority; no separate leaf-4 rows are invented.",
+      "canonical_recipe": {
+        "name": "com.synexia.rewrite.M3SwingUiConvergence20261019",
+        "source_path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3SwingUiConvergence20261019.java",
+        "source_sha256": "03e17219365378a2f1773c36bccf52f54c49ca3e2a343a8cb137276532ee5f3e",
+        "manifest_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/m3-swing-ui-convergence-20261019/manifest.tsv",
+        "manifest_sha256": "8700ab0a685f1d8ac2890874d13a440461d1a496e92907759cc718a6dc7b6d16",
+        "canonical_repository": "hsoliwal/com.synexia",
+        "canonical_commit": "74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd",
+        "canonical_pr_url": "https://github.com/hsoliwal/com.synexia/pull/12528",
+        "publication_state": "PUBLISHED_CANONICAL_PR_OPEN_DRAFT",
+        "owner": "Existing M3GpuToolJoinRecipe / M3GpuToolJoinManifest",
+        "sdk": {
+          "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/successor-sdk-final-selection/receipt.json",
+          "sha256": "2b2e935ceb68b54d4d1a3d053533e1fec31b0e72c2ca1d481c3845e4733db82c",
+          "publication_state": "PUBLISHED_CANONICAL_PR_OPEN_DRAFT",
+          "canonical_commit": "74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd",
+          "state": "PASS_FINAL_SELECTED_MANIFEST_BOUNDED_PLAINTEXT",
+          "engine": "OpenRewrite 8.17.1 actual ScanningRecipe SDK",
+          "tests": 9,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "java_lst": "NOT_RUN",
+          "final_manifest_rule": "PASS for final view 21 targets / 8 changes with RowTree EXACT_KEEP, binding 7 targets / 3 changes, and Swing UI 12 targets / 12 changes. Requalify any later source or manifest change.",
+          "final_view_manifest_sha256": "eefba93f1322bf0470add185ef2a72904346b8bec45814c7a4d422e5773a0eb4",
+          "log_sha256": "a0d752f6748c8c4aa27cf564b18343951481d9e06a6c9bfc277509c5ccea55de",
+          "canonical_pr_url": "https://github.com/hsoliwal/com.synexia/pull/12528",
+          "canonical_url": "https://github.com/hsoliwal/com.synexia/blob/74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/successor-sdk-final-selection/receipt.json"
+        }
+      },
+      "verification": {
+        "source": "PASS exact published donor Git blob/raw SHA-256; two receiver preimages and ten absent proof/helper additions verified",
+        "canonical_kernel": "PASS 53640 checks / 4096 before-post subsets; 12 CREATED then 12 UNCHANGED for the complete runtime/proof packet",
+        "java21_headless": "PASS 28 JUnit checks; stock/receiver/default-unset/false/true public transcripts identical; exact donor differential 40 seeds x 300 steps per false/true with 1240 pixel comparisons each",
+        "api": "BasicListUI and M3FixedHeightLayoutCache javap -protected -s match receiver; BasicListUI matches stock Java21",
+        "jni": "Not applicable to these Java source changes; no native UI/device execution",
+        "resources": "Not measured; per-UI metadata and two initial int[8] lanes remain allocated even when the flag is off"
+      },
+      "pending_gates": [
+        "Full source-built and installed M3JDK21 image",
+        "Applicable jtreg and JCK",
+        "Android/iOS runtime, native surface, lifecycle, input, packaging and device/simulator execution",
+        "Matched workload, cold/warm CPU, allocation, retained-heap and native-memory acceptance"
+      ],
+      "receiving_sequence": {
+        "active_phase": "STRING",
+        "active_state": "QUALIFICATION_REQUIRED",
+        "phase_promotion": false,
+        "scope": "BOUNDED_OWNER_QUALIFICATION_ONLY",
+        "public_jdk_names_unchanged": true,
+        "canonical_payload_owner_unchanged": true
+      },
+      "receiving_pr_url": "https://github.com/hsoliwal/M3jdk21/pull/1525",
+      "evidence": [
+        {
+          "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/swing-ui/QUALIFICATION.json",
+          "sha256": "89caed5b70931312775d451f5f65225898d1a2cfa1d12152536f4636ff98bcbc",
+          "publication_state": "PUBLISHED_CANONICAL_PR_OPEN_DRAFT",
+          "canonical_commit": "74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd",
+          "canonical_pr_url": "https://github.com/hsoliwal/com.synexia/pull/12528",
+          "canonical_url": "https://github.com/hsoliwal/com.synexia/blob/74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/swing-ui/QUALIFICATION.json"
+        },
+        {
+          "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/swing-ui/QUALIFICATION.md",
+          "sha256": "133a02765dd8ccb7448fd1ced7bc3c2a0309881012857694937d435b5d7634cd",
+          "publication_state": "PUBLISHED_CANONICAL_PR_OPEN_DRAFT",
+          "canonical_commit": "74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd",
+          "canonical_pr_url": "https://github.com/hsoliwal/com.synexia/pull/12528",
+          "canonical_url": "https://github.com/hsoliwal/com.synexia/blob/74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/swing-ui/QUALIFICATION.md"
+        },
+        {
+          "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/delivery-metadata/current-swing-9a164c31/ADMISSION.json",
+          "canonical_commit": "74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd",
+          "canonical_pr_url": "https://github.com/hsoliwal/com.synexia/pull/12528",
+          "canonical_url": "https://github.com/hsoliwal/com.synexia/blob/74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/delivery-metadata/current-swing-9a164c31/ADMISSION.json",
+          "sha256": "af080f1d211aa7082f4efa6b3f7b138733e2f0bfae1064b0195d39199f025a93",
+          "git_blob_sha1": "5b3b05a8272fc80c7a2e49ddb8e2afe865b4fa36",
+          "publication_state": "PUBLISHED_CANONICAL_PR_OPEN_DRAFT"
+        },
+        {
+          "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/delivery-metadata/current-swing-9a164c31/MODULE_ADMISSION.json",
+          "canonical_commit": "74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd",
+          "canonical_pr_url": "https://github.com/hsoliwal/com.synexia/pull/12528",
+          "canonical_url": "https://github.com/hsoliwal/com.synexia/blob/74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/delivery-metadata/current-swing-9a164c31/MODULE_ADMISSION.json",
+          "sha256": "e996fa1ab799a1017b4175d14f13d1ab6e8e4b41eaf3b05a836b017d221a4208",
+          "git_blob_sha1": "8a3c49e57d69093b98ff6d6b63f87d37635ad361",
+          "publication_state": "PUBLISHED_CANONICAL_PR_OPEN_DRAFT"
+        }
+      ],
+      "receiving_document": "m3/docs/swing-viewport/convergence-20261019/RECEIVING.md",
+      "preserved_limits": [
+        "Opt-in unnotified value mutation can retain old row sizes; exact donor divergence test passes.",
+        "Donor partial-layout counter prints 1064 with flag false / 990 with true and is not valid activation evidence; exact measurement assertions supply leaf-4 evidence.",
+        "Fixed-cache differential preserves same-exception-class and rebuild protocol; D2 and D4 remain; no full post-exception identity claim."
+      ],
+      "proof_paths": [
+        "m3/ports/swing-viewport/jdk-reproducers/M3ListRowsTest.java",
+        "m3/ports/swing-viewport/jdk-reproducers/M3ListMeasureTest.java",
+        "m3/ports/swing-viewport/jdk-reproducers/M3JListViewportDifferential.java",
+        "m3/ports/swing-viewport/jdk-reproducers/M3FixedHeightSelectionResetTest.java",
+        "m3/ports/swing-viewport/jdk-reproducers/M3JListPublicObservation.java"
+      ],
+      "source_rights_crosswalk": "m3/docs/viewport-everywhere/convergence-20261019/SOURCE_RIGHTS.tsv",
+      "historical_qualification_parent": "c2a8733f6eebaadcc206a61d08906bfd8b6d60dc",
+      "current_source_admission": {
+        "state": "PASS_EXACT_SOURCE_IDENTITY_REUSE_EARLIER_EXECUTION",
+        "source_commit": "9a164c31b38c7013c179a3ff38b0bb60c199c7fd",
+        "historical_execution_parent": "c2a8733f6eebaadcc206a61d08906bfd8b6d60dc",
+        "runtime_or_sdk_rerun": "NOT_RUN_BY_METADATA_RECOVERY",
+        "admission": {
+          "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/delivery-metadata/current-swing-9a164c31/ADMISSION.json",
+          "canonical_commit": "74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd",
+          "canonical_pr_url": "https://github.com/hsoliwal/com.synexia/pull/12528",
+          "canonical_url": "https://github.com/hsoliwal/com.synexia/blob/74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/delivery-metadata/current-swing-9a164c31/ADMISSION.json",
+          "sha256": "af080f1d211aa7082f4efa6b3f7b138733e2f0bfae1064b0195d39199f025a93",
+          "git_blob_sha1": "5b3b05a8272fc80c7a2e49ddb8e2afe865b4fa36",
+          "publication_state": "PUBLISHED_CANONICAL_PR_OPEN_DRAFT"
+        },
+        "module_admission": {
+          "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/delivery-metadata/current-swing-9a164c31/MODULE_ADMISSION.json",
+          "canonical_commit": "74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd",
+          "canonical_pr_url": "https://github.com/hsoliwal/com.synexia/pull/12528",
+          "canonical_url": "https://github.com/hsoliwal/com.synexia/blob/74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/delivery-metadata/current-swing-9a164c31/MODULE_ADMISSION.json",
+          "sha256": "e996fa1ab799a1017b4175d14f13d1ab6e8e4b41eaf3b05a836b017d221a4208",
+          "git_blob_sha1": "8a3c49e57d69093b98ff6d6b63f87d37635ad361",
+          "publication_state": "PUBLISHED_CANONICAL_PR_OPEN_DRAFT"
+        },
+        "module_source_scope": {
+          "baseline_tracked_files": 73,
+          "earlier_executed_binding_only_candidate_files": 75,
+          "binding_proof_additions": 2,
+          "ui_jdk_reproducer_additions": 5,
+          "combined_receiving_source_module_files": 80,
+          "fresh_combined_80_file_maven_execution": "NOT_RUN",
+          "rule": "The existing 75-file execution receipt covers the binding-only candidate. The two combined recipes add seven module files to the 73-file baseline, yielding 80 tracked files. Separate java.desktop source qualification remains separately recorded."
+        },
+        "rule": "Unchanged recipe/source bytes reuse earlier execution; current collection receipts do not extend Swing platform qualification."
+      },
+      "receiving_metadata_pr_url": "https://github.com/hsoliwal/M3jdk21/pull/1525"
     }
   ],
   "imported_donor_sources": [],

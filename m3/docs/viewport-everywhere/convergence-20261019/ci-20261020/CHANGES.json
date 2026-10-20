@@ -1,0 +1,140 @@
+{
+  "schema": "M3_RECEIVING_CI_FOLLOWUP_V1",
+  "source_head": "066b7a15c29388f3444ab3cf0550ecf1df698c6d",
+  "source_pr": "https://github.com/hsoliwal/M3jdk21/pull/1522",
+  "canonical_runtime_recipe_source_pin": "74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd",
+  "canonical_runtime_manifest_sha256": "5bb24c679cea5b4d6daddd870323401466419f90ad105a845efe94352e708819",
+  "scope": "Four target-specific CI/dependency-verification files; Java/JNI production, test bodies, POMs and canonical runtime recipes are unchanged.",
+  "runtime_qualification_epoch": "Earlier complete 657-file module/477-test receipts stay bound to their original source inventory. The full CI qualifier file changes here; the 268 production Java, 264 test Java, production C and guarded runtime owners remain exact.",
+  "changes": [
+    {
+      "path": "m3/collections/qualification/full-java-jni-20261018/verify.py",
+      "before_sha256": "f6a76836d96bc6d41033ce94b0aa760fd5f68ebcb903396bb5f6eb1618d0931a",
+      "after_sha256": "2ad6ff2d74671a9888c64c94e998eaf979c9ba49cdea85fd24a841f661b84aff",
+      "before_git_blob": "cf5e385420cae668fa0e68f769545f7ca6b16e03",
+      "after_git_blob": "f08a7b3f2976fb7d234fd27f625d6766e1e9a9b1",
+      "before_bytes": 11623,
+      "after_bytes": 11673,
+      "license": "Apache-2.0 integration code",
+      "production_java_jni_or_junit_test_body_changed": false,
+      "mode": "100644"
+    },
+    {
+      "path": ".github/workflows/m3-collections.yml",
+      "before_sha256": "ff90dcce42c80cc940878c8c5dcde0a14a8def69d08dbc7aadb174b9ad2bb649",
+      "after_sha256": "8efc148837d892ccbc146da1bbc5ab34542051986da08b28d6c8695170f4740e",
+      "before_git_blob": "7bcc8d43df65cc5b62638bba45514bb7bf469dc1",
+      "after_git_blob": "5466943d27df5607a483878a7d17e3eedd71f8a6",
+      "before_bytes": 7464,
+      "after_bytes": 7596,
+      "license": "Apache-2.0 integration code",
+      "production_java_jni_or_junit_test_body_changed": false,
+      "mode": "100644"
+    },
+    {
+      "path": "m3/vendor/third_party/junit-platform-launcher-1.10.2/verify_source.py",
+      "before_sha256": "7ecd6418dcd4097ca23b3382c4d87d18ed2a02bc8df2a503421c23793fcfd10b",
+      "after_sha256": "62ee079c1c692c657d3ff9dd30120d91702fd93c9b2b6203536865d56bae9d9d",
+      "before_git_blob": "5057ea0df282f90b97114725128c2964e62647f2",
+      "after_git_blob": "f880435ace3c6caa6ce6ba43d1e794b45969a183",
+      "before_bytes": 1838,
+      "after_bytes": 2100,
+      "license": "Apache-2.0 integration code",
+      "production_java_jni_or_junit_test_body_changed": false,
+      "mode": "100644"
+    },
+    {
+      "path": ".github/workflows/m3-physical-state-superset-20261019.yml",
+      "mode": "100644",
+      "before_git_blob": "ee83df7c18ef17fd87dfb2fda80eb7c309e93325",
+      "before_sha256": "82c67c9c64d80a7b79d70a3c4a502f1d1a727923da8ab84152c4bf0098531538",
+      "after_git_blob": "e5e410cf86efe51c638e3d53df50a61d5f61d80e",
+      "after_sha256": "f780dd319e1d7f666473433caa1c2a4426f3cee549b7c95a5c7f25104393f0f5",
+      "source_epoch": "066b7a15c29388f3444ab3cf0550ecf1df698c6d"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "m3/docs/viewport-everywhere/convergence-20261019/ci-20261020/LAUNCHER_REPAIR.json",
+      "original_local_path": "task-work/junit-launcher-repair/REPAIR_RECEIPT.json",
+      "sha256": "a51418f0d5bff02573f540f0689e20c2d1da9c7f525250abc30d758a35e7ca19",
+      "git_blob_sha1": "e010df50320e7017af39b71ecaea716c3f975bce",
+      "bytes": 5488
+    },
+    {
+      "path": "m3/docs/viewport-everywhere/convergence-20261019/ci-20261020/LAUNCHER_REPORT.md",
+      "original_local_path": "task-work/junit-launcher-repair/REPORT.md",
+      "sha256": "f51be5cee6e5472612566a866b5e96d6ff2df77f496b9ea889557b5302d2a753",
+      "git_blob_sha1": "f227cae8591dfead8ed3219c5235c8d2462b249e",
+      "bytes": 5601
+    },
+    {
+      "path": "m3/docs/viewport-everywhere/convergence-20261019/ci-20261020/PHYSICAL_SOURCE_PIN.json",
+      "original_local_path": "task-work/m3-collections-readback/SOURCE_PIN_REPAIR.json",
+      "sha256": "0b7db2e9c43ed432d059fe1960e0411d55785aa391fa18291794b0ed1e9707ce",
+      "git_blob_sha1": "984cdd9248ea2bcaeceec6bcfb5c8c31b1544963",
+      "bytes": 5212
+    },
+    {
+      "path": "m3/docs/viewport-everywhere/convergence-20261019/ci-20261020/INDEPENDENT_REVIEW.json",
+      "original_local_path": "task-work/m3-collections-readback/LAUNCHER_REVIEW.json",
+      "sha256": "d4cfac08ca0d803485b89e3853914b0cab301d67c41c4c4f3f700973d3278167",
+      "git_blob_sha1": "5655f816f3118cb06377e8e5cfe291f45e1fc4fc",
+      "bytes": 2696
+    },
+    {
+      "path": "m3/docs/viewport-everywhere/convergence-20261019/ci-20261020/QUALIFIED_SOURCE_READBACK.json",
+      "original_local_path": "task-work/m3-collections-readback/RECEIPT.json",
+      "sha256": "c310614e296e1f203cb8fe47351da57ec81e2bf7be220900c71dfd20d749cb91",
+      "git_blob_sha1": "930c9b7065d4fef51eed530e6b07a73a91d3135e",
+      "bytes": 98095
+    },
+    {
+      "path": "m3/docs/viewport-everywhere/convergence-20261019/ci-20261020/PREVIOUS_CI_READBACK.json",
+      "original_local_path": "task-work/m3-collections-readback/CI_READBACK.json",
+      "sha256": "e805f2d10409188d6bf73f3ff0834e90ebd3adc99912846f0b8018ba5dba9c30",
+      "git_blob_sha1": "88d3c3b917bfcf3f3f37f3beddbbb4ff3406b853",
+      "bytes": 44568
+    },
+    {
+      "path": "m3/docs/viewport-everywhere/convergence-20261019/ci-20261020/full-collection-failure.log",
+      "original_local_path": "task-work/m3-collections-readback/full_logs.log",
+      "sha256": "07da40b240af5d40d9905bb07b195c51128f22b9ddd0eb7554d526b0f33649e8",
+      "git_blob_sha1": "8f4f085fd8091e1b86edeb3c5dd3ce83db6b0b85",
+      "bytes": 137182
+    },
+    {
+      "path": "m3/docs/viewport-everywhere/convergence-20261019/ci-20261020/physical-pin-failure.log",
+      "original_local_path": "task-work/m3-collections-readback/current_logs.log",
+      "sha256": "58669ff99e3dde048f3302bfeca13a819bc63c56db6489b82533856b3da9da76",
+      "git_blob_sha1": "0feae0da13c096042859c9e9b8b73949272d21e0",
+      "bytes": 22620
+    },
+    {
+      "path": "m3/docs/viewport-everywhere/convergence-20261019/ci-20261020/launcher-source-before.stderr",
+      "original_local_path": "task-work/junit-launcher-repair/validation/baseline.stderr",
+      "sha256": "7b484b833c2c3024130d695ec334be2d057c9da9960b5e1ed226d06ce67660ad",
+      "git_blob_sha1": "9edb7a87e2fc18adaa623d24a085d269501f85c0",
+      "bytes": 1183
+    },
+    {
+      "path": "m3/docs/viewport-everywhere/convergence-20261019/ci-20261020/launcher-source-after.stdout",
+      "original_local_path": "task-work/junit-launcher-repair/validation/candidate.stdout",
+      "sha256": "a4bed614cd3acdc03b916faf0127a87a4e0333afba16e1eb690d6cc555ba172b",
+      "git_blob_sha1": "18c02b609124b720f94707a9d8af94d098957f0e",
+      "bytes": 219
+    }
+  ],
+  "validation": {
+    "launcher_source_verifier_baseline_failure": true,
+    "launcher_source_verifier_candidate_pass": true,
+    "launcher_sealed_files": 88,
+    "launcher_production_java": 80,
+    "source_dependency_order_checked": true,
+    "independent_review": "PASS",
+    "all_six_physical_source_pins_match_receiver": true,
+    "java21_maven_junit_jni_execution_of_ci_followup": "PENDING_RECEIVING_WORKFLOW"
+  },
+  "historical_receipts_mutated": false,
+  "phase_promotion": false
+}
