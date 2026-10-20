@@ -7,6 +7,7 @@ package com.m3.viewport.awt;
 import java.awt.AWTEventMulticaster;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.EventQueue;
 import java.awt.ItemSelectable;
 import java.awt.List;
 import java.awt.Panel;
@@ -19,6 +20,7 @@ import java.util.AbstractList;
 import java.util.Arrays;
 import java.util.Objects;
 
+import com.m3.collections.M3BitMask;
 import com.m3.collections.M3RangeSet;
 import com.m3.collections.M3WindowPlan;
 import com.m3.collections.M3WindowView;
@@ -60,6 +62,13 @@ public final class M3AwtViewportList extends Panel implements ItemSelectable {
 	private transient ItemListener itemListener;
 	private transient ActionListener actionListener;
 	private boolean syncing;
+	/* mirror of the plane's native selection (bit i = plane row i): syncing compares lanes, it asks the peer nothing */
+	private long [] planeSelected = new long [1];
+	/* an edit reached the resident rows since the last refresh; edits past the window touch only the scrollbar */
+	private boolean residentDirty = true;
+	private boolean barPending;
+	/* calls that reach the native peers (plane and scroll bar), for the per-row overhead measurement */
+	long nativeCalls;
 
 	public M3AwtViewportList () {
 		this (0, false);
@@ -109,7 +118,8 @@ public final class M3AwtViewportList extends Panel implements ItemSelectable {
 		items [at] = value;
 		count++;
 		selection.insert (at, 1);
-		if (at <= caret && count > 1) caret++;
+		// the native caret keeps its index across an insertion (M3AwtCaretProbe P06/P07)
+		if (at < window.first () + window.size ()) residentDirty = true;
 		refresh ();
 	}
 
@@ -125,6 +135,7 @@ public final class M3AwtViewportList extends Panel implements ItemSelectable {
 		selection.setLogicalCount (0);
 		top = 0;
 		caret = 0;
+		residentDirty = true;
 		refresh ();
 	}
 
@@ -146,9 +157,14 @@ public final class M3AwtViewportList extends Panel implements ItemSelectable {
 		Arrays.fill (items, count - removed, count, null);
 		count -= removed;
 		selection.remove (start, removed);
-		if (caret > end) caret -= removed;
-		else if (caret >= start) caret = start;
-		caret = Math.max (0, Math.min (caret, count - 1));
+		// the peer deletes row start removed times; the native caret keeps its index unless its own row goes
+		// (then it steps back one) or the list shrinks below it (M3AwtCaretProbe P09-P14, P24-P25)
+		for (int k = 0, left = count + removed; k < removed; k++) {
+			left--;
+			if (caret == start) caret = Math.max (0, caret - 1);
+			else if (caret >= left) caret = Math.max (0, left - 1);
+		}
+		if (start < window.first () + window.size ()) residentDirty = true;
 		refresh ();
 	}
 
@@ -215,6 +231,9 @@ public final class M3AwtViewportList extends Panel implements ItemSelectable {
 		if (b == multipleMode) return;
 		multipleMode = b;
 		plane.setMultipleMode (b);
+		Arrays.fill (planeSelected, 0L);
+		for (int i : plane.getSelectedIndexes ()) M3BitMask.set (planeSelected, i, true);
+		nativeCalls += 2;
 		if (!b) {
 			boolean keep = caret < count && selection.isSelected (caret);
 			selection.clear ();
@@ -290,27 +309,81 @@ public final class M3AwtViewportList extends Panel implements ItemSelectable {
 	private void refresh () {
 		top = Math.max (0, Math.min (top, Math.max (0, count - rows)));
 		int first = Math.max (0, top - OVERSCAN);
-		int size = Math.min (count - first, rows + 2 * OVERSCAN);
+		int size = Math.max (0, Math.min (count - first, rows + 2 * OVERSCAN));
+		if (!residentDirty && first == window.first () && size == window.size () && plane.getItemCount () == size) {
+			// a delta outside the resident rows: only the scroll extent changes (invariant #1)
+			setBar ();
+			return;
+		}
+		residentDirty = false;
 		boolean structural = plane.getItemCount () != window.size () || !residentMatches ();
-		M3WindowPlan plan = window.move (first, Math.max (0, size));
+		M3WindowPlan plan = window.move (first, size);
 		syncing = true;
 		try {
 			if (structural || plan.replaced ()) {
-				plane.removeAll ();
-				for (int i = 0; i < window.size (); i++) plane.add (window.get (i));
+				planeClear ();
+				for (int i = 0; i < window.size (); i++) planeAdd (window.get (i), -1);
 			} else {
-				for (int i = 0; i < plan.retiredTail (); i++) plane.remove (plane.getItemCount () - 1);
-				for (int i = 0; i < plan.retiredHead (); i++) plane.remove (0);
-				for (int i = 0; i < plan.insertedHead (); i++) plane.add (window.get (i), i);
-				for (int i = window.size () - plan.insertedTail (); i < window.size (); i++) plane.add (window.get (i));
+				for (int i = 0; i < plan.retiredTail (); i++) planeRemove (plane.getItemCount () - 1);
+				for (int i = 0; i < plan.retiredHead (); i++) planeRemove (0);
+				for (int i = 0; i < plan.insertedHead (); i++) planeAdd (window.get (i), i);
+				for (int i = window.size () - plan.insertedTail (); i < window.size (); i++) planeAdd (window.get (i), -1);
 			}
-			bar.setValues (top, Math.min (rows, Math.max (1, count)), 0, Math.max (count, 1));
+			setBar ();
 			syncSelectionLocked ();
 			if (count > 0) plane.makeVisible (Math.min (window.size () - 1, top - first + rows - 1));
 			if (count > 0) plane.makeVisible (top - first);
+			if (count > 0) nativeCalls += 2;
 		} finally {
 			syncing = false;
 		}
+	}
+
+	/* the scroll bar takes one coalesced update per event cycle: a bulk append is O(1) native calls, not O(rows) */
+	private void setBar () {
+		if (barPending) return;
+		barPending = true;
+		EventQueue.invokeLater (this::flushBar);
+	}
+
+	private void flushBar () {
+		int value, visible, maximum;
+		synchronized (this) {
+			barPending = false;
+			value = top;
+			visible = Math.min (rows, Math.max (1, count));
+			maximum = Math.max (count, 1);
+			nativeCalls++;
+		}
+		bar.setValues (value, visible, 0, maximum);
+	}
+
+	private void planeAdd (String item, int index) {
+		int n = plane.getItemCount ();
+		planeSelected = M3BitMask.ensure (planeSelected, n + 1);
+		M3BitMask.insert (planeSelected, n, index < 0 ? n : index, 1);
+		plane.add (item, index);
+		nativeCalls++;
+	}
+
+	private void planeRemove (int index) {
+		M3BitMask.remove (planeSelected, plane.getItemCount (), index, 1);
+		plane.remove (index);
+		nativeCalls++;
+	}
+
+	private void planeClear () {
+		Arrays.fill (planeSelected, 0L);
+		plane.removeAll ();
+		nativeCalls++;
+	}
+
+	private void planeSelect (int index, boolean selected) {
+		if (selected && !multipleMode) Arrays.fill (planeSelected, 0L);
+		M3BitMask.set (planeSelected, index, selected);
+		if (selected) plane.select (index);
+		else plane.deselect (index);
+		nativeCalls++;
 	}
 
 	/* the plane must hold exactly the window's rows; a structural edit inside the window breaks that */
@@ -332,20 +405,20 @@ public final class M3AwtViewportList extends Panel implements ItemSelectable {
 	}
 
 	private void syncSelectionLocked () {
-		for (int i = 0; i < plane.getItemCount (); i++) {
+		for (int i = 0, n = plane.getItemCount (); i < n; i++) {
 			boolean selected = selection.isSelected (window.first () + i);
-			if (selected != plane.isIndexSelected (i)) {
-				if (selected) plane.select (i);
-				else plane.deselect (i);
-			}
+			if (selected != M3BitMask.get (planeSelected, i)) planeSelect (i, selected);
 		}
 	}
 
 	private void planeItem (ItemEvent e) {
 		if (syncing) return;
-		int row = window.rowOf ((Integer) e.getItem ());
-		if (row < 0) return;
+		int planeRow = (Integer) e.getItem ();
 		boolean selected = e.getStateChange () == ItemEvent.SELECTED;
+		if (selected && !multipleMode) Arrays.fill (planeSelected, 0L);
+		if (planeRow >= 0 && planeRow < plane.getItemCount ()) M3BitMask.set (planeSelected, planeRow, selected);
+		int row = window.rowOf (planeRow);
+		if (row < 0) return;
 		synchronized (this) {
 			if (selected && !multipleMode) selection.clear ();
 			selection.setSelected (row, selected);

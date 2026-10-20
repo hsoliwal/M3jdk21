@@ -18,8 +18,9 @@ import java.util.Random;
  * answers (items, selection, selected index and item, mode, visible index) are compared, and any difference ends the
  * seed with the op log as the reproduction. Also records the resident rows of the viewport plane and the time to fill
  * both lists with many rows.
- * <p>Usage: {@code M3AwtListDifferential <seeds> <steps> <bulkRows>}; prints {@code SEED n OK|MISMATCH ...} lines and
- * a {@code SUMMARY} line.</p>
+ * <p>Usage: {@code M3AwtListDifferential <seeds> <steps> <bulkRows> [viewportOnlyRows...]}; prints
+ * {@code SEED n OK|MISMATCH ...}, {@code BULK} (stock against viewport, ns and native calls per row and per page jump),
+ * {@code SCALE} (viewport alone, median of 5) and {@code SUMMARY} lines.</p>
  */
 public final class M3AwtListDifferential {
 	private static final System.Logger LOG = System.getLogger ("com.m3.viewport.awt.M3AwtListDifferential");
@@ -37,6 +38,10 @@ public final class M3AwtListDifferential {
 			EventQueue.invokeAndWait (() -> runSeed (frame, s, steps, totals));
 		}
 		EventQueue.invokeAndWait (() -> bulk (frame, bulk));
+		for (int i = 3; i < args.length; i++) {
+			int rows = Integer.parseInt (args [i]);
+			EventQueue.invokeAndWait (() -> viewportScale (frame, rows));
+		}
 		LOG.log (System.Logger.Level.INFO, String.valueOf ("SUMMARY seeds=" + seeds + " ok=" + totals [0] + " mismatched=" + totals [1] + " steps=" + totals [2]));
 		frame.dispose ();
 		System.exit (totals [1] == 0 ? 0 : 1);
@@ -172,12 +177,51 @@ public final class M3AwtListDifferential {
 		long t0 = System.nanoTime ();
 		for (int i = 0; i < rows; i++) stock.add ("row " + i);
 		long t1 = System.nanoTime ();
+		long calls = viewport.nativeCalls;
 		for (int i = 0; i < rows; i++) viewport.add ("row " + i);
 		long t2 = System.nanoTime ();
-		viewport.makeVisible (rows / 2);
+		long addCalls = viewport.nativeCalls - calls;
+		Random random = new Random (5);
+		int jumps = 200;
+		long t3 = System.nanoTime ();
+		for (int i = 0; i < jumps; i++) stock.makeVisible (random.nextInt (rows));
+		long t4 = System.nanoTime ();
+		calls = viewport.nativeCalls;
+		for (int i = 0; i < jumps; i++) viewport.makeVisible (random.nextInt (rows));
+		long t5 = System.nanoTime ();
+		long jumpCalls = viewport.nativeCalls - calls;
 		LOG.log (System.Logger.Level.INFO, String.valueOf ("BULK rows=" + rows + " stockMs=" + (t1 - t0) / 1_000_000 + " viewportMs=" + (t2 - t1) / 1_000_000
-				+ " viewportResident=" + viewport.residentRows () + " top=" + viewport.getTopIndex ()));
+				+ " viewportResident=" + viewport.residentRows () + " top=" + viewport.getTopIndex ()
+				+ " stockNsPerRow=" + (t1 - t0) / rows + " viewportNsPerRow=" + (t2 - t1) / rows + " viewportNativeCallsPerRow=" + (double) addCalls / rows
+				+ " stockNsPerJump=" + (t4 - t3) / jumps + " viewportNsPerJump=" + (t5 - t4) / jumps + " viewportNativeCallsPerJump=" + (double) jumpCalls / jumps));
 		frame.remove (stock);
 		frame.remove (viewport);
+	}
+
+	/* the viewport alone at sizes the stock list cannot reach in a test run: append, then page jumps */
+	static void viewportScale (Frame frame, int rows) {
+		long [] add = new long [5], jump = new long [5];
+		long addCalls = 0, jumpCalls = 0;
+		for (int round = 0; round < 5; round++) {
+			M3AwtViewportList viewport = new M3AwtViewportList (8, false);
+			frame.add (viewport);
+			frame.validate ();
+			long calls = viewport.nativeCalls, t0 = System.nanoTime ();
+			for (int i = 0; i < rows; i++) viewport.add ("row " + i);
+			long t1 = System.nanoTime ();
+			addCalls = viewport.nativeCalls - calls;
+			Random random = new Random (round);
+			calls = viewport.nativeCalls;
+			for (int i = 0; i < 1_000; i++) viewport.makeVisible (random.nextInt (rows));
+			long t2 = System.nanoTime ();
+			jumpCalls = viewport.nativeCalls - calls;
+			add [round] = (t1 - t0) / rows;
+			jump [round] = (t2 - t1) / 1_000;
+			frame.remove (viewport);
+		}
+		Arrays.sort (add);
+		Arrays.sort (jump);
+		LOG.log (System.Logger.Level.INFO, String.valueOf ("SCALE rows=" + rows + " viewportNsPerRowMedian=" + add [2] + " nativeCallsAppend=" + addCalls
+				+ " viewportNsPerJumpMedian=" + jump [2] + " nativeCallsPerJump=" + jumpCalls / 1_000.0));
 	}
 }
