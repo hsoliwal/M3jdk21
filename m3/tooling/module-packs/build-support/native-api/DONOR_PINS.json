@@ -1,0 +1,480 @@
+{
+  "repository": "https://github.com/mojohaus/maven-native",
+  "commit": "59b9d76471f42265141e1edd3594f9dca156099a",
+  "tag": "maven-native-1.1.0",
+  "tag_object": "f56f09408e59e5975ea8c98350dbd0b2760d4941",
+  "files": [
+    {
+      "path": "maven-native-api/src/main/java/org/codehaus/mojo/natives/AbstractEnvFactory.java",
+      "git_blob": "4b56736a890ef85c41b796a8cc46d16bc4ffbf83",
+      "bytes": 472,
+      "license": "MIT (module LICENSE.txt; retain original headerless body)",
+      "target_relative": "upstream/maven-native-api/src/main/java/org/codehaus/mojo/natives/AbstractEnvFactory.java",
+      "sha256": "655f97e5e025fb96aeb4c80539b33c42aaa3dd449bc41bf16ee7659cc011b73e"
+    },
+    {
+      "path": "maven-native-api/src/main/java/org/codehaus/mojo/natives/ConfigurationBase.java",
+      "git_blob": "848db93a7d0a165360af1bb1f800304e171a7c9a",
+      "bytes": 1420,
+      "license": "MIT",
+      "target_relative": "upstream/maven-native-api/src/main/java/org/codehaus/mojo/natives/ConfigurationBase.java",
+      "sha256": "8e96927c9464f51a868734ff4d4f5704ec9417b709a1dda9b55c5ca6f91d8255"
+    },
+    {
+      "path": "maven-native-api/src/main/java/org/codehaus/mojo/natives/Dependency.java",
+      "git_blob": "104370bbeecf0c1b01eb342b874fa6c8a543a128",
+      "bytes": 7587,
+      "license": "MIT",
+      "target_relative": "upstream/maven-native-api/src/main/java/org/codehaus/mojo/natives/Dependency.java",
+      "sha256": "f1a72cfe278868c84381425508646a5d4ed55d22a4a05d326196d15e6b104a3f"
+    },
+    {
+      "path": "maven-native-api/src/main/java/org/codehaus/mojo/natives/EnvFactory.java",
+      "git_blob": "539a6694f4b7473da2caa72741955cbcdefaeb15",
+      "bytes": 1444,
+      "license": "MIT",
+      "target_relative": "upstream/maven-native-api/src/main/java/org/codehaus/mojo/natives/EnvFactory.java",
+      "sha256": "0a97ea2dd9da97542556fa5ab787b76ea9ee5141356f24f95e581730b82a9cc9"
+    },
+    {
+      "path": "maven-native-api/src/main/java/org/codehaus/mojo/natives/NativeBuildException.java",
+      "git_blob": "8895bcad5edddcbaff50646d75c8c44202a444e1",
+      "bytes": 1661,
+      "license": "MIT",
+      "target_relative": "upstream/maven-native-api/src/main/java/org/codehaus/mojo/natives/NativeBuildException.java",
+      "sha256": "bc07293b65e1492e538d44736eb9525becbbc588b93742b2daf5e82396f6b380"
+    },
+    {
+      "path": "maven-native-api/src/main/java/org/codehaus/mojo/natives/NativeSources.java",
+      "git_blob": "87dc4e38bae0ac194d24ae41ad892219035aeecf",
+      "bytes": 6208,
+      "license": "MIT",
+      "target_relative": "upstream/maven-native-api/src/main/java/org/codehaus/mojo/natives/NativeSources.java",
+      "sha256": "3f39a0b2def25ebeb79822631dcdeb4397365bb441b36b1d9062da0409887471"
+    },
+    {
+      "path": "maven-native-api/src/main/java/org/codehaus/mojo/natives/SourceDependencyAnalyzer.java",
+      "git_blob": "1ce423e53bc8650d29be30e2cba21b09b827b58b",
+      "bytes": 2314,
+      "license": "MIT",
+      "target_relative": "upstream/maven-native-api/src/main/java/org/codehaus/mojo/natives/SourceDependencyAnalyzer.java",
+      "sha256": "04e78f6004f9276ab9c8f60a2c91c1902e950f244b3d67d734f4257a3b8253a0"
+    },
+    {
+      "path": "maven-native-api/src/main/java/org/codehaus/mojo/natives/compiler/AbstractCompiler.java",
+      "git_blob": "0ad85235b422be92d38008a11f0ba869fc55ef23",
+      "bytes": 8013,
+      "license": "MIT",
+      "target_relative": "upstream/maven-native-api/src/main/java/org/codehaus/mojo/natives/compiler/AbstractCompiler.java",
+      "sha256": "ee0632d98b2bb01378554e6203453b3d43506300d123bb58cd449ba3f8ba78b2"
+    },
+    {
+      "path": "maven-native-api/src/main/java/org/codehaus/mojo/natives/compiler/AbstractMessageCompiler.java",
+      "git_blob": "81b2853eccc05185fd1e8464bba4d5e10fe36f75",
+      "bytes": 2085,
+      "license": "MIT",
+      "target_relative": "upstream/maven-native-api/src/main/java/org/codehaus/mojo/natives/compiler/AbstractMessageCompiler.java",
+      "sha256": "689c92f1717cc0a675b87552fefaeddb37fdd9e0bb224a12fbff5b21a4a8a98a"
+    },
+    {
+      "path": "maven-native-api/src/main/java/org/codehaus/mojo/natives/compiler/AbstractResourceCompiler.java",
+      "git_blob": "01440d4dc0501751673a10ece74588a9d73fd8b2",
+      "bytes": 3644,
+      "license": "MIT",
+      "target_relative": "upstream/maven-native-api/src/main/java/org/codehaus/mojo/natives/compiler/AbstractResourceCompiler.java",
+      "sha256": "5ba31efce548eb72766f815ce4654ab5b50a9870f486b6558e913ffe297fe52b"
+    },
+    {
+      "path": "maven-native-api/src/main/java/org/codehaus/mojo/natives/compiler/Compiler.java",
+      "git_blob": "e6a7dcbddc9a5b8489a5363b9f1dac1ab11b061e",
+      "bytes": 1622,
+      "license": "MIT",
+      "target_relative": "upstream/maven-native-api/src/main/java/org/codehaus/mojo/natives/compiler/Compiler.java",
+      "sha256": "553679ab186dcad3b542acb5479a41259f84631d4919c2f525c1e19a13d57dfa"
+    },
+    {
+      "path": "maven-native-api/src/main/java/org/codehaus/mojo/natives/compiler/CompilerConfiguration.java",
+      "git_blob": "6a92164fa2a9765037b2ce1a261bec918959f020",
+      "bytes": 4326,
+      "license": "MIT",
+      "target_relative": "upstream/maven-native-api/src/main/java/org/codehaus/mojo/natives/compiler/CompilerConfiguration.java",
+      "sha256": "47bdf0f6b68213ff7b629edec0d7f0c3095db5473bacd7fab5909ba94b68f8d3"
+    },
+    {
+      "path": "maven-native-api/src/main/java/org/codehaus/mojo/natives/compiler/MessageCompiler.java",
+      "git_blob": "4bbf1b684a23294a5fee0a9dadce6a20630355c6",
+      "bytes": 1455,
+      "license": "MIT",
+      "target_relative": "upstream/maven-native-api/src/main/java/org/codehaus/mojo/natives/compiler/MessageCompiler.java",
+      "sha256": "bf88ab89a3cc229139eef783c45205f16c1781e07c11bb4e32a70cf602aa2761"
+    },
+    {
+      "path": "maven-native-api/src/main/java/org/codehaus/mojo/natives/compiler/MessageCompilerConfiguration.java",
+      "git_blob": "3b50ee6e2cd9344481e5559c9f526013b34d772f",
+      "bytes": 2576,
+      "license": "MIT",
+      "target_relative": "upstream/maven-native-api/src/main/java/org/codehaus/mojo/natives/compiler/MessageCompilerConfiguration.java",
+      "sha256": "887f1882423c00d8dfe4680ad81161e5fe3fbde455072a6f79ab06eff90ff763"
+    },
+    {
+      "path": "maven-native-api/src/main/java/org/codehaus/mojo/natives/compiler/ResourceCompiler.java",
+      "git_blob": "8dcefccfbc319968ed88f48c14b5a21ec1d0162f",
+      "bytes": 1679,
+      "license": "MIT",
+      "target_relative": "upstream/maven-native-api/src/main/java/org/codehaus/mojo/natives/compiler/ResourceCompiler.java",
+      "sha256": "00d654c9f55b76e121d5171fe0c85e2f1c93257f055369db24602cd3d8aa6cc5"
+    },
+    {
+      "path": "maven-native-api/src/main/java/org/codehaus/mojo/natives/compiler/ResourceCompilerConfiguration.java",
+      "git_blob": "63c3d29a0e8dcbddbbfb8b00f59b438cf0caa9c2",
+      "bytes": 3835,
+      "license": "MIT",
+      "target_relative": "upstream/maven-native-api/src/main/java/org/codehaus/mojo/natives/compiler/ResourceCompilerConfiguration.java",
+      "sha256": "db6dd0f79563dfff8ebae966eb0f1a70ad9aac56b44b418720e20c2dbc2a88ee"
+    },
+    {
+      "path": "maven-native-api/src/main/java/org/codehaus/mojo/natives/javah/AbstractJavah.java",
+      "git_blob": "47ff5b8f60f1cb845d51a1b94a1250c8191cfcf0",
+      "bytes": 1321,
+      "license": "MIT",
+      "target_relative": "upstream/maven-native-api/src/main/java/org/codehaus/mojo/natives/javah/AbstractJavah.java",
+      "sha256": "6add06c93b1030343cf988a11018ca271c7658bc2374c1252173157f38091504"
+    },
+    {
+      "path": "maven-native-api/src/main/java/org/codehaus/mojo/natives/javah/Javah.java",
+      "git_blob": "89ad88bf0715bbece05d670480c59b1dd4228353",
+      "bytes": 1437,
+      "license": "MIT",
+      "target_relative": "upstream/maven-native-api/src/main/java/org/codehaus/mojo/natives/javah/Javah.java",
+      "sha256": "703b488c67b148ea405c88352fe27859ea8e2b3aeb6cd3f2c577ed14908e0219"
+    },
+    {
+      "path": "maven-native-api/src/main/java/org/codehaus/mojo/natives/javah/JavahConfiguration.java",
+      "git_blob": "d91d56c8261f9d6ad913394ca56b24165a3b4b0a",
+      "bytes": 3364,
+      "license": "MIT",
+      "target_relative": "upstream/maven-native-api/src/main/java/org/codehaus/mojo/natives/javah/JavahConfiguration.java",
+      "sha256": "b3d1fe617ac28ad4dfa34d8099b63b126d4d2ef0cd57b5d837ddf6c7f0f424f3"
+    },
+    {
+      "path": "maven-native-api/src/main/java/org/codehaus/mojo/natives/linker/AbstractLinker.java",
+      "git_blob": "dfbb90a8b2e6ea090beb8a95752717565f51eb40",
+      "bytes": 4840,
+      "license": "MIT",
+      "target_relative": "upstream/maven-native-api/src/main/java/org/codehaus/mojo/natives/linker/AbstractLinker.java",
+      "sha256": "973f599faff01e64cc334c2c63def105c669ad999ba34cc49e9e790f6fbb4fa8"
+    },
+    {
+      "path": "maven-native-api/src/main/java/org/codehaus/mojo/natives/linker/ArchiveLinker.java",
+      "git_blob": "a80a78ac5134f751943b6aedc37533c70e99e598",
+      "bytes": 2596,
+      "license": "MIT",
+      "target_relative": "upstream/maven-native-api/src/main/java/org/codehaus/mojo/natives/linker/ArchiveLinker.java",
+      "sha256": "bed0ffb1401f4300ca8978c4b32c39e84e327c177edb3f666314ce03098b579c"
+    },
+    {
+      "path": "maven-native-api/src/main/java/org/codehaus/mojo/natives/linker/DefaultRanlib.java",
+      "git_blob": "a2634661aed6ca61785dca743a990b1c73ca7c4e",
+      "bytes": 618,
+      "license": "MIT (module LICENSE.txt; retain original headerless body)",
+      "target_relative": "upstream/maven-native-api/src/main/java/org/codehaus/mojo/natives/linker/DefaultRanlib.java",
+      "sha256": "21187c82ab27de5231c8c590a6b6bd2e0b5b253a5ccb080143857cc2863dd863"
+    },
+    {
+      "path": "maven-native-api/src/main/java/org/codehaus/mojo/natives/linker/Linker.java",
+      "git_blob": "053f3fa36f83cc8c5613c74ca550cac3f1ce1b68",
+      "bytes": 1499,
+      "license": "MIT",
+      "target_relative": "upstream/maven-native-api/src/main/java/org/codehaus/mojo/natives/linker/Linker.java",
+      "sha256": "0d16d02cd6404a59586bfcba344afd838cb304b96659ff73e02fe6a619e8f6e2"
+    },
+    {
+      "path": "maven-native-api/src/main/java/org/codehaus/mojo/natives/linker/LinkerConfiguration.java",
+      "git_blob": "248b2217a263032dda7ff70215786fc2853e739b",
+      "bytes": 5128,
+      "license": "MIT",
+      "target_relative": "upstream/maven-native-api/src/main/java/org/codehaus/mojo/natives/linker/LinkerConfiguration.java",
+      "sha256": "e023400a65e5c880860f54a4c0c900bcc073410e5a27f7f397306f7c11379ad9"
+    },
+    {
+      "path": "maven-native-api/src/main/java/org/codehaus/mojo/natives/linker/Manifest.java",
+      "git_blob": "08656df7ded9e9d37d22cf13ef11b574259ac81e",
+      "bytes": 1377,
+      "license": "MIT",
+      "target_relative": "upstream/maven-native-api/src/main/java/org/codehaus/mojo/natives/linker/Manifest.java",
+      "sha256": "caa253a6ed7324808fe5c918c2351ce95d34773c870018dd82a8d76060d1b4d8"
+    },
+    {
+      "path": "maven-native-api/src/main/java/org/codehaus/mojo/natives/linker/ManifestConfiguration.java",
+      "git_blob": "a699d824aae9016ffc7a423ee13612f6461ba7da",
+      "bytes": 1987,
+      "license": "MIT",
+      "target_relative": "upstream/maven-native-api/src/main/java/org/codehaus/mojo/natives/linker/ManifestConfiguration.java",
+      "sha256": "f87b5ab6724196fc14778cfaec1f0e209ef858d236b945e1aa113d124eadae5e"
+    },
+    {
+      "path": "maven-native-api/src/main/java/org/codehaus/mojo/natives/linker/Ranlib.java",
+      "git_blob": "a0cf5947355fcd86745fcc255e336d0cd19243b8",
+      "bytes": 245,
+      "license": "MIT (module LICENSE.txt; retain original headerless body)",
+      "target_relative": "upstream/maven-native-api/src/main/java/org/codehaus/mojo/natives/linker/Ranlib.java",
+      "sha256": "a44e464e0d87a8ccd82e5a75ef4f5825b99853c36d1f74319d32d291fcfe7cee"
+    },
+    {
+      "path": "maven-native-api/src/main/java/org/codehaus/mojo/natives/parser/AbstractParser.java",
+      "git_blob": "d109b7fd00889e1864b5c5ffae5188b01de76bde",
+      "bytes": 2206,
+      "license": "Apache-2.0",
+      "target_relative": "upstream/maven-native-api/src/main/java/org/codehaus/mojo/natives/parser/AbstractParser.java",
+      "sha256": "70f90a4a1c72388f8f39af5afc1e4c151866f65c713eb3fa882864681c77579e"
+    },
+    {
+      "path": "maven-native-api/src/main/java/org/codehaus/mojo/natives/parser/AbstractParserState.java",
+      "git_blob": "e8b65ba4a6757e50f648e926d196c409fbeb33bb",
+      "bytes": 1321,
+      "license": "Apache-2.0",
+      "target_relative": "upstream/maven-native-api/src/main/java/org/codehaus/mojo/natives/parser/AbstractParserState.java",
+      "sha256": "32138d9bcf6b8f3db3d1e87fac3d17c762dd8ef124c94d54ee66c9c185e12510"
+    },
+    {
+      "path": "maven-native-api/src/main/java/org/codehaus/mojo/natives/parser/BranchState.java",
+      "git_blob": "e1d24f77609242e08f327a89f99f17ad0c23e425",
+      "bytes": 1727,
+      "license": "Apache-2.0",
+      "target_relative": "upstream/maven-native-api/src/main/java/org/codehaus/mojo/natives/parser/BranchState.java",
+      "sha256": "41b5d5c2e640573bf4d6fe15e1efa614fe8089ca25de99d32fc2e25eb4b2b045"
+    },
+    {
+      "path": "maven-native-api/src/main/java/org/codehaus/mojo/natives/parser/CParser.java",
+      "git_blob": "b0191dc5b569283062a96a7f859f082c961e6f79",
+      "bytes": 2992,
+      "license": "Apache-2.0",
+      "target_relative": "upstream/maven-native-api/src/main/java/org/codehaus/mojo/natives/parser/CParser.java",
+      "sha256": "cffd61724d900cf76c7eee833749415c5981af5475d0e87a3aaa5c05f42fcd9c"
+    },
+    {
+      "path": "maven-native-api/src/main/java/org/codehaus/mojo/natives/parser/CaseInsensitiveLetterState.java",
+      "git_blob": "6876eff3e1e9a8f030902b677186ac501766a3da",
+      "bytes": 2492,
+      "license": "Apache-2.0",
+      "target_relative": "upstream/maven-native-api/src/main/java/org/codehaus/mojo/natives/parser/CaseInsensitiveLetterState.java",
+      "sha256": "84c3a79a6ff2d4fc58a6f7c7f15fbcaba76c3ecf1e11a5f7458e2bf7b636140a"
+    },
+    {
+      "path": "maven-native-api/src/main/java/org/codehaus/mojo/natives/parser/CobolLineStartState.java",
+      "git_blob": "18ea78570ec7b071584b46b69a96d72cf4c7329e",
+      "bytes": 3237,
+      "license": "MIT",
+      "target_relative": "upstream/maven-native-api/src/main/java/org/codehaus/mojo/natives/parser/CobolLineStartState.java",
+      "sha256": "f00dc254c4ad86b258cc71b9f455317358a0fc07479b7da2bf0a8e215c01ddf7"
+    },
+    {
+      "path": "maven-native-api/src/main/java/org/codehaus/mojo/natives/parser/CobolParser.java",
+      "git_blob": "a6f6a9975bbb254266c3142cc046542e6ed924f9",
+      "bytes": 2545,
+      "license": "MIT",
+      "target_relative": "upstream/maven-native-api/src/main/java/org/codehaus/mojo/natives/parser/CobolParser.java",
+      "sha256": "dfe7a08c0f7cfd1a6796f41291443e3869f29d807586beed7ceb5272fbeb052e"
+    },
+    {
+      "path": "maven-native-api/src/main/java/org/codehaus/mojo/natives/parser/FilenameState.java",
+      "git_blob": "9b9abde2b49eec38a4967650db8c0741ef67345c",
+      "bytes": 1435,
+      "license": "Apache-2.0",
+      "target_relative": "upstream/maven-native-api/src/main/java/org/codehaus/mojo/natives/parser/FilenameState.java",
+      "sha256": "614ed72a88765da8943c90888baf345c0d6714c47f957fe6f1f75cb14247087e"
+    },
+    {
+      "path": "maven-native-api/src/main/java/org/codehaus/mojo/natives/parser/FortranParser.java",
+      "git_blob": "0113acdc7f467857193cc6b9d8099d500bcc28d2",
+      "bytes": 3202,
+      "license": "Apache-2.0",
+      "target_relative": "upstream/maven-native-api/src/main/java/org/codehaus/mojo/natives/parser/FortranParser.java",
+      "sha256": "3ae9180071338f96f70a3e9d0204d3364ebf18f4e1dc69fc532e4b93bde96f5b"
+    },
+    {
+      "path": "maven-native-api/src/main/java/org/codehaus/mojo/natives/parser/LetterState.java",
+      "git_blob": "8318e50765075c2c28bdacb3827efb9cb7cbc0eb",
+      "bytes": 2214,
+      "license": "Apache-2.0",
+      "target_relative": "upstream/maven-native-api/src/main/java/org/codehaus/mojo/natives/parser/LetterState.java",
+      "sha256": "2b550416b8d0f12f5952436f9be80080ed3d5bc57aee18662bec01d81ba02615"
+    },
+    {
+      "path": "maven-native-api/src/main/java/org/codehaus/mojo/natives/parser/Parser.java",
+      "git_blob": "4ff4e1efd959ccaa4c03dc644bd85388f4085fd0",
+      "bytes": 922,
+      "license": "Apache-2.0",
+      "target_relative": "upstream/maven-native-api/src/main/java/org/codehaus/mojo/natives/parser/Parser.java",
+      "sha256": "978bd81a1fe29c7bde7f15721e2e0cf068f34bdd7b429d2f3f5df52f4f683669"
+    },
+    {
+      "path": "maven-native-api/src/main/java/org/codehaus/mojo/natives/parser/PostCopy.java",
+      "git_blob": "f6f0fdc62d9d322069c09b8ed0030f990f9a1db2",
+      "bytes": 2132,
+      "license": "MIT",
+      "target_relative": "upstream/maven-native-api/src/main/java/org/codehaus/mojo/natives/parser/PostCopy.java",
+      "sha256": "00f7976dd0f400d6ba98a68871fc92f156fbdafa5bb82e4d286709fb2dea467c"
+    },
+    {
+      "path": "maven-native-api/src/main/java/org/codehaus/mojo/natives/parser/PostE.java",
+      "git_blob": "7ba6ba3d9b4a69ba4f227a87e82ab607fd1d9b7e",
+      "bytes": 1347,
+      "license": "Apache-2.0",
+      "target_relative": "upstream/maven-native-api/src/main/java/org/codehaus/mojo/natives/parser/PostE.java",
+      "sha256": "02595b7ae9b73ede4595309ed67ee91f16fa49ec5825d83c3489f4c7e105b52d"
+    },
+    {
+      "path": "maven-native-api/src/main/java/org/codehaus/mojo/natives/parser/WhitespaceOrCaseInsensitiveLetterState.java",
+      "git_blob": "900f4172325c4c062c9ca3b206b5b8111ea18442",
+      "bytes": 2297,
+      "license": "Apache-2.0",
+      "target_relative": "upstream/maven-native-api/src/main/java/org/codehaus/mojo/natives/parser/WhitespaceOrCaseInsensitiveLetterState.java",
+      "sha256": "fc4ae049953f8de017c7a8e0818786e251894e3e6c2786a1ab68f70c0781f869"
+    },
+    {
+      "path": "maven-native-api/src/main/java/org/codehaus/mojo/natives/parser/WhitespaceOrLetterState.java",
+      "git_blob": "c68cca5c26000536de7fe69aa8c1b97b530b068a",
+      "bytes": 2070,
+      "license": "Apache-2.0",
+      "target_relative": "upstream/maven-native-api/src/main/java/org/codehaus/mojo/natives/parser/WhitespaceOrLetterState.java",
+      "sha256": "7992e67737dbe8ef9a7ba1edeb39c0dec3eeaa041746d66d39acd42c938b349c"
+    },
+    {
+      "path": "maven-native-api/src/main/java/org/codehaus/mojo/natives/util/CommandLineUtil.java",
+      "git_blob": "4169acd3a4aa8967550141c8eb10a64e8575512f",
+      "bytes": 1001,
+      "license": "MIT (module LICENSE.txt; retain original headerless body)",
+      "target_relative": "upstream/maven-native-api/src/main/java/org/codehaus/mojo/natives/util/CommandLineUtil.java",
+      "sha256": "a3a7f44f7cb589014937a03dda26366fda76def0e17d7d8f5802bae10ec2399d"
+    },
+    {
+      "path": "maven-native-api/src/main/java/org/codehaus/mojo/natives/util/EnvUtil.java",
+      "git_blob": "a3fd142b5a05e2231c1deba8a07cd4c458a314d0",
+      "bytes": 1708,
+      "license": "MIT (module LICENSE.txt; retain original headerless body)",
+      "target_relative": "upstream/maven-native-api/src/main/java/org/codehaus/mojo/natives/util/EnvUtil.java",
+      "sha256": "8529c5b87010563ac9f90a21b9581ad44d683707e6958a5f17674ad1780ce64a"
+    },
+    {
+      "path": "maven-native-api/src/main/java/org/codehaus/mojo/natives/util/FileSet.java",
+      "git_blob": "551fb39fffd010f52c0d886a756bce22a418933a",
+      "bytes": 2632,
+      "license": "Apache-2.0",
+      "target_relative": "upstream/maven-native-api/src/main/java/org/codehaus/mojo/natives/util/FileSet.java",
+      "sha256": "4e813d7e63dd14a9da49a507d8d2b368a27a504ab46f106d73a64d0bba749748"
+    },
+    {
+      "path": "maven-native-api/src/main/java/org/codehaus/mojo/natives/util/FileUtil.java",
+      "git_blob": "e5991c5c1bcaeddbb9129ae500ed0a4285a19858",
+      "bytes": 5802,
+      "license": "MIT (module LICENSE.txt; retain original headerless body)",
+      "target_relative": "upstream/maven-native-api/src/main/java/org/codehaus/mojo/natives/util/FileUtil.java",
+      "sha256": "c8427edbcefb276a5c5cc5a602d93ec6b8486bf5f103121bd62cbc8a91496171"
+    },
+    {
+      "path": "maven-native-components/maven-native-generic-c/src/main/java/org/codehaus/mojo/natives/c/AbstractCCompiler.java",
+      "git_blob": "9c508fbfab5b59dc643b7ebdb9b57499552a400a",
+      "bytes": 4200,
+      "license": "MIT",
+      "target_relative": "upstream/maven-native-components/maven-native-generic-c/src/main/java/org/codehaus/mojo/natives/c/AbstractCCompiler.java",
+      "sha256": "2820d6612dfd1f9afb7a4982bd162490c4f155a554213759b2a1682437a24fd2"
+    },
+    {
+      "path": "maven-native-components/maven-native-generic-c/src/main/java/org/codehaus/mojo/natives/c/CCompiler.java",
+      "git_blob": "5eb7e37c4dc6760126f06df0b80cef9efc24b0ea",
+      "bytes": 1574,
+      "license": "MIT",
+      "target_relative": "upstream/maven-native-components/maven-native-generic-c/src/main/java/org/codehaus/mojo/natives/c/CCompiler.java",
+      "sha256": "e11b47b04179bed4d05040238fd7b29ce949ebebad565e927f10f31bee00469a"
+    },
+    {
+      "path": "maven-native-components/maven-native-generic-c/src/main/java/org/codehaus/mojo/natives/c/CCompilerClassic.java",
+      "git_blob": "9e37a12c587dcfee2eab64372f49a6849cdce16e",
+      "bytes": 1587,
+      "license": "MIT",
+      "target_relative": "upstream/maven-native-components/maven-native-generic-c/src/main/java/org/codehaus/mojo/natives/c/CCompilerClassic.java",
+      "sha256": "13ab310b395b8f9912d86ea8a3700b2301db0bd60ae3ee1b19f804482db99a50"
+    },
+    {
+      "path": "maven-native-components/maven-native-generic-c/src/main/java/org/codehaus/mojo/natives/c/CLinker.java",
+      "git_blob": "742a03ff373975db8262181e2b348537272b9821",
+      "bytes": 6377,
+      "license": "MIT",
+      "target_relative": "upstream/maven-native-components/maven-native-generic-c/src/main/java/org/codehaus/mojo/natives/c/CLinker.java",
+      "sha256": "5bcc48e6aacd2bc35106e935998d5b2bba108a1c0992e784cac654df5c21c256"
+    },
+    {
+      "path": "maven-native-components/maven-native-generic-c/src/main/java/org/codehaus/mojo/natives/c/CLinkerClassic.java",
+      "git_blob": "d689fa065752e1e3baf699529bc2d32500fefade",
+      "bytes": 1568,
+      "license": "MIT",
+      "target_relative": "upstream/maven-native-components/maven-native-generic-c/src/main/java/org/codehaus/mojo/natives/c/CLinkerClassic.java",
+      "sha256": "4407052eb14b148efb621085831d818fa99a1dff90730cf75afc9e6db5b78ae9"
+    },
+    {
+      "path": "LICENSE.txt",
+      "git_blob": "58b5c4334c3fe2f4ab51be28685faf2f00d2d64c",
+      "bytes": 1075,
+      "license": "MIT",
+      "target_relative": "upstream/LICENSE.txt",
+      "sha256": "2481c2fabe971de40b8193c5016971de71cff91800ba8bfa78a51b405e5abb6c"
+    },
+    {
+      "path": "pom.xml",
+      "git_blob": "e82a564e8d1554473b999359cc672cbe355ec995",
+      "bytes": 9393,
+      "license": "MIT (module LICENSE.txt; retain original headerless body)",
+      "target_relative": "upstream/pom.xml",
+      "sha256": "f309dd7613b5e0845e7f0a082d4231e772d6f684935d1ee449e9551f851b0ed8"
+    },
+    {
+      "path": "maven-native-api/LICENSE.txt",
+      "git_blob": "58b5c4334c3fe2f4ab51be28685faf2f00d2d64c",
+      "bytes": 1075,
+      "license": "MIT",
+      "target_relative": "upstream/maven-native-api/LICENSE.txt",
+      "sha256": "2481c2fabe971de40b8193c5016971de71cff91800ba8bfa78a51b405e5abb6c"
+    },
+    {
+      "path": "maven-native-api/pom.xml",
+      "git_blob": "0beafad8a669e5aa051dbae82664b161ac614446",
+      "bytes": 806,
+      "license": "MIT (module LICENSE.txt; retain original headerless body)",
+      "target_relative": "upstream/maven-native-api/pom.xml",
+      "sha256": "3664e5bd68f13b15bc01f40d7129f51f5d59069a06ea1a99a5d3822e5dbdb26d"
+    },
+    {
+      "path": "maven-native-api/src/main/resources/META-INF/plexus/components.xml",
+      "git_blob": "1a5276cfffd1323990cc4719a63b4eaac9668ccf",
+      "bytes": 626,
+      "license": "MIT (module LICENSE.txt; retain original headerless body)",
+      "target_relative": "upstream/maven-native-api/src/main/resources/META-INF/plexus/components.xml",
+      "sha256": "da87fe6f866ee7a6c9159f6559aa286deea74e6cd5b49c547747c3ebc480297e"
+    },
+    {
+      "path": "maven-native-components/pom.xml",
+      "git_blob": "56469db16104087cbafc53c1d5b53178d2dcd500",
+      "bytes": 1432,
+      "license": "MIT (module LICENSE.txt; retain original headerless body)",
+      "target_relative": "upstream/maven-native-components/pom.xml",
+      "sha256": "451da30a1d3f95ffb71e78f6f345421f7acd63b640b8a354c1754cbf3585ee9e"
+    },
+    {
+      "path": "maven-native-components/maven-native-generic-c/LICENSE.txt",
+      "git_blob": "58b5c4334c3fe2f4ab51be28685faf2f00d2d64c",
+      "bytes": 1075,
+      "license": "MIT",
+      "target_relative": "upstream/maven-native-components/maven-native-generic-c/LICENSE.txt",
+      "sha256": "2481c2fabe971de40b8193c5016971de71cff91800ba8bfa78a51b405e5abb6c"
+    },
+    {
+      "path": "maven-native-components/maven-native-generic-c/pom.xml",
+      "git_blob": "f68d242fe0ee7df517ac8638345a6a68388f451d",
+      "bytes": 1225,
+      "license": "MIT (module LICENSE.txt; retain original headerless body)",
+      "target_relative": "upstream/maven-native-components/maven-native-generic-c/pom.xml",
+      "sha256": "e56a3195b884a4cffb871bccd62dbc39befde0282d478e90b6ea638c7e51a349"
+    }
+  ]
+}
