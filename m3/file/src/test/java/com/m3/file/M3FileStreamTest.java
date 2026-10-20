@@ -121,6 +121,25 @@ class M3FileStreamTest {
     }
 
     @Test
+    void identicalFactReceiptsConvergeButConflictsFail() throws Exception {
+        byte[] one = MessageDigest.getInstance("SHA-256").digest(new byte[] {1});
+        byte[] two = MessageDigest.getInstance("SHA-256").digest(new byte[] {2});
+
+        M3FileFacts converged =
+                M3FileFacts.of(
+                        new M3FileFact("ast", one),
+                        new M3FileFact("ast", one));
+        assertEquals(1, converged.size());
+        assertArrayEquals(one, converged.requireSha256("ast"));
+        org.junit.jupiter.api.Assertions.assertThrows(
+                IllegalArgumentException.class,
+                () ->
+                        M3FileFacts.of(
+                                new M3FileFact("ast", one),
+                                new M3FileFact("ast", two)));
+    }
+
+    @Test
     void factDeltaUsesSortedLanesWithoutMapEntries() throws Exception {
         byte[] one = MessageDigest.getInstance("SHA-256").digest(new byte[] {1});
         byte[] two = MessageDigest.getInstance("SHA-256").digest(new byte[] {2});
