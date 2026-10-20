@@ -65,7 +65,8 @@ Ids dense, pre-order (scan order = `Files.walk` order); `0` = root; `rows()` = n
 | `depth` | `short[]` | root `0` | S1 |
 | `nameOff` / `namePool` | `int[rows+1]` / `char[]` | per-row name chars; removed in S4 (now `nameId` + `M3FileNames` pool) | S1 |
 | `childStart` / `childCount` / `childIds` | `int[]` | CSR, slices sorted by name | S1 |
-| `subtreeEnd` | `int[]` | exclusive end of the pre-order subtree range `[id, subtreeEnd)` | S2 |
+| `subtreeEnd` | `int[]` | exclusive end position of the pre-order subtree `[rank(id), subtreeEnd)` | S2 |
+| `order` / `rank` | `int[]` | position -> id and id -> position; identity for eager scans, spliced by lazy expansion (ids stay stable) | S8 |
 | `size` / `mtime` | `long[]` | bytes; epoch millis | S1 |
 | `nameId` | `int[]` | interned name id (`M3FileNames`) | S4 |
 | `typeId` | `int[]` | interned extension type id (`tree.types()`) | S4 |
@@ -77,7 +78,7 @@ Ids dense, pre-order (scan order = `Files.walk` order); `0` = root; `rows()` = n
 
 Flags: `DIR`, `REGULAR`, `LINK`, `HIDDEN`, `SCANNED`, `RESIDENT`, `DIRTY`, `DELETED` (+ `HASHED`, `TOKEN_HASHED`, `STRUCT_HASHED` in S5).
 
-Invariants: (1) `parent[id] < id`; (2) `depth[id] == depth[parent[id]] + 1`; (3) CSR slices sorted by name; (4) `childIds` holds every non-root id once; (5) `DELETED` rows keep lanes, skipped by iteration; (6) `subtreeEnd[id] > id` and the subtree of `id` is exactly `[id, subtreeEnd[id])`.
+Invariants: (1) `parent[id] < id`; (2) `depth[id] == depth[parent[id]] + 1`; (3) CSR slices sorted by name; (4) `childIds` holds every non-root id once; (5) `DELETED` rows keep lanes, skipped by iteration; (6) `subtreeEnd[id] > rank[id]` and the subtree of `id` is exactly the positions `[rank[id], subtreeEnd[id])`; (7) `rank[parent[id]] < rank[id]`, `order` and `rank` are inverse.
 
 ## 4. `M3File`
 
@@ -116,7 +117,7 @@ Cursor: `nextId()` (`-1` at end), `nextEntry()` (`Optional<M3File>`), `hasNext()
 | S5 | change gate + hash lanes, `M3FileChangeProvider`; rebase onto #1567 `Fingerprint` once merged | gate skips reads for unchanged attributes; hash lanes equal #1567 fingerprint |
 | S6 | `M3FileTreeDelta`, `M3FileChange` | delta of scan/edit/rescan equals expected ADDED/REMOVED/CHANGED; paths feed #1568 ledger |
 | S7 | `M3FileSource` (one abstract method; FILESYSTEM and zip sources), zip/jar roots through `M3FileTree.open` (central directory, implied dirs, nested zip-in-zip sub-trees via streaming, `ARCHIVE` flag, `entryCrc` lane gating), entry content via `ZipFile.getInputStream` with byte limits | differential vs `ZipFile.entries()` + `ZipInputStream` |
-| S8 | `M3FileScanSpec` maxDepth, lazy `scanChildren(id)`, `expandArchives` (archives below a directory root become sub-trees; S7 expands only an archive root) | lazy expansion test; scanned dirs never re-scanned |
+| S8 | `M3FileScanSpec` maxDepth, lazy `scanChildren(id)`; `expandArchives` (archives below a directory root) moved to S9 | done: random-order full expansion == eager scan == `Files.walk`; ids stable; fail-fast traversals |
 | S9 | unix-style ops (`du`, `find`, `wc` over walks), zip writing, error modes | per-op differential tests |
 | S10 | viewport row host over `com.m3.viewport.M3RowHost` | 100k rows, O(window) per frame |
 | S11 | lane image (little-endian lanes + name pool), content-addressed | round-trip equal; open without re-scan |

@@ -28,7 +28,7 @@ import java.util.stream.IntStream;
  *
  * <p>Invariants: {@code parent[id] < id}; {@code depth[id] == depth[parent[id]] + 1}; every child
  * slice is sorted by {@link #compareNames}; {@code childIds} holds every non-root id exactly once;
- * the subtree of {@code id} is exactly {@code [id, subtreeEnd(id))}; {@link M3FileFlag#DELETED} rows
+ * the subtree of {@code id} is exactly the positions {@code [rank(id), subtreeEnd(id))}; {@link M3FileFlag#DELETED} rows
  * keep their lanes and are skipped by {@link #ids()} and walks.</p>
  */
 public final class M3FileTree implements Closeable {
@@ -52,9 +52,13 @@ public final class M3FileTree implements Closeable {
     private int[] childCount = new int[INITIAL_ROWS];
     private int[] childIds = new int[INITIAL_ROWS];
     private int[] subtreeEnd = new int[INITIAL_ROWS];
+    private int[] order = new int[INITIAL_ROWS];
+    private int[] rank = new int[INITIAL_ROWS];
     private long[] size = new long[INITIAL_ROWS];
     private long[] mtime = new long[INITIAL_ROWS];
     private int rows;
+    private int generation;
+    private M3FileScanSpec spec = M3FileScanSpec.EAGER;
     private int childTop;
 
     private M3FileTree(Path root, int residencyCapacity, M3FileSource source) {
@@ -77,8 +81,34 @@ public final class M3FileTree implements Closeable {
 
     /** As {@link #open(Path)} with an explicit facade residency capacity (power of two). */
     public static M3FileTree open(Path root, int residencyCapacity) throws IOException {
-        if (isArchive(root)) return M3FileZipScanner.scan(root, residencyCapacity);
-        return M3FileTreeScanner.scan(new M3FileTree(root, residencyCapacity, M3FileSource.FILESYSTEM));
+        return open(root, new M3FileScanSpec(Integer.MAX_VALUE, residencyCapacity));
+    }
+
+    /**
+     * As {@link #open(Path)} under {@code spec}: a directory scan stops {@code spec.maxDepth()} levels
+     * down and {@link #scanChildren(int)} expands further on demand. Archives are always read whole.
+     */
+    public static M3FileTree open(Path root, M3FileScanSpec spec) throws IOException {
+        if (isArchive(root)) return M3FileZipScanner.scan(root, spec.residencyCapacity());
+        M3FileTree tree = new M3FileTree(root, spec.residencyCapacity(), M3FileSource.FILESYSTEM);
+        tree.spec = spec;
+        return M3FileTreeScanner.scan(tree, -1, spec.maxDepth());
+    }
+
+    /**
+     * Scans the children of an unscanned directory row ({@code spec.maxDepth()} levels) and splices
+     * them into pre-order after it. Ids stay stable; positions after the directory shift, and walks or
+     * cursors open during the call fail fast. Returns the rows added; {@code 0} for scanned rows.
+     */
+    public int scanChildren(int id) throws IOException {
+        checkId(id);
+        if (!flag(M3FileFlag.DIR, id) || flag(M3FileFlag.SCANNED, id)) return 0;
+        if (source != M3FileSource.FILESYSTEM) throw new IllegalStateException("only file-system trees scan lazily");
+        int first = rows;
+        M3FileTreeScanner.scan(this, id, Math.max(1, spec.maxDepth()));
+        splice(id, first);
+        generation++;
+        return rows - first;
     }
 
     /** Shared empty tree behind {@link M3File#of(Path)}; it has no rows. */
@@ -149,7 +179,28 @@ public final class M3FileTree implements Closeable {
     /** Live ids in pre-order. */
     public IntStream ids() {
         BitSet deleted = flags[M3FileFlag.DELETED.ordinal()];
-        return IntStream.range(0, rows).filter(id -> !deleted.get(id));
+        return IntStream.range(0, rows).map(position -> order[position]).filter(id -> !deleted.get(id));
+    }
+
+    /** Pre-order position of {@code id}; equal to {@code id} until a lazy expansion splices rows. */
+    public int rank(int id) {
+        checkId(id);
+        return rank[id];
+    }
+
+    /** Row id at pre-order {@code position}. */
+    public int idAt(int position) {
+        Objects.checkIndex(position, rows);
+        return order[position];
+    }
+
+    /** Incremented by every structural change (lazy expansion); traversals fail fast across it. */
+    public int generation() {
+        return generation;
+    }
+
+    public M3FileScanSpec spec() {
+        return spec;
     }
 
     public int residentCount() {
@@ -176,7 +227,7 @@ public final class M3FileTree implements Closeable {
         return depth[id];
     }
 
-    /** Exclusive end of the pre-order subtree of {@code id}: the subtree is {@code [id, subtreeEnd(id))}. */
+    /** Exclusive end position of the pre-order subtree of {@code id}: positions {@code [rank(id), subtreeEnd(id))}. */
     public int subtreeEnd(int id) {
         checkId(id);
         return subtreeEnd[id];
@@ -385,6 +436,8 @@ public final class M3FileTree implements Closeable {
         parent[id] = parentId;
         depth[id] = (short) (parentId < 0 ? 0 : depth[parentId] + 1);
         subtreeEnd[id] = id + 1;
+        order[id] = id;
+        rank[id] = id;
         size[id] = bytes;
         mtime[id] = modified;
         nameId[id] = names.intern(name);
@@ -410,6 +463,24 @@ public final class M3FileTree implements Closeable {
         setFlag(M3FileFlag.SCANNED, dirId, true);
     }
 
+    /**
+     * Moves rows {@code [first, rows)}, built in pre-order after every existing position, to the positions
+     * right after {@code dirId}, and shifts the subtree ends that cover or follow it. O(rows).
+     */
+    private void splice(int dirId, int first) {
+        int added = rows - first;
+        int at = rank[dirId] + 1;
+        for (int id = 0; id < first; id++) {
+            if (subtreeEnd[id] >= at) subtreeEnd[id] += added;
+        }
+        subtreeEnd[dirId] = at + added;
+        for (int id = first; id < rows; id++) subtreeEnd[id] += at - first;
+        int[] moved = Arrays.copyOfRange(order, first, rows);
+        System.arraycopy(order, at, order, at + added, first - at);
+        System.arraycopy(moved, 0, order, at, added);
+        for (int position = at; position < rows; position++) rank[order[position]] = position;
+    }
+
     private void ensureRows(int needed) {
         if (needed <= parent.length) return;
         int capacity = Math.max(parent.length * 2, needed);
@@ -420,6 +491,8 @@ public final class M3FileTree implements Closeable {
         childStart = Arrays.copyOf(childStart, capacity);
         childCount = Arrays.copyOf(childCount, capacity);
         subtreeEnd = Arrays.copyOf(subtreeEnd, capacity);
+        order = Arrays.copyOf(order, capacity);
+        rank = Arrays.copyOf(rank, capacity);
         size = Arrays.copyOf(size, capacity);
         mtime = Arrays.copyOf(mtime, capacity);
         hashes.grow(capacity);

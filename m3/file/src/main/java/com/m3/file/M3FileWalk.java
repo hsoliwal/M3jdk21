@@ -173,16 +173,17 @@ public final class M3FileWalk implements M3FileTraversal {
 
     @Override
     public Spliterator.OfInt idSpliterator() {
-        return new M3FileIdSpliterator(this, root, rangeEnd(), plain());
+        return new M3FileIdSpliterator(this, tree.rank(root), rangeEnd(), plain());
     }
 
     /** Pull cursor over the same entries in the same order. */
     public M3FileCursor cursor() {
-        return new M3FileCursor(this, root, rangeEnd());
+        return new M3FileCursor(this, tree.rank(root), rangeEnd());
     }
 
+    /** Exclusive end position of this walk. */
     int rangeEnd() {
-        return closed(root) ? root + 1 : tree.subtreeEnd(root);
+        return closed(root) ? tree.rank(root) + 1 : tree.subtreeEnd(root);
     }
 
     /** Unfiltered walk over a tree without tombstones: every id in range is emitted. */
@@ -194,22 +195,25 @@ public final class M3FileWalk implements M3FileTraversal {
 
     /** True when the walk does not descend below {@code id}. */
     boolean closed(int id) {
-        if (tree.subtreeEnd(id) == id + 1) return false;
+        if (tree.subtreeEnd(id) == tree.rank(id) + 1) return false;
         if (tree.deleted(id) || tree.depth(id) - rootDepth >= maxDepth) return true;
         if (pruneIds != null && pruneIds.test(id)) return true;
         return prune != null && prune.test(tree.file(id));
     }
 
-    /** Next position after visiting {@code id}: the first child, or past a closed subtree. */
-    int advance(int id) {
+    /** Next position after visiting {@code position}: the first child, or past a closed subtree. */
+    int advance(int position) {
+        int id = tree.idAt(position);
         int end = tree.subtreeEnd(id);
-        return end != id + 1 && closed(id) ? end : id + 1;
+        return end != position + 1 && closed(id) ? end : position + 1;
     }
 
     /** Moves {@code position} past the highest closed proper ancestor, so it never lies in a skipped subtree. */
     int normalize(int position) {
+        int rootPosition = tree.rank(root);
         int target = position;
-        for (int ancestor = tree.parent(position); ancestor >= root; ancestor = tree.parent(ancestor)) {
+        for (int ancestor = tree.parent(tree.idAt(position)); ancestor >= 0 && tree.rank(ancestor) >= rootPosition;
+                ancestor = tree.parent(ancestor)) {
             if (closed(ancestor)) target = tree.subtreeEnd(ancestor);
         }
         return target;

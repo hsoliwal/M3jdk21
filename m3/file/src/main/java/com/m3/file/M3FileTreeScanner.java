@@ -24,33 +24,48 @@ import java.util.EnumSet;
 final class M3FileTreeScanner extends SimpleFileVisitor<Path> {
     private final M3FileTree tree;
     private final M3FileTreeBuilder builder;
+    private final int startId;
+    private boolean started;
 
-    private M3FileTreeScanner(M3FileTree tree) {
+    private M3FileTreeScanner(M3FileTree tree, int startId) {
         this.tree = tree;
         this.builder = new M3FileTreeBuilder(tree);
+        this.startId = startId;
     }
 
-    static M3FileTree scan(M3FileTree tree) throws IOException {
-        M3FileTreeScanner scanner = new M3FileTreeScanner(tree);
-        Files.walkFileTree(tree.root(), EnumSet.noneOf(FileVisitOption.class), Integer.MAX_VALUE, scanner);
+    /**
+     * Scans {@code maxDepth} levels: from the root of an empty tree ({@code startId < 0}), or below the
+     * existing unscanned directory row {@code startId}, whose new descendants are appended in pre-order.
+     * Directories at {@code maxDepth} become rows without children.
+     */
+    static M3FileTree scan(M3FileTree tree, int startId, int maxDepth) throws IOException {
+        if (startId >= 0 && maxDepth < 1) throw new IllegalArgumentException("expansion needs maxDepth >= 1");
+        M3FileTreeScanner scanner = new M3FileTreeScanner(tree, startId);
+        Path start = startId < 0 ? tree.root() : tree.path(startId);
+        Files.walkFileTree(start, EnumSet.noneOf(FileVisitOption.class), maxDepth, scanner);
         if (tree.rows() == 0) throw new IOException("root was not visited: " + tree.root());
         return tree;
     }
 
     @Override
     public FileVisitResult preVisitDirectory(Path dir, BasicFileAttributes attrs) {
-        builder.openFrame(append(dir, fresh(dir, attrs)));
+        boolean expanding = !started && startId >= 0;
+        started = true;
+        builder.openFrame(expanding ? startId : append(dir, fresh(dir, attrs)));
         return FileVisitResult.CONTINUE;
     }
 
     @Override
     public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) {
-        append(file, attrs);
+        started = true;
+        append(file, attrs.isDirectory() ? fresh(file, attrs) : attrs);
         return FileVisitResult.CONTINUE;
     }
 
     @Override
-    public FileVisitResult visitFileFailed(Path file, IOException exc) {
+    public FileVisitResult visitFileFailed(Path file, IOException exc) throws IOException {
+        if (!started && startId >= 0) throw exc;
+        started = true;
         String name = nameOf(file);
         builder.append(name, M3FileKind.OTHER, dotName(name), -1L, Long.MIN_VALUE);
         return FileVisitResult.CONTINUE;
