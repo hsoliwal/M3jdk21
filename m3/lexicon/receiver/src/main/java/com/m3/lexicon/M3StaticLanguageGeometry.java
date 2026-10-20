@@ -179,6 +179,14 @@ public final class M3StaticLanguageGeometry {
         return new FrequencyBand(lower, Math.max(lower, upper));
     }
 
+    /**
+     * Package-private native-kernel view. The frozen lane is never exposed through public API.
+     * Native code treats it as read-only for the duration of one bounded call.
+     */
+    long[] frequencyLaneForNative() {
+        return frequency;
+    }
+
     public long primitiveBytes() {
         return 8L * (frequency.length + classMask.length + concepts.length + subjects.length
                         + pairCounts.length)
