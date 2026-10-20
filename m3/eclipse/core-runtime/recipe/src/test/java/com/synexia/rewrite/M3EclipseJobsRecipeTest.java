@@ -66,7 +66,7 @@ final class M3EclipseJobsRecipeTest {
     @Test
     void manifestAndTemplatesAreSealed() throws Exception {
         var rows = rows();
-        assertEquals(2, rows.size());
+        assertEquals(4, rows.size());
         assertEquals(expected().keySet().stream().toList(), rows.stream().map(row -> row[0]).toList());
         for (String[] row : rows) {
             assertEquals(4, row.length);

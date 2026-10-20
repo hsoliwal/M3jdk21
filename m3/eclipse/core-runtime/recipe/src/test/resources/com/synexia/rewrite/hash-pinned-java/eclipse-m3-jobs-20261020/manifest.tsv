@@ -1,2 +1,4 @@
+m3/eclipse/core-runtime/src/main/java/com/m3/eclipse/runtime/M3EclipseJobScheduler.java	ABSENT	dc7e2cc6243291c362e135311ca2e50fb9d445db4f0c72cee5508d770526b6dd	M3EclipseJobScheduler.java.txt
 m3/eclipse/core-runtime/src/main/java/com/m3/eclipse/runtime/M3EclipseJobs.java	ABSENT	a4b0fc4b45a2f2c16f461e0288906ddc5c34aded1f3af64e3e3f42b49079d368	M3EclipseJobs.java.txt
+m3/eclipse/core-runtime/src/test/java/com/m3/eclipse/runtime/M3EclipseJobSchedulerTest.java	ABSENT	89ea9107defabe8f35a3ee8bc5d8559f79c6a13c90e1fa7cbbbf65f3d1c6724f	M3EclipseJobSchedulerTest.java.txt
 m3/eclipse/core-runtime/src/test/java/com/m3/eclipse/runtime/M3EclipseJobsTest.java	ABSENT	e12bdc3c08aec2d886a403d6f342de3ac0b35a0e063409ad43ae0c8784de19e5	M3EclipseJobsTest.java.txt

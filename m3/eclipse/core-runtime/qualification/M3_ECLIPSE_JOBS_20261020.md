@@ -34,3 +34,10 @@
 5. Reuse Lucene+OpenNLP only for candidate retrieval/semantic enrichment; JDT retains binding/working-copy authority.
 6. Preserve Eclipse SWT, Nebula, JFace and OS lifecycle contracts; JNI can accelerate primitive spans only after parity proof.
 Each candidate requires source identity, donor comparison, recipe tests, differential tests, and its own acceptance evidence.
+
+## Expanded original Eclipse JobManager path
+- **New original Job path**: `M3EclipseJobScheduler.schedule()` uses `org.eclipse.core.runtime.jobs.Job` and `ISchedulingRule` without substituting an M3 executor for Eclipse scheduling. Clients get the actual `Job` for join/cancel/priorities/families/listeners.
+- **Shared progress**: original Eclipse `IProgressMonitor` and existing borrowed `M3EclipseProgressMonitor` receive the same user callback progress. One M3 owner alone owns `beginTask/done`; original Eclipse JobManager controls the job lifecycle. Cancellation is read in both directions; task exceptions remain `IStatus.ERROR`.
+- **Local evidence**: Java21 `javac -Xlint:all -Werror` on both Java sources and their 12 test methods passed with API-faithful Eclipse/JUnit stand-ins. No real Eclipse Job/OSGi runtime tests were run locally.
+- **Canonical recipe**: same Synexia PR #12575 with four sorted, SHA-256-sealed `ABSENT` targets and an updated recipe fixed-point/drift suite. The actual Eclipse implementation remains M3JDK21 code.
+- **Required new real integration gates**: PDE/Equinox JobManager ISchedulingRule conflict exclusion; native job cancellation before/after run; priority/family notifications; real `org.eclipse.core.jobs` 3.15.700 provided dependency and bundle imports.
