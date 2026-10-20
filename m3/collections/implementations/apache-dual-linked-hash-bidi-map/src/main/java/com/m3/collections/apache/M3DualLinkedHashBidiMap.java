@@ -169,18 +169,34 @@ public final class M3DualLinkedHashBidiMap<K, V> implements BidiMap<K, V>, Seria
          * @return the previous value, or null when the key was new
          */
         Object put(Object key, Object value) {
-            int s = find(key);
-            if (s >= 0) {
-                Object old = values[s];
-                values[s] = value;
-                return old;
+            // One probe both finds the key and remembers where a new key would go (first tombstone, else the
+            // terminating empty position); only a rehash forces a second probe.
+            int hash = spread(key);
+            int[] probed = index;
+            int p = -1;
+            if (probed.length != 0) {
+                int mask = probed.length - 1;
+                int q = hash & mask;
+                for (; probed[q] != 0; q = q + 1 & mask) {
+                    int s = probed[q] - 1;
+                    if (s < 0) {
+                        if (p < 0) { p = q; }
+                    } else if (hashes[s] == hash && Objects.equals(key, keys[s])) {
+                        Object old = values[s];
+                        values[s] = value;
+                        return old;
+                    }
+                }
+                if (p < 0) { p = q; }
             }
             ensureSlot();
             ensureIndex();
-            int hash = spread(key);
-            int mask = index.length - 1;
-            int p = hash & mask;
-            while (index[p] > 0) { p = p + 1 & mask; }
+            if (index != probed) {
+                int mask = index.length - 1;
+                p = hash & mask;
+                while (index[p] != 0) { p = p + 1 & mask; }
+            }
+            int s;
             if (index[p] == 0) { occupied++; }
             if (free < 0) { s = used++; } else { s = free; free = after[s]; }
             keys[s] = key;

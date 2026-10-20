@@ -155,15 +155,25 @@ public final class M3LinkedHashMultiset<E> extends AbstractCollection<E> impleme
     }
 
     int find(Object element) {
+        int r = locate(element);
+        return r >= 0 ? r : -1;
+    }
+
+    /**
+     * The dense offset of {@code element}, or {@code -(p + 2)} for the empty index position {@code p} that ends its
+     * probe, so an insert can reuse it (-1 when there is no index yet).
+     */
+    private int locate(Object element) {
         int[] table = index;
         if (table.length == 0) { return -1; }
         int h = spread(element);
         int mask = table.length - 1;
-        for (int p = h & mask; table[p] != 0; p = p + 1 & mask) {
+        int p = h & mask;
+        for (; table[p] != 0; p = p + 1 & mask) {
             int d = table[p] - 1;
             if (hashes[d] == h && Objects.equals(element, elements[d])) { return d; }
         }
-        return -1;
+        return -(p + 2);
     }
 
     private int positionOf(int d) {
@@ -173,7 +183,9 @@ public final class M3LinkedHashMultiset<E> extends AbstractCollection<E> impleme
         return p;
     }
 
-    private int insert(Object element, int count) {
+    /** Inserts a new element; {@code miss} is locate()'s result, whose empty position is reused unless reserve() rehashed. */
+    private int insert(Object element, int count, int miss) {
+        int[] probed = index;
         reserve(distinct + 1);
         int d = distinct++;
         int h = spread(element);
@@ -186,9 +198,14 @@ public final class M3LinkedHashMultiset<E> extends AbstractCollection<E> impleme
         after[d] = -1;
         if (last >= 0) { after[last] = d; } else { first = d; }
         last = d;
-        int mask = index.length - 1;
-        int p = h & mask;
-        while (index[p] != 0) { p = p + 1 & mask; }
+        int p;
+        if (index == probed && miss < -1) {
+            p = -(miss + 2);
+        } else {
+            int mask = index.length - 1;
+            p = h & mask;
+            while (index[p] != 0) { p = p + 1 & mask; }
+        }
         index[p] = d + 1;
         total += count;
         modCount++;
@@ -270,9 +287,9 @@ public final class M3LinkedHashMultiset<E> extends AbstractCollection<E> impleme
     @Override public int add(E element, int occurrences) {
         if (occurrences == 0) { return count(element); }
         if (occurrences < 0) { throw new IllegalArgumentException("occurrences cannot be negative: " + occurrences); }
-        int d = find(element);
+        int d = locate(element);
         if (d < 0) {
-            insert(element, occurrences);
+            insert(element, occurrences, d);
             return 0;
         }
         int old = counts[d];
@@ -304,9 +321,9 @@ public final class M3LinkedHashMultiset<E> extends AbstractCollection<E> impleme
 
     @Override public int setCount(E element, int count) {
         if (count < 0) { throw new IllegalArgumentException("count cannot be negative but was: " + count); }
-        int d = find(element);
+        int d = locate(element);
         if (d < 0) {
-            if (count > 0) { insert(element, count); }
+            if (count > 0) { insert(element, count, d); }
             return 0;
         }
         int old = counts[d];
