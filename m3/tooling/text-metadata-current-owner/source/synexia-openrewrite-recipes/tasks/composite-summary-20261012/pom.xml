@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.synexia.m3</groupId><artifactId>composite-summary-proof</artifactId><version>1.0.0</version>
+  <packaging>pom</packaging>
+  <properties><proof.mode></proof.mode></properties>
+  <build><plugins><plugin>
+    <groupId>org.codehaus.mojo</groupId><artifactId>exec-maven-plugin</artifactId><version>3.5.0</version>
+    <executions><execution><id>source-seal-and-real-java-proof</id><phase>verify</phase>
+      <goals><goal>exec</goal></goals><configuration><executable>bash</executable>
+        <commandlineArgs>"${project.basedir}/verify.sh" ${proof.mode}</commandlineArgs>
+      </configuration></execution></executions>
+  </plugin></plugins></build>
+  <profiles><profile><id>jni</id><properties><proof.mode>--jni</proof.mode></properties></profile></profiles>
+</project>

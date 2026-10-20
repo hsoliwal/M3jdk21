@@ -83,3 +83,14 @@ agent (PR #1403, branch `m3/viewport-everywhere-20261018`). `FIRST_PARTY_ROWS.ts
 provider surfaces they cover (JDK `subList`, Guava `Lists.partition`/`RangeSet`, Apache `ListUtils`/
 `CompositeCollection`/`TreeList`/`LRUMap`), and the matching scaffold rows carry them as reuse hints.
 Filtered/sorted wrappers compose over these views (a view of a view) instead of duplicating them.
+
+## In-place landing (2026-10-19)
+
+M3jdk21 is the JDK: `m3/collections` is the proving ground and owned stores land in place in `java.base`.
+`INVENTORY.tsv` therefore carries `in_place_landing` and `landing_consumer`, derived by the generator from
+`LANDING_MAP.tsv` (category family to its `java.util` analogue):
+- JDK rows land in their own `java.util` type. The public API stays unchanged and the internals move onto M3
+  array+mask lanes through an M3JdkHandoff packet (TARGET_OWNED_PORT, GPLv2+CPE).
+- Guava/Commons/Spring rows reuse the `java.base` store of their family's `java.util` analogue, while the
+  provider-shaped API owner stays outside `java.base`.
+- Eclipse rows never land.

@@ -782,7 +782,7 @@
   ],
   "receiving_order": "Preserve the existing String -> arrays -> collections -> AST/compiler -> remaining runtime qualification sequence.",
   "schema": "M3_COLLECTION_MODULE_NAME_MAPPING_V1",
-  "copyright": "Copyright © 2026 Hitesh Soliwal and Contributors to the Synexia Project.",
+  "copyright": "Copyright \u00a9 2026 Hitesh Soliwal and Contributors to the Synexia Project.",
   "license": "Apache-2.0",
   "preserved_primitive_owners": [
     {
@@ -960,5 +960,21 @@
       "canonical_reusable_source_home": "hsoliwal/com.synexia",
       "source_admission": "NO_NEW_DONOR_COPY_BY_THIS_METADATA_RECIPE"
     }
-  ]
+  ],
+  "collection_refinement_20261019": {
+    "modification_notice": "Modified 2026 by Hitesh Soliwal and contributors: serial catalogue-driven collection contract refinement through canonical Synexia recipes.",
+    "target_baseline": "677437be295b23f7ccf7409be287008944d0e8b0",
+    "canonical_repository": "hsoliwal/com.synexia",
+    "canonical_recipe": "com.synexia.m3.NetBeansCollectionAtoms20261019",
+    "canonical_recipe_path": "synexia-openrewrite-recipes/recipe-crates/m3-netbeans-collection-atoms-20261019",
+    "qualification": "m3/collections/qualification/netbeans-collection-atoms-20261019/README.md",
+    "catalogue": "m3/collections/algorithm-catalog/netbeans-collection-atoms-20261019.tsv",
+    "netbeans_donor_revision": "f26ca8d8025ff820b8ffe751b6db6c1cc67baa97",
+    "netbeans_runtime_source_adopted": false,
+    "netbeans_disposition": "EVALUATED; M3ArrayList and native long-address gather candidates REFUSED; incumbent owners retained",
+    "rights": "Apache-2.0; all existing notices and historical source mappings retained; reviewed donor NOTICE packaged as evaluation provenance",
+    "phase_advance": false,
+    "public_java_api_change": false,
+    "public_jni_abi_change": false
+  }
 }

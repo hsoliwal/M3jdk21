@@ -1,3 +1,4 @@
+// Modified 2026 by Hitesh Soliwal and contributors: reconcile merged sequenced guards and retain reversed split ordering.
 // Modified 2026 by Hitesh Soliwal and contributors: preserve comparator metadata across filtered splits.
 /*
  * SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
@@ -250,7 +251,8 @@ public final class M3FilteredViews {
         @Override public boolean contains(Object value) { return source.contains(value); }
         @Override public boolean containsAll(Collection<?> values) { return source.containsAll(values); }
         @Override public Iterator<E> iterator() { return Collections.unmodifiableSet(source).iterator(); }
-        @Override public java.util.Spliterator<E> spliterator() { return source.spliterator(); }
+        /** Preserve the reverse owner's iterator/size demand and every split's ordering. */
+        @Override public Spliterator<E> spliterator() { return M3SlotSpliterators.sorted(source); }
         @Override public Object[] toArray() { return source.toArray(); }
         @Override public <T> T[] toArray(T[] target) { return source.toArray(target); }
         @Override public <T> T[] toArray(java.util.function.IntFunction<T[]> factory) {
@@ -311,14 +313,9 @@ public final class M3FilteredViews {
         @Override public SortedSet<E> tailSet(E from) {
             return new SortedSetView<>(sorted.tailSet(from), predicate);
         }
-        @Override public SortedSet<E> reversed() {
-            return readOnlySortedSet(SortedSet.super.reversed());
-        }
         // An explicit read-only boundary refuses even empty endpoint mutations.
         @Override public void addFirst(E value) { throw readonly(); }
         @Override public void addLast(E value) { throw readonly(); }
-        @Override public E removeFirst() { throw readonly(); }
-        @Override public E removeLast() { throw readonly(); }
         @Override public E first() { return iterator().next(); }
         @Override public E last() {
             Iterator<E> iterator = iterator();
@@ -327,18 +324,6 @@ public final class M3FilteredViews {
             while (iterator.hasNext()) last = iterator.next();
             return last;
         }
-
-        // Keep the reversed half-open/comparator view on the same live backing
-        // owner, but do not expose JDK's reverse wrapper as a mutable boundary.
-        @Override public SortedSet<E> reversed() {
-            return new SortedSetView<>(sorted.reversed(), predicate);
-        }
-
-        // SortedSet's Java 21 default removeFirst/removeLast inspect the
-        // collection before attempting removal. Empty strict read-only views
-        // must refuse mutations without invoking a user predicate.
-        @Override public E removeFirst() { throw readonly(); }
-        @Override public E removeLast() { throw readonly(); }
     }
 
     private static final class NavigableSetView<E> extends SortedSetView<E>
@@ -410,13 +395,9 @@ public final class M3FilteredViews {
         }
         @Override public E pollFirst() { throw readonly(); }
         @Override public E pollLast() { throw readonly(); }
-        @Override public NavigableSet<E> reversed() { return descendingSet(); }
         @Override public NavigableSet<E> descendingSet() {
             return new NavigableSetView<>(nav.descendingSet(), predicate);
         }
-        // Preserve NavigableSet's covariant sequenced return type and the
-        // same strict mutation refusal inherited from SortedSetView.
-        @Override public NavigableSet<E> reversed() { return descendingSet(); }
         @Override public Iterator<E> descendingIterator() {
             return filtered(nav.descendingSet().iterator(), predicate);
         }

@@ -95,6 +95,34 @@ public final class M3ConcurrentBitSet {
         }
     }
 
+    /**
+     * Atomically claims the first clear bit seen while scanning ascending words.
+     * All state stays in the existing parent-owned primitive long[] and its CAS
+     * metadata; no per-slot entry, cursor object or shadow owner is created.
+     *
+     * <p>Concurrent claims cannot return the same bit until it is cleared.
+     * Concurrent clears may change which bit is lowest while this scan runs;
+     * returning -1 does not constitute a global empty snapshot under mutation.
+     *
+     * @return claimed index in [0, bitCapacity()), or -1 after a full scan
+     */
+    public int claimFirstClearBit() {
+        final int tailBits = bitCapacity & 63;
+        for (int wordIndex = 0; wordIndex < words.length; wordIndex++) {
+            final long validMask = wordIndex == words.length - 1 && tailBits != 0
+                    ? (1L << tailBits) - 1L : -1L;
+            for (;;) {
+                final long before = (long) LONG_ELEMENT.getAcquire(words, wordIndex);
+                final long chosen = Long.lowestOneBit(~before & validMask);
+                if (chosen == 0L) break;
+                if (LONG_ELEMENT.compareAndSet(words, wordIndex, before, before | chosen)) {
+                    return (wordIndex << 6) + Long.numberOfTrailingZeros(chosen);
+                }
+            }
+        }
+        return -1;
+    }
+
     public int cardinalityApprox() {
         int count = 0;
         for (int index = 0; index < words.length; index++) {

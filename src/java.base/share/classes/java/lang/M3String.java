@@ -746,6 +746,10 @@ final class M3String implements CharSequence {
         M3String that = other.m3();
         if (that != null) {
             if (sameCoordinate(that)) return true;
+            if (isWholeOwner() && that.isWholeOwner()
+                    && owner instanceof M3StringImmediate && that.owner instanceof M3StringImmediate) {
+                return M3StringImmediate.sameText(owner, that.owner);
+            }
             if (that.length() != length()) return false;
             if (isWholeOwner() && that.isWholeOwner()) {
                 if (owner.javaHash != that.owner.javaHash) return false;

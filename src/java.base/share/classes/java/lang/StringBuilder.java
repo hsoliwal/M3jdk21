@@ -471,7 +471,7 @@ public final class StringBuilder
     @Override
     @IntrinsicCandidate
     public String toString() {
-        //FLLDCIM: R5-BUILDER — composite builder: the String owns the composed M3 tuple, no flatten
+        //FLLDCIM: R5-BUILDER \u2014 composite builder: the String owns the composed M3 tuple, no flatten
         String composed = m3ComposedString();
         if (composed != null) {
             return composed;
@@ -496,7 +496,7 @@ public final class StringBuilder
      */
     @Serial
     private void writeObject(ObjectOutputStream s) throws IOException {
-        m3EnsureFlat(); //FLLDCIM: R5-BUILDER — serial form unchanged
+        m3EnsureFlat(); //FLLDCIM: R5-BUILDER \u2014 serial form unchanged
         s.defaultWriteObject();
         s.writeInt(count);
         char[] val = new char[capacity()];

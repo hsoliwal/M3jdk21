@@ -53,11 +53,64 @@ public final class M3ASTHierarchyContract {
             check(position==expected,"parent child coverage L"+lvl);
         }
     }
+
+    /** Unnamed module/package and non-collection parser facts are valid L0 leaves. */
+    private static void genericSourceFacts() {
+        var plain = new M3ASTHierarchy.FileFact("p", "", "", "Demo.java",
+                sha(20000), sha(20001), 0, new int[] {7, 11},
+                new byte[] {(byte) 0x80, (byte) 0xff});
+        var javaType = new M3ASTHierarchy.FileFact("p", "jdk.compiler", "com.m3", "src/T.java",
+                sha(20002), sha(20003), M3ASTHierarchy.LIST,
+                new int[] {13}, new byte[] {1});
+        var neutral = M3ASTHierarchy.build("r", List.of(plain));
+        check(neutral.totalFiles() == 1 && neutral.totalOccurrences() == 2,
+                "unnamed source retains two primitive occurrences");
+        check(neutral.familyMask() == 0, "plain source does not claim collections");
+        check(neutral.stateMask(0) == 128 && neutral.stateMask(1) == 255,
+                "full unsigned masks preserved");
+        neutral.requireFamilies(0);
+        reject(IllegalStateException.class, () -> neutral.requireFamilies(M3ASTHierarchy.LIST),
+                "plain source does not qualify a collection family");
+        var mixed = M3ASTHierarchy.build("r", List.of(plain, javaType));
+        check(mixed.rootSha256().equals(
+                M3ASTHierarchy.build("r", List.of(javaType, plain)).rootSha256()),
+                "mixed parser-fact hierarchy order independent");
+        check(mixed.totalFiles() == 2 && mixed.totalOccurrences() == 3,
+                "mixed leaf offsets remain exact");
+        check(mixed.familyMask() == M3ASTHierarchy.LIST, "zero family does not add flags");
+        check(mixed.level(M3ASTHierarchy.Level.L2_PACKAGE).size() == 2,
+                "named and unnamed package planes");
+        check(mixed.level(M3ASTHierarchy.Level.L3_MODULE).size() == 2,
+                "named and unnamed module planes");
+        check(mixed.level(M3ASTHierarchy.Level.L4_PROJECT).size() == 1,
+                "same project retained");
+        mixed.requireFamilies(M3ASTHierarchy.LIST);
+        coverage(mixed);
+        coverage(neutral);
+        var typed = new M3ASTHierarchy.FileFact("p", "", "", "Demo.java",
+                sha(20000), sha(20001), M3ASTHierarchy.ARRAY,
+                new int[] {7, 11}, new byte[] {(byte) 0x80, (byte) 0xff});
+        check(!neutral.rootSha256().equals(M3ASTHierarchy.build("r", List.of(typed)).rootSha256()),
+                "family classification changes source digest");
+        reject(IllegalArgumentException.class,
+                () -> new M3ASTHierarchy.FileFact("p", " ", "", "Demo.java",
+                        sha(20000), sha(20001), 0, new int[] {1}, new byte[] {0}),
+                "space-only module still rejected");
+        reject(IllegalArgumentException.class,
+                () -> new M3ASTHierarchy.FileFact("p", "", " ", "Demo.java",
+                        sha(20000), sha(20001), 0, new int[] {1}, new byte[] {0}),
+                "space-only package still rejected");
+        reject(IllegalArgumentException.class,
+                () -> new M3ASTHierarchy.FileFact("p", null, "", "Demo.java",
+                        sha(20000), sha(20001), 0, new int[] {1}, new byte[] {0}),
+                "null module still rejected");
+    }
     public static void main(String[] args) {
         int count = args.length==0?2000:Integer.parseInt(args[0]);
         var facts = new ArrayList<M3ASTHierarchy.FileFact>(count);
         int expectedAtoms=0;
         for(int i=0;i<count;i++){facts.add(fact(i));expectedAtoms += 1+i%17;}
+        genericSourceFacts();
         var original=M3ASTHierarchy.build("hsoliwal/com.synexia",facts);
         check(original.totalOccurrences()==expectedAtoms,"total atom count");
         check(original.totalFiles()==count,"file count");
@@ -110,7 +163,6 @@ public final class M3ASTHierarchyContract {
         reject(IllegalArgumentException.class,()->new M3ASTHierarchy.FileFact("p","m","pkg","foo\\bar",sha(1),sha(2),1,new int[]{1},new byte[]{1}),"windows path");
         reject(IllegalArgumentException.class,()->new M3ASTHierarchy.FileFact("p","m","pkg","foo",sha(1),sha(2),1,new int[]{1},new byte[]{1,2}),"misaligned flags");
         reject(IllegalArgumentException.class,()->new M3ASTHierarchy.FileFact("p","m","pkg","foo",sha(1),sha(2),1,new int[]{0},new byte[]{1}),"invalid atom handle");
-        reject(IllegalArgumentException.class,()->new M3ASTHierarchy.FileFact("p","m","pkg","foo",sha(1),sha(2),0,new int[]{1},new byte[]{1}),"missing family classification");
         reject(IllegalArgumentException.class,()->new M3ASTHierarchy.FileFact("p","m","pkg","foo",sha(1),sha(2),1<<22,new int[]{1},new byte[]{1}),"unknown family mask");
         reject(IllegalArgumentException.class,()->new M3ASTHierarchy.FileFact("p","m","pkg","foo","not-a-hash",sha(2),1,new int[]{1},new byte[]{1}),"bad source seal");
         // Tests a single atom state or receipt drift changes the content-addressed root.
