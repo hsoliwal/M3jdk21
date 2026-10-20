@@ -10,5 +10,5 @@ java_runtime	OpenJDK 21.0.12.1
 maven_runtime	NOT_INSTALLED
 profile	serial-file-bounded-java21
 compiler_options	--release 21 -proc:none -Xlint:all,-module -Werror
-tests	M3FileDeltaLedgerContract (30); M3FileBuildImpactContract (10567)
+tests	M3FileDeltaLedgerContract (30); M3FileBuildImpactContract (10569)
 promotion	DRAFT_HOLD
