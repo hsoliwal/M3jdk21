@@ -71,6 +71,7 @@ public final class M3ShadowStreams {
     public static OutputStream output(OutputStream primary, OutputStream shadow,
                                       M3StreamProgress progress) {
         Objects.requireNonNull(primary, "primary");
+        if (primary == shadow) throw new IllegalArgumentException("output shadows must be distinct");
         M3StreamProgress monitor = M3StreamProgress.require(progress);
         return new OutputStream() {
             private boolean closed;
