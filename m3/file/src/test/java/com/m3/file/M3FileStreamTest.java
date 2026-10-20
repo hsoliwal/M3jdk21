@@ -112,6 +112,25 @@ class M3FileStreamTest {
     }
 
     @Test
+    void immediateChildrenFormIndependentDirectoryWorkUnits() throws Exception {
+        Path root = Files.createDirectory(temp.resolve("children"));
+        Path nested = Files.createDirectory(root.resolve("nested"));
+        Files.writeString(root.resolve("one.txt"), "1");
+        Files.writeString(nested.resolve("two.txt"), "2");
+
+        List<Path> children;
+        try (var stream =
+                M3FileTraversal.children(
+                        root,
+                        M3FileTraversal.Options.all(),
+                        M3ProgressMonitor.none())) {
+            children = stream.map(M3File::path).sorted().toList();
+        }
+
+        assertEquals(List.of(nested, root.resolve("one.txt")).stream().sorted().toList(), children);
+    }
+
+    @Test
     void lazySuffixTraversalDoesNotRetainUnrelatedFiles() throws Exception {
         Path rootA = Files.createDirectory(temp.resolve("a"));
         Path rootB = Files.createDirectory(temp.resolve("b"));
