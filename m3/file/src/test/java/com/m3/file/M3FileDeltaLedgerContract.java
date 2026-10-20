@@ -89,6 +89,22 @@ public final class M3FileDeltaLedgerContract {
             ok((recreated.stateAt(binarySlot) & M3FileDeltaLedger.CREATED) != 0,
                     "recreated class state");
 
+            Path big = root.resolve("large.bin");
+            byte[] bigData = new byte[2 * 65536 + 7];
+            bigData[bigData.length - 1] = 1;
+            Files.write(big, bigData);
+            var bigFirst = M3FileDeltaLedger.scan(root, null, List.of(big));
+            ok(bigFirst.changedSlots(M3FileDeltaLedger.Kind.BUILD_INPUT).length == 1,
+                    "multi-buffer input created");
+            var bigSame = M3FileDeltaLedger.scan(root, bigFirst, List.of(big));
+            ok(bigSame.changedSlots(M3FileDeltaLedger.Kind.BUILD_INPUT).length == 0,
+                    "multi-buffer input unchanged");
+            bigData[65536 + 1] ^= 1;
+            Files.write(big, bigData);
+            var bigModified = M3FileDeltaLedger.scan(root, bigSame, List.of(big));
+            ok((bigModified.stateAt(0) & M3FileDeltaLedger.MODIFIED) != 0,
+                    "multi-buffer interior delta detected");
+
             M3FileDeltaLedger.save(snapshot, recreated);
             byte[] corrupt = Files.readAllBytes(snapshot);
             corrupt[corrupt.length - 2] ^= 0x01;
