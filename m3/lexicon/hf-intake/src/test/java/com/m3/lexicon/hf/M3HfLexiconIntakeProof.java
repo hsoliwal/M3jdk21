@@ -766,7 +766,7 @@ public final class M3HfLexiconIntakeProof {
                 && austlang.contains("approximate"),
                 "Austlang stable variety IDs and approximate locations remain qualified");
         String afwn = discoveryRecord(lines, "afwn-2022-release-1-0");
-        require(afwn.contains("nine languages") && afwn.contains("CC BY 4.0")
+        require(afwn.contains("nine South African languages") && afwn.contains("CC BY 4.0")
                 && afwn.contains("synset"),
                 "African Wordnet release coverage, rights and sense identity remain explicit");
         String multilingualFrequency = discoveryRecord(lines, "hf-multilingual-frequency-lists");
