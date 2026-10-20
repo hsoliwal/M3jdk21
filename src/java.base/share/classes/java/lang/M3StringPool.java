@@ -901,7 +901,7 @@ final class M3StringPool {
      * No native address, Java byte/char payload, or child M3String is retained or copied.
      * The stack grows only when the tuple depth requires it.</p>
      */
-    private static final class LeafCursor {
+    static final class LeafCursor {
         private M3StringOwner[] pendingOwners = new M3StringOwner[8];
         private long[] pendingCoordinates = new long[8];
         private int pendingSize;
