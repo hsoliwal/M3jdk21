@@ -365,6 +365,19 @@ public final class M3OrderStatisticForest {
 		return removed;
 	}
 
+	/**
+	 * Resets the lanes of {@code id} without unlinking it: for an owner that drops a whole tree (every node of it is
+	 * forgotten, then {@link #dropTree(int)}), O(1) per node instead of one removal each.
+	 */
+	public void forget (int id) {
+		reset (id);
+	}
+
+	/** Forgets the tree of {@code parentId}; its nodes must have been {@link #forget(int) forgotten}. */
+	public void dropTree (int parentId) {
+		roots [parentId + 1] = NONE;
+	}
+
 	/** Applies every pending shift of the tree of {@code parentId}, so the key lane holds absolute keys. O(k). */
 	public void flush (int parentId) {
 		flushNode (roots [parentId + 1]);
