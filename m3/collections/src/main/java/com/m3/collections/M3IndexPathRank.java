@@ -3,6 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  * M3 indexed-path rank/select extension: recipe-generated target candidate.
  * Modified 2026: adaptive sparse rank lookup and dense bitmap-word enumeration.
+ * Modified 2026: decode contiguous low-bit rank words without per-rank bit clearing.
  */
 package com.m3.collections;
 
@@ -142,6 +143,9 @@ public final class M3IndexPathRank {
         }
         long word = selected[low];
         int remainder = rank - wordPrefix[low];
+        // A nonzero low-bit run has ordinal == rank within this word.
+        // The identity also admits all 64 bits: -1L + 1L wraps to zero.
+        if ((word & (word + 1L)) == 0) return (low << 6) + remainder;
         while (remainder-- > 0) word &= word - 1;
         return (low << 6) + Long.numberOfTrailingZeros(word);
     }

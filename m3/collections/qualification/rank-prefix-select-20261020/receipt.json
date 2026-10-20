@@ -1,0 +1,73 @@
+{
+  "schema": 1,
+  "canonical_repository": "hsoliwal/com.synexia",
+  "canonical_commit": "9c8c0c58c7bdd2c8a0ca47c7ff9fa92bf3a0e7b1",
+  "canonical_pr": 12563,
+  "canonical_packet": "synexia-openrewrite-recipes/tasks/m3-index-rank-prefix-select-20261020/qualification-20261020",
+  "target_parent": "35e661134ba99b774f34326d1138e995ccda193a",
+  "recipes": [
+    "com.synexia.m3.M3IndexPathRankPrefixSelect20261020",
+    "com.synexia.m3.M3JUnitLauncherProvenance20261020"
+  ],
+  "generated_targets": {
+    "m3/collections/src/main/java/com/m3/collections/M3IndexPathRank.java": "327c22ee178360d87aa82cbef5122ac19a44bd036415c315480166cd439fc0e2",
+    "m3/collections/src/test/java/com/m3/collections/M3IndexPathRankSelectProof.java": "8a56230b726c526f3b1b69a7af92e087af8ae73cc63a98ed4d4d5ac976cc653c",
+    "m3/collections/src/test/java/com/m3/collections/M3IndexPathRankSelectTest.java": "aa7986baa325f1e992707ff05a43fc177d653fbd79158ea1dce6c4f186fd0e9c",
+    "m3/vendor/third_party/junit-platform-launcher-1.10.2/verify_source.py": "19c8ac41b3f25e43a7053d6a8a24cb2256806200b0ab64f58e83ada246ccea76"
+  },
+  "sdk": {
+    "tests_passed": 16,
+    "java_first_application_files": 3,
+    "text_final_direct_recipe": "original-to-final qualified; current target already at exact final output",
+    "final_application_files": 0,
+    "replay_files": 0
+  },
+  "runtime": {
+    "status": "ORIGINAL_COLLECTION_MAVEN_AND_JNI_PASS",
+    "inputs": 1443,
+    "production_java": 267,
+    "test_java": 263,
+    "source_owned_modules": 10,
+    "stale_class_removal_checks": 10,
+    "native_libraries": 10,
+    "maven_tests": {
+      "tests": 469,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "public_surfaces_unchanged": 2,
+    "jni_headers_unchanged": 12,
+    "installed_jdk_qualification": false
+  },
+  "rank_native_parity_paths": 180,
+  "interpreter": {
+    "rank_checks": 36476,
+    "randomized_paths": 900
+  },
+  "rank_select_assertions": 12595606,
+  "launcher_provenance_cases": 5,
+  "supersedes": [
+    "Original owning collection Maven source-owned JUnit dependency installation HOLD in rank-convergence-20261020"
+  ],
+  "hold": [
+    "Installed integrated M3JDK21 / HotSpot / jtreg / JCK",
+    "String-first phase promotion and all-family completion",
+    "Full canonical reactor and source-built OpenRewrite dependency closure",
+    "Non-Linux platforms",
+    "Representative retained heap and native RSS",
+    "Hosted CI checks are separate from local qualification"
+  ],
+  "status": "DRAFT_COLLECTION_MAVEN_JNI_QUALIFIED_NOT_INSTALLED_JDK_QUALIFIED",
+  "local_evidence_sha256": {
+    "INPUTS.tsv": "9ae05ba37c1f5bf0dedf4ddd945cc4a5a2eb39ca67b4b61b3531177465c9d553",
+    "launcher-provenance-refusals.log": "0727fdff912b3270dd8224a2d3996791da4e5ef7695ec8b9fdedf01b4b3e103d",
+    "module-verify.log": "ae0651fc3b128ddf8a1f965022959590ab641b02a4c5e6f227eae91b6f6b834d",
+    "rank-interpreter.log": "473c20d5916cd8f0a96d3cebd38093db47b00c51fcda9f455ad3a2d2579df81a",
+    "rank-native.log": "6c7cb98955ebfe161f604b29612fc9084cc3c3d2d003aa44fe9e57e8b38242f7",
+    "rank-select.log": "d026e825ac2078f586a6badc19229b1b61d0b38b10b14a6c2b3ccfdd7001cebb",
+    "sdk-final.log": "3f97921e7641cbd5904c3157f0120d44e143163a76c91bc5376d8b32aabdeeb5",
+    "stale-class-removal.json": "db31407f200dbaac7b714fa16ab42e9a1c8e6e6fb5b4ea1d83cba46e58a130b1",
+    "work-probe.log": "46e23c85ee3f353ad2d29f9601e0e084819d5245035a923b44650d506934d84d"
+  }
+}
