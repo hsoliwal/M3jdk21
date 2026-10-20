@@ -5,4 +5,5 @@ m3/ast/src/main/java/com/m3/ast/M3Dag.java	ABSENT	7254aef1da83db4270ed050b751561
 m3/ast/src/main/java/com/m3/ast/M3Interaction.java	ABSENT	d9fc83108108beb561b0dcdfa261121749ef50930e3d2e0105bac4c4b3724028	0005-M3Interaction.java.txt
 m3/ast/src/main/java/com/m3/ast/M3InteractionKind.java	ABSENT	b76a6f39d0dfdc2efa39dc96dfe45daf0a913f38b251e1ea2dfb467728e72c35	0006-M3InteractionKind.java.txt
 m3/ast/src/main/java/com/m3/ast/M3InteractionMode.java	ABSENT	bbc60fd5690db2d2989e84e4e47599fd63a54c4335122fab1f2581cbc1cea9e8	0007-M3InteractionMode.java.txt
+m3/ast/src/test/java/com/m3/ast/M3UniversalAstDagSelfTest.java	ABSENT	47876e56ab8624d388a5c5e9b21b2e7240292d0532a66888f7b9604d2455cbb4	0009-M3UniversalAstDagSelfTest.java.txt
 m3/ast/src/test/java/com/m3/ast/M3UniversalAstDagTest.java	ABSENT	9a027309e04b0b0009d2ee89ff18efeda1355e923432825ab27159321bd4a282	0008-M3UniversalAstDagTest.java.txt
