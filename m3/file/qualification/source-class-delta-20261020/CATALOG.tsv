@@ -12,3 +12,4 @@ JNI hash acceleration	Existing M3FS native owner	Reuse only after Java/JNI compa
 Collection filtered views	Existing M3Collections and java.util owner	Array/offset/mask backed view, predicate selection	Original API, mutation, predicate demand, comparator, nested view contracts	REUSE_EXISTING_PRS
 Collection sorted views	Existing M3Collections and java.util owner	Index-only stable physical-offset order	Comparer/null/duplicate/range/reverse/iterator contracts	REUSE_EXISTING_PRS
 LeetCode HackerRank GeeksforGeeks	Algorithm category catalogue	Hashing/graph/difference taxonomy only	No challenge code copied; exact hashes determine equality	REFERENCE_ONLY
+Buffered file hashing	M3FileDeltaLedger private atom	One 64KiB reusable ByteBuffer per scan	No per-file 64KiB scratch allocation; refuse repeated zero reads	JAVA21_PROBE_PASS
