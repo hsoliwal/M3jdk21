@@ -460,7 +460,7 @@ def qualify(args):
         for test in FIXTURES:
             command.run("image-" + test, *java, "--add-modules", ",".join(MODULES),
                         "-cp", output / "test-classes", test)
-        for test in ("M3SourceToolsTest", "M3CpuToolsTest"):
+        for test in ("M3SourceToolsTest", "M3CpuToolsTest", "M3FileCpuFactsTest"):
             command.run("image-m3-storage-" + test, *java, "-XX:+UnlockExperimentalVMOptions",
                         "-XX:+UseM3StringStorage", "-Dm3.test.requireStorage=true",
                         "--add-opens", "java.base/java.lang=ALL-UNNAMED",
@@ -497,7 +497,7 @@ def qualify(args):
         receipt.update({"status": "PASS", "fixture_classes": list(FIXTURES) + ["M3TextSmoke"],
                         "toolchain_before_after": "EXACT_HASH_MATCH", "legal_notice_roots": [label for label, _ in legal_roots],
                         "legal_notice_sha256": legal_seals, "legal_jmod_and_image_readback": "EXACT_HASH_MATCH_ALL_20_MODULES",
-                        "m3_string_storage_enabled_fixtures": ["M3SourceToolsTest", "M3CpuToolsTest"],
+                        "m3_string_storage_enabled_fixtures": ["M3SourceToolsTest", "M3CpuToolsTest", "M3FileCpuFactsTest"],
                         "jni_owner": native_source.relative_to(repo).as_posix(),
                         "jni_sha256": sha256(bundled_native), "image_module_count": len(actual),
                         "module_artifacts_sha256": sha256(output / "MODULE_ARTIFACTS.json"),
