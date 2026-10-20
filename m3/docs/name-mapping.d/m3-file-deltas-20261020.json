@@ -1,0 +1,21 @@
+{
+  "schema": "M3_FILE_DELTA_MAPPING_V1",
+  "copyright": "2026 Hitesh Soliwal and contributors",
+  "license": "Apache-2.0",
+  "target_module": "com.m3.file",
+  "existing_owner": "com.m3.file.M3File",
+  "added_owner": "com.m3.file.M3FileSnapshot",
+  "source_contract": "Bounded raw-byte observations of the original provider Path, complete SHA-256 and file existence/metadata deltas",
+  "target_paths": [
+    "m3/file/src/main/java/com/m3/file/M3File.java",
+    "m3/file/src/main/java/com/m3/file/M3FileSnapshot.java"
+  ],
+  "existing_mapping": "m3/docs/name-mapping.json: com.synexia.indexstring.file.MIndexFile*Facts family -> M3 file/m3fs fact plane",
+  "identity_rule": "Use file path, content and producer generation; String owner coordinates are not file identity",
+  "recipe_home": "hsoliwal/com.synexia:synexia-openrewrite-recipes/recipe-crates/m3-file-build-deltas-20261020",
+  "intake_mode": "INDEPENDENT_APACHE_MODULE",
+  "receiving_sequence_advanced": false,
+  "semantic_dependency_reuse": "PENDING",
+  "automatic_maven_compile_skipping": "PENDING",
+  "full_jdk_hotspot_integration": "NOT_QUALIFIED_BY_THIS_FILE_MODULE_CHANGE"
+}
