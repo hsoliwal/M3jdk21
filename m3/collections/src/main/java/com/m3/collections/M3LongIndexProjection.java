@@ -142,6 +142,25 @@ public final class M3LongIndexProjection {
             // immutable directory already in the requested order or copy its window.
             return new M3LongIndexProjection(values, indices, from, to, requested);
         }
+        // Two-pointer category: a monotone index directory can switch direction
+        // in O(n) instead of a full O(n log n) indirect merge sort. Reverse
+        // equal-valued runs back into their original stable encounter order.
+        // Only the private physical index vector is copied; values never move.
+        if (order != Order.ENCOUNTER) {
+            int[] reversed = physicalIndices();
+            reverseRange(reversed, 0, reversed.length);
+            for (int run = 0; run < reversed.length;) {
+                long value = M3LongAddressKernel.loadPhysicalUnchecked(values, reversed[run]);
+                int end = run + 1;
+                while (end < reversed.length
+                        && M3LongAddressKernel.loadPhysicalUnchecked(values, reversed[end]) == value) {
+                    end++;
+                }
+                reverseRange(reversed, run, end);
+                run = end;
+            }
+            return new M3LongIndexProjection(values, reversed, 0, reversed.length, requested);
+        }
         int[] current = physicalIndices();
         int size = current.length;
         if (size < 2) {
@@ -172,4 +191,13 @@ public final class M3LongIndexProjection {
         return new M3LongIndexProjection(values, current, 0, size,
                 descending ? Order.DESCENDING : Order.ASCENDING);
     }
+    /** Reverses only a private int[] coordinate window, never a payload or shared index. */
+    private static void reverseRange(int[] positions, int begin, int end) {
+        for (int left = begin, right = end - 1; left < right; left++, right--) {
+            int tmp = positions[left];
+            positions[left] = positions[right];
+            positions[right] = tmp;
+        }
+    }
+
 }
