@@ -451,7 +451,8 @@ public final class M3LinkedHashMultiset<E> extends AbstractCollection<E> impleme
         int walked = 0;
         int previous = -1;
         for (int d = first; d >= 0; d = after[d]) {
-            if (d >= distinct || before[d] != previous || ++walked > distinct) { throw new AssertionError("links"); }
+            if (d >= distinct || before[d] != previous) { throw new AssertionError("links"); }
+            walked++;
             previous = d;
         }
         if (walked != distinct || previous != last) { throw new AssertionError("links"); }

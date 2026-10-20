@@ -280,8 +280,11 @@ final class M3LinkedHashMultisetContractTest {
             it.remove();
             return null;
         });
+        // Guava's LinkedHashMap.forEach also visits appended entries, so an unconditional add would never end there.
         outcomeOnly("forEachEntry structural (Guava LinkedHashMap.forEach keeps visiting, then throws)", List.of(1, 1, 1, 2, 3, 3, 11), m -> {
-            m.forEachEntry((x, n) -> m.add(x + 10));
+            m.forEachEntry((x, n) -> {
+                if (x < 10) { m.add(x + 10); }
+            });
             return null;
         });
         both("forEach structural", m -> {
@@ -430,13 +433,12 @@ final class M3LinkedHashMultisetContractTest {
         List<Integer> order = new ArrayList<>();
         for (int i = 0; i < 5_000; i++) {
             int e = i % 97 * 31;
-            if (churn.add(e)) { order.remove((Integer) e); order.add(e); }
+            if (churn.count(e) == 0) { order.add(e); }
+            churn.add(e);
             if (i % 3 == 0) {
                 int gone = (i * 7) % 97 * 31;
-                churn.setCount(gone, 0);
-                order.remove((Integer) gone);
+                if (churn.setCount(gone, 0) > 0) { order.remove((Integer) gone); }
             }
-            if (!churn.contains(e)) { order.remove((Integer) e); }
         }
         churn.verifyInvariants();
         assertEquals(order, new ArrayList<>(churn.elementSet()));
@@ -516,6 +518,7 @@ final class M3LinkedHashMultisetContractTest {
         expectBroken("links", m -> ints(m, "after")[2] = 7);
         expectBroken("links", m -> ints(m, "before")[1] = 2);
         expectBroken("links", m -> ints(m, "after")[0] = 2);
+        expectBroken("links", m -> ints(m, "after")[1] = -1);
     }
 
     @Test
