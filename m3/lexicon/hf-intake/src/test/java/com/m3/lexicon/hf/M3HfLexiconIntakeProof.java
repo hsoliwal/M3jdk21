@@ -321,6 +321,20 @@ public final class M3HfLexiconIntakeProof {
                 "kanjidic2-edrdg",
                 "cc-cedict-v2"
         )), "exact 230 language-resource source IDs match the pinned catalogue");
+        String jmdict = discoveryRecord(lines, "jmdict-edrdg");
+        require(jmdict.contains("JMdict_e/JMdict_b")
+                && jmdict.contains("legacy generation")
+                && jmdict.contains("parallel NG generation"),
+                "JMdict edition and generation remain pinned separately");
+        String kanjidic2 = discoveryRecord(lines, "kanjidic2-edrdg");
+        require(kanjidic2.contains("CC BY-NC-SA 4.0")
+                && kanjidic2.contains("exclude SKIP from any commercial payload"),
+                "KANJIDIC2 SKIP rights stay field-scoped and noncommercial");
+        String ccCedict = discoveryRecord(lines, "cc-cedict-v2");
+        require(ccCedict.contains("case-sensitively")
+                && ccCedict.contains("[Wang2]") && ccCedict.contains("[wang2]")
+                && ccCedict.contains("case-fold Pinyin"),
+                "CC-CEDICT V2 preserves case-sensitive Pinyin identity");
         String sindhi = discoveryRecord(lines, "hf-sindhi-open-lexicon");
         require(sindhi.contains("223,342") && sindhi.contains("lexical_id")
                 && sindhi.contains("entry_id") && sindhi.contains("schema casting"),
