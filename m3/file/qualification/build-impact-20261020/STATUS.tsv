@@ -10,3 +10,5 @@ jni_abi_native_tests	NOT_EXECUTED	No new native symbol; native acceleration unme
 full_jdk_hotspot_jtreg	NOT_EXECUTED	No full target image
 maven_gradle_self_build	NOT_EXECUTED	No fork distribution/runtime path exercised
 provider_filtered_sorted_contracts	UNTOUCHED	Existing owner PRs maintained separately
+interpreted_jvm_java21	PASS_LOCAL	M3_FILE_IMPACT_PASS checks=10569
+checked_jni_flag_java_only	PASS_LOCAL	-Xcheck:jni: no new JNI method called; not native parity
