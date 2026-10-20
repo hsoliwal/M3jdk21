@@ -1,0 +1,10 @@
+# Rule 24 hidden-viewport gate (M3HiddenViewportGate, headful on the hidden desktop via ui_lock.sh + hidden_java.sh), 2026-10-20, JDK 21.0.9 + --patch-module java.desktop.
+# The view sits in the second tab of a JTabbedPane; that tab is hidden, 10^4 model events are applied in 100 batches, then the tab is shown. Counts: paintComponent of the view and JScrollPane.doLayout.
+# visible_rows_hash: rows, bounds and text of the rows in the window after show; pixels_hash: the captured view.
+view	impl	n	events	paints_hidden	layouts_hidden	paints_shown	layouts_shown	events_ms	visible_rows_hash	pixels_hash
+list	stock	100000	10000	0	0	1	2	137	e09034bb	f4c1a27
+list	m3	100000	10000	0	0	1	2	65	e09034bb	f4c1a27
+tree	stock	100000	10000	0	0	1	2	7106	1c028bcc	c49bc994
+tree	m3	100000	10000	0	0	1	2	298	1c028bcc	c49bc994
+table	stock	100000	10000	0	0	1	2	40	1aaa24fd	eb9633c7
+table	m3	100000	10000	0	0	1	2	42	1aaa24fd	eb9633c7
