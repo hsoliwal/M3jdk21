@@ -124,17 +124,16 @@ public final class M3UiInterningBench {
 		final M3TextExtentCache extents = new M3TextExtentCache (1 << 18);
 		final M3LabelLanes lanes;
 		final M3TextExtentCache.Measurer measurer = (label, font) -> measureLabel (label, font);
-		final StringBuilder scratch = new StringBuilder ();
+		final char [] chars = new char [256];
 
 		PoolStore (int columns) {
 			lanes = new M3LabelLanes (columns, pool, extents);
 			lanes.setRowCount (ROWS);
 		}
 
-		long measureLabel (int label, int font) {
-			scratch.setLength (0);
-			for (int i = 0, n = pool.length (label); i < n; i++) scratch.append (pool.charAt (label, i));
-			return measure (scratch, font);
+		long measureLabel (long label, int font) {
+			int length = lanes.getChars (label, chars, 0);
+			return measure (java.nio.CharBuffer.wrap (chars, 0, length), font);
 		}
 
 		public void set (int row, int column, String text) {
