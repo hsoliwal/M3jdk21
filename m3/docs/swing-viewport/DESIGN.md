@@ -601,3 +601,57 @@ public API):
    8 MB -> about 16 KB for 1,000 entries.
 3. The leaf 4 width lane as 16-bit values, with an int lane only when a width exceeds 32,767: 4 MB -> 2 MB. The leaf
    3 offset lane stays, because `cellHeights` is a protected stock field and must keep its form.
+
+## 14. Leaf 7: the TableRowSorter order as two int lanes (`sun.swing.table.M3SorterLanes`)
+
+Stock `DefaultRowSorter` keeps one `Row` object per visible row (a reference to the sorter and the model index,
+sorted through `Comparable`), a `Row[]` lane and an `int[]` lane. That is 32 MB at 10^6 rows, and every row
+duplicates the model's own row identity.
+
+**The lanes.** With `-Dm3.swing.viewport=true`, the order is two int lanes, view-to-model and model-to-view: 8 MB at
+10^6 rows.
+- The sort compares model indices through the sorter's own `compare`, whose ties fall back to the model index. The
+  order is therefore strict, and any comparison sort gives the stock permutation.
+- The insert, delete and update paths are the stock paths with `Row` replaced by its model index.
+- The public `sort()` runs through the sorter, so an override still applies.
+- The `RowSorterEvent` carries the same previous order.
+- The one difference is the sequence of `compare` calls, which only a comparator with side effects can observe.
+
+**The lane sort** is a natural-run merge sort with the shape of the stock TimSort:
+- ascending runs are kept and strictly descending runs reversed;
+- runs shorter than 32 are extended by binary insertion;
+- runs are merged pairwise, and a merge whose halves are already in order is skipped.
+
+An ordered or reversed column costs n - 1 comparisons. The first version, a top-down merge sort, was 13-25x slower
+than stock at 10^5-10^6 rows (3 s against 140-383 ms at 10^6), because stock TimSort finds the runs of a sorted
+column. It was replaced within the leaf; the ledger records the rejection.
+
+**Hook (recipe-first).** The recipe `M3SwingTableSorterLanes` adds to `DefaultRowSorter`:
+- a field, null when the property is off;
+- a binding method that hands the lanes the sorter's `compare`, `include`, keys, flags and event;
+- gates in `setSortKeys`, `sort`, `convertRowIndexToView`, `convertRowIndexToModel`, `getViewRowCount`,
+  `allChanged`, `rowsInserted`, `rowsDeleted` and `rowsUpdated`.
+
+With the field null every stock line runs. Pass 1 CHANGED, pass 2 UNCHANGED.
+
+**Rule 24 (delta gate).** Insert, delete and update events are applied as deltas. Full sorts remain only at the stock
+cutoffs: the view is not sorted (after updates without `sortsOnUpdates`), it is empty, or more than a tenth of its
+rows changed. They are kept because the stock full sort also refreshes comparators and string converters, so a
+delta path there could answer differently. `fullSortsOnDeltas()` counts them: 697 in 40 x 300 differential steps,
+all at those cutoffs.
+
+| Proof (2026-10-20, JDK 21.0.9, stock + `--patch-module java.desktop`, output on S:) | Result |
+|---|---|
+| `M3RowSorterLanesDifferential 40 300`: two JTables on one `DefaultTableModel`; the stock sorter has its lanes field cleared. Steps: sort keys (UNSORTED included), toggles, filters, `sortsOnUpdates`, comparators, max keys, sortable columns, inserts, removals, edits, update/data/structure events, direct sorter calls, invalid ranges, `setRowCount`, selections. Compared: view count, the permutation both ways, out-of-range exceptions, keys, selection with lead and anchor, `RowSorterEvent`s with their previous order, pixels | **40/40 pass, 1,240 equal pixel captures; 11,006 of 12,040 checks with the lanes in use; no `Row` object created** |
+| `M3SorterLanesTest` (JUnit 5, 5 tests: lane sort against `Arrays.sort`, ordered and reversed lanes at n - 1 comparisons, 60 scripted hosts x 300 steps against a brute-force order, the stock corner cases, the sorter gate, 20 x 200 differential), merged with a flag-off run | **5/5; `M3SorterLanes` 100% lines (263/263), 100% branches (160/160)** |
+| `make`, jtreg | PENDING_CI |
+
+**Benchmark** (`bench/SORTER_LANES_20261020.tsv`, two rounds; time and allocation noise-bound on a shared machine):
+
+| Measure, 10^6 rows | stock | M3 |
+|---|---:|---:|
+| retained sorter heap, sorted | 32.0 MB | **8.0 MB** |
+| allocation of a sort from unsorted | 36.0 MB | **12.1 MB** (10^5: 3.6 -> 1.2 MB) |
+| sort by an Integer column | 140-383 ms | 200-238 ms |
+| one-row insert | 32-42 ms | 21-35 ms |
+| 1,000-row update with `sortsOnUpdates` | 24-28 ms | 10-18 ms |
