@@ -163,6 +163,21 @@ final class M3StringRegexDp {
 
     private static long advanceJava(M3StringOwner owner, int start, int length,
             Plan plan, long state) {
+        // Physical byte storage cannot hide a surrogate after a dead frontier.
+        if (owner instanceof M3StringAtom atom && atom.storageWidth == 1) {
+            for (int offset = 0; offset < length && state != 0L;) {
+                int fence = offset + Math.min(64, length - offset);
+                for (; offset < fence; offset++) {
+                    char unit = owner.charAt(start + offset);
+                    long accepts = unit < 128 ? plan.ascii[unit]
+                            : isJdkLineTerminator(unit) ? 0L : plan.dot;
+                    long live = state & accepts;
+                    long destinations = (live & plan.star) | ((live & ~plan.star) << 1);
+                    state = close(destinations, plan.star);
+                }
+            }
+            return state;
+        }
         for (int offset = 0; offset < length; offset++) {
             char unit = owner.charAt(start + offset);
             // Do not early-return for an empty state: a later surrogate must still refuse.
@@ -171,18 +186,16 @@ final class M3StringRegexDp {
                     : isJdkLineTerminator(unit) ? 0L : plan.dot;
             long live = state & accepts;
             long destinations = (live & plan.star) | ((live & ~plan.star) << 1);
-            state = close(destinations, plan.closure);
+            state = close(destinations, plan.star);
         }
         return state;
     }
 
-    private static long close(long bits, long[] closure) {
-        long result = 0L;
-        while (bits != 0L) {
-            result |= closure[Long.numberOfTrailingZeros(bits)];
-            bits &= bits - 1;
-        }
-        return result;
+    private static long close(long bits, long star) {
+        if (bits == 0L) return 0L;
+        // A carry closes each starred run from its first seed through its exit.
+        // At most 32 atom bits keep the sum below 2^33.
+        return bits | (star ^ (star + (bits & star)));
     }
 
     /** Larger admitted patterns use one row and a saved previous-row diagonal. */
