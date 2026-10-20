@@ -17,7 +17,7 @@ package java.lang;
  * packed prefix/suffix units, ASCII case hashes, and trim/strip boundaries. Candidate facts may
  * reject impossible work, but exact M3 String comparison remains semantic authority.</p>
  */
-final class M3StringFacts {
+final class M3StringFacts implements java.util.function.LongPredicate {
     private static final int UTF8_REPLACEMENT_BYTES =
             java.nio.charset.StandardCharsets.UTF_8.newEncoder().replacement().length;
 
@@ -361,6 +361,18 @@ final class M3StringFacts {
                 trimEnd,
                 stripStart,
                 stripEnd);
+    }
+
+    /**
+     * Conservative membership for a packed unsigned 48-bit UTF-16 trigram.
+     * Reuse the exact signal fold used by scan/compose; collisions remain candidates.
+     */
+    @Override
+    public boolean test(long key) {
+        if ((key & ~0xffff_ffff_ffffL) != 0L) return true;
+        long required = addTrigramSignal(
+                0L, (char) (key >>> 32), (char) (key >>> 16), (char) key);
+        return (trigramSignal64 & required) == required;
     }
 
     boolean mayContain(M3StringFacts needle) {

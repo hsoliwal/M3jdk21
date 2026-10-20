@@ -54,12 +54,12 @@ jobs:
           bash -n m3/synexia-import/pure-int-recipe-custody/install.sh
           python3 m3/synexia-import/pure-int-recipe-custody/test_source_bootstrap.py
           bash m3/synexia-import/pure-int-recipe-custody/install.sh "$GITHUB_WORKSPACE" --dependencies-only
+      - name: Recipe, UTF-16, mapped-owner, JNI and compiled-kernel gates
+        run: mvn -B -ntp -f m3/tooling/tq/pom.xml verify
       - name: TQ successor recipe and custody
         run: |
           mvn -B -ntp -f m3/tooling/tq-sync/pom.xml verify
           python3 m3/tooling/tq-sync/verify-plan.py
-      - name: Recipe, UTF-16, mapped-owner, JNI and compiled-kernel gates
-        run: mvn -B -ntp -f m3/tooling/tq/pom.xml verify
       - name: Preserve release evidence
         run: |
           mkdir -p m3/tooling/tq/target/release

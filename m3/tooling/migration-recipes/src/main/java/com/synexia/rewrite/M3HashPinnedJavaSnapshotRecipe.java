@@ -1,3 +1,4 @@
+// SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
 // SPDX-License-Identifier: Apache-2.0
 package com.synexia.rewrite;
 
@@ -227,6 +228,11 @@ public final class M3HashPinnedJavaSnapshotRecipe
             throw new IllegalStateException("Java template parse/format drift: " + target.path());
         }
         return parsed.get(0);
+    }
+
+    /** Exact, sorted target paths sealed by this receiver's recipe crate. */
+    public List<String> targetPaths() {
+        return targets().stream().map(Target::path).toList();
     }
 
     private List<Target> targets() {
