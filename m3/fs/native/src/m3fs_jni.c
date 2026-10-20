@@ -3,6 +3,7 @@
 
 #include "m3fs.h"
 #include "m3fs_semantic.h"
+#include "m3fs_structure.h"
 
 #include <limits.h>
 #include <stdint.h>
@@ -1309,6 +1310,211 @@ Java_com_m3_fs_M3FsNative_nativeMIndexTokenIndexOf(
   }
   free(path);
   return (jint)index;
+}
+
+JNIEXPORT jlongArray JNICALL
+Java_com_m3_fs_M3FsNative_nativeStructureInfo(
+    JNIEnv *env, jclass type, jlong handle, jstring path_value) {
+  (void)type;
+  m3_jni_lease lease;
+  char *path = NULL;
+  if (!with_path(env, handle, path_value, &lease, &path)) return NULL;
+  m3fs_structure_info_data info;
+  int status = m3fs_structure_info(lease.fs, path, &info);
+  release_fs(&lease);
+  if (status != M3FS_OK) {
+    throw_status(env, status, path);
+    free(path);
+    return NULL;
+  }
+  free(path);
+  jlong values[6];
+  values[0] = (jlong)info.domain_id;
+  values[1] = (jlong)info.node_count;
+  values[2] = (jlong)info.child_count;
+  values[3] = (jlong)info.text_token_count;
+  values[4] = (jlong)info.binary_byte_count;
+  values[5] = (jlong)info.image_bytes;
+  return semantic_long_array(env, values, 6);
+}
+
+JNIEXPORT jlongArray JNICALL
+Java_com_m3_fs_M3FsNative_nativeStructureNode(
+    JNIEnv *env, jclass type, jlong handle, jstring path_value, jint node_id) {
+  (void)type;
+  if (node_id <= 0) {
+    throw_class(env, "java/lang/IndexOutOfBoundsException", "M3 structure node id");
+    return NULL;
+  }
+  m3_jni_lease lease;
+  char *path = NULL;
+  if (!with_path(env, handle, path_value, &lease, &path)) return NULL;
+  m3fs_structure_node_data node;
+  int status =
+      m3fs_structure_node(lease.fs, path, (uint32_t)node_id, &node);
+  release_fs(&lease);
+  if (status != M3FS_OK) {
+    throw_status(env, status, path);
+    free(path);
+    return NULL;
+  }
+  free(path);
+  jlong values[5];
+  values[0] = (jlong)node.kind;
+  values[1] = (jlong)node.child_count;
+  values[2] = (jlong)node.first;
+  values[3] = (jlong)node.second;
+  values[4] = (jlong)node.semantic_hash64;
+  return semantic_long_array(env, values, 5);
+}
+
+JNIEXPORT jint JNICALL
+Java_com_m3_fs_M3FsNative_nativeStructureChild(
+    JNIEnv *env, jclass type, jlong handle, jstring path_value,
+    jint node_id, jint ordinal) {
+  (void)type;
+  if (node_id <= 0 || ordinal < 0) {
+    throw_class(env, "java/lang/IndexOutOfBoundsException", "M3 structure child coordinate");
+    return 0;
+  }
+  m3_jni_lease lease;
+  char *path = NULL;
+  if (!with_path(env, handle, path_value, &lease, &path)) return 0;
+  uint32_t child = 0U;
+  int status =
+      m3fs_structure_child(
+          lease.fs, path, (uint32_t)node_id, (uint32_t)ordinal, &child);
+  release_fs(&lease);
+  if (status != M3FS_OK) {
+    throw_status(env, status, path);
+    free(path);
+    return 0;
+  }
+  free(path);
+  return (jint)child;
+}
+
+JNIEXPORT jlong JNICALL
+Java_com_m3_fs_M3FsNative_nativeStructureTextToken(
+    JNIEnv *env, jclass type, jlong handle, jstring path_value,
+    jint node_id, jint ordinal) {
+  (void)type;
+  if (node_id <= 0 || ordinal < 0) {
+    throw_class(env, "java/lang/IndexOutOfBoundsException", "M3 structure text coordinate");
+    return 0;
+  }
+  m3_jni_lease lease;
+  char *path = NULL;
+  if (!with_path(env, handle, path_value, &lease, &path)) return 0;
+  uint64_t token = UINT64_C(0);
+  int status =
+      m3fs_structure_text_token(
+          lease.fs, path, (uint32_t)node_id, (uint32_t)ordinal, &token);
+  release_fs(&lease);
+  if (status != M3FS_OK) {
+    throw_status(env, status, path);
+    free(path);
+    return 0;
+  }
+  free(path);
+  return (jlong)token;
+}
+
+JNIEXPORT jbyteArray JNICALL
+Java_com_m3_fs_M3FsNative_nativeStructureBinary(
+    JNIEnv *env, jclass type, jlong handle, jstring path_value, jint node_id) {
+  (void)type;
+  if (node_id <= 0) {
+    throw_class(env, "java/lang/IndexOutOfBoundsException", "M3 structure binary node");
+    return NULL;
+  }
+  m3_jni_lease lease;
+  char *path = NULL;
+  if (!with_path(env, handle, path_value, &lease, &path)) return NULL;
+
+  uint32_t needed = 0U;
+  int status =
+      m3fs_structure_binary(
+          lease.fs, path, (uint32_t)node_id, NULL, 0U, &needed);
+  unsigned char *bytes = NULL;
+  if (status == M3FS_NOSPACE && needed != 0U) {
+    bytes = (unsigned char *)malloc((size_t)needed);
+    if (bytes == NULL) {
+      release_fs(&lease);
+      free(path);
+      throw_class(env, "java/lang/OutOfMemoryError", "M3 structure binary");
+      return NULL;
+    }
+    status =
+        m3fs_structure_binary(
+            lease.fs, path, (uint32_t)node_id, bytes, needed, &needed);
+  }
+  release_fs(&lease);
+  if (status != M3FS_OK) {
+    free(bytes);
+    throw_status(env, status, path);
+    free(path);
+    return NULL;
+  }
+  free(path);
+
+  jbyteArray result = (*env)->NewByteArray(env, (jsize)needed);
+  if (result != NULL && needed != 0U) {
+    (*env)->SetByteArrayRegion(
+        env, result, 0, (jsize)needed, (const jbyte *)bytes);
+  }
+  free(bytes);
+  return result;
+}
+
+JNIEXPORT jint JNICALL
+Java_com_m3_fs_M3FsNative_nativeStructureRefTarget(
+    JNIEnv *env, jclass type, jlong handle, jstring path_value, jint node_id) {
+  (void)type;
+  if (node_id <= 0) {
+    throw_class(env, "java/lang/IndexOutOfBoundsException", "M3 structure ref node");
+    return 0;
+  }
+  m3_jni_lease lease;
+  char *path = NULL;
+  if (!with_path(env, handle, path_value, &lease, &path)) return 0;
+  uint32_t target = 0U;
+  int status =
+      m3fs_structure_ref_target(lease.fs, path, (uint32_t)node_id, &target);
+  release_fs(&lease);
+  if (status != M3FS_OK) {
+    throw_status(env, status, path);
+    free(path);
+    return 0;
+  }
+  free(path);
+  return (jint)target;
+}
+
+JNIEXPORT jint JNICALL
+Java_com_m3_fs_M3FsNative_nativeStructureMapValue(
+    JNIEnv *env, jclass type, jlong handle, jstring path_value,
+    jint map_node_id, jint key_node_id) {
+  (void)type;
+  if (map_node_id <= 0 || key_node_id <= 0) {
+    throw_class(env, "java/lang/IndexOutOfBoundsException", "M3 structure map coordinate");
+    return 0;
+  }
+  m3_jni_lease lease;
+  char *path = NULL;
+  if (!with_path(env, handle, path_value, &lease, &path)) return 0;
+  uint32_t value = 0U;
+  int status =
+      m3fs_structure_map_value(
+          lease.fs, path, (uint32_t)map_node_id, (uint32_t)key_node_id, &value);
+  release_fs(&lease);
+  if (status != M3FS_OK) {
+    throw_status(env, status, path);
+    free(path);
+    return 0;
+  }
+  free(path);
+  return (jint)value;
 }
 
 static void *semantic_copy_bytes(JNIEnv *env, jbyteArray input, jsize expected) {
