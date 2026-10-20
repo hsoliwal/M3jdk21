@@ -1,0 +1,31 @@
+{
+  "schema": "m3-agent-recipe-source-custody/v1",
+  "source_repo": "hsoliwal/com.synexia",
+  "source_commit": "1e44842b254c86dfaac32b053ae782123b6457eb",
+  "source_module": "synexia-m3-recipe",
+  "mechanical_recipe": "synexia-m3-recipe/scripts/generate_agent_receiver.py",
+  "license": "Apache-2.0",
+  "qualified": false,
+  "files": [
+    {
+      "name": "M3RecipeAgent.java",
+      "source_sha256": "6cc109b0237b5d62db213732c6b2290f9d26af467ee8fef23332c24c327de832",
+      "receiver_sha256": "da6c5532898baa1722adc241251ddbc532b46a5598700b5987159a6d8e7c91db"
+    },
+    {
+      "name": "M3RecipeCatalogue.java",
+      "source_sha256": "9dcd0d05d496a53ce683b5e7f48955cb4857feb07404298a812350191cd86429",
+      "receiver_sha256": "8c77f6fb0fdd5316baa2e4472beadbd448a35f9e2c7b2b241e7c027f0d6db056"
+    },
+    {
+      "name": "M3RecipeAgentProof.java",
+      "source_sha256": "4944dafd226e4b82f72aa679463a89cbdc135a442214fecedf0e057b9763c8b9",
+      "receiver_sha256": "dce62a8a6ee9f69da5bd1308c988720f359e45b4e14c8434f5660a3fb53e6068"
+    },
+    {
+      "name": "M3RecipeAgentTest.java",
+      "source_sha256": "a24c4911d9359460787498f9e2a564e96db16377edda1df6720004d7b8186ba4",
+      "receiver_sha256": "de08888909422bc9cacafd44a9db86e0b5e8fb197a024b70d67253c6e0b4a5d3"
+    }
+  ]
+}
