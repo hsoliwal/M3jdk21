@@ -1,0 +1,14 @@
+key	value
+date	2026-10-20
+source_repo	hsoliwal/M3JDK21
+source_parent_branch	m3/native-source-class-delta-ledger-20261020
+source_parent_commit	88b30b49fb5848a634d73f386e8c7d8411035c9e
+recipe_repo	hsoliwal/com.synexia
+recipe_branch	m3/abi-impact-arraygraph-20261020
+recipe_pr	12582
+java_runtime	OpenJDK 21.0.12.1
+maven_runtime	NOT_INSTALLED
+profile	serial-file-bounded-java21
+compiler_options	--release 21 -proc:none -Xlint:all,-module -Werror
+tests	M3FileDeltaLedgerContract (30); M3FileBuildImpactContract (10567)
+promotion	DRAFT_HOLD

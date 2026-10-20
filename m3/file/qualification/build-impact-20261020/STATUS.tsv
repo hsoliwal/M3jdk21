@@ -1,0 +1,12 @@
+item	status	evidence
+new_source_authored	PASS_LOCAL	M3FileBuildImpact.java SHA-256 5cad82ced173265fa7a59b8eb5a8e13a64476d9d8bb5381c9e35209cbcabc0f3
+new_test_authored	PASS_LOCAL	M3FileBuildImpactContract.java SHA-256 da651ed52b20eaa70480c0d8e2a026991fc7ad376d17a105eb0d4d14fb724a27
+java21_strict_compile	PASS_LOCAL	--release 21 -proc:none -Xlint:all,-module -Werror
+original_byte_delta_oracle	PASS_LOCAL	M3_FILE_DELTA_PASS checks=30
+reverse_impact_independent_oracle	PASS_LOCAL	M3_FILE_IMPACT_PASS checks=10567
+canonical_synexia_recipe_created	REVIEW_HOLD	hsoliwal/com.synexia#12582
+maven_openrewrite_replay	NOT_EXECUTED	Maven/Rewrite not present in local environment
+jni_abi_native_tests	NOT_EXECUTED	No new native symbol; native acceleration unmeasured
+full_jdk_hotspot_jtreg	NOT_EXECUTED	No full target image
+maven_gradle_self_build	NOT_EXECUTED	No fork distribution/runtime path exercised
+provider_filtered_sorted_contracts	UNTOUCHED	Existing owner PRs maintained separately

@@ -1,0 +1,9 @@
+category	candidate	decision	rationale
+M3 exact file delta	Existing M3FileDeltaLedger #1568	REUSE	No duplicate payload/identity owner
+Dependency reachability	CSR int offsets + queue + visited byte flags	SELECT	Deterministic O(V+E) graph closure with original physical indexes
+Educational graph algorithms	LeetCode 207, HackerRank BFS, GeeksforGeeks BFS	REFERENCE_ONLY	Problem families inform differential cases; no source copied
+ABI verification	Original javac and M3AST source/attribute facts	REUSE_REQUIRED	No heuristic hash grants ABI equivalence
+Graph missing closure	Conservative full affected mask	SELECT	Safe when sound incremental selection cannot be proven
+Compiler context	Changed POM/DSL or unknown processors	CONSERVATIVE	Treat all declared rows affected until exact model dependencies are proven
+Filtered/sorted backed views	Existing M3FilteredViews/M3FilteredNavigableSet/JNI	KEEP	Separate semantics, no copied snapshots or per-row Node
+JNI graph kernel	Optional new native implementation	HOLD	No new symbol without benchmark and checked JNI/ABI proof

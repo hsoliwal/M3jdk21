@@ -1,0 +1,10 @@
+name	required	location
+STATUS.tsv	YES	m3/file/qualification/build-impact-20261020/STATUS.tsv
+FINAL_REPORT.md	YES	m3/file/qualification/build-impact-20261020/FINAL_REPORT.md
+RUN_CONTEXT.tsv	YES	m3/file/qualification/build-impact-20261020/RUN_CONTEXT.tsv
+PROVENANCE.tsv	YES	m3/file/qualification/build-impact-20261020/PROVENANCE.tsv
+VERIFY_CONTRACT.tsv	YES	m3/file/qualification/build-impact-20261020/VERIFY_CONTRACT.tsv
+OUTPUT_CONTRACT.tsv	YES	m3/file/qualification/build-impact-20261020/OUTPUT_CONTRACT.tsv
+INVENTORY.tsv	YES	m3/file/qualification/build-impact-20261020/INVENTORY.tsv
+CATEGORY_CATALOG.tsv	YES	m3/file/qualification/build-impact-20261020/CATEGORY_CATALOG.tsv
+TODO.tsv	YES	m3/file/qualification/build-impact-20261020/TODO.tsv
