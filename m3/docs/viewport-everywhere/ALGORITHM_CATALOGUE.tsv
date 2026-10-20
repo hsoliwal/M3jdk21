@@ -1,1 +1,6 @@
 problem	chosen	alternative	n	chosen_ns_per_op	alternative_ns_per_op	decision
+shift every key at or after a position in an ordered index (sibling coordinates, measured rows)	lazy propagation on AVL keys (pending shift per node, parent links)	eager walk over later keys	1000000	3490	4395908	adopted (M3OrderStatisticForest.shift)
+remove a key range from a balanced tree	split, split, join2 (join-based AVL, Blelloch et al. 2016)	one removal per key, O(r log n)	1048576	184 visited nodes (r = 64)	n/a	adopted (M3OrderStatisticForest.removeRange)
+offset of a row with sparse measured extents under row inserts/removes	order-statistic tree with subtree count and sum: (row - rank) x estimate + prefix	sorted array + Fenwick tree (rebuild on a middle insert)	1000000	3188	9655842	adopted (M3SparseExtents)
+state lane of a scrolling window	ring buffer (power-of-two capacity)	copy into a spare lane per move	4096	24	930	adopted (M3WindowView)
+pending changes of a hidden window	one dirty span folded in O(1) per run; one show patch	exact range set (M3RangeSet), O(ranges) per shifted run	10000 patches	190	n/a	adopted (span)
