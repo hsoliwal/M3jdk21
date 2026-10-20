@@ -101,6 +101,35 @@ public final class M3PatchCostBenchAfter {
 				}
 				return topology.childIndex (n / 2);
 			});
+			// rule 26: compose two 64-run patches (one per frame), export 4096 rows to slots
+			int runs = 64;
+			int [] at = new int [runs], count = new int [runs], insertAt = new int [runs];
+			for (int r = 0; r < runs; r++) {
+				at [r] = n - (r + 1) * (n / (runs + 1));
+				count [r] = 3;
+				insertAt [r] = r * (n / (runs + 1));
+			}
+			M3Patch first = M3Patch.of (n, at, count, insertAt, count);
+			M3Patch then = M3Patch.of (n, at, count, insertAt, count);
+			report ("compose two 64-run patches", n, 20_000, ops -> {
+				long s = 0;
+				for (int i = 0; i < ops; i++) s += M3Patch.compose (first, then).keptCount ();
+				return s;
+			});
+			int [] keys = new int [n], slots = new int [4096];
+			long [] weights = new long [n];
+			M3OrderStatisticForest forest = new M3OrderStatisticForest ();
+			forest.ensureCapacity (n);
+			forest.lanes (keys, weights);
+			for (int slot = 0; slot < n; slot++) {
+				keys [slot] = slot;
+				forest.insert (-1, slot);
+			}
+			report ("order: export 4096 rows to slots from the middle", n, 2_000, ops -> {
+				long s = 0;
+				for (int i = 0; i < ops; i++) s += forest.order (-1, n / 2, slots.length, slots);
+				return s + slots [4095];
+			});
 		}
 	}
 
