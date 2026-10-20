@@ -7,3 +7,6 @@ interpreted_named_module_runtime	PASS_LOCAL	M3_SHADOW_STREAM_PASS checks=43
 native_jni	NOT_APPLICABLE_NO_NEW_SYMBOL	Java-only stream methods, not JNI proof
 full_m3jdk21_hotspot	NOT_EXECUTED	Full SDK bootstrap and jtreg gates pending
 maven_gradle_analyzer_wiring	NOT_EXECUTED	Original task/AST receiver not yet wired
+stock_bootstrap_jmod_link	PASS_LOCAL	jmod and jlink of com.m3.file from exact Java21 sources
+linked_image_runtime	PASS_LOCAL	M3_SHADOW_STREAM_PASS checks=43 normal + 43 interpreted
+full_native_m3jdk21_image	NOT_EXECUTED	Bootstrap JMOD evidence is not a full SDK/HotSpot build
