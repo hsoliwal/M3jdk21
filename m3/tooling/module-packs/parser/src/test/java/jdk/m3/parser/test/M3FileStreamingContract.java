@@ -24,7 +24,7 @@ public final class M3FileStreamingContract {
 
     private static void refuses(Checked work, String reason) {
         checks++;
-        try { work.run(); }
+        try { work.execute(); }
         catch (IOException expected) { return; }
         throw new AssertionError("missing input decoding/budget refusal: " + reason);
     }
