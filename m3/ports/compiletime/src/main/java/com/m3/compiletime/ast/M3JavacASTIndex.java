@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: Apache-2.0
 // Copyright 2026 Hitesh Soliwal and contributors
+// Modified 2026-10-20: reuse exact frozen-input source seals and event-local fallback facts.
 package com.m3.compiletime.ast;
 
 import com.synexia.mindex.compiler.ast.MIndexJavaAST;
@@ -49,6 +50,7 @@ public final class M3JavacASTIndex implements AutoCloseable {
         private CompilationUnitTree unit;
         private final Phase phase;
         private String source;
+        private String sourceSha256;
         private TypeElement type;
         private final Thread thread = Thread.currentThread();
         private M3AST syntax;
@@ -91,7 +93,17 @@ public final class M3JavacASTIndex implements AutoCloseable {
         public M3FileSourceFacts facts(String provider, int schema) {
             requireActive();
             String identity = type == null ? provider : provider + "/type=" + type.getQualifiedName();
-            return M3FileSourceFacts.capture(unit.getSourceFile().toUri().toString(), source,
+            URI sourceUri = unit.getSourceFile().toUri();
+            String sourceName = sourceUri.toString();
+            if (sourceSha256 == null) {
+                if (resolver instanceof FrozenInputs frozen) {
+                    sourceSha256 = frozen.sourceSha256(sourceUri, source);
+                }
+                if (sourceSha256 == null) {
+                    sourceSha256 = M3FileSourceFacts.sourceSha256ImmutableView(source);
+                }
+            }
+            return new M3FileSourceFacts(sourceName, sourceSha256, source.length(),
                     context.sha256(), identity, schema, phase.name());
         }
 
@@ -101,7 +113,7 @@ public final class M3JavacASTIndex implements AutoCloseable {
             }
         }
 
-        private void release() { unit = null; type = null; syntax = null; source = null; }
+        private void release() { unit = null; type = null; syntax = null; source = null; sourceSha256 = null; }
     }
 
     private JavacTask task;
@@ -152,14 +164,29 @@ public final class M3JavacASTIndex implements AutoCloseable {
                 throw new IllegalArgumentException("duplicate frozen source URI");
             }
         }
-        Map<URI, M3File> frozen = Map.copyOf(files);
-        return unit -> {
-            M3File file = frozen.get(unit.getSourceFile().toUri());
+        return new FrozenInputs(Map.copyOf(files));
+    }
+
+    /** Same immutable input map as the original resolver; no second source owner or cache. */
+    private static final class FrozenInputs implements SourceResolver {
+        private final Map<URI, M3File> files;
+
+        private FrozenInputs(Map<URI, M3File> files) { this.files = files; }
+
+        @Override public String source(CompilationUnitTree unit) throws IOException {
+            M3File file = files.get(unit.getSourceFile().toUri());
             if (file == null || unit.getSourceFile().getCharContent(false) != file.source()) {
                 throw new IOException("source was not the admitted immutable parser input");
             }
             return file.source();
-        };
+        }
+
+        private String sourceSha256(URI uri, String source) {
+            M3File file = files.get(uri);
+            // A public resolver or mutable source-file identity cannot supply a trusted hash.
+            // A mismatch uses the existing captured-character fallback instead of a foreign seal.
+            return file != null && file.source() == source ? file.sourceSha256() : null;
+        }
     }
 
     public M3JavacASTIndex on(Phase phase, String consumerId, Consumer<View> consumer) {

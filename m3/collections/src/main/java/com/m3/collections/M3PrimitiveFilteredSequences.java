@@ -158,6 +158,21 @@ public final class M3PrimitiveFilteredSequences {
         }
     }
 
+    /**
+     * Reuse the existing M3 filtered-view array-plan atom for primitive traversal.
+     * The plan contains predicates in original backing-to-outer order, never
+     * values or predicate results. Do not call LongPredicate.and: these views
+     * have always called test directly, including for predicates overriding and.
+     */
+    private static M3LongIterator filterPlan(M3LongIterator source, LongPredicate[] plan) {
+        return new Cursor(source, value -> {
+            for (LongPredicate predicate : plan) {
+                if (!predicate.test(value)) return false;
+            }
+            return true;
+        });
+    }
+
     private static final class ListView extends View implements M3LongList {
         private final M3LongList source;
 
@@ -185,7 +200,24 @@ public final class M3PrimitiveFilteredSequences {
         @Override public boolean contains(long value) {
             return source.contains(value) && predicate.test(value);
         }
-        @Override public M3LongIterator iterator() { return filter(source.iterator()); }
+        @Override public M3LongIterator iterator() {
+            // Two cursor frames are bounded and cheaper than a separate plan array.
+            if (!(source instanceof ListView previous)
+                    || !(previous.source instanceof ListView)) return filter(source.iterator());
+            int depth = 1;
+            ListView innermost = this;
+            while (innermost.source instanceof ListView inner) {
+                depth = Math.addExact(depth, 1);
+                innermost = inner;
+            }
+            LongPredicate[] plan = new LongPredicate[depth];
+            ListView current = this;
+            for (int index = depth - 1; index >= 0; index--) {
+                plan[index] = current.predicate;
+                if (index != 0) current = (ListView) current.source;
+            }
+            return filterPlan(innermost.source.iterator(), plan);
+        }
         @Override public long[] toArray() { return copy(iterator()); }
         @Override public int capacity() { return source.capacity(); }
         @Override public long get(int index) { return source.get(physical(index, false)); }
@@ -319,9 +351,28 @@ public final class M3PrimitiveFilteredSequences {
         @Override public boolean contains(long value) {
             return source.contains(value) && predicate.test(value);
         }
-        @Override public M3LongIterator iterator() { return filter(source.iterator()); }
-        @Override public M3LongIterator descendingIterator() {
-            return filter(source.descendingIterator());
+        @Override public M3LongIterator iterator() { return iterator(false); }
+        @Override public M3LongIterator descendingIterator() { return iterator(true); }
+
+        private M3LongIterator iterator(boolean descending) {
+            if (!(source instanceof DequeView previous)
+                    || !(previous.source instanceof DequeView)) {
+                return filter(descending ? source.descendingIterator() : source.iterator());
+            }
+            int depth = 1;
+            DequeView innermost = this;
+            while (innermost.source instanceof DequeView inner) {
+                depth = Math.addExact(depth, 1);
+                innermost = inner;
+            }
+            LongPredicate[] plan = new LongPredicate[depth];
+            DequeView current = this;
+            for (int index = depth - 1; index >= 0; index--) {
+                plan[index] = current.predicate;
+                if (index != 0) current = (DequeView) current.source;
+            }
+            return filterPlan(descending ? innermost.source.descendingIterator()
+                    : innermost.source.iterator(), plan);
         }
         @Override public long[] toArray() { return copy(iterator()); }
         @Override public long get(int index) {

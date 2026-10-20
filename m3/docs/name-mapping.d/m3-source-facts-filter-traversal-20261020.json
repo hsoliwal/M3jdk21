@@ -1,0 +1,40 @@
+{
+  "schema": "M3_NAME_MAPPING_FRAGMENT_V1",
+  "canonical_home": "hsoliwal/com.synexia",
+  "canonical_baseline": "f04fbac91a7891e64b77c7b24cef1ab75ec88144",
+  "source_baseline": "d6d76b563050fc13c4fa79bc494edf29f1614b37",
+  "composition_parent": "8a3540d43c25ce92dafe2dd6b3f3e61ee7783dda",
+  "note": "M3JDK21 is the single integrated runtime product. These are refinements of existing owners. Synexia retains reusable recipe, donor convergence and validation custody. No public name is introduced or renamed; the receiving phase remains String.",
+  "mappings": [
+    {
+      "source": "com.synexia.mindex.compiler.ast.M3File",
+      "target": "com.m3.compiletime.ast.M3File",
+      "status": "existing-owner-lazy-source-seal-reuse",
+      "target_rule": "One immutable String payload and lazily published exact character digest; original byte digest separate; public descriptors unchanged."
+    },
+    {
+      "source": "com.synexia.mindex.compiler.ast.M3FileSourceFacts",
+      "target": "com.m3.compiletime.ast.M3FileSourceFacts",
+      "status": "existing-owner-framed-utf16-batching",
+      "target_rule": "Preserve source/context domain separation, UTF-16 framing, provider/schema/phase and each repository public API. Bulk String access uses the existing String owner."
+    },
+    {
+      "source": "com.synexia.mindex.compiler.ast.M3JavacASTIndex",
+      "target": "com.m3.compiletime.ast.M3JavacASTIndex",
+      "status": "existing-owner-frozen-input-fact-reuse",
+      "target_rule": "Original JavacTask and original synchronous compiler objects remain authoritative. URI and exact source String authorize shared file digest; arbitrary resolver fallback is event-local. No parser, AST store or context cache is replaced."
+    },
+    {
+      "source": "M3FilteredViews backing-to-outer predicate plan",
+      "target": "com.m3.collections.M3PrimitiveFilteredSequences",
+      "status": "existing-owner-private-traversal-refinement",
+      "target_rule": "Keep payload, public interfaces, callback order, exceptions and mutation owners. At depth3 or above iterate predicate references through one primitive cursor; depth1/2 retain old paths. Sorted owner composition remains tested."
+    },
+    {
+      "source": "Approved Synexia mindex_array_flatten_jni.c donor at 8e1f56d448fd31ee5b666c922947e39c2036d4fd; existing com.m3.arrays.M3ArrayNative",
+      "target": "same existing Java/JNI owners",
+      "status": "existing-owner-native-source-proof-and-donor-refusal-restoration",
+      "target_rule": "Exact arrays become the existing immutable M3File source. Reuse donor second-pass null refusal and release of unpublished JNI result, preserving the target exception mapping and pending throwable. Existing JNI signatures and payload ownership remain unchanged."
+    }
+  ]
+}
