@@ -313,9 +313,14 @@ public final class M3FilteredViews {
         @Override public SortedSet<E> tailSet(E from) {
             return new SortedSetView<>(sorted.tailSet(from), predicate);
         }
+        @Override public SortedSet<E> reversed() {
+            return readOnlySortedSet(SortedSet.super.reversed());
+        }
         // An explicit read-only boundary refuses even empty endpoint mutations.
         @Override public void addFirst(E value) { throw readonly(); }
         @Override public void addLast(E value) { throw readonly(); }
+        @Override public E removeFirst() { throw readonly(); }
+        @Override public E removeLast() { throw readonly(); }
         @Override public E first() { return iterator().next(); }
         @Override public E last() {
             Iterator<E> iterator = iterator();
@@ -395,6 +400,7 @@ public final class M3FilteredViews {
         }
         @Override public E pollFirst() { throw readonly(); }
         @Override public E pollLast() { throw readonly(); }
+        @Override public NavigableSet<E> reversed() { return descendingSet(); }
         @Override public NavigableSet<E> descendingSet() {
             return new NavigableSetView<>(nav.descendingSet(), predicate);
         }

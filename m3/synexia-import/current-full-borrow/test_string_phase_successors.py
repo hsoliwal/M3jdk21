@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import csv
+import hashlib
 import importlib.util
 from pathlib import Path
 import tempfile
@@ -75,9 +76,33 @@ class StringTargetSuccessorTest(unittest.TestCase):
         self.assertEqual("70d1d03c109126fdda36c54da21b484bbe368fd9",
                          historical[phase.M3_STRING_PATH]["successor_git_blob"])
         expected = phase.current_successor_blobs(self.mapping())
-        self.assertEqual("35ed998540e044eed8cb7596e2e2c019ae369bd3",
+        self.assertEqual("e53f62018eaf8e5dbf9cc85969bf3828e6950712",
                          expected[phase.M3_STRING_PATH])
-        self.assertEqual(4, len(expected))
+        self.assertEqual("14fc79e035ac7c8fe610b0fc9191ba428b683133",
+                         expected[phase.M3_STRING_FACTS_PATH])
+        self.assertEqual("09750ae9a656cfeb0a82c4979fb33e4022c49942",
+                         expected[phase.M3_STRING_POOL_PATH])
+        self.assertEqual("6f89d8cc25c8d8b7d372faaa7a9a550f819868c3",
+                         expected[phase.M3_STRING_SEARCH_PATH])
+        self.assertEqual("c0074f4b144da23040e63e0ba8866d56d0d304ac",
+                         expected["src/java.base/share/classes/java/lang/M3StringPositionPrecompute.java"])
+        self.assertEqual("011377436faba14db9fb15bb8f63ecbbf7501dae",
+                         expected[phase.M3_STRING_CODEPOINT_PATH])
+        self.assertEqual(expected[phase.M3_STRING_CODEPOINT_PATH],
+                         phase.git_blob(phase.ROOT / phase.M3_STRING_CODEPOINT_PATH))
+        self.assertEqual(6, len(expected))
+
+    def test_additional_chain_requires_exact_original_mapping(self):
+        rows = self.mapping()
+        missing = [row for row in rows if row["target_path"] != phase.M3_STRING_CODEPOINT_PATH]
+        with self.assertRaisesRegex(ValueError, "additional String chain origin drift"):
+            phase.current_successor_blobs(missing)
+        changed = [row.copy() for row in rows]
+        for row in changed:
+            if row["target_path"] == phase.M3_STRING_CODEPOINT_PATH:
+                row["target_git_blob"] = "0" * 40
+        with self.assertRaisesRegex(ValueError, "additional String chain origin drift"):
+            phase.current_successor_blobs(changed)
 
     def test_chain_refuses_drift_ambiguity_reordering_and_promotion(self):
         good = self.read_chain()
@@ -99,6 +124,40 @@ class StringTargetSuccessorTest(unittest.TestCase):
         for mutated in cases:
             self.with_chain(mutated, lambda: self.assertRaises(
                 ValueError, phase.current_successor_blobs, self.mapping()))
+
+    def test_each_owner_step_refuses_cross_owner_drift_and_promotion(self):
+        good = self.read_chain()
+        for index, row in enumerate(good):
+            for field, replacement in (
+                ("target_path", phase.M3_STRING_POOL_PATH
+                 if row["target_path"] != phase.M3_STRING_POOL_PATH else phase.M3_STRING_PATH),
+                ("predecessor_git_blob", "0" * 40),
+                ("successor_git_blob", "f" * 40),
+                ("synexia_pr", "0"),
+                ("m3jdk_pr", "0"),
+                ("state", "RUNTIME_ACCEPTED"),
+            ):
+                with self.subTest(step=index, field=field):
+                    changed = [item.copy() for item in good]
+                    changed[index][field] = replacement
+                    self.with_chain(changed, lambda: self.assertRaises(
+                        ValueError, phase.current_successor_blobs, self.mapping()))
+
+    def test_owner_continuity_is_checked_independently_of_allowlist(self):
+        good = self.read_chain()
+        # A future allowlist edit must not let one owner's predecessor come
+        # from another owner or skip an intermediate historical transition.
+        for index in (3, 5, 6, 8, 9, 10, 11, 12):
+            with self.subTest(step=index):
+                changed = [row.copy() for row in good]
+                changed[index]["predecessor_git_blob"] = "0" * 40
+                expected = list(phase.EXPECTED_TARGET_CHAIN)
+                target, _, after, synexia_pr, m3jdk_pr = expected[index]
+                expected[index] = (target, "0" * 40, after, synexia_pr, m3jdk_pr)
+                with patch.object(phase, "EXPECTED_TARGET_CHAIN", tuple(expected)):
+                    self.with_chain(changed, lambda: self.assertRaisesRegex(
+                        ValueError, "discontinuous String successor chain",
+                        phase.current_successor_blobs, self.mapping()))
 
     def test_duplicate_successor_refuses(self):
         rows = self.read_rows()
@@ -282,8 +341,13 @@ class StringTargetSuccessorTest(unittest.TestCase):
                 self.assertEqual(row["source_git_blob"] if key == "source_path"
                                  else row["cache_git_blob"],
                                  phase.git_blob(path), key)
-        self.assertEqual("4ef13745f3fdc265fc8df3f2d84a9f2ecd3b7516",
-                         phase.git_blob(phase.SUCCESSOR_CHAIN))
+        # Pin the entire three-step prefix present at a3e88976, including its
+        # original header, row order and line endings. Later rows are additive.
+        prefix = b"".join(phase.SUCCESSOR_CHAIN.read_bytes().splitlines(keepends=True)[:4])
+        self.assertEqual("75d949e5aa2c8ff4e5c70d648e81fc0d37b68651",
+                         hashlib.sha1(f"blob {len(prefix)}\0".encode("ascii") + prefix).hexdigest())
+        self.assertEqual("141806b3119342dfba2efe6487664ba3a0c53158",
+                         phase.git_blob(phase.SUCCESSORS))
 
 
     def test_live_precompute_target_matches_current_receipt_when_present(self):
@@ -291,7 +355,25 @@ class StringTargetSuccessorTest(unittest.TestCase):
         target = phase.ROOT / row["target_path"]
         if not target.is_file():
             self.skipTest("M3JDK receiver source tree is not present")
-        self.assertEqual(row["current_target_git_blob"], phase.git_blob(target))
+        self.assertEqual("0a88ed559b23def5d2229bba3316ea2268b4d720",
+                         row["current_target_git_blob"])
+        current = phase.current_successor_blobs(self.mapping())
+        self.assertEqual(current[row["target_path"]], phase.git_blob(target))
+
+
+    def test_precompute_observation_cannot_alias_a_historical_owner(self):
+        changed = phase.EXPECTED_PRECOMPUTE_OBSERVATION.copy()
+        changed["target_path"] = phase.M3_STRING_POOL_PATH
+        with patch.object(phase, "EXPECTED_PRECOMPUTE_OBSERVATION", changed):
+            with self.assertRaisesRegex(ValueError, "collides with historical successor owners"):
+                phase.current_successor_blobs(self.mapping())
+
+    def test_precompute_chain_cannot_skip_its_historical_checkpoint(self):
+        changed = phase.EXPECTED_PRECOMPUTE_OBSERVATION.copy()
+        changed["current_target_git_blob"] = "f" * 40
+        with patch.object(phase, "EXPECTED_PRECOMPUTE_OBSERVATION", changed):
+            with self.assertRaisesRegex(ValueError, "discontinuous String successor chain"):
+                phase.current_successor_blobs(self.mapping())
 
 
 if __name__ == "__main__":

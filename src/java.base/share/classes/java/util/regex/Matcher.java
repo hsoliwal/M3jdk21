@@ -1752,6 +1752,13 @@ public final class Matcher implements MatchResult {
                 || m3TqFactsFrom != this.from
                 || m3TqFactsTo != to) {
             try {
+                jdk.internal.access.JavaLangAccess access =
+                        jdk.internal.access.SharedSecrets.getJavaLangAccess();
+                java.util.function.LongPredicate prepared = access == null
+                        ? null : access.stringM3TrigramFacts((String) text);
+                if (prepared != null && !query.test(prepared)) {
+                    return false;
+                }
                 facts = M3TQ.precompute(text, this.from, to, M3_TQ_MAX_UTF16_UNITS);
             } catch (OutOfMemoryError unavailable) {
                 // Candidate precompute must never add a new failure mode to Matcher.find().

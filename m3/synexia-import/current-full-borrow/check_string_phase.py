@@ -122,12 +122,55 @@ PRECOMPUTE_SEARCH_MAPPING_RULE = (
 )
 
 M3_STRING_PATH = "src/java.base/share/classes/java/lang/M3String.java"
+M3_STRING_FACTS_PATH = "src/java.base/share/classes/java/lang/M3StringFacts.java"
+M3_STRING_POOL_PATH = "src/java.base/share/classes/java/lang/M3StringPool.java"
+M3_STRING_SEARCH_PATH = "src/java.base/share/classes/java/lang/M3StringSearchPrecompute.java"
+M3_STRING_CODEPOINT_PATH = "src/java.base/share/classes/java/lang/M3StringCodePointPrecompute.java"
+# This owner already advanced on master via #998. Its original phase-map pin
+# remains immutable, just like the separate four-owner V1 successor receipt.
+ADDITIONAL_CHAIN_ORIGINS = {
+    M3_STRING_CODEPOINT_PATH: "6cbb277119f387aac772373d31621af64bea68d5",
+}
 # Each exact transition was independently observed at the named GitHub PR head.
 EXPECTED_STRING_CHAIN = (
     ("70d1d03c109126fdda36c54da21b484bbe368fd9",
      "4fb87fd70ffe5c8d75d17db9c28b44bc9b574704", "11220", "862"),
     ("4fb87fd70ffe5c8d75d17db9c28b44bc9b574704",
      "42399d411c1516a56a47dcdb10242960157b4677", "11247", "864"),
+    ("42399d411c1516a56a47dcdb10242960157b4677",
+     "35ed998540e044eed8cb7596e2e2c019ae369bd3", "11448", "898"),
+    ("35ed998540e044eed8cb7596e2e2c019ae369bd3",
+     "e3bffdb11669a80a8fe8e1ba127b23fb7efc3c1e", "12189", "1205"),
+    ("e3bffdb11669a80a8fe8e1ba127b23fb7efc3c1e",
+     "e53f62018eaf8e5dbf9cc85969bf3828e6950712", "12374", "1371"),
+)
+# Extend each historical owner independently. This is a closed list of observed
+# source transitions; adding a row never changes Phase-1 acceptance policy.
+EXPECTED_TARGET_CHAIN = tuple((M3_STRING_PATH, *step) for step in EXPECTED_STRING_CHAIN) + (
+    (M3_STRING_FACTS_PATH,
+     "fcd108ab6181fec11d16eda811b29d18298f3fb1",
+     "d8dd7dc30db6a9e3897146572bd4a7755c954ffb", "11288", "873"),
+    (M3_STRING_FACTS_PATH,
+     "d8dd7dc30db6a9e3897146572bd4a7755c954ffb",
+     "3e76b8c52eefc3b1983c701a0b9dfc953262a554", "12189", "1205"),
+    (M3_STRING_FACTS_PATH,
+     "3e76b8c52eefc3b1983c701a0b9dfc953262a554",
+     "14fc79e035ac7c8fe610b0fc9191ba428b683133", "12370", "1368"),
+    (M3_STRING_POOL_PATH,
+     "514247a2e6c3704e03a9b47682f74e481f66585f",
+     "0905414556ad0b698a5b5f835f53d12bc040bc8c", "11612", "929"),
+    (M3_STRING_CODEPOINT_PATH,
+     "6cbb277119f387aac772373d31621af64bea68d5",
+     "011377436faba14db9fb15bb8f63ecbbf7501dae", "11966", "998"),
+    (M3_STRING_POOL_PATH,
+     "0905414556ad0b698a5b5f835f53d12bc040bc8c",
+     "09750ae9a656cfeb0a82c4979fb33e4022c49942", "12389", "1390"),
+    (M3_STRING_SEARCH_PATH,
+     "0a88ed559b23def5d2229bba3316ea2268b4d720",
+     "ce902e813a0c0f61827a82b560f8484cd6070a10", "12397", "1399"),
+    (M3_STRING_SEARCH_PATH,
+     "ce902e813a0c0f61827a82b560f8484cd6070a10",
+     "6f89d8cc25c8d8b7d372faaa7a9a550f819868c3", "12397", "1399"),
 )
 
 SUCCESSOR_MARKERS = {
@@ -264,24 +307,36 @@ def current_successor_blobs(mapping_rows: list[dict[str, str]]) -> dict[str, str
     """
     historical = approved_successors(mapping_rows)
     current = {target: row["successor_git_blob"] for target, row in historical.items()}
+    for target, original_pin in ADDITIONAL_CHAIN_ORIGINS.items():
+        mapped = {row["target_git_blob"] for row in mapping_rows
+                  if row["target_path"] == target}
+        if target in current or mapped != {original_pin}:
+            raise ValueError("additional String chain origin drift: " + target)
+        current[target] = original_pin
+    # The V2 observation remains an immutable historical checkpoint.
+    # Its two newly merged successors are validated by the same serial chain.
+    observation = EXPECTED_PRECOMPUTE_OBSERVATION
+    if observation["target_path"] in current:
+        raise ValueError("M3String precompute owner collides with historical successor owners")
+    current[observation["target_path"]] = observation["current_target_git_blob"]
     chain = load_tsv(SUCCESSOR_CHAIN, SUCCESSOR_CHAIN_HEADER)
-    if len(chain) != len(EXPECTED_STRING_CHAIN):
+    if len(chain) != len(EXPECTED_TARGET_CHAIN):
         raise ValueError("String successor chain length drift")
-    for index, (step, expected) in enumerate(zip(chain, EXPECTED_STRING_CHAIN), start=1):
-        before, after, synexia_pr, m3jdk_pr = expected
+    for index, (step, expected) in enumerate(zip(chain, EXPECTED_TARGET_CHAIN), start=1):
+        target, before, after, synexia_pr, m3jdk_pr = expected
         if any(not step[field] for field in SUCCESSOR_CHAIN_HEADER):
             raise ValueError(f"blank String successor chain field: {index}")
         if (step["schema"] != "M3JDK21_STRING_TARGET_EVOLUTION_V1"
-                or step["target_path"] != M3_STRING_PATH
+                or step["target_path"] != target
                 or step["predecessor_git_blob"] != before
                 or step["successor_git_blob"] != after
                 or step["synexia_pr"] != synexia_pr
                 or step["m3jdk_pr"] != m3jdk_pr
                 or step["state"] != "SOURCE_CANDIDATE_NOT_RUNTIME_ACCEPTED"):
             raise ValueError(f"unreviewed String successor chain step: {index}")
-        if current[M3_STRING_PATH] != before:
+        if current[target] != before:
             raise ValueError(f"discontinuous String successor chain: {index}")
-        current[M3_STRING_PATH] = after
+        current[target] = after
     return current
 
 
@@ -312,7 +367,8 @@ def load_precompute_observation() -> dict[str, str]:
         if not row[field].isdigit():
             raise ValueError("invalid M3String precompute PR: " + field)
     target = ROOT / row["target_path"]
-    if target.is_file() and git_blob(target) != row["current_target_git_blob"]:
+    current = current_successor_blobs(load_tsv(MAP, HEADER))
+    if target.is_file() and git_blob(target) != current[row["target_path"]]:
         raise ValueError("live M3JDK precompute target blob drift")
     return row
 
@@ -493,11 +549,6 @@ def main(argv: list[str]) -> int:
     current_blobs = current_successor_blobs(rows)
     precompute_observation = load_precompute_observation()
     validate_precompute_mapping(rows, precompute_observation)
-    if precompute_observation["target_path"] in current_blobs:
-        raise ValueError("M3String precompute owner collides with V1 successor chain")
-    current_blobs[precompute_observation["target_path"]] = (
-        precompute_observation["current_target_git_blob"]
-    )
     relations: set[str] = set()
     for physical, row in enumerate(rows, start=2):
         if any(not row[field] for field in HEADER):

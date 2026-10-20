@@ -1,5 +1,6 @@
 // SPDX-FileCopyrightText: 2026 Hitesh Soliwal and contributors
 // SPDX-License-Identifier: Apache-2.0
+// Modified 2026-10-19: reduce readonly indexed iterator allocation without changing callback demand.
 package com.m3.collections;
 
 import java.util.AbstractList;
@@ -37,7 +38,8 @@ import java.util.function.Predicate;
  * normal JDK subList behavior when the underlying parent is structurally changed outside
  * that span. List.reversed() is supplied by JDK21 and remains backed/write-through.
  *
- * <p>Sequential traversal is O(backing length), indexed lookup/insert O(backing length),
+ * <p>Editable/list-iterator traversal is O(backing length), indexed lookup/insert O(backing length).
+ * The readonly Iterator retains inherited indexed demand, including repeated predicate scans,
  * and no O(1) random access or independent parallel-split guarantee is claimed. This is
  * distinct from M3IndexListView's detached, primitive-ID sorted snapshots; user predicates
  * and comparators are Java callbacks and never invoked through JNI. No new storage, interner,
@@ -133,15 +135,25 @@ public final class M3FilteredLists {
         StrictReadOnlyList(List<E> delegate) { this.delegate = Objects.requireNonNull(delegate); }
         @Override public int size() { return delegate.size(); }
         @Override public E get(int index) { return delegate.get(index); }
-        // Keep the inherited indexed read path and its callback demand unchanged.
-        // Only removal is guarded, including calls before next or after exhaustion.
+        // This private final wrapper never mutates its own AbstractList modCount.
+        // Keep the indexed get/size demand and IndexOutOfBoundsException wrapping;
+        // only the redundant delegate iterator and unsupported-removal state vanish.
+        // listIterator() remains the existing sequential backed traversal boundary.
         @Override public Iterator<E> iterator() {
-            Iterator<E> cursor = super.iterator();
             return new Iterator<>() {
-                @Override public boolean hasNext() { return cursor.hasNext(); }
-                @Override public E next() { return cursor.next(); }
-                @Override public void forEachRemaining(Consumer<? super E> action) {
-                    cursor.forEachRemaining(action);
+                private int cursor;
+                @Override public boolean hasNext() {
+                    return cursor != StrictReadOnlyList.this.size();
+                }
+                @Override public E next() {
+                    try {
+                        int index = cursor;
+                        E value = StrictReadOnlyList.this.get(index);
+                        cursor = index + 1;
+                        return value;
+                    } catch (IndexOutOfBoundsException failure) {
+                        throw new NoSuchElementException(failure);
+                    }
                 }
                 @Override public void remove() { throw new UnsupportedOperationException(); }
             };
