@@ -50,6 +50,33 @@ public interface M3FileTraversal {
     default Stream<M3File> parallelStream() {
         return StreamSupport.stream(spliterator(), true);
     }
+    /**
+     * Bounded file-local work over this traversal's primitive row IDs. The
+     * original `M3FileTree` and filters select candidates; no file facade is
+     * created until a worker consumes that row, and only a bounded number of
+     * tasks/futures are resident. Results are delivered in encounter order.
+     */
+    default <R> long parallelFiles(int maxParallelism, M3FileProgress progress,
+            M3FileParallel.FileTask<R> work, M3FileParallel.FileResult<R> sink)
+            throws IOException {
+        return M3FileParallel.files(this, maxParallelism, progress, work, sink);
+    }
+
+    /**
+     * Treat selected directory rows as independent scan roots. A lazy scan
+     * specification avoids expanding the whole filesystem. Select disjoint
+     * directories if overlapping subtree work is not intended.
+     */
+    default <R> long parallelDirectories(M3FileScanSpec policy, int maxParallelism,
+            M3FileProgress progress, M3FileParallel.RootTask<R> work,
+            M3FileParallel.RootResult<R> sink) throws IOException {
+        M3FileTree owner = tree();
+        return M3FileParallel.roots(ids()
+                        .filter(id -> owner.flag(M3FileFlag.DIR, id))
+                        .mapToObj(owner::path),
+                policy, maxParallelism, progress, work, sink);
+    }
+
 
     default <R> Stream<R> map(Function<? super M3File, ? extends R> mapper) {
         return stream().map(mapper);
