@@ -32,6 +32,7 @@ RECEIVER_INPUTS = ("pin.tsv", "synexia-estate.tsv", "synexia-dag.tsv",
 COMPILER_SOURCES = (
     "com/sun/source/util/M3AST.java",
     "com/sun/tools/javac/m3/M3ASTPC.java",
+    "com/sun/tools/javac/m3/M3ASTTextFacts.java",
     "com/sun/tools/javac/m3/M3PrimitiveImageCompiler.java",
     "com/sun/tools/javac/main/JavaCompiler.java",
 )
