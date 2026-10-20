@@ -131,7 +131,9 @@ public final class M3TokenPredicateCache {
         return switch (key) {
             case M3TokenPattern.K_KIND -> "kind";
             case M3TokenPattern.K_LEXEME -> "lexeme";
-            default -> "binding";
+            case M3TokenPattern.K_BINDING -> "binding";
+            case M3TokenPattern.K_FLAGS -> "flags";
+            default -> "text";
         };
     }
 
