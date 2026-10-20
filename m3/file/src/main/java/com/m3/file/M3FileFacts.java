@@ -33,18 +33,28 @@ public final class M3FileFacts {
 
         M3FileFact[] sorted = facts.clone();
         Arrays.sort(sorted);
-        String[] names = new String[sorted.length];
-        byte[] digests = new byte[Math.multiplyExact(sorted.length, M3FileFact.SHA256_BYTES)];
+        int unique = 0;
         for (int index = 0; index < sorted.length; index++) {
             M3FileFact fact = Objects.requireNonNull(sorted[index], "fact");
-            if (index > 0 && fact.name().equals(names[index - 1])) {
+            if (index > 0 && fact.name().equals(sorted[index - 1].name())) {
                 if (!fact.sameDigest(sorted[index - 1])) {
-                    throw new IllegalArgumentException("conflicting duplicate M3 file fact: " + fact.name());
+                    throw new IllegalArgumentException(
+                            "conflicting duplicate M3 file fact: " + fact.name());
                 }
-                throw new IllegalArgumentException("duplicate M3 file fact: " + fact.name());
+                continue;
             }
-            names[index] = fact.name();
-            fact.copyDigest(digests, index * M3FileFact.SHA256_BYTES);
+            unique++;
+        }
+
+        String[] names = new String[unique];
+        byte[] digests = new byte[Math.multiplyExact(unique, M3FileFact.SHA256_BYTES)];
+        int output = 0;
+        for (int index = 0; index < sorted.length; index++) {
+            M3FileFact fact = sorted[index];
+            if (index > 0 && fact.name().equals(sorted[index - 1].name())) continue;
+            names[output] = fact.name();
+            fact.copyDigest(digests, output * M3FileFact.SHA256_BYTES);
+            output++;
         }
         return new M3FileFacts(names, digests);
     }
