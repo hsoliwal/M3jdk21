@@ -22,7 +22,7 @@ public final class M3PathMaskStageCacheParity {
                     + ", java=" + Arrays.toString(java) + ", native=" + Arrays.toString(nativeRows));
         }
         cases++;
-        if (planes.length <= 8) cached++; else fallback++;
+        if (planes.length <= 8 && count >= 8) cached++; else fallback++;
     }
 
     private static void failure(Runnable operation, Class<? extends Throwable> kind) {
