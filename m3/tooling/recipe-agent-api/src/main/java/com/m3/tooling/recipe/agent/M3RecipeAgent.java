@@ -432,7 +432,7 @@ public final class M3RecipeAgent {
         List<String> paths = new ArrayList<>();
         try (var walk = Files.walk(folder)) {
             int scanned = 0;
-            for (Path path : walk.sorted().toList()) {
+            for (Path path : (Iterable<Path>) walk::iterator) {
                 if (++scanned > 200_000) throw new IllegalStateException("scan budget exceeded");
                 if (Files.isSymbolicLink(path)) throw new IllegalStateException("symlink inside scope: " + path);
                 if (!Files.isRegularFile(path, LinkOption.NOFOLLOW_LINKS)) continue;
@@ -442,6 +442,7 @@ public final class M3RecipeAgent {
                 if (paths.size() > MAX_FILES) throw new IllegalStateException("file count budget exceeded");
             }
         }
+        paths.sort(Comparator.naturalOrder());
         return List.copyOf(paths);
     }
 
