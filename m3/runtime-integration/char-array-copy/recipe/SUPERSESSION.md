@@ -1,6 +1,6 @@
 # Runtime recipe-home closure — current M3 String supersession
 
-Status: candidate target-specific closure on exact M3JDK21 master `c1acefe582ac84414f1082f095e96bbee167bc33`.
+Status: candidate target-specific closure on exact M3JDK21 master `df532e779056dbec203dde20030657c3d144f5b5`.
 
 ## Purpose
 
@@ -32,7 +32,7 @@ For this packet the admitted replacement is:
 ```text
 src/java.base/share/classes/java/lang/MIndexString.java
   -> src/java.base/share/classes/java/lang/M3String.java
-     Git blob 3137d574684eac57260775ce13f8fbe2bf7ef0bc
+     Git blob bcbe4d4da2903dc27ad65155aa5d632c0c57c759
 ```
 
 If the replacement path/blob drifts, the historical recipe fails closed.
