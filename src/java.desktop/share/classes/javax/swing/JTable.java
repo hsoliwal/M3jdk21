@@ -2431,6 +2431,90 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
         return M3ScrollSupport.scrollTo(this, M3ScrollSupport.rows(this), row, alignment);
     }
 
+    /* the viewport observer (leaf S9): created by the first visibility listener or isViewportDirty() */
+    private transient M3VisibilitySupport m3VisibilitySupport;
+
+    private M3VisibilitySupport m3VisibilitySupport() {
+        if (m3VisibilitySupport == null) {
+            m3VisibilitySupport = new M3VisibilitySupport(this);
+        }
+        return m3VisibilitySupport;
+    }
+
+    /**
+     * Adds a listener for the viewport of the table: the rows that enter
+     * and leave the visible range, new extents, and the hidden and shown
+     * transitions ({@link M3VisibilityEvent}). The first listener hears the
+     * current state: {@link M3VisibilityEvent#HIDDEN}, or the visible rows as
+     * {@link M3VisibilityEvent#ENTERED} and the extents. A hidden viewport
+     * announces nothing until {@link M3VisibilityEvent#SHOWN}; the model may
+     * change meanwhile (for example through {@code DefaultTableModel.apply(M3Patch, IntFunction)}), which makes the
+     * viewport dirty ({@link #isViewportDirty()}) and costs no painting or
+     * layout, since Swing paints and validates only showing components. A
+     * show announces {@code SHOWN}, the window delta since the last
+     * announced range and the new extents, before the first paint.
+     *
+     * @param listener the listener
+     * @throws NullPointerException if {@code listener} is null
+     * @see #removeVisibilityListener(M3VisibilityListener)
+     * @since 21
+     */
+    public void addVisibilityListener(M3VisibilityListener listener) {
+        m3VisibilitySupport().add(listener);
+    }
+
+    /**
+     * Removes a listener added with
+     * {@link #addVisibilityListener(M3VisibilityListener)}.
+     *
+     * @param listener the listener
+     * @since 21
+     */
+    public void removeVisibilityListener(M3VisibilityListener listener) {
+        listenerList.remove(M3VisibilityListener.class, listener);
+    }
+
+    /**
+     * Returns the visibility listeners of the table.
+     *
+     * @return the listeners, an empty array when there are none
+     * @since 21
+     */
+    @BeanProperty(bound = false)
+    public M3VisibilityListener[] getVisibilityListeners() {
+        return listenerList.getListeners(M3VisibilityListener.class);
+    }
+
+    /**
+     * Returns whether the viewport of the table is hidden: the table is
+     * not showing (it or an ancestor is not visible, or it is not in a
+     * displayable window), its window is iconified, or its visible rectangle
+     * is empty.
+     *
+     * @return {@code true} when the table shows no rows
+     * @since 21
+     */
+    @BeanProperty(bound = false)
+    public boolean isViewportHidden() {
+        return M3VisibilitySupport.hidden(this);
+    }
+
+    /**
+     * Returns whether the rows of the table changed while its viewport was
+     * hidden and the viewport has not shown since. Tracking starts with the
+     * first call of this method or of
+     * {@link #addVisibilityListener(M3VisibilityListener)}. During
+     * {@link M3VisibilityEvent#SHOWN} it still answers for the hidden
+     * period.
+     *
+     * @return {@code true} when the viewport has changes to show
+     * @since 21
+     */
+    @BeanProperty(bound = false)
+    public boolean isViewportDirty() {
+        return m3VisibilitySupport().isDirty();
+    }
+
     /**
      * Returns the indices of all selected columns.
      *
