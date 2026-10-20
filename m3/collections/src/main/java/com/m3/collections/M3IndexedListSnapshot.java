@@ -169,6 +169,7 @@ public final class M3IndexedListSnapshot<E> extends AbstractList<E> implements R
                 && !M3IndexMaskCompactor.nativeAvailable()) {
             throw new UnsatisfiedLinkError("m3_collections_mask JNI library unavailable");
         }
+        if (backend == M3IndexMaskCompactor.Backend.JAVA) return filteredJava(predicate);
         byte[] alignedStates = new byte[size()];
         // Evaluate Java callbacks once in logical encounter order. The JNI boundary
         // receives only the primitive state byte lane, never the Object[] owner.
@@ -185,6 +186,35 @@ public final class M3IndexedListSnapshot<E> extends AbstractList<E> implements R
         }
         // Physical membership is already lazily computable from admitted indexes;
         // do not allocate a separate BitSet until a caller actually requests it.
+        return new M3IndexedListSnapshot<>(values, admitted, 0, admitted.length, null);
+    }
+
+    /**
+     * Count predicate decisions while filling the current private byte state lane.
+     * This removes the selector's separate count scan while retaining one callback
+     * per logical occurrence and stable index order. Every output directory stays
+     * private because filteredSorted may permute it in place.
+     */
+    private M3IndexedListSnapshot<E> filteredJava(Predicate<? super E> predicate) {
+        int length = size();
+        byte[] selected = new byte[length];
+        int count = 0;
+        for (int i = 0; i < length; i++) {
+            if (predicate.test(get(i))) {
+                selected[i] = 1;
+                count++;
+            }
+        }
+        int[] admitted = new int[count];
+        if (count == length) {
+            // Keep a private directory for filteredSorted, even when every row survives.
+            System.arraycopy(positions, from, admitted, 0, length);
+        } else if (count != 0) {
+            int written = 0;
+            for (int i = 0; i < length; i++) {
+                if (selected[i] != 0) admitted[written++] = positions[from + i];
+            }
+        }
         return new M3IndexedListSnapshot<>(values, admitted, 0, admitted.length, null);
     }
 

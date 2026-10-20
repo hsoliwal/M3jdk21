@@ -17,6 +17,7 @@ JAVA = Path(os.environ['JAVA_HOME'])
 VENDOR = ROOT / 'm3/vendor/third_party'
 DEPENDENCIES = ('apiguardian-api', 'opentest4j', 'univocity-parsers',
                 'junit-platform-commons-1.10.2', 'junit-platform-engine-1.10.2',
+                'junit-platform-launcher-1.10.2',
                 'junit-jupiter-api-5.10.2', 'junit-jupiter-params-5.10.2',
                 'junit-jupiter-engine-5.10.2', 'junit-jupiter-5.10.2')
 # Existing library names and generated JNI headers; no second native owner.
