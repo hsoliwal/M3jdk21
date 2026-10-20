@@ -171,7 +171,10 @@ public final class M3KeyedParallelismPlan<T, K> {
     private static <E> void put(BlockingQueue<E> queue, E value,
                                 AtomicReference<Throwable> laneFailure)
             throws InterruptedException {
-        if (queue.offer(value)) return;
+        if (queue.offer(value)) {
+            checkFailure(laneFailure.get());
+            return;
+        }
         do {
             checkFailure(laneFailure.get());
         } while (!queue.offer(value, 25, TimeUnit.MILLISECONDS));

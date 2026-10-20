@@ -192,7 +192,10 @@ public final class M3FilteredViews {
             while (cursor.hasNext()) { cursor.next(); count++; }
             return count;
         }
-        @Override public boolean isEmpty() { return !iterator().hasNext(); }
+        @Override public boolean isEmpty() {
+            for (E item : source) if (predicate.test(item)) return false;
+            return true;
+        }
         @Override public boolean contains(Object value) {
             if (membershipView(source) == null) return visible(source, predicate, value);
             // Replay the existing inner membership and outer representative scans in order.
@@ -313,9 +316,14 @@ public final class M3FilteredViews {
         @Override public SortedSet<E> tailSet(E from) {
             return new SortedSetView<>(sorted.tailSet(from), predicate);
         }
+        @Override public SortedSet<E> reversed() {
+            return readOnlySortedSet(SortedSet.super.reversed());
+        }
         // An explicit read-only boundary refuses even empty endpoint mutations.
         @Override public void addFirst(E value) { throw readonly(); }
         @Override public void addLast(E value) { throw readonly(); }
+        @Override public E removeFirst() { throw readonly(); }
+        @Override public E removeLast() { throw readonly(); }
         @Override public E first() { return iterator().next(); }
         @Override public E last() {
             Iterator<E> iterator = iterator();
@@ -359,8 +367,11 @@ public final class M3FilteredViews {
                     : (inclusive ? direction <= 0 : direction < 0);
         }
         private E firstVisible(Iterator<E> cursor) {
-            Iterator<E> selected = M3FilteredViews.filtered(cursor, predicate);
-            return selected.hasNext() ? selected.next() : null;
+            while (cursor.hasNext()) {
+                E item = cursor.next();
+                if (predicate.test(item)) return item;
+            }
+            return null;
         }
         private E navigate(E candidate, E query, boolean forward, boolean inclusive) {
             if (candidate == null && !nullIsCandidate(query, forward, inclusive)) return null;
@@ -395,6 +406,7 @@ public final class M3FilteredViews {
         }
         @Override public E pollFirst() { throw readonly(); }
         @Override public E pollLast() { throw readonly(); }
+        @Override public NavigableSet<E> reversed() { return descendingSet(); }
         @Override public NavigableSet<E> descendingSet() {
             return new NavigableSetView<>(nav.descendingSet(), predicate);
         }
@@ -435,8 +447,10 @@ public final class M3FilteredViews {
             return count;
         }
         @Override public boolean isEmpty() {
-            return !filtered(sorted.entrySet().iterator(),
-                    item -> predicate.test(item.getKey(), item.getValue())).hasNext();
+            for (Entry<K, V> item : sorted.entrySet()) {
+                if (predicate.test(item.getKey(), item.getValue())) return false;
+            }
+            return true;
         }
         /**
          * Called only after containsKey has established membership. The
@@ -533,9 +547,12 @@ public final class M3FilteredViews {
          * entries are then skipped by iterator advancement instead of repeated lookup.
          */
         private Entry<K, V> firstVisible(Iterator<Entry<K, V>> cursor) {
-            Iterator<Entry<K, V>> selected = M3FilteredViews.filtered(cursor,
-                    entry -> predicate.test(entry.getKey(), entry.getValue()));
-            return selected.hasNext() ? new SimpleImmutableEntry<>(selected.next()) : null;
+            while (cursor.hasNext()) {
+                Entry<K, V> entry = cursor.next();
+                if (predicate.test(entry.getKey(), entry.getValue()))
+                    return new SimpleImmutableEntry<>(entry);
+            }
+            return null;
         }
         /**
          * Do not turn an out-of-range query on a live bounded map into a

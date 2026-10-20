@@ -110,11 +110,11 @@ public final class M3PrimitiveFilteredSequences {
         }
     }
 
-    private static int count(M3LongIterator it) {
+    /** Count directly without constructing the selected iterator's lookahead state. */
+    private static int count(M3LongIterator it, LongPredicate predicate) {
         int result = 0;
         while (it.hasNext()) {
-            it.nextLong();
-            result++;
+            if (predicate.test(it.nextLong())) result++;
         }
         return result;
     }
@@ -181,7 +181,7 @@ public final class M3PrimitiveFilteredSequences {
             throw new IndexOutOfBoundsException(visibleIndex);
         }
 
-        @Override public int size() { return count(iterator()); }
+        @Override public int size() { return count(source.iterator(), predicate); }
         @Override public boolean contains(long value) {
             return source.contains(value) && predicate.test(value);
         }
@@ -314,7 +314,7 @@ public final class M3PrimitiveFilteredSequences {
             this.source = Objects.requireNonNull(source, "source");
         }
 
-        @Override public int size() { return count(iterator()); }
+        @Override public int size() { return count(source.iterator(), predicate); }
         @Override public int capacity() { return source.capacity(); }
         @Override public boolean contains(long value) {
             return source.contains(value) && predicate.test(value);
@@ -408,7 +408,7 @@ public final class M3PrimitiveFilteredSequences {
             this.source = Objects.requireNonNull(source, "source");
         }
 
-        @Override public int size() { return count(iterator()); }
+        @Override public int size() { return count(source.iterator(), predicate); }
         @Override public boolean contains(long value) {
             return source.contains(value) && predicate.test(value);
         }
