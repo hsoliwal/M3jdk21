@@ -1,0 +1,37 @@
+owner	donor_type	operation	size	impl	build_ms	query_ms	build_alloc_B_per_elem	query_alloc_B_per_op	retained_B	retained_unit
+M3HashMultiset	com.google.common.collect.HashMultiset	add n distinct + n/2 repeats; count n; iterate	100000	guava	8.44	1.93	68.97	0.00	58.49	B/element
+M3HashMultiset	com.google.common.collect.HashMultiset	add n distinct + n/2 repeats; count n; iterate	100000	m3	7.83	2.36	87.35	0.00	32.61	B/element
+M3HashMultiset	com.google.common.collect.HashMultiset	add n distinct + n/2 repeats; count n; iterate	1000000	guava	80.33	26.20	64.78	0.00	56.39	B/element
+M3HashMultiset	com.google.common.collect.HashMultiset	add n distinct + n/2 repeats; count n; iterate	1000000	m3	91.50	25.85	67.17	0.00	25.19	B/element
+M3LinkedHashMultiset	com.google.common.collect.LinkedHashMultiset	add n distinct + n/2 repeats; count n; iterate	100000	guava	10.97	1.50	76.97	0.00	66.49	B/element
+M3LinkedHashMultiset	com.google.common.collect.LinkedHashMultiset	add n distinct + n/2 repeats; count n; iterate	100000	m3	10.75	1.83	120.54	0.00	43.67	B/element
+M3LinkedHashMultiset	com.google.common.collect.LinkedHashMultiset	add n distinct + n/2 repeats; count n; iterate	1000000	guava	134.06	24.95	72.78	0.00	64.39	B/element
+M3LinkedHashMultiset	com.google.common.collect.LinkedHashMultiset	add n distinct + n/2 repeats; count n; iterate	1000000	m3	81.10	18.51	92.37	0.00	33.59	B/element
+M3HashBag	org.apache.commons.collections4.bag.HashBag	add n distinct + n/2 repeats; getCount n; iterate	100000	commons	8.41	3.79	68.97	0.00	58.49	B/element
+M3HashBag	org.apache.commons.collections4.bag.HashBag	add n distinct + n/2 repeats; getCount n; iterate	100000	m3	6.95	0.95	70.76	0.00	27.08	B/element
+M3HashBag	org.apache.commons.collections4.bag.HashBag	add n distinct + n/2 repeats; getCount n; iterate	1000000	commons	70.01	23.72	64.78	0.00	56.39	B/element
+M3HashBag	org.apache.commons.collections4.bag.HashBag	add n distinct + n/2 repeats; getCount n; iterate	1000000	m3	70.01	11.59	54.57	0.00	20.99	B/element
+M3EnumMultiset	com.google.common.collect.EnumMultiset	n add over 64 constants; count n; iterate	100000	guava	0.35	1.34	0.01	0.02	592.15	B/instance
+M3EnumMultiset	com.google.common.collect.EnumMultiset	n add over 64 constants; count n; iterate	100000	m3	0.51	1.09	0.00	0.02	344.03	B/instance
+M3EnumMultiset	com.google.common.collect.EnumMultiset	n add over 64 constants; count n; iterate	1000000	guava	3.18	2.77	0.00	0.00	592.15	B/instance
+M3EnumMultiset	com.google.common.collect.EnumMultiset	n add over 64 constants; count n; iterate	1000000	m3	4.69	2.23	0.00	0.00	344.03	B/instance
+M3ArrayListMultimap	com.google.common.collect.ArrayListMultimap	put n over n/10 keys; get(k).size n; iterate entries	100000	guava	4.36	2.40	30.11	3.20	13.46	B/element
+M3ArrayListMultimap	com.google.common.collect.ArrayListMultimap	put n over n/10 keys; get(k).size n; iterate entries	100000	m3	6.18	2.90	35.76	0.00	12.93	B/element
+M3ArrayListMultimap	com.google.common.collect.ArrayListMultimap	put n over n/10 keys; get(k).size n; iterate entries	1000000	guava	55.29	25.95	30.90	3.20	13.85	B/element
+M3ArrayListMultimap	com.google.common.collect.ArrayListMultimap	put n over n/10 keys; get(k).size n; iterate entries	1000000	m3	50.47	19.61	32.86	0.00	12.10	B/element
+M3DualLinkedHashBidiMap	org.apache.commons.collections4.bidimap.DualLinkedHashBidiMap	put n; get + getKey n; mapIterator	100000	commons	14.03	3.02	121.95	0.00	100.97	B/element
+M3DualLinkedHashBidiMap	org.apache.commons.collections4.bidimap.DualLinkedHashBidiMap	put n; get + getKey n; mapIterator	100000	m3	24.70	3.09	221.25	0.00	80.73	B/element
+M3DualLinkedHashBidiMap	org.apache.commons.collections4.bidimap.DualLinkedHashBidiMap	put n; get + getKey n; mapIterator	1000000	commons	129.30	34.11	113.56	0.00	96.78	B/element
+M3DualLinkedHashBidiMap	org.apache.commons.collections4.bidimap.DualLinkedHashBidiMap	put n; get + getKey n; mapIterator	1000000	m3	176.42	35.37	237.76	0.00	84.81	B/element
+M3MultiValueMapAdapter	org.springframework.util.MultiValueMapAdapter	add n over n/10 keys; getFirst n; forEach	100000	spring	7.64	2.18	35.71	0.00	14.26	B/element
+M3MultiValueMapAdapter	org.springframework.util.MultiValueMapAdapter	add n over n/10 keys; getFirst n; forEach	100000	m3	6.31	1.63	35.71	0.00	14.26	B/element
+M3MultiValueMapAdapter	org.springframework.util.MultiValueMapAdapter	add n over n/10 keys; getFirst n; forEach	1000000	spring	79.86	26.42	36.50	0.00	14.65	B/element
+M3MultiValueMapAdapter	org.springframework.util.MultiValueMapAdapter	add n over n/10 keys; getFirst n; forEach	1000000	m3	92.29	28.28	36.50	0.00	14.65	B/element
+M3EnumHashBiMap	com.google.common.collect.EnumHashBiMap	n put over 64 keys; get + inverse.get n; iterate	100000	guava	0.81	1.72	0.04	0.03	3008.21	B/instance
+M3EnumHashBiMap	com.google.common.collect.EnumHashBiMap	n put over 64 keys; get + inverse.get n; iterate	100000	m3	0.49	1.96	0.02	0.00	1440.15	B/instance
+M3EnumHashBiMap	com.google.common.collect.EnumHashBiMap	n put over 64 keys; get + inverse.get n; iterate	1000000	guava	11.00	16.62	0.00	0.00	3008.21	B/instance
+M3EnumHashBiMap	com.google.common.collect.EnumHashBiMap	n put over 64 keys; get + inverse.get n; iterate	1000000	m3	5.64	27.71	0.00	0.00	1440.15	B/instance
+M3EnumBiMap	com.google.common.collect.EnumBiMap	n put over 64 keys; get + inverse.get n; iterate	100000	guava	0.49	1.17	0.01	0.03	696.21	B/instance
+M3EnumBiMap	com.google.common.collect.EnumBiMap	n put over 64 keys; get + inverse.get n; iterate	100000	m3	0.84	3.53	0.01	0.00	1216.15	B/instance
+M3EnumBiMap	com.google.common.collect.EnumBiMap	n put over 64 keys; get + inverse.get n; iterate	1000000	guava	5.66	7.72	0.00	0.00	696.21	B/instance
+M3EnumBiMap	com.google.common.collect.EnumBiMap	n put over 64 keys; get + inverse.get n; iterate	1000000	m3	9.65	10.05	0.00	0.00	1216.15	B/instance
