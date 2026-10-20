@@ -38,14 +38,14 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
-import sun.swing.table.M3SparseSizes;
 
 /**
  * Seeded scripts against two JTables on one DefaultTableModel. The stock side has its
  * {@code m3Sizes} flag cleared, so it keeps {@code rowModel} and {@code SortManager.modelRowSizes};
  * the other keeps {@code sun.swing.table.M3SparseSizes}. Steps: per-row and global row heights,
  * inserts, removals, moves, edits, update/data/structure events, sorters on and off, sort keys,
- * filters, row count changes, selections, serialization round trips. After every step: the row
+ * filters, row count changes, selections, serialization round trips (both sides throw while custom heights
+ * are set, upstream defect D8). After every step: the row
  * count, every row's height and rectangle, rowAtPoint at every row boundary and outside, the
  * preferred size, the scroll increments at sampled rectangles, the selection, and that the M3 side
  * keeps no dense SizeSequence; pixels every 10 steps. Every fifth seed uses 2,000-4,000 rows.
@@ -74,6 +74,7 @@ public final class M3TableRowHeightsDifferential {
     static int pixelChecks;
     static int sparseSteps;
     static int roundTrips;
+    static int failedRoundTrips;
 
     private final Random rnd;
     private final DefaultTableModel model;
@@ -231,43 +232,60 @@ public final class M3TableRowHeightsDifferential {
             act("setRowSelectionInterval " + a + " " + b, t -> t.setRowSelectionInterval(a, b));
         } else if (op < 84) {
             log.add(step + " serialization round trip");
-            JTable s2 = roundTrip(stock, true);
-            JTable m2 = roundTrip(m3, false);
-            String a = heights(s2);
-            String b = heights(m2);
-            if (!a.equals(b)) {
-                fail("heights after a serialization round trip\n  stock " + a + "\n  m3    " + b);
+            Object s2 = roundTrip(stock, true);
+            Object m2 = roundTrip(m3, false);
+            if (s2 instanceof JTable st && m2 instanceof JTable mt) {
+                String a = heights(st);
+                String b = heights(mt);
+                if (!a.equals(b)) {
+                    fail("heights after a serialization round trip\n  stock " + a + "\n  m3    " + b);
+                }
+                st.setModel(model);
+                mt.setModel(model);
+                stock = st;
+                m3 = mt;
+                roundTrips++;
+            } else if (!String.valueOf(s2).equals(String.valueOf(m2))) {
+                fail("serialization outcome stock " + s2 + " m3 " + m2);
+            } else {
+                // the failed write left both UIs uninstalled (the reinstall comes after the write); reinstall both
+                reinstall(stock);
+                reinstall(m3);
+                failedRoundTrips++;
             }
-            s2.setModel(model);
-            m2.setModel(model);
-            stock = s2;
-            m3 = m2;
-            roundTrips++;
         } else {
             act("query only", t -> { });
         }
     }
 
-    /** Serializes and reads back a table with its own copy of the model; the stock copy keeps the dense store. */
-    JTable roundTrip(JTable t, boolean stockSide) throws Exception {
+    /**
+     * Serializes and reads back a table with its own copy of the model, or answers the exception
+     * (a table with custom row heights is not serializable in stock: upstream defect D8).
+     */
+    Object roundTrip(JTable t, boolean stockSide) throws Exception {
         JTable copy;
         ByteArrayOutputStream out = new ByteArrayOutputStream();
         try (ObjectOutputStream o = new ObjectOutputStream(out)) {
             o.writeObject(t);
+        } catch (java.io.IOException e) {
+            return e.getClass().getName() + ": " + e.getMessage();
         }
         try (ObjectInputStream in = new ObjectInputStream(new ByteArrayInputStream(out.toByteArray()))) {
             copy = (JTable) in.readObject();
         }
         if (stockSide) {
             setFlag(copy, false);
-            Object sparse = get(copy, "m3RowSizes");
-            if (sparse != null) {
-                field("rowModel").set(copy, ((M3SparseSizes) sparse).toSizeSequence());
-                field("m3RowSizes").set(copy, null);
-            }
         }
         copy.setSize(300, 400);
         return copy;
+    }
+
+    /** A fresh UI for a table whose UI a failed write left uninstalled (its uninstallUI would throw). */
+    static void reinstall(JTable t) throws ReflectiveOperationException {
+        Field ui = javax.swing.JComponent.class.getDeclaredField("ui");
+        ui.setAccessible(true);
+        ui.set(t, null);
+        t.updateUI();
     }
 
     static String heights(JTable t) {
@@ -393,6 +411,7 @@ public final class M3TableRowHeightsDifferential {
         });
         return "M3TableRowHeightsDifferential seeds " + seeds + " steps " + steps + " passed " + passed[0]
                 + " failed " + failures.size() + " " + failures + "; pixel comparisons " + pixelChecks
-                + "; checks with the sparse store in use " + sparseSteps + "; serialization round trips " + roundTrips;
+                + "; checks with the sparse store in use " + sparseSteps + "; serialization round trips " + roundTrips
+                + " (both threw " + failedRoundTrips + " times: custom row heights, upstream defect D8)";
     }
 }

@@ -8,7 +8,7 @@
  * @summary M3 swing-viewport leaf 8: JUnit suite of sun.swing.table.M3SparseSizes against
  *          javax.swing.SizeSequence: every query at every index and position, inside and outside
  *          the range, through random setSize, insertEntries, removeEntries and setSizes scripts;
- *          the view-order mapping through a sorter; the dense round trip; the JTable differential.
+ *          the view-order mapping through a sorter; the JTable differential.
  * @modules java.desktop/sun.swing.table java.desktop/javax.swing:open
  * @build M3TableRowHeightsDifferential
  * @run junit/othervm -Djava.awt.headless=true -Dm3.swing.viewport=true -XX:-OmitStackTraceInFastThrow M3SparseSizesTest
@@ -101,11 +101,83 @@ public class M3SparseSizesTest {
         assertTrue(entries > 10_000, "stored entries over the scripts: " + entries);
     }
 
+    /** Above LIMIT custom sizes the store is the stock dense tree: same answers, and back to sparse on setSizes. */
+    @Test
+    void denseAboveTheLimit() {
+        Random rnd = new Random(4);
+        int n = 20_000;
+        SizeSequence stock = new SizeSequence(n, 16);
+        M3SparseSizes m3 = new M3SparseSizes(n, 16);
+        for (int k = 0; k < 6000; k++) {
+            int i = rnd.nextInt(n);
+            int s = 1 + rnd.nextInt(60);
+            stock.setSize(i, s);
+            m3.setSize(i, s);
+        }
+        assertEquals(-1, m3.count(), "dense above the limit");
+        same(stock, m3, "after 6,000 sets");
+        for (int step = 0; step < 40; step++) {
+            int len = stock.getSizes().length;
+            int op = rnd.nextInt(3);
+            if (op == 0) {
+                int at = rnd.nextInt(len + 1);
+                stock.insertEntries(at, 3, 16);
+                m3.insertEntries(at, 3, 16);
+            } else if (op == 1) {
+                int at = rnd.nextInt(len - 3);
+                stock.removeEntries(at, 3);
+                m3.removeEntries(at, 3);
+            } else {
+                int i = rnd.nextInt(len);
+                stock.setSize(i, 7);
+                m3.setSize(i, 7);
+            }
+            m3.setSize(-1, 99);
+            if (step % 10 == 0) {
+                same(stock, m3, "dense step " + step);
+            }
+        }
+        same(stock, m3, "dense end");
+        m3.setSizes(10, 3);
+        assertEquals(0, m3.count(), "setSizes returns to the sparse form");
+        SizeSequence bulkStock = new SizeSequence(10, 5);
+        M3SparseSizes bulk = new M3SparseSizes(10, 5);
+        bulkStock.insertEntries(3, M3SparseSizes.LIMIT + 1, 9);
+        bulk.insertEntries(3, M3SparseSizes.LIMIT + 1, 9);
+        assertEquals(-1, bulk.count(), "a bulk insert over the limit goes dense");
+        same(bulkStock, bulk, "bulk insert");
+        DefaultTableModel model = new DefaultTableModel(new Object[] {"n"}, 0) {
+            @Override
+            public Class<?> getColumnClass(int c) {
+                return Integer.class;
+            }
+        };
+        for (int i = 0; i < 6000; i++) {
+            model.addRow(new Object[] {i % 17});
+        }
+        TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>(model);
+        sorter.setSortKeys(List.of(new RowSorter.SortKey(0, SortOrder.ASCENDING)));
+        sorter.setRowFilter(RowFilter.numberFilter(RowFilter.ComparisonType.NOT_EQUAL, 3, 0));
+        M3SparseSizes modelSizes = new M3SparseSizes(6000, 16);
+        for (int i = 0; i < 6000; i++) {
+            modelSizes.setSize(i, 17 + i % 5);
+        }
+        assertEquals(-1, modelSizes.count());
+        M3SparseSizes view = modelSizes.inViewOrder(sorter.getViewRowCount(), 16, sorter);
+        for (int v = 0; v < sorter.getViewRowCount(); v++) {
+            assertEquals(modelSizes.getSize(sorter.convertRowIndexToModel(v)), view.getSize(v), "view row " + v);
+        }
+    }
+
     /** Zero sizes among the entries: getIndex skips them as the stock tree does. */
     @Test
     void zeroSizes() {
-        SizeSequence stock = new SizeSequence(new int[] {5, 0, 0, 7, 0, 3});
-        M3SparseSizes m3 = M3SparseSizes.of(new int[] {5, 0, 0, 7, 0, 3}, 4);
+        int[] sizes = {5, 0, 0, 7, 0, 3};
+        SizeSequence stock = new SizeSequence(sizes);
+        M3SparseSizes m3 = new M3SparseSizes(sizes.length, 4);
+        for (int i = 0; i < sizes.length; i++) {
+            m3.setSize(i, sizes[i]);
+        }
         same(stock, m3, "zeros");
         m3.setSize(3, 0);
         stock.setSize(3, 0);
@@ -129,6 +201,10 @@ public class M3SparseSizesTest {
         assertThrows(IndexOutOfBoundsException.class, () -> s.insertEntries(-1, 1, 10));
         assertThrows(IndexOutOfBoundsException.class, () -> s.removeEntries(4, 2));
         assertThrows(IllegalArgumentException.class, () -> s.setSizes(2, 0));
+        assertThrows(IllegalArgumentException.class, () -> s.setSizes(-1, 5));
+        assertThrows(IndexOutOfBoundsException.class, () -> s.insertEntries(0, -1, 10));
+        assertThrows(IndexOutOfBoundsException.class, () -> s.removeEntries(0, -1));
+        assertThrows(IndexOutOfBoundsException.class, () -> s.removeEntries(-1, 1));
         s.setSize(2, 30);
         assertEquals(1, s.count());
         assertEquals(10, s.defaultSize());
@@ -137,8 +213,7 @@ public class M3SparseSizesTest {
         assertEquals(3, s.getIndex(50));
         assertEquals(5, s.getIndex(70));
         assertEquals(4, s.getIndex(69));
-        SizeSequence dense = s.toSizeSequence();
-        assertArrayEquals(new int[] {10, 10, 30, 10, 10}, dense.getSizes());
+        assertArrayEquals(new int[] {10, 10, 30, 10, 10}, s.getSizes());
         assertEquals(0, new M3SparseSizes(0, 3).getIndex(5), "empty: always 0");
         assertEquals(0, new M3SparseSizes(0, 3).getPosition(2));
     }

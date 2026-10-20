@@ -6017,13 +6017,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
     @Serial
     private void writeObject(ObjectOutputStream s) throws IOException {
         if (m3RowSizes != null) {
-            // the stock dense form goes into the stream
-            rowModel = m3RowSizes.toSizeSequence();
+            // as the stock: rowModel, a SizeSequence, is not serializable (upstream defect D8)
+            throw new java.io.NotSerializableException("javax.swing.SizeSequence");
         }
         s.defaultWriteObject();
-        if (m3RowSizes != null) {
-            rowModel = null;
-        }
         if (getUIClassID().equals(uiClassID)) {
             byte count = JComponent.getWriteObjCounter(this);
             JComponent.setWriteObjCounter(this, --count);
@@ -6086,10 +6083,6 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
         selectionForeground = (Color) f.get("selectionForeground", null);
         selectionBackground = (Color) f.get("selectionBackground", null);
         rowModel = (SizeSequence) f.get("rowModel", null);
-        if (m3Sizes && rowModel != null) {
-            m3RowSizes = sun.swing.table.M3SparseSizes.of(rowModel.getSizes(), rowHeight);
-            rowModel = null;
-        }
 
         boolean newDragEnabled = f.get("dragEnabled", false);
         checkDragEnabled(newDragEnabled);

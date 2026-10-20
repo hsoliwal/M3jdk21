@@ -44,8 +44,12 @@ import sun.security.action.GetBooleanAction;
  * {@code getIndex} is 0 before position 0 and the length at or after the total. Two stock behaviours
  * are not mirrored because they corrupt the stock tree: {@code setSize} of a negative index is
  * ignored here, and the inserts and removals are checked against the length. The default size is at
- * least 1, as a {@code JTable} row height is. Design and proof: m3/docs/swing-viewport/DESIGN.md
- * section 15.
+ * least 1, as a {@code JTable} row height is.
+ * <p>
+ * Above {@link #LIMIT} custom sizes the sparse form loses (an insert in the middle of the lanes and the
+ * prefix rebuilt after each change are O(k), against O(log n) for the stock tree), so the store moves to a
+ * dense {@code SizeSequence}, the stock structure, and stays there until {@link #setSizes}. Design and
+ * proof: m3/docs/swing-viewport/DESIGN.md section 15.
  */
 //FLLDCIM: M3 swing-viewport leaf 8 - JTable row heights as one sparse store per order, no dense copies
 public final class M3SparseSizes {
@@ -53,7 +57,12 @@ public final class M3SparseSizes {
     /** Whether {@code JTable} keeps its row heights here; read once from {@code m3.swing.viewport}. */
     public static final boolean ENABLED = GetBooleanAction.privilegedGetProperty("m3.swing.viewport");
 
+    /** The most custom sizes kept sparse: 64 KB of lanes; above it the stock dense tree is used. */
+    public static final int LIMIT = 4096;
+
     private int length;
+    /** The stock dense tree once more than {@link #LIMIT} sizes are custom, else null. */
+    private SizeSequence dense;
     private int defaultSize;
     private int[] index = new int[4];
     private int[] size = new int[4];
@@ -70,24 +79,11 @@ public final class M3SparseSizes {
         this.defaultSize = defaultSize;
     }
 
-    /** The sparse form of dense {@code sizes} with {@code defaultSize} implied (deserialization). */
-    public static M3SparseSizes of(int[] sizes, int defaultSize) {
-        M3SparseSizes s = new M3SparseSizes(sizes.length, defaultSize);
-        for (int i = 0; i < sizes.length; i++) {
-            if (sizes[i] != defaultSize) {
-                s.append(i, sizes[i]);
-            }
-        }
-        return s;
-    }
-
-    /** The dense stock form (serialization). */
-    public SizeSequence toSizeSequence() {
-        return new SizeSequence(getSizes());
-    }
-
     /** {@code SizeSequence.getSizes()}. */
     public int[] getSizes() {
+        if (dense != null) {
+            return dense.getSizes();
+        }
         int[] sizes = new int[length];
         Arrays.fill(sizes, defaultSize);
         for (int j = 0; j < count; j++) {
@@ -106,15 +102,18 @@ public final class M3SparseSizes {
         return defaultSize;
     }
 
-    /** The number of stored entries (those whose size differs from the default). */
+    /** The number of sparse entries (sizes that differ from the default); -1 once the store is dense. */
     public int count() {
-        return count;
+        return dense != null ? -1 : count;
     }
 
     /** {@code SizeSequence.getSize}: 0 outside the range. */
     public int getSize(int i) {
         if (i < 0 || i >= length) {
             return 0;
+        }
+        if (dense != null) {
+            return dense.getSize(i);
         }
         int j = find(i);
         return j >= 0 ? size[j] : defaultSize;
@@ -128,6 +127,9 @@ public final class M3SparseSizes {
         if (i >= length) {
             i = length;
         }
+        if (dense != null) {
+            return dense.getPosition(i);
+        }
         build();
         int j = find(i);
         int below = j >= 0 ? j : -1 - j;
@@ -138,6 +140,9 @@ public final class M3SparseSizes {
     public int getIndex(int position) {
         if (position < 0 || length == 0) {
             return 0;
+        }
+        if (dense != null) {
+            return dense.getIndex(position);
         }
         build();
         if (position >= total()) {
@@ -172,6 +177,13 @@ public final class M3SparseSizes {
         if (i < 0 || i >= length) {
             return;
         }
+        if (dense == null && count == LIMIT && s != defaultSize && find(i) < 0) {
+            toDense();
+        }
+        if (dense != null) {
+            dense.setSize(i, s);
+            return;
+        }
         int j = find(i);
         if (s == defaultSize) {
             if (j >= 0) {
@@ -189,6 +201,14 @@ public final class M3SparseSizes {
     public void insertEntries(int start, int n, int value) {
         if (start < 0 || start > length || n < 0) {
             throw new IndexOutOfBoundsException("insert " + n + " at " + start + " of " + length);
+        }
+        if (dense == null && value != defaultSize && count + (long) n > LIMIT) {
+            toDense();
+        }
+        if (dense != null) {
+            dense.insertEntries(start, n, value);
+            length += n;
+            return;
         }
         int j = lowerBound(start);
         for (int k = j; k < count; k++) {
@@ -208,6 +228,11 @@ public final class M3SparseSizes {
         if (start < 0 || n < 0 || start + n > length) {
             throw new IndexOutOfBoundsException("remove " + n + " at " + start + " of " + length);
         }
+        if (dense != null) {
+            dense.removeEntries(start, n);
+            length -= n;
+            return;
+        }
         int from = lowerBound(start);
         int to = lowerBound(start + n);
         if (to > from) {
@@ -225,10 +250,20 @@ public final class M3SparseSizes {
         if (n < 0 || value < 1) {
             throw new IllegalArgumentException("length " + n + ", size " + value);
         }
+        dense = null;
         count = 0;
         length = n;
         defaultSize = value;
         dirty = true;
+    }
+
+    /** Moves the store to the stock dense tree (more than {@link #LIMIT} custom sizes). */
+    private void toDense() {
+        dense = new SizeSequence(getSizes());
+        count = 0;
+        index = new int[4];
+        size = new int[4];
+        prefix = new long[5];
     }
 
     /**
@@ -238,6 +273,15 @@ public final class M3SparseSizes {
      */
     public M3SparseSizes inViewOrder(int viewCount, int viewDefault, RowSorter<?> sorter) {
         M3SparseSizes view = new M3SparseSizes(viewCount, viewDefault);
+        if (dense != null) {
+            for (int m = 0; m < length; m++) {
+                int v = sorter.convertRowIndexToView(m);
+                if (v != -1) {
+                    view.setSize(v, dense.getSize(m));
+                }
+            }
+            return view;
+        }
         for (int j = 0; j < count; j++) {
             int v = sorter.convertRowIndexToView(index[j]);
             if (v != -1) {
@@ -291,10 +335,6 @@ public final class M3SparseSizes {
     private int lowerBound(int i) {
         int j = find(i);
         return j >= 0 ? j : -1 - j;
-    }
-
-    private void append(int i, int s) {
-        insert(count, i, s);
     }
 
     private void insert(int j, int i, int s) {

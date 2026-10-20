@@ -56,6 +56,7 @@ public final class DeltaBench {
                 case "list" -> list();
                 case "heap" -> heap();
                 case "sorter" -> sorter();
+                case "heights" -> heights();
                 default -> throw new IllegalArgumentException(kase);
             }
         });
@@ -176,6 +177,46 @@ public final class DeltaBench {
                 "setRowFilter: initializeFilteredMapping + sort");
         time("update_one_row_filtered", r -> m.setValueAt(r, mid, 1), "setValueAt with a filter and sortsOnUpdates");
         row("view_rows", s.getViewRowCount(), "rows", "after the filter");
+    }
+
+    /** Leaf 8: custom row heights at N rows (sparse store below 4,096 entries, the stock dense tree above). */
+    static void heights() {
+        DefaultTableModel m = tableModel();
+        JTable t = new JTable(m);
+        t.setAutoCreateRowSorter(true);
+        t.getRowSorter().setSortKeys(List.of(new RowSorter.SortKey(1, SortOrder.DESCENDING)));
+        java.util.Random rnd = new java.util.Random(7);
+        time("set_1000_heights", r -> {
+            for (int i = 0; i < N; i += Math.max(1, N / 1000)) {
+                t.setRowHeight(i, 20 + (i + r) % 9);
+            }
+        }, "setRowHeight on 1,000 rows spread over the table, with a sorter");
+        time("frame_queries_1000", r -> {
+            for (int k = 0; k < 1000; k++) {
+                int y = rnd.nextInt(Math.max(1, t.getHeight() > 0 ? t.getHeight() : N * 16));
+                sink += t.rowAtPoint(new Point(5, y)) + t.getCellRect(rnd.nextInt(N), 0, false).y;
+            }
+        }, "1,000 rowAtPoint + getCellRect pairs (a page of painting)");
+        int[] order = new int[N];
+        for (int i = 0; i < N; i++) {
+            order[i] = i;
+        }
+        for (int i = N - 1; i > 0; i--) {
+            int j = rnd.nextInt(i + 1);
+            int x = order[i];
+            order[i] = order[j];
+            order[j] = x;
+        }
+        time("set_every_height_random", r -> {
+            for (int i = 0; i < N; i++) {
+                t.setRowHeight(order[i], 17 + (order[i] + r) % 7);
+            }
+        }, "setRowHeight on every row in random order (pack rows): dense above 4,096 entries");
+        time("frame_queries_dense_1000", r -> {
+            for (int k = 0; k < 1000; k++) {
+                sink += t.rowAtPoint(new Point(5, rnd.nextInt(N * 17))) + t.getCellRect(rnd.nextInt(N), 0, false).y;
+            }
+        }, "1,000 rowAtPoint + getCellRect pairs with every row custom");
     }
 
     /** Median of 7 runs of {@code edit}, in ms, and the median bytes the thread allocated per run. */

@@ -9,8 +9,8 @@ description: >-
   in two dense SizeSequences, rowModel in view order and SortManager.modelRowSizes in model order, 4n bytes each.
   With the property set the same two stores are sun.swing.table.M3SparseSizes, holding only the rows whose height
   differs from the default: m3RowSizes beside rowModel and SortManager.m3ModelSizes beside modelRowSizes, with the
-  stock lifecycle mirrored at every site that reads, writes or drops the stock pair; serialization writes the dense
-  stock form and reads it back. Default off: m3Sizes false keeps every stock line. Applied by M3PerFileApply; a
+  stock lifecycle mirrored at every site that reads, writes or drops the stock pair. Serialization throws as the
+  stock does with custom heights (SizeSequence is not serializable, upstream defect D8). Default off: m3Sizes false keeps every stock line. Applied by M3PerFileApply; a
   second pass must report UNCHANGED.
 recipeList:
   - com.synexia.openrewrite.viewport.M3AddMemberIfMissing:
@@ -109,27 +109,13 @@ recipeList:
       methodName: writeObject
       parameterCount: 1
       position: METHOD_START
-      statements: "        if (m3RowSizes != null) {\n            // the stock dense form goes into the stream\n            rowModel = m3RowSizes.toSizeSequence();\n        }"
-  - com.synexia.openrewrite.viewport.M3InsertStatements:
-      declaringClasses: [javax.swing.JTable]
-      methodName: writeObject
-      parameterCount: 1
-      anchor: "s.defaultWriteObject();"
-      position: AFTER
-      statements: "        if (m3RowSizes != null) {\n            rowModel = null;\n        }"
+      statements: "        if (m3RowSizes != null) {\n            // as the stock: rowModel, a SizeSequence, is not serializable (upstream defect D8)\n            throw new java.io.NotSerializableException(\"javax.swing.SizeSequence\");\n        }"
   - com.synexia.openrewrite.viewport.M3InsertStatements:
       declaringClasses: [javax.swing.JTable]
       methodName: readObject
       parameterCount: 1
       position: METHOD_START
       statements: "        m3Sizes = sun.swing.table.M3SparseSizes.ENABLED;"
-  - com.synexia.openrewrite.viewport.M3InsertStatements:
-      declaringClasses: [javax.swing.JTable]
-      methodName: readObject
-      parameterCount: 1
-      anchor: "rowModel = (SizeSequence) f.get(\"rowModel\", null);"
-      position: AFTER
-      statements: "        if (m3Sizes && rowModel != null) {\n            m3RowSizes = sun.swing.table.M3SparseSizes.of(rowModel.getSizes(), rowHeight);\n            rowModel = null;\n        }"
   - com.synexia.openrewrite.viewport.M3InsertStatements:
       declaringClasses: [javax.swing.JTable$SortManager, javax.swing.JTable.SortManager]
       methodName: setViewRowHeight
