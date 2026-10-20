@@ -119,10 +119,7 @@ public final class M3FileDeltaLedger {
         TreeSet<String> supplied = new TreeSet<>();
         for (Path path : tracked) supplied.add(relativeKey(root, Objects.requireNonNull(path, "path")));
         int original = old == null ? 0 : old.slots();
-        if ((long) original + supplied.size() > MAX_SLOTS) {
-            throw new IOException("M3File delta slot limit exceeded");
-        }
-        int capacity = original + supplied.size();
+        int capacity = (int) Math.min(MAX_SLOTS, (long) original + supplied.size());
         String[] paths = old == null ? new String[capacity] : Arrays.copyOf(old.paths, capacity);
         byte[] kinds = old == null ? new byte[capacity] : Arrays.copyOf(old.kinds, capacity);
         long[] sizes = old == null ? new long[capacity] : Arrays.copyOf(old.sizes, capacity);
@@ -141,6 +138,9 @@ public final class M3FileDeltaLedger {
             Path target = root.resolve(key);
             Fingerprint actual = fingerprint(root, target);
             if (actual == null) continue;
+            if (slot < 0 && used == capacity) {
+                throw new IOException("M3File delta slot limit exceeded");
+            }
             int at = slot < 0 ? used++ : slot;
             if (slot < 0) {
                 paths[at] = key;
