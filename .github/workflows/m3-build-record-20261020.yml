@@ -1,0 +1,42 @@
+# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and contributors
+# SPDX-License-Identifier: Apache-2.0
+name: M3JDK21 native M3FS build record proof
+on:
+  pull_request:
+    paths:
+      - 'm3/fs/src/main/java/com/m3/fs/M3BuildState*.java'
+      - 'm3/fs/src/test/java/com/m3/fs/M3BuildState*.java'
+      - 'm3/fs/qualification/build-state-20261020/**'
+      - '.github/workflows/m3-build-record-20261020.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  native-sqlite-and-java21:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: maven
+      - name: Install original M3FS native build prerequisites
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y cmake build-essential pkg-config libsqlite3-dev
+      - name: Run original M3FS JUnit and native CTest gates
+        run: |
+          mvn -B -ntp -f m3/fs/pom.xml -Dtest=M3BuildStateTest -Dsurefire.failIfNoSpecifiedTests=false verify
+      - name: Preserve native/JUnit receipts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: m3-build-state-native-evidence
+          path: |
+            m3/fs/target/surefire-reports/**
+            m3/fs/target/native/Testing/Temporary/**
+          if-no-files-found: warn
