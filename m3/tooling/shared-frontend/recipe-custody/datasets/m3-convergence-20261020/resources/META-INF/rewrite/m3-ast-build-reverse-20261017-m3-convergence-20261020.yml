@@ -1,0 +1,7 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3jdk.AstBuildReverse20261017
+displayName: Preserve M3JDK21 native Java/JNI AST and collection superset
+description: Replays the admission and proof files through existing canonical M3 hash-pinned text snapshot owner.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe:
+      crateName: m3-ast-build-reverse-20261017-m3-convergence-20261020
