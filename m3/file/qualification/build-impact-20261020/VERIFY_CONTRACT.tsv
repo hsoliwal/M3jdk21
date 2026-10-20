@@ -9,3 +9,5 @@ jni	- Xcheck:jni, javac -h native compare if changed	NO	N/A_NO_NATIVE_CHANGE
 full_sdk	Source-built JDK+HotSpot/jtreg/installed module	NO	PENDING
 fork_builds	Real Maven and Gradle no-op/ABI/classpath/processor cases	NO	PENDING
 perf	CPU+heap+native memory on representative workloads	NO	PENDING
+interpreted_runtime	OpenJDK21 -Xint same ABI/graph oracle	YES_LOCAL	PASS_10569
+jni_flag_only	-Xcheck:jni option over Java-only module	YES_LOCAL	NO_NATIVE_METHOD_EXERCISED
