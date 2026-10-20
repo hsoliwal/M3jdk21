@@ -273,6 +273,7 @@ public final class M3TaskRecipeTest {
     }
 
     @Test void exactReplayFixedPointAndInputOrder() {
+        qualifyRawByteHashRecipe();
         namedDescriptorComposesTheQualifiedLanes();
         verifySerialQualifiedPasses();
         for (Lane lane : lanes()) {
@@ -374,6 +375,8 @@ public final class M3TaskRecipeTest {
 
     @Test void qualifiedSdkResultsAreRetained() throws IOException {
         Path root = Path.of(System.getProperty("m3.candidate.root"));
+        Files.createDirectories(root);
+        verifyRawByteDigest(root);
         StringBuilder receipt = new StringBuilder("# OpenRewrite SDK Results; no template-copy materialization\n");
         for (Lane lane : lanes()) {
             Replay result = replay(lane, parse(lane, state(lane, false)));
@@ -412,16 +415,90 @@ public final class M3TaskRecipeTest {
         }
         for (Path source : boundFiles.stream().sorted().toList()) {
             inputs.append("crate/").append(crate.relativize(source).toString().replace('\\', '/'))
-                    .append('\t').append(sha(Files.readString(source))).append('\n');
+                    .append('\t').append(sha(source)).append('\n');
         }
         Path owner = Path.of(System.getProperty("m3.recipe.owner.root"));
         for (String name : List.of("M3EditScope.java", "M3HashPinnedJavaSnapshotRecipe.java",
                 "M3HashPinnedTextSnapshotRecipe.java", "M3ScopeInference.java")) {
             String relative = "src/main/java/com/synexia/rewrite/" + name;
             inputs.append("owner/").append(relative).append('\t')
-                    .append(sha(Files.readString(owner.resolve(relative)))).append('\n');
+                    .append(sha(owner.resolve(relative))).append('\n');
         }
         Files.writeString(root.resolve("SDK_INPUTS.tsv"), inputs, StandardCharsets.UTF_8);
+    }
+
+    private static void qualifyRawByteHashRecipe() {
+        String crateName = "m3-task-recipe-raw-byte-hash-20261020";
+        String root = "/com/synexia/rewrite/hash-pinned-java/" + crateName + "/";
+        String yamlPath = "/META-INF/rewrite/" + crateName + ".yml";
+        try (var stream = M3TaskRecipeTest.class.getResourceAsStream(yamlPath)) {
+            assertNotNull(stream, "raw-byte named recipe descriptor");
+            String recipeName = "com.synexia.m3jdk.M3TaskRecipeRawByteHash20261020";
+            Recipe named = Environment.builder().load(new YamlResourceLoader(stream,
+                    URI.create("classpath:" + yamlPath), new Properties())).build()
+                    .activateRecipes(recipeName);
+            assertTrue(named.validateAll().stream().allMatch(v -> v.isValid()),
+                    () -> "raw-byte recipe validation: " + named.validateAll());
+
+            String manifest = resource(root + "manifest.tsv", false);
+            List<String> rows = manifest.lines()
+                    .filter(line -> !line.isBlank() && !line.startsWith("#")).toList();
+            assertEquals(1, rows.size(), "one exact Java file atom");
+            String[] row = rows.getFirst().split("\\t", -1);
+            assertEquals(4, row.length, "exact recipe manifest");
+            String before = resource(root + "pre/" + row[3], false);
+            String after = resource(root + row[3], false);
+            assertEquals(row[1], sha(before), "sealed recipe preimage");
+            assertEquals(row[2], sha(after), "sealed recipe postimage");
+
+            List<Throwable> errors = new ArrayList<>();
+            List<SourceFile> parsed = JavaParser.fromJavaVersion().build()
+                    .parseInputs(List.of(Parser.Input.fromString(Path.of(row[0]), before)),
+                            null, new InMemoryExecutionContext(errors::add)).toList();
+            assertTrue(errors.isEmpty(), () -> "raw-byte fixture parse errors: " + errors);
+            assertEquals(1, parsed.size());
+            SourceFile original = parsed.getFirst();
+            assertInstanceOf(J.CompilationUnit.class, original);
+            assertEquals(before, original.printAll(), "recipe preimage parses losslessly");
+
+            List<Throwable> recipeErrors = new ArrayList<>();
+            List<Result> changes = named.run(new InMemoryLargeSourceSet(List.of(original)),
+                    new InMemoryExecutionContext(recipeErrors::add), 1)
+                    .getChangeset().getAllResults();
+            assertTrue(recipeErrors.isEmpty(), () -> "raw-byte OpenRewrite errors: " + recipeErrors);
+            assertEquals(before, original.printAll(), "recipe leaves admitted LST immutable");
+            assertEquals(1, changes.size());
+            SourceFile changed = changes.getFirst().getAfter();
+            assertNotNull(changed);
+            assertEquals(after, changed.printAll(), "exact recipe output");
+            List<Throwable> fixedErrors = new ArrayList<>();
+            List<Result> fixed = named.run(new InMemoryLargeSourceSet(List.of(changed)),
+                    new InMemoryExecutionContext(fixedErrors::add), 1)
+                    .getChangeset().getAllResults();
+            assertTrue(fixedErrors.isEmpty(), () -> "raw-byte fixed-point errors: " + fixedErrors);
+            assertTrue(fixed.isEmpty(), "raw-byte recipe is a fixed point");
+        } catch (IOException failure) {
+            throw new IllegalStateException("raw-byte recipe qualification failed", failure);
+        }
+    }
+
+    private static void verifyRawByteDigest(Path root) throws IOException {
+        byte[] malformedUtf8 = {(byte) 0xc3, (byte) 0x28};
+        assertEquals("eddf68639913a3cb8331cdfe7f87559e0beccf2c289c0d90ac4d89b3204004f8", sha(malformedUtf8), "raw digest discriminator");
+        Path sample = Files.createTempFile(root, "raw-byte-hash-", ".bin");
+        try {
+            Files.write(sample, malformedUtf8);
+            assertEquals(sha(malformedUtf8), sha(sample), "streaming hash accepts arbitrary bytes");
+            byte[] validUtf8 = "M3 custody λ".getBytes(StandardCharsets.UTF_8);
+            Files.write(sample, validUtf8);
+            assertEquals(sha(new String(validUtf8, StandardCharsets.UTF_8)), sha(sample),
+                    "valid UTF-8 byte identity remains stable");
+            assertNotEquals(sha(malformedUtf8),
+                    sha(new String(malformedUtf8, StandardCharsets.UTF_8)),
+                    "replacement decoding cannot stand in for raw-byte custody");
+        } finally {
+            Files.deleteIfExists(sample);
+        }
     }
 
     private static void refused(Lane lane, List<SourceFile> input) {
@@ -454,8 +531,26 @@ public final class M3TaskRecipeTest {
         } catch (IOException failure) { throw new IllegalStateException(failure); }
     }
     private static String sha(String text) {
-        try { return HexFormat.of().formatHex(MessageDigest.getInstance("SHA-256")
-                .digest(text.getBytes(StandardCharsets.UTF_8))); }
+        return sha(text.getBytes(StandardCharsets.UTF_8));
+    }
+
+    private static String sha(Path source) throws IOException {
+        try {
+            MessageDigest digest = MessageDigest.getInstance("SHA-256");
+            try (var input = Files.newInputStream(source)) {
+                byte[] buffer = new byte[8192];
+                for (int count; (count = input.read(buffer)) != -1;) {
+                    digest.update(buffer, 0, count);
+                }
+            }
+            return HexFormat.of().formatHex(digest.digest());
+        } catch (NoSuchAlgorithmException impossible) {
+            throw new ExceptionInInitializerError(impossible);
+        }
+    }
+
+    private static String sha(byte[] bytes) {
+        try { return HexFormat.of().formatHex(MessageDigest.getInstance("SHA-256").digest(bytes)); }
         catch (NoSuchAlgorithmException impossible) { throw new ExceptionInInitializerError(impossible); }
     }
 }
