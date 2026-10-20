@@ -284,6 +284,102 @@ def proof_marker(raw, expected):
             "ACTUAL_COMPLETE_UNCHANGED_PROOF_OUTPUT_REQUIRED")
 
 
+def native_benchmark(root, source, env, jdk, cc, nm, generated, commands, metadata):
+    work = root / "state-relation-native" / "bench"
+    require(not work.exists() and not work.is_symlink(), "FRESH_BENCHMARK_DIRECTORY_REQUIRED")
+    work.mkdir()
+    sdk = TASK.parent / "sdk"
+    original = sdk / "src/main/resources/com/synexia/rewrite/state-relation-sparse-c11-20261020/before" / NATIVE
+    emitted = sdk / metadata["generatedCandidate"]["path"]
+    harness = safe_file(TASK, "paired_bench.c")
+    checker = safe_file(TASK, "verify_benchmark.py")
+    common = ["-std=c11", "-Wall", "-Wextra", "-Wpedantic", "-Werror",
+              "-Wconversion", "-Wsign-conversion", "-O3", "-fno-lto"]
+    objects, source_rows = [], {}
+    for variant, c_source in (("baseline", original), ("sparse", emitted), ("portable", emitted)):
+        c_raw = safe_file(c_source.parent, c_source.name).read_bytes()
+        expected_git = PINNED[NATIVE] if variant == "baseline" else metadata["generatedCandidate"]["gitBlob"]
+        require(git_blob(c_raw) == expected_git, "BENCHMARK_SOURCE_CUSTODY:" + variant)
+        output = work / (variant + ".o")
+        defines = ["-Dm3_state_relation_compose=m3_bench_" + variant + "_compose",
+                   "-Dm3_state_relation_repeat=m3_bench_" + variant + "_repeat",
+                   "-DJava_jdk_internal_mindex_M3StateRelation_composeNative=Java_m3_benchmark_"
+                       + variant + "_composeNative",
+                   "-DJava_jdk_internal_mindex_M3StateRelation_repeatNative=Java_m3_benchmark_"
+                       + variant + "_repeatNative"]
+        if variant == "portable":
+            defines.append("-DM3_STATE_RELATION_FORCE_POSITIONAL_SCAN")
+        row, raw = command(root, source, "state-relation-bench-" + variant + "-compile",
+            [cc, *common, *defines, "-I" + str(jdk / "include"),
+             "-I" + str(jdk / "include/linux"), "-I" + str((source / HEADER).parent),
+             "-include", str(generated), "-c", str(c_source), "-o", str(output)], env)
+        require(not raw, "STRICT_BENCH_OBJECT_COMPILE_WITHOUT_DIAGNOSTICS:" + variant)
+        commands.append(row)
+        object_raw = safe_file(work, output.name).read_bytes()
+        require(object_raw[:4] == b"\x7fELF" and len(object_raw) < LOG_LIMIT, "BOUNDED_REAL_BENCH_OBJECT")
+        objects.append(output)
+        source_rows[variant] = {"sourceGitBlob": expected_git, "sourceSha256": sha(c_raw),
+                                "sourceBytes": len(c_raw), "objectBytes": len(object_raw),
+                                "objectSha256": sha(object_raw), "objectPath": str(output.relative_to(root))}
+    executable = work / "paired-bench"
+    row, raw = command(root, source, "state-relation-bench-link",
+        [cc, *common, "-I" + str((source / HEADER).parent), str(harness),
+         *[str(path) for path in objects], "-o", str(executable)], env)
+    require(not raw, "STRICT_BENCH_LINK_WITHOUT_DIAGNOSTICS")
+    commands.append(row)
+    binary = safe_file(work, executable.name).read_bytes()
+    require(binary[:4] == b"\x7fELF" and len(binary) < LOG_LIMIT, "BOUNDED_REAL_BENCH_EXECUTABLE")
+    row, raw = command(root, source, "state-relation-bench-symbols",
+                       [nm, "-g", "--defined-only", str(executable)], env)
+    commands.append(row)
+    symbols = {line.split()[-1] for line in raw.decode("utf-8").splitlines() if line.split()}
+    required = {"m3_bench_" + name + "_" + operation
+                for name in ("baseline", "sparse", "portable") for operation in ("compose", "repeat")}
+    require(required <= symbols, "ALL_SIX_SEPARATELY_COMPILED_KERNEL_SYMBOLS_REQUIRED")
+    row, raw = command(root, source, "state-relation-bench-run", [str(executable)], env, timeout=180)
+    commands.append(row)
+    verifier = runpy.run_path(str(checker), run_name="m3_relation_native_paired_trace")
+    verified = verifier["validate"](raw)
+    require(verified["state"] == "PASS_DATA_INTEGRITY_ONLY" and verified["caseCount"] == 96
+            and verified["measurements"] == 1440 and verified["independentMatrixOracles"] == 96
+            and verified["allSamplesRetained"] is True
+            and verified["automaticAdoption"] is False, "COMPLETE_INDEPENDENT_BENCHMARK_VALIDATION")
+    require(safe_file(work, executable.name).read_bytes() == binary, "BENCH_EXECUTABLE_CHANGED")
+    for item in source_rows.values():
+        object_raw = safe_file(root, item["objectPath"]).read_bytes()
+        require(len(object_raw) == item["objectBytes"] and sha(object_raw) == item["objectSha256"],
+                "BENCH_OBJECT_CHANGED")
+    try:
+        libc = os.confstr("CS_GNU_LIBC_VERSION")
+    except (AttributeError, OSError, ValueError):
+        libc = "UNKNOWN"
+    machine = os.uname()
+    cpu_model = "UNKNOWN"
+    try:
+        with open("/proc/cpuinfo", "r", encoding="utf-8") as stream:
+            cpu = stream.read(262144)
+        cpu_model = next((line.split(":", 1)[1].strip()
+                          for line in cpu.splitlines() if line.startswith("model name")), "UNKNOWN")
+    except OSError:
+        pass
+    result = {"schema": "M3_RELATION_PAIRED_NATIVE_BENCHMARK_RECEIPT_V1",
+              "qualificationId": os.environ["M3_QUALIFICATION_ID"],
+              "checkoutCommit": os.environ["EXPECTED_SOURCE_SHA"],
+              "stdout": {key: row[key] for key in ("log", "bytes", "sha256")},
+              "verified": verified, "sourcesAndObjects": source_rows,
+              "harnessSha256": sha(harness.read_bytes()), "verifierSha256": sha(checker.read_bytes()),
+              "executableBytes": len(binary), "executableSha256": sha(binary),
+              "compilerFlags": common, "timingWithoutSanitizer": True, "ltoDisabled": True,
+              "correctnessPrerequisite": "THREE_COMPLETE_FATAL_UBSAN_C11_JNI_PROOFS_EARLIER_IN_SAME_EXECUTION",
+              "libc": libc, "cpuModel": cpu_model,
+              "platform": {name: getattr(machine, name) for name in ("sysname", "release", "version", "machine")},
+              "randomInputContract": "Single-threaded provisioned libc rand/srand outside timed sections; exact actual input rows retained. No cross-libc random-stream or randomness-quality claim.",
+              "externalToolchainBytesSealed": False, "kernelTimingMeasured": True,
+              "jniEndToEndQualified": False, "fullJdkPerformanceQualified": False,
+              "heapNativeMappedRetentionQualified": False, "productAdoption": False}
+    return write(root, "state-relation-native-benchmark.json", result)
+
+
 def execute(root, source, ident):
     metadata, before, manifest_hash = inputs(source)
     env, java, javac, jdk, cc, nm, java_options, tools = toolchain(root)
@@ -373,6 +469,7 @@ def execute(root, source, ident):
             and b"M3_RELATION_PORT" not in raw and b"REUSE logicalUnits" not in raw,
             "MISSING_NATIVE_MUST_REFUSE_BEFORE_PROOF_WITHOUT_FALLBACK")
     commands.append(row)
+    benchmark = native_benchmark(root, source, env, jdk, cc, nm, generated, commands, metadata)
     _, after, final_manifest_hash = inputs(source)
     require(before == after and manifest_hash == final_manifest_hash, "SOURCE_OR_MANIFEST_CHANGED")
     require(inventory == classes(class_root), "CLASSES_CHANGED_AFTER_EXECUTION")
@@ -398,7 +495,8 @@ def execute(root, source, ident):
         "commands": commands, "tools": tools, "classes": inventory,
         "generatedJniHeader": {"path": str(header_copy.relative_to(root)),
             "bytes": len(generated_raw), "sha256": sha(generated_raw)},
-        "nativeLibraries": libraries,
+        "nativeLibraries": libraries, "nativeBenchmark": benchmark,
+        "nativeKernelTimingMeasured": True, "productAdoption": False,
         "cases": 71748, "javaChecks": 74829, "nativeChecks": 149658,
         "fullExistingProofPreserved": True, "javaClassPathExecuted": True,
         "nativeExecuted": True, "nativeSkips": 0, "explicitLibraryLoad": True,

@@ -2,7 +2,7 @@
   "schema": 1,
   "repository": "hsoliwal/com.synexia",
   "receiverRepository": "hsoliwal/M3jdk21",
-  "sourceCommit": "edbb3bbc5e01d93b69565a686a6dfd63f7faa06b",
+  "sourceCommit": "f338532ea81a12fa48d4d860c4daed620350c786",
   "admissionCommit": "5d2d2c39120c7a779e2beb06f0af19cb7364e253",
   "hostAdmissionCommit": "73ec51da3a1e419a1bcb8816d0313dead8dbaf62",
   "receiverBase": "d6d76b563050fc13c4fa79bc494edf29f1614b37",
@@ -200,16 +200,16 @@
     {
       "targetPath": "m3/tooling/state-relation-sparse-c11/qualify.py",
       "sourcePath": "synexia-openrewrite-recipes/tasks/state-relation-sparse-c11-20261020/hosted/qualify.py",
-      "gitBlob": "4fd480809f5d04816a529f7f077e5d2cb5a89517",
-      "bytes": 25101,
-      "sha256": "f3b6c5dbf03067df1517faa9ab4c5d4baf578ac2bef59f34c97d9709f729693d"
+      "gitBlob": "23a20384c03f42f76d98c65928b3d1433cba3b85",
+      "bytes": 29871,
+      "sha256": "29d456e4329d3c299cd957c7d0df9989b184de6b8d045e20146ef92ec64f9345"
     },
     {
       "targetPath": "m3/tooling/state-relation-sparse-c11/runtime/qualify.py",
       "sourcePath": "synexia-openrewrite-recipes/tasks/state-relation-sparse-c11-20261020/runtime/qualify.py",
-      "gitBlob": "4b3f1eb9e3d3f6b08304e54241dc251e8aa4130b",
-      "bytes": 24352,
-      "sha256": "a6d2e0af8efaf87ad22325694ffb79022e4bc60faf463d72b1e6096efea155be"
+      "gitBlob": "e3cee738ed60472ebaeb32c2ef5ed53d2e0295a3",
+      "bytes": 31059,
+      "sha256": "b49bb2476a20a20faa129dea34c56163f835cb22d45a5c13d5fc0197491b639a"
     },
     {
       "targetPath": "m3/tooling/state-relation-sparse-c11/runtime/INPUTS.json",
@@ -221,9 +221,23 @@
     {
       "targetPath": ".github/workflows/m3-state-relation-sparse-c11.yml",
       "sourcePath": "synexia-openrewrite-recipes/tasks/state-relation-sparse-c11-20261020/hosted/m3-state-relation-sparse-c11.yml",
-      "gitBlob": "dd8c9a6d48e3029839a129c95cc3c29e333c2040",
-      "bytes": 31601,
-      "sha256": "9ea97911d63a7812fe5616e417c03daa40af74611069e118dad69d20ed6585f9"
+      "gitBlob": "3ac237950cbf59b6908970415118cd5349e2f531",
+      "bytes": 31648,
+      "sha256": "c3bcb69da9438b95fa57527c3c86e73c019b760bcd9462cb8e6b8e3904cf1032"
+    },
+    {
+      "targetPath": "m3/tooling/state-relation-sparse-c11/runtime/paired_bench.c",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/state-relation-sparse-c11-20261020/runtime/paired_bench.c",
+      "gitBlob": "5f6cffb067f1c1fd0aa7148b73c950a82cb7accc",
+      "bytes": 10144,
+      "sha256": "8176a93af6b927a4e5013419aae4a3dd30d3ea535f9759369dbec330a550dcb2"
+    },
+    {
+      "targetPath": "m3/tooling/state-relation-sparse-c11/runtime/verify_benchmark.py",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/state-relation-sparse-c11-20261020/runtime/verify_benchmark.py",
+      "gitBlob": "52542721aaad1557359a8ff4f29e3b565d1a2170",
+      "bytes": 9616,
+      "sha256": "dc9de3a73a14d3e5430735992c59982a67f7c10175c0983875a5ea0139c71436"
     }
   ],
   "receiverOriginalOwners": [

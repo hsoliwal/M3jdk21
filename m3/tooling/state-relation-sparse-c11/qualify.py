@@ -148,7 +148,7 @@ def binding(fresh=False):
     if len(source_commit) != 40 or any(char not in "0123456789abcdef" for char in source_commit):
         raise RuntimeError("canonical source commit required")
     rows = record["files"]
-    if len(rows) != 31 or record['sdkFiles'] != 27:
+    if len(rows) != 33 or record['sdkFiles'] != 27:
         raise RuntimeError("bounded complete SDK and hosted source binding required")
     seen = set()
     for row in rows:
@@ -164,7 +164,8 @@ def binding(fresh=False):
     tracked.discard("")
     if len(tracked) != record["sdkFiles"] or {p for p in seen if p.startswith(sdk_prefix)} != tracked:
         raise RuntimeError("exact complete SDK binding required")
-    if not {PREFIX + "qualify.py", PREFIX + "runtime/qualify.py", PREFIX + "runtime/INPUTS.json", WORKFLOW} <= seen:
+    if not {PREFIX + "qualify.py", PREFIX + "runtime/qualify.py", PREFIX + "runtime/INPUTS.json",
+            PREFIX + "runtime/paired_bench.c", PREFIX + "runtime/verify_benchmark.py", WORKFLOW} <= seen:
         raise RuntimeError("hosted authoring inputs must be source-bound")
     subprocess.run(["git", "diff", "HEAD", "--exit-code", "--no-ext-diff", "--", PREFIX, WORKFLOW],
                    cwd=RECEIVER, check=True, timeout=60)
@@ -333,9 +334,11 @@ def report():
         labels.extend("state-relation-" + variant + "-" + suffix
                       for suffix in ("c11-compile", "native-symbols", "native-proof"))
     labels.append("state-relation-missing-library-refusal")
+    labels.extend(["state-relation-bench-" + name + "-compile" for name in ("baseline","sparse","portable")])
+    labels.extend(["state-relation-bench-link", "state-relation-bench-symbols", "state-relation-bench-run"])
     commands = execution["commands"]
     if [row["label"] for row in commands] != labels:
-        raise RuntimeError("all twelve actual numeric command records required")
+        raise RuntimeError("all eighteen actual numeric/measurement command records required")
     for row in commands:
         raw = regular(ROOT / str(relative(row["log"]))).read_bytes()
         if (len(raw) != row["bytes"] or hashlib.sha256(raw).hexdigest() != row["sha256"]
@@ -365,6 +368,63 @@ def report():
                 or natives[variant]["sourceSha256"] != hashlib.sha256(source_raw).hexdigest()
                 or natives[variant]["sourceGitBlob"] != blob(source_raw)):
             raise RuntimeError("compiled native source drift")
+    benchmark_ref = execution["nativeBenchmark"]
+    benchmark_path = regular(ROOT / str(relative(benchmark_ref["path"])))
+    benchmark_raw = benchmark_path.read_bytes()
+    if len(benchmark_raw) != benchmark_ref["bytes"] or hashlib.sha256(benchmark_raw).hexdigest() != benchmark_ref["sha256"]:
+        raise RuntimeError("actual benchmark receipt custody")
+    benchmark = json.loads(benchmark_raw)
+    if (benchmark["schema"] != "M3_RELATION_PAIRED_NATIVE_BENCHMARK_RECEIPT_V1"
+            or benchmark["qualificationId"] != ident or benchmark["checkoutCommit"] != head
+            or benchmark["kernelTimingMeasured"] is not True
+            or execution["nativeKernelTimingMeasured"] is not True
+            or benchmark["timingWithoutSanitizer"] is not True or benchmark["ltoDisabled"] is not True
+            or benchmark["productAdoption"] is not False or execution["productAdoption"] is not False):
+        raise RuntimeError("actual paired native benchmark identity and scope")
+    for key in ("jniEndToEndQualified", "fullJdkPerformanceQualified", "heapNativeMappedRetentionQualified",
+                "externalToolchainBytesSealed"):
+        if benchmark[key] is not False:
+            raise RuntimeError("native microtiming exceeds declared boundary")
+    bench_row = next(row for row in commands if row["label"] == "state-relation-bench-run")
+    benchmark_stdout = regular(ROOT / str(relative(bench_row["log"]))).read_bytes()
+    if benchmark["stdout"] != {key: bench_row[key] for key in ("log", "bytes", "sha256")}:
+        raise RuntimeError("benchmark stdout custody")
+    checker_path = regular(HERE / "runtime/verify_benchmark.py")
+    checker = runpy.run_path(str(checker_path), run_name="m3_paired_native_host_validation")
+    verified = checker["validate"](benchmark_stdout)
+    if benchmark["verified"] != verified or verified["caseCount"] != 96 or verified["measurements"] != 1440:
+        raise RuntimeError("complete independent paired timing validation")
+    if (benchmark["harnessSha256"] != sha256(HERE / "runtime/paired_bench.c")
+            or benchmark["verifierSha256"] != sha256(checker_path)):
+        raise RuntimeError("source-bound benchmark harness/checker drift")
+    bench_dir = work / "bench"
+    executable = regular(bench_dir / "paired-bench")
+    if (benchmark["executableBytes"] != executable.stat().st_size
+            or benchmark["executableSha256"] != sha256(executable)):
+        raise RuntimeError("actual measured executable changed")
+    if set(benchmark["sourcesAndObjects"]) != {"baseline","sparse","portable"}:
+        raise RuntimeError("exact measured source variants")
+    for variant, item in benchmark["sourcesAndObjects"].items():
+        c_source = SDK / ("src/main/resources/com/synexia/rewrite/state-relation-sparse-c11-20261020/before/"
+                          + TARGET_C) if variant == "baseline" else SDK / "target/emitted" / TARGET_C
+        object_path = regular(bench_dir / (variant + ".o"))
+        if (item["sourceGitBlob"] != blob(regular(c_source).read_bytes())
+                or item["sourceSha256"] != sha256(c_source)
+                or item["sourceBytes"] != c_source.stat().st_size
+                or item["objectPath"] != str(object_path.relative_to(ROOT))
+                or item["objectBytes"] != object_path.stat().st_size
+                or item["objectSha256"] != sha256(object_path)):
+            raise RuntimeError("actual measured source/object drift")
+        compile_row = next(row for row in commands if row["label"] == "state-relation-bench-" + variant + "-compile")
+        forced = "-DM3_STATE_RELATION_FORCE_POSITIONAL_SCAN"
+        if (not {"-std=c11","-Werror","-O3","-fno-lto","-c","-include"} <= set(compile_row["argv"])
+                or "-fsanitize=undefined" in compile_row["argv"]
+                or (forced in compile_row["argv"]) != (variant == "portable")
+                or str(c_source) not in compile_row["argv"]):
+            raise RuntimeError("actual matched O3/no-LTO benchmark compile command")
+    if benchmark["compilerFlags"] != ["-std=c11","-Wall","-Wextra","-Wpedantic","-Werror",
+                                     "-Wconversion","-Wsign-conversion","-O3","-fno-lto"]:
+        raise RuntimeError("matched benchmark compiler flags")
     if "[INFO] BUILD SUCCESS" not in regular(ARTIFACTS / "sdk-maven.log").read_text(encoding="utf-8"):
         raise RuntimeError("actual Maven SDK build success required")
     result = {
@@ -390,6 +450,8 @@ def report():
         "actualNativeChecksPerVariant": 149658, "nativeVariants": 3, "nativeSkips": 0,
         "sparseAndPortableC11JniQualified": True, "missingLibraryRefused": True,
         "fullExistingProofPreserved": True, "performanceQualified": False,
+        "nativeKernelTimingMeasured": True, "nativeBenchmarkReceiptSha256": sha256(benchmark_path),
+        "benchmarkCases": 96, "benchmarkMeasurements": 1440, "automaticAdoption": False,
     }
     result.update({key: False for key in FORBIDDEN})
     write("qualification-receipt.json", result)

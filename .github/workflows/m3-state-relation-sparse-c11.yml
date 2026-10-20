@@ -1,7 +1,7 @@
 # SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
 # SPDX-License-Identifier: Apache-2.0
 # Reuses the source-qualified Maven recipe and existing monitored hosted lane.
-name: M3 sparse StateRelation recipe and three-variant C11 JNI qualification
+name: M3 sparse StateRelation C11 JNI and paired native kernel timing
 on:
   pull_request:
     paths:
@@ -304,9 +304,9 @@ jobs:
               runtime=source/"m3/tooling/state-relation-sparse-c11/runtime/qualify.py"
               run("native-inputs",py+[str(runtime),"--output-root",str(root),"--inputs-only"],deadline=90)
               run("native-proof",py+[str(runtime),"--output-root",str(root),"--run"],deadline=600)
-              run("sdk-report",py+[str(qualifier),"report"],deadline=90)
+              run("sdk-report",py+[str(qualifier),"report"],deadline=180)
               receipt=json.loads((bundle/"qualification-receipt.json").read_bytes())
-              if receipt["sdkRecipeJUnitQualified"] is not True or receipt["sparseAndPortableC11JniQualified"] is not True:raise RuntimeError("actual recipe and original/sparse/portable native proofs required")
+              if receipt["sdkRecipeJUnitQualified"] is not True or receipt["sparseAndPortableC11JniQualified"] is not True or receipt["nativeKernelTimingMeasured"] is not True:raise RuntimeError("actual recipe and original/sparse/portable native proofs required")
               for key in ("originalPrivateModelQualified","stringDispatchQualified","fullNativeTargetQualified","windowsQualified","fullMatchedJdkQualified","performanceRetentionQualified","productTargetApplied","phaseAdvanced"):
                   if receipt[key] is not False:raise RuntimeError("source SDK scope drift")
               hosted={"schema":"M3_STATE_RELATION_SPARSE_C11_HOSTED_V1","checkoutCommit":head,"commands":records,"qualificationReceiptSha256":hashlib.sha256((bundle/"qualification-receipt.json").read_bytes()).hexdigest(),"aggregateBytes":gate(),"storageGuardReceiptSha256":hashlib.sha256((bundle/"storage-guard-receipt.json").read_bytes()).hexdigest(),"mavenIdentity":observed,"phaseAdvanced":False}
