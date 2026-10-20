@@ -103,6 +103,28 @@ public class M3SparseSizesTest {
 
     /** Above LIMIT custom sizes the store is the stock dense tree: same answers, and back to sparse on setSizes. */
     @Test
+    void sparseAtTheLimit() {
+        int n = M3SparseSizes.LIMIT * 2;
+        SizeSequence stock = new SizeSequence(n, 16);
+        M3SparseSizes m3 = new M3SparseSizes(n, 16);
+        for (int i = 0; i < M3SparseSizes.LIMIT; i++) {
+            stock.setSize(i * 2, 20);
+            m3.setSize(i * 2, 20);
+        }
+        assertEquals(M3SparseSizes.LIMIT, m3.count(), "full but sparse");
+        stock.setSize(2, 30);
+        m3.setSize(2, 30);
+        stock.setSize(3, 16);
+        m3.setSize(3, 16);
+        assertEquals(M3SparseSizes.LIMIT, m3.count(), "an existing entry or the default size keeps it sparse");
+        same(stock, m3, "at the limit");
+        stock.setSize(3, 30);
+        m3.setSize(3, 30);
+        assertEquals(-1, m3.count(), "one more entry makes it dense");
+        same(stock, m3, "past the limit");
+    }
+
+    @Test
     void denseAboveTheLimit() {
         Random rnd = new Random(4);
         int n = 20_000;
