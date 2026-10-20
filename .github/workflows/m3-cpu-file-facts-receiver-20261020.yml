@@ -41,6 +41,8 @@ jobs:
           assert text.count('FIXTURES = ("M3DonorToolsTest", "M3SourceToolsTest", "M3CpuToolsTest", "M3FileCpuFactsTest")') == 1
           assert 'for test in FIXTURES:' in text
           assert 'image-fixtures-javac' in text
+          assert 'for test in ("M3SourceToolsTest", "M3CpuToolsTest", "M3FileCpuFactsTest"):' in text
+          assert '"m3_string_storage_enabled_fixtures": ["M3SourceToolsTest", "M3CpuToolsTest", "M3FileCpuFactsTest"],' in text
           assert 'image-m3-storage-' in text
           for file in (
               root/"src/com.m3.tools.cpu/com/m3/tools/cpu/M3FileCpuFacts.java",
