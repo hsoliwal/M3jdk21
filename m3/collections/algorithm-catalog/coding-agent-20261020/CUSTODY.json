@@ -1,0 +1,12 @@
+{
+  "schema": "synexia.coding-agent.catalogue-custody.v1",
+  "canonical_repository": "hsoliwal/com.synexia",
+  "canonical_PR": 12539,
+  "canonical_path": "docs/M3-SCALE/runs/20261017-synexia-to-public/CODEX-PRESERVATION/dream/recipe-catalogue/coding-agent-20261020",
+  "receiving_repository": "hsoliwal/M3JDK21",
+  "receiving_PR": 1549,
+  "receiving_path": "m3/collections/algorithm-catalog/coding-agent-20261020",
+  "transfer": "Identical metadata/configuration proof-catalogue mirror, not duplicate product implementation or new runtime layer",
+  "source_generation": false,
+  "global_phase_promotion": false
+}

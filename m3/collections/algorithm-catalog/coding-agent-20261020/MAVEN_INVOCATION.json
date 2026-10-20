@@ -1,0 +1,38 @@
+{
+  "schema": "synexia.coding-agent.maven-invocation.v1",
+  "artifact": "org.openrewrite.maven:rewrite-maven-plugin:5.23.1",
+  "plugin_source_commit": "f4e1ac2af034603f8ffdf86e0731c99e02cc64a8",
+  "engine": "Plugin POM pins rewrite.version8.17.1",
+  "actual_properties": [
+    "rewrite.configLocation",
+    "rewrite.activeRecipes",
+    "rewrite.recipeArtifactCoordinates",
+    "failOnDryRunResults"
+  ],
+  "dry_run_argv": [
+    "mvn",
+    "-o",
+    "-B",
+    "-ntp",
+    "-f",
+    "EXACT_RECEIVING_POM",
+    "-Drewrite.configLocation=ABSOLUTE_QUALIFIED_SCOPED_RECIPE_EXAMPLES_YML",
+    "-Drewrite.activeRecipes=SELECTED_REAL_DESCRIPTOR",
+    "org.openrewrite.maven:rewrite-maven-plugin:5.23.1:dryRunNoFork"
+  ],
+  "apply_goal": "org.openrewrite.maven:rewrite-maven-plugin:5.23.1:runNoFork",
+  "recheck": "Run the same dry run against freshly reparsed applied bytes; inspect exact result/patch/receiving tests. failOnDryRunResults is a check policy, not proof of runtime semantics.",
+  "status": "NOT_RUN_HOLD_APPROVED_K_CACHE_MISSING_DEPENDENCIES_AND_PLUGINS",
+  "prerequisites": [
+    "exact existing POM/source/resource pins",
+    "verified recipe discovery and valid options",
+    "Maven wrapper/toolchain and effective POM",
+    "every plugin/recipe/parser artifact available offline",
+    "all build/cache/output/temp/home routes qualified on K",
+    "8GiB after output and task caps",
+    "read/write/create/delete/move-set guards",
+    "public contracts and receiving module runtime proof",
+    "Synthetic agent-recipe-fixtures/java paths must be explicitly included as parsed sources with the ExampleAnnotation type attributed; zero-result discovery/dry run is not a positive proof."
+  ],
+  "scope": "Recipe options and preconditions in YAML; no made-up -DsourceFilePattern or --scope property. No unrestricted run admitted by this document."
+}
