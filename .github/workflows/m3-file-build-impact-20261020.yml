@@ -35,3 +35,5 @@ jobs:
             -m com.m3.file/com.m3.file.M3FileDeltaLedgerContract
           java --module-path build/m3-file-impact \
             -m com.m3.file/com.m3.file.M3FileBuildImpactContract
+          java -Xint --module-path build/m3-file-impact \
+            -m com.m3.file/com.m3.file.M3FileBuildImpactContract
