@@ -67,6 +67,13 @@ public final class M3FileCpuFactsTest {
                 "primitive line mask from existing hit positions");
         yes(Arrays.equals(new long[] {3L}, facts.search("\r\nab", 4).lineMask()),
                 "cross-CRLF hit sets both affected source lines");
+        Path lineOverlap = work.resolve("line-overlap.txt");
+        Files.writeString(lineOverlap, "aa\naa\naa\n", StandardCharsets.UTF_8);
+        M3FileCpuFacts.Search overlapping = M3FileCpuFacts.of(M3File.load(lineOverlap))
+                .search("aa\naa", 10);
+        yes(Arrays.equals(new int[] {0, 3}, overlapping.positions())
+                && Arrays.equals(new long[] {7L}, overlapping.lineMask()),
+                "coalesced multi-line hit intervals preserve every affected line");
         yes(Arrays.equals(new int[] {8}, facts.search("\ud83d\ude42ab", 4).positions()),
                 "supplementary UTF-16 source coordinates");
         yes(facts.search("", 50).size() == original.length() + 1,
