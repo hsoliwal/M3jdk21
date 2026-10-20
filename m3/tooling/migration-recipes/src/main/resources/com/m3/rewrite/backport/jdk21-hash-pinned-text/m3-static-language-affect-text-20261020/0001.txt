@@ -33,6 +33,11 @@ jobs:
         with:
           distribution: temurin
           java-version: '21'
+      - name: Focused OpenRewrite fixed-point and refusal proof
+        run: >-
+          mvn -B -f m3/tooling/migration-recipes/pom.xml
+          -Dtest=M3StaticLanguageAffectJavaRecipeTest,M3StaticLanguageAffectTextRecipeTest
+          test
       - name: Configure CMake
         run: cmake --version
       - name: Strict Java and JNI differential proof
