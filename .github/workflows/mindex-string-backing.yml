@@ -89,6 +89,8 @@ jobs:
         with:
           distribution: temurin
           java-version: '21'
+      - name: Install the in-tree Synexia recipe custody module
+        run: mvn -B -ntp -f m3/pom.xml -pl synexia-import/pure-int-recipe-custody -am -DskipTests install
       - name: Prove recipe-first M3 String char-range ingress
         run: mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml -Dtest=M3StringCharRangeIngressRecipeTest test
       - name: Verify String Phase-1 checkout root and integrity
