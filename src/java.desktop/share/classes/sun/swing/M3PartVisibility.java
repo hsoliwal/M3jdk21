@@ -26,6 +26,7 @@
 package sun.swing;
 
 import java.awt.Component;
+import java.awt.Container;
 import java.awt.Frame;
 import java.awt.Window;
 import java.awt.event.ComponentAdapter;
@@ -37,66 +38,84 @@ import java.awt.event.WindowEvent;
 import java.awt.event.WindowStateListener;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.WeakHashMap;
 
 import javax.swing.JComponent;
+import javax.swing.SwingUtilities;
 import javax.swing.event.PartVisibilityEvent;
 import javax.swing.event.PartVisibilityListener;
 
 /**
- * The tracker behind {@code JComponent.addPartVisibilityListener} (brief rule 25). A component gets one
- * tracker when its first {@link PartVisibilityListener} is added and loses it with the last, so the cost
- * is proportional to the listening components. The tracker keeps the last part-visible state and
- * recomputes it on the triggers that can change it:
+ * The tracker behind {@code JComponent.addPartVisibilityListener} (M3JDK, brief rule 25). A component gets one
+ * tracker when its first {@link PartVisibilityListener} is added and loses it with the last, so the cost is
+ * proportional to the listening components; with no listener nothing is tracked. The tracker keeps the last
+ * part-visible state and recomputes it on the triggers that can change it:
  * <ul>
- * <li>{@code HierarchyEvent.SHOWING_CHANGED} (setVisible of the component or an ancestor, a JTabbedPane
- * tab or a CardLayout card selected, the window shown or hidden): cause {@code VISIBILITY};</li>
- * <li>{@code PARENT_CHANGED} and {@code DISPLAYABILITY_CHANGED}: cause {@code REPARENT};</li>
- * <li>a resize of the component ({@code componentResized}) or of an ancestor ({@code ancestorResized}):
- * cause {@code SIZE};</li>
- * <li>the window iconified or deiconified ({@code WindowEvent.WINDOW_STATE_CHANGED}): cause
- * {@code MINIMIZE}, one dispatcher per window, ancestors first;</li>
- * <li>{@code JComponent.setPartHidden} on the component or an ancestor: cause {@code CONTAINER},
- * ancestors first.</li>
+ * <li>{@code HierarchyEvent.SHOWING_CHANGED}: setVisible on the component or an ancestor, a JTabbedPane tab or a
+ * CardLayout card selected, the window shown or hidden. Cause {@code VISIBILITY}.</li>
+ * <li>{@code PARENT_CHANGED} and {@code DISPLAYABILITY_CHANGED}: cause {@code REPARENT}.</li>
+ * <li>A resize of the component ({@code componentResized}) or of an ancestor ({@code ancestorResized}): cause
+ * {@code SIZE}.</li>
+ * <li>The window iconified or deiconified ({@code WINDOW_STATE_CHANGED}, one dispatcher per window): cause
+ * {@code MINIMIZE}.</li>
+ * <li>{@code JComponent.setPartHidden} on the component or an ancestor: cause {@code CONTAINER}.</li>
  * </ul>
- * An event goes out only when the recomputed state differs from the kept one, so a trigger that
- * changes nothing sends nothing; adding the first listener only records the state.
+ * AWT delivers hierarchy events to descendants before ancestors. So the first tracker whose state a change flips
+ * rechecks every tracker below the changed component, ancestors first, and the trackers reached later find their
+ * state already current. An event goes out only when the state differs from the kept one: a trigger that changes
+ * nothing sends nothing, and adding the first listener only records the state. Listeners run on the thread that
+ * made the change, the event dispatch thread for code that follows the Swing threading rule.
  */
 //FLLDCIM: M3 swing part visibility - JComponent.isPartVisible and its listener, cost O(listening components)
 public final class M3PartVisibility extends ComponentAdapter
         implements HierarchyListener, HierarchyBoundsListener {
 
+    /** Guards {@link #TRACKERS}, {@link #WINDOWS} and the dispatchers' lists; never held while a listener runs. */
+    private static final Object LOCK = new Object();
+
     /** Every live tracker, weakly (the component holds its tracker as a listener). */
     private static final List<WeakReference<M3PartVisibility>> TRACKERS = new ArrayList<>();
 
-    /** One window-state dispatcher per window with trackers, so iconify reaches them ancestors first. */
+    /** One window-state dispatcher per window with trackers. */
     private static final WeakHashMap<Window, Dispatcher> WINDOWS = new WeakHashMap<>();
 
-    /** Dispatches a window's state changes to its trackers, ancestors first. */
+    private static final Comparator<M3PartVisibility> ANCESTORS_FIRST =
+            Comparator.comparingInt(t -> depth(t.component));
+
+    /** Sends a window's iconify and deiconify to its trackers, ancestors first. */
     private static final class Dispatcher implements WindowStateListener {
         final List<WeakReference<M3PartVisibility>> trackers = new ArrayList<>();
 
         @Override
         public void windowStateChanged(WindowEvent e) {
-            if (((e.getOldState() ^ e.getNewState()) & Frame.ICONIFIED) != 0) {
-                for (M3PartVisibility t : byDepth(trackers)) {
-                    t.recheck(PartVisibilityEvent.MINIMIZE, e.getWindow());
-                }
+            if (((e.getOldState() ^ e.getNewState()) & Frame.ICONIFIED) == 0) {
+                return;
+            }
+            List<M3PartVisibility> all;
+            synchronized (LOCK) {
+                all = live(trackers, null);
+            }
+            for (M3PartVisibility t : all) {
+                t.recheck(PartVisibilityEvent.MINIMIZE, e.getWindow());
             }
         }
     }
 
     private final JComponent component;
+    private final WeakReference<M3PartVisibility> self = new WeakReference<>(this);
     private boolean visible;
     private Window window;
-    private final WeakReference<M3PartVisibility> self = new WeakReference<>(this);
 
     private M3PartVisibility(JComponent component) {
         this.component = component;
     }
 
-    /** {@code JComponent.isPartVisible}: showing, non-zero size up to the window, no part-hidden ancestor, not iconified. */
+    /**
+     * {@code JComponent.isPartVisible}: showing, a non-zero size for the component and every ancestor up to its
+     * window, no ancestor marked part-hidden, and the window not iconified.
+     */
     public static boolean isPartVisible(JComponent c) {
         if (!c.isShowing()) {
             return false;
@@ -115,7 +134,7 @@ public final class M3PartVisibility extends ComponentAdapter
         return true;
     }
 
-    /** Called when {@code c} got a listener: the first one installs the tracker and records the state. */
+    /** {@code c} got a listener: the first one installs the tracker and records the state, without an event. */
     public static void listenerAdded(JComponent c) {
         if (tracker(c) != null) {
             return;
@@ -126,10 +145,12 @@ public final class M3PartVisibility extends ComponentAdapter
         c.addHierarchyBoundsListener(t);
         c.addComponentListener(t);
         t.attachWindow();
-        TRACKERS.add(t.self);
+        synchronized (LOCK) {
+            TRACKERS.add(t.self);
+        }
     }
 
-    /** Called when {@code c} lost its last listener: removes the tracker. */
+    /** {@code c} lost its last listener: the tracker goes. */
     public static void listenerRemoved(JComponent c) {
         M3PartVisibility t = tracker(c);
         if (t == null) {
@@ -138,32 +159,39 @@ public final class M3PartVisibility extends ComponentAdapter
         c.removeHierarchyListener(t);
         c.removeHierarchyBoundsListener(t);
         c.removeComponentListener(t);
-        t.detachWindow();
-        TRACKERS.remove(t.self);
+        t.attachTo(null);
+        synchronized (LOCK) {
+            TRACKERS.remove(t.self);
+        }
     }
 
-    /** Called when {@code c} was marked part-hidden or unmarked: rechecks the trackers in its subtree, ancestors first. */
+    /** {@code c} was marked part-hidden or unmarked: rechecks the trackers at and below it, ancestors first. */
     public static void partHiddenChanged(JComponent c) {
-        List<WeakReference<M3PartVisibility>> below = new ArrayList<>();
-        for (WeakReference<M3PartVisibility> r : TRACKERS) {
-            M3PartVisibility t = r.get();
-            if (t != null && (t.component == c || c.isAncestorOf(t.component))) {
-                below.add(r);
-            }
+        List<M3PartVisibility> below;
+        synchronized (LOCK) {
+            below = live(TRACKERS, c);
         }
-        for (M3PartVisibility t : byDepth(below)) {
+        for (M3PartVisibility t : below) {
             t.recheck(PartVisibilityEvent.CONTAINER, c);
         }
     }
 
-    /** The number of live trackers (for tests). */
+    /** The number of live trackers, for tests. */
     public static int trackers() {
-        TRACKERS.removeIf(r -> r.get() == null);
-        return TRACKERS.size();
+        synchronized (LOCK) {
+            return live(TRACKERS, null).size();
+        }
+    }
+
+    /** The number of windows with a window-state dispatcher, for tests. */
+    public static int windows() {
+        synchronized (LOCK) {
+            return WINDOWS.size();
+        }
     }
 
     private static M3PartVisibility tracker(JComponent c) {
-        for (var l : c.getHierarchyListeners()) {
+        for (HierarchyListener l : c.getHierarchyListeners()) {
             if (l instanceof M3PartVisibility t) {
                 return t;
             }
@@ -171,15 +199,22 @@ public final class M3PartVisibility extends ComponentAdapter
         return null;
     }
 
-    /** The live trackers of {@code refs} sorted by depth (ancestors first); cleared references are dropped. */
-    private static List<M3PartVisibility> byDepth(List<WeakReference<M3PartVisibility>> refs) {
+    /**
+     * The live trackers of {@code refs} at or below {@code root} (all of them when null), ancestors first; cleared
+     * references are dropped. Callers hold {@link #LOCK}.
+     */
+    private static List<M3PartVisibility> live(List<WeakReference<M3PartVisibility>> refs, Component root) {
         refs.removeIf(r -> r.get() == null);
-        List<M3PartVisibility> live = new ArrayList<>(refs.size());
+        List<M3PartVisibility> out = new ArrayList<>();
         for (WeakReference<M3PartVisibility> r : refs) {
-            live.add(r.get());
+            M3PartVisibility t = r.get();
+            if (t != null && (root == null || t.component == root
+                    || root instanceof Container k && k.isAncestorOf(t.component))) {
+                out.add(t);
+            }
         }
-        live.sort((a, b) -> Integer.compare(depth(a.component), depth(b.component)));
-        return live;
+        out.sort(ANCESTORS_FIRST);
+        return out;
     }
 
     private static int depth(Component c) {
@@ -191,40 +226,47 @@ public final class M3PartVisibility extends ComponentAdapter
     }
 
     private void attachWindow() {
-        Window w = javax.swing.SwingUtilities.getWindowAncestor(component);
+        attachTo(SwingUtilities.getWindowAncestor(component));
+    }
+
+    /** Moves this tracker to the dispatcher of {@code w} (none when null). */
+    private void attachTo(Window w) {
         if (w == window) {
             return;
         }
-        detachWindow();
+        Window old = window;
         window = w;
-        if (w != null) {
-            Dispatcher d = WINDOWS.get(w);
-            if (d == null) {
-                d = new Dispatcher();
-                WINDOWS.put(w, d);
-                w.addWindowStateListener(d);
-            }
-            d.trackers.add(self);
-        }
-    }
-
-    private void detachWindow() {
-        if (window != null) {
-            Dispatcher d = WINDOWS.get(window);
+        Dispatcher added = null;
+        Dispatcher emptied = null;
+        synchronized (LOCK) {
+            Dispatcher d = old == null ? null : WINDOWS.get(old);
             if (d != null) {
-                d.trackers.remove(self);
-                d.trackers.removeIf(r -> r.get() == null);
+                d.trackers.removeIf(r -> r.get() == null || r == self);
                 if (d.trackers.isEmpty()) {
-                    window.removeWindowStateListener(d);
-                    WINDOWS.remove(window);
+                    WINDOWS.remove(old);
+                    emptied = d;
                 }
             }
-            window = null;
+            if (w != null) {
+                d = WINDOWS.get(w);
+                if (d == null) {
+                    d = new Dispatcher();
+                    WINDOWS.put(w, d);
+                    added = d;
+                }
+                d.trackers.add(self);
+            }
+        }
+        if (emptied != null) {
+            old.removeWindowStateListener(emptied);
+        }
+        if (added != null) {
+            w.addWindowStateListener(added);
         }
     }
 
     /** Recomputes the state; sends one event when it changed. */
-    void recheck(int cause, Component origin) {
+    private void recheck(int cause, Component origin) {
         boolean now = isPartVisible(component);
         if (now == visible) {
             return;
@@ -240,21 +282,38 @@ public final class M3PartVisibility extends ComponentAdapter
         }
     }
 
+    /** A change at {@code changed}: when it flips this tracker, every tracker at or below it is rechecked. */
+    private void changed(int cause, Component changed) {
+        if (isPartVisible(component) == visible) {
+            return;
+        }
+        List<M3PartVisibility> below;
+        synchronized (LOCK) {
+            below = live(TRACKERS, changed);
+        }
+        if (!below.contains(this)) {
+            below.add(this);
+        }
+        for (M3PartVisibility t : below) {
+            t.recheck(cause, changed);
+        }
+    }
+
     @Override
     public void hierarchyChanged(HierarchyEvent e) {
         long flags = e.getChangeFlags();
-        if ((flags & (HierarchyEvent.PARENT_CHANGED | HierarchyEvent.DISPLAYABILITY_CHANGED)) != 0) {
+        boolean moved = (flags & (HierarchyEvent.PARENT_CHANGED | HierarchyEvent.DISPLAYABILITY_CHANGED)) != 0;
+        if (moved) {
             attachWindow();
-            recheck(PartVisibilityEvent.REPARENT, e.getChanged());
         }
-        if ((flags & HierarchyEvent.SHOWING_CHANGED) != 0) {
-            recheck(PartVisibilityEvent.VISIBILITY, e.getChanged());
+        if (moved || (flags & HierarchyEvent.SHOWING_CHANGED) != 0) {
+            changed(moved ? PartVisibilityEvent.REPARENT : PartVisibilityEvent.VISIBILITY, e.getChanged());
         }
     }
 
     @Override
     public void ancestorResized(HierarchyEvent e) {
-        recheck(PartVisibilityEvent.SIZE, e.getChanged());
+        changed(PartVisibilityEvent.SIZE, e.getChanged());
     }
 
     @Override
@@ -264,6 +323,6 @@ public final class M3PartVisibility extends ComponentAdapter
 
     @Override
     public void componentResized(ComponentEvent e) {
-        recheck(PartVisibilityEvent.SIZE, component);
+        changed(PartVisibilityEvent.SIZE, component);
     }
 }

@@ -4838,7 +4838,9 @@ public abstract class JComponent extends Container implements Serializable,
     /**
      * Marks this component part-hidden, or clears the mark (M3JDK). A container calls this when its content is out
      * of sight while the container itself still shows, such as a collapsed collapsible pane. The components below
-     * it then stop being part-visible, and their listeners are told, ancestors first.
+     * it then stop being part-visible, and their listeners are told, ancestors first. While the mark is set, the
+     * RepaintManager drops repaints and defers layout at and below this component; clearing the mark revalidates
+     * and repaints once.
      *
      * @param hidden whether this component and the components below it are out of sight
      */
@@ -4846,6 +4848,10 @@ public abstract class JComponent extends Container implements Serializable,
         if (partHidden != hidden) {
             partHidden = hidden;
             sun.swing.M3PartVisibility.partHiddenChanged(this);
+            if (!hidden) {
+                revalidate();
+                repaint();
+            }
         }
     }
 
@@ -4856,6 +4862,46 @@ public abstract class JComponent extends Container implements Serializable,
      */
     public boolean getPartHidden() {
         return partHidden;
+    }
+
+    /**
+     * Adds a listener that is told when the window of rows this view shows changes (M3JDK). JList, JTree and JTable,
+     * and the views built on them, fire it once per coalesced change, after layout and before paint, and never while
+     * the view is not part-visible. Other components never fire it. Nothing is sent when a listener is added.
+     *
+     * @param l the listener; null is ignored
+     * @see javax.swing.event.ViewportListener
+     */
+    public void addViewportListener(javax.swing.event.ViewportListener l) {
+        if (l == null) {
+            return;
+        }
+        listenerList.add(javax.swing.event.ViewportListener.class, l);
+        sun.swing.M3ViewportReporter.listenerAdded(this);
+    }
+
+    /**
+     * Removes a listener added with {@link #addViewportListener}; the last one stops the tracking.
+     *
+     * @param l the listener; null or a listener that was not added is ignored
+     */
+    public void removeViewportListener(javax.swing.event.ViewportListener l) {
+        if (l == null) {
+            return;
+        }
+        listenerList.remove(javax.swing.event.ViewportListener.class, l);
+        if (listenerList.getListenerCount(javax.swing.event.ViewportListener.class) == 0) {
+            sun.swing.M3ViewportReporter.listenerRemoved(this);
+        }
+    }
+
+    /**
+     * The viewport listeners of this component.
+     *
+     * @return the listeners; an empty array when there are none
+     */
+    public javax.swing.event.ViewportListener[] getViewportListeners() {
+        return listenerList.getListeners(javax.swing.event.ViewportListener.class);
     }
 
     /**
@@ -5711,6 +5757,10 @@ public abstract class JComponent extends Container implements Serializable,
         if (listenerList != null
                 && listenerList.getListenerCount(javax.swing.event.PartVisibilityListener.class) > 0) {
             sun.swing.M3PartVisibility.listenerAdded(this);
+        }
+        if (listenerList != null
+                && listenerList.getListenerCount(javax.swing.event.ViewportListener.class) > 0) {
+            sun.swing.M3ViewportReporter.listenerAdded(this);
         }
     }
 

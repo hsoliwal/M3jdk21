@@ -1317,6 +1317,28 @@ public class EventQueue {
             new InvocationEvent(Toolkit.getDefaultToolkit(), runnable));
     }
 
+    /** M3JDK rule 28: an invokeAndWait wait longer than this is logged once; 0 turns the log off. */
+    @SuppressWarnings("removal")
+    private static final int M3_SYNC_WARN_MILLIS = Math.max(0, java.security.AccessController.doPrivileged(
+            new sun.security.action.GetIntegerAction("swing.synchronizer.syncWarnMillis", 5000)));
+
+    /** M3JDK rule 28: logs a long invokeAndWait wait with the caller's stack and the dispatch thread's stack. */
+    private static void m3LogLongWait(int millis) {
+        sun.util.logging.PlatformLogger log = sun.util.logging.PlatformLogger.getLogger("javax.swing.M3Synchronizer");
+        if (!log.isLoggable(sun.util.logging.PlatformLogger.Level.WARNING)) {
+            return;
+        }
+        Thread edt = Toolkit.getEventQueue().getDispatchThread();
+        StringBuilder b = new StringBuilder("invokeAndWait has waited more than ").append(millis)
+                .append(" ms for the event dispatch thread ").append(edt == null ? "(none)" : edt.getName());
+        if (edt != null) {
+            for (StackTraceElement e : edt.getStackTrace()) {
+                b.append("\n\tat ").append(e);
+            }
+        }
+        log.warning(b.toString(), new Throwable("invokeAndWait caller"));
+    }
+
     /**
      * Causes {@code runnable} to have its {@code run}
      * method called in the {@link #isDispatchThread dispatch thread} of
@@ -1358,10 +1380,23 @@ public class EventQueue {
 
         InvocationEvent event =
             new InvocationEvent(source, runnable, lock, true);
+        //FLLDCIM: M3 synchronizer - a wait over swing.synchronizer.syncWarnMillis is logged once, then goes on
+        long m3Start = System.nanoTime();
+        boolean m3Warned = M3_SYNC_WARN_MILLIS == 0;
 
         synchronized (lock) {
             Toolkit.getEventQueue().postEvent(event);
             while (!event.isDispatched()) {
+                if (!m3Warned) {
+                    long left = M3_SYNC_WARN_MILLIS - (System.nanoTime() - m3Start) / 1_000_000L;
+                    if (left > 0) {
+                        lock.wait(left);
+                        continue;
+                    }
+                    m3Warned = true;
+                    m3LogLongWait(M3_SYNC_WARN_MILLIS);
+                    continue;
+                }
                 lock.wait();
             }
         }

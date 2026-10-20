@@ -1,0 +1,38 @@
+# Copyright 2026 Hitesh Soliwal and contributors
+# SPDX-License-Identifier: Apache-2.0
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.openrewrite.viewport.M3SwingSynchronizerWaits
+displayName: EventQueue.invokeAndWait logs a wait over swing.synchronizer.syncWarnMillis once (brief rule 28)
+description: >-
+  M3JDK brief rule 28 (m3/docs/swing-viewport/DESIGN.md section 17), the Swing side of SWT's Synchronizer wait log.
+  invokeAndWait waits on its lock as before. After swing.synchronizer.syncWarnMillis (default 5000, 0 turns it off)
+  without the event dispatched, it logs once at WARNING on the JUL logger javax.swing.M3Synchronizer. The log carries
+  the waiting caller's stack as the Throwable and the event dispatch thread's stack in the message. The wait then
+  goes on, so the semantics stay the stock ones. Ordinary event order is untouched. Applied by M3PerFileApply; a
+  second pass must report UNCHANGED.
+recipeList:
+  - com.synexia.openrewrite.viewport.M3AddMemberIfMissing:
+      declaringClasses: [java.awt.EventQueue]
+      memberName: M3_SYNC_WARN_MILLIS
+      beforeMethod: invokeAndWait
+      memberSource: "    /** M3JDK rule 28: an invokeAndWait wait longer than this is logged once; 0 turns the log off. */\n    @SuppressWarnings(\"removal\")\n    private static final int M3_SYNC_WARN_MILLIS = Math.max(0, java.security.AccessController.doPrivileged(\n            new sun.security.action.GetIntegerAction(\"swing.synchronizer.syncWarnMillis\", 5000)));"
+  - com.synexia.openrewrite.viewport.M3AddMemberIfMissing:
+      declaringClasses: [java.awt.EventQueue]
+      memberName: m3LogLongWait
+      beforeMethod: invokeAndWait
+      memberSource: "    /** M3JDK rule 28: logs a long invokeAndWait wait with the caller's stack and the dispatch thread's stack. */\n    private static void m3LogLongWait(int millis) {\n        sun.util.logging.PlatformLogger log = sun.util.logging.PlatformLogger.getLogger(\"javax.swing.M3Synchronizer\");\n        if (!log.isLoggable(sun.util.logging.PlatformLogger.Level.WARNING)) {\n            return;\n        }\n        Thread edt = Toolkit.getEventQueue().getDispatchThread();\n        StringBuilder b = new StringBuilder(\"invokeAndWait has waited more than \").append(millis)\n                .append(\" ms for the event dispatch thread \").append(edt == null ? \"(none)\" : edt.getName());\n        if (edt != null) {\n            for (StackTraceElement e : edt.getStackTrace()) {\n                b.append(\"\\n\\tat \").append(e);\n            }\n        }\n        log.warning(b.toString(), new Throwable(\"invokeAndWait caller\"));\n    }"
+  - com.synexia.openrewrite.viewport.M3InsertStatements:
+      declaringClasses: [java.awt.EventQueue]
+      methodName: invokeAndWait
+      parameterCount: 2
+      anchor: "synchronized (lock) {"
+      position: BEFORE
+      statements: "        //FLLDCIM: M3 synchronizer - a wait over swing.synchronizer.syncWarnMillis is logged once, then goes on\n        long m3Start = System.nanoTime();\n        boolean m3Warned = M3_SYNC_WARN_MILLIS == 0;"
+  - com.synexia.openrewrite.viewport.M3InsertStatements:
+      declaringClasses: [java.awt.EventQueue]
+      methodName: invokeAndWait
+      parameterCount: 2
+      anchor: "lock.wait();"
+      position: BEFORE
+      statements: "                if (!m3Warned) {\n                    long left = M3_SYNC_WARN_MILLIS - (System.nanoTime() - m3Start) / 1_000_000L;\n                    if (left > 0) {\n                        lock.wait(left);\n                        continue;\n                    }\n                    m3Warned = true;\n                    m3LogLongWait(M3_SYNC_WARN_MILLIS);\n                    continue;\n                }"

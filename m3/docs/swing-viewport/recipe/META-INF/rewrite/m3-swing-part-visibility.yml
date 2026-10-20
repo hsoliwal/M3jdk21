@@ -3,7 +3,7 @@
 ---
 type: specs.openrewrite.org/v1beta/recipe
 name: com.synexia.openrewrite.viewport.M3SwingPartVisibility
-displayName: JComponent tells listeners when it becomes part-visible or stops being so (brief rule 25)
+displayName: JComponent part visibility and viewport listeners (brief rule 25)
 description: >-
   M3JDK brief rule 25 (m3/docs/swing-viewport/DESIGN.md section 16), the Swing side of SWT.PartVisible and
   SWT.PartHidden. Adds javax.swing.event.PartVisibilityListener support to JComponent:
@@ -11,7 +11,10 @@ description: >-
   listenerList. The first listener installs the tracker sun.swing.M3PartVisibility, and readObject reinstalls it.
   Additive API: a component without a listener does nothing new. partHidden is transient, and serialVersionUID is
   pinned to the stock JDK 21 value, so the serialized form stays the stock one. Applied by M3PerFileApply; a second
-  pass must report UNCHANGED.
+  pass must report UNCHANGED. The same recipe adds JComponent add/remove/getViewportListeners
+  (javax.swing.event.ViewportListener, reporter sun.swing.M3ViewportReporter, installed for JList, JTree and JTable
+  only), and one call in RepaintManager.ProcessingRunnable.run that flushes pending viewport events right after
+  validation, before paint.
 recipeList:
   - com.synexia.openrewrite.viewport.M3AddMemberIfMissing:
       declaringClasses: [javax.swing.JComponent]
@@ -47,7 +50,7 @@ recipeList:
       declaringClasses: [javax.swing.JComponent]
       memberName: setPartHidden
       beforeMethod: getListeners
-      memberSource: "    /**\n     * Marks this component part-hidden, or clears the mark (M3JDK). A container calls this when its content is out\n     * of sight while the container itself still shows, such as a collapsed collapsible pane. The components below\n     * it then stop being part-visible, and their listeners are told, ancestors first.\n     *\n     * @param hidden whether this component and the components below it are out of sight\n     */\n    public void setPartHidden(boolean hidden) {\n        if (partHidden != hidden) {\n            partHidden = hidden;\n            sun.swing.M3PartVisibility.partHiddenChanged(this);\n        }\n    }"
+      memberSource: "    /**\n     * Marks this component part-hidden, or clears the mark (M3JDK). A container calls this when its content is out\n     * of sight while the container itself still shows, such as a collapsed collapsible pane. The components below\n     * it then stop being part-visible, and their listeners are told, ancestors first. While the mark is set, the\n     * RepaintManager drops repaints and defers layout at and below this component; clearing the mark revalidates\n     * and repaints once.\n     *\n     * @param hidden whether this component and the components below it are out of sight\n     */\n    public void setPartHidden(boolean hidden) {\n        if (partHidden != hidden) {\n            partHidden = hidden;\n            sun.swing.M3PartVisibility.partHiddenChanged(this);\n            if (!hidden) {\n                revalidate();\n                repaint();\n            }\n        }\n    }"
   - com.synexia.openrewrite.viewport.M3AddMemberIfMissing:
       declaringClasses: [javax.swing.JComponent]
       memberName: getPartHidden
@@ -59,3 +62,45 @@ recipeList:
       parameterCount: 1
       position: METHOD_END
       statements: "        if (listenerList != null\n                && listenerList.getListenerCount(javax.swing.event.PartVisibilityListener.class) > 0) {\n            sun.swing.M3PartVisibility.listenerAdded(this);\n        }"
+  - com.synexia.openrewrite.viewport.M3AddMemberIfMissing:
+      declaringClasses: [javax.swing.JComponent]
+      memberName: addViewportListener
+      beforeMethod: getListeners
+      memberSource: "    /**\n     * Adds a listener that is told when the window of rows this view shows changes (M3JDK). JList, JTree and JTable,\n     * and the views built on them, fire it once per coalesced change, after layout and before paint, and never while\n     * the view is not part-visible. Other components never fire it. Nothing is sent when a listener is added.\n     *\n     * @param l the listener; null is ignored\n     * @see javax.swing.event.ViewportListener\n     */\n    public void addViewportListener(javax.swing.event.ViewportListener l) {\n        if (l == null) {\n            return;\n        }\n        listenerList.add(javax.swing.event.ViewportListener.class, l);\n        sun.swing.M3ViewportReporter.listenerAdded(this);\n    }"
+  - com.synexia.openrewrite.viewport.M3AddMemberIfMissing:
+      declaringClasses: [javax.swing.JComponent]
+      memberName: removeViewportListener
+      beforeMethod: getListeners
+      memberSource: "    /**\n     * Removes a listener added with {@link #addViewportListener}; the last one stops the tracking.\n     *\n     * @param l the listener; null or a listener that was not added is ignored\n     */\n    public void removeViewportListener(javax.swing.event.ViewportListener l) {\n        if (l == null) {\n            return;\n        }\n        listenerList.remove(javax.swing.event.ViewportListener.class, l);\n        if (listenerList.getListenerCount(javax.swing.event.ViewportListener.class) == 0) {\n            sun.swing.M3ViewportReporter.listenerRemoved(this);\n        }\n    }"
+  - com.synexia.openrewrite.viewport.M3AddMemberIfMissing:
+      declaringClasses: [javax.swing.JComponent]
+      memberName: getViewportListeners
+      beforeMethod: getListeners
+      memberSource: "    /**\n     * The viewport listeners of this component.\n     *\n     * @return the listeners; an empty array when there are none\n     */\n    public javax.swing.event.ViewportListener[] getViewportListeners() {\n        return listenerList.getListeners(javax.swing.event.ViewportListener.class);\n    }"
+  - com.synexia.openrewrite.viewport.M3InsertStatements:
+      declaringClasses: [javax.swing.JComponent]
+      methodName: readObject
+      parameterCount: 1
+      position: METHOD_END
+      statements: "        if (listenerList != null\n                && listenerList.getListenerCount(javax.swing.event.ViewportListener.class) > 0) {\n            sun.swing.M3ViewportReporter.listenerAdded(this);\n        }"
+  - com.synexia.openrewrite.viewport.M3InsertStatements:
+      declaringClasses: [javax.swing.RepaintManager$ProcessingRunnable, javax.swing.RepaintManager.ProcessingRunnable]
+      methodName: run
+      parameterCount: 0
+      anchor: "validateInvalidComponents();"
+      position: AFTER
+      statements: "            //FLLDCIM: M3 swing viewport listener - flush after layout, before paint\n            sun.swing.M3ViewportReporter.flushAll();"
+  - com.synexia.openrewrite.viewport.M3InsertStatements:
+      declaringClasses: [javax.swing.RepaintManager]
+      methodName: addDirtyRegion0
+      parameterCount: 5
+      anchor: "if (!p.isVisible() || !p.isDisplayable()) {"
+      position: BEFORE
+      statements: "            //FLLDCIM: M3 swing part visibility - no paint at or below a part-hidden component\n            if (p instanceof JComponent pj && pj.getPartHidden()) {\n                return;\n            }"
+  - com.synexia.openrewrite.viewport.M3InsertStatements:
+      declaringClasses: [javax.swing.RepaintManager]
+      methodName: addInvalidComponent
+      parameterCount: 1
+      anchor: "if (invalidComponents == null) {"
+      position: BEFORE
+      statements: "        //FLLDCIM: M3 swing part visibility - no layout at or below a part-hidden component\n        for (Component p = invalidComponent; p != null; p = p.getParent()) {\n            if (p instanceof JComponent pj && pj.getPartHidden()) {\n                return;\n            }\n        }"

@@ -375,6 +375,12 @@ public class RepaintManager
         if (validateRoot == null) {
             return;
         }
+        //FLLDCIM: M3 swing part visibility - no layout at or below a part-hidden component
+        for (Component p = invalidComponent; p != null; p = p.getParent()) {
+            if (p instanceof JComponent pj && pj.getPartHidden()) {
+                return;
+            }
+        }
 
         /* Lazily create the invalidateComponents vector and add the
          * validateRoot if it's not there already.  If this validateRoot
@@ -458,6 +464,10 @@ public class RepaintManager
         // it could lead to the possibility of getting locks out
         // of order and deadlocking.
         for (Container p = c; p != null; p = p.getParent()) {
+            //FLLDCIM: M3 swing part visibility - no paint at or below a part-hidden component
+            if (p instanceof JComponent pj && pj.getPartHidden()) {
+                return;
+            }
             if (!p.isVisible() || !p.isDisplayable()) {
                 return;
             }
@@ -1959,6 +1969,8 @@ public class RepaintManager
             scheduleHeavyWeightPaints();
             // Do the actual validation and painting.
             validateInvalidComponents();
+            //FLLDCIM: M3 swing viewport listener - flush after layout, before paint
+            sun.swing.M3ViewportReporter.flushAll();
             prePaintDirtyRegions();
         }
     }
