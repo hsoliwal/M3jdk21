@@ -2,115 +2,129 @@
 <!-- SPDX-License-Identifier: Apache-2.0 -->
 # M3File / M3FileTree — DESIGN
 
-Status: DRAFT-2 | Module: `m3/file` (`com.m3.file`) | Branch: `m3/m3file-tree-20261020` | Date: 2026-10-20
+Status: DRAFT-3 | Module: `m3/file` (`com.m3.file`) | Branch: `m3/m3file-tree-20261020` | PR #1590 | Date: 2026-10-20
 
 ## 0. Names (locked)
 
-| Symbol | Role | Never |
-|--------|------|-------|
-| `M3File` | the entry type: one thin facade per tree row `(tree, id)`; also keeps the existing detached `M3File.of(Path)` read edge | `MFile`, `M3Path`, `FileNode`, `M3FileEntry` |
-| `M3FileTree` | owner of the lanes for one rooted directory tree; `M3FileTree.open(Path root)` is the only way to get a populated tree | `M3FileSystem`, `FileLanes` |
-| `M3FileFlag` | bit lanes (one `BitSet` per flag) | `FileState` |
-| `M3FileTreeScanner` | `Files.walkFileTree` visitor that fills the lanes in pre-order | `Crawler` |
-| `M3FileResidency` | bounded table of live `M3File` facades owned by the tree | `FileCache` |
-| `M3FileDelta` (slice 3) | immutable change record applied to lanes | `FileEvent` |
-| `M3FileView` (slice 4) | filtered/sorted int-index wrapper over a tree | `FilteredTree` |
+Entry type is `M3File` everywhere. Small interfaces carry behaviour in default methods; implementations supply one or two abstract methods.
 
-## 1. Inventory (IFB) — what exists on `origin/master` at `85bf188c14d`
+| Symbol | Kind | Role | Never |
+|--------|------|------|-------|
+| `M3File` | class | the entry type: thin facade per tree row `(tree, id)`; also the detached `M3File.of(Path)` edge | `MFile`, `M3Path`, `FileNode`, `M3FileEntry` |
+| `M3FileTree` | class | owner of the lanes of one rooted tree; `M3FileTree.open(...)` is the only way to get a populated tree | `M3FileSystem`, `FileLanes` |
+| `M3FileFlag` | enum | bit lanes, one `BitSet` per constant | `FileState` |
+| `M3FileKind` | enum | kind mask bits FILE, DIRECTORY, SYMLINK, OTHER | `FileType` |
+| `M3FileTreeScanner` | class | `Files.walkFileTree` visitor filling lanes in pre-order | `Crawler` |
+| `M3FileResidency` | class | bounded table of live facades owned by the tree | `FileCache` |
+| `M3FileTraversal` | interface | abstract `tree()` + `idSpliterator()`; defaults `stream`, `parallelStream`, `spliterator`, `ids`, `map`, `forEach`, `collect`, `toList`, `count`, `paths`, `first` | `FileStream` |
+| `M3FileWalk` | class | immutable walk spec over a subtree: depth limits, kind mask, type ids, glob, regex, prune, filter; implements `M3FileTraversal` | `FileQuery` |
+| `M3FileCursor` | class | pull cursor: `nextId()`, `nextEntry()`, `skipSubtree()` | `FileIterator` |
+| `M3FileProgress` | interface | sub-progress monitor (units, split, cancel); Eclipse `SubMonitor` shape, no Eclipse dependency | `ProgressListener` |
+| `M3FileShadow` | interface | observer that advances while a main stream is read or written; abstract `update(byte[],int,int)` | `TeeStream` |
+| `M3FileCharShadow` | interface | char-level layer fed by a UTF-8 decoding shadow | `Decoder` |
+| `M3FileShadowInputStream` / `M3FileShadowOutputStream` | class | main stream + progress + shadows; one I/O pass feeds every layer | `HashingStream` |
+| `M3FileNames` | class | per-tree name/segment interner: name id -> pool range (TIL, int ids) | `String.intern` |
+| `M3FileTypes` | class | interned type ids by extension (`txt`, `json`, `bin`, ``) | `MimeMap` |
+| `M3FileChangeProvider` | interface | change detection; defaults = attribute gate then hash; native providers override | `Watcher` |
+| `M3FileTreeDelta` | class | two scans -> change lanes + `Stream<M3FileChange>` | `FileDiff` |
+| `M3FileChange` | class | facade over one delta row: before/after `M3File`, change bits | `FileEvent` |
 
-| Owner | Path | Use here |
-|-------|------|----------|
-| `com.m3.file.M3File` | `m3/file/src/main/java/com/m3/file/M3File.java` | detached Path read edge (`of`, `path`, `metadata`, `openReadChannel`, `openInputStream`, `readAllBytes`, `Metadata`). Kept verbatim; the class gains the tree-entry role. |
-| `module com.m3.file` | `m3/file/src/main/java/module-info.java` | unchanged (exports `com.m3.file`) |
-| `m3/eclipse/optional-jmod/build.py:28` | compiles `m3/file/src/main/java` into the optional JMOD | new sources must stay JDK-only, no deps |
-| `com.m3.fs.M3DirectoryTable` | `m3/fs/src/main/java/com/m3/fs/M3DirectoryTable.java` | pattern donor: names as one `char[]` pool + `int[] offsets`, stats as flat lanes; entries exist only at API access |
-| `org.m3.runtime.lazy.LazyObjectParent` | `m3/lazyobjects/.../LazyObjectParent.java` | pattern donor: parent-owned transient handles, eviction = recreate; here reduced to an int-keyed bounded table |
-| `com.m3.viewport.M3RowHost` | `m3/viewport-core/.../M3RowHost.java` | slice 5 target: rows are logical ints, work per frame O(window) |
-| `com.m3.arrays` pom | `m3/arrays/pom.xml` | build template: junit-jupiter 5.10.2, surefire `useModulePath=false`, `-Xlint:all,-module -Werror` |
+## 1. Inventory (IFB)
 
-Not reused: `m3/fs` native/JNI (Java-only law), any interner (names live in the pool; interning deferred).
+| Owner | Path / ref | Use here |
+|-------|-----------|----------|
+| `com.m3.file.M3File` | `m3/file/src/main/java/com/m3/file/M3File.java` @ `85bf188c14d` | detached read edge kept verbatim; gains tree-entry role |
+| `module com.m3.file` | `m3/file/src/main/java/module-info.java` | unchanged; JDK-only (compiled into `m3/eclipse/optional-jmod/build.py:28`) |
+| `com.m3.fs.M3DirectoryTable` | `m3/fs/src/main/java/com/m3/fs/` | pattern: `char[]` name pool + offsets |
+| `org.m3.runtime.lazy.LazyObjectParent` | `m3/lazyobjects/` | pattern: parent-owned transient handles |
+| `com.m3.viewport.M3RowHost` | `m3/viewport-core/` | row-host contract for the viewport slice |
+| `java.nio.file.Files.walk` / `walkFileTree` / `PathMatcher` | JDK | scan, glob semantics, differential oracle |
+| `java.security.DigestInputStream`, `java.util.zip.CheckedInputStream`, `CRC32C` | JDK | shadow-stream pattern; SHA-256 and fast hash (CRC32C intrinsic) |
+| `com.synexia.common.utils.TokenInterner` | Synexia `synexia-common/.../TokenInterner.java` blob `5a4163518ab7` | TIL pattern (bounded, stats); adapted to int ids over a char pool |
+| Eclipse `SubMonitor` | EPL-2.0 Eclipse Platform | shape only (split/worked/cancel); no code, no dependency |
+| PR #1567 `codex/m3-file-content-delta-20261020-d6d76b56` | `M3File.fingerprint(long)`, `Fingerprint`, `ADDED=1`, `REMOVED=2`, `CONTENT_CHANGED=4`, `contentDelta` | reused vocabulary and record for raw-byte hash; **conflict**: it reads the `path` field, which is lazy for tree entries -> must use `path()` |
+| PR #1568 `m3/native-source-class-delta-ledger-20261020` | `M3FileDeltaLedger` (sealed source/class build-fact snapshots) | downstream consumer; the tree delta hands it changed paths; no second ledger |
 
 ## 2. Laws applied
 
-- DOOP: data in lanes (`int[]`, `long[]`, `short[]`, `char[]`, `BitSet`); `M3File` holds `tree`, `id` and a lazily memoised `Path`.
-- Object residency: facades are transient, parent-owned by `M3FileTree`, created on `file(id)`, bounded by `M3FileResidency`; eviction = drop, recreation = free; identity is `(tree, id)`, never the facade instance.
-- One model + deltas: one lane model for scanner, views, viewport binding; later changes arrive as `M3FileDelta` in id order; no per-consumer maps.
-- Bits/ints: flags are bitsets, names are pool ranges, children are CSR ranges; `String`/`Path` only when a caller asks (cold).
-- HP-LAW: `open`, `childIds`, `parent`, `depth`, flag probes are allocation-free; `name()`, `toPath()` are cold.
-- Java only, JDK only: scan = `Files.walkFileTree`, no native walker, no third-party dependency.
+- DOOP: data in lanes (`int[]`, `long[]`, `short[]`, `char[]`, `BitSet`); `M3File` holds `tree`, `id`, a memoised `Path`.
+- Never materialise the file system: only lanes, type ids, kind bits and traversal order; `M3File`, `String`, `Path` on demand.
+- Object residency: facades transient, parent-owned, bounded, recreate-on-evict; identity `(tree, id)`.
+- One model + deltas: scanner, walks, views, viewport, change detection share one lane model; changes travel as delta lanes.
+- Default methods first: interfaces expose one or two abstract methods; everything derivable is a default.
+- HP-LAW: id-level walk, flags, depth, names compare, shadows' `update` are allocation-free per entry/byte block.
+- Java only, JDK only.
 
 ## 3. Lanes (`M3FileTree`)
 
-Ids are dense, allocated in pre-order; `0` = root; `rows()` = next free id. Capacity doubles.
+Ids dense, pre-order (scan order = `Files.walk` order); `0` = root; `rows()` = next free id.
 
-| Lane | Type | Meaning |
-|------|------|---------|
-| `parent` | `int[]` | parent id; `-1` for root |
-| `depth` | `short[]` | root `0` |
-| `nameOff` | `int[rows+1]` | name of `id` = `namePool[nameOff[id] .. nameOff[id+1])` (UTF-16 units) |
-| `namePool` | `char[]` | all names, appended in id order |
-| `childStart` | `int[]` | start of the CSR slice in `childIds` |
-| `childCount` | `int[]` | direct children; `0` until scanned |
-| `childIds` | `int[]` | CSR payload, one entry per non-root id |
-| `size` | `long[]` | byte length; `-1` unknown |
-| `mtime` | `long[]` | last-modified epoch millis; `Long.MIN_VALUE` unknown |
+| Lane | Type | Meaning | Slice |
+|------|------|---------|-------|
+| `parent` | `int[]` | parent id; `-1` root | S1 |
+| `depth` | `short[]` | root `0` | S1 |
+| `nameOff` / `namePool` | `int[rows+1]` / `char[]` | name chars of each row (replaced by `nameId` in S4) | S1 |
+| `childStart` / `childCount` / `childIds` | `int[]` | CSR, slices sorted by name | S1 |
+| `subtreeEnd` | `int[]` | exclusive end of the pre-order subtree range `[id, subtreeEnd)` | S2 |
+| `size` / `mtime` | `long[]` | bytes; epoch millis | S1 |
+| `nameId` | `int[]` | interned name id (`M3FileNames`) | S4 |
+| `typeId` | `short[]` | interned extension type id (`M3FileTypes`) | S4 |
+| `fileKey` | `int[]` | interned `BasicFileAttributes.fileKey()` id, `0` none | S5 |
+| `crc` | `long[]` | CRC32C of raw bytes (fast hash) | S5 |
+| `sha` | `long[4*rows]` | SHA-256 words of raw bytes, big-endian (#1567 `Fingerprint` order) | S5 |
+| `tokenHash` | `long[]` | whitespace-insensitive token-stream hash | S5 |
+| `structHash` | `long[]` | structured-view hash (M3AST etc.) supplied by a shadow | S5 |
 
-Flags (`M3FileFlag`, one `BitSet` each): `DIR`, `LINK`, `HIDDEN`, `SCANNED`, `RESIDENT`, `DIRTY`, `DELETED`.
+Flags: `DIR`, `REGULAR`, `LINK`, `HIDDEN`, `SCANNED`, `RESIDENT`, `DIRTY`, `DELETED` (+ `HASHED`, `TOKEN_HASHED`, `STRUCT_HASHED` in S5).
 
-Invariants (asserted by the slice-1 test):
-1. `parent[id] < id` for all `id > 0`.
-2. `depth[id] == depth[parent[id]] + 1`.
-3. Every CSR slice is sorted by name (UTF-16 unit order, then length) — deterministic, locale-free.
-4. `childIds` contains every id except `0` exactly once.
-5. `DELETED` rows keep their lanes and are skipped by `ids()`.
+Invariants: (1) `parent[id] < id`; (2) `depth[id] == depth[parent[id]] + 1`; (3) CSR slices sorted by name; (4) `childIds` holds every non-root id once; (5) `DELETED` rows keep lanes, skipped by iteration; (6) `subtreeEnd[id] > id` and the subtree of `id` is exactly `[id, subtreeEnd[id])`.
 
 ## 4. `M3File`
 
-```java
-public final class M3File {
-    private final M3FileTree tree;   // M3FileTree.detached() for of(Path)
-    private final int id;            // -1 when detached
-    private Path path;               // of(Path): eager; tree entry: memoised on first toPath()/path()
+Detached edge (unchanged): `of(Path)`, `path()`, `metadata()`, `openReadChannel()`, `openInputStream()`, `readAllBytes(int)`, `Metadata`.
+Tree entry: `id()`, `isTreeEntry()`, `tree()`, `name()`, `parent()`, `depth()`, `childCount()`, `childIds()`, `children()`, `isDirectory()`, `isRegularFile()`, `isSymbolicLink()`, `isHidden()`, `flag()`, `kind()`, `size()`, `lastModified()`, `toPath()`, `walk()`.
+Streams (S3): `openInputStream(M3FileProgress, M3FileShadow...)`, `openOutputStream(M3FileProgress, M3FileShadow...)`; byte limits as `readAllBytes`.
 
-    // existing edge (unchanged behaviour): of(Path), path(), metadata(), openReadChannel(),
-    // openInputStream(), readAllBytes(int), record Metadata
-    // tree entry: id(), isTreeEntry(), tree(), name(), parent() : Optional<M3File>,
-    // childIds() : IntStream, children() : Stream<M3File>, isDirectory(), isSymbolicLink(),
-    // isHidden(), size(), lastModified(), depth(), toPath(), equals/hashCode on (tree, id | path)
-}
-```
+## 5. Traversal (S2)
 
-Lane accessors on a detached file throw `IllegalStateException`; the Path edge works on both kinds (`path()` of an entry = `root.resolve(names joined)`).
+`tree.walk()` / `tree.walk(id)` / `file.walk()` -> `M3FileWalk` (immutable; each `with` returns a copy):
+`minDepth(int)`, `maxDepth(int)`, `kinds(M3FileKind...)`, `glob(String)` (JDK `PathMatcher` over the path relative to the walk root), `regex(String|Pattern)` (relative path string, platform separator), `nameRegex(...)` (name only, no allocation), `prune(Predicate<M3File>)` / `pruneIds(IntPredicate)` (do not descend; the entry itself still meets the filters, `find -prune` semantics), `filter(Predicate<M3File>)` / `filterIds(IntPredicate)`.
+Order: pre-order scan order, identical to `Files.walk` over the same directory state. Lane tests run before facade tests.
+Spliterator: `ORDERED | DISTINCT | NONNULL`, plus `SIZED | SUBSIZED` when the walk is unfiltered and the tree has no tombstones. `trySplit` halves the id range and moves the split point past the highest closed (pruned or depth-capped) ancestor using `subtreeEnd`, so halves never overlap or enter closed subtrees.
+Cursor: `nextId()` (`-1` at end), `nextEntry()` (`Optional<M3File>`), `hasNext()`, `skipSubtree()` (dynamic prune of the last returned entry).
 
-## 5. `M3FileTree`
+## 6. Design directions (user, 2026-10-20) and consequences
 
-```java
-public static M3FileTree open(Path root) throws IOException;   // slice 1: eager, NOFOLLOW_LINKS, unbounded depth
-public static M3FileTree detached();                            // shared empty tree for M3File.of(Path)
-public Path root(); public M3File rootFile(); public M3File file(int id);
-public int rows(); public int liveCount(); public IntStream ids(); public int residentCount();
-public int parent(int id); public int depth(int id); public int childCount(int id); public int childId(int id, int index); public IntStream childIds(int id);
-public String name(int id); public long size(int id); public long mtime(int id);
-public boolean flag(M3FileFlag f, int id); public int compareNames(int a, int b); public Path path(int id);
-```
+| # | Direction (user) | Consequence | Slice |
+|---|------------------|-------------|-------|
+| D1 | "default methods are under-used" | small interfaces (`M3FileTraversal`, `M3FileProgress`, `M3FileShadow`, `M3FileCharShadow`, `M3FileChangeProvider`) with one or two abstract methods; behaviour in defaults | S2+ |
+| D2 | "both input and output streams should receive a sub-progress monitor" | every M3File input/output stream takes an optional `M3FileProgress` (bytes as units, `split`, cancellation -> `InterruptedIOException`) | S3 |
+| D3 | "shadow streams ... move as and when the main stream is read; brilliant for layered parsing; layered traversal" | shadows observe one main stream, no second I/O: SHA-256, CRC32C, byte count, line-offset index, UTF-8 char layer -> token shadow; M3AST shadow plugs in from `m3/ast` through `M3FileCharShadow` (no dependency here); `skip` reads through so every layer sees every byte | S3 |
+| D4 | "use attributes like change timestamp and length to detect change; providers that have a change-attribute mechanism are a different story" | cheapest first: size + mtime + fileKey gate, hash only when the gate trips; `M3FileChangeProvider` defaults implement the gate; WatchService, zip central-directory CRC/size, git index stat data override `knownContentHash` / `changed` | S5, S7 |
+| D5 | "record not only updates and hashes, but other hashes of its structured file (like M3AST)"; "M3File is small due to interning" | hash lanes raw (`sha`, `crc`) and structured (`tokenHash`, `structHash`); names and segments interned to int ids (TIL), type ids by extension | S4, S5 |
+| D6 | "can be used to generate deltas so downstream can consume the delta" | `M3FileTreeDelta`: two trees -> merge-join of sorted CSR slices (no hash maps) -> change lanes; `Stream<M3FileChange>` with bits ADDED/REMOVED/CONTENT_CHANGED (#1567 values) + SIZE/MTIME/KIND/TYPE/TOKEN/STRUCT; changed paths feed #1568 `M3FileDeltaLedger` | S6 |
+| D7 | "we don't need the whole file system at all, apart from the file type (.txt, .json, .bin), the order of traversal" | no per-entry objects or path strings retained; only type ids, kind bits, pre-order ids, lanes | all |
 
-Scanner: `preVisitDirectory` appends the row and opens a frame; `visitFile`/`visitFileFailed` append rows (failed = unknown size/mtime, no flags); `postVisitDirectory` sorts the frame's ids in place (heap sort over `compareNames`, no allocation) and writes the CSR slice, then sets `SCANNED`. Hidden = dot-name or `DosFileAttributes.isHidden()` from the attributes the walk already read (no second stat).
-
-Residency: `M3FileResidency` is a direct-mapped table (`capacity` power of two, default 4096): `slot = id & mask`; a request overwrites the slot's previous occupant, `RESIDENT` mirrors the table. Replacement policy upgrades (LRU/clock) are a slice-2 option only if a measured consumer needs them.
-
-## 6. Slices (one commit + test each)
+## 7. Slices (one commit + push + STATUS row each)
 
 | Slice | Leaf | Done when |
 |-------|------|-----------|
-| 1 | `M3FileFlag`, `M3FileTree.open`, `M3FileTreeScanner`, `M3FileResidency`, `M3File` entry role, pom test wiring, `M3FileTreeTest` | `mvn -f m3/file/pom.xml test` green on JDK 21; invariants 1-5 asserted |
-| 2 | `M3FileScanSpec` (maxDepth, lazy dirs), `scanChildren(id)`, `SCANNED` semantics, optional `subtreeSize` lane | lazy expansion test; scanned dirs never re-scanned |
-| 3 | `M3FileDelta` ADD/REMOVE/UPDATE, `apply`, `DIRTY`/`DELETED`, `compact()`, `M3FileWatcher` (WatchService) | replay test: scan == scan + deltas |
-| 4 | `M3FileView` filtered/sorted int-index wrapper; name/size/mtime orders; delta re-sort for the visible window only | view test; stable; no full rebuild on delta |
-| 5 | `M3FileRowHost` binding of tree rows to `com.m3.viewport.M3RowHost` | 100k-entry tree, O(window) per frame |
-| 6 | `M3FileImage` little-endian lane snapshot (names pool + lanes), content-addressed | round-trip equal; open from image without re-scan |
+| S1 | lanes, scanner, residency, `M3File` entry role | done `ed2036b9f92`, 6/6 tests |
+| S2 | `M3FileTraversal`, `M3FileWalk`, `M3FileCursor`, `M3FileKind`, id/facade spliterators, `subtreeEnd` lane, `REGULAR` flag | differential vs `Files.walk`, `walkFileTree` SKIP_SUBTREE, `PathMatcher`, `Pattern`; parallel == sequential |
+| S3 | `M3FileProgress`, `M3FileShadow`, `M3FileCharShadow`, shadow input/output streams, SHA-256/CRC32C/count/line-index/UTF-8/token shadows | shadows equal `MessageDigest`/`CRC32C`/line scan of the same bytes in one pass; progress units == bytes; cancel aborts |
+| S4 | `M3FileNames` interner, `M3FileTypes`, `nameId`/`typeId` lanes, `types(...)` walk filter | repeated names stored once; type ids stable; S1/S2 tests unchanged |
+| S5 | change gate + hash lanes, `M3FileChangeProvider`; rebase onto #1567 `Fingerprint` once merged | gate skips reads for unchanged attributes; hash lanes equal #1567 fingerprint |
+| S6 | `M3FileTreeDelta`, `M3FileChange` | delta of scan/edit/rescan equals expected ADDED/REMOVED/CHANGED; paths feed #1568 ledger |
+| S7 | zip/jar sources through `M3FileTree.open` (central directory, no extraction, nested zip-in-zip sub-trees), entry content via `ZipFile.getInputStream` with byte limits | differential vs `ZipFile.entries()` |
+| S8 | `M3FileScanSpec` maxDepth, lazy `scanChildren(id)` | lazy expansion test; scanned dirs never re-scanned |
+| S9 | unix-style ops (`du`, `find`, `wc` over walks), zip writing, error modes | per-op differential tests |
+| S10 | viewport row host over `com.m3.viewport.M3RowHost` | 100k rows, O(window) per frame |
+| S11 | lane image (little-endian lanes + name pool), content-addressed | round-trip equal; open without re-scan |
+| S12 | Synexia crate custody `crates/m3-file/file-tree` (stacked on Synexia #12520), output = this branch | recipe fixed point; draft PR |
 
-Out of scope: content I/O beyond the existing edge, permissions/ACLs, following links, native watchers, interning service.
+Out of scope: permissions/ACLs, following links, native watchers, JNI.
 
-## 7. Slice-1 test plan
+## 8. Test plans
 
-Fixture: temp dir, 3 levels, 12 files, 1 dot-file, 1 empty dir. Assert `liveCount`, root depth 0, invariants 1-5, `toPath()` equals the real path for every id, `isDirectory` matches `Files.isDirectory`, hidden flag, `file(id)` identity while resident, `equals` across eviction, residency capacity 2 -> `RESIDENT` cardinality 2 after three distinct requests, detached `of(Path)` edge still reads bytes.
+S1: temp tree (3 levels, 12 files, dot-file, empty dir): invariants, `toPath()` == real path, flags, residency eviction identity, detached edge unchanged.
+S2: same fixture + optional symlink (assumption-guarded): walk order == `Files.walk(root, n)`; glob == `PathMatcher` over `root.relativize`; regex == `Pattern` over the relative string; prune == `walkFileTree` with `SKIP_SUBTREE`; kinds == `Files.isRegularFile/isDirectory/isSymbolicLink` (NOFOLLOW); sub-root walks; parallel `toList()` == sequential; SIZED exactness; cursor `skipSubtree`.

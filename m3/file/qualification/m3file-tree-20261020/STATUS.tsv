@@ -1,0 +1,4 @@
+slice	leaf	state	commit	tests	evidence
+S0	DESIGN.md DRAFT-1/2 + FOSS_REUSE_DECISION.tsv	DONE	d3f2dcafe7d	-	-
+S1	lanes, scanner, residency, M3File entry role	DONE	ed2036b9f92	6/6	S:/m3-scratch/m3file/mvn-test-2.log
+S1.1	DESIGN.md DRAFT-3: user directions D1-D7, slices S2-S12, #1567/#1568 coordination	DONE	(this commit)	-	-
