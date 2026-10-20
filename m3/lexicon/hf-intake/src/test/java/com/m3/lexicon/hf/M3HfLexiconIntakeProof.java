@@ -66,7 +66,7 @@ public final class M3HfLexiconIntakeProof {
     private static int verifyLanguageResourceDiscovery() throws IOException {
         List<String> lines = resourceLines(
                 "/com/m3/lexicon/hf/language-resource-discovery.tsv");
-        require(lines.size() == 227, "226 language-resource candidates plus header");
+        require(lines.size() == 231, "230 language-resource candidates plus header");
         List<String> expectedHeader = List.of("source_id", "resource", "category",
                 "data_shape_and_identity", "rights_and_attribution", "m3_candidate_use",
                 "admission_blockers", "state", "evidence");
@@ -315,8 +315,12 @@ public final class M3HfLexiconIntakeProof {
                 "inuktitutcomputing-uqailaut-roots",
                 "nrc-nunavut-hansard-3",
                 "hf-americasnli",
-                "hf-teara-maori-english"
-        )), "exact 226 language-resource source IDs match the pinned catalogue");
+                "hf-teara-maori-english",
+                "jmdict-edrdg",
+                "jmnedict-edrdg",
+                "kanjidic2-edrdg",
+                "cc-cedict-v2"
+        )), "exact 230 language-resource source IDs match the pinned catalogue");
         String sindhi = discoveryRecord(lines, "hf-sindhi-open-lexicon");
         require(sindhi.contains("223,342") && sindhi.contains("lexical_id")
                 && sindhi.contains("entry_id") && sindhi.contains("schema casting"),
