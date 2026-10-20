@@ -14,6 +14,16 @@ _Static_assert(sizeof(jlong) == 8, "JNI long must be 64 bits");
   fprintf(stderr, "FAIL %s:%d: %s\n", __FILE__, __LINE__, #expr); exit(1); \
 } } while (0)
 
+/* Independent per-bit oracle: deliberately not the tested AND-equality formula. */
+static int reference_mask(uint64_t bits, uint64_t required, uint64_t excluded, int width) {
+    for (int shift = 0; shift < width; ++shift) {
+        uint64_t flag = UINT64_C(1) << shift;
+        if ((required & flag) != 0 && (bits & flag) == 0) return 0;
+        if ((excluded & flag) != 0 && (bits & flag) != 0) return 0;
+    }
+    return 1;
+}
+
 static void check_ranges(void) {
     CHECK(m3_jni_valid_window(0, 0, 0));
     CHECK(m3_jni_valid_window(100, 10, 90));
@@ -31,8 +41,8 @@ static void check_unsigned_masks(void) {
     for (int bits = 0; bits < 256; ++bits) {
         for (int required = 0; required < 256; ++required) {
             for (int excluded = 0; excluded < 256; ++excluded) {
-                int expected = ((bits & required) == required)
-                        && ((bits & excluded) == 0);
+                int expected = reference_mask((uint8_t)bits, (uint8_t)required,
+                        (uint8_t)excluded, 8);
                 CHECK(m3_jni_matches_u8((jbyte)(uint8_t)bits,
                             (jint)required, (jint)excluded) == expected);
             }
@@ -48,8 +58,8 @@ static void check_full_width_masks(void) {
     for (size_t a = 0; a < sizeof(ints) / sizeof(ints[0]); ++a) {
         for (size_t b = 0; b < sizeof(ints) / sizeof(ints[0]); ++b) {
             for (size_t c = 0; c < sizeof(ints) / sizeof(ints[0]); ++c) {
-                int expected = ((ints[a] & ints[b]) == ints[b])
-                        && ((ints[a] & ints[c]) == 0);
+                int expected = reference_mask((uint32_t)ints[a], (uint32_t)ints[b],
+                        (uint32_t)ints[c], 32);
                 CHECK(m3_jni_matches_u32(ints[a], ints[b], ints[c]) == expected);
             }
         }
@@ -57,8 +67,8 @@ static void check_full_width_masks(void) {
     for (size_t a = 0; a < sizeof(longs) / sizeof(longs[0]); ++a) {
         for (size_t b = 0; b < sizeof(longs) / sizeof(longs[0]); ++b) {
             for (size_t c = 0; c < sizeof(longs) / sizeof(longs[0]); ++c) {
-                int expected = ((longs[a] & longs[b]) == longs[b])
-                        && ((longs[a] & longs[c]) == 0);
+                int expected = reference_mask((uint64_t)longs[a], (uint64_t)longs[b],
+                        (uint64_t)longs[c], 64);
                 CHECK(m3_jni_matches_u64(longs[a], longs[b], longs[c]) == expected);
             }
         }
