@@ -2,10 +2,12 @@
 // SPDX-License-Identifier: Apache-2.0
 package com.m3.file;
 
+import java.nio.file.Path;
+import java.util.Optional;
 import java.util.StringJoiner;
 
 /**
- * Change bits between two observations of one logical entry.
+ * One row of an {@link M3FileTreeDelta} (a thin facade over its lanes), and the change-bit vocabulary.
  *
  * <p>{@link #ADDED}, {@link #REMOVED} and {@link #CONTENT_CHANGED} keep the values of the M3File
  * content-delta vocabulary (PR #1567), so downstream consumers and the build delta ledger (PR #1568)
@@ -30,10 +32,65 @@ public final class M3FileChange {
     private static final String[] NAMES = {"ADDED", "REMOVED", "CONTENT_CHANGED", "SIZE", "MTIME", "KIND",
         "FILE_KEY", "TOKENS", "STRUCTURE", "UNREADABLE"};
 
-    private M3FileChange() {
+    private final M3FileTreeDelta delta;
+    private final int row;
+
+    M3FileChange(M3FileTreeDelta delta, int row) {
+        this.delta = delta;
+        this.row = row;
     }
 
-    /** {@code "SIZE|MTIME"} style rendering; {@code "NONE"} for zero. */
+    public int row() {
+        return row;
+    }
+
+    public int bits() {
+        return delta.bits(row);
+    }
+
+    /** True when every bit of {@code mask} is set. */
+    public boolean has(int mask) {
+        return (bits() & mask) == mask;
+    }
+
+    /** Entry in the before tree; empty for an addition. */
+    public Optional<M3File> before() {
+        int id = delta.beforeId(row);
+        return id < 0 ? Optional.empty() : Optional.of(delta.before().file(id));
+    }
+
+    /** Entry in the after tree; empty for a removal. */
+    public Optional<M3File> after() {
+        int id = delta.afterId(row);
+        return id < 0 ? Optional.empty() : Optional.of(delta.after().file(id));
+    }
+
+    /** The after entry, or the before entry for a removal. */
+    public M3File entry() {
+        return after().or(this::before).orElseThrow();
+    }
+
+    /** Cold: current path (the before path for a removal). */
+    public Path path() {
+        return delta.path(row);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other instanceof M3FileChange that && that.delta == delta && that.row == row;
+    }
+
+    @Override
+    public int hashCode() {
+        return 31 * System.identityHashCode(delta) + row;
+    }
+
+    @Override
+    public String toString() {
+        return describe(bits()) + " " + path();
+    }
+
+    /** {@code "CONTENT_CHANGED|SIZE"} style rendering in bit order; {@code "NONE"} for zero. */
     public static String describe(int bits) {
         if (bits == 0) return "NONE";
         StringJoiner joiner = new StringJoiner("|");

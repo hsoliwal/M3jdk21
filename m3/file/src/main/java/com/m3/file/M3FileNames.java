@@ -79,14 +79,18 @@ public final class M3FileNames {
 
     /** UTF-16 code unit order, then length (as {@link String#compareTo}); allocation-free. */
     public int compare(int a, int b) {
-        if (a == b) return 0;
-        int lengthA = length(a);
-        int lengthB = length(b);
-        int offA = offsets[a];
-        int offB = offsets[b];
+        return a == b ? 0 : compare(a, this, b);
+    }
+
+    /** {@link #compare(int, int)} across two interners (two trees); allocation-free. */
+    public int compare(int id, M3FileNames other, int otherId) {
+        int lengthA = length(id);
+        int lengthB = other.length(otherId);
+        int offA = offsets[id];
+        int offB = other.offsets[otherId];
         int common = Math.min(lengthA, lengthB);
         for (int i = 0; i < common; i++) {
-            int difference = pool[offA + i] - pool[offB + i];
+            int difference = pool[offA + i] - other.pool[offB + i];
             if (difference != 0) return difference;
         }
         return lengthA - lengthB;

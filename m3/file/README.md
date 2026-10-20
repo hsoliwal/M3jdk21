@@ -47,3 +47,18 @@ and `skipSubtree()`. Order is `Files.walk` order. `M3File.openInputStream` and
 `split`, cancellation) and `M3FileShadow` layers that move with the main
 stream: SHA-256, CRC32C, line index, and a UTF-8 layer feeding
 `M3FileCharShadow`s (token hash; an M3AST builder plugs in from `m3/ast`).
+
+## Names, hashes, change detection and deltas (S4-S6)
+
+Rows keep interned `nameId`/`typeId` (`tree.names()`, `tree.types()`), so
+repeated segments are stored once and file types are small ids. `tree.hash`
+fills CRC32C, SHA-256 (#1567 `Fingerprint` word order), token and structure
+hash lanes in one shadow pass per file. `M3FileChangeProvider` is all default
+methods: an attribute gate (kind, size, mtime, file key) decides without I/O,
+and only rows whose gate trips are read; providers with their own change
+mechanism (WatchService, zip CRC, git index, an M3AST structure layer)
+override one method. `M3FileTreeDelta.between(before, after, ...)` merge-joins
+the sorted child slices of two scans into change lanes and a
+`Stream<M3FileChange>` (ADDED/REMOVED/CONTENT_CHANGED at the #1567 values plus
+SIZE, MTIME, KIND, FILE_KEY, TOKENS, STRUCTURE, UNREADABLE); `paths(mask)` is
+the hand-off to the build delta ledger (#1568).

@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.nio.file.FileVisitOption;
 import java.nio.file.FileVisitResult;
 import java.nio.file.Files;
+import java.nio.file.LinkOption;
 import java.nio.file.Path;
 import java.nio.file.SimpleFileVisitor;
 import java.nio.file.attribute.BasicFileAttributes;
@@ -43,7 +44,7 @@ final class M3FileTreeScanner extends SimpleFileVisitor<Path> {
 
     @Override
     public FileVisitResult preVisitDirectory(Path dir, BasicFileAttributes attrs) {
-        openFrame(append(dir, attrs));
+        openFrame(append(dir, fresh(dir, attrs)));
         return FileVisitResult.CONTINUE;
     }
 
@@ -64,6 +65,19 @@ final class M3FileTreeScanner extends SimpleFileVisitor<Path> {
     public FileVisitResult postVisitDirectory(Path dir, IOException exc) {
         closeFrame();
         return FileVisitResult.CONTINUE;
+    }
+
+    /**
+     * Directory attributes from a Windows listing come from the parent's NTFS index entry, which is
+     * updated lazily when children change; a directory's own record is current, so it is read again.
+     */
+    private static BasicFileAttributes fresh(Path dir, BasicFileAttributes attrs) {
+        if (!(attrs instanceof DosFileAttributes)) return attrs;
+        try {
+            return Files.readAttributes(dir, BasicFileAttributes.class, LinkOption.NOFOLLOW_LINKS);
+        } catch (IOException unreadable) {
+            return attrs;
+        }
     }
 
     private int append(Path path, BasicFileAttributes attrs) {
