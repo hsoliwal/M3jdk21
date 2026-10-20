@@ -104,6 +104,35 @@ final class M3LabelLanesTest {
 		pool.clear ();
 	}
 
+	/**
+	 * Brief rule 24: a full refresh that hands every row its text again changes no
+	 * id and measures nothing; a changed label re-interns one entry and measures
+	 * one label. Nothing is rebuilt.
+	 */
+	@Test
+	void refreshIsADeltaNotARebuild () {
+		M3LabelPool pool = new M3LabelPool ();
+		M3TextExtentCache extents = new M3TextExtentCache (64);
+		M3LabelLanes lanes = new M3LabelLanes (1, pool, extents);
+		M3TextExtentCache.Measurer measurer = (label, font) -> measure (pool.text (label), font);
+		lanes.setRowCount (1000);
+		for (int r = 0; r < 1000; r++) lanes.setText (r, 0, TYPES [r % 4]);
+		int [] ids = new int [1000];
+		for (int r = 0; r < 1000; r++) ids [r] = lanes.labelId (r, 0);
+		int widest = lanes.widest (0, 0, 1000, 0, measurer);
+		long misses = pool.misses (), measurements = extents.misses ();
+		for (int r = 0; r < 1000; r++) lanes.setText (r, 0, new String (TYPES [r % 4]));
+		for (int r = 0; r < 1000; r++) assertEquals (ids [r], lanes.labelId (r, 0));
+		assertEquals (widest, lanes.widest (0, 0, 1000, 0, measurer));
+		assertEquals (misses, pool.misses ());
+		assertEquals (measurements, extents.misses ());
+		lanes.setText (7, 0, "renamed.tsv");
+		assertEquals (misses + 1, pool.misses ());
+		lanes.widest (0, 0, 1000, 0, measurer);
+		assertEquals (measurements + 1, extents.misses ());
+		assertEquals (5, pool.size ());
+	}
+
 	@Test
 	void evictedLabelsLeaveTheExtentCache () {
 		M3LabelPool pool = new M3LabelPool (0);
