@@ -1,0 +1,53 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3JDK21 composite prefix cursor — canonical OpenRewrite and Java21
+on:
+  pull_request:
+    paths:
+      - 'src/java.base/share/classes/java/lang/M3String.java'
+      - 'src/java.base/share/classes/java/lang/M3StringPrecomputeBridge.java'
+      - 'test/jdk/java/lang/String/M3StringCompositePrefixCursorTest.java'
+      - 'm3/runtime-integration/string-prefix-cursor-20261020/**'
+      - 'm3/tooling/shared-frontend/recipe-custody/datasets/m3-prefix-cursor-20261020/**'
+      - '.github/workflows/m3-string-composite-prefix-cursor-20261020.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  source-sealed-cursor:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            src/java.base/share/classes/java/lang/M3String.java
+            src/java.base/share/classes/java/lang/M3StringPrecomputeBridge.java
+            test/jdk/java/lang/String/M3StringCompositePrefixCursorTest.java
+            m3/runtime-integration/string-prefix-cursor-20261020/
+            m3/tooling/shared-frontend/recipe-custody/
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Execute actual existing OpenRewrite SDK and source-seal receiver
+        shell: bash
+        run: |
+          set -euo pipefail
+          root="$PWD/m3/tooling/shared-frontend/recipe-custody"
+          mvn -B -ntp -f "$root/pom.xml" \
+            -Dm3.dataset=m3-prefix-cursor-20261020 \
+            "-Drecipe.owner.root=$root/sdk-owner" -Pcontract verify
+          python3 "$root/receive.py" --crate "$root" \
+            --dataset m3-prefix-cursor-20261020 \
+            --recipe-owner "$root/sdk-owner" --target "$PWD" --check
+      - name: Strict Java21 jtreg source syntax
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/m3-prefix-test"
+          javac --release 21 -proc:none -Xlint:all,-serial -Werror \
+            -d "$RUNNER_TEMP/m3-prefix-test" \
+            test/jdk/java/lang/String/M3StringCompositePrefixCursorTest.java
+          echo 'Test source compiled on Java21. Runtime needs M3JDK21 source-built image; NOT EXECUTED.'

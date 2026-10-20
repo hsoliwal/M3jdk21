@@ -1,0 +1,7 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3jdk.AstBuildReverse20261017
+displayName: Reuse composite M3String leaf cursors for long prefix comparisons
+description: Replays exact source-sealed Java21 in-place String and bridge atoms; no additional parser or String payload.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: m3-ast-build-reverse-20261017-m3-prefix-cursor-20261020
