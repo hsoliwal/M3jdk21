@@ -2,7 +2,7 @@
   "schema": "M3_JOINED_RANGE_DIRECTORY_SOURCE_BINDING_V1",
   "repository": "hsoliwal/com.synexia",
   "receiverRepository": "hsoliwal/M3jdk21",
-  "sourceCommit": "31cfc2e598be6edd505f7181d264bf1e6f7bcb98",
+  "sourceCommit": "7012002387d601b8343063eb8d35014d2530d1d5",
   "admissionCommit": "ec4309cde9a5311347aab535b1cee4a2be442742",
   "sdkTree": "2086a6175e8b573fa340a3458eaa382f11b3378d",
   "sdkFiles": 34,
@@ -264,9 +264,9 @@
     {
       "sourcePath": "synexia-openrewrite-recipes/tasks/joined-range-directory-20261020/verification/qualify.py",
       "targetPath": "m3/tooling/joined-range-directory/runtime/qualify.py",
-      "gitBlob": "b04179358a13d30e818c3f9de7b014fcb37f8eab",
-      "bytes": 17907,
-      "sha256": "f40199934f48ae17f3903b2a4ba914a3ef582f74671a74fd31e880932cef8c19"
+      "gitBlob": "214017285242d75cb78b7fb5392243fb2d5b018e",
+      "bytes": 17994,
+      "sha256": "539a433663548fb0393972e0e66c1bb0a0153f2c45bc58ead05735e44877283b"
     },
     {
       "sourcePath": "synexia-openrewrite-recipes/tasks/joined-range-directory-20261020/verification/M3JoinedRangeProof.java",

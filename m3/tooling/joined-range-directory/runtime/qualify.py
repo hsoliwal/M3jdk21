@@ -210,7 +210,8 @@ def qualify():
     # The supervised parent sets all temp/cache paths; no fallback path is introduced.
     os.environ["M3_JDK"] = environment["M3_JDK"]
     cohorts = {}
-    for label, owner in (("baseline", before), ("candidate", after)):
+    candidate = source_values[TARGET] if source_values[TARGET] == after else after
+    for label, owner in (("baseline", before), ("candidate", candidate)):
         directory = ROOT / label
         directory.mkdir()
         for name, current in source_values.items():
