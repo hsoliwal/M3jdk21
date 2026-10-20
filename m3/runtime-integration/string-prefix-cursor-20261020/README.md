@@ -93,3 +93,54 @@ operation-specific repeated-use profiles prove a net advantage after memory,
 construction time, GC and invalidation overhead. A mutable piece table
 belongs to a document/edit session owner, not automatically to every
 immutable M3 String.
+
+
+## Ordered multi-pass source recipe (successor to the aggregate snapshot)
+
+The original three-target aggregate remains the **contract oracle and receiver
+postimage**. Its named OpenRewrite descriptor now composes three distinct
+`M3HashPinnedJavaSnapshotRecipe` instances in source-file order:
+
+1. **Pass 1 — composite original atom**:
+   `M3String.java`, existing `startsWith(M3String,int)` source/cursor atom.
+2. **Pass 2 — flat-prefix consumer atom**:
+   `M3StringPrecomputeBridge.java`, existing `startsWith(M3String,String,int)`
+   bridge. It retains flat String admission semantics.
+3. **Pass 3 — regression receiver**:
+   `M3StringCompositePrefixCursorTest.java`, new source-only jtreg oracle.
+
+Each pass has **exactly one** preimage/postimage path and an independently
+hashed source snapshot. The three passes are composed in the single named
+OpenRewrite recipe `com.synexia.m3jdk.AstBuildReverse20261017`. SDK
+`M3TaskRecipeTest` performs actual Java LST parsing and named composed
+recipe replay; its fixed-point and refusal gates remain unchanged.
+
+`PASSES.tsv` binds problem categories to their original source owners.
+`verify_multi_pass.py` checks source custody, ordered pass identity,
+independently hash-verified templates, absence/creation rules, product
+postimage equality, and a **metadata-model** second-run fixed point.
+Its negative tests cover foreign source drift, altered preimages,
+reordered passes, overlapping targets and malformed categories. It does
+not substitute for running the actual OpenRewrite SDK.
+
+Run, in order:
+
+```sh
+python3 -m unittest discover \
+  -s m3/runtime-integration/string-prefix-cursor-20261020 \
+  -p 'test_verify_multi_pass.py' -v
+python3 m3/runtime-integration/string-prefix-cursor-20261020/verify_multi_pass.py --root .
+root="$PWD/m3/tooling/shared-frontend/recipe-custody"
+mvn -B -ntp -f "$root/pom.xml" \
+  -Dm3.dataset=m3-prefix-cursor-20261020 \
+  "-Drecipe.owner.root=$root/sdk-owner" -Pcontract verify
+python3 "$root/receive.py" \
+  --dataset m3-prefix-cursor-20261020 \
+  --recipe-owner "$root/sdk-owner" --target "$PWD" --check
+```
+
+**Never fix a generated M3JDK21 product file by hand.** Correct the smallest
+failing canonical recipe input/behavioral atom, regenerate its exact target,
+and replay the ordered stages to a demonstrated fixed point. The original
+Java String behavior, JNI compatibility and full M3JDK21 runtime gates are
+the independent final acceptance authority.
