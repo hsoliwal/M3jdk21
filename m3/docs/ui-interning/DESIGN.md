@@ -42,7 +42,7 @@ of hashing text (section 4.4).
 | `M3LabelPool` | `byte[]` arena (Latin-1 1 byte/char, UTF-16 2 bytes/char per label, as JDK compact strings); `long` span (offset, length, coder); `long` key (String.hashCode + length, or canonical id); `int` refcount; `int` prev/next (LRU of released labels, free list); `int[]` slot table | `String` created by `text(id)` and kept in a 4096-slot direct-mapped cache (bounded whatever the label count) | 28 + text bytes + 8 table |
 | `M3ShortLabel` | none (static codec): a label is a `long`; tag 0 = pool id, tag 1 = LATIN1 immediate (1..7 units), tag 2 = IDENT immediate (8..10 units), layout of M3JDK's `M3StringImmediate` | `toString(label)` on API demand; `getChars` into a caller buffer | 0 |
 | `M3TextExtentCache` | `long` label, `int` font, `long` extent (width << 32 \| height), `byte` CLOCK bit | none | 21 per slot |
-| `M3TreePathTrie` | `int` parent, segment, depth, firstChild, nextSibling, prevSibling; `long` flags; edge table `long` key (parentPathId << 32 \| segment) + `int` id | none (`segments(id, int[])` fills a caller array) | 36 + 12 per edge slot |
+| `M3TreePathTrie` | `int` parent, segment, depth, firstChild, nextSibling, prevSibling; `long` flags; edge table `long` key (parentPathId << 32 \| segment) + `int` id | none (`segments(id, int[])` fills a caller array) | 32 + 12 per edge slot (at least 2 slots per path) |
 | `M3LabelLanes` | per column an `int[]` of pool ids (pooled lanes) or a `long[]` of `M3ShortLabel` values (immediate lanes) | String from the pool facade cache or `M3ShortLabel.toString`; `getChars` for native callbacks | 4 or 8 per cell |
 
 No Entry objects, no per-row allocation on any hot path, no `String.intern()` (TIL law).
