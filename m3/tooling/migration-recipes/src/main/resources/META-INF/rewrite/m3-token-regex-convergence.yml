@@ -10,5 +10,5 @@ description: >-
   hash-pinned postimages; a second application is fixed-point and a future competing owner is
   refused rather than overwritten.
 recipeList:
-  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+  - com.m3.rewrite.backport.M3Jdk21HashPinnedSnapshotRecipe:
       crateName: m3-token-regex-convergence
