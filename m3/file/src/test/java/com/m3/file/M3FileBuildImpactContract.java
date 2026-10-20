@@ -38,6 +38,10 @@ public final class M3FileBuildImpactContract {
                     new int[] {ai, bi}, new int[] {bi, ci}, true);
             ok(empty.affectedSlots().length == 0 && !empty.globalInvalidation(), "exact no-op");
             ok(empty.unaffectedAt(ai) && !empty.requiresWorkAt(ci), "safe candidate only");
+            failure(IndexOutOfBoundsException.class,
+                    () -> M3FileBuildImpact.plan(same, new long[same.slots()],
+                            new int[] {ai}, new int[] {-1}, true),
+                    "invalid no-op graph edge must still be refused");
 
             Files.writeString(root.resolve(a), "changed implementation A");
             var source = M3FileDeltaLedger.scan(root, same, files);
@@ -68,6 +72,10 @@ public final class M3FileBuildImpactContract {
             ok(incomplete.affectedSlots().length == source.slots(), "incomplete graph rebuild-all");
             ok((incomplete.reasonAt(di) & M3FileBuildImpact.CONSERVATIVE) != 0,
                     "unrelated node conservatively selected");
+            failure(IndexOutOfBoundsException.class,
+                    () -> M3FileBuildImpact.plan(source, new long[source.slots()],
+                            new int[] {-1}, new int[] {ai}, false),
+                    "invalid conservative graph edge must still be refused");
 
             Files.writeString(root.resolve(pom), "changed effective build input");
             var context = M3FileDeltaLedger.scan(root, source, files);
