@@ -74,8 +74,7 @@ public final class M3SwingBehaviourProbe {
     }
 
     /* properties added by the enhanced API; every other property must keep its descriptor */
-    private static final Set<String> NEW_PROPERTIES = Set.of("selectionRanges", "visibleRange", "scrollInfo", "visibilityListeners", "viewportHidden",
-            "viewportDirty");
+    private static final Set<String> NEW_PROPERTIES = Set.of("selectionRanges", "visibleRange", "scrollInfo");
 
     private static String beans(Class<?> type) throws Exception {
         TreeSet<String> properties = new TreeSet<>();

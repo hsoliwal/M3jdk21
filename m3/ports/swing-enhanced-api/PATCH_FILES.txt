@@ -12,6 +12,3 @@ javax/swing/tree/DefaultTreeModel.java
 javax/swing/M3Scrolling.java
 javax/swing/M3ScrollInfo.java
 javax/swing/M3ScrollSupport.java
-javax/swing/M3VisibilityEvent.java
-javax/swing/M3VisibilityListener.java
-javax/swing/M3VisibilitySupport.java
