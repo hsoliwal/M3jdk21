@@ -19,6 +19,9 @@ import jdk.internal.access.SharedSecrets;
  * semantic oracle.</p>
  */
 public final class M3ASTTextFacts {
+    private static final int UTF8_REPLACEMENT_BYTES =
+            java.nio.charset.StandardCharsets.UTF_8.newEncoder().replacement().length;
+
     private M3ASTTextFacts() { }
 
     public record Facts(
@@ -234,6 +237,7 @@ public final class M3ASTTextFacts {
 
             int codePoint = unit;
             int width = 1;
+            boolean unpairedSurrogate = false;
             if (Character.isHighSurrogate(unit) && local + 1 < length) {
                 char next = source.charAt(beginIndex + local + 1);
                 if (Character.isLowSurrogate(next)) {
@@ -241,9 +245,12 @@ public final class M3ASTTextFacts {
                     width = 2;
                 } else {
                     unpaired++;
+                    unpairedSurrogate = true;
                 }
-            } else if (Character.isLowSurrogate(unit)) {
+            } else if (Character.isHighSurrogate(unit)
+                    || Character.isLowSurrogate(unit)) {
                 unpaired++;
+                unpairedSurrogate = true;
             }
 
             boolean whitespace = Character.isWhitespace(codePoint);
@@ -271,7 +278,9 @@ public final class M3ASTTextFacts {
                 continue;
             }
 
-            utf8 += unit <= 0x7f ? 1L : (unit <= 0x7ff ? 2L : 3L);
+            utf8 += unpairedSurrogate
+                    ? UTF8_REPLACEMENT_BYTES
+                    : (unit <= 0x7f ? 1L : (unit <= 0x7ff ? 2L : 3L));
             codePoints++;
         }
 
