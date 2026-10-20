@@ -3,6 +3,7 @@
 package com.m3.file;
 
 import java.io.IOException;
+import java.io.InterruptedIOException;
 import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.BitSet;
@@ -36,6 +37,7 @@ public final class M3FileTree {
     private final M3FileResidency residency;
     private final M3FileNames names = new M3FileNames(INITIAL_ROWS);
     private final M3FileNames types = new M3FileNames(8);
+    private final M3FileHashes hashes = new M3FileHashes(INITIAL_ROWS);
     private int[] parent = new int[INITIAL_ROWS];
     private short[] depth = new short[INITIAL_ROWS];
     private int[] nameId = new int[INITIAL_ROWS];
@@ -196,6 +198,57 @@ public final class M3FileTree {
         return types.name(typeId(id));
     }
 
+    /** CRC32C lane; meaningful when {@link M3FileFlag#HASHED}. */
+    public long crc(int id) {
+        checkId(id);
+        return hashes.crc(id);
+    }
+
+    /** SHA-256 word {@code word} (0..3, big-endian, #1567 {@code Fingerprint} order); meaningful when HASHED. */
+    public long shaWord(int id, int word) {
+        checkId(id);
+        Objects.checkIndex(word, 4);
+        return hashes.sha(id, word);
+    }
+
+    /** Token-stream hash lane; meaningful when {@link M3FileFlag#TOKEN_HASHED}. */
+    public long tokenHash(int id) {
+        checkId(id);
+        return hashes.tokens(id);
+    }
+
+    /** Structure hash lane; meaningful when {@link M3FileFlag#STRUCT_HASHED}. */
+    public long structHash(int id) {
+        checkId(id);
+        return hashes.structure(id);
+    }
+
+    /** Hash of the scan-time {@code BasicFileAttributes.fileKey()}, {@code 0} when the provider has none. */
+    public int fileKeyHash(int id) {
+        checkId(id);
+        return hashes.fileKey(id);
+    }
+
+    /**
+     * Fills the hash lanes of the regular files in {@code entries} with one observation pass each;
+     * progress units are bytes (one {@link M3FileProgress#split} per file). Returns the rows hashed;
+     * rows whose observation fails get {@link M3FileFlag#FAILED}. Cancellation propagates.
+     */
+    public int hash(M3FileTraversal entries, long maxBytes, M3FileProgress progress, M3FileChangeProvider provider)
+            throws InterruptedIOException {
+        if (entries.tree() != this) throw new IllegalArgumentException("traversal of another tree");
+        int[] files = entries.ids().filter(id -> flag(M3FileFlag.REGULAR, id)).toArray();
+        long total = 0;
+        for (int id : files) total += Math.max(0, size[id]);
+        progress.begin("hash " + root, total);
+        int hashed = 0;
+        for (int id : files) {
+            if (hashes.observe(this, id, maxBytes, progress.split(Math.max(0, size[id])), provider)) hashed++;
+        }
+        progress.done();
+        return hashed;
+    }
+
     public int nameLength(int id) {
         return names.length(nameId(id));
     }
@@ -260,6 +313,22 @@ public final class M3FileTree {
         appendName(id, out);
     }
 
+    M3FileHashes hashes() {
+        return hashes;
+    }
+
+    /** Observes row {@code id} into the hash lanes; false when not regular or failed. */
+    boolean hashRow(int id, long maxBytes, M3FileProgress progress, M3FileChangeProvider provider)
+            throws InterruptedIOException {
+        checkId(id);
+        return hashes.observe(this, id, maxBytes, progress, provider);
+    }
+
+    /** Gate closed: row {@code id} inherits the content observation of {@code from}'s row {@code fromId}. */
+    void carryHashes(int id, M3FileTree from, int fromId) {
+        hashes.carry(this, id, from, fromId);
+    }
+
     void setFlag(M3FileFlag flag, int id, boolean value) {
         flags[flag.ordinal()].set(id, value);
     }
@@ -308,6 +377,7 @@ public final class M3FileTree {
         subtreeEnd = Arrays.copyOf(subtreeEnd, capacity);
         size = Arrays.copyOf(size, capacity);
         mtime = Arrays.copyOf(mtime, capacity);
+        hashes.grow(capacity);
     }
 
     private void checkId(int id) {

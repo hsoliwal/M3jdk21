@@ -24,7 +24,15 @@ public enum M3FileFlag {
     /** A delta touched this row since the last commit (slice 3). */
     DIRTY,
     /** Tombstone: the row keeps its lanes and is skipped by iteration (slice 3). */
-    DELETED;
+    DELETED,
+    /** Raw-byte hash lanes (CRC32C, SHA-256) hold this row's content observation. */
+    HASHED,
+    /** Token-hash lane is set: the content decoded as text without NUL bytes. */
+    TOKEN_HASHED,
+    /** Structure-hash lane is set by an {@link M3FileChangeProvider#structure} layer. */
+    STRUCT_HASHED,
+    /** The last content observation of this row failed (vanished, unreadable, over the limit). */
+    FAILED;
 
     static final M3FileFlag[] VALUES = values();
 }

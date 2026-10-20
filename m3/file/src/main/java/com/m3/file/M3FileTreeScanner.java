@@ -72,6 +72,7 @@ final class M3FileTreeScanner extends SimpleFileVisitor<Path> {
         boolean hidden = dotName(name) || (attrs instanceof DosFileAttributes dos && dos.isHidden());
         int id = tree.append(parentId(), name, kind, hidden,
                 attrs.size(), attrs.lastModifiedTime().toMillis());
+        tree.hashes().fileKey(id, attrs.fileKey());
         enlist(id);
         return id;
     }
