@@ -1067,7 +1067,8 @@ public final class M3HfLexiconIntakeProof {
                 "RL-fr version, typed lexical relations and scope stay explicit");
         String bel = discoveryRecord(lines, "bel-rl-fr-3-1");
         require(bel.contains("31,987 citations") && bel.contains("53,013")
-                && bel.contains("source rights") && bel.contains("REFERENCE_ONLY"),
+                && bel.contains("underlying text rights")
+                && bel.contains("citation-level provenance") && bel.contains("REFERENCE_ONLY"),
                 "BEL-RL citation identity and per-source rights remain gated");
         String prolexbase = discoveryRecord(lines, "prolexbase-2-2");
         require(prolexbase.contains("67,000") && prolexbase.contains("65,500")
