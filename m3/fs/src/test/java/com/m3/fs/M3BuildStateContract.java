@@ -103,13 +103,37 @@ public final class M3BuildStateContract {
         byte[] corrupt = encoded.clone(); corrupt[10] ^= 0x01; badImage(corrupt);
         badImage(Arrays.copyOf(encoded, encoded.length - 1));
         badImage(Arrays.copyOf(encoded, MAX_BYTES + 1));
+        // Counts that fit the caller's row limit but not the image budget must
+        // be refused before allocating any large column arrays.
+        byte[] impossible = encoded.clone();
+        java.nio.ByteBuffer.wrap(impossible).putInt(8, 30_000);
+        putSeal(impossible);
+        checks++;
+        try { M3BuildState.decode(impossible, MAX_BYTES, 40_000, 10_000);
+              throw new AssertionError("accepted impossible image geometry"); }
+        catch (IOException expected) { /* expected */ }
+        checks++;
+        try { baseline.encode(encoded.length - 1);
+              throw new AssertionError("admitted output exceeding exact bound"); }
+        catch (IOException expected) { /* expected */ }
         invalid(() -> sampleInvalid(new String[]{"same", "same"}, new int[]{0, 0, 0}, new int[0]));
         invalid(() -> sampleInvalid(new String[]{"../bad", "safe"}, new int[]{0, 0, 0}, new int[0]));
+        invalid(() -> sampleInvalid(new String[]{"a//b", "safe"}, new int[]{0, 0, 0}, new int[0]));
+        invalid(() -> sampleInvalid(new String[]{"a/./b", "safe"}, new int[]{0, 0, 0}, new int[0]));
+        invalid(() -> sampleInvalid(new String[]{"a/", "safe"}, new int[]{0, 0, 0}, new int[0]));
         invalid(() -> sampleInvalid(new String[]{"a", "b"}, new int[]{0, 0, 1}, new int[]{2}));
         invalid(() -> sampleInvalid(new String[]{"a", "b"}, new int[]{0, 0, 2}, new int[]{0, 0}));
         invalid(() -> sampleInvalid(new String[]{"a", "b"}, new int[]{0, 0, 0}, new int[0], new long[]{4L}));
         fuzzReverseClosure();
         return checks;
+    }
+
+    private static void putSeal(byte[] encoded) {
+        byte[] data = Arrays.copyOf(encoded, encoded.length - 32);
+        byte[] hash;
+        try { hash = MessageDigest.getInstance("SHA-256").digest(data); }
+        catch (NoSuchAlgorithmException impossible) { throw new AssertionError(impossible); }
+        System.arraycopy(hash, 0, encoded, data.length, 32);
     }
 
     private static byte[] fill(int n, byte value) { byte[] values = new byte[n]; Arrays.fill(values, value); return values; }
