@@ -164,34 +164,50 @@ public final class M3DualLinkedHashBidiMap<K, V> implements BidiMap<K, V>, Seria
         }
 
         /**
+         * The slot of {@code key}, or {@code -(p + 2)} for the index position a new key would take (the first
+         * tombstone on its probe, else the empty position that ends it); -1 while there is no index.
+         */
+        int locate(Object key) {
+            int[] table = index;
+            if (table.length == 0) { return -1; }
+            int hash = spread(key);
+            int mask = table.length - 1;
+            int p = -1;
+            int q = hash & mask;
+            for (; table[q] != 0; q = q + 1 & mask) {
+                int s = table[q] - 1;
+                if (s < 0) {
+                    if (p < 0) { p = q; }
+                } else if (hashes[s] == hash && Objects.equals(key, keys[s])) {
+                    return s;
+                }
+            }
+            return -((p < 0 ? q : p) + 2);
+        }
+
+        /**
          * Puts like LinkedHashMap: an existing key keeps its slot, position and key object; a new key goes last.
+         * {@code at} is {@link #locate}(key), taken before this call with only erasures in between; an erasure
+         * turns a live position into a tombstone and keeps slots in place, so the located slot or free position
+         * stays valid, and only a rehash forces a new probe.
          *
          * @return the previous value, or null when the key was new
          */
-        Object put(Object key, Object value) {
-            // One probe both finds the key and remembers where a new key would go (first tombstone, else the
-            // terminating empty position); only a rehash forces a second probe.
-            int hash = spread(key);
-            int[] probed = index;
-            int p = -1;
-            if (probed.length != 0) {
-                int mask = probed.length - 1;
-                int q = hash & mask;
-                for (; probed[q] != 0; q = q + 1 & mask) {
-                    int s = probed[q] - 1;
-                    if (s < 0) {
-                        if (p < 0) { p = q; }
-                    } else if (hashes[s] == hash && Objects.equals(key, keys[s])) {
-                        Object old = values[s];
-                        values[s] = value;
-                        return old;
-                    }
-                }
-                if (p < 0) { p = q; }
+        Object put(Object key, Object value, int at) {
+            if (at >= 0) {
+                Object old = values[at];
+                values[at] = value;
+                return old;
             }
+            int[] probed = index;
             ensureSlot();
             ensureIndex();
-            if (index != probed) {
+            int hash = spread(key);
+            int p;
+            if (index == probed) {
+                // ensureIndex() always rehashes an empty index, so here at carries a position.
+                p = -(at + 2);
+            } else {
                 int mask = index.length - 1;
                 p = hash & mask;
                 while (index[p] != 0) { p = p + 1 & mask; }
@@ -266,12 +282,16 @@ public final class M3DualLinkedHashBidiMap<K, V> implements BidiMap<K, V>, Seria
     private Object put(int s, Object key, Object value) {
         Table normal = tables[s];
         Table reverse = tables[1 - s];
-        int k = normal.find(key);
+        int k = normal.locate(key);
         if (k >= 0) { reverse.remove(normal.values[k]); }
-        int v = reverse.find(value);
-        if (v >= 0) { normal.remove(reverse.values[v]); }
-        Object old = normal.put(key, value);
-        reverse.put(value, key);
+        int v = reverse.locate(value);
+        if (v >= 0) {
+            normal.remove(reverse.values[v]);
+            // Commons lets a raw entry setValue break the bijection, so that removal may have erased key itself.
+            k = normal.locate(key);
+        }
+        Object old = normal.put(key, value, k);
+        reverse.put(value, key, v);
         return old;
     }
 
