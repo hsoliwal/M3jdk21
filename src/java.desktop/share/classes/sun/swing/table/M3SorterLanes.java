@@ -403,10 +403,7 @@ public final class M3SorterLanes {
     private void insertInOrder(int[] toAdd, int count, int[] current) {
         int last = 0;
         for (int i = 0; i < count; i++) {
-            int index = binarySearch(current, toAdd[i]);
-            if (index < 0) {
-                index = -1 - index;
-            }
+            int index = -1 - binarySearch(current, toAdd[i]);
             System.arraycopy(current, last, viewToModel, last + i, index - last);
             viewToModel[index + i] = toAdd[i];
             last = index;

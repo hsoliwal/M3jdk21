@@ -44,6 +44,7 @@ public class M3SorterLanesTest {
     static final class Script implements M3SorterLanes.Host {
         final List<Integer> keys = new ArrayList<>();
         boolean unsorted;
+        boolean cachedUnsorted;
         boolean filtered;
         boolean sorted;
         int hideModulo;
@@ -56,6 +57,10 @@ public class M3SorterLanesTest {
         @Override
         public int compare(int model1, int model2) {
             compares++;
+            if (cachedUnsorted) {
+                // stock: no cached sort keys, so the fallback to model order decides
+                return model1 - model2;
+            }
             int c = Integer.compare(keys.get(model1), keys.get(model2));
             return c != 0 ? c : model1 - model2;
         }
@@ -93,11 +98,13 @@ public class M3SorterLanesTest {
         @Override
         public void prepareSort() {
             prepared++;
+            cachedUnsorted = unsorted;
         }
 
         @Override
         public void prepareResort() {
             resorts++;
+            cachedUnsorted = unsorted;
         }
 
         @Override
@@ -228,6 +235,7 @@ public class M3SorterLanesTest {
                     updated++;
                 } else {
                     s.lanes.clear();
+                    before = s.lanes.snapshot();
                     assertFalse(s.lanes.transformed());
                     s.lanes.sort();
                 }
