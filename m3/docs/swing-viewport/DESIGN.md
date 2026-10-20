@@ -655,3 +655,63 @@ all at those cutoffs.
 | sort by an Integer column | 140-383 ms | 200-238 ms |
 | one-row insert | 32-42 ms | 21-35 ms |
 | 1,000-row update with `sortsOnUpdates` | 24-28 ms | 10-18 ms |
+
+## 15. Leaf 8: JTable custom row heights in one sparse store per order (`sun.swing.table.M3SparseSizes`)
+
+**The stock stores.** Stock `JTable` keeps custom row heights in two dense `SizeSequence`s, 4n bytes each:
+- `rowModel`, in view order;
+- `SortManager.modelRowSizes`, in model order, with a sorter.
+
+So one custom height on a 10^6-row sorted table costs 8 MB, and every height is stored twice, densely.
+
+**The sparse stores.** With `-Dm3.swing.viewport=true`, the same two stores are `M3SparseSizes`: a sorted int lane of
+the rows whose height differs from the default, with a lane of their heights. Positions come from a prefix lane of
+the differences, rebuilt only after a change.
+- Every answer is the `SizeSequence` answer, including out of range: `getSize` is 0 there, `getPosition` is 0 before
+  the first entry and the total after the last, and `getIndex` is 0 before position 0 and the length at the total.
+- Above 4,096 custom heights the sparse form loses. An insert into the middle of the lanes and the prefix rebuild
+  are O(k), against O(log n) for the stock tree. So the store moves to a stock `SizeSequence` and stays there until
+  `setSizes`.
+
+**The hooks.** The recipe `M3SwingTableRowHeights` mirrors the stock lifecycle at every site that reads, writes or
+drops the stock pair:
+- `setRowHeight(int, int)` and `setRowHeight(int)`;
+- `getRowHeight(int)`, `rowAtPoint`, `getCellRect` and `getScrollableBlockIncrement` (the stock shortcut there is
+  for uniform rows only);
+- `tableChanged`, `tableRowsInserted`, `tableRowsDeleted` and `setRowSorter`;
+- `SortManager.setViewRowHeight`, `allChanged`, `processChange` and `setViewRowHeightsFromModel`;
+- `writeObject` and `readObject`.
+
+Default off: the transient flag `m3Sizes` is false and every stock line runs. Pass 1 CHANGED, pass 2 UNCHANGED.
+
+**Upstream defects met on the way:**
+- **D7:** `setRowHeight(row, h)` with a negative row reaches `SizeSequence.setSize`, which adds h into the sums of
+  the left subtrees and moves every row below. The sparse store ignores it, as stock already ignores rows at or
+  past the end. The differential leaves negative rows out, since their behaviour is unspecified.
+- **D8:** a table with custom heights cannot be serialized: `rowModel` is a non-transient `SizeSequence`, which is
+  not `Serializable`. The M3 side throws the same `NotSerializableException` with the same message. Both sides are
+  then left with their UI uninstalled, because the reinstall comes after a complete write.
+
+| Proof (2026-10-20, JDK 21.0.9, stock + `--patch-module java.desktop`, output on S:) | Result |
+|---|---|
+| `M3TableRowHeightsDifferential 40 300`: two JTables on one model; the stock side has its flag cleared. Steps: per-row and global heights, inserts, removals, moves, edits, update/data/structure events, sorters on and off, sort keys, filters, row counts, selections, serialization round trips. Compared: rows and preferred size, every row's height and rectangle, `rowAtPoint` at every boundary and outside, scroll increments, selection, round-trip outcomes and heights, pixels; the M3 side must never hold a dense `rowModel` | **40/40 pass, 1,240 equal pixel captures; 6,750 checks with the sparse store in use; 166 round trips, 141 throwing on both sides (D8)** |
+| `M3SparseSizesTest` (JUnit 5, 7 tests: 50 scripts x 300 steps of the four mutators against `SizeSequence` at every index and position; the store at exactly 4,096 entries and the dense range above; zero sizes; the bounds and arguments; the view-order mapping through a sorter; the differential), merged with a flag-off run | **7/7 pass; `M3SparseSizes` 175/175 lines, 124/124 branches** |
+| `make`, jtreg | PENDING_CI |
+
+**Measured at 10^6 rows with a sorter** (`bench/HEIGHTS_20261020.tsv`; medians of 7 rounds, then the median over the
+JVM runs; the machine was shared, so single runs vary by up to 3x):
+
+| | stock | M3 |
+|---|---|---|
+| Heap of 1,000 custom heights (`DeltaBench heap`) | 8.0 MB | 0.0 MB (two lanes of 1,000 entries, about 32 KB) |
+| `setRowHeight` on 1,000 spread rows | 3.37 ms | 0.78 ms |
+| 1,000 `rowAtPoint` + `getCellRect` pairs, sparse | 2.30 ms | 1.32 ms |
+| `setRowHeight` on every row, random order (dense above 4,096) | 2,561 ms | 2,338 ms |
+| 1,000 pairs with every row custom | 1.54 ms | 4.34 ms (steady 2.09; quiet run 1.23 / 0.97) |
+| Allocation per `setRowHeight` / per query pair | 0 / 56 B | 0 / 56 B |
+
+The dense row is open. Once the store is dense, the M3 queries make the same `SizeSequence` calls as stock, behind one
+more object. The bench's 1,000-pair medians put M3 behind in 9 of 10 runs. A probe with 100,000 pairs per round and
+the JVM order alternated measures the two as equal (flag on 0.94-2.70 ms, off 1.00-3.29 ms per 1,000 pairs). The
+next step is a JFR profile on a quiet machine. If the extra object is the cost, the dense form can keep the
+`SizeSequence` tree array itself.
