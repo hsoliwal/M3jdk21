@@ -13,6 +13,7 @@ import java.util.Objects;
  * serialized attributed-AST format.
  */
 public final class M3JavacTree {
+    private static final Tree.Kind[] KIND_BY_ORDINAL = Tree.Kind.values();
     private final M3File source;
     private final int[] kinds;
     private final int[] parents;
@@ -29,7 +30,7 @@ public final class M3JavacTree {
 
     public M3File source() { return source; }
     public int nodeCount() { return kinds.length; }
-    public Tree.Kind kind(int node) { return Tree.Kind.values()[kinds[check(node)]]; }
+    public Tree.Kind kind(int node) { return KIND_BY_ORDINAL[kinds[check(node)]]; }
     /** Parent row, or -1 for the compilation-unit root. */
     public int parent(int node) { return parents[check(node)]; }
     /** Exact javac UTF-16 start offset, or -1 if unavailable. */
