@@ -15,7 +15,8 @@
 #include <stdint.h>
 #include <limits.h>
 #include "java_lang_M3StringPool.h"
-#if defined(__linux__)
+#include "m3_jni_util.h"
+#if defined(__linux__) || defined(__APPLE__)
 #include <errno.h>
 #include <sys/mman.h>
 #include <sys/stat.h>
@@ -25,11 +26,7 @@
 #endif
 
 static void mapping_error(JNIEnv *env, const char *message) {
-    jclass type = (*env)->FindClass(env, "java/io/IOException");
-    if (type != NULL) {
-        (void)(*env)->ThrowNew(env, type, message);
-        (*env)->DeleteLocalRef(env, type);
-    }
+    m3_jni_throw_by_name(env, "java/io/IOException", message);
 }
 
 static int valid_range(jlong address, jlong length) {
@@ -50,9 +47,10 @@ Java_java_lang_M3StringPool_mapLexicon0(JNIEnv *env, jclass ignored,
         mapping_error(env, "Invalid fixed M3 lexicon address or size");
         return NULL;
     }
-#if defined(__linux__) && defined(MAP_FIXED_NOREPLACE)
+#if defined(__linux__) || defined(__APPLE__)
     struct stat info;
     long page_size;
+    int mapping_flags = MAP_SHARED;
     (void)handle;
     if (descriptor < 0 || fstat(descriptor, &info) != 0
             || !S_ISREG(info.st_mode) || info.st_size != length) {
@@ -64,8 +62,16 @@ Java_java_lang_M3StringPool_mapLexicon0(JNIEnv *env, jclass ignored,
         mapping_error(env, "Unaligned fixed M3 lexicon address");
         return NULL;
     }
+#if defined(__linux__) && defined(MAP_FIXED_NOREPLACE)
+    mapping_flags |= MAP_FIXED_NOREPLACE;
+#endif
+    /* A non-fixed address hint never replaces an occupied mapping. Accept only
+     * the exact requested address below; release any alternate mapping. This
+     * preserves the existing no-replace path on Linux and supports Apple or
+     * Linux headers without MAP_FIXED_NOREPLACE through the same contract.
+     */
     mapped = mmap((void *)(uintptr_t)address, (size_t)length,
-            PROT_READ, MAP_SHARED | MAP_FIXED_NOREPLACE, descriptor, 0);
+            PROT_READ, mapping_flags, descriptor, 0);
     if (mapped == MAP_FAILED) {
         mapping_error(env, "Fixed M3 lexicon address unavailable");
         return NULL;
@@ -124,7 +130,7 @@ Java_java_lang_M3StringPool_unmapLexicon0(JNIEnv *env, jclass ignored,
     (void)env;
     (void)ignored;
     if (!valid_range(address, length)) return JNI_FALSE;
-#if defined(__linux__)
+#if defined(__linux__) || defined(__APPLE__)
     return munmap((void *)(uintptr_t)address, (size_t)length) == 0 ? JNI_TRUE : JNI_FALSE;
 #elif defined(_WIN32)
     return UnmapViewOfFile((void *)(uintptr_t)address) ? JNI_TRUE : JNI_FALSE;

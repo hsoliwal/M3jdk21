@@ -1,0 +1,566 @@
+{
+  "schema": 1,
+  "proposal": "M3CommonJniPlatform20261020 native shared support and mapping",
+  "repository": "hsoliwal/M3jdk21",
+  "target_baseline": "d6d76b563050fc13c4fa79bc494edf29f1614b37",
+  "canonical_recipe": {
+    "name": "com.synexia.m3.CommonJniPlatform20261020",
+    "suggested_class": "M3CommonJniPlatform20261020",
+    "engine": "Existing M3GpuToolJoinRecipe class-backed composition",
+    "repository": "hsoliwal/com.synexia",
+    "status": "BIND_BY_ROOT_BEFORE_PUBLICATION",
+    "commit_binding": "Receiving commit Synexia-Recipe-Commit trailer and PR; kept outside generated templates to avoid a self-referential commit hash.",
+    "engine_baseline": "hsoliwal/com.synexia@f04fbac91a7891e64b77c7b24cef1ab75ec88144"
+  },
+  "files": [
+    {
+      "path": "m3/collections/src/main/native/collections/m3_index_mask_compactor.c",
+      "before": {
+        "git_blob_sha1": "15024c40ba9b92fd50fb7823ecfa9543aba22be1",
+        "sha256": "d1c300832aa9bf44cd7b7199cff593beb2a9464fbb52c9c8448da7773eaf0aef",
+        "bytes": 16830
+      },
+      "after": {
+        "git_blob_sha1": "8fb2c3fb8e5642deebcfcd482200854ea131912a",
+        "sha256": "3fea7150a748804b47384f75b98a21f86b3db1def6249887c7508d4c749a165d",
+        "bytes": 16166
+      },
+      "source_license": "Apache-2.0",
+      "existing_jni_declarations_unchanged": true,
+      "jni_declaration_count": 9,
+      "preserved_exception_guard_count": 24,
+      "shared_throw_call_sites": 6
+    },
+    {
+      "path": "m3/collections/src/main/native/collections/m3_index_mask_window.c",
+      "before": {
+        "git_blob_sha1": "bd300c90d54ede9b7f238efe8a18c918d2fcef9e",
+        "sha256": "8107ba8ba5f9d7519563eba9d20e76932dd077b2359f056b05ccd0a2d7d62e18",
+        "bytes": 6433
+      },
+      "after": {
+        "git_blob_sha1": "8f3048b8614457795376b65e06dc306bfdd827ef",
+        "sha256": "3f3c222275ebd45b8a40846c758f8333e86f68b118707acb9f1a088fe3ae6ba6",
+        "bytes": 6390
+      },
+      "source_license": "Apache-2.0",
+      "existing_jni_declarations_unchanged": true,
+      "jni_declaration_count": 2,
+      "preserved_exception_guard_count": 9,
+      "shared_throw_call_sites": 1
+    },
+    {
+      "path": "m3/collections/src/main/native/collections/m3_index_path_masks.c",
+      "before": {
+        "git_blob_sha1": "086b49293257fd17cc7fbd1ebbb98460aa677e35",
+        "sha256": "3f5a760e633762469fad5a9dcd531cb39c33d11752d79ad241e506800b26e7cb",
+        "bytes": 5772
+      },
+      "after": {
+        "git_blob_sha1": "30fd8eb84dd28b932a842643b6d4b5ef53991667",
+        "sha256": "5a5f4d260f0368a5a3f08c6b04ceb432e670b713230118162e7d62ae595a402f",
+        "bytes": 5703
+      },
+      "source_license": "Apache-2.0",
+      "existing_jni_declarations_unchanged": true,
+      "jni_declaration_count": 1,
+      "preserved_exception_guard_count": 13,
+      "shared_throw_call_sites": 1
+    },
+    {
+      "path": "m3/collections/src/main/native/collections/m3_long_index_path_masks_jni.c",
+      "before": {
+        "git_blob_sha1": "941f77d7261fd27cca9977575585f6278fcb0d31",
+        "sha256": "c5971bd4bb6ee01a5385cc9ae22a2d7bc2bedd2163a1e39dd24cf76ec5f5e512",
+        "bytes": 11105
+      },
+      "after": {
+        "git_blob_sha1": "244e2e250d8e35c3467260a85c2f44580102f399",
+        "sha256": "c75732ddf8c2d562b917bf015d58d1b726bb7e3cabd481cd4dfd1ae7b60e9cfa",
+        "bytes": 11060
+      },
+      "source_license": "Apache-2.0",
+      "existing_jni_declarations_unchanged": true,
+      "jni_declaration_count": 2,
+      "preserved_exception_guard_count": 15,
+      "shared_throw_call_sites": 1
+    },
+    {
+      "path": "m3/collections/src/main/native/collections/m3_residency_state_mask.c",
+      "before": {
+        "git_blob_sha1": "f6015cf4f9d760a649d37124d9d5219d6052164b",
+        "sha256": "07076627c4cdca856ead90d400c467d7259b65a7970dfbea114ffd66a9bb54e4",
+        "bytes": 4443
+      },
+      "after": {
+        "git_blob_sha1": "178fad51766479d666af3b4a18101748c977f47b",
+        "sha256": "f893e18b9ca2dff10aa07a1217e925c0e282ab01d6d485ade94a3eb5098acc41",
+        "bytes": 4401
+      },
+      "source_license": "Apache-2.0",
+      "existing_jni_declarations_unchanged": true,
+      "jni_declaration_count": 1,
+      "preserved_exception_guard_count": 11,
+      "shared_throw_call_sites": 1
+    },
+    {
+      "path": "m3/collections/src/main/native/collections/m3_state_mask_histogram.c",
+      "before": {
+        "git_blob_sha1": "f7099d5e06db8c76fe5d6549f8d167f965569c35",
+        "sha256": "21ff3a8dade438a819d411fba96a6cb4ee8ddbd4c568409686137c42524e41bf",
+        "bytes": 4065
+      },
+      "after": {
+        "git_blob_sha1": "5591de6b1826d29dd4cdbc67ca3f2c87f9eb56e5",
+        "sha256": "4ab0d28d827916c7aae1852ef2d961f8bbfffde8b216ce52f6a7d9301fbd351d",
+        "bytes": 4022
+      },
+      "source_license": "Apache-2.0",
+      "existing_jni_declarations_unchanged": true,
+      "jni_declaration_count": 1,
+      "preserved_exception_guard_count": 5,
+      "shared_throw_call_sites": 1
+    },
+    {
+      "path": "m3/collections/src/main/native/collections/segmented_bit_lane.c",
+      "before": {
+        "git_blob_sha1": "011b847f0d22ea96e4b136547083904ac50b1440",
+        "sha256": "4ff7fb4557c58cc59de7fbb24498f3df2a197083a5cd467670dc24b9441f1210",
+        "bytes": 3458
+      },
+      "after": {
+        "git_blob_sha1": "4dabc33b4f2e0156ce245ca22ce0421a954d90d1",
+        "sha256": "1246ffa52b1867fb1a41f4c70689dc661a808c4b1790bd4a09cd6cd9fa2e8aa2",
+        "bytes": 3415
+      },
+      "source_license": "Apache-2.0",
+      "existing_jni_declarations_unchanged": true,
+      "jni_declaration_count": 1,
+      "preserved_exception_guard_count": 3,
+      "shared_throw_call_sites": 1
+    },
+    {
+      "path": "src/java.base/share/native/libjava/M3BitLane28.c",
+      "before": {
+        "git_blob_sha1": "e635253e2ba030155f088e7750f6b1627f5e91cf",
+        "sha256": "615b37ffa3781dae9739213db43299bfb2025e98b9960f35dc25c5b0325cc216",
+        "bytes": 3809
+      },
+      "after": {
+        "git_blob_sha1": "ef3dbc9797750f242d0ca9475eefdc61cc26835f",
+        "sha256": "49d203bbead58a29117590286d45883a476614afce2fb3f116cc9a6d843f43f1",
+        "bytes": 3713
+      },
+      "source_license": "Apache-2.0",
+      "existing_jni_declarations_unchanged": true,
+      "jni_declaration_count": 1,
+      "preserved_exception_guard_count": 3,
+      "shared_throw_call_sites": 1
+    },
+    {
+      "path": "src/java.base/share/native/libjava/M3RX7.c",
+      "before": {
+        "git_blob_sha1": "5b78633b2c4904506fbb47035eabb54611586b39",
+        "sha256": "441c6de3577b56d15134f8048c1eeaab3baa982517309ca8d3e7fc9c65006d1a",
+        "bytes": 4163
+      },
+      "after": {
+        "git_blob_sha1": "3a97c5b4c596f6c02fe3a82edeeb4413ba42b10a",
+        "sha256": "63f42202be6ce83f72e70854051dffd261125d686ee52ffe6de97540c3957524",
+        "bytes": 4063
+      },
+      "source_license": "GPL-2.0-only WITH Classpath-exception-2.0",
+      "existing_jni_declarations_unchanged": true,
+      "jni_declaration_count": 1,
+      "preserved_exception_guard_count": 0,
+      "shared_throw_call_sites": 1
+    },
+    {
+      "path": "src/java.base/share/native/libjava/M3RegexDpPlan.c",
+      "before": {
+        "git_blob_sha1": "a64bceb4379d14fa668d1b247b8ad12181d0cffd",
+        "sha256": "77f58524b0ae73671b6f33cdf1a5dcc9e546deef7f7350b0df2f661f693f75e7",
+        "bytes": 8971
+      },
+      "after": {
+        "git_blob_sha1": "1503b85e9c2c6c3b0fc1db01f453d628306479f1",
+        "sha256": "943e7921e10ec95bc90cdc1f6dea173b821898749a4e4079fae4710b9785713a",
+        "bytes": 8873
+      },
+      "source_license": "GPL-2.0-only WITH Classpath-exception-2.0",
+      "existing_jni_declarations_unchanged": true,
+      "jni_declaration_count": 3,
+      "preserved_exception_guard_count": 5,
+      "shared_throw_call_sites": 1
+    },
+    {
+      "path": "src/java.base/share/native/libjava/M3StateRelation.c",
+      "before": {
+        "git_blob_sha1": "610ca8bab47065a49b9b58814d6392a287f4fd8b",
+        "sha256": "b1bfd040a1454ac06ab3f96952d97c8c5a6509dcf55dbba9797b6517eea2ef16",
+        "bytes": 5899
+      },
+      "after": {
+        "git_blob_sha1": "fd24b54be45d6679ea1d746487216bc99efccc2f",
+        "sha256": "42ce45bf2d2584b3dd22799389b2fa43971e2355608c744e59eabb039434444c",
+        "bytes": 5788
+      },
+      "source_license": "Apache-2.0",
+      "existing_jni_declarations_unchanged": true,
+      "jni_declaration_count": 2,
+      "preserved_exception_guard_count": 5,
+      "shared_throw_call_sites": 1
+    },
+    {
+      "path": "src/java.base/share/native/libjava/M3StringPool.c",
+      "before": {
+        "git_blob_sha1": "b769b0238e8dbd6c356f53fd0ac67fb4a6f07244",
+        "sha256": "1d1f2de2aa47769d058ef5ca889742f674ef0f40556e282dec5ddf69258ac5ce",
+        "bytes": 4821
+      },
+      "after": {
+        "git_blob_sha1": "04bbcc6105207103e0c988515b2a0cc9ce2f113a",
+        "sha256": "fb7bab27b68ecfbffc8c98743e8ab3dc06abcc61555e777001b376441b747c1d",
+        "bytes": 5193
+      },
+      "source_license": "GPL-2.0-only WITH Classpath-exception-2.0",
+      "existing_jni_declarations_unchanged": true,
+      "jni_declaration_count": 2,
+      "preserved_exception_guard_count": 0,
+      "shared_throw_call_sites": 1
+    },
+    {
+      "path": "src/java.base/share/native/libjava/M3StringRegexDp.c",
+      "before": {
+        "git_blob_sha1": "d9f36a89e95458ac843b32bee8aa34a809909e6b",
+        "sha256": "81440eb281b6401777d02a3ae28787f9d87b12ae10af426a7c78f58a5c9a723c",
+        "bytes": 8429
+      },
+      "after": {
+        "git_blob_sha1": "8cf19d5df7024b3fdaa5a9f3d18a038c4aeaf58f",
+        "sha256": "076e61b8fa19620935f02868ddb8ab5b568ba721fa958ecfa3e1df99db058ed8",
+        "bytes": 8326
+      },
+      "source_license": "GPL-2.0-only WITH Classpath-exception-2.0",
+      "existing_jni_declarations_unchanged": true,
+      "jni_declaration_count": 1,
+      "preserved_exception_guard_count": 2,
+      "shared_throw_call_sites": 1
+    },
+    {
+      "path": "src/java.base/share/native/libjava/m3_jni_util.h",
+      "before": {
+        "state": "ABSENT"
+      },
+      "after": {
+        "git_blob_sha1": "88bf9c35757a6844cdd056ed7cee3dc275bb1dfd",
+        "sha256": "5e3661478ca9e7082e5bea27cfaa5267110793093845c82ca986850a2fb19ac6",
+        "bytes": 1240
+      },
+      "source_license": "GPL-2.0-only WITH Classpath-exception-2.0"
+    }
+  ],
+  "source_ownership": "M3JDK21 integrated runtime owns libjava and installed-image acceptance. Synexia owns reusable recipes and convergence. No Synexia runtime dependency.",
+  "donors": [
+    {
+      "repository": "hsoliwal/M3jdk21",
+      "ref": "d6d76b563050fc13c4fa79bc494edf29f1614b37",
+      "path": "src/java.base/share/native/libjava/M3StringPool.c",
+      "blob": "b769b0238e8dbd6c356f53fd0ac67fb4a6f07244",
+      "role": "Existing target exception atom, validation, ownership and mapping owner",
+      "license": "GPL-2.0-only WITH Classpath-exception-2.0"
+    },
+    {
+      "repository": "hsoliwal/M3jdk21",
+      "ref": "d6d76b563050fc13c4fa79bc494edf29f1614b37",
+      "path": "src/java.base/share/native/libjava/M3RegexDpPlan.c",
+      "blob": "a64bceb4379d14fa668d1b247b8ad12181d0cffd",
+      "role": "Existing target general exception atom; no algorithm changes",
+      "license": "GPL-2.0-only WITH Classpath-exception-2.0"
+    },
+    {
+      "repository": "hsoliwal/M3jdk21",
+      "ref": "d6d76b563050fc13c4fa79bc494edf29f1614b37",
+      "path": "src/hotspot/os/bsd/os_bsd.cpp",
+      "blob": "a2a9a26e8e5cac1a4f676294e3b1a080a6e57af3",
+      "role": "EVIDENCE_ONLY: anon_mmap and pd_attempt_reserve_memory_at provide existing non-fixed hint, exact-address acceptance and cleanup pattern; no C++ body copied.",
+      "license": "Existing OpenJDK GPL-2.0-only file; header rights retained"
+    },
+    {
+      "repository": "hsoliwal/M3jdk21",
+      "ref": "d6d76b563050fc13c4fa79bc494edf29f1614b37",
+      "path": "m3/collections/src/main/native/collections/m3_index_path_masks.c",
+      "blob": "086b49293257fd17cc7fbd1ebbb98460aa677e35",
+      "role": "Existing independently licensed Region selector exception behavior; original source notices retained",
+      "license": "Apache-2.0"
+    }
+  ],
+  "rights": {
+    "decision": "Preserve the GPLv2-with-Classpath target exception atom and all incumbent per-file licenses; no dual license or third-party grant is added.",
+    "new_header": "Use the existing M3Regex target wording plus GPL-2.0-only WITH Classpath-exception-2.0 SPDX identifier and Hitesh Soliwal/contributors copyright. No Oracle designation or authorship is attributed to this new first-party file.",
+    "derivation": "The extracted helper follows existing M3RegexDpPlan.c and M3StringPool.c target-owned GPL-with-Classpath helpers. The BSD mapping donor remains evidence-only; no BSD/HotSpot function body was copied.",
+    "apache_consumers": "Existing Apache collection source retains its exact notices, algorithms and bodies apart from helper calls/includes. The common GPL-with-Classpath header remains separately identified; no Apache source body is pasted or relicensed into libjava.",
+    "distribution_scope": "Integrated packaging retains the separate header and collection source notices plus applicable repository LICENSE, ADDITIONAL_LICENSE_INFO, m3/collections/LICENSE and NOTICE. This source review does not declare a new blanket license for a combined distribution.",
+    "policy_sources": [
+      {
+        "path": "M3-SYNEXIA-RIGHTS.md",
+        "blob": "393b7d72568a0a596d4f254a76e0a4d02a2fb824"
+      },
+      {
+        "path": "M3-SYNEXIA-NOTICE.md",
+        "blob": "cc2db752c41507975cf4e1ab895e786e12082cf7"
+      },
+      {
+        "path": "SYNEXIA_APACHE_BORROWING_POLICY.md",
+        "blob": "6cdf36567c7afbad0cc5bd5f56b5f2884fbd5fc9"
+      },
+      {
+        "path": "ADDITIONAL_LICENSE_INFO",
+        "blob": "ff700cd09f6ea0cc497f68169fd5c210bdaa7c2b"
+      },
+      {
+        "path": "LICENSE",
+        "blob": "8b400c7ab81b7b18baff3f81d597f5e511883134"
+      }
+    ],
+    "review_ref": "d6d76b563050fc13c4fa79bc494edf29f1614b37",
+    "existing_headers_byte_identical": true,
+    "incumbent_apache_target_files": [
+      {
+        "path": "src/java.base/share/native/libjava/M3BitLane28.c",
+        "license": "Apache-2.0",
+        "disposition": "Existing source notice retained; this change does not relicense or resolve historical direct-copy intake status."
+      },
+      {
+        "path": "src/java.base/share/native/libjava/M3StateRelation.c",
+        "license": "Apache-2.0",
+        "disposition": "Existing source notice retained; this change does not relicense or resolve historical direct-copy intake status."
+      }
+    ]
+  },
+  "source_packaging": {
+    "requirement": "Collection source exports/build inputs must retain the integrated repository relative layout and the one shared java.base native header. Copying only a collection C file is insufficient.",
+    "collection_include": "../../../../../../src/java.base/share/native/libjava/m3_jni_util.h",
+    "libjava_include": "m3_jni_util.h",
+    "header_copy_or_mirror": "No second runtime copy is introduced.",
+    "existing_compile_command_changes": 0
+  },
+  "qualification_snapshot": {
+    "receipt_sha256": "2b217adb5ee5ccb33dcedba114c9af21c88b0cb037bcd2312ed7fd77679eeb4e",
+    "host": {
+      "system": "Linux",
+      "machine": "x86_64"
+    },
+    "source_hashes": {
+      "baseline_owner": "1d1f2de2aa47769d058ef5ca889742f674ef0f40556e282dec5ddf69258ac5ce",
+      "candidate_owner": "fb7bab27b68ecfbffc8c98743e8ab3dc06abcc61555e777001b376441b747c1d",
+      "candidate_helper": "3daf7de3b3fb18d8d2f6c5a5409ae9bf33d847fd6ca1604acb46f984e6966b3f"
+    },
+    "status": "PASS",
+    "results": {
+      "baseline-linux": {
+        "checks": 24,
+        "kind": "deterministic-model"
+      },
+      "candidate-linux": {
+        "checks": 24,
+        "kind": "deterministic-model"
+      },
+      "candidate-linux-hint-model": {
+        "checks": 24,
+        "kind": "deterministic-model"
+      },
+      "candidate-apple-model": {
+        "checks": 24,
+        "kind": "deterministic-model"
+      },
+      "linux-before-after-differential": "identical 24-case transcript",
+      "helper-c": {
+        "checks": 3,
+        "kind": "JNI-table-contract-model"
+      },
+      "helper-cpp": {
+        "checks": 3,
+        "kind": "JNI-table-contract-model"
+      },
+      "jvm-linux-baseline": {
+        "checks": 8,
+        "kind": "actual-production-C-real-JVM-and-Linux-mmap",
+        "jni_checking": true
+      },
+      "jvm-linux-candidate": {
+        "checks": 8,
+        "kind": "actual-production-C-real-JVM-and-Linux-mmap",
+        "jni_checking": true
+      }
+    },
+    "command_count": 21,
+    "limitations": [
+      "Apple branch uses Linux host headers and stubbed syscalls; it is not an Apple build or kernel test.",
+      "The no-NOREPLACE branch is a deterministic syscall model, not an old-kernel execution.",
+      "Real JVM execution uses the actual production C mapping owner registered to a test class, not a source-built M3JDK21 image.",
+      "Android/iOS device execution, Windows mapping execution and full integrated runtime qualification are not exercised here."
+    ],
+    "receipt_publication_path": "m3/qualification/common-jni-platform-20261020/native-mapping-candidate-receipt.json",
+    "scope": "Historical pre-portability mapping/helper receipt only, bound to its recorded earlier helper hash. This does not qualify the updated common header; use a newly source-bound all-owner receipt for the current candidate.",
+    "historical": true
+  },
+  "platform_matrix": "PLATFORM_MATRIX.tsv",
+  "current_receiving_phase": "STRING / QUALIFICATION_REQUIRED; no advance",
+  "schema_sources": [
+    {
+      "path": "m3/algorithms/catalogue",
+      "status": "ABSENT_AT_BASELINE",
+      "observation": "Pinned contents API returns 404; m3/algorithms lists only src and test."
+    },
+    {
+      "path": "m3/collections/algorithm-catalog/native-index-range-20261017.tsv",
+      "blob": "46172e8ceef9b6d58329f5d37931f8b559c5295c",
+      "role": "Existing 10-column searchable candidate evaluation schema reused."
+    },
+    {
+      "path": "m3/docs/name-mapping.d/m3-pattern-ascii-frontier.json",
+      "blob": "e412ab17c42fd7875380e657a2643e388d562776",
+      "role": "Existing M3_NAME_MAPPING_FRAGMENT_V1 shape reused."
+    },
+    {
+      "path": "m3/docs/m3jdk21-porting-invariant.md",
+      "blob": "291eec22b13d01baecf2c3acef24c3749e19cc24",
+      "role": "Canonical recipe-first, per-file source, license, proof and ordered phase authority."
+    }
+  ],
+  "external_references": [
+    {
+      "url": "https://developer.apple.com/library/archive/documentation/System/Conceptual/ManPages_iPhoneOS/man2/mmap.2.html",
+      "role": "Archived primary mmap documentation; hint is not guaranteed exact; reference only."
+    },
+    {
+      "url": "https://developer.android.com/ndk/guides/jni-tips",
+      "role": "Primary JNI/thread/class-loader guidance; reference only; does not prove M3JDK21 Android execution."
+    },
+    {
+      "url": "https://developer.android.com/guide/practices/page-sizes",
+      "role": "Primary Android page-size build/run requirements; reference only; modeled page-size inputs are not Android qualification."
+    },
+    {
+      "url": "https://openjdk-mobile.github.io/roadmap/",
+      "role": "Mobile Java runtime work is a separate target; source reference only, no transplanted runtime or support claim."
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/cpp/c-language/c-keywords?view=msvc-170",
+      "role": "Microsoft C inline keyword requires /std:c11 or /std:c17; __inline extension supports default Microsoft C mode. Source portability evidence, not Windows qualification."
+    }
+  ],
+  "review_limits": [
+    "Bounded thirteen-owner, eighteen-site support consolidation preserving twenty-seven JNI declarations; four differing lifetime owners explicitly excluded; not all JNI duplicate removal.",
+    "Apple source branch and model evidence do not establish native Apple or phone support.",
+    "No measured CPU/heap/native memory performance improvement is claimed.",
+    "All challenge-platform records are separately identified existing catalogue taxonomy; no new site code or license is inferred."
+  ],
+  "scope": {
+    "existing_c_owners": 13,
+    "common_header_additions": 1,
+    "jni_declarations_preserved": 27,
+    "shared_throw_call_sites": 18,
+    "excluded_different_lifetime_owners": 4,
+    "not_universal_duplicate_removal": true
+  },
+  "shared_header": {
+    "path": "src/java.base/share/native/libjava/m3_jni_util.h",
+    "function": "static inline void m3_jni_throw_by_name(JNIEnv *env, const char *type, const char *message)",
+    "languages": [
+      "C17",
+      "C++20"
+    ],
+    "ownership": "Existing M3JDK21 java.base native owner; no exported symbol, runtime service, new native family or extra library.",
+    "semantics": "FindClass; when non-null, ThrowNew then DeleteLocalRef. Caller retains exact message, return/sentinel, and pending-exception policy.",
+    "absence_evidence": {
+      "directory": "src/java.base/share/native/libjava",
+      "tree_sha": "0258d0c37938f68cb2f804ac50a255820d14e09a",
+      "observation": "Pinned directory listing contains no m3_jni_util.h."
+    },
+    "c_declaration_portability": "Uses static __inline for _MSC_VER without __cplusplus; static inline otherwise. No global inline macro is introduced."
+  },
+  "mapping_change": {
+    "owner": "src/java.base/share/native/libjava/M3StringPool.c",
+    "linux": "Preserves MAP_SHARED | MAP_FIXED_NOREPLACE when the macro is supplied by Linux headers.",
+    "apple_and_linux_without_macro": "MAP_SHARED requested-address hint; accept exact address only; release alternate mapping and throw existing IOException.",
+    "unmapping": "munmap branch now includes Apple as well as Linux.",
+    "preserved": [
+      "Exact address requirement",
+      "64 KiB address alignment",
+      "Positive address and length",
+      "INT_MAX length bound",
+      "Pointer/size conversion and overflow checks",
+      "Regular file and exact file length checks",
+      "Existing Windows mapping and cleanup",
+      "Existing error messages",
+      "Direct-buffer failure unmaps native allocation"
+    ],
+    "intentional_behavior_extension": "Apple and Linux headers lacking MAP_FIXED_NOREPLACE gain a safe mapping attempt; previous unsupported behavior on these branches is not asserted equivalent.",
+    "destructive_fixed_mapping_used": false
+  },
+  "excluded_incumbents": [
+    {
+      "path": "src/java.base/share/native/libjava/M3ObjectMetrics.c",
+      "identity": {
+        "git_blob_sha1": "1e7505f9d87ea9d8f6c7def62efc293515eeb0bf",
+        "sha256": "ce18bcccd3014f83e899c0d0b878f1b221f654096600c5b2d21bfa95285a7edc",
+        "bytes": 1477
+      },
+      "status": "UNCHANGED_DIFFERENT_LIFETIME_ATOM",
+      "rationale": "Current exception path has no explicit DeleteLocalRef. Replacing it with this shared cleanup atom would change the operation sequence; retain incumbent until separately qualified.",
+      "find_class_occurrences": 2,
+      "delete_local_ref_occurrences": 0
+    },
+    {
+      "path": "m3/collections/src/main/native/collections/m3_long_address_kernel.c",
+      "identity": {
+        "git_blob_sha1": "821876dfb56d836a0ae23e4bc16a391fd7f97ef2",
+        "sha256": "49a3e45262ee764c37746c323ae0def76adfff5f27a4cace6ab7416587ca544f",
+        "bytes": 3458
+      },
+      "status": "UNCHANGED_DIFFERENT_LIFETIME_ATOM",
+      "rationale": "Current exception path has no explicit DeleteLocalRef. Replacing it with this shared cleanup atom would change the operation sequence; retain incumbent until separately qualified.",
+      "find_class_occurrences": 3,
+      "delete_local_ref_occurrences": 0
+    },
+    {
+      "path": "m3/collections/src/main/native/collections/m3_long_rank_batch_jni.c",
+      "identity": {
+        "git_blob_sha1": "f5660370d94503888d31adfb9b6f04796ebc426f",
+        "sha256": "50c741073d6ef0b4efbd4a90c1f336f42945fa3bcd5824455f213f7509a52388",
+        "bytes": 2278
+      },
+      "status": "UNCHANGED_DIFFERENT_LIFETIME_ATOM",
+      "rationale": "Current exception path has no explicit DeleteLocalRef. Replacing it with this shared cleanup atom would change the operation sequence; retain incumbent until separately qualified.",
+      "find_class_occurrences": 2,
+      "delete_local_ref_occurrences": 0
+    },
+    {
+      "path": "m3/collections/src/main/native/collections/m3_signal_order_jni.c",
+      "identity": {
+        "git_blob_sha1": "46b578b94710d804dd4eb198a8c235fb3db92547",
+        "sha256": "e7a5991f5be2e0bad99400ff477a1c03ec9d1d8e1236f9faf366485f94966ed5",
+        "bytes": 3052
+      },
+      "status": "UNCHANGED_DIFFERENT_LIFETIME_ATOM",
+      "rationale": "Current exception path has no explicit DeleteLocalRef. Replacing it with this shared cleanup atom would change the operation sequence; retain incumbent until separately qualified.",
+      "find_class_occurrences": 1,
+      "delete_local_ref_occurrences": 0
+    }
+  ],
+  "source_verification": {
+    "baseline_git_blob_identity": "PASS for all thirteen incumbents against exact pinned checkout; original seven also match the supplied audit snapshot.",
+    "include_resolution": "PASS all thirteen include paths resolve to the same candidate header.",
+    "existing_jni_declarations": "PASS exact source declarations unchanged for all thirteen incumbents.",
+    "native_compile": "NOT_RUN_BY_CANDIDATE_AUTHOR; delegated root/native-tests owner.",
+    "native_runtime": "NOT_RUN_BY_CANDIDATE_AUTHOR; delegated root/native-tests owner.",
+    "recipe_generation": "SOURCE_SEALED_CANONICAL_RECIPE; see receiving commit trailer and canonical SDK execution receipt",
+    "device_platform_qualification": "NOT_RUN",
+    "source_built_installed_M3JDK21": "NOT_RUN",
+    "license_header_review": "PASS new header attributes no Oracle grant; existing thirteen complete leading notice/preprocessor blocks byte-identical; per-file license boundaries retained.",
+    "exception_and_message_preservation": "PASS every incumbent string literal outside include directives and every ExceptionCheck count preserved; existing residency guard retained."
+  },
+  "source_candidate_manifest_sha256": "b0901c64c1adb4a77c66ff5ba8964fef1fa38b83c3c24f1829583a4286fc976a"
+}

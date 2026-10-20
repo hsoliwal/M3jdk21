@@ -5,6 +5,7 @@
  */
 #include <jni.h>
 #include <stdint.h>
+#include "../../../../../../src/java.base/share/native/libjava/m3_jni_util.h"
 
 #define M3_MASK_WINDOW_CHUNK 128
 #define M3_MASK_WINDOW_MAX 4096
@@ -14,11 +15,7 @@ static jlong m3_window_result(jint next, jint written) {
 }
 
 static jlong m3_window_invalid(JNIEnv *env, const char *message) {
-    jclass type = (*env)->FindClass(env, "java/lang/IllegalArgumentException");
-    if (type != NULL) {
-        (*env)->ThrowNew(env, type, message);
-        (*env)->DeleteLocalRef(env, type);
-    }
+    m3_jni_throw_by_name(env, "java/lang/IllegalArgumentException", message);
     return (jlong) -1;
 }
 

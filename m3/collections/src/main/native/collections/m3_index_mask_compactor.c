@@ -5,15 +5,13 @@
  */
 #include <jni.h>
 #include <stddef.h>
+#include "../../../../../../src/java.base/share/native/libjava/m3_jni_util.h"
 
 #define M3_CHUNK 256
 
 static void m3_throw_state_drift(JNIEnv *env) {
-    jclass type = (*env)->FindClass(env, "java/util/ConcurrentModificationException");
-    if (type != NULL) {
-        (*env)->ThrowNew(env, type, "aligned selection states changed");
-        (*env)->DeleteLocalRef(env, type);
-    }
+    m3_jni_throw_by_name(env, "java/util/ConcurrentModificationException",
+            "aligned selection states changed");
 }
 
 /* One core for legacy whole-index and offset windows. All bounds validated by exports.
@@ -75,22 +73,16 @@ Java_com_m3_collections_M3IndexMaskCompactor_selectNative(
         JNIEnv *env, jclass owner, jintArray rows, jbyteArray states, jint required_mask) {
     (void)owner;
     if (rows == NULL || states == NULL || required_mask < 0 || required_mask > 255) {
-        jclass exception = (*env)->FindClass(env, "java/lang/IllegalArgumentException");
-        if (exception != NULL) {
-            (*env)->ThrowNew(env, exception, "invalid primitive selection inputs");
-            (*env)->DeleteLocalRef(env, exception);
-        }
+        m3_jni_throw_by_name(env, "java/lang/IllegalArgumentException",
+                "invalid primitive selection inputs");
         return NULL;
     }
     jsize n = (*env)->GetArrayLength(env, rows);
     if ((*env)->ExceptionCheck(env)) return NULL;
     if ((*env)->GetArrayLength(env, states) != n) {
         if ((*env)->ExceptionCheck(env)) return NULL;
-        jclass exception = (*env)->FindClass(env, "java/lang/IllegalArgumentException");
-        if (exception != NULL) {
-            (*env)->ThrowNew(env, exception, "state/index length mismatch");
-            (*env)->DeleteLocalRef(env, exception);
-        }
+        m3_jni_throw_by_name(env, "java/lang/IllegalArgumentException",
+                "state/index length mismatch");
         return NULL;
     }
     return m3_select_range(env, rows, states, 0, n, required_mask);
@@ -109,11 +101,8 @@ Java_com_m3_collections_M3IndexMaskCompactor_selectRangeNative(
         jint first, jint length, jint required_mask) {
     (void)owner;
     if (rows == NULL || states == NULL || required_mask < 0 || required_mask > 255) {
-        jclass type = (*env)->FindClass(env, "java/lang/IllegalArgumentException");
-        if (type != NULL) {
-            (*env)->ThrowNew(env, type, "invalid primitive selection inputs");
-            (*env)->DeleteLocalRef(env, type);
-        }
+        m3_jni_throw_by_name(env, "java/lang/IllegalArgumentException",
+                "invalid primitive selection inputs");
         return NULL;
     }
     jsize rows_length = (*env)->GetArrayLength(env, rows);
@@ -123,11 +112,8 @@ Java_com_m3_collections_M3IndexMaskCompactor_selectRangeNative(
     /* Subtraction-based bounds keep first+length from overflowing before validation. */
     if (first < 0 || length < 0 || first > rows_length || length > rows_length - first
             || states_length != length) {
-        jclass type = (*env)->FindClass(env, "java/lang/IllegalArgumentException");
-        if (type != NULL) {
-            (*env)->ThrowNew(env, type, "invalid index window or aligned state length");
-            (*env)->DeleteLocalRef(env, type);
-        }
+        m3_jni_throw_by_name(env, "java/lang/IllegalArgumentException",
+                "invalid index window or aligned state length");
         return NULL;
     }
     return m3_select_range(env, rows, states, first, length, required_mask);
@@ -137,11 +123,8 @@ Java_com_m3_collections_M3IndexMaskCompactor_selectRangeNative(
  * Reuse the original chunked mask/compactor ABI and state-drift diagnostic.
  */
 static void m3_bad_window(JNIEnv *env) {
-    jclass type = (*env)->FindClass(env, "java/lang/IllegalArgumentException");
-    if (type != NULL) {
-        (*env)->ThrowNew(env, type, "invalid indexed window or unsigned-byte mask");
-        (*env)->DeleteLocalRef(env, type);
-    }
+    m3_jni_throw_by_name(env, "java/lang/IllegalArgumentException",
+            "invalid indexed window or unsigned-byte mask");
 }
 
 static int m3_window_valid(JNIEnv *env, jarray rows, jbyteArray states,

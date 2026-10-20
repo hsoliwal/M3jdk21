@@ -10,6 +10,7 @@
 #include <jni.h>
 #include <stdint.h>
 #include <stddef.h>
+#include "../../../../../../src/java.base/share/native/libjava/m3_jni_util.h"
 
 #define M3_LONG_PATH_MAX_WINDOW 4096
 
@@ -20,11 +21,7 @@ typedef struct m3_path_shape {
 } m3_path_shape;
 
 static void m3_throw(JNIEnv *env, const char *type, const char *message) {
-    jclass cls = (*env)->FindClass(env, type);
-    if (cls != NULL) {
-        (void)(*env)->ThrowNew(env, cls, message);
-        (*env)->DeleteLocalRef(env, cls);
-    }
+    m3_jni_throw_by_name(env, type, message);
 }
 
 static jlong m3_pack(jint next, jint written) {

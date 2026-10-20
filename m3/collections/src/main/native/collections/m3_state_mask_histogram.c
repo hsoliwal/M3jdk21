@@ -4,16 +4,13 @@
  */
 #include <jni.h>
 #include <stdint.h>
+#include "../../../../../../src/java.base/share/native/libjava/m3_jni_util.h"
 
 #define M3_STATE_COUNT 256
 #define M3_STATE_CHUNK 256
 
 static void m3_invalid(JNIEnv *env, const char *message) {
-    jclass type = (*env)->FindClass(env, "java/lang/IllegalArgumentException");
-    if (type != NULL) {
-        (*env)->ThrowNew(env, type, message);
-        (*env)->DeleteLocalRef(env, type);
-    }
+    m3_jni_throw_by_name(env, "java/lang/IllegalArgumentException", message);
 }
 
 JNIEXPORT void JNICALL
