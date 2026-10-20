@@ -8,13 +8,10 @@
  */
 #include <jni.h>
 #include <stddef.h>
+#include "../../../../../native/include/m3_jni_core.h"
 
 static void m3_throw(JNIEnv *env, const char *type, const char *message) {
-    jclass exception = (*env)->FindClass(env, type);
-    if (exception != NULL) {
-        (void)(*env)->ThrowNew(env, exception, message);
-        (*env)->DeleteLocalRef(env, exception);
-    }
+    m3_jni_throw_new(env, type, message);
 }
 
 /* -1 = pending JNI exception, 0 = rejected, 1 = accepted. */
@@ -49,7 +46,7 @@ static int m3_matches(JNIEnv *env, jobjectArray planes,
         (*env)->GetIntArrayRegion(env, plane, slot, 1, &state);
         (*env)->DeleteLocalRef(env, plane_object);
         if ((*env)->ExceptionCheck(env)) return -1;
-        if ((state & required) != required || (state & forbidden) != 0) return 0;
+        if (!m3_jni_matches_u32(state, required, forbidden)) return 0;
     }
     return 1;
 }

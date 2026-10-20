@@ -3,20 +3,16 @@
 #include <stdint.h>
 #include <stdlib.h>
 #include "m3_arrays.h"
+#include "../../../../native/include/m3_jni_core.h"
 
 #define M3_ARRAY_CHUNK 1024
 
 static void throw_illegal(JNIEnv *env, const char *message) {
-  if ((*env)->ExceptionCheck(env)) return;
-  jclass type = (*env)->FindClass(env, "java/lang/IllegalArgumentException");
-  if (type != NULL) {
-    (void)(*env)->ThrowNew(env, type, message);
-    (*env)->DeleteLocalRef(env, type);
-  }
+  m3_jni_throw_new(env, "java/lang/IllegalArgumentException", message);
 }
 
 static int checked_range(jint start, jint count, jsize length) {
-  return start >= 0 && count >= 0 && (int64_t)start + (int64_t)count <= (int64_t)length;
+  return m3_jni_valid_window(length, start, count);
 }
 
 JNIEXPORT jint JNICALL
