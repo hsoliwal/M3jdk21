@@ -17,6 +17,22 @@ target_include_directories(m3_jni_core INTERFACE
   ${CMAKE_CURRENT_SOURCE_DIR}/include ${M3_JNI_HEADERS})
 target_compile_features(m3_jni_core INTERFACE c_std_11)
 
+# Compile the actual existing SDK JNI owning sources on every supported CMake
+# target, including Android cross-compiles. The generated-header residency owner
+# continues to use its own javac -h / matched JNI integration workflow.
+add_library(m3_jni_existing_owners OBJECT
+  ${CMAKE_CURRENT_SOURCE_DIR}/../arrays/src/main/native/m3_arrays_jni.c
+  ${CMAKE_CURRENT_SOURCE_DIR}/../collections/src/main/native/collections/m3_index_path_masks.c)
+target_link_libraries(m3_jni_existing_owners PRIVATE m3_jni_core)
+target_include_directories(m3_jni_existing_owners PRIVATE
+  ${CMAKE_CURRENT_SOURCE_DIR}/../arrays/src/main/native/include)
+target_compile_features(m3_jni_existing_owners PRIVATE c_std_11)
+if(MSVC)
+  target_compile_options(m3_jni_existing_owners PRIVATE /W4 /WX)
+else()
+  target_compile_options(m3_jni_existing_owners PRIVATE -Wall -Wextra -Werror -Wpedantic)
+endif()
+
 include(CTest)
 if(BUILD_TESTING)
   add_executable(m3_jni_core_contract tests/m3_jni_core_contract.c)
