@@ -636,6 +636,13 @@ public abstract class JComponent extends Container implements Serializable,
         return popupMenu;
     }
 
+    /** The stock JDK 21 value, computed by serialver before any member was added; it keeps serialized components compatible. */
+    @java.io.Serial
+    private static final long serialVersionUID = 4588530037560142483L;
+
+    /** Whether this component and the components below it are out of sight while it still shows ({@link #setPartHidden}). */
+    private transient boolean partHidden;
+
     /**
      * Default <code>JComponent</code> constructor.  This constructor does
      * very little initialization beyond calling the <code>Container</code>
@@ -4778,6 +4785,80 @@ public abstract class JComponent extends Container implements Serializable,
     }
 
     /**
+     * Adds a listener that is told when this component becomes part-visible or stops being so (M3JDK; see
+     * {@link #isPartVisible()}). The first listener starts the tracking. Nothing is sent when a listener is added.
+     *
+     * @param l the listener; null is ignored
+     * @see javax.swing.event.PartVisibilityListener
+     */
+    public void addPartVisibilityListener(javax.swing.event.PartVisibilityListener l) {
+        if (l == null) {
+            return;
+        }
+        listenerList.add(javax.swing.event.PartVisibilityListener.class, l);
+        sun.swing.M3PartVisibility.listenerAdded(this);
+    }
+
+    /**
+     * Removes a listener added with {@link #addPartVisibilityListener}; the last one stops the tracking.
+     *
+     * @param l the listener; null or a listener that was not added is ignored
+     */
+    public void removePartVisibilityListener(javax.swing.event.PartVisibilityListener l) {
+        if (l == null) {
+            return;
+        }
+        listenerList.remove(javax.swing.event.PartVisibilityListener.class, l);
+        if (listenerList.getListenerCount(javax.swing.event.PartVisibilityListener.class) == 0) {
+            sun.swing.M3PartVisibility.listenerRemoved(this);
+        }
+    }
+
+    /**
+     * The part visibility listeners of this component.
+     *
+     * @return the listeners; an empty array when there are none
+     */
+    public javax.swing.event.PartVisibilityListener[] getPartVisibilityListeners() {
+        return listenerList.getListeners(javax.swing.event.PartVisibilityListener.class);
+    }
+
+    /**
+     * Whether this component is visible to the user as part of the screen (M3JDK). It must be showing, it and every
+     * ancestor up to its window must have a non-zero size, no ancestor may be marked part-hidden
+     * ({@link #setPartHidden}), and its window must not be iconified. A component scrolled out of a viewport
+     * still counts as part-visible: scrolling is the viewport's business.
+     *
+     * @return whether this component is part-visible
+     */
+    public boolean isPartVisible() {
+        return sun.swing.M3PartVisibility.isPartVisible(this);
+    }
+
+    /**
+     * Marks this component part-hidden, or clears the mark (M3JDK). A container calls this when its content is out
+     * of sight while the container itself still shows, such as a collapsed collapsible pane. The components below
+     * it then stop being part-visible, and their listeners are told, ancestors first.
+     *
+     * @param hidden whether this component and the components below it are out of sight
+     */
+    public void setPartHidden(boolean hidden) {
+        if (partHidden != hidden) {
+            partHidden = hidden;
+            sun.swing.M3PartVisibility.partHiddenChanged(this);
+        }
+    }
+
+    /**
+     * Whether this component is marked part-hidden ({@link #setPartHidden}).
+     *
+     * @return the mark
+     */
+    public boolean getPartHidden() {
+        return partHidden;
+    }
+
+    /**
      * Returns an array of all the objects currently registered
      * as <code><em>Foo</em>Listener</code>s
      * upon this <code>JComponent</code>.
@@ -5627,6 +5708,10 @@ public abstract class JComponent extends Container implements Serializable,
         }
         setWriteObjCounter(this, (byte)0);
         revalidateRunnableScheduled = new AtomicBoolean(false);
+        if (listenerList != null
+                && listenerList.getListenerCount(javax.swing.event.PartVisibilityListener.class) > 0) {
+            sun.swing.M3PartVisibility.listenerAdded(this);
+        }
     }
 
 

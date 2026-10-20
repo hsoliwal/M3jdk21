@@ -1,0 +1,61 @@
+# Copyright 2026 Hitesh Soliwal and contributors
+# SPDX-License-Identifier: Apache-2.0
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.openrewrite.viewport.M3SwingPartVisibility
+displayName: JComponent tells listeners when it becomes part-visible or stops being so (brief rule 25)
+description: >-
+  M3JDK brief rule 25 (m3/docs/swing-viewport/DESIGN.md section 16), the Swing side of SWT.PartVisible and
+  SWT.PartHidden. Adds javax.swing.event.PartVisibilityListener support to JComponent:
+  add/remove/getPartVisibilityListeners, isPartVisible() and setPartHidden/getPartHidden. The listeners live in
+  listenerList. The first listener installs the tracker sun.swing.M3PartVisibility, and readObject reinstalls it.
+  Additive API: a component without a listener does nothing new. partHidden is transient, and serialVersionUID is
+  pinned to the stock JDK 21 value, so the serialized form stays the stock one. Applied by M3PerFileApply; a second
+  pass must report UNCHANGED.
+recipeList:
+  - com.synexia.openrewrite.viewport.M3AddMemberIfMissing:
+      declaringClasses: [javax.swing.JComponent]
+      memberName: serialVersionUID
+      beforeMethod: JComponent
+      memberSource: "    /** The stock JDK 21 value, computed by serialver before any member was added; it keeps serialized components compatible. */\n    @java.io.Serial\n    private static final long serialVersionUID = 4588530037560142483L;"
+  - com.synexia.openrewrite.viewport.M3AddMemberIfMissing:
+      declaringClasses: [javax.swing.JComponent]
+      memberName: partHidden
+      beforeMethod: JComponent
+      memberSource: "    /** Whether this component and the components below it are out of sight while it still shows ({@link #setPartHidden}). */\n    private transient boolean partHidden;"
+  - com.synexia.openrewrite.viewport.M3AddMemberIfMissing:
+      declaringClasses: [javax.swing.JComponent]
+      memberName: addPartVisibilityListener
+      beforeMethod: getListeners
+      memberSource: "    /**\n     * Adds a listener that is told when this component becomes part-visible or stops being so (M3JDK; see\n     * {@link #isPartVisible()}). The first listener starts the tracking. Nothing is sent when a listener is added.\n     *\n     * @param l the listener; null is ignored\n     * @see javax.swing.event.PartVisibilityListener\n     */\n    public void addPartVisibilityListener(javax.swing.event.PartVisibilityListener l) {\n        if (l == null) {\n            return;\n        }\n        listenerList.add(javax.swing.event.PartVisibilityListener.class, l);\n        sun.swing.M3PartVisibility.listenerAdded(this);\n    }"
+  - com.synexia.openrewrite.viewport.M3AddMemberIfMissing:
+      declaringClasses: [javax.swing.JComponent]
+      memberName: removePartVisibilityListener
+      beforeMethod: getListeners
+      memberSource: "    /**\n     * Removes a listener added with {@link #addPartVisibilityListener}; the last one stops the tracking.\n     *\n     * @param l the listener; null or a listener that was not added is ignored\n     */\n    public void removePartVisibilityListener(javax.swing.event.PartVisibilityListener l) {\n        if (l == null) {\n            return;\n        }\n        listenerList.remove(javax.swing.event.PartVisibilityListener.class, l);\n        if (listenerList.getListenerCount(javax.swing.event.PartVisibilityListener.class) == 0) {\n            sun.swing.M3PartVisibility.listenerRemoved(this);\n        }\n    }"
+  - com.synexia.openrewrite.viewport.M3AddMemberIfMissing:
+      declaringClasses: [javax.swing.JComponent]
+      memberName: getPartVisibilityListeners
+      beforeMethod: getListeners
+      memberSource: "    /**\n     * The part visibility listeners of this component.\n     *\n     * @return the listeners; an empty array when there are none\n     */\n    public javax.swing.event.PartVisibilityListener[] getPartVisibilityListeners() {\n        return listenerList.getListeners(javax.swing.event.PartVisibilityListener.class);\n    }"
+  - com.synexia.openrewrite.viewport.M3AddMemberIfMissing:
+      declaringClasses: [javax.swing.JComponent]
+      memberName: isPartVisible
+      beforeMethod: getListeners
+      memberSource: "    /**\n     * Whether this component is visible to the user as part of the screen (M3JDK). It must be showing, it and every\n     * ancestor up to its window must have a non-zero size, no ancestor may be marked part-hidden\n     * ({@link #setPartHidden}), and its window must not be iconified. A component scrolled out of a viewport\n     * still counts as part-visible: scrolling is the viewport's business.\n     *\n     * @return whether this component is part-visible\n     */\n    public boolean isPartVisible() {\n        return sun.swing.M3PartVisibility.isPartVisible(this);\n    }"
+  - com.synexia.openrewrite.viewport.M3AddMemberIfMissing:
+      declaringClasses: [javax.swing.JComponent]
+      memberName: setPartHidden
+      beforeMethod: getListeners
+      memberSource: "    /**\n     * Marks this component part-hidden, or clears the mark (M3JDK). A container calls this when its content is out\n     * of sight while the container itself still shows, such as a collapsed collapsible pane. The components below\n     * it then stop being part-visible, and their listeners are told, ancestors first.\n     *\n     * @param hidden whether this component and the components below it are out of sight\n     */\n    public void setPartHidden(boolean hidden) {\n        if (partHidden != hidden) {\n            partHidden = hidden;\n            sun.swing.M3PartVisibility.partHiddenChanged(this);\n        }\n    }"
+  - com.synexia.openrewrite.viewport.M3AddMemberIfMissing:
+      declaringClasses: [javax.swing.JComponent]
+      memberName: getPartHidden
+      beforeMethod: getListeners
+      memberSource: "    /**\n     * Whether this component is marked part-hidden ({@link #setPartHidden}).\n     *\n     * @return the mark\n     */\n    public boolean getPartHidden() {\n        return partHidden;\n    }"
+  - com.synexia.openrewrite.viewport.M3InsertStatements:
+      declaringClasses: [javax.swing.JComponent]
+      methodName: readObject
+      parameterCount: 1
+      position: METHOD_END
+      statements: "        if (listenerList != null\n                && listenerList.getListenerCount(javax.swing.event.PartVisibilityListener.class) > 0) {\n            sun.swing.M3PartVisibility.listenerAdded(this);\n        }"
