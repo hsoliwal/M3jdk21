@@ -5,6 +5,7 @@ on:
     paths:
       - 'm3/eclipse/framework/**'
       - 'm3/collections/src/main/java/**'
+      - 'm3/recipes/runtime-convergence-20261020/**'
       - 'm3/tooling/migration-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java'
       - '.github/workflows/m3-eclipse-framework-forward-20261017.yml'
   workflow_dispatch:
@@ -22,12 +23,13 @@ jobs:
             m3/eclipse/framework
             m3/collections
             m3/tooling/migration-recipes
+            m3/recipes/runtime-convergence-20261020
       - uses: actions/setup-java@v4
         with:
           distribution: temurin
           java-version: '21'
           cache: maven
-      - name: Bind five exact recipe-generated candidate postimages
+      - name: Bind the complete current Java inventory to successor source seals
         shell: bash
         run: |
           set -euxo pipefail
@@ -37,20 +39,36 @@ jobs:
           from pathlib import Path
           import hashlib
           import subprocess
-          root = Path('m3/eclipse/framework/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-java/eclipse-framework-m3-index-forward')
-          rows = [r.split('\t') for r in (root/'manifest.tsv').read_text().splitlines() if r and not r.startswith('#')]
-          assert len(rows) == 8
-          assert [r[0] for r in rows] == sorted(r[0] for r in rows)
-          tracked = set(subprocess.check_output(['git', 'ls-files', 'm3/eclipse/framework/src'], text=True).splitlines())
-          assert tracked == {r[0] for r in rows}, tracked ^ {r[0] for r in rows}
-          for path, before, wanted, source in rows:
-              assert before == 'ABSENT'
-              for p in (Path(path),root/source):
-                  assert p.is_file() and not p.is_symlink(), p
-                  got = hashlib.sha256(p.read_bytes()).hexdigest()
-                  assert got == wanted, (p,got,wanted)
-          print('EXACT_EIGHT_JAVA_POSTIMAGES')
+          base = Path('m3/recipes/runtime-convergence-20261020/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-runtime-convergence-20261020')
+          seal = Path('m3/eclipse/framework/qualification/runtime-convergence-20261020/SOURCE_SEALS.tsv')
+          manifest = [s.split('\t') for s in (base / 'manifest.tsv').read_text().splitlines() if s and not s.startswith('#')]
+          bindings = [r for r in manifest if r[0] == seal.as_posix()]
+          assert len(bindings) == 1 and len(bindings[0]) == 4, bindings
+          _, _, digest, template = bindings[0]
+          for candidate in (seal, base / template):
+              assert candidate.is_file() and not candidate.is_symlink(), candidate
+              assert hashlib.sha256(candidate.read_bytes()).hexdigest() == digest, candidate
+          rows = [s.split('\t') for s in seal.read_text().splitlines() if s and not s.startswith('#')]
+          assert len(rows) == 10
+          assert all(len(r) == 2 for r in rows)
+          paths = [r[0] for r in rows]
+          assert paths == sorted(set(paths)), paths
+          tracked = {p for p in subprocess.check_output(['git', 'ls-files', 'm3/eclipse/framework/src'], text=True).splitlines() if p.endswith('.java')}
+          present = {p.as_posix() for p in Path('m3/eclipse/framework/src').rglob('*.java')}
+          assert tracked == present == set(paths), (tracked ^ set(paths), present ^ set(paths))
+          for relative, digest in rows:
+              candidate = Path(relative)
+              assert candidate.is_file() and not candidate.is_symlink(), candidate
+              assert hashlib.sha256(candidate.read_bytes()).hexdigest() == digest, candidate
+          Path('proof/source-seals.tsv').write_bytes(seal.read_bytes())
+          print('EXACT_CURRENT_FRAMEWORK_JAVA_INVENTORY', len(rows))
           PY
+      - name: Execute canonical successor SDK application, refusal and fixed-point tests
+        run: |
+          set -euxo pipefail
+          mvn -B -ntp -f m3/recipes/runtime-convergence-20261020/pom.xml \
+            -Drecipe.owner.root="$GITHUB_WORKSPACE/m3/recipes/runtime-convergence-20261020/sdk-owner" \
+            -Dm3.recipe.name=com.synexia.m3jdk.RuntimeConvergence20261020 test 2>&1 | tee proof/successor-recipe.txt
       - name: Execute canonical source-sealed OpenRewrite recipe tests
         run: |
           set -euxo pipefail
@@ -79,7 +97,7 @@ jobs:
           assert reports, 'no JUnit reports'
           roots=[E.parse(p).getroot() for p in reports]
           n={k:sum(int(v.attrib.get(k,0)) for v in roots) for k in ('tests','errors','failures','skipped')}
-          assert n=={'tests':6,'errors':0,'failures':0,'skipped':0},n
+          assert n=={'tests':21,'errors':0,'failures':0,'skipped':0},n
           print('ECLIPSE_API_OSGI_SERVICE_JUNIT_TESTS',n)
           PY
           unzip -p m3/eclipse/framework/target/m3-eclipse-framework-forward-0.1.0-SNAPSHOT.jar META-INF/MANIFEST.MF > proof/eclipse-bundle-manifest.txt
@@ -95,5 +113,7 @@ jobs:
           retention-days: 30
           path: |
             proof/
+            m3/recipes/runtime-convergence-20261020/target/surefire-reports/
+            m3/eclipse/framework/qualification/runtime-convergence-20261020/SOURCE_SEALS.tsv
             m3/eclipse/framework/recipe/target/surefire-reports/
             m3/eclipse/framework/target/surefire-reports/

@@ -1,0 +1,48 @@
+--- before/m3/collections/src/main/java/com/m3/collections/M3FilteredLists.java
++++ after/m3/collections/src/main/java/com/m3/collections/M3FilteredLists.java
+@@ -370,9 +370,29 @@
+             @Override public int nextIndex() { live(); return logical; }
+             @Override public int previousIndex() { live(); return logical - 1; }
+ 
++            /** Validate the original cursor without changing its physical position.
++             * Keep writes on the backing List: a writable list may expose an
++             * unmodifiable/snapshot iterator. next() also checks an exhausted
++             * fail-fast cursor; hasNext() alone need not detect invalidation.
++             */
++            private void checkForComodification() {
++                try {
++                    try {
++                        iterator.next();
++                    } catch (NoSuchElementException exhausted) {
++                        return;
++                    }
++                    iterator.previous();
++                } catch (RuntimeException | Error failure) {
++                    failed = true;
++                    throw failure;
++                }
++            }
++
+             @Override public void remove() {
+                 live();
+                 if (lastPhysical < 0) throw new IllegalStateException("remove without delivered element");
++                checkForComodification();
+                 int target = lastPhysical;
+                 int position = iterator.nextIndex();
+                 backing.remove(target);
+@@ -388,6 +408,7 @@
+                 live();
+                 if (lastPhysical < 0) throw new IllegalStateException("set without delivered element");
+                 requireAccepted(value);
++                checkForComodification();
+                 backing.set(lastPhysical, value);
+                 discardProbes();
+             }
+@@ -395,6 +416,7 @@
+             @Override public void add(E value) {
+                 live();
+                 requireAccepted(value);
++                checkForComodification();
+                 int position = iterator.nextIndex();
+                 backing.add(position, value);
+                 iterator = backing.listIterator(position + 1);

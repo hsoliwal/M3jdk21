@@ -1,0 +1,270 @@
+{
+  "receiving_repository": "hsoliwal/M3jdk21",
+  "receiving_base": "d6d76b563050fc13c4fa79bc494edf29f1614b37",
+  "status": "ACTUAL_SDK_EXECUTION_5_TESTS_PASS",
+  "target_count": 29,
+  "files": [
+    {
+      "target": ".github/workflows/m3-eclipse-framework-forward-20261017.yml",
+      "lane": "text",
+      "before_sha256": "f99b655ed4ab286724723ee855fc497b7a63287ab9e8bf79adf3b2389077f77d",
+      "after_sha256": "562ec9a61f5543e9d908da8fcde03fe218f8bd06be1bdbd83ef3deba807dcc63",
+      "origin": "first-party reviewed current-owner successor",
+      "authoring_candidate": "work-build-20261020/candidate/.github/workflows/m3-eclipse-framework-forward-20261017.yml",
+      "resource": "src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-runtime-convergence-20261020/001-m3-eclipse-framework-forward-20261017.yml.txt"
+    },
+    {
+      "target": ".github/workflows/m3-eclipse-progress-forward-20261017.yml",
+      "lane": "text",
+      "before_sha256": "1c30570c638691d8bff8f605de4a017ae7743f5e7787c2c5cc77670a666ebd36",
+      "after_sha256": "9c9d7d284498de1dcaf30d1ddaf64315fd663cbf48d4db7648f7ef3ff0ef1674",
+      "origin": "first-party reviewed current-owner successor",
+      "authoring_candidate": "work-build-20261020/candidate/.github/workflows/m3-eclipse-progress-forward-20261017.yml",
+      "resource": "src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-runtime-convergence-20261020/002-m3-eclipse-progress-forward-20261017.yml.txt"
+    },
+    {
+      "target": ".github/workflows/m3-runtime-convergence-20261020.yml",
+      "lane": "text",
+      "before_sha256": "ABSENT",
+      "after_sha256": "4e14a4991396d6bbf45513b63bc848edf4d138578143e3d82f2be1094548e549",
+      "origin": "first-party combined received-source qualification workflow",
+      "authoring_candidate": "work-build-20261020/candidate/.github/workflows/m3-runtime-convergence-20261020.yml",
+      "resource": "src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-runtime-convergence-20261020/003-m3-runtime-convergence-20261020.yml.txt"
+    },
+    {
+      "target": "m3/collections/qualification/full-java-jni-20261018/verify.py",
+      "lane": "text",
+      "before_sha256": "f6a76836d96bc6d41033ce94b0aa760fd5f68ebcb903396bb5f6eb1618d0931a",
+      "after_sha256": "e3b10822b0f0456dc7c3f4d4f34a65c68fc2915bd9bd3eab1db2b4aa7ca65c45",
+      "origin": "existing source-JUnit and owning Java/JNI qualification successor; native work probe is pinned donor reuse",
+      "authoring_candidate": "work-qualification-20261020/candidate/m3/collections/qualification/full-java-jni-20261018/verify.py",
+      "resource": "src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-runtime-convergence-20261020/004-verify.py.txt"
+    },
+    {
+      "target": "m3/collections/src/main/java/com/m3/collections/M3FilteredLists.java",
+      "lane": "java",
+      "before_sha256": "032bffd456e67c7568b028489ceec85f24510469b3a0e00571ab36cd17ae3b75",
+      "after_sha256": "da74a8a45e475034d40a630367eb8139b8e3c12cd69f1d4adbaa251f2b4660ba",
+      "origin": "hsoliwal/M3jdk21@0122f7cf73b3b2a10429806c3e4beadc4caf0792:m3/collections/src/main/java/com/m3/collections/M3FilteredLists.java",
+      "authoring_candidate": "work-collections-20261020/candidate/src/main/java/com/m3/collections/M3FilteredLists.java",
+      "resource": "src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-runtime-convergence-20261020/001-M3FilteredLists.java.txt"
+    },
+    {
+      "target": "m3/collections/src/main/java/com/m3/collections/M3FilteredNavigableSet.java",
+      "lane": "java",
+      "before_sha256": "d13c5c5db3e07e5c66f8857f2c74e07d2ba60babb7d2529bd397e61894881fd0",
+      "after_sha256": "a9b51ed9c0859ef27d308ea89e1b41cf3283dfd54478a36b1d89d6ab66711b0c",
+      "origin": "hsoliwal/M3jdk21@987f743658055252bdaf056610a3a903eba0bfee:m3/collections/src/main/java/com/m3/collections/M3FilteredNavigableSet.java",
+      "authoring_candidate": "work-collections-20261020/candidate/src/main/java/com/m3/collections/M3FilteredNavigableSet.java",
+      "resource": "src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-runtime-convergence-20261020/002-M3FilteredNavigableSet.java.txt"
+    },
+    {
+      "target": "m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java",
+      "lane": "java",
+      "before_sha256": "8419315c3058bce6add897b7ffa7c6763bbb6b85418bb35e190ba8a4d2dd70c4",
+      "after_sha256": "dce9da78508449041db8907ef7bc44e9fcee1117bbe91db880e35c26933f9470",
+      "origin": "hsoliwal/M3jdk21@987f743658055252bdaf056610a3a903eba0bfee:m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java",
+      "authoring_candidate": "work-collections-20261020/candidate/src/main/java/com/m3/collections/M3FilteredViews.java",
+      "resource": "src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-runtime-convergence-20261020/003-M3FilteredViews.java.txt"
+    },
+    {
+      "target": "m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java",
+      "lane": "java",
+      "before_sha256": "ed76ad01f7b89f064846d0dc35a1a705f461abe17772694c1be8223dbed2156c",
+      "after_sha256": "13cf1e5c20a184869de3044f83cbb87e9f5e0e1ac60eaf28d01623be544fd924",
+      "origin": "hsoliwal/M3jdk21@0122f7cf73b3b2a10429806c3e4beadc4caf0792:m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java",
+      "authoring_candidate": "work-collections-20261020/candidate/src/main/java/com/m3/collections/M3IndexMaskCompactor.java",
+      "resource": "src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-runtime-convergence-20261020/004-M3IndexMaskCompactor.java.txt"
+    },
+    {
+      "target": "m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java",
+      "lane": "java",
+      "before_sha256": "77ef7d6197ef936f5ae9f62c35accf2f5f3ff690dcc55ca3fd4d8f545a007545",
+      "after_sha256": "a29b0bc589565924611538c6fabe15a70d3629bc4eb3db0977d19f411ef4eb4e",
+      "origin": "hsoliwal/M3jdk21@0122f7cf73b3b2a10429806c3e4beadc4caf0792:m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java",
+      "authoring_candidate": "work-collections-20261020/candidate/src/main/java/com/m3/collections/M3LongIndexProjection.java",
+      "resource": "src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-runtime-convergence-20261020/005-M3LongIndexProjection.java.txt"
+    },
+    {
+      "target": "m3/collections/src/main/native/collections/m3_index_mask_compactor.c",
+      "lane": "text",
+      "before_sha256": "d1c300832aa9bf44cd7b7199cff593beb2a9464fbb52c9c8448da7773eaf0aef",
+      "after_sha256": "e7708773958746254defdfc1a77fa7946089a9623781a356c211a36c3be32026",
+      "origin": "hsoliwal/M3jdk21@0122f7cf73b3b2a10429806c3e4beadc4caf0792:m3/collections/src/main/native/collections/m3_index_mask_compactor.c",
+      "authoring_candidate": "work-collections-20261020/candidate/src/main/native/collections/m3_index_mask_compactor.c",
+      "resource": "src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-runtime-convergence-20261020/005-m3_index_mask_compactor.c.txt"
+    },
+    {
+      "target": "m3/collections/src/test/java/com/m3/collections/M3FilteredEndpointRestorationContract.java",
+      "lane": "java",
+      "before_sha256": "ABSENT",
+      "after_sha256": "a1cf85feec6621af519dc03d86389945527f7c6544947a28ce49ac2328db8773",
+      "origin": "hsoliwal/M3jdk21@987f743658055252bdaf056610a3a903eba0bfee:m3/collections/src/test/java/com/m3/collections/M3FilteredEndpointRestorationContract.java",
+      "authoring_candidate": "work-collections-20261020/candidate/src/test/java/com/m3/collections/M3FilteredEndpointRestorationContract.java",
+      "resource": "src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-runtime-convergence-20261020/006-M3FilteredEndpointRestorationContract.java.txt"
+    },
+    {
+      "target": "m3/collections/src/test/java/com/m3/collections/M3FilteredEndpointRestorationTest.java",
+      "lane": "java",
+      "before_sha256": "ABSENT",
+      "after_sha256": "294b4a465a3189f8115210b626a9a44dcb19e53f6e73ddf98395bdc13a11a488",
+      "origin": "hsoliwal/M3jdk21@987f743658055252bdaf056610a3a903eba0bfee:m3/collections/src/test/java/com/m3/collections/M3FilteredEndpointRestorationTest.java",
+      "authoring_candidate": "work-collections-20261020/candidate/src/test/java/com/m3/collections/M3FilteredEndpointRestorationTest.java",
+      "resource": "src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-runtime-convergence-20261020/007-M3FilteredEndpointRestorationTest.java.txt"
+    },
+    {
+      "target": "m3/collections/src/test/java/com/m3/collections/M3FilteredListMutationProof.java",
+      "lane": "java",
+      "before_sha256": "ABSENT",
+      "after_sha256": "2647764e90666b193426f3985026f25d8fe76e1114239ae6dd52a0036f5f4292",
+      "origin": "hsoliwal/M3jdk21@0122f7cf73b3b2a10429806c3e4beadc4caf0792:m3/collections/src/test/java/com/m3/collections/M3FilteredListMutationProof.java",
+      "authoring_candidate": "work-collections-20261020/candidate/src/test/java/com/m3/collections/M3FilteredListMutationProof.java",
+      "resource": "src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-runtime-convergence-20261020/008-M3FilteredListMutationProof.java.txt"
+    },
+    {
+      "target": "m3/collections/src/test/java/com/m3/collections/M3FilteredListMutationTest.java",
+      "lane": "java",
+      "before_sha256": "ABSENT",
+      "after_sha256": "ebd9ee4a1cc4f9b602bc7bffd2e2654d3e95a0d3ec10f4ba7b1f24710d6c1207",
+      "origin": "hsoliwal/M3jdk21@0122f7cf73b3b2a10429806c3e4beadc4caf0792:m3/collections/src/test/java/com/m3/collections/M3FilteredListMutationTest.java",
+      "authoring_candidate": "work-collections-20261020/candidate/src/test/java/com/m3/collections/M3FilteredListMutationTest.java",
+      "resource": "src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-runtime-convergence-20261020/009-M3FilteredListMutationTest.java.txt"
+    },
+    {
+      "target": "m3/collections/src/test/java/com/m3/collections/M3FilteredListProviderInvalidationTest.java",
+      "lane": "java",
+      "before_sha256": "ABSENT",
+      "after_sha256": "56262d7641029fedd19553cd67d3b62b0c2c9ddc8cd5909cb44dcd74588bb70a",
+      "origin": "first-party regression for independently reproduced raw-provider invalidation",
+      "authoring_candidate": "work-collections-20261020/candidate/src/test/java/com/m3/collections/M3FilteredListProviderInvalidationTest.java",
+      "resource": "src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-runtime-convergence-20261020/010-M3FilteredListProviderInvalidationTest.java.txt"
+    },
+    {
+      "target": "m3/collections/src/test/java/com/m3/collections/M3IndexOrderWindowContract.java",
+      "lane": "java",
+      "before_sha256": "ABSENT",
+      "after_sha256": "7c1c055ec9a58a9c807fc05be3ec4a83b0a411729f41c259e3180d1e45262b94",
+      "origin": "hsoliwal/M3jdk21@0122f7cf73b3b2a10429806c3e4beadc4caf0792:m3/collections/src/test/java/com/m3/collections/M3IndexOrderWindowContract.java",
+      "authoring_candidate": "work-collections-20261020/candidate/src/test/java/com/m3/collections/M3IndexOrderWindowContract.java",
+      "resource": "src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-runtime-convergence-20261020/011-M3IndexOrderWindowContract.java.txt"
+    },
+    {
+      "target": "m3/collections/src/test/java/com/m3/collections/M3IndexOrderWindowTest.java",
+      "lane": "java",
+      "before_sha256": "ABSENT",
+      "after_sha256": "69af2677ee57c22da762b275c7b16d6718877159b340a949cc6b5a2d0c2158f8",
+      "origin": "hsoliwal/M3jdk21@0122f7cf73b3b2a10429806c3e4beadc4caf0792:m3/collections/src/test/java/com/m3/collections/M3IndexOrderWindowTest.java",
+      "authoring_candidate": "work-collections-20261020/candidate/src/test/java/com/m3/collections/M3IndexOrderWindowTest.java",
+      "resource": "src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-runtime-convergence-20261020/012-M3IndexOrderWindowTest.java.txt"
+    },
+    {
+      "target": "m3/collections/src/test/java/com/m3/collections/M3MaskWindowCurrentProof.java",
+      "lane": "java",
+      "before_sha256": "ABSENT",
+      "after_sha256": "f1249302fac441f9cf092fbe6052443d54ee3f60ddfff7178fae25b5529bcff3",
+      "origin": "hsoliwal/M3jdk21@0122f7cf73b3b2a10429806c3e4beadc4caf0792:m3/collections/src/test/java/com/m3/collections/M3MaskWindowCurrentProof.java",
+      "authoring_candidate": "work-collections-20261020/candidate/src/test/java/com/m3/collections/M3MaskWindowCurrentProof.java",
+      "resource": "src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-runtime-convergence-20261020/013-M3MaskWindowCurrentProof.java.txt"
+    },
+    {
+      "target": "m3/collections/src/test/native/m3_mask_compactor_work.c",
+      "lane": "text",
+      "before_sha256": "ABSENT",
+      "after_sha256": "a508d1cfe2050bce7b5669726c03fddc4aa80d8e328046082cef8a4956d96186",
+      "origin": "existing source-JUnit and owning Java/JNI qualification successor; native work probe is pinned donor reuse",
+      "authoring_candidate": "work-qualification-20261020/candidate/m3/collections/src/test/native/m3_mask_compactor_work.c",
+      "resource": "src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-runtime-convergence-20261020/006-m3_mask_compactor_work.c.txt"
+    },
+    {
+      "target": "m3/eclipse/core-runtime/qualification/runtime-convergence-20261020/SOURCE_SEALS.tsv",
+      "lane": "text",
+      "before_sha256": "ABSENT",
+      "after_sha256": "026f9b9fce9907911e67f0ae24788aeb08153fd6b68c3ab60b264f1016f38fc6",
+      "origin": "first-party reviewed current-owner successor",
+      "authoring_candidate": "work-build-20261020/candidate/m3/eclipse/core-runtime/qualification/runtime-convergence-20261020/SOURCE_SEALS.tsv",
+      "resource": "src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-runtime-convergence-20261020/007-SOURCE_SEALS.tsv.txt"
+    },
+    {
+      "target": "m3/eclipse/core-runtime/src/main/java/com/m3/eclipse/runtime/M3EclipseProgressMonitor.java",
+      "lane": "java",
+      "before_sha256": "10a41822af6ee4a71335fb2ab4e6395dd6be8c076fe8931c0e6b1391c9cef8bd",
+      "after_sha256": "1db0b3c74b273149cd4642b3dfd722c43db9da3a9075cb7e6e62766381dfa0b3",
+      "origin": "first-party reviewed current-owner successor",
+      "authoring_candidate": "work-progress-20261020/candidate/m3/eclipse/core-runtime/src/main/java/com/m3/eclipse/runtime/M3EclipseProgressMonitor.java",
+      "resource": "src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-runtime-convergence-20261020/014-M3EclipseProgressMonitor.java.txt"
+    },
+    {
+      "target": "m3/eclipse/core-runtime/src/test/java/com/m3/eclipse/runtime/M3EclipseProgressMonitorTest.java",
+      "lane": "java",
+      "before_sha256": "480c640c1090373c02f5fef8aac78284f0b93c1911573df468b6c9640eb90e65",
+      "after_sha256": "432989cda03507051f751d314f87b0a7181a82b0927398cf3d0804bf3fc6e94e",
+      "origin": "first-party reviewed current-owner successor",
+      "authoring_candidate": "work-progress-20261020/candidate/m3/eclipse/core-runtime/src/test/java/com/m3/eclipse/runtime/M3EclipseProgressMonitorTest.java",
+      "resource": "src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-runtime-convergence-20261020/015-M3EclipseProgressMonitorTest.java.txt"
+    },
+    {
+      "target": "m3/eclipse/framework/pom.xml",
+      "lane": "text",
+      "before_sha256": "6dea6636a98ea1e2a12e3c7ab542a3bd16e19a015a08e8a2239f9bf87e034f91",
+      "after_sha256": "d02843e827b0c0b4c98278d2dc4018f066565c8c20d66dc3f58d617f65e2c795",
+      "origin": "first-party reviewed current-owner successor",
+      "authoring_candidate": "work-build-20261020/candidate/m3/eclipse/framework/pom.xml",
+      "resource": "src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-runtime-convergence-20261020/008-pom.xml.txt"
+    },
+    {
+      "target": "m3/eclipse/framework/qualification/runtime-convergence-20261020/SOURCE_SEALS.tsv",
+      "lane": "text",
+      "before_sha256": "ABSENT",
+      "after_sha256": "c854ebd035511bb7988a8609287d34aec1e9e0194ef81ac5af8f6001581a6bea",
+      "origin": "first-party reviewed current-owner successor",
+      "authoring_candidate": "work-build-20261020/candidate/m3/eclipse/framework/qualification/runtime-convergence-20261020/SOURCE_SEALS.tsv",
+      "resource": "src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-runtime-convergence-20261020/009-SOURCE_SEALS.tsv.txt"
+    },
+    {
+      "target": "m3/eclipse/framework/src/main/java/com/m3/eclipse/framework/M3EclipseRuntimeActivator.java",
+      "lane": "java",
+      "before_sha256": "f2ad7045a07c6905d2f540e9863851fc7ae95b04d867a11f8e4927c13f0a71c4",
+      "after_sha256": "1c9b9dd3132e06ccb16c8a4a5e976517581d373581bc3c112b58e5f9bed5fbef",
+      "origin": "first-party reviewed Eclipse service lifetime successor",
+      "authoring_candidate": "work-framework-20261020/payloads/M3EclipseRuntimeActivator.java.txt",
+      "resource": "src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-runtime-convergence-20261020/016-M3EclipseRuntimeActivator.java.txt"
+    },
+    {
+      "target": "m3/eclipse/framework/src/test/java/com/m3/eclipse/framework/M3EclipseEquinoxLifecycleTest.java",
+      "lane": "java",
+      "before_sha256": "ABSENT",
+      "after_sha256": "a1979168639d7e87d96f63b92d8a741f92449090d10b27cbb0b9785a8595a5ef",
+      "origin": "first-party reviewed Eclipse service lifetime successor",
+      "authoring_candidate": "work-framework-20261020/payloads/M3EclipseEquinoxLifecycleTest.java.txt",
+      "resource": "src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-runtime-convergence-20261020/017-M3EclipseEquinoxLifecycleTest.java.txt"
+    },
+    {
+      "target": "m3/eclipse/framework/src/test/java/com/m3/eclipse/framework/M3EclipseRuntimeActivatorTest.java",
+      "lane": "java",
+      "before_sha256": "e7026e6b0b56aa71aa6a0e617a29ccf8df603d3656ed6ae6966c9662d3b6167d",
+      "after_sha256": "dec1b59d74df3b42663a6d381cee0e0f8aeb4fc1ec0c5a3b261739f6402381eb",
+      "origin": "first-party reviewed Eclipse service lifetime successor",
+      "authoring_candidate": "work-framework-20261020/payloads/M3EclipseRuntimeActivatorTest.java.txt",
+      "resource": "src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-runtime-convergence-20261020/018-M3EclipseRuntimeActivatorTest.java.txt"
+    },
+    {
+      "target": "m3/vendor/third_party/junit-platform-launcher-1.10.2/verify_source.py",
+      "lane": "text",
+      "before_sha256": "7ecd6418dcd4097ca23b3382c4d87d18ed2a02bc8df2a503421c23793fcfd10b",
+      "after_sha256": "3974d7494a50fc10a419e8fc5780b97934c00417a5f3eb5d6b42763be4b3a2d5",
+      "origin": "existing source-JUnit and owning Java/JNI qualification successor; native work probe is pinned donor reuse",
+      "authoring_candidate": "work-qualification-20261020/candidate/m3/vendor/third_party/junit-platform-launcher-1.10.2/verify_source.py",
+      "resource": "src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-runtime-convergence-20261020/010-verify_source.py.txt"
+    },
+    {
+      "target": "test/jdk/java/util/ArrayList/M3MaskThresholdContracts.java",
+      "lane": "java",
+      "before_sha256": "ABSENT",
+      "after_sha256": "5186dff4ded7eb6167e903be67c0ef724c978a4548b3a7a6a5d9fa3b50730331",
+      "origin": "first-party independent oracle; production proposal REJECT_COST_GATE",
+      "authoring_candidate": "work-java-base-20261020/payloads/M3MaskThresholdContracts.java.txt",
+      "resource": "src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-runtime-convergence-20261020/019-M3MaskThresholdContracts.java.txt"
+    }
+  ],
+  "receiving_git_parent": "73f59218dc4ef1a3ef79aad990e77273db2a2d60"
+}

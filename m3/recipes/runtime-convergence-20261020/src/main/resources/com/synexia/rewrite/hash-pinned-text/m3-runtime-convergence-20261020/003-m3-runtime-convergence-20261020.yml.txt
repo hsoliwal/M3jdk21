@@ -1,0 +1,124 @@
+name: M3 runtime convergence Java, JNI and Eclipse qualification
+on:
+  pull_request:
+    branches: [master]
+    paths:
+      - 'm3/recipes/runtime-convergence-20261020/**'
+      - 'm3/collections/**'
+      - 'm3/eclipse/core-runtime/**'
+      - 'm3/eclipse/framework/**'
+      - 'm3/vendor/third_party/apiguardian-api/**'
+      - 'm3/vendor/third_party/opentest4j/**'
+      - 'm3/vendor/third_party/univocity-parsers/**'
+      - 'm3/vendor/third_party/junit-*/**'
+      - 'src/java.base/share/classes/java/util/ArrayList.java'
+      - 'src/java.base/share/classes/java/util/Vector.java'
+      - 'src/java.base/share/classes/jdk/internal/mindex/M3CollectionMaskCompactor.java'
+      - 'test/jdk/java/util/ArrayList/M3MaskThresholdContracts.java'
+      - '.github/workflows/m3-runtime-convergence-20261020.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  received-runtime-contracts:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    env:
+      CC: gcc
+      CXX: g++
+      EXPECTED_HEAD: ${{ github.event.pull_request.head.sha || github.sha }}
+    steps:
+      # The contract checks every manifest target, including metadata and workflow
+      # postimages. Keep the complete pinned head instead of an incomplete sparse tree.
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          fetch-depth: 1
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: maven
+          cache-dependency-path: |
+            m3/recipes/runtime-convergence-20261020/pom.xml
+            m3/collections/pom.xml
+            m3/eclipse/core-runtime/pom.xml
+            m3/eclipse/framework/pom.xml
+            m3/vendor/third_party/apiguardian-api/pom.xml
+            m3/vendor/third_party/opentest4j/pom.xml
+            m3/vendor/third_party/univocity-parsers/pom.xml
+            m3/vendor/third_party/junit-*/pom.xml
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install checksum-pinned Maven and record toolchains
+        shell: bash
+        run: |
+          set -euxo pipefail
+          mkdir -p proof
+          git rev-parse HEAD | tee proof/head.txt
+          test "$(cat proof/head.txt)" = "$EXPECTED_HEAD"
+          curl --fail --location --retry 3 \
+            https://archive.apache.org/dist/maven/maven-3/3.9.9/binaries/apache-maven-3.9.9-bin.tar.gz \
+            --output "$RUNNER_TEMP/apache-maven-3.9.9-bin.tar.gz"
+          printf '%s  %s\n' \
+            a555254d6b53d267965a3404ecb14e53c3827c09c3b94b5678835887ab404556bfaf78dcfe03ba76fa2508649dca8531c74bca4d5846513522404d48e8c4ac8b \
+            "$RUNNER_TEMP/apache-maven-3.9.9-bin.tar.gz" | sha512sum --check --strict -
+          tar -xzf "$RUNNER_TEMP/apache-maven-3.9.9-bin.tar.gz" -C "$RUNNER_TEMP"
+          echo "MVN=$RUNNER_TEMP/apache-maven-3.9.9/bin/mvn" >> "$GITHUB_ENV"
+          "$JAVA_HOME/bin/java" -version 2>&1 | tee proof/java-version.txt
+          "$JAVA_HOME/bin/javac" -version 2>&1 | tee proof/javac-version.txt
+          python3 --version | tee proof/python-version.txt
+          gcc --version | tee proof/gcc-version.txt
+          g++ --version | tee proof/gxx-version.txt
+          "$RUNNER_TEMP/apache-maven-3.9.9/bin/mvn" --version | tee proof/maven-version.txt
+      - name: Execute exact canonical SDK application, fixed-point and refusal tests
+        shell: bash
+        run: |
+          set -euxo pipefail
+          "$MVN" -B -ntp -f m3/recipes/runtime-convergence-20261020/pom.xml \
+            -Drecipe.owner.root="$GITHUB_WORKSPACE/m3/recipes/runtime-convergence-20261020/sdk-owner" \
+            -Dm3.recipe.name=com.synexia.m3jdk.RuntimeConvergence20261020 \
+            test 2>&1 | tee proof/canonical-sdk.txt
+      - name: Require a read-only receiver check with zero pending changes
+        shell: bash
+        run: |
+          set -euxo pipefail
+          python3 m3/recipes/runtime-convergence-20261020/receive.py \
+            --target "$GITHUB_WORKSPACE" \
+            --recipe-owner "$GITHUB_WORKSPACE/m3/recipes/runtime-convergence-20261020/sdk-owner" \
+            --check 2>&1 | tee proof/receiver-check.txt
+          grep -Eq '^M3_SDK_RESULTS_RECEIVER_PASS mode=check targets=[1-9][0-9]* changes=0$' proof/receiver-check.txt
+      - name: Qualify received owners through the canonical contract profile
+        shell: bash
+        run: |
+          set -euxo pipefail
+          "$MVN" -B -ntp -f m3/recipes/runtime-convergence-20261020/pom.xml \
+            -Drecipe.owner.root="$GITHUB_WORKSPACE/m3/recipes/runtime-convergence-20261020/sdk-owner" \
+            -Dm3.recipe.name=com.synexia.m3jdk.RuntimeConvergence20261020 \
+            -Pcontract -Dm3.contract.target="$GITHUB_WORKSPACE" \
+            verify 2>&1 | tee proof/received-contracts.txt
+          test -f m3/recipes/runtime-convergence-20261020/target/contract-proof/RECEIPT.json
+          git diff --exit-code -- \
+            m3/collections/src m3/eclipse/core-runtime/src m3/eclipse/framework/src \
+            src/java.base/share/classes/java/util/ArrayList.java \
+            src/java.base/share/classes/java/util/Vector.java \
+            src/java.base/share/classes/jdk/internal/mindex/M3CollectionMaskCompactor.java \
+            test/jdk/java/util/ArrayList/M3MaskThresholdContracts.java
+      - name: Preserve actual SDK, source-JUnit, Java/JNI and Eclipse evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: m3-runtime-convergence-${{ github.event.pull_request.head.sha || github.sha }}
+          retention-days: 30
+          path: |
+            proof/
+            m3/recipes/runtime-convergence-20261020/target/
+            m3/collections/target/full-java-jni/
+            m3/collections/target/surefire-reports/
+            m3/eclipse/core-runtime/target/surefire-reports/
+            m3/eclipse/framework/target/surefire-reports/
+            m3/eclipse/core-runtime/qualification/runtime-convergence-20261020/SOURCE_SEALS.tsv
+            m3/eclipse/framework/qualification/runtime-convergence-20261020/SOURCE_SEALS.tsv
+            m3/eclipse/core-runtime/target/m3-eclipse-core-runtime-bridge-0.1.0-SNAPSHOT.jar
+            m3/eclipse/framework/target/m3-eclipse-framework-forward-0.1.0-SNAPSHOT.jar

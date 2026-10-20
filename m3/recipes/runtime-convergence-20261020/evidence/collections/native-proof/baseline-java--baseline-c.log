@@ -1,0 +1,4 @@
+['/tmp/m3jdk21-toolchain-20261020/jdk-21.0.12.1+1/bin/java', '-Xmx768m', '-XX:ActiveProcessorCount=2', '-ea', '-Xcheck:jni', '-Djava.library.path=/workspace/scratch/53bcd62c244c/work-collections-20261020/native-proof/baseline', '-cp', '/workspace/scratch/53bcd62c244c/work-collections-20261020/baseline/target/classes:/workspace/scratch/53bcd62c244c/work-collections-20261020/baseline/target/test-classes', 'com.m3.collections.M3MaskWindowCurrentProof', 'native']
+M3_MASK_CURRENT mode=native checks=320006 digest=8a4338e94c64996bde776a42c0de8a0eaa6857a31f1beb3eacb60586f01be012 PASS
+
+EXIT=0

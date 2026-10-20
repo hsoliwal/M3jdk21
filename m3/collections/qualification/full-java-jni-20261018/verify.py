@@ -13,10 +13,11 @@ import zipfile
 ROOT = Path(__file__).resolve().parents[4]
 MODULE = ROOT / 'm3/collections'
 OUT = MODULE / 'target/full-java-jni'
-JAVA = Path(os.environ['JAVA_HOME'])
+JAVA = None  # Resolve only after invalidating the previous qualification receipt.
 VENDOR = ROOT / 'm3/vendor/third_party'
 DEPENDENCIES = ('apiguardian-api', 'opentest4j', 'univocity-parsers',
                 'junit-platform-commons-1.10.2', 'junit-platform-engine-1.10.2',
+                'junit-platform-launcher-1.10.2',
                 'junit-jupiter-api-5.10.2', 'junit-jupiter-params-5.10.2',
                 'junit-jupiter-engine-5.10.2', 'junit-jupiter-5.10.2')
 # Existing library names and generated JNI headers; no second native owner.
@@ -63,20 +64,26 @@ def reports(mode):
     return totals
 
 def main():
+    global JAVA
+    (OUT / 'PROOF.json').unlink(missing_ok=True)
+    JAVA = Path(os.environ['JAVA_HOME'])
+    head = subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=ROOT, text=True).strip()
+    expected = os.environ.get('EXPECTED_HEAD')
+    if expected and head != expected: raise RuntimeError('Checked-out head differs from expected head')
+    # Never bind current source hashes to cached compiler output. Clean before
+    # creating OUT so both owning Maven modes and the JNI build start fresh.
+    maven(MODULE / 'pom.xml', 'clean')
     OUT.mkdir(parents=True, exist_ok=True)
     (OUT / 'PROOF.json').unlink(missing_ok=True)  # Never leave a prior PASS after a failed rerun.
     for name in ('headers', 'classes', 'fixture-classes', 'native', 'missing'):
         path = OUT / name
         if path.exists(): shutil.rmtree(path)
         path.mkdir()
-    head = subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=ROOT, text=True).strip()
-    expected = os.environ.get('EXPECTED_HEAD')
-    if expected and head != expected: raise RuntimeError('Checked-out head differs from expected head')
     dependency_proof = {}
     for module in DEPENDENCIES:
         owner = VENDOR / module
         run(['python3', owner / 'verify_source.py'])
-        maven(owner / 'pom.xml', '-DskipTests', 'install')
+        maven(owner / 'pom.xml', '-DskipTests', 'clean', 'install')
         ns = {'m': 'http://maven.apache.org/POM/4.0.0'}
         pom = ET.parse(owner / 'pom.xml').getroot()
         artifact = pom.findtext('m:artifactId', namespaces=ns)
@@ -122,6 +129,12 @@ def main():
     run(cc + [native / 'm3_long_address_kernel.c', MODULE / 'src/test/native/m3_gather_spans.c',
               '-o', gather_fixture])
     run([gather_fixture])
+    # Reuse the exact donor's instrumented JNI table to measure actual kernel work.
+    # Real JVM parity remains a separate required gate below.
+    work_fixture = OUT / 'native/mask-compactor-work'
+    run(cc + ['-DOWNER_SOURCE="' + str(native / 'm3_index_mask_compactor.c') + '"',
+              MODULE / 'src/test/native/m3_mask_compactor_work.c', '-o', work_fixture])
+    run([work_fixture, '1'])
     common = ['-Xmx768m', '-XX:ActiveProcessorCount=2', '-Xcheck:jni',
               '-Dm3.collections.rank.native=true', '-Dm3.collections.signal.native=true']
     results = {}
@@ -159,6 +172,9 @@ def main():
                  ('M3NativeIndexRangeSelfTest', ['range', 'sharing']),
                  ('M3ObjectStateSlots28SelfTest', ['--native']),
                  ('M3IndexedTableSelfTest', ['--native']),
+                 ('M3FilteredListMutationProof', []),
+                 ('M3FilteredEndpointRestorationContract', []),
+                 ('M3MaskWindowCurrentProof', ['native']),
                  ('M3BagRankIndexSelfTest', ['--native']),
                  ('M3SdkRecoverySelfTest', ['--native']),
                  ('M3SignalOrderContract', ['native']),
@@ -170,8 +186,11 @@ def main():
          'com.m3.collections.M3BudgetedMaskWindowContract', '--missing'])
     run([JAVA / 'bin/java', *common, '-Djava.library.path=' + str(OUT / 'missing'), '-cp', cp,
          'com.m3.collections.M3LongIndexPathMasksJNISelfTest'])
+    run([JAVA / 'bin/java', *common, '-Djava.library.path=' + str(OUT / 'missing'), '-cp', cp,
+         'com.m3.collections.M3MaskWindowCurrentProof', 'missing'])
     native_fixtures = [MODULE / 'src/test/native' / name for name in
-                       ('m3_mask_window_spans.c', 'm3_mask_window_regions.c', 'm3_bitlane_jump_jni.c', 'm3_gather_spans.c')]
+                       ('m3_mask_window_spans.c', 'm3_mask_window_regions.c', 'm3_bitlane_jump_jni.c',
+                        'm3_gather_spans.c', 'm3_mask_compactor_work.c')]
     proof = {'status': 'PASS_OWNING_COLLECTION_JAVA_AND_JNI', 'head_sha': head,
              'scope': 'independent m3/collections; no JDK phase or challenge-corpus promotion',
              'worktree_dirty': bool(subprocess.check_output(['git', 'status', '--porcelain', '--untracked-files=no'], cwd=ROOT)),

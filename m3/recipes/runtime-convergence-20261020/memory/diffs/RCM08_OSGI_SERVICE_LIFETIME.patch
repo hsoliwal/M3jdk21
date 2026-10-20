@@ -1,0 +1,94 @@
+--- before/m3/eclipse/framework/src/main/java/com/m3/eclipse/framework/M3EclipseRuntimeActivator.java
++++ after/m3/eclipse/framework/src/main/java/com/m3/eclipse/framework/M3EclipseRuntimeActivator.java
+@@ -19,31 +19,76 @@
+ public final class M3EclipseRuntimeActivator
+         implements BundleActivator, M3EclipseRuntimeServices {
+     private volatile BundleContext context;
+-    private volatile ServiceRegistration<M3EclipseRuntimeServices> service;
++    private ServiceRegistration<M3EclipseRuntimeServices> service;
++    private enum Lifecycle { STOPPED, STARTING, ACTIVE, STOPPING }
++    private Lifecycle lifecycle = Lifecycle.STOPPED;
++    private boolean stopRequested;
+ 
+     public M3EclipseRuntimeActivator() { }
+ 
+     @Override
+-    public synchronized void start(BundleContext newContext) {
++    public void start(BundleContext newContext) {
+         Objects.requireNonNull(newContext, "context");
+-        if (context != null || service != null) {
+-            throw new IllegalStateException("M3 Eclipse forwarder already started");
++        synchronized (this) {
++            if (lifecycle != Lifecycle.STOPPED) {
++                throw new IllegalStateException("M3 Eclipse forwarder already started");
++            }
++            lifecycle = Lifecycle.STARTING;
++            context = newContext;
+         }
+-        ServiceRegistration<M3EclipseRuntimeServices> registered =
+-                newContext.registerService(M3EclipseRuntimeServices.class, this, null);
+-        if (registered == null) {
+-            throw new IllegalStateException("OSGi returned no service registration");
++        ServiceRegistration<M3EclipseRuntimeServices> registered;
++        try {
++            // REGISTERED is synchronous: publish usable context before the framework call.
++            // Never hold our monitor across framework callbacks.
++            registered = newContext.registerService(M3EclipseRuntimeServices.class, this, null);
++            if (registered == null) {
++                throw new IllegalStateException("OSGi returned no service registration");
++            }
++        } catch (RuntimeException | Error failure) {
++            synchronized (this) {
++                context = null;
++                stopRequested = false;
++                lifecycle = Lifecycle.STOPPED;
++            }
++            throw failure;
+         }
+-        context = newContext;
+-        service = registered;
++        boolean stopAfterRegistration;
++        synchronized (this) {
++            service = registered;
++            stopAfterRegistration = stopRequested;
++            lifecycle = stopAfterRegistration ? Lifecycle.STOPPING : Lifecycle.ACTIVE;
++            stopRequested = false;
++        }
++        // A REGISTERED callback may stop us before registerService returns its handle.
++        if (stopAfterRegistration) unregister(registered);
+     }
+ 
+     @Override
+-    public synchronized void stop(BundleContext stoppedContext) {
+-        ServiceRegistration<M3EclipseRuntimeServices> registered = service;
+-        service = null;
+-        context = null;
+-        if (registered != null) registered.unregister();
++    public void stop(BundleContext stoppedContext) {
++        ServiceRegistration<M3EclipseRuntimeServices> registered;
++        synchronized (this) {
++            if (lifecycle == Lifecycle.STARTING) {
++                stopRequested = true;
++                return;
++            }
++            if (lifecycle != Lifecycle.ACTIVE) return;
++            lifecycle = Lifecycle.STOPPING;
++            registered = service;
++        }
++        unregister(registered);
++    }
++
++    private void unregister(ServiceRegistration<M3EclipseRuntimeServices> registered) {
++        try {
++            // UNREGISTERING callbacks may still obtain and use this service.
++            registered.unregister();
++        } finally {
++            synchronized (this) {
++                service = null;
++                context = null;
++                lifecycle = Lifecycle.STOPPED;
++            }
++        }
+     }
+ 
+     @Override
