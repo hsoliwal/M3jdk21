@@ -1,0 +1,120 @@
+{
+  "plan_sha256": "ccd04ed4f435f51e431e0b846a75c0bc944af357db2a62079b0ead40d0d4f3e8",
+  "files": [
+    {
+      "path": "classes/com/m3/collections/M3IndexMaskCompactor$Backend.class",
+      "bytes": 1228,
+      "sha256": "ba88b56db816f917e5d868c8b609c99726013335832bfd513f36e196f689c3e2"
+    },
+    {
+      "path": "classes/com/m3/collections/M3IndexMaskCompactor$NativeLibrary.class",
+      "bytes": 654,
+      "sha256": "9e3c0a0c78429c3443b86ea534c654f3b8c51e68981ec3b120b4a3b8760889d7"
+    },
+    {
+      "path": "classes/com/m3/collections/M3IndexMaskCompactor$NativePositionMasks.class",
+      "bytes": 667,
+      "sha256": "9dc0018c2edb9d92b73866ba563c25f67ba78ac6dfb6388548d98d4c5f8d0931"
+    },
+    {
+      "path": "classes/com/m3/collections/M3IndexMaskCompactor$NativePositions.class",
+      "bytes": 654,
+      "sha256": "213734fae9a232d249e679bad1909464f5594da5dd21258f47f8f92812d17118"
+    },
+    {
+      "path": "classes/com/m3/collections/M3IndexMaskCompactor$NativeRange.class",
+      "bytes": 642,
+      "sha256": "14d66cdc179d8aba14d021557c97d332daeb18f608aef79a06246fc3fad739df"
+    },
+    {
+      "path": "classes/com/m3/collections/M3IndexMaskCompactor.class",
+      "bytes": 5550,
+      "sha256": "cfe4d6aac91065314f407ddf109c2cfeba5f7aa8b757dd599c401d59bb9db152"
+    },
+    {
+      "path": "classes/com/m3/collections/M3LongAddressKernel$NativeLibrary.class",
+      "bytes": 764,
+      "sha256": "8dc0c05604e4dda2618c052bc1eab6e9119d41031211f53434dd3eb71436bda0"
+    },
+    {
+      "path": "classes/com/m3/collections/M3LongAddressKernel.class",
+      "bytes": 2513,
+      "sha256": "0b85f982c282841386254065acea5144b2360957bc56410c24f4c9f8af49b4d4"
+    },
+    {
+      "path": "classes/com/m3/collections/M3LongIndexProjection$Order.class",
+      "bytes": 1274,
+      "sha256": "f8f3b34203b2564928f67d41490c7c73c5c90f371bc0d58bf615efbff5fc1ce6"
+    },
+    {
+      "path": "classes/com/m3/collections/M3LongIndexProjection.class",
+      "bytes": 4668,
+      "sha256": "6407a1e37ea0ac98bc564860d30a0be322cea284133a2799ef67c24bdebeb0f5"
+    },
+    {
+      "path": "classes/com/m3/collections/M3MaskWindowCurrentProof.class",
+      "bytes": 14291,
+      "sha256": "f3341271cf379a5488407decb5f7aa765b94f4c4b55c7d4f9d274b83848eb3b7"
+    },
+    {
+      "path": "compile_java.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "compile_native.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "headers/com_m3_collections_M3IndexMaskCompactor.h",
+      "bytes": 2705,
+      "sha256": "58d3bcfbf9d4de386e96f78a0581da9da6fa06cfd597a1b7ab6827b2ceceb60d"
+    },
+    {
+      "path": "headers/com_m3_collections_M3LongAddressKernel.h",
+      "bytes": 613,
+      "sha256": "d05efb9e3c397b1fc8cba4404372c9052efc91a2eea54d2e48b46cde93252dbf"
+    },
+    {
+      "path": "java.log",
+      "bytes": 118,
+      "sha256": "7493a65f11398f709a28e76df2d5b6d77446b65e504fe2b2fec98f4c1f6707df"
+    },
+    {
+      "path": "library-java.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "library-missing.log",
+      "bytes": 458,
+      "sha256": "83c814d20f4f92e1e24a29362cfe54b635dd15c804fc4aa2adb6f2c153e6c579"
+    },
+    {
+      "path": "library-native.log",
+      "bytes": 2048,
+      "sha256": "0fde5423e6c7a42212986aa0902d34b37eb5b0042d078bf5c37b1c2f916d45af"
+    },
+    {
+      "path": "missing.log",
+      "bytes": 34,
+      "sha256": "2fe891f55a4c957bcb678b11b404fa84fad625f75fe174b56fd9bdc55e0076c2"
+    },
+    {
+      "path": "native/m3_collections_mask.dll",
+      "bytes": 48241,
+      "sha256": "a3042862d539d6eec5ac021d4a2f2251c78c2ecf69135989010d1c77701b543a"
+    },
+    {
+      "path": "native.log",
+      "bytes": 120,
+      "sha256": "e38fd165665b71d3532a96425405672af2e34a0ee229e6b0bda421870ba54a72"
+    },
+    {
+      "path": "native_exports.log",
+      "bytes": 23089,
+      "sha256": "bf7837b04c2f72c58f77696bc44e08ed75521f9922480dac4aacf2d7ff397a9b"
+    }
+  ]
+}

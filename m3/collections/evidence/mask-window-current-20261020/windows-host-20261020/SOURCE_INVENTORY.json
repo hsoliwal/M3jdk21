@@ -1,0 +1,42 @@
+{
+  "schema": "synexia.m3jdk21.exact-source-inventory.v1",
+  "repository": "hsoliwal/M3JDK21",
+  "pull_request": 1549,
+  "commit": "fd493c1d9dac8cdf462351c35d588fe9299b7e34",
+  "files": [
+    {
+      "path": "src/com/m3/collections/M3IndexMaskCompactor.java",
+      "bytes": 17626,
+      "sha256": "13cf1e5c20a184869de3044f83cbb87e9f5e0e1ac60eaf28d01623be544fd924",
+      "git_blob": "daea60beeb202d9e996f9a018fe5974738a43523"
+    },
+    {
+      "path": "src/com/m3/collections/M3LongIndexProjection.java",
+      "bytes": 9493,
+      "sha256": "a29b0bc589565924611538c6fabe15a70d3629bc4eb3db0977d19f411ef4eb4e",
+      "git_blob": "4191858c5aa6e0c1961376e2724fccef0a1d6bcb"
+    },
+    {
+      "path": "src/com/m3/collections/M3LongAddressKernel.java",
+      "bytes": 5865,
+      "sha256": "7e4997911a30ae3d2a9a558f0a80dff3ba98bc5b3c9d81b37215a33c2b597d7d",
+      "git_blob": "9ac6c5a1e121affd28e6503d922927f6c91c3a66"
+    },
+    {
+      "path": "src/com/m3/collections/M3MaskWindowCurrentProof.java",
+      "bytes": 13002,
+      "sha256": "f1249302fac441f9cf092fbe6052443d54ee3f60ddfff7178fae25b5529bcff3",
+      "git_blob": "636ceb1c9324c6cfd4fa9aa0077f8ffc2be8228d"
+    },
+    {
+      "path": "native-src/m3_index_mask_compactor.c",
+      "bytes": 15719,
+      "sha256": "e7708773958746254defdfc1a77fa7946089a9623781a356c211a36c3be32026",
+      "git_blob": "a94368898d0c5d9b0dbedb9dcd56d4d2e39a1414"
+    }
+  ],
+  "source_mutation": false,
+  "new_product_code": false,
+  "execution": "NOT_RUN",
+  "storage_protection": "ACTIVE"
+}
