@@ -1,7 +1,7 @@
 {
   "schema": "m3-agent-recipe-source-custody/v1",
   "source_repo": "hsoliwal/com.synexia",
-  "source_commit": "1e44842b254c86dfaac32b053ae782123b6457eb",
+  "source_commit": "a25c7123661e56cfba5cf1c8d2624afd2e547465",
   "source_module": "synexia-m3-recipe",
   "mechanical_recipe": "synexia-m3-recipe/scripts/generate_agent_receiver.py",
   "license": "Apache-2.0",
@@ -9,8 +9,8 @@
   "files": [
     {
       "name": "M3RecipeAgent.java",
-      "source_sha256": "6cc109b0237b5d62db213732c6b2290f9d26af467ee8fef23332c24c327de832",
-      "receiver_sha256": "da6c5532898baa1722adc241251ddbc532b46a5598700b5987159a6d8e7c91db"
+      "source_sha256": "4af12425c920dc47d2d4e428ad8826fadd60bc5919dbf46cdb139be25af34d8f",
+      "receiver_sha256": "2468f3881a6345d97c2e99bf6a5eac5596431a326d553e1721409d0749785982"
     },
     {
       "name": "M3RecipeCatalogue.java",
