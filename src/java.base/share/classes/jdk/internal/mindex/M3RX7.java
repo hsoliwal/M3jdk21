@@ -5,6 +5,8 @@ package jdk.internal.mindex;
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.regex.Pattern;
+import jdk.internal.access.JavaLangAccess;
+import jdk.internal.access.SharedSecrets;
 
 /**
  * RX7: immutable bounded ASCII DFA execution atom derived from a separately verified
@@ -23,6 +25,8 @@ public final class M3RX7 {
     private static final int MAX_TEXT_UNITS = 1_000_000;
     private static final int MAX_PACKED_BYTES = 1 << 20;
     private static final int MAX_TOKEN_LENGTH = 4096;
+    private static final int MAX_M3_TOKEN_SEQUENCE = 65_536;
+    private static final int MAX_M3_TOKEN_VOCABULARY = 4096;
     private static final long MAX_TOKEN_CELLS = 1_048_576;
     private static final long MAX_TOKEN_WORK = 32L << 20;
     private static final long MAX_TOKEN_INDEX_BYTES = 8L << 20;
@@ -307,6 +311,76 @@ public final class M3RX7 {
             int state = start;
             for (int id : tokenIds) state = nextState(state, id);
             return state >= 0 && isFinal(state);
+        }
+    }
+
+    /**
+     * Prepare exact DFA state-transfer rows for the canonical scalar ranges of one M3-backed
+     * ASCII String. The String owner DAG is observed through JavaLangAccess as bounded primitive
+     * lanes; no whole-String flattening or retained String/token object is introduced.
+     *
+     * <p>Null means the String is not M3-backed, is not ASCII, or the bounded transition/image
+     * budget refuses the candidate. The authoritative JDK regex engine remains the fallback.</p>
+     */
+    public M3TokenPlan prepareM3TokenPlan(String input) {
+        Objects.requireNonNull(input, "input");
+        JavaLangAccess.M3StringTokenSnapshot snapshot =
+                SharedSecrets.getJavaLangAccess().m3StringAsciiTokens(
+                        input,
+                        MAX_M3_TOKEN_SEQUENCE,
+                        MAX_M3_TOKEN_VOCABULARY,
+                        MAX_TOKEN_LENGTH,
+                        MAX_PACKED_BYTES);
+        if (snapshot == null) return null;
+        byte[] packed = snapshot.packedAscii();
+        int[] offsets = snapshot.offsets();
+        int[] lengths = snapshot.lengths();
+        int[] sequence = snapshot.sequence();
+        TokenIndex index = prepareTokenIndex(packed, offsets, lengths);
+        return index == null ? null : new M3TokenPlan(index, sequence);
+    }
+
+    /** Returns -1 when the bounded M3 token lane is unavailable, otherwise exact DFA 0/1. */
+    public int matchesM3TokensCandidate(String input) {
+        M3TokenPlan plan = prepareM3TokenPlan(Objects.requireNonNull(input, "input"));
+        return plan == null ? -1 : plan.matches() ? 1 : 0;
+    }
+
+    /**
+     * Compatibility oracle for the M3 token lane. A candidate disagreement is a hard invariant
+     * failure; otherwise the JDK Pattern remains the returned truth.
+     */
+    public boolean matchesM3TokensVerified(String input, Pattern authoritativePattern) {
+        Objects.requireNonNull(input, "input");
+        Objects.requireNonNull(authoritativePattern, "authoritativePattern");
+        boolean truth = authoritativePattern.matcher(input).matches();
+        int candidate = matchesM3TokensCandidate(input);
+        if (candidate >= 0 && (candidate == 1) != truth) {
+            throw new IllegalStateException("M3RX7 token DFA disagrees with JDK Pattern");
+        }
+        return truth;
+    }
+
+    /** Pattern-specific primitive state-transfer image plus one M3 leaf-token sequence. */
+    public static final class M3TokenPlan {
+        private final TokenIndex index;
+        private final int[] sequence;
+
+        private M3TokenPlan(TokenIndex index, int[] sequence) {
+            this.index = Objects.requireNonNull(index, "index");
+            this.sequence = Objects.requireNonNull(sequence, "sequence").clone();
+            for (int token : this.sequence) Objects.checkIndex(token, index.tokenCount());
+        }
+
+        public int tokenSequenceLength() { return sequence.length; }
+        public int vocabularySize() { return index.tokenCount(); }
+        public long retainedPrimitiveBytes() {
+            return index.retainedPrimitiveBytes() + (long) sequence.length * Integer.BYTES;
+        }
+        public boolean matches() {
+            int state = index.initialState();
+            for (int token : sequence) state = index.nextState(state, token);
+            return state >= 0 && index.isFinal(state);
         }
     }
 
