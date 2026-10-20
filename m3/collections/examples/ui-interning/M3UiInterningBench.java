@@ -161,7 +161,7 @@ public final class M3UiInterningBench {
 	public static void main (String [] args) throws IOException {
 		Path out = Path.of (args.length > 0 ? args [0] : "BENCHMARKS.tsv");
 		try (PrintWriter tsv = new PrintWriter (Files.newBufferedWriter (out, StandardCharsets.UTF_8))) {
-			tsv.println ("scenario\tstore\trows\tcolumns\tdistinct_labels\tretained_mb\tmeasurer_calls_widest\tframe_us_p50\tframe_us_p90\tfill_ms\tnotes");
+			tsv.print ("scenario\tstore\trows\tcolumns\tdistinct_labels\tretained_mb\tmeasurer_calls_widest\tframe_us_p50\tframe_us_p90\tfill_ms\tnotes\n");
 			Scenario [] scenarios = {
 				new Scenario ("explorer-4-columns", new int [] {169_618, 693, 1_301, 2_836}),
 				new Scenario ("json-keys", new int [] {11_520}),
@@ -198,7 +198,7 @@ public final class M3UiInterningBench {
 		int distinct = kind.equals ("pool") ? ((PoolStore) store).pool.size () : countDistinct ((StringStore) store);
 		String notes = kind.equals ("pool") ? "pool " + ((PoolStore) store).pool.retainedBytes () / 1024 + " KB, extents " + ((PoolStore) store).extents.retainedBytes () / 1024 + " KB" : kind.equals ("hashmap") ? "HashMap dedupe: entry object + String per distinct label" : "fresh String per cell";
 		String line = String.format ("%s\t%s\t%d\t%d\t%d\t%.1f\t%d\t%d\t%d\t%d\t%s", scenario.name, kind, ROWS, columns, distinct, retainedKb / 1024.0, widestCalls, frames [0], frames [1], fillMs, notes);
-		tsv.println (line);
+		tsv.print (line + "\n");
 		tsv.flush ();
 		LOG.log (System.Logger.Level.INFO, () -> line);
 	}
@@ -270,9 +270,11 @@ public final class M3UiInterningBench {
 			trie.flag (ids [i], M3TreePathTrie.EXPANDED, true);
 			expanded++;
 		}
-		String line = String.format ("fs-paths\tstrings\t%d\t1\t%d\t%.1f\t0\t0\t0\t0\tone String path per node%n", ROWS, trie.size (), stringKb / 1024.0)
+		String line = String.format ("fs-paths\tstrings\t%d\t1\t%d\t%.1f\t0\t0\t0\t0\tone String path per node
+", ROWS, trie.size (), stringKb / 1024.0)
 			+ String.format ("fs-paths\ttrie\t%d\t1\t%d\t%.1f\t0\t0\t0\t%d\tone int per node path, %d names pooled, %d expanded flags kept in the lane", ROWS, trie.size (), trieKb / 1024.0, internMs, pool.size (), expanded);
-		tsv.println (line);
+		tsv.print (line + "
+");
 		LOG.log (System.Logger.Level.INFO, () -> line);
 	}
 
