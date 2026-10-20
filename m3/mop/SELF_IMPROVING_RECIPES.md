@@ -9,6 +9,22 @@ SPDX-License-Identifier: Apache-2.0
 Original author / project lead: Hitesh Soliwal (Synexia). First-party M3/Synexia
 work; see `M3-SYNEXIA-RIGHTS.md` and `M3-SYNEXIA-NOTICE.md` at the repository root.
 
+## The four pillars
+
+Machine Oriented Programming, as defined by Hitesh Soliwal (Synexia), works on code
+through four mechanical pillars, each carried out by recipes:
+
+1. **Atomize**: decompose source into typed, addressable atoms (repository, module,
+   package, file, type, member, statement) with hashes, spans and contract facts.
+2. **Patternize**: recognize the patterns the atoms instantiate (algorithm categories,
+   design patterns, structural clusters), so known structure is reused, not regenerated.
+3. **Annotate**: record the recognized roles and contracts on the code itself
+   (pattern roles, interface contracts, scope), so machines read meaning from structure.
+4. **Document**: derive and keep documentation (Javadoc, interface skeletons, design
+   records) converged with the code, so documentation is primary semantic memory.
+
+The invariant below makes the recipes that implement these pillars improve themselves.
+
 ## The invariant
 
 > Each time an LLM or a coding agent corrects a recipe, the recipe records that
