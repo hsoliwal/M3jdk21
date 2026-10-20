@@ -139,8 +139,142 @@ public final class M3TaskRecipeTest {
         return new Replay(Map.copyOf(actual), patch.toString(), results.size());
     }
 
+
+    /**
+     * Exercise the actual class-backed OpenRewrite recipes in the planned order.
+     * The input Java LSTs are parsed once; subsequent FILE passes consume the
+     * preceding immutable SourceFile objects, not another parsed source graph.
+     * Template parsing performed by the incumbent recipes is separate from a
+     * second frontend pass over unchanged input. This is a test harness only.
+     *
+     * Absent PASSES.tsv means a historical aggregate dataset, whose admission
+     * and receipt semantics are deliberately left untouched.
+     */
+    private static void verifySerialQualifiedPasses() {
+        Path crateRoot = Path.of(System.getProperty("m3.crate.root"));
+        Path plan = crateRoot.resolve("datasets")
+                .resolve(System.getProperty("m3.dataset")).resolve("PASSES.tsv");
+        if (!Files.isRegularFile(plan)) return;
+        try {
+            List<String[]> passes = Files.readAllLines(plan, StandardCharsets.UTF_8).stream()
+                    .filter(line -> !line.isBlank() && !line.startsWith("#"))
+                    .map(line -> line.split("\t", -1)).toList();
+            assertFalse(passes.isEmpty(), "at least one actual FILE-local recipe");
+            Map<String, SourceFile> original = new TreeMap<>();
+            Map<String, String> expected = new TreeMap<>();
+            for (Lane lane : lanes()) {
+                // Parse original source only once per language lane, then share the
+                // actual OpenRewrite SourceFile identities between all passes.
+                for (SourceFile file : parse(lane, state(lane, false))) {
+                    SourceFile previous = original.putIfAbsent(path(file), file);
+                    if (previous != null) assertEquals(previous.printAll(), file.printAll());
+                }
+                expected.putAll(state(lane, true));
+            }
+            Map<String, SourceFile> current = new TreeMap<>(original);
+            int changed = 0;
+            StringBuilder receipts = new StringBuilder(
+                    "# phase\towner\tbefore_sha256\tafter_sha256\tactual_changes\n");
+            java.util.Set<String> stageNames = new java.util.HashSet<>();
+            for (int i = 0; i < passes.size(); i++) {
+                String[] pass = passes.get(i);
+                assertEquals(6, pass.length, "one fully catalogued pass per row");
+                assertEquals(Integer.toString(i + 1), pass[0], "serial order");
+                String stage = pass[1], target = pass[2], resourceName = pass[3];
+                assertTrue(stage.matches("[a-z0-9][a-z0-9-]{0,79}"));
+                assertTrue(stageNames.add(stage), "unique stage identities");
+                assertFalse(pass[4].isBlank(), "semantic behavioral-atom category");
+                assertFalse(pass[5].isBlank(), "problem-category donor decision");
+                boolean java = target.endsWith(".java");
+                String resourceRoot = "/com/synexia/rewrite/hash-pinned-"
+                        + (java ? "java/" : "text/") + stage + "/";
+                String manifest = resource(resourceRoot + "manifest.tsv", false);
+                List<String> rows = manifest.lines().filter(s -> !s.isBlank()
+                        && !s.startsWith("#")).toList();
+                assertEquals(1, rows.size(), "only one physical source per stage");
+                String[] row = rows.getFirst().split("\t", -1);
+                assertEquals(4, row.length, "exact SHA-256 manifest");
+                assertEquals(target, row[0], "original file ownership");
+                assertEquals(resourceName, row[3], "recipe source snapshot");
+                SourceFile before = current.get(target);
+                String beforeDigest = before == null ? "ABSENT" : sha(before.printAll());
+                assertEquals(row[1], beforeDigest, "admitted intermediate source generation");
+                String candidate = resource(resourceRoot + resourceName, false);
+                assertEquals(row[2], sha(candidate), "sealed candidate source");
+
+                List<SourceFile> unchanged = new ArrayList<>(current.values());
+                Map<String, String> sourceTextBefore = rendered(unchanged);
+                List<Throwable> errors = new ArrayList<>();
+                ScanningRecipe<?> recipe = java
+                        ? new M3HashPinnedJavaSnapshotRecipe(stage)
+                        : new M3HashPinnedTextSnapshotRecipe(stage);
+                List<Result> results = recipe.run(
+                        new InMemoryLargeSourceSet(unchanged),
+                        new InMemoryExecutionContext(errors::add), 1)
+                        .getChangeset().getAllResults();
+                assertTrue(errors.isEmpty(), () -> "OpenRewrite stage failures: " + errors);
+                boolean needed = !beforeDigest.equals(row[2]);
+                assertEquals(needed ? 1 : 0, results.size(),
+                        "exactly the nominated source changes in this pass");
+                if (needed) {
+                    Result result = results.getFirst();
+                    SourceFile after = result.getAfter();
+                    assertNotNull(after, "source-preserving passes never delete");
+                    assertEquals(target, path(after), "no scope promotion");
+                    if (java) assertInstanceOf(J.CompilationUnit.class, after);
+                    else assertInstanceOf(PlainText.class, after);
+                    if (before != null) {
+                        assertNotNull(result.getBefore(), "existing source is a replacement");
+                        assertEquals(before.getId(), result.getBefore().getId(),
+                                "same original input LST identity, no caller-side reparse");
+                        assertEquals(before.getId(), after.getId(),
+                                "preserve AST identity through transformation");
+                    } else assertNull(result.getBefore(), "new regression file");
+                    assertEquals(row[2], sha(after.printAll()),
+                            "exact OpenRewrite stage postimage");
+                    current.put(target, after);
+                    changed++;
+                }
+                // Even a callback that returns a new LST must not mutate the
+                // admitted original AST objects or unrelated file contents.
+                assertEquals(sourceTextBefore, rendered(unchanged),
+                        "input Java AST snapshots remain immutable for every pass");
+                for (Map.Entry<String, SourceFile> sibling : current.entrySet()) {
+                    if (!sibling.getKey().equals(target)) {
+                        SourceFile oldSibling = unchanged.stream()
+                                .filter(u -> path(u).equals(sibling.getKey()))
+                                .findFirst().orElseThrow();
+                        assertSame(oldSibling, sibling.getValue(),
+                                "no new AST or wrapper retained for unchanged sibling");
+                    }
+                }
+                receipts.append(i + 1).append('\t').append(target).append('\t')
+                        .append(row[1]).append('\t').append(row[2]).append('\t')
+                        .append(needed ? "1" : "0").append('\n');
+            }
+            Map<String, String> terminal = new TreeMap<>();
+            current.forEach((k, v) -> terminal.put(k, v.printAll()));
+            assertEquals(expected, terminal, "composition closes at aggregate output");
+            // The second driver iteration is a true zero-work terminal pass:
+            // downstream stages already own each final generation. Avoid
+            // running earlier historical recipes on a later postimage.
+            for (Map.Entry<String, String> file : expected.entrySet()) {
+                assertEquals(file.getValue(), terminal.get(file.getKey()),
+                        "no reparse/rewrite of a finished file generation");
+            }
+            Path receipt = Path.of(System.getProperty("m3.candidate.root"))
+                    .resolve("SDK_MULTIPASS_RESULTS.tsv");
+            Files.createDirectories(receipt.getParent());
+            Files.writeString(receipt, receipts.toString(), StandardCharsets.UTF_8);
+            assertTrue(changed > 0, "a multi-pass task must produce reviewed changes");
+        } catch (IOException problem) {
+            throw new IllegalStateException("multi-pass proof inputs unreadable", problem);
+        }
+    }
+
     @Test void exactReplayFixedPointAndInputOrder() {
         namedDescriptorComposesTheQualifiedLanes();
+        verifySerialQualifiedPasses();
         for (Lane lane : lanes()) {
             List<SourceFile> initial = parse(lane, state(lane, false));
             Replay result = replay(lane, initial);

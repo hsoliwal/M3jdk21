@@ -40,6 +40,9 @@ jobs:
             -p 'test_verify_multi_pass.py' -v
           python3 m3/runtime-integration/string-prefix-cursor-20261020/verify_multi_pass.py \
             --root "$PWD"
+          python3 m3/tooling/shared-frontend/recipe-custody/contract/test_verify_stage_chain.py
+          python3 m3/tooling/shared-frontend/recipe-custody/contract/verify_stage_chain.py \
+            --root "$PWD" --dataset m3-prefix-cursor-20261020
       - name: Execute composed three-pass OpenRewrite SDK and exact receiver
         shell: bash
         run: |
