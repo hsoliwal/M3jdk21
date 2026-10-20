@@ -1,0 +1,8 @@
+# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and contributors
+# SPDX-License-Identifier: Apache-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.CurrentMasterConvergence20261019
+displayName: Refine current M3JDK21 collection and JNI owners
+description: Exact current-source atoms preserving newly received APIs and algorithms.
+recipeList:
+  - com.synexia.rewrite.M3CurrentMasterConvergence20261019
