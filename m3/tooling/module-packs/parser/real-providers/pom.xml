@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- SPDX-License-Identifier: Apache-2.0 -->
+<!-- SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project -->
+<!-- Modified 2026-10-20: pinned test-only JDT parser-entry instrumentation dependency. -->
 <!-- Only an external *test* dependency closure; none are required by jdk.m3.parser. -->
 <project xmlns="http://maven.apache.org/POM/4.0.0"
  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -14,6 +16,11 @@
   </repository>
  </repositories>
  <dependencies>
+  <!-- ASM BSD-3-Clause; test instrumentation only, no parser-module dependency. -->
+  <dependency>
+   <groupId>org.ow2.asm</groupId><artifactId>asm</artifactId>
+   <version>9.7</version>
+  </dependency>
   <dependency>
    <groupId>org.eclipse.jdt</groupId><artifactId>org.eclipse.jdt.core</artifactId>
    <version>3.40.0</version>

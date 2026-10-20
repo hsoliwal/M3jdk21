@@ -20,6 +20,7 @@ import com.sun.source.util.Trees;
 import com.sun.tools.javac.api.BasicJavacTask;
 import com.sun.tools.javac.api.MultiTaskListener;
 import com.sun.tools.javac.main.Arguments;
+import com.sun.tools.javac.main.JavaCompiler;
 import com.sun.tools.javac.processing.JavacProcessingEnvironment;
 import com.sun.tools.javac.util.Context;
 import com.sun.tools.javac.util.ClientCodeException;
@@ -57,6 +58,7 @@ public final class M3ASTPC implements Plugin {
         Path image = null;
         Path slots = null;
         boolean fold = false;
+        String sourceScope = null;
         for (String arg : args) {
             if (arg.equals("lossless") && !retainSyntax) retainSyntax = true;
             else if (arg.equals("fold-expressions") && !fold) fold = true;
@@ -66,13 +68,16 @@ public final class M3ASTPC implements Plugin {
                 image = Path.of(arg.substring("image=".length()));
             else if (arg.startsWith("slots=") && slots == null)
                 slots = Path.of(arg.substring("slots=".length()));
+            else if (arg.startsWith("scope=") && sourceScope == null)
+                sourceScope = arg.substring("scope=".length());
             else throw new IllegalArgumentException("unknown or duplicate M3AST option: " + arg);
         }
         if (image == null && (slots != null || fold))
             throw new IllegalArgumentException("M3AST slots/fold-expressions require image");
         if (trace != null && (sameOutput(trace, image) || sameOutput(trace, slots)))
             throw new IllegalArgumentException("M3AST trace must differ from image and slots");
-        Session session = (Session) open(task, retainSyntax);
+        Session session = (Session) (sourceScope == null ? open(task, retainSyntax)
+                : open(task, retainSyntax, sourceScope(task, sourceScope)));
         try {
             // Reuse javac's actual processor/plugin loader, including module paths.
             var loader = JavacProcessingEnvironment.instance(session.context)
@@ -95,6 +100,30 @@ public final class M3ASTPC implements Plugin {
                 .equals(right.toAbsolutePath().normalize());
     }
 
+    /** Build tools keep their original source selection, task and compiler arguments. */
+    private static M3AST.Scope sourceScope(JavacTask task, String selection) {
+        Objects.requireNonNull(task, "task");
+        if (!(task instanceof BasicJavacTask javac))
+            throw new IllegalArgumentException("M3AST requires the active javac task");
+        Context context = javac.getContext();
+        if (context == null) throw new IllegalStateException("closed javac context");
+        Arguments arguments = context.get(Arguments.argsKey);
+        if (arguments == null) throw new IllegalStateException("javac arguments not initialized");
+        ArrayList<URI> sources = new ArrayList<>();
+        for (JavaFileObject source : arguments.getFileObjects()) sources.add(source.toUri());
+        if (selection.equals("file")) {
+            if (sources.size() != 1)
+                throw new IllegalArgumentException("M3AST file scope requires one original source input");
+            return M3AST.Scope.file(sources.get(0));
+        }
+        if (selection.startsWith("package:"))
+            return M3AST.Scope.packageSources(selection.substring("package:".length()), sources);
+        if (selection.startsWith("module:"))
+            return M3AST.Scope.moduleSources(selection.substring("module:".length()), sources);
+        if (selection.equals("project")) return M3AST.Scope.projectSources(sources);
+        throw new IllegalArgumentException("unknown M3AST source scope: " + selection);
+    }
+
     /**
      * Internal, version-bound bridge for converters using javac internals.
      * Public consumers use Unit.tree()/trees(); this requires an explicit
@@ -113,6 +142,13 @@ public final class M3ASTPC implements Plugin {
             throw new IllegalArgumentException("foreign M3AST unit implementation");
         live.check();
         return live.session.syntaxRetained;
+    }
+
+    /** Refuse unselected source before javac reads characters, even for silent probes. */
+    public static void beforeSourceRead(Context context, JavaFileObject file) {
+        Session session = context.get(KEY);
+        if (session == null || session.closed || session.scope == null) return;
+        session.requireSource(file);
     }
 
     /** Bind M3 source identity to the exact characters handed to javac's parser. */
@@ -190,6 +226,26 @@ public final class M3ASTPC implements Plugin {
         return session;
     }
 
+    public static M3AST open(JavacTask task, boolean retainSyntax, M3AST.Scope scope) {
+        Objects.requireNonNull(scope, "scope");
+        Objects.requireNonNull(task, "task");
+        if (!(task instanceof BasicJavacTask javac))
+            throw new IllegalArgumentException("M3AST requires the active javac task");
+        Context context = javac.getContext();
+        if (context == null) throw new IllegalStateException("closed javac context");
+        JavaCompiler compiler = context.get(JavaCompiler.compilerKey);
+        if (compiler != null && compiler.hasStartedSourceProcessing())
+            throw new IllegalStateException("scope requires an unstarted task");
+        Session session = (Session) open(task, false);
+        if (session.started) throw new IllegalStateException("scope requires an unstarted task");
+        if (session.scope != null && !session.scope.equals(scope)) {
+            throw new IllegalArgumentException("M3AST scope is already bound to this task");
+        }
+        if (retainSyntax) session.retainSyntax();
+        session.scope = scope;
+        return session;
+    }
+
     private static final class Session implements M3AST, TaskListener {
         private JavacTask task;
         private Context context;
@@ -199,6 +255,7 @@ public final class M3ASTPC implements Plugin {
         private long parsed, analyzed, captures, reads, computations, hits;
         private final HashMap<URI, Seal> seals = new HashMap<>();
         private M3AST.Source activeSource;
+        private M3AST.Scope scope;
         private int errors;
         private boolean started, completed, closed, failed, syntaxRetained;
 
@@ -206,6 +263,46 @@ public final class M3ASTPC implements Plugin {
             this.task = task;
             this.context = context;
             task.addTaskListener(this);
+        }
+
+        void requireSource(JavaFileObject file) {
+            try {
+                if (!scope.contains(file.toUri())) {
+                    throw new IllegalArgumentException("M3AST source outside " + scope.kind()
+                            + " scope: " + file.toUri()
+                            + "; supply the unchanged dependency as a binary or entered symbol");
+                }
+            } catch (RuntimeException | Error failure) {
+                abort(failure);
+                throw new ClientCodeException(failure);
+            }
+        }
+
+        private void requireDeclaration(TaskEvent event) {
+            if (scope == null || event.getCompilationUnit() == null) return;
+            CompilationUnitTree tree = event.getCompilationUnit();
+            String actual;
+            if (scope.kind() == M3AST.ScopeKind.PACKAGE) {
+                actual = tree.getPackageName() == null ? "" : tree.getPackageName().toString();
+            } else if (scope.kind() == M3AST.ScopeKind.MODULE) {
+                if (tree.getModule() != null) {
+                    actual = tree.getModule().getName().toString();
+                } else if (event.getKind() == TaskEvent.Kind.ENTER
+                        && tree instanceof com.sun.tools.javac.tree.JCTree.JCCompilationUnit unit
+                        && unit.modle != null) {
+                    actual = unit.modle.name.toString();
+                } else {
+                    return; // module membership is assigned by the original enter phase
+                }
+            } else {
+                return;
+            }
+            if (!scope.name().equals(actual)) {
+                IllegalArgumentException failure = new IllegalArgumentException(
+                        "M3AST declaration outside " + scope.kind() + " scope: " + actual);
+                abort(failure);
+                throw new ClientCodeException(failure);
+            }
         }
 
         void retainSyntax() {
@@ -232,9 +329,13 @@ public final class M3ASTPC implements Plugin {
             switch (event.getKind()) {
                 case PARSE -> {
                     parsed++;
-                    try { dispatch(event, M3AST.Phase.PARSED); }
+                    try {
+                        requireDeclaration(event);
+                        dispatch(event, M3AST.Phase.PARSED);
+                    }
                     finally { activeSource = null; }
                 }
+                case ENTER -> requireDeclaration(event);
                 case ANALYZE -> { analyzed++; dispatch(event, M3AST.Phase.ANALYZED); }
                 case COMPILATION -> {
                     completed = true;
@@ -292,6 +393,7 @@ public final class M3ASTPC implements Plugin {
             context = null;
             seals.clear();
             activeSource = null;
+            scope = null;
             Throwable first = null;
             try {
                 for (M3AST.Consumer consumer : consumers) {

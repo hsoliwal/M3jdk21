@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: Apache-2.0
 // SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
+// Modified 2026-10-20: transfer full buffers at sealing and release every builder reference.
 package jdk.m3.parser;
 
 import java.util.Arrays;
@@ -32,15 +33,20 @@ public final class M3ASTIndex {
     private M3ASTIndex(Builder builder) {
         source = builder.source;
         domain = builder.domain;
-        names = Arrays.copyOf(builder.names, builder.nameCount);
-        kinds = Arrays.copyOf(builder.kinds, builder.size);
-        parents = Arrays.copyOf(builder.parents, builder.size);
-        starts = Arrays.copyOf(builder.starts, builder.size);
-        ends = Arrays.copyOf(builder.ends, builder.size);
-        flags = Arrays.copyOf(builder.flags, builder.size);
-        first = Arrays.copyOf(builder.first, builder.size);
-        next = Arrays.copyOf(builder.next, builder.size);
-        childCounts = Arrays.copyOf(builder.childCounts, builder.size);
+        names = builder.names.length == builder.nameCount ? builder.names
+                : Arrays.copyOf(builder.names, builder.nameCount);
+        kinds = retained(builder.kinds, builder.size);
+        parents = retained(builder.parents, builder.size);
+        starts = retained(builder.starts, builder.size);
+        ends = retained(builder.ends, builder.size);
+        flags = retained(builder.flags, builder.size);
+        first = retained(builder.first, builder.size);
+        next = retained(builder.next, builder.size);
+        childCounts = retained(builder.childCounts, builder.size);
+    }
+
+    private static int[] retained(int[] values, int size) {
+        return values.length == size ? values : Arrays.copyOf(values, size);
     }
 
     public static Builder builder(M3File source, Domain domain, int maxNodes) {
@@ -69,10 +75,10 @@ public final class M3ASTIndex {
     public long primitiveBytes() { return (long) kinds.length * 8L * Integer.BYTES; }
     private int check(int node) { return Objects.checkIndex(node, kinds.length); }
 
-    /** Bounded, single-owner creation; discarded immediately after immutable publication. */
+    /** Bounded, single-owner creation; sealing releases all retained input and array references. */
     public static final class Builder {
-        private final M3File source;
-        private final Domain domain;
+        private M3File source;
+        private Domain domain;
         private final int maxNodes;
         private String[] names = new String[16];
         private int nameCount;
@@ -161,7 +167,17 @@ public final class M3ASTIndex {
         public M3ASTIndex seal() {
             if (sealed || size < 1) throw new IllegalStateException("AST index not open or empty");
             sealed = true;
-            return new M3ASTIndex(this);
+            try {
+                return new M3ASTIndex(this);
+            } finally {
+                // A caller may retain the sealed builder. It must not retain a
+                // second copy of the index buffers or keep the source alive.
+                names = null;
+                kinds = parents = starts = ends = flags = null;
+                first = last = next = childCounts = null;
+                source = null;
+                domain = null;
+            }
         }
 
         private int nameId(String value) {

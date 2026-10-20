@@ -109,3 +109,105 @@ All verification commands are recorded with status and output. A failure stops
 dependent stages. A source change begins a new lint/compile/test/runtime pass.
 Compilation of test consumers is completed before test execution. Final review
 includes the target PR and canonical Synexia recipe PR; neither is auto-merged.
+
+## Source generation, compilation scope, and unchanged class files
+
+M3JDK21's existing compiler owns parsing, symbols, diagnostics, and generation.
+`M3AST.open(task, retainSyntax, scope)` adds an explicit source admission to that
+same task. `Scope.file`, `Scope.packageSources`, `Scope.moduleSources`, and
+`Scope.projectSources` take the exact source URIs selected by the caller. Package
+and module scopes also check the original compiler's declaration/membership facts.
+Bind the scope before starting the task or registering framework consumers.
+The default two-argument and one-argument entrypoints retain their behavior.
+
+Existing Maven/Gradle compiler-argument configuration can select the same source
+boundary with `-Xplugin:M3AST scope=file`, `scope=package:my.package`,
+`scope=module:my.module`, or `scope=project`. The original plugin derives admitted
+URIs from javac's already selected input file objects without reading characters.
+The build tool still owns which files are selected and which binary paths/options
+are supplied. File scope requires exactly one selected input. Multiple scope
+options and unknown scope values are refused. Scope options may accompany the
+existing `lossless` plugin argument. No new build-tool parser or compiler task is
+created. The finite source-patch test invokes the actual plugin's `init` method;
+service discovery under the final M3JDK21 module descriptor remains a product-JDK
+gate, not a capability inferred from the supplied stock JDK's descriptor.
+
+The caller supplies unchanged dependencies on the original compiler's class path,
+module path, or already entered context. For example, compile a changed `A.java`
+against existing `B.class` and `C.class`; those dependencies' source files do not
+need to be opened, parsed, or compiled. A new compiler context may still read the
+class files to resolve their symbols. This API does not introduce a global symbol
+cache or promise zero binary I/O across independent compiler contexts.
+
+```java
+// task is the original JavacTask with its existing options and binary paths.
+M3AST.Scope scope = M3AST.Scope.file(selectedSource.toUri());
+try (M3AST ast = M3AST.open(task, true, scope)) {
+    ast.addConsumer(consumer);
+    boolean compiled = task.call();
+}
+```
+
+All three original source-opening routes enforce admission before character I/O:
+explicit source reads, implicit class completion, and silent module/package-name
+probes. A source outside the selected set is a caller configuration refusal through
+javac's existing client-exception path, with failed session cleanup. It is not an
+invented symbol or a successful partial compilation. Include any intentionally
+generated source and required source descriptor in the admission; otherwise supply
+the corresponding binary. This does not alter file-manager lookup preference:
+if `-Xprefer:source` chooses an excluded source, admission refuses that read.
+
+`-implicit:none` alone only suppresses implicit class generation. The scope test
+includes a control that still parses an implicit dependency with that option and
+an admitted-task case that refuses the same dependency before its source read.
+See the [Java 21 javac specification](https://docs.oracle.com/en/java/javase/21/docs/specs/man/javac.html).
+
+One authoritative syntax generation can serve multiple projections. The scope
+contract checks that parse/analyze/generate on the same original task share the
+actual compilation unit and that consumers share an event-local projection.
+It checks two successive source generations against unchanged dependency bytes,
+single-file analysis without generation, package boundaries, module dependencies,
+project package relationships, missing dependencies, lifecycle, and source refusal.
+Run it through the existing `build.py` lint/compile/test/runtime chain; the linked
+image run uses the same compiled compiler owners and precompiled test consumer.
+
+Unchanged syntax is not proof that attributed facts remain valid. Compiler build,
+language options, class/module paths and their content, processors, generated
+sources, and dependency ABI can invalidate semantic facts. Existing Synexia
+`M3CompilationContext.sealed`, `M3JavacASTIndex`, `MIndexJavaAST.capture`, and
+`M3ASTWorkspaceCache` already own source/context-bound capture and bounded reuse.
+Their admitted snapshots are reusable through those owners; live javac trees and
+symbols must not be transplanted into a different compiler context.
+
+## Original framework ownership and qualification boundary
+
+The source audit retains existing work in the Maven, Gradle, NetBeans, and
+OpenRewrite forks. Maven's compiler configuration selects M3AST on the existing
+compile/testCompile invocation; Gradle attaches to its original JavacTask;
+NetBeans retains its existing task, parsed trees, class path, and selected phase
+work. Synexia's `M3OpenRewriteSharedAST` uses the existing Java 21 visitor on an
+already attributed javac unit. No new framework parser or parallel compiler is
+introduced by source admission.
+
+JDT rewrite plans and physical DOM mutation are distinct inputs. A direct
+projection may consume the existing plan's revised children and original
+move/copy nodes. Such a projection must retain original parse binding semantics,
+reject physical-tree drift, require exclusive access to the mutable plan, and
+leave transformed offsets unknown unless an actual position owner proves them.
+Text formatting and a new semantic attribution are separate operations.
+
+The audit does not certify every frontend as parse-once. OpenRewrite's Maven
+parser still constructs RawPom and XML trees in separate parses. The existing
+JSON AST draft's legacy serializer-based mapper overloads still honor custom
+serializers; direct tree binding is qualified on that draft's own follow-up.
+JDT text rewrite formatting may call its parser internally. These remain explicit
+owner-specific review items, not capabilities inferred from the compiler scope
+tests. This finite qualification does not advance whole-family receiving status
+or replace a full M3JDK21/HotSpot platform build.
+
+The source-built qualification seals the original compiler descriptor and checks
+its `uses com.sun.source.util.M3AST.Consumer` declaration. The stock-JDK test
+process grants that same service use before invoking the actual plugin's `init`;
+the grant is test-only and does not patch a production descriptor. Original
+service discovery through the rebuilt M3JDK21 descriptor remains a separate
+full-product build gate.
