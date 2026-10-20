@@ -70,7 +70,7 @@ public final class M3BuildState {
             String key = paths[i];
             if (key == null || key.isEmpty() || key.indexOf('\0') >= 0 ||
                     key.startsWith("/") || key.indexOf('\\') >= 0 ||
-                    Arrays.asList(key.split("/", -1)).contains("..") ||
+                    !validSegments(key) ||
                     encodedKey(key).length > MAX_KEY_BYTES) {
                 throw new IllegalArgumentException("invalid workspace-relative path");
             }
@@ -91,6 +91,23 @@ public final class M3BuildState {
                 }
             }
         }
+    }
+
+    /** Validate path segments without allocating a retained row-local segment list. */
+    private static boolean validSegments(String key) {
+        int start = 0;
+        while (start <= key.length()) {
+            int end = key.indexOf('/', start);
+            if (end < 0) end = key.length();
+            int length = end - start;
+            if (length == 0 || (length == 1 && key.charAt(start) == '.') ||
+                    (length == 2 && key.charAt(start) == '.' && key.charAt(start + 1) == '.')) {
+                return false;
+            }
+            if (end == key.length()) return true;
+            start = end + 1;
+        }
+        return false;
     }
 
     private static byte[] encodedKey(String key) {
@@ -248,7 +265,13 @@ public final class M3BuildState {
     /** Checksum-sealed, versioned serialization; the caller supplies an allocation budget. */
     public byte[] encode(int maxBytes) throws IOException {
         if (maxBytes < HASH_BYTES + 48) throw new IllegalArgumentException("maxBytes");
-        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        // Verify exact encoded geometry before allocating a growing output buffer.
+        long required = 84L + 81L * size() + 4L * dependencies.length + 8L * abiKnown.length;
+        for (String path : paths) {
+            required = Math.addExact(required, encodedKey(path).length);
+            if (required > maxBytes) throw new IOException("build state image budget exceeded");
+        }
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream((int) required);
         try (DataOutputStream out = new DataOutputStream(bytes)) {
             out.writeInt(MAGIC); out.writeInt(VERSION);
             out.writeInt(size()); out.writeInt(dependencies.length);
@@ -285,6 +308,11 @@ public final class M3BuildState {
             if (in.readInt() != MAGIC || in.readInt() != VERSION) throw new IOException("unknown build state schema");
             int n = in.readInt(), m = in.readInt();
             if (n < 0 || n > maxRows || m < 0 || m > maxEdges) throw new IOException("invalid image counts");
+            // Reject impossible counts before any data-column allocation; a tiny image must
+            // never cause large allocations even when the caller sets generous count caps.
+            if (52L + 82L * n + 4L * m + 8L * ((n + 63L) >>> 6) > payloadEnd) {
+                throw new IOException("build state counts exceed sealed byte budget");
+            }
             byte[] context = new byte[HASH_BYTES]; in.readFully(context);
             String[] paths = new String[n]; byte[] roles = new byte[n]; long[] lengths = new long[n];
             byte[] content = new byte[Math.multiplyExact(n, HASH_BYTES)];
