@@ -26,7 +26,7 @@ import org.openrewrite.internal.InMemoryLargeSourceSet;
 import org.openrewrite.java.JavaParser;
 import org.openrewrite.java.tree.J;
 
-/** Exact source admission, fixed-point and drift-refusal proof for the new incremental build impact atom. */
+/** Exact source admission, fixed-point and drift-refusal proof for the native file and Maven/Gradle reactor impact atoms. */
 final class M3FileBuildImpactRecipeTest {
     private static final String CRATE = "m3-file-build-impact-20261020";
     private static final String ROOT = "/com/synexia/rewrite/hash-pinned-java/" + CRATE + "/";
@@ -66,7 +66,7 @@ final class M3FileBuildImpactRecipeTest {
     @Test
     void manifestAndTemplatesAreSealed() throws Exception {
         var rows = rows();
-        assertEquals(2, rows.size());
+        assertEquals(4, rows.size());
         assertEquals(expected().keySet().stream().toList(), rows.stream().map(row -> row[0]).toList());
         for (String[] row : rows) {
             assertEquals(4, row.length);

@@ -30,11 +30,15 @@ jobs:
             m3/file/src/main/java/com/m3/file/M3File.java \
             m3/file/src/main/java/com/m3/file/M3FileDeltaLedger.java \
             m3/file/src/main/java/com/m3/file/M3BuildImpactPlan.java \
+            m3/file/src/main/java/com/m3/file/M3ReactorImpactPlan.java \
             m3/file/src/test/java/com/m3/file/M3FileDeltaLedgerContract.java \
-            m3/file/src/test/java/com/m3/file/M3BuildImpactPlanContract.java
+            m3/file/src/test/java/com/m3/file/M3BuildImpactPlanContract.java \
+            m3/file/src/test/java/com/m3/file/M3ReactorImpactPlanContract.java
           java --module-path build/m3file-delta-classes \
             -m com.m3.file/com.m3.file.M3FileDeltaLedgerContract
           java --module-path build/m3file-delta-classes \
             -m com.m3.file/com.m3.file.M3BuildImpactPlanContract
+          java --module-path build/m3file-delta-classes \
+            -m com.m3.file/com.m3.file.M3ReactorImpactPlanContract
       - name: Execute reusable Java LST recipe fixed point and drift proof
         run: mvn -B -ntp -f m3/file/recipe/build-impact-20261020/pom.xml test

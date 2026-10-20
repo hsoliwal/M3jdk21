@@ -25,3 +25,13 @@ Canonical reusable OpenRewrite recipe: `hsoliwal/com.synexia#12584`, `com.synexi
 4. No JNI implementation is invented here; the Java primitive BFS already operates directly on parent-owned arrays. Existing JNI file/mask kernels retain their exact ABI/parity requirements.
 
 This stacked PR targets the M3FileDeltaLedger feature branch, not master until that underlying SHA/delta owner is qualified and admitted. No Maven reactor/JDT incremental engine integration is claimed from this planning atom alone.
+
+## Native Maven/Gradle reactor and original physical file coordinates
+
+The same canonical recipe now receives two additional Java21 atoms: `M3ReactorImpactPlan` and its dependency-free `M3ReactorImpactPlanContract`. Physical file slots remain owned by the original `M3FileDeltaLedger`; no new file hashes, Maven model store, JDT parser, build plugin wrapper or JNI callback engine.
+
+- The reactor kernel receives a complete physical-slot-to-project index plane from the authoritative build model. Downstream project edges are CSR int[] arrays. Its Kahn topological traversal and BFS produce a dependency-ordered impacted project int[] without boxed nodes.
+- Missing graph, unknown physical file owner, changed POM/plugin/build input or incomplete compiler ABI proof conservatively invalidates all reactor projects. Cyclic or invalid dependency graphs are refused instead of returning a partial build. No result is cached unless source and dependency generations agree.
+- Real compiler, annotation processor, Maven 4 Resolver, m2e/Tycho and Gradle project metadata producers are **not yet wired**. They must supply complete generation-matched models; no plugin behavior is silently skipped.
+- Verified locally: **18 additional** Java21 deterministic checks on top of 25 file-plan checks, with a test-only M3FileDeltaLedger API shim and `-Xlint:all -Werror`. CI now compiles and exercises both classes against the original M3File ledger on the exact PR head.
+- Canonical recipe has four hash-sealed `ABSENT` targets (two production and two contracts); added source SHA256 `ebb3c7f8d56d578f311a176b06df4aec5af1572f2235b9903e817a32d0e7a328`, contract SHA256 `7a16c118fc4bca14d7bd1994b166fd99f83e333d3176bfed89e0b72661075a51`.

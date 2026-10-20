@@ -6,3 +6,6 @@ abi-safe-elision	Verified byte[] proof of no dependent impact	CONDITIONAL	O(1) p
 missing-semantic-graph	Conservative whole live SOURCE/CLASS impact mask	REQUIRED	O(V)	O(V) output	Missing edges/processors/relevant build options may invalidate any dependent; never silently skip a compile
 build-model-delta	Any POM/Gradle/processor/build input changed	REQUIRED CONSERVATIVE	O(V)	O(V) output	Until Maven/Gradle reactor/resolver model identity is proven equal, invalidate all live compilation inputs
 native-jni	JNI per BFS edge	REJECT	O(E) boundary overhead	Native handle/root lifetime risk	Keep primitive graph traversal on Java21 arrays; reuse existing native kernels only where measured
+Maven4/Gradle-reactor-dag	CSR project dependencies and Kahn topological scheduling	SELECT M3ReactorImpactPlan	O(V+E)	O(V) primitive indegree, queue, masks	Input remains Maven/Gradle/JDT authoritative generation; no duplicate POM parsing or graph objects
+Maven4/Gradle-reactor-dag	unknown project ownership and model revisions	CONSERVATIVE	O(V)	O(V)	Full reactor rebuild rather than speculative cache hit
+Maven4/Gradle-reactor-dag	competitive-programming DAG topological sorting	IDEA_ONLY	O(V+E)	O(V)	General Kahn queue pattern from problem category; no LeetCode/HackerRank/GeeksforGeeks source copied
