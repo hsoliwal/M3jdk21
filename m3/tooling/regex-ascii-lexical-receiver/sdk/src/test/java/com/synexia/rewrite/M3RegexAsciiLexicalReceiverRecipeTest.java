@@ -10,7 +10,7 @@ import java.net.URI;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.*;
 import java.util.*;
-import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.parallel.Execution;
 import org.junit.jupiter.api.parallel.ExecutionMode;
@@ -254,7 +254,8 @@ final class M3RegexAsciiLexicalReceiverRecipeTest {
                 StandardOpenOption.CREATE_NEW, StandardOpenOption.WRITE);
     }
 
-    @AfterAll static void retainCountersOnlyAfterAllNamedMethodsPass() throws IOException {
+    @AfterEach void retainCountersOnlyAfterAllNamedMethodsPass() throws IOException {
+        if (PASSED.size() < 3) return;
         assertEquals(Set.of("all8PartialStatesBothOrdersReachExactFixedPoint",
                 "all8InverseStatesBothOrdersRecoverExactBefore",
                 "eachOwnedInputRefusesDriftMissingAndDuplicateOwnership"), PASSED);

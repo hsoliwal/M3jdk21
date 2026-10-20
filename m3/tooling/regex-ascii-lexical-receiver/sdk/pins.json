@@ -261,9 +261,9 @@
     },
     {
       "path": "src/test/java/com/synexia/rewrite/M3RegexAsciiLexicalReceiverRecipeTest.java",
-      "gitBlob": "46b86df717ca9c520fd4c25ca96330a6cb165d30",
-      "bytes": 16013,
-      "sha256": "40739208a648ab0484b1f5d5d57805c860aaa556e6f5d9d8da060dbed11eb5a3"
+      "gitBlob": "77e2fe7348670cf744de08c8cec6fa4c8ebf2ae6",
+      "bytes": 16047,
+      "sha256": "009427bfe21387443b46ee99bc3d2ba86f2af547be26f141f9b47d638562a4ff"
     },
     {
       "path": "THIRD_PARTY_NOTICES.md",
