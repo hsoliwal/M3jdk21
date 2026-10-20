@@ -34,6 +34,9 @@ import java.util.Arrays;
  * counts the visited nodes. No Item/proxy or per-row object is created; reset drops
  * all measurement backing.</p>
  *
+ * <p>Threads: not thread-safe and holds no lock; confined to the thread that applies the
+ * model's patches and measures rows (the UI thread for a widget).</p>
+ *
  * <p>The behaviour follows two pattern donors, read at pinned commits and not copied:
  * react-window (MIT, 439cfee: lib/core getOffsetForIndex, getEstimatedSize,
  * createCachedBounds, getStartStopIndices) for lazy measurement, the

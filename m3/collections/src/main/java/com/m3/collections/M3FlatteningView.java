@@ -17,6 +17,11 @@ import java.util.RandomAccess;
  * order-statistic sibling forest), and {@link M3TreeProjection} maps a row to its (parent, child index) coordinate in
  * O(depth x log k). Cold children are arithmetic: {@link #get(int)} asks the {@link Source} for them only when read.
  * Child counts are read when a node is expanded.</p>
+ * <p>Cost (k materialized siblings, d depth): {@link #size()} O(1); {@link #get}, {@link #depth}, {@link #isExpanded}
+ * O(d log k); {@link #expand}, {@link #collapse} O(d log k); {@link #apply} O(runs log k + discarded nodes + d log k),
+ * never a rebuild (brief rule 24). {@link #work()} counts the sibling-index steps.</p>
+ * <p>Threads: not thread-safe and holds no lock; the view and its {@link Source} are confined to the thread that
+ * applies the model's patches.</p>
  *
  * @param <N> node type
  */

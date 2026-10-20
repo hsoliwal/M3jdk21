@@ -39,6 +39,19 @@ import java.util.Arrays;
  * those walks visit, so tests can bound the cost of an edit. The lanes are parallel
  * primitive arrays indexed by id: five ints, one byte and one long per id, plus one
  * root int per parent slot (slot 0 is the root of the tree itself).</p>
+ *
+ * <p>Ids are the owner's storage slots (rule 26: the public lane model's slots); a parent's
+ * key lane holds each child's row among its siblings, dense (every row has a slot) or
+ * sparse (only materialized rows have one). Cost, k children of the parent:
+ * {@link #find} (row to slot), {@link #key} (slot to row), {@link #lower},
+ * {@link #ceiling}, {@link #rank}, {@link #prefix}, {@link #seek}, {@link #seekOffset},
+ * {@link #insert}, {@link #remove}, {@link #adjust}, {@link #shift}: O(log k);
+ * {@link #removeRange}: O(log k + removed); {@link #order}: O(log k + count);
+ * {@link #flush}: O(k); {@link #size(int)}, {@link #total}, {@link #treeHeight}: O(1).</p>
+ *
+ * <p>Threads: not thread-safe and holds no lock; confined to its owner's thread (the
+ * thread that applies the model's patches). Even reads may not run beside a write:
+ * a write moves nodes and pending shifts.</p>
  */
 public final class M3OrderStatisticForest {
 	private static final int NONE = -1;
@@ -368,6 +381,39 @@ public final class M3OrderStatisticForest {
 				node = right [node];
 			}
 		}
+	}
+
+	/**
+	 * Writes the children of {@code parentId} in key order, starting at the first key at or above {@code fromKey}, to
+	 * {@code out} (at most {@code count} of them, from index 0); answers how many. One descent, then in-order
+	 * successor steps along parent links: O(log k + count). The bulk export of a row run to slots.
+	 */
+	public int order (int parentId, int fromKey, int count, int [] out) {
+		int node = ceiling (parentId, fromKey), n = 0;
+		while (node != NONE && n < count) {
+			out [n++] = node;
+			node = successor (node);
+		}
+		return n;
+	}
+
+	/* the next node in key order: the leftmost of the right subtree, else the first ancestor reached from its left */
+	private int successor (int node) {
+		int r = right [node];
+		if (r != NONE) {
+			while (left [r] != NONE) {
+				work++;
+				r = left [r];
+			}
+			return r;
+		}
+		int child = node, parent = up [node];
+		while (parent != NONE && right [parent] == child) {
+			work++;
+			child = parent;
+			parent = up [parent];
+		}
+		return parent;
 	}
 
 	/** Number of children of {@code parentId} with a key in {@code [from, to)}. */

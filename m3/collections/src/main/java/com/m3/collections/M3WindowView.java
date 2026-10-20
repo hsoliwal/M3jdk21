@@ -24,6 +24,14 @@ import java.util.RandomAccess;
  * entries it touches. While the window is {@link #hide() hidden} no host call is made: runs only update the lanes and
  * fold the touched entries into one dirty span (O(1) per run), and {@link #show()} answers one window patch that
  * brings the host from what it showed when hidden to the current window, to apply and paint once.</p>
+ * <p>Cost (w entries in the window, n source rows): {@link #size()}, {@link #rowOf}, {@link #entryOf}, state and flag
+ * O(1); {@link #get} O(1) plus the source's {@code get}; {@link #move} O(entries entering and leaving), the ring growing
+ * amortized; {@link #remove}, {@link #insert}: O(1) plus the shorter side of the window moved in the lane, never
+ * O(n); {@link #update}, {@link #hide()}, {@link #show()} O(1); {@link #count(int)} O(w). {@link #work()} counts
+ * these steps.</p>
+ * <p>Threads: not thread-safe and holds no lock. A window, its source and its host are confined to one thread (the
+ * thread that applies the model's patches, the UI thread for a widget); the host is called on that thread. The
+ * source changes only together with the patch that describes the change.</p>
  *
  * @param <E> element type of the source
  */
@@ -155,6 +163,20 @@ public final class M3WindowView<E> extends AbstractList<E> implements RandomAcce
 		if (hidden) foldInsert (entry, count);
 		else if (host != null) host.insert (entry, count);
 		modCount++;
+	}
+
+	/**
+	 * The contents of source rows {@code [row, row + count)} changed in place. The resident ones are told to the host as
+	 * an entry update (or, hidden, folded into the dirty span); their state masks stay. O(1).
+	 */
+	@Override
+	public void update (int row, int count) {
+		work++;
+		int from = Math.max (row, plan.first ()), to = Math.min (row + count, plan.first () + plan.size ());
+		if (from >= to) return;
+		int entry = from - plan.first ();
+		if (hidden) foldUpdate (entry, to - from);
+		else if (host != null) host.update (entry, to - from);
 	}
 
 	/** Stops host calls: from now on patches only update the lanes and the dirty span. */
@@ -301,6 +323,18 @@ public final class M3WindowView<E> extends AbstractList<E> implements RandomAcce
 		}
 		if (dirtyLow >= entry) dirtyLow += count;
 		if (dirtyHigh > entry) dirtyHigh += count;
+		dirtyLow = Math.min (dirtyLow, entry);
+		dirtyHigh = Math.max (dirtyHigh, entry + count);
+	}
+
+	/* the dirty span after current entries [entry, entry + count) changed in place */
+	private void foldUpdate (int entry, int count) {
+		if (!dirty) {
+			dirty = true;
+			dirtyLow = entry;
+			dirtyHigh = entry + count;
+			return;
+		}
 		dirtyLow = Math.min (dirtyLow, entry);
 		dirtyHigh = Math.max (dirtyHigh, entry + count);
 	}

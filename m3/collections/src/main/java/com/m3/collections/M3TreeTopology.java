@@ -17,6 +17,12 @@ import java.util.*;
  * do not require slots; only their parent's logical child count is retained.
  * This is intentionally independent of any native Tree model so native rows can
  * later become a reconstructable viewport projection.</p>
+ *
+ * <p>Structural edits arrive as patch runs ({@link #apply}, {@link #insertCoordinates},
+ * {@link #removeCoordinates}): O(log k + discarded) per run plus one refresh of the
+ * ancestors, through the lazy shifts of the {@link M3OrderStatisticForest} sibling
+ * index (brief rule 24). Threads: not thread-safe and holds no lock; confined to the
+ * thread that applies the model's patches.</p>
  */
 public final class M3TreeTopology {
 	static final int ROOT = -1;

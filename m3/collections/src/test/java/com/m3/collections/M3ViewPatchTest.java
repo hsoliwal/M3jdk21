@@ -203,6 +203,12 @@ public class M3ViewPatchTest {
 			for (int i = 0; i < count; i++) rows.add (index + i, window.get (index + i));
 		}
 
+		@Override
+		public void update (int index, int count) {
+			calls++;
+			for (int i = 0; i < count; i++) rows.set (index + i, window.get (index + i));
+		}
+
 		void follow (M3WindowPlan plan) {
 			if (plan.replaced ()) {
 				rows.clear ();
