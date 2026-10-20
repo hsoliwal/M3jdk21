@@ -2395,6 +2395,43 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
     }
 
     /**
+     * Returns the vertical scroll state of the table as one value: the top
+     * view row, its pixel offset, the heights of that row, of the viewport
+     * and of the content, and the row counts derived from them. Row heights
+     * may differ ({@link #setRowHeight(int, int)}); every count is measured
+     * on the rows.
+     *
+     * @return the scroll state
+     * @see #scrollRowToVisible(int, M3Scrolling)
+     * @since 21
+     */
+    @BeanProperty(bound = false)
+    public M3ScrollInfo getScrollInfo() {
+        return M3ScrollSupport.info(this, M3ScrollSupport.rows(this));
+    }
+
+    /**
+     * Scrolls so that the view row is placed as the alignment says: at the
+     * top, centered, at the bottom of the viewport, or with the smallest
+     * scroll that shows it, which is the rule of
+     * {@link #scrollRectToVisible(Rectangle)}. The row is clamped to the
+     * rows and the position to the content. The horizontal position is kept.
+     * The scroll goes through {@code scrollRectToVisible}, so it takes
+     * effect when the table is the view of a {@code JViewport} and is a
+     * no-op otherwise.
+     *
+     * @param row the view row to show
+     * @param alignment where to place it
+     * @return the first visible row after the scroll, or -1 when the table
+     *         has no rows
+     * @throws NullPointerException if {@code alignment} is null
+     * @since 21
+     */
+    public int scrollRowToVisible(int row, M3Scrolling alignment) {
+        return M3ScrollSupport.scrollTo(this, M3ScrollSupport.rows(this), row, alignment);
+    }
+
+    /**
      * Returns the indices of all selected columns.
      *
      * @return an array of integers containing the indices of all selected columns,

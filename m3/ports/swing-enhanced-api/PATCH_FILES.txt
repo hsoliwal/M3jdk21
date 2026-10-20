@@ -9,3 +9,6 @@ javax/swing/table/AbstractTableModel.java
 javax/swing/table/DefaultTableModel.java
 javax/swing/DefaultListModel.java
 javax/swing/tree/DefaultTreeModel.java
+javax/swing/M3Scrolling.java
+javax/swing/M3ScrollInfo.java
+javax/swing/M3ScrollSupport.java

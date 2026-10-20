@@ -101,8 +101,9 @@ public final class M3ScrollInfo {
     }
 
     /**
-     * Returns the height of the viewport, the visible rectangle of the
-     * component.
+     * Returns the height of the viewport: the extent of the enclosing
+     * {@code JViewport} when the component is its view, otherwise the height
+     * of the component's visible rectangle.
      *
      * @return the viewport height in pixels
      */
@@ -149,8 +150,9 @@ public final class M3ScrollInfo {
     }
 
     /**
-     * Returns the vertical scroll position: the top edge of the viewport in
-     * the component's coordinates.
+     * Returns the vertical scroll position: the view position of the
+     * enclosing {@code JViewport} (the top of the visible rectangle without
+     * one), in the component's coordinates.
      *
      * @return the view position in pixels
      */
@@ -177,10 +179,10 @@ public final class M3ScrollInfo {
             return false;
         }
         M3ScrollInfo o = (M3ScrollInfo) other;
-        return topIndex == o.topIndex && pixelOffset == o.pixelOffset && rowExtent == o.rowExtent
-                && viewportExtent == o.viewportExtent && rowCount == o.rowCount && visibleRows == o.visibleRows
-                && fullRows == o.fullRows && contentExtent == o.contentExtent && pixelPosition == o.pixelPosition
-                && maxTopIndex == o.maxTopIndex;
+        return ((topIndex ^ o.topIndex) | (pixelOffset ^ o.pixelOffset) | (rowExtent ^ o.rowExtent)
+                | (viewportExtent ^ o.viewportExtent) | (rowCount ^ o.rowCount) | (visibleRows ^ o.visibleRows)
+                | (fullRows ^ o.fullRows) | (maxTopIndex ^ o.maxTopIndex) | (contentExtent ^ o.contentExtent)
+                | (pixelPosition ^ o.pixelPosition)) == 0;
     }
 
     @Override

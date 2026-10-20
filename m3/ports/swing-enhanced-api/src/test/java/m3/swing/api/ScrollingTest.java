@@ -75,12 +75,13 @@ public class ScrollingTest {
 
     /* the oracle: every field from a scan of the row bounds */
     private static M3ScrollInfoOracle oracle(Subject s) {
-        Rectangle visible = s.view().getVisibleRect();
+        JViewport port = (JViewport) s.view().getParent();
+        int y0 = port.getViewPosition().y, extent = port.getExtentSize().height;
         int count = s.count().get();
         M3ScrollInfoOracle o = new M3ScrollInfoOracle();
         o.rowCount = count;
-        o.viewportExtent = Math.max(0, visible.height);
-        o.pixelPosition = visible.y;
+        o.viewportExtent = extent;
+        o.pixelPosition = y0;
         o.topIndex = -1;
         o.maxTopIndex = -1;
         if (count == 0) {
@@ -93,20 +94,20 @@ public class ScrollingTest {
         if (o.maxTopIndex < 0) {
             o.maxTopIndex = count - 1;
         }
-        o.topIndex = firstAtOrBelow(s, count, visible.y);
+        o.topIndex = firstAtOrBelow(s, count, y0);
         if (o.topIndex < 0 || o.viewportExtent == 0) {
             o.rowExtent = o.topIndex < 0 ? 0 : s.bounds().apply(o.topIndex).height;
             return o;
         }
         Rectangle top = s.bounds().apply(o.topIndex);
-        o.pixelOffset = Math.max(0, visible.y - top.y);
+        o.pixelOffset = Math.max(0, y0 - top.y);
         o.rowExtent = top.height;
         for (int row = 0; row < count; row++) {
             Rectangle r = s.bounds().apply(row);
-            if (r.intersects(visible)) {
+            if (r.y < y0 + extent && r.y + r.height > y0) {
                 o.visibleRows++;
             }
-            if (visible.contains(r)) {
+            if (r.y >= y0 && r.y + r.height <= y0 + extent) {
                 o.fullRows++;
             }
         }
@@ -192,9 +193,10 @@ public class ScrollingTest {
             JViewport viewport = viewport(s.view(), 300, 157);
             int count = s.count().get();
             int maxY = s.view().getHeight() - 157;
-            for (int row : new int[] {0, 1, 7, 8, 42, 120, count / 2, count - 2, count - 1}) {
+            int start = Math.min(500, maxY);
+            for (int row : java.util.stream.IntStream.of(0, 1, 7, 8, 42, 120, count / 2, count - 2, count - 1).filter(r -> r < count).toArray()) {
                 for (M3Scrolling alignment : M3Scrolling.values()) {
-                    viewport.setViewPosition(new Point(0, 500));
+                    viewport.setViewPosition(new Point(0, start));
                     int top = s.scroll().to(row, alignment);
                     Rectangle visible = s.view().getVisibleRect();
                     Rectangle r = s.bounds().apply(row);
@@ -209,13 +211,13 @@ public class ScrollingTest {
                                 || clamped, where);
                         case MIN_DISTANCE -> {
                             assertTrue(visible.contains(r) || r.height > visible.height, where + " shown");
-                            boolean wasAbove = r.y < 500, wasBelow = r.y + r.height > 500 + 157;
+                            boolean wasAbove = r.y < start, wasBelow = r.y + r.height > start + 157;
                             if (wasAbove) {
                                 assertEquals(r.y, visible.y, where + " above: aligned to the top");
                             } else if (wasBelow) {
                                 assertTrue(r.y + r.height == visible.y + visible.height || clamped, where + " below");
                             } else {
-                                assertEquals(500, visible.y, where + " already visible: no scroll");
+                                assertEquals(start, visible.y, where + " already visible: no scroll");
                             }
                         }
                     }
@@ -240,5 +242,59 @@ public class ScrollingTest {
         JTable alone = Fixtures.table(30);
         alone.setSize(300, alone.getPreferredSize().height);
         assertEquals(0, alone.scrollRowToVisible(20, M3Scrolling.BOTTOM));
+    }
+
+    @Test
+    public void componentTallerThanItsRows() {
+        JTable table = Fixtures.table(12);
+        JViewport viewport = viewport(table, 300, 157);
+        table.setSize(300, 1000);
+        M3ScrollInfo info = table.getScrollInfo();
+        assertEquals(11, info.maxTopIndex(), "the last row is the last possible top row");
+        viewport.setViewPosition(new Point(0, 843));
+        info = table.getScrollInfo();
+        assertEquals(-1, info.topIndex());
+        assertEquals(0, info.visibleRows());
+        assertEquals(12L * table.getRowHeight(), info.contentExtent());
+    }
+
+    @Test
+    public void valueSemantics() {
+        JList<String> list = Fixtures.list(50);
+        viewport(list, 100, 60);
+        M3ScrollInfo info = list.getScrollInfo();
+        assertEquals(info, info);
+        assertNotEquals(info, null);
+        assertNotEquals(info, "M3ScrollInfo");
+        list.scrollRowToVisible(30, M3Scrolling.TOP);
+        assertNotEquals(info, list.getScrollInfo());
+        assertEquals(M3Scrolling.MIN_DISTANCE, M3Scrolling.valueOf("MIN_DISTANCE"));
+
+        JTree tree = Fixtures.tree();
+        JViewport viewport = viewport(tree, 200, 50);
+        tree.scrollRowToVisible(40);
+        assertTrue(viewport.getViewPosition().y > 0, "the stock scrollRowToVisible(int) still scrolls");
+    }
+
+    @Test
+    public void rowsBelowATopInset() {
+        JList<String> list = Fixtures.list(30);
+        list.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 0, 0, 0));
+        JTree tree = Fixtures.tree();
+        tree.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 0, 0, 0));
+        for (Subject s : List.of(
+                new Subject("list", list, () -> list.getModel().getSize(), r -> list.getCellBounds(r, r),
+                        list::getScrollInfo, list::scrollRowToVisible),
+                new Subject("tree", tree, tree::getRowCount, tree::getRowBounds, tree::getScrollInfo,
+                        tree::scrollRowToVisible))) {
+            JViewport viewport = viewport(s.view(), 200, 3);
+            M3ScrollInfo info = s.info().get();
+            oracle(s).assertEquals(info, s.name() + " window above the first row");
+            assertEquals(0, info.topIndex());
+            assertEquals(0, info.visibleRows());
+            viewport.setSize(200, 60);
+            oracle(s).assertEquals(s.info().get(), s.name() + " inset in the window");
+            assertEquals(0, s.scroll().to(0, M3Scrolling.MIN_DISTANCE));
+        }
     }
 }

@@ -18,6 +18,7 @@ sed 's/>/>\n/g' "$xml" | awk -v list="$list" '
     match($0, /covered="[0-9]*"/); c = substr($0, RSTART + 9, RLENGTH - 10)
     miss[t] += m; cov[t] += c
     if (t == "LINE" && m > 0) printf "missed %d line(s): %s.%s\n", m, cls, method
+    if (t == "BRANCH" && m > 0) printf "missed %d branch(es): %s.%s%s", m, cls, method, ORS
   }
   END {
     for (t in cov) printf "NEW CODE %s %d/%d (%.1f%%)\n", t, cov[t], cov[t] + miss[t], 100 * cov[t] / (cov[t] + miss[t])

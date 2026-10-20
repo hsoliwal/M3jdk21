@@ -2028,6 +2028,42 @@ public class JTree extends JComponent implements Scrollable, Accessible
     }
 
     /**
+     * Returns the vertical scroll state of the tree as one value: the top
+     * row, its pixel offset, the heights of that row, of the viewport and of
+     * the content, and the row counts derived from them. Rows are the
+     * visible rows of the tree ({@link #getRowCount()}); their heights may
+     * differ, so every count is measured on the rows.
+     *
+     * @return the scroll state
+     * @see #scrollRowToVisible(int, M3Scrolling)
+     * @since 21
+     */
+    @BeanProperty(bound = false)
+    public M3ScrollInfo getScrollInfo() {
+        return M3ScrollSupport.info(this, M3ScrollSupport.rows(this));
+    }
+
+    /**
+     * Scrolls so that the row is placed as the alignment says: at the top,
+     * centered, at the bottom of the viewport, or with the smallest scroll
+     * that shows it, which is the rule of {@link #scrollRowToVisible(int)}.
+     * The row is clamped to the rows and the position to the content. The
+     * horizontal position is kept. The scroll goes through
+     * {@link #scrollRectToVisible(Rectangle)}, so it takes effect when the
+     * tree is the view of a {@code JViewport} and is a no-op otherwise.
+     *
+     * @param row the row to show, where 0 is the first row in the display
+     * @param alignment where to place it
+     * @return the first visible row after the scroll, or -1 when the tree
+     *         shows no rows
+     * @throws NullPointerException if {@code alignment} is null
+     * @since 21
+     */
+    public int scrollRowToVisible(int row, M3Scrolling alignment) {
+        return M3ScrollSupport.scrollTo(this, M3ScrollSupport.rows(this), row, alignment);
+    }
+
+    /**
      * Returns the number of nodes selected.
      *
      * @return the number of nodes selected

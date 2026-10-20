@@ -2261,6 +2261,43 @@ public class JList<E> extends JComponent implements Scrollable, Accessible
         return first < 0 ? M3ItemRange.EMPTY : M3ItemRange.of(first, getLastVisibleIndex());
     }
 
+    /**
+     * Returns the vertical scroll state of the list as one value: the top
+     * cell, its pixel offset, the heights of that cell, of the viewport and
+     * of the content, and the cell counts derived from them. Cells are taken
+     * in index order; in a multi-column layout ({@code VERTICAL_WRAP},
+     * {@code HORIZONTAL_WRAP}) the cell of the first column stands for the
+     * row.
+     *
+     * @return the scroll state
+     * @see #scrollRowToVisible(int, M3Scrolling)
+     * @since 21
+     */
+    @BeanProperty(bound = false)
+    public M3ScrollInfo getScrollInfo() {
+        return M3ScrollSupport.info(this, M3ScrollSupport.rows(this));
+    }
+
+    /**
+     * Scrolls so that the cell at {@code index} is placed as the alignment
+     * says: at the top, centered, at the bottom of the viewport, or with the
+     * smallest scroll that shows it, which is the rule of
+     * {@link #ensureIndexIsVisible(int)}. The index is clamped to the cells
+     * and the position to the content. The scroll goes through
+     * {@link #scrollRectToVisible(Rectangle)}, so it takes effect when the
+     * list is the view of a {@code JViewport} and is a no-op otherwise.
+     *
+     * @param index the cell to show
+     * @param alignment where to place it
+     * @return the first visible cell after the scroll, or -1 when the list
+     *         is empty
+     * @throws NullPointerException if {@code alignment} is null
+     * @since 21
+     */
+    public int scrollRowToVisible(int index, M3Scrolling alignment) {
+        return M3ScrollSupport.scrollTo(this, M3ScrollSupport.rows(this), index, alignment);
+    }
+
 
     /**
      * Selects a single cell. Does nothing if the given index is greater

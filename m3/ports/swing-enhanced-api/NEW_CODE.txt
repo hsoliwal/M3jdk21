@@ -19,3 +19,15 @@ javax/swing/table/AbstractTableModel$1 *
 javax/swing/table/DefaultTableModel$1 *
 javax/swing/DefaultListModel$1 *
 javax/swing/tree/DefaultTreeModel$1 *
+javax/swing/M3Scrolling *
+javax/swing/M3ScrollInfo *
+javax/swing/M3ScrollSupport *
+javax/swing/M3ScrollSupport$1 *
+javax/swing/M3ScrollSupport$2 *
+javax/swing/M3ScrollSupport$3 *
+javax/swing/JList getScrollInfo
+javax/swing/JList scrollRowToVisible
+javax/swing/JTable getScrollInfo
+javax/swing/JTable scrollRowToVisible
+javax/swing/JTree getScrollInfo
+javax/swing/JTree scrollRowToVisible

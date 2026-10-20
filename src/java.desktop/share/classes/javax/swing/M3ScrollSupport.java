@@ -113,55 +113,65 @@ final class M3ScrollSupport {
         return r != null && y >= r.y && y < r.y + r.height;
     }
 
-    /** The first row at or below {@code y}: the row containing it, row 0 above the rows, -1 below them. */
-    static int topRow(Rows rows, int count, int y) {
-        if (count == 0) {
-            return -1;
-        }
+    /**
+     * The first row at or below {@code y} of a component that has rows: the row containing it, row 0 above the
+     * rows, -1 below them.
+     */
+    static int topRow(Rows rows, int y) {
         int row = rows.rowAt(y);
         if (row >= 0) {
             return row;
         }
         Rectangle first = rows.bounds(0);
-        return first != null && y < first.y ? 0 : -1;
+        return y < first.y ? 0 : -1;
+    }
+
+    /**
+     * The vertical window of the component: the view position and extent of the enclosing {@code JViewport} (a
+     * viewport child is always its view), otherwise the visible rectangle. Only the vertical axis counts for rows.
+     */
+    private static int[] window(JComponent component) {
+        if (component.getParent() instanceof JViewport viewport) {
+            return new int[] {viewport.getViewPosition().y, Math.max(0, viewport.getExtentSize().height)};
+        }
+        Rectangle visible = component.getVisibleRect();
+        return new int[] {visible.y, Math.max(0, visible.height)};
     }
 
     static M3ScrollInfo info(JComponent component, Rows rows) {
-        Rectangle visible = component.getVisibleRect();
+        int[] window = window(component);
+        int y0 = window[0], extent = window[1];
         int count = rows.count();
-        int viewportExtent = Math.max(0, visible.height);
         if (count == 0) {
-            return new M3ScrollInfo(-1, 0, 0, viewportExtent, 0, 0, 0, 0, visible.y, -1);
+            return new M3ScrollInfo(-1, 0, 0, extent, 0, 0, 0, 0, y0, -1);
         }
         Rectangle last = rows.bounds(count - 1);
         long content = last.y + (long) last.height;
-        int maxTop = viewportExtent == 0 ? count - 1
-                : topRow(rows, count, Math.max(0, component.getHeight() - viewportExtent));
+        int maxTop = extent == 0 ? count - 1 : topRow(rows, Math.max(0, component.getHeight() - extent));
         if (maxTop < 0) {
             maxTop = count - 1;
         }
-        int top = topRow(rows, count, visible.y);
-        if (viewportExtent == 0 || top < 0) {
-            return new M3ScrollInfo(top, 0, top < 0 ? 0 : rows.bounds(top).height, viewportExtent, count, 0, 0,
-                    content, visible.y, maxTop);
+        int top = topRow(rows, y0);
+        if (extent == 0 || top < 0) {
+            return new M3ScrollInfo(top, 0, top < 0 ? 0 : rows.bounds(top).height, extent, count, 0, 0, content, y0,
+                    maxTop);
         }
         Rectangle topBounds = rows.bounds(top);
-        int bottomY = visible.y + visible.height - 1;
-        int lastVisible = rows.rowAt(bottomY);
+        long y1 = (long) y0 + extent;
+        int lastVisible = rows.rowAt((int) Math.min(Integer.MAX_VALUE, y1 - 1));
         if (lastVisible < 0) {
-            lastVisible = bottomY >= content ? count - 1 : top - 1;
+            lastVisible = y1 - 1 >= content ? count - 1 : top - 1;
         }
-        int visibleRows = lastVisible - top + 1;
-        int firstFull = topBounds.y >= visible.y ? top : top + 1;
+        int firstFull = topBounds.y >= y0 ? top : top + 1;
         int lastFull = lastVisible;
         if (lastVisible >= 0) {
             Rectangle lastBounds = rows.bounds(lastVisible);
-            if (lastBounds.y + lastBounds.height > visible.y + visible.height) {
+            if (lastBounds.y + (long) lastBounds.height > y1) {
                 lastFull = lastVisible - 1;
             }
         }
-        return new M3ScrollInfo(top, Math.max(0, visible.y - topBounds.y), topBounds.height, viewportExtent, count,
-                visibleRows, Math.max(0, lastFull - firstFull + 1), content, visible.y, maxTop);
+        return new M3ScrollInfo(top, Math.max(0, y0 - topBounds.y), topBounds.height, extent, count,
+                lastVisible - top + 1, Math.max(0, lastFull - firstFull + 1), content, y0, maxTop);
     }
 
     static int scrollTo(JComponent component, Rows rows, int row, M3Scrolling alignment) {
@@ -172,25 +182,26 @@ final class M3ScrollSupport {
         }
         row = Math.max(0, Math.min(row, count - 1));
         Rectangle r = rows.bounds(row);
-        Rectangle visible = component.getVisibleRect();
+        int[] window = window(component);
+        int y0 = window[0], extent = window[1];
         int y;
         switch (alignment) {
             case TOP:
                 y = r.y;
                 break;
             case BOTTOM:
-                y = r.y + r.height - visible.height;
+                y = r.y + r.height - extent;
                 break;
             case CENTER:
-                y = r.y + r.height / 2 - visible.height / 2;
+                y = r.y + r.height / 2 - extent / 2;
                 break;
             default:
-                y = r.y < visible.y ? r.y
-                        : r.y + r.height > visible.y + visible.height ? r.y + r.height - visible.height : visible.y;
+                y = r.y < y0 ? r.y : r.y + r.height > y0 + extent ? r.y + r.height - extent : y0;
                 break;
         }
-        y = Math.max(0, Math.min(y, Math.max(0, component.getHeight() - visible.height)));
-        component.scrollRectToVisible(new Rectangle(visible.x, y, visible.width, visible.height));
-        return topRow(rows, count, component.getVisibleRect().y);
+        y = Math.max(0, Math.min(y, Math.max(0, component.getHeight() - extent)));
+        Rectangle visible = component.getVisibleRect();
+        component.scrollRectToVisible(new Rectangle(visible.x, y, visible.width, extent));
+        return topRow(rows, window(component)[0]);
     }
 }
