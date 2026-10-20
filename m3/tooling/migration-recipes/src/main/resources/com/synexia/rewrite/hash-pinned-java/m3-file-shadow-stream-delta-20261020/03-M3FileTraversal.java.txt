@@ -88,6 +88,29 @@ public final class M3FileTraversal {
         return rootStream.flatMap(root -> walk(root, checked, monitor));
     }
 
+    /**
+     * Immediate children only. This is the directory-level partition boundary for schedulers that
+     * want to process independent directories/files concurrently without retaining a tree.
+     */
+    public static Stream<M3File> children(
+            Path directory, Options options, M3ProgressMonitor progress) {
+        Path parent = Objects.requireNonNull(directory, "directory");
+        Options checked = Objects.requireNonNull(options, "options");
+        M3ProgressMonitor monitor = Objects.requireNonNull(progress, "progress");
+        monitor.checkCanceled();
+        try {
+            return Files.list(parent)
+                    .peek(ignored -> {
+                        monitor.worked(1L);
+                        monitor.checkCanceled();
+                    })
+                    .filter(checked.include())
+                    .map(M3File::of);
+        } catch (IOException failure) {
+            throw new UncheckedIOException(failure);
+        }
+    }
+
     public static Stream<M3File> walk(
             Path root, Options options, M3ProgressMonitor progress) {
         Path start = Objects.requireNonNull(root, "root");
