@@ -1,28 +1,90 @@
 {
-  "schema": 1,
-  "status": "CANDIDATE_NOT_ADMITTED",
+  "schema": 2,
+  "status": "SCOPED_RECIPE_AND_RUNTIME_PASS",
   "target_revision": "df532e779056dbec203dde20030657c3d144f5b5",
-  "completed": {
-    "java21_strict_compile": true,
-    "filtered_null_checks": 3555352,
-    "histogram_java_checks": 403492,
-    "bitmap_java_checks": 119456,
-    "projection_java_checks": 282479,
+  "recipe": "com.synexia.m3.CollectionRecovery20261020",
+  "generated_sources": 6,
+  "master_wrappers_preserved": true,
+  "sdk": {
+    "tests": 5,
     "failures": 0,
-    "strict_C17_syntax": [
-      "m3_state_mask_histogram.c",
-      "m3_index_mask_window.c"
+    "errors": 0,
+    "gates": [
+      "named generation",
+      "fixed point",
+      "missing/drift refusal",
+      "duplicate/occupied refusal",
+      "permutation/independent recipe equality",
+      "unrelated source preservation",
+      "serial-prefix and single-file replay"
     ]
   },
-  "scope": "Exact canonical CollectionComposite20261019 postimages, not current-master composition",
+  "runtime": {
+    "current_filtered_checks": 3555352,
+    "generated_projection_java_checks": 282479,
+    "generated_projection_jni_checks": 287107,
+    "sorted_checks_per_mode": 1031319,
+    "sorted_modes": [
+      "mixed",
+      "interpreter",
+      "C1"
+    ],
+    "exact_source_baseline": "fails split comparator lost",
+    "public_api_parity": [
+      "M3LongIndexProjection",
+      "java.util.SortedSet"
+    ],
+    "jni": {
+      "platform": "Windows x64; Java 21.0.9+7-LTS-338; MinGW C17",
+      "strict_builds": [
+        "statehist",
+        "mask",
+        "address"
+      ],
+      "histogram": 421946,
+      "bitmap": 135714,
+      "projection": 287107,
+      "mask_window": 270606,
+      "xcheck_jni": true
+    }
+  },
+  "allocation": {
+    "rows": 65536,
+    "warmups": 30,
+    "repetitions": 40,
+    "equal_run_lengths": [
+      1,
+      8,
+      65536
+    ],
+    "before_bytes_per_operation": [
+      524356,
+      524352,
+      524352
+    ],
+    "after_bytes_per_operation": [
+      262192,
+      262192,
+      262192
+    ],
+    "checksum_equal": true,
+    "limitation": "Single-host fixed workload; no universal latency or retained/native-memory improvement claim"
+  },
+  "autoreview": {
+    "engine": "codex",
+    "findings": [],
+    "scope": "Exact six-file source-review packet with unchanged current wrappers as context; not full repository or canonical metadata review"
+  },
   "pending": [
-    "SDK generation and fixed-point execution",
-    "current-master filtered wrapper probe",
-    "java.base patched runtime",
-    "Windows JNI shared-link and runtime",
-    "full M3JDK21 build and jtreg",
-    "performance comparisons",
-    "source-aware autoreview"
+    "source-built full M3JDK21 image and full jtreg",
+    "Linux/macOS JNI/platform matrix",
+    "retained heap/native/process-memory comparison",
+    "five-library complete compatibility",
+    "ordered String-to-arrays-to-collections admission",
+    "historical composite recipe remains separate unqualified candidate",
+    "historical source-seal workflows require qualified successor receipts"
   ],
-  "blocker": "K: required temporary lane stopped responding during local qualification; storage hold retained. No inference of full qualification from syntax or Java-only results."
+  "protection": "Storage protection stays ACTIVE; no C/D/E build output; K TEMP verified; 64MiB scoped budget and 8GiB reserve retained",
+  "proof": "qualification/COMMANDS.json",
+  "current_source_identity_proof": "qualification/CURRENT_SOURCE_IDENTITIES.json"
 }
