@@ -1,5 +1,7 @@
 /*
- * SPDX-License-Identifier: Apache-2.0
+ * Copyright (c) 2026, Hitesh Soliwal and contributors. All rights reserved.
+ * GPLv2 with the Classpath exception.
+ */
  * @test
  * @summary JNI-callable UTF-16 ranges compose into one interned M3 String view
  * @run main/native/othervm --add-opens=java.base/java.lang=ALL-UNNAMED -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage M3StringCharRangeJniIngressTest
