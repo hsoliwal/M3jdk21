@@ -1,0 +1,6 @@
+category	problem_shape	donor_or_reference	decision	m3_owner
+COMPOSITE_LITERAL_SEARCH	substring search over balanced immutable composition	M3MeasuredRope + M3StringTuple	REUSE_EXISTING	java.lang.M3StringTuple
+SUBTREE_REJECTION	measured-tree pruning by composable necessary facts	M3StringFacts	REUSE_EXISTING	java.lang.M3StringFacts
+SEAM_MATCH	pattern crossing concatenation boundary	KMP prefix table	REUSE_EXISTING	java.lang.M3StringSearchPrecompute
+SUBSTRING_SEARCH	exact first/last substring search	LeetCode 28 / GFG KMP	CATEGORY_ONLY	java.lang.M3StringTreeSearch
+BALANCED_SEQUENCE	persistent measured sequence	rope/finger-tree problem shape	REFERENCE_ONLY	M3StringTuple canonical DAG
