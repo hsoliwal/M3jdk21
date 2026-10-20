@@ -112,6 +112,9 @@ public final class M3ShadowStreamsContract {
         check(outputProgress.get() == 126, "outbound progress on confirmed mirror work");
         check(mainOutput.size() == 126, "primary output exact bytes");
         equal(mainOutput.toByteArray(), shadowOutput.toByteArray(), "output mirrored exactly");
+        rejects(IllegalArgumentException.class,
+                () -> M3ShadowStreams.output(mainOutput, mainOutput, M3StreamProgress.none()),
+                "shadow cannot alias primary output");
         ByteArrayOutputStream ahead = new ByteArrayOutputStream();
         OutputStream failing = new OutputStream() {
             @Override public void write(int ignored) throws IOException { throw new IOException("shadow failure"); }
