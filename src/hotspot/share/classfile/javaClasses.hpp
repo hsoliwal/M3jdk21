@@ -233,7 +233,8 @@ class java_lang_M3String : AllStatic {
   static int _tuple_left_offset;
   static int _tuple_right_offset;
 
-  static int _immediate_packed_offset;
+  static int _immediate_words_offset;
+  static int _immediate_slot_offset;
 
   static void copy_owner_chars(
       oop owner, int start, int len, jchar* destination);
