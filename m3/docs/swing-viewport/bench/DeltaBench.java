@@ -217,6 +217,14 @@ public final class DeltaBench {
                 sink += t.rowAtPoint(new Point(5, rnd.nextInt(N * 17))) + t.getCellRect(rnd.nextInt(N), 0, false).y;
             }
         }, "1,000 rowAtPoint + getCellRect pairs with every row custom");
+        for (int k = 0; k < 200_000; k++) {
+            sink += t.rowAtPoint(new Point(5, rnd.nextInt(N * 17))) + t.getCellRect(rnd.nextInt(N), 0, false).y;
+        }
+        time("frame_queries_dense_1000_steady", r -> {
+            for (int k = 0; k < 1000; k++) {
+                sink += t.rowAtPoint(new Point(5, rnd.nextInt(N * 17))) + t.getCellRect(rnd.nextInt(N), 0, false).y;
+            }
+        }, "the same after 200,000 more queries (the M3 store changed shape, so its query methods recompile)");
     }
 
     /** Median of 7 runs of {@code edit}, in ms, and the median bytes the thread allocated per run. */
