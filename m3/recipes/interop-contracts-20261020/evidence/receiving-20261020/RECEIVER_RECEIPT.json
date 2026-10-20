@@ -1,0 +1,41 @@
+{
+  "status": "PASS_ACTUAL_RECEIVER_APPLY_REPLAY_CHECK",
+  "target_parent": "d1b9aa9f35cf6f8cf7af1fb581471c2551bd7e97",
+  "runs": [
+    {
+      "name": "apply-01",
+      "command": [
+        "python3",
+        "/workspace/scratch/53bcd62c244c/canonical-interop-contracts-20261020/receive.py",
+        "--target",
+        "/workspace/scratch/53bcd62c244c/M3JDK21"
+      ],
+      "exit": 0,
+      "stdout": "M3_SDK_RESULTS_RECEIVER_PASS mode=apply targets=13 changes=13\n"
+    },
+    {
+      "name": "apply-02",
+      "command": [
+        "python3",
+        "/workspace/scratch/53bcd62c244c/canonical-interop-contracts-20261020/receive.py",
+        "--target",
+        "/workspace/scratch/53bcd62c244c/M3JDK21"
+      ],
+      "exit": 0,
+      "stdout": "M3_SDK_RESULTS_RECEIVER_PASS mode=apply targets=13 changes=0\n"
+    },
+    {
+      "name": "check",
+      "command": [
+        "python3",
+        "/workspace/scratch/53bcd62c244c/canonical-interop-contracts-20261020/receive.py",
+        "--target",
+        "/workspace/scratch/53bcd62c244c/M3JDK21",
+        "--check"
+      ],
+      "exit": 0,
+      "stdout": "M3_SDK_RESULTS_RECEIVER_PASS mode=check targets=13 changes=0\n"
+    }
+  ],
+  "SDK_RESULTS_sha256": "9923deb1d157564d7327b39a8290641208aecc1ee14efe9b25e6ab211cd3ae81"
+}

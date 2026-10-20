@@ -13,16 +13,17 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
-import org.apache.commons.collections4.Predicate;
 import org.junit.jupiter.api.Test;
 
 /** Contract differential for Apache admission semantics, not a Guava live-filter oracle. */
 final class M3ApacheCollectionsTest {
-    private static final Predicate<Integer> NONNEGATIVE = value -> value != null && value >= 0;
+    private static boolean nonnegative(Integer value) {
+        return value != null && value >= 0;
+    }
 
     @Test
     void listPreservesOrderAndValidatesMutationAtTheApacheBoundary() {
-        var list = M3ApacheCollections.predicatedList(NONNEGATIVE);
+        var list = M3ApacheCollections.predicatedList(M3ApacheCollectionsTest::nonnegative);
         list.add(3);
         list.add(1);
         list.add(3);
@@ -39,7 +40,7 @@ final class M3ApacheCollectionsTest {
 
     @Test
     void setValidatesAdmissionWithoutHidingStoredMembers() {
-        var set = M3ApacheCollections.predicatedSet(NONNEGATIVE);
+        var set = M3ApacheCollections.predicatedSet(M3ApacheCollectionsTest::nonnegative);
         assertTrue(set.add(0));
         assertFalse(set.add(0));
         assertTrue(set.add(9));
@@ -54,7 +55,7 @@ final class M3ApacheCollectionsTest {
     @Test
     void sortedSetPreservesComparatorAndLiveBoundedView() {
         var sorted = M3ApacheCollections.predicatedSortedSet(Comparator.<Integer>reverseOrder(),
-                NONNEGATIVE);
+                M3ApacheCollectionsTest::nonnegative);
         sorted.add(1); sorted.add(5); sorted.add(3);
         assertEquals(5, sorted.first());
         assertEquals(1, sorted.last());
@@ -82,7 +83,7 @@ final class M3ApacheCollectionsTest {
     @Test
     void sortedMapPreservesComparatorRangesAndValueChecks() {
         var map = M3ApacheCollections.<Integer, String>predicatedSortedMap(
-                Comparator.naturalOrder(), NONNEGATIVE, Objects::nonNull);
+                Comparator.naturalOrder(), M3ApacheCollectionsTest::nonnegative, Objects::nonNull);
         map.put(4, "four");
         map.put(2, "two");
         map.put(6, "six");
@@ -96,14 +97,14 @@ final class M3ApacheCollectionsTest {
 
     @Test
     void eachFacadeOwnsIndependentBackingAndValidatesNullArguments() {
-        var left = M3ApacheCollections.predicatedSet(NONNEGATIVE);
-        var right = M3ApacheCollections.predicatedSet(NONNEGATIVE);
+        var left = M3ApacheCollections.predicatedSet(M3ApacheCollectionsTest::nonnegative);
+        var right = M3ApacheCollections.predicatedSet(M3ApacheCollectionsTest::nonnegative);
         assertNotSame(left, right);
         left.add(7);
         assertFalse(right.contains(7));
         assertThrows(NullPointerException.class, () -> M3ApacheCollections.predicatedSet(null));
         assertThrows(NullPointerException.class, () -> M3ApacheCollections.predicatedList(null));
-        assertThrows(NullPointerException.class, () -> M3ApacheCollections.predicatedSortedSet(null, NONNEGATIVE));
+        assertThrows(NullPointerException.class, () -> M3ApacheCollections.predicatedSortedSet(null, M3ApacheCollectionsTest::nonnegative));
         assertThrows(NullPointerException.class, () -> M3ApacheCollections.predicatedSortedMap(null, null, null));
     }
 }

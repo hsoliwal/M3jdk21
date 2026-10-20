@@ -1,0 +1,77 @@
+{
+  "schema": "m3-interop-donor-evaluation/1",
+  "recipe": "com.synexia.m3jdk.InteropContracts20261020",
+  "selection_scope": "Contract-preserving test/metadata correction only; no donor production source copied, no new production algorithm or runtime integration layer.",
+  "commons_collections": {
+    "coordinate": "org.apache.commons:commons-collections4:4.5.0",
+    "license": "Apache-2.0",
+    "jar_sha256": "00f93263c267be201b8ae521b44a7137271b16688435340bf629db1bac0a5845",
+    "repository": "https://github.com/apache/commons-collections",
+    "revision": "7f7fb0244abc940a2e9dd28b67508c0483a58c3e",
+    "sources": [
+      {
+        "path": "src/main/java/org/apache/commons/collections4/Bag.java",
+        "git_blob": "b06061a016d4a4f1dc43e0ba0803e42ca94b6506"
+      },
+      {
+        "path": "src/main/java/org/apache/commons/collections4/bag/AbstractMapBag.java",
+        "git_blob": "9da508f625f5ab6050c56b2da465e8aac4e448e2"
+      }
+    ],
+    "contract": "M3ApacheBag explicitly retains min(ownedCount,inputCount), consistent with cardinality wording in the pinned Bag interface.",
+    "comparison": "Pinned HashBag removes a key when retained input count exceeds the owned count. Unconditional implementation parity conflicts with the explicit M3 contract.",
+    "selected": "Keep M3 owner unchanged; consume independent input occurrences to derive the expected retain result; keep real HashBag comparisons on the equivalent domain and add an explicit owned2/input3 divergence fixture.",
+    "rejected": "Changing M3 to reproduce the pinned HashBag quirk; skipping excess-multiplicity input; allowing a diverged donor state to contaminate later random operations.",
+    "correctness_evidence": [
+      "apache-review/APACHE_PROBE_RECEIPT.json",
+      "apache-review/apache-contract-probe.log",
+      "reports-13/java/TEST-com.m3.collections.interop.M3ApacheBagContractTest.xml"
+    ],
+    "complexity": "Independent fixture occurrence budget may take O(n*m) time and O(m+n) space for small bounded test states. It deliberately does not clone the production counted algorithm; no runtime speed claim."
+  },
+  "spring": {
+    "coordinate": "org.springframework:spring-core:6.2.0",
+    "license": "Apache-2.0",
+    "jar_sha256": "3b82629da38717dd616a70ec1055f9a8e208d58132071a6314a32159f8bce162",
+    "repository": "https://github.com/spring-projects/spring-framework",
+    "revision": "5024bb72279188f1d0dcfe19e8abdd4bdb9887c8",
+    "source": {
+      "path": "spring-core/src/main/java/org/springframework/util/MultiValueMapAdapter.java",
+      "git_blob": "4c7c2f1d133cccef1eab060524a71cd3de4b45a9"
+    },
+    "contract": "Both adapters preserve caller-provided fixed-size list behavior and may throw UnsupportedOperationException when an add operation attempts to grow it.",
+    "selected": "Execute both counterparts for the three void add branches; compare RuntimeException class or successful null outcome; preserve all seeded operations, return/state checks, and fixed-list inputs.",
+    "rejected": "Copying fixed-size inputs into mutable lists, suppressing errors, discarding failing operations, changing production semantics, or retaining the larger all-operations Outcome helper.",
+    "correctness_evidence": [
+      "independent/SPRING_RECEIPT.json",
+      "independent/spring-1.log",
+      "reports-13/native/TEST-com.m3.collections.interop.M3SpringArrayContractTest.xml"
+    ],
+    "complexity": "Only test observation changes; one execution of each donor/owner operation. No production complexity change or measured performance claim.",
+    "derived_evidence": {
+      "path": "evidence/interop-correction/independent/Spring-MultiValueMapAdapter-javap.log",
+      "sha256": "9a3e94a883baa9c858394822323eaedd1fe9659c36506401c7662de1fb8555aa",
+      "source_path": "org/springframework/util/MultiValueMapAdapter.class",
+      "notice": "licenses/Spring-6.2.0-NOTICE.txt",
+      "license_text": "licenses/Spring-6.2.0-LICENSE.txt"
+    }
+  },
+  "synexia_reuse": {
+    "production": "Existing M3LibraryCollections factories, M3LibraryBindings resource loader, M3ArrayifiedIndexOps stable merge, M3IndexPathMasks/M3IndexMaskCompactor and M3 Apache/Spring owners remain unchanged by these13 targets.",
+    "transformation": "Existing canonical four engines, M3TaskRecipeTest and receive.py are reused byte-for-byte; new named recipe identity and exact13 target resources only.",
+    "owner_source_revision_note": "Seven of eight copied owner-source witnesses equal baseline2779; the received main recipe M3IndexMaskCompactor witness is pinned at d1b9aa9f35cf6f8cf7af1fb581471c2551bd7e97. The finite evidence source-origin map records exact revisions."
+  },
+  "catalogue_discovery": {
+    "prior_catalogue": "catalogue/PRIOR_PROBLEMS_20261020.tsv",
+    "sources": [
+      "GitHub",
+      "LeetCode",
+      "HackerRank",
+      "GeeksforGeeks"
+    ],
+    "scope": "Reuse the existing task catalogue problem taxonomy and links. LeetCode/HackerRank/GeeksforGeeks approaches here remain metadata-only candidates, not newly copied challenge solutions, source licenses, or performance evidence.",
+    "selection": "The observed defects are compilation, contract oracles, stable ordering, backend applicability, and factual metadata. Existing exact owners and pinned primary donor contracts settle these cases; no unrelated algorithm substitution is justified."
+  },
+  "performance_status": "NOT_BENCHMARKED; no product speedup is claimed",
+  "evidence_prefix": "evidence/interop-correction/"
+}

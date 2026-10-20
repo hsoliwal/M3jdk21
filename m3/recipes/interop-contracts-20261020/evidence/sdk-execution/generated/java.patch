@@ -1,0 +1,326 @@
+diff --git a/m3/collections/interop/src/test/java/com/m3/collections/interop/M3ApacheBagContractTest.java b/m3/collections/interop/src/test/java/com/m3/collections/interop/M3ApacheBagContractTest.java
+index 4184a8b..eaec0a4 100644
+--- a/m3/collections/interop/src/test/java/com/m3/collections/interop/M3ApacheBagContractTest.java
++++ b/m3/collections/interop/src/test/java/com/m3/collections/interop/M3ApacheBagContractTest.java
+@@ -7,15 +7,16 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
+ import com.m3.collections.M3IndexMaskCompactor;
+ import java.util.ArrayList;
+ import java.util.Arrays;
++import java.util.Collections;
+ import java.util.List;
+ import java.util.Random;
+ import org.apache.commons.collections4.Bag;
+ import org.apache.commons.collections4.bag.HashBag;
+ import org.junit.jupiter.api.Test;
+ 
+-/** Real Commons 4.5.0 donor-API differential over M3 arrays/counts. */
++/** Real Commons 4.5.0 API differential with an independent retention contract oracle. */
+ final class M3ApacheBagContractTest {
+-    @Test void randomizedOfficialHashBagOracle() {
++    @Test void randomizedBagContractAndPinnedDonor() {
+         Bag<Integer> expected=new HashBag<>();
+         Bag<Integer> actual=new M3ApacheBag<>();
+         Random random=new Random(20261018L);
+@@ -36,7 +37,24 @@
+                 }
+                 default -> {
+                     List<Integer> source=Arrays.asList(key,key,random.nextInt(11));
+-                    assertEquals(expected.retainAll(source),actual.retainAll(source));
++                    // Consume input occurrences independently of either counted-bag implementation.
++                    List<Integer> retained=new ArrayList<>(expected);
++                    List<Integer> budget=new ArrayList<>(source);
++                    boolean changed=retained.removeIf(item->!budget.remove(item));
++                    assertEquals(changed,actual.retainAll(source));
++                    Bag<Integer> donor=new HashBag<>(expected);
++                    boolean equivalentDomain=true;
++                    for(Integer item:expected.uniqueSet()) {
++                        if(Collections.frequency(source,item)>expected.getCount(item))equivalentDomain=false;
++                    }
++                    boolean donorChanged=donor.retainAll(source);
++                    expected=new HashBag<>(retained);
++                    // Pinned HashBag 4.5.0 differs when input count exceeds owned count.
++                    // Never carry that divergent donor state into a subsequent operation.
++                    if(equivalentDomain) {
++                        assertEquals(changed,donorChanged,"donor return step="+step);
++                        assertEquals(expected,donor,"donor retention step="+step);
++                    }
+                 }
+             }
+             assertEquals(expected.size(),actual.size(),"size step="+step);
+@@ -47,6 +65,21 @@
+         }
+     }
+ 
++    @Test void oversizedRetentionPreservesContractAndPinsDonorDivergence() {
++        Bag<Integer> actual=new M3ApacheBag<>();
++        Bag<Integer> donor=new HashBag<>();
++        actual.add(6,2);
++        donor.add(6,2);
++        List<Integer> input=List.of(6,6,6);
++        assertFalse(actual.retainAll(input));
++        assertEquals(2,actual.getCount(6));
++        assertEquals(2,actual.size());
++        // This assertion deliberately records the exact Commons Collections 4.5.0 quirk.
++        assertTrue(donor.retainAll(input));
++        assertEquals(0,donor.getCount(6));
++        assertTrue(donor.isEmpty());
++    }
++
+     @Test void iteratorLiveUniqueAndRealPrimitiveMaskSelection() {
+         M3ApacheBag<String> actual=new M3ApacheBag<>();
+         M3CountedBag<String> store=actual.m3Backend();
+diff --git a/m3/collections/interop/src/test/java/com/m3/collections/interop/M3ApacheCollectionsTest.java b/m3/collections/interop/src/test/java/com/m3/collections/interop/M3ApacheCollectionsTest.java
+index 9edf500..52c7126 100644
+--- a/m3/collections/interop/src/test/java/com/m3/collections/interop/M3ApacheCollectionsTest.java
++++ b/m3/collections/interop/src/test/java/com/m3/collections/interop/M3ApacheCollectionsTest.java
+@@ -13,16 +13,17 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
+ import java.util.Comparator;
+ import java.util.List;
+ import java.util.Objects;
+-import org.apache.commons.collections4.Predicate;
+ import org.junit.jupiter.api.Test;
+ 
+ /** Contract differential for Apache admission semantics, not a Guava live-filter oracle. */
+ final class M3ApacheCollectionsTest {
+-    private static final Predicate<Integer> NONNEGATIVE = value -> value != null && value >= 0;
++    private static boolean nonnegative(Integer value) {
++        return value != null && value >= 0;
++    }
+ 
+     @Test
+     void listPreservesOrderAndValidatesMutationAtTheApacheBoundary() {
+-        var list = M3ApacheCollections.predicatedList(NONNEGATIVE);
++        var list = M3ApacheCollections.predicatedList(M3ApacheCollectionsTest::nonnegative);
+         list.add(3);
+         list.add(1);
+         list.add(3);
+@@ -39,7 +40,7 @@
+ 
+     @Test
+     void setValidatesAdmissionWithoutHidingStoredMembers() {
+-        var set = M3ApacheCollections.predicatedSet(NONNEGATIVE);
++        var set = M3ApacheCollections.predicatedSet(M3ApacheCollectionsTest::nonnegative);
+         assertTrue(set.add(0));
+         assertFalse(set.add(0));
+         assertTrue(set.add(9));
+@@ -54,7 +55,7 @@
+     @Test
+     void sortedSetPreservesComparatorAndLiveBoundedView() {
+         var sorted = M3ApacheCollections.predicatedSortedSet(Comparator.<Integer>reverseOrder(),
+-                NONNEGATIVE);
++                M3ApacheCollectionsTest::nonnegative);
+         sorted.add(1); sorted.add(5); sorted.add(3);
+         assertEquals(5, sorted.first());
+         assertEquals(1, sorted.last());
+@@ -82,7 +83,7 @@
+     @Test
+     void sortedMapPreservesComparatorRangesAndValueChecks() {
+         var map = M3ApacheCollections.<Integer, String>predicatedSortedMap(
+-                Comparator.naturalOrder(), NONNEGATIVE, Objects::nonNull);
++                Comparator.naturalOrder(), M3ApacheCollectionsTest::nonnegative, Objects::nonNull);
+         map.put(4, "four");
+         map.put(2, "two");
+         map.put(6, "six");
+@@ -96,14 +97,14 @@
+ 
+     @Test
+     void eachFacadeOwnsIndependentBackingAndValidatesNullArguments() {
+-        var left = M3ApacheCollections.predicatedSet(NONNEGATIVE);
+-        var right = M3ApacheCollections.predicatedSet(NONNEGATIVE);
++        var left = M3ApacheCollections.predicatedSet(M3ApacheCollectionsTest::nonnegative);
++        var right = M3ApacheCollections.predicatedSet(M3ApacheCollectionsTest::nonnegative);
+         assertNotSame(left, right);
+         left.add(7);
+         assertFalse(right.contains(7));
+         assertThrows(NullPointerException.class, () -> M3ApacheCollections.predicatedSet(null));
+         assertThrows(NullPointerException.class, () -> M3ApacheCollections.predicatedList(null));
+-        assertThrows(NullPointerException.class, () -> M3ApacheCollections.predicatedSortedSet(null, NONNEGATIVE));
++        assertThrows(NullPointerException.class, () -> M3ApacheCollections.predicatedSortedSet(null, M3ApacheCollectionsTest::nonnegative));
+         assertThrows(NullPointerException.class, () -> M3ApacheCollections.predicatedSortedMap(null, null, null));
+     }
+ }
+diff --git a/m3/collections/interop/src/test/java/com/m3/collections/interop/M3FiveLibraryArrayificationTest.java b/m3/collections/interop/src/test/java/com/m3/collections/interop/M3FiveLibraryArrayificationTest.java
+index 42d78b4..7a46cda 100644
+--- a/m3/collections/interop/src/test/java/com/m3/collections/interop/M3FiveLibraryArrayificationTest.java
++++ b/m3/collections/interop/src/test/java/com/m3/collections/interop/M3FiveLibraryArrayificationTest.java
+@@ -53,7 +53,8 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
+         byte[] flags=new byte[5];
+         var root=M3FiveLibraryIndexViews.capture(keys,values,new int[]{0,2,1,3,4},flags);
+         var sorted=root.sortedByKey(Comparator.naturalOrder());
+-        var left=sorted.slice(0,3),right=sorted.slice(3,5);
++        var left=sorted.slice(0,3);
++        var right=sorted.slice(3,5);
+         var merged=left.mergeSortedByKey(right,Comparator.naturalOrder());
+         assertEquals(sorted.asJdkList(),merged.asJdkList());
+         assertArrayEquals(new int[]{0,1,2,3,4},java.util.stream.IntStream.range(0,merged.size())
+@@ -62,7 +63,8 @@
+         assertThrows(IllegalArgumentException.class,()->left.mergeSortedByKey(
+                 M3FiveLibraryIndexViews.capture(keys,values,new int[]{0},flags),Comparator.naturalOrder()));
+         var duplicated=left.mergeSortedByKey(left,Comparator.naturalOrder());
+-        assertEquals(List.of(0,0,1,1,2,2),duplicated.asJdkList());
++        // Stable ties retain the entire left a-run before the right a-run.
++        assertEquals(List.of(0,1,0,1,2,2),duplicated.asJdkList());
+     }
+ 
+     @Test void randomizedArrayificationAgainstJdkReference() {
+diff --git a/m3/collections/interop/src/test/java/com/m3/collections/interop/M3FiveLibraryKeyRangesTest.java b/m3/collections/interop/src/test/java/com/m3/collections/interop/M3FiveLibraryKeyRangesTest.java
+index 9698ccc..bda93a1 100644
+--- a/m3/collections/interop/src/test/java/com/m3/collections/interop/M3FiveLibraryKeyRangesTest.java
++++ b/m3/collections/interop/src/test/java/com/m3/collections/interop/M3FiveLibraryKeyRangesTest.java
+@@ -12,6 +12,7 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
+ import java.util.Arrays;
+ import java.util.Comparator;
+ import java.util.List;
++import java.util.Map;
+ import java.util.Random;
+ import org.junit.jupiter.api.Test;
+ 
+diff --git a/m3/collections/interop/src/test/java/com/m3/collections/interop/M3FiveProviderFlagSelectionTest.java b/m3/collections/interop/src/test/java/com/m3/collections/interop/M3FiveProviderFlagSelectionTest.java
+index 8693906..0676939 100644
+--- a/m3/collections/interop/src/test/java/com/m3/collections/interop/M3FiveProviderFlagSelectionTest.java
++++ b/m3/collections/interop/src/test/java/com/m3/collections/interop/M3FiveProviderFlagSelectionTest.java
+@@ -97,7 +97,7 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
+     }
+ 
+     @Test void actualDirectSpringSdkFactoryKeepsLiveMapAndListAliasing() {
+-        MultiValueMap<String, Integer> spring = M3FiveProviderDirectSdk.springMultiValueMap();
++        MultiValueMap<String, Integer> spring = M3LibraryCollections.springMultiValueMap();
+         assertInstanceOf(M3SpringArrayMultiValueMap.class, spring);
+         spring.add("k", 1);
+         spring.add("k", 2);
+diff --git a/m3/collections/interop/src/test/java/com/m3/collections/interop/M3GuavaListMultimapContract.java b/m3/collections/interop/src/test/java/com/m3/collections/interop/M3GuavaListMultimapContract.java
+index 93c899b..d510cfc 100644
+--- a/m3/collections/interop/src/test/java/com/m3/collections/interop/M3GuavaListMultimapContract.java
++++ b/m3/collections/interop/src/test/java/com/m3/collections/interop/M3GuavaListMultimapContract.java
+@@ -138,8 +138,14 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
+         check(!actual.containsKey(-100),"selection detached from source");
+         boolean failed=false;try{actual.selectedByStates(new int[count+1],0,0,M3IndexPathMasks.Backend.JAVA);}catch(IllegalArgumentException ex){failed=true;}
+         check(failed,"unaligned full-width state refusal");
+-        failed=false;try{actual.selectedByStates(states,0,0,M3IndexPathMasks.Backend.NATIVE_REQUIRED);}catch(UnsatisfiedLinkError ex){failed=true;}
+-        check(failed,"native required fail closed when absent");
++        if (M3IndexPathMasks.nativeAvailable()) {
++            var nativeSelected = actual.selectedByStates(states, Integer.MIN_VALUE, 4,
++                    M3IndexPathMasks.Backend.NATIVE_REQUIRED);
++            equal(expected, new ArrayList<>(nativeSelected.entries()), "native full 32-bit selection");
++        } else {
++            failed=false;try{actual.selectedByStates(states,0,0,M3IndexPathMasks.Backend.NATIVE_REQUIRED);}catch(UnsatisfiedLinkError ex){failed=true;}
++            check(failed,"native required fail closed when absent");
++        }
+         equal(Collections.emptyList(),new M3GuavaListMultimap<>().removeAll("absent"),"absent removal");
+         System.out.println("PASS M3GuavaListMultimapContract checks="+checks+" steps=6400");
+     }
+diff --git a/m3/collections/interop/src/test/java/com/m3/collections/interop/M3LibraryBindingsSelfTest.java b/m3/collections/interop/src/test/java/com/m3/collections/interop/M3LibraryBindingsSelfTest.java
+index d315aa2..0dd719d 100644
+--- a/m3/collections/interop/src/test/java/com/m3/collections/interop/M3LibraryBindingsSelfTest.java
++++ b/m3/collections/interop/src/test/java/com/m3/collections/interop/M3LibraryBindingsSelfTest.java
+@@ -20,12 +20,12 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
+     @FunctionalInterface private interface Action { void run() throws Exception; }
+     public static void main(String[] args) throws Exception {
+         var all = M3LibraryBindings.all();
+-        check(all.size() == 23);
++        check(all.size() == 25);
+         check(M3LibraryBindings.forFamily(M3LibraryBinding.Family.JDK).size() == 6);
+-        check(M3LibraryBindings.forFamily(M3LibraryBinding.Family.GUAVA).size() == 6);
++        check(M3LibraryBindings.forFamily(M3LibraryBinding.Family.GUAVA).size() == 7);
+         check(M3LibraryBindings.forFamily(M3LibraryBinding.Family.ECLIPSE_COLLECTIONS).size() == 5);
+         check(M3LibraryBindings.forFamily(M3LibraryBinding.Family.SPRING_FRAMEWORK).size() == 4);
+-        check(M3LibraryBindings.forFamily(M3LibraryBinding.Family.APACHE_COMMONS_COLLECTIONS).size() == 2);
++        check(M3LibraryBindings.forFamily(M3LibraryBinding.Family.APACHE_COMMONS_COLLECTIONS).size() == 3);
+         check(M3LibraryBindings.all() == all);
+         fails(UnsupportedOperationException.class, () -> all.clear());
+         for (var binding : all) {
+@@ -53,7 +53,7 @@
+         check(M3LibraryBindings.read(new ByteArrayInputStream(text.getBytes(StandardCharsets.UTF_8))).equals(all));
+         var line = text.lines().skip(1).findFirst().orElseThrow();
+         String overload = line.replace("jdkMap\t\t", "jdkMap\tjava.util.Comparator\t");
+-        check(M3LibraryBindings.read(new ByteArrayInputStream((text + overload + "\n").getBytes(StandardCharsets.UTF_8))).size() == 24);
++        check(M3LibraryBindings.read(new ByteArrayInputStream((text + overload + "\n").getBytes(StandardCharsets.UTF_8))).size() == 26);
+         for (String bad : List.of(text + line + "\n", text.replace("GUAVA", "GUVAVA"),
+                 text.replace("jdkMap", "apacheMap"), text.replace("com.m3.collections.M3LinkedHashMap", "java.util.HashMap"),
+                 text.replace("java.util.Map", "org.springframework.util.MultiValueMap"),
+@@ -63,6 +63,6 @@
+         fails(java.nio.charset.CharacterCodingException.class,
+                 () -> M3LibraryBindings.read(new ByteArrayInputStream(new byte[]{(byte)0xc3, 0x28})));
+         fails(IllegalArgumentException.class, () -> M3LibraryBindings.read(new ByteArrayInputStream(new byte[1_048_577])));
+-        System.out.println("M3LibraryBindingsSelfTest checks=" + checks + " families=5 bindings=23");
++        System.out.println("M3LibraryBindingsSelfTest checks=" + checks + " families=5 bindings=25");
+     }
+ }
+diff --git a/m3/collections/interop/src/test/java/com/m3/collections/interop/M3LibraryClosureTest.java b/m3/collections/interop/src/test/java/com/m3/collections/interop/M3LibraryClosureTest.java
+index 141661a..879c156 100644
+--- a/m3/collections/interop/src/test/java/com/m3/collections/interop/M3LibraryClosureTest.java
++++ b/m3/collections/interop/src/test/java/com/m3/collections/interop/M3LibraryClosureTest.java
+@@ -134,7 +134,7 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
+ 
+     @Test void springCreatedListsAndFactoryWiring() {
+         var actual = M3LibraryCollections.<String, Integer>springMultiValueMap();
+-        assertInstanceOf(M3SpringMultiValueMap.class, actual);
++        assertInstanceOf(M3SpringArrayMultiValueMap.class, actual);
+         actual.add("a", 1); actual.set("b", 2); actual.addAll("c", List.of(3, 4)); actual.addAll("empty", List.of());
+         for (List<Integer> values : actual.values()) assertInstanceOf(M3LinkedList.class, values);
+         assertTrue(actual.containsKey("empty")); assertEquals(4, actual.size());
+diff --git a/m3/collections/interop/src/test/java/com/m3/collections/interop/M3SdkFamiliesTest.java b/m3/collections/interop/src/test/java/com/m3/collections/interop/M3SdkFamiliesTest.java
+index dedf938..6327c0c 100644
+--- a/m3/collections/interop/src/test/java/com/m3/collections/interop/M3SdkFamiliesTest.java
++++ b/m3/collections/interop/src/test/java/com/m3/collections/interop/M3SdkFamiliesTest.java
+@@ -23,7 +23,7 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
+ /** Actual pinned donors and existing M3 owners are required; no test doubles are permitted here. */
+ class M3SdkFamiliesTest {
+     @Test void everyFactoryHasExactNamesAndAvailableM3Owners() throws Exception {
+-        assertEquals(23, M3LibraryBindings.verifyRuntime(getClass().getClassLoader(), null));
++        assertEquals(25, M3LibraryBindings.verifyRuntime(getClass().getClassLoader(), null));
+     }
+     @Test void apacheBackingOwnersAreM3RatherThanRenamedDonorStorage() throws Exception {
+         var list = new M3ApacheListValuedMap<String, Integer>();
+diff --git a/m3/collections/interop/src/test/java/com/m3/collections/interop/M3SpringArrayContractTest.java b/m3/collections/interop/src/test/java/com/m3/collections/interop/M3SpringArrayContractTest.java
+index 978dc2e..9a4047a 100644
+--- a/m3/collections/interop/src/test/java/com/m3/collections/interop/M3SpringArrayContractTest.java
++++ b/m3/collections/interop/src/test/java/com/m3/collections/interop/M3SpringArrayContractTest.java
+@@ -81,13 +81,13 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
+             Integer key = random.nextInt(7) == 0 ? null : random.nextInt(32);
+             Integer value = random.nextInt(8) == 0 ? null : random.nextInt(50);
+             switch (random.nextInt(13)) {
+-                case 0 -> { actual.add(key, value); expected.add(key, value); }
++                case 0 -> assertSameFailure(() -> expected.add(key, value), () -> actual.add(key, value));
+                 case 1 -> { actual.set(key, value); expected.set(key, value); }
+-                case 2 -> { actual.addIfAbsent(key, value); expected.addIfAbsent(key, value); }
++                case 2 -> assertSameFailure(() -> expected.addIfAbsent(key, value), () -> actual.addIfAbsent(key, value));
+                 case 3 -> assertEquals(expected.remove(key), actual.remove(key));
+                 case 4 -> {
+                     List<Integer> input = Arrays.asList(value, value);
+-                    actual.addAll(key, input); expected.addAll(key, input);
++                    assertSameFailure(() -> expected.addAll(key, input), () -> actual.addAll(key, input));
+                 }
+                 case 5 -> {
+                     List<Integer> a = random.nextInt(6) == 0 ? null : new ArrayList<>(Arrays.asList(value));
+@@ -122,4 +122,18 @@
+                     actual.asSingleValueMap().get(key), "view step " + step);
+         }
+     }
++
++    /** Both owners may refuse structural changes to a caller-owned fixed-size list. */
++    private static void assertSameFailure(Runnable expected, Runnable actual) {
++        assertEquals(failureOf(expected), failureOf(actual));
++    }
++
++    private static Class<? extends RuntimeException> failureOf(Runnable operation) {
++        try {
++            operation.run();
++            return null;
++        } catch (RuntimeException failure) {
++            return failure.getClass();
++        }
++    }
+ }
+diff --git a/m3/collections/interop/src/test/java/com/m3/collections/interop/M3SpringCaseInsensitiveSdkFactoryTest.java b/m3/collections/interop/src/test/java/com/m3/collections/interop/M3SpringCaseInsensitiveSdkFactoryTest.java
+index f2927f1..ac99b20 100644
+--- a/m3/collections/interop/src/test/java/com/m3/collections/interop/M3SpringCaseInsensitiveSdkFactoryTest.java
++++ b/m3/collections/interop/src/test/java/com/m3/collections/interop/M3SpringCaseInsensitiveSdkFactoryTest.java
+@@ -34,6 +34,6 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
+         assertEquals("java.util.Map", binding.contractType());
+         assertEquals("com.m3.collections.interop.M3SpringCaseInsensitiveMap", binding.adapterType());
+         assertEquals("springCaseInsensitiveMap(java.util.Locale)", binding.descriptor());
+-        assertEquals(23, M3LibraryBindings.verifyRuntime(getClass().getClassLoader(), null));
++        assertEquals(25, M3LibraryBindings.verifyRuntime(getClass().getClassLoader(), null));
+     }
+ }

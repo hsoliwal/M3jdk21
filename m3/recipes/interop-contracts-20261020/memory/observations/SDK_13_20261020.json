@@ -1,0 +1,30 @@
+{
+  "schema": "synexia-m3-recipe-observation-v1",
+  "event_id": "interop-contracts-20261020-sdk13",
+  "captured_utc": "2026-10-20T14:57:37.394133+00:00",
+  "canonical_recipe": "com.synexia.m3jdk.InteropContracts20261020",
+  "canonical_home": "synexia-openrewrite-recipes/recipe-crates/m3-interop-contracts-20261020",
+  "candidate_set_sha256": "05f397c6181992c354c6113aca7e2f9039bb8c835bef8e5c14a286ec526176eb",
+  "observation": "ACTUAL_SDK_PASS_AND_READ_ONLY_RECEIVER_PREFLIGHT_PASS",
+  "sdk_tests": {
+    "tests": 5,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "source_inputs_bound": 36,
+  "sdk_results": 13,
+  "receipt": "evidence/sdk-final-13/SDK_RECEIPT.json",
+  "receipt_sha256": "0556e01c74b47ac3da2a3e6bf2cacfb36044c34d4e32ac1c8367d4d319d428f4",
+  "read_only_receiving_preflight": {
+    "targets": 13,
+    "changes": 13,
+    "performed_by": "/root/final_review",
+    "target_changed": false
+  },
+  "prior_attempt": "evidence/sdk-execution/SDK_RECEIPT.json",
+  "historical_capture_events_rewritten": false,
+  "admission_at_capture": "Actual target receiving and received-checkout qualification are separate root executions; this observation proves SDK and read-only preflight only.",
+  "promotes_receiving_phase": false,
+  "performance_claim": false
+}

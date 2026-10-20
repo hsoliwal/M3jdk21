@@ -1,0 +1,39 @@
+{
+  "status": "PASS_CURRENT_SPRING_SOURCE_EXCEPTION_PARITY",
+  "scope": "One copied current M3 source owner and independent Java probe against exact Spring6.2.0 artifact; no product or parent module edits",
+  "recorded_utc": "2026-10-20T14:18:46.296301+00:00",
+  "source": {
+    "path": "M3SpringArrayMultiValueMap.java",
+    "sha256": "8062247a92ee9dc90d313b715ba9158e47c53b3e7848508a5fdd54ddaaaecb96"
+  },
+  "probe": {
+    "path": "SpringExceptionParityProbe.java",
+    "sha256": "0850e14b5963ee6ae7fdee0c0e81c532ad2427558e549262303627f1596a1eb2"
+  },
+  "dependency_jars": {
+    "org.springframework:spring-core:6.2.0": "3b82629da38717dd616a70ec1055f9a8e208d58132071a6314a32159f8bce162",
+    "com.m3:m3-collections:0.1.0-SNAPSHOT": "c440f4f104373c5ed64f8ee313a8f8007de79b9ff7150f207f25164cd348ab80"
+  },
+  "java_version": "openjdk version \"21.0.12.1\" 2026-08-18 LTS\nOpenJDK Runtime Environment Temurin-21.0.12.1+1 (build 21.0.12.1+1-LTS)\nOpenJDK 64-Bit Server VM Temurin-21.0.12.1+1 (build 21.0.12.1+1-LTS, mixed mode, sharing)",
+  "operations": 4500,
+  "matching_refusals": 209,
+  "comparisons_per_operation": 7,
+  "minimal_borrowed_fixed_list": true,
+  "first_refusal": {
+    "step": 23,
+    "operation": "addAll(key, Arrays.asList(value,value))",
+    "key": 30,
+    "exception": "java.lang.UnsupportedOperationException",
+    "poststate": "unchanged for both owners"
+  },
+  "logs": {
+    "spring-1.log": "da3e921fc0a9a07f3f0eb2725ccd6bf3ddafaab0086feae33506f3cb7109f807",
+    "spring-0.log": "f2690fd208bfb76536464027df890c99d264cf76681cd7cdf6ca45c4f49ffe79"
+  },
+  "donor_bytecode": {
+    "path": "Spring-MultiValueMapAdapter-javap.log",
+    "sha256": "9a3e94a883baa9c858394822323eaedd1fe9659c36506401c7662de1fb8555aa"
+  },
+  "production_changes_proposed": false,
+  "test_repair": "Run donor and M3 operations independently; compare return values and RuntimeException classes; keep all current state/key-order/projection checks after either outcome. Do not broaden mutability or copy borrowed lists."
+}

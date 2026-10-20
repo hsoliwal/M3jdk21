@@ -1,0 +1,96 @@
+# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
+# SPDX-License-Identifier: Apache-2.0
+# Exact selected one-off authoring functions reused from prior correction-memory authoring.
+
+def canonical(value):
+    if value is None:
+        return 'null'
+    if type(value) is bool:
+        return 'true' if value else 'false'
+    if type(value) is int:
+        if not -(1 << 63) <= value < (1 << 63):
+            raise ValueError('integer outside signed 64-bit range')
+        return str(value)
+    if isinstance(value, str):
+        result = []
+        for char in value:
+            code = ord(char)
+            if 0xD800 <= code <= 0xDFFF:
+                raise ValueError('unpaired surrogate')
+            if code < 32:
+                result.append('\\u%04x' % code)
+            elif char == '"':
+                result.append('\\"')
+            elif char == '\\':
+                result.append('\\\\')
+            else:
+                result.append(char)
+        return '"' + ''.join(result) + '"'
+    if isinstance(value, list):
+        return '[' + ','.join(map(canonical, value)) + ']'
+    if isinstance(value, dict):
+        if any(not isinstance(k, str) or not k.isascii() for k in value):
+            raise ValueError('non-ASCII schema key')
+        return '{' + ','.join(canonical(k) + ':' + canonical(value[k]) for k in sorted(value)) + '}'
+    raise ValueError('unsupported JSON value')
+
+def raw(value):
+    return canonical(value).encode('utf-8')
+
+ART = {'path': (str, type(None)), 'sha256': (str, type(None)), 'status': str, 'purpose': str}
+
+ATOM = {'atom_id': str, 'owner': str, 'contract': str, 'before': ART, 'after': ART, 'dependencies': [str]}
+
+SCHEMA = {
+    'schema': str, 'event_schema': str, 'attempt_id': str, 'event_type': str, 'recipe_id': str,
+    'recorded_utc': str, 'correction_utc': type(None), 'correction_utc_status': str,
+    'authors': [str], 'license': str, 'repository': str, 'canonical_path': str,
+    'target_repository': str, 'target_source_revision': str, 'publication_commit': type(None),
+    'publication_status': str,
+    'recipe_versions': {'before': ART, 'after': ART, 'after_version': str, 'dependency_artifacts': [ART]},
+    'atoms': [ATOM],
+    'pattern': {'category': str, 'matching': [str], 'exclusions': [str], 'refusal': str, 'catalogue': [str]},
+    'trigger': {'artifact': ART, 'observed_line': str, 'expected': str, 'observation_scope': str},
+    'root_cause': {'status': str, 'explanation': str}, 'change': str, 'lesson': str,
+    'rejected_approaches': [{'approach': str, 'reason': str}],
+    'verification': {'status': str, 'outcome': str, 'environment': str, 'commands': [str], 'evidence': [ART]},
+    'regression_fixtures': [ART], 'replay': {'status': str, 'commands': [str], 'limitations': str},
+    'source_diff': ART, 'parents': [str], 'supersedes': [str],
+    'admission': {'status': str, 'scope': str, 'pending_gates': [str], 'merge_authority': bool, 'phase_promotion': bool},
+    'documentation': str,
+}
+
+def schema_check(value, schema, path='$'):
+    if isinstance(schema, dict):
+        if not isinstance(value, dict) or set(value) != set(schema):
+            raise ValueError('missing or unknown field at ' + path)
+        for key in schema:
+            schema_check(value[key], schema[key], path + '.' + key)
+    elif isinstance(schema, list):
+        if not isinstance(value, list):
+            raise ValueError('not an array at ' + path)
+        for item in value:
+            schema_check(item, schema[0], path + '[]')
+    else:
+        allowed = schema if isinstance(schema, tuple) else (schema,)
+        if type(value) not in allowed:
+            raise ValueError('invalid type at ' + path)
+
+def walk_artifacts(value):
+    if isinstance(value, dict):
+        if set(value) == set(ART):
+            yield value
+        else:
+            for child in value.values():
+                yield from walk_artifacts(child)
+    elif isinstance(value, list):
+        for child in value:
+            yield from walk_artifacts(child)
+
+def json_schema(schema):
+    if isinstance(schema, dict):
+        return {'type': 'object', 'additionalProperties': False, 'required': sorted(schema), 'properties': {k: json_schema(v) for k, v in sorted(schema.items())}}
+    if isinstance(schema, list):
+        return {'type': 'array', 'items': json_schema(schema[0])}
+    mapping = {str: 'string', bool: 'boolean', type(None): 'null'}
+    return {'type': [mapping[s] for s in schema]} if isinstance(schema, tuple) else {'type': mapping[schema]}
