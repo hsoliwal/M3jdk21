@@ -2,11 +2,13 @@ item	status	evidence
 source_inventory	PASS	original M3File Git blob c182a3b1526f9fd0ca20c631d97df3048076defd
 canonical_synexia_recipe	AUTHORED_NOT_EXECUTED	Synexia #12598, OpenRewrite JUnit with source-sealed exact postimages
 java21_strict_compile	PASS_LOCAL	javac --release 21 -proc:none -Xlint:all,-module -Werror
-normal_named_module_runtime	PASS_LOCAL	M3_SHADOW_STREAM_PASS checks=43
-interpreted_named_module_runtime	PASS_LOCAL	M3_SHADOW_STREAM_PASS checks=43
+normal_named_module_runtime	PASS_LOCAL	M3_SHADOW_STREAM_PASS checks=44
+interpreted_named_module_runtime	PASS_LOCAL	M3_SHADOW_STREAM_PASS checks=44
 native_jni	NOT_APPLICABLE_NO_NEW_SYMBOL	Java-only stream methods, not JNI proof
 full_m3jdk21_hotspot	NOT_EXECUTED	Full SDK bootstrap and jtreg gates pending
 maven_gradle_analyzer_wiring	NOT_EXECUTED	Original task/AST receiver not yet wired
 stock_bootstrap_jmod_link	PASS_LOCAL	jmod and jlink of com.m3.file from exact Java21 sources
-linked_image_runtime	PASS_LOCAL	M3_SHADOW_STREAM_PASS checks=43 normal + 43 interpreted
+linked_image_runtime	PASS_LOCAL	M3_SHADOW_STREAM_PASS checks=44 normal + 43 interpreted
 full_native_m3jdk21_image	NOT_EXECUTED	Bootstrap JMOD evidence is not a full SDK/HotSpot build
+output_alias_refusal	PASS_LOCAL	44th assertion rejects same primary and shadow output identity
+recipe_memory_same_commit	AUTHORING_COMMITTED	Synexia #12598 RECIPE_MEMORY.tsv with correction source and guard

@@ -7,3 +7,4 @@ Javac AST	Original javac task + M3AST index	HOLD	No second parser or AST store
 Attribute-based file delta	Existing M3File metadata and delta PRs	REUSE_LATER	Provider generation needed to safely avoid hashing
 JNI stream duplication	Standalone native shadow IO	REJECT_UNMEASURED	Prefer existing checked JNI selectors only if measured
 Educational algorithms	LeetCode/HackerRank/GeeksforGeeks categories	REFERENCE_ONLY	No imported challenge implementation
+Aliased primary/shadow outputs	Reject identical OutputStream identities before writing	SELECT	Contract forbids duplicate output bytes	First-party additive guard

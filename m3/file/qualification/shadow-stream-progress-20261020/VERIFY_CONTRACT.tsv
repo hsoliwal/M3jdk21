@@ -7,6 +7,6 @@ runtime	PASS_LOCAL	Original NIO provider, symlink refusal and shadow cursor cont
 canonical_recipe	NOT_EXECUTED	Missing Maven executable and dependencies in local environment
 native_compiler_and_jni	NO_NATIVE_CHANGE	No JNI symbols; require measured reason to add
 full_sdk	NOT_EXECUTED	Native/HotSpot/JTReg/JCK outstanding
-jmod_package	PASS_LOCAL	Stock Java21 jmod create; sha256 3653e62c5099a96d7cd19b7f70e88802debfa8da07afb120207f277100caf839
-linked_image	PASS_LOCAL	Stock Java21 jlink com.m3.file; two 43-assertion executions
+jmod_package	PASS_LOCAL	Stock Java21 jmod create; sha256 fbc6a1556f79920401ef47639d705a6f2e9d876a9bcc98a47b1c9ffc08525065
+linked_image	PASS_LOCAL	Stock Java21 jlink com.m3.file; two 44-assertion executions
 full_m3jdk21_hotspot	NOT_EXECUTED	Required independently from bootstrap JMOD admission
