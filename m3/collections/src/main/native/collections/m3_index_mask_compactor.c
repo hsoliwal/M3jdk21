@@ -69,7 +69,8 @@ static jintArray m3_select_range(JNIEnv *env, jintArray rows, jbyteArray states,
         if (accepted > 0) {
             (*env)->GetIntArrayRegion(env, rows, first + offset + first_match, span, row_ids);
             if ((*env)->ExceptionCheck(env)) return NULL;
-            if (required_mask != 0) {
+            /* A contiguous accepted span is already packed by the region read. */
+            if (accepted < span) {
                 for (jsize i = 0; i < accepted; i++) {
                     row_ids[i] = row_ids[(jsize)offsets[i] - first_match];
                 }
@@ -379,7 +380,8 @@ Java_com_m3_collections_M3IndexMaskCompactor_selectWindowNative(
             (*env)->GetIntArrayRegion(env, rows, row_offset + position + first_match, span, values);
             if ((*env)->ExceptionCheck(env)) return NULL;
             /* Sorted ordinals keep each destination at or before its unread source. */
-            if (mask != 0) {
+            /* A contiguous accepted span is already packed by the region read. */
+            if (batch < span) {
                 for (jsize i = 0; i < batch; i++) {
                     values[i] = values[(jsize)offsets[i] - first_match];
                 }
@@ -439,7 +441,8 @@ Java_com_m3_collections_M3IndexMaskCompactor_selectLongWindowNative(
             (*env)->GetLongArrayRegion(env, rows, row_offset + position + first_match, span, values);
             if ((*env)->ExceptionCheck(env)) return NULL;
             /* Sorted ordinals keep each destination at or before its unread source. */
-            if (mask != 0) {
+            /* A contiguous accepted span is already packed by the region read. */
+            if (batch < span) {
                 for (jsize i = 0; i < batch; i++) {
                     values[i] = values[(jsize)offsets[i] - first_match];
                 }

@@ -194,6 +194,7 @@ static void selection(JNIEnv *env, jint mask) {
 }
 
 int main(void) {
+    int contiguous_cases = 0, hole_cases = 0;
     struct JNINativeInterface_ api = {0};
     api.GetArrayLength = length; api.ExceptionCheck = exception;
     api.FindClass = find_class; api.ThrowNew = throw_new; api.DeleteLocalRef = delete_ref;
@@ -225,6 +226,24 @@ int main(void) {
                 marks[state_first + 511] = marks[state_first + 512] = (jbyte)128;
         selection(&env, 128);
         require(row_elements == 258 && row_reads == 3, "cross-chunk enclosing span accounting");
+
+        const int run_starts[] = {0, 1, 7, 127, 128, 254, 255, 256, 257, 510, 511, 512, 598, 599};
+        const int run_lengths[] = {1, 2, 3, 7, 63, 64, 65, 127, 128, 129, 255, 256, 257, 599, 600};
+        for (size_t a = 0; a < sizeof run_starts / sizeof run_starts[0]; a++) {
+            for (size_t b = 0; b < sizeof run_lengths / sizeof run_lengths[0]; b++) {
+                int start = run_starts[a], run = run_lengths[b];
+                if (run > 600 - start) continue;
+                configure(variant, 600);
+                memset(marks + state_first + start, 128, (size_t)run);
+                selection(&env, 128);
+                contiguous_cases++;
+                if (run > 2) {
+                    marks[state_first + start + run / 2] = 0;
+                    selection(&env, 128);
+                    hole_cases++;
+                }
+            }
+        }
 
         const int kinds[] = {STATE_FAULT, STATE_FAULT, STATE_FAULT, ROW_FAULT,
                             ROW_FAULT, WRITE_FAULT, WRITE_FAULT, ALLOC_FAULT,
@@ -274,6 +293,7 @@ int main(void) {
         require(invoke(&env, 128, 0) == NULL && pending == DRIFT_EXCEPTION, "late count increase refused");
         require(writes == 1 && row_elements == 2, "late increase preserves prefix and stops publication");
     }
+    printf("CONTIGUOUS_REFINE_PASS run_cases=%d hole_cases=%d\n", contiguous_cases, hole_cases);
     puts("JNI_COMPACTOR_SPANS_PASS singleton_cases=2400 singleton_rows=1 rejected_rows=0 cross_chunk_rows=258/600 modes=4 region_allocation_faults=40 count_drift_cases=12");
     return 0;
 }
