@@ -13,7 +13,14 @@ function(m3fs_warnings target)
     target_compile_options(${target} PRIVATE -Wall -Wextra -Werror -Wconversion -Wshadow -Wpedantic)
   endif()
 endfunction()
-add_library(m3fs SHARED src/m3fs.c src/m3index_semantic_core.c src/m3fs_semantic.c)
+add_library(
+  m3fs
+  SHARED
+  src/m3fs.c
+  src/m3index_semantic_core.c
+  src/m3fs_semantic.c
+  src/m3structure_semantic_core.c
+  src/m3fs_structure.c)
 target_include_directories(m3fs PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)
 target_link_libraries(m3fs PRIVATE SQLite::SQLite3 Threads::Threads)
 m3fs_warnings(m3fs)
