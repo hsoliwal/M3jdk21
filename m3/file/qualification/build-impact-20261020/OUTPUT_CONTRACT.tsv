@@ -8,3 +8,4 @@ OUTPUT_CONTRACT.tsv	YES	m3/file/qualification/build-impact-20261020/OUTPUT_CONTR
 INVENTORY.tsv	YES	m3/file/qualification/build-impact-20261020/INVENTORY.tsv
 CATEGORY_CATALOG.tsv	YES	m3/file/qualification/build-impact-20261020/CATEGORY_CATALOG.tsv
 TODO.tsv	YES	m3/file/qualification/build-impact-20261020/TODO.tsv
+JAVA21_EXECUTION.log	YES	m3/file/qualification/build-impact-20261020/JAVA21_EXECUTION.log
