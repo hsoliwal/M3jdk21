@@ -103,10 +103,32 @@ final class M3ScrollSupport {
 
             @Override
             public int rowAt(int y) {
-                int row = tree.getClosestRowForLocation(0, y);
-                return contains(row < 0 ? null : tree.getRowBounds(row), y) ? row : -1;
+                return searchRow(this, y);
             }
         };
+    }
+
+    /**
+     * The row whose bounds contain {@code y}, or -1, by a binary search over the row bounds, which follow the row
+     * order (catalogue: binary search over a monotone sequence): O(log n) bounds lookups. For JTree, whose own
+     * y-to-row answer is O(n): {@code getClosestRowForLocation} ends in the layout cache's row of a node, an
+     * {@code indexOf} over the visible nodes, while a row's bounds are found from the row in O(1).
+     */
+    static int searchRow(Rows rows, int y) {
+        int low = 0;
+        int high = rows.count() - 1;
+        while (low <= high) {
+            int mid = (low + high) >>> 1;
+            Rectangle r = rows.bounds(mid);
+            if (y < r.y) {
+                high = mid - 1;
+            } else if (y >= r.y + r.height) {
+                low = mid + 1;
+            } else {
+                return mid;
+            }
+        }
+        return -1;
     }
 
     private static boolean contains(Rectangle r, int y) {
