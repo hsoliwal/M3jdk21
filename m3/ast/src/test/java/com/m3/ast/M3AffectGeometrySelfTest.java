@@ -37,10 +37,7 @@ public final class M3AffectGeometrySelfTest {
                 .put(M3AffectAxis.DOMINANCE, 8000)
                 .put(M3AffectAxis.GOAL_RELEVANCE, 16000)
                 .build();
-        M3EmotionOntology custom = M3EmotionOntology.builder(labels)
-                .add("custom_joy", M3EmotionOntology.TYPE_FINE_GRAINED, joyAxes) >= 0
-                ? buildCustom(labels, joyAxes)
-                : throwImpossible();
+        M3EmotionOntology custom = buildCustom(labels, joyAxes);
 
         int customJoy = custom.emotionByLabelId(labels.id("custom_joy")).orElseThrow();
         equal(25000, custom.affectQ15(customJoy, M3AffectAxis.VALENCE).orElseThrow(),
@@ -68,9 +65,6 @@ public final class M3AffectGeometrySelfTest {
         return builder.freeze();
     }
 
-    private static M3EmotionOntology throwImpossible() {
-        throw new AssertionError();
-    }
 
     private static void check(boolean condition, String label) {
         checks++;
