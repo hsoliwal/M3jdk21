@@ -237,6 +237,75 @@ class M3FileShadowTest {
         assertEquals(TEXT, b.text());
     }
 
+
+    @Test
+    void malformedProviderCannotSpinOrResumeAnyLayeredRead() throws Exception {
+        for (int mode = 0; mode < 4; mode++) {
+            InputStream noProgress = new InputStream() {
+                @Override public int read() { return -1; }
+                @Override public int read(byte[] bytes, int offset, int length) { return 0; }
+            };
+            AtomicLong progress = new AtomicLong();
+            M3FileCrcShadow crc = M3FileShadow.crc32c();
+            try (M3FileShadowInputStream input = new M3FileShadowInputStream(noProgress, 100,
+                    M3FileProgress.of(progress::addAndGet, () -> false), crc)) {
+                int action = mode;
+                IOException failure = assertThrows(IOException.class, () -> {
+                    switch (action) {
+                        case 0 -> input.read();
+                        case 1 -> input.read(new byte[8]);
+                        case 2 -> input.skip(8);
+                        case 3 -> input.transferTo(new ByteArrayOutputStream());
+                        default -> throw new AssertionError(action);
+                    }
+                });
+                assertTrue(failure.getMessage().contains("invalid underlying input read count"));
+                assertEquals(0, input.count());
+                assertEquals(0, progress.get());
+                assertFalse(input.ended());
+                assertThrows(IOException.class, () -> input.read(new byte[1]),
+                        "a provider with uncertain byte delivery cannot resume after failure");
+            }
+        }
+        for (int bad : new int[] {-2, 5}) {
+            InputStream invalid = new InputStream() {
+                @Override public int read() { return -1; }
+                @Override public int read(byte[] bytes, int offset, int length) { return bad; }
+            };
+            try (M3FileShadowInputStream input = new M3FileShadowInputStream(invalid, 100,
+                    M3FileProgress.NONE)) {
+                assertThrows(IOException.class, () -> input.read(new byte[4]));
+                assertEquals(0, input.count());
+                assertThrows(IOException.class, () -> input.read(new byte[4]));
+            }
+        }
+    }
+
+    @Test
+    void failedLayerOrLimitCannotCommitUnobservedProgress() throws Exception {
+        AtomicLong progress = new AtomicLong();
+        M3FileShadow updating = (bytes, offset, length) -> {
+            throw new IllegalStateException("layer cannot consume block");
+        };
+        try (M3FileShadowInputStream input = new M3FileShadowInputStream(
+                new ByteArrayInputStream(new byte[] {1, 2, 3}), 10,
+                M3FileProgress.of(progress::addAndGet, () -> false), updating)) {
+            assertThrows(IllegalStateException.class, () -> input.read(new byte[3]));
+            assertEquals(0, input.count());
+            assertEquals(0, progress.get());
+            assertFalse(input.ended());
+            assertThrows(IOException.class, input::read);
+        }
+        try (M3FileShadowInputStream input = new M3FileShadowInputStream(
+                new ByteArrayInputStream(new byte[] {1, 2, 3, 4}), 2,
+                M3FileProgress.of(progress::addAndGet, () -> false))) {
+            assertThrows(M3FileLimitException.class, () -> input.read(new byte[4]));
+            assertEquals(0, input.count(), "the unobserved, rejected block is not committed");
+            assertEquals(0, progress.get());
+            assertThrows(IOException.class, () -> input.skip(1));
+        }
+    }
+
     private static long crc32c(byte[] data) {
         CRC32C crc = new CRC32C();
         crc.update(data);
