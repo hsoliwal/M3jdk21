@@ -41,6 +41,7 @@ CONTRACTS = (
     ("jdk.m3.parser.test.M3JavacParserContract", "M3_JAVAC_PARSER_PASS"),
     ("jdk.m3.parser.test.M3CrossFrontendContract", "M3_AST_MULTIFRONTEND_PASS"),
     ("jdk.m3.parser.test.M3LexerProfileContract", "M3_LEXER_PROFILE_PASS"),
+    ("jdk.m3.parser.test.M3ASTTextFactsContract", "M3_AST_STRING_FACTS_CONTRACT_PASS"),
 )
 COMPILER_CONTRACTS = (("M3ASTProjectionStateTest", "M3_AST_PROJECTION_STATE_PASS"),)
 SMOKE = ("jdk.m3.parser.test.M3ParserImageSmoke", "M3_PARSER_IMAGE_PASS")
