@@ -1142,7 +1142,10 @@ final class M3String implements CharSequence {
         M3StringSearchPrecompute.Plan plan = M3StringSearchPrecompute.prepare(checked);
         if (plan != null) {
             if (!M3StringSearchPrecompute.mayContain(this, plan)) return -1;
-            return M3StringSearchPrecompute.indexOf(this, checked, plan, from, end);
+            int tree = M3StringTreeSearch.indexOf(this, checked, plan, from, end);
+            return tree != M3StringTreeSearch.NOT_APPLICABLE
+                    ? tree
+                    : M3StringSearchPrecompute.indexOf(this, checked, plan, from, end);
         }
 
         int limit = end - checked.length();
@@ -1168,7 +1171,10 @@ final class M3String implements CharSequence {
         M3StringSearchPrecompute.Plan plan = M3StringSearchPrecompute.prepare(checked);
         if (plan != null) {
             if (!M3StringSearchPrecompute.mayContain(this, plan)) return -1;
-            return M3StringSearchPrecompute.lastIndexOf(this, checked, plan, maximumStart);
+            int tree = M3StringTreeSearch.lastIndexOf(this, checked, plan, maximumStart);
+            return tree != M3StringTreeSearch.NOT_APPLICABLE
+                    ? tree
+                    : M3StringSearchPrecompute.lastIndexOf(this, checked, plan, maximumStart);
         }
 
         char first = checked.charAt(0);
