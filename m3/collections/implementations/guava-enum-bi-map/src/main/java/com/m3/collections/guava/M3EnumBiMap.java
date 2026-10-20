@@ -56,6 +56,10 @@ public final class M3EnumBiMap<K extends Enum<K>, V extends Enum<V>> extends Abs
     private transient Class<?>[] types;
     private transient Enum<?>[][] universes;
     private transient int[][] lanes;
+    /** Hoisted aliases of {@code types[0]}, {@code lanes[0]} and {@code universes[1]} for the forward get(). */
+    private transient Class<?> keyClass;
+    private transient int[] keyLane;
+    private transient Enum<?>[] valueConstants;
     private transient int size;
     private transient Side<V, K> inverseView;
     private transient Set<K> keySetView;
@@ -99,6 +103,9 @@ public final class M3EnumBiMap<K extends Enum<K>, V extends Enum<V>> extends Abs
         types = new Class<?>[] {Objects.requireNonNull(keyType), Objects.requireNonNull(valueType)};
         universes = new Enum<?>[][] {UNIVERSES.get(keyType), UNIVERSES.get(valueType)};
         lanes = new int[][] {new int[universes[0].length], new int[universes[1].length]};
+        keyClass = keyType;
+        keyLane = lanes[0];
+        valueConstants = universes[1];
     }
 
     /** Returns the key enum type. */
@@ -134,9 +141,16 @@ public final class M3EnumBiMap<K extends Enum<K>, V extends Enum<V>> extends Abs
         return o >= 0 && lanes[s][o] != 0;
     }
 
-    private Object lookup(int s, Object key) {
-        int o = ord(s, key);
-        return o < 0 || lanes[s][o] == 0 ? null : universes[1 - s][lanes[s][o] - 1];
+    /**
+     * get() on one side over that side's hoisted arrays ({@code types[s]}, {@code lanes[s]},
+     * {@code universes[1 - s]}): one class check, one lane read, one universe read.
+     */
+    private static Object lookup(Object key, Class<?> type, int[] lane, Enum<?>[] targets) {
+        if (key == null) { return null; }
+        Class<?> c = key.getClass();
+        if (c != type && c.getSuperclass() != type) { return null; }
+        int t = lane[((Enum<?>) key).ordinal()];
+        return t == 0 ? null : targets[t - 1];
     }
 
     private ClassCastException wrong(int s, Object key) {
@@ -270,7 +284,7 @@ public final class M3EnumBiMap<K extends Enum<K>, V extends Enum<V>> extends Abs
     }
 
     @Override public V get(Object key) {
-        return cast(lookup(0, key));
+        return cast(lookup(key, keyClass, keyLane, valueConstants));
     }
 
     @Override public V put(K key, V value) {
@@ -558,12 +572,19 @@ public final class M3EnumBiMap<K extends Enum<K>, V extends Enum<V>> extends Abs
     private final class Side<A, B> extends AbstractMap<A, B> implements BiMap<A, B>, Serializable {
         @Serial private static final long serialVersionUID = 0L;
         private final int s;
+        /** Hoisted aliases of {@code types[s]}, {@code lanes[s]} and {@code universes[1 - s]} for get(). */
+        private final transient Class<?> type;
+        private final transient int[] lane;
+        private final transient Enum<?>[] targets;
         private transient Set<A> keys;
         private transient Set<B> values;
         private transient Set<Map.Entry<A, B>> entries;
 
         Side(int s) {
             this.s = s;
+            this.type = types[s];
+            this.lane = lanes[s];
+            this.targets = universes[1 - s];
         }
 
         @Override public int size() {
@@ -583,7 +604,7 @@ public final class M3EnumBiMap<K extends Enum<K>, V extends Enum<V>> extends Abs
         }
 
         @Override public B get(Object key) {
-            return cast(lookup(s, key));
+            return cast(lookup(key, type, lane, targets));
         }
 
         @Override public B put(A key, B value) {
