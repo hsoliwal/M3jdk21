@@ -102,6 +102,9 @@ public final class M3File {
 
     public boolean flag(M3FileFlag flag) { return tree.flag(flag, entryId()); }
 
+    /** Why the last observation of this entry failed; {@link M3FileError#NONE} otherwise. */
+    public M3FileError error() { return tree.error(entryId()); }
+
     /** Byte length observed at scan time; {@code -1} unknown. */
     public long size() { return tree.size(entryId()); }
 
@@ -135,12 +138,12 @@ public final class M3File {
     public byte[] readAllBytes(int maxBytes) throws IOException {
         if (maxBytes < 0) throw new IllegalArgumentException("negative maxBytes");
         if (metadata().size() > maxBytes) {
-            throw new IOException("resource exceeds configured read limit");
+            throw new M3FileLimitException("resource exceeds configured read limit");
         }
         try (InputStream input = openInputStream()) {
             byte[] data = input.readNBytes(maxBytes);
             if (input.read() != -1) {
-                throw new IOException("resource exceeds configured read limit");
+                throw new M3FileLimitException("resource exceeds configured read limit");
             }
             return data;
         }
@@ -161,7 +164,7 @@ public final class M3File {
         if (maxBytes < 0) throw new IllegalArgumentException("negative maxBytes");
         Metadata observed = metadata();
         if (!observed.regularFile()) throw new IOException("resource is not a regular file");
-        if (observed.size() > maxBytes) throw new IOException("resource exceeds configured read limit");
+        if (observed.size() > maxBytes) throw new M3FileLimitException("resource exceeds configured read limit");
         progress.begin(path().toString(), observed.size());
         return new M3FileShadowInputStream(tree.source().openContent(this), maxBytes, progress, shadows);
     }

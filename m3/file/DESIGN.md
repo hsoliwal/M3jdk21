@@ -119,7 +119,7 @@ Cursor: `nextId()` (`-1` at end), `nextEntry()` (`Optional<M3File>`), `hasNext()
 | S7 | `M3FileSource` (one abstract method; FILESYSTEM and zip sources), zip/jar roots through `M3FileTree.open` (central directory, implied dirs, nested zip-in-zip sub-trees via streaming, `ARCHIVE` flag, `entryCrc` lane gating), entry content via `ZipFile.getInputStream` with byte limits | differential vs `ZipFile.entries()` + `ZipInputStream` |
 | S8 | `M3FileScanSpec` maxDepth, lazy `scanChildren(id)`; `expandArchives` (archives below a directory root) moved to S9 | done: random-order full expansion == eager scan == `Files.walk`; ids stable; fail-fast traversals |
 | S9a | unix-style ops as traversal defaults (`bytes` = du, `wc`, `grep`), `render` (tree), `zipTo` (any source; repack archives) | done: differential vs POSIX wc rules, BufferedReader lines, ZipFile round trip |
-| S9b | error lane + `M3FileLimitException`, `expandArchives` (archives below a directory root as sub-trees via a mixed source) | per-mode tests |
+| S9b | error lane + `M3FileLimitException`, `expandArchives` (archives below a directory root as sub-trees; `M3FileArchiveContent` serves both sources) | done: NOT_FOUND/LIMIT lanes set and cleared, classification table, expanded rows and bytes equal the archive-root tree, entry-level delta |
 | S10 | viewport row host over `com.m3.viewport.M3RowHost` | 100k rows, O(window) per frame |
 | S11 | lane image (little-endian lanes + name pool), content-addressed | round-trip equal; open without re-scan |
 | S12 | Synexia crate custody `crates/m3-file/file-tree` (stacked on Synexia #12520), output = this branch | recipe fixed point; draft PR |

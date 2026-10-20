@@ -62,11 +62,7 @@ final class M3FileZipScanner {
             int root = builder.append(name, M3FileKind.FILE, M3FileTreeScanner.dotName(name), attrs.size(),
                     attrs.lastModifiedTime().toMillis());
             tree.setFlag(M3FileFlag.ARCHIVE, root, true);
-            List<Item> items = new ArrayList<>();
-            for (Enumeration<? extends ZipEntry> entries = zip.entries(); entries.hasMoreElements(); ) {
-                ZipEntry entry = entries.nextElement();
-                items.add(item(entry, entry.getSize(), nestedOf(zip, entry)));
-            }
+            List<Item> items = items(zip);
             builder.openFrame(root);
             emit(tree, builder, items);
             builder.closeFrame();
@@ -79,6 +75,33 @@ final class M3FileZipScanner {
             }
             throw failure;
         }
+    }
+
+    /**
+     * Lists the archive file of row {@code row} (already appended under a directory scan) and emits its
+     * entries below it, flagging it {@link M3FileFlag#ARCHIVE}; a file that does not open as an archive
+     * stays a plain file.
+     */
+    static void expandInto(M3FileTree tree, M3FileTreeBuilder builder, int row, Path archive) {
+        List<Item> items;
+        try (ZipFile zip = new ZipFile(archive.toFile())) {
+            items = items(zip);
+        } catch (IOException notAnArchive) {
+            return;
+        }
+        tree.setFlag(M3FileFlag.ARCHIVE, row, true);
+        builder.openFrame(row);
+        emit(tree, builder, items);
+        builder.closeFrame();
+    }
+
+    private static List<Item> items(ZipFile zip) {
+        List<Item> items = new ArrayList<>();
+        for (Enumeration<? extends ZipEntry> entries = zip.entries(); entries.hasMoreElements(); ) {
+            ZipEntry entry = entries.nextElement();
+            items.add(item(entry, entry.getSize(), nestedOf(zip, entry)));
+        }
+        return items;
     }
 
     /** Normalised entry name: segments joined by {@code /}. */
@@ -213,7 +236,7 @@ final class M3FileZipScanner {
 
         private void counted(long n) throws IOException {
             count += n;
-            if (count > limit) throw new IOException("nested archive exceeds " + limit + " inflated bytes");
+            if (count > limit) throw new M3FileLimitException("nested archive exceeds " + limit + " inflated bytes");
         }
     }
 }

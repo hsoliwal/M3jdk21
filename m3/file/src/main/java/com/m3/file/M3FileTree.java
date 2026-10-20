@@ -56,6 +56,7 @@ public final class M3FileTree implements Closeable {
     private int[] rank = new int[INITIAL_ROWS];
     private long[] size = new long[INITIAL_ROWS];
     private long[] mtime = new long[INITIAL_ROWS];
+    private byte[] error = new byte[INITIAL_ROWS];
     private int rows;
     private int generation;
     private M3FileScanSpec spec = M3FileScanSpec.EAGER;
@@ -288,6 +289,12 @@ public final class M3FileTree implements Closeable {
         return types.name(typeId(id));
     }
 
+    /** Why the last observation of {@code id} failed; {@link M3FileError#NONE} unless {@link M3FileFlag#FAILED}. */
+    public M3FileError error(int id) {
+        checkId(id);
+        return M3FileError.VALUES[error[id]];
+    }
+
     /** CRC32C lane; meaningful when {@link M3FileFlag#HASHED}. */
     public long crc(int id) {
         checkId(id);
@@ -425,6 +432,17 @@ public final class M3FileTree implements Closeable {
         hashes.carry(this, id, from, fromId);
     }
 
+    /** Records a failed observation of {@code id}: {@link M3FileFlag#FAILED} and the error lane. */
+    void fail(int id, IOException failure) {
+        setFlag(M3FileFlag.FAILED, id, true);
+        error[id] = (byte) M3FileError.of(failure).ordinal();
+    }
+
+    void clearFailure(int id) {
+        setFlag(M3FileFlag.FAILED, id, false);
+        error[id] = 0;
+    }
+
     void setFlag(M3FileFlag flag, int id, boolean value) {
         flags[flag.ordinal()].set(id, value);
     }
@@ -495,6 +513,7 @@ public final class M3FileTree implements Closeable {
         rank = Arrays.copyOf(rank, capacity);
         size = Arrays.copyOf(size, capacity);
         mtime = Arrays.copyOf(mtime, capacity);
+        error = Arrays.copyOf(error, capacity);
         hashes.grow(capacity);
     }
 

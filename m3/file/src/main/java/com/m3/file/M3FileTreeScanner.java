@@ -58,7 +58,11 @@ final class M3FileTreeScanner extends SimpleFileVisitor<Path> {
     @Override
     public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) {
         started = true;
-        append(file, attrs.isDirectory() ? fresh(file, attrs) : attrs);
+        int id = append(file, attrs.isDirectory() ? fresh(file, attrs) : attrs);
+        if (tree.spec().expandArchives() && attrs.isRegularFile() && !attrs.isSymbolicLink()
+                && M3FileZipScanner.ARCHIVE_TYPES.contains(M3FileTree.extension(nameOf(file)))) {
+            M3FileZipScanner.expandInto(tree, builder, id, file);
+        }
         return FileVisitResult.CONTINUE;
     }
 
@@ -67,7 +71,7 @@ final class M3FileTreeScanner extends SimpleFileVisitor<Path> {
         if (!started && startId >= 0) throw exc;
         started = true;
         String name = nameOf(file);
-        builder.append(name, M3FileKind.OTHER, dotName(name), -1L, Long.MIN_VALUE);
+        tree.fail(builder.append(name, M3FileKind.OTHER, dotName(name), -1L, Long.MIN_VALUE), exc);
         return FileVisitResult.CONTINUE;
     }
 

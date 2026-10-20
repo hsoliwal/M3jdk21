@@ -42,7 +42,7 @@ public final class M3FileShadowOutputStream extends FilterOutputStream {
         Objects.checkFromIndexSize(offset, length, bytes.length);
         if (finished) throw new IOException("stream closed");
         progress.checkCanceled();
-        if (length > maxBytes - count) throw new IOException("resource exceeds configured write limit");
+        if (length > maxBytes - count) throw new M3FileLimitException("resource exceeds configured write limit");
         out.write(bytes, offset, length);
         count += length;
         for (M3FileShadow shadow : shadows) shadow.update(bytes, offset, length);

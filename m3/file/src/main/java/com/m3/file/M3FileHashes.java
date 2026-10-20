@@ -113,7 +113,7 @@ final class M3FileHashes {
         } catch (InterruptedIOException canceled) {
             throw canceled;
         } catch (IOException failed) {
-            tree.setFlag(M3FileFlag.FAILED, id, true);
+            tree.fail(id, failed);
             tree.setFlag(M3FileFlag.HASHED, id, false);
             tree.setFlag(M3FileFlag.TOKEN_HASHED, id, false);
             tree.setFlag(M3FileFlag.STRUCT_HASHED, id, false);
@@ -123,7 +123,7 @@ final class M3FileHashes {
         for (int word = 0; word < 4; word++) sha[id * 4 + word] = digest.word(word);
         tokens[id] = binary[0] ? 0 : tokenShadow.hash();
         structure[id] = structured.isPresent() ? structured.get().structHash() : 0;
-        tree.setFlag(M3FileFlag.FAILED, id, false);
+        tree.clearFailure(id);
         tree.setFlag(M3FileFlag.HASHED, id, true);
         tree.setFlag(M3FileFlag.TOKEN_HASHED, id, !binary[0]);
         tree.setFlag(M3FileFlag.STRUCT_HASHED, id, structured.isPresent());

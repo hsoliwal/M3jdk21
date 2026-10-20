@@ -110,7 +110,7 @@ public final class M3FileShadowInputStream extends FilterInputStream {
 
     private void observe(byte[] bytes, int offset, int n) throws IOException {
         count += n;
-        if (count > maxBytes) throw new IOException("resource exceeds configured read limit");
+        if (count > maxBytes) throw new M3FileLimitException("resource exceeds configured read limit");
         for (M3FileShadow shadow : shadows) shadow.update(bytes, offset, n);
         progress.worked(n);
     }

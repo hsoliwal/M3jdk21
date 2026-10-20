@@ -138,12 +138,12 @@ public interface M3FileTraversal {
             M3FileShadow... shadows) throws InterruptedIOException {
         try {
             tree.file(id).observe(maxBytes, progress.split(Math.max(0, tree.size(id))), shadows);
-            tree.setFlag(M3FileFlag.FAILED, id, false);
+            tree.clearFailure(id);
             return true;
         } catch (InterruptedIOException canceled) {
             throw canceled;
         } catch (IOException failed) {
-            tree.setFlag(M3FileFlag.FAILED, id, true);
+            tree.fail(id, failed);
             return false;
         }
     }

@@ -15,6 +15,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.PathMatcher;
+import java.nio.file.attribute.FileTime;
 import java.security.MessageDigest;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -120,6 +121,7 @@ class M3FileZipTest {
         Map<String, byte[]> next = outerEntries(bytes("class A v2"), false);
         next.put("com/x/C.class", bytes("class C"));
         Path v2 = fixture("v2.jar", next);
+        Files.setLastModifiedTime(v2, FileTime.fromMillis(Files.getLastModifiedTime(v1).toMillis() + 5_000));
         try (M3FileTree before = M3FileTree.open(v1); M3FileTree after = M3FileTree.open(v2)) {
             AtomicLong read = new AtomicLong();
             M3FileTreeDelta delta = M3FileTreeDelta.between(before, after, 1 << 20,
