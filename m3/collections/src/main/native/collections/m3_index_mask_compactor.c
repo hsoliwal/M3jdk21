@@ -45,11 +45,14 @@ static jintArray m3_select_range(JNIEnv *env, jintArray rows, jbyteArray states,
         }
         (*env)->GetIntArrayRegion(env, rows, first + offset, chunk, row_ids);
         if ((*env)->ExceptionCheck(env)) return NULL;
-        jsize accepted = 0;
-        for (jsize i = 0; i < chunk; i++) {
-            unsigned int bits = required_mask == 0 ? 0u : (unsigned int)(unsigned char)marks[i];
-            if ((bits & (unsigned int)required_mask) == (unsigned int)required_mask) {
-                row_ids[accepted++] = row_ids[i];
+        /* A zero mask selects this entire chunk, already in output order. */
+        jsize accepted = required_mask == 0 ? chunk : 0;
+        if (required_mask != 0) {
+            for (jsize i = 0; i < chunk; i++) {
+                unsigned int bits = (unsigned int)(unsigned char)marks[i];
+                if ((bits & (unsigned int)required_mask) == (unsigned int)required_mask) {
+                    row_ids[accepted++] = row_ids[i];
+                }
             }
         }
         if (accepted > count - written) {
