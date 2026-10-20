@@ -1,0 +1,15 @@
+owner	donor_type	operation	size	impl	build_ms	query_ms	build_alloc_B_per_elem	query_alloc_B_per_op	retained_B	retained_unit
+M3DualLinkedHashBidiMap	org.apache.commons.collections4.bidimap.DualLinkedHashBidiMap	put n; get + getKey n; mapIterator	100000	m3	13.76	2.51	221.25	0.00	80.73	B/element
+M3DualLinkedHashBidiMap	org.apache.commons.collections4.bidimap.DualLinkedHashBidiMap	put n; get + getKey n; mapIterator	100000	m3	10.54	1.05	221.25	0.00	80.73	B/element
+M3DualLinkedHashBidiMap	org.apache.commons.collections4.bidimap.DualLinkedHashBidiMap	put n; get + getKey n; mapIterator	100000	m3	14.11	2.10	221.25	0.00	80.73	B/element
+M3DualLinkedHashBidiMap	org.apache.commons.collections4.bidimap.DualLinkedHashBidiMap	put n; get + getKey n; mapIterator	100000	m3	16.06	2.68	221.25	0.00	80.73	B/element
+M3DualLinkedHashBidiMap	org.apache.commons.collections4.bidimap.DualLinkedHashBidiMap	put n; get + getKey n; mapIterator	100000	m3	19.02	2.63	221.25	0.00	80.73	B/element
+M3DualLinkedHashBidiMap	org.apache.commons.collections4.bidimap.DualLinkedHashBidiMap	put n; get + getKey n; mapIterator	100000	m3	22.82	2.02	221.25	0.00	80.73	B/element
+M3DualLinkedHashBidiMap	org.apache.commons.collections4.bidimap.DualLinkedHashBidiMap	put n; get + getKey n; mapIterator	100000	m3	12.27	1.17	221.25	0.00	80.73	B/element
+M3DualLinkedHashBidiMap	org.apache.commons.collections4.bidimap.DualLinkedHashBidiMap	put n; get + getKey n; mapIterator	1000000	m3	54.29	9.89	237.76	0.00	84.81	B/element
+M3DualLinkedHashBidiMap	org.apache.commons.collections4.bidimap.DualLinkedHashBidiMap	put n; get + getKey n; mapIterator	1000000	m3	81.05	14.81	237.76	0.00	75.77	B/element
+M3DualLinkedHashBidiMap	org.apache.commons.collections4.bidimap.DualLinkedHashBidiMap	put n; get + getKey n; mapIterator	1000000	m3	58.37	11.24	237.76	0.00	75.77	B/element
+M3DualLinkedHashBidiMap	org.apache.commons.collections4.bidimap.DualLinkedHashBidiMap	put n; get + getKey n; mapIterator	1000000	m3	79.23	14.32	237.76	0.00	75.77	B/element
+M3DualLinkedHashBidiMap	org.apache.commons.collections4.bidimap.DualLinkedHashBidiMap	put n; get + getKey n; mapIterator	1000000	m3	106.68	23.99	237.76	0.00	84.81	B/element
+M3DualLinkedHashBidiMap	org.apache.commons.collections4.bidimap.DualLinkedHashBidiMap	put n; get + getKey n; mapIterator	1000000	m3	83.23	16.69	237.76	0.00	84.81	B/element
+M3DualLinkedHashBidiMap	org.apache.commons.collections4.bidimap.DualLinkedHashBidiMap	put n; get + getKey n; mapIterator	1000000	m3	67.19	12.72	237.76	0.00	84.81	B/element
