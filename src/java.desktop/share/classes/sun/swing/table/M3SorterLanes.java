@@ -92,9 +92,16 @@ public final class M3SorterLanes {
     private int[] viewToModel;
     /** Model index to view index, -1 for a filtered row; null with {@link #viewToModel}. */
     private int[] modelToView;
+    /** Full sorts done for a delta event at the stock cutoffs (rule 24 counter). */
+    private int fullSortsOnDeltas;
 
     /** Creates unbound lanes; the sorter binds its host before the first use. */
     public M3SorterLanes() {
+    }
+
+    /** The number of full sorts done for delta events, all at the stock cutoffs (for the differentials). */
+    public int fullSortsOnDeltas() {
+        return fullSortsOnDeltas;
     }
 
     /** Whether {@link #bind} ran. */
@@ -273,11 +280,17 @@ public final class M3SorterLanes {
         }
     }
 
+    /**
+     * The stock {@code shouldOptimizeChange}: a change of a sorted or filtered view is applied as a
+     * delta, except where the stock sorts in full (the view is not sorted, it is empty, or more than
+     * a tenth of its rows changed); those full sorts are counted for the differentials.
+     */
     private boolean shouldOptimizeChange(int firstRow, int lastRow) {
         if (viewToModel == null) {
             return false;
         }
         if (!host.sorted() || viewToModel.length == 0 || (lastRow - firstRow) > viewToModel.length / 10) {
+            fullSortsOnDeltas++;
             host.sort();
             return false;
         }

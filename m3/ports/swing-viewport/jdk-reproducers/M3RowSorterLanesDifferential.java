@@ -370,7 +370,11 @@ public final class M3RowSorterLanesDifferential {
             }
             check(step % 10 == 0);
         }
+        fullSortsOnDeltas += ((M3SorterLanes) get(m3.sorter, "m3Lanes")).fullSortsOnDeltas();
     }
+
+    /** Full sorts the lanes made for delta events, summed over the seeds; only the stock cutoffs make them. */
+    static int fullSortsOnDeltas;
 
     public static void main(String[] args) throws Exception {
         int seeds = args.length > 0 ? Integer.parseInt(args[0]) : 40;
@@ -402,6 +406,7 @@ public final class M3RowSorterLanesDifferential {
         });
         return "M3RowSorterLanesDifferential seeds " + seeds + " steps " + steps + " passed " + passed[0]
                 + " failed " + failures.size() + " " + failures + "; pixel comparisons " + pixelChecks
-                + "; checks " + checks + ", with the lanes transformed " + lanesSteps;
+                + "; checks " + checks + ", with the lanes transformed " + lanesSteps
+                + "; full sorts on delta events " + fullSortsOnDeltas + " (all at the stock cutoffs: view not sorted, or over a tenth of the rows changed)";
     }
 }
