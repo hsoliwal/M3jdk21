@@ -66,7 +66,7 @@ public final class M3HfLexiconIntakeProof {
     private static int verifyLanguageResourceDiscovery() throws IOException {
         List<String> lines = resourceLines(
                 "/com/m3/lexicon/hf/language-resource-discovery.tsv");
-        require(lines.size() == 227, "226 language-resource candidates plus header");
+        require(lines.size() == 231, "230 language-resource candidates plus header");
         List<String> expectedHeader = List.of("source_id", "resource", "category",
                 "data_shape_and_identity", "rights_and_attribution", "m3_candidate_use",
                 "admission_blockers", "state", "evidence");
@@ -315,8 +315,26 @@ public final class M3HfLexiconIntakeProof {
                 "inuktitutcomputing-uqailaut-roots",
                 "nrc-nunavut-hansard-3",
                 "hf-americasnli",
-                "hf-teara-maori-english"
-        )), "exact 226 language-resource source IDs match the pinned catalogue");
+                "hf-teara-maori-english",
+                "jmdict-edrdg",
+                "jmnedict-edrdg",
+                "kanjidic2-edrdg",
+                "cc-cedict-v2"
+        )), "exact 230 language-resource source IDs match the pinned catalogue");
+        String jmdict = discoveryRecord(lines, "jmdict-edrdg");
+        require(jmdict.contains("JMdict_e/JMdict_b")
+                && jmdict.contains("legacy generation")
+                && jmdict.contains("parallel NG generation"),
+                "JMdict edition and generation remain pinned separately");
+        String kanjidic2 = discoveryRecord(lines, "kanjidic2-edrdg");
+        require(kanjidic2.contains("CC BY-NC-SA 4.0")
+                && kanjidic2.contains("exclude SKIP from any commercial payload"),
+                "KANJIDIC2 SKIP rights stay field-scoped and noncommercial");
+        String ccCedict = discoveryRecord(lines, "cc-cedict-v2");
+        require(ccCedict.contains("case-sensitively")
+                && ccCedict.contains("[Wang2]") && ccCedict.contains("[wang2]")
+                && ccCedict.contains("case-fold Pinyin"),
+                "CC-CEDICT V2 preserves case-sensitive Pinyin identity");
         String sindhi = discoveryRecord(lines, "hf-sindhi-open-lexicon");
         require(sindhi.contains("223,342") && sindhi.contains("lexical_id")
                 && sindhi.contains("entry_id") && sindhi.contains("schema casting"),
@@ -748,7 +766,7 @@ public final class M3HfLexiconIntakeProof {
                 && austlang.contains("approximate"),
                 "Austlang stable variety IDs and approximate locations remain qualified");
         String afwn = discoveryRecord(lines, "afwn-2022-release-1-0");
-        require(afwn.contains("nine languages") && afwn.contains("CC BY 4.0")
+        require(afwn.contains("nine South African languages") && afwn.contains("CC BY 4.0")
                 && afwn.contains("synset"),
                 "African Wordnet release coverage, rights and sense identity remain explicit");
         String multilingualFrequency = discoveryRecord(lines, "hf-multilingual-frequency-lists");
@@ -1017,12 +1035,13 @@ public final class M3HfLexiconIntakeProof {
                 && morphalou.contains("522,662") && morphalou.contains("LGPL-LR"),
                 "Morphalou form/phonetic counts, provenance and data license stay explicit");
         String rlfr = discoveryRecord(lines, "rl-fr-2025-03");
-        require(rlfr.contains("7 March 2025") && rlfr.contains("polysemy")
+        require(rlfr.contains("March 2025") && rlfr.contains("polysemy")
                 && rlfr.contains("CC BY 4.0") && rlfr.contains("not translations"),
                 "RL-fr version, typed lexical relations and scope stay explicit");
         String bel = discoveryRecord(lines, "bel-rl-fr-3-1");
         require(bel.contains("31,987 citations") && bel.contains("53,013")
-                && bel.contains("source rights") && bel.contains("REFERENCE_ONLY"),
+                && bel.contains("underlying text rights")
+                && bel.contains("citation-level provenance") && bel.contains("REFERENCE_ONLY"),
                 "BEL-RL citation identity and per-source rights remain gated");
         String prolexbase = discoveryRecord(lines, "prolexbase-2-2");
         require(prolexbase.contains("67,000") && prolexbase.contains("65,500")
