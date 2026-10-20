@@ -4,8 +4,17 @@ package com.m3.file;
 
 import java.io.IOException;
 import java.io.InterruptedIOException;
+import java.util.ArrayDeque;
 import java.util.Arrays;
+import java.util.ConcurrentModificationException;
 import java.util.Optional;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicReference;
 
 /**
  * Hash lanes of an {@link M3FileTree}: CRC32C, SHA-256 (four big-endian words, the #1567
@@ -98,7 +107,15 @@ final class M3FileHashes {
     boolean observe(M3FileTree tree, int id, long maxBytes, M3FileProgress progress, M3FileChangeProvider provider)
             throws InterruptedIOException {
         if (!tree.flag(M3FileFlag.REGULAR, id)) return false;
-        M3File file = tree.file(id);
+        return commit(tree, read(tree.file(id), maxBytes, progress, provider));
+    }
+
+    /** A bounded per-observation result; never retains file bytes or parser shadows. */
+    private record Observation(int id, long crc, long sha0, long sha1, long sha2, long sha3,
+            long tokens, long structure, boolean text, boolean structured, IOException failure) { }
+
+    private static Observation read(M3File file, long maxBytes, M3FileProgress progress,
+            M3FileChangeProvider provider) throws InterruptedIOException {
         M3FileDigestShadow digest = M3FileShadow.sha256();
         M3FileCrcShadow crc32c = M3FileShadow.crc32c();
         M3FileTokenShadow tokenShadow = M3FileCharShadow.tokens();
@@ -113,20 +130,124 @@ final class M3FileHashes {
         } catch (InterruptedIOException canceled) {
             throw canceled;
         } catch (IOException failed) {
-            tree.fail(id, failed);
-            tree.setFlag(M3FileFlag.HASHED, id, false);
-            tree.setFlag(M3FileFlag.TOKEN_HASHED, id, false);
-            tree.setFlag(M3FileFlag.STRUCT_HASHED, id, false);
+            return new Observation(file.id(), 0, 0, 0, 0, 0, 0, 0, false, false, failed);
+        }
+        return new Observation(file.id(), crc32c.value(), digest.word(0), digest.word(1),
+                digest.word(2), digest.word(3), binary[0] ? 0 : tokenShadow.hash(),
+                structured.isPresent() ? structured.get().structHash() : 0,
+                !binary[0], structured.isPresent(), null);
+    }
+
+    /** Only the calling coordinator publishes into the tree's non-thread-safe lanes. */
+    private boolean commit(M3FileTree tree, Observation value) {
+        int id = value.id();
+        if (value.failure() != null) {
+            tree.fail(id, value.failure());
+            for (M3FileFlag flag : CONTENT_FLAGS) tree.setFlag(flag, id, false);
             return false;
         }
-        crc[id] = crc32c.value();
-        for (int word = 0; word < 4; word++) sha[id * 4 + word] = digest.word(word);
-        tokens[id] = binary[0] ? 0 : tokenShadow.hash();
-        structure[id] = structured.isPresent() ? structured.get().structHash() : 0;
+        crc[id] = value.crc();
+        sha[id * 4] = value.sha0();
+        sha[id * 4 + 1] = value.sha1();
+        sha[id * 4 + 2] = value.sha2();
+        sha[id * 4 + 3] = value.sha3();
+        tokens[id] = value.tokens();
+        structure[id] = value.structure();
         tree.clearFailure(id);
         tree.setFlag(M3FileFlag.HASHED, id, true);
-        tree.setFlag(M3FileFlag.TOKEN_HASHED, id, !binary[0]);
-        tree.setFlag(M3FileFlag.STRUCT_HASHED, id, structured.isPresent());
+        tree.setFlag(M3FileFlag.TOKEN_HASHED, id, value.text());
+        tree.setFlag(M3FileFlag.STRUCT_HASHED, id, value.structured());
         return true;
+    }
+
+    int observeParallel(M3FileTree tree, M3FileTraversal entries, long maxBytes,
+            M3FileProgress progress, M3FileChangeProvider provider, int parallelism)
+            throws InterruptedIOException {
+        int generation = tree.generation();
+        AtomicBoolean stopping = new AtomicBoolean();
+        AtomicReference<Throwable> failure = new AtomicReference<>();
+        M3FileProgress shared = new M3FileProgress() {
+            @Override public synchronized void worked(long units) { progress.worked(units); }
+            @Override public synchronized boolean isCanceled() {
+                return stopping.get() || failure.get() != null || Thread.currentThread().isInterrupted()
+                        || progress.isCanceled();
+            }
+        };
+        int width = Math.max(1, Math.min(parallelism, tree.rows()));
+        var workers = Executors.newFixedThreadPool(width);
+        ArrayDeque<Future<Observation>> pending = new ArrayDeque<>();
+        int hashed = 0;
+        try (var ids = entries.ids().filter(id -> tree.flag(M3FileFlag.REGULAR, id))) {
+            progress.begin("hash " + tree.root(), 0);
+            var iterator = ids.iterator();
+            while (true) {
+                check(tree, generation, shared, failure);
+                while (pending.size() < width && iterator.hasNext()) {
+                    check(tree, generation, shared, failure);
+                    int id = iterator.nextInt();
+                    M3File file = tree.file(id);
+                    M3FileProgress child = shared.split(Math.max(0, tree.size(id)));
+                    pending.addLast(workers.submit(() -> {
+                        try {
+                            shared.checkCanceled();
+                            return read(file, maxBytes, child, provider);
+                        } catch (InterruptedIOException | RuntimeException | Error fatal) {
+                            failure.compareAndSet(null, fatal);
+                            throw fatal;
+                        }
+                    }));
+                }
+                if (pending.isEmpty()) break;
+                Observation next;
+                while (true) {
+                    check(tree, generation, shared, failure);
+                    try {
+                        // Poll only to notice cancellation while a source is blocked in I/O.
+                        next = pending.getFirst().get(100, TimeUnit.MILLISECONDS);
+                        break;
+                    } catch (TimeoutException waiting) {
+                        // Keep the full outstanding window bounded behind its first result.
+                    } catch (InterruptedException interrupted) {
+                        Thread.currentThread().interrupt();
+                        InterruptedIOException canceled = new InterruptedIOException("hash interrupted");
+                        canceled.initCause(interrupted);
+                        throw canceled;
+                    } catch (ExecutionException failed) {
+                        // A sibling can fail while this get is waiting. Its cancellation must not
+                        // replace the first parser/provider failure that caused the shutdown.
+                        Throwable first = failure.get();
+                        rethrow(first != null ? first : failed.getCause());
+                        throw new AssertionError("unreachable");
+                    }
+                }
+                check(tree, generation, shared, failure);
+                pending.removeFirst();
+                if (commit(tree, next)) hashed++;
+            }
+        } finally {
+            stopping.set(true);
+            workers.shutdownNow();
+            workers.close(); // Joins even when the caller was interrupted; restores its interrupt.
+        }
+        progress.done();
+        return hashed;
+    }
+
+    private static void check(M3FileTree tree, int generation, M3FileProgress progress,
+            AtomicReference<Throwable> failure) throws InterruptedIOException {
+        Throwable fatal = failure.get();
+        if (fatal != null) rethrow(fatal);
+        boolean canceled = progress.isCanceled();
+        fatal = failure.get();
+        if (fatal != null) rethrow(fatal);
+        if (canceled) throw new InterruptedIOException("hash canceled");
+        if (tree.generation() != generation) throw new ConcurrentModificationException();
+    }
+
+    private static void rethrow(Throwable failure) throws InterruptedIOException {
+        if (failure instanceof InterruptedIOException canceled) throw canceled;
+        if (failure instanceof RuntimeException unchecked) throw unchecked;
+        if (failure instanceof Error error) throw error;
+        throw new IllegalStateException("unexpected observation failure", failure);
     }
 }
