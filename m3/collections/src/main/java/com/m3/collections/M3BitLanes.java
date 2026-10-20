@@ -139,6 +139,26 @@ public final class M3BitLanes {
 		}
 	}
 
+	/** Highest set index of {@code lane} at or below {@code from}, or -1; scans down a word at a time. */
+	public int previousSet (int lane, int from) {
+		int [] words = lanes [lane];
+		if (from >= length) from = length - 1;
+		if (words == null || from < 0) return -1;
+		int word = from >>> 5, bits;
+		if (word >= words.length) {
+			word = words.length - 1;
+			if (word < 0) return -1;
+			bits = words [word];
+		} else {
+			bits = words [word] & (-1 >>> (31 - (from & 31)));
+		}
+		while (true) {
+			if (bits != 0) return (word << 5) + 31 - Integer.numberOfLeadingZeros (bits);
+			if (--word < 0) return -1;
+			bits = words [word];
+		}
+	}
+
 	/** Index of the first set bit at or after <code>from</code>, or -1. */
 	public int nextSet (int lane, int from) {
 		int [] words = lanes [lane];

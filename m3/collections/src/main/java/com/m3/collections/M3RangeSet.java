@@ -31,8 +31,18 @@ package com.m3.collections;
  * </ul>
  * <p>Out-of-model indices and ranges throw <code>IllegalArgumentException</code> in both forms,
  * as the range form does.</p>
+ * <p>It is the selection of every core view and of the public model API (rule 26): an
+ * {@link M3Patch.Target}, so the rows' patch runs reach it like any other lane
+ * ({@link #insert}, {@link #remove}; content updates keep the selection). Cost, r ranges and n
+ * rows: {@link #isSelected}, {@link #setSelected}, {@link #selectRange} O(log r + merged ranges)
+ * in the range form, O(1) / O(span / 64) in the bitset form; {@link #insert}, {@link #remove}
+ * O(r) / O(n / 64); {@link #firstSelected()}, {@link #lastSelected()} O(1) in the range form and a
+ * word scan to that row in the bitset form (the scroll to the first or last selected row
+ * of rule 29); {@link #invert()} O(1) / O(n / 64).</p>
+ * <p>Threads: not thread-safe and holds no lock; confined to the thread that applies the model's
+ * patches.</p>
  */
-public final class M3RangeSet {
+public final class M3RangeSet implements M3Patch.Target {
 	/** Minimum run count before the bitset form is considered. */
 	static final int MIN_BITS_RUNS = 1024;
 
@@ -187,6 +197,36 @@ public final class M3RangeSet {
 		return result;
 	}
 
+	/**
+	 * The lowest selected row, or -1 when nothing is selected: the target of a scroll to the first selected row
+	 * (rule 29). O(1) in the range form (the complement flag included); in the bitset form a word scan up to that row.
+	 */
+	public int firstSelected () {
+		int count = logicalCount ();
+		if (count == 0) return -1;
+		if (bits == null) {
+			int ranges = selection.rangeCount ();
+			if (!selection.complementMode ()) return ranges == 0 ? -1 : selection.rangeStart (0);
+			int first = ranges > 0 && selection.rangeStart (0) == 0 ? selection.rangeEndExclusive (0) : 0;
+			return first < count ? first : -1;
+		}
+		return bits.nextSet (0, 0);
+	}
+
+	/** The highest selected row, or -1 when nothing is selected (scroll to the last selected row, rule 29). */
+	public int lastSelected () {
+		int count = logicalCount ();
+		if (count == 0) return -1;
+		if (bits == null) {
+			int ranges = selection.rangeCount ();
+			if (!selection.complementMode ()) return ranges == 0 ? -1 : selection.rangeEndExclusive (ranges - 1) - 1;
+			int last = ranges > 0 && selection.rangeEndExclusive (ranges - 1) == count ? selection.rangeStart (ranges - 1) - 1 : count - 1;
+			return last;
+		}
+		return bits.previousSet (0, count - 1);
+	}
+
+	@Override
 	public void insert (int index, int count) {
 		if (bits == null) {
 			selection.insert (index, count);
@@ -197,6 +237,7 @@ public final class M3RangeSet {
 		runCount = -1;
 	}
 
+	@Override
 	public void remove (int index, int count) {
 		if (bits == null) {
 			selection.remove (index, count);

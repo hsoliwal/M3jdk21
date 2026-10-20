@@ -49,11 +49,12 @@ import java.util.Arrays;
  * the caller sets (setEstimate), where react-window uses the running average.</p>
  */
 public final class M3SparseExtents implements M3Patch.Target {
-	static final int ALIGN_AUTO = 0;
-	static final int ALIGN_START = 1;
-	static final int ALIGN_CENTER = 2;
-	static final int ALIGN_END = 3;
-	static final int ALIGN_SMART = 4;
+	/** Alignments of {@link #scrollOffsetFor}: the smallest move, the row at the top, centered, at the bottom, kept when revealed. */
+	public static final int ALIGN_AUTO = 0;
+	public static final int ALIGN_START = 1;
+	public static final int ALIGN_CENTER = 2;
+	public static final int ALIGN_END = 3;
+	public static final int ALIGN_SMART = 4;
 	private static final int TREE = -1;
 	private static final int [] EMPTY = new int [0];
 	private static final long [] EMPTY_EXTENTS = new long [0];
@@ -247,6 +248,17 @@ public final class M3SparseExtents implements M3Patch.Target {
 			default -> throw new IllegalArgumentException ("invalid alignment");
 		};
 		return clampOffset (target, viewport);
+	}
+
+	/**
+	 * Scroll offset that reveals the first (or last) selected row of {@code selection} with
+	 * {@code align} (rule 29: scroll to first/last selected); the clamped current offset when
+	 * nothing is selected. O(log m) plus {@link M3RangeSet#firstSelected()} /
+	 * {@link M3RangeSet#lastSelected()}.
+	 */
+	public long scrollToSelected (M3RangeSet selection, boolean last, int align, long current, int viewport) {
+		int row = last ? selection.lastSelected () : selection.firstSelected ();
+		return row < 0 || row >= count ? clampOffset (current, viewport) : scrollOffsetFor (row, align, current, viewport);
 	}
 
 	/**

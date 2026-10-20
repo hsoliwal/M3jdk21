@@ -125,6 +125,21 @@ public final class M3PatchCostBenchAfter {
 				keys [slot] = slot;
 				forest.insert (-1, slot);
 			}
+			// rule 29: scroll to the first/last selected row; before, the only way was toArray () and its ends
+			M3RangeSet ranges = new M3RangeSet (), scattered = new M3RangeSet ();
+			ranges.setLogicalCount (n);
+			scattered.setLogicalCount (n);
+			ranges.selectRange (n / 3, n / 2);
+			ranges.invert ();
+			for (int row = 1; row < n; row += 7) scattered.setSelected (row, true);
+			report ("first+last selected, range form (complement), new accessors", n, 100_000,
+					ops -> { long s = 0; for (int i = 0; i < ops; i++) s += ranges.firstSelected () + ranges.lastSelected (); return s; });
+			report ("first+last selected, range form (complement), via toArray", n, 5,
+					ops -> { long s = 0; for (int i = 0; i < ops; i++) { int [] a = ranges.toArray (); s += a [0] + a [a.length - 1]; } return s; });
+			report ("first+last selected, bitset form (every 7th row), new accessors", n, 100_000,
+					ops -> { long s = 0; for (int i = 0; i < ops; i++) s += scattered.firstSelected () + scattered.lastSelected (); return s; });
+			report ("first+last selected, bitset form (every 7th row), via toArray", n, 5,
+					ops -> { long s = 0; for (int i = 0; i < ops; i++) { int [] a = scattered.toArray (); s += a [0] + a [a.length - 1]; } return s; });
 			report ("order: export 4096 rows to slots from the middle", n, 2_000, ops -> {
 				long s = 0;
 				for (int i = 0; i < ops; i++) s += forest.order (-1, n / 2, slots.length, slots);
