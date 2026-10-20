@@ -60,11 +60,11 @@ global-prefix checkpoints. The verifier supports a *later stage on the
 same source file*, Java and JNI C text lanes, new files, unchanged no-op
 passes, and deterministic zero-work final-state detection. It keeps a
 single O(file count) transient source-generation vector, not one copy
-per pass. Eleven independent fixture tests exercise success, every
+per pass. Thirteen independent fixture tests exercise success, every
 intermediate checkpoint, tampering, mixed-generation refusal, duplicate
 stage ownership, absent-source mismatches, path kind and symlinks.
 
-`-Pcontract verify` runs the original SDK/receiver, 11 new refusal
+`-Pcontract verify` runs the original SDK/receiver, 13 new refusal
 fixtures, and the source-chain verifier. `--optional` skips datasets
 without a pass plan, preserving historical qualification contracts.
 `--allow-checkpoint` is used for authoring; **promotion requires the

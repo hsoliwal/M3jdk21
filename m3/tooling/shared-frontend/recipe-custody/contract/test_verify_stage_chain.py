@@ -2,6 +2,7 @@
 """Executed Java/JNI multi-pass source-chain refusal, resume and fixed-point fixtures."""
 from pathlib import Path
 import json
+import hashlib
 import sys
 import tempfile
 import unittest
@@ -64,9 +65,17 @@ class ChainTest(unittest.TestCase):
         dest = self.resources / 'META-INF/rewrite'
         dest.mkdir(parents=True)
         (dest / (self.crate+'.yml')).write_text(yaml)
+        catalogue = 'category\tdecision\n' + ''.join(f'category-{n}\tSELECT\n' for n in range(1, 6))
+        self.catalogue = self.root / 'm3/algorithm-catalogue.tsv'
+        self.catalogue.parent.mkdir(parents=True, exist_ok=True)
+        self.catalogue.write_text(catalogue)
+        payload = catalogue.encode()
+        catalogue_blob = hashlib.sha1(b'blob ' + str(len(payload)).encode() + b'\0' + payload).hexdigest()
         (self.data / 'DATASET.json').write_text(json.dumps({
             'dataset': self.name, 'crate_name': self.crate, 'targets': len(self.targets),
             'java_targets': 3, 'text_targets': 1,
+            'category_catalogue': 'm3/algorithm-catalogue.tsv',
+            'category_catalogue_blob': catalogue_blob,
         }))
         (self.data / 'MODES.tsv').write_text(''.join(p+'\t0644\n' for p in sorted(self.targets)))
         for kind in ('java','text'):
@@ -138,6 +147,17 @@ class ChainTest(unittest.TestCase):
         p.write_bytes(b'wrong\n')
         with self.assertRaisesRegex(ValueError,'SHA-256 drift'):
             v.verify(self.root,self.name)
+
+    def test_donor_catalogue_drift_refused(self):
+        self.catalogue.write_text(self.catalogue.read_text() + 'foreign\tSELECT\n')
+        with self.assertRaisesRegex(ValueError, 'catalogue source changed'):
+            v.verify(self.root, self.name)
+
+    def test_uncatalogued_behavioral_atom_refused(self):
+        p = self.data / 'PASSES.tsv'
+        p.write_text(p.read_text().replace('category-2', 'missing-category'))
+        with self.assertRaisesRegex(ValueError, 'uncatalogued'):
+            v.verify(self.root, self.name)
 
     def test_wrong_pass_order_refused(self):
         p=self.data/'PASSES.tsv'

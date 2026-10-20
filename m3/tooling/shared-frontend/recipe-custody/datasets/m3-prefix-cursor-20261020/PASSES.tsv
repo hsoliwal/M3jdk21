@@ -1,4 +1,4 @@
 # ordinal	stage_crate	target	resource	behavioral_atom	problem_category
-1	m3-prefix-cursor-20261020-p1	src/java.base/share/classes/java/lang/M3String.java	0001-M3String.java.txt	composite source long startsWith	rope_scalar_run_navigation
-2	m3-prefix-cursor-20261020-p2	src/java.base/share/classes/java/lang/M3StringPrecomputeBridge.java	0002-M3StringPrecomputeBridge.java.txt	flat prefix bridge source cursor	mixed_flat_canonical_prefix
-3	m3-prefix-cursor-20261020-p3	test/jdk/java/lang/String/M3StringCompositePrefixCursorTest.java	0003-M3StringCompositePrefixCursorTest.java.txt	UTF16 oracle and seam regression	jdkinternal_utf16_oracle
+1	m3-prefix-cursor-20261020-p1	src/java.base/share/classes/java/lang/M3String.java	0001-M3String.java.txt	composite source long startsWith	long_composite_prefix
+2	m3-prefix-cursor-20261020-p2	src/java.base/share/classes/java/lang/M3StringPrecomputeBridge.java	0002-M3StringPrecomputeBridge.java.txt	flat prefix bridge source cursor	mixed_flat_prefix
+3	m3-prefix-cursor-20261020-p3	test/jdk/java/lang/String/M3StringCompositePrefixCursorTest.java	0003-M3StringCompositePrefixCursorTest.java.txt	UTF16 oracle and seam regression	utf16_differential_proof

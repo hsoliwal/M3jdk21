@@ -101,6 +101,38 @@ def verify(root: Path, dataset: str, require_terminal: bool = True) -> dict:
     # One observed generation vector: no O(stages x files) snapshot table.
     current = {path: (digest(within(root, path).read_bytes())
                       if within(root, path).exists() else 'ABSENT') for path in aggregate}
+    # A pass category must resolve to a selected, licensed donor comparison,
+    # not just an invented label. Historical datasets without this optional
+    # seal retain their original receipt behavior.
+    approved_categories = None
+    catalogue_path = meta.get('category_catalogue')
+    if catalogue_path is not None:
+        if not isinstance(catalogue_path, str):
+            raise ValueError('invalid algorithm catalogue path')
+        source = within(root, catalogue_path).read_bytes()
+        promised_blob = meta.get('category_catalogue_blob')
+        actual_blob = hashlib.sha1(b'blob ' + str(len(source)).encode('ascii')
+                                   + b'\0' + source).hexdigest()
+        if actual_blob != promised_blob:
+            raise ValueError('algorithm catalogue source changed since pin')
+        source.decode('utf-8', errors='strict')
+        records_text = [line.split('\t') for line in source.decode('utf-8').splitlines()
+                        if line and not line.startswith('#')]
+        if len(records_text) < 2 or 'category' not in records_text[0] or 'decision' not in records_text[0]:
+            raise ValueError('algorithm catalogue is missing required columns')
+        category_column = records_text[0].index('category')
+        decision_column = records_text[0].index('decision')
+        approved_categories = set()
+        for cells in records_text[1:]:
+            if len(cells) != len(records_text[0]):
+                raise ValueError('algorithm catalogue row width mismatch')
+            decision = cells[decision_column]
+            if decision not in ('SELECT', 'REUSE', 'PRESERVE', 'IMPLEMENTED'):
+                continue
+            approved_categories.add(cells[category_column])
+        if not approved_categories:
+            raise ValueError('algorithm catalogue contains no qualified candidate')
+
     states = {path: orig for path, (orig, _, _) in aggregate.items()}
     checkpoint = 0 if states == current else -1
     generations = set(states.items())
@@ -111,6 +143,8 @@ def verify(root: Path, dataset: str, require_terminal: bool = True) -> dict:
             raise ValueError('stage order or identity violation')
         if not atom.strip() or not category.strip() or target not in aggregate:
             raise ValueError('unclassified/foreign recipe target')
+        if approved_categories is not None and category not in approved_categories:
+            raise ValueError('uncatalogued or unqualified donor category: ' + category)
         seen.add(stage)
         kind = aggregate[target][2]
         stage_root = resources / 'com/synexia/rewrite' / ('hash-pinned-' + kind) / stage
