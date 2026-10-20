@@ -1,0 +1,15 @@
+owner	donor_type	operation	size	impl	build_ms	query_ms	build_alloc_B_per_elem	query_alloc_B_per_op	retained_B	retained_unit
+M3EnumBiMap	com.google.common.collect.EnumBiMap	n put over 64 keys; get + inverse.get n; iterate	100000	m3	0.67	2.81	0.01	0.00	1216.15	B/instance
+M3EnumBiMap	com.google.common.collect.EnumBiMap	n put over 64 keys; get + inverse.get n; iterate	100000	m3	0.64	3.09	0.01	0.00	1216.15	B/instance
+M3EnumBiMap	com.google.common.collect.EnumBiMap	n put over 64 keys; get + inverse.get n; iterate	100000	m3	0.59	2.56	0.01	0.00	1216.15	B/instance
+M3EnumBiMap	com.google.common.collect.EnumBiMap	n put over 64 keys; get + inverse.get n; iterate	100000	m3	1.19	3.24	0.01	0.00	1216.15	B/instance
+M3EnumBiMap	com.google.common.collect.EnumBiMap	n put over 64 keys; get + inverse.get n; iterate	100000	m3	0.60	0.81	0.01	0.00	1216.15	B/instance
+M3EnumBiMap	com.google.common.collect.EnumBiMap	n put over 64 keys; get + inverse.get n; iterate	100000	m3	0.63	4.00	0.01	0.00	1216.15	B/instance
+M3EnumBiMap	com.google.common.collect.EnumBiMap	n put over 64 keys; get + inverse.get n; iterate	100000	m3	0.70	2.63	0.01	0.00	1216.15	B/instance
+M3EnumBiMap	com.google.common.collect.EnumBiMap	n put over 64 keys; get + inverse.get n; iterate	1000000	m3	10.20	5.50	0.00	0.00	1216.15	B/instance
+M3EnumBiMap	com.google.common.collect.EnumBiMap	n put over 64 keys; get + inverse.get n; iterate	1000000	m3	9.16	6.23	0.00	0.00	1216.15	B/instance
+M3EnumBiMap	com.google.common.collect.EnumBiMap	n put over 64 keys; get + inverse.get n; iterate	1000000	m3	4.69	5.34	0.00	0.00	1216.15	B/instance
+M3EnumBiMap	com.google.common.collect.EnumBiMap	n put over 64 keys; get + inverse.get n; iterate	1000000	m3	6.99	6.98	0.00	0.00	1216.15	B/instance
+M3EnumBiMap	com.google.common.collect.EnumBiMap	n put over 64 keys; get + inverse.get n; iterate	1000000	m3	5.64	7.25	0.00	0.00	1216.15	B/instance
+M3EnumBiMap	com.google.common.collect.EnumBiMap	n put over 64 keys; get + inverse.get n; iterate	1000000	m3	4.69	5.92	0.00	0.00	1216.15	B/instance
+M3EnumBiMap	com.google.common.collect.EnumBiMap	n put over 64 keys; get + inverse.get n; iterate	1000000	m3	7.16	6.17	0.00	0.00	1216.15	B/instance

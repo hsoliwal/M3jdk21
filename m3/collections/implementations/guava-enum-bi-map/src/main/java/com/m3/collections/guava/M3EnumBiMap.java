@@ -46,6 +46,12 @@ public final class M3EnumBiMap<K extends Enum<K>, V extends Enum<V>> extends Abs
     private static final int KEYS = 0;
     private static final int VALUES = 1;
     private static final int ENTRIES = 2;
+    /** One shared, never-written universe per enum class; getEnumConstants() clones on every call. */
+    private static final ClassValue<Enum<?>[]> UNIVERSES = new ClassValue<>() {
+        @Override protected Enum<?>[] computeValue(Class<?> type) {
+            return (Enum<?>[]) type.getEnumConstants();
+        }
+    };
 
     private transient Class<?>[] types;
     private transient Enum<?>[][] universes;
@@ -91,7 +97,7 @@ public final class M3EnumBiMap<K extends Enum<K>, V extends Enum<V>> extends Abs
 
     private void init(Class<?> keyType, Class<?> valueType) {
         types = new Class<?>[] {Objects.requireNonNull(keyType), Objects.requireNonNull(valueType)};
-        universes = new Enum<?>[][] {(Enum<?>[]) keyType.getEnumConstants(), (Enum<?>[]) valueType.getEnumConstants()};
+        universes = new Enum<?>[][] {UNIVERSES.get(keyType), UNIVERSES.get(valueType)};
         lanes = new int[][] {new int[universes[0].length], new int[universes[1].length]};
     }
 
