@@ -6,7 +6,48 @@ Row format: **hunk** (merge-tree hunk number @ line in the conflicted result, ou
 
 Proposal vocabulary: `take upstream` (theirs replaces ours), `keep fork` (ours stays, theirs dropped), `union` (both blocks kept, order stated), `3-way` (exact merged text given). Proof names a jtreg test path on the jdk21u side and/or an M3 test under `test/jdk/java/lang/String/` or `test/jdk/java/lang/StringBuilder/` of the fork; "owners confirm" marks a test name chosen from the fork tree without reading it.
 
-Prerequisites that are NOT conflicts but that the String rows rely on (auto-merged, verify after merge): `StringUTF16.java` must carry 8311906's `coderFromArrayLen(byte[], int)` and the never-null `compress(...)` overloads; `StringLatin1.java`/`StringCoding.java` as upstream.
+Prerequisites that are not conflicts but that the String rows rely on (auto-merged, verify after merge): `StringUTF16.java` must carry 8311906's `coderFromArrayLen(byte[], int)` and the never-null `compress(...)` overloads; `StringLatin1.java`/`StringCoding.java` as upstream.
+
+## Summary
+
+| group | files | hunks | take upstream | keep fork | union | 3-way (text given) |
+|---|---|---|---|---|---|---|
+| A. String / AbstractStringBuilder | 2 | 12 | 1 (h2) | 2 (h5 hunk only, h6) | 0 | 9 (String h1, h3, h4, h7, h8, h9, h10; ASB h1, h2) |
+| B. PQC | 17 | 169 | 168 | 0 | 1 (java.security) | 0 |
+| C. HotSpot OS layer | 2 | 3 | 0 | 0 | 3 | 0 |
+| D. Repository files | 2 | 2 | 1 | 1 | 0 | 0 |
+| **total** | **23** | **186** | **170** | **3** | **4** | **9** |
+
+### Must-fix outside the conflict hunks (auto-merged, compiles, wrong at run time)
+
+8311906 changes `StringUTF16.compress(...)` to **never return null**: it returns a Latin1 array (length `len`) or a UTF16 array (length `2*len`), and the caller takes the coder from `StringUTF16.coderFromArrayLen(val, len)`. The jdk21u `StringUTF16.java` auto-merges into the fork, so every fork call site that still reads `null` as "not Latin1" would tag UTF16 bytes as `LATIN1`.
+
+Sites in the merge result:
+- `String.java` 382, 790, 813, 978, 5501, 5548 and `AbstractStringBuilder.java` 1810 already use the upstream pattern.
+- `String.java` 808 (h7), 5508 (h9) and 5564 (h10) are covered by the rows below.
+- **`String.java` 838-843** (non-`ArrayDecoder` decode path, outside every hunk) still reads:
+  ```java
+  if (COMPACT_STRINGS) {
+      byte[] bs = StringUTF16.compress(ca, 0, caLen);
+      if (bs != null) {
+          return new M3Construction(bs, LATIN1);
+      }
+  }
+  ```
+  Proposed:
+  ```java
+  if (COMPACT_STRINGS) {
+      byte[] val = StringUTF16.compress(ca, 0, caLen);
+      return new M3Construction(val, StringUTF16.coderFromArrayLen(val, caLen));
+  }
+  ```
+  Proof: decode a non-Latin1 payload through a non-`ArrayDecoder` charset, for example `new String(bytes, Charset.forName("UTF-32"))`, and compare with stock behaviour: `test/jdk/java/lang/String/StringRacyConstructor.java` and the fork's `M3StringUtf16DifferentialTest`.
+- No other `StringUTF16.compress` caller exists in `java.lang` or `jdk.internal` of the merge result. This includes all 83 fork-only `M3*` sources, read through the GitHub blob API.
+
+### Other auto-merged points to verify
+
+- `AbstractStringBuilder`: 8359454 removes `putStringAt(int, String, int, int)`. The merge result calls only the 2-argument form (6 sites), so the fork's R5-BUILDER lane is unaffected.
+- `SignatureUtil.java` result line 512: fork `default -> kAlg.contains("KEM") ? null : kAlg;` against jdk21u `default -> null;`. See group B.
 
 ## A. `src/java.base/share/classes/java/lang/String.java` — 10 hunks
 
