@@ -5,6 +5,51 @@
 #include <jni.h>
 #include <string.h>
 
+#if !defined(M3_RELATION_PORTABLE_SCAN) && (defined(__GNUC__) || defined(__clang__))
+/* Reuse the existing regex atom bit-scan on nonzero masks. Other compilers keep
+ * this owner's original shift loop, avoiding repeated portable prefix scans. */
+static uint32_t relation_lowest_state(uint64_t bits) {
+  return (uint32_t)__builtin_ctzll((unsigned long long)bits);
+}
+
+int m3_state_relation_compose(const uint64_t *left, const uint64_t *right,
+                                 uint64_t *output, size_t states) {
+  uint64_t temporary[64];
+  uint64_t mask;
+  uint64_t ceiling = 0;
+  uint64_t previous = 0;
+  uint64_t value = 0;
+  if (left == NULL || right == NULL || output == NULL || states == 0 || states > 64) {
+    return -1;
+  }
+  mask = states == 64 ? UINT64_MAX : (UINT64_C(1) << states) - UINT64_C(1);
+  for (size_t row = 0; row < states; ++row) {
+    if (((left[row] | right[row]) & ~mask) != 0) return -1;
+    ceiling |= right[row];
+  }
+  for (size_t row = 0; row < states; ++row) {
+    /* No source row is written before complete validation/computation, preserving aliases.
+     * Repeated frontiers reuse an exact invocation-local result, never a hash/filter hit. */
+    const uint64_t active = left[row];
+    if (row == 0 || active != previous) {
+      uint64_t bits = active;
+      /* The full incoming frontier selects exactly the precomputed union. */
+      value = active == mask ? ceiling : 0;
+      while (bits != 0 && value != ceiling) {
+        value |= right[relation_lowest_state(bits)];
+        bits &= bits - UINT64_C(1);
+      }
+
+      previous = active;
+    }
+    temporary[row] = value;
+  }
+  memcpy(output, temporary, states * sizeof(uint64_t));
+  return 0;
+}
+
+#else
+/* Exact original composition body on compilers without the intrinsic. */
 int m3_state_relation_compose(const uint64_t *left, const uint64_t *right,
                                  uint64_t *output, size_t states) {
   uint64_t temporary[64];
@@ -40,6 +85,8 @@ int m3_state_relation_compose(const uint64_t *left, const uint64_t *right,
   memcpy(output, temporary, states * sizeof(uint64_t));
   return 0;
 }
+
+#endif
 
 static void relation_error(JNIEnv *env, const char *type, const char *message) {
   jclass exception = (*env)->FindClass(env, type);
