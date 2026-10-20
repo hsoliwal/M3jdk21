@@ -59,6 +59,7 @@ public class SharedSecrets {
     private static JavaAWTFontAccess javaAWTFontAccess;
     private static JavaBeansAccess javaBeansAccess;
     private static JavaLangAccess javaLangAccess;
+    private static M3StringAccess m3StringAccess;
     private static JavaLangInvokeAccess javaLangInvokeAccess;
     private static JavaLangModuleAccess javaLangModuleAccess;
     private static JavaLangRefAccess javaLangRefAccess;
@@ -155,6 +156,14 @@ public class SharedSecrets {
 
     public static JavaLangAccess getJavaLangAccess() {
         return javaLangAccess;
+    }
+
+    public static void setM3StringAccess(M3StringAccess access) {
+        m3StringAccess = access;
+    }
+
+    public static M3StringAccess getM3StringAccess() {
+        return m3StringAccess;
     }
 
     public static void setJavaLangInvokeAccess(JavaLangInvokeAccess jlia) {
