@@ -12,16 +12,17 @@ import java.util.stream.IntStream;
 /**
  * Owner of one rooted directory tree held in structure-of-arrays lanes ({@code m3/file/DESIGN.md}).
  *
- * <p>Row ids are dense and allocated in pre-order; {@code 0} is the root. Lanes: {@code parent},
- * {@code depth}, a {@code char[]} name pool with per-row offsets (pattern of
- * {@code com.m3.fs.M3DirectoryTable}), CSR child slices, {@code size}, {@code mtime}, and one
- * {@link BitSet} per {@link M3FileFlag}. {@link M3File} facades are thin {@code (tree, id)} handles
- * produced by {@link #file(int)} and kept in a bounded {@link M3FileResidency}; a {@code String} or
- * {@code Path} is only built when a caller asks for one.</p>
+ * <p>Row ids are dense and allocated in pre-order (the scan order of {@code Files.walk}); {@code 0}
+ * is the root. Lanes: {@code parent}, {@code depth}, a {@code char[]} name pool with per-row offsets
+ * (pattern of {@code com.m3.fs.M3DirectoryTable}), CSR child slices, {@code subtreeEnd}, {@code size},
+ * {@code mtime}, and one {@link BitSet} per {@link M3FileFlag}. {@link M3File} facades are thin
+ * {@code (tree, id)} handles produced by {@link #file(int)} and kept in a bounded
+ * {@link M3FileResidency}; a {@code String} or {@code Path} is only built when a caller asks.</p>
  *
  * <p>Invariants: {@code parent[id] < id}; {@code depth[id] == depth[parent[id]] + 1}; every child
  * slice is sorted by {@link #compareNames}; {@code childIds} holds every non-root id exactly once;
- * {@link M3FileFlag#DELETED} rows keep their lanes and are skipped by {@link #ids()}.</p>
+ * the subtree of {@code id} is exactly {@code [id, subtreeEnd(id))}; {@link M3FileFlag#DELETED} rows
+ * keep their lanes and are skipped by {@link #ids()} and walks.</p>
  */
 public final class M3FileTree {
     static final int DEFAULT_RESIDENCY = 4096;
@@ -38,6 +39,7 @@ public final class M3FileTree {
     private int[] childStart = new int[INITIAL_ROWS];
     private int[] childCount = new int[INITIAL_ROWS];
     private int[] childIds = new int[INITIAL_ROWS];
+    private int[] subtreeEnd = new int[INITIAL_ROWS];
     private long[] size = new long[INITIAL_ROWS];
     private long[] mtime = new long[INITIAL_ROWS];
     private int rows;
@@ -79,13 +81,24 @@ public final class M3FileTree {
         return residency.file(this, id);
     }
 
+    /** Walk over the whole tree. */
+    public M3FileWalk walk() {
+        return walk(0);
+    }
+
+    /** Walk over the subtree of {@code id} (inclusive). */
+    public M3FileWalk walk(int id) {
+        checkId(id);
+        return new M3FileWalk(this, id);
+    }
+
     /** Rows allocated, tombstones included. */
     public int rows() {
         return rows;
     }
 
     public int liveCount() {
-        return rows - flags[M3FileFlag.DELETED.ordinal()].cardinality();
+        return rows - tombstones();
     }
 
     /** Live ids in pre-order. */
@@ -106,6 +119,12 @@ public final class M3FileTree {
     public int depth(int id) {
         checkId(id);
         return depth[id];
+    }
+
+    /** Exclusive end of the pre-order subtree of {@code id}: the subtree is {@code [id, subtreeEnd(id))}. */
+    public int subtreeEnd(int id) {
+        checkId(id);
+        return subtreeEnd[id];
     }
 
     public int childCount(int id) {
@@ -139,6 +158,11 @@ public final class M3FileTree {
     public boolean flag(M3FileFlag flag, int id) {
         checkId(id);
         return flags[flag.ordinal()].get(id);
+    }
+
+    public M3FileKind kind(int id) {
+        checkId(id);
+        return M3FileKind.VALUES[Integer.numberOfTrailingZeros(kindBit(id))];
     }
 
     public int nameLength(int id) {
@@ -176,16 +200,39 @@ public final class M3FileTree {
         checkId(id);
         if (id == 0) return root;
         StringBuilder relative = new StringBuilder();
-        appendRelative(relative, id);
+        appendRelative(0, id, relative);
         return root.resolve(relative.toString());
     }
 
-    private void appendRelative(StringBuilder out, int id) {
-        if (parent[id] > 0) {
-            appendRelative(out, parent[id]);
+    /** Kind bit of {@code id} ({@link M3FileKind#bit()}); a link is never a directory or file. */
+    int kindBit(int id) {
+        if (flags[M3FileFlag.LINK.ordinal()].get(id)) return M3FileKind.SYMLINK.bit();
+        if (flags[M3FileFlag.DIR.ordinal()].get(id)) return M3FileKind.DIRECTORY.bit();
+        if (flags[M3FileFlag.REGULAR.ordinal()].get(id)) return M3FileKind.FILE.bit();
+        return M3FileKind.OTHER.bit();
+    }
+
+    boolean deleted(int id) {
+        return flags[M3FileFlag.DELETED.ordinal()].get(id);
+    }
+
+    int tombstones() {
+        return flags[M3FileFlag.DELETED.ordinal()].cardinality();
+    }
+
+    /** Appends the name chars of {@code id}; no intermediate String. */
+    void appendName(int id, StringBuilder out) {
+        out.append(namePool, nameOff[id], nameOff[id + 1] - nameOff[id]);
+    }
+
+    /** Appends the path of {@code id} relative to its ancestor-or-self {@code from}; empty when equal. */
+    void appendRelative(int from, int id, StringBuilder out) {
+        if (id == from) return;
+        if (parent[id] != from) {
+            appendRelative(from, parent[id], out);
             out.append(root.getFileSystem().getSeparator());
         }
-        out.append(namePool, nameOff[id], nameOff[id + 1] - nameOff[id]);
+        appendName(id, out);
     }
 
     void setFlag(M3FileFlag flag, int id, boolean value) {
@@ -193,22 +240,24 @@ public final class M3FileTree {
     }
 
     /** Scanner entry: appends one row in pre-order and returns its id. */
-    int append(int parentId, String name, boolean dir, boolean link, boolean hidden, long bytes, long modified) {
+    int append(int parentId, String name, M3FileKind kind, boolean hidden, long bytes, long modified) {
         ensureRows(rows + 1);
         int id = rows++;
         parent[id] = parentId;
         depth[id] = (short) (parentId < 0 ? 0 : depth[parentId] + 1);
+        subtreeEnd[id] = id + 1;
         size[id] = bytes;
         mtime[id] = modified;
         appendName(name);
         nameOff[id + 1] = nameTop;
-        setFlag(M3FileFlag.DIR, id, dir);
-        setFlag(M3FileFlag.LINK, id, link);
+        setFlag(M3FileFlag.DIR, id, kind == M3FileKind.DIRECTORY);
+        setFlag(M3FileFlag.REGULAR, id, kind == M3FileKind.FILE);
+        setFlag(M3FileFlag.LINK, id, kind == M3FileKind.SYMLINK);
         setFlag(M3FileFlag.HIDDEN, id, hidden);
         return id;
     }
 
-    /** Scanner entry: writes the sorted CSR slice {@code ids[from, to)} for directory {@code dirId}. */
+    /** Scanner entry: writes the sorted CSR slice {@code ids[from, to)} of {@code dirId} and closes its subtree. */
     void closeDirectory(int dirId, int[] ids, int from, int to) {
         int count = to - from;
         if (childTop + count > childIds.length) {
@@ -218,6 +267,7 @@ public final class M3FileTree {
         childCount[dirId] = count;
         System.arraycopy(ids, from, childIds, childTop, count);
         childTop += count;
+        subtreeEnd[dirId] = rows;
         setFlag(M3FileFlag.SCANNED, dirId, true);
     }
 
@@ -238,6 +288,7 @@ public final class M3FileTree {
         nameOff = Arrays.copyOf(nameOff, capacity + 1);
         childStart = Arrays.copyOf(childStart, capacity);
         childCount = Arrays.copyOf(childCount, capacity);
+        subtreeEnd = Arrays.copyOf(subtreeEnd, capacity);
         size = Arrays.copyOf(size, capacity);
         mtime = Arrays.copyOf(mtime, capacity);
     }

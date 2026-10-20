@@ -88,6 +88,13 @@ public final class M3File {
 
     public boolean isSymbolicLink() { return tree.flag(M3FileFlag.LINK, entryId()); }
 
+    public boolean isRegularFile() { return tree.flag(M3FileFlag.REGULAR, entryId()); }
+
+    public M3FileKind kind() { return tree.kind(entryId()); }
+
+    /** Walk over this entry and its descendants. */
+    public M3FileWalk walk() { return tree.walk(entryId()); }
+
     public boolean isHidden() { return tree.flag(M3FileFlag.HIDDEN, entryId()); }
 
     public boolean flag(M3FileFlag flag) { return tree.flag(flag, entryId()); }

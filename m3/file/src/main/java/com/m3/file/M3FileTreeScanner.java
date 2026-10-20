@@ -56,7 +56,7 @@ final class M3FileTreeScanner extends SimpleFileVisitor<Path> {
     @Override
     public FileVisitResult visitFileFailed(Path file, IOException exc) {
         String name = nameOf(file);
-        enlist(tree.append(parentId(), name, false, false, dotName(name), -1L, Long.MIN_VALUE));
+        enlist(tree.append(parentId(), name, M3FileKind.OTHER, dotName(name), -1L, Long.MIN_VALUE));
         return FileVisitResult.CONTINUE;
     }
 
@@ -68,10 +68,9 @@ final class M3FileTreeScanner extends SimpleFileVisitor<Path> {
 
     private int append(Path path, BasicFileAttributes attrs) {
         String name = nameOf(path);
-        boolean link = attrs.isSymbolicLink();
-        boolean dir = attrs.isDirectory() && !link;
+        M3FileKind kind = M3FileKind.of(attrs);
         boolean hidden = dotName(name) || (attrs instanceof DosFileAttributes dos && dos.isHidden());
-        int id = tree.append(parentId(), name, dir, link, hidden,
+        int id = tree.append(parentId(), name, kind, hidden,
                 attrs.size(), attrs.lastModifiedTime().toMillis());
         enlist(id);
         return id;

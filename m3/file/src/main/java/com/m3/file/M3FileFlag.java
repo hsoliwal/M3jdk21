@@ -11,6 +11,8 @@ package com.m3.file;
 public enum M3FileFlag {
     /** Row is a directory by its own attributes; links are never followed. */
     DIR,
+    /** Row is a regular file by its own attributes. */
+    REGULAR,
     /** Row is a symbolic link; never followed and never {@link #DIR}. */
     LINK,
     /** Dot-name or DOS hidden attribute observed during the scan. */
