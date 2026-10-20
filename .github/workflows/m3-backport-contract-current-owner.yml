@@ -127,6 +127,7 @@ jobs:
           source=pathlib.Path(os.environ["M3_SOURCE_ROOT"])
           bundle=root/"artifacts";bundle.mkdir(exist_ok=False)
           sdk=source/"m3/tooling/backport-contract-current-owner/sdk"
+          authoring=source/"m3/tooling/backport-contract-current-owner/applied-owner-custody/authoring-sdk"
           start=time.monotonic()
           active_command=None
           class CensusRescan(RuntimeError):pass
@@ -135,10 +136,10 @@ jobs:
               if error.errno==errno.ENOENT and error.filename:
                   missing=pathlib.Path(error.filename)
                   temporary=root/"tmp"
-                  if active_command in ("sdk-inputs","sdk-maven","runtime-proof") and temporary in missing.parents:
+                  if active_command in ("sdk-inputs","sdk-maven","authoring-inputs","authoring-maven","runtime-proof") and temporary in missing.parents:
                       allowed=True
-                  if active_command in ("sdk-inputs","sdk-maven"):
-                      target=sdk/"target"
+                  if active_command in ("sdk-inputs","sdk-maven","authoring-inputs","authoring-maven"):
+                      target=(authoring if active_command.startswith("authoring-") else sdk)/"target"
                       if target in missing.parents:
                           child=missing.relative_to(target).parts[0]
                           if re.fullmatch(r"tmp[a-z0-9_]{8}",child):allowed=True
@@ -229,6 +230,62 @@ jobs:
               receipt={"schema":"M3_BACKPORT_CONTRACT_CURRENT_OWNER_STORAGE_GUARD_DISCRIMINATORS_V1","tests":len(cases),"failures":0,"cases":cases,"scope":"SAME_INLINE_GATE_WITH_MOCKED_METADATA_NO_REAL_TARGET_MUTATION"}
               (bundle/"storage-guard-receipt.json").write_text(json.dumps(receipt,indent=2)+"\n",encoding="utf-8")
               print("PASS: eleven actual-inline mocked storage guard discriminators")
+          def authoring_binding():
+              sdk_prefix="m3/tooling/backport-contract-current-owner/applied-owner-custody/authoring-sdk/"
+              workflow_path=".github/workflows/m3-backport-contract-current-owner.yml"
+              binding_path="m3/tooling/backport-contract-current-owner/applied-owner-custody/authoring-source-binding.json"
+              path=source/binding_path
+              if not path.is_file() or any(p.is_symlink() for p in [path,*path.parents]):raise RuntimeError("missing or redirected authoring source binding")
+              raw=path.read_bytes()
+              git_blob=lambda data:hashlib.sha1(b"blob "+str(len(data)).encode("ascii")+b"\0"+data).hexdigest()
+              if git_blob(raw)!=getgit("rev-parse","HEAD:"+binding_path):raise RuntimeError("authoring source binding differs from exact HEAD")
+              binding=json.loads(raw)
+              if (binding["schema"]!="M3_BACKPORT_APPLIED_OWNER_AUTHORING_SOURCE_BINDING_V1"
+                      or binding["repository"]!="hsoliwal/com.synexia" or binding["receiverRepository"]!="hsoliwal/M3jdk21"
+                      or binding["admissionCommit"]!="679bece51397656563133a4f7e00063b086c0ee7"
+                      or binding["sdkPath"]!=sdk_prefix or binding["runtimeApplied"] is not False or binding["phaseAdvanced"] is not False
+                      or not re.fullmatch("[0-9a-f]{40}",binding["sourceCommit"])):raise RuntimeError("authoring source binding identity drift")
+              rows=binding["files"]
+              if not isinstance(rows,list) or not 1<=binding["sdkFiles"]<=64 or len(rows)!=binding["sdkFiles"]+1:raise RuntimeError("closed authoring source binding size required")
+              tracked=subprocess.check_output(["git","ls-files","-z","--",sdk_prefix],cwd=source,timeout=15).decode("utf-8").split("\0")
+              expected=set(tracked)-{""}
+              if len(expected)!=binding["sdkFiles"]:raise RuntimeError("complete authoring tracked inventory required")
+              expected.add(workflow_path)
+              tree=subprocess.check_output(["git","ls-tree","-r","-z","HEAD","--",sdk_prefix,workflow_path],cwd=source,timeout=15).decode("utf-8")
+              head_blobs={}
+              for entry in tree.split("\0"):
+                  if not entry:continue
+                  fields,name=entry.split("\t",1)
+                  mode,kind,digest=fields.split(" ")
+                  if kind!="blob" or mode!="100644" or name in head_blobs:raise RuntimeError("regular unique authoring Git sources required")
+                  head_blobs[name]=digest
+              if set(head_blobs)!=expected:raise RuntimeError("authoring HEAD inventory differs")
+              seen=set()
+              for row in rows:
+                  name=row["targetPath"];relative=pathlib.PurePosixPath(name)
+                  if (name in seen or name not in expected or relative.is_absolute() or "\\" in name or ":" in name or "\0" in name
+                          or any(part in ("",".","..") for part in name.split("/"))):raise RuntimeError("authoring source ownership drift")
+                  seen.add(name);item=source/name
+                  if not item.is_file() or any(p.is_symlink() for p in [item,*item.parents]):raise RuntimeError("missing or redirected authoring source")
+                  data=item.read_bytes()
+                  if (len(data)!=row["bytes"] or git_blob(data)!=row["gitBlob"] or head_blobs[name]!=row["gitBlob"]
+                          or hashlib.sha256(data).hexdigest()!=row["sha256"]):raise RuntimeError("authoring canonical bytes differ: "+name)
+              if seen!=expected or not authoring.is_dir() or (authoring/"target").exists() or (authoring/"target").is_symlink():raise RuntimeError("fresh closed authoring source tree required")
+              found=set()
+              def refuse(error):raise RuntimeError("authoring source census failed") from error
+              for folder,directories,files in os.walk(authoring,followlinks=False,onerror=refuse):
+                  base=pathlib.Path(folder)
+                  if any((base/name).is_symlink() for name in directories):raise RuntimeError("redirected authoring source directory")
+                  for name in files:
+                      item=base/name
+                      if not item.is_file() or item.is_symlink():raise RuntimeError("nonregular authoring source file")
+                      found.add(item.relative_to(source).as_posix())
+              if found!=expected-{workflow_path}:raise RuntimeError("unbound authoring source file")
+              subprocess.run(["git","diff","HEAD","--exit-code","--no-ext-diff","--",sdk_prefix,binding_path,workflow_path],cwd=source,check=True,timeout=15)
+              receipt={"schema":"M3_BACKPORT_APPLIED_OWNER_AUTHORING_SOURCE_BINDING_RECEIPT_V1","checkoutCommit":head,"canonicalSourceCommit":binding["sourceCommit"],
+                       "bindingSha256":hashlib.sha256(raw).hexdigest(),"sdkFiles":binding["sdkFiles"],"boundFiles":len(rows),"runtimeApplied":False,"phaseAdvanced":False}
+              destination=bundle/"authoring-source-binding-receipt.json"
+              with destination.open("x",encoding="utf-8") as output:output.write(json.dumps(receipt,indent=2)+"\n")
           def getgit(*args):
               return subprocess.check_output(["git",*args],cwd=source,text=True,timeout=15).strip()
           gate()
@@ -303,6 +360,27 @@ jobs:
               if any((sdk/"target"/name).exists() for name in ("classes","test-classes","surefire-reports")):raise RuntimeError("SDK compilation and test outputs must start absent")
               run("sdk-maven",maven+["-f",str(sdk/"pom.xml"),"-DskipTests=false","-Dmaven.test.skip=false","test"],deadline=600)
               run("sdk-reports",py+[str(sdk/"verify.py"),"--reports"],deadline=90)
+              authoring_binding()
+              run("authoring-inputs",py+[str(authoring/"verify.py"),"--inputs","--self-test"],deadline=120)
+              if any((authoring/"target"/name).exists() for name in ("classes","test-classes","surefire-reports")):raise RuntimeError("authoring compilation and tests must start absent")
+              run("authoring-maven",maven+["-f",str(authoring/"pom.xml"),"-DskipTests=false","-Dmaven.test.skip=false","test"],deadline=600)
+              run("authoring-reports",py+[str(authoring/"verify.py"),"--reports"],deadline=90)
+              authoring_receipt=json.loads((authoring/"target/authoring-sdk-receipt.json").read_bytes())
+              if (authoring_receipt["schema"]!="M3_BACKPORT_APPLIED_OWNER_CUSTODY_SDK_RECEIPT_V1"
+                      or authoring_receipt["scope"]!="SOURCE_ONLY_BACKPORT_APPLIED_OWNER_CUSTODY_REPLAY"
+                      or authoring_receipt["qualificationId"]!=os.environ["M3_QUALIFICATION_ID"] or authoring_receipt["checkoutCommit"]!=head
+                      or (authoring_receipt["tests"],authoring_receipt["successfulRuns"],authoring_receipt["refusedRuns"],authoring_receipt["emittedOutputs"])!=(3,512,48,6)
+                      or authoring_receipt["recipeJUnitQualified"] is not True or authoring_receipt["recipeReplayQualified"] is not True
+                      or authoring_receipt["inputPinsSha256"]!=hashlib.sha256((authoring/"pins.json").read_bytes()).hexdigest()):
+                  raise RuntimeError("fresh complete helper-authoring Maven qualification required")
+              for label,count,schema,scope in (
+                      ("runtime",22,"M3_BACKPORT_APPLIED_OWNER_CONSTRUCTOR_CONTROLS_V1","PURE_CONSTRUCTOR_OVER_SEALED_BYTES_NO_SOURCE_MUTATION"),
+                      ("host",29,"M3_BACKPORT_APPLIED_HOST_CONSTRUCTOR_CONTROLS_V1","PURE_HOST_CONTRACT_OVER_SEALED_IDENTITIES_NO_SOURCE_MUTATION")):
+                  controls=authoring_receipt["constructorControls"][label]
+                  if (controls["schema"]!=schema or controls["scope"]!=scope or controls["state"]!="PASS" or controls["tests"]!=count
+                          or len(controls["cases"])!=count or len(set(controls["cases"]))!=count):raise RuntimeError("complete helper constructor controls required")
+              for key in ("runtimeApplied","phaseAdvanced","productTargetApplied"):
+                  if authoring_receipt[key] is not False:raise RuntimeError("helper authoring source-only scope drift")
               runtime=source/"m3/tooling/backport-contract-current-owner/runtime/qualify.py"
               run("runtime-inputs",py+[str(runtime),"--output-root",str(root),"--inputs-only"],deadline=90)
               run("runtime-proof",py+[str(runtime),"--output-root",str(root),"--run"],deadline=300)
@@ -311,7 +389,7 @@ jobs:
               if receipt["sdkRecipeJUnitQualified"] is not True or receipt["currentBackportContractsQualified"] is not True:raise RuntimeError("actual recipe and current backport contracts required")
               for key in ("originalPrivateModelQualified","stringDispatchQualified","fullNativeTargetQualified","windowsQualified","fullMatchedJdkQualified","performanceRetentionQualified","productTargetApplied","phaseAdvanced"):
                   if receipt[key] is not False:raise RuntimeError("source SDK scope drift")
-              hosted={"schema":"M3_BACKPORT_CONTRACT_CURRENT_OWNER_HOSTED_V1","checkoutCommit":head,"commands":records,"qualificationReceiptSha256":hashlib.sha256((bundle/"qualification-receipt.json").read_bytes()).hexdigest(),"aggregateBytes":gate(),"storageGuardReceiptSha256":hashlib.sha256((bundle/"storage-guard-receipt.json").read_bytes()).hexdigest(),"mavenIdentity":observed,"phaseAdvanced":False}
+              hosted={"schema":"M3_BACKPORT_CONTRACT_CURRENT_OWNER_HOSTED_V1","checkoutCommit":head,"commands":records,"qualificationReceiptSha256":hashlib.sha256((bundle/"qualification-receipt.json").read_bytes()).hexdigest(),"aggregateBytes":gate(),"storageGuardReceiptSha256":hashlib.sha256((bundle/"storage-guard-receipt.json").read_bytes()).hexdigest(),"mavenIdentity":observed,"authoringSdkReceiptSha256":hashlib.sha256((authoring/"target/authoring-sdk-receipt.json").read_bytes()).hexdigest(),"authoringSourceBindingReceiptSha256":hashlib.sha256((bundle/"authoring-source-binding-receipt.json").read_bytes()).hexdigest(),"phaseAdvanced":False}
               (bundle/"hosted-receipt.json").write_text(json.dumps(hosted,indent=2)+"\n",encoding="utf-8")
           finally:
               # Command logs already reside in the upload directory if storage refuses new copies.
@@ -327,19 +405,31 @@ jobs:
                   external+=sorted((sdk/"target/surefire-reports").glob("TEST-*.xml"))
                   external+=sorted((sdk/"target/surefire-reports").glob("*.txt"))
                   external+=[sdk/"target/sdk-receipt.json",sdk/"target/recipe-test-counters.json",qualifier.parent/"source-binding.json"]
+                  external+=sorted((authoring/"target/surefire-reports").glob("TEST-*.xml"))+sorted((authoring/"target/surefire-reports").glob("*.txt"))
+                  external+=[authoring/"target/authoring-sdk-receipt.json",authoring/"target/authoring-recipe-test-counters.json",authoring.parent/"authoring-source-binding.json"]
+                  authoring_aliases={
+                      authoring/"target/emitted/m3/tooling/backport-contract-current-owner/qualify.py":"authoring-output-host-qualify.py",
+                      authoring/"target/emitted/m3/tooling/backport-contract-current-owner/README.md":"authoring-output-host-README.md",
+                      authoring/"target/emitted/m3/tooling/backport-contract-current-owner/runtime/qualify.py":"authoring-output-runtime-qualify.py",
+                      authoring/"target/emitted/m3/tooling/backport-contract-current-owner/runtime/README.md":"authoring-output-runtime-README.md",
+                      authoring/"target/emitted/m3/tooling/backport-contract-current-owner/runtime/INPUTS.json":"authoring-output-INPUTS.json",
+                      authoring/"target/emitted/.github/workflows/m3-backport-contract-current-owner.yml":"authoring-output-workflow.yml",
+                  }
+                  external+=list(authoring_aliases)
                   selected=present+[p for p in external if p.is_file()]
                   if any(not p.is_file() or any(q.is_symlink() for q in [p,*p.parents]) for p in selected):raise RuntimeError("closed artifact source fence")
                   by_name={}
                   origins={}
                   copies=[]
                   for path in selected:
-                      if path.name in ("commands.json","inventory.json","log-tail.txt"):raise RuntimeError("reserved artifact name already exists")
-                      destination=bundle/path.name
-                      if path.name in by_name:
-                          if path.read_bytes()!=by_name[path.name].read_bytes():raise RuntimeError("artifact basename conflict")
+                      name=authoring_aliases.get(path,path.name)
+                      if name in ("commands.json","inventory.json","log-tail.txt"):raise RuntimeError("reserved artifact name already exists")
+                      destination=bundle/name
+                      if name in by_name:
+                          if path.read_bytes()!=by_name[name].read_bytes():raise RuntimeError("artifact basename conflict")
                           continue
-                      by_name[path.name]=path
-                      origins[path.name]=str(path.relative_to(root)) if root in path.parents else str(path.relative_to(source))
+                      by_name[name]=path
+                      origins[name]=str(path.relative_to(root)) if root in path.parents else str(path.relative_to(source))
                       if path!=destination:copies.append((path,destination))
                   commands=(json.dumps(records,indent=2)+"\n").encode("utf-8")
                   payload=sum(p.stat().st_size for p in by_name.values())+len(tail)+len(commands)
