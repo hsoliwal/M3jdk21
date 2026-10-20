@@ -82,6 +82,13 @@ public final class M3FileCpuFactsTest {
         mutated[0] = 0;
         yes(facts.search("ab", 5).lineMask()[0] == 2L, "defensive line mask");
         expect(IllegalArgumentException.class, () -> facts.search("a", -1));
+        Path dense = work.resolve("dense.txt");
+        Files.writeString(dense, "a".repeat(262_145), StandardCharsets.UTF_8);
+        M3FileCpuFacts denseFacts = M3FileCpuFacts.of(M3File.load(dense));
+        M3FileCpuFacts.Search large = denseFacts.search("a", 262_145);
+        yes(large.complete() && large.size() == 262_145
+                && denseFacts.search("a", 262_145) != large,
+                "large one-megabyte hit lane is returned but not retained in cache");
 
         Files.writeString(filePath, "aaaa\r\nxy\ud83d\ude42ab\n", StandardCharsets.UTF_8);
         M3File next = M3File.load(filePath);
