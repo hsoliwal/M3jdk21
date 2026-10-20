@@ -3,7 +3,7 @@ SPDX-License-Identifier: Apache-2.0 -->
 # M3JDK21 current-owner efficiency and common JNI receiver
 
 M3JDK21 owns these runtime implementations. This receiver pins the reusable
-Synexia recipes at commit `f29989d9d1ee1097ad4a50dda277dabfe1496da4`, [canonical PR #12564](https://github.com/hsoliwal/com.synexia/pull/12564).
+Synexia recipes at commit `517d49739dca95ba5caad4a3f14f94171a984b71`, [canonical PR #12564](https://github.com/hsoliwal/com.synexia/pull/12564).
 It extends the existing collections/Swing receiving stack at
 `8e868958f017482cfd6c5085869263c92a011cf6` ([#1525](https://github.com/hsoliwal/M3JDK21/pull/1525),
 based on [#1522](https://github.com/hsoliwal/M3JDK21/pull/1522)).
@@ -60,13 +60,13 @@ remain unimplemented or unqualified; the build recipe does not claim otherwise.
 
 The complete reports and raw proof custody remain canonical:
 
-- [Task design, source guards and reproduction](https://github.com/hsoliwal/com.synexia/tree/f29989d9d1ee1097ad4a50dda277dabfe1496da4/synexia-openrewrite-recipes/recipes/m3-android-efficiency-20261020/README.md)
-- [Java qualification](https://github.com/hsoliwal/com.synexia/tree/f29989d9d1ee1097ad4a50dda277dabfe1496da4/synexia-openrewrite-recipes/recipes/m3-android-efficiency-20261020/java-leaf/QUALIFICATION.md)
-- [Native qualification and both timing series](https://github.com/hsoliwal/com.synexia/tree/f29989d9d1ee1097ad4a50dda277dabfe1496da4/synexia-openrewrite-recipes/recipes/m3-android-efficiency-20261020/native-leaf/QUALIFICATION.md)
-- [Common JNI build qualification](https://github.com/hsoliwal/com.synexia/tree/f29989d9d1ee1097ad4a50dda277dabfe1496da4/synexia-openrewrite-recipes/recipes/m3-android-efficiency-20261020/common-jni-build/QUALIFICATION.md)
-- [Actual SDK materialization](https://github.com/hsoliwal/com.synexia/tree/f29989d9d1ee1097ad4a50dda277dabfe1496da4/synexia-openrewrite-recipes/recipes/m3-android-efficiency-20261020/execution/SDK_MATERIALIZATION_STAGE_2.json)
-- [Donor/category evaluation](https://github.com/hsoliwal/com.synexia/tree/f29989d9d1ee1097ad4a50dda277dabfe1496da4/synexia-openrewrite-recipes/recipes/m3-android-efficiency-20261020/DONOR_EVALUATION.md)
-- [Existing catalogue, extended to twenty-one rows](https://github.com/hsoliwal/com.synexia/blob/f29989d9d1ee1097ad4a50dda277dabfe1496da4/synexia-indexstring/docs/search-algorithm-catalog.tsv)
+- [Task design, source guards and reproduction](https://github.com/hsoliwal/com.synexia/tree/517d49739dca95ba5caad4a3f14f94171a984b71/synexia-openrewrite-recipes/recipes/m3-android-efficiency-20261020/README.md)
+- [Java qualification](https://github.com/hsoliwal/com.synexia/tree/517d49739dca95ba5caad4a3f14f94171a984b71/synexia-openrewrite-recipes/recipes/m3-android-efficiency-20261020/java-leaf/QUALIFICATION.md)
+- [Native qualification and both timing series](https://github.com/hsoliwal/com.synexia/tree/517d49739dca95ba5caad4a3f14f94171a984b71/synexia-openrewrite-recipes/recipes/m3-android-efficiency-20261020/native-leaf/QUALIFICATION.md)
+- [Common JNI build qualification](https://github.com/hsoliwal/com.synexia/tree/517d49739dca95ba5caad4a3f14f94171a984b71/synexia-openrewrite-recipes/recipes/m3-android-efficiency-20261020/common-jni-build/QUALIFICATION.md)
+- [Actual SDK materialization](https://github.com/hsoliwal/com.synexia/tree/517d49739dca95ba5caad4a3f14f94171a984b71/synexia-openrewrite-recipes/recipes/m3-android-efficiency-20261020/execution/SDK_MATERIALIZATION_STAGE_2.json)
+- [Donor/category evaluation](https://github.com/hsoliwal/com.synexia/tree/517d49739dca95ba5caad4a3f14f94171a984b71/synexia-openrewrite-recipes/recipes/m3-android-efficiency-20261020/DONOR_EVALUATION.md)
+- [Existing catalogue, extended to twenty-one rows](https://github.com/hsoliwal/com.synexia/blob/517d49739dca95ba5caad4a3f14f94171a984b71/synexia-indexstring/docs/search-algorithm-catalog.tsv)
 
 The original six-row catalogue prefix, rejected candidates, failed compiler
 invocations and current measurements are retained. GitHub/AOSP implementations

@@ -15,7 +15,7 @@ integration while honoring the same owner contract. A platform cannot be
 declared supported merely because host headers compile.
 
 The full evaluated owner/adapter matrix, exact donor source closure and remaining
-gates are pinned in the [canonical common platform contract](https://github.com/hsoliwal/com.synexia/tree/f29989d9d1ee1097ad4a50dda277dabfe1496da4/synexia-openrewrite-recipes/recipes/m3-android-efficiency-20261020/COMMON_JNI_PLATFORM_CONTRACT.md).
+gates are pinned in the [canonical common platform contract](https://github.com/hsoliwal/com.synexia/tree/517d49739dca95ba5caad4a3f14f94171a984b71/synexia-openrewrite-recipes/recipes/m3-android-efficiency-20261020/COMMON_JNI_PLATFORM_CONTRACT.md).
 
 ## Current receiving implementation
 
