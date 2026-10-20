@@ -105,23 +105,53 @@ public final class M3File {
      * rejects the observation rather than publishing a mixed-generation snapshot.
      */
     public M3FileSnapshot snapshotWithSha256(M3ProgressMonitor progress) throws IOException {
+        return indexedSnapshot(progress).source();
+    }
+
+    /**
+     * Drives source hashing and all supplied parser/index fact observers from one physical read.
+     *
+     * <p>Observers may maintain arbitrary incremental parser/index state but publish only a
+     * fixed-width fact receipt back to this module. M3File therefore never owns M3AST, regex,
+     * JSON, binary-format or index-specific runtime objects.</p>
+     */
+    public M3FileIndexedSnapshot indexedSnapshot(
+            M3ProgressMonitor progress, M3FileFactObserver... observers) throws IOException {
         Metadata before = metadata();
         if (!before.regularFile()) throw new IOException("resource is not a regular file");
 
-        MessageDigest digest = sha256();
-        M3StreamObserver hash = digest::update;
-        try (InputStream input = openInputStream(progress, hash)) {
+        M3FileFactObserver[] checked =
+                Objects.requireNonNull(observers, "observers").clone();
+        MessageDigest sourceDigest = sha256();
+        M3StreamObserver[] shadows = new M3StreamObserver[checked.length + 1];
+        shadows[0] = sourceDigest::update;
+        for (int index = 0; index < checked.length; index++) {
+            shadows[index + 1] = Objects.requireNonNull(checked[index], "fact observer");
+        }
+
+        try (InputStream input = openInputStream(progress, shadows)) {
             byte[] buffer = new byte[64 * 1024];
             while (input.read(buffer) >= 0) {
-                // The shadow performs hashing; the primary loop only drives the stream.
+                // The shadows perform all layered work; this loop only drives the primary stream.
             }
         }
 
         Metadata after = metadata();
         if (!before.equals(after)) {
-            throw new IOException("resource metadata changed while hashing");
+            throw new IOException("resource metadata changed while indexing");
         }
-        return new M3FileSnapshot(after, digest.digest());
+
+        M3FileFact[] facts = new M3FileFact[checked.length];
+        for (int index = 0; index < checked.length; index++) {
+            M3FileFact fact = Objects.requireNonNull(checked[index].fact(), "fact");
+            if (!checked[index].factName().equals(fact.name())) {
+                throw new IllegalStateException("fact observer name changed after publication");
+            }
+            facts[index] = fact;
+        }
+        return new M3FileIndexedSnapshot(
+                new M3FileSnapshot(after, sourceDigest.digest()),
+                M3FileFacts.of(facts));
     }
 
     public M3FileDelta deltaSince(
