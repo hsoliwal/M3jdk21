@@ -5,6 +5,10 @@
 #include <limits.h>
 #include <stdint.h>
 
+#define M3_LANGUAGE_MAX_WORDS (1 << 20)
+#define M3_LANGUAGE_MAX_TOKENS (1 << 20)
+#define M3_LANGUAGE_MAX_SENTENCES (1 << 16)
+
 static jlong cluster_score_q20(jint first, jint last, jint significant) {
     jint span = last - first + 1;
     uint64_t sig = (uint64_t)(uint32_t)significant;
@@ -43,6 +47,11 @@ Java_com_m3_lexicon_M3LanguageNative_scoreLuhnClusters0(
     jsize word_length = (*env)->GetArrayLength(env, word_ids);
     jsize sentence_count = (*env)->GetArrayLength(env, sentence_ends);
     jsize frequency_length = (*env)->GetArrayLength(env, frequencies);
+    if (word_count > M3_LANGUAGE_MAX_WORDS
+            || word_length > M3_LANGUAGE_MAX_TOKENS
+            || sentence_count > M3_LANGUAGE_MAX_SENTENCES) {
+        return -8;
+    }
     if (frequency_length < (jsize)(word_count + 1)
             || (*env)->GetArrayLength(env, out_score_q20) != sentence_count
             || (*env)->GetArrayLength(env, out_significant) != sentence_count
