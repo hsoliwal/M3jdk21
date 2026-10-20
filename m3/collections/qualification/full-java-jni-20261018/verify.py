@@ -17,6 +17,7 @@ JAVA = Path(os.environ['JAVA_HOME'])
 VENDOR = ROOT / 'm3/vendor/third_party'
 DEPENDENCIES = ('apiguardian-api', 'opentest4j', 'univocity-parsers',
                 'junit-platform-commons-1.10.2', 'junit-platform-engine-1.10.2',
+                'junit-platform-launcher-1.10.2',
                 'junit-jupiter-api-5.10.2', 'junit-jupiter-params-5.10.2',
                 'junit-jupiter-engine-5.10.2', 'junit-jupiter-5.10.2')
 # Existing library names and generated JNI headers; no second native owner.
@@ -118,6 +119,10 @@ def main():
         run(cc + [native / 'm3_index_mask_window.c', MODULE / 'src/test/native' /
                   ('m3_mask_window_' + fixture + '.c'), '-o', executable])
         run([executable])
+    compactor_fixture = OUT / 'native/compactor-spans'
+    run(cc + [native / 'm3_index_mask_compactor.c',
+              MODULE / 'src/test/native/m3_compactor_spans.c', '-o', compactor_fixture])
+    run([compactor_fixture])
     gather_fixture = OUT / 'native/gather-spans'
     run(cc + [native / 'm3_long_address_kernel.c', MODULE / 'src/test/native/m3_gather_spans.c',
               '-o', gather_fixture])
@@ -165,20 +170,41 @@ def main():
                  ('M3SignalDimensionsNativeContract', []),
                  ('M3ResidencyStateMaskProof', ['native']),
                  ('M3BitLaneJumpProof', [str(OUT / 'native/libm3_bitlane_jump_test.so')])]
+    contracts.extend([('M3ProjectionRefinementProbe', ['native']),
+                      ('M3FilteredNullNavigationProbe', [])])
     for name, args in contracts: run(java + ['com.m3.collections.' + name, *args])
+    java_only = [JAVA / 'bin/java', *common, '-Djava.library.path=' + str(OUT / 'missing'), '-cp', cp]
+    run(java_only + ['com.m3.collections.M3ProjectionRefinementProbe', 'java'])
+    run(java_only + ['com.m3.collections.M3ProjectionRefinementProbe', 'absent'])
+    run(java_only + ['com.m3.collections.M3IndexOrderWindowContract', '--missing'])
+    observations = {}
+    for mode, launcher in [('java', java_only), ('native', java)]:
+        command = list(map(str, launcher + ['com.m3.collections.M3IndexOrderWindowContract', '--' + mode]))
+        print('+ ' + ' '.join(command), flush=True)
+        completed = subprocess.run(command, cwd=ROOT, text=True, stdout=subprocess.PIPE,
+                                   stderr=subprocess.STDOUT)
+        print(completed.stdout, end='', flush=True)
+        completed.check_returncode()
+        lines = [line for line in completed.stdout.splitlines() if line.startswith('INDEX_ORDER_WINDOW_PASS ')]
+        if len(lines) != 1: raise RuntimeError('Missing unique window contract observation: ' + mode)
+        observations[mode] = lines[0].split('observations=')[1]
+    if observations['java'] != observations['native']:
+        raise RuntimeError('Java and JNI window observations differ')
     run([JAVA / 'bin/java', *common, '-Djava.library.path=' + str(OUT / 'missing'), '-cp', cp,
          'com.m3.collections.M3BudgetedMaskWindowContract', '--missing'])
     run([JAVA / 'bin/java', *common, '-Djava.library.path=' + str(OUT / 'missing'), '-cp', cp,
          'com.m3.collections.M3LongIndexPathMasksJNISelfTest'])
     native_fixtures = [MODULE / 'src/test/native' / name for name in
-                       ('m3_mask_window_spans.c', 'm3_mask_window_regions.c', 'm3_bitlane_jump_jni.c', 'm3_gather_spans.c')]
+                       ('m3_mask_window_spans.c', 'm3_mask_window_regions.c', 'm3_bitlane_jump_jni.c', 'm3_gather_spans.c',
+                        'm3_compactor_spans.c')]
     proof = {'status': 'PASS_OWNING_COLLECTION_JAVA_AND_JNI', 'head_sha': head,
              'scope': 'independent m3/collections; no JDK phase or challenge-corpus promotion',
              'worktree_dirty': bool(subprocess.check_output(['git', 'status', '--porcelain', '--untracked-files=no'], cwd=ROOT)),
              'jar_sha256': sha(jar), 'jar_classes': len(expected_classes), 'runtime_modules': runtime_modules,
              'java_sources': len(sources), 'test_sources': len(tests), 'junit': results,
              'source_dependencies': dependency_proof, 'native_libraries': sorted(LIBRARIES),
-             'explicit_native_contracts': [name for name, _ in contracts],
+             'explicit_native_contracts': [name for name, _ in contracts] + ['M3IndexOrderWindowContract'],
+             'window_observations': observations,
              'native': 'generated headers; C17 strict; fatal UBSan; actual -Xcheck:jni',
              'source_sha256': {str(p.relative_to(ROOT)): sha(p) for p in sources + tests + sorted(admitted) + native_fixtures}}
     (OUT / 'PROOF.json').write_text(json.dumps(proof, indent=2) + '\n')

@@ -1,0 +1,32 @@
+name: M3 Universal AST DAG Java21
+
+on:
+  pull_request:
+    paths:
+      - 'm3/ast/**'
+      - 'm3/tooling/migration-recipes/src/main/resources/**m3-universal-ast-dag-20261020**'
+      - '.github/workflows/m3-universal-ast-dag-20261020.yml'
+  push:
+    branches:
+      - 'm3/universal-ast-dag-geometry-20261020'
+    paths:
+      - 'm3/ast/**'
+      - 'm3/tooling/migration-recipes/src/main/resources/**m3-universal-ast-dag-20261020**'
+
+permissions:
+  contents: read
+
+jobs:
+  focused-java21:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Exact recipe and Java21 proof
+        run: python3 m3/ast/qualification/universal-ast-dag-20261020/verify.py

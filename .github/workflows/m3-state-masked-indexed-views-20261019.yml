@@ -1,0 +1,73 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3JDK21 Intrinsic Masked Views — OpenRewrite and jtreg contracts
+on:
+  pull_request:
+    paths:
+      - 'src/java.base/share/classes/jdk/internal/m3/M3IndexedArray.java'
+      - 'src/java.base/share/classes/jdk/internal/m3/M3IndexedView.java'
+      - 'test/jdk/jdk/internal/m3/M3StateMaskedIndexedViewTest.java'
+      - 'm3/tooling/shared-frontend/recipe-custody/datasets/m3-state-masked-views-20261019/**'
+      - '.github/workflows/m3-state-masked-indexed-views-20261019.yml'
+  workflow_dispatch:
+jobs:
+  exact-product-recipe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            .github/workflows/m3-state-masked-indexed-views-20261019.yml
+            src/java.base/share/classes/jdk/internal/m3/M3IndexedArray.java
+            src/java.base/share/classes/jdk/internal/m3/M3IndexedView.java
+            test/jdk/jdk/internal/m3/M3IndexedArrayTest.java
+            test/jdk/jdk/internal/m3/M3IndexedViewEpochTest.java
+            test/jdk/jdk/internal/m3/M3StateMaskedIndexedViewTest.java
+            m3/tooling/shared-frontend/recipe-custody/
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Qualify canonical OpenRewrite source recipe and receiver
+        shell: bash
+        run: |
+          set -euo pipefail
+          root="$PWD/m3/tooling/shared-frontend/recipe-custody"
+          mvn -B -ntp -f "$root/pom.xml" \
+            -Dm3.dataset=m3-state-masked-views-20261019 \
+            "-Drecipe.owner.root=$root/sdk-owner" -Pcontract verify
+          python3 "$root/receive.py" --crate "$root" \
+            --dataset m3-state-masked-views-20261019 \
+            --recipe-owner "$root/sdk-owner" --target "$PWD" --check
+      - name: Compile M3JDK21 java.base product sources and contract probes
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p out/m3-state-views/classes out/m3-state-views/tests
+          javac -Xlint:all,-serial -Werror \
+            --patch-module java.base=src/java.base/share/classes \
+            -d out/m3-state-views/classes \
+            src/java.base/share/classes/jdk/internal/m3/M3IndexedArray.java \
+            src/java.base/share/classes/jdk/internal/m3/M3IndexedView.java
+          javac -Xlint:all,-serial -Werror \
+            --patch-module java.base=out/m3-state-views/classes \
+            --add-exports java.base/jdk.internal.m3=ALL-UNNAMED \
+            -d out/m3-state-views/tests \
+            test/jdk/jdk/internal/m3/M3IndexedArrayTest.java \
+            test/jdk/jdk/internal/m3/M3IndexedViewEpochTest.java \
+            test/jdk/jdk/internal/m3/M3StateMaskedIndexedViewTest.java
+      - name: Run historical behavior and new state-mask oracles
+        shell: bash
+        run: |
+          set -euo pipefail
+          for mode in normal interpreted; do
+            jvm_flags=()
+            if [ "$mode" = interpreted ]; then jvm_flags=(-Xint); fi
+            for test in M3IndexedArrayTest M3IndexedViewEpochTest M3StateMaskedIndexedViewTest; do
+              java "${jvm_flags[@]}" --patch-module java.base=out/m3-state-views/classes \
+                --add-exports java.base/jdk.internal.m3=ALL-UNNAMED \
+                -cp out/m3-state-views/tests "$test"
+            done
+          done
