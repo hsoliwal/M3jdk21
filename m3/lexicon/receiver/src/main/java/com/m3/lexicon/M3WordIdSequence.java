@@ -12,6 +12,11 @@ import java.util.List;
  * (M3RXW001) and of token-sequence regex (REGEX_PRECOMPUTE_DESIGN.md §2e, §2f).
  */
 public final class M3WordIdSequence {
+    // Optional cold directory over this resolver's existing immutable String references.
+    // Larger dictionaries and unusually long identity-hash clusters keep comparator lookup.
+    private static final int MAX_IDENTITY_ROWS = 1 << 20;
+    private static final int MAX_IDENTITY_PROBES = 64;
+
     /** Resolves a composite span to a CWID (0 when absent). */
     @FunctionalInterface
     public interface Resolver {
@@ -44,7 +49,7 @@ public final class M3WordIdSequence {
     /** Resolver over a strictly ascending word list (CWID = index + 1), comparing through atom slices. */
     public static Resolver sortedLexicon(List<? extends CharSequence> sortedWords) {
         List<? extends CharSequence> words = List.copyOf(sortedWords);
-        return (text, start, end) -> {
+        Resolver fallback = (text, start, end) -> {
             int low = 0;
             int high = words.size() - 1;
             while (low <= high) {
@@ -61,6 +66,84 @@ public final class M3WordIdSequence {
             }
             return 0;
         };
+        int[] identityRows = identityRows(words);
+        if (identityRows == null) {
+            return fallback;
+        }
+        return (text, start, end) -> {
+            if (text != null && start >= 0 && start < end
+                    && end <= text.length()) {
+                int atom = text.wholeAtom(start, end);
+                if (atom >= 0 && text.atoms().get(atom) instanceof String word
+                        && word.length() == end - start) {
+                    int cwid = identityWordId(words, identityRows, word);
+                    if (cwid != 0) {
+                        return cwid;
+                    }
+                }
+            }
+            return fallback.wordId(text, start, end);
+        };
+    }
+
+    /**
+     * Admits only exact immutable, strictly ordered spellings. The table contains row
+     * coordinates into the already-owned list, never another text payload or word wrapper.
+     */
+    private static int[] identityRows(List<? extends CharSequence> words) {
+        int count = words.size();
+        if (count == 0 || count > MAX_IDENTITY_ROWS) {
+            return null;
+        }
+        String previous = null;
+        for (CharSequence value : words) {
+            if (!(value instanceof String word)
+                    || (previous != null && previous.compareTo(word) >= 0)) {
+                return null;
+            }
+            previous = word;
+        }
+        int capacity = 2;
+        while (capacity < count * 2) {
+            capacity <<= 1;
+        }
+        int[] rows = new int[capacity];
+        int mask = capacity - 1;
+        for (int row = 0; row < count; row++) {
+            int slot = identitySlot(words.get(row), mask);
+            int probes = 0;
+            while (probes < MAX_IDENTITY_PROBES && rows[slot] != 0) {
+                slot = (slot + 1) & mask;
+                probes++;
+            }
+            if (probes == MAX_IDENTITY_PROBES) {
+                return null;
+            }
+            rows[slot] = row + 1;
+        }
+        return rows;
+    }
+
+    private static int identityWordId(List<? extends CharSequence> words, int[] rows,
+            String word) {
+        int mask = rows.length - 1;
+        int slot = identitySlot(word, mask);
+        for (int probe = 0; probe < MAX_IDENTITY_PROBES; probe++) {
+            int cwid = rows[slot];
+            if (cwid == 0) {
+                return 0;
+            }
+            if (words.get(cwid - 1) == word) {
+                return cwid;
+            }
+            slot = (slot + 1) & mask;
+        }
+        return 0;
+    }
+
+    private static int identitySlot(Object value, int mask) {
+        int hash = System.identityHashCode(value);
+        return (hash ^ (hash >>> 16)) & mask;
     }
 
     /** @return number of tokens */
