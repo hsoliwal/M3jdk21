@@ -28,6 +28,29 @@ AWT, IntelliJ and RWT:
 - **Render snapshots.** What a renderer consumes is an `M3Snapshot` published per generation (section 13), never the
   store directly.
 
+### 0a. Brief rule 24: all delta-based views (user, 2026-10-20)
+
+`M3Patch` is the only structural update path through the core views; each view counts its work (`work()`), and
+`M3PatchCostTest` / `M3ViewPatchTest` bound that count at n = 2^10 .. 2^20.
+
+| View | Patch entry | Cost of one run | How |
+|---|---|---|---|
+| `M3OrderStatisticForest` | `shift`, `removeRange` | O(log k + removed) | AVL with subtree size and sum; lazy key shifts (a pending shift per node, parent links for `key(id)`); range removal by split, split, join (join-based trees, Blelloch et al. 2016, pattern only) |
+| `M3TreeTopology` / `M3FlatteningView` | `apply(parentId / row, patch)`, `insertCoordinates`, `removeCoordinates` | O(log k + discarded) plus one ancestor refresh | one lazy shift of the sibling index instead of a walk over later siblings; removed subtrees dropped whole (O(1) per node); moved expanded children re-linked with their subtree |
+| `M3SparseExtents` | `M3Patch.Target` (`insert`, `remove`), `apply(patch)` | O(log m + removed measurements); one row height or column width O(log m); estimate O(1) | measured rows are forest nodes (row = key, extent = weight); offset = (row - measured before) x estimate + extent before |
+| `M3WindowView` | `M3Patch.Target`, `apply(patch)` with a bound host | O(1) per run plus the entries it touches | runs before the window shift it, runs inside it become entry removes/inserts for the host; the state lane is a ring, so `move` (scroll, resize, layout) costs the entries entering and leaving |
+
+**Viewport deltas (resize, layout).** A resize or relayout is a window move: `M3WindowView.move` answers the plan of
+rows leaving and entering at the head and tail, in O(changed). A row height or column width is
+`M3SparseExtents.setExtent`, O(log m). Adapters use only these two.
+
+**Hidden viewports.** `M3WindowView.hide()` stops host calls: runs update the lanes and fold the touched entries into
+one dirty span (O(1) per run, worst case). `show()` answers one patch over what the host showed when hidden (at most
+one remove run and one insert run) for the adapter to apply and paint once. A span rather than an exact range set:
+the show patch replaces the span in one step, while an exact set would cost O(ranges) per shifted run. The AWT
+adapter hides its window when the list stops showing (`HierarchyEvent.SHOWING_CHANGED`) and applies the show patch
+when it shows again.
+
 ## 1. Shape
 
 ```
