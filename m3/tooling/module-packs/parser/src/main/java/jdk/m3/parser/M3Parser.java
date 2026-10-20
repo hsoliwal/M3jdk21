@@ -26,6 +26,11 @@ public final class M3Parser {
         this.limits = Objects.requireNonNull(limits, "limits");
     }
 
+    /** Share a single grammar parse and its source/AST across interested consumers. */
+    public M3ParserSession session(M3File source) {
+        return new M3ParserSession(this, Objects.requireNonNull(source, "source"));
+    }
+
     public M3Grammar grammar() { return grammar; }
     public M3GrammarLimits limits() { return limits; }
 
