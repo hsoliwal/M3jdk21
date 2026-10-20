@@ -46,6 +46,18 @@ public final class M3BuildStateContract {
                 new int[]{0, 0, 1, 2}, new int[]{0, 1}, sha(context));
     }
 
+    private static M3BuildState overlappingChanges(boolean now) {
+        byte[] contents = new byte[96], abi = new byte[96];
+        put(contents, 0, sha(now ? "a new" : "a old"));
+        put(contents, 1, sha(now ? "b new" : "b old"));
+        put(contents, 2, sha("c unchanged"));
+        put(abi, 0, sha(now ? "A NEW ABI" : "A OLD ABI"));
+        put(abi, 1, sha("B identical ABI"));
+        return new M3BuildState(new String[]{"a", "b", "c"},
+                fill(3, M3BuildState.SOURCE), new long[]{5, 5, 11}, contents,
+                abi, new long[]{3}, new int[]{0, 0, 1, 2}, new int[]{0, 1}, sha("ctx"));
+    }
+
     private static void put(byte[] lane, int row, byte[] value) {
         System.arraycopy(value, 0, lane, row * 32, 32);
     }
@@ -69,6 +81,14 @@ public final class M3BuildStateContract {
         M3BuildState apiChanged = sample("new body", "DIFFERENT ABI", "ctx");
         plan = apiChanged.changedFrom(baseline);
         check(plan.affectedCount() == 3L && plan.affected(2), "reverse dependency closure");
+        // A changed exported ABI forces B to rebuild, even though B's independently
+        // changed source has an equal ABI. B must not block the propagation to C.
+        M3BuildState oldChain = overlappingChanges(false);
+        M3BuildState newChain = overlappingChanges(true);
+        M3BuildState.Plan overlapping = newChain.changedFrom(oldChain);
+        check(overlapping.changed(0) && overlapping.changed(1), "overlapping direct changes");
+        check(overlapping.affectedCount() == 3L && overlapping.affected(2),
+                "independently dirty middle vertex cannot suppress ancestor invalidation");
         check(Arrays.equals(plan.changedMask(), new long[]{1L}), "only source changed");
         long[] hacked = plan.affectedMask(); hacked[0] = 0L;
         check(plan.affectedCount() == 3L, "defensive bitmap projection");
