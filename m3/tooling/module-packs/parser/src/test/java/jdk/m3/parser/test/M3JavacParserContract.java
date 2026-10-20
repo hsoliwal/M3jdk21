@@ -109,8 +109,8 @@ public final class M3JavacParserContract {
                 check(units == 1, "caller ran one actual javac parse");
                 summary = session.summary();
                 check(summary.parsedUnits() == 1 && summary.capturedSources() == 1
-                        && summary.projectionComputations() == 1 && summary.projectionHits() == 1,
-                        "two consumers reuse one source-bound projection");
+                        && summary.projectionComputations() == 2 && summary.projectionHits() == 1,
+                        "two consumers reuse one tree and its nested source projection");
                 check(summary.sourceReads() == 0 && input.reads == 1, "projection uses exact parser input without rereading");
             }
         }
@@ -158,11 +158,12 @@ public final class M3JavacParserContract {
             try (M3AST session = M3JavacParser.attach(task, M3JavacParser.projection(128), outputs::add)) {
                 M3JavacParser.attach(task, M3JavacParser.projection(128), outputs::add);
                 task.parse();
-                check(session.summary().projectionComputations() == 2 && session.summary().projectionHits() == 0,
-                        "equal projection names do not share distinct operation identities");
+                check(session.summary().projectionComputations() == 3 && session.summary().projectionHits() == 1,
+                        "distinct tree identities share only their nested source projection");
             }
         }
         check(outputs.size() == 2 && outputs.get(0) != outputs.get(1), "distinct projections produce separate detached values");
+        check(outputs.get(0).source() == outputs.get(1).source(), "distinct tree projections share the source-only result");
         check(outputs.get(0).source().text() == outputs.get(1).source().text(), "distinct projections still share the frozen text payload");
         check(M3ParserFixtures.javacDigest(outputs.get(0)).equals(M3ParserFixtures.javacDigest(outputs.get(1))),
                 "independent projections agree in semantic content");
