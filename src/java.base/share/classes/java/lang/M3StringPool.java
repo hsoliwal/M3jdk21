@@ -103,6 +103,22 @@ final class M3StringPool {
     /** Only an unpublished mapping owned by this admission may be released. */
     private static native boolean unmapLexicon0(long address, long length);
 
+    /**
+     * JNI batch concatenation over existing canonical M3String owner/range references.
+     *
+     * <p>The native code uses a fixed 32-slot stack to combine the already-interned
+     * coordinates through this pool's normal canonical concat operation. The Java
+     * input array contains references, never a copied joined text payload. Mapped
+     * lexicon/OS-shared atoms remain owned by their original retained mapping,
+     * and short immediate words remain in their fixed long[] pages. Materialization
+     * remains an explicit String/JNI compatibility operation.</p>
+     *
+     * <p>This is an internal opt-in batch entry point. Normal String concatenation
+     * keeps its Java path until installed-image/native performance qualification.</p>
+     */
+    // FLLDCIM: ATOM — canonical native batch join over fixed-array/view coordinates
+    static native M3String concatViewsNative0(M3String[] parts);
+
     private static String savedProperty(String name) {
         return VM.initLevel() >= 1 ? VM.getSavedProperty(name) : null;
     }
