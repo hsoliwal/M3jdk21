@@ -9,9 +9,11 @@ import java.util.Optional;
  * Change detection between two observations of one logical entry, cheapest first.
  *
  * <p>Every method is a default ({@link #ATTRIBUTES} is the plain provider): {@link #attributeChange}
- * compares kind, size, modified time and file key from the scan lanes with no I/O; when that gate stays
- * closed the new row inherits the old content observation and nothing is read. Only when the gate trips
- * is the new row observed once (SHA-256, CRC32C, token hash, {@link #structure} hash) and compared by
+ * compares kind, size, modified time and file key from the scan lanes with no I/O. When that gate stays
+ * closed, an observation already recorded on the new row is retained and compared, including a failed
+ * observation. A row without an observation inherits the old content observation; nothing is read.
+ * Only when the gate trips is the new row observed once (SHA-256, CRC32C, token hash, {@link #structure}
+ * hash) and compared by
  * {@link #contentChange}. Providers with their own change mechanism override as little as they need:
  * a {@code WatchService} or git-index provider overrides {@link #attributeChange}, a zip provider compares
  * central-directory CRC/size there, an M3AST provider returns a layer from {@link #structure}.</p>
@@ -72,6 +74,8 @@ public interface M3FileChangeProvider {
             M3FileProgress progress) throws InterruptedIOException {
         int bits = attributeChange(before, beforeId, after, afterId);
         if (bits == 0) {
+            if (after.flag(M3FileFlag.FAILED, afterId)) return M3FileChange.UNREADABLE;
+            if (after.flag(M3FileFlag.HASHED, afterId)) return contentChange(before, beforeId, after, afterId);
             after.carryHashes(afterId, before, beforeId);
             return 0;
         }

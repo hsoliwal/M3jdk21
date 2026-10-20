@@ -51,7 +51,8 @@ final class M3FileSubProgress implements M3FileProgress {
         } else if (worked >= total) {
             push(parentUnits);
         } else {
-            push((long) Math.floor((double) worked * parentUnits / total));
+            // Binary64 rounding must not allocate more than the integral parent share.
+            push(Math.min(parentUnits, (long) Math.floor((double) worked * parentUnits / total)));
         }
     }
 

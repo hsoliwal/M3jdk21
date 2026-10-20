@@ -5,6 +5,7 @@ package com.m3.file;
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -139,7 +140,7 @@ class M3FileTreeTest {
         assertEquals("x".repeat(9), new String(detached.readAllBytes(64), StandardCharsets.US_ASCII));
         assertThrows(IOException.class, () -> detached.readAllBytes(4));
         assertThrows(IllegalStateException.class, detached::name);
-        assertEquals(M3File.of(z), detached);
+        assertNotEquals(M3File.of(z), detached, "the original detached edge uses Object identity");
         assertEquals(0, M3FileTree.detached().rows());
     }
 

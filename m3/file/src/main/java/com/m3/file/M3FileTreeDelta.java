@@ -40,7 +40,15 @@ public final class M3FileTreeDelta {
         this.progress = progress;
     }
 
-    /** Delta from {@code before} to {@code after}; progress units are bytes read (one split per file). */
+    /**
+     * Delta from {@code before} to {@code after}; progress units are bytes read (one split per file).
+     * Both scans must have a populated child slice for every live directory and archive. Unscanned
+     * slices and failed observations of unknown kinds are unknown coverage, not empty trees. Callers
+     * must capture complete snapshots before comparing them.
+     *
+     * @throws IllegalArgumentException if either tree has an unscanned directory/archive or a failed
+     *         observation of unknown kind; validation precedes progress, providers and content reads
+     */
     public static M3FileTreeDelta between(M3FileTree before, M3FileTree after, long maxBytes, M3FileProgress progress,
             M3FileChangeProvider provider) throws InterruptedIOException {
         Objects.requireNonNull(before, "before");
@@ -49,6 +57,8 @@ public final class M3FileTreeDelta {
         if (maxBytes < 0) throw new IllegalArgumentException("negative maxBytes");
         M3FileTreeDelta delta = new M3FileTreeDelta(before, after, Objects.requireNonNull(provider, "provider"),
                 maxBytes, Objects.requireNonNull(progress, "progress"));
+        requireCompleteCoverage(before, "before");
+        requireCompleteCoverage(after, "after");
         progress.begin("delta " + after.root(), 0);
         delta.pair(0, 0);
         progress.done();
@@ -107,6 +117,18 @@ public final class M3FileTreeDelta {
 
     Path path(int row) {
         return afterIds[row] >= 0 ? after.path(afterIds[row]) : before.path(beforeIds[row]);
+    }
+
+    private static void requireCompleteCoverage(M3FileTree tree, String name) {
+        for (int id = 0; id < tree.rows(); id++) {
+            if (tree.deleted(id)) continue;
+            boolean unknownKind = tree.flag(M3FileFlag.FAILED, id) && tree.kind(id) == M3FileKind.OTHER;
+            boolean unscannedChildren = (tree.flag(M3FileFlag.DIR, id) || tree.flag(M3FileFlag.ARCHIVE, id))
+                    && !tree.flag(M3FileFlag.SCANNED, id);
+            if (unknownKind || unscannedChildren) {
+                throw new IllegalArgumentException(name + " tree has incomplete coverage at row " + id);
+            }
+        }
     }
 
     private void pair(int b, int a) throws InterruptedIOException {

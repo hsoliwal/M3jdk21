@@ -162,11 +162,12 @@ public final class M3File {
     public M3FileShadowInputStream openInputStream(long maxBytes, M3FileProgress progress, M3FileShadow... shadows)
             throws IOException {
         if (maxBytes < 0) throw new IllegalArgumentException("negative maxBytes");
+        M3FileShadow[] checked = checkedShadows(progress, shadows);
         Metadata observed = metadata();
         if (!observed.regularFile()) throw new IOException("resource is not a regular file");
         if (observed.size() > maxBytes) throw new M3FileLimitException("resource exceeds configured read limit");
         progress.begin(path().toString(), observed.size());
-        return new M3FileShadowInputStream(tree.source().openContent(this), maxBytes, progress, shadows);
+        return new M3FileShadowInputStream(tree.source().openContent(this), maxBytes, progress, checked);
     }
 
     /**
@@ -176,9 +177,18 @@ public final class M3File {
      */
     public M3FileShadowOutputStream openOutputStream(M3FileProgress progress, M3FileShadow... shadows)
             throws IOException {
-        OutputStream output = tree.source().openOutput(this);
+        M3FileShadow[] checked = checkedShadows(progress, shadows);
         progress.begin(path().toString(), 0);
-        return new M3FileShadowOutputStream(output, Long.MAX_VALUE, progress, shadows);
+        OutputStream output = tree.source().openOutput(this);
+        return new M3FileShadowOutputStream(output, Long.MAX_VALUE, progress, checked);
+    }
+
+    /** Validate and capture callback inputs before a provider is opened or progress begins. */
+    private static M3FileShadow[] checkedShadows(M3FileProgress progress, M3FileShadow[] shadows) {
+        Objects.requireNonNull(progress, "progress");
+        M3FileShadow[] checked = Objects.requireNonNull(shadows, "shadows").clone();
+        for (M3FileShadow shadow : checked) Objects.requireNonNull(shadow, "shadow");
+        return checked;
     }
 
     /** One read pass that only feeds {@code shadows}; returns the bytes read. */
@@ -204,16 +214,16 @@ public final class M3File {
         return id;
     }
 
-    /** Tree entries are equal by {@code (tree, id)}; detached files by Path. */
+    /** Tree entries are equal by {@code (tree, id)}; detached files retain object identity. */
     @Override
     public boolean equals(Object other) {
-        return other instanceof M3File that && that.tree == tree && that.id == id
-                && (id >= 0 || that.path().equals(path()));
+        return this == other || id >= 0 && other instanceof M3File that
+                && that.tree == tree && that.id == id;
     }
 
     @Override
     public int hashCode() {
-        return id >= 0 ? 31 * System.identityHashCode(tree) + id : path().hashCode();
+        return id >= 0 ? 31 * System.identityHashCode(tree) + id : System.identityHashCode(this);
     }
 
     @Override

@@ -71,14 +71,19 @@ class M3FileLazyTest {
         int top = tree.ids().filter(id -> tree.name(id).equals("top.txt")).findFirst().orElseThrow();
         M3File file = tree.file(top);
         Path path = file.toPath();
-        int rankBefore = tree.rank(top);
+        int[] orderBefore = tree.ids().toArray();
         int a = tree.ids().filter(id -> tree.name(id).equals("a")).findFirst().orElseThrow();
+        int expandedPosition = tree.rank(a);
         int generation = tree.generation();
-        assertTrue(tree.scanChildren(a) > 0);
+        int added = tree.scanChildren(a);
+        assertTrue(added > 0);
         assertEquals(generation + 1, tree.generation());
         assertEquals(path, tree.file(top).toPath());
         assertEquals(file, tree.file(top));
-        assertTrue(tree.rank(top) > rankBefore, "positions after the expansion shift");
+        for (int position = 0; position < orderBefore.length; position++) {
+            int expected = position + (position > expandedPosition ? added : 0);
+            assertEquals(expected, tree.rank(orderBefore[position]), "only positions after the expansion shift");
+        }
         assertEquals(0, tree.scanChildren(top), "files have no children");
     }
 
