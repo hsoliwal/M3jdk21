@@ -2,8 +2,8 @@
  * SPDX-License-Identifier: Apache-2.0
  * @test
  * @summary JNI-callable UTF-16 ranges compose into one interned M3 String view
- * @run main/othervm --add-opens=java.base/java.lang=ALL-UNNAMED -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage M3StringCharRangeJniIngressTest
- * @run main/othervm --add-opens=java.base/java.lang=ALL-UNNAMED -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage -XX:-CompactStrings M3StringCharRangeJniIngressTest
+ * @run main/native/othervm --add-opens=java.base/java.lang=ALL-UNNAMED -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage M3StringCharRangeJniIngressTest
+ * @run main/native/othervm --add-opens=java.base/java.lang=ALL-UNNAMED -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage -XX:-CompactStrings M3StringCharRangeJniIngressTest
  */
 
 import java.lang.reflect.Field;
@@ -20,6 +20,7 @@ public class M3StringCharRangeJniIngressTest {
     private static int checks;
 
     static {
+        System.loadLibrary("M3StringCharRangeJniIngress");
         try {
             STRING_M3 = String.class.getDeclaredField("m3");
             STRING_M3.setAccessible(true);
@@ -37,6 +38,9 @@ public class M3StringCharRangeJniIngressTest {
             throw new ExceptionInInitializerError(failure);
         }
     }
+
+    private static native String invokeJoinRanges(
+            char[][] sources, int[] starts, int[] lengths);
 
     public static void main(String[] args) throws Exception {
         check(Modifier.isStatic(RANGE_JOIN.getModifiers())
@@ -97,16 +101,8 @@ public class M3StringCharRangeJniIngressTest {
         System.out.println("M3_STRING_CHAR_RANGE_JNI_INGRESS_PASS|checks=" + checks);
     }
 
-    private static String joinRanges(char[][] sources, int[] starts, int[] lengths)
-            throws Exception {
-        try {
-            return (String) RANGE_JOIN.invoke(null, sources, starts, lengths);
-        } catch (java.lang.reflect.InvocationTargetException failure) {
-            Throwable cause = failure.getCause();
-            if (cause instanceof Exception exception) throw exception;
-            if (cause instanceof Error error) throw error;
-            throw new AssertionError(cause);
-        }
+    private static String joinRanges(char[][] sources, int[] starts, int[] lengths) {
+        return invokeJoinRanges(sources, starts, lengths);
     }
 
     private static Object requireM3(String value) throws IllegalAccessException {
