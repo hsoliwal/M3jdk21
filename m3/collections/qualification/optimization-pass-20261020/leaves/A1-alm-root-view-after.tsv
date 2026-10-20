@@ -1,0 +1,5 @@
+owner	donor_type	operation	size	impl	build_ms	query_ms	build_alloc_B_per_elem	query_alloc_B_per_op	retained_B	retained_unit
+M3ArrayListMultimap	com.google.common.collect.ArrayListMultimap	put n over n/10 keys; get(k).size n; iterate entries	100000	guava	4.38	2.02	30.11	3.20	13.46	B/element
+M3ArrayListMultimap	com.google.common.collect.ArrayListMultimap	put n over n/10 keys; get(k).size n; iterate entries	100000	m3	6.38	2.06	35.76	0.00	12.93	B/element
+M3ArrayListMultimap	com.google.common.collect.ArrayListMultimap	put n over n/10 keys; get(k).size n; iterate entries	1000000	guava	61.62	24.04	30.90	3.20	13.85	B/element
+M3ArrayListMultimap	com.google.common.collect.ArrayListMultimap	put n over n/10 keys; get(k).size n; iterate entries	1000000	m3	56.91	19.58	32.86	0.00	12.10	B/element

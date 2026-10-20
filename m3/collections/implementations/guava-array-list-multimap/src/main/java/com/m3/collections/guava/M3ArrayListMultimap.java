@@ -691,7 +691,8 @@ public final class M3ArrayListMultimap<K, V> implements ListMultimap<K, V>, Seri
             this.parent = parent;
             this.offset = offset;
             this.length = length;
-            this.expected = stampOf(key);
+            // Only sublists check the stamp (see check()), so a root view skips the extra key lookup.
+            this.expected = parent == null ? 0 : stampOf(key);
         }
 
         private void check() {
