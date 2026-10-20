@@ -12,3 +12,11 @@ Those files are PRESERVED_HISTORY test oracles; no test logic or license was cha
 M3RX7, M3RX7Image and M3RX7Codec fixtures retain their existing Apache-2.0 headers.
 This notice does not relicense any protected fixture or dependent project.
 OpenRewrite, JUnit and annotations are declared Maven dependencies, not vendored code.
+
+Nullable String concat successor:
+StringConcatFactory.java.txt forward/inverse fixtures are from hsoliwal/M3jdk21
+commit2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49; original Oracle GPLv2/Classpath
+exception header is retained exactly. See LICENSE.OpenJDK. The revised existing
+jtreg test and runtime manifest retain receiving-repository provenance; this
+notice does not relicense their source. OpenRewrite Result.diff is called as an
+existing dependency API, not copied or replaced.
