@@ -50,6 +50,12 @@ import java.util.function.BiFunction;
 public final class M3EnumHashBiMap<K extends Enum<K>, V> extends AbstractMap<K, V> implements BiMap<K, V>, Serializable {
     @Serial private static final long serialVersionUID = 0L;
     private static final int[] NO_INTS = {};
+    /** One shared, never-written universe per enum class; getEnumConstants() clones on every call. */
+    private static final ClassValue<Object[]> UNIVERSES = new ClassValue<>() {
+        @Override protected Object[] computeValue(Class<?> type) {
+            return type.getEnumConstants();
+        }
+    };
 
     private transient Class<K> keyType;
     private transient K[] universe;
@@ -90,7 +96,7 @@ public final class M3EnumHashBiMap<K extends Enum<K>, V> extends AbstractMap<K, 
 
     private void init(Class<K> type) {
         keyType = Objects.requireNonNull(type);
-        universe = type.getEnumConstants();
+        universe = cast(UNIVERSES.get(type));
         vals = new Object[universe.length];
         valueHashes = new int[universe.length];
         present = new long[universe.length + 63 >>> 6];
