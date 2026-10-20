@@ -270,11 +270,9 @@ public final class M3UiInterningBench {
 			trie.flag (ids [i], M3TreePathTrie.EXPANDED, true);
 			expanded++;
 		}
-		String line = String.format ("fs-paths\tstrings\t%d\t1\t%d\t%.1f\t0\t0\t0\t0\tone String path per node
-", ROWS, trie.size (), stringKb / 1024.0)
+		String line = String.format ("fs-paths\tstrings\t%d\t1\t%d\t%.1f\t0\t0\t0\t0\tone String path per node\n", ROWS, trie.size (), stringKb / 1024.0)
 			+ String.format ("fs-paths\ttrie\t%d\t1\t%d\t%.1f\t0\t0\t0\t%d\tone int per node path, %d names pooled, %d expanded flags kept in the lane", ROWS, trie.size (), trieKb / 1024.0, internMs, pool.size (), expanded);
-		tsv.print (line + "
-");
+		tsv.print (line + "\n");
 		LOG.log (System.Logger.Level.INFO, () -> line);
 	}
 
