@@ -149,8 +149,7 @@ public final class M3FileDeltaLedger {
             byte kind = (byte) kindOf(key).ordinal();
             boolean matched = slot >= 0 && (old.state[at] & LIVE) != 0
                     && old.kinds[at] == kind && old.sizes[at] == actual.size
-                    && MessageDigest.isEqual(actual.hash,
-                            Arrays.copyOfRange(old.hashes, at * HASH_BYTES, (at + 1) * HASH_BYTES));
+                    && hashEquals(old.hashes, at * HASH_BYTES, actual.hash);
             kinds[at] = kind;
             sizes[at] = actual.size;
             System.arraycopy(actual.hash, 0, hashes, at * HASH_BYTES, HASH_BYTES);
@@ -264,6 +263,14 @@ public final class M3FileDeltaLedger {
             }
             return new Snapshot(root, paths, kinds, sizes, states, hashes, lookup);
         }
+    }
+
+    /** Compare the fixed 32-byte digest in its parent array without a temporary row copy. */
+    private static boolean hashEquals(byte[] lane, int offset, byte[] candidate) {
+        for (int i = 0; i < HASH_BYTES; i++) {
+            if (lane[offset + i] != candidate[i]) return false;
+        }
+        return true;
     }
 
     /** Open addressing over original physical row indexes; no per-file retained Entry nodes. */
