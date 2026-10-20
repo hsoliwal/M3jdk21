@@ -142,6 +142,10 @@ final class M3EnumMultisetContractTest {
         both("remove zero", m -> List.of(m.remove(A, 0), m.remove(Code.at(9), 0)));
         both("too many", m -> m.add(A, Integer.MAX_VALUE));
         both("max new", m -> List.of(m.add(Code.at(9), Integer.MAX_VALUE), m.size()));
+        both("single add past max", m -> {
+            m.add(Code.at(9), Integer.MAX_VALUE);
+            return m.add(Code.at(9));
+        });
         both("saturated size", m -> {
             m.add(Code.at(8), Integer.MAX_VALUE);
             m.add(Code.at(9), Integer.MAX_VALUE);

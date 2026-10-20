@@ -172,8 +172,18 @@ public final class M3EnumMultiset<E extends Enum<E>> extends M3EnumMultisetBase<
         return element == null || !isActuallyE(element) ? 0 : counts[((Enum<?>) element).ordinal()];
     }
 
+    /** add(element, 1) without the occurrence checks a constant 1 cannot fail. */
     @Override public boolean add(E element) {
-        add(element, 1);
+        checkIsE(element);
+        int ordinal = element.ordinal();
+        int old = counts[ordinal];
+        if (old == Integer.MAX_VALUE) { throw new IllegalArgumentException("too many occurrences: " + (old + 1L)); }
+        counts[ordinal] = old + 1;
+        total++;
+        if (old == 0) {
+            present[ordinal >>> 6] |= 1L << ordinal;
+            distinct++;
+        }
         return true;
     }
 
