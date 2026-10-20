@@ -132,11 +132,12 @@ public final class M3FileDeltaLedger {
             if ((old.state[i] & LIVE) != 0) states[i] = REMOVED;
         }
         int used = original;
+        ByteBuffer scratch = supplied.isEmpty() ? null : ByteBuffer.allocate(64 * 1024);
         for (String key : supplied) {
             int bucket = bucket(key, paths, lookup);
             int slot = lookup[bucket] - 1;
             Path target = root.resolve(key);
-            Fingerprint actual = fingerprint(root, target);
+            Fingerprint actual = fingerprint(root, target, scratch);
             if (actual == null) continue;
             if (slot < 0 && used == capacity) {
                 throw new IOException("M3File delta slot limit exceeded");
@@ -291,7 +292,7 @@ public final class M3FileDeltaLedger {
 
     private record Fingerprint(long size, byte[] hash) {}
 
-    private static Fingerprint fingerprint(Path root, Path file) throws IOException {
+    private static Fingerprint fingerprint(Path root, Path file, ByteBuffer buffer) throws IOException {
         Path cursor = root;
         for (Path element : root.relativize(file)) {
             cursor = cursor.resolve(element);
@@ -306,12 +307,17 @@ public final class M3FileDeltaLedger {
         if (!before.isRegularFile()) throw new IOException("tracked input is not a regular file");
         MessageDigest digest = sha();
         long total = 0;
-        ByteBuffer buffer = ByteBuffer.allocate(64 * 1024);
+        buffer.clear();
+        int consecutiveZeroReads = 0;
         try (SeekableByteChannel channel = M3File.of(file).openReadChannel()) {
             while (true) {
                 int read = channel.read(buffer);
                 if (read < 0) break;
-                if (read == 0) continue;
+                if (read == 0) {
+                    if (++consecutiveZeroReads > 16) throw new IOException("M3File read made no progress");
+                    continue;
+                }
+                consecutiveZeroReads = 0;
                 total = Math.addExact(total, read);
                 digest.update(buffer.flip());
                 buffer.clear();
