@@ -13,7 +13,9 @@ import java.util.Objects;
  *
  * <p>Every byte returned (or skipped: skip reads through) reaches every shadow exactly once, in order;
  * shadows {@link M3FileShadow#finish() finish} at EOF. Mark/reset is unsupported so no layer ever sees
- * a byte twice. Progress units are bytes; cancellation is checked before each transfer and surfaces as
+ * a byte twice. Invalid/zero-length responses to nonempty reads, failed callbacks, and byte-limit
+ * violations poison the stream: a later read cannot silently resume with missing shadow bytes.
+ * Progress units are bytes; cancellation is checked before each transfer and surfaces as
  * {@link java.io.InterruptedIOException}. Reading past {@code maxBytes} fails like
  * {@link M3File#readAllBytes(int)}.</p>
  */
@@ -25,6 +27,7 @@ public final class M3FileShadowInputStream extends FilterInputStream {
     private byte[] scratch;
     private long count;
     private boolean ended;
+    private boolean failed;
 
     public M3FileShadowInputStream(InputStream in, long maxBytes, M3FileProgress progress, M3FileShadow... shadows) {
         super(Objects.requireNonNull(in, "in"));
@@ -37,10 +40,7 @@ public final class M3FileShadowInputStream extends FilterInputStream {
 
     @Override
     public int read() throws IOException {
-        int n;
-        do {
-            n = read(single, 0, 1);
-        } while (n == 0);
+        int n = read(single, 0, 1);
         return n < 0 ? -1 : single[0] & 0xff;
     }
 
@@ -48,11 +48,23 @@ public final class M3FileShadowInputStream extends FilterInputStream {
     public int read(byte[] bytes, int offset, int length) throws IOException {
         Objects.checkFromIndexSize(offset, length, bytes.length);
         if (length == 0) return 0;
+        if (failed) throw new IOException("shadow stream cannot resume after a failed read");
+        if (ended) return -1;
         progress.checkCanceled();
-        int n = in.read(bytes, offset, length);
-        if (n < 0) {
+        final int n;
+        try {
+            n = in.read(bytes, offset, length);
+        } catch (IOException | RuntimeException failure) {
+            failed = true;
+            throw failure;
+        }
+        if (n == -1) {
             end();
             return -1;
+        }
+        if (n <= 0 || n > length) {
+            failed = true;
+            throw new IOException("invalid underlying input read count: " + n);
         }
         observe(bytes, offset, n);
         return n;
@@ -98,7 +110,7 @@ public final class M3FileShadowInputStream extends FilterInputStream {
         throw new IOException("mark/reset not supported: shadows see each byte once");
     }
 
-    /** Bytes read so far. */
+    /** Bytes successfully delivered to every shadow and the progress monitor. */
     public long count() {
         return count;
     }
@@ -109,15 +121,28 @@ public final class M3FileShadowInputStream extends FilterInputStream {
     }
 
     private void observe(byte[] bytes, int offset, int n) throws IOException {
+        if (n > maxBytes - count) {
+            failed = true;
+            throw new M3FileLimitException("resource exceeds configured read limit");
+        }
+        try {
+            for (M3FileShadow shadow : shadows) shadow.update(bytes, offset, n);
+            progress.worked(n);
+        } catch (RuntimeException | Error failure) {
+            failed = true;
+            throw failure;
+        }
         count += n;
-        if (count > maxBytes) throw new M3FileLimitException("resource exceeds configured read limit");
-        for (M3FileShadow shadow : shadows) shadow.update(bytes, offset, n);
-        progress.worked(n);
     }
 
     private void end() {
         if (ended) return;
+        try {
+            for (M3FileShadow shadow : shadows) shadow.finish();
+        } catch (RuntimeException | Error failure) {
+            failed = true;
+            throw failure;
+        }
         ended = true;
-        for (M3FileShadow shadow : shadows) shadow.finish();
     }
 }
