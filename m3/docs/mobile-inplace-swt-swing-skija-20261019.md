@@ -2,6 +2,19 @@
 
 Status: **source-audited migration plan; Android and iOS runtimes are NOT implemented or qualified by this change**. This file does not create a new M3 toolkit or runtime layer.
 
+## Common JNI and native platform requirement
+
+M3JDK21 MUST use the [common JNI and native platform contract](common-jni-platform-contract.md)
+for phone and other platform ports. Reuse shared JNI validation, references, thread/lifetime
+management and registration machinery; retain typed, module-owned bindings and existing symbols.
+Portable algorithms and service contracts stay common. Android, Apple-device, desktop and other
+backends implement their actual OS, runtime and original toolkit responsibilities.
+
+Build and qualify each OS/CPU/runtime/linkage profile separately. ART library compatibility,
+Apple-device native packaging and simulator compilation do not establish M3JDK21 runtime execution.
+Static JNI and an actual iOS JVM port remain valid routes subject to target proof. The common
+contract records the existing helper owners, source gaps and acceptance obligations.
+
 ## In-place product ownership
 
 | Owner | Preserve | Mobile work that remains |
