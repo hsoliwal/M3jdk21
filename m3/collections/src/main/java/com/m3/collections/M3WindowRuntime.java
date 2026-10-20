@@ -479,12 +479,7 @@ public final class M3WindowRuntime {
 		/** First range whose end is at or after <code>position</code> (ranges are sorted and disjoint). */
 		private int firstEndingAtOrAfter (int position) {
 			int low = 0, high = rangeCount;
-			while (low < high) {
-				int mid = (low + high) >>> 1;
-				if (ends [mid] < position) low = mid + 1;
-				else high = mid;
-			}
-			return low;
+			return M3LaneSearch.lowerBound(ends, low, high, position);
 		}
 
 		private boolean contains (int index) {
