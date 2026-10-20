@@ -816,8 +816,10 @@ public final class M3HfLexiconIntakeProof {
                 .filter(line -> "wordfreq-3-0-2-data".equals(splitTsv(line)[0]))
                 .findFirst().orElse("");
         require(wordfreq.contains("CC BY-SA 4.0") && wordfreq.contains("Apache-2.0")
-                && wordfreq.contains("2021") && wordfreq.contains("bare CSV"),
-                "wordfreq data/code rights, vintage and attribution constraints remain explicit");
+                && wordfreq.contains("2021") && wordfreq.contains("bare CSV")
+                && wordfreq.contains("issue #120") && wordfreq.contains("unanswered")
+                && wordfreq.contains("binary-derived"),
+                "wordfreq data/code rights, vintage and unresolved derived-list terms remain explicit");
         String reflex = lines.stream().skip(1)
                 .filter(line -> "reflex-africa-v1-0".equals(splitTsv(line)[0]))
                 .findFirst().orElse("");
