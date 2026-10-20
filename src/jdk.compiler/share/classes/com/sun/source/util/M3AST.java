@@ -12,6 +12,7 @@ package com.sun.source.util;
 
 import com.sun.source.tree.CompilationUnitTree;
 import com.sun.tools.javac.m3.M3ASTPC;
+import com.sun.tools.javac.m3.M3ASTTextFacts;
 import java.io.IOException;
 import java.net.URI;
 import java.util.Objects;
@@ -125,6 +126,85 @@ public interface M3AST extends AutoCloseable {
         }
     }
 
+    /**
+     * Fixed-size lexical geometry of one exact source range.
+     *
+     * <p>On M3JDK the values are projected from canonical M3 String facts without rescanning the
+     * range. On a stock-JDK parser qualification they are produced by the exact compatibility
+     * scanner. Signals are candidate filters only; exact String operations remain authoritative.</p>
+     */
+    record TextFacts(
+            int utf16Length,
+            int utf8Length,
+            int modifiedUtf8Length,
+            int codePointCount,
+            int unpairedSurrogateCount,
+            int javaHash,
+            int hash31Power,
+            long bitSignal64,
+            boolean ascii,
+            boolean latin1,
+            int asciiUpperHash,
+            int asciiLowerHash,
+            int asciiTitleHash,
+            long prefix4,
+            long suffix4,
+            long bigramSignal64,
+            long trigramSignal64,
+            int trimStart,
+            int trimEnd,
+            int stripStart,
+            int stripEnd,
+            long ownerStructuralHash64,
+            long coordinate,
+            boolean m3Backed,
+            boolean signalsAvailable) {
+
+        public boolean mayContainUnits(long requiredSignal64) {
+            return !signalsAvailable
+                    || (bitSignal64 & requiredSignal64) == requiredSignal64;
+        }
+
+        public boolean mayContainBigrams(long requiredSignal64) {
+            return !signalsAvailable
+                    || (bigramSignal64 & requiredSignal64) == requiredSignal64;
+        }
+
+        public boolean mayContainTrigrams(long requiredSignal64) {
+            return !signalsAvailable
+                    || (trigramSignal64 & requiredSignal64) == requiredSignal64;
+        }
+
+        private static TextFacts fromInternal(M3ASTTextFacts.Facts facts) {
+            return new TextFacts(
+                    facts.utf16Length(),
+                    facts.utf8Length(),
+                    facts.modifiedUtf8Length(),
+                    facts.codePointCount(),
+                    facts.unpairedSurrogateCount(),
+                    facts.javaHash(),
+                    facts.hash31Power(),
+                    facts.bitSignal64(),
+                    facts.ascii(),
+                    facts.latin1(),
+                    facts.asciiUpperHash(),
+                    facts.asciiLowerHash(),
+                    facts.asciiTitleHash(),
+                    facts.prefix4(),
+                    facts.suffix4(),
+                    facts.bigramSignal64(),
+                    facts.trigramSignal64(),
+                    facts.trimStart(),
+                    facts.trimEnd(),
+                    facts.stripStart(),
+                    facts.stripEnd(),
+                    facts.ownerStructuralHash64(),
+                    facts.coordinate(),
+                    facts.m3Backed(),
+                    facts.signalsAvailable());
+        }
+    }
+
     /** A scoped reference to the actual compiler tree, with lazy projections. */
     interface Unit {
         Phase phase();
@@ -136,6 +216,19 @@ public interface M3AST extends AutoCloseable {
         Object contextIdentity();
         /** Uses the exact parsed source at PARSE; later reads are checked against its source seal. */
         Source source() throws IOException;
+
+        /**
+         * Lexical facts for an exact half-open UTF-16 range of the sealed parsed source.
+         *
+         * <p>The default keeps third-party Unit implementations source-compatible. M3JDK reuses
+         * M3 String facts through the internal shared-secret; stock JDKs use the exact fallback.</p>
+         */
+        default TextFacts textFacts(int beginIndex, int endIndex) throws IOException {
+            Source retained = source();
+            return TextFacts.fromInternal(
+                    M3ASTTextFacts.of(retained.text(), beginIndex, endIndex));
+        }
+
         /**
          * Compute once per identity and event. Null and thrown exceptions are
          * memoized too. Recursive requests for the same key are refused.
