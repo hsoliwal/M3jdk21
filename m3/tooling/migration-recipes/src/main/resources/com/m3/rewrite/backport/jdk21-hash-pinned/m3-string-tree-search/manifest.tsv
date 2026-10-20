@@ -1,0 +1,4 @@
+# path	before_sha256	after_sha256	resource
+src/java.base/share/classes/java/lang/M3String.java	3048c2538f437dc612aab4af2c520fece3a7e8f3eb59aca2ac907d6307f9d0f2	245208c8346e21bb79ca51af33154e262211e5f2ab1ea8047466039be675e09d	00-M3String.java.txt
+src/java.base/share/classes/java/lang/M3StringTreeSearch.java	ABSENT	fd26b5b90a6e95f00d8eee641dfdf06b859d241989a1d9d62c9e116379ee6b15	01-M3StringTreeSearch.java.txt
+test/jdk/java/lang/String/M3StringTreeSearchTest.java	ABSENT	6d3ff3b5022880a0e66ae5a22d7dea9e0fa6f429e15e1971b5f3d85594726b37	02-M3StringTreeSearchTest.java.txt
