@@ -1,0 +1,307 @@
+/*
+ * SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
+ * SPDX-License-Identifier: Apache-2.0
+ */
+package com.m3.text;
+
+import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+/**
+ * Additional fresh-range ownership proof over actual compiled M3 implementations.
+ * The separate original 118-directory/4026-case corpus is retained unchanged.
+ * Reflection reads only the Joined leaf and cumulative-end directories.
+ */
+public final class M3JoinedFreshRangeProof {
+    private final Class<?> joinedClass;
+    private final Field leavesField;
+    private final Field endsField;
+    private int fixtures;
+    private int ranges;
+    private int nested;
+    private int freshResults;
+    private int invalidRanges;
+    private int indexRefusals;
+
+    private record Expected(StorageIdentity identity, LocalM3StringPiece.Encoding encoding,
+                            int offset, String text, int backingBytes) {
+        int length() { return text.length(); }
+    }
+
+    private record Fixture(M3StringPiece source, List<Expected> leaves) { }
+    private record Directory(LocalM3StringPiece[] leaves, int[] ends) { }
+
+    private M3JoinedFreshRangeProof() throws ReflectiveOperationException {
+        joinedClass = M3StringPiece.join().getClass();
+        leavesField = joinedClass.getDeclaredField("leaves");
+        endsField = joinedClass.getDeclaredField("ends");
+        leavesField.setAccessible(true);
+        endsField.setAccessible(true);
+    }
+
+    /** Invoked by the SDK after compiling and loading each actual emitted cohort. */
+    public static String run() {
+        try {
+            return new M3JoinedFreshRangeProof().prove();
+        } catch (ReflectiveOperationException failure) {
+            throw new AssertionError("joined directory reflection contract", failure);
+        }
+    }
+
+    private static void require(boolean condition, String message) {
+        if (!condition) throw new AssertionError(message);
+    }
+
+    private Directory directory(M3StringPiece piece) throws IllegalAccessException {
+        require(piece.getClass() == joinedClass, "Joined result required");
+        Object leaves = leavesField.get(piece), ends = endsField.get(piece);
+        require(leaves instanceof LocalM3StringPiece[], "flat Local directory required");
+        require(ends instanceof int[], "cumulative directory required");
+        return new Directory((LocalM3StringPiece[]) leaves, (int[]) ends);
+    }
+
+    private static Expected expected(LocalM3StringPiece leaf, String text) {
+        require(leaf.length() == text.length(), "fixture length mismatch");
+        return new Expected(leaf.storageIdentity(), leaf.encoding(), leaf.codeUnitOffset(),
+                text, leaf.retainedBackingBytes());
+    }
+
+    private static String text(List<Expected> leaves) {
+        StringBuilder out = new StringBuilder();
+        for (Expected leaf : leaves) out.append(leaf.text());
+        return out.toString();
+    }
+
+    /** Independent linear range oracle over explicit fixture coordinates and Java text. */
+    private static List<Expected> cut(List<Expected> leaves, int from, int to) {
+        List<Expected> out = new ArrayList<>();
+        int origin = 0;
+        for (Expected leaf : leaves) {
+            int end = origin + leaf.length();
+            int a = Math.max(from, origin), b = Math.min(to, end);
+            if (a < b) {
+                int offset = a - origin;
+                out.add(new Expected(leaf.identity(), leaf.encoding(), leaf.offset() + offset,
+                        leaf.text().substring(offset, b - origin), leaf.backingBytes()));
+            }
+            origin = end;
+        }
+        return List.copyOf(out);
+    }
+
+    private static Map<StorageIdentity, Integer> owners(List<Expected> leaves) {
+        Map<StorageIdentity, Integer> out = new HashMap<>();
+        for (Expected leaf : leaves) {
+            Integer previous = out.putIfAbsent(leaf.identity(), leaf.backingBytes());
+            require(previous == null || previous.intValue() == leaf.backingBytes(),
+                    "fixture backing identity mismatch");
+        }
+        return out;
+    }
+
+    private static long payload(Map<StorageIdentity, Integer> owners) {
+        long total = 0;
+        for (int bytes : owners.values()) total += bytes;
+        return total;
+    }
+
+    /**
+     * Complete directory/coordinate validation precedes every read of result characters.
+     * Prefix sums use the independent expected lengths, rather than the observed ends.
+     */
+    private void structural(M3StringPiece piece, Directory observed, List<Expected> expected) {
+        require(observed.leaves().length == expected.size(), "flat leaf count mismatch");
+        require(observed.ends().length == expected.size(), "directory lengths mismatch");
+        int units = 0;
+        Map<StorageIdentity, Integer> actualOwners = new HashMap<>();
+        for (int i = 0; i < expected.size(); i++) {
+            LocalM3StringPiece actual = observed.leaves()[i];
+            Expected want = expected.get(i);
+            require(actual != null && actual.length() > 0, "nonempty flat Local leaf required");
+            require(actual.length() == want.length(), "leaf range length mismatch");
+            units += want.length();
+            require(observed.ends()[i] == units, "cumulative ends mismatch");
+            require(i == 0 || observed.ends()[i - 1] < observed.ends()[i],
+                    "cumulative ends not increasing");
+            require(actual.storageIdentity().equals(want.identity()), "backing owner changed");
+            require(actual.encoding() == want.encoding(), "backing encoding changed");
+            require(actual.codeUnitOffset() == want.offset(), "backing coordinates changed");
+            require(actual.retainedBackingBytes() == want.backingBytes(), "backing payload changed");
+            Integer previous = actualOwners.putIfAbsent(actual.storageIdentity(),
+                    actual.retainedBackingBytes());
+            require(previous == null || previous.intValue() == actual.retainedBackingBytes(),
+                    "one backing identity has different payloads");
+        }
+        require(piece.length() == units, "joined length mismatch");
+        Map<StorageIdentity, Integer> expectedOwners = owners(expected);
+        require(actualOwners.equals(expectedOwners), "touched backing owner set mismatch");
+        require(payload(actualOwners) == payload(expectedOwners), "deduplicated backing payload mismatch");
+    }
+
+    private static void freshHandles(Directory result, Directory source) {
+        require(result.leaves() != source.leaves(), "fresh leaves array required");
+        require(result.ends() != source.ends(), "fresh ends array required");
+        for (LocalM3StringPiece leaf : result.leaves()) {
+            for (LocalM3StringPiece original : source.leaves()) {
+                require(leaf != original, "fresh Local range handle required");
+            }
+        }
+    }
+
+    private void indexRefusal(Runnable action) {
+        try {
+            action.run();
+        } catch (IndexOutOfBoundsException expected) {
+            indexRefusals++;
+            return;
+        }
+        throw new AssertionError("invalid character index accepted");
+    }
+
+    private void characters(M3StringPiece piece, Directory observed, List<Expected> expected) {
+        String want = text(expected);
+        for (int i = 0; i < want.length(); i++) {
+            require(piece.charAt(i) == want.charAt(i), "joined UTF16 code unit mismatch");
+        }
+        require(piece.flatten().equals(want), "flattened UTF16 text mismatch");
+        require(piece.toString().equals(want), "String conversion mismatch");
+        for (int i = 0; i < expected.size(); i++) {
+            LocalM3StringPiece leaf = observed.leaves()[i];
+            String value = expected.get(i).text();
+            for (int at = 0; at < value.length(); at++) {
+                require(leaf.charAt(at) == value.charAt(at), "Local UTF16 code unit mismatch");
+            }
+        }
+        indexRefusal(() -> piece.charAt(-1));
+        indexRefusal(() -> piece.charAt(piece.length()));
+    }
+
+    private M3StringPiece checkedRange(M3StringPiece source, List<Expected> sourceExpected,
+                                      int from, int to) throws IllegalAccessException {
+        Directory input = directory(source);
+        List<Expected> want = cut(sourceExpected, from, to);
+        M3StringPiece first = source.subSequence(from, to);
+        M3StringPiece second = source.subSequence(from, to);
+        require(first != source && second != source && first != second,
+                "fresh joined result required");
+        Directory a = directory(first), b = directory(second);
+        structural(first, a, want);
+        structural(second, b, want);
+        freshHandles(a, input);
+        freshHandles(b, input);
+        freshHandles(a, b);
+        characters(first, a, want);
+        characters(second, b, want);
+        freshResults += 2;
+        return first;
+    }
+
+    private void rangeRefusal(M3StringPiece source, int from, int to) {
+        try {
+            source.subSequence(from, to);
+        } catch (IndexOutOfBoundsException expected) {
+            invalidRanges++;
+            return;
+        }
+        throw new AssertionError("invalid range accepted");
+    }
+
+    private void fixture(Fixture fixture) throws IllegalAccessException {
+        M3StringPiece source = fixture.source();
+        List<Expected> expected = fixture.leaves();
+        Directory original = directory(source);
+        structural(source, original, expected);
+        characters(source, original, expected);
+        int length = text(expected).length();
+        for (int from = 0; from <= length; from++) {
+            for (int to = from; to <= length; to++) {
+                M3StringPiece result = checkedRange(source, expected, from, to);
+                ranges++;
+                List<Expected> selected = cut(expected, from, to);
+                int innerFrom = (to - from) / 3;
+                int innerTo = (to - from) - innerFrom;
+                checkedRange(result, selected, innerFrom, innerTo);
+                nested++;
+            }
+        }
+        rangeRefusal(source, -1, 0);
+        rangeRefusal(source, 0, length + 1);
+        rangeRefusal(source, 1, 0);
+        rangeRefusal(source, Integer.MIN_VALUE, Integer.MAX_VALUE);
+        rangeRefusal(source, Integer.MAX_VALUE, Integer.MAX_VALUE);
+        // Reading and slicing must not alter the source directory or its public contents.
+        Directory after = directory(source);
+        require(after.leaves() == original.leaves() && after.ends() == original.ends(),
+                "source directory identity changed");
+        structural(source, after, expected);
+        fixtures++;
+    }
+
+    private String prove() throws IllegalAccessException {
+        LocalM3Arena arena = new LocalM3Arena();
+        LocalM3Arena other = new LocalM3Arena();
+        char[] unicode = {'[', (char) 0xd83d, (char) 0xde03, (char) 0xd800,
+                          'x', (char) 0xdc00, (char) 0, (char) 0xffff, ']'};
+        String unicodeText = new String(unicode);
+        LocalM3StringPiece whole = arena.copyUtf16(unicode);
+        unicode[1] = 'q';
+        LocalM3StringPiece unicodeRange = whole.subSequence(1, 8);
+        LocalM3StringPiece repeatedRange = whole.subSequence(3, 6);
+        LocalM3StringPiece latin = arena.copyLatin1(new byte[]{(byte) 0xfe, 0, 65,
+                                                            (byte) 0x80, (byte) 0xff, 66});
+        LocalM3StringPiece latinRange = latin.subSequence(1, 5);
+        LocalM3StringPiece music = other.copyUtf16(new char[]{'X', (char) 0xd834,
+                                                            (char) 0xdd1e, 'Y'});
+        LocalM3StringPiece musicRange = music.subSequence(1, 3);
+        LocalM3StringPiece unrelated = other.copyLatin1(new byte[]{9, 8, 7});
+        LocalM3StringPiece empty = whole.subSequence(2, 2);
+        LocalM3StringPiece emptyLatin = latin.subSequence(3, 3);
+        Expected u = expected(unicodeRange, unicodeText.substring(1, 8));
+        Expected r = expected(repeatedRange, unicodeText.substring(3, 6));
+        Expected l = expected(latinRange, new String(new char[]{0, 'A', (char) 0x80, (char) 0xff}));
+        Expected v = expected(musicRange, new String(new char[]{(char) 0xd834, (char) 0xdd1e}));
+        Expected z = expected(unrelated, new String(new char[]{9, 8, 7}));
+
+        M3StringPiece emptyJoined = M3StringPiece.join(empty, M3StringPiece.join(), emptyLatin);
+        fixture(new Fixture(emptyJoined, List.of()));
+
+        M3StringPiece repeated = M3StringPiece.join(unicodeRange, empty, repeatedRange);
+        require(u.identity().equals(r.identity()), "repeated-owner fixture required");
+        require(payload(owners(List.of(u, r))) == whole.retainedBackingBytes(),
+                "repeated-owner payload must count once");
+        fixture(new Fixture(repeated, List.of(u, r)));
+
+        M3StringPiece mixed = M3StringPiece.join(
+                M3StringPiece.join(latinRange, empty, unicodeRange),
+                M3StringPiece.join(), M3StringPiece.join(musicRange, emptyLatin),
+                unrelated, repeatedRange);
+        List<Expected> mixedExpected = List.of(l, u, v, z, r);
+        require(owners(mixedExpected).size() == 4, "mixed owner fixture required");
+        fixture(new Fixture(mixed, mixedExpected));
+
+        M3StringPiece[] caller = new LocalM3StringPiece[]{latinRange, repeatedRange, empty};
+        M3StringPiece snapshot = M3StringPiece.join(caller);
+        caller[0] = unrelated;
+        caller[1] = empty;
+        caller[2] = musicRange;
+        require(directory(snapshot).leaves() != caller, "caller array retained");
+        fixture(new Fixture(snapshot, List.of(l, r)));
+
+        M3StringPiece inner = mixed.subSequence(2, 17);
+        LocalM3StringPiece small = repeatedRange.subSequence(1, 2);
+        List<Expected> nestedExpected = new ArrayList<>(cut(mixedExpected, 2, 17));
+        nestedExpected.addAll(cut(List.of(r), 1, 2));
+        M3StringPiece nestedJoin = M3StringPiece.join(
+                inner, M3StringPiece.join(empty, small, emptyLatin), M3StringPiece.join());
+        fixture(new Fixture(nestedJoin, List.copyOf(nestedExpected)));
+
+        require(fixtures == 5 && ranges == 466 && nested == 466 && freshResults == 1864,
+                "fresh range case census mismatch");
+        require(invalidRanges == 25 && indexRefusals == 3738, "refusal census mismatch");
+        return "JOINED_FRESH_RANGE_PASS fixtures=5 ranges=466 nested=466 freshResults=1864"
+                + " invalidRanges=25 indexRefusals=3738 aliasMutations=3";
+    }
+}

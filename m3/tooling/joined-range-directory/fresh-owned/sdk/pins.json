@@ -1,0 +1,215 @@
+{
+  "schema": "M3_JOINED_FRESH_OWNED_RANGE_SDK_INPUTS_V1",
+  "admissionCommit": "80253b14a14191ad826a5c7c7594100c7c3c588a",
+  "sourceOnly": true,
+  "providers": {
+    "openrewriteAdapter": "1c1b1b568d369f688f6953161636bf36b484bf5a",
+    "manifestKernel": "38df5f97bbeec8a8a8cfc77091d56bda925c07f2"
+  },
+  "files": [
+    {
+      "path": "FOSS_REUSE_DECISION.tsv",
+      "gitBlob": "39e6a213f1e03b491a7dfbaa4f4cf3d8b397bc65",
+      "bytes": 1564,
+      "sha256": "e8104b89f703ef35bc726bb1000744e2a80b8a0bf4196853251243d115db3c53"
+    },
+    {
+      "path": "README.md",
+      "gitBlob": "04d4034742a583784f118541b275d45bcdde0f1c",
+      "bytes": 2959,
+      "sha256": "8061a80a44e09f7749bdd33ae32abee22accac7d5c95685e0e52d5a46d7f5bd1"
+    },
+    {
+      "path": "THIRD_PARTY_NOTICES.md",
+      "gitBlob": "e33a0ce6c98280a816dbb51413d358628c680453",
+      "bytes": 1383,
+      "sha256": "8471c914183472440b5e91f887efd2b061a512e2516442e007bf2513efdc5b03"
+    },
+    {
+      "path": "pinned-engine/com/synexia/rewrite/M3GpuToolJoinManifest.java",
+      "gitBlob": "38df5f97bbeec8a8a8cfc77091d56bda925c07f2",
+      "bytes": 10964,
+      "sha256": "56bd61be29eae76b3f468519677424450448751d94ca032956b330d7b3dd1999"
+    },
+    {
+      "path": "pinned-engine/com/synexia/rewrite/M3GpuToolJoinRecipe.java",
+      "gitBlob": "1c1b1b568d369f688f6953161636bf36b484bf5a",
+      "bytes": 5187,
+      "sha256": "ee90a2b8689699745553c2f4d2d07121b91777f4e9a671fdb33ba8edea0c14ec"
+    },
+    {
+      "path": "pinned-engine/com/synexia/rewrite/M3JoinedRangeDirectoryInverseRecipe.java",
+      "gitBlob": "0fbb61ead7047e0b2ab0627bd381967113d99db1",
+      "bytes": 766,
+      "sha256": "3a621135ee30d294cb86539604e245684084dc11f4fb44be0129c3f3214120f7"
+    },
+    {
+      "path": "pinned-engine/com/synexia/rewrite/M3JoinedRangeDirectoryRecipe.java",
+      "gitBlob": "f1bafb2c8e156e2a0ad8479d3996bf139a6977df",
+      "bytes": 755,
+      "sha256": "75ea82b2c12b7680c7dbd61f6334b053522f918a72045b61e03be408409f2600"
+    },
+    {
+      "path": "pom.xml",
+      "gitBlob": "d79867bcc09ad6329e12418e15907e54b8ab025f",
+      "bytes": 2678,
+      "sha256": "f0ab99c3dafb38e82f8e5fd4c6d22db07831808c251c4622f292114c83e6673e"
+    },
+    {
+      "path": "src/main/resources/META-INF/rewrite/joined-range-directory-20261020.yml",
+      "gitBlob": "e1c6c89d97f90f16a7f3a6660f3f86b6e36340b0",
+      "bytes": 698,
+      "sha256": "632f935ee7bc550dd3814ea3d0cb3d18cb0b74216fd65bfe274313e5f22a3f72"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/joined-range-directory-20261020/forward/before/m3/core/src/com/m3/text/JoinedM3StringPiece.java",
+      "gitBlob": "3edc23c22362b08af00f7332ddc445a0274a6dd4",
+      "bytes": 2919,
+      "sha256": "10ddd082c142420c29985a85d8b2f77507fdbcde2552b8bfc154e658f3b2a9e3"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/joined-range-directory-20261020/forward/before/m3/core/src/com/m3/text/LocalM3Arena.java",
+      "gitBlob": "d82710cd1a49b54d92afcd74cdd903cd009766ba",
+      "bytes": 1975,
+      "sha256": "99e6adce8be83bf6ebbe2128409e4f34cff88e0d06602c95e21f64a27898b73d"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/joined-range-directory-20261020/forward/before/m3/core/src/com/m3/text/LocalM3StringPiece.java",
+      "gitBlob": "6b745c9472144ad6de01de4d06a533974e558fb1",
+      "bytes": 2115,
+      "sha256": "06370c193953ead287f6fd6c423e12bd7761da8bf1c825dacd7445afe1876b51"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/joined-range-directory-20261020/forward/before/m3/core/src/com/m3/text/M3StringPiece.java",
+      "gitBlob": "99cb72623fa6bc2d5426553e04aaf0e5bfa993cc",
+      "bytes": 767,
+      "sha256": "d43e66b414d96ba4b16b8cc94f64fa5a01c2dcb350ad58050105b04996486479"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/joined-range-directory-20261020/forward/before/m3/core/src/com/m3/text/StorageIdentity.java",
+      "gitBlob": "7f0a0bb63d38a0a6efbe08f37249dd3e258eb35a",
+      "bytes": 494,
+      "sha256": "b1e4fcbd385adc7c01c56d0f6a6af63d42ef0e6fa75b46d66d8d75c64c7a6417"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/joined-range-directory-20261020/forward/manifest.tsv",
+      "gitBlob": "87a12624563e4c8af45ac7ea4a82efd90f9d59a4",
+      "bytes": 950,
+      "sha256": "13541b4fc43566e2c84ed77e6e38a114fa0a7cb5a26ffaffd7256cdd12fe2ca4"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/joined-range-directory-20261020/forward/out/m3/core/src/com/m3/text/JoinedM3StringPiece.java",
+      "gitBlob": "4f88f794266375ad8174fa56e952c30d32689877",
+      "bytes": 3377,
+      "sha256": "d69ef5cc0e4bd5d95808978b4a0d73982322230a623d897074840b58fab1993e"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/joined-range-directory-20261020/forward/out/m3/core/src/com/m3/text/LocalM3Arena.java",
+      "gitBlob": "d82710cd1a49b54d92afcd74cdd903cd009766ba",
+      "bytes": 1975,
+      "sha256": "99e6adce8be83bf6ebbe2128409e4f34cff88e0d06602c95e21f64a27898b73d"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/joined-range-directory-20261020/forward/out/m3/core/src/com/m3/text/LocalM3StringPiece.java",
+      "gitBlob": "6b745c9472144ad6de01de4d06a533974e558fb1",
+      "bytes": 2115,
+      "sha256": "06370c193953ead287f6fd6c423e12bd7761da8bf1c825dacd7445afe1876b51"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/joined-range-directory-20261020/forward/out/m3/core/src/com/m3/text/M3StringPiece.java",
+      "gitBlob": "99cb72623fa6bc2d5426553e04aaf0e5bfa993cc",
+      "bytes": 767,
+      "sha256": "d43e66b414d96ba4b16b8cc94f64fa5a01c2dcb350ad58050105b04996486479"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/joined-range-directory-20261020/forward/out/m3/core/src/com/m3/text/StorageIdentity.java",
+      "gitBlob": "7f0a0bb63d38a0a6efbe08f37249dd3e258eb35a",
+      "bytes": 494,
+      "sha256": "b1e4fcbd385adc7c01c56d0f6a6af63d42ef0e6fa75b46d66d8d75c64c7a6417"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/joined-range-directory-20261020/inverse/before/m3/core/src/com/m3/text/JoinedM3StringPiece.java",
+      "gitBlob": "4f88f794266375ad8174fa56e952c30d32689877",
+      "bytes": 3377,
+      "sha256": "d69ef5cc0e4bd5d95808978b4a0d73982322230a623d897074840b58fab1993e"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/joined-range-directory-20261020/inverse/before/m3/core/src/com/m3/text/LocalM3Arena.java",
+      "gitBlob": "d82710cd1a49b54d92afcd74cdd903cd009766ba",
+      "bytes": 1975,
+      "sha256": "99e6adce8be83bf6ebbe2128409e4f34cff88e0d06602c95e21f64a27898b73d"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/joined-range-directory-20261020/inverse/before/m3/core/src/com/m3/text/LocalM3StringPiece.java",
+      "gitBlob": "6b745c9472144ad6de01de4d06a533974e558fb1",
+      "bytes": 2115,
+      "sha256": "06370c193953ead287f6fd6c423e12bd7761da8bf1c825dacd7445afe1876b51"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/joined-range-directory-20261020/inverse/before/m3/core/src/com/m3/text/M3StringPiece.java",
+      "gitBlob": "99cb72623fa6bc2d5426553e04aaf0e5bfa993cc",
+      "bytes": 767,
+      "sha256": "d43e66b414d96ba4b16b8cc94f64fa5a01c2dcb350ad58050105b04996486479"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/joined-range-directory-20261020/inverse/before/m3/core/src/com/m3/text/StorageIdentity.java",
+      "gitBlob": "7f0a0bb63d38a0a6efbe08f37249dd3e258eb35a",
+      "bytes": 494,
+      "sha256": "b1e4fcbd385adc7c01c56d0f6a6af63d42ef0e6fa75b46d66d8d75c64c7a6417"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/joined-range-directory-20261020/inverse/manifest.tsv",
+      "gitBlob": "3f1f1fc694c4dd28cdbac948b7f639d87a8cf708",
+      "bytes": 950,
+      "sha256": "90c2fdfebb9c2d3997515bb0d5f75ad2f3c7a25202e14b5f372501068491bf74"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/joined-range-directory-20261020/inverse/out/m3/core/src/com/m3/text/JoinedM3StringPiece.java",
+      "gitBlob": "3edc23c22362b08af00f7332ddc445a0274a6dd4",
+      "bytes": 2919,
+      "sha256": "10ddd082c142420c29985a85d8b2f77507fdbcde2552b8bfc154e658f3b2a9e3"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/joined-range-directory-20261020/inverse/out/m3/core/src/com/m3/text/LocalM3Arena.java",
+      "gitBlob": "d82710cd1a49b54d92afcd74cdd903cd009766ba",
+      "bytes": 1975,
+      "sha256": "99e6adce8be83bf6ebbe2128409e4f34cff88e0d06602c95e21f64a27898b73d"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/joined-range-directory-20261020/inverse/out/m3/core/src/com/m3/text/LocalM3StringPiece.java",
+      "gitBlob": "6b745c9472144ad6de01de4d06a533974e558fb1",
+      "bytes": 2115,
+      "sha256": "06370c193953ead287f6fd6c423e12bd7761da8bf1c825dacd7445afe1876b51"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/joined-range-directory-20261020/inverse/out/m3/core/src/com/m3/text/M3StringPiece.java",
+      "gitBlob": "99cb72623fa6bc2d5426553e04aaf0e5bfa993cc",
+      "bytes": 767,
+      "sha256": "d43e66b414d96ba4b16b8cc94f64fa5a01c2dcb350ad58050105b04996486479"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/joined-range-directory-20261020/inverse/out/m3/core/src/com/m3/text/StorageIdentity.java",
+      "gitBlob": "7f0a0bb63d38a0a6efbe08f37249dd3e258eb35a",
+      "bytes": 494,
+      "sha256": "b1e4fcbd385adc7c01c56d0f6a6af63d42ef0e6fa75b46d66d8d75c64c7a6417"
+    },
+    {
+      "path": "src/test/java/com/synexia/rewrite/M3JoinedRangeDirectoryRecipeTest.java",
+      "gitBlob": "73471b80d618b4ab2b016d097459dd5cb390ef93",
+      "bytes": 22058,
+      "sha256": "a36dd62e6d2cb03614473e90e77298971bb8203eeeefcf1f11689f3d128ec61f"
+    },
+    {
+      "path": "src/test/resources/com/synexia/rewrite/joined-range-directory-20261020/proof/M3JoinedFreshRangeProof.java.txt",
+      "gitBlob": "fa35d3170995ad74f6d7363d6e3fe85dd0b2449c",
+      "bytes": 14816,
+      "sha256": "8194f210675ff2da605989cf885687549a77ac6037757ac0a8fabcea307cee1f"
+    },
+    {
+      "path": "verify.py",
+      "gitBlob": "40c2e4a35315e953500ec3a3942bdc584db2f2b7",
+      "bytes": 25785,
+      "sha256": "b1cf55f585929b49f6ffeea0f4e5c93314c0e1bf3e89976c1ddc95fa070236d3"
+    }
+  ]
+}

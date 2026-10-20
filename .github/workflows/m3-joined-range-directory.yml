@@ -123,12 +123,16 @@ jobs:
         run: |
           set -euo pipefail
           python3 -I -S -B - <<'PY'
-          import errno,hashlib,json,os,pathlib,re,shutil,signal,subprocess,time
+          import errno,hashlib,json,os,pathlib,re,runpy,shutil,signal,subprocess,time
           reserve,cap=8*1024**3,512*1024**2
           root=pathlib.Path(os.environ["M3_PROOF_ROOT"])
           source=pathlib.Path(os.environ["M3_SOURCE_ROOT"])
           bundle=root/"artifacts";bundle.mkdir(exist_ok=False)
           sdk=source/"m3/tooling/joined-range-directory/sdk"
+          fresh_qualifier=source/"m3/tooling/joined-range-directory/fresh-owned/qualify.py"
+          fresh_sdk=fresh_qualifier.parent/"sdk"
+          fresh_root=root/"joined-fresh-owned";fresh_root.mkdir(exist_ok=False)
+          fresh_outer=fresh_root/"outer";fresh_outer.mkdir(exist_ok=False)
           start=time.monotonic()
           active_command=None
           class CensusRescan(RuntimeError):pass
@@ -137,13 +141,24 @@ jobs:
               if error.errno==errno.ENOENT and error.filename:
                   missing=pathlib.Path(error.filename)
                   temporary=root/"tmp"
-                  if active_command in ("sdk-inputs","sdk-maven","native-proof","range-runtime") and temporary in missing.parents:
+                  if active_command in ("sdk-inputs","sdk-maven","native-proof","range-runtime","fresh-sdk-inputs","fresh-sdk-maven","fresh-runtime") and temporary in missing.parents:
                       allowed=True
                   if active_command in ("sdk-inputs","sdk-maven"):
                       target=sdk/"target"
                       if target in missing.parents:
                           child=missing.relative_to(target).parts[0]
                           if re.fullmatch(r"tmp[a-z0-9_]{8}",child):allowed=True
+                  if active_command in ("fresh-sdk-inputs","fresh-sdk-maven"):
+                      target=fresh_sdk/"target"
+                      if target in missing.parents:
+                          child=missing.relative_to(target).parts[0]
+                          if re.fullmatch(r"tmp[a-z0-9_]{8}",child):allowed=True
+                  if active_command == "fresh-runtime":
+                      for cohort in ("original-product","qualified-range","fresh-owned"):
+                          build=fresh_root/"runtime"/cohort/"m3/build"
+                          if build in missing.parents:
+                              child=missing.relative_to(build).parts[0]
+                              if re.fullmatch(r"lexicon\.[A-Za-z0-9]{6}",child):allowed=True
                   if active_command == "range-runtime":
                       for cohort in ("baseline","candidate"):
                           build=root/"joined-range-runtime"/cohort/"m3/build"
@@ -153,6 +168,7 @@ jobs:
               if allowed:raise CensusRescan("owned SDK temporary directory disappeared") from error
               raise RuntimeError("storage census failed: "+str(error)) from error
           def gate(limit=480*1024**2):
+              if time.monotonic()-start>1500:raise RuntimeError("global deadline during storage/evidence collection")
               for attempt in range(3):
                   used=0
                   try:
@@ -193,9 +209,14 @@ jobs:
                            "baseline-lexicon":root/"joined-range-runtime/baseline/m3/build/lexicon.abc123/child",
                            "candidate-lexicon":root/"joined-range-runtime/candidate/m3/build/lexicon.abc123/child",
                            "ordinary-build":root/"joined-range-runtime/baseline/m3/build/classes/child",
+                           "fresh-sdk":fresh_sdk/"target/tmpabcdefgh/child",
+                           "fresh-original-lexicon":fresh_root/"runtime/original-product/m3/build/lexicon.abc123/child",
+                           "fresh-qualified-lexicon":fresh_root/"runtime/qualified-range/m3/build/lexicon.abc123/child",
+                           "fresh-owned-lexicon":fresh_root/"runtime/fresh-owned/m3/build/lexicon.abc123/child",
+                           "fresh-ordinary-build":fresh_root/"runtime/fresh-owned/m3/build/classes/child",
                            "m2":root/"m2/missing-directory","source":sdk/"pinned-engine/missing-directory",
                            "target":sdk/"target/classes/missing-directory"}.get(kind,source/"ordinary-output")
-                  owner=pathlib.Path(os.environ["RUNNER_TEMP"]) if kind in ("tmp","m2","baseline-lexicon","candidate-lexicon","ordinary-build") else source
+                  owner=pathlib.Path(os.environ["RUNNER_TEMP"]) if kind in ("tmp","m2","baseline-lexicon","candidate-lexicon","ordinary-build","fresh-original-lexicon","fresh-qualified-lexicon","fresh-owned-lexicon","fresh-ordinary-build") else source
                   def walk(base,**options):
                       if pathlib.Path(base)!=owner:return iter(())
                       counts["walks"]=counts["walks"]+1
@@ -203,7 +224,7 @@ jobs:
                   def lstat(path):
                       counts["stats"]=counts["stats"]+1
                       if kind=="permission":raise PermissionError(errno.EACCES,"denied",str(path))
-                      if kind=="file" or kind in ("sdk","tmp","m2","source","target","baseline-lexicon","candidate-lexicon","ordinary-build") and (repeat or counts["stats"]==1):
+                      if kind=="file" or kind in ("sdk","tmp","m2","source","target","baseline-lexicon","candidate-lexicon","ordinary-build","fresh-sdk","fresh-original-lexicon","fresh-qualified-lexicon","fresh-owned-lexicon","fresh-ordinary-build") and (repeat or counts["stats"]==1):
                           raise FileNotFoundError(errno.ENOENT,"gone",str(path))
                       return SimpleNamespace(st_size=size,st_blocks=0)
                   free=reserve+cap if available is None else available
@@ -219,7 +240,7 @@ jobs:
                           if expected is None or expected not in str(error):raise AssertionError(name+" rejected incorrectly") from error
                       else:
                           if expected is not None:raise AssertionError(name+" unexpectedly admitted")
-                  if name in ("sdk-selftest-rescan","owned-java-temp-rescan","range-java-temp-rescan","baseline-lexicon-rescan","candidate-lexicon-rescan") and counts["walks"]!=2:raise AssertionError("complete census did not restart")
+                  if name.endswith("-rescan") and counts["walks"]!=2:raise AssertionError("complete census did not restart")
                   if name=="three-rescan-bound" and counts["walks"]!=3:raise AssertionError("census retry bound changed")
                   cases.append(name)
               try:
@@ -245,6 +266,30 @@ jobs:
               receipt={"schema":"M3_JOINED_RANGE_DIRECTORY_STORAGE_GUARD_DISCRIMINATORS_V1","tests":len(cases),"failures":0,"cases":cases,"scope":"SAME_INLINE_GATE_WITH_MOCKED_METADATA_NO_REAL_TARGET_MUTATION"}
               (bundle/"storage-guard-receipt.json").write_text(json.dumps(receipt,indent=2)+"\n",encoding="utf-8")
               print("PASS: sixteen actual-inline mocked storage guard discriminators")
+              legacy_cases=list(cases)
+              try:
+                  exercise("fresh-sdk-selftest-rescan","fresh-sdk",phase="fresh-sdk-inputs")
+                  exercise("fresh-sdk-maven-rescan","fresh-sdk",phase="fresh-sdk-maven")
+                  exercise("fresh-shared-inputs-rescan","tmp",phase="fresh-sdk-inputs")
+                  exercise("fresh-shared-maven-rescan","tmp",phase="fresh-sdk-maven")
+                  exercise("fresh-shared-runtime-rescan","tmp",phase="fresh-runtime")
+                  exercise("fresh-original-lexicon-rescan","fresh-original-lexicon",phase="fresh-runtime")
+                  exercise("fresh-qualified-lexicon-rescan","fresh-qualified-lexicon",phase="fresh-runtime")
+                  exercise("fresh-owned-lexicon-rescan","fresh-owned-lexicon",phase="fresh-runtime")
+                  exercise("old-sdk-in-fresh-phase-refused","sdk",phase="fresh-sdk-inputs",expected="storage census failed")
+                  exercise("fresh-sdk-in-old-phase-refused","fresh-sdk",phase="sdk-inputs",expected="storage census failed")
+                  exercise("old-lexicon-in-fresh-phase-refused","baseline-lexicon",phase="fresh-runtime",expected="storage census failed")
+                  exercise("fresh-lexicon-in-old-phase-refused","fresh-original-lexicon",phase="range-runtime",expected="storage census failed")
+                  exercise("fresh-sdk-in-binding-refused","fresh-sdk",phase="fresh-binding",expected="storage census failed")
+                  exercise("fresh-lexicon-in-maven-refused","fresh-owned-lexicon",phase="fresh-sdk-maven",expected="storage census failed")
+                  exercise("fresh-ordinary-build-refused","fresh-ordinary-build",phase="fresh-runtime",expected="storage census failed")
+                  exercise("fresh-m2-refused","m2",phase="fresh-runtime",expected="storage census failed")
+              finally:active_command=previous_command
+              if len(cases)!=32 or cases[:16]!=legacy_cases:raise RuntimeError("preserve sixteen legacy plus sixteen fresh storage controls")
+              gate()
+              fresh_receipt={"schema":"M3_JOINED_FRESH_STORAGE_GUARD_DISCRIMINATORS_V1","tests":len(cases),"legacyControls":16,"freshControls":16,"failures":0,"cases":cases,"controllerEnvironmentControls":collector_env_controls,"scope":"SAME_INLINE_GATE_WITH_MOCKED_METADATA_NO_REAL_TARGET_MUTATION"}
+              (fresh_root/"storage-guard-receipt.json").write_text(json.dumps(fresh_receipt,indent=2)+"\n",encoding="utf-8")
+              print("PASS: all sixteen legacy and sixteen fresh storage guard discriminators")
           def getgit(*args):
               return subprocess.check_output(["git",*args],cwd=source,text=True,timeout=15).strip()
           gate()
@@ -254,7 +299,40 @@ jobs:
           for name in list(env):
               if name in ("GITHUB_TOKEN","GH_TOKEN","CLASSPATH") or name.startswith(("PIP_","PYTHON","MAVEN_","JAVA_TOOL_OPTIONS","JDK_JAVA_OPTIONS")):env.pop(name,None)
           env.update(M3_QUALIFICATION_ROOT=str(root),HOME=str(root/"home"),USERPROFILE=str(root/"home"),MAVEN_USER_HOME=str(root/"home/.m2"),TMPDIR=str(root/"tmp"),TEMP=str(root/"tmp"),TMP=str(root/"tmp"),JAVA_HOME=os.environ["M3_JAVA_HOME"],PATH=os.environ["M3_PYTHON_BIN"]+os.pathsep+os.environ["M3_JAVA_HOME"]+"/bin"+os.pathsep+env["PATH"],MAVEN_OPTS="-Xmx512m -Dfile.encoding=UTF-8 -Djava.io.tmpdir="+str(root/"tmp")+" -Duser.home="+str(root/"home"),JAVA_TOOL_OPTIONS="-Dfile.encoding=UTF-8 -Djava.io.tmpdir="+str(root/"tmp")+" -Duser.home="+str(root/"home")+" -XX:+PerfDisableSharedMem",PIP_CONFIG_FILE=os.devnull,PIP_DISABLE_PIP_VERSION_CHECK="1",PIP_NO_CACHE_DIR="1",PYTHONDONTWRITEBYTECODE="1",GIT_OPTIONAL_LOCKS="0",GIT_NO_LAZY_FETCH="1",GIT_TERMINAL_PROMPT="0")
+          def controller_call(operation,*arguments):
+              # Reuse the exact selected/scrubbed child context, then restore the parent.
+              previous=os.environ.copy()
+              try:
+                  os.environ.clear();os.environ.update(env)
+                  controller=runpy.run_path(str(fresh_qualifier),run_name="m3_joined_fresh_scoped_controller")
+                  return controller[operation](*arguments)
+              finally:
+                  os.environ.clear();os.environ.update(previous)
+          def collector_environment_discriminators():
+              from unittest.mock import patch
+              cases=[]
+              with patch.dict(os.environ,{"JAVA_HOME":"/wrong-default-jdk17"},clear=False):
+                  os.environ.pop("M3_QUALIFICATION_ROOT",None)
+                  prior=os.environ.copy()
+                  observed=[]
+                  def fake(path,run_name):
+                      if dict(os.environ)!=env or os.environ.get("JAVA_HOME")!=os.environ["M3_JAVA_HOME"] or os.environ.get("M3_QUALIFICATION_ROOT")!=str(root):raise AssertionError("collector must receive exact selected scrubbed environment")
+                      observed.append("exact-selected-context")
+                      return {"probe":lambda:True,"refuse":lambda:(_ for _ in ()).throw(RuntimeError("expected scoped refusal"))}
+                  with patch.object(runpy,"run_path",fake):
+                      if controller_call("probe") is not True or dict(os.environ)!=prior:raise AssertionError("collector context/restoration mismatch")
+                      cases.append("wrong-default-java-and-missing-qualification-root-replaced")
+                      try:controller_call("refuse")
+                      except RuntimeError as error:
+                          if str(error)!="expected scoped refusal":raise
+                      else:raise AssertionError("scoped refusal unexpectedly admitted")
+                      if dict(os.environ)!=prior:raise AssertionError("collector exception changed parent environment")
+                      cases.append("parent-environment-restored-after-refusal")
+                  if len(observed)!=2:raise AssertionError("actual scoped controller probe census")
+              return {"schema":"M3_JOINED_FRESH_COLLECTOR_ENVIRONMENT_CONTROLS_V1","tests":2,"failures":0,"cases":cases,"scope":"ACTUAL_SCOPED_FUNCTION_WITH_MOCKED_RUNPY_NO_NEW_PROCESS"}
+          collector_env_controls=collector_environment_discriminators()
           records=[]
+          fresh_records=[]
           def cleanup(child):
               # The qualifier wrappers start no nested sessions; fence this owned group.
               for sig,seconds in ((signal.SIGTERM,2),(signal.SIGKILL,3)):
@@ -271,7 +349,7 @@ jobs:
               if time.monotonic()-start>1500:raise RuntimeError("global deadline before launch")
               gate()
               child=None;code=None
-              log=bundle/(name+".log")
+              log=(fresh_outer if name.startswith("fresh-") else bundle)/(name+".log")
               launched=time.time()
               with log.open("xb") as out:
                   active_command=name
@@ -298,7 +376,7 @@ jobs:
                                       except ProcessLookupError:pass
                                       child.wait(timeout=5)
                               cleanup(child)
-                              records.append({"name":name,"argv":command,"returncode":child.returncode,"startedUtc":time.strftime("%Y-%m-%dT%H:%M:%SZ",time.gmtime(launched)),"completedUtc":time.strftime("%Y-%m-%dT%H:%M:%SZ",time.gmtime()),"log":log.name,"logBytes":log.stat().st_size,"parentReaped":True,"ownedSessionAbsent":True})
+                              (fresh_records if name.startswith("fresh-") else records).append({"name":name,"argv":command,"returncode":child.returncode,"startedUtc":time.strftime("%Y-%m-%dT%H:%M:%SZ",time.gmtime(launched)),"completedUtc":time.strftime("%Y-%m-%dT%H:%M:%SZ",time.gmtime()),"log":log.name,"logBytes":log.stat().st_size,"parentReaped":True,"ownedSessionAbsent":True})
                       finally:active_command=None
               gate()
               if code!=expected:raise RuntimeError(name+" failed with "+str(code)+" expected "+str(expected))
@@ -308,6 +386,7 @@ jobs:
           maven=["mvn","-B","-ntp","-s",str(settings/"settings.xml"),"-gs",str(settings/"global-settings.xml"),"-Dmaven.repo.local="+str(root/"m2"),"-Dstyle.color=never"]
           try:
               run("binding",py+[str(qualifier),"binding"],deadline=60)
+              run("fresh-binding",py+[str(fresh_qualifier),"binding"],deadline=90)
               run("toolchain",maven+["-version"],deadline=30)
               version=(bundle/"toolchain.log").read_text(encoding="utf-8")
               expected="Apache Maven 3.10.0 (c43a36b8d67be7e0805a411bc0898af1a51f5472)"
@@ -316,6 +395,7 @@ jobs:
               if identities!=[expected] or not re.search(r"Java version: 21(?:\.|,)",version):raise RuntimeError("exact inventoried Maven3.10/JDK21 required; no setup/download fallback")
               storage_guard_discriminators()
               run("sdk-inputs",py+[str(sdk/"verify.py"),"--inputs","--self-test"],deadline=120)
+              run("fresh-sdk-inputs",py+[str(fresh_sdk/"verify.py"),"--inputs","--self-test"],deadline=120)
               if any((sdk/"target"/name).exists() for name in ("classes","test-classes","surefire-reports")):raise RuntimeError("SDK compilation and test outputs must start absent")
               run("sdk-maven",maven+["-f",str(sdk/"pom.xml"),"-DskipTests=false","-Dmaven.test.skip=false","test"],deadline=600)
               run("sdk-reports",py+[str(sdk/"verify.py"),"--reports"],deadline=90)
@@ -380,6 +460,23 @@ jobs:
               (bundle/"inventory.json").write_text(json.dumps(inventory,indent=2)+"\n",encoding="utf-8")
               print(tail.decode("utf-8",errors="replace"))
               print("Final aggregate bytes before artifact upload:",gate(496*1024**2))
+              error=__import__("sys").exc_info()[1]
+              if error is not None and fresh_records:
+                  controller_call("collect_failure",fresh_records,error,gate)
+          # The preceding finally freezes the unchanged legacy47 projection first.
+          controller_call("freeze_legacy")
+          try:
+              if any((fresh_sdk/"target"/name).exists() for name in ("classes","test-classes","surefire-reports")):raise RuntimeError("fresh SDK compilation and test outputs must start absent")
+              run("fresh-sdk-maven",maven+["-f",str(fresh_sdk/"pom.xml"),"-DskipTests=false","-Dmaven.test.skip=false","test"],deadline=600)
+              run("fresh-sdk-reports",py+[str(fresh_sdk/"verify.py"),"--reports"],deadline=90)
+              run("fresh-runtime",py+[str(fresh_qualifier),"runtime"],deadline=1200)
+              run("fresh-report",py+[str(fresh_qualifier),"report"],deadline=90)
+              controller_call("collect",fresh_records,head,observed,gate)
+          except BaseException:
+              # Preserve complete attempted fresh stdout in the job log when full qualification refuses.
+              error=__import__("sys").exc_info()[1]
+              controller_call("collect_failure",fresh_records,error,gate)
+              raise
           PY
       - name: Fence the existing artifact payload
         id: artifact_payload
