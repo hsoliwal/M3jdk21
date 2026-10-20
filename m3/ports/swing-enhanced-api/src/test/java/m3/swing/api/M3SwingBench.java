@@ -151,11 +151,13 @@ public final class M3SwingBench {
         return top + visible + full + last.y + last.height + maxTop;
     }
 
-    static void plainCenter(JComponent view, JViewport viewport, int row, RowGeometry rows) {
+    /* the same answer as scrollRowToVisible(row, CENTER): scroll, then the top row after the scroll */
+    static int plainCenter(JComponent view, JViewport viewport, int row, RowGeometry rows) {
         Rectangle r = rows.bounds(row);
         int extent = viewport.getExtentSize().height;
         int y = Math.max(0, Math.min(r.y + r.height / 2 - extent / 2, view.getHeight() - extent));
         viewport.setViewPosition(new Point(viewport.getViewPosition().x, y));
+        return rows.rowAt(viewport.getViewPosition().y);
     }
 
     private static void row(String leaf, String op, String component, int size, long[] plain, long[] m3) {
