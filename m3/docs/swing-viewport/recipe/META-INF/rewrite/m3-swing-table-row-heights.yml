@@ -156,3 +156,10 @@ recipeList:
       parameterCount: 0
       position: METHOD_START
       statements: "            if (m3ModelSizes != null) {\n                m3RowSizes = m3ModelSizes.inViewOrder(getRowCount(), getRowHeight(), sorter);\n                return;\n            }"
+  - com.synexia.openrewrite.viewport.M3InsertStatements:
+      declaringClasses: [javax.swing.JTable]
+      methodName: setRowSorter
+      parameterCount: 1
+      anchor: "rowModel = null;"
+      position: AFTER
+      statements: "        m3RowSizes = null;"
