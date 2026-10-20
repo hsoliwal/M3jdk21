@@ -12,5 +12,12 @@ copies). Every (owner, size, implementation) runs in its own JVM with `-Xms3g -X
 donor's call-site profiles never affect the owned class. `run-bench.sh` is the driver (paths are this
 workstation's: owned module sources, provider jars, output under `S:/m3-scratch/collections/bench`).
 
-`baseline-20261020.tsv` is the measured starting point (JDK 21.0.9, Windows 11). Where the owned class is
+`baseline-20261020.tsv` is the measured starting point (JDK 21.0.9, Windows 11); `baseline-20261020-median3.tsv` repeats it
+as the median of 3 JVMs. Where the owned class is
 slower or larger than the donor, a leaf follows; a measured "no" is recorded too.
+
+Leaves (`leaves/`) are paired A/B runs (`run-ab.sh`): the owned class built from the base revision and from the
+leaf revision, alternating JVMs, 7 pairs per size. This workstation is shared with other tracks (CPU load at
+100% of 32 threads during the runs), and outside load only ever adds time, so `agg.sh` reports the minimum
+over JVMs of each JVM's median-of-5 time, and the median for allocation and retained heap; `*.raw.tsv` keeps
+every run.

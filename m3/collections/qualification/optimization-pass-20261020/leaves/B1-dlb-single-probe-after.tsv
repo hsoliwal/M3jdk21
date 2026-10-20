@@ -1,0 +1,3 @@
+owner	donor_type	operation	size	impl	build_ms	query_ms	build_alloc_B_per_elem	query_alloc_B_per_op	retained_B	retained_unit	runs
+M3DualLinkedHashBidiMap	org.apache.commons.collections4.bidimap.DualLinkedHashBidiMap	put n; get + getKey n; mapIterator	100000	m3	10.17	1.21	221.25	0.00	80.73	B/element	7
+M3DualLinkedHashBidiMap	org.apache.commons.collections4.bidimap.DualLinkedHashBidiMap	put n; get + getKey n; mapIterator	1000000	m3	72.08	15.01	237.76	0.00	84.80	B/element	7

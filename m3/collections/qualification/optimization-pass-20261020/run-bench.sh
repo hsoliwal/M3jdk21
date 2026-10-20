@@ -1,6 +1,6 @@
 #!/bin/bash
 # usage: bench.sh <out.tsv> <sizes,comma> [owner...]  -- compile owned modules + bench once, then REPEATS JVMs per
-# (owner, size, impl), interleaving donor and owned; <out.tsv> gets the per-metric median over the JVM runs,
+# (owner, size, impl), interleaving donor and owned; <out.tsv> gets agg.sh over the JVM runs (min time, median rest),
 # <out.tsv>.raw keeps every run.
 S=S:/m3-scratch/collections/bench
 W=K:/m3-work/agents/collections-superset/wt-dlb/m3/collections
@@ -23,12 +23,5 @@ rm -f $OUT $OUT.raw
 for o in $OWNERS; do for n in ${SIZES//,/ }; do for r in $(seq 1 $REPEATS); do for i in donor owned; do
   "$J/java" $JVM -cp "$S/classes;$CP" OwnedVsDonorBench $OUT.raw $n $o $i >> $S/run.log 2>&1 || echo "FAIL $o $n $i" >> $S/run.log
 done; done; done; done
-awk -F'\t' 'NR == 1 { print; next }
-  { key = $1 FS $2 FS $3 FS $4 FS $5; if (!(key in seen)) { seen[key] = 1; order[++k] = key; unit[key] = $11 }
-    c = ++cnt[key]; for (f = 6; f <= 10; f++) v[key, f, c] = $f }
-  END { for (i = 1; i <= k; i++) { key = order[i]; line = key
-      for (f = 6; f <= 10; f++) { n = cnt[key]; for (a = 1; a <= n; a++) s[a] = v[key, f, a]
-        for (a = 1; a <= n; a++) for (b = a + 1; b <= n; b++) if (s[b] + 0 < s[a] + 0) { t = s[a]; s[a] = s[b]; s[b] = t }
-        line = line FS s[int((n + 1) / 2)] }
-      print line FS unit[key] } }' $OUT.raw > $OUT
+bash S:/m3-scratch/collections/agg.sh $OUT.raw > $OUT
 echo rc=0

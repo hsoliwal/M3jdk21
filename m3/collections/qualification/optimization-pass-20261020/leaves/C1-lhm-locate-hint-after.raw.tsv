@@ -1,0 +1,15 @@
+owner	donor_type	operation	size	impl	build_ms	query_ms	build_alloc_B_per_elem	query_alloc_B_per_op	retained_B	retained_unit
+M3LinkedHashMultiset	com.google.common.collect.LinkedHashMultiset	add n distinct + n/2 repeats; count n; iterate	100000	m3	14.73	7.73	120.54	0.00	43.67	B/element
+M3LinkedHashMultiset	com.google.common.collect.LinkedHashMultiset	add n distinct + n/2 repeats; count n; iterate	100000	m3	10.38	2.48	120.54	0.00	43.67	B/element
+M3LinkedHashMultiset	com.google.common.collect.LinkedHashMultiset	add n distinct + n/2 repeats; count n; iterate	100000	m3	10.88	2.13	120.54	0.00	43.67	B/element
+M3LinkedHashMultiset	com.google.common.collect.LinkedHashMultiset	add n distinct + n/2 repeats; count n; iterate	100000	m3	9.33	2.44	120.54	0.00	43.67	B/element
+M3LinkedHashMultiset	com.google.common.collect.LinkedHashMultiset	add n distinct + n/2 repeats; count n; iterate	100000	m3	11.61	1.53	120.54	0.00	43.67	B/element
+M3LinkedHashMultiset	com.google.common.collect.LinkedHashMultiset	add n distinct + n/2 repeats; count n; iterate	100000	m3	13.26	1.69	120.54	0.00	43.67	B/element
+M3LinkedHashMultiset	com.google.common.collect.LinkedHashMultiset	add n distinct + n/2 repeats; count n; iterate	100000	m3	13.35	1.45	120.54	0.00	43.67	B/element
+M3LinkedHashMultiset	com.google.common.collect.LinkedHashMultiset	add n distinct + n/2 repeats; count n; iterate	1000000	m3	85.33	20.22	92.37	0.00	33.59	B/element
+M3LinkedHashMultiset	com.google.common.collect.LinkedHashMultiset	add n distinct + n/2 repeats; count n; iterate	1000000	m3	72.16	15.95	92.37	0.00	33.59	B/element
+M3LinkedHashMultiset	com.google.common.collect.LinkedHashMultiset	add n distinct + n/2 repeats; count n; iterate	1000000	m3	79.32	16.35	92.37	0.00	33.59	B/element
+M3LinkedHashMultiset	com.google.common.collect.LinkedHashMultiset	add n distinct + n/2 repeats; count n; iterate	1000000	m3	72.77	15.73	92.37	0.00	33.59	B/element
+M3LinkedHashMultiset	com.google.common.collect.LinkedHashMultiset	add n distinct + n/2 repeats; count n; iterate	1000000	m3	86.72	15.20	92.37	0.00	33.59	B/element
+M3LinkedHashMultiset	com.google.common.collect.LinkedHashMultiset	add n distinct + n/2 repeats; count n; iterate	1000000	m3	67.50	14.09	92.37	0.00	33.59	B/element
+M3LinkedHashMultiset	com.google.common.collect.LinkedHashMultiset	add n distinct + n/2 repeats; count n; iterate	1000000	m3	77.15	18.67	92.37	0.00	33.59	B/element

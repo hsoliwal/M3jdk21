@@ -1,0 +1,3 @@
+owner	donor_type	operation	size	impl	build_ms	query_ms	build_alloc_B_per_elem	query_alloc_B_per_op	retained_B	retained_unit	runs
+M3LinkedHashMultiset	com.google.common.collect.LinkedHashMultiset	add n distinct + n/2 repeats; count n; iterate	100000	m3	9.33	1.45	120.54	0.00	43.67	B/element	7
+M3LinkedHashMultiset	com.google.common.collect.LinkedHashMultiset	add n distinct + n/2 repeats; count n; iterate	1000000	m3	67.50	14.09	92.37	0.00	33.59	B/element	7
