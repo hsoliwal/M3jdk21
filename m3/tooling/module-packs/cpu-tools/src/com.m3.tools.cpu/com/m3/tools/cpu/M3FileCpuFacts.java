@@ -242,13 +242,19 @@ public final class M3FileCpuFacts {
                     computed = lineMask;
                     if (computed == null) {
                         long[] words = new long[(owner.lineCount() + 63) >>> 6];
+                        // Existing ExactSearch emits monotonically increasing hit
+                        // positions. Coalesce overlapping line intervals so no
+                        // source line is marked more than once (O(hits + lines)).
+                        int coveredThrough = -1;
                         for (int start : original.positions()) {
                             int from = owner.lineOf(start);
                             int to = needleLength == 0 ? from
                                     : owner.lineOf(Math.addExact(start, needleLength - 1));
-                            for (int line = from; line <= to; line++) {
+                            for (int line = Math.max(from, coveredThrough + 1);
+                                    line <= to; line++) {
                                 words[line >>> 6] |= 1L << (line & 63);
                             }
+                            coveredThrough = Math.max(coveredThrough, to);
                         }
                         lineMask = computed = words;
                     }
