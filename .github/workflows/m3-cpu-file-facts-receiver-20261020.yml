@@ -1,0 +1,67 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3File CPU source facts receiver admission
+
+on:
+  push:
+    branches: [m3/cpu-file-facts-20261020]
+  pull_request:
+    paths:
+      - m3/tooling/module-packs/cpu-tools/src/com.m3.tools.cpu/com/m3/tools/cpu/M3FileCpuFacts.java
+      - m3/tooling/module-packs/cpu-tools/fixtures/M3FileCpuFactsTest.java
+      - m3/tooling/module-packs/cpu-tools/build.py
+      - .github/workflows/m3-cpu-file-facts-receiver-20261020.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  source-admission:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Existing CPU pack original admission and subprocess contracts
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -B m3/tooling/module-packs/cpu-tools/fixtures/test_build.py
+      - name: Ensure new original-parser test is run by linked M3JDK build
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          root = Path("m3/tooling/module-packs/cpu-tools")
+          text = (root/"build.py").read_text()
+          assert text.count('FIXTURES = ("M3DonorToolsTest", "M3SourceToolsTest", "M3CpuToolsTest", "M3FileCpuFactsTest")') == 1
+          assert 'for test in FIXTURES:' in text
+          assert 'image-fixtures-javac' in text
+          assert 'image-m3-storage-' in text
+          for file in (
+              root/"src/com.m3.tools.cpu/com/m3/tools/cpu/M3FileCpuFacts.java",
+              root/"fixtures/M3FileCpuFactsTest.java"):
+              assert file.is_file() and file.stat().st_size > 1000
+          print("M3_CPU_SOURCE_ADMISSION_PASS fixture=1 no-reparse-owner=1")
+          PY
+      - name: Retain source receipt
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p m3-cpu-facts-receipts
+          sha256sum \
+            m3/tooling/module-packs/cpu-tools/src/com.m3.tools.cpu/com/m3/tools/cpu/M3FileCpuFacts.java \
+            m3/tooling/module-packs/cpu-tools/fixtures/M3FileCpuFactsTest.java \
+            m3/tooling/module-packs/cpu-tools/build.py \
+            > m3-cpu-facts-receipts/SOURCE_SHA256.txt
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: m3-cpu-file-facts-source-admission
+          path: m3-cpu-facts-receipts/
+          retention-days: 14
+          if-no-files-found: warn
