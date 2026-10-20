@@ -1,0 +1,68 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3 AST parse-once scoped javac and lean M3File
+
+on:
+  push:
+    branches:
+      - m3/ast-parse-once-scoped-compilation-20261020
+  pull_request:
+    paths:
+      - m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3ScopedJavac.java
+      - m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3ASTSourceSession.java
+      - m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3File.java
+      - m3/tooling/module-packs/parser/src/test/java/jdk/m3/parser/test/M3ScopedJavacContract.java
+      - m3/tooling/module-packs/parser/src/test/java/jdk/m3/parser/test/M3FileStreamingContract.java
+      - .github/workflows/m3-ast-parse-once-20261020.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  java21-scopes:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Strict Java 21 compilation against original javac APIs
+        shell: bash
+        run: |
+          set -euo pipefail
+          ROOT=m3/tooling/module-packs/parser/src
+          mkdir -p "$RUNNER_TEMP/m3-scope-classes"
+          javac --release 21 -Xlint:all -Werror -proc:none -implicit:none \
+            -d "$RUNNER_TEMP/m3-scope-classes" \
+            "$ROOT/main/java/jdk/m3/parser/M3File.java" \
+            "$ROOT/main/java/jdk/m3/parser/M3ASTIndex.java" \
+            "$ROOT/main/java/jdk/m3/parser/M3ASTSourceSession.java" \
+            "$ROOT/main/java/jdk/m3/parser/M3ScopedJavac.java" \
+            "$ROOT/test/java/jdk/m3/parser/test/M3ScopedJavacContract.java" \
+            "$ROOT/test/java/jdk/m3/parser/test/M3FileStreamingContract.java"
+      - name: Prove one original task, file/package/module/project selected recompilation
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p m3-parse-once-proof
+          java -ea -cp "$RUNNER_TEMP/m3-scope-classes" \
+            jdk.m3.parser.test.M3ScopedJavacContract \
+            "$RUNNER_TEMP/m3-scope-test" | tee m3-parse-once-proof/SCOPES.txt
+          grep '^M3_AST_SCOPE_PARSE_ONCE_PASS assertions=' m3-parse-once-proof/SCOPES.txt
+      - name: Prove streaming bytes, source identity, strict UTF-16/UTF-8 hashes
+        shell: bash
+        run: |
+          set -euo pipefail
+          java -ea -cp "$RUNNER_TEMP/m3-scope-classes" \
+            jdk.m3.parser.test.M3FileStreamingContract \
+            "$RUNNER_TEMP/m3-file-test" | tee m3-parse-once-proof/FILE.txt
+          grep '^M3_FILE_STREAMING_PASS checks=' m3-parse-once-proof/FILE.txt
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: m3-ast-parse-once-selected-scopes
+          path: m3-parse-once-proof/
+          if-no-files-found: warn
+          retention-days: 21
