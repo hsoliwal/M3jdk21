@@ -58,6 +58,11 @@ public interface M3FileShadow {
         return new M3FileLineShadow();
     }
 
+    /** POSIX {@code wc} counts (bytes, newlines, words). */
+    static M3FileWcShadow wc() {
+        return new M3FileWcShadow();
+    }
+
     /** UTF-8 char layer feeding {@code layers}; malformed input becomes U+FFFD as in {@code new String(bytes, UTF_8)}. */
     static M3FileUtf8Shadow utf8(M3FileCharShadow... layers) {
         return new M3FileUtf8Shadow(layers);

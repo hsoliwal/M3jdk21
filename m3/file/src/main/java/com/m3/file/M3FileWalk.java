@@ -2,9 +2,15 @@
 // SPDX-License-Identifier: Apache-2.0
 package com.m3.file;
 
+import java.io.IOException;
+import java.io.OutputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.PathMatcher;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.BitSet;
+import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
 import java.util.Spliterator;
@@ -179,6 +185,52 @@ public final class M3FileWalk implements M3FileTraversal {
     /** Pull cursor over the same entries in the same order. */
     public M3FileCursor cursor() {
         return new M3FileCursor(this, tree.rank(root), rangeEnd());
+    }
+
+    /**
+     * {@code tree}-style rendering in name order (CSR slices): an entry is shown when the walk accepts it
+     * or when it leads to an accepted descendant; pruned and depth-capped subtrees are not entered.
+     */
+    public String render() {
+        StringBuilder out = new StringBuilder();
+        for (String line : lines(root, probe())) out.append(line).append('\n');
+        return out.toString();
+    }
+
+    /**
+     * Writes this walk's directories and regular files into a zip on {@code target} (not closed), names
+     * relative to the walk root; content streams through each entry's source with {@code maxBytes} and a
+     * split of {@code progress} per file. Returns the entries written.
+     */
+    public long zipTo(OutputStream target, long maxBytes, M3FileProgress progress) throws IOException {
+        return M3FileZipWriter.write(this, Objects.requireNonNull(target, "target"), maxBytes, progress);
+    }
+
+    /** {@link #zipTo(OutputStream, long, M3FileProgress)} into a new or truncated file. */
+    public long zipTo(Path target, long maxBytes, M3FileProgress progress) throws IOException {
+        try (OutputStream out = Files.newOutputStream(target)) {
+            return zipTo(out, maxBytes, progress);
+        }
+    }
+
+    private List<String> lines(int id, Probe probe) {
+        List<List<String>> children = new ArrayList<>();
+        if (!closed(id)) {
+            for (int i = 0; i < tree.childCount(id); i++) {
+                List<String> child = lines(tree.childId(id, i), probe);
+                if (!child.isEmpty()) children.add(child);
+            }
+        }
+        if (children.isEmpty() && !probe.accepts(id)) return List.of();
+        List<String> out = new ArrayList<>();
+        out.add(tree.name(id));
+        for (int i = 0; i < children.size(); i++) {
+            boolean last = i == children.size() - 1;
+            List<String> child = children.get(i);
+            out.add((last ? "└── " : "├── ") + child.get(0));
+            for (int j = 1; j < child.size(); j++) out.add((last ? "    " : "│   ") + child.get(j));
+        }
+        return out;
     }
 
     /** Exclusive end position of this walk. */

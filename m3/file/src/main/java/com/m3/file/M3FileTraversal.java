@@ -2,12 +2,17 @@
 // SPDX-License-Identifier: Apache-2.0
 package com.m3.file;
 
+import java.io.IOException;
+import java.io.InterruptedIOException;
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.Spliterator;
 import java.util.function.Consumer;
 import java.util.function.Function;
+import java.util.regex.Pattern;
 import java.util.stream.Collector;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
@@ -74,5 +79,72 @@ public interface M3FileTraversal {
 
     default Optional<M3File> first() {
         return stream().findFirst();
+    }
+
+    /** {@code du -b}: bytes of the regular files, from the size lanes; no I/O. */
+    default long bytes() {
+        M3FileTree tree = tree();
+        return ids().filter(id -> tree.flag(M3FileFlag.REGULAR, id)).mapToLong(id -> Math.max(0, tree.size(id))).sum();
+    }
+
+    /** {@code wc} over the regular files, one shadow pass each; progress units are bytes. */
+    default M3FileWordCount wc(long maxBytes, M3FileProgress progress) throws InterruptedIOException {
+        M3FileTree tree = tree();
+        int[] files = ids().filter(id -> tree.flag(M3FileFlag.REGULAR, id)).toArray();
+        progress.begin("wc", bytes());
+        long lines = 0;
+        long words = 0;
+        long bytes = 0;
+        long failed = 0;
+        for (int id : files) {
+            M3FileWcShadow counts = M3FileShadow.wc();
+            if (observe(tree, id, maxBytes, progress, counts)) {
+                lines += counts.lines();
+                words += counts.words();
+                bytes += counts.bytes();
+            } else {
+                failed++;
+            }
+        }
+        progress.done();
+        return new M3FileWordCount(files.length - failed, lines, words, bytes, failed);
+    }
+
+    /**
+     * {@code grep}: lines of the regular text files matching {@code pattern} ({@link java.util.regex.Matcher#find}),
+     * in traversal order; files containing NUL bytes are skipped as binary. One shadow pass per file.
+     */
+    default List<M3FileMatch> grep(Pattern pattern, long maxBytes, M3FileProgress progress) throws InterruptedIOException {
+        Objects.requireNonNull(pattern, "pattern");
+        M3FileTree tree = tree();
+        int[] files = ids().filter(id -> tree.flag(M3FileFlag.REGULAR, id)).toArray();
+        progress.begin("grep " + pattern, bytes());
+        List<M3FileMatch> matches = new ArrayList<>();
+        for (int id : files) {
+            M3FileGrepShadow lines = new M3FileGrepShadow(tree.file(id), pattern);
+            boolean[] binary = {false};
+            M3FileShadow nulProbe = (block, offset, length) -> {
+                for (int i = offset; i < offset + length && !binary[0]; i++) binary[0] = block[i] == 0;
+            };
+            if (observe(tree, id, maxBytes, progress, nulProbe, M3FileShadow.utf8(lines)) && !binary[0]) {
+                matches.addAll(lines.matches());
+            }
+        }
+        progress.done();
+        return matches;
+    }
+
+    private static boolean observe(M3FileTree tree, int id, long maxBytes, M3FileProgress progress,
+            M3FileShadow... shadows) throws InterruptedIOException {
+        try {
+            tree.file(id).observe(maxBytes, progress.split(Math.max(0, tree.size(id))), shadows);
+            tree.setFlag(M3FileFlag.FAILED, id, false);
+            return true;
+        } catch (InterruptedIOException canceled) {
+            throw canceled;
+        } catch (IOException failed) {
+            tree.setFlag(M3FileFlag.FAILED, id, true);
+            return false;
+        }
     }
 }
