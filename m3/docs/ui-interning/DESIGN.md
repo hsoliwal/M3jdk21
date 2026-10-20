@@ -125,6 +125,20 @@ would add 12 bytes per path to save one pool entry per distinct short name, a me
 A restore walk skips every subtree below a path without interned children (`hasChildren`), which is what makes it
 faster than the incremental path hashing of eclipse.platform.ui#4247 (ledger L3).
 
+## 6a. Threads (brief rule 28) and the public model API (rule 26)
+
+- The pool, the lanes and the trie belong to the model thread: they are not thread-safe and are never read from the
+  UI thread while the model thread writes them.
+- Patches to the UI thread carry label values, not Strings. An immediate label (`M3ShortLabel`) is a value and is
+  safe on any thread; a pooled label in a patch must come with its text for the resident window (or the patch is
+  applied while the model is quiescent), because the arena may grow or compact under a concurrent reader.
+- Text measurement needs the UI thread's GC, so the extent cache belongs to the UI thread and is keyed by the same
+  label values; the pool's eviction listener reaches it through the patch stream (an evicted id is never in a live
+  patch, since lanes hold a reference while a row shows the label).
+- Rule 26's `M3TableModel`/`M3TreeModel`/`M3ListModel` take cell text "through interned label ids or a CharSequence
+  provider": `M3LabelLanes` is that lane, `getChars` is the no-String provider, and `M3TreePathTrie` gives tree models
+  their path ids. The owners of those models adopt these classes (ADOPTION.tsv).
+
 ## 7. Adoption
 
 `ADOPTION.tsv` lists, per owner (Tree, Table, List, Grid, JFace, Swing caches), the call sites that switch to label
