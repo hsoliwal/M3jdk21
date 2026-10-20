@@ -1,0 +1,8 @@
+category	existing_owner	decision	reason	pinned_source	license	status
+TREE_SCAN	java.nio.file.Files.walkFileTree	REUSE_EXACT	JDK pre-order walk with NOFOLLOW_LINKS and attributes already read; no native or third-party walker	java.base (M3jdk21)	GPL-2.0-with-classpath-exception	JDK_OWNED
+FILE_READ_EDGE	com.m3.file.M3File	EXTEND_EXISTING	Existing detached Path read edge kept verbatim; class gains the tree-entry role instead of a second entry type	m3/file/src/main/java/com/m3/file/M3File.java@85bf188c14d	Apache-2.0	SOURCE_IDENTITY_VERIFIED
+NAME_STORAGE	com.m3.fs.M3DirectoryTable	ADAPT_PATTERN	char[] name pool plus int[] offsets, names materialised only at API access; per-directory native image codec not reused	m3/fs/src/main/java/com/m3/fs/M3DirectoryTable.java@85bf188c14d	Apache-2.0	PATTERN_ONLY
+FACADE_RESIDENCY	org.m3.runtime.lazy.LazyObjectParent	ADAPT_PATTERN	parent-owned transient handles with recreate-on-evict; reduced to an int-keyed bounded table, no swap codec	m3/lazyobjects/src/main/java/org/m3/runtime/lazy/LazyObjectParent.java@85bf188c14d	Apache-2.0	PATTERN_ONLY
+VIEWPORT_BINDING	com.m3.viewport.M3RowHost	REUSE_CONTRACT_LATER	slice 5 binds tree rows to the existing row-host contract; nothing generated in slice 1	m3/viewport-core/src/main/java/com/m3/viewport/M3RowHost.java@85bf188c14d	Apache-2.0	DEFERRED
+BUILD_TEMPLATE	m3/arrays/pom.xml	REUSE_EXACT	junit-jupiter 5.10.2, surefire useModulePath=false, -Xlint:all,-module -Werror	m3/arrays/pom.xml@85bf188c14d	Apache-2.0	SOURCE_IDENTITY_VERIFIED
+TREE_LANES	none	GENERATE_GAP	no existing M3 owner for a rooted multi-directory tree in SoA lanes (pre-order ids, CSR children, flag bitsets)	-	Apache-2.0	GAP
