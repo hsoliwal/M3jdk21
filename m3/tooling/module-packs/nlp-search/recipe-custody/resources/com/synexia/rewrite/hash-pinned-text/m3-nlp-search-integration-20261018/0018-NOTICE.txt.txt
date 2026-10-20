@@ -1,0 +1,40 @@
+M3File, Lucene and OpenNLP module-pack integration
+Copyright 2026 Hitesh Soliwal and Contributors to the Synexia Project
+
+The first-party receiver, recipe integration, M3AST source-search consumer and
+mapped Apache-licensed Synexia file work retain Apache License 2.0 notices.
+Their original source headers and per-file provenance remain authoritative.
+
+This distribution includes Apache Lucene 9.10.0 and Apache OpenNLP Tools 2.4.0,
+including software developed at The Apache Software Foundation
+(https://www.apache.org/). The original Apache LICENSE/NOTICE files and embedded
+third-party notices are retained in the source trees and full library resources.
+Selected M3 changes are backported from hsoliwal/lucene revision
+d1b7235f1ba1c1eea5b04a5b7e6554595a90719e and hsoliwal/opennlp revision
+368337311ad94b665fd178f8d3ced005a73b2370. These compatibility backports do not
+relicense the donor works or claim a full fork-major distribution upgrade.
+
+The complete MIndexFile family and mapped supporting donors originate in
+hsoliwal/com.synexia revision 50f48cbbe11f17fb8dc209bac3812f8940a1e267.
+FILE_PORT_MAP.json and the source API, native and source-inventory receipts retain
+the precise mappings, original identities and explicit adaptations. The canonical
+integration recipe owner is synexia-openrewrite-recipes/crates/m3-nlp-search in
+that repository. The resulting runtime does not require a Synexia service or
+classpath dependency.
+
+SLF4J API 2.0.12 and SLF4J Simple 2.0.13 retain their original MIT license and
+copyright notices, including QOS.ch Sarl (Switzerland), in their full source and
+META-INF resources.
+
+The linked Java runtime includes JDK modules under their original JDK license
+terms and per-module legal notices. The bounded compiler-source proof rebuilds
+the five pinned compiler inputs recorded in COMPILER_SOURCES.json on the supplied
+Java 21 runtime; it does not change the JDK's license or certify native M3String
+storage. Original JDK legal files are retained when repackaging those modules.
+
+LICENSE.txt contains the Apache License 2.0 applicable to the first-party
+integration. It is not a replacement for embedded library or JDK license terms.
+SOURCE_REF.json, INPUTS.json and the per-component provenance record source
+identity; an executed build's RESULT.json and detailed receipts record its proof
+scope. No broader JDK, upstream-suite, other-platform or performance certification
+is implied by this notice.
