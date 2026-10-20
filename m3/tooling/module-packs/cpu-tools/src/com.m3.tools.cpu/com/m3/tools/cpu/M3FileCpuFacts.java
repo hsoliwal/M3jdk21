@@ -31,6 +31,7 @@ import jdk.m3.text.Canonical;
  */
 public final class M3FileCpuFacts {
     private static final int MAX_CACHED_SEARCHES = 8;
+    private static final long MAX_CACHED_HIT_BYTES = 1L << 20;
     private final M3File source;
     private final M3AstTools.Snapshot syntax;
     private final String identity;
@@ -103,9 +104,17 @@ public final class M3FileCpuFacts {
         Search result = new Search(this, original, needle.length(), new Canonical(
                 "m3-file-cpu-exact-search-v1").text(identity)
                 .text(original.sha256()).number(maxHits).finish());
-        // Retain at most eight queries; trim under observable heap pressure.
-        if (heapPressure() < 0.80d) {
-            if (searches.size() == MAX_CACHED_SEARCHES) searches.remove(0);
+        // Bound both the query count and retained coordinate bytes, never
+        // caller-provided cache hints. Large result arrays are returned without
+        // becoming session cache state. Heap pressure can clear the LRU.
+        long requestedBytes = Integer.BYTES * (long) original.size();
+        if (requestedBytes <= MAX_CACHED_HIT_BYTES && heapPressure() < 0.80d) {
+            long retained = 0;
+            for (CachedSearch item : searches) retained += item.result.retainedPrimitiveBytes();
+            while (!searches.isEmpty() && (searches.size() == MAX_CACHED_SEARCHES
+                    || retained + requestedBytes > MAX_CACHED_HIT_BYTES)) {
+                retained -= searches.remove(0).result.retainedPrimitiveBytes();
+            }
             searches.add(new CachedSearch(needle, maxHits, result));
         } else {
             searches.clear();
