@@ -1,0 +1,12 @@
+# SPDX-License-Identifier: Apache-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.M3StringTreeSearch
+displayName: Receive prepared-fact M3 String tuple search pruning
+description: >-
+  Hash-pinned current-M3JDK receiver for exact literal search over the canonical balanced
+  M3StringTuple DAG. Adds a package-private measured-tree search atom and changes only the
+  prepared-plan dispatch in M3String. Positive facts never prove a match; unprepared facts retain
+  the existing KMP/BMH path.
+recipeList:
+  - com.m3.rewrite.backport.M3Jdk21HashPinnedSnapshotRecipe:
+      crateName: m3-string-tree-search
