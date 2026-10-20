@@ -38,7 +38,7 @@ Executed on OpenJDK 21.0.12.1:
 - javac --release 21 -Xlint:all,-module -Werror on two product
   classes, standalone contract and test source using **local compilation
   shims** for M3FS and JUnit: PASS.
-- Standalone Java21 graph/codec proof: **15,402 checks PASS**,
+- Standalone Java21 graph/codec proof: **15,407 checks PASS**,
   including 180 differential graph fixtures against independent reachability.
 - A regression for simultaneously dirty ABI-stable middle nodes exposed
   incorrect worklist suppression on the first candidate. Corrected and
