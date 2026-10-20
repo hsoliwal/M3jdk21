@@ -36,7 +36,6 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import javax.swing.event.FrameListener;
 
 import sun.awt.PeerEvent;
-import sun.awt.SunToolkit;
 
 /**
  * The model-thread protocol of the event dispatch thread (M3JDK, brief rule 28; the Swing side of SWT's
@@ -100,19 +99,19 @@ public final class M3Synchronizer {
         public void run() {
             Runnable r;
             synchronized (LOCK) {
-                KEYED[priority].remove(key);
+                KEYED.get(priority).remove(key);
                 r = task;
             }
             r.run();
         }
     }
 
-    @SuppressWarnings("unchecked")
-    private static final Map<Object, Entry>[] KEYED = new Map[] {new HashMap<>(), new HashMap<>(), new HashMap<>(),
-            new HashMap<>(), new HashMap<>()};
-    @SuppressWarnings("unchecked")
-    private static final List<Entry>[] QUEUED = new List[] {new ArrayList<>(), new ArrayList<>(), null,
-            new ArrayList<>(), new ArrayList<>()};
+    /** Per priority: the queued entries with a key, by key. */
+    private static final List<Map<Object, Entry>> KEYED = List.of(new HashMap<>(), new HashMap<>(), new HashMap<>(),
+            new HashMap<>(), new HashMap<>());
+    /** Per priority: the queued entries in order (unused for DEFAULT, whose keyed entries are posted events). */
+    private static final List<List<Entry>> QUEUED = List.of(new ArrayList<>(), new ArrayList<>(), new ArrayList<>(),
+            new ArrayList<>(), new ArrayList<>());
     private static final List<FrameListener> FRAME_LISTENERS = new CopyOnWriteArrayList<>();
     private static boolean urgentPosted;
     private static boolean idlePosted;
@@ -160,28 +159,28 @@ public final class M3Synchronizer {
         boolean idle = false;
         boolean frame = false;
         synchronized (LOCK) {
-            Entry e = key == null ? null : KEYED[priority].get(key);
+            Entry e = key == null ? null : KEYED.get(priority).get(key);
             if (e != null) {
                 e.task = r;
                 return;
             }
             e = new Entry(key, priority, r);
             if (key != null) {
-                KEYED[priority].put(key, e);
+                KEYED.get(priority).put(key, e);
             }
             switch (priority) {
                 case DEFAULT -> posted = e;
                 case INPUT, LAYOUT -> {
-                    QUEUED[priority].add(e);
+                    QUEUED.get(priority).add(e);
                     urgent = !urgentPosted;
                     urgentPosted = true;
                 }
                 case MODEL -> {
-                    QUEUED[priority].add(e);
+                    QUEUED.get(priority).add(e);
                     frame = true;
                 }
                 default -> {
-                    QUEUED[priority].add(e);
+                    QUEUED.get(priority).add(e);
                     idle = !idlePosted;
                     idlePosted = true;
                 }
@@ -191,7 +190,7 @@ public final class M3Synchronizer {
             EventQueue.invokeLater(posted);
         }
         if (urgent) {
-            SunToolkit.postPriorityEvent(new PeerEvent(Toolkit.getDefaultToolkit(), M3Synchronizer::drainUrgent,
+            postUrgent(new PeerEvent(Toolkit.getDefaultToolkit(), M3Synchronizer::drainUrgent,
                     PeerEvent.PRIORITY_EVENT));
         }
         if (idle) {
@@ -254,7 +253,7 @@ public final class M3Synchronizer {
             if (tick == null) {
                 tick = new Timer(FRAME_MILLIS, e -> frame());
                 tick.setRepeats(false);
-                tick.setCoalesce(true);
+                tick.setCoalesce(false);
             }
             t = tick;
         }
@@ -305,24 +304,31 @@ public final class M3Synchronizer {
 
     /** Takes the queued entries of a priority and frees their keys; callers hold LOCK. */
     private static List<Entry> take(int priority) {
-        List<Entry> q = QUEUED[priority];
+        List<Entry> q = QUEUED.get(priority);
         if (q.isEmpty()) {
             return List.of();
         }
         List<Entry> due = new ArrayList<>(q);
         q.clear();
-        KEYED[priority].clear();
+        KEYED.get(priority).clear();
         return due;
     }
 
-    /** Runs the entries in order; when one throws, the rest go back to the front of the queue first. */
+    /**
+     * Runs the entries in order. When one throws, the rest go back to the front of the queue, and the exception is
+     * rethrown from an event of its own, so the event dispatch thread reports it as for any runnable while this
+     * drain or tick (and the frame timer) carry on.
+     */
     private static void runAll(List<Entry> due, int priority) {
         for (int i = 0; i < due.size(); i++) {
             try {
                 due.get(i).task.run();
             } catch (RuntimeException | Error t) {
                 requeue(due.subList(i + 1, due.size()), priority);
-                throw t;
+                EventQueue.invokeLater(() -> {
+                    throw t;
+                });
+                return;
             }
         }
     }
@@ -332,18 +338,23 @@ public final class M3Synchronizer {
             return;
         }
         synchronized (LOCK) {
-            QUEUED[priority].addAll(0, rest);
+            QUEUED.get(priority).addAll(0, rest);
             for (Entry e : rest) {
                 if (e.key != null) {
-                    KEYED[priority].putIfAbsent(e.key, e);
+                    KEYED.get(priority).putIfAbsent(e.key, e);
                 }
             }
         }
         switch (priority) {
             case MODEL -> scheduleTick();
             case IDLE -> EventQueue.invokeLater(M3Synchronizer::drainIdle);
-            default -> SunToolkit.postPriorityEvent(new PeerEvent(Toolkit.getDefaultToolkit(),
+            default -> postUrgent(new PeerEvent(Toolkit.getDefaultToolkit(),
                     M3Synchronizer::drainUrgent, PeerEvent.PRIORITY_EVENT));
         }
+    }
+
+    /** Posts a drain at the event queue's high priority, ahead of ordinary events. */
+    private static void postUrgent(PeerEvent e) {
+        Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(e);
     }
 }
