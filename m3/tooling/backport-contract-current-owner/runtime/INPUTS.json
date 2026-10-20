@@ -132,5 +132,73 @@
     "selfEnforcedAggregateClaim": false,
     "newProductionCode": false,
     "sourceForkAlias": false
-  }
+  },
+  "receiverState": "APPLIED",
+  "frozenBaselineSource": "SDK_FORWARD_BEFORE_REPLACE_PLUS_CURRENT_KEEP",
+  "receiverCurrentOwners": [
+    {
+      "path": "m3/backports/test_compatibility_policy.py",
+      "gitBlob": "cd7b5a28ce3ec1f5a4475a145b40a3074b1a5c21",
+      "bytes": 7101,
+      "sha256": "69694e6e3725aeee8687a8c58bce477c7256f626d8425c04a9ce9772250a2bb6",
+      "role": "REPLACE",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "m3/backports/compatibility_policy.py",
+      "gitBlob": "89673d65b2ad42fc694d809d5c6f4d0eab7adbd8",
+      "bytes": 4695,
+      "sha256": "d51301d3ea225e89b000a2256855ab7806a1faf20c5fa493eb5666de1e7880c2",
+      "role": "KEEP",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "m3/backports/POST21_PRIORITY_COMPATIBILITY.tsv",
+      "gitBlob": "db7579c96d7dfc9c0c70fb4b28773cf89bad76ca",
+      "bytes": 6319,
+      "sha256": "4d813438bb68106c65781b3891c43afd4b35d288e0440ec4d27f83305b780c1a",
+      "role": "KEEP",
+      "license": "PRESERVED_RECEIVER_NOTICE_NO_RELICENSING"
+    },
+    {
+      "path": "m3/backports/JEP_CATALOGUE.tsv",
+      "gitBlob": "a0ef9aa95da17a19c3df8ab8aded355fad4f4598",
+      "bytes": 12083,
+      "sha256": "d47f07c2ee9829bfb91f4c4e2162bb221e86206aada802e0580aaef79d7fd250",
+      "role": "KEEP",
+      "license": "PRESERVED_RECEIVER_NOTICE_NO_RELICENSING"
+    },
+    {
+      "path": "m3/backports/RELEASE_JEP_AUTHORITY.tsv",
+      "gitBlob": "745a26772b8050c28dd93d05c724bfa9c2ad5e18",
+      "bytes": 760,
+      "sha256": "05341181f89e150ae602644ddaca9d53596be533cb2695e4032f11c0e1a70709",
+      "role": "KEEP",
+      "license": "PRESERVED_RECEIVER_NOTICE_NO_RELICENSING"
+    },
+    {
+      "path": "m3/backports/test_backport_execution_waves.py",
+      "gitBlob": "7a3b961caa4302a2ebd1675360e29e6b1df9697b",
+      "bytes": 12454,
+      "sha256": "5a59d038e108010c484f66f545ab5bc745a791182ed4794556b414ffde315dd0",
+      "role": "REPLACE",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "m3/backports/backport_execution_waves.py",
+      "gitBlob": "cc2a6ceb90b56d3b05d1307e705586c8d7cf1b40",
+      "bytes": 12177,
+      "sha256": "2cb19465a6a0d4f24dc228921eb1a2d7c2bbc4e53ce68e635b0e60ddb2a563dc",
+      "role": "KEEP",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "m3/backports/BACKPORT_EXECUTION_WAVES.md",
+      "gitBlob": "428d775ca476b187dceb26a012401b11b975bbbb",
+      "bytes": 6247,
+      "sha256": "df2aca41ab120bdbc8c165d4abe3552c54a91c591aab116b718b94283ae23f28",
+      "role": "REPLACE",
+      "license": "PRESERVED_RECEIVER_NOTICE_NO_RELICENSING"
+    }
+  ]
 }

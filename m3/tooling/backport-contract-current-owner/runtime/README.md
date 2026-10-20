@@ -15,7 +15,11 @@ three expected postimages must be the actual fresh Maven SDK outputs.
 
 Run the existing SDK qualification first. Its three generated files must exist at
 sdk/target/emitted/<original m3/backports path>, with the exact INPUTS.json postimage pins.
-The runtime accepts the exact reviewed before tuple, not an unreviewed current file.
+The runtime accepts only the exact applied eight-owner tuple in receiverCurrentOwners.
+The original files entries remain frozen. The baseline reconstructs the three REPLACE
+preimages from the unchanged SDK forward/before resources and reads the five KEEP
+owners from the actual checkout. Current custody totals 61,836 bytes; the frozen
+baseline still totals 59,781 bytes. Unknown current or frozen bytes refuse.
 
 The existing external supervisor must create Q/artifacts, Q/tmp, Q/home and Q/cache,
 set M3_SOURCE_ROOT to the canonical actual checkout, and set M3_PROOF_ROOT and
@@ -36,9 +40,19 @@ It does not claim to enforce aggregate bytes, reap all descendants or supervise
 an unwrapped standalone execution. The outer supervisor must enforce the unchanged
 512 MiB aggregate cap, 8 GiB free reserve, bounded timeout and final complete census.
 
+Twenty-two constructor controls run over the actual validated byte maps without
+writing source files. They reject drift in each current owner and each frozen
+replacement preimage, malformed/missing/duplicate/unexpected current-owner rows,
+a forged current identity, postimages substituted for frozen originals and extra
+byte-map entries. The successful control proves the baseline uses the three frozen
+originals and the five real KEEP owners. These controls supplement the real four
+filesystem runs below.
+
 The runtime retains three small exact eight-file receivers at
 Q/backport-contract-python/{baseline,candidate,child-reversion}. The candidate is
-assembled from the real three Maven postimages plus the original five KEEP files.
+assembled from the real three fresh Maven postimages plus the actual five KEEP files.
+The baseline uses the pinned original replacement bodies even after those three
+postimages are present in the checkout. No inverse is applied to product sources.
 The child-reversion changes only the unique literal
 {"a.compile": "review/child-only"} back to {} in an isolated copy.
 No source or emitted output is edited. All fixture directories remain for final custody.
@@ -78,9 +92,20 @@ It rehashes source owners, all three receivers, actual Maven outputs and every r
 The host may import inputs(receiver) -> (metadata, actual_sources, input_manifest_hash)
 and validate_execution(execution, Q, receiver) -> None. The latter reparses all four
 hash-bound raw logs, verifies real final fixtures and custody, and rejects scope drift.
+Execution and custody receipts separately bind receiverState APPLIED,
+frozenBaselineSource SDK_FORWARD_BEFORE_REPLACE_PLUS_CURRENT_KEEP, all eight
+frozenBaselineOwners, current source custody and the complete constructorControls.
 Runtime receipt schema is M3_BACKPORT_CONTRACT_CURRENT_OWNER_EXECUTION_V1 and scope is
 EXACT_EIGHT_OWNER_BACKPORT_CONTRACT_DIFFERENTIAL. SDK qualification remains a separate
 prerequisite; the runtime cannot manufacture its receipt.
+
+The applied-custody refinement was admitted before authorship in
+679bece51397656563133a4f7e00063b086c0ee7. It reuses the already qualified host
+8b2f0dc1b85eb0ba755eaccb2752c14a985b5005 and runtime
+4c64fbf724649bd9527e95b6456bcda842ec8086. Original SDK pins, providers, POM,
+verifier and resources remain unchanged. Authored templates require fresh actual
+Maven recipe qualification and an applied-head filesystem run before promotion.
+The earlier source-only proof is a distinct receipt, not proof of the new head.
 
 All broader flags stay false: original private source-fork model, full control reactor,
 matched/full JDK, Java/JNI/native, performance, production application and phase promotion.

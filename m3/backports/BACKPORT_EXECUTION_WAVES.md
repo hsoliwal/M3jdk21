@@ -40,8 +40,15 @@ jep_485.recipe    true    review/JEP-485/module-approval
 The planner validates that approved atom IDs exist in the canonical DAG. Approval is scheduling
 evidence only; it is not Java-21 compatibility or promotion authority.
 
-If a parent atom is held, a child becomes `DEPENDENCY_HOLD` even when the child has its own scope
-approval. No dependent atom can bypass a held parent.
+Admission reasons have explicit precedence. Non-executable evidence remains `EVIDENCE_HOLD`.
+An executable atom without its own required scope approval remains `SCOPE_APPROVAL_HOLD`,
+including when its parent is also held. Only an otherwise-ready child of a held parent becomes
+`DEPENDENCY_HOLD`; its own scope approval cannot bypass that dependency.
+
+Consequently, two unapproved MODULE or MULTI_MODULE atoms retain their individual scope holds.
+Approving only the child leaves the parent scope-held and makes the child dependency-held.
+Approving both permits execution only when their remaining admission checks pass. A held atom
+always has wave -1; scope approval is not dependency readiness or promotion authority.
 
 ## Waves
 

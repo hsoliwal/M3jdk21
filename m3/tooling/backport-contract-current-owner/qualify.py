@@ -23,6 +23,14 @@ ENGINES = {
     "M3GpuToolJoinRecipe": "1c1b1b568d369f688f6953161636bf36b484bf5a",
     "M3GpuToolJoinManifest": "38df5f97bbeec8a8a8cfc77091d56bda925c07f2",
 }
+RECEIVER_STATE = "APPLIED"
+FROZEN_BASELINE_SOURCE = "SDK_FORWARD_BEFORE_REPLACE_PLUS_CURRENT_KEEP"
+PREVIOUS_QUALIFICATION = {
+    "repository": "hsoliwal/M3jdk21",
+    "head": "9ef3708dac4156c89cc9118782fb1b49fdb960df",
+    "runId": 39353881924, "jobId": 118404122728, "artifactId": 12234482603,
+    "qualificationReceiptSha256": "4f1b6140e92f6211ffef5f8084f30721172410b5c0688c8057cc3993914e346e",
+}
 FORBIDDEN = ("originalPrivateModelQualified", "stringDispatchQualified", "fullNativeTargetQualified",
              "windowsQualified", "fullMatchedJdkQualified", "performanceRetentionQualified",
              "productTargetApplied", "phaseAdvanced", "fullControlReactorQualified")
@@ -65,6 +73,28 @@ def write(name, value):
     destination.write_text(json.dumps(value, indent=2) + "\n", encoding="utf-8")
 
 
+def applied_owner_contract(record, metadata, actual):
+    if (record["receiverState"] != RECEIVER_STATE or metadata["receiverState"] != RECEIVER_STATE
+            or record["frozenBaselineSource"] != FROZEN_BASELINE_SOURCE
+            or metadata["frozenBaselineSource"] != FROZEN_BASELINE_SOURCE
+            or record["previousQualification"] != PREVIOUS_QUALIFICATION):
+        raise RuntimeError("exact applied-state baseline and prior qualification required")
+    original = record["receiverOriginalOwners"]
+    current = record["receiverCurrentOwners"]
+    if (len(original) != 8 or len({row["path"] for row in original}) != 8
+            or len(current) != 8 or len({row["path"] for row in current}) != 8
+            or original != metadata["files"] or current != metadata["receiverCurrentOwners"]):
+        raise RuntimeError("separate exact original and current owner tuples required")
+    identities = lambda rows: {row["path"]: {key: row[key] for key in ("bytes", "sha256", "gitBlob")}
+                               for row in rows}
+    frozen, receiving = identities(original), identities(current)
+    if (set(frozen) != set(receiving) or actual != receiving
+            or sum(row["bytes"] for row in frozen.values()) != 59781
+            or sum(row["bytes"] for row in receiving.values()) != 61836):
+        raise RuntimeError("applied receiving owners differ from current custody")
+    return frozen, receiving
+
+
 def binding(fresh=False):
     head = git("rev-parse", "HEAD")
     if head != os.environ["EXPECTED_SOURCE_SHA"] or len(head) != 40:
@@ -102,9 +132,13 @@ def binding(fresh=False):
         raise RuntimeError("hosted authoring inputs must be source-bound")
     subprocess.run(["git", "diff", "HEAD", "--exit-code", "--no-ext-diff", "--", PREFIX, WORKFLOW],
                    cwd=RECEIVER, check=True, timeout=60)
-    owners = record["receiverOriginalOwners"]
+    driver = runpy.run_path(str(regular(HERE / "runtime/qualify.py")),
+                            run_name="m3_backport_contract_binding_runtime_reuse")
+    metadata, actual_sources, _ = driver["inputs"](RECEIVER)
+    applied_owner_contract(record, metadata, actual_sources)
+    owners = record["receiverCurrentOwners"]
     if len(owners) != 8 or len({row["path"] for row in owners}) != 8:
-        raise RuntimeError("eight authentic receiving owners required")
+        raise RuntimeError("eight exact current receiving owners required")
     for row in owners:
         path = str(relative(row["path"]))
         data = regular(RECEIVER / path).read_bytes()
@@ -183,6 +217,7 @@ def report():
                              "sha256":digest, "gitBlob":blob(data)}
     driver = runpy.run_path(str(regular(HERE / "runtime/qualify.py")), run_name="m3_backport_contract_runtime_reuse")
     metadata, actual_sources, input_hash = driver["inputs"](RECEIVER)
+    frozen_originals, current_owners = applied_owner_contract(record, metadata, actual_sources)
     if set(actual_sources) != set(expected_custody):
         raise RuntimeError("runtime input closure must be exactly eight real owners")
     execution_path = regular(ARTIFACTS / "backport-contract-execution.json")
@@ -193,6 +228,13 @@ def report():
             or execution["receiverHead"] != head
             or execution["inputManifestSha256"] != input_hash
             or execution["sourceBase"] != "9a164c31b38c7013c179a3ff38b0bb60c199c7fd"
+            or execution["receiverState"] != RECEIVER_STATE
+            or execution["frozenBaselineSource"] != FROZEN_BASELINE_SOURCE
+            or execution["frozenBaselineOwners"] != frozen_originals
+            or execution["constructorControls"]["schema"] != "M3_BACKPORT_APPLIED_OWNER_CONSTRUCTOR_CONTROLS_V1"
+            or execution["constructorControls"]["scope"] != "PURE_CONSTRUCTOR_OVER_SEALED_BYTES_NO_SOURCE_MUTATION"
+            or execution["constructorControls"]["state"] != "PASS"
+            or execution["constructorControls"]["tests"] != 22
             or (execution["baselineTests"],execution["candidateTests"],execution["syntheticValidatorTests"]) != (21,21,3)):
         raise RuntimeError("current backport proof identity or scope differs")
     for key in ("baselineFailuresReproduced","candidateAllOwningTestsExecuted",
@@ -205,7 +247,13 @@ def report():
     custody_raw = custody_path.read_bytes()
     if (len(custody_raw) != custody_ref["bytes"]
             or hashlib.sha256(custody_raw).hexdigest() != custody_ref["sha256"]):
-        raise RuntimeError("original and isolated receiver custody receipt differs")
+        raise RuntimeError("current and isolated receiver custody receipt differs")
+    custody = json.loads(custody_raw)
+    if (custody["sourceBytes"] != 61836 or custody["before"] != current_owners
+            or custody["after"] != current_owners or custody["frozenBaselineOwners"] != frozen_originals
+            or custody["frozenBaselineBytes"] != 59781
+            or custody["constructorControls"] != execution["constructorControls"]):
+        raise RuntimeError("current custody and frozen semantic baseline must remain distinct")
     labels = ["backport-baseline","backport-candidate",
               "backport-child-approval-refusal","backport-synthetic-validator"]
     commands = execution["commands"]
@@ -229,6 +277,12 @@ def report():
         "successfulSdkRuns":64, "refusedSdkRuns":48, "emittedProductFiles":3,
         "compiledProviders":providers, "unchangedReceiverCustody":expected_custody,
         "emittedProductSourceOutputs":output_rows,
+        "receiverState":RECEIVER_STATE, "frozenBaselineSource":FROZEN_BASELINE_SOURCE,
+        "receiverOriginalOwners":record["receiverOriginalOwners"],
+        "receiverCurrentOwners":record["receiverCurrentOwners"],
+        "frozenBaselineOwners":frozen_originals,
+        "constructorControls":execution["constructorControls"],
+        "previousQualification":PREVIOUS_QUALIFICATION,
         "runtimeInputManifestSha256":input_hash,
         "runtimeExecutionReceiptSha256":sha256(execution_path),
         "sourceCustodySha256":sha256(custody_path),
@@ -252,6 +306,8 @@ if __name__ == "__main__":
               "canonicalSourceCommit":record["sourceCommit"],
               "sourceBindingSha256":sha256(HERE / "source-binding.json"),
               "boundFiles":len(record["files"]), "sdkFiles":record["sdkFiles"],
+              "receiverState":RECEIVER_STATE, "frozenBaselineSource":FROZEN_BASELINE_SOURCE,
+              "previousQualification":PREVIOUS_QUALIFICATION,
               "runtimeApplied":False, "phaseAdvanced":False})
     else:
         report()

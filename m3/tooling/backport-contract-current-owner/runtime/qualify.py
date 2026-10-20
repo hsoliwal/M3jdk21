@@ -168,38 +168,164 @@ def identity(raw):
     return {"bytes": len(raw), "sha256": sha(raw), "gitBlob": git_blob(raw)}
 
 
-def inputs(receiver):
-    real_directory(receiver, "RECEIVER")
-    real_directory(TASK, "TASK")
-    raw = safe_file(TASK, "INPUTS.json").read_bytes()
-    require(len(raw) < 32768, "INPUT_MANIFEST_TOO_LARGE")
-    metadata = json.loads(raw)
-    require(metadata["schema"] == 1
+FROZEN = SDK / "src/main/resources/com/synexia/rewrite/backport-contract-current-owner-20261019/forward/before"
+RECEIVER_STATE = "APPLIED"
+FROZEN_BASELINE_SOURCE = "SDK_FORWARD_BEFORE_REPLACE_PLUS_CURRENT_KEEP"
+ORIGINAL_BYTES, CURRENT_BYTES = 59781, 61836
+CONSTRUCTOR_CONTROL_SCHEMA = "M3_BACKPORT_APPLIED_OWNER_CONSTRUCTOR_CONTROLS_V1"
+
+def owner_rows(metadata):
+    require(isinstance(metadata, dict)
+            and metadata["schema"] == 1
             and metadata["capability"] == "backport-contract-current-owner-20261019"
             and metadata["preCodeAdmission"] == "ab8633cc645487bc69bcd6919f328a0e1b5e40a9"
             and metadata["receiverCommit"] == "9a164c31b38c7013c179a3ff38b0bb60c199c7fd"
-            and metadata["capBytes"] == CAP and metadata["reserveBytes"] == RESERVE,
+            and metadata["capBytes"] == CAP and metadata["reserveBytes"] == RESERVE
+            and metadata["receiverState"] == RECEIVER_STATE
+            and metadata["frozenBaselineSource"] == FROZEN_BASELINE_SOURCE,
             "INPUT_POLICY_DRIFT")
     rows = metadata["files"]
-    require(len(rows) == 8 and {row["path"] for row in rows} == set(PINNED),
-            "EXACT_EIGHT_INPUTS_REQUIRED")
+    require(isinstance(rows, list) and len(rows) == 8
+            and all(isinstance(row, dict) and isinstance(row.get("path"), str) for row in rows)
+            and {row["path"] for row in rows} == set(PINNED),
+            "EXACT_EIGHT_ORIGINAL_INPUTS_REQUIRED")
     require({row["path"]: row for row in metadata["replacements"]} == AFTER
             and len(metadata["replacements"]) == 3,
             "EXACT_THREE_POSTIMAGE_PINS_REQUIRED")
     require(metadata["expectedTestIds"] == EXPECTED_IDS
             and metadata["syntheticTestIds"] == SYNTHETIC_IDS,
             "FROZEN_OWNING_TEST_INVENTORY_DRIFT")
-    actual = {}
+    originals = {}
+    expected_current = []
     for row in rows:
         path = row["path"]
         require(row["gitBlob"] == PINNED[path] and row["bytes"] < 32768
                 and row["role"] == ("REPLACE" if path in AFTER else "KEEP"),
                 "CANONICAL_OWNER_IDENTITY_DRIFT:" + path)
-        found = identity(safe_file(receiver, path).read_bytes())
-        require(all(row[key] == found[key] for key in found), "SOURCE_PIN_DRIFT:" + path)
-        actual[path] = found
-    require(sum(item["bytes"] for item in actual.values()) == 59781,
-            "EIGHT_OWNER_BYTES_DRIFT")
+        originals[path] = row
+        expected_current.append({**row, **AFTER.get(path, {})})
+    declared = metadata["receiverCurrentOwners"]
+    require(isinstance(declared, list) and len(declared) == 8
+            and all(isinstance(row, dict) and isinstance(row.get("path"), str) for row in declared)
+            and len({row["path"] for row in declared}) == 8
+            and {row["path"] for row in declared} == set(PINNED),
+            "EXACT_EIGHT_CURRENT_INPUTS_REQUIRED")
+    require(declared == expected_current, "CURRENT_OWNER_LINEAGE_DRIFT")
+    require(sum(row["bytes"] for row in rows) == ORIGINAL_BYTES
+            and sum(row["bytes"] for row in declared) == CURRENT_BYTES,
+            "OWNER_BYTE_INVENTORY_DRIFT")
+    return originals, {row["path"]: row for row in declared}
+
+
+def require_identity(raw, row, label):
+    found = identity(raw)
+    require(all(row[key] == found[key] for key in found), label + row["path"])
+    return found
+
+
+def construct_frozen_baseline(metadata, current_data, frozen_data):
+    """Pure constructor: three frozen preimages plus the five real current KEEP owners."""
+    originals, current = owner_rows(metadata)
+    require(set(current_data) == set(PINNED), "EXACT_EIGHT_CURRENT_BYTES_REQUIRED")
+    require(set(frozen_data) == set(AFTER), "EXACT_THREE_FROZEN_PREIMAGES_REQUIRED")
+    for path, raw in current_data.items():
+        require_identity(raw, current[path], "CURRENT_OWNER_PIN_DRIFT:")
+    for path, raw in frozen_data.items():
+        require_identity(raw, originals[path], "FROZEN_PREIMAGE_PIN_DRIFT:")
+    baseline = {path: frozen_data[path] if path in AFTER else current_data[path]
+                for path in PINNED}
+    for path, raw in baseline.items():
+        require_identity(raw, originals[path], "FROZEN_BASELINE_PIN_DRIFT:")
+    require(sum(len(raw) for raw in baseline.values()) == ORIGINAL_BYTES,
+            "FROZEN_BASELINE_BYTES_DRIFT")
+    return baseline
+
+
+def owner_data(receiver):
+    return {path: safe_file(receiver, path).read_bytes() for path in PINNED}
+
+
+def frozen_data():
+    real_directory(FROZEN, "FROZEN_SDK_PREIMAGES")
+    return {path: safe_file(FROZEN, path).read_bytes() for path in AFTER}
+
+
+def frozen_baseline(receiver, metadata):
+    return construct_frozen_baseline(metadata, owner_data(receiver), frozen_data())
+
+
+def constructor_controls_from_data(metadata, current, frozen):
+    """Exercise the real pure constructor over sealed bytes without touching source files."""
+    baseline = construct_frozen_baseline(metadata, current, frozen)
+    require(all(baseline[path] != current[path] for path in AFTER)
+            and all(baseline[path] == current[path] for path in PINNED if path not in AFTER),
+            "BASELINE_MUST_USE_FROZEN_REPLACEMENTS_AND_REAL_KEEP")
+    cases = ["applied-current-frozen-baseline-constructed"]
+    def refused(name, candidate_metadata, candidate_current, candidate_frozen, expected):
+        try:
+            construct_frozen_baseline(candidate_metadata, candidate_current, candidate_frozen)
+        except RuntimeError as error:
+            require(expected in str(error), "CONSTRUCTOR_CONTROL_WRONG_REFUSAL:" + name)
+        else:
+            raise RuntimeError("CONSTRUCTOR_CONTROL_UNEXPECTED_ADMISSION:" + name)
+        cases.append(name)
+    for path in PINNED:
+        changed = dict(current)
+        changed[path] = changed[path] + b"\nunknown current-owner drift\n"
+        refused("current-drift:" + path, metadata, changed, frozen, "CURRENT_OWNER_PIN_DRIFT:")
+    for path in AFTER:
+        changed = dict(frozen)
+        changed[path] = changed[path] + b"\nunknown frozen-preimage drift\n"
+        refused("frozen-drift:" + path, metadata, current, changed, "FROZEN_PREIMAGE_PIN_DRIFT:")
+    import copy
+    variants = {}
+    value = copy.deepcopy(metadata)
+    value["receiverCurrentOwners"].pop()
+    variants["missing"] = value
+    value = copy.deepcopy(metadata)
+    value["receiverCurrentOwners"][-1] = dict(value["receiverCurrentOwners"][0])
+    variants["duplicate"] = value
+    value = copy.deepcopy(metadata)
+    value["receiverCurrentOwners"][-1]["path"] = "m3/backports/unexpected.py"
+    variants["unexpected"] = value
+    value = copy.deepcopy(metadata)
+    value["receiverCurrentOwners"] = {}
+    variants["malformed"] = value
+    for name, value in variants.items():
+        refused("current-rows-" + name, value, current, frozen, "EXACT_EIGHT_CURRENT_INPUTS_REQUIRED")
+    value = copy.deepcopy(metadata)
+    value["receiverCurrentOwners"][0]["sha256"] = "0" * 64
+    refused("current-row-forged-identity", value, current, frozen, "CURRENT_OWNER_LINEAGE_DRIFT")
+    for path in AFTER:
+        changed = dict(frozen)
+        changed[path] = current[path]
+        refused("postimage-is-not-baseline:" + path, metadata, current, changed, "FROZEN_PREIMAGE_PIN_DRIFT:")
+    refused("extra-current-bytes", metadata, {**current, "unexpected": b""}, frozen,
+            "EXACT_EIGHT_CURRENT_BYTES_REQUIRED")
+    refused("extra-frozen-bytes", metadata, current, {**frozen, "unexpected": b""},
+            "EXACT_THREE_FROZEN_PREIMAGES_REQUIRED")
+    require(len(cases) == 22 and len(set(cases)) == 22, "EXACT_CONSTRUCTOR_CONTROLS_REQUIRED")
+    return {"schema": CONSTRUCTOR_CONTROL_SCHEMA, "state": "PASS", "tests": len(cases),
+            "cases": cases, "scope": "PURE_CONSTRUCTOR_OVER_SEALED_BYTES_NO_SOURCE_MUTATION"}
+
+
+def constructor_controls(receiver, metadata):
+    return constructor_controls_from_data(metadata, owner_data(receiver), frozen_data())
+
+
+def inputs(receiver):
+    real_directory(receiver, "RECEIVER")
+    real_directory(TASK, "TASK")
+    raw = safe_file(TASK, "INPUTS.json").read_bytes()
+    require(len(raw) < 32768, "INPUT_MANIFEST_TOO_LARGE")
+    metadata = json.loads(raw)
+    _, current = owner_rows(metadata)
+    data = owner_data(receiver)
+    construct_frozen_baseline(metadata, data, frozen_data())
+    actual = {path: require_identity(data[path], row, "CURRENT_OWNER_PIN_DRIFT:")
+              for path, row in current.items()}
+    require(sum(item["bytes"] for item in actual.values()) == CURRENT_BYTES,
+            "CURRENT_EIGHT_OWNER_BYTES_DRIFT")
     return metadata, actual, sha(raw)
 
 
@@ -395,6 +521,12 @@ def check_commands(commands, root, fixture_root):
 def validate_execution(execution, root, receiver):
     """Recompute source, real emitted outputs, all four raw logs and final fixtures. Returns None."""
     metadata, current, manifest_hash = inputs(receiver)
+    baseline = {path: identity(raw) for path, raw in frozen_baseline(receiver, metadata).items()}
+    controls = constructor_controls(receiver, metadata)
+    require(execution["receiverState"] == RECEIVER_STATE
+            and execution["frozenBaselineSource"] == FROZEN_BASELINE_SOURCE
+            and execution["frozenBaselineOwners"] == baseline
+            and execution["constructorControls"] == controls, "APPLIED_BASELINE_IDENTITY_DRIFT")
     require(execution["schema"] == SCHEMA and execution["scope"] == SCOPE
             and execution["state"] == "PASS"
             and execution["inputManifestSha256"] == manifest_hash
@@ -421,13 +553,16 @@ def validate_execution(execution, root, receiver):
     custody = json.loads(raw)
     require(custody["schema"] == 1 and custody["qualificationId"] == execution["qualificationId"]
             and custody["inputManifestSha256"] == manifest_hash
-            and custody["files"] == 8 and custody["sourceBytes"] == 59781
+            and custody["files"] == 8 and custody["sourceBytes"] == CURRENT_BYTES
             and custody["before"] == custody["after"] == current
+            and custody["frozenBaselineOwners"] == baseline
+            and custody["frozenBaselineBytes"] == ORIGINAL_BYTES
+            and custody["constructorControls"] == controls
             and custody["unchanged"] is True, "EXACT_SOURCE_OWNERS_MUST_REMAIN_UNCHANGED")
     wave = safe_file(SDK / "target/emitted", WAVES).read_bytes()
     require(wave.count(CHILD_APPROVAL.encode("utf-8")) == 1, "UNIQUE_CHILD_APPROVAL_ANCHOR_REQUIRED")
     reverted = wave.replace(CHILD_APPROVAL.encode("utf-8"), b"{}")
-    expected_maps = expected_fixture_maps(current, postimages, reverted)
+    expected_maps = expected_fixture_maps(baseline, postimages, reverted)
     fixture_root = root / "backport-contract-python"
     fixture_maps = {name: snapshot(fixture_root / name) for name in expected_maps}
     require(fixture_maps == expected_maps
@@ -444,6 +579,9 @@ def validate_execution(execution, root, receiver):
 
 def execute(root, receiver, ident):
     metadata, before, manifest_hash = inputs(receiver)
+    baseline_data = frozen_baseline(receiver, metadata)
+    baseline = {path: identity(raw) for path, raw in baseline_data.items()}
+    controls = constructor_controls(receiver, metadata)
     require(os.environ.get("M3_PROOF_ROOT") == str(root), "PROOF_ROOT_ENVIRONMENT_MISMATCH")
     env = environment(root)
     head = receiver_head(receiver, env)
@@ -460,12 +598,12 @@ def execute(root, receiver, ident):
     anchor = CHILD_APPROVAL.encode("utf-8")
     require(wave.count(anchor) == 1, "UNIQUE_CHILD_APPROVAL_ANCHOR_REQUIRED")
     reverted = wave.replace(anchor, b"{}")
-    expected_maps = expected_fixture_maps(before, postimages, reverted)
+    expected_maps = expected_fixture_maps(baseline, postimages, reverted)
     for name in ("baseline", "candidate", "child-reversion"):
         destination = work / name
         destination.mkdir()
         for path in PINNED:
-            raw = safe_file(receiver, path).read_bytes() if name == "baseline" else candidate_data[path]
+            raw = baseline_data[path] if name == "baseline" else candidate_data[path]
             if name == "child-reversion" and path == WAVES:
                 raw = reverted
             target = destination.joinpath(*PurePosixPath(path).parts)
@@ -492,7 +630,9 @@ def execute(root, receiver, ident):
     require(fixture_before == fixture_after, "RECEIVER_FIXTURES_CHANGED_DURING_TESTS")
     custody = write(root, "backport-contract-source-custody.json", {
         "schema": 1, "qualificationId": ident, "inputManifestSha256": manifest_hash,
-        "files": 8, "sourceBytes": 59781, "before": before, "after": after, "unchanged": True,
+        "files": 8, "sourceBytes": CURRENT_BYTES, "before": before, "after": after, "unchanged": True,
+        "frozenBaselineOwners": baseline, "frozenBaselineBytes": ORIGINAL_BYTES,
+        "constructorControls": controls,
         "fixturesBefore": fixture_before, "fixturesAfter": fixture_after,
     })
     receipt = {
@@ -500,6 +640,8 @@ def execute(root, receiver, ident):
         "receiverHead": head, "ciReportedSha": os.environ.get("GITHUB_SHA", ""),
         "sourceBase": metadata["receiverCommit"], "preCodeAdmission": metadata["preCodeAdmission"],
         "inputManifestSha256": manifest_hash, "sourceCustody": custody,
+        "receiverState": RECEIVER_STATE, "frozenBaselineSource": FROZEN_BASELINE_SOURCE,
+        "frozenBaselineOwners": baseline, "constructorControls": controls,
         "commands": commands, "results": results, "emitted": postimages,
         "baselineTests": 21, "candidateTests": 21, "childApprovalReversionTests": 21,
         "syntheticValidatorTests": 3,
@@ -523,8 +665,10 @@ def main():
     args = parser.parse_args()
     root, receiver, ident = context(args.output_root)
     if args.inputs_only:
-        _, actual, manifest_hash = inputs(receiver)
-        print(json.dumps({"state": "INPUTS_ONLY", "qualificationId": ident,
+        metadata, actual, manifest_hash = inputs(receiver)
+        controls = constructor_controls(receiver, metadata)
+        print(json.dumps({"state": "INPUTS_ONLY", "receiverState": RECEIVER_STATE,
+            "constructorControls": controls, "qualificationId": ident,
             "files": len(actual), "inputManifestSha256": manifest_hash,
             "nativeExecuted": False}, sort_keys=True))
     else:

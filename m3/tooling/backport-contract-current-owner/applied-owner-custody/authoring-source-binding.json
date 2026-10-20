@@ -2,7 +2,7 @@
   "schema": "M3_BACKPORT_APPLIED_OWNER_AUTHORING_SOURCE_BINDING_V1",
   "repository": "hsoliwal/com.synexia",
   "receiverRepository": "hsoliwal/M3jdk21",
-  "sourceCommit": "26f1c7ec531ed036dc0f828684b94999d1a09690",
+  "sourceCommit": "ad255811262f7b5b17717747cd64fbc669a9db5a",
   "admissionCommit": "679bece51397656563133a4f7e00063b086c0ee7",
   "sdkPath": "m3/tooling/backport-contract-current-owner/applied-owner-custody/authoring-sdk/",
   "sdkFiles": 46,
@@ -331,9 +331,9 @@
     },
     {
       "targetPath": ".github/workflows/m3-backport-contract-current-owner.yml",
-      "gitBlob": "5ab3cba8a55c95095e3db09b8c959938aeab91e1",
-      "bytes": 40399,
-      "sha256": "9bb4d837c3a477bde62834691b2908619a7430f7b4c2831fd542fff191624405",
+      "gitBlob": "b992bdbfb5187f868fbf3388d01edb7d9e9d905c",
+      "bytes": 40769,
+      "sha256": "594e164e1befff52160360c6bdda1872e4821023ff180a7fca725dfc67869eb1",
       "sourcePath": "synexia-openrewrite-recipes/tasks/backport-contract-current-owner-20261019/hosted/qualification.yml"
     }
   ],
