@@ -14,6 +14,9 @@ import com.sun.source.tree.CompilationUnitTree;
 import com.sun.tools.javac.m3.M3ASTPC;
 import java.io.IOException;
 import java.net.URI;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
 import java.util.Objects;
 import javax.lang.model.element.TypeElement;
 
@@ -54,6 +57,95 @@ public interface M3AST extends AutoCloseable {
      */
     static M3AST open(JavacTask task, boolean retainSyntax) {
         return M3ASTPC.open(task, retainSyntax);
+    }
+
+    /**
+     * Bind an explicit source workset to the original, unstarted compiler task.
+     * Outside types must be supplied by that task's existing class/module paths
+     * or already entered compiler context. Source discovery outside the workset
+     * is refused before opening the source, including implicit completion and
+     * module/package probes. This does not create another task, parse a file,
+     * change compiler options, or manufacture symbols for missing dependencies.
+     *
+     * <p>The workset describes this compilation's source generation, not a file
+     * watcher or a reusable attribution key. Changed source or compiler inputs
+     * require the caller's normal invalidation. Unchanged external class files
+     * remain binary inputs; they do not need to be recompiled from source.
+     */
+    static M3AST open(JavacTask task, boolean retainSyntax, Scope scope) {
+        return M3ASTPC.open(task, retainSyntax, Objects.requireNonNull(scope, "scope"));
+    }
+
+    /** The caller-selected source boundary; dependency resolution stays with javac. */
+    enum ScopeKind { FILE, PACKAGE, MODULE, PROJECT }
+
+    /**
+     * Immutable admission of exact source URIs. A sorted reference array provides
+     * logarithmic membership without a retained map entry per source. This set
+     * includes any intentionally generated source or source module descriptor;
+     * an unlisted generated/dependency source is refused like any other source.
+     */
+    final class Scope {
+        private final ScopeKind kind;
+        private final String name;
+        private final URI[] sources;
+
+        private Scope(ScopeKind kind, String name, Collection<URI> sources) {
+            this.kind = kind;
+            this.name = Objects.requireNonNull(name, "name");
+            this.sources = Objects.requireNonNull(sources, "sources").toArray(URI[]::new);
+            if (this.sources.length == 0 || kind == ScopeKind.FILE && this.sources.length != 1) {
+                throw new IllegalArgumentException("scope requires its explicit source workset");
+            }
+            if (kind == ScopeKind.MODULE && name.isEmpty()) {
+                throw new IllegalArgumentException("module scope requires a module name");
+            }
+            for (URI source : this.sources) {
+                if (!Objects.requireNonNull(source, "source URI").isAbsolute()) {
+                    throw new IllegalArgumentException("scope source URI must be absolute");
+                }
+            }
+            Arrays.sort(this.sources);
+            for (int index = 1; index < this.sources.length; index++) {
+                if (this.sources[index - 1].equals(this.sources[index])) {
+                    throw new IllegalArgumentException("duplicate scope source URI");
+                }
+            }
+        }
+
+        public static Scope file(URI source) {
+            return new Scope(ScopeKind.FILE, "", List.of(source));
+        }
+
+        /** Empty package name admits the unnamed package. */
+        public static Scope packageSources(String name, Collection<URI> sources) {
+            return new Scope(ScopeKind.PACKAGE, name, sources);
+        }
+
+        public static Scope moduleSources(String name, Collection<URI> sources) {
+            return new Scope(ScopeKind.MODULE, name, sources);
+        }
+
+        public static Scope projectSources(Collection<URI> sources) {
+            return new Scope(ScopeKind.PROJECT, "", sources);
+        }
+
+        public ScopeKind kind() { return kind; }
+        public String name() { return name; }
+        public int sourceCount() { return sources.length; }
+        public List<URI> sourceUris() { return List.of(sources.clone()); }
+        public boolean contains(URI source) {
+            return Arrays.binarySearch(sources, Objects.requireNonNull(source, "source")) >= 0;
+        }
+
+        @Override public boolean equals(Object other) {
+            return other instanceof Scope scope && kind == scope.kind
+                    && name.equals(scope.name) && Arrays.equals(sources, scope.sources);
+        }
+
+        @Override public int hashCode() {
+            return 31 * (31 * kind.hashCode() + name.hashCode()) + Arrays.hashCode(sources);
+        }
     }
 
     /**
