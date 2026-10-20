@@ -111,6 +111,20 @@ public final class M3FileBuildImpact {
             }
         }
         int edgeCount = dependencies.length;
+        boolean anyDirect = false;
+        for (long reason : reasons) if (reason != 0) anyDirect = true;
+        // A no-op or untrusted generation never needs a retained reverse graph.
+        // Still validate every endpoint so bad compiler facts never look valid.
+        if (global || !anyDirect) {
+            for (int e = 0; e < edgeCount; e++) {
+                Objects.checkIndex(dependencies[e], n);
+                Objects.checkIndex(dependents[e], n);
+            }
+            if (global) {
+                for (int i = 0; i < n; i++) reasons[i] |= CONSERVATIVE;
+            }
+            return new Plan(reasons, completeGraph, global);
+        }
         int[] start = new int[n + 1];
         for (int e = 0; e < edgeCount; e++) {
             int dependency = Objects.checkIndex(dependencies[e], n);
@@ -122,10 +136,6 @@ public final class M3FileBuildImpact {
         int[] reverse = new int[edgeCount];
         for (int e = 0; e < edgeCount; e++) {
             reverse[cursor[dependencies[e]]++] = dependents[e];
-        }
-        if (global) {
-            for (int i = 0; i < n; i++) reasons[i] |= CONSERVATIVE;
-            return new Plan(reasons, completeGraph, true);
         }
         int[] queue = new int[n];
         byte[] enqueued = new byte[n];
