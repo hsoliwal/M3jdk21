@@ -1,7 +1,20 @@
 type: specs.openrewrite.org/v1beta/recipe
 name: com.synexia.m3jdk.AstBuildReverse20261017
-displayName: Reuse composite M3String leaf cursors for long prefix comparisons
-description: Replays exact source-sealed Java21 in-place String and bridge atoms; no additional parser or String payload.
+displayName: M3String composite cursor FILE-local multi-pass refinement
+description: >-
+  Ordered mechanical Java21 passes over already-owned M3String atoms: one source
+  file per OpenRewrite recipe, then real SDK/receiver fixed-point proof. No
+  new source or AST owner; original java.lang and JNI contracts remain authority.
+tags:
+  - m3jdk21
+  - multi-pass
+  - file-local
+  - recipe-first
+  - contract-preserving
 recipeList:
   - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
-      crateName: m3-ast-build-reverse-20261017-m3-prefix-cursor-20261020
+      crateName: m3-prefix-cursor-20261020-p1
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: m3-prefix-cursor-20261020-p2
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: m3-prefix-cursor-20261020-p3

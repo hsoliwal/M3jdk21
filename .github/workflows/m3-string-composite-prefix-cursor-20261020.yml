@@ -31,7 +31,16 @@ jobs:
         with:
           distribution: temurin
           java-version: '21'
-      - name: Execute actual existing OpenRewrite SDK and source-seal receiver
+      - name: Verify ordered per-file passes and exact source custody
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -m unittest discover \
+            -s m3/runtime-integration/string-prefix-cursor-20261020 \
+            -p 'test_verify_multi_pass.py' -v
+          python3 m3/runtime-integration/string-prefix-cursor-20261020/verify_multi_pass.py \
+            --root "$PWD"
+      - name: Execute composed three-pass OpenRewrite SDK and exact receiver
         shell: bash
         run: |
           set -euo pipefail
