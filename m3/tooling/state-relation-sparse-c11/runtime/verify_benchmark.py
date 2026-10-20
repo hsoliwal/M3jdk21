@@ -9,9 +9,9 @@ import statistics
 
 MASK = (1 << 64) - 1
 SEED, MULTIPLIER = 0xcbf29ce484222325, 0x100000001b3
-DIMENSIONS = (1, 2, 31, 32, 63, 64)
+DIMENSIONS = (1, 2, 31, 32, 63, 64, 3, 4, 8, 16)
 FAMILIES = ("zero", "sparse", "dense", "highest-bit", "ceiling-early",
-            "repeated-frontier", "alternating", "random")
+            "repeated-frontier", "alternating", "random", "zero-left-only", "zero-right-only")
 VARIANTS = ("baseline", "sparse", "portable")
 
 
@@ -81,32 +81,36 @@ def checksum_checkpoints(expected, iterations):
 def validate(raw):
     require(isinstance(raw, bytes) and 0 < len(raw) <= 1048576, "bounded real stdout required")
     lines = raw.decode("utf-8", errors="strict").splitlines()
-    require(len(lines) == 1538 and all(0 < len(line) < 16384 for line in lines), "exact trace census")
+    require(len(lines) == 3202 and all(0 < len(line) < 16384 for line in lines), "exact trace census")
     records = [json.loads(line, object_pairs_hook=unique_object) for line in lines]
     require(all(isinstance(row, dict) for row in records), "object records required")
     environment, final = records[0], records[-1]
     require(set(environment) == {"kind", "schema", "cases", "samples", "variants", "targetNs",
                                 "iterationCap", "clockResolutionNs", "randomInputApi", "randMax"}, "environment fields")
     require(environment["kind"] == "environment"
-            and environment["schema"] == "M3_RELATION_NATIVE_PAIRED_TIMING_V1"
-            and (environment["cases"], environment["samples"], environment["variants"]) == (96, 5, 3)
+            and environment["schema"] == "M3_RELATION_NATIVE_PAIRED_TIMING_V2"
+            and (environment["cases"], environment["samples"], environment["variants"]) == (200, 5, 3)
             and environment["targetNs"] == 20000000 and environment["iterationCap"] == 1048576
             and integer(environment["clockResolutionNs"], 1, 1000000000)
             and environment["randomInputApi"] == "libc-rand-srand"
             and integer(environment["randMax"], 32767, 2147483647), "timing protocol")
     require(set(final) == {"kind", "cases", "measurements", "consumedChecksum", "state"}
             and final["kind"] == "summary" and final["state"] == "PASS"
-            and final["cases"] == 96 and final["measurements"] == 1440
+            and final["cases"] == 200 and final["measurements"] == 3000
             and isinstance(final["consumedChecksum"], str)
             and re.fullmatch("[0-9a-f]{16}", final["consumedChecksum"]), "terminal summary")
     cases, measurements, consumed = [], 0, 0
-    for case_id in range(96):
+    for case_id in range(200):
         offset = 1 + case_id * 16
         item = records[offset]
         require(set(item) == {"kind", "case", "states", "family", "operation", "iterations",
                               "pilotNs", "pilotChecksum", "targetReached", "left", "right", "expected"},
                 "case fields")
-        n, family = DIMENSIONS[case_id // 16], FAMILIES[(case_id % 16) // 2]
+        if case_id < 160:
+            n, family = DIMENSIONS[case_id // 16], FAMILIES[(case_id % 16) // 2]
+        else:
+            extra = case_id - 160
+            n, family = DIMENSIONS[extra // 4], FAMILIES[8 + (extra % 4) // 2]
         operation = "compose" if case_id % 2 == 0 else "repeat-7"
         require(item["kind"] == "case" and type(item["case"]) is int and item["case"] == case_id
                 and type(item["states"]) is int and item["states"] == n
@@ -123,6 +127,12 @@ def validate(raw):
         require(expected == expected_output(left, right, operation), "independent exact output oracle")
         if family == "zero":
             require(not any(left) and not any(right), "zero corpus")
+        elif family == "zero-left-only":
+            require(not any(left) and right == [1 << i for i in range(n)],
+                    "exact zero-left/diagonal-right corpus")
+        elif family == "zero-right-only":
+            require(left == [1 << i for i in range(n)] and not any(right),
+                    "exact diagonal-left/zero-right corpus")
         elif family == "dense":
             require(all(v == (1 << n) - 1 for v in left), "dense corpus")
         elif family == "highest-bit":
@@ -166,12 +176,12 @@ def validate(raw):
                       "sparseSpeedupOverBaseline": medians["baseline"] / medians["sparse"],
                       "portableSpeedupOverBaseline": medians["baseline"] / medians["portable"],
                       "noisy": any(value > .20 for value in noise.values())})
-    require(measurements == 1440 and format(consumed, "016x") == final["consumedChecksum"],
+    require(measurements == 3000 and format(consumed, "016x") == final["consumedChecksum"],
             "complete warmup/pilot/sample checksum chain")
-    return {"schema": "M3_RELATION_NATIVE_PAIRED_TIMING_VERIFICATION_V1",
+    return {"schema": "M3_RELATION_NATIVE_PAIRED_TIMING_VERIFICATION_V2",
             "state": "PASS_DATA_INTEGRITY_ONLY", "scope": "NATIVE_KERNEL_WITH_COMMON_DISPATCH_AND_CHECKSUM_OVERHEAD",
-            "cases": cases, "caseCount": 96, "measurements": 1440,
-            "independentMatrixOracles": 96, "variants": list(VARIANTS),
+            "cases": cases, "caseCount": 200, "measurements": 3000,
+            "independentMatrixOracles": 200, "variants": list(VARIANTS),
             "clockResolutionNs": environment["clockResolutionNs"],
             "allSamplesRetained": True, "fullOutputAndChecksumVerified": True,
             "noisyCases": sum(item["noisy"] for item in cases),

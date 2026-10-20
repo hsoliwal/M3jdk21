@@ -1,70 +1,52 @@
 <!-- SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project -->
 <!-- SPDX-License-Identifier: Apache-2.0 -->
 
-# Sparse StateRelation C11 proposal SDK
+# Adaptive StateRelation C11 proposal SDK
 
-Canonical owner: hsoliwal/com.synexia. Borrow-first admission was committed before
-this source authoring at 5d2d2c39120c7a779e2beb06f0af19cb7364e253, capability
-native-state-relation-sparse64-frontier. This is a source-only proposal. Maven,
-candidate C11/JNI execution and performance evaluation are NOT_RUN.
+Canonical recipe owner: hsoliwal/com.synexia. Pre-code admission
+16fe92372d86a157094ba973bbd8f347c1a6707e precedes this successor. Read the pinned durable
+rejection linked from ../adaptive/RECIPE_MEMORY.json before revising this recipe.
+This SDK is authored source awaiting new Maven/native/timing qualification.
 
-The SDK directly imports the two existing source-sealed OpenRewrite engine
-providers and Maven POM from current StateRelation SDK tree
-a52ab91c9d023e9bc30bb2396e7599a305caf5e8. Their bytes and dependency coordinates
-are unchanged. Two thin class-backed recipes activate by exact YAML names:
+The original default-CTZ proposal abb751e6056e34f25d0f09660d575f362610359e passed its three
+JUnit methods,16 successful/32 refused applications and all three original C/JNI
+proof variants at run39382619623/job118494964789. Its96-case/1440-sample native
+benchmark included dense/zero/small regressions; default promotion was rejected.
+Those historical results do not qualify this successor or full String/JDK integration.
 
-- com.synexia.m3.StateRelationSparseC11
-- com.synexia.m3.StateRelationSparseC11.Inverse
+The two original source-sealed providers and original Maven POM remain byte-identical:
+engine1c1b1b568d369f688f6953161636bf36b484bf5a,
+manifest38df5f97bbeec8a8a8cfc77091d56bda925c07f2,
+POMd79867bcc09ad6329e12418e15907e54b8ab025f.
+Exact class-backed recipe names remain com.synexia.m3.StateRelationSparseC11 and
+com.synexia.m3.StateRelationSparseC11.Inverse. Each direction has one exact C
+CHANGE and four KEEP owners. The inverse restores the complete original baseline.
 
-Each direction has one exact C CHANGE and four KEEP owners. Complete frozen
-before/out fixtures preserve the original Java StateRelation, DotStar, C header
-and 71,748-case proof byte-for-byte. The C baseline is Git blob
-610ca8bab47065a49b9b58814d6392a287f4fd8b, 5,899 bytes. The candidate is Git blob
-abb751e6056e34f25d0f09660d575f362610359e, 6,237 bytes, SHA256
-5d40fe7c65d54e26c6964313186624675592703ea6e2e1cb2886840b2f15347e.
-The inverse payload is the complete original baseline C source.
+Candidate C is generated from original610ca8bab47065a49b9b58814d6392a287f4fd8b,
+5899 bytes; successor106b95061f1adaca160e8fece2ad083f07f0b51b, 6697 bytes, SHA256
+4c453d51223c3223f07fb88b39e1c1b6ed9891de8157d32a63990a9a4488ece9. All rows validate before the optimized-only
+ceiling==0 shortcut writes the known zero output. Otherwise the optimized lane
+uses guarded nonzero CTZ only for states>2 and active!=mask; small/full frontiers
+use the literal original positional loop. Forced-positional and unsupported
+compiler paths preserve the original source after preprocessing. Actual compiler
+preprocessing equality remains a required external gate. Adjacent-frontier reuse,
+staged nonzero output, JNI/repeat code, public interfaces and ownership remain intact.
+No new retained cache, memory owner or foreign implementation is introduced.
 
-Only the inner scan of a changed invocation-local frontier is replaced. Under
-GCC/Clang, the guarded nonzero uint64_t bits value supplies __builtin_ctzll through
-an unsigned long long cast; clearing its least set bit visits the same right-hand
-rows. M3_STATE_RELATION_FORCE_POSITIONAL_SCAN or an unsupported compiler selects
-the complete original size_t column/value/positional loop byte-for-byte. This
-uses C11 and the existing headers. No foreign implementation or header is copied.
+Three original JUnit method names remain unchanged. Both-order forward/inverse
+round-trips and fixed points retain16 successful runs and two authentic emissions.
+All30 per-owner drift/missing/duplicate refusals and two historical refusals remain;
+the historical method adds both-direction refusal of the exact rejected default C.
+Expected actual counters:3 tests,16 successful,34 refused,2 emitted. No test was
+executed during authoring. Unknown recipe-name, unrelated-source and identity checks remain.
 
-All validation, ceiling computation, adjacent-frontier reuse, staged output
-writes, alias behavior, repeat algorithm, JNI entry points and bit transfers,
-exceptions, public interfaces, ownership and native-allocation behavior remain
-outside the changed atom. Sparse row visits may decline; worst-case O(n^2) for
-n <= 64 remains unchanged. Performance and retention are unmeasured.
+There are28 SDK files including27 nonself pins. verify.py validates closed source
+inventory, byte counts, SHA256/Git identities, both directional manifests, exact
+providers/POM and both immutable non-target C fixtures. Its authored controls cover
+21 malformed XML cases,14 counter/marker cases and64 closed-input refusals; their
+Python execution remains NOT_RUN for this successor.
 
-Three actual JUnit methods are authored:
-
-- bothPartialStatesRoundTripAndReachFixedPointsInBothOrders: both complete
-  before/after states, both input orders, forward/inverse applications and
-  second applications at fixed points: 16 successful real recipe applications.
-- everyOwnerRefusesDriftMissingAndDuplicateWithoutMutation: each of five owners
-  in both directions refuses drift, missing and duplicate ownership: 30 refusals.
-- historicalCRefusesBothDirectionsWithoutMutation: the existing historical C
-  fixture is refused in both directions: two additional refusals.
-
-Tests preserve unrelated input, original maps and SourceFile identities/bytes,
-check exact named activation and unknown-name refusal, and verify both manifests
-and all payload identities. Only after all three methods pass do they retain the
-actual generated SourceFile postimages, one in target/emitted and one in
-target/inverse-emitted, and CREATE_NEW counter evidence. Expected counters are
-three tests, 16 successes, 32 refusals and two emitted C files.
-
-There are 27 SDK files including 26 nonself pins. verify.py checks closed physical
-source inventory, raw UTF8 SHA256, Git blob SHA and byte sizes, original provider
-and POM identities, both directional manifests and four unchanged owners.
-Authored self-tests include 21 XML-report, 14 counter/stdout and 62 closed-input
-refusals. Synthetic verifier controls do not constitute actual JUnit execution.
-The reports phase requires all three exact named cases, zero failures/errors/
-skips, the unique counter marker, fresh counters, four real Java21 provider
-classes and both exact authentic emitted C bodies.
-
-Future qualification uses the existing bounded isolated hosted lane with a fresh
-M3_QUALIFICATION_ID, exact EXPECTED_SOURCE_SHA and verified output/cache routes:
+Qualification must run the unchanged Maven POM and exact verifier:
 
 ```sh
 python3 -I -S -B verify.py --inputs --self-test
@@ -72,23 +54,11 @@ mvn -B -ntp -Dstyle.color=never -Dmaven.test.skip=false -DskipTests=false test
 python3 -I -S -B verify.py --reports
 ```
 
-The unchanged POM invokes the verifier self-test during validate. Temporary
-self-test copies stay in SDK/target; reports creates no temporary tree. A fresh
-target/sdk-receipt.json links actual XML, counter, compiled SDK provider and
-emitted-output hashes. Receipt scope is SOURCE_ONLY_STATE_RELATION_SPARSE_C11_PROPOSAL.
-
-Before applying the product C target, compile the freshly generated candidate in
-both fast and forced-positional variants with C11 fatal UBSan and -Xcheck:jni,
-the complete existing 71,748-case/149,658-native-check proof with zero skips,
-unchanged ABI/export and missing-library negatives. Run a bounded matched
-current/candidate native-kernel benchmark with paired inputs, compiler flags,
-deadlines, checksum equivalence and actual timing evidence. Sparse/dense,
-bit-63, ceiling and repeated-frontier families must be distinguished. Do not
-adopt from static operation counts or noisy timings.
-
-The previously executed baseline proof (run 39354057348, job 118404674933)
-qualifies the different original C blob, not this candidate. Full java.base/
-libjava/String integration, the original private model, Windows, whole-JDK
-compatibility and matched performance/heap/native/mapped retention remain
-separate gates. No product source, public workflow or repository ref is applied
-by this SDK authoring step.
+Use fresh admitted output paths, M3_QUALIFICATION_ID and EXPECTED_SOURCE_SHA.
+Retain original71748-case/74829-Java-check/149658-native-check proofs for baseline,
+authentic emitted candidate and forced-portable modes, fatal UBSan,-Xcheck:jni,
+generated headers/exports and missing-library refusals. Add exact original/portable
+preprocessing comparison and direct C late-invalid-row/overlap/bit63 discriminators.
+Preserve first96 benchmark identities; qualify admitted200 cases/3000 samples.
+No product application, measured successor speedup, retention gain, Windows or
+full-JDK compatibility is claimed. Local storage protection and bulk holds remain ACTIVE.

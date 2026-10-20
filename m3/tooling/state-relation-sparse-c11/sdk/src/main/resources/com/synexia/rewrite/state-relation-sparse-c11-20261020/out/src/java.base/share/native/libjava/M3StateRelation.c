@@ -20,6 +20,13 @@ int m3_state_relation_compose(const uint64_t *left, const uint64_t *right,
     if (((left[row] | right[row]) & ~mask) != 0) return -1;
     ceiling |= right[row];
   }
+#if !defined(M3_STATE_RELATION_FORCE_POSITIONAL_SCAN) && (defined(__GNUC__) || defined(__clang__))
+  /* The validated right relation has no reachable state, including aliased inputs. */
+  if (ceiling == 0) {
+    memset(output, 0, states * sizeof(uint64_t));
+    return 0;
+  }
+#endif
   for (size_t row = 0; row < states; ++row) {
     /* No source row is written before complete validation/computation, preserving aliases.
      * Repeated frontiers reuse an exact invocation-local result, never a hash/filter hit. */
@@ -27,19 +34,23 @@ int m3_state_relation_compose(const uint64_t *left, const uint64_t *right,
     if (row == 0 || active != previous) {
       uint64_t bits = active;
 #if !defined(M3_STATE_RELATION_FORCE_POSITIONAL_SCAN) && (defined(__GNUC__) || defined(__clang__))
-      value = 0;
-      while (bits != 0 && value != ceiling) {
-        const unsigned column = (unsigned) __builtin_ctzll((unsigned long long) bits);
-        value |= right[column];
-        bits &= bits - UINT64_C(1);
-      }
-#else
+      if (states > 2 && active != mask) {
+        value = 0;
+        while (bits != 0 && value != ceiling) {
+          const unsigned column = (unsigned) __builtin_ctzll((unsigned long long) bits);
+          value |= right[column];
+          bits &= bits - UINT64_C(1);
+        }
+      } else {
+#endif
       size_t column = 0;
       value = 0;
       while (bits != 0 && value != ceiling) {
         if ((bits & UINT64_C(1)) != 0) value |= right[column];
         bits >>= 1;
         ++column;
+      }
+#if !defined(M3_STATE_RELATION_FORCE_POSITIONAL_SCAN) && (defined(__GNUC__) || defined(__clang__))
       }
 #endif
       previous = active;

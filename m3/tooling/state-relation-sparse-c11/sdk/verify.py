@@ -28,12 +28,15 @@ OWNER_GIT = {
 }
 C_OWNER = "src/java.base/share/native/libjava/M3StateRelation.c"
 C_BEFORE_SHA = "b1bfd040a1454ac06ab3f96952d97c8c5a6509dcf55dbba9797b6517eea2ef16"
-C_AFTER_GIT = "abb751e6056e34f25d0f09660d575f362610359e"
-C_AFTER_SHA = "5d40fe7c65d54e26c6964313186624675592703ea6e2e1cb2886840b2f15347e"
+C_AFTER_GIT = "106b95061f1adaca160e8fece2ad083f07f0b51b"
+C_AFTER_SHA = "4c453d51223c3223f07fb88b39e1c1b6ed9891de8157d32a63990a9a4488ece9"
 TARGET_PATHS = list(OWNER_GIT)
 KEEP_PATHS = [name for name in TARGET_PATHS if name != C_OWNER]
 HISTORICAL = "src/test/resources/com/synexia/rewrite/state-relation-sparse-c11-20261020/historical/M3StateRelation.c.txt"
 HISTORICAL_GIT = "5b30f71d8ed878b3199225b9512b75a090ff896c"
+REJECTED = "src/test/resources/com/synexia/rewrite/state-relation-sparse-c11-20261020/rejected/M3StateRelation.c.txt"
+REJECTED_GIT = "abb751e6056e34f25d0f09660d575f362610359e"
+REJECTED_SHA = "5d40fe7c65d54e26c6964313186624675592703ea6e2e1cb2886840b2f15347e"
 RECEIVER_OUTPUTS: dict[str, str] = {}
 RECEIVER_CUSTODY: dict[str, str] = {}
 DESCRIPTOR = "src/main/resources/META-INF/rewrite/state-relation-sparse-c11-20261020.yml"
@@ -44,7 +47,7 @@ REQUIRED_PATHS = sorted([
     "pinned-engine/com/synexia/rewrite/M3GpuToolJoinRecipe.java",
     "pinned-engine/com/synexia/rewrite/M3GpuToolJoinManifest.java",
     "pinned-engine/com/synexia/rewrite/M3StateRelationSparseC11Recipe.java",
-    "pom.xml", DESCRIPTOR, INVERSE_DESCRIPTOR, INVERSE_ADAPTER, TEST, "verify.py", HISTORICAL,
+    "pom.xml", DESCRIPTOR, INVERSE_DESCRIPTOR, INVERSE_ADAPTER, TEST, "verify.py", HISTORICAL, REJECTED,
     "FOSS_REUSE_DECISION.tsv", "THIRD_PARTY_NOTICES.md", "README.md",
     RESOURCE + "/manifest.tsv", RESOURCE + "/inverse/manifest.tsv",
     RESOURCE + "/inverse/out/" + C_OWNER,
@@ -55,6 +58,7 @@ ORIGINAL_GIT = {
     "pinned-engine/com/synexia/rewrite/M3GpuToolJoinManifest.java": "38df5f97bbeec8a8a8cfc77091d56bda925c07f2",
     "pom.xml": "d79867bcc09ad6329e12418e15907e54b8ab025f",
     HISTORICAL: HISTORICAL_GIT,
+    REJECTED: REJECTED_GIT,
 }
 PROVIDERS = {"openrewriteAdapter": ORIGINAL_GIT["pinned-engine/com/synexia/rewrite/M3GpuToolJoinRecipe.java"],
              "manifestKernel": ORIGINAL_GIT["pinned-engine/com/synexia/rewrite/M3GpuToolJoinManifest.java"]}
@@ -151,6 +155,10 @@ def manifests() -> tuple[dict[str, str], dict[str, str]]:
     historical = regular(ROOT / HISTORICAL).read_bytes()
     require(git_blob(historical) == HISTORICAL_GIT and digest(historical) not in (
             before_hashes[C_OWNER], C_AFTER_SHA), "historical C remains a non-target refusal fixture")
+    rejected = regular(ROOT / REJECTED).read_bytes()
+    require(git_blob(rejected) == REJECTED_GIT and digest(rejected) == REJECTED_SHA
+            and REJECTED_SHA not in (before_hashes[C_OWNER], C_AFTER_SHA),
+            "rejected default C remains an exact non-target refusal fixture")
     return {C_OWNER: C_AFTER_SHA}, {name: before_hashes[name] for name in KEEP_PATHS}
 
 def inputs() -> tuple[dict, bytes]:
@@ -158,10 +166,10 @@ def inputs() -> tuple[dict, bytes]:
     pins = json.loads(pins_data)
     require(pins["schema"] == "M3_STATE_RELATION_SPARSE_C11_SDK_INPUTS_V1"
             and pins["providers"] == PROVIDERS and pins["sourceOnly"] is True
-            and pins["admissionCommit"] == "5d2d2c39120c7a779e2beb06f0af19cb7364e253",
+            and pins["admissionCommit"] == "16fe92372d86a157094ba973bbd8f347c1a6707e",
             "sealed StateRelation SDK identity drift")
     rows = pins["files"]
-    require(len(rows) == len(REQUIRED_PATHS) == 26
+    require(len(rows) == len(REQUIRED_PATHS) == 27
             and {row["path"] for row in rows} == set(REQUIRED_PATHS),
             "complete closed sparse C11 SDK input set required")
     seen = set()
@@ -206,7 +214,7 @@ def validate_report(data: bytes, classname: str, methods: list[str]) -> dict[str
 def validate_counters(counter: dict, ident: str, head: str) -> None:
     require(counter["schema"] == 1 and counter["qualificationId"] == ident
             and counter["checkoutCommit"] == head and counter["tests"] == 3
-            and counter["successfulRuns"] == 16 and counter["refusedRuns"] == 32
+            and counter["successfulRuns"] == 16 and counter["refusedRuns"] == 34
             and counter["emittedOutputs"] == 2
             and counter["sourceOnly"] is True and counter["runtimeApplied"] is False
             and counter["phaseAdvanced"] is False, "fresh actual recipe counter receipt required")
@@ -214,7 +222,7 @@ def validate_counters(counter: dict, ident: str, head: str) -> None:
 
 def validate_marker(xml: bytes, ident: str) -> None:
     marker = ("M3_STATE_RELATION_SPARSE_C11_RECIPE_COUNTERS successful=16"
-              + " refused=32 outputs=2 qualificationId=" + ident)
+              + " refused=34 outputs=2 qualificationId=" + ident)
     lines = [line for node in ET.fromstring(xml).iter("system-out")
              for line in (node.text or "").splitlines()
              if line.startswith("M3_STATE_RELATION_SPARSE_C11_RECIPE_COUNTERS")]
@@ -298,7 +306,7 @@ def self_test_evidence() -> None:
     """Exercise real counter/marker validators; synthetic controls are not JUnit execution."""
     ident, head = "state-relation-selftest-qualification", "1" * 40
     baseline = {"schema": 1, "qualificationId": ident, "checkoutCommit": head, "tests": 3,
-                "successfulRuns": 16, "refusedRuns": 32, "emittedOutputs": 2,
+                "successfulRuns": 16, "refusedRuns": 34, "emittedOutputs": 2,
                 "sourceOnly": True, "runtimeApplied": False, "phaseAdvanced": False}
     validate_counters(baseline, ident, head)
     refused = 0
@@ -315,12 +323,12 @@ def self_test_evidence() -> None:
         else:
             raise AssertionError("altered recipe counter admitted: " + key)
     line = ("M3_STATE_RELATION_SPARSE_C11_RECIPE_COUNTERS successful=16"
-            + " refused=32 outputs=2 qualificationId=" + ident)
+            + " refused=34 outputs=2 qualificationId=" + ident)
     root = ET.Element("testsuite")
     ET.SubElement(root, "system-out").text = line + "\n"
     validate_marker(ET.tostring(root), ident)
     for text in ("", line + "-stale\n", line + "\n" + line + "\n",
-                 line.replace("refused=32", "refused=31")):
+                 line.replace("refused=34", "refused=33")):
         changed = ET.Element("testsuite")
         ET.SubElement(changed, "system-out").text = text
         try:
@@ -460,7 +468,7 @@ def reports(pins: dict, pins_data: bytes) -> None:
         "unchangedReceiverCustody": dict(RECEIVER_CUSTODY),
         "counterReceipt": {"path": "target/recipe-test-counters.json",
                            "bytes": len(counter_raw), "sha256": digest(counter_raw)},
-        "tests": 3, "successfulRuns": 16, "refusedRuns": 32, "emittedOutputs": 2,
+        "tests": 3, "successfulRuns": 16, "refusedRuns": 34, "emittedOutputs": 2,
         "sourceOnly": True, "recipeJUnitQualified": True, "recipeReplayQualified": True,
         **{key: False for key in FALSE_GATES},
     }

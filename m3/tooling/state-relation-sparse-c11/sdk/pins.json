@@ -1,6 +1,6 @@
 {
   "schema": "M3_STATE_RELATION_SPARSE_C11_SDK_INPUTS_V1",
-  "admissionCommit": "5d2d2c39120c7a779e2beb06f0af19cb7364e253",
+  "admissionCommit": "16fe92372d86a157094ba973bbd8f347c1a6707e",
   "sourceOnly": true,
   "providers": {
     "openrewriteAdapter": "1c1b1b568d369f688f6953161636bf36b484bf5a",
@@ -9,9 +9,21 @@
   "files": [
     {
       "path": "FOSS_REUSE_DECISION.tsv",
-      "gitBlob": "2270292cd40ff89fe0bd4e22a1429cbdb782ebfe",
-      "bytes": 1213,
-      "sha256": "854edcfd4e398cae66482bcbeca44a0fbe97e7d4c6cce303771913ef0ef825fd"
+      "gitBlob": "b422753401b7badca26058b3ce1130a4c230fc37",
+      "bytes": 2089,
+      "sha256": "04e99e6d54695f58d82a2b40418309e53865fcc4c36ccfe1301a32a6c4e3b8a2"
+    },
+    {
+      "path": "README.md",
+      "gitBlob": "c40b9d96aad0365168fe23f2f3a53cf2d8f82ce0",
+      "bytes": 4017,
+      "sha256": "42f3e37f26b384aaf8c889a942b2ccc8061b70e5f8972fc38e22692a3b167f86"
+    },
+    {
+      "path": "THIRD_PARTY_NOTICES.md",
+      "gitBlob": "5c057e1271e9c1ad380295ad82760f3aa0f512de",
+      "bytes": 2703,
+      "sha256": "5213051976632be3df79c17b93c765bf43e8efe372cda730016ae841363836c7"
     },
     {
       "path": "pinned-engine/com/synexia/rewrite/M3GpuToolJoinManifest.java",
@@ -44,10 +56,16 @@
       "sha256": "f0ab99c3dafb38e82f8e5fd4c6d22db07831808c251c4622f292114c83e6673e"
     },
     {
-      "path": "README.md",
-      "gitBlob": "2a97e099b486efa4d9bb3e1e47c919ac9c6086ac",
-      "bytes": 5538,
-      "sha256": "3949c221738ed5e664098244d8cc6728faeb1d6ab3fb3dda8b5dbeb6bdd35087"
+      "path": "src/main/resources/META-INF/rewrite/state-relation-sparse-c11-20261020-inverse.yml",
+      "gitBlob": "0dbadfdcfc61c24d3ddf0b3effbdf9bf181c02f0",
+      "bytes": 481,
+      "sha256": "285b18af40d5c6de101fdacc3b176138d0214f0a64150b71055801c53d3496df"
+    },
+    {
+      "path": "src/main/resources/META-INF/rewrite/state-relation-sparse-c11-20261020.yml",
+      "gitBlob": "22c9f8d51d5d680168be408006df6b605864132c",
+      "bytes": 462,
+      "sha256": "6de3e434ac8087d89d10a56825266876ed6225f7206f643a81802949d3e5da34"
     },
     {
       "path": "src/main/resources/com/synexia/rewrite/state-relation-sparse-c11-20261020/before/m3/compatibility/regex-relations-20261014/M3RelationPortProof.java",
@@ -68,22 +86,22 @@
       "sha256": "3270f7889a8c94fa15c90e88491b7fbe483d5ad3053ab36d7e07a63c4c734caa"
     },
     {
-      "path": "src/main/resources/com/synexia/rewrite/state-relation-sparse-c11-20261020/before/src/java.base/share/native/libjava/m3_state_relation.h",
-      "gitBlob": "18a02e228129827da486edc5b316790af6135310",
-      "bytes": 1021,
-      "sha256": "c948c0ac34180f1f9412a764c3c9fd8c59e11509467aa9e04f8825e903526885"
-    },
-    {
       "path": "src/main/resources/com/synexia/rewrite/state-relation-sparse-c11-20261020/before/src/java.base/share/native/libjava/M3StateRelation.c",
       "gitBlob": "610ca8bab47065a49b9b58814d6392a287f4fd8b",
       "bytes": 5899,
       "sha256": "b1bfd040a1454ac06ab3f96952d97c8c5a6509dcf55dbba9797b6517eea2ef16"
     },
     {
+      "path": "src/main/resources/com/synexia/rewrite/state-relation-sparse-c11-20261020/before/src/java.base/share/native/libjava/m3_state_relation.h",
+      "gitBlob": "18a02e228129827da486edc5b316790af6135310",
+      "bytes": 1021,
+      "sha256": "c948c0ac34180f1f9412a764c3c9fd8c59e11509467aa9e04f8825e903526885"
+    },
+    {
       "path": "src/main/resources/com/synexia/rewrite/state-relation-sparse-c11-20261020/inverse/manifest.tsv",
-      "gitBlob": "f35148e3dd893eedbd9098d6e6f74e1cf60248fa",
+      "gitBlob": "a42253dc31d321b156396b668b82dc73ad7cd356",
       "bytes": 1043,
-      "sha256": "2a4b37cff5b8690c05541a5ae638f44d0fd48af1df90a2da081155a06fa54f2a"
+      "sha256": "72957d2ff848b72d92eed4414e044caf32de6817f7c4c07f5c53b63215cd9a7c"
     },
     {
       "path": "src/main/resources/com/synexia/rewrite/state-relation-sparse-c11-20261020/inverse/out/src/java.base/share/native/libjava/M3StateRelation.c",
@@ -93,9 +111,9 @@
     },
     {
       "path": "src/main/resources/com/synexia/rewrite/state-relation-sparse-c11-20261020/manifest.tsv",
-      "gitBlob": "7e1135355e3443f88465ccbfbf6652869f146194",
+      "gitBlob": "29c544e83eaab23f5ddccd3de2e2de28117bd465",
       "bytes": 1043,
-      "sha256": "b11f37c48e79a237a1a9ad71f6f5353cb1bb6270b57f3c69d82695626e3734fe"
+      "sha256": "c5498b90a14e1ff6ded95982c50e24571660053e1fdb643a5c47c14d784e7c2f"
     },
     {
       "path": "src/main/resources/com/synexia/rewrite/state-relation-sparse-c11-20261020/out/m3/compatibility/regex-relations-20261014/M3RelationPortProof.java",
@@ -116,34 +134,22 @@
       "sha256": "3270f7889a8c94fa15c90e88491b7fbe483d5ad3053ab36d7e07a63c4c734caa"
     },
     {
+      "path": "src/main/resources/com/synexia/rewrite/state-relation-sparse-c11-20261020/out/src/java.base/share/native/libjava/M3StateRelation.c",
+      "gitBlob": "106b95061f1adaca160e8fece2ad083f07f0b51b",
+      "bytes": 6697,
+      "sha256": "4c453d51223c3223f07fb88b39e1c1b6ed9891de8157d32a63990a9a4488ece9"
+    },
+    {
       "path": "src/main/resources/com/synexia/rewrite/state-relation-sparse-c11-20261020/out/src/java.base/share/native/libjava/m3_state_relation.h",
       "gitBlob": "18a02e228129827da486edc5b316790af6135310",
       "bytes": 1021,
       "sha256": "c948c0ac34180f1f9412a764c3c9fd8c59e11509467aa9e04f8825e903526885"
     },
     {
-      "path": "src/main/resources/com/synexia/rewrite/state-relation-sparse-c11-20261020/out/src/java.base/share/native/libjava/M3StateRelation.c",
-      "gitBlob": "abb751e6056e34f25d0f09660d575f362610359e",
-      "bytes": 6237,
-      "sha256": "5d40fe7c65d54e26c6964313186624675592703ea6e2e1cb2886840b2f15347e"
-    },
-    {
-      "path": "src/main/resources/META-INF/rewrite/state-relation-sparse-c11-20261020-inverse.yml",
-      "gitBlob": "0dbadfdcfc61c24d3ddf0b3effbdf9bf181c02f0",
-      "bytes": 481,
-      "sha256": "285b18af40d5c6de101fdacc3b176138d0214f0a64150b71055801c53d3496df"
-    },
-    {
-      "path": "src/main/resources/META-INF/rewrite/state-relation-sparse-c11-20261020.yml",
-      "gitBlob": "22c9f8d51d5d680168be408006df6b605864132c",
-      "bytes": 462,
-      "sha256": "6de3e434ac8087d89d10a56825266876ed6225f7206f643a81802949d3e5da34"
-    },
-    {
       "path": "src/test/java/com/synexia/rewrite/M3StateRelationSparseC11RecipeTest.java",
-      "gitBlob": "3b6ebd2ce92b5f3c54f3604fdb124a83be0eed09",
-      "bytes": 16613,
-      "sha256": "07ea24efd4577f6ae160d2bbe23190d581ef299f9e42cb36ec6e64e2bf5ccf39"
+      "gitBlob": "c6aa0e57c06505bc83c38c9832526262725c2721",
+      "bytes": 17464,
+      "sha256": "5f211f5b78985aa42772525d241320b3a085e293c43bb5837d51138881254150"
     },
     {
       "path": "src/test/resources/com/synexia/rewrite/state-relation-sparse-c11-20261020/historical/M3StateRelation.c.txt",
@@ -152,16 +158,16 @@
       "sha256": "66d28e350f4894498b15c0041c0a43c075f12c9e3a384214e45d9868ce1950b6"
     },
     {
-      "path": "THIRD_PARTY_NOTICES.md",
-      "gitBlob": "3db2f70b51443d360979e4c45d589fefc9d3adf0",
-      "bytes": 2290,
-      "sha256": "007cec2da44610cb0024f13956cd68997f54ab1288edc6c0ad29e0ae7ccfc7b7"
+      "path": "src/test/resources/com/synexia/rewrite/state-relation-sparse-c11-20261020/rejected/M3StateRelation.c.txt",
+      "gitBlob": "abb751e6056e34f25d0f09660d575f362610359e",
+      "bytes": 6237,
+      "sha256": "5d40fe7c65d54e26c6964313186624675592703ea6e2e1cb2886840b2f15347e"
     },
     {
       "path": "verify.py",
-      "gitBlob": "0c2507d78817184e9df3c367390f2ac02bc870cc",
-      "bytes": 24947,
-      "sha256": "3239415c925da1c83c4d868f1d96893d345f388e183037fb8ee7d85df4da3136"
+      "gitBlob": "220cfda4ed7ed9426e78ca74855a3cecfc5dd5d4",
+      "bytes": 25533,
+      "sha256": "ac2b0b466fe2df3eb9a19f5939d7aa04b83eaf8ab8945f787de2100d54f91ea8"
     }
   ]
 }

@@ -46,6 +46,13 @@ CLASS_NAMES = {
 EXPECTED_CLASSES = {"jdk/internal/mindex/" + name + ".class" for name in CLASS_NAMES}
 
 
+
+DIRECT_C_EXPECTED = {"schema": "M3_RELATION_DIRECT_C_PROOF_V1", "state": "PASS", "variants": 3, "casesPerVariant": 611, "checksPerVariant": 2444, "totalCases": 1833, "totalChecks": 7332, "zeroRightCasesExecuted": True, "partialOverlapCasesExecuted": True, "exactAliasCasesExecuted": True, "lateInvalidOutputCasesExecuted": True, "invalidDimensionCasesExecuted": True, "nullArgumentCasesExecuted": True, "state64HighestBitCasesExecuted": True, "independentSnapshotOracleExecuted": True, "outputGuardCasesExecuted": True, "unrestrictedPointerProofQualified": False, "performanceQualified": False}
+DIRECT_C_FLAGS = ["-std=c11", "-Wall", "-Wextra", "-Wpedantic", "-Werror",
+                  "-Wconversion", "-Wsign-conversion", "-fsanitize=undefined",
+                  "-fno-sanitize-recover=all"]
+
+
 def require(condition, message):
     if not condition:
         raise RuntimeError(message)
@@ -142,7 +149,7 @@ def inputs(source):
         require(all(observed[key] == row[key] for key in observed), "FROZEN_SOURCE_PIN_DRIFT:" + name)
     result = host["owner_plan"](original, post, actual)
     require(sum(len(value) for value in original.values()) == 28948, "FROZEN_FIVE_OWNER_BYTES_DRIFT")
-    require(sum(len(value) for value in post.values()) == 29286, "POSTIMAGE_FIVE_OWNER_BYTES_DRIFT")
+    require(sum(len(value) for value in post.values()) == 29746, "POSTIMAGE_FIVE_OWNER_BYTES_DRIFT")
     candidate = safe_file(sdk, metadata["generatedCandidate"]["path"]).read_bytes()
     expected = metadata["generatedCandidate"]
     require(candidate == post[NATIVE] and len(candidate) == expected["bytes"]
@@ -153,7 +160,7 @@ def inputs(source):
             and sdk_receipt["qualificationId"] == os.environ["M3_QUALIFICATION_ID"]
             and sdk_receipt["checkoutCommit"] == os.environ["EXPECTED_SOURCE_SHA"]
             and (sdk_receipt["tests"], sdk_receipt["successfulRuns"], sdk_receipt["refusedRuns"],
-                 sdk_receipt["emittedOutputs"]) == (3, 16, 32, 2)
+                 sdk_receipt["emittedOutputs"]) == (3, 16, 34, 2)
             and sdk_receipt["recipeJUnitQualified"] is True,
             "SAME_EXECUTION_AUTHENTIC_MAVEN_RECEIPT_REQUIRED")
     require(sdk_receipt["emittedProductSourceOutputs"][NATIVE] == {
@@ -284,6 +291,61 @@ def proof_marker(raw, expected):
             "ACTUAL_COMPLETE_UNCHANGED_PROOF_OUTPUT_REQUIRED")
 
 
+def validate_direct_c_output(raw):
+    require(type(raw) is bytes and len(raw) <= 16384 and raw.count(b"\n") == 1
+            and raw.endswith(b"\n") and b"\r" not in raw, "ONE_BOUNDED_DIRECT_C_JSON_LINE_REQUIRED")
+    def unique(pairs):
+        result = {}
+        for key, value in pairs:
+            require(key not in result, "DUPLICATE_DIRECT_C_JSON_KEY")
+            result[key] = value
+        return result
+    result = json.loads(raw, object_pairs_hook=unique)
+    require(type(result) is dict and set(result) == set(DIRECT_C_EXPECTED),
+            "EXACT_DIRECT_C_PROOF_FIELDS_REQUIRED")
+    require(all(type(result[key]) is type(expected) and result[key] == expected
+                for key, expected in DIRECT_C_EXPECTED.items()), "EXACT_DIRECT_C_PROOF_RESULT_REQUIRED")
+    return result
+
+
+def native_direct_c(root, source, env, cc, commands, libraries, metadata):
+    spec = metadata["directCProof"]
+    require(spec["path"] == "direct_c_proof.c" and spec["expected"] == DIRECT_C_EXPECTED,
+            "DIRECT_C_PROOF_PROTOCOL_DRIFT")
+    harness = safe_file(TASK, spec["path"])
+    harness_raw = harness.read_bytes()
+    require(len(harness_raw) == spec["bytes"] and sha(harness_raw) == spec["sha256"]
+            and git_blob(harness_raw) == spec["gitBlob"], "DIRECT_C_HARNESS_SOURCE_DRIFT")
+    work = root / "state-relation-native"
+    executable = work / "direct-c-proof"
+    require(not executable.exists() and not executable.is_symlink(), "FRESH_DIRECT_C_EXECUTABLE_REQUIRED")
+    row, raw = command(root, source, "state-relation-direct-c-compile",
+        [cc, *DIRECT_C_FLAGS, "-I" + str((source / HEADER).parent),
+         str(harness), "-ldl", "-o", str(executable)], env)
+    require(not raw, "STRICT_DIRECT_C_COMPILE_WITHOUT_DIAGNOSTICS")
+    commands.append(row)
+    binary = safe_file(work, executable.name).read_bytes()
+    require(binary[:4] == b"\x7fELF" and len(binary) < LOG_LIMIT, "BOUNDED_REAL_DIRECT_C_EXECUTABLE")
+    paths = [safe_file(root, libraries[name]["path"]) for name in ("baseline", "sparse", "portable")]
+    require(env["UBSAN_OPTIONS"] == "halt_on_error=1:print_stacktrace=1",
+            "DIRECT_C_FATAL_SANITIZER_ENV_REQUIRED")
+    row, raw = command(root, source, "state-relation-direct-c-run",
+                       [str(executable), *[str(path) for path in paths]], env)
+    commands.append(row)
+    result = validate_direct_c_output(raw)
+    require(safe_file(work, executable.name).read_bytes() == binary
+            and harness.read_bytes() == harness_raw, "DIRECT_C_EXECUTABLE_OR_HARNESS_CHANGED")
+    return {"schema": "M3_RELATION_DIRECT_C_ABI_EXECUTION_V1",
+            "result": result, "stdout": {key: row[key] for key in ("log", "bytes", "sha256")},
+            "source": {"path": spec["path"], "bytes": len(harness_raw),
+                       "sha256": sha(harness_raw), "gitBlob": git_blob(harness_raw)},
+            "executable": {"path": str(executable.relative_to(root)),
+                           "bytes": len(binary), "sha256": sha(binary), "exportedAsArtifact": False},
+            "compilerFlags": DIRECT_C_FLAGS, "fatalUndefinedBehaviorSanitizer": True,
+            "ubsanOptions": env["UBSAN_OPTIONS"], "libraryOrder": ["baseline", "sparse", "portable"],
+            "unrestrictedPointerProofQualified": False, "productAdoption": False}
+
+
 def native_benchmark(root, source, env, jdk, cc, nm, generated, commands, metadata):
     work = root / "state-relation-native" / "bench"
     require(not work.exists() and not work.is_symlink(), "FRESH_BENCHMARK_DIRECTORY_REQUIRED")
@@ -295,6 +357,21 @@ def native_benchmark(root, source, env, jdk, cc, nm, generated, commands, metada
     checker = safe_file(TASK, "verify_benchmark.py")
     common = ["-std=c11", "-Wall", "-Wextra", "-Wpedantic", "-Werror",
               "-Wconversion", "-Wsign-conversion", "-O3", "-fno-lto"]
+    preprocessing_rows, preprocessing_raw = {}, {}
+    for variant, c_source in (("original", original), ("portable", emitted)):
+        row, raw = command(root, source, "state-relation-bench-" + variant + "-preprocess",
+            [cc, *common, "-DM3_STATE_RELATION_FORCE_POSITIONAL_SCAN",
+             "-I" + str(jdk / "include"), "-I" + str(jdk / "include/linux"),
+             "-I" + str((source / HEADER).parent), "-include", str(generated),
+             "-E", "-P", str(c_source)], env)
+        require(raw, "NONEMPTY_REAL_PREPROCESSOR_OUTPUT_REQUIRED:" + variant)
+        commands.append(row)
+        preprocessing_rows[variant] = {key: row[key] for key in ("log", "bytes", "sha256")}
+        preprocessing_raw[variant] = raw
+    require(preprocessing_raw["original"] == preprocessing_raw["portable"],
+            "FORCED_PORTABLE_PREPROCESSED_KERNEL_MUST_EQUAL_BASELINE")
+    preprocessing = {"equal": True, "bytes": len(preprocessing_raw["original"]),
+                     "sha256": sha(preprocessing_raw["original"]), **preprocessing_rows}
     objects, source_rows = [], {}
     for variant, c_source in (("baseline", original), ("sparse", emitted), ("portable", emitted)):
         c_raw = safe_file(c_source.parent, c_source.name).read_bytes()
@@ -340,8 +417,8 @@ def native_benchmark(root, source, env, jdk, cc, nm, generated, commands, metada
     commands.append(row)
     verifier = runpy.run_path(str(checker), run_name="m3_relation_native_paired_trace")
     verified = verifier["validate"](raw)
-    require(verified["state"] == "PASS_DATA_INTEGRITY_ONLY" and verified["caseCount"] == 96
-            and verified["measurements"] == 1440 and verified["independentMatrixOracles"] == 96
+    require(verified["state"] == "PASS_DATA_INTEGRITY_ONLY" and verified["caseCount"] == 200
+            and verified["measurements"] == 3000 and verified["independentMatrixOracles"] == 200
             and verified["allSamplesRetained"] is True
             and verified["automaticAdoption"] is False, "COMPLETE_INDEPENDENT_BENCHMARK_VALIDATION")
     require(safe_file(work, executable.name).read_bytes() == binary, "BENCH_EXECUTABLE_CHANGED")
@@ -367,6 +444,7 @@ def native_benchmark(root, source, env, jdk, cc, nm, generated, commands, metada
               "checkoutCommit": os.environ["EXPECTED_SOURCE_SHA"],
               "stdout": {key: row[key] for key in ("log", "bytes", "sha256")},
               "verified": verified, "sourcesAndObjects": source_rows,
+              "portablePreprocessing": preprocessing,
               "harnessSha256": sha(harness.read_bytes()), "verifierSha256": sha(checker.read_bytes()),
               "executableBytes": len(binary), "executableSha256": sha(binary),
               "compilerFlags": common, "timingWithoutSanitizer": True, "ltoDisabled": True,
@@ -469,6 +547,7 @@ def execute(root, source, ident):
             and b"M3_RELATION_PORT" not in raw and b"REUSE logicalUnits" not in raw,
             "MISSING_NATIVE_MUST_REFUSE_BEFORE_PROOF_WITHOUT_FALLBACK")
     commands.append(row)
+    direct_c = native_direct_c(root, source, env, cc, commands, libraries, metadata)
     benchmark = native_benchmark(root, source, env, jdk, cc, nm, generated, commands, metadata)
     _, after, final_manifest_hash = inputs(source)
     require(before == after and manifest_hash == final_manifest_hash, "SOURCE_OR_MANIFEST_CHANGED")
@@ -496,6 +575,8 @@ def execute(root, source, ident):
         "generatedJniHeader": {"path": str(header_copy.relative_to(root)),
             "bytes": len(generated_raw), "sha256": sha(generated_raw)},
         "nativeLibraries": libraries, "nativeBenchmark": benchmark,
+        "directCAbiProof": direct_c, "directCAbiCorpusExecuted": True,
+        "directCProofAdmission": metadata["directCProofAdmission"],
         "nativeKernelTimingMeasured": True, "productAdoption": False,
         "cases": 71748, "javaChecks": 74829, "nativeChecks": 149658,
         "fullExistingProofPreserved": True, "javaClassPathExecuted": True,

@@ -14,7 +14,7 @@
 #define SAMPLE_COUNT 5U
 #define ITERATION_CAP UINT64_C(1048576)
 #define TARGET_NS UINT64_C(20000000)
-#define MAX_CASES 96U
+#define MAX_CASES 200U
 
 typedef int (*compose_fn)(const uint64_t *, const uint64_t *, uint64_t *, size_t);
 typedef int (*repeat_fn)(const uint64_t *, uint64_t *, size_t, uint64_t);
@@ -33,9 +33,9 @@ static const struct variant variants[3] = {
     {"portable", m3_bench_portable_compose, m3_bench_portable_repeat}
 };
 static volatile uint64_t consumed;
-static const char *families[8] = {
+static const char *families[10] = {
     "zero", "sparse", "dense", "highest-bit", "ceiling-early",
-    "repeated-frontier", "alternating", "random"
+    "repeated-frontier", "alternating", "random", "zero-left-only", "zero-right-only"
 };
 
 static void fail(const char *message) {
@@ -100,6 +100,8 @@ static void input_rows(size_t n, unsigned family, uint64_t *left, uint64_t *righ
                 left[row] = random_bits() & mask;
                 right[row] = random_bits() & mask;
                 break;
+            case 8: left[row] = 0; right[row] = diagonal; break;
+            case 9: left[row] = diagonal; right[row] = 0; break;
             default: fail("unknown family");
         }
     }
@@ -140,69 +142,74 @@ static void json_rows(const uint64_t *rows, size_t n) {
 }
 
 int main(void) {
-    const size_t dimensions[6] = {1, 2, 31, 32, 63, 64};
+    const size_t dimensions[10] = {1, 2, 31, 32, 63, 64, 3, 4, 8, 16};
     struct timespec resolution;
     if (clock_getres(CLOCK_MONOTONIC, &resolution) != 0) fail("clock_getres");
     const uint64_t resolution_ns = timespec_ns(resolution);
     if (resolution_ns == 0) fail("zero clock resolution");
-    (void) printf("{\"kind\":\"environment\",\"schema\":\"M3_RELATION_NATIVE_PAIRED_TIMING_V1\","
-                 "\"cases\":96,\"samples\":5,\"variants\":3,\"targetNs\":%" PRIu64 ","
+    (void) printf("{\"kind\":\"environment\",\"schema\":\"M3_RELATION_NATIVE_PAIRED_TIMING_V2\","
+                 "\"cases\":200,\"samples\":5,\"variants\":3,\"targetNs\":%" PRIu64 ","
                  "\"iterationCap\":%" PRIu64 ",\"clockResolutionNs\":%" PRIu64 ","
                  "\"randomInputApi\":\"libc-rand-srand\",\"randMax\":%d}\n",
                  TARGET_NS, ITERATION_CAP, resolution_ns, RAND_MAX);
     unsigned case_id = 0, measurements = 0;
-    for (unsigned d = 0; d < 6; ++d) {
-        const size_t n = dimensions[d];
-        for (unsigned family = 0; family < 8; ++family) {
-            uint64_t left[64] = {0}, right[64] = {0};
-            input_rows(n, family, left, right);
-            for (unsigned operation = 0; operation < 2; ++operation) {
-                uint64_t expected[64] = {0}, out[64] = {0};
-                if (invoke(0, operation, left, right, expected, n) != 0) fail("baseline result");
-                for (unsigned variant = 0; variant < 3; ++variant) {
-                    if (invoke(variant, operation, left, right, out, n) != 0
-                            || memcmp(expected, out, n * sizeof(uint64_t)) != 0)
-                        fail("complete output disagreement before timing");
-                    (void) exercise(variant, operation, left, right, out, n, UINT64_C(256));
-                }
-                uint64_t iterations = UINT64_C(64), pilot_ns = 0, pilot_checksum = 0;
-                for (;;) {
-                    pilot_ns = timed(0, operation, left, right, out, n, iterations, &pilot_checksum);
-                    if (pilot_ns >= TARGET_NS || iterations == ITERATION_CAP) break;
-                    iterations *= UINT64_C(2);
-                }
-                (void) printf("{\"kind\":\"case\",\"case\":%u,\"states\":%zu,\"family\":\"%s\","
-                             "\"operation\":\"%s\",\"iterations\":%" PRIu64 ","
-                             "\"pilotNs\":%" PRIu64 ",\"pilotChecksum\":\"%016" PRIx64 "\","
-                             "\"targetReached\":%s,\"left\":",
-                             case_id, n, families[family], operation == 0 ? "compose" : "repeat-7",
-                             iterations, pilot_ns, pilot_checksum, pilot_ns >= TARGET_NS ? "true" : "false");
-                json_rows(left, n); (void) printf(",\"right\":"); json_rows(right, n);
-                (void) printf(",\"expected\":"); json_rows(expected, n); (void) printf("}\n");
-                for (unsigned sample = 0; sample < SAMPLE_COUNT; ++sample) {
-                    uint64_t reference_checksum = 0;
-                    for (unsigned ordinal = 0; ordinal < 3; ++ordinal) {
-                        const unsigned variant = (sample + case_id + ordinal) % 3;
-                        uint64_t checksum = 0;
-                        const uint64_t elapsed = timed(variant, operation, left, right, out, n,
-                                                      iterations, &checksum);
-                        if (memcmp(expected, out, n * sizeof(uint64_t)) != 0)
-                            fail("complete output disagreement after timing");
-                        if (ordinal == 0) reference_checksum = checksum;
-                        else if (checksum != reference_checksum) fail("paired checksum disagreement");
-                        (void) printf("{\"kind\":\"sample\",\"case\":%u,\"sample\":%u,\"ordinal\":%u,"
-                                     "\"variant\":\"%s\",\"iterations\":%" PRIu64 ","
-                                     "\"elapsedNs\":%" PRIu64 ",\"checksum\":\"%016" PRIx64 "\"}\n",
-                                     case_id, sample, ordinal, variants[variant].name,
-                                     iterations, elapsed, checksum);
-                        ++measurements;
+    /* Original families first: cases 0..95 retain their original inputs and order. */
+    for (unsigned cohort = 0; cohort < 2; ++cohort) {
+        const unsigned first_family = cohort == 0 ? 0U : 8U;
+        const unsigned family_limit = cohort == 0 ? 8U : 10U;
+        for (unsigned d = 0; d < 10; ++d) {
+            const size_t n = dimensions[d];
+            for (unsigned family = first_family; family < family_limit; ++family) {
+                uint64_t left[64] = {0}, right[64] = {0};
+                input_rows(n, family, left, right);
+                for (unsigned operation = 0; operation < 2; ++operation) {
+                    uint64_t expected[64] = {0}, out[64] = {0};
+                    if (invoke(0, operation, left, right, expected, n) != 0) fail("baseline result");
+                    for (unsigned variant = 0; variant < 3; ++variant) {
+                        if (invoke(variant, operation, left, right, out, n) != 0
+                                || memcmp(expected, out, n * sizeof(uint64_t)) != 0)
+                            fail("complete output disagreement before timing");
+                        (void) exercise(variant, operation, left, right, out, n, UINT64_C(256));
                     }
+                    uint64_t iterations = UINT64_C(64), pilot_ns = 0, pilot_checksum = 0;
+                    for (;;) {
+                        pilot_ns = timed(0, operation, left, right, out, n, iterations, &pilot_checksum);
+                        if (pilot_ns >= TARGET_NS || iterations == ITERATION_CAP) break;
+                        iterations *= UINT64_C(2);
+                    }
+                    (void) printf("{\"kind\":\"case\",\"case\":%u,\"states\":%zu,\"family\":\"%s\","
+                                 "\"operation\":\"%s\",\"iterations\":%" PRIu64 ","
+                                 "\"pilotNs\":%" PRIu64 ",\"pilotChecksum\":\"%016" PRIx64 "\","
+                                 "\"targetReached\":%s,\"left\":",
+                                 case_id, n, families[family], operation == 0 ? "compose" : "repeat-7",
+                                 iterations, pilot_ns, pilot_checksum, pilot_ns >= TARGET_NS ? "true" : "false");
+                    json_rows(left, n); (void) printf(",\"right\":"); json_rows(right, n);
+                    (void) printf(",\"expected\":"); json_rows(expected, n); (void) printf("}\n");
+                    for (unsigned sample = 0; sample < SAMPLE_COUNT; ++sample) {
+                        uint64_t reference_checksum = 0;
+                        for (unsigned ordinal = 0; ordinal < 3; ++ordinal) {
+                            const unsigned variant = (sample + case_id + ordinal) % 3;
+                            uint64_t checksum = 0;
+                            const uint64_t elapsed = timed(variant, operation, left, right, out, n,
+                                                          iterations, &checksum);
+                            if (memcmp(expected, out, n * sizeof(uint64_t)) != 0)
+                                fail("complete output disagreement after timing");
+                            if (ordinal == 0) reference_checksum = checksum;
+                            else if (checksum != reference_checksum) fail("paired checksum disagreement");
+                            (void) printf("{\"kind\":\"sample\",\"case\":%u,\"sample\":%u,\"ordinal\":%u,"
+                                         "\"variant\":\"%s\",\"iterations\":%" PRIu64 ","
+                                         "\"elapsedNs\":%" PRIu64 ",\"checksum\":\"%016" PRIx64 "\"}\n",
+                                         case_id, sample, ordinal, variants[variant].name,
+                                         iterations, elapsed, checksum);
+                            ++measurements;
+                        }
+                    }
+                    ++case_id;
                 }
-                ++case_id;
             }
         }
     }
-    if (case_id != MAX_CASES || measurements != 1440) fail("measurement census");
+    if (case_id != MAX_CASES || measurements != 3000) fail("measurement census");
     (void) printf("{\"kind\":\"summary\",\"cases\":%u,\"measurements\":%u,"
                  "\"consumedChecksum\":\"%016" PRIx64 "\",\"state\":\"PASS\"}\n",
                  case_id, measurements, consumed);

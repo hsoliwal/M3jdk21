@@ -38,3 +38,9 @@ files and Maven POM remain byte-for-byte unchanged.
 No new third-party implementation or dependency is introduced. Retaining the
 owned component license does not establish compatibility of every possible
 whole-JDK distribution. License text: https://www.apache.org/licenses/LICENSE-2.0
+
+Adaptive successor authoring reuses those same owned atoms and providers under
+pre-code admission 16fe92372d86a157094ba973bbd8f347c1a6707e. The rejected default C
+abb751e6056e34f25d0f09660d575f362610359e is retained verbatim in rejected/M3StateRelation.c.txt
+as a non-target regression fixture, with its original Apache-2.0 notices. No
+additional implementation donor, dependency or license grant is introduced.

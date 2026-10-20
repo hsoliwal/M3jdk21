@@ -75,7 +75,7 @@ SOURCE_GIT = {
     "src/java.base/share/native/libjava/m3_state_relation.h": "18a02e228129827da486edc5b316790af6135310",
     "m3/compatibility/regex-relations-20261014/M3RelationPortProof.java": "e9a6beee8916cf97d5d4aac2383e7ac2fa8843e0"
 }
-AFTER_GIT = {**SOURCE_GIT, TARGET_C: "abb751e6056e34f25d0f09660d575f362610359e"}
+AFTER_GIT = {**SOURCE_GIT, TARGET_C: "106b95061f1adaca160e8fece2ad083f07f0b51b"}
 
 def owner_plan(original, post, actual):
     lanes = (original, post, actual)
@@ -141,14 +141,15 @@ def binding(fresh=False):
     if (record["repository"] != "hsoliwal/com.synexia"
             or record["receiverRepository"] != "hsoliwal/M3jdk21"
             or record["runtimeApplied"] is not False or record["phaseAdvanced"] is not False
-            or record["admissionCommit"] != "5d2d2c39120c7a779e2beb06f0af19cb7364e253"
+            or record["admissionCommit"] != "16fe92372d86a157094ba973bbd8f347c1a6707e"
+            or record["directCProofAdmissionCommit"] != "8ea443441cc4e1f27209c30dbaa51a151c6653c4"
             or record["hostAdmissionCommit"] != "73ec51da3a1e419a1bcb8816d0313dead8dbaf62"):
         raise RuntimeError("source binding identity or scope drift")
     source_commit = record["sourceCommit"]
     if len(source_commit) != 40 or any(char not in "0123456789abcdef" for char in source_commit):
         raise RuntimeError("canonical source commit required")
     rows = record["files"]
-    if len(rows) != 33 or record['sdkFiles'] != 27:
+    if len(rows) != 35 or record['sdkFiles'] != 28:
         raise RuntimeError("bounded complete SDK and hosted source binding required")
     seen = set()
     for row in rows:
@@ -165,7 +166,8 @@ def binding(fresh=False):
     if len(tracked) != record["sdkFiles"] or {p for p in seen if p.startswith(sdk_prefix)} != tracked:
         raise RuntimeError("exact complete SDK binding required")
     if not {PREFIX + "qualify.py", PREFIX + "runtime/qualify.py", PREFIX + "runtime/INPUTS.json",
-            PREFIX + "runtime/paired_bench.c", PREFIX + "runtime/verify_benchmark.py", WORKFLOW} <= seen:
+            PREFIX + "runtime/paired_bench.c", PREFIX + "runtime/verify_benchmark.py",
+            PREFIX + "runtime/direct_c_proof.c", WORKFLOW} <= seen:
         raise RuntimeError("hosted authoring inputs must be source-bound")
     subprocess.run(["git", "diff", "HEAD", "--exit-code", "--no-ext-diff", "--", PREFIX, WORKFLOW],
                    cwd=RECEIVER, check=True, timeout=60)
@@ -204,7 +206,7 @@ def report():
     module = runpy.run_path(str(regular(SDK / "verify.py")), run_name="m3_sparse_sdk_reuse")
     pins, pins_data = module["inputs"]()
     if module["SUITES"] != {SUITE: METHODS} or module["RECEIVER_OUTPUTS"] != {
-            TARGET_C: "5d40fe7c65d54e26c6964313186624675592703ea6e2e1cb2886840b2f15347e"}:
+            TARGET_C: "4c453d51223c3223f07fb88b39e1c1b6ed9891de8157d32a63990a9a4488ece9"}:
         raise RuntimeError("exact three-method one-C recipe contract required")
     expected_custody = {row["path"]: row["sha256"] for row in record["receiverOriginalOwners"]
                         if row["path"] != TARGET_C}
@@ -230,7 +232,7 @@ def report():
             or sdk["reports"][SUITE]["sha256"] != hashlib.sha256(xml).hexdigest()
             or sdk["unchangedReceiverCustody"] != expected_custody
             or sdk["counterReceipt"]["sha256"] != sha256(counter)
-            or (sdk["tests"],sdk["successfulRuns"],sdk["refusedRuns"],sdk["emittedOutputs"]) != (3,16,32,2)
+            or (sdk["tests"],sdk["successfulRuns"],sdk["refusedRuns"],sdk["emittedOutputs"]) != (3,16,34,2)
             or sdk["recipeJUnitQualified"] is not True or sdk["recipeReplayQualified"] is not True):
         raise RuntimeError("actual SDK receipt/counter/source identity differs")
     for flag in module["FALSE_GATES"]:
@@ -334,11 +336,13 @@ def report():
         labels.extend("state-relation-" + variant + "-" + suffix
                       for suffix in ("c11-compile", "native-symbols", "native-proof"))
     labels.append("state-relation-missing-library-refusal")
+    labels.extend(["state-relation-direct-c-compile", "state-relation-direct-c-run",
+                   "state-relation-bench-original-preprocess", "state-relation-bench-portable-preprocess"])
     labels.extend(["state-relation-bench-" + name + "-compile" for name in ("baseline","sparse","portable")])
     labels.extend(["state-relation-bench-link", "state-relation-bench-symbols", "state-relation-bench-run"])
     commands = execution["commands"]
     if [row["label"] for row in commands] != labels:
-        raise RuntimeError("all eighteen actual numeric/measurement command records required")
+        raise RuntimeError("all twenty-two actual numeric/direct-ABI/measurement command records required")
     for row in commands:
         raw = regular(ROOT / str(relative(row["log"]))).read_bytes()
         if (len(raw) != row["bytes"] or hashlib.sha256(raw).hexdigest() != row["sha256"]
@@ -368,6 +372,40 @@ def report():
                 or natives[variant]["sourceSha256"] != hashlib.sha256(source_raw).hexdigest()
                 or natives[variant]["sourceGitBlob"] != blob(source_raw)):
             raise RuntimeError("compiled native source drift")
+    direct = execution["directCAbiProof"]
+    direct_spec = metadata["directCProof"]
+    direct_source = regular(HERE / "runtime/direct_c_proof.c")
+    direct_binary = regular(work / "direct-c-proof")
+    direct_compile = next(row for row in commands if row["label"] == "state-relation-direct-c-compile")
+    direct_run = next(row for row in commands if row["label"] == "state-relation-direct-c-run")
+    direct_stdout = regular(ROOT / str(relative(direct_run["log"]))).read_bytes()
+    direct_expected_source = {"path": "direct_c_proof.c", "bytes": direct_source.stat().st_size,
+                             "sha256": sha256(direct_source), "gitBlob": blob(direct_source.read_bytes())}
+    if (direct["schema"] != "M3_RELATION_DIRECT_C_ABI_EXECUTION_V1"
+            or direct["source"] != direct_expected_source
+            or any(direct_spec[key] != direct_expected_source[key] for key in direct_expected_source)
+            or direct_spec["expected"] != driver["DIRECT_C_EXPECTED"]
+            or direct["result"] != driver["validate_direct_c_output"](direct_stdout)
+            or direct["stdout"] != {key: direct_run[key] for key in ("log", "bytes", "sha256")}
+            or direct["compilerFlags"] != driver["DIRECT_C_FLAGS"]
+            or direct["fatalUndefinedBehaviorSanitizer"] is not True
+            or direct["ubsanOptions"] != "halt_on_error=1:print_stacktrace=1"
+            or direct["libraryOrder"] != ["baseline", "sparse", "portable"]
+            or direct["unrestrictedPointerProofQualified"] is not False
+            or direct["productAdoption"] is not False
+            or execution["directCAbiCorpusExecuted"] is not True
+            or execution["directCProofAdmission"] != metadata["directCProofAdmission"]):
+        raise RuntimeError("exact actual direct C ABI corpus and source required")
+    expected_binary = {"path": str(direct_binary.relative_to(ROOT)),
+                       "bytes": direct_binary.stat().st_size, "sha256": sha256(direct_binary),
+                       "exportedAsArtifact": False}
+    if (direct["executable"] != expected_binary
+            or direct_compile["argv"] != [execution["tools"]["gcc"], *driver["DIRECT_C_FLAGS"],
+                "-I" + str((RECEIVER / driver["HEADER"]).parent),
+                str(direct_source), "-ldl", "-o", str(direct_binary)]
+            or direct_run["argv"] != [str(direct_binary),
+                *[str(ROOT / natives[name]["path"]) for name in ("baseline", "sparse", "portable")]]):
+        raise RuntimeError("actual direct C fatal-UBSan compile/run command differs")
     benchmark_ref = execution["nativeBenchmark"]
     benchmark_path = regular(ROOT / str(relative(benchmark_ref["path"])))
     benchmark_raw = benchmark_path.read_bytes()
@@ -392,7 +430,7 @@ def report():
     checker_path = regular(HERE / "runtime/verify_benchmark.py")
     checker = runpy.run_path(str(checker_path), run_name="m3_paired_native_host_validation")
     verified = checker["validate"](benchmark_stdout)
-    if benchmark["verified"] != verified or verified["caseCount"] != 96 or verified["measurements"] != 1440:
+    if benchmark["verified"] != verified or verified["caseCount"] != 200 or verified["measurements"] != 3000:
         raise RuntimeError("complete independent paired timing validation")
     if (benchmark["harnessSha256"] != sha256(HERE / "runtime/paired_bench.c")
             or benchmark["verifierSha256"] != sha256(checker_path)):
@@ -425,6 +463,27 @@ def report():
     if benchmark["compilerFlags"] != ["-std=c11","-Wall","-Wextra","-Wpedantic","-Werror",
                                      "-Wconversion","-Wsign-conversion","-O3","-fno-lto"]:
         raise RuntimeError("matched benchmark compiler flags")
+    preprocessing_rows, preprocessing_raw = {}, {}
+    jdk = Path(execution["tools"]["java"]).parent.parent
+    for variant, c_source in (("original", SDK / ("src/main/resources/com/synexia/rewrite/state-relation-sparse-c11-20261020/before/" + TARGET_C)),
+                              ("portable", SDK / "target/emitted" / TARGET_C)):
+        row = next(row for row in commands if row["label"] == "state-relation-bench-" + variant + "-preprocess")
+        expected_argv = [execution["tools"]["gcc"], *benchmark["compilerFlags"],
+                         "-DM3_STATE_RELATION_FORCE_POSITIONAL_SCAN",
+                         "-I" + str(jdk / "include"), "-I" + str(jdk / "include/linux"),
+                         "-I" + str((RECEIVER / driver["HEADER"]).parent), "-include", str(real_header),
+                         "-E", "-P", str(c_source)]
+        raw = regular(ROOT / str(relative(row["log"]))).read_bytes()
+        if row["argv"] != expected_argv or not raw:
+            raise RuntimeError("exact baseline/forced-portable preprocessing command required")
+        preprocessing_rows[variant] = {key: row[key] for key in ("log", "bytes", "sha256")}
+        preprocessing_raw[variant] = raw
+    expected_preprocessing = {"equal": True, "bytes": len(preprocessing_raw["original"]),
+                              "sha256": hashlib.sha256(preprocessing_raw["original"]).hexdigest(),
+                              **preprocessing_rows}
+    if (preprocessing_raw["original"] != preprocessing_raw["portable"]
+            or benchmark["portablePreprocessing"] != expected_preprocessing):
+        raise RuntimeError("forced-portable preprocessed candidate must equal original")
     if "[INFO] BUILD SUCCESS" not in regular(ARTIFACTS / "sdk-maven.log").read_text(encoding="utf-8"):
         raise RuntimeError("actual Maven SDK build success required")
     result = {
@@ -435,7 +494,7 @@ def report():
         "inputPinsSha256": hashlib.sha256(pins_data).hexdigest(),
         "sdkReceiptSha256": sha256(sdk_path), "surefireXmlSha256": hashlib.sha256(xml).hexdigest(),
         "suite": SUITE, "methods": METHODS, "counts": counts,
-        "successfulSdkRuns": 16, "refusedSdkRuns": 32, "emittedProductFiles": 2,
+        "successfulSdkRuns": 16, "refusedSdkRuns": 34, "emittedProductFiles": 2,
         "compiledProviders": providers, "unchangedReceiverCustody": expected_custody,
         "emissions": emissions, "receiverCurrentOwners": record["observedCurrentOwners"],
         "ownerPlanControls": record["ownerPlanControls"],
@@ -451,7 +510,9 @@ def report():
         "sparseAndPortableC11JniQualified": True, "missingLibraryRefused": True,
         "fullExistingProofPreserved": True, "performanceQualified": False,
         "nativeKernelTimingMeasured": True, "nativeBenchmarkReceiptSha256": sha256(benchmark_path),
-        "benchmarkCases": 96, "benchmarkMeasurements": 1440, "automaticAdoption": False,
+        "benchmarkCases": 200, "benchmarkMeasurements": 3000, "automaticAdoption": False,
+        "directCAbiCorpusExecuted": True, "directCAbiProof": direct,
+        "forcedPortablePreprocessingIdentical": True,
     }
     result.update({key: False for key in FORBIDDEN})
     write("qualification-receipt.json", result)

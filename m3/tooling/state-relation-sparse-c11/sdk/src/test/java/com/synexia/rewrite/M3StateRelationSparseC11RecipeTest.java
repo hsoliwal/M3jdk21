@@ -27,12 +27,14 @@ final class M3StateRelationSparseC11RecipeTest {
     private static final String ROOT = "/com/synexia/rewrite/state-relation-sparse-c11-20261020/";
     private static final String DESCRIPTOR = "/META-INF/rewrite/state-relation-sparse-c11-20261020";
     private static final String NAME = "com.synexia.m3.StateRelationSparseC11";
-    private static final String FORWARD_MANIFEST_SHA = "b11f37c48e79a237a1a9ad71f6f5353cb1bb6270b57f3c69d82695626e3734fe";
-    private static final String INVERSE_MANIFEST_SHA = "2a4b37cff5b8690c05541a5ae638f44d0fd48af1df90a2da081155a06fa54f2a";
+    private static final String FORWARD_MANIFEST_SHA = "c5498b90a14e1ff6ded95982c50e24571660053e1fdb643a5c47c14d784e7c2f";
+    private static final String INVERSE_MANIFEST_SHA = "72957d2ff848b72d92eed4414e044caf32de6817f7c4c07f5c53b63215cd9a7c";
     private static final String FORWARD_DESCRIPTOR_SHA = "6de3e434ac8087d89d10a56825266876ed6225f7206f643a81802949d3e5da34";
     private static final String INVERSE_DESCRIPTOR_SHA = "285b18af40d5c6de101fdacc3b176138d0214f0a64150b71055801c53d3496df";
     private static final String C_OWNER = "src/java.base/share/native/libjava/M3StateRelation.c";
-    private static final String C_AFTER = "5d40fe7c65d54e26c6964313186624675592703ea6e2e1cb2886840b2f15347e";
+    private static final String C_AFTER = "4c453d51223c3223f07fb88b39e1c1b6ed9891de8157d32a63990a9a4488ece9";
+    private static final String REJECTED = ROOT + "rejected/M3StateRelation.c.txt";
+    private static final String REJECTED_SHA = "5d40fe7c65d54e26c6964313186624675592703ea6e2e1cb2886840b2f15347e";
     private static final String HISTORICAL = ROOT + "historical/M3StateRelation.c.txt";
     private static final String HISTORICAL_SHA = "66d28e350f4894498b15c0041c0a43c075f12c9e3a384214e45d9868ce1950b6";
     private static final Map<String, String> BEFORE = Map.ofEntries(
@@ -233,6 +235,17 @@ final class M3StateRelationSparseC11RecipeTest {
             input.put(C_OWNER, historical);
             reject(sources(input, true), "source drift: " + C_OWNER, inverse);
         }
+        // Preserve the measured default-CTZ rejection as an immutable non-target regression.
+        String rejected = resource(REJECTED);
+        assertEquals(REJECTED_SHA, M3GpuToolJoinManifest.sha256(rejected));
+        assertNotEquals(BEFORE.get(C_OWNER), REJECTED_SHA);
+        assertNotEquals(C_AFTER, REJECTED_SHA);
+        for (boolean inverse : new boolean[]{false, true}) {
+            assertNull(manifest(inverse).target(REJECTED), "rejected fixture is not a target");
+            var input = state(inverse);
+            input.put(C_OWNER, rejected);
+            reject(sources(input, true), "source drift: " + C_OWNER, inverse);
+        }
         PASSED.add("historicalCRefusesBothDirectionsWithoutMutation");
     }
 
@@ -242,7 +255,7 @@ final class M3StateRelationSparseC11RecipeTest {
                 "everyOwnerRefusesDriftMissingAndDuplicateWithoutMutation",
                 "historicalCRefusesBothDirectionsWithoutMutation"), PASSED);
         assertEquals(16, successfulRuns);
-        assertEquals(32, refusedRuns);
+        assertEquals(34, refusedRuns);
         String id = System.getenv("M3_QUALIFICATION_ID"), head = System.getenv("EXPECTED_SOURCE_SHA");
         assertNotNull(id); assertNotNull(head);
         assertTrue(id.matches("[A-Za-z0-9_.-]{16,128}"));
@@ -273,7 +286,7 @@ final class M3StateRelationSparseC11RecipeTest {
                   "checkoutCommit": "%s",
                   "tests": 3,
                   "successfulRuns": 16,
-                  "refusedRuns": 32,
+                  "refusedRuns": 34,
                   "emittedOutputs": 2,
                   "sourceOnly": true,
                   "runtimeApplied": false,
@@ -283,6 +296,6 @@ final class M3StateRelationSparseC11RecipeTest {
         Files.writeString(target.resolve("recipe-test-counters.json"), json, StandardCharsets.UTF_8,
                 StandardOpenOption.CREATE_NEW, StandardOpenOption.WRITE);
         System.out.println("M3_STATE_RELATION_SPARSE_C11_RECIPE_COUNTERS successful=16"
-                + " refused=32 outputs=2 qualificationId=" + id);
+                + " refused=34 outputs=2 qualificationId=" + id);
     }
 }
