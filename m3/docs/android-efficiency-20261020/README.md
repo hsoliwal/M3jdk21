@@ -87,6 +87,17 @@ reconciled explicitly; complete prior records and target pins remain in
 `history/`. The current validator is run against actual receiving bytes.
 Product acceptance and migration completion remain open.
 
+## Receiving evidence and source rights
+
+The immutable runtime receive is `329cd9116eca5a3b2ec081fb6760ca3e6508da7e`
+([PR #1572](https://github.com/hsoliwal/M3jdk21/pull/1572)).
+[Receiving qualification](QUALIFICATION.md), [exact provenance](PROVENANCE.json)
+and the [source-rights crosswalk](SOURCE_RIGHTS.tsv) bind this pass.
+The [actual validator receipt](evidence/migration-validator-receipt.json)
+records exit 0 and `MIGRATION_MANIFEST_VALID completion=INCOMPLETE`.
+All 60 prior migration identities and statuses are preserved; the three new
+records remain `implemented-unverified`.
+
 ## Remaining acceptance gates
 
 The receiving phase remains **STRING / QUALIFICATION_REQUIRED**.
