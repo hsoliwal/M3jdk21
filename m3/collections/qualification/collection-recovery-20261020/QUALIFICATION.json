@@ -1,0 +1,28 @@
+{
+  "schema": 1,
+  "status": "CANDIDATE_NOT_ADMITTED",
+  "target_revision": "df532e779056dbec203dde20030657c3d144f5b5",
+  "completed": {
+    "java21_strict_compile": true,
+    "filtered_null_checks": 3555352,
+    "histogram_java_checks": 403492,
+    "bitmap_java_checks": 119456,
+    "projection_java_checks": 282479,
+    "failures": 0,
+    "strict_C17_syntax": [
+      "m3_state_mask_histogram.c",
+      "m3_index_mask_window.c"
+    ]
+  },
+  "scope": "Exact canonical CollectionComposite20261019 postimages, not current-master composition",
+  "pending": [
+    "SDK generation and fixed-point execution",
+    "current-master filtered wrapper probe",
+    "java.base patched runtime",
+    "Windows JNI shared-link and runtime",
+    "full M3JDK21 build and jtreg",
+    "performance comparisons",
+    "source-aware autoreview"
+  ],
+  "blocker": "K: required temporary lane stopped responding during local qualification; storage hold retained. No inference of full qualification from syntax or Java-only results."
+}

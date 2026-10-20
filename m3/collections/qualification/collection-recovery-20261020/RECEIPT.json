@@ -1,0 +1,43 @@
+{
+  "schema": 1,
+  "recipe": "com.synexia.m3.CollectionRecovery20261020",
+  "canonical_repository": "hsoliwal/com.synexia",
+  "canonical_commit": "f1c3835666ad54433485ff7195a714b14895fe29",
+  "canonical_crate": "synexia-openrewrite-recipes/recipe-crates/m3jdk21-collection-recovery-20261020",
+  "target_base": "df532e779056dbec203dde20030657c3d144f5b5",
+  "status": "EXACT_DONOR_REPLAY_CANDIDATE_NOT_SDK_ADMITTED",
+  "files": [
+    {
+      "path": "m3/collections/qualification/jdk-rx7-view-convergence-20261019/proof/MaskWindowConvergence.java",
+      "sha": "571f05ce9af0df3e7c5c828f241ee1f2ce47e750"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java",
+      "sha": "7cfcbf419ac3164a1ea4e79292d6100821d48228"
+    },
+    {
+      "path": "m3/collections/verification/view-refinement-20261019/M3FilteredNullNavigationProbe.java",
+      "sha": "e455268299d1901a4f4872579124afc3caa90541"
+    },
+    {
+      "path": "m3/collections/verification/view-refinement-20261019/M3ProjectionRefinementProbe.java",
+      "sha": "2af991831919b05018dcb1901a617b5ab91dce14"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/SortedSet.java",
+      "sha": "81b894e2fd70eba359483c4fcbda127473cf4cd8"
+    },
+    {
+      "path": "test/jdk/java/util/SortedSet/SortedSetSplitOrder.java",
+      "sha": "5b1b136e98d5865838c7820e80bef2b764edd067"
+    }
+  ],
+  "public_interfaces": "Existing owners only; no new public API or JNI symbol",
+  "preserved": [
+    "newer M3FilteredViews",
+    "newer ReverseOrderSortedSetView",
+    "bitmap membership",
+    "native mask window",
+    "native signed-stride histogram"
+  ]
+}
