@@ -24,7 +24,7 @@ public final class M3BuildState {
     public static final String ARTIFACT_KIND = "m3.build-state";
     public static final int VERSION = 1;
     public static final byte SOURCE = 1, CLASS = 2, INPUT = 3;
-    public static final int DIRECT = 1, DEPENDENT = 2, CONTEXT = 4, REMOVAL = 8, INPUT_CHANGED = 16;
+    public static final int DIRECT = 1, DEPENDENT = 2, CONTEXT = 4, REMOVAL = 8, INPUT_CHANGED = 16, GRAPH_CHANGED = 32;
     private static final int MAGIC = 0x4d334253; // M3BS
     private static final int DIGEST_BYTES = 32;
     private static final int MAX_ROWS = 250_000, MAX_EDGES = 2_000_000;
@@ -133,6 +133,30 @@ public final class M3BuildState {
                     || !same(abi, i, previous.abi, old))) {
                 // Unknown but byte-identical facts do not by themselves invalidate dependents.
                 abiChanged[i] = changed || abiDifference;
+            }
+        }
+        // Compare provider identities, not physical row offsets, across generations.
+        // Newly added consumers are already direct deltas. Retained consumers with
+        // changed dependency facts must be reanalyzed even if source bytes match.
+        int[] start = starts(rows(), consumers);
+        int[] oldStart = starts(previous.rows(), previous.consumers);
+        for (int i = 0; i < rows(); i++) {
+            int old = Arrays.binarySearch(previous.names, names[i]);
+            if (old < 0) continue;
+            int len = start[i + 1] - start[i];
+            if (len != oldStart[old + 1] - oldStart[old]) {
+                if (kinds[i] == SOURCE) flags[i] |= DIRECT | GRAPH_CHANGED;
+                if (kinds[i] != INPUT) abiChanged[i] = true;
+                continue;
+            }
+            for (int j = 0; j < len; j++) {
+                String provider = names[providers[start[i] + j]];
+                String oldProvider = previous.names[previous.providers[oldStart[old] + j]];
+                if (!provider.equals(oldProvider)) {
+                    if (kinds[i] == SOURCE) flags[i] |= DIRECT | GRAPH_CHANGED;
+                    if (kinds[i] != INPUT) abiChanged[i] = true;
+                    break;
+                }
             }
         }
         for (String name : previous.names) {
@@ -250,6 +274,12 @@ public final class M3BuildState {
             throw new IllegalArgumentException("SHA-256 must be 32 bytes");
         }
         return value.clone();
+    }
+    private static int[] starts(int rows, int[] consumers) {
+        int[] start = new int[rows + 1];
+        for (int consumer : consumers) start[consumer + 1]++;
+        for (int i = 1; i <= rows; i++) start[i] += start[i - 1];
+        return start;
     }
     private static boolean same(byte[] left, int li, byte[] right, int ri) {
         int a = li * DIGEST_BYTES, b = ri * DIGEST_BYTES;
