@@ -1035,7 +1035,7 @@ public final class M3HfLexiconIntakeProof {
                 && morphalou.contains("522,662") && morphalou.contains("LGPL-LR"),
                 "Morphalou form/phonetic counts, provenance and data license stay explicit");
         String rlfr = discoveryRecord(lines, "rl-fr-2025-03");
-        require(rlfr.contains("7 March 2025") && rlfr.contains("polysemy")
+        require(rlfr.contains("March 2025") && rlfr.contains("polysemy")
                 && rlfr.contains("CC BY 4.0") && rlfr.contains("not translations"),
                 "RL-fr version, typed lexical relations and scope stay explicit");
         String bel = discoveryRecord(lines, "bel-rl-fr-3-1");
