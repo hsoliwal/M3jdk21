@@ -234,9 +234,9 @@ public final class M3BigString {
         Objects.requireNonNull(needle, "needle");
         long size = length();
         long from = Math.max(0L, fromIndex);
-        if (from > size) return -1L;
         int m = needle.length();
-        if (m == 0) return from;
+        if (m == 0) return Math.min(from, size);
+        if (from > size) return -1L;
         if ((long) m > size - from || !mayContainLiteral(needle)) return -1L;
         int[] failure = new int[m];
         for (int i = 1, j = 0; i < m; i++) {
