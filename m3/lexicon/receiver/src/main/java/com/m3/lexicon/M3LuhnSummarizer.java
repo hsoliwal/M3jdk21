@@ -86,10 +86,31 @@ public final class M3LuhnSummarizer {
         validateDocument(wordIds, sentenceEnds);
 
         ArrayList<SentenceScore> scores = new ArrayList<>(sentenceEnds.length);
+        long[] nativeLuhn = new long[sentenceEnds.length];
+        int[] nativeSignificant = new int[sentenceEnds.length];
+        int[] nativeSpan = new int[sentenceEnds.length];
+        boolean nativeClusters = config.requiredClassMask() == 0L
+                && config.excludedClassMask() == 0L
+                && M3LanguageNative.scoreLuhnClusters(
+                        geometry,
+                        wordIds,
+                        sentenceEnds,
+                        config.significantFrequencyBand(),
+                        config.maximumGap(),
+                        nativeLuhn,
+                        nativeSignificant,
+                        nativeSpan);
+
         int start = 0;
         for (int sentence = 0; sentence < sentenceEnds.length; sentence++) {
             int end = sentenceEnds[sentence];
-            scores.add(score(sentence, wordIds, start, end));
+            scores.add(nativeClusters
+                    ? scoreWithLuhn(
+                            sentence, wordIds, start, end,
+                            nativeLuhn[sentence],
+                            nativeSignificant[sentence],
+                            nativeSpan[sentence])
+                    : score(sentence, wordIds, start, end));
             start = end;
         }
 
@@ -123,6 +144,30 @@ public final class M3LuhnSummarizer {
         return new SentenceScore(
                 sentenceIndex, total, cluster.scoreQ20(), pair, semantic,
                 cluster.significantWords(), cluster.strongestSpan());
+    }
+
+    private SentenceScore scoreWithLuhn(
+            int sentenceIndex,
+            int[] words,
+            int start,
+            int end,
+            long luhnQ20,
+            int significantWords,
+            int strongestSpan) {
+        long pair = pairScore(words, start, end);
+        long semantic = semanticScore(words, start, end);
+        long total = saturatedAdd(
+                saturatedAdd(weight(luhnQ20, config.luhnWeightQ10()),
+                        weight(pair, config.pairWeightQ10())),
+                weight(semantic, config.semanticWeightQ10()));
+        return new SentenceScore(
+                sentenceIndex,
+                total,
+                luhnQ20,
+                pair,
+                semantic,
+                significantWords,
+                strongestSpan);
     }
 
     private ClusterScore luhn(int[] words, int start, int end) {
