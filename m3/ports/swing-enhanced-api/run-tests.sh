@@ -5,6 +5,7 @@
 #   run-tests.sh test       JUnit, headless, --patch-module java.desktop=<patch>
 #   run-tests.sh coverage   the same under JaCoCo; report of the new code (NEW_CODE.txt)
 #   run-tests.sh diff       behaviour probe against master's classes and against this branch's; outputs must be equal
+#   run-tests.sh bench <leaf> <sizes...>   M3SwingBench (plain API vs enhanced API, median ns/op and bytes/op), log in $OUT/bench
 # Env: M3_JDK21 (JDK 21 home), OUT (output dir, default S:/m3-scratch/enhanced-api/swing), BASE (git ref, default origin/master).
 set -euo pipefail
 here=$(cd "$(dirname "$0")" && { pwd -W 2>/dev/null || pwd; })
@@ -77,5 +78,11 @@ case "${1:-test}" in
     else
       diff "$out/probe-base.txt" "$out/probe-work.txt" | head -40; exit 1
     fi ;;
-  *) echo "usage: $0 compile|test|coverage|diff" >&2; exit 2 ;;
+  bench)
+    compile
+    mkdir -p "$out/bench"; shift
+    "$jdk/bin/java" -Xmx3g -XX:+UseSerialGC -Djava.awt.headless=true --patch-module java.desktop="$out/patch" \
+      "-Djava.util.logging.SimpleFormatter.format=%5\$s%n" -cp "$out/test-classes" m3.swing.api.M3SwingBench "$@" \
+      2>&1 | tee "$out/bench/$1-$(date +%Y%m%d-%H%M).tsv" ;;
+  *) echo "usage: $0 compile|test|coverage|diff|bench" >&2; exit 2 ;;
 esac
