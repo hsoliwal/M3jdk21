@@ -34,3 +34,16 @@ and recreated. `M3File.of(Path)` keeps the detached read edge above. Design,
 invariants and the remaining slices (lazy scan, deltas, views, viewport row
 host, lane image) are in [DESIGN.md](DESIGN.md); donor decisions in
 `qualification/m3file-tree-20261020/FOSS_REUSE_DECISION.tsv`.
+
+## Walks, progress and shadow streams (S2, S3)
+
+`tree.walk()` / `file.walk()` return an immutable `M3FileWalk` (depth limits,
+kind mask, JDK glob, path/name regex, `prune`, `filter`, lane-level `pruneIds`
+and `filterIds`) whose `M3FileTraversal` default methods give `stream()`,
+`parallelStream()`, `map`, `forEach`, `collect`, `count` and an ORDERED,
+splittable spliterator (SIZED when unfiltered); `cursor()` adds `nextEntry()`
+and `skipSubtree()`. Order is `Files.walk` order. `M3File.openInputStream` and
+`openOutputStream` take an `M3FileProgress` sub-monitor (units = bytes,
+`split`, cancellation) and `M3FileShadow` layers that move with the main
+stream: SHA-256, CRC32C, line index, and a UTF-8 layer feeding
+`M3FileCharShadow`s (token hash; an M3AST builder plugs in from `m3/ast`).

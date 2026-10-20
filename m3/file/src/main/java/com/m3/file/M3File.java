@@ -4,6 +4,7 @@ package com.m3.file;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.nio.channels.Channels;
 import java.nio.channels.SeekableByteChannel;
 import java.nio.file.Files;
@@ -140,6 +141,52 @@ public final class M3File {
                 throw new IOException("resource exceeds configured read limit");
             }
             return data;
+        }
+    }
+
+    /** {@link #openInputStream(long, M3FileProgress, M3FileShadow...)} without a byte limit. */
+    public M3FileShadowInputStream openInputStream(M3FileProgress progress, M3FileShadow... shadows)
+            throws IOException {
+        return openInputStream(Long.MAX_VALUE, progress, shadows);
+    }
+
+    /**
+     * Caller-closed input stream with a sub-progress monitor (units = bytes, total = observed size) and
+     * shadows that move as it is read; links are not followed, the limit is enforced while streaming.
+     */
+    public M3FileShadowInputStream openInputStream(long maxBytes, M3FileProgress progress, M3FileShadow... shadows)
+            throws IOException {
+        if (maxBytes < 0) throw new IllegalArgumentException("negative maxBytes");
+        Metadata observed = metadata();
+        if (!observed.regularFile()) throw new IOException("resource is not a regular file");
+        if (observed.size() > maxBytes) throw new IOException("resource exceeds configured read limit");
+        progress.begin(path().toString(), observed.size());
+        InputStream input = Channels.newInputStream(
+                Files.newByteChannel(path(), StandardOpenOption.READ, LinkOption.NOFOLLOW_LINKS));
+        return new M3FileShadowInputStream(input, maxBytes, progress, shadows);
+    }
+
+    /**
+     * Caller-closed output stream (create or truncate, links not followed) with a sub-progress monitor
+     * and shadows that move as it is written. Tree lanes are a scan-time observation and do not change.
+     */
+    public M3FileShadowOutputStream openOutputStream(M3FileProgress progress, M3FileShadow... shadows)
+            throws IOException {
+        progress.begin(path().toString(), 0);
+        OutputStream output = Files.newOutputStream(path(), StandardOpenOption.CREATE,
+                StandardOpenOption.TRUNCATE_EXISTING, StandardOpenOption.WRITE, LinkOption.NOFOLLOW_LINKS);
+        return new M3FileShadowOutputStream(output, Long.MAX_VALUE, progress, shadows);
+    }
+
+    /** One read pass that only feeds {@code shadows}; returns the bytes read. */
+    public long observe(long maxBytes, M3FileProgress progress, M3FileShadow... shadows) throws IOException {
+        try (M3FileShadowInputStream input = openInputStream(maxBytes, progress, shadows)) {
+            byte[] buffer = new byte[8192];
+            for (int read = input.read(buffer); read >= 0; read = input.read(buffer)) {
+                // shadows consume the block
+            }
+            progress.done();
+            return input.count();
         }
     }
 
