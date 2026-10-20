@@ -116,7 +116,7 @@ public final class M3ImmediateLabelBench {
 
 	/** Microseconds per frame (p50, p90): 60 random rows, every column copied into a char buffer and measured. */
 	static long [] frames (Object model, int columns, int rows) {
-		char [] buffer = new char [4096];
+		char [] buffer = new char [1 << 20];
 		long [] samples = new long [FRAMES];
 		Random random = new Random (7);
 		long sink = 0;

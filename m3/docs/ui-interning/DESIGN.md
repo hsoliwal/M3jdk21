@@ -39,10 +39,11 @@ of hashing text (section 4.4).
 
 | Class | Lanes (per id) | Facades | Bytes per entry |
 |---|---|---|---|
-| `M3LabelPool` | `byte[]` arena (Latin-1 1 byte/char, UTF-16 2 bytes/char per label, as JDK compact strings); `long` span (offset, length, coder); `long` key (String.hashCode + length, or canonical id); `int` refcount; `int` prev/next (LRU of released labels, free list); `int[]` slot table | `String` per id, created only by `text(id)`, dropped on eviction or `trimFacades()` | 24 + text bytes + 8 table |
-| `M3TextExtentCache` | `long` key (labelId << 32 \| fontId); `long` extent (width << 32 \| height); `byte` CLOCK bit | none | 17 per slot |
+| `M3LabelPool` | `byte[]` arena (Latin-1 1 byte/char, UTF-16 2 bytes/char per label, as JDK compact strings); `long` span (offset, length, coder); `long` key (String.hashCode + length, or canonical id); `int` refcount; `int` prev/next (LRU of released labels, free list); `int[]` slot table | `String` created by `text(id)` and kept in a 4096-slot direct-mapped cache (bounded whatever the label count) | 28 + text bytes + 8 table |
+| `M3ShortLabel` | none (static codec): a label is a `long`; tag 0 = pool id, tag 1 = LATIN1 immediate (1..7 units), tag 2 = IDENT immediate (8..10 units), layout of M3JDK's `M3StringImmediate` | `toString(label)` on API demand; `getChars` into a caller buffer | 0 |
+| `M3TextExtentCache` | `long` label, `int` font, `long` extent (width << 32 \| height), `byte` CLOCK bit | none | 21 per slot |
 | `M3TreePathTrie` | `int` parent, segment, depth, firstChild, nextSibling, prevSibling; `long` flags; edge table `long` key (parentPathId << 32 \| segment) + `int` id | none (`segments(id, int[])` fills a caller array) | 36 + 12 per edge slot |
-| `M3LabelLanes` | one `int[]` label-id lane per column | String facades from the pool | 4 per cell |
+| `M3LabelLanes` | per column an `int[]` of pool ids (pooled lanes) or a `long[]` of `M3ShortLabel` values (immediate lanes) | String from the pool facade cache or `M3ShortLabel.toString`; `getChars` for native callbacks | 4 or 8 per cell |
 
 No Entry objects, no per-row allocation on any hot path, no `String.intern()` (TIL law).
 
@@ -56,8 +57,8 @@ No Entry objects, no per-row allocation on any hot path, no `String.intern()` (T
   deleted, its arena bytes become garbage, its id goes to the free list and the eviction listener hears the id (the
   extent cache drops that id's widths).
 - Referenced labels are never evicted: the bound applies to released labels only, so rows never lose text.
-- `text(id)` returns the String facade (created once, then reused); `length`, `charAt`, `getChars`, `contentEquals`,
-  `compare` and `hash` answer from the arena without creating a String.
+- `text(id)` returns a String facade from a bounded direct-mapped cache (a miss decodes again); `length`, `charAt`,
+  `getChars`, `contentEquals`, `compare` and `hash` answer from the arena without creating a String.
 - Not thread-safe: one model owner thread.
 
 ### 4.2 Algorithms (rule 21; rows in `ALGORITHM_CATALOGUE.tsv`)
@@ -68,7 +69,19 @@ No Entry objects, no per-row allocation on any hot path, no `String.intern()` (T
 - The arena is compacted in O(live bytes) when garbage exceeds the live bytes.
 
 ### 4.3 Measured effect
-See section 8 and `BENCHMARKS.tsv`.
+See section 8 and `OPTIMIZATION_LEDGER.tsv`.
+
+### 4.5 Immediate short labels (user 2026-10-20: "short-string may help us")
+`M3ShortLabel` packs a label of 1..7 Latin-1 units, or of 8..10 identifier characters, into one `long` in the layout of
+M3JDK's `M3StringImmediate` (#1465), so on M3JDK the value lines up with the JDK's own immediate String; the technique
+follows tools4j shortstring (MIT, pattern only). Such a label needs no pool entry, no reference count and no String:
+equality is `==`, the text decodes into a caller buffer. Tag 0 holds a pool id, so one `long` lane holds both kinds.
+
+Measured share (`IMMEDIATE_SHARE.tsv`): 13.4% of Explorer name cells (2,000,000 S: entries), 60.2% of path-segment
+occurrences, 22.3% of Problems-view cells (Severity 100%, Location 34.1%); but only 2.4-4.8% of distinct labels. Because
+a `long` lane costs 4 more bytes per cell than an `int` id lane, immediate lanes win time (no hashing or probing for the
+immediate cells) and lose memory unless the distinct short labels outnumber rows/16. Pooled lanes stay the default;
+immediate lanes are a per-model choice for short-label columns, and the measured trade-off is in the ledger.
 
 ### 4.4 M3JDK in place
 `M3LabelPool.CanonicalIds` maps a String to a 64-bit id that is unique per content (contract: injective, never 0).
@@ -78,7 +91,8 @@ the class moves into `jdk.internal.util`). The proving ground tests it with an i
 
 ## 5. M3TextExtentCache
 
-- Key `(labelId, fontId)` packed in a `long`; value width and height packed in a `long`.
+- Key `(label, fontId)` in parallel `long` and `int` lanes (a label is a pool id or an immediate); value width and
+  height packed in a `long`.
 - Open addressing with backward-shift delete; bounded by `maxEntries`; CLOCK second-chance eviction when full.
 - `invalidateFont(fontId)` (font change), `invalidateAll()` (DPI/zoom change), `invalidateLabel(labelId)` (wired as
   the pool's eviction listener, since evicted ids are reused).
@@ -105,11 +119,26 @@ Uses:
 
 With an `M3LabelPool` the trie owns one reference per name segment and releases it when the path is removed.
 
+No TreePath object exists per element: a path is its id, its segments are read into a caller's `int[]` or appended to a
+caller's `StringBuilder` only when an API asks. Segments stay `int` (pool ids or indices): immediate `long` segments
+would add 12 bytes per path to save one pool entry per distinct short name, a measured no (ledger row L8).
+A restore walk skips every subtree below a path without interned children (`hasChildren`), which is what makes it
+faster than the incremental path hashing of eclipse.platform.ui#4247 (ledger L3).
+
 ## 7. Adoption
 
 `ADOPTION.tsv` lists, per owner (Tree, Table, List, Grid, JFace, Swing caches), the call sites that switch to label
 ids and path ids and the expected savings. TreeViewport, TableViewport and ListViewport are not edited by this leaf.
 
-## 8. Status
+## 8. Status (2026-10-20)
 
-Filled in as leaves land (tests, coverage, benchmarks, differential).
+- Classes: `M3LabelPool`, `M3ShortLabel`, `M3TextExtentCache`, `M3TreePathTrie`, `M3TreePathRows`, `M3LabelLanes` in
+  `m3/collections`; the same sources (package line changed) in SWT `org.eclipse.swt.internal.m3.collections`.
+- Tests: 42 JUnit 5 cases, seeded differentials against an LRU model, a path map, a depth-first row walk and String
+  cells (pool on versus off, pooled and immediate lanes); JaCoCo 100% lines and branches for all six classes
+  (`build_and_test.sh`).
+- Benchmarks: `m3/collections/examples/ui-interning/` (headless, 10^5 and 10^6) and, in SWT,
+  `docs/m3/ui-interning/bench/` (real Table and Tree on the official 3.135.0 jar and the fork's viewport jar, hidden
+  desktop). Every number is in `OPTIMIZATION_LEDGER.tsv` with its evidence file.
+- Not done here: switching TreeViewport/TableViewport/ListViewport, JFace and Swing to the lanes (owners in
+  `ADOPTION.tsv`); wiring `CanonicalIds` to `java.lang.M3StringPool` in java.base.
