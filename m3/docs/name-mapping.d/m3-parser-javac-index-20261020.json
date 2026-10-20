@@ -1,0 +1,33 @@
+{
+  "schema": "M3_OPTIONAL_MODULE_MAPPING_V1",
+  "module": "jdk.m3.parser",
+  "intake_mode": "INDEPENDENT_APACHE_MODULE",
+  "canonical_recipe": "com.synexia.m3.JavacIndexIngress20261020",
+  "recipe_repository": "hsoliwal/com.synexia",
+  "recipe_revision": "d3993252efdf973e0c87a996cff389f849720be8",
+  "target": "m3/tooling/module-packs/parser",
+  "receiving_sequence_advanced": false,
+  "mappings": [
+    {
+      "source": "com.sun.source.util.M3AST PARSED event",
+      "target": "M3JavacParser.indexProjection / M3ASTIngress.javac",
+      "role": "share the existing javac parse, no independent parser"
+    },
+    {
+      "source": "M3JavacTree existing four-lane API",
+      "target": "M3ASTIndex.Domain.JAVAC",
+      "role": "additional generic read-only index, compatibility API unchanged"
+    },
+    {
+      "source": "com.m3.compiletime.ast.M3AST",
+      "target": null,
+      "role": "PENDING hash/diff semantic equivalence before consolidation"
+    },
+    {
+      "source": "M3File delta, progress/streams, SQLite E48 facts",
+      "target": null,
+      "role": "PENDING separate first-class Java/JNI contract qualification"
+    }
+  ],
+  "gates": "Source and template seals only; full Synexia Maven/OpenRewrite execution, JDK21 parser image, jtreg, JNI and resource gates pending"
+}

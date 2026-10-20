@@ -4,6 +4,8 @@ package jdk.m3.parser;
 
 import java.io.IOException;
 import java.io.StringReader;
+import com.sun.source.tree.CompilationUnitTree;
+import com.sun.source.util.Trees;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -43,6 +45,16 @@ public final class M3ASTIngress {
     }
 
     private M3ASTIngress() { }
+
+    /**
+     * Index a javac tree that the caller has already parsed. Does not create
+     * another parser, reread the source, or retain compiler tree handles.
+     */
+    public static M3ASTIndex javac(M3File source, CompilationUnitTree tree,
+            Trees trees, Limits limits) {
+        check(source, limits);
+        return M3JavacIndexIngress.capture(source, tree, trees, limits);
+    }
 
     /** Secure, complete POM XML parsing; exact element byte offsets are unavailable. */
     public static M3ASTIndex mavenPom(M3File source, Limits limits) throws IOException {

@@ -15,7 +15,7 @@ import java.util.Objects;
  * Nodes are occurrence identities within this immutable source generation.
  */
 public final class M3ASTIndex {
-    public enum Domain { ECLIPSE_JDT, MAVEN_POM, GRADLE_GROOVY, GRADLE_KOTLIN, JACKSON_JSON }
+    public enum Domain { ECLIPSE_JDT, MAVEN_POM, GRADLE_GROOVY, GRADLE_KOTLIN, JACKSON_JSON, JAVAC }
     public static final int NO_RANGE = -1;
     /** The origin parser guarantees an exact half-open UTF-16 source range. */
     public static final int EXACT_RANGE = 1;
