@@ -41,3 +41,9 @@ Both runs: `M3_SHADOW_STREAM_PASS checks=43`. Source replays from one primary in
 - Reuse [M3JDK21 #1567](https://github.com/hsoliwal/M3JDK21/pull/1567) and [#1568](https://github.com/hsoliwal/M3JDK21/pull/1568) for file deltas and fingerprints. Metadata (mtime, length, provider change attrs) can prefilter, but cannot prove unchanged bytes absent an authoritative stable provider generation. Existing Maven/Gradle/filtered/sorted owners are not modified here.
 
 First-party code and recipes retain Apache-2.0 / Copyright 2026 Hitesh Soliwal and contributors. LeetCode/HackerRank/GeeksforGeeks are problem-category references only; no challenge or incompatible-license donor code was copied.
+
+## Actual JMOD and jlink verification (stock bootstrap VM)
+
+The exact Java21 compiled module and contract were packaged using `jmod create --class-path` and linked using `jlink --module-path $JDK/jmods:<proof-directory> --add-modules com.m3.file`. The resulting image's `bin/java` ran the original shadow-stream contract **43/43 checks in normal and interpreted modes**. `java --list-modules` included `com.m3.file` and `java.base@21.0.12.1`.
+
+Proof JMOD SHA-256: `3653e62c5099a96d7cd19b7f70e88802debfa8da07afb120207f277100caf839`. M3File class SHA-256: `85db6e0612183db1dd8f553fc52984d4df908d53b22647ecb6387243dbf1081b`. The **proof** JMOD includes the test class for executable admission; no claim is made about production module packaging. The VM/JDK supplying `java.base` here is stock OpenJDK 21, not a source-built M3JDK21/HotSpot image; full SDK qualification remains pending.
