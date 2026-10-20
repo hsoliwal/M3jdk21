@@ -1,0 +1,3 @@
+$ /workspace/scratch/abdb4b1178cf/toolchain/zulu21.48.17-ca-jdk21.0.10-linux_x64/bin/java -Xmx512m -Xcheck:jni -Djava.library.path=/workspace/scratch/abdb4b1178cf/acquisition/rank-convergence/reproduction-02/native -cp /workspace/scratch/abdb4b1178cf/acquisition/rank-convergence/reproduction-02/junit:/workspace/scratch/abdb4b1178cf/acquisition/rank-convergence/reproduction-02/main:/workspace/scratch/abdb4b1178cf/acquisition/rank-convergence/reproduction-02/test -Xint com.m3.collections.M3IndexPathRankWordWalkProof
+PASS sparse wide offset/extreme-row windows: 29
+PASS M3IndexPathRank word walk: 6300 independent Java21 windows; signed rows, duplicates, strides, masks
