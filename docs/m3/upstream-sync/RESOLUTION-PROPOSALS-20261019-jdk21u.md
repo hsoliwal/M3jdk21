@@ -34,3 +34,20 @@ Fork structure to respect: constructors admit an `M3String` first (`maybeAdmit*`
 
 Also from 8311906/8351000 in this file (auto-merged, not conflicts): `initBytes(char[],..)` uses `coderFromArrayLen`; `putCharSB` after `inflate()` in the two `appendChars` loops; 8359454 23bd6b50dbb removes `putStringAt(int, String, int, int)`. Verify the fork's composite-builder lane (R5-BUILDER, 237f97cdb6e) does not call the removed overload.
 
+## C. HotSpot OS layer — 3 hunks
+
+The fork backports "report open file descriptors" (2edaaa0d8d4 Linux, 13868fa5e46 BSD/macOS, plus auto-merged declarations in `os.hpp`, `os_bsd.hpp`, `os_aix.cpp`, `os_windows.cpp` and the call in `vmError.cpp`). jdk21u has no `print_open_file_descriptors` anywhere. The conflicts are adjacent insertions only.
+
+| hunk | upstream change | fork (M3) side | proposal | proof |
+|---|---|---|---|---|
+| `os_bsd.cpp` h1 @2534 (41/21) | 8320890 4d4c47d92f: adds `os::pd_dll_unload(...)` at end of file | adds `os::print_open_file_descriptors` + `os::Bsd::print_open_file_descriptors` at the same place | union: upstream's `pd_dll_unload` block first, then the fork's two functions | `test/hotspot/jtreg/runtime/ErrorHandling/` hs_err smoke (owners pick); build of macOS/BSD port; `make test TEST=gtest:os` |
+| `os_linux.cpp` h1 @96 (1/1) includes | 8295159 7e4185a74e: `# include <fenv.h>` | `# include <dirent.h>` (for `/proc/self/fd`) | union: both includes, `<dirent.h>` then `<fenv.h>` | `test/hotspot/jtreg/compiler/floatingpoint/TestDenormalFloat.java` / `TestDenormalDouble.java` area of 8295159 (owners confirm); Linux build |
+| `os_linux.cpp` h2 @5792 (27/21) | 8320890 4d4c47d92f: `os::pd_dll_unload(...)` | `os::print_open_file_descriptors` (50 ms bounded `/proc/self/fd` scan) | union: upstream's `pd_dll_unload` block first, then the fork's function | as os_bsd h1, Linux |
+
+## D. Repository files — 2 hunks
+
+| hunk | upstream change | fork side | proposal | proof |
+|---|---|---|---|---|
+| `.github/workflows/build-cross-compile.yml` h1 @116 (2/1) | 8314656 5cd6929a2c: drop `debian-ports-archive-keyring` from the apt line | fork 6aa67d17700 already dropped the gcc version pins (mirroring jdk21u) and kept the keyring | take upstream (the fork's change on these lines equals upstream's except the keyring line, which upstream removed) | the workflow parses as YAML; the cross-compile GHA job when Actions are enabled |
+| `README.md` h1 @1 (268/8) | 8343474 22d5e0d1f8: jdk21u project README | the 279-line M3 homepage (15 fork commits) | keep fork | none (documentation) |
+
