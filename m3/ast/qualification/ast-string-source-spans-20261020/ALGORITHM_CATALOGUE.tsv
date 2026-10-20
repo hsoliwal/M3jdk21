@@ -1,0 +1,7 @@
+category	incumbent_or_candidate	decision	complexity	donor_or_reference	license_and_rationale
+AST lexical source location	one UTF16 span per canonical atom	REJECT	incorrect when identical subtrees occur at distinct source offsets	M3Ast hash-consing requirement	No third-party body copied; keep canonical atom identity independent of occurrence
+AST source geometry	occurrence-indexed primitive arrays	ADOPT	O(expanded AST occurrences + child edges); O(1) child offset lookup	M3ASTHierarchy occurrence facts, M3 collections CSR arena	First-party Apache-2.0; identical subtree atoms reuse one row while geometry remains independent
+source lifetime	owner coordinate + source generation check	ADOPT	O(1) source version validation	M3String owner/coordinate invariant	No source text copy, no native pointer, and caller retains lifetime authority
+UTF16 source spans	logical source [start,end) code unit bounds	ADOPT	O(occurrences) validation	OpenJDK javac/JDT source geometry contracts	Do not convert to code points or assume segment-local offsets
+missing span state	packed bitmap and (-1,-1) sentinel	ADOPT	O(1) known bit test	M3 primitive word masks	Retains recovered/synthetic position distinction without per-occurrence boxes
+AST preorder	iterative stack of primitive atom/parent/ordinal indexes	ADOPT	O(V+E) time and O(V+E) frozen space	DFS traversal category; LeetCode 144 problem taxonomy	No challenge-site implementation copied; avoids recursive traversal stack in projection
