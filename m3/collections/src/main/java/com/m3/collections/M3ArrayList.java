@@ -13,7 +13,6 @@ import java.io.Serial;
 import java.io.Serializable;
 import java.util.AbstractList;
 import java.util.Arrays;
-import java.util.BitSet;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.ConcurrentModificationException;
@@ -27,8 +26,8 @@ import java.util.function.Predicate;
  * <p>It preserves nulls, duplicate references and encounter order; index mutations
  * move only array references. Its inherited iterators and backed {@code subList}
  * follow {@link AbstractList}'s structural-modification epoch. Predicate-driven
- * removal first prepares a dynamically sized {@link BitSet} of rejected logical
- * positions and commits one stable compaction only after predicates succeed.
+ * removal lazily prepares a primitive {@code long[]} mask relative to the first
+ * rejection and commits one stable compaction only after predicates succeed.
  * Thus repeated filtering is not required when callers obtain a separate immutable
  * {@link M3IndexedListSnapshot} through {@link #snapshot()}.
  *
@@ -177,33 +176,59 @@ public final class M3ArrayList<E> extends AbstractList<E>
     }
 
     /**
-     * Two-pass, exception-safe stable filtering: run predicates once, then compact
-     * actual {@code Object[]} entries in place without allocating per-row objects.
-     * Predicate reentrant structural modification is rejected before compaction.
+     * Evaluate predicates once before committing stable compaction. A no-match
+     * traversal creates no removal mask; bits are relative to the first rejection.
+     * Nonstructural callback writes stay live; structural writes are refused at
+     * the same callback boundary as before. Java references never enter JNI.
      */
     @SuppressWarnings("unchecked")
     @Override public boolean removeIf(Predicate<? super E> predicate) {
         Objects.requireNonNull(predicate, "predicate");
         int expectedModCount = modCount;
         int oldSize = size;
-        BitSet removed = new BitSet();
+        long[] removed = null;
+        int first = -1;
         for (int read = 0; read < oldSize; read++) {
             boolean reject = predicate.test((E) elements[read]);
             if (modCount != expectedModCount) {
                 throw new ConcurrentModificationException("predicate structurally changed owner");
             }
-            if (reject) removed.set(read);
+            if (reject) {
+                if (first < 0) {
+                    first = read;
+                    removed = new long[1];
+                }
+                removed = markRemoval(removed, read - first);
+            }
         }
-        int rejected = removed.cardinality();
-        if (rejected == 0) return false;
-        int write = 0;
-        for (int read = 0; read < oldSize; read++) {
-            if (!removed.get(read)) elements[write++] = elements[read];
+        if (first < 0) return false;
+        compactRemovals(removed, first, oldSize);
+        return true;
+    }
+
+    /** Grow only decision scratch, without changing the canonical reference lane. */
+    private static long[] markRemoval(long[] words, int bit) {
+        int word = bit >>> 6;
+        if (word >= words.length) {
+            words = Arrays.copyOf(words, Math.max(word + 1, words.length << 1));
+        }
+        words[word] |= 1L << bit;
+        return words;
+    }
+
+    /** Commit once after successful callbacks; retain order and clear vacated references. */
+    private void compactRemovals(long[] words, int first, int oldSize) {
+        int write = first;
+        for (int read = first + 1; read < oldSize; read++) {
+            int bit = read - first;
+            int word = bit >>> 6;
+            if (word >= words.length || (words[word] & (1L << bit)) == 0) {
+                elements[write++] = elements[read];
+            }
         }
         Arrays.fill(elements, write, oldSize, null);
         size = write;
         modCount++;
-        return true;
     }
 
     /** Stable JDK Object[] sort; comparator callbacks are Java-only. */
