@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- SPDX-License-Identifier: Apache-2.0; Copyright 2026 Hitesh Soliwal and contributors -->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
- <modelVersion>4.0.0</modelVersion><groupId>com.m3.proof</groupId><artifactId>regex-precompute-receiver</artifactId><version>1.0-SNAPSHOT</version><packaging>pom</packaging>
- <build><plugins><plugin><groupId>org.codehaus.mojo</groupId><artifactId>exec-maven-plugin</artifactId><version>3.3.0</version><executions><execution><id>verify-canonical-postimages-and-fixture</id><phase>verify</phase><goals><goal>exec</goal></goals><configuration><executable>python3</executable><arguments>
-  <argument>${synexia.checkout}/synexia-openrewrite-recipes/recipes/m3jdk21-regex-precompute-20261014/verify.py</argument><argument>--quick</argument><argument>--target</argument><argument>${project.basedir}/../../..</argument>
- </arguments></configuration></execution></executions></plugin></plugins></build>
-</project>

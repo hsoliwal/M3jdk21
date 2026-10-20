@@ -1,4 +1,0 @@
-com.m3.tools.text.ngram
-exports com.m3.tools.text.ngram
-requires java.base mandated
-

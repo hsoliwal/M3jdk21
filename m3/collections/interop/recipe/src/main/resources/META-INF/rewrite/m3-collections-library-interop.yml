@@ -1,7 +1,0 @@
-type: specs.openrewrite.org/v1beta/recipe
-name: com.synexia.rewrite.M3CollectionsLibraryInterop
-displayName: Compose four library collection contracts over existing M3 owners
-description: Generate hash-sealed M3JDK interop candidates and differential tests without replacing core owners or claiming full family coverage.
-recipeList:
-  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
-      crateName: collections-library-interop

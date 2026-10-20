@@ -1,4 +1,0 @@
-source_category	source_owner	source_ref	target_owner	disposition	qualification
-primitive_hash_set	hsoliwal/com.synexia	synexia-primitives/IntHashSet.java;source seal via m3jdk21-zero-slot-growth-20261017	hsoliwal/M3jdk21:m3/collections/M3IntHashSet.java	TARGET_OWNED_APACHE_PORT	SELECTED_SOURCE_PASS;JDK_PRODUCT_PENDING
-primitive_int_int_hash_map	hsoliwal/com.synexia	synexia-primitives/IntIntHashMap.java;source seal via m3jdk21-zero-slot-growth-20261017	hsoliwal/M3jdk21:m3/collections/M3IntIntHashMap.java	TARGET_OWNED_APACHE_PORT	SELECTED_SOURCE_PASS;JDK_PRODUCT_PENDING
-primitive_int_long_hash_map	hsoliwal/com.synexia	synexia-primitives/IntLongHashMap.java;source seal via m3jdk21-zero-slot-growth-20261017	hsoliwal/M3jdk21:m3/collections/M3IntLongHashMap.java	TARGET_OWNED_APACHE_PORT	SELECTED_SOURCE_PASS;JDK_PRODUCT_PENDING

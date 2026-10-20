@@ -1,9 +1,0 @@
-# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
-# SPDX-License-Identifier: Apache-2.0
-type: specs.openrewrite.org/v1beta/recipe
-name: com.synexia.m3.RX7CodecReceive20261018Inverse
-displayName: Restore the qualified previous RX7 launcher and workflow
-description: Restore exact qualified control-plane preimages; Java candidate and protected sources remain separately owned.
-recipeList:
-  - com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe:
-      crateName: m3-rx7-codec-receive-20261018-inverse

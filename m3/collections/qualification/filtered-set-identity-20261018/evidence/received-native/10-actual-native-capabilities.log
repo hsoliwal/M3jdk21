@@ -1,5 +1,0 @@
-rangeAbiNative=1
-positionsAbiNative=1
-PASS native owner availability=8, actual ABI version checks=2
-
-EXIT=0

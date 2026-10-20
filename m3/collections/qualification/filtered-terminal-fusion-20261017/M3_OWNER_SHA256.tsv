@@ -1,4 +1,0 @@
-# Exact unchanged M3JDK21 source owners (path SHA256 GitBlob)
-m3/collections/src/main/java/com/m3/collections/M3LongCollection.java	ea0c1aa0957f7bafd5cf2892cbe483c98d5772192f81cc3c467d53ab5c1c7531	d0b389681ade738e97426d950b6291c746912cf0
-m3/collections/src/main/java/com/m3/collections/M3LongIterator.java	9d10e476f5d1664a1028fe52406ab05421758961c6d3d5cf163241e058a3f201	44778a63d99c5b1f99adee536b954a4ebb8c64f3
-m3/collections/src/main/java/com/m3/collections/M3LongPredicates.java	e5d9d7fca94c4eef0843bb7eb7929c2baba05892207f9336a6da3a089bc882ad	2367a2e5f7437ffe340d800a1a5c949cef54adc4

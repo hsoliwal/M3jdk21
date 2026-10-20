@@ -1,4 +1,0 @@
-com.m3.tools.text.frequency
-exports com.m3.tools.text.frequency
-requires java.base mandated
-

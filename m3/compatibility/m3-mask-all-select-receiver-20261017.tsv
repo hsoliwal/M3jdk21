@@ -1,2 +1,0 @@
-source_family	synexia_recipe	synexia_commit	target_owner	target_path	disposition
-M3IndexMaskCompactor	com.synexia.rewrite.M3Jdk21MaskAllSelectReceiver20261017	7d8d33c8ccdb59309a3d45c33bae7efef9050a39	com.m3.collections.M3IndexMaskCompactor	m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java	TARGET_OWNED_APACHE_MODULE_RECEIVER;PHASE_NOT_PROMOTED

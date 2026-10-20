@@ -1,8 +1,0 @@
-# SPDX-License-Identifier: Apache-2.0
-type: specs.openrewrite.org/v1beta/recipe
-name: com.synexia.m3.RX7CodecCap20261018
-displayName: Bound RX7 byte-array snapshots before allocation
-description: Require all current receiver owners and original oracles; change only the codec and add the independent bounds oracle.
-recipeList:
-  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
-      crateName: m3-rx7-codec-cap-20261018

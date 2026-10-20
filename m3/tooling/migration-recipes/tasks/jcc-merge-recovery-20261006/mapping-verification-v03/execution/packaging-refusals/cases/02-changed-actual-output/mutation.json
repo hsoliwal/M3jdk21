@@ -1,4 +1,0 @@
-{
-  "kind": "append bytes to isolated actual Result copy",
-  "path": "materialized/m3/docs/name-mapping.json"
-}

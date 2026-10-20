@@ -1,4 +1,0 @@
-JAVA threw java.util.ConcurrentModificationException required=[3, 0]
-NATIVE_REQUIRED returned next=2 written=2 required=[3, 17]
-JAVA threw java.util.ConcurrentModificationException forbidden=[1, 0]
-NATIVE_REQUIRED returned next=2 written=2 forbidden=[1, 17]

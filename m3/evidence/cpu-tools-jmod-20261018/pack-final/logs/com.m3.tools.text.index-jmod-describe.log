@@ -1,4 +1,0 @@
-com.m3.tools.text.index
-exports com.m3.tools.text.index
-requires java.base mandated
-

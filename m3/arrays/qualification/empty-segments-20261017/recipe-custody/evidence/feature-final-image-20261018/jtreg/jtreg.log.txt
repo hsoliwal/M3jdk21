@@ -1,5 +1,0 @@
-Directory "/workspace/scratch/2b4d1cb957a7/build-proof/feature-jtreg/work" not found: creating
-Directory "/workspace/scratch/2b4d1cb957a7/build-proof/feature-jtreg/report" not found: creating
-Test results: passed: 9
-Report written to /workspace/scratch/2b4d1cb957a7/build-proof/feature-jtreg/report/html/report.html
-Results written to /workspace/scratch/2b4d1cb957a7/build-proof/feature-jtreg/work

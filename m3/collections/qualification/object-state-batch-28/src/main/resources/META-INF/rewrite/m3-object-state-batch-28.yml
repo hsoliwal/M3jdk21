@@ -1,8 +1,0 @@
-# SPDX-License-Identifier: Apache-2.0
-type: specs.openrewrite.org/v1beta/recipe
-name: com.synexia.rewrite.M3ObjectStateBatch28
-displayName: Batch generation-safe object state masks without element wrappers
-recipeList:
-  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
-      crateName: object-state-batch-28
-      lst: false

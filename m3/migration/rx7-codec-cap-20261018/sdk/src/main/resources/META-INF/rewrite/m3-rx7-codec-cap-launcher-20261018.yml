@@ -1,9 +1,0 @@
-# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
-# SPDX-License-Identifier: Apache-2.0
-type: specs.openrewrite.org/v1beta/recipe
-name: com.synexia.m3.RX7CodecCapLauncher20261018
-displayName: Qualify RX7 recipe exports through the existing bounded receiver workflow
-description: Use exact candidate checkout, existing preinstalled toolchains, owned output, real recipe exports and clone-specific heap discrimination; no production application.
-recipeList:
-  - com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe:
-      crateName: m3-rx7-codec-cap-launcher-20261018

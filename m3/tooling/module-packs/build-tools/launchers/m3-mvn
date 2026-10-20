@@ -1,6 +1,0 @@
-#!/bin/sh
-# Copyright 2026 Hitesh Soliwal and contributors
-# SPDX-License-Identifier: Apache-2.0
-JAVA_HOME=$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd) || exit 1
-export JAVA_HOME
-exec "$JAVA_HOME/lib/m3-tools/maven/bin/mvn" "$@"

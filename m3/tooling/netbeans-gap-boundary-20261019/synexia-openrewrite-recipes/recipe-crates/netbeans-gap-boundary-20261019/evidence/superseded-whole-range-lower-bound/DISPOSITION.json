@@ -1,6 +1,0 @@
-{
-  "status": "SUPERSEDED",
-  "correctness": "finite contract and oracle checks passed",
-  "reason": "preserve incumbent exact-midpoint quick match and one/two-element read counts; logarithmic search only when preceding duplicate exists",
-  "benchmark_limit": "empty-array nanosecond loops can be optimized away; ratios for empty not meaningful"
-}

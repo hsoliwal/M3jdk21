@@ -1,9 +1,0 @@
-Traceback (most recent call last):
-  File "/workspace/scratch/f4826e049195/com.synexia/synexia-openrewrite-recipes/recipes/m3-cpu-tools-jmod-20261018/target/current/receiver-proof/isolated-tgfn9eio/late-drift/crate/receive.py", line 197, in <module>
-    main()
-  File "/workspace/scratch/f4826e049195/com.synexia/synexia-openrewrite-recipes/recipes/m3-cpu-tools-jmod-20261018/target/current/receiver-proof/isolated-tgfn9eio/late-drift/crate/receive.py", line 192, in main
-    result = receive(crate, args.dataset, owner.absolute(), args.target.absolute(), args.check)
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/workspace/scratch/f4826e049195/com.synexia/synexia-openrewrite-recipes/recipes/m3-cpu-tools-jmod-20261018/target/current/receiver-proof/isolated-tgfn9eio/late-drift/crate/receive.py", line 156, in receive
-    raise ValueError("target source drift: " + relative)
-ValueError: target source drift: m3/tooling/module-packs/text-tools/src/jdk.m3.io/jdk/m3/io/M3File.java

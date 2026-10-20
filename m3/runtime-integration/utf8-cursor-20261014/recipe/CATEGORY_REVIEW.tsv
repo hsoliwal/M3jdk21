@@ -1,6 +1,0 @@
-category	candidate	selection	fit	proof	remaining
-recipe/receiving-java-lst	Publicvendor2530 Java-snapshot provider	WRAP	Same APIs and strict Java-LST semantics used by exact unchangedb735 tests	Source fit; official8.17.1 API inspection	Actual Maven/SDK
-recipe/canonical-java-lst	Canonical39c source-fork provider	SEPARATE_GATE	Adds host-classpath controls/extra paths; never infer its qualification from2530	Exactsource comparison	Canonical Maven/source-fork qualification
-recipe/incompatible-provider	Publiccountsd58	NO_FIT	Missing targetPaths/preimageManifest; changed PlainText protocol	Rejected before module construction	None
-qualification/negative-controls	Originalfive SDK tests unchanged	DIRECT_IMPORT	Preserves full original intended Java-LST refusal/application/fixedpoint scope	NOT_RUN	Actual receiving SDK
-qualification/evidence	Exact five-method Surefire report and sealed input closure	SELECT	Reject missing/skipped/unexpected/failed tests	CPU validator proof is separate	Actual emitted report

@@ -1,8 +1,0 @@
-{
-  "artifact": "dec-0.1.2",
-  "origin": "https://raw.githubusercontent.com/google/brotli/v0.6.0/LICENSE",
-  "file": "UPSTREAM_LICENSE.txt",
-  "sha256": "3d180008e36922a4e8daec11c34c7af264fed5962d07924aea928c38e8663c94",
-  "bytes": 1084,
-  "caveat": "NEAREST_TAG: the Java dec 0.1.2 artifact has no tag in google/brotli; parent pom org.brotli:parent:0.1.2 declares MIT License"
-}

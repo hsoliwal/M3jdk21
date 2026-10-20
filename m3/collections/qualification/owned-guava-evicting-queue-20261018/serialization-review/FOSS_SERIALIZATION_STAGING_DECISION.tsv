@@ -1,2 +1,0 @@
-capability	donor	classification	adaptation	before_adaptation_status
-owned-queue-serialization-v2-public-packet	Frozen V1 45-file public packet and completed one-target receiving host; prewritten regression SHA6659b1f7853a5edd8f286b67e42644fe1d6d1df68f5df60fa6d620124c818e5b	ADAPT	Retain three existing proof sources and canonical engine; add owned-only serialization proof invocation, private-wire scope/old-failure receipt and exact V2 owner pins; retain V1 benchmark owner attribution and all129 base source pins	RECORDED_BEFORE_PUBLIC_STAGE_V2_ADAPTATION

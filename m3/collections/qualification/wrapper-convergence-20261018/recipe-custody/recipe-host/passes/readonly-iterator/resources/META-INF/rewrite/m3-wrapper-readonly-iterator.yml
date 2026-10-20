@@ -1,9 +1,0 @@
-# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
-# SPDX-License-Identifier: Apache-2.0
-type: specs.openrewrite.org/v1beta/recipe
-name: com.synexia.m3.WrapperConvergence20261018
-displayName: M3 one-file wrapper convergence candidate
-description: Replays one exact reviewed source file through the existing canonical snapshot engine.
-recipeList:
-  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
-      crateName: m3-wrapper-readonly-iterator

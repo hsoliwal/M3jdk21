@@ -1,7 +1,0 @@
-candidate-describe-compiler: starting
-candidate-describe-compiler: exit 0
-candidate-shared-frontend: starting
-candidate-shared-frontend: exit 0
-candidate-source-seal: starting
-candidate-source-seal: exit 0
-VALIDATION_PASS /workspace/scratch/65626af64474/m3-ast-shared-20261018/descriptor-qualification-01/validation

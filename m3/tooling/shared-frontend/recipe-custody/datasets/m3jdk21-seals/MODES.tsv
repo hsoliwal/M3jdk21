@@ -1,4 +1,0 @@
-m3/docs/name-mapping.d/m3-ast-source-seals-20261018.json	0644
-m3/tooling/shared-frontend/source-seals/README.md	0644
-src/jdk.compiler/share/classes/com/sun/tools/javac/m3/M3ASTPC.java	0644
-test/langtools/tools/javac/m3/M3ASTSourceSealTest.java	0644

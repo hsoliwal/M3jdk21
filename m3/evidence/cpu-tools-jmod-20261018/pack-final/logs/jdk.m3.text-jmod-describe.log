@@ -1,4 +1,0 @@
-jdk.m3.text
-exports jdk.m3.text
-requires java.base mandated
-

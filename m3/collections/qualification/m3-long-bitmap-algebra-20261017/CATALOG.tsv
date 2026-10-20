@@ -1,8 +1,0 @@
-category	evidence	chosen_atom	contract	status	license/provenance
-CACHED_FILTER	Existing M3LongBitmapFilteredSnapshot (hsoliwal/M3jdk21)	One-time occurrence BitSet predicate evaluation	Never re-evaluate cached snapshot predicates; keep live views unchanged	REUSE	M3 first-party Apache-2.0
-BITWISE_ALGEBRA	HackerRank Bit Manipulation https://www.hackerrank.com/domains/algorithms/bit-manipulation	BitSet AND OR XOR AND-NOT bounded flip	Same projection identity, preserve distinct occurrences	SELECTED	Category reference only, no challenge code
-POPCOUNT_SELECT	LeetCode #191 https://leetcode.com/problems/number-of-1-bits/	cardinality and nextSetBit	Bitmap grows only for admitted positions, no max capacity	SELECTED	Problem category only
-BITSET_STATE	GeeksforGeeks BitSet https://www.geeksforgeeks.org/java/bitset-class-java-examples/	Unsigned 8-bit required/excluded masks	Once per position, disjoint 8-bit masks and exact aligned length	SELECTED	Problem category only
-INDIRECT_STABLE_SORT	LeetCode #912 https://leetcode.com/problems/sort-an-array/	Existing M3LongIndexProjection indirect stable sort	No new payload owner, stable ties and half-open slices	REUSE	M3 first-party Apache-2.0
-JNI_MASK	Existing M3IndexMaskCompactor Java/C17	Delegate index compaction to existing optional JNI	No predicate callbacks/pointer retention or new native symbols	REUSE	M3 first-party Apache-2.0
-GENERIC_LIVE_FILTER	Apache Commons Collections PredicatedCollection (Apache-2.0)	Do not cache unconstrained mutable predicates	Would violate live semantics without owner revision	DEFER	Reference only; no upstream source copied

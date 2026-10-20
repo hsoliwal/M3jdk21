@@ -1,4 +1,0 @@
-m3/tooling/shared-frontend/openrewrite-tool/README.md	0644
-m3/tooling/shared-frontend/openrewrite-tool/pom.xml	0644
-m3/tooling/shared-frontend/openrewrite-tool/src/main/java/org/m3jdk/tooling/rewrite/M3RewriteTool.java	0644
-m3/tooling/shared-frontend/openrewrite-tool/src/test/java/org/m3jdk/tooling/rewrite/M3RewriteToolTest.java	0644

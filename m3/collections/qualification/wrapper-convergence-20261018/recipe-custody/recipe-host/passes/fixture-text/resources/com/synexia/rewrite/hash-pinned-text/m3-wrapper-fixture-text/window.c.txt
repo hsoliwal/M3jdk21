@@ -1,7 +1,0 @@
-// SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
-// SPDX-License-Identifier: Apache-2.0
-int m3_fixture_checked(int index, int length) {
-    int valid = index >= 0 && index < length;
-    return valid ? index : -1;
-}
-/* Java-looking native payload: class Fake { int changed = 1; } */

@@ -1,9 +1,0 @@
-Traceback (most recent call last):
-  File "/workspace/scratch/65626af64474/m3-ast-shared-20261018/Synexia/synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/receive.py", line 195, in <module>
-    main()
-  File "/workspace/scratch/65626af64474/m3-ast-shared-20261018/Synexia/synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/receive.py", line 190, in main
-    result = receive(crate, args.dataset, owner.absolute(), args.target.absolute(), args.check)
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/workspace/scratch/65626af64474/m3-ast-shared-20261018/Synexia/synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/receive.py", line 154, in receive
-    raise ValueError("target source drift: " + relative)
-ValueError: target source drift: src/jdk.compiler/share/classes/com/sun/tools/javac/m3/M3ASTPC.java

@@ -1,8 +1,0 @@
-metric	value	source
-token_differential_cases	46338	M3TokenPatternTest#randomTokenPatternsMatchTheStockOracle (8000 patterns x 6 token lanes, random lane splits; oracle = stock Pattern over U+E000+id encoding; 0 mismatches)
-token_refused_patterns	277	nullable loops rejected by M3TokenPatternParser
-token_operations_by_engine	NONE=9413 GATE=6116 LITERAL=25643 DFA=256382 PIKEVM=41234 STOCK=0	per-operation counts
-boundary_example	1 token match vs 3 character-regex matches	M3TokenPatternTest#matchesNeverReachInsideCommentOrLiteralTokens
-jacoco_line_with_token_layer	99.92% (1274/1275)	full suite on m3/regex-cursor-token-20261018, JaCoCo 0.8.12
-jacoco_branch_with_token_layer	97.45%	same run
-tests	29 passed, 0 failed	JUnit console 1.10.1

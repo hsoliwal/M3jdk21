@@ -1,8 +1,0 @@
-{
-  "artifact": "jsoup",
-  "version": "1.23.2",
-  "origin": "https://raw.githubusercontent.com/jhy/jsoup/jsoup-1.23.2/LICENSE",
-  "sha256": "f5d724c5818010c61bff2e177f5b6452434bc054807522bf241940bca8b1d6b1",
-  "bytes": 1102,
-  "pom_license": "The MIT License <https://jsoup.org/license>"
-}

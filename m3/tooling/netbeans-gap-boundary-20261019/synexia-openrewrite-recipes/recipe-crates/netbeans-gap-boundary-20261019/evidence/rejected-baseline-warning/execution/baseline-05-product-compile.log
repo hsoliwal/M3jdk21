@@ -1,6 +1,0 @@
-/workspace/scratch/48c1329dbda8/netbeans-gap-20261019/trial-02/baseline/source/javax/swing/text/GapContent.java:85: warning: [this-escape] possible 'this' escape before subclass is fully initialized
-        replace(0, 0, implied, implied.length);
-               ^
-error: warnings found and -Werror specified
-1 error
-1 warning

@@ -1,5 +1,0 @@
-# Sorting fixture
-
-```java
-public int notCode() { return 19; }
-```

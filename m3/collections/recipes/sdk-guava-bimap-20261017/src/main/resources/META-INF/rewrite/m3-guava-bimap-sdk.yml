@@ -1,6 +1,0 @@
-type: specs.openrewrite.org/v1beta/recipe
-name: com.synexia.m3.GuavaBiMapSdk20261017
-displayName: Source-sealed Guava BiMap backed by M3 indexed arrays
-description: Apply the qualified M3 Guava BiMap API receiver using the existing OpenRewrite source-seal engine.
-recipeList:
-  - com.synexia.rewrite.M3GuavaBiMapRecipe

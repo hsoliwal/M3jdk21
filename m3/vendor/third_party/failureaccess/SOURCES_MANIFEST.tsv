@@ -1,4 +1,0 @@
-path	bytes	sha256
-META-INF/MANIFEST.MF	127	52d37326e23d5bbc4ed842861b765956d3ac965136c9872147f19226902a670f
-com/google/common/util/concurrent/internal/InternalFutureFailureAccess.java	2309	745df6c9adaf5a144bf57e17d9222919a15a129c1174fcc04966093bf3b1ec32
-com/google/common/util/concurrent/internal/InternalFutures.java	1761	e5b7d647e394134095d8b9ff473b510dc1c34324332a13af27ad8db9a490b091

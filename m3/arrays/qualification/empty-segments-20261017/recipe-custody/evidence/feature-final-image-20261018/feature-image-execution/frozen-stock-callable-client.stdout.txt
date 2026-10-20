@@ -1,1 +1,0 @@
-PASS old Callable lambda/anonymous/class/dual Runnable and checked exception identity; finite client witness

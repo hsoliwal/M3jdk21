@@ -1,7 +1,0 @@
-type: specs.openrewrite.org/v1beta/recipe
-name: com.synexia.m3.Jdk21BinarySetIndexNavigation20261018
-displayName: Use existing paged long indexes for binary set-algebra navigation
-description: Hash-sealed one-owner Java LST replacement and two additive Java21 oracles.
-recipeList:
-  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
-      crateName: m3jdk21-binary-set-index-navigation-20261018

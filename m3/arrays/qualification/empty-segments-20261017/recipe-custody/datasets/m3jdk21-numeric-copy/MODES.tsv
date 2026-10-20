@@ -1,8 +1,0 @@
-m3/arrays/qualification/numeric-copy-20261018/CATALOGUE.json	0644
-m3/arrays/qualification/numeric-copy-20261018/README.md	0644
-m3/arrays/qualification/numeric-copy-20261018/src/test/java/com/m3/arrays/M3ArrayCopySizeAgent.java	0644
-m3/arrays/qualification/numeric-copy-20261018/src/test/java/com/m3/arrays/M3ArrayNumericCopyCostProbe.java	0644
-m3/arrays/src/main/java/com/m3/arrays/M3Arrays.java	0644
-m3/arrays/src/test/java/com/m3/arrays/M3ArrayNumericCopySelfTest.java	0644
-m3/arrays/src/test/java/com/m3/arrays/M3ArrayNumericCopyTest.java	0644
-m3/backports/ALGORITHM_CATALOGUE.tsv	0644

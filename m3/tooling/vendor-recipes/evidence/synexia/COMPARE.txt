@@ -1,2 +1,0 @@
-synexia	poms_oracle=10	poms_recipe=10	identical=10	different=0	rows_oracle=181	rows_recipe=181	rows_bytes_equal=True	oracle_rows_sha256=bba76d7e014d76cd	recipe_rows_sha256=bba76d7e014d76cd
-compare_exit=0

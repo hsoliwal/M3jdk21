@@ -1,6 +1,0 @@
-same-value-reference	true	[V:self]	{A=V}
-equal-distinct-value	true	[V:V]	{A=V}
-unequal-value	false	[V:W]	{A=V}
-present-null	true	[]	{A=null}
-different-size	false	[]	{A=null}
-two-shared-values	true	[V:self, V:self]	{A=V, B=V}

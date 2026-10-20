@@ -1,9 +1,0 @@
-m3/tooling/module-packs/build-support/gradle-provider/LICENSE.txt	0644
-m3/tooling/module-packs/build-support/gradle-provider/NOTICE.md	0644
-m3/tooling/module-packs/build-support/gradle-provider/README.md	0644
-m3/tooling/module-packs/build-support/gradle-provider/pom.xml	0644
-m3/tooling/module-packs/build-support/gradle-provider/src/main/java/org/gradle/internal/m3/ast/M3GradleASTProvider.java	0644
-m3/tooling/module-packs/build-support/gradle-provider/src/test/java/org/gradle/internal/m3/ast/M3GradleASTProviderProbe.java	0644
-m3/tooling/module-packs/build-support/gradle-provider/src/test/java/org/gradle/internal/m3/ast/M3GradleASTProviderTest.java	0644
-m3/tooling/module-packs/build-support/gradle-provider/src/test/resources/META-INF/services/com.sun.source.util.M3AST$Consumer	0644
-m3/tooling/module-packs/build-support/gradle-provider/src/test/resources/META-INF/services/com.sun.source.util.Plugin	0644

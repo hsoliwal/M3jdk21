@@ -1,8 +1,0 @@
-#!/usr/bin/env bash
-# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
-# SPDX-License-Identifier: Apache-2.0
-set -euo pipefail
-
-/tmp/m3-toolchain/jdk-21.0.12.1+1/bin/javac -Xlint:all,-module -Werror -d /workspace/scratch/f8287c652798/work/review-identity/classes /workspace/scratch/f8287c652798/work/identity-set/candidate/m3/collections/src/main/java/com/m3/collections/M3CollectionViews.java /workspace/scratch/f8287c652798/work/identity-set/candidate/m3/collections/src/test/java/com/m3/collections/M3FilteredSetIdentityContract.java /workspace/scratch/f8287c652798/work/review-identity/ReviewProbe.java
-/tmp/m3-toolchain/jdk-21.0.12.1+1/bin/java -cp /workspace/scratch/f8287c652798/work/review-identity/classes com.m3.collections.M3FilteredSetIdentityContract
-/tmp/m3-toolchain/jdk-21.0.12.1+1/bin/java -cp /workspace/scratch/f8287c652798/work/review-identity/classes ReviewProbe

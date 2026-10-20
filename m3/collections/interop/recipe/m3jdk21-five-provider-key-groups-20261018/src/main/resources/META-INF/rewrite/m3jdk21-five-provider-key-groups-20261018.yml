@@ -1,8 +1,0 @@
-# Copyright 2026 Hitesh Soliwal and contributors. SPDX-License-Identifier: Apache-2.0
----
-type: specs.openrewrite.org/v1beta/recipe
-name: com.synexia.m3.FiveProviderKeyGroups20261018
-displayName: M3 five-provider stable indexed grouping over canonical arrays/offsets
-recipeList:
-  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
-      crateName: m3jdk21-five-provider-key-groups-20261018

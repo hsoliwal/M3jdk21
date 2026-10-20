@@ -1,7 +1,0 @@
-type: specs.openrewrite.org/v1beta/recipe
-name: com.synexia.m3.Jdk21StrictIndexedReadOnlySourcepath20261018
-displayName: Resolve sourcepath to the Java package root for strict M3 indexed contracts
-description: One source-hash sealed workflow atom; no product source changes.
-recipeList:
-  - com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe:
-      crateName: m3jdk21-index-readonly-sourcepath-20261018

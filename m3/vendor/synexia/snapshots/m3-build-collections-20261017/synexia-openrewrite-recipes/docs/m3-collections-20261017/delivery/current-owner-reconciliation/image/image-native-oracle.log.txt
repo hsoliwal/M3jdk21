@@ -1,4 +1,0 @@
-$ ["/workspace/scratch/4f99f40718f0/m3-implementation/wrappers/delivery/freshbase-image-proof/pack/image/bin/java", "-Xcheck:jni", "--add-modules", "jdk.m3.collections,com.m3.collections", "--add-reads", "jdk.m3.collections=com.m3.collections", "--patch-module", "com.m3.collections=/workspace/scratch/4f99f40718f0/m3-implementation/wrappers/delivery/freshbase-image-proof/image-native-contracts", "-m", "com.m3.collections/com.m3.collections.M3IndexMaskCompactorSelfTest", "--native"]
-PASS M3IndexMaskCompactorSelfTest checks=16925 JNI=true
-
-EXIT 0

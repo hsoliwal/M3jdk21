@@ -1,8 +1,0 @@
---- baseline/module-info
-+++ native/module-info
-@@ -1,4 +1,4 @@
--module com.m3.collections {
-+module com.m3.collections@1.0-SNAPSHOT {
-   requires java.base;
-   exports com.m3.collections;
- }

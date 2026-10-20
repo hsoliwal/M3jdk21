@@ -1,9 +1,0 @@
-repository	file	exact_git_blob	license	mode
-hsoliwal/M3jdk21	m3/collections/src/main/java/com/m3/collections/M3LinkedHashMap.java	ade59880b8c9b2bee1b32ae67ca9d29b7382d998	Apache-2.0	READ_ONLY_DEPENDENCY
-hsoliwal/M3jdk21	m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java	958d1bc57f6c90f78d4e5f408cc758d1adc8fba5	Apache-2.0	READ_ONLY_DEPENDENCY_TARGET_CI
-hsoliwal/com.synexia	synexia-mat-collections/src/main/java/com/synexia/matcollections/MatIntMultiMap.java	dc304807401c2ccb80a3640bdeb5405fd875a825	Apache-2.0	REFERENCE_ONLY
-hsoliwal/com.synexia	synexia-mat-collections/src/main/java/com/synexia/matcollections/MatIdMultiMap.java	ce2783a57fc09b7c2e4756de5ca583ccc098ea1b	Apache-2.0	REFERENCE_ONLY
-hsoliwal/com.synexia	M3CollectionSdkNames.java template	b85cce7dabd0e8bcd0779fbf50f111173a1ad48a	Apache-2.0	GENERATOR_TEMPLATE
-hsoliwal/com.synexia	M3IndexedMultiValueMap.java template	9035b651c5aab1f5850009372e2432ef196efc79	Apache-2.0	GENERATOR_TEMPLATE
-hsoliwal/com.synexia	M3CollectionSdkContractSelfTest.java template	690b7e4f0780bde29b5c13f5f397a7623f850328	Apache-2.0	GENERATOR_TEMPLATE
-hsoliwal/com.synexia	M3_SDK_FAMILY_CATALOG.tsv template	fc2bae136d4a9641ebddd95736581abc69ace48e	Apache-2.0	GENERATOR_TEMPLATE

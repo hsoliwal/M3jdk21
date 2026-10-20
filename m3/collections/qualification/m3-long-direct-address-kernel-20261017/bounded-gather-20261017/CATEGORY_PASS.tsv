@@ -1,9 +1,0 @@
-category	owner_or_reference	decision	boundary
-array-index-gather	M3LongAddressKernel	REFINE_EXISTING_NATIVE	Keep payload/address/output owners, duplicate order and partial prefix failure
-index-filter-sort-slice	M3LongIndexProjection/M3IndexMaskCompactor	KEEP	Actual current Java owners unchanged; test composed offsets and masks
-JNI critical lifetime	JDK21 JNI functions specification	BOUNDED_CHUNKS	Own scratch 3072 bytes; one payload pin or contiguous region reads; not wall-time/VM allocation bound
-permutation composition	LeetCode1920	CATEGORY_ONLY	Do not restrict arbitrary duplicate gather to permutations; no solution copied
-array reversal	HackerRank Arrays-DS	CATEGORY_ONLY	Reversed physical-index fixture; no submission copied
-indexed reorder	GeeksforGeeks reorder by indexes	REJECT_DIRECT_ADAPTATION	Scatter destinations differ from gather sources; no code copied
-runtime performance	Fixed-workload Java/old JNI/new JNI diagnostic	JAVA_REMAINS_DEFAULT	Finer critical region bound with irregular-gather overhead; no generalized speedup
-recipe custody	Synexia b993d3b9adc81fd6540210581afad7aac4edf631	PINNED_EXTERNAL_RECIPE	M3JDK owns runtime and receiving tests; no Synexia runtime dependency

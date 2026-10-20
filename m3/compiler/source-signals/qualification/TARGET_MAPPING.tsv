@@ -1,6 +1,0 @@
-source_family	synexia_canonical	target_owner	disposition
-Sortable type processing	hsoliwal/com.synexia PR #12319 (exact revision to verify)	m3/collections/signal-codegen PR #1312	REUSE / HOLD until parity review
-Compiler-attributed structural/call signals	new Synexia recipe proposal (not merged)	m3/compiler/source-signals/M3SourceSignalPlugin.java	CANDIDATE / independent compiler proving module
-Scalar order and numeric separation	hsoliwal/com.synexia PR #12243	m3/collections/M3SignalDimensions.java + M3ProgressiveSignalEvidence.java	REUSE existing canonical product owners
-JNI sorting	hsoliwal/com.synexia PR #12243	m3/collections existing M3SignalOrderNative + C17 source	NO_NEW_NATIVE_ABI
-jdk.compiler promotion	com.sun.tools.javac.m3 mapped owner	src/jdk.compiler/share/classes/com/sun/tools/javac/m3/	PENDING phase and OpenJDK source/ABI acceptance

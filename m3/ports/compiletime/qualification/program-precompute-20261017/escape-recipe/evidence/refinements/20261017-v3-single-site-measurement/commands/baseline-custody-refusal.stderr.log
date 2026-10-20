@@ -1,9 +1,0 @@
-Traceback (most recent call last):
-  File "/tmp/m3-program-escape-qualified-v3/baseline/m3/ports/compiletime/verify_compiletime_precompute.py", line 87, in <module>
-    main()
-  File "/tmp/m3-program-escape-qualified-v3/baseline/m3/ports/compiletime/verify_compiletime_precompute.py", line 80, in main
-    targets = check_crate()
-              ^^^^^^^^^^^^^
-  File "/tmp/m3-program-escape-qualified-v3/baseline/m3/ports/compiletime/verify_compiletime_precompute.py", line 34, in check_crate
-    raise AssertionError("crate targets differ from port sources (re-run seal_crate.py)")
-AssertionError: crate targets differ from port sources (re-run seal_crate.py)

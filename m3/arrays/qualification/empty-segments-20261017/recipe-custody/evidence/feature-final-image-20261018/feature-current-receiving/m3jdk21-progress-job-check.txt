@@ -1,1 +1,0 @@
-M3_COLLECTIONS_RECEIVER_PASS {"actual_sdk_results": true, "changes": 10, "dataset": "m3jdk21-progress-job", "mode": "check", "targets": 10}

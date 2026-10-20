@@ -1,6 +1,0 @@
-path	source Git blob	canonical donor
-src/java.base/share/classes/java/util/ArrayList.java	885d891b0f817080824622d592691a27cf8ffa26	m3jdk/native-collection-mask-recipe-20261018
-src/java.base/share/classes/java/util/Vector.java	a79a77ce8700dc494d02d906b2a7765670629eee	m3jdk/native-collection-mask-recipe-20261018
-src/java.base/share/classes/jdk/internal/mindex/M3CollectionMaskCompactor.java	88836faa4dfeb114825547e43cae6a6521303f88	m3jdk/native-collection-mask-recipe-20261018
-test/jdk/java/util/ArrayList/M3MaskCompactionDifferential.java	c505b5604e978f215e4aeb93eadfd9f933ffc743	m3jdk/native-collection-mask-recipe-20261018
-test/jdk/java/util/ArrayList/M3JdkRemoveIfMaskContracts.java	2dc2fb6494f008fb7166dabfb97000d282a5f9af	m3jdk/native-collection-mask-recipe-20261018

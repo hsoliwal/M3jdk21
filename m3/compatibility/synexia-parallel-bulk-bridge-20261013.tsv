@@ -1,2 +1,0 @@
-schema	canonical_repo	canonical_pr	canonical_head	canonical_recipe	target_module	jdk_owner	parallel_owner	donor_corroboration	intake_mode	source_state	target_test_state	promotion_authority
-M3_PARALLEL_BULK_BRIDGE_V1	hsoliwal/com.synexia	10711	c85f35bec40ae891f622a99858e218dd8c1f953f	com.synexia.rewrite.M3Jdk21ParallelBulkBridgeRecipe	m3/ports/parallel-bulk	jdk.internal.vm.parallel	com.m3.parallel	hsoliwal/synexia-tornadovm#7	INDEPENDENT_APACHE_MODULE	SOURCE_SEALED	TARGET_TEST_PENDING	false

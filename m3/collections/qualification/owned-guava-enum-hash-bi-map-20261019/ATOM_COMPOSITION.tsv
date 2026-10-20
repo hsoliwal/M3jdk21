@@ -1,6 +1,0 @@
-operation_atom	selected_permissive_surface	custom_uncovered_composition	validation_receipt	limits
-ordinal value lane	first-party EnumLongMap/EnumSet ordinal and presence-word mechanics	nullable object values; presence bit instead of NULL sentinel	differential forward ops; exact forward toString	-
-value index	owned M3HashMultiset backward-shift index (#1418)	ordinal-addressed hashes; moveValue rebind keeps valueMod	inverse iterator same-value rebind scenario	inverse order is ordinal order
-fail-fast	EnumMap weak consistency forward; HashMap valueMod inverse	precomputed successor for inverse cursors	viewsAndEntries iterator scenarios	-
-bimap rules	Guava contract (value uniqueness, forcePut, entry setValue checks, replaceAll conflicts)	pre-mutation type checks where Guava corrupts	mapContract, viewsAndEntries, ownedOnlyDivergences	documented divergences on Guava-corrupting paths
-serialization	owned stream format (key type, size, key/value pairs); inverse resolves to forward.inverse()	InvalidObjectException on bad type/size/key	serializationRoundTrip, corruptStreamsAreRejected	not wire-compatible with Guava

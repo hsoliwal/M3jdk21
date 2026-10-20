@@ -1,8 +1,0 @@
-{
-  "artifact": "sqlite-jdbc-3.51.1.1",
-  "origin": "https://raw.githubusercontent.com/xerial/sqlite-jdbc/3.51.1.1/LICENSE",
-  "file": "UPSTREAM_LICENSE.txt",
-  "sha256": "3ddf9be5c28fe27dad143a5dc76eea25222ad1dd68934a047064e56ed2fa40c5",
-  "bytes": 11560,
-  "caveat": "EXACT_TAG"
-}

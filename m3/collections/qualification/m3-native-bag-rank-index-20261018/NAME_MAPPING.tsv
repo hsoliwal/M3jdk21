@@ -1,4 +1,0 @@
-schema	core_payload_owner	indexed_family	JNI_owner	disposition
-M3_BAG_RANK_V1	M3CountedBag<E> -> CountSnapshot<E>	M3BagRankIndex<E> long[] prefix, int[] order, half-open index windows	M3IndexMaskCompactor C17 unchanged	NEW_NATIVE_GENERIC_COLLECTION_SOURCE
-M3_BAG_RANK_V1	JDK Object reference GC ownership	M3 immutable rank/select views	NO_OBJECT_POINTERS_TO_JNI	PRESERVE
-M3_BAG_RANK_V1	Guava/Eclipse/Spring/Apache Collection family APIs	N/A	N/A	NO_ADAPTER_OR_VENDOR_IMPLEMENTATION_COPIED

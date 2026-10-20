@@ -1,5 +1,0 @@
-{"scope":"fixed ASM frames; medians of seven rounds; one query batch visits each obtaining site","retained_measurement":"Instrumentation.getObjectSize of the sole returned primitive array","java":"21.0.12.1+1-LTS","rows":[
-{"sites":1,"instructions":23,"legacy_ns":8409,"legacy_cpu_ns":8660,"legacy_alloc_bytes":304,"cold_ns":13615,"cold_cpu_ns":13649,"cold_alloc_bytes":864,"warm_ns":76,"warm_cpu_ns":76,"warm_alloc_bytes":0,"retained_vm_bytes":112,"primitive_payload_bytes":92,"checksum":1},
-{"sites":8,"instructions":121,"legacy_ns":61621,"legacy_cpu_ns":61690,"legacy_alloc_bytes":7064,"cold_ns":17526,"cold_cpu_ns":17573,"cold_alloc_bytes":6224,"warm_ns":29,"warm_cpu_ns":29,"warm_alloc_bytes":0,"retained_vm_bytes":504,"primitive_payload_bytes":484,"checksum":1287},
-{"sites":32,"instructions":457,"legacy_ns":446097,"legacy_cpu_ns":444660,"legacy_alloc_bytes":106304,"cold_ns":52154,"cold_cpu_ns":52236,"cold_alloc_bytes":20008,"warm_ns":48,"warm_cpu_ns":50,"warm_alloc_bytes":0,"retained_vm_bytes":1848,"primitive_payload_bytes":1828,"checksum":5913}
-]}

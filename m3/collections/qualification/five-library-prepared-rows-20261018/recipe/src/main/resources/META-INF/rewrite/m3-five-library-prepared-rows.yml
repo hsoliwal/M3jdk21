@@ -1,6 +1,0 @@
-type: specs.openrewrite.org/v1beta/recipe
-name: com.synexia.m3.FiveLibraryPreparedRows20261018
-displayName: Prepare cached M3 five-library filtered and sorted index views
-description: Generate exact source-sealed Java owner, JUnit oracle and provenance without changing any existing owner.
-recipeList:
-  - com.synexia.m3.M3FiveLibraryPreparedRowsRecipe

@@ -1,9 +1,0 @@
-# SPDX-License-Identifier: Apache-2.0
-type: specs.openrewrite.org/v1beta/recipe
-name: com.synexia.m3.SdkBindingSuccessor20261018
-displayName: Receive the exact M3 SDK source-binding successor
-description: Replaces only the measured 7020-byte SDK source with its 7807-byte successor, or accepts that exact successor. PlainText execution establishes source custody; SDK runtime behavior and binding guard qualification are separate.
-recipeList:
-  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
-      crateName: sdk-binding-successor-v3
-      lst: false

@@ -1,7 +1,0 @@
-# M3AST-1 actual javac events; no independent parse or attribution
-phase	source	type
-PARSED	file:///tmp/m3-selected-tools-final-v3-20261017/project%20with%20spaces/src/main/java/demo/Api.java	
-PARSED	file:///tmp/m3-selected-tools-final-v3-20261017/project%20with%20spaces/src/main/java/demo/Use.java	
-ANALYZED	file:///tmp/m3-selected-tools-final-v3-20261017/project%20with%20spaces/src/main/java/demo/Api.java	demo.Api
-ANALYZED	file:///tmp/m3-selected-tools-final-v3-20261017/project%20with%20spaces/src/main/java/demo/Use.java	demo.Use
-# parsed=2 analyzed=2 captures=2 extraSourceReads=0 projections=0 hits=0 errors=0 completed=true consumerFailed=false

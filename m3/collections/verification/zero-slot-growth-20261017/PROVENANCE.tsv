@@ -1,4 +1,0 @@
-path	source_recipe_commit	provenance	license	public_contract
-m3/collections/src/main/java/com/m3/collections/M3IntHashSet.java	a37f72729b1870d0dd20c5370f04ba0755e65d29	Synexia first-party IntHashSet donor + target-owned int lane	Apache-2.0	UNCHANGED_SIGNATURES
-m3/collections/src/main/java/com/m3/collections/M3IntIntHashMap.java	a37f72729b1870d0dd20c5370f04ba0755e65d29	Synexia first-party IntIntHashMap donor + target-owned int-int lane	Apache-2.0	UNCHANGED_SIGNATURES
-m3/collections/src/main/java/com/m3/collections/M3IntLongHashMap.java	a37f72729b1870d0dd20c5370f04ba0755e65d29	Synexia first-party IntLongHashMap donor + target-owned int-long lane	Apache-2.0	UNCHANGED_SIGNATURES

@@ -1,2 +1,0 @@
-evidence_kind	recipe	path	preimage_sha256	postimage_sha256	first_changes	fixed_point_changes
-SDK_EXECUTION	com.synexia.m3.M3RankInstallerAtomicPreflight20261017	m3/collections/recipe/order-statistics/src/main/java/com/m3/recipe/M3RankIndexRecipe.java	eac25798bbd647d339e501a716b7c6362db2137b372c472ecb61fefe7a1cb88a	74c167625a4d1e7885cfb8e7d9fd1e1767b725cb0e814bafa08368f78cfc0838	1	0

@@ -1,9 +1,0 @@
-# SPDX-License-Identifier: Apache-2.0
-type: specs.openrewrite.org/v1beta/recipe
-name: com.synexia.m3.OwnedSpringCaseInsensitiveMap20261018
-displayName: Receive one exact owned M3 Spring case-insensitive map source
-description: Installs one absent production source or accepts its exact current postimage. PlainText execution establishes source custody; map API behavior is qualified separately.
-recipeList:
-  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
-      crateName: owned-spring-case-insensitive-map
-      lst: false

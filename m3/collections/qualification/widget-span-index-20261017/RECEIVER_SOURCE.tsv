@@ -1,7 +1,0 @@
-# SPDX-License-Identifier: Apache-2.0
-# exact source paths, preimage_sha256, source_seal_sha256, canonical blob, canonical recipe
-path	preimage	postimage_sha256	postimage_git_blob	canonical_recipe
-m3/collections/src/main/java/com/m3/collections/M3SpanIndex.java	ABSENT	76da13c95905f3a41b0e95acd89ff68e9ae12b665fec8fe804a5af37235a9641	2f194670d58f5248d5220eade807f152647b4052	com.synexia.m3.WidgetSpanIndex20261017
-m3/collections/src/main/native/collections/m3_span_index_jni.c	ABSENT	f33781ca270dda25553986da350d4d5fc3808c483363c93a7bad64717effaf3c	5664098cc69800fc83140a84db48cac98625232f	com.synexia.m3.WidgetSpanIndex20261017
-m3/collections/src/test/java/com/m3/collections/M3SpanIndexSelfTest.java	ABSENT	38a577aaa1857878b095e2a89f8a7c60868f471ff3c125cbfb839b56e7842cf6	2def1962e7db62293ef4c21d6b5206b7563b3b8f	com.synexia.m3.WidgetSpanIndex20261017
-m3/collections/src/test/java/com/m3/collections/M3SpanIndexTest.java	ABSENT	fc92c4b6d1dc47519a6613ce1773331741ffd2e6deaf8dd97e35dc98a02b2cef	74bd6f61e69dfb6b78edee67e4f73b11630ef02b	com.synexia.m3.WidgetSpanIndex20261017

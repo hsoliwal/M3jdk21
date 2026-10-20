@@ -1,4 +1,0 @@
-problem_category	baseline	selected_atom	decision	contract_and_provenance
-JAVAC_PACKAGE_SOURCEPATH	Package source directory incorrectly passed as -sourcepath; javac could not discover com.m3.collections transitive owners	Use module source root m3/collections/src/main/java	SELECT_EXISTING_JDK21_BUILD_RULE	No library dep, JNI ABI, Java source or oracle changed. JDK javac -sourcepath documented compiler semantics.
-SERIAL_RECIPE_CUSTODY	Workflow is a source-input file and must not be hand-patched	M3HashPinnedTextSnapshotRecipe current SHA256 one-file replacement	REUSE_CANONICAL_ENGINE	Refuse drift and missing preimage; fixed point. Original first-party Apache-2.0.
-LEETCODE_HACKERRANK_GFG	Algorithm taxonomies do not change Java compiler path resolution	No donor selected	NOT_APPLICABLE	Maintain existing algorithm-catalogue provenance without unrelated donor research.

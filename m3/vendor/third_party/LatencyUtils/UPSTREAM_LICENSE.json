@@ -1,9 +1,0 @@
-{
-  "artifact": "LatencyUtils-2.0.3",
-  "origin": "https://raw.githubusercontent.com/LatencyUtils/LatencyUtils/LatencyUtils-2.0.3/LICENSE",
-  "file": "UPSTREAM_LICENSE.txt",
-  "sha256": "50b43424ea5a8855c49f89e4d3a00fd55fb572ecd0c872f4215f63f654983c6c",
-  "bytes": 2091,
-  "caveat": "EXACT_TAG LatencyUtils-2.0.3",
-  "pom_license": "Public Domain, per Creative Commons CC0 <http://creativecommons.org/publicdomain/zero/1.0/>"
-}

@@ -1,3 +1,0 @@
-# path	before_sha256	after_sha256	template
-# parse-context-sha256	9f7f143fec0b529d0fb81a9d815abaac90ed2af05b6ca071d780b51f5b1e86b3
-m3/ports/collections/src/main/java/com/m3/util/M3PrimitiveIndexView.java	ABSENT	4f69b71b3deb0fdd867aa90dde2fb4b762fdd9c246c8fe77689484184ca46789	template-00.txt

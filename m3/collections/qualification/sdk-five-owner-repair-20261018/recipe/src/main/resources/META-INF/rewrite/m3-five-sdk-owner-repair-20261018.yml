@@ -1,6 +1,0 @@
-# SPDX-License-Identifier: Apache-2.0
-type: specs.openrewrite.org/v1beta/recipe
-name: com.synexia.m3.FiveSdkOwnerRepair20261018
-displayName: Correct duplicate M3 SDK factories and expose current array/index owners
-recipeList:
-  - com.synexia.rewrite.M3FiveSdkOwnerRepairRecipe

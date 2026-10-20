@@ -1,1 +1,0 @@
-M3_COLLECTIONS_RECEIVER_PASS {"actual_sdk_results": true, "changes": 6, "dataset": "m3jdk21-runtime-facade", "mode": "check", "targets": 6}

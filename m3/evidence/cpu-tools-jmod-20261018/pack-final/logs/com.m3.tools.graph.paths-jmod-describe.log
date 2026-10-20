@@ -1,4 +1,0 @@
-com.m3.tools.graph.paths
-exports com.m3.tools.graph.paths
-requires java.base mandated
-

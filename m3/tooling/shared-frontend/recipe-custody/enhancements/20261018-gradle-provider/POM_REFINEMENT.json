@@ -1,8 +1,0 @@
-{
-  "event": "POM_REFINEMENT_DOCUMENTED_BEFORE_PATCH",
-  "reason": "Actual Maven compiler-plugin 3.13.0 JPMS argument inspection dereferences null getPathElements for a nonmodular testCompile when --patch-module is a separate option. The supported single javac option --patch-module=jdk.compiler=... retains exact semantics and avoids project-patch inference.",
-  "planned_source_change": "Only patched-compiler profile argument encoding in provider pom.xml",
-  "provider_java_changes": 0,
-  "pom_pre_sha256": "32e2bcc25f0b9936eab712fe89d9aafa58844efdcf87f4897e4595435ac567b8",
-  "previous_evidence": "attempts/02-maven-testcompile-patch-option"
-}

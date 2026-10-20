@@ -1,7 +1,0 @@
-role	path	git_blob	sha256	license
-CANONICAL_TEMPLATE	m3/collections/interop/src/main/java/com/m3/collections/interop/M3ApacheBag.java	86473e61bf886a28ca3a40010b6bd25f5f34cdb0	5ff51272c4fd48ef11a09b9138ac2329392bb2a70e2a4fe43fab2889909d224f	Apache-2.0
-CANONICAL_TEMPLATE	m3/collections/interop/src/test/java/com/m3/collections/interop/M3ApacheBagContractTest.java	4184a8b861025d80010723d4700588f075eca105	737dba455e469117b94cd82a48458bcbe2e4c1fd038b0beb578dcc00ccc1982a	Apache-2.0
-DEPENDENCY	m3/collections/src/main/java/com/m3/collections/M3CountedBag.java	9f5cc4ba6c189b4b8dd476b999ba82d93922d74a	PIN_GIT_BLOB_ONLY	Apache-2.0
-DEPENDENCY	m3/collections/src/main/java/com/m3/collections/M3LinkedHashMap.java	ade59880b8c9b2bee1b32ae67ca9d29b7382d998	PIN_GIT_BLOB_ONLY	Apache-2.0
-EXISTING_TRANSFORMER	M3GpuToolJoinRecipe.java	1c1b1b568d369f688f6953161636bf36b484bf5a	PIN_GIT_BLOB_ONLY	Apache-2.0
-EXISTING_MANIFEST_ENGINE	M3GpuToolJoinManifest.java	38df5f97bbeec8a8a8cfc77091d56bda925c07f2	PIN_GIT_BLOB_ONLY	Apache-2.0

@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Copyright 2026 Hitesh Soliwal and contributors; SPDX-License-Identifier: Apache-2.0 -->
-<!-- Insert this element into the existing javac task. The selected compiler must
-     provide M3AST. Keep its existing compiler, fork, executable, processor paths,
-     source selection and other compiler arguments. -->
-<compilerarg value="-Xplugin:M3AST"/>

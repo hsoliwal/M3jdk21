@@ -1,6 +1,0 @@
-role	source	git_blob	policy
-original native	m3/collections/src/main/native/collections/m3_index_mask_compactor.c	f1a9488905807e6417dd267e125bfc44dbcc9297	Apache-2.0 retained
-original compactor	m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java	958d1bc57f6c90f78d4e5f408cc758d1adc8fba5	Apache-2.0 retained
-original projection	m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java	ea7a32700cb16f7a20a5ca47a96d9eb484561eb3	Apache-2.0 retained
-reused kernel	hsoliwal/com.synexia M3GpuToolJoinManifest.java	38df5f97bbeec8a8a8cfc77091d56bda925c07f2	verbatim Apache-2.0 build-only donor already present in receiver object database
-reused SDK wrapper	hsoliwal/com.synexia M3GpuToolJoinRecipe.java	1c1b1b568d369f688f6953161636bf36b484bf5a	verbatim Apache-2.0 build-only donor

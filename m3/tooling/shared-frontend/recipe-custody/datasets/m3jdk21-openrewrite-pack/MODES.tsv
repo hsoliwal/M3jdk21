@@ -1,7 +1,0 @@
-# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
-# SPDX-License-Identifier: Apache-2.0
-m3/tooling/module-packs/build-tools/OPENREWRITE.md	0644
-m3/tooling/module-packs/build-tools/openrewrite_pack.py	0644
-m3/tooling/module-packs/build-tools/test_openrewrite_pack.py	0644
-m3/tooling/shared-frontend/openrewrite-runtime/pom.xml	0644
-m3/tooling/shared-frontend/openrewrite-runtime/src/test/java/org/m3jdk/tooling/rewrite/M3RewriteRuntimeTest.java	0644

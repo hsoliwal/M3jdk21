@@ -1,5 +1,0 @@
-Apache Maven 4.1.0-SNAPSHOT
-Maven home: /tmp/m3-selected-tools-final-v3-20261017/relocated image with spaces/lib/m3-tools/maven
-Java version: 21-internal, vendor: N/A, runtime: /tmp/m3-selected-tools-final-v3-20261017/relocated image with spaces
-Default locale: en, platform encoding: UTF-8, time zone: America/Mexico_City
-OS name: "linux", version: "6.18.55", arch: "amd64", family: "unix"

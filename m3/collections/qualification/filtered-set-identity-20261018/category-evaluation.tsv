@@ -1,5 +1,0 @@
-category	shape	status	reason
-collections	identity-backed-filtered-set-membership	SELECTED_OWNER_PATTERN	Directly describes membership/removal under backing-set identity semantics and predicate evaluation on the stored representative. No challenge-code donor required.
-collections	read-only-collection-guards	RELATED_OWNER_EVIDENCE_ONLY	Current M3FilteredViews helper supplies representative-resolution evidence, but its read-only remove behavior is not the mutable target contract.
-two_pointers	live-filtered-navigation	EVIDENCE_ONLY	Traversal/filter taxonomy does not establish identity membership or correct stored-reference removal; no new traversal optimization selected.
-challenge-platform-array-search-sort-bitset	ordered-discovery-evidence	DISCOVERY_ONLY	LeetCode -> HackerRank -> GeeksforGeeks pages supply general category navigation only. No checked page defines this exact identity-backed Set defect; no solution/editorial text reused.

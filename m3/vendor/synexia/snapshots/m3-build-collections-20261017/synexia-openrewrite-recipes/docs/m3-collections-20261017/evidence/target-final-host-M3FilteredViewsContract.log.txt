@@ -1,4 +1,0 @@
-$ ["/workspace/scratch/4f99f40718f0/m3-implementation/toolchain/jdk-21.0.2+13/bin/java", "-Xcheck:jni", "--add-modules", "jdk.m3.collections,com.m3.collections", "--module-path", "/workspace/scratch/4f99f40718f0/m3-implementation/checkouts/M3jdk21/m3/tooling/module-packs/collections/target/m3-collections-image/modules", "--patch-module", "jdk.m3.collections=/workspace/scratch/4f99f40718f0/m3-implementation/checkouts/M3jdk21/m3/tooling/module-packs/collections/target/m3-collections-image/host-contracts", "-m", "jdk.m3.collections/jdk.m3.collections.M3FilteredViewsContract"]
-PASS M3_FILTERED_VIEWS checks=123500 randomized=750
-
-EXIT 0

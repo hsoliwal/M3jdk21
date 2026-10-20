@@ -1,6 +1,0 @@
-category	candidate	reuse_or_action	cost	contract_decision	provenance
-SORTED_SET_RANGE	JDK21 java.util.SortedSet / NavigableSet	M3FilteredViews.filter(SortedSet)	O(n) visible scan, source comparator retained	REUSE; read-only live view with range checks from backing owner	JDK API names only, no OpenJDK implementation copied
-SORTED_MAP_RANGE	JDK21 java.util.SortedMap / NavigableMap	M3FilteredViews.filterEntries(SortedMap)	O(n) visible scan, source comparator retained	REUSE; immutable entry objects are transient, no Entry storage owner	JDK API names only, no OpenJDK implementation copied
-MASKED_SELECTION	LeetCode 27 remove element (category reference)	M3LongBitmapFilteredSnapshot and M3IndexMaskCompactor	O(n) precompute, O(1) indexed test	NO NEW KERNEL; live predicate would invalidate captured bitmap	https://leetcode.com/problems/remove-element/ (problem reference only)
-RANK_INDEX	LeetCode 34 search range (category reference)	M3LongIndexProjection	O(log n) index query after preprocessing	NO DUPLICATE INDEX OWNER	https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array/ (problem reference only)
-STATE_FLAGS	M3ObjectStateSlots28 byte masks + M3SlotAllocator28	REUSE_UNCHANGED	O(1) slot state access	Existing explicit constructor on master retained; no concurrent overwrite	Existing first-party Apache-2.0 M3 code

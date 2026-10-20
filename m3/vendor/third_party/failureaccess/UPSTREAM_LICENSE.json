@@ -1,8 +1,0 @@
-{
-  "artifact": "failureaccess",
-  "version": "1.0.2",
-  "origin": "https://raw.githubusercontent.com/google/guava/v33.0.0/LICENSE",
-  "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
-  "bytes": 11358,
-  "pom_license": "(none in pom; parent com.google.guava:guava-parent:26.0-android)"
-}

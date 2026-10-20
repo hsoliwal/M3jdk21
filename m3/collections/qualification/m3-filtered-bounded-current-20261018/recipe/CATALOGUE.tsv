@@ -1,9 +1,0 @@
-problem_category	candidate	selected_atom	complexity	decision	contract_provenance
-BOUNDED_MUTABLE_SET	JDK21 NavigableSet lower/floor/ceiling/higher	M3MutableFilteredViews.SetView bounded recovery from M3JDK21 #1159	O(log n+k) ordinary; O(n) exceptional	RESTORE_ATOM	Reapplied to current master only; keep later source.addAll(admitted) capture and CapturedEntries putAll; JDK GPLv2+CPE API only.
-BOUNDED_READONLY_MAP	JDK21 NavigableMap lower/floor/ceiling/higher	M3FilteredViews.NavigableMapView boundedEntry from #1159	O(log n+k) ordinary; O(n) exceptional	RESTORE_ATOM	Retain master Collections.unmodifiableNavigableMap and immutable returned Entry contract.
-REPRESENTATIVE	Original TreeSet/TreeMap stored comparator key	Existing compareStored helpers	O(n) fallback	REUSE	Descending, nested and null-friendly comparator edge cases tested; no alias-key predicate shortcut.
-INDEX_MASK_JNI	Existing M3IndexMaskCompactor C17/JNI	Primitive index/state selectors unchanged	O(n)	KEEP	No Java object/predicate/comparator across JNI, no new ABI or payload owner.
-LEETCODE	Search Insert Position #35; First/Last Position #34	Problem taxonomy only	reference	NO_BORROW	No challenge/editorial implementation copied.
-HACKERRANK	Java Comparator / Sorted Subarray challenges	Problem taxonomy only	reference	NO_BORROW	No challenge/editorial implementation copied.
-GEEKSFORGEEKS	lower_bound upper_bound and array-mask categories	Problem taxonomy only	reference	NO_BORROW	No challenge/editorial implementation copied.
-THIRD_PARTY	Guava filter; Eclipse NavigableSet; Apache PredicatedSortedSet; Spring MultiValueMap	Distinct provider contracts	reference	NOT_SUBSTITUTABLE	No upstream implementations copied; do not claim five-SDK parity.

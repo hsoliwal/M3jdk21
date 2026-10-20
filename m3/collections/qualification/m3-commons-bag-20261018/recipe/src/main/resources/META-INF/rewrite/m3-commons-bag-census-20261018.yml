@@ -1,6 +1,0 @@
-type: specs.openrewrite.org/v1beta/recipe
-name: com.synexia.m3.CommonsBagCensus20261018
-displayName: Extend strict five-provider SDK source census from 34 to 36
-description: Admit exact new Apache Bag and JUnit source identities without weakening historical five-file receipt.
-recipeList:
-  - com.synexia.rewrite.M3CommonsBagCensusRecipe

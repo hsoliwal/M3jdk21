@@ -1,4 +1,0 @@
-$ ["nm", "-D", "--defined-only", "/workspace/scratch/f8287c652798/proof/native-collections/lib/libm3_collections_statehist.so"]
-00000000000012e0 T Java_com_m3_collections_M3StateMaskHistogram_tallyNative
-
-EXIT=0

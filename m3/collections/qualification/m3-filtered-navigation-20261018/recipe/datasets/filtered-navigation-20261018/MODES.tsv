@@ -1,9 +1,0 @@
-.github/workflows/m3-filtered-bounded-current-20261018.yml	0644
-m3/collections/qualification/m3-filtered-navigation-20261018/README.md	0644
-m3/collections/qualification/m3-filtered-navigation-20261018/runtime/pom.xml	0644
-m3/collections/qualification/m3-filtered-navigation-20261018/runtime/verify.py	0644
-m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java	0644
-m3/collections/src/main/java/com/m3/collections/M3IndexPathMasks.java	0644
-m3/collections/src/test/java/com/m3/collections/M3FilteredNavigationReconciliationContract.java	0644
-m3/collections/src/test/java/com/m3/collections/M3FilteredNavigationReconciliationTest.java	0644
-m3/collections/src/test/java/com/m3/collections/M3IndexPathMasksAliasContract.java	0644

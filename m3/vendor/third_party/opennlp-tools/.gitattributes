@@ -1,5 +1,0 @@
-# Preserve the exact licensed donor bytes, including upstream whitespace.
-src/** -text whitespace=-blank-at-eol,-blank-at-eof
-upstream-reference/** -text whitespace=-blank-at-eol,-blank-at-eof
-LICENSE -text
-NOTICE -text

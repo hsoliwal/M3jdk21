@@ -1,5 +1,0 @@
-# OpenRewrite SDK Results; no template-copy materialization
-m3/tooling/shared-frontend/openrewrite-tool/src/main/java/org/m3jdk/tooling/rewrite/M3RewriteTool.java	ABSENT	5ff61fe56b750096da8b9972a9cb4d9f4c318d6c2f73863f26b9c49404ad2976
-m3/tooling/shared-frontend/openrewrite-tool/src/test/java/org/m3jdk/tooling/rewrite/M3RewriteToolTest.java	ABSENT	53c807cf46d1b7dd14c3031b3bc9fef84349488cef4d7a0b43d9643c2aaffa86
-m3/tooling/shared-frontend/openrewrite-tool/README.md	ABSENT	95c706e9a672f0447991478a09de36afaffbadb23c7a2f9275d8b67ffc5c80aa
-m3/tooling/shared-frontend/openrewrite-tool/pom.xml	ABSENT	b486de013cf39a2d5d2962a965dd848415a4800e0fc71f8543fb02b82e9cdaf5

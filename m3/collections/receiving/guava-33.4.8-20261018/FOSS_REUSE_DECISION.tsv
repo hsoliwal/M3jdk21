@@ -1,4 +1,0 @@
-capability	donor	classification	fit	license_and_attribution
-Whole Guava collection source	google/guava@f06690fa3e874f65515e8fd338a74d636e2c792f	ADAPT	All3356files; common and ownedpublicsuffix namespaces relocated; externalTruth/Jimfs namespaces retained	Original per-file/embedded notices and LICENSE retained
-Complete M3 source receiving	e3e9dc721ce7d840a59a8de0484e90d1c3340736	DIRECT_IMPORT	Actual source bytes/modes/paths; original donor build metadata retained as provenance, no original-GAV publication	Imported rights unchanged
-Namespace transformation	Existing exactGit/inverse/fixedpoint and frozen helper/provider ownership recipes	REUSE_MECHANISM	Serial per-file source refinement; zero collection-storage algorithm changes in this phase	First-party metadata Apache2; donor material not relicensed

@@ -1,8 +1,0 @@
-{
-  "artifact": "re2j-1.8",
-  "origin": "https://raw.githubusercontent.com/google/re2j/re2j-1.8/LICENSE",
-  "file": "UPSTREAM_LICENSE.txt",
-  "sha256": "26a6133577cc8e48d7c002ac4d4a554786e7c0e1732e10f2db205e5e494c411b",
-  "bytes": 1617,
-  "caveat": "EXACT_TAG; Go-style BSD license as declared in the pom (Go License)"
-}

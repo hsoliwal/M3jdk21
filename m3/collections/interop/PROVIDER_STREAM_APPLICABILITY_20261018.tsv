@@ -1,6 +1,0 @@
-provider	concrete_surface	adapter_call	behavior_to_assert	status
-JDK	java.util.Collection / Iterable	M3ObjectStream.snapshot / live	separate snapshot vs live-source semantics; duplicate and null retention	core fixture only
-Guava	ArrayListMultimap.get(key), Multimap values	M3ObjectStream.snapshot(valueList)	value-list encounter order and duplicates; existing multimap contract unchanged	optional interop JUnit added; Maven not run
-Eclipse Collections	MutableList / RichIterable	M3ObjectStream.snapshot(Iterable)	encounter order, duplicates; do not require java.util.Collection specifically	optional interop JUnit added; Maven not run
-Spring Framework	LinkedMultiValueMap.get(key)	M3ObjectStream.snapshot(valueList)	ordered value list; map key case and live-map semantics remain Spring-owned	optional interop JUnit added; Maven not run
-Apache Commons Collections	ListUtils.predicatedList	M3ObjectStream.snapshot(collection)	predicate admission policy remains provider-owned; M3 snapshot is detached	optional interop JUnit added; Maven not run

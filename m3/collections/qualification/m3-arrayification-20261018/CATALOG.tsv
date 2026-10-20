@@ -1,8 +1,0 @@
-category	exemplar	selected_m3_atom	rationale	complexity	donor_use
-INDEX_COMPOSITION	LeetCode #1920 Build Array from Permutation	M3ArrayifiedIndexOps.gather	Checked ordinal mapping, repeated rows remain occurrences	O(k)	CATEGORY_ONLY_NO_SOURCE_COPY
-STABLE_FILTER	LeetCode #27 Remove Element	M3ArrayifiedIndexOps.selected	Unsigned byte state mask, stable two-pass compact	O(n)	CATEGORY_ONLY_NO_SOURCE_COPY
-ROTATE	LeetCode #189 Rotate Array	M3ArrayifiedIndexOps.rotated	Triple reversal of primitive metadata, payload unchanged	O(n)	CATEGORY_ONLY_NO_SOURCE_COPY
-MERGE	LeetCode #88 Merge Sorted Array	M3ArrayifiedIndexOps.mergeSorted	Stable tie left; checked sorted operands	O(n+m)	CATEGORY_ONLY_NO_SOURCE_COPY
-DYNAMIC_GROUPS	HackerRank Dynamic Array	Reuse M3IndexedMultiValueMap / M3LinkedHashMap	Do not add Entry/Node owners	O(1) amortized append	CATEGORY_ONLY_NO_SOURCE_COPY
-RANK_PREFIX	GeeksforGeeks prefix sum and bit count	Reuse M3BitLane28 / M3IndexPathRank	No duplicate bit/rank engine	variable	CATEGORY_ONLY_NO_SOURCE_COPY
-JNI_SELECTION	Existing M3IndexMaskCompactor	selectPositions NATIVE_REQUIRED	Native-only primitive selectors; no callbacks or heap pointer retention	O(n)	FIRST_PARTY_APACHE_2.0

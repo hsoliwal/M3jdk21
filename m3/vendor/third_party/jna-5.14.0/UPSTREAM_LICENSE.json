@@ -1,8 +1,0 @@
-{
-  "artifact": "jna",
-  "version": "5.14.0",
-  "origin": "https://raw.githubusercontent.com/java-native-access/jna/5.14.0/LICENSE",
-  "sha256": "521bb271ac56e0e29a1b1b688b94af17d00d378fc8e63478d8c8b2a7c4a229d0",
-  "bytes": 788,
-  "pom_license": "LGPL-2.1-or-later <https://www.gnu.org/licenses/old-licenses/lgpl-2.1>;Apache-2.0 <https://www.apache.org/licenses/LICENSE-2.0.txt>"
-}

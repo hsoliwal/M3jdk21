@@ -1,4 +1,0 @@
-com.m3.tools.text.regex
-exports com.m3.tools.text.regex
-requires java.base mandated
-

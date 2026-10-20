@@ -1,4 +1,0 @@
-com.m3.tools.codec.varint jar:file:///dev/shm/m3-cpu-tools-f4826e049195-build-v4/jars/com.m3.tools.codec.varint.jar!/module-info.class
-exports com.m3.tools.codec.varint
-requires java.base mandated
-

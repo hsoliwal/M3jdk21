@@ -1,8 +1,0 @@
-Compiled from "M3AST.java"
-public interface com.sun.source.util.M3AST extends java.lang.AutoCloseable {
-  public static com.sun.source.util.M3AST open(com.sun.source.util.JavacTask);
-  public static com.sun.source.util.M3AST open(com.sun.source.util.JavacTask, boolean);
-  public abstract void addConsumer(com.sun.source.util.M3AST$Consumer);
-  public abstract com.sun.source.util.M3AST$Summary summary();
-  public abstract void close();
-}

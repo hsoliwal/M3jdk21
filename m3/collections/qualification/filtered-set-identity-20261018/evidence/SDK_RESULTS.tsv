@@ -1,4 +1,0 @@
-# OpenRewrite SDK Results; no template-copy materialization
-m3/collections/src/main/java/com/m3/collections/M3CollectionViews.java	c1ae229f00911e0881de9cae102f2c65f0f7f9f8eb4da1abd364a816dd84ee0d	511800d4d79c7d8838ddb497f031e13827decd44c9c2790093f89ea01cdaa349
-m3/collections/src/test/java/com/m3/collections/M3FilteredSetIdentityContract.java	ABSENT	81efd65e93b4019e7878dd2eb6643082571e02e66282150a286b8585603eaf8e
-m3/collections/src/test/java/com/m3/collections/M3FilteredSetIdentityTest.java	ABSENT	83801bb1a5df7e3ea7f179c2985712c8e62fae4f3264715f8686b76fb23843c2

@@ -1,3 +1,0 @@
-capability	donor	classification	fit	license_and_attribution
-Selected full source bodies	hsoliwal/M3jdk21@2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49:src/java.base/share/classes	ADAPT	59 source-custody postimages; full receiving compile refused	GPL-2.0 and designated Classpath exception per original headers; original LICENSE retained; no relicensing
-Namespace recipe	openrewrite/rewrite@8.17.1 and existing serial protected-span recipes	REUSE_MECHANISM	Per-type ChangeType partial; byte fallback for custody only	Recipe Apache-2.0 does not relicense donor source

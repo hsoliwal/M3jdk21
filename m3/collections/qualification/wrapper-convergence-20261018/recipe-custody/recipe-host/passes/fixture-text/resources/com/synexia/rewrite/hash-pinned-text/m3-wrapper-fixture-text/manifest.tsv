@@ -1,2 +1,0 @@
-# path	before-sha256	after-sha256	template
-fixture/src/main/native/window.c	e2c34fdbab5128cf93ce00ad5c4f4eff790d156679ea4afec3e0501a48e6e31b	835c01233ff0798bb1bd078dca2a5695def69587586625396d7427dde8c49dde	window.c.txt

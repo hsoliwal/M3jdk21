@@ -1,2 +1,0 @@
-src/java.base/share/classes/jdk/internal/vm/parallel/BulkScheduler.java	af52a1b984e90dcc922f7b319df4f6d2a882ff5a5cb5f3bf43855b8b7fb3ede0	c558264923c720d38e4f76f0f356c957f23f5179920fa3a530517e3f398652b1	BulkScheduler.java.txt
-test/jdk/jdk/internal/vm/parallel/BulkProviderStableIdentityTest.java	ABSENT	fef5c76fb2a42aaec2664355ac105656b61dbb04a1b0e13189dab9d4bf7380da	BulkProviderStableIdentityTest.java.txt

@@ -1,9 +1,0 @@
-problem_category	source_or_reference	license_and_status	selected_atom	complexity	contract	disposition
-INDEXED_ARRAY_WINDOW	Synexia #12054/M3JDK21 #1075 first-party window donor	Apache-2.0 original; target evidence	independent row/state offset and bounded selection	O(n) + O(k) output	validate ranges before native dispatch; preserve duplicates/order	REUSE_RECONCILE
-ALL_SELECTED_COPY	M3JDK21 #1076 existing owner	Apache-2.0 first-party	Arrays.copyOfRange only for all pass and zero mask	O(k) copy, no mask rescan for zero	detached output and no alias to mutable caller arrays	PRESERVE_EXISTING_FASTPATH
-NATIVE_INDEXED_MASK	M3JDK21 #1075 C17 JNI region kernel	Apache-2.0 first-party	bounded 256-cell region count/emit	O(n) time O(k) output	no pinned Java pointers, no callbacks, NATIVE_REQUIRED explicit	REUSE_ATOM
-UNORDERED_REMOVAL	LeetCode #27 Remove Element	taxonomy only; no code copied	stable filter not swap-delete	O(n)	preserve occurrence order unlike some challenge solutions	REFERENCE_ONLY
-ARRAY_ROTATION	HackerRank Left Rotation	taxonomy only; no code copied	logical offsets instead of input copy	O(1) descriptor; O(k) materialize	positive checked offsets	REFERENCE_ONLY
-SLIDING_WINDOW	GeeksforGeeks sliding window / prefix ranges	taxonomy only; no code copied	independent range preflight	O(1) validation	no overflow when offset+length approaches MAX	REFERENCE_ONLY
-PREDICATED_WRAPPER	Apache Commons Collections predicated view	Apache-2.0 reference only	metadata mask vs admission validator	N/A	semantically different contract; no code copied	REJECT_DIRECT_COPY
-LAZY_FILTER_VIEW	Google Guava / Eclipse Collections	Apache-2.0 / EPL family reference only	primitive prefilter before materializing objects	N/A	JDK predicate order and live-view semantics remain Java-side	REFERENCE_ONLY

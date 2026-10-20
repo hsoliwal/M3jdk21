@@ -1,4 +1,0 @@
-com.m3.tools.text.similarity
-exports com.m3.tools.text.similarity
-requires java.base mandated
-

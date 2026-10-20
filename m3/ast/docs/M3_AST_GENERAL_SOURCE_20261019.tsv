@@ -1,8 +1,0 @@
-# SPDX-License-Identifier: Apache-2.0
-# category	donor / authority	decision	complexity, compatibility, rationale
-SOURCE-CLASSIFICATION	Existing M3ASTHierarchy	SELECTED	0 is the absence of collection classification; previously valid 1..8191 masks, sorted file roots and primitive slots preserved
-UNNAMED-PACKAGES	Java 21 JLS 7.4.2/7.7.5	SELECTED	Empty Java module/package coordinates are real; null or blank whitespace still refused
-JDT-PROJECTION	Synexia MIndexSelectiveAstMasterAdapter	FOLLOW-UP	Consume exact JDT source/binding facts in original M3JDK21 owners; this patch does not claim JDT parsing
-MASK-INDEX	Existing M3IndexMaskCompactor Java/JNI	REUSE WHEN NEEDED	No duplicate bit selector, per-occurrence object store or new JNI symbols
-SUBSET-ALGORITHM	LeetCode 78 / HackerRank Bit Manipulation	REJECTED	Enumeration of bit combinations is not necessary to admit zero-state classifications
-LOOKUP	GeeksforGeeks binary-search / sorting category	REJECTED	No new lookup hash/array because existing canonical order and offsets remain correct

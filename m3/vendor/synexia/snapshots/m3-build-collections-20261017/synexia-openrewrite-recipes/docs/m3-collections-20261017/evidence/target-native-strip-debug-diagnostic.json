@@ -1,8 +1,0 @@
-{
-  "actual_linked_sha256": "1bf2a2f057fe1ced09c10bdd9052387c723c39477ac59226d09b4d9ae2b31dde",
-  "normalized_reference_sha256": "1bf2a2f057fe1ced09c10bdd9052387c723c39477ac59226d09b4d9ae2b31dde",
-  "byte_equal": true,
-  "normalizer": "objcopy --strip-debug original expected",
-  "expected_packaging_transform": "jmod_pack.py jlink --strip-debug",
-  "source_implementation_change": false
-}

@@ -1,3 +1,0 @@
-source_owner	target_owner	mode	base	contract	status
-hsoliwal/com.synexia:com.synexia.m3.GvasStrictSameAddress20261016	com.m3.text.M3FixedAddressMapping	INDEPENDENT_APACHE_MODULE	0x600000000000	SAME_VIRTUAL_ADDRESS_OR_REFUSE	PROVING_LINUX_ONLY
-hsoliwal/com.synexia:M3GvasStrictNativeRecipe	m3/lexicon/native/m3_fixed_address_mapping_jni.c	JNI_TARGET_ADAPTER	0x600000000000	MAP_SHARED_FIXED_NOREPLACE_OR_REFUSE	WINDOWS_AND_HOTSPOT_NOT_RUN

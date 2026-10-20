@@ -1,9 +1,0 @@
-# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and contributors
-# SPDX-License-Identifier: Apache-2.0
-type: specs.openrewrite.org/v1beta/recipe
-name: com.synexia.m3jdk.M3BitLaneRuntimeCountSkip20261019
-displayName: Reuse prepared M3JDK21 runtime bitmap counts during navigation
-description: Qualify one exact java.base bitmap postimage without changing representation, allocation policy or JNI ABI.
-recipeList:
-  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
-      crateName: m3jdk21-bitlane-runtime-count-skip-20261019

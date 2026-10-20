@@ -1,2 +1,0 @@
-packet_id	atom_id	scope	scope_promotion_approved	work_ref	depends_on
-jep-485-stream-gatherers	gatherers-feature	LIBRARY_API	true	com.m3.rewrite.backport.M3Jep485StreamGatherersBackportRecipe	

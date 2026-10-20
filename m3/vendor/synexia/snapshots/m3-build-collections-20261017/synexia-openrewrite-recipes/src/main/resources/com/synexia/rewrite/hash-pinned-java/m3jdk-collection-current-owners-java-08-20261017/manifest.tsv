@@ -1,3 +1,0 @@
-# path	before_sha256	after_sha256	template
-# parse-context-sha256	99036d570fce20d42262994dfa15c52d745f411e91e7255fba8b7cfae5e5c0f0
-m3/tooling/module-packs/collections/src/test/java/jdk/m3/collections/M3FilteredViewsContract.java	ABSENT	cc8179e14343a9b1182e7c8002a44f6ee12786605be9ebc750dd1926f5d53020	template-00.txt

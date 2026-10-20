@@ -1,8 +1,0 @@
-{
-  "artifact": "assertj-core-3.25.3",
-  "origin": "https://raw.githubusercontent.com/assertj/assertj/assertj-build-3.25.3/LICENSE.txt",
-  "file": "UPSTREAM_LICENSE.txt",
-  "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
-  "bytes": 11357,
-  "caveat": "EXACT_TAG assertj-build-3.25.3"
-}

@@ -1,7 +1,0 @@
-type: specs.openrewrite.org/v1beta/recipe
-name: com.synexia.rewrite.M3EclipseCoreOptionalJmod
-displayName: Receive an optional Eclipse core JMOD over existing M3 text, index, AST, arrays and file edges
-description: Eight source-absent Java21 postimages, exact SHA256 source custody, no second M3 owner.
-recipeList:
-  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
-      crateName: eclipse-core-optional-jmod

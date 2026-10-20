@@ -1,8 +1,0 @@
-{
-  "artifact": "classgraph-4.8.165",
-  "origin": "https://raw.githubusercontent.com/classgraph/classgraph/classgraph-4.8.165/LICENSE-ClassGraph.txt",
-  "file": "UPSTREAM_LICENSE.txt",
-  "sha256": "4107216e853eee237beca89fe7d460271baf03eb70713f796bea46226b568944",
-  "bytes": 1081,
-  "caveat": "EXACT_TAG classgraph-4.8.165 (upstream file LICENSE-ClassGraph.txt)"
-}

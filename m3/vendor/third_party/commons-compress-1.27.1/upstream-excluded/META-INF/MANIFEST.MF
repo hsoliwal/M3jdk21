@@ -1,9 +1,0 @@
-Manifest-Version: 1.0
-Created-By: Maven Source Plugin 3.2.1
-Specification-Title: Apache Commons Compress
-Specification-Version: 1.27
-Specification-Vendor: The Apache Software Foundation
-Implementation-Title: Apache Commons Compress
-Implementation-Version: 1.27.1
-Implementation-Vendor: The Apache Software Foundation
-

@@ -1,7 +1,0 @@
-order	command	state
-0	diff --check	REQUIRED
-1	javac --release 21 -Xlint:all -Werror	SELECTED_SOURCE_PASS
-2	java -cp ... M3MaskDenseSelectionProof	PASS
-3	java -Xcheck:jni -Djava.library.path=... M3MaskNativeParityProof	PASS
-4	mvn -B -ntp -f m3/collections/pom.xml -Dtest=M3MaskAllSelectionReceiverTest test	NOT_RUN
-5	JDK build + applicable jtreg native regression	NOT_RUN

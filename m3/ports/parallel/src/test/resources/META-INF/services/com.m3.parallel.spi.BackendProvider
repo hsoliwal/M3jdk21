@@ -1,9 +1,0 @@
-# SPDX-License-Identifier: Apache-2.0
-com.m3.parallel.testing.TestProviders$Faulty
-com.m3.parallel.testing.TestProviders$Absent
-com.m3.parallel.testing.TestProviders$Throwing
-com.m3.parallel.testing.TestProviders$BadId
-com.m3.parallel.testing.TestProviders$Reserved
-com.m3.parallel.testing.TestProviders$DuplicateA
-com.m3.parallel.testing.TestProviders$DuplicateB
-com.m3.parallel.testing.NoSuchProvider

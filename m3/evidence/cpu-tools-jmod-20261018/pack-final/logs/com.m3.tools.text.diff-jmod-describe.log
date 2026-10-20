@@ -1,4 +1,0 @@
-com.m3.tools.text.diff
-exports com.m3.tools.text.diff
-requires java.base mandated
-

@@ -1,3 +1,0 @@
-# path	before	after	template
-src/java.base/share/classes/jdk/internal/mindex/M3TQ.java	ABSENT	9c45405969aeac089ad8786443d59450f2fd8e6f33ca1a6e35e95a7a45f4f0b1	M3TQ.java.txt
-test/jdk/java/lang/String/M3TQTest.java	ABSENT	68316b377bc4e538c7cb343060696cb8fccfaee433c220bdb73d3486d16e9f20	M3TQTest.java.txt

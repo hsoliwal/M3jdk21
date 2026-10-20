@@ -1,3 +1,0 @@
-path	donor_repo	donor_pr	blob_sha1	content_sha256	status
-src/java.base/share/classes/java/lang/M3StringProjection.java	hsoliwal/com.synexia	11886	59f80a443ac43281ab22427378f031c5aedbb773	2cb6695adbd08074142e196fc314d60d50e1eb0d4810c27b12d0f39dfe2a31c4	ABSENT_BEFORE
-test/jdk/java/lang/String/M3StringProjectionTest.java	hsoliwal/com.synexia	11886	8f59fc8b58f5aaf83a01edc18e7f17678192fe04	b87bc91196ec87f4654a10e0c7c5c7c7450d2e6279598222d03feaea6dd0710a	ABSENT_BEFORE

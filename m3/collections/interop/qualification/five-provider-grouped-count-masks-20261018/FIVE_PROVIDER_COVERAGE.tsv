@@ -1,7 +1,0 @@
-provider	actual_target_interfaces	M3_reused_storage_atoms	selection_boundary	status
-JDK	Set/Map-of-Set/Map-of-Counts	M3LinkedHashSet+M3LinkedHashMap, keys[]/starts[]/ordinals[]	distinct key count, distinct group values, occurrence counter	NEW_UNQUALIFIED
-GUAVA	SetMultimap/SortedSetMultimap/Multiset	M3LinkedHashMap+M3LinkedHashSet+M3TreeSet+M3GuavaMultiset	set duplicates collapse per key, bag key count repeats	NEW_UNQUALIFIED
-ECLIPSE_COLLECTIONS	MutableSetMultimap/MutableBagMultimap/MutableBag	M3EclipseSetMultimap+M3EclipseBagMultimap+M3EclipseBag	Eclipse bag counts occurrences, set multimap pairs distinct	NEW_UNQUALIFIED
-SPRING_FRAMEWORK	MultiValueMap fromSingleValue	M3LinkedHashMap via M3LibraryCollections.springSingleValueMap	last value wins, size distinct keys, scalar view	NEW_UNQUALIFIED
-APACHE_COMMONS_COLLECTIONS	SetValuedMap/MultiSet	M3ApacheSetValuedMap+M3ApacheMultiSet	pair count vs repeat key multiset count kept independent	NEW_UNQUALIFIED
-ALL_FIVE	shared underlying selection	M3FiveProviderKeyGroups and M3IndexPathMasks Java/C17	full signed 32-bit AND-required AND-NOT-forbidden stage masks, no object pointer native	PENDING_ACTUAL_CI

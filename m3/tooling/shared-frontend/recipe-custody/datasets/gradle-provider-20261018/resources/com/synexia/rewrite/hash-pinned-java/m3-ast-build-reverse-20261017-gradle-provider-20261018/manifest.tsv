@@ -1,3 +1,0 @@
-m3/tooling/module-packs/build-support/gradle-provider/src/main/java/org/gradle/internal/m3/ast/M3GradleASTProvider.java	ABSENT	92a7700275af7759c6a8c80e636fc19e9ac1affa84c0cfa15b8063ae70244557	0005-M3GradleASTProvider.java.txt
-m3/tooling/module-packs/build-support/gradle-provider/src/test/java/org/gradle/internal/m3/ast/M3GradleASTProviderProbe.java	ABSENT	6f09a77dd665891ecd495071fa2ddfbf68f3926492a493a9318e4cbefd0815b1	0006-M3GradleASTProviderProbe.java.txt
-m3/tooling/module-packs/build-support/gradle-provider/src/test/java/org/gradle/internal/m3/ast/M3GradleASTProviderTest.java	ABSENT	d9ecd98e605e4e40152d789a3c000843e03887da826ebfb79150d1708d0f7105	0007-M3GradleASTProviderTest.java.txt

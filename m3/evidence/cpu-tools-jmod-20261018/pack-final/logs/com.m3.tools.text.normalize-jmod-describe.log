@@ -1,4 +1,0 @@
-com.m3.tools.text.normalize
-exports com.m3.tools.text.normalize
-requires java.base mandated
-

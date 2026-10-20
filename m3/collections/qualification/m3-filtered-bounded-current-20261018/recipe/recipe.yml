@@ -1,7 +1,0 @@
-type: specs.openrewrite.org/v1beta/recipe
-name: com.synexia.m3.Jdk21FilteredBoundedCurrent20261018
-displayName: Restore bounded filtered views on current M3JDK21 master
-description: Reuse old qualified navigation atoms with new current-master preimages, strict sealed replacements and JDK contract tests.
-recipeList:
-  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
-      crateName: m3jdk21-filtered-bounded-current-20261018

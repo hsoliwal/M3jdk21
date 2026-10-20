@@ -1,4 +1,0 @@
-$ ["/workspace/scratch/4f99f40718f0/m3-implementation/toolchain/jdk-21.0.2+13/bin/java", "-Xcheck:jni", "-cp", "/workspace/scratch/4f99f40718f0/m3-implementation/wrappers/stage-1-classes", "com.synexia.common.collections.M3MutableFilteredViewsJniContract", "jni", "/workspace/scratch/4f99f40718f0/m3-implementation/wrappers/native/libM3WrapperStableFilter.so"]
-PASS M3_MUTABLE_FILTERED_JNI fixtures=1000 backend=JNI
-
-EXIT 0

@@ -1,3 +1,0 @@
-source	target	disposition	qualification
-com.synexia.indexstring.MIndexString	java.lang.M3String	EXISTING_TARGET_MAPPING_REUSED	NO_NEW_ABI_OR_RECEIVING_PHASE
-java.lang.M3String.CodeUnitCursor	java.lang.M3String.encodeUtf8	REUSE_UNCHANGED_TARGET_PRIVATE_HELPER	MODEL_PROOF_ONLY_JDK_GATES_OPEN

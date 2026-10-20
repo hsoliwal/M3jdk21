@@ -1,5 +1,0 @@
-Exception in thread "main" java.lang.AssertionError: native parity
-	at M3Lane28Test.check(M3Lane28Test.java:255)
-	at M3Lane28Test.nativeParity(M3Lane28Test.java:223)
-	at M3Lane28Test.bitmap(M3Lane28Test.java:186)
-	at M3Lane28Test.main(M3Lane28Test.java:38)

@@ -1,2 +1,0 @@
-artifact	version	jar	module	requires	disposition
-jdk.m3.parser	1	/workspace/scratch/a0f19f379302/parser-target-proof-2/jdk.m3.parser.jar	jdk.m3.parser	jdk.compiler	JMOD

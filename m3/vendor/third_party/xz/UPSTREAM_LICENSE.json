@@ -1,8 +1,0 @@
-{
-  "artifact": "xz",
-  "version": "1.10",
-  "origin": "https://raw.githubusercontent.com/tukaani-project/xz-java/v1.10/COPYING",
-  "sha256": "1e77ef26cee5216d6531e49cbf2f6111a0270dc7b322fc65477063c5aff88766",
-  "bytes": 663,
-  "pom_license": "0BSD <>"
-}

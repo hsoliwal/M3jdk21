@@ -1,8 +1,0 @@
-M3 optional Optane module candidate
-Copyright 2026 Hitesh Soliwal and contributors.
-Independent Apache-2.0 module; OpenJDK licenses remain unchanged.
-ProgressMonitor adapts Synexia MIndexProgressMonitor, Git blob
-763ea75ea1553e679d6fcda271760328defef8cd.
-Recipe mechanics adapt the existing UnicodeX PMem Replay.java,
-Git blob 7846666788b78b3163290b802ecb6fb5e76015e6.
-No PMDK implementation source or third-party algorithm text is copied.

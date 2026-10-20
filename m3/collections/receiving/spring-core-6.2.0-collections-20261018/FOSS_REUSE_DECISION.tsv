@@ -1,3 +1,0 @@
-capability	donor	classification	fit	license_and_attribution
-Selected full source bodies	spring-projects/spring-framework@5024bb72279188f1d0dcfe19e8abdd4bdb9887c8	ADAPT	27 typed-qualified source postimages	Apache-2.0; original LICENSE.txt and per-file headers retained
-Namespace recipe	openrewrite/rewrite@8.17.1 and existing serial protected-span recipes	REUSE_MECHANISM	Typed ChangePackage with exact inverse and fixed point	Recipe Apache-2.0 does not relicense donor source

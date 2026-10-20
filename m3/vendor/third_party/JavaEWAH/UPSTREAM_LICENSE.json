@@ -1,9 +1,0 @@
-{
-  "artifact": "JavaEWAH-1.1.13",
-  "origin": "https://raw.githubusercontent.com/lemire/javaewah/JavaEWAH-1.1.13/LICENSE",
-  "file": "UPSTREAM_LICENSE.txt",
-  "sha256": "1848e985e358c9a4e21a735d92d57a890f0104d3ccf1b44ef3a0bf7bf337d627",
-  "bytes": 10621,
-  "caveat": "EXACT_TAG JavaEWAH-1.1.13",
-  "pom_license": "Apache 2 <http://www.apache.org/licenses/LICENSE-2.0.txt>"
-}

@@ -1,9 +1,0 @@
-gate	status
-source_integrity	LOCAL_PASS
-javac21	LOCAL_PASS
-contract	LOCAL_PASS
-maven_openrewrite	NOT_RUN
-full_m3_reactor	NOT_RUN
-native_abi	UNCHANGED
-jtreg_java_base	NOT_RUN
-independent_review	NOT_RUN

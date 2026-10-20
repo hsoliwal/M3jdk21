@@ -1,9 +1,0 @@
-category	problem/reference	baseline	selected atom	complexity	status	contract and donor disposition
-DEEP_NESTED_PREDICATES	LeetCode 27 / stable filter family	Recursive lambda composition over View	Exact restored FilterChain/FilterTerm persistent chain	O(1) composition; O(depth) eval	REUSE_MERGED_M3	Stack-safe at 20,000 nesting; no contest code copied
-READONLY_NESTING	Synexia #12045, M3JDK21 #1069	One StrictReadOnlyList per level	Fuse strictly internal View under StrictReadOnlyList	O(1) per layer	RESTORE_MERGED_SOURCE	No writable-protection bypass
-LATE_BOUND_TRAVERSAL	HackerRank Java Iterator; JDK Spliterator	Iterator bound on spliterator construction	Bind source iterator upon first traversal	O(1) creation	RESTORE_MERGED_SOURCE	Source mutations before terminal observe live owner
-SOURCE_ORDER	GeeksforGeeks iterator order; JDK List	Existing source encounter order	Preserve underlying ListIterator	O(n) selection	UNCHANGED	No sorted/size false spliterator characteristics
-PHYSICAL_SLOT_MASKS	M3IndexMaskCompactor; M3IndexPathMasks	Existing precomputed metadata selection	No new JNI path or duplicate state owner	No JNI in arbitrary predicate	REUSE_EXISTING_JNI	Callbacks/exception identity remain in Java; native handles only primitive arrays
-FILTERED_SORTED_VIEW	M3FilteredViews / M3LongSortedViews	Existing live sorted adapters	Keep existing owners unmodified	Contract-specific	DEFER	No second wrapper hierarchy
-COPYRIGHT_LICENSE	Prior Synexia original Apache-2.0 code	Merged donor history source, missing from current master	Copy exact historic original Git blobs	N/A	PRESERVE	Copyright 2026 Hitesh Soliwal and contributors; third-party sources not copied
-JNI_INDEX_MASK_PARITY	M3IndexMaskCompactor Java/JNI native required	Detached physical row IDs + byte masks	Use existing bounded C17 selector with no Java predicate crossing	O(n) indices	REUSE_REAL_JNI	512 seeded List/index cases; high-bit masks; explicit no-fallback behavior

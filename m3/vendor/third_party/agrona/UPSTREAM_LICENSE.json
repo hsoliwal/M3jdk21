@@ -1,8 +1,0 @@
-{
-  "artifact": "agrona",
-  "version": "1.21.2",
-  "origin": "https://raw.githubusercontent.com/real-logic/agrona/1.21.2/LICENSE",
-  "sha256": "af3928565c008fe1dbb38ee9fc01f29c5e29908b8d30bdb259585a7b8ed540a1",
-  "bytes": 11326,
-  "pom_license": "The Apache License, Version 2.0 <https://www.apache.org/licenses/LICENSE-2.0.txt>"
-}

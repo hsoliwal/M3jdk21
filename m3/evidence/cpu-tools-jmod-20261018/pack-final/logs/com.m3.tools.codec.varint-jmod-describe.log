@@ -1,4 +1,0 @@
-com.m3.tools.codec.varint
-exports com.m3.tools.codec.varint
-requires java.base mandated
-

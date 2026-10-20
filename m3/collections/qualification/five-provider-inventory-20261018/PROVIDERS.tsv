@@ -1,7 +1,0 @@
-code	lib	provider	version	maven	license	package	usage
-J	jdk	JDK java.util	21	-	GPL-2.0-only WITH Classpath-exception-2.0	com.m3.collections.jdk	API_SHAPE_ONLY: public signatures read by reflection from the running JDK21; no JDK source copied
-G	guava	Guava	33.4.8-jre	com.google.guava:guava:33.4.8-jre	Apache-2.0	com.m3.collections.guava	API types are compile dependencies of the scaffold; no provider implementation superclass, delegate or body
-A	apache	Apache Commons Collections	4.5.0	org.apache.commons:commons-collections4:4.5.0	Apache-2.0	com.m3.collections.apache	API types are compile dependencies of the scaffold; no provider implementation superclass, delegate or body
-S	spring	Spring Framework core	6.2.0	org.springframework:spring-core:6.2.0	Apache-2.0	com.m3.collections.spring	API types are compile dependencies of the scaffold; jsr305 is provided only so javac can read Spring nullness metadata
-EA	eclipse	Eclipse Collections API	11.1.0	-	EPL-1.0 OR EDL-1.0	-	PATTERN_ONLY: never copied, never a dependency in any scope
-EI	eclipse	Eclipse Collections	11.1.0	-	EPL-1.0 OR EDL-1.0	-	PATTERN_ONLY: never copied, never a dependency in any scope

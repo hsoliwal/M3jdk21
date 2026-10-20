@@ -1,7 +1,0 @@
-type: specs.openrewrite.org/v1beta/recipe
-name: com.synexia.rewrite.M3EclipseProgressForward
-displayName: Eclipse IProgressMonitor forwarding over the existing M3 progress owner
-description: Emit an additive Java 21 facade and differential lifecycle tests from hash-sealed Java LSTs, retaining M3 progress ownership.
-recipeList:
-  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
-      crateName: eclipse-m3-progress-forward

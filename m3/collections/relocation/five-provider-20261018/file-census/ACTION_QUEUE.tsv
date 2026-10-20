@@ -1,9 +1,0 @@
-priority	pattern	contract_gate	state
-P1	indexed array/list/set/map/queue/mask source rows	read exact source + compare current M3 atom	PROPOSAL
-P2	multimap/bimap/bag/table/sorted/view rows	provider-specific null-order-identity-snapshot semantics	PROPOSAL
-P3	Eclipse API/interfaces and code generators	original EPL/EDL + generated API closure	PROPOSAL
-P3	concurrent/snapshot/serialization-bearing rows	JMM GC serialization exception-order proof	PROPOSAL
-P3	JDK java.base collection source	NO_RENAME of actual java.base; isolated copy only	PROPOSAL
-BLOCKED	Spring source candidates	writable fork not found; upstream read-only	PROPOSAL
-SKIP	TYPED_EXCLUSION_NON_COLLECTION rows	no collection mutation	TYPED_EXCLUSION
-TEST	TEST_ORACLE rows	full tests retained against renamed candidate	PENDING

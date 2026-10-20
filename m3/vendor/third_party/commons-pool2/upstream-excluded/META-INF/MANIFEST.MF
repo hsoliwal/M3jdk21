@@ -1,9 +1,0 @@
-Manifest-Version: 1.0
-Created-By: Maven Source Plugin 3.2.1
-Specification-Title: Apache Commons Pool
-Specification-Version: 2.12
-Specification-Vendor: The Apache Software Foundation
-Implementation-Title: Apache Commons Pool
-Implementation-Version: 2.12.0
-Implementation-Vendor: The Apache Software Foundation
-

@@ -1,8 +1,0 @@
-{
-  "artifact": "rewrite-java-21-8.17.1",
-  "origin": "https://raw.githubusercontent.com/openrewrite/rewrite/v8.17.1/lombok.config",
-  "file": "UPSTREAM_LOMBOK.config",
-  "sha256": "7a7eb5e33aaf354f59875207a37f97df1d3593910e8c3018aa3975b09e8e1b01",
-  "bytes": 396,
-  "purpose": "OpenRewrite root lombok.config at tag v8.17.1; the published sources jars omit it; delombok reads it as lombok.config"
-}

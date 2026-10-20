@@ -1,8 +1,0 @@
-{"detail":"source and preceding artifacts sealed","input_sha256":"e279db46a00e6a15a0d44275a40b32c4a1ed1cff9db13658ee971d7251f30ce5","phase":"lint","status":"START"}
-{"detail":"phase receipt committed","input_sha256":"e279db46a00e6a15a0d44275a40b32c4a1ed1cff9db13658ee971d7251f30ce5","phase":"lint","status":"PASS"}
-{"detail":"source and preceding artifacts sealed","input_sha256":"e279db46a00e6a15a0d44275a40b32c4a1ed1cff9db13658ee971d7251f30ce5","phase":"compile","status":"START"}
-{"detail":"phase receipt committed","input_sha256":"e279db46a00e6a15a0d44275a40b32c4a1ed1cff9db13658ee971d7251f30ce5","phase":"compile","status":"PASS"}
-{"detail":"source and preceding artifacts sealed","input_sha256":"e279db46a00e6a15a0d44275a40b32c4a1ed1cff9db13658ee971d7251f30ce5","phase":"test","status":"START"}
-{"detail":"phase receipt committed","input_sha256":"e279db46a00e6a15a0d44275a40b32c4a1ed1cff9db13658ee971d7251f30ce5","phase":"test","status":"PASS"}
-{"detail":"source and preceding artifacts sealed","input_sha256":"e279db46a00e6a15a0d44275a40b32c4a1ed1cff9db13658ee971d7251f30ce5","phase":"runtime","status":"START"}
-{"detail":"phase receipt committed","input_sha256":"e279db46a00e6a15a0d44275a40b32c4a1ed1cff9db13658ee971d7251f30ce5","phase":"runtime","status":"PASS"}

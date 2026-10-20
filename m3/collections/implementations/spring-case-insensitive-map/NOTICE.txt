@@ -1,9 +1,0 @@
-M3 owned Spring case-insensitive map
-Copyright 2002-2023 the original Spring Framework authors.
-Original policy authors: Juergen Hoeller and Phillip Webb.
-Copyright 2026 Hitesh Soliwal and contributors to the Synexia/M3 project.
-
-Modified from the Spring Framework 6.2.0 public map policy and composed with
-first-party Synexia/M3 array/index storage atoms. Provider collection bodies
-were replaced by independently owned arrays and primitive indexes.
-The exact original Apache License 2.0 is retained in LICENSE.txt.

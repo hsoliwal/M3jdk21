@@ -1,4 +1,0 @@
-com.m3.tools.text.tokenize
-exports com.m3.tools.text.tokenize
-requires java.base mandated
-

@@ -1,4 +1,0 @@
-$ ["nm", "-D", "--defined-only", "/workspace/scratch/f8287c652798/proof/native-collections/lib/libm3_residency_state_mask.so"]
-0000000000002330 T Java_com_m3_collections_M3ResidencyStateMaskIndex_select0
-
-EXIT=0

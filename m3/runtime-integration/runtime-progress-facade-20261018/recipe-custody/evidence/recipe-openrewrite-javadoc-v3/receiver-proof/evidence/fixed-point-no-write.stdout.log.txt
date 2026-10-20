@@ -1,1 +1,0 @@
-M3_COLLECTIONS_RECEIVER_PASS {"actual_sdk_results": true, "changes": 0, "dataset": "m3-openrewrite-javadoc", "mode": "apply", "targets": 15}

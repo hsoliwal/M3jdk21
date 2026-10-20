@@ -1,6 +1,0 @@
-type: specs.openrewrite.org/v1beta/recipe
-name: com.synexia.m3.Arrayification20261018
-displayName: M3 LeetCode-index arrayification across five library collection adapters
-description: Preserve five vendor API names while using one M3 array/index/mask storage substrate.
-recipeList:
-  - com.synexia.rewrite.M3Arrayification20261018Recipe

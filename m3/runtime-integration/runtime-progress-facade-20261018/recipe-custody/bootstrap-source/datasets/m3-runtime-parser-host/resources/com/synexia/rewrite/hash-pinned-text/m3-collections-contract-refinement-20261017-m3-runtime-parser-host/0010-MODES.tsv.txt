@@ -1,6 +1,0 @@
-m3/collections/src/test/native/recipe_fixture.c	0644
-pom.xml	0644
-settings.properties	0644
-src/main/java/fixture/Plan.java	0644
-src/main/java/fixture/Snapshot.java	0644
-tools/build.py	0644

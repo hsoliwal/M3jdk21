@@ -1,9 +1,0 @@
-Traceback (most recent call last):
-  File "/workspace/scratch/13309be96b09/collections-work/recipes/m3-collections-contract-refinement-20261017/target/fixture/receiver-proof/isolated-qe9_bn4u/late-drift/crate/receive.py", line 195, in <module>
-    main()
-  File "/workspace/scratch/13309be96b09/collections-work/recipes/m3-collections-contract-refinement-20261017/target/fixture/receiver-proof/isolated-qe9_bn4u/late-drift/crate/receive.py", line 190, in main
-    result = receive(crate, args.dataset, owner.absolute(), args.target.absolute(), args.check)
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/workspace/scratch/13309be96b09/collections-work/recipes/m3-collections-contract-refinement-20261017/target/fixture/receiver-proof/isolated-qe9_bn4u/late-drift/crate/receive.py", line 154, in receive
-    raise ValueError("target source drift: " + relative)
-ValueError: target source drift: tools/build.py

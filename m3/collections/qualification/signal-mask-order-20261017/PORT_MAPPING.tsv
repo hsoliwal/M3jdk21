@@ -1,6 +1,0 @@
-source_owner	target_owner	intake_mode	status	contract_boundary	canonical_recipe
-com.synexia.matcollections.MatIntOrder/com.synexia.matcollections.MatSignalDimensions	com.m3.collections.M3SignalOrder	TARGET_OWNED_PORT	CANDIDATE_NOT_JDK_PROMOTED	Detached primitive stable total-double row ordinals, not live JDK Collection	com.synexia.m3.M3Jdk21SignalMaskOrder20261017
-com.synexia.matcollections.MatNativeSignalOrder	com.m3.collections.M3SignalOrderNative	TARGET_OWNED_PORT	CANDIDATE_OPT_IN	Owned primitive long[]/int[] JNI sort, no retained object references	com.synexia.m3.M3Jdk21SignalMaskOrder20261017
-com.synexia.matcollections.MatSortableProcessor	com.sun.tools.javac.m3.M3ASTPC (future integration)	DEFERRED	NOT_PORTED	Canonical source-time @Sortable remains Synexia-owned; only its precomputed scalar projection is consumed	NONE
-com.synexia.matcollections.MatCollectionViews	java.util.CollectionViews and existing com.m3.collections filtered wrappers	DEFERRED	EXISTING_OWNER_NO_CHANGE	Live mutations/comparator identity/range contracts require separate JDK gates	NONE
-com.synexia.matcollections.MatIntFilterKernel	com.m3.collections.M3IndexMaskCompactor/M3IndexMaskWindow	EXISTING_TARGET_OWNER	NO_CHANGE	Byte-mask filtering is independent from one-time signal projection	NONE

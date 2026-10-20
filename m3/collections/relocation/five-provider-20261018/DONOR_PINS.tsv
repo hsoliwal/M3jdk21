@@ -1,6 +1,0 @@
-provider	repository	commit	source_package	target_package	module	licence	first_pass
-GUAVA	hsoliwal/guava	9247d70e1638aa88103f727d2c47c66c4f93fd16	com.google.common	com.m3.sdk.guava	guava	Apache-2.0	FORK_WORKTREE
-ECLIPSE	hsoliwal/eclipse-collections	00a668d624c870652bf746d10f250a4d37a777f8	org.eclipse.collections	com.m3.sdk.eclipse.collections	eclipse-collections-api + eclipse-collections	EPL-1.0/EDL-1.0	FORK_WORKTREE
-APACHE	hsoliwal/commons-collections	2d985c27e07bdcbb9516aea44b0dda3f3e487ced	org.apache.commons.collections4	com.m3.sdk.apache.commons.collections4	src/main/java	Apache-2.0	FORK_WORKTREE
-SPRING	spring-projects/spring-framework	49adc91c7e41eaafb52fc11e1210989894bda1f3	org.springframework.util	com.m3.sdk.spring.util	spring-core	Apache-2.0	UPSTREAM_REFERENCE_NO_WRITABLE_USER_FORK
-JDK	hsoliwal/M3jdk21	2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49	java.util	com.m3.sdk.jdk.util	java.base	GPL-2.0-with-Classpath-exception	STAGE_ONLY_NEVER_RENAME_JAVA_BASE

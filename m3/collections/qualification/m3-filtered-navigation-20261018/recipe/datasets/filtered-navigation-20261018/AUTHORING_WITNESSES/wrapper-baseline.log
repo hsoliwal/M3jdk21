@@ -1,7 +1,0 @@
-navigation checks=141840 failures=2391 first=rank=-3 owner=0 mask=1 query=-4 higher expected=0 actual=null
-entries checks=11448 failures=6242 first=one stored membership predicate expected=1 actual=3
-readonly checks=904 failures=206 first=strict removeFirst expected=java.lang.UnsupportedOperationException actual=java.util.NoSuchElementException
-depth checks=0 failures=1 first=depth threw java.lang.StackOverflowError
-TOTAL checks=154192 failures=8840
-Exception in thread "main" java.lang.AssertionError: rank=-3 owner=0 mask=1 query=-4 higher expected=0 actual=null
-	at com.m3.collections.M3FilteredNavigationReconciliationContract.main(M3FilteredNavigationReconciliationContract.java:51)

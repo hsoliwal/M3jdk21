@@ -1,8 +1,0 @@
-dependency	jdk21_state	jdk24_usage	m3_action
-Thread.ofVirtual	PRESENT	Gatherers.mapConcurrent	REUSE
-JavaUtilCollectionAccess.listFromTrustedArrayNullsAllowed	PRESENT	window gatherers	REUSE
-SharedSecrets.getJavaUtilCollectionAccess	PRESENT	window gatherers	REUSE
-Nodes.castingArray	PRESENT	pipeline node materialization	REUSE
-jdk.internal.invoke.MhUtil	ABSENT	GathererOp VarHandle lookup	ADAPT_LOCAL_HELPER
-PreviewFeature.STREAM_GATHERERS	NOT_REQUIRED_FINAL	removed by graduation	DO_NOT_IMPORT
-java grammar change	NONE	NONE	NO_LANGUAGE_BACKPORT

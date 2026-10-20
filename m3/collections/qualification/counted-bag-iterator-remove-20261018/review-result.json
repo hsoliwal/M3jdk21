@@ -1,6 +1,0 @@
-{
-  "findings": [],
-  "overall_correctness": "patch is correct",
-  "overall_explanation": "The iterator now tracks the element returned by the last successful next() independently of hasNext() lookahead, so remove() targets the correct occurrence without changing fail-fast, duplicate-count, null-element, or removal-eligibility behavior. The recipe snapshot matches the production change, and no actionable defect was identified in the supplied qualification or recipe artifacts.",
-  "overall_confidence": 0.97
-}

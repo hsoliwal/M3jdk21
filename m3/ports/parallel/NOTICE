@@ -1,7 +1,0 @@
-M3 parallel API (m3.parallel)
-Copyright 2026 Hitesh Soliwal and Contributors to the Synexia Project
-
-First-party Apache-2.0 module. TornadoVM (beehive-lab/TornadoVM) informed the
-shape of the launch API (task graph, transfer modes, 1-D worker grid); no
-TornadoVM source is copied and there is no TornadoVM dependency. See
-m3/docs/m3sdk/m3-parallel-vcpu-design.md and TORNADO_API_SURFACE.tsv.

@@ -1,6 +1,0 @@
-# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
-# SPDX-License-Identifier: Apache-2.0
-m3/tooling/module-packs/build-tools/OPENREWRITE.md	ABSENT	9a6536e3d8c30fd8064189dbb8be1ea01f02d9dc54739820d199634e6a4f46cd	0001-OPENREWRITE.md.txt
-m3/tooling/module-packs/build-tools/openrewrite_pack.py	ABSENT	05f932678db1957965c325aa8da06169b3e42b2dc002d4f1deb8f6d1e9e2db2e	0002-openrewrite_pack.py.txt
-m3/tooling/module-packs/build-tools/test_openrewrite_pack.py	ABSENT	0cba34745fd33107d97dad89ddd72d90753e724975b6b9367fc42c11e230caf9	0003-test_openrewrite_pack.py.txt
-m3/tooling/shared-frontend/openrewrite-runtime/pom.xml	ABSENT	f90996fcfa174a0c95225e45248e9c6f2d372ef09c835f1df08cf3727dac4a35	0004-pom.xml.txt

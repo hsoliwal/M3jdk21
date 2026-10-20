@@ -1,8 +1,0 @@
-# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
-# SPDX-License-Identifier: Apache-2.0
-problem_category	candidate	decision	correctness_and_compatibility	complexity	donor	qualification
-SOURCE_DELIVERY_IDENTITY	Git ancestry as delivery	REJECT	A merged ancestor does not establish current file bytes	O(1) assertion is insufficient	Current and earlier pinned Git trees	27 actual target comparisons required
-SOURCE_DELIVERY_IDENTITY	exact original recipe postimages	SELECT	26 exact old preimages restore the same delivered bytes; four per-file chains are composed without changing owners	O(total admitted bytes) hashing and comparison	Seven existing canonical datasets; preserved per-file licenses	Original Maven/OpenRewrite SDK and receiver gates
-CATALOGUE_UNION	whole-file historical replacement	REJECT	Would remove the current ALG-NUMERIC-COPY-RUNS row	O(file bytes)	Current catalogue	Explicit prefix-preservation witness
-CATALOGUE_UNION	append five missing exact rows	SELECT	Preserve every current byte, compare row identities, refuse conflicting owners	O(current and original row bytes)	Existing original runtime catalogue delta	Prefix, collision, and exact-row checks
-DISCOVERY_APPLICABILITY	LeetCode HackerRank GeeksforGeeks	NOT_APPLICABLE	This pass restores reviewed source identity and metadata; it introduces no new search or collection algorithm	NOT_APPLICABLE	Prior algorithm choices and donor reviews remain retained	No new performance or algorithm superiority claim

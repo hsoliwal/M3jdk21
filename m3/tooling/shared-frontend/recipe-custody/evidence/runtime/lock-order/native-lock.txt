@@ -1,1 +1,0 @@
-M3_TOOL_INPUT_LOCK_WRITTEN /workspace/scratch/13309be96b09/build-work/native-maven-sdk-pack-lock.json

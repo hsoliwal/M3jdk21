@@ -1,6 +1,0 @@
-type: specs.openrewrite.org/v1beta/recipe
-name: com.synexia.m3.IndexedMultivalueOccurrence20261018
-displayName: M3JDK21 integrated indexed multivalue occurrence refinement
-description: Existing-owner contract-preserving source sealed Java and metadata change.
-recipeList:
-  - com.synexia.rewrite.M3IndexedMultivalueOccurrenceRecipe

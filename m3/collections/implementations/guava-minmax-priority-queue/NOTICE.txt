@@ -1,1 +1,0 @@
-Owned MinMaxPriorityQueue: adapted from Guava33.4.8, Copyright2010 and selected2007-2011 comparator/guard/math atoms The Guava Authors, Apache-2.0. Modified2026 Hitesh Soliwal and contributors: package/type, M3 array-backed buffers, temporary movement arrays and owned comparator atoms. See THIRD_PARTY_NOTICES.md and qualification provenance.

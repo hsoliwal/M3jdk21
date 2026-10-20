@@ -1,8 +1,0 @@
-{
-  "artifact": "ecj",
-  "version": "3.46.100",
-  "origin": "https://raw.githubusercontent.com/eclipse-jdt/eclipse.jdt.core/R4_36/LICENSE",
-  "sha256": "0becf16567beb77fa252b7664631dd177c8f9a1889e48995b45379c7130e5303",
-  "bytes": 14198,
-  "pom_license": "EPL-2.0 <https://www.eclipse.org/legal/epl-2.0/>"
-}

@@ -1,5 +1,0 @@
-Canonical recipe/proof: Copyright 2026 Hitesh Soliwal and Contributors to the Synexia Project; Apache-2.0.
-OpenJDK inputs and GapContent postimage retain GPL-2.0-only WITH Classpath-exception-2.0; target tests GPL-2.0-only.
-NetBeans oracle source is unmodified Apache-2.0 at f26ca8d8025ff820b8ffe751b6db6c1cc67baa97; retain third_party/netbeans/LICENSE and NOTICE. It is not JDK runtime code.
-No challenge/editorial source copied. No new native code.
-Canonical engines reused unchanged from Synexia; previous focused Maven harness from PR12459 adapted under Apache-2.0.

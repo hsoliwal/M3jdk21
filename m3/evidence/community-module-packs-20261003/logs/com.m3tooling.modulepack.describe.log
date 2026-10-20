@@ -1,4 +1,0 @@
-com.m3tooling.modulepack
-exports com.m3.tools.modulepack
-requires java.base mandated
-

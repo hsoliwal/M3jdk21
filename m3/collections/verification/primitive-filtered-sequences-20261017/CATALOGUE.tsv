@@ -1,9 +1,0 @@
-category	operation	algorithm	donor_or_reference	decision	complexity	limitations
-FILTER_LIST	logical_to_physical	stable sequential index scan	Synexia M3Index index/offset discipline; LeetCode 27 Remove Element	REUSE_ADAPT	O(n) seek, O(1) metadata	long primitive domain, stable predicate
-FILTER_DEQUE	visible head and tail	forward/reverse primitive iterator	M3LongArrayDeque; JDK Deque contract	REUSE_BACKING	O(n) peek	no concurrent mutations
-FILTER_QUEUE	FIFO visible removal	primitive first-occurrence deletion	M3LongArrayDeque; HackerRank Queue using Two Stacks problem taxonomy	REUSE_BACKING	O(n) scan/deletion	not a blocking queue
-FILTER_STACK	LIFO visible removal	backward indexed scan	M3LongArrayList; HackerRank balanced-brackets stack category	REUSE_BACKING	O(n) peak seek	requires indexed backing
-FILTER_LIST_SORT	sort visible positions only	primitive position and value arrays	JDK Arrays.sort; GeeksforGeeks array partition/sort taxonomy	REUSE_JDK	O(n+k log k) time O(k) scratch	mutates backing values at visible coordinates only
-FILTER_GROUP_COMPACT	in-place visible-only predicate removal	owner filterInPlace compaction	Synexia M3Scale two-pointer compact arrays; LeetCode 27	REUSE_BACKING	O(n) time O(1) primitive scratch	partial commit follows backing contract
-READ_ONLY	no-op mutation rejection	strict access guard	JDK Collections.unmodifiable wrappers	PRESERVE_CONTRACT	O(1) guard	all write APIs throw
-STATE_MASK	owner remains physical state authority	existing M3StateMaskArrays and M3IndexMaskCompactor	Synexia M3 mask donors	UNCHANGED	O(n) matching	state flags not copied into new per-value objects

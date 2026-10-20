@@ -1,9 +1,0 @@
-# SPDX-License-Identifier: Apache-2.0
-# Copyright 2026 Hitesh Soliwal and contributors
-# target-base	2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49
-.github/workflows/m3-java-util-sorts-20261018.yml	ABSENT	c7c83e0340c6af8e7862d7b21dd2c8c34d56c2f478957f019c7f668254909ab8	sorting-ci.yml.txt
-m3/docs/name-mapping.d/m3-java-util-sorts.json	ABSENT	cc11cfa3ed9f575a7b0eef72f1a0b3fedbe92e0c70bd5e7d5fd53d694f079644	sorting-name-map.json.txt
-m3/docs/sorting/README.md	ABSENT	617ff12e313dbcc416def50abd6766d07cceef3fe475a92dac75c3567fb9e51c	sort-catalogue.md.txt
-m3/docs/sorting/USAGE.md	ABSENT	1a1cb2513886124f76547d8c47768b5d09a0f878d86b3f0cd796618824276490	sorting-usage.md.txt
-m3/docs/sorting/algorithms.tsv	ABSENT	fdd13991d79f91091b7633983e1dedaff2896aef7f308c5af9b9df9297d8b7a1	sort-catalogue.tsv.txt
-m3/verification/sorting/verify.py	ABSENT	96e4ed9e928691bf26353d051b3bd219772133dd571a0382877ae6d60dbd0a5f	sorting-verify.py.txt

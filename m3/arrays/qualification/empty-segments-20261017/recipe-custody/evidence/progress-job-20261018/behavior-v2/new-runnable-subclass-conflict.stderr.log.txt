@@ -1,3 +1,0 @@
-ProgressJobRunnableConflict.java:10:32: compiler.err.override.weaker.access: (compiler.misc.cant.implement: run(java.util.concurrent.ProgressMonitor), ProgressJobRunnableConflict, run(java.util.concurrent.ProgressMonitor), java.lang.Runnable), public
-ProgressJobRunnableConflict.java:16:29: compiler.err.override.incompatible.ret: (compiler.misc.cant.implement: run(java.util.concurrent.ProgressMonitor), ProgressJobPublicRunnableConflict, run(java.util.concurrent.ProgressMonitor), java.lang.Runnable), java.lang.String, void
-2 errors

@@ -1,8 +1,0 @@
-type: specs.openrewrite.org/v1beta/recipe
-name: com.synexia.m3.OwnedApacheMultiValue20261018
-displayName: Owned M3 Apache multivalue source custody
-description: Reconstructs 30 owned Java bodies/helpers and two scoped behavioral probes from exact hashes. PlainText mode establishes custody only; executed Java21 contracts are separate.
-recipeList:
-  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
-      crateName: owned-apache-multivalue
-      lst: false

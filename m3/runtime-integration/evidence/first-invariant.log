@@ -1,3 +1,0 @@
-Exception in thread "main" java.lang.AssertionError: char[] projection traverses atoms
-	at MIndexStringInvariant.check(MIndexStringInvariant.java:150)
-	at MIndexStringInvariant.main(MIndexStringInvariant.java:83)

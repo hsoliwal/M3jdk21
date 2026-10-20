@@ -1,7 +1,0 @@
----
-type: "specs.openrewrite.org/v1beta/attribution"
-recipeName: "org.openrewrite.java.RandomizeId"
-contributors:
-- name: "Jonathan Schneider"
-  email: "jkschneider@gmail.com"
-  lineCount: 36

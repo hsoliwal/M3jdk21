@@ -1,9 +1,0 @@
-# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
-# SPDX-License-Identifier: Apache-2.0
-type: specs.openrewrite.org/v1beta/recipe
-name: com.synexia.m3.RX7CodecReceive20261018
-displayName: Preserve the independent RX7 heap witness across exact output receipt
-description: Bind the qualified previous launcher and existing workflow to a sibling receiver that admits four exact stable input states and compiles the original inverse codec independently of installed output.
-recipeList:
-  - com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe:
-      crateName: m3-rx7-codec-receive-20261018

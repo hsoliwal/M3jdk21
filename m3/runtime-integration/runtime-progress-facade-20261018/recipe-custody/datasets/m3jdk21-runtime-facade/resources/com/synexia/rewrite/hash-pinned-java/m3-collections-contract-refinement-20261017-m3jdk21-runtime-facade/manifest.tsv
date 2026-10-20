@@ -1,3 +1,0 @@
-src/java.base/share/classes/java/lang/Runtime.java	daacc198e43203c8bfabaf925569da40964f2758b9f1513dfce88b77e8da8c87	22d589337e359550e6b6e7311aabe25affc7989f886085a44454e9053561e424	0004-Runtime.java.txt
-test/jdk/java/lang/Runtime/M3RuntimeLegacyClient.java	ABSENT	3ee84f95c58b7e880fb1fffbbb257c91334956712a0dd1a27f60a6b318a2c167	0005-M3RuntimeLegacyClient.java.txt
-test/jdk/java/lang/Runtime/M3RuntimeProgressFacade.java	ABSENT	2eb18c42e8d6ad7ce0456f88f07e7c2572ff1f02a8c9989dbec2a90afd5a7a3c	0006-M3RuntimeProgressFacade.java.txt

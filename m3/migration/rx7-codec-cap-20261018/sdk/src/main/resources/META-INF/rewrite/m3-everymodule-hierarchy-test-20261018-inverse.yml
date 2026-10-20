@@ -1,8 +1,0 @@
-# SPDX-License-Identifier: Apache-2.0
-type: specs.openrewrite.org/v1beta/recipe
-name: com.synexia.m3.EveryModuleHierarchyTest20261018Inverse
-displayName: Restore the exact original EveryModule inventory test
-description: Restore the single-test preimage from the exact hierarchy assertion candidate without changing its implementation owners or admission authority.
-recipeList:
-  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
-      crateName: m3-everymodule-hierarchy-test-20261018-inverse

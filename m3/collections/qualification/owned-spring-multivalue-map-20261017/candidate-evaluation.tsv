@@ -1,5 +1,0 @@
-category	candidate	selection	rationale	correctness_evidence	complexity	performance_evidence	status
-GENERIC_MULTI_MAP	Spring MultiValueMapAdapter6.2.0	ADAPT	Preserve full multi-value API and Map dispatch while M3 owns directory and created lists	source inventory before generation; differential execution pending	directory expected O(1) lookup; per-key list append amortized O(1)	no benchmark run	PENDING_EXECUTED_ADMISSION
-GENERIC_MULTI_MAP	M3IndexedMultiValueMap	REJECT	Occurrence count, detached snapshots and no retained caller list aliases differ	pinned source comparison	N/A	N/A	NO_FIT
-IMMUTABLE_SINGLETON_LIST	M3IndexedListSnapshot	REJECT	No-op mutation and serializability differ from scalar-view-created singleton	source comparison	O(1) size/access	no benchmark run	NO_FIT
-LIVE_MAP_VIEW	Spring MultiToSingleValueMapAdapter6.2.0	ADAPT	Own scalar Map protocol with same fresh view allocation, mutation closure, immutable entries and quirks	pinned source inventory before generation; runtime proof pending	map lookup expected O(1); traversal O(n)	no benchmark run	PENDING_EXECUTED_ADMISSION

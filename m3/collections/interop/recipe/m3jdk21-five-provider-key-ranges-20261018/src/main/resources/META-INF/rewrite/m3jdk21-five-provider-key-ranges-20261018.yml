@@ -1,9 +1,0 @@
-# SPDX-License-Identifier: Apache-2.0
----
-type: specs.openrewrite.org/v1beta/recipe
-name: com.synexia.m3.FiveProviderKeyRanges20261018
-displayName: M3 five-provider stable indexed key range and mask composition
-description: Adds a source-hash-sealed Java 21 metadata-only range planner and real-provider contract tests without replacing existing SDK owners.
-recipeList:
-  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
-      crateName: m3jdk21-five-provider-key-ranges-20261018

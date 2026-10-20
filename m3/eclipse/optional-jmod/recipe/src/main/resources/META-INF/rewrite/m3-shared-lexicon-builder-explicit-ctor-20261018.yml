@@ -1,9 +1,0 @@
-type: specs.openrewrite.org/v1beta/recipe
-name: com.synexia.rewrite.M3SharedLexiconBuilderExplicitCtor20261018
-displayName: Declare the M3 shared-catalog Builder constructor explicitly
-description: >
-  Applies the exact source-sealed Java 21 compiler-gate correction through the
-  existing M3HashPinnedJavaSnapshotRecipe engine; refuses drift.
-recipeList:
-  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
-      crateName: m3-shared-lexicon-builder-explicit-ctor-20261018

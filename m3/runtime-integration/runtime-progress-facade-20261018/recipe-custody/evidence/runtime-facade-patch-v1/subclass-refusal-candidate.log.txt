@@ -1,2 +1,0 @@
-RuntimeSubclassMustRefuse.java:1:8: compiler.err.report.access: java.lang.Runtime(), private, java.lang.Runtime
-1 error

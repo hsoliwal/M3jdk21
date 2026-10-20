@@ -1,1 +1,0 @@
-package fixture; public final class Plan { public int limit() { return 2; } }

@@ -1,4 +1,0 @@
-# Exact functional progress Javadoc successor after M3jdk21 #1082.
-src/java.base/share/classes/java/util/function/Consumer.java	4de2f5ed281ed6f56b872bd4ae9cc832ffb11b6c78e84a0774d7d6058a4a31fc	025c5fa47f9505eccea26c540bc3e320762346c464ecca37ec1994297285a073	Consumer.java.txt
-src/java.base/share/classes/java/util/function/Function.java	7943afca3f9a3816e8f75a62b9c6104c31b883a1a1e614fb795a8fc85333c744	e116c9989d314cb6ffdaef60e8f665205afccdd28ee3674af2c6eedc008da588	Function.java.txt
-src/java.base/share/classes/java/util/function/Supplier.java	49c58acaea3e70e81ec7187b47551d1e0cf6906443bcf3d71e8c9cbba4d032c6	2d5f23125e22f4d20d80d7734e883c45fd179207f0ab508fdd0c9e8616156766	Supplier.java.txt

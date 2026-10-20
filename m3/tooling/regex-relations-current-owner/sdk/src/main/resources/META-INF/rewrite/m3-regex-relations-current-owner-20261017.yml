@@ -1,8 +1,0 @@
-# SPDX-License-Identifier: Apache-2.0
----
-type: specs.openrewrite.org/v1beta/recipe
-name: com.synexia.m3.RegexRelationsCurrentOwner
-displayName: Restore the current M3 regex relation consumer
-description: Emit a source-sealed current-owner continuation without runtime or phase authority.
-recipeList:
-  - com.synexia.rewrite.M3RegexRelationsCurrentOwnerRecipe

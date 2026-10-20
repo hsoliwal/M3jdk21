@@ -1,9 +1,0 @@
-{
-  "stage": "Maven/OpenRewrite SDK scan",
-  "kind": "IllegalStateException",
-  "signature": "invalid hash-pinned text manifest row",
-  "cause": "non-lexical target path order",
-  "failed_manifest_sha256": "b86b5042e52c09c1dd1ece9595c15ab94ba4e413470fc226ac3490b8b21e895c",
-  "correction": "sort recipe manifest rows; no target source edits",
-  "regression": "rejectedManifestOrderStillFails"
-}

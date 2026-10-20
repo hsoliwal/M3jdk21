@@ -1,9 +1,0 @@
-# Actual finite Linux local execution (2026-10-17)
-java 21.0.12.1; Apache Maven 3.9.9; OpenRewrite 8.17.1; JUnit Jupiter 5.10.2
-Strict Java 21 compilation against existing 77 first-party M3 source owners and actual Guava/Eclipse binaries: PASS.
-M3EclipseBag + M3EclipseBagMultimap against Eclipse HashBag/HashBagMultimap 11.1.0: PASS 251476 assertions / 8300 seeded operations (default JVM); PASS repeated -Xint.
-M3GuavaClassToInstanceMaps against real MutableClassToInstanceMap 33.4.8-jre: PASS 11992 assertions / 3000 seeded operations (default JVM); PASS repeated -Xint.
-Total 263468 assertions per mode; 526936 checks across both runs. Real dependency binaries, no API mocks.
-Real Maven/OpenRewrite Java LST tests: 3 run, 0 failures/errors/skips, BUILD SUCCESS. 8 exact output Java source/AST results; fixed point; 8 bounded partial installations under two orderings; occupied and duplicate refusals.
-NOT EXECUTED LOCALLY: Full five-provider JUnit (Apache 4.5.0 binary unavailable offline), exact current M3JDK21 core+interop reactor, native -Xcheck:jni, installed JDK, JMH, JCK, platform/provider version permutations.
-No new JNI source or symbol; source owner and JNI ABI remain unchanged.

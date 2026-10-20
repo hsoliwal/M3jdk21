@@ -1,7 +1,0 @@
-type: specs.openrewrite.org/v1beta/recipe
-name: com.synexia.m3jdk.StrictFilteredSequenced20261018
-displayName: Preserve strict filtered sorted-set mutation refusal on Java 21
-description: Hash-pinned M3JDK21 product owner refinement retaining live filtered sorted and navigable reversed views.
-recipeList:
-  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
-      crateName: m3jdk21-strict-filtered-sequenced-20261018

@@ -1,6 +1,0 @@
-/workspace/scratch/2b4d1cb957a7/M3jdk21/m3/arrays/src/main/java/module-info.java:3: warning: [module] module name component m3 should avoid terminal digits
-module com.m3.arrays {
-          ^
-error: warnings found and -Werror specified
-1 error
-1 warning

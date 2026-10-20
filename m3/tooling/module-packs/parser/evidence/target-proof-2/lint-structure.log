@@ -1,3 +1,0 @@
-PASS Python AST, XML, naming JSON, Java UTF-8/LF/license/package structure
-java_sources=36
-Java compiler warnings are checked with -Xlint:all -Werror in compile phase.

@@ -1,7 +1,0 @@
-{
-  "scope": "auxiliary per-suite report for the last documentation pass",
-  "fact": "Native mode reused the base gate runner suite filename; native suite detail has been renamed to invariant-policy-native-suites.json to state its actual mode. The earlier ordinary mode remains evidenced by its unchanged command/exit/count receipt and raw stdout/stderr; its per-suite hash list was replaced and is not claimed retained. All earlier per-file product-suite artifacts remain unchanged.",
-  "java_receipt": "invariant-policy-product-test.json",
-  "native_receipt": "invariant-policy-native-test.json",
-  "runtime_source_state_identical": true
-}

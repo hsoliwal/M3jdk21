@@ -1,9 +1,0 @@
-# Copyright 2026 Hitesh Soliwal and contributors. SPDX-License-Identifier: Apache-2.0
-source_repo	hsoliwal/com.synexia
-source_commit	7f70c57ceed2ad24d1ca888db604be74be10e30d
-recipe	com.synexia.m3.StateMaskHistogram20261017
-java_template_blob	5988d568c52bc959e760a51a280b78c1d41f8519
-oracle_template_blob	e5dc5194c885c5adbf2d243fff70a3a551935c47
-junit_template_blob	f51da8488067193c6e4b3c4ce8d24f5c69bc0e73
-native_template_blob	b49b0ef89dfdd07f51730a7034aef0b84516082a
-license	Apache-2.0; copyright 2026 Hitesh Soliwal and contributors; no third-party source copied

@@ -1,7 +1,0 @@
-{
-  "status": "PASS",
-  "targets": 5,
-  "exact_sdk_outputs": true,
-  "fixed_point_hashes_and_mtimes_unchanged": true,
-  "git_diff_check_exit_code": 0
-}
