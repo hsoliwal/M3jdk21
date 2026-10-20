@@ -57,6 +57,20 @@ public final class M3TableRowHeightsDifferential {
         void run(JTable t) throws Exception;
     }
 
+    /** The shared model, serializable (a static class, so a round trip does not capture the harness). */
+    static final class Model extends DefaultTableModel {
+        private static final long serialVersionUID = 1L;
+
+        Model() {
+            super(new Object[] {"s", "n"}, 0);
+        }
+
+        @Override
+        public Class<?> getColumnClass(int c) {
+            return c == 0 ? String.class : Integer.class;
+        }
+    }
+
     static int pixelChecks;
     static int sparseSteps;
     static int roundTrips;
@@ -70,12 +84,7 @@ public final class M3TableRowHeightsDifferential {
 
     M3TableRowHeightsDifferential(long seed) {
         rnd = new Random(seed);
-        model = new DefaultTableModel(new Object[] {"s", "n"}, 0) {
-            @Override
-            public Class<?> getColumnClass(int c) {
-                return c == 0 ? String.class : Integer.class;
-            }
-        };
+        model = new Model();
         int n = seed % 5 == 0 ? 2000 + rnd.nextInt(2000) : rnd.nextInt(50);
         for (int i = 0; i < n; i++) {
             model.addRow(row());
@@ -156,7 +165,8 @@ public final class M3TableRowHeightsDifferential {
         int size = model.getRowCount();
         int view = m3.getRowCount();
         if (op < 22 && view > 0) {
-            int r = rnd.nextInt(view + 1) - (rnd.nextInt(8) == 0 ? view + 1 : 0);
+            // a negative row is upstream defect D7 (the stock SizeSequence corrupts its sums); not compared
+            int r = rnd.nextInt(view + 2);
             int h = rnd.nextInt(10) == 0 ? -1 + rnd.nextInt(2) : 8 + rnd.nextInt(40);
             act("setRowHeight " + r + " " + h, t -> t.setRowHeight(r, h));
         } else if (op < 25) {
@@ -217,7 +227,8 @@ public final class M3TableRowHeightsDifferential {
             model.setRowCount(n);
         } else if (op < 82 && view > 0) {
             int a = rnd.nextInt(view);
-            act("setRowSelectionInterval " + a, t -> t.setRowSelectionInterval(a, Math.min(view - 1, a + rnd.nextInt(2))));
+            int b = Math.min(view - 1, a + rnd.nextInt(2));
+            act("setRowSelectionInterval " + a + " " + b, t -> t.setRowSelectionInterval(a, b));
         } else if (op < 84) {
             log.add(step + " serialization round trip");
             JTable s2 = roundTrip(stock, true);
@@ -225,9 +236,7 @@ public final class M3TableRowHeightsDifferential {
             String a = heights(s2);
             String b = heights(m2);
             if (!a.equals(b)) {
-                fail("heights after a serialization round trip
-  stock " + a + "
-  m3    " + b);
+                fail("heights after a serialization round trip\n  stock " + a + "\n  m3    " + b);
             }
             s2.setModel(model);
             m2.setModel(model);
