@@ -1,0 +1,19 @@
+# SPDX-License-Identifier: Apache-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: com.m3.rewrite.backport.M3StringTokenAwareRegex20261020
+displayName: Compose regex DFA transitions over canonical M3 String leaves
+description: >-
+  Hash-pinned target receiver for the token-aware regex atom. Existing M3 String scalar/range
+  coordinates are exposed as a bounded primitive ASCII vocabulary/sequence and consumed by the
+  existing M3RX7 TokenIndex. No public String/Pattern/Matcher API changes and no second regex parser.
+recipeList:
+  - com.m3.rewrite.backport.M3Jdk21HashPinnedSnapshotRecipe:
+      crateName: m3-string-token-aware-regex-20261020
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.m3.rewrite.backport.M3StringTokenAwareRegex20261020Inverse
+displayName: Roll back M3 String token-aware regex atom
+description: Exact hash-pinned inverse for the 2026-10-20 token-aware regex receiver.
+recipeList:
+  - com.m3.rewrite.backport.M3Jdk21HashPinnedSnapshotRecipe:
+      crateName: m3-string-token-aware-regex-20261020-inverse
