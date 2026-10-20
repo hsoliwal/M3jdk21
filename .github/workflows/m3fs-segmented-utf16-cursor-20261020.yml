@@ -1,0 +1,55 @@
+# Copyright 2026 Hitesh Soliwal and contributors; SPDX-License-Identifier: Apache-2.0
+name: M3JDK21 M3FS composite UTF-16 indexed cursors
+on:
+  pull_request:
+    paths:
+      - 'm3/fs/src/main/java/com/m3/fs/M3FsPrecomputeBundle.java'
+      - 'm3/fs/src/test/java/com/m3/fs/M3FsSegmentedCursor*.java'
+      - 'm3/fs/qualification/segmented-utf16-cursor-20261020/**'
+      - '.github/workflows/m3fs-segmented-utf16-cursor-20261020.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  existing-m3fs-java21:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Check source-sealed original M3FS owners
+        shell: bash
+        run: |
+          set -euo pipefail
+          sha256sum --check m3/fs/qualification/segmented-utf16-cursor-20261020/SOURCE_SEALS.sha256
+      - name: Strict compile actual M3JDK21 M3FS Java and zero-copy oracle
+        shell: bash
+        run: |
+          set -euo pipefail
+          OUT="$RUNNER_TEMP/m3fs-segmented-cursor"
+          mkdir -p "$OUT/classes"
+          find m3/fs/src/main/java/com/m3/fs -name '*.java' -print > "$OUT/sources.txt"
+          printf '%s\n' m3/fs/src/test/java/com/m3/fs/M3FsSegmentedCursorSelfTest.java >> "$OUT/sources.txt"
+          javac --release 21 -proc:none -Xlint:all -Werror -d "$OUT/classes" @"$OUT/sources.txt"
+          java -ea -Xcheck:jni -cp "$OUT/classes" com.m3.fs.M3FsSegmentedCursorSelfTest
+  existing-m3fs-junit-native:
+    runs-on: ubuntu-latest
+    timeout-minutes: 50
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: maven
+      - name: Build actual M3FS JNI library and execute mapped UTF-16 module tests
+        shell: bash
+        run: |
+          set -euo pipefail
+          sudo apt-get update
+          sudo apt-get install -y cmake libsqlite3-dev
+          mvn -B -ntp -f m3/fs/pom.xml \
+            -Dtest=M3SegmentedUtf16FsTest,M3FsSegmentedCursorTest test
