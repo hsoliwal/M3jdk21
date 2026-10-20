@@ -101,7 +101,7 @@ class CharArrayCopyRecipeTest(unittest.TestCase):
     def test_git_blob_uses_the_repository_nul_framing(self):
         source = RECIPE.ROOT / "src/java.base/share/classes/java/lang/M3String.java"
         self.assertEqual(
-            "bcbe4d4da2903dc27ad65155aa5d632c0c57c759",
+            "1e6c5c33569dbfd17cb75de2ceb61f567e6767af",
             RECIPE.git_blob(source.read_bytes()),
         )
 

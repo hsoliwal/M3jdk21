@@ -204,6 +204,78 @@ final class M3String implements CharSequence {
     }
 
     /**
+     * Canonicalizes selected UTF-16 ranges and composes them as one balanced M3 owner.
+     *
+     * <p>All descriptor lanes are snapshotted and every range and the total logical length are
+     * validated before the first pool admission. The result retains only canonical atom/tuple
+     * owners; caller arrays are never retained and no flat concatenated character payload is allocated.
+     * A {@code null} result means the local pool declined a scalar admission.</p>
+     */
+    static M3String joinCharRanges(char[][] sources, int[] starts, int[] lengths) {
+        Objects.requireNonNull(sources, "sources");
+        Objects.requireNonNull(starts, "starts");
+        Objects.requireNonNull(lengths, "lengths");
+        if (sources.length != starts.length || sources.length != lengths.length) {
+            throw new IllegalArgumentException("range descriptor lane lengths differ");
+        }
+
+        char[][] checkedSources = sources.clone();
+        int[] checkedStarts = starts.clone();
+        int[] checkedLengths = lengths.clone();
+        long totalLength = 0L;
+        for (int index = 0; index < checkedSources.length; index++) {
+            char[] source = Objects.requireNonNull(checkedSources[index], "source");
+            int start = checkedStarts[index];
+            int length = checkedLengths[index];
+            Objects.checkFromIndexSize(start, length, source.length);
+            totalLength += length;
+        }
+        if (totalLength > Integer.MAX_VALUE) {
+            throw new OutOfMemoryError("Required length exceeds implementation limit");
+        }
+        if (totalLength == 0L) return EMPTY;
+
+        M3String[] levels =
+                new M3String[Integer.SIZE - Integer.numberOfLeadingZeros(checkedSources.length)];
+        boolean wasAdmitting = Boolean.TRUE.equals(ADMITTING.get());
+        ADMITTING.set(Boolean.TRUE);
+        try {
+            for (int index = 0; index < checkedSources.length; index++) {
+                if (checkedLengths[index] == 0) continue;
+                M3String carry =
+                        M3StringPool.internChars(
+                                checkedSources[index], checkedStarts[index], checkedLengths[index]);
+                if (carry == null) return null;
+
+                boolean placed = false;
+                for (int level = 0; level < levels.length; level++) {
+                    M3String previous = levels[level];
+                    if (previous == null) {
+                        levels[level] = carry;
+                        placed = true;
+                        break;
+                    }
+                    levels[level] = null;
+                    carry = M3StringPool.concat(previous, carry);
+                }
+                if (!placed) throw new InternalError("M3 String range carry level exhausted");
+            }
+
+            M3String result = EMPTY;
+            for (int level = levels.length - 1; level >= 0; level--) {
+                M3String part = levels[level];
+                if (part != null) {
+                    result = result.length() == 0 ? part : M3StringPool.concat(result, part);
+                }
+            }
+            return result;
+        } finally {
+            if (wasAdmitting) ADMITTING.set(Boolean.TRUE);
+            else ADMITTING.remove();
+        }
+    }
+
+    /**
      * Designated String.join adapter with O(log N) temporary M3 references.
      *
      * <p>The caller has already converted its CharSequence elements to String, so no
