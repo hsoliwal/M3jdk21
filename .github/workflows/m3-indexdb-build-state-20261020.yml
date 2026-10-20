@@ -1,0 +1,40 @@
+name: M3JDK21 indexed build-state contract
+on:
+  pull_request:
+    paths:
+      - 'm3/indexdb/**'
+      - '.github/workflows/m3-indexdb-build-state-20261020.yml'
+  push:
+    branches: ['m3/indexdb-build-state-20261020']
+permissions:
+  contents: read
+jobs:
+  java21-owner:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Strict Java21 actual M3IndexDB + build-state owner
+        run: |
+          set -euo pipefail
+          mkdir -p build/m3-build-state
+          javac --release 21 -Xlint:all -Werror -d build/m3-build-state \
+            m3/indexdb/src/main/java/com/m3/indexdb/M3IndexDbArtifact.java \
+            m3/indexdb/src/main/java/com/m3/indexdb/M3IndexDB.java \
+            m3/indexdb/src/main/java/com/m3/indexdb/M3BuildState.java \
+            m3/indexdb/src/test/java/com/m3/indexdb/M3BuildStateContract.java
+          java -cp build/m3-build-state com.m3.indexdb.M3BuildStateContract
+  full-indexdb-coverage:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: maven
+      - name: Original owning-module Maven JUnit and unchanged 99% line/branch gates
+        run: mvn -B -ntp -f m3/indexdb/pom.xml clean verify
