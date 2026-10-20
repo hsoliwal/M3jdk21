@@ -41,13 +41,13 @@ Not reused: `m3/fs` native/JNI (Java-only law), any interner (names live in the 
 
 ## 3. Lanes (`M3FileTree`)
 
-Ids are dense, allocated in pre-order; `0` = root; `size()` = next free id. Capacity doubles.
+Ids are dense, allocated in pre-order; `0` = root; `rows()` = next free id. Capacity doubles.
 
 | Lane | Type | Meaning |
 |------|------|---------|
 | `parent` | `int[]` | parent id; `-1` for root |
 | `depth` | `short[]` | root `0` |
-| `nameOff` | `int[size+1]` | name of `id` = `namePool[nameOff[id] .. nameOff[id+1])` (UTF-16 units) |
+| `nameOff` | `int[rows+1]` | name of `id` = `namePool[nameOff[id] .. nameOff[id+1])` (UTF-16 units) |
 | `namePool` | `char[]` | all names, appended in id order |
 | `childStart` | `int[]` | start of the CSR slice in `childIds` |
 | `childCount` | `int[]` | direct children; `0` until scanned |
@@ -88,8 +88,8 @@ Lane accessors on a detached file throw `IllegalStateException`; the Path edge w
 public static M3FileTree open(Path root) throws IOException;   // slice 1: eager, NOFOLLOW_LINKS, unbounded depth
 public static M3FileTree detached();                            // shared empty tree for M3File.of(Path)
 public Path root(); public M3File rootFile(); public M3File file(int id);
-public int size(); public int liveCount(); public IntStream ids();
-public int parent(int id); public int depth(int id); public int childCount(int id); public IntStream childIds(int id);
+public int rows(); public int liveCount(); public IntStream ids(); public int residentCount();
+public int parent(int id); public int depth(int id); public int childCount(int id); public int childId(int id, int index); public IntStream childIds(int id);
 public String name(int id); public long size(int id); public long mtime(int id);
 public boolean flag(M3FileFlag f, int id); public int compareNames(int a, int b); public Path path(int id);
 ```
