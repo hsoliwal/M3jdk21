@@ -77,9 +77,6 @@ public final class M3ScopedJavac {
             if ((scope == Scope.MODULE) != (descriptors == 1) || descriptors > 1) {
                 throw new IllegalArgumentException("module scope must include exactly one module-info.java");
             }
-            if (givenClasses.contains(null) || givenModules.contains(null)) {
-                throw new IllegalArgumentException("null dependency path");
-            }
             // Context is admission metadata, not an assertion of cross-build
             // cache equivalence. Callers must separately seal complete bytes.
         }
