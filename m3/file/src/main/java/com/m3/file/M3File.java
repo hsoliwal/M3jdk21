@@ -55,6 +55,24 @@ public final class M3File {
         return Channels.newInputStream(openReadChannel());
     }
 
+    /** Monitor read/skip byte work without buffering or duplicating source data. */
+    public InputStream openInputStream(M3StreamProgress progress) throws IOException {
+        M3StreamProgress.require(progress);
+        return M3ShadowStreams.monitoredInput(openInputStream(), progress);
+    }
+
+    /**
+     * Open one original provider channel with a bounded, shared shadow-page arena.
+     * All layered consumers obtain cursors using {@code shared.shadow(child)};
+     * the owning caller closes this stream. No filesystem scan or new source owner.
+     */
+    public M3ShadowStreams.SharedInput openShadowInputStream(
+            int maxRetainedBytes, M3StreamProgress progress) throws IOException {
+        if (maxRetainedBytes < 0) throw new IllegalArgumentException("negative shadow capacity");
+        M3StreamProgress.require(progress);
+        return M3ShadowStreams.input(openInputStream(), maxRetainedBytes, progress);
+    }
+
     /**
      * Bounded complete read; a size precheck is only an optimization. The actual
      * stream is checked again to handle concurrent file growth or replacement.
