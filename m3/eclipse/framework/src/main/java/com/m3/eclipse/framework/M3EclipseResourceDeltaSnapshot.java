@@ -23,6 +23,8 @@ public final class M3EclipseResourceDeltaSnapshot {
     private final M3EclipseIndexedSnapshot<IResourceDelta> rows =
             new M3EclipseIndexedSnapshot<>();
     private final M3LongArrayList parents = M3Collections.longArrayList();
+    /** Full 32-bit Eclipse IResourceDelta flag words in physical BFS order. */
+    private final M3LongArrayList flags = M3Collections.longArrayList();
 
     private M3EclipseResourceDeltaSnapshot() {}
 
@@ -33,6 +35,7 @@ public final class M3EclipseResourceDeltaSnapshot {
         M3ObjectIdentitySet<IResourceDelta> seen = new M3ObjectIdentitySet<>();
         snapshot.rows.add(root, kindMask(root));
         snapshot.parents.add(-1L);
+        snapshot.flags.add(Integer.toUnsignedLong(root.getFlags()));
         seen.add(root);
         for (int ordinal = 0; ordinal < snapshot.rows.size(); ordinal++) {
             IResourceDelta[] children = snapshot.rows.at(ordinal).getAffectedChildren();
@@ -49,6 +52,7 @@ public final class M3EclipseResourceDeltaSnapshot {
                 }
                 snapshot.rows.add(child, kindMask(child));
                 snapshot.parents.add(ordinal);
+                snapshot.flags.add(Integer.toUnsignedLong(child.getFlags()));
                 seen.add(child);
             }
         }
@@ -70,6 +74,26 @@ public final class M3EclipseResourceDeltaSnapshot {
     public int parentOrdinal(int ordinal) { return Math.toIntExact(parents.get(ordinal)); }
 
     public int capturedKind(int ordinal) { return rows.state(ordinal); }
+
+    /** Full flags at capture time, including high bits; no lossy byte truncation. */
+    public int capturedFlags(int ordinal) { return (int) flags.get(ordinal); }
+
+    /**
+     * Bitwise required/excluded selection against saved full-width flag words.
+     * This is an indexed projection only. It does not re-open workspace resources
+     * or replace Eclipse's original delta flags, identity or notification order.
+     */
+    public List<IResourceDelta> selectByFlags(int requiredMask, int excludedMask) {
+        List<IResourceDelta> selected = M3Collections.arrayList();
+        for (int ordinal = 0; ordinal < rows.size(); ordinal++) {
+            int observed = (int) flags.get(ordinal);
+            if ((observed & requiredMask) == requiredMask
+                    && (observed & excludedMask) == 0) {
+                selected.add(rows.at(ordinal));
+            }
+        }
+        return List.copyOf(selected);
+    }
 
     /** Primitive-mask selected original delta references in snapshot breadth-first order. */
     public List<IResourceDelta> select(int requiredKindMask, int excludedKindMask) {
