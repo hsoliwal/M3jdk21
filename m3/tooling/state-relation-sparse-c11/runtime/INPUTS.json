@@ -1,0 +1,98 @@
+{
+  "schema": 1,
+  "capability": "state-relation-sparse-c11-20261020",
+  "state": "SOURCE_AUTHORED_NOT_EXECUTED",
+  "sourceBase": {
+    "repository": "hsoliwal/M3jdk21",
+    "commit": "d6d76b563050fc13c4fa79bc494edf29f1614b37"
+  },
+  "preCodeAdmission": {
+    "repository": "hsoliwal/com.synexia",
+    "commit": "5d2d2c39120c7a779e2beb06f0af19cb7364e253",
+    "path": "synexia-openrewrite-recipes/tasks/state-relation-sparse-c11-20261020/ADMISSION.json",
+    "gitBlob": "1f1234dfc02db59ee5f9f22d17677a78c61c13d7"
+  },
+  "capBytes": 536870912,
+  "reserveBytes": 8589934592,
+  "files": [
+    {
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3StateRelation.java",
+      "gitBlob": "ea904c0962fb976f43b45575f06f46ad198e29a2",
+      "bytes": 2138,
+      "sha256": "3270f7889a8c94fa15c90e88491b7fbe483d5ad3053ab36d7e07a63c4c734caa",
+      "role": "JAVA_NUMERIC_OWNER",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3DotStarRelations.java",
+      "gitBlob": "780c7887aaa6b0892a76f4eee1dcb17086a60289",
+      "bytes": 8838,
+      "sha256": "bbc2901ebe5b2de9951b672127bd47e9d13c70b5a39482fa0727703d0a2ff757",
+      "role": "JAVA_ADAPTER_OWNER",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "src/java.base/share/native/libjava/M3StateRelation.c",
+      "gitBlob": "610ca8bab47065a49b9b58814d6392a287f4fd8b",
+      "bytes": 5899,
+      "sha256": "b1bfd040a1454ac06ab3f96952d97c8c5a6509dcf55dbba9797b6517eea2ef16",
+      "role": "COMPLETE_CURRENT_C_TRANSLATION_UNIT",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "src/java.base/share/native/libjava/m3_state_relation.h",
+      "gitBlob": "18a02e228129827da486edc5b316790af6135310",
+      "bytes": 1021,
+      "sha256": "c948c0ac34180f1f9412a764c3c9fd8c59e11509467aa9e04f8825e903526885",
+      "role": "AUTHENTIC_KERNEL_HEADER",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "m3/compatibility/regex-relations-20261014/M3RelationPortProof.java",
+      "gitBlob": "e9a6beee8916cf97d5d4aac2383e7ac2fa8843e0",
+      "bytes": 11052,
+      "sha256": "bb77a4d48ed803e0503a8e497ec144748dd87d05b1c659971273d15b5bd89606",
+      "role": "UNCHANGED_COMPLETE_EXISTING_PROOF",
+      "license": "Apache-2.0"
+    }
+  ],
+  "expected": {
+    "cases": 71748,
+    "javaChecks": 74829,
+    "nativeChecks": 149658,
+    "javaMarker": "M3_RELATION_PORT cases=71748 checks=74829 native=false PASS",
+    "nativeMarker": "M3_RELATION_PORT cases=71748 checks=149658 native=true PASS",
+    "reuseMarker": "REUSE logicalUnits=2097152 reads=2 summaries=21 joins=20 hits=20"
+  },
+  "historical": {
+    "qualificationGitBlob": "90c166890a6f265473bf5471776ca0be596f2876",
+    "oldCGitBlob": "5b30f71d8ed878b3199225b9512b75a090ff896c",
+    "scope": "Historical C17 numeric-only module-patch proof; not a receipt for changed current C, C11 or classpath."
+  },
+  "scope": {
+    "fullProofPreserved": true,
+    "newNumericImplementation": false,
+    "advance0Qualified": false,
+    "fullNativeLibraryQualified": false,
+    "privateSourceForkReactorQualified": false,
+    "fullJdkQualified": false,
+    "windowsQualified": false,
+    "performanceQualified": false,
+    "runtimeApplied": false,
+    "phaseAdvanced": false,
+    "generatedSparseCAndPortableProofRequired": true,
+    "benchmarkExecuted": false
+  },
+  "hostAdmission": {
+    "repository": "hsoliwal/com.synexia",
+    "commit": "73ec51da3a1e419a1bcb8816d0313dead8dbaf62",
+    "path": "synexia-openrewrite-recipes/tasks/state-relation-sparse-c11-20261020/benchmark/ADMISSION.json"
+  },
+  "sdkTree": "e31ac28dc44cb975f07fd194c99568a23824d73d",
+  "generatedCandidate": {
+    "path": "target/emitted/src/java.base/share/native/libjava/M3StateRelation.c",
+    "bytes": 6237,
+    "gitBlob": "abb751e6056e34f25d0f09660d575f362610359e",
+    "sha256": "5d40fe7c65d54e26c6964313186624675592703ea6e2e1cb2886840b2f15347e"
+  }
+}
