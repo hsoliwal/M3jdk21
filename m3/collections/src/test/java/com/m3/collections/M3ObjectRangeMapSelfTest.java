@@ -1,4 +1,6 @@
-/* Copyright 2026 Hitesh Soliwal and contributors. SPDX-License-Identifier: Apache-2.0 */
+/* Copyright 2026 Hitesh Soliwal and contributors. SPDX-License-Identifier: Apache-2.0
+ * Modified 2026: verify both explicit JNI availability branches without weakening refusal.
+ */
 package com.m3.collections;
 
 import java.util.ArrayList;
@@ -160,8 +162,35 @@ public final class M3ObjectRangeMapSelfTest {
                 () -> map.updateState(5, 4, 4), "overlap states");
         fails(IllegalArgumentException.class, () -> map.spans().selected(1,1,
                 M3IndexPathMasks.Backend.JAVA), "contradictory selected stages");
-        fails(UnsatisfiedLinkError.class, () -> map.spans().selected(1,0,
-                M3IndexPathMasks.Backend.NATIVE_REQUIRED), "explicit no JNI fallback");
+        if (M3IndexPathMasks.nativeAvailable()) {
+            var spans = map.spans();
+            var live = spans.selected(M3ObjectRangeMap.LIVE, 0,
+                    M3IndexPathMasks.Backend.NATIVE_REQUIRED);
+            eq(3, live.size(), "native LIVE retains every current span");
+            for (int i = 0; i < live.size(); i++) {
+                eq(i, live.physicalAt(i), "native LIVE physical encounter order");
+                eq(spans.startAt(i), live.startAt(i), "native LIVE start parity");
+                eq(spans.endAt(i), live.endAt(i), "native LIVE end parity");
+                eq(spans.valueAt(i), live.valueAt(i), "native LIVE value parity");
+                eq(spans.stateAt(i), live.stateAt(i), "native LIVE full state parity");
+            }
+            var high = spans.selected(Integer.MIN_VALUE, M3ObjectRangeMap.VISIBLE,
+                    M3IndexPathMasks.Backend.NATIVE_REQUIRED);
+            eq(1, high.size(), "native high-bit required and visible excluded");
+            eq(1, high.physicalAt(0), "native high-bit middle physical slot");
+            eq(5, high.startAt(0), "native high-bit selected start");
+            eq(10, high.endAt(0), "native high-bit selected end");
+            eq("B", high.valueAt(0), "native high-bit selected value");
+            eq(Integer.MIN_VALUE | M3ObjectRangeMap.DIRTY | M3ObjectRangeMap.LIVE,
+                    high.stateAt(0), "native full 32-bit selected state");
+            var javaHigh = spans.selected(Integer.MIN_VALUE, M3ObjectRangeMap.VISIBLE,
+                    M3IndexPathMasks.Backend.JAVA);
+            eq(javaHigh.size(), high.size(), "native high-bit Java count parity");
+            eq(javaHigh.physicalAt(0), high.physicalAt(0), "native high-bit Java slot parity");
+        } else {
+            fails(UnsatisfiedLinkError.class, () -> map.spans().selected(1,0,
+                    M3IndexPathMasks.Backend.NATIVE_REQUIRED), "explicit no JNI fallback");
+        }
         ok(map.remove(0,20), "delete all");
         eq(0, map.spanCount(), "empty map");
         var nullable = new M3ObjectRangeMap<Integer, Integer>(Comparator.nullsFirst(Integer::compareTo));
@@ -174,6 +203,7 @@ public final class M3ObjectRangeMapSelfTest {
     public static void main(String[] args) {
         if (args.length != 0) throw new IllegalArgumentException("usage: no args");
         contracts(); randomized(false); randomized(true);
-        System.out.println("PASS M3ObjectRangeMapSelfTest checks=" + checks + " randomized=12000");
+        System.out.println("PASS M3ObjectRangeMapSelfTest checks=" + checks
+                + " randomized=12000 native=" + M3IndexPathMasks.nativeAvailable());
     }
 }

@@ -1,0 +1,10 @@
+category	candidate	decision	contract_and_evidence	canonical_record
+sorted-live-view	Original java.util.ReverseOrderSortedSetView	TARGET_OWNED_REFINEMENT	Explicit bounds/readiness/removal masks preserve null payload and backing ownership; 14 baseline contract corrections	hsoliwal/com.synexia@e6489b972ea0fd045386bf28e57e9acf53bbad6f:synexia-openrewrite-recipes/recipes/jdk-sorted-mask-20261019/CATALOGUE.tsv
+sorted-membership	Bound checks then existing backing contains	SELECT	Comparator equivalence; array-backed diagnostic used 14 comparisons; no universal backing complexity guarantee	same canonical record
+sorted-membership	Copy values into another tree/snapshot	REJECT	Would detach live view and add payload ownership	same canonical record
+bitmap-range-popcount	Existing M3BitLane28 Java/libjava peer	REFINE_EXISTING_ATOMS	Mask endpoint words once; unchanged payload/metadata/JNI export; 212597 assertions per invocation	same canonical record
+bit-population	LeetCode 191 Number of 1 Bits	REFERENCE_ONLY	Problem category, no submission/editorial code copied	same canonical record
+mutable-bitset	HackerRank Java BitSet	REFERENCE_ONLY	Set/flip and maintained-count test category, no copied code	same canonical record
+range-mask	GeeksforGeeks count-set-bits category	UNVERIFIED_REFERENCE_ONLY	Independent retrieval pending; not an accepted source donor	same canonical record
+paired-xor	LeetCode 136 / HackerRank Lonely Integer	NO_SUBSTITUTION	Pair cancellation is not arbitrary cardinality or comparator membership	same canonical record
+native-dispatch	Force JNI for every count	REJECT	Explicit JNI remains slower in measured single-page workload; no automatic dispatch change	same canonical record

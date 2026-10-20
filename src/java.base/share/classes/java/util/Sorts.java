@@ -56,30 +56,70 @@ public final class Sorts {
 
     private Sorts() { }
 
-    /** Sorts an object array in natural order using the selected algorithm. */
+    /**
+     * Sorts an object array in natural order using the selected algorithm.
+     *
+     * @param <T> the array element type
+     * @param values the array to sort
+     * @param algorithm the selected sorting algorithm
+     */
     public static <T> void sort(T[] values, SortAlgorithm algorithm) {
         sort(values, 0, values.length, null, algorithm, ProgressMonitors.current());
     }
 
-    /** Sorts an object array using a comparator, or natural order when null. */
+    /**
+     * Sorts an object array using a comparator, or natural order when null.
+     *
+     * @param <T> the array element type
+     * @param values the array to sort
+     * @param comparator the value comparator, or {@code null} for natural order
+     * @param algorithm the selected sorting algorithm
+     */
     public static <T> void sort(T[] values, Comparator<? super T> comparator,
                                 SortAlgorithm algorithm) {
         sort(values, 0, values.length, comparator, algorithm, ProgressMonitors.current());
     }
 
-    /** Sorts an object range in natural order with the current progress monitor. */
+    /**
+     * Sorts an object range in natural order with the current progress monitor.
+     *
+     * @param <T> the array element type
+     * @param values the array to sort
+     * @param fromIndex the first source index, inclusive
+     * @param toIndex the last source index, exclusive
+     * @param algorithm the selected sorting algorithm
+     */
     public static <T> void sort(T[] values, int fromIndex, int toIndex,
                                 SortAlgorithm algorithm) {
         sort(values, fromIndex, toIndex, null, algorithm, ProgressMonitors.current());
     }
 
-    /** Sorts an object range using the current progress monitor. */
+    /**
+     * Sorts an object range using the current progress monitor.
+     *
+     * @param <T> the array element type
+     * @param values the array to sort
+     * @param fromIndex the first source index, inclusive
+     * @param toIndex the last source index, exclusive
+     * @param comparator the value comparator, or {@code null} for natural order
+     * @param algorithm the selected sorting algorithm
+     */
     public static <T> void sort(T[] values, int fromIndex, int toIndex,
                                 Comparator<? super T> comparator, SortAlgorithm algorithm) {
         sort(values, fromIndex, toIndex, comparator, algorithm, ProgressMonitors.current());
     }
 
-    /** Sorts an object range with a borrowed, nullable progress monitor. */
+    /**
+     * Sorts an object range with a borrowed, nullable progress monitor.
+     *
+     * @param <T> the array element type
+     * @param values the array to sort
+     * @param fromIndex the first source index, inclusive
+     * @param toIndex the last source index, exclusive
+     * @param comparator the value comparator, or {@code null} for natural order
+     * @param algorithm the selected sorting algorithm
+     * @param monitor a borrowed monitor, or {@code null} to disable progress and cancellation
+     */
     public static <T> void sort(T[] values, int fromIndex, int toIndex,
                                 Comparator<? super T> comparator, SortAlgorithm algorithm,
                                 ProgressMonitor monitor) {
@@ -101,24 +141,60 @@ public final class Sorts {
         }
     }
 
-    /** Returns sorted absolute source indices for an object array in natural order. */
+    /**
+     * Returns sorted absolute source indices for an object array in natural order.
+     *
+     * @param <T> the array element type
+     * @param values the source array, which is not rearranged
+     * @param algorithm the selected sorting algorithm
+     * @return absolute source indices in the selected sorted order
+     */
     public static <T> int[] order(T[] values, SortAlgorithm algorithm) {
         return order(values, 0, values.length, null, algorithm, ProgressMonitors.current());
     }
 
-    /** Returns sorted absolute source indices using a comparator or natural order. */
+    /**
+     * Returns sorted absolute source indices using a comparator or natural order.
+     *
+     * @param <T> the array element type
+     * @param values the source array, which is not rearranged
+     * @param comparator the value comparator, or {@code null} for natural order
+     * @param algorithm the selected sorting algorithm
+     * @return absolute source indices in the selected sorted order
+     */
     public static <T> int[] order(T[] values, Comparator<? super T> comparator,
                                  SortAlgorithm algorithm) {
         return order(values, 0, values.length, comparator, algorithm, ProgressMonitors.current());
     }
 
-    /** Returns sorted absolute indices for an object range with the current monitor. */
+    /**
+     * Returns sorted absolute indices for an object range with the current monitor.
+     *
+     * @param <T> the array element type
+     * @param values the source array, which is not rearranged
+     * @param fromIndex the first source index, inclusive
+     * @param toIndex the last source index, exclusive
+     * @param comparator the value comparator, or {@code null} for natural order
+     * @param algorithm the selected sorting algorithm
+     * @return absolute source indices in the selected sorted order
+     */
     public static <T> int[] order(T[] values, int fromIndex, int toIndex,
                                  Comparator<? super T> comparator, SortAlgorithm algorithm) {
         return order(values, fromIndex, toIndex, comparator, algorithm, ProgressMonitors.current());
     }
 
-    /** Returns sorted absolute indices; it never rearranges the object array. */
+    /**
+     * Returns sorted absolute indices; it never rearranges the object array.
+     *
+     * @param <T> the array element type
+     * @param values the source array, which is not rearranged
+     * @param fromIndex the first source index, inclusive
+     * @param toIndex the last source index, exclusive
+     * @param comparator the value comparator, or {@code null} for natural order
+     * @param algorithm the selected sorting algorithm
+     * @param monitor a borrowed monitor, or {@code null} to disable progress and cancellation
+     * @return absolute source indices in the selected sorted order
+     */
     public static <T> int[] order(T[] values, int fromIndex, int toIndex,
                                  Comparator<? super T> comparator, SortAlgorithm algorithm,
                                  ProgressMonitor monitor) {
@@ -134,13 +210,28 @@ public final class Sorts {
     /**
      * Returns ordered coordinates over a caller-owned indexed source. The comparator
      * receives absolute indices; the values and any aligned masks remain with the caller.
+     *
+     * @param fromIndex the first source index, inclusive
+     * @param toIndex the last source index, exclusive
+     * @param comparator the comparison of absolute source indices
+     * @param algorithm the selected sorting algorithm
+     * @return absolute source indices in the selected sorted order
      */
     public static int[] order(int fromIndex, int toIndex, IntBinaryOperator comparator,
                               SortAlgorithm algorithm) {
         return order(fromIndex, toIndex, comparator, algorithm, ProgressMonitors.current());
     }
 
-    /** Returns ordered coordinates using a borrowed, nullable monitor. */
+    /**
+     * Returns ordered coordinates using a borrowed, nullable monitor.
+     *
+     * @param fromIndex the first source index, inclusive
+     * @param toIndex the last source index, exclusive
+     * @param comparator the comparison of absolute source indices
+     * @param algorithm the selected sorting algorithm
+     * @param monitor a borrowed monitor, or {@code null} to disable progress and cancellation
+     * @return absolute source indices in the selected sorted order
+     */
     public static int[] order(int fromIndex, int toIndex, IntBinaryOperator comparator,
                               SortAlgorithm algorithm, ProgressMonitor monitor) {
         checkRange(Integer.MAX_VALUE, fromIndex, toIndex);
@@ -152,13 +243,28 @@ public final class Sorts {
     /**
      * Returns sorted coordinates after evaluating exactly one signed-long key per
      * input coordinate on successful key admission. Supports every registered algorithm.
+     *
+     * @param fromIndex the first source index, inclusive
+     * @param toIndex the last source index, exclusive
+     * @param keys the function supplying a signed-long key for each absolute source index
+     * @param algorithm the selected sorting algorithm
+     * @return absolute source indices in the selected sorted order
      */
     public static int[] orderByLong(int fromIndex, int toIndex, IntToLongFunction keys,
                                     SortAlgorithm algorithm) {
         return orderByLong(fromIndex, toIndex, keys, algorithm, ProgressMonitors.current());
     }
 
-    /** Returns sorted coordinates using cached keys and a borrowed nullable monitor. */
+    /**
+     * Returns sorted coordinates using cached keys and a borrowed nullable monitor.
+     *
+     * @param fromIndex the first source index, inclusive
+     * @param toIndex the last source index, exclusive
+     * @param keys the function supplying a signed-long key for each absolute source index
+     * @param algorithm the selected sorting algorithm
+     * @param monitor a borrowed monitor, or {@code null} to disable progress and cancellation
+     * @return absolute source indices in the selected sorted order
+     */
     public static int[] orderByLong(int fromIndex, int toIndex, IntToLongFunction keys,
                                     SortAlgorithm algorithm, ProgressMonitor monitor) {
         checkRange(Integer.MAX_VALUE, fromIndex, toIndex);
@@ -170,19 +276,40 @@ public final class Sorts {
     /**
      * Sorts an existing lane of physical indices, including duplicates and negative
      * labels if the caller's comparator supports them. The comparator receives labels.
+     *
+     * @param indices the index labels to reorder
+     * @param comparator the comparison of supplied index labels
+     * @param algorithm the selected sorting algorithm
      */
     public static void sortIndices(int[] indices, IntBinaryOperator comparator,
                                     SortAlgorithm algorithm) {
         sortIndices(indices, 0, indices.length, comparator, algorithm, ProgressMonitors.current());
     }
 
-    /** Sorts a range of an index lane using the current monitor. */
+    /**
+     * Sorts a range of an index lane using the current monitor.
+     *
+     * @param indices the index labels to reorder
+     * @param fromIndex the first index-lane position, inclusive
+     * @param toIndex the last index-lane position, exclusive
+     * @param comparator the comparison of supplied index labels
+     * @param algorithm the selected sorting algorithm
+     */
     public static void sortIndices(int[] indices, int fromIndex, int toIndex,
                                     IntBinaryOperator comparator, SortAlgorithm algorithm) {
         sortIndices(indices, fromIndex, toIndex, comparator, algorithm, ProgressMonitors.current());
     }
 
-    /** Sorts a copied index window, then commits it after all callbacks succeed. */
+    /**
+     * Sorts a copied index window, then commits it after all callbacks succeed.
+     *
+     * @param indices the index labels to reorder
+     * @param fromIndex the first index-lane position, inclusive
+     * @param toIndex the last index-lane position, exclusive
+     * @param comparator the comparison of supplied index labels
+     * @param algorithm the selected sorting algorithm
+     * @param monitor a borrowed monitor, or {@code null} to disable progress and cancellation
+     */
     public static void sortIndices(int[] indices, int fromIndex, int toIndex,
                                     IntBinaryOperator comparator, SortAlgorithm algorithm,
                                     ProgressMonitor monitor) {
@@ -195,17 +322,37 @@ public final class Sorts {
         System.arraycopy(work, 0, indices, fromIndex, work.length);
     }
 
-    /** Sorts a boolean array with the selected algorithm and current monitor. */
+    /**
+     * Sorts a boolean array with the selected algorithm and current monitor.
+     *
+     * @param values the array to sort
+     * @param algorithm the selected sorting algorithm
+     */
     public static void sort(boolean[] values, SortAlgorithm algorithm) {
         sort(values, 0, values.length, algorithm, ProgressMonitors.current());
     }
 
-    /** Sorts a half-open boolean range with the current monitor. */
+    /**
+     * Sorts a half-open boolean range with the current monitor.
+     *
+     * @param values the array to sort
+     * @param fromIndex the first source index, inclusive
+     * @param toIndex the last source index, exclusive
+     * @param algorithm the selected sorting algorithm
+     */
     public static void sort(boolean[] values, int fromIndex, int toIndex, SortAlgorithm algorithm) {
         sort(values, fromIndex, toIndex, algorithm, ProgressMonitors.current());
     }
 
-    /** Sorts a boolean range with a borrowed, nullable monitor. */
+    /**
+     * Sorts a boolean range with a borrowed, nullable monitor.
+     *
+     * @param values the array to sort
+     * @param fromIndex the first source index, inclusive
+     * @param toIndex the last source index, exclusive
+     * @param algorithm the selected sorting algorithm
+     * @param monitor a borrowed monitor, or {@code null} to disable progress and cancellation
+     */
     public static void sort(boolean[] values, int fromIndex, int toIndex,
                              SortAlgorithm algorithm, ProgressMonitor monitor) {
         int[] order = order(values, fromIndex, toIndex, algorithm, monitor);
@@ -226,34 +373,77 @@ public final class Sorts {
         }
     }
 
-    /** Returns sorted absolute source indices without rearranging a boolean array. */
+    /**
+     * Returns sorted absolute source indices without rearranging a boolean array.
+     *
+     * @param values the source array, which is not rearranged
+     * @param algorithm the selected sorting algorithm
+     * @return absolute source indices in the selected sorted order
+     */
     public static int[] order(boolean[] values, SortAlgorithm algorithm) {
         return order(values, 0, values.length, algorithm, ProgressMonitors.current());
     }
 
-    /** Returns sorted absolute indices for a half-open boolean range. */
+    /**
+     * Returns sorted absolute indices for a half-open boolean range.
+     *
+     * @param values the source array, which is not rearranged
+     * @param fromIndex the first source index, inclusive
+     * @param toIndex the last source index, exclusive
+     * @param algorithm the selected sorting algorithm
+     * @return absolute source indices in the selected sorted order
+     */
     public static int[] order(boolean[] values, int fromIndex, int toIndex, SortAlgorithm algorithm) {
         return order(values, fromIndex, toIndex, algorithm, ProgressMonitors.current());
     }
 
-    /** Returns sorted absolute indices using a borrowed, nullable monitor. */
+    /**
+     * Returns sorted absolute indices using a borrowed, nullable monitor.
+     *
+     * @param values the source array, which is not rearranged
+     * @param fromIndex the first source index, inclusive
+     * @param toIndex the last source index, exclusive
+     * @param algorithm the selected sorting algorithm
+     * @param monitor a borrowed monitor, or {@code null} to disable progress and cancellation
+     * @return absolute source indices in the selected sorted order
+     */
     public static int[] order(boolean[] values, int fromIndex, int toIndex,
                               SortAlgorithm algorithm, ProgressMonitor monitor) {
         return primitiveOrder(values.length, fromIndex, toIndex, algorithm, monitor,
                 (left, right) -> Boolean.compare(values[left], values[right]), index -> values[index] ? 1L : 0L);
     }
 
-    /** Sorts a byte array with the selected algorithm and current monitor. */
+    /**
+     * Sorts a byte array with the selected algorithm and current monitor.
+     *
+     * @param values the array to sort
+     * @param algorithm the selected sorting algorithm
+     */
     public static void sort(byte[] values, SortAlgorithm algorithm) {
         sort(values, 0, values.length, algorithm, ProgressMonitors.current());
     }
 
-    /** Sorts a half-open byte range with the current monitor. */
+    /**
+     * Sorts a half-open byte range with the current monitor.
+     *
+     * @param values the array to sort
+     * @param fromIndex the first source index, inclusive
+     * @param toIndex the last source index, exclusive
+     * @param algorithm the selected sorting algorithm
+     */
     public static void sort(byte[] values, int fromIndex, int toIndex, SortAlgorithm algorithm) {
         sort(values, fromIndex, toIndex, algorithm, ProgressMonitors.current());
     }
 
-    /** Sorts a byte range with a borrowed, nullable monitor. */
+    /**
+     * Sorts a byte range with a borrowed, nullable monitor.
+     *
+     * @param values the array to sort
+     * @param fromIndex the first source index, inclusive
+     * @param toIndex the last source index, exclusive
+     * @param algorithm the selected sorting algorithm
+     * @param monitor a borrowed monitor, or {@code null} to disable progress and cancellation
+     */
     public static void sort(byte[] values, int fromIndex, int toIndex,
                              SortAlgorithm algorithm, ProgressMonitor monitor) {
         int[] order = order(values, fromIndex, toIndex, algorithm, monitor);
@@ -274,34 +464,77 @@ public final class Sorts {
         }
     }
 
-    /** Returns sorted absolute source indices without rearranging a byte array. */
+    /**
+     * Returns sorted absolute source indices without rearranging a byte array.
+     *
+     * @param values the source array, which is not rearranged
+     * @param algorithm the selected sorting algorithm
+     * @return absolute source indices in the selected sorted order
+     */
     public static int[] order(byte[] values, SortAlgorithm algorithm) {
         return order(values, 0, values.length, algorithm, ProgressMonitors.current());
     }
 
-    /** Returns sorted absolute indices for a half-open byte range. */
+    /**
+     * Returns sorted absolute indices for a half-open byte range.
+     *
+     * @param values the source array, which is not rearranged
+     * @param fromIndex the first source index, inclusive
+     * @param toIndex the last source index, exclusive
+     * @param algorithm the selected sorting algorithm
+     * @return absolute source indices in the selected sorted order
+     */
     public static int[] order(byte[] values, int fromIndex, int toIndex, SortAlgorithm algorithm) {
         return order(values, fromIndex, toIndex, algorithm, ProgressMonitors.current());
     }
 
-    /** Returns sorted absolute indices using a borrowed, nullable monitor. */
+    /**
+     * Returns sorted absolute indices using a borrowed, nullable monitor.
+     *
+     * @param values the source array, which is not rearranged
+     * @param fromIndex the first source index, inclusive
+     * @param toIndex the last source index, exclusive
+     * @param algorithm the selected sorting algorithm
+     * @param monitor a borrowed monitor, or {@code null} to disable progress and cancellation
+     * @return absolute source indices in the selected sorted order
+     */
     public static int[] order(byte[] values, int fromIndex, int toIndex,
                               SortAlgorithm algorithm, ProgressMonitor monitor) {
         return primitiveOrder(values.length, fromIndex, toIndex, algorithm, monitor,
                 (left, right) -> Byte.compare(values[left], values[right]), index -> values[index]);
     }
 
-    /** Sorts a short array with the selected algorithm and current monitor. */
+    /**
+     * Sorts a short array with the selected algorithm and current monitor.
+     *
+     * @param values the array to sort
+     * @param algorithm the selected sorting algorithm
+     */
     public static void sort(short[] values, SortAlgorithm algorithm) {
         sort(values, 0, values.length, algorithm, ProgressMonitors.current());
     }
 
-    /** Sorts a half-open short range with the current monitor. */
+    /**
+     * Sorts a half-open short range with the current monitor.
+     *
+     * @param values the array to sort
+     * @param fromIndex the first source index, inclusive
+     * @param toIndex the last source index, exclusive
+     * @param algorithm the selected sorting algorithm
+     */
     public static void sort(short[] values, int fromIndex, int toIndex, SortAlgorithm algorithm) {
         sort(values, fromIndex, toIndex, algorithm, ProgressMonitors.current());
     }
 
-    /** Sorts a short range with a borrowed, nullable monitor. */
+    /**
+     * Sorts a short range with a borrowed, nullable monitor.
+     *
+     * @param values the array to sort
+     * @param fromIndex the first source index, inclusive
+     * @param toIndex the last source index, exclusive
+     * @param algorithm the selected sorting algorithm
+     * @param monitor a borrowed monitor, or {@code null} to disable progress and cancellation
+     */
     public static void sort(short[] values, int fromIndex, int toIndex,
                              SortAlgorithm algorithm, ProgressMonitor monitor) {
         int[] order = order(values, fromIndex, toIndex, algorithm, monitor);
@@ -322,34 +555,77 @@ public final class Sorts {
         }
     }
 
-    /** Returns sorted absolute source indices without rearranging a short array. */
+    /**
+     * Returns sorted absolute source indices without rearranging a short array.
+     *
+     * @param values the source array, which is not rearranged
+     * @param algorithm the selected sorting algorithm
+     * @return absolute source indices in the selected sorted order
+     */
     public static int[] order(short[] values, SortAlgorithm algorithm) {
         return order(values, 0, values.length, algorithm, ProgressMonitors.current());
     }
 
-    /** Returns sorted absolute indices for a half-open short range. */
+    /**
+     * Returns sorted absolute indices for a half-open short range.
+     *
+     * @param values the source array, which is not rearranged
+     * @param fromIndex the first source index, inclusive
+     * @param toIndex the last source index, exclusive
+     * @param algorithm the selected sorting algorithm
+     * @return absolute source indices in the selected sorted order
+     */
     public static int[] order(short[] values, int fromIndex, int toIndex, SortAlgorithm algorithm) {
         return order(values, fromIndex, toIndex, algorithm, ProgressMonitors.current());
     }
 
-    /** Returns sorted absolute indices using a borrowed, nullable monitor. */
+    /**
+     * Returns sorted absolute indices using a borrowed, nullable monitor.
+     *
+     * @param values the source array, which is not rearranged
+     * @param fromIndex the first source index, inclusive
+     * @param toIndex the last source index, exclusive
+     * @param algorithm the selected sorting algorithm
+     * @param monitor a borrowed monitor, or {@code null} to disable progress and cancellation
+     * @return absolute source indices in the selected sorted order
+     */
     public static int[] order(short[] values, int fromIndex, int toIndex,
                               SortAlgorithm algorithm, ProgressMonitor monitor) {
         return primitiveOrder(values.length, fromIndex, toIndex, algorithm, monitor,
                 (left, right) -> Short.compare(values[left], values[right]), index -> values[index]);
     }
 
-    /** Sorts a char array with the selected algorithm and current monitor. */
+    /**
+     * Sorts a char array with the selected algorithm and current monitor.
+     *
+     * @param values the array to sort
+     * @param algorithm the selected sorting algorithm
+     */
     public static void sort(char[] values, SortAlgorithm algorithm) {
         sort(values, 0, values.length, algorithm, ProgressMonitors.current());
     }
 
-    /** Sorts a half-open char range with the current monitor. */
+    /**
+     * Sorts a half-open char range with the current monitor.
+     *
+     * @param values the array to sort
+     * @param fromIndex the first source index, inclusive
+     * @param toIndex the last source index, exclusive
+     * @param algorithm the selected sorting algorithm
+     */
     public static void sort(char[] values, int fromIndex, int toIndex, SortAlgorithm algorithm) {
         sort(values, fromIndex, toIndex, algorithm, ProgressMonitors.current());
     }
 
-    /** Sorts a char range with a borrowed, nullable monitor. */
+    /**
+     * Sorts a char range with a borrowed, nullable monitor.
+     *
+     * @param values the array to sort
+     * @param fromIndex the first source index, inclusive
+     * @param toIndex the last source index, exclusive
+     * @param algorithm the selected sorting algorithm
+     * @param monitor a borrowed monitor, or {@code null} to disable progress and cancellation
+     */
     public static void sort(char[] values, int fromIndex, int toIndex,
                              SortAlgorithm algorithm, ProgressMonitor monitor) {
         int[] order = order(values, fromIndex, toIndex, algorithm, monitor);
@@ -370,34 +646,77 @@ public final class Sorts {
         }
     }
 
-    /** Returns sorted absolute source indices without rearranging a char array. */
+    /**
+     * Returns sorted absolute source indices without rearranging a char array.
+     *
+     * @param values the source array, which is not rearranged
+     * @param algorithm the selected sorting algorithm
+     * @return absolute source indices in the selected sorted order
+     */
     public static int[] order(char[] values, SortAlgorithm algorithm) {
         return order(values, 0, values.length, algorithm, ProgressMonitors.current());
     }
 
-    /** Returns sorted absolute indices for a half-open char range. */
+    /**
+     * Returns sorted absolute indices for a half-open char range.
+     *
+     * @param values the source array, which is not rearranged
+     * @param fromIndex the first source index, inclusive
+     * @param toIndex the last source index, exclusive
+     * @param algorithm the selected sorting algorithm
+     * @return absolute source indices in the selected sorted order
+     */
     public static int[] order(char[] values, int fromIndex, int toIndex, SortAlgorithm algorithm) {
         return order(values, fromIndex, toIndex, algorithm, ProgressMonitors.current());
     }
 
-    /** Returns sorted absolute indices using a borrowed, nullable monitor. */
+    /**
+     * Returns sorted absolute indices using a borrowed, nullable monitor.
+     *
+     * @param values the source array, which is not rearranged
+     * @param fromIndex the first source index, inclusive
+     * @param toIndex the last source index, exclusive
+     * @param algorithm the selected sorting algorithm
+     * @param monitor a borrowed monitor, or {@code null} to disable progress and cancellation
+     * @return absolute source indices in the selected sorted order
+     */
     public static int[] order(char[] values, int fromIndex, int toIndex,
                               SortAlgorithm algorithm, ProgressMonitor monitor) {
         return primitiveOrder(values.length, fromIndex, toIndex, algorithm, monitor,
                 (left, right) -> Character.compare(values[left], values[right]), index -> values[index]);
     }
 
-    /** Sorts a int array with the selected algorithm and current monitor. */
+    /**
+     * Sorts a int array with the selected algorithm and current monitor.
+     *
+     * @param values the array to sort
+     * @param algorithm the selected sorting algorithm
+     */
     public static void sort(int[] values, SortAlgorithm algorithm) {
         sort(values, 0, values.length, algorithm, ProgressMonitors.current());
     }
 
-    /** Sorts a half-open int range with the current monitor. */
+    /**
+     * Sorts a half-open int range with the current monitor.
+     *
+     * @param values the array to sort
+     * @param fromIndex the first source index, inclusive
+     * @param toIndex the last source index, exclusive
+     * @param algorithm the selected sorting algorithm
+     */
     public static void sort(int[] values, int fromIndex, int toIndex, SortAlgorithm algorithm) {
         sort(values, fromIndex, toIndex, algorithm, ProgressMonitors.current());
     }
 
-    /** Sorts a int range with a borrowed, nullable monitor. */
+    /**
+     * Sorts a int range with a borrowed, nullable monitor.
+     *
+     * @param values the array to sort
+     * @param fromIndex the first source index, inclusive
+     * @param toIndex the last source index, exclusive
+     * @param algorithm the selected sorting algorithm
+     * @param monitor a borrowed monitor, or {@code null} to disable progress and cancellation
+     */
     public static void sort(int[] values, int fromIndex, int toIndex,
                              SortAlgorithm algorithm, ProgressMonitor monitor) {
         int[] order = order(values, fromIndex, toIndex, algorithm, monitor);
@@ -418,34 +737,77 @@ public final class Sorts {
         }
     }
 
-    /** Returns sorted absolute source indices without rearranging a int array. */
+    /**
+     * Returns sorted absolute source indices without rearranging a int array.
+     *
+     * @param values the source array, which is not rearranged
+     * @param algorithm the selected sorting algorithm
+     * @return absolute source indices in the selected sorted order
+     */
     public static int[] order(int[] values, SortAlgorithm algorithm) {
         return order(values, 0, values.length, algorithm, ProgressMonitors.current());
     }
 
-    /** Returns sorted absolute indices for a half-open int range. */
+    /**
+     * Returns sorted absolute indices for a half-open int range.
+     *
+     * @param values the source array, which is not rearranged
+     * @param fromIndex the first source index, inclusive
+     * @param toIndex the last source index, exclusive
+     * @param algorithm the selected sorting algorithm
+     * @return absolute source indices in the selected sorted order
+     */
     public static int[] order(int[] values, int fromIndex, int toIndex, SortAlgorithm algorithm) {
         return order(values, fromIndex, toIndex, algorithm, ProgressMonitors.current());
     }
 
-    /** Returns sorted absolute indices using a borrowed, nullable monitor. */
+    /**
+     * Returns sorted absolute indices using a borrowed, nullable monitor.
+     *
+     * @param values the source array, which is not rearranged
+     * @param fromIndex the first source index, inclusive
+     * @param toIndex the last source index, exclusive
+     * @param algorithm the selected sorting algorithm
+     * @param monitor a borrowed monitor, or {@code null} to disable progress and cancellation
+     * @return absolute source indices in the selected sorted order
+     */
     public static int[] order(int[] values, int fromIndex, int toIndex,
                               SortAlgorithm algorithm, ProgressMonitor monitor) {
         return primitiveOrder(values.length, fromIndex, toIndex, algorithm, monitor,
                 (left, right) -> Integer.compare(values[left], values[right]), index -> values[index]);
     }
 
-    /** Sorts a long array with the selected algorithm and current monitor. */
+    /**
+     * Sorts a long array with the selected algorithm and current monitor.
+     *
+     * @param values the array to sort
+     * @param algorithm the selected sorting algorithm
+     */
     public static void sort(long[] values, SortAlgorithm algorithm) {
         sort(values, 0, values.length, algorithm, ProgressMonitors.current());
     }
 
-    /** Sorts a half-open long range with the current monitor. */
+    /**
+     * Sorts a half-open long range with the current monitor.
+     *
+     * @param values the array to sort
+     * @param fromIndex the first source index, inclusive
+     * @param toIndex the last source index, exclusive
+     * @param algorithm the selected sorting algorithm
+     */
     public static void sort(long[] values, int fromIndex, int toIndex, SortAlgorithm algorithm) {
         sort(values, fromIndex, toIndex, algorithm, ProgressMonitors.current());
     }
 
-    /** Sorts a long range with a borrowed, nullable monitor. */
+    /**
+     * Sorts a long range with a borrowed, nullable monitor.
+     *
+     * @param values the array to sort
+     * @param fromIndex the first source index, inclusive
+     * @param toIndex the last source index, exclusive
+     * @param algorithm the selected sorting algorithm
+     * @param monitor a borrowed monitor, or {@code null} to disable progress and cancellation
+     */
     public static void sort(long[] values, int fromIndex, int toIndex,
                              SortAlgorithm algorithm, ProgressMonitor monitor) {
         int[] order = order(values, fromIndex, toIndex, algorithm, monitor);
@@ -466,34 +828,77 @@ public final class Sorts {
         }
     }
 
-    /** Returns sorted absolute source indices without rearranging a long array. */
+    /**
+     * Returns sorted absolute source indices without rearranging a long array.
+     *
+     * @param values the source array, which is not rearranged
+     * @param algorithm the selected sorting algorithm
+     * @return absolute source indices in the selected sorted order
+     */
     public static int[] order(long[] values, SortAlgorithm algorithm) {
         return order(values, 0, values.length, algorithm, ProgressMonitors.current());
     }
 
-    /** Returns sorted absolute indices for a half-open long range. */
+    /**
+     * Returns sorted absolute indices for a half-open long range.
+     *
+     * @param values the source array, which is not rearranged
+     * @param fromIndex the first source index, inclusive
+     * @param toIndex the last source index, exclusive
+     * @param algorithm the selected sorting algorithm
+     * @return absolute source indices in the selected sorted order
+     */
     public static int[] order(long[] values, int fromIndex, int toIndex, SortAlgorithm algorithm) {
         return order(values, fromIndex, toIndex, algorithm, ProgressMonitors.current());
     }
 
-    /** Returns sorted absolute indices using a borrowed, nullable monitor. */
+    /**
+     * Returns sorted absolute indices using a borrowed, nullable monitor.
+     *
+     * @param values the source array, which is not rearranged
+     * @param fromIndex the first source index, inclusive
+     * @param toIndex the last source index, exclusive
+     * @param algorithm the selected sorting algorithm
+     * @param monitor a borrowed monitor, or {@code null} to disable progress and cancellation
+     * @return absolute source indices in the selected sorted order
+     */
     public static int[] order(long[] values, int fromIndex, int toIndex,
                               SortAlgorithm algorithm, ProgressMonitor monitor) {
         return primitiveOrder(values.length, fromIndex, toIndex, algorithm, monitor,
                 (left, right) -> Long.compare(values[left], values[right]), index -> values[index]);
     }
 
-    /** Sorts a float array with the selected algorithm and current monitor. */
+    /**
+     * Sorts a float array with the selected algorithm and current monitor.
+     *
+     * @param values the array to sort
+     * @param algorithm the selected sorting algorithm
+     */
     public static void sort(float[] values, SortAlgorithm algorithm) {
         sort(values, 0, values.length, algorithm, ProgressMonitors.current());
     }
 
-    /** Sorts a half-open float range with the current monitor. */
+    /**
+     * Sorts a half-open float range with the current monitor.
+     *
+     * @param values the array to sort
+     * @param fromIndex the first source index, inclusive
+     * @param toIndex the last source index, exclusive
+     * @param algorithm the selected sorting algorithm
+     */
     public static void sort(float[] values, int fromIndex, int toIndex, SortAlgorithm algorithm) {
         sort(values, fromIndex, toIndex, algorithm, ProgressMonitors.current());
     }
 
-    /** Sorts a float range with a borrowed, nullable monitor. */
+    /**
+     * Sorts a float range with a borrowed, nullable monitor.
+     *
+     * @param values the array to sort
+     * @param fromIndex the first source index, inclusive
+     * @param toIndex the last source index, exclusive
+     * @param algorithm the selected sorting algorithm
+     * @param monitor a borrowed monitor, or {@code null} to disable progress and cancellation
+     */
     public static void sort(float[] values, int fromIndex, int toIndex,
                              SortAlgorithm algorithm, ProgressMonitor monitor) {
         int[] order = order(values, fromIndex, toIndex, algorithm, monitor);
@@ -514,34 +919,77 @@ public final class Sorts {
         }
     }
 
-    /** Returns sorted absolute source indices without rearranging a float array. */
+    /**
+     * Returns sorted absolute source indices without rearranging a float array.
+     *
+     * @param values the source array, which is not rearranged
+     * @param algorithm the selected sorting algorithm
+     * @return absolute source indices in the selected sorted order
+     */
     public static int[] order(float[] values, SortAlgorithm algorithm) {
         return order(values, 0, values.length, algorithm, ProgressMonitors.current());
     }
 
-    /** Returns sorted absolute indices for a half-open float range. */
+    /**
+     * Returns sorted absolute indices for a half-open float range.
+     *
+     * @param values the source array, which is not rearranged
+     * @param fromIndex the first source index, inclusive
+     * @param toIndex the last source index, exclusive
+     * @param algorithm the selected sorting algorithm
+     * @return absolute source indices in the selected sorted order
+     */
     public static int[] order(float[] values, int fromIndex, int toIndex, SortAlgorithm algorithm) {
         return order(values, fromIndex, toIndex, algorithm, ProgressMonitors.current());
     }
 
-    /** Returns sorted absolute indices using a borrowed, nullable monitor. */
+    /**
+     * Returns sorted absolute indices using a borrowed, nullable monitor.
+     *
+     * @param values the source array, which is not rearranged
+     * @param fromIndex the first source index, inclusive
+     * @param toIndex the last source index, exclusive
+     * @param algorithm the selected sorting algorithm
+     * @param monitor a borrowed monitor, or {@code null} to disable progress and cancellation
+     * @return absolute source indices in the selected sorted order
+     */
     public static int[] order(float[] values, int fromIndex, int toIndex,
                               SortAlgorithm algorithm, ProgressMonitor monitor) {
         return primitiveOrder(values.length, fromIndex, toIndex, algorithm, monitor,
                 (left, right) -> Float.compare(values[left], values[right]), index -> floatKey(values[index]));
     }
 
-    /** Sorts a double array with the selected algorithm and current monitor. */
+    /**
+     * Sorts a double array with the selected algorithm and current monitor.
+     *
+     * @param values the array to sort
+     * @param algorithm the selected sorting algorithm
+     */
     public static void sort(double[] values, SortAlgorithm algorithm) {
         sort(values, 0, values.length, algorithm, ProgressMonitors.current());
     }
 
-    /** Sorts a half-open double range with the current monitor. */
+    /**
+     * Sorts a half-open double range with the current monitor.
+     *
+     * @param values the array to sort
+     * @param fromIndex the first source index, inclusive
+     * @param toIndex the last source index, exclusive
+     * @param algorithm the selected sorting algorithm
+     */
     public static void sort(double[] values, int fromIndex, int toIndex, SortAlgorithm algorithm) {
         sort(values, fromIndex, toIndex, algorithm, ProgressMonitors.current());
     }
 
-    /** Sorts a double range with a borrowed, nullable monitor. */
+    /**
+     * Sorts a double range with a borrowed, nullable monitor.
+     *
+     * @param values the array to sort
+     * @param fromIndex the first source index, inclusive
+     * @param toIndex the last source index, exclusive
+     * @param algorithm the selected sorting algorithm
+     * @param monitor a borrowed monitor, or {@code null} to disable progress and cancellation
+     */
     public static void sort(double[] values, int fromIndex, int toIndex,
                              SortAlgorithm algorithm, ProgressMonitor monitor) {
         int[] order = order(values, fromIndex, toIndex, algorithm, monitor);
@@ -562,17 +1010,40 @@ public final class Sorts {
         }
     }
 
-    /** Returns sorted absolute source indices without rearranging a double array. */
+    /**
+     * Returns sorted absolute source indices without rearranging a double array.
+     *
+     * @param values the source array, which is not rearranged
+     * @param algorithm the selected sorting algorithm
+     * @return absolute source indices in the selected sorted order
+     */
     public static int[] order(double[] values, SortAlgorithm algorithm) {
         return order(values, 0, values.length, algorithm, ProgressMonitors.current());
     }
 
-    /** Returns sorted absolute indices for a half-open double range. */
+    /**
+     * Returns sorted absolute indices for a half-open double range.
+     *
+     * @param values the source array, which is not rearranged
+     * @param fromIndex the first source index, inclusive
+     * @param toIndex the last source index, exclusive
+     * @param algorithm the selected sorting algorithm
+     * @return absolute source indices in the selected sorted order
+     */
     public static int[] order(double[] values, int fromIndex, int toIndex, SortAlgorithm algorithm) {
         return order(values, fromIndex, toIndex, algorithm, ProgressMonitors.current());
     }
 
-    /** Returns sorted absolute indices using a borrowed, nullable monitor. */
+    /**
+     * Returns sorted absolute indices using a borrowed, nullable monitor.
+     *
+     * @param values the source array, which is not rearranged
+     * @param fromIndex the first source index, inclusive
+     * @param toIndex the last source index, exclusive
+     * @param algorithm the selected sorting algorithm
+     * @param monitor a borrowed monitor, or {@code null} to disable progress and cancellation
+     * @return absolute source indices in the selected sorted order
+     */
     public static int[] order(double[] values, int fromIndex, int toIndex,
                               SortAlgorithm algorithm, ProgressMonitor monitor) {
         return primitiveOrder(values.length, fromIndex, toIndex, algorithm, monitor,

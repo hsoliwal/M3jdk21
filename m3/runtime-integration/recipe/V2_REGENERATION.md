@@ -91,3 +91,18 @@ is one of the four modified-UTF-8 fan-in owners whose `superseded` list `apply.p
 (`MUTF8_FANIN`), so it is NOT recorded here: `apply.py --check` stays `source drift: .../M3StringFacts.java`
 on this branch (live master 2f2beb2eff7a fails the same check with 8 drifted targets, first
 `.../M3String.java`). Advancing that entry needs the fan-in owner's recipe, not this re-seal.
+
+## 2026-10-19 re-seal (immediate short String owner, leaf SHORTSTRING)
+
+Superseded-custody re-seal against e5869d9ffbd9fe65c03450e017e6691721ae2d9a (receiver of Synexia #12475): `runtime.patch` and every `after`
+image untouched. The immediate-string owner commit changed eight sealed targets (`M3String.java`,
+`M3StringOwner.java`, `M3StringPool.java`, `javaClasses.cpp`, `javaClasses.hpp`, `javaClasses.inline.hpp`,
+`vmClassMacros.hpp`, `vmSymbols.hpp`); their new hashes are recorded as `superseded`. Pre-existing
+drift on master (`M3StringFacts.java`, pinned by `apply.py` `MUTF8_FANIN`) is unchanged by this leaf.
+
+Correction (same leaf): `javaClasses.cpp`, `javaClasses.hpp` and `javaClasses.inline.hpp` are three of the four
+modified-UTF-8 fan-in owners whose `superseded` lists `apply.py` pins exactly (`MUTF8_FANIN`, with
+`M3StringFacts.java`), so their new hashes are NOT recorded: five targets are re-sealed (`M3String.java`,
+`M3StringOwner.java`, `M3StringPool.java`, `vmClassMacros.hpp`, `vmSymbols.hpp`). `apply.py --check` on this
+branch reports `modified UTF-8 source drift: .../javaClasses.cpp`; advancing the fan-in needs the fan-in owner
+recipe for all four owners together (live master already fails the check on `M3StringFacts.java`).

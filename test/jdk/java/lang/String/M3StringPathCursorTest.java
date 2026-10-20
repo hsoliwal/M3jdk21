@@ -77,6 +77,20 @@ public final class M3StringPathCursorTest {
             return new View(M3String.whole(owner), units.clone());
         }
 
+        View immediate(char[] units) {
+            // Padding is deliberately outside both admitted immediate alphabets.
+            // The actual packer's offset/length must exclude it.
+            char[] padded = new char[units.length + 4];
+            Arrays.fill(padded, '\uffff');
+            System.arraycopy(units, 0, padded, 2, units.length);
+            long allocatedBefore = nativeBytes;
+            long packed = M3StringImmediate.packChars(padded, 2, units.length);
+            require(packed != M3StringImmediate.NONE, "test immediate must be admitted");
+            M3StringImmediate owner = M3StringImmediate.of(packed);
+            require(nativeBytes == allocatedBefore, "immediate fixture adds no native payload");
+            return new View(M3String.whole(owner), units.clone());
+        }
+
         View join(View left, View right) {
             if (left.units.length == 0) return right;
             if (right.units.length == 0) return left;
@@ -119,6 +133,7 @@ public final class M3StringPathCursorTest {
 
     public static void main(String[] arguments) {
         basicBoundaries();
+        immediateLeafBoundaries();
         exhaustiveShortText();
         randomSharedSlices();
         deepTrees();
@@ -165,6 +180,58 @@ public final class M3StringPathCursorTest {
             verifyAccess(emptyChildren.slice(1, emptyChildren.units.length - 1), 5);
             verifyStreams(emptyChildren);
         }
+    }
+
+    private static void immediateLeafBoundaries() {
+        long checksBefore = checks;
+        long scenariosBefore = scenarios;
+        char[][] spellings = {
+            {'\0'}, {'\u00ff', 'A', '\0'},
+            {'a', 'B', '0', '_', '$', '\u00ff', 'z'},
+            "aB09_$Zx".toCharArray(), "aB09_$Zxy".toCharArray(),
+            "aB09_$Zxyz".toCharArray()
+        };
+        try (NativeFixture fixture = new NativeFixture()) {
+            View nativeWide = fixture.atom(new char[] {'x', '\ud83d', '\ude42', '\u0100'}, 2, true);
+            View nativeLittle = fixture.atom(new char[] {'\uffff', '\ud800', 'y'}, 2, false);
+            View empty = new View(M3String.empty(), new char[0]);
+            long seed = 0x494d4d4544494154L;
+            for (char[] spelling : spellings) {
+                View immediate = fixture.immediate(spelling);
+                require(immediate.text.owner() instanceof M3StringImmediate, "actual immediate owner");
+                verifyAccess(immediate, seed++);
+                verifyStreams(immediate);
+                for (int from = 0; from <= spelling.length; from++) {
+                    for (int to = from; to <= spelling.length; to++) {
+                        View slice = immediate.slice(from, to);
+                        verifyAccess(slice, seed++);
+                        verifyStreams(slice);
+                        View mixed = fixture.rawJoin(
+                                fixture.rawJoin(nativeWide.slice(1, 4), slice),
+                                fixture.rawJoin(slice, nativeLittle.slice(0, 2)));
+                        verifyAccess(mixed, seed++);
+                        verifyAccess(mixed.slice(1, mixed.units.length - 1), seed++);
+                        verifyStreams(mixed);
+                    }
+                }
+                View adjacent = fixture.immediate("0123AB_$xy".toCharArray()).slice(2, 9);
+                View shared = fixture.rawJoin(immediate, immediate);
+                View nested = fixture.rawJoin(
+                        fixture.rawJoin(empty, shared.slice(1, shared.units.length)),
+                        fixture.rawJoin(adjacent, empty));
+                verifyAccess(nested, seed++);
+                verifyStreams(nested);
+                List<View> pieces = List.of(immediate, nativeWide, adjacent, nativeLittle,
+                        immediate, adjacent.slice(1, adjacent.units.length));
+                View balanced = fixture.balanced(pieces, 0, pieces.size());
+                verifyAccess(balanced, seed++);
+                verifyAccess(balanced.slice(1, balanced.units.length - 1), seed++);
+                verifyStreams(balanced);
+            }
+        }
+        System.out.println("M3_IMMEDIATE_CURSOR_SEAMS_PASS checks=" + (checks - checksBefore)
+                + " scenarios=" + (scenarios - scenariosBefore)
+                + " actual_immediate_native_tuple_owners=true");
     }
 
     private static void exhaustiveShortText() {

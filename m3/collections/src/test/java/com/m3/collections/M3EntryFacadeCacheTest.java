@@ -1,5 +1,6 @@
 /*
  * Copyright 2026 Hitesh Soliwal and contributors
+ * Modified 2026 by Hitesh Soliwal and contributors: reconcile map projection tests with the no-retained-entry invariant; preserve generic LFU contracts.
  * SPDX-License-Identifier: Apache-2.0
  */
 package com.m3.collections;
@@ -7,6 +8,8 @@ package com.m3.collections;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
+import java.util.IdentityHashMap;
 import java.util.Map;
 import org.junit.jupiter.api.Test;
 
@@ -60,55 +63,151 @@ final class M3EntryFacadeCacheTest {
     }
 
     @Test
-    void strongMapEntryFacadesAreReusedUntilEvictionOrMappingRemoval() {
+    void strongMapEntryFacadesAreFreshLiveCallerProjections() throws ReflectiveOperationException {
         M3LinkedHashMap<Object, Integer> map = new M3LinkedHashMap<>();
-        Object key = new Object();
+        Object key = new String("same");
         map.put(key, 1);
+        map.put(new String("same"), 1);
 
         Map.Entry<Object, Integer> first = map.entrySet().iterator().next();
         Map.Entry<Object, Integer> second = map.entrySet().iterator().next();
-        assertSame(first, second);
-        assertSame(key, second.getKey());
+        assertNotSame(first, second);
+        assertSame(key, second.getKey(), "equal lookup keys must preserve the stored key identity");
         assertEquals(1, second.getValue());
         assertEquals(1, second.setValue(2));
+        assertEquals(2, first.getValue());
         assertEquals(2, map.get(key));
+        assertNoOwnedEntries(map);
 
         assertEquals(2, map.remove(key));
+        assertNull(first.getValue());
+        assertThrows(IllegalStateException.class, () -> first.setValue(9));
         map.put(key, 3);
         Map.Entry<Object, Integer> afterReinsert = map.entrySet().iterator().next();
         assertNotSame(first, afterReinsert);
+        assertNotSame(second, afterReinsert);
         assertEquals(3, afterReinsert.getValue());
+
+        map.clear();
+        map.put(null, null);
+        Map.Entry<Object, Integer> nullEntry = map.entrySet().iterator().next();
+        assertNotSame(nullEntry, map.entrySet().iterator().next());
+        assertNull(nullEntry.getKey());
+        assertNull(nullEntry.getValue());
+        assertNull(nullEntry.setValue(4));
+        assertEquals(4, map.get(null));
+        assertNoOwnedEntries(map);
     }
 
-
     @Test
-    void treeMapReusesLiveFacadesButKeepsEntrySnapshotsDetached() {
+    void treeMapKeepsFreshLiveFacadesAndDetachedImmutableSnapshots() throws ReflectiveOperationException {
         M3TreeMap<String, Integer> map = new M3TreeMap<>();
         map.put("one", 1);
+        var view = map.subMap("one", true, "one", true).descendingMap();
 
-        Map.Entry<String, Integer> first = map.entrySet().iterator().next();
-        Map.Entry<String, Integer> second = map.entrySet().iterator().next();
-        assertSame(first, second);
+        Map.Entry<String, Integer> first = view.entrySet().iterator().next();
+        Map.Entry<String, Integer> second = view.entrySet().iterator().next();
+        Map.Entry<String, Integer> endpoint = view.sequencedEntrySet().getFirst();
+        assertNotSame(first, second);
+        assertNotSame(first, endpoint);
+        assertNotSame(endpoint, view.sequencedEntrySet().getFirst());
 
         Map.Entry<String, Integer> snapshot = map.firstEntry();
         assertNotSame(snapshot, map.firstEntry());
+        assertThrows(UnsupportedOperationException.class, () -> snapshot.setValue(7));
         map.put("one", 2);
-        assertEquals(1, snapshot.getValue(),
-                "firstEntry must remain a detached immutable snapshot");
-        assertEquals(2, first.getValue(),
-                "the cached iterator facade resolves the live mapping");
+        assertEquals(1, snapshot.getValue(), "firstEntry must remain a detached immutable snapshot");
+        assertEquals(2, first.getValue(), "each caller projection resolves the live mapping");
+        assertEquals(2, endpoint.setValue(3));
+        assertEquals(3, second.getValue());
+        assertEquals(3, map.get("one"));
+        assertNoOwnedEntries(map);
+        assertNoOwnedEntries(view);
     }
 
     @Test
-    void weakKeyMapBypassesStrongFacadeCache() throws ReflectiveOperationException {
+    void weakKeyMapHasFreshProjectionsWithoutStrongOwnerRetention() throws ReflectiveOperationException {
         M3WeakHashMap<Object, Integer> map = new M3WeakHashMap<>();
         Object key = new Object();
         map.put(key, 1);
-        assertEquals(1, map.entrySet().iterator().next().getValue());
+        Map.Entry<Object, Integer> first = map.entrySet().iterator().next();
+        Map.Entry<Object, Integer> second = map.entrySet().iterator().next();
+        assertNotSame(first, second);
+        assertSame(key, first.getKey());
+        assertEquals(1, second.getValue());
+        assertEquals(1, first.setValue(2));
+        assertEquals(2, second.getValue());
+        assertNoOwnedEntries(map);
+    }
 
-        Field cache = M3SlotMap.class.getDeclaredField("entryFacades");
-        cache.setAccessible(true);
-        assertNull(cache.get(map),
-                "a strong facade cache would keep weak keys alive and change map semantics");
+    @Test
+    void compatibilityHookKeepsCallbackDemandAndExceptionIdentity() {
+        HookMap map = new HookMap();
+        map.put("one", 1);
+        Map.Entry<String, Integer> first = map.entrySet().iterator().next();
+        assertEquals(1, map.calls);
+        map.advisory = false;
+        assertNotSame(first, map.entrySet().iterator().next());
+        assertEquals(2, map.calls);
+        map.advisory = true;
+        assertNotSame(first, map.entryFacade("one"));
+        assertEquals(3, map.calls);
+
+        RuntimeException marker = new IllegalStateException("projection callback");
+        map.failure = marker;
+        assertSame(marker, assertThrows(RuntimeException.class,
+                () -> map.entrySet().iterator().next()));
+        assertEquals(4, map.calls);
+        assertEquals(1, map.get("one"));
+    }
+
+    private static final class HookMap extends M3SlotMap<String, Integer> {
+        private final M3LinkedHashMap<String, Integer> storage = new M3LinkedHashMap<>();
+        @Override int firstSlot() { return storage.firstSlot(); }
+        @Override int nextSlot(int slot) { return storage.nextSlot(slot); }
+        @Override int findSlot(Object key) { return storage.findSlot(key); }
+        @Override String keyAt(int slot) { return storage.keyAt(slot); }
+        @Override Integer valueAt(int slot) { return storage.valueAt(slot); }
+        @Override Integer writeAt(int slot, Integer value) { return storage.writeAt(slot, value); }
+        @Override Integer eraseAt(int slot) { return storage.eraseAt(slot); }
+        @Override int revision() { return storage.revision(); }
+        @Override public int size() { return storage.size(); }
+        @Override public Integer put(String key, Integer value) { return storage.put(key, value); }
+        int calls;
+        boolean advisory = true;
+        RuntimeException failure;
+
+        @Override protected boolean cacheEntryFacades() {
+            calls++;
+            if (failure != null) throw failure;
+            return advisory;
+        }
+    }
+
+    private static void assertNoOwnedEntries(Object owner) throws ReflectiveOperationException {
+        assertNoOwnedEntries(owner, new IdentityHashMap<>());
+    }
+
+    private static void assertNoOwnedEntries(Object value, IdentityHashMap<Object, Boolean> seen)
+            throws ReflectiveOperationException {
+        if (value == null || seen.put(value, Boolean.TRUE) != null) return;
+        assertFalse(value instanceof Map.Entry<?, ?>,
+                "map-owned object graph retained a caller Entry projection");
+        Class<?> type = value.getClass();
+        if (type.isArray()) {
+            if (!type.getComponentType().isPrimitive()) {
+                for (Object element : (Object[]) value) assertNoOwnedEntries(element, seen);
+            }
+            return;
+        }
+        // Include inherited owners: checking only the concrete map misses base-class caches.
+        for (Class<?> owner = type; owner != null
+                && owner.getName().startsWith("com.m3.collections."); owner = owner.getSuperclass()) {
+            for (Field field : owner.getDeclaredFields()) {
+                if (Modifier.isStatic(field.getModifiers()) || field.getType().isPrimitive()) continue;
+                field.setAccessible(true);
+                assertNoOwnedEntries(field.get(value), seen);
+            }
+        }
     }
 }

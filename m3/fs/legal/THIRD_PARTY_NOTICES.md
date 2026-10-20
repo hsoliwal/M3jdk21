@@ -31,3 +31,52 @@ The linked image uses a stock Temurin Java 21 toolchain for this bounded module
 qualification. OpenJDK files retain GPL-2.0 with the Classpath Exception and their
 original image notices. This port does not relicense OpenJDK or qualify a complete
 modified M3JDK21/HotSpot build.
+
+## RE2J1.8 internal fallback source
+
+M3JDK21 carries the 19 Java production sources from google/re2j at
+`57278921a609461c14d9cdb057d7aa9511c8f7ac` (tag `re2j-1.8`) in the private
+`com.m3.fs.internal.re2j` package. The original Go and RE2J copyrights are
+preserved in every file. The only source adaptations are package/import names
+and SOURCE-retained serial-warning annotations on two existing declarations.
+No RE2J binary or Synexia runtime service is required by the production module.
+The unchanged upstream artifact is a test-only differential oracle.
+
+RE2J has its own BSD-3-Clause terms; the M3FS Apache license does not relicense it.
+The full terms follow so this notice remains sufficient when packaged in the
+M3FS JAR, the OSGi bundle, or the linked module's legal directory.
+
+```text
+This is a work derived from Russ Cox's RE2 in Go, whose license
+http://golang.org/LICENSE is as follows:
+
+Copyright (c) 2009 The Go Authors. All rights reserved.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are
+met:
+
+   * Redistributions of source code must retain the above copyright
+     notice, this list of conditions and the following disclaimer.
+
+   * Redistributions in binary form must reproduce the above copyright
+     notice, this list of conditions and the following disclaimer in
+     the documentation and/or other materials provided with the
+     distribution.
+
+   * Neither the name of Google Inc. nor the names of its contributors
+     may be used to endorse or promote products derived from this
+     software without specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+"AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+```

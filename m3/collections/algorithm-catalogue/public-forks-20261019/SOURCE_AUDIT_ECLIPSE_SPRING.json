@@ -1,0 +1,191 @@
+{
+  "schema": "synexia.public-fork-source-audit.v1",
+  "client_date": "2026-10-19",
+  "status": "CANDIDATE_SOURCE_INVENTORY_ONLY",
+  "scope": {
+    "repositories": ["hsoliwal/eclipse-collections", "hsoliwal/spring-framework"],
+    "repository_visibility_parent_and_root_metadata": "Delegated to parent inventory; not duplicated here",
+    "inspected_source_facts": 6,
+    "branch_records": 15,
+    "github_reads": 14,
+    "read_budget": "12 planned plus 2 adaptive reads after source-path 404",
+    "disk_action": "Only this small documentation unit; no source copies",
+    "no_clone": true,
+    "no_build_or_test_execution": true,
+    "no_benchmark_execution": true,
+    "no_model_review": true,
+    "no_private_helper_source_read": true,
+    "no_production_edit_or_architecture_admission": true,
+    "no_repository_publication": true
+  },
+  "method": "List all branches returned by one per_page=100 response for each repository; inspect immutable default-head root directories, license evidence and selected source excerpts. Source excerpts establish storage mechanisms only. Proposed reuse classifications require a separate capability gate and executed proof before adaptation.",
+  "repositories": [
+    {
+      "repository": "hsoliwal/eclipse-collections",
+      "url": "https://github.com/hsoliwal/eclipse-collections",
+      "inspected_default_branch": "master",
+      "inspected_commit": "489c8e63b973aaf52eb87f08f5908a152a4b8f22",
+      "root_directory_url": "https://api.github.com/repos/hsoliwal/eclipse-collections/contents?ref=489c8e63b973aaf52eb87f08f5908a152a4b8f22",
+      "branches_url": "https://api.github.com/repos/hsoliwal/eclipse-collections/branches?per_page=100",
+      "branch_list_observation": "10 records returned, below requested page size; all listed below. Branch names describe workspaces, not proof of changes, admission, merge status or test execution.",
+      "license": {
+        "source_header_terms": "Eclipse Public License v1.0 and Eclipse Distribution License v1.0",
+        "edl_file_read": "LICENSE-EDL-1.0.txt",
+        "edl_blob": "4e492acbfa2054917ae22b35cf6c03e9b3feff76",
+        "edl_url": "https://github.com/hsoliwal/eclipse-collections/blob/489c8e63b973aaf52eb87f08f5908a152a4b8f22/LICENSE-EDL-1.0.txt",
+        "root_epl_file_listed_not_read": "LICENSE-EPL-1.0.txt",
+        "root_epl_blob": "79e486c3d2c20397a987cc8785b8e62b8bbcbb52",
+        "notice_file_listed_not_read": "NOTICE.md",
+        "notice_blob": "c5d0cd1eb0d4b15b2affbb2ab1dde5f988209876",
+        "reuse_requirement": "Before adaptation, preserve applicable copyright, license and notices; record exact donor commit and paths. This inventory does not make a legal compatibility determination."
+      },
+      "namespace_observation": "The three selected source files exist under com/m3/collections/eclipse at this commit; original org/eclipse/collections paths for UnifiedMap and FastList returned 404. A package rename does not establish an array conversion or whole-repository completeness.",
+      "root_test_and_performance_directories_listed": ["unit-tests", "unit-tests-java8", "unit-tests-thread-safety", "serialization-tests", "acceptance-tests", "jmh-tests", "jmh-scala-tests", "performance-tests", "jcstress-tests", "test-coverage"],
+      "test_directory_limit": "Only root directory entries observed. No suite content, runnable closure, results or performance claims inferred.",
+      "branches": [
+        {"name": "m3/all-files-pass-20261018", "head": "5161968370d16b09974030c714107b75ead437b8"},
+        {"name": "m3/baseline-eclipse-11.1-20261018", "head": "c889280d72f6d4d70d64e1a36e33e5555d84ca10"},
+        {"name": "m3/object-stream-contracts-20261018", "head": "fd752269fe257f6500fa17a221656d052f57492f"},
+        {"name": "m3/package-first-eclipse-index-20261018", "head": "dcf686a8bccd536feabfb10947815b81b3bfdd42"},
+        {"name": "m3/package-import-rename-20261018", "head": "6460aee4bd999bff2eb0a2d539df00280079ddb8"},
+        {"name": "m3/package-relocation-20261018", "head": "c9d6ca17580af87d10c89a3a1460c7f1e855ba7c"},
+        {"name": "m3/package-relocation-eclipse-11.1-20261018", "head": "2729a8109f0a5d877896b947a35993961c3d57f2"},
+        {"name": "m3/stream-superset-bridge-20261018", "head": "cb899d03fe96806825c2a02195aec477b3c7ce17"},
+        {"name": "master", "head": "489c8e63b973aaf52eb87f08f5908a152a4b8f22"},
+        {"name": "preserve/additive-before-20261018-1843", "head": "76d09e86a947b2f7cc0e8111f1af18941438af8d"}
+      ],
+      "source_facts": [
+        {
+          "id": "EC_UNIFIED_MAP_ARRAY_HASH",
+          "problem_category": "Hash maps; interleaved array storage; collision resolution; masked indexing",
+          "path": "eclipse-collections/src/main/java/com/m3/collections/eclipse/impl/map/mutable/UnifiedMap.java",
+          "git_blob": "8bab18c3e7a9d8c02eaa24be9f1634f708cb2541",
+          "inspected_lines": {"first": 1, "last": 360},
+          "url": "https://github.com/hsoliwal/eclipse-collections/blob/489c8e63b973aaf52eb87f08f5908a152a4b8f22/eclipse-collections/src/main/java/com/m3/collections/eclipse/impl/map/mutable/UnifiedMap.java",
+          "mechanisms": [
+            "Owns transient Object[] table and occupied count; adjacent slots hold each key and value.",
+            "Null keys and collision buckets use special sentinel objects.",
+            "Collision buckets use additional Object[] arrays of consecutive key/value pairs instead of stored Entry nodes.",
+            "Capacity selection uses power-of-two growth; hash mixing and a bit mask choose an even key-slot index.",
+            "Insertion writes key/value slots directly and rehashes when occupied exceeds maxSize."
+          ],
+          "entry_storage_assessment": "Strong candidate for no stored Entry nodes; the class documentation explicitly describes array collision storage. Inspection is targeted, not a proof of every internal operation.",
+          "candidate_classification": "ADAPT",
+          "selection_rationale": "Reuse the existing array map and collision representation before designing another generic hash table.",
+          "observable_limits": ["Additional collision arrays remain part of the storage layout; this is not a single flat global array.", "No allocation measurement, differential corpus, worst-case guarantee or speed comparison was executed.", "Null handling, equality direction, iterator behavior, serialization, resizing and subclass hooks need separate contract qualification before adaptation."]
+        },
+        {
+          "id": "EC_FAST_LIST_DYNAMIC_ARRAY",
+          "problem_category": "Dynamic arrays; contiguous range compaction; direct indexed traversal",
+          "path": "eclipse-collections/src/main/java/com/m3/collections/eclipse/impl/list/mutable/FastList.java",
+          "git_blob": "4fe22de19c2bd4bd5c51d363bed3e5d490bbf5bf",
+          "inspected_lines": {"first": 1, "last": 320},
+          "url": "https://github.com/hsoliwal/eclipse-collections/blob/489c8e63b973aaf52eb87f08f5908a152a4b8f22/eclipse-collections/src/main/java/com/m3/collections/eclipse/impl/list/mutable/FastList.java",
+          "mechanisms": [
+            "Owns protected int size and transient T[] items.",
+            "Separate shared empty-array sentinels distinguish default construction from explicit zero capacity.",
+            "Range deletion shifts a suffix using System.arraycopy and clears/reset the vacated end.",
+            "Sorting, reversal and internal traversal directly use the owned array.",
+            "Wrap-copy and backing-array factory variants expose distinct copy-versus-alias behavior."
+          ],
+          "entry_storage_assessment": "Array-owned list candidate; no map-entry storage is required by the inspected list representation.",
+          "candidate_classification": "ADAPT",
+          "selection_rationale": "Existing dynamic-array ownership and bulk operations fit M3 array/index refinement.",
+          "observable_limits": ["FastList explicitly documents lack of concurrent-modification exceptions. Replacing it with an ordinary fail-fast list would change behavior.", "Factory array aliasing, copy/clone semantics and subclass-visible storage must be preserved.", "The excerpts do not qualify all growth, overflow or serialization paths; no tests or benchmarks were executed."]
+        },
+        {
+          "id": "EC_TREE_SORTED_MAP_BACKING_GAP",
+          "problem_category": "Sorted maps; range views; ordering and copy contracts",
+          "path": "eclipse-collections/src/main/java/com/m3/collections/eclipse/impl/map/sorted/mutable/TreeSortedMap.java",
+          "git_blob": "5bd0fc5ac4e972c031d3e72b7fd5597dce9df660",
+          "inspected_lines": {"first": 1, "last": 220},
+          "url": "https://github.com/hsoliwal/eclipse-collections/blob/489c8e63b973aaf52eb87f08f5908a152a4b8f22/eclipse-collections/src/main/java/com/m3/collections/eclipse/impl/map/sorted/mutable/TreeSortedMap.java",
+          "mechanisms": ["Package is relocated to com.m3.collections.eclipse.impl.map.sorted.mutable.", "Backing field remains private java.util.TreeMap<K,V> treeMap.", "The six inspected constructors allocate JDK TreeMap instances; comparator-plus-map construction creates a TreeMap then calls putAll."],
+          "entry_storage_assessment": "Current owner still delegates storage to the JDK node-backed TreeMap; relocation alone is not array conversion.",
+          "candidate_classification": "ADAPT_CONTRACT_ONLY",
+          "selection_rationale": "Use the existing public and behavioral surface as donor contract while replacing backing storage with separately qualified arrays/indexes.",
+          "observable_limits": ["This is a current public-fork source observation, not a review of any unpublished helper.", "No assertion of full TreeSortedMap API implementation, serialization compatibility or whole-repository conversion follows from these excerpts."]
+        }
+      ]
+    },
+    {
+      "repository": "hsoliwal/spring-framework",
+      "url": "https://github.com/hsoliwal/spring-framework",
+      "inspected_default_branch": "main",
+      "inspected_commit": "d8e77dbd0160231dd231496a49a5d53752187013",
+      "root_directory_url": "https://api.github.com/repos/hsoliwal/spring-framework/contents?ref=d8e77dbd0160231dd231496a49a5d53752187013",
+      "branches_url": "https://api.github.com/repos/hsoliwal/spring-framework/branches?per_page=100",
+      "branch_list_observation": "5 records returned, below requested page size; all listed below. Names and preserved heads are inventory evidence only.",
+      "license": {
+        "terms": "Apache License, Version 2.0",
+        "license_file": "LICENSE.txt",
+        "license_blob": "ff77379631504c17ad0a94dddc6803f0d3fb0fbb",
+        "inspected_license_lines": {"first": 1, "last": 80},
+        "license_url": "https://github.com/hsoliwal/spring-framework/blob/d8e77dbd0160231dd231496a49a5d53752187013/LICENSE.txt",
+        "source_header_evidence": "Apache-2.0 headers observed in LinkedCaseInsensitiveMap and LinkedMultiValueMap excerpts; ConcurrentReferenceHashMap header was outside its selected excerpt.",
+        "reuse_requirement": "Retain applicable license, copyright and notice requirements and exact provenance before adaptation; inspect per-file obligations at admission."
+      },
+      "namespace_observation": "All three inspected utility source paths remain org/springframework/util at this commit. Root has an m3 directory; its contents were not read.",
+      "branches": [
+        {"name": "m3/object-stream-contracts-20261018", "head": "70618ad38843112381f9d6c33968a01a18163a51"},
+        {"name": "m3/stream-superset-bridge-20261018", "head": "11e7fd9d007d25321931f85807e3f04629adab3e"},
+        {"name": "main", "head": "d8e77dbd0160231dd231496a49a5d53752187013"},
+        {"name": "preserve/additive-before-20261018-1843", "head": "49adc91c7e41eaafb52fc11e1210989894bda1f3"},
+        {"name": "preserve/20261019-pre-fleet-49adc91c7e41", "head": "49adc91c7e41eaafb52fc11e1210989894bda1f3"}
+      ],
+      "source_facts": [
+        {
+          "id": "SPRING_CASE_INSENSITIVE_MAP_CONTRACT",
+          "problem_category": "Case-insensitive maps; insertion order; locale normalization; dual indexing",
+          "path": "spring-core/src/main/java/org/springframework/util/LinkedCaseInsensitiveMap.java",
+          "git_blob": "93c584fd6d1b41dffba2f0e2576ec7c08cf1218a",
+          "inspected_lines": {"first": 1, "last": 200},
+          "url": "https://github.com/hsoliwal/spring-framework/blob/d8e77dbd0160231dd231496a49a5d53752187013/spring-core/src/main/java/org/springframework/util/LinkedCaseInsensitiveMap.java",
+          "mechanisms": ["LinkedHashMap<String,V> owns ordered, original-case keys and values.", "HashMap<String,String> indexes normalized strings to their original-case keys.", "Lookup uses locale-based normalization; class documentation excludes null keys.", "Changing the casing of an existing key can remove the old original-case mapping before inserting the replacement.", "An overridable eldest-entry removal hook coordinates removal from both indexes."],
+          "entry_storage_assessment": "Current implementation uses JDK HashMap/LinkedHashMap storage; not a no-stored-entry implementation.",
+          "candidate_classification": "ADAPT_CONTRACT_ONLY",
+          "selection_rationale": "Reuse case preservation, ordering, locale and dual-index consistency rules while independently qualifying M3 storage.",
+          "observable_limits": ["Replacement casing/order, null values, locale edge cases, protected hooks and live views require differential proof.", "No claim that an M3 version already preserves every Spring behavior; no tests or benchmarks executed."]
+        },
+        {
+          "id": "SPRING_MULTI_VALUE_COPY_CONTRACT",
+          "problem_category": "Multimaps; list-valued mappings; shallow and deep copying; alias ownership",
+          "path": "spring-core/src/main/java/org/springframework/util/LinkedMultiValueMap.java",
+          "git_blob": "574b0eec83d8bbb0ce8df82287616c9b8add85da",
+          "inspected_lines": {"first": 1, "last": 150},
+          "url": "https://github.com/hsoliwal/spring-framework/blob/d8e77dbd0160231dd231496a49a5d53752187013/spring-core/src/main/java/org/springframework/util/LinkedMultiValueMap.java",
+          "mechanisms": ["Extends MultiValueMapAdapter and supplies a LinkedHashMap backing map.", "Value-holding lists use ArrayList.", "Copy construction and clone reuse existing list objects.", "deepCopy creates an independent ArrayList per mapping."],
+          "entry_storage_assessment": "Lists are dynamic arrays, but the backing LinkedHashMap remains node-backed.",
+          "candidate_classification": "ADAPT_CONTRACT_ONLY",
+          "selection_rationale": "Retain shallow/deep-copy alias behavior and ordered multimap API when replacing map storage.",
+          "observable_limits": ["Blind flattening of all values would lose required list sharing and externally supplied list behavior.", "No MultiValueMapAdapter implementation closure, tests or performance measured in this audit."]
+        },
+        {
+          "id": "SPRING_REFERENCE_MAP_LIFECYCLE",
+          "problem_category": "Concurrent reference maps; segment locking; reference queues; masked indexing; purge and resize",
+          "path": "spring-core/src/main/java/org/springframework/util/ConcurrentReferenceHashMap.java",
+          "git_blob": "21a3b6b34889da8a9578f3b7c6c7fb8fc72209d2",
+          "inspected_lines": {"first": 610, "last": 850},
+          "url": "https://github.com/hsoliwal/spring-framework/blob/d8e77dbd0160231dd231496a49a5d53752187013/spring-core/src/main/java/org/springframework/util/ConcurrentReferenceHashMap.java",
+          "mechanisms": ["Each segment extends ReentrantLock and owns a volatile Reference<K,V>[] array plus an AtomicInteger count.", "Hash masking selects slots using hash & (references.length - 1).", "Mutation allocates a stored Entry and creates a Reference linked to the prior bucket head.", "Lookup and restructuring traverse Reference.getNext chains.", "Reference-queue polling drives purging; restructuring can double the array and rebuild reference chains under the segment lock."],
+          "entry_storage_assessment": "Arrays and masks coexist with stored Entry objects and linked Reference chains; direct storage import does not satisfy the requested no-entry invariant.",
+          "candidate_classification": "ADAPT_LIFECYCLE_ONLY",
+          "selection_rationale": "Inventory segmented lifecycle and purge timing as a possible donor; replace node/referent ownership only with dedicated GC and concurrency qualification.",
+          "observable_limits": ["No weak/soft-reference liveness, concurrent linearizability or garbage-collection proof was executed.", "Required reference wrappers and stored map entries are distinct concerns; this audit does not admit a replacement representation.", "Selected excerpt excludes file header and full public API."]
+        }
+      ]
+    }
+  ],
+  "failed_reads_preserved_as_observations": [
+    {"repository": "hsoliwal/eclipse-collections", "commit": "489c8e63b973aaf52eb87f08f5908a152a4b8f22", "path": "eclipse-collections/src/main/java/org/eclipse/collections/impl/map/mutable/UnifiedMap.java", "result": "GitHub NOT_FOUND 404", "resolution": "Read matching com/m3/collections/eclipse path at the same immutable commit"},
+    {"repository": "hsoliwal/eclipse-collections", "commit": "489c8e63b973aaf52eb87f08f5908a152a4b8f22", "path": "eclipse-collections/src/main/java/org/eclipse/collections/impl/list/mutable/FastList.java", "result": "GitHub NOT_FOUND 404", "resolution": "Read matching com/m3/collections/eclipse path at the same immutable commit"}
+  ],
+  "overall_limits": [
+    "This unit audits only two assigned forks and six selected source files; parent owns the broader public-fork inventory.",
+    "No inference of whole-library or all-five-library implementation completeness.",
+    "No best, peak, faster or lower-allocation claim is established.",
+    "Git blob identities pin whole files; observations are limited to the explicitly recorded excerpts.",
+    "Candidate reuse decisions are searchable inventory entries, not FOSS gate approval for new architecture or source generation.",
+    "No test, runtime, source-blind equivalence, Maven, JPMS, OSGi or JNI admission was performed."
+  ]
+}

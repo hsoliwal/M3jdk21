@@ -199,6 +199,53 @@ public final class M3ObjectIndexSnapshot<E> extends AbstractList<E> implements R
         return filteredByState(requiredMask, excludedMask, M3IndexMaskCompactor.Backend.JAVA);
     }
 
+    /**
+     * Select a detached logical view through an external 32-bit state plane indexed by
+     * the snapshot's PHYSICAL slot IDs, not by the sorted encounter ordinals.
+     *
+     * <p>This is a metadata-only, immediate projection. It preserves the original Object[]
+     * reference owner, duplicates, nulls, stable comparator/signal order, and the selected
+     * physical-slot metadata. The caller-owned state plane is borrowed only for this call;
+     * later changes to that plane cannot change this snapshot's membership. State bits
+     * (including bit 31) are compared as full integer masks, with no byte truncation.
+     * Invalid physical slots are rejected before any native call or output publication.
+     *
+     * <p>The Java and optional JNI backends delegate to the EXISTING
+     * {@link M3IndexPathMasks} row/physical-offset selector. No object references,
+     * predicates, comparators or JVM heap pointers cross JNI, and NATIVE_REQUIRED
+     * refuses a missing library rather than silently falling back. Neither path retains
+     * an external pointer or aliases mutable caller state.</p>
+     */
+    public M3ObjectIndexSnapshot<E> filteredByPhysicalStatePlane(
+            int[] stateByPhysicalSlot, int requiredMask, int excludedMask,
+            M3IndexPathMasks.Backend backend) {
+        Objects.requireNonNull(stateByPhysicalSlot, "stateByPhysicalSlot");
+        Objects.requireNonNull(backend, "backend");
+        int[] orderedRows = Arrays.copyOfRange(rows, from, to);
+        int[] orderedSlots = new int[orderedRows.length];
+        for (int i = 0; i < orderedRows.length; i++) {
+            int slot = physicalSlots[orderedRows[i]];
+            if (slot < 0 || slot >= stateByPhysicalSlot.length) {
+                throw new IndexOutOfBoundsException(
+                        "physical slot has no caller state word: " + slot);
+            }
+            orderedSlots[i] = slot;
+        }
+        int[] selected = M3IndexPathMasks.select(
+                orderedRows, orderedSlots, new int[][] { stateByPhysicalSlot },
+                new int[] { requiredMask }, new int[] { excludedMask },
+                0, orderedRows.length, 1, backend);
+        return withRows(selected, order);
+    }
+
+    /** Java-only convenience overload; native use must remain explicit. */
+    public M3ObjectIndexSnapshot<E> filteredByPhysicalStatePlane(
+            int[] stateByPhysicalSlot, int requiredMask, int excludedMask) {
+        return filteredByPhysicalStatePlane(
+                stateByPhysicalSlot, requiredMask, excludedMask,
+                M3IndexPathMasks.Backend.JAVA);
+    }
+
     public M3ObjectIndexSnapshot<E> filtered(Predicate<? super E> predicate) {
         Objects.requireNonNull(predicate, "predicate");
         BitSet accepted = new BitSet(size());

@@ -1,0 +1,6 @@
+operation_atom	selected_permissive_surface	custom_uncovered_composition	validation_receipt	limits
+dense element/count lanes	owned M3HashMultiset lanes (#1418)	Commons add/remove return values and modCount-on-every-add rule	differential ops 0-8, 29	iteration order is dense order
+bag algebra	Commons contract (count-wise containsAll/retainAll, copy-wise removeAll)	retainAll excess computed into an owned bag, removed copy by copy as Commons does	differential ops 10-15, 27-28	-
+fail-fast	modCount + structMod counters	Commons BagIterator and HashMap iterator rules, iterator removal not counted	iteratorsFailFast, twoIteratorsFollowTheBackingMapRule	stale removals refuse before mutating
+uniqueSet	unmodifiable flyweight AbstractSet	all mutators throw like Commons UnmodifiableSet	viewsTextAndArrays	-
+serialization	owned stream format	InvalidObjectException on negative or zero counts	serializationRoundTrip incl. 2 corrupt streams	not wire-compatible with Commons' serialized form
