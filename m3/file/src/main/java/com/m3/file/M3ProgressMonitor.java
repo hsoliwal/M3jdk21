@@ -2,6 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 package com.m3.file;
 
+import java.math.BigInteger;
 import java.util.Objects;
 import java.util.concurrent.CancellationException;
 import java.util.concurrent.atomic.AtomicLong;
@@ -111,10 +112,13 @@ public interface M3ProgressMonitor {
 
     private static long scale(long completed, long parentUnits, long childUnits) {
         if (completed >= childUnits) return parentUnits;
-        long quotient = parentUnits / childUnits;
-        long remainder = parentUnits % childUnits;
-        return Math.addExact(
-                Math.multiplyExact(completed, quotient),
-                Math.multiplyExact(completed, remainder) / childUnits);
+        if (completed == 0L || parentUnits == 0L) return 0L;
+        if (completed <= Long.MAX_VALUE / parentUnits) {
+            return Math.multiplyExact(completed, parentUnits) / childUnits;
+        }
+        return BigInteger.valueOf(completed)
+                .multiply(BigInteger.valueOf(parentUnits))
+                .divide(BigInteger.valueOf(childUnits))
+                .longValueExact();
     }
 }
