@@ -29,7 +29,9 @@ jobs:
         run: |
           set -euo pipefail
           check() { actual=$(git hash-object "$2"); test "$actual" = "$1" || { echo "SOURCE DRIFT: $2 expected=$1 actual=$actual"; exit 1; }; }
-          check 217700023c2a6456a505b07b311290f8da8c02e2 m3/collections/src/main/java/com/m3/collections/M3IndexedListSnapshot.java
+          # Qualified current predicate/count atom; existing physical-state APIs are preserved.
+          # Synexia 74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd; manifest SHA-256 5bb24c679cea5b4d6daddd870323401466419f90ad105a845efe94352e708819.
+          check 2caf4faf78ea20ccb41de9a61b08790855b4edd4 m3/collections/src/main/java/com/m3/collections/M3IndexedListSnapshot.java
           check e2cff159750d9b7f45cd438a8d517aff8d5bff43 m3/collections/src/main/java/com/m3/collections/M3ObjectIndexSnapshot.java
           check 01945ebc69137affa7ab3ef708fcbb0cd95a5c24 m3/collections/src/test/java/com/m3/collections/M3ObjectPhysicalMaskSelfTest.java
           check 10931f3f8316b3cecd0f27cbf25e468175022b19 m3/collections/src/test/java/com/m3/collections/M3ObjectPhysicalMaskTest.java
