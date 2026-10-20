@@ -188,11 +188,13 @@ public class M3SorterLanesTest {
                 int n = s.keys.size();
                 if (op < 2) {
                     s.unsorted = rnd.nextInt(3) == 0;
-                    s.filtered = rnd.nextBoolean();
-                    s.hideModulo = 2 + rnd.nextInt(4);
                     if (rnd.nextBoolean()) {
+                        // setRowFilter or sort(): the filter may change too
+                        s.filtered = rnd.nextBoolean();
+                        s.hideModulo = 2 + rnd.nextInt(4);
                         s.lanes.sort();
                     } else {
+                        // setSortKeys: only the keys change (stock sortExistingData keeps the filtered rows)
                         s.lanes.sortKeysChanged();
                     }
                 } else if (op < 5) {
