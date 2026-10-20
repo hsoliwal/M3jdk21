@@ -3,10 +3,12 @@
  */
 package jdk.m3.parser;
 
+import java.io.BufferedReader;
+import java.io.FilterInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.URI;
-import java.nio.ByteBuffer;
 import java.nio.charset.Charset;
 import java.nio.charset.CodingErrorAction;
 import java.nio.file.Files;
@@ -56,19 +58,23 @@ public final class M3File implements CharSequence {
         if (maxBytes < 0 || maxBytes > Integer.MAX_VALUE - 8) {
             throw new IllegalArgumentException("maxBytes outside supported array bounds");
         }
-        byte[] bytes;
-        try (InputStream input = Files.newInputStream(path)) {
-            bytes = input.readNBytes(maxBytes + 1);
+        // Retain only the final immutable String, not a parallel whole-file byte[]
+        // and decoded char[]; hashing happens on the same bounded input traversal.
+        MessageDigest bytesSha = sha256();
+        StringBuilder decoded = new StringBuilder(Math.min(8192, maxBytes));
+        try (InputStream input = new BoundedInputStream(Files.newInputStream(path), maxBytes, bytesSha);
+             BufferedReader reader = new BufferedReader(new InputStreamReader(input,
+                     charset.newDecoder()
+                            .onMalformedInput(CodingErrorAction.REPORT)
+                            .onUnmappableCharacter(CodingErrorAction.REPORT)), 8192)) {
+            char[] chunk = new char[8192];
+            int count;
+            while ((count = reader.read(chunk, 0, chunk.length)) != -1) {
+                decoded.append(chunk, 0, count);
+            }
         }
-        if (bytes.length > maxBytes) {
-            throw new IOException("source exceeds maxBytes=" + maxBytes + ": " + path);
-        }
-        String text = charset.newDecoder()
-                .onMalformedInput(CodingErrorAction.REPORT)
-                .onUnmappableCharacter(CodingErrorAction.REPORT)
-                .decode(ByteBuffer.wrap(bytes)).toString();
-        String byteHash = HexFormat.of().formatHex(sha256().digest(bytes));
-        return new M3File(path.toAbsolutePath().normalize().toUri(), text, byteHash);
+        return new M3File(path.toAbsolutePath().normalize().toUri(), decoded.toString(),
+                HexFormat.of().formatHex(bytesSha.digest()));
     }
 
     public URI uri() { return uri; }
@@ -93,14 +99,51 @@ public final class M3File implements CharSequence {
 
     private static String hashUtf16(String value) {
         MessageDigest digest = sha256();
-        byte[] pair = new byte[2];
-        for (int index = 0; index < value.length(); index++) {
-            char unit = value.charAt(index);
-            pair[0] = (byte) (unit >>> 8);
-            pair[1] = (byte) unit;
-            digest.update(pair);
+        byte[] chunk = new byte[8192];
+        int size = 0;
+        for (int i = 0; i < value.length(); i++) {
+            char unit = value.charAt(i);
+            chunk[size++] = (byte) (unit >>> 8);
+            chunk[size++] = (byte) unit;
+            if (size == chunk.length) {
+                digest.update(chunk, 0, size);
+                size = 0;
+            }
         }
+        if (size != 0) digest.update(chunk, 0, size);
         return HexFormat.of().formatHex(digest.digest());
+    }
+
+    /** Fail on byte N+1, never buffering more than a decoder-owned chunk. */
+    private static final class BoundedInputStream extends FilterInputStream {
+        private int remaining;
+        private final MessageDigest digest;
+
+        BoundedInputStream(InputStream input, int limit, MessageDigest digest) {
+            super(input);
+            this.remaining = limit;
+            this.digest = digest;
+        }
+
+        @Override public int read() throws IOException {
+            int unit = in.read();
+            if (unit < 0) return -1;
+            if (remaining == 0) throw new IOException("source exceeds maxBytes");
+            remaining--;
+            digest.update((byte) unit);
+            return unit;
+        }
+
+        @Override public int read(byte[] buffer, int offset, int length) throws IOException {
+            Objects.checkFromIndexSize(offset, length, buffer.length);
+            if (length == 0) return 0;
+            int count = in.read(buffer, offset, Math.min(length, remaining + 1));
+            if (count <= 0) return count;
+            if (count > remaining) throw new IOException("source exceeds maxBytes");
+            remaining -= count;
+            digest.update(buffer, offset, count);
+            return count;
+        }
     }
 
     private static MessageDigest sha256() {
