@@ -1,0 +1,15 @@
+# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
+# SPDX-License-Identifier: Apache-2.0
+# Modified 2026-10-20: new bounded Java/native target packet; unchanged engine owners.
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3jdk.RuntimeConvergence20261020
+displayName: Source-sealed current runtime convergence
+description: >-
+  Materialize reviewed exact Java and native/text successors for the bounded
+  Eclipse progress, service lifetime, collection view and JNI mask packet.
+  Per-file compiler, behavior, ABI and runtime gates remain independently required.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: m3-runtime-convergence-20261020
+  - com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe:
+      crateName: m3-runtime-convergence-20261020

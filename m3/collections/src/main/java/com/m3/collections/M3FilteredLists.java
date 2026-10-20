@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
@@ -370,9 +371,40 @@ public final class M3FilteredLists {
             @Override public int nextIndex() { live(); return logical; }
             @Override public int previousIndex() { live(); return logical - 1; }
 
+            /** Validate the original cursor without changing its physical position.
+             * Keep writes on the backing List: a writable list may expose an
+             * unmodifiable/snapshot iterator. A bounded provider can refuse next()
+             * at its end before checking structural generation, so probe the reverse
+             * direction as well. Return true only when neither direction has an element.
+             */
+            private boolean checkForComodification() {
+                try {
+                    try {
+                        iterator.next();
+                    } catch (NoSuchElementException exhausted) {
+                        try {
+                            iterator.previous();
+                        } catch (NoSuchElementException empty) {
+                            if (lastPhysical >= 0) {
+                                throw new ConcurrentModificationException("delivered element disappeared");
+                            }
+                            return true;
+                        }
+                        iterator.next();
+                        return false;
+                    }
+                    iterator.previous();
+                    return false;
+                } catch (RuntimeException | Error failure) {
+                    failed = true;
+                    throw failure;
+                }
+            }
+
             @Override public void remove() {
                 live();
                 if (lastPhysical < 0) throw new IllegalStateException("remove without delivered element");
+                checkForComodification();
                 int target = lastPhysical;
                 int position = iterator.nextIndex();
                 backing.remove(target);
@@ -388,6 +420,7 @@ public final class M3FilteredLists {
                 live();
                 if (lastPhysical < 0) throw new IllegalStateException("set without delivered element");
                 requireAccepted(value);
+                checkForComodification();
                 backing.set(lastPhysical, value);
                 discardProbes();
             }
@@ -395,8 +428,23 @@ public final class M3FilteredLists {
             @Override public void add(E value) {
                 live();
                 requireAccepted(value);
+                boolean empty = checkForComodification();
                 int position = iterator.nextIndex();
-                backing.add(position, value);
+                if (empty) {
+                    // Empty bounded iterators may bypass generation checks in both
+                    // traversal directions. Let their own insertion validate and write.
+                    // Snapshot iterators can forbid writes on an editable backing list.
+                    try {
+                        iterator.add(value);
+                    } catch (UnsupportedOperationException unsupported) {
+                        backing.add(position, value);
+                    } catch (ConcurrentModificationException invalidated) {
+                        failed = true;
+                        throw invalidated;
+                    }
+                } else {
+                    backing.add(position, value);
+                }
                 iterator = backing.listIterator(position + 1);
                 logical++;
                 lastPhysical = -1;

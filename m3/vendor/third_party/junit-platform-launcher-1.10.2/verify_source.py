@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 # SPDX-License-Identifier: Apache-2.0
+# Modified 2026 by Hitesh Soliwal and contributors: reuse repository-relative source-seal verification.
 """Check the pinned, unchanged donor and its optional built legal resources."""
 import hashlib
 import json
@@ -10,7 +11,7 @@ import zipfile
 
 def main():
     owner = Path(__file__).resolve().parent
-    root = owner.parent.parent
+    root = owner.parents[3]  # PROVENANCE paths are repository-relative.
     manifest = json.loads((owner / "PROVENANCE.json").read_text(encoding="utf-8"))
     for item in manifest["files"]:
         source = root / item["repository"]
@@ -24,7 +25,8 @@ def main():
     }
     if set((owner / "src/main/java").rglob("*.java")) != expected:
         raise SystemExit("Production donor inventory changed")
-    receipt = {"revision": manifest["revision"], "exact_files": len(manifest["files"]),
+    receipt = {"coordinate": manifest["coordinate"],
+               "sources_jar_sha256": manifest["sources_jar_sha256"], "exact_files": len(manifest["files"]),
                "exact_production_files": len(expected)}
     if len(sys.argv) > 1:
         artifact = Path(sys.argv[1])

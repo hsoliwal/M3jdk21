@@ -1,0 +1,15 @@
+lane=0 density=0 states=8 payload=0 result=0
+lane=0 density=1 states=8 payload=1 result=256
+lane=0 density=2 states=8 payload=4 result=1024
+lane=1 density=0 states=8 payload=0 result=0
+lane=1 density=1 states=8 payload=1 result=256
+lane=1 density=2 states=8 payload=4 result=1024
+lane=2 density=0 states=8 payload=0 result=0
+lane=2 density=1 states=8 payload=1 result=256
+lane=2 density=2 states=8 payload=4 result=1024
+lane=3 density=0 states=8 payload=0 result=0
+lane=3 density=1 states=8 payload=1 result=256
+lane=3 density=2 states=8 payload=4 result=1024
+NATIVE_WORK_PROBE checks=54 PASS (function-table instrument; actual JVM proof separate)
+
+EXIT=0

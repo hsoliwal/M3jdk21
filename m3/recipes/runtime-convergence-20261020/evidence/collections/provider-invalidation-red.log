@@ -1,0 +1,99 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] -----------------------< com.m3:m3-collections >------------------------
+[INFO] Building M3 collection lanes 0.1.0-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ m3-collections ---
+[INFO] Copying 7 resources from  to target/classes/META-INF
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ m3-collections ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ m3-collections ---
+[INFO] skip non existing resourceDirectory /workspace/scratch/53bcd62c244c/work-collections-20261020/candidate/src/test/resources
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ m3-collections ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 262 source files with javac [debug release 21] to target/test-classes
+[INFO] 
+[INFO] --- surefire:3.2.5:test (default-test) @ m3-collections ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running com.m3.collections.M3FilteredListProviderInvalidationTest
+[ERROR] Tests run: 7, Failures: 3, Errors: 0, Skipped: 0, Time elapsed: 0.159 s <<< FAILURE! -- in com.m3.collections.M3FilteredListProviderInvalidationTest
+[ERROR] com.m3.collections.M3FilteredListProviderInvalidationTest.emptySublistAddMatchesOriginalProviderGenerationCheck -- Time elapsed: 0.022 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: Expected java.util.ConcurrentModificationException to be thrown, but nothing was thrown.
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:152)
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:73)
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:35)
+	at org.junit.jupiter.api.Assertions.assertThrows(Assertions.java:3115)
+	at com.m3.collections.M3FilteredListProviderInvalidationTest.emptySublistAddMatchesOriginalProviderGenerationCheck(M3FilteredListProviderInvalidationTest.java:51)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+[ERROR] com.m3.collections.M3FilteredListProviderInvalidationTest.exhaustedNonemptySublistMutationsMatchOriginalProviderRefusal -- Time elapsed: 0.008 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: Expected java.util.ConcurrentModificationException to be thrown, but nothing was thrown.
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:152)
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:73)
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:35)
+	at org.junit.jupiter.api.Assertions.assertThrows(Assertions.java:3115)
+	at com.m3.collections.M3FilteredListProviderInvalidationTest.exhaustedNonemptySublistMutationsMatchOriginalProviderRefusal(M3FilteredListProviderInvalidationTest.java:34)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+[ERROR] com.m3.collections.M3FilteredListProviderInvalidationTest.clearedDeliveredSpanRefusesMutationsFromEitherDirection -- Time elapsed: 0.005 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: Unexpected exception type thrown, expected: <java.util.ConcurrentModificationException> but was: <java.lang.IndexOutOfBoundsException>
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:67)
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:35)
+	at org.junit.jupiter.api.Assertions.assertThrows(Assertions.java:3115)
+	at com.m3.collections.M3FilteredListProviderInvalidationTest.clearedDeliveredSpanRefusesMutationsFromEitherDirection(M3FilteredListProviderInvalidationTest.java:72)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+Caused by: java.lang.IndexOutOfBoundsException: Index 0 out of bounds for length 0
+	at java.base/jdk.internal.util.Preconditions.outOfBounds(Preconditions.java:100)
+	at java.base/jdk.internal.util.Preconditions.outOfBoundsCheckIndex(Preconditions.java:106)
+	at java.base/jdk.internal.util.Preconditions.checkIndex(Preconditions.java:302)
+	at java.base/java.util.Objects.checkIndex(Objects.java:385)
+	at java.base/java.util.AbstractList$SubList.remove(AbstractList.java:804)
+	at com.m3.collections.M3FilteredLists$View$Cursor.remove(M3FilteredLists.java:398)
+	at com.m3.collections.M3FilteredListProviderInvalidationTest.mutate(M3FilteredListProviderInvalidationTest.java:153)
+	at com.m3.collections.M3FilteredListProviderInvalidationTest.lambda$clearedDeliveredSpanRefusesMutationsFromEitherDirection$8(M3FilteredListProviderInvalidationTest.java:72)
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:53)
+	... 6 more
+
+[INFO] 
+[INFO] Results:
+[INFO] 
+[ERROR] Failures: 
+[ERROR]   M3FilteredListProviderInvalidationTest.clearedDeliveredSpanRefusesMutationsFromEitherDirection:72 Unexpected exception type thrown, expected: <java.util.ConcurrentModificationException> but was: <java.lang.IndexOutOfBoundsException>
+[ERROR]   M3FilteredListProviderInvalidationTest.emptySublistAddMatchesOriginalProviderGenerationCheck:51 Expected java.util.ConcurrentModificationException to be thrown, but nothing was thrown.
+[ERROR]   M3FilteredListProviderInvalidationTest.exhaustedNonemptySublistMutationsMatchOriginalProviderRefusal:34 Expected java.util.ConcurrentModificationException to be thrown, but nothing was thrown.
+[INFO] 
+[ERROR] Tests run: 7, Failures: 3, Errors: 0, Skipped: 0
+[INFO] 
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  15.683 s
+[INFO] Finished at: 2026-10-20T08:30:42+01:00
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-surefire-plugin:3.2.5:test (default-test) on project m3-collections: There are test failures.
+[ERROR] 
+[ERROR] Please refer to /workspace/scratch/53bcd62c244c/work-collections-20261020/candidate/target/surefire-reports for the individual test results.
+[ERROR] Please refer to dump files (if any exist) [date].dump, [date]-jvmRun[N].dump and [date].dumpstream.
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException

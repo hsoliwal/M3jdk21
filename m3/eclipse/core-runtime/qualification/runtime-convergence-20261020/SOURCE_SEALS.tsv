@@ -1,0 +1,4 @@
+# Copyright 2026 Hitesh Soliwal and contributors; SPDX-License-Identifier: Apache-2.0
+# target_java_path	sha256
+m3/eclipse/core-runtime/src/main/java/com/m3/eclipse/runtime/M3EclipseProgressMonitor.java	1db0b3c74b273149cd4642b3dfd722c43db9da3a9075cb7e6e62766381dfa0b3
+m3/eclipse/core-runtime/src/test/java/com/m3/eclipse/runtime/M3EclipseProgressMonitorTest.java	432989cda03507051f751d314f87b0a7181a82b0927398cf3d0804bf3fc6e94e

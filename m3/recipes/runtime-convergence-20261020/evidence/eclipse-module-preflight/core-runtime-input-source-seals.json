@@ -1,0 +1,14 @@
+[
+  {
+    "path": "pom.xml",
+    "sha256": "3b4d4fadfec5822bd5a9022797870fc41443954f0d63ab718586738cd926e244"
+  },
+  {
+    "path": "src/main/java/com/m3/eclipse/runtime/M3EclipseProgressMonitor.java",
+    "sha256": "1db0b3c74b273149cd4642b3dfd722c43db9da3a9075cb7e6e62766381dfa0b3"
+  },
+  {
+    "path": "src/test/java/com/m3/eclipse/runtime/M3EclipseProgressMonitorTest.java",
+    "sha256": "432989cda03507051f751d314f87b0a7181a82b0927398cf3d0804bf3fc6e94e"
+  }
+]
