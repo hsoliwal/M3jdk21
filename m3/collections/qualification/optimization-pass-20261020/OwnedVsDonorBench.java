@@ -91,7 +91,9 @@ public final class OwnedVsDonorBench {
         LOG.info(row);
         List<String> rows = new ArrayList<>(Files.exists(out) ? Files.readAllLines(out, StandardCharsets.UTF_8) : List.of(HEADER));
         rows.add(row);
-        Files.write(out, rows, StandardCharsets.UTF_8);
+        Files.writeString(out, String.join("
+", rows) + "
+", StandardCharsets.UTF_8);
     }
 
     /** Median build/query times and minimum allocations over REPS runs after warm-up; no instance outlives the call. */
