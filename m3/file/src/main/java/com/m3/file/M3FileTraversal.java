@@ -47,7 +47,9 @@ public final class M3FileTraversal {
                     Integer.MAX_VALUE,
                     false,
                     path -> {
-                        if (Files.isDirectory(path)) return true;
+                        if (!Files.isRegularFile(path, java.nio.file.LinkOption.NOFOLLOW_LINKS)) {
+                            return false;
+                        }
                         String name = path.getFileName() == null ? "" : path.getFileName().toString();
                         for (String suffix : copy) if (name.endsWith(suffix)) return true;
                         return false;
