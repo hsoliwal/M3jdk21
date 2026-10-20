@@ -36,9 +36,48 @@ public final class M3Patch {
 		this.insertCount = insertCount;
 		this.moveFrom = moveFrom;
 		this.moveTo = moveTo;
-		this.removed = Arrays.stream (removeCount).sum ();
-		this.inserted = Arrays.stream (insertCount).sum ();
+		this.removed = total (removeCount);
+		this.inserted = total (insertCount);
 		this.kept = kept;
+	}
+
+	/**
+	 * A patch of a sequence of {@code size} entries from runs: remove runs from the highest index down (old indices),
+	 * then insert runs from the lowest index up (new indices); no moves. The arrays are copied.
+	 */
+	public static M3Patch of (int size, int [] removeAt, int [] removeCount, int [] insertAt, int [] insertCount) {
+		if (removeAt.length != removeCount.length || insertAt.length != insertCount.length) throw new IllegalArgumentException ("run lanes");
+		int bound = size, removed = 0;
+		for (int i = 0; i < removeAt.length; i++) {
+			if (removeCount [i] <= 0 || removeAt [i] < 0 || removeAt [i] > bound - removeCount [i]) throw new IllegalArgumentException ("remove run " + i);
+			bound = removeAt [i];
+			removed += removeCount [i];
+		}
+		int floor = 0, length = size - removed;
+		for (int i = 0; i < insertAt.length; i++) {
+			if (insertCount [i] <= 0 || insertAt [i] < floor || insertAt [i] > length) throw new IllegalArgumentException ("insert run " + i);
+			length += insertCount [i];
+			floor = insertAt [i] + insertCount [i];
+		}
+		return new M3Patch (removeAt.clone (), removeCount.clone (), insertAt.clone (), insertCount.clone (), EMPTY, EMPTY, size - removed);
+	}
+
+	/** One insert run: {@code count} entries at {@code at} of a sequence of {@code size}. */
+	public static M3Patch insertion (int size, int at, int count) {
+		return of (size, EMPTY, EMPTY, new int [] {at}, new int [] {count});
+	}
+
+	/** One remove run: {@code count} entries at {@code at} of a sequence of {@code size}. */
+	public static M3Patch removal (int size, int at, int count) {
+		return of (size, new int [] {at}, new int [] {count}, EMPTY, EMPTY);
+	}
+
+	private static final int [] EMPTY = new int [0];
+
+	private static int total (int [] counts) {
+		int sum = 0;
+		for (int c : counts) sum = Math.addExact (sum, c);
+		return sum;
 	}
 
 	/** Number of remove runs; run {@code i} removes {@link #removeCount(int)} entries at {@link #removeAt(int)}. */

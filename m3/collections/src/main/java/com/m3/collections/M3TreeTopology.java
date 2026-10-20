@@ -543,6 +543,10 @@ public final class M3TreeTopology {
         if (visibleContribution != 0) {
             propagateVisibleContribution(parentId, -visibleContribution);
         }
+		discardSubtreeDetached (id);
+	}
+
+	private void discardSubtreeDetached (int id) {
 		discardSubtreeDetached (id, true);
 	}
 

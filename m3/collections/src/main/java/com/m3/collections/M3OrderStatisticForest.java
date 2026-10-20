@@ -220,7 +220,7 @@ public final class M3OrderStatisticForest {
 			boolean below = keys [node] + acc < key;
 			acc += shifts [node];
 			if (below) {
-				result += size (left [node]) + 1;
+				result += sizeOf (left [node]) + 1;
 				node = right [node];
 			} else {
 				node = left [node];
@@ -244,7 +244,7 @@ public final class M3OrderStatisticForest {
 
 	/** Number of children of {@code parentId} in the index. */
 	public int size (int parentId) {
-		return size (roots [parentId + 1]);
+		return sizeOf (roots [parentId + 1]);
 	}
 
 	/**
@@ -289,7 +289,7 @@ public final class M3OrderStatisticForest {
 			work++;
 			int key = keys [node] + acc;
 			acc += shifts [node];
-			int leftRank = rank + size (left [node]);
+			int leftRank = rank + sizeOf (left [node]);
 			long leftSum = before + sum (left [node]);
 			if ((key - (long) leftRank) * slope + leftSum <= offset) {
 				found = node;
@@ -447,7 +447,7 @@ public final class M3OrderStatisticForest {
 		if (l != NONE) up [l] = node;
 		if (r != NONE) up [r] = node;
 		heights [node] = (byte) (1 + Math.max (height (l), height (r)));
-		sizes [node] = 1 + size (l) + size (r);
+		sizes [node] = 1 + sizeOf (l) + sizeOf (r);
 		sums [node] = weights [node] + sum (l) + sum (r);
 		return node;
 	}
@@ -552,7 +552,7 @@ public final class M3OrderStatisticForest {
 		return node == NONE ? 0 : heights [node];
 	}
 
-	private int size (int node) {
+	private int sizeOf (int node) {
 		return node == NONE ? 0 : sizes [node];
 	}
 
