@@ -1,0 +1,20 @@
+Execution: 2026-10-20 / Linux / OpenJDK 21.0.12.1
+Source: exact Synexia recipe postimages, current product branch
+Compiler: javac --release 21 -proc:none -Xlint:all,-module -Werror
+Module: com.m3.file (actual module-info.java)
+Source SHA-256: b8fda14938d05bef146af0176861d1e3c3946c73e18a38fdfce4f7758b581ce4
+Test SHA-256: 4ee656c026fd40e26ec9aa73c26da77dfd07eb084c236bdadf97c7f83369cd89
+Product Java Git blob: 769e1844b0b85465e02aeebad7d57706558ef1a4
+Product test Git blob: cc8c3d017b57df3bd034696e7207658545574f44
+Strict Java21 compile: PASS
+java --module-path ... -m com.m3.file/com.m3.file.M3FileDeltaLedgerContract
+M3_FILE_DELTA_PASS checks=30
+java --module-path ... -m com.m3.file/com.m3.file.M3FileBuildImpactContract
+M3_FILE_IMPACT_PASS checks=10569
+java -Xint --module-path ... -m com.m3.file/com.m3.file.M3FileBuildImpactContract
+M3_FILE_IMPACT_PASS checks=10569
+java -Xcheck:jni --module-path ... -m com.m3.file/com.m3.file.M3FileBuildImpactContract
+M3_FILE_IMPACT_PASS checks=10569
+Note: -Xcheck:jni executed a Java-only module and does not constitute native JNI testing.
+NO MAVEN/OPENREWRITE APPLICATION RUN: local Maven and rewrite jars unavailable.
+NO FULL M3JDK21 JVM/JTREG/JCK BUILD: separate qualification hold.
