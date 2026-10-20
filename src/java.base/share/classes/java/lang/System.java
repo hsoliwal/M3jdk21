@@ -76,6 +76,7 @@ import jdk.internal.module.ServicesCatalog;
 import jdk.internal.reflect.CallerSensitive;
 import jdk.internal.reflect.Reflection;
 import jdk.internal.access.JavaLangAccess;
+import jdk.internal.access.M3StringAccess;
 import jdk.internal.access.SharedSecrets;
 import jdk.internal.javac.PreviewFeature;
 import jdk.internal.logger.LoggerFinderLoader;
@@ -2150,6 +2151,7 @@ public final class System {
         // register the shared secrets - do this first, since SystemProps.initProperties
         // might initialize CharsetDecoders that rely on it
         setJavaLangAccess();
+        setM3StringAccess();
 
         // VM might invoke JNU_NewStringPlatform() to set those encoding
         // sensitive properties (user.home, user.name, boot.class.path, etc.)
@@ -2340,6 +2342,61 @@ public final class System {
 
         // system is fully initialized
         VM.initLevel(4);
+    }
+
+    private static void setM3StringAccess() {
+        SharedSecrets.setM3StringAccess(new M3StringAccess() {
+            @Override
+            public boolean hasM3Storage(String value) {
+                return Objects.requireNonNull(value, "value").m3() != null;
+            }
+
+            @Override
+            public M3StringAccess.Facts facts(String value) {
+                String checked = Objects.requireNonNull(value, "value");
+                M3String storage = checked.m3();
+                return storage == null ? null : snapshot(storage);
+            }
+
+            @Override
+            public M3StringAccess.Facts facts(
+                    String value, int beginIndex, int endIndex) {
+                String checked = Objects.requireNonNull(value, "value");
+                Objects.checkFromToIndex(beginIndex, endIndex, checked.length());
+                M3String storage = checked.m3();
+                return storage == null
+                        ? null
+                        : snapshot(storage.slice(beginIndex, endIndex));
+            }
+
+            private M3StringAccess.Facts snapshot(M3String storage) {
+                M3StringFacts facts = storage.facts();
+                return new M3StringAccess.Facts(
+                        facts.utf16Length,
+                        facts.utf8Length,
+                        facts.modifiedUtf8Length,
+                        facts.codePointCount,
+                        facts.unpairedSurrogateCount,
+                        facts.javaHash,
+                        facts.hash31Power,
+                        facts.bitSignal64,
+                        facts.ascii,
+                        facts.latin1,
+                        facts.asciiUpperHash,
+                        facts.asciiLowerHash,
+                        facts.asciiTitleHash,
+                        facts.prefix4,
+                        facts.suffix4,
+                        facts.bigramSignal64,
+                        facts.trigramSignal64,
+                        facts.trimStart,
+                        facts.trimEnd,
+                        facts.stripStart,
+                        facts.stripEnd,
+                        storage.structuralHash64(),
+                        storage.coordinate());
+            }
+        });
     }
 
     private static void setJavaLangAccess() {
