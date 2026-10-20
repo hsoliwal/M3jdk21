@@ -9,6 +9,8 @@ description: >-
 recipeList:
   - com.m3.rewrite.backport.M3Jdk21HashPinnedSnapshotRecipe:
       crateName: m3-string-token-aware-regex-20261020
+  - com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe:
+      crateName: m3-string-token-aware-regex-workflow-20261020
 ---
 type: specs.openrewrite.org/v1beta/recipe
 name: com.m3.rewrite.backport.M3StringTokenAwareRegex20261020Inverse
@@ -17,3 +19,5 @@ description: Exact hash-pinned inverse for the 2026-10-20 token-aware regex rece
 recipeList:
   - com.m3.rewrite.backport.M3Jdk21HashPinnedSnapshotRecipe:
       crateName: m3-string-token-aware-regex-20261020-inverse
+  - com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe:
+      crateName: m3-string-token-aware-regex-workflow-20261020-inverse
