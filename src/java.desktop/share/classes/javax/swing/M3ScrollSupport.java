@@ -65,6 +65,10 @@ final class M3ScrollSupport {
             @Override
             public int rowAt(int y) {
                 int index = list.locationToIndex(new Point(0, y));
+                if (index > 0 && index < count() - 1 && list.getLayoutOrientation() == JList.VERTICAL) {
+                    /* the closest row of a vertical list is clamped only at the ends: a middle row contains y */
+                    return index;
+                }
                 return contains(index < 0 ? null : list.getCellBounds(index, index), y) ? index : -1;
             }
         };

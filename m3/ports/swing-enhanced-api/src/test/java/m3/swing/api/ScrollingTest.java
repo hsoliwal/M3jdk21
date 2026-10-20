@@ -277,6 +277,21 @@ public class ScrollingTest {
     }
 
     @Test
+    public void wrappedListInOneColumn() {
+        JList<String> list = Fixtures.list(300);
+        list.setLayoutOrientation(JList.VERTICAL_WRAP);
+        list.setVisibleRowCount(300);
+        Subject s = new Subject("wrapped list", list, () -> list.getModel().getSize(), r -> list.getCellBounds(r, r),
+                list::getScrollInfo, list::scrollRowToVisible);
+        JViewport viewport = viewport(list, 200, 90);
+        for (int row : new int[] {0, 150, 299}) {
+            int top = s.scroll().to(row, M3Scrolling.CENTER);
+            oracle(s).assertEquals(s.info().get(), "wrapped list, row " + row);
+            assertEquals(firstAtOrBelow(s, 300, viewport.getViewPosition().y), top, "wrapped list top, row " + row);
+        }
+    }
+
+    @Test
     public void rowsBelowATopInset() {
         JList<String> list = Fixtures.list(30);
         list.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 0, 0, 0));
