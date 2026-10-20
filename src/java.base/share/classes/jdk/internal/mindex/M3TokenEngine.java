@@ -346,7 +346,7 @@ final class M3TokenEngine {
     private static final class StateSet {
         private final int endpointCount;
         private final int stride;
-        private final boolean[] seen;
+        private final long[] seen;
         private int[] positions = new int[8];
         private int[] registers;
         private int[] copy;
@@ -355,16 +355,18 @@ final class M3TokenEngine {
         StateSet(int endpointCount, int stride) {
             this.endpointCount = endpointCount;
             this.stride = stride;
-            this.seen = new boolean[endpointCount];
+            this.seen = new long[(endpointCount + 63) >>> 6];
             this.registers = new int[Math.multiplyExact(8, stride)];
             this.copy = new int[stride];
         }
 
         void add(int position, int[] source) {
             Objects.checkIndex(position, endpointCount);
-            if (seen[position]) return;
+            int word = position >>> 6;
+            long bit = 1L << (position & 63);
+            if ((seen[word] & bit) != 0L) return;
             ensure(count + 1);
-            seen[position] = true;
+            seen[word] |= bit;
             positions[count] = position;
             System.arraycopy(source, 0, registers, count * stride, stride);
             count++;
