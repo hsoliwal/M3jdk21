@@ -1,0 +1,87 @@
+# Copyright 2026 Hitesh Soliwal and contributors. SPDX-License-Identifier: Apache-2.0
+name: M3 current-stack stable index order SDK and JNI
+on:
+  push:
+    branches: ['m3/view-refinement-20261019-a3e8897']
+  pull_request:
+    paths:
+      - '.github/workflows/m3-view-order-sdk-20261020.yml'
+      - 'm3/collections/qualification/view-order-sdk-20261020/**'
+      - 'm3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java'
+      - 'm3/collections/src/main/java/com/m3/collections/M3FilteredViews.java'
+      - 'm3/collections/src/main/java/com/m3/collections/M3FilteredNavigableSet.java'
+      - 'm3/collections/src/main/native/collections/**'
+      - 'src/java.base/share/native/libjava/m3_jni_util.h'
+permissions:
+  contents: read
+jobs:
+  sdk-current-stack-and-receiver:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    env:
+      Q: m3/collections/qualification/view-order-sdk-20261020
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          persist-credentials: false
+          fetch-depth: 1
+          sparse-checkout: |
+            m3/collections/qualification/view-order-sdk-20261020
+            m3/collections/src/main
+            src/java.base/share/native/libjava
+      - uses: actions/checkout@v5
+        with:
+          repository: hsoliwal/M3jdk21
+          ref: 987f743658055252bdaf056610a3a903eba0bfee
+          path: current-stack
+          persist-credentials: false
+          fetch-depth: 1
+          sparse-checkout: |
+            m3/collections/src/main
+            src/java.base/share/native/libjava
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Seal canonical engine and record exact checkouts
+        shell: bash
+        run: |
+          set -euo pipefail
+          git rev-parse HEAD
+          git -C current-stack rev-parse HEAD
+          test "$(git hash-object "$Q/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java")" = 135a28d0cec9ea988607cdef6caa1f0fe5115d75
+          test "$(git hash-object "$Q/src/main/java/com/synexia/rewrite/M3ScopeInference.java")" = 9174dd681f0d75b5086fc19904a71524a03972dc
+          test "$(git hash-object "$Q/src/main/java/com/synexia/rewrite/M3EditScope.java")" = 274360816db1e44a2f1796a3bc5cdeff6b0ce6db
+      - name: Actual canonical Maven OpenRewrite generation and refusal tests
+        shell: bash
+        run: |
+          set -euo pipefail
+          mvn -B -ntp -f "$Q/verification/view-order-sdk-20261020/pom.xml" clean test | tee "$RUNNER_TEMP/view-order-sdk.log"
+      - name: Generated Java and actual current-stack JNI differential
+        run: bash "$Q/verification/view-order-sdk-20261020/verify-current.sh" "$GITHUB_WORKSPACE/current-stack"
+      - name: Require composed current owners and exact generated production source
+        shell: bash
+        run: |
+          set -euo pipefail
+          JAVA=m3/collections/src/main/java/com/m3/collections
+          for name in M3FilteredViews M3FilteredNavigableSet M3SlotSpliterators M3IndexMaskCompactor M3LongAddressKernel; do
+            cmp "$JAVA/$name.java" "current-stack/$JAVA/$name.java"
+          done
+          for file in m3_index_mask_compactor.c m3_long_address_kernel.c; do
+            cmp "m3/collections/src/main/native/collections/$file" "current-stack/m3/collections/src/main/native/collections/$file"
+          done
+          cmp src/java.base/share/native/libjava/m3_jni_util.h current-stack/src/java.base/share/native/libjava/m3_jni_util.h
+          cmp "$Q/verification/view-order-sdk-20261020/target/generated-receiver/$JAVA/M3LongIndexProjection.java" "$JAVA/M3LongIndexProjection.java"
+          echo EXACT_GENERATED_CURRENT_STACK_RECEIVER_PASS
+      - name: Retain generated-source and test evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: view-order-sdk-${{ github.event.pull_request.head.sha || github.sha }}
+          path: |
+            ${{ runner.temp }}/view-order-sdk.log
+            m3/collections/qualification/view-order-sdk-20261020/verification/view-order-sdk-20261020/target/surefire-reports
+            m3/collections/qualification/view-order-sdk-20261020/verification/view-order-sdk-20261020/target/evidence
+            m3/collections/qualification/view-order-sdk-20261020/verification/view-order-sdk-20261020/target/generated-receiver
+          if-no-files-found: error
