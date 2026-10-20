@@ -159,7 +159,9 @@ public final class M3Ast {
                 stack[stackSize++] = atoms.childAt(current, i);
             }
         }
-        return java.util.Arrays.copyOf(output, outputSize);
+        return outputSize == output.length
+                ? output
+                : java.util.Arrays.copyOf(output, outputSize);
     }
 
     /** Projects ordered AST-child relations into an immutable M3 DAG. */

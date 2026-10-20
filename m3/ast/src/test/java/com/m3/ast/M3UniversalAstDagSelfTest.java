@@ -41,7 +41,24 @@ public final class M3UniversalAstDagSelfTest {
         equal(5, ast.expandedSize(root), "expanded occurrences");
         equal(3, ast.depth(root), "depth");
         M3Dag dag = ast.asDag(99L);
-        equal(2, dag.edgeCount(), "AST edges");
+        equal(3, dag.edgeCount(), "AST edges");
+        int branch = ast.childAt(root, 0);
+        equal(1, dag.outgoingCount(branch), "shared branch outgoing count");
+        equal(2, dag.outgoingCount(root), "root ordered outgoing count");
+        M3Dag.EdgeView branchEdge = dag.outgoingEdge(branch, 0);
+        equal(branch, branchEdge.fromAtomId(), "branch edge source");
+        equal(ast.childAt(branch, 0), branchEdge.toAtomId(), "branch edge target");
+        equal(0, branchEdge.ordinal(), "branch child ordinal");
+        equal(99L, branchEdge.relationWordId(), "branch child relation");
+        for (int ordinal = 0; ordinal < 2; ordinal++) {
+            M3Dag.EdgeView edge = dag.outgoingEdge(root, ordinal);
+            equal(root, edge.fromAtomId(), "root edge source");
+            equal(branch, edge.toAtomId(), "shared root edge target");
+            equal(ordinal, edge.ordinal(), "distinct root child ordinal");
+            equal(99L, edge.relationWordId(), "root child relation");
+        }
+        check(dag.outgoingEdge(root, 0).edgeId() != dag.outgoingEdge(root, 1).edgeId(),
+                "shared target retains two ordered edges");
         equal(M3InteractionKind.STRUCTURAL, dag.edge(0).interactionKind(), "AST edge kind");
     }
 
