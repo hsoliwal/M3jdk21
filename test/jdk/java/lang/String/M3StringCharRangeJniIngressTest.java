@@ -2,10 +2,12 @@
  * Copyright (c) 2026, Hitesh Soliwal and contributors. All rights reserved.
  * GPLv2 with the Classpath exception.
  */
+
+/*
  * @test
  * @summary JNI-callable UTF-16 ranges compose into one interned M3 String view
- * @run main/native/othervm --add-opens=java.base/java.lang=ALL-UNNAMED -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage M3StringCharRangeJniIngressTest
- * @run main/native/othervm --add-opens=java.base/java.lang=ALL-UNNAMED -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage -XX:-CompactStrings M3StringCharRangeJniIngressTest
+ * @run main/native/othervm -Xcheck:jni --add-opens=java.base/java.lang=ALL-UNNAMED -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage M3StringCharRangeJniIngressTest
+ * @run main/native/othervm -Xcheck:jni --add-opens=java.base/java.lang=ALL-UNNAMED -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage -XX:-CompactStrings M3StringCharRangeJniIngressTest
  */
 
 import java.lang.reflect.Field;
@@ -19,6 +21,7 @@ public class M3StringCharRangeJniIngressTest {
     private static final Field M3_COORDINATE;
     private static final Method RANGE_JOIN;
     private static final Method CHAR_SHADOW;
+    private static final Field TUPLE_HEIGHT;
     private static int checks;
 
     static {
@@ -36,6 +39,9 @@ public class M3StringCharRangeJniIngressTest {
             RANGE_JOIN.setAccessible(true);
             CHAR_SHADOW = m3.getDeclaredMethod("charShadow");
             CHAR_SHADOW.setAccessible(true);
+            Class<?> tuple = Class.forName("java.lang.M3StringTuple");
+            TUPLE_HEIGHT = tuple.getDeclaredField("height");
+            TUPLE_HEIGHT.setAccessible(true);
         } catch (ReflectiveOperationException failure) {
             throw new ExceptionInInitializerError(failure);
         }
@@ -70,6 +76,33 @@ public class M3StringCharRangeJniIngressTest {
         check(owner == M3_OWNER.get(repeatedStorage)
                         && coordinate == M3_COORDINATE.getLong(repeatedStorage),
                 "same interned pieces reuse the canonical tuple coordinate");
+
+        int fanout = 257; // Deliberately not a power of two: exercise carry and final fold.
+        char[][] manySources = new char[fanout][];
+        int[] manyStarts = new int[fanout];
+        int[] manyLengths = new int[fanout];
+        char[] manyExpected = new char[fanout];
+        for (int index = 0; index < fanout; index++) {
+            char unit = (char) ('a' + index % 26);
+            manySources[index] = new char[] {unit};
+            manyLengths[index] = 1;
+            manyExpected[index] = unit;
+        }
+        String many = joinRanges(manySources, manyStarts, manyLengths);
+        check(many != null && many.equals(new String(manyExpected)),
+                "257 selected ranges preserve order through balanced composition");
+        Object manyStorage = requireM3(many);
+        Object manyOwner = M3_OWNER.get(manyStorage);
+        int height = TUPLE_HEIGHT.getInt(manyOwner);
+        int ceilLog2 = Integer.SIZE - Integer.numberOfLeadingZeros(fanout - 1);
+        check(height <= 2 * ceilLog2 + 1,
+                "non-power-of-two tuple height remains logarithmically bounded");
+        String manyAgain = joinRanges(manySources, manyStarts, manyLengths);
+        Object manyAgainStorage = requireM3(manyAgain);
+        check(manyOwner == M3_OWNER.get(manyAgainStorage)
+                        && M3_COORDINATE.getLong(manyStorage)
+                                == M3_COORDINATE.getLong(manyAgainStorage),
+                "large repeated fanout reuses its canonical tuple coordinate");
 
         Arrays.fill(first, 'x');
         Arrays.fill(second, 'y');
