@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: Apache-2.0
 // SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
+// Modified 2026-10-20: enforce existing occurrence/depth budgets before unbounded retention.
 package jdk.m3.parser;
 
 import java.lang.reflect.Array;
@@ -8,6 +9,7 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
 
@@ -56,35 +58,35 @@ public final class M3ASTAuthoritativeModels {
                 "completed Maven effective model");
         M3ASTIndex.Builder out = M3ASTIndex.builder(source,
                 M3ASTIndex.Domain.MAVEN_POM, limits.maxNodes());
-        int root = unknown(out, -1, "MAVEN_EFFECTIVE_MODEL");
+        int root = unknown(out, -1, "MAVEN_EFFECTIVE_MODEL", limits, 1);
         Object parent = optional(model, "getParent");
-        if (parent != null) unknown(out, root, "MAVEN_INHERITED_PARENT");
-        for (Object ignored : elements(optional(model, "getModules"))) {
-            unknown(out, root, "MAVEN_MODULE");
+        if (parent != null) unknown(out, root, "MAVEN_INHERITED_PARENT", limits, 2);
+        for (Object ignored : elements(optional(model, "getModules"), limits.maxNodes())) {
+            unknown(out, root, "MAVEN_MODULE", limits, 2);
         }
-        append(out, root, optional(model, "getDependencies"), "MAVEN_DEPENDENCY");
+        append(out, root, optional(model, "getDependencies"), "MAVEN_DEPENDENCY", limits, 2);
         Object managed = optional(model, "getDependencyManagement");
         if (managed != null) {
-            int node = unknown(out, root, "MAVEN_DEPENDENCY_MANAGEMENT");
-            append(out, node, optional(managed, "getDependencies"), "MAVEN_MANAGED_DEPENDENCY");
+            int node = unknown(out, root, "MAVEN_DEPENDENCY_MANAGEMENT", limits, 2);
+            append(out, node, optional(managed, "getDependencies"), "MAVEN_MANAGED_DEPENDENCY", limits, 3);
         }
         Object build = optional(model, "getBuild");
         if (build != null) {
-            int buildNode = unknown(out, root, "MAVEN_BUILD");
-            for (Object plugin : elements(optional(build, "getPlugins"))) {
-                int pluginNode = unknown(out, buildNode, "MAVEN_PLUGIN");
-                append(out, pluginNode, optional(plugin, "getExecutions"), "MAVEN_PLUGIN_EXECUTION");
-                append(out, pluginNode, optional(plugin, "getDependencies"), "MAVEN_PLUGIN_DEPENDENCY");
+            int buildNode = unknown(out, root, "MAVEN_BUILD", limits, 2);
+            for (Object plugin : elements(optional(build, "getPlugins"), limits.maxNodes())) {
+                int pluginNode = unknown(out, buildNode, "MAVEN_PLUGIN", limits, 3);
+                append(out, pluginNode, optional(plugin, "getExecutions"), "MAVEN_PLUGIN_EXECUTION", limits, 4);
+                append(out, pluginNode, optional(plugin, "getDependencies"), "MAVEN_PLUGIN_DEPENDENCY", limits, 4);
             }
             Object pluginManagement = optional(build, "getPluginManagement");
             if (pluginManagement != null) {
-                int node = unknown(out, buildNode, "MAVEN_PLUGIN_MANAGEMENT");
-                append(out, node, optional(pluginManagement, "getPlugins"), "MAVEN_MANAGED_PLUGIN");
+                int node = unknown(out, buildNode, "MAVEN_PLUGIN_MANAGEMENT", limits, 3);
+                append(out, node, optional(pluginManagement, "getPlugins"), "MAVEN_MANAGED_PLUGIN", limits, 4);
             }
         }
-        append(out, root, optional(model, "getProfiles"), "MAVEN_PROFILE");
-        append(out, root, optional(model, "getRepositories"), "MAVEN_REPOSITORY");
-        append(out, root, optional(model, "getPluginRepositories"), "MAVEN_PLUGIN_REPOSITORY");
+        append(out, root, optional(model, "getProfiles"), "MAVEN_PROFILE", limits, 2);
+        append(out, root, optional(model, "getRepositories"), "MAVEN_REPOSITORY", limits, 2);
+        append(out, root, optional(model, "getPluginRepositories"), "MAVEN_PLUGIN_REPOSITORY", limits, 2);
         return out.seal();
     }
 
@@ -110,8 +112,9 @@ public final class M3ASTAuthoritativeModels {
         M3ASTIndex.Builder out = M3ASTIndex.builder(source,
                 kotlin ? M3ASTIndex.Domain.GRADLE_KOTLIN : M3ASTIndex.Domain.GRADLE_GROOVY,
                 limits.maxNodes());
-        Object[] projects = new Object[16];
-        int[] parents = new int[16], depths = new int[16];
+        int capacity = Math.min(16, limits.maxNodes());
+        Object[] projects = new Object[capacity];
+        int[] parents = new int[capacity], depths = new int[capacity];
         int size = 1;
         projects[0] = gradleProject;
         parents[0] = -1;
@@ -127,13 +130,14 @@ public final class M3ASTAuthoritativeModels {
                 throw new IllegalArgumentException("unnamed original Gradle project");
             }
             int row = unknown(out, parent, "GRADLE_TOOLING_PROJECT");
-            append(out, row, call(type, original, "getTasks"), "GRADLE_TOOLING_TASK");
-            List<?> children = elements(call(type, original, "getChildren"));
+            append(out, row, call(type, original, "getTasks"), "GRADLE_TOOLING_TASK", limits, depth + 1);
+            List<?> children = elements(call(type, original, "getChildren"), limits.maxNodes());
             for (int i = children.size() - 1; i >= 0; i--) {
                 if (size == projects.length) {
-                    projects = Arrays.copyOf(projects, projects.length * 2);
-                    parents = Arrays.copyOf(parents, parents.length * 2);
-                    depths = Arrays.copyOf(depths, depths.length * 2);
+                    int expanded = expandedCapacity(projects.length, limits.maxNodes());
+                    projects = Arrays.copyOf(projects, expanded);
+                    parents = Arrays.copyOf(parents, expanded);
+                    depths = Arrays.copyOf(depths, expanded);
                 }
                 projects[size] = children.get(i);
                 parents[size] = row;
@@ -156,8 +160,9 @@ public final class M3ASTAuthoritativeModels {
         Class<?> nodeType = load(moduleType.getClassLoader(), "org.codehaus.groovy.ast.ASTNode");
         M3ASTIndex.Builder out = M3ASTIndex.builder(source,
                 M3ASTIndex.Domain.GRADLE_GROOVY, limits.maxNodes());
-        Object[] pending = new Object[16];
-        int[] parents = new int[16], depths = new int[16];
+        int capacity = Math.min(16, limits.maxNodes());
+        Object[] pending = new Object[capacity];
+        int[] parents = new int[capacity], depths = new int[capacity];
         pending[0] = module;
         parents[0] = -1;
         depths[0] = 1;
@@ -173,16 +178,19 @@ public final class M3ASTAuthoritativeModels {
             children.clear();
             for (String accessor : groovyChildren(value)) {
                 Object child = optional(value, accessor);
-                if (nodeType.isInstance(child)) children.add(child);
+                if (nodeType.isInstance(child)) addChild(children, child, limits.maxNodes());
                 else if (child instanceof Iterable<?> list) {
-                    for (Object entry : list) if (nodeType.isInstance(entry)) children.add(entry);
+                    for (Object entry : list) {
+                        if (nodeType.isInstance(entry)) addChild(children, entry, limits.maxNodes());
+                    }
                 }
             }
             for (int i = children.size() - 1; i >= 0; i--) {
                 if (size == pending.length) {
-                    pending = Arrays.copyOf(pending, pending.length * 2);
-                    parents = Arrays.copyOf(parents, parents.length * 2);
-                    depths = Arrays.copyOf(depths, depths.length * 2);
+                    int expanded = expandedCapacity(pending.length, limits.maxNodes());
+                    pending = Arrays.copyOf(pending, expanded);
+                    parents = Arrays.copyOf(parents, expanded);
+                    depths = Arrays.copyOf(depths, expanded);
                 }
                 pending[size] = children.get(i);
                 parents[size] = row;
@@ -208,8 +216,9 @@ public final class M3ASTAuthoritativeModels {
         }
         M3ASTIndex.Builder out = M3ASTIndex.builder(source,
                 M3ASTIndex.Domain.GRADLE_KOTLIN, limits.maxNodes());
-        Object[] pending = new Object[16];
-        int[] parents = new int[16], depths = new int[16];
+        int capacity = Math.min(16, limits.maxNodes());
+        Object[] pending = new Object[capacity];
+        int[] parents = new int[capacity], depths = new int[capacity];
         pending[0] = ktFile; parents[0] = -1; depths[0] = 1;
         int size = 1;
         while (size != 0) {
@@ -228,9 +237,10 @@ public final class M3ASTAuthoritativeModels {
             }
             for (int i = Array.getLength(children) - 1; i >= 0; i--) {
                 if (size == pending.length) {
-                    pending = Arrays.copyOf(pending, pending.length * 2);
-                    parents = Arrays.copyOf(parents, parents.length * 2);
-                    depths = Arrays.copyOf(depths, depths.length * 2);
+                    int expanded = expandedCapacity(pending.length, limits.maxNodes());
+                    pending = Arrays.copyOf(pending, expanded);
+                    parents = Arrays.copyOf(parents, expanded);
+                    depths = Arrays.copyOf(depths, expanded);
                 }
                 pending[size] = Array.get(children, i);
                 parents[size] = row;
@@ -262,8 +272,24 @@ public final class M3ASTAuthoritativeModels {
         };
     }
 
-    private static void append(M3ASTIndex.Builder out, int parent, Object original, String kind) {
-        for (Object ignored : elements(original)) unknown(out, parent, kind);
+    private static void append(M3ASTIndex.Builder out, int parent, Object original, String kind,
+            M3ASTIngress.Limits limits, int depth) {
+        for (Object ignored : elements(original, limits.maxNodes())) {
+            unknown(out, parent, kind, limits, depth);
+        }
+    }
+    private static int unknown(M3ASTIndex.Builder out, int parent, String kind,
+            M3ASTIngress.Limits limits, int depth) {
+        if (depth > limits.maxDepth()) throw new IllegalArgumentException("original provider depth budget");
+        return unknown(out, parent, kind);
+    }
+    private static int expandedCapacity(int capacity, int maximum) {
+        if (capacity == maximum) throw new IllegalArgumentException("original provider occurrence budget");
+        return Math.min(maximum, capacity * 2);
+    }
+    private static void addChild(ArrayList<Object> children, Object child, int maximum) {
+        if (children.size() == maximum) throw new IllegalArgumentException("Groovy child occurrence budget");
+        children.add(child);
     }
     private static int unknown(M3ASTIndex.Builder out, int parent, String kind) {
         return out.add(parent, kind, -1, -1, M3ASTIndex.SOURCE_UNVERIFIED);
@@ -322,13 +348,21 @@ public final class M3ASTAuthoritativeModels {
         if (value == null) throw new IllegalArgumentException(message + " unavailable");
         return value;
     }
-    private static List<?> elements(Object value) {
+    private static List<?> elements(Object value, int maximum) {
         if (value == null) return List.of();
+        if (value instanceof Collection<?> collection && collection.size() > maximum) {
+            throw new IllegalArgumentException("original provider collection budget");
+        }
         if (value instanceof List<?> list) return list;
-        if (value instanceof Collection<?> collection) return List.copyOf(collection);
         if (value instanceof Iterable<?> iterable) {
             ArrayList<Object> answer = new ArrayList<>();
-            for (Object element : iterable) answer.add(element);
+            Iterator<?> entries = iterable.iterator();
+            while (entries.hasNext()) {
+                if (answer.size() == maximum) throw new IllegalArgumentException("original provider collection budget");
+                Object element = entries.next();
+                // Preserve the previous List.copyOf null policy for non-List Collections.
+                answer.add(value instanceof Collection<?> ? Objects.requireNonNull(element) : element);
+            }
             return answer;
         }
         throw new IllegalArgumentException("provider collection not iterable: " + value.getClass());

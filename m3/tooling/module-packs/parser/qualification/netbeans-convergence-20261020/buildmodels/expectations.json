@@ -1,0 +1,78 @@
+{
+  "kind": "FINITE_API_SHAPE_JAVA",
+  "baseline_owner_sha256": "8fe4828ed449335d3ec4975b16f708ff26fa6739dad82523379cd2f7bfb6bef3",
+  "candidate_owner_sha256": "ce89397cbfbcf34616cf549459f118702c2bf9af1528bc70cf480ad63682c445",
+  "public_protected_api_sha256": "97d74039a14393a771678154f449f6857039b4084d4c642c7fc3d6cc41be3e26",
+  "cases": [
+    {
+      "case": "valid",
+      "baseline_exit": 0,
+      "baseline_diagnostic": "M3_BUILD_MODEL_LIMITS_PASS case=valid checks=308",
+      "candidate_exit": 0,
+      "candidate_diagnostic": "M3_BUILD_MODEL_LIMITS_PASS case=valid checks=308"
+    },
+    {
+      "case": "maven-depth",
+      "baseline_exit": 1,
+      "baseline_diagnostic": "Exception in thread \"main\" java.lang.AssertionError: expected IllegalArgumentException, operation succeeded",
+      "candidate_exit": 0,
+      "candidate_diagnostic": "M3_BUILD_MODEL_LIMITS_PASS case=maven-depth checks=1"
+    },
+    {
+      "case": "maven-nested-depth",
+      "baseline_exit": 1,
+      "baseline_diagnostic": "Exception in thread \"main\" java.lang.AssertionError: expected IllegalArgumentException, operation succeeded",
+      "candidate_exit": 0,
+      "candidate_diagnostic": "M3_BUILD_MODEL_LIMITS_PASS case=maven-nested-depth checks=1"
+    },
+    {
+      "case": "maven-lazy-budget",
+      "baseline_exit": 1,
+      "baseline_diagnostic": "Exception in thread \"main\" java.lang.AssertionError: expected IllegalArgumentException but received java.lang.AssertionError: PRE_BUDGET_ENUMERATION",
+      "candidate_exit": 0,
+      "candidate_diagnostic": "M3_BUILD_MODEL_LIMITS_PASS case=maven-lazy-budget checks=2"
+    },
+    {
+      "case": "maven-collection-budget",
+      "baseline_exit": 1,
+      "baseline_diagnostic": "Exception in thread \"main\" java.lang.AssertionError: expected IllegalArgumentException but received java.lang.AssertionError: OVERSIZED_COLLECTION_MATERIALIZED",
+      "candidate_exit": 0,
+      "candidate_diagnostic": "M3_BUILD_MODEL_LIMITS_PASS case=maven-collection-budget checks=1"
+    },
+    {
+      "case": "gradle-task-depth",
+      "baseline_exit": 1,
+      "baseline_diagnostic": "Exception in thread \"main\" java.lang.AssertionError: expected IllegalArgumentException, operation succeeded",
+      "candidate_exit": 0,
+      "candidate_diagnostic": "M3_BUILD_MODEL_LIMITS_PASS case=gradle-task-depth checks=1"
+    },
+    {
+      "case": "gradle-lazy-budget",
+      "baseline_exit": 1,
+      "baseline_diagnostic": "Exception in thread \"main\" java.lang.AssertionError: expected IllegalArgumentException but received java.lang.AssertionError: PRE_BUDGET_ENUMERATION",
+      "candidate_exit": 0,
+      "candidate_diagnostic": "M3_BUILD_MODEL_LIMITS_PASS case=gradle-lazy-budget checks=2"
+    },
+    {
+      "case": "gradle-frontier",
+      "baseline_exit": 1,
+      "baseline_diagnostic": "Exception in thread \"main\" java.lang.AssertionError: expected IllegalArgumentException but received java.lang.AssertionError: FRONTIER_EXCEEDED_BEFORE_REFUSAL",
+      "candidate_exit": 0,
+      "candidate_diagnostic": "M3_BUILD_MODEL_LIMITS_PASS case=gradle-frontier checks=2"
+    },
+    {
+      "case": "groovy-lazy-budget",
+      "baseline_exit": 1,
+      "baseline_diagnostic": "Exception in thread \"main\" java.lang.AssertionError: expected IllegalArgumentException but received java.lang.AssertionError: PRE_BUDGET_ENUMERATION",
+      "candidate_exit": 0,
+      "candidate_diagnostic": "M3_BUILD_MODEL_LIMITS_PASS case=groovy-lazy-budget checks=2"
+    },
+    {
+      "case": "kotlin-frontier",
+      "baseline_exit": 1,
+      "baseline_diagnostic": "Exception in thread \"main\" java.lang.AssertionError: provider probe failure wrapped before budget refusal",
+      "candidate_exit": 0,
+      "candidate_diagnostic": "M3_BUILD_MODEL_LIMITS_PASS case=kotlin-frontier checks=1"
+    }
+  ]
+}
