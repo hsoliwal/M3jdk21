@@ -141,6 +141,18 @@ public final class M3ASTIngress {
         return output.seal();
     }
 
+    /**
+     * Index an ANTLR4 parse tree that a grammar-specific parser already built.
+     * The caller supplies the original Parser and CharStream; M3JDK21 verifies
+     * exact source text, adjusts Unicode code-point coordinates to UTF-16 and
+     * retains no original ANTLR runtime nodes in the resulting M3ASTIndex.
+     * This does not invoke another parser or add a mandatory runtime jar.
+     */
+    public static M3ASTIndex antlr4(M3File source, Object originalTree,
+            Object originalParser, Object originalCharStream, Limits limits) {
+        return M3Antlr4Ingress.index(source, originalTree, originalParser, originalCharStream, limits);
+    }
+
     /** Optional real-J ingress; the core module has no OpenRewrite dependency. */
     public static M3ASTIndex openrewriteJ(M3File source, Object root, Limits limits) {
         check(source, limits);
