@@ -880,6 +880,25 @@ public final class M3FS implements AutoCloseable {
     return decodeStat(M3FsNative.stat(state.requireHandle(), path(path)));
   }
 
+  /**
+   * Reads at most 4096 native metadata rows through one JNI transition.
+   * In a live handle each path is still sampled independently; for a repeatable
+   * multi-row view use {@link #openSnapshot(Path)}. Missing paths and native
+   * operation errors are returned as per-row status codes rather than fabricated
+   * zero-sized files. This is not an atomic filesystem mutation or a DBFS adapter.
+   * Rows own detached primitive storage; {@code Stat} records are projected on demand.
+   *
+   * @throws UnsupportedOperationException if a loaded older ABI-1 native library
+   *         does not export this additive JNI entrypoint
+   */
+  public synchronized M3FsStatBatch statBatch(String... paths) throws IOException {
+    state.requireHandle();
+    String[] checked = Objects.requireNonNull(paths, "paths").clone();
+    if (checked.length > 4096) throw new IllegalArgumentException("stat batch limit");
+    for (String entry : checked) Objects.requireNonNull(entry, "path");
+    return new M3FsStatBatch(M3FsNative.statBatch(state.requireHandle(), checked));
+  }
+
   public synchronized List<DirEntry> list(String path) throws IOException {
     return listTable(path).entries();
   }
