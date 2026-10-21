@@ -155,6 +155,49 @@ class M3FsManagerBulkTest {
         assertTrue(provider.events.isEmpty());
     }
 
+    @Test
+    void sparseWordCursorMatchesLinearReferenceForRandomWindows() {
+        java.util.Random random = new java.util.Random(0x3B17);
+        for (int trial = 0; trial < 320; trial++) {
+            int length = random.nextInt(250);
+            M3FsBulk.Builder builder = M3FsBulk.builder(0);
+            for (int i = 0; i < length; i++) builder.mkdir("ram:/" + i);
+            int first = random.nextInt(length + 1);
+            int count = random.nextInt(length - first + 1);
+            long[] selected = new long[(length + 63) >>> 6];
+            for (int i = 0; i < length; i++) {
+                if (random.nextInt(trial % 2 == 0 ? 43 : 2) == 0) {
+                    selected[i >>> 6] |= 1L << (i & 63);
+                }
+            }
+            Harness harness = new Harness();
+            M3FsBulk.Result result = harness.manager().executeM3Batch(
+                    builder.build(), first, count, selected);
+            List<String> expected = new ArrayList<>();
+            for (int i = 0; i < length; i++) {
+                boolean active = i >= first && i < first + count
+                        && (selected[i >>> 6] & (1L << (i & 63))) != 0;
+                if (active) expected.add("mkdir ram:/" + i);
+                assertEquals(active ? M3FsBulk.OK : M3FsBulk.SKIPPED, result.status(i));
+            }
+            assertEquals(expected, harness.events);
+            assertEquals(expected.size(), result.successfulCount());
+        }
+    }
+
+    @Test
+    void emptyMaskAndZeroWindowMustNotCallProviders() {
+        Harness harness = new Harness();
+        M3FsBulk.Builder builder = M3FsBulk.builder(0);
+        for (int i = 0; i < 130; i++) builder.mkdir("ram:/" + i);
+        M3FsBulk.Batch batch = builder.build();
+        M3FsBulk.Result empty = harness.manager().executeM3Batch(batch, 13, 115, new long[3]);
+        assertEquals(0, empty.successfulCount());
+        M3FsBulk.Result zeroWindow = harness.manager().executeM3Batch(batch, 130, 0, null);
+        assertEquals(0, zeroWindow.successfulCount());
+        assertTrue(harness.events.isEmpty());
+    }
+
     private record Entry(boolean exists, boolean file, boolean directory) { }
 
     private static final class Harness {
