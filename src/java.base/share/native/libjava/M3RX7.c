@@ -6,7 +6,9 @@
 #include <jni.h>
 #include <stdint.h>
 #include <stddef.h>
+#include <stdlib.h>
 #include "jdk_internal_mindex_M3RX7.h"
+#include "jdk_internal_mindex_M3RX7Transitions.h"
 
 #define M3_ASCII 128
 #define M3_MAX_STATES 4096
@@ -20,6 +22,30 @@ static void invalid(JNIEnv *env, const char *detail) {
     if (clazz != NULL) {
         (*env)->ThrowNew(env, clazz, detail);
         (*env)->DeleteLocalRef(env, clazz);
+    }
+}
+
+static void allocation_failed(JNIEnv *env) {
+    jclass clazz = (*env)->FindClass(env, "java/lang/OutOfMemoryError");
+    if (clazz != NULL) {
+        (*env)->ThrowNew(env, clazz, "bounded DFA transfer workspace");
+        (*env)->DeleteLocalRef(env, clazz);
+    }
+}
+
+static int valid_transfer(const jshort *rows, jsize states) {
+    for (jsize state = 0; state < states; state++) {
+        if (rows[state] < -1 || rows[state] >= states) return 0;
+    }
+    return 1;
+}
+
+/* Inputs may coincide for squaring. Output is always separate storage. */
+static void compose_transfer(const jshort *left, const jshort *right,
+        jshort *out, jsize states) {
+    for (jsize state = 0; state < states; state++) {
+        jint intermediate = left[state];
+        out[state] = intermediate < 0 ? (jshort) -1 : right[intermediate];
     }
 }
 
@@ -146,4 +172,108 @@ JNIEXPORT jint JNICALL Java_jdk_internal_mindex_M3RX7_advanceTokens0(
         return -1;
     }
     return state;
+}
+
+JNIEXPORT void JNICALL Java_jdk_internal_mindex_M3RX7Transitions_compose0(
+        JNIEnv *env, jclass ignored, jshortArray leftArray,
+        jshortArray rightArray, jshortArray outArray) {
+    jshort *left = NULL, *right = NULL, *out = NULL;
+    int written = 0;
+    (void) ignored;
+    if (leftArray == NULL || rightArray == NULL || outArray == NULL) {
+        invalid(env, "missing DFA transfer arrays");
+        return;
+    }
+    jsize states = (*env)->GetArrayLength(env, leftArray);
+    if (states < 1 || states > M3_MAX_STATES
+            || states != (*env)->GetArrayLength(env, rightArray)
+            || states != (*env)->GetArrayLength(env, outArray)) {
+        invalid(env, "invalid DFA transfer dimensions");
+        return;
+    }
+    if ((*env)->IsSameObject(env, leftArray, outArray)
+            || (*env)->IsSameObject(env, rightArray, outArray)) {
+        invalid(env, "DFA transfer output aliases input");
+        return;
+    }
+    left = (*env)->GetShortArrayElements(env, leftArray, NULL);
+    if (left == NULL) goto done;
+    right = (*env)->GetShortArrayElements(env, rightArray, NULL);
+    if (right == NULL) goto done;
+    if (!valid_transfer(left, states) || !valid_transfer(right, states)) {
+        invalid(env, "invalid DFA transfer state");
+        goto done;
+    }
+    out = (*env)->GetShortArrayElements(env, outArray, NULL);
+    if (out == NULL) goto done;
+    compose_transfer(left, right, out, states);
+    written = 1;
+done:
+    if (out != NULL) (*env)->ReleaseShortArrayElements(env, outArray, out, written ? 0 : JNI_ABORT);
+    if (right != NULL) (*env)->ReleaseShortArrayElements(env, rightArray, right, JNI_ABORT);
+    if (left != NULL) (*env)->ReleaseShortArrayElements(env, leftArray, left, JNI_ABORT);
+}
+
+JNIEXPORT void JNICALL Java_jdk_internal_mindex_M3RX7Transitions_repeat0(
+        JNIEnv *env, jclass ignored, jshortArray rowsArray,
+        jlong count, jshortArray outArray) {
+    jshort *rows = NULL, *out = NULL, *workspace = NULL;
+    int written = 0;
+    (void) ignored;
+    if (rowsArray == NULL || outArray == NULL) {
+        invalid(env, "missing DFA transfer arrays");
+        return;
+    }
+    jsize states = (*env)->GetArrayLength(env, rowsArray);
+    if (count < 0 || states < 1 || states > M3_MAX_STATES
+            || states != (*env)->GetArrayLength(env, outArray)) {
+        invalid(env, "invalid DFA repetition dimensions or count");
+        return;
+    }
+    if ((*env)->IsSameObject(env, rowsArray, outArray)) {
+        invalid(env, "DFA repetition output aliases input");
+        return;
+    }
+    rows = (*env)->GetShortArrayElements(env, rowsArray, NULL);
+    if (rows == NULL) goto done;
+    if (!valid_transfer(rows, states)) {
+        invalid(env, "invalid DFA transfer state");
+        goto done;
+    }
+    workspace = (jshort *) malloc((size_t) states * 2 * sizeof(jshort));
+    if (workspace == NULL) {
+        allocation_failed(env);
+        goto done;
+    }
+    jshort *result = workspace;
+    jshort *scratch = workspace + states;
+    for (jsize state = 0; state < states; state++) {
+        result[state] = count == 0 ? (jshort) state : rows[state];
+    }
+    /* The leading set bit is represented by rows. Unsigned shifts are defined
+       even for the highest admitted exponent, INT64_MAX. */
+    uint64_t bit = 0;
+    for (uint64_t remaining = (uint64_t) count; remaining > 1; remaining >>= 1) {
+        bit = bit == 0 ? UINT64_C(1) : bit << 1;
+    }
+    for (; bit != 0; bit >>= 1) {
+        compose_transfer(result, result, scratch, states);
+        jshort *previous = result;
+        result = scratch;
+        scratch = previous;
+        if (((uint64_t) count & bit) != 0) {
+            compose_transfer(result, rows, scratch, states);
+            previous = result;
+            result = scratch;
+            scratch = previous;
+        }
+    }
+    out = (*env)->GetShortArrayElements(env, outArray, NULL);
+    if (out == NULL) goto done;
+    for (jsize state = 0; state < states; state++) out[state] = result[state];
+    written = 1;
+done:
+    if (out != NULL) (*env)->ReleaseShortArrayElements(env, outArray, out, written ? 0 : JNI_ABORT);
+    free(workspace);
+    if (rows != NULL) (*env)->ReleaseShortArrayElements(env, rowsArray, rows, JNI_ABORT);
 }
