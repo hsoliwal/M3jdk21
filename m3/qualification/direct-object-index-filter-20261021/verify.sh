@@ -24,13 +24,15 @@ echo "259b99369196525639d27a1a13e82ac967b69691e3f486ac153fce744a786875  $TEST" |
 JAVA_HOME="${JAVA_HOME:-$(dirname "$(dirname "$(readlink -f "$(command -v javac)")")")}"
 WORK="$(mktemp -d)"
 trap 'rm -rf "$WORK"' EXIT
-mkdir -p "$WORK/classes"
+mkdir -p "$WORK/classes" "$WORK/src/jdk/internal/misc"
+cp "$JAVA" "$WORK/src/jdk/internal/misc/M3ObjectMemory.java"
 
-# Compile against the matched package/module names, without loading the unbuilt
-# libjava exports and without modifying the supplied product class.
+# Compile byte-identical JDK source against one isolated java.base patch path,
+# without implicitly compiling unrelated unqualified JDK sources or loading the
+# unbuilt libjava exports.
 javac -source 21 -target 21 -proc:none -Xlint:all -Werror \
-  --patch-module java.base=src/java.base/share/classes \
-  -d "$WORK/classes" "$JAVA"
+  --patch-module java.base="$WORK/src" \
+  -d "$WORK/classes" "$WORK/src/jdk/internal/misc/M3ObjectMemory.java"
 javac -source 21 -target 21 -proc:none -Xlint:all -Werror \
   --patch-module java.base="$WORK/classes" \
   --add-exports java.base/jdk.internal.misc=ALL-UNNAMED \
