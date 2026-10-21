@@ -372,11 +372,7 @@ public final class M3IndexedListSnapshot<E> extends AbstractList<E> implements R
             reversePositions(indices, 0, length);
             int output = 0;
             for (int end = length; end > 0;) {
-                int begin = end - 1;
-                while (begin > 0
-                        && (groupStarts[begin >>> 6] & (1L << (begin & 63))) == 0L) {
-                    begin--;
-                }
+                int begin = precedingGroupStart(groupStarts, end - 1);
                 int next = output + (end - begin);
                 reversePositions(indices, output, next);
                 output = next;
@@ -387,6 +383,19 @@ public final class M3IndexedListSnapshot<E> extends AbstractList<E> implements R
                     comparator != null ? comparator.compare(right, left)
                             : ((Comparable<? super E>) right).compareTo(left));
         }
+    }
+
+    /** Last admitted equality-group start at or before a selected source ordinal. */
+    private static int precedingGroupStart(long[] groupStarts, int ordinal) {
+        int word = ordinal >>> 6;
+        long candidates = groupStarts[word] & (-1L >>> (63 - (ordinal & 63)));
+        while (candidates == 0L) {
+            if (--word < 0) {
+                throw new IllegalStateException("missing immutable equality-group start");
+            }
+            candidates = groupStarts[word];
+        }
+        return (word << 6) + Long.SIZE - 1 - Long.numberOfLeadingZeros(candidates);
     }
 
     /** Reverse only a private primitive-index range; no payload, entry or callback. */
