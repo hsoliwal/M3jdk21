@@ -1,4 +1,17 @@
 <!-- SPDX-License-Identifier: Apache-2.0 -->
+# Nullable String concat recipe qualification candidate
+
+This successor extends qualified hierarchy SDK8fba702e07911581678c94aca44ba724a7b5d2e8/run39107636371 without changing its four engines, Maven POM, old resources, test methods, exports or controls. New qualification is NOT_RUN. The composite targets the public factory, existing jtreg test and runtime-owner manifest at master2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49.
+
+The test uses the unchanged Java AST snapshot engine. The factory reuses the unchanged text engine's EXISTING exact jdkJavadocBootstrap path; pinned OpenRewrite8.17.1 cannot convert its Javadoc. JSON uses the same text owner. No new parser exception or suppressed callback is introduced. Typed factory postimage/Java21 compile, original model, actual task admission and matched baseline/candidate images remain required and NOT_RUN.
+
+The new helper plans32named composite runs/32fixedpoints/24owning-leaf refusals/2export refusals. Leaves preflight their own targets; no cross-engine atomicity is asserted. It captures complete actual forward Results and emits only their three Result.diff patches plus a receipt, with4records under16KiB and64KiBbundle caps. Full source afterimages remain pinned resources; they are not oversized log carriers. All old carrier/log/proof/process/storage bounds remain unchanged. No target application, speedup or fullJDK/JNI claim is admitted.
+
+Borrow-first foundation04d5ced83d6a014784671bc5606ac61e4bc0723a preceded helper authoring. Preserve public source notices and all66historical runtime-owner entries/oldpatch hash. The manifest adds only the exact factory successor. Canonical authoring home: synexia-openrewrite-recipes/tasks/string-concat-null-string-20261018.
+
+## Historical qualified base description
+
+<!-- SPDX-License-Identifier: Apache-2.0 -->
 # EveryModule hierarchy test recipe qualification bootstrap
 
 This test-only successor preserves qualified RX7 bootstrap SDK603c438782a1447b4dd0a486ec6bb6287c8db715, its unchanged four engines/POM/source/oracles, three named JUnit methods, original two Java exports and exact three-record receive-control carrier. The old control plane remains byte-exact and runs this SDK through a separately bound draft.

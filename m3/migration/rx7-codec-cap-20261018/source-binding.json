@@ -1,12 +1,12 @@
 {
   "schema": "SYNEXIA_RX7_CODEC_CAP_BINDING_V1",
   "repository": "hsoliwal/com.synexia",
-  "sourceCommit": "d9e5fcd712d25e16f1b52a93b8a2c3a14639a323",
-  "sourcePullRequest": "https://github.com/hsoliwal/com.synexia/pull/12303",
-  "canonicalPath": "synexia-openrewrite-recipes/tasks/everymodule-hierarchy-test-repair-20261018/sdk",
+  "sourceCommit": "a7e7bbdc7a69fbee615ea04d47321956f0abf35a",
+  "sourcePullRequest": "https://github.com/hsoliwal/com.synexia/pull/12315",
+  "canonicalPath": "synexia-openrewrite-recipes/tasks/string-concat-null-string-20261018/sdk",
   "receiverCorePath": "m3/migration/rx7-codec-cap-20261018/sdk",
-  "moduleGitTree": "8fba702e07911581678c94aca44ba724a7b5d2e8",
-  "pinsSha256": "aaeca3f76302a5390819f77e5149111809cf7768b45364203d20856a28a617e4",
+  "moduleGitTree": "74d9cacb400b6116f36a1ec7315d720b30a00813",
+  "pinsSha256": "a5184199af5e6cd6e41cb43427e9f29c84548ca1f0b7e9bce99d74a14dc55890",
   "launcherSha256": "63de29b3444fcd5a794ff8ba47b8cebf2d0aa14934c5fb38ed58624f0a661a00",
   "workflowSha256": "b878863f71b122dcabbfef09658458a358662e8210a470b70d5cc431acc250a8",
   "runtimeApplied": false,
@@ -15,7 +15,7 @@
     39100818657,
     39101824825
   ],
-  "candidateExecution": "NOT_RUN_EVERYMODULE_HIERARCHY_TEST_RECIPE_QUALIFICATION",
+  "candidateExecution": "NOT_RUN_NULLABLE_STRING_CONCAT_RECIPE_QUALIFICATION",
   "bootstrapOnly": true,
   "qualifiedCapBranchPreserved": "b42f5260417d12bb73246302c8722b9295a2d24f",
   "everyModuleAdmission": "NOT_RUN",
@@ -27,8 +27,13 @@
   "originalModuleTestExecution": "NOT_RUN",
   "originalTestApplication": false,
   "sourcePathTreeExternalReadback": {
-    "commit": "d9e5fcd712d25e16f1b52a93b8a2c3a14639a323",
-    "path": "synexia-openrewrite-recipes/tasks/everymodule-hierarchy-test-repair-20261018/sdk",
-    "tree": "8fba702e07911581678c94aca44ba724a7b5d2e8"
-  }
+    "commit": "a7e7bbdc7a69fbee615ea04d47321956f0abf35a",
+    "path": "synexia-openrewrite-recipes/tasks/string-concat-null-string-20261018/sdk",
+    "tree": "74d9cacb400b6116f36a1ec7315d720b30a00813"
+  },
+  "qualifiedHierarchyBranchPreserved": "b83c325c8a395464909bc71156cfb3b563b6623e",
+  "intendedProductionApplicationBase": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
+  "typedFactoryPostimage": "NOT_RUN",
+  "matchedImageBaseline": "NOT_RUN",
+  "matchedImageCandidate": "NOT_RUN"
 }
