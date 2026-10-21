@@ -60,6 +60,24 @@
               <classpathScope>test</classpathScope>
             </configuration>
           </execution>
+          <execution>
+            <id>m3-word-transfer-boundary-proof</id>
+            <phase>verify</phase>
+            <goals><goal>java</goal></goals>
+            <configuration>
+              <mainClass>com.m3.lexicon.M3RegexWordTransferBoundaryProof</mainClass>
+              <classpathScope>test</classpathScope>
+            </configuration>
+          </execution>
+          <execution>
+            <id>m3-word-transfer-composition-proof</id>
+            <phase>verify</phase>
+            <goals><goal>java</goal></goals>
+            <configuration>
+              <mainClass>com.m3.lexicon.M3RegexWordTransferCompositionProof</mainClass>
+              <classpathScope>test</classpathScope>
+            </configuration>
+          </execution>
         </executions>
       </plugin>
     </plugins>

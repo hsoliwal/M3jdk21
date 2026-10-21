@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: Apache-2.0
 // Copyright 2026 Hitesh Soliwal and contributors
+// M3 refinement 2026-10-21: checked coordinates, bound intake and composable row summaries.
 package com.m3.lexicon;
 
 import java.nio.ByteBuffer;
@@ -7,6 +8,7 @@ import java.nio.ByteOrder;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Word-id regex transfer rows (sidecar M3RXW001; REGEX_PRECOMPUTE_DESIGN.md §2e). For a DFA whose state
@@ -43,10 +45,17 @@ public final class M3RegexWordTransferRows {
         this.accept = accept;
     }
 
-    /** Builds the full vocab x Q table (image-time or lazy page fill). */
+    /**
+     * Builds the full vocab x Q table (image-time or lazy page fill). The DFA and spellings
+     * must be stable during construction. A DFA transition must return a state in 0..Q-1.
+     * UTF-16 units are exact, including NUL and unpaired surrogates; no folding is performed.
+     */
     public static M3RegexWordTransferRows build(Dfa dfa, List<? extends CharSequence> words) {
-        int q = dfa.stateCount();
-        int v = words.size();
+        int q = Objects.requireNonNull(dfa, "dfa").stateCount();
+        if (q <= 0) {
+            throw new IllegalArgumentException("DFA state count must be positive");
+        }
+        int v = Objects.requireNonNull(words, "words").size();
         int[] next = new int[Math.multiplyExact(v, q)];
         long[] accept = M3BitLanes.lanes(next.length);
         for (int word = 0; word < v; word++) {
@@ -55,6 +64,9 @@ public final class M3RegexWordTransferRows {
                 int current = state;
                 for (int index = 0; index < spelling.length(); index++) {
                     current = dfa.next(current, spelling.charAt(index));
+                    if (current < 0 || current >= q) {
+                        throw new IllegalArgumentException("DFA transition out of range");
+                    }
                     if (dfa.accepting(current)) {
                         M3BitLanes.set(accept, word * q + state);
                     }
@@ -67,21 +79,163 @@ public final class M3RegexWordTransferRows {
 
     /** @return state after word {@code cwid} from {@code state} */
     public int step(int cwid, int state) {
-        return next[(cwid - 1) * states + state];
+        return next[cell(cwid, state)];
     }
 
     /** @return true when an accepting state is reached inside word {@code cwid} from {@code state} */
     public boolean acceptsInside(int cwid, int state) {
-        return M3BitLanes.get(accept, (cwid - 1) * states + state);
+        return M3BitLanes.get(accept, cell(cwid, state));
     }
 
     /** Composes rows over a CWID sequence (every CWID must be in 1..V). */
     public int run(int[] cwids, int state) {
+        return run(cwids, 0, cwids.length, state);
+    }
+
+    /** Composes a half-open CWID range without copying the token lane. */
+    public int run(int[] cwids, int from, int to, int state) {
+        Objects.checkFromToIndex(from, to, cwids.length);
+        Objects.checkIndex(state, states);
         int current = state;
-        for (int cwid : cwids) {
-            current = step(cwid, current);
+        for (int token = from; token < to; token++) {
+            current = next[row(cwids[token]) + current];
         }
         return current;
+    }
+
+    /** @return number of DFA states Q */
+    public int stateCount() {
+        return states;
+    }
+
+    /**
+     * Precomputes a transfer for every starting state over all supplied CWIDs.
+     * No spelling or DFA callback is visited after build. The input must remain stable
+     * during this call; the returned summary retains neither the input nor any spelling.
+     */
+    public Summary summarize(int[] cwids) {
+        return summarize(cwids, 0, cwids.length);
+    }
+
+    /**
+     * Precomputes a half-open range in O(Q * (to-from)) work, retaining Q integers and
+     * ceil(Q/64) acceptance lanes. Empty ranges are identity transfers, with no inside
+     * acceptance; an initially accepting state is not itself a consumed-text match.
+     */
+    public Summary summarize(int[] cwids, int from, int to) {
+        Objects.checkFromToIndex(from, to, cwids.length);
+        int[] transition = identityTransitions();
+        long[] acceptance = M3BitLanes.lanes(states);
+        for (int token = from; token < to; token++) {
+            int row = row(cwids[token]);
+            for (int state = 0; state < states; state++) {
+                int cell = row + transition[state];
+                if (M3BitLanes.get(accept, cell)) {
+                    M3BitLanes.set(acceptance, state);
+                }
+                transition[state] = next[cell];
+            }
+        }
+        // Finish array initialization before the constructor's final-field publication.
+        return new Summary(this, transition, acceptance);
+    }
+
+    private int[] identityTransitions() {
+        int[] transition = new int[states];
+        for (int state = 0; state < states; state++) {
+            transition[state] = state;
+        }
+        return transition;
+    }
+
+    private Summary identity() {
+        return new Summary(this, identityTransitions(), M3BitLanes.lanes(states));
+    }
+
+    private int row(int cwid) {
+        // Check before subtract/multiply: flat-array bounds do not protect coordinates.
+        if (cwid <= 0 || cwid > vocabulary) {
+            throw new IndexOutOfBoundsException("CWID outside 1..V");
+        }
+        return (cwid - 1) * states;
+    }
+
+    private int cell(int cwid, int state) {
+        Objects.checkIndex(state, states);
+        return row(cwid) + state;
+    }
+
+    /**
+     * Immutable primitive transfer function over this exact table owner. Summaries may
+     * be shared by readers; arrays never escape. Retaining a summary retains its owner.
+     * This summarizes supplied DFA transitions, not captures/backreferences or all of
+     * java.util.regex. Acceptance means a state reached AFTER at least one UTF-16 unit.
+     */
+    public static final class Summary {
+        private final M3RegexWordTransferRows owner;
+        private final int[] next;
+        private final long[] accept;
+
+        private Summary(M3RegexWordTransferRows owner, int[] next, long[] accept) {
+            this.owner = owner;
+            this.next = next;
+            this.accept = accept;
+        }
+
+        /** @return exit state for the supplied starting state */
+        public int step(int state) {
+            return next[Objects.checkIndex(state, next.length)];
+        }
+
+        /** @return whether an accepting state is reached after consuming a unit */
+        public boolean acceptsInside(int state) {
+            return M3BitLanes.get(accept, Objects.checkIndex(state, next.length));
+        }
+
+        /**
+         * Returns this segment followed by right in O(Q) work, without spelling or
+         * token reads. Rejects another owner even when its dimensions happen to match.
+         */
+        public Summary then(Summary right) {
+            Objects.requireNonNull(right, "right");
+            if (owner != right.owner) {
+                throw new IllegalArgumentException("different transfer table owner");
+            }
+            int[] transition = new int[next.length];
+            long[] acceptance = M3BitLanes.lanes(next.length);
+            for (int state = 0; state < next.length; state++) {
+                int middle = next[state];
+                transition[state] = right.next[middle];
+                if (M3BitLanes.get(accept, state) || M3BitLanes.get(right.accept, middle)) {
+                    M3BitLanes.set(acceptance, state);
+                }
+            }
+            return new Summary(owner, transition, acceptance);
+        }
+
+        /**
+         * Repeats the segment by binary powering in O(Q * log(copies)) work and O(Q)
+         * live auxiliary storage. No expanded word-id lane is created; zero is identity.
+         */
+        public Summary repeat(long copies) {
+            if (copies < 0) {
+                throw new IllegalArgumentException("negative repeat count");
+            }
+            if (copies == 1) {
+                return this;
+            }
+            Summary result = owner.identity();
+            Summary power = this;
+            for (long count = copies; count != 0; count >>>= 1) {
+                if ((count & 1) != 0) {
+                    result = result.then(power);
+                }
+                if (count > 1) {
+                    power = power.then(power);
+                }
+            }
+            return result;
+        }
     }
 
     /** @return vocabulary size V */
@@ -111,18 +265,51 @@ public final class M3RegexWordTransferRows {
         return out.array();
     }
 
-    /** Reads an image written by {@link #image}; refuses on magic, geometry or digest mismatch. */
+    /**
+     * Reads an image written by {@link #image}; refuses on magic, geometry or digest
+     * mismatch. Legacy unbound intake: use the overload for caller-expected identity.
+     * The bytes in [0, limit) must not change during intake, including through aliases
+     * of a read-only buffer. Position, mark and byte order of the caller are untouched.
+     */
     public static M3RegexWordTransferRows read(ByteBuffer image) throws M3LexiconFormatException {
+        return readImage(image, 0, null);
+    }
+
+    /**
+     * Reads only a sidecar for the caller's exact generation64 and 32-byte pattern key.
+     * Digest and state validation still apply. These are caller-supplied identities,
+     * not a signature, proof of the DFA, or globally collision-free lexicon identity.
+     * Input bytes must remain immutable throughout this call, as for the legacy reader.
+     */
+    public static M3RegexWordTransferRows read(ByteBuffer image, long generation64, byte[] patternKey)
+            throws M3LexiconFormatException {
+        if (Objects.requireNonNull(patternKey, "patternKey").length != 32) {
+            throw new IllegalArgumentException("pattern key must be a SHA-256");
+        }
+        return readImage(image, generation64, patternKey.clone());
+    }
+
+    private static M3RegexWordTransferRows readImage(ByteBuffer image, long generation64, byte[] patternKey)
+            throws M3LexiconFormatException {
         ByteBuffer map = image.duplicate().order(ByteOrder.BIG_ENDIAN);
         M3LexiconFormat.checkHeader(map);
         M3LexiconFormatException.require(map.getLong(0) == M3LexiconFormat.M3RXW001.magic(), "magic");
         int q = map.getInt(16);
         int v = map.getInt(20);
         long cells = (long) q * v;
+        // Bound before multiplying cell count by its width; malicious q*v can exceed long/4.
+        M3LexiconFormatException.require(q > 0 && v >= 0 && cells <= (Integer.MAX_VALUE - HEADER) / 4,
+                "invalid M3RXW001 cell count");
         long acceptAt = map.getLong(80);
-        M3LexiconFormatException.require(q > 0 && v >= 0 && map.getInt(24) == 4 && map.getLong(72) == HEADER
+        M3LexiconFormatException.require(map.getInt(24) == 4 && map.getLong(72) == HEADER
                 && acceptAt == HEADER + 4 * cells && map.limit() == acceptAt + 8L * ((cells + 63) >>> 6),
                 "invalid M3RXW001 geometry");
+        if (patternKey != null) {
+            byte[] storedKey = new byte[32];
+            map.get(40, storedKey);
+            M3LexiconFormatException.require(map.getLong(32) == generation64, "lexicon generation mismatch");
+            M3LexiconFormatException.require(MessageDigest.isEqual(patternKey, storedKey), "pattern key mismatch");
+        }
         byte[] expected = new byte[32];
         map.get(96, expected);
         M3LexiconFormatException.require(MessageDigest.isEqual(expected, digest(map)), "digest mismatch");
