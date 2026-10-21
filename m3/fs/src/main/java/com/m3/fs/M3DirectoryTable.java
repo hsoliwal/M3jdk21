@@ -147,6 +147,30 @@ public final class M3DirectoryTable {
     @Override public M3FS.DirEntry get(int index) { return entry(index); }
   }
 
+  /** Preserves the API entry-list hash using the canonical UTF-16 and stat columns. */
+  int entriesHashCode() {
+    int hash = 1;
+    for (int row = 0; row < size(); row++) {
+      int nameHash = 0;
+      for (int i = offsets[row]; i < offsets[row + 1]; i++) {
+        nameHash = 31 * nameHash + names[i];
+      }
+      int lane = row * 4;
+      // Keep Stat's record component order, including the enum instance hash.
+      int statHash = Long.hashCode(scalar[lane]);
+      statHash = 31 * statHash + Long.hashCode(scalar[lane + 1]);
+      statHash = 31 * statHash + Long.hashCode(scalar[lane + 2]);
+      statHash = 31 * statHash + Long.hashCode(scalar[lane + 3]);
+      statHash = 31 * statHash + M3FS.Kind.fromNative(state[lane]).hashCode();
+      statHash = 31 * statHash + state[lane + 1];
+      statHash = 31 * statHash + state[lane + 2];
+      statHash = 31 * statHash + state[lane + 3];
+      int entryHash = 31 * nameHash + statHash;
+      hash = 31 * hash + entryHash;
+    }
+    return hash;
+  }
+
   @Override public boolean equals(Object other) {
     return this == other || other instanceof M3DirectoryTable table
         && Arrays.equals(names, table.names) && Arrays.equals(offsets, table.offsets)
