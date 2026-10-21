@@ -7,6 +7,10 @@ on:
       - 'm3/collections/src/main/java/com/m3/collections/M3IndexPathRank.java'
       - 'm3/collections/src/main/java/com/m3/collections/M3LongStateArray.java'
       - 'm3/collections/src/test/java/com/m3/collections/M3IndexPathIdentity*.java'
+      - 'm3/collections/src/main/java/com/m3/collections/M3IndexedLiveView.java'
+      - 'm3/collections/src/test/java/com/m3/collections/M3IndexedLiveViewContract.java'
+      - 'm3/collections/src/test/java/com/m3/collections/M3IndexPathRankBulk*.java'
+      - 'm3/collections/src/test/java/com/m3/collections/M3IndexPathRankNativeSelfTest.java'
       - 'm3/collections/algorithm-catalogue/identity-index-rank-20261021/**'
       - '.github/workflows/m3-identity-rank-20261021.yml'
   workflow_dispatch:
@@ -30,10 +34,15 @@ jobs:
           set -euo pipefail
           git diff --check
           cat <<'SHA' | sha256sum --check
-          235ad056fdfcb6b7c7402face27ade4eefbc71c21cd9dae4920bbc8a0dd2601c  m3/collections/src/main/java/com/m3/collections/M3IndexPathRank.java
+          d650c7fb84b1911d367b5b89ba31f943ac147a594a62948a6a862f1d23ec8010  m3/collections/src/main/java/com/m3/collections/M3IndexPathRank.java
           3d63ae8ed3d7e1c02ffbc1b96daa7d14ee143fffc12da11ba9aec44eaecc0d3b  m3/collections/src/main/java/com/m3/collections/M3LongStateArray.java
-          4f0ba78f6e3e62ee2ca0785349105e7b7cd34069a7f424980db2eaf635926c50  m3/collections/src/test/java/com/m3/collections/M3IndexPathIdentitySelfTest.java
+          bc9755bd43350d583ad724408926f4e2ef76d8c5fc8040278a2620c9dc7a65ba  m3/collections/src/test/java/com/m3/collections/M3IndexPathIdentitySelfTest.java
           dcba4e115ae235321aa2558804a2b3f2cc053fa3b20a7a785b1a487422b2f60e  m3/collections/src/test/java/com/m3/collections/M3IndexPathIdentityTest.java
+          463045956ddd7792f5ae8614c979c129f6fdd2ad30491a8637db10a11c3dc1c1  m3/collections/src/main/java/com/m3/collections/M3IndexedLiveView.java
+          3cad49e2d2e0c5aa1c8d2b880ddca19392cc072a68c2203872634550deae7b60  m3/collections/src/test/java/com/m3/collections/M3IndexedLiveViewContract.java
+          11eaa64f85575aac225b2839872a74e6db52d06981196488834a0f1799eaf7d3  m3/collections/src/test/java/com/m3/collections/M3IndexPathRankNativeSelfTest.java
+          05e276a47fc63c158fe20e3ba14fd3d3adc468b47eabf0966516c392a7cc3f98  m3/collections/src/test/java/com/m3/collections/M3IndexPathRankBulkSelfTest.java
+          011dc027f62c3ba5f8a7bd53808d4fd12531262434e10705b53e42446b7c7298  m3/collections/src/test/java/com/m3/collections/M3IndexPathRankBulkTest.java
           SHA
       - name: Compile exact Java21 identity rank and existing JNI parity probe
         shell: bash
@@ -45,6 +54,7 @@ jobs:
             m3/collections/src/main/java/com/m3/collections/M3IndexPathMasks.java \
             m3/collections/src/main/java/com/m3/collections/M3IndexPathRank.java \
             m3/collections/src/test/java/com/m3/collections/M3IndexPathIdentitySelfTest.java \
+            m3/collections/src/test/java/com/m3/collections/M3IndexPathRankBulkSelfTest.java \
             m3/collections/src/test/java/com/m3/collections/M3IndexPathRankSelfTest.java \
             m3/collections/src/test/java/com/m3/collections/M3IndexPathRankNativeSelfTest.java
           gcc -std=c11 -Wall -Wextra -Werror -Wconversion -Wshadow -pedantic \
@@ -52,10 +62,11 @@ jobs:
             m3/collections/src/main/native/collections/m3_index_path_masks.c \
             -o "$out/native/libm3_collections_pathmask.so"
           java -cp "$out/classes" com.m3.collections.M3IndexPathIdentitySelfTest
+          java -cp "$out/classes" com.m3.collections.M3IndexPathRankBulkSelfTest
           java -cp "$out/classes" com.m3.collections.M3IndexPathRankSelfTest
           java -Xcheck:jni -Djava.library.path="$out/native" -cp "$out/classes" \
             com.m3.collections.M3IndexPathRankNativeSelfTest
       - name: Original owner and new identity-rank JUnit regressions
         run: >
           mvn -B -ntp -f m3/collections/pom.xml
-          -Dtest=M3IndexPathIdentityTest,M3LongStateArrayTest,M3IndexPathRankTest test
+          -Dtest=M3IndexPathIdentityTest,M3LongStateArrayTest,M3IndexPathRankTest,M3IndexPathRankBulkTest,M3IndexedLiveViewTest test
