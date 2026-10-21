@@ -34,3 +34,20 @@ The packet is reviewable but cannot certify full five-provider collection supers
 This review branch also contains the seven exact source/test/manifest/workflow files from previously open M3JDK21 [#1757](https://github.com/hsoliwal/M3jdk21/pull/1757), canonical recipe [Synexia #12854](https://github.com/hsoliwal/com.synexia/pull/12854). The original sorted owner `M3IndexedListSnapshot` has an otherwise disjoint current master preimage and retains the same public APIs, comparator callback order and existing JNI selector. Its ascending-only temporary `int[n]` reversal is replaced by `long[(n+63)/64]` group-boundary bits and a word-level predecessor walk, with no new retained backing store. Unsorted merge sorting is unchanged. The product source matches the prior canonical recipe's Git blob and preserves the prior separate source manifest and CI gate.
 
 This is an **additive source union**, not a Git two-parent ancestry merge, a public API expansion, or proof that either independently opened draft passed its compilation/JNI/installed-JDK gates. The earlier PR and all its history remain available for review; do not close it until combined-source acceptance and owner sign-off. The `M3IndexPathRank.copySelectedRowIds` proposal from #1738 adds a callable API and is deliberately **not** copied into this contract-preserving branch without review.
+
+## Second serial pass on the same filtered owner
+
+The original `M3FilteredViews.CollectionView.contains` nested membership path
+used a temporary growable `ArrayList<CollectionView>` to collect immutable
+wrapper links and then replay their representative checks from inside to out.
+The recipe now counts the same parent links without invoking predicates,
+materializes one exact-size `CollectionView<?>[]` metadata directory,
+and executes the **same** `visible` / `visibleMember` callbacks in their
+previous order. No result/payload is cached, no public API is added and no
+JNI ABI changes.
+
+A source-owned Java21 regression compares a four-level nested membership
+callback tape (`0,0,1,0,1,2,0,1,2,3`), absence short-circuit and a deliberately
+throwing inner predicate. The canonical Synexia recipe and this product's
+SHA-256/Git-blob manifest were re-sealed together. Source equality is
+verified independently from compiler, JUnit, JNI and installed-JDK admission.
