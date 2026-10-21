@@ -25,6 +25,7 @@ public final class M3FileShadowInputStream extends FilterInputStream {
     private byte[] scratch;
     private long count;
     private boolean ended;
+    private boolean limitExceeded;
 
     public M3FileShadowInputStream(InputStream in, long maxBytes, M3FileProgress progress, M3FileShadow... shadows) {
         super(Objects.requireNonNull(in, "in"));
@@ -49,11 +50,26 @@ public final class M3FileShadowInputStream extends FilterInputStream {
         Objects.checkFromIndexSize(offset, length, bytes.length);
         if (length == 0) return 0;
         progress.checkCanceled();
-        int n = in.read(bytes, offset, length);
-        if (n < 0) {
-            end();
-            return -1;
+        if (limitExceeded) throw new M3FileLimitException("resource exceeds configured read limit");
+        if (ended) return -1;
+        long remaining = maxBytes - count;
+        if (remaining == 0) {
+            // Probe one byte only to distinguish EOF from excess content.
+            if (in.read() < 0) { end(); return -1; }
+            limitExceeded = true;
+            throw new M3FileLimitException("resource exceeds configured read limit");
         }
+        // Restrict the underlying request BEFORE consuming its bytes.
+        int allowed = (int) Math.min((long) length, remaining);
+        int n = in.read(bytes, offset, allowed);
+        if (n == 0) {
+            // Recover progress if an unusual provider returns zero for nonzero read.
+            int fallback = in.read();
+            if (fallback < 0) { end(); return -1; }
+            bytes[offset] = (byte) fallback;
+            n = 1;
+        }
+        if (n < 0) { end(); return -1; }
         observe(bytes, offset, n);
         return n;
     }
