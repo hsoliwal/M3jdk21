@@ -1,0 +1,7 @@
+# SPDX-License-Identifier: Apache-2.0
+# Canonical Synexia crate: m3-indexed-descending-groupmask-20261021
+# Original master owner Git blob: 27c56be2bd960ea9de139766ab40960bdbe91b0a
+# path	before_sha256	after_sha256	after_git_blob
+m3/collections/src/main/java/com/m3/collections/M3IndexedListSnapshot.java	c59c2aaa40ef12712b7a5c3ab8af0173a63ae6b995fd4b71695bd61e312d7bff	09594e9b2116889f9ca4065fabadf4d7dc4e2d9bae8a506d277f49fdc5ea362f	6a7cbf805ca8aba1c121eab31fce9c682ca62c51
+m3/collections/src/test/java/com/m3/collections/M3IndexedDescendingGroupMaskSelfTest.java	ABSENT	cfd524fbf36e318d2ea914f8ceaea39bda1dd709ee46a93c47b0fbfac76e6bb5	9f4dd4ead80df815cd4a58e1add9b7bc331a7660
+m3/collections/src/test/java/com/m3/collections/M3IndexedDescendingGroupMaskTest.java	ABSENT	44c8e5c2789e56194c9b5eb3e82c4efb843277a8540fc4d50d8e6532a2230014	e99094b3dbd05aab5db3e7b8dfab1ad9f83ff306
