@@ -1,0 +1,43 @@
+{
+  "baseline_commit": "2779aba3f98f31c324be43f731be7914e1a05935",
+  "maven_fork_commit": "2993571eedbe96e06a737eaa8ae47cf112b255de",
+  "maven_version": "4.1.0-SNAPSHOT",
+  "handoff_sha256": "3e66250f18894ed3704ccd68c9d6227d399ffa8eee787fd7c719ed94e70d7164",
+  "files": 8,
+  "java_files": 2,
+  "source_license": {
+    "M3_owner_and_packet": "Apache-2.0, existing notices retained",
+    "maven_fork": "Apache-2.0; no implementation body or binary copied into target runtime",
+    "fork_LICENSE_sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+    "fork_NOTICE_sha256": "633cdd68388defe137dd4b6a02bc9656cefae3b33c64b371e31b104aad40adac"
+  },
+  "donor_roles": [
+    {
+      "path": "api/maven-api-core/src/main/java/org/apache/maven/api/services/ModelBuilderResult.java",
+      "role": "Public distinct result API and completed effective model contract"
+    },
+    {
+      "path": "impl/maven-impl/src/main/java/org/apache/maven/impl/model/DefaultModelBuilder.java",
+      "role": "Original model construction/validation and subprojects/modules selection authority"
+    },
+    {
+      "path": "impl/maven-impl/src/main/java/org/apache/maven/impl/standalone/ApiRunner.java",
+      "role": "Real source-built test-only session construction"
+    },
+    {
+      "path": "impl/maven-impl/src/test/java/org/apache/maven/impl/model/DefaultModelBuilderTest.java",
+      "role": "41 original fork tests required by source qualification"
+    }
+  ],
+  "implementation": "Existing M3ASTAuthoritativeModels gains one additive public entry and a shared private projection; Maven3 getter order/output retained; JDT unchanged; no replacement parser/model builder or foreign model retained by index",
+  "current_runtime_proof": "REAL_PROVIDER_003_COMPARISON.json: baseline13 and candidate102 actual-provider checks, original Maven3 and JDT shapes equal",
+  "fresh_receiver_required": true,
+  "new_canonical_packet": "m3-maven4-effective-20261021, delegated to jobs_resources; target product must be recipe emitted only",
+  "performance": "No measured speed/allocation claim; existing projection linear in occurrences, at most four-level depth verification",
+  "scope_limits": [
+    "16 Maven4 API/implementation JARs source-built; external74 JARs cached",
+    "Incumbent JDT3.40.0/Maven3.9.11 artifact compatibility, not current custom JDT source acceptance",
+    "No complete Maven4 distribution/plugin or all-fork test promotion",
+    "No custom resolver/m2e/Tycho/mvnd or full product/HotSpot/all-platform promotion"
+  ]
+}

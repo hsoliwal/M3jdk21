@@ -1,0 +1,28 @@
+--- qualified-sdk003/verify_sources.py
++++ swt-pom-correction/verify_sources.py
+@@ -1,6 +1,7 @@
+ #!/usr/bin/env python3
+ # SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
+ # SPDX-License-Identifier: Apache-2.0
++# Modified 2026-10-21 from qualified integrated SDK003 for one SWT proof-POM correction.
+ """Read back the finite receiving source set and unchanged canonical recipe owners."""
+ import argparse
+ import hashlib
+@@ -29,7 +30,7 @@
+     crate = Path(__file__).resolve().parent
+     seal_path = crate / 'SOURCE_SEALS.json'
+     seals = json.loads(seal_path.read_text())
+-    assert seals['schema'] == 'M3_INTEGRATED_RECOVERY_SOURCE_SEALS/1'
++    assert seals['schema'] == 'SWT_CURRENT_OWNER_RUNTIME_CLOSURE_SOURCE_SEALS/1'
+     assert seals['task'] == TASK and seals['recipe'] == NAMED
+     assert seals['receiving_revision'] == SOURCE and seals['canonical_source_revision'] == CANONICAL
+     seen = set()
+@@ -45,7 +46,7 @@
+         assert sha(owner / name) == expected, 'canonical engine drift: ' + name
+     print(json.dumps({'status': 'EXACT_RECIPE_POSTIMAGES', 'target_paths': len(seen),
+                       'unchanged_engines': len(ENGINES), 'source_seals_sha256': sha(seal_path),
+-                      'scope': 'source readback only; runtime and source-built JDK gates are separate'}))
++                      'scope': 'source readback only; SWT native/platform and Tycho gates are separate'}))
+ 
+ 
+ if __name__ == '__main__':

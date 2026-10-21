@@ -1,0 +1,38 @@
+[
+  {
+    "bytes": 6571,
+    "git_blob": "5e02839678dd2d8608e2fef4a6df5aba07401490",
+    "path": "m3/core/src/com/m3/text/M3FixedAddressMapping.java",
+    "sha256": "704acbd7c0899f6cb4ca47658e0ce0387d8b498ce6ca6d801f02461d2f3a0025"
+  },
+  {
+    "bytes": 11215,
+    "git_blob": "c27d6603b32d9c7f277ed097b70ee8eac174b08b",
+    "path": "m3/core/src/com/m3/text/M3GvasLiteralImage.java",
+    "sha256": "2c1a8b9cc9870fc5fdf8e6f8ca46af907c503346aaf6d783b74a6498fd3601cd"
+  },
+  {
+    "bytes": 7802,
+    "git_blob": "d4af3a34e45b58fb6849b1d8ec85d31fdda7b287",
+    "path": "m3/core/test/com/m3/text/M3GvasLiteralImageContractTest.java",
+    "sha256": "9bb67410bda500c43eb58f65c648351fc1ac477328abe84da2537bab823f114d"
+  },
+  {
+    "bytes": 7629,
+    "git_blob": "a3cbcd5c17e99761fe5a9acc4200e920f73e1c79",
+    "path": "m3/lexicon/native/m3_fixed_address_mapping_jni.c",
+    "sha256": "99ee928f3af6733d344933836541d1fbeafa69555e18148728a5ba52b8dc7f41"
+  },
+  {
+    "bytes": 6526,
+    "git_blob": "c51439e44223ff21bb2bf7fb634b4c387d7bd489",
+    "path": "m3/ports/compiletime/src/main/java/com/m3/compiletime/M3GvasLiteralImageWriter.java",
+    "sha256": "68960329204f13a52204ee857a1e5a5155072222dac43622c7fd5fdbabd5abae"
+  },
+  {
+    "bytes": 6503,
+    "git_blob": "f7333576f7edcf2198b0b27869ea74d69f9089d2",
+    "path": "m3/verify-gvas-literal-precompute.py",
+    "sha256": "3f68054a4bb60c573af6d0c640fe44ff5ec9630527b9e6561ee521bd18574982"
+  }
+]

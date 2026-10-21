@@ -1,0 +1,218 @@
+{
+  "schema": "MOP-RCM/1.0",
+  "profile": "m3-nlp-current-receiver-lock-20261021/1.0",
+  "recipe_id": "com.synexia.m3.NlpCurrentReceiverLock20261021",
+  "event_type": "RECORDED",
+  "admission": "PENDING",
+  "source": {
+    "repository": "hsoliwal/M3jdk21",
+    "revision": "2779aba3f98f31c324be43f731be7914e1a05935"
+  },
+  "parents": [],
+  "supersedes": [],
+  "recipe_before": null,
+  "recipe_after": {
+    "path": "proof/sdk-001-offline/named-recipe.yml",
+    "sha256": "15e677dc21d770567af56a0ada688026f9be56654f0f7d214fb276cf3f687bd7"
+  },
+  "source_manifest_before": {
+    "path": "preimages/m3/tooling/module-packs/nlp-search/current-source-lock.json",
+    "sha256": "054029431fbd8063c1e0397c43f3538f319984e252c92f08538881dc0a2eaff5"
+  },
+  "source_manifest_after": {
+    "path": "SOURCE_SEALS.json",
+    "sha256": "6cc232bd392dd188b227a0a7c304d0a6e6d25ed91dd3641fefb335afdfc8574e"
+  },
+  "observation_epoch_seconds": 1792550603,
+  "author": "Hitesh Soliwal and Contributors to the Synexia Project",
+  "license": "Apache-2.0",
+  "trigger": "The unchanged combined receiver refused one outdated owner hash and two unlisted current source files before creating its output directory.",
+  "root_cause": {
+    "status": "observed",
+    "explanation": "The closed manifest had not followed three received M3 text owners. Immutable BigString canonical templates also differ from their own manifest and received files; that independent historical mismatch is retained rather than treated as valid regeneration."
+  },
+  "change": "Qualify exact received GVAS, BigString and Rope contracts and lineage; replace only the two changed hashes and add the two explicit existing-source entries. Preserve the exact source-set guard, schema, donor pins and all other values.",
+  "lesson": "A source-lock refresh requires source custody and owning behavior proof. Preserve conflicting historical templates and stronger unreceived APIs as separate evidence; never infer correctness merely from merge state or matching names.",
+  "known_failures": [
+    "Original combined receiver: exit1, one hash drift, two coverage additions, no output directory.",
+    "Historical BigString source and test templates do not match the pinned manifest; no historical recipe replay success is claimed."
+  ],
+  "atoms": [
+    {
+      "id": "closed-source-lock-and-exact-received-lineage",
+      "owner": "Existing M3 text owners, current-fork source guards and task proof custody",
+      "contract": "A source-lock refresh requires source custody and owning behavior proof. Preserve conflicting historical templates and stronger unreceived APIs as separate evidence; never infer correctness merely from merge state or matching names.",
+      "pattern": "Qualify exact received GVAS, BigString and Rope contracts and lineage; replace only the two changed hashes and add the two explicit existing-source entries. Preserve the exact source-set guard, schema, donor pins and all other values.",
+      "applicability": [
+        "Exact receiving2779 sources and the frozen two-file successor."
+      ],
+      "exclusions": [
+        "No guard weakening, test suppression, new runtime abstraction or global product admission."
+      ]
+    }
+  ],
+  "regression_fixtures": [
+    {
+      "path": "proof/receiver-refusal-001/RESULT.json",
+      "sha256": "c74725aa452de9bbe804da3d137897550e733b8911e1f988a86f178ac2967def"
+    },
+    {
+      "path": "proof/owner-candidate-001/LINEAGE_REVIEW.json",
+      "sha256": "d95239b5849c3518072e289a23f659ac5e5ce9905e111fd3853a8c3fec36d89a"
+    },
+    {
+      "path": "proof/owner-candidate-001/SOURCE_LOCK_GUARDS.json",
+      "sha256": "5e851b6e146048151736984b86484a7edb9209c76a8774754610a24d11daf41b"
+    },
+    {
+      "path": "proof/owner-candidate-001/bigstring_template.diff",
+      "sha256": "8c6923df3673ba4908c53f1e8fedcb7108e348378db1d4705f337216f4e677d3"
+    },
+    {
+      "path": "proof/owner-candidate-001/bigstring_test_template.diff",
+      "sha256": "7864382e34e683c565f4964aa7076dc2c6ab4fa804fe2c33c4ad549cde27960c"
+    }
+  ],
+  "verification": [
+    {
+      "gate": "original_closed_source_refusal",
+      "status": "FAIL",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "/workspace/scratch/206049dfb270/nlp-work/receiver-source/m3/tooling/module-packs/nlp-search/current_forks.py",
+        "--jdk-home",
+        "/tmp/m3-build-tools/jdk-21.0.12.1+1",
+        "--out",
+        "/workspace/scratch/206049dfb270/nlp-work/current-receiver-001",
+        "--receiver",
+        "/workspace/scratch/206049dfb270/nlp-work/receiver-source",
+        "--opennlp-source",
+        "/workspace/scratch/206049dfb270/nlp-work/forks/opennlp",
+        "--lucene-source",
+        "/workspace/scratch/206049dfb270/nlp-work/forks/lucene",
+        "--recipe-runner",
+        "/workspace/scratch/206049dfb270/nlp-work/receiver-source/m3/vendor/synexia/synexia-openrewrite-recipes/crates/m3-nlp-search/current-forks-20261018/run_recipe.py",
+        "--recipe-resources",
+        "/workspace/scratch/206049dfb270/nlp-work/receiver-source/m3/vendor/synexia/synexia-openrewrite-recipes/src/main/resources"
+      ],
+      "evidence": [
+        {
+          "path": "proof/receiver-refusal-001/RESULT.json",
+          "sha256": "c74725aa452de9bbe804da3d137897550e733b8911e1f988a86f178ac2967def"
+        },
+        {
+          "path": "proof/receiver-refusal-001/command.log",
+          "sha256": "59f425942a6a9cb07848ad725e3f2106efe81f69cc1fcefa8f38727e59e2d5bb"
+        }
+      ]
+    },
+    {
+      "gate": "actual_canonical_two_file_sdk",
+      "status": "PASS",
+      "command": [
+        "/tmp/m3-build-tools/apache-maven-3.9.9/bin/mvn",
+        "-B",
+        "-ntp",
+        "-f",
+        "/tmp/m3-nlp-current-owner-sdk-001/canonical/synexia-openrewrite-recipes/recipe-crates/m3-nlp-current-receiver-lock-20261021/pom.xml",
+        "-Dmaven.repo.local=/tmp/m3-build-m2",
+        "-Dparser.classpath=/workspace/scratch/206049dfb270/nlp-work/source-lock-correction/builder-and-whole-rope-001/candidate-classes",
+        "-o",
+        "test"
+      ],
+      "evidence": [
+        {
+          "path": "proof/sdk-001-offline/RESULT.json",
+          "sha256": "5f9b55adcb99fb526dd044476ec647cd2ca82dc3bb25a38c71f479df9925a187"
+        },
+        {
+          "path": "proof/sdk-001-offline/recipe-proof.tsv",
+          "sha256": "3e524fbb755c3eae8156fd1e04cfceb56a2fd7b6095ffd6d89e2f1a33873d10a"
+        }
+      ]
+    },
+    {
+      "gate": "actual_emitted_complete_receiving_image",
+      "status": "PASS",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "-B",
+        "/workspace/scratch/206049dfb270/M3jdk21/m3/tooling/module-packs/nlp-search/current_forks.py",
+        "--receiver",
+        "/workspace/scratch/206049dfb270/M3jdk21",
+        "--jdk-home",
+        "/tmp/m3-build-tools/jdk-21.0.12.1+1",
+        "--out",
+        "/workspace/scratch/206049dfb270/nlp-work/source-lock-correction/combined-receiver-001",
+        "--opennlp-source",
+        "/workspace/scratch/206049dfb270/nlp-work/forks/opennlp",
+        "--lucene-source",
+        "/workspace/scratch/206049dfb270/nlp-work/forks/lucene",
+        "--recipe-runner",
+        "/workspace/scratch/206049dfb270/nlp-work/receiver-source/m3/vendor/synexia/synexia-openrewrite-recipes/crates/m3-nlp-search/current-forks-20261018/run_recipe.py",
+        "--recipe-resources",
+        "/workspace/scratch/206049dfb270/nlp-work/receiver-source/m3/vendor/synexia/synexia-openrewrite-recipes/src/main/resources",
+        "--opennlp-dependencies",
+        "/workspace/scratch/206049dfb270/nlp-work/dependencies/opennlp",
+        "--lucene-dependencies",
+        "/workspace/scratch/206049dfb270/nlp-work/dependencies/lucene"
+      ],
+      "evidence": [
+        {
+          "path": "proof/receiver-runtime-001/combined-receiver-001-receipts/RESULT.json",
+          "sha256": "38c71b8c4f6fb632f2352873cbd2578be7cf1f1383cdf34d64f4fce9e5c0cee1"
+        },
+        {
+          "path": "proof/receiver-runtime-001/combined-receiver-001-receipts/command.log",
+          "sha256": "4c5e3d9cecaabdb0552118f2fc78a68e63bec81d4da95a7eba419752ca463265"
+        },
+        {
+          "path": "proof/receiver-runtime-001/FINAL_RECEIVER_QUALIFICATION.json",
+          "sha256": "38781b148a4f46623481a6e10b04c71407608ede27ad6925ddd905436419fe41"
+        }
+      ]
+    }
+  ],
+  "replay": {
+    "status": "PASS",
+    "command": [
+      "/tmp/m3-build-tools/apache-maven-3.9.9/bin/mvn",
+      "-B",
+      "-ntp",
+      "-f",
+      "/tmp/m3-nlp-current-owner-sdk-001/canonical/synexia-openrewrite-recipes/recipe-crates/m3-nlp-current-receiver-lock-20261021/pom.xml",
+      "-Dmaven.repo.local=/tmp/m3-build-m2",
+      "-Dparser.classpath=/workspace/scratch/206049dfb270/nlp-work/source-lock-correction/builder-and-whole-rope-001/candidate-classes",
+      "-o",
+      "test"
+    ],
+    "evidence": [
+      {
+        "path": "proof/sdk-001-offline/RESULT.json",
+        "sha256": "5f9b55adcb99fb526dd044476ec647cd2ca82dc3bb25a38c71f479df9925a187"
+      },
+      {
+        "path": "proof/sdk-001-offline/recipe-proof.tsv",
+        "sha256": "3e524fbb755c3eae8156fd1e04cfceb56a2fd7b6095ffd6d89e2f1a33873d10a"
+      },
+      {
+        "path": "proof/copier-qualification-001/RESULT.json",
+        "sha256": "02ba2402bcbe554ec4e18ede6eec1c84c4accccb098a9779996995aaedf4289b"
+      }
+    ]
+  },
+  "environment": "Actual Java21.0.12.1+1 and Maven3.9.9/OpenRewrite8.17.1; pinned current-fork build scripts and cached dependency archives. Source and classpath readbacks remain unchanged. Original Java21 preview/native-access warning behavior is retained.",
+  "applicability": [
+    "The three current received text owners have explicit source-lineage and owning-gate proof. Only the constructor declaration and source-lock file change."
+  ],
+  "exclusions": [
+    "No earlier core, SWT or Maven4 memory event is inherited; no differing BigString stream API is imported."
+  ],
+  "pending_gates": [
+    "Full String/HotSpot/JDK family, upstream Java25 suites, optional native/model, platform, performance and exact hosted admission remain separate."
+  ],
+  "unknowns": [
+    "The original source body behind the old GVAS digest is not recreated. Exact current receiving source and its legitimate earlier receiving commit are retained.",
+    "This is a new task family; no previously qualified version of this task recipe is asserted. Published-core helper lineage is retained independently."
+  ]
+}

@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: Apache-2.0
 // SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
+// Modified 2026-10-21: consume completed Maven 4 models through the existing projection owner.
 package jdk.m3.parser;
 
 import java.lang.reflect.Array;
@@ -45,7 +46,7 @@ public final class M3ASTAuthoritativeModels {
      * with its inherited/activated results, is the Maven ModelBuilder's result,
      * not a value inferred from raw XML. All positions intentionally stay unknown
      * because effective models can combine multiple source POMs and profiles.
-     * Maven 4's distinct API needs an independently qualified provider.
+     * Maven 4's distinct API is accepted by {@link #maven4Effective}.
      */
     public static M3ASTIndex mavenEffective(M3File source, Object modelBuildingResult,
             M3ASTIngress.Limits limits) {
@@ -54,14 +55,38 @@ public final class M3ASTAuthoritativeModels {
                 "org.apache.maven.model.building.ModelBuildingResult");
         Object model = required(call(type, modelBuildingResult, "getEffectiveModel"),
                 "completed Maven effective model");
+        return mavenEffectiveModel(source, model, limits, false);
+    }
+
+    /**
+     * Project an already completed Maven 4 ModelBuilderResult through its own API.
+     * The original builder remains responsible for inheritance, interpolation,
+     * profiles and resolution. Validation-only results without an effective model
+     * are refused. Subprojects take precedence over the legacy modules list, as in
+     * Maven 4's builder. No child result is rebuilt or resolved by this projection.
+     * All source positions remain unknown because effective data can span POMs.
+     */
+    public static M3ASTIndex maven4Effective(M3File source, Object modelBuilderResult,
+            M3ASTIngress.Limits limits) {
+        check(source, limits);
+        Class<?> type = requireType(modelBuilderResult,
+                "org.apache.maven.api.services.ModelBuilderResult");
+        Object model = required(call(type, modelBuilderResult, "getEffectiveModel"),
+                "completed Maven 4 effective model");
+        requireType(model, "org.apache.maven.api.model.Model");
+        return mavenEffectiveModel(source, model, limits, true);
+    }
+
+    private static M3ASTIndex mavenEffectiveModel(M3File source, Object model,
+            M3ASTIngress.Limits limits, boolean maven4) {
         M3ASTIndex.Builder out = M3ASTIndex.builder(source,
                 M3ASTIndex.Domain.MAVEN_POM, limits.maxNodes());
         int root = unknown(out, -1, "MAVEN_EFFECTIVE_MODEL");
         Object parent = optional(model, "getParent");
         if (parent != null) unknown(out, root, "MAVEN_INHERITED_PARENT");
-        for (Object ignored : elements(optional(model, "getModules"))) {
-            unknown(out, root, "MAVEN_MODULE");
-        }
+        List<?> modules = elements(optional(model, maven4 ? "getSubprojects" : "getModules"));
+        if (maven4 && modules.isEmpty()) modules = elements(optional(model, "getModules"));
+        for (Object ignored : modules) unknown(out, root, "MAVEN_MODULE");
         append(out, root, optional(model, "getDependencies"), "MAVEN_DEPENDENCY");
         Object managed = optional(model, "getDependencyManagement");
         if (managed != null) {
@@ -85,7 +110,20 @@ public final class M3ASTAuthoritativeModels {
         append(out, root, optional(model, "getProfiles"), "MAVEN_PROFILE");
         append(out, root, optional(model, "getRepositories"), "MAVEN_REPOSITORY");
         append(out, root, optional(model, "getPluginRepositories"), "MAVEN_PLUGIN_REPOSITORY");
-        return out.seal();
+        M3ASTIndex index = out.seal();
+        if (maven4) {
+            // The effective-model projection is at most four levels deep. Check
+            // the actual occurrence path without allocating a second directory.
+            for (int node = 0; node < index.nodeCount(); node++) {
+                int depth = 0;
+                for (int ancestor = node; ancestor >= 0; ancestor = index.parent(ancestor)) {
+                    if (++depth > limits.maxDepth()) {
+                        throw new IllegalArgumentException("Maven 4 model depth budget");
+                    }
+                }
+            }
+        }
+        return index;
     }
 
     /**

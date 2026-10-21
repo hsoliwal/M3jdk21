@@ -1,0 +1,40 @@
+{
+  "lucene": {
+    "status": "PASS",
+    "repository": "https://github.com/hsoliwal/lucene.git",
+    "revision": "873b6167603c69101d626ddffd8d733340300fea",
+    "path": "/workspace/scratch/206049dfb270/nlp-work/forks/lucene",
+    "tracked_clean": true,
+    "log_sha256": "90689ae169b67354dff974f0ee3e6ba0268e9e8d9cb929d1e41d2a4457c8c5eb",
+    "seconds": 7.295
+  },
+  "opennlp": {
+    "status": "PASS",
+    "repository": "https://github.com/hsoliwal/opennlp.git",
+    "revision": "8b647d1d389736952e43fb46865c874747f7acde",
+    "path": "/workspace/scratch/206049dfb270/nlp-work/forks/opennlp",
+    "tracked_clean": true,
+    "log_sha256": "2971a74bee5b18653a650d363391df7fb0ecbd33644ae4d1460c9f6f8ae8abd7",
+    "seconds": 1.364
+  },
+  "receiver": {
+    "status": "PASS",
+    "repository": "hsoliwal/M3jdk21",
+    "revision": "2779aba3f98f31c324be43f731be7914e1a05935",
+    "snapshot": "/workspace/scratch/206049dfb270/nlp-work/receiver-source",
+    "selected_paths": [
+      "m3/tooling/module-packs/nlp-search",
+      "m3/tooling/jmod-recipes",
+      "m3/core/src",
+      "m3/ports/compiletime/src",
+      "m3/vendor/synexia/synexia-mindex/compiler",
+      "m3/vendor/synexia/synexia-mindex/runtime",
+      "m3/vendor/synexia/synexia-native-interop/src",
+      "m3/vendor/synexia/synexia-openrewrite-recipes"
+    ],
+    "files": 1167,
+    "log_sha256": "9bfb57214be792c470fb01f04b09ca8d572bf84ed1f0348138af497e4cff4171",
+    "source_manifest_sha256": "195c810e60b3eff66b975ed66df238e5afd018163b67d24cf6b617eaf2640d8e",
+    "product_tree_modified": false
+  }
+}

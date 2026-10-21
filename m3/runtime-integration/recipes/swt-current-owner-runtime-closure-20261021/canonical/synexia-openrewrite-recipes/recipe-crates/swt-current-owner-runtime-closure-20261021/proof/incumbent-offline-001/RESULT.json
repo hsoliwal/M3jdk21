@@ -1,0 +1,43 @@
+{
+  "schema": "SWT_EXISTING_CURRENT_OWNER_QUALIFICATION/1",
+  "status": "FAIL",
+  "repository": "hsoliwal/eclipse.platform.swt",
+  "revision": "c0ffa6d76338ed1b06cfe0158b0e04d8930df546",
+  "tree": "cfbecfc15c5de51e7e4c6110c2c65742cb471466",
+  "production_sha256": "df4f8498b1f633f2ffeae310f761ecaa0ea686e392557b8cfe2c684864a7f9b4",
+  "production_git_blob": "7370ac91ca85784b7b72efabef4129ffbfd3cea3",
+  "canonical_receiving_source": "hsoliwal/com.synexia@9372a2d57f1a05394172a7bd85dda3f0d6d83983",
+  "canonical_pr": "https://github.com/hsoliwal/com.synexia/pull/12544",
+  "received_through": [
+    "https://github.com/hsoliwal/eclipse.platform.swt/pull/236",
+    "https://github.com/hsoliwal/eclipse.platform.swt/pull/237"
+  ],
+  "sdk_tests": null,
+  "steps": [
+    {
+      "name": "sdk",
+      "argv": [
+        "/tmp/m3-build-tools/apache-maven-3.9.9/bin/mvn",
+        "-B",
+        "-ntp",
+        "-o",
+        "-Dmaven.repo.local=/tmp/m3-build-m2",
+        "-f",
+        "/workspace/scratch/206049dfb270/jobs-work/swt-receiver-current-001/source/docs/m3/scrollbar-full-range-20261020/recipes/swt-scrollbar-full-range-20261020/pom.xml",
+        "clean",
+        "test"
+      ],
+      "exit_code": 1,
+      "seconds": 1.122,
+      "log_sha256": "4dfeef9e6b708d5d17ff7b2631ab8faa29746fea67b4161474d2c6ea22069d85"
+    }
+  ],
+  "failure": "RuntimeError: sdk failed; unchanged owner and log retained",
+  "input_files": 27,
+  "inputs_sha256": "f5796a267c780913f385af8aa1fcf700e9c4a929dc408c7b642a2e276398cba5",
+  "commands_sha256": "c6bd71fef880d5543b2a461043559713eb468075111ad909b0f551cfb1bad98d",
+  "source_inputs_unchanged": true,
+  "production_writes": 0,
+  "duration_seconds": 1.177,
+  "scope": "Actual existing7-test OpenRewrite owner and generated/current receiver arithmetic; no SWT/Tycho/native/display/image/performance promotion"
+}

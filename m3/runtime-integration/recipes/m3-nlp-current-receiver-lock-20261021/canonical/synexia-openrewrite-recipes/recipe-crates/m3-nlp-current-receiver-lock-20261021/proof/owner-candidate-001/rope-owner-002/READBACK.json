@@ -1,0 +1,44 @@
+[
+  {
+    "bytes": 2634,
+    "git_blob": "cc3c84f5ea0230e2f57e3d3ae0f5d29b9241e597",
+    "path": "m3/core/src/com/m3/text/JoinedM3StringPiece.java",
+    "sha256": "694ee6a9fa06803244fd56d7a846da16f1560d242a0660ae2f4a927c43fc3dcb"
+  },
+  {
+    "bytes": 1975,
+    "git_blob": "d82710cd1a49b54d92afcd74cdd903cd009766ba",
+    "path": "m3/core/src/com/m3/text/LocalM3Arena.java",
+    "sha256": "99e6adce8be83bf6ebbe2128409e4f34cff88e0d06602c95e21f64a27898b73d"
+  },
+  {
+    "bytes": 2115,
+    "git_blob": "6b745c9472144ad6de01de4d06a533974e558fb1",
+    "path": "m3/core/src/com/m3/text/LocalM3StringPiece.java",
+    "sha256": "06370c193953ead287f6fd6c423e12bd7761da8bf1c825dacd7445afe1876b51"
+  },
+  {
+    "bytes": 9740,
+    "git_blob": "b8e29cf9431d00aa3ee5d1c658ec8c7fa8177e03",
+    "path": "m3/core/src/com/m3/text/M3RopeTextIndex.java",
+    "sha256": "ff2495c01b8df68a01167e29daa4ea4a6af25650e59c5cc705cc2fdc7cfa0141"
+  },
+  {
+    "bytes": 767,
+    "git_blob": "99cb72623fa6bc2d5426553e04aaf0e5bfa993cc",
+    "path": "m3/core/src/com/m3/text/M3StringPiece.java",
+    "sha256": "d43e66b414d96ba4b16b8cc94f64fa5a01c2dcb350ad58050105b04996486479"
+  },
+  {
+    "bytes": 494,
+    "git_blob": "7f0a0bb63d38a0a6efbe08f37249dd3e258eb35a",
+    "path": "m3/core/src/com/m3/text/StorageIdentity.java",
+    "sha256": "b1e4fcbd385adc7c01c56d0f6a6af63d42ef0e6fa75b46d66d8d75c64c7a6417"
+  },
+  {
+    "bytes": 8903,
+    "git_blob": "cef8b5f91b7dc666627ddf5a5eb1c8a4611ebf73",
+    "path": "m3/core/test/M3RopeTextIndexTest.java",
+    "sha256": "1374a5b14a32a58324f50f980731a94e5e938235fbfdf27c2e679f0ea1681c92"
+  }
+]

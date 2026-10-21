@@ -1,0 +1,6 @@
+Exception in thread "main" java.lang.IllegalArgumentException: missing or unknown schema fields
+	at com.synexia.rewrite.memory.M3RecoveryMemory.invalid(M3RecoveryMemory.java:332)
+	at com.synexia.rewrite.memory.M3RecoveryMemory.object(M3RecoveryMemory.java:248)
+	at com.synexia.rewrite.memory.M3RecoveryMemory.artifact(M3RecoveryMemory.java:218)
+	at com.synexia.rewrite.memory.M3RecoveryMemory.validate(M3RecoveryMemory.java:183)
+	at com.synexia.rewrite.memory.M3RecoveryMemory.main(M3RecoveryMemory.java:46)

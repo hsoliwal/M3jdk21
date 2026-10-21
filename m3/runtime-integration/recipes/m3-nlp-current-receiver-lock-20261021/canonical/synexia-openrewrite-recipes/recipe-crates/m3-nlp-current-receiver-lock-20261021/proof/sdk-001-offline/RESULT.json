@@ -1,0 +1,221 @@
+{
+  "schema": "M3_NLP_CURRENT_RECEIVER_LOCK_SDK_ATTEMPT/1",
+  "task": "m3-nlp-current-receiver-lock-20261021",
+  "status": "PASS",
+  "scope": "source-replay-only",
+  "dependency_lane": "offline-cached-artifacts",
+  "full_source_vendored_reactor": "NOT_RUN",
+  "receiving_runtime_gates": "SEPARATE",
+  "started_at": "2026-10-21T02:34:17.026142+00:00",
+  "duration_seconds": "13.094",
+  "exit_code": 0,
+  "timed_out": false,
+  "command": [
+    "/tmp/m3-build-tools/apache-maven-3.9.9/bin/mvn",
+    "-B",
+    "-ntp",
+    "-f",
+    "/tmp/m3-nlp-current-owner-sdk-001/canonical/synexia-openrewrite-recipes/recipe-crates/m3-nlp-current-receiver-lock-20261021/pom.xml",
+    "-Dmaven.repo.local=/tmp/m3-build-m2",
+    "-Dparser.classpath=/workspace/scratch/206049dfb270/nlp-work/source-lock-correction/builder-and-whole-rope-001/candidate-classes",
+    "-o",
+    "test"
+  ],
+  "cwd": "/tmp/m3-nlp-current-owner-sdk-001/canonical",
+  "java_release_sha256": "e5a4248b028f6ecd6d43fb1a57fff0f900ef62e026501e95875a60b0cf904338",
+  "source_inputs_unchanged": true,
+  "compiled_parser_dependencies_unchanged": true,
+  "suites": [
+    {
+      "name": "com.synexia.rewrite.M3NlpCurrentReceiverLockRecipeTest",
+      "tests": "1",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "time": "9.159"
+    }
+  ],
+  "counts": {
+    "tests": 1,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "artifacts": [
+    {
+      "path": "PARSER_DEPENDENCIES.json",
+      "sha256": "992a5c6979257aaf29a20b522557e8a53d620a193aae0a4c0aec8bb7c818aa78",
+      "bytes": 4164
+    },
+    {
+      "path": "PARSER_DEPENDENCIES_AFTER.json",
+      "sha256": "992a5c6979257aaf29a20b522557e8a53d620a193aae0a4c0aec8bb7c818aa78",
+      "bytes": 4164
+    },
+    {
+      "path": "SOURCE_INPUTS.json",
+      "sha256": "b378c86771c29fabfbbaeb5668f0685b7fbefc42ccec8d4016d4a5d04cb616ea",
+      "bytes": 4979
+    },
+    {
+      "path": "SOURCE_INPUTS_AFTER.json",
+      "sha256": "b378c86771c29fabfbbaeb5668f0685b7fbefc42ccec8d4016d4a5d04cb616ea",
+      "bytes": 4979
+    },
+    {
+      "path": "inputs/synexia-openrewrite-recipes/recipe-crates/m3-nlp-current-receiver-lock-20261021/SOURCE_SEALS.json",
+      "sha256": "6cc232bd392dd188b227a0a7c304d0a6e6d25ed91dd3641fefb335afdfc8574e",
+      "bytes": 1402
+    },
+    {
+      "path": "inputs/synexia-openrewrite-recipes/recipe-crates/m3-nlp-current-receiver-lock-20261021/apply_receiver.py",
+      "sha256": "1e39c6f4b246222aa1cc5c8349cb28dd1cf595a7b699c498bf25c814938d0166",
+      "bytes": 7421
+    },
+    {
+      "path": "inputs/synexia-openrewrite-recipes/recipe-crates/m3-nlp-current-receiver-lock-20261021/attribution/DependencyCustody.java",
+      "sha256": "640e1dd09e65d5343ee7660e37c05a692ce854ae14b692c3c2b2aec21470827a",
+      "bytes": 379
+    },
+    {
+      "path": "inputs/synexia-openrewrite-recipes/recipe-crates/m3-nlp-current-receiver-lock-20261021/attribution/expected-methods.txt",
+      "sha256": "3c0e128f7995f973ffcab8afe9abcd45fc9b078283966c10fd48157e1bdbd0ad",
+      "bytes": 51
+    },
+    {
+      "path": "inputs/synexia-openrewrite-recipes/recipe-crates/m3-nlp-current-receiver-lock-20261021/phases.tsv",
+      "sha256": "72972522a2d6fe9394e96461ba8a27398831426d4addfb6b0aece785aea2d2a8",
+      "bytes": 102
+    },
+    {
+      "path": "inputs/synexia-openrewrite-recipes/recipe-crates/m3-nlp-current-receiver-lock-20261021/pom.xml",
+      "sha256": "db625339ac0cf0c6067da37d401f98c4d3bebe8dd00b6b96a439b0773ab7203b",
+      "bytes": 4084
+    },
+    {
+      "path": "inputs/synexia-openrewrite-recipes/recipe-crates/m3-nlp-current-receiver-lock-20261021/preimages/m3/core/src/com/m3/text/SharedLexiconPrecomputeCatalog.java",
+      "sha256": "8e6156376ea9548971b78bb876dc3968195266f04c17c5b061d7f5e4b52f367d",
+      "bytes": 11009
+    },
+    {
+      "path": "inputs/synexia-openrewrite-recipes/recipe-crates/m3-nlp-current-receiver-lock-20261021/preimages/m3/tooling/module-packs/nlp-search/current-source-lock.json",
+      "sha256": "054029431fbd8063c1e0397c43f3538f319984e252c92f08538881dc0a2eaff5",
+      "bytes": 25292
+    },
+    {
+      "path": "inputs/synexia-openrewrite-recipes/recipe-crates/m3-nlp-current-receiver-lock-20261021/prepare_packet.py",
+      "sha256": "c61c6d2f3c32bbafb2944e6739a4f33165a8290b3f8b5a8c9c81e7b2c48d3002",
+      "bytes": 7022
+    },
+    {
+      "path": "inputs/synexia-openrewrite-recipes/recipe-crates/m3-nlp-current-receiver-lock-20261021/qualify.py",
+      "sha256": "98cab73999f5a89ef97ef3def5ece019e5b9095478df891d5f6b3adaff2d3114",
+      "bytes": 9717
+    },
+    {
+      "path": "inputs/synexia-openrewrite-recipes/recipe-crates/m3-nlp-current-receiver-lock-20261021/src/test/java/com/synexia/rewrite/M3NlpCurrentReceiverLockRecipeTest.java",
+      "sha256": "e5031b1b72dffe8b2b13a886ecfc4b8ccee8caab2e00a6008aabaee782740673",
+      "bytes": 31707
+    },
+    {
+      "path": "inputs/synexia-openrewrite-recipes/recipe-crates/m3-nlp-current-receiver-lock-20261021/verify_sources.py",
+      "sha256": "102e2f52e30dece10cbaed1676dcd2c1698f1c302eacd63ed053255377281d69",
+      "bytes": 2411
+    },
+    {
+      "path": "inputs/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3EditScope.java",
+      "sha256": "962d37d62d740c3e8055c365a048ae7ee0479c26a9f6bbfe741e540d6c1134ab",
+      "bytes": 1052
+    },
+    {
+      "path": "inputs/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+      "sha256": "083f8b1fd956fe2ed81168bc580d1e0f39a815401c50571d397ddba40150cf63",
+      "bytes": 31505
+    },
+    {
+      "path": "inputs/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedTextSnapshotRecipe.java",
+      "sha256": "5a64bd502cb8aa7d51b78813b736e37a0a7f420233f405c4d2df08ee2eefe8bc",
+      "bytes": 19983
+    },
+    {
+      "path": "inputs/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3ScopeInference.java",
+      "sha256": "9a6c54f42564c0ef82de3f40a2de17e6598569916c15255653bf79fbe3353579",
+      "bytes": 8268
+    },
+    {
+      "path": "inputs/synexia-openrewrite-recipes/src/main/resources/META-INF/rewrite/m3-nlp-current-receiver-lock-20261021.yml",
+      "sha256": "15e677dc21d770567af56a0ada688026f9be56654f0f7d214fb276cf3f687bd7",
+      "bytes": 586
+    },
+    {
+      "path": "inputs/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-current-receiver-lock-20261021-001/manifest.tsv",
+      "sha256": "2dda091367402d8a8fb1b7df9af6a767df3fe4245683c1bc18d9bf30f488ce1d",
+      "bytes": 209
+    },
+    {
+      "path": "inputs/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-current-receiver-lock-20261021-001/postimage.java.txt",
+      "sha256": "92fd76c3f0d3c10c90ea4cb52485d2dbceda513fa3d794d22ec67fd153fd62ed",
+      "bytes": 11039
+    },
+    {
+      "path": "inputs/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-nlp-current-receiver-lock-20261021-002/manifest.tsv",
+      "sha256": "edc97c75aaadac0fe2354e32ea24d0d6376a93ab756dee220ea1e6f022066496",
+      "bytes": 204
+    },
+    {
+      "path": "inputs/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-nlp-current-receiver-lock-20261021-002/postimage.txt",
+      "sha256": "7f591c98c603ba8128c97747fe38fd1ccfe8adb5f2cd712b98b2697fff935acb",
+      "bytes": 25536
+    },
+    {
+      "path": "maven.log",
+      "sha256": "2dd932d8ef38eb819a5953cd0a3f412077baf52343f8f886f36ed81d7fc978cb",
+      "bytes": 2421
+    },
+    {
+      "path": "named-recipe.yml",
+      "sha256": "15e677dc21d770567af56a0ada688026f9be56654f0f7d214fb276cf3f687bd7",
+      "bytes": 586
+    },
+    {
+      "path": "phase-receipts/m3-nlp-current-receiver-lock-20261021-001.tsv",
+      "sha256": "b045ebc2edad3aae6a25afe64510136be48ee8b92880cb28ccced0485b62bef2",
+      "bytes": 443
+    },
+    {
+      "path": "phase-receipts/m3-nlp-current-receiver-lock-20261021-002.tsv",
+      "sha256": "f57cfb573fe32b5f6a68517b47c868d1e0b3bb623b5e459fffb887a33174fbf2",
+      "bytes": 443
+    },
+    {
+      "path": "proof-status.tsv",
+      "sha256": "149d54cc5118746a17ac1177194930608caf4f27a7abaa8243ac6b99f236fae6",
+      "bytes": 90
+    },
+    {
+      "path": "receiver/m3/core/src/com/m3/text/SharedLexiconPrecomputeCatalog.java",
+      "sha256": "92fd76c3f0d3c10c90ea4cb52485d2dbceda513fa3d794d22ec67fd153fd62ed",
+      "bytes": 11039
+    },
+    {
+      "path": "receiver/m3/tooling/module-packs/nlp-search/current-source-lock.json",
+      "sha256": "7f591c98c603ba8128c97747fe38fd1ccfe8adb5f2cd712b98b2697fff935acb",
+      "bytes": 25536
+    },
+    {
+      "path": "recipe-proof.tsv",
+      "sha256": "3e524fbb755c3eae8156fd1e04cfceb56a2fd7b6095ffd6d89e2f1a33873d10a",
+      "bytes": 1528
+    },
+    {
+      "path": "surefire-reports/TEST-com.synexia.rewrite.M3NlpCurrentReceiverLockRecipeTest.xml",
+      "sha256": "692b15aa3799b31ff0b539b2eff4ff52bab98176d69903f7f6a4722dec404655",
+      "bytes": 12671
+    },
+    {
+      "path": "surefire-reports/com.synexia.rewrite.M3NlpCurrentReceiverLockRecipeTest.txt",
+      "sha256": "7dc11d0f95f20c159bcdc5eed31c2241a17f7b079ac87ba551f9a7d40f1b9a9f",
+      "bytes": 358
+    }
+  ]
+}

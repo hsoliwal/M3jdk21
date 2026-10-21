@@ -1,0 +1,6 @@
+/workspace/scratch/206049dfb270/nlp-work/receiver-source/m3/core/src/com/m3/text/SharedLexiconPrecomputeCatalog.java:136: warning: [missing-explicit-ctor] class Builder in exported package com.m3.text declares no explicit constructors, thereby exposing a default constructor to clients of module com.m3.text
+    public static final class Builder {
+                        ^
+error: warnings found and -Werror specified
+1 error
+1 warning

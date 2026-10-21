@@ -1,0 +1,610 @@
+{
+  "scope": "Actual outputs of passing pinned current Lucene source/staging/image gate;59 named JARs and JMODs plus linked image identity",
+  "artifacts": [
+    {
+      "path": "lucene-owner-001/jars/com.fasterxml.jackson.annotation.jar",
+      "bytes": 84211,
+      "sha256": "21ddb598807d3a51a876704eb979d9296e1c6a6f47ab1826ff88c6d6a127a2d0"
+    },
+    {
+      "path": "lucene-owner-001/jars/com.fasterxml.jackson.core.jar",
+      "bytes": 599548,
+      "sha256": "2d30c375cddea9657a1e1ef97547a2694b663b355facb4de53a097782b312d1a"
+    },
+    {
+      "path": "lucene-owner-001/jars/com.fasterxml.jackson.databind.jar",
+      "bytes": 1714464,
+      "sha256": "d4cbf8947087f305869826801913abdc50735a1fab2074a1993e7bc67ca974a3"
+    },
+    {
+      "path": "lucene-owner-001/jars/com.ibm.icu.jar",
+      "bytes": 15155589,
+      "sha256": "99197f2573936b1b6b1e47e2fcd2f536577d7ad6536c8e1e17614397cfa63b2d"
+    },
+    {
+      "path": "lucene-owner-001/jars/hppc.jar",
+      "bytes": 1670747,
+      "sha256": "4ba40f5707bcd57330ebade06e7f8c12f0534de1d548bb6aed0a40567a7295cf"
+    },
+    {
+      "path": "lucene-owner-001/jars/io.github.classgraph.jar",
+      "bytes": 635068,
+      "sha256": "cd3d03540bb9def8cc73464ac17c4d2609f1ca192ce2b2b6b4b4b4b9a6b2fa9f"
+    },
+    {
+      "path": "lucene-owner-001/jars/io.github.dmlloyd.classfile.jar",
+      "bytes": 978434,
+      "sha256": "2156731c92362678945300ed39b7bf954c8338ecd1f5880995cfbd95d46dbbfe"
+    },
+    {
+      "path": "lucene-owner-001/jars/jcommander.jar",
+      "bytes": 85277,
+      "sha256": "b574c7129aa3c20ad6a41661b5b01edce133df99e83cc786cec3e1cc73bdd1ba"
+    },
+    {
+      "path": "lucene-owner-001/jars/libsvm.jar",
+      "bytes": 41587,
+      "sha256": "a9289a65b236adab54c6f0dd96bc7c3ce394108cf72ecc4cd249151ca3a5da6b"
+    },
+    {
+      "path": "lucene-owner-001/jars/morfologik.ukrainian.search.jar",
+      "bytes": 4101425,
+      "sha256": "fdb35aac25453d22c55da0a14a60b06f75c70e29895a9b6b948b54f0a27b014a"
+    },
+    {
+      "path": "lucene-owner-001/jars/noggit.jar",
+      "bytes": 28469,
+      "sha256": "dc3384b0c71b004f2df547eaad7a279f28abd3e928e3be56062fa7e6ab2f29f6"
+    },
+    {
+      "path": "lucene-owner-001/jars/org.antlr.antlr4.runtime.jar",
+      "bytes": 329727,
+      "sha256": "bdb40194d417b155a019b5c5fa3a523941470b23298d9816eafb413151c39bde"
+    },
+    {
+      "path": "lucene-owner-001/jars/org.apache.commons.codec.jar",
+      "bytes": 422738,
+      "sha256": "78a5d732fbd715e2d10bd7150d2f8030bae57267f8aacc5c88f642cb6c2e5d3f"
+    },
+    {
+      "path": "lucene-owner-001/jars/org.apache.commons.xml.secure.jar",
+      "bytes": 76196,
+      "sha256": "f99636716db8483d72b82441e70e275019f5a120e2af2722c66decdd272169eb"
+    },
+    {
+      "path": "lucene-owner-001/jars/org.apache.lucene.analysis.common.jar",
+      "bytes": 1727291,
+      "sha256": "afc622d7abfb5c3cf3dc1683ff3a0c48eb63198aa2d3141f87cb69bc8ebac445"
+    },
+    {
+      "path": "lucene-owner-001/jars/org.apache.lucene.analysis.icu.jar",
+      "bytes": 87250,
+      "sha256": "25c12819da2e3f53e47550c41f84aa612ea08dbcb71e5b29820112030f1d304c"
+    },
+    {
+      "path": "lucene-owner-001/jars/org.apache.lucene.analysis.kuromoji.jar",
+      "bytes": 4709621,
+      "sha256": "590dd1d68c3cdc887743c4c6f1f664248e76e1e3821fcd077284e3aa9a92f3af"
+    },
+    {
+      "path": "lucene-owner-001/jars/org.apache.lucene.analysis.morfologik.jar",
+      "bytes": 29573,
+      "sha256": "c9f35680e91166837d5a2799fca8d87f783df90b1007c71e7dad1493098118f7"
+    },
+    {
+      "path": "lucene-owner-001/jars/org.apache.lucene.analysis.nori.jar",
+      "bytes": 7821326,
+      "sha256": "0009fd781957c5cd63ca6969758cd1646b9eab9f73cec1da253b41ff5bd7b63f"
+    },
+    {
+      "path": "lucene-owner-001/jars/org.apache.lucene.analysis.opennlp.jar",
+      "bytes": 39741,
+      "sha256": "cbd6ddf440598723d088651c395361e9a863aa8c8979ca2c046cec656efee45f"
+    },
+    {
+      "path": "lucene-owner-001/jars/org.apache.lucene.analysis.phonetic.jar",
+      "bytes": 27353,
+      "sha256": "5dc41c8d2012f790bfd30285e9b5ecfc03032f096af4d666ee9b20d6384c1c33"
+    },
+    {
+      "path": "lucene-owner-001/jars/org.apache.lucene.analysis.smartcn.jar",
+      "bytes": 3594758,
+      "sha256": "15c9b2ce24f370136e6434a2ad810aca183f551144913d37433348168226468f"
+    },
+    {
+      "path": "lucene-owner-001/jars/org.apache.lucene.analysis.stempel.jar",
+      "bytes": 523479,
+      "sha256": "3fae74693d5329f9b7f1b2d918c2310adb3c512017fd2cdaacf278c8fb56b4b1"
+    },
+    {
+      "path": "lucene-owner-001/jars/org.apache.lucene.backward_codecs.jar",
+      "bytes": 660572,
+      "sha256": "0aabb29409fb9c9f2e57266aa12fce7c7f1be4846c081c0e63099c7bff13c6f4"
+    },
+    {
+      "path": "lucene-owner-001/jars/org.apache.lucene.classification.jar",
+      "bytes": 60315,
+      "sha256": "66a01cdde2e8eccc5d72fe2e33c90201cbe0b4ce02d4cef97eaf0d77c4de4560"
+    },
+    {
+      "path": "lucene-owner-001/jars/org.apache.lucene.codecs.jar",
+      "bytes": 439299,
+      "sha256": "ac6df4ac991de11f0a74ad765f18a14f0aa22c3e78ef291414e987c251570eb6"
+    },
+    {
+      "path": "lucene-owner-001/jars/org.apache.lucene.core.jar",
+      "bytes": 4297475,
+      "sha256": "e20b4bdc00ea05c83c9000e04b3e389823f492f9eb1e7650f9ffbadc01a9f99e"
+    },
+    {
+      "path": "lucene-owner-001/jars/org.apache.lucene.expressions.jar",
+      "bytes": 80093,
+      "sha256": "e0826a9af68b99d32ad8480f9113fcd165400685770be04218610116ac3716c4"
+    },
+    {
+      "path": "lucene-owner-001/jars/org.apache.lucene.facet.jar",
+      "bytes": 294359,
+      "sha256": "807bc4715ac094d51620b75f290f1777120aeaced25670ecdaa0de7745abaf7c"
+    },
+    {
+      "path": "lucene-owner-001/jars/org.apache.lucene.grouping.jar",
+      "bytes": 100972,
+      "sha256": "a459507bd1b240cc19a6880cb213a429fd82b6baa97597ba7230b3d55d39aaff"
+    },
+    {
+      "path": "lucene-owner-001/jars/org.apache.lucene.highlighter.jar",
+      "bytes": 249687,
+      "sha256": "1a74a39aa83da88ed20e803a862cc48bdc126c2ddd1c2e4687da09cd8fcf057a"
+    },
+    {
+      "path": "lucene-owner-001/jars/org.apache.lucene.join.jar",
+      "bytes": 178624,
+      "sha256": "206a6343da9e37f07740532303ae1a604e14adddc32a8445e190f151787ac3ed"
+    },
+    {
+      "path": "lucene-owner-001/jars/org.apache.lucene.luke.jar",
+      "bytes": 582896,
+      "sha256": "320dba0cdb85112c6a6c02abc878a4945fe974a5bc785b63b94ebdde05dd7e7c"
+    },
+    {
+      "path": "lucene-owner-001/jars/org.apache.lucene.memory.jar",
+      "bytes": 64197,
+      "sha256": "15edf3d2dc39d21fa474f3ae2f54ee5ef87d086e66cc91f3a729f7d6d0f139f7"
+    },
+    {
+      "path": "lucene-owner-001/jars/org.apache.lucene.misc.jar",
+      "bytes": 162457,
+      "sha256": "8a04069d35a5af5bc13ceb379e722063a381059a140a65e1bab3aeb9c587a5fe"
+    },
+    {
+      "path": "lucene-owner-001/jars/org.apache.lucene.monitor.jar",
+      "bytes": 132443,
+      "sha256": "906a19a35ff2c2e3d0a4629ebea554b00e8e41d61cbe1178f2dac6eebf10f914"
+    },
+    {
+      "path": "lucene-owner-001/jars/org.apache.lucene.queries.jar",
+      "bytes": 475636,
+      "sha256": "2610768653f8996251c44f44344356c35b533b59e5bd8b8100095ad29b697a99"
+    },
+    {
+      "path": "lucene-owner-001/jars/org.apache.lucene.queryparser.jar",
+      "bytes": 401495,
+      "sha256": "270e83c141fd59e5a443ddb1d4e0671eadbba1f909d3688f9fb94126316f65c9"
+    },
+    {
+      "path": "lucene-owner-001/jars/org.apache.lucene.replicator.jar",
+      "bytes": 51756,
+      "sha256": "6c82de8fbf8d505c63f080f54a8d33e6e25cadecfff0f99f87a752f5e7545ea6"
+    },
+    {
+      "path": "lucene-owner-001/jars/org.apache.lucene.sandbox.jar",
+      "bytes": 478649,
+      "sha256": "7706c697dfaff512383a607b88cb358b28f836741f8c62763e102073e7455b0c"
+    },
+    {
+      "path": "lucene-owner-001/jars/org.apache.lucene.spatial3d.jar",
+      "bytes": 282994,
+      "sha256": "ac0094a09ac7a3ef7567f2f336acb34548fcd28e296eb3606627dbfb8e3d8edc"
+    },
+    {
+      "path": "lucene-owner-001/jars/org.apache.lucene.spatial_extras.jar",
+      "bytes": 221227,
+      "sha256": "813ec8b466f8a112470f418384b708b0407658b71d81e3479a544e835ffdec96"
+    },
+    {
+      "path": "lucene-owner-001/jars/org.apache.lucene.suggest.jar",
+      "bytes": 218428,
+      "sha256": "07187fca8c5b977cdda4f7185416f806f492431ffdee9031fb6f09d1ba41cc4b"
+    },
+    {
+      "path": "lucene-owner-001/jars/org.apache.opennlp.morfologik.jar",
+      "bytes": 18670,
+      "sha256": "784f8ad3f434134553f528ca42929e523a919f318186a0502be0a41e18af1eeb"
+    },
+    {
+      "path": "lucene-owner-001/jars/org.apache.opennlp.spellcheck.jar",
+      "bytes": 56854,
+      "sha256": "d792b9cff10c99691cacb0aeef7cd3b474edafdaf3cbb28ccc71428568f02225"
+    },
+    {
+      "path": "lucene-owner-001/jars/org.apache.opennlp.tools.jar",
+      "bytes": 2049317,
+      "sha256": "a1d929ba987cb1a07192a298cfd0e58ee0d29b0fdd90804d55c3996b3c28df5a"
+    },
+    {
+      "path": "lucene-owner-001/jars/org.apache.opennlp.uima.jar",
+      "bytes": 59761,
+      "sha256": "acb7e6f5279e71811a4eff991c88b1e4f2e89213cbdffbdb5e200ea064cce38b"
+    },
+    {
+      "path": "lucene-owner-001/jars/org.carrot2.morfologik.fsa.jar",
+      "bytes": 19032,
+      "sha256": "eeef1d800cd0d5ff0262941ab84e969ab65019370df6b130ef691406e265bd98"
+    },
+    {
+      "path": "lucene-owner-001/jars/org.carrot2.morfologik.fsa_builders.jar",
+      "bytes": 31411,
+      "sha256": "149f22e9891ec825cbce3b5e08bc1beb2e811aedf9f8d0b730c7a8a85168ee7f"
+    },
+    {
+      "path": "lucene-owner-001/jars/org.carrot2.morfologik.polish.jar",
+      "bytes": 1885348,
+      "sha256": "9ee5cb53175def6df6b44ed83f584176ed012935fdbb50874d1d4bf3b7d84b76"
+    },
+    {
+      "path": "lucene-owner-001/jars/org.carrot2.morfologik.stemming.jar",
+      "bytes": 53930,
+      "sha256": "191ab39d86775180742cdcf8eb5fe15e83e63510bd0563ae30df86c34dfbec3a"
+    },
+    {
+      "path": "lucene-owner-001/jars/org.carrot2.morfologik.tools.jar",
+      "bytes": 37062,
+      "sha256": "3646d588efd1d8a52e0696154ccb360d97fded4a71ff1fdfb2b3f27c55b80022"
+    },
+    {
+      "path": "lucene-owner-001/jars/org.locationtech.jts.jar",
+      "bytes": 1238269,
+      "sha256": "a77d983e9b9f110726843589501197c2f535bbda15e27e2fb4c91d699c0d1579"
+    },
+    {
+      "path": "lucene-owner-001/jars/org.slf4j.jar",
+      "bytes": 69479,
+      "sha256": "2c58b034909bf9f53015b28931daa56dfa0867707e8f428c52b0681577fe9554"
+    },
+    {
+      "path": "lucene-owner-001/jars/org.slf4j.simple.jar",
+      "bytes": 14902,
+      "sha256": "e2857b339302155ccf441ba34ca53733f09eac6faaf04a78ea632718e00045ba"
+    },
+    {
+      "path": "lucene-owner-001/jars/s2.geometry.library.java.jar",
+      "bytes": 122008,
+      "sha256": "85d61a4dd6385dfa13021b716a34fb25ead53ea34e4211d0030b0eba5060535a"
+    },
+    {
+      "path": "lucene-owner-001/jars/spatial4j.jar",
+      "bytes": 189505,
+      "sha256": "4d81330132df951a83ddf3b45f660819872e738c5f97be4c898b516891b9cb2d"
+    },
+    {
+      "path": "lucene-owner-001/jars/uimaj.core.jar",
+      "bytes": 1938578,
+      "sha256": "6b03337c59e1521a768c03540cc9c4b25bc19325087b70e57150b1828f89f837"
+    },
+    {
+      "path": "lucene-owner-001/jars/zlibsvm.core.jar",
+      "bytes": 40782,
+      "sha256": "e2a8fb431ae68d4259f51de23c64f80f6dd4b758afc1ef3bb56b6ee2e7ccb7e2"
+    },
+    {
+      "path": "lucene-owner-001/pack/jmods/com.fasterxml.jackson.annotation.jmod",
+      "bytes": 216965,
+      "sha256": "2be8774950e8fdfee89ccb9145787f1299fcca7b97422048c93f5a6a0bfeb6de"
+    },
+    {
+      "path": "lucene-owner-001/pack/jmods/com.fasterxml.jackson.core.jmod",
+      "bytes": 703489,
+      "sha256": "434b225833629ec583800e0243638b964141db629709d6e3e647efa4ccbf5ecd"
+    },
+    {
+      "path": "lucene-owner-001/pack/jmods/com.fasterxml.jackson.databind.jmod",
+      "bytes": 1852970,
+      "sha256": "937752c73661d8382cf32055ea0344168ddf33405d378d48062c1cb6a7bdac9b"
+    },
+    {
+      "path": "lucene-owner-001/pack/jmods/com.ibm.icu.jmod",
+      "bytes": 15375164,
+      "sha256": "2e4f34c18e5557716bd3646118132abfee0f64d887b712cca716f2fe2dd3f021"
+    },
+    {
+      "path": "lucene-owner-001/pack/jmods/hppc.jmod",
+      "bytes": 1823198,
+      "sha256": "4b628240ec91d0d1889d463583ce8b00eedd04285397903fe30d25f3ed246449"
+    },
+    {
+      "path": "lucene-owner-001/pack/jmods/io.github.classgraph.jmod",
+      "bytes": 769101,
+      "sha256": "4c8e100705cd083cdd8ebd040cb1e81456fbe0bc9b8befcd89634703ed7f5248"
+    },
+    {
+      "path": "lucene-owner-001/pack/jmods/io.github.dmlloyd.classfile.jmod",
+      "bytes": 1119515,
+      "sha256": "4f175e218e33e535a86fcaa5788c7cf3c4cffc72698c387a20d985ba2476de9a"
+    },
+    {
+      "path": "lucene-owner-001/pack/jmods/jcommander.jmod",
+      "bytes": 218002,
+      "sha256": "0de4df15ac06674c3bcb842ff4ccf0ec99af6161efde9a11310f83a9ecb94b1a"
+    },
+    {
+      "path": "lucene-owner-001/pack/jmods/libsvm.jmod",
+      "bytes": 173938,
+      "sha256": "927c334306700bcd47dd68e8f79c574303a040aa3590dc8346ceb9b11f4f26d2"
+    },
+    {
+      "path": "lucene-owner-001/pack/jmods/morfologik.ukrainian.search.jmod",
+      "bytes": 4233720,
+      "sha256": "00a8b52bc5f4bceed938995f44fa306df000e6bcc7630804f177576955c90b64"
+    },
+    {
+      "path": "lucene-owner-001/pack/jmods/noggit.jmod",
+      "bytes": 160668,
+      "sha256": "4e39fd53435c60915ecb4cc450e3e6d2a8009ea79f5123a55e2f1c205090fbf7"
+    },
+    {
+      "path": "lucene-owner-001/pack/jmods/org.antlr.antlr4.runtime.jmod",
+      "bytes": 464120,
+      "sha256": "719a3f7d0294a578c66ef28b14059cb3808740ecf2207ccc601d41dd00b89fa5"
+    },
+    {
+      "path": "lucene-owner-001/pack/jmods/org.apache.commons.codec.jmod",
+      "bytes": 554750,
+      "sha256": "b7d7b5d352c401e824a85cb761e2756eca4d3aa4674e770295118119c9e06788"
+    },
+    {
+      "path": "lucene-owner-001/pack/jmods/org.apache.commons.xml.secure.jmod",
+      "bytes": 208479,
+      "sha256": "9b453c4fb6a9030980e01ce0a9e7c77938a86056ed1784b1e577a6f409d8bedd"
+    },
+    {
+      "path": "lucene-owner-001/pack/jmods/org.apache.lucene.analysis.common.jmod",
+      "bytes": 1860852,
+      "sha256": "fd4650e73d801d62fdd183c5d4b7f30bd10f303b87655e810e6cb232952b2b04"
+    },
+    {
+      "path": "lucene-owner-001/pack/jmods/org.apache.lucene.analysis.icu.jmod",
+      "bytes": 219271,
+      "sha256": "8c4d10002af2f6fa513bb634441900a6115bb26acc3402d1602b89450704585e"
+    },
+    {
+      "path": "lucene-owner-001/pack/jmods/org.apache.lucene.analysis.kuromoji.jmod",
+      "bytes": 4842354,
+      "sha256": "748bcf1bdc9b6876f18003c5e0e2e78f885cea0bbb2797d17f4717858237dbb3"
+    },
+    {
+      "path": "lucene-owner-001/pack/jmods/org.apache.lucene.analysis.morfologik.jmod",
+      "bytes": 161458,
+      "sha256": "79fe427482ec0f2ed03ed225726487ee64e6c7bc718f9a3d28c4318acf8dc20f"
+    },
+    {
+      "path": "lucene-owner-001/pack/jmods/org.apache.lucene.analysis.nori.jmod",
+      "bytes": 7953865,
+      "sha256": "be14641d2aba8d9f14bde4b4f905d7e6693bb6cad12b8f978630297c4ebd619f"
+    },
+    {
+      "path": "lucene-owner-001/pack/jmods/org.apache.lucene.analysis.opennlp.jmod",
+      "bytes": 171754,
+      "sha256": "be49f3db7e2546b3a37002722c75322a6a9372c762e9bd62094d2606c3964dcb"
+    },
+    {
+      "path": "lucene-owner-001/pack/jmods/org.apache.lucene.analysis.phonetic.jmod",
+      "bytes": 159362,
+      "sha256": "1ad798392a37208c8043cf8a3e61060b48629f92462b05e761b444a17dfe2fc0"
+    },
+    {
+      "path": "lucene-owner-001/pack/jmods/org.apache.lucene.analysis.smartcn.jmod",
+      "bytes": 3726697,
+      "sha256": "c300e96cbf8d3a455ea18e6c26c1f94c47b837947e1c02de569de78f28ea1eec"
+    },
+    {
+      "path": "lucene-owner-001/pack/jmods/org.apache.lucene.analysis.stempel.jmod",
+      "bytes": 655378,
+      "sha256": "ad47c97013272f5b2773fc21f0be4467e041e3c98859047a3843dbe54b865a81"
+    },
+    {
+      "path": "lucene-owner-001/pack/jmods/org.apache.lucene.backward_codecs.jmod",
+      "bytes": 795681,
+      "sha256": "2e713cdcaf9a7fe27ef90aa0f2a582f597e808a80fdec701215976c02fd2d3fc"
+    },
+    {
+      "path": "lucene-owner-001/pack/jmods/org.apache.lucene.classification.jmod",
+      "bytes": 192402,
+      "sha256": "3035af4ec1e336e5f46f48d983d9bc989d365d41eb349a7b9b733921dec7e4a0"
+    },
+    {
+      "path": "lucene-owner-001/pack/jmods/org.apache.lucene.codecs.jmod",
+      "bytes": 573504,
+      "sha256": "908e5acf59189dbddbcdda1b7ccd21f881ac53d2d80ef50cc9b17c7b0886f8cf"
+    },
+    {
+      "path": "lucene-owner-001/pack/jmods/org.apache.lucene.core.jmod",
+      "bytes": 4467974,
+      "sha256": "b98c42411bf9d6abe68f6bb8eba30d04b7581baba0303015418ec6dc8e53790a"
+    },
+    {
+      "path": "lucene-owner-001/pack/jmods/org.apache.lucene.expressions.jmod",
+      "bytes": 212742,
+      "sha256": "fc8e57846fd6d5d0baef7efbf738670b8c4d367863305516591d21ffcfb2165f"
+    },
+    {
+      "path": "lucene-owner-001/pack/jmods/org.apache.lucene.facet.jmod",
+      "bytes": 428376,
+      "sha256": "f999dc772495931fec2c8b9b3b6a76ee7ea282a5efc2457f6e7bad22442e08c0"
+    },
+    {
+      "path": "lucene-owner-001/pack/jmods/org.apache.lucene.grouping.jmod",
+      "bytes": 233917,
+      "sha256": "7d8b17f30c709128809a15438838baf8c64a8c507b3b471989620991daec1f86"
+    },
+    {
+      "path": "lucene-owner-001/pack/jmods/org.apache.lucene.highlighter.jmod",
+      "bytes": 383832,
+      "sha256": "f6762fe8a341b1c34b3fcb568cb09562fd7136c4006739243ea8b8311aea6d1b"
+    },
+    {
+      "path": "lucene-owner-001/pack/jmods/org.apache.lucene.join.jmod",
+      "bytes": 312601,
+      "sha256": "aef9ecde5c1a5aefeec22b2c8df4310e47aa228ee886c6713374e4efa1290691"
+    },
+    {
+      "path": "lucene-owner-001/pack/jmods/org.apache.lucene.luke.jmod",
+      "bytes": 715029,
+      "sha256": "ebdf8d322f3eb7c7cc26d7a9ff8ad01322863df4efd04600139943324cbc3887"
+    },
+    {
+      "path": "lucene-owner-001/pack/jmods/org.apache.lucene.memory.jmod",
+      "bytes": 196734,
+      "sha256": "1be0212faa7948897fa3819eca710d448fa40d00f10c6debe87a3f503fa0d300"
+    },
+    {
+      "path": "lucene-owner-001/pack/jmods/org.apache.lucene.misc.jmod",
+      "bytes": 295088,
+      "sha256": "79e19676708ecdc2619fa9fa719270d01c45b0a8765fc342ae3cea5d7c223ac4"
+    },
+    {
+      "path": "lucene-owner-001/pack/jmods/org.apache.lucene.monitor.jmod",
+      "bytes": 265978,
+      "sha256": "8f36372bdde0542ab70fe22286dc6a459d3e19fbe66c47b4ab58750a7e7fcc83"
+    },
+    {
+      "path": "lucene-owner-001/pack/jmods/org.apache.lucene.queries.jmod",
+      "bytes": 612567,
+      "sha256": "fe0bf721afdcc8d8885e036f6314faeb2f0cb7492e5c032d0ff44d258298f541"
+    },
+    {
+      "path": "lucene-owner-001/pack/jmods/org.apache.lucene.queryparser.jmod",
+      "bytes": 532662,
+      "sha256": "7e85b6975bec84a0b503826aa128be8d89f45fbf7dccb5f0beb0ab1c527a06fb"
+    },
+    {
+      "path": "lucene-owner-001/pack/jmods/org.apache.lucene.replicator.jmod",
+      "bytes": 183975,
+      "sha256": "b334fa15bc1eafcb8f8679f30da995b78d9fee5a0a7374b62396a7623f7887be"
+    },
+    {
+      "path": "lucene-owner-001/pack/jmods/org.apache.lucene.sandbox.jmod",
+      "bytes": 612548,
+      "sha256": "294f4fc0f54003128fa194893ae366b33008983824223cd9434ba450d099987d"
+    },
+    {
+      "path": "lucene-owner-001/pack/jmods/org.apache.lucene.spatial3d.jmod",
+      "bytes": 417295,
+      "sha256": "1bb4617d73ad72311fc741912e374b9a1fc65de821a43e3a3097f30c5b3055e1"
+    },
+    {
+      "path": "lucene-owner-001/pack/jmods/org.apache.lucene.spatial_extras.jmod",
+      "bytes": 354232,
+      "sha256": "82f82ed421d8c834239caf061ec464f4644a72f3a99a52d14c0be9795926d2bc"
+    },
+    {
+      "path": "lucene-owner-001/pack/jmods/org.apache.lucene.suggest.jmod",
+      "bytes": 351415,
+      "sha256": "9dde43cc3c0f999cd4c25baf0b857918407af368c78d2ad0a16ff170f2965556"
+    },
+    {
+      "path": "lucene-owner-001/pack/jmods/org.apache.opennlp.morfologik.jmod",
+      "bytes": 150361,
+      "sha256": "0b1ac62fef808c55dc8cdc1b5cd3ffaa66c0e2de66353827e300f196d4f9aec1"
+    },
+    {
+      "path": "lucene-owner-001/pack/jmods/org.apache.opennlp.spellcheck.jmod",
+      "bytes": 188883,
+      "sha256": "9d364a79cc42843dd8089e7949a86777b30370a37802f52d96db1bc5eebbb315"
+    },
+    {
+      "path": "lucene-owner-001/pack/jmods/org.apache.opennlp.tools.jmod",
+      "bytes": 2189726,
+      "sha256": "b2091a08abd4007b78aa6b79253283c64a2f0b9c056c6532afeb8897b24a5e33"
+    },
+    {
+      "path": "lucene-owner-001/pack/jmods/org.apache.opennlp.uima.jmod",
+      "bytes": 191646,
+      "sha256": "f863c6c4b532c967eee05b92079f44b923f65d5f1374871d65ce6091404af06a"
+    },
+    {
+      "path": "lucene-owner-001/pack/jmods/org.carrot2.morfologik.fsa.jmod",
+      "bytes": 151505,
+      "sha256": "656673e76862d9c8515a6b898f923c4ceeaaa0b0a9ee0258b2a87b128e36dc8a"
+    },
+    {
+      "path": "lucene-owner-001/pack/jmods/org.carrot2.morfologik.fsa_builders.jmod",
+      "bytes": 163856,
+      "sha256": "5ac72db91b2eca08e02a9844fe22f3919e11e714f230a1ebd792257ab93e9140"
+    },
+    {
+      "path": "lucene-owner-001/pack/jmods/org.carrot2.morfologik.polish.jmod",
+      "bytes": 2017633,
+      "sha256": "38cab5bc31d9f505c793f7f88eae297645e0f0d5603e6750ec8655709c893c2d"
+    },
+    {
+      "path": "lucene-owner-001/pack/jmods/org.carrot2.morfologik.stemming.jmod",
+      "bytes": 186825,
+      "sha256": "c3d34df23ec2440d8468d8c2a3091b9b4c32c9e0d744df968e4ae827a552f8c2"
+    },
+    {
+      "path": "lucene-owner-001/pack/jmods/org.carrot2.morfologik.tools.jmod",
+      "bytes": 169755,
+      "sha256": "39d511d1ffcf57569d2adf2ee849f1e0f8cc57bebc67046c5081f41e0013dfa6"
+    },
+    {
+      "path": "lucene-owner-001/pack/jmods/org.locationtech.jts.jmod",
+      "bytes": 1372744,
+      "sha256": "f4ecd12f46a49eebb9af7822f1bf89af4507919a728715c67402b268b782aa37"
+    },
+    {
+      "path": "lucene-owner-001/pack/jmods/org.slf4j.jmod",
+      "bytes": 202026,
+      "sha256": "9320dc01e3ec4ecce078fed12583a54156cf9c672a73a92e27edcb46f899da5f"
+    },
+    {
+      "path": "lucene-owner-001/pack/jmods/org.slf4j.simple.jmod",
+      "bytes": 146777,
+      "sha256": "044141861fbf0d51378850886f52de81019acadd8ad2826c4fb85857f4746356"
+    },
+    {
+      "path": "lucene-owner-001/pack/jmods/s2.geometry.library.java.jmod",
+      "bytes": 254537,
+      "sha256": "8c10872e2039faa264e0887255e27db78b6a54f8949b811a62397141f4b3b8d6"
+    },
+    {
+      "path": "lucene-owner-001/pack/jmods/spatial4j.jmod",
+      "bytes": 321538,
+      "sha256": "53d51c0cdfedceb91b1aa4761b16d27ef427803ae855692a479765c14ccf8dd9"
+    },
+    {
+      "path": "lucene-owner-001/pack/jmods/uimaj.core.jmod",
+      "bytes": 2080315,
+      "sha256": "be4dfeb7bac9093b17a8faf9bbac771233dd62869959edf23cd88fa77c482ee0"
+    },
+    {
+      "path": "lucene-owner-001/pack/jmods/zlibsvm.core.jmod",
+      "bytes": 171729,
+      "sha256": "a4b8b64cbaa2a927e1e71763e543fc3bd560ccb16fc0aef91de3b22a22bf1744"
+    },
+    {
+      "path": "lucene-owner-001/pack/image/release",
+      "bytes": 1937,
+      "sha256": "2293726e19bc0e518d15559702c26f99495362b3d1fc45bf0d46d5844bb6f97c"
+    },
+    {
+      "path": "lucene-owner-001/pack/image/bin/java",
+      "bytes": 12328,
+      "sha256": "3282b9858bee1ffd212a1a640236699494235d106e3b8bccbf726f9ac02cb0aa"
+    },
+    {
+      "path": "lucene-owner-001/pack/image/lib/modules",
+      "bytes": 209280750,
+      "sha256": "cb5508ae82b910b4e208ffe6712b953aff3458147c917b499f535ab3f5962229"
+    }
+  ]
+}

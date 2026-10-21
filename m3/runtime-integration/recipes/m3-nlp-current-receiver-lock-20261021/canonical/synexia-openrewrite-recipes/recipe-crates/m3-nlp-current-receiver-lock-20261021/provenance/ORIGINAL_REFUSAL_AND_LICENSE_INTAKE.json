@@ -1,0 +1,30 @@
+{
+  "schema": "M3_NLP_ORIGINAL_REFUSAL_AND_LICENSE_INTAKE/1",
+  "files": [
+    {
+      "source_path": "/workspace/scratch/206049dfb270/synexia/synexia-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/proof/current-fork-owners-20261021/nlp/evidence/CURRENT_RECEIVER_001.json",
+      "path": "proof/receiver-refusal-001/RESULT.json",
+      "sha256": "c74725aa452de9bbe804da3d137897550e733b8911e1f988a86f178ac2967def",
+      "bytes": 1993
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/synexia/synexia-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/proof/current-fork-owners-20261021/nlp/evidence/CURRENT_RECEIVER_001.log",
+      "path": "proof/receiver-refusal-001/command.log",
+      "sha256": "59f425942a6a9cb07848ad725e3f2106efe81f69cc1fcefa8f38727e59e2d5bb",
+      "bytes": 848
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/synexia/synexia-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/licenses/Synexia-LICENSE",
+      "path": "licenses/Synexia-LICENSE",
+      "sha256": "1eb85fc97224598dad1852b5d6483bbcf0aa8608790dcc657a5a2a761ae9c8c6",
+      "bytes": 11558
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/synexia/synexia-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/licenses/Synexia-NOTICE",
+      "path": "licenses/Synexia-NOTICE",
+      "sha256": "816e983c97925d4342c370520dfd072fc4dfe493f050bf244e34ecb5c75ccbb1",
+      "bytes": 17628
+    }
+  ],
+  "status": "EXACT_READBACK"
+}

@@ -1,0 +1,203 @@
+{
+  "baseline": [
+    {
+      "path": ".github/workflows/build.yml",
+      "sha256": "31f4535e8ab1ec189a0f9f9fed4fd1eb2167fe78de6e5ef89e802b52e00c1bd5",
+      "bytes": 9213,
+      "git_blob": "09eec8b4eafa7ccae3aaa20be3977a995ea25dbb"
+    },
+    {
+      "path": ".github/workflows/maven.yml",
+      "sha256": "c1013f2fcc40751858b73fb3594831a14ed329975a25e14dd1e4c6adbda04360",
+      "bytes": 5260,
+      "git_blob": "829b62f0efbbbeb0c98138bf4c4e2cc6c5c996a5"
+    },
+    {
+      "path": ".github/workflows/swt-scrollbar-full-range-20261020.yml",
+      "sha256": "443fa115d1ca9e90798b2bfa97a1a592ba94eca8784f823724a0ab0966205d34",
+      "bytes": 3073,
+      "git_blob": "005dc64b27d6eae2e9e42d56553a75d263a1bbeb"
+    },
+    {
+      "path": "AGENTS.md",
+      "sha256": "7fef4871cb74188b0cfd9ea183c3836847f05f0f9ea4462e58bb155239dfd104",
+      "bytes": 12451,
+      "git_blob": "e0ebc6f23d970a7c381eb514200924f99f276513"
+    },
+    {
+      "path": "bundles/org.eclipse.swt/Eclipse SWT/common/org/eclipse/swt/widgets/ViewportScrollBarGeometry.java",
+      "sha256": "df4f8498b1f633f2ffeae310f761ecaa0ea686e392557b8cfe2c684864a7f9b4",
+      "bytes": 5260,
+      "git_blob": "7370ac91ca85784b7b72efabef4129ffbfd3cea3"
+    },
+    {
+      "path": "docs/m3/scrollbar-full-range-20261020/README.md",
+      "sha256": "865df36749ac167528f723b880ded72507cf99d67fdcb842c0237ed63bb379ba",
+      "bytes": 4522,
+      "git_blob": "83d573334e9ac8d0fd0c79d255c60a6c1bdca815"
+    },
+    {
+      "path": "docs/m3/scrollbar-full-range-20261020/RECEIVER_LOCAL_JAVA21_PROOF.md",
+      "sha256": "c1ac1342e0c0aeb6252cd6511451bb47748f34688ff2006a34c443713765306b",
+      "bytes": 2284,
+      "git_blob": "01db397fad0d9a27514c0ceb371cc23b1c755eaf"
+    },
+    {
+      "path": "docs/m3/scrollbar-full-range-20261020/receiver-map.json",
+      "sha256": "6eabc37f6a3225032e1d2a99fcbcf6d2f3e7c22d1a70413a58fbaa87304ee2cb",
+      "bytes": 847,
+      "git_blob": "f2535b13c3a206faed691a62820241341bfce335"
+    },
+    {
+      "path": "docs/m3/scrollbar-full-range-20261020/recipes/swt-scrollbar-full-range-20261020/pom.xml",
+      "sha256": "7539cf81d2d7a7b30bff97ce2812a7e67f4e3593463a898aa38c8e6b0240dfa0",
+      "bytes": 2179,
+      "git_blob": "420eabcfebc730b8d932d2db884908c1cd77840b"
+    },
+    {
+      "path": "docs/m3/scrollbar-full-range-20261020/recipes/swt-scrollbar-full-range-20261020/proof/ScrollbarFullRangeProof.java",
+      "sha256": "bf11b1abb3cc394331bc213860dd6bc6fc01cde09856035e32074c955df5f7c8",
+      "bytes": 9275,
+      "git_blob": "0765c1a56c0f85d64f987e7e15edfcc8553f3b54"
+    },
+    {
+      "path": "docs/m3/scrollbar-full-range-20261020/recipes/swt-scrollbar-full-range-20261020/src/test/java/com/synexia/rewrite/ScrollbarFullRangeRecipeTest.java",
+      "sha256": "90d22367810a3dd7358d1b47e3129358b9a540c5a81dc79865db073480385cb6",
+      "bytes": 5435,
+      "git_blob": "1d8555a826f233a47a11fa1f67ba928a8f2467eb"
+    },
+    {
+      "path": "docs/m3/scrollbar-full-range-20261020/recipes/swt-scrollbar-full-range-20261020/verify.py",
+      "sha256": "53ff0e591c650b363f50988d5ae496866ecba37b444886dedd7115c4c73d530b",
+      "bytes": 3609,
+      "git_blob": "f4df2d0b6603d5eab8c38331999b27c0e1c683d4"
+    },
+    {
+      "path": "docs/m3/scrollbar-full-range-20261020/src/main/java/com/synexia/rewrite/M3EditScope.java",
+      "sha256": "962d37d62d740c3e8055c365a048ae7ee0479c26a9f6bbfe741e540d6c1134ab",
+      "bytes": 1052,
+      "git_blob": "274360816db1e44a2f1796a3bc5cdeff6b0ce6db"
+    },
+    {
+      "path": "docs/m3/scrollbar-full-range-20261020/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+      "sha256": "083f8b1fd956fe2ed81168bc580d1e0f39a815401c50571d397ddba40150cf63",
+      "bytes": 31505,
+      "git_blob": "135a28d0cec9ea988607cdef6caa1f0fe5115d75"
+    },
+    {
+      "path": "docs/m3/scrollbar-full-range-20261020/src/main/java/com/synexia/rewrite/M3ScopeInference.java",
+      "sha256": "9a6c54f42564c0ef82de3f40a2de17e6598569916c15255653bf79fbe3353579",
+      "bytes": 8268,
+      "git_blob": "9174dd681f0d75b5086fc19904a71524a03972dc"
+    },
+    {
+      "path": "docs/m3/scrollbar-full-range-20261020/src/main/resources/META-INF/rewrite/swt-scrollbar-full-range-20261020.yml",
+      "sha256": "6d0f5be2c965dc21bd30ad15f52bb062cfd9f48ed44002f93256eefc5b340fe8",
+      "bytes": 508,
+      "git_blob": "15edde1be40ba520b63dbfa4d5966a081d1e07b9"
+    },
+    {
+      "path": "docs/m3/scrollbar-full-range-20261020/src/main/resources/com/synexia/rewrite/hash-pinned-java/swt-scrollbar-full-range-20261020/ViewportScrollBarGeometry.before.java.txt",
+      "sha256": "0b8ede7af0551b7afaa270b9723bb405fad315f4f0ddb6e8dfc4db3267e30b44",
+      "bytes": 5067,
+      "git_blob": "1fd72c44bf9dcd5c2beca6ce95388640f48e0f67"
+    },
+    {
+      "path": "docs/m3/scrollbar-full-range-20261020/src/main/resources/com/synexia/rewrite/hash-pinned-java/swt-scrollbar-full-range-20261020/ViewportScrollBarGeometry.java.txt",
+      "sha256": "df4f8498b1f633f2ffeae310f761ecaa0ea686e392557b8cfe2c684864a7f9b4",
+      "bytes": 5260,
+      "git_blob": "7370ac91ca85784b7b72efabef4129ffbfd3cea3"
+    },
+    {
+      "path": "docs/m3/scrollbar-full-range-20261020/src/main/resources/com/synexia/rewrite/hash-pinned-java/swt-scrollbar-full-range-20261020/manifest.tsv",
+      "sha256": "fedd7bc812f25b7f3e56da86470ac4acef369f850b1075c31f5a4fe4c0b62560",
+      "bytes": 263,
+      "git_blob": "2e34dbb84e92a05afd1bc548296fad04dbf2059e"
+    },
+    {
+      "path": "tests/org.eclipse.swt.tests/JUnit Tests/org/eclipse/swt/tests/junit/AllNonBrowserTests.java",
+      "sha256": "822e13cbf45fa8f58c3b51f514bb9a2197b50724004fc3ac37d8795107c261f2",
+      "bytes": 6018,
+      "git_blob": "c1be41060a0bb9168c16219c92d5397bb772c8a8"
+    },
+    {
+      "path": "tests/org.eclipse.swt.tests/JUnit Tests/org/eclipse/swt/tests/junit/AllTests.java",
+      "sha256": "3156425c594d20c299f7f43ed13e0c092f6c5209997f31e128107545fc267ffd",
+      "bytes": 1266,
+      "git_blob": "fef9d083ea47c17a8694878d5fc1c143b5fe1aa5"
+    },
+    {
+      "path": "tests/org.eclipse.swt.tests/JUnit Tests/org/eclipse/swt/tests/junit/AllWidgetTests.java",
+      "sha256": "7d5d332d1ba3bb34ef840eacca3c710e434a0cf0396a91ebe5a73fac720b235c",
+      "bytes": 4996,
+      "git_blob": "4146e078eeca67a49e620fde8424056d481c1685"
+    },
+    {
+      "path": "tests/org.eclipse.swt.tests/JUnit Tests/org/eclipse/swt/tests/junit/Test_ViewportScrollBarGeometry.java",
+      "sha256": "83501fc504d65ee63f1dcfec59c34a496433d8c107a9e4fb0870ef34bd6aa000",
+      "bytes": 5182,
+      "git_blob": "f634d69289b013d8d83bc74427033888274c182e"
+    },
+    {
+      "path": "tests/org.eclipse.swt.tests/JUnit Tests/org/eclipse/swt/tests/junit/Test_org_eclipse_swt_widgets_ScrollBar_GeometryDifferential.java",
+      "sha256": "37d0e8fd029d134f20d73f89a43244287594e808ca55f95944d637cfe7c3b9a6",
+      "bytes": 6937,
+      "git_blob": "312f014d0fe9af1b37c393b9d87a2e63d910363c"
+    },
+    {
+      "path": "tests/org.eclipse.swt.tests/JUnit Tests/org/eclipse/swt/tests/junit/ViewportDifferential.java",
+      "sha256": "ce880dc75362906fc451f5497d419f1351845ac0c57a266462aa2c726927de0a",
+      "bytes": 27274,
+      "git_blob": "c2bc42e5567ae1db70f34afd5fcc48660efda192"
+    },
+    {
+      "path": "tests/org.eclipse.swt.tests/build.properties",
+      "sha256": "bef09e51f49f020280574399c836485e448f8c141c277d3b2dd268f7dff0ddf3",
+      "bytes": 782,
+      "git_blob": "3e336c7584c5e70a5239c51daff124a776c43ebe"
+    },
+    {
+      "path": "tests/org.eclipse.swt.tests/pom.xml",
+      "sha256": "2899464097d8f2163df217f1b56454acad07b6f932b9274b0aab4618f39d9c04",
+      "bytes": 3342,
+      "git_blob": "e5a469d124aa1e51655d38a2847c1becb3547b14"
+    }
+  ],
+  "candidate": {
+    ".github/workflows/build.yml": "31f4535e8ab1ec189a0f9f9fed4fd1eb2167fe78de6e5ef89e802b52e00c1bd5",
+    ".github/workflows/maven.yml": "c1013f2fcc40751858b73fb3594831a14ed329975a25e14dd1e4c6adbda04360",
+    ".github/workflows/swt-scrollbar-full-range-20261020.yml": "443fa115d1ca9e90798b2bfa97a1a592ba94eca8784f823724a0ab0966205d34",
+    "AGENTS.md": "7fef4871cb74188b0cfd9ea183c3836847f05f0f9ea4462e58bb155239dfd104",
+    "bundles/org.eclipse.swt/Eclipse SWT/common/org/eclipse/swt/widgets/ViewportScrollBarGeometry.java": "df4f8498b1f633f2ffeae310f761ecaa0ea686e392557b8cfe2c684864a7f9b4",
+    "docs/m3/scrollbar-full-range-20261020/README.md": "865df36749ac167528f723b880ded72507cf99d67fdcb842c0237ed63bb379ba",
+    "docs/m3/scrollbar-full-range-20261020/RECEIVER_LOCAL_JAVA21_PROOF.md": "c1ac1342e0c0aeb6252cd6511451bb47748f34688ff2006a34c443713765306b",
+    "docs/m3/scrollbar-full-range-20261020/receiver-map.json": "6eabc37f6a3225032e1d2a99fcbcf6d2f3e7c22d1a70413a58fbaa87304ee2cb",
+    "docs/m3/scrollbar-full-range-20261020/recipes/swt-scrollbar-full-range-20261020/pom.xml": "6553565c8dd14a857e796f741f3f8f8e7cbf3edda11df58b8dcd8a53e78e5600",
+    "docs/m3/scrollbar-full-range-20261020/recipes/swt-scrollbar-full-range-20261020/proof/ScrollbarFullRangeProof.java": "bf11b1abb3cc394331bc213860dd6bc6fc01cde09856035e32074c955df5f7c8",
+    "docs/m3/scrollbar-full-range-20261020/recipes/swt-scrollbar-full-range-20261020/src/test/java/com/synexia/rewrite/ScrollbarFullRangeRecipeTest.java": "90d22367810a3dd7358d1b47e3129358b9a540c5a81dc79865db073480385cb6",
+    "docs/m3/scrollbar-full-range-20261020/recipes/swt-scrollbar-full-range-20261020/verify.py": "53ff0e591c650b363f50988d5ae496866ecba37b444886dedd7115c4c73d530b",
+    "docs/m3/scrollbar-full-range-20261020/src/main/java/com/synexia/rewrite/M3EditScope.java": "962d37d62d740c3e8055c365a048ae7ee0479c26a9f6bbfe741e540d6c1134ab",
+    "docs/m3/scrollbar-full-range-20261020/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java": "083f8b1fd956fe2ed81168bc580d1e0f39a815401c50571d397ddba40150cf63",
+    "docs/m3/scrollbar-full-range-20261020/src/main/java/com/synexia/rewrite/M3ScopeInference.java": "9a6c54f42564c0ef82de3f40a2de17e6598569916c15255653bf79fbe3353579",
+    "docs/m3/scrollbar-full-range-20261020/src/main/resources/META-INF/rewrite/swt-scrollbar-full-range-20261020.yml": "6d0f5be2c965dc21bd30ad15f52bb062cfd9f48ed44002f93256eefc5b340fe8",
+    "docs/m3/scrollbar-full-range-20261020/src/main/resources/com/synexia/rewrite/hash-pinned-java/swt-scrollbar-full-range-20261020/ViewportScrollBarGeometry.before.java.txt": "0b8ede7af0551b7afaa270b9723bb405fad315f4f0ddb6e8dfc4db3267e30b44",
+    "docs/m3/scrollbar-full-range-20261020/src/main/resources/com/synexia/rewrite/hash-pinned-java/swt-scrollbar-full-range-20261020/ViewportScrollBarGeometry.java.txt": "df4f8498b1f633f2ffeae310f761ecaa0ea686e392557b8cfe2c684864a7f9b4",
+    "docs/m3/scrollbar-full-range-20261020/src/main/resources/com/synexia/rewrite/hash-pinned-java/swt-scrollbar-full-range-20261020/manifest.tsv": "fedd7bc812f25b7f3e56da86470ac4acef369f850b1075c31f5a4fe4c0b62560",
+    "tests/org.eclipse.swt.tests/JUnit Tests/org/eclipse/swt/tests/junit/AllNonBrowserTests.java": "822e13cbf45fa8f58c3b51f514bb9a2197b50724004fc3ac37d8795107c261f2",
+    "tests/org.eclipse.swt.tests/JUnit Tests/org/eclipse/swt/tests/junit/AllTests.java": "3156425c594d20c299f7f43ed13e0c092f6c5209997f31e128107545fc267ffd",
+    "tests/org.eclipse.swt.tests/JUnit Tests/org/eclipse/swt/tests/junit/AllWidgetTests.java": "7d5d332d1ba3bb34ef840eacca3c710e434a0cf0396a91ebe5a73fac720b235c",
+    "tests/org.eclipse.swt.tests/JUnit Tests/org/eclipse/swt/tests/junit/Test_ViewportScrollBarGeometry.java": "83501fc504d65ee63f1dcfec59c34a496433d8c107a9e4fb0870ef34bd6aa000",
+    "tests/org.eclipse.swt.tests/JUnit Tests/org/eclipse/swt/tests/junit/Test_org_eclipse_swt_widgets_ScrollBar_GeometryDifferential.java": "37d0e8fd029d134f20d73f89a43244287594e808ca55f95944d637cfe7c3b9a6",
+    "tests/org.eclipse.swt.tests/JUnit Tests/org/eclipse/swt/tests/junit/ViewportDifferential.java": "ce880dc75362906fc451f5497d419f1351845ac0c57a266462aa2c726927de0a",
+    "tests/org.eclipse.swt.tests/build.properties": "bef09e51f49f020280574399c836485e448f8c141c277d3b2dd268f7dff0ddf3",
+    "tests/org.eclipse.swt.tests/pom.xml": "2899464097d8f2163df217f1b56454acad07b6f932b9274b0aab4618f39d9c04"
+  },
+  "candidate_pom": {
+    "path": "docs/m3/scrollbar-full-range-20261020/recipes/swt-scrollbar-full-range-20261020/pom.xml",
+    "before_sha256": "7539cf81d2d7a7b30bff97ce2812a7e67f4e3593463a898aa38c8e6b0240dfa0",
+    "after_sha256": "6553565c8dd14a857e796f741f3f8f8e7cbf3edda11df58b8dcd8a53e78e5600",
+    "template": "/workspace/scratch/206049dfb270/jobs-work/swt-owner-closure-20261021/candidates/docs/m3/scrollbar-full-range-20261020/recipes/swt-scrollbar-full-range-20261020/pom.xml"
+  },
+  "compiled_directory_is_fresh": true,
+  "unchanged_original_test_count": 7
+}
