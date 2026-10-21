@@ -1,0 +1,2 @@
+seq	recipe	trigger	observed	correction	guard	lesson	category	donor	status
+1	com.m3.rewrite.backport.M3FileByteEventFactRecipe	stream-progress-review	progress accounting called Bytes.payload().length and therefore cloned immutable payload bytes solely to observe length	PENDING	M3FileByteEventFactRecipeTest	expose byteCount() as retained immutable fact while preserving defensive payload() cloning	stream-observation-allocation	M3JDK21-existing-M3FileStreamEvents	RECORDED
