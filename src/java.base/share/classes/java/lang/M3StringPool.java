@@ -116,7 +116,7 @@ final class M3StringPool {
      * <p>This is an internal opt-in batch entry point. Normal String concatenation
      * keeps its Java path until installed-image/native performance qualification.</p>
      */
-    // FLLDCIM: ATOM — canonical native batch join over fixed-array/view coordinates
+    // FLLDCIM: ATOM - canonical native batch join over fixed-array/view coordinates
     static native M3String concatViewsNative0(M3String[] parts);
 
     private static String savedProperty(String name) {
