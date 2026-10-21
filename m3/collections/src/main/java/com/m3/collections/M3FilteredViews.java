@@ -76,22 +76,23 @@ public final class M3FilteredViews {
     private static <E> Iterator<E> filtered(Iterator<E> source,
             Predicate<? super E> predicate) {
         return new Iterator<>() {
+            private static final int READY = 1;
+            private static final int EXHAUSTED = 1 << 1;
             private E next;
-            private boolean ready;
-            private boolean exhausted;
+            private int state;
 
             @Override public boolean hasNext() {
-                if (ready) return true;
-                if (exhausted) return false;
+                if ((state & READY) != 0) return true;
+                if ((state & EXHAUSTED) != 0) return false;
                 while (source.hasNext()) {
                     E candidate = source.next();
                     if (predicate.test(candidate)) {
                         next = candidate;
-                        ready = true;
+                        state |= READY;
                         return true;
                     }
                 }
-                exhausted = true;
+                state |= EXHAUSTED;
                 return false;
             }
 
@@ -99,7 +100,7 @@ public final class M3FilteredViews {
                 if (!hasNext()) throw new NoSuchElementException();
                 E result = next;
                 next = null;
-                ready = false;
+                state &= ~READY;
                 return result;
             }
 
@@ -170,18 +171,26 @@ public final class M3FilteredViews {
 
         @Override public Iterator<E> iterator() {
             if (iterationView(source) == null) return filtered(source.iterator(), predicate);
-            // A depth-sized array replaces nested iterator frames, never backing elements.
-            ArrayList<Predicate<? super E>> filters = new ArrayList<>();
+            // Immutable wrapper links are read twice without callbacks. One exact
+            // predicate array replaces ArrayList growth and nested iterator frames.
             CollectionView<E> layer = this;
             Collection<E> backing;
+            int depth = 0;
             do {
-                filters.add(layer.predicate);
+                depth++;
                 backing = layer.source;
                 layer = iterationView(backing);
             } while (layer != null);
+            @SuppressWarnings("unchecked")
+            Predicate<? super E>[] filters = (Predicate<? super E>[]) new Predicate<?>[depth];
+            layer = this;
+            for (int index = 0; index < filters.length; index++) {
+                filters[index] = layer.predicate;
+                if (index + 1 < filters.length) layer = iterationView(layer.source);
+            }
             return filtered(backing.iterator(), value -> {
-                for (int index = filters.size() - 1; index >= 0; index--) {
-                    if (!filters.get(index).test(value)) return false;
+                for (int index = filters.length - 1; index >= 0; index--) {
+                    if (!filters[index].test(value)) return false;
                 }
                 return true;
             });
