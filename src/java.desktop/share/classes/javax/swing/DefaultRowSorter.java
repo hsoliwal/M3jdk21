@@ -185,12 +185,64 @@ public abstract class DefaultRowSorter<M, I> extends RowSorter<M> {
     // Whether to print warning about JDK-8160087
     private static boolean warning8160087 = true;
 
+    /** The view order as int lanes when m3.swing.viewport is set ({@code sun.swing.table.M3SorterLanes}), else null. */
+    private final sun.swing.table.M3SorterLanes m3Lanes =
+            sun.swing.table.M3SorterLanes.ENABLED ? new sun.swing.table.M3SorterLanes() : null;
+
     /**
      * Creates an empty <code>DefaultRowSorter</code>.
      */
     public DefaultRowSorter() {
         sortKeys = Collections.emptyList();
         maxSortKeys = 3;
+    }
+
+    /** The lanes, bound on first use to this sorter's comparison, filter, keys, flags and event. */
+    private sun.swing.table.M3SorterLanes m3BoundLanes() {
+        if (!m3Lanes.bound()) {
+            m3Lanes.bind(new sun.swing.table.M3SorterLanes.Host() {
+                public int compare(int model1, int model2) {
+                    return DefaultRowSorter.this.compare(model1, model2);
+                }
+                public boolean include(int modelRow) {
+                    return DefaultRowSorter.this.include(modelRow);
+                }
+                public int modelRowCount() {
+                    return getModelWrapper().getRowCount();
+                }
+                public boolean unsorted() {
+                    return isUnsorted();
+                }
+                public boolean filtered() {
+                    return getRowFilter() != null;
+                }
+                public boolean sorted() {
+                    return sorted;
+                }
+                public void sorted(boolean value) {
+                    sorted = value;
+                }
+                public void prepareSort() {
+                    updateUseToString();
+                    if (isUnsorted()) {
+                        cachedSortKeys = new SortKey[0];
+                    } else {
+                        cacheSortKeys(getSortKeys());
+                    }
+                }
+                public void prepareResort() {
+                    updateUseToString();
+                    cacheSortKeys(getSortKeys());
+                }
+                public void sort() {
+                    DefaultRowSorter.this.sort();
+                }
+                public void changed(int[] lastViewToModel) {
+                    fireRowSorterChanged(lastViewToModel);
+                }
+            });
+        }
+        return m3Lanes;
     }
 
     /**
@@ -309,6 +361,10 @@ public abstract class DefaultRowSorter<M, I> extends RowSorter<M> {
         }
         if (!this.sortKeys.equals(old)) {
             fireSortOrderChanged();
+            if (m3Lanes != null) {
+                m3BoundLanes().sortKeysChanged();
+                return;
+            }
             if (viewToModel == null) {
                 // Currently unsorted, use sort so that internal fields
                 // are correctly set.
@@ -490,6 +546,9 @@ public abstract class DefaultRowSorter<M, I> extends RowSorter<M> {
      * @throws IndexOutOfBoundsException {@inheritDoc}
      */
     public int convertRowIndexToView(int index) {
+        if (m3Lanes != null && m3Lanes.transformed()) {
+            return m3Lanes.viewIndex(index);
+        }
         if (modelToView == null) {
             return convertUnsortedUnfiltered(index);
         }
@@ -502,6 +561,9 @@ public abstract class DefaultRowSorter<M, I> extends RowSorter<M> {
      * @throws IndexOutOfBoundsException {@inheritDoc}
      */
     public int convertRowIndexToModel(int index) {
+        if (m3Lanes != null && m3Lanes.transformed()) {
+            return m3Lanes.modelIndex(index);
+        }
         if (viewToModel == null) {
             return convertUnsortedUnfiltered(index);
         }
@@ -577,6 +639,10 @@ public abstract class DefaultRowSorter<M, I> extends RowSorter<M> {
      * @see #setSortKeys
      */
     public void sort() {
+        if (m3Lanes != null) {
+            m3BoundLanes().sort();
+            return;
+        }
         sorted = true;
         int[] lastViewToModel = getViewToModelAsInts(viewToModel);
         updateUseToString();
@@ -821,6 +887,9 @@ public abstract class DefaultRowSorter<M, I> extends RowSorter<M> {
      * {@inheritDoc}
      */
     public int getViewRowCount() {
+        if (m3Lanes != null && m3Lanes.transformed()) {
+            return m3Lanes.viewRowCount();
+        }
         if (viewToModel != null) {
             // When filtering this may differ from getModelWrapper().getRowCount()
             return viewToModel.length;
@@ -836,6 +905,9 @@ public abstract class DefaultRowSorter<M, I> extends RowSorter<M> {
     }
 
     private void allChanged() {
+        if (m3Lanes != null) {
+            m3Lanes.clear();
+        }
         modelToView = null;
         viewToModel = null;
         comparators = null;
@@ -877,6 +949,10 @@ public abstract class DefaultRowSorter<M, I> extends RowSorter<M> {
             throw new IndexOutOfBoundsException("Invalid range");
         }
         modelRowCount = newModelRowCount;
+        if (m3Lanes != null) {
+            m3BoundLanes().rowsInserted(firstRow, endRow);
+            return;
+        }
         if (shouldOptimizeChange(firstRow, endRow)) {
             rowsInserted0(firstRow, endRow);
         }
@@ -893,6 +969,10 @@ public abstract class DefaultRowSorter<M, I> extends RowSorter<M> {
             throw new IndexOutOfBoundsException("Invalid range");
         }
         modelRowCount = getModelWrapper().getRowCount();
+        if (m3Lanes != null) {
+            m3BoundLanes().rowsDeleted(firstRow, endRow);
+            return;
+        }
         if (shouldOptimizeChange(firstRow, endRow)) {
             rowsDeleted0(firstRow, endRow);
         }
@@ -907,6 +987,10 @@ public abstract class DefaultRowSorter<M, I> extends RowSorter<M> {
         checkAgainstModel(firstRow, endRow);
         if (firstRow >= modelRowCount || endRow >= modelRowCount) {
             throw new IndexOutOfBoundsException("Invalid range");
+        }
+        if (m3Lanes != null) {
+            m3BoundLanes().rowsUpdated(firstRow, endRow, getSortsOnUpdates());
+            return;
         }
         if (getSortsOnUpdates()) {
             if (shouldOptimizeChange(firstRow, endRow)) {
