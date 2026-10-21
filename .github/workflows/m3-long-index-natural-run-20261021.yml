@@ -8,6 +8,7 @@ on:
       - 'm3/collections/src/test/java/com/m3/collections/M3LongIndexNaturalRunTest.java'
       - 'm3/collections/qualification/natural-run-20261021/**'
       - 'm3/collections/algorithm-catalog/natural-run-20261021/**'
+      - 'm3/docs/M3JDK21-INTEGRATED-JAVA-JNI-RECIPE-CATALOGUE-20261021.md'
       - '.github/workflows/m3-long-index-natural-run-20261021.yml'
   workflow_dispatch:
 jobs:
