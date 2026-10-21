@@ -80,19 +80,36 @@ public final class M3ListMeasure {
     private int textPositions;
     private int alignments;
     private int remeasured;
+    private int fullMeasuresOnDeltas;
 
     /** Creates the per-UI state; the first layout measures every row. */
     public M3ListMeasure() {
+    }
+
+    /**
+     * Keeps the kept sizes usable while {@code ok}; a delta event that makes them unusable counts as
+     * a full measure caused by a delta (the rule 24 counter).
+     */
+    private boolean track(boolean ok) {
+        if (valid && !ok) {
+            fullMeasuresOnDeltas++;
+        }
+        valid = valid && ok;
+        return valid;
+    }
+
+    /** Full measures that delta events caused (untrackable indices, the piece cap, a probe mismatch), for the differentials. */
+    public int fullMeasuresOnDeltas() {
+        return fullMeasuresOnDeltas;
     }
 
     /** Records {@code ListDataListener.intervalAdded}. */
     public void added(int index0, int index1) {
         int a = Math.min(index0, index1);
         int k = Math.max(index0, index1) - a + 1;
-        valid = valid && a >= 0 && a <= pieces.size() && k > 0;
-        if (valid) {
+        if (track(a >= 0 && a <= pieces.size() && k > 0)) {
             pieces.insert(a, k);
-            valid = pieces.count() <= MAX_PIECES;
+            track(pieces.count() <= MAX_PIECES);
         }
     }
 
@@ -100,10 +117,9 @@ public final class M3ListMeasure {
     public void removed(int index0, int index1) {
         int a = Math.min(index0, index1);
         int b = Math.max(index0, index1);
-        valid = valid && a >= 0 && b < pieces.size();
-        if (valid) {
+        if (track(a >= 0 && b < pieces.size())) {
             pieces.remove(a, b);
-            valid = pieces.count() <= MAX_PIECES;
+            track(pieces.count() <= MAX_PIECES);
         }
     }
 
@@ -111,10 +127,9 @@ public final class M3ListMeasure {
     public void changed(int index0, int index1) {
         int a = Math.min(index0, index1);
         int b = Math.max(index0, index1);
-        valid = valid && a >= 0 && b < pieces.size();
-        if (valid) {
+        if (track(a >= 0 && b < pieces.size())) {
             pieces.change(a, b);
-            valid = pieces.count() <= MAX_PIECES;
+            track(pieces.count() <= MAX_PIECES);
         }
     }
 
@@ -193,7 +208,11 @@ public final class M3ListMeasure {
                 probe = row + pieces.length(i) - 1;
             }
         }
-        if (probe < 0 || probe < n - 1 && !same(list, m, r, pane, probe, h, w)) {
+        if (probe < 0) {
+            return false;
+        }
+        if (probe < n - 1 && !same(list, m, r, pane, probe, h, w)) {
+            fullMeasuresOnDeltas++;
             return false;
         }
         int count = probe < n - 1 ? 1 : 0;
@@ -208,6 +227,7 @@ public final class M3ListMeasure {
             }
         }
         if (probe == n - 1 && !same(list, m, r, pane, probe, h, w)) {
+            fullMeasuresOnDeltas++;
             return false;
         }
         remeasured = count + (probe == n - 1 ? 1 : 0);

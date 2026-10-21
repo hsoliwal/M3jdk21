@@ -506,15 +506,57 @@ public final class M3JTreeViewportDifferential {
         check(true);
         for (step = 0; step < steps; step++) {
             changedUnderRoot = false;
+            int logStart = log.size();
+            AbstractLayoutCache cacheBefore = ((M3MetalTreeUI) m3.tree.getUI()).cache();
+            int before = rebuilds(cacheBefore);
             step();
             if (changedUnderRoot) {
                 acceptD1();
             }
             check(step % 10 == 0);
-            if (((M3MetalTreeUI) m3.tree.getUI()).cache().getClass().getSimpleName()
-                    .equals("M3FixedHeightLayoutCache")) {
+            AbstractLayoutCache cacheAfter = ((M3MetalTreeUI) m3.tree.getUI()).cache();
+            if (cacheAfter == cacheBefore) {
+                deltaGate(logStart, before, rebuilds(cacheAfter));
+            }
+            if (cacheAfter.getClass().getSimpleName().equals("M3FixedHeightLayoutCache")) {
                 fixedSteps++;
             }
+        }
+    }
+
+    /** Steps that hand the cache a delta: they must never rebuild it in full (brief rule 24). */
+    static final java.util.Set<String> DELTAS = java.util.Set.of("insertNodeInto", "removeNodeFromParent",
+            "valueForPathChanged", "expandRow", "collapseRow", "expandPath", "collapsePath", "makeVisible",
+            "setSelectionRow", "addSelectionInterval", "setSelectionPath", "addSelectionPath", "clearSelection",
+            "removeSelectionRow");
+    static int deltaSteps;
+
+    /** The M3 cache's rebuild count; -1 for a stock cache (a BasicTreeUI subclass that kept its own). */
+    static int rebuilds(AbstractLayoutCache cache) {
+        try {
+            return (int) cache.getClass().getMethod("rebuilds").invoke(cache);
+        } catch (ReflectiveOperationException e) {
+            return -1;
+        }
+    }
+
+    /** Fails when a delta step rebuilt the M3 cache, unless the harness rebuilt both after an exception. */
+    void deltaGate(int logStart, int before, int after) {
+        if (logStart >= log.size() || before < 0) {
+            return;
+        }
+        String[] first = log.get(logStart).trim().split(" ");
+        if (first.length < 2 || !DELTAS.contains(first[1])) {
+            return;
+        }
+        for (String line : log.subList(logStart, log.size())) {
+            if (line.contains("rebuild") || line.contains("accepted D")) {
+                return;
+            }
+        }
+        deltaSteps++;
+        if (after != before) {
+            fail("full rebuild on a delta step (rule 24)", "0", String.valueOf(after - before));
         }
     }
 
@@ -550,6 +592,7 @@ public final class M3JTreeViewportDifferential {
                 + " passed " + passed[0]
                 + " failed " + failures.size() + " " + failures + "; pixel comparisons " + pixelChecks
                 + "; accepted upstream defect D1 " + acceptedD1 + " times; rebuilt after exceptions "
-                + rebuiltAfterException + "; steps on M3FixedHeightLayoutCache " + fixedSteps;
+                + rebuiltAfterException + "; steps on M3FixedHeightLayoutCache " + fixedSteps
+                + "; full rebuilds on " + deltaSteps + " delta steps: 0";
     }
 }
