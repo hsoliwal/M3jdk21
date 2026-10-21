@@ -18,6 +18,9 @@ import subprocess
 import sys
 import zipfile
 
+from vfs_pack_support import (collect_legal, load_dependencies, verify_jar_legal,
+                              verify_linked_legal, write_pack_inputs)
+
 DONOR_COMMIT = "289e32f130c9c8e4a1cf0edc1066327d699393bf"
 ROOTS = ("java.se", "jdk.m3fs", "jdk.unsupported", "jdk.zipfs")
 
@@ -121,6 +124,10 @@ def main(argv=None):
     parser.add_argument("--native-library", type=Path, required=True)
     parser.add_argument("--sqlite-library", type=Path, required=True)
     parser.add_argument("--out", type=Path, required=True)
+    parser.add_argument("--provider-dependency-cache", type=Path,
+                        help="Pinned VFS provider dependency closure; required for a VFS-enabled M3FS JAR")
+    parser.add_argument("--provider-dependency-lock", type=Path,
+                        help="Defaults to tools/vfs-dependencies.lock.json when a provider cache is supplied")
     parser.add_argument("--repository-root", type=Path,
                         default=Path(__file__).resolve().parents[3])
     args = parser.parse_args(argv)
@@ -136,6 +143,7 @@ def main(argv=None):
     native = input_file(args.native_library)
     sqlite = input_file(args.sqlite_library)
     with zipfile.ZipFile(jar) as archive:
+        contains_vfs = "com/m3/fs/vfs/M3VFS.class" in archive.namelist()
         if "module-info.class" not in archive.namelist():
             raise ValueError("packaged modular M3FS jar required; run Maven install first")
     repository = args.repository_root.resolve(strict=True)
@@ -144,6 +152,15 @@ def main(argv=None):
     if not graph.is_dir():
         raise ValueError("existing module-packs graph owner missing")
     module_root = Path(__file__).resolve().parents[1]
+    if contains_vfs and args.provider_dependency_cache is None:
+        raise ValueError("VFS-enabled M3FS requires --provider-dependency-cache with the complete pinned closure")
+    if args.provider_dependency_lock is not None and args.provider_dependency_cache is None:
+        raise ValueError("--provider-dependency-lock requires --provider-dependency-cache")
+    dependency_lock = args.provider_dependency_lock or module_root / "tools/vfs-dependencies.lock.json"
+    dependencies = (load_dependencies(dependency_lock, args.provider_dependency_cache, module_root)
+                    if args.provider_dependency_cache is not None else [])
+    if contains_vfs:
+        verify_jar_legal(module_root, jar)
     probe = input_file(module_root / "verification/M3FsRuntimeProbe.java")
     out = args.out.absolute()
     receipts = out.with_name(out.name + "-receipts")
@@ -164,6 +181,7 @@ def main(argv=None):
     shutil.copyfile(sqlite, libraries / sqlite_soname)
     legal = receipts / "legal"
     notices = native_notices(repository, module_root, jar.parent.parent, sqlite, legal)
+    provider_legal_hashes = collect_legal(module_root, dependencies, legal)
     release = (jdk / "release").read_text(encoding="utf-8") if (jdk / "release").is_file() else ""
     inputs = {
         "donor_commit": DONOR_COMMIT,
@@ -171,6 +189,11 @@ def main(argv=None):
         "jni_library": {"path": str(native), "sha256": digest(native)},
         "sqlite_library": {"path": str(sqlite), "soname": sqlite_soname, "sha256": digest(sqlite)},
         "existing_packer": {"path": str(packer), "sha256": digest(packer)},
+        "provider_dependencies": [{"module": row["module"], "path": str(row["jar"]),
+                                   "sha256": row["sha256"], "descriptor_kind": row["descriptor_kind"]}
+                                  for row in dependencies],
+        "provider_dependency_lock": ({"path": str(input_file(dependency_lock)), "sha256": digest(dependency_lock)}
+                                     if dependencies else None),
         "probe_source": {"path": str(probe), "sha256": digest(probe)},
         "jdk_home": str(jdk), "jdk_release": release, "roots": ROOTS,
         "removed_environment_names": removed, "legal": notices,
@@ -178,15 +201,9 @@ def main(argv=None):
                  "This wrapper does not build or qualify the full modified OpenJDK/M3JDK21 tree.",
     }
     (receipts / "inputs.json").write_text(json.dumps(inputs, indent=2, sort_keys=True) + "\n", encoding="utf-8")
-    image_tsv = receipts / "JMOD_IMAGE.tsv"
-    with image_tsv.open("w", encoding="utf-8", newline="") as stream:
-        writer = csv.writer(stream, delimiter="\t", lineterminator="\n")
-        writer.writerow(("module", "jar", "disposition"))
-        writer.writerow(("jdk.m3fs", str(jar), "MODULAR_JAR"))
-    manifest = receipts / "DESCRIPTOR_MANIFEST.tsv"
-    manifest.write_text("module\tunit_jars\ttarget\n", encoding="utf-8")
+    image_tsv, manifest = write_pack_inputs(receipts, jar, dependencies)
     command = [sys.executable, packer, "--image-tsv", image_tsv, "--manifest", manifest,
-               "--layer-root", repository, "--jdk-home", jdk, "--out", out,
+               "--layer-root", module_root, "--jdk-home", jdk, "--out", out,
                "--add-modules", "java.se", "--native-library", "jdk.m3fs=" + str(libraries),
                "--legal-notices", legal]
     for root in ROOTS:
@@ -194,8 +211,9 @@ def main(argv=None):
     checked(command, environment, receipts / "pack.log")
     image = (out / "image").resolve(strict=True)
     classes = receipts / "probe-classes"
+    provider_module_path = os.pathsep.join([str(jar)] + [str(row["jar"]) for row in dependencies])
     checked([jdk / "bin/javac", "--release", "21", "-Xlint:all", "-Werror",
-             "--module-path", jar, "--add-modules", "jdk.m3fs", "-d", classes, probe],
+             "--module-path", provider_module_path, "--add-modules", "jdk.m3fs", "-d", classes, probe],
             environment, receipts / "probe-compile.log")
     probe_output = checked([image / "bin/java", "-Xcheck:jni", "-Dm3fs.native=required",
                             "--add-modules", "jdk.m3fs", "-cp", classes, "M3FsRuntimeProbe",
@@ -204,6 +222,9 @@ def main(argv=None):
     values = dict(line.split("=", 1) for line in probe_output.splitlines() if "=" in line)
     if values.get("M3FS_RUNTIME_PROBE") != "PASS":
         raise RuntimeError("linked probe did not emit its success marker")
+    provider_legal_proof = verify_linked_legal(out, dependencies, provider_legal_hashes)
+    if dependencies:
+        load_dependencies(dependency_lock, args.provider_dependency_cache, module_root)
     linked_native = image / "lib/libm3fs.so"
     linked_sqlite = image / "lib" / sqlite_soname
     report = {
@@ -211,6 +232,7 @@ def main(argv=None):
         "linked_jni": {"path": str(linked_native), "sha256": digest(linked_native)},
         "linked_sqlite": {"path": str(linked_sqlite), "sha256": digest(linked_sqlite)},
         "input_hash_receipt": "inputs.json",
+        "provider_legal": provider_legal_proof,
         "native_hash_note": "jlink --strip-debug can change copied native bytes; input and image hashes are distinct observations.",
         "scope": inputs["scope"],
     }
@@ -222,6 +244,6 @@ def main(argv=None):
 if __name__ == "__main__":
     try:
         sys.exit(main())
-    except (OSError, ValueError, RuntimeError, zipfile.BadZipFile) as failure:
+    except (OSError, ValueError, RuntimeError, KeyError, zipfile.BadZipFile) as failure:
         print("M3FS_RUNTIME_PACKAGE_REFUSED: " + str(failure), file=sys.stderr)
         sys.exit(1)

@@ -1,0 +1,109 @@
+{
+  "schema": "M3FS_VFS_NAME_MAPPING_V1",
+  "copyright": "Copyright 2026 Hitesh Soliwal and contributors (M3 modifications)",
+  "license": "Apache-2.0; original Apache notices retained",
+  "product": "M3JDK21",
+  "intake_mode": "INDEPENDENT_APACHE_MODULE",
+  "target_module": "jdk.m3fs",
+  "target_path": "m3/fs",
+  "target_base": "73f59218dc4ef1a3ef79aad990e77273db2a2d60",
+  "canonical_repository": "hsoliwal/com.synexia",
+  "canonical_base": "f04fbac91a7891e64b77c7b24cef1ab75ec88144",
+  "canonical_recipe_owners": [
+    "com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe",
+    "com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe"
+  ],
+  "canonical_recipe_crate": "synexia-openrewrite-recipes/recipe-crates/m3fs-vfs-20261020",
+  "source_repository": "apache/commons-vfs",
+  "source_tag": "rel/commons-vfs-2.10.0",
+  "source_revision": "685b3b723a83e56034391350ea1a02231411142f",
+  "source_package": "org.apache.commons.vfs2",
+  "runtime_package": "com.m3.fs.vfs",
+  "runtime_owner": "jdk.m3fs",
+  "maven_profile": "m3-vfs-core",
+  "source_receipt": "m3/fs/vfs/SOURCE.json",
+  "source_profile": "m3/fs/vfs/SOURCE_PROFILE.tsv",
+  "dependency_lock": "m3/fs/tools/vfs-dependencies.lock.json",
+  "legal_notice": "m3/fs/legal/commons-vfs2/NOTICE.txt",
+  "modification_notice": "m3/fs/legal/commons-vfs2/CHANGES-M3FS.md",
+  "qualification_receipt": "m3/fs/verification/vfs-20261020/qualification.json",
+  "cross_gate_report": "m3/fs/verification/vfs-20261020/RESULTS.json",
+  "mappings": [
+    {
+      "source": "org.apache.commons.vfs2 and subpackages",
+      "target": "com.m3.fs.vfs and subpackages",
+      "role": "Attributed provider API/SPI in the existing jdk.m3fs owner; ordinary donor type names retained unless mapped below"
+    },
+    {
+      "source": "org.apache.commons.vfs2.VFS",
+      "target": "com.m3.fs.vfs.M3VFS",
+      "role": "M3-facing provider-manager entry point"
+    },
+    {
+      "source": "org.apache.commons.vfs2.FileObject",
+      "target": "com.m3.fs.vfs.FileObject",
+      "role": "Mutable provider handle; original lifecycle contract remains distinct from immutable MFile metadata"
+    },
+    {
+      "source": "MFile/MFiles approved stream design",
+      "target": [
+        "com.m3.fs.MFile",
+        "com.m3.fs.MFiles",
+        "com.m3.fs.MFiles.Plan",
+        "com.m3.fs.MFileContent",
+        "com.m3.fs.MFileStreams",
+        "com.m3.fs.MFileObservation",
+        "com.m3.fs.MFileChangeSource",
+        "com.m3.fs.MFileDelta"
+      ],
+      "role": "M3FS facade: selective layered traversal, owned default I/O, child progress bridge, synchronous shadows and evidence-qualified deltas"
+    },
+    {
+      "source": "org/apache/commons/vfs2/Resources.properties and impl/providers.xml",
+      "target": "com/m3/fs/vfs/Resources.properties and impl/providers.xml",
+      "role": "Relocated bundles, provider class names and reflective references"
+    },
+    {
+      "source": "META-INF/vfs-providers.xml",
+      "target": "META-INF/m3fs-vfs-providers.xml",
+      "role": "M3 provider extension discovery; original-namespace plugins are not binary-compatible"
+    },
+    {
+      "source": "provider/url/UrlFileNameParser.java, UrlFileObject.java and UrlFileName.java",
+      "target": "Corresponding com.m3.fs.vfs.provider.url classes using donor GenericURLFileName/GenericURLFileNameParser and URIUtils",
+      "role": "Explicit source adaptation removes the core URL path dependency on legacy HttpClient 3; original legacy types remain deferred source inputs"
+    },
+    {
+      "source": "Commons Logging, Lang, IO, Compress and Codec",
+      "target": "Separate pinned dependency modules in tools/vfs-dependencies.lock.json",
+      "role": "External module identities and original notices retained; dependency versions are not inferred from package relocation"
+    },
+    {
+      "source": "FTP/FTPS, HTTP-client families, SFTP, LRUFilesCache and legacy URLFileName/Parser",
+      "target": null,
+      "role": "Retained source custody; excluded from the bounded compiled profile"
+    },
+    {
+      "source": "Git commit-tree and Git LFS provider direction",
+      "target": null,
+      "role": "Future provider work; current Git working trees are ordinary file-provider inputs"
+    },
+    {
+      "source": "DefaultFileSystemManager lifecycle",
+      "target": "com.m3.fs.vfs.impl.DefaultFileSystemManager",
+      "role": "Failure cleanup, partial-init cleanup prerequisites, callback-safe component detachment and continued close with suppressed failures; original Standard initialization order preserved"
+    }
+  ],
+  "ownership_boundaries": [
+    "com.m3.file.M3File remains the separate thin Path/provider read boundary",
+    "The compiletime M3File source/AST snapshot owner is not replaced or duplicated",
+    "MFile metadata lifetime is stable; content remains scoped to its owning stream",
+    "The VFS logical namespace can collapse duplicate physical archive records"
+  ],
+  "jpms_exported": true,
+  "exports_scope": "Compiled API/SPI packages only, as declared in m3/fs/src/main/module/module-info.java",
+  "synexia_runtime_dependency": false,
+  "receiving_sequence_advanced": false,
+  "qualification_status": "CONSULT_CHECKED_RECEIPTS; this mapping asserts no runtime gate pass",
+  "performance_claim": "No memory-gain, array-only, zero-copy or constant-memory claim"
+}
