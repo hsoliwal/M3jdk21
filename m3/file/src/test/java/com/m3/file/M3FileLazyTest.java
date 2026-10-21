@@ -71,14 +71,29 @@ class M3FileLazyTest {
         int top = tree.ids().filter(id -> tree.name(id).equals("top.txt")).findFirst().orElseThrow();
         M3File file = tree.file(top);
         Path path = file.toPath();
-        int rankBefore = tree.rank(top);
         int a = tree.ids().filter(id -> tree.name(id).equals("a")).findFirst().orElseThrow();
+        int insertionRank = tree.rank(a);
+        int[] existing = tree.ids().toArray();
+        int[] ranks = new int[existing.length];
+        Path[] paths = new Path[existing.length];
+        M3File[] facades = new M3File[existing.length];
+        for (int i = 0; i < existing.length; i++) {
+            ranks[i] = tree.rank(existing[i]);
+            paths[i] = tree.path(existing[i]);
+            facades[i] = tree.file(existing[i]);
+        }
         int generation = tree.generation();
-        assertTrue(tree.scanChildren(a) > 0);
+        int added = tree.scanChildren(a);
+        assertTrue(added > 0);
         assertEquals(generation + 1, tree.generation());
         assertEquals(path, tree.file(top).toPath());
         assertEquals(file, tree.file(top));
-        assertTrue(tree.rank(top) > rankBefore, "positions after the expansion shift");
+        for (int i = 0; i < existing.length; i++) {
+            assertEquals(ranks[i] + (ranks[i] > insertionRank ? added : 0), tree.rank(existing[i]),
+                    "exact splice shift independent of directory enumeration order");
+            assertEquals(paths[i], tree.file(existing[i]).toPath());
+            assertEquals(facades[i], tree.file(existing[i]));
+        }
         assertEquals(0, tree.scanChildren(top), "files have no children");
     }
 
