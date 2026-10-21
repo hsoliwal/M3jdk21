@@ -47,6 +47,11 @@ public final class M3TreeSet<E> extends AbstractSet<E> implements NavigableSet<E
     @Override public M3TreeSet<E> subSet(E from, boolean fi, E to, boolean ti) { return new M3TreeSet<>(map.subMap(from, fi, to, ti), insertable); }
     @Override public M3TreeSet<E> headSet(E to, boolean inclusive) { return new M3TreeSet<>(map.headMap(to, inclusive), insertable); }
     @Override public M3TreeSet<E> tailSet(E from, boolean inclusive) { return new M3TreeSet<>(map.tailMap(from, inclusive), insertable); }
+    /** Preserve the owned map's admission decision and key-view insertion policy. */
+    M3TreeSet<E> rangeOrNull(E value, boolean forward, boolean inclusive) {
+        M3TreeMap<E, ?> range = map.rangeOrNull(value, forward, inclusive);
+        return range == null ? null : new M3TreeSet<>(range, insertable);
+    }
     @Override public SortedSet<E> subSet(E from, E to) { return subSet(from, true, to, false); }
     @Override public SortedSet<E> headSet(E to) { return headSet(to, false); }
     @Override public SortedSet<E> tailSet(E from) { return tailSet(from, true); }
