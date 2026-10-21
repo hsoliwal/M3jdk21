@@ -1,0 +1,159 @@
+{
+  "SPDX-FileCopyrightText": "2026 Hitesh Soliwal and Contributors to the Synexia Project",
+  "SPDX-License-Identifier": "Apache-2.0",
+  "schema": 1,
+  "binding_status": "BOUND_TO_CANONICAL_RECIPE_APPLIED_SOURCE_AND_READ_BACK_BLOBS",
+  "authority": "TARGET_RECEIVER_MAPPING_AND_EVIDENCE_ONLY",
+  "source": "Canonical Synexia native-only position selection postimages and regression fixture",
+  "canonical_recipe_repository": "hsoliwal/com.synexia",
+  "canonical_recipe_pr": 12650,
+  "canonical_recipe": "com.synexia.m3.MaskNativeAtomsRuntime20261021",
+  "canonical_recipe_path": "synexia-openrewrite-recipes/recipe-crates/m3-mask-native-atoms-runtime-20261021",
+  "canonical_recipe_revision": "ad4ff6084a3b95c9e5dc993eff96efef03ea8f2c",
+  "target": "com.m3.collections.M3IndexMaskCompactor existing JNI position selectors",
+  "target_module": "com.m3.collections",
+  "target_paths": [
+    "m3/collections/src/main/native/collections/m3_index_mask_compactor.c",
+    "m3/collections/src/test/java/com/m3/collections/M3MaskPositionAtomsTest.java"
+  ],
+  "receiving_baseline": "7c0d2493edbf93ac5cb726667ce83046d3519e3e",
+  "receiving_prerequisite": "hsoliwal/M3jdk21#1603",
+  "status": "PENDING_FULL_TARGET_ACCEPTANCE",
+  "scope": "EXISTING_SEPARATE_APACHE_COLLECTION_OWNER; NATIVE_POSITION_ATOMS_ONLY",
+  "intake_mode": "INDEPENDENT_APACHE_MODULE",
+  "license": "Apache-2.0; retain existing per-file copyright/NOTICE and change notices; no OpenJDK source relicensing",
+  "public_api": "Existing Java owner and JNI entry points unchanged; no new java.util/java.lang owner or Synexia runtime dependency",
+  "target_rule": "Preserve stable positions, required/excluded overlap guard, range/chunk offsets, exact JNI region/exception/allocation schedule and immutable caller arrays; filtered-wrapper candidate excluded",
+  "phase_rule": "STRING remains active; ARRAY/COLLECTION/AST/global acceptance unchanged",
+  "source_seals": [
+    {
+      "path": "m3/collections/src/main/native/collections/m3_index_mask_compactor.c",
+      "before_git_blob": "8451188d0ffdb6971af68c0c96504bcd51dde7f2",
+      "before_sha256": "fb907640aa9615ce28c61bb802da39e6cb16030b9f95aad266aa6c68531b4074",
+      "after_sha256": "58f403c3b2677ecb8c7c36d9e04233760c1477f4d770f431efddc5318edf9ad2",
+      "after_git_blob": "1fede488cf577ffc8c90b503c4f4e45369aba5b9"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3MaskPositionAtomsTest.java",
+      "before_sha256": "ABSENT",
+      "after_sha256": "53d22b261f4376f41e735dc5121d3d8f97ee08f4eafdf99e3f615d0330b22548",
+      "after_git_blob": "dca94be95032319e7f029c792e5ecffdc336b404"
+    }
+  ],
+  "unchanged_java_owner_git_blob": "b81b069fb4815f0c78b17119390d7b204f6179d1",
+  "canonical_recipe_sdk_proof_sha256": "8b96ff9f844e6c238d2105c55af7b4c37f4628737e8232ca8115a5942dd14bd0",
+  "canonical_two_file_receiver_root": "a9af2623aea50708e6506c43ffb484858d5f1740fa550466ea08307a34c733bf",
+  "target_application_receipt": "m3/collections/qualification/m3-mask-native-atoms-runtime-20261021/evidence/copier-apply.receipt.json",
+  "inherited_source_gate_findings": [
+    "Unmodified 20261016 source-seal gate exits 1 on #1603 Java compactor; five of six full input pins differ before this continuation",
+    "Unmodified 20261018 position source-seal gate exits 1 on #1603 Java compactor; two of three full input pins differ before this continuation"
+  ],
+  "pending_target_gates": [
+    "Complete current installed-source donation inventory and exact existing successor overlays",
+    "Whole collection module/source-dependency/native matrix and full reactor",
+    "Applicable installed M3JDK image/jtreg/platform/lifetime/concurrency/resource matrices",
+    "Measured CPU/retained-heap/native/process memory; no speedup claim",
+    "Generic Synexia task admission and its unresolved donor prerequisite"
+  ],
+  "automatic_application": false,
+  "phase_advance": false,
+  "family_completion": false,
+  "runtime_dependency_on_synexia": false,
+  "target_replay_receipt": "m3/collections/qualification/m3-mask-native-atoms-runtime-20261021/evidence/copier-replay.receipt.json",
+  "target_readback_receipt": "m3/collections/qualification/m3-mask-native-atoms-runtime-20261021/source-blobs-readback.json",
+  "root_mapping_reference": {
+    "path": "m3/docs/name-mapping.json",
+    "revision": "7c0d2493edbf93ac5cb726667ce83046d3519e3e",
+    "git_blob": "a7008bc04536586218da76e823bf570d50cec526",
+    "sha256": "1085c259e66bff017137e0c63bb86fc0b8daf436865f6378075cf4c920035ef4",
+    "owner_pointers": [
+      "/family_name_mapping/2",
+      "/family_name_mapping/3"
+    ],
+    "receiving_sequence_pointer": "/porting_invariant/receiving_sequence",
+    "root_map_modified": false
+  },
+  "canonical_catalogue": {
+    "repository": "hsoliwal/com.synexia",
+    "source_revision": "99fe40f05b8c0594427e7b9a062f5fd4791a8734",
+    "path": "synexia-openrewrite-recipes/recipe-crates/m3-mask-range-atoms-20261021/catalogue.tsv",
+    "scope": "native mask rows only; wrapper-contract repair rows are excluded",
+    "native_row_ids": [
+      "native_required_excluded_mask_combination_20261021",
+      "native_zero_mask_affine_positions_20261021",
+      "stable_compaction_donor_refusal_memory_20261021"
+    ]
+  },
+  "canonical_evidence_reuse": {
+    "path": "synexia-openrewrite-recipes/recipe-crates/m3-mask-native-atoms-runtime-20261021/evidence/NATIVE_EVIDENCE_REUSE.json",
+    "new_native_execution": false,
+    "prior_qualification_manifest_sha256": "c8a487fac1ce742a3a1a72485cea6c5d4793e7c8ccd38dc55c5ca1990001a7e4",
+    "prior_emitted_verification_manifest_sha256": "e7307eefe82564c745f99554d5386a9414b2081dfb8ff49773517f2af1baeb32",
+    "native_execution_scope": "Prior exact-byte real-JNI execution is reused by custody; fresh native-only execution is SDK source replay, parser attribution, copier and evidence binding only"
+  },
+  "baseline_gate_receipt": "baseline-gates/results.json",
+  "fresh_target_verification": {
+    "path": "m3/collections/qualification/m3-mask-native-atoms-runtime-20261021/evidence/results.json",
+    "sha256": "5190a2bc4245b9d226a5e25c71898dd5a01d420906301ffc8e7df778fe3f06d3"
+  },
+  "fresh_target_commands": {
+    "path": "m3/collections/qualification/m3-mask-native-atoms-runtime-20261021/evidence/commands.json",
+    "sha256": "39d5fe9cc00cfae6f95f3d5c944a06c11db628bec9bea46e371f5d4ef50b1315"
+  },
+  "application_receipt_binding": {
+    "path": "m3/collections/qualification/m3-mask-native-atoms-runtime-20261021/evidence/copier-apply.receipt.json",
+    "sha256": "d8fca71ffed3794cf9ebd71a505e908852877d9ab963d7a64a5024222a12b3b0"
+  },
+  "replay_receipt_binding": {
+    "path": "m3/collections/qualification/m3-mask-native-atoms-runtime-20261021/evidence/copier-replay.receipt.json",
+    "sha256": "2621bfb4966e4ac1ec6a23968672e90334112014409f35bbf215289fa6636f4c"
+  },
+  "readback_receipt_binding": {
+    "path": "m3/collections/qualification/m3-mask-native-atoms-runtime-20261021/source-blobs-readback.json",
+    "sha256": "445cffdf6cfe38fd9706a606da1af7ae4ea6fa71e8dbace0577c91fda8e58e12"
+  },
+  "source_postimages": [
+    {
+      "repository": "hsoliwal/com.synexia",
+      "commit": "ad4ff6084a3b95c9e5dc993eff96efef03ea8f2c",
+      "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-mask-native-atoms-runtime-20261021-native-owner/m3_index_mask_compactor.c.txt",
+      "sha256": "58f403c3b2677ecb8c7c36d9e04233760c1477f4d770f431efddc5318edf9ad2",
+      "git_blob": "1fede488cf577ffc8c90b503c4f4e45369aba5b9",
+      "target_path": "m3/collections/src/main/native/collections/m3_index_mask_compactor.c",
+      "target_specific_source_adaptations": []
+    },
+    {
+      "repository": "hsoliwal/com.synexia",
+      "commit": "ad4ff6084a3b95c9e5dc993eff96efef03ea8f2c",
+      "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-mask-native-atoms-runtime-20261021-native-test/M3MaskPositionAtomsTest.java.txt",
+      "sha256": "53d22b261f4376f41e735dc5121d3d8f97ee08f4eafdf99e3f615d0330b22548",
+      "git_blob": "dca94be95032319e7f029c792e5ecffdc336b404",
+      "target_path": "m3/collections/src/test/java/com/m3/collections/M3MaskPositionAtomsTest.java",
+      "target_specific_source_adaptations": []
+    }
+  ],
+  "fresh_target_scope": {
+    "source_subset": true,
+    "full_checkout": false,
+    "platform": "GNU/Linux",
+    "java_release": 21,
+    "c_standard": "C17",
+    "actual_jvm_test_commands": 3,
+    "check_jni": true,
+    "same_nine_jni_exports": true,
+    "full_jdk_build": "NOT_RUN",
+    "performance_claim": "NONE"
+  },
+  "target_verifier": {
+    "path": "m3/collections/qualification/m3-mask-native-atoms-runtime-20261021/verification/verify_target_native.py",
+    "sha256": "0e5daf1012d1ac6876846e437dca49a6f7c65519c53dcae75c5da3cd60265cef",
+    "scope": "Target-specific acceptance driver adapted from canonical emitted-output verification; no new transformation engine",
+    "donor": {
+      "repository": "hsoliwal/com.synexia",
+      "commit": "99fe40f05b8c0594427e7b9a062f5fd4791a8734",
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-mask-range-atoms-20261021/verification/native/verify_emitted_native.py",
+      "sha256": "dbe0107e18c42a0ae54ee9baf701211298c5b52b6516809e8b1c29db802077b9",
+      "license": "Apache-2.0"
+    }
+  }
+}

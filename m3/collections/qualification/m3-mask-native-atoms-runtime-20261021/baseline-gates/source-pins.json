@@ -1,0 +1,62 @@
+[
+  {
+    "path": "m3/collections/src/main/native/collections/m3_index_mask_compactor.c",
+    "gitBlob": "8451188d0ffdb6971af68c0c96504bcd51dde7f2",
+    "revision": "7c0d2493edbf93ac5cb726667ce83046d3519e3e",
+    "sha256": "fb907640aa9615ce28c61bb802da39e6cb16030b9f95aad266aa6c68531b4074"
+  },
+  {
+    "path": "m3/collections/qualification/verify_mask_selection.py",
+    "gitBlob": "74181552384d222ad4cddea7dbca403baedc5859",
+    "revision": "7c0d2493edbf93ac5cb726667ce83046d3519e3e",
+    "sha256": "1dbed85fcd21e29f55d9b9045d317a3e62bfae1e34cdd60160a039cb49ba7201"
+  },
+  {
+    "path": "m3/collections/qualification/mask-selection-postimages-20261016.tsv",
+    "gitBlob": "4af8dd67db8d089ef9606f193741d6634c892c15",
+    "revision": "7c0d2493edbf93ac5cb726667ce83046d3519e3e",
+    "sha256": "f65fd990437300fbdc5660a61853ba922739b0054693a4f198a0d1aa6e3da02a"
+  },
+  {
+    "path": "m3/collections/qualification/m3-index-mask-position-selection-20261018/verify.py",
+    "gitBlob": "c8568006f8dd06a33e9bc38239291d86352974d6",
+    "revision": "7c0d2493edbf93ac5cb726667ce83046d3519e3e",
+    "sha256": "6a237e61e715f0a223c6269ba628e3f9dbd99473c01645f492c37d5376abda8e"
+  },
+  {
+    "path": "m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java",
+    "gitBlob": "b81b069fb4815f0c78b17119390d7b204f6179d1",
+    "revision": "7c0d2493edbf93ac5cb726667ce83046d3519e3e",
+    "sha256": "ed76ad01f7b89f064846d0dc35a1a705f461abe17772694c1be8223dbed2156c"
+  },
+  {
+    "path": "m3/collections/src/main/java/com/m3/collections/M3LongArrayDeque.java",
+    "gitBlob": "c049870fb0005eabc0e30dd61ebbc9768bef6c33",
+    "revision": "7c0d2493edbf93ac5cb726667ce83046d3519e3e",
+    "sha256": "ee2ce70df68f11d14ba85a7da8485c9e82e7bc38c08601b57b69d1f39d3bdd2a"
+  },
+  {
+    "path": "m3/collections/src/main/java/com/m3/collections/M3LongArrayList.java",
+    "gitBlob": "543e4d99ba6cc07a949141640588fd6437203635",
+    "revision": "7c0d2493edbf93ac5cb726667ce83046d3519e3e",
+    "sha256": "968773eb7e044332b9c1a44040b49e3aa253e0f1464d8d9e38513e2ebcc8f6dd"
+  },
+  {
+    "path": "m3/collections/src/test/java/com/m3/collections/M3IndexMaskCompactorSelfTest.java",
+    "gitBlob": "7b04a77cc113a81b4a09d6004666cada79c8c088",
+    "revision": "7c0d2493edbf93ac5cb726667ce83046d3519e3e",
+    "sha256": "5ae3d26cf58d0fff37bff398e73ee4f3b3e44212b56c046c3690fc8f58538f0f"
+  },
+  {
+    "path": "m3/collections/src/test/java/com/m3/collections/M3IndexMaskCompactorTest.java",
+    "gitBlob": "e9342d8064a19bb44ce31d470b33b1fd0c3777ff",
+    "revision": "7c0d2493edbf93ac5cb726667ce83046d3519e3e",
+    "sha256": "2d4273ec51e75d07e9f551d64e3059bb325253a41edbdb7eba5564040d1da3c0"
+  },
+  {
+    "path": "m3/collections/src/main/java/com/m3/collections/M3CountedBag.java",
+    "gitBlob": "121a45e12151ba92292331bf538443cf99cc4283",
+    "revision": "7c0d2493edbf93ac5cb726667ce83046d3519e3e",
+    "sha256": "2334edd988b5512c9ef6b7092a8ab5ac99e36df09629661ae3779f7090c5bc54"
+  }
+]

@@ -1,0 +1,222 @@
+{
+  "scope": "exact selected-source receiving repository, not a full checkout or installed JDK image",
+  "repository": "/workspace/scratch/213cc9f26139/continuation/m3-runtime-native/repository",
+  "base_revision": "7c0d2493edbf93ac5cb726667ce83046d3519e3e",
+  "recipe_proof_sha256": "8b96ff9f844e6c238d2105c55af7b4c37f4628737e8232ca8115a5942dd14bd0",
+  "receiver_root": "a9af2623aea50708e6506c43ffb484858d5f1740fa550466ea08307a34c733bf",
+  "driver_sha256": "0e5daf1012d1ac6876846e437dca49a6f7c65519c53dcae75c5da3cd60265cef",
+  "copier_sha256": "185b03d4ab0961acf658694bfb654cddfc361a04dad249a0ced6b49ba70687c8",
+  "preimage_custody_sha256": "892a3a56aeb949addf29a10aee54d7bfae91019789b7e9a52fb1230ff52dea31",
+  "inputs": [
+    {
+      "path": "/workspace/scratch/213cc9f26139/continuation/jni/runtime-native-only/synexia-openrewrite-recipes/recipe-crates/m3-mask-native-atoms-runtime-20261021/TARGETS.json",
+      "bytes": 953,
+      "sha256": "8b03da1c9cf87dedbf460b094cb1f10582a0aa5d8e6d0a0e2d7f708951d2ee2f"
+    },
+    {
+      "path": "/workspace/scratch/213cc9f26139/continuation/jni/runtime-native-only/synexia-openrewrite-recipes/recipe-crates/m3-mask-native-atoms-runtime-20261021/apply_receiver.py",
+      "bytes": 9901,
+      "sha256": "185b03d4ab0961acf658694bfb654cddfc361a04dad249a0ced6b49ba70687c8"
+    },
+    {
+      "path": "/workspace/scratch/213cc9f26139/continuation/jni/runtime-native-only/synexia-openrewrite-recipes/recipe-crates/m3-mask-native-atoms-runtime-20261021/atom-chains.tsv",
+      "bytes": 247,
+      "sha256": "aeaa51ec1ea94f29bf7b09013eba1ec94b2548c943a6d2602abdc7c905132e5f"
+    },
+    {
+      "path": "/workspace/scratch/213cc9f26139/continuation/jni/runtime-native-only/synexia-openrewrite-recipes/recipe-crates/m3-mask-native-atoms-runtime-20261021/phases.tsv",
+      "bytes": 119,
+      "sha256": "ad6354d21105890b430def0089ebf0b3a9732e6654118138b2223f07dc0229ee"
+    },
+    {
+      "path": "/workspace/scratch/213cc9f26139/continuation/jni/runtime-native-only/synexia-openrewrite-recipes/recipe-crates/m3-mask-native-atoms-runtime-20261021/pom.xml",
+      "bytes": 3821,
+      "sha256": "b62fe88fb77f8c566f35dd71aaf8273faf97043b700dabdeee6475aeaed8663e"
+    },
+    {
+      "path": "/workspace/scratch/213cc9f26139/continuation/jni/runtime-native-only/synexia-openrewrite-recipes/recipe-crates/m3-mask-native-atoms-runtime-20261021/preimages/m3-mask-native-atoms-runtime-20261021-disjoint-atom/m3/collections/src/main/native/collections/m3_index_mask_compactor.c",
+      "bytes": 17251,
+      "sha256": "0dcf81bc353bc8f41b251071de932a2f23952a48c47edd0c4b9d386f8991bc41"
+    },
+    {
+      "path": "/workspace/scratch/213cc9f26139/continuation/jni/runtime-native-only/synexia-openrewrite-recipes/recipe-crates/m3-mask-native-atoms-runtime-20261021/preimages/m3-mask-native-atoms-runtime-20261021-identity-atom/m3/collections/src/main/native/collections/m3_index_mask_compactor.c",
+      "bytes": 16979,
+      "sha256": "fb907640aa9615ce28c61bb802da39e6cb16030b9f95aad266aa6c68531b4074"
+    },
+    {
+      "path": "/workspace/scratch/213cc9f26139/continuation/jni/runtime-native-only/synexia-openrewrite-recipes/recipe-crates/m3-mask-native-atoms-runtime-20261021/preimages/m3-mask-native-atoms-runtime-20261021-native-owner/m3/collections/src/main/native/collections/m3_index_mask_compactor.c",
+      "bytes": 16979,
+      "sha256": "fb907640aa9615ce28c61bb802da39e6cb16030b9f95aad266aa6c68531b4074"
+    },
+    {
+      "path": "/workspace/scratch/213cc9f26139/continuation/jni/runtime-native-only/synexia-openrewrite-recipes/recipe-crates/m3-mask-native-atoms-runtime-20261021/src/test/java/com/synexia/rewrite/M3MaskNativeRuntimeRecipeTest.java",
+      "bytes": 35179,
+      "sha256": "9f6e8c77bdd1c86a0140f46dba9e0629db3d488ee4411e68034ffbb673efc758"
+    },
+    {
+      "path": "/workspace/scratch/213cc9f26139/continuation/jni/runtime-native-only/synexia-openrewrite-recipes/recipe-crates/m3-mask-native-atoms-runtime-20261021/target/named-recipe.yml",
+      "bytes": 520,
+      "sha256": "5c39f4a6dd610ac6c2268aef1bc9ffb502ae0082df435a963f612eb3f7331214"
+    },
+    {
+      "path": "/workspace/scratch/213cc9f26139/continuation/jni/runtime-native-only/synexia-openrewrite-recipes/recipe-crates/m3-mask-native-atoms-runtime-20261021/target/phase-receipts/m3-mask-native-atoms-runtime-20261021-disjoint-atom.tsv",
+      "bytes": 453,
+      "sha256": "acd6d71bdf0ef9f7f7e812e2985cccbfe0015edbd05fb248889c3c0704154e74"
+    },
+    {
+      "path": "/workspace/scratch/213cc9f26139/continuation/jni/runtime-native-only/synexia-openrewrite-recipes/recipe-crates/m3-mask-native-atoms-runtime-20261021/target/phase-receipts/m3-mask-native-atoms-runtime-20261021-identity-atom.tsv",
+      "bytes": 453,
+      "sha256": "d7a9014bef97b6125a3bd931722f00ed782723706cdaee2bc8a70dfb63943f93"
+    },
+    {
+      "path": "/workspace/scratch/213cc9f26139/continuation/jni/runtime-native-only/synexia-openrewrite-recipes/recipe-crates/m3-mask-native-atoms-runtime-20261021/target/phase-receipts/m3-mask-native-atoms-runtime-20261021-native-owner.tsv",
+      "bytes": 452,
+      "sha256": "e46cd9e0daea80fb9a7ae9a023a55501e8e1f3a0eb12d7100ec32a12b5d13ccd"
+    },
+    {
+      "path": "/workspace/scratch/213cc9f26139/continuation/jni/runtime-native-only/synexia-openrewrite-recipes/recipe-crates/m3-mask-native-atoms-runtime-20261021/target/phase-receipts/m3-mask-native-atoms-runtime-20261021-native-test.tsv",
+      "bytes": 451,
+      "sha256": "3e45ca0b75f356f88d06b4426b658371f2e735bf8b8781a5c6164df04f19254e"
+    },
+    {
+      "path": "/workspace/scratch/213cc9f26139/continuation/jni/runtime-native-only/synexia-openrewrite-recipes/recipe-crates/m3-mask-native-atoms-runtime-20261021/target/proof-status.tsv",
+      "bytes": 90,
+      "sha256": "9dcebd10c848afe34cf99d160decc940c01735db8766eb8159bc7d654c230256"
+    },
+    {
+      "path": "/workspace/scratch/213cc9f26139/continuation/jni/runtime-native-only/synexia-openrewrite-recipes/recipe-crates/m3-mask-native-atoms-runtime-20261021/target/receiver/m3/collections/src/main/native/collections/m3_index_mask_compactor.c",
+      "bytes": 17359,
+      "sha256": "58f403c3b2677ecb8c7c36d9e04233760c1477f4d770f431efddc5318edf9ad2"
+    },
+    {
+      "path": "/workspace/scratch/213cc9f26139/continuation/jni/runtime-native-only/synexia-openrewrite-recipes/recipe-crates/m3-mask-native-atoms-runtime-20261021/target/receiver/m3/collections/src/test/java/com/m3/collections/M3MaskPositionAtomsTest.java",
+      "bytes": 8624,
+      "sha256": "53d22b261f4376f41e735dc5121d3d8f97ee08f4eafdf99e3f615d0330b22548"
+    },
+    {
+      "path": "/workspace/scratch/213cc9f26139/continuation/jni/runtime-native-only/synexia-openrewrite-recipes/recipe-crates/m3-mask-native-atoms-runtime-20261021/target/recipe-proof.tsv",
+      "bytes": 1773,
+      "sha256": "8b96ff9f844e6c238d2105c55af7b4c37f4628737e8232ca8115a5942dd14bd0"
+    },
+    {
+      "path": "/workspace/scratch/213cc9f26139/continuation/jni/runtime-native-only/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3EditScope.java",
+      "bytes": 1052,
+      "sha256": "962d37d62d740c3e8055c365a048ae7ee0479c26a9f6bbfe741e540d6c1134ab"
+    },
+    {
+      "path": "/workspace/scratch/213cc9f26139/continuation/jni/runtime-native-only/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+      "bytes": 31505,
+      "sha256": "083f8b1fd956fe2ed81168bc580d1e0f39a815401c50571d397ddba40150cf63"
+    },
+    {
+      "path": "/workspace/scratch/213cc9f26139/continuation/jni/runtime-native-only/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedTextSnapshotRecipe.java",
+      "bytes": 19983,
+      "sha256": "5a64bd502cb8aa7d51b78813b736e37a0a7f420233f405c4d2df08ee2eefe8bc"
+    },
+    {
+      "path": "/workspace/scratch/213cc9f26139/continuation/jni/runtime-native-only/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3ScopeInference.java",
+      "bytes": 8268,
+      "sha256": "9a6c54f42564c0ef82de3f40a2de17e6598569916c15255653bf79fbe3353579"
+    },
+    {
+      "path": "/workspace/scratch/213cc9f26139/continuation/jni/runtime-native-only/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-mask-native-atoms-runtime-20261021-native-test/M3MaskPositionAtomsTest.java.txt",
+      "bytes": 8624,
+      "sha256": "53d22b261f4376f41e735dc5121d3d8f97ee08f4eafdf99e3f615d0330b22548"
+    },
+    {
+      "path": "/workspace/scratch/213cc9f26139/continuation/jni/runtime-native-only/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-mask-native-atoms-runtime-20261021-native-test/manifest.tsv",
+      "bytes": 306,
+      "sha256": "1d98ac85cf1ae927ae26bd2884cd4b49dcd4665616e1fe3c7730934c97cb7903"
+    },
+    {
+      "path": "/workspace/scratch/213cc9f26139/continuation/jni/runtime-native-only/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-mask-native-atoms-runtime-20261021-disjoint-atom/m3_index_mask_compactor.c.txt",
+      "bytes": 17359,
+      "sha256": "58f403c3b2677ecb8c7c36d9e04233760c1477f4d770f431efddc5318edf9ad2"
+    },
+    {
+      "path": "/workspace/scratch/213cc9f26139/continuation/jni/runtime-native-only/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-mask-native-atoms-runtime-20261021-disjoint-atom/manifest.tsv",
+      "bytes": 353,
+      "sha256": "f50c36de0e15849572039cdbded7011067cf2f38558dbc911336fdfcc0b690b3"
+    },
+    {
+      "path": "/workspace/scratch/213cc9f26139/continuation/jni/runtime-native-only/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-mask-native-atoms-runtime-20261021-identity-atom/m3_index_mask_compactor.c.txt",
+      "bytes": 17251,
+      "sha256": "0dcf81bc353bc8f41b251071de932a2f23952a48c47edd0c4b9d386f8991bc41"
+    },
+    {
+      "path": "/workspace/scratch/213cc9f26139/continuation/jni/runtime-native-only/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-mask-native-atoms-runtime-20261021-identity-atom/manifest.tsv",
+      "bytes": 353,
+      "sha256": "e623227a9b15561ae45c2351cbc2a1b3ef8e44ec567bf88bcf2ddbfa67b22345"
+    },
+    {
+      "path": "/workspace/scratch/213cc9f26139/continuation/jni/runtime-native-only/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-mask-native-atoms-runtime-20261021-native-owner/m3_index_mask_compactor.c.txt",
+      "bytes": 17359,
+      "sha256": "58f403c3b2677ecb8c7c36d9e04233760c1477f4d770f431efddc5318edf9ad2"
+    },
+    {
+      "path": "/workspace/scratch/213cc9f26139/continuation/jni/runtime-native-only/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-mask-native-atoms-runtime-20261021-native-owner/manifest.tsv",
+      "bytes": 353,
+      "sha256": "64404c2e3c24d1fae302a15863c7f95a03c33a255360b1deb70d2ab3672a6e4a"
+    },
+    {
+      "path": "/workspace/scratch/213cc9f26139/continuation/m3-runtime-native/preimage-custody.json",
+      "bytes": 1518,
+      "sha256": "892a3a56aeb949addf29a10aee54d7bfae91019789b7e9a52fb1230ff52dea31"
+    },
+    {
+      "path": "/workspace/scratch/213cc9f26139/continuation/m3-runtime-native/repository/m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java",
+      "bytes": 18371,
+      "sha256": "ed76ad01f7b89f064846d0dc35a1a705f461abe17772694c1be8223dbed2156c"
+    },
+    {
+      "path": "/workspace/scratch/213cc9f26139/continuation/m3-runtime-native/repository/m3/collections/src/main/native/collections/m3_index_mask_compactor.c",
+      "bytes": 17359,
+      "sha256": "58f403c3b2677ecb8c7c36d9e04233760c1477f4d770f431efddc5318edf9ad2"
+    },
+    {
+      "path": "/workspace/scratch/213cc9f26139/continuation/m3-runtime-native/repository/m3/collections/src/test/java/com/m3/collections/M3IndexMaskRangeNativeTest.java",
+      "bytes": 6815,
+      "sha256": "01cca6f8506da8120978892182071b2d3be631bebf5011fa112602524c532619"
+    },
+    {
+      "path": "/workspace/scratch/213cc9f26139/continuation/m3-runtime-native/repository/m3/collections/src/test/java/com/m3/collections/M3MaskPositionAtomsTest.java",
+      "bytes": 8624,
+      "sha256": "53d22b261f4376f41e735dc5121d3d8f97ee08f4eafdf99e3f615d0330b22548"
+    },
+    {
+      "path": "/workspace/scratch/213cc9f26139/continuation/m3-runtime-native/repository/m3/collections/src/test/java/com/m3/collections/M3RequiredExcludedMaskSelectorNativeContract.java",
+      "bytes": 1830,
+      "sha256": "89c35701322381e4d958bf6344e2357988c4ad97ce1a0dd42a9a3f698a205c7f"
+    },
+    {
+      "path": "/workspace/scratch/213cc9f26139/synexia/synexia-openrewrite-recipes/recipe-crates/m3-mask-range-atoms-20261021/qualification/native/evidence/baseline-M3IndexMaskRangeNativeTest.stdout.log",
+      "bytes": 152,
+      "sha256": "f5bcf7f607e507686a3f7981703e1aa5fc0b7b4fa5c482099631b5614917ec87"
+    },
+    {
+      "path": "/workspace/scratch/213cc9f26139/synexia/synexia-openrewrite-recipes/recipe-crates/m3-mask-range-atoms-20261021/qualification/native/evidence/baseline-M3MaskPositionAtomsTest.stdout.log",
+      "bytes": 173,
+      "sha256": "00d6715c4893348cb2bc486633632cecea069826d07101e491a68b7b9c7e82c2"
+    },
+    {
+      "path": "/workspace/scratch/213cc9f26139/synexia/synexia-openrewrite-recipes/recipe-crates/m3-mask-range-atoms-20261021/qualification/native/evidence/baseline-M3RequiredExcludedMaskSelectorNativeContract.stdout.log",
+      "bytes": 61,
+      "sha256": "c1a67ac51dee0798af3359903f125ca0bdf6b71f5e1f73ef666ff06dbb0147e0"
+    },
+    {
+      "path": "/workspace/scratch/213cc9f26139/synexia/synexia-openrewrite-recipes/recipe-crates/m3-mask-range-atoms-20261021/qualification/native/evidence/baseline-schedule.stdout.log",
+      "bytes": 674140,
+      "sha256": "14455b5778b0b2df4a2029bcd288d69a3d75343507d10101de196cda87e38ac4"
+    },
+    {
+      "path": "/workspace/scratch/213cc9f26139/synexia/synexia-openrewrite-recipes/recipe-crates/m3-mask-range-atoms-20261021/verification/native/evidence/results.json",
+      "bytes": 2023,
+      "sha256": "b60da790dc5206f097e42df257445b514a627ca379a46a890667de843212f329"
+    },
+    {
+      "path": "/workspace/scratch/213cc9f26139/synexia/synexia-openrewrite-recipes/recipe-crates/m3-mask-range-atoms-20261021/verification/native/fixtures/baseline-contract.json",
+      "bytes": 1953,
+      "sha256": "b51bff459e073cefcac9639a259e5da11faea48b6437bbe807d1706757fee75f"
+    }
+  ]
+}
