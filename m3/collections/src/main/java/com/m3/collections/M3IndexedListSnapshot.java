@@ -51,9 +51,7 @@ public final class M3IndexedListSnapshot<E> extends AbstractList<E> implements R
 
     public static <E> M3IndexedListSnapshot<E> copyOf(Collection<? extends E> source) {
         Objects.requireNonNull(source, "source");
-        Object[] copy = source.toArray();
-        copy = Arrays.copyOf(copy, copy.length, Object[].class);
-        return fromOwned(copy);
+        return fromOwned(source.toArray());
     }
 
     public static <E> M3IndexedListSnapshot<E> copyOf(E[] source) {

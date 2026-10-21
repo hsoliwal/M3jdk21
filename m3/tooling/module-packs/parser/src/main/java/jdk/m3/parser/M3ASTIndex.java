@@ -203,12 +203,30 @@ public final class M3ASTIndex {
             try { digest.digest(result, row * 32, 32); }
             catch (DigestException impossible) { throw new AssertionError(impossible); }
         }
-        return new StructuralHashes(result);
+        return new StructuralHashes(result, units);
     }
 
     public static final class StructuralHashes {
         private final byte[] values;
-        private StructuralHashes(byte[] values) { this.values = values; }
+        private final long textUnits;
+        private StructuralHashes(byte[] values, long textUnits) {
+            this.values = values;
+            this.textUnits = textUnits;
+        }
+        /** Internal count observed by the existing structural-hash admission. */
+        long textUnits() { return textUnits; }
+        /** Borrow the existing SHA bytes for primitive candidate-bucket lookup. */
+        long prefix64(int node) {
+            int start = Objects.checkIndex(node, nodeCount()) * 32;
+            long result = 0;
+            for (int i = 0; i < 8; i++) result = (result << 8) | (values[start + i] & 255L);
+            return result;
+        }
+        boolean sameHash(int left, int right) {
+            int a = Objects.checkIndex(left, nodeCount()) * 32;
+            int b = Objects.checkIndex(right, nodeCount()) * 32;
+            return Arrays.mismatch(values, a, a + 32, values, b, b + 32) < 0;
+        }
         public String schema() { return STRUCTURAL_HASH_SCHEMA; }
         public int nodeCount() { return values.length / 32; }
         public String sha256(int node) {
@@ -254,6 +272,28 @@ public final class M3ASTIndex {
         putInt(digest, value == null ? -1 : value.length());
         if (value != null) for (int i = 0; i < value.length(); i++) putChar(digest, value.charAt(i));
     }
+    /** Internal primitive queries reuse the original kind vocabulary. */
+    int kindOrdinal(int node) { return kinds[check(node)]; }
+    int kindVocabularySize() { return names.length; }
+    String kindVocabularyName(int ordinal) {
+        return names[Objects.checkIndex(ordinal, names.length)];
+    }
+
+    /** Compare exactly the retained structural atom lanes, not semantic bindings. */
+    boolean sameStructuralAtom(int firstNode, int secondNode) {
+        int a = check(firstNode), b = check(secondNode);
+        if (kinds[a] != kinds[b] || childCounts[a] != childCounts[b]
+                || (flags[a] & (SYNTAX_ONLY | RECOVERED))
+                   != (flags[b] & (SYNTAX_ONLY | RECOVERED))) return false;
+        boolean aDetails = literalKinds != null && literalKinds[a] >= 0;
+        boolean bDetails = literalKinds != null && literalKinds[b] >= 0;
+        if (aDetails != bDetails) return false;
+        return !aDetails || (Objects.equals(nodeNames[a], nodeNames[b])
+                && literalKinds[a] == literalKinds[b]
+                && Objects.equals(literalValues[a], literalValues[b])
+                && modifiers[a] == modifiers[b]);
+    }
+
     private int check(int node) { return Objects.checkIndex(node, kinds.length); }
 
     /** Bounded, single-owner creation; discarded immediately after immutable publication. */

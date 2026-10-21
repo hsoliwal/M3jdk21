@@ -1,0 +1,75 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3JDK21 single-owner indexed snapshot Java/JNI contract
+
+on:
+  push:
+    branches: [m3/indexed-snapshot-own-toarray-20261021]
+  pull_request:
+    paths:
+      - m3/collections/src/main/java/com/m3/collections/M3IndexedListSnapshot.java
+      - m3/collections/src/test/java/com/m3/collections/M3IndexedSnapshotSingleOwnerProof.java
+      - m3/collections/algorithm-catalogue/challenge-patterns-20261018/M3_TOARRAY_*
+      - .github/workflows/m3-indexed-snapshot-own-toarray-20261021.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  java21-owner-and-abi:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 25
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Strict production Java and real original mask-owner compile
+        shell: bash
+        run: |
+          set -euo pipefail
+          ROOT=m3/collections/src/main/java/com/m3/collections
+          PROOF=m3/collections/src/test/java/com/m3/collections/M3IndexedSnapshotSingleOwnerProof.java
+          mkdir -p "$RUNNER_TEMP/m3-new" "$RUNNER_TEMP/m3-old/com/m3/collections"
+          javac --release 21 -Xlint:all -Werror -proc:none \
+            -d "$RUNNER_TEMP/m3-new" \
+            "$ROOT/M3IndexMaskCompactor.java" "$ROOT/M3IndexPathMasks.java" \
+            "$ROOT/M3IndexedListSnapshot.java" "$PROOF"
+          git show a4415af418a9b0f21a06cd5801d238577fbb6eb7:"$ROOT/M3IndexedListSnapshot.java" \
+            > "$RUNNER_TEMP/m3-old/com/m3/collections/M3IndexedListSnapshot.java"
+          javac --release 21 -Xlint:all -Werror -proc:none \
+            -d "$RUNNER_TEMP/m3-old" \
+            "$ROOT/M3IndexMaskCompactor.java" "$ROOT/M3IndexPathMasks.java" \
+            "$RUNNER_TEMP/m3-old/com/m3/collections/M3IndexedListSnapshot.java"
+          mkdir -p snapshot-proof
+          javap -public -classpath "$RUNNER_TEMP/m3-old" com.m3.collections.M3IndexedListSnapshot \
+            > snapshot-proof/PUBLIC_BEFORE.txt
+          javap -public -classpath "$RUNNER_TEMP/m3-new" com.m3.collections.M3IndexedListSnapshot \
+            > snapshot-proof/PUBLIC_AFTER.txt
+          diff -u snapshot-proof/PUBLIC_BEFORE.txt snapshot-proof/PUBLIC_AFTER.txt
+          sha256sum "$ROOT/M3IndexedListSnapshot.java" "$PROOF" \
+            > snapshot-proof/SOURCE_SHA256.txt
+      - name: Source owner and physical-coordinate Java/JNI refusal oracle
+        shell: bash
+        run: |
+          set -euo pipefail
+          java -ea -Xcheck:jni -cp "$RUNNER_TEMP/m3-new" \
+            com.m3.collections.M3IndexedSnapshotSingleOwnerProof | tee snapshot-proof/RESULT.txt
+          grep '^M3_INDEXED_SNAPSHOT_SINGLE_OWNER_PASS checks=' snapshot-proof/RESULT.txt
+      - name: Interpreter semantic parity
+        shell: bash
+        run: |
+          set -euo pipefail
+          java -Xint -ea -Xcheck:jni -cp "$RUNNER_TEMP/m3-new" \
+            com.m3.collections.M3IndexedSnapshotSingleOwnerProof | tee snapshot-proof/INTERPRETER.txt
+          grep '^M3_INDEXED_SNAPSHOT_SINGLE_OWNER_PASS checks=' snapshot-proof/INTERPRETER.txt
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: m3-indexed-snapshot-owner-abi
+          path: snapshot-proof/
+          retention-days: 14
+          if-no-files-found: warn
