@@ -106,12 +106,12 @@ public final class M3FmtLexiconFrameContract {
   private static void regexCorpus(byte[] original, byte[] decoded) {
     String before = new String(original, StandardCharsets.ISO_8859_1);
     String after = new String(decoded, StandardCharsets.ISO_8859_1);
-    String[] expressions = {"apple", ".*?", "^apple", "apple\\\\s",
-        "(a)(b)\\\\2", "\\\\bclass\\\\b", "(?m)^class",
-        "(?:class|interface)", "a.*\\\\}", "[A-Z]+", "(?<=apple) ",
-        "(?s).*λ", "\\\\p{L}+", "(?:a|b){2,5}", "(a+)+$",
-        "[invalid", "(?<word>apple)", "\\\\Qclass X {}\\\\E",
-        ".*", "\\\\Aapple", "\\\\z", "(?=String)", "(?!orange)"};
+    String[] expressions = {"apple", ".*?", "^apple", "apple\\s",
+        "(a)(b)\\2", "\\bclass\\b", "(?m)^class",
+        "(?:class|interface)", "a.*\\}", "[A-Z]+", "(?<=apple) ",
+        "(?s).*λ", "\\p{L}+", "(?:a|b){2,5}", "(a+)+$",
+        "[invalid", "(?<word>apple)", "\\Qclass X {}\\E",
+        ".*", "\\Aapple", "\\z", "(?=String)", "(?!orange)"};
     int[] flags = {0, Pattern.CASE_INSENSITIVE, Pattern.MULTILINE,
         Pattern.DOTALL, Pattern.CASE_INSENSITIVE | Pattern.UNICODE_CASE};
     for (String expression : expressions) {
