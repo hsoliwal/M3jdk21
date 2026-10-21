@@ -136,6 +136,174 @@ public final class SharedLexiconCatalog {
                 relatedLexemes, recordCount);
     }
 
+    /**
+     * Trusted UnicodeX publication manifest supplied by the caller. The producer owns the
+     * specification and rank assignment; this receiver never infers either from spelling.
+     * Digests are lowercase SHA-256. Ranks are dense zero-based source record IDs.
+     */
+    public record Qualification(String specId, String specVersion, String sourceRevision,
+                                String sourceId, String languageTag, String lexiconId,
+                                int wordCount, String rankMapSha256, String projectionSha256) {
+        public Qualification {
+            for (String value : List.of(specId, specVersion, sourceRevision, sourceId,
+                    languageTag, lexiconId)) {
+                if (value.isBlank() || value.length() > 65536)
+                    throw new IllegalArgumentException("invalid qualification field");
+            }
+            if (!sourceRevision.matches("[0-9a-f]{40}|[0-9a-f]{64}") || wordCount <= 0
+                    || !rankMapSha256.matches("[0-9a-f]{64}")
+                    || !projectionSha256.matches("[0-9a-f]{64}"))
+                throw new IllegalArgumentException("invalid qualification seal/count/revision");
+        }
+
+        /** Full descriptor seal for existing content-addressed transport metadata. */
+        public String sha256() {
+            MessageDigest digest = qualificationDigest();
+            try (var out = new java.io.DataOutputStream(
+                    new java.security.DigestOutputStream(java.io.OutputStream.nullOutputStream(), digest))) {
+                digestText(out, "M3-UNICODEX-QUALIFICATION-1");
+                digestScope(out, this);
+                digestText(out, rankMapSha256); digestText(out, projectionSha256);
+            } catch (IOException impossible) { throw new AssertionError(impossible); }
+            return HexFormat.of().formatHex(digest.digest());
+        }
+    }
+
+    /**
+     * Eagerly validates existing catalog images and preserved source ranks against a trusted
+     * manifest. No new image format, global sort rule, concept allocator or dictionary is created.
+     * Failure closes the private catalog. Success transfers its close ownership to the view.
+     */
+    public static Qualified openQualified(Path directory, Qualification expected) throws IOException {
+        Objects.requireNonNull(expected, "expected");
+        SharedLexiconCatalog catalog = open(directory);
+        try {
+            return new Qualified(catalog, expected);
+        } catch (IOException | RuntimeException failure) {
+            catalog.close();
+            throw failure;
+        }
+    }
+
+    /** Qualified rank projection; retains only two primitive coordinate lanes per source rank. */
+    public static final class Qualified implements AutoCloseable {
+        private final SharedLexiconCatalog catalog;
+        private final Qualification qualification;
+        private final int[] shardIds;
+        private final int[] imageRows;
+
+        private Qualified(SharedLexiconCatalog catalog, Qualification expected) throws IOException {
+            this.catalog = catalog;
+            this.qualification = expected;
+            // Count before allocation: an untrusted manifest cannot force oversized rank lanes.
+            long count = catalog.mappingsByIdentity.values().stream()
+                    .filter(mapping -> mapping.sourceId().equals(expected.sourceId())).count();
+            if (count != expected.wordCount())
+                throw new IOException("qualified source rank count mismatch");
+            shardIds = new int[expected.wordCount()];
+            imageRows = new int[expected.wordCount()];
+            java.util.Arrays.fill(shardIds, -1);
+            for (SourceMapping mapping : catalog.mappingsByIdentity.values()) {
+                if (!mapping.sourceId().equals(expected.sourceId())) continue;
+                if (!mapping.languageTag().equals(expected.languageTag())
+                        || !mapping.recordId().matches("0|[1-9][0-9]*"))
+                    throw new IOException("qualified source language/rank mismatch");
+                final int rank;
+                try { rank = Integer.parseInt(mapping.recordId()); }
+                catch (NumberFormatException invalid) { throw new IOException("invalid source rank", invalid); }
+                if (rank >= shardIds.length || shardIds[rank] >= 0)
+                    throw new IOException("duplicate or out-of-range source rank");
+                shardIds[rank] = mapping.coordinate().shardId();
+                imageRows[rank] = mapping.coordinate().imageRow();
+            }
+            MessageDigest ranks = qualificationDigest();
+            MessageDigest projection = qualificationDigest();
+            try (var out = digestOutput(ranks); var physical = digestOutput(projection)) {
+                digestText(out, "M3-UNICODEX-RANK-MAP-1");
+                digestScope(out, expected);
+                for (int rank = 0; rank < shardIds.length; rank++) {
+                    if (shardIds[rank] < 0) throw new IOException("missing source rank");
+                    out.writeInt(rank); digestText(out, Integer.toString(rank));
+                    digestText(out, catalog.textAt(new Coordinate(shardIds[rank], imageRows[rank])));
+                }
+                digestText(physical, "M3-UNICODEX-PROJECTION-1");
+                physical.writeInt(catalog.shards.size());
+                for (int shard = 0; shard < catalog.shards.size(); shard++) {
+                    ShardSlot slot = catalog.shards.get(shard);
+                    physical.writeInt(shard); physical.writeInt(slot.expectedRecords);
+                    physical.writeLong(slot.expectedUnits); physical.write(slot.expectedDigest);
+                }
+            }
+            if (!HexFormat.of().formatHex(ranks.digest()).equals(expected.rankMapSha256())
+                    || !HexFormat.of().formatHex(projection.digest()).equals(expected.projectionSha256()))
+                throw new IOException("qualified rank map or projection SHA-256 mismatch");
+        }
+
+        public Qualification qualification() {
+            catalog.lifecycle.readLock().lock();
+            try { catalog.ensureOpen(); return qualification; }
+            finally { catalog.lifecycle.readLock().unlock(); }
+        }
+
+        public int wordCount() { return qualification().wordCount(); }
+
+        /** Must precede use of sender ranks. Packed generation tags are never sufficient. */
+        public void requireCompatible(Qualification sender) {
+            if (!qualification().equals(Objects.requireNonNull(sender, "sender")))
+                throw new IllegalArgumentException("foreign UnicodeX publication");
+        }
+
+        public Coordinate coordinate(int rank) {
+            catalog.lifecycle.readLock().lock();
+            try {
+                catalog.ensureOpen();
+                Objects.checkIndex(rank, shardIds.length);
+                return new Coordinate(shardIds[rank], imageRows[rank]);
+            } finally { catalog.lifecycle.readLock().unlock(); }
+        }
+
+        /** Explicit materialization boundary with the existing per-record mutation check. */
+        public LocalM3StringPiece copyRank(int rank, LocalM3Arena arena) throws IOException {
+            catalog.lifecycle.readLock().lock();
+            try {
+                Coordinate coordinate = coordinate(rank);
+                return catalog.shards.get(coordinate.shardId()).image
+                        .copyRecord(coordinate.imageRow(), arena);
+            } finally { catalog.lifecycle.readLock().unlock(); }
+        }
+
+        public String textAtRank(int rank) throws IOException {
+            return copyRank(rank, new LocalM3Arena()).flatten();
+        }
+
+        /** Closes the privately owned catalog; already copied local pieces remain valid. */
+        @Override public void close() { catalog.close(); }
+    }
+
+    private static MessageDigest qualificationDigest() {
+        try { return MessageDigest.getInstance("SHA-256"); }
+        catch (NoSuchAlgorithmException impossible) { throw new AssertionError(impossible); }
+    }
+
+    private static java.io.DataOutputStream digestOutput(MessageDigest digest) {
+        return new java.io.DataOutputStream(new java.security.DigestOutputStream(
+                java.io.OutputStream.nullOutputStream(), digest));
+    }
+
+    // Length-prefixed UTF-16 code units preserve unpaired surrogates and every exact spelling.
+    private static void digestText(java.io.DataOutputStream out, String value) throws IOException {
+        out.writeInt(value.length());
+        for (int i = 0; i < value.length(); i++) out.writeChar(value.charAt(i));
+    }
+
+    private static void digestScope(java.io.DataOutputStream out, Qualification value) throws IOException {
+        digestText(out, value.specId()); digestText(out, value.specVersion());
+        digestText(out, value.sourceRevision()); digestText(out, value.sourceId());
+        digestText(out, value.languageTag()); digestText(out, value.lexiconId());
+        out.writeInt(value.wordCount());
+    }
+
+
     public record Coordinate(int shardId, int imageRow) { }
 
     /** Stable Synexia identity, independent of the physical M3LEX projection. */
