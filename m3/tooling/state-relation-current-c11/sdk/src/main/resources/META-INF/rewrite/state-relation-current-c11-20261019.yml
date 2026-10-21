@@ -1,0 +1,9 @@
+# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
+# SPDX-License-Identifier: Apache-2.0
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.StateRelationCurrentC11
+displayName: Verify the exact current StateRelation C11 source closure
+description: Exact five-KEEP source custody; current C11 and JNI execution remain separate.
+recipeList:
+  - com.synexia.rewrite.M3StateRelationCurrentC11Recipe
