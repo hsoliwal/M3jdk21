@@ -1,0 +1,87 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3JDK21 backport wave admission
+
+on:
+  pull_request:
+    paths:
+      - 'm3/backports/backport_execution_waves.py'
+      - 'm3/backports/test_backport_execution_waves.py'
+      - 'm3/backports/BACKPORT_EXECUTION_WAVES.md'
+      - 'm3/compatibility/synexia-wave-admission-pin-20261014.tsv'
+      - '.github/workflows/m3-jdk21-backport-wave-admission.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  exact-python-proof:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Verify received postimage hashes
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from hashlib import sha256
+          from pathlib import Path
+          expected = {
+              "m3/backports/backport_execution_waves.py":
+                  "2cb19465a6a0d4f24dc228921eb1a2d7c2bbc4e53ce68e635b0e60ddb2a563dc",
+              "m3/backports/test_backport_execution_waves.py":
+                  "5a59d038e108010c484f66f545ab5bc745a791182ed4794556b414ffde315dd0",
+              "m3/backports/BACKPORT_EXECUTION_WAVES.md":
+                  "df2aca41ab120bdbc8c165d4abe3552c54a91c591aab116b718b94283ae23f28",
+          }
+          for path, root in expected.items():
+              actual = sha256(Path(path).read_bytes()).hexdigest()
+              if actual != root:
+                  raise SystemExit(f"FAIL: source-sealed receipt drift: {path}")
+          print("PASS: three exact Synexia source-sealed postimages")
+          PY
+
+      - name: Python syntax and JEP wave regression tests
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -m py_compile             m3/backports/backport_execution_waves.py             m3/backports/test_backport_execution_waves.py
+          python3 -m unittest -v m3/backports/test_backport_execution_waves.py
+
+      - name: Build and parse canonical JEP/JBS wave evidence
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p target/m3-backport-wave-admission
+          python3 m3/backports/backport_execution_waves.py             --root .             --tsv-out target/m3-backport-wave-admission/waves.tsv             --json-out target/m3-backport-wave-admission/waves.json
+          python3 - <<'PY'
+          import csv
+          import json
+          from pathlib import Path
+          root = Path("target/m3-backport-wave-admission")
+          with (root / "waves.tsv").open(encoding="utf-8", newline="") as handle:
+              rows = list(csv.DictReader(handle, delimiter="\t"))
+          payload = json.loads((root / "waves.json").read_text(encoding="utf-8"))
+          if not rows or len(rows) != len(payload["items"]):
+              raise SystemExit("FAIL: wave count/serialization disagreement")
+          if payload["mutation_authority"] or payload["promotion_authority"]:
+              raise SystemExit("FAIL: scheduler cannot grant mutation/promotion")
+          for row in rows:
+              if row["execution_state"] == "EVIDENCE_HOLD" and row["scope_approved"] == "True":
+                  raise SystemExit("FAIL: held evidence was marked scope-approved")
+          print(f"PASS: {len(rows)} atom wave receipts, authority withheld")
+          PY
+
+      - name: Upload read-only backport wave receipts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: m3jdk21-backport-wave-admission-${{ github.run_id }}
+          path: target/m3-backport-wave-admission/
+          if-no-files-found: warn
+          retention-days: 14
