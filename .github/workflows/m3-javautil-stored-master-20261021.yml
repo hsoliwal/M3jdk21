@@ -1,0 +1,23 @@
+name: M3JDK21 java.util stored occurrence contract
+on:
+  pull_request:
+    paths:
+      - 'src/java.base/share/classes/java/util/CollectionViews.java'
+      - 'test/jdk/java/util/CollectionViews/StoredRepresentativeOracle.java'
+      - 'm3/qualification/javautil-stored-master-20261021/**'
+      - '.github/workflows/m3-javautil-stored-master-20261021.yml'
+  workflow_dispatch:
+jobs:
+  verify-java-base:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Baseline red / Java21 original owner and ABI / green modes
+        run: bash m3/qualification/javautil-stored-master-20261021/verify.sh "$RUNNER_TEMP/m3javautil-$GITHUB_RUN_ID"
