@@ -8,5 +8,5 @@ pass	file	behavior_atom	category	evaluation	action	evidence
 7	M3IndexPathMasks.java	32-bit physical offset path	mask and index manipulation	Original JNI/Java orderedRows and physicalOffsets	Use as independent oracle	12 randomized duplicate and signed/reversed paths
 8	M3FilteredViews.java and M3CollectionViews.java	live sorted/filtered wrappers	Java JDK comparator semantics	Separate pending PRs own live predicate callbacks	No source edit	Review chronology and no duplicate runtime
 9	M3AST/M3File/String	one file one parse	M3JDK21 owner invariants	Do not introduce another input read or AST owner	No source edit	Existing product source unchanged
-10	GitHub	Product nested PR	Superset PR1680 already retains five previously qualified source heads	Base this atom branch on real superset head	No clobbering historical native/JDK work
+10	GitHub	Product nested PR	Superset PR1680 already retains five previously qualified source heads	Base received atom on current master after superset #1680 merged	No clobbering historical native/JDK work
 11	Synexia	recipe-first serial pass	Inline Atomize Patternize Comment / Maven	JDK21/Java/JNI proof and full source seals before promotion	Apply canonical source-sealed recipe	Source preimage and fixed-point refusal tests
