@@ -111,3 +111,17 @@ writer, verifier or runtime implementation has already shipped.
 Design rationale and the proposed Java interface are in the
 [MOP technical paper](m3/papers/MOP_RECIPE_OWNED_IMPROVEMENT_MEMORY.md).
 
+## Public JDK naming and formatting: required pre-edit map lookup
+
+Before formatting, renaming, moving or replacing any M3/JDK implementation,
+read [M3JDK21 name and package contract](m3/docs/M3JDK21_NAME_AND_PACKAGE_CONTRACT.md)
+and resolve the exact `m3/docs/name-mapping.json` `migration.records[].id`.
+Use only the canonical Synexia Maven/OpenRewrite recipe, source-pinned staged
+transformations and exact target receiving tests; never treat a faster isolated
+M3 class as permission to rename a public JDK type. Public JDK class names
+remain `String`, `Class`, `HashMap`, `Pattern`, etc.; their selected
+implementations are incorporated **inside the original JDK owners**, with
+internal M3 helpers retained wherever their contracts require them.
+
+Run `python3 m3/tooling/name-contract/check.py` before proposing changes.
+It is a candidate/queue gate, **not** installed-JDK runtime admission.
