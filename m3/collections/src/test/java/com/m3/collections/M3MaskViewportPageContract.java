@@ -33,7 +33,7 @@ public final class M3MaskViewportPageContract {
         throw new AssertionError("missing " + expected.getName());
     }
 
-    private static void boundaries() {
+    private static void boundaries(boolean nativeLoaded) {
         int[] offsets = {12, 2, 2, Integer.MAX_VALUE, 0};
         int[] states = {0, Integer.MIN_VALUE, -1, 1, 0};
         int[] out = {77, 77, 77, 77, 77};
@@ -82,6 +82,37 @@ public final class M3MaskViewportPageContract {
         check(M3MaskViewportKernel.projectPage(sameArray, sameArray, 0, 4,
                 1, 0, 1, 2, sameArray, 2) == 2, "all-three alias count");
         check(Arrays.equals(sameArray, new int[]{1, 1, 1, 1}), "all-three alias contents");
+        if (nativeLoaded) {
+            int[] nativePage = {77, 77, 77, 77, 77};
+            check(M3MaskViewportNative.projectPage(offsets, states, 0, 5,
+                    Integer.MIN_VALUE, 0, 1, 1, nativePage, 2) == 1,
+                    "native high-bit page count");
+            check(Arrays.equals(nativePage, new int[]{77, 77, 2, 77, 77}),
+                    "native high-bit result");
+            int[] beforePage = nativePage.clone();
+            refuses(IllegalArgumentException.class,
+                    () -> M3MaskViewportNative.projectPage(new int[]{3, -1},
+                            new int[]{1, 0}, 0, 2, 1, 0,
+                            0, 0, nativePage, 0));
+            check(Arrays.equals(nativePage, beforePage),
+                    "native empty page validates and preserves target");
+            refuses(IndexOutOfBoundsException.class,
+                    () -> M3MaskViewportNative.projectPage(offsets, states,
+                            0, 5, 0, 0, 0, 5, nativePage, 1));
+            check(Arrays.equals(nativePage, beforePage),
+                    "native capacity refusal preserves target");
+            int[] nativeAlias = {5, 3, 5, 9, 11, 2};
+            check(M3MaskViewportNative.projectPage(nativeAlias, stateMask,
+                    0, 6, 1, 0, 1, 2, nativeAlias, 3) == 2,
+                    "native aliased page count");
+            check(Arrays.equals(nativeAlias, aliasOffsets),
+                    "native alias parity");
+            int[] stateAlias = {1, 0, 1, 1};
+            check(M3MaskViewportNative.projectPage(new int[]{20, 30, 40, 50},
+                    stateAlias, 0, 4, 1, 0, 0, 2, stateAlias, 1) == 2,
+                    "native state alias count");
+            check(Arrays.equals(stateAlias, aliasState), "native state alias parity");
+        }
     }
 
     private static void randomized(boolean nativeLoaded) {
@@ -129,6 +160,13 @@ public final class M3MaskViewportPageContract {
                     check(target[i + 2] == nativeFull[skip + i],
                             "JNI-selected page parity " + trial);
                 }
+                int[] nativePage = new int[expected + 5];
+                Arrays.fill(nativePage, -55);
+                check(M3MaskViewportNative.projectPage(ids, masks, first,
+                        length, required, forbidden, skip, budget, nativePage, 2)
+                        == expected, "native page count " + trial);
+                check(Arrays.equals(nativePage, target),
+                        "native/Java visible page parity " + trial);
             }
         }
     }
@@ -140,7 +178,7 @@ public final class M3MaskViewportPageContract {
             if (path == null) throw new IllegalArgumentException("m3.native.path required");
             System.load(path);
         }
-        boundaries();
+        boundaries(nativeLoaded);
         randomized(nativeLoaded);
         System.out.println("M3_MASK_VIEWPORT_PAGE_PASS checks=" + checks
                 + " existingJni=" + nativeLoaded);

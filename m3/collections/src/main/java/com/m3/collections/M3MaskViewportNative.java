@@ -9,8 +9,7 @@ final class M3MaskViewportNative {
     private M3MaskViewportNative() {
     }
 
-
-    /** Optional JNI parity: only primitive batches, no Java callbacks. */
+    /** CPU frame projection keeps the same parent-owned model and mask bits. */
     static native int projectFramePage(int[] logicalOffsets, int[] states,
             int first, int length, int requiredBits, int forbiddenBits,
             int skipVisible, int maxVisible, int[] rowTarget, int rowTargetOffset,
@@ -19,4 +18,9 @@ final class M3MaskViewportNative {
     static native int project(int[] logicalOffsets, int[] states, int first,
             int length, int requiredBits, int forbiddenBits, int[] target,
             int targetOffset);
+
+    /** Native resident-page projection; the Java CPU model remains authoritative. */
+    static native int projectPage(int[] logicalOffsets, int[] states, int first,
+            int length, int requiredBits, int forbiddenBits, int skipVisible,
+            int maxVisible, int[] target, int targetOffset);
 }
