@@ -24,3 +24,5 @@ jobs:
           java-version: '21'
       - name: Exact original owner Java21 source seals and regression
         run: bash m3/collections/qualification/indexed-live-reentrancy-20261021/verify.sh
+      - name: Existing C11 JNI mask selector required-backend proof
+        run: bash m3/collections/qualification/required-excluded-windows-20261021/verify.sh
