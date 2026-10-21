@@ -169,6 +169,41 @@ public class M3ObjectMapper extends ObjectMapper {
         return super.readValue(writeValueAsString(Objects.requireNonNull(ast, "ast")), valueType);
     }
 
+    /**
+     * Bind the existing authoritative tree through its original indexed tokens.
+     * No JSON text is written, read or parsed. The AST remains immutable and owned
+     * by its caller; only this binding cursor is closed.
+     *
+     * <p>Ordinary Jackson deserializers, naming/coercion settings, object identities,
+     * parser features and token-kind read constraints apply. M3 retained-state and
+     * expanded-traversal budgets apply as well. The AST has no source locations:
+     * mapping failures report an unavailable location rather than invented offsets.
+     *
+     * <p>This explicit tree operation does not invoke an M3AST serializer, a
+     * generator, input/output decorators or format-specific source processing.
+     * Source-length limits have no byte/character stream to measure here. The
+     * existing {@code readValue(M3AST, ...)} overloads keep their serializer-based
+     * JSON materialization contract.
+     */
+    public <T> T readTreeValue(M3AST ast, Class<T> valueType) throws IOException {
+        return readTreeValue(ast, getTypeFactory().constructType(
+                Objects.requireNonNull(valueType, "valueType")));
+    }
+
+    /** Bind original AST tokens to a parameterized type without a JSON round-trip. */
+    public <T> T readTreeValue(M3AST ast, TypeReference<T> valueType) throws IOException {
+        return readTreeValue(ast, getTypeFactory().constructType(
+                Objects.requireNonNull(valueType, "valueType")));
+    }
+
+    /** Bind original AST tokens with this mapper's configured Jackson deserialization. */
+    @SuppressWarnings("unchecked")
+    public <T> T readTreeValue(M3AST ast, JavaType valueType) throws IOException {
+        Objects.requireNonNull(ast, "ast");
+        Objects.requireNonNull(valueType, "valueType");
+        return (T) _readMapAndClose(new M3ASTParser(ast, getFactory(), this, m3Limits), valueType);
+    }
+
     private static String stable(CharSequence source) {
         return Objects.requireNonNull(source, "source").toString();
     }
