@@ -80,6 +80,84 @@ public final class M3File implements CharSequence {
     /** Raw byte SHA-256 when created by read; absent for character-only sources. */
     public Optional<String> byteSha256() { return Optional.ofNullable(byteSha256); }
 
+    /** Disposition of two independently captured original-byte SHA-256 seals. */
+    public enum ByteChange {
+        /** At least one snapshot was created without original-byte identity. */
+        UNKNOWN,
+        /** Both captured SHA-256 seals match; this is not an ABI comparison. */
+        MATCHING_SEALS,
+        /** The captured original bytes have different SHA-256 seals. */
+        DIFFERENT_SEALS
+    }
+
+    /**
+     * Detached change evidence in exact UTF-16 code-unit coordinates.
+     *
+     * <p>The previous window is [start, previousEnd) and the current window is
+     * [start, currentEnd). Results from changesFrom place unchanged text at zero.
+     * The windows can contain unchanged text between separate edits. URI and
+     * byte-seal changes are independent of character changes. This value does
+     * not establish reusable syntax, attributed symbols, class ABI or outputs.</p>
+     */
+    public record SourceDelta(boolean sameUri, int start, int previousEnd,
+            int currentEnd, ByteChange byteChange) {
+        public SourceDelta {
+            if (start < 0 || previousEnd < start || currentEnd < start) {
+                throw new IllegalArgumentException("invalid source delta window");
+            }
+            Objects.requireNonNull(byteChange, "byteChange");
+        }
+
+        /** Whether the retained source characters differ, independent of URI/encoding. */
+        public boolean charactersChanged() {
+            return previousEnd != start || currentEnd != start;
+        }
+    }
+
+    /**
+     * Compare this immutable snapshot with an earlier snapshot without parsing or I/O.
+     *
+     * <p>A maximal common prefix and a non-overlapping common suffix enclose all
+     * changed characters. Comparison is exact, including unpaired surrogates,
+     * and never treats a hash match as character equality. Callers retain
+     * responsibility for complete compilation-context and output validation.
+     * A lexical boundary change can invalidate syntax beyond this window.</p>
+     *
+     * @param previous the earlier immutable source snapshot
+     * @return immutable evidence; no source payload is copied into the result
+     * @throws NullPointerException if previous is null
+     */
+    public SourceDelta changesFrom(M3File previous) {
+        Objects.requireNonNull(previous, "previous");
+        ByteChange bytes = compareByteSeals(previous);
+        boolean sameUri = uri.equals(previous.uri);
+        if (text == previous.text) {
+            return new SourceDelta(sameUri, 0, 0, 0, bytes);
+        }
+        int previousEnd = previous.text.length();
+        int currentEnd = text.length();
+        int prefix = 0;
+        int sharedLength = Math.min(previousEnd, currentEnd);
+        while (prefix < sharedLength && previous.text.charAt(prefix) == text.charAt(prefix)) {
+            prefix++;
+        }
+        if (prefix == previousEnd && prefix == currentEnd) {
+            return new SourceDelta(sameUri, 0, 0, 0, bytes);
+        }
+        while (previousEnd > prefix && currentEnd > prefix
+                && previous.text.charAt(previousEnd - 1) == text.charAt(currentEnd - 1)) {
+            previousEnd--;
+            currentEnd--;
+        }
+        return new SourceDelta(sameUri, prefix, previousEnd, currentEnd, bytes);
+    }
+
+    private ByteChange compareByteSeals(M3File previous) {
+        if (byteSha256 == null || previous.byteSha256 == null) return ByteChange.UNKNOWN;
+        return byteSha256.equals(previous.byteSha256)
+                ? ByteChange.MATCHING_SEALS : ByteChange.DIFFERENT_SEALS;
+    }
+
     @Override public int length() { return text.length(); }
     @Override public char charAt(int index) { return text.charAt(index); }
 

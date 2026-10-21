@@ -12,6 +12,9 @@ import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.nio.file.attribute.FileTime;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.HexFormat;
 import java.util.Objects;
 
 /**
@@ -24,6 +27,7 @@ import java.util.Objects;
  * the file-open operations.</p>
  */
 public final class M3File {
+    private static final int FINGERPRINT_BUFFER_BYTES = 8192;
     private final Path path;
 
     private M3File(Path path) {
@@ -73,9 +77,73 @@ public final class M3File {
         }
     }
 
+    /**
+     * Stream a bounded raw-byte SHA-256 observation without retaining file content.
+     *
+     * <p>Every call reads the content through this owner's regular-file, nofollow
+     * stream. Neither modification time nor file size authorizes reuse. The
+     * accepted length is inclusive; at most one additional byte is read to
+     * detect a limit violation. The stream closes on success and failure.</p>
+     *
+     * <p>The result describes bytes observed during this read, not an atomic
+     * filesystem version. Equal digests are not proof of class ABI or semantic
+     * equivalence. Binary class files, archives and resources are never decoded
+     * as text.</p>
+     *
+     * @param maxBytes maximum accepted byte count, from zero to Long.MAX_VALUE
+     * @return immutable length and digest metadata, with no retained payload
+     * @throws IllegalArgumentException if maxBytes is negative
+     * @throws IOException if the file cannot be read, is not a regular file,
+     *         exceeds the limit, or a read makes no progress
+     */
+    public Fingerprint fingerprint(long maxBytes) throws IOException {
+        if (maxBytes < 0) throw new IllegalArgumentException("negative maxBytes");
+        MessageDigest digest = sha256Digest();
+        byte[] block = new byte[FINGERPRINT_BUFFER_BYTES];
+        long size = 0;
+        try (InputStream input = openInputStream()) {
+            while (true) {
+                long remaining = maxBytes - size;
+                int limit = remaining >= block.length ? block.length : (int) remaining + 1;
+                int count = input.read(block, 0, limit);
+                if (count < 0) break;
+                if (count == 0) throw new IOException("resource read made no progress");
+                if (count > remaining) {
+                    throw new IOException("resource exceeds configured fingerprint limit");
+                }
+                digest.update(block, 0, count);
+                size += count;
+            }
+        }
+        return new Fingerprint(size, HexFormat.of().formatHex(digest.digest()));
+    }
+
+    private static MessageDigest sha256Digest() {
+        try {
+            return MessageDigest.getInstance("SHA-256");
+        } catch (NoSuchAlgorithmException impossible) {
+            throw new AssertionError("required SHA-256 provider unavailable", impossible);
+        }
+    }
+
     private void requireRegular() throws IOException {
         if (!metadata().regularFile()) {
             throw new IOException("resource is not a regular file");
+        }
+    }
+
+    /** Metadata for observed bytes; digest equality does not certify class ABI equality. */
+    public record Fingerprint(long size, String sha256) {
+        public Fingerprint {
+            if (size < 0) throw new IllegalArgumentException("negative file size");
+            Objects.requireNonNull(sha256, "sha256");
+            if (sha256.length() != 64) throw new IllegalArgumentException("invalid SHA-256");
+            for (int index = 0; index < sha256.length(); index++) {
+                char digit = sha256.charAt(index);
+                if (!(digit >= '0' && digit <= '9' || digit >= 'a' && digit <= 'f')) {
+                    throw new IllegalArgumentException("invalid lowercase SHA-256");
+                }
+            }
         }
     }
 

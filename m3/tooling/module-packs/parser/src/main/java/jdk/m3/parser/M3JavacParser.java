@@ -15,7 +15,41 @@ import java.util.function.Consumer;
 
 /** Projects the existing M3AST parse event; the caller owns and runs its javac task. */
 public final class M3JavacParser {
+    private static final M3AST.Projection<M3File> SOURCE = new M3AST.Projection<>(
+            "jdk.m3.parser.javac.source.v1", M3JavacParser::captureSource);
+
     private M3JavacParser() { }
+
+    /**
+     * The shared source-only operation identity for an original PARSED event.
+     *
+     * <p>The existing event memoizer owns the result. This key retains no source
+     * or compiler state between events. Source and tree consumers receive the
+     * same immutable M3File without another source read or AST traversal.</p>
+     *
+     * @return the same operation key for requests through M3AST.Unit.project
+     */
+    public static M3AST.Projection<M3File> sourceProjection() {
+        return SOURCE;
+    }
+
+    /**
+     * Compare the actual parsed source with a caller-owned earlier snapshot.
+     *
+     * <p>This requests only the shared source projection, never a tree index.
+     * It supplies character/URI/byte-seal evidence, not semantic equivalence or
+     * authority to skip a build task. The original callback lifetime applies.</p>
+     *
+     * @param unit the current original compiler PARSED callback view
+     * @param previous an actual earlier immutable source snapshot
+     * @return exact UTF-16 replacement coordinates and identity evidence
+     * @throws Exception if the original view or source projection is unavailable
+     */
+    public static M3File.SourceDelta changesFrom(M3AST.Unit unit, M3File previous) throws Exception {
+        Objects.requireNonNull(unit, "unit");
+        Objects.requireNonNull(previous, "previous");
+        return unit.project(SOURCE).changesFrom(previous);
+    }
 
     /**
      * Create a caller-owned operation identity. Reuse this exact instance across
@@ -47,7 +81,7 @@ public final class M3JavacParser {
         return handle;
     }
 
-    private static M3JavacTree capture(M3AST.Unit unit, int maxNodes) throws Exception {
+    private static M3File captureSource(M3AST.Unit unit) throws Exception {
         if (unit.phase() != M3AST.Phase.PARSED) {
             throw new IllegalArgumentException("M3JavacParser requires a PARSED event");
         }
@@ -56,6 +90,14 @@ public final class M3JavacParser {
         if (!source.utf16Sha256().equals(retained.utf16Sha256())) {
             throw new IllegalStateException("M3AST source seal mismatch");
         }
+        return source;
+    }
+
+    private static M3JavacTree capture(M3AST.Unit unit, int maxNodes) throws Exception {
+        if (unit.phase() != M3AST.Phase.PARSED) {
+            throw new IllegalArgumentException("M3JavacParser requires a PARSED event");
+        }
+        M3File source = unit.project(SOURCE);
         SourcePositions positions = unit.trees().getSourcePositions();
         int capacity = Math.min(64, maxNodes);
         int[] kinds = new int[capacity];
