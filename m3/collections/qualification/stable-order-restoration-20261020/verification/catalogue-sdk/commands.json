@@ -1,0 +1,166 @@
+[
+  {
+    "argv": [
+      "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/toolchain/maven/bin/mvn",
+      "-o",
+      "-B",
+      "-ntp",
+      "-Dmaven.repo.local=/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2",
+      "-f",
+      "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-refinement-20261020/catalogue/recipe-host/pom.xml",
+      "-Drecipe.owner.root=/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/canonical/synexia-openrewrite-recipes",
+      "-Dm3.pass=catalogue-candidates",
+      "-DskipTests",
+      "test-compile"
+    ],
+    "cwd": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-refinement-20261020/catalogue/recipe-host",
+    "elapsed_seconds": 3.451646,
+    "exit": 0,
+    "name": "catalogue-candidates-compile",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stdout_sha256": "df18048a82bfe47c39cafed2d3b449154c86a3696ba16a2b35da611937909f66"
+  },
+  {
+    "argv": [
+      "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/toolchain/maven/bin/mvn",
+      "-o",
+      "-B",
+      "-ntp",
+      "-Dmaven.repo.local=/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2",
+      "-f",
+      "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-refinement-20261020/catalogue/recipe-host/pom.xml",
+      "-Drecipe.owner.root=/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/canonical/synexia-openrewrite-recipes",
+      "-Dm3.pass=catalogue-candidates",
+      "surefire:test"
+    ],
+    "cwd": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-refinement-20261020/catalogue/recipe-host",
+    "elapsed_seconds": 3.123019,
+    "exit": 0,
+    "name": "catalogue-candidates-sdk",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stdout_sha256": "ca42e141f26e605eab32716239c507c650ead4575ed6b180f39d889e30e323cd"
+  },
+  {
+    "argv": [
+      "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/toolchain/maven/bin/mvn",
+      "-o",
+      "-B",
+      "-ntp",
+      "-Dmaven.repo.local=/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2",
+      "-f",
+      "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-refinement-20261020/catalogue/recipe-host/pom.xml",
+      "-Drecipe.owner.root=/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/canonical/synexia-openrewrite-recipes",
+      "-Dm3.pass=catalogue-readme",
+      "-DskipTests",
+      "test-compile"
+    ],
+    "cwd": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-refinement-20261020/catalogue/recipe-host",
+    "elapsed_seconds": 3.443371,
+    "exit": 0,
+    "name": "catalogue-readme-compile",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stdout_sha256": "7c86f03c72e5c436623c32c55fe29f2dd38f241d6763ce79a8fbea1be9ce49e3"
+  },
+  {
+    "argv": [
+      "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/toolchain/maven/bin/mvn",
+      "-o",
+      "-B",
+      "-ntp",
+      "-Dmaven.repo.local=/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2",
+      "-f",
+      "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-refinement-20261020/catalogue/recipe-host/pom.xml",
+      "-Drecipe.owner.root=/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/canonical/synexia-openrewrite-recipes",
+      "-Dm3.pass=catalogue-readme",
+      "surefire:test"
+    ],
+    "cwd": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-refinement-20261020/catalogue/recipe-host",
+    "elapsed_seconds": 3.124433,
+    "exit": 0,
+    "name": "catalogue-readme-sdk",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stdout_sha256": "e1b1a97977b72a4f4030bb760743996093cfac83a5b397e4a5d50377c7adbac7"
+  },
+  {
+    "argv": [
+      "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/toolchain/maven/bin/mvn",
+      "-o",
+      "-B",
+      "-ntp",
+      "-Dmaven.repo.local=/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2",
+      "-f",
+      "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-refinement-20261020/catalogue/recipe-host/pom.xml",
+      "-Drecipe.owner.root=/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/canonical/synexia-openrewrite-recipes",
+      "-Dm3.pass=catalogue-discovery",
+      "-DskipTests",
+      "test-compile"
+    ],
+    "cwd": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-refinement-20261020/catalogue/recipe-host",
+    "elapsed_seconds": 3.35215,
+    "exit": 0,
+    "name": "catalogue-discovery-compile",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stdout_sha256": "67a99eebf6d68faa59a3a0ee6bc4fc1534361836c73da83d22517d631074d364"
+  },
+  {
+    "argv": [
+      "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/toolchain/maven/bin/mvn",
+      "-o",
+      "-B",
+      "-ntp",
+      "-Dmaven.repo.local=/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2",
+      "-f",
+      "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-refinement-20261020/catalogue/recipe-host/pom.xml",
+      "-Drecipe.owner.root=/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/canonical/synexia-openrewrite-recipes",
+      "-Dm3.pass=catalogue-discovery",
+      "surefire:test"
+    ],
+    "cwd": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-refinement-20261020/catalogue/recipe-host",
+    "elapsed_seconds": 3.16475,
+    "exit": 0,
+    "name": "catalogue-discovery-sdk",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stdout_sha256": "fbfbbca70eb9234fb827f77a5c2bf01ba60b428f924b4e0f2527f454342a6991"
+  },
+  {
+    "argv": [
+      "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/toolchain/maven/bin/mvn",
+      "-o",
+      "-B",
+      "-ntp",
+      "-Dmaven.repo.local=/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2",
+      "-f",
+      "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-refinement-20261020/catalogue/recipe-host/pom.xml",
+      "-Drecipe.owner.root=/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/canonical/synexia-openrewrite-recipes",
+      "-Dm3.pass=catalogue-pins",
+      "-DskipTests",
+      "test-compile"
+    ],
+    "cwd": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-refinement-20261020/catalogue/recipe-host",
+    "elapsed_seconds": 3.171354,
+    "exit": 0,
+    "name": "catalogue-pins-compile",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stdout_sha256": "b2787b1ec1229c9311fe8893e2ea452a98b5b2af07fd2fb3500770af368171f6"
+  },
+  {
+    "argv": [
+      "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/toolchain/maven/bin/mvn",
+      "-o",
+      "-B",
+      "-ntp",
+      "-Dmaven.repo.local=/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2",
+      "-f",
+      "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-refinement-20261020/catalogue/recipe-host/pom.xml",
+      "-Drecipe.owner.root=/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/canonical/synexia-openrewrite-recipes",
+      "-Dm3.pass=catalogue-pins",
+      "surefire:test"
+    ],
+    "cwd": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-refinement-20261020/catalogue/recipe-host",
+    "elapsed_seconds": 3.274559,
+    "exit": 0,
+    "name": "catalogue-pins-sdk",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stdout_sha256": "4aa120a1838e908dfd94f722f5821852bce42abd2785856ac8292f920b177deb"
+  }
+]

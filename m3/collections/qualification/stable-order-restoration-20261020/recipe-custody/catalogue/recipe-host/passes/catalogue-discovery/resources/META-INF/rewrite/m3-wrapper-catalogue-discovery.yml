@@ -1,0 +1,9 @@
+# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and contributors
+# SPDX-License-Identifier: Apache-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.WrapperConvergence20261018
+displayName: Append one validated M3 catalogue record
+description: Admit one exact new catalogue file through the existing canonical text owner.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe:
+      crateName: m3-wrapper-catalogue-discovery
