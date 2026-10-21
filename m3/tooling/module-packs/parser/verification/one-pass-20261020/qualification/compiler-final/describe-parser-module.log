@@ -1,0 +1,7 @@
+jdk.m3.parser file:///workspace/scratch/e736b6177c79/m3-one-pass-20261020/qualification/parser-final/jdk.m3.parser.jar
+exports jdk.m3.parser
+exports jdk.m3.parser.grammar
+requires java.base mandated
+requires java.sql transitive static
+requires jdk.compiler transitive
+requires java.xml

@@ -1,0 +1,744 @@
+{
+  "artifacts": [
+    {
+      "bytes": 2827,
+      "path": "compile-all-consumers.log",
+      "sha256": "0db8faecb14bdbae832609ecdab2ccb76cf2f5d777e8e64b60043a366300c3c4"
+    },
+    {
+      "bytes": 10758,
+      "path": "compile-commands.json",
+      "sha256": "c0b586c1c0b61955254b4c1ac07a516404f1339749e553f8fc5ff79a2a981953"
+    },
+    {
+      "bytes": 1071,
+      "path": "compile-compiler-patch.log",
+      "sha256": "1e969b109102bb1ed7d38c436476ee6f669c03de86ea669a7c447abe8c8caa88"
+    },
+    {
+      "bytes": 5962,
+      "path": "compile-parser-module.log",
+      "sha256": "cdb38b3f52f8cd7fc3eb318efc2d0e0be224e562ab68e105b72a9fe125a9cb74"
+    },
+    {
+      "bytes": 640,
+      "path": "compiler-patch/com/sun/source/util/M3AST$Consumer.class",
+      "sha256": "96ed26db9f315152a4e31a9736ba8e64ddd0cbfa8a698ded357eb80b309819d2"
+    },
+    {
+      "bytes": 566,
+      "path": "compiler-patch/com/sun/source/util/M3AST$Factory.class",
+      "sha256": "17c1923667d1cde9affc4d376ee949ffcc78afdaea5f24aecad211d09db47059"
+    },
+    {
+      "bytes": 1096,
+      "path": "compiler-patch/com/sun/source/util/M3AST$Phase.class",
+      "sha256": "dd34d09c7ef03a56d5b5091f26940cebed25bd9b7bcb7fc5897244831bb567a6"
+    },
+    {
+      "bytes": 1234,
+      "path": "compiler-patch/com/sun/source/util/M3AST$Projection.class",
+      "sha256": "d41b2e0990704892ae9ad41ad0b7c7711b3d93414e697d28db2e192b414da3e7"
+    },
+    {
+      "bytes": 1694,
+      "path": "compiler-patch/com/sun/source/util/M3AST$Source.class",
+      "sha256": "f11c1591e6d29420b42d61fc489d4aaafe1a9922b04f6db5859b68f5d1f00ba5"
+    },
+    {
+      "bytes": 2299,
+      "path": "compiler-patch/com/sun/source/util/M3AST$Summary.class",
+      "sha256": "8914a16c074a095b18e9a754e1bb467c95f19e7bbbac43089750579457d8c382"
+    },
+    {
+      "bytes": 964,
+      "path": "compiler-patch/com/sun/source/util/M3AST$Unit.class",
+      "sha256": "91f8219fcb1329d9a38172ca73615b19f66698d827d98e6e774b8456b6b8ffcb"
+    },
+    {
+      "bytes": 1142,
+      "path": "compiler-patch/com/sun/source/util/M3AST.class",
+      "sha256": "7adc7c87923bf9c9fb347b85507c9ac1357191d7cc40d273fdb44db83f5cafe2"
+    },
+    {
+      "bytes": 813,
+      "path": "compiler-patch/com/sun/tools/javac/m3/M3ASTPC$1.class",
+      "sha256": "9e3c74f2213cc3914f78d29d3b3f9745cbca1a63859df74b7cf2989ce5eb3f5a"
+    },
+    {
+      "bytes": 1425,
+      "path": "compiler-patch/com/sun/tools/javac/m3/M3ASTPC$LiveUnit$Failure.class",
+      "sha256": "e2996b98f7d5ebef9f0040e1a964fe4b6cfd9aefcb7c7fce1a8f8e90d0da0223"
+    },
+    {
+      "bytes": 5749,
+      "path": "compiler-patch/com/sun/tools/javac/m3/M3ASTPC$LiveUnit.class",
+      "sha256": "f8ee0cf870522474ab0e0aa9da6b2acd6f018e5bab25dcd08f67e9f4126c80ba"
+    },
+    {
+      "bytes": 1391,
+      "path": "compiler-patch/com/sun/tools/javac/m3/M3ASTPC$Seal.class",
+      "sha256": "6f80d3d4abbe4f4a3685eb1daf079699d45de17e566caf93e8946db859c12d8b"
+    },
+    {
+      "bytes": 6400,
+      "path": "compiler-patch/com/sun/tools/javac/m3/M3ASTPC$Session.class",
+      "sha256": "a534ead1e47d3979b11b2eebd20e729cf7b00f136ad89b9fdc9cf74648636044"
+    },
+    {
+      "bytes": 3618,
+      "path": "compiler-patch/com/sun/tools/javac/m3/M3ASTPC$Trace.class",
+      "sha256": "f9b0e69d41008e54c04f5055fe6352e957d8b3f1b4dd5129c95f3ad62a2a4073"
+    },
+    {
+      "bytes": 8472,
+      "path": "compiler-patch/com/sun/tools/javac/m3/M3ASTPC.class",
+      "sha256": "78519628cbe9f3e8face0d7a8fa8cf048a76370e2719ab2ea75311b7dec6ad2f"
+    },
+    {
+      "bytes": 4187,
+      "path": "compiler-patch/com/sun/tools/javac/m3/M3PrimitiveImageCompiler$1.class",
+      "sha256": "758d419791269d166bb831225f20494f9e59fe80373d83930e9aa6bac60fdecb"
+    },
+    {
+      "bytes": 3644,
+      "path": "compiler-patch/com/sun/tools/javac/m3/M3PrimitiveImageCompiler$2.class",
+      "sha256": "7350b5b49e7d0fc9a22a913d0276f7bf9ba22dfc4f46199bb45e0130fcdcd7e2"
+    },
+    {
+      "bytes": 1585,
+      "path": "compiler-patch/com/sun/tools/javac/m3/M3PrimitiveImageCompiler$3.class",
+      "sha256": "afe16019e3c16f94e7b24966a18b9e8344dd2d32895d297eeac83b99ff6d58bd"
+    },
+    {
+      "bytes": 1462,
+      "path": "compiler-patch/com/sun/tools/javac/m3/M3PrimitiveImageCompiler$Entry.class",
+      "sha256": "7ae24a0a13e390e8e3b7dd20d6e66967ea17c4cc0aa9cf088fc072eeea319c13"
+    },
+    {
+      "bytes": 14812,
+      "path": "compiler-patch/com/sun/tools/javac/m3/M3PrimitiveImageCompiler.class",
+      "sha256": "16a8a22d6c53bca3fc1fea4c78365073c9ab59b9c58b5f73bd772270426295be"
+    },
+    {
+      "bytes": 1327,
+      "path": "compiler-patch/com/sun/tools/javac/main/JavaCompiler$1.class",
+      "sha256": "1bd9ec43595bd916c70c879758ad2fbc53bac9e7983ec6c5d2f6ba044f157718"
+    },
+    {
+      "bytes": 4165,
+      "path": "compiler-patch/com/sun/tools/javac/main/JavaCompiler$1MethodBodyRemover.class",
+      "sha256": "89254c8df792f553c8a7fafc6d61fe977d1f00b8642b89976136d0aa46c2209d"
+    },
+    {
+      "bytes": 4090,
+      "path": "compiler-patch/com/sun/tools/javac/main/JavaCompiler$1ScanNested.class",
+      "sha256": "bf6b8eef557105312d77856f9f75ba2c756c6aa1f3cad4d30ded6a4d908f1f74"
+    },
+    {
+      "bytes": 837,
+      "path": "compiler-patch/com/sun/tools/javac/main/JavaCompiler$2.class",
+      "sha256": "6704dee3d34680c4cc17b1f94b9a67fb2d3ca080cc6b7513b68ec5d2611ca2cd"
+    },
+    {
+      "bytes": 1598,
+      "path": "compiler-patch/com/sun/tools/javac/main/JavaCompiler$CompilePolicy.class",
+      "sha256": "673c5a560e1f65814360d168208af6466d0b00ddcf849ee131364008000f97d5"
+    },
+    {
+      "bytes": 1569,
+      "path": "compiler-patch/com/sun/tools/javac/main/JavaCompiler$ImplicitSourcePolicy.class",
+      "sha256": "97a2e331b204d9be35802bfe4026495f307560fac5c68b0ab18cee5a08f90c64"
+    },
+    {
+      "bytes": 1882,
+      "path": "compiler-patch/com/sun/tools/javac/main/JavaCompiler$InitialFileParser.class",
+      "sha256": "11c41aa5b2970adb09e0d05095edca18d5e1ead5868199d871ad4b485f4d74e2"
+    },
+    {
+      "bytes": 620,
+      "path": "compiler-patch/com/sun/tools/javac/main/JavaCompiler$InitialFileParserIntf.class",
+      "sha256": "637a55fc17283dd2f992fd3d7ec6855b53bb0381dc46a0e4d936d0079afe691a"
+    },
+    {
+      "bytes": 56714,
+      "path": "compiler-patch/com/sun/tools/javac/main/JavaCompiler.class",
+      "sha256": "66fce35f90de9df9b96ab74ef6538f1ba58f998b8a7d0237a1a0143161bd73d8"
+    },
+    {
+      "bytes": 6878,
+      "path": "compiler-source/com/sun/source/util/M3AST.java",
+      "sha256": "0c451956dbaa3cffcdd5e05705501c192b913048a7afd7562982aef584c9d37a"
+    },
+    {
+      "bytes": 20789,
+      "path": "compiler-source/com/sun/tools/javac/m3/M3ASTPC.java",
+      "sha256": "3e43390b9d9df94da9943b101c809f1bdc4c1039e825976b2cda72acb8c56b28"
+    },
+    {
+      "bytes": 17663,
+      "path": "compiler-source/com/sun/tools/javac/m3/M3PrimitiveImageCompiler.java",
+      "sha256": "5827f24f34317707564be6ca031ecb6ef69958b66ca69a42a787080ef6ccb006"
+    },
+    {
+      "bytes": 74324,
+      "path": "compiler-source/com/sun/tools/javac/main/JavaCompiler.java",
+      "sha256": "129e8c19ef328185c45465b9c8bf9baee43bb24be54842b69833c52e3e6f3dcb"
+    },
+    {
+      "bytes": 12956,
+      "path": "modules/jdk.m3.parser/jdk/m3/parser/M3ASTAuthoritativeModels.class",
+      "sha256": "0bd45a595d82bdb39339f807ce3d47cd0f125812a4d0aab52e47dd559fd06db2"
+    },
+    {
+      "bytes": 1294,
+      "path": "modules/jdk.m3.parser/jdk/m3/parser/M3ASTIndex$1.class",
+      "sha256": "148b0fade27fab1307e5f1ee257be19e9add0f0414d83a367ab091ad6a368373"
+    },
+    {
+      "bytes": 6744,
+      "path": "modules/jdk.m3.parser/jdk/m3/parser/M3ASTIndex$Builder.class",
+      "sha256": "77bb23605f29bb45176c5b0ba457c812e3692ed535086cab7bc373c16dadb643"
+    },
+    {
+      "bytes": 1379,
+      "path": "modules/jdk.m3.parser/jdk/m3/parser/M3ASTIndex$Domain.class",
+      "sha256": "c94fe106ead44de35c928926e73078934ebcbeb7aa2fabee8c2dafb1bc26ce82"
+    },
+    {
+      "bytes": 1473,
+      "path": "modules/jdk.m3.parser/jdk/m3/parser/M3ASTIndex$LiteralKind.class",
+      "sha256": "5e07deb5a06c597630423971e3635714bf7ec8de5ee2fd8d570db6fb9ea6ed5a"
+    },
+    {
+      "bytes": 821,
+      "path": "modules/jdk.m3.parser/jdk/m3/parser/M3ASTIndex$StructuralHashes.class",
+      "sha256": "8ed50c1cae384662fefbbc51b8fb8d22efc2993c394afe1ef828e2051b1b28c2"
+    },
+    {
+      "bytes": 9748,
+      "path": "modules/jdk.m3.parser/jdk/m3/parser/M3ASTIndex.class",
+      "sha256": "3ca1f552815b27d0cab280e775e081bf7b980ef23b50ad662b4b4ce8c9657bc4"
+    },
+    {
+      "bytes": 1764,
+      "path": "modules/jdk.m3.parser/jdk/m3/parser/M3ASTIngress$1.class",
+      "sha256": "874e620802fd853888f510546bb824be0b09ee9581fbe030ef95fb07a2dcc72a"
+    },
+    {
+      "bytes": 1237,
+      "path": "modules/jdk.m3.parser/jdk/m3/parser/M3ASTIngress$DirectChildren.class",
+      "sha256": "467cdc5138f65848f671bcd81ae272f7520a50c61ef99cb1ad564b9b131567b7"
+    },
+    {
+      "bytes": 1802,
+      "path": "modules/jdk.m3.parser/jdk/m3/parser/M3ASTIngress$Limits.class",
+      "sha256": "5da6d44405b9af97e256a977ee1eea7e8b65076f1d005d57b7d60318e8befe52"
+    },
+    {
+      "bytes": 933,
+      "path": "modules/jdk.m3.parser/jdk/m3/parser/M3ASTIngress$SourceLines.class",
+      "sha256": "1ce1d1a6d5567211fcc6c08715baca9e9fb78a1f6a058328d8fb5343ba26e98c"
+    },
+    {
+      "bytes": 20755,
+      "path": "modules/jdk.m3.parser/jdk/m3/parser/M3ASTIngress.class",
+      "sha256": "53e600ebc068e7fc118d74adaba051911aa6eca9ed3305ed5c470fb62fe905a8"
+    },
+    {
+      "bytes": 5875,
+      "path": "modules/jdk.m3.parser/jdk/m3/parser/M3ASTJacksonEvents.class",
+      "sha256": "b922a4f9b350cd66e4f769aa32f90b67c33c23691e50fe8d3526411468e8acde"
+    },
+    {
+      "bytes": 1959,
+      "path": "modules/jdk.m3.parser/jdk/m3/parser/M3FactsWriter$Context.class",
+      "sha256": "7d68ed299c67c7c874a79906a0c91d5e84bdd4c47107e8e6837f0d651e882d33"
+    },
+    {
+      "bytes": 2363,
+      "path": "modules/jdk.m3.parser/jdk/m3/parser/M3FactsWriter$Limits.class",
+      "sha256": "156b2ea9a26d23ab7eb80443ed4bd21a5dac620373e08db292e121f9af2d1b26"
+    },
+    {
+      "bytes": 1472,
+      "path": "modules/jdk.m3.parser/jdk/m3/parser/M3FactsWriter$Result.class",
+      "sha256": "5b089265905a32944086e85a78477df24f065b5830b97d68243bf5e882c01f35"
+    },
+    {
+      "bytes": 1069,
+      "path": "modules/jdk.m3.parser/jdk/m3/parser/M3FactsWriter$StreamOwner.class",
+      "sha256": "418906ac501af04f38e1259dcb9cf91c4a1ec76f37545af69019d1e8e63085af"
+    },
+    {
+      "bytes": 452,
+      "path": "modules/jdk.m3.parser/jdk/m3/parser/M3FactsWriter$Work.class",
+      "sha256": "71fa29c78d5e1391b339cef5c63692e81e1ffeef222c5d73854471ba5791faa7"
+    },
+    {
+      "bytes": 21733,
+      "path": "modules/jdk.m3.parser/jdk/m3/parser/M3FactsWriter.class",
+      "sha256": "6c342768d8eccf0d1ab85b6c5929a79b9e3813973a4a7ac6712e753b95b0d12e"
+    },
+    {
+      "bytes": 5554,
+      "path": "modules/jdk.m3.parser/jdk/m3/parser/M3File.class",
+      "sha256": "74b1f5f9677f31ab122f0a7525475df3869230d0c349d7ab63ba66b8d3765fdc"
+    },
+    {
+      "bytes": 1240,
+      "path": "modules/jdk.m3.parser/jdk/m3/parser/M3JavacParser$1.class",
+      "sha256": "1b5322802cf3a5fcc54de868c0db93c55f3803fb4fe7098d5dc259afe114f419"
+    },
+    {
+      "bytes": 1235,
+      "path": "modules/jdk.m3.parser/jdk/m3/parser/M3JavacParser$2.class",
+      "sha256": "761951f113a427b6a39f5f4616792d96fb3d11cb49dc267b6aea763a35586184"
+    },
+    {
+      "bytes": 1152,
+      "path": "modules/jdk.m3.parser/jdk/m3/parser/M3JavacParser$DirectChildren.class",
+      "sha256": "727b8020d6e88651542214f83a7fbf2e66cb8892be73064744558df8885940b0"
+    },
+    {
+      "bytes": 7197,
+      "path": "modules/jdk.m3.parser/jdk/m3/parser/M3JavacParser.class",
+      "sha256": "d42b1474852daa7cb4311d3e145a5abd746ad474aeda2082780d63fe044263d2"
+    },
+    {
+      "bytes": 1809,
+      "path": "modules/jdk.m3.parser/jdk/m3/parser/M3JavacTree.class",
+      "sha256": "82fb7d913d93a99e6f00fa975019aba7afd685bbaabf7ff356ed783a9e35628d"
+    },
+    {
+      "bytes": 2302,
+      "path": "modules/jdk.m3.parser/jdk/m3/parser/M3ParseResult.class",
+      "sha256": "fbd0075e66b0dc876484a82418a49ecf071804c9fe7151b13e066d745191fb7d"
+    },
+    {
+      "bytes": 2116,
+      "path": "modules/jdk.m3.parser/jdk/m3/parser/M3Parser.class",
+      "sha256": "802c3645397f951986dd6afa6dfcb87925fbd971cd96d785d71186f1fdcafb98"
+    },
+    {
+      "bytes": 3188,
+      "path": "modules/jdk.m3.parser/jdk/m3/parser/grammar/M3EarleyWaitingIndex.class",
+      "sha256": "f747d659a6dd2528da070e55505a431a18355c5032b7614c95921aa5191094d0"
+    },
+    {
+      "bytes": 775,
+      "path": "modules/jdk.m3.parser/jdk/m3/parser/grammar/M3Grammar$1.class",
+      "sha256": "59d4e576975f4f1cb914436c4f31a2e1be9e561ef2262a03cb3957d68aa6ae7f"
+    },
+    {
+      "bytes": 12065,
+      "path": "modules/jdk.m3.parser/jdk/m3/parser/grammar/M3Grammar.class",
+      "sha256": "d69e3e621bedfebed93f743ffcb01f179c3f65291b5b822a015cfee0a651ba12"
+    },
+    {
+      "bytes": 1512,
+      "path": "modules/jdk.m3.parser/jdk/m3/parser/grammar/M3GrammarAnalysis$ProductiveResult.class",
+      "sha256": "56f5cc88a5e9939a0811921743d65410e036e2e95aa5f835f05a62c7d601e87f"
+    },
+    {
+      "bytes": 2495,
+      "path": "modules/jdk.m3.parser/jdk/m3/parser/grammar/M3GrammarAnalysis$Result.class",
+      "sha256": "7977298529dc95010d38146deb7b14969b9845967b76cb06e289f4cca510dfdf"
+    },
+    {
+      "bytes": 4321,
+      "path": "modules/jdk.m3.parser/jdk/m3/parser/grammar/M3GrammarAnalysis.class",
+      "sha256": "561b179b86ba47dbe2b6bd6ce33213ccb972cd1331748edb23aa632548ad2e76"
+    },
+    {
+      "bytes": 3082,
+      "path": "modules/jdk.m3.parser/jdk/m3/parser/grammar/M3GrammarBudget.class",
+      "sha256": "ca3bea4472fd228035302cc7542d1c835f3c784124c74bcefc7eafe0bdc40b75"
+    },
+    {
+      "bytes": 1592,
+      "path": "modules/jdk.m3.parser/jdk/m3/parser/grammar/M3GrammarBuilder$ProductionSpec.class",
+      "sha256": "62cf4f9ed95d316cc14735a91b7d651fe9857c1ba05c5379fff0a650b697c56b"
+    },
+    {
+      "bytes": 2041,
+      "path": "modules/jdk.m3.parser/jdk/m3/parser/grammar/M3GrammarBuilder$SymbolKey.class",
+      "sha256": "7d0f7656dfcf0beb0a5dbdac3c1ef177cd7e412c0c1eb46027fe868e6e5050cf"
+    },
+    {
+      "bytes": 7304,
+      "path": "modules/jdk.m3.parser/jdk/m3/parser/grammar/M3GrammarBuilder.class",
+      "sha256": "a400bbbb91249732970ee3eba6b776d602ba0bfb48e8fcf9597bd330635e8d0d"
+    },
+    {
+      "bytes": 1210,
+      "path": "modules/jdk.m3.parser/jdk/m3/parser/grammar/M3GrammarDecisionIndex$1.class",
+      "sha256": "823b4f9fe8a186ba2c76de868f9c922ec520062984cf65a8021c04bada81b3b9"
+    },
+    {
+      "bytes": 1156,
+      "path": "modules/jdk.m3.parser/jdk/m3/parser/grammar/M3GrammarDecisionIndex$IntArena.class",
+      "sha256": "c5954f8540e096678721708da1633c259d87da16440be40c96158d08408ca672"
+    },
+    {
+      "bytes": 14181,
+      "path": "modules/jdk.m3.parser/jdk/m3/parser/grammar/M3GrammarDecisionIndex.class",
+      "sha256": "3e2fdfcc013f57a6ce0c731b1a7b064cade7bf396ecc34de36c2ac47ee8f3296"
+    },
+    {
+      "bytes": 628,
+      "path": "modules/jdk.m3.parser/jdk/m3/parser/grammar/M3GrammarDecisionIndexes.class",
+      "sha256": "5473b0cd581f433889a1ac202db17969f07effe68a59d0f933d769ae52748912"
+    },
+    {
+      "bytes": 441,
+      "path": "modules/jdk.m3.parser/jdk/m3/parser/grammar/M3GrammarException.class",
+      "sha256": "4c55d7af4bc8f48ce95522667f775b9ef3f617700094c0941f02cb85231d4441"
+    },
+    {
+      "bytes": 1409,
+      "path": "modules/jdk.m3.parser/jdk/m3/parser/grammar/M3GrammarFamily.class",
+      "sha256": "6bf01a604c3487fa7ef114fde0c31e72efc16b552dfc57d308164db862851232"
+    },
+    {
+      "bytes": 1269,
+      "path": "modules/jdk.m3.parser/jdk/m3/parser/grammar/M3GrammarFormat.class",
+      "sha256": "ecc58e32b03cb9fb82bde42a73525e194d4eac01766babb2b2a41a7fb880ca5a"
+    },
+    {
+      "bytes": 8776,
+      "path": "modules/jdk.m3.parser/jdk/m3/parser/grammar/M3GrammarLexer.class",
+      "sha256": "96cdf0fc44547a64b3115d7ab9a39b7568e59618603bff4529f2dd12066f8c7f"
+    },
+    {
+      "bytes": 2459,
+      "path": "modules/jdk.m3.parser/jdk/m3/parser/grammar/M3GrammarLimits.class",
+      "sha256": "0a8c818efeda45abb8ac66879dc1657d0dba6cf695567c9172f0a3762a730f6a"
+    },
+    {
+      "bytes": 1929,
+      "path": "modules/jdk.m3.parser/jdk/m3/parser/grammar/M3GrammarParseResult.class",
+      "sha256": "8a7351e35e13f278307079b6d97aab77d52a2d72cf6e095ddb0a6df1178c5099"
+    },
+    {
+      "bytes": 2621,
+      "path": "modules/jdk.m3.parser/jdk/m3/parser/grammar/M3GrammarParseTree.class",
+      "sha256": "555eedad2ff8d35443da0d9b7a31f99ec52e00fb79d1a21c0ff97e2ee36929c1"
+    },
+    {
+      "bytes": 3733,
+      "path": "modules/jdk.m3.parser/jdk/m3/parser/grammar/M3GrammarParser$BackStateSet.class",
+      "sha256": "760981085667a81c667e3a53e6cc631164b242c1460534c4905bec5542e49354"
+    },
+    {
+      "bytes": 2996,
+      "path": "modules/jdk.m3.parser/jdk/m3/parser/grammar/M3GrammarParser$TreeBuilder.class",
+      "sha256": "ad7ab5c760fc28f0832181c3866eb234ba28027e96f4db15d56bb44ef35e9857"
+    },
+    {
+      "bytes": 10419,
+      "path": "modules/jdk.m3.parser/jdk/m3/parser/grammar/M3GrammarParser.class",
+      "sha256": "2229343e14e717fc9787d2731ac772f03c6cac8fb590841823c0bde05b79dc6c"
+    },
+    {
+      "bytes": 2663,
+      "path": "modules/jdk.m3.parser/jdk/m3/parser/grammar/M3GrammarRecognizer$StateSet.class",
+      "sha256": "9ff64bcf697129500b41b34020fdb181cab3c89675f81e5d798c503ea886e11e"
+    },
+    {
+      "bytes": 7864,
+      "path": "modules/jdk.m3.parser/jdk/m3/parser/grammar/M3GrammarRecognizer.class",
+      "sha256": "1d367e51e2dbc653d30362f4a671e4f48b24fae937fda23524b7a0fe730549ed"
+    },
+    {
+      "bytes": 3543,
+      "path": "modules/jdk.m3.parser/jdk/m3/parser/grammar/M3GrammarRef.class",
+      "sha256": "2f90689d2b958940148dbe18efd1ef911bd202a914bc12194b55ad0296082a73"
+    },
+    {
+      "bytes": 2038,
+      "path": "modules/jdk.m3.parser/jdk/m3/parser/grammar/M3GrammarSource.class",
+      "sha256": "0fd5551af4970d6b2796829829ea54671ee34723d47b9e314bedf579f6a7520b"
+    },
+    {
+      "bytes": 1442,
+      "path": "modules/jdk.m3.parser/jdk/m3/parser/grammar/M3GrammarStrictness.class",
+      "sha256": "84750d5b471b7b84d02026537af75d4da62bb036264ac99121907d74872cc781"
+    },
+    {
+      "bytes": 1152,
+      "path": "modules/jdk.m3.parser/jdk/m3/parser/grammar/M3GrammarSymbolKind.class",
+      "sha256": "527e7cac8461d8cc8b418ff8e51fa90ad03af6c54df1bcb3aecd36f3603d2a24"
+    },
+    {
+      "bytes": 1912,
+      "path": "modules/jdk.m3.parser/jdk/m3/parser/grammar/M3GrammarTokenDispatch.class",
+      "sha256": "3dda510a8fab135b5f669ccd36427d351b1f534a423c9fffd0d60efdc572dc1b"
+    },
+    {
+      "bytes": 1678,
+      "path": "modules/jdk.m3.parser/jdk/m3/parser/grammar/M3GrammarValidation.class",
+      "sha256": "66aa73c90265a68e8800611394764c48dc9396d841f5a107ac27341ecbd661d7"
+    },
+    {
+      "bytes": 3055,
+      "path": "modules/jdk.m3.parser/jdk/m3/parser/grammar/M3LexerProfile$Builder.class",
+      "sha256": "1125cdbc208f07890cfe5696802431f7f9eab5b8df3174d61218f06301ce3fac"
+    },
+    {
+      "bytes": 5032,
+      "path": "modules/jdk.m3.parser/jdk/m3/parser/grammar/M3LexerProfile.class",
+      "sha256": "b6883be986fb80aeeed0a05232c5acec4675479dc6898a29710459a5bdbedce9"
+    },
+    {
+      "bytes": 1107,
+      "path": "modules/jdk.m3.parser/jdk/m3/parser/grammar/M3LiteralCase.class",
+      "sha256": "d728c393ab90ee5766c98339ece45a986c91675eafaa3c969284876d3e9fcb01"
+    },
+    {
+      "bytes": 1633,
+      "path": "modules/jdk.m3.parser/jdk/m3/parser/grammar/M3TokenClass.class",
+      "sha256": "6ca0e0f866562f259647d0a8242c1bcef1ab10d134966ecb8d826a242b608c14"
+    },
+    {
+      "bytes": 3066,
+      "path": "modules/jdk.m3.parser/jdk/m3/parser/grammar/M3TokenStream.class",
+      "sha256": "2112ed4b73775594f7f07d5dd5f52d00731c952fa452dd80ee0c4741a9a6a3d4"
+    },
+    {
+      "bytes": 286,
+      "path": "modules/jdk.m3.parser/module-info.class",
+      "sha256": "3a2326f3252efed33043c43a29274ca7ee4e3c98b334bea44012fdab5da08bad"
+    },
+    {
+      "bytes": 364,
+      "path": "test-classes/jdk/m3/jackson/M3AST.class",
+      "sha256": "dfe5420ca880d45e62e74455b526629b3ccc0fcdeeb91912476f1623ea6a323d"
+    },
+    {
+      "bytes": 649,
+      "path": "test-classes/jdk/m3/jackson/M3ASTAtom.class",
+      "sha256": "99b0af631b223a4d59496022c913ef5d9f4bae370e7bd068be3bd89acdc11142"
+    },
+    {
+      "bytes": 2408,
+      "path": "test-classes/jdk/m3/parser/test/M3ASTDetailsContract$1.class",
+      "sha256": "52107e4ed01ac58a3e07c05b4da42d0b786ed59b2f7208757f5a4d6c966eb67e"
+    },
+    {
+      "bytes": 785,
+      "path": "test-classes/jdk/m3/parser/test/M3ASTDetailsContract$2.class",
+      "sha256": "b7e9ed27d0df28617b0c21db7915554571d125519c8cd398c9b2f6750a2b65e4"
+    },
+    {
+      "bytes": 393,
+      "path": "test-classes/jdk/m3/parser/test/M3ASTDetailsContract$Action.class",
+      "sha256": "033e5673b0a5e6f4626d440a8b17ef565b81bfda10b28cfaaded91c7b448fb4b"
+    },
+    {
+      "bytes": 562,
+      "path": "test-classes/jdk/m3/parser/test/M3ASTDetailsContract$ActionWithTree.class",
+      "sha256": "9a846397466eaf03531159b2bce81f5bb592147b5ef05c9a2b95d184a8053f3e"
+    },
+    {
+      "bytes": 2003,
+      "path": "test-classes/jdk/m3/parser/test/M3ASTDetailsContract$Captured.class",
+      "sha256": "7152bc8dd99c7c3b49f98105e0956a1fda5664e299a732bdc90a02b56f6b210b"
+    },
+    {
+      "bytes": 1631,
+      "path": "test-classes/jdk/m3/parser/test/M3ASTDetailsContract$Row.class",
+      "sha256": "9b74b2ddf3c019dd14e4261305f4ad254eebdc804b10847d6b9171c9b9bfb460"
+    },
+    {
+      "bytes": 856,
+      "path": "test-classes/jdk/m3/parser/test/M3ASTDetailsContract$Source.class",
+      "sha256": "759a4a25a945576852cc6d2e96c7fcfd7647e88a60c75241682083a360881b50"
+    },
+    {
+      "bytes": 28299,
+      "path": "test-classes/jdk/m3/parser/test/M3ASTDetailsContract.class",
+      "sha256": "3ee15f5d2394202d7a4c1c27653c594bc6cf7904ec0d79c4ad60b0670e5cd269"
+    },
+    {
+      "bytes": 1060,
+      "path": "test-classes/jdk/m3/parser/test/M3ASTIndexProjectionContract$1.class",
+      "sha256": "dffe36db74e5eb82be49f93e5886058c39f890662cabfe83342c73d2691863dd"
+    },
+    {
+      "bytes": 2447,
+      "path": "test-classes/jdk/m3/parser/test/M3ASTIndexProjectionContract$2.class",
+      "sha256": "36b3578c436e6aca5215cc058aacb8d070ecadceee983e59406fab6f4af35ad8"
+    },
+    {
+      "bytes": 2425,
+      "path": "test-classes/jdk/m3/parser/test/M3ASTIndexProjectionContract$3.class",
+      "sha256": "f6949b485670d07d4ef30d18affb99c88cef2a6d9a2fe306cb46ce86c4809132"
+    },
+    {
+      "bytes": 417,
+      "path": "test-classes/jdk/m3/parser/test/M3ASTIndexProjectionContract$Action.class",
+      "sha256": "31780463c288ec15353e1ade4e0808943ca2c63e7a99628bd4a502595b72304a"
+    },
+    {
+      "bytes": 926,
+      "path": "test-classes/jdk/m3/parser/test/M3ASTIndexProjectionContract$Source.class",
+      "sha256": "ed9a7771760053859b632f7ef88ec0f64e9d3e0beb9dc43bd2907c32a4a9858b"
+    },
+    {
+      "bytes": 13689,
+      "path": "test-classes/jdk/m3/parser/test/M3ASTIndexProjectionContract.class",
+      "sha256": "977bd9c1cfda3349f20732fdfa4a9ba947872872be9547fdc37345e2f83a9dc3"
+    },
+    {
+      "bytes": 404,
+      "path": "test-classes/jdk/m3/parser/test/M3CrossFrontendContract$Checked.class",
+      "sha256": "ffffe2c8dd13e5240e238822667bf105931d4c4b1f9bf3d58ea35de8e821418b"
+    },
+    {
+      "bytes": 13945,
+      "path": "test-classes/jdk/m3/parser/test/M3CrossFrontendContract.class",
+      "sha256": "ac1b6f181caca11dcec384c05789929004a79f940d95b06f1bcfd4a734a93615"
+    },
+    {
+      "bytes": 774,
+      "path": "test-classes/jdk/m3/parser/test/M3FactsWriterContract$1.class",
+      "sha256": "75b817c631e4336caaf6c9eb98b82866e5bf7dc85ea84f67a528f74a64ca87ee"
+    },
+    {
+      "bytes": 1302,
+      "path": "test-classes/jdk/m3/parser/test/M3FactsWriterContract$2.class",
+      "sha256": "5465384b093fa9c558a8bbe8d47d95dd09cb97a2d1dba3cdeda864d15b597bed"
+    },
+    {
+      "bytes": 993,
+      "path": "test-classes/jdk/m3/parser/test/M3FactsWriterContract$3.class",
+      "sha256": "8c37e7844402daaae506e1fcf40b93e6e3fbf5a6dd59452d5229390a79c01161"
+    },
+    {
+      "bytes": 398,
+      "path": "test-classes/jdk/m3/parser/test/M3FactsWriterContract$Checked.class",
+      "sha256": "c55282bfda483b12b6c96974ab783ebbb460ea683d078077432684eac048a79d"
+    },
+    {
+      "bytes": 29683,
+      "path": "test-classes/jdk/m3/parser/test/M3FactsWriterContract.class",
+      "sha256": "79d3c58d7f47a4f810db9f49bee9a58a5928f4c24eef65ad458edd6c5125d295"
+    },
+    {
+      "bytes": 1402,
+      "path": "test-classes/jdk/m3/parser/test/M3FileInputContract$1.class",
+      "sha256": "0c7a917129f100b1752708f12ad2270f73fb433a8a38406b8ec2d23d49d9df1a"
+    },
+    {
+      "bytes": 404,
+      "path": "test-classes/jdk/m3/parser/test/M3FileInputContract$CheckedAction.class",
+      "sha256": "3ed2e8b347ddb4e5c97588b1fb3076a2c924db639136013e84252767e14f03f8"
+    },
+    {
+      "bytes": 2027,
+      "path": "test-classes/jdk/m3/parser/test/M3FileInputContract$TrackedInput.class",
+      "sha256": "a9cd823671a9a2b49bb439854b4ae1819f2b3b92009dba242964d6ba5fea5533"
+    },
+    {
+      "bytes": 16725,
+      "path": "test-classes/jdk/m3/parser/test/M3FileInputContract.class",
+      "sha256": "7bd6705356a5033943ab45be393b383d3d78c8d13613d0d8ffcd9b1f99fa15c6"
+    },
+    {
+      "bytes": 1013,
+      "path": "test-classes/jdk/m3/parser/test/M3JavacParserContract$1.class",
+      "sha256": "17ba92c7d713cba6ae913ca5e15f33039a5bf19845f2451b674a108de7695a30"
+    },
+    {
+      "bytes": 2174,
+      "path": "test-classes/jdk/m3/parser/test/M3JavacParserContract$2$1.class",
+      "sha256": "1fdd47040c45c79ccd342001fdb53f85ab19679cba99f29421ee24b074238cc7"
+    },
+    {
+      "bytes": 2864,
+      "path": "test-classes/jdk/m3/parser/test/M3JavacParserContract$2.class",
+      "sha256": "ad82aaae66020979e59cfe293569237950f0e70bea117bcbc79bf64fac93b5d3"
+    },
+    {
+      "bytes": 1061,
+      "path": "test-classes/jdk/m3/parser/test/M3JavacParserContract$3.class",
+      "sha256": "a1514f0b1f2a79bf4bb2120bb9c3e1d6594b6ad6afca26684f464cad57e44312"
+    },
+    {
+      "bytes": 2416,
+      "path": "test-classes/jdk/m3/parser/test/M3JavacParserContract$4.class",
+      "sha256": "82b1e79973f389af3372974b1813fe5e055320de2cec5b8f82654fc54eb4eae9"
+    },
+    {
+      "bytes": 402,
+      "path": "test-classes/jdk/m3/parser/test/M3JavacParserContract$Operation.class",
+      "sha256": "c358cbe18e6014ac35e4cc5ac96e4b796c25d4533cd0fd1cd72eee1fc4ab55c8"
+    },
+    {
+      "bytes": 1779,
+      "path": "test-classes/jdk/m3/parser/test/M3JavacParserContract$Row.class",
+      "sha256": "c9902246e618eb0e8154ff32757e792241489442764847010b8201d6726a479e"
+    },
+    {
+      "bytes": 1377,
+      "path": "test-classes/jdk/m3/parser/test/M3JavacParserContract$Source.class",
+      "sha256": "2f6a02cfe1e388eaaade2abef1a279f5263694d634fc9b303640a5c6af3dcca5"
+    },
+    {
+      "bytes": 16228,
+      "path": "test-classes/jdk/m3/parser/test/M3JavacParserContract.class",
+      "sha256": "b0d9d6d3f9c97b580880aa090fd0e0a0a7aa41b14230542ab1ee8827f2ea20de"
+    },
+    {
+      "bytes": 6233,
+      "path": "test-classes/jdk/m3/parser/test/M3ParserFixtures.class",
+      "sha256": "06523a910af5cafbd46ec01fff23b1701ebecbe1f53e86e4dd884165e2a4b563"
+    },
+    {
+      "bytes": 414,
+      "path": "test-classes/jdk/m3/parser/test/M3ParserFrameworkContract$Operation.class",
+      "sha256": "e82619628f6e3de2b3bfd68f4268a1daf5bfde6e28f6e8f1bbd00de1b7763629"
+    },
+    {
+      "bytes": 22453,
+      "path": "test-classes/jdk/m3/parser/test/M3ParserFrameworkContract.class",
+      "sha256": "ed285cd41467bde125ccdbb975fa64b6c59fa6ba3a9320c49064df654c6e1235"
+    },
+    {
+      "bytes": 757,
+      "path": "test-classes/jdk/m3/parser/test/M3ParserImageSmoke$1.class",
+      "sha256": "7d4286d12dea2f89b97292ae82d10a3191a5cc32586a06d921b29f5ec84fe0d8"
+    },
+    {
+      "bytes": 5685,
+      "path": "test-classes/jdk/m3/parser/test/M3ParserImageSmoke.class",
+      "sha256": "82daf668a29591e665ee66ba049a1d862b96249d9b206b3e6f4eebbf09955cbd"
+    },
+    {
+      "bytes": 1669,
+      "path": "test-classes/org/eclipse/jdt/core/dom/ASTNode.class",
+      "sha256": "cb3ec481e467781e2dd20525258c330c2dfe897f7dfbc4a27a65461b1fd94d5a"
+    },
+    {
+      "bytes": 249,
+      "path": "test-classes/org/eclipse/jdt/core/dom/CompilationUnit.class",
+      "sha256": "03e1464bc137e022a19106776355d8ddb7cb0373967a32d8e0ae4e464d4b8ddd"
+    },
+    {
+      "bytes": 235,
+      "path": "test-classes/org/eclipse/jdt/core/dom/NameNode.class",
+      "sha256": "4d8a4cef3b53d02d568b592478e08256abbf9403582c12f5e211aa2d0dbefa4e"
+    },
+    {
+      "bytes": 402,
+      "path": "test-classes/org/eclipse/jdt/core/dom/StructuralPropertyDescriptor.class",
+      "sha256": "fed3bdc62a3d1644f5128933157ee44f26dfedb9dc85ab1ee4341f972e8fe9b7"
+    }
+  ],
+  "input_sha256": "f481be732b094cc7906147d2096a0b1f2196e6c2b8d5427d6af804ca3fc69648",
+  "phase": "compile",
+  "previous_receipt_sha256": "3fbd2a4be5dfd6b84b4b381c8aa961d9fb0b8e35f0d9ff3438000aea60cde8a0",
+  "schema": "M3_PARSER_PHASE_RECEIPT_V1",
+  "status": "PASS"
+}

@@ -2,13 +2,34 @@
 // SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
 package jdk.m3.parser;
 
+import com.sun.source.tree.BlockTree;
+import com.sun.source.tree.BreakTree;
+import com.sun.source.tree.ClassTree;
+import com.sun.source.tree.CompilationUnitTree;
+import com.sun.source.tree.ContinueTree;
+import com.sun.source.tree.IdentifierTree;
+import com.sun.source.tree.LabeledStatementTree;
+import com.sun.source.tree.LiteralTree;
+import com.sun.source.tree.MemberReferenceTree;
+import com.sun.source.tree.MemberSelectTree;
+import com.sun.source.tree.MethodTree;
+import com.sun.source.tree.ModifiersTree;
+import com.sun.source.tree.Tree;
+import com.sun.source.tree.TypeParameterTree;
+import com.sun.source.tree.VariableTree;
+import com.sun.source.util.SourcePositions;
+import com.sun.source.util.TreeScanner;
+import com.sun.source.util.Trees;
 import java.io.IOException;
 import java.io.StringReader;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
+import javax.lang.model.element.Modifier;
+import javax.lang.model.element.Name;
 import javax.xml.XMLConstants;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -43,6 +64,198 @@ public final class M3ASTIngress {
     }
 
     private M3ASTIngress() { }
+
+    /**
+     * Detach occurrences from an existing javac tree; no compiler, parse, print,
+     * attribution or source-file read is performed. The caller owns the tree's
+     * lifetime and must prevent concurrent mutation. URI/length equality cannot
+     * establish that the supplied source was the parser input, so this public
+     * ingress always retains SOURCE_UNVERIFIED. Exact known positions describe
+     * geometry only. The event-owned M3JavacParser index projection additionally
+     * has the compiler's exact input seal and can certify that source binding.
+     */
+    public static M3ASTIndex javac(M3File source, CompilationUnitTree root, Trees trees, Limits limits) {
+        return javac(source, root, Objects.requireNonNull(trees, "trees").getSourcePositions(), limits);
+    }
+
+    /** Supplied-tree variant for an existing public SourcePositions owner. */
+    public static M3ASTIndex javac(M3File source, CompilationUnitTree root, SourcePositions positions, Limits limits) {
+        return javac(source, root, positions, limits, false);
+    }
+
+    /* Only the existing compiler event projection establishes this source binding. */
+    static M3ASTIndex javacSealed(M3File source, CompilationUnitTree root, SourcePositions positions, Limits limits) {
+        return javac(source, root, positions, limits, true);
+    }
+
+    private static M3ASTIndex javac(M3File source, CompilationUnitTree root, SourcePositions positions,
+                                  Limits limits, boolean sealedSource) {
+        check(source, limits);
+        Objects.requireNonNull(root, "original compilation unit");
+        Objects.requireNonNull(positions, "source positions");
+        M3ASTIndex.Builder output = M3ASTIndex.builder(source, M3ASTIndex.Domain.JAVAC, limits.maxNodes());
+        SourceLines lines = new SourceLines(source);
+        int capacity = Math.min(32, limits.maxNodes());
+        Tree[] pending = new Tree[capacity];
+        int[] parents = new int[capacity], depths = new int[capacity];
+        int[] types = new int[capacity], executables = new int[capacity];
+        pending[0] = root; parents[0] = -1; depths[0] = 1; types[0] = executables[0] = -1;
+        int size = 1, appended = 0;
+        DirectChildren children = new DirectChildren();
+        while (size > 0) {
+            Tree node = pending[--size];
+            pending[size] = null;
+            int parent = parents[size], depth = depths[size], type = types[size], executable = executables[size];
+            if (depth > limits.maxDepth()) throw new IllegalArgumentException("javac depth budget exceeded");
+            int start = javacOffset(positions.getStartPosition(root, node), source.length());
+            int end = javacOffset(positions.getEndPosition(root, node), source.length());
+            if (start < 0 || end < 0) start = end = -1;
+            int flags = M3ASTIndex.SYNTAX_ONLY | (sealedSource ? 0 : M3ASTIndex.SOURCE_UNVERIFIED);
+            if (start >= 0) flags |= M3ASTIndex.EXACT_RANGE;
+            if (node.getKind() == Tree.Kind.ERRONEOUS) flags |= M3ASTIndex.RECOVERED;
+            int row = output.add(parent, node.getKind().name(), start, end, flags);
+            appended++;
+            M3ASTIndex.LiteralKind literal = literalKind(node);
+            output.details(row, start < 0 ? -1 : lines.line(start), end < 0 ? -1 : lines.line(end),
+                    javacName(node), literal, literalValue(node, literal), javacModifiers(node), type, executable);
+            int childType = node instanceof ClassTree ? row : type;
+            int childExecutable = node instanceof MethodTree || node.getKind() == Tree.Kind.LAMBDA_EXPRESSION ? row : executable;
+            children.reset(limits.maxNodes() - appended - size);
+            node.accept(children, null);
+            if (!children.nodes.isEmpty() && depth == limits.maxDepth()) {
+                throw new IllegalArgumentException("javac depth budget exceeded");
+            }
+            for (int i = children.nodes.size() - 1; i >= 0; i--) {
+                if (size == pending.length) {
+                    int grown = (int) Math.min(limits.maxNodes(), pending.length + (long) (pending.length >>> 1) + 1L);
+                    if (grown <= size) throw new IllegalArgumentException("javac node budget exceeded");
+                    pending = Arrays.copyOf(pending, grown); parents = Arrays.copyOf(parents, grown);
+                    depths = Arrays.copyOf(depths, grown); types = Arrays.copyOf(types, grown);
+                    executables = Arrays.copyOf(executables, grown);
+                }
+                pending[size] = children.nodes.get(i); parents[size] = row; depths[size] = depth + 1;
+                types[size] = childType; executables[size++] = childExecutable;
+            }
+            children.nodes.clear();
+        }
+        return output.seal();
+    }
+
+    /** Optional real-J ingress; the core module has no OpenRewrite dependency. */
+    public static M3ASTIndex openrewriteJ(M3File source, Object root, Limits limits) {
+        check(source, limits);
+        Objects.requireNonNull(root, "original OpenRewrite J compilation unit");
+        try {
+            ClassLoader loader = root.getClass().getClassLoader();
+            Class<?> treeType = Class.forName("org.openrewrite.java.tree.J$CompilationUnit", false, loader);
+            if (!treeType.isInstance(root)) throw new IllegalArgumentException("not an OpenRewrite J.CompilationUnit");
+            Class<?> provider = Class.forName("jdk.m3.parser.openrewrite.M3OpenRewriteIngress", true, loader);
+            Method ingress = provider.getMethod("openrewriteJ", M3File.class, treeType, Limits.class);
+            return (M3ASTIndex) ingress.invoke(null, source, root, limits);
+        } catch (InvocationTargetException failure) {
+            if (failure.getCause() instanceof RuntimeException runtime) throw runtime;
+            if (failure.getCause() instanceof Error error) throw error;
+            throw new IllegalArgumentException("OpenRewrite ingress failed", failure.getCause());
+        } catch (ReflectiveOperationException failure) {
+            throw new IllegalArgumentException("optional OpenRewrite ingress is unavailable/incompatible", failure);
+        }
+    }
+
+    private static int javacOffset(long offset, int sourceLength) {
+        if (offset == -1) return -1;
+        if (offset < 0 || offset > sourceLength) throw new IllegalArgumentException("javac position outside supplied UTF-16 source");
+        return (int) offset;
+    }
+
+    private static final class DirectChildren extends TreeScanner<Void, Void> {
+        final ArrayList<Tree> nodes = new ArrayList<>();
+        private int remaining;
+        void reset(int remaining) { nodes.clear(); this.remaining = remaining; }
+        @Override public Void scan(Tree node, Void ignored) {
+            if (node != null) {
+                if (nodes.size() == remaining) throw new IllegalArgumentException("javac node budget exceeded");
+                nodes.add(node);
+            }
+            return null;
+        }
+    }
+
+    private static final class SourceLines {
+        private int[] starts = new int[32];
+        private int count = 1;
+        SourceLines(M3File source) {
+            for (int i = 0; i < source.length(); i++) {
+                char c = source.charAt(i);
+                if (c == '\n' || (c == '\r' && (i + 1 == source.length() || source.charAt(i + 1) != '\n'))) {
+                    if (count == starts.length) starts = Arrays.copyOf(starts, Math.addExact(count, (count >>> 1) + 1));
+                    starts[count++] = i + 1;
+                }
+            }
+        }
+        int line(int offset) {
+            int position = Arrays.binarySearch(starts, 0, count, offset);
+            return position >= 0 ? position + 1 : -position - 1;
+        }
+    }
+
+    private static String javacName(Tree node) {
+        Name name;
+        if (node instanceof ClassTree type) name = type.getSimpleName();
+        else if (node instanceof MethodTree method) name = method.getName();
+        else if (node instanceof VariableTree variable) name = variable.getName();
+        else if (node instanceof IdentifierTree identifier) name = identifier.getName();
+        else if (node instanceof MemberSelectTree member) name = member.getIdentifier();
+        else if (node instanceof MemberReferenceTree member) name = member.getName();
+        else if (node instanceof TypeParameterTree parameter) name = parameter.getName();
+        else if (node instanceof LabeledStatementTree labeled) name = labeled.getLabel();
+        else if (node instanceof BreakTree jump) name = jump.getLabel();
+        else if (node instanceof ContinueTree jump) name = jump.getLabel();
+        else name = null;
+        return name == null ? null : name.toString();
+    }
+
+    private static long javacModifiers(Tree node) {
+        ModifiersTree modifiers;
+        if (node instanceof ClassTree type) modifiers = type.getModifiers();
+        else if (node instanceof MethodTree method) modifiers = method.getModifiers();
+        else if (node instanceof VariableTree variable) modifiers = variable.getModifiers();
+        else if (node instanceof ModifiersTree value) modifiers = value;
+        else modifiers = null;
+        long bits = 0;
+        if (modifiers != null) for (Modifier modifier : modifiers.getFlags()) bits |= M3ASTIndex.modifierBit(modifier);
+        if (node.getKind() == Tree.Kind.INTERFACE || node.getKind() == Tree.Kind.ANNOTATION_TYPE) bits |= M3ASTIndex.INTERFACE;
+        if (node instanceof BlockTree block && block.isStatic()) bits |= M3ASTIndex.STATIC;
+        return bits;
+    }
+
+    private static M3ASTIndex.LiteralKind literalKind(Tree node) {
+        return switch (node.getKind()) {
+            case NULL_LITERAL -> M3ASTIndex.LiteralKind.NULL;
+            case BOOLEAN_LITERAL -> M3ASTIndex.LiteralKind.BOOLEAN;
+            case CHAR_LITERAL -> M3ASTIndex.LiteralKind.CHAR;
+            case STRING_LITERAL -> M3ASTIndex.LiteralKind.STRING;
+            case INT_LITERAL -> M3ASTIndex.LiteralKind.INT;
+            case LONG_LITERAL -> M3ASTIndex.LiteralKind.LONG;
+            case FLOAT_LITERAL -> M3ASTIndex.LiteralKind.FLOAT;
+            case DOUBLE_LITERAL -> M3ASTIndex.LiteralKind.DOUBLE;
+            default -> M3ASTIndex.LiteralKind.NONE;
+        };
+    }
+
+    private static String literalValue(Tree node, M3ASTIndex.LiteralKind kind) {
+        if (kind == M3ASTIndex.LiteralKind.NONE || kind == M3ASTIndex.LiteralKind.NULL) return null;
+        Object value = ((LiteralTree) node).getValue();
+        return switch (kind) {
+            case BOOLEAN -> Boolean.toString((Boolean) value);
+            case CHAR -> Character.toString((Character) value);
+            case STRING -> (String) value;
+            case INT -> Integer.toString((Integer) value);
+            case LONG -> Long.toString((Long) value);
+            case FLOAT -> Integer.toUnsignedString(Float.floatToRawIntBits((Float) value));
+            case DOUBLE -> Long.toUnsignedString(Double.doubleToRawLongBits((Double) value));
+            case NONE, NULL -> throw new AssertionError("non-value literal");
+        };
+    }
 
     /** Secure, complete POM XML parsing; exact element byte offsets are unavailable. */
     public static M3ASTIndex mavenPom(M3File source, Limits limits) throws IOException {

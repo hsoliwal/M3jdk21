@@ -71,6 +71,61 @@ public final class M3File implements CharSequence {
         return new M3File(path.toAbsolutePath().normalize().toUri(), text, byteHash);
     }
 
+    /**
+     * Read an existing input once and retain its supplied source URI exactly.
+     * This method takes ownership of a nonnull input and closes it exactly once,
+     * including when URI, charset or byte-budget validation fails. The caller
+     * must not separately close the transferred input.
+     *
+     * <p>At most {@code maxBytes + 1} bytes are consumed; the extra byte detects
+     * an oversized source. Successful input reaches EOF within the budget.
+     * As with the Path reader, input close precedes size validation and strict
+     * decoding. The selected charset owns BOM handling. Malformed or unmappable
+     * data is refused without replacement-character recovery. A close failure
+     * prevents a source result; read/setup failures retain distinct close
+     * failures as suppressed evidence without suppressing themselves.</p>
+     *
+     * <p>The raw byte and exact UTF-16 identities describe the admitted byte
+     * sequence and its decoded String. No source is reopened, and this method
+     * does not establish an atomic filesystem snapshot.</p>
+     */
+    public static M3File read(URI uri, InputStream input, Charset charset, int maxBytes) throws IOException {
+        Objects.requireNonNull(input, "input");
+        byte[] bytes;
+        Throwable primary = null;
+        try {
+            Objects.requireNonNull(uri, "uri");
+            Objects.requireNonNull(charset, "charset");
+            if (maxBytes < 0 || maxBytes > Integer.MAX_VALUE - 8) {
+                throw new IllegalArgumentException("maxBytes outside supported array bounds");
+            }
+            bytes = input.readNBytes(maxBytes + 1);
+        } catch (IOException | RuntimeException | Error failure) {
+            primary = failure;
+            throw failure;
+        } finally {
+            try {
+                input.close();
+            } catch (IOException | RuntimeException | Error cleanup) {
+                if (primary == null) {
+                    throw cleanup;
+                }
+                if (primary != cleanup) {
+                    primary.addSuppressed(cleanup);
+                }
+            }
+        }
+        if (bytes.length > maxBytes) {
+            throw new IOException("source exceeds maxBytes=" + maxBytes + ": " + uri);
+        }
+        String text = charset.newDecoder()
+                .onMalformedInput(CodingErrorAction.REPORT)
+                .onUnmappableCharacter(CodingErrorAction.REPORT)
+                .decode(ByteBuffer.wrap(bytes)).toString();
+        String byteHash = HexFormat.of().formatHex(sha256().digest(bytes));
+        return new M3File(uri, text, byteHash);
+    }
+
     public URI uri() { return uri; }
     public String text() { return text; }
 
