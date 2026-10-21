@@ -1,0 +1,16 @@
+{
+  "content": [
+    {
+      "type": "text",
+      "text": "Action completed."
+    }
+  ],
+  "structuredContent": {
+    "content": "# path\tbefore-sha256\tafter-sha256\ttemplate\nm3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java\t77ef7d6197ef936f5ae9f62c35accf2f5f3ff690dcc55ca3fd4d8f545a007545\t7bf939ea374ce6c0b13c403f5e154c0f8d376f9cddb8e623cf00ef299183a77e\tM3LongIndexProjection.java.txt\n",
+    "encoding": "utf-8",
+    "sha": "392b386030bdb0d999d05038474365e24d2b8b44",
+    "display_url": "https://github.com/hsoliwal/com.synexia/blob/528aaf79cfae79c5dbfe7c307340329d320e8c44/synexia-openrewrite-recipes/recipe-crates/m3-wrapper-convergence-20261018/recipe-host/passes/stable-order-groups/resources/com/synexia/rewrite/hash-pinned-java/m3-wrapper-stable-order-groups/manifest.tsv",
+    "display_title": "manifest.tsv"
+  },
+  "isError": false
+}
