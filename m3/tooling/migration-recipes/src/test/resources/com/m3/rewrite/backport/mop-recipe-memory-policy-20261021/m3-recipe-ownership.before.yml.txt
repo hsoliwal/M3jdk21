@@ -1,0 +1,33 @@
+name: M3 recipe ownership
+
+on:
+  push:
+    branches:
+      - "m3/recipe-ownership-*"
+    paths:
+      - "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/**"
+      - "m3/docs/synexia-recipe-ownership-classification.tsv"
+      - "m3/runtime-integration/verify-recipe-ownership.py"
+      - ".github/workflows/m3-recipe-ownership.yml"
+  pull_request:
+    paths:
+      - "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/**"
+      - "m3/docs/synexia-recipe-ownership-classification.tsv"
+      - "m3/runtime-integration/verify-recipe-ownership.py"
+      - ".github/workflows/m3-recipe-ownership.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  classify:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Verify every M3JDK21 recipe owner
+        run: python3 m3/runtime-integration/verify-recipe-ownership.py
