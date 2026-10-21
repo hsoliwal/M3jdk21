@@ -1,0 +1,17 @@
+scope	disposition
+All JDK collection owners	NOT_ESTABLISHED_BY_THIS_RUN
+Guava collection family	NOT_ESTABLISHED_BY_THIS_RUN
+Eclipse Collections family	NOT_ESTABLISHED_BY_THIS_RUN
+Apache Commons collection family	NOT_ESTABLISHED_BY_THIS_RUN
+Spring collection family	NOT_ESTABLISHED_BY_THIS_RUN
+Swift-derived collections	NOT_ESTABLISHED_BY_THIS_RUN
+PCollections and other persistent collections	NOT_ESTABLISHED_BY_THIS_RUN
+Other collection forks	NOT_ESTABLISHED_BY_THIS_RUN
+Graph collections	NOT_ESTABLISHED_BY_THIS_RUN
+Lazy and filtered/sorted/backed views	NOT_ESTABLISHED_BY_THIS_RUN
+Concurrent families and memory-model proofs	NOT_ESTABLISHED_BY_THIS_RUN
+All Java21 stream operators	NOT_ESTABLISHED_BY_THIS_RUN
+All-source LeetCoder dispatcher coverage	NOT_ESTABLISHED_BY_THIS_RUN
+Whole-tree atomization and patternization	NOT_ESTABLISHED_BY_THIS_RUN
+IOP validation and global consolidation	NOT_ESTABLISHED_BY_THIS_RUN
+Original module and source-built-JDK integration	NOT_ESTABLISHED_BY_THIS_RUN

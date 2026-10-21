@@ -1,0 +1,7 @@
+priority	owner	action	status
+P0	M3AlgorithmProgressSurfaceInventoryRecipe	Replace compilation-wide shared skip flag with complete per-source visitation	SOURCE_FINDING_UNPATCHED
+P0	M3AlgorithmProgressSurfaceInventoryRecipe	Inventory instance/default and implicit-public interface methods; include nested/inherited context	SOURCE_FINDING_UNPATCHED
+P0	M3AlgorithmProgressSurfaceInventoryRecipe	Use exact attributed monitor identity and typed parameter vectors	SOURCE_FINDING_UNPATCHED
+P0	M3AlgorithmProgressSurfaceInventoryRecipeTest	Assert complete exact table contents across multiple files and negative cases	SOURCE_FINDING_UNPATCHED
+P1	M3JDK21 all modules	Close actual module/method inventory and classify existing/candidate/excluded/unresolved families	NOT_RUN
+P1	Existing owner recipes	Qualify useful default/overload additions against source/binary/behavior fixtures	NOT_RUN

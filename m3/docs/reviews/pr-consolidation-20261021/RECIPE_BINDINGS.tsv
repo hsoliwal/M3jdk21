@@ -1,0 +1,7 @@
+purpose	repository	pr	existing_owner	source_namespace	target_namespace	observed_status
+rename	hsoliwal/com.synexia	12340	OpenRewrite ChangePackage; collections-package-import-rename-20261018	org.apache.commons.collections4	com.m3.collections.apache	OPEN_NOT_MERGEABLE
+rename	hsoliwal/com.synexia	12340	OpenRewrite ChangePackage; collections-package-import-rename-20261018	org.eclipse.collections	com.m3.collections.eclipse	OPEN_NOT_MERGEABLE
+rename	hsoliwal/com.synexia	12340	OpenRewrite ChangePackage; collections-package-import-rename-20261018	com.google.common	com.m3.collections.guava	OPEN_NOT_MERGEABLE
+rename	hsoliwal/com.synexia	12340	OpenRewrite ChangePackage; collections-package-import-rename-20261018	com.google.thirdparty	com.m3.collections.guava.thirdparty	OPEN_NOT_MERGEABLE
+first-party header	hsoliwal/com.synexia	12522	FirstPartyApacheHeaderRecipe	Explicitly admitted first-party files only	Preserve third-party/OpenJDK rights	MERGED_CURRENT_TREE_NOT_VERIFIED
+array refinement	hsoliwal/com.synexia	12427	m3-collections-contract-refinement-20261017 / collection-array-forks-20261019	Pinned original source epochs	Exact receiving postimages	OPEN_NOT_MERGEABLE

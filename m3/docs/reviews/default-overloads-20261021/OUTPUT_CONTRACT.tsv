@@ -1,0 +1,11 @@
+path	kind
+ACTION_QUEUE.tsv	task_contract_or_audit_metadata
+CONTRACT.md	task_contract_or_audit_metadata
+FINAL_REPORT.md	task_contract_or_audit_metadata
+OUTPUT_CONTRACT.tsv	task_contract_or_audit_metadata
+PROVENANCE.tsv	task_contract_or_audit_metadata
+RUN_CONTEXT.tsv	task_contract_or_audit_metadata
+SOURCE_MANIFEST.sha256	task_contract_or_audit_metadata
+STATUS.tsv	task_contract_or_audit_metadata
+TASK.json	task_contract_or_audit_metadata
+VERIFY_CONTRACT.tsv	task_contract_or_audit_metadata

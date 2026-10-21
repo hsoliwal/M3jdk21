@@ -1,0 +1,9 @@
+artifact	purpose
+FINAL_REPORT.md	Observed code, proposed optimization rules and limits
+ACTION_QUEUE.tsv	Family and operation evaluation matrix
+PROVENANCE.tsv	Source revision/blob and inspection extent
+EXTERNAL_REFERENCES.tsv	Primary contract and donor-pattern references
+STATUS.tsv	Execution versus proposal status
+RUN_CONTEXT.tsv	Scope and locks
+VERIFY_CONTRACT.tsv	Verification boundaries
+MANIFEST.sha256	Local artifact content hashes
