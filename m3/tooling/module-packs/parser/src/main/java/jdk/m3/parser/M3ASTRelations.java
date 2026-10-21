@@ -24,6 +24,7 @@ import java.util.function.IntConsumer;
  */
 public final class M3ASTRelations {
     private final M3ASTIndex index;
+    private volatile int[] kindCounts;
     private volatile KindPostings postings;
     private volatile StructuralClasses classes;
 
@@ -51,11 +52,10 @@ public final class M3ASTRelations {
         }
     }
 
-    /** O(1) kind count after one shared, lazy counting-sort index. */
+    /** O(1) repeat: the first count query retains only one int per kind. */
     public int countKind(String kind) {
         int id = kindId(Objects.requireNonNull(kind, "kind"));
-        KindPostings p = postings();
-        return id < 0 ? 0 : p.offsets[id + 1] - p.offsets[id];
+        return id < 0 ? 0 : counts()[id];
     }
 
     /**
@@ -147,16 +147,19 @@ public final class M3ASTRelations {
 
     /** Release only optional sidecars, never the original file or AST. */
     public synchronized void discardDerived() {
+        kindCounts = null;
         postings = null;
         classes = null;
     }
 
     /** Retained primitive array payload only, excluding M3AST/M3File and array headers. */
     public long retainedPrimitiveBytes() {
+        int[] counts = kindCounts;
         KindPostings p = postings;
         StructuralClasses c = classes;
         return Integer.BYTES * (
-                (p == null ? 0L : (long) p.rows.length + p.offsets.length)
+                (counts == null ? 0L : counts.length)
+                        + (p == null ? 0L : (long) p.rows.length + p.offsets.length)
                         + (c == null ? 0L : (long) c.classOf.length
                                 + c.representatives.length + c.multiplicities.length));
     }
@@ -168,20 +171,35 @@ public final class M3ASTRelations {
         return -1;
     }
 
+    private int[] counts() {
+        int[] found = kindCounts;
+        if (found == null) {
+            synchronized (this) {
+                found = kindCounts;
+                if (found == null) {
+                    found = new int[index.kindVocabularySize()];
+                    for (int row = 0; row < index.nodeCount(); row++) {
+                        found[index.kindOrdinal(row)]++;
+                    }
+                    kindCounts = found;
+                }
+            }
+        }
+        return found;
+    }
+
     private KindPostings postings() {
         KindPostings found = postings;
         if (found == null) {
             synchronized (this) {
                 found = postings;
                 if (found == null) {
-                    int kinds = index.kindVocabularySize();
+                    int[] histogram = counts();
+                    int kinds = histogram.length;
                     int n = index.nodeCount();
                     int[] offsets = new int[kinds + 1];
-                    for (int row = 0; row < n; row++) {
-                        offsets[index.kindOrdinal(row) + 1]++;
-                    }
-                    for (int id = 1; id <= kinds; id++) {
-                        offsets[id] = Math.addExact(offsets[id], offsets[id - 1]);
+                    for (int id = 0; id < kinds; id++) {
+                        offsets[id + 1] = Math.addExact(offsets[id], histogram[id]);
                     }
                     int[] cursor = Arrays.copyOf(offsets, kinds);
                     int[] rows = new int[n];
