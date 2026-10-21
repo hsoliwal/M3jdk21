@@ -1,4 +1,6 @@
 // SPDX-License-Identifier: Apache-2.0
+// SPDX-FileCopyrightText: 2026 Hitesh Soliwal and contributors
+// Modified 2026-10-21: cover mixed exact states and tampered-postimage refusal.
 package com.m3.rewrite.backport;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -50,6 +52,36 @@ class M3StringLeafCursorConvergenceRecipeTest {
 
     var second = recipe.run(new InMemoryLargeSourceSet(after), context(), 1);
     assertTrue(second.getChangeset().getAllResults().isEmpty());
+  }
+
+  @Test
+  void retainsPinnedPostimagesBesideARequiredPreimage() {
+    List<SourceFile> input = List.of(
+        java("src/java.base/share/classes/java/lang/M3StringPool.java",
+            resource("M3StringPool.after.java.txt")),
+        java("src/java.base/share/classes/java/lang/M3StringTokenRegex.java",
+            resource("M3StringTokenRegex.before.java.txt")),
+        java("src/java.base/share/classes/java/lang/M3StringLeafCursor.java",
+            resource("M3StringLeafCursor.java.txt")));
+    var run = new M3StringLeafCursorConvergenceRecipe()
+        .run(new InMemoryLargeSourceSet(input), context(), 1);
+    var changes = run.getChangeset().getAllResults();
+    assertEquals(1, changes.size());
+    assertEquals("src/java.base/share/classes/java/lang/M3StringTokenRegex.java",
+        normalized(changes.getFirst().getAfter().getSourcePath()));
+    assertEquals(resource("M3StringTokenRegex.after.java.txt"),
+        changes.getFirst().getAfter().printAll());
+  }
+
+  @Test
+  void refusesTamperedPostimage() {
+    List<SourceFile> input = List.of(
+        java("src/java.base/share/classes/java/lang/M3StringPool.java",
+            resource("M3StringPool.after.java.txt") + "// unreviewed change\n"),
+        java("src/java.base/share/classes/java/lang/M3StringTokenRegex.java",
+            resource("M3StringTokenRegex.after.java.txt")));
+    assertThrows(RuntimeException.class, () -> new M3StringLeafCursorConvergenceRecipe()
+        .run(new InMemoryLargeSourceSet(input), context(), 1));
   }
 
   @Test

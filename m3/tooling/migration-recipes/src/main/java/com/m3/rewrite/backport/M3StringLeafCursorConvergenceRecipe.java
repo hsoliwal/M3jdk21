@@ -1,5 +1,6 @@
 // SPDX-FileCopyrightText: 2026 Hitesh Soliwal and contributors
 // SPDX-License-Identifier: Apache-2.0
+// Modified 2026-10-21: retain exact sealed postimages at the recipe fixed point.
 package com.m3.rewrite.backport;
 
 import java.io.IOException;
@@ -64,7 +65,8 @@ public final class M3StringLeafCursorConvergenceRecipe
               inventory.conflicts.add("duplicate target " + path);
               return tree;
             }
-            if (target.required() && !gitBlobSha1(file.printAll()).equals(target.before())) {
+            String blob = gitBlobSha1(file.printAll());
+            if (target.required() && !blob.equals(target.before()) && !blob.equals(target.after())) {
               inventory.conflicts.add(
                   "preimage drift " + path + " actual=" + gitBlobSha1(file.printAll()));
             }
@@ -100,6 +102,7 @@ public final class M3StringLeafCursorConvergenceRecipe
         String path = file.getSourcePath().normalize().toString().replace('\\', '/');
         for (Target target : targets()) {
           if (target.required() && target.path().equals(path)) {
+            if (gitBlobSha1(file.printAll()).equals(target.after())) return file;
             return inventory.parsedAfter.get(path);
           }
         }

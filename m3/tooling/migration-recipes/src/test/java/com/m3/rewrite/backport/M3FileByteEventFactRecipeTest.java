@@ -1,7 +1,10 @@
 // SPDX-License-Identifier: Apache-2.0
+// SPDX-FileCopyrightText: 2026 Hitesh Soliwal and contributors
+// Modified 2026-10-21: cover mixed exact states and tampered-postimage refusal.
 package com.m3.rewrite.backport;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.IOException;
@@ -56,6 +59,34 @@ class M3FileByteEventFactRecipeTest {
 
     var second = recipe.run(new InMemoryLargeSourceSet(after), context(), 1);
     assertTrue(second.getChangeset().getAllResults().isEmpty());
+  }
+
+  @Test
+  void retainsPinnedPostimageBesideARequiredPreimage() {
+    List<SourceFile> input = List.of(
+        java("m3/ports/file/src/main/java/com/m3/file/M3FileStreamEvents.java",
+            resource("M3FileStreamEvents.after.java.txt")),
+        java("m3/ports/file/src/main/java/com/m3/file/M3FileStreamTasks.java",
+            resource("M3FileStreamTasks.before.java.txt")));
+    var run = new M3FileByteEventFactRecipe()
+        .run(new InMemoryLargeSourceSet(input), context(), 1);
+    var changes = run.getChangeset().getAllResults();
+    assertEquals(1, changes.size());
+    assertEquals("m3/ports/file/src/main/java/com/m3/file/M3FileStreamTasks.java",
+        changes.getFirst().getAfter().getSourcePath().toString());
+    assertEquals(resource("M3FileStreamTasks.after.java.txt"),
+        changes.getFirst().getAfter().printAll());
+  }
+
+  @Test
+  void refusesTamperedPostimage() {
+    List<SourceFile> input = List.of(
+        java("m3/ports/file/src/main/java/com/m3/file/M3FileStreamEvents.java",
+            resource("M3FileStreamEvents.after.java.txt") + "// unreviewed change\n"),
+        java("m3/ports/file/src/main/java/com/m3/file/M3FileStreamTasks.java",
+            resource("M3FileStreamTasks.after.java.txt")));
+    assertThrows(RuntimeException.class, () -> new M3FileByteEventFactRecipe()
+        .run(new InMemoryLargeSourceSet(input), context(), 1));
   }
 
   private static SourceFile java(String path, String source) {
