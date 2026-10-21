@@ -1,0 +1,15 @@
+{
+  "status": "PASS",
+  "native_variant": "PINNED_BASELINE_ONLY",
+  "sdk_java_main_sources": 282,
+  "native_translation_units": 12,
+  "shared_libraries": 11,
+  "generated_jni_headers": 12,
+  "model_log": "qualification/native-baseline/model-ubsan-baseline.log",
+  "model_log_sha256": "9950133d514594a05b144ebb0a7c21d8b77bb1183c20a82e00a21b791f565546",
+  "cxx_scope": "generated-header types and C-linkage consumer; product source compiled as C17",
+  "actual_jvm_native_contracts": "NOT_RUN_IN_THIS_STAGE",
+  "candidate_compilation": "NOT_RUN; awaits root after three integrated Java file passes",
+  "full_current_source_integrated_image": "NOT_RUN",
+  "owning_maven_lifecycle": "NOT_RUN; separate gate"
+}

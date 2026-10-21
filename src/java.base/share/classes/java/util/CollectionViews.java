@@ -296,7 +296,10 @@ public final class CollectionViews {
 
         @Override
         public boolean isEmpty() {
-            return !iterator().hasNext();
+            for (E element : backing) {
+                if (visible(element)) return false;
+            }
+            return true;
         }
 
         @Override

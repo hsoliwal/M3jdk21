@@ -2,6 +2,7 @@
  * Copyright 2026 Hitesh Soliwal and contributors.
  * SPDX-License-Identifier: Apache-2.0
  * Recipe-generated M3 primitive index operations.
+ * Modified 2026: detached output copies and exclusively owned coordinate remapping.
  */
 package com.m3.collections;
 
@@ -42,28 +43,31 @@ public final class M3ArrayifiedIndexOps {
 
     /**
      * Rotate only a detached index window; negative distance rotates left.
-     * Reversal-based O(n) time, O(1) auxiliary memory besides output.
+     * Two-copy O(n) rotation, O(1) auxiliary memory besides the detached output.
      * The original source, physical payload and aligned physical state remain
      * untouched. The result is detached even when distance is a multiple of n.
      */
     public static int[] rotated(int[] rows, int from, int to, int distance) {
         Objects.requireNonNull(rows, "rows");
         Objects.checkFromToIndex(from, to, rows.length);
-        int[] result = Arrays.copyOfRange(rows, from, to);
-        if (result.length < 2) return result;
-        int shift = Math.floorMod(distance, result.length);
-        if (shift != 0) {
-            reverse(result, 0, result.length);
-            reverse(result, 0, shift);
-            reverse(result, shift, result.length);
-        }
-        return result;
+        int length = to - from;
+        if (length < 2) return Arrays.copyOfRange(rows, from, to);
+        int shift = Math.floorMod(distance, length);
+        if (shift == 0) return Arrays.copyOfRange(rows, from, to);
+        return copyRotatedWindow(rows, from, length, shift);
     }
 
-    private static void reverse(int[] values, int from, int to) {
-        for (int left = from, right = to - 1; left < right; left++, right--) {
-            int save = values[left]; values[left] = values[right]; values[right] = save;
-        }
+    /**
+     * Materialize a detached rotation by joining the suffix and prefix once.
+     * Caller has checked the window and normalized shift into (0,length).
+     * Each source occurrence is copied once; no in-place reversal is needed.
+     */
+    private static int[] copyRotatedWindow(int[] rows, int from, int length, int shift) {
+        int[] output = new int[length];
+        int prefix = length - shift;
+        System.arraycopy(rows, from + prefix, output, 0, shift);
+        System.arraycopy(rows, from, output, shift, prefix);
+        return output;
     }
 
     /**
@@ -99,11 +103,7 @@ public final class M3ArrayifiedIndexOps {
             }
             int[] positions = M3IndexMaskCompactor.selectPositions(
                     accepted, 1, M3IndexMaskCompactor.Backend.NATIVE_REQUIRED);
-            int[] result = new int[positions.length];
-            for (int i = 0; i < result.length; i++) {
-                result[i] = rows[from + Objects.checkIndex(positions[i], length)];
-            }
-            return result;
+            return remapOwnedPositions(rows, from, length, positions);
         }
         if (required == 0 && excluded == 0) return Arrays.copyOfRange(rows, from, to);
         if ((required & excluded) != 0) return new int[0];
@@ -123,6 +123,18 @@ public final class M3ArrayifiedIndexOps {
         }
         if (write != count) throw new ConcurrentModificationException("mask changed during selection");
         return result;
+    }
+
+    /**
+     * Reuse only the fresh, detached position lane returned by the JNI selector.
+     * It is not published until every ordinal is checked and remapped. Inputs,
+     * payload ownership and repeated occurrence identity are left unchanged.
+     */
+    private static int[] remapOwnedPositions(int[] rows, int from, int length, int[] positions) {
+        for (int i = 0; i < positions.length; i++) {
+            positions[i] = rows[from + Objects.checkIndex(positions[i], length)];
+        }
+        return positions;
     }
 
     /**
@@ -150,8 +162,10 @@ public final class M3ArrayifiedIndexOps {
             if (order.applyAsInt(left[i], right[j]) <= 0) output[target++] = left[i++];
             else output[target++] = right[j++];
         }
-        while (i < leftTo) output[target++] = left[i++];
-        while (j < rightTo) output[target++] = right[j++];
+        // Only unopposed tails remain: no comparator call is elided or added.
+        int leftRemaining = leftTo - i;
+        System.arraycopy(left, i, output, target, leftRemaining);
+        System.arraycopy(right, j, output, target + leftRemaining, rightTo - j);
         return output;
     }
 

@@ -221,20 +221,26 @@ public final class M3IndexedArray<E> {
                               int requiredMask, int forbiddenMask,
                               boolean stateAware) {
         final long initialVersion = stateAware ? stateVersion : version;
-        final int[] selected = new int[size];
-        int used = 0;
-        for (int i = 0; i < size; i++) {
-            final int slot = order[i];
-            final int state = states[slot];
-            if ((!stateAware || ((state & requiredMask) == requiredMask
-                                 && (state & forbiddenMask) == 0))
-                    && (predicate == null || predicate.test(valueAtSlot(slot)))) {
-                selected[used++] = slot;
+        final int[] result;
+        if (predicate == null && !stateAware) {
+            // The monitor protects this private directory; no callback or state test
+            // can change the epoch while the unconditional selection is copied.
+            result = Arrays.copyOf(order, size);
+        } else {
+            final int[] selected = new int[size];
+            int used = 0;
+            for (int i = 0; i < size; i++) {
+                final int slot = order[i];
+                final int state = states[slot];
+                if ((!stateAware || ((state & requiredMask) == requiredMask
+                                     && (state & forbiddenMask) == 0))
+                        && (predicate == null || predicate.test(valueAtSlot(slot)))) {
+                    selected[used++] = slot;
+                }
+                rejectReentrantMutation(initialVersion, stateAware);
             }
-            rejectReentrantMutation(initialVersion, stateAware);
+            result = used == selected.length ? selected : Arrays.copyOf(selected, used);
         }
-        final int[] result = used == selected.length
-                ? selected : Arrays.copyOf(selected, used);
         if (comparator != null) {
             stableSort(result, comparator, initialVersion, stateAware);
         }
@@ -341,11 +347,11 @@ public final class M3IndexedArray<E> {
                     rejectReentrantMutation(initialVersion, stateAware);
                     target[output++] = ordering <= 0 ? source[l++] : source[r++];
                 }
-                while (l < leftEnd) {
-                    target[output++] = source[l++];
-                }
-                while (r < rightEnd) {
-                    target[output++] = source[r++];
+                // An unopposed tail needs no comparator calls or epoch checks.
+                if (l < leftEnd) {
+                    System.arraycopy(source, l, target, output, leftEnd - l);
+                } else if (r < rightEnd) {
+                    System.arraycopy(source, r, target, output, rightEnd - r);
                 }
             }
             final int[] previousSource = source;

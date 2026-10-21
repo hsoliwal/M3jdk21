@@ -2,7 +2,7 @@
   "schema": "m3.collections.convergence.context.v1",
   "date": "2026-10-21",
   "authorization": "Implement and enhance this chat's integrated M3JDK21 Java/JNI collection work, reusable canonical Synexia recipes, catalogue, reviewable PRs.",
-  "stage": "INVENTORY",
+  "stage": "PUBLICATION_PREPARATION",
   "target": {
     "repository": "hsoliwal/M3jdk21",
     "revision": "33d2e6ae8048c436bd55b951d9f7dbfab2f3efcb"
@@ -35,5 +35,45 @@
     "canonical": 12857,
     "target": 1760
   },
-  "artifact_status": "No new implementation or tests executed yet"
+  "artifact_status": "Final v3 SDK, core and SDK component qualification passed; draft-only full-product gates remain open.",
+  "manifest_sha256": "ed0798ddef0c7d052cafb776a42098086d69d67466c47b97f8bb6c46fe46dae2",
+  "final_qualification_sha256": "182ddb6a2dbf7ec826b8a54be18c6df8517f56524c3e121907a074b77e875926",
+  "counts": {
+    "MODIFY": 4,
+    "KEEP": 10,
+    "ADD": 8
+  },
+  "open_gates": [
+    {
+      "gate": "matching_current_source_full_jdk_image",
+      "status": "NOT_RUN"
+    },
+    {
+      "gate": "core_native_window_exports_in_matching_installed_image",
+      "status": "BLOCKED",
+      "reason": "Historical source-built image lacks required exports."
+    },
+    {
+      "gate": "unchanged_owning_maven_reactor_source_built_dependencies",
+      "status": "NOT_RUN",
+      "reason": "Component JUnit uses upstream 5.10.2; owning source-built 5.10.2-m3-source-1 is a separate requirement."
+    },
+    {
+      "gate": "applicable_jtreg_jck_platform_provider_matrix",
+      "status": "NOT_RUN"
+    },
+    {
+      "gate": "existing_java_base_CollectionViews_license_promotion_review",
+      "status": "OPEN"
+    }
+  ],
+  "status": "REVIEW_READY_DRAFT",
+  "receiving_repository": "hsoliwal/M3JDK21",
+  "canonical_publication_commit": "f5c6fc673b0c7dfa684f0b0c1e3f0c15bb57b14d",
+  "canonical_pr": "https://github.com/hsoliwal/com.synexia/pull/12895",
+  "publication_provenance": {
+    "status": "PASS",
+    "changed_paths": 97,
+    "receipt": "provenance/EXACT_COMMIT_RECEIPT.json"
+  }
 }

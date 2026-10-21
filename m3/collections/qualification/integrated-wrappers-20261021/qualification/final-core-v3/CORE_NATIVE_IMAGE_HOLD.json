@@ -1,0 +1,6 @@
+{
+  "status": "NOT_RUN",
+  "reason": "Historical source-built image lacks M3IndexMaskWindow JNI exports",
+  "scope": "unchanged core mask-window owner; full matching current-source image remains HOLD",
+  "sdk_native_compactor": "separate actual-JNI qualification"
+}

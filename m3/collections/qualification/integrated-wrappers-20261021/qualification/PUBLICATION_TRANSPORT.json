@@ -1,0 +1,78 @@
+{
+  "schema": "m3.publication.transport.v1",
+  "status": "RESTORED_EXACT_AND_UNCHANGED_VERIFIER_PASS",
+  "failure": {
+    "status": "UNREFERENCED_BLOB_UPLOAD_REJECTED",
+    "repository": "hsoliwal/com.synexia",
+    "source": "publication-evidence-final/measurement-evidence.jsonl",
+    "bytes": 27707405,
+    "sha256": "4eb14cb5a8bb45f1d4f21a4e9b89ca7b7c7df7f77a9809fed715ba3c8b087900",
+    "action": "github.create_blob encoding=utf-8",
+    "error": "HTTP 400: MCP request body is invalid or exceeds the 16 MiB limit",
+    "final_implementation_commit_created": false,
+    "branch_updated": false,
+    "resolution_plan": "Publish record-boundary checksum-verified parts plus exact reconstruction; preserve immutable original bundle and implementation."
+  },
+  "parts_manifest_sha256": "4eecd3fb45d0efdf4a9a87c3ceb9b126a7114b02bfa1142a84bbb0cfb9b8a256",
+  "restore_adapter_sha256": "fc8509f1646a04ad3f8ee96f7eac103fb0ab741f83744075db7c4567f6154510",
+  "parts": 5,
+  "measurement_records": 786,
+  "five_file_byte_comparison": [
+    {
+      "name": "MANIFEST.json",
+      "bytes": 8225560,
+      "sha256": "d25f3fd5ceef32769117943f14f5a21e1d3913757974b68ce07d6453134fffd5",
+      "equal": true
+    },
+    {
+      "name": "RECEIPT.json",
+      "bytes": 1629,
+      "sha256": "a6ed8117ef85909ef173937e7fa50069976c64f9da2be94219ff9809833728bb",
+      "equal": true
+    },
+    {
+      "name": "ROUNDTRIP_VERIFICATION.json",
+      "bytes": 194,
+      "sha256": "7d2dbec2406ae3bbc477e4116490658227485a31ce09ceaae8073a52e3468de5",
+      "equal": true
+    },
+    {
+      "name": "measurement-evidence.jsonl",
+      "bytes": 27707405,
+      "sha256": "4eb14cb5a8bb45f1d4f21a4e9b89ca7b7c7df7f77a9809fed715ba3c8b087900",
+      "equal": true
+    },
+    {
+      "name": "source-history.jsonl",
+      "bytes": 2554550,
+      "sha256": "f644eb936d127ef21dcd6f667e8b446dd36eb53d39d29205c3b8819cc2343a67",
+      "equal": true
+    }
+  ],
+  "executed_commands": [
+    {
+      "command": "python3 design/publication/measurement_parts.py --bundle-dir canonical/synexia-openrewrite-recipes/recipe-crates/m3-arrayification-20261018/integrated-wrappers-20261021/evidence/bundles --output-dir publication-v2/restored-transport",
+      "exit_code": 0,
+      "result": "EXACT_FIVE_FILE_BUNDLE_RESTORED"
+    },
+    {
+      "command": "python3 design/publication/package_evidence.py verify --bundle-dir publication-v2/restored-transport",
+      "exit_code": 0,
+      "result": "LOSSLESS_BUNDLE_VERIFIED",
+      "included_files": 1092,
+      "decoded_source_bytes": 27983471,
+      "manifest_sha256": "d25f3fd5ceef32769117943f14f5a21e1d3913757974b68ce07d6453134fffd5"
+    }
+  ],
+  "qualification_change": "NONE; all product and historical evidence bytes preserved",
+  "storage_only_deduplication": "After exact equality, restored files share immutable original bundle inodes; paths and bytes remain exact.",
+  "provenance_preparation_failure": {
+    "status": "PROVENANCE_PREPARATION_REFUSED_BEFORE_OUTPUT",
+    "command": "python3 design/provenance/append_provenance.py --task-root . --plan design/provenance/ROW_PLAN_FINAL_V3_TRANSPORT_V2.json --delta publication-v2/FILE_MANIFEST_PRE_LEDGER_TRANSPORT_V2.json --output-dir design/provenance/final-v3-transport-v2-append",
+    "exit_code": 1,
+    "error_code": "FIRST_PARTY_DISPOSITION",
+    "message": "first-party no-header row must declare FIRST_PARTY_NO_HEADER or FIRST_PARTY_METADATA",
+    "failed_plan_sha256": "66791817a946741d0152e9cb7e72c3e36a1417a5c803e0e32254b800b251a27b",
+    "resolution": "Use unchanged policy-required FIRST_PARTY_METADATA disposition for the five exact measurement parts; original refused plan retained, checker and classification unchanged."
+  }
+}
