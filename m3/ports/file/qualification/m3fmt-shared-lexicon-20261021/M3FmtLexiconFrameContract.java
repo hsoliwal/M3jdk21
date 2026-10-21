@@ -93,20 +93,51 @@ public final class M3FmtLexiconFrameContract {
     return M3FmtLexiconFrame.seal(lexicon(ROOT), meta, kinds, ids, offsets, raw);
   }
 
-  private static void regexCorpus(byte[] raw) {
-    String s = new String(raw, StandardCharsets.ISO_8859_1);
-    for (String expression : new String[] {
-        "apple", ".*?", "^apple", "apple\\s", "(a)(b)\\2", "\\bclass\\b",
-        "(?m)^class", "(?:class|interface)", "a.*\\}", "[A-Z]+", "(?<=apple) ",
-        "(?s).*λ", "\\p{L}+", "(?:a|b){2,5}", "(a+)+$", "[invalid"
-    }) {
-      try {
-        Pattern compiled = Pattern.compile(expression);
-        boolean beforeFind = compiled.matcher(s).find();
-        boolean afterFind = compiled.matcher(new String(raw, StandardCharsets.ISO_8859_1)).find();
-        check(beforeFind == afterFind, "regex oracle reproducibility " + expression);
-      } catch (PatternSyntaxException invalid) {
-        check("[invalid".equals(expression), "unexpected invalid regex");
+  private static byte[] originalBytes() throws IOException {
+    java.io.ByteArrayOutputStream expected = new java.io.ByteArrayOutputStream();
+    expected.write((SPELLINGS[0] + SPELLINGS[1] + SPELLINGS[3]).getBytes(StandardCharsets.UTF_8));
+    expected.write(new byte[] {(byte) 0xff, (byte) 0xc0, 0, '\\r', '\\n'});
+    expected.write((SPELLINGS[1] + SPELLINGS[4] + SPELLINGS[1] + SPELLINGS[5])
+        .getBytes(StandardCharsets.UTF_8));
+    return expected.toByteArray();
+  }
+
+  /** JDK Pattern/Matcher oracles on independent source bytes versus received indexed bytes. */
+  private static void regexCorpus(byte[] original, byte[] decoded) {
+    String before = new String(original, StandardCharsets.ISO_8859_1);
+    String after = new String(decoded, StandardCharsets.ISO_8859_1);
+    String[] expressions = {"apple", ".*?", "^apple", "apple\\\\s",
+        "(a)(b)\\\\2", "\\\\bclass\\\\b", "(?m)^class",
+        "(?:class|interface)", "a.*\\\\}", "[A-Z]+", "(?<=apple) ",
+        "(?s).*λ", "\\\\p{L}+", "(?:a|b){2,5}", "(a+)+$",
+        "[invalid", "(?<word>apple)", "\\\\Qclass X {}\\\\E",
+        ".*", "\\\\Aapple", "\\\\z", "(?=String)", "(?!orange)"};
+    int[] flags = {0, Pattern.CASE_INSENSITIVE, Pattern.MULTILINE,
+        Pattern.DOTALL, Pattern.CASE_INSENSITIVE | Pattern.UNICODE_CASE};
+    for (String expression : expressions) {
+      for (int flag : flags) {
+        try {
+          Pattern pattern = Pattern.compile(expression, flag);
+          var left = pattern.matcher(before);
+          var right = pattern.matcher(after);
+          check(left.matches() == right.matches(), "matches " + expression);
+          check(left.lookingAt() == right.lookingAt(), "lookingAt " + expression);
+          left.reset();
+          right.reset();
+          for (int hit = 0; hit < 16; hit++) {
+            boolean a = left.find(), b = right.find();
+            check(a == b, "find " + expression);
+            if (!a) break;
+            check(left.start() == right.start() && left.end() == right.end(),
+                "match span " + expression);
+            for (int group = 0; group <= left.groupCount(); group++) {
+              check(java.util.Objects.equals(left.group(group), right.group(group)),
+                  "capture " + expression);
+            }
+          }
+        } catch (PatternSyntaxException invalid) {
+          check("[invalid".equals(expression), "unexpected invalid regex " + expression);
+        }
       }
     }
   }
@@ -122,7 +153,10 @@ public final class M3FmtLexiconFrameContract {
                         M3FmtLexiconFrame.materialize(restored, lexicon(ROOT))),
         "lossless source bytes");
     check(restored.segmentCount() == 8 && restored.literalByteCount() == 5, "segmented lanes");
-    regexCorpus(M3FmtLexiconFrame.materialize(restored, lexicon(ROOT)));
+    byte[] original = originalBytes();
+    byte[] decoded = M3FmtLexiconFrame.materialize(restored, lexicon(ROOT));
+    check(Arrays.equals(original, decoded), "independent byte-for-byte reference");
+    regexCorpus(original, decoded);
     refuses(() -> M3FmtLexiconFrame.read(encoded, lexicon("f".repeat(64))));
     refuses(() -> M3FmtLexiconFrame.materialize(restored, lexicon("f".repeat(64))));
     refuses(() -> M3FmtLexiconFrame.seal(lexicon(ROOT), Map.of(),
