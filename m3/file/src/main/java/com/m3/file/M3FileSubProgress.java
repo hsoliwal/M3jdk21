@@ -51,8 +51,30 @@ final class M3FileSubProgress implements M3FileProgress {
         } else if (worked >= total) {
             push(parentUnits);
         } else {
-            push((long) Math.floor((double) worked * parentUnits / total));
+            push(scaled(worked, parentUnits, total));
         }
+    }
+
+    /**
+     * Exact floor(work * share / total), no floating point, BigInteger or heap
+     * allocation. The common path uses an unsigned divide. Oversized products
+     * use two machine words and a bounded 64-step unsigned division.
+     */
+    private static long scaled(long work, long share, long total) {
+        if (work == 0 || share == 0) return 0;
+        long low = work * share;
+        long high = Math.multiplyHigh(work, share);
+        if (high == 0) return Long.divideUnsigned(low, total);
+        long remainder = high;
+        long quotient = 0;
+        for (int bit = 63; bit >= 0; bit--) {
+            remainder = (remainder << 1) | ((low >>> bit) & 1L);
+            if (Long.compareUnsigned(remainder, total) >= 0) {
+                remainder -= total;
+                quotient |= 1L << bit;
+            }
+        }
+        return quotient;
     }
 
     private void push(long target) {
