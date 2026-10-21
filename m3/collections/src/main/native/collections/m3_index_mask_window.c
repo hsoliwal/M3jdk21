@@ -1,3 +1,4 @@
+/* Modified 2026 by Hitesh Soliwal and contributors: trim JNI row spans to admitted ordinals. */
 /* Copyright 2026 Hitesh Soliwal and contributors. SPDX-License-Identifier: Apache-2.0 */
 /* Additional ABI in the existing m3_collections_mask shared library.
  * Fixed 128-element JNI regions; no persistent pins, Java callbacks, or native heap storage.
@@ -66,6 +67,7 @@ static jlong m3_window_scan_range(JNIEnv *env, jintArray rows, jbyteArray states
 
     jbyte marks[M3_MASK_WINDOW_CHUNK];
     jint selected[M3_MASK_WINDOW_CHUNK];
+    unsigned char offsets[M3_MASK_WINDOW_CHUNK];
     jint next = first;
     jint written = 0;
     jint pending = 0;
@@ -74,27 +76,27 @@ static jlong m3_window_scan_range(JNIEnv *env, jintArray rows, jbyteArray states
         if (take > M3_MASK_WINDOW_CHUNK) take = M3_MASK_WINDOW_CHUNK;
         (*env)->GetByteArrayRegion(env, states, next, take, marks);
         if ((*env)->ExceptionCheck(env)) return (jlong) -1;
-        /* Locate the first admitted state before loading row payload. The emit loop
-         * has no per-selected-value load flag, keeping dense chunks straightforward. */
-        jint first_match = 0;
-        while (first_match < take) {
-            unsigned int flags = (unsigned int) (unsigned char) marks[first_match];
-            if ((flags & (unsigned int) required) == (unsigned int) required
-                    && (flags & (unsigned int) excluded) == 0U) break;
-            first_match++;
-        }
-        if (first_match == take) {
-            next += take;
-            continue;
-        }
-        (*env)->GetIntArrayRegion(env, rows, next, take, values);
-        if ((*env)->ExceptionCheck(env)) return (jlong) -1;
-        next += first_match;
-        for (jint i = first_match; i < take; i++) {
-            unsigned int flags = (unsigned int) (unsigned char) marks[i];
+        /* One state pass records relative ordinals, stopping when the output fills.
+         * Only the enclosing admitted row span crosses JNI. Offsets fit in one byte
+         * because the fixed chunk is 128; no retained index or native heap is added. */
+        jint matches = 0;
+        jint consumed = 0;
+        jint remaining = limit - written;
+        while (consumed < take && matches < remaining) {
+            unsigned int flags = (unsigned int) (unsigned char) marks[consumed];
             if ((flags & (unsigned int) required) == (unsigned int) required
                     && (flags & (unsigned int) excluded) == 0U) {
-                selected[pending++] = values[i];
+                offsets[matches++] = (unsigned char) consumed;
+            }
+            consumed++;
+        }
+        if (matches != 0) {
+            jint first_match = offsets[0];
+            jint span = (jint) offsets[matches - 1] - first_match + 1;
+            (*env)->GetIntArrayRegion(env, rows, next + first_match, span, values);
+            if ((*env)->ExceptionCheck(env)) return (jlong) -1;
+            for (jint i = 0; i < matches; i++) {
+                selected[pending++] = values[(jint) offsets[i] - first_match];
                 written++;
                 if (pending == M3_MASK_WINDOW_CHUNK || written == limit) {
                     (*env)->SetIntArrayRegion(env, output,
@@ -103,9 +105,8 @@ static jlong m3_window_scan_range(JNIEnv *env, jintArray rows, jbyteArray states
                     pending = 0;
                 }
             }
-            next++;
-            if (written == limit) break;
         }
+        next += consumed;
     }
     if (pending != 0) {
         (*env)->SetIntArrayRegion(env, output,

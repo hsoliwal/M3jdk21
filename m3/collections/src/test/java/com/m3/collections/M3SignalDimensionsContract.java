@@ -1,3 +1,4 @@
+// Modified 2026 by Hitesh Soliwal and contributors: qualify loaded and missing JNI independently.
 /*
  * Copyright 2026 Hitesh Soliwal and contributors
  * SPDX-License-Identifier: Apache-2.0
@@ -167,10 +168,16 @@ public final class M3SignalDimensionsContract {
                 () -> M3SignalDimensions.project(-1, row -> "x",
                         List.of((ToDoubleFunction<String>) x -> 3.0), new boolean[] {false},
                         null, 0, 0, M3SignalOrder.Backend.JAVA), "negative rows");
-        rejects(UnsatisfiedLinkError.class,
-                () -> M3SignalDimensions.order(new double[][] {{3, 1}},
-                        new boolean[] {false}, M3SignalOrder.Backend.NATIVE_REQUIRED),
-                "JNI cannot silently fall back");
+        if (M3SignalOrderNative.available()) {
+            same(new int[] {1, 0}, M3SignalDimensions.order(new double[][] {{3, 1}},
+                    new boolean[] {false}, M3SignalOrder.Backend.NATIVE_REQUIRED),
+                    "loaded JNI produces the exact ascending order");
+        } else {
+            rejects(UnsatisfiedLinkError.class,
+                    () -> M3SignalDimensions.order(new double[][] {{3, 1}},
+                            new boolean[] {false}, M3SignalOrder.Backend.NATIVE_REQUIRED),
+                    "JNI cannot silently fall back");
+        }
     }
 
     private static int[] oracle(double[][] columns, boolean[] descending,
