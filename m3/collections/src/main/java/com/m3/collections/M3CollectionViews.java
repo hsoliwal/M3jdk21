@@ -395,6 +395,12 @@ public final class M3CollectionViews {
         }
 
         private boolean removeMatching(Predicate<? super E> condition) {
+            // These exact owners publish bulk changes without mutating snapshot iterators.
+            // Subclasses retain their existing iterator dispatch and override contracts.
+            if (backing.getClass() == java.util.concurrent.CopyOnWriteArrayList.class
+                    || backing.getClass() == java.util.concurrent.CopyOnWriteArraySet.class) {
+                return backing.removeIf(element -> visible(element) && condition.test(element));
+            }
             boolean changed = false;
             Iterator<E> iterator = backing.iterator();
             while (iterator.hasNext()) {
