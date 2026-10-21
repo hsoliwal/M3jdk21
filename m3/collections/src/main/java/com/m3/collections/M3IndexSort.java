@@ -1,5 +1,7 @@
 // SPDX-FileCopyrightText: 2026 Hitesh Soliwal and contributors
 // SPDX-License-Identifier: Apache-2.0
+// Modified 2026 by Hitesh Soliwal and contributors: bulk-copy unopposed
+// merge tails without changing comparisons or value-access callbacks.
 package com.m3.collections;
 
 import java.util.Comparator;
@@ -37,8 +39,11 @@ final class M3IndexSort {
                     // Left side wins ties: equal keys retain input encounter order.
                     destination[out++] = order <= 0 ? source[left++] : source[right++];
                 }
-                while (left < mid) destination[out++] = source[left++];
-                while (right < high) destination[out++] = source[right++];
+                if (left < mid) {
+                    System.arraycopy(source, left, destination, out, mid - left);
+                } else if (right < high) {
+                    System.arraycopy(source, right, destination, out, high - right);
+                }
             }
             int[] previous = source;
             source = destination;

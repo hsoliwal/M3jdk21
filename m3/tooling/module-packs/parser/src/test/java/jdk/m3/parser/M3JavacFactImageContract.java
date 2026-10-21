@@ -6,6 +6,7 @@ import java.net.URI;
 import java.security.MessageDigest;
 import java.util.Arrays;
 public final class M3JavacFactImageContract {
+ public M3JavacFactImageContract() {}
  private static int checks;
  private static void check(boolean v,String reason){checks++;if(!v)throw new AssertionError(reason);}
  private static void refuses(Throwing action){checks++;try{action.run();throw new AssertionError("accepted invalid evidence");}catch(IOException expected){}}

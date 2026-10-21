@@ -18,6 +18,8 @@ final class M3GrammarBudget {
 
   M3GrammarLimits limits() { return limits; }
 
+  long remainingWork() { return remainingWork; }
+
   void source(int length) {
     if (length < 0 || length > limits.maxSourceChars()) exceeded("maxSourceChars");
   }
