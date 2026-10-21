@@ -132,3 +132,124 @@ Java_java_lang_M3StringPool_unmapLexicon0(JNIEnv *env, jclass ignored,
     return JNI_FALSE;
 #endif
 }
+
+/*
+ * Fixed-array JNI concatenation of canonical owner/range views.
+ * No joined byte[]/char[] payload and no persistent native pointers.
+ * Incoming M3String[] keeps the OS-mapped and local owners reachable.
+ */
+// FLLDCIM: ATOM — native fixed-stack concatenation; M3StringPool owns canonical merging.
+#define M3_CONCAT_LEVELS 32
+
+static void m3_concat_throw(JNIEnv *env, const char *class_name, const char *message) {
+    jclass error_class = (*env)->FindClass(env, class_name);
+    if (error_class != NULL) {
+        (void)(*env)->ThrowNew(env, error_class, message);
+        (*env)->DeleteLocalRef(env, error_class);
+    }
+}
+
+JNIEXPORT jobject JNICALL
+Java_java_lang_M3StringPool_concatViewsNative0(JNIEnv *env, jclass pool, jobjectArray parts) {
+    jobject levels[M3_CONCAT_LEVELS] = {NULL};
+    jobject result = NULL;
+    jclass string_class = NULL;
+    jfieldID coordinate_field = NULL;
+    jmethodID concat_method = NULL;
+    jmethodID empty_method = NULL;
+    jlong accumulated = 0;
+
+    if (parts == NULL) {
+        m3_concat_throw(env, "java/lang/NullPointerException", "M3String parts");
+        return NULL;
+    }
+    string_class = (*env)->FindClass(env, "java/lang/M3String");
+    if (string_class == NULL) goto cleanup;
+    coordinate_field = (*env)->GetFieldID(env, string_class, "value", "J");
+    if (coordinate_field == NULL) goto cleanup;
+    concat_method = (*env)->GetStaticMethodID(env, pool, "concat",
+            "(Ljava/lang/M3String;Ljava/lang/M3String;)Ljava/lang/M3String;");
+    if (concat_method == NULL) goto cleanup;
+    empty_method = (*env)->GetStaticMethodID(env, string_class, "empty", "()Ljava/lang/M3String;");
+    if (empty_method == NULL) goto cleanup;
+
+    const jsize count = (*env)->GetArrayLength(env, parts);
+    for (jsize index = 0; index < count; index++) {
+        jobject part = (*env)->GetObjectArrayElement(env, parts, index);
+        if (part == NULL) {
+            if (!(*env)->ExceptionCheck(env)) {
+                m3_concat_throw(env, "java/lang/NullPointerException", "null interned M3String part");
+            }
+            goto cleanup;
+        }
+        const jlong coordinate = (*env)->GetLongField(env, part, coordinate_field);
+        if ((*env)->ExceptionCheck(env)) {
+            (*env)->DeleteLocalRef(env, part);
+            goto cleanup;
+        }
+        const uint64_t units = (uint64_t) coordinate & UINT64_C(0xffffffff);
+        if (units > (uint64_t) INT_MAX || units > (uint64_t) (INT_MAX - accumulated)) {
+            (*env)->DeleteLocalRef(env, part);
+            m3_concat_throw(env, "java/lang/OutOfMemoryError", "Required length exceeds implementation limit");
+            goto cleanup;
+        }
+        accumulated += (jlong) units;
+        if (units == 0) {
+            (*env)->DeleteLocalRef(env, part);
+            continue;
+        }
+
+        int level;
+        for (level = 0; level < M3_CONCAT_LEVELS; level++) {
+            if (levels[level] == NULL) {
+                levels[level] = part;
+                part = NULL;
+                break;
+            }
+            jobject merged = (*env)->CallStaticObjectMethod(env, pool, concat_method,
+                    levels[level], part);
+            (*env)->DeleteLocalRef(env, levels[level]);
+            levels[level] = NULL;
+            (*env)->DeleteLocalRef(env, part);
+            part = merged;
+            if ((*env)->ExceptionCheck(env) || part == NULL) {
+                if (part != NULL) (*env)->DeleteLocalRef(env, part);
+                goto cleanup;
+            }
+        }
+        if (part != NULL) {
+            (*env)->DeleteLocalRef(env, part);
+            m3_concat_throw(env, "java/lang/OutOfMemoryError", "Too many M3 concatenation parts");
+            goto cleanup;
+        }
+    }
+
+    /* Higher occupied levels hold earlier pieces. Fold low-to-high for source order. */
+    for (int level = 0; level < M3_CONCAT_LEVELS; level++) {
+        if (levels[level] == NULL) continue;
+        if (result == NULL) {
+            result = levels[level];
+            levels[level] = NULL;
+        } else {
+            jobject merged = (*env)->CallStaticObjectMethod(env, pool, concat_method,
+                    levels[level], result);
+            (*env)->DeleteLocalRef(env, levels[level]);
+            levels[level] = NULL;
+            (*env)->DeleteLocalRef(env, result);
+            result = merged;
+            if ((*env)->ExceptionCheck(env) || result == NULL) goto cleanup;
+        }
+    }
+    if (result == NULL) result = (*env)->CallStaticObjectMethod(env, string_class, empty_method);
+
+cleanup:
+    for (int level = 0; level < M3_CONCAT_LEVELS; level++) {
+        if (levels[level] != NULL) (*env)->DeleteLocalRef(env, levels[level]);
+    }
+    if (string_class != NULL) (*env)->DeleteLocalRef(env, string_class);
+    if ((*env)->ExceptionCheck(env)) {
+        if (result != NULL) (*env)->DeleteLocalRef(env, result);
+        return NULL;
+    }
+    return result;
+}
