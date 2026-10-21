@@ -126,14 +126,14 @@ public final class M3RecipeMemoryPolicyRecipe
     return List.of(
         new Target(
             ".github/workflows/m3-recipe-ownership.yml",
-            "WORKFLOW_BEFORE",
-            "WORKFLOW_AFTER",
+            "d757a073ce0a60cd35f7169beea671203324ba16",
+            "f82ed0daf49220d7b483bdf8025f5b378f8601eb",
             "m3-recipe-ownership.yml.txt",
             false),
         new Target(
             "m3/runtime-integration/verify-recipe-memory.py",
             "",
-            "VERIFIER_AFTER",
+            "7d193b6ad53beb25824b856006893c883aa61bf4",
             "verify-recipe-memory.py.txt",
             true));
   }
