@@ -352,6 +352,39 @@ public final class M3FileTree implements Closeable {
         return hashed;
     }
 
+    /**
+     * Bounded parallel variant of {@link #hash(M3FileTraversal, long, M3FileProgress, M3FileChangeProvider)}.
+     * At most {@code parallelism} observations are outstanding, including completed results waiting
+     * for an earlier row. Each worker reads its file once; the caller publishes hash/failure lanes
+     * in traversal order. No list proportional to the traversal is retained by this overload.
+     *
+     * <p>The source must support independent concurrent reads, and {@code provider.structure} must
+     * support concurrent calls and return independent shadows. Monitor callbacks are serialized;
+     * workers receive private split monitors. The total is unknown ({@code 0}) until complete.
+     * With {@code parallelism == 1}, the original serial implementation (including its total) is used.</p>
+     *
+     * <p>The caller must exclusively own the tree during this call: do not expand, close, hash, or
+     * otherwise mutate it from callbacks or other threads. Cancellation/interruption or an unchecked
+     * callback failure stops submission and joins all workers before returning; already committed rows
+     * remain committed. Blocking sources must cooperate with interruption or eventually return.
+     * Ordinary per-file I/O failures mark that row failed and allow later rows to proceed.</p>
+     *
+     * @throws IllegalArgumentException if the traversal belongs to another tree, the byte limit is
+     *         negative, or parallelism is not positive
+     */
+    public int hash(M3FileTraversal entries, long maxBytes, M3FileProgress progress,
+            M3FileChangeProvider provider, int parallelism) throws InterruptedIOException {
+        Objects.requireNonNull(entries, "entries");
+        Objects.requireNonNull(progress, "progress");
+        Objects.requireNonNull(provider, "provider");
+        if (entries.tree() != this) throw new IllegalArgumentException("traversal of another tree");
+        if (maxBytes < 0) throw new IllegalArgumentException("negative maxBytes");
+        if (parallelism < 1) throw new IllegalArgumentException("nonpositive parallelism");
+        progress.checkCanceled();
+        return parallelism == 1 ? hash(entries, maxBytes, progress, provider)
+                : hashes.observeParallel(this, entries, maxBytes, progress, provider, parallelism);
+    }
+
     public int nameLength(int id) {
         return names.length(nameId(id));
     }
