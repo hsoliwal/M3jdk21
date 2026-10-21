@@ -275,7 +275,7 @@
       "repository": "hsoliwal/com.synexia",
       "commit": "08e84ed4430894e07dea272758401fd7202d2187",
       "path": "synexia-job/src/main/java/com/synexia/job/utils/ProgressCalculationUtils.java",
-      "sha256": "0bef25ae5da2e196d223ce18e9a62a6b0a0e39c6c702130a9d8556559a6fec75",
+      "sha256": "7a5f950efde91f07e8df46a092bb34408b49532807be361a6c1da19ac3b3bf45",
       "license": "Apache-2.0",
       "role": "main",
       "destination": "com/synexia/job/utils/ProgressCalculationUtils.java"
@@ -318,9 +318,9 @@
     },
     {
       "repository": "hsoliwal/M3jdk21",
-      "commit": "677437be295b23f7ccf7409be287008944d0e8b0",
+      "commit": "de5e0d18fa602c902b6164c6941938f6b2b6275d",
       "path": "m3/ports/compiletime/src/main/java/com/m3/compiletime/M3ASTLeafIndex.java",
-      "sha256": "0daf29ca1e035d8facfaea0ef86f0f91158320f0d343f51b12dd6fc81a4f9428",
+      "sha256": "6fae48f743887349e5b2ed22dc835c17563ecea22b8cf732e0640b5deffd30fd",
       "license": "Apache-2.0",
       "role": "main",
       "destination": "com/m3/compiletime/M3ASTLeafIndex.java"
