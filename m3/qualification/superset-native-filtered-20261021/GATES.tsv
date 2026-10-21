@@ -1,0 +1,13 @@
+gate	status	donor_or_command
+SOURCE_RECEIPT	PASS	12/12 original Git blobs equal exact qualified donor postimages
+ORIGINAL_JAVA_ABI	SOURCE_PRESERVED	7 production originals; donor qualified public interface shapes
+COMPARATOR_DONOR_LOCAL	HISTORICAL_PASS_NOT_RERUN	PR1763 canonical runtime and callback/injection suite
+MASK_JNI_DONOR_LOCAL	HISTORICAL_PASS_NOT_RERUN	PR1761 16,777,216 mask cases, 86,000 count cases with C17/JNI
+INDEX_ARRAY_DONOR_LOCAL	HISTORICAL_PASS_NOT_RERUN	PR1760 tests and native resource receipts, CPU results mixed
+CANONICAL_OPENREWRITE_COMBINED	NOT_RUN	Synexia PR12857, #12860 and #12856 recipes not replayed on this branch
+JAVA21_COLLECTIONS_REACTOR	NOT_RUN	Original m3/collections Maven/JUnit closure
+JNI_LIBJAVA_IMAGE	NOT_RUN	Original M3JDK21 make images, javac -h, native export/lifetime tests
+JDK_JTREG_JCK	NOT_RUN	Full javabase and collection compatibility
+M3FILE_PARENT_COMBINATION	SOURCE_PRESERVED	Parent #1782 V2 one-read/SQLite JNI unchanged
+PLATFORM_MATRIX	NOT_RUN	Windows/macOS/Android native ABI and provider policies
+CPU_HEAP_NATIVE_MEMORY	NOT_REMEASURED	Original resource receipts and no blanket speed claim
