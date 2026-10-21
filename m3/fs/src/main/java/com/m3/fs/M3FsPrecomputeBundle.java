@@ -568,6 +568,15 @@ public final class M3FsPrecomputeBundle {
       }
       if (cursor != bytes.remaining()) throw new IllegalArgumentException("prepared segment terminal");
     }
+    // Each accessor projects an independent cursor over the same admitted payload.
+    @Override public ByteBuffer bytes() { return bytes.asReadOnlyBuffer().order(bytes.order()); }
+    @Override public IntBuffer starts() { return starts.asReadOnlyBuffer(); }
+    @Override public IntBuffer lengths() { return lengths.asReadOnlyBuffer(); }
+    @Override public LongBuffer bytePresence() { return bytePresence.asReadOnlyBuffer(); }
+    @Override public LongBuffer pairNgramPresence() { return pairNgramPresence.asReadOnlyBuffer(); }
+    @Override public LongBuffer trigramNgramPresence() { return trigramNgramPresence.asReadOnlyBuffer(); }
+    @Override public IntBuffer metadata() { return metadata.asReadOnlyBuffer(); }
+
     public int size() { return segmentCount(); }
     public int packedBytes() { return bytes.remaining(); }
     public int byteAt(int index) { return Byte.toUnsignedInt(bytes.get(bytes.position() + Objects.checkIndex(index, bytes.remaining()))); }
@@ -622,6 +631,13 @@ public final class M3FsPrecomputeBundle {
         }
       }
     }
+    // Each accessor projects an independent cursor over the same admitted payload.
+    @Override public ByteBuffer patternBytes() { return patternBytes.asReadOnlyBuffer().order(patternBytes.order()); }
+    @Override public IntBuffer patternOffsets() { return patternOffsets.asReadOnlyBuffer(); }
+    @Override public IntBuffer transitions() { return transitions.asReadOnlyBuffer(); }
+    @Override public LongBuffer outputMasks() { return outputMasks.asReadOnlyBuffer(); }
+    @Override public IntBuffer metadata() { return metadata.asReadOnlyBuffer(); }
+
     public int totalPatternBytes() { return patternBytes.remaining(); }
     public int patternOffset(int index) { return patternOffsets.get(patternOffsets.position() + Objects.checkIndex(index, patternCount() + 1)); }
     public int patternLength(int index) { Objects.checkIndex(index, patternCount()); return patternOffset(index + 1) - patternOffset(index); }
@@ -703,6 +719,12 @@ public final class M3FsPrecomputeBundle {
       }
     }
 
+    // Each accessor projects an independent cursor over the same admitted payload.
+    @Override public ByteBuffer asciiClassByValue() { return asciiClassByValue.asReadOnlyBuffer().order(asciiClassByValue.order()); }
+    @Override public ShortBuffer transitions() { return transitions.asReadOnlyBuffer(); }
+    @Override public ByteBuffer accepting() { return accepting.asReadOnlyBuffer().order(accepting.order()); }
+    @Override public IntBuffer metadata() { return metadata.asReadOnlyBuffer(); }
+
     public int startState() {
       return metadata.get(metadata.position());
     }
@@ -756,6 +778,11 @@ public final class M3FsPrecomputeBundle {
         }
       }
     }
+
+    // Each accessor projects an independent cursor over the same admitted payload.
+    @Override public ByteBuffer bytes() { return bytes.asReadOnlyBuffer().order(bytes.order()); }
+    @Override public LongBuffer offsets() { return offsets.asReadOnlyBuffer(); }
+    @Override public IntBuffer lengths() { return lengths.asReadOnlyBuffer(); }
 
     public int segmentCount() {
       return lengths.remaining();
