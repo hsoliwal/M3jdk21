@@ -53,6 +53,11 @@ DONOR_MODULES = (
 RECEIVER_MODULE = "jdk.m3.jackson"
 CONTRACT_MAIN = "jdk.m3.jackson.tests.M3JacksonContract"
 CONTRACT_MARKER = "M3_JACKSON_CONTRACT_PASS"
+# Test-only retained-cursor assertions; no module-info or consumer runtime opening.
+CONTRACT_OPENS = (
+    "--add-opens", "jdk.m3.jackson/jdk.m3.jackson=ALL-UNNAMED",
+    "--add-opens", "com.fasterxml.jackson.core/com.fasterxml.jackson.core.base=ALL-UNNAMED",
+)
 DEVELOPER_MODULES = ("java.se", "jdk.compiler", "jdk.jlink", "jdk.jartool", "jdk.jdeps")
 ARCHIVE_DATE = "2026-01-01T00:00:00Z"
 ZIP_DATE = (2026, 1, 1, 0, 0, 0)
@@ -483,7 +488,7 @@ class Run:
     def test(self):
         self.verify_compiled_inputs()
         text, _ = self.command("host-contract", [
-            self.tools["java"], "--module-path",
+            self.tools["java"], *CONTRACT_OPENS, "--module-path",
             os.pathsep.join((str(self.output / "donor-jars"), str(self.output / "modules"))),
             "--add-modules", RECEIVER_MODULE, "-cp", self.output / "test-classes",
             CONTRACT_MAIN, self.output / "host-contract-output",
@@ -562,7 +567,7 @@ class Run:
         if not required.issubset(actual):
             raise ValueError("linked module closure incomplete: " + repr(sorted(required - actual)))
         self.command("linked-contract", [
-            java, "--add-modules", RECEIVER_MODULE, "-cp", self.output / "test-classes",
+            java, *CONTRACT_OPENS, "--add-modules", RECEIVER_MODULE, "-cp", self.output / "test-classes",
             CONTRACT_MAIN, self.output / "linked-contract-output",
         ], marker=CONTRACT_MARKER)
         self.verify_compiled_inputs()

@@ -2,7 +2,6 @@
 // Copyright 2026 Hitesh Soliwal and contributors
 package jdk.m3.jackson;
 
-import com.fasterxml.jackson.core.JsonFactory;
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonToken;
@@ -33,8 +32,6 @@ final class M3JsonCodec {
         M3ASTBuilder builder = new M3ASTBuilder(limits);
         ArrayDeque<InputFrame> stack = new ArrayDeque<>();
         Work work = new Work(limits);
-        JsonFactory strictNumbers = JsonFactory.builder()
-                .streamReadConstraints(parser.streamReadConstraints()).build();
         JsonToken token = parser.currentToken();
         if (token == null) token = parser.nextToken();
         if (token == null) throw JsonMappingException.from(parser, "empty JSON input");
@@ -76,13 +73,9 @@ final class M3JsonCodec {
                     if (parser.isNaN()) throw JsonMappingException.from(parser, "M3AST requires finite JSON numbers");
                     String value = parser.getText();
                     work.text(value);
-                    // Preserve parser-exposed lexemes, but never emit permissive non-JSON spelling.
-                    try (JsonParser check = strictNumbers.createParser(value)) {
-                        JsonToken numeric = check.nextToken();
-                        if (numeric == null || !numeric.isNumeric() || !value.equals(check.getText())
-                                || check.nextToken() != null) {
-                            throw JsonMappingException.from(parser, "M3AST requires a strict JSON numeric lexeme");
-                        }
+                    // RFC 8259 numeric grammar; no parser allocation per numeric token.
+                    if (!isStrictJsonNumber(value)) {
+                        throw JsonMappingException.from(parser, "M3AST requires a strict JSON numeric lexeme");
                     }
                     atom = builder.leaf(token == JsonToken.VALUE_NUMBER_INT ? "NUMBER_INT" : "NUMBER_FLOAT",
                             null, value);
@@ -96,12 +89,43 @@ final class M3JsonCodec {
             InputFrame parent = stack.peek();
             if (parent.kind.equals("OBJECT")) {
                 if (parent.name == null) throw JsonMappingException.from(parser, "object value without a field name");
-                atom = builder.atom("FIELD", parent.name, null, new int[] {atom});
+                atom = builder.field(parent.name, atom);
                 parent.name = null;
             }
             parent.add(atom, limits.maxChildReferences());
             token = requiredNext(parser);
         }
+    }
+
+    /** Validates the entire JSON number lexeme without creating another parser or Node. */
+    private static boolean isStrictJsonNumber(String text) {
+        int size = text.length();
+        if (size == 0) return false;
+        int cursor = text.charAt(0) == '-' ? 1 : 0;
+        if (cursor == size) return false;
+        char first = text.charAt(cursor);
+        if (first == '0') {
+            cursor++;
+        } else if (first >= '1' && first <= '9') {
+            cursor++;
+            while (cursor < size && text.charAt(cursor) >= '0' && text.charAt(cursor) <= '9') cursor++;
+        } else {
+            return false;
+        }
+        if (cursor < size && text.charAt(cursor) == '.') {
+            cursor++;
+            int start = cursor;
+            while (cursor < size && text.charAt(cursor) >= '0' && text.charAt(cursor) <= '9') cursor++;
+            if (cursor == start) return false;
+        }
+        if (cursor < size && (text.charAt(cursor) == 'e' || text.charAt(cursor) == 'E')) {
+            cursor++;
+            if (cursor < size && (text.charAt(cursor) == '+' || text.charAt(cursor) == '-')) cursor++;
+            int start = cursor;
+            while (cursor < size && text.charAt(cursor) >= '0' && text.charAt(cursor) <= '9') cursor++;
+            if (cursor == start) return false;
+        }
+        return cursor == size;
     }
 
     private static JsonToken requiredNext(JsonParser parser) throws IOException {
@@ -119,7 +143,7 @@ final class M3JsonCodec {
     }
 
     private static void writeValue(M3AST ast, JsonGenerator generator, M3JsonLimits limits) throws IOException {
-        if (ast.root().kind().equals("FIELD")) {
+        if ("FIELD".equals(ast.kindAt(ast.rootAtomIndex()))) {
             throw new IllegalArgumentException("a field occurrence is not a complete JSON value");
         }
         if (ast.atomCount() > limits.maxAtoms()) throw new IllegalArgumentException("M3 AST atom budget");
@@ -129,68 +153,86 @@ final class M3JsonCodec {
         if (ast.retainedTextUnits() > limits.maxTextUnits()) {
             throw new IllegalArgumentException("M3 AST retained text budget");
         }
-        ArrayDeque<OutputFrame> stack = new ArrayDeque<>();
-        stack.push(new OutputFrame(ast.rootAtomIndex()));
+
+        // This stack is two primitive arrays, not one OutputFrame object per JSON token.
+        int[] atomStack = new int[32];
+        int[] nextStack = new int[32];
+        atomStack[0] = ast.rootAtomIndex();
+        nextStack[0] = -1;
+        int top = 0;
+        int containers = 0;
         Work work = new Work(limits);
-        int depth = 0;
-        while (!stack.isEmpty()) {
-            OutputFrame frame = stack.peek();
-            M3ASTAtom atom = ast.atom(frame.atom);
-            String kind = atom.kind();
-            if (frame.nextChild == -1) {
+        while (top >= 0) {
+            int index = atomStack[top];
+            String kind = ast.kindAt(index);
+            if (nextStack[top] == -1) {
                 work.token();
                 switch (kind) {
                     case "OBJECT", "ARRAY" -> {
-                        if (++depth > limits.maxDepth()) throw new IllegalArgumentException("JSON depth budget");
+                        if (++containers > limits.maxDepth()) {
+                            throw new IllegalArgumentException("JSON depth budget");
+                        }
                         if (kind.equals("OBJECT")) generator.writeStartObject();
                         else generator.writeStartArray();
-                        frame.nextChild = 0;
+                        nextStack[top] = 0;
                     }
                     case "FIELD" -> {
-                        if (atom.childCount() != 1) throw new IllegalStateException("field requires one value");
-                        work.text(atom.name());
-                        generator.writeFieldName(atom.name());
-                        frame.nextChild = 0;
+                        if (ast.childCountAt(index) != 1) {
+                            throw new IllegalStateException("field requires one value");
+                        }
+                        String name = ast.nameAt(index);
+                        work.text(name);
+                        generator.writeFieldName(name);
+                        nextStack[top] = 0;
                     }
                     case "STRING" -> {
-                        work.text(atom.value());
-                        generator.writeString(atom.value());
-                        stack.pop();
+                        String value = ast.valueAt(index);
+                        work.text(value);
+                        generator.writeString(value);
+                        top--;
                         continue;
                     }
                     case "NUMBER_INT", "NUMBER_FLOAT" -> {
-                        work.text(atom.value());
+                        String value = ast.valueAt(index);
+                        work.text(value);
                         if (generator instanceof TokenBuffer buffer) {
-                            buffer.writeNumber(atom.value(), kind.equals("NUMBER_INT"));
+                            buffer.writeNumber(value, kind.equals("NUMBER_INT"));
                         } else {
-                            generator.writeNumber(atom.value());
+                            generator.writeNumber(value);
                         }
-                        stack.pop();
+                        top--;
                         continue;
                     }
                     case "TRUE", "FALSE" -> {
                         generator.writeBoolean(kind.equals("TRUE"));
-                        stack.pop();
+                        top--;
                         continue;
                     }
                     case "NULL" -> {
                         generator.writeNull();
-                        stack.pop();
+                        top--;
                         continue;
                     }
                     default -> throw new IllegalStateException("unrecognized JSON atom kind: " + kind);
                 }
             }
-            if (frame.nextChild < atom.childCount()) {
-                stack.push(new OutputFrame(atom.childAtomIndex(frame.nextChild++)));
+            if (nextStack[top] < ast.childCountAt(index)) {
+                int child = ast.childAtomIndexAt(index, nextStack[top]++);
+                if (top + 1 == atomStack.length) {
+                    int capacity = Math.multiplyExact(atomStack.length, 2);
+                    atomStack = Arrays.copyOf(atomStack, capacity);
+                    nextStack = Arrays.copyOf(nextStack, capacity);
+                }
+                atomStack[++top] = child;
+                nextStack[top] = -1;
             } else {
                 if (kind.equals("OBJECT") || kind.equals("ARRAY")) {
                     work.token();
                     if (kind.equals("OBJECT")) generator.writeEndObject();
                     else generator.writeEndArray();
-                    depth--;
+                    containers--;
                 }
-                stack.pop();
+                top--;
             }
         }
     }
@@ -210,12 +252,6 @@ final class M3JsonCodec {
             }
             children[size++] = atom;
         }
-    }
-
-    private static final class OutputFrame {
-        final int atom;
-        int nextChild = -1;
-        OutputFrame(int atom) { this.atom = atom; }
     }
 
     /** Count occurrences as well as retained atoms: DAG sharing cannot evade output work bounds. */

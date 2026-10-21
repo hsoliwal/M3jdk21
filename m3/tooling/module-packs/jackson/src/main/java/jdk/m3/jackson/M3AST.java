@@ -42,6 +42,55 @@ public final class M3AST {
         return pool.atom(atomIndex);
     }
 
+    /** Primitive indexed lookup; unlike {@link #atom(int)}, creates no node wrapper. */
+    public String kindAt(int atomIndex) { return pool.kind(atomIndex); }
+
+    /** Field name at an indexed atom; null for non-field values. */
+    public String nameAt(int atomIndex) { return pool.name(atomIndex); }
+
+    /** Scalar text or original numeric lexeme at an indexed atom. */
+    public String valueAt(int atomIndex) { return pool.value(atomIndex); }
+
+    /** Number of child references, including repeated occurrences of shared atoms. */
+    public int childCountAt(int atomIndex) { return pool.childCount(atomIndex); }
+
+    /** Ordered child atom coordinate without allocating an M3ASTAtom. */
+    public int childAtomIndexAt(int atomIndex, int childIndex) {
+        return pool.childAt(atomIndex, childIndex);
+    }
+
+    /** Array element coordinate without creating a Java node or iterator. */
+    public int arrayElementAt(int arrayAtomIndex, int elementIndex) {
+        if (!"ARRAY".equals(kindAt(arrayAtomIndex))) {
+            throw new IllegalArgumentException("expected JSON array atom");
+        }
+        return childAtomIndexAt(arrayAtomIndex, elementIndex);
+    }
+
+    /**
+     * Find an object's named field occurrence, including duplicates, by zero-based
+     * occurrence number. Returns the field's VALUE atom index or -1 if absent.
+     * This performs a bounded linear scan of primitive child coordinates and
+     * creates no field/entry objects; a secondary field index may be added later.
+     */
+    public int objectFieldValueAt(int objectAtomIndex, String fieldName, int occurrence) {
+        Objects.requireNonNull(fieldName, "fieldName");
+        if (occurrence < 0) throw new IllegalArgumentException("negative field occurrence");
+        if (!"OBJECT".equals(kindAt(objectAtomIndex))) {
+            throw new IllegalArgumentException("expected JSON object atom");
+        }
+        for (int ordinal = 0, count = childCountAt(objectAtomIndex); ordinal < count; ordinal++) {
+            int field = childAtomIndexAt(objectAtomIndex, ordinal);
+            if ("FIELD".equals(kindAt(field)) && fieldName.equals(nameAt(field))) {
+                if (occurrence-- == 0) return childAtomIndexAt(field, 0);
+            }
+        }
+        return -1;
+    }
+
+    /** Structural candidate hash of an indexed atom. */
+    public long structuralHash64At(int atomIndex) { return pool.structuralHash64(atomIndex); }
+
     /**
      * Deterministic structural candidate hash in the receiving UTF-16 domain.
      * Hash equality alone does not establish structure or document identity.

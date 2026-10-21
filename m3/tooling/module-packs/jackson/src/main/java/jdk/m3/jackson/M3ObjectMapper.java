@@ -11,10 +11,16 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.MapperFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
+import java.io.FilterInputStream;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
 import java.io.Serial;
 import java.io.StringReader;
 import java.nio.charset.Charset;
+import java.nio.charset.CodingErrorAction;
 import java.nio.file.Path;
+import java.nio.file.Files;
 import java.util.LinkedHashSet;
 import java.util.Objects;
 
@@ -93,6 +99,63 @@ public class M3ObjectMapper extends ObjectMapper {
         return readAST(M3File.read(path, charset, maxBytes));
     }
 
+    /**
+     * Parses a bounded file as a stream, without creating a whole-file byte array,
+     * String snapshot or per-atom Java object. Malformed character sequences fail closed.
+     *
+     * <p>The resulting AST retains only its indexed atoms and scalar text; unlike
+     * {@link M3File}, this route does not retain a source snapshot or byte digest.
+     */
+    public M3AST readASTStreaming(Path path, Charset charset, long maxBytes) throws IOException {
+        Objects.requireNonNull(path, "path");
+        Objects.requireNonNull(charset, "charset");
+        if (maxBytes < 0) throw new IllegalArgumentException("negative source byte limit");
+        try (InputStream bytes = new BoundedInput(Files.newInputStream(path), maxBytes);
+             Reader characters = new InputStreamReader(bytes, charset.newDecoder()
+                     .onMalformedInput(CodingErrorAction.REPORT)
+                     .onUnmappableCharacter(CodingErrorAction.REPORT));
+             JsonParser parser = getFactory().createParser(characters)) {
+            M3AST result = M3JsonCodec.read(parser, m3Limits);
+            if (parser.nextToken() != null) {
+                throw JsonMappingException.from(parser, "trailing JSON content");
+            }
+            return result;
+        }
+    }
+
+    /** Byte-budget enforcement must also cover streams that grow while being read. */
+    private static final class BoundedInput extends FilterInputStream {
+        private long remaining;
+
+        BoundedInput(InputStream input, long maxBytes) {
+            super(input);
+            remaining = maxBytes;
+        }
+
+        @Override public int read() throws IOException {
+            int value = super.read();
+            if (value >= 0) {
+                if (remaining == 0) throw new IOException("source exceeds byte budget");
+                remaining--;
+            }
+            return value;
+        }
+
+        @Override public int read(byte[] bytes, int offset, int length) throws IOException {
+            Objects.checkFromIndexSize(offset, length, bytes.length);
+            if (length == 0) return 0;
+            if (remaining == 0) {
+                if (super.read() != -1) throw new IOException("source exceeds byte budget");
+                return -1;
+            }
+            int result = super.read(bytes, offset, (int) Math.min(remaining, length));
+            if (result > 0) remaining -= result;
+            return result;
+        }
+
+        @Override public long skip(long count) { return 0; }
+    }
+
     /** JSON projection is an explicit materialization boundary; ordinary Jackson binds the result. */
     public <T> T readValue(M3AST ast, Class<T> valueType) throws IOException {
         return super.readValue(writeValueAsString(Objects.requireNonNull(ast, "ast")), valueType);
@@ -104,6 +167,41 @@ public class M3ObjectMapper extends ObjectMapper {
 
     public <T> T readValue(M3AST ast, JavaType valueType) throws IOException {
         return super.readValue(writeValueAsString(Objects.requireNonNull(ast, "ast")), valueType);
+    }
+
+    /**
+     * Bind the existing authoritative tree through its original indexed tokens.
+     * No JSON text is written, read or parsed. The AST remains immutable and owned
+     * by its caller; only this binding cursor is closed.
+     *
+     * <p>Ordinary Jackson deserializers, naming/coercion settings, object identities,
+     * parser features and token-kind read constraints apply. M3 retained-state and
+     * expanded-traversal budgets apply as well. The AST has no source locations:
+     * mapping failures report an unavailable location rather than invented offsets.
+     *
+     * <p>This explicit tree operation does not invoke an M3AST serializer, a
+     * generator, input/output decorators or format-specific source processing.
+     * Source-length limits have no byte/character stream to measure here. The
+     * existing {@code readValue(M3AST, ...)} overloads keep their serializer-based
+     * JSON materialization contract.
+     */
+    public <T> T readTreeValue(M3AST ast, Class<T> valueType) throws IOException {
+        return readTreeValue(ast, getTypeFactory().constructType(
+                Objects.requireNonNull(valueType, "valueType")));
+    }
+
+    /** Bind original AST tokens to a parameterized type without a JSON round-trip. */
+    public <T> T readTreeValue(M3AST ast, TypeReference<T> valueType) throws IOException {
+        return readTreeValue(ast, getTypeFactory().constructType(
+                Objects.requireNonNull(valueType, "valueType")));
+    }
+
+    /** Bind original AST tokens with this mapper's configured Jackson deserialization. */
+    @SuppressWarnings("unchecked")
+    public <T> T readTreeValue(M3AST ast, JavaType valueType) throws IOException {
+        Objects.requireNonNull(ast, "ast");
+        Objects.requireNonNull(valueType, "valueType");
+        return (T) _readMapAndClose(new M3ASTParser(ast, getFactory(), this, m3Limits), valueType);
     }
 
     private static String stable(CharSequence source) {
