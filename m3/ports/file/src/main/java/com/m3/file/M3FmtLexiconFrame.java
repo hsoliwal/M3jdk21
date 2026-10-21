@@ -223,7 +223,7 @@ public final class M3FmtLexiconFrame {
         throw new IOException("decoded file content hash mismatch");
       }
       return result;
-    } catch (IllegalArgumentException | IndexOutOfBoundsException malformed) {
+    } catch (IllegalArgumentException malformed) {
       throw new IOException("malformed M3FMT frame", malformed);
     }
   }
