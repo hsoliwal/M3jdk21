@@ -4,6 +4,7 @@ package com.m3.mop;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
+import java.nio.CharBuffer;
 import java.nio.channels.FileChannel;
 import java.nio.channels.FileLock;
 import java.nio.charset.StandardCharsets;
@@ -85,6 +86,7 @@ public final class M3RecipeMemory {
                 || content.contains("\n\n")) {
             throw new IOException("invalid recipe memory header or final newline");
         }
+        if (content.length() == HEADER.length()) return List.of();
         List<Entry> result = new ArrayList<>();
         Set<String> seen = new HashSet<>();
         Instant last = Instant.EPOCH;
@@ -166,6 +168,15 @@ public final class M3RecipeMemory {
         if (!proof.equals(header + "compile\tPASS\ntest\tPASS\nfixed_point\tPASS\n")) {
             throw new IOException("recipe correction proof absent, stale or incomplete");
         }
+        // Admission must agree with read() before any filesystem publication.
+        if (improvement.utc().isBefore(Instant.EPOCH)) {
+            throw new IOException("correction timestamp predates recipe memory epoch");
+        }
+        // Record the exact lesson; never replace malformed UTF-16 with '?'.
+        ByteBuffer encoded = StandardCharsets.UTF_8.newEncoder()
+                .encode(CharBuffer.wrap(improvement.line()));
+        byte[] appended = new byte[encoded.remaining()];
+        encoded.get(appended);
         Files.createDirectories(ledger.getParent());
         Path lockPath = ledger.resolveSibling(ledger.getFileName() + ".lock");
         try (FileChannel lockChannel = FileChannel.open(lockPath,
@@ -181,7 +192,6 @@ public final class M3RecipeMemory {
                     && row.correction().equals(improvement.correction()))) {
                 throw new IOException("duplicate proven recipe correction");
             }
-            byte[] appended = improvement.line().getBytes(StandardCharsets.UTF_8);
             if (before.length + (long) appended.length > MAX_BYTES) {
                 throw new IOException("recipe memory byte budget exceeded");
             }
