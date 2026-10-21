@@ -5,7 +5,9 @@ package com.m3.collections;
 import java.util.AbstractList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.Objects;
+import java.util.function.Predicate;
 import java.util.RandomAccess;
 
 /**
@@ -55,6 +57,38 @@ public final class M3ObservableList<E> extends AbstractList<E> implements Random
 
     public long generation() { return generation; }
     public int listenerCount() { return listeners.length; }
+
+    /**
+     * A read-only, live filtered projection of the same dynamic-array owner.
+     * Only selected primitive positions are cached. Structural and set() updates
+     * automatically invalidate that index; mutations to referenced objects
+     * require explicit view.invalidate().
+     */
+    public M3IndexedLiveView<E> filteredView(Predicate<? super E> predicate) {
+        return M3IndexedLiveView.filtered(elements, predicate);
+    }
+
+    /** Stable natural/comparator-sorted view; no sorting of the payload owner. */
+    public M3IndexedLiveView<E> sortedView(Comparator<? super E> comparator) {
+        return M3IndexedLiveView.sorted(elements, comparator);
+    }
+
+    /** One reusable filter-mask + stable primitive-index sort over the same owner. */
+    public M3IndexedLiveView<E> filteredSortedView(
+            Predicate<? super E> predicate, Comparator<? super E> comparator) {
+        return M3IndexedLiveView.filteredSorted(elements, predicate, comparator);
+    }
+
+    /**
+     * An explicit JNI option compacts only the primitive selection mask;
+     * predicates, comparators and M3ObservableList callbacks always run in Java.
+     * NATIVE_REQUIRED fails if the matching native binary is unavailable.
+     */
+    public M3IndexedLiveView<E> filteredSortedView(
+            Predicate<? super E> predicate, Comparator<? super E> comparator,
+            M3IndexMaskCompactor.Backend backend) {
+        return M3IndexedLiveView.filteredSorted(elements, predicate, comparator, backend);
+    }
 
     /** Duplicates are permitted and each registration receives one callback. */
     public void addListener(Listener<E> listener) {
