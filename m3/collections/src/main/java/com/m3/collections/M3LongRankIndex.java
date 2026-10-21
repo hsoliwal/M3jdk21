@@ -195,6 +195,11 @@ public final class M3LongRankIndex {
         return M3LongRankBatchNative.lowerBounds(values, queries);
     }
 
+    /** Java or optional JNI batched upper bounds, counting duplicate occurrences. */
+    public int[] upperBounds(long[] queries) {
+        return M3LongRankBatchNative.upperBounds(values, queries);
+    }
+
     public long[] toArray() {
         return values.clone();
     }

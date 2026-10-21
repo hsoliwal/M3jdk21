@@ -1,0 +1,32 @@
+# Copyright 2026 Hitesh Soliwal and contributors. SPDX-License-Identifier: Apache-2.0
+name: M3 rank upper JNI receiver
+on:
+  push:
+    branches: [codex/m3-jni-batch-upper-20261021]
+  pull_request:
+    paths:
+      - "m3/collections/src/main/java/com/m3/collections/M3LongRankBatchNative.java"
+      - "m3/collections/src/main/native/collections/m3_long_rank_batch_jni.c"
+      - "m3/collections/qualification/rank-batch-upper-20261021/**"
+      - ".github/workflows/m3-rank-batch-upper-20261021.yml"
+jobs:
+  jni-rank-bound:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            m3/collections/src/main/java/com/m3/collections/M3LaneSearch.java
+            m3/collections/src/main/java/com/m3/collections/M3LongRankBatchNative.java
+            m3/collections/src/main/native/collections/m3_long_rank_batch_jni.c
+            m3/collections/src/test/java/com/m3/collections/M3LongRankUpperBoundsContract.java
+            m3/collections/qualification/rank-batch-upper-20261021/verify.sh
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
+      - name: Java and required/legacy JNI differential
+        run: bash m3/collections/qualification/rank-batch-upper-20261021/verify.sh
