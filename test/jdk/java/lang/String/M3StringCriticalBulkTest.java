@@ -5,8 +5,8 @@
 
 /*
  * @test
- * @summary Independent UTF-16 array oracles for copied, critical and region JNI String access
- * @modules java.base/java.lang:open
+ * @summary Critical-first JNI String access preserves canonical native/mapped owners and independent UTF-16 content
+ * @modules java.base/java.lang:open java.base/java.nio:open
  * @build M3StringRegexNativeBridgeTest
  * @run main/native/othervm -Xmx128m -Xcheck:jni -XX:+UnlockExperimentalVMOptions -XX:-UseM3StringStorage M3StringCriticalBulkTest
  * @run main/native/othervm -Xmx128m -Xcheck:jni -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage M3StringCriticalBulkTest requireM3
@@ -17,10 +17,18 @@
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.lang.ref.WeakReference;
+import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
+import java.nio.MappedByteBuffer;
+import java.nio.channels.FileChannel;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardOpenOption;
 import java.util.Arrays;
 
 /**
- * Reuses the existing native bridge without changing its implementation.
+ * Reuses the existing JNI bridge symbols with GetStringCritical exercised first.
  * Expected digests and round-trip content come only from independent char[] data.
  */
 public final class M3StringCriticalBulkTest {
@@ -40,6 +48,9 @@ public final class M3StringCriticalBulkTest {
     private static Field m3Storage;
     private static Method owner;
     private static Method nativePayloadBytes;
+    private static Field coordinate;
+    private static Field compatibilityValue;
+    private static Object sharedSentinel;
 
     public static void main(String[] args) throws Exception {
         boolean requireM3 = Arrays.asList(args).contains("requireM3");
@@ -56,6 +67,10 @@ public final class M3StringCriticalBulkTest {
             nativePayloadBytes = Class.forName("java.lang.M3StringAtom")
                     .getDeclaredMethod("nativePayloadBytes");
             nativePayloadBytes.setAccessible(true);
+            coordinate = Class.forName("java.lang.M3String").getDeclaredField("value");
+            coordinate.setAccessible(true);
+            compatibilityValue = String.class.getDeclaredField("value");
+            compatibilityValue.setAccessible(true);
         }
         check(invoke(digests, null) == null, "null digest contract");
         check(invoke(roundTrip, null) == null, "null round-trip contract");
@@ -87,6 +102,14 @@ public final class M3StringCriticalBulkTest {
             verify("detached-after-gc-" + round, detached.text(), detached.expected());
         }
         if (requireM3) {
+            MappedFixture mapped = mappedFixture();
+            verify("mapped-critical-first", mapped.text(), mapped.expected());
+            for (int round = 0; round < 3; round++) {
+                pressure = new byte[262144];
+                System.gc();
+                check(mapped.mapping().get() != null, "live ordinary String retains its mapping");
+                verify("mapped-after-gc-" + round, mapped.text(), mapped.expected());
+            }
             check(m3Fixtures > 0, "enabled action exercised admitted M3 strings");
             check(nativeAtomFixtures > 0, "enabled action exercised canonical native atom payloads");
         }
@@ -126,11 +149,23 @@ public final class M3StringCriticalBulkTest {
 
     private static void verify(String label, String text, char[] expected) throws Exception {
         fixtures++;
+        Object originalStorage = null;
+        Object originalOwner = null;
+        Object originalSentinel = null;
+        long originalCoordinate = 0;
         if (m3Storage != null) {
             Object storage = m3Storage.get(text);
             if (storage != null) {
                 m3Fixtures++;
                 Object payloadOwner = owner.invoke(storage);
+                originalStorage = storage;
+                originalOwner = payloadOwner;
+                originalCoordinate = coordinate.getLong(storage);
+                originalSentinel = compatibilityValue.get(text);
+                check(((byte[]) originalSentinel).length == 0,
+                        label + ": no retained compatibility payload before JNI");
+                if (sharedSentinel == null) sharedSentinel = originalSentinel;
+                check(originalSentinel == sharedSentinel, label + ": one shared empty sentinel");
                 if (nativePayloadBytes.getDeclaringClass().isInstance(payloadOwner)
                         && (long) nativePayloadBytes.invoke(payloadOwner) > 0) {
                     nativeAtomFixtures++;
@@ -144,12 +179,80 @@ public final class M3StringCriticalBulkTest {
         for (int method = 0; method < actual.length; method++) {
             check(actual[method] == expectedHash, label + ": JNI digest path " + method);
         }
+        verifyOwnership(label + ": after critical-first access", text, originalStorage,
+                originalOwner, originalCoordinate, originalSentinel);
         String copied = (String) invoke(roundTrip, text);
         check(copied != null, label + ": native NewString is non-null");
         check(copied.length() == expected.length, label + ": native NewString length");
         char[] copiedUnits = new char[expected.length];
         copied.getChars(0, copiedUnits.length, copiedUnits, 0);
         check(Arrays.equals(copiedUnits, expected), label + ": native NewString UTF-16 content");
+        verifyOwnership(label + ": after round-trip", text, originalStorage,
+                originalOwner, originalCoordinate, originalSentinel);
+    }
+
+    private static void verifyOwnership(String label, String text, Object originalStorage,
+            Object originalOwner, long originalCoordinate, Object originalSentinel) throws Exception {
+        if (originalStorage == null) return;
+        Object current = m3Storage.get(text);
+        check(current == originalStorage, label + ": canonical M3 value retained");
+        check(owner.invoke(current) == originalOwner, label + ": canonical owner retained");
+        check(coordinate.getLong(current) == originalCoordinate, label + ": range retained");
+        check(compatibilityValue.get(text) == originalSentinel, label + ": sentinel retained");
+    }
+
+    private record MappedFixture(String text, char[] expected, WeakReference<Object> mapping) { }
+
+    /** Test-owned immutable mapping; no global lexicon or OS-wide interning claim. */
+    private static MappedFixture mappedFixture() throws Exception {
+        char[] expected = units(8193, 2);
+        ByteBuffer bytes = ByteBuffer.allocate(expected.length * Character.BYTES)
+                .order(ByteOrder.BIG_ENDIAN);
+        for (char unit : expected) bytes.putChar(unit);
+        Path path = Files.createTempFile("m3-critical-owner-", ".bin");
+        path.toFile().deleteOnExit();
+        Files.write(path, bytes.array());
+        MappedByteBuffer mapped;
+        try (FileChannel channel = FileChannel.open(path, StandardOpenOption.READ)) {
+            mapped = channel.map(FileChannel.MapMode.READ_ONLY, 0, bytes.capacity());
+        }
+        Field address = java.nio.Buffer.class.getDeclaredField("address");
+        address.setAccessible(true);
+        long base = address.getLong(mapped);
+        check(base != 0, "mapped fixture has native storage");
+        Class<?> valueClass = Class.forName("java.lang.M3String");
+        Class<?> ownerClass = Class.forName("java.lang.M3StringOwner");
+        Class<?> atomClass = Class.forName("java.lang.M3StringAtom");
+        Class<?> poolClass = Class.forName("java.lang.M3StringPool");
+        Method mappedAtom = atomClass.getDeclaredMethod("mapped", Object.class, long.class,
+                byte.class, boolean.class, int.class, byte.class, int.class, long.class, long.class);
+        Method whole = valueClass.getDeclaredMethod("whole", ownerClass);
+        Method concat = poolClass.getDeclaredMethod("concat", valueClass, valueClass);
+        Method mix = poolClass.getDeclaredMethod("mix64", long.class);
+        mappedAtom.setAccessible(true);
+        whole.setAccessible(true);
+        concat.setAccessible(true);
+        mix.setAccessible(true);
+        Object[] pieces = new Object[2];
+        int[] starts = {0, 97};
+        int[] lengths = {97, expected.length - 97};
+        for (int part = 0; part < pieces.length; part++) {
+            int javaHash = 0;
+            for (int index = starts[part]; index < starts[part] + lengths[part]; index++) {
+                javaHash = 31 * javaHash + expected[index];
+            }
+            long id = base + (long) starts[part] * Character.BYTES;
+            long structural = (long) mix.invoke(null, id ^ lengths[part]);
+            Object atom = mappedAtom.invoke(null, mapped, id, (byte) 2, true,
+                    lengths[part], (byte) 1, javaHash, id, structural);
+            pieces[part] = whole.invoke(null, atom);
+        }
+        Object joined = concat.invoke(null, pieces[0], pieces[1]);
+        var constructor = String.class.getDeclaredConstructor(valueClass);
+        constructor.setAccessible(true);
+        String text = constructor.newInstance(joined);
+        check(m3Storage.get(text) == joined, "ordinary String directly retains mapped composition");
+        return new MappedFixture(text, expected, new WeakReference<>(mapped));
     }
 
     private record Detached(String text, char[] expected) { }

@@ -22,14 +22,15 @@ Java_M3StringRegexNativeBridgeTest_digests(JNIEnv *env, jclass unused, jstring t
     (void) unused;
     if (text == NULL) return NULL;
     const jsize length = (*env)->GetStringLength(env, text);
-    const jchar *chars = (*env)->GetStringChars(env, text, NULL);
-    if (chars == NULL) return NULL;
-    const uint64_t copied = checksum(chars, length);
-    (*env)->ReleaseStringChars(env, text, chars);
+    /* Exercise critical access before any copied-string or region projection. */
     const jchar *critical = (*env)->GetStringCritical(env, text, NULL);
     if (critical == NULL) return NULL;
     const uint64_t pinned = checksum(critical, length);
     (*env)->ReleaseStringCritical(env, text, critical);
+    const jchar *chars = (*env)->GetStringChars(env, text, NULL);
+    if (chars == NULL) return NULL;
+    const uint64_t copied = checksum(chars, length);
+    (*env)->ReleaseStringChars(env, text, chars);
     uint64_t region = OFFSET;
     jchar local[128];
     for (jsize at = 0; at < length;) {

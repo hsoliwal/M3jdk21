@@ -1,0 +1,261 @@
+{
+  "epoch": "E1",
+  "sourceSdk": {
+    "sha256": {
+      "release": "30b7acc8c75aab14f8f44d376d6c7d8871ff49eab2ea5c662615285c82b2fb09",
+      "bin/java": "76e09ce124093dc9647a2625af88ad008431bebae0e2ab130717b023b07486c6",
+      "bin/javac": "cb3002735ab7c8215704ac7d571998cde2e82435b7115784261732b170af2545",
+      "bin/jmod": "213855578a62cb110e6b0ac492224bdd9b6dbb5ffe632701e48438569b021503",
+      "bin/jlink": "5f9558b8fea87b8d9be38df0b3ab7198b52375692754a354b83e032061af951a",
+      "lib/modules": "0d67c423c77fc6f17027762d9b6185946fa639a6895879f7dfe13ed9be396a76",
+      "lib/server/libjvm.so": "ed550049a9fd4611dd6265205b227bed77ad387b83266986d71208df0b3114fb",
+      "jmods/java.base.jmod": "5caeaab67ace4197d2195624977685ad1fcad8bc352bf66238ded61725f94955",
+      "jmods/java.compiler.jmod": "9d3986061ee22729f12dc2a9d058f54deb0c47d36acbe98eeb267522a7723560",
+      "jmods/java.datatransfer.jmod": "32412756cdcb53a854942bafcfed20d3a3046522921e6e0cf10e952f362a6461",
+      "jmods/java.desktop.jmod": "5f2194cff1b3596e88add60a56ba10e189cc85cd74c36b8ac6471c81d9c90d07",
+      "jmods/java.instrument.jmod": "11774b9223fbd8d181778938d1f11985bf92032fe4abb712be6f68ac2a0c79c1",
+      "jmods/java.logging.jmod": "9338219495544be0e680af900f315d6f7fa67c091b0ffabcd5328b3b9ea07089",
+      "jmods/java.management.jmod": "c8629f7d4b6f941145020c01fd5a83e957eb39d523dfec03cb312d2fff5fc33a",
+      "jmods/java.management.rmi.jmod": "b8469372cba42c35dc696de5678d199b66c854e1dd29fba1362d947063af88bd",
+      "jmods/java.naming.jmod": "ce40f413620a73575afedbed14d6817cd569b974291558a51ad14bc4f6f972b9",
+      "jmods/java.net.http.jmod": "94dab1ca3b57e03bf43cf4e41c73fcbbf2ba107a9ba747633fdfc54bdd75cd25",
+      "jmods/java.prefs.jmod": "45f1154ce99419a6a17576c40a0d3e5fcd4989870719e4f856bcbaecad37a283",
+      "jmods/java.rmi.jmod": "162524645a908db9348a74763666019fafd5cf591648c178b47c010108d099a4",
+      "jmods/java.scripting.jmod": "b95ba32c13c2004295df9cd814a70f11ff784287105724801f653e4d16a461c6",
+      "jmods/java.se.jmod": "a63b9f9b02c2c92c545e0585a353e23f37859639a9beb20ef017a972077a27cc",
+      "jmods/java.security.jgss.jmod": "446e4159ee720bf141a54d0b921b288e3c044326b8c26bcd97c2786801469d2b",
+      "jmods/java.security.sasl.jmod": "30f3d96191bb1e02e548cccca5056b6b4f283573709d7aa17595f28630b3e48a",
+      "jmods/java.smartcardio.jmod": "b3af019172b5630b06ab3e6e899c4762a1e43906b5bab6abb5f7635c56873020",
+      "jmods/java.sql.jmod": "aa5a45ed4e82ffc77e6f8720be4dc2c961fc84ac79ba7ad760d816de3cb9d11f",
+      "jmods/java.sql.rowset.jmod": "107adbbf64e6e85afa2a2b8c8810a322bf24b6e18f5a81156ddf444f0b36c306",
+      "jmods/java.transaction.xa.jmod": "82d6c86dfba58dec9e3a151041b415f3f3c24cc405763064ffe47e10669416cc",
+      "jmods/java.xml.crypto.jmod": "153a18fcef42534578320745c8e8e52718970f0dedd052f624444a00ec2db11b",
+      "jmods/java.xml.jmod": "d784e473e8fc210af9ef3a9e82f8b1d938f4ff364d09546d034adfc38e105899",
+      "jmods/jdk.accessibility.jmod": "6a843b4cddd6c8a85a1a83b1904a42cc6f41effa1896a05c5c042713838e4a67",
+      "jmods/jdk.attach.jmod": "0172166caf85d29539c90c39bb001ba25382ec4e46466863439d94f3473e9eb1",
+      "jmods/jdk.charsets.jmod": "897042c95a4ca77bf713dd1fe701c8587868100d2304564df8bdd040ceeb8865",
+      "jmods/jdk.compiler.jmod": "a0c5c7fe1e4fbdf44de16c9a7893e00868a60b3f46280cff39a4896f6a8134fe",
+      "jmods/jdk.crypto.cryptoki.jmod": "ecc3ee9a00464903b8135ad79e53f04d6c1d6985dafe6f45f8aae5fce1ff8cda",
+      "jmods/jdk.crypto.ec.jmod": "826e7c79b71a148356b7995d420af1be8eb32a883ec889a603fc99462a990c81",
+      "jmods/jdk.dynalink.jmod": "661090c8c3029596f7f2a33456abbd2ea293d163ed7083a4dbfe148cdc397582",
+      "jmods/jdk.editpad.jmod": "6fb27b4e8edfc50e16401fa3bc62d2bf69ecf66cb1c2c61829fd00569a201b8c",
+      "jmods/jdk.hotspot.agent.jmod": "f076b1c0b06af9e6f9867e1cfae5fb0ccb6e926dcebacdbc4714a39ad272aed1",
+      "jmods/jdk.httpserver.jmod": "be22120ac6ae2d762d90d51f27c6f6bcbd898f6a2fce6cc7cd1dce6b3eb84966",
+      "jmods/jdk.incubator.vector.jmod": "3fba464ec1274a76b96cbb81df63b1204155cdbb96985cf973070a4778610839",
+      "jmods/jdk.internal.ed.jmod": "0f12e716dcbc871fe5933589c0616cf134527ce7fc866c5a8100ed716c8c8d2b",
+      "jmods/jdk.internal.jvmstat.jmod": "9bc8e94a384ac364b0129afe81b940787cc811fd5bac0cc0717bdd4be21cc2e4",
+      "jmods/jdk.internal.le.jmod": "1fa54d0f9012a5375b1bbb1a8b3c72502fcba1eecc064ae62531825e69455667",
+      "jmods/jdk.internal.opt.jmod": "41761b216d4a2284b196ac8ca824352e4ed6c849ba0277a1c3231b98b10c5744",
+      "jmods/jdk.internal.vm.ci.jmod": "234f33579fe53112514422cd69a5d551d6653fe26d5ca6bdc1e8b226bbef3a83",
+      "jmods/jdk.internal.vm.compiler.jmod": "9c4dd29da0eca8c896223982b4382d3e32b4b186b88b9be8e73dca3dd08ff5c6",
+      "jmods/jdk.internal.vm.compiler.management.jmod": "30dd03a3634c16dcf4214e865fc2bbfc43671750efa64c484e8d9c3306a25ded",
+      "jmods/jdk.jartool.jmod": "627e13c462664b93688c802fe7f6e20a36780e627e7c4f40adf0f6fe43df7a29",
+      "jmods/jdk.javadoc.jmod": "ca216097577672c6cc677e20cc28c52c1cae18f2bced407e6ef6a5dce6d30eac",
+      "jmods/jdk.jcmd.jmod": "0963f15824e52b932c5eaba7449de673bac3f1249d3fb7ced87da21bb34b3e22",
+      "jmods/jdk.jconsole.jmod": "76990fac9f211e85e1ecaa69dfa7ff5b7baf3681c76889c668e09cf8ce611f66",
+      "jmods/jdk.jdeps.jmod": "90a9434a80b400b423ce39c483928e285a789bb612a0f0fda7cf5e5f0035dd7f",
+      "jmods/jdk.jdi.jmod": "8ac4c3a7af366608e69ccc7cf49cca1c5393e979c0e1300f6ef3433e58fd2d8a",
+      "jmods/jdk.jdwp.agent.jmod": "c61d86b31691be0c2edd7f5451ef67c9cef058444222aa8f2be4e6bdd22b1043",
+      "jmods/jdk.jfr.jmod": "98d0f1db032b49a571965d1e6e2bbf347cd161b5f631836f5ebc24c5397041f6",
+      "jmods/jdk.jlink.jmod": "a0d74d4a16d4f30e0004d15fdf04c93fdfb804f360cbad02ad68fc4de0eaa9eb",
+      "jmods/jdk.jpackage.jmod": "5cedaa394cd1a5b0df641568928589f7db6fa551fc24e1929425a7e0f5f99f0c",
+      "jmods/jdk.jshell.jmod": "fa4b6863a405bda945d11fccbd13ae2ce640bc3b38d18e890d16a2940b7d4544",
+      "jmods/jdk.jsobject.jmod": "95d1fcda4529f67fb28ffb4829f5bdea8cde772820e726052f5e484677c875bb",
+      "jmods/jdk.jstatd.jmod": "a68c72e5cf761e1aec5abf15dd2b2dbfda7df746cef85a87ee53f4c88e0de7e9",
+      "jmods/jdk.localedata.jmod": "575804c03fee860b12f26ce2ba76232286f4adfd1b350dbd0f6eac58c0afd93d",
+      "jmods/jdk.management.agent.jmod": "c46cb5867edaa5f06e2a5f9b4a6f4beb77bc0545f0d82e092a9d700fa177d1a6",
+      "jmods/jdk.management.jfr.jmod": "1f5a7377d5e83e21a65fb94cc6e1ce8f8a4850a394c8107dfbe7fab06a9a0322",
+      "jmods/jdk.management.jmod": "a5bf7adfd8cb54e83c18acf2f544662c9ed5bca85d2bc33da18095dd3040cdb1",
+      "jmods/jdk.naming.dns.jmod": "3273a7321f0953206fe5364bb5158d8ca037549e83f1734c4070619d41625d28",
+      "jmods/jdk.naming.rmi.jmod": "0645514636fd8412277273a1822fc391212bfab451e1395cb2ed5890e6bbc1c9",
+      "jmods/jdk.net.jmod": "3f6d2994f59b111c5c1dc277e88e25bc070b02e024bcb3008c0720a6d25c2a68",
+      "jmods/jdk.nio.mapmode.jmod": "df9ece80c94cd720126c0cd6ff19120db9d96f12ae725cb63ec3f5cb34846e96",
+      "jmods/jdk.random.jmod": "ac49ab03820c741c414c7e19941ae590cae7f4db2661439c744c73e47eaaf335",
+      "jmods/jdk.sctp.jmod": "5150f862f3bc6b4945d3041dda3510b0e00950998afc09347c1ff938f81b1ed9",
+      "jmods/jdk.security.auth.jmod": "7b818b19dfa1bc57206cd33c6e05c7859e3fba584b4c531237ba33ba75fb469f",
+      "jmods/jdk.security.jgss.jmod": "f8c6655d7310b26f292af1f07009ad63ac14a1d16a363631bb472910dae4a465",
+      "jmods/jdk.unsupported.desktop.jmod": "66f47bf1e763860019fe2520adf2703f64a1be23bd896739ccce35d56f954dfb",
+      "jmods/jdk.unsupported.jmod": "8672322846f02c8189c54edacdb35fa9a12641c3ff45d20f3a73b74dd346188c",
+      "jmods/jdk.xml.dom.jmod": "6d76b89d6998fdd90415b114ec36edb4b8994840e9d7804cb71c47734c464ab1",
+      "jmods/jdk.zipfs.jmod": "9d3e561e339df60f22ef5c6107bc471d6028da65b26ef51c6aec595438b7c88d"
+    },
+    "sourceHome": "${SOURCE_SDK}",
+    "nativeJniHeadersEquivalent": true
+  },
+  "jniHeaderEquivalence": [
+    {
+      "path": "include/jni.h",
+      "bootSha256": "99e64ebbe749e6df284f852f11b3c73f6ea97baf15120428f40f887fe0616e61",
+      "sourceSdkSha256": "99e64ebbe749e6df284f852f11b3c73f6ea97baf15120428f40f887fe0616e61",
+      "equal": true
+    },
+    {
+      "path": "include/linux/jni_md.h",
+      "bootSha256": "88cb5c33e306900dd35a78d5a439087123b8e91b0986bb5acb42cc9bd2fcc42e",
+      "sourceSdkSha256": "88cb5c33e306900dd35a78d5a439087123b8e91b0986bb5acb42cc9bd2fcc42e",
+      "equal": true
+    }
+  ],
+  "ownerScripts": {
+    "m3/tooling/jmod-recipes/tools/jmod_pack.py": "8acdc46eaa0cac0861384d6caf252d1a2f763c80d09b68932177e1dac598bfaf",
+    "m3/tooling/jmod-recipes/tools/jmod_image.py": "407622e9a4db86f1b9abae2e451638713b151f14256190c0e28fe7d0739eb7cf"
+  },
+  "owningVerifierSha256": "f6a76836d96bc6d41033ce94b0aa760fd5f68ebcb903396bb5f6eb1618d0931a",
+  "nativeCompiler": "cc C17 Wall Wextra Werror O2; generated headers force-included; no test-only binaries packaged",
+  "nativeMappingOwner": "m3/collections/qualification/full-java-jni-20261018/verify.py",
+  "nativeLibraries": [
+    {
+      "library": "m3_collections_address",
+      "sha256": "dfc8810af986e1b7c1310aafedf9601649d10c5b18558e88993d29d7dbfbed79",
+      "strippedReferenceSha256": "d595c7364d37f67a7aed37ce592c8db352f1d5e64720534c61131c8b049a2d47",
+      "jniExports": [
+        "Java_com_m3_collections_M3LongAddressKernel_gatherNative"
+      ],
+      "inputs": {
+        "m3/collections/src/main/native/collections/m3_long_address_kernel.c": "49a3e45262ee764c37746c323ae0def76adfff5f27a4cace6ab7416587ca544f",
+        "m3/collections/target/full-java-jni/headers/com_m3_collections_M3LongAddressKernel.h": "dffaa88fa278c69424c6879ddbe2b6d741e37dd48e123e97ebb86043b6b59df7"
+      }
+    },
+    {
+      "library": "m3_collections_long_path_masks",
+      "sha256": "bd16e8935eb29d6d165cf5f7788c7566c2cc07b34f7f48b604801bb14b93f024",
+      "strippedReferenceSha256": "a0ccdadf1cc5fc56b730d37e403be7616ade724e8224ad12737004cd8fb82a93",
+      "jniExports": [
+        "Java_com_m3_collections_M3LongIndexPathMasksJNI_scanWindowNative",
+        "Java_com_m3_collections_M3LongIndexPathMasksJNI_selectNative"
+      ],
+      "inputs": {
+        "m3/collections/src/main/native/collections/m3_long_index_path_masks_jni.c": "c5971bd4bb6ee01a5385cc9ae22a2d7bc2bedd2163a1e39dd24cf76ec5f5e512",
+        "m3/collections/target/full-java-jni/headers/com_m3_collections_M3LongIndexPathMasksJNI.h": "68dd32b3203baa60ac10eed61030f7c770664eec42ac3689666b042c11f48758"
+      }
+    },
+    {
+      "library": "m3_collections_mask",
+      "sha256": "1c8f2f3036c9959e93a78ec0d943820c1fa21320b55e79cc42fbe6726bb1366d",
+      "strippedReferenceSha256": "1e5678c8c22a1a88dbae031eeffa306f9a83e0a462dbfd5df2bc63292b8ae44b",
+      "jniExports": [
+        "Java_com_m3_collections_M3IndexMaskCompactor_positionsAbiNative",
+        "Java_com_m3_collections_M3IndexMaskCompactor_positionsMasksAbiNative",
+        "Java_com_m3_collections_M3IndexMaskCompactor_rangeAbiNative",
+        "Java_com_m3_collections_M3IndexMaskCompactor_selectLongWindowNative",
+        "Java_com_m3_collections_M3IndexMaskCompactor_selectNative",
+        "Java_com_m3_collections_M3IndexMaskCompactor_selectPositionsMasksNative",
+        "Java_com_m3_collections_M3IndexMaskCompactor_selectPositionsNative",
+        "Java_com_m3_collections_M3IndexMaskCompactor_selectRangeNative",
+        "Java_com_m3_collections_M3IndexMaskCompactor_selectWindowNative",
+        "Java_com_m3_collections_M3IndexMaskWindow_scanBoundedNative",
+        "Java_com_m3_collections_M3IndexMaskWindow_scanNative"
+      ],
+      "inputs": {
+        "m3/collections/src/main/native/collections/m3_index_mask_compactor.c": "fedca631c2f0f0f73a27dde5e87395e95ac00fde07fc1d7006735c2ef18a579a",
+        "m3/collections/target/full-java-jni/headers/com_m3_collections_M3IndexMaskCompactor.h": "2c9ee704fe1128ca05a7ff38b6844ad178fd79c03fef0aa24fe9605778f46c81",
+        "m3/collections/src/main/native/collections/m3_index_mask_window.c": "8107ba8ba5f9d7519563eba9d20e76932dd077b2359f056b05ccd0a2d7d62e18",
+        "m3/collections/target/full-java-jni/headers/com_m3_collections_M3IndexMaskWindow.h": "26d6f1302b888bbebde68d4d911f7b74d91c1fe5f90871928af0220829dc9866"
+      }
+    },
+    {
+      "library": "m3_collections_pathmask",
+      "sha256": "a76f6d66d14f331aabd1ea0b5769f7938d7db4e03a58dd8185cebc3401cdcbc9",
+      "strippedReferenceSha256": "559661faef8b969803e1e5889c04a34d7cf0be15730192ffc5f0793cc610d809",
+      "jniExports": [
+        "Java_com_m3_collections_M3IndexPathMasks_selectNative"
+      ],
+      "inputs": {
+        "m3/collections/src/main/native/collections/m3_index_path_masks.c": "3f5a760e633762469fad5a9dcd531cb39c33d11752d79ad241e506800b26e7cb",
+        "m3/collections/target/full-java-jni/headers/com_m3_collections_M3IndexPathMasks.h": "5781e35d4a9a16a037e1e80a8e45f7ee53283822691ed863a7476e5defa9fe50"
+      }
+    },
+    {
+      "library": "m3_collections_span",
+      "sha256": "74fddae415c1be87620c9334a78a4a4e5ed0d1f4404eab612826e9737936c891",
+      "strippedReferenceSha256": "15b472453315a76b06221dff2ece8410ab01c0e4fb754eb62b26d4a3aac735fa",
+      "jniExports": [
+        "Java_com_m3_collections_M3SpanIndex_batchNative"
+      ],
+      "inputs": {
+        "m3/collections/src/main/native/collections/m3_span_index_jni.c": "f33781ca270dda25553986da350d4d5fc3808c483363c93a7bad64717effaf3c",
+        "m3/collections/target/full-java-jni/headers/com_m3_collections_M3SpanIndex.h": "97f7008debc3cb89057b4ca7be9f4fcbc9af8a5e823bc97e2c008cb243ad73cf"
+      }
+    },
+    {
+      "library": "m3_collections_statehist",
+      "sha256": "07a176660b6b03f2cfed23e1e8d162d59308b1449d44da49071466d9069fc486",
+      "strippedReferenceSha256": "e8da101d5daaf4e5524af4a97a6025dd8ae893f89665b4cf0234b1b8402f14ba",
+      "jniExports": [
+        "Java_com_m3_collections_M3StateMaskHistogram_tallyNative"
+      ],
+      "inputs": {
+        "m3/collections/src/main/native/collections/m3_state_mask_histogram.c": "21ff3a8dade438a819d411fba96a6cb4ee8ddbd4c568409686137c42524e41bf",
+        "m3/collections/target/full-java-jni/headers/com_m3_collections_M3StateMaskHistogram.h": "7a7d83d5f7cebfb88857a2bc331570b4902ed71acb994f978eb05c3a8f5a51f4"
+      }
+    },
+    {
+      "library": "m3_residency_state_mask",
+      "sha256": "d8dd732728c3291f229793d4b47e1a5e9de953b4d71b9bb35fc21fbf68cfd2fe",
+      "strippedReferenceSha256": "7cd1f1afdb07e2e941dcf352126746a58bd6602e574fca7aa240d52a3280eb4e",
+      "jniExports": [
+        "Java_com_m3_collections_M3ResidencyStateMaskIndex_select0"
+      ],
+      "inputs": {
+        "m3/collections/src/main/native/collections/m3_residency_state_mask.c": "07076627c4cdca856ead90d400c467d7259b65a7970dfbea114ffd66a9bb54e4",
+        "m3/collections/target/full-java-jni/headers/com_m3_collections_M3ResidencyStateMaskIndex.h": "f29cf38398b9d0972f57cea34d8fc7ecce822c484e8c02e8175c11dfe684e0ff"
+      }
+    },
+    {
+      "library": "m3bitlane",
+      "sha256": "73c1a18eb5a010941f9f45f43f06b63f3a135ec3a4b9fbfaf9996258ac800e49",
+      "strippedReferenceSha256": "683ca18e9543a57a0c0119fc92edb01fafcdaa761fb5643f7ea6ff70d44b2fc2",
+      "jniExports": [
+        "Java_com_m3_collections_M3BitLane28_cardinality0"
+      ],
+      "inputs": {
+        "m3/collections/src/main/native/collections/segmented_bit_lane.c": "4ff7fb4557c58cc59de7fbb24498f3df2a197083a5cd467670dc24b9441f1210",
+        "m3/collections/target/full-java-jni/headers/com_m3_collections_M3BitLane28.h": "9100fb4d366f16641b244df49c3f284c72f618a8a0b925f6038a87c089d903e1"
+      }
+    },
+    {
+      "library": "m3rankbatch",
+      "sha256": "b5755cf98e19a43c140db7195bef0271437f7c620542be9017b68d9a56ccc74e",
+      "strippedReferenceSha256": "f50692c10cd31e53886e352e5254828a41e24afbbd6aab2f1943fb6359f56c24",
+      "jniExports": [
+        "Java_com_m3_collections_M3LongRankBatchNative_lowerBounds0"
+      ],
+      "inputs": {
+        "m3/collections/src/main/native/collections/m3_long_rank_batch_jni.c": "50c741073d6ef0b4efbd4a90c1f336f42945fa3bcd5824455f213f7509a52388",
+        "m3/collections/target/full-java-jni/headers/com_m3_collections_M3LongRankBatchNative.h": "d1b1b66ab80343d0ac9674334c2facf4c6e371200f463db2100ae6b73c7bc641"
+      }
+    },
+    {
+      "library": "m3signalorder",
+      "sha256": "4ebac165598835cbcb9683904a82cc772ebb5c889a8229257aeb1f803db0702e",
+      "strippedReferenceSha256": "34244eb9d77d2ffbb55b65df6a4be1c066d52526ef4f975b8545ab6349471930",
+      "jniExports": [
+        "Java_com_m3_collections_M3SignalOrderNative_sort0"
+      ],
+      "inputs": {
+        "m3/collections/src/main/native/collections/m3_signal_order_jni.c": "8dc63771408057e56610719e6d562454bece9769a5727c7614c104e659dc8a22",
+        "m3/collections/target/full-java-jni/headers/com_m3_collections_M3SignalOrderNative.h": "9aa514761c1a67d298c0cf463db64cbfde1f380951eadf30c8d664b3a1a15c96"
+      }
+    }
+  ],
+  "moduleJarSha256": "a1e9c1dc0234ddc6fa3ae0534d981d2467ec11fa93add05c25ca5b0bf693e879",
+  "stagedFileCount": 433,
+  "stagedFileIndexSha256": "8d5450a35e44129ff3340419a6a26cd108995268a1c9ad1529198b762ae08a6a",
+  "stagedFileIndexHashEncoding": "UTF-8 JSON object; sorted keys; separators comma and colon; no final newline",
+  "stagedFilesReceiptSha256": "e4e8242d74016da75db3259882ef4ce0f951e62cee8ac574a0806065f50a1265",
+  "productionClassCount": 512,
+  "externalTestClassCount": 420,
+  "productionTestClassOverlap": false,
+  "stagedSourceAndLegalHashes": {
+    "inputs/core-sources/BootstrapViewsTest.java": "a36b48eee0924abd57ce1a356d26ce4e8c6516170e65478cd42cb2d09fbd8a75",
+    "inputs/core-sources/CollectionViewsCoreContract.java": "3060640c56a40eb15a90c20150e3e5ef55aea96af5dab45c53fcba301e929208",
+    "inputs/core-sources/CollectionViewsCowBulkTest.java": "f95a9a35f6b6ed1f25d2e6e5d14a0df7a5bedaa36b4c346f92be53208769da0d",
+    "inputs/core-sources/CollectionViewsIdentityContract.java": "e332147bc9f559f63fa4d5f0909c58e5416f3a20e4992da8ab13d6fba100fd7f",
+    "inputs/core-sources/CollectionViewsIdentityTest.java": "246c2eb27e26310a7ced850f55bb443c08456c557eba6da1686a07f998f87a36",
+    "inputs/core-sources/CollectionViewsRefinement.java": "16b8cbd6f1fe1287435284e3680a6c2b603f3fdabb17806cc61ea409d03425a7",
+    "inputs/legal/LICENSE": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+    "inputs/legal/NETBEANS-NOTICE.txt": "88b6f1f16df90583111f75cb4cda5e3431b8797e59f09d2dd299e0ee1de9fa54",
+    "inputs/legal/NOTICE": "81138f9994f4afa899c22904debf7cf8277803cf21b53536108ac7e254b0a5bb",
+    "inputs/legal/SYNEXIA-DONATION-NOTICE.txt": "8b99e55314dface1175cf4c9a0f5d23d699920877b838b54e657c65dd8f25556"
+  }
+}

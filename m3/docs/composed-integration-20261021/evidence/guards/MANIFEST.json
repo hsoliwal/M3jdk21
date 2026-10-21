@@ -1,0 +1,44 @@
+{
+  "schema": "M3_GUARD_EVIDENCE_V1",
+  "copyright": "Copyright 2026 Hitesh Soliwal and contributors",
+  "license": "Apache-2.0 for this receipt; referenced source rights unchanged",
+  "scope": "Original and final policy/source guards; String phase remains failed on baseline and receiver; full-borrow SOURCE_PIN_ONLY does not advance promotion",
+  "files": [
+    {
+      "path": "candidate.json",
+      "raw_source": "guards/candidate.json",
+      "raw_sha256": "0ebd717c3e91081777a9f176ea82256948194fa8916fbc11383ea2d239fd289d",
+      "published_sha256": "e55067f05b5c7b092e92ce25ecc7f26277e39e2a38295d54040fdce189d740aa"
+    },
+    {
+      "path": "baseline-string-phase.json",
+      "raw_source": "guards/baseline-string-phase.json",
+      "raw_sha256": "619f784116a8f0c7fde85d0bfd9e2f61bee518c2ae6605d0d61c6ff7e464e1f9",
+      "published_sha256": "619f784116a8f0c7fde85d0bfd9e2f61bee518c2ae6605d0d61c6ff7e464e1f9"
+    },
+    {
+      "path": "baseline-string-phase.log",
+      "raw_source": "guards/baseline-string-phase.log",
+      "raw_sha256": "67f59b55303523b98f130f76cd3dd293241923da0a512ab5c8f5fdac6800d194",
+      "published_sha256": "8d7bf998665451c65e8de1b1365fcc42edaa555568eac13d8f748a8458c9376b"
+    },
+    {
+      "path": "final-string-phase.log",
+      "raw_source": "guards/final-string-phase.log",
+      "raw_sha256": "063c76f61f2915c7fc6e8f07b361a0e162bc34e9d6d9cdcba20302392af92db5",
+      "published_sha256": "c2fff1d1f4d709e20d8726db27190729c43acd731b35ee54e2e8644a939ea9d9"
+    },
+    {
+      "path": "final-full-borrow.log",
+      "raw_source": "guards/final-full-borrow.log",
+      "raw_sha256": "69354cd1ab04227bdf9f5a5a912361e57b90b1d8315146d447827e2636a259e5",
+      "published_sha256": "69354cd1ab04227bdf9f5a5a912361e57b90b1d8315146d447827e2636a259e5"
+    },
+    {
+      "path": "receiving-concat-source-gate.log",
+      "raw_source": "receiving-concat-source-gate.log",
+      "raw_sha256": "3ba4380bca0c24aef2002ead0c359fc8d5858b927e6d7b3f99490399f0f393fd",
+      "published_sha256": "3ba4380bca0c24aef2002ead0c359fc8d5858b927e6d7b3f99490399f0f393fd"
+    }
+  ]
+}

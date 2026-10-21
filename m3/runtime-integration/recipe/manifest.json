@@ -197,7 +197,10 @@
     },
     "src/java.base/share/classes/java/lang/invoke/StringConcatFactory.java": {
       "before": "847d49e8b3b8de4183c4551c0965d9919ab942c0bef996d787f1f36174579010",
-      "after": "0bdcf30e2e090545d41e80566ca2b60d50d3a1c3e80e3dc849f1a22ecc3e11b8"
+      "after": "0bdcf30e2e090545d41e80566ca2b60d50d3a1c3e80e3dc849f1a22ecc3e11b8",
+      "superseded": [
+        "732c410330a1137aace06d3b20e0e8a86899b4fe98f15c738d588102383c4052"
+      ]
     },
     "src/java.base/share/classes/java/util/regex/M3PatternQuery.java": {
       "before": null,

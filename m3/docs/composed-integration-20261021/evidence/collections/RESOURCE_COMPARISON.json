@@ -1,0 +1,1483 @@
+{
+  "schema": "M3_RADIX_PAIRED_RESOURCE_DIAGNOSTIC_V1",
+  "status": "PASS_EXECUTED_DIAGNOSTIC",
+  "benchmarkSource": "m3/collections/src/test/java/com/m3/collections/M3SignalRadixUniformBench.java",
+  "benchmarkSha256": "8b026711262170986520d92fe782913d6a138f66bb9c795b6de748b11aa3dbe4",
+  "processes": 8,
+  "workloadRows": 96,
+  "forkOrder": "round1 baseline,candidate;round2 candidate,baseline;Java then JNI",
+  "jvm": "Temurin21.0.12.1+1;Xms256m;Xmx256m;ActiveProcessorCount2;Xcheck:jni;existing signal native opt-in true",
+  "sampleProtocol": "existing unchanged donor:2*repetitions warmup;9 samples;reported median;fixed seed31337;repetitionsmax16..2048",
+  "sourceSeals": [
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3SignalOrder.java",
+      "base": "a115db5d8d9a53c20bf6f6880286a967a80a8dda",
+      "donor": "5217d74a6efe62a0e6d42807e692b5a0f4dc2e42",
+      "preimageSha256": "15c85e74a51a716af1b11038c05263b83b1a1ea02f345bc3838d661a158fd80f",
+      "postimageSha256": "3b117a531afd39f071fda04796684084812371982295a508270e58bfb70a2430"
+    },
+    {
+      "path": "m3/collections/src/main/native/collections/m3_signal_order_jni.c",
+      "base": "a115db5d8d9a53c20bf6f6880286a967a80a8dda",
+      "donor": "5217d74a6efe62a0e6d42807e692b5a0f4dc2e42",
+      "preimageSha256": "e7a5991f5be2e0bad99400ff477a1c03ec9d1d8e1236f9faf366485f94966ed5",
+      "postimageSha256": "8dc63771408057e56610719e6d562454bece9769a5727c7614c104e659dc8a22"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3SignalRadixUniformBench.java",
+      "base": "a115db5d8d9a53c20bf6f6880286a967a80a8dda",
+      "donor": "5217d74a6efe62a0e6d42807e692b5a0f4dc2e42",
+      "preimageSha256": null,
+      "postimageSha256": "8b026711262170986520d92fe782913d6a138f66bb9c795b6de748b11aa3dbe4"
+    }
+  ],
+  "runs": "RUNS.json",
+  "summary": [
+    {
+      "backend": "java",
+      "size": 0,
+      "distribution": "repeated",
+      "medianWallNs": {
+        "baseline": [
+          82,
+          75
+        ],
+        "candidate": [
+          71,
+          80
+        ]
+      },
+      "medianCpuNs": {
+        "baseline": [
+          83,
+          76
+        ],
+        "candidate": [
+          71,
+          80
+        ]
+      },
+      "allocatedBytes": {
+        "baseline": [
+          24,
+          24
+        ],
+        "candidate": [
+          24,
+          24
+        ]
+      },
+      "retainedIndexPayloadBytes": {
+        "baseline": [
+          0,
+          0
+        ],
+        "candidate": [
+          0,
+          0
+        ]
+      },
+      "modeledNativeScratchBytes": {
+        "baseline": [
+          0,
+          0
+        ],
+        "candidate": [
+          0,
+          0
+        ]
+      },
+      "cpuRatioCandidateOverBaseline": 0.949685534591195,
+      "memoryFieldsEqual": true
+    },
+    {
+      "backend": "java",
+      "size": 0,
+      "distribution": "narrow",
+      "medianWallNs": {
+        "baseline": [
+          54,
+          53
+        ],
+        "candidate": [
+          55,
+          55
+        ]
+      },
+      "medianCpuNs": {
+        "baseline": [
+          55,
+          54
+        ],
+        "candidate": [
+          55,
+          56
+        ]
+      },
+      "allocatedBytes": {
+        "baseline": [
+          24,
+          24
+        ],
+        "candidate": [
+          24,
+          24
+        ]
+      },
+      "retainedIndexPayloadBytes": {
+        "baseline": [
+          0,
+          0
+        ],
+        "candidate": [
+          0,
+          0
+        ]
+      },
+      "modeledNativeScratchBytes": {
+        "baseline": [
+          0,
+          0
+        ],
+        "candidate": [
+          0,
+          0
+        ]
+      },
+      "cpuRatioCandidateOverBaseline": 1.018348623853211,
+      "memoryFieldsEqual": true
+    },
+    {
+      "backend": "java",
+      "size": 0,
+      "distribution": "varying",
+      "medianWallNs": {
+        "baseline": [
+          57,
+          54
+        ],
+        "candidate": [
+          64,
+          54
+        ]
+      },
+      "medianCpuNs": {
+        "baseline": [
+          57,
+          55
+        ],
+        "candidate": [
+          64,
+          55
+        ]
+      },
+      "allocatedBytes": {
+        "baseline": [
+          24,
+          24
+        ],
+        "candidate": [
+          24,
+          24
+        ]
+      },
+      "retainedIndexPayloadBytes": {
+        "baseline": [
+          0,
+          0
+        ],
+        "candidate": [
+          0,
+          0
+        ]
+      },
+      "modeledNativeScratchBytes": {
+        "baseline": [
+          0,
+          0
+        ],
+        "candidate": [
+          0,
+          0
+        ]
+      },
+      "cpuRatioCandidateOverBaseline": 1.0625,
+      "memoryFieldsEqual": true
+    },
+    {
+      "backend": "java",
+      "size": 1,
+      "distribution": "repeated",
+      "medianWallNs": {
+        "baseline": [
+          72,
+          72
+        ],
+        "candidate": [
+          103,
+          124
+        ]
+      },
+      "medianCpuNs": {
+        "baseline": [
+          73,
+          67
+        ],
+        "candidate": [
+          94,
+          124
+        ]
+      },
+      "allocatedBytes": {
+        "baseline": [
+          72,
+          72
+        ],
+        "candidate": [
+          72,
+          72
+        ]
+      },
+      "retainedIndexPayloadBytes": {
+        "baseline": [
+          4,
+          4
+        ],
+        "candidate": [
+          4,
+          4
+        ]
+      },
+      "modeledNativeScratchBytes": {
+        "baseline": [
+          0,
+          0
+        ],
+        "candidate": [
+          0,
+          0
+        ]
+      },
+      "cpuRatioCandidateOverBaseline": 1.5571428571428572,
+      "memoryFieldsEqual": true
+    },
+    {
+      "backend": "java",
+      "size": 1,
+      "distribution": "narrow",
+      "medianWallNs": {
+        "baseline": [
+          55,
+          60
+        ],
+        "candidate": [
+          65,
+          61
+        ]
+      },
+      "medianCpuNs": {
+        "baseline": [
+          55,
+          60
+        ],
+        "candidate": [
+          66,
+          61
+        ]
+      },
+      "allocatedBytes": {
+        "baseline": [
+          72,
+          72
+        ],
+        "candidate": [
+          72,
+          72
+        ]
+      },
+      "retainedIndexPayloadBytes": {
+        "baseline": [
+          4,
+          4
+        ],
+        "candidate": [
+          4,
+          4
+        ]
+      },
+      "modeledNativeScratchBytes": {
+        "baseline": [
+          0,
+          0
+        ],
+        "candidate": [
+          0,
+          0
+        ]
+      },
+      "cpuRatioCandidateOverBaseline": 1.1043478260869566,
+      "memoryFieldsEqual": true
+    },
+    {
+      "backend": "java",
+      "size": 1,
+      "distribution": "varying",
+      "medianWallNs": {
+        "baseline": [
+          56,
+          59
+        ],
+        "candidate": [
+          65,
+          54
+        ]
+      },
+      "medianCpuNs": {
+        "baseline": [
+          57,
+          59
+        ],
+        "candidate": [
+          66,
+          55
+        ]
+      },
+      "allocatedBytes": {
+        "baseline": [
+          72,
+          72
+        ],
+        "candidate": [
+          72,
+          72
+        ]
+      },
+      "retainedIndexPayloadBytes": {
+        "baseline": [
+          4,
+          4
+        ],
+        "candidate": [
+          4,
+          4
+        ]
+      },
+      "modeledNativeScratchBytes": {
+        "baseline": [
+          0,
+          0
+        ],
+        "candidate": [
+          0,
+          0
+        ]
+      },
+      "cpuRatioCandidateOverBaseline": 1.043103448275862,
+      "memoryFieldsEqual": true
+    },
+    {
+      "backend": "java",
+      "size": 256,
+      "distribution": "repeated",
+      "medianWallNs": {
+        "baseline": [
+          8949,
+          7093
+        ],
+        "candidate": [
+          6330,
+          3571
+        ]
+      },
+      "medianCpuNs": {
+        "baseline": [
+          8856,
+          7076
+        ],
+        "candidate": [
+          6338,
+          3576
+        ]
+      },
+      "allocatedBytes": {
+        "baseline": [
+          7272,
+          7272
+        ],
+        "candidate": [
+          7272,
+          7272
+        ]
+      },
+      "retainedIndexPayloadBytes": {
+        "baseline": [
+          1024,
+          1024
+        ],
+        "candidate": [
+          1024,
+          1024
+        ]
+      },
+      "modeledNativeScratchBytes": {
+        "baseline": [
+          0,
+          0
+        ],
+        "candidate": [
+          0,
+          0
+        ]
+      },
+      "cpuRatioCandidateOverBaseline": 0.6222696459954808,
+      "memoryFieldsEqual": true
+    },
+    {
+      "backend": "java",
+      "size": 256,
+      "distribution": "narrow",
+      "medianWallNs": {
+        "baseline": [
+          6552,
+          5788
+        ],
+        "candidate": [
+          4307,
+          3528
+        ]
+      },
+      "medianCpuNs": {
+        "baseline": [
+          6556,
+          5792
+        ],
+        "candidate": [
+          4305,
+          3531
+        ]
+      },
+      "allocatedBytes": {
+        "baseline": [
+          7272,
+          7272
+        ],
+        "candidate": [
+          7272,
+          7272
+        ]
+      },
+      "retainedIndexPayloadBytes": {
+        "baseline": [
+          1024,
+          1024
+        ],
+        "candidate": [
+          1024,
+          1024
+        ]
+      },
+      "modeledNativeScratchBytes": {
+        "baseline": [
+          0,
+          0
+        ],
+        "candidate": [
+          0,
+          0
+        ]
+      },
+      "cpuRatioCandidateOverBaseline": 0.6345966958211856,
+      "memoryFieldsEqual": true
+    },
+    {
+      "backend": "java",
+      "size": 256,
+      "distribution": "varying",
+      "medianWallNs": {
+        "baseline": [
+          6330,
+          5866
+        ],
+        "candidate": [
+          5834,
+          5259
+        ]
+      },
+      "medianCpuNs": {
+        "baseline": [
+          6334,
+          5870
+        ],
+        "candidate": [
+          5838,
+          5250
+        ]
+      },
+      "allocatedBytes": {
+        "baseline": [
+          7272,
+          7272
+        ],
+        "candidate": [
+          7272,
+          7272
+        ]
+      },
+      "retainedIndexPayloadBytes": {
+        "baseline": [
+          1024,
+          1024
+        ],
+        "candidate": [
+          1024,
+          1024
+        ]
+      },
+      "modeledNativeScratchBytes": {
+        "baseline": [
+          0,
+          0
+        ],
+        "candidate": [
+          0,
+          0
+        ]
+      },
+      "cpuRatioCandidateOverBaseline": 0.9085545722713865,
+      "memoryFieldsEqual": true
+    },
+    {
+      "backend": "java",
+      "size": 65536,
+      "distribution": "repeated",
+      "medianWallNs": {
+        "baseline": [
+          1280357,
+          1178592
+        ],
+        "candidate": [
+          680652,
+          599316
+        ]
+      },
+      "medianCpuNs": {
+        "baseline": [
+          1237801,
+          1149535
+        ],
+        "candidate": [
+          667709,
+          580908
+        ]
+      },
+      "allocatedBytes": {
+        "baseline": [
+          1573992,
+          1573992
+        ],
+        "candidate": [
+          1573992,
+          1573992
+        ]
+      },
+      "retainedIndexPayloadBytes": {
+        "baseline": [
+          262144,
+          262144
+        ],
+        "candidate": [
+          262144,
+          262144
+        ]
+      },
+      "modeledNativeScratchBytes": {
+        "baseline": [
+          0,
+          0
+        ],
+        "candidate": [
+          0,
+          0
+        ]
+      },
+      "cpuRatioCandidateOverBaseline": 0.5230168690121542,
+      "memoryFieldsEqual": true
+    },
+    {
+      "backend": "java",
+      "size": 65536,
+      "distribution": "narrow",
+      "medianWallNs": {
+        "baseline": [
+          1385003,
+          1278785
+        ],
+        "candidate": [
+          754402,
+          962743
+        ]
+      },
+      "medianCpuNs": {
+        "baseline": [
+          1334337,
+          1237831
+        ],
+        "candidate": [
+          684408,
+          925764
+        ]
+      },
+      "allocatedBytes": {
+        "baseline": [
+          1573992,
+          1573992
+        ],
+        "candidate": [
+          1573992,
+          1573992
+        ]
+      },
+      "retainedIndexPayloadBytes": {
+        "baseline": [
+          262144,
+          262144
+        ],
+        "candidate": [
+          262144,
+          262144
+        ]
+      },
+      "modeledNativeScratchBytes": {
+        "baseline": [
+          0,
+          0
+        ],
+        "candidate": [
+          0,
+          0
+        ]
+      },
+      "cpuRatioCandidateOverBaseline": 0.6259979907999789,
+      "memoryFieldsEqual": true
+    },
+    {
+      "backend": "java",
+      "size": 65536,
+      "distribution": "varying",
+      "medianWallNs": {
+        "baseline": [
+          1569096,
+          1866717
+        ],
+        "candidate": [
+          1232691,
+          1433041
+        ]
+      },
+      "medianCpuNs": {
+        "baseline": [
+          1562761,
+          1853444
+        ],
+        "candidate": [
+          1186857,
+          1392897
+        ]
+      },
+      "allocatedBytes": {
+        "baseline": [
+          1573992,
+          1573992
+        ],
+        "candidate": [
+          1573992,
+          1573992
+        ]
+      },
+      "retainedIndexPayloadBytes": {
+        "baseline": [
+          262144,
+          262144
+        ],
+        "candidate": [
+          262144,
+          262144
+        ]
+      },
+      "modeledNativeScratchBytes": {
+        "baseline": [
+          0,
+          0
+        ],
+        "candidate": [
+          0,
+          0
+        ]
+      },
+      "cpuRatioCandidateOverBaseline": 0.7551519888297101,
+      "memoryFieldsEqual": true
+    },
+    {
+      "backend": "native",
+      "size": 0,
+      "distribution": "repeated",
+      "medianWallNs": {
+        "baseline": [
+          102,
+          95
+        ],
+        "candidate": [
+          75,
+          76
+        ]
+      },
+      "medianCpuNs": {
+        "baseline": [
+          103,
+          96
+        ],
+        "candidate": [
+          75,
+          67
+        ]
+      },
+      "allocatedBytes": {
+        "baseline": [
+          24,
+          24
+        ],
+        "candidate": [
+          24,
+          24
+        ]
+      },
+      "retainedIndexPayloadBytes": {
+        "baseline": [
+          0,
+          0
+        ],
+        "candidate": [
+          0,
+          0
+        ]
+      },
+      "modeledNativeScratchBytes": {
+        "baseline": [
+          0,
+          0
+        ],
+        "candidate": [
+          0,
+          0
+        ]
+      },
+      "cpuRatioCandidateOverBaseline": 0.7135678391959799,
+      "memoryFieldsEqual": true
+    },
+    {
+      "backend": "native",
+      "size": 0,
+      "distribution": "narrow",
+      "medianWallNs": {
+        "baseline": [
+          53,
+          66
+        ],
+        "candidate": [
+          54,
+          60
+        ]
+      },
+      "medianCpuNs": {
+        "baseline": [
+          54,
+          66
+        ],
+        "candidate": [
+          55,
+          61
+        ]
+      },
+      "allocatedBytes": {
+        "baseline": [
+          24,
+          24
+        ],
+        "candidate": [
+          24,
+          24
+        ]
+      },
+      "retainedIndexPayloadBytes": {
+        "baseline": [
+          0,
+          0
+        ],
+        "candidate": [
+          0,
+          0
+        ]
+      },
+      "modeledNativeScratchBytes": {
+        "baseline": [
+          0,
+          0
+        ],
+        "candidate": [
+          0,
+          0
+        ]
+      },
+      "cpuRatioCandidateOverBaseline": 0.9666666666666667,
+      "memoryFieldsEqual": true
+    },
+    {
+      "backend": "native",
+      "size": 0,
+      "distribution": "varying",
+      "medianWallNs": {
+        "baseline": [
+          54,
+          65
+        ],
+        "candidate": [
+          56,
+          56
+        ]
+      },
+      "medianCpuNs": {
+        "baseline": [
+          54,
+          66
+        ],
+        "candidate": [
+          56,
+          56
+        ]
+      },
+      "allocatedBytes": {
+        "baseline": [
+          24,
+          24
+        ],
+        "candidate": [
+          24,
+          24
+        ]
+      },
+      "retainedIndexPayloadBytes": {
+        "baseline": [
+          0,
+          0
+        ],
+        "candidate": [
+          0,
+          0
+        ]
+      },
+      "modeledNativeScratchBytes": {
+        "baseline": [
+          0,
+          0
+        ],
+        "candidate": [
+          0,
+          0
+        ]
+      },
+      "cpuRatioCandidateOverBaseline": 0.9333333333333333,
+      "memoryFieldsEqual": true
+    },
+    {
+      "backend": "native",
+      "size": 1,
+      "distribution": "repeated",
+      "medianWallNs": {
+        "baseline": [
+          134,
+          183
+        ],
+        "candidate": [
+          157,
+          127
+        ]
+      },
+      "medianCpuNs": {
+        "baseline": [
+          135,
+          184
+        ],
+        "candidate": [
+          158,
+          128
+        ]
+      },
+      "allocatedBytes": {
+        "baseline": [
+          72,
+          72
+        ],
+        "candidate": [
+          72,
+          72
+        ]
+      },
+      "retainedIndexPayloadBytes": {
+        "baseline": [
+          4,
+          4
+        ],
+        "candidate": [
+          4,
+          4
+        ]
+      },
+      "modeledNativeScratchBytes": {
+        "baseline": [
+          0,
+          0
+        ],
+        "candidate": [
+          0,
+          0
+        ]
+      },
+      "cpuRatioCandidateOverBaseline": 0.896551724137931,
+      "memoryFieldsEqual": true
+    },
+    {
+      "backend": "native",
+      "size": 1,
+      "distribution": "narrow",
+      "medianWallNs": {
+        "baseline": [
+          107,
+          165
+        ],
+        "candidate": [
+          116,
+          105
+        ]
+      },
+      "medianCpuNs": {
+        "baseline": [
+          108,
+          166
+        ],
+        "candidate": [
+          116,
+          106
+        ]
+      },
+      "allocatedBytes": {
+        "baseline": [
+          72,
+          72
+        ],
+        "candidate": [
+          72,
+          72
+        ]
+      },
+      "retainedIndexPayloadBytes": {
+        "baseline": [
+          4,
+          4
+        ],
+        "candidate": [
+          4,
+          4
+        ]
+      },
+      "modeledNativeScratchBytes": {
+        "baseline": [
+          0,
+          0
+        ],
+        "candidate": [
+          0,
+          0
+        ]
+      },
+      "cpuRatioCandidateOverBaseline": 0.8102189781021898,
+      "memoryFieldsEqual": true
+    },
+    {
+      "backend": "native",
+      "size": 1,
+      "distribution": "varying",
+      "medianWallNs": {
+        "baseline": [
+          83,
+          175
+        ],
+        "candidate": [
+          105,
+          83
+        ]
+      },
+      "medianCpuNs": {
+        "baseline": [
+          84,
+          176
+        ],
+        "candidate": [
+          106,
+          83
+        ]
+      },
+      "allocatedBytes": {
+        "baseline": [
+          72,
+          72
+        ],
+        "candidate": [
+          72,
+          72
+        ]
+      },
+      "retainedIndexPayloadBytes": {
+        "baseline": [
+          4,
+          4
+        ],
+        "candidate": [
+          4,
+          4
+        ]
+      },
+      "modeledNativeScratchBytes": {
+        "baseline": [
+          0,
+          0
+        ],
+        "candidate": [
+          0,
+          0
+        ]
+      },
+      "cpuRatioCandidateOverBaseline": 0.7269230769230769,
+      "memoryFieldsEqual": true
+    },
+    {
+      "backend": "native",
+      "size": 256,
+      "distribution": "repeated",
+      "medianWallNs": {
+        "baseline": [
+          7381,
+          6247
+        ],
+        "candidate": [
+          2974,
+          2707
+        ]
+      },
+      "medianCpuNs": {
+        "baseline": [
+          7254,
+          6253
+        ],
+        "candidate": [
+          2718,
+          2457
+        ]
+      },
+      "allocatedBytes": {
+        "baseline": [
+          3128,
+          3128
+        ],
+        "candidate": [
+          3128,
+          3128
+        ]
+      },
+      "retainedIndexPayloadBytes": {
+        "baseline": [
+          1024,
+          1024
+        ],
+        "candidate": [
+          1024,
+          1024
+        ]
+      },
+      "modeledNativeScratchBytes": {
+        "baseline": [
+          6144,
+          6144
+        ],
+        "candidate": [
+          6144,
+          6144
+        ]
+      },
+      "cpuRatioCandidateOverBaseline": 0.38313467091137926,
+      "memoryFieldsEqual": true
+    },
+    {
+      "backend": "native",
+      "size": 256,
+      "distribution": "narrow",
+      "medianWallNs": {
+        "baseline": [
+          6900,
+          7120
+        ],
+        "candidate": [
+          4311,
+          4192
+        ]
+      },
+      "medianCpuNs": {
+        "baseline": [
+          6907,
+          7137
+        ],
+        "candidate": [
+          4326,
+          4194
+        ]
+      },
+      "allocatedBytes": {
+        "baseline": [
+          3128,
+          3128
+        ],
+        "candidate": [
+          3128,
+          3128
+        ]
+      },
+      "retainedIndexPayloadBytes": {
+        "baseline": [
+          1024,
+          1024
+        ],
+        "candidate": [
+          1024,
+          1024
+        ]
+      },
+      "modeledNativeScratchBytes": {
+        "baseline": [
+          6144,
+          6144
+        ],
+        "candidate": [
+          6144,
+          6144
+        ]
+      },
+      "cpuRatioCandidateOverBaseline": 0.606664767872401,
+      "memoryFieldsEqual": true
+    },
+    {
+      "backend": "native",
+      "size": 256,
+      "distribution": "varying",
+      "medianWallNs": {
+        "baseline": [
+          7012,
+          9098
+        ],
+        "candidate": [
+          6219,
+          5909
+        ]
+      },
+      "medianCpuNs": {
+        "baseline": [
+          6936,
+          8798
+        ],
+        "candidate": [
+          6031,
+          5912
+        ]
+      },
+      "allocatedBytes": {
+        "baseline": [
+          3128,
+          3128
+        ],
+        "candidate": [
+          3128,
+          3128
+        ]
+      },
+      "retainedIndexPayloadBytes": {
+        "baseline": [
+          1024,
+          1024
+        ],
+        "candidate": [
+          1024,
+          1024
+        ]
+      },
+      "modeledNativeScratchBytes": {
+        "baseline": [
+          6144,
+          6144
+        ],
+        "candidate": [
+          6144,
+          6144
+        ]
+      },
+      "cpuRatioCandidateOverBaseline": 0.759056819626287,
+      "memoryFieldsEqual": true
+    },
+    {
+      "backend": "native",
+      "size": 65536,
+      "distribution": "repeated",
+      "medianWallNs": {
+        "baseline": [
+          1036357,
+          1026485
+        ],
+        "candidate": [
+          398320,
+          437583
+        ]
+      },
+      "medianCpuNs": {
+        "baseline": [
+          995775,
+          975320
+        ],
+        "candidate": [
+          393912,
+          408265
+        ]
+      },
+      "allocatedBytes": {
+        "baseline": [
+          786488,
+          786488
+        ],
+        "candidate": [
+          786488,
+          786488
+        ]
+      },
+      "retainedIndexPayloadBytes": {
+        "baseline": [
+          262144,
+          262144
+        ],
+        "candidate": [
+          262144,
+          262144
+        ]
+      },
+      "modeledNativeScratchBytes": {
+        "baseline": [
+          1572864,
+          1572864
+        ],
+        "candidate": [
+          1572864,
+          1572864
+        ]
+      },
+      "cpuRatioCandidateOverBaseline": 0.40697023735537863,
+      "memoryFieldsEqual": true
+    },
+    {
+      "backend": "native",
+      "size": 65536,
+      "distribution": "narrow",
+      "medianWallNs": {
+        "baseline": [
+          1150458,
+          1097529
+        ],
+        "candidate": [
+          633065,
+          688967
+        ]
+      },
+      "medianCpuNs": {
+        "baseline": [
+          1151030,
+          1071523
+        ],
+        "candidate": [
+          630624,
+          646459
+        ]
+      },
+      "allocatedBytes": {
+        "baseline": [
+          786488,
+          786488
+        ],
+        "candidate": [
+          786488,
+          786488
+        ]
+      },
+      "retainedIndexPayloadBytes": {
+        "baseline": [
+          262144,
+          262144
+        ],
+        "candidate": [
+          262144,
+          262144
+        ]
+      },
+      "modeledNativeScratchBytes": {
+        "baseline": [
+          1572864,
+          1572864
+        ],
+        "candidate": [
+          1572864,
+          1572864
+        ]
+      },
+      "cpuRatioCandidateOverBaseline": 0.5746018205190158,
+      "memoryFieldsEqual": true
+    },
+    {
+      "backend": "native",
+      "size": 65536,
+      "distribution": "varying",
+      "medianWallNs": {
+        "baseline": [
+          1211218,
+          1368702
+        ],
+        "candidate": [
+          1207412,
+          1620906
+        ]
+      },
+      "medianCpuNs": {
+        "baseline": [
+          1206173,
+          1281363
+        ],
+        "candidate": [
+          1206657,
+          1621414
+        ]
+      },
+      "allocatedBytes": {
+        "baseline": [
+          786488,
+          786488
+        ],
+        "candidate": [
+          786488,
+          786488
+        ]
+      },
+      "retainedIndexPayloadBytes": {
+        "baseline": [
+          262144,
+          262144
+        ],
+        "candidate": [
+          262144,
+          262144
+        ]
+      },
+      "modeledNativeScratchBytes": {
+        "baseline": [
+          1572864,
+          1572864
+        ],
+        "candidate": [
+          1572864,
+          1572864
+        ]
+      },
+      "cpuRatioCandidateOverBaseline": 1.1368965112464704,
+      "memoryFieldsEqual": true
+    }
+  ],
+  "scope": [
+    "Thread allocation and CPU are observed by unchanged donor MXBean calls.",
+    "Retained bytes mean existing owner-reported int-row payload only, not deep retained JVM heap or overhead.",
+    "Native scratch bytes are the unchanged source formula24*n, not a measured native allocation peak.",
+    "maxRssKiB in RUNS.json is per-process OS wait4 maximum resident set, including JVM/GC/shared pages and all workloads.",
+    "Two processes per variant/backend are diagnostics and do not establish statistical confidence or general performance.",
+    "Competing workspace build load and JIT/GC affect timing; all rows, including regressions, retained.",
+    "Missing opt-in first attempt correctly refused requiredJNI; preserved under attempt001; corrected only harness JVM property."
+  ],
+  "epoch": "Paired pre-collections versus admitted radix atom; boot JDK diagnostic, not linked E1",
+  "preparation": [
+    {
+      "label": "benchmark",
+      "command": [
+        "${JAVA_HOME}/bin/javac",
+        "--release",
+        "21",
+        "-Xlint:all,-module",
+        "-Werror",
+        "-cp",
+        "${CANDIDATE_CLASSES}",
+        "-d",
+        "${RESOURCE_WORK}/bench-classes",
+        "${CANDIDATE_REPO}/m3/collections/src/test/java/com/m3/collections/M3SignalRadixUniformBench.java"
+      ],
+      "returncode": 0,
+      "sourceSha256": "8b026711262170986520d92fe782913d6a138f66bb9c795b6de748b11aa3dbe4"
+    },
+    {
+      "label": "baseline",
+      "command": [
+        "cc",
+        "-std=c17",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-O2",
+        "-fPIC",
+        "-shared",
+        "-I${JAVA_HOME}/include",
+        "-I${JAVA_HOME}/include/linux",
+        "-include",
+        "${RADIX_HEADERS}/com_m3_collections_M3SignalOrderNative.h",
+        "${BASELINE_REPO}/m3/collections/src/main/native/collections/m3_signal_order_jni.c",
+        "-o",
+        "${RESOURCE_WORK}/baseline/libm3signalorder.so"
+      ],
+      "returncode": 0,
+      "sourceSha256": "e7a5991f5be2e0bad99400ff477a1c03ec9d1d8e1236f9faf366485f94966ed5",
+      "librarySha256": "a58a25c57d6803ca9753487b5b72eb8c37e03ae32ca0d87cd66d4552ad9a0d9d"
+    },
+    {
+      "label": "candidate",
+      "command": [
+        "cc",
+        "-std=c17",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-O2",
+        "-fPIC",
+        "-shared",
+        "-I${JAVA_HOME}/include",
+        "-I${JAVA_HOME}/include/linux",
+        "-include",
+        "${RADIX_HEADERS}/com_m3_collections_M3SignalOrderNative.h",
+        "${CANDIDATE_REPO}/m3/collections/src/main/native/collections/m3_signal_order_jni.c",
+        "-o",
+        "${RESOURCE_WORK}/candidate/libm3signalorder.so"
+      ],
+      "returncode": 0,
+      "sourceSha256": "8dc63771408057e56610719e6d562454bece9769a5727c7614c104e659dc8a22",
+      "librarySha256": "4ebac165598835cbcb9683904a82cc772ebb5c889a8229257aeb1f803db0702e"
+    }
+  ],
+  "samples": "RESOURCE_SAMPLES.csv",
+  "processUsage": "RESOURCE_PROCESS_USAGE.json",
+  "rawComparisonSha256": "5672a1adf7ad51a91ac59d07b006443ad4b086dda233842637237e7a40e1b72f"
+}

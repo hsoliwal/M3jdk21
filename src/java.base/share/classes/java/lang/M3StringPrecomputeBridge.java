@@ -47,6 +47,25 @@ final class M3StringPrecomputeBridge {
         int length1 = left.length();
         int length2 = right.length();
         int limit = Math.min(length1, length2);
+        if (limit >= 256
+                && (leftStorage != null && leftStorage.owner() instanceof M3StringTuple
+                        || rightStorage != null && rightStorage.owner() instanceof M3StringTuple)) {
+            int firstDifference = left.charAt(0) - right.charAt(0);
+            if (firstDifference != 0) return firstDifference;
+            M3String.CodeUnitCursor leftUnits = leftStorage != null
+                    && leftStorage.owner() instanceof M3StringTuple
+                    ? new M3String.CodeUnitCursor(leftStorage) : null;
+            M3String.CodeUnitCursor rightUnits = rightStorage != null
+                    && rightStorage.owner() instanceof M3StringTuple
+                    ? new M3String.CodeUnitCursor(rightStorage) : null;
+            for (int index = 1; index < limit; index++) {
+                char leftUnit = leftUnits == null ? left.charAt(index) : leftUnits.at(index);
+                char rightUnit = rightUnits == null ? right.charAt(index) : rightUnits.at(index);
+                int difference = leftUnit - rightUnit;
+                if (difference != 0) return difference;
+            }
+            return length1 - length2;
+        }
         for (int index = 0; index < limit; index++) {
             int difference = left.charAt(index) - right.charAt(index);
             if (difference != 0) return difference;
@@ -70,6 +89,15 @@ final class M3StringPrecomputeBridge {
             }
         }
 
+        // Flat-prefix lookup keeps admission unchanged; only the tuple needs a cursor.
+        if (prefix.length() >= 256 && source.owner() instanceof M3StringTuple) {
+            if (source.charAt(offset) != prefix.charAt(0)) return false;
+            M3String.CodeUnitCursor units = new M3String.CodeUnitCursor(source);
+            for (int index = 1; index < prefix.length(); index++) {
+                if (units.at(offset + index) != prefix.charAt(index)) return false;
+            }
+            return true;
+        }
         for (int index = 0; index < prefix.length(); index++) {
             if (source.charAt(offset + index) != prefix.charAt(index)) return false;
         }

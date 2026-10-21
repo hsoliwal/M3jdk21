@@ -1,0 +1,136 @@
+{
+  "status": "PASS_FINAL_RECEIVER_NATIVE_ADDENDA",
+  "utc": "2026-10-21T02:47:23.415372+00:00",
+  "recipeStage": "combine-views-final21",
+  "owningProofSha256": "4fbc24a40e0a78ec10deeacfddf5a42a40fe067f726fb83d7e15f0c9d9b1deaa",
+  "runs": [
+    {
+      "name": "catalogue-native",
+      "command": [
+        "${JAVA_HOME}/bin/java",
+        "-ea",
+        "-Xmx768m",
+        "-XX:ActiveProcessorCount=2",
+        "-Xcheck:jni",
+        "-Dm3.collections.signal.native=true",
+        "-Dm3.collections.rank.native=true",
+        "-Djava.library.path=${REPO}/m3/collections/target/full-java-jni/native",
+        "-cp",
+        "${REPO}/m3/collections/target/classes:${REPO}/m3/collections/target/test-classes",
+        "com.m3.collections.M3CatalogueRefinementContract",
+        "native"
+      ],
+      "returncode": 0,
+      "seconds": 0.15484716199898685,
+      "output": "PASS M3CatalogueRefinementContract mode=native checks=8438\n"
+    },
+    {
+      "name": "catalogue-missing",
+      "command": [
+        "${JAVA_HOME}/bin/java",
+        "-ea",
+        "-Xmx768m",
+        "-XX:ActiveProcessorCount=2",
+        "-Xcheck:jni",
+        "-Dm3.collections.signal.native=true",
+        "-Dm3.collections.rank.native=true",
+        "-Djava.library.path=${REPO}/m3/collections/target/full-java-jni/missing",
+        "-cp",
+        "${REPO}/m3/collections/target/classes:${REPO}/m3/collections/target/test-classes",
+        "com.m3.collections.M3CatalogueRefinementContract",
+        "missing-native"
+      ],
+      "returncode": 0,
+      "seconds": 0.15485300200089114,
+      "output": "PASS M3CatalogueRefinementContract mode=missing-native checks=2\n"
+    },
+    {
+      "name": "radix-native",
+      "command": [
+        "${JAVA_HOME}/bin/java",
+        "-ea",
+        "-Xmx768m",
+        "-XX:ActiveProcessorCount=2",
+        "-Xcheck:jni",
+        "-Dm3.collections.signal.native=true",
+        "-Dm3.collections.rank.native=true",
+        "-Djava.library.path=${REPO}/m3/collections/target/full-java-jni/native",
+        "-cp",
+        "${REPO}/m3/collections/target/classes:${REPO}/m3/collections/target/test-classes",
+        "com.m3.collections.M3SignalRadixUniformContract",
+        "native"
+      ],
+      "returncode": 0,
+      "seconds": 0.4949689050008601,
+      "output": "PASS radix JNI checks=417038\n"
+    },
+    {
+      "name": "packed-allocation",
+      "command": [
+        "${JAVA_HOME}/bin/java",
+        "-Xmx512m",
+        "-XX:ActiveProcessorCount=2",
+        "-cp",
+        "${REPO}/m3/collections/target/classes:${REPO}/m3/collections/target/test-classes",
+        "com.m3.collections.M3PackedSelectionAllocationProbe"
+      ],
+      "returncode": 0,
+      "seconds": 0.28107833300055063,
+      "output": "zero_survivors=1000000 average_allocated_bytes=125882\n"
+    },
+    {
+      "name": "compile-empty-regions",
+      "command": [
+        "cc",
+        "-std=c17",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-O2",
+        "-fsanitize=undefined",
+        "-fno-sanitize-recover=undefined",
+        "-I${JAVA_HOME}/include",
+        "-I${JAVA_HOME}/include/linux",
+        "-include",
+        "${REPO}/m3/collections/target/full-java-jni/headers/com_m3_collections_M3IndexMaskCompactor.h",
+        "${REPO}/m3/collections/src/main/native/collections/m3_index_mask_compactor.c",
+        "${REPO}/m3/collections/src/test/native/m3_mask_compactor_empty_regions.c",
+        "-o",
+        "${ADDENDA_WORK}/empty-regions"
+      ],
+      "returncode": 0,
+      "seconds": 0.5073839159995259,
+      "output": ""
+    },
+    {
+      "name": "empty-regions",
+      "command": [
+        "${ADDENDA_WORK}/empty-regions"
+      ],
+      "returncode": 0,
+      "seconds": 0.002456647000144585,
+      "output": "PASS empty compaction: 4 native exports, zero payload reads, second-pass drift retained\n"
+    }
+  ],
+  "sourceSha256": {
+    "m3/collections/src/test/java/com/m3/collections/M3CatalogueRefinementContract.java": "661279db0cf532a67a0bf8ee5483cd91f79b49936add8e96fde08b1130f55174",
+    "m3/collections/src/test/java/com/m3/collections/M3SignalRadixUniformContract.java": "dd85a7c4b19364cc9b91ecf581abb33bf613435aec0873319f7082649dbdfbac",
+    "m3/collections/src/test/java/com/m3/collections/M3PackedSelectionAllocationProbe.java": "bbb4abeb2f9dbc512d6236173b68e8404ac5b11729640e1747aac6f002b933a7",
+    "m3/collections/src/test/native/m3_mask_compactor_empty_regions.c": "48631b556931bd113464bfabca7876615261f2a4bbb17b54be6fa2fa801e96c7",
+    "m3/collections/src/main/native/collections/m3_index_mask_compactor.c": "fedca631c2f0f0f73a27dde5e87395e95ac00fde07fc1d7006735c2ef18a579a",
+    "m3/collections/src/main/native/collections/m3_signal_order_jni.c": "8dc63771408057e56610719e6d562454bece9769a5727c7614c104e659dc8a22"
+  },
+  "nativeLibraries": {
+    "libm3_collections_address.so": "22d16e116c90a5f14f79dc0e54424baf088ae7e1c1eb1714910d9d8abb4bdb2c",
+    "libm3_collections_long_path_masks.so": "92d0547ab25919403af3c6a7d75f445d45e2a1287f7644e6ca6908b34bed6edc",
+    "libm3_collections_mask.so": "bc76339668f8107ac4a7d8fa0acc80a6ea775d984a540dd11976c7201d42db3b",
+    "libm3_collections_pathmask.so": "9b45ee9111bd7e3b9ff7bb04f62eaee8e686dec04c41e2150f630eeaad62c45d",
+    "libm3_collections_span.so": "70ce308dbdc54038c9b0c203e4720b7d2978b4d45001d3fb416b166a2f795505",
+    "libm3_collections_statehist.so": "10961b4d57695cb0fd200fa5ff67647689a200fef598c59b810d954a8a759239",
+    "libm3_residency_state_mask.so": "55b9a56f4c78f1b7f38217e2f0eba9a47ed10dfdf40b652d40fbab77d7714744",
+    "libm3bitlane.so": "364139a8221f833f9867d25aa86f487e37fa1348371415944d3fa6555356e628",
+    "libm3rankbatch.so": "577cae31fd0a7fd62e8f4ff750f26a32ff011e6f8ac700cb39680311ab6ddb85",
+    "libm3signalorder.so": "f5577263425793856f5e04c5e67060286bb103fd822d919135dd02679beda224"
+  },
+  "scope": "Current receiver classes and generated-header fatalUBSan libraries on Temurin21; installed sourcebuilt image is a separate next gate."
+}

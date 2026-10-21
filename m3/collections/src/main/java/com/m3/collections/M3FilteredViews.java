@@ -551,10 +551,9 @@ public final class M3FilteredViews {
          * comparator-backed bounded iterator, retaining each stored key/value.
          */
         private Entry<K, V> boundedEntry(K query, boolean forward, boolean inclusive) {
-            Iterator<Entry<K, V>> cursor;
+            NavigableMap<K, V> range;
             try {
-                cursor = forward ? nav.tailMap(query, inclusive).entrySet().iterator()
-                        : nav.headMap(query, inclusive).descendingMap().entrySet().iterator();
+                range = forward ? nav.tailMap(query, inclusive) : nav.headMap(query, inclusive);
             } catch (IllegalArgumentException outOfRange) {
                 Iterator<Entry<K, V>> bounded = forward
                         ? nav.entrySet().iterator() : nav.descendingMap().entrySet().iterator();
@@ -570,6 +569,8 @@ public final class M3FilteredViews {
                 }
                 return null;
             }
+            Iterator<Entry<K, V>> cursor = forward ? range.entrySet().iterator()
+                    : range.descendingMap().entrySet().iterator();
             return firstVisible(cursor);
         }
         @Override public Entry<K, V> lowerEntry(K key) {

@@ -1,0 +1,25 @@
+{
+  "schema": "M3_COLLECTION_E2_PUBLIC_EVIDENCE_PACKET_V1",
+  "epoch": "E2",
+  "status": "PASS_SANITIZED_ADDITIVE_RECEIVING_EVIDENCE",
+  "files": {
+    "OWNERSHIP.json": "d5200cfe1fc402632429ef2c1676dfde5dfb0488e39335c442fb44fdcf22ff0b",
+    "QUALIFICATION.json": "1b17bbf68f773fee45be855226524f84ae5459553fec9d344d71d72d289b9ef5",
+    "RAW_EVIDENCE_SHA256.tsv": "598f72cad4022a86f4681b46d47330e28213a02e22e061012b39c212dd6c56cc",
+    "README.md": "d79659784a2027d6efaf86200cda2000fa822a5e8b07e8d48b464bad2e097fec",
+    "RUNS.json": "a1551890fd481784d873c651c3b51d37a1ab2403a96ac6d71f6de296e1236743",
+    "SOURCE_EPOCH.json": "1ad4977db028ba0dd4c5e9a74eea6d929be85ba3db3a15ae3c85224377c8288b",
+    "SOURCE_SDK_INPUTS.json": "2a85c9ff594e3b799e6cbe0c4834ce40f3d37faaa1c2dd10cba41197d39de4f9"
+  },
+  "fileCountExcludingManifest": 7,
+  "contentBytesExcludingManifest": 60167,
+  "validation": {
+    "jsonParsed": 5,
+    "rawEvidenceHashesVerified": 33,
+    "sourcePostimages": 55,
+    "e1PublicPacketUnchanged": true,
+    "privateAbsolutePathsAbsent": true,
+    "freshRuntimeRuns": "6 String mode runs; 7 public-core runs; 2 module/JNI runs",
+    "reusedWholeSuite": "E1 491-test linked suite; no fresh E2 whole-suite claim"
+  }
+}

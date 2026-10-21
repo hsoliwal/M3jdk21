@@ -18,6 +18,8 @@
  * @summary Refused local atoms and uncached tuples do not retain empty map buckets
  * @modules java.base/java.lang:+open
  * @run main/othervm -XX:+UnlockExperimentalVMOptions -XX:-UseM3StringStorage -Dm3.string.pool.maxBytes=0 -Dm3.string.pool.maxTuples=0 M3StringPoolMetadataBoundsTest
+ * @run main/othervm -XX:+UnlockExperimentalVMOptions -XX:-UseM3StringStorage -Dm3.string.pool.maxBytes=0 -Dm3.string.pool.maxTuples=0 -Dm3.string.immediate=false M3StringPoolMetadataBoundsTest
+ * @run main/othervm -XX:+UnlockExperimentalVMOptions -XX:-UseM3StringStorage -Dm3.string.pool.maxBytes=0 -Dm3.string.pool.maxTuples=0 -XX:-CompactStrings M3StringPoolMetadataBoundsTest
  */
 
 import java.lang.reflect.Field;
@@ -60,9 +62,15 @@ public class M3StringPoolMetadataBoundsTest {
                 check(chars.invoke(null, value, 0, 2) == null, "char admission refused");
                 int[] codePoints = {value[0], value[1]};
                 check(points.invoke(null, codePoints, 0, 2) == null, "code-point admission refused");
-                byte[] value8 = {(byte) index, (byte) (index >>> 8)};
-                check(latin1.invoke(null, value8, 0, 2) == null, "Latin-1 admission refused");
-                check(compact.invoke(null, value8, 0, 2, (byte) 0) == null, "compact admission refused");
+                // Exceed both immediate packing profiles: this test exercises
+                // refused native atoms, while immediate owners need no native budget.
+                byte[] value8 = new byte[32];
+                value8[0] = (byte) index;
+                value8[1] = (byte) (index >>> 8);
+                check(latin1.invoke(null, value8, 0, value8.length) == null,
+                        "Latin-1 native admission refused");
+                check(compact.invoke(null, value8, 0, value8.length, (byte) 0) == null,
+                        "compact native admission refused");
                 check(locals.size() == localBaseline, "refusal retires empty local metadata");
             }
             check((long) bytes.invoke(null) == byteBaseline, "refusal leaves native accounting unchanged");

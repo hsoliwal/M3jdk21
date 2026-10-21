@@ -536,8 +536,7 @@ final class M3StringPool {
                     M3StringAtom created = M3StringAtom.localUnit(unit, coder, id, hash64);
                     long retainedBytes = created.nativePayloadBytes();
                     LOCAL_NATIVE_BYTES.addAndGet(retainedBytes);
-                    bucket.values.add(new LocalRef(created, fingerprint, bucket, retainedBytes));
-                    return M3String.whole(created);
+                    return retain(bucket, fingerprint, created, retainedBytes);
                 } finally {
                     retireEmptyLocalBucket(fingerprint, bucket);
                 }
@@ -640,7 +639,11 @@ final class M3StringPool {
                         } else if (existing.length == totalLength
                                 && existing.coder == coder
                                 && existing.javaHash == javaHash
-                                && sameLeafSequence(M3String.whole(existing), left, right)) {
+                                // Identical immutable child coordinates are already an exact proof.
+                                // Keep normalized leaf comparison for different parenthesizations.
+                                && ((existing.left.sameCoordinate(left)
+                                        && existing.right.sameCoordinate(right))
+                                    || sameLeafSequence(M3String.whole(existing), left, right))) {
                             return M3String.whole(existing);
                         }
                     }
@@ -648,7 +651,13 @@ final class M3StringPool {
                     M3StringTuple created = new M3StringTuple(left, right, id, routeKey);
                     // Retention cap: past it the tuple composes and lives with its String, uncanonical.
                     if (RETAINED_TUPLES.incrementAndGet() <= MAX_RETAINED_TUPLES) {
-                        bucket.values.add(new TupleRef(created, routeKey, bucket));
+                        boolean retained = false;
+                        try {
+                            bucket.values.add(new TupleRef(created, routeKey, bucket));
+                            retained = true;
+                        } finally {
+                            if (!retained) RETAINED_TUPLES.decrementAndGet();
+                        }
                     } else {
                         RETAINED_TUPLES.decrementAndGet();
                     }
@@ -733,8 +742,25 @@ final class M3StringPool {
     /** Publishes a freshly allocated local atom whose bytes are already reserved (bucket lock held). */
     private static M3String retain(
             LocalBucket bucket, Fingerprint fingerprint, M3StringAtom created, long bytes) {
-        bucket.values.add(new LocalRef(created, fingerprint, bucket, bytes));
-        return M3String.whole(created);
+        LocalRef reference = null;
+        boolean retained = false;
+        try {
+            reference = new LocalRef(created, fingerprint, bucket, bytes);
+            bucket.values.add(reference);
+            // Once published, the queue owns cleanup even if the result wrapper cannot allocate.
+            retained = true;
+            return M3String.whole(created);
+        } finally {
+            if (!retained) {
+                if (reference == null) {
+                    UNSAFE.freeMemory(created.address);
+                    release(bytes);
+                } else {
+                    // Mark the existing record released: a later queue delivery must be harmless.
+                    reference.releaseNative();
+                }
+            }
+        }
     }
 
     private static boolean reserveAfterDrain(long bytes) {

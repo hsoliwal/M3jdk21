@@ -1,3 +1,4 @@
+// Modified 2026 by Hitesh Soliwal and contributors: reuse current M3 occurrence/admission atoms and restore nested callbacks.
 /*
  * Copyright 2026 Hitesh Soliwal and contributors
  * SPDX-License-Identifier: Apache-2.0
@@ -6,6 +7,7 @@
  * Identity-set refinement: owner-gated membership and exact-reference removal.
  * Modified 2026-10-20: forward-reconcile the existing proposed java.base owner
  * from M3JDK21 PR 1551 with current collection behavioral atoms and COW removal.
+ * Modified 2026-10-21: preserve explicit JDK identity-view membership and hashing.
  * Apache notice retained; core integration license review remains a promotion gate.
  */
 package java.util;
@@ -47,12 +49,26 @@ import java.util.function.Predicate;
  * exact size; no predicate results are cached without validity evidence. Stream
  * traversal uses an unsized selection cursor rather than an eager counting pass.
  * The separate sortedSnapshot method intentionally creates independent storage.
+ *
+ * <p>Identity membership and set hashing are retained for {@link IdentityHashMap}
+ * views and their standard {@link Collections} wrappers, including wrappers
+ * around filtered views. Identity entries compare their key and value references.
+ * Custom collections, wrappers or subclasses that introduce other equivalence
+ * rules are not inferred from their contents or hash codes.
  */
 public final class CollectionViews {
     private CollectionViews() {
     }
 
-    /** Returns a live view, preserving runtime set/sorted/navigable capabilities. */
+    /**
+     * Returns a live view, preserving runtime set/sorted/navigable capabilities.
+     *
+     * @param <E> the element type
+     * @param backing the authoritative collection
+     * @param predicate the admission predicate, applied to stored occurrences
+     * @return a live filtered collection
+     * @throws NullPointerException if backing or predicate is null
+     */
     @SuppressWarnings("unchecked")
     public static <E> Collection<E> filtered(
             Collection<E> backing, Predicate<? super E> predicate) {
@@ -62,7 +78,15 @@ public final class CollectionViews {
         return new FilteredCollection<>(backing, predicate);
     }
 
-    /** Retains runtime sorted capability and set equality in the live view. */
+    /**
+     * Retains runtime sorted capability and set equality in the live view.
+     *
+     * @param <E> the element type
+     * @param backing the authoritative set
+     * @param predicate the admission predicate, applied to stored representatives
+     * @return a live filtered set
+     * @throws NullPointerException if backing or predicate is null
+     */
     @SuppressWarnings("unchecked")
     public static <E> Set<E> filtered(Set<E> backing, Predicate<? super E> predicate) {
         if (backing instanceof NavigableSet<?>) return filtered((NavigableSet<E>) backing, predicate);
@@ -70,7 +94,15 @@ public final class CollectionViews {
         return new FilteredSet<>(backing, predicate);
     }
 
-    /** Retains the comparator, range views and runtime navigable capability. */
+    /**
+     * Retains the comparator, range views and runtime navigable capability.
+     *
+     * @param <E> the element type
+     * @param backing the authoritative sorted set
+     * @param predicate the admission predicate, applied to stored representatives
+     * @return a live filtered sorted set
+     * @throws NullPointerException if backing or predicate is null
+     */
     @SuppressWarnings("unchecked")
     public static <E> SortedSet<E> filtered(
             SortedSet<E> backing, Predicate<? super E> predicate) {
@@ -78,7 +110,15 @@ public final class CollectionViews {
         return new FilteredSortedSet<>(backing, predicate);
     }
 
-    /** Retains navigable operations, descending order and range-view contracts. */
+    /**
+     * Retains navigable operations, descending order and range-view contracts.
+     *
+     * @param <E> the element type
+     * @param backing the authoritative navigable set
+     * @param predicate the admission predicate, applied to stored representatives
+     * @return a live filtered navigable set
+     * @throws NullPointerException if backing or predicate is null
+     */
     public static <E> NavigableSet<E> filtered(
             NavigableSet<E> backing, Predicate<? super E> predicate) {
         return new FilteredNavigableSet<>(backing, predicate);
@@ -88,6 +128,12 @@ public final class CollectionViews {
      * Returns an independent, stable, read-only list sorted by the comparator.
      * Equal-comparator elements are not deduplicated. Unlike a backed filter,
      * this operation copies references and does not reflect later source changes.
+     *
+     * @param <E> the element type
+     * @param source the source collection in its encounter order
+     * @param comparator the ordering, or null for natural ordering
+     * @return an independent unmodifiable sorted list
+     * @throws NullPointerException if source is null
      */
     public static <E> List<E> sortedSnapshot(
             Collection<? extends E> source, Comparator<? super E> comparator) {
@@ -104,6 +150,12 @@ public final class CollectionViews {
      * additions/removals are reflected. Nulls and duplicate references survive.
      * This never calls source.size(), performs no filter size prepass, and does
      * not change Collection.toArray or any existing JDK/Synexia contract.
+     *
+     * @param <E> the element type
+     * @param source the source collection in its encounter order
+     * @param predicate the admission predicate
+     * @return an independent unmodifiable list of admitted occurrences
+     * @throws NullPointerException if source or predicate is null
      */
     public static <E> List<E> filteredSnapshot(
             Collection<? extends E> source, Predicate<? super E> predicate) {
@@ -115,6 +167,13 @@ public final class CollectionViews {
      * owner. Comparator-equivalent elements remain distinct and preserve their
      * original encounter order. A null comparator means natural ordering, as
      * specified by List.sort; mutable element objects are not deep-copied.
+     *
+     * @param <E> the element type
+     * @param source the source collection in its encounter order
+     * @param predicate the admission predicate
+     * @param comparator the ordering, or null for natural ordering
+     * @return an independent unmodifiable sorted list of admitted occurrences
+     * @throws NullPointerException if source or predicate is null
      */
     public static <E> List<E> filteredSortedSnapshot(
             Collection<? extends E> source, Predicate<? super E> predicate,
@@ -241,6 +300,7 @@ public final class CollectionViews {
     private static class FilteredCollection<E> extends AbstractCollection<E> {
         protected final Collection<E> backing;
         protected final Predicate<? super E> predicate;
+        private final int identityKind;
 
         @SuppressWarnings("unchecked")
         private FilteredCollection(Collection<E> source, Predicate<? super E> filter) {
@@ -251,10 +311,42 @@ public final class CollectionViews {
                 this.backing = previous.backing;
                 Predicate<? super E> existing = previous.predicate;
                 this.predicate = orderedAnd(existing, filter);
+                this.identityKind = previous.identityKind;
             } else {
                 this.backing = source;
                 this.predicate = filter;
+                Collection<?> membershipSource = Collections.collectionViewMembershipSource(source);
+                this.identityKind = membershipSource instanceof FilteredCollection<?> previous
+                        ? previous.identityKind
+                        : IdentityHashMap.collectionViewIdentityKind(membershipSource);
             }
+        }
+
+        /** Resolve equivalence without calling a foreign probe's value equality. */
+        private boolean sameElement(Object candidate, E stored) {
+            if (identityKind == IdentityHashMap.COLLECTION_IDENTITY_ELEMENTS) {
+                return candidate == stored;
+            }
+            if (identityKind == IdentityHashMap.COLLECTION_IDENTITY_ENTRIES) {
+                return candidate instanceof Map.Entry<?, ?> probe
+                        && stored instanceof Map.Entry<?, ?> entry
+                        && probe.getKey() == entry.getKey()
+                        && probe.getValue() == entry.getValue();
+            }
+            return Objects.equals(candidate, stored);
+        }
+
+        /** Hash with the same explicit owner equivalence used by membership. */
+        protected final int elementHash(E element) {
+            if (identityKind == IdentityHashMap.COLLECTION_IDENTITY_ELEMENTS) {
+                return System.identityHashCode(element);
+            }
+            if (identityKind == IdentityHashMap.COLLECTION_IDENTITY_ENTRIES) {
+                Map.Entry<?, ?> entry = (Map.Entry<?, ?>) element;
+                return System.identityHashCode(entry.getKey())
+                        ^ System.identityHashCode(entry.getValue());
+            }
+            return Objects.hashCode(element);
         }
 
         private boolean visible(E element) {
@@ -302,7 +394,7 @@ public final class CollectionViews {
             // caller-provided equal probe. Equivalence does not imply that a
             // predicate depending on other fields agrees for both instances.
             for (E stored : backing) {
-                if (Objects.equals(candidate, stored) && visible(stored)) {
+                if (sameElement(candidate, stored) && visible(stored)) {
                     return true;
                 }
             }
@@ -341,7 +433,7 @@ public final class CollectionViews {
                 List<E> list = (List<E>) backing;
                 int physical = 0;
                 for (E stored : list) {
-                    if (Objects.equals(candidate, stored) && visible(stored)) {
+                    if (sameElement(candidate, stored) && visible(stored)) {
                         list.remove(physical);
                         return true;
                     }
@@ -353,7 +445,7 @@ public final class CollectionViews {
             boolean skippedEqual = false;
             while (cursor.hasNext()) {
                 E stored = cursor.next();
-                if (Objects.equals(candidate, stored)) {
+                if (sameElement(candidate, stored)) {
                     if (visible(stored)) {
                         try {
                             cursor.remove();
@@ -482,9 +574,7 @@ public final class CollectionViews {
         public int hashCode() {
             int hash = 0;
             for (E element : this) {
-                if (element != null) {
-                    hash += element.hashCode();
-                }
+                hash += elementHash(element);
             }
             return hash;
         }
@@ -719,6 +809,8 @@ public final class CollectionViews {
         @Override
         public boolean tryAdvance(Consumer<? super E> consumer) {
             Objects.requireNonNull(consumer, "action");
+            Consumer<? super E> enclosingAction = action;
+            boolean enclosingDelivered = delivered;
             action = consumer;
             delivered = false;
             try {
@@ -727,7 +819,8 @@ public final class CollectionViews {
                 }
                 return delivered;
             } finally {
-                action = null;
+                action = enclosingAction;
+                delivered = enclosingDelivered;
             }
         }
 
