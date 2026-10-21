@@ -15,8 +15,8 @@
  */
 
 // SPDX-License-Identifier: Apache-2.0
-// Modified 2026 by Hitesh Soliwal and contributors: owned scalar-view body and
-// a private serializable one-element Object[] list delta.
+// Modified 2026 by Hitesh Soliwal and contributors: owned scalar-view body,
+// a private serializable one-element Object[] list delta, and a target widened to any list-valued map.
 package com.m3.collections.spring;
 
 import java.io.IOException;
@@ -44,7 +44,8 @@ import java.util.function.Predicate;
 import java.util.function.UnaryOperator;
 
 /**
- * Live first-value Map protocol over an owned M3MultiValueMap.
+ * Live first-value Map protocol over a list-valued map: an owned M3MultiValueMap, any Spring
+ * MultiValueMap (including an M3MultiValueMapAdapter) or a plain {@code Map<K, List<V>>}.
  *
  * <p>As in Spring 6.2, get/put/remove adapt null or empty lists to null, while values,
  * entries and forEach explicitly read index zero and retain the donor's null/empty
@@ -53,11 +54,17 @@ import java.util.function.UnaryOperator;
  */
 public final class M3SingleValueMapView<K, V> implements Map<K, V>, Serializable {
     @Serial private static final long serialVersionUID = 1L;
-    private final M3MultiValueMap<K, V> targetMap;
+    // Object streams validate the supplied target graph at serialization time, as before the widening.
+    @SuppressWarnings("serial")
+    private final Map<K, List<V>> targetMap;
     private transient Collection<V> values;
     private transient Set<Map.Entry<K, V>> entries;
 
-    public M3SingleValueMapView(final M3MultiValueMap<K, V> targetMap) {
+    /**
+     * Views {@code targetMap}; the view reads only the {@code Map<K, List<V>>} protocol, so the target
+     * needs no particular class. Existing callers passing an M3MultiValueMap compile unchanged.
+     */
+    public M3SingleValueMapView(final Map<K, List<V>> targetMap) {
         if (targetMap == null) {
             throw new IllegalArgumentException("'targetMap' must not be null");
         }

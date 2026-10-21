@@ -8,10 +8,10 @@ and Spring 6.2.0) plus sixteen first-party rows. Each row has one `owned_status`
 
 | status | meaning | rows |
 |---|---|---|
-| `DONE #PR` / `DONE master` | owned array/mask implementation on master or in an open PR | 15 provider (8 master, 7 PR) + 2 first-party |
+| `DONE #PR` / `DONE master` | owned array/mask implementation on master or in an open PR | 16 provider (8 master, 8 PR) + 2 first-party |
 | `EXISTING` | core JDK-shaped M3 owner already on master; no scaffold (NO-DUP) | 10 |
 | `CLAIMED #PR` / `CLAIMED viewport-everywhere` | an open PR or the viewport agent owns it; do not build | 10 provider + 14 first-party |
-| `SCAFFOLD` | generated skeleton module exists; bodies throw `UnsupportedOperationException` | 127 (133 generated; 6 since owned) |
+| `SCAFFOLD` | generated skeleton module exists; bodies throw `UnsupportedOperationException` | 126 (133 generated; 7 since owned) |
 | `PATTERN_ONLY` | Eclipse Collections (EPL-1.0/EDL-1.0): never copied, never a dependency | 578 |
 
 There are no `OPEN` rows left: the generator turns every OPEN JDK/Guava/Apache/Spring row into a
@@ -65,12 +65,15 @@ only; the core `m3/collections` module is unchanged and still depends on `java.b
 
 ## Fill order (one owned type per PR, each flips its row to DONE)
 
-1. Guava `ArrayListMultimap` (reuse interop `M3GuavaListMultimap`, core `M3IndexedMultiValueMap`); Guava
-   `HashMultimap` reuses the #1261 engine.
-2. Commons `HashBag` / Guava `HashMultiset` over `M3CountedBag` (coordinate with #1271).
-3. Guava `EnumHashBiMap`/`EnumBiMap`, Commons `DualLinkedHashBidiMap` over the owned `M3HashBiMap`/`M3BidiMap`.
+1. Guava `ArrayListMultimap` (DONE #1400). Guava `HashMultimap` is BLOCKED until open #1261 lands: it must
+   reuse that PR's `M3IndexedSetMultiMap` engine, not duplicate it (coordinator, 2026-10-19).
+2. Commons `HashBag` (DONE #1421) and Guava `HashMultiset` (DONE #1418).
+3. Guava `EnumHashBiMap` (DONE #1460) and `EnumBiMap` (DONE #1462); Commons `DualLinkedHashBidiMap` (DONE #1468).
 4. Filtered/sorted wrappers are already claimed (#1362, #1365, #1366, #1367, viewport selection lists): no scaffold.
-5. Spring `MultiValueMapAdapter` over the owned `M3MultiValueMap` (`LinkedMultiValueMap` is DONE).
+5. Spring `MultiValueMapAdapter` (DONE #1469; `LinkedMultiValueMap` is DONE on master).
+6. Next wave (approved 2026-10-19), one stacked PR each: Guava `EnumMultiset` (DONE #1499), `LinkedHashMultiset`,
+   `LinkedHashMultimap`, Commons `TreeBag`, Guava `TreeMultimap`. Each row's `in_place_landing` names the
+   java.util store it lands in under the M3jdk21-is-the-JDK rule.
 
 ## Viewport-derived views (2026-10-19)
 
