@@ -1,6 +1,8 @@
 /*
  * Copyright 2026 Hitesh Soliwal and contributors
+ * SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
  * SPDX-License-Identifier: Apache-2.0
+ * Modified 2026-10-21: validate and merge sorted batches backward with existing lane reuse.
  */
 package com.m3.collections;
 
@@ -14,11 +16,14 @@ import java.util.Objects;
  *
  * <p>Keys live in one sorted {@code long[]} lane and values in a parallel {@code long[]} lane, so
  * every long, including zero and the extrema, is a legal key and a legal value, and iteration is a
- * plain lane walk in natural signed order. The mechanics are those of the first-party Synexia donor
- * {@code PackedLongLongSortedMap} under the {@code LongLongSortedMap} contract: single updates use
- * binary search plus {@code System.arraycopy}; nondecreasing batches collapse duplicate keys (last
- * value wins) and merge in one forward pass; growth is 1.5x with a floor of eight slots and
- * compaction is the explicit {@link #trimToSize()}. Lookups and the navigation calls are O(log n);
+ * plain lane walk in natural signed order. The original storage and navigation mechanics come from
+ * first-party Synexia {@code PackedLongLongSortedMap} under the {@code LongLongSortedMap} contract.
+ * This refinement keeps binary search plus {@code System.arraycopy} for single updates, while
+ * nondecreasing batches validate then merge backward
+ * (last incoming value wins), reusing the lanes when their capacity permits. Single-insertion
+ * growth is 1.5x with a floor of eight slots; batches preserve capacity for the existing size plus
+ * distinct incoming keys. Compaction is the explicit {@link #trimToSize()}. Lookups and the
+ * navigation calls are O(log n);
  * a single put or remove is an O(log n) search plus an O(n) lane shift, exactly as in the donor.
  * Navigation takes a caller default as {@link java.util.NavigableMap} would return null;
  * {@code firstKey}, {@code lastKey} and the poll calls throw {@link NoSuchElementException} on an
@@ -60,9 +65,11 @@ public final class M3LongLongTreeMap implements M3LongLongSortedMap {
     }
 
     /**
-     * Merges a batch of nondecreasing keys in one forward pass. Duplicate incoming keys collapse
-     * with the last value winning and incoming values replace present keys; returns the number of
-     * new keys. Unsorted keys or mismatched lane lengths are refused before any state changes.
+     * Validates then merges nondecreasing keys backward in O(size + batch length) time. Duplicate
+     * incoming keys collapse with the last value winning and incoming values replace present keys;
+     * returns the number of new keys. Unsorted keys or mismatched lane lengths are refused before
+     * any state changes. Existing lanes are reused when capacity permits; growth allocates only
+     * the two destination lanes, with capacity based on the old size plus distinct incoming keys.
      */
     public int putAllSorted(long[] sourceKeys, long[] sourceValues) {
         Objects.requireNonNull(sourceKeys, "sourceKeys");
@@ -73,15 +80,36 @@ public final class M3LongLongTreeMap implements M3LongLongSortedMap {
         if (sourceKeys.length == 0) {
             return 0;
         }
-        long[] batchKeys = new long[sourceKeys.length];
-        long[] batchValues = new long[sourceValues.length];
-        int unique = collapseSorted(sourceKeys, sourceValues, batchKeys, batchValues);
         int before = size;
-        merge(batchKeys, batchValues, unique);
-        if (size != before) {
+        int unique = 0;
+        int added = 0;
+        int existing = 0;
+        for (int i = 0; i < sourceKeys.length; i++) {
+            long key = sourceKeys[i];
+            if (i > 0 && key < sourceKeys[i - 1]) {
+                throw new IllegalArgumentException("source keys must be sorted");
+            }
+            if (i == 0 || key != sourceKeys[i - 1]) {
+                unique++;
+                while (existing < before && keys[existing] < key) {
+                    existing++;
+                }
+                if (existing == before || keys[existing] != key) {
+                    added++;
+                }
+            }
+        }
+        // Keep the observable batch-capacity rule, even for replacement-only batches.
+        long required = (long) before + unique;
+        if (required > Integer.MAX_VALUE) {
+            throw new OutOfMemoryError("required array size too large");
+        }
+        int capacity = Math.max(keys.length, (int) required);
+        mergeSortedBackward(sourceKeys, sourceValues, before + added, capacity);
+        if (added != 0) {
             modCount++;
         }
-        return size - before;
+        return added;
     }
 
     @Override
@@ -313,57 +341,43 @@ public final class M3LongLongTreeMap implements M3LongLongSortedMap {
         return (int) Math.min(grown, MAX_ARRAY_SIZE);
     }
 
-    private static int collapseSorted(long[] sourceKeys, long[] sourceValues,
-            long[] batchKeys, long[] batchValues) {
-        int unique = 0;
-        for (int i = 0; i < sourceKeys.length; i++) {
-            long key = sourceKeys[i];
-            if (i > 0 && key < sourceKeys[i - 1]) {
-                throw new IllegalArgumentException("source keys must be sorted");
-            }
-            if (unique > 0 && batchKeys[unique - 1] == key) {
-                batchValues[unique - 1] = sourceValues[i];
-            } else {
-                batchKeys[unique] = key;
-                batchValues[unique] = sourceValues[i];
-                unique++;
-            }
+    private void mergeSortedBackward(long[] sourceKeys, long[] sourceValues,
+            int newSize, int capacity) {
+        long[] mergedKeys = keys;
+        long[] mergedValues = values;
+        if (capacity > keys.length) {
+            // Keep both allocations local so failure cannot publish one replacement lane.
+            mergedKeys = new long[capacity];
+            mergedValues = new long[capacity];
         }
-        return unique;
-    }
-
-    private void merge(long[] batchKeys, long[] batchValues, int unique) {
-        int capacity = Math.max(keys.length, size + unique);
-        long[] mergedKeys = new long[capacity];
-        long[] mergedValues = new long[capacity];
-        int left = 0;
-        int right = 0;
-        int write = 0;
-        while (left < size && right < unique) {
-            long existing = keys[left];
-            long incoming = batchKeys[right];
-            if (existing < incoming) {
-                mergedKeys[write] = existing;
-                mergedValues[write++] = values[left++];
-            } else {
-                if (existing == incoming) {
-                    left++;
-                }
-                mergedKeys[write] = incoming;
-                mergedValues[write++] = batchValues[right++];
+        int left = size - 1;
+        int right = sourceKeys.length - 1;
+        int write = newSize - 1;
+        while (right >= 0) {
+            long incoming = sourceKeys[right];
+            long value = sourceValues[right];
+            // The unprocessed union contains the existing prefix, so write >= left.
+            while (left >= 0 && keys[left] > incoming) {
+                mergedKeys[write] = keys[left];
+                mergedValues[write--] = values[left--];
             }
+            if (left >= 0 && keys[left] == incoming) {
+                left--;
+            }
+            mergedKeys[write] = incoming;
+            mergedValues[write--] = value;
+            do {
+                right--;
+            } while (right >= 0 && sourceKeys[right] == incoming);
         }
-        while (left < size) {
-            mergedKeys[write] = keys[left];
-            mergedValues[write++] = values[left++];
-        }
-        while (right < unique) {
-            mergedKeys[write] = batchKeys[right];
-            mergedValues[write++] = batchValues[right++];
+        // With reused lanes the remaining existing prefix is already in its final positions.
+        if (mergedKeys != keys && left >= 0) {
+            System.arraycopy(keys, 0, mergedKeys, 0, left + 1);
+            System.arraycopy(values, 0, mergedValues, 0, left + 1);
         }
         keys = mergedKeys;
         values = mergedValues;
-        size = write;
+        size = newSize;
     }
 
     private void checkForComodification(int expectedModCount) {

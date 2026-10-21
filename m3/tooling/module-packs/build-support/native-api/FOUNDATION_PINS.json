@@ -1,0 +1,30 @@
+{
+  "schema": "M3_NATIVE_API_FOUNDATIONS_V1",
+  "m3_file": {
+    "coordinate": "com.m3:m3-file:0.1.0-SNAPSHOT",
+    "jar_sha256": "158ccfaf131eae3bcd1fb8548c6a16f4d2304c825d709713047c56075e273630",
+    "source_sha256": "12244bd16d118e35b981cf6f89d6e551901b43d9c2bfab62c44144a167306e3a",
+    "class_files": {
+      "com/m3/file/M3File$Fingerprint.class": "e737e476679196370a1f69f9bdd747c8d475b5d4dfbcd1f83d4720a0b5c0bc86",
+      "com/m3/file/M3File$Metadata.class": "5f7cad8d565a314c8748136183e45af4e3a3dda27b67a84c94f6f74b744c97ba",
+      "com/m3/file/M3File.class": "6cec08e0fb7e481f462b3043b56612c1835dd5794d5f53e3d172ca48faced6f2",
+      "module-info.class": "6f63ed36ab4b857b99eac75f13acaa3fdfc1d6007cb2ff973b829abad0dfb840"
+    },
+    "qualified_jar_sha256": "5939b7cff87af2418c713d2683e58ee9d9f5ec177a34b5248e5f93a1a9dca302",
+    "qualified_receipt_sha256": "b1d0c2b34c76930c40711608ceeaaf56e4633870144e6ecade8a10be164c5c81",
+    "scope": "already-qualified original com.m3.file module; packaging only",
+    "descriptor_note": "all class entries match qualified proof JAR; raw receipt module-info precedes original jar packaging metadata"
+  },
+  "jni_headers": {
+    "runtime_base": "Temurin21.0.12.1+1",
+    "compiler_source_pin": "hsoliwal/M3jdk21@d6d76b563050fc13c4fa79bc494edf29f1614b37",
+    "files": {
+      "include/jni.h": "99e64ebbe749e6df284f852f11b3c73f6ea97baf15120428f40f887fe0616e61",
+      "include/linux/jni_md.h": "88cb5c33e306900dd35a78d5a439087123b8e91b0986bb5acb42cc9bd2fcc42e",
+      "legal/java.base/LICENSE": "4b9abebc4338048a7c2dc184e9f800deb349366bdf28eb23c2677a77b4c87726",
+      "legal/java.base/ADDITIONAL_LICENSE_INFO": "a69bce275ba7a3570af6579cb0f55682cd75fedfcd49e0e8e9022270c447c916",
+      "legal/java.base/ASSEMBLY_EXCEPTION": "75292f03bf23d3db7c985aecc191029b93883200721ed23ed34a2e601463df33"
+    },
+    "license": "GPL-2.0-with-Classpath-exception; retain exact header and SDK license texts"
+  }
+}

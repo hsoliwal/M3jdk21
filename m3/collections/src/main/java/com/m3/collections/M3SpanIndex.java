@@ -194,23 +194,17 @@ public final class M3SpanIndex {
         /** Leftmost interval whose earlier start covers the given logical row. */
         public int earliestCovering(int row) {
             if (row <= 0 || starts.length == 0) return Math.max(0, row);
-            int low = 0, high = starts.length;
-            int prior = row - 1;
-            while (low < high) {
-                int middle = low + ((high - low) >>> 1);
-                if (starts[middle] <= prior) low = middle + 1;
-                else high = middle;
-            }
-            int last = low - 1;
-            if (last < 0 || prefix[last] < row) return row;
-            low = 0;
-            high = last;
+            if (starts[0] >= row || prefix[prefix.length - 1] < row) return row;
+            // At the first prefix >= row, this interval's end is the first to cover
+            // row. Sorted starts need only one final strict-start check; no second
+            // search or additional index is necessary, including duplicate starts.
+            int low = 0, high = starts.length - 1;
             while (low < high) {
                 int middle = low + ((high - low) >>> 1);
                 if (prefix[middle] >= row) high = middle;
                 else low = middle + 1;
             }
-            return starts[low];
+            return starts[low] < row ? starts[low] : row;
         }
 
         /** Same deterministic answers for a caller-owned query vector. */

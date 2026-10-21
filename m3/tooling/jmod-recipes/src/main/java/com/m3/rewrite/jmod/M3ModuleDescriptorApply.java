@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: Apache-2.0
+// SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
 package com.m3.rewrite.jmod;
 
 import java.io.IOException;
@@ -33,7 +34,20 @@ public final class M3ModuleDescriptorApply {
 
     public static int apply(Path root, Path manifest, Path receipt) {
         M3ModuleDescriptorRecipe recipe = new M3ModuleDescriptorRecipe(manifest.toString());
-        List<Result> first = run(recipe, root, manifest);
+        List<Result> first;
+        try {
+            first = run(recipe, root, manifest);
+        } catch (IllegalStateException refusal) {
+            // The scanner refuses a whole packet during generation, before any Result is written.
+            // Preserve the documented CLI drift exit code without swallowing malformed manifests,
+            // tampered generated sources, or unrelated recipe failures.
+            if (refusal.getMessage() == null || !refusal.getMessage().startsWith("descriptor drift: ")) {
+                throw refusal;
+            }
+            write(receipt, "target\tbefore_sha256\tafter_sha256\tchange\nREFUSED\t"
+                    + refusal.getMessage() + "\n");
+            return 3;
+        }
         List<String> rows = new ArrayList<>(List.of("target\tbefore_sha256\tafter_sha256\tchange"));
         for (Result r : first) {
             if (r.getAfter() != null && r.getAfter().getMarkers().findFirst(Markup.Error.class).isPresent()) {

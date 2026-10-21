@@ -8,24 +8,16 @@
 
 static jint earliest_covering(jint target, const jint *starts, const jlong *prefix, jsize count) {
     if (target <= 0) return target < 0 ? 0 : target;
+    if (count == 0 || starts[0] >= target || prefix[count - 1] < (jlong) target) return target;
+    /* Same first-qualifying-prefix proof as the Java owner; start remains exclusive. */
     jsize low = 0;
-    jsize high = count;
-    const jint prior = target - 1;
-    while (low < high) {
-        jsize middle = low + (high - low) / 2;
-        if (starts[middle] <= prior) low = middle + 1;
-        else high = middle;
-    }
-    jsize last = low - 1;
-    if (last < 0 || prefix[last] < (jlong) target) return target;
-    low = 0;
-    high = last;
+    jsize high = count - 1;
     while (low < high) {
         jsize middle = low + (high - low) / 2;
         if (prefix[middle] >= (jlong) target) high = middle;
         else low = middle + 1;
     }
-    return starts[low];
+    return starts[low] < target ? starts[low] : target;
 }
 
 JNIEXPORT jintArray JNICALL Java_com_m3_collections_M3SpanIndex_batchNative(

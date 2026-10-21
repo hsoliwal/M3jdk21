@@ -3227,6 +3227,9 @@ public class BasicTreeUI extends TreeUI
                      expanded, treeModel.isLeaf(value), row,
                      false);
                 if(tree != null) {
+                    // Upstream JDK-6507038: remove the previously added components to prevent
+                    // a leak, then add the component the renderer returned now
+                    rendererPane.removeAll();
                     // Only ever removed when UI changes, this is OK!
                     rendererPane.add(aComponent);
                     aComponent.validate();

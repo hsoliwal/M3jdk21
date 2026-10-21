@@ -1,0 +1,29 @@
+{
+  "all_input_jmod_legal_entries_verified_in_image": 110,
+  "original_resources": [
+    {
+      "entry": "META-INF/maven/org.xerial/sqlite-jdbc/LICENSE.zentus",
+      "kind": "legal",
+      "module": "org.xerial.sqlitejdbc",
+      "sha256": "89167dab92289c7e5e2b65b044f0856b703d05e5d5e35c3548e73d9c7d2f5048"
+    },
+    {
+      "entry": "META-INF/maven/org.xerial/sqlite-jdbc/LICENSE",
+      "kind": "legal",
+      "module": "org.xerial.sqlitejdbc",
+      "sha256": "3ddf9be5c28fe27dad143a5dc76eea25222ad1dd68934a047064e56ed2fa40c5"
+    },
+    {
+      "entry": "org/sqlite/native/Linux/x86_64/libsqlitejdbc.so",
+      "kind": "original_linux_x86_64_jni",
+      "module": "org.xerial.sqlitejdbc",
+      "sha256": "8991ba66c5c95a6d2a8bc395e874c5550b5acde267c618db1049cc1d801c34f1"
+    },
+    {
+      "entry": "META-INF/LICENSE.txt",
+      "kind": "legal",
+      "module": "org.slf4j",
+      "sha256": "4e7f90c86ab51278228bce153122f1d8df30149d13ce9ef524c8444a84c32dcc"
+    }
+  ]
+}

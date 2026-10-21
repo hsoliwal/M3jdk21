@@ -54,13 +54,13 @@ jobs:
           bash -n m3/synexia-import/pure-int-recipe-custody/install.sh
           python3 m3/synexia-import/pure-int-recipe-custody/test_source_bootstrap.py
           bash m3/synexia-import/pure-int-recipe-custody/install.sh "$GITHUB_WORKSPACE" --dependencies-only
+      - name: Recipe, UTF-16, mapped-owner, JNI and compiled-kernel gates
+        run: mvn -B -ntp -f m3/tooling/tq/pom.xml verify
       - name: TQ successor recipe and custody
         run: |
           mvn -B -ntp -f m3/tooling/tq-sync/pom.xml verify
           python3 m3/tooling/tq-sync/verify-plan.py --context ic0
           python3 -B -S -m unittest discover -s m3/tooling/tq-sync/src/test/python -p test_ic0_context.py -v
-      - name: Recipe, UTF-16, mapped-owner, JNI and compiled-kernel gates
-        run: mvn -B -ntp -f m3/tooling/tq/pom.xml verify
       - name: Current TQ workflow context regression
         run: python3 -B -S -m unittest discover -s m3/tooling/tq/src/test/python -p test_ic0_context.py -v
       - name: Preserve release evidence

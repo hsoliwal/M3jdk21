@@ -137,7 +137,17 @@ match is always a whole token span: it cannot cross a token boundary or land ins
 comment token (exclude them with `<!#COMMENT>` or by class). No quit units on token alphabets.
 Oracle: each token id `t` maps to the private-use unit `U+E000 + t` and the pattern to an
 equivalent JDK regex; stock `Pattern` decides (the NLTK flattening is used only in tests).
-Reconcile with M3RX7 TokenIndex (PR #1338) and PRs #1369/#1370/#1372/#1378/#1380 later.
+Reconcile with M3RX7 TokenIndex (PR #1338), the java.base token-sequence scaffold PR #1397
+(receives Synexia #12396) and PRs #1369/#1370/#1372/#1378/#1380 later.
+
+Shipped on branch `m3/regex-cursor-token-20261018`: `M3TokenCursor` (lanes of `int[]`, empty lanes
+skipped, OR-composed presence facts), `M3TokenPatternParser`, `M3TokenPattern`. Quantifiers over a
+pattern that can match no token are rejected; captures inside loops follow PikeVM semantics
+(last iteration). square/t-rex atoms (Synexia #12398 run `20261017-ui-donor-atomize`, 452
+leaves) are mapped construct by construct in `m3/ports/regex-cursor/TREX_PATTERN_MAP.tsv`; gaps:
+lexicon-backed regex classes, class intersection, numeric attribute predicates, same-span
+conjunction. t-rex states Apache-2.0 only in its README (no LICENSE file), so it stays
+LICENSE_REVIEW_REQUIRED: pattern use only, no code or test text copied.
 
 ## 7. java.base path (recipe-first)
 

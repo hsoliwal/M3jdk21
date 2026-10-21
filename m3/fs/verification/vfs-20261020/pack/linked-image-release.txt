@@ -1,0 +1,2 @@
+JAVA_VERSION="21.0.12.1"
+MODULES="java.base java.logging commons.logging java.datatransfer java.xml java.prefs java.desktop org.apache.commons.codec org.apache.commons.io org.apache.commons.lang3 org.apache.commons.compress jdk.m3fs"

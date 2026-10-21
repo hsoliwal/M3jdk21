@@ -129,30 +129,14 @@ public final class M3LongRankIndex {
     public int lowerBound(long target) {
         int lo = 0;
         int hi = values.length;
-        while (lo < hi) {
-            int middle = lo + ((hi - lo) >>> 1);
-            if (values[middle] < target) {
-                lo = middle + 1;
-            } else {
-                hi = middle;
-            }
-        }
-        return lo;
+        return M3LaneSearch.lowerBound(values, lo, hi, target);
     }
 
     /** First index of a value strictly greater than target; in [0, size]. */
     public int upperBound(long target) {
         int lo = 0;
         int hi = values.length;
-        while (lo < hi) {
-            int middle = lo + ((hi - lo) >>> 1);
-            if (values[middle] <= target) {
-                lo = middle + 1;
-            } else {
-                hi = middle;
-            }
-        }
-        return lo;
+        return M3LaneSearch.upperBound(values, lo, hi, target);
     }
 
     /** Zero-based positional select in signed sorted order, duplicates included. */

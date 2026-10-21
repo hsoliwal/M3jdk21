@@ -1,57 +1,332 @@
 <!-- SPDX-License-Identifier: Apache-2.0; build integration only, upstream source remains The Apache Software License, Version 2.0. -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>io.micrometer</groupId><artifactId>micrometer-core</artifactId><version>1.9.17-m3-source-1</version>
+  <groupId>io.micrometer</groupId>
+  <artifactId>micrometer-core</artifactId>
+  <version>1.9.17-m3-source-1</version>
   <name>micrometer-core 1.9.17 - unchanged upstream source build for M3jdk21</name>
   <description>Source inclusion of the published io.micrometer:micrometer-core:1.9.17 sources jar (SHA-1 c77fa0305e75290685d2c04c2e531c425b4dd98b); no upstream implementation changes. See PROVENANCE.json.</description>
   <url>https://github.com/micrometer-metrics/micrometer</url>
-  <licenses><license><name>The Apache Software License, Version 2.0</name><url>https://repo.maven.apache.org/maven2/io/micrometer/micrometer-core/1.9.17/micrometer-core-1.9.17.pom</url><distribution>repo</distribution></license></licenses>
-  <properties><project.build.sourceEncoding>UTF-8</project.build.sourceEncoding></properties>
+  <licenses>
+    <license>
+      <name>The Apache Software License, Version 2.0</name>
+      <url>https://repo.maven.apache.org/maven2/io/micrometer/micrometer-core/1.9.17/micrometer-core-1.9.17.pom</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
   <dependencies>
-    <dependency><groupId>org.hdrhistogram</groupId><artifactId>HdrHistogram</artifactId><version>2.1.12-m3-source-1</version><!-- source module --></dependency>
-    <dependency><groupId>org.latencyutils</groupId><artifactId>LatencyUtils</artifactId><version>2.0.3-m3-source-1</version><!-- source module --></dependency>
-    <dependency><groupId>com.google.code.findbugs</groupId><artifactId>jsr305</artifactId><version>3.0.2</version><scope>provided</scope><optional>true</optional><!-- published-pom compile input (compile, optional), binary, never shipped --></dependency>
-    <dependency><groupId>org.aspectj</groupId><artifactId>aspectjweaver</artifactId><version>1.8.14</version><scope>provided</scope><optional>true</optional><!-- published-pom compile input (compile, optional), binary, never shipped --></dependency>
-    <dependency><groupId>io.dropwizard.metrics</groupId><artifactId>metrics-core</artifactId><version>4.2.22</version><scope>provided</scope><optional>true</optional><!-- published-pom compile input (compile, optional), binary, never shipped --></dependency>
-    <dependency><groupId>com.google.guava</groupId><artifactId>guava</artifactId><version>31.1-jre</version><scope>provided</scope><optional>true</optional><!-- published-pom compile input (compile, optional), binary, never shipped --></dependency>
-    <dependency><groupId>com.github.ben-manes.caffeine</groupId><artifactId>caffeine</artifactId><version>2.9.3</version><scope>provided</scope><optional>true</optional><!-- published-pom compile input (compile, optional), binary, never shipped --></dependency>
-    <dependency><groupId>net.sf.ehcache</groupId><artifactId>ehcache</artifactId><version>2.10.9.2</version><scope>provided</scope><optional>true</optional><!-- published-pom compile input (compile, optional), binary, never shipped --></dependency>
-    <dependency><groupId>javax.cache</groupId><artifactId>cache-api</artifactId><version>1.1.1</version><scope>provided</scope><optional>true</optional><!-- published-pom compile input (compile, optional), binary, never shipped --></dependency>
-    <dependency><groupId>com.hazelcast</groupId><artifactId>hazelcast</artifactId><version>5.1.1</version><scope>provided</scope><optional>true</optional><!-- published-pom compile input (compile, optional), binary, never shipped --></dependency>
-    <dependency><groupId>org.hibernate</groupId><artifactId>hibernate-entitymanager</artifactId><version>5.6.15.Final</version><scope>provided</scope><optional>true</optional><!-- published-pom compile input (compile, optional), binary, never shipped --></dependency>
-    <dependency><groupId>org.eclipse.jetty</groupId><artifactId>jetty-server</artifactId><version>9.4.53.v20231009</version><scope>provided</scope><optional>true</optional><!-- published-pom compile input (compile, optional), binary, never shipped --></dependency>
-    <dependency><groupId>org.eclipse.jetty</groupId><artifactId>jetty-client</artifactId><version>9.4.53.v20231009</version><scope>provided</scope><optional>true</optional><!-- published-pom compile input (compile, optional), binary, never shipped --></dependency>
-    <dependency><groupId>org.apache.tomcat.embed</groupId><artifactId>tomcat-embed-core</artifactId><version>8.5.95</version><scope>provided</scope><optional>true</optional><!-- published-pom compile input (compile, optional), binary, never shipped --></dependency>
-    <dependency><groupId>org.glassfish.jersey.core</groupId><artifactId>jersey-server</artifactId><version>2.37</version><scope>provided</scope><optional>true</optional><!-- published-pom compile input (compile, optional), binary, never shipped --></dependency>
-    <dependency><groupId>io.grpc</groupId><artifactId>grpc-api</artifactId><version>1.45.1</version><scope>provided</scope><optional>true</optional><!-- published-pom compile input (compile, optional), binary, never shipped --></dependency>
-    <dependency><groupId>org.apache.httpcomponents</groupId><artifactId>httpclient</artifactId><version>4.5.14</version><scope>provided</scope><optional>true</optional><!-- published-pom compile input (compile, optional), binary, never shipped --></dependency>
-    <dependency><groupId>org.apache.httpcomponents</groupId><artifactId>httpasyncclient</artifactId><version>4.1.5</version><scope>provided</scope><optional>true</optional><!-- published-pom compile input (compile, optional), binary, never shipped --></dependency>
-    <dependency><groupId>com.netflix.hystrix</groupId><artifactId>hystrix-core</artifactId><version>1.5.12</version><scope>provided</scope><optional>true</optional><!-- published-pom compile input (compile, optional), binary, never shipped --></dependency>
-    <dependency><groupId>ch.qos.logback</groupId><artifactId>logback-classic</artifactId><version>1.2.12</version><scope>provided</scope><optional>true</optional><!-- published-pom compile input (compile, optional), binary, never shipped --></dependency>
-    <dependency><groupId>org.apache.logging.log4j</groupId><artifactId>log4j-core</artifactId><version>2.17.2</version><scope>provided</scope><optional>true</optional><!-- published-pom compile input (compile, optional), binary, never shipped --></dependency>
-    <dependency><groupId>com.squareup.okhttp3</groupId><artifactId>okhttp</artifactId><version>5.0.0-alpha.11</version><scope>provided</scope><optional>true</optional><!-- published-pom compile input (compile, optional), binary, never shipped --></dependency>
-    <dependency><groupId>org.mongodb</groupId><artifactId>mongodb-driver-sync</artifactId><version>4.6.1</version><scope>provided</scope><optional>true</optional><!-- published-pom compile input (compile, optional), binary, never shipped --></dependency>
-    <dependency><groupId>org.jooq</groupId><artifactId>jooq</artifactId><version>3.14.16</version><scope>provided</scope><optional>true</optional><!-- published-pom compile input (compile, optional), binary, never shipped --></dependency>
-    <dependency><groupId>org.apache.kafka</groupId><artifactId>kafka-clients</artifactId><version>2.8.2</version><scope>provided</scope><optional>true</optional><!-- published-pom compile input (compile, optional), binary, never shipped --></dependency>
-    <dependency><groupId>org.apache.kafka</groupId><artifactId>kafka-streams</artifactId><version>2.8.2</version><scope>provided</scope><optional>true</optional><!-- published-pom compile input (compile, optional), binary, never shipped --></dependency>
+    <dependency>
+      <groupId>org.hdrhistogram</groupId>
+      <artifactId>HdrHistogram</artifactId>
+      <version>2.1.12-m3-source-1</version>
+      <!-- source module -->
+    </dependency>
+    <dependency>
+      <groupId>org.latencyutils</groupId>
+      <artifactId>LatencyUtils</artifactId>
+      <version>2.0.3-m3-source-1</version>
+      <!-- source module -->
+    </dependency>
+    <dependency>
+      <groupId>com.google.code.findbugs</groupId>
+      <artifactId>jsr305</artifactId>
+      <version>3.0.2</version>
+      <scope>provided</scope>
+      <optional>true</optional>
+      <!-- published-pom compile input (compile, optional), binary, never shipped -->
+    </dependency>
+    <dependency>
+      <groupId>org.aspectj</groupId>
+      <artifactId>aspectjweaver</artifactId>
+      <version>1.8.14</version>
+      <scope>provided</scope>
+      <optional>true</optional>
+      <!-- published-pom compile input (compile, optional), binary, never shipped -->
+    </dependency>
+    <dependency>
+      <groupId>io.dropwizard.metrics</groupId>
+      <artifactId>metrics-core</artifactId>
+      <version>4.2.22</version>
+      <scope>provided</scope>
+      <optional>true</optional>
+      <!-- published-pom compile input (compile, optional), binary, never shipped -->
+    </dependency>
+    <dependency>
+      <groupId>com.google.guava</groupId>
+      <artifactId>guava</artifactId>
+      <version>31.1-jre</version>
+      <scope>provided</scope>
+      <optional>true</optional>
+      <!-- published-pom compile input (compile, optional), binary, never shipped -->
+    </dependency>
+    <dependency>
+      <groupId>com.github.ben-manes.caffeine</groupId>
+      <artifactId>caffeine</artifactId>
+      <version>2.9.3</version>
+      <scope>provided</scope>
+      <optional>true</optional>
+      <!-- published-pom compile input (compile, optional), binary, never shipped -->
+    </dependency>
+    <dependency>
+      <groupId>net.sf.ehcache</groupId>
+      <artifactId>ehcache</artifactId>
+      <version>2.10.9.2</version>
+      <scope>provided</scope>
+      <optional>true</optional>
+      <!-- published-pom compile input (compile, optional), binary, never shipped -->
+    </dependency>
+    <dependency>
+      <groupId>javax.cache</groupId>
+      <artifactId>cache-api</artifactId>
+      <version>1.1.1</version>
+      <scope>provided</scope>
+      <optional>true</optional>
+      <!-- published-pom compile input (compile, optional), binary, never shipped -->
+    </dependency>
+    <dependency>
+      <groupId>com.hazelcast</groupId>
+      <artifactId>hazelcast</artifactId>
+      <version>5.1.1</version>
+      <scope>provided</scope>
+      <optional>true</optional>
+      <!-- published-pom compile input (compile, optional), binary, never shipped -->
+    </dependency>
+    <dependency>
+      <groupId>org.hibernate</groupId>
+      <artifactId>hibernate-entitymanager</artifactId>
+      <version>5.6.15.Final</version>
+      <scope>provided</scope>
+      <optional>true</optional>
+      <!-- published-pom compile input (compile, optional), binary, never shipped -->
+    </dependency>
+    <dependency>
+      <groupId>org.eclipse.jetty</groupId>
+      <artifactId>jetty-server</artifactId>
+      <version>9.4.53.v20231009</version>
+      <scope>provided</scope>
+      <optional>true</optional>
+      <!-- published-pom compile input (compile, optional), binary, never shipped -->
+    </dependency>
+    <dependency>
+      <groupId>org.eclipse.jetty</groupId>
+      <artifactId>jetty-client</artifactId>
+      <version>9.4.53.v20231009</version>
+      <scope>provided</scope>
+      <optional>true</optional>
+      <!-- published-pom compile input (compile, optional), binary, never shipped -->
+    </dependency>
+    <dependency>
+      <groupId>org.apache.tomcat.embed</groupId>
+      <artifactId>tomcat-embed-core</artifactId>
+      <version>8.5.95</version>
+      <scope>provided</scope>
+      <optional>true</optional>
+      <!-- published-pom compile input (compile, optional), binary, never shipped -->
+    </dependency>
+    <dependency>
+      <groupId>org.glassfish.jersey.core</groupId>
+      <artifactId>jersey-server</artifactId>
+      <version>2.37</version>
+      <scope>provided</scope>
+      <optional>true</optional>
+      <!-- published-pom compile input (compile, optional), binary, never shipped -->
+    </dependency>
+    <dependency>
+      <groupId>io.grpc</groupId>
+      <artifactId>grpc-api</artifactId>
+      <version>1.45.1</version>
+      <scope>provided</scope>
+      <optional>true</optional>
+      <!-- published-pom compile input (compile, optional), binary, never shipped -->
+    </dependency>
+    <dependency>
+      <groupId>org.apache.httpcomponents</groupId>
+      <artifactId>httpclient</artifactId>
+      <version>4.5.14</version>
+      <scope>provided</scope>
+      <optional>true</optional>
+      <!-- published-pom compile input (compile, optional), binary, never shipped -->
+    </dependency>
+    <dependency>
+      <groupId>org.apache.httpcomponents</groupId>
+      <artifactId>httpasyncclient</artifactId>
+      <version>4.1.5</version>
+      <scope>provided</scope>
+      <optional>true</optional>
+      <!-- published-pom compile input (compile, optional), binary, never shipped -->
+    </dependency>
+    <dependency>
+      <groupId>com.netflix.hystrix</groupId>
+      <artifactId>hystrix-core</artifactId>
+      <version>1.5.12</version>
+      <scope>provided</scope>
+      <optional>true</optional>
+      <!-- published-pom compile input (compile, optional), binary, never shipped -->
+    </dependency>
+    <dependency>
+      <groupId>ch.qos.logback</groupId>
+      <artifactId>logback-classic</artifactId>
+      <version>1.2.12</version>
+      <scope>provided</scope>
+      <optional>true</optional>
+      <!-- published-pom compile input (compile, optional), binary, never shipped -->
+    </dependency>
+    <dependency>
+      <groupId>org.apache.logging.log4j</groupId>
+      <artifactId>log4j-core</artifactId>
+      <version>2.17.2</version>
+      <scope>provided</scope>
+      <optional>true</optional>
+      <!-- published-pom compile input (compile, optional), binary, never shipped -->
+    </dependency>
+    <dependency>
+      <groupId>com.squareup.okhttp3</groupId>
+      <artifactId>okhttp</artifactId>
+      <version>5.0.0-alpha.11</version>
+      <scope>provided</scope>
+      <optional>true</optional>
+      <!-- published-pom compile input (compile, optional), binary, never shipped -->
+    </dependency>
+    <dependency>
+      <groupId>org.mongodb</groupId>
+      <artifactId>mongodb-driver-sync</artifactId>
+      <version>4.6.1</version>
+      <scope>provided</scope>
+      <optional>true</optional>
+      <!-- published-pom compile input (compile, optional), binary, never shipped -->
+    </dependency>
+    <dependency>
+      <groupId>org.jooq</groupId>
+      <artifactId>jooq</artifactId>
+      <version>3.14.16</version>
+      <scope>provided</scope>
+      <optional>true</optional>
+      <!-- published-pom compile input (compile, optional), binary, never shipped -->
+    </dependency>
+    <dependency>
+      <groupId>org.apache.kafka</groupId>
+      <artifactId>kafka-clients</artifactId>
+      <version>2.8.2</version>
+      <scope>provided</scope>
+      <optional>true</optional>
+      <!-- published-pom compile input (compile, optional), binary, never shipped -->
+    </dependency>
+    <dependency>
+      <groupId>org.apache.kafka</groupId>
+      <artifactId>kafka-streams</artifactId>
+      <version>2.8.2</version>
+      <scope>provided</scope>
+      <optional>true</optional>
+      <!-- published-pom compile input (compile, optional), binary, never shipped -->
+    </dependency>
   </dependencies>
   <build>
     <resources>
-      <resource><directory>src/main/resources</directory></resource>
-      <resource><directory>${project.basedir}</directory><targetPath>META-INF/third-party/micrometer-core</targetPath><includes><include>LICENSE</include><include>PROVENANCE.json</include><include>THIRD_PARTY_NOTICES.md</include></includes></resource>
+      <resource>
+        <directory>src/main/resources</directory>
+      </resource>
+      <resource>
+        <directory>${project.basedir}</directory>
+        <targetPath>META-INF/third-party/micrometer-core</targetPath>
+        <includes>
+          <include>LICENSE</include>
+          <include>PROVENANCE.json</include>
+          <include>THIRD_PARTY_NOTICES.md</include>
+        </includes>
+      </resource>
     </resources>
     <plugins>
-      <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-compiler-plugin</artifactId><version>3.15.0</version>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.15.0</version>
         <!-- Upstream bytes are compiled as published: no annotation processing, no warnings-as-errors. M3jdk21 integration is checked separately with -Werror. -->
-        <configuration><release>8</release><encoding>UTF-8</encoding><proc>none</proc><compilerArgs><arg>-Xlint:all,-options</arg></compilerArgs></configuration>
+        <configuration>
+          <release>8</release>
+          <encoding>UTF-8</encoding>
+          <proc>none</proc>
+          <compilerArgs>
+            <arg>-Xlint:all,-options</arg>
+          </compilerArgs>
+        </configuration>
       </plugin>
-      <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-surefire-plugin</artifactId><version>3.5.6</version>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>3.5.6</version>
         <!-- Published sources jars carry no test suite; the compile and the consumers' own tests are the proof lane. -->
-        <configuration><skipTests>true</skipTests></configuration>
+        <configuration>
+          <skipTests>true</skipTests>
+        </configuration>
       </plugin>
-      <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-jar-plugin</artifactId><version>3.5.0</version>
-        <configuration><excludes><exclude>META-INF/jpms.args</exclude></excludes><archive><manifestEntries><Automatic-Module-Name>micrometer.core</Automatic-Module-Name></manifestEntries></archive></configuration>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+        <version>3.5.0</version>
+        <configuration>
+          <excludes>
+            <exclude>META-INF/jpms.args</exclude>
+          </excludes>
+          <archive>
+            <manifestEntries>
+              <Automatic-Module-Name>micrometer.core</Automatic-Module-Name>
+            </manifestEntries>
+          </archive>
+        </configuration>
       </plugin>
     </plugins>
   </build>
+  <profiles>
+    <profile>
+      <id>m3-recipe-boot</id>
+      <activation>
+        <file>
+          <exists>${maven.multiModuleProjectDirectory}/.m3/recipe-boot.properties</exists>
+        </file>
+      </activation>
+      <properties>
+        <m3.recipe.boot.skip>false</m3.recipe.boot.skip>
+      </properties>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>exec-maven-plugin</artifactId>
+            <version>3.5.0</version>
+            <inherited>true</inherited>
+            <dependencies>
+              <dependency>
+                <groupId>com.synexia.m3</groupId>
+                <artifactId>m3-pr-stack-preservation</artifactId>
+                <version>1.0.0-m3boot20261021</version>
+              </dependency>
+            </dependencies>
+            <executions>
+              <execution>
+                <id>m3-recipe-boot</id>
+                <phase>validate</phase>
+                <goals>
+                  <goal>java</goal>
+                </goals>
+                <configuration>
+                  <skip>${m3.recipe.boot.skip}</skip>
+                  <mainClass>com.synexia.m3.prstack.M3RecipeBoot</mainClass>
+                  <includeProjectDependencies>false</includeProjectDependencies>
+                  <includePluginDependencies>true</includePluginDependencies>
+                  <arguments>
+                    <argument>${maven.multiModuleProjectDirectory}/.m3/recipe-boot.properties</argument>
+                    <argument>${project.basedir}</argument>
+                    <argument>${session.projects[0].basedir.absolutePath}</argument>
+                  </arguments>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
 </project>

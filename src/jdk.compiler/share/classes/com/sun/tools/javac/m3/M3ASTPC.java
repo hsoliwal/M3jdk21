@@ -1,5 +1,6 @@
 /*
  * Copyright (c) 2026, Hitesh Soliwal and contributors. All rights reserved.
+ * Copyright (c) 2000, 2022, Oracle and/or its affiliates. All rights reserved.
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
  *
  * This code is free software; you can redistribute it and/or modify it
@@ -7,6 +8,20 @@
  * published by the Free Software Foundation. Oracle designates this
  * particular file as subject to the "Classpath" exception as provided
  * by Oracle in the LICENSE file that accompanied this code.
+ *
+ * This code is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+ * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License
+ * version 2 for more details (a copy is included in the LICENSE file that
+ * accompanied this code).
+ *
+ * You should have received a copy of the GNU General Public License version
+ * 2 along with this work; if not, write to the Free Software Foundation,
+ * Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ * Please contact Oracle, 500 Oracle Parkway, Redwood Shores, CA 94065 USA
+ * or visit www.oracle.com if you need additional information or have any
+ * questions.
  */
 package com.sun.tools.javac.m3;
 
@@ -37,7 +52,6 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.HexFormat;
-import java.util.IdentityHashMap;
 import java.util.HashMap;
 import javax.tools.JavaFileObject;
 import java.util.Objects;
@@ -317,15 +331,19 @@ public final class M3ASTPC implements Plugin {
     }
 
     private static final class LiveUnit implements M3AST.Unit {
-        private static final Object COMPUTING = new Object();
-        private static final Object NULL = new Object();
-        private record Failure(Throwable cause) { }
+        private static final byte COMPUTING = 1;
+        private static final byte COMPLETED = 2;
+        private static final byte FAILED = 4;
         private Session session;
         private CompilationUnitTree tree;
         private TypeElement type;
         private final M3AST.Phase phase;
         private final Thread thread = Thread.currentThread();
-        private IdentityHashMap<M3AST.Projection<?>, Object> projections;
+        // IdentityHashMap's paired-slot probing, specialized to this event's state.
+        // No null key, removal, entry object, failure wrapper, or global owner.
+        private Object[] projections;
+        private byte[] projectionStates;
+        private int projectionCount;
         private M3AST.Source source;
         private IOException sourceFailure;
 
@@ -380,25 +398,75 @@ public final class M3ASTPC implements Plugin {
         public <T> T project(M3AST.Projection<T> projection) throws Exception {
             check();
             Objects.requireNonNull(projection, "projection");
-            if (projections == null) projections = new IdentityHashMap<>();
-            Object result = projections.get(projection);
-            if (result == COMPUTING) throw new IllegalStateException("recursive M3AST projection: " + projection.name());
-            if (result == null) {
-                projections.put(projection, COMPUTING);
-                session.computations++;
-                try {
-                    T value = projection.create(this);
-                    result = value == null ? NULL : value;
-                } catch (Throwable failure) {
-                    result = new Failure(failure);
-                }
-                projections.put(projection, result);
-            } else session.hits++;
-            if (result instanceof Failure failure) {
-                if (failure.cause() instanceof Error error) throw error;
-                throw (Exception) failure.cause();
+            if (projections == null) {
+                Object[] entries = new Object[16];
+                byte[] states = new byte[8];
+                projections = entries;
+                projectionStates = states;
             }
-            return result == NULL ? null : (T) result;
+            int slot = projectionSlot(projection, projections);
+            if ((projectionStates[slot >>> 1] & COMPUTING) != 0)
+                throw new IllegalStateException("recursive M3AST projection: " + projection.name());
+            if (projections[slot] == null) {
+                if (3L * (projectionCount + 1) > projections.length) {
+                    growProjections();
+                    slot = projectionSlot(projection, projections);
+                }
+                projections[slot] = projection;
+                projectionStates[slot >>> 1] = COMPUTING;
+                projectionCount++;
+                session.computations++;
+                Object result;
+                byte state = COMPLETED;
+                try {
+                    result = projection.create(this);
+                } catch (Throwable failure) {
+                    result = failure;
+                    state |= FAILED;
+                }
+                // Nested factories can grow and rehash this same event's arrays.
+                slot = projectionSlot(projection, projections);
+                projections[slot + 1] = result;
+                projectionStates[slot >>> 1] = state;
+            } else session.hits++;
+            Object result = projections[slot + 1];
+            if ((projectionStates[slot >>> 1] & FAILED) != 0) {
+                if (result instanceof Error error) throw error;
+                throw (Exception) result;
+            }
+            return (T) result;
+        }
+
+        /** Adapted from java.util.IdentityHashMap's identity hash and paired-slot probe. */
+        private static int projectionSlot(Object key, Object[] entries) {
+            int hash = System.identityHashCode(key);
+            int mask = entries.length - 1;
+            int slot = ((hash << 1) - (hash << 8)) & mask;
+            while (entries[slot] != null && entries[slot] != key) slot = (slot + 2) & mask;
+            return slot;
+        }
+
+        private void growProjections() {
+            int length = projections.length;
+            // As in IdentityHashMap, retain a vacant key slot at maximum capacity.
+            if (length == 1 << 30) {
+                if (projectionCount == (length >>> 1) - 1)
+                    throw new IllegalStateException("Capacity exhausted.");
+                return;
+            }
+            Object[] entries = new Object[length << 1];
+            byte[] states = new byte[length];
+            for (int old = 0; old < length; old += 2) {
+                Object key = projections[old];
+                if (key != null) {
+                    int slot = projectionSlot(key, entries);
+                    entries[slot] = key;
+                    entries[slot + 1] = projections[old + 1];
+                    states[slot >>> 1] = projectionStates[old >>> 1];
+                }
+            }
+            projections = entries;
+            projectionStates = states;
         }
 
         void release() {
@@ -407,8 +475,9 @@ public final class M3ASTPC implements Plugin {
             type = null;
             source = null;
             sourceFailure = null;
-            if (projections != null) projections.clear();
             projections = null;
+            projectionStates = null;
+            projectionCount = 0;
         }
     }
 

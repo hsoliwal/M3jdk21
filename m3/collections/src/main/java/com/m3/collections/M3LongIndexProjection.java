@@ -7,6 +7,7 @@
 package com.m3.collections;
 
 import java.util.Arrays;
+import java.util.BitSet;
 import java.util.Objects;
 
 /**
@@ -21,7 +22,8 @@ import java.util.Objects;
  * <p>Unlike M3's live collection wrappers this class is a detached snapshot.
  * Its methods never refresh when a mutable source changes. It does not replace
  * {@code java.util} or claim compatible serialized concrete class identity.
- * Reordering is O(n log n) time and O(n) index scratch; indexed reads O(1).
+ * Reordering encounter order is O(n log n); switching a known sorted direction is O(n).
+ * Both use O(n) index storage; indexed reads are O(1).
  * Native mask selection is opt-in via the existing M3IndexMaskCompactor JNI.</p>
  */
 public final class M3LongIndexProjection {
@@ -129,11 +131,116 @@ public final class M3LongIndexProjection {
         return new M3LongIndexProjection(values, selected, 0, selected.length, order);
     }
 
+    /**
+     * Compose a signed-stride path over this view with precomputed full-width state masks.
+     *
+     * <p>Each mask plane is addressed by the original physical slot in the
+     * privately owned value array, rather than by this view's logical ordinal.
+     * The ordered index lane therefore also serves as the physical-offset lane:
+     * sorting, slicing and previous filtering do not create a redundant offset
+     * array. Repeated values remain distinct physical occurrences.
+     *
+     * <p>Filters are pure, precomputed 32-bit metadata stages, not callbacks.
+     * The caller must keep the mask planes unchanged for this entire call.
+     * {@code first/count/stride} are relative to this logical view. A negative
+     * stride reverses sorted direction without claiming stable reverse ties.
+     * The result is detached, with no retained caller mask or native pointer.
+     * A required JNI backend never silently falls back to Java.
+     *
+     * @throws IndexOutOfBoundsException for invalid relative traversal geometry
+     */
+    public M3LongIndexProjection filteredPathMasks(
+            int[][] statePlanes, int[] requiredMasks, int[] forbiddenMasks,
+            int first, int count, int stride, M3IndexPathMasks.Backend backend) {
+        Objects.requireNonNull(backend, "backend");
+        int length = size();
+        if (first < 0 || first > length || count < 0 || stride == 0) {
+            throw new IndexOutOfBoundsException("invalid projection path");
+        }
+        if (count != 0) {
+            long last = (long) first + (long) (count - 1) * stride;
+            if (first == length || last < 0 || last >= length) {
+                throw new IndexOutOfBoundsException("path leaves projection window");
+            }
+        }
+        int[] selected = M3IndexPathMasks.select(
+                indices, indices, statePlanes, requiredMasks, forbiddenMasks,
+                from + first, count, stride, backend);
+        Order resultOrder = order;
+        if (stride < 0) {
+            resultOrder = switch (order) {
+                case ASCENDING -> Order.DESCENDING;
+                case DESCENDING -> Order.ASCENDING;
+                case ENCOUNTER -> Order.ENCOUNTER;
+            };
+        }
+        return new M3LongIndexProjection(values, selected, 0, selected.length, resultOrder);
+    }
+
+    /**
+     * Select trusted, private logical-occurrence bits without an intermediate byte mask.
+     * The plan owns a plain immutable BitSet whose bounded extent and cached count were
+     * admitted together. Opaque BitSet origins keep the existing byte-mask path.
+     */
+    M3LongIndexProjection filteredOrdinals(BitSet selected, int selectedCount) {
+        if (selectedCount == size()) {
+            return new M3LongIndexProjection(values, indices, from, to, order);
+        }
+        int[] selectedIndices = new int[selectedCount];
+        int write = 0;
+        for (int ordinal = selected.nextSetBit(0); ordinal >= 0;
+                ordinal = selected.nextSetBit(ordinal + 1)) {
+            selectedIndices[write++] = M3LongAddressKernel.addressUnchecked(indices, from, ordinal);
+        }
+        return new M3LongIndexProjection(values, selectedIndices, 0, selectedCount, order);
+    }
+
     /** Stable signed-long sort; only the primitive index vector is permuted. */
     public M3LongIndexProjection sortedAscending() { return sorted(false); }
 
     /** Stable signed-long descending sort; exact ties retain encounter order. */
     public M3LongIndexProjection sortedDescending() { return sorted(true); }
+
+    /**
+     * Reverse equal-value groups without reversing occurrences inside a group.
+     * The immutable index window is already sorted. Copy each group forward,
+     * using one result index and the current address kernel for payload reads.
+     * Sliced and filtered tie groups remain bounded by this view's [from,to).
+     */
+    private int[] reverseValueGroups() {
+        int[] reversed = new int[size()];
+        int write = 0;
+        for (int end = to; end > from;) {
+            int start = end - 1;
+            long value = M3LongAddressKernel.loadUnchecked(values, indices, 0, start);
+            while (start > from
+                    && M3LongAddressKernel.loadUnchecked(values, indices, 0, start - 1)
+                    == value) {
+                start--;
+            }
+            int count = end - start;
+            System.arraycopy(indices, start, reversed, write, count);
+            write += count;
+            end = start;
+        }
+        return reversed;
+    }
+
+    /**
+     * Recognize an already-sorted encounter window without copying its physical
+     * directory. A tie is never inverted: identical values preserve the exact
+     * existing physical-index order, including repeated values and slices.
+     * Only the current immutable [from,to) window participates in this scan.
+     */
+    private boolean alreadyOrdered(boolean descending) {
+        long preceding = M3LongAddressKernel.loadPhysicalUnchecked(values, indices[from]);
+        for (int index = from + 1; index < to; index++) {
+            long current = M3LongAddressKernel.loadPhysicalUnchecked(values, indices[index]);
+            if (descending ? preceding < current : preceding > current) return false;
+            preceding = current;
+        }
+        return true;
+    }
 
     private M3LongIndexProjection sorted(boolean descending) {
         Order requested = descending ? Order.DESCENDING : Order.ASCENDING;
@@ -142,24 +249,14 @@ public final class M3LongIndexProjection {
             // immutable directory already in the requested order or copy its window.
             return new M3LongIndexProjection(values, indices, from, to, requested);
         }
-        // Two-pointer category: a monotone index directory can switch direction
-        // in O(n) instead of a full O(n log n) indirect merge sort. Reverse
-        // equal-valued runs back into their original stable encounter order.
-        // Only the private physical index vector is copied; values never move.
         if (order != Order.ENCOUNTER) {
-            int[] reversed = physicalIndices();
-            reverseRange(reversed, 0, reversed.length);
-            for (int run = 0; run < reversed.length;) {
-                long value = M3LongAddressKernel.loadPhysicalUnchecked(values, reversed[run]);
-                int end = run + 1;
-                while (end < reversed.length
-                        && M3LongAddressKernel.loadPhysicalUnchecked(values, reversed[end]) == value) {
-                    end++;
-                }
-                reverseRange(reversed, run, end);
-                run = end;
-            }
+            int[] reversed = reverseValueGroups();
             return new M3LongIndexProjection(values, reversed, 0, reversed.length, requested);
+        }
+        if (alreadyOrdered(descending)) {
+            // A sorted encounter-order index needs neither a copied directory
+            // nor the scratch array / merge passes. Caller observes a new view.
+            return new M3LongIndexProjection(values, indices, from, to, requested);
         }
         int[] current = physicalIndices();
         int size = current.length;
@@ -191,13 +288,4 @@ public final class M3LongIndexProjection {
         return new M3LongIndexProjection(values, current, 0, size,
                 descending ? Order.DESCENDING : Order.ASCENDING);
     }
-    /** Reverses only a private int[] coordinate window, never a payload or shared index. */
-    private static void reverseRange(int[] positions, int begin, int end) {
-        for (int left = begin, right = end - 1; left < right; left++, right--) {
-            int tmp = positions[left];
-            positions[left] = positions[right];
-            positions[right] = tmp;
-        }
-    }
-
 }

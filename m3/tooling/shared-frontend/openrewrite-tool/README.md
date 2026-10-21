@@ -13,6 +13,52 @@ additional dependencies can be supplied with repeated `--recipe-jar` options;
 they must be compatible with the packaged framework version. The pack does not
 include every language, third-party recipe catalog, or proprietary recipe.
 
+## Call the execution API with existing trees
+
+Build integrations that already own their source trees can call the same
+execution path directly:
+
+```java
+Recipe recipe = environment.activateRecipes("example.RenameApi");
+RecipeRun run = M3RewriteTool.execute(recipe, admittedSources, execution);
+List<Result> changes = run.getChangeset().getAllResults();
+```
+
+Here `environment`, `recipe`, `execution`, `RecipeRun` and `Result`
+are the original OpenRewrite APIs. `admittedSources` is the caller's
+`List<? extends SourceFile>`; Java callers can supply the detached
+`J.CompilationUnit` objects returned by the existing
+`M3RewriteFrontend.projection(execution)` on their own M3 compiler task.
+The compiler integration must register the projection before compilation,
+capture only supported attributed units during the callbacks, and require a
+successful completed compilation and adequate input coverage before execution.
+The live javac unit itself must not escape its callback. The existing frontend's
+same-context, syntax-retention, by-file attribution and lossless-printing checks
+remain authoritative.
+
+`execute` snapshots list membership and preserves the supplied tree objects.
+It validates the configured recipe, including composite children, then calls
+the original `Recipe.run` scheduler and returns its native `RecipeRun`,
+including data tables. It creates no compiler, parser, process or Maven/Gradle
+invocation and does not read input files or publish changes. Already admitted
+non-Java `SourceFile` trees use the same original framework contracts.
+Recipes may still invoke their own template parsers or other ordinary code.
+
+The caller owns recipe activation, source-set completeness, class loading,
+execution-context messages and error policy. The API does not change the thread
+context class loader. Null arguments/elements and invalid configuration are
+refused before scheduling. OpenRewrite can report a handled failure through
+`execution.getOnError()` and still return a run; callers must inspect their
+recorded failures before accepting output. Exceptions that escape OpenRewrite
+propagate unchanged. The CLI uses this API after its own successful compilation
+and retains its stronger rule that recorded errors prevent patch publication.
+
+This is the callable execution boundary within the existing product owner.
+Maven/Gradle lifecycle receivers and native-build API integration require their
+own concrete consumers and tests; their integration is not implied by this API.
+No performance or cross-build reuse claim follows from avoiding a new compiler
+task at this boundary.
+
 ## Run a configured recipe
 
 Save `rewrite.yml`:

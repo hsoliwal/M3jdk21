@@ -32,14 +32,26 @@ final class M3IndexedView<E> extends AbstractList<E> implements RandomAccess {
     private final M3IndexedArray<E> backing;
     private final Predicate<? super E> predicate;
     private final Comparator<? super E> comparator;
+    private final int requiredMask;
+    private final int forbiddenMask;
+    private final boolean stateAware;
     private int[] indexes = new int[0];
     private long indexedVersion = Long.MIN_VALUE;
 
     M3IndexedView(M3IndexedArray<E> backing, Predicate<? super E> predicate,
                   Comparator<? super E> comparator) {
+        this(backing, predicate, comparator, 0, 0, false);
+    }
+
+    M3IndexedView(M3IndexedArray<E> backing, Predicate<? super E> predicate,
+                  Comparator<? super E> comparator, int requiredMask,
+                  int forbiddenMask, boolean stateAware) {
         this.backing = Objects.requireNonNull(backing);
         this.predicate = predicate;
         this.comparator = comparator;
+        this.requiredMask = requiredMask;
+        this.forbiddenMask = forbiddenMask;
+        this.stateAware = stateAware;
     }
 
     @Override
@@ -55,7 +67,7 @@ final class M3IndexedView<E> extends AbstractList<E> implements RandomAccess {
         synchronized (backing) {
             refresh();
             Objects.checkIndex(index, indexes.length);
-            return backing.viewValue(indexedVersion, indexes[index]);
+            return viewValue(indexedVersion, indexes[index]);
         }
     }
 
@@ -109,7 +121,7 @@ final class M3IndexedView<E> extends AbstractList<E> implements RandomAccess {
                     if (cursor >= count) {
                         throw new NoSuchElementException();
                     }
-                    return backing.viewValue(expected, indexes[origin + cursor++]);
+                    return viewValue(expected, indexes[origin + cursor++]);
                 }
             }
 
@@ -128,7 +140,7 @@ final class M3IndexedView<E> extends AbstractList<E> implements RandomAccess {
                     if (cursor == 0) {
                         throw new NoSuchElementException();
                     }
-                    return backing.viewValue(expected, indexes[origin + --cursor]);
+                    return viewValue(expected, indexes[origin + --cursor]);
                 }
             }
 
@@ -204,7 +216,7 @@ final class M3IndexedView<E> extends AbstractList<E> implements RandomAccess {
             Objects.checkIndex(index, count);
             synchronized (backing) {
                 checkVersion(expected);
-                return backing.viewValue(expected, indexes[origin + index]);
+                return viewValue(expected, indexes[origin + index]);
             }
         }
 
@@ -339,7 +351,7 @@ final class M3IndexedView<E> extends AbstractList<E> implements RandomAccess {
             synchronized (backing) {
                 bind();
                 if (cursor == end) return false;
-                value = backing.viewValue(expected, indexes[cursor++]);
+                value = viewValue(expected, indexes[cursor++]);
             }
             action.accept(value);
             synchronized (backing) {
@@ -362,20 +374,30 @@ final class M3IndexedView<E> extends AbstractList<E> implements RandomAccess {
         }
     }
 
+    private long currentVersion() {
+        return stateAware ? backing.stateVersion() : backing.version();
+    }
+
+    private E viewValue(long expected, int slot) {
+        return backing.viewValue(expected, slot, stateAware);
+    }
+
     private void checkVersion(long expected) {
-        if (backing.version() != expected) {
+        if (currentVersion() != expected) {
             throw new ConcurrentModificationException("M3 view backing changed");
         }
     }
 
     private void refresh() {
-        final long current = backing.version();
+        final long current = currentVersion();
         if (indexedVersion == current) {
             return;
         }
-        final int[] selected = backing.select(predicate, comparator);
+        final int[] selected = stateAware
+                ? backing.select(predicate, comparator, requiredMask, forbiddenMask, true)
+                : backing.select(predicate, comparator);
         indexes = selected;
-        indexedVersion = backing.version();
+        indexedVersion = currentVersion();
         modCount++;
     }
 }

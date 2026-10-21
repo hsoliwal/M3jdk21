@@ -1,0 +1,9 @@
+{
+  "schema": "M3_SEMANTIC_INSTALLATION_PRESERVATION_V1",
+  "source_commit": "3055b76e294423da047c0a2ee030045bca97ef00",
+  "poms": 457,
+  "original_xml_tree_after_removing_only_added_profile": "PASS",
+  "original_xml_comments_byte_equal": "PASS",
+  "no_added_global_property_overrides": "PASS",
+  "each_before_and_after_sha256_matches_recipe_receipt": "PASS"
+}

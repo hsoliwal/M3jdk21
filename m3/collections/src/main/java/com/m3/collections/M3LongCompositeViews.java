@@ -61,20 +61,71 @@ public final class M3LongCompositeViews {
             }
         };
     }
+    /**
+     * Nested compositions are paths through existing child directories, not a
+     * reason to recursively wrap every child or materialize primitive payloads.
+     */
     private static final class Concatenation implements M3LongCollection {
         private final M3LongCollection[] inputs;
         Concatenation(M3LongCollection[] inputs) { this.inputs = inputs; }
+
+        /** One reference-array frame and one int offset per nesting level. */
+        private static final class PathCursor {
+            private M3LongCollection[][] frames = new M3LongCollection[8][];
+            private int[] offsets = new int[8];
+            private int depth = 1;
+            private M3LongCollection ready;
+
+            PathCursor(M3LongCollection[] roots) { frames[0] = roots; }
+
+            boolean hasNext() {
+                if (ready != null) return true;
+                while (depth != 0) {
+                    int frame = depth - 1;
+                    if (offsets[frame] == frames[frame].length) {
+                        frames[frame] = null;
+                        depth--;
+                        continue;
+                    }
+                    M3LongCollection child = frames[frame][offsets[frame]++];
+                    if (child instanceof Concatenation nested) {
+                        if (depth == frames.length) {
+                            int capacity = Math.multiplyExact(frames.length, 2);
+                            frames = Arrays.copyOf(frames, capacity);
+                            offsets = Arrays.copyOf(offsets, capacity);
+                        }
+                        frames[depth] = nested.inputs;
+                        offsets[depth++] = 0;
+                    } else {
+                        ready = child;
+                        return true;
+                    }
+                }
+                return false;
+            }
+
+            M3LongCollection next() {
+                if (!hasNext()) throw new NoSuchElementException();
+                M3LongCollection leaf = ready;
+                ready = null;
+                return leaf;
+            }
+        }
+
         public int size() {
-            int n = 0;
-            for (M3LongCollection c : inputs) n = Math.addExact(n, c.size());
-            return n;
+            int count = 0;
+            PathCursor path = new PathCursor(inputs);
+            while (path.hasNext()) count = Math.addExact(count, path.next().size());
+            return count;
         }
         public boolean contains(long value) {
-            for (M3LongCollection c : inputs) if (c.contains(value)) return true;
+            PathCursor path = new PathCursor(inputs);
+            while (path.hasNext()) if (path.next().contains(value)) return true;
             return false;
         }
         public boolean isEmpty() {
-            for (M3LongCollection c : inputs) if (!c.isEmpty()) return false;
+            PathCursor path = new PathCursor(inputs);
+            while (path.hasNext()) if (!path.next().isEmpty()) return false;
             return true;
         }
         public void clear() { throw new UnsupportedOperationException("read-only composite"); }
@@ -91,12 +142,13 @@ public final class M3LongCompositeViews {
         }
         public M3LongIterator iterator() {
             return new M3LongIterator() {
-                private int index;
+                private PathCursor path;
                 private M3LongIterator active;
                 public boolean hasNext() {
+                    if (path == null) path = new PathCursor(inputs);
                     while (active == null || !active.hasNext()) {
-                        if (index == inputs.length) return false;
-                        active = inputs[index++].iterator();
+                        if (!path.hasNext()) return false;
+                        active = path.next().iterator();
                     }
                     return true;
                 }

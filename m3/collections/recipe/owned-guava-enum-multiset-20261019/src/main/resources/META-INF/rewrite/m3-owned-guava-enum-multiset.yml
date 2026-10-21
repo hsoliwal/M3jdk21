@@ -1,0 +1,9 @@
+# SPDX-License-Identifier: Apache-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.OwnedGuavaEnumMultiset20261019
+displayName: Receive the exact owned M3 Guava EnumMultiset source over its scaffold
+description: Replaces the exact generated scaffold preimage with the exact owned postimage, or accepts the owned postimage unchanged. PlainText execution establishes source custody; multiset API behavior is qualified separately by the module's differential tests.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: owned-guava-enum-multiset
+      lst: false

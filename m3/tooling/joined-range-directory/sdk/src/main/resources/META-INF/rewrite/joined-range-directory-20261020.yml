@@ -1,0 +1,15 @@
+# SPDX-License-Identifier: Apache-2.0
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.JoinedRangeDirectory
+displayName: Reuse prefix routing for joined string ranges
+description: Exact one-file refinement with four unchanged owners; runtime and allocation proof remain separate.
+recipeList:
+  - com.synexia.rewrite.M3JoinedRangeDirectoryRecipe
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.JoinedRangeDirectoryInverse
+displayName: Recover exact original joined string range scan
+description: Exact inverse source recovery; no production file is mutated by the source qualification job.
+recipeList:
+  - com.synexia.rewrite.M3JoinedRangeDirectoryInverseRecipe

@@ -434,6 +434,21 @@ public class M3StringOwnerRangeLifetimeTest {
 
     private static void exerciseLastUseReads(char[] units, boolean wideBuilder) {
         int length = units.length;
+        // Distinct whole/sliced native owners prevent canonical identity from bypassing reads.
+        // Only primitive arrays survive the hot helpers, so the existing reclamation pressure
+        // also covers the final bulk equality/order access to each temporary String owner.
+        char[] padded = new char[length + 2];
+        padded[0] = 'p';
+        padded[length + 1] = 'q';
+        System.arraycopy(units, 0, padded, 1, length);
+        check(lastUseEquals(units, padded), "last-use whole/range equality");
+        check(lastUseCompareTo(units, padded) == 0, "last-use whole/range comparison");
+        if (length != 0) {
+            padded[length] ^= 1;
+            check(!lastUseEquals(units, padded), "last-use unequal range equality");
+            check(lastUseCompareTo(units, padded) == units[length - 1] - padded[length],
+                    "last-use exact tail comparison difference");
+        }
         if (length != 0) {
             check(lastUseCharAt(units, 0) == units[0], "last-use first UTF-16 unit");
             check(lastUseCharAt(units, length / 2) == units[length / 2],
@@ -477,6 +492,14 @@ public class M3StringOwnerRangeLifetimeTest {
         byte[] emptyBytes = {(byte) 0x5a, (byte) 0x5a, (byte) 0x5a};
         lastUseBytes(units, length, length, emptyBytes, 1);
         checkLastUseBytes(units, length, length, emptyBytes, 1, "empty byte range");
+    }
+
+    private static boolean lastUseEquals(char[] units, char[] padded) {
+        return new String(units).equals(new String(padded).substring(1, padded.length - 1));
+    }
+
+    private static int lastUseCompareTo(char[] units, char[] padded) {
+        return new String(units).compareTo(new String(padded).substring(1, padded.length - 1));
     }
 
     private static char lastUseCharAt(char[] units, int index) {

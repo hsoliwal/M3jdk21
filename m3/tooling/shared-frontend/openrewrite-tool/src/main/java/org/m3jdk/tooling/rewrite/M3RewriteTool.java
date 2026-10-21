@@ -40,6 +40,7 @@ import javax.tools.ToolProvider;
 import org.openrewrite.ExecutionContext;
 import org.openrewrite.InMemoryExecutionContext;
 import org.openrewrite.Recipe;
+import org.openrewrite.RecipeRun;
 import org.openrewrite.Result;
 import org.openrewrite.SourceFile;
 import org.openrewrite.config.Environment;
@@ -48,10 +49,11 @@ import org.openrewrite.internal.InMemoryLargeSourceSet;
 import org.openrewrite.java.tree.J;
 
 /**
- * Opt-in OpenRewrite Java recipe runner over the selected M3 compiler's actual attributed units.
- * This entry point never invokes a JavaParser or reparses/re-attributes its input compilation units.
- * Recipes may use their normal synthetic-template parsers. The runner emits a review patch; it
- * does not replace source files. Runtime and additional recipe jars retain their original packages.
+ * OpenRewrite recipe execution over admitted source trees. The Java CLI obtains those trees
+ * from the selected M3 compiler's actual attributed units and emits a review patch.
+ * Neither entry point reparses/re-attributes its input trees or replaces source files.
+ * Recipes may use their normal synthetic-template parsers. Runtime and additional recipe jars
+ * retain their original packages.
  */
 public final class M3RewriteTool {
     private M3RewriteTool() { }
@@ -95,6 +97,39 @@ public final class M3RewriteTool {
         }
     }
 
+    /**
+     * Runs a configured recipe on already admitted OpenRewrite source trees.
+     *
+     * <p>This method snapshots source-list membership while retaining the original tree objects,
+     * validates the recipe configuration, and returns the original OpenRewrite run. It creates
+     * no compiler task or parser and performs no source-file reads or patch publication.
+     * The caller owns source admission, successful compilation where needed, complete workset
+     * selection, and the decision to accept results. Recipes retain their ordinary behavior,
+     * including any synthetic-template parsing.</p>
+     *
+     * <p>The supplied context and thread context class loader remain caller-owned. OpenRewrite
+     * reports handled recipe failures through the context's error handler; such a failure does
+     * not necessarily throw or prevent a run from being returned. Exceptions that escape
+     * OpenRewrite propagate unchanged. The CLI separately refuses patch publication on errors.</p>
+     *
+     * @param recipe the configured recipe, including any composite children
+     * @param sources already admitted trees in the intended source-set order
+     * @param execution caller context for messages, errors, timeouts and data tables
+     * @return the native OpenRewrite result and data tables
+     * @throws NullPointerException if an argument or source element is null
+     * @throws IllegalArgumentException if recipe configuration is invalid
+     */
+    public static RecipeRun execute(Recipe recipe, List<? extends SourceFile> sources,
+                                    ExecutionContext execution) {
+        Objects.requireNonNull(recipe, "recipe");
+        Objects.requireNonNull(sources, "sources");
+        Objects.requireNonNull(execution, "execution");
+        List<SourceFile> inputs = new ArrayList<>(sources);
+        for (SourceFile input : inputs) Objects.requireNonNull(input, "source element");
+        validateRecipe(recipe, execution);
+        return recipe.run(new InMemoryLargeSourceSet(inputs), execution);
+    }
+
     private static int execute(Request request, PrintStream patchOutput, PrintStream messages)
             throws Exception {
         Path temporaryClasses = request.classesDirectory() == null
@@ -116,10 +151,10 @@ public final class M3RewriteTool {
                     M3RewriteTool.class.getClassLoader())) {
                 Thread.currentThread().setContextClassLoader(recipes);
                 try {
-                    Recipe recipe = activate(request, recipes, execution);
-                    List<SourceFile> inputs = new ArrayList<>(compilation.units());
-                    List<Result> results = new ArrayList<>(recipe.run(
-                            new InMemoryLargeSourceSet(inputs), execution).getChangeset().getAllResults());
+                    Recipe recipe = activate(request, recipes);
+                    List<J.CompilationUnit> inputs = compilation.units();
+                    List<Result> results = new ArrayList<>(
+                            execute(recipe, inputs, execution).getChangeset().getAllResults());
                     if (!failures.isEmpty()) {
                         throw new IOException("recipe execution failed; no patch emitted", failures.peek());
                     }
@@ -224,7 +259,7 @@ public final class M3RewriteTool {
         }
     }
 
-    private static Recipe activate(Request request, ClassLoader recipes, ExecutionContext execution)
+    private static Recipe activate(Request request, ClassLoader recipes)
             throws IOException {
         Environment.Builder environment = Environment.builder().scanRuntimeClasspath("org.openrewrite");
         for (Path jar : request.recipeJars()) environment.scanJar(jar, request.recipeJars(), recipes);
@@ -233,15 +268,17 @@ public final class M3RewriteTool {
                 environment.load(new YamlResourceLoader(input, yaml.toUri(), new Properties(), recipes));
             }
         }
-        Recipe selected = environment.build().activateRecipes(request.recipeNames());
-        var validated = selected.validateAll(execution, new ArrayList<>());
+        return environment.build().activateRecipes(request.recipeNames());
+    }
+
+    private static void validateRecipe(Recipe recipe, ExecutionContext execution) {
+        var validated = recipe.validateAll(execution, new ArrayList<>());
         List<String> invalid = new ArrayList<>();
         for (var validation : validated) {
             for (var failure : validation.failures())
                 invalid.add(failure.getProperty() + ": " + failure.getMessage());
         }
         if (!invalid.isEmpty()) throw new IllegalArgumentException("Invalid recipe configuration: " + invalid);
-        return selected;
     }
 
     private static String resultPath(Result result) {

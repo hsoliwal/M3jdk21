@@ -42,6 +42,7 @@ public final class M3ParserFrameworkContract {
 
     public static void main(String[] arguments) throws Exception {
         sourceIdentity();
+        sourceSealBoundaries();
         fileAdmission();
         expressions();
         lexerSpansAndErrors();
@@ -84,6 +85,24 @@ public final class M3ParserFrameworkContract {
         check(frozen.text().equals("12 + 3") && result.conforms(), "mutable ingress snapshotted once");
         check(result.source() == frozen && result.requireTree().tokens().source() == frozen.text(),
                 "result and token ranges retain the admitted source");
+    }
+
+    private static void sourceSealBoundaries() throws Exception {
+        for (int length : new int[] {0, 1, 2, 4095, 4096, 4097, 8191, 8192, 8193, 131073}) {
+            char[] units = new char[length];
+            for (int index = 0; index < length; index++) units[index] = (char) (index * 40503 + 0xd800);
+            // Independent contiguous UTF-16BE oracle includes lone surrogates and block tails.
+            ByteBuffer expected = ByteBuffer.allocate(length * Character.BYTES).order(ByteOrder.BIG_ENDIAN);
+            expected.asCharBuffer().put(units);
+            check(source(new String(units)).utf16Sha256().equals(hash(expected.array())),
+                    "exact source seal at length " + length);
+            if (length != 0) {
+                String original = source(new String(units)).utf16Sha256();
+                units[length - 1] ^= 1;
+                check(!source(new String(units)).utf16Sha256().equals(original),
+                        "last code unit remains part of seal at length " + length);
+            }
+        }
     }
 
     private static void fileAdmission() throws Exception {

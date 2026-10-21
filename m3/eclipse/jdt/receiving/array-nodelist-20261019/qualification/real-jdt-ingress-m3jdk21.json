@@ -1,0 +1,142 @@
+{
+  "scope": "real source-built JDT DOM to existing M3ASTIngress.eclipseJdt",
+  "pass": true,
+  "tests": 7,
+  "sourceSha256": "0f14bb3a09d48c1a2b4ae6f1c19c22816289aed03eb0e3fb98520a766e7ba235",
+  "coreJar": {
+    "path": "/tmp/m3-jdt-20261019/generated-receiving-21/jdt-exact-core-source/jdt-exact-core-source-20261019.jar",
+    "sha256": "754d81875768dbd6c119f307f32f408ce84c6a2690bd9968cd09d21db5a82854"
+  },
+  "compilerJar": {
+    "path": "/tmp/m3-jdt-20261019/generated-receiving-21/jdt-exact-compiler-source/jdt-exact-compiler-source-20261019.jar",
+    "sha256": "d39f2bc3f91257161daac1cabefe21fb9b3f54f1b9e1b125d7dde7edfd88378d"
+  },
+  "dependencies": [
+    {
+      "name": "ant-1.10.15.jar",
+      "sha256": "763acda4a69588c9ea8817a952851ff0c2fc4bffa1d081c2565dc407f29d5794"
+    },
+    {
+      "name": "ant-launcher-1.10.15.jar",
+      "sha256": "5c8551990307a032336d98ddaed549a39a689f07d4d4c6b950601bf22b3d6a1b"
+    },
+    {
+      "name": "hamcrest-core-1.3.jar",
+      "sha256": "66fdef91e9739348df7a096aa384a5685f4e875584cce89386a7a47251c4d8e9"
+    },
+    {
+      "name": "jna-5.19.1.jar",
+      "sha256": "4fb141dd8ef6b0585ffceea4bc49602fbc6312fa977e2c488794ea3e6aafecae"
+    },
+    {
+      "name": "jna-platform-5.19.1.jar",
+      "sha256": "3b3864f5b449e9c3c24b16861524b622b086563f44e0cd8384c8efc5a6052f82"
+    },
+    {
+      "name": "jol-core-0.17.jar",
+      "sha256": "bd73d9ad265d8478ccde06130200877f3a4f0a6e2d44e7fb8cbb2e6f4104cbdc"
+    },
+    {
+      "name": "junit-4.13.2.jar",
+      "sha256": "8e495b634469d64fb8acfa3495a065cbacc8a0fff55ce1e31007be4c16dc57d3"
+    },
+    {
+      "name": "org.eclipse.compare.core-3.8.900.jar",
+      "sha256": "e75b07863128a076989d15e815d63a49cab772a338f1f0444d007bef3fa94601"
+    },
+    {
+      "name": "org.eclipse.core.commands-3.13.0.jar",
+      "sha256": "fe916979793d364fcd0a71c15c3fa803d60a8566cff8c64b0eef04918b5b6a65"
+    },
+    {
+      "name": "org.eclipse.core.contenttype-3.9.900.jar",
+      "sha256": "6c57132740523b5c5de125c0041ca43c1606da6563214c1bae3999fa21ead893"
+    },
+    {
+      "name": "org.eclipse.core.expressions-3.9.700.jar",
+      "sha256": "06a18236ae181659e1e5499d912d68de527720686f1f51dab632d3e298e32b78"
+    },
+    {
+      "name": "org.eclipse.core.filesystem-1.11.500.jar",
+      "sha256": "bf9ad56f6bee0044829bcbbe0ac5b9df28bb354beb0a4bdf0fe9a489ded12d36"
+    },
+    {
+      "name": "org.eclipse.core.jobs-3.15.900.jar",
+      "sha256": "941b3c5feeba4ec0a949a8a94ff10283b2505813fa736c9e6345f146ae1b7e8a"
+    },
+    {
+      "name": "org.eclipse.core.resources-3.24.100.jar",
+      "sha256": "946851cf5902cd3b002920063a30b169e5710088b6c1ad7dd05bdd3be4fbfff4"
+    },
+    {
+      "name": "org.eclipse.core.runtime-3.35.0.jar",
+      "sha256": "5b0c2794e9fe1785360dec920cc802f3388a0eb72ee25b89054b79ff3e2f07c9"
+    },
+    {
+      "name": "org.eclipse.equinox.app-1.7.600.jar",
+      "sha256": "fd353398835107608f554779a6e91891725efb94e0f57559d0ab3cea4b6156c7"
+    },
+    {
+      "name": "org.eclipse.equinox.common-3.21.0.jar",
+      "sha256": "2545ed27d408f19882695703097e5998bf25652bd0dac76a8e6d1391ec228ab7"
+    },
+    {
+      "name": "org.eclipse.equinox.preferences-3.12.100.jar",
+      "sha256": "fd04e81a28ab32b6bb073286eb293c44b760176fcf1e35ef15614d62df820f86"
+    },
+    {
+      "name": "org.eclipse.equinox.registry-3.12.600.jar",
+      "sha256": "4f8cd72681446b598390a8c24ee9b9996f6e4c5fabed022b50bd26f6f5a0bf6c"
+    },
+    {
+      "name": "org.eclipse.osgi-3.24.300.jar",
+      "sha256": "4a770aa4a78df653af871073c8b4ddd56884895f5fc71d10c40b4289ac7c8b9f"
+    },
+    {
+      "name": "org.eclipse.team.core-3.10.1100.jar",
+      "sha256": "4f4d2f9c62c7cca50c1ee07e803858c2f817b2f647449ef4f0549f35d90366ec"
+    },
+    {
+      "name": "org.eclipse.text-3.14.800.jar",
+      "sha256": "14814c1f1a737fde0a2d56c47a2f02cf4c8c5dee748756c4763e674cae214250"
+    },
+    {
+      "name": "org.osgi.service.prefs-1.1.2.jar",
+      "sha256": "43c7c870710e363405d422da653cce0d798a4537f76e4930f79bceadd3a55345"
+    },
+    {
+      "name": "osgi.annotation-8.0.1.jar",
+      "sha256": "a0e8a4c362bd3600812f37b0ea45fba966c7bc049d01fed56a09ecc74082759e"
+    }
+  ],
+  "compilerModulePathSha256": "f2c745a358ff9058742cb3024c93bd572c25d33f3f09e3cadb947c101f8e4b2b",
+  "runtimeModuleMode": "linked runtime image",
+  "runtimeModulePathSha256": null,
+  "runtimeModulesSha256": "3ba6a75905fa90d991af967543c0a321c8f39262c101c02018c45f62d2afa041",
+  "runtimeVersion": "openjdk version \"21-internal\" 2023-09-19\nOpenJDK Runtime Environment (fastdebug build 21-internal-adhoc.root.M3jdk21)\nOpenJDK 64-Bit Server VM (fastdebug build 21-internal-adhoc.root.M3jdk21, mixed mode)",
+  "parserModuleDescriptor": "jdk.m3.parser\nexports jdk.m3.parser\nexports jdk.m3.parser.grammar\nrequires java.base mandated\nrequires java.xml\nrequires jdk.compiler transitive",
+  "compileCommand": [
+    "/tmp/m3-module-runtime-tools-20261019/jdk-21.0.12.1+1/bin/javac",
+    "--release",
+    "21",
+    "--module-path",
+    "/tmp/m3-parser-refinement-20261019/current-ordered/modules",
+    "--add-modules",
+    "jdk.m3.parser",
+    "-cp",
+    "/tmp/m3-jdt-20261019/generated-receiving-21/jdt-exact-core-source/jdt-exact-core-source-20261019.jar:/tmp/m3-jdt-20261019/generated-receiving-21/jdt-exact-compiler-source/jdt-exact-compiler-source-20261019.jar:/tmp/m3-jdt-20261019/dependencies/ant-1.10.15.jar:/tmp/m3-jdt-20261019/dependencies/ant-launcher-1.10.15.jar:/tmp/m3-jdt-20261019/dependencies/hamcrest-core-1.3.jar:/tmp/m3-jdt-20261019/dependencies/jna-5.19.1.jar:/tmp/m3-jdt-20261019/dependencies/jna-platform-5.19.1.jar:/tmp/m3-jdt-20261019/dependencies/jol-core-0.17.jar:/tmp/m3-jdt-20261019/dependencies/junit-4.13.2.jar:/tmp/m3-jdt-20261019/dependencies/org.eclipse.compare.core-3.8.900.jar:/tmp/m3-jdt-20261019/dependencies/org.eclipse.core.commands-3.13.0.jar:/tmp/m3-jdt-20261019/dependencies/org.eclipse.core.contenttype-3.9.900.jar:/tmp/m3-jdt-20261019/dependencies/org.eclipse.core.expressions-3.9.700.jar:/tmp/m3-jdt-20261019/dependencies/org.eclipse.core.filesystem-1.11.500.jar:/tmp/m3-jdt-20261019/dependencies/org.eclipse.core.jobs-3.15.900.jar:/tmp/m3-jdt-20261019/dependencies/org.eclipse.core.resources-3.24.100.jar:/tmp/m3-jdt-20261019/dependencies/org.eclipse.core.runtime-3.35.0.jar:/tmp/m3-jdt-20261019/dependencies/org.eclipse.equinox.app-1.7.600.jar:/tmp/m3-jdt-20261019/dependencies/org.eclipse.equinox.common-3.21.0.jar:/tmp/m3-jdt-20261019/dependencies/org.eclipse.equinox.preferences-3.12.100.jar:/tmp/m3-jdt-20261019/dependencies/org.eclipse.equinox.registry-3.12.600.jar:/tmp/m3-jdt-20261019/dependencies/org.eclipse.osgi-3.24.300.jar:/tmp/m3-jdt-20261019/dependencies/org.eclipse.team.core-3.10.1100.jar:/tmp/m3-jdt-20261019/dependencies/org.eclipse.text-3.14.800.jar:/tmp/m3-jdt-20261019/dependencies/org.osgi.service.prefs-1.1.2.jar:/tmp/m3-jdt-20261019/dependencies/osgi.annotation-8.0.1.jar",
+    "-d",
+    "/tmp/m3-jdt-20261019/real-ingress-proof/emitted-current-image/classes",
+    "/workspace/scratch/7ea994fb52d9/proofs/sdk-jdt-ingress-01/sdk-output/m3/eclipse/jdt/receiving/array-nodelist-20261019/proof/src/main/java/org/eclipse/jdt/core/tests/dom/M3JdtIngressProof.java"
+  ],
+  "runCommand": [
+    "/tmp/m3-parser-refinement-20261019/current-integrated/image/bin/java",
+    "--add-modules",
+    "jdk.m3.parser",
+    "-cp",
+    "/tmp/m3-jdt-20261019/real-ingress-proof/emitted-current-image/classes:/tmp/m3-jdt-20261019/generated-receiving-21/jdt-exact-core-source/jdt-exact-core-source-20261019.jar:/tmp/m3-jdt-20261019/generated-receiving-21/jdt-exact-compiler-source/jdt-exact-compiler-source-20261019.jar:/tmp/m3-jdt-20261019/dependencies/ant-1.10.15.jar:/tmp/m3-jdt-20261019/dependencies/ant-launcher-1.10.15.jar:/tmp/m3-jdt-20261019/dependencies/hamcrest-core-1.3.jar:/tmp/m3-jdt-20261019/dependencies/jna-5.19.1.jar:/tmp/m3-jdt-20261019/dependencies/jna-platform-5.19.1.jar:/tmp/m3-jdt-20261019/dependencies/jol-core-0.17.jar:/tmp/m3-jdt-20261019/dependencies/junit-4.13.2.jar:/tmp/m3-jdt-20261019/dependencies/org.eclipse.compare.core-3.8.900.jar:/tmp/m3-jdt-20261019/dependencies/org.eclipse.core.commands-3.13.0.jar:/tmp/m3-jdt-20261019/dependencies/org.eclipse.core.contenttype-3.9.900.jar:/tmp/m3-jdt-20261019/dependencies/org.eclipse.core.expressions-3.9.700.jar:/tmp/m3-jdt-20261019/dependencies/org.eclipse.core.filesystem-1.11.500.jar:/tmp/m3-jdt-20261019/dependencies/org.eclipse.core.jobs-3.15.900.jar:/tmp/m3-jdt-20261019/dependencies/org.eclipse.core.resources-3.24.100.jar:/tmp/m3-jdt-20261019/dependencies/org.eclipse.core.runtime-3.35.0.jar:/tmp/m3-jdt-20261019/dependencies/org.eclipse.equinox.app-1.7.600.jar:/tmp/m3-jdt-20261019/dependencies/org.eclipse.equinox.common-3.21.0.jar:/tmp/m3-jdt-20261019/dependencies/org.eclipse.equinox.preferences-3.12.100.jar:/tmp/m3-jdt-20261019/dependencies/org.eclipse.equinox.registry-3.12.600.jar:/tmp/m3-jdt-20261019/dependencies/org.eclipse.osgi-3.24.300.jar:/tmp/m3-jdt-20261019/dependencies/org.eclipse.team.core-3.10.1100.jar:/tmp/m3-jdt-20261019/dependencies/org.eclipse.text-3.14.800.jar:/tmp/m3-jdt-20261019/dependencies/org.osgi.service.prefs-1.1.2.jar:/tmp/m3-jdt-20261019/dependencies/osgi.annotation-8.0.1.jar",
+    "org.junit.runner.JUnitCore",
+    "org.eclipse.jdt.core.tests.dom.M3JdtIngressProof"
+  ],
+  "testOutput": "JUnit version 4.13.2\n.M3JDT_REAL_INGRESS fixture=before-rewrite nodes=13 depth=7 recovered=0\nM3JDT_REAL_INGRESS fixture=rewrite-reparsed nodes=11 depth=7 recovered=0\n.M3JDT_REAL_INGRESS fixture=records-patterns-utf16 nodes=53 depth=12 recovered=0\n.M3JDT_REAL_INGRESS fixture=before-cross-parent-move nodes=17 depth=7 recovered=0\n.M3JDT_REAL_INGRESS fixture=resolved-record nodes=14 depth=7 recovered=0\n.M3JDT_REAL_INGRESS fixture=before-list-edits nodes=16 depth=7 recovered=0\nM3JDT_REAL_INGRESS fixture=after-list-edits nodes=17 depth=7 recovered=0\n.M3JDT_REAL_INGRESS fixture=recovery nodes=6 depth=4 recovered=2\n.M3JDT_REAL_INGRESS fixture=wide-lists nodes=391 depth=7 recovered=0\n\nTime: 4.412\n\nOK (7 tests)\n\n"
+}

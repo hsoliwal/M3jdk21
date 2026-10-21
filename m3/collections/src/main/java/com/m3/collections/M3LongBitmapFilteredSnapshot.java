@@ -212,6 +212,9 @@ public final class M3LongBitmapFilteredSnapshot implements M3LongCollection {
         private final LongPredicate predicate;
         private final LongSupplier revision;
         private volatile Cache cache;
+        // Guarded by this monitor. Equality spans one capture; wrapping would
+        // require 2^64 synchronous invalidations during that single capture.
+        private long invalidationGeneration;
 
         private static final class Cache {
             final long revision;
@@ -232,13 +235,19 @@ public final class M3LongBitmapFilteredSnapshot implements M3LongCollection {
         }
 
         /** Invalidate manually when the owner cannot publish a trustworthy epoch. */
-        public synchronized void invalidate() { cache = null; }
+        public synchronized void invalidate() {
+            invalidationGeneration++;
+            cache = null;
+        }
 
         private Cache current() {
             long stamp = revision.getAsLong();
             Cache seen = cache;
             if (seen != null && seen.revision == stamp) return seen;
             synchronized (this) {
+                // Revision suppliers and predicates can invalidate reentrantly.
+                // Capture before either callback so publication cannot erase it.
+                long generation = invalidationGeneration;
                 stamp = revision.getAsLong();
                 seen = cache;
                 if (seen != null && seen.revision == stamp) return seen;
@@ -248,7 +257,9 @@ public final class M3LongBitmapFilteredSnapshot implements M3LongCollection {
                     throw new ConcurrentModificationException("revision changed during bitmap capture");
                 }
                 Cache rebuilt = new Cache(stamp, fresh);
-                cache = rebuilt;
+                // Return this call's detached result without retrying callbacks.
+                // A reentrant invalidation reserves rebuilding for the next read.
+                if (invalidationGeneration == generation) cache = rebuilt;
                 return rebuilt;
             }
         }

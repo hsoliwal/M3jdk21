@@ -75,7 +75,7 @@ public final class M3LongIndexOrderFlipProof {
         one(extremes, 0, extremes.length, new byte[] {
                 -1, -1, -1, -1, -1, -1, -1, -1, -1}, true);
         one(extremes, 1, 5, new byte[] {-1, 0, -1, -1, -1}, false);
-        Random random = new Random(0x4d33464c49504c);
+        Random random = new Random(0x4d33464c49504cL);
         for (int trial = 0; trial < 3_072; trial++) {
             int count = random.nextInt(160);
             long[] values = new long[count];

@@ -1,0 +1,36 @@
+# Copyright 2026 Hitesh Soliwal and contributors
+# SPDX-License-Identifier: Apache-2.0
+name: M3File source and class content deltas
+on:
+  pull_request:
+    paths:
+      - 'm3/file/**'
+      - 'm3/docs/build-delta-invariant.md'
+      - 'm3/docs/name-mapping.d/m3file-build-delta-20261020.json'
+      - '.github/workflows/m3-file-content-delta.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  file-delta:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Verify module and linked-image source/class contract
+        run: mvn -B -ntp -f m3/file/pom.xml verify
+      - name: Retain actual commands and results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: m3-file-content-delta-${{ github.event.pull_request.head.sha || github.sha }}
+          path: |
+            m3/file/target/delta-check/*.log
+            m3/file/target/delta-check/*.json
+          if-no-files-found: error

@@ -1,0 +1,20 @@
+{
+  "status": "PASS",
+  "declared_coordinate": "org.slf4j:slf4j-simple:2.0.13",
+  "records": [
+    {
+      "url": "https://repo.maven.apache.org/maven2/org/slf4j/slf4j-simple/2.0.13/slf4j-simple-2.0.13.pom",
+      "bytes": 1313,
+      "sha1": "567d77edee0d7b215d9b6ee77cb01ba14dad38b3",
+      "sha256": "4a4d4bb24cf8abe2cb874a836f5e743d3485b7db04fcff6fc071495253b5cfa8",
+      "path": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/slf4j/slf4j-simple/2.0.13/slf4j-simple-2.0.13.pom"
+    },
+    {
+      "url": "https://repo.maven.apache.org/maven2/org/slf4j/slf4j-simple/2.0.13/slf4j-simple-2.0.13.jar",
+      "bytes": 15703,
+      "sha1": "be11a3f05f7cf546524b07ad252719d840f4daed",
+      "sha256": "3153fe1d689cffb94f1530b58470c306685ba68844de8857116e3b6ebb81d9f7",
+      "path": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/slf4j/slf4j-simple/2.0.13/slf4j-simple-2.0.13.jar"
+    }
+  ]
+}

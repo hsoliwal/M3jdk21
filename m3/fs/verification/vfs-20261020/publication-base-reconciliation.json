@@ -1,0 +1,39 @@
+{
+  "schema": "M3_SOURCE_PUBLICATION_BASE_RECONCILIATION_V1",
+  "date": "2026-10-20",
+  "repository": "hsoliwal/M3jdk21",
+  "filesystem_source_base": "73f59218dc4ef1a3ef79aad990e77273db2a2d60",
+  "collections_source_base": "95d0266ff15ae1f11876cce7360b155ef33a1862",
+  "publication_parent": "95d0266ff15ae1f11876cce7360b155ef33a1862",
+  "publication_base_tree": "47e6569abd83f2a3e63bbd02ed334a4021d847f2",
+  "compare_url": "https://github.com/hsoliwal/M3jdk21/compare/73f59218dc4ef1a3ef79aad990e77273db2a2d60...95d0266ff15ae1f11876cce7360b155ef33a1862",
+  "status": "ahead",
+  "ahead_by": 2,
+  "changed_between_filesystem_source_and_publication": [
+    {
+      "path": "AGENTS.md",
+      "status": "modified",
+      "git_blob": "9cf0dc67aeb62237fb54c49b03586f3ae39bcc79",
+      "additions": 19,
+      "deletions": 0
+    },
+    {
+      "path": "m3/docs/mop-recipe-improvement-memory.md",
+      "status": "added",
+      "git_blob": "c9386f423cd810aa77379b980ed52153d2090ffb",
+      "additions": 254,
+      "deletions": 0
+    },
+    {
+      "path": "m3/papers/MOP_RECIPE_OWNED_IMPROVEMENT_MEMORY.md",
+      "status": "added",
+      "git_blob": "ff6bf74342b0cf7e51d3faa819b8b4e29d52468e",
+      "additions": 214,
+      "deletions": 0
+    }
+  ],
+  "source_overlap": false,
+  "policy_disposition": "Read current AGENTS and MOP correction-memory policy; retain existing catalogue and source seals and append finite correction evidence. No original generation receipt rewritten.",
+  "canonical_base": "f04fbac91a7891e64b77c7b24cef1ab75ec88144",
+  "canonical_tree": "57831de32503e396fc7c54aa2af860b1fd66281b"
+}

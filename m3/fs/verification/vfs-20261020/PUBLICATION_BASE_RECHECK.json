@@ -1,0 +1,231 @@
+{
+  "exact_canonical_commit": "Recorded separately in CANONICAL_HANDOFF.json",
+  "qualification_records_unchanged": true,
+  "raw_receipts_relative_to_canonical": "synexia-openrewrite-recipes/recipe-crates/m3fs-vfs-20261020/evidence/publication-base-recheck/receiving-base",
+  "receipt": {
+    "base_commit": "95d0266ff15ae1f11876cce7360b155ef33a1862",
+    "base_tree": "47e6569abd83f2a3e63bbd02ed334a4021d847f2",
+    "changed_files": [
+      {
+        "additions": 5,
+        "bytes": 1938,
+        "complete_patch_checked_against_file": true,
+        "deletions": 0,
+        "git_blob": "2993ec112eef0398e28d498d9d06f5a64c5f0732",
+        "path": "m3/collections/algorithm-catalogue/challenge-patterns-20261018/FOSS_REUSE_DECISION.tsv",
+        "sha256": "ae8713e262b89542c14885d527528a67c8b693fd648544082c34bc2e5ba620ed",
+        "status": "added"
+      },
+      {
+        "additions": 15,
+        "bytes": 7663,
+        "complete_patch_checked_against_file": true,
+        "deletions": 0,
+        "git_blob": "206ab17412c95758a52a2b9dda48a7d435e3d7c6",
+        "path": "m3/collections/algorithm-catalogue/challenge-patterns-20261018/PRIMARY_SOURCES.tsv",
+        "sha256": "7ccc2c248884a8b6d0ec21e7d397a6e7901c3854231897b6ffead85411cc50d3",
+        "status": "added"
+      },
+      {
+        "additions": 12,
+        "bytes": 2232,
+        "complete_patch_checked_against_file": true,
+        "deletions": 0,
+        "git_blob": "623a9e465b5d9edb1b40ba275058fd76af2d941f",
+        "path": "m3/collections/algorithm-catalogue/challenge-patterns-20261018/README.md",
+        "sha256": "021ca82f423406f5d700e6215467497ce1a4f85ea1acbb1a3a2dae9bfde16b86",
+        "status": "added"
+      },
+      {
+        "additions": 80,
+        "bytes": 4040,
+        "complete_patch_checked_against_file": true,
+        "deletions": 0,
+        "git_blob": "3ec9a315af3b21802348994edc17668658eaf2fd",
+        "path": "m3/mop/SELF_IMPROVING_RECIPES.md",
+        "sha256": "82d6ad4e26aa24cf684ac731ee32198f527b98da5cc46e03fea7f5f582b5190c",
+        "status": "added"
+      }
+    ],
+    "checked_at_utc": "2026-10-20T11:47:54.908900+00:00",
+    "commits": [
+      {
+        "sha": "7b20d0a7e6f42501536057f1d7a142944e3002e3",
+        "subject": "docs(m3): recover pinned LeetCode/HackerRank challenge categories additively"
+      },
+      {
+        "sha": "2c6d68d2a453bb09711e46c3c58a9c34ebaeed21",
+        "subject": "docs(m3/mop): the self-improving recipe invariant of Machine Oriented Programming"
+      },
+      {
+        "sha": "920c5d5f44e5c94407ca7ef026f41391cb21d810",
+        "subject": "docs(m3/mop): the four MOP pillars - Atomize, Patternize, Annotate, Document"
+      },
+      {
+        "sha": "843e5a416cbe3d0cd7748fcd621d0b3acb32d94e",
+        "subject": "docs(m3/mop): admit self-improving recipe correction memory"
+      },
+      {
+        "sha": "065e3626aac2de62d2f531aec3bed2fca533c9f9",
+        "subject": "docs(m3): integrate pinned challenge algorithm-category catalogue"
+      }
+    ],
+    "comparison": {
+      "additions": 112,
+      "ahead_by": 5,
+      "all_commit_metadata_returned": true,
+      "all_net_changed_paths_returned": true,
+      "behind_by": 0,
+      "complete_patches_and_exact_file_bytes_read": true,
+      "deletions": 0,
+      "files": 4,
+      "renames": 0,
+      "status": "ahead",
+      "total_commits": 5
+    },
+    "complete_patch_sha256": "1da0d9c31c907968ad5f518420b660fa9ae0318c4ca3b82a6d645ef6b2202e6a",
+    "head_commit": "065e3626aac2de62d2f531aec3bed2fca533c9f9",
+    "head_tree": "55280761602fa82ecf548d9918fadba780c887b8",
+    "issues": [],
+    "limits": [
+      "Compatibility is scoped to the exact observed head; a later ref change requires rechecking.",
+      "This reconciliation adds no runtime, full source-built JDK, performance or TSV-conformance claim."
+    ],
+    "master_rechecked_at_end": "065e3626aac2de62d2f531aec3bed2fca533c9f9",
+    "payload_or_frozen_evidence_edits": 0,
+    "policy_review": {
+      "authoritative_existing_spec": "m3/docs/mop-recipe-improvement-memory.md; SYNEXIA-MOP-RECIPE-MEMORY-1; MOP-RCM/1.0; linked from unchanged AGENTS.md",
+      "canonical_memory_paths": [
+        "synexia-openrewrite-recipes/recipe-crates/m3-collections-refinement-20261020/memory/LESSONS.md",
+        "synexia-openrewrite-recipes/recipe-crates/m3-collections-refinement-20261020/memory/events/70d9ce2b7ab1964ad8c17850ed2e051ca810b44a571cb3666a8991513742237b.json",
+        "synexia-openrewrite-recipes/recipe-crates/m3fs-vfs-20261020/memory/LESSONS.md",
+        "synexia-openrewrite-recipes/recipe-crates/m3fs-vfs-20261020/memory/events/0faf72f685519bd528eaae0415ea0bc0af63ede2a4ea7e488aee67dfe82db508.json"
+      ],
+      "exact_head_policy_files": {
+        "AGENTS.md": {
+          "git_blob": "9cf0dc67aeb62237fb54c49b03586f3ae39bcc79",
+          "sha256": "4dc1c9e0322f265969f30a9b780b7f12d8e41af06adba20307a6baa0274e6e64"
+        },
+        "mop-recipe-improvement-memory.md": {
+          "git_blob": "c9386f423cd810aa77379b980ed52153d2090ffb",
+          "sha256": "3bc9a8776dcf4fe974ff16a44077de3c3b9865d411195e197321264bd3773bf6"
+        }
+      },
+      "existing_agents_unchanged": true,
+      "format_note": "The new overview names RECIPE_MEMORY.tsv. The AGENTS-linked detailed specification section 4 explicitly permits equivalent existing layouts and says not to require a duplicate memory system. Current canonical crates retain immutable memory/events/*.json and derived memory/LESSONS.md. This review does not claim named-TSV compliance or a shipped automatic memory engine.",
+      "new_document": "m3/mop/SELF_IMPROVING_RECIPES.md",
+      "new_document_sha256": "82d6ad4e26aa24cf684ac731ee32198f527b98da5cc46e03fea7f5f582b5190c",
+      "new_or_modified_agents": [],
+      "new_overview_requirements": [
+        "Atomize, Patternize, Annotate, Document",
+        "Read correction memory before changing or applying a recipe",
+        "Append-only correction evidence, guard and lesson in the same change",
+        "Overview names RECIPE_MEMORY.tsv with eight columns"
+      ],
+      "owner_disposition": "Root read both specifications and confirmed retaining existing canonical memory, append-only events and source pins with this explicit format note; no duplicate memory system.",
+      "read_in_full": true
+    },
+    "publication_conclusion": "The already qualified FS and collection payloads are source-compatible with this exact head. Parent new commits from 065e3626aac2de62d2f531aec3bed2fca533c9f9/tree55280761602fa82ecf548d9918fadba780c887b8, preserving the four documentation additions. Retain original qualification identities and append this reconciliation.",
+    "publication_payloads": {
+      "collections": {
+        "ancestor_path_conflicts": [],
+        "exact_path_overlap": [],
+        "manifest": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/publish/target-collections-hashes.json",
+        "manifest_sha256": "4ffd9fe0604fc654c520e1e177d2f31b2a9bac2448f932d44d3d9fdd12f220ef",
+        "payload_paths": 402
+      },
+      "fs": {
+        "ancestor_path_conflicts": [],
+        "exact_path_overlap": [],
+        "manifest": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/publish/target-fs-hashes.json",
+        "manifest_sha256": "782c1507f8388b1550b4117c444fb9f607338655432c39c0254a018eefda6d58",
+        "payload_paths": 582
+      }
+    },
+    "qualification_identities_retained": {
+      "collections_qualified_base_commit": "95d0266ff15ae1f11876cce7360b155ef33a1862",
+      "fs_product_base_commit": "73f59218dc4ef1a3ef79aad990e77273db2a2d60",
+      "qualification_receipts_rewritten": false
+    },
+    "raw_receipt_sha256": {
+      "raw/base-collections-tree.json": "1b5adeafa757f5e13dac621aa085c0ea35a98958a98681f559db1aad5dcc2bee",
+      "raw/base-git-commit.json": "87d68aa99de4ff0535536a089314ec1ede0d809a7e975328744d371e517f0f1f",
+      "raw/base-m3-tree.json": "869f3536a55bff0bb077cd9e53036229204a172a0610dd9007dcaca92844e3f2",
+      "raw/base-root-tree.json": "42fdbd743c9f62693f3dbcb00ed4e4b96d069b7753e7c2130932afce7922f4af",
+      "raw/changed-file-0.json": "29ed9d38ae5ef75a85b4a9b3cb20fc6d8077a89b707a8abedd0d8952d15f629f",
+      "raw/changed-file-1.json": "35cf17d4be23027a61faf8619771670fcda9e34fa4c08dd7c45cf788c6322a33",
+      "raw/changed-file-2.json": "555734fa106ba6723bfd0aa1fa66722a3ba9538f4610555873711d773c9a521b",
+      "raw/changed-file-3.json": "e60e1c8d99bad2e73a3ade0f296be11a14a8afa6781bedb39ea569100a5d0d0a",
+      "raw/compare-rest.json": "1552df6e697792cb59fe9c3ef9aabafc135cf0ebe970f87182ec64dc4af32367",
+      "raw/compare.json": "f57d24a6fdcaaeabcdb6e872a1e250da91f59dc8e56b5f834d84e825dec350e1",
+      "raw/head-agents.json": "07ad7318d1a0c38e889102f5060746cfc3a1e306b05b7ea4d0006dac05d948e5",
+      "raw/head-collections-tree.json": "0d6d6ad28b40d14155d6bd46ab84be7afd5e4112b14d4d848dc04e1ab7a3ef8b",
+      "raw/head-git-commit.json": "f0c1e6696acbf44c96fc8359b42040ed811660faacbf83e9a717c16c4bb631ec",
+      "raw/head-m3-tree.json": "0cce566818de76c7add525b1973866318f717aeb26e515a760b932af7be88411",
+      "raw/head-memory-spec.json": "b451323f1a7337b5b173c76850ac1dd3cf80cfac3905a8fd7c78f463874cf8fb",
+      "raw/head-root-tree.json": "7752a712e20739f6cdb41476d1e945c6361e5b8c1424ab563c6bcaba7c04d240",
+      "raw/master-ref-final.json": "c6e99b78a9df4133156324f90f9dfdb143d006056c2387f2ba68c4982708d9d8",
+      "raw/master-ref.json": "c6e99b78a9df4133156324f90f9dfdb143d006056c2387f2ba68c4982708d9d8",
+      "raw/new-commit.json": "e25926c8f6df4dd9a1a1a3693ac0b9776530d02db553a85edd4bc95fe7a2cb0a"
+    },
+    "remote_mutations": 0,
+    "repository": "hsoliwal/M3jdk21",
+    "runtime_compatibility": {
+      "collections_changed_entries": [
+        "algorithm-catalogue"
+      ],
+      "m3_changed_entries": [
+        "collections",
+        "mop"
+      ],
+      "reason": "The complete net change is four documentation additions. Whole m3/fs, arrays and algorithms trees are identical. Collections src and both POMs are identical. Every other root and m3 entry is unchanged.",
+      "root_changed_entries": [
+        "m3"
+      ],
+      "source_test_build_native_path_changes": [],
+      "status": "PASS",
+      "unchanged_entries": {
+        "m3/algorithms": {
+          "base": "4d72221e90177bd795acb36eaeb3a1edea7a336d",
+          "equal": true,
+          "head": "4d72221e90177bd795acb36eaeb3a1edea7a336d",
+          "kind": "tree"
+        },
+        "m3/arrays": {
+          "base": "21fb3de7afa913f77ede1ec5fe9eb9ac177d84f9",
+          "equal": true,
+          "head": "21fb3de7afa913f77ede1ec5fe9eb9ac177d84f9",
+          "kind": "tree"
+        },
+        "m3/collections/pom-m3-index-mask-window-20261017.xml": {
+          "base": "1280602bc649807540b1827e6559a1044b121d4b",
+          "equal": true,
+          "head": "1280602bc649807540b1827e6559a1044b121d4b",
+          "kind": "blob"
+        },
+        "m3/collections/pom.xml": {
+          "base": "2e9dd0126296be03531c2d7fcb008cb4b1186a91",
+          "equal": true,
+          "head": "2e9dd0126296be03531c2d7fcb008cb4b1186a91",
+          "kind": "blob"
+        },
+        "m3/collections/src": {
+          "base": "b717fd4995a1e3cee32a9879f6f575dee9baa99b",
+          "equal": true,
+          "head": "b717fd4995a1e3cee32a9879f6f575dee9baa99b",
+          "kind": "tree"
+        },
+        "m3/fs": {
+          "base": "adc8951584ddb6046efa1528081204a55815acf8",
+          "equal": true,
+          "head": "adc8951584ddb6046efa1528081204a55815acf8",
+          "kind": "tree"
+        }
+      }
+    },
+    "schema": "M3_PUBLICATION_TARGET_REF_RECONCILIATION_V1",
+    "status": "PASS",
+    "tests_or_builds_rerun": 0
+  },
+  "schema": "M3_TARGET_PUBLICATION_CHECKPOINT_V1"
+}

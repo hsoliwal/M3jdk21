@@ -1,0 +1,6 @@
+artifact	origin	license
+M3File.java	hsoliwal/M3JDK21 original c182a3b1526f9fd0ca20c631d97df3048076defd	Apache-2.0
+M3StreamProgress.java	Synexia #12598 canonical exact template	Apache-2.0 first-party
+M3ShadowStreams.java	Synexia #12598 canonical exact template	Apache-2.0 first-party
+M3ShadowStreamsContract.java	Synexia #12598 canonical test template	Apache-2.0 first-party
+M3ShadowStreams algorithm categories	JDK APIs and M3FsProgress precedent	Reference only; no copied challenge source

@@ -12,6 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.lang.reflect.Proxy;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicInteger;
 import org.eclipse.core.resources.IResourceDelta;
 import org.eclipse.core.runtime.IExtensionPoint;
 import org.eclipse.core.runtime.IExtensionRegistry;
@@ -104,6 +105,36 @@ class M3EclipseFrameworkSnapshotsTest {
         assertEquals(2048, snapshot.select(IResourceDelta.CHANGED, 0).size());
     }
 
+    @Test
+    void fullWidthEclipseFlagsRetainCaptureStateAndResourceIdentity() {
+        AtomicInteger liveFlags = new AtomicInteger(0x80000021);
+        IResourceDelta leaf = proxy(IResourceDelta.class, (proxy, method, args) ->
+                switch (method.getName()) {
+                    case "getKind" -> IResourceDelta.CHANGED;
+                    case "getFlags" -> liveFlags.get();
+                    case "getAffectedChildren" -> new IResourceDelta[0];
+                    default -> throw new AssertionError("Unexpected delta operation: "
+                            + method.getName());
+                });
+        IResourceDelta branch = deltaWithFlags(IResourceDelta.ADDED, 0x21, leaf);
+        IResourceDelta root = delta(IResourceDelta.NO_CHANGE, branch);
+        M3EclipseResourceDeltaSnapshot view = M3EclipseResourceDeltaSnapshot.capture(root, 10);
+        assertEquals(3, view.size());
+        assertEquals(0x80000021, view.capturedFlags(2));
+        assertEquals(List.of(branch, leaf), view.selectByFlags(0x21, 0));
+        assertEquals(List.of(leaf), view.selectByFlags(0x80000000, 0));
+        assertEquals(List.of(branch), view.selectByFlags(0x21, 0x80000000));
+        assertEquals(List.of(root), view.selectByFlags(0, 0x20));
+        assertEquals(List.of(root, branch, leaf), view.selectByFlags(0, 0));
+        liveFlags.set(0);
+        assertEquals(0x80000021, view.capturedFlags(2));
+        assertSame(leaf, view.at(2));
+        assertEquals(List.of(leaf), view.selectByFlags(0x80000000, 0));
+        assertThrows(UnsupportedOperationException.class,
+                () -> view.selectByFlags(0, 0).clear());
+        assertThrows(IndexOutOfBoundsException.class, () -> view.capturedFlags(3));
+    }
+
     private static Bundle bundle(long id, int state) {
         return proxy(Bundle.class, (proxy, method, args) -> switch (method.getName()) {
             case "getBundleId" -> id;
@@ -139,8 +170,13 @@ class M3EclipseFrameworkSnapshotsTest {
     }
 
     private static IResourceDelta delta(int kind, IResourceDelta... children) {
+        return deltaWithFlags(kind, 0, children);
+    }
+
+    private static IResourceDelta deltaWithFlags(int kind, int flags, IResourceDelta... children) {
         return proxy(IResourceDelta.class, (proxy, method, args) -> switch (method.getName()) {
             case "getKind" -> kind;
+            case "getFlags" -> flags;
             case "getAffectedChildren" -> children.clone();
             default -> throw new AssertionError("Unexpected delta operation: " + method.getName());
         });

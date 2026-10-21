@@ -38,7 +38,7 @@ jobs:
         run: |
           set -euo pipefail
           P=m3/collections/qualification/filtered-list-mutation-20261018
-          test "$(git hash-object m3/tooling/migration-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java)" = d58ca50dfaeb60f581b64f43545e688aca5c6530
+          test "$(git hash-object m3/tooling/migration-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java)" = 05e02169c7429183107a99c60e1aad05b4d73b5f
           mkdir -p "$P/target/pre"
           cp "$P/pre/M3FilteredLists.java.txt" "$P/target/pre/M3FilteredLists.java"
           echo "b2dc49d3a9ec43b6e6bd34cf5c6dac53057cf90f42cc9ed506d54822a760fc2d  $P/target/pre/M3FilteredLists.java" | sha256sum -c -

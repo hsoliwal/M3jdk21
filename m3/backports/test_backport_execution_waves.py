@@ -87,10 +87,22 @@ class BackportExecutionWavesTest(unittest.TestCase):
             ),
         ]
 
-        held = {item.atom_id: item for item in self.w.plan(atoms, {})}
+        unapproved = {item.atom_id: item for item in self.w.plan(atoms, {})}
+        self.assertEqual(self.w.SCOPE_APPROVAL_HOLD, unapproved["a.recipe"].execution_state)
+        self.assertEqual(self.w.SCOPE_APPROVAL_HOLD, unapproved["a.compile"].execution_state)
+        self.assertFalse(unapproved["a.compile"].scope_approved)
+        self.assertEqual(-1, unapproved["a.compile"].wave)
+
+        # Approve only the child: its held parent must still block execution.
+        held = {
+            item.atom_id: item
+            for item in self.w.plan(atoms, {"a.compile": "review/child-only"})
+        }
         self.assertEqual(self.w.SCOPE_APPROVAL_HOLD, held["a.recipe"].execution_state)
         self.assertEqual(self.w.DEPENDENCY_HOLD, held["a.compile"].execution_state)
         self.assertEqual(-1, held["a.recipe"].wave)
+        self.assertTrue(held["a.compile"].scope_approved)
+        self.assertEqual(-1, held["a.compile"].wave)
 
         approved = {
             item.atom_id: item

@@ -1,0 +1,57 @@
+[
+  {
+    "target": ".github/workflows/m3-parser-jmod-20261018.yml",
+    "before_sha256": "a7a4e6eb4bde9cd9e111d9cb22e91912f044612db085f76724a691fd441fce16",
+    "after_sha256": "9345c88482b943b26d67490f9358cfd3d7a0e18bd744657b2bf6d223d2391c0b"
+  },
+  {
+    "target": "m3/tooling/module-packs/parser/build.py",
+    "before_sha256": "de93f034db70c0fd3378d0cfd17f6277cdcd5431caeca535eba7cb74dc973eea",
+    "after_sha256": "768866248eb7afc27ab1a02931e6011a11fe7b24c69738fd4c387b28f0b0a486"
+  },
+  {
+    "target": "m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3File.java",
+    "before_sha256": "5851f9fc09cb079818fe2224249129688e7637bd562f77cb016cdc8c32c868ad",
+    "after_sha256": "b5c439656c2b8028d482675727d1e4cb1dd6f9c43b35cf6ffa2d8683048fba6a"
+  },
+  {
+    "target": "m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3JavacParser.java",
+    "before_sha256": "64a255aa080e9197f16dac5112609592b7ce015379a8673a8dcc219529e5356b",
+    "after_sha256": "6743e408798f7ddef9641f6d7957af8e3a2112dd5fe8a5b650454f5876fa6250"
+  },
+  {
+    "target": "m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3JavacTree.java",
+    "before_sha256": "d1c19496b30a94a595818c3f7b8fc07c460ccb7ea3bb3fb382b445787c2bbadc",
+    "after_sha256": "6d225afc9ce50c1da5a914b92de3a977a1eee42f3ee8fd289017b5ff22c19ae0"
+  },
+  {
+    "target": "m3/tooling/module-packs/parser/src/test/java/jdk/m3/parser/test/M3JavacParserContract.java",
+    "before_sha256": "94e70622b392e6f82eeeb4edff08279abaec0d086c683cbe55b6ed052531160b",
+    "after_sha256": "7e3d729cb471b52d72cf02499ed92c7b6ca5e072308f8ed70fb430eb44f6da4c"
+  },
+  {
+    "target": "m3/tooling/module-packs/parser/src/test/java/jdk/m3/parser/test/M3ParserFrameworkContract.java",
+    "before_sha256": "e50633969f5fbea9bb425ad5623347beeaf9adc2f44524a5ec2b14773b077ce5",
+    "after_sha256": "deb08c3dbc95b65a72ad495e27f45c550f4770c461520d8a4a64f7b2f33daa3b"
+  },
+  {
+    "target": "m3/tooling/module-packs/parser/src/test/java/jdk/m3/parser/test/M3ParserResourceProbe.java",
+    "before_sha256": "ABSENT",
+    "after_sha256": "020c2cc5076c443d26c6f0c8555076e2dad7516c3a975cce3a1d301b1e4ceb12"
+  },
+  {
+    "target": "m3/tooling/shared-frontend/algorithm-catalogue.tsv",
+    "before_sha256": "05952a2bfce357b72b25fdd5dba5f570ff5ae3ee29425773e9882b8427e0ab10",
+    "after_sha256": "5e8c84e37e5facc6df5a47624ded1e0a2d96910f17ee4dbeddf83406723bf8a9"
+  },
+  {
+    "target": "src/jdk.compiler/share/classes/com/sun/tools/javac/m3/M3ASTPC.java",
+    "before_sha256": "3e43390b9d9df94da9943b101c809f1bdc4c1039e825976b2cda72acb8c56b28",
+    "after_sha256": "e337b44516d2fe8b2ce31e06051b15653e510f155cff2a10df7f9b0e36981808"
+  },
+  {
+    "target": "test/langtools/tools/javac/m3/M3ASTProjectionStateTest.java",
+    "before_sha256": "ABSENT",
+    "after_sha256": "c2a129e99790ce0abb8d82a852ae8962883d674e40dd252ac57c637a33e68537"
+  }
+]

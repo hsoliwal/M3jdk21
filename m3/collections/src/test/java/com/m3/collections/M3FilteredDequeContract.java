@@ -122,6 +122,55 @@ public final class M3FilteredDequeContract {
         yes(backward.removeFirst() == last);
         yes(source.size() == 2);
     }
+    /** Asymmetric equals exercises the JDK query-to-element removal contract. */
+    private static final class TokenQuery {
+        final int kind;
+        TokenQuery(int kind) { this.kind = kind; }
+        @Override public boolean equals(Object other) {
+            return other instanceof Token t && kind == t.kind;
+        }
+        @Override public int hashCode() { return kind; }
+    }
+    static void asymmetricQueryEquality() {
+        Token first = new Token(1,10), hiddenA = new Token(2,0),
+                middle = new Token(1,11), hiddenB = new Token(2,1),
+                last = new Token(1,12);
+        Deque<Token> source = new LinkedList<>(List.of(first, hiddenA, middle, hiddenB, last));
+        Deque<Token> view = M3FilteredDeques.filtered(source, t -> t != null && t.kind == 1);
+        TokenQuery query = new TokenQuery(1), hiddenQuery = new TokenQuery(2);
+        yes(query.equals(first) && !first.equals(query));
+        yes(view.contains(query));
+        yes(view.removeFirstOccurrence(query));
+        Iterator<Token> physical = source.iterator();
+        yes(physical.next() == hiddenA);
+        yes(physical.next() == middle);
+        yes(physical.next() == hiddenB);
+        yes(physical.next() == last);
+        yes(!physical.hasNext());
+        yes(!view.remove(hiddenQuery));
+        yes(!view.removeLastOccurrence(hiddenQuery));
+        yes(!view.contains(hiddenQuery));
+        yes(view.removeLastOccurrence(query));
+        yes(source.size() == 3 && source.getFirst() == hiddenA && source.getLast() == hiddenB);
+        yes(view.getFirst() == middle);
+        yes(view.reversed().remove(query));
+        yes(source.size() == 2 && source.getFirst() == hiddenA && source.getLast() == hiddenB);
+        source.addFirst(first);
+        yes(view.remove(query));
+        yes(source.size() == 2 && !view.remove(query));
+        yes(!view.remove(null));
+        Deque<Token> nullable = new LinkedList<>();
+        nullable.addLast(null);
+        nullable.addLast(first);
+        Deque<Token> nullView = M3FilteredDeques.filtered(nullable, t -> t != null && t.kind == 1);
+        yes(!nullView.remove(null));
+        yes(nullable.size() == 2 && nullable.getFirst() == null);
+        yes(nullView.remove(new TokenQuery(1)));
+        yes(nullable.size() == 1 && nullable.getFirst() == null);
+        Deque<Token> readonly = M3FilteredDeques.readOnlyFiltered(source, t -> t.kind == 2);
+        raises(UnsupportedOperationException.class, () -> readonly.remove(hiddenQuery));
+        raises(UnsupportedOperationException.class, () -> readonly.removeLastOccurrence(hiddenQuery));
+    }
     static void bulkAndQueue() {
         Deque<Integer> original = new LinkedList<>(List.of(-1, 2, -3, 4, -5, 6));
         Deque<Integer> selected = M3FilteredDeques.filtered(original, i -> i >= 0);
@@ -170,5 +219,5 @@ public final class M3FilteredDequeContract {
             }
         }
     }
-    public static void main(String[] args) {basics();iteratorsAndReversal();nullsAndReadonly();equalButDistinctIdentities();bulkAndQueue();differential();System.out.println("PASS checks="+checks);}
+    public static void main(String[] args) {basics();iteratorsAndReversal();nullsAndReadonly();equalButDistinctIdentities();asymmetricQueryEquality();bulkAndQueue();differential();System.out.println("PASS checks="+checks);}
 }

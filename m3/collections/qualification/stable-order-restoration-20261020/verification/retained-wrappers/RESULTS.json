@@ -1,0 +1,305 @@
+{
+  "commands": "COMMANDS.json",
+  "compiler_diagnostics_empty": true,
+  "finished_at": "2026-10-20T11:32:18.413728+00:00",
+  "fresh_classes": "CLASSES.json",
+  "freshly_passing_historical_oracles": {
+    "bounded-map": 64,
+    "bounded-set": 64,
+    "interior-null": 6,
+    "readonly-effects": 8,
+    "readonly-policy": 25
+  },
+  "historical_vs_current": "The fixtures were published historically and are byte-identical here. Every listed outcome is a new execution against the pinned current tree. The historical pending interior-null label is not a current reproduced failure: all six unchanged checks pass. Pass counts across modes overlap and must not be added as unique assertions.",
+  "immutable_git_owner_hashes_rechecked_after_run": true,
+  "input_hashes": "SOURCE_SHA256.tsv",
+  "input_hashes_unchanged_after_run": true,
+  "known_findings": [
+    "Comparator-owned IllegalArgumentException is swallowed in the bounded read-only map witness. Both comparator-failure and the original default readonly mode stop at that first failure; their later mutable-set assertion is not reached.",
+    "The ordinary read-only iterator retains the indexed callback path and exceeds the original linear-work oracle: 787456 predicate calls for a 1024-element backing list. There is no traversal speed claim.",
+    "The ordinary read-only iterator does not detect the backing mutation in the original fail-fast witness. Later assertions in that mode are not reached."
+  ],
+  "original_fixture_bytes_and_default_mode_preserved": true,
+  "original_junit_gate": {
+    "argv": [
+      "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/toolchain/jdk21/bin/java",
+      "-ea",
+      "-cp",
+      "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/retained-wrappers/classes:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/jupiter/junit-jupiter-api/5.10.2/junit-jupiter-api-5.10.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/jupiter/junit-jupiter-engine/5.10.2/junit-jupiter-engine-5.10.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/platform/junit-platform-commons/1.10.2/junit-platform-commons-1.10.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/platform/junit-platform-engine/1.10.2/junit-platform-engine-1.10.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/platform/junit-platform-launcher/1.10.2/junit-platform-launcher-1.10.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar",
+      "FacadeTestLauncher",
+      "com.m3.collections.M3WrapperConvergenceTest"
+    ],
+    "counts": {
+      "aborted": 0,
+      "failed": 0,
+      "found": 1,
+      "skipped": 0,
+      "started": 1,
+      "successful": 1
+    },
+    "cwd": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/retained-wrappers",
+    "exit_code": 0,
+    "finished_at": "2026-10-20T11:32:17.779707+00:00",
+    "label": "junit-readonly-policy",
+    "log": "junit-readonly-policy.log",
+    "log_sha256": "5d8b38e1bfc19490d019e7cc7d8ca9e6a28dc1e49b64abbebdb8b70c84a4014c",
+    "started_at": "2026-10-20T11:32:17.410716+00:00"
+  },
+  "original_standalone_contract": [
+    {
+      "argv": [
+        "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/toolchain/jdk21/bin/java",
+        "-ea",
+        "-cp",
+        "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/retained-wrappers/classes",
+        "com.m3.collections.M3WrapperConvergenceContract",
+        "readonly-policy"
+      ],
+      "checks": 25,
+      "cwd": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/retained-wrappers",
+      "exit_code": 0,
+      "finished_at": "2026-10-20T11:32:17.862624+00:00",
+      "label": "oracle-readonly-policy",
+      "log": "oracle-readonly-policy.log",
+      "log_sha256": "95727b413b6b25e2999d525ec90a1c6cae7fb7a52ecde89655d2dfe72b9f2c55",
+      "mode": "readonly-policy",
+      "outcome": "PASS",
+      "started_at": "2026-10-20T11:32:17.780925+00:00"
+    },
+    {
+      "argv": [
+        "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/toolchain/jdk21/bin/java",
+        "-ea",
+        "-cp",
+        "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/retained-wrappers/classes",
+        "com.m3.collections.M3WrapperConvergenceContract",
+        "readonly-effects"
+      ],
+      "checks": 8,
+      "cwd": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/retained-wrappers",
+      "exit_code": 0,
+      "finished_at": "2026-10-20T11:32:17.948874+00:00",
+      "label": "oracle-readonly-effects",
+      "log": "oracle-readonly-effects.log",
+      "log_sha256": "8ae780d7cd5a46f866b664b1304895f6bbf0e60ad2d8f2ed9442cec4766cc984",
+      "mode": "readonly-effects",
+      "outcome": "PASS",
+      "started_at": "2026-10-20T11:32:17.863386+00:00"
+    },
+    {
+      "argv": [
+        "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/toolchain/jdk21/bin/java",
+        "-ea",
+        "-cp",
+        "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/retained-wrappers/classes",
+        "com.m3.collections.M3WrapperConvergenceContract",
+        "readonly-linear"
+      ],
+      "cwd": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/retained-wrappers",
+      "exit_code": 1,
+      "finished_at": "2026-10-20T11:32:18.024155+00:00",
+      "first_failure": "Exception in thread \"main\" java.lang.AssertionError: ordinary iterator predicate work must be linear, actual=787456",
+      "label": "oracle-readonly-linear",
+      "log": "oracle-readonly-linear.log",
+      "log_sha256": "91663a16b81d93150ae51948401c30b9f9082e66f3e41f9bed5b09e7dc740b3b",
+      "mode": "readonly-linear",
+      "original_oracle_not_weakened": true,
+      "outcome": "RETAINED_KNOWN_FAILURE",
+      "started_at": "2026-10-20T11:32:17.949589+00:00"
+    },
+    {
+      "argv": [
+        "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/toolchain/jdk21/bin/java",
+        "-ea",
+        "-cp",
+        "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/retained-wrappers/classes",
+        "com.m3.collections.M3WrapperConvergenceContract",
+        "readonly-failfast"
+      ],
+      "cwd": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/retained-wrappers",
+      "exit_code": 1,
+      "finished_at": "2026-10-20T11:32:18.089168+00:00",
+      "first_failure": "Exception in thread \"main\" java.lang.AssertionError: ordinary read-only iterator retains backing fail-fast detection: missing ConcurrentModificationException",
+      "label": "oracle-readonly-failfast",
+      "log": "oracle-readonly-failfast.log",
+      "log_sha256": "79ee3a489a54389785ed35d7e8803fec71037b5dc2afabd18232523352412753",
+      "mode": "readonly-failfast",
+      "original_oracle_not_weakened": true,
+      "outcome": "RETAINED_KNOWN_FAILURE",
+      "started_at": "2026-10-20T11:32:18.024752+00:00"
+    },
+    {
+      "argv": [
+        "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/toolchain/jdk21/bin/java",
+        "-ea",
+        "-cp",
+        "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/retained-wrappers/classes",
+        "com.m3.collections.M3WrapperConvergenceContract",
+        "comparator-failure"
+      ],
+      "cwd": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/retained-wrappers",
+      "exit_code": 1,
+      "finished_at": "2026-10-20T11:32:18.147479+00:00",
+      "first_failure": "Exception in thread \"main\" java.lang.AssertionError: read-only map comparator failure: missing IllegalArgumentException",
+      "label": "oracle-comparator-failure",
+      "log": "oracle-comparator-failure.log",
+      "log_sha256": "baf6c5ccd95f661dfaadad26a8070590ec4e8d54c80a8c056f31ffb0cde15bed",
+      "mode": "comparator-failure",
+      "original_oracle_not_weakened": true,
+      "outcome": "RETAINED_KNOWN_FAILURE",
+      "started_at": "2026-10-20T11:32:18.089813+00:00"
+    },
+    {
+      "argv": [
+        "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/toolchain/jdk21/bin/java",
+        "-ea",
+        "-cp",
+        "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/retained-wrappers/classes",
+        "com.m3.collections.M3WrapperConvergenceContract",
+        "bounded-map"
+      ],
+      "checks": 64,
+      "cwd": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/retained-wrappers",
+      "exit_code": 0,
+      "finished_at": "2026-10-20T11:32:18.210702+00:00",
+      "label": "oracle-bounded-map",
+      "log": "oracle-bounded-map.log",
+      "log_sha256": "c91cc3d8d58dc5bee2ab8395ed747d152093b8a14a52ce2f8e88009d24403887",
+      "mode": "bounded-map",
+      "outcome": "PASS",
+      "started_at": "2026-10-20T11:32:18.148060+00:00"
+    },
+    {
+      "argv": [
+        "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/toolchain/jdk21/bin/java",
+        "-ea",
+        "-cp",
+        "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/retained-wrappers/classes",
+        "com.m3.collections.M3WrapperConvergenceContract",
+        "bounded-set"
+      ],
+      "checks": 64,
+      "cwd": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/retained-wrappers",
+      "exit_code": 0,
+      "finished_at": "2026-10-20T11:32:18.268685+00:00",
+      "label": "oracle-bounded-set",
+      "log": "oracle-bounded-set.log",
+      "log_sha256": "b416f81b3392d7a01e24ce8f68ba3f4c399fcde78b61a3b174dcf2536ba23283",
+      "mode": "bounded-set",
+      "outcome": "PASS",
+      "started_at": "2026-10-20T11:32:18.211645+00:00"
+    },
+    {
+      "argv": [
+        "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/toolchain/jdk21/bin/java",
+        "-ea",
+        "-cp",
+        "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/retained-wrappers/classes",
+        "com.m3.collections.M3WrapperConvergenceContract",
+        "interior-null"
+      ],
+      "checks": 6,
+      "cwd": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/retained-wrappers",
+      "exit_code": 0,
+      "finished_at": "2026-10-20T11:32:18.322800+00:00",
+      "label": "oracle-interior-null",
+      "log": "oracle-interior-null.log",
+      "log_sha256": "c68e7ab27c3d547837cbfb6f1d0867617b9224d194d5ec1d2539a207a86f749a",
+      "mode": "interior-null",
+      "outcome": "PASS",
+      "started_at": "2026-10-20T11:32:18.269406+00:00"
+    },
+    {
+      "argv": [
+        "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/toolchain/jdk21/bin/java",
+        "-ea",
+        "-cp",
+        "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/retained-wrappers/classes",
+        "com.m3.collections.M3WrapperConvergenceContract"
+      ],
+      "cwd": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/retained-wrappers",
+      "exit_code": 1,
+      "finished_at": "2026-10-20T11:32:18.399577+00:00",
+      "first_failure": "Exception in thread \"main\" java.lang.AssertionError: read-only map comparator failure: missing IllegalArgumentException",
+      "label": "oracle-readonly",
+      "log": "oracle-readonly.log",
+      "log_sha256": "5281ea19a1fff0ae95acc4c440fa0315afbd00f9ea6a6c6b36765ab10f2ee8e1",
+      "mode": "readonly",
+      "original_oracle_not_weakened": true,
+      "outcome": "RETAINED_KNOWN_FAILURE",
+      "started_at": "2026-10-20T11:32:18.323463+00:00"
+    }
+  ],
+  "production_changes": 0,
+  "public_api": {
+    "argv": [
+      "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/toolchain/jdk21/bin/javap",
+      "-public",
+      "-s",
+      "-classpath",
+      "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/retained-wrappers/classes",
+      "com.m3.collections.M3FilteredLists",
+      "com.m3.collections.M3FilteredViews",
+      "com.m3.collections.M3MutableFilteredViews"
+    ],
+    "cwd": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/retained-wrappers",
+    "exit_code": 0,
+    "finished_at": "2026-10-20T11:32:17.410451+00:00",
+    "label": "public-api",
+    "log": "public-api.log",
+    "log_sha256": "b1596af8e9da832b16ef25a535bf1f5c4aee4911bc008c68f7a1ea95fe1847d0",
+    "started_at": "2026-10-20T11:32:17.211068+00:00"
+  },
+  "qualification_scope": "Fresh bounded Java 21 execution of historical exact fixtures against current four-owner source closure. No complete module, Maven, native, performance, or source-built JDK claim.",
+  "report_finalization": {
+    "finalizer_sha256": "23ef60c1f7ebc45dad8a9639ebcfd4113a8b18a08ff43de42c53ddd228c1c332",
+    "operation": "Read existing logs and correct the initial driver's static known-findings narrative to the actual passing interior-null outcome; no execution result changed.",
+    "pre_finalization_report_sha256": "1c2979c678256f0d044c1b80923d5dd0e15e4203ad9bea04bfd40632cf0b7858",
+    "tests_rerun": false,
+    "timestamp": "2026-10-20T11:33:39.342188+00:00"
+  },
+  "source_tree": "985d672bf250aa090b2399d626f0e3e1b541135d",
+  "sources_receipt": "SOURCES.json",
+  "standalone_counts": {
+    "executed": 9,
+    "passed": 5,
+    "retained_known_failures": 4
+  },
+  "started_at": "2026-10-20T11:32:15.463181+00:00",
+  "status": "RETAINED_READONLY_POLICY_PASS_WITH_PRESERVED_KNOWN_FAILURES",
+  "strict_compilation": {
+    "argv": [
+      "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/toolchain/jdk21/bin/javac",
+      "--release",
+      "21",
+      "-Xlint:all",
+      "-Werror",
+      "-implicit:none",
+      "-sourcepath",
+      "",
+      "-classpath",
+      "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/jupiter/junit-jupiter-api/5.10.2/junit-jupiter-api-5.10.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/jupiter/junit-jupiter-engine/5.10.2/junit-jupiter-engine-5.10.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/platform/junit-platform-commons/1.10.2/junit-platform-commons-1.10.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/platform/junit-platform-engine/1.10.2/junit-platform-engine-1.10.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/platform/junit-platform-launcher/1.10.2/junit-platform-launcher-1.10.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar",
+      "-d",
+      "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/retained-wrappers/classes",
+      "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/retained-wrappers/source/com/m3/collections/M3FilteredLists.java",
+      "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/retained-wrappers/source/com/m3/collections/M3FilteredViews.java",
+      "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/retained-wrappers/source/com/m3/collections/M3MutableFilteredViews.java",
+      "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/retained-wrappers/source/com/m3/collections/M3SlotSpliterators.java",
+      "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/retained-wrappers/source/com/m3/collections/M3WrapperConvergenceContract.java",
+      "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/retained-wrappers/source/com/m3/collections/M3WrapperConvergenceTest.java",
+      "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/retained-wrappers/source/FacadeTestLauncher.java"
+    ],
+    "classfile_count": 36,
+    "cwd": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/retained-wrappers",
+    "existing_launcher_count": 1,
+    "exit_code": 0,
+    "finished_at": "2026-10-20T11:32:17.210787+00:00",
+    "flags": "--release 21 -Xlint:all -Werror -implicit:none -sourcepath empty",
+    "historical_fixture_count": 2,
+    "label": "strict-javac",
+    "log": "strict-javac.log",
+    "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "production_owner_count": 4,
+    "started_at": "2026-10-20T11:32:15.642762+00:00"
+  }
+}

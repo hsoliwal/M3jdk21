@@ -1,0 +1,11 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3jdk.AstBuildReverse20261017
+displayName: M3JDK21 Machine Oriented Programming recipe memory custody
+description: >-
+  Source-sealed additive M3JDK21 control-plane Java21 recipe-memory verifier,
+  regression tests and strict compile runner. Reuses original OpenRewrite engines.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: m3-ast-build-reverse-20261017-m3-mop-recipe-memory-20261020
+  - com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe:
+      crateName: m3-ast-build-reverse-20261017-m3-mop-recipe-memory-20261020

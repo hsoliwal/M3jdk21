@@ -1,0 +1,44 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3JDK21 stable descending index groups
+on:
+  pull_request:
+    paths:
+      - "m3/collections/src/main/java/com/m3/collections/M3IndexedListSnapshot.java"
+      - "m3/collections/src/test/java/com/m3/collections/M3StableDescendingSnapshot*.java"
+      - ".github/workflows/m3-stable-descending-index.yml"
+  workflow_dispatch:
+jobs:
+  stable-descending-java-jni:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Compile actual existing M3 snapshot/index owners strictly
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p build/m3-stable-descending
+          src=m3/collections/src/main/java/com/m3/collections
+          javac --release 21 -Xlint:all -Werror -d build/m3-stable-descending \
+            "$src/M3IndexMaskCompactor.java" "$src/M3IndexPathMasks.java" \
+            "$src/M3IndexedListSnapshot.java" \
+            m3/collections/src/test/java/com/m3/collections/M3StableDescendingSnapshotProof.java
+      - name: Java reference oracle
+        run: java -cp build/m3-stable-descending com.m3.collections.M3StableDescendingSnapshotProof
+      - name: Compile unchanged target JNI C17 selector strictly
+        shell: bash
+        run: |
+          set -euo pipefail
+          cc -std=c17 -Wall -Wextra -Werror -fPIC -shared \
+            -I"$JAVA_HOME/include" -I"$JAVA_HOME/include/linux" \
+            m3/collections/src/main/native/collections/m3_index_path_masks.c \
+            -o build/m3-stable-descending/libm3_collections_pathmask.so
+      - name: Native-required JNI reference oracle
+        run: |
+          java -Xcheck:jni -Djava.library.path=build/m3-stable-descending \
+            -cp build/m3-stable-descending \
+            com.m3.collections.M3StableDescendingSnapshotProof --native

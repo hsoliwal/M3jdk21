@@ -1,0 +1,14 @@
+# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and contributors
+# SPDX-License-Identifier: Apache-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.LongSortedMaskedWindow20261021
+displayName: Source-sealed M3JDK21 sorted long snapshot over physical masked windows
+description: >-
+  Reuse the existing parent-owned M3LongSortedSnapshot and indexed Java/JNI
+  M3IndexMaskCompactor. Strictly validate only the selected sorted-unique row
+  span before one exact-sized detached mask-selected result is created.
+  Preserve all existing public interfaces, original snapshot contracts,
+  JNI availability policy, rank/select and range semantics.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: m3-long-sorted-masked-window-20261021

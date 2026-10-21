@@ -36,6 +36,7 @@ public final class M3JavacParserContract {
         distinctProjectionIdentities();
         nodeBudgetAndCleanup();
         parsedPhaseOnly();
+        traversalShapes();
         System.out.println("M3_JAVAC_PARSER_PASS checks=" + checks);
     }
 
@@ -235,6 +236,77 @@ public final class M3JavacParserContract {
             }
         }
         check(refusals.get() == 1, "adapter refuses attributed-event capture");
+    }
+
+    private static void traversalShapes() throws Exception {
+        StringBuilder wide = new StringBuilder("class Wide {");
+        for (int index = 0; index < 513; index++) wide.append("int value").append(index).append(" = ").append(index).append(';');
+        wide.append("void visit() { for (int i = 0; i < 9; i++) { if (i > 3) continue; } }");
+        wide.append('}');
+        StringBuilder deep = new StringBuilder("class Deep { int value = ");
+        deep.append("(".repeat(80)).append('1');
+        for (int index = 0; index < 80; index++) deep.append(" + ").append(index).append(')');
+        deep.append("; }");
+        String[] names = {"Empty", "Wide", "Deep", "Patterns", "module-info", "Broken"};
+        String[] texts = {"", wide.toString(), deep.toString(),
+                "sealed interface Expr permits Lit {} record Lit(int value) implements Expr {} "
+                        + "final class Patterns { int eval(Expr e) { return switch (e) { "
+                        + "case Lit(int value) when value > 0 -> value; default -> 0; }; } }",
+                "module sample { requires java.base; exports p; opens p; uses java.lang.Runnable; "
+                        + "provides java.lang.Runnable with p.Worker; }",
+                "class Broken { void m( { if (true) return; }"};
+        for (int fixture = 0; fixture < texts.length; fixture++) {
+            ArrayList<Row> oracle = new ArrayList<>();
+            M3JavacTree tree = captureShape(names[fixture], texts[fixture], 100_000, oracle);
+            check(tree.nodeCount() == oracle.size(), "shape node count " + names[fixture]);
+            for (int row = 0; row < oracle.size(); row++) {
+                Row expected = oracle.get(row);
+                check(tree.kind(row) == expected.kind() && tree.parent(row) == expected.parent()
+                                && tree.start(row) == expected.start() && tree.end(row) == expected.end(),
+                        "scanner order/parent/range " + names[fixture] + " row=" + row);
+            }
+            M3JavacTree exact = captureShape(names[fixture], texts[fixture], oracle.size(), new ArrayList<>());
+            check(M3ParserFixtures.javacDigest(tree).equals(M3ParserFixtures.javacDigest(exact)),
+                    "exact budget keeps deterministic result " + names[fixture]);
+            if (oracle.size() > 1) {
+                String name = names[fixture];
+                String text = texts[fixture];
+                RuntimeException failure = expect(RuntimeException.class,
+                        () -> captureShape(name, text, oracle.size() - 1, new ArrayList<>()));
+                check(hasCause(failure, IllegalStateException.class, "maxNodes"), "shape budget refuses " + name);
+            }
+        }
+    }
+
+    private static M3JavacTree captureShape(String name, String text, int limit, List<Row> oracle) throws Exception {
+        var diagnostics = new DiagnosticCollector<JavaFileObject>();
+        M3JavacTree[] captured = new M3JavacTree[1];
+        try (var manager = ToolProvider.getSystemJavaCompiler().getStandardFileManager(
+                diagnostics, null, StandardCharsets.UTF_8)) {
+            Source input = new Source(name, text);
+            JavacTask task = task(input, manager, diagnostics);
+            try (M3AST session = M3JavacParser.attach(task, M3JavacParser.projection(limit), tree -> captured[0] = tree)) {
+                session.addConsumer(new M3AST.Consumer() {
+                    @Override public void parsed(M3AST.Unit unit) {
+                        var positions = unit.trees().getSourcePositions();
+                        new TreeScanner<Void, Integer>() {
+                            @Override public Void scan(Tree tree, Integer parent) {
+                                if (tree == null) return null;
+                                int row = oracle.size();
+                                oracle.add(new Row(tree.getKind(), parent,
+                                        (int) positions.getStartPosition(unit.tree(), tree),
+                                        (int) positions.getEndPosition(unit.tree(), tree)));
+                                return super.scan(tree, row);
+                            }
+                        }.scan(unit.tree(), -1);
+                    }
+                });
+                task.parse();
+                check(input.reads == 1 && session.summary().capturedSources() == 1, "single retained source " + name);
+            }
+        }
+        check(captured[0] != null, "complete projection published " + name);
+        return captured[0];
     }
 
     private static boolean hasCause(Throwable failure, Class<? extends Throwable> type, String message) {

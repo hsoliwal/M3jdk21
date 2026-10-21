@@ -1,0 +1,9 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3jdk.AstBuildReverse20261017
+displayName: Receive M3File provider-owned shadow streams and nested progress into M3JDK21
+description: >-
+  Exact additive Java21 source-gated original file-owner streams, without
+  retaining full file contents or creating an M3+JDK wrapper.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: m3-ast-build-reverse-20261017-m3-file-shadow-20261020

@@ -1,0 +1,24 @@
+name: M3JDK21 full-width path-mask classification Java/JNI proof
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - 'm3/collections/src/main/java/com/m3/collections/M3IndexPathMasks.java'
+      - 'm3/collections/src/test/java/com/m3/collections/M3IndexPathMaskClassificationProof.java'
+      - 'm3/collections/qualification/pathmask-classification-20261021/**'
+      - 'm3/collections/algorithm-catalog/pathmask-terminal-classification-20261021.tsv'
+      - 'm3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-index-pathmask-classification-20261021/**'
+      - 'm3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-index-pathmask-classification-20261021.yml'
+      - '.github/workflows/m3-index-pathmask-classification-20261021.yml'
+jobs:
+  java21-c17-jni:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Source seals, Java 21 differentials and checked C17 JNI
+        run: bash m3/collections/qualification/pathmask-classification-20261021/verify.sh

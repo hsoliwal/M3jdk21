@@ -1,0 +1,10 @@
+category	candidate	decision	time_space	rationale	url
+PREDICATE_ANY	Current M3CollectionViews isEmpty via filtered iterator	BASELINE_ORACLE	O(k) with one selected cursor allocation	Keep original owner-callback and exception trace as oracle	https://github.com/hsoliwal/M3jdk21
+PREDICATE_ANY	Direct source iterator short-circuit	SELECT_PRIVATE_METHOD_REFINEMENT	O(k) with no selected cursor wrapper	No source.size, stream allocation or predicate reordering; early stop and backed semantics preserved	internal
+PREDICATE_ANY	OpenJDK Stream.anyMatch	REFERENCE_ONLY	O(k), stream setup	Semantically related, but constructing stream may alter source invocation and allocations	https://github.com/openjdk/jdk21
+PREDICATE_ANY	Guava Iterables.any	COMPARISON_ONLY	O(k)	Avoid runtime dependency; compare short-circuit and source traversal only	https://github.com/google/guava
+BINARY_SEARCH	LeetCode 34 First and Last Sorted Position	REJECT_FOR_ARBITRARY_PREDICATES	O(log n) if monotonic keys	A live arbitrary Java predicate is not sorted/monotonic; binary search would change semantics	https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array/
+ITERATOR_EFFECTS	HackerRank Java Iterator	TAXONOMY_TEST_REFERENCE	O(k)	Use cursor acquisition, hasNext/next and exception-order adversarial tests; no copied editorial	https://www.hackerrank.com/challenges/java-iterator/problem
+PREDICATE_ANY	GeeksforGeeks Stream anyMatch	TAXONOMY_TEST_REFERENCE	O(k)	Short-circuit semantic reference, not donor implementation copy	https://www.geeksforgeeks.org/java/stream-anymatch-java-examples/
+BACKED_SORTED	Existing M3FilteredViews M3MutableFilteredViews M3CollectionViews	KEEP_EXISTING_OWNERS	Varies by view contract	No replacement of sorted/backed wrappers or comparator and identity conventions	https://github.com/hsoliwal/M3jdk21/pull/1619
+JNI_MASK	Existing integrated JNI primitive mask kernels	REUSE_UNCHANGED	O(n) batched	Java predicates/callbacks stay in Java; native primitive batches remain product JNI owner	https://github.com/hsoliwal/M3jdk21/pull/1557

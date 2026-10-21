@@ -103,6 +103,22 @@ final class M3StringPool {
     /** Only an unpublished mapping owned by this admission may be released. */
     private static native boolean unmapLexicon0(long address, long length);
 
+    /**
+     * JNI batch concatenation over existing canonical M3String owner/range references.
+     *
+     * <p>The native code uses a fixed 32-slot stack to combine the already-interned
+     * coordinates through this pool's normal canonical concat operation. The Java
+     * input array contains references, never a copied joined text payload. Mapped
+     * lexicon/OS-shared atoms remain owned by their original retained mapping,
+     * and short immediate words remain in their fixed long[] pages. Materialization
+     * remains an explicit String/JNI compatibility operation.</p>
+     *
+     * <p>This is an internal opt-in batch entry point. Normal String concatenation
+     * keeps its Java path until installed-image/native performance qualification.</p>
+     */
+    // FLLDCIM: ATOM - canonical native batch join over fixed-array/view coordinates
+    static native M3String concatViewsNative0(M3String[] parts);
+
     private static String savedProperty(String name) {
         return VM.initLevel() >= 1 ? VM.getSavedProperty(name) : null;
     }
@@ -830,14 +846,14 @@ final class M3StringPool {
 
     private static boolean sameLeafSequence(
             M3String existing, M3String left, M3String right) {
-        LeafCursor candidate = new LeafCursor(existing, null);
-        LeafCursor requested = new LeafCursor(left, right);
+        M3StringLeafCursor candidate = new M3StringLeafCursor(existing, null, true);
+        M3StringLeafCursor requested = new M3StringLeafCursor(left, right, true);
         for (;;) {
             boolean candidateNext = candidate.next();
             boolean requestedNext = requested.next();
             if (candidateNext != requestedNext) return false;
             if (!candidateNext) return true;
-            if (!sameLeaf(candidate.atom(), requested.atom())
+            if (!sameLeaf(candidate.owner(), requested.owner())
                     || candidate.start() != requested.start()
                     || candidate.length() != requested.length()) {
                 return false;
@@ -901,112 +917,34 @@ final class M3StringPool {
      * No native address, Java byte/char payload, or child M3String is retained or copied.
      * The stack grows only when the tuple depth requires it.</p>
      */
-    private static final class LeafCursor {
-        private M3StringOwner[] pendingOwners = new M3StringOwner[8];
-        private long[] pendingCoordinates = new long[8];
-        private int pendingSize;
-
-        private M3StringOwner atom;
-        private int start;
-        private int length;
-
-        private boolean buffered;
-        private M3StringOwner bufferedAtom;
-        private int bufferedStart;
-        private int bufferedLength;
-
-        private M3StringOwner rawAtom;
-        private int rawStart;
-        private int rawLength;
-
-        LeafCursor(M3String first, M3String second) {
-            if (second != null) push(second.owner(), second.start(), second.length());
-            if (first != null) push(first.owner(), first.start(), first.length());
+    /**
+     * The JNI shadow allocation already owns the one contiguous output array.
+     * Reuse this pool's canonical owner/range cursor to transfer exact scalar
+     * subranges without recursive tuple calls or intermediate text payloads.
+     */
+    static void copyCharsFromPath(M3StringOwner root, int from, int end,
+            char[] destination, int destinationStart) {
+        if (from == end) return;
+        M3StringLeafCursor path = new M3StringLeafCursor(root, from, end - from, true);
+        int target = destinationStart;
+        while (path.next()) {
+            int count = path.length();
+            path.owner().getChars(path.start(), Math.addExact(path.start(), count),
+                    destination, target);
+            target = Math.addExact(target, count);
         }
+    }
 
-        /**
-         * Preserve M3String.range's exact bounds authority without manufacturing a child
-         * wrapper. Ownership remains strong for every pending JNI-visible atom.
-         */
-        private void push(M3StringOwner owner, int offset, int count) {
-            if (count == 0) return;
-            Objects.checkFromIndexSize(offset, count, owner.length);
-            if (pendingSize == pendingOwners.length) {
-                int capacity = Math.multiplyExact(pendingOwners.length, 2);
-                pendingOwners = Arrays.copyOf(pendingOwners, capacity);
-                pendingCoordinates = Arrays.copyOf(pendingCoordinates, capacity);
-            }
-            pendingOwners[pendingSize] = owner;
-            pendingCoordinates[pendingSize] =
-                    ((long) offset << Integer.SIZE) | Integer.toUnsignedLong(count);
-            pendingSize++;
-        }
-
-        boolean next() {
-            if (buffered) {
-                atom = bufferedAtom;
-                start = bufferedStart;
-                length = bufferedLength;
-                buffered = false;
-            } else {
-                if (!pullRaw()) return false;
-                atom = rawAtom;
-                start = rawStart;
-                length = rawLength;
-            }
-
-            while (pullRaw()) {
-                if (rawAtom == atom && start + length == rawStart) {
-                    length = Math.addExact(length, rawLength);
-                } else {
-                    buffered = true;
-                    bufferedAtom = rawAtom;
-                    bufferedStart = rawStart;
-                    bufferedLength = rawLength;
-                    break;
-                }
-            }
-            return true;
-        }
-
-        M3StringOwner atom() { return atom; }
-        int start() { return start; }
-        int length() { return length; }
-
-        private boolean pullRaw() {
-            while (pendingSize != 0) {
-                int top = --pendingSize;
-                M3StringOwner owner = pendingOwners[top];
-                pendingOwners[top] = null; // Do not pin already-consumed owners.
-                long coordinate = pendingCoordinates[top];
-                int rangeStart = (int) (coordinate >>> Integer.SIZE);
-                int rangeLength = (int) coordinate;
-                if (!(owner instanceof M3StringTuple tuple)) {
-                    rawAtom = owner;
-                    rawStart = rangeStart;
-                    rawLength = rangeLength;
-                    return true;
-                }
-
-                int rangeEnd = rangeStart + rangeLength;
-                int leftLength = tuple.left.length();
-
-                if (rangeEnd > leftLength) {
-                    int rightStart = Math.max(0, rangeStart - leftLength);
-                    int rightEnd = rangeEnd - leftLength;
-                    push(tuple.right.owner(),
-                            Math.addExact(tuple.right.start(), rightStart),
-                            rightEnd - rightStart);
-                }
-                if (rangeStart < leftLength) {
-                    int leftStart = rangeStart;
-                    int leftEnd = Math.min(rangeEnd, leftLength);
-                    push(tuple.left.owner(),
-                            Math.addExact(tuple.left.start(), leftStart),
-                            leftEnd - leftStart);
-                }
-            }
-            return false;
+    static void copyBytesFromPath(M3StringOwner root, int from, int end,
+            byte[] destination, int destinationStart, byte coder) {
+        if (from == end) return;
+        M3StringLeafCursor path = new M3StringLeafCursor(root, from, end - from, true);
+        int target = destinationStart;
+        while (path.next()) {
+            int count = path.length();
+            path.owner().getBytes(path.start(), Math.addExact(path.start(), count),
+                    destination, target, coder);
+            target = Math.addExact(target, count);
         }
     }
 
