@@ -1,0 +1,23 @@
+name: M3JDK21 native state-plane snapshot Java21/C17 parity
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - 'm3/collections/src/main/native/collections/m3_index_path_masks.c'
+      - 'm3/collections/qualification/native-plane-snapshot-20261021/**'
+      - 'm3/collections/algorithm-catalog/native-plane-snapshot-20261021.tsv'
+      - 'm3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-native-plane-snapshot-*/**'
+      - 'm3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-native-plane-snapshot-*.yml'
+      - '.github/workflows/m3-native-plane-snapshot-20261021.yml'
+jobs:
+  checked-jni-dual-binary:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Compare original and bounded-plane native owners under CheckJNI and UBSan
+        run: bash m3/collections/qualification/native-plane-snapshot-20261021/verify.sh
