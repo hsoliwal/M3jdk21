@@ -38,6 +38,17 @@ Read and follow the existing [porting and naming invariant](m3/docs/m3jdk21-port
 and [naming/migration map](m3/docs/name-mapping.json) before M3 source work. They remain the target
 policy authorities; this file makes the existing invariant discoverable to repository agents.
 
+
+**Naming, formatting, and implementation promotion:** use the [M3JDK21 naming admission
+workflow](m3/docs/m3jdk21-naming-admission-workflow.md) when a donor candidate becomes an existing
+JDK class implementation, an M3 internal helper changes class/package/method spelling, or an
+authoring agent formats or relocates Java sources. Record the stable capability ID in the existing
+`m3/docs/name-mapping.json`; preserve the public JDK class name, constructors and ABI, and keep
+M3 helpers internal. The canonical Java21 Maven/OpenRewrite naming admission and its synthetic
+fixed-point/refusal proof live only in Synexia. A candidate may enter target code only after a
+distinct source-sealed recipe and the actual target compiler, runtime, JNI/GC and performance gates.
+A naming preflight PASS is not a JDK backend promotion.
+
 Synexia (`hsoliwal/com.synexia`) is the donor-convergence workspace. M3JDK21 owns the delivered
 Java/HotSpot/JNI runtime and target acceptance. Keep reusable Maven/OpenRewrite recipes, fixtures,
 source seals, provenance and convergence receipts in Synexia, then apply qualified recipes to
