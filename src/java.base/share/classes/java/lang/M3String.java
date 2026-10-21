@@ -82,7 +82,51 @@ final class M3String implements CharSequence {
     static M3String range(M3StringOwner owner, int start, int length) {
         if (length == 0) return EMPTY;
         if (start == 0 && length == owner.length) return whole(owner);
-        return new M3String(owner, span(start, length));
+
+        // Validate before tuple arithmetic. The constructor performs this same check for
+        // scalar owners; tuple ranges must be checked before descending or rebuilding.
+        long coordinate = span(start, length);
+        Objects.checkFromIndexSize(start, length, owner.length);
+        if (owner instanceof M3StringTuple tuple) {
+            return sliceTupleRange(tuple, start, length);
+        }
+        return new M3String(owner, coordinate);
+    }
+
+    /**
+     * Creates a structural view of a tuple range. Fully covered tuple owners are reused;
+     * only the cut paths are descended, and a range crossing the child seam is recomposed
+     * through the existing height-balanced tuple factory.
+     */
+    private static M3String sliceTupleRange(M3StringTuple tuple, int start, int length) {
+        int end = start + length;
+        int leftLength = tuple.left.length();
+        if (end <= leftLength) {
+            return sliceChild(tuple.left, start, length);
+        }
+        if (start >= leftLength) {
+            return sliceChild(tuple.right, start - leftLength, length);
+        }
+        int leftCount = leftLength - start;
+        return M3StringPool.concat(
+                sliceChild(tuple.left, start, leftCount),
+                sliceChild(tuple.right, 0, length - leftCount));
+    }
+
+    /**
+     * Clips a logical child range and normalizes partial tuple owners before they can become
+     * children of a newly composed tuple. Scalar ranges remain owner-coordinate views.
+     */
+    private static M3String sliceChild(M3String child, int start, int length) {
+        if (length == 0) return EMPTY;
+        if (start == 0 && length == child.length()) {
+            M3StringOwner childOwner = child.owner();
+            if (!(childOwner instanceof M3StringTuple)
+                    || (child.start() == 0 && child.length() == childOwner.length)) {
+                return child;
+            }
+        }
+        return range(child.owner(), Math.addExact(child.start(), start), length);
     }
 
     static M3String empty() {
