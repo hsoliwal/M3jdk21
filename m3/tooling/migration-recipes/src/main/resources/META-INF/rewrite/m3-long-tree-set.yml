@@ -1,0 +1,16 @@
+# SPDX-License-Identifier: Apache-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.LongTreeSet
+displayName: M3JDK21 M3LongTreeSet proving-ground owner
+description: >-
+  Adds com.m3.collections.M3LongTreeSet, the concrete owner of the existing M3LongSortedSet
+  contract: a sorted primitive-long set of fixed-capacity pages inside flat primitive lanes
+  (values, page maxima, page counts, page slots, free slots) with no per-element node, natural
+  signed-long order, every long legal, O(log n) lookup and navigation, page split/merge
+  compaction and a fail-fast iterator, adapted from the first-party Synexia donors
+  PackedLongSortedSet and PackedLongPagedSortedSet under the LongSortedSet contract, with its
+  differential test against java.util.TreeSet<Long>. Proving ground only (wave 2 of the
+  COLLECTIONS family); no java.util type is replaced.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: m3-long-tree-set
