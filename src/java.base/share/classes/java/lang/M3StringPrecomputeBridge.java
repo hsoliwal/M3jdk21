@@ -51,11 +51,14 @@ final class M3StringPrecomputeBridge {
         boolean leftTuple = leftStorage != null && leftStorage.owner() instanceof M3StringTuple;
         boolean rightTuple = rightStorage != null && rightStorage.owner() instanceof M3StringTuple;
         if (leftTuple || rightTuple) {
+            int firstDifference = left.charAt(0) - right.charAt(0);
+            if (firstDifference != 0) return firstDifference;
+            if (limit == 1) return length1 - length2;
             M3String.CodeUnitCursor leftUnits = leftTuple
                     ? new M3String.CodeUnitCursor(leftStorage) : null;
             M3String.CodeUnitCursor rightUnits = rightTuple
                     ? new M3String.CodeUnitCursor(rightStorage) : null;
-            for (int index = 0; index < limit; index++) {
+            for (int index = 1; index < limit; index++) {
                 char first = leftUnits != null ? leftUnits.at(index) : left.charAt(index);
                 char second = rightUnits != null ? rightUnits.at(index) : right.charAt(index);
                 int difference = first - second;

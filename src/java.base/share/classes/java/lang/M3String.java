@@ -820,9 +820,13 @@ final class M3String implements CharSequence {
         boolean leftTuple = owner instanceof M3StringTuple;
         boolean rightTuple = that != null && that.owner instanceof M3StringTuple;
         if (leftTuple || rightTuple) {
+            int limit = length();
+            if (limit == 0) return true;
+            if (charAt(0) != other.charAt(0)) return false;
+            if (limit == 1) return true;
             CodeUnitCursor leftUnits = leftTuple ? new CodeUnitCursor(this) : null;
             CodeUnitCursor rightUnits = rightTuple ? new CodeUnitCursor(that) : null;
-            for (int index = 0; index < length(); index++) {
+            for (int index = 1; index < limit; index++) {
                 char left = leftUnits != null ? leftUnits.at(index) : charAt(index);
                 char right = rightUnits != null ? rightUnits.at(index) : other.charAt(index);
                 if (left != right) return false;
