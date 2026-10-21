@@ -96,7 +96,7 @@ public final class M3FmtLexiconFrameContract {
   private static byte[] originalBytes() throws IOException {
     java.io.ByteArrayOutputStream expected = new java.io.ByteArrayOutputStream();
     expected.write((SPELLINGS[0] + SPELLINGS[1] + SPELLINGS[3]).getBytes(StandardCharsets.UTF_8));
-    expected.write(new byte[] {(byte) 0xff, (byte) 0xc0, 0, '\\r', '\\n'});
+    expected.write(new byte[] {(byte) 0xff, (byte) 0xc0, 0, '\r', '\n'});
     expected.write((SPELLINGS[1] + SPELLINGS[4] + SPELLINGS[1] + SPELLINGS[5])
         .getBytes(StandardCharsets.UTF_8));
     return expected.toByteArray();
