@@ -595,10 +595,50 @@ final class M3String implements CharSequence {
 
         char at(int index) {
             Objects.checkIndex(index, source.length());
+            resolve(index);
+            return scalar.charAt(scalarOffset + index - logicalBegin);
+        }
+
+        /**
+         * Compare equal-length logical ranges, skipping only intersections backed by the same
+         * immutable scalar owner and exact scalar offset. Different owners or coordinates are
+         * compared through their existing UTF-16 reader; hashes and DAG shape prove nothing.
+         * Both cursors retain their source owners throughout the operation, and no native
+         * address, payload copy or persistent leaf index is created.
+         */
+        int compareRange(CodeUnitCursor other, int sourceIndex, int otherIndex, int length) {
+            Objects.requireNonNull(other, "other");
+            Objects.checkFromIndexSize(sourceIndex, length, source.length());
+            Objects.checkFromIndexSize(otherIndex, length, other.source.length());
+            if (other == this) {
+                if (sourceIndex == otherIndex) return 0;
+                other = new CodeUnitCursor(source);
+            }
+            int end = sourceIndex + length;
+            while (sourceIndex < end) {
+                resolve(sourceIndex);
+                other.resolve(otherIndex);
+                int count = Math.min(end - sourceIndex,
+                        Math.min(logicalEnd - sourceIndex, other.logicalEnd - otherIndex));
+                int leftOffset = scalarOffset + sourceIndex - logicalBegin;
+                int rightOffset = other.scalarOffset + otherIndex - other.logicalBegin;
+                if (scalar != other.scalar || leftOffset != rightOffset) {
+                    for (int index = 0; index < count; index++) {
+                        int difference = scalar.charAt(leftOffset + index)
+                                - other.scalar.charAt(rightOffset + index);
+                        if (difference != 0) return difference;
+                    }
+                }
+                sourceIndex += count;
+                otherIndex += count;
+            }
+            return 0;
+        }
+
+        private void resolve(int index) {
             if (scalar == null || index < logicalBegin || index >= logicalEnd) {
                 seek(index);
             }
-            return scalar.charAt(scalarOffset + index - logicalBegin);
         }
 
         private void seek(int index) {
@@ -757,13 +797,11 @@ final class M3String implements CharSequence {
                 return M3StringImmediate.sameText(owner, that.owner);
             }
             if (that.length() != length()) return false;
-            if (isWholeOwner() && that.isWholeOwner()) {
-                if (owner.javaHash != that.owner.javaHash) return false;
+            if (isWholeOwner()) {
+                if (that.hashKnownToDiffer(owner.javaHash)) return false;
             } else {
                 M3StringFacts leftFacts = factsIfPrepared();
-                M3StringFacts rightFacts = that.factsIfPrepared();
-                if (leftFacts != null && rightFacts != null
-                        && leftFacts.javaHash != rightFacts.javaHash) {
+                if (leftFacts != null && that.hashKnownToDiffer(leftFacts.javaHash)) {
                     return false;
                 }
             }
@@ -775,6 +813,10 @@ final class M3String implements CharSequence {
                         || that != null && that.owner instanceof M3StringTuple)) {
             // Reject a first-unit mismatch before allocating temporary cursors.
             if (charAt(0) != other.charAt(0)) return false;
+            if (that != null) {
+                return new CodeUnitCursor(this).compareRange(
+                        new CodeUnitCursor(that), 1, 1, length() - 1) == 0;
+            }
             CodeUnitCursor leftUnits = owner instanceof M3StringTuple
                     ? new CodeUnitCursor(this) : null;
             CodeUnitCursor rightUnits = that != null && that.owner instanceof M3StringTuple
@@ -1089,18 +1131,8 @@ final class M3String implements CharSequence {
                 && (owner instanceof M3StringTuple
                         || checked.owner instanceof M3StringTuple)) {
             if (charAt(offset) != checked.charAt(0)) return false;
-            CodeUnitCursor sourceUnits = owner instanceof M3StringTuple
-                    ? new CodeUnitCursor(this) : null;
-            CodeUnitCursor prefixUnits = checked.owner instanceof M3StringTuple
-                    ? new CodeUnitCursor(checked) : null;
-            for (int index = 1; index < checked.length(); index++) {
-                char left = sourceUnits == null
-                        ? charAt(offset + index) : sourceUnits.at(offset + index);
-                char right = prefixUnits == null
-                        ? checked.charAt(index) : prefixUnits.at(index);
-                if (left != right) return false;
-            }
-            return true;
+            return new CodeUnitCursor(this).compareRange(
+                    new CodeUnitCursor(checked), offset + 1, 1, checked.length() - 1) == 0;
         }
         for (int index = 0; index < checked.length(); index++) {
             if (charAt(offset + index) != checked.charAt(index)) return false;
