@@ -220,23 +220,13 @@ public final class M3LongSortedSnapshot implements M3LongSortedSet {
     private int lowerBound(long value) {
         int low = from;
         int high = to;
-        while (low < high) {
-            int middle = low + ((high - low) >>> 1);
-            if (values[middle] < value) low = middle + 1;
-            else high = middle;
-        }
-        return low;
+        return M3LaneSearch.lowerBound(values, low, high, value);
     }
 
     private int upperBound(long value) {
         int low = from;
         int high = to;
-        while (low < high) {
-            int middle = low + ((high - low) >>> 1);
-            if (values[middle] <= value) low = middle + 1;
-            else high = middle;
-        }
-        return low;
+        return M3LaneSearch.upperBound(values, low, high, value);
     }
 
     private static UnsupportedOperationException immutable() {
