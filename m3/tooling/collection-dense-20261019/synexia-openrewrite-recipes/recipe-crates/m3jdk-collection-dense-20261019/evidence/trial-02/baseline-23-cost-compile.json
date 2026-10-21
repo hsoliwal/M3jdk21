@@ -1,0 +1,21 @@
+{
+  "command": [
+    "javac",
+    "-J-Xmx256m",
+    "-Xlint:all",
+    "--patch-module",
+    "java.base=/workspace/scratch/48c1329dbda8/m3jdk-collections-20261019/trial-02/baseline/classes:/workspace/scratch/48c1329dbda8/m3jdk-collections-20261019/trial-02/baseline/bench-source",
+    "--add-modules",
+    "java.management,jdk.management",
+    "--add-reads",
+    "java.base=java.management",
+    "--add-reads",
+    "java.base=jdk.management",
+    "-d",
+    "/workspace/scratch/48c1329dbda8/m3jdk-collections-20261019/trial-02/baseline/bench-classes",
+    "/workspace/scratch/48c1329dbda8/m3jdk-collections-20261019/trial-02/baseline/bench-source/java/util/M3CollectionMasksBenchmark.java",
+    "/workspace/scratch/48c1329dbda8/m3jdk-collections-20261019/trial-02/baseline/bench-source/java/util/M3CollectionViewsBenchmark.java"
+  ],
+  "exit": 0,
+  "log_sha256": "2cab796d1d64b77542e3d7a47fa6f4864161891999f470213ae464c95471a99e"
+}

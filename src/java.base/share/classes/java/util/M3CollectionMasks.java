@@ -79,6 +79,9 @@ final class M3CollectionMasks {
                     fromInclusive, toExclusive));
         }
         int[] result = new int[count];
+        if (count == toExclusive - fromInclusive) {
+            return selectedAll(words, fromInclusive, toExclusive, result);
+        }
         int written = 0;
         for (int index = firstWord; index <= lastWord; index++) {
             long word = windowWord(words, index, firstWord, lastWord,
@@ -93,6 +96,25 @@ final class M3CollectionMasks {
         }
         if (written != count) {
             throw changedMask();
+        }
+        return result;
+    }
+
+    /** The full range needs no bit decoding; recheck before consecutive fill. */
+    private static int[] selectedAll(long[] words, int fromInclusive,
+                                     int toExclusive, int[] result) {
+        int firstWord = fromInclusive >>> 6;
+        int lastWord = (toExclusive - 1) >>> 6;
+        int observed = 0;
+        for (int index = firstWord; index <= lastWord; index++) {
+            observed += Long.bitCount(windowWord(words, index, firstWord, lastWord,
+                    fromInclusive, toExclusive));
+        }
+        if (observed != result.length) {
+            throw changedMask();
+        }
+        for (int i = 0; i < result.length; i++) {
+            result[i] = fromInclusive + i;
         }
         return result;
     }

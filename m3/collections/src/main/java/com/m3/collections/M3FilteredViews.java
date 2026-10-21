@@ -236,9 +236,11 @@ public final class M3FilteredViews {
          */
         private boolean nullIsCandidate(E query, boolean forward, boolean inclusive) {
             Comparator<? super E> order = nav.comparator();
-            if (order == null || nav.isEmpty()
-                    || (nav.first() != null && nav.last() != null)) return false;
-            int direction = order.compare(null, query);
+            if (order == null || nav.isEmpty()) return false;
+            // A comparator may place null between non-null members. The actual
+            // directional endpoint proves whether a matching member exists;
+            // do not assume null is an extreme or probe an unsupported null key.
+            int direction = order.compare(forward ? nav.last() : nav.first(), query);
             return forward ? (inclusive ? direction >= 0 : direction > 0)
                     : (inclusive ? direction <= 0 : direction < 0);
         }

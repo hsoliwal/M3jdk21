@@ -135,6 +135,46 @@ Java_java_util_M3CollectionMasks_selected0(JNIEnv *env, jclass type,
         }
         return NULL;
     }
+    if (count == to - from) {
+        jint observed = 0;
+        /* A fully selected range has one exact consecutive answer. Re-read
+         * all bounded word chunks before filling to retain drift detection. */
+        for (block = first_word; block <= last_word;) {
+            jint remaining = last_word - block + 1;
+            jsize length = remaining < M3_MASK_WORD_CHUNK
+                    ? remaining : M3_MASK_WORD_CHUNK;
+            jint offset;
+            (*env)->GetLongArrayRegion(env, words, block, length, input);
+            if ((*env)->ExceptionCheck(env)) {
+                return NULL;
+            }
+            for (offset = 0; offset < length; offset++) {
+                observed += m3_mask_population(m3_mask_window(input[offset],
+                        block + offset, first_word, last_word, from, to));
+            }
+            block += length;
+        }
+        if (observed != count) {
+            m3_mask_throw(env, "java/util/ConcurrentModificationException",
+                    "selection mask changed during extraction");
+            return NULL;
+        }
+        while (written < count) {
+            jint remaining = count - written;
+            jsize length = remaining < M3_MASK_INDEX_CHUNK
+                    ? remaining : M3_MASK_INDEX_CHUNK;
+            jint offset;
+            for (offset = 0; offset < length; offset++) {
+                output[offset] = from + written + offset;
+            }
+            (*env)->SetIntArrayRegion(env, result, written, length, output);
+            if ((*env)->ExceptionCheck(env)) {
+                return NULL;
+            }
+            written += length;
+        }
+        return result;
+    }
     for (block = first_word; block <= last_word;) {
         jint remaining = last_word - block + 1;
         jsize length = remaining < M3_MASK_WORD_CHUNK

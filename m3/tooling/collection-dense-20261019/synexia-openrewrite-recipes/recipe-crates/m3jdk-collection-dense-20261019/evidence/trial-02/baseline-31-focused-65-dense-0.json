@@ -1,0 +1,27 @@
+{
+  "command": [
+    "taskset",
+    "-c",
+    "0",
+    "java",
+    "-Xms256m",
+    "-Xmx256m",
+    "--add-modules",
+    "java.management,jdk.management",
+    "--add-reads",
+    "java.base=java.management",
+    "--add-reads",
+    "java.base=jdk.management",
+    "--patch-module",
+    "java.base=/workspace/scratch/48c1329dbda8/m3jdk-collections-20261019/trial-02/baseline/classes:/workspace/scratch/48c1329dbda8/m3jdk-collections-20261019/trial-02/baseline/bench-classes",
+    "-Dm3.bench.size=65",
+    "-Dm3.bench.density=dense",
+    "java.util.M3CollectionViewsBenchmark",
+    "integrated"
+  ],
+  "exit": 0,
+  "log_sha256": "94f3e0bff05a2bd12a6df8871d9e9e1f180f224ef74a7c5473e2fda262602d2e",
+  "max_rss_kib": 115112,
+  "user_seconds": 0.883774,
+  "system_seconds": 0.074041
+}
