@@ -22,6 +22,29 @@ static jlong m3_window_invalid(JNIEnv *env, const char *message) {
     return (jlong) -1;
 }
 
+/* Pure selection atom over caller-owned scratch, shared by both JNI entry points.
+ * Preconditions: 0 <= take <= M3_MASK_WINDOW_CHUNK, remaining > 0, valid
+ * unsigned-byte masks. Offsets are stable source ordinals, not row values.
+ * No JNI calls, allocation, retained state, or payload mutation occur here.
+ * Preserve the incumbent two-condition predicate: its fused native alternative
+ * was rejected by the recorded resource gate. */
+static jint m3_window_select_offsets(const jbyte *marks, jint take,
+        jint required, jint excluded, jint remaining, unsigned char *offsets,
+        jint *consumed_out) {
+    jint matches = 0;
+    jint consumed = 0;
+    while (consumed < take && matches < remaining) {
+        unsigned int flags = (unsigned int) (unsigned char) marks[consumed];
+        if ((flags & (unsigned int) required) == (unsigned int) required
+                && (flags & (unsigned int) excluded) == 0U) {
+            offsets[matches++] = (unsigned char) consumed;
+        }
+        consumed++;
+    }
+    *consumed_out = consumed;
+    return matches;
+}
+
 /* Reuse #1131's sparse JNI scan atom for legacy and bounded source windows. */
 static jlong m3_window_scan_range(JNIEnv *env, jintArray rows, jbyteArray states,
         jint first, jint end, jboolean full_source, jint required, jint excluded,
@@ -79,17 +102,9 @@ static jlong m3_window_scan_range(JNIEnv *env, jintArray rows, jbyteArray states
         /* One state pass records relative ordinals, stopping when the output fills.
          * Only the enclosing admitted row span crosses JNI. Offsets fit in one byte
          * because the fixed chunk is 128; no retained index or native heap is added. */
-        jint matches = 0;
-        jint consumed = 0;
-        jint remaining = limit - written;
-        while (consumed < take && matches < remaining) {
-            unsigned int flags = (unsigned int) (unsigned char) marks[consumed];
-            if ((flags & (unsigned int) required) == (unsigned int) required
-                    && (flags & (unsigned int) excluded) == 0U) {
-                offsets[matches++] = (unsigned char) consumed;
-            }
-            consumed++;
-        }
+        jint consumed;
+        jint matches = m3_window_select_offsets(marks, take, required, excluded,
+                limit - written, offsets, &consumed);
         if (matches != 0) {
             jint first_match = offsets[0];
             jint span = (jint) offsets[matches - 1] - first_match + 1;

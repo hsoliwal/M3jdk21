@@ -174,11 +174,15 @@ public final class M3IndexMaskWindow {
     /** Single primitive scan atom used by the legacy and bounded Java paths. */
     private static long scanRangeJava(int[] rows, byte[] states, int first, int end,
             int required, int excluded, int[] output, int outputOffset, int limit) {
+        // Compile the two unsigned-byte conditions once per window. The impossible
+        // value -1 preserves contradictory masks even for package-local scanJava calls.
+        final int testedMask = required | excluded;
+        final int expected = (required & excluded) == 0 ? required : -1;
         int next = first;
         int copied = 0;
         while (next < end && copied < limit) {
             int flags = states[next] & 0xff;
-            if ((flags & required) == required && (flags & excluded) == 0) {
+            if ((flags & testedMask) == expected) {
                 output[outputOffset + copied++] = rows[next];
             }
             next++;
