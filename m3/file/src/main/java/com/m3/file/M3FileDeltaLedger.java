@@ -1,5 +1,6 @@
 // SPDX-FileCopyrightText: 2026 Hitesh Soliwal and contributors
 // SPDX-License-Identifier: Apache-2.0
+// Modified 2026-10-21 by the Synexia m3-project-delta recipe: timestamp columns and version-1 migration.
 package com.m3.file;
 
 import java.io.DataInputStream;
@@ -8,19 +9,18 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
-import java.nio.channels.SeekableByteChannel;
 import java.nio.file.AtomicMoveNotSupportedException;
 import java.nio.file.Files;
 import java.nio.file.LinkOption;
-import java.nio.file.NoSuchFileException;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
 import java.nio.file.StandardOpenOption;
-import java.nio.file.attribute.BasicFileAttributes;
+import java.nio.file.attribute.FileTime;
 import java.security.DigestInputStream;
 import java.security.DigestOutputStream;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.time.Instant;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Objects;
@@ -39,7 +39,8 @@ public final class M3FileDeltaLedger {
     public static final long REMOVED = 1L << 3;
     public static final long DELTA = CREATED | MODIFIED | REMOVED;
     private static final int MAGIC = 0x4d33444c; // M3DL
-    private static final int VERSION = 1;
+    private static final int VERSION = 2;
+    private static final int UNKNOWN_NANOS = -1;
     private static final int HASH_BYTES = 32;
     private static final int MAX_SLOTS = 1_000_000;
     private static final Kind[] KINDS = Kind.values();
@@ -54,16 +55,21 @@ public final class M3FileDeltaLedger {
         private final String[] paths;
         private final byte[] kinds;
         private final long[] sizes;
+        private final long[] modifiedSeconds;
+        private final int[] modifiedNanos;
         private final long[] state;
         private final byte[] hashes;
         private final int[] slotsByPath;
 
         private Snapshot(Path root, String[] paths, byte[] kinds, long[] sizes,
+                         long[] modifiedSeconds, int[] modifiedNanos,
                          long[] state, byte[] hashes, int[] slotsByPath) {
             this.root = root;
             this.paths = paths;
             this.kinds = kinds;
             this.sizes = sizes;
+            this.modifiedSeconds = modifiedSeconds;
+            this.modifiedNanos = modifiedNanos;
             this.state = state;
             this.hashes = hashes;
             this.slotsByPath = slotsByPath;
@@ -78,6 +84,16 @@ public final class M3FileDeltaLedger {
             return slotsByPath[at] - 1;
         }
         public long sizeAt(int slot) { return sizes[checked(slot)]; }
+        /** Version-1 images have unknown timestamps until their next observation. */
+        public boolean hasLastModifiedAt(int slot) { return modifiedNanos[checked(slot)] != UNKNOWN_NANOS; }
+        /** Last observed timestamp, retained for tombstones; unknown legacy metadata is never fabricated. */
+        public FileTime lastModifiedAt(int slot) {
+            int at = checked(slot);
+            if (modifiedNanos[at] == UNKNOWN_NANOS) {
+                throw new IllegalStateException("M3File timestamp was not recorded in the loaded generation");
+            }
+            return FileTime.from(Instant.ofEpochSecond(modifiedSeconds[at], modifiedNanos[at]));
+        }
         public long stateAt(int slot) { return state[checked(slot)]; }
         public boolean changedAt(int slot) { return (stateAt(slot) & DELTA) != 0; }
         public boolean liveAt(int slot) { return (stateAt(slot) & LIVE) != 0; }
@@ -111,6 +127,17 @@ public final class M3FileDeltaLedger {
      */
     public static Snapshot scan(Path directory, Snapshot old, Collection<Path> tracked)
             throws IOException {
+        return scan(directory, old, tracked, false);
+    }
+
+    /**
+     * Scan the same complete input set, optionally treating a known timestamp
+     * change as MODIFIED even when the content is equal. A previously unknown
+     * version-1 timestamp becoming known is not a change. Content is always
+     * hashed; this policy introduces no metadata shortcut or extra file reads.
+     */
+    public static Snapshot scan(Path directory, Snapshot old, Collection<Path> tracked,
+            boolean includeTimestampChanges) throws IOException {
         Path root = checkedRoot(directory);
         Objects.requireNonNull(tracked, "tracked");
         if (old != null && !old.root.equals(root)) {
@@ -123,6 +150,9 @@ public final class M3FileDeltaLedger {
         String[] paths = old == null ? new String[capacity] : Arrays.copyOf(old.paths, capacity);
         byte[] kinds = old == null ? new byte[capacity] : Arrays.copyOf(old.kinds, capacity);
         long[] sizes = old == null ? new long[capacity] : Arrays.copyOf(old.sizes, capacity);
+        long[] modifiedSeconds = old == null ? new long[capacity] : Arrays.copyOf(old.modifiedSeconds, capacity);
+        int[] modifiedNanos = old == null ? new int[capacity] : Arrays.copyOf(old.modifiedNanos, capacity);
+        Arrays.fill(modifiedNanos, original, capacity, UNKNOWN_NANOS);
         long[] states = new long[capacity];
         byte[] hashes = old == null ? new byte[Math.multiplyExact(capacity, HASH_BYTES)]
                 : Arrays.copyOf(old.hashes, Math.multiplyExact(capacity, HASH_BYTES));
@@ -132,13 +162,18 @@ public final class M3FileDeltaLedger {
             if ((old.state[i] & LIVE) != 0) states[i] = REMOVED;
         }
         int used = original;
-        ByteBuffer scratch = supplied.isEmpty() ? null : ByteBuffer.allocate(64 * 1024);
+        byte[] scratch = supplied.isEmpty() ? null : new byte[64 * 1024];
         for (String key : supplied) {
             int bucket = bucket(key, paths, lookup);
             int slot = lookup[bucket] - 1;
             Path target = root.resolve(key);
-            Fingerprint actual = fingerprint(root, target, scratch);
-            if (actual == null) continue;
+            M3File.Observation observed = observe(root, target, scratch);
+            if (observed == null) continue;
+            M3File.Fingerprint actual = observed.fingerprint();
+            Instant modified = observed.lastModified().toInstant();
+            if (!FileTime.from(modified).equals(observed.lastModified())) {
+                throw new IOException("M3File timestamp exceeds the persistent Instant range");
+            }
             if (slot < 0 && used == capacity) {
                 throw new IOException("M3File delta slot limit exceeded");
             }
@@ -149,16 +184,23 @@ public final class M3FileDeltaLedger {
             }
             byte kind = (byte) kindOf(key).ordinal();
             boolean matched = slot >= 0 && (old.state[at] & LIVE) != 0
-                    && old.kinds[at] == kind && old.sizes[at] == actual.size
-                    && hashEquals(old.hashes, at * HASH_BYTES, actual.hash);
+                    && old.kinds[at] == kind && old.sizes[at] == actual.size()
+                    && hashEquals(old.hashes, at * HASH_BYTES, actual);
+            boolean timestampChanged = includeTimestampChanges && slot >= 0
+                    && old.modifiedNanos[at] != UNKNOWN_NANOS
+                    && (old.modifiedSeconds[at] != modified.getEpochSecond()
+                            || old.modifiedNanos[at] != modified.getNano());
             kinds[at] = kind;
-            sizes[at] = actual.size;
-            System.arraycopy(actual.hash, 0, hashes, at * HASH_BYTES, HASH_BYTES);
-            states[at] = LIVE | (matched ? 0 : slot < 0 || (old.state[at] & LIVE) == 0
+            sizes[at] = actual.size();
+            modifiedSeconds[at] = modified.getEpochSecond();
+            modifiedNanos[at] = modified.getNano();
+            putHash(hashes, at * HASH_BYTES, actual);
+            states[at] = LIVE | (matched && !timestampChanged ? 0 : slot < 0 || (old.state[at] & LIVE) == 0
                     ? CREATED : MODIFIED);
         }
         return new Snapshot(root, Arrays.copyOf(paths, used), Arrays.copyOf(kinds, used),
-                Arrays.copyOf(sizes, used), Arrays.copyOf(states, used),
+                Arrays.copyOf(sizes, used), Arrays.copyOf(modifiedSeconds, used),
+                Arrays.copyOf(modifiedNanos, used), Arrays.copyOf(states, used),
                 Arrays.copyOf(hashes, Math.multiplyExact(used, HASH_BYTES)), lookup);
     }
 
@@ -193,6 +235,8 @@ public final class M3FileDeltaLedger {
                     out.writeUTF(snapshot.paths[i]);
                     out.writeByte(snapshot.kinds[i]);
                     out.writeLong(snapshot.sizes[i]);
+                    out.writeLong(snapshot.modifiedSeconds[i]);
+                    out.writeInt(snapshot.modifiedNanos[i]);
                     out.writeLong(snapshot.state[i] & LIVE);
                     out.write(snapshot.hashes, i * HASH_BYTES, HASH_BYTES);
                 }
@@ -214,14 +258,18 @@ public final class M3FileDeltaLedger {
         }
     }
 
-    /** Verify format, exact input root, and complete SHA-256 seal before reuse. */
+    /** Verify version 1 or 2, exact input root, and complete SHA-256 seal before reuse. */
     public static Snapshot load(Path image, Path expectedDirectory) throws IOException {
         Path expectedRoot = checkedRoot(expectedDirectory);
         MessageDigest digest = sha();
         try (InputStream source = Files.newInputStream(image);
              DigestInputStream signed = new DigestInputStream(source, digest);
              DataInputStream in = new DataInputStream(signed)) {
-            if (in.readInt() != MAGIC || in.readInt() != VERSION) {
+            if (in.readInt() != MAGIC) {
+                throw new IOException("unknown M3File delta image format");
+            }
+            int version = in.readInt();
+            if (version != 1 && version != VERSION) {
                 throw new IOException("unknown M3File delta image format");
             }
             Path root = Path.of(in.readUTF()).toAbsolutePath().normalize();
@@ -231,6 +279,9 @@ public final class M3FileDeltaLedger {
             String[] paths = new String[count];
             byte[] kinds = new byte[count];
             long[] sizes = new long[count];
+            long[] modifiedSeconds = new long[count];
+            int[] modifiedNanos = new int[count];
+            Arrays.fill(modifiedNanos, UNKNOWN_NANOS);
             long[] states = new long[count];
             byte[] hashes = new byte[Math.multiplyExact(count, HASH_BYTES)];
             int[] lookup = newTable(count);
@@ -250,6 +301,13 @@ public final class M3FileDeltaLedger {
                 }
                 kinds[i] = kind;
                 sizes[i] = in.readLong();
+                if (version >= 2) {
+                    modifiedSeconds[i] = in.readLong();
+                    modifiedNanos[i] = in.readInt();
+                    if (!validTimestamp(modifiedSeconds[i], modifiedNanos[i])) {
+                        throw new IOException("invalid M3File delta timestamp");
+                    }
+                }
                 states[i] = in.readLong();
                 if (sizes[i] < 0 || (states[i] & ~LIVE) != 0) {
                     throw new IOException("invalid M3File delta row");
@@ -262,16 +320,26 @@ public final class M3FileDeltaLedger {
             if (in.read() != -1 || !MessageDigest.isEqual(seal, digest.digest())) {
                 throw new IOException("M3File delta image checksum mismatch");
             }
-            return new Snapshot(root, paths, kinds, sizes, states, hashes, lookup);
+            return new Snapshot(root, paths, kinds, sizes, modifiedSeconds, modifiedNanos, states, hashes, lookup);
         }
     }
 
     /** Compare the fixed 32-byte digest in its parent array without a temporary row copy. */
-    private static boolean hashEquals(byte[] lane, int offset, byte[] candidate) {
-        for (int i = 0; i < HASH_BYTES; i++) {
-            if (lane[offset + i] != candidate[i]) return false;
-        }
-        return true;
+    private static boolean hashEquals(byte[] lane, int offset, M3File.Fingerprint candidate) {
+        ByteBuffer view = ByteBuffer.wrap(lane, offset, HASH_BYTES);
+        return view.getLong() == candidate.digest0() && view.getLong() == candidate.digest1()
+                && view.getLong() == candidate.digest2() && view.getLong() == candidate.digest3();
+    }
+
+    private static void putHash(byte[] lane, int offset, M3File.Fingerprint content) {
+        ByteBuffer.wrap(lane, offset, HASH_BYTES).putLong(content.digest0()).putLong(content.digest1())
+                .putLong(content.digest2()).putLong(content.digest3());
+    }
+
+    private static boolean validTimestamp(long seconds, int nanos) {
+        if (nanos == UNKNOWN_NANOS) return seconds == 0;
+        return nanos >= 0 && nanos < 1_000_000_000
+                && seconds >= Instant.MIN.getEpochSecond() && seconds <= Instant.MAX.getEpochSecond();
     }
 
     /** Open addressing over original physical row indexes; no per-file retained Entry nodes. */
@@ -290,47 +358,13 @@ public final class M3FileDeltaLedger {
         return at;
     }
 
-    private record Fingerprint(long size, byte[] hash) {}
-
-    private static Fingerprint fingerprint(Path root, Path file, ByteBuffer buffer) throws IOException {
+    private static M3File.Observation observe(Path root, Path file, byte[] scratch) throws IOException {
         Path cursor = root;
         for (Path element : root.relativize(file)) {
             cursor = cursor.resolve(element);
             if (Files.isSymbolicLink(cursor)) throw new IOException("symlink in tracked M3File path");
         }
-        BasicFileAttributes before;
-        try {
-            before = Files.readAttributes(file, BasicFileAttributes.class, LinkOption.NOFOLLOW_LINKS);
-        } catch (NoSuchFileException missing) {
-            return null;
-        }
-        if (!before.isRegularFile()) throw new IOException("tracked input is not a regular file");
-        MessageDigest digest = sha();
-        long total = 0;
-        buffer.clear();
-        int consecutiveZeroReads = 0;
-        try (SeekableByteChannel channel = M3File.of(file).openReadChannel()) {
-            while (true) {
-                int read = channel.read(buffer);
-                if (read < 0) break;
-                if (read == 0) {
-                    if (++consecutiveZeroReads > 16) throw new IOException("M3File read made no progress");
-                    continue;
-                }
-                consecutiveZeroReads = 0;
-                total = Math.addExact(total, read);
-                digest.update(buffer.flip());
-                buffer.clear();
-            }
-        }
-        BasicFileAttributes after = Files.readAttributes(
-                file, BasicFileAttributes.class, LinkOption.NOFOLLOW_LINKS);
-        if (!after.isRegularFile() || before.size() != total || after.size() != total
-                || !before.lastModifiedTime().equals(after.lastModifiedTime())
-                || !Objects.equals(before.fileKey(), after.fileKey())) {
-            throw new IOException("tracked M3File changed while being hashed");
-        }
-        return new Fingerprint(total, digest.digest());
+        return M3File.of(file).observeIfExists(scratch);
     }
 
     private static Path checkedRoot(Path directory) throws IOException {

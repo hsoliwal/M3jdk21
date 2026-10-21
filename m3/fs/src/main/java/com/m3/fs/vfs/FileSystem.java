@@ -20,6 +20,9 @@
 package com.m3.fs.vfs;
 
 import java.io.File;
+import java.util.Objects;
+
+import com.m3.fs.M3FsBulk;
 
 /**
  * A file system, made up of a hierarchy of files.
@@ -193,4 +196,44 @@ public interface FileSystem {
      * @see FileContent#setAttribute
      */
     void setAttribute(String attrName, Object value) throws FileSystemException;
+
+    /**
+     * Executes a columnar M3FS operation packet in this filesystem's namespace.
+     * The generic fallback is ordered, nontransactional and best-effort; a
+     * provider can override this default to execute native/SQL/protocol bulk.
+     * Atomic requests are rejected by the fallback before any provider I/O.
+     */
+    default M3FsBulk.Result executeM3Batch(M3FsBulk.Batch batch) {
+        return M3FsBulk.fallback(this, Objects.requireNonNull(batch, "batch"));
+    }
+
+    /** Reads existence/type metadata for all paths, preserving positional results. */
+    default M3FsBulk.Result statAll(String... paths) {
+        Objects.requireNonNull(paths, "paths");
+        M3FsBulk.Builder batch = M3FsBulk.builder(paths.length);
+        for (String path : paths) {
+            batch.stat(path);
+        }
+        return executeM3Batch(batch.build());
+    }
+
+    /** Creates directories sequentially with provider-specific existing-directory semantics. */
+    default M3FsBulk.Result createFolders(String... paths) {
+        Objects.requireNonNull(paths, "paths");
+        M3FsBulk.Builder batch = M3FsBulk.builder(paths.length);
+        for (String path : paths) {
+            batch.mkdir(path);
+        }
+        return executeM3Batch(batch.build());
+    }
+
+    /** Deletes selected entries without recursive deletion; see explicit DELETE_TREE. */
+    default M3FsBulk.Result deletePaths(String... paths) {
+        Objects.requireNonNull(paths, "paths");
+        M3FsBulk.Builder batch = M3FsBulk.builder(paths.length);
+        for (String path : paths) {
+            batch.delete(path);
+        }
+        return executeM3Batch(batch.build());
+    }
 }

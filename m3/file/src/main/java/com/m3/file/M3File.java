@@ -1,5 +1,6 @@
 // SPDX-FileCopyrightText: 2026 Hitesh Soliwal and contributors
 // SPDX-License-Identifier: Apache-2.0
+// Modified 2026-10-21 by the Synexia m3-project-delta recipe: checked timestamp observations.
 package com.m3.file;
 
 import java.io.IOException;
@@ -9,6 +10,7 @@ import java.nio.channels.Channels;
 import java.nio.channels.SeekableByteChannel;
 import java.nio.file.Files;
 import java.nio.file.LinkOption;
+import java.nio.file.NoSuchFileException;
 import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
 import java.nio.file.attribute.BasicFileAttributes;
@@ -121,9 +123,37 @@ public final class M3File {
      *         exceeded, or a concurrent change is detected; errors never mean absence
      */
     public Fingerprint fingerprint(long maxBytes) throws IOException {
+        return observe(maxBytes).fingerprint();
+    }
+
+    /**
+     * Observe content and its checked modification time in the same bounded read.
+     * The timestamp is metadata, not part of {@link Fingerprint} equality or
+     * {@link #contentDelta(Fingerprint, Fingerprint)}. Concurrent-change and byte
+     * limit checks are identical to {@link #fingerprint(long)}; this is not an
+     * atomic filesystem snapshot. Errors never produce an absent observation.
+     */
+    public Observation observe(long maxBytes) throws IOException {
+        return observe(maxBytes, new byte[8192], false);
+    }
+
+    /** Ledger-only admission: only absence at the first metadata read returns null. */
+    Observation observeIfExists(byte[] scratch) throws IOException {
+        return observe(Long.MAX_VALUE, scratch, true);
+    }
+
+    private Observation observe(long maxBytes, byte[] buffer, boolean initialAbsenceAllowed)
+            throws IOException {
         if (maxBytes < 0) throw new IllegalArgumentException("negative maxBytes");
-        BasicFileAttributes before = Files.readAttributes(
-                path, BasicFileAttributes.class, LinkOption.NOFOLLOW_LINKS);
+        Objects.requireNonNull(buffer, "scratch");
+        if (buffer.length == 0) throw new IllegalArgumentException("empty scratch buffer");
+        BasicFileAttributes before;
+        try {
+            before = Files.readAttributes(path, BasicFileAttributes.class, LinkOption.NOFOLLOW_LINKS);
+        } catch (NoSuchFileException missing) {
+            if (initialAbsenceAllowed) return null;
+            throw missing;
+        }
         if (!before.isRegularFile()) throw new IOException("resource is not a regular file");
         if (before.size() > maxBytes) {
             throw new IOException("resource exceeds configured read limit");
@@ -135,23 +165,20 @@ public final class M3File {
             throw new AssertionError("required SHA-256 provider unavailable", impossible);
         }
         long count = 0;
-        try (InputStream input = openInputStream()) {
-            byte[] buffer = new byte[8192];
+        ByteBuffer scratch = ByteBuffer.wrap(buffer);
+        try (SeekableByteChannel channel = openReadChannel()) {
             while (count < maxBytes) {
-                int read = input.read(buffer, 0, (int) Math.min(buffer.length, maxBytes - count));
+                scratch.clear().limit((int) Math.min(buffer.length, maxBytes - count));
+                int read = readProgressing(channel, scratch);
                 if (read < 0) break;
-                if (read == 0) {
-                    int single = input.read();
-                    if (single < 0) break;
-                    digest.update((byte) single);
-                    count++;
-                } else {
-                    digest.update(buffer, 0, read);
-                    count += read;
-                }
+                digest.update(buffer, 0, read);
+                count += read;
             }
-            if (count == maxBytes && input.read() != -1) {
-                throw new IOException("resource exceeds configured read limit");
+            if (count == maxBytes) {
+                scratch.clear().limit(1);
+                if (readProgressing(channel, scratch) >= 0) {
+                    throw new IOException("resource exceeds configured read limit");
+                }
             }
         }
         BasicFileAttributes after = Files.readAttributes(
@@ -162,7 +189,17 @@ public final class M3File {
             throw new IOException("resource changed during fingerprint observation");
         }
         ByteBuffer hash = ByteBuffer.wrap(digest.digest());
-        return new Fingerprint(count, hash.getLong(), hash.getLong(), hash.getLong(), hash.getLong());
+        Fingerprint content = new Fingerprint(count, hash.getLong(), hash.getLong(), hash.getLong(), hash.getLong());
+        return new Observation(content, after.lastModifiedTime());
+    }
+
+    /** A stalled provider must fail rather than hang a ledger scan or invent a zero byte. */
+    private static int readProgressing(SeekableByteChannel channel, ByteBuffer scratch) throws IOException {
+        for (int attempt = 0; attempt <= 16; attempt++) {
+            int read = channel.read(scratch);
+            if (read != 0) return read;
+        }
+        throw new IOException("M3File read made no progress");
     }
 
     /**
@@ -189,6 +226,14 @@ public final class M3File {
     public record Fingerprint(long size, long digest0, long digest1, long digest2, long digest3) {
         public Fingerprint {
             if (size < 0) throw new IllegalArgumentException("negative fingerprint size");
+        }
+    }
+
+    /** Immutable content plus checked metadata; timestamp equality does not certify unchanged bytes. */
+    public record Observation(Fingerprint fingerprint, FileTime lastModified) {
+        public Observation {
+            Objects.requireNonNull(fingerprint, "fingerprint");
+            Objects.requireNonNull(lastModified, "lastModified");
         }
     }
 

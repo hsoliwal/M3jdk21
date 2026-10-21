@@ -27,6 +27,8 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Objects;
+
+import com.m3.fs.M3FsBulk;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -58,6 +60,23 @@ import com.m3.fs.vfs.util.Messages;
  * A partial {@link com.m3.fs.vfs.FileSystem} implementation.
  */
 public abstract class AbstractFileSystem extends AbstractVfsComponent implements FileSystem {
+
+    /**
+     * M3FS batch template; override the protected hook in a native/DB/remote
+     * provider to coalesce requests. Never claim atomicity on the fallback.
+     */
+    @Override
+    public M3FsBulk.Result executeM3Batch(final M3FsBulk.Batch batch) {
+        return doExecuteM3Batch(Objects.requireNonNull(batch, "batch"));
+    }
+
+    /**
+     * Provider-specific bulk hook. DBFS may dispatch indexed SQL statements in
+     * a transaction; the default preserves ordered per-entry VFS semantics.
+     */
+    protected M3FsBulk.Result doExecuteM3Batch(final M3FsBulk.Batch batch) {
+        return FileSystem.super.executeM3Batch(batch);
+    }
 
     private static final FileListener[] EMPTY_FILE_LISTENER_ARRAY = {};
 

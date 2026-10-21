@@ -2,6 +2,8 @@
 // SPDX-License-Identifier: Apache-2.0
 package com.m3.fs;
 
+// Modified 2026-10-21: preserve explicit legacy timestamp knowledge and v1 byte round trips.
+
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
@@ -72,6 +74,9 @@ public final class M3BuildStateContract {
         check(decoded.dependency(2, 0) == 1 && decoded.dependency(1, 0) == 0, "edge identity");
         check(decoded.find("b/B.class", M3BuildState.CLASS) == 1 && decoded.find("absent", M3BuildState.CLASS) == -1, "binary search");
         check(decoded.hasAbi(0) && !decoded.hasAbi(1), "ABI bitmap");
+        check(java.nio.ByteBuffer.wrap(encoded).getInt(4) == 1, "legacy constructor preserves v1 schema");
+        check(!decoded.completeInventory() && decoded.modifiedTimeNanos(0).isEmpty(), "v1 timestamp remains unknown");
+        check(!decoded.hasModifiedTime(1), "unknown timestamp is not epoch zero");
         check(decoded.changedFrom(decoded).affectedCount() == 0L, "unchanged exact state");
         M3BuildState changed = sample("new body", "sameABI", "ctx");
         M3BuildState.Plan plan = changed.changedFrom(baseline);

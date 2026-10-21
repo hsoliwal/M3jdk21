@@ -1,6 +1,8 @@
 // SPDX-License-Identifier: Apache-2.0
 package com.m3.file;
 
+// Modified 2026-10-21: Make the existing public constructor explicit for strict lint compilation.
+
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.*;
@@ -12,6 +14,8 @@ import java.util.concurrent.atomic.AtomicLong;
 
 /** Original provider stream, shadow gating, progress, and zero read-ahead. */
 public final class M3FileStreamsContract {
+    /** Preserves the previously implicit public constructor. */
+    public M3FileStreamsContract() { }
     private static long checks;
     private static void check(boolean b, String why) {checks++; if (!b) throw new AssertionError(why);}
     private static void fail(Class<? extends Throwable> type, Task task) throws Exception {

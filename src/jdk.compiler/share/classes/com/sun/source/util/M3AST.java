@@ -10,6 +10,11 @@
  */
 package com.sun.source.util;
 
+/*
+ * Modified 2026-10-21 by Synexia (Hitesh Soliwal and contributors): added
+ * immutable, explicitly partial build facts from the original M3AST event.
+ */
+
 import com.sun.source.tree.CompilationUnitTree;
 import com.sun.tools.javac.m3.M3ASTPC;
 import java.io.IOException;
@@ -73,6 +78,20 @@ public interface M3AST extends AutoCloseable {
         return M3ASTPC.isPluginSelected(task);
     }
 
+    /**
+     * Project partial build facts from this original ANALYZED event. Consumers
+     * share one result by using this entry point; no parsing, attribution or
+     * source reread is performed. The result never certifies a complete build
+     * dependency graph or authorizes skipping a compiler or plugin execution.
+     *
+     * @throws IllegalStateException if the unit is not a live ANALYZED event
+     * @throws IllegalArgumentException if the unit is not owned by this compiler
+     * @throws Exception if the event projection cannot be captured
+     */
+    static BuildFacts buildFacts(Unit unit) throws Exception {
+        return M3ASTPC.buildFacts(Objects.requireNonNull(unit, "unit"));
+    }
+
     /** Register a consumer once, by object identity, before the first event. */
     void addConsumer(Consumer consumer);
 
@@ -122,6 +141,60 @@ public interface M3AST extends AutoCloseable {
             Objects.requireNonNull(uri, "uri");
             Objects.requireNonNull(text, "text");
             Objects.requireNonNull(utf16Sha256, "utf16Sha256");
+        }
+    }
+
+    /**
+     * Detached facts for one analyzed top-level type and its visited nested,
+     * local and anonymous declarations. Names use JVM binary-name spelling.
+     * Resolved member and constant uses include the declaring type even when
+     * javac can inline the value into bytecode. Same-event declared names are
+     * omitted from referenced names. Both name lanes are sorted and unique.
+     *
+     * <p>The source seal is the original parser's exact UTF-16 generation, not
+     * a filesystem byte hash or a portable semantic-context key. These facts
+     * omit negative/wildcard lookup dependencies, processor inputs, output
+     * ownership and plugin effects. They describe an analysis event, including
+     * a possible failed compilation, rather than its successful publication.
+     * Other top-level types in the source have separate analysis events.
+     */
+    record BuildFacts(URI sourceUri, int sourceLength, String sourceUtf16Sha256,
+                      String analyzedBinaryName, String[] declaredBinaryNames,
+                      String[] referencedBinaryNames, boolean hasUnresolvedSymbols) {
+        public static final String SCHEMA = "M3AST_BUILD_FACTS_V1";
+
+        public BuildFacts {
+            Objects.requireNonNull(sourceUri, "sourceUri");
+            Objects.requireNonNull(sourceUtf16Sha256, "sourceUtf16Sha256");
+            Objects.requireNonNull(analyzedBinaryName, "analyzedBinaryName");
+            if (sourceLength < 0 || sourceUtf16Sha256.length() != 64
+                    || analyzedBinaryName.isEmpty())
+                throw new IllegalArgumentException("invalid build fact source identity");
+            for (int i = 0; i < sourceUtf16Sha256.length(); i++) {
+                char c = sourceUtf16Sha256.charAt(i);
+                if (!(c >= '0' && c <= '9') && !(c >= 'a' && c <= 'f'))
+                    throw new IllegalArgumentException("invalid build fact source digest");
+            }
+            declaredBinaryNames = names(declaredBinaryNames);
+            referencedBinaryNames = names(referencedBinaryNames);
+        }
+
+        @Override public String[] declaredBinaryNames() { return declaredBinaryNames.clone(); }
+        @Override public String[] referencedBinaryNames() { return referencedBinaryNames.clone(); }
+
+        /** This event projection deliberately cannot certify complete dependency coverage. */
+        public boolean completeDependencyGraph() { return false; }
+
+        private static String[] names(String[] input) {
+            String[] values = Objects.requireNonNull(input, "binary names").clone();
+            String previous = null;
+            for (String value : values) {
+                if (value == null || value.isEmpty()
+                        || (previous != null && previous.compareTo(value) >= 0))
+                    throw new IllegalArgumentException("noncanonical build fact names");
+                previous = value;
+            }
+            return values;
         }
     }
 

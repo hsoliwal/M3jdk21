@@ -2,6 +2,8 @@
 // SPDX-License-Identifier: Apache-2.0
 package com.m3.fs;
 
+// Modified 2026-10-21: separate observed and successful checkpoints using existing native atomic publication.
+
 import java.io.IOException;
 import java.nio.channels.FileChannel;
 import java.nio.channels.FileLock;
@@ -43,18 +45,23 @@ public final class M3BuildStateStore {
 
     /** Empty if no build state has ever been published. Never repairs corrupt state silently. */
     public static Optional<Version> read(M3FS fs, int maxBytes, int maxRows, int maxEdges) throws IOException {
+        return readHead(fs, HEAD, maxBytes, maxRows, maxEdges);
+    }
+
+    private static Optional<Version> readHead(M3FS fs, String head,
+            int maxBytes, int maxRows, int maxEdges) throws IOException {
         Objects.requireNonNull(fs, "fs");
         if (maxBytes < 0 || maxRows < 0 || maxEdges < 0) throw new IllegalArgumentException("limits");
         if (!exists(fs, "/", "m3-build")) return Optional.empty();
-        if (!exists(fs, DIRECTORY, "state")) return Optional.empty();
-        M3FS.Stat stat = fs.stat(HEAD);
+        if (!exists(fs, DIRECTORY, head.substring(DIRECTORY.length() + 1))) return Optional.empty();
+        M3FS.Stat stat = fs.stat(head);
         if (stat.kind() != M3FS.Kind.FILE || stat.size() > maxBytes || stat.size() > Integer.MAX_VALUE) {
             throw new IOException("invalid build state kind or byte budget");
         }
         byte[] data = new byte[Math.toIntExact(stat.size())];
         int read = 0;
         while (read < data.length) {
-            int amount = fs.read(HEAD, read, data, read, Math.min(READ_BLOCK, data.length - read));
+            int amount = fs.read(head, read, data, read, Math.min(READ_BLOCK, data.length - read));
             if (amount <= 0) throw new IOException("truncated build state");
             read += amount;
         }
@@ -77,6 +84,105 @@ public final class M3BuildStateStore {
         byte[] encoded = state.encode(maxBytes);
         // Ensure the candidate meets exactly the same decoder bounds as a future reader.
         M3BuildState.decode(encoded, maxBytes, maxRows, maxEdges);
+        return locked(fs, () -> {
+            Optional<Version> previous = read(fs, maxBytes, maxRows, maxEdges);
+            byte[] actual = previous.map(Version::commitment).orElse(null);
+            if (!Arrays.equals(actual, expectedCommitment)) throw new IOException("stale build-state commitment");
+            return writeHead(fs, HEAD, state, encoded);
+        });
+    }
+
+    /**
+     * Reads the observation staged against one exact successful head. A pinned snapshot is required
+     * so the two reads share a view. No observation is a successful-build authorization.
+     */
+    public static Optional<Version> readObserved(M3FS snapshot, byte[] expectedSuccessful,
+            int maxBytes, int maxRows, int maxEdges) throws IOException {
+        Objects.requireNonNull(snapshot, "snapshot");
+        byte[] expected = commitment(expectedSuccessful, true);
+        if (!snapshot.isSnapshot()) throw new IOException("observed checkpoint read requires a pinned snapshot");
+        requireCommitment(read(snapshot, maxBytes, maxRows, maxEdges), expected, "successful");
+        Optional<Version> observed = readHead(snapshot, observedPath(expected), maxBytes, maxRows, maxEdges);
+        if (observed.isPresent() && !observed.orElseThrow().state().completeInventory()) {
+            throw new IOException("observed checkpoint is not a completed inventory");
+        }
+        return observed;
+    }
+
+    /**
+     * Atomically stages a completed observation without changing /m3-build/state. Both the expected
+     * successful head and previous observation are CAS-checked under the existing writer lock.
+     * The observation is the existing state payload at a name bound to its successful predecessor;
+     * no independent SQL schema or checkpoint envelope is introduced.
+     */
+    public static Version observe(M3FS fs, M3BuildState completed, byte[] expectedSuccessful,
+            byte[] expectedObserved, int maxBytes, int maxRows, int maxEdges) throws IOException {
+        Objects.requireNonNull(completed, "completed");
+        if (!completed.completeInventory()) throw new IOException("observation requires a completed inventory");
+        byte[] successful = commitment(expectedSuccessful, true);
+        byte[] observed = commitment(expectedObserved, true);
+        byte[] encoded = completed.encode(maxBytes);
+        M3BuildState.decode(encoded, maxBytes, maxRows, maxEdges);
+        return locked(fs, () -> {
+            requireCommitment(read(fs, maxBytes, maxRows, maxEdges), successful, "successful");
+            String target = observedPath(successful);
+            requireCommitment(readHead(fs, target, maxBytes, maxRows, maxEdges), observed, "observed");
+            return writeHead(fs, target, completed, encoded);
+        });
+    }
+
+    /**
+     * Caller attests that execution for this exact observation succeeded. This method runs no compiler.
+     * It checks the successful predecessor and observed image under the writer lock, then atomically
+     * promotes the existing payload. Failed execution must leave this method uncalled. Stale base or
+     * superseded observation fails. Content commitments are not nonces and do not exclude ABA edits;
+     * callers own build-output serialization and input/execution identity outside this SQLite store.
+     * The exact promoted observation is removed best-effort after commit; a crash or cleanup failure
+     * may retain an inert orphan. Cleanup addresses only that exact promoted observation.
+     */
+    public static Version promoteObserved(M3FS fs, byte[] expectedSuccessful, byte[] expectedObserved,
+            int maxBytes, int maxRows, int maxEdges) throws IOException {
+        byte[] successful = commitment(expectedSuccessful, true);
+        byte[] observed = commitment(expectedObserved, false);
+        return locked(fs, () -> {
+            requireCommitment(read(fs, maxBytes, maxRows, maxEdges), successful, "successful");
+            Optional<Version> pending = readHead(fs, observedPath(successful), maxBytes, maxRows, maxEdges);
+            requireCommitment(pending, observed, "observed");
+            M3BuildState candidate = pending.orElseThrow(() -> new IOException("missing observation")).state();
+            if (!candidate.completeInventory()) throw new IOException("observation is not a completed inventory");
+            Version committed = writeHead(fs, HEAD, candidate, candidate.encode(maxBytes));
+            // The head is already committed. Cleanup must not report a failed promotion.
+            try { fs.unlink(observedPath(successful)); }
+            catch (IOException | RuntimeException cleanup) { /* restart may reclaim this exact orphan */ }
+            return committed;
+        });
+    }
+
+    private static byte[] commitment(byte[] value, boolean nullable) {
+        if (value == null) {
+            if (!nullable) throw new IllegalArgumentException("commitment is required");
+            return null;
+        }
+        if (value.length != M3BuildState.HASH_BYTES) throw new IllegalArgumentException("commitment");
+        return value.clone();
+    }
+
+    private static String observedPath(byte[] successful) {
+        return DIRECTORY + "/observed-" + (successful == null ? "initial" : java.util.HexFormat.of().formatHex(successful));
+    }
+
+    private static void requireCommitment(Optional<Version> value, byte[] expected, String kind) throws IOException {
+        if (!Arrays.equals(value.map(Version::commitment).orElse(null), expected)) {
+            throw new IOException("stale " + kind + " build-state commitment");
+        }
+    }
+
+    @FunctionalInterface
+    private interface LockedUpdate { Version run() throws IOException; }
+
+    private static Version locked(M3FS fs, LockedUpdate update) throws IOException {
+        Objects.requireNonNull(fs, "fs");
+        if (fs.isReadOnly() || fs.isSnapshot()) throw new IOException("build state publication requires writable M3FS");
         Path database = fs.database();
         Path lockFile = database.resolveSibling(database.getFileName() + ".m3build.lock");
         try (FileChannel channel = FileChannel.open(lockFile,
@@ -85,31 +191,28 @@ public final class M3BuildStateStore {
             try { lock = channel.tryLock(); }
             catch (OverlappingFileLockException busy) { throw new IOException("build-state writer already active", busy); }
             if (lock == null) throw new IOException("build-state writer already active");
-            try (lock) {
-                Optional<Version> previous = read(fs, maxBytes, maxRows, maxEdges);
-                byte[] actual = previous.map(Version::commitment).orElse(null);
-                if (!Arrays.equals(actual, expectedCommitment)) {
-                    throw new IOException("stale build-state commitment");
+            try (lock) { return update.run(); }
+        }
+    }
+
+    private static Version writeHead(M3FS fs, String head, M3BuildState state, byte[] encoded) throws IOException {
+        if (!exists(fs, "/", "m3-build")) fs.mkdir(DIRECTORY, DIRECTORY_MODE);
+        String temporary = DIRECTORY + "/.state-" + UUID.randomUUID();
+        fs.createFile(temporary, FILE_MODE);
+        boolean published = false;
+        try {
+            long size = fs.write(temporary, 0L, encoded);
+            if (size != encoded.length) throw new IOException("incomplete staged build state");
+            fs.rename(temporary, head); // one native SQLite transaction
+            published = true;
+        } finally {
+            if (!published) {
+                try { fs.unlink(temporary); } catch (IOException cleanup) {
+                    // The prior head is unchanged; an orphan may be cleaned by its owner later.
                 }
-                if (!exists(fs, "/", "m3-build")) fs.mkdir(DIRECTORY, DIRECTORY_MODE);
-                String temporary = DIRECTORY + "/.state-" + UUID.randomUUID();
-                fs.createFile(temporary, FILE_MODE);
-                boolean published = false;
-                try {
-                    long size = fs.write(temporary, 0L, encoded);
-                    if (size != encoded.length) throw new IOException("incomplete staged build state");
-                    fs.rename(temporary, HEAD); // one native SQLite transaction
-                    published = true;
-                } finally {
-                    if (!published) {
-                        try { fs.unlink(temporary); } catch (IOException cleanup) {
-                            // A failed write must not change the old head; orphaned temp may be cleaned later.
-                        }
-                    }
-                }
-                return new Version(state, digest(encoded));
             }
         }
+        return new Version(state, digest(encoded));
     }
 
     private static boolean exists(M3FS fs, String parent, String name) throws IOException {
