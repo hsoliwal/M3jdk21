@@ -29,6 +29,7 @@ public final class M3FilteredCursorStateProof {
         filteredDequeFailurePoisoning();
         filteredReadOnlyNullsAndLiveBacking();
         nestedPredicateOrderAndSortedViews();
+        nestedMembershipDirectory();
         randomizedStableOccurrences();
         System.out.println("PASS M3FilteredCursorStateProof checks=" + checks);
     }
@@ -141,6 +142,42 @@ public final class M3FilteredCursorStateProof {
         equal(List.of(2, 4, 6), selected(filtered), "navigable sorted filter order");
         equal(List.of(6, 4, 2), selected(filtered.descendingSet()),
                 "descending sorted metadata and order");
+    }
+
+    /** Deep read-only membership replays the same stored-representative callback tape. */
+    private static void nestedMembershipDirectory() {
+        Collection<Integer> source = new ArrayList<>(List.of(2));
+        List<Integer> calls = new ArrayList<>();
+        Collection<Integer> nested = source;
+        for (int depth = 0; depth < 4; depth++) {
+            int stage = depth;
+            nested = M3FilteredViews.filter(nested, value -> {
+                calls.add(stage);
+                return value == 2;
+            });
+        }
+        check(nested.contains(2), "nested contains selected representative");
+        equal(List.of(0, 0, 1, 0, 1, 2, 0, 1, 2, 3), calls,
+                "exact inner-to-outer representative callback tape");
+        calls.clear();
+        check(!nested.contains(3), "unknown physical element absent");
+        check(calls.isEmpty(), "unknown absent member does not evaluate predicate");
+
+        Collection<Integer> throwing = source;
+        List<Integer> exceptionTape = new ArrayList<>();
+        for (int depth = 0; depth < 4; depth++) {
+            int stage = depth;
+            throwing = M3FilteredViews.filter(throwing, value -> {
+                exceptionTape.add(stage);
+                if (stage == 1) throw new IllegalStateException("predicate stage 1");
+                return true;
+            });
+        }
+        Collection<Integer> checkFailure = throwing;
+        refuses(IllegalStateException.class, () -> checkFailure.contains(2),
+                "nested membership callback exception");
+        equal(List.of(0, 0, 1), exceptionTape,
+                "exception prevents later membership predicates");
     }
 
     private static void randomizedStableOccurrences() {
