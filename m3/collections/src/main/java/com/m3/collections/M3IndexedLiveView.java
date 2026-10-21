@@ -45,6 +45,7 @@ public final class M3IndexedLiveView<E> extends AbstractList<E> implements Rando
     private int structureEpoch;
     private long valueEpoch;
     private boolean prepared;
+    private boolean preparing;
     private long invalidationEpoch;
 
     private M3IndexedLiveView(M3ArrayList<E> owner, Predicate<? super E> filter,
@@ -95,42 +96,60 @@ public final class M3IndexedLiveView<E> extends AbstractList<E> implements Rando
         }
     }
 
+    /** A callback can also invalidate this view without changing parent epochs. */
+    private void checkPreparation(int expectedStructure, long expectedValue,
+            long expectedInvalidation) {
+        checkEpoch(expectedStructure, expectedValue);
+        if (invalidationEpoch != expectedInvalidation) {
+            throw new ConcurrentModificationException("M3 indexed view invalidated during preparation");
+        }
+    }
+
     private void refresh() {
+        if (preparing) {
+            throw new ConcurrentModificationException("M3 indexed view reentered during preparation");
+        }
         int structure = owner.m3StructureEpoch();
         long values = owner.m3ValueEpoch();
         if (prepared && structure == structureEpoch && values == valueEpoch) return;
-        if (filter != null && backend == M3IndexMaskCompactor.Backend.NATIVE_REQUIRED
-                && !M3IndexMaskCompactor.nativeAvailable()) {
-            throw new UnsatisfiedLinkError("m3_index_mask JNI library unavailable");
-        }
-        int length = owner.size();
-        int[] selected;
-        if (filter == null) {
-            selected = new int[length];
-            for (int i = 0; i < length; i++) selected[i] = i;
-        } else {
-            byte[] selectedMask = new byte[length];
-            for (int i = 0; i < length; i++) {
-                checkEpoch(structure, values);
-                E value = owner.get(i);
-                selectedMask[i] = (byte) (filter.test(value) ? 1 : 0);
-                checkEpoch(structure, values);
+        long expectedInvalidation = invalidationEpoch;
+        preparing = true;
+        try {
+            if (filter != null && backend == M3IndexMaskCompactor.Backend.NATIVE_REQUIRED
+                    && !M3IndexMaskCompactor.nativeAvailable()) {
+                throw new UnsatisfiedLinkError("m3_index_mask JNI library unavailable");
             }
-            selected = M3IndexMaskCompactor.selectPositions(selectedMask, 1, backend);
+            int length = owner.size();
+            int[] selected;
+            if (filter == null) {
+                selected = new int[length];
+                for (int i = 0; i < length; i++) selected[i] = i;
+            } else {
+                byte[] selectedMask = new byte[length];
+                for (int i = 0; i < length; i++) {
+                    checkPreparation(structure, values, expectedInvalidation);
+                    E value = owner.get(i);
+                    selectedMask[i] = (byte) (filter.test(value) ? 1 : 0);
+                    checkPreparation(structure, values, expectedInvalidation);
+                }
+                selected = M3IndexMaskCompactor.selectPositions(selectedMask, 1, backend);
+            }
+            checkPreparation(structure, values, expectedInvalidation);
+            if (sorted) {
+                M3IndexSort.stable(selected, index -> {
+                    checkPreparation(structure, values, expectedInvalidation);
+                    return owner.get(index);
+                }, comparator);
+            }
+            checkPreparation(structure, values, expectedInvalidation);
+            // One publication after all callbacks, JNI selection and sorting complete.
+            physical = selected;
+            structureEpoch = structure;
+            valueEpoch = values;
+            prepared = true;
+        } finally {
+            preparing = false;
         }
-        checkEpoch(structure, values);
-        if (sorted) {
-            M3IndexSort.stable(selected, index -> {
-                checkEpoch(structure, values);
-                return owner.get(index);
-            }, comparator);
-        }
-        checkEpoch(structure, values);
-        // One publication after all callbacks, JNI selection and sorting complete.
-        physical = selected;
-        structureEpoch = structure;
-        valueEpoch = values;
-        prepared = true;
     }
 
     @Override public int size() { refresh(); return physical.length; }
@@ -227,8 +246,83 @@ public final class M3IndexedLiveView<E> extends AbstractList<E> implements Rando
     @Override public E removeFirst() { throw immutable(); }
     @Override public E removeLast() { throw immutable(); }
 
+    /** Backed ranges retain strict refusal, including empty and no-op mutations. */
+    @Override public List<E> subList(int fromIndex, int toIndex) {
+        return strictReadOnly(super.subList(fromIndex, toIndex));
+    }
+
     /** JDK reversed view stays backed while every modification remains refused. */
     @Override public List<E> reversed() {
-        return Collections.unmodifiableList(super.reversed());
+        return strictReadOnly(super.reversed());
+    }
+
+    /**
+     * Reuse the JDK range/reversal for reads and the existing unmodifiable cursor
+     * guards. JDK21 List default endpoints and reversed no-op methods need this
+     * explicit boundary to retain the root's unconditional mutation refusal.
+     * Only a view descriptor is retained; the parent still owns every value and
+     * physical index. Keep the delegate's RandomAccess declaration unchanged.
+     */
+    private static <E> List<E> strictReadOnly(List<E> delegate) {
+        return strictReadOnly(delegate, null);
+    }
+
+    private static <E> List<E> strictReadOnly(List<E> delegate, List<E> reverse) {
+        return delegate instanceof RandomAccess
+                ? new StrictRandomAccessList<>(delegate, reverse)
+                : new StrictReadOnlyList<>(delegate, reverse);
+    }
+
+    private static class StrictReadOnlyList<E> extends AbstractList<E> {
+        private final List<E> delegate;
+        private final List<E> reverse;
+
+        StrictReadOnlyList(List<E> delegate, List<E> reverse) {
+            this.delegate = Collections.unmodifiableList(delegate);
+            this.reverse = reverse;
+        }
+
+        @Override public int size() { return delegate.size(); }
+        @Override public E get(int index) { return delegate.get(index); }
+        @Override public boolean contains(Object value) { return delegate.contains(value); }
+        @Override public boolean containsAll(Collection<?> values) { return delegate.containsAll(values); }
+        @Override public int indexOf(Object value) { return delegate.indexOf(value); }
+        @Override public int lastIndexOf(Object value) { return delegate.lastIndexOf(value); }
+        @Override public Object[] toArray() { return delegate.toArray(); }
+        @Override public <T> T[] toArray(T[] target) { return delegate.toArray(target); }
+        @Override public void forEach(Consumer<? super E> action) { delegate.forEach(action); }
+        @Override public Iterator<E> iterator() { return delegate.iterator(); }
+        @Override public ListIterator<E> listIterator(int index) { return delegate.listIterator(index); }
+        @Override public Spliterator<E> spliterator() { return delegate.spliterator(); }
+        @Override public List<E> subList(int fromIndex, int toIndex) {
+            return strictReadOnly(delegate.subList(fromIndex, toIndex));
+        }
+        @Override public List<E> reversed() {
+            // Retain the opposite descriptor, not an ever-growing reversal chain.
+            return reverse != null ? reverse : strictReadOnly(delegate.reversed(), this);
+        }
+        @Override public E set(int index, E value) { throw immutable(); }
+        @Override public void add(int index, E value) { throw immutable(); }
+        @Override public boolean add(E value) { throw immutable(); }
+        @Override public boolean addAll(Collection<? extends E> values) { throw immutable(); }
+        @Override public boolean addAll(int index, Collection<? extends E> values) { throw immutable(); }
+        @Override public E remove(int index) { throw immutable(); }
+        @Override public boolean remove(Object value) { throw immutable(); }
+        @Override public boolean removeAll(Collection<?> values) { throw immutable(); }
+        @Override public boolean retainAll(Collection<?> values) { throw immutable(); }
+        @Override public boolean removeIf(Predicate<? super E> test) { throw immutable(); }
+        @Override public void replaceAll(UnaryOperator<E> action) { throw immutable(); }
+        @Override public void sort(Comparator<? super E> order) { throw immutable(); }
+        @Override public void clear() { throw immutable(); }
+        @Override protected void removeRange(int fromIndex, int toIndex) { throw immutable(); }
+        @Override public void addFirst(E value) { throw immutable(); }
+        @Override public void addLast(E value) { throw immutable(); }
+        @Override public E removeFirst() { throw immutable(); }
+        @Override public E removeLast() { throw immutable(); }
+    }
+
+    private static final class StrictRandomAccessList<E> extends StrictReadOnlyList<E>
+            implements RandomAccess {
+        StrictRandomAccessList(List<E> delegate, List<E> reverse) { super(delegate, reverse); }
     }
 }
