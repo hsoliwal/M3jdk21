@@ -163,7 +163,7 @@ public final class M3CollectionSdk {
             Collection<? extends E> source, int[][] physicalStates,
             int[] requiredMasks, int[] forbiddenMasks,
             Comparator<? super E> comparator, M3IndexPathMasks.Backend backend) {
-        return indexedObjectSnapshot(source).sortedMaskedByPhysicalStates(
+        return M3CollectionSdk.<E>indexedObjectSnapshot(source).sortedMaskedByPhysicalStates(
                 physicalStates, requiredMasks, forbiddenMasks, comparator, backend);
     }
 
