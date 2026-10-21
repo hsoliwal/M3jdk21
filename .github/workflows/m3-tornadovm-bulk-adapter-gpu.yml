@@ -1,4 +1,6 @@
-name: M3 TornadoVM Bulk Adapter GPU
+# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
+# SPDX-License-Identifier: Apache-2.0
+name: M3 TornadoVM Installed Image Device Parity
 
 on:
   workflow_dispatch:
@@ -16,16 +18,29 @@ jobs:
         with:
           distribution: temurin
           java-version: '21'
-      - uses: actions/checkout@v5
+      - name: Build and seal the existing source-owned JUnit test support
+        run: >-
+          python3 -B m3/runtime-integration/tornado/build_junit_support.py
+          --repo-root "$GITHUB_WORKSPACE"
+          --jdk-home "$JAVA_HOME" --maven "$(command -v mvn)"
+          --maven-repo "$HOME/.m2/repository"
+          --out "$RUNNER_TEMP/m3-tornado-gpu-junit" --resolve-build-tools
+      - name: Build in-tree compiler, runtime and provider, then require device parity
+        run: >-
+          bash m3/build-tornado.sh
+          --jdk-home "$JAVA_HOME" --maven "$(command -v mvn)"
+          --maven-repo "$HOME/.m2/repository"
+          --junit-lock "$RUNNER_TEMP/m3-tornado-gpu-junit/JUNIT_LOCK.json"
+          --backend opencl --out "$RUNNER_TEMP/m3-tornado-gpu-proof"
+          --allow-bootstrap-jdk --require-gpu --resolve-build-tools --phase all
+      # This hosted/bootstrap toolchain lane is a device qualification result.
+      # Matched M3JDK21 release admission additionally requires --m3-jdk-receipt.
+      - name: Preserve device identity, parity and installed-image evidence
+        if: always()
+        uses: actions/upload-artifact@v4
         with:
-          repository: hsoliwal/synexia-tornadovm
-          ref: 3bf826714a48d7fdf346ffde8a0fc25c525572c5
-          path: target/synexia-tornadovm
-      - name: Install pinned RV32IM provider
-        run: >
-          mvn -B -ntp -f target/synexia-tornadovm/m3/cpu-gpu/pom.xml
-          -DskipTests install
-      - name: Physical TornadoVM CPU-parity gate
-        run: >
-          mvn -B -ntp -f m3/ports/tornadovm-bulk/pom.xml
-          -Dm3.gpu=true test
+          name: m3-tornado-gpu-proof
+          path: |
+            ${{ runner.temp }}/m3-tornado-gpu-proof
+            ${{ runner.temp }}/m3-tornado-gpu-junit
+          if-no-files-found: error

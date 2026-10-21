@@ -88,5 +88,30 @@
     "all regex is precomputed",
     "production ready",
     "all collections optimized"
-  ]
+  ],
+  "optional_runtime_capabilities": {
+    "tornadovm": {
+      "owner": "M3JDK21",
+      "source": "m3/vendor/tornadovm",
+      "mapping": "m3/docs/name-mapping.d/m3-tornado-integrated-runtime-20261021.json",
+      "build": "m3/build-tornado.sh",
+      "claim": "CONDITIONAL_ON_EXACT_MATCHED_IMAGE_RECEIPT",
+      "required_gates": [
+        "PINNED_SOURCE_AND_RUNTIME_DEPENDENCIES",
+        "CANONICAL_RECIPE_SDK_AND_ZERO_CHANGE_REPLAY",
+        "LINT_BEFORE_COMPILE",
+        "SOURCE_COMPILER_RUNTIME_BACKEND_BUILD",
+        "EXISTING_PROVIDER_API_AND_BEHAVIOR",
+        "NAMED_MODULE_CLOSURE_AND_JMODS",
+        "MATCHED_M3JDK21_INSTALLED_IMAGE",
+        "ACTUAL_DEVICE_PARITY_FOR_CLAIMED_BACKEND",
+        "JVMCI_M3_STRING_GUARD_PRESERVED",
+        "UPSTREAM_AND_DEPENDENCY_LEGAL_NOTICES"
+      ],
+      "bootstrap_image_is_final_admission": false,
+      "cpu_opencl_is_physical_gpu_evidence": false,
+      "receiving_sequence_advanced": false,
+      "performance_superiority": "NOT_CLAIMED"
+    }
+  }
 }
