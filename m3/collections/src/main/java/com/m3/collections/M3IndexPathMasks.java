@@ -242,6 +242,31 @@ public final class M3IndexPathMasks {
 
     static int[] selectJava(int[] rows, int[] offsets, int[][] planes,
             int[] required, int[] forbidden, int first, int count, int stride) {
+        // Public selection has already checked complete logical/physical geometry.
+        // Do not pay a mask-classification pass for tiny scans.
+        if (count >= 8) {
+            boolean unrestricted = true;
+            for (int stage = 0; stage < required.length; stage++) {
+                int need = required[stage], deny = forbidden[stage];
+                if ((need | deny) != 0) {
+                    if ((need & deny) != 0) return new int[0];
+                    // The normal two-pass matcher remains authoritative as
+                    // soon as a nontrivial, noncontradictory stage appears.
+                    unrestricted = false;
+                    break;
+                }
+            }
+            if (unrestricted) {
+                // The input remains borrowed; the returned index directory is detached.
+                if (stride == 1) return java.util.Arrays.copyOfRange(rows, first, first + count);
+                int[] selected = new int[count];
+                long at = first;
+                for (int n = 0; n < count; n++, at += stride) {
+                    selected[n] = rows[(int) at];
+                }
+                return selected;
+            }
+        }
         int kept = 0;
         long at = first;
         for (int n = 0; n < count; n++, at += stride) {
