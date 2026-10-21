@@ -3,6 +3,16 @@
   "policy": "additive; no blind renames or unverified compatibility claims; Synexia donor names do not define M3JDK target ABI; precompute is internal-only",
   "mappings": [
     {
+      "source": "M3JDK21 java.lang.String standard byte[] shape + canonical OS-interned M3String owner/range",
+      "target": "java.lang.String.value/m3, java.lang.M3String, java.base JNI/HotSpot String region and array-return boundaries",
+      "status": "DRAFT_DUAL_VIEW_CONTRACT_TEST_PENDING_INSTALLED_IMAGE",
+      "recipe": "com.synexia.rewrite.m3dual.M3DualStringViewRecipe",
+      "target_rule": "A standard java.lang.String retains byte[] value/coder/hash fields and its additional M3 owner/coordinate. For M3-backed String, value shares one zero-length sentinel; the actual immutable content lives only in interned fixed arrays or OS-mapped atoms. JNI native view traversal uses these owners without flattening. Explicit mutable byte[]/char[] outputs are fresh compatibility arrays, never discontiguous zero-copy Java aliases.",
+      "not_claimed": "No java.lang.String char[] backing field in JDK21; no global OS intern API; true discontiguous Java primitive-array virtualization would require separate HotSpot ABI/GC/JMM/JNI proof",
+      "test": "test/jdk/java/lang/String/M3StringOsMappedNativeConcatTest.java",
+      "gates": "Target Java21/HotSpot installed image, JNI/JTReg, GC/CDS, replay/fixed point/refusal and comparative process/native/heap resource costs pending"
+    },
+    {
       "source": "OS-mapped interned MIndexString/shared array atom views and M3JDK21 native String consumers",
       "target": "java.lang.M3StringPool.concatViewsNative0 / src/java.base/share/native/libjava/M3StringPool.c",
       "status": "DRAFT_JNI_OS_MAPPED_CONCAT_NO_INSTALLED_RUNTIME_QUALIFICATION",
