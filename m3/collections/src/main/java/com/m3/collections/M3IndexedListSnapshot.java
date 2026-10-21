@@ -354,21 +354,29 @@ public final class M3IndexedListSnapshot<E> extends AbstractList<E> implements R
             }
         }
         if (ascending) {
-            int[] reverseGroups = new int[length];
-            int output = 0;
+            // Preserve original comparator call order while reversing physical runs.
+            // Reverse each equality group first, then the entire private index lane.
             for (int end = length; end > 0;) {
                 int begin = end - 1;
                 while (begin > 0 && compare(indices[begin - 1],
                         indices[begin], comparator) == 0) begin--;
-                System.arraycopy(indices, begin, reverseGroups, output, end - begin);
-                output += end - begin;
+                reverseRange(indices, begin, end);
                 end = begin;
             }
-            System.arraycopy(reverseGroups, 0, indices, 0, length);
+            reverseRange(indices, 0, length);
         } else {
             sortPositions(indices, (left, right) ->
                     comparator != null ? comparator.compare(right, left)
                             : ((Comparable<? super E>) right).compareTo(left));
+        }
+    }
+
+    /** In-place two-pointer reversal of a private half-open index span. */
+    private static void reverseRange(int[] directory, int from, int until) {
+        for (int left = from, right = until - 1; left < right; left++, right--) {
+            int previous = directory[left];
+            directory[left] = directory[right];
+            directory[right] = previous;
         }
     }
 
