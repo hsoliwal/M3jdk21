@@ -157,6 +157,11 @@ public final class M3FilteredViews {
         SortedSet<E> sorted = sortedOwner(source);
         if (sorted != null) {
             @SuppressWarnings("unchecked") E alias = (E) value;
+            if (sorted instanceof NavigableSet<?> nav) {
+                // ceiling uses the stored representative without a new tail-range view.
+                @SuppressWarnings("unchecked") NavigableSet<E> navigable = (NavigableSet<E>) nav;
+                return predicate.test(navigable.ceiling(alias));
+            }
             return predicate.test(sorted.tailSet(alias).first());
         }
         if (source instanceof Set<?>) {
