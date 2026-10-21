@@ -12,6 +12,7 @@ import java.nio.file.StandardOpenOption;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
+import java.util.HexFormat;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.UUID;
@@ -54,6 +55,40 @@ public final class M3BuildStateStore {
     public static Optional<Version> readOffline(M3FS fs, int maxBytes, int maxRows)
             throws IOException {
         return readAt(fs, OFFLINE_HEAD, "offline-scan", maxBytes, maxRows, 0);
+    }
+
+    /**
+     * Read the exact project's named offline input generation.
+     * Each 32-byte context seal maps to a distinct key in the SAME SQLite DB:
+     * Maven/Gradle and different selection policies cannot replace each other.
+     * The unkeyed readOffline remains available for its original legacy clients.
+     */
+    public static Optional<Version> readOffline(M3FS fs, byte[] contextSha256,
+            int maxBytes, int maxRows) throws IOException {
+        String head = profileHead(contextSha256);
+        String name = head.substring(DIRECTORY.length() + 1);
+        Optional<Version> stored = readAt(fs, head, name, maxBytes, maxRows, 0);
+        if (stored.isPresent()) {
+            M3BuildState candidate = stored.orElseThrow().state();
+            if (!Arrays.equals(contextSha256, candidate.contextSha256())
+                    || candidate.dependencyCount() != 0) {
+                throw new IOException("foreign or attributed offline project checkpoint");
+            }
+            for (int row = 0; row < candidate.size(); row++) {
+                if (candidate.hasAbi(row)) {
+                    throw new IOException("offline checkpoint cannot assert compiler ABI");
+                }
+            }
+        }
+        return stored;
+    }
+
+    /** A fixed-length, collision-resistant SQLite inode name from an exact caller context. */
+    private static String profileHead(byte[] contextSha256) {
+        if (Objects.requireNonNull(contextSha256, "contextSha256").length != M3BuildState.HASH_BYTES) {
+            throw new IllegalArgumentException("expected a 32-byte profile SHA-256");
+        }
+        return DIRECTORY + "/offline-" + HexFormat.of().formatHex(contextSha256);
     }
 
     private static Optional<Version> readAt(M3FS fs, String head, String name,
@@ -100,6 +135,29 @@ public final class M3BuildStateStore {
         }
         return publishAt(fs, OFFLINE_HEAD, "offline-scan", state, expectedCommitment,
                 maxBytes, maxRows, 0);
+    }
+
+    /**
+     * Compare-and-swap one independent scan profile. Reuses original per-project
+     * M3FS SQLite WAL, serialization, native rename and writer lock.
+     */
+    public static Version publishOffline(M3FS fs, byte[] contextSha256, M3BuildState state,
+            byte[] expectedCommitment, int maxBytes, int maxRows) throws IOException {
+        String head = profileHead(contextSha256);
+        Objects.requireNonNull(state, "state");
+        if (!Arrays.equals(contextSha256, state.contextSha256())) {
+            throw new IllegalArgumentException("offline profile/source context mismatch");
+        }
+        if (state.dependencyCount() != 0) {
+            throw new IllegalArgumentException("offline discovery must not assert compiler edges");
+        }
+        for (int row = 0; row < state.size(); row++) {
+            if (state.hasAbi(row)) {
+                throw new IllegalArgumentException("offline discovery must not assert compiler ABI");
+            }
+        }
+        return publishAt(fs, head, head.substring(DIRECTORY.length() + 1),
+                state, expectedCommitment, maxBytes, maxRows, 0);
     }
 
     private static Version publishAt(M3FS fs, String head, String name, M3BuildState state,
