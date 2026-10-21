@@ -1,0 +1,94 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3JDK21 adaptive state histogram Java/JNI parity
+
+on:
+  push:
+    branches: [m3/statehist-adaptive-maskcount-20261021]
+  pull_request:
+    paths:
+      - m3/collections/src/main/java/com/m3/collections/M3StateMaskHistogram.java
+      - m3/collections/src/test/java/com/m3/collections/M3StateMaskAdaptiveCountContract.java
+      - m3/collections/algorithm-catalogue/challenge-patterns-20261018/M3_STATEHIST_ADAPTIVE*
+      - .github/workflows/m3-statehist-adaptive-maskcount-20261021.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  source-owned-java-and-native-abi:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Pin five-PR integrated original C17/JNI owner and Java target
+        shell: bash
+        run: |
+          set -euo pipefail
+          ROOT=m3/collections/src/main/java/com/m3/collections
+          NATIVE=m3/collections/src/main/native/collections/m3_state_mask_histogram.c
+          test "$(git hash-object "$NATIVE")" = 89a82a00206d1d486b86a5ce2daa2a6792a48fd1
+          git show e4fbea40e0c34febba8b2013b49f00a28f35ea1c:"$ROOT/M3StateMaskHistogram.java" \
+            > /tmp/M3StateMaskHistogram.java
+          test "$(git hash-object /tmp/M3StateMaskHistogram.java)" = ce6703d190c024bcf6ea5d4eb91db8ab7f6da087
+          mkdir -p m3-adaptive-proof "$RUNNER_TEMP/m3-new" \
+            "$RUNNER_TEMP/m3-old/com/m3/collections"
+          cp /tmp/M3StateMaskHistogram.java \
+            "$RUNNER_TEMP/m3-old/com/m3/collections/M3StateMaskHistogram.java"
+      - name: Compile exact original and candidate owners under strict Java21
+        shell: bash
+        run: |
+          set -euo pipefail
+          ROOT=m3/collections/src/main/java/com/m3/collections
+          javac --release 21 -Xlint:all -Werror -proc:none -d "$RUNNER_TEMP/m3-old" \
+            "$RUNNER_TEMP/m3-old/com/m3/collections/M3StateMaskHistogram.java" \
+            "$ROOT/M3IndexMaskCompactor.java" "$ROOT/M3IndexPathMasks.java"
+          javac --release 21 -Xlint:all -Werror -proc:none -d "$RUNNER_TEMP/m3-new" \
+            "$ROOT/M3StateMaskHistogram.java" "$ROOT/M3IndexMaskCompactor.java" \
+            "$ROOT/M3IndexPathMasks.java" \
+            m3/collections/src/test/java/com/m3/collections/M3StateMaskAdaptiveCountContract.java
+          javap -public -classpath "$RUNNER_TEMP/m3-old" com.m3.collections.M3StateMaskHistogram \
+            > m3-adaptive-proof/BEFORE_API.txt
+          javap -public -classpath "$RUNNER_TEMP/m3-new" com.m3.collections.M3StateMaskHistogram \
+            > m3-adaptive-proof/AFTER_API.txt
+          diff -u m3-adaptive-proof/BEFORE_API.txt m3-adaptive-proof/AFTER_API.txt
+      - name: Actual M3 primitive mask owners and signed/duplicate paths
+        shell: bash
+        run: |
+          set -euo pipefail
+          java -ea -Xcheck:jni -cp "$RUNNER_TEMP/m3-new" \
+            com.m3.collections.M3StateMaskAdaptiveCountContract \
+            | tee m3-adaptive-proof/ACTUAL.txt
+          grep '^M3_STATEHIST_ADAPTIVE_PASS checks=' m3-adaptive-proof/ACTUAL.txt
+      - name: Java21 interpreter parity
+        shell: bash
+        run: |
+          set -euo pipefail
+          java -Xint -ea -Xcheck:jni -cp "$RUNNER_TEMP/m3-new" \
+            com.m3.collections.M3StateMaskAdaptiveCountContract \
+            | tee m3-adaptive-proof/INTERPRETER.txt
+          grep '^M3_STATEHIST_ADAPTIVE_PASS checks=' m3-adaptive-proof/INTERPRETER.txt
+      - name: Exact source blob and original JNI receipt
+        if: always()
+        shell: bash
+        run: |
+          mkdir -p m3-adaptive-proof
+          git hash-object m3/collections/src/main/java/com/m3/collections/M3StateMaskHistogram.java \
+            m3/collections/src/main/native/collections/m3_state_mask_histogram.c \
+            > m3-adaptive-proof/GIT_BLOBS.txt
+          sha256sum m3/collections/src/main/java/com/m3/collections/M3StateMaskHistogram.java \
+            m3/collections/src/main/native/collections/m3_state_mask_histogram.c \
+            > m3-adaptive-proof/SOURCE_SHA256.txt
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: m3-statehist-adaptive-java-jni
+          path: m3-adaptive-proof/
+          retention-days: 14
+          if-no-files-found: warn
