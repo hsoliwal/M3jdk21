@@ -1,0 +1,1968 @@
+[
+  {
+    "stage": "author-check",
+    "argv": [
+      "python3",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/recipe/author.py",
+      "--check"
+    ],
+    "exit": 0,
+    "expected_failure": false,
+    "log": "000-author-check.log",
+    "sha256": "f15ff8689b42df61c4d2de601db7d6c40b84fe88529e3ebd4de3efbb9023e112",
+    "seconds": 0.046008577999600675
+  },
+  {
+    "stage": "recipe-lint",
+    "argv": [
+      "javac",
+      "--release",
+      "21",
+      "-proc:none",
+      "-Xlint:all",
+      "-Werror",
+      "-d",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/recipe-lint",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/recipe/src/main/java/com/synexia/rewrite/M3GpuToolJoinManifest.java",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/recipe/src/main/java/com/synexia/rewrite/SealReplay.java"
+    ],
+    "exit": 0,
+    "expected_failure": false,
+    "log": "001-recipe-lint.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "seconds": 0.9606495359985274
+  },
+  {
+    "stage": "recipe-compile",
+    "argv": [
+      "javac",
+      "--release",
+      "21",
+      "-proc:none",
+      "-d",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/recipe-classes",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/recipe/src/main/java/com/synexia/rewrite/M3GpuToolJoinManifest.java",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/recipe/src/main/java/com/synexia/rewrite/SealReplay.java"
+    ],
+    "exit": 0,
+    "expected_failure": false,
+    "log": "002-recipe-compile.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "seconds": 0.9034895360018709
+  },
+  {
+    "stage": "recipe-apply",
+    "argv": [
+      "java",
+      "-cp",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/recipe-classes",
+      "com.synexia.rewrite.SealReplay",
+      "apply",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/recipe-state-0",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/recipe/src/main/resources/m3-mask-window"
+    ],
+    "exit": 0,
+    "expected_failure": false,
+    "log": "003-recipe-apply.log",
+    "sha256": "f62171550f0b1bb21198fcaf162a1c379dadd438000383c2058ce2497b35a5be",
+    "seconds": 0.1520549349988869
+  },
+  {
+    "stage": "recipe-check",
+    "argv": [
+      "java",
+      "-cp",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/recipe-classes",
+      "com.synexia.rewrite.SealReplay",
+      "check",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/recipe-state-0",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/recipe/src/main/resources/m3-mask-window"
+    ],
+    "exit": 0,
+    "expected_failure": false,
+    "log": "004-recipe-check.log",
+    "sha256": "13838a89c9f97ae400b1d46379a3e8f5b2a919122748c48cfd9935462e96ce33",
+    "seconds": 0.09898224399876199
+  },
+  {
+    "stage": "recipe-apply",
+    "argv": [
+      "java",
+      "-cp",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/recipe-classes",
+      "com.synexia.rewrite.SealReplay",
+      "apply",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/recipe-state-0",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/recipe/src/main/resources/m3-mask-window"
+    ],
+    "exit": 0,
+    "expected_failure": false,
+    "log": "005-recipe-apply.log",
+    "sha256": "f79d4afdb7d344727a0f8cfc6dba365b49fef2a0e7158ee80e2fedbbfd6e1384",
+    "seconds": 0.11713628300276469
+  },
+  {
+    "stage": "recipe-apply",
+    "argv": [
+      "java",
+      "-cp",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/recipe-classes",
+      "com.synexia.rewrite.SealReplay",
+      "apply",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/recipe-state-1",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/recipe/src/main/resources/m3-mask-window"
+    ],
+    "exit": 0,
+    "expected_failure": false,
+    "log": "006-recipe-apply.log",
+    "sha256": "980550fb678812b16f257c50d9d0ac81b5c9b665273aa239bbe98579a1419404",
+    "seconds": 0.11094947799938382
+  },
+  {
+    "stage": "recipe-check",
+    "argv": [
+      "java",
+      "-cp",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/recipe-classes",
+      "com.synexia.rewrite.SealReplay",
+      "check",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/recipe-state-1",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/recipe/src/main/resources/m3-mask-window"
+    ],
+    "exit": 0,
+    "expected_failure": false,
+    "log": "007-recipe-check.log",
+    "sha256": "13838a89c9f97ae400b1d46379a3e8f5b2a919122748c48cfd9935462e96ce33",
+    "seconds": 0.12082451400056016
+  },
+  {
+    "stage": "recipe-apply",
+    "argv": [
+      "java",
+      "-cp",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/recipe-classes",
+      "com.synexia.rewrite.SealReplay",
+      "apply",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/recipe-state-1",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/recipe/src/main/resources/m3-mask-window"
+    ],
+    "exit": 0,
+    "expected_failure": false,
+    "log": "008-recipe-apply.log",
+    "sha256": "f79d4afdb7d344727a0f8cfc6dba365b49fef2a0e7158ee80e2fedbbfd6e1384",
+    "seconds": 0.12089356299838983
+  },
+  {
+    "stage": "recipe-apply",
+    "argv": [
+      "java",
+      "-cp",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/recipe-classes",
+      "com.synexia.rewrite.SealReplay",
+      "apply",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/recipe-state-2",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/recipe/src/main/resources/m3-mask-window"
+    ],
+    "exit": 0,
+    "expected_failure": false,
+    "log": "009-recipe-apply.log",
+    "sha256": "980550fb678812b16f257c50d9d0ac81b5c9b665273aa239bbe98579a1419404",
+    "seconds": 0.1014067280011659
+  },
+  {
+    "stage": "recipe-check",
+    "argv": [
+      "java",
+      "-cp",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/recipe-classes",
+      "com.synexia.rewrite.SealReplay",
+      "check",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/recipe-state-2",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/recipe/src/main/resources/m3-mask-window"
+    ],
+    "exit": 0,
+    "expected_failure": false,
+    "log": "010-recipe-check.log",
+    "sha256": "13838a89c9f97ae400b1d46379a3e8f5b2a919122748c48cfd9935462e96ce33",
+    "seconds": 0.09487357700345456
+  },
+  {
+    "stage": "recipe-apply",
+    "argv": [
+      "java",
+      "-cp",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/recipe-classes",
+      "com.synexia.rewrite.SealReplay",
+      "apply",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/recipe-state-2",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/recipe/src/main/resources/m3-mask-window"
+    ],
+    "exit": 0,
+    "expected_failure": false,
+    "log": "011-recipe-apply.log",
+    "sha256": "f79d4afdb7d344727a0f8cfc6dba365b49fef2a0e7158ee80e2fedbbfd6e1384",
+    "seconds": 0.10861414799728664
+  },
+  {
+    "stage": "recipe-apply",
+    "argv": [
+      "java",
+      "-cp",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/recipe-classes",
+      "com.synexia.rewrite.SealReplay",
+      "apply",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/recipe-state-3",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/recipe/src/main/resources/m3-mask-window"
+    ],
+    "exit": 0,
+    "expected_failure": false,
+    "log": "012-recipe-apply.log",
+    "sha256": "77ff9bcd6acdbddc5e9ddeb3a10a7a3d9aba33d177be14008adb466d05d21423",
+    "seconds": 0.0969702620022872
+  },
+  {
+    "stage": "recipe-check",
+    "argv": [
+      "java",
+      "-cp",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/recipe-classes",
+      "com.synexia.rewrite.SealReplay",
+      "check",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/recipe-state-3",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/recipe/src/main/resources/m3-mask-window"
+    ],
+    "exit": 0,
+    "expected_failure": false,
+    "log": "013-recipe-check.log",
+    "sha256": "13838a89c9f97ae400b1d46379a3e8f5b2a919122748c48cfd9935462e96ce33",
+    "seconds": 0.10118216000046232
+  },
+  {
+    "stage": "recipe-apply",
+    "argv": [
+      "java",
+      "-cp",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/recipe-classes",
+      "com.synexia.rewrite.SealReplay",
+      "apply",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/recipe-state-3",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/recipe/src/main/resources/m3-mask-window"
+    ],
+    "exit": 0,
+    "expected_failure": false,
+    "log": "014-recipe-apply.log",
+    "sha256": "f79d4afdb7d344727a0f8cfc6dba365b49fef2a0e7158ee80e2fedbbfd6e1384",
+    "seconds": 0.13190164400293725
+  },
+  {
+    "stage": "recipe-apply",
+    "argv": [
+      "java",
+      "-cp",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/recipe-classes",
+      "com.synexia.rewrite.SealReplay",
+      "apply",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/recipe-state-4",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/recipe/src/main/resources/m3-mask-window"
+    ],
+    "exit": 0,
+    "expected_failure": false,
+    "log": "015-recipe-apply.log",
+    "sha256": "980550fb678812b16f257c50d9d0ac81b5c9b665273aa239bbe98579a1419404",
+    "seconds": 0.09702868999738712
+  },
+  {
+    "stage": "recipe-check",
+    "argv": [
+      "java",
+      "-cp",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/recipe-classes",
+      "com.synexia.rewrite.SealReplay",
+      "check",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/recipe-state-4",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/recipe/src/main/resources/m3-mask-window"
+    ],
+    "exit": 0,
+    "expected_failure": false,
+    "log": "016-recipe-check.log",
+    "sha256": "13838a89c9f97ae400b1d46379a3e8f5b2a919122748c48cfd9935462e96ce33",
+    "seconds": 0.14365240700135473
+  },
+  {
+    "stage": "recipe-apply",
+    "argv": [
+      "java",
+      "-cp",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/recipe-classes",
+      "com.synexia.rewrite.SealReplay",
+      "apply",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/recipe-state-4",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/recipe/src/main/resources/m3-mask-window"
+    ],
+    "exit": 0,
+    "expected_failure": false,
+    "log": "017-recipe-apply.log",
+    "sha256": "f79d4afdb7d344727a0f8cfc6dba365b49fef2a0e7158ee80e2fedbbfd6e1384",
+    "seconds": 0.14722707200053264
+  },
+  {
+    "stage": "recipe-apply",
+    "argv": [
+      "java",
+      "-cp",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/recipe-classes",
+      "com.synexia.rewrite.SealReplay",
+      "apply",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/recipe-state-5",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/recipe/src/main/resources/m3-mask-window"
+    ],
+    "exit": 0,
+    "expected_failure": false,
+    "log": "018-recipe-apply.log",
+    "sha256": "77ff9bcd6acdbddc5e9ddeb3a10a7a3d9aba33d177be14008adb466d05d21423",
+    "seconds": 0.13099166599931777
+  },
+  {
+    "stage": "recipe-check",
+    "argv": [
+      "java",
+      "-cp",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/recipe-classes",
+      "com.synexia.rewrite.SealReplay",
+      "check",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/recipe-state-5",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/recipe/src/main/resources/m3-mask-window"
+    ],
+    "exit": 0,
+    "expected_failure": false,
+    "log": "019-recipe-check.log",
+    "sha256": "13838a89c9f97ae400b1d46379a3e8f5b2a919122748c48cfd9935462e96ce33",
+    "seconds": 0.10100942899953225
+  },
+  {
+    "stage": "recipe-apply",
+    "argv": [
+      "java",
+      "-cp",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/recipe-classes",
+      "com.synexia.rewrite.SealReplay",
+      "apply",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/recipe-state-5",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/recipe/src/main/resources/m3-mask-window"
+    ],
+    "exit": 0,
+    "expected_failure": false,
+    "log": "020-recipe-apply.log",
+    "sha256": "f79d4afdb7d344727a0f8cfc6dba365b49fef2a0e7158ee80e2fedbbfd6e1384",
+    "seconds": 0.1456860059988685
+  },
+  {
+    "stage": "recipe-apply",
+    "argv": [
+      "java",
+      "-cp",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/recipe-classes",
+      "com.synexia.rewrite.SealReplay",
+      "apply",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/recipe-state-6",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/recipe/src/main/resources/m3-mask-window"
+    ],
+    "exit": 0,
+    "expected_failure": false,
+    "log": "021-recipe-apply.log",
+    "sha256": "77ff9bcd6acdbddc5e9ddeb3a10a7a3d9aba33d177be14008adb466d05d21423",
+    "seconds": 0.1066876590011816
+  },
+  {
+    "stage": "recipe-check",
+    "argv": [
+      "java",
+      "-cp",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/recipe-classes",
+      "com.synexia.rewrite.SealReplay",
+      "check",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/recipe-state-6",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/recipe/src/main/resources/m3-mask-window"
+    ],
+    "exit": 0,
+    "expected_failure": false,
+    "log": "022-recipe-check.log",
+    "sha256": "13838a89c9f97ae400b1d46379a3e8f5b2a919122748c48cfd9935462e96ce33",
+    "seconds": 0.1410798880024231
+  },
+  {
+    "stage": "recipe-apply",
+    "argv": [
+      "java",
+      "-cp",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/recipe-classes",
+      "com.synexia.rewrite.SealReplay",
+      "apply",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/recipe-state-6",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/recipe/src/main/resources/m3-mask-window"
+    ],
+    "exit": 0,
+    "expected_failure": false,
+    "log": "023-recipe-apply.log",
+    "sha256": "f79d4afdb7d344727a0f8cfc6dba365b49fef2a0e7158ee80e2fedbbfd6e1384",
+    "seconds": 0.1346424349976587
+  },
+  {
+    "stage": "recipe-apply",
+    "argv": [
+      "java",
+      "-cp",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/recipe-classes",
+      "com.synexia.rewrite.SealReplay",
+      "apply",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/recipe-state-7",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/recipe/src/main/resources/m3-mask-window"
+    ],
+    "exit": 0,
+    "expected_failure": false,
+    "log": "024-recipe-apply.log",
+    "sha256": "f79d4afdb7d344727a0f8cfc6dba365b49fef2a0e7158ee80e2fedbbfd6e1384",
+    "seconds": 0.1382669859995076
+  },
+  {
+    "stage": "recipe-check",
+    "argv": [
+      "java",
+      "-cp",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/recipe-classes",
+      "com.synexia.rewrite.SealReplay",
+      "check",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/recipe-state-7",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/recipe/src/main/resources/m3-mask-window"
+    ],
+    "exit": 0,
+    "expected_failure": false,
+    "log": "025-recipe-check.log",
+    "sha256": "13838a89c9f97ae400b1d46379a3e8f5b2a919122748c48cfd9935462e96ce33",
+    "seconds": 0.1074289879979915
+  },
+  {
+    "stage": "recipe-apply",
+    "argv": [
+      "java",
+      "-cp",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/recipe-classes",
+      "com.synexia.rewrite.SealReplay",
+      "apply",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/recipe-state-7",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/recipe/src/main/resources/m3-mask-window"
+    ],
+    "exit": 0,
+    "expected_failure": false,
+    "log": "026-recipe-apply.log",
+    "sha256": "f79d4afdb7d344727a0f8cfc6dba365b49fef2a0e7158ee80e2fedbbfd6e1384",
+    "seconds": 0.16249893399799475
+  },
+  {
+    "stage": "recipe-apply",
+    "argv": [
+      "java",
+      "-cp",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/recipe-classes",
+      "com.synexia.rewrite.SealReplay",
+      "apply",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/refuse-missing",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/resources-missing"
+    ],
+    "exit": 1,
+    "expected_failure": true,
+    "log": "027-recipe-apply.log",
+    "sha256": "22cd93baca87af0f63d21e2f08f37271480981156dd5a9b872c980eaa57c514c",
+    "seconds": 0.14027378500031773
+  },
+  {
+    "stage": "recipe-apply",
+    "argv": [
+      "java",
+      "-cp",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/recipe-classes",
+      "com.synexia.rewrite.SealReplay",
+      "apply",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/refuse-drift",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/resources-drift"
+    ],
+    "exit": 1,
+    "expected_failure": true,
+    "log": "028-recipe-apply.log",
+    "sha256": "53cba079bdd0418f96599896b8bef5511def9811835d6b93a261c0da540eb886",
+    "seconds": 0.13117703500029165
+  },
+  {
+    "stage": "recipe-apply",
+    "argv": [
+      "java",
+      "-cp",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/recipe-classes",
+      "com.synexia.rewrite.SealReplay",
+      "apply",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/refuse-occupied",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/resources-occupied"
+    ],
+    "exit": 1,
+    "expected_failure": true,
+    "log": "029-recipe-apply.log",
+    "sha256": "bdfd3b128ab6509bc470d957c286b66a3103a1aebf83606c9278ddf905eb8310",
+    "seconds": 0.11272067599929869
+  },
+  {
+    "stage": "recipe-apply",
+    "argv": [
+      "java",
+      "-cp",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/recipe-classes",
+      "com.synexia.rewrite.SealReplay",
+      "apply",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/refuse-template",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/resources-template"
+    ],
+    "exit": 1,
+    "expected_failure": true,
+    "log": "030-recipe-apply.log",
+    "sha256": "f175f9494d9b3207a7ae0f9253a6a3dd859de04366edb31a9245788f61e22c17",
+    "seconds": 0.09468814600040787
+  },
+  {
+    "stage": "recipe-apply",
+    "argv": [
+      "java",
+      "-cp",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/recipe-classes",
+      "com.synexia.rewrite.SealReplay",
+      "apply",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/refuse-duplicate",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/resources-duplicate"
+    ],
+    "exit": 1,
+    "expected_failure": true,
+    "log": "031-recipe-apply.log",
+    "sha256": "18f7ec0ae10dbf800d920c390bf91571b8a0c34fa27a72cf8ca4c2023bbec0dd",
+    "seconds": 0.12072045100285322
+  },
+  {
+    "stage": "recipe-apply",
+    "argv": [
+      "java",
+      "-cp",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/recipe-classes",
+      "com.synexia.rewrite.SealReplay",
+      "apply",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/refuse-escape",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/resources-escape"
+    ],
+    "exit": 1,
+    "expected_failure": true,
+    "log": "032-recipe-apply.log",
+    "sha256": "a9a04779f6098ed5f61a46cb8d83fc5f7f3ebabddb5dba734e6ad5a6db0987fb",
+    "seconds": 0.11370246300066356
+  },
+  {
+    "stage": "recipe-apply",
+    "argv": [
+      "java",
+      "-cp",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/recipe-classes",
+      "com.synexia.rewrite.SealReplay",
+      "apply",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/refuse-symlink",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/resources-symlink"
+    ],
+    "exit": 1,
+    "expected_failure": true,
+    "log": "033-recipe-apply.log",
+    "sha256": "782cd36866790075921e74444ae40421fc13e5c25a824e88941a23bf91b9beac",
+    "seconds": 0.10527207799896132
+  },
+  {
+    "stage": "java-lint",
+    "argv": [
+      "javac",
+      "--release",
+      "21",
+      "-proc:none",
+      "-Xlint:all",
+      "-Werror",
+      "-d",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/before/lint",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/candidate/m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/candidate/m3/collections/src/main/java/com/m3/collections/M3LongAddressKernel.java",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/candidate/m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/recipe/probes/M3MaskWindowKernelSelfTest.java"
+    ],
+    "exit": 0,
+    "expected_failure": false,
+    "log": "034-java-lint.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "seconds": 1.211324133000744
+  },
+  {
+    "stage": "native-lint",
+    "argv": [
+      "gcc",
+      "-std=c17",
+      "-Wall",
+      "-Wextra",
+      "-Wconversion",
+      "-Wshadow",
+      "-Wpedantic",
+      "-Werror",
+      "-I/workspace/scratch/6a76dfb8b5f4/toolchains/jdk-21.0.12.1+1/include",
+      "-I/workspace/scratch/6a76dfb8b5f4/toolchains/jdk-21.0.12.1+1/include/linux",
+      "-fsyntax-only",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/candidate/m3/collections/src/main/native/collections/m3_index_mask_compactor.c"
+    ],
+    "exit": 0,
+    "expected_failure": false,
+    "log": "035-native-lint.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "seconds": 0.020095232997846324
+  },
+  {
+    "stage": "probe-lint",
+    "argv": [
+      "gcc",
+      "-std=c17",
+      "-Wall",
+      "-Wextra",
+      "-Wconversion",
+      "-Wshadow",
+      "-Wpedantic",
+      "-Werror",
+      "-I/workspace/scratch/6a76dfb8b5f4/toolchains/jdk-21.0.12.1+1/include",
+      "-I/workspace/scratch/6a76dfb8b5f4/toolchains/jdk-21.0.12.1+1/include/linux",
+      "-DPRODUCT_SOURCE=\"/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/candidate/m3/collections/src/main/native/collections/m3_index_mask_compactor.c\"",
+      "-fsyntax-only",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/recipe/probes/native_probe.c"
+    ],
+    "exit": 0,
+    "expected_failure": false,
+    "log": "036-probe-lint.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "seconds": 0.02182651100156363
+  },
+  {
+    "stage": "java-compile",
+    "argv": [
+      "javac",
+      "--release",
+      "21",
+      "-proc:none",
+      "-h",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/before/headers",
+      "-d",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/before/classes",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/candidate/m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/candidate/m3/collections/src/main/java/com/m3/collections/M3LongAddressKernel.java",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/candidate/m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/recipe/probes/M3MaskWindowKernelSelfTest.java"
+    ],
+    "exit": 0,
+    "expected_failure": false,
+    "log": "037-java-compile.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "seconds": 1.213646885000344
+  },
+  {
+    "stage": "native-compile",
+    "argv": [
+      "gcc",
+      "-std=c17",
+      "-Wall",
+      "-Wextra",
+      "-Wconversion",
+      "-Wshadow",
+      "-Wpedantic",
+      "-Werror",
+      "-I/workspace/scratch/6a76dfb8b5f4/toolchains/jdk-21.0.12.1+1/include",
+      "-I/workspace/scratch/6a76dfb8b5f4/toolchains/jdk-21.0.12.1+1/include/linux",
+      "-fsanitize=undefined",
+      "-fno-sanitize-recover=all",
+      "-O2",
+      "-fPIC",
+      "-shared",
+      "-fstack-usage",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/candidate/m3/collections/src/main/native/collections/m3_index_mask_compactor.c",
+      "-o",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/before/native/libm3_collections_mask.so"
+    ],
+    "exit": 0,
+    "expected_failure": false,
+    "log": "038-native-compile.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "seconds": 0.3723143729985168
+  },
+  {
+    "stage": "probe-compile",
+    "argv": [
+      "gcc",
+      "-std=c17",
+      "-Wall",
+      "-Wextra",
+      "-Wconversion",
+      "-Wshadow",
+      "-Wpedantic",
+      "-Werror",
+      "-I/workspace/scratch/6a76dfb8b5f4/toolchains/jdk-21.0.12.1+1/include",
+      "-I/workspace/scratch/6a76dfb8b5f4/toolchains/jdk-21.0.12.1+1/include/linux",
+      "-fsanitize=undefined",
+      "-fno-sanitize-recover=all",
+      "-O2",
+      "-DPRODUCT_SOURCE=\"/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/candidate/m3/collections/src/main/native/collections/m3_index_mask_compactor.c\"",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/recipe/probes/native_probe.c",
+      "-o",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/before/native-probe"
+    ],
+    "exit": 0,
+    "expected_failure": false,
+    "log": "039-probe-compile.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "seconds": 0.4346241170023859
+  },
+  {
+    "stage": "api",
+    "argv": [
+      "javap",
+      "-public",
+      "-s",
+      "-cp",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/before/classes",
+      "com.m3.collections.M3IndexMaskCompactor"
+    ],
+    "exit": 0,
+    "expected_failure": false,
+    "log": "040-api.log",
+    "sha256": "b63a4fdd01ae39e2babf9baabb756320bb5945b6fc72343a2b68b134d76e362a",
+    "seconds": 0.2674003760002961
+  },
+  {
+    "stage": "api",
+    "argv": [
+      "javap",
+      "-public",
+      "-s",
+      "-cp",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/before/classes",
+      "com.m3.collections.M3IndexMaskCompactor$Backend"
+    ],
+    "exit": 0,
+    "expected_failure": false,
+    "log": "041-api.log",
+    "sha256": "eb9b5480c80efd01f44ba9eff3b750939e293516df51771903219dc36126c063",
+    "seconds": 0.22635636199993314
+  },
+  {
+    "stage": "symbols",
+    "argv": [
+      "nm",
+      "-D",
+      "--defined-only",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/before/native/libm3_collections_mask.so"
+    ],
+    "exit": 0,
+    "expected_failure": false,
+    "log": "042-symbols.log",
+    "sha256": "0ade00841fa3cfc7cbd98ff9adcc8ce538defa2331b6b1eca46dc5e47c89456d",
+    "seconds": 0.0048436110009788536
+  },
+  {
+    "stage": "probe-test",
+    "argv": [
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/before/native-probe"
+    ],
+    "exit": 0,
+    "expected_failure": false,
+    "log": "043-probe-test.log",
+    "sha256": "16f65f00cea96787a241677f22abad50eacac224b5a4a93c1140a291e0d01ace",
+    "seconds": 0.0036436990012589376
+  },
+  {
+    "stage": "java-test",
+    "argv": [
+      "java",
+      "-Xmx32m",
+      "-Xcheck:jni",
+      "-Djava.library.path=/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/before/native",
+      "-cp",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/before/classes",
+      "com.m3.collections.M3MaskWindowKernelSelfTest"
+    ],
+    "exit": 0,
+    "expected_failure": false,
+    "log": "044-java-test.log",
+    "sha256": "cf7bf2611b8965c4d30a6eabecfaa1947d4034fbb3cf1c2770d74d78c36f04c6",
+    "seconds": 0.4189668229992094
+  },
+  {
+    "stage": "jni-runtime",
+    "argv": [
+      "java",
+      "-Xmx32m",
+      "-Xcheck:jni",
+      "-Djava.library.path=/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/before/native",
+      "-cp",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/before/classes",
+      "com.m3.collections.M3MaskWindowKernelSelfTest",
+      "--native"
+    ],
+    "exit": 0,
+    "expected_failure": false,
+    "log": "045-jni-runtime.log",
+    "sha256": "7e68774530aaa7e738962f422dab2f8210735613b8b93e5f50b7c572afc04edc",
+    "seconds": 0.5049600640013523
+  },
+  {
+    "stage": "missing-runtime",
+    "argv": [
+      "java",
+      "-Djava.library.path=/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/before/empty",
+      "-cp",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/before/classes",
+      "com.m3.collections.M3MaskWindowKernelSelfTest",
+      "--missing"
+    ],
+    "exit": 0,
+    "expected_failure": false,
+    "log": "046-missing-runtime.log",
+    "sha256": "e8ee77d6b6127aecc56d2b45b6519178f9c05e55b0526110efe8416264385001",
+    "seconds": 0.19209504700120306
+  },
+  {
+    "stage": "recipe-apply",
+    "argv": [
+      "java",
+      "-cp",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/recipe-classes",
+      "com.synexia.rewrite.SealReplay",
+      "apply",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/candidate",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/recipe/src/main/resources/m3-mask-window/pass-1"
+    ],
+    "exit": 0,
+    "expected_failure": false,
+    "log": "047-recipe-apply.log",
+    "sha256": "77ff9bcd6acdbddc5e9ddeb3a10a7a3d9aba33d177be14008adb466d05d21423",
+    "seconds": 0.20342542000071262
+  },
+  {
+    "stage": "recipe-check",
+    "argv": [
+      "java",
+      "-cp",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/recipe-classes",
+      "com.synexia.rewrite.SealReplay",
+      "check",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/candidate",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/recipe/src/main/resources/m3-mask-window/pass-1"
+    ],
+    "exit": 0,
+    "expected_failure": false,
+    "log": "048-recipe-check.log",
+    "sha256": "13838a89c9f97ae400b1d46379a3e8f5b2a919122748c48cfd9935462e96ce33",
+    "seconds": 0.20386050700108171
+  },
+  {
+    "stage": "java-lint",
+    "argv": [
+      "javac",
+      "--release",
+      "21",
+      "-proc:none",
+      "-Xlint:all",
+      "-Werror",
+      "-d",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/java/lint",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/candidate/m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/candidate/m3/collections/src/main/java/com/m3/collections/M3LongAddressKernel.java",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/candidate/m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/recipe/probes/M3MaskWindowKernelSelfTest.java"
+    ],
+    "exit": 0,
+    "expected_failure": false,
+    "log": "049-java-lint.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "seconds": 1.1962444699966
+  },
+  {
+    "stage": "native-lint",
+    "argv": [
+      "gcc",
+      "-std=c17",
+      "-Wall",
+      "-Wextra",
+      "-Wconversion",
+      "-Wshadow",
+      "-Wpedantic",
+      "-Werror",
+      "-I/workspace/scratch/6a76dfb8b5f4/toolchains/jdk-21.0.12.1+1/include",
+      "-I/workspace/scratch/6a76dfb8b5f4/toolchains/jdk-21.0.12.1+1/include/linux",
+      "-fsyntax-only",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/candidate/m3/collections/src/main/native/collections/m3_index_mask_compactor.c"
+    ],
+    "exit": 0,
+    "expected_failure": false,
+    "log": "050-native-lint.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "seconds": 0.017789052002626704
+  },
+  {
+    "stage": "probe-lint",
+    "argv": [
+      "gcc",
+      "-std=c17",
+      "-Wall",
+      "-Wextra",
+      "-Wconversion",
+      "-Wshadow",
+      "-Wpedantic",
+      "-Werror",
+      "-I/workspace/scratch/6a76dfb8b5f4/toolchains/jdk-21.0.12.1+1/include",
+      "-I/workspace/scratch/6a76dfb8b5f4/toolchains/jdk-21.0.12.1+1/include/linux",
+      "-DPRODUCT_SOURCE=\"/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/candidate/m3/collections/src/main/native/collections/m3_index_mask_compactor.c\"",
+      "-fsyntax-only",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/recipe/probes/native_probe.c"
+    ],
+    "exit": 0,
+    "expected_failure": false,
+    "log": "051-probe-lint.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "seconds": 0.01765322600112995
+  },
+  {
+    "stage": "java-compile",
+    "argv": [
+      "javac",
+      "--release",
+      "21",
+      "-proc:none",
+      "-h",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/java/headers",
+      "-d",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/java/classes",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/candidate/m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/candidate/m3/collections/src/main/java/com/m3/collections/M3LongAddressKernel.java",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/candidate/m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/recipe/probes/M3MaskWindowKernelSelfTest.java"
+    ],
+    "exit": 0,
+    "expected_failure": false,
+    "log": "052-java-compile.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "seconds": 1.085906274998706
+  },
+  {
+    "stage": "native-compile",
+    "argv": [
+      "gcc",
+      "-std=c17",
+      "-Wall",
+      "-Wextra",
+      "-Wconversion",
+      "-Wshadow",
+      "-Wpedantic",
+      "-Werror",
+      "-I/workspace/scratch/6a76dfb8b5f4/toolchains/jdk-21.0.12.1+1/include",
+      "-I/workspace/scratch/6a76dfb8b5f4/toolchains/jdk-21.0.12.1+1/include/linux",
+      "-fsanitize=undefined",
+      "-fno-sanitize-recover=all",
+      "-O2",
+      "-fPIC",
+      "-shared",
+      "-fstack-usage",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/candidate/m3/collections/src/main/native/collections/m3_index_mask_compactor.c",
+      "-o",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/java/native/libm3_collections_mask.so"
+    ],
+    "exit": 0,
+    "expected_failure": false,
+    "log": "053-native-compile.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "seconds": 0.26077230499868165
+  },
+  {
+    "stage": "probe-compile",
+    "argv": [
+      "gcc",
+      "-std=c17",
+      "-Wall",
+      "-Wextra",
+      "-Wconversion",
+      "-Wshadow",
+      "-Wpedantic",
+      "-Werror",
+      "-I/workspace/scratch/6a76dfb8b5f4/toolchains/jdk-21.0.12.1+1/include",
+      "-I/workspace/scratch/6a76dfb8b5f4/toolchains/jdk-21.0.12.1+1/include/linux",
+      "-fsanitize=undefined",
+      "-fno-sanitize-recover=all",
+      "-O2",
+      "-DPRODUCT_SOURCE=\"/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/candidate/m3/collections/src/main/native/collections/m3_index_mask_compactor.c\"",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/recipe/probes/native_probe.c",
+      "-o",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/java/native-probe"
+    ],
+    "exit": 0,
+    "expected_failure": false,
+    "log": "054-probe-compile.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "seconds": 0.5040354359989578
+  },
+  {
+    "stage": "api",
+    "argv": [
+      "javap",
+      "-public",
+      "-s",
+      "-cp",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/java/classes",
+      "com.m3.collections.M3IndexMaskCompactor"
+    ],
+    "exit": 0,
+    "expected_failure": false,
+    "log": "055-api.log",
+    "sha256": "b63a4fdd01ae39e2babf9baabb756320bb5945b6fc72343a2b68b134d76e362a",
+    "seconds": 0.5683065949997399
+  },
+  {
+    "stage": "api",
+    "argv": [
+      "javap",
+      "-public",
+      "-s",
+      "-cp",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/java/classes",
+      "com.m3.collections.M3IndexMaskCompactor$Backend"
+    ],
+    "exit": 0,
+    "expected_failure": false,
+    "log": "056-api.log",
+    "sha256": "eb9b5480c80efd01f44ba9eff3b750939e293516df51771903219dc36126c063",
+    "seconds": 0.16425568900012877
+  },
+  {
+    "stage": "symbols",
+    "argv": [
+      "nm",
+      "-D",
+      "--defined-only",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/java/native/libm3_collections_mask.so"
+    ],
+    "exit": 0,
+    "expected_failure": false,
+    "log": "057-symbols.log",
+    "sha256": "0ade00841fa3cfc7cbd98ff9adcc8ce538defa2331b6b1eca46dc5e47c89456d",
+    "seconds": 0.0029107739974278957
+  },
+  {
+    "stage": "probe-test",
+    "argv": [
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/java/native-probe"
+    ],
+    "exit": 0,
+    "expected_failure": false,
+    "log": "058-probe-test.log",
+    "sha256": "16f65f00cea96787a241677f22abad50eacac224b5a4a93c1140a291e0d01ace",
+    "seconds": 0.0037156190010136925
+  },
+  {
+    "stage": "java-test",
+    "argv": [
+      "java",
+      "-Xmx32m",
+      "-Xcheck:jni",
+      "-Djava.library.path=/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/java/native",
+      "-cp",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/java/classes",
+      "com.m3.collections.M3MaskWindowKernelSelfTest"
+    ],
+    "exit": 0,
+    "expected_failure": false,
+    "log": "059-java-test.log",
+    "sha256": "cf7bf2611b8965c4d30a6eabecfaa1947d4034fbb3cf1c2770d74d78c36f04c6",
+    "seconds": 0.31461572400075966
+  },
+  {
+    "stage": "jni-runtime",
+    "argv": [
+      "java",
+      "-Xmx32m",
+      "-Xcheck:jni",
+      "-Djava.library.path=/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/java/native",
+      "-cp",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/java/classes",
+      "com.m3.collections.M3MaskWindowKernelSelfTest",
+      "--native"
+    ],
+    "exit": 0,
+    "expected_failure": false,
+    "log": "060-jni-runtime.log",
+    "sha256": "7e68774530aaa7e738962f422dab2f8210735613b8b93e5f50b7c572afc04edc",
+    "seconds": 0.30931795699871145
+  },
+  {
+    "stage": "missing-runtime",
+    "argv": [
+      "java",
+      "-Djava.library.path=/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/java/empty",
+      "-cp",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/java/classes",
+      "com.m3.collections.M3MaskWindowKernelSelfTest",
+      "--missing"
+    ],
+    "exit": 0,
+    "expected_failure": false,
+    "log": "061-missing-runtime.log",
+    "sha256": "e8ee77d6b6127aecc56d2b45b6519178f9c05e55b0526110efe8416264385001",
+    "seconds": 0.08546630599812488
+  },
+  {
+    "stage": "recipe-apply",
+    "argv": [
+      "java",
+      "-cp",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/recipe-classes",
+      "com.synexia.rewrite.SealReplay",
+      "apply",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/candidate",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/recipe/src/main/resources/m3-mask-window/pass-2"
+    ],
+    "exit": 0,
+    "expected_failure": false,
+    "log": "062-recipe-apply.log",
+    "sha256": "77ff9bcd6acdbddc5e9ddeb3a10a7a3d9aba33d177be14008adb466d05d21423",
+    "seconds": 0.10197914600212243
+  },
+  {
+    "stage": "recipe-check",
+    "argv": [
+      "java",
+      "-cp",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/recipe-classes",
+      "com.synexia.rewrite.SealReplay",
+      "check",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/candidate",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/recipe/src/main/resources/m3-mask-window/pass-2"
+    ],
+    "exit": 0,
+    "expected_failure": false,
+    "log": "063-recipe-check.log",
+    "sha256": "13838a89c9f97ae400b1d46379a3e8f5b2a919122748c48cfd9935462e96ce33",
+    "seconds": 0.093558390999533
+  },
+  {
+    "stage": "java-lint",
+    "argv": [
+      "javac",
+      "--release",
+      "21",
+      "-proc:none",
+      "-Xlint:all",
+      "-Werror",
+      "-d",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/native/lint",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/candidate/m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/candidate/m3/collections/src/main/java/com/m3/collections/M3LongAddressKernel.java",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/candidate/m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/recipe/probes/M3MaskWindowKernelSelfTest.java"
+    ],
+    "exit": 0,
+    "expected_failure": false,
+    "log": "064-java-lint.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "seconds": 0.96149934999994
+  },
+  {
+    "stage": "native-lint",
+    "argv": [
+      "gcc",
+      "-std=c17",
+      "-Wall",
+      "-Wextra",
+      "-Wconversion",
+      "-Wshadow",
+      "-Wpedantic",
+      "-Werror",
+      "-I/workspace/scratch/6a76dfb8b5f4/toolchains/jdk-21.0.12.1+1/include",
+      "-I/workspace/scratch/6a76dfb8b5f4/toolchains/jdk-21.0.12.1+1/include/linux",
+      "-fsyntax-only",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/candidate/m3/collections/src/main/native/collections/m3_index_mask_compactor.c"
+    ],
+    "exit": 0,
+    "expected_failure": false,
+    "log": "065-native-lint.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "seconds": 0.011659358999168035
+  },
+  {
+    "stage": "probe-lint",
+    "argv": [
+      "gcc",
+      "-std=c17",
+      "-Wall",
+      "-Wextra",
+      "-Wconversion",
+      "-Wshadow",
+      "-Wpedantic",
+      "-Werror",
+      "-I/workspace/scratch/6a76dfb8b5f4/toolchains/jdk-21.0.12.1+1/include",
+      "-I/workspace/scratch/6a76dfb8b5f4/toolchains/jdk-21.0.12.1+1/include/linux",
+      "-DPRODUCT_SOURCE=\"/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/candidate/m3/collections/src/main/native/collections/m3_index_mask_compactor.c\"",
+      "-fsyntax-only",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/recipe/probes/native_probe.c"
+    ],
+    "exit": 0,
+    "expected_failure": false,
+    "log": "066-probe-lint.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "seconds": 0.014637334003055003
+  },
+  {
+    "stage": "java-compile",
+    "argv": [
+      "javac",
+      "--release",
+      "21",
+      "-proc:none",
+      "-h",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/native/headers",
+      "-d",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/native/classes",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/candidate/m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/candidate/m3/collections/src/main/java/com/m3/collections/M3LongAddressKernel.java",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/candidate/m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/recipe/probes/M3MaskWindowKernelSelfTest.java"
+    ],
+    "exit": 0,
+    "expected_failure": false,
+    "log": "067-java-compile.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "seconds": 1.0736015359980229
+  },
+  {
+    "stage": "native-compile",
+    "argv": [
+      "gcc",
+      "-std=c17",
+      "-Wall",
+      "-Wextra",
+      "-Wconversion",
+      "-Wshadow",
+      "-Wpedantic",
+      "-Werror",
+      "-I/workspace/scratch/6a76dfb8b5f4/toolchains/jdk-21.0.12.1+1/include",
+      "-I/workspace/scratch/6a76dfb8b5f4/toolchains/jdk-21.0.12.1+1/include/linux",
+      "-fsanitize=undefined",
+      "-fno-sanitize-recover=all",
+      "-O2",
+      "-fPIC",
+      "-shared",
+      "-fstack-usage",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/candidate/m3/collections/src/main/native/collections/m3_index_mask_compactor.c",
+      "-o",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/native/native/libm3_collections_mask.so"
+    ],
+    "exit": 0,
+    "expected_failure": false,
+    "log": "068-native-compile.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "seconds": 0.25352627300162567
+  },
+  {
+    "stage": "probe-compile",
+    "argv": [
+      "gcc",
+      "-std=c17",
+      "-Wall",
+      "-Wextra",
+      "-Wconversion",
+      "-Wshadow",
+      "-Wpedantic",
+      "-Werror",
+      "-I/workspace/scratch/6a76dfb8b5f4/toolchains/jdk-21.0.12.1+1/include",
+      "-I/workspace/scratch/6a76dfb8b5f4/toolchains/jdk-21.0.12.1+1/include/linux",
+      "-fsanitize=undefined",
+      "-fno-sanitize-recover=all",
+      "-O2",
+      "-DPRODUCT_SOURCE=\"/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/candidate/m3/collections/src/main/native/collections/m3_index_mask_compactor.c\"",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/recipe/probes/native_probe.c",
+      "-o",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/native/native-probe"
+    ],
+    "exit": 0,
+    "expected_failure": false,
+    "log": "069-probe-compile.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "seconds": 0.3772158399988257
+  },
+  {
+    "stage": "api",
+    "argv": [
+      "javap",
+      "-public",
+      "-s",
+      "-cp",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/native/classes",
+      "com.m3.collections.M3IndexMaskCompactor"
+    ],
+    "exit": 0,
+    "expected_failure": false,
+    "log": "070-api.log",
+    "sha256": "b63a4fdd01ae39e2babf9baabb756320bb5945b6fc72343a2b68b134d76e362a",
+    "seconds": 0.1712085789986304
+  },
+  {
+    "stage": "api",
+    "argv": [
+      "javap",
+      "-public",
+      "-s",
+      "-cp",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/native/classes",
+      "com.m3.collections.M3IndexMaskCompactor$Backend"
+    ],
+    "exit": 0,
+    "expected_failure": false,
+    "log": "071-api.log",
+    "sha256": "eb9b5480c80efd01f44ba9eff3b750939e293516df51771903219dc36126c063",
+    "seconds": 0.1959976510006527
+  },
+  {
+    "stage": "symbols",
+    "argv": [
+      "nm",
+      "-D",
+      "--defined-only",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/native/native/libm3_collections_mask.so"
+    ],
+    "exit": 0,
+    "expected_failure": false,
+    "log": "072-symbols.log",
+    "sha256": "028ff7a7fbe80e31ccc7319ed609910f15fb88d918e3c16b6c0dedfaccbbb649",
+    "seconds": 0.002140771997801494
+  },
+  {
+    "stage": "probe-test",
+    "argv": [
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/native/native-probe"
+    ],
+    "exit": 0,
+    "expected_failure": false,
+    "log": "073-probe-test.log",
+    "sha256": "27988b573cee7eb8fe4f47d123b7518c616947c79902e2a48f9d7f4d57e52d18",
+    "seconds": 0.014964166999561712
+  },
+  {
+    "stage": "java-test",
+    "argv": [
+      "java",
+      "-Xmx32m",
+      "-Xcheck:jni",
+      "-Djava.library.path=/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/native/native",
+      "-cp",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/native/classes",
+      "com.m3.collections.M3MaskWindowKernelSelfTest"
+    ],
+    "exit": 0,
+    "expected_failure": false,
+    "log": "074-java-test.log",
+    "sha256": "cf7bf2611b8965c4d30a6eabecfaa1947d4034fbb3cf1c2770d74d78c36f04c6",
+    "seconds": 0.315493393001816
+  },
+  {
+    "stage": "jni-runtime",
+    "argv": [
+      "java",
+      "-Xmx32m",
+      "-Xcheck:jni",
+      "-Djava.library.path=/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/native/native",
+      "-cp",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/native/classes",
+      "com.m3.collections.M3MaskWindowKernelSelfTest",
+      "--native"
+    ],
+    "exit": 0,
+    "expected_failure": false,
+    "log": "075-jni-runtime.log",
+    "sha256": "7e68774530aaa7e738962f422dab2f8210735613b8b93e5f50b7c572afc04edc",
+    "seconds": 0.30415593499856186
+  },
+  {
+    "stage": "missing-runtime",
+    "argv": [
+      "java",
+      "-Djava.library.path=/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/native/empty",
+      "-cp",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/native/classes",
+      "com.m3.collections.M3MaskWindowKernelSelfTest",
+      "--missing"
+    ],
+    "exit": 0,
+    "expected_failure": false,
+    "log": "076-missing-runtime.log",
+    "sha256": "e8ee77d6b6127aecc56d2b45b6519178f9c05e55b0526110efe8416264385001",
+    "seconds": 0.10143275700102095
+  },
+  {
+    "stage": "recipe-apply",
+    "argv": [
+      "java",
+      "-cp",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/recipe-classes",
+      "com.synexia.rewrite.SealReplay",
+      "apply",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/candidate",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/recipe/src/main/resources/m3-mask-window/pass-3"
+    ],
+    "exit": 0,
+    "expected_failure": false,
+    "log": "077-recipe-apply.log",
+    "sha256": "77ff9bcd6acdbddc5e9ddeb3a10a7a3d9aba33d177be14008adb466d05d21423",
+    "seconds": 0.09766766399843618
+  },
+  {
+    "stage": "recipe-check",
+    "argv": [
+      "java",
+      "-cp",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/recipe-classes",
+      "com.synexia.rewrite.SealReplay",
+      "check",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/candidate",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/recipe/src/main/resources/m3-mask-window/pass-3"
+    ],
+    "exit": 0,
+    "expected_failure": false,
+    "log": "078-recipe-check.log",
+    "sha256": "13838a89c9f97ae400b1d46379a3e8f5b2a919122748c48cfd9935462e96ce33",
+    "seconds": 0.10348436899948865
+  },
+  {
+    "stage": "java-lint",
+    "argv": [
+      "javac",
+      "--release",
+      "21",
+      "-proc:none",
+      "-Xlint:all",
+      "-Werror",
+      "-d",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/test/lint",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/candidate/m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/candidate/m3/collections/src/main/java/com/m3/collections/M3LongAddressKernel.java",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/candidate/m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/candidate/m3/collections/src/test/java/com/m3/collections/M3MaskWindowKernelSelfTest.java"
+    ],
+    "exit": 0,
+    "expected_failure": false,
+    "log": "079-java-lint.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "seconds": 0.9384260469996661
+  },
+  {
+    "stage": "native-lint",
+    "argv": [
+      "gcc",
+      "-std=c17",
+      "-Wall",
+      "-Wextra",
+      "-Wconversion",
+      "-Wshadow",
+      "-Wpedantic",
+      "-Werror",
+      "-I/workspace/scratch/6a76dfb8b5f4/toolchains/jdk-21.0.12.1+1/include",
+      "-I/workspace/scratch/6a76dfb8b5f4/toolchains/jdk-21.0.12.1+1/include/linux",
+      "-fsyntax-only",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/candidate/m3/collections/src/main/native/collections/m3_index_mask_compactor.c"
+    ],
+    "exit": 0,
+    "expected_failure": false,
+    "log": "080-native-lint.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "seconds": 0.012014605999866035
+  },
+  {
+    "stage": "probe-lint",
+    "argv": [
+      "gcc",
+      "-std=c17",
+      "-Wall",
+      "-Wextra",
+      "-Wconversion",
+      "-Wshadow",
+      "-Wpedantic",
+      "-Werror",
+      "-I/workspace/scratch/6a76dfb8b5f4/toolchains/jdk-21.0.12.1+1/include",
+      "-I/workspace/scratch/6a76dfb8b5f4/toolchains/jdk-21.0.12.1+1/include/linux",
+      "-DPRODUCT_SOURCE=\"/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/candidate/m3/collections/src/main/native/collections/m3_index_mask_compactor.c\"",
+      "-fsyntax-only",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/recipe/probes/native_probe.c"
+    ],
+    "exit": 0,
+    "expected_failure": false,
+    "log": "081-probe-lint.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "seconds": 0.01536155299982056
+  },
+  {
+    "stage": "java-compile",
+    "argv": [
+      "javac",
+      "--release",
+      "21",
+      "-proc:none",
+      "-h",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/test/headers",
+      "-d",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/test/classes",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/candidate/m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/candidate/m3/collections/src/main/java/com/m3/collections/M3LongAddressKernel.java",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/candidate/m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/candidate/m3/collections/src/test/java/com/m3/collections/M3MaskWindowKernelSelfTest.java"
+    ],
+    "exit": 0,
+    "expected_failure": false,
+    "log": "082-java-compile.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "seconds": 0.9431374340019829
+  },
+  {
+    "stage": "native-compile",
+    "argv": [
+      "gcc",
+      "-std=c17",
+      "-Wall",
+      "-Wextra",
+      "-Wconversion",
+      "-Wshadow",
+      "-Wpedantic",
+      "-Werror",
+      "-I/workspace/scratch/6a76dfb8b5f4/toolchains/jdk-21.0.12.1+1/include",
+      "-I/workspace/scratch/6a76dfb8b5f4/toolchains/jdk-21.0.12.1+1/include/linux",
+      "-fsanitize=undefined",
+      "-fno-sanitize-recover=all",
+      "-O2",
+      "-fPIC",
+      "-shared",
+      "-fstack-usage",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/candidate/m3/collections/src/main/native/collections/m3_index_mask_compactor.c",
+      "-o",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/test/native/libm3_collections_mask.so"
+    ],
+    "exit": 0,
+    "expected_failure": false,
+    "log": "083-native-compile.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "seconds": 0.2322542420006357
+  },
+  {
+    "stage": "probe-compile",
+    "argv": [
+      "gcc",
+      "-std=c17",
+      "-Wall",
+      "-Wextra",
+      "-Wconversion",
+      "-Wshadow",
+      "-Wpedantic",
+      "-Werror",
+      "-I/workspace/scratch/6a76dfb8b5f4/toolchains/jdk-21.0.12.1+1/include",
+      "-I/workspace/scratch/6a76dfb8b5f4/toolchains/jdk-21.0.12.1+1/include/linux",
+      "-fsanitize=undefined",
+      "-fno-sanitize-recover=all",
+      "-O2",
+      "-DPRODUCT_SOURCE=\"/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/candidate/m3/collections/src/main/native/collections/m3_index_mask_compactor.c\"",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/recipe/probes/native_probe.c",
+      "-o",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/test/native-probe"
+    ],
+    "exit": 0,
+    "expected_failure": false,
+    "log": "084-probe-compile.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "seconds": 0.35629708399937954
+  },
+  {
+    "stage": "api",
+    "argv": [
+      "javap",
+      "-public",
+      "-s",
+      "-cp",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/test/classes",
+      "com.m3.collections.M3IndexMaskCompactor"
+    ],
+    "exit": 0,
+    "expected_failure": false,
+    "log": "085-api.log",
+    "sha256": "b63a4fdd01ae39e2babf9baabb756320bb5945b6fc72343a2b68b134d76e362a",
+    "seconds": 0.20332343699919875
+  },
+  {
+    "stage": "api",
+    "argv": [
+      "javap",
+      "-public",
+      "-s",
+      "-cp",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/test/classes",
+      "com.m3.collections.M3IndexMaskCompactor$Backend"
+    ],
+    "exit": 0,
+    "expected_failure": false,
+    "log": "086-api.log",
+    "sha256": "eb9b5480c80efd01f44ba9eff3b750939e293516df51771903219dc36126c063",
+    "seconds": 0.18184987400309183
+  },
+  {
+    "stage": "symbols",
+    "argv": [
+      "nm",
+      "-D",
+      "--defined-only",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/test/native/libm3_collections_mask.so"
+    ],
+    "exit": 0,
+    "expected_failure": false,
+    "log": "087-symbols.log",
+    "sha256": "028ff7a7fbe80e31ccc7319ed609910f15fb88d918e3c16b6c0dedfaccbbb649",
+    "seconds": 0.0026848230008909013
+  },
+  {
+    "stage": "probe-test",
+    "argv": [
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/test/native-probe"
+    ],
+    "exit": 0,
+    "expected_failure": false,
+    "log": "088-probe-test.log",
+    "sha256": "27988b573cee7eb8fe4f47d123b7518c616947c79902e2a48f9d7f4d57e52d18",
+    "seconds": 0.002594116002001101
+  },
+  {
+    "stage": "java-test",
+    "argv": [
+      "java",
+      "-Xmx32m",
+      "-Xcheck:jni",
+      "-Djava.library.path=/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/test/native",
+      "-cp",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/test/classes",
+      "com.m3.collections.M3MaskWindowKernelSelfTest"
+    ],
+    "exit": 0,
+    "expected_failure": false,
+    "log": "089-java-test.log",
+    "sha256": "cf7bf2611b8965c4d30a6eabecfaa1947d4034fbb3cf1c2770d74d78c36f04c6",
+    "seconds": 0.31974281699876883
+  },
+  {
+    "stage": "jni-runtime",
+    "argv": [
+      "java",
+      "-Xmx32m",
+      "-Xcheck:jni",
+      "-Djava.library.path=/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/test/native",
+      "-cp",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/test/classes",
+      "com.m3.collections.M3MaskWindowKernelSelfTest",
+      "--native"
+    ],
+    "exit": 0,
+    "expected_failure": false,
+    "log": "090-jni-runtime.log",
+    "sha256": "7e68774530aaa7e738962f422dab2f8210735613b8b93e5f50b7c572afc04edc",
+    "seconds": 0.3090784050000366
+  },
+  {
+    "stage": "missing-runtime",
+    "argv": [
+      "java",
+      "-Djava.library.path=/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/test/empty",
+      "-cp",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/test/classes",
+      "com.m3.collections.M3MaskWindowKernelSelfTest",
+      "--missing"
+    ],
+    "exit": 0,
+    "expected_failure": false,
+    "log": "091-missing-runtime.log",
+    "sha256": "e8ee77d6b6127aecc56d2b45b6519178f9c05e55b0526110efe8416264385001",
+    "seconds": 0.0994927399988228
+  },
+  {
+    "stage": "binary-matrix",
+    "argv": [
+      "java",
+      "-Xmx32m",
+      "-Xcheck:jni",
+      "-Djava.library.path=/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/test/native",
+      "-cp",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/before/classes",
+      "com.m3.collections.M3MaskWindowKernelSelfTest",
+      "--native"
+    ],
+    "exit": 0,
+    "expected_failure": false,
+    "log": "092-binary-matrix.log",
+    "sha256": "7e68774530aaa7e738962f422dab2f8210735613b8b93e5f50b7c572afc04edc",
+    "seconds": 0.3588648499971896
+  },
+  {
+    "stage": "binary-matrix",
+    "argv": [
+      "java",
+      "-Xmx32m",
+      "-Xcheck:jni",
+      "-Djava.library.path=/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/before/native",
+      "-cp",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/test/classes",
+      "com.m3.collections.M3MaskWindowKernelSelfTest",
+      "--native"
+    ],
+    "exit": 0,
+    "expected_failure": false,
+    "log": "093-binary-matrix.log",
+    "sha256": "7e68774530aaa7e738962f422dab2f8210735613b8b93e5f50b7c572afc04edc",
+    "seconds": 0.3417124400002649
+  },
+  {
+    "stage": "legacy-lint",
+    "argv": [
+      "gcc",
+      "-std=c17",
+      "-Wall",
+      "-Wextra",
+      "-Wconversion",
+      "-Wshadow",
+      "-Wpedantic",
+      "-Werror",
+      "-I/workspace/scratch/6a76dfb8b5f4/toolchains/jdk-21.0.12.1+1/include",
+      "-I/workspace/scratch/6a76dfb8b5f4/toolchains/jdk-21.0.12.1+1/include/linux",
+      "-fsyntax-only",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/recipe/legacy/m3_index_mask_compactor.c"
+    ],
+    "exit": 0,
+    "expected_failure": false,
+    "log": "094-legacy-lint.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "seconds": 0.013144861997716362
+  },
+  {
+    "stage": "legacy-compile",
+    "argv": [
+      "gcc",
+      "-std=c17",
+      "-Wall",
+      "-Wextra",
+      "-Wconversion",
+      "-Wshadow",
+      "-Wpedantic",
+      "-Werror",
+      "-I/workspace/scratch/6a76dfb8b5f4/toolchains/jdk-21.0.12.1+1/include",
+      "-I/workspace/scratch/6a76dfb8b5f4/toolchains/jdk-21.0.12.1+1/include/linux",
+      "-fsanitize=undefined",
+      "-fno-sanitize-recover=all",
+      "-O2",
+      "-fPIC",
+      "-shared",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/recipe/legacy/m3_index_mask_compactor.c",
+      "-o",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/legacy-native/libm3_collections_mask.so"
+    ],
+    "exit": 0,
+    "expected_failure": false,
+    "log": "095-legacy-compile.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "seconds": 0.2316868810012238
+  },
+  {
+    "stage": "legacy-runtime",
+    "argv": [
+      "java",
+      "-Xmx32m",
+      "-Xcheck:jni",
+      "-Djava.library.path=/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/legacy-native",
+      "-cp",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/test/classes",
+      "com.m3.collections.M3MaskWindowKernelSelfTest",
+      "--native"
+    ],
+    "exit": 0,
+    "expected_failure": false,
+    "log": "096-legacy-runtime.log",
+    "sha256": "7e68774530aaa7e738962f422dab2f8210735613b8b93e5f50b7c572afc04edc",
+    "seconds": 0.3586267000027874
+  },
+  {
+    "stage": "mutant-lint",
+    "argv": [
+      "gcc",
+      "-std=c17",
+      "-Wall",
+      "-Wextra",
+      "-Wconversion",
+      "-Wshadow",
+      "-Wpedantic",
+      "-Werror",
+      "-I/workspace/scratch/6a76dfb8b5f4/toolchains/jdk-21.0.12.1+1/include",
+      "-I/workspace/scratch/6a76dfb8b5f4/toolchains/jdk-21.0.12.1+1/include/linux",
+      "-fsyntax-only",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/mutant-state-offset/mutant.c"
+    ],
+    "exit": 0,
+    "expected_failure": false,
+    "log": "097-mutant-lint.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "seconds": 0.01365270899987081
+  },
+  {
+    "stage": "mutant-compile",
+    "argv": [
+      "gcc",
+      "-std=c17",
+      "-Wall",
+      "-Wextra",
+      "-Wconversion",
+      "-Wshadow",
+      "-Wpedantic",
+      "-Werror",
+      "-I/workspace/scratch/6a76dfb8b5f4/toolchains/jdk-21.0.12.1+1/include",
+      "-I/workspace/scratch/6a76dfb8b5f4/toolchains/jdk-21.0.12.1+1/include/linux",
+      "-fsanitize=undefined",
+      "-fno-sanitize-recover=all",
+      "-O2",
+      "-fPIC",
+      "-shared",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/mutant-state-offset/mutant.c",
+      "-o",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/mutant-state-offset/libm3_collections_mask.so"
+    ],
+    "exit": 0,
+    "expected_failure": false,
+    "log": "098-mutant-compile.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "seconds": 0.2336520169992582
+  },
+  {
+    "stage": "mutant-runtime",
+    "argv": [
+      "java",
+      "-Xmx32m",
+      "-Xcheck:jni",
+      "-Djava.library.path=/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/mutant-state-offset",
+      "-cp",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/test/classes",
+      "com.m3.collections.M3MaskWindowKernelSelfTest",
+      "--native"
+    ],
+    "exit": 1,
+    "expected_failure": true,
+    "log": "099-mutant-runtime.log",
+    "sha256": "00d43afe5ca35a0faef6fd44d72c02c03a0a97dca224df531c536c5fc1c71b3a",
+    "seconds": 0.0639362389993039
+  },
+  {
+    "stage": "mutant-lint",
+    "argv": [
+      "gcc",
+      "-std=c17",
+      "-Wall",
+      "-Wextra",
+      "-Wconversion",
+      "-Wshadow",
+      "-Wpedantic",
+      "-Werror",
+      "-I/workspace/scratch/6a76dfb8b5f4/toolchains/jdk-21.0.12.1+1/include",
+      "-I/workspace/scratch/6a76dfb8b5f4/toolchains/jdk-21.0.12.1+1/include/linux",
+      "-fsyntax-only",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/mutant-long-payload/mutant.c"
+    ],
+    "exit": 0,
+    "expected_failure": false,
+    "log": "100-mutant-lint.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "seconds": 0.016323809999448713
+  },
+  {
+    "stage": "mutant-compile",
+    "argv": [
+      "gcc",
+      "-std=c17",
+      "-Wall",
+      "-Wextra",
+      "-Wconversion",
+      "-Wshadow",
+      "-Wpedantic",
+      "-Werror",
+      "-I/workspace/scratch/6a76dfb8b5f4/toolchains/jdk-21.0.12.1+1/include",
+      "-I/workspace/scratch/6a76dfb8b5f4/toolchains/jdk-21.0.12.1+1/include/linux",
+      "-fsanitize=undefined",
+      "-fno-sanitize-recover=all",
+      "-O2",
+      "-fPIC",
+      "-shared",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/mutant-long-payload/mutant.c",
+      "-o",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/mutant-long-payload/libm3_collections_mask.so"
+    ],
+    "exit": 0,
+    "expected_failure": false,
+    "log": "101-mutant-compile.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "seconds": 0.24328222400072264
+  },
+  {
+    "stage": "mutant-runtime",
+    "argv": [
+      "java",
+      "-Xmx32m",
+      "-Xcheck:jni",
+      "-Djava.library.path=/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/mutant-long-payload",
+      "-cp",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/test/classes",
+      "com.m3.collections.M3MaskWindowKernelSelfTest",
+      "--native"
+    ],
+    "exit": 1,
+    "expected_failure": true,
+    "log": "102-mutant-runtime.log",
+    "sha256": "b21b7f015b949332b14add5c2c62c6dcabc864dd0761345cf5d6de745ba18314",
+    "seconds": 0.07543452499885461
+  },
+  {
+    "stage": "recipe-check",
+    "argv": [
+      "java",
+      "-cp",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/recipe-classes",
+      "com.synexia.rewrite.SealReplay",
+      "check",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/candidate",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/recipe/src/main/resources/m3-mask-window"
+    ],
+    "exit": 0,
+    "expected_failure": false,
+    "log": "103-recipe-check.log",
+    "sha256": "13838a89c9f97ae400b1d46379a3e8f5b2a919122748c48cfd9935462e96ce33",
+    "seconds": 0.10742909900000086
+  },
+  {
+    "stage": "recipe-apply",
+    "argv": [
+      "java",
+      "-cp",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/recipe-classes",
+      "com.synexia.rewrite.SealReplay",
+      "apply",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/candidate",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/recipe/src/main/resources/m3-mask-window"
+    ],
+    "exit": 0,
+    "expected_failure": false,
+    "log": "104-recipe-apply.log",
+    "sha256": "f79d4afdb7d344727a0f8cfc6dba365b49fef2a0e7158ee80e2fedbbfd6e1384",
+    "seconds": 0.11257642900091014
+  }
+]

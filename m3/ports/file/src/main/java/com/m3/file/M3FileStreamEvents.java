@@ -59,6 +59,11 @@ public final class M3FileStreamEvents {
       if (payload.length == 0) throw new IllegalArgumentException("empty byte event");
     }
 
+    /** Number of retained bytes without exposing or cloning the immutable payload. */
+    public int byteCount() {
+      return payload.length;
+    }
+
     @Override
     public byte[] payload() {
       return payload.clone();

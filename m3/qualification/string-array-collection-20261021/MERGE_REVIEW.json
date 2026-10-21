@@ -1,0 +1,58 @@
+{
+  "schema": "M3_NONDESTRUCTIVE_REVIEW_BRANCH_MERGE_V1",
+  "status": "PASS_SOURCE_MERGE_REVIEW",
+  "qualified_commit": "0c0aaf310cf0dd8a5b4eb2d23ec9944d8e547d3d",
+  "qualified_source_base": "1d105af842f16ba31a8ca14593f58ed43b7429ee",
+  "incoming_master": "e7d7c5cdb21c4726c6be398e64efb1cc1e916135",
+  "resolved_tree": "615aa8eb2d94a104d37cf05f050b1737b68bde0f",
+  "conflict_resolutions": [
+    {
+      "path": "src/java.base/share/classes/java/lang/M3StringImmediate.java",
+      "chosen_git_blob": "74c9a849c0124e1be77374cc8b97b7102ed0848f",
+      "resolution": "Preserve current master byte-for-byte; it already contains the equivalent comment/doc-only compiler correction."
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/M3StringPool.java",
+      "chosen_git_blob": "0d47d7e969086262705460c153583f659237c894",
+      "resolution": "Preserve current master byte-for-byte; it already contains the equivalent comment/doc-only compiler correction."
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/CollectionViews.java",
+      "chosen_git_blob": "2ff7ec57ab93c8bd118ceb320fd76aae1c0e7d66",
+      "resolution": "Preserve current master byte-for-byte; it already contains the equivalent comment/doc-only compiler correction."
+    }
+  ],
+  "string_admission": {
+    "path": "src/java.base/share/classes/java/lang/M3String.java",
+    "current_source_preserved_except_exact_donor_atom": true,
+    "donor_atom_sha256": "6b69e1ba2dc077fadff68917191f6f3d7c0be3262c23a64995c58a4b6aa810f8",
+    "merged_sha256": "24c0a0fc189801352a22daf9514973a8bd7f93697cdd9e99ed7999400f365bc7",
+    "before_sha256": "900bb2f7f8d709f9ed23109b74aec6bfd1ee52f89addd2ccad060e535aa7382d"
+  },
+  "source_delta_paths": [
+    "m3/collections/src/main/java/com/m3/collections/M3FilteredNavigableSet.java",
+    "m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java",
+    "m3/collections/src/main/java/com/m3/collections/M3MutableFilteredViews.java",
+    "m3/collections/src/main/java/com/m3/collections/M3SignalOrder.java",
+    "m3/collections/src/main/native/collections/m3_signal_order_jni.c",
+    "m3/collections/src/test/java/com/m3/collections/M3FilteredCursorExceptionContract.java",
+    "m3/collections/src/test/java/com/m3/collections/M3FilteredCursorExceptionTest.java",
+    "m3/collections/src/test/java/com/m3/collections/M3FilteredFacadeEndpointContract.java",
+    "m3/collections/src/test/java/com/m3/collections/M3FilteredFacadeEndpointTest.java",
+    "m3/collections/src/test/java/com/m3/collections/M3SignalRadixUniformBench.java",
+    "m3/collections/src/test/java/com/m3/collections/M3SignalRadixUniformContract.java",
+    "m3/collections/src/test/java/com/m3/collections/M3SignalRadixUniformTest.java",
+    "m3/qualification/string-array-collection-20261021/README.md",
+    "m3/qualification/string-array-collection-20261021/RECEIPT.json",
+    "m3/qualification/string-array-collection-20261021/TARGET_FILES.tsv",
+    "src/java.base/share/classes/java/lang/M3String.java",
+    "src/java.base/share/native/libjava/String.c",
+    "test/jdk/java/lang/String/M3StringNativeProjectionTest.java",
+    "test/jdk/java/lang/String/libM3StringNativeProjectionTest.c",
+    "test/jdk/java/util/CollectionViews/RunSearchJni.java",
+    "test/jdk/java/util/CollectionViews/run_search_jni.c"
+  ],
+  "runtime_qualification_of_newer_master": "NOT_RUN; original source-built image proof remains pinned to qualified commit/base.",
+  "history_rewritten": false,
+  "source_recipe_seals_relaxed": false
+}
