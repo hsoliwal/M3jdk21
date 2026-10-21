@@ -76,6 +76,9 @@ public final class M3ASTRelationsContract {
         same(0L, shared.retainedPrimitiveBytes(), "no eager arrays, parser, or AST");
         check(shared.countKind("MAVEN_DEPENDENCY") == 3, "Maven-like kind count");
         check(shared.countKind("NOT_PRESENT") == 0, "unknown kind");
+        check(shared.retainedPrimitiveBytes() > 0
+                && shared.retainedPrimitiveBytes() < (long) build.index().nodeCount() * 4,
+                "count-only Maven linter retains kind counters, not all postings");
         int[] expected = {build.left(), build.second(), build.distinct()};
         check(Arrays.equals(expected, shared.rowsOfKind("MAVEN_DEPENDENCY", 3)),
                 "kind postings preserve original preorder");
