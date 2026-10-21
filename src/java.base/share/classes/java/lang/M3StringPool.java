@@ -901,6 +901,37 @@ final class M3StringPool {
      * No native address, Java byte/char payload, or child M3String is retained or copied.
      * The stack grows only when the tuple depth requires it.</p>
      */
+    /**
+     * The JNI shadow allocation already owns the one contiguous output array.
+     * Reuse this pool's canonical owner/range cursor to transfer exact scalar
+     * subranges without recursive tuple calls or intermediate text payloads.
+     */
+    static void copyCharsFromPath(M3StringOwner root, int from, int end,
+            char[] destination, int destinationStart) {
+        if (from == end) return;
+        LeafCursor path = new LeafCursor(root, from, end - from);
+        int target = destinationStart;
+        while (path.next()) {
+            int count = path.length();
+            path.atom().getChars(path.start(), Math.addExact(path.start(), count),
+                    destination, target);
+            target = Math.addExact(target, count);
+        }
+    }
+
+    static void copyBytesFromPath(M3StringOwner root, int from, int end,
+            byte[] destination, int destinationStart, byte coder) {
+        if (from == end) return;
+        LeafCursor path = new LeafCursor(root, from, end - from);
+        int target = destinationStart;
+        while (path.next()) {
+            int count = path.length();
+            path.atom().getBytes(path.start(), Math.addExact(path.start(), count),
+                    destination, target, coder);
+            target = Math.addExact(target, count);
+        }
+    }
+
     private static final class LeafCursor {
         private M3StringOwner[] pendingOwners = new M3StringOwner[8];
         private long[] pendingCoordinates = new long[8];
@@ -922,6 +953,11 @@ final class M3StringPool {
         LeafCursor(M3String first, M3String second) {
             if (second != null) push(second.owner(), second.start(), second.length());
             if (first != null) push(first.owner(), first.start(), first.length());
+        }
+
+        /** Consume a known immutable tuple coordinate without constructing child wrappers. */
+        LeafCursor(M3StringOwner owner, int start, int count) {
+            push(owner, start, count);
         }
 
         /**
