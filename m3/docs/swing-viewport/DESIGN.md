@@ -223,7 +223,158 @@ method names and lane meanings change only together with a note in this section.
    every expansion; an expanded-path index keyed by parent removes the O(expanded) factor.
 3. `BasicTreeUI` paint by row index (inventory OH18 of `m3-swing-awt-viewport.md`): one `TreePath` per painted row only
    where `paintRow` needs it.
-4. JList: prefix sums over `cellHeights` for `getCellBounds` and `convertLocationToRow` (identical answers, O(log n)),
-   guarded so that subclasses that write `cellHeights` keep the stock loops; measure-on-demand for `updateLayoutState`.
+4. JList: prefix sums over `cellHeights` for `getCellBounds` and `convertLocationToRow` (done: leaf 3, section 9),
+   guarded so that subclasses that write `cellHeights` keep the stock loops; `updateLayoutState` measures only the rows
+   that list data events touched (done: leaf 4, section 10). An estimated-height lane is a contract change, recorded
+   in `ENHANCED_API_MAP.tsv` for the user.
 5. Fix D2 in `DefaultTreeSelectionModel` in the M3 mode, with its own differential.
 6. Default-on switch, together with the SWT `swt.widget.mode` convention, once CI has run make and jtreg.
+
+## 9. Leaf 3: JList row offsets by prefix lane (`sun.swing.list`)
+
+Stock `BasicListUI` keeps one height per row in `cellHeights` (a new array per `updateLayoutState`) and sums it row
+by row in two places: `getCellBounds(JList, int)` (the y of a vertical row) and `convertLocationToRow` (the row at a
+y). `indexToLocation`, `locationToIndex`, `getPreferredSize` (the bounds of the last row), scroll increments and
+every painted row pay O(row): 302-455 us per query at the end of 10^6 rows (section 2).
+
+| Class | Role |
+|---|---|
+| `sun.swing.list.M3RowOffsets` | the seam: `startOf(row)` (wrapped `int` sum of the heights before a row), `monotone()`, `firstEndingAfter(offset)`; the switch point for an `m3/collections` prefix-sum owner once one ships inside the JDK (none exists on `m3/viewport-everywhere-20261018` at `b9d9659c184`; `M3SparseExtents` is sparse and lives outside `java.desktop`) |
+| `sun.swing.list.M3PrefixRowOffsets` | one `int[n + 1]` prefix lane built in one pass; `startOf` is a load, `firstEndingAfter` a binary search |
+| `sun.swing.list.M3ListRows` | per-UI state: offsets keyed by the identity of the `cellHeights` array, the module guard, and the two stock loops' answers |
+
+**Algorithm choice (rule 21, `ALGORITHM_CATALOGUE.tsv`, `bench/ROW_OFFSETS_20261018.tsv`).** At 10^6 rows the prefix
+lane builds in 0.69 ms and answers the start of a row in 3.5 ns and the row at an offset in 149 ns; the in-repo
+`javax.swing.SizeSequence` takes 4.4 ms, 133 ns and 176 ns, a Fenwick tree 1.8 ms, 28 ns and 236 ns, sqrt blocks
+0.3 ms, 196 ns and 280 ns; the stock loop takes 288 us for the start of the last row. The heights never change in
+place (the stock class replaces the array on every layout), so the point updates of SizeSequence and Fenwick buy
+nothing here; SizeSequence stays the candidate owner for the measure-on-demand leaf, where single heights change.
+
+**Same answers.** `getCellBounds`: the stock `y = insets.top + h[0] + ... + h[row - 1]` in `int` arithmetic equals
+`insets.top + startOf(row)` for any heights, wrapping included (addition modulo 2^32); rows at or past
+`cellHeights.length` keep the stock code (which answers y = 0). `convertLocationToRow`: the stock loop returns the
+first row whose `[y, y + h)` holds `y0`, else `size - 1` (also when `y0` is above the list and `closest` is false),
+and 0 for `closest` above the top; with non-negative heights and no `int` overflow of `insets.top + startOf(size)`
+that is `min(firstEndingAfter(y0 - top), size - 1)`. With a negative height or an overflow, `M3ListRows.rowAt`
+answers `STOCK` and the stock loop runs.
+
+**Guard.** The stock class writes `cellHeights` only while it fills a newly allocated array in `updateLayoutState`,
+and no other `java.desktop` class touches the field (`git grep cellHeights`), so the array's identity is its
+version. A `BasicListUI` subclass from another module could write the array in place; such UIs keep the stock loops
+(the check is `getClass().getModule()`). Third-party look and feels therefore keep stock behaviour and cost.
+
+**Hook (recipe-first).** `recipe/META-INF/rewrite/m3-swing-viewport-list.yml`
+(`com.synexia.openrewrite.viewport.M3SwingViewportBasicListUI`): one field (`M3AddMemberIfMissing`) and two blocks
+(`M3InsertStatements`, `BEFORE` the stock code they bypass, falling through to it when the path is off). OpenJDK
+writes `default:` without braces and `else if` chains, which the insert recipe did not search; the recipe was
+extended (hsoliwal/com.synexia `8c122afccd25` on `m3/viewport-catalogue-recipes-20261016`: `else if` chains and
+`case` statements with or without braces, two new recipe tests) and then applied.
+
+| Proof (2026-10-19, JDK 21.0.9, stock + `--patch-module java.desktop`; re-run with build and test output on S: after G: showed failing writes, same results) | Result |
+|---|---|
+| `M3JListViewportDifferential 40 300` (`-Dm3.swing.viewport=true`): two JLists on one `DefaultListModel`, one with a `BasicListUI` subclass outside `java.desktop` (stock loops), one with `BasicListUI` (prefix lane); heights 0, negative and very large included; public answers after every step, pixels every 10 steps | **40 of 40 seeds x 300 steps pass, 1,240 pixel comparisons equal, offsets built at all 12,040 checks** |
+| Mutation check: `firstEndingAfter` with `>=` in place of `>` | caught: 3 of 5 seeds fail |
+| `M3ListRowsTest` (JUnit 5: lane and `rowAt` against the stock loops copied as oracles, wrapping, the monotone flag, guard and versioning, the JList differential) under JaCoCo 0.8.15, merged with a flag-off differential run | **7/7 pass; `sun.swing.list` 100.00% lines (47/47), 100.00% branches (30/30)** |
+| `javac -Xlint:all` of the patched classes | clean for the three new classes; `BasicListUI` adds no warning |
+| Hook recipe via `M3PerFileApply` | pass 1 CHANGED, pass 2 UNCHANGED (fixed point); the extended `M3InsertStatements` leaves the `BasicTreeUI` and SWT `Tree` hooks UNCHANGED |
+| Recipe crate tests | 35 run, 0 failures, 2 skipped (`M3InsertStatementsTest` 9/9) |
+| `make`, jtreg | PENDING_CI |
+
+**Benchmark** (`bench/LIST_20261019.tsv`, `SwingViewportBench list`, 10^6 rows, three rounds on a heavily shared
+machine, stock / M3): `locationToIndex` of the last row 405-626 us / 2.0-3.2 us; `indexToLocation` of the last row
+366-501 us / 1.6-2.8 us; 800x600 frame p50 in the middle 0.82-0.99 ms / 0.42-0.57 ms, at the end 1.23-1.36 ms /
+0.43-0.50 ms (the start frame is noise-bound in both); heap +4 MB (the lane). The single-shot relayout rows
+(`getPreferredSize` 493-687 ms / 593-869 ms, `add(0)` + relayout 378-574 ms / 360-588 ms) are noise-bound: two further
+rounds with a fixed 1.5 GB heap (no heap growth) gave `getPreferredSize` 559-699 ms stock and 622-656 ms M3. Every
+row is still measured on each relayout; leaf 4 (section 10) removes that for model edits.
+
+## 10. Leaf 4: JList measures only the rows that list data events touched (`sun.swing.list`)
+
+Stock `BasicListUI.updateLayoutState` measures every row on every layout: one `getElementAt`, one renderer call and
+one `getPreferredSize` per row. Each list data event (an insert, a removal, a `set`) therefore costs a full pass:
+360-588 ms per edit at 10^6 rows (section 9). Leaf 4 keeps each row's measured height and width between layouts and
+measures only the rows that the events touched.
+
+| Class | Role |
+|---|---|
+| `sun.swing.list.M3RowPieces` | piece table: the rows after the edits as runs of rows measured at the last layout, or runs of new rows; an event edits it in O(pieces), the next layout copies the kept sizes in one O(n) pass |
+| `sun.swing.list.M3ListMeasure` | per-UI state: the height and width lanes of the last layout (the height lane is the `cellHeights` array handed to `BasicListUI`, never written afterwards), the pieces, the inputs that set row sizes, and the `measure` decision |
+
+**When it applies.** With `-Dm3.swing.viewport=true`, a UI class in `java.desktop`, vertical layout, variable row
+heights (`fixedCellHeight == -1`), an enabled list, and a renderer whose class is exactly `DefaultListCellRenderer`
+or `DefaultListCellRenderer.UIResource` (the look and feel's default). That renderer sizes a row from the value
+(text, HTML or icon), the list's font and orientation, its border from the look and feel, and its own label
+properties; never from the row index (the index only selects drop-location colours). Anything else keeps the stock
+loop, and the next accepted layout measures every row.
+
+**What a layout measures.**
+- Every row, in the stock order: the first layout, and any layout after the model, the renderer, the list's font
+  (identity) or component orientation, or the renderer's `html.disable` property, icon-text gap, text positions,
+  alignments, label UI or set preferred size changed.
+- Otherwise the inserted and changed rows, in ascending order, plus one probe: the last row kept from the last
+  layout. When the probe is the last row it is measured last; otherwise it is measured first and the rows after it
+  are all new. Either way the renderer ends configured for the last row, as after the stock loop.
+- Every row again when the probe measures differently from its recorded size. This catches changes that resize every
+  row without an event or a tracked input, such as a `UIManager` border or a display scale change.
+- Every row when the events cannot be followed: `contentsChanged` with an index below 0, indices out of range, a
+  model size that the events do not explain, or more than 1,024 pieces.
+
+**Same answers.** The hook sets `cellWidth` (the fixed width, else the widest row, -1 for an empty list),
+`cellHeight = -1`, `cellHeights` (a new array per layout) and `columnCount = 1`, exactly the fields the stock
+method sets for a vertical list. They equal the stock values whenever every kept row would still measure as
+recorded. The tracked inputs, the probe and the events make sure of that, except in the one case below.
+
+**The one known divergence: a value changed without a list data event.** The `ListModel` contract says listeners are
+told of every change, and `DefaultListModel` does so. A model that breaks it, for example a mutable value whose
+`toString` changes, an `Icon` that changes size, or HTML whose images load later, gives different answers:
+- Stock keeps the row's old size until the next `updateLayoutState`, which any later event or property change
+  causes (an insert elsewhere, a font change). That layout measures every row and picks the change up.
+- The M3 path keeps the recorded size until the row itself gets an event, or until every row is measured again
+  (a tracked input changes, the probe differs, the events cannot be followed, or the changed row is the probe).
+- `M3ListMeasureTest.eventlessMutationIsTheOneKnownDivergence` records both behaviours. An application that hits
+  it fires the event the contract asks for (`DefaultListModel.set(i, sameValue)`).
+
+The renderer and the model also see fewer calls (the touched rows plus one probe instead of every row). Only the
+JDK's own renderer classes take the path, and neither has side effects; a model whose `getElementAt` has side
+effects sees fewer of them.
+
+**Not built: an estimated-height lane** (measure on demand, estimate unmeasured rows). `getPreferredSize` and every y
+below an unmeasured row would be estimates, so the answers would differ from stock until every row is measured. It
+is a contract change, recorded in `ENHANCED_API_MAP.tsv` (`LIST-ESTIMATED-ROW-HEIGHTS`, an opt-in client property)
+for the user to decide.
+
+**Algorithm choice (rule 21, `ALGORITHM_CATALOGUE.tsv`, `bench/ROW_EDITS_20261019.tsv`).** Bookkeeping between two
+layouts at 10^6 rows, measuring excluded: the piece table takes 1.0-3.0 ms whatever the edits (one front insert,
+40 random inserts, 1,000 appends, 1,000 front inserts, 100 changes, 100 removals); shifting both lanes on every
+event takes 0.5-1.0 ms for a single edit but 15.5 ms for 40 random inserts and 346 ms for 1,000 front inserts.
+The piece table is chosen. **Donor check:** JetBrainsRuntime `jbr21` `BasicListUI` is identical to stock and `main`
+changes only comments (`FOSS_REUSE_DECISION.tsv`); there is nothing to port.
+
+**Hook (recipe-first).** The same recipe, `M3SwingViewportBasicListUI`, adds a second field, a block at the start
+of `updateLayoutState` (it falls through to the stock loop when `measure` declines), and one statement at the start
+of `Handler.intervalAdded`, `intervalRemoved` and `contentsChanged`. The statement runs before the selection model
+is updated, because the selection listener can lay the list out in the middle of the event. Pass 1 CHANGED, pass 2
+UNCHANGED.
+
+| Proof (2026-10-19, JDK 21.0.9, stock + `--patch-module java.desktop`, output on S:) | Result |
+|---|---|
+| `M3JListViewportDifferential 40 300` (`-Dm3.swing.viewport=true`). Every third seed now keeps `DefaultListCellRenderer` with plain, HTML (one to four lines), empty and null strings and icons; those seeds also toggle `html.disable`, the icon-text gap, the text position, the enabled state and the orientation, and swap the renderer (UIResource, plain, a subclass). Public answers are compared after every step and pixels every 10 steps | **40/40 seeds x 300 steps pass, 1,240 pixel comparisons equal, 990 layouts measured only part of the rows** |
+| Planted bugs: `contentsChanged` not recorded; the piece split losing its row offset | caught: 2 of 9 and 1 of 9 seeds fail (the 3 renderer seeds among them) |
+| `M3ListMeasureTest` (JUnit 5, 9 tests: piece table against a reference list, which rows a layout measures, the probe at the front, at the end and for a height-only change, 12 tracked inputs, declined cases, untrackable events and the 1,024-piece cap, the event-less mutation divergence, empty/clear/fixed width, 30 x 200 differential) with `M3ListRowsTest`, under JaCoCo 0.8.15, merged with a flag-off run | **16/16 pass; `sun.swing.list` 100% lines (213/213), 100% branches (162/162)** |
+| `javac -Xlint:all` of the patched classes | clean for both new classes; warnings unchanged (`BasicTreeUI`'s two `this-escape`) |
+| Hook recipe via `M3PerFileApply` | pass 1 CHANGED, pass 2 UNCHANGED |
+| `make`, jtreg | PENDING_CI |
+
+**Benchmark** (`bench/LIST_MEASURE_20261019.tsv`, `SwingViewportBench list`, 10^6 rows, two interleaved rounds,
+stock / M3; `relayout_*` = one model edit + `getPreferredSize`, median of 11):
+
+| Edit | stock | M3 |
+|---|---:|---:|
+| insert at the front | 564-584 ms | 6.3 ms |
+| `set` in the middle (two-line HTML) | 681-971 ms | 12.1-14.0 ms |
+| append | 792-836 ms | 4.1-4.2 ms |
+| remove at the front | 693-1,007 ms | 5.3-6.1 ms |
+| first layout (`getPreferredSize`, single shot) | 1,302-1,350 ms | 939-1,165 ms (every row is measured either way; noise-bound) |
+| heap after the first layout | 62.3-63.3 MB | 70.9 MB (+4 MB width lane, +4 MB leaf 3 prefix lane) |
+
+The machine was more loaded than in section 9's run; the stock edit rows there were 360-588 ms single shot.
