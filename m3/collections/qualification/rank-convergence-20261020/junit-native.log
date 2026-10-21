@@ -1,0 +1,114 @@
+$ /workspace/scratch/abdb4b1178cf/toolchain/zulu21.48.17-ca-jdk21.0.10-linux_x64/bin/java -Xmx512m -Xcheck:jni -Djava.library.path=/workspace/scratch/abdb4b1178cf/acquisition/rank-convergence/reproduction-02/native -cp /workspace/scratch/abdb4b1178cf/acquisition/rank-convergence/reproduction-02/junit:/workspace/scratch/abdb4b1178cf/acquisition/rank-convergence/reproduction-02/main:/workspace/scratch/abdb4b1178cf/acquisition/rank-convergence/reproduction-02/test -Dm3.collections.all.native.required=true -Dm3.mask.spans.native.required=true -Dm3.collections.rank.native=true -Dm3.collections.signal.native=true RunJUnit
+M3LongRankIndexSelfTest PASS native=true
+PASS M3FilteredListsEdges checks=40
+PASS M3FilteredListsContract operations=32452 checks=755754
+PASS M3FilteredListsWorkProof rows=65537 predicate_calls=65537 split_payload=0
+PASS M3LongCompositeLateBindSelfTest checks=535
+PASS M3CountedBagSelfTest checks=165184
+PASS M3IndexMaskCompactorSelfTest checks=17188 JNI=false
+LAZY-METRIC	selection_10M	select_all_ms	0.150
+LAZY-METRIC	selection_10M	invert_ms	0.028
+LAZY-METRIC	selection_10M	shift_click_ms	0.539
+LAZY-METRIC	selection_cutover	k=1000	bits=false	scatter_ms=4.4	invert_ms=0.011	toArray_ms=30.2
+LAZY-METRIC	selection_cutover	k=10000	bits=false	scatter_ms=10.5	invert_ms=0.010	toArray_ms=3.8
+LAZY-METRIC	selection_cutover	k=50000	bits=true	scatter_ms=37.7	invert_ms=3.335	toArray_ms=47.0
+LAZY-METRIC	selection_cutover	k=156250	bits=true	scatter_ms=34.6	invert_ms=0.517	toArray_ms=33.9
+LAZY-METRIC	selection_cutover	k=300000	bits=true	scatter_ms=50.6	invert_ms=0.137	toArray_ms=30.4
+LAZY-METRIC	selection_cutover	k=1000000	bits=true	scatter_ms=108.3	invert_ms=0.181	toArray_ms=39.8
+LAZY-METRIC	check_all_10M_ms	8.042
+LAZY-METRIC	uncheck_all_10M_ms	2.338
+LAZY-METRIC	insert_shift_10M_ms	2.584
+M3StateMaskHistogramSelfTest PASS checks=421946 native=true
+PASS M3StrictFilteredSequencedContract checks=126
+PASS M3ReadOnlyMapDefaultsContract checks=5600
+PASS M3IndexPathRank Java21 deterministic differential: 36476 rank checks; 900 randomized paths
+M3FilteredSetIdentityContract: 46 checks passed
+PASS M3SignalDimensions checks=1474
+PASS M3_OBJECT_SLOT_INDEX checks=40
+PASS M3LongAddressKernelSelfTest checks=384942 native=true
+M3NativeIndexRangeSelfTest mode=legacy checks=638439 seededCases=2048
+M3_FILTERED_LIST_DEEP_PLAN_PASS checks=189
+M3KeyedOrderRingContract PASS checks=4106
+VIEWPORT_TREE_PASS checks=269096 digest=16622768763742859435
+SWT_ROW_WINDOW_PASS checks=6758426
+M3_KEYED_ADMISSION_PASS checks=44
+PASS M3IndexedSnapshotPositionProof checks=114886 JNI=false
+PASS M3ZeroSlotCapacityContract checks=656464 operations=196611 physical=true
+M3_LONG_DAG_CHECKS=291 RESULT=PASS
+M3_FILTERED_LIST_MUTATION_PASS checks=775092
+PASS M3IndexedSetAlgebraSeekProof checks=277043
+M3_ZERO_MASK_ARRAY_FAST_PATH_PASS checks=6176
+PACKED_LAZY_STATE_OK null/reuse/growth/failure/recursion/mutation/cancellation/events/system-progress
+PACKED_LAZY_TREE_OK eager/lazy AVL differential=20000 views/entries/flags/progress/events
+M3_LINKED_INDEX_SPLIT_PASS checks=22765
+INDEX_ORDER_WINDOW_PASS native=false maskPairs=65536 windows=67914 checks=2990400 observations=e15c399b7be3d8c0fbd38bc6e2cd4c63b93bb0b95d1272bce9acdcc7bec5445b
+PASS M3IndexPathMasksSelfTest checks=1554 JNI=false
+M3_PATH_MASK_ALIAS_PASS checks=2332 actualJNI=true
+navigation checks=141840 failures=0 first=null
+entries checks=11447 failures=0 first=null
+readonly checks=904 failures=0 first=null
+depth checks=48 failures=0 first=null
+TOTAL checks=154239 failures=0
+M3ObjectStreamContract PASS assertions=540
+PASS M3IndexedTableReentrantSortContract checks=18
+M3SpanIndex Java21/JNI oracle: PASS 128804 assertions, JNI=true
+PASS M3FilteredNavigableSetRangeContract checks=110325
+PASS M3_SDK_OWNER_FACTORY checks=10224
+PASS M3IndexedTableSelfTest checks=62985 randomized=6000 native=false
+PASS sparse wide offset/extreme-row windows: 29
+PASS M3IndexPathRank word walk: 6300 independent Java21 windows; signed rows, duplicates, strides, masks
+PASS M3SdkRecoverySelfTest checks=19834 native=false
+PASS M3_INDEX_MASK_WINDOW checks=15298 native=false
+PASS checks=140595
+PASS M3_OBJECT_PHYSICAL_MASK checks=25 native=true
+PASS M3_MUTABLE_FILTERED_VIEWS assertions=288223
+PASS M3IndexedMultiValueOccurrenceSelfTest checks=440027 native=true
+M3_READONLY_FILTER_DEPTH_PASS checks=64
+M3_MASK_OFFSET_PROJECTION_PASS checks=28615 seed=5562870565234366513
+M3_BOUNDED_GATHER_PASS checks=21975732 fingerprint=-8730037866241443045 native=true
+PASS M3PhysicalStateSnapshotProof assertions=13576 backend=NATIVE_REQUIRED
+PASS M3PhysicalStateSnapshotProof assertions=27152 backend=JAVA
+PASS M3IndexedFilterSortFusionSelfTest checks=9960 JNI=false
+PASS M3TombstoneReuseSelfTest checks=142438 saved_set_array_payload_bytes=72 saved_map_array_payload_bytes=136
+PASS M3SignalMask32Contract checks=1472 native=true
+PASS M3BitLane28FenwickSelfTest checks=21298 mutations=15000
+M3BagRankIndex randomized scenarios=1200
+PASS M3BagRankIndexSelfTest checks=213230 native=false
+PASS M3RequiredExcludedMaskSelectorContract checks=133140
+FILTERED_MERGED_SEQUENCED_PASS checks=2517
+PASS checks=164104
+MASK_SPANS_PASS cases=12000 backend=JAVA
+MASK_SPANS_PASS cases=12000 backend=NATIVE_REQUIRED
+FILTERED_SPLITS_PASS checks=6324
+PASS M3LongRangeSetSelfTest oracleChecks=411913
+PASS M3LongSortedAlgebraSelfTest checks=508836
+PASS M3WrapperConvergenceContract mode=readonly-policy checks=25
+M3_STORED_REPRESENTATIVE_CONTRACT_PASS assertions=2454
+M3ArrayListRemoveIfProof PASS cases=12013 assertions=1883123
+Preserved baseline: root rejects structural callbacks immediately; inherited subList retains prefix removals on callback failure.
+Unused Object[] slots are directly verified null; GC scheduling and whole-JDK integration are outside this finite proof.
+PASS M3IndexMaskWindowRecoverySelfTest checks=7524 JNI=false
+PASS M3SignalOrderContract backend=JAVA checks=2009
+M3_RESIDENCY_STATE_MASK_PASS checks=11226 fingerprint=12197969927824375845 backend=jni-enabled
+PASS M3MaskDenseSelectionProof checks=52563 nativeAvailable=true
+PASS M3ObjectRangeMapSelfTest checks=706283 randomized=12000 native=true
+PASS M3IndexedReadOnlyNoopProof checks=70132
+PASS M3GenericReferenceOwnersProof checks=7773 native=false
+M3ObjectStreamTerminalContract PASS assertions=29
+PROGRESS_PERCENT_WITNESS worked=9223372036854775807 total=9223372036854775807 expected=100 actual=100
+PASS M3GenericArrayListSelfTest checks=960583 native=true
+
+Test run finished after 75478 ms
+[       143 containers found      ]
+[         0 containers skipped    ]
+[       143 containers started    ]
+[         0 containers aborted    ]
+[       143 containers successful ]
+[         0 containers failed     ]
+[       468 tests found           ]
+[         0 tests skipped         ]
+[       468 tests started         ]
+[         0 tests aborted         ]
+[       468 tests successful      ]
+[         0 tests failed          ]
+

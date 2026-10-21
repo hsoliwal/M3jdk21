@@ -2,6 +2,8 @@
  * Copyright 2026 Hitesh Soliwal and contributors
  * SPDX-License-Identifier: Apache-2.0
  * M3 indexed-path rank/select extension: recipe-generated target candidate.
+ * Modified 2026: adaptive sparse rank lookup and dense bitmap-word enumeration.
+ * Modified 2026: decode contiguous low-bit rank words without per-rank bit clearing.
  */
 package com.m3.collections;
 
@@ -141,6 +143,9 @@ public final class M3IndexPathRank {
         }
         long word = selected[low];
         int remainder = rank - wordPrefix[low];
+        // A nonzero low-bit run has ordinal == rank within this word.
+        // The identity also admits all 64 bits: -1L + 1L wraps to zero.
+        if ((word & (word + 1L)) == 0) return (low << 6) + remainder;
         while (remainder-- > 0) word &= word - 1;
         return (low << 6) + Long.numberOfTrailingZeros(word);
     }
@@ -200,8 +205,32 @@ public final class M3IndexPathRank {
 
         public int[] toArray() {
             int[] result = new int[size()];
-            for (int rank = 0; rank < result.length; rank++) {
-                result[rank] = owner.selectedRowId(firstRank + rank);
+            if (result.length == 0) return result;
+            int firstWord = from >>> 6;
+            int lastWord = (to - 1) >>> 6;
+            // Reuse rank/select for sparse windows instead of walking empty words.
+            // Each select needs at most this binary-search depth plus 63 bit clears.
+            // The long product cannot overflow even for the largest Java array.
+            int selectWork = 64 + Integer.SIZE
+                    - Integer.numberOfLeadingZeros(owner.selected.length);
+            if ((long) lastWord - firstWord + 1 > (long) result.length * selectWork) {
+                for (int rank = 0; rank < result.length; rank++) {
+                    result[rank] = owner.selectedRowId(firstRank + rank);
+                }
+                return result;
+            }
+            int write = 0;
+            for (int wordIndex = firstWord; wordIndex <= lastWord; wordIndex++) {
+                long bits = owner.selected[wordIndex];
+                if (wordIndex == firstWord) bits &= -1L << (from & 63);
+                if (wordIndex == lastWord && (to & 63) != 0) {
+                    bits &= (1L << (to & 63)) - 1L;
+                }
+                while (bits != 0) {
+                    int sourceOrdinal = (wordIndex << 6) + Long.numberOfTrailingZeros(bits);
+                    result[write++] = owner.rows[sourceOrdinal];
+                    bits &= bits - 1;
+                }
             }
             return result;
         }
