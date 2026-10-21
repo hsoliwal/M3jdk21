@@ -31,13 +31,13 @@ class SourceCensusTest(unittest.TestCase):
         census = root / 'current.tsv'
         census.write_text('\n'.join('\t'.join(x) for x in now)+'\n')
         return census, baseline
-    def test_five_historical_plus_thirty_one_additive(self):
+    def test_five_historical_plus_seventy_one_additive(self):
         with tempfile.TemporaryDirectory() as temp:
             root = Path(temp)
             current, old = self.make_fixture(root)
             allowed = verify.verify(root, current, old,
                 verify.sha256(current.read_bytes()), verify.git_blob(old.read_bytes()), False)
-            self.assertEqual(len(allowed), 36)
+            self.assertEqual(len(allowed), 76)
     def test_missing_drift_and_alias_refusal(self):
         with tempfile.TemporaryDirectory() as temp:
             root = Path(temp)
@@ -79,6 +79,24 @@ class SourceCensusTest(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, 'changed unapproved historical'):
                 verify.verify(root, current, old, verify.sha256(current.read_bytes()),
                     verify.git_blob(old.read_bytes()), False)
+
+    def test_successor_ledger_requires_exact_prior_and_new_blob(self):
+        prior = [('source-a', 'ABSENT', '1' * 64, 'a' * 40)]
+        current = [('source-a', 'ABSENT', '2' * 64, 'b' * 40),
+                   ('source-b', 'ABSENT', '3' * 64, 'c' * 40)]
+        successor = [('source-a', '1' * 64, '2' * 64, 'b' * 40, 'a' * 40)]
+        verify.verify_successor_lineage(current, prior, successor, 1, 1)
+        with self.assertRaisesRegex(ValueError, 'successor ledger'):
+            verify.verify_successor_lineage(current, prior, [], 1, 1)
+        with self.assertRaisesRegex(ValueError, 'not admitted'):
+            tampered = [list(successor[0])]
+            tampered[0][4] = 'f' * 40
+            verify.verify_successor_lineage(current, prior, tampered, 1, 1)
+        with self.assertRaisesRegex(ValueError, 'predecessor cell'):
+            changed = [list(current[0]), list(current[1])]
+            changed[0][1] = 'f' * 64
+            verify.verify_successor_lineage(changed, prior, successor, 1, 1)
+
 
 if __name__ == '__main__':
     unittest.main()
