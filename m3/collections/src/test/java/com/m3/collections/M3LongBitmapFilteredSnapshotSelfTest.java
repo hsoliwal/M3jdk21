@@ -246,6 +246,110 @@ public final class M3LongBitmapFilteredSnapshotSelfTest {
         check(attempt.get() == 12, "failed capture did not publish incomplete bitmap");
     }
 
+    /** Explicit invalidation must survive reentrant callbacks without retrying this read. */
+    private static void verifyManualInvalidation() {
+        for (int repetitions : new int[]{1, 3}) {
+            MutableSource source = new MutableSource(3, 1, 2);
+            AtomicInteger calls = new AtomicInteger();
+            M3LongBitmapFilteredSnapshot.VersionedView[] holder =
+                    new M3LongBitmapFilteredSnapshot.VersionedView[1];
+            holder[0] = new M3LongBitmapFilteredSnapshot.VersionedView(source, value -> {
+                if (calls.getAndIncrement() == 0) {
+                    for (int i = 0; i < repetitions; i++) holder[0].invalidate();
+                }
+                return true;
+            }, () -> 0L);
+            M3LongBitmapFilteredSnapshot first = holder[0].snapshot();
+            equal(new long[]{3, 1, 2}, first.toArray(), "invalidated capture still returns its result");
+            check(calls.get() == 3, "capture invalidation does not retry callbacks");
+            M3LongBitmapFilteredSnapshot rebuilt = holder[0].snapshot();
+            check(rebuilt != first, "reentrant invalidation reserves the next rebuild");
+            check(calls.get() == 6, "next read rebuilds once after repeated invalidations");
+            check(holder[0].snapshot() == rebuilt, "rebuilt snapshot is cached");
+            M3LongBitmapFilteredSnapshot asc = holder[0].sortedAscending();
+            M3LongBitmapFilteredSnapshot desc = holder[0].sortedDescending();
+            equal(new long[]{1, 2, 3}, asc.toArray(), "rebuilt ascending cache");
+            equal(new long[]{3, 2, 1}, desc.toArray(), "rebuilt descending cache");
+            check(holder[0].sortedAscending() == asc
+                    && holder[0].sortedDescending() == desc, "sorted sidecars remain memoized");
+            check(calls.get() == 6, "sorted sidecars do not rerun predicates");
+            M3LongIterator old = holder[0].iterator();
+            check(old.nextLong() == 3, "manual invalidation cursor begins");
+            source.replace(9);
+            holder[0].invalidate();
+            check(old.hasNext() && old.nextLong() == 1,
+                    "manual invalidation preserves existing detached cursor behavior");
+            equal(new long[]{9}, holder[0].toArray(), "manual invalidation refreshes future reads");
+            check(holder[0].sortedAscending() != asc
+                    && holder[0].sortedDescending() != desc, "manual invalidation drops sorted sidecars");
+        }
+
+        // The outer supplier runs before capture. The inner supplier and final
+        // validation run within capture and must not erase their invalidations.
+        for (int callback = 1; callback <= 3; callback++) {
+            int invalidateAt = callback;
+            AtomicInteger revisions = new AtomicInteger();
+            AtomicInteger calls = new AtomicInteger();
+            M3LongBitmapFilteredSnapshot.VersionedView[] holder =
+                    new M3LongBitmapFilteredSnapshot.VersionedView[1];
+            holder[0] = new M3LongBitmapFilteredSnapshot.VersionedView(
+                    new MutableSource(2, 1), value -> {
+                        calls.incrementAndGet();
+                        return true;
+                    }, () -> {
+                        if (revisions.incrementAndGet() == invalidateAt) holder[0].invalidate();
+                        return 0L;
+                    });
+            M3LongBitmapFilteredSnapshot first = holder[0].snapshot();
+            check(calls.get() == 2, "revision supplier invalidation does not retry capture");
+            M3LongBitmapFilteredSnapshot next = holder[0].snapshot();
+            check((next == first) == (callback == 1), "supplier capture boundary retained");
+            check(calls.get() == (callback == 1 ? 2 : 4), "supplier invalidation rebuild count");
+            check(holder[0].snapshot() == next, "supplier-invalidated rebuild is cached");
+        }
+
+        AtomicInteger attempts = new AtomicInteger();
+        IllegalArgumentException failure = new IllegalArgumentException("frozen predicate failure");
+        M3LongBitmapFilteredSnapshot.VersionedView[] failing =
+                new M3LongBitmapFilteredSnapshot.VersionedView[1];
+        failing[0] = new M3LongBitmapFilteredSnapshot.VersionedView(
+                new MutableSource(4, 1), value -> {
+                    if (attempts.getAndIncrement() == 0) {
+                        failing[0].invalidate();
+                        throw failure;
+                    }
+                    return true;
+                }, () -> 0L);
+        try {
+            failing[0].snapshot();
+            throw new AssertionError("expected original predicate failure");
+        } catch (IllegalArgumentException observed) {
+            check(observed == failure, "predicate exception identity is unchanged");
+        }
+        M3LongBitmapFilteredSnapshot recovered = failing[0].snapshot();
+        equal(new long[]{4, 1}, recovered.toArray(), "failed capture can be retried by caller");
+        check(attempts.get() == 3, "failed capture never retries automatically");
+        check(failing[0].snapshot() == recovered && attempts.get() == 3,
+                "successful retry is cached after predicate failure");
+
+        AtomicInteger sortedCalls = new AtomicInteger();
+        M3LongBitmapFilteredSnapshot.VersionedView[] sorting =
+                new M3LongBitmapFilteredSnapshot.VersionedView[1];
+        sorting[0] = new M3LongBitmapFilteredSnapshot.VersionedView(
+                new MutableSource(2, 1), value -> {
+                    if (sortedCalls.getAndIncrement() == 0) sorting[0].invalidate();
+                    return true;
+                }, () -> 0L);
+        M3LongBitmapFilteredSnapshot firstSort = sorting[0].sortedAscending();
+        equal(new long[]{1, 2}, firstSort.toArray(), "invalidated capture can still be sorted");
+        check(sortedCalls.get() == 2, "sorting does not retry invalidated capture");
+        M3LongBitmapFilteredSnapshot nextSort = sorting[0].sortedAscending();
+        check(nextSort != firstSort && sortedCalls.get() == 4,
+                "invalidated sorted result is not published as a cached sidecar");
+        check(sorting[0].sortedAscending() == nextSort && sortedCalls.get() == 4,
+                "next sorted result is memoized");
+    }
+
     public static void main(String[] args) {
         fails(NullPointerException.class, () -> M3LongBitmapFilteredSnapshot.snapshot(null, v -> true));
         fails(NullPointerException.class, () -> M3LongBitmapFilteredSnapshot.snapshot(new long[0], null));
@@ -283,6 +387,7 @@ public final class M3LongBitmapFilteredSnapshotSelfTest {
         check(immutable.physicalMaskCopy().get(1), "physical slot maps first duplicate");
         check(immutable.physicalMaskCopy().get(2), "physical slot maps second duplicate");
         verifyEpoch();
+        verifyManualInvalidation();
         Random r = new Random(0x20261017abcdL);
         for (int run = 0; run < 500; run++) {
             int n = r.nextInt(180);
