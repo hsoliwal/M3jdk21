@@ -7,6 +7,7 @@
 #include <stdint.h>
 #include <stddef.h>
 #include <limits.h>
+#include <stdlib.h>
 
 #ifdef _WIN32
 #include <windows.h>
@@ -24,6 +25,54 @@ static void fail(JNIEnv *env, const char *type, const char *message) {
     jclass klass = (*env)->FindClass(env, type);
     if (klass != NULL) (*env)->ThrowNew(env, klass, message);
 }
+
+#if defined(__linux__) && defined(MAP_FIXED_NOREPLACE)
+/* Admission-only filename projection through the JDK's filesystem charset owner.
+ * JNI GetStringUTFChars uses modified UTF-8 and cannot name supplementary paths.
+ * No returned JNI array or native filename buffer survives this native call.
+ */
+static char *platform_path(JNIEnv *env, jstring path) {
+    jclass utility = (*env)->FindClass(env, "sun/nio/fs/Util");
+    if (utility == NULL) return NULL;
+    jmethodID encode = (*env)->GetStaticMethodID(env, utility, "toBytes", "(Ljava/lang/String;)[B");
+    if (encode == NULL) {
+        (*env)->DeleteLocalRef(env, utility);
+        return NULL;
+    }
+    jbyteArray bytes = (jbyteArray)(*env)->CallStaticObjectMethod(env, utility, encode, path);
+    jboolean failed = (*env)->ExceptionCheck(env);
+    (*env)->DeleteLocalRef(env, utility);
+    if (failed) {
+        if (bytes != NULL) (*env)->DeleteLocalRef(env, bytes);
+        return NULL;
+    }
+    if (bytes == NULL) {
+        fail(env, "java/lang/IllegalStateException", "JDK filesystem encoder returned no path");
+        return NULL;
+    }
+    jsize count = (*env)->GetArrayLength(env, bytes);
+    char *filename = (char *)malloc((size_t)count + 1u);
+    if (filename == NULL) {
+        (*env)->DeleteLocalRef(env, bytes);
+        fail(env, "java/lang/OutOfMemoryError", "canonical image file name");
+        return NULL;
+    }
+    (*env)->GetByteArrayRegion(env, bytes, 0, count, (jbyte *)filename);
+    failed = (*env)->ExceptionCheck(env);
+    (*env)->DeleteLocalRef(env, bytes);
+    if (failed) {
+        free(filename);
+        return NULL;
+    }
+    if (memchr(filename, '\0', (size_t)count) != NULL) {
+        free(filename);
+        fail(env, "java/io/IOException", "canonical image path contains NUL");
+        return NULL;
+    }
+    filename[count] = '\0';
+    return filename;
+}
+#endif
 
 static int valid_range(jlong base, jlong length) {
     return base > 0 && length > 0 && length <= INT_MAX
@@ -49,10 +98,10 @@ Java_com_m3_text_M3FixedAddressMapping_mapExact0(JNIEnv *env, jclass klass,
         fail(env, "java/lang/IllegalArgumentException", "non-aligned mapping address");
         return NULL;
     }
-    const char *filename = (*env)->GetStringUTFChars(env, path, NULL);
+    char *filename = platform_path(env, path);
     if (filename == NULL) return NULL;
     int fd = open(filename, O_RDONLY | O_CLOEXEC | O_NOFOLLOW);
-    (*env)->ReleaseStringUTFChars(env, path, filename);
+    free(filename);
     if (fd < 0) {
         fail(env, "java/io/IOException", "cannot open canonical image read-only");
         return NULL;

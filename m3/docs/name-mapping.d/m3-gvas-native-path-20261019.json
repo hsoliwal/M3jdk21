@@ -1,0 +1,18 @@
+{
+  "copyright": "Copyright 2026 Hitesh Soliwal and contributors",
+  "license": "Apache-2.0",
+  "recipe": "com.synexia.m3.GvasNativePath20261019",
+  "canonical_crate": "synexia-openrewrite-recipes/crates/m3jdk21-20261019/string-native",
+  "target_baseline": "672e29f20bd039acaaeeb97ea17eee2939fcc8e4",
+  "target_owner": "com.m3.text.M3FixedAddressMapping.mapExact0",
+  "target_native_source": "m3/lexicon/native/m3_fixed_address_mapping_jni.c",
+  "reused_owner": "sun.nio.fs.Util.toBytes(String)",
+  "reused_source": "src/java.base/share/classes/sun/nio/fs/Util.java",
+  "reused_git_blob": "94a5def1e853d5406f3defa24f0455b977095e0c",
+  "intake_mode": "INDEPENDENT_APACHE_MODULE",
+  "reuse_mode": "CALL_EXISTING_JDK_OWNER_NO_SOURCE_COPY",
+  "abi": "Preserve existing four JNI method descriptors and exports",
+  "payload": "Existing immutable fixed-address image remains the owner",
+  "verification": "m3/verify-gvas-lookup-index.py plus retained strict-address and process-identity tests",
+  "promotion": "BOUND_TO_EXECUTED_RECEIPTS_NO_FAMILY_PHASE_ADVANCE"
+}

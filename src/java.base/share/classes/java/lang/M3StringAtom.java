@@ -4,6 +4,7 @@
  */
 package java.lang;
 
+import java.lang.ref.Reference;
 import java.util.Objects;
 
 import jdk.internal.misc.Unsafe;
@@ -324,33 +325,41 @@ final class M3StringAtom extends M3StringOwner {
     @Override
     char charAt(int index) {
         Objects.checkIndex(index, length);
-        if (storageWidth == 1) return (char) (UNSAFE.getByte(address + index) & 0xff);
-        long at = address + ((long) index << 1);
-        int first = UNSAFE.getByte(at) & 0xff;
-        int second = UNSAFE.getByte(at + 1L) & 0xff;
-        return bigEndian
-                ? (char) ((first << 8) | second)
-                : (char) (first | (second << 8));
+        try {
+            if (storageWidth == 1) return (char) (UNSAFE.getByte(address + index) & 0xff);
+            long at = address + ((long) index << 1);
+            int first = UNSAFE.getByte(at) & 0xff;
+            int second = UNSAFE.getByte(at + 1L) & 0xff;
+            return bigEndian
+                    ? (char) ((first << 8) | second)
+                    : (char) (first | (second << 8));
+        } finally {
+            Reference.reachabilityFence(this);
+        }
     }
 
     @Override
     void getChars(int start, int end, char[] destination, int destinationStart) {
         Objects.checkFromToIndex(start, end, length);
         Objects.checkFromIndexSize(destinationStart, end - start, destination.length);
-        if (storageWidth == 1) {
-            long source = address + start;
-            for (int target = destinationStart; start < end; start++, target++, source++) {
-                destination[target] = (char) (UNSAFE.getByte(source) & 0xff);
+        try {
+            if (storageWidth == 1) {
+                long source = address + start;
+                for (int target = destinationStart; start < end; start++, target++, source++) {
+                    destination[target] = (char) (UNSAFE.getByte(source) & 0xff);
+                }
+                return;
             }
-            return;
-        }
-        long source = address + ((long) start << 1);
-        for (int target = destinationStart; start < end; start++, target++, source += 2L) {
-            int first = UNSAFE.getByte(source) & 0xff;
-            int second = UNSAFE.getByte(source + 1L) & 0xff;
-            destination[target] = bigEndian
-                    ? (char) ((first << 8) | second)
-                    : (char) (first | (second << 8));
+            long source = address + ((long) start << 1);
+            for (int target = destinationStart; start < end; start++, target++, source += 2L) {
+                int first = UNSAFE.getByte(source) & 0xff;
+                int second = UNSAFE.getByte(source + 1L) & 0xff;
+                destination[target] = bigEndian
+                        ? (char) ((first << 8) | second)
+                        : (char) (first | (second << 8));
+            }
+        } finally {
+            Reference.reachabilityFence(this);
         }
     }
 
@@ -368,32 +377,36 @@ final class M3StringAtom extends M3StringOwner {
                 count << destinationCoder,
                 destination.length);
 
-        if (storageWidth == 1 && destinationCoder == String.LATIN1) {
-            long source = address + start;
-            for (int target = destinationStart; start < end; start++, target++, source++) {
-                destination[target] = UNSAFE.getByte(source);
+        try {
+            if (storageWidth == 1 && destinationCoder == String.LATIN1) {
+                long source = address + start;
+                for (int target = destinationStart; start < end; start++, target++, source++) {
+                    destination[target] = UNSAFE.getByte(source);
+                }
+                return;
             }
-            return;
-        }
 
-        long source = address + (storageWidth == 1 ? start : ((long) start << 1));
-        for (int target = destinationStart; start < end; start++, target++) {
-            char unit;
-            if (storageWidth == 1) {
-                unit = (char) (UNSAFE.getByte(source++) & 0xff);
-            } else {
-                int first = UNSAFE.getByte(source) & 0xff;
-                int second = UNSAFE.getByte(source + 1L) & 0xff;
-                unit = bigEndian
-                        ? (char) ((first << 8) | second)
-                        : (char) (first | (second << 8));
-                source += 2L;
+            long source = address + (storageWidth == 1 ? start : ((long) start << 1));
+            for (int target = destinationStart; start < end; start++, target++) {
+                char unit;
+                if (storageWidth == 1) {
+                    unit = (char) (UNSAFE.getByte(source++) & 0xff);
+                } else {
+                    int first = UNSAFE.getByte(source) & 0xff;
+                    int second = UNSAFE.getByte(source + 1L) & 0xff;
+                    unit = bigEndian
+                            ? (char) ((first << 8) | second)
+                            : (char) (first | (second << 8));
+                    source += 2L;
+                }
+                if (destinationCoder == String.LATIN1) {
+                    destination[target] = (byte) unit;
+                } else {
+                    StringUTF16.putChar(destination, target, unit);
+                }
             }
-            if (destinationCoder == String.LATIN1) {
-                destination[target] = (byte) unit;
-            } else {
-                StringUTF16.putChar(destination, target, unit);
-            }
+        } finally {
+            Reference.reachabilityFence(this);
         }
     }
 
