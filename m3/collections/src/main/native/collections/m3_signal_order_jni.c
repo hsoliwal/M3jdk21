@@ -45,6 +45,9 @@ JNIEXPORT void JNICALL Java_com_m3_collections_M3SignalOrderNative_sort0(
             unsigned int digit = (unsigned int) (((uint64_t) keys[i] >> shift) & UINT64_C(255));
             positions[digit]++;
         }
+        /* A uniform byte is an identity pass; no scatter or buffer exchange is needed. */
+        unsigned int firstDigit = (unsigned int) (((uint64_t) keys[0] >> shift) & UINT64_C(255));
+        if (positions[firstDigit] == count) continue;
         size_t start = 0;
         for (size_t digit = 0; digit < 256U; digit++) {
             size_t occur = positions[digit];

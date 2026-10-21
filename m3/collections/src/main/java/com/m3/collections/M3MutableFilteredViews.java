@@ -212,10 +212,9 @@ public final class M3MutableFilteredViews {
 
         /** One-seek normal path; recover only invalid bounded-range construction. */
         private E bounded(E query, boolean forward, boolean inclusive) {
-            Iterator<E> cursor;
+            NavigableSet<E> range;
             try {
-                cursor = forward ? source.tailSet(query, inclusive).iterator()
-                        : source.headSet(query, inclusive).descendingIterator();
+                range = forward ? source.tailSet(query, inclusive) : source.headSet(query, inclusive);
             } catch (IllegalArgumentException outOfRange) {
                 Iterator<E> bounded = forward ? source.iterator() : source.descendingIterator();
                 Comparator<? super E> comparator = source.comparator();
@@ -230,6 +229,7 @@ public final class M3MutableFilteredViews {
                 }
                 return null;
             }
+            Iterator<E> cursor = forward ? range.iterator() : range.descendingIterator();
             return seek(cursor);
         }
 
