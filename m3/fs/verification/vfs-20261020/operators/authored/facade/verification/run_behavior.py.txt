@@ -1,0 +1,92 @@
+#!/usr/bin/env python3
+# Copyright 2026 Hitesh Soliwal and contributors. SPDX-License-Identifier: Apache-2.0
+"""Compile the same contract against a read-only receiver, with outputs kept here."""
+from pathlib import Path
+import argparse
+import hashlib
+import json
+import os
+import subprocess
+import sys
+
+p = argparse.ArgumentParser()
+p.add_argument("--baseline", action="store_true")
+p.add_argument("--receiver", type=Path)
+p.add_argument("--classes", type=Path, help="Already compiled generated-receiver classes")
+p.add_argument("--classpath", default="")
+p.add_argument("--compile-owned", action="store_true", help="Compile authored facade into scratch test output")
+p.add_argument("--java-home", type=Path, help="Java 21 JDK; defaults to the original qualification toolchain")
+a = p.parse_args()
+facade = Path(__file__).resolve().parents[1]
+workspace = facade.parents[1]
+receiver = a.receiver or workspace / "receiver/m3/fs"
+if a.baseline and a.receiver is None and (workspace / "baseline/m3/fs/src/main/java").exists():
+    receiver = workspace / "baseline/m3/fs"
+java = (a.java_home or Path("/workspace/scratch/abdb4b1178cf/toolchain/zulu21.48.17-ca-jdk21.0.10-linux_x64")) / "bin"
+m2 = workspace / "m2"
+coordinates = (
+    ("org/junit/jupiter/junit-jupiter-api", "5.10.2"),
+    ("org/junit/jupiter/junit-jupiter-engine", "5.10.2"),
+    ("org/junit/platform/junit-platform-commons", "1.10.2"),
+    ("org/junit/platform/junit-platform-engine", "1.10.2"),
+    ("org/junit/platform/junit-platform-launcher", "1.10.2"),
+    ("org/opentest4j/opentest4j", "1.3.0"),
+    ("org/apiguardian/apiguardian-api", "1.1.2"),
+)
+deps = [m2 / group / version / f"{Path(group).name}-{version}.jar" for group, version in coordinates]
+for dep in deps:
+    if not dep.is_file():
+        sys.exit(f"Missing test dependency: {dep}")
+classes = facade / "verification" / ("baseline-classes" if a.baseline else
+                                     "template-classes" if a.compile_owned else "current-classes")
+classes.mkdir(parents=True, exist_ok=True)
+extra_classpath = a.classpath
+if not a.baseline and not extra_classpath:
+    lock = receiver / "tools/vfs-dependencies.lock.json"
+    if not lock.is_file():
+        sys.exit("Pass --classpath or emit the receiver's dependency lock through the canonical recipe first.")
+    runtime_deps = []
+    for row in json.loads(lock.read_text())["dependencies"]:
+        artifact = m2 / row["repository_path"]
+        if hashlib.sha256(artifact.read_bytes()).hexdigest() != row["sha256"]:
+            sys.exit(f"Dependency hash mismatch: {artifact}")
+        runtime_deps.append(artifact)
+    extra_classpath = os.pathsep.join(map(str, runtime_deps))
+classpath = os.pathsep.join(map(str, deps)) + (os.pathsep + extra_classpath if extra_classpath else "")
+test_sources = [facade / "m3/fs/src/test/java/com/m3/fs/MFilesBehaviorTest.java", facade / "verification/FacadeTestLauncher.java"]
+test_classes = ["com.m3.fs.MFilesBehaviorTest"]
+if a.baseline:
+    if (receiver / "src/main/java/com/m3/fs/MFiles.java").exists():
+        if a.receiver is not None or not (classes / "com/m3/fs/M3FS.class").exists():
+            sys.exit("Expected the original pre-facade receiver; pass its checkout with --receiver.")
+        print("Reusing pre-facade classes captured before recipe application.")
+    else:
+        sources = sorted((receiver / "src/main/java").rglob("*.java"))
+        if not sources:
+            sys.exit(f"No baseline sources found under {receiver}")
+        subprocess.run([str(java / "javac"), "--release", "21", "-Xlint:all", "-Werror", "-d", str(classes), *map(str, sources)], check=True)
+else:
+    production_classes = a.classes or receiver / "target/classes"
+    if not production_classes.is_dir():
+        sys.exit(f"Generated-receiver classes are not ready: {production_classes}")
+    classpath += os.pathsep + str(production_classes)
+    generated_resources = receiver / "src/main/resources"
+    if generated_resources.is_dir():
+        classpath += os.pathsep + str(generated_resources)
+    if a.compile_owned:
+        owned_sources = sorted((facade / "m3/fs/src/main/java").rglob("*.java"))
+        subprocess.run([str(java / "javac"), "--release", "21", "-Xlint:all", "-Werror", "-cp", classpath,
+                        "-d", str(classes), *map(str, owned_sources)], check=True)
+        classpath = str(classes) + os.pathsep + classpath
+    test_sources.append(facade / "m3/fs/src/test/java/com/m3/fs/MFilesProviderTest.java")
+    test_classes.append("com.m3.fs.MFilesProviderTest")
+    test_sources.append(facade / "m3/fs/src/test/java/com/m3/fs/MFileCaptureTest.java")
+    test_classes.append("com.m3.fs.MFileCaptureTest")
+subprocess.run([str(java / "javac"), "--release", "21", "-Xlint:all", "-Werror", "-cp", classpath, "-d", str(classes), *map(str, test_sources)], check=True)
+result = subprocess.run([str(java / "java"), "-cp", str(classes) + os.pathsep + classpath,
+                         "FacadeTestLauncher", *test_classes], text=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+log = facade / "verification" / ("baseline-red.log" if a.baseline else
+                                 "template-behavior.log" if a.compile_owned else "current-behavior.log")
+log.write_text(result.stdout, encoding="utf-8")
+print(result.stdout)
+sys.exit(result.returncode)

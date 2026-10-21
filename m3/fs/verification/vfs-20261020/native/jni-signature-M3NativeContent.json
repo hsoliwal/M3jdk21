@@ -1,0 +1,28 @@
+{
+  "command": [
+    "/usr/bin/cc",
+    "-std=gnu11",
+    "-Wall",
+    "-Wextra",
+    "-Werror",
+    "-Wconversion",
+    "-Wshadow",
+    "-Wpedantic",
+    "-pthread",
+    "-I",
+    "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/fs/native/include",
+    "-isystem",
+    "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/toolchain/native/deps/usr/include",
+    "-I",
+    "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/toolchain/jdk21/include",
+    "-I",
+    "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/toolchain/jdk21/include/linux",
+    "-fPIC",
+    "-include",
+    "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/native-capture/jni-headers/com_m3_fs_M3NativeContent.h",
+    "-fsyntax-only",
+    "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/fs/native/src/m3_fs_jni.c"
+  ],
+  "exit_code": 0,
+  "log": "jni-signature-M3NativeContent.log"
+}

@@ -1,0 +1,235 @@
+#!/usr/bin/env python3
+"""Run the existing native-profile JUnit tests against generated M3FS classes."""
+# Copyright 2026 Hitesh Soliwal and contributors
+# SPDX-License-Identifier: Apache-2.0
+
+from datetime import datetime, timezone
+import hashlib
+import json
+import os
+from pathlib import Path
+import re
+import shutil
+import subprocess
+import sys
+import time
+
+B = Path(__file__).resolve().parent
+R = B / "receiver/m3/fs"
+Q = B / "qualification-capture/classes"
+J = B / "toolchain/jdk21"
+O = B / "native-java-capture"
+LIB = B / "native-capture/libm3fs.so"
+DEPS = B / "toolchain/test-dependencies"
+TESTS = {
+    "M3FSNativeTest": 3,
+    "M3FSScrubTest": 2,
+    "M3FsCheckedInodeIoTest": 4,
+    "M3FsFeatureTest": 2,
+    "M3FsHotPathTest": 1,
+    "M3FsImageBindingTest": 4,
+    "M3FsIndexedTest": 1,
+    "M3FsNativeSemanticTest": 1,
+    "M3FsRegexFallbackTest": 4,
+    "M3FsSnapshotViewTest": 1,
+    "M3FsSparseFeatureTest": 2,
+    "M3MappedStorageTest": 1,
+    "M3NativeContentPositionTest": 1,
+}
+FIXTURES = [
+    "M3FsHotPathSelfTest", "M3FsIndexedSelfTest", "M3FsReadSnapshotSelfTest",
+    "M3FsSnapshotViewSelfTest", "M3MappedStorageChecks",
+    "M3NativeContentPositionChecks", "M3TestRegexImages",
+]
+
+
+def sha(path):
+    return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def write_json(path, value):
+    path.write_text(json.dumps(value, indent=2, sort_keys=True) + "\n")
+
+
+def inventory(path):
+    return {str(p.relative_to(path)): sha(p) for p in sorted(path.rglob("*.class"))}
+
+
+def summary(output):
+    result = {}
+    for name in ("found", "skipped", "started", "aborted", "successful", "failed"):
+        values = re.findall(r"\[\s*(\d+) tests " + name + r"\s*\]", output)
+        if len(values) != 1:
+            raise RuntimeError("Missing or ambiguous JUnit count: " + name)
+        result[name] = int(values[0])
+    return result
+
+
+def main():
+    if O.exists():
+        stamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%S%fZ")
+        O.rename(B / (O.name + ".previous-" + stamp))
+    O.mkdir()
+    classes = O / "test-classes"
+    classes.mkdir()
+    report = {
+        "status": "RUNNING",
+        "started_utc": datetime.now(timezone.utc).isoformat(),
+        "production_classes": str(Q),
+        "production_overlays": False,
+        "expected_junit_tests": sum(TESTS.values()),
+        "expected_junit_classes": len(TESTS),
+        "junit_tests": 0,
+        "commands": [],
+        "results": [],
+        "native_required": True,
+        "flags": ["-ea", "-Xcheck:jni", "-Dm3.fs.test=true", "-Dm3fs.native=required",
+                  "-Dm3.fs.native.path=" + str(LIB)],
+        "java_home": str(J),
+        "qualification_scope": "Existing explicit native-profile JUnit tests and their unchanged fixtures; not the Maven lifecycle or a whole M3JDK21 build",
+    }
+    try:
+        native_receipt = B / "native-capture/qualification.json"
+        native = json.loads(native_receipt.read_text())
+        if native["status"] != "PASS" or native["library"]["path"] != str(LIB):
+            raise RuntimeError("Native owner qualification is not PASS for the requested library")
+        library_sha = sha(LIB)
+        if library_sha != native["library"]["sha256"]:
+            raise RuntimeError("Native library differs from its build receipt")
+        report["library"] = {"path": str(LIB), "sha256": library_sha}
+        report["native_build_receipt"] = {"path": str(native_receipt), "sha256": sha(native_receipt)}
+        acquisition_path = DEPS / "native-java-acquisition.json"
+        acquisition = json.loads(acquisition_path.read_text())
+        if acquisition["status"] != "PASS":
+            raise RuntimeError("Exact declared test dependency acquisition is not PASS")
+        extra_jars = []
+        for item in acquisition["artifacts"]:
+            path = Path(item["path"])
+            if sha(path) != item["sha256"]:
+                raise RuntimeError("Acquired dependency drift: " + str(path))
+            extra_jars.append(path)
+        if len(extra_jars) != 2:
+            raise RuntimeError("Expected exactly SQLite JDBC and RE2/J test artifacts")
+        shutil.copyfile(acquisition_path, O / "dependency-acquisition.json")
+        failed_acquisition = DEPS / "native-java-acquisition-direct-failed.json"
+        if failed_acquisition.exists():
+            shutil.copyfile(failed_acquisition, O / "dependency-acquisition-direct-failed.json")
+        report["dependency_acquisition"] = {"path": str(acquisition_path), "sha256": sha(acquisition_path)}
+        prior = B / "runtime-capture/results.json"
+        prior_sha = sha(prior)
+        before = inventory(Q)
+        if not before or before != json.loads((B / "runtime-capture/production-classes.after.json").read_text()):
+            raise RuntimeError("Generated classes differ from the completed capture runtime receipt")
+        write_json(O / "production-classes.before.json", before)
+        junit = [
+            B / "m2/org/junit/jupiter/junit-jupiter-api/5.10.2/junit-jupiter-api-5.10.2.jar",
+            B / "m2/org/junit/jupiter/junit-jupiter-engine/5.10.2/junit-jupiter-engine-5.10.2.jar",
+            B / "m2/org/junit/platform/junit-platform-commons/1.10.2/junit-platform-commons-1.10.2.jar",
+            B / "m2/org/junit/platform/junit-platform-engine/1.10.2/junit-platform-engine-1.10.2.jar",
+            B / "m2/org/junit/platform/junit-platform-launcher/1.10.2/junit-platform-launcher-1.10.2.jar",
+            B / "m2/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.jar",
+            B / "m2/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar",
+            B / "m2/org/slf4j/slf4j-api/1.7.36/slf4j-api-1.7.36.jar",
+            B / "m2/org/slf4j/slf4j-simple/1.7.36/slf4j-simple-1.7.36.jar",
+        ]
+        jars = junit + extra_jars
+        report["dependency_hashes"] = {str(p): sha(p) for p in jars}
+        report["receiver_pom_sha256"] = sha(R / "pom.xml")
+        report["java_release"] = (J / "release").read_text()
+        sources = [R / "src/test/java/com/m3/fs" / (name + ".java") for name in [*TESTS, *FIXTURES]]
+        launcher = B / "authored/facade/verification/FacadeTestLauncher.java"
+        sources.append(launcher)
+        source_hashes = {str(p): sha(p) for p in sources}
+        write_json(O / "test-source-hashes.json", source_hashes)
+        expected = []
+        for name, count in TESTS.items():
+            source = R / "src/test/java/com/m3/fs" / (name + ".java")
+            methods = re.findall(r"@Test\s+(?:public\s+)?void\s+(\w+)\s*\(", source.read_text())
+            if len(methods) != count:
+                raise RuntimeError("Declared test count drift: " + name)
+            expected.append({"class": "com.m3.fs." + name, "tests": count, "methods": methods,
+                             "source": str(source), "source_sha256": sha(source)})
+        write_json(O / "expected-tests.json", expected)
+        report["expected_tests"] = expected
+        env = os.environ.copy()
+        removed = []
+        for key in ("CLASSPATH", "JAVA_TOOL_OPTIONS", "JDK_JAVA_OPTIONS", "_JAVA_OPTIONS"):
+            if key in env:
+                removed.append(key)
+                del env[key]
+        report["removed_environment_variable_names"] = removed
+
+        def run(label, command):
+            command = [str(a) for a in command]
+            started = time.monotonic()
+            result = subprocess.run(command, cwd=B, env=env, text=True,
+                                    stdout=subprocess.PIPE, stderr=subprocess.STDOUT, timeout=180)
+            (O / (label + ".log")).write_text(result.stdout)
+            report["commands"].append({"label": label, "command": command, "cwd": str(B),
+                                       "exit_code": result.returncode,
+                                       "elapsed_seconds": round(time.monotonic() - started, 3),
+                                       "log": str(O / (label + ".log"))})
+            write_json(O / "commands.json", report["commands"])
+            return result
+
+        compile_cp = os.pathsep.join(map(str, [Q, *jars]))
+        compiled = run("compile", [J / "bin/javac", "--release", "21", "-Xlint:all", "-Werror",
+                                   "-sourcepath", "", "-cp", compile_cp, "-d", classes, *sources])
+        if compiled.returncode:
+            raise RuntimeError("Existing native test fixture compilation failed; see compile.log")
+        outputs = inventory(classes)
+        allowed = set(TESTS) | set(FIXTURES) | {"FacadeTestLauncher"}
+        for path in outputs:
+            stem = Path(path).name.removesuffix(".class").split("$", 1)[0]
+            if path in before or stem not in allowed:
+                raise RuntimeError("Unexpected or production test output: " + path)
+        write_json(O / "test-classes.json", outputs)
+        report["test_class_count"] = len(outputs)
+        report["fresh_test_fixtures_only"] = True
+        runtime_cp = os.pathsep.join(map(str, [classes, Q, *jars]))
+        failed = []
+        for name, count in TESTS.items():
+            result = run(name, [J / "bin/java", *report["flags"], "-cp", runtime_cp,
+                                "FacadeTestLauncher", "com.m3.fs." + name])
+            counts = summary(result.stdout)
+            jni_diagnostics = bool(re.search(r"WARNING in native method|FATAL ERROR in native method", result.stdout))
+            passed = (result.returncode == 0 and counts == {
+                "found": count, "skipped": 0, "started": count, "aborted": 0,
+                "successful": count, "failed": 0,
+            } and not jni_diagnostics)
+            report["results"].append({"class": "com.m3.fs." + name, "status": "PASS" if passed else "FAIL",
+                                       "expected_tests": count, "junit": counts,
+                                       "jni_diagnostics": jni_diagnostics})
+            report["junit_tests"] += counts["successful"]
+            print(name + ": " + ("PASS" if passed else "FAIL") + " " + str(counts), flush=True)
+            if not passed:
+                failed.append(name)
+        after = inventory(Q)
+        write_json(O / "production-classes.after.json", after)
+        report["production_classes_unchanged"] = before == after
+        report["production_class_count"] = len(after)
+        report["native_library_unchanged"] = sha(LIB) == library_sha
+        report["test_sources_unchanged"] = all(sha(Path(path)) == digest for path, digest in source_hashes.items())
+        report["java_runtime_receipt_unchanged"] = sha(prior) == prior_sha
+        report["java_runtime_receipt"] = {"path": str(prior), "sha256": prior_sha}
+        report["skipped"] = sum(r["junit"]["skipped"] for r in report["results"])
+        report["aborted"] = sum(r["junit"]["aborted"] for r in report["results"])
+        report["failed"] = sum(r["junit"]["failed"] for r in report["results"])
+        if failed or not all(report[key] for key in (
+            "production_classes_unchanged", "native_library_unchanged", "test_sources_unchanged",
+            "java_runtime_receipt_unchanged")) or report["junit_tests"] != 27:
+            raise RuntimeError("Native Java qualification failed: " + ", ".join(failed))
+        report["status"] = "PASS"
+    except Exception as failure:
+        report["status"] = "FAIL"
+        report["error"] = type(failure).__name__ + ": " + str(failure)
+        print(report["error"], file=sys.stderr)
+    finally:
+        report["finished_utc"] = datetime.now(timezone.utc).isoformat()
+        write_json(O / "results.json", report)
+    print(report["status"] + ": " + str(report["junit_tests"]) + "/27 existing native JUnit tests; " + str(O / "results.json"))
+    return 0 if report["status"] == "PASS" else 1
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
