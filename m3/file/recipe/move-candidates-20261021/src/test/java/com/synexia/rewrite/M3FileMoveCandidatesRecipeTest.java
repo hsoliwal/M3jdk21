@@ -74,8 +74,10 @@ final class M3FileMoveCandidatesRecipeTest {
         SourceFile drift = JavaParser.fromJavaVersion().build().parse(source)
                 .findFirst().orElseThrow().withSourcePath(Path.of(path));
         var recipe = new M3HashPinnedJavaSnapshotRecipe(CRATE, true);
-        assertThrows(RuntimeException.class, () ->
-                recipe.run(new InMemoryLargeSourceSet(List.of(drift)), context()));
+        var execution = context();
+        var inventory = recipe.getInitialValue(execution);
+        recipe.getScanner(inventory).visit(drift, execution);
+        assertThrows(IllegalStateException.class, () -> recipe.generate(inventory, execution));
     }
 
     private static InMemoryExecutionContext context() {
