@@ -1,6 +1,7 @@
 /*
  * SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
  * SPDX-License-Identifier: Apache-2.0
+ * Modified 2026: recognize interior-null candidates in readonly set navigation.
  */
 package com.m3.collections;
 
@@ -240,9 +241,20 @@ public final class M3FilteredViews {
          */
         private boolean nullIsCandidate(E query, boolean forward, boolean inclusive) {
             Comparator<? super E> order = nav.comparator();
-            if (order == null || nav.isEmpty()
-                    || (nav.first() != null && nav.last() != null)) return false;
-            int direction = order.compare(null, query);
+            if (order == null || nav.isEmpty()) return false;
+            E first = nav.first();
+            int direction;
+            if (first == null) {
+                direction = order.compare(null, query);
+            } else {
+                E last = nav.last();
+                // Keep the historical extreme probes and their order. When both
+                // extremes are non-null, an interior null is still possible.
+                // A qualifying directional extreme proves that navigation found
+                // a member, so its null result denotes that retained member.
+                direction = last == null ? order.compare(null, query)
+                        : order.compare(forward ? last : first, query);
+            }
             return forward ? (inclusive ? direction >= 0 : direction > 0)
                     : (inclusive ? direction <= 0 : direction < 0);
         }
