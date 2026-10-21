@@ -1,0 +1,93 @@
+{
+  "status": "PASS_PRIOR_132_AND_113_REGRESSION",
+  "commands": [
+    {
+      "label": "frozen132-entry-regression",
+      "argv": [
+        "C:\\Program Files\\Java\\jdk-21\\bin\\java.exe",
+        "-Xms128m",
+        "-Xmx128m",
+        "-Xss512k",
+        "-XX:ActiveProcessorCount=2",
+        "-XX:-UsePerfData",
+        "-Djava.io.tmpdir=S:\\codex-work\\m3-collections-next-20261018\\temp",
+        "-Duser.home=S:\\codex-work\\m3-collections-next-20261018\\m3-avl-insertion-frontier-20261018\\qualification-regression-v1\\home",
+        "-Djava.library.path=S:\\codex-work\\m3-collections-next-20261018\\m3-avl-insertion-frontier-20261018\\qualification-regression-v1\\absent-native",
+        "-cp",
+        "S:\\codex-work\\m3-collections-next-20261018\\m3-tree-map-entry-protocol-20261018\\qualification-entry-proof-v1\\classes;S:\\codex-work\\m3-collections-next-20261018\\m3-avl-insertion-frontier-20261018\\qualification-compile-v1\\classes;S:\\codex-work\\m3-collections-next-20261018\\m3-tree-map-entry-protocol-20261018\\qualification-compile-v1\\classes;S:\\codex-work\\m3-collections-next-20261018\\spring-case-insensitive-map\\current-base-runtime-v5\\core130-classes",
+        "TreeMapLookupEntryProof",
+        "com.m3.collections.M3TreeMap"
+      ],
+      "returncode": 0,
+      "reason": "completed",
+      "pid": 46848,
+      "capturedBytes": 1892,
+      "combinedLogLimitBytes": 131072,
+      "capacityChecks": 5,
+      "readerThreadsJoined": true,
+      "treeContainment": "Windows kill-on-close job with stdin-gated command",
+      "elapsedSeconds": 0.218,
+      "stdout_sha256": "7d0e3e4b091112f7d433549f89cb2d557f6abd1873fea1c88344511483d0de64",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "frozen113-bulk-regression",
+      "argv": [
+        "C:\\Program Files\\Java\\jdk-21\\bin\\java.exe",
+        "-Xms128m",
+        "-Xmx128m",
+        "-Xss512k",
+        "-XX:ActiveProcessorCount=2",
+        "-XX:-UsePerfData",
+        "-Djava.io.tmpdir=S:\\codex-work\\m3-collections-next-20261018\\temp",
+        "-Duser.home=S:\\codex-work\\m3-collections-next-20261018\\m3-avl-insertion-frontier-20261018\\qualification-regression-v1\\home",
+        "-Djava.library.path=S:\\codex-work\\m3-collections-next-20261018\\m3-avl-insertion-frontier-20261018\\qualification-regression-v1\\absent-native",
+        "-cp",
+        "S:\\codex-work\\m3-collections-next-20261018\\m3-tree-map-linear-bulk-load-20261018\\qualification-proof-v2\\classes;S:\\codex-work\\m3-collections-next-20261018\\m3-avl-insertion-frontier-20261018\\qualification-compile-v1\\classes;S:\\codex-work\\m3-collections-next-20261018\\m3-tree-map-entry-protocol-20261018\\qualification-compile-v1\\classes;S:\\codex-work\\m3-collections-next-20261018\\spring-case-insensitive-map\\current-base-runtime-v5\\core130-classes",
+        "M3TreeMapSortedBulkProof",
+        "com.m3.collections.M3TreeMap"
+      ],
+      "returncode": 0,
+      "reason": "completed",
+      "pid": 54460,
+      "capturedBytes": 524,
+      "combinedLogLimitBytes": 131072,
+      "capacityChecks": 11,
+      "readerThreadsJoined": true,
+      "treeContainment": "Windows kill-on-close job with stdin-gated command",
+      "elapsedSeconds": 0.875,
+      "stdout_sha256": "a2b21db2cc073a5d4364d06d02ab44127967a63a28b32baf95a6b99daf682999",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "source_after_git_blob": "fc8a9e75011f5dc8b86f1ee553caba979cb2e30b",
+  "recipe": {
+    "forward": true,
+    "fixed_point": true,
+    "exact_inverse": true,
+    "inverse_fixed_point": true,
+    "stale_input_refused": true
+  },
+  "gate_before": {
+    "root": "S:\\codex-work\\m3-collections-next-20261018",
+    "free_bytes": 25511575552,
+    "logical_bytes": 529641943,
+    "cap_bytes": 536870912,
+    "reserve_bytes": 8589934592,
+    "verified_child_temp": "S:\\codex-work\\m3-collections-next-20261018\\temp\\",
+    "C_build_lane": "HELD",
+    "K_temp_lane": "UNAVAILABLE"
+  },
+  "gate_after": {
+    "root": "S:\\codex-work\\m3-collections-next-20261018",
+    "free_bytes": 25511567360,
+    "logical_bytes": 529644359,
+    "cap_bytes": 536870912,
+    "reserve_bytes": 8589934592,
+    "verified_child_temp": "S:\\codex-work\\m3-collections-next-20261018\\temp\\",
+    "C_build_lane": "HELD",
+    "K_temp_lane": "UNAVAILABLE"
+  },
+  "performance_admission": false,
+  "full_owner_admission": false
+}

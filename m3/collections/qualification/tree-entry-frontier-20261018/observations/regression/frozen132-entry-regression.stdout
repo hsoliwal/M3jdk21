@@ -1,0 +1,14 @@
+DIAGNOSTIC postStructuralEntry view=0 access=0 return:null throw:java.lang.IllegalStateException state=return:[2=B, 3=C, 4=D, 8=fresh]
+DIAGNOSTIC postStructuralEntry view=0 access=1 return:null throw:java.lang.IllegalStateException state=return:[2=B, 3=C, 4=D, 8=fresh]
+DIAGNOSTIC postStructuralEntry view=0 access=2 return:null throw:java.lang.IllegalStateException state=return:[1=A, 2=B, 3=C, 8=fresh]
+DIAGNOSTIC postStructuralEntry view=1 access=0 return:null throw:java.lang.IllegalStateException state=return:[1=A, 3=C, 4=D, 8=fresh]
+DIAGNOSTIC postStructuralEntry view=1 access=1 return:null throw:java.lang.IllegalStateException state=return:[1=A, 3=C, 4=D, 8=fresh]
+DIAGNOSTIC postStructuralEntry view=1 access=2 return:null throw:java.lang.IllegalStateException state=return:[1=A, 2=B, 4=D, 8=fresh]
+DIAGNOSTIC postStructuralEntry view=2 access=0 return:null throw:java.lang.IllegalStateException state=return:[1=A, 2=B, 3=C, 8=fresh]
+DIAGNOSTIC postStructuralEntry view=2 access=1 return:null throw:java.lang.IllegalStateException state=return:[1=A, 2=B, 3=C, 8=fresh]
+DIAGNOSTIC postStructuralEntry view=2 access=2 return:null throw:java.lang.IllegalStateException state=return:[2=B, 3=C, 4=D, 8=fresh]
+DIAGNOSTIC postStructuralEntry view=3 access=0 return:null throw:java.lang.IllegalStateException state=return:[1=A, 2=B, 4=D, 8=fresh]
+DIAGNOSTIC postStructuralEntry view=3 access=1 return:null throw:java.lang.IllegalStateException state=return:[1=A, 2=B, 4=D, 8=fresh]
+DIAGNOSTIC postStructuralEntry view=3 access=2 return:null throw:java.lang.IllegalStateException state=return:[2=B, 3=C, 4=D, 8=fresh]
+PASS optionalPublicEntryOwner=com.m3.collections.M3LinkedHashMap
+PASS finiteCases=132 expectedSHA256=a6d0de0b5d74beb8cbefd5c99be759882c36ad85841f9d52cf4e5ba66932d84b target=com.m3.collections.M3TreeMap fullOwnerMatrix=OPEN comparatorTraceCounts=NOT_ASSERTED

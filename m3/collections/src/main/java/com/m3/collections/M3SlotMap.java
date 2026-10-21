@@ -30,6 +30,8 @@ abstract class M3SlotMap<K, V> extends AbstractMap<K, V> {
     abstract int revision();
     boolean live(int slot) { return true; }
     void accessed(int slot) { }
+    int entrySlot(K key, int hint, int expected) { return findSlot(key); }
+    final Entry<K, V> entryAt(int slot) { return new LiveEntry(keyAt(slot), slot, revision()); }
     final void check(int expected) {
         if (revision() != expected) { throw new ConcurrentModificationException(); }
     }
@@ -154,11 +156,16 @@ abstract class M3SlotMap<K, V> extends AbstractMap<K, V> {
     }
     final class LiveEntry implements Entry<K, V> {
         private final K key;
-        LiveEntry(K key) { this.key = key; }
+        private final int hint;
+        private final int expected;
+        LiveEntry(K key) { this(key, -1, -1); }
+        LiveEntry(K key, int hint, int expected) {
+            this.key = key; this.hint = hint; this.expected = expected;
+        }
         @Override public K getKey() { return key; }
-        @Override public V getValue() { int s = findSlot(key); return s < 0 ? null : valueAt(s); }
+        @Override public V getValue() { int s = entrySlot(key, hint, expected); return s < 0 ? null : valueAt(s); }
         @Override public V setValue(V value) {
-            int s = findSlot(key);
+            int s = entrySlot(key, hint, expected);
             if (s < 0) { throw new IllegalStateException("entry no longer present"); }
             return writeAt(s, value);
         }
@@ -191,7 +198,7 @@ abstract class M3SlotMap<K, V> extends AbstractMap<K, V> {
             @Override @SuppressWarnings("unchecked") public T next() {
                 if (!hasNext()) { throw new NoSuchElementException(); }
                 last = cursor; lastKey = heldKey; cursor = nextSlot(cursor); prepared = false;
-                Object result = kind == 0 ? heldKey : kind == 1 ? valueAt(last) : new LiveEntry(heldKey);
+                Object result = kind == 0 ? heldKey : kind == 1 ? valueAt(last) : entryAt(last);
                 heldKey = null; return (T) result;
             }
             @Override public void remove() {

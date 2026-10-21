@@ -1,0 +1,30 @@
+{
+  "schema": "m3-tree-lookup-validation-before/v1",
+  "donorHead": "dcaf125c2104853208608d1ff2c38d8b91d8ba7a",
+  "preimage": {
+    "path": "S:\\codex-work\\m3-collections-next-20261018\\m3-avl-insertion-frontier-20261018\\src\\main\\java\\com\\m3\\collections\\M3TreeMap.java",
+    "sha256": "e8dcb2c6a1101195dbbecbb55018bb68f182f088309cdfd83f189231d69ca08e",
+    "bytes": 27555
+  },
+  "realWitness": "Canonical EC owner1 mapped109+109 toSortedBag test comparator counter expected10 actual19, both failures preserved in ec-indexed owner1 result f75c97ae...",
+  "selectedAtom": "Avoid an unconditional query-self comparison when bounds or nonempty indexed descent already compare the query; keep natural-empty invalid-key checking and custom-empty no-comparison result",
+  "scope": "No public signatures or storage layout changed. Comparator search-path/call counts are not fixed API promises. Actual values/exceptions and existing invariants must pass. Stateful/reentrant comparator semantics remain an explicit qualification surface.",
+  "challengeReuse": "References identify BST problem category, not licensed implementation or proof. Existing Tree.find is the selected donor.",
+  "proofBeforeAdmission": [
+    "Exact88-row public API",
+    "Frozen132 entry and113 sorted bulk discriminators",
+    "Existing exhaustive AVL corpus",
+    "Canonical504+6 metadata/272 defaults/callback12/mapped460 receiving suite"
+  ],
+  "performanceClaim": "Not benchmarked; removing one comparator invocation per qualified lookup is a source-level candidate, not a throughput or universal peak claim",
+  "storage": {
+    "root": "S:\\codex-work\\m3-collections-next-20261018",
+    "free_bytes": 25496088576,
+    "logical_bytes": 529911126,
+    "cap_bytes": 536870912,
+    "reserve_bytes": 8589934592,
+    "verified_child_temp": "S:\\codex-work\\m3-collections-next-20261018\\temp\\",
+    "C_build_lane": "HELD",
+    "K_temp_lane": "UNAVAILABLE"
+  }
+}
