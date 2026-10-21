@@ -32,6 +32,7 @@ jobs:
           set -euo pipefail
           git diff --check origin/master...HEAD
           bash m3/collections/qualification/filtered-cursor-mask-20261021/verify.sh
+          bash m3/collections/qualification/descending-groupmask-20261021/verify.sh
       - name: Strict Java 21 actual M3 List/Deque/Sorted wrappers and existing oracles
         shell: bash
         run: |
@@ -102,5 +103,5 @@ jobs:
       - name: Run original owning filtered List Deque sorted wrappers and new JUnit
         run: >
           mvn -B -ntp -f m3/collections/pom.xml
-          -Dtest=M3FilteredCursorStateTest,M3FilteredDequesTest,M3FilteredViewsTest,M3FilteredListsTest
+          -Dtest=M3FilteredCursorStateTest,M3IndexedDescendingGroupMaskTest,M3IndexedFilterSortFusionTest,M3FilteredDequesTest,M3FilteredViewsTest,M3FilteredListsTest
           test
