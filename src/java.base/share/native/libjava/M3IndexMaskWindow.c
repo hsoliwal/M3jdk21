@@ -103,8 +103,9 @@ static jlong m3_window_scan_range(JNIEnv *env, jintArray rows, jbyteArray states
          * Only the enclosing admitted row span crosses JNI. Offsets fit in one byte
          * because the fixed chunk is 128; no retained index or native heap is added. */
         jint consumed;
+        jint remaining = limit - written;
         jint matches = m3_window_select_offsets(marks, take, required, excluded,
-                limit - written, offsets, &consumed);
+                remaining, offsets, &consumed);
         if (matches != 0) {
             jint first_match = offsets[0];
             jint span = (jint) offsets[matches - 1] - first_match + 1;
@@ -161,4 +162,52 @@ Java_jdk_internal_m3_M3IndexMaskWindow_scanBoundedNative(
     (void) owner;
     return m3_window_scan_range(env, rows, states, first, end, JNI_FALSE,
             required, excluded, output, output_offset, limit);
+}
+
+
+/* State-only reduction. Keep the established two-condition native predicate;
+ * the prior selection predicate-fusion candidate remains rejected. */
+static jint m3_window_count_matches(const jbyte *marks, jint take,
+        jint required, jint excluded) {
+    jint count = 0;
+    for (jint i = 0; i < take; i++) {
+        unsigned int flags = (unsigned int) (unsigned char) marks[i];
+        if ((flags & (unsigned int) required) == (unsigned int) required
+                && (flags & (unsigned int) excluded) == 0U) {
+            count++;
+        }
+    }
+    return count;
+}
+
+/* Additive count ABI: only bounded state reads, 128 scratch bytes plus locals.
+ * No row-ID reads, output writes, allocation, callbacks or critical-array pins. */
+JNIEXPORT jlong JNICALL
+Java_jdk_internal_m3_M3IndexMaskWindow_countBoundedNative(
+        JNIEnv *env, jclass owner, jbyteArray states, jint first, jint end,
+        jint required, jint excluded) {
+    (void) owner;
+    if ((*env)->ExceptionCheck(env)) return (jlong) -1;
+    if (states == NULL || required < 0 || required > 255
+            || excluded < 0 || excluded > 255) {
+        return m3_window_invalid(env, "invalid mask-window count arguments");
+    }
+    jsize length = (*env)->GetArrayLength(env, states);
+    if ((*env)->ExceptionCheck(env)) return (jlong) -1;
+    if (first < 0 || first > length || end < first || end > length) {
+        return m3_window_invalid(env, "invalid mask-window count geometry");
+    }
+    if ((required & excluded) != 0) return m3_window_result(end, 0);
+    if ((required | excluded) == 0) return m3_window_result(end, end - first);
+    jbyte marks[M3_MASK_WINDOW_CHUNK];
+    jint count = 0;
+    for (jint next = first; next < end;) {
+        jint take = end - next;
+        if (take > M3_MASK_WINDOW_CHUNK) take = M3_MASK_WINDOW_CHUNK;
+        (*env)->GetByteArrayRegion(env, states, next, take, marks);
+        if ((*env)->ExceptionCheck(env)) return (jlong) -1;
+        count += m3_window_count_matches(marks, take, required, excluded);
+        next += take;
+    }
+    return m3_window_result(end, count);
 }

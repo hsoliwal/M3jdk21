@@ -215,4 +215,81 @@ public final class M3IndexMaskWindow {
     /** Native bounded ABI is additive; explicit requests reject older shared libraries. */
     private static native long scanBoundedNative(int[] rows, byte[] states, int first,
             int end, int required, int excluded, int[] output, int outputOffset, int limit);
+
+    /** Lazy, independent capability; older libraries retain the original scan ABI. */
+    private static final class NativeCount {
+        static final boolean AVAILABLE = load();
+        private static boolean load() {
+            if (!nativeAvailable()) return false;
+            try {
+                return countBoundedNative(new byte[0], 0, 0, 0, 0) == 0L;
+            } catch (UnsatisfiedLinkError unavailable) {
+                return false;
+            }
+        }
+    }
+
+    /** True only when both existing scans and the additive count entry resolve. */
+    public static boolean nativeCountAvailable() { return NativeCount.AVAILABLE; }
+
+    /**
+     * Counts matching byte-state rows without reading row IDs or writing output arrays.
+     * Examines at most {@code maxExamined} slots beginning at {@code firstIndex}.
+     * The exclusive end is clamped to the state array length without integer overflow.
+     *
+     * <p>Every required bit must be present and every excluded bit absent. A byte with
+     * several set bits still contributes at most one match; contradictory masks count
+     * zero. Inputs must remain stable during the call. The caller owns synchronization
+     * and must revalidate its parent generation between resumptions; this is not a
+     * cached size of an arbitrary predicate-backed collection.
+     *
+     * <p>Validation order is states, backend, masks, first index, then scan budget.
+     * An explicit native request requires the additive count symbol even for empty,
+     * zero-budget or contradictory-mask calls. A legacy library may still scan but
+     * cannot silently substitute Java or an index-producing scan for this operation.
+     *
+     * @return high 32 bits: exclusive next source index; low 32 bits: match count,
+     *         decoded with {@link #nextIndex(long)} and {@link #written(long)}
+     */
+    public static long countBounded(byte[] rowStates, int firstIndex, int maxExamined,
+            int requiredMask, int excludedMask, Backend backend) {
+        Objects.requireNonNull(rowStates, "rowStates");
+        Objects.requireNonNull(backend, "backend");
+        checkMask(requiredMask);
+        checkMask(excludedMask);
+        if (firstIndex < 0 || firstIndex > rowStates.length) {
+            throw new IndexOutOfBoundsException(firstIndex);
+        }
+        if (maxExamined < 0) throw new IllegalArgumentException("negative input scan budget");
+        int end = firstIndex + Math.min(maxExamined, rowStates.length - firstIndex);
+        if (backend == Backend.NATIVE_REQUIRED) {
+            if (!nativeCountAvailable()) {
+                throw new UnsatisfiedLinkError("M3JDK21 libjava mask-window count JNI unavailable");
+            }
+            long result = countBoundedNative(rowStates, firstIndex, end, requiredMask, excludedMask);
+            int count = written(result);
+            if (nextIndex(result) != end || count < 0 || count > end - firstIndex) {
+                throw new IllegalStateException("invalid native mask-window count");
+            }
+            return result;
+        }
+        if ((requiredMask & excludedMask) != 0) return pack(end, 0);
+        if ((requiredMask | excludedMask) == 0) return pack(end, end - firstIndex);
+        return pack(end, countRangeJava(rowStates, firstIndex, end, requiredMask, excludedMask));
+    }
+
+    /** Scalar reduction over stable caller-owned states; no row or result storage. */
+    private static int countRangeJava(byte[] states, int first, int end,
+            int required, int excluded) {
+        final int testedMask = required | excluded;
+        int count = 0;
+        for (int index = first; index < end; index++) {
+            if (((states[index] & 0xff) & testedMask) == required) count++;
+        }
+        return count;
+    }
+
+    /** Additive count ABI; no row IDs, result arrays or object callbacks cross JNI. */
+    private static native long countBoundedNative(byte[] states, int first, int end,
+            int required, int excluded);
 }
