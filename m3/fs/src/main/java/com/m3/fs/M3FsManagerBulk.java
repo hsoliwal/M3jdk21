@@ -62,9 +62,18 @@ public final class M3FsManagerBulk {
         Arrays.fill(statuses, M3FsBulk.SKIPPED);
         int[] metadata = new int[batch.size()];
         FileSystemException[] failures = new FileSystemException[batch.size()];
-        for (int i = first, end = first + count; i < end; i++) {
-            if (selected != null && (selected[i >>> 6] & (1L << (i & 63))) == 0) {
-                continue;
+        for (int i = first, end = first + count; i < end;) {
+            if (selected != null) {
+                int word = i >>> 6;
+                long candidates = selected[word] & (-1L << (i & 63));
+                if (candidates == 0L) {
+                    // Jump over an empty 64-bit word without visiting its rows.
+                    // Widen before shifting to avoid overflow at very large batch sizes.
+                    i = (int) Math.min((long) end, ((long) word + 1L) << 6);
+                    continue;
+                }
+                i = (word << 6) + Long.numberOfTrailingZeros(candidates);
+                if (i >= end) break;
             }
             batch.progress().checkCanceled();
             try {
@@ -78,6 +87,7 @@ public final class M3FsManagerBulk {
                 }
             }
             batch.progress().worked(1);
+            i++;
         }
         return new M3FsBulk.Result(statuses, metadata, failures);
     }
