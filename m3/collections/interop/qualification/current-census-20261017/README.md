@@ -30,3 +30,20 @@ contracts work or that 76 sources compiled successfully. The actual original
 Java/JNI and full reactor gates must run after source admission; failed or
 unstarted gates remain open. Canonical Synexia recipe dataset:
 `m3-interop-census-20261021`; no manual edits to production source files.
+
+## Second original-source census epoch — 76 → 76
+
+The previous complete 76-row `current-source-census.tsv` is retained byte-for-byte
+as `previous-source-census-76-20261021.tsv`. An immutable one-row
+`source-epoch-76-delta-20261021.tsv` records the Java21 test correction in
+`M3FiveLibraryArrayificationTest.java`, including old/new SHA256 and Git blobs.
+Exactly one test path changed: 76 source identities remain tracked, with zero
+addition/removal. The 36-file previous receipt, its seven-source successor ledger
+and the historical five-file recipe remain untouched and independently verified.
+
+The current receipt and both predecessor-to-successor epochs are admitted by the
+existing fail-closed verifier. Any further source change requires another exact
+serial recipe and immutable receipt, not a weakened or dynamically regenerated
+file list. The actual prior PR-head four-library run caught the stale test blob
+before compilation; this successor is designed to restore the integrity gate,
+not to claim JDK/JNI/provider tests pass. Canonical Synexia dataset: `m3-interop-epoch2-20261021`.

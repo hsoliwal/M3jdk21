@@ -98,5 +98,30 @@ class SourceCensusTest(unittest.TestCase):
             verify.verify_successor_lineage(changed, prior, successor, 1, 1)
 
 
+    def test_current_epoch_exact_one_source_successor(self):
+        before = [('first.java', 'ABSENT', 'a' * 64, '1' * 40),
+                  ('second.java', 'ABSENT', 'b' * 64, '2' * 40)]
+        after = [('first.java', 'ABSENT', 'c' * 64, '3' * 40),
+                 ('second.java', 'ABSENT', 'b' * 64, '2' * 40)]
+        ledger = [('first.java', 'a' * 64, 'c' * 64, '3' * 40, '1' * 40)]
+        verify.verify_current_epoch(after, before, ledger, 1)
+        verify.verify_current_epoch([list(r) for r in after], before,
+                                    [list(r) for r in ledger], 1)
+        with self.assertRaisesRegex(ValueError, 'unadmitted source epoch change'):
+            verify.verify_current_epoch(after, before, [], 1)
+        with self.assertRaisesRegex(ValueError, 'successor hash or blob'):
+            wrong = [list(ledger[0])]
+            wrong[0][4] = 'f' * 40
+            verify.verify_current_epoch(after, before, wrong, 1)
+        with self.assertRaisesRegex(ValueError, 'added or lost'):
+            verify.verify_current_epoch(after[:1], before, ledger, 1)
+        with self.assertRaisesRegex(ValueError, 'predecessor field'):
+            wrong = [list(after[0]), list(after[1])]
+            wrong[0][1] = 'f' * 64
+            verify.verify_current_epoch(wrong, before, ledger, 1)
+        with self.assertRaisesRegex(ValueError, 'duplicate'):
+            verify.verify_current_epoch(after + [after[0]], before, ledger, 1)
+
+
 if __name__ == '__main__':
     unittest.main()
