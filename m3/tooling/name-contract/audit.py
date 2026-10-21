@@ -115,7 +115,7 @@ def main(argv: list[str]) -> int:
         print(as_tsv(rows), end="")
         bad = [r for r in rows if r["result"].startswith("REVIEW_")]
         print("M3JDK21_MAP_CENSUS rows=" + str(len(rows)) + " distinct_paths="
-              + str(len({r["source_path"] for r in rows})) + " attention=" + str(len(bad)), file=sys.stderr)
+              + str(len({r["target_path"] for r in rows})) + " attention=" + str(len(bad)), file=sys.stderr)
         if "--strict" in argv and bad:
             return 1
         return 0
