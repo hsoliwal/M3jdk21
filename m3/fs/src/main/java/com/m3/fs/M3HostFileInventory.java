@@ -97,6 +97,16 @@ public final class M3HostFileInventory {
                 || Files.isSymbolicLink(root)) {
             throw new IOException("host project root must be a non-symlink directory");
         }
+        // NOFOLLOW_LINKS for the final path component alone does not protect
+        // symlinks in ancestors of a nested project/module root.
+        Path ancestor = root.getRoot();
+        if (ancestor == null) throw new IOException("host root is not absolute");
+        for (Path segment : root) {
+            ancestor = ancestor.resolve(segment);
+            if (Files.isSymbolicLink(ancestor)) {
+                throw new IOException("symbolic link in host root: " + ancestor);
+            }
+        }
         Objects.requireNonNull(entries, "entries");
         Objects.requireNonNull(include, "include");
         Objects.requireNonNull(limits, "limits");
@@ -212,7 +222,17 @@ public final class M3HostFileInventory {
         digest.update((byte) 0);
         digest.update(root.toUri().toASCIIString().getBytes(StandardCharsets.UTF_8));
         digest.update((byte) 0);
-        digest.update(selectionId.getBytes(StandardCharsets.UTF_8));
+        // String.getBytes UTF-8 silently replaces malformed UTF-16 (for
+        // example an unpaired surrogate) with '?', merging distinct policies.
+        try {
+            java.nio.ByteBuffer encoded = StandardCharsets.UTF_8.newEncoder()
+                    .onMalformedInput(java.nio.charset.CodingErrorAction.REPORT)
+                    .onUnmappableCharacter(java.nio.charset.CodingErrorAction.REPORT)
+                    .encode(java.nio.CharBuffer.wrap(selectionId));
+            digest.update(encoded);
+        } catch (java.nio.charset.CharacterCodingException invalid) {
+            throw new IllegalArgumentException("malformed UTF-16 selection identity", invalid);
+        }
         return digest.digest();
     }
 
