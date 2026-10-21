@@ -1,0 +1,23 @@
+name: M3JDK21 native bulk index-mask Java21/C17 proof
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - 'm3/collections/src/main/native/collections/m3_index_path_masks.c'
+      - 'm3/collections/qualification/native-bulk-pathmask-20261021/**'
+      - 'm3/collections/algorithm-catalog/native-bulk-pathmask-20261021.tsv'
+      - 'm3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-native-bulk-pathmask-*/**'
+      - 'm3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-native-bulk-pathmask-*.yml'
+      - '.github/workflows/m3-native-bulk-pathmask-20261021.yml'
+jobs:
+  actual-java-native-differential:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Verify exact source recipes and compare C17 JNI binaries
+        run: bash m3/collections/qualification/native-bulk-pathmask-20261021/verify.sh

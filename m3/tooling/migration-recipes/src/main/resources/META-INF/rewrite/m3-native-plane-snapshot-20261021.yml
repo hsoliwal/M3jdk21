@@ -1,0 +1,8 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.rewrite.M3NativePlaneSnapshot20261021
+displayName: M3JDK21 bounded JNI state-plane snapshot
+description: Exact source-sealed JNI C17 atom, attached to the original M3JDK21 indexed collection owner.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: m3-native-plane-snapshot-20261021
+      lst: false

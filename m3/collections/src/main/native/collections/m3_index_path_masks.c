@@ -59,6 +59,11 @@ static int m3_matches(JNIEnv *env, jobjectArray planes,
  * All local references are released on every normal/exceptional exit.
  */
 #define M3_CACHED_STAGE_LIMIT 8
+/* At most 8 x 256 x sizeof(jint) = 8192 bytes of call-local state data.
+ * The row threshold amortizes an eager plane snapshot on constrained devices.
+ */
+#define M3_PLANE_SNAPSHOT_CAPACITY 256
+#define M3_PLANE_SNAPSHOT_MIN_ROWS 512
 
 typedef struct {
     jintArray plane[M3_CACHED_STAGE_LIMIT];
@@ -66,6 +71,8 @@ typedef struct {
     jint needs[M3_CACHED_STAGE_LIMIT];
     jint denies[M3_CACHED_STAGE_LIMIT];
     jsize count;
+    jboolean snapshot_ready;
+    jint snapshot_values[M3_CACHED_STAGE_LIMIT][M3_PLANE_SNAPSHOT_CAPACITY];
 } M3StageCache;
 
 static void m3_release_stages(JNIEnv *env, M3StageCache *cache) {
@@ -101,6 +108,29 @@ failure:
     return 0;
 }
 
+/* Snapshot only small, complete primitive state planes when repeated indexed
+ * lookups are likely to amortize the initial bulk JNI region reads. Every
+ * physical offset is still checked against its original per-stage capacity.
+ * No Java array address is retained; mutable inputs must remain stable for the
+ * duration of the call, as required by the existing M3IndexPathMasks contract.
+ */
+static int m3_prepare_small_plane_snapshot(JNIEnv *env, M3StageCache *cache,
+        jint logical_count) {
+    if (logical_count < M3_PLANE_SNAPSHOT_MIN_ROWS) return 1;
+    for (jsize stage = 0; stage < cache->count; ++stage) {
+        if (cache->length[stage] > M3_PLANE_SNAPSHOT_CAPACITY) return 1;
+    }
+    for (jsize stage = 0; stage < cache->count; ++stage) {
+        jsize length = cache->length[stage];
+        if (length == 0) continue;
+        (*env)->GetIntArrayRegion(env, cache->plane[stage], 0, length,
+                cache->snapshot_values[stage]);
+        if ((*env)->ExceptionCheck(env)) return 0;
+    }
+    cache->snapshot_ready = JNI_TRUE;
+    return 1;
+}
+
 /* -1 is an exception; 0 and 1 are rejected and admitted respectively. */
 static int m3_matches_cached(JNIEnv *env, const M3StageCache *cache, jint slot) {
     for (jsize i = 0; i < cache->count; ++i) {
@@ -110,19 +140,109 @@ static int m3_matches_cached(JNIEnv *env, const M3StageCache *cache, jint slot) 
             return -1;
         }
         jint state;
-        (*env)->GetIntArrayRegion(env, cache->plane[i], slot, 1, &state);
-        if ((*env)->ExceptionCheck(env)) return -1;
+        if (cache->snapshot_ready) {
+            state = cache->snapshot_values[i][slot];
+        } else {
+            (*env)->GetIntArrayRegion(env, cache->plane[i], slot, 1, &state);
+            if ((*env)->ExceptionCheck(env)) return -1;
+        }
         if ((state & cache->needs[i]) != cache->needs[i]
                 || (state & cache->denies[i]) != 0) return 0;
     }
     return 1;
 }
 
+
+/* Bulk contiguous physical-index path execution: one native entry for the whole
+ * selection. Keep per-state reads checked (physical offsets may be arbitrary),
+ * but bring logical offsets and accepted row IDs across JNI in bounded regions.
+ * A source array is borrowed only during this operation; no GC-unsafe pointer
+ * is retained, and the output remains a detached, exact-sized primitive array.
+ */
+enum { M3_PATH_BULK = 256 };
+
+static jintArray m3_select_cached_contiguous(JNIEnv *env, jintArray rows,
+        jintArray offsets, const M3StageCache *cache, jint first, jint count) {
+    jint slots[M3_PATH_BULK];
+    jint row_ids[M3_PATH_BULK];
+    jint selected_indices[M3_PATH_BULK];
+    jint selected_values[M3_PATH_BULK];
+    jsize matching = 0;
+    jintArray result = NULL;
+
+    for (jint pass = 0; pass < 2; ++pass) {
+        if (pass == 1) {
+            result = (*env)->NewIntArray(env, matching);
+            if (result == NULL) return NULL;
+        }
+        jsize written = 0;
+        for (jint position = 0; position < count;) {
+            jint remaining = count - position;
+            jsize chunk = remaining < M3_PATH_BULK ? remaining : M3_PATH_BULK;
+            (*env)->GetIntArrayRegion(env, offsets, first + position, chunk, slots);
+            if ((*env)->ExceptionCheck(env)) return NULL;
+
+            jsize selected = 0;
+            for (jsize index = 0; index < chunk; ++index) {
+                int keep = m3_matches_cached(env, cache, slots[index]);
+                if (keep < 0) return NULL;
+                if (keep == 0) continue;
+                if (pass == 0) {
+                    matching++;
+                } else {
+                    if (selected >= matching - written) {
+                        m3_throw(env, "java/util/ConcurrentModificationException",
+                                "mask stages changed during JNI selection");
+                        return NULL;
+                    }
+                    selected_indices[selected++] = index;
+                }
+            }
+            if (pass == 1 && selected > 0) {
+                (*env)->GetIntArrayRegion(env, rows, first + position, chunk, row_ids);
+                if ((*env)->ExceptionCheck(env)) return NULL;
+                for (jsize index = 0; index < selected; ++index) {
+                    selected_values[index] = row_ids[selected_indices[index]];
+                }
+                (*env)->SetIntArrayRegion(env, result, written, selected, selected_values);
+                if ((*env)->ExceptionCheck(env)) return NULL;
+                written += selected;
+            }
+            position += chunk;
+        }
+        if (pass == 1) {
+            if (written != matching) {
+                m3_throw(env, "java/util/ConcurrentModificationException",
+                        "mask stages changed during JNI selection");
+                return NULL;
+            }
+            return result;
+        }
+    }
+    return NULL;
+}
+
 static jintArray m3_select_cached(JNIEnv *env, jintArray rows, jintArray offsets,
         jobjectArray planes, jintArray required, jintArray forbidden,
         jint first, jint count, jint stride, jsize stages) {
-    M3StageCache cache = {0};
+    // Initialize only live JNI handles and the cache flag. State words are
+    // copied before first use; clearing all 8KiB on every short scan is wasteful.
+    M3StageCache cache;
+    for (jsize stage = 0; stage < M3_CACHED_STAGE_LIMIT; ++stage) {
+        cache.plane[stage] = NULL;
+    }
+    cache.snapshot_ready = JNI_FALSE;
     if (!m3_prepare_stages(env, planes, required, forbidden, stages, &cache)) return NULL;
+    if (!m3_prepare_small_plane_snapshot(env, &cache, count)) {
+        m3_release_stages(env, &cache);
+        return NULL;
+    }
+    if (stride == 1) {
+        jintArray output = m3_select_cached_contiguous(
+                env, rows, offsets, &cache, first, count);
+        m3_release_stages(env, &cache);
+        return output;
+    }
     jintArray result = NULL;
     jsize matching = 0;
     for (jint pass = 0; pass < 2; ++pass) {
