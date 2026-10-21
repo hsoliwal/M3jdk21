@@ -23,27 +23,52 @@ public final class ProgressMonitors {
 
     private ProgressMonitors() { }
 
-    /** Process fallback. Supplier publication is atomic; it may be called concurrently. */
+    /**
+     * Returns the process fallback. The supplier is selected atomically and may be called concurrently.
+     *
+     * @return the supplier result, or {@link ProgressMonitor#NONE} if that result is null
+     */
     public static ProgressMonitor system() {
         ProgressMonitor monitor = SYSTEM.get().get();
         return monitor == null ? ProgressMonitor.NONE : monitor;
     }
 
-    /** Update the global fallback and return the previous provider. */
+    /**
+     * Atomically replaces the process fallback supplier.
+     *
+     * @param provider the new fallback supplier
+     * @return the previous fallback supplier
+     * @throws NullPointerException if provider is null
+     */
     public static Supplier<? extends ProgressMonitor> setSystem(
             Supplier<? extends ProgressMonitor> provider) {
         return SYSTEM.getAndSet(Objects.requireNonNull(provider, "provider"));
     }
 
+    /**
+     * Resets the process fallback supplier to one that returns {@link ProgressMonitor#NONE}.
+     */
     public static void resetSystem() { SYSTEM.set(NONE); }
 
-    /** The lexical monitor, or the process fallback when no scope is active. */
+    /**
+     * Returns the current lexical monitor, falling back to the process supplier.
+     *
+     * @return the current monitor, which is never null
+     */
     public static ProgressMonitor current() {
         Scope scope = CURRENT.get();
         return scope != null ? scope.monitor : system();
     }
 
-    /** Bind an already-owned monitor: closing this scope does not call done(). */
+    /**
+     * Binds a borrowed monitor to the current thread until the returned scope closes.
+     * Closing the scope does not complete the monitor. Scopes must close on their
+     * creating thread and in reverse binding order.
+     *
+     * @param monitor the borrowed monitor
+     * @return the lexical scope that restores the previous binding
+     * @throws NullPointerException if monitor is null
+     */
     public static Scope bind(ProgressMonitor monitor) {
         Objects.requireNonNull(monitor, "monitor");
         Scope next = new Scope(CURRENT.get(), monitor);
@@ -51,6 +76,16 @@ public final class ProgressMonitors {
         return next;
     }
 
+    /**
+     * Runs a task under a borrowed monitor without completing the monitor.
+     * Cancellation is checked before the task and after its normal completion.
+     *
+     * @param task the task to run
+     * @param monitor the borrowed monitor
+     * @throws NullPointerException if either argument is null
+     * @throws CancellationException if cancellation is detected
+     */
+    @SuppressWarnings("try")
     public static void run(Runnable task, ProgressMonitor monitor) {
         Objects.requireNonNull(task, "task");
         try (Scope ignored = bind(monitor)) {
@@ -60,6 +95,19 @@ public final class ProgressMonitors {
         }
     }
 
+    /**
+     * Calls a task under a borrowed monitor without completing the monitor.
+     * Cancellation is checked before the task and after its normal completion.
+     *
+     * @param <T> the task result type
+     * @param task the task to call
+     * @param monitor the borrowed monitor
+     * @return the task result
+     * @throws Exception if the task fails
+     * @throws NullPointerException if either argument is null
+     * @throws CancellationException if cancellation is detected
+     */
+    @SuppressWarnings("try")
     public static <T> T call(Callable<T> task, ProgressMonitor monitor) throws Exception {
         Objects.requireNonNull(task, "task");
         try (Scope ignored = bind(monitor)) {
@@ -70,6 +118,17 @@ public final class ProgressMonitors {
         }
     }
 
+    /**
+     * Creates a weighted child that credits work to the parent without completing it.
+     *
+     * @param parent the parent monitor
+     * @param name the child task name; null is treated as an empty name
+     * @param parentTicks the nonnegative number of parent units reserved for the child
+     * @param totalWork the positive total child work, or {@link ProgressMonitor#UNKNOWN_WORK}
+     * @return the weighted child, or {@link ProgressMonitor#NONE} for a no-op parent
+     * @throws NullPointerException if parent is null
+     * @throws IllegalArgumentException if parentTicks is negative, or totalWork is zero or below UNKNOWN_WORK
+     */
     public static ProgressMonitor child(
             ProgressMonitor parent, String name, long parentTicks, long totalWork) {
         Objects.requireNonNull(parent, "parent");

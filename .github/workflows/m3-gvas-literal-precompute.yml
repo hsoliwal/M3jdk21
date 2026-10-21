@@ -6,6 +6,9 @@ on:
       - 'm3/core/src/com/m3/text/M3GvasLiteralImage.java'
       - 'm3/core/test/com/m3/text/M3GvasLiteralImageContractTest.java'
       - 'm3/verify-gvas-literal-precompute.py'
+      - 'm3/verify-gvas-lookup-index.py'
+      - 'm3/core/test/com/m3/text/M3GvasLookupIndexContractTest.java'
+      - 'm3/tests/test_gvas_literal_process_identity.py'
       - '.github/workflows/m3-gvas-literal-precompute.yml'
   workflow_dispatch:
 permissions:
@@ -19,5 +22,9 @@ jobs:
         with:
           distribution: temurin
           java-version: '21'
+      - name: Verify exact parent-owned procfs process identity
+        run: python3 -B m3/tests/test_gvas_literal_process_identity.py
       - name: Verify compiled literal image and exact pointer across JVMs
         run: M3_JDK="$JAVA_HOME" python3 m3/verify-gvas-literal-precompute.py
+      - name: Verify prepared exact lookup and collision fallbacks
+        run: M3_JDK="$JAVA_HOME" python3 -B m3/verify-gvas-lookup-index.py

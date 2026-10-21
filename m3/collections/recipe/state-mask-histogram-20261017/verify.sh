@@ -5,24 +5,7 @@ ROOT=$(cd "$(dirname "$0")/../../../.." && pwd)
 RECIPE="$ROOT/m3/collections/recipe/state-mask-histogram-20261017"
 OUT=$(mktemp -d)
 trap 'rm -rf "$OUT"' EXIT
-python3 - "$ROOT" "$RECIPE" <<'PY'
-import hashlib, pathlib, sys
-root = pathlib.Path(sys.argv[1]); recipe = pathlib.Path(sys.argv[2])
-for manifest in ('manifest.tsv', 'native-manifest.tsv'):
-    for row in (recipe / manifest).read_text().splitlines():
-        if not row.strip() or row.startswith('#'): continue
-        path, before, digest, template = row.split('\t')
-        if before != 'ABSENT': raise SystemExit('unexpected preimage claim: ' + path)
-        output = root / path
-        mirror = recipe / 'templates' / template
-        if not output.is_file() or not mirror.is_file():
-            raise SystemExit('missing generated output / sealed mirror: ' + path)
-        actual = hashlib.sha256(output.read_bytes()).hexdigest()
-        mirror_hash = hashlib.sha256(mirror.read_bytes()).hexdigest()
-        if digest != actual or digest != mirror_hash:
-            raise SystemExit('generated output/source mirror SHA-256 drift: ' + path)
-print('source-sealed Java21/C17 receiver: PASS')
-PY
+python3 "$ROOT/m3/collections/qualification/array-mask-successor-20261019/verify_successor.py" --root "$ROOT" --family histogram
 mkdir -p "$OUT/classes" "$OUT/native" "$OUT/headers"
 JH=${JAVA_HOME:-$(dirname "$(dirname "$(readlink -f "$(command -v javac)")")")}
 SRC="$ROOT/m3/collections/src/main/java/com/m3/collections"
