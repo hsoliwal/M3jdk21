@@ -1,0 +1,933 @@
+{
+  "scope": "isolated owning interop module; canonical recipe and receiving admission pending",
+  "mode": "java",
+  "source_head": "2779aba3f98f31c324be43f731be7914e1a05935",
+  "receiver": "/workspace/scratch/53bcd62c244c/work-interop-fix-20261020/fresh-java-838bdd7b4ecb426e8032d1f81a322ce5/m3/collections/interop",
+  "command": [
+    "/tmp/m3jdk21-toolchain-20261020/apache-maven-3.9.9/bin/mvn",
+    "-o",
+    "-B",
+    "-ntp",
+    "-Dmaven.repo.local=/tmp/m3jdk21-toolchain-20261020/m2",
+    "-DargLine=-ea -Xcheck:jni -Djava.library.path=/workspace/scratch/53bcd62c244c/work-interop-fix-20261020/fresh-java-838bdd7b4ecb426e8032d1f81a322ce5/empty-native -Dm3.interop.requireNative=false",
+    "clean",
+    "verify"
+  ],
+  "start_time_ns": 1792507601095430365,
+  "end_time_ns": 1792507614760831683,
+  "maven_exit": 0,
+  "fresh_directory_had_no_target_or_class_files": true,
+  "sources_sha256": {
+    "m3/collections/LICENSE": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+    "m3/collections/NOTICE": "81138f9994f4afa899c22904debf7cf8277803cf21b53536108ac7e254b0a5bb",
+    "m3/collections/interop/README.md": "ba0d1f7f7e834901ca7f0aef7ebdab8e259ae0a287182d53947b9e1945bc9f0d",
+    "m3/collections/interop/SDK_FAMILIES.md": "da19139c66d6f3e221a91f8d66315a58c7f8d887740c310e6ae3cd8b89b0c73a",
+    "m3/collections/interop/SDK_FAMILY_NOTICES.md": "2a0cfb54eb39e7120743673cde476297e2b1a51f67d14fb01aade18821383d67",
+    "m3/collections/interop/THIRD_PARTY_NOTICES.md": "758a1c85ad63ec2c6d7945d79c4bd53b7269f3804f668f2395c985b43ae042ad",
+    "m3/collections/interop/donor-origin.json": "f11fbd42c6fff4abfdc7bf5f403d6565018d31f79fb0c6e7b5e7de5d30245d4f",
+    "m3/collections/interop/pom.xml": "b1e7dd0817690de77ad1af8898d39e4edcab2ee005aeec709f39151d5981e9a3",
+    "m3/collections/interop/recipe-receipt.tsv": "389bcc674172800f8e77317b03d532ba826491c0da7f4a90f865f6f8c37ccd09",
+    "m3/collections/interop/sdk-family-bindings.tsv": "95075c5fd971af4d7272f6aa40ab90acfdb2fbd274bde4f0ebd8d6deb9fdb4d8",
+    "m3/collections/interop/src/main/java/com/m3/collections/interop/M3ApacheBag.java": "5ff51272c4fd48ef11a09b9138ac2329392bb2a70e2a4fe43fab2889909d224f",
+    "m3/collections/interop/src/main/java/com/m3/collections/interop/M3ApacheBidiMap.java": "a6befb0b3c872d062d61ac61f0e74bb24ffca53ef1133c35e4a1ae3c176ee561",
+    "m3/collections/interop/src/main/java/com/m3/collections/interop/M3ApacheCollections.java": "05b7d0a02a5397b42ce589e524509e5e6ced65794aefabea8ad1b52d57d507cc",
+    "m3/collections/interop/src/main/java/com/m3/collections/interop/M3ApacheListValuedMap.java": "7c74e242fb0bae5f853e335aed4d2d5695f9c1881af6325297641d29b06dcc82",
+    "m3/collections/interop/src/main/java/com/m3/collections/interop/M3ApacheMultiSet.java": "a036fbcd07f78c3b13586347d8472fc6e0145fce5c9a42edf4c6715837a1ff37",
+    "m3/collections/interop/src/main/java/com/m3/collections/interop/M3ApacheSetValuedMap.java": "e44934cdb39484af881aa834fb6478b160c150a1b874bee4a03ed70c46e19547",
+    "m3/collections/interop/src/main/java/com/m3/collections/interop/M3BiMap.java": "80aa788db958a34779f02559323e3d77268791eb82ababfacc42538217c6e4bc",
+    "m3/collections/interop/src/main/java/com/m3/collections/interop/M3BiMaps.java": "ae16d7395c3325230bebe7d3f58765669c639f091fd1e06c4b069031affd5db8",
+    "m3/collections/interop/src/main/java/com/m3/collections/interop/M3EclipseBag.java": "54150cefa63b01fb46634ec7b5654d93c2f2d595094bba773fda15297b3f0cb4",
+    "m3/collections/interop/src/main/java/com/m3/collections/interop/M3EclipseBagMultimap.java": "dc2a1ce20163b5dfbb2ed7fde6be2d1124379827c7e8d57353cc2251e40f507c",
+    "m3/collections/interop/src/main/java/com/m3/collections/interop/M3EclipseListMultimap.java": "d44ceb0849d9b2059c1432a3faace8edd999b3d72995eb35f025631883c07c58",
+    "m3/collections/interop/src/main/java/com/m3/collections/interop/M3EclipseSetMultimap.java": "41c037332683d815898921e796490ef7505fb4fa9b76605ad0abd62643709960",
+    "m3/collections/interop/src/main/java/com/m3/collections/interop/M3FiveFamilyPreparedSelection.java": "8b9ba8edf03de5ccce15b1be104ba846b53a5e39fcda15bdb22a741d9575db04",
+    "m3/collections/interop/src/main/java/com/m3/collections/interop/M3FiveLibraryIndexViews.java": "06b7a8ee9064eea7c25254d6b604962e9753f265dd18575fdd219110fc6eca84",
+    "m3/collections/interop/src/main/java/com/m3/collections/interop/M3FiveLibraryKeyRanges.java": "4c42eb437ca834519dce2cd8e10cf048ab48fbb1084c428ebd9ea8832fcd7334",
+    "m3/collections/interop/src/main/java/com/m3/collections/interop/M3FiveLibraryPreparedRows.java": "9937238dfc7294ff787d303232f345b04af28e0558058b140f5402eaf02bfc8b",
+    "m3/collections/interop/src/main/java/com/m3/collections/interop/M3FiveListFamilies.java": "25f4051dcff340507c0e662413104b74a3bbb295bbe6bc78250f1ec7ea92a236",
+    "m3/collections/interop/src/main/java/com/m3/collections/interop/M3FiveProviderFlagSelection.java": "7db59bb0fe1be361dd0e4d478e95f0cc02a6497cc68f4fffb0be99210fd30832",
+    "m3/collections/interop/src/main/java/com/m3/collections/interop/M3FiveProviderKeyGroups.java": "49767629cccbc847c4a66252f86ce18ce57be8aa49a685350624e570a126597f",
+    "m3/collections/interop/src/main/java/com/m3/collections/interop/M3GuavaBiMap.java": "ec6d6d289005832fa20e691c46da5fc232cab8292b87c6455aca0c6696ba35bb",
+    "m3/collections/interop/src/main/java/com/m3/collections/interop/M3GuavaClassToInstanceMaps.java": "8e149744d798e19f217f324553ef8373d0b761c47585380918d15f96a511af95",
+    "m3/collections/interop/src/main/java/com/m3/collections/interop/M3GuavaListMultimap.java": "8e2f3ac99f0e3ea37600ac3d655f3f4ff60adf66e30be275cd0bd920f8f9c52d",
+    "m3/collections/interop/src/main/java/com/m3/collections/interop/M3GuavaMultiset.java": "b540395c2411c0e3cf93ffc49285f7492d5119548c41daa60a650c0aed87ddb9",
+    "m3/collections/interop/src/main/java/com/m3/collections/interop/M3GuavaRowSortedTable.java": "bf92e5b0017203b824589d229d799b27ff9d7659b54282d83b5777b3044c4e11",
+    "m3/collections/interop/src/main/java/com/m3/collections/interop/M3GuavaSetMultimap.java": "0517eb6b401671e18b870eeb307e74f856a071c21a4a033432d0fc3348844099",
+    "m3/collections/interop/src/main/java/com/m3/collections/interop/M3LibraryBinding.java": "fdd00fecd40c07a94ad0faee0fd036d62cb3f9d15dda9309af9626cedc9627c2",
+    "m3/collections/interop/src/main/java/com/m3/collections/interop/M3LibraryBindings.java": "46e13c91b108ccb886fa14c6df4a363488f12a35d4fef55c78fee51ac789edcd",
+    "m3/collections/interop/src/main/java/com/m3/collections/interop/M3LibraryCollections.java": "bdd58a73f64875bc7f523901f72be318d1c9a63bab1a98f01d07d38597733b02",
+    "m3/collections/interop/src/main/java/com/m3/collections/interop/M3LibraryCollectors.java": "8836aaca2113c3d25bffbf1a226394ffa0f6a7c7fbba826715a0aa96c5500a19",
+    "m3/collections/interop/src/main/java/com/m3/collections/interop/M3SpringArrayMultiValueMap.java": "8062247a92ee9dc90d313b715ba9158e47c53b3e7848508a5fdd54ddaaaecb96",
+    "m3/collections/interop/src/main/java/com/m3/collections/interop/M3SpringCaseInsensitiveMap.java": "24e2d7542cb86f777f90f99ae2db1cbc18b3fa5bb46441fd66e2c0461d09c7d8",
+    "m3/collections/interop/src/main/java/com/m3/collections/interop/M3SpringMultiValueMap.java": "cfd7a51bdce14f3e8f2b875d529006c3863049d10087a18b14ccad45f0fd669a",
+    "m3/collections/interop/src/test/java/com/m3/collections/interop/M3ApacheBagContractTest.java": "64337fe0166e6542f8146d77e526e4614a144484bd0a3f1cb0547761193218fc",
+    "m3/collections/interop/src/test/java/com/m3/collections/interop/M3ApacheBidiMapContractTest.java": "fdd2b5fcd7d6e7d18a9f5ee5f35cf6512017231ced902d365700c907a6305564",
+    "m3/collections/interop/src/test/java/com/m3/collections/interop/M3ApacheCollectionsTest.java": "17be67dda9f2365dfc68659838bb9a9c7f70749466d4e33ef89fb8d39123db09",
+    "m3/collections/interop/src/test/java/com/m3/collections/interop/M3BiMapTest.java": "8b5171a387ba6f33a652f9a7dfd9f29e4bd40c9b87527d1c85b1323f775dba4a",
+    "m3/collections/interop/src/test/java/com/m3/collections/interop/M3CountedProviderContractTest.java": "15d5524cf41305db0802cc5ce2d3c8637573d552cb2f9e12240b46ef2b773ba9",
+    "m3/collections/interop/src/test/java/com/m3/collections/interop/M3EclipseBagMultimapSelfTest.java": "a76366f09b65b3d7dd94e255f99038f0831405adf8e9cd271a0aa0ee4f35ac8e",
+    "m3/collections/interop/src/test/java/com/m3/collections/interop/M3EclipseBagMultimapTest.java": "19ea5615976f44f754c78eb64057024417b4acd69bcf3eef469aafaf49ccb354",
+    "m3/collections/interop/src/test/java/com/m3/collections/interop/M3EclipseListMultimapSelfTest.java": "f08cd0616def50f7d80769ab4ec86c0b7a4ffe9f4ac171ec4b1bbd216448844e",
+    "m3/collections/interop/src/test/java/com/m3/collections/interop/M3EclipseMultimapTest.java": "7646aa823ef4cf6a2203d6c7de6c69d28c0017cee16fc266db5dea6c6e291415",
+    "m3/collections/interop/src/test/java/com/m3/collections/interop/M3EclipseSetMultimapSelfTest.java": "3a7abcb3e898b088d6be60ddf1d078abfa94e6aaef1f7127fb111960727bccd5",
+    "m3/collections/interop/src/test/java/com/m3/collections/interop/M3FiveFamilyPreparedSelectionSelfTest.java": "9ceb788e6c6cdca0596879eff680cb6fb4591663a7379f868d4f1b0afd5bbd52",
+    "m3/collections/interop/src/test/java/com/m3/collections/interop/M3FiveFamilyPreparedSelectionTest.java": "2113f5a2dc439f59e653127900c01ac55ae547d05a93436ed46c7ca269220bf7",
+    "m3/collections/interop/src/test/java/com/m3/collections/interop/M3FiveLibraryArrayificationTest.java": "2144a65349ce395a48f6a3bad490ee7a6827f358fbf2e152d5898f999c5e7674",
+    "m3/collections/interop/src/test/java/com/m3/collections/interop/M3FiveLibraryExpandedContractsTest.java": "a4006d9c2d9995ba22687ef40db45ddd62993f11804c65c55bbff7d9c95f7de4",
+    "m3/collections/interop/src/test/java/com/m3/collections/interop/M3FiveLibraryIndexViewsTest.java": "7e4f34529ad88d985d6065808e81da9683ecebdb2ba9e4f397515bf0a9d75477",
+    "m3/collections/interop/src/test/java/com/m3/collections/interop/M3FiveLibraryInteropContractTest.java": "dad4233d279811dee46a9fc96ab665d596e82c18e1599b5cf2022a90d98e22b4",
+    "m3/collections/interop/src/test/java/com/m3/collections/interop/M3FiveLibraryKeyRangesTest.java": "ef93d9a53e0b9935c6e796b55ce2c47e4d94a732c7ac9f07b5a635eb436cc467",
+    "m3/collections/interop/src/test/java/com/m3/collections/interop/M3FiveLibraryPreparedRowsTest.java": "353b22c32544ba8a66f7f51ba593909cde9b1734f8bb7d42123fe8e3f44a54c2",
+    "m3/collections/interop/src/test/java/com/m3/collections/interop/M3FiveLibraryState32Test.java": "26548a60299d8647807401c467d013da60e2f9d248cb82450dcc6d0fe70a3d15",
+    "m3/collections/interop/src/test/java/com/m3/collections/interop/M3FiveListFamiliesContract.java": "93fdf15c0abb5dff4dce37c26a85d6a0340b10477b3fa73ac1e35ef9df69bd7b",
+    "m3/collections/interop/src/test/java/com/m3/collections/interop/M3FiveListFamiliesTest.java": "68ad68cd200a3791f29e97078cbf8e0724b1dec6f13775e1be51e505ddc59b7f",
+    "m3/collections/interop/src/test/java/com/m3/collections/interop/M3FiveProviderBagContractTest.java": "9dca6f5d7da21e7bd2228cc42b40c12e62b7137ff17baacf5756df11db2da9ee",
+    "m3/collections/interop/src/test/java/com/m3/collections/interop/M3FiveProviderCountSharingRegressionTest.java": "3e84a0c302ae8d9ee1f83d716c45dca897e83f99b922ce65d5e7c4f0e53a876f",
+    "m3/collections/interop/src/test/java/com/m3/collections/interop/M3FiveProviderFlagSelectionTest.java": "52289c1c82f43e18d1c661ffc26ee6d640129a9483838cda3199ee99e333cc31",
+    "m3/collections/interop/src/test/java/com/m3/collections/interop/M3FiveProviderKeyGroupClosureTest.java": "97debdc8af2e48e695191daa9a5ad872b9d16131556b9372441ad75c3185a30a",
+    "m3/collections/interop/src/test/java/com/m3/collections/interop/M3FiveProviderKeyGroupsTest.java": "1ae6bb4dac9658e7135946e6292bd4946be523f735046970ec85e897c0b44993",
+    "m3/collections/interop/src/test/java/com/m3/collections/interop/M3GuavaBiMapContractTest.java": "f2fd29a044cb8033254d8bfcd958e8a6fb44fff8e4053233a54f76dea6012e31",
+    "m3/collections/interop/src/test/java/com/m3/collections/interop/M3GuavaBiMapSelfTest.java": "3aabbcef066cc99e6bcad4301b106372a87d078234358f5b0a9824b693ee2eb8",
+    "m3/collections/interop/src/test/java/com/m3/collections/interop/M3GuavaClassToInstanceMapsSelfTest.java": "c247f3c0a1b923b22cbbd693265d0960f5b062608fbe2827728f242a60cab22c",
+    "m3/collections/interop/src/test/java/com/m3/collections/interop/M3GuavaClassToInstanceMapsTest.java": "8c2cf570d004f7b3e8d1ab4476b3e7075de6a3f31c09ef6a1617eb78fd8c48d3",
+    "m3/collections/interop/src/test/java/com/m3/collections/interop/M3GuavaListMultimapContract.java": "59afee8356d265bb72ac13d2bd07226f2e595b93921410e4c0081c91115ae627",
+    "m3/collections/interop/src/test/java/com/m3/collections/interop/M3GuavaListMultimapRealTest.java": "902b3d01547f0b15f281369de64cdbd24214dcb615cbd744f9a396ff08c59314",
+    "m3/collections/interop/src/test/java/com/m3/collections/interop/M3GuavaRowSortedTableContract.java": "e5ebe88e96b3f6c95c85023d39738d95317a2fb9b87589cf075b7a4047d38b27",
+    "m3/collections/interop/src/test/java/com/m3/collections/interop/M3GuavaRowSortedTableTest.java": "574f62203c39bfd58b4a679bdde747f3bb4eb578e3216b8f095763665477bc49",
+    "m3/collections/interop/src/test/java/com/m3/collections/interop/M3GuavaSetMultimapTest.java": "24c9b9ac0690dc04312c52363b25de179fa85ef38ad2d96696cb2e07dcef46d0",
+    "m3/collections/interop/src/test/java/com/m3/collections/interop/M3LibraryBindingsSelfTest.java": "7211db3940ab181400b3cff8607b0f0e73b685eed4827f5aa8ec984fe716ac6c",
+    "m3/collections/interop/src/test/java/com/m3/collections/interop/M3LibraryClosureTest.java": "29691e36f212ae79c31a06a597a58e76c7e51280787c46db6d7264b30fd567e0",
+    "m3/collections/interop/src/test/java/com/m3/collections/interop/M3LibraryCollectionsTest.java": "792a0a8fdb7dadd0fc81e033fc0fc61cc8e2f7c4af5acdfb7098304d19b0d1f1",
+    "m3/collections/interop/src/test/java/com/m3/collections/interop/M3ObjectStreamProviderContractTest.java": "e98e9461f84d2b2a8ea257921eac7d11908600c4b4844c9b069f045e696b2513",
+    "m3/collections/interop/src/test/java/com/m3/collections/interop/M3SdkFamiliesTest.java": "84159857d13f31dc7d1fe49a4d04356c40906cb7c6dfe1b9b0a206da6a6d4f7d",
+    "m3/collections/interop/src/test/java/com/m3/collections/interop/M3SpringArrayContractTest.java": "a0810a10a35d0e23660ce3109dd260bd8bba0495e71268d988b5694bf71dd054",
+    "m3/collections/interop/src/test/java/com/m3/collections/interop/M3SpringCaseInsensitiveContract.java": "e62a783c8d389e10627a8226cbee239ae837fdafd06893f403d52b5854146767",
+    "m3/collections/interop/src/test/java/com/m3/collections/interop/M3SpringCaseInsensitiveSdkFactoryTest.java": "192e287a4b98241c59c0c4a3de07cec2505d867d4cb52ed949c7e6ca31b429f0",
+    "m3/collections/interop/src/test/java/com/m3/collections/interop/M3SpringCaseInsensitiveTest.java": "3cca2ebfed563f4c2eff862e580605b4b438f9632095f325833a10a6e4c47b97"
+  },
+  "source_hashes_unchanged_after_build": true,
+  "all_class_mtimes_within_build": true,
+  "classes": {
+    "target/classes/com/m3/collections/interop/M3ApacheBag.class": {
+      "sha256": "806cd5c254cfd041c8efa436abee8cb49d167eb6fc1d7e9fbd1fb9fc2867cae0",
+      "mtime_ns": 1792507604060944755
+    },
+    "target/classes/com/m3/collections/interop/M3ApacheBidiMap.class": {
+      "sha256": "cc88d8dd1f50105dddf24a4554e390641068eb59e8304d834646d5c5263e5655",
+      "mtime_ns": 1792507604080945259
+    },
+    "target/classes/com/m3/collections/interop/M3ApacheCollections.class": {
+      "sha256": "34f41ed1e97bcda1d3c02c9809fb1d8b0010d15cde25ba0271ec7999a0100b08",
+      "mtime_ns": 1792507604152947069
+    },
+    "target/classes/com/m3/collections/interop/M3ApacheListValuedMap.class": {
+      "sha256": "2ed1944e206666dbf29b19600aa4c65ec4e8f115be5d7b631cb3d7aab07370ee",
+      "mtime_ns": 1792507604164947372
+    },
+    "target/classes/com/m3/collections/interop/M3ApacheMultiSet$1.class": {
+      "sha256": "7a54395604b8f382565455f11f3687b8979f076e518f6a6cd43af17b8ea7b07d",
+      "mtime_ns": 1792507604192948077
+    },
+    "target/classes/com/m3/collections/interop/M3ApacheMultiSet$CountEntry.class": {
+      "sha256": "78d01f8024b9aae69804662b7e1f9db5511adcb1e4120d49028b89591a804ca5",
+      "mtime_ns": 1792507604192948077
+    },
+    "target/classes/com/m3/collections/interop/M3ApacheMultiSet.class": {
+      "sha256": "6ac70f08ef3f66223093688d5d8f925b6dda0c4074db9fd4d4ecd4d42610938c",
+      "mtime_ns": 1792507604199525499
+    },
+    "target/classes/com/m3/collections/interop/M3ApacheSetValuedMap.class": {
+      "sha256": "dca8058093385db6b232328c1fa3014e9d5e69bf1856e8057c4263c31fb92077",
+      "mtime_ns": 1792507604204948378
+    },
+    "target/classes/com/m3/collections/interop/M3BiMap$1$1.class": {
+      "sha256": "90954567dce67b920223abb839084e9a06598b32181847fa12517b03b7e791a9",
+      "mtime_ns": 1792507604308364521
+    },
+    "target/classes/com/m3/collections/interop/M3BiMap$1.class": {
+      "sha256": "622d6d5ca765b36a5b4cb7ca451db43d0378b3d5ed5d5a491708d420f12935c2",
+      "mtime_ns": 1792507604309231581
+    },
+    "target/classes/com/m3/collections/interop/M3BiMap$2$1.class": {
+      "sha256": "30870c54823d08cc030e893f9f265c2a8a2c1816e8ff9143870adef6cca67bcf",
+      "mtime_ns": 1792507604309867902
+    },
+    "target/classes/com/m3/collections/interop/M3BiMap$2.class": {
+      "sha256": "c4245b2fede4dc18430937c63099e46aefcef67756fbe0cb53c6b252975dbad6",
+      "mtime_ns": 1792507604310617123
+    },
+    "target/classes/com/m3/collections/interop/M3BiMap$3$1$1.class": {
+      "sha256": "4ef6ab21f63c534256fb80d9963c537ee209f2e1c21b080a842a0319ef7cee22",
+      "mtime_ns": 1792507604311767000
+    },
+    "target/classes/com/m3/collections/interop/M3BiMap$3$1.class": {
+      "sha256": "d469abc2c909f5d71240c09e044aeb5bc9fe3fd2a21150084982675073af9627",
+      "mtime_ns": 1792507604313277832
+    },
+    "target/classes/com/m3/collections/interop/M3BiMap$3.class": {
+      "sha256": "b7bfd5eccd8e690d05e3ffef6e96c007a60306c8399061b7e7598e9158db8171",
+      "mtime_ns": 1792507604314228758
+    },
+    "target/classes/com/m3/collections/interop/M3BiMap$Revision.class": {
+      "sha256": "1decc603e6d6f1e092a9a88a384b8602e96540be4bb6ebce6123710669af0448",
+      "mtime_ns": 1792507604300950793
+    },
+    "target/classes/com/m3/collections/interop/M3BiMap$ViewIterator.class": {
+      "sha256": "c2721443c5911fa6e7f242e9161477831aecdb7cfcbdce579d8d2c033356c52a",
+      "mtime_ns": 1792507604315408750
+    },
+    "target/classes/com/m3/collections/interop/M3BiMap.class": {
+      "sha256": "7fab9868c74d8154473e2a92b89a958a97500a23542bbe80fe6dbcb7a21bcecf",
+      "mtime_ns": 1792507604320951296
+    },
+    "target/classes/com/m3/collections/interop/M3BiMaps.class": {
+      "sha256": "0e4fb8c66a31af6a4171626c0d9fbc2a8985cb4a1fe10d08c50ba3902126076d",
+      "mtime_ns": 1792507604368952504
+    },
+    "target/classes/com/m3/collections/interop/M3EclipseBag.class": {
+      "sha256": "852c6863626ccfde7d43c25de69704592c319fb8d1b26502d0ed431bb4218104",
+      "mtime_ns": 1792507604596958239
+    },
+    "target/classes/com/m3/collections/interop/M3EclipseBagMultimap.class": {
+      "sha256": "357c8b39e04884f105abc9c150460960c58b5b6774769302a69c9bd4a5174f4d",
+      "mtime_ns": 1792507604680960353
+    },
+    "target/classes/com/m3/collections/interop/M3EclipseListMultimap.class": {
+      "sha256": "f1c09e98d0fea3679afdc329656646ba95086102ebf2bc8f535661cfdd6f58d0",
+      "mtime_ns": 1792507604716961258
+    },
+    "target/classes/com/m3/collections/interop/M3EclipseSetMultimap.class": {
+      "sha256": "d2e570318b6affc0ec7e8ab1fce2da1fd43e1f4f9bb1de54d5e94f6eff919c37",
+      "mtime_ns": 1792507604760962365
+    },
+    "target/classes/com/m3/collections/interop/M3FiveFamilyPreparedSelection$Projection$1.class": {
+      "sha256": "188425a8ace23c9f7143299ae552cc50483e2bc85d63b2b28d3ffcc5309483d9",
+      "mtime_ns": 1792507604792963171
+    },
+    "target/classes/com/m3/collections/interop/M3FiveFamilyPreparedSelection$Projection.class": {
+      "sha256": "0eca1760e90293371d2869d764c1eef4ae427813819ea33960d2eb4f87cd1413",
+      "mtime_ns": 1792507604796963271
+    },
+    "target/classes/com/m3/collections/interop/M3FiveFamilyPreparedSelection.class": {
+      "sha256": "33ef056d10774273d823e931bdb80864eae67a3c55c32faa243e64c22a9ff151",
+      "mtime_ns": 1792507604804963472
+    },
+    "target/classes/com/m3/collections/interop/M3FiveLibraryIndexViews.class": {
+      "sha256": "de843a4e9ff7284524b61fe08f028bec6ee8d14378fcdcc07fb5854177dc782a",
+      "mtime_ns": 1792507604908966089
+    },
+    "target/classes/com/m3/collections/interop/M3FiveLibraryKeyRanges.class": {
+      "sha256": "a6eed886e2a28d4393a1036ad58ae08da455cf1e757fc5944d17932e163345e4",
+      "mtime_ns": 1792507604936966794
+    },
+    "target/classes/com/m3/collections/interop/M3FiveLibraryPreparedRows$IndexComparator.class": {
+      "sha256": "a61f3670f43851251b0b5e7324a733916a12d6566299386ad5e140bc42e411b0",
+      "mtime_ns": 1792507604968967597
+    },
+    "target/classes/com/m3/collections/interop/M3FiveLibraryPreparedRows.class": {
+      "sha256": "2314534e96ca11bab31677c919181720d7a25f1074b204b1f4c6656c2dcdf53b",
+      "mtime_ns": 1792507604991508638
+    },
+    "target/classes/com/m3/collections/interop/M3FiveListFamilies$Snapshot.class": {
+      "sha256": "7b0e340319382346adf5e97acdad4f1611daff5c68d1a754052c7d37632431d1",
+      "mtime_ns": 1792507605028969107
+    },
+    "target/classes/com/m3/collections/interop/M3FiveListFamilies.class": {
+      "sha256": "4618d7c27221cea990764baa63ab70535fe63101f83eeb64915c9070cd2dff40",
+      "mtime_ns": 1792507605032969208
+    },
+    "target/classes/com/m3/collections/interop/M3FiveProviderFlagSelection.class": {
+      "sha256": "367f9717c47793cf36a6de684ba7e0186d06fb60ace9f77840704b8d45ab05fe",
+      "mtime_ns": 1792507605152972227
+    },
+    "target/classes/com/m3/collections/interop/M3FiveProviderKeyGroups$GroupValues.class": {
+      "sha256": "5a3268d521eae64f5070db04334dc6385ef55413bbe96dafbd888b5b6aeaf20c",
+      "mtime_ns": 1792507605188973133
+    },
+    "target/classes/com/m3/collections/interop/M3FiveProviderKeyGroups.class": {
+      "sha256": "aa3af6532bff41f60d7519997a1bda77cb705a1989f4f62d52f5a3757e8b2712",
+      "mtime_ns": 1792507605200973434
+    },
+    "target/classes/com/m3/collections/interop/M3GuavaBiMap$1$1.class": {
+      "sha256": "0569901587611f2072ac4cbf374adb12c5a148f58d78297070e206b0e5c188cb",
+      "mtime_ns": 1792507605220973937
+    },
+    "target/classes/com/m3/collections/interop/M3GuavaBiMap$1.class": {
+      "sha256": "af05f4ed40d929d3d29f447bf79d8dc5aa13733b6d7a596c6a1e922b801ffbaa",
+      "mtime_ns": 1792507605228421046
+    },
+    "target/classes/com/m3/collections/interop/M3GuavaBiMap$LiveEntry.class": {
+      "sha256": "4f3579084822099bd4dab1ae2602fc8b9e0c72d8465352aee2f96cfe03ab2623",
+      "mtime_ns": 1792507605229664404
+    },
+    "target/classes/com/m3/collections/interop/M3GuavaBiMap.class": {
+      "sha256": "0ee408f39936ad25abcfd343f5b995e6dec44f4cd0be11c062af58b6a7c0a448",
+      "mtime_ns": 1792507605231407407
+    },
+    "target/classes/com/m3/collections/interop/M3GuavaClassToInstanceMaps.class": {
+      "sha256": "f7251abbcb3a492ba37058445738896d9897e248aab34a5c957ae1ec69909c01",
+      "mtime_ns": 1792507605234630285
+    },
+    "target/classes/com/m3/collections/interop/M3GuavaListMultimap$1$1.class": {
+      "sha256": "3620363c33d2a5b3eaa70047c1fa38739e17a92ee3dc06531cfa842655734319",
+      "mtime_ns": 1792507605112971222
+    },
+    "target/classes/com/m3/collections/interop/M3GuavaListMultimap$1.class": {
+      "sha256": "121417d5de0129810dd3423b764ba7f4462e67d339032d4d768e7e0c19385f67",
+      "mtime_ns": 1792507605117759958
+    },
+    "target/classes/com/m3/collections/interop/M3GuavaListMultimap$2.class": {
+      "sha256": "dac66a4f601ec5231f3557c1d711eeb8acdf9223de0bfc30b666896d393f34e6",
+      "mtime_ns": 1792507605118236057
+    },
+    "target/classes/com/m3/collections/interop/M3GuavaListMultimap$3$1.class": {
+      "sha256": "973c74086ab41e1daf804b9046cc222ee5999851321d8db8bdcd5b27e06521d4",
+      "mtime_ns": 1792507605120478444
+    },
+    "target/classes/com/m3/collections/interop/M3GuavaListMultimap$3.class": {
+      "sha256": "7f77575916f2e7db7785acfa813999a20ca3349e558205a0922f716794a5f9d5",
+      "mtime_ns": 1792507605121030337
+    },
+    "target/classes/com/m3/collections/interop/M3GuavaListMultimap$4$1$1.class": {
+      "sha256": "11e1c4de8d3da94f057e85e735eccdc8c66f55e87e0c43f42ee75fbf2e5512ab",
+      "mtime_ns": 1792507605121389800
+    },
+    "target/classes/com/m3/collections/interop/M3GuavaListMultimap$4$1.class": {
+      "sha256": "5efc8988bb5e7cc1ec677d8295bbf1e7965f8c1d537b42e3e8761a0868e29645",
+      "mtime_ns": 1792507605122302779
+    },
+    "target/classes/com/m3/collections/interop/M3GuavaListMultimap$4.class": {
+      "sha256": "01a2d702f68f24a9eed3a78cd0278c1907826df6841dd57131ff81679e7f4c94",
+      "mtime_ns": 1792507605123109708
+    },
+    "target/classes/com/m3/collections/interop/M3GuavaListMultimap$KeyCounts$1$1.class": {
+      "sha256": "fe3bc16329e2ae6c0c8be79e888abc10bcf7610ed22157ce3111190b08477ddb",
+      "mtime_ns": 1792507605123999542
+    },
+    "target/classes/com/m3/collections/interop/M3GuavaListMultimap$KeyCounts$1.class": {
+      "sha256": "fc558fd19fa8cce5de88e56f7fc1b399da66b253f9c7f2746f1b64bb205ac546",
+      "mtime_ns": 1792507605124352375
+    },
+    "target/classes/com/m3/collections/interop/M3GuavaListMultimap$KeyCounts$2.class": {
+      "sha256": "599c67972141ad82c4815b128ec3dcf1efe8ee9a1e7eac2dae967dd63188e39b",
+      "mtime_ns": 1792507605124650074
+    },
+    "target/classes/com/m3/collections/interop/M3GuavaListMultimap$KeyCounts$KeyEntry.class": {
+      "sha256": "28067adfc59d892e629584e39f0c719cfbe8169aa3ea14430bfa7ff909bfe23e",
+      "mtime_ns": 1792507605125558857
+    },
+    "target/classes/com/m3/collections/interop/M3GuavaListMultimap$KeyCounts.class": {
+      "sha256": "5601138e0b447ef9182a2ce1ca53d7aa00260d469e6e74be5ea08dde5baae980",
+      "mtime_ns": 1792507605127224993
+    },
+    "target/classes/com/m3/collections/interop/M3GuavaListMultimap$PairCursor.class": {
+      "sha256": "6ca4bf82f86975853d9ea7a58ca35686b13943b7b65e475521b839ab1aee78e5",
+      "mtime_ns": 1792507605119995695
+    },
+    "target/classes/com/m3/collections/interop/M3GuavaListMultimap$ValueView.class": {
+      "sha256": "881b60a550cda5c4241d9487852e71bcfb95b26aceb543a95b2472c2e50eee4a",
+      "mtime_ns": 1792507605112971222
+    },
+    "target/classes/com/m3/collections/interop/M3GuavaListMultimap.class": {
+      "sha256": "caa5c8dc403e5f16e6c4fd425c2875d2100056d73218ba6473078d15f79c4c8c",
+      "mtime_ns": 1792507605130209631
+    },
+    "target/classes/com/m3/collections/interop/M3GuavaMultiset$EntryView$1.class": {
+      "sha256": "8424a2cb070667c7f1cabb6447b2d5b67fb60dcb30563d05573dcf3bb1d91db0",
+      "mtime_ns": 1792507605240974440
+    },
+    "target/classes/com/m3/collections/interop/M3GuavaMultiset$EntryView.class": {
+      "sha256": "45fb69408199f035e54deefb2d26c2b4945fe498bbbbe2d0702abad80789ed7d",
+      "mtime_ns": 1792507605244974541
+    },
+    "target/classes/com/m3/collections/interop/M3GuavaMultiset.class": {
+      "sha256": "927c2f82db1d0bcb15fdb948facbc675f035ba4be0c18e2b9feebf66bd4e1411",
+      "mtime_ns": 1792507605250092469
+    },
+    "target/classes/com/m3/collections/interop/M3GuavaRowSortedTable$SortedRowMap$1$1.class": {
+      "sha256": "83bf6f54cac0067ed8509fe9e27cc84352b5a0044b6e252b90c5f63c2aa7b13b",
+      "mtime_ns": 1792507605272975247
+    },
+    "target/classes/com/m3/collections/interop/M3GuavaRowSortedTable$SortedRowMap$1.class": {
+      "sha256": "bb453356ef2913e695cfb193495c7c3380d01fb2defd2635ea2787a5248eb669",
+      "mtime_ns": 1792507605278316769
+    },
+    "target/classes/com/m3/collections/interop/M3GuavaRowSortedTable$SortedRowMap.class": {
+      "sha256": "1eb5b616eb46ed376b18b4f5d99015753187742e705d685be29e75840ae1482c",
+      "mtime_ns": 1792507605278987612
+    },
+    "target/classes/com/m3/collections/interop/M3GuavaRowSortedTable.class": {
+      "sha256": "9f60591f19e84c0c7f9ec6bf307c75e5675a8080d0f063a4072daf4c7c1d258d",
+      "mtime_ns": 1792507605280046251
+    },
+    "target/classes/com/m3/collections/interop/M3GuavaSetMultimap.class": {
+      "sha256": "77078dc61b5bfa9bb1c075cad8637ac71654a7a967fe3f8174bfe18227f796cb",
+      "mtime_ns": 1792507605289957466
+    },
+    "target/classes/com/m3/collections/interop/M3LibraryBinding$Family.class": {
+      "sha256": "1bb12fc47340353b644c83b13fadfb3a76eac6f3c7ff8fc28c42a145ac804356",
+      "mtime_ns": 1792507605304976051
+    },
+    "target/classes/com/m3/collections/interop/M3LibraryBinding$Ownership.class": {
+      "sha256": "6b02da6026d0c3e443a031093b276efb4b4570a807c90988af527ee7b549ee33",
+      "mtime_ns": 1792507605313005893
+    },
+    "target/classes/com/m3/collections/interop/M3LibraryBinding.class": {
+      "sha256": "9e1f89a1f9f37dee6dff7311aaba52b9396ee564c0043e231fd3434bc96e9c71",
+      "mtime_ns": 1792507605314407821
+    },
+    "target/classes/com/m3/collections/interop/M3LibraryBindings$Loaded.class": {
+      "sha256": "2871d1a1e2212599f75737d8ac24b6f5e841b8fa85cd2304c3854717a4fe4f3f",
+      "mtime_ns": 1792507605332976755
+    },
+    "target/classes/com/m3/collections/interop/M3LibraryBindings.class": {
+      "sha256": "2fe8d91b9dab120fe09dcaec2451d6e9390750b02d24e1273d15f01f1993c2d9",
+      "mtime_ns": 1792507605340976957
+    },
+    "target/classes/com/m3/collections/interop/M3LibraryCollections.class": {
+      "sha256": "66a6aa263759edd118339f14ede3ad4357d41667743a6dedb223cca420480d11",
+      "mtime_ns": 1792507605383332750
+    },
+    "target/classes/com/m3/collections/interop/M3LibraryCollectors.class": {
+      "sha256": "9e736950ccaa427cf49f500c2ecea99400a4118e0fd0aab1fdb505ae43db7951",
+      "mtime_ns": 1792507605440979473
+    },
+    "target/classes/com/m3/collections/interop/M3SpringArrayMultiValueMap$FirstValueView$1$1.class": {
+      "sha256": "c1d8777df69c49800dad5c4b08fd9bdb96476c6ff82c867f4baf185d91810a29",
+      "mtime_ns": 1792507605468980177
+    },
+    "target/classes/com/m3/collections/interop/M3SpringArrayMultiValueMap$FirstValueView$1.class": {
+      "sha256": "57814bbdaa4bc3a61dcc3be4ae2e03c076146107a30f77239d12a2bc6abfabac",
+      "mtime_ns": 1792507605473605084
+    },
+    "target/classes/com/m3/collections/interop/M3SpringArrayMultiValueMap$FirstValueView.class": {
+      "sha256": "9f40cf1800294d867d05cdbcf5b94a3b2f397061d5833bc8a473c9184a5550e2",
+      "mtime_ns": 1792507605474733979
+    },
+    "target/classes/com/m3/collections/interop/M3SpringArrayMultiValueMap.class": {
+      "sha256": "6f3170275cf3bec30b20325283356309ccb4fc58419804807fcbf9f693e7c2af",
+      "mtime_ns": 1792507605477610999
+    },
+    "target/classes/com/m3/collections/interop/M3SpringCaseInsensitiveMap$1$1$1.class": {
+      "sha256": "21ddb375acea4032e31333429f9668797ccffd8eecef535d122da52e3f2f43ed",
+      "mtime_ns": 1792507605516981384
+    },
+    "target/classes/com/m3/collections/interop/M3SpringCaseInsensitiveMap$1$1.class": {
+      "sha256": "ce05e0b158299b7d8ca9ea85397055469e13ae591426421733d991c9959099be",
+      "mtime_ns": 1792507605516981384
+    },
+    "target/classes/com/m3/collections/interop/M3SpringCaseInsensitiveMap$1.class": {
+      "sha256": "4ca41dbda274722d5d41788b4b7253d7ccfb1c22eb2d6b555a0c7d12643809ad",
+      "mtime_ns": 1792507605522098368
+    },
+    "target/classes/com/m3/collections/interop/M3SpringCaseInsensitiveMap$2$1.class": {
+      "sha256": "f47ea40f6977217b94b85b3ddc9ba2f5e036751e0f4cc7cfdba3efda4376e689",
+      "mtime_ns": 1792507605522630302
+    },
+    "target/classes/com/m3/collections/interop/M3SpringCaseInsensitiveMap$2.class": {
+      "sha256": "08b999af6191ee2759c29f20786e0a379f136fb5428028de6e39908d5c9af6fc",
+      "mtime_ns": 1792507605523111769
+    },
+    "target/classes/com/m3/collections/interop/M3SpringCaseInsensitiveMap$3$1.class": {
+      "sha256": "10ec85b1091b4660fce31a2a5c2e25e9b6a16b66f96061f6852edb19f3871f2e",
+      "mtime_ns": 1792507605523497341
+    },
+    "target/classes/com/m3/collections/interop/M3SpringCaseInsensitiveMap$3.class": {
+      "sha256": "6cb9a2e29136bb53caf9e4222f141b4e7b7dbc117679f54a8397c9f09233991a",
+      "mtime_ns": 1792507605523875843
+    },
+    "target/classes/com/m3/collections/interop/M3SpringCaseInsensitiveMap.class": {
+      "sha256": "4eed0bbed757dbb19d6e9c73e2da05261dd24c633f19012f125d0db37cff9d0a",
+      "mtime_ns": 1792507605525336850
+    },
+    "target/classes/com/m3/collections/interop/M3SpringMultiValueMap.class": {
+      "sha256": "31adafa3d8ca5d55b1eeff25e347aa95a459b2e6e55674a000402ffdef6aca51",
+      "mtime_ns": 1792507605540981987
+    },
+    "target/test-classes/com/m3/collections/interop/M3ApacheBagContractTest.class": {
+      "sha256": "650c9a4f5fb46dfb0d9fdc50d331bfb307b606b103b00e11ffb5fc7996608413",
+      "mtime_ns": 1792507606036994467
+    },
+    "target/test-classes/com/m3/collections/interop/M3ApacheBidiMapContractTest.class": {
+      "sha256": "ac4b44a195b32094f97b29ef1041b58808bbb0009323120baa8ec96ec40814a1",
+      "mtime_ns": 1792507606056994969
+    },
+    "target/test-classes/com/m3/collections/interop/M3ApacheCollectionsTest.class": {
+      "sha256": "0f9e2cef8e6be408a8e84716c88859af05d61a2f8c99e7b0cd070f79da5b84cb",
+      "mtime_ns": 1792507606144997182
+    },
+    "target/test-classes/com/m3/collections/interop/M3BiMapTest$Call.class": {
+      "sha256": "1e5857ef3d2fa951edca0591b9c00dbb06579f9283397755448995612222e774",
+      "mtime_ns": 1792507606345653377
+    },
+    "target/test-classes/com/m3/collections/interop/M3BiMapTest$Key.class": {
+      "sha256": "d03313c4df3644363ee9f315bce132cb66de49c8f4eabe8a05ce611156a0712a",
+      "mtime_ns": 1792507606341002114
+    },
+    "target/test-classes/com/m3/collections/interop/M3BiMapTest$Outcome.class": {
+      "sha256": "ba9f4df0bb8f5866d2159787cec928005356fbf9107b49ccb98c49241e555b60",
+      "mtime_ns": 1792507606341002114
+    },
+    "target/test-classes/com/m3/collections/interop/M3BiMapTest.class": {
+      "sha256": "07455ba78a8b498a53724d81a2e94372b861c8436f53c285ed040db17b8ed0a0",
+      "mtime_ns": 1792507606349002315
+    },
+    "target/test-classes/com/m3/collections/interop/M3CountedProviderContractTest.class": {
+      "sha256": "b1b1100c0cd2b08097999ddbb03fdf3ad9e6962a6c249332c7960beade64ee2c",
+      "mtime_ns": 1792507606385003221
+    },
+    "target/test-classes/com/m3/collections/interop/M3EclipseBagMultimapSelfTest.class": {
+      "sha256": "03096761abdc5c478b4d724d6f013fca49a565ae57fccfca3076cb110d797319",
+      "mtime_ns": 1792507606441004629
+    },
+    "target/test-classes/com/m3/collections/interop/M3EclipseBagMultimapTest.class": {
+      "sha256": "c37b6934f709a5e98e1a4692455cde6d47292200c3dcb24f5a45ad0db7648f70",
+      "mtime_ns": 1792507606441004629
+    },
+    "target/test-classes/com/m3/collections/interop/M3EclipseListMultimapSelfTest.class": {
+      "sha256": "b1b76fe1229a0ef0b368e2006291b5fac25f9de2d479a4073d3052b0aa996957",
+      "mtime_ns": 1792507606465005233
+    },
+    "target/test-classes/com/m3/collections/interop/M3EclipseMultimapTest.class": {
+      "sha256": "623fe153b3af01ab8b9845ed957e0abbffebf2a62dcba2086c79c1b327adba4d",
+      "mtime_ns": 1792507606471393225
+    },
+    "target/test-classes/com/m3/collections/interop/M3EclipseSetMultimapSelfTest.class": {
+      "sha256": "1f13e8a393b1c4fb5997490ac09982842b3d5db209ffef55c90ca215c41ab81a",
+      "mtime_ns": 1792507606505006240
+    },
+    "target/test-classes/com/m3/collections/interop/M3FiveFamilyPreparedSelectionSelfTest.class": {
+      "sha256": "b2f63c17b2db47344ecd851f80fd42b6389f7661f51402f21de90c1145365969",
+      "mtime_ns": 1792507606521006643
+    },
+    "target/test-classes/com/m3/collections/interop/M3FiveFamilyPreparedSelectionTest.class": {
+      "sha256": "c9ea9376b7ef077f56a4b975904a8fd20f0427ee96dbbc6a783070947911d585",
+      "mtime_ns": 1792507606537007044
+    },
+    "target/test-classes/com/m3/collections/interop/M3FiveLibraryArrayificationTest.class": {
+      "sha256": "fd2ec4d1fb22cf8a63d4db54248b55cb2198a60965413bbf46cdd35f58673722",
+      "mtime_ns": 1792507606577008051
+    },
+    "target/test-classes/com/m3/collections/interop/M3FiveLibraryExpandedContractsTest$1Cell.class": {
+      "sha256": "08ab1950d01dad203a0567f502d24b5750e95d54d5b8f1d4a8d22d7ab194c00b",
+      "mtime_ns": 1792507606633009459
+    },
+    "target/test-classes/com/m3/collections/interop/M3FiveLibraryExpandedContractsTest.class": {
+      "sha256": "48002ba1574e35709d56af1eb3c50ffddc45952af9891198f90fc238b57c7586",
+      "mtime_ns": 1792507606633009459
+    },
+    "target/test-classes/com/m3/collections/interop/M3FiveLibraryIndexViewsTest.class": {
+      "sha256": "b4cce0437b579b92599f040b8b0bcaf7d75e6cd64f96a59dab9f58ef7c7bb4e5",
+      "mtime_ns": 1792507606693010969
+    },
+    "target/test-classes/com/m3/collections/interop/M3FiveLibraryInteropContractTest.class": {
+      "sha256": "ebdb09300f6b54271bd83da8b2a597a35dec22619f831bf80ab4836835f124eb",
+      "mtime_ns": 1792507606733011976
+    },
+    "target/test-classes/com/m3/collections/interop/M3FiveLibraryKeyRangesTest.class": {
+      "sha256": "47791804f786daef624e6f8c192bb6497b9e5490e9efc6ecbb2bf9d4a344038b",
+      "mtime_ns": 1792507606821014189
+    },
+    "target/test-classes/com/m3/collections/interop/M3FiveLibraryPreparedRowsTest$Pair.class": {
+      "sha256": "7a727d8fbd3244dc13c37ee8ac4645e6fcf0c5468a6f6dfb4fcbb331fe59d47a",
+      "mtime_ns": 1792507606865015296
+    },
+    "target/test-classes/com/m3/collections/interop/M3FiveLibraryPreparedRowsTest.class": {
+      "sha256": "b3c37c78dba22da10ad8369e5ec34586655dfaff311ef4061341c1de4a296ca8",
+      "mtime_ns": 1792507606865015296
+    },
+    "target/test-classes/com/m3/collections/interop/M3FiveLibraryState32Test.class": {
+      "sha256": "6bc459b835ef83baceeab28d58025995701ef9d5394239fa8fac37ce4c27a13e",
+      "mtime_ns": 1792507606941017209
+    },
+    "target/test-classes/com/m3/collections/interop/M3FiveListFamiliesContract.class": {
+      "sha256": "afeac43de53eb61f6425dba71aeeee14647afe415c5b29e9a8e450dda6d4c087",
+      "mtime_ns": 1792507606953017509
+    },
+    "target/test-classes/com/m3/collections/interop/M3FiveListFamiliesTest.class": {
+      "sha256": "b0fd52adbec8cc35ee05ca1383613c9d9d743f4b0d4f625c140ef0fde6b5b942",
+      "mtime_ns": 1792507606961017711
+    },
+    "target/test-classes/com/m3/collections/interop/M3FiveProviderBagContractTest.class": {
+      "sha256": "4f6dcaaa5e9345dcf33fff0524f3d709c74285c558788886d1bf5574ae2fd889",
+      "mtime_ns": 1792507606973018013
+    },
+    "target/test-classes/com/m3/collections/interop/M3FiveProviderCountSharingRegressionTest.class": {
+      "sha256": "1117fa3c684e993dc446bcf334bb81cba5caf30ee8aee71b37e61687d1a25da0",
+      "mtime_ns": 1792507606985018315
+    },
+    "target/test-classes/com/m3/collections/interop/M3FiveProviderFlagSelectionTest.class": {
+      "sha256": "5f657e2389d44d26adaab19e7cfb13aa4c29a26b0e7ba3a25563ca6a815672f9",
+      "mtime_ns": 1792507607045019828
+    },
+    "target/test-classes/com/m3/collections/interop/M3FiveProviderKeyGroupClosureTest.class": {
+      "sha256": "16b45fffce381b93ddf18f84f5f99e53f201eab54f36a404221ad2dbebeb9389",
+      "mtime_ns": 1792507607105021347
+    },
+    "target/test-classes/com/m3/collections/interop/M3FiveProviderKeyGroupsTest.class": {
+      "sha256": "247a936100d600368f76a1e8fb4c0afe0b1a156854f26ef55235f0f3e377fede",
+      "mtime_ns": 1792507607161022763
+    },
+    "target/test-classes/com/m3/collections/interop/M3GuavaBiMapContractTest.class": {
+      "sha256": "fb98776aa8fd4a12ac209509eda21cea35642f92354e8bc595830dfcfd4c96e9",
+      "mtime_ns": 1792507607177023168
+    },
+    "target/test-classes/com/m3/collections/interop/M3GuavaBiMapSelfTest.class": {
+      "sha256": "97e9ad89e05850f07a05da5e39076bedce1ef48f86a4f316943f03d651ffc9dc",
+      "mtime_ns": 1792507607193023571
+    },
+    "target/test-classes/com/m3/collections/interop/M3GuavaClassToInstanceMapsSelfTest.class": {
+      "sha256": "5ab8e0c0d09fdb14d74fc4f0b5328fe7163332707ef4ccfad72a94eb065c7faf",
+      "mtime_ns": 1792507607213024078
+    },
+    "target/test-classes/com/m3/collections/interop/M3GuavaClassToInstanceMapsTest.class": {
+      "sha256": "57e6cb707e5615c5a74362a5fb4a280971864777296e863f05258adb409cc8f2",
+      "mtime_ns": 1792507607220269236
+    },
+    "target/test-classes/com/m3/collections/interop/M3GuavaListMultimapContract.class": {
+      "sha256": "2dc1d38023237e1c208e19ad9220fd1baef68bea21a1086c13d18fedc34be32f",
+      "mtime_ns": 1792507607241024785
+    },
+    "target/test-classes/com/m3/collections/interop/M3GuavaListMultimapRealTest.class": {
+      "sha256": "443888a46eed41279108381025121f15d8efc9ad5e7a9dc080816414a5790fde",
+      "mtime_ns": 1792507607273025596
+    },
+    "target/test-classes/com/m3/collections/interop/M3GuavaRowSortedTableContract.class": {
+      "sha256": "75542e8e2503df0757614f985418b2cb4d0c091dcd6453b57de85315bc4176a1",
+      "mtime_ns": 1792507607305026405
+    },
+    "target/test-classes/com/m3/collections/interop/M3GuavaRowSortedTableTest.class": {
+      "sha256": "ad622a90bc90bc5ccd29b1d5a73776ec14c3afbd59716a084ee955446d8d155e",
+      "mtime_ns": 1792507607305026405
+    },
+    "target/test-classes/com/m3/collections/interop/M3GuavaSetMultimapTest.class": {
+      "sha256": "21936556f9a9425b93c70be133d7075b920a3b7e1caaa4796abd1e31f0ba4016",
+      "mtime_ns": 1792507607345027417
+    },
+    "target/test-classes/com/m3/collections/interop/M3LibraryBindingsSelfTest$Action.class": {
+      "sha256": "5c32ac65f81e3032073849463aa25ad4a2289da70c361cc907ee7e0ba3e1c1cd",
+      "mtime_ns": 1792507607361027821
+    },
+    "target/test-classes/com/m3/collections/interop/M3LibraryBindingsSelfTest.class": {
+      "sha256": "64d1a64a41d7a64f207a3ffa78bd7e13f2aa5ec459fd05ecec569ab5cf4e79e9",
+      "mtime_ns": 1792507607365027923
+    },
+    "target/test-classes/com/m3/collections/interop/M3LibraryClosureTest.class": {
+      "sha256": "c003974f96f39d3d435340b0e3e7fb121c6ba3c85006eb80b702760a5d8e7b53",
+      "mtime_ns": 1792507607553032679
+    },
+    "target/test-classes/com/m3/collections/interop/M3LibraryCollectionsTest$Key.class": {
+      "sha256": "c154e3593f3099fbfb370cbffd50513185a630c409285c677765f7dbe1e6cc37",
+      "mtime_ns": 1792507607661035409
+    },
+    "target/test-classes/com/m3/collections/interop/M3LibraryCollectionsTest.class": {
+      "sha256": "493eb3393b0137dda81403c67927b83c607e7a72f3e482be154f4b70256ca101",
+      "mtime_ns": 1792507607669035613
+    },
+    "target/test-classes/com/m3/collections/interop/M3ObjectStreamProviderContractTest.class": {
+      "sha256": "0f5fbb404a53fe381228299cd0aa97e250769e28c1e6501adff8cd3bac5477be",
+      "mtime_ns": 1792507607733037230
+    },
+    "target/test-classes/com/m3/collections/interop/M3SdkFamiliesTest.class": {
+      "sha256": "8fec62a693338e8ee431b8fcf83b5494cf15102b5d9b37ed9a231666301b12af",
+      "mtime_ns": 1792507607781038445
+    },
+    "target/test-classes/com/m3/collections/interop/M3SpringArrayContractTest.class": {
+      "sha256": "ba610d43a1438e01a5e93cb1222f08d2858a5fc06d3874ab0222b362bcb59dd0",
+      "mtime_ns": 1792507607813039255
+    },
+    "target/test-classes/com/m3/collections/interop/M3SpringCaseInsensitiveContract.class": {
+      "sha256": "611e734b5df32de4196e1e5a3faf98d64e25b537d2f4bb6eaaa1961c25196ef8",
+      "mtime_ns": 1792507607829039659
+    },
+    "target/test-classes/com/m3/collections/interop/M3SpringCaseInsensitiveSdkFactoryTest.class": {
+      "sha256": "76b7bdee303308ab38af741dd56594a8b2cf75240557508e305f7fa33342b939",
+      "mtime_ns": 1792507607833039761
+    },
+    "target/test-classes/com/m3/collections/interop/M3SpringCaseInsensitiveTest.class": {
+      "sha256": "f4feae4cc033e7aefe738ccd615161c3ac2a6b52e79dc3e8e51caf85ce0adf07",
+      "mtime_ns": 1792507607837039862
+    }
+  },
+  "class_inspection": {
+    "M3FiveLibraryArrayificationTest": {
+      "exit": 0,
+      "sha256": "fd2ec4d1fb22cf8a63d4db54248b55cb2198a60965413bbf46cdd35f58673722"
+    },
+    "M3GuavaListMultimapContract": {
+      "exit": 0,
+      "sha256": "2dc1d38023237e1c208e19ad9220fd1baef68bea21a1086c13d18fedc34be32f",
+      "contains_native_availability_branch": true,
+      "contains_native_selection_assertion": true
+    },
+    "M3SpringArrayContractTest": {
+      "exit": 0,
+      "sha256": "ba610d43a1438e01a5e93cb1222f08d2858a5fc06d3874ab0222b362bcb59dd0",
+      "contains_minimal_failure_helper": true
+    },
+    "M3ApacheBagContractTest": {
+      "exit": 0,
+      "sha256": "650c9a4f5fb46dfb0d9fdc50d331bfb307b606b103b00e11ffb5fc7996608413",
+      "contains_divergence_fixture": true
+    }
+  },
+  "owning_collection_jar": {
+    "path": "/tmp/m3jdk21-toolchain-20261020/m2/com/m3/m3-collections/0.1.0-SNAPSHOT/m3-collections-0.1.0-SNAPSHOT.jar",
+    "sha256": "c440f4f104373c5ed64f8ee313a8f8007de79b9ff7150f207f25164cd348ab80"
+  },
+  "native_libraries": {
+    "libm3_bitlane_jump_test.so": "cb10d561590bd8d0ed70843cedc4d9de768f26e16f40e9d21840fe0af82c3492",
+    "libm3_collections_address.so": "09235040b05df6d1d23816cf449315cb8dbb9be9fff09b7309470adeb2af5fe7",
+    "libm3_collections_long_path_masks.so": "5f20d233d1270fb6af59304061a7d3c342085b753d729a21a5cfeced441bf04d",
+    "libm3_collections_mask.so": "c18c570947c970cff6399bc340de2225fd854f58f6b27dc750dd98bcb58a63ec",
+    "libm3_collections_pathmask.so": "ee4f9808364d39b813c8c4b3771e8c7cfe48831ee17d589d065904507fea310c",
+    "libm3_collections_span.so": "75cfb0a407becb9924e66c4a34c201348170a5502a53c9cf19d3bcbe908c7f4e",
+    "libm3_collections_statehist.so": "c5ec22c7aa1e64e92e3a05e897393e0327751a66972a8532346bde0c60bcd6bc",
+    "libm3_residency_state_mask.so": "e86d0e5db27b40d36aaba0ce86a9385298b01a97cd4743e2edbb3774c5e54c2f",
+    "libm3bitlane.so": "9d7cfd176654ede85d95f52d496621dbd50b265b3722397dfd37996cd7927211",
+    "libm3rankbatch.so": "ed0643ee026d601ed860a2f814faba7e8c4be5fcd0560bbcb9a1b8314052d611",
+    "libm3signalorder.so": "8f29d3b8ba3fef77538d0f158d3c5fee0c947e51d383bcbb61f7866d4410d9b7"
+  },
+  "test_totals": {
+    "tests": 159,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "reports": {
+    "TEST-com.m3.collections.interop.M3ApacheBagContractTest.xml": {
+      "sha256": "5d768627505e4f14637efdc3c41ff21dc31385cb3d894796688ac37415c1821b",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "TEST-com.m3.collections.interop.M3ApacheBidiMapContractTest.xml": {
+      "sha256": "fc278827f525720889e42398eef4ee306f4973346762a451c42359fd70d74367",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "TEST-com.m3.collections.interop.M3ApacheCollectionsTest.xml": {
+      "sha256": "b57ec7c0f2bf95e44362a88a86fd4e571f481a08e10053d071441fd6d62c2a8b",
+      "tests": 6,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "TEST-com.m3.collections.interop.M3BiMapTest.xml": {
+      "sha256": "0d0b4db17fc1c5d0354effa446a6dd30e83acc23b7e15f0b6090f7d5aadf24ca",
+      "tests": 22,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "TEST-com.m3.collections.interop.M3CountedProviderContractTest.xml": {
+      "sha256": "76b99289ecf11acd22e02e0b5f580f6165a6d731d1bc1f56a936ef13c80170ef",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "TEST-com.m3.collections.interop.M3EclipseBagMultimapTest.xml": {
+      "sha256": "58190d494b47d672fa32c3f586a12b44016c4ddfb93a7bd92f81a07823e33cd6",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "TEST-com.m3.collections.interop.M3EclipseMultimapTest.xml": {
+      "sha256": "b6a0836da92f6877d09f6a35783ccac639fb989213bdea8b3f07b3845fe7f39b",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "TEST-com.m3.collections.interop.M3FiveFamilyPreparedSelectionTest.xml": {
+      "sha256": "4f0a0679cfef9e85ab9f3dd5cebded7b50c9edc69deed3af52538fab7da75834",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "TEST-com.m3.collections.interop.M3FiveLibraryArrayificationTest.xml": {
+      "sha256": "bcdeeeff9d27bb57b4e6dd1b5455f81aff29504542e56e5b158cf741240268ae",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "TEST-com.m3.collections.interop.M3FiveLibraryExpandedContractsTest.xml": {
+      "sha256": "8bfa8e715fe9f2ff49c20b744dffec3bb37f812f7490808ab95dec5e76b1b0d7",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "TEST-com.m3.collections.interop.M3FiveLibraryIndexViewsTest.xml": {
+      "sha256": "c83564b40fd9412c9727f5bd8af0f2531dcb00dff1cf541703312ce939bfb68d",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "TEST-com.m3.collections.interop.M3FiveLibraryInteropContractTest.xml": {
+      "sha256": "a5f1194ac816d0b1bafa900b9da32c64073cec8c78f18e63f40801bd94a47aec",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "TEST-com.m3.collections.interop.M3FiveLibraryKeyRangesTest.xml": {
+      "sha256": "e939f0051065b3841c1081ecc67c4725b48b65a096644f768e86e7122fcd9183",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "TEST-com.m3.collections.interop.M3FiveLibraryPreparedRowsTest.xml": {
+      "sha256": "7bc1dec9fbd346423a327aa2ef12036e4c94c4657e8672e29b61720007bb7bf5",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "TEST-com.m3.collections.interop.M3FiveLibraryState32Test.xml": {
+      "sha256": "52e0689e75fcdd24fe6fa82d0b657afea97b0e446edfa507cab90ec508f2f758",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "TEST-com.m3.collections.interop.M3FiveListFamiliesTest.xml": {
+      "sha256": "6bb0de501caf8bb1fc58249d8a652d40c26dd485af29323cf05cffc0f9374ff7",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "TEST-com.m3.collections.interop.M3FiveProviderBagContractTest.xml": {
+      "sha256": "dfac4c9320be86179ae9be3fa5eb221183c075319b4be5d43fd6ee9bf0693ea2",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "TEST-com.m3.collections.interop.M3FiveProviderCountSharingRegressionTest.xml": {
+      "sha256": "1e48f17f90333a10c9be0085595937374fd5302a80bcdc5a3ad2927616ff57ad",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "TEST-com.m3.collections.interop.M3FiveProviderFlagSelectionTest.xml": {
+      "sha256": "e254336e0b9795ecef97fae20c22213db1e29980866420b8efc0c21e70ac0389",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "TEST-com.m3.collections.interop.M3FiveProviderKeyGroupClosureTest.xml": {
+      "sha256": "8ec6e3627ae26a7e78fb8dc4f682c3a6e331e7afa1625631c4163298af5bd715",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "TEST-com.m3.collections.interop.M3FiveProviderKeyGroupsTest.xml": {
+      "sha256": "883411973a63625e72f81f90b3a36babe365901d1add06c29de40a7fbf88dad3",
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "TEST-com.m3.collections.interop.M3GuavaBiMapContractTest.xml": {
+      "sha256": "f4cc64a4e0b123a8c4df2b65f47a52521233207132c6593d865e254cbddb7bdf",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "TEST-com.m3.collections.interop.M3GuavaClassToInstanceMapsTest.xml": {
+      "sha256": "7cb661bf58deef2141b2fb78e1612c2a8f7265f9b6923cf47d404f20430c7fa0",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "TEST-com.m3.collections.interop.M3GuavaListMultimapRealTest.xml": {
+      "sha256": "8adb3fc2ad51b4ae6bcbc114829dd2d81a2c7e0a8ec2fe98bc99a5849ce7dd38",
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "TEST-com.m3.collections.interop.M3GuavaRowSortedTableTest.xml": {
+      "sha256": "e37bd16f8792cf38923c6e1ce9953c58f69b0dd653e21641dd1fc4a5182c2875",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "TEST-com.m3.collections.interop.M3GuavaSetMultimapTest.xml": {
+      "sha256": "597c626a3246a1723a250eba4e403e99e95f3d5ebd184b2a24ae2bf89a87b92b",
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "TEST-com.m3.collections.interop.M3LibraryClosureTest.xml": {
+      "sha256": "e042dd3a7869394f618acf33ff8c7d9e3ecaac1b0e7b084b9ca5a8dc0a1179b7",
+      "tests": 20,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "TEST-com.m3.collections.interop.M3LibraryCollectionsTest.xml": {
+      "sha256": "2b97782dee6344469c00919ff44fe0c97c7560d60c5caa574e42eec4a72bc879",
+      "tests": 23,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "TEST-com.m3.collections.interop.M3ObjectStreamProviderContractTest.xml": {
+      "sha256": "b2d1c1891749fa7efb629c0401235b7400276c3a104f733d85210038f376fb08",
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "TEST-com.m3.collections.interop.M3SdkFamiliesTest.xml": {
+      "sha256": "45aef3cc14cc6bfee9704fe3584f22f4c86c3411241a0628200f69c10ef56819",
+      "tests": 7,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "TEST-com.m3.collections.interop.M3SpringArrayContractTest.xml": {
+      "sha256": "55e13637c026012607c0b436b616bffba288a30311c9d01e5e8fc3f11017484a",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "TEST-com.m3.collections.interop.M3SpringCaseInsensitiveSdkFactoryTest.xml": {
+      "sha256": "7fddf89bd1ad84210b5286a2ccae135c84d33a5d48501109326f142e697c1d0c",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "TEST-com.m3.collections.interop.M3SpringCaseInsensitiveTest.xml": {
+      "sha256": "f1d463cc718cb7b04a012ee6e3569a2a2efc5de9a4b88d50b78f113642f9fa61",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    }
+  },
+  "log": "evidence/attempt-09-fresh-java.log",
+  "log_sha256": "9ea645975c262b3af458abdfcc7a2b02b3dac801c7538ae6d9f67dc7999361c4",
+  "qualified_isolated_module": true
+}

@@ -1,0 +1,12 @@
+{
+  "M3JDK21/m3/collections/interop/src/main/java/com/m3/collections/interop/M3ApacheBag.java": "5ff51272c4fd48ef11a09b9138ac2329392bb2a70e2a4fe43fab2889909d224f",
+  "M3JDK21/m3/collections/interop/src/test/java/com/m3/collections/interop/M3ApacheBagContractTest.java": "737dba455e469117b94cd82a48458bcbe2e4c1fd038b0beb578dcc00ccc1982a",
+  "M3JDK21/m3/collections/interop/src/main/java/com/m3/collections/interop/M3SpringArrayMultiValueMap.java": "8062247a92ee9dc90d313b715ba9158e47c53b3e7848508a5fdd54ddaaaecb96",
+  "M3JDK21/m3/collections/interop/src/test/java/com/m3/collections/interop/M3SpringArrayContractTest.java": "a8b537381b64899e263eb481a95a83ae40a9b7ed8109fe401f2329c750419267",
+  "work-interop-fix-20261020/independent/M3SpringArrayMultiValueMap.java": "8062247a92ee9dc90d313b715ba9158e47c53b3e7848508a5fdd54ddaaaecb96",
+  "work-interop-fix-20261020/independent/SpringExceptionParityProbe.java": "0850e14b5963ee6ae7fdee0c0e81c532ad2427558e549262303627f1596a1eb2",
+  "work-interop-fix-20261020/independent/spring-0.log": "f2690fd208bfb76536464027df890c99d264cf76681cd7cdf6ca45c4f49ffe79",
+  "work-interop-fix-20261020/independent/spring-1.log": "da3e921fc0a9a07f3f0eb2725ccd6bf3ddafaab0086feae33506f3cb7109f807",
+  "work-interop-fix-20261020/evidence/attempt-02-compile-fixes.log": "64c7573022a71b22648a7c309b25c690455e4e29981d38f965ce9ffa99b6f186",
+  "/tmp/m3jdk21-toolchain-20261020/m2/org/springframework/spring-core/6.2.0/spring-core-6.2.0.jar": "3b82629da38717dd616a70ec1055f9a8e208d58132071a6314a32159f8bce162"
+}

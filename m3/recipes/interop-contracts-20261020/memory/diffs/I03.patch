@@ -1,0 +1,133 @@
+--- before/m3/collections/interop/src/test/java/com/m3/collections/interop/M3FiveLibraryArrayificationTest.java
++++ after/m3/collections/interop/src/test/java/com/m3/collections/interop/M3FiveLibraryArrayificationTest.java
+@@ -63,7 +63,8 @@
+         assertThrows(IllegalArgumentException.class,()->left.mergeSortedByKey(
+                 M3FiveLibraryIndexViews.capture(keys,values,new int[]{0},flags),Comparator.naturalOrder()));
+         var duplicated=left.mergeSortedByKey(left,Comparator.naturalOrder());
+-        assertEquals(List.of(0,0,1,1,2,2),duplicated.asJdkList());
++        // Stable ties retain the entire left a-run before the right a-run.
++        assertEquals(List.of(0,1,0,1,2,2),duplicated.asJdkList());
+     }
+ 
+     @Test void randomizedArrayificationAgainstJdkReference() {
+--- before/m3/collections/interop/src/test/java/com/m3/collections/interop/M3GuavaListMultimapContract.java
++++ after/m3/collections/interop/src/test/java/com/m3/collections/interop/M3GuavaListMultimapContract.java
+@@ -138,8 +138,14 @@
+         check(!actual.containsKey(-100),"selection detached from source");
+         boolean failed=false;try{actual.selectedByStates(new int[count+1],0,0,M3IndexPathMasks.Backend.JAVA);}catch(IllegalArgumentException ex){failed=true;}
+         check(failed,"unaligned full-width state refusal");
+-        failed=false;try{actual.selectedByStates(states,0,0,M3IndexPathMasks.Backend.NATIVE_REQUIRED);}catch(UnsatisfiedLinkError ex){failed=true;}
+-        check(failed,"native required fail closed when absent");
++        if (M3IndexPathMasks.nativeAvailable()) {
++            var nativeSelected = actual.selectedByStates(states, Integer.MIN_VALUE, 4,
++                    M3IndexPathMasks.Backend.NATIVE_REQUIRED);
++            equal(expected, new ArrayList<>(nativeSelected.entries()), "native full 32-bit selection");
++        } else {
++            failed=false;try{actual.selectedByStates(states,0,0,M3IndexPathMasks.Backend.NATIVE_REQUIRED);}catch(UnsatisfiedLinkError ex){failed=true;}
++            check(failed,"native required fail closed when absent");
++        }
+         equal(Collections.emptyList(),new M3GuavaListMultimap<>().removeAll("absent"),"absent removal");
+         System.out.println("PASS M3GuavaListMultimapContract checks="+checks+" steps=6400");
+     }
+--- before/m3/collections/interop/src/test/java/com/m3/collections/interop/M3LibraryClosureTest.java
++++ after/m3/collections/interop/src/test/java/com/m3/collections/interop/M3LibraryClosureTest.java
+@@ -134,7 +134,7 @@
+ 
+     @Test void springCreatedListsAndFactoryWiring() {
+         var actual = M3LibraryCollections.<String, Integer>springMultiValueMap();
+-        assertInstanceOf(M3SpringMultiValueMap.class, actual);
++        assertInstanceOf(M3SpringArrayMultiValueMap.class, actual);
+         actual.add("a", 1); actual.set("b", 2); actual.addAll("c", List.of(3, 4)); actual.addAll("empty", List.of());
+         for (List<Integer> values : actual.values()) assertInstanceOf(M3LinkedList.class, values);
+         assertTrue(actual.containsKey("empty")); assertEquals(4, actual.size());
+--- before/m3/collections/interop/src/test/java/com/m3/collections/interop/M3LibraryBindingsSelfTest.java
++++ after/m3/collections/interop/src/test/java/com/m3/collections/interop/M3LibraryBindingsSelfTest.java
+@@ -20,12 +20,12 @@
+     @FunctionalInterface private interface Action { void run() throws Exception; }
+     public static void main(String[] args) throws Exception {
+         var all = M3LibraryBindings.all();
+-        check(all.size() == 23);
++        check(all.size() == 25);
+         check(M3LibraryBindings.forFamily(M3LibraryBinding.Family.JDK).size() == 6);
+-        check(M3LibraryBindings.forFamily(M3LibraryBinding.Family.GUAVA).size() == 6);
++        check(M3LibraryBindings.forFamily(M3LibraryBinding.Family.GUAVA).size() == 7);
+         check(M3LibraryBindings.forFamily(M3LibraryBinding.Family.ECLIPSE_COLLECTIONS).size() == 5);
+         check(M3LibraryBindings.forFamily(M3LibraryBinding.Family.SPRING_FRAMEWORK).size() == 4);
+-        check(M3LibraryBindings.forFamily(M3LibraryBinding.Family.APACHE_COMMONS_COLLECTIONS).size() == 2);
++        check(M3LibraryBindings.forFamily(M3LibraryBinding.Family.APACHE_COMMONS_COLLECTIONS).size() == 3);
+         check(M3LibraryBindings.all() == all);
+         fails(UnsupportedOperationException.class, () -> all.clear());
+         for (var binding : all) {
+@@ -53,7 +53,7 @@
+         check(M3LibraryBindings.read(new ByteArrayInputStream(text.getBytes(StandardCharsets.UTF_8))).equals(all));
+         var line = text.lines().skip(1).findFirst().orElseThrow();
+         String overload = line.replace("jdkMap\t\t", "jdkMap\tjava.util.Comparator\t");
+-        check(M3LibraryBindings.read(new ByteArrayInputStream((text + overload + "\n").getBytes(StandardCharsets.UTF_8))).size() == 24);
++        check(M3LibraryBindings.read(new ByteArrayInputStream((text + overload + "\n").getBytes(StandardCharsets.UTF_8))).size() == 26);
+         for (String bad : List.of(text + line + "\n", text.replace("GUAVA", "GUVAVA"),
+                 text.replace("jdkMap", "apacheMap"), text.replace("com.m3.collections.M3LinkedHashMap", "java.util.HashMap"),
+                 text.replace("java.util.Map", "org.springframework.util.MultiValueMap"),
+@@ -63,6 +63,6 @@
+         fails(java.nio.charset.CharacterCodingException.class,
+                 () -> M3LibraryBindings.read(new ByteArrayInputStream(new byte[]{(byte)0xc3, 0x28})));
+         fails(IllegalArgumentException.class, () -> M3LibraryBindings.read(new ByteArrayInputStream(new byte[1_048_577])));
+-        System.out.println("M3LibraryBindingsSelfTest checks=" + checks + " families=5 bindings=23");
++        System.out.println("M3LibraryBindingsSelfTest checks=" + checks + " families=5 bindings=25");
+     }
+ }
+--- before/m3/collections/interop/src/test/java/com/m3/collections/interop/M3SdkFamiliesTest.java
++++ after/m3/collections/interop/src/test/java/com/m3/collections/interop/M3SdkFamiliesTest.java
+@@ -23,7 +23,7 @@
+ /** Actual pinned donors and existing M3 owners are required; no test doubles are permitted here. */
+ class M3SdkFamiliesTest {
+     @Test void everyFactoryHasExactNamesAndAvailableM3Owners() throws Exception {
+-        assertEquals(23, M3LibraryBindings.verifyRuntime(getClass().getClassLoader(), null));
++        assertEquals(25, M3LibraryBindings.verifyRuntime(getClass().getClassLoader(), null));
+     }
+     @Test void apacheBackingOwnersAreM3RatherThanRenamedDonorStorage() throws Exception {
+         var list = new M3ApacheListValuedMap<String, Integer>();
+--- before/m3/collections/interop/src/test/java/com/m3/collections/interop/M3SpringCaseInsensitiveSdkFactoryTest.java
++++ after/m3/collections/interop/src/test/java/com/m3/collections/interop/M3SpringCaseInsensitiveSdkFactoryTest.java
+@@ -34,6 +34,6 @@
+         assertEquals("java.util.Map", binding.contractType());
+         assertEquals("com.m3.collections.interop.M3SpringCaseInsensitiveMap", binding.adapterType());
+         assertEquals("springCaseInsensitiveMap(java.util.Locale)", binding.descriptor());
+-        assertEquals(23, M3LibraryBindings.verifyRuntime(getClass().getClassLoader(), null));
++        assertEquals(25, M3LibraryBindings.verifyRuntime(getClass().getClassLoader(), null));
+     }
+ }
+--- before/m3/collections/interop/SDK_FAMILIES.md
++++ after/m3/collections/interop/SDK_FAMILIES.md
+@@ -1,3 +1,6 @@
++<!-- SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project -->
++<!-- SPDX-License-Identifier: Apache-2.0 -->
++
+ # M3 collection SDK: five correctly identified contract families
+ 
+ This is an **additive SDK surface**, not a renamed donor class library. Preserve JDK,
+@@ -10,7 +13,8 @@
+ The historical `name-mapping.json` remains the source-migration authority. The accompanying
+ `sdk-family-bindings.tsv` maps **this factory surface** to exact API names and physical
+ owners; it does not replace that migration history or the accumulated algorithm catalogue.
+-There are 23 mapped factories, not 22 complete donor libraries or an exhaustive API census.
++There are 25 mapped factories, including the existing Guava BiMap and Apache BidiMap
++entries. This is a bounded factory inventory, not an exhaustive API census.
+ All other APIs remain outside this packet's qualification boundary.
+ 
+ ## Names and storage
+@@ -27,6 +31,7 @@
+ | GUAVA | `guavaSetMultimap` | `com.google.common.collect.SetMultimap` | `com.m3.collections.M3LinkedHashMap`, `com.m3.collections.M3LinkedHashSet` |
+ | GUAVA | `guavaSortedSetMultimap` | `com.google.common.collect.SortedSetMultimap` | `com.m3.collections.M3LinkedHashMap`, `com.m3.collections.M3TreeSet` |
+ | GUAVA | `guavaTable` | `com.google.common.collect.Table` | `com.m3.collections.M3LinkedHashMap` |
++| GUAVA | `guavaBiMap` | `com.google.common.collect.BiMap` | `com.m3.collections.M3LinkedHashMap` |
+ | ECLIPSE_COLLECTIONS | `eclipseMap` | `org.eclipse.collections.api.map.MutableMap` | `com.m3.collections.M3LinkedHashMap` |
+ | ECLIPSE_COLLECTIONS | `eclipseList` | `org.eclipse.collections.api.list.MutableList` | `com.m3.collections.M3LinkedList` |
+ | ECLIPSE_COLLECTIONS | `eclipseSet` | `org.eclipse.collections.api.set.MutableSet` | `com.m3.collections.M3LinkedHashSet` |
+@@ -38,6 +43,7 @@
+ | SPRING_FRAMEWORK | `springCaseInsensitiveMap` | `java.util.Map` | `com.m3.collections.M3LinkedHashMap` (original payload owner plus folded-key index) |
+ | APACHE_COMMONS_COLLECTIONS | `apacheListValuedMap` | `org.apache.commons.collections4.ListValuedMap` | `com.m3.collections.M3LinkedHashMap`, `com.m3.collections.M3LinkedList` |
+ | APACHE_COMMONS_COLLECTIONS | `apacheSetValuedMap` | `org.apache.commons.collections4.SetValuedMap` | `com.m3.collections.M3LinkedHashMap`, `com.m3.collections.M3LinkedHashSet` |
++| APACHE_COMMONS_COLLECTIONS | `apacheBidiMap` | `org.apache.commons.collections4.BidiMap` | `com.m3.collections.M3LinkedHashMap` |
+ | GUAVA | `guavaFilteredCollection` | `java.util.Collection` | `com.m3.collections.M3LinkedList` |
+ | GUAVA | `guavaFilteredNavigableSet` | `java.util.NavigableSet` | `com.m3.collections.M3TreeSet` |
+ 

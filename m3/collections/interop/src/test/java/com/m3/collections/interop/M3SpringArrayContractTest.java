@@ -81,13 +81,13 @@ final class M3SpringArrayContractTest {
             Integer key = random.nextInt(7) == 0 ? null : random.nextInt(32);
             Integer value = random.nextInt(8) == 0 ? null : random.nextInt(50);
             switch (random.nextInt(13)) {
-                case 0 -> { actual.add(key, value); expected.add(key, value); }
+                case 0 -> assertSameFailure(() -> expected.add(key, value), () -> actual.add(key, value));
                 case 1 -> { actual.set(key, value); expected.set(key, value); }
-                case 2 -> { actual.addIfAbsent(key, value); expected.addIfAbsent(key, value); }
+                case 2 -> assertSameFailure(() -> expected.addIfAbsent(key, value), () -> actual.addIfAbsent(key, value));
                 case 3 -> assertEquals(expected.remove(key), actual.remove(key));
                 case 4 -> {
                     List<Integer> input = Arrays.asList(value, value);
-                    actual.addAll(key, input); expected.addAll(key, input);
+                    assertSameFailure(() -> expected.addAll(key, input), () -> actual.addAll(key, input));
                 }
                 case 5 -> {
                     List<Integer> a = random.nextInt(6) == 0 ? null : new ArrayList<>(Arrays.asList(value));
@@ -120,6 +120,20 @@ final class M3SpringArrayContractTest {
             assertEquals(new ArrayList<>(expected.keySet()), new ArrayList<>(actual.keySet()), "order step " + step);
             assertEquals(expected.asSingleValueMap().get(key),
                     actual.asSingleValueMap().get(key), "view step " + step);
+        }
+    }
+
+    /** Both owners may refuse structural changes to a caller-owned fixed-size list. */
+    private static void assertSameFailure(Runnable expected, Runnable actual) {
+        assertEquals(failureOf(expected), failureOf(actual));
+    }
+
+    private static Class<? extends RuntimeException> failureOf(Runnable operation) {
+        try {
+            operation.run();
+            return null;
+        } catch (RuntimeException failure) {
+            return failure.getClass();
         }
     }
 }

@@ -1,0 +1,24 @@
+{
+  "captured_utc": "2026-10-20T15:08:53.836264+00:00",
+  "executed_by": "/root/final_review",
+  "command": [
+    "python",
+    "-B",
+    "/workspace/scratch/53bcd62c244c/work-interop-fix-20261020/verify_copied_packet.py",
+    "/workspace/scratch/53bcd62c244c/canonical-interop-contracts-20261020"
+  ],
+  "exit_code": 0,
+  "validator_sha256": "0f6854362f2efb9f68694c28c3b97d91a5dcea93c92961544cc51fb147a81665",
+  "log_sha256": "0b51acb60da51f32c72cf45fd183b3fa5b6daba8d3e10552e876afa84e53b80a",
+  "observed": {
+    "result": "PASS",
+    "scope": "Read-only copied packet checksum/schema/digest/parent/trigger/artifact custody; later SDK/receiving observations are separate",
+    "packet_files": 395,
+    "immutable_events": 13,
+    "exact_referenced_artifacts": 73,
+    "retained_profile_checks": 26,
+    "packet_sha256sums_sha256": "30911ebc70934f3cb0a9a9bf4dd72e1c82233e4e9836c33b92bf0a9220efde22",
+    "phase_promotion": false
+  },
+  "writes_by_validator": false
+}

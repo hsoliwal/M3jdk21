@@ -138,8 +138,14 @@ public final class M3GuavaListMultimapContract {
         check(!actual.containsKey(-100),"selection detached from source");
         boolean failed=false;try{actual.selectedByStates(new int[count+1],0,0,M3IndexPathMasks.Backend.JAVA);}catch(IllegalArgumentException ex){failed=true;}
         check(failed,"unaligned full-width state refusal");
-        failed=false;try{actual.selectedByStates(states,0,0,M3IndexPathMasks.Backend.NATIVE_REQUIRED);}catch(UnsatisfiedLinkError ex){failed=true;}
-        check(failed,"native required fail closed when absent");
+        if (M3IndexPathMasks.nativeAvailable()) {
+            var nativeSelected = actual.selectedByStates(states, Integer.MIN_VALUE, 4,
+                    M3IndexPathMasks.Backend.NATIVE_REQUIRED);
+            equal(expected, new ArrayList<>(nativeSelected.entries()), "native full 32-bit selection");
+        } else {
+            failed=false;try{actual.selectedByStates(states,0,0,M3IndexPathMasks.Backend.NATIVE_REQUIRED);}catch(UnsatisfiedLinkError ex){failed=true;}
+            check(failed,"native required fail closed when absent");
+        }
         equal(Collections.emptyList(),new M3GuavaListMultimap<>().removeAll("absent"),"absent removal");
         System.out.println("PASS M3GuavaListMultimapContract checks="+checks+" steps=6400");
     }
