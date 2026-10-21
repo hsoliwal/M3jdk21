@@ -19,7 +19,7 @@ Eclipse projects reveal reusable Java platform capabilities. Their presence does
 
 ## First additive atom: observable M3 list
 
-`com.m3.collections.M3ObservableList<E>` is a concrete `java.util.List<E>` with one `M3ArrayList<E>` payload owner. Callback registration uses a copy-on-write array; mutation dispatch passes primitive index/count, one change kind and old/new single-value references without constructing per-row notification objects. It supports nulls, duplicates, backed sublists, ordered synchronous mutation notifications and reentrancy refusal. Listeners are external-synchronization clients; a callback exception propagates *after* the write. The standalone Java21 differential source is `m3/collections/qualification/observable-20261021/M3ObservableListContract.java`.
+`com.m3.collections.M3ObservableList<E>` is a concrete `java.util.List<E>` with one `M3ArrayList<E>` payload owner. Callback registration uses a copy-on-write array; mutation dispatch passes primitive index/count, one change kind and old/new single-value references without constructing per-row notification objects. It supports nulls, duplicates, backed sublists, ordered synchronous mutation notifications and reentrancy refusal. Listeners are external-synchronization clients; a callback exception propagates *after* the write. The standalone Java21 differential source is `m3/collections/src/test/java/com/m3/collections/M3ObservableListContract.java`.
 
 This first atom is **not** EMF's `EList`: the future EMF receiver must project its actual notification event objects on demand at the public boundary and preserve its distinct model contracts. Do not confuse a minimal event primitive with completed model notification integration.
 
