@@ -710,6 +710,8 @@ public final class M3CollectionViews {
         @Override
         public boolean tryAdvance(Consumer<? super E> consumer) {
             Objects.requireNonNull(consumer, "action");
+            Consumer<? super E> previousAction = action;
+            boolean previousDelivered = delivered;
             action = consumer;
             delivered = false;
             try {
@@ -718,7 +720,8 @@ public final class M3CollectionViews {
                 }
                 return delivered;
             } finally {
-                action = null;
+                action = previousAction;
+                delivered = previousDelivered;
             }
         }
 

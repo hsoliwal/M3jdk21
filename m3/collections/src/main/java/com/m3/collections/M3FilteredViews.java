@@ -1,3 +1,5 @@
+// Modified 2026 by Hitesh Soliwal and contributors: reconcile direct-owner null probes and stored-key entry membership.
+// Modified 2026 by Hitesh Soliwal and contributors: preserve comparator metadata across filtered splits.
 /*
  * SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
  * SPDX-License-Identifier: Apache-2.0
@@ -24,6 +26,7 @@ import java.util.SequencedCollection;
 import java.util.SequencedSet;
 import java.util.SortedMap;
 import java.util.SortedSet;
+import java.util.Spliterator;
 import java.util.TreeMap;
 import java.util.TreeSet;
 import java.util.concurrent.ConcurrentSkipListMap;
@@ -316,7 +319,12 @@ public final class M3FilteredViews {
             while (cursor.hasNext()) { cursor.next(); count++; }
             return count;
         }
-        @Override public boolean isEmpty() { return !iterator().hasNext(); }
+        @Override public boolean isEmpty() {
+            // Preserve the iterative deep-chain owner; fuse only an opaque backing terminal.
+            if (iterationView(source) != null) return !iterator().hasNext();
+            for (E item : source) if (predicate.test(item)) return false;
+            return true;
+        }
         @Override public boolean contains(Object value) {
             if (membershipView(source) == null) return visible(source, predicate, value);
             // Replay the existing inner membership and outer representative scans in order.
@@ -480,6 +488,10 @@ public final class M3FilteredViews {
         }
 
         @Override public Comparator<? super E> comparator() { return sorted.comparator(); }
+        /** Preserve custom ordering on every recursively split child. */
+        @Override public Spliterator<E> spliterator() {
+            return M3SlotSpliterators.sorted(this);
+        }
         @Override public boolean contains(Object value) {
             if (!sorted.contains(value)) return false;
             @SuppressWarnings("unchecked") E alias = (E) value;
@@ -539,12 +551,39 @@ public final class M3FilteredViews {
             }
             E candidate = forward ? (inclusive ? nav.ceiling(query) : nav.higher(query))
                     : (inclusive ? nav.floor(query) : nav.lower(query));
-            if (candidate == null && !nullIsAnchor(nav, query, inclusive, !forward)) return null;
+            if (candidate == null && !nullIsCandidate(query, forward, inclusive)) return null;
             if (predicate.test(candidate)) return candidate;
             Iterator<E> remaining = forward ? nav.tailSet(candidate, false).iterator()
                     : nav.headSet(candidate, false).descendingIterator();
-            Iterator<E> selected = filtered(remaining, predicate);
-            return selected.hasNext() ? selected.next() : null;
+            while (remaining.hasNext()) {
+                E next = remaining.next();
+                if (predicate.test(next)) return next;
+            }
+            return null;
+        }
+        /**
+         * Preserve direct-owner probe order while distinguishing a retained null
+         * at any comparator position from an absent navigation result. Nested
+         * qualified tree-owner lookup uses the separate anchor path above.
+         */
+        private boolean nullIsCandidate(E query, boolean forward, boolean inclusive) {
+            Comparator<? super E> order = nav.comparator();
+            if (order == null || nav.isEmpty()) return false;
+            E first = nav.first();
+            int direction;
+            if (first == null) {
+                direction = order.compare(null, query);
+            } else {
+                E last = nav.last();
+                // Keep the historical extreme probes and their order. When both
+                // extremes are non-null, an interior null is still possible.
+                // A qualifying directional extreme proves that navigation found
+                // a member, so its null result denotes that retained member.
+                direction = last == null ? order.compare(null, query)
+                        : order.compare(forward ? last : first, query);
+            }
+            return forward ? (inclusive ? direction >= 0 : direction > 0)
+                    : (inclusive ? direction <= 0 : direction < 0);
         }
         @Override public E lower(E e) {
             return navigate(e, false, false);
@@ -611,8 +650,10 @@ public final class M3FilteredViews {
             return count;
         }
         @Override public boolean isEmpty() {
-            return !filtered(sorted.entrySet().iterator(),
-                    item -> predicate.test(item.getKey(), item.getValue())).hasNext();
+            for (Entry<K, V> item : sorted.entrySet()) {
+                if (predicate.test(item.getKey(), item.getValue())) return false;
+            }
+            return true;
         }
         /**
          * Called only after containsKey has established membership. The
@@ -745,9 +786,14 @@ public final class M3FilteredViews {
          * entries are then skipped by iterator advancement instead of repeated lookup.
          */
         private Entry<K, V> firstVisible(Iterator<Entry<K, V>> cursor) {
-            Iterator<Entry<K, V>> selected = M3FilteredViews.filtered(cursor,
-                    entry -> predicate.test(entry.getKey(), entry.getValue()));
-            return selected.hasNext() ? new SimpleImmutableEntry<>(selected.next()) : null;
+            while (cursor.hasNext()) {
+                Entry<K, V> entry = cursor.next();
+                if (predicate.test(entry.getKey(), entry.getValue())) {
+                    // Each requested projection remains a fresh caller-owned immutable entry.
+                    return new SimpleImmutableEntry<>(entry);
+                }
+            }
+            return null;
         }
         /** Map.Entry supplies presence independently from a possibly null stored key. */
         private Entry<K, V> seek(K key, boolean inclusive, boolean descending) {
