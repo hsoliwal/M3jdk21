@@ -23,6 +23,7 @@
  * questions.
  */
 
+// Modified 2026 by Hitesh Soliwal and contributors: use the sorted splitting owner.
 package java.util;
 
 import java.util.function.Consumer;
@@ -111,7 +112,7 @@ class ReverseOrderSortedSetView<E> implements SortedSet<E> {
     }
 
     public Spliterator<E> spliterator() {
-        return Spliterators.spliterator(this, Spliterator.ORDERED);
+        return SortedSet.super.spliterator();
     }
 
     // ========== Collection ==========

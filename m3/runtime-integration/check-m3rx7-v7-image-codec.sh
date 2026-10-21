@@ -5,8 +5,8 @@ set -eu
 ROOT=$(CDPATH='' cd -- "$(dirname "$0")/../.." && pwd)
 PROD="$ROOT/src/java.base/share/classes/jdk/internal/mindex"
 (cd "$ROOT" && sha256sum -c - <<'M3_PINNED_SOURCES'
-3005574994ae3ea854f15469a40d68057b0eae709323a042285e463c2871ad98  src/java.base/share/classes/jdk/internal/mindex/M3RX7.java
-0b513cce6893fb697e7784d2556a9081b5b391abf20008493f1ba35de7a0ff9e  src/java.base/share/classes/jdk/internal/mindex/M3RX7Transitions.java
+fa5ecdb1a0c28813397343ee62d4ef5924d57f2738bb786e6e3af6aa99289821  src/java.base/share/classes/jdk/internal/mindex/M3RX7.java
+4242a99703fc40e351030603a8faffebe03fb5509ae615c63744ed1c88693018  src/java.base/share/classes/jdk/internal/mindex/M3RX7Transitions.java
 5c9f80b832a722a9611a718d5c6228aa59721b5fae846267e05ac5c451353ba7  src/java.base/share/classes/jdk/internal/mindex/M3RX7Image.java
 fc6727011d2cc9027d43280ce692c4646c378438c0fb7be9c8f7ae7d0c1102c9  src/java.base/share/classes/jdk/internal/mindex/M3RX7Codec.java
 bd2ed346fb4ba3945b0d7a14c04418f4996b2f11c4945e8fc14bdba24a99bd6a  test/jdk/java/util/regex/M3RX7CodecTest.java
