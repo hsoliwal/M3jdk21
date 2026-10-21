@@ -1,0 +1,858 @@
+{
+  "schema": "m3-complete-observation-adjudication/v1",
+  "status": "PASS_SCOPED_FIX_WITH_10_INHERITED_CONTROL_DIFFERENCES",
+  "strictFullCorpusAdmission": false,
+  "caseCount": 640,
+  "beforeMatching": 486,
+  "afterMatching": 630,
+  "correctedCases": 144,
+  "inheritedUnchangedDifferences": 10,
+  "newDifferences": 0,
+  "changedRecordsStillDifferingFromJdk": 0,
+  "changedIds": [
+    "NATURAL/FRESH/ROOT/COUNTING/get",
+    "NATURAL/FRESH/ROOT/COUNTING/getOrDefault",
+    "NATURAL/FRESH/ROOT/COUNTING/containsKey",
+    "NATURAL/FRESH/ROOT/COUNTING/remove",
+    "NATURAL/FRESH/ROOT/COUNTING/keys.contains",
+    "NATURAL/FRESH/ROOT/COUNTING/keys.remove",
+    "NATURAL/FRESH/ROOT/COUNTING/entries.contains",
+    "NATURAL/FRESH/ROOT/COUNTING/entries.remove",
+    "NATURAL/FRESH/ROOT/SELF_THROW/get",
+    "NATURAL/FRESH/ROOT/SELF_THROW/getOrDefault",
+    "NATURAL/FRESH/ROOT/SELF_THROW/containsKey",
+    "NATURAL/FRESH/ROOT/SELF_THROW/remove",
+    "NATURAL/FRESH/ROOT/SELF_THROW/keys.contains",
+    "NATURAL/FRESH/ROOT/SELF_THROW/keys.remove",
+    "NATURAL/FRESH/ROOT/SELF_THROW/entries.contains",
+    "NATURAL/FRESH/ROOT/SELF_THROW/entries.remove",
+    "NATURAL/FRESH/ROOT/ALWAYS_THROW/get",
+    "NATURAL/FRESH/ROOT/ALWAYS_THROW/getOrDefault",
+    "NATURAL/FRESH/ROOT/ALWAYS_THROW/containsKey",
+    "NATURAL/FRESH/ROOT/ALWAYS_THROW/remove",
+    "NATURAL/FRESH/ROOT/ALWAYS_THROW/keys.contains",
+    "NATURAL/FRESH/ROOT/ALWAYS_THROW/keys.remove",
+    "NATURAL/FRESH/ROOT/ALWAYS_THROW/entries.contains",
+    "NATURAL/FRESH/ROOT/ALWAYS_THROW/entries.remove",
+    "NATURAL/FRESH/DESCENDING/COUNTING/get",
+    "NATURAL/FRESH/DESCENDING/COUNTING/getOrDefault",
+    "NATURAL/FRESH/DESCENDING/COUNTING/containsKey",
+    "NATURAL/FRESH/DESCENDING/COUNTING/remove",
+    "NATURAL/FRESH/DESCENDING/COUNTING/keys.contains",
+    "NATURAL/FRESH/DESCENDING/COUNTING/keys.remove",
+    "NATURAL/FRESH/DESCENDING/COUNTING/entries.contains",
+    "NATURAL/FRESH/DESCENDING/COUNTING/entries.remove",
+    "NATURAL/FRESH/DESCENDING/SELF_THROW/get",
+    "NATURAL/FRESH/DESCENDING/SELF_THROW/getOrDefault",
+    "NATURAL/FRESH/DESCENDING/SELF_THROW/containsKey",
+    "NATURAL/FRESH/DESCENDING/SELF_THROW/remove",
+    "NATURAL/FRESH/DESCENDING/SELF_THROW/keys.contains",
+    "NATURAL/FRESH/DESCENDING/SELF_THROW/keys.remove",
+    "NATURAL/FRESH/DESCENDING/SELF_THROW/entries.contains",
+    "NATURAL/FRESH/DESCENDING/SELF_THROW/entries.remove",
+    "NATURAL/FRESH/DESCENDING/ALWAYS_THROW/get",
+    "NATURAL/FRESH/DESCENDING/ALWAYS_THROW/getOrDefault",
+    "NATURAL/FRESH/DESCENDING/ALWAYS_THROW/containsKey",
+    "NATURAL/FRESH/DESCENDING/ALWAYS_THROW/remove",
+    "NATURAL/FRESH/DESCENDING/ALWAYS_THROW/keys.contains",
+    "NATURAL/FRESH/DESCENDING/ALWAYS_THROW/keys.remove",
+    "NATURAL/FRESH/DESCENDING/ALWAYS_THROW/entries.contains",
+    "NATURAL/FRESH/DESCENDING/ALWAYS_THROW/entries.remove",
+    "NATURAL/CLEARED/ROOT/COUNTING/get",
+    "NATURAL/CLEARED/ROOT/COUNTING/getOrDefault",
+    "NATURAL/CLEARED/ROOT/COUNTING/containsKey",
+    "NATURAL/CLEARED/ROOT/COUNTING/remove",
+    "NATURAL/CLEARED/ROOT/COUNTING/keys.contains",
+    "NATURAL/CLEARED/ROOT/COUNTING/keys.remove",
+    "NATURAL/CLEARED/ROOT/COUNTING/entries.contains",
+    "NATURAL/CLEARED/ROOT/COUNTING/entries.remove",
+    "NATURAL/CLEARED/ROOT/SELF_THROW/get",
+    "NATURAL/CLEARED/ROOT/SELF_THROW/getOrDefault",
+    "NATURAL/CLEARED/ROOT/SELF_THROW/containsKey",
+    "NATURAL/CLEARED/ROOT/SELF_THROW/remove",
+    "NATURAL/CLEARED/ROOT/SELF_THROW/keys.contains",
+    "NATURAL/CLEARED/ROOT/SELF_THROW/keys.remove",
+    "NATURAL/CLEARED/ROOT/SELF_THROW/entries.contains",
+    "NATURAL/CLEARED/ROOT/SELF_THROW/entries.remove",
+    "NATURAL/CLEARED/ROOT/ALWAYS_THROW/get",
+    "NATURAL/CLEARED/ROOT/ALWAYS_THROW/getOrDefault",
+    "NATURAL/CLEARED/ROOT/ALWAYS_THROW/containsKey",
+    "NATURAL/CLEARED/ROOT/ALWAYS_THROW/remove",
+    "NATURAL/CLEARED/ROOT/ALWAYS_THROW/keys.contains",
+    "NATURAL/CLEARED/ROOT/ALWAYS_THROW/keys.remove",
+    "NATURAL/CLEARED/ROOT/ALWAYS_THROW/entries.contains",
+    "NATURAL/CLEARED/ROOT/ALWAYS_THROW/entries.remove",
+    "NATURAL/CLEARED/DESCENDING/COUNTING/get",
+    "NATURAL/CLEARED/DESCENDING/COUNTING/getOrDefault",
+    "NATURAL/CLEARED/DESCENDING/COUNTING/containsKey",
+    "NATURAL/CLEARED/DESCENDING/COUNTING/remove",
+    "NATURAL/CLEARED/DESCENDING/COUNTING/keys.contains",
+    "NATURAL/CLEARED/DESCENDING/COUNTING/keys.remove",
+    "NATURAL/CLEARED/DESCENDING/COUNTING/entries.contains",
+    "NATURAL/CLEARED/DESCENDING/COUNTING/entries.remove",
+    "NATURAL/CLEARED/DESCENDING/SELF_THROW/get",
+    "NATURAL/CLEARED/DESCENDING/SELF_THROW/getOrDefault",
+    "NATURAL/CLEARED/DESCENDING/SELF_THROW/containsKey",
+    "NATURAL/CLEARED/DESCENDING/SELF_THROW/remove",
+    "NATURAL/CLEARED/DESCENDING/SELF_THROW/keys.contains",
+    "NATURAL/CLEARED/DESCENDING/SELF_THROW/keys.remove",
+    "NATURAL/CLEARED/DESCENDING/SELF_THROW/entries.contains",
+    "NATURAL/CLEARED/DESCENDING/SELF_THROW/entries.remove",
+    "NATURAL/CLEARED/DESCENDING/ALWAYS_THROW/get",
+    "NATURAL/CLEARED/DESCENDING/ALWAYS_THROW/getOrDefault",
+    "NATURAL/CLEARED/DESCENDING/ALWAYS_THROW/containsKey",
+    "NATURAL/CLEARED/DESCENDING/ALWAYS_THROW/remove",
+    "NATURAL/CLEARED/DESCENDING/ALWAYS_THROW/keys.contains",
+    "NATURAL/CLEARED/DESCENDING/ALWAYS_THROW/keys.remove",
+    "NATURAL/CLEARED/DESCENDING/ALWAYS_THROW/entries.contains",
+    "NATURAL/CLEARED/DESCENDING/ALWAYS_THROW/entries.remove",
+    "NATURAL/REMOVED/ROOT/COUNTING/get",
+    "NATURAL/REMOVED/ROOT/COUNTING/getOrDefault",
+    "NATURAL/REMOVED/ROOT/COUNTING/containsKey",
+    "NATURAL/REMOVED/ROOT/COUNTING/remove",
+    "NATURAL/REMOVED/ROOT/COUNTING/keys.contains",
+    "NATURAL/REMOVED/ROOT/COUNTING/keys.remove",
+    "NATURAL/REMOVED/ROOT/COUNTING/entries.contains",
+    "NATURAL/REMOVED/ROOT/COUNTING/entries.remove",
+    "NATURAL/REMOVED/ROOT/SELF_THROW/get",
+    "NATURAL/REMOVED/ROOT/SELF_THROW/getOrDefault",
+    "NATURAL/REMOVED/ROOT/SELF_THROW/containsKey",
+    "NATURAL/REMOVED/ROOT/SELF_THROW/remove",
+    "NATURAL/REMOVED/ROOT/SELF_THROW/keys.contains",
+    "NATURAL/REMOVED/ROOT/SELF_THROW/keys.remove",
+    "NATURAL/REMOVED/ROOT/SELF_THROW/entries.contains",
+    "NATURAL/REMOVED/ROOT/SELF_THROW/entries.remove",
+    "NATURAL/REMOVED/ROOT/ALWAYS_THROW/get",
+    "NATURAL/REMOVED/ROOT/ALWAYS_THROW/getOrDefault",
+    "NATURAL/REMOVED/ROOT/ALWAYS_THROW/containsKey",
+    "NATURAL/REMOVED/ROOT/ALWAYS_THROW/remove",
+    "NATURAL/REMOVED/ROOT/ALWAYS_THROW/keys.contains",
+    "NATURAL/REMOVED/ROOT/ALWAYS_THROW/keys.remove",
+    "NATURAL/REMOVED/ROOT/ALWAYS_THROW/entries.contains",
+    "NATURAL/REMOVED/ROOT/ALWAYS_THROW/entries.remove",
+    "NATURAL/REMOVED/DESCENDING/COUNTING/get",
+    "NATURAL/REMOVED/DESCENDING/COUNTING/getOrDefault",
+    "NATURAL/REMOVED/DESCENDING/COUNTING/containsKey",
+    "NATURAL/REMOVED/DESCENDING/COUNTING/remove",
+    "NATURAL/REMOVED/DESCENDING/COUNTING/keys.contains",
+    "NATURAL/REMOVED/DESCENDING/COUNTING/keys.remove",
+    "NATURAL/REMOVED/DESCENDING/COUNTING/entries.contains",
+    "NATURAL/REMOVED/DESCENDING/COUNTING/entries.remove",
+    "NATURAL/REMOVED/DESCENDING/SELF_THROW/get",
+    "NATURAL/REMOVED/DESCENDING/SELF_THROW/getOrDefault",
+    "NATURAL/REMOVED/DESCENDING/SELF_THROW/containsKey",
+    "NATURAL/REMOVED/DESCENDING/SELF_THROW/remove",
+    "NATURAL/REMOVED/DESCENDING/SELF_THROW/keys.contains",
+    "NATURAL/REMOVED/DESCENDING/SELF_THROW/keys.remove",
+    "NATURAL/REMOVED/DESCENDING/SELF_THROW/entries.contains",
+    "NATURAL/REMOVED/DESCENDING/SELF_THROW/entries.remove",
+    "NATURAL/REMOVED/DESCENDING/ALWAYS_THROW/get",
+    "NATURAL/REMOVED/DESCENDING/ALWAYS_THROW/getOrDefault",
+    "NATURAL/REMOVED/DESCENDING/ALWAYS_THROW/containsKey",
+    "NATURAL/REMOVED/DESCENDING/ALWAYS_THROW/remove",
+    "NATURAL/REMOVED/DESCENDING/ALWAYS_THROW/keys.contains",
+    "NATURAL/REMOVED/DESCENDING/ALWAYS_THROW/keys.remove",
+    "NATURAL/REMOVED/DESCENDING/ALWAYS_THROW/entries.contains",
+    "NATURAL/REMOVED/DESCENDING/ALWAYS_THROW/entries.remove"
+  ],
+  "inheritedIds": [
+    "NATURAL/NONEMPTY/ROOT/COUNTING/getOrDefault",
+    "NATURAL/NONEMPTY/ROOT/SELF_THROW/getOrDefault",
+    "NATURAL/NONEMPTY/DESCENDING/COUNTING/getOrDefault",
+    "NATURAL/NONEMPTY/DESCENDING/SELF_THROW/getOrDefault",
+    "COMPARATOR/NONEMPTY/ROOT/COUNTING/getOrDefault",
+    "COMPARATOR/NONEMPTY/ROOT/SELF_THROW/getOrDefault",
+    "COMPARATOR/NONEMPTY/ROOT/NULL/getOrDefault",
+    "COMPARATOR/NONEMPTY/DESCENDING/COUNTING/getOrDefault",
+    "COMPARATOR/NONEMPTY/DESCENDING/SELF_THROW/getOrDefault",
+    "COMPARATOR/NONEMPTY/DESCENDING/NULL/getOrDefault"
+  ],
+  "traces": [
+    {
+      "path": "S:\\codex-work\\m3-collections-next-20261018\\m3-tree-empty-lookup-admission-20261019\\original.stdout.jsonl.gz",
+      "gzipSha256": "5f639255f431ead16f1f3711fbd576570a3594f3cfe4a1867ca393ad60d646dd",
+      "rawSha256": "5279d4d09a1cdb48482047950f92e8504ce84056eb4c55f8fd2db5f4565f4b3c",
+      "rawBytes": 134145
+    },
+    {
+      "path": "S:\\codex-work\\m3-collections-next-20261018\\m3-tree-empty-lookup-baseline-independent-20261019\\baseline.stdout.jsonl.gz",
+      "gzipSha256": "06fdce1caf2a5559e5bd7a7cf23b7d57127d2e7356712a79d35e3f94b42d5660",
+      "rawSha256": "1b7ab64c350c7525e99b803cbfef86aea31fe44704109d602e62a422377a547a",
+      "rawBytes": 145855
+    },
+    {
+      "path": "S:\\codex-work\\m3-collections-next-20261018\\m3-tree-empty-lookup-validator-5d0c45d1\\candidate.stdout.jsonl.gz",
+      "gzipSha256": "a4ab18ddb0c430c3814c8a3cbc40bc40cb60f3a5a60be8b16a71ce90bb68ec21",
+      "rawSha256": "b8e22aaa80cfe6f0958698b937d3c4f29dc006b8c6d54869236ee54ab3ccb0e8",
+      "rawBytes": 134040
+    }
+  ],
+  "originalFirst": true,
+  "fixtureExpectationsEdited": false,
+  "validatorReport": {
+    "path": "S:\\codex-work\\m3-collections-next-20261018\\m3-tree-empty-lookup-validator-5d0c45d1\\BEHAVIOR_REPORT.json",
+    "sha256": "d8d69d45adcc518706c503fb7eab5c28882257a486f5364ff6a205896ee79e34",
+    "strictControlClause4": "FAIL: ten inherited callback sequences, outcomes/state exact"
+  },
+  "examples": [
+    {
+      "id": "NATURAL/FRESH/ROOT/COUNTING/get",
+      "original": {
+        "kind": "case",
+        "id": "NATURAL/FRESH/ROOT/COUNTING/get",
+        "outcome": {
+          "kind": "return",
+          "value": null
+        },
+        "events": [],
+        "size": 0,
+        "empty": true,
+        "entries": []
+      },
+      "baseline": {
+        "kind": "case",
+        "id": "NATURAL/FRESH/ROOT/COUNTING/get",
+        "outcome": {
+          "kind": "return",
+          "value": null
+        },
+        "events": [
+          "COUNTING17:COUNTING17"
+        ],
+        "size": 0,
+        "empty": true,
+        "entries": []
+      },
+      "candidate": {
+        "kind": "case",
+        "id": "NATURAL/FRESH/ROOT/COUNTING/get",
+        "outcome": {
+          "kind": "return",
+          "value": null
+        },
+        "events": [],
+        "size": 0,
+        "empty": true,
+        "entries": []
+      }
+    },
+    {
+      "id": "NATURAL/FRESH/ROOT/ALWAYS_THROW/get",
+      "original": {
+        "kind": "case",
+        "id": "NATURAL/FRESH/ROOT/ALWAYS_THROW/get",
+        "outcome": {
+          "kind": "return",
+          "value": null
+        },
+        "events": [],
+        "size": 0,
+        "empty": true,
+        "entries": []
+      },
+      "baseline": {
+        "kind": "case",
+        "id": "NATURAL/FRESH/ROOT/ALWAYS_THROW/get",
+        "outcome": {
+          "kind": "throw",
+          "class": "EmptyRootLookupOracle$Marker",
+          "message": "empty-root-lookup-marker",
+          "markerIdentity": true
+        },
+        "events": [
+          "ALWAYS_THROW17:ALWAYS_THROW17"
+        ],
+        "size": 0,
+        "empty": true,
+        "entries": []
+      },
+      "candidate": {
+        "kind": "case",
+        "id": "NATURAL/FRESH/ROOT/ALWAYS_THROW/get",
+        "outcome": {
+          "kind": "return",
+          "value": null
+        },
+        "events": [],
+        "size": 0,
+        "empty": true,
+        "entries": []
+      }
+    },
+    {
+      "id": "NATURAL/CLEARED/DESCENDING/SELF_THROW/entries.remove",
+      "original": {
+        "kind": "case",
+        "id": "NATURAL/CLEARED/DESCENDING/SELF_THROW/entries.remove",
+        "outcome": {
+          "kind": "return",
+          "value": false
+        },
+        "events": [],
+        "size": 0,
+        "empty": true,
+        "entries": []
+      },
+      "baseline": {
+        "kind": "case",
+        "id": "NATURAL/CLEARED/DESCENDING/SELF_THROW/entries.remove",
+        "outcome": {
+          "kind": "throw",
+          "class": "EmptyRootLookupOracle$Marker",
+          "message": "empty-root-lookup-marker",
+          "markerIdentity": true
+        },
+        "events": [
+          "SELF_THROW17:SELF_THROW17"
+        ],
+        "size": 0,
+        "empty": true,
+        "entries": []
+      },
+      "candidate": {
+        "kind": "case",
+        "id": "NATURAL/CLEARED/DESCENDING/SELF_THROW/entries.remove",
+        "outcome": {
+          "kind": "return",
+          "value": false
+        },
+        "events": [],
+        "size": 0,
+        "empty": true,
+        "entries": []
+      }
+    }
+  ],
+  "inheritedCompleteRecords": [
+    {
+      "original": {
+        "kind": "case",
+        "id": "NATURAL/NONEMPTY/ROOT/COUNTING/getOrDefault",
+        "outcome": {
+          "kind": "return",
+          "value": "fallback"
+        },
+        "events": [
+          "COUNTING17:SEED7",
+          "COUNTING17:SEED7"
+        ],
+        "size": 1,
+        "empty": false,
+        "entries": [
+          "SEED7=seed"
+        ]
+      },
+      "baseline": {
+        "kind": "case",
+        "id": "NATURAL/NONEMPTY/ROOT/COUNTING/getOrDefault",
+        "outcome": {
+          "kind": "return",
+          "value": "fallback"
+        },
+        "events": [
+          "COUNTING17:SEED7"
+        ],
+        "size": 1,
+        "empty": false,
+        "entries": [
+          "SEED7=seed"
+        ]
+      },
+      "candidate": {
+        "kind": "case",
+        "id": "NATURAL/NONEMPTY/ROOT/COUNTING/getOrDefault",
+        "outcome": {
+          "kind": "return",
+          "value": "fallback"
+        },
+        "events": [
+          "COUNTING17:SEED7"
+        ],
+        "size": 1,
+        "empty": false,
+        "entries": [
+          "SEED7=seed"
+        ]
+      }
+    },
+    {
+      "original": {
+        "kind": "case",
+        "id": "NATURAL/NONEMPTY/ROOT/SELF_THROW/getOrDefault",
+        "outcome": {
+          "kind": "return",
+          "value": "fallback"
+        },
+        "events": [
+          "SELF_THROW17:SEED7",
+          "SELF_THROW17:SEED7"
+        ],
+        "size": 1,
+        "empty": false,
+        "entries": [
+          "SEED7=seed"
+        ]
+      },
+      "baseline": {
+        "kind": "case",
+        "id": "NATURAL/NONEMPTY/ROOT/SELF_THROW/getOrDefault",
+        "outcome": {
+          "kind": "return",
+          "value": "fallback"
+        },
+        "events": [
+          "SELF_THROW17:SEED7"
+        ],
+        "size": 1,
+        "empty": false,
+        "entries": [
+          "SEED7=seed"
+        ]
+      },
+      "candidate": {
+        "kind": "case",
+        "id": "NATURAL/NONEMPTY/ROOT/SELF_THROW/getOrDefault",
+        "outcome": {
+          "kind": "return",
+          "value": "fallback"
+        },
+        "events": [
+          "SELF_THROW17:SEED7"
+        ],
+        "size": 1,
+        "empty": false,
+        "entries": [
+          "SEED7=seed"
+        ]
+      }
+    },
+    {
+      "original": {
+        "kind": "case",
+        "id": "NATURAL/NONEMPTY/DESCENDING/COUNTING/getOrDefault",
+        "outcome": {
+          "kind": "return",
+          "value": "fallback"
+        },
+        "events": [
+          "COUNTING17:SEED7",
+          "COUNTING17:SEED7"
+        ],
+        "size": 1,
+        "empty": false,
+        "entries": [
+          "SEED7=seed"
+        ]
+      },
+      "baseline": {
+        "kind": "case",
+        "id": "NATURAL/NONEMPTY/DESCENDING/COUNTING/getOrDefault",
+        "outcome": {
+          "kind": "return",
+          "value": "fallback"
+        },
+        "events": [
+          "COUNTING17:SEED7"
+        ],
+        "size": 1,
+        "empty": false,
+        "entries": [
+          "SEED7=seed"
+        ]
+      },
+      "candidate": {
+        "kind": "case",
+        "id": "NATURAL/NONEMPTY/DESCENDING/COUNTING/getOrDefault",
+        "outcome": {
+          "kind": "return",
+          "value": "fallback"
+        },
+        "events": [
+          "COUNTING17:SEED7"
+        ],
+        "size": 1,
+        "empty": false,
+        "entries": [
+          "SEED7=seed"
+        ]
+      }
+    },
+    {
+      "original": {
+        "kind": "case",
+        "id": "NATURAL/NONEMPTY/DESCENDING/SELF_THROW/getOrDefault",
+        "outcome": {
+          "kind": "return",
+          "value": "fallback"
+        },
+        "events": [
+          "SELF_THROW17:SEED7",
+          "SELF_THROW17:SEED7"
+        ],
+        "size": 1,
+        "empty": false,
+        "entries": [
+          "SEED7=seed"
+        ]
+      },
+      "baseline": {
+        "kind": "case",
+        "id": "NATURAL/NONEMPTY/DESCENDING/SELF_THROW/getOrDefault",
+        "outcome": {
+          "kind": "return",
+          "value": "fallback"
+        },
+        "events": [
+          "SELF_THROW17:SEED7"
+        ],
+        "size": 1,
+        "empty": false,
+        "entries": [
+          "SEED7=seed"
+        ]
+      },
+      "candidate": {
+        "kind": "case",
+        "id": "NATURAL/NONEMPTY/DESCENDING/SELF_THROW/getOrDefault",
+        "outcome": {
+          "kind": "return",
+          "value": "fallback"
+        },
+        "events": [
+          "SELF_THROW17:SEED7"
+        ],
+        "size": 1,
+        "empty": false,
+        "entries": [
+          "SEED7=seed"
+        ]
+      }
+    },
+    {
+      "original": {
+        "kind": "case",
+        "id": "COMPARATOR/NONEMPTY/ROOT/COUNTING/getOrDefault",
+        "outcome": {
+          "kind": "return",
+          "value": "fallback"
+        },
+        "events": [
+          "comparator:COUNTING17:SEED7",
+          "COUNTING17:SEED7",
+          "comparator:COUNTING17:SEED7",
+          "COUNTING17:SEED7"
+        ],
+        "size": 1,
+        "empty": false,
+        "entries": [
+          "SEED7=seed"
+        ]
+      },
+      "baseline": {
+        "kind": "case",
+        "id": "COMPARATOR/NONEMPTY/ROOT/COUNTING/getOrDefault",
+        "outcome": {
+          "kind": "return",
+          "value": "fallback"
+        },
+        "events": [
+          "comparator:COUNTING17:SEED7",
+          "COUNTING17:SEED7"
+        ],
+        "size": 1,
+        "empty": false,
+        "entries": [
+          "SEED7=seed"
+        ]
+      },
+      "candidate": {
+        "kind": "case",
+        "id": "COMPARATOR/NONEMPTY/ROOT/COUNTING/getOrDefault",
+        "outcome": {
+          "kind": "return",
+          "value": "fallback"
+        },
+        "events": [
+          "comparator:COUNTING17:SEED7",
+          "COUNTING17:SEED7"
+        ],
+        "size": 1,
+        "empty": false,
+        "entries": [
+          "SEED7=seed"
+        ]
+      }
+    },
+    {
+      "original": {
+        "kind": "case",
+        "id": "COMPARATOR/NONEMPTY/ROOT/SELF_THROW/getOrDefault",
+        "outcome": {
+          "kind": "return",
+          "value": "fallback"
+        },
+        "events": [
+          "comparator:SELF_THROW17:SEED7",
+          "SELF_THROW17:SEED7",
+          "comparator:SELF_THROW17:SEED7",
+          "SELF_THROW17:SEED7"
+        ],
+        "size": 1,
+        "empty": false,
+        "entries": [
+          "SEED7=seed"
+        ]
+      },
+      "baseline": {
+        "kind": "case",
+        "id": "COMPARATOR/NONEMPTY/ROOT/SELF_THROW/getOrDefault",
+        "outcome": {
+          "kind": "return",
+          "value": "fallback"
+        },
+        "events": [
+          "comparator:SELF_THROW17:SEED7",
+          "SELF_THROW17:SEED7"
+        ],
+        "size": 1,
+        "empty": false,
+        "entries": [
+          "SEED7=seed"
+        ]
+      },
+      "candidate": {
+        "kind": "case",
+        "id": "COMPARATOR/NONEMPTY/ROOT/SELF_THROW/getOrDefault",
+        "outcome": {
+          "kind": "return",
+          "value": "fallback"
+        },
+        "events": [
+          "comparator:SELF_THROW17:SEED7",
+          "SELF_THROW17:SEED7"
+        ],
+        "size": 1,
+        "empty": false,
+        "entries": [
+          "SEED7=seed"
+        ]
+      }
+    },
+    {
+      "original": {
+        "kind": "case",
+        "id": "COMPARATOR/NONEMPTY/ROOT/NULL/getOrDefault",
+        "outcome": {
+          "kind": "return",
+          "value": "fallback"
+        },
+        "events": [
+          "comparator:null:SEED7",
+          "comparator:null:SEED7"
+        ],
+        "size": 1,
+        "empty": false,
+        "entries": [
+          "SEED7=seed"
+        ]
+      },
+      "baseline": {
+        "kind": "case",
+        "id": "COMPARATOR/NONEMPTY/ROOT/NULL/getOrDefault",
+        "outcome": {
+          "kind": "return",
+          "value": "fallback"
+        },
+        "events": [
+          "comparator:null:SEED7"
+        ],
+        "size": 1,
+        "empty": false,
+        "entries": [
+          "SEED7=seed"
+        ]
+      },
+      "candidate": {
+        "kind": "case",
+        "id": "COMPARATOR/NONEMPTY/ROOT/NULL/getOrDefault",
+        "outcome": {
+          "kind": "return",
+          "value": "fallback"
+        },
+        "events": [
+          "comparator:null:SEED7"
+        ],
+        "size": 1,
+        "empty": false,
+        "entries": [
+          "SEED7=seed"
+        ]
+      }
+    },
+    {
+      "original": {
+        "kind": "case",
+        "id": "COMPARATOR/NONEMPTY/DESCENDING/COUNTING/getOrDefault",
+        "outcome": {
+          "kind": "return",
+          "value": "fallback"
+        },
+        "events": [
+          "comparator:COUNTING17:SEED7",
+          "COUNTING17:SEED7",
+          "comparator:COUNTING17:SEED7",
+          "COUNTING17:SEED7"
+        ],
+        "size": 1,
+        "empty": false,
+        "entries": [
+          "SEED7=seed"
+        ]
+      },
+      "baseline": {
+        "kind": "case",
+        "id": "COMPARATOR/NONEMPTY/DESCENDING/COUNTING/getOrDefault",
+        "outcome": {
+          "kind": "return",
+          "value": "fallback"
+        },
+        "events": [
+          "comparator:COUNTING17:SEED7",
+          "COUNTING17:SEED7"
+        ],
+        "size": 1,
+        "empty": false,
+        "entries": [
+          "SEED7=seed"
+        ]
+      },
+      "candidate": {
+        "kind": "case",
+        "id": "COMPARATOR/NONEMPTY/DESCENDING/COUNTING/getOrDefault",
+        "outcome": {
+          "kind": "return",
+          "value": "fallback"
+        },
+        "events": [
+          "comparator:COUNTING17:SEED7",
+          "COUNTING17:SEED7"
+        ],
+        "size": 1,
+        "empty": false,
+        "entries": [
+          "SEED7=seed"
+        ]
+      }
+    },
+    {
+      "original": {
+        "kind": "case",
+        "id": "COMPARATOR/NONEMPTY/DESCENDING/SELF_THROW/getOrDefault",
+        "outcome": {
+          "kind": "return",
+          "value": "fallback"
+        },
+        "events": [
+          "comparator:SELF_THROW17:SEED7",
+          "SELF_THROW17:SEED7",
+          "comparator:SELF_THROW17:SEED7",
+          "SELF_THROW17:SEED7"
+        ],
+        "size": 1,
+        "empty": false,
+        "entries": [
+          "SEED7=seed"
+        ]
+      },
+      "baseline": {
+        "kind": "case",
+        "id": "COMPARATOR/NONEMPTY/DESCENDING/SELF_THROW/getOrDefault",
+        "outcome": {
+          "kind": "return",
+          "value": "fallback"
+        },
+        "events": [
+          "comparator:SELF_THROW17:SEED7",
+          "SELF_THROW17:SEED7"
+        ],
+        "size": 1,
+        "empty": false,
+        "entries": [
+          "SEED7=seed"
+        ]
+      },
+      "candidate": {
+        "kind": "case",
+        "id": "COMPARATOR/NONEMPTY/DESCENDING/SELF_THROW/getOrDefault",
+        "outcome": {
+          "kind": "return",
+          "value": "fallback"
+        },
+        "events": [
+          "comparator:SELF_THROW17:SEED7",
+          "SELF_THROW17:SEED7"
+        ],
+        "size": 1,
+        "empty": false,
+        "entries": [
+          "SEED7=seed"
+        ]
+      }
+    },
+    {
+      "original": {
+        "kind": "case",
+        "id": "COMPARATOR/NONEMPTY/DESCENDING/NULL/getOrDefault",
+        "outcome": {
+          "kind": "return",
+          "value": "fallback"
+        },
+        "events": [
+          "comparator:null:SEED7",
+          "comparator:null:SEED7"
+        ],
+        "size": 1,
+        "empty": false,
+        "entries": [
+          "SEED7=seed"
+        ]
+      },
+      "baseline": {
+        "kind": "case",
+        "id": "COMPARATOR/NONEMPTY/DESCENDING/NULL/getOrDefault",
+        "outcome": {
+          "kind": "return",
+          "value": "fallback"
+        },
+        "events": [
+          "comparator:null:SEED7"
+        ],
+        "size": 1,
+        "empty": false,
+        "entries": [
+          "SEED7=seed"
+        ]
+      },
+      "candidate": {
+        "kind": "case",
+        "id": "COMPARATOR/NONEMPTY/DESCENDING/NULL/getOrDefault",
+        "outcome": {
+          "kind": "return",
+          "value": "fallback"
+        },
+        "events": [
+          "comparator:null:SEED7"
+        ],
+        "size": 1,
+        "empty": false,
+        "entries": [
+          "SEED7=seed"
+        ]
+      }
+    }
+  ],
+  "performance": "No JMH/throughput claim; no comparison or allocation required for empty admission",
+  "catalogueCategory": "ordered-map/empty-key-admission",
+  "donorSelection": "ADAPT existing array AVL findSlot; JDK original/reference, no source imported",
+  "otherUnfinished": "EC retained cursor root ownership, current14 build closure, other five-library owners and JNI"
+}

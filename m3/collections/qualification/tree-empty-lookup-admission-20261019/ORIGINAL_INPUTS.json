@@ -1,0 +1,46 @@
+{
+  "fixtureSourceSha256": "66bee1e712eb5053ca4414b8b756191f9c1e134be3c6183ab93663fc40d2cd1f",
+  "fixtureClasses": [
+    {
+      "path": "S:\\codex-work\\m3-collections-next-20261018\\m3-tree-empty-lookup-admission-20261019\\fixture-classes\\EmptyRootLookupOracle$Marker.class",
+      "sha256": "677761592fe9d33ab72d1d50e9dd42ffc39b8b674b069a0e769a30e17445f542"
+    },
+    {
+      "path": "S:\\codex-work\\m3-collections-next-20261018\\m3-tree-empty-lookup-admission-20261019\\fixture-classes\\EmptyRootLookupOracle$Probe.class",
+      "sha256": "0bd63288ba53544b0bc75c2691c3d251d5c8f9bd34c0d8284627d70f348d89cd"
+    },
+    {
+      "path": "S:\\codex-work\\m3-collections-next-20261018\\m3-tree-empty-lookup-admission-20261019\\fixture-classes\\EmptyRootLookupOracle.class",
+      "sha256": "daee992b169b6e0fe77b23bc7f2c5e25e8fc3135c8f7046518ce5dd7535d0204"
+    }
+  ],
+  "utilityClasses": [
+    {
+      "path": "S:\\codex-work\\m3-collections-next-20261018\\m3-ec-putall-calibration3-20261018\\classes\\CanonicalPutAllCalibration3$Action.class",
+      "sha256": "b3be9cbee332e965fd65ff44c1fbee5111f40396ee04952176c267fe8616bb4e"
+    },
+    {
+      "path": "S:\\codex-work\\m3-collections-next-20261018\\m3-ec-putall-calibration3-20261018\\classes\\CanonicalPutAllCalibration3$Order.class",
+      "sha256": "4f5c00f47f8949e6320e265d377573dee2031520a6d000a3ff25b0c90d5472bc"
+    },
+    {
+      "path": "S:\\codex-work\\m3-collections-next-20261018\\m3-ec-putall-calibration3-20261018\\classes\\CanonicalPutAllCalibration3$Source$1$1.class",
+      "sha256": "5d82a0a1770f8abda5a9430968ada3bffb14a3e7df61b876b17ab59c5a5b63f2"
+    },
+    {
+      "path": "S:\\codex-work\\m3-collections-next-20261018\\m3-ec-putall-calibration3-20261018\\classes\\CanonicalPutAllCalibration3$Source$1.class",
+      "sha256": "7abb8ddd2ffc781d2cd4e59fd7d2d9741388af0e7ab245249c203290695befb4"
+    },
+    {
+      "path": "S:\\codex-work\\m3-collections-next-20261018\\m3-ec-putall-calibration3-20261018\\classes\\CanonicalPutAllCalibration3$Source.class",
+      "sha256": "4226a16dcc3a8f8e5d594dc38917b1396a0d68da89af2237ddc1a384983766fd"
+    },
+    {
+      "path": "S:\\codex-work\\m3-collections-next-20261018\\m3-ec-putall-calibration3-20261018\\classes\\CanonicalPutAllCalibration3.class",
+      "sha256": "8364fd036a1b2e8f318ebb76e3a0fb7374e92c9ad50c9b09f741a832ed8eb9e3"
+    }
+  ],
+  "expectedCases": 640,
+  "sourceAware": true,
+  "candidateExecuted": false
+}
