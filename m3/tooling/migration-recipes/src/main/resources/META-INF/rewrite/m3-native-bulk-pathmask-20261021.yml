@@ -1,0 +1,8 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.rewrite.M3NativeBulkPathMask20261021
+displayName: M3JDK21 contiguous native path-mask bulk selection
+description: Exact source-guarded C17 native index, offset and row selection via M3JDK21's original JNI owner.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: m3-native-bulk-pathmask-20261021
+      lst: false
