@@ -222,6 +222,28 @@ public final class M3BuildState {
                 times, known, digest(complete.scope().getBytes(StandardCharsets.UTF_8)));
     }
 
+    /**
+     * Original M3BuildState V2 input receiver for a completed caller-owned
+     * M3File traversal over the host provider. The caller has already verified
+     * every admitted original file through EOF; this method neither opens
+     * paths, reparses source, nor asserts compiler ABI/dependency facts.
+     *
+     * <p>All columns are caller-owned candidate arrays and are defensively
+     * copied by the existing immutable V2 constructor. Scope is the verified
+     * host-root and stable selection-policy digest (not an M3FS native inode).
+     * Full inventory is a producer attestation, not an OS atomic snapshot.</p>
+     */
+    static M3BuildState completedHostRows(String[] paths, byte[] roles,
+            long[] lengths, byte[] hashes, long[] modifiedNanos,
+            long[] modifiedKnown, byte[] contextHash, byte[] scopeHash) {
+        int count = Objects.requireNonNull(paths, "paths").length;
+        return new M3BuildState(paths, roles, lengths, hashes,
+                new byte[Math.multiplyExact(count, HASH_BYTES)],
+                new long[(int) ((count + 63L) >>> 6)],
+                new int[Math.addExact(count, 1)], new int[0], contextHash,
+                modifiedNanos, modifiedKnown, scopeHash);
+    }
+
     private static final class InventoryColumns {
         private final int maxBytes;
         private String[] paths = new String[0];
