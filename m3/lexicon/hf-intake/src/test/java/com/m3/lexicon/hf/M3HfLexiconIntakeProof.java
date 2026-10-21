@@ -66,7 +66,7 @@ public final class M3HfLexiconIntakeProof {
     private static int verifyLanguageResourceDiscovery() throws IOException {
         List<String> lines = resourceLines(
                 "/com/m3/lexicon/hf/language-resource-discovery.tsv");
-        require(lines.size() == 231, "230 language-resource candidates plus header");
+        require(lines.size() == 235, "234 language-resource candidates plus header");
         List<String> expectedHeader = List.of("source_id", "resource", "category",
                 "data_shape_and_identity", "rights_and_attribution", "m3_candidate_use",
                 "admission_blockers", "state", "evidence");
@@ -319,8 +319,12 @@ public final class M3HfLexiconIntakeProof {
                 "jmdict-edrdg",
                 "jmnedict-edrdg",
                 "kanjidic2-edrdg",
-                "cc-cedict-v2"
-        )), "exact 230 language-resource source IDs match the pinned catalogue");
+                "cc-cedict-v2",
+                "iso-639-2023",
+                "iso-15924-script-codes",
+                "clts-2-3-0",
+                "multext-east-v6-morphosyntax"
+        )), "exact 234 language-resource source IDs match the pinned catalogue");
         String jmdict = discoveryRecord(lines, "jmdict-edrdg");
         require(jmdict.contains("JMdict_e/JMdict_b")
                 && jmdict.contains("legacy generation")
@@ -335,6 +339,34 @@ public final class M3HfLexiconIntakeProof {
                 && ccCedict.contains("[Wang2]") && ccCedict.contains("[wang2]")
                 && ccCedict.contains("case-fold Pinyin"),
                 "CC-CEDICT V2 preserves case-sensitive Pinyin identity");
+        String iso639 = discoveryRecord(lines, "iso-639-2023");
+        require(iso639.contains("\tlanguage_identity_and_code_system\t")
+                && iso639.contains("Edition 2 (2023)")
+                && iso639.contains("ISO 639-1") && iso639.contains("ISO 639-5")
+                && iso639.contains("free-of-charge use")
+                && iso639.contains("BCP 47 tags"),
+                "ISO language-code sets, code-use rights and namespace boundaries stay explicit");
+        String iso15924 = discoveryRecord(lines, "iso-15924-script-codes");
+        require(iso15924.contains("\tscript_identity_and_code_system\t")
+                && iso15924.contains("four-letter alphabetic")
+                && iso15924.contains("three-digit numeric")
+                && iso15924.contains("not language IDs")
+                && iso15924.contains("Unicode Script values"),
+                "ISO script-code forms and distinct language/Unicode identities stay explicit");
+        String clts = discoveryRecord(lines, "clts-2-3-0");
+        require(clts.contains("\tphonetic_transcription_and_sound_feature_specification\t")
+                && clts.contains("five transcription systems")
+                && clts.contains("22 transcription datasets")
+                && clts.contains("six sound-class systems")
+                && clts.contains("CC BY 4.0"),
+                "CLTS version, transcription coverage, feature schemes and attribution stay explicit");
+        String multext = discoveryRecord(lines, "multext-east-v6-morphosyntax");
+        require(multext.contains("\tmorphosyntactic_feature_and_tag_specification\t")
+                && multext.contains("2022-06-24") && multext.contains("compact MSD tag")
+                && multext.contains("CC BY-SA 4.0")
+                && multext.contains("specification artifact, not associated lexica or corpora")
+                && multext.contains("unknown versus absent"),
+                "MULTEXT-East versioned language-specific grammar specs and rights stay explicit");
         String sindhi = discoveryRecord(lines, "hf-sindhi-open-lexicon");
         require(sindhi.contains("223,342") && sindhi.contains("lexical_id")
                 && sindhi.contains("entry_id") && sindhi.contains("schema casting"),
