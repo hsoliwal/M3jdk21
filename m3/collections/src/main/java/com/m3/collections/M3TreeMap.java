@@ -129,7 +129,12 @@ public final class M3TreeMap<K, V> extends M3OrderedSlotMap<K, V> implements Nav
     }
     @Override public boolean isEmpty() { return firstSlot() < 0; }
     @Override public V put(K key, V value) {
-        tree.writable(); checked(key);
+        tree.writable();
+        // Ordinary nonempty roots validate against visited keys during descent.
+        // Keep admission validation for the first key and all other value/view modes.
+        if (tree.size == 0 || hasLow || hasHigh || descending || tree.lazy != null || tree.keyOnly) {
+            checked(key);
+        }
         if (!within(key)) { throw new IllegalArgumentException("key outside view"); }
         int expected = revision(), p = -1, s = tree.root, cmp = 0;
         while (s >= 0) {
