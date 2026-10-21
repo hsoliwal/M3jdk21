@@ -1,7 +1,6 @@
 /* Copyright 2026 Hitesh Soliwal and contributors. SPDX-License-Identifier: Apache-2.0 */
 package com.m3.fs;
 
-import java.util.Arrays;
 import java.util.Objects;
 
 /**
@@ -28,11 +27,20 @@ public final class M3FsStatBatch {
     private final int[] flags;
 
     M3FsStatBatch(long[] nativeColumns) {
+        this(nativeColumns, false);
+    }
+
+    /** Only the JNI bridge may transfer exclusive ownership of its fresh output. */
+    static M3FsStatBatch adoptNative(long[] nativeColumns) {
+        return new M3FsStatBatch(nativeColumns, true);
+    }
+
+    private M3FsStatBatch(long[] nativeColumns, boolean exclusivelyOwned) {
         Objects.requireNonNull(nativeColumns, "nativeColumns");
         if (nativeColumns.length % WIDTH != 0) {
             throw new IllegalArgumentException("invalid native metadata geometry");
         }
-        columns = nativeColumns.clone();
+        columns = exclusivelyOwned ? nativeColumns : nativeColumns.clone();
         flags = new int[columns.length / WIDTH];
         for (int row = 0; row < flags.length; row++) {
             int offset = row * WIDTH;
@@ -152,7 +160,8 @@ public final class M3FsStatBatch {
     }
 
     @Override public String toString() {
-        return "M3FsStatBatch[size=" + size() + ", successes="
-                + Arrays.stream(flags).filter(flag -> (flag & EXISTS) != 0).count() + "]";
+        int successful = 0;
+        for (int state : flags) if ((state & EXISTS) != 0) successful++;
+        return "M3FsStatBatch[size=" + size() + ", successes=" + successful + "]";
     }
 }
