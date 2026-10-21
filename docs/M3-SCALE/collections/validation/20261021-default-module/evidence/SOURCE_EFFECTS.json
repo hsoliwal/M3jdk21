@@ -1,0 +1,555 @@
+{
+  "schema": "synexia.data.module.prelaunch-source-effect-inventory.v1",
+  "status": "REQUIRES_ROOT_EFFECT_REVIEW_NOT_AUTOMATIC_PERMISSION",
+  "source_manifest": {
+    "path": "K:\\codex-work\\m3jdk21-recipe-pass-20261020\\data-current-module-materialization-k-v1\\SOURCE_MANIFEST.tsv",
+    "bytes": 97733,
+    "sha256": "66558ebc244b9e8b3be082920f160151042579dae765796f2038d15e5a54a3ba"
+  },
+  "patterns": {
+    "process": "ProcessBuilder|Runtime\\s*\\.\\s*getRuntime\\s*\\(\\s*\\)\\s*\\.\\s*exec\\s*\\(|ProcessHandle|System\\s*\\.\\s*exit\\s*\\(",
+    "compiler": "JavaCompiler|ToolProvider|javax\\.tools",
+    "file_write_or_temp": "FileOutputStream|FileWriter|RandomAccessFile|Files\\s*\\.\\s*(?:write|newOutputStream|createTemp|createFile|createDirector|move|copy|delete)|createTempFile|createTempDirectory|FileChannel",
+    "network": "java\\.net\\.|javax\\.net\\.|HttpClient|Socket\\s*\\(|URL\\s*\\(",
+    "property_write": "System\\s*\\.\\s*(?:setProperty|setProperties|clearProperty)\\s*\\(",
+    "reflection_loading": "Class\\s*\\.\\s*forName\\s*\\(|ServiceLoader|URLClassLoader",
+    "native_or_property_read": "System\\s*\\.\\s*load(?:Library)?\\s*\\(|Boolean\\s*\\.\\s*getBoolean\\s*\\(|System\\s*\\.\\s*(?:getProperty|getenv)\\s*\\(",
+    "classpath_resource": "getResourceAsStream\\s*\\("
+  },
+  "source_files_scanned": 553,
+  "matched_files": [
+    {
+      "path": "src/main/java/com/m3/collections/M3CollectionSdkNames.java",
+      "sha256": "0e8d7bf9235d4075552c104d650290534b3b814014bcdb664de89fbc804fdaee",
+      "sites": [
+        {
+          "line": 74,
+          "kinds": [
+            "classpath_resource"
+          ],
+          "text": "InputStream stream = M3CollectionSdkNames.class.getResourceAsStream(RESOURCE);"
+        }
+      ]
+    },
+    {
+      "path": "src/main/java/com/m3/collections/M3IndexMaskCompactor.java",
+      "sha256": "13cf1e5c20a184869de3044f83cbb87e9f5e0e1ac60eaf28d01623be544fd924",
+      "sites": [
+        {
+          "line": 335,
+          "kinds": [
+            "native_or_property_read"
+          ],
+          "text": "System.loadLibrary(\"m3_collections_mask\");"
+        }
+      ]
+    },
+    {
+      "path": "src/main/java/com/m3/collections/M3IndexPathMasks.java",
+      "sha256": "33b894d2b4c9f89a0244023737d49645d54cbcb1b388a0956e475567fdd4a577",
+      "sites": [
+        {
+          "line": 273,
+          "kinds": [
+            "native_or_property_read"
+          ],
+          "text": "System.loadLibrary(\"m3_collections_pathmask\");"
+        }
+      ]
+    },
+    {
+      "path": "src/main/java/com/m3/collections/M3LongAddressKernel.java",
+      "sha256": "7e4997911a30ae3d2a9a558f0a80dff3ba98bc5b3c9d81b37215a33c2b597d7d",
+      "sites": [
+        {
+          "line": 122,
+          "kinds": [
+            "native_or_property_read"
+          ],
+          "text": "System.loadLibrary(\"m3_collections_address\");"
+        }
+      ]
+    },
+    {
+      "path": "src/main/java/com/m3/collections/M3LongIndexPathMasksJNI.java",
+      "sha256": "6170e9899132ef746a88c140cebc78cbaf511aea1c797549fab3e2238d4c5a06",
+      "sites": [
+        {
+          "line": 25,
+          "kinds": [
+            "native_or_property_read"
+          ],
+          "text": "System.loadLibrary(\"m3_collections_long_path_masks\");"
+        }
+      ]
+    },
+    {
+      "path": "src/main/java/com/m3/collections/M3LongRankBatchNative.java",
+      "sha256": "a199d9601ca4c36d8dbe3d1b95a8dd7da49d5f22a15ed29a7112665a38288c82",
+      "sites": [
+        {
+          "line": 53,
+          "kinds": [
+            "native_or_property_read"
+          ],
+          "text": "if (!Boolean.getBoolean(\"m3.collections.rank.native\")) {"
+        },
+        {
+          "line": 57,
+          "kinds": [
+            "native_or_property_read"
+          ],
+          "text": "System.loadLibrary(\"m3rankbatch\");"
+        }
+      ]
+    },
+    {
+      "path": "src/main/java/com/m3/collections/M3ResidencyStateMaskIndex.java",
+      "sha256": "fcb1575f5366bba814870456acdf38379325f631cde86a18ae9541588e500dfc",
+      "sites": [
+        {
+          "line": 216,
+          "kinds": [
+            "native_or_property_read"
+          ],
+          "text": "System.loadLibrary(\"m3_residency_state_mask\");"
+        }
+      ]
+    },
+    {
+      "path": "src/main/java/com/m3/collections/M3SignalOrderNative.java",
+      "sha256": "eaa37fee096172a200088d80b2b48955d60d602061fba71d715e25f6d395acc8",
+      "sites": [
+        {
+          "line": 20,
+          "kinds": [
+            "native_or_property_read"
+          ],
+          "text": "if (!Boolean.getBoolean(\"m3.collections.signal.native\")) return false;"
+        },
+        {
+          "line": 22,
+          "kinds": [
+            "native_or_property_read"
+          ],
+          "text": "System.loadLibrary(\"m3signalorder\");"
+        }
+      ]
+    },
+    {
+      "path": "src/main/java/com/m3/collections/M3SpanIndex.java",
+      "sha256": "cf76dacccd055f5a21338c09ae7ce77efc0fe21fb756ad6c2e7015f9831d650b",
+      "sites": [
+        {
+          "line": 236,
+          "kinds": [
+            "native_or_property_read"
+          ],
+          "text": "System.loadLibrary(\"m3_collections_span\");"
+        }
+      ]
+    },
+    {
+      "path": "src/main/java/com/m3/collections/M3StateMaskHistogram.java",
+      "sha256": "965a098c4f8b0103b5a497ef7e7897e0e0cb740f6f38da96fa6d4e277f859a42",
+      "sites": [
+        {
+          "line": 186,
+          "kinds": [
+            "native_or_property_read"
+          ],
+          "text": "System.loadLibrary(\"m3_collections_statehist\");"
+        }
+      ]
+    },
+    {
+      "path": "src/test/java/com/m3/collections/M3BitLaneJumpProof.java",
+      "sha256": "1a6b291f5c5e079afbfe02adf6faf2dc6de997263e24507e85ee6333365bab24",
+      "sites": [
+        {
+          "line": 21,
+          "kinds": [
+            "native_or_property_read"
+          ],
+          "text": "if (withNative) System.load(java.nio.file.Path.of(args[0]).toAbsolutePath().toString());"
+        }
+      ]
+    },
+    {
+      "path": "src/test/java/com/m3/collections/M3BitLanesTest.java",
+      "sha256": "749e1e097944f862c9c374215daa5fec7f7c435277b104234e5d3827d7882599",
+      "sites": [
+        {
+          "line": 25,
+          "kinds": [
+            "reflection_loading"
+          ],
+          "text": "Constructor<?> constructor = Class.forName (\"\" + name).getDeclaredConstructor (types);"
+        },
+        {
+          "line": 351,
+          "kinds": [
+            "reflection_loading"
+          ],
+          "text": "Field field = Class.forName (\"\" + type).getDeclaredField (name);"
+        }
+      ]
+    },
+    {
+      "path": "src/test/java/com/m3/collections/M3CollectionCostProbe.java",
+      "sha256": "c3b7fe8f9b10dd1607af7b5da7b657138934a1b5cf0d449960c50c2a219d35a8",
+      "sites": [
+        {
+          "line": 40,
+          "kinds": [
+            "native_or_property_read"
+          ],
+          "text": "System.out.println(\"# java=\" + System.getProperty(\"java.runtime.version\")"
+        },
+        {
+          "line": 41,
+          "kinds": [
+            "native_or_property_read"
+          ],
+          "text": "+ \"; vm=\" + System.getProperty(\"java.vm.name\")"
+        },
+        {
+          "line": 42,
+          "kinds": [
+            "native_or_property_read"
+          ],
+          "text": "+ \"; os=\" + System.getProperty(\"os.name\")"
+        },
+        {
+          "line": 43,
+          "kinds": [
+            "native_or_property_read"
+          ],
+          "text": "+ \"; arch=\" + System.getProperty(\"os.arch\")"
+        }
+      ]
+    },
+    {
+      "path": "src/test/java/com/m3/collections/M3CollectionSdkCatalogSelfTest.java",
+      "sha256": "b28c7bea13e62b546cfc77b518126b1cbae52a3449bc264230ace523a10e3dc1",
+      "sites": [
+        {
+          "line": 73,
+          "kinds": [
+            "reflection_loading"
+          ],
+          "text": "Class.forName(jdk);"
+        }
+      ]
+    },
+    {
+      "path": "src/test/java/com/m3/collections/M3ColumnarLanesTest.java",
+      "sha256": "8a5783af6bf68a06979f7acd48c3ce53127c99e5c306800c3377a8389055a034",
+      "sites": [
+        {
+          "line": 33,
+          "kinds": [
+            "reflection_loading"
+          ],
+          "text": "Constructor<?> constructor = Class.forName (\"com.m3.collections.M3ColumnarLanes\").getDeclaredConstructor (int.class, int [].class, int.class);"
+        }
+      ]
+    },
+    {
+      "path": "src/test/java/com/m3/collections/M3FilteredSplitsMaskSpansTest.java",
+      "sha256": "249873d4ffe56ca3a49aa993c5965d7b04b7cef0c437636d6c0ba431802b7955",
+      "sites": [
+        {
+          "line": 10,
+          "kinds": [
+            "native_or_property_read"
+          ],
+          "text": "org.junit.jupiter.api.Assumptions.assumeTrue(Boolean.getBoolean(\"m3.mask.spans.native.required\"),"
+        },
+        {
+          "line": 15,
+          "kinds": [
+            "native_or_property_read"
+          ],
+          "text": "org.junit.jupiter.api.Assumptions.assumeTrue(Boolean.getBoolean(\"m3.collections.all.native.required\"),"
+        },
+        {
+          "line": 27,
+          "kinds": [
+            "native_or_property_read"
+          ],
+          "text": "System.loadLibrary(\"m3bitlane\");"
+        }
+      ]
+    },
+    {
+      "path": "src/test/java/com/m3/collections/M3ListModelTest.java",
+      "sha256": "3a7839413344255eeb34d931ca8c5ed02afe16097d8006f0abd5337bfefdbe82",
+      "sites": [
+        {
+          "line": 39,
+          "kinds": [
+            "reflection_loading"
+          ],
+          "text": "Constructor<?> constructor = Class.forName(PACKAGE + type).getDeclaredConstructor(types(arguments));"
+        }
+      ]
+    },
+    {
+      "path": "src/test/java/com/m3/collections/M3ListWidthTest.java",
+      "sha256": "485434699995e315b909393955fb38486e1004b531b0e668e5c319032cb68f8a",
+      "sites": [
+        {
+          "line": 35,
+          "kinds": [
+            "reflection_loading"
+          ],
+          "text": "Constructor<?> constructor = Class.forName (\"com.m3.collections.M3ListWidth\").getDeclaredConstructor (ToIntFunction.class);"
+        },
+        {
+          "line": 224,
+          "kinds": [
+            "reflection_loading"
+          ],
+          "text": "Constructor<?> constructor = Class.forName (\"com.m3.collections.M3ListWidth\").getDeclaredConstructor (ToIntFunction.class);"
+        }
+      ]
+    },
+    {
+      "path": "src/test/java/com/m3/collections/M3LongAddressBoundedSelfTest.java",
+      "sha256": "0e590e67416010c433b82eb263ddc55f162c099eed13b7fb1606b2c868d83c5d",
+      "sites": [
+        {
+          "line": 20,
+          "kinds": [
+            "native_or_property_read"
+          ],
+          "text": "if (Boolean.getBoolean(\"m3.address.required\") && !nativeMode) {"
+        }
+      ]
+    },
+    {
+      "path": "src/test/java/com/m3/collections/M3MaskViewportKernelContract.java",
+      "sha256": "a6abf38a1d3905c7c43aeed98fb16b3f06ea73b4af20e6e76477497bfc72310c",
+      "sites": [
+        {
+          "line": 20,
+          "kinds": [
+            "native_or_property_read"
+          ],
+          "text": "final String lib = System.getProperty(\"m3.native.path\");"
+        },
+        {
+          "line": 22,
+          "kinds": [
+            "native_or_property_read"
+          ],
+          "text": "System.load(lib);"
+        }
+      ]
+    },
+    {
+      "path": "src/test/java/com/m3/collections/M3NetBeansGatherSpansTest.java",
+      "sha256": "277bda013eede687b41d9931fd19239968642dd5a1584b1644c8511b28258a77",
+      "sites": [
+        {
+          "line": 54,
+          "kinds": [
+            "native_or_property_read"
+          ],
+          "text": "if (Boolean.getBoolean(\"m3.collections.all.native.required\")) {"
+        }
+      ]
+    },
+    {
+      "path": "src/test/java/com/m3/collections/M3ObjectCountsTest.java",
+      "sha256": "18d51bc473a9dabdce01325e44b96203131755265e3bdb0bd4d2be02803f5af3",
+      "sites": [
+        {
+          "line": 110,
+          "kinds": [
+            "native_or_property_read"
+          ],
+          "text": "if (Boolean.getBoolean(\"m3.interop.requireNative\")) {"
+        }
+      ]
+    },
+    {
+      "path": "src/test/java/com/m3/collections/M3ObjectResidencyTest.java",
+      "sha256": "6ee2da4009928feb40d5854bfedb716c904e0d2b83ed92f9ad311bbb9bdb8240",
+      "sites": [
+        {
+          "line": 177,
+          "kinds": [
+            "classpath_resource"
+          ],
+          "text": "try (var stream = M3ObjectResidencyTest.class.getResourceAsStream("
+        }
+      ]
+    },
+    {
+      "path": "src/test/java/com/m3/collections/M3PlaneGeometryTest.java",
+      "sha256": "b74b4b53c8e49c94a4bb02d1fb032426d479db05a3a035f79bd1b089a1dd2f3a",
+      "sites": [
+        {
+          "line": 23,
+          "kinds": [
+            "reflection_loading"
+          ],
+          "text": "Field field = Class.forName (\"com.m3.collections.M3PlaneGeometry\").getDeclaredField (name);"
+        },
+        {
+          "line": 33,
+          "kinds": [
+            "reflection_loading"
+          ],
+          "text": "Method method = Class.forName (\"com.m3.collections.M3PlaneGeometry\").getDeclaredMethod (name, types);"
+        }
+      ]
+    },
+    {
+      "path": "src/test/java/com/m3/collections/M3SparseExtentsTest.java",
+      "sha256": "0cbda4e20d66281fcbff7c8d6dee10bd1cca2919cb8d8ee8e389905594321bd9",
+      "sites": [
+        {
+          "line": 34,
+          "kinds": [
+            "reflection_loading"
+          ],
+          "text": "Constructor<?> c = Class.forName(\"com.m3.collections.M3SparseExtents\").getDeclaredConstructor(int.class);"
+        }
+      ]
+    },
+    {
+      "path": "src/test/java/com/m3/collections/M3TreeOrderStatisticTest.java",
+      "sha256": "60004a4d37f76468944d0e555c284df500d8c967510cb8386acfa35aad983b2c",
+      "sites": [
+        {
+          "line": 94,
+          "kinds": [
+            "reflection_loading"
+          ],
+          "text": "return Class.forName (\"\" + name);"
+        }
+      ]
+    },
+    {
+      "path": "src/test/java/com/m3/collections/M3TreeReflection.java",
+      "sha256": "babb04fe9dcd43178fd956a81fe8661b3a107a08d14b61ab08edd38366dc9edb",
+      "sites": [
+        {
+          "line": 29,
+          "kinds": [
+            "reflection_loading"
+          ],
+          "text": "return Class.forName (\"\" + simpleName);"
+        }
+      ]
+    },
+    {
+      "path": "src/test/java/com/m3/collections/M3TreeTopologyTest.java",
+      "sha256": "e7bf2ff77c8d007b269aac984d7d7aa9ae8bffc9c90636f5c5a7c0d7a5ee51e1",
+      "sites": [
+        {
+          "line": 33,
+          "kinds": [
+            "reflection_loading"
+          ],
+          "text": "Constructor<?> constructor = Class.forName (\"com.m3.collections.M3TreeTopology\").getDeclaredConstructor ();"
+        },
+        {
+          "line": 37,
+          "kinds": [
+            "reflection_loading"
+          ],
+          "text": "Field field = Class.forName (\"com.m3.collections.M3ItemState\").getDeclaredField (name);"
+        }
+      ]
+    },
+    {
+      "path": "src/test/java/com/m3/collections/M3TreeWindowPlanTest.java",
+      "sha256": "d25b3bb9f4958372f1a4ef79c0841fccdbcba02a7e6657ed2b4521d0f5eb3b2a",
+      "sites": [
+        {
+          "line": 36,
+          "kinds": [
+            "reflection_loading"
+          ],
+          "text": "Constructor<?> c = Class.forName (\"com.m3.collections.M3TreeWindowPlan\").getDeclaredConstructor ();"
+        }
+      ]
+    },
+    {
+      "path": "src/test/java/com/m3/collections/M3TreeWindowScenarioTest.java",
+      "sha256": "25fc768245d8ae89c3e7d2b55e6f65df4e3b9f603a577aaedad30cd08c196ca8",
+      "sites": [
+        {
+          "line": 36,
+          "kinds": [
+            "reflection_loading"
+          ],
+          "text": "Class<?> type = Class.forName (\"\" + name);"
+        },
+        {
+          "line": 44,
+          "kinds": [
+            "reflection_loading"
+          ],
+          "text": "Field field = Class.forName (\"com.m3.collections.M3ItemState\").getDeclaredField (\"EXPANDED\");"
+        },
+        {
+          "line": 188,
+          "kinds": [
+            "reflection_loading"
+          ],
+          "text": "Class<?> type = Class.forName (\"com.m3.collections.M3TreeWindow\");"
+        },
+        {
+          "line": 273,
+          "kinds": [
+            "reflection_loading"
+          ],
+          "text": "Class<?> type = Class.forName (\"com.m3.collections.M3TreeWindow\");"
+        }
+      ]
+    },
+    {
+      "path": "src/test/java/com/m3/collections/M3WindowPlanTest.java",
+      "sha256": "029775d842de830545b0851324782b86091f5f9d05282d0e4ffc6a277dc0abc9",
+      "sites": [
+        {
+          "line": 32,
+          "kinds": [
+            "reflection_loading"
+          ],
+          "text": "Constructor<?> c = Class.forName (\"com.m3.collections.M3WindowPlan\").getDeclaredConstructor ();"
+        }
+      ]
+    },
+    {
+      "path": "src/test/java/com/m3/collections/M3WindowRuntimeRowWindowTest.java",
+      "sha256": "fd4dee3471560be714f0507f909d03f2a4b6912508a0b57c8b8619bfe8b06947",
+      "sites": [
+        {
+          "line": 215,
+          "kinds": [
+            "reflection_loading"
+          ],
+          "text": "Constructor<?> constructor = Class.forName(\"com.m3.collections.M3WindowPlanner\")"
+        }
+      ]
+    }
+  ],
+  "reviewed_interpretations": {
+    "process_compiler_file_write_temp_network_property_mutation": "No matched occurrence in current Java/C/header sources; lexical absence is not a whole-OS effect oracle.",
+    "native_main_loaders": "Nine exact names; all catch UnsatisfiedLinkError, rank and signal additionally require explicit opt-in properties. No native path is overridden. A new stock-JDK properties preflight must bind actual search directories and prove named candidates absent before Maven.",
+    "standalone_loads": "M3BitLaneJumpProof and M3MaskViewportKernelContract contain System.load guarded by explicit main argument or m3.native.path. No reference to either class occurs outside its own file in the current Java source set; neither is default Surefire-named or annotated as a JUnit test.",
+    "native_test_assumptions": "M3FilteredSplitsMaskSpansTest guards checked-JNI/all-native cases with m3.mask.spans.native.required and m3.collections.all.native.required. m3bitlane load follows the latter. Actual skips and reasons remain pending JNI coverage.",
+    "other_native_branches": "Rank/signal opt-ins, m3.address.required, m3.interop.requireNative, all-native branches retain source-authored defaults. Some native backends select Java when unavailable; no all-native coverage is claimed.",
+    "residency": "M3ObjectResidency SpillStore is an injected interface; the current test uses an in-memory HashMap store or deliberate IOException, not disk I/O. HeapSnapshot and RuntimePressureTest observe running JVM heap metrics.",
+    "serialization": "java.io imports in collection implementations and GenericArrayListSelfTest are object/byte-array serialization, not filesystem output constructors.",
+    "resource_reads": "M3CollectionSdkNames reads /com/m3/collections/M3_SDK_FAMILY_CATALOG.tsv from classpath; ObjectResidencyTest reads its generated annotation class as a resource. Current POM root-resource list replaces default src/main/resources, so missing catalogue may cause a legitimate unchanged-suite failure; no repair/exclusion is authorized by this plan.",
+    "reflection": "Class.forName sites refer to current collection classes or a fixed JDK type list; no source URLClassLoader or ServiceLoader match. Reflection is retained, not rewritten or excluded."
+  },
+  "limit": "Lexical occurrence inventory only, not reachability/effect proof. Root must inspect actual process/compiler/temp/write/network sites and bind required concrete executables/routes. No test is excluded or silently bypassed."
+}
