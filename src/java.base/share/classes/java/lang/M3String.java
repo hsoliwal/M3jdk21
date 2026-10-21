@@ -595,10 +595,14 @@ final class M3String implements CharSequence {
 
         char at(int index) {
             Objects.checkIndex(index, source.length());
+            prepare(index);
+            return scalar.charAt(scalarOffset + index - logicalBegin);
+        }
+
+        private void prepare(int index) {
             if (scalar == null || index < logicalBegin || index >= logicalEnd) {
                 seek(index);
             }
-            return scalar.charAt(scalarOffset + index - logicalBegin);
         }
 
         private void seek(int index) {
@@ -770,10 +774,64 @@ final class M3String implements CharSequence {
         } else if (other.length() != length()) {
             return false;
         }
-        for (int index = 0; index < length(); index++) {
-            if (charAt(index) != other.charAt(index)) return false;
+        return that != null
+                ? comparePrefix(that, length()) == 0
+                : compareFlatPrefix(other, length()) == 0;
+    }
+
+    /**
+     * Compare a logical prefix using existing scalar runs. Owner identity proves equality only for
+     * the same offset and run length; different owners or tuple segmentation still compare text.
+     */
+    int comparePrefix(M3String other, int count) {
+        Objects.requireNonNull(other, "other");
+        Objects.checkFromIndexSize(0, count, length());
+        Objects.checkFromIndexSize(0, count, other.length());
+        if (count == 0 || sameCoordinate(other)) return 0;
+        if (!(owner instanceof M3StringTuple) && !(other.owner instanceof M3StringTuple)) {
+            return compareScalarRange(owner, start(), other.owner, other.start(), count);
         }
-        return true;
+        CodeUnitCursor left = new CodeUnitCursor(this);
+        CodeUnitCursor right = new CodeUnitCursor(other);
+        for (int index = 0; index < count; ) {
+            left.prepare(index);
+            right.prepare(index);
+            int runEnd = Math.min(count, Math.min(left.logicalEnd, right.logicalEnd));
+            int difference = compareScalarRange(
+                    left.scalar, left.scalarOffset + index - left.logicalBegin,
+                    right.scalar, right.scalarOffset + index - right.logicalBegin,
+                    runEnd - index);
+            if (difference != 0) return difference;
+            index = runEnd;
+        }
+        return 0;
+    }
+
+    private static int compareScalarRange(
+            M3StringOwner left, int leftStart, M3StringOwner right, int rightStart, int count) {
+        if (left == right && leftStart == rightStart) return 0;
+        if (left instanceof M3StringAtom leftAtom && right instanceof M3StringAtom rightAtom) {
+            return leftAtom.compareRange(leftStart, rightAtom, rightStart, count);
+        }
+        for (int index = 0; index < count; index++) {
+            int difference = left.charAt(leftStart + index) - right.charAt(rightStart + index);
+            if (difference != 0) return difference;
+        }
+        return 0;
+    }
+
+    /** Mixed flat/M3 comparison never admits, flattens, or prepares facts for either side. */
+    int compareFlatPrefix(String other, int count) {
+        Objects.requireNonNull(other, "other");
+        Objects.checkFromIndexSize(0, count, length());
+        Objects.checkFromIndexSize(0, count, other.length());
+        CodeUnitCursor units = owner instanceof M3StringTuple ? new CodeUnitCursor(this) : null;
+        for (int index = 0; index < count; index++) {
+            char unit = units != null ? units.at(index) : owner.charAt(start() + index);
+            int difference = unit - other.charAt(index);
+            if (difference != 0) return difference;
+        }
+        return 0;
     }
 
     void getChars(int sourceBegin, int sourceEnd, char[] destination, int destinationBegin) {

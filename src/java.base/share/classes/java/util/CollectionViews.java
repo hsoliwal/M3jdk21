@@ -49,7 +49,14 @@ public final class CollectionViews {
     private CollectionViews() {
     }
 
-    /** Returns a live view, preserving runtime set/sorted/navigable capabilities. */
+    /**
+     * Returns a live view, preserving runtime set/sorted/navigable capabilities.
+     *
+     * @param <E> the type of elements in the backing collection
+     * @param backing the collection to filter
+     * @param predicate the predicate that determines which elements are visible
+     * @return a live view of the backing elements accepted by the predicate
+     */
     @SuppressWarnings("unchecked")
     public static <E> Collection<E> filtered(
             Collection<E> backing, Predicate<? super E> predicate) {
@@ -59,7 +66,14 @@ public final class CollectionViews {
         return new FilteredCollection<>(backing, predicate);
     }
 
-    /** Retains runtime sorted capability and set equality in the live view. */
+    /**
+     * Retains runtime sorted capability and set equality in the live view.
+     *
+     * @param <E> the type of elements in the backing set
+     * @param backing the set to filter
+     * @param predicate the predicate that determines which elements are visible
+     * @return a live set view of the backing elements accepted by the predicate
+     */
     @SuppressWarnings("unchecked")
     public static <E> Set<E> filtered(Set<E> backing, Predicate<? super E> predicate) {
         if (backing instanceof NavigableSet<?>) return filtered((NavigableSet<E>) backing, predicate);
@@ -67,7 +81,14 @@ public final class CollectionViews {
         return new FilteredSet<>(backing, predicate);
     }
 
-    /** Retains the comparator, range views and runtime navigable capability. */
+    /**
+     * Retains the comparator, range views and runtime navigable capability.
+     *
+     * @param <E> the type of elements in the backing sorted set
+     * @param backing the sorted set to filter
+     * @param predicate the predicate that determines which elements are visible
+     * @return a live sorted-set view of the elements accepted by the predicate
+     */
     @SuppressWarnings("unchecked")
     public static <E> SortedSet<E> filtered(
             SortedSet<E> backing, Predicate<? super E> predicate) {
@@ -75,7 +96,14 @@ public final class CollectionViews {
         return new FilteredSortedSet<>(backing, predicate);
     }
 
-    /** Retains navigable operations, descending order and range-view contracts. */
+    /**
+     * Retains navigable operations, descending order and range-view contracts.
+     *
+     * @param <E> the type of elements in the backing navigable set
+     * @param backing the navigable set to filter
+     * @param predicate the predicate that determines which elements are visible
+     * @return a live navigable-set view of the elements accepted by the predicate
+     */
     public static <E> NavigableSet<E> filtered(
             NavigableSet<E> backing, Predicate<? super E> predicate) {
         return new FilteredNavigableSet<>(backing, predicate);
@@ -85,6 +113,12 @@ public final class CollectionViews {
      * Returns an independent, stable, read-only list sorted by the comparator.
      * Equal-comparator elements are not deduplicated. Unlike a backed filter,
      * this operation copies references and does not reflect later source changes.
+     *
+     * @param <E> the type of elements in the snapshot
+     * @param source the collection whose elements are copied
+     * @param comparator the comparator used to order the elements, or
+     *        {@code null} to use their natural ordering
+     * @return an unmodifiable list snapshot in the specified order
      */
     public static <E> List<E> sortedSnapshot(
             Collection<? extends E> source, Comparator<? super E> comparator) {
@@ -101,6 +135,11 @@ public final class CollectionViews {
      * additions/removals are reflected. Nulls and duplicate references survive.
      * This never calls source.size(), performs no filter size prepass, and does
      * not change Collection.toArray or any existing JDK/Synexia contract.
+     *
+     * @param <E> the type of elements in the snapshot
+     * @param source the collection whose elements are filtered and copied
+     * @param predicate the predicate that selects elements for the snapshot
+     * @return an unmodifiable list of selected elements in encounter order
      */
     public static <E> List<E> filteredSnapshot(
             Collection<? extends E> source, Predicate<? super E> predicate) {
@@ -112,6 +151,14 @@ public final class CollectionViews {
      * owner. Comparator-equivalent elements remain distinct and preserve their
      * original encounter order. A null comparator means natural ordering, as
      * specified by List.sort; mutable element objects are not deep-copied.
+     *
+     * @param <E> the type of elements in the snapshot
+     * @param source the collection whose elements are filtered and copied
+     * @param predicate the predicate that selects elements for the snapshot
+     * @param comparator the comparator used to order the selected elements, or
+     *        {@code null} to use their natural ordering
+     * @return an unmodifiable list snapshot of selected elements in the
+     *         specified order
      */
     public static <E> List<E> filteredSortedSnapshot(
             Collection<? extends E> source, Predicate<? super E> predicate,

@@ -4,7 +4,7 @@ SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Proj
 SPDX-License-Identifier: Apache-2.0
 -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.synexia.verification</groupId>
   <artifactId>m3-program-escape-precompute-recipe-proof</artifactId>
@@ -18,24 +18,59 @@ SPDX-License-Identifier: Apache-2.0
     <rewrite.version>8.17.1</rewrite.version>
   </properties>
   <dependencies>
-    <dependency><groupId>org.openrewrite</groupId><artifactId>rewrite-java</artifactId><version>${rewrite.version}</version></dependency>
-    <dependency><groupId>org.openrewrite</groupId><artifactId>rewrite-java-21</artifactId><version>${rewrite.version}</version><scope>runtime</scope></dependency>
-    <dependency><groupId>org.junit.jupiter</groupId><artifactId>junit-jupiter</artifactId><version>5.10.2</version><scope>test</scope></dependency>
-    <dependency><groupId>org.slf4j</groupId><artifactId>slf4j-simple</artifactId><version>2.0.13</version><scope>test</scope></dependency>
+    <dependency>
+      <groupId>org.openrewrite</groupId>
+      <artifactId>rewrite-java</artifactId>
+      <version>${rewrite.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.openrewrite</groupId>
+      <artifactId>rewrite-java-21</artifactId>
+      <version>${rewrite.version}</version>
+      <scope>runtime</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter</artifactId>
+      <version>5.10.2</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-simple</artifactId>
+      <version>2.0.13</version>
+      <scope>test</scope>
+    </dependency>
   </dependencies>
   <build>
     <sourceDirectory>${recipe.owner.root}/src/main/java</sourceDirectory>
     <plugins>
-      <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-resources-plugin</artifactId><version>3.3.1</version></plugin>
-      <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-compiler-plugin</artifactId><version>3.13.0</version>
-        <configuration><includes>
-          <include>com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java</include>
-          <include>com/synexia/rewrite/M3HashPinnedTextSnapshotRecipe.java</include>
-          <include>com/synexia/rewrite/M3ScopeInference.java</include>
-          <include>com/synexia/rewrite/M3EditScope.java</include>
-        </includes><compilerArgs><arg>-Xlint:all</arg><arg>-Werror</arg></compilerArgs></configuration>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-resources-plugin</artifactId>
+        <version>3.3.1</version>
       </plugin>
-      <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-surefire-plugin</artifactId><version>3.2.5</version>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.13.0</version>
+        <configuration>
+          <includes>
+            <include>com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java</include>
+            <include>com/synexia/rewrite/M3HashPinnedTextSnapshotRecipe.java</include>
+            <include>com/synexia/rewrite/M3ScopeInference.java</include>
+            <include>com/synexia/rewrite/M3EditScope.java</include>
+          </includes>
+          <compilerArgs>
+            <arg>-Xlint:all</arg>
+            <arg>-Werror</arg>
+          </compilerArgs>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>3.2.5</version>
         <configuration>
           <failIfNoTests>true</failIfNoTests>
           <argLine>-Xmx768m</argLine>
@@ -53,57 +88,115 @@ SPDX-License-Identifier: Apache-2.0
   <profiles>
     <profile>
       <id>port-tests</id>
-      <build><plugins><plugin>
-        <groupId>org.apache.maven.plugins</groupId><artifactId>maven-surefire-plugin</artifactId><version>3.2.5</version>
-        <configuration>
-          <testClassesDirectory>${m3.port.classes}</testClassesDirectory>
-          <reportsDirectory>${m3.port.reports}</reportsDirectory>
-          <additionalClasspathElements>
-            <additionalClasspathElement>${m3.port.dependencies}</additionalClasspathElement>
-          </additionalClasspathElements>
-          <argLine>-Xmx512m --add-opens java.base/java.util.regex=ALL-UNNAMED</argLine>
-          <includes><include>com/m3/compiletime/*Test.class</include></includes>
-        </configuration>
-      </plugin></plugins></build>
-    </profile>
-<profile>
-  <id>contract</id>
-  <properties>
-    <m3.contract.python>python3</m3.contract.python>
-    <m3.contract.output>${project.build.directory}/contract-proof</m3.contract.output>
-  </properties>
-  <build>
-    <plugins>
-      <plugin>
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>exec-maven-plugin</artifactId>
-        <version>3.5.0</version>
-        <executions>
-          <execution>
-            <id>verify-program-escape-sdk-contract</id>
-            <phase>verify</phase>
-            <goals><goal>exec</goal></goals>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-surefire-plugin</artifactId>
+            <version>3.2.5</version>
             <configuration>
-              <executable>${m3.contract.python}</executable>
-              <arguments>
-                <argument>${project.basedir}/contract/verify_sdk_results.py</argument>
-                <argument>--target</argument>
-                <argument>${m3.contract.target}</argument>
-                <argument>--crate</argument>
-                <argument>${project.basedir}</argument>
-                <argument>--output</argument>
-                <argument>${m3.contract.output}</argument>
-              </arguments>
-              <environmentVariables>
-                <PYTHONDONTWRITEBYTECODE>1</PYTHONDONTWRITEBYTECODE>
-              </environmentVariables>
-              <timeout>1200000</timeout>
+              <testClassesDirectory>${m3.port.classes}</testClassesDirectory>
+              <reportsDirectory>${m3.port.reports}</reportsDirectory>
+              <additionalClasspathElements>
+                <additionalClasspathElement>${m3.port.dependencies}</additionalClasspathElement>
+              </additionalClasspathElements>
+              <argLine>-Xmx512m --add-opens java.base/java.util.regex=ALL-UNNAMED</argLine>
+              <includes>
+                <include>com/m3/compiletime/*Test.class</include>
+              </includes>
             </configuration>
-          </execution>
-        </executions>
-      </plugin>
-    </plugins>
-  </build>
-</profile>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+    <profile>
+      <id>contract</id>
+      <properties>
+        <m3.contract.python>python3</m3.contract.python>
+        <m3.contract.output>${project.build.directory}/contract-proof</m3.contract.output>
+      </properties>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>exec-maven-plugin</artifactId>
+            <version>3.5.0</version>
+            <executions>
+              <execution>
+                <id>verify-program-escape-sdk-contract</id>
+                <phase>verify</phase>
+                <goals>
+                  <goal>exec</goal>
+                </goals>
+                <configuration>
+                  <executable>${m3.contract.python}</executable>
+                  <arguments>
+                    <argument>${project.basedir}/contract/verify_sdk_results.py</argument>
+                    <argument>--target</argument>
+                    <argument>${m3.contract.target}</argument>
+                    <argument>--crate</argument>
+                    <argument>${project.basedir}</argument>
+                    <argument>--output</argument>
+                    <argument>${m3.contract.output}</argument>
+                  </arguments>
+                  <environmentVariables>
+                    <PYTHONDONTWRITEBYTECODE>1</PYTHONDONTWRITEBYTECODE>
+                  </environmentVariables>
+                  <timeout>1200000</timeout>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+    <profile>
+      <id>m3-recipe-boot</id>
+      <activation>
+        <file>
+          <exists>${maven.multiModuleProjectDirectory}/.m3/recipe-boot.properties</exists>
+        </file>
+      </activation>
+      <properties>
+        <m3.recipe.boot.skip>false</m3.recipe.boot.skip>
+      </properties>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>exec-maven-plugin</artifactId>
+            <version>3.5.0</version>
+            <inherited>true</inherited>
+            <dependencies>
+              <dependency>
+                <groupId>com.synexia.m3</groupId>
+                <artifactId>m3-pr-stack-preservation</artifactId>
+                <version>1.0.0-m3boot20261021</version>
+              </dependency>
+            </dependencies>
+            <executions>
+              <execution>
+                <id>m3-recipe-boot</id>
+                <phase>validate</phase>
+                <goals>
+                  <goal>java</goal>
+                </goals>
+                <configuration>
+                  <skip>${m3.recipe.boot.skip}</skip>
+                  <mainClass>com.synexia.m3.prstack.M3RecipeBoot</mainClass>
+                  <includeProjectDependencies>false</includeProjectDependencies>
+                  <includePluginDependencies>true</includePluginDependencies>
+                  <arguments>
+                    <argument>${maven.multiModuleProjectDirectory}/.m3/recipe-boot.properties</argument>
+                    <argument>${project.basedir}</argument>
+                    <argument>${session.projects[0].basedir.absolutePath}</argument>
+                  </arguments>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
   </profiles>
 </project>

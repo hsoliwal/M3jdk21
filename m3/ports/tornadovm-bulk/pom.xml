@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- SPDX-License-Identifier: Apache-2.0 -->
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.m3</groupId>
   <artifactId>m3-tornadovm-bulk-adapter</artifactId>
@@ -33,7 +33,10 @@
       <resource>
         <directory>${project.basedir}</directory>
         <targetPath>META-INF</targetPath>
-        <includes><include>LICENSE</include><include>NOTICE</include></includes>
+        <includes>
+          <include>LICENSE</include>
+          <include>NOTICE</include>
+        </includes>
       </resource>
       <resource>
         <directory>${project.basedir}/source-custody</directory>
@@ -63,18 +66,20 @@
                   </fileset>
                 </copy>
                 <javac
-                    srcdir="${project.build.directory}/bulk-patch-src"
-                    destdir="${project.build.directory}/bulk-patch-classes"
-                    source="21"
-                    target="21"
-                    includeantruntime="false"
-                    encoding="UTF-8">
+                                                                                                                                                                                    srcdir="${project.build.directory}/bulk-patch-src"
+                                                                                                                                                                                    destdir="${project.build.directory}/bulk-patch-classes"
+                                                                                                                                                                                    source="21"
+                                                                                                                                                                                    target="21"
+                                                                                                                                                                                    includeantruntime="false"
+                                                                                                                                                                                    encoding="UTF-8">
                   <compilerarg line="--patch-module java.base=${project.build.directory}/bulk-patch-src"/>
                   <compilerarg line="-Xlint:all -Werror"/>
                 </javac>
               </target>
             </configuration>
-            <goals><goal>run</goal></goals>
+            <goals>
+              <goal>run</goal>
+            </goals>
           </execution>
         </executions>
       </plugin>
@@ -131,11 +136,15 @@
               <execution>
                 <id>m3-synexia-atom-pattern-verify</id>
                 <phase>verify</phase>
-                <goals><goal>dryRun</goal></goals>
+                <goals>
+                  <goal>dryRun</goal>
+                </goals>
               </execution>
             </executions>
             <configuration>
-              <activeRecipes><recipe>com.synexia.m3.EveryModuleAtomPatternApplication</recipe></activeRecipes>
+              <activeRecipes>
+                <recipe>com.synexia.m3.EveryModuleAtomPatternApplication</recipe>
+              </activeRecipes>
               <exportDatatables>true</exportDatatables>
               <runPerSubmodule>false</runPerSubmodule>
               <failOnInvalidActiveRecipes>true</failOnInvalidActiveRecipes>
@@ -215,11 +224,15 @@
               <execution>
                 <id>m3-synexia-atom-pattern-mastery-verify</id>
                 <phase>verify</phase>
-                <goals><goal>dryRun</goal></goals>
+                <goals>
+                  <goal>dryRun</goal>
+                </goals>
               </execution>
             </executions>
             <configuration>
-              <activeRecipes><recipe>com.synexia.m3.EveryModuleAtomPatternMastery</recipe></activeRecipes>
+              <activeRecipes>
+                <recipe>com.synexia.m3.EveryModuleAtomPatternMastery</recipe>
+              </activeRecipes>
               <exportDatatables>true</exportDatatables>
               <runPerSubmodule>false</runPerSubmodule>
               <failOnInvalidActiveRecipes>true</failOnInvalidActiveRecipes>
@@ -276,6 +289,54 @@
                 <exclusion>**/vendor/**</exclusion>
               </exclusions>
             </configuration>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+    <profile>
+      <id>m3-recipe-boot</id>
+      <activation>
+        <file>
+          <exists>${maven.multiModuleProjectDirectory}/.m3/recipe-boot.properties</exists>
+        </file>
+      </activation>
+      <properties>
+        <m3.recipe.boot.skip>false</m3.recipe.boot.skip>
+      </properties>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>exec-maven-plugin</artifactId>
+            <version>3.5.0</version>
+            <inherited>true</inherited>
+            <dependencies>
+              <dependency>
+                <groupId>com.synexia.m3</groupId>
+                <artifactId>m3-pr-stack-preservation</artifactId>
+                <version>1.0.0-m3boot20261021</version>
+              </dependency>
+            </dependencies>
+            <executions>
+              <execution>
+                <id>m3-recipe-boot</id>
+                <phase>validate</phase>
+                <goals>
+                  <goal>java</goal>
+                </goals>
+                <configuration>
+                  <skip>${m3.recipe.boot.skip}</skip>
+                  <mainClass>com.synexia.m3.prstack.M3RecipeBoot</mainClass>
+                  <includeProjectDependencies>false</includeProjectDependencies>
+                  <includePluginDependencies>true</includePluginDependencies>
+                  <arguments>
+                    <argument>${maven.multiModuleProjectDirectory}/.m3/recipe-boot.properties</argument>
+                    <argument>${project.basedir}</argument>
+                    <argument>${session.projects[0].basedir.absolutePath}</argument>
+                  </arguments>
+                </configuration>
+              </execution>
+            </executions>
           </plugin>
         </plugins>
       </build>

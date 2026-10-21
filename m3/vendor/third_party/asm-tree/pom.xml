@@ -1,36 +1,158 @@
 <!-- SPDX-License-Identifier: Apache-2.0; build integration only, upstream source remains BSD-3-Clause. -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>org.ow2.asm</groupId><artifactId>asm-tree</artifactId><version>9.6-m3-source-1</version>
+  <groupId>org.ow2.asm</groupId>
+  <artifactId>asm-tree</artifactId>
+  <version>9.6-m3-source-1</version>
   <name>asm-tree 9.6 - unchanged upstream source build for M3jdk21</name>
   <description>Source inclusion of the published org.ow2.asm:asm-tree:9.6 sources jar (SHA-1 0ea2ff719db7976655f5c95469a98eac7671a119); no upstream implementation changes. See PROVENANCE.json.</description>
   <url>http://asm.ow2.io/</url>
-  <licenses><license><name>BSD-3-Clause</name><url>https://repo.maven.apache.org/maven2/org/ow2/asm/asm-tree/9.6/asm-tree-9.6.pom</url><distribution>repo</distribution></license></licenses>
-  <properties><project.build.sourceEncoding>UTF-8</project.build.sourceEncoding></properties>
+  <licenses>
+    <license>
+      <name>BSD-3-Clause</name>
+      <url>https://repo.maven.apache.org/maven2/org/ow2/asm/asm-tree/9.6/asm-tree-9.6.pom</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
   <dependencies>
-    <dependency><groupId>org.ow2.asm</groupId><artifactId>asm</artifactId><version>9.6-m3-source-1</version><!-- source module --></dependency>
+    <dependency>
+      <groupId>org.ow2.asm</groupId>
+      <artifactId>asm</artifactId>
+      <version>9.6-m3-source-1</version>
+      <!-- source module -->
+    </dependency>
   </dependencies>
   <build>
     <resources>
-      <resource><directory>src/main/resources</directory></resource>
-      <resource><directory>${project.basedir}</directory><targetPath>META-INF/third-party/asm-tree</targetPath><includes><include>LICENSE</include><include>PROVENANCE.json</include><include>THIRD_PARTY_NOTICES.md</include></includes></resource>
+      <resource>
+        <directory>src/main/resources</directory>
+      </resource>
+      <resource>
+        <directory>${project.basedir}</directory>
+        <targetPath>META-INF/third-party/asm-tree</targetPath>
+        <includes>
+          <include>LICENSE</include>
+          <include>PROVENANCE.json</include>
+          <include>THIRD_PARTY_NOTICES.md</include>
+        </includes>
+      </resource>
     </resources>
     <plugins>
-      <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-compiler-plugin</artifactId><version>3.15.0</version>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.15.0</version>
         <!-- Upstream bytes are compiled as published: no annotation processing, no warnings-as-errors. M3jdk21 integration is checked separately with -Werror. -->
-        <configuration><release>8</release><encoding>UTF-8</encoding><proc>none</proc><compilerArgs><arg>-Xlint:all,-options</arg></compilerArgs></configuration>
+        <configuration>
+          <release>8</release>
+          <encoding>UTF-8</encoding>
+          <proc>none</proc>
+          <compilerArgs>
+            <arg>-Xlint:all,-options</arg>
+          </compilerArgs>
+        </configuration>
       </plugin>
-      <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-surefire-plugin</artifactId><version>3.5.6</version>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>3.5.6</version>
         <!-- Published sources jars carry no test suite; the compile and the consumers' own tests are the proof lane. -->
-        <configuration><skipTests>true</skipTests></configuration>
+        <configuration>
+          <skipTests>true</skipTests>
+        </configuration>
       </plugin>
-      <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-jar-plugin</artifactId><version>3.5.0</version>
-        <configuration><excludes><exclude>META-INF/jpms.args</exclude></excludes><archive><manifestEntries><M3jdk21-Source-Inline>no upstream Automatic-Module-Name</M3jdk21-Source-Inline></manifestEntries></archive></configuration>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+        <version>3.5.0</version>
+        <configuration>
+          <excludes>
+            <exclude>META-INF/jpms.args</exclude>
+          </excludes>
+          <archive>
+            <manifestEntries>
+              <M3jdk21-Source-Inline>no upstream Automatic-Module-Name</M3jdk21-Source-Inline>
+            </manifestEntries>
+          </archive>
+        </configuration>
       </plugin>
-      <plugin><groupId>org.moditect</groupId><artifactId>moditect-maven-plugin</artifactId><version>1.2.2.Final</version>
+      <plugin>
+        <groupId>org.moditect</groupId>
+        <artifactId>moditect-maven-plugin</artifactId>
+        <version>1.2.2.Final</version>
         <!-- descriptors upstream generates in its build, assembled from the declaration in src/main/descriptor -->
-        <executions><execution><id>add-module-info-root</id><phase>package</phase><goals><goal>add-module-info</goal></goals><configuration><jvmVersion>base</jvmVersion><overwriteExistingFiles>true</overwriteExistingFiles><failOnWarning>false</failOnWarning><version>9.6</version><module><moduleInfoFile>${project.basedir}/src/main/descriptor/root/module-info.java</moduleInfoFile></module></configuration></execution></executions>
+        <executions>
+          <execution>
+            <id>add-module-info-root</id>
+            <phase>package</phase>
+            <goals>
+              <goal>add-module-info</goal>
+            </goals>
+            <configuration>
+              <jvmVersion>base</jvmVersion>
+              <overwriteExistingFiles>true</overwriteExistingFiles>
+              <failOnWarning>false</failOnWarning>
+              <version>9.6</version>
+              <module>
+                <moduleInfoFile>${project.basedir}/src/main/descriptor/root/module-info.java</moduleInfoFile>
+              </module>
+            </configuration>
+          </execution>
+        </executions>
       </plugin>
     </plugins>
   </build>
+  <profiles>
+    <profile>
+      <id>m3-recipe-boot</id>
+      <activation>
+        <file>
+          <exists>${maven.multiModuleProjectDirectory}/.m3/recipe-boot.properties</exists>
+        </file>
+      </activation>
+      <properties>
+        <m3.recipe.boot.skip>false</m3.recipe.boot.skip>
+      </properties>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>exec-maven-plugin</artifactId>
+            <version>3.5.0</version>
+            <inherited>true</inherited>
+            <dependencies>
+              <dependency>
+                <groupId>com.synexia.m3</groupId>
+                <artifactId>m3-pr-stack-preservation</artifactId>
+                <version>1.0.0-m3boot20261021</version>
+              </dependency>
+            </dependencies>
+            <executions>
+              <execution>
+                <id>m3-recipe-boot</id>
+                <phase>validate</phase>
+                <goals>
+                  <goal>java</goal>
+                </goals>
+                <configuration>
+                  <skip>${m3.recipe.boot.skip}</skip>
+                  <mainClass>com.synexia.m3.prstack.M3RecipeBoot</mainClass>
+                  <includeProjectDependencies>false</includeProjectDependencies>
+                  <includePluginDependencies>true</includePluginDependencies>
+                  <arguments>
+                    <argument>${maven.multiModuleProjectDirectory}/.m3/recipe-boot.properties</argument>
+                    <argument>${project.basedir}</argument>
+                    <argument>${session.projects[0].basedir.absolutePath}</argument>
+                  </arguments>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
 </project>
