@@ -20,7 +20,7 @@ MAP = "m3/docs/name-mapping.json"
 PLAN = "m3/tooling/name-contract/name-plan.json"
 FQN = re.compile(r"^[A-Za-z_$][\w$]*(?:\.[A-Za-z_$][\w$]*)+$")
 JAVA_DECL = re.compile(r"\b(?:class|interface|enum|record|@interface)\s+([\w$]+)\b")
-FIELDS = ("mapping_id", "record_state", "module", "source_path", "declared_symbol", "path_refs", "result")
+FIELDS = ("mapping_id", "record_state", "module", "target_path", "declared_symbol", "path_refs", "result")
 
 
 def safe_path(root: Path, path: str) -> Path:
@@ -81,9 +81,19 @@ def snapshot(root: Path) -> list[dict[str, str]]:
                 else:
                     status = "PRESENT_JTREG_SIMPLE_NAME" if JAVA_DECL.search(text) else "REVIEW_DECLARATION"
         elif path.endswith((".c", ".h", ".cpp", ".cc")):
-            status = "NATIVE_PRESENT_UNVERIFIED" if file.is_file() else "NATIVE_MISSING"
+            if file.is_file():
+                status = "NATIVE_PRESENT_UNVERIFIED"
+            elif state in ("pending", "blocked"):
+                status = "PENDING_NATIVE_MISSING"
+            else:
+                status = "REVIEW_NATIVE_MISSING"
         else:
-            status = "OTHER_PRESENT_UNVERIFIED" if file.is_file() else "OTHER_MISSING"
+            if file.is_file():
+                status = "OTHER_PRESENT_UNVERIFIED"
+            elif state in ("pending", "blocked"):
+                status = "PENDING_OTHER_MISSING"
+            else:
+                status = "REVIEW_OTHER_MISSING"
         rows.append(dict(zip(FIELDS, (ident, state, module, path, symbol, str(counts[path]), status))))
     return rows
 

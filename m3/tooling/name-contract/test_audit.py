@@ -72,6 +72,19 @@ class TargetCensusTest(unittest.TestCase):
         self.save()
         self.assertEqual(AUDIT.snapshot(self.root)[0]["result"], "REVIEW_PATH_SYMBOL")
 
+    def test_absent_implemented_native_target_needs_review(self):
+        (self.root / self.candidates[1]["path"]).unlink()
+        rows = AUDIT.snapshot(self.root)
+        self.assertEqual(rows[1]["result"], "REVIEW_NATIVE_MISSING")
+
+    def test_absent_pending_native_target_is_not_accepted(self):
+        self.records[0]["status"] = "pending"
+        self.save()
+        (self.root / self.candidates[1]["path"]).unlink()
+        rows = AUDIT.snapshot(self.root)
+        self.assertEqual(rows[1]["result"], "PENDING_NATIVE_MISSING")
+        self.assertIn("target_path", AUDIT.as_tsv(rows).splitlines()[0])
+
     def test_map_drift_refused(self):
         write(self.root, AUDIT.MAP, "{}")
         with self.assertRaisesRegex(ValueError, "drift"):

@@ -115,7 +115,10 @@ python3 synexia-openrewrite-recipes/crates/m3jdk21-owner-naming/emit.py \
 module, path, symbol, mapping state, number of mappings sharing the path, and
 a conservative presence/type-declaration disposition. Pending or blocked source
 targets are not treated as failures merely because a file is absent.
-Native C/H paths are not parsed as Java. A file present with the expected
+Native C/H paths are not parsed as Java, but missing native files under
+an implemented mapping are review failures. Missing pending/blocked native
+paths stay explicitly pending. Output uses `target_path` so future
+mapping edits cannot mistake a receiving target for its donor source. A file present with the expected
 package/type name is **not** proof of ABI, behavior, performance or installed
 JDK admission, and this is not a full-source inventory.
 
