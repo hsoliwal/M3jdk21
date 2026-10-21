@@ -226,6 +226,40 @@ public class StringReader extends Reader {
     }
 
     /**
+     * Transfers immutable String ranges directly to the existing M3-aware
+     * encoder only when both endpoints have exact trusted JDK classes.
+     * Subclasses and arbitrary writers retain Reader's original dispatch.
+     *
+     * <p>The source lock is released before invoking the writer, preserving
+     * Reader.transferTo's per-read/per-write lock boundary.
+     */
+    @Override
+    public long transferTo(Writer out) throws IOException {
+        Objects.requireNonNull(out, "out");
+        if (getClass() != StringReader.class
+                || (out.getClass() != OutputStreamWriter.class
+                        && out.getClass() != FileWriter.class)) {
+            return super.transferTo(out);
+        }
+        long transferred = 0L;
+        for (;;) {
+            String source;
+            int start;
+            int count;
+            synchronized (lock) {
+                ensureOpen();
+                if (next >= length) return transferred;
+                start = next;
+                count = Math.min(length - next, 8192);
+                source = str;
+                next += count;
+            }
+            out.write(source, start, count);
+            transferred += count;
+        }
+    }
+
+    /**
      * Closes the stream and releases any system resources associated with
      * it. Once the stream has been closed, further read(),
      * ready(), mark(), or reset() invocations will throw an IOException.
