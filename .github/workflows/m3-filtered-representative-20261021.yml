@@ -1,0 +1,24 @@
+name: M3JDK21 filtered comparator stored representative proof
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - 'm3/collections/src/main/java/com/m3/collections/M3FilteredViews.java'
+      - 'm3/collections/src/test/java/com/m3/collections/M3FilteredComparatorRepresentativeProof.java'
+      - 'm3/collections/qualification/filtered-comparator-representative-20261021/**'
+      - 'm3/collections/algorithm-catalog/filtered-sorted-representative-20261021.tsv'
+      - 'm3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-filtered-representative-20261021/**'
+      - 'm3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-filtered-representative-20261021.yml'
+      - '.github/workflows/m3-filtered-representative-20261021.yml'
+jobs:
+  exact-parent-to-successor:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Reproduce parent failure and qualify current M3JDK21 owner
+        run: bash m3/collections/qualification/filtered-comparator-representative-20261021/verify.sh
