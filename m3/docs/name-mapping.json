@@ -748,6 +748,32 @@
       "source_license": "GPL-2.0-only WITH Classpath-exception-2.0; existing target notices retained",
       "recipe_owner": "synexia-openrewrite-recipes/recipe-crates/m3jdk21-fixed-lexicon-convergence-20261019/datasets/indexed-views-20261019",
       "scope_limit": "Refines one existing owner; public collection APIs and the current STRING qualification phase remain unchanged."
+    },
+    {
+      "recipe_owner": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3-wrap-jni-20261020",
+      "intake_mode": "EXISTING_DIRECT_COPY_REVIEW",
+      "source_license": "Apache-2.0; preserve actual donor copyright and notice; no automatic GPL relicensing",
+      "status": "reviewable source receiver with bounded tests; core licence and full-product promotion remain pending",
+      "scope_limit": "Existing global STRING -> ARRAYS -> COLLECTIONS -> AST_COMPILER -> REMAINING_FAMILIES gate remains unchanged. Derived installed-image evidence uses pinned target String/libjava/classes with the recorded Temurin HotSpot; it is not a full source-built VM or all-platform qualification.",
+      "source": "Existing proposed M3JDK21 CollectionViews owner (PR 1551) and current qualified collection atoms",
+      "source_commit": "49744f953f717b86ca0811cf34dbbdc7c88f54e9",
+      "source_role": "Bootstrap filtered Collection/Set/SortedSet/NavigableSet views and explicit stable snapshots",
+      "target": "java.util.CollectionViews",
+      "target_rule": "Preserve the seven proposed factories, stored occurrence and identity-set membership, runtime capability dispatch, backing liveness and sorted comparator metadata. Retain arrays/physical occurrences; compose predicate metadata without cached results; dispatch COW bulk removal to the actual owner. No com.m3 or Synexia runtime dependency.",
+      "evidence": "m3/collections/algorithm-catalog/wrapper-convergence-20261020"
+    },
+    {
+      "recipe_owner": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3-wrap-jni-20261020",
+      "intake_mode": "EXISTING_DIRECT_COPY_REVIEW",
+      "source_license": "Apache-2.0; preserve actual donor copyright and notice; no automatic GPL relicensing",
+      "status": "reviewable source receiver with bounded tests; core licence and full-product promotion remain pending",
+      "scope_limit": "Existing global STRING -> ARRAYS -> COLLECTIONS -> AST_COMPILER -> REMAINING_FAMILIES gate remains unchanged. Derived installed-image evidence uses pinned target String/libjava/classes with the recorded Temurin HotSpot; it is not a full source-built VM or all-platform qualification.",
+      "source": "Existing proposed M3JDK21 mask-window libjava receiver (PR 1557)",
+      "source_commit": "900a723619fb7021e41b6e2c48a773fd41407224",
+      "source_role": "Bounded primitive index/state-mask JNI scan with the existing two native exports",
+      "target": "jdk.internal.m3.M3IndexMaskWindow; src/java.base/share/native/libjava/M3IndexMaskWindow.c",
+      "target_rule": "Verify both actual JNI symbols, enforce NATIVE_REQUIRED on zero-work requests, preserve unsigned masks, half-open windows, duplicate row IDs, output guards, alias refusal and primitive array lifetimes. Probe existing exports; do not introduce a second payload store or native pointer ownership.",
+      "evidence": "m3/collections/algorithm-catalog/wrapper-convergence-20261020/native-proof"
     }
   ],
   "imported_donor_sources": [],

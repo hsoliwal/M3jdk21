@@ -21,7 +21,8 @@ import java.util.Objects;
  * <p>Unlike M3's live collection wrappers this class is a detached snapshot.
  * Its methods never refresh when a mutable source changes. It does not replace
  * {@code java.util} or claim compatible serialized concrete class identity.
- * Reordering is O(n log n) time and O(n) index scratch; indexed reads O(1).
+ * Unordered sorting is O(n log n) with O(n) index scratch; reversing a known
+ * sorted direction is O(n) with one final index array. Indexed reads are O(1).
  * Native mask selection is opt-in via the existing M3IndexMaskCompactor JNI.</p>
  */
 public final class M3LongIndexProjection {
@@ -141,6 +142,24 @@ public final class M3LongIndexProjection {
             // A slice/filter retains its direction and tie order; do not re-sort an
             // immutable directory already in the requested order or copy its window.
             return new M3LongIndexProjection(values, indices, from, to, requested);
+        }
+        if (order != Order.ENCOUNTER) {
+            // Reverse the ORDER OF EQUAL-VALUE RUNS, not the occurrences in a run.
+            // The immutable window is already sorted in the opposite direction.
+            // One final index array, O(n) work and no merge scratch or payload copy.
+            int[] reversed = new int[size()];
+            int write = 0;
+            for (int end = to; end > from;) {
+                int begin = end - 1;
+                long value = M3LongAddressKernel.loadPhysicalUnchecked(values, indices[begin]);
+                while (begin > from && M3LongAddressKernel.loadPhysicalUnchecked(
+                        values, indices[begin - 1]) == value) begin--;
+                int count = end - begin;
+                System.arraycopy(indices, begin, reversed, write, count);
+                write += count;
+                end = begin;
+            }
+            return new M3LongIndexProjection(values, reversed, 0, reversed.length, requested);
         }
         int[] current = physicalIndices();
         int size = current.length;

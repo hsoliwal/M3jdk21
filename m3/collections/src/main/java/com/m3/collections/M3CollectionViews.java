@@ -395,6 +395,12 @@ public final class M3CollectionViews {
         }
 
         private boolean removeMatching(Predicate<? super E> condition) {
+            if (backing instanceof java.util.concurrent.CopyOnWriteArrayList<?>) {
+                // Snapshot iterators cannot remove. Let the actual owner publish its
+                // survivor array only after every callback has completed successfully.
+                // Other owners retain their existing iterator/partial-write behavior.
+                return backing.removeIf(element -> visible(element) && condition.test(element));
+            }
             boolean changed = false;
             Iterator<E> iterator = backing.iterator();
             while (iterator.hasNext()) {
