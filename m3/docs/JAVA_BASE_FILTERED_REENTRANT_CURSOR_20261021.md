@@ -51,3 +51,27 @@ nested exhaustion, a nested rejected-only suffix and successful nested order.
 The **full patched JDK test, original java.base suite, Maven/OpenRewrite
 test fixture, JNI and toolkit matrix were not executed** in this session.
 Review should retain this PR as a draft until those gates are qualified.
+
+## Continuation: original-owner stored representative atom
+
+The second independent source-file pass receives **four existing first-party
+M3CollectionViews methods** into java.base's original FilteredCollection and
+FilteredSet: stored-representative membership, physical-index removal, and
+identity-sensitive Set contains/remove. The donor is Git blob
+`5719775a20aa06f9873e07fff0d0d6832cfdb662` and the final receiver image is
+`995a35df6926b40c804270622cfc6310e0585b20`. This preserves the
+already-qualified reentrant cursor pass. One contiguous JDK source owner remains
+authoritative; backing ArrayList/Set state is not copied into extra stores.
+
+A new `FilteredRepresentativeContractTest.java` covers hidden/visible equal
+objects, normal and identity Sets, `CopyOnWriteArrayList`,
+`CopyOnWriteArraySet`, comparator-backed TreeSet and 20,000 seeded array/list
+mutations. The **isolated** Java 21 donor atom harness completed **341,997**
+checks under `javac --release 21 -Xlint:all -Werror`.
+This is not a completed patched whole-JDK test result.
+
+The canonical Synexia recipe remains
+`hsoliwal/com.synexia/pull/12865`, now containing individually source-sealed
+pass 1 and pass 2, plus an original-to-final fixed-point receiver. Existing
+native mask selectors are reused unchanged; no new JNI ABI was submitted in
+this pass.
