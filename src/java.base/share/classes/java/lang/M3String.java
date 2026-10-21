@@ -1423,6 +1423,91 @@ final class M3String implements CharSequence {
         return (int) (coordinate & SPAN_MASK);
     }
 
+    /*
+     * Known-array slices are an explicit compatibility export, distinct from
+     * the canonical owner/range concat and OS-mapped shared-view join. The JNI
+     * receivers write exactly one fresh Java result array, not a joined M3 payload.
+     * The unchanged String/char[]/byte[] contracts remain authoritative.
+     */
+    static char[] concatKnownChars(
+            char[] left, int leftStart, int leftCount,
+            char[] right, int rightStart, int rightCount) {
+        Objects.requireNonNull(left);
+        Objects.requireNonNull(right);
+        Objects.checkFromIndexSize(leftStart, leftCount, left.length);
+        Objects.checkFromIndexSize(rightStart, rightCount, right.length);
+        checkedJoinedArrayLength(leftCount, rightCount);
+        return nativeConcatKnownChars(
+                left, leftStart, leftCount, right, rightStart, rightCount);
+    }
+
+    static byte[] concatKnownBytes(
+            byte[] left, int leftStart, int leftCount,
+            byte[] right, int rightStart, int rightCount) {
+        Objects.requireNonNull(left);
+        Objects.requireNonNull(right);
+        Objects.checkFromIndexSize(leftStart, leftCount, left.length);
+        Objects.checkFromIndexSize(rightStart, rightCount, right.length);
+        checkedJoinedArrayLength(leftCount, rightCount);
+        return nativeConcatKnownBytes(
+                left, leftStart, leftCount, right, rightStart, rightCount);
+    }
+
+    /** Addresses refer to already-owned direct/native array windows, not Java heap pointers. */
+    static char[] concatMappedUtf16(
+            ByteBuffer left, int leftStart, int leftCount, boolean leftBigEndian,
+            ByteBuffer right, int rightStart, int rightCount, boolean rightBigEndian) {
+        checkDirectRange(left, leftStart, leftCount, true);
+        checkDirectRange(right, rightStart, rightCount, true);
+        checkedJoinedArrayLength(leftCount, rightCount);
+        return nativeConcatMappedUtf16(
+                left, leftStart, leftCount, leftBigEndian,
+                right, rightStart, rightCount, rightBigEndian);
+    }
+
+    /** Raw bytes are copied as-is; no coder conversion or per-slice arrays are created. */
+    static byte[] concatMappedBytes(
+            ByteBuffer left, int leftStart, int leftCount,
+            ByteBuffer right, int rightStart, int rightCount) {
+        checkDirectRange(left, leftStart, leftCount, false);
+        checkDirectRange(right, rightStart, rightCount, false);
+        checkedJoinedArrayLength(leftCount, rightCount);
+        return nativeConcatMappedBytes(
+                left, leftStart, leftCount, right, rightStart, rightCount);
+    }
+
+    private static int checkedJoinedArrayLength(int left, int right) {
+        long length = (long) left + right;
+        if (length > Integer.MAX_VALUE)
+            throw new OutOfMemoryError("Required array length exceeds implementation limit");
+        return (int) length;
+    }
+
+    private static void checkDirectRange(
+            ByteBuffer owner, int start, int count, boolean utf16) {
+        Objects.requireNonNull(owner);
+        if (!owner.isDirect() || (utf16 && (owner.capacity() & 1) != 0))
+            throw new IllegalArgumentException("aligned direct array required");
+        int units = utf16 ? owner.capacity() >>> 1 : owner.capacity();
+        Objects.checkFromIndexSize(start, count, units);
+    }
+
+    private static native char[] nativeConcatKnownChars(
+            char[] left, int leftStart, int leftCount,
+            char[] right, int rightStart, int rightCount);
+
+    private static native byte[] nativeConcatKnownBytes(
+            byte[] left, int leftStart, int leftCount,
+            byte[] right, int rightStart, int rightCount);
+
+    private static native char[] nativeConcatMappedUtf16(
+            ByteBuffer left, int leftStart, int leftCount, boolean leftBigEndian,
+            ByteBuffer right, int rightStart, int rightCount, boolean rightBigEndian);
+
+    private static native byte[] nativeConcatMappedBytes(
+            ByteBuffer left, int leftStart, int leftCount,
+            ByteBuffer right, int rightStart, int rightCount);
+
     private static native byte[] nativeByteShadow(
             M3String value, int start, int length, byte coder);
 
