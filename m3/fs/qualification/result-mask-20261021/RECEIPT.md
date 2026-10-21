@@ -23,3 +23,7 @@
 - No native symbol is introduced or existing SQLite/JNI semantics modified; real native bulk stat remains separate in target PR #1740.
 
 Product changes must be generated from, and read back against, exact Synexia source templates. Neither copied donor snippets nor an isolated oracle grants whole-JDK promotion or completeness.
+
+## JNI status-schema boundary
+
+The native-stat candidate `M3FsStatBatch` in M3JDK21 #1740 uses native status `OK = 0` (with `STATUS_NOT_FOUND = 1`) and native flags `EXISTS = 1`, `FILE = 2`, `DIRECTORY = 4`. The original `M3FsBulk.Result` instead uses Java command status `OK = 1`, `FAILED = 3`, `SKIPPED = 4`, and `META_CHECKED = 1`, `META_EXISTS = 2`, `META_FILE = 4`, `META_DIRECTORY = 8`. **These are distinct schemas**. Do not coerce native rows directly into Java command-result flags, or treat presence as command success. Any later JNI integration requires a source-sealed converter, explicit native error and missing-file policy, JNI/JDK ABI and differential oracle.
