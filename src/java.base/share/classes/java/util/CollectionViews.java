@@ -300,9 +300,27 @@ public final class CollectionViews {
         }
 
         @Override
-        @SuppressWarnings("unchecked")
         public boolean contains(Object candidate) {
-            return backing.contains(candidate) && predicate.test((E) candidate);
+            // Probe equality alone does not establish visibility: predicates
+            // belong to stored occurrences, not caller-supplied equal aliases.
+            if (!backing.contains(candidate)) return false;
+            if (backing instanceof Set<?>) {
+                E equivalent = null;
+                boolean found = false;
+                for (E stored : backing) {
+                    // Identity-keyed sets require the same stored object.
+                    if (stored == candidate) return visible(stored);
+                    if (!found && Objects.equals(candidate, stored)) {
+                        equivalent = stored;
+                        found = true;
+                    }
+                }
+                return found && visible(equivalent);
+            }
+            for (E stored : backing) {
+                if (Objects.equals(candidate, stored) && visible(stored)) return true;
+            }
+            return false;
         }
 
         @Override
@@ -325,8 +343,53 @@ public final class CollectionViews {
         }
 
         @Override
+        @SuppressWarnings("unchecked")
         public boolean remove(Object candidate) {
-            return contains(candidate) && backing.remove(candidate);
+            if (!backing.contains(candidate)) return false;
+            if (backing instanceof List<?>) {
+                // Remove the selected physical occurrence, not an earlier
+                // equal occurrence that was hidden by the filter.
+                List<E> list = (List<E>) backing;
+                int physical = 0;
+                for (E stored : list) {
+                    if (Objects.equals(candidate, stored) && visible(stored)) {
+                        list.remove(physical);
+                        return true;
+                    }
+                    physical++;
+                }
+                return false;
+            }
+            if (backing instanceof Set<?>) {
+                E equivalent = null;
+                boolean found = false;
+                for (E stored : backing) {
+                    if (stored == candidate) return visible(stored) && backing.remove(stored);
+                    if (!found && Objects.equals(candidate, stored)) {
+                        equivalent = stored;
+                        found = true;
+                    }
+                }
+                return found && visible(equivalent) && backing.remove(equivalent);
+            }
+            Iterator<E> iterator = backing.iterator();
+            boolean skippedHiddenEqual = false;
+            while (iterator.hasNext()) {
+                E stored = iterator.next();
+                if (Objects.equals(candidate, stored)) {
+                    if (visible(stored)) {
+                        try {
+                            iterator.remove();
+                            return true;
+                        } catch (UnsupportedOperationException unsupported) {
+                            if (skippedHiddenEqual) throw unsupported;
+                            return backing.remove(stored);
+                        }
+                    }
+                    skippedHiddenEqual = true;
+                }
+            }
+            return false;
         }
 
         @Override
