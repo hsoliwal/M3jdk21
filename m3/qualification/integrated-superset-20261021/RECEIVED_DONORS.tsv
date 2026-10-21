@@ -1,0 +1,21 @@
+# path	source_pr_or_recipe	git_blob_sha1	semantic_role	custody
+m3/collections/qualification/indexed-state-histogram-jni-20261021/README.md	1669	2880a76fa993215f598f6aabf68101c3c27b172f	java-jni-proof-doc	GITHUB_POSTIMAGE_READBACK_MATCH
+m3/collections/src/main/java/com/m3/collections/M3FilteredDeques.java	1633	dfdbf710de34e79bb5ba87e9af018914cbfbe9a5	original-deque-query-equality	GITHUB_POSTIMAGE_READBACK_MATCH
+m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java	12711	b6285f4d2a2799a590d74dfdd119fcb95d5ec611	forward-source-qualified-first-visible	GITHUB_POSTIMAGE_READBACK_MATCH
+m3/collections/src/main/java/com/m3/collections/M3StateMaskHistogram.java	1669	ce6703d190c024bcf6ea5d4eb91db8ab7f6da087	original-array-native-gather	GITHUB_POSTIMAGE_READBACK_MATCH
+m3/collections/src/main/native/collections/m3_state_mask_histogram.c	1669	89a82a00206d1d486b86a5ce2daa2a6792a48fd1	original-c17-jni-entrypoint	GITHUB_POSTIMAGE_READBACK_MATCH
+m3/collections/src/test/java/com/m3/collections/M3FilteredDequeContract.java	1633	60118a804d4de87f58f7323de60233c30aa37325	deque-contract-test	GITHUB_POSTIMAGE_READBACK_MATCH
+m3/collections/src/test/java/com/m3/collections/M3FirstVisibleAtomContract.java	1643	1e2e0ad454cd091ad5c8f165c18cc6d0a115b14e	first-visible-trace-oracle	GITHUB_POSTIMAGE_READBACK_MATCH
+m3/collections/src/test/java/com/m3/collections/M3FirstVisibleAtomTest.java	1643	160212a78452e6e97c84cc2bea24b94ea960306d	first-visible-junit	GITHUB_POSTIMAGE_READBACK_MATCH
+m3/collections/src/test/java/com/m3/collections/M3StateMaskHistogramIndexedNativeContract.java	1669	426c024640cac50b8635b671d3b1efcaffb3731e	indexed-jni-oracle	GITHUB_POSTIMAGE_READBACK_MATCH
+m3/collections/src/test/java/com/m3/collections/M3StateMaskHistogramIndexedNativeTest.java	1669	cad8a63e37dd0e3d758a45bb6041efad70cf0761	indexed-jni-junit	GITHUB_POSTIMAGE_READBACK_MATCH
+m3/docs/name-mapping.d/m3-indexed-histogram-native-20261021.json	1669	37aa454f091ad7231d5cc415cdc7c7ad2b503ef3	native-owner-map	GITHUB_POSTIMAGE_READBACK_MATCH
+m3/file/src/main/java/com/m3/file/M3FileCharShadow.java	1661	a3391903ddb43d16ae82a5f43781b7237e5b6806	additive-character-shadow-grammar-factory	GITHUB_POSTIMAGE_READBACK_MATCH
+m3/file/src/main/java/com/m3/file/M3Grammar.java	1661	e41830cc1f39a11154435060d4bd29bef35859f4	one-read-paragraph-observer	GITHUB_POSTIMAGE_READBACK_MATCH
+m3/file/src/main/java/com/m3/file/M3Paragraphs.java	1661	1f89e5f6520ef8c31b65e01dd3c40e492371e043	immutable-paragraph-primitive-index	GITHUB_POSTIMAGE_READBACK_MATCH
+m3/file/src/test/java/com/m3/file/M3GrammarContract.java	1661	a2c483243f863b7cb50c67f5df4cfa16b611119a	grammar-differential-contract	GITHUB_POSTIMAGE_READBACK_MATCH
+m3/file/src/test/java/com/m3/file/M3GrammarTest.java	1661	8aa80a8b47e38de4bb90ca35936734b686d8c7a5	grammar-junit	GITHUB_POSTIMAGE_READBACK_MATCH
+m3/tooling/module-packs/parser/M3_COMPILER_FACTS.md	1649	7bf58677124603783baaf9cfc440225e031c5e5d	javac-fact-schema	GITHUB_POSTIMAGE_READBACK_MATCH
+m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3JavacFactImage.java	1649	868e04436993f54cc639f17f3429f5e06ca93adb	javac-original-tree-facts	GITHUB_POSTIMAGE_READBACK_MATCH
+m3/tooling/module-packs/parser/src/test/java/jdk/m3/parser/M3JavacFactImageContract.java	1649	4e3d123688f9abdf323496ae155530e510087a1a	javac-image-oracle	GITHUB_POSTIMAGE_READBACK_MATCH
+test/jdk/java/util/Collections/M3CollectionWrapperContractTest.java	1640	17976be7d564467fcff2d3892c63d80bd93a385c	standard-jdk-view-jtreg	GITHUB_POSTIMAGE_READBACK_MATCH
