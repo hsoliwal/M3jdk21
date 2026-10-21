@@ -37,7 +37,7 @@ jobs:
           mkdir -p proof/core-classes/META-INF
           { git rev-parse HEAD; uname -m; java -version 2>&1; mvn -version; } > proof/identity.txt
           ENGINE=m3/tooling/migration-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java
-          test "$(git hash-object "$ENGINE")" = d58ca50dfaeb60f581b64f43545e688aca5c6530
+          test "$(git hash-object "$ENGINE")" = 34bebff98306f1e9b002ae166598fd21e8fd62ba
           python3 -m unittest discover -s m3/collections/interop/qualification/current-census-20261017 -p 'test_*.py' -v 2>&1 | tee proof/census-tests.log
           python3 m3/collections/interop/qualification/current-census-20261017/verify.py | tee proof/admitted-postimages.tsv
       - name: Run all six actual recipe proofs before delivery
