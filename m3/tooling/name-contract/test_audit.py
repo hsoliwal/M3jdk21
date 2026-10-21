@@ -7,6 +7,8 @@ from hashlib import sha1
 import importlib.util
 import json
 from pathlib import Path
+import subprocess
+import sys
 import tempfile
 import unittest
 
@@ -101,6 +103,76 @@ class TargetCensusTest(unittest.TestCase):
         self.save()
         with self.assertRaisesRegex(ValueError, "unsafe"):
             AUDIT.snapshot(self.root)
+
+
+    def run_cli(self, *arguments: str, absolute: bool = False):
+        relative = "m3/tooling/name-contract/audit.py"
+        script = self.root / relative
+        script.parent.mkdir(parents=True, exist_ok=True)
+        script.write_bytes((HERE / "audit.py").read_bytes())
+        return subprocess.run(
+            [sys.executable, str(script) if absolute else relative, *arguments],
+            cwd=self.root, capture_output=True, text=True, check=False)
+
+    def test_cli_accepts_repository_relative_and_absolute_script_paths(self):
+        for absolute in (False, True):
+            for arguments in ((), ("--strict",)):
+                with self.subTest(absolute=absolute, arguments=arguments):
+                    result = self.run_cli(*arguments, absolute=absolute)
+                    self.assertEqual(result.returncode, 0, result.stderr)
+                    self.assertIn("PRESENT_NAME_MATCH", result.stdout)
+                    self.assertIn("rows=3 distinct_paths=2 attention=0", result.stderr)
+
+    def test_cli_strict_retains_review_failure(self):
+        (self.root / self.candidates[1]["path"]).unlink()
+        result = self.run_cli("--strict")
+        self.assertEqual(result.returncode, 1, result.stderr)
+        self.assertIn("REVIEW_NATIVE_MISSING", result.stdout)
+        self.assertIn("attention=1", result.stderr)
+
+    def test_cli_without_strict_reports_review_without_failing(self):
+        (self.root / self.candidates[1]["path"]).unlink()
+        result = self.run_cli()
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertIn("REVIEW_NATIVE_MISSING", result.stdout)
+        self.assertIn("attention=1", result.stderr)
+
+    def test_cli_rejects_unknown_and_repeated_flags(self):
+        for arguments in (("--unknown",), ("--strict", "--strict")):
+            with self.subTest(arguments=arguments):
+                result = self.run_cli(*arguments)
+                self.assertEqual(result.returncode, 2)
+                self.assertEqual(result.stdout, "")
+                self.assertIn("usage: audit.py [--strict]", result.stderr)
+
+
+class WorkflowCoverageTest(unittest.TestCase):
+    def test_sparse_checkout_covers_concrete_canonical_target_paths(self):
+        root = AUDIT.ROOT
+        workflow = root / ".github/workflows/m3jdk21-name-contract.yml"
+        lines = workflow.read_text(encoding="utf-8").splitlines()
+        starts = [i for i, line in enumerate(lines)
+                  if line.strip() == "sparse-checkout: |"]
+        self.assertEqual(len(starts), 1, "one explicit sparse-checkout pattern block")
+        start = starts[0]
+        indentation = len(lines[start]) - len(lines[start].lstrip())
+        patterns = []
+        for line in lines[start + 1:]:
+            if not line.strip():
+                continue
+            if len(line) - len(line.lstrip()) <= indentation:
+                break
+            patterns.append(line.strip())
+        self.assertTrue(patterns, "checkout must declare its source scope")
+        records = json.loads((root / AUDIT.MAP).read_text(encoding="utf-8"))["migration"]["records"]
+        targets = {target["path"] for record in records for target in record.get("targets", [])
+                   if isinstance(target, dict) and target.get("path") and target.get("symbol")}
+        # The workflow uses exact paths and explicit recursive owner subtrees.
+        # Actual Git sparse-checkout behavior is also qualified in the recipe receipt.
+        uncovered = sorted(path for path in targets
+                           if not any(path == pattern or pattern.endswith("/**")
+                                      and path.startswith(pattern[:-2]) for pattern in patterns))
+        self.assertEqual(uncovered, [], "mapped source owners are absent from the checkout scope")
 
 
 if __name__ == "__main__":
