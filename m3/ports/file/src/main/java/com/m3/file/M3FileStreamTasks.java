@@ -109,7 +109,7 @@ public final class M3FileStreamTasks {
             started.attributes().size());
       } else if (event instanceof M3FileStreamEvents.Bytes chunk) {
         if (!begun || done) throw new IOException("M3File byte event outside active traversal");
-        long length = chunk.payload().length;
+        long length = chunk.byteCount();
         bytes = Math.addExact(bytes, length);
         monitor.worked(length);
       } else if (event instanceof M3FileStreamEvents.Finished finished) {
