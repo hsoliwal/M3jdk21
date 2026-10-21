@@ -1,0 +1,107 @@
+{
+  "schema": "synexia.data.address.public-compile-outputs.v1",
+  "java_release": 21,
+  "compiler_options": [
+    "--release",
+    "21",
+    "-encoding",
+    "UTF-8",
+    "-proc:none",
+    "-implicit:none",
+    "-Xlint:all",
+    "-Werror"
+  ],
+  "source_count": 4,
+  "classes": 11,
+  "generated_headers": 2,
+  "files": [
+    {
+      "path": "classes/com/m3/collections/M3IndexMaskCompactor$Backend.class",
+      "bytes": 1228,
+      "sha256": "ba88b56db816f917e5d868c8b609c99726013335832bfd513f36e196f689c3e2",
+      "minor": 0,
+      "major": 65
+    },
+    {
+      "path": "classes/com/m3/collections/M3IndexMaskCompactor$NativeLibrary.class",
+      "bytes": 654,
+      "sha256": "9e3c0a0c78429c3443b86ea534c654f3b8c51e68981ec3b120b4a3b8760889d7",
+      "minor": 0,
+      "major": 65
+    },
+    {
+      "path": "classes/com/m3/collections/M3IndexMaskCompactor$NativePositionMasks.class",
+      "bytes": 667,
+      "sha256": "9dc0018c2edb9d92b73866ba563c25f67ba78ac6dfb6388548d98d4c5f8d0931",
+      "minor": 0,
+      "major": 65
+    },
+    {
+      "path": "classes/com/m3/collections/M3IndexMaskCompactor$NativePositions.class",
+      "bytes": 654,
+      "sha256": "213734fae9a232d249e679bad1909464f5594da5dd21258f47f8f92812d17118",
+      "minor": 0,
+      "major": 65
+    },
+    {
+      "path": "classes/com/m3/collections/M3IndexMaskCompactor$NativeRange.class",
+      "bytes": 642,
+      "sha256": "14d66cdc179d8aba14d021557c97d332daeb18f608aef79a06246fc3fad739df",
+      "minor": 0,
+      "major": 65
+    },
+    {
+      "path": "classes/com/m3/collections/M3IndexMaskCompactor.class",
+      "bytes": 5550,
+      "sha256": "cfe4d6aac91065314f407ddf109c2cfeba5f7aa8b757dd599c401d59bb9db152",
+      "minor": 0,
+      "major": 65
+    },
+    {
+      "path": "classes/com/m3/collections/M3LongAddressBoundedSelfTest.class",
+      "bytes": 9464,
+      "sha256": "8d27d5c39b69333be23104250c145cf417dc6d8ba158e605809c4c67425ba85e",
+      "minor": 0,
+      "major": 65
+    },
+    {
+      "path": "classes/com/m3/collections/M3LongAddressKernel$NativeLibrary.class",
+      "bytes": 764,
+      "sha256": "8dc0c05604e4dda2618c052bc1eab6e9119d41031211f53434dd3eb71436bda0",
+      "minor": 0,
+      "major": 65
+    },
+    {
+      "path": "classes/com/m3/collections/M3LongAddressKernel.class",
+      "bytes": 2513,
+      "sha256": "0b85f982c282841386254065acea5144b2360957bc56410c24f4c9f8af49b4d4",
+      "minor": 0,
+      "major": 65
+    },
+    {
+      "path": "classes/com/m3/collections/M3LongIndexProjection$Order.class",
+      "bytes": 1274,
+      "sha256": "f8f3b34203b2564928f67d41490c7c73c5c90f371bc0d58bf615efbff5fc1ce6",
+      "minor": 0,
+      "major": 65
+    },
+    {
+      "path": "classes/com/m3/collections/M3LongIndexProjection.class",
+      "bytes": 4668,
+      "sha256": "6407a1e37ea0ac98bc564860d30a0be322cea284133a2799ef67c24bdebeb0f5",
+      "minor": 0,
+      "major": 65
+    },
+    {
+      "path": "headers/com_m3_collections_M3IndexMaskCompactor.h",
+      "bytes": 2705,
+      "sha256": "58d3bcfbf9d4de386e96f78a0581da9da6fa06cfd597a1b7ab6827b2ceceb60d"
+    },
+    {
+      "path": "headers/com_m3_collections_M3LongAddressKernel.h",
+      "bytes": 613,
+      "sha256": "d05efb9e3c397b1fc8cba4404372c9052efc91a2eea54d2e48b46cde93252dbf"
+    }
+  ],
+  "checkpoint": "One completed javac process produced these files. The original plan stopped on an incorrect 8-class expectation; all 11 classes match source declarations. Continuation reused the exact cohort without recompilation."
+}

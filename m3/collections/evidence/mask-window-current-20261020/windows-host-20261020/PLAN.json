@@ -1,0 +1,301 @@
+{
+  "schema": "synexia.m3jdk21.fixed-native-proof-action.v1",
+  "status": "PLAN_ONLY_NOT_RUN",
+  "repository": "hsoliwal/M3JDK21",
+  "pull_request": 1549,
+  "commit": "fd493c1d9dac8cdf462351c35d588fe9299b7e34",
+  "root": "K:/codex-work/m3jdk21-recipe-pass-20261020/index-mask-jni-v1",
+  "source_inventory": "SOURCE_INVENTORY.json",
+  "source_inventory_sha256": "c3db42a093aecc31e4bbbc12e87d6e4d7eb9edefd08ff26bb145bd6de2654b57",
+  "scope": {
+    "kind": "EXACT_FIVE_FILE_VALIDATION_ACTION",
+    "source_transformation": false,
+    "description": "Actual existing selector/projection/address Java owners, existing current proof, selector C; Windows host only",
+    "prerequisite": "PR1540 baseline/candidate proof completes and releases global JVM lock",
+    "global_phase_advance": false
+  },
+  "tools": [
+    {
+      "path": "C:/ProgramData/mingw64/mingw64/bin/gcc.exe",
+      "sha256": "690d171db384af0f69002374a7fc4755128ee82c688d22818bd981f869a65890"
+    },
+    {
+      "path": "C:/Program Files/Java/jdk-21/bin/javac.exe",
+      "sha256": "8a1d32f529ba4d01940194e3b06d14aff828e5d47f5f374ec88c81902fc3456f"
+    },
+    {
+      "path": "C:/Program Files/Java/jdk-21/bin/java.exe",
+      "sha256": "d27c1a75edf380963c430232e93340eab4bd3694044976cff85421bf163b876c"
+    },
+    {
+      "path": "C:/Program Files/Java/jdk-21/include/jni.h",
+      "sha256": "7c11817ffadcb8cb03d433aa9835e88e0d084300c66023de122d7b8aeee9f01d"
+    },
+    {
+      "path": "C:/Program Files/Java/jdk-21/include/win32/jni_md.h",
+      "sha256": "a0d17d1d5dda93f81d723dcec4b9b0f47c8a5f9d2a1164f3fb3f9a882bb3cd34"
+    },
+    {
+      "path": "C:/ProgramData/mingw64/mingw64/bin/objdump.exe",
+      "sha256": "26f516ba532bd2e2db9cfa109bc74f1ae3761fd115b36db23f09a086171d0766"
+    }
+  ],
+  "commands": [
+    {
+      "id": "compile_java",
+      "argv": [
+        "C:/Program Files/Java/jdk-21/bin/javac.exe",
+        "-J-Xms32m",
+        "-J-Xmx768m",
+        "-J-XX:+UseSerialGC",
+        "-J-XX:MaxMetaspaceSize=256m",
+        "-J-XX:ReservedCodeCacheSize=64m",
+        "-J-XX:TieredStopAtLevel=1",
+        "-J-XX:-UsePerfData",
+        "-J-XX:+DisableAttachMechanism",
+        "-J-XX:-HeapDumpOnOutOfMemoryError",
+        "-J-XX:-CreateCoredumpOnCrash",
+        "-J-XX:HeapDumpPath=K:/codex-work/m3jdk21-recipe-pass-20261020/index-mask-jni-v1/dumps",
+        "-J-Djava.io.tmpdir=K:/codex-work/m3jdk21-recipe-pass-20261020/index-mask-jni-v1/tmp",
+        "-J-Duser.home=K:/codex-work/m3jdk21-recipe-pass-20261020/index-mask-jni-v1/home",
+        "-J-Duser.dir=K:/codex-work/m3jdk21-recipe-pass-20261020/index-mask-jni-v1",
+        "-J-Djna.tmpdir=K:/codex-work/m3jdk21-recipe-pass-20261020/index-mask-jni-v1/tmp/jna",
+        "-J-Djansi.tmpdir=K:/codex-work/m3jdk21-recipe-pass-20261020/index-mask-jni-v1/tmp/jansi",
+        "-J-Dorg.xerial.snappy.tempdir=K:/codex-work/m3jdk21-recipe-pass-20261020/index-mask-jni-v1/tmp/snappy",
+        "-J-Djava.util.prefs.userRoot=K:/codex-work/m3jdk21-recipe-pass-20261020/index-mask-jni-v1/prefs/user",
+        "-J-Djava.util.prefs.systemRoot=K:/codex-work/m3jdk21-recipe-pass-20261020/index-mask-jni-v1/prefs/system",
+        "-J-Dfile.encoding=UTF-8",
+        "-J-XX:ErrorFile=K:/codex-work/m3jdk21-recipe-pass-20261020/index-mask-jni-v1/hs_err_pid%p.log",
+        "--release",
+        "21",
+        "-encoding",
+        "UTF-8",
+        "-proc:none",
+        "-implicit:none",
+        "-Xlint:all",
+        "-Werror",
+        "-sourcepath",
+        "K:/codex-work/m3jdk21-recipe-pass-20261020/index-mask-jni-v1/src",
+        "-classpath",
+        "K:/codex-work/m3jdk21-recipe-pass-20261020/index-mask-jni-v1/classes",
+        "-d",
+        "K:/codex-work/m3jdk21-recipe-pass-20261020/index-mask-jni-v1/classes",
+        "-h",
+        "K:/codex-work/m3jdk21-recipe-pass-20261020/index-mask-jni-v1/headers",
+        "K:/codex-work/m3jdk21-recipe-pass-20261020/index-mask-jni-v1/src/com/m3/collections/M3IndexMaskCompactor.java",
+        "K:/codex-work/m3jdk21-recipe-pass-20261020/index-mask-jni-v1/src/com/m3/collections/M3LongIndexProjection.java",
+        "K:/codex-work/m3jdk21-recipe-pass-20261020/index-mask-jni-v1/src/com/m3/collections/M3LongAddressKernel.java",
+        "K:/codex-work/m3jdk21-recipe-pass-20261020/index-mask-jni-v1/src/com/m3/collections/M3MaskWindowCurrentProof.java"
+      ],
+      "deadline_seconds": 180
+    },
+    {
+      "id": "compile_native",
+      "argv": [
+        "C:/ProgramData/mingw64/mingw64/bin/gcc.exe",
+        "-std=c17",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-Wconversion",
+        "-Wshadow",
+        "-pedantic",
+        "-shared",
+        "-O2",
+        "-I",
+        "C:/Program Files/Java/jdk-21/include",
+        "-I",
+        "C:/Program Files/Java/jdk-21/include/win32",
+        "K:/codex-work/m3jdk21-recipe-pass-20261020/index-mask-jni-v1/native-src/m3_index_mask_compactor.c",
+        "-o",
+        "K:/codex-work/m3jdk21-recipe-pass-20261020/index-mask-jni-v1/native/m3_collections_mask.dll"
+      ],
+      "deadline_seconds": 120
+    },
+    {
+      "id": "native_exports",
+      "argv": [
+        "C:/ProgramData/mingw64/mingw64/bin/objdump.exe",
+        "-p",
+        "K:/codex-work/m3jdk21-recipe-pass-20261020/index-mask-jni-v1/native/m3_collections_mask.dll"
+      ],
+      "deadline_seconds": 30
+    },
+    {
+      "id": "java",
+      "argv": [
+        "C:/Program Files/Java/jdk-21/bin/java.exe",
+        "-Xms32m",
+        "-Xmx768m",
+        "-XX:+UseSerialGC",
+        "-XX:MaxMetaspaceSize=256m",
+        "-XX:ReservedCodeCacheSize=64m",
+        "-XX:TieredStopAtLevel=1",
+        "-XX:-UsePerfData",
+        "-XX:+DisableAttachMechanism",
+        "-XX:-HeapDumpOnOutOfMemoryError",
+        "-XX:-CreateCoredumpOnCrash",
+        "-XX:HeapDumpPath=K:/codex-work/m3jdk21-recipe-pass-20261020/index-mask-jni-v1/dumps",
+        "-Djava.io.tmpdir=K:/codex-work/m3jdk21-recipe-pass-20261020/index-mask-jni-v1/tmp",
+        "-Duser.home=K:/codex-work/m3jdk21-recipe-pass-20261020/index-mask-jni-v1/home",
+        "-Duser.dir=K:/codex-work/m3jdk21-recipe-pass-20261020/index-mask-jni-v1",
+        "-Djna.tmpdir=K:/codex-work/m3jdk21-recipe-pass-20261020/index-mask-jni-v1/tmp/jna",
+        "-Djansi.tmpdir=K:/codex-work/m3jdk21-recipe-pass-20261020/index-mask-jni-v1/tmp/jansi",
+        "-Dorg.xerial.snappy.tempdir=K:/codex-work/m3jdk21-recipe-pass-20261020/index-mask-jni-v1/tmp/snappy",
+        "-Djava.util.prefs.userRoot=K:/codex-work/m3jdk21-recipe-pass-20261020/index-mask-jni-v1/prefs/user",
+        "-Djava.util.prefs.systemRoot=K:/codex-work/m3jdk21-recipe-pass-20261020/index-mask-jni-v1/prefs/system",
+        "-Dfile.encoding=UTF-8",
+        "-XX:ErrorFile=K:/codex-work/m3jdk21-recipe-pass-20261020/index-mask-jni-v1/hs_err_pid%p.log",
+        "-Xlog:library=debug:file=library-java.log:uptime,level,tags",
+        "-ea",
+        "-Xcheck:jni",
+        "-Djava.library.path=K:/codex-work/m3jdk21-recipe-pass-20261020/index-mask-jni-v1/empty-native",
+        "-cp",
+        "K:/codex-work/m3jdk21-recipe-pass-20261020/index-mask-jni-v1/classes",
+        "com.m3.collections.M3MaskWindowCurrentProof",
+        "java"
+      ],
+      "deadline_seconds": 180
+    },
+    {
+      "id": "native",
+      "argv": [
+        "C:/Program Files/Java/jdk-21/bin/java.exe",
+        "-Xms32m",
+        "-Xmx768m",
+        "-XX:+UseSerialGC",
+        "-XX:MaxMetaspaceSize=256m",
+        "-XX:ReservedCodeCacheSize=64m",
+        "-XX:TieredStopAtLevel=1",
+        "-XX:-UsePerfData",
+        "-XX:+DisableAttachMechanism",
+        "-XX:-HeapDumpOnOutOfMemoryError",
+        "-XX:-CreateCoredumpOnCrash",
+        "-XX:HeapDumpPath=K:/codex-work/m3jdk21-recipe-pass-20261020/index-mask-jni-v1/dumps",
+        "-Djava.io.tmpdir=K:/codex-work/m3jdk21-recipe-pass-20261020/index-mask-jni-v1/tmp",
+        "-Duser.home=K:/codex-work/m3jdk21-recipe-pass-20261020/index-mask-jni-v1/home",
+        "-Duser.dir=K:/codex-work/m3jdk21-recipe-pass-20261020/index-mask-jni-v1",
+        "-Djna.tmpdir=K:/codex-work/m3jdk21-recipe-pass-20261020/index-mask-jni-v1/tmp/jna",
+        "-Djansi.tmpdir=K:/codex-work/m3jdk21-recipe-pass-20261020/index-mask-jni-v1/tmp/jansi",
+        "-Dorg.xerial.snappy.tempdir=K:/codex-work/m3jdk21-recipe-pass-20261020/index-mask-jni-v1/tmp/snappy",
+        "-Djava.util.prefs.userRoot=K:/codex-work/m3jdk21-recipe-pass-20261020/index-mask-jni-v1/prefs/user",
+        "-Djava.util.prefs.systemRoot=K:/codex-work/m3jdk21-recipe-pass-20261020/index-mask-jni-v1/prefs/system",
+        "-Dfile.encoding=UTF-8",
+        "-XX:ErrorFile=K:/codex-work/m3jdk21-recipe-pass-20261020/index-mask-jni-v1/hs_err_pid%p.log",
+        "-Xlog:library=debug:file=library-native.log:uptime,level,tags",
+        "-ea",
+        "-Xcheck:jni",
+        "-Djava.library.path=K:/codex-work/m3jdk21-recipe-pass-20261020/index-mask-jni-v1/native",
+        "-cp",
+        "K:/codex-work/m3jdk21-recipe-pass-20261020/index-mask-jni-v1/classes",
+        "com.m3.collections.M3MaskWindowCurrentProof",
+        "native"
+      ],
+      "deadline_seconds": 180
+    },
+    {
+      "id": "missing",
+      "argv": [
+        "C:/Program Files/Java/jdk-21/bin/java.exe",
+        "-Xms32m",
+        "-Xmx768m",
+        "-XX:+UseSerialGC",
+        "-XX:MaxMetaspaceSize=256m",
+        "-XX:ReservedCodeCacheSize=64m",
+        "-XX:TieredStopAtLevel=1",
+        "-XX:-UsePerfData",
+        "-XX:+DisableAttachMechanism",
+        "-XX:-HeapDumpOnOutOfMemoryError",
+        "-XX:-CreateCoredumpOnCrash",
+        "-XX:HeapDumpPath=K:/codex-work/m3jdk21-recipe-pass-20261020/index-mask-jni-v1/dumps",
+        "-Djava.io.tmpdir=K:/codex-work/m3jdk21-recipe-pass-20261020/index-mask-jni-v1/tmp",
+        "-Duser.home=K:/codex-work/m3jdk21-recipe-pass-20261020/index-mask-jni-v1/home",
+        "-Duser.dir=K:/codex-work/m3jdk21-recipe-pass-20261020/index-mask-jni-v1",
+        "-Djna.tmpdir=K:/codex-work/m3jdk21-recipe-pass-20261020/index-mask-jni-v1/tmp/jna",
+        "-Djansi.tmpdir=K:/codex-work/m3jdk21-recipe-pass-20261020/index-mask-jni-v1/tmp/jansi",
+        "-Dorg.xerial.snappy.tempdir=K:/codex-work/m3jdk21-recipe-pass-20261020/index-mask-jni-v1/tmp/snappy",
+        "-Djava.util.prefs.userRoot=K:/codex-work/m3jdk21-recipe-pass-20261020/index-mask-jni-v1/prefs/user",
+        "-Djava.util.prefs.systemRoot=K:/codex-work/m3jdk21-recipe-pass-20261020/index-mask-jni-v1/prefs/system",
+        "-Dfile.encoding=UTF-8",
+        "-XX:ErrorFile=K:/codex-work/m3jdk21-recipe-pass-20261020/index-mask-jni-v1/hs_err_pid%p.log",
+        "-Xlog:library=debug:file=library-missing.log:uptime,level,tags",
+        "-ea",
+        "-Xcheck:jni",
+        "-Djava.library.path=K:/codex-work/m3jdk21-recipe-pass-20261020/index-mask-jni-v1/empty-native",
+        "-cp",
+        "K:/codex-work/m3jdk21-recipe-pass-20261020/index-mask-jni-v1/classes",
+        "com.m3.collections.M3MaskWindowCurrentProof",
+        "missing"
+      ],
+      "deadline_seconds": 180
+    }
+  ],
+  "owned_directories": [
+    "classes",
+    "headers",
+    "native",
+    "empty-native",
+    "tmp/jna",
+    "tmp/jansi",
+    "tmp/snappy",
+    "home",
+    "prefs/user",
+    "prefs/system",
+    "dumps"
+  ],
+  "child_environment": {
+    "prepend_PATH": "C:/ProgramData/mingw64/mingw64/bin",
+    "TMPDIR": "K:/codex-work/m3jdk21-recipe-pass-20261020/index-mask-jni-v1/tmp",
+    "clear": [
+      "GCC_EXEC_PREFIX",
+      "COMPILER_PATH",
+      "LIBRARY_PATH",
+      "CPATH",
+      "C_INCLUDE_PATH",
+      "CPLUS_INCLUDE_PATH",
+      "DEPENDENCIES_OUTPUT",
+      "SUNPRO_DEPENDENCIES"
+    ]
+  },
+  "acceptance": {
+    "exact_stdout": {
+      "java": "M3_MASK_CURRENT mode=java checks=236639 digest=4d79e76f92e079de30d99aff98324657115cb029add55d34d00c5e9562877baf PASS",
+      "native": "M3_MASK_CURRENT mode=native checks=320006 digest=8a4338e94c64996bde776a42c0de8a0eaa6857a31f1beb3eacb60586f01be012 PASS",
+      "missing": "M3_MISSING_NATIVE checks=21 PASS"
+    },
+    "checked_jni": "No warnings or diagnostics in native/java/missing logs",
+    "exports": "Generated M3IndexMaskCompactor header and actual DLL each have the same nine Java_ symbols",
+    "native_library": "Only freshly built K DLL is in native mode java.library.path; empty directory used for java/missing",
+    "all_native_jobs": "exit0/terminal/active0/allhandlesclosed/noerrors",
+    "source_freshness": "Inventory hashes unchanged after execution",
+    "native_library_trace": "Native mode library-native.log must show Loaded library at exact fresh K native/m3_collections_mask.dll path; hash DLL before and after run"
+  },
+  "supervision": {
+    "definitions": "S:/codex-work/storage-recovery-20261013/native-process-cwd-recipe-20261016/target/generated/OwnedJobSupervisor.py",
+    "sha256": "c3f5f71cacbb8b95c99eaff74b3bc787359540ad738d65a007668da6b6ad83e9",
+    "reference": "K:/codex-work/claude-preservation-20261020/bootstrap-conflict/qualification-k-v1/run_qualification.py",
+    "reference_sha256": "e0513362b4240c6698fb8190a05420e9fcd6e1894a918cf54a998a5919cc34d8",
+    "lock": "K:/m3-work/tmp/jvm.lock",
+    "lock_protocol": "one atomic mkdir, HOLD if present, identity-checked own release only after durable terminal outcomes",
+    "global_output_cap_bytes": 83886080,
+    "fixture_cap_bytes": 16777216,
+    "planned_output_reserve_bytes": 8673820672
+  },
+  "claims": {
+    "new_Java_or_C_or_test_code": false,
+    "new_dependencies": false,
+    "source_mutation": false,
+    "legacy_fixture": false,
+    "union_with_1538_or_1547": false,
+    "Maven_or_full_JDK_or_platform_or_performance_admission": false,
+    "Windows_UBSan": "NOT_RUN"
+  },
+  "storage_protection": "ACTIVE",
+  "canonical_recipe": {
+    "repository": "hsoliwal/com.synexia",
+    "pull_request": 12549,
+    "commit": "f188e2af9117f0a0126b70aec3f87bb4489cbf42",
+    "packet_tree": "34febf76a5471c984bb255daafbe9f5bb468f2c5",
+    "application": "Existing Java manifest-kernel/SealReplay proof recorded upstream; no fresh attributed OpenRewrite SDK execution claimed"
+  }
+}

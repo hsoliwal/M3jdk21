@@ -17,7 +17,7 @@
   <build>
     <resources><resource><directory>${project.basedir}</directory><targetPath>META-INF</targetPath>
       <includes><include>LICENSE</include><include>NOTICE</include><include>provenance.json</include><include>synexia-donation.json</include><include>name-mapping.json</include><include>SYNEXIA-DONATION-NOTICE.txt</include><include>NETBEANS-NOTICE.txt</include></includes>
-    </resource></resources>
+    </resource><resource><directory>src/main/resources</directory></resource></resources>
     <plugins>
     <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-resources-plugin</artifactId><version>3.3.1</version></plugin>
     <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-compiler-plugin</artifactId><version>3.13.0</version>

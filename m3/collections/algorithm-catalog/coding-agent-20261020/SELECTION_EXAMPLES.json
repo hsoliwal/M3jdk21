@@ -1,0 +1,44 @@
+{
+  "schema": "synexia.coding-agent.selection-examples.v1",
+  "role": "Agent selection records; not generic runtime request bodies.",
+  "examples": [
+    {
+      "intent": "Replace a documentation field on one file",
+      "binding_id": "org.openrewrite.text.FindAndReplace",
+      "requested_scope": {
+        "kind": "FILE",
+        "path": "agent-recipe-fixtures/README.md"
+      },
+      "options": {
+        "find": "^OLD_LABEL: (.*)$",
+        "replace": "LABEL: $1",
+        "regex": true,
+        "caseSensitive": true,
+        "multiline": true,
+        "dotAll": false,
+        "filePattern": "agent-recipe-fixtures/README.md"
+      },
+      "proof_state": "NOT_RUN",
+      "next_action": "Preview using existing Maven dryRunNoFork after environment is qualified; verify exact path set and fresh-run fixed point."
+    },
+    {
+      "intent": "Clean selected Java folder",
+      "binding_ids": [
+        "synexia.mechanical.01-upper-case-literal-suffixes",
+        "synexia.mechanical.02-modifier-order",
+        "synexia.mechanical.03-negated-equality",
+        "synexia.mechanical.04-remove-unused-imports",
+        "synexia.mechanical.05-order-imports",
+        "synexia.mechanical.06-auto-format"
+      ],
+      "requested_scope": {
+        "kind": "FOLDER",
+        "path": "src/main/java/com/acme"
+      },
+      "typed_binding": "M3MechanicalPasses.forPattern(\"src/main/java/com/acme/**\")",
+      "executor": "M3OpenRewriteTranspiler.executeProjectCycle(exactSourceMap,classpath,pass)",
+      "proof_state": "SOURCE_INSPECTED_NOT_RUN",
+      "next_action": "Resolve exact sources, hash and parse them, apply serial passes through existing host, then compile/contract/behavior and fixed-point gates."
+    }
+  ]
+}

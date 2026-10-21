@@ -1,0 +1,17 @@
+{
+  "schema": 1,
+  "source": "hsoliwal/com.synexia",
+  "recipe_commit": "b5d2bbb3c75ff928f3dbb0f92ed4471488ea8c05",
+  "recipe_pr": 12563,
+  "recipe": "com.synexia.m3.M3IndexPathRankAdaptive20261020",
+  "target_baseline": "fd493c1d9dac8cdf462351c35d588fe9299b7e34",
+  "targets": [
+    "com.m3.collections.M3IndexPathRank",
+    "com.m3.collections.M3IndexPathRank$Window"
+  ],
+  "public_names": "unchanged; no new public runtime class or native method",
+  "implementation": "Existing bitmap word traversal plus existing sparse prefix-rank select, with bounded word-range masks and occurrence order preserved",
+  "canonical_ownership": "Synexia recipe/templates/catalogue; integrated M3JDK21 existing product owner and receiving proof",
+  "license": "Apache-2.0 first-party owner; upstream notices preserved; category references are not copied solutions",
+  "status": "DRAFT_COLLECTION_SOURCE_QUALIFIED_NOT_INSTALLED_JDK_QUALIFIED"
+}

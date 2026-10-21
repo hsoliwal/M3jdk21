@@ -1,0 +1,79 @@
+{
+  "schema": "synexia.coding-agent.scope-contract.v1",
+  "levels": [
+    "repository",
+    "module",
+    "package",
+    "source-set",
+    "folder",
+    "file-glob",
+    "file",
+    "type",
+    "member",
+    "FLLDCIM-leaf"
+  ],
+  "required_selection_fields": [
+    "target_repository",
+    "target_base_commit",
+    "recipe_binding_id",
+    "recipe_source_commit",
+    "options",
+    "requested_scope",
+    "resolved_input_paths",
+    "input_hashes",
+    "allowed_read_paths",
+    "allowed_write_paths",
+    "allowed_create_paths",
+    "allowed_delete_paths",
+    "allowed_move_pairs",
+    "maximum_files",
+    "proof_plan",
+    "expected_postconditions"
+  ],
+  "actual_bindings": [
+    {
+      "kind": "FILE",
+      "owner": "M3MechanicalPasses.forFile(String)",
+      "enforcement": "Explicit caller source input and same-path output; outer host supplies materialization/hash/read/write guard."
+    },
+    {
+      "kind": "FOLDER",
+      "owner": "FindSourceFiles(filePattern) and six sourceFilePattern leaves",
+      "example": "src/main/java/com/acme/**",
+      "enforcement": "Repository-relative glob on parsed source paths; caller must prove resolved set."
+    },
+    {
+      "kind": "TEXT_FILE_OR_FOLDER",
+      "owner": "Find/FindAndReplace.filePattern",
+      "enforcement": "Semicolon OR is supported here; no empty/all default admitted implicitly."
+    },
+    {
+      "kind": "SEALED_TARGET_SET",
+      "owner": "SealReplay check/apply",
+      "enforcement": "All five manifest targets guarded even when only one target needs repair."
+    },
+    {
+      "kind": "ORDERED_COMPOSITION",
+      "owner": "OpenRewrite declarative recipeList",
+      "enforcement": "Ordered recipes, not an arbitrary task scheduler or merge authority."
+    }
+  ],
+  "algebra": {
+    "union": "Exact resolved set union; only text recipe semicolon OR is a source-verified direct binding here.",
+    "intersection": "Ordinary edit-visitor preconditions are AND; this does not fence ScanningRecipe scanning/generation.",
+    "difference": "Resolve and prove exact excluded path set; no generic set-difference executor is registered by this packet.",
+    "widen": "New scope requires new input closure, donor fit, counterexamples and all gates before promotion.",
+    "narrow": "Restrict inputs AND every allowed effect. A smaller changed-file count does not establish narrower authorization."
+  },
+  "incompatible_authority_enums": [
+    "M3EditScope:FILE/VISIBILITY/PACKAGE/MODULE/MULTI_MODULE/LIBRARY_API",
+    "M3AtomPromotionScope:FILE/PACKAGE/MODULE/PROJECT/REPOSITORY"
+  ],
+  "known_holds": [
+    "ai provider selectionPath does not fence atom iteration",
+    "FILE locality does not limit number of files",
+    "ScanningRecipe generate is not fenced by ordinary declarative edit preconditions",
+    "M3OpenRewriteTranspiler rejects creates/deletes/moves/structured-to-PlainText; use a separately qualified effect owner for these",
+    "No new universal --scope or JSON dispatcher is implemented."
+  ]
+}
