@@ -161,6 +161,22 @@ public final class M3LongIndexProjection {
         return reversed;
     }
 
+    /**
+     * Recognize an already-sorted encounter window without copying its physical
+     * directory. A tie is never inverted: identical values preserve the exact
+     * existing physical-index order, including repeated values and slices.
+     * Only the current immutable [from,to) window participates in this scan.
+     */
+    private boolean alreadyOrdered(boolean descending) {
+        long preceding = M3LongAddressKernel.loadPhysicalUnchecked(values, indices[from]);
+        for (int index = from + 1; index < to; index++) {
+            long current = M3LongAddressKernel.loadPhysicalUnchecked(values, indices[index]);
+            if (descending ? preceding < current : preceding > current) return false;
+            preceding = current;
+        }
+        return true;
+    }
+
     private M3LongIndexProjection sorted(boolean descending) {
         Order requested = descending ? Order.DESCENDING : Order.ASCENDING;
         if (order == requested || size() < 2) {
@@ -171,6 +187,11 @@ public final class M3LongIndexProjection {
         if (order != Order.ENCOUNTER) {
             int[] reversed = reverseValueGroups();
             return new M3LongIndexProjection(values, reversed, 0, reversed.length, requested);
+        }
+        if (alreadyOrdered(descending)) {
+            // A sorted encounter-order index needs neither a copied directory
+            // nor the scratch array / merge passes. Caller observes a new view.
+            return new M3LongIndexProjection(values, indices, from, to, requested);
         }
         int[] current = physicalIndices();
         int size = current.length;
