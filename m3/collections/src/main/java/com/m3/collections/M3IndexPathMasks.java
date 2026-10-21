@@ -179,6 +179,41 @@ public final class M3IndexPathMasks {
         return packWindow(stop, kept);
     }
 
+    /**
+     * Examines at most {@code maxExamined} successive path ordinals, while
+     * writing at most {@code limit} matching IDs into the caller's output.
+     * The `count` parameter describes the full declared path, not this slice;
+     * the high result bits retain that path's ordinal coordinate system.
+     *
+     * <p>The full path geometry is checked before scanning. Only encountered
+     * physical offsets are checked: an invalid future offset is rejected when
+     * its window is reached. Zero input budget visits no entries and preserves
+     * the cursor and output after normal alias/bounds/native checks.
+     *
+     * <p>Delegates the capped path to the existing {@link #scanWindow}
+     * implementation and its checked JNI selector; no new native symbol,
+     * element wrapper, retained index or Java predicate callback is introduced.
+     */
+    public static long scanWindowBounded(int[] orderedRows, int[] physicalOffsets,
+            int[][] statePlanes, int[] requiredMasks, int[] forbiddenMasks,
+            int first, int count, int stride, int next, int maxExamined,
+            int[] output, int outputOffset, int limit, Backend backend) {
+        Objects.requireNonNull(backend, "backend");
+        if (maxExamined < 0) {
+            throw new IllegalArgumentException("negative input scan budget");
+        }
+        validateShape(orderedRows, physicalOffsets, statePlanes,
+                requiredMasks, forbiddenMasks, first, count, stride);
+        if (next < 0 || next > count) {
+            throw new IndexOutOfBoundsException("path ordinal outside [0,count]");
+        }
+        // Clamping before addition avoids next + maxExamined overflow.
+        int boundedCount = next + Math.min(maxExamined, count - next);
+        return scanWindow(orderedRows, physicalOffsets, statePlanes,
+                requiredMasks, forbiddenMasks, first, boundedCount, stride, next,
+                output, outputOffset, limit, backend);
+    }
+
     private static long packWindow(int next, int count) {
         return ((long) next << 32) | (count & 0xffff_ffffL);
     }
