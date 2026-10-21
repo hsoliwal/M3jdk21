@@ -117,6 +117,21 @@ public final class ChangeJournal {
      * @throws IllegalStateException if some required events have been overwritten
      */
     public synchronized Batch snapshot(long afterVersion) {
+        return snapshot(afterVersion, capacity);
+    }
+
+    /**
+     * Copies no more than {@code maxChanges} consecutive model changes.
+     * The returned cursor is the last copied version, not the journal head;
+     * callers may resume at that cursor without losing retained changes.
+     * A zero bound creates an empty batch while retaining the requested cursor.
+     * A stale cursor is rejected even for zero-length requests. No model element
+     * or per-change wrapper is retained beyond the batch's six compact lanes.
+     *
+     * @throws IllegalArgumentException if the cursor or bound is invalid
+     * @throws IllegalStateException if the requested history was overwritten
+     */
+    public synchronized Batch snapshot(long afterVersion, int maxChanges) {
         if (afterVersion < 0 || afterVersion > version) {
             throw new IllegalArgumentException("cursor outside version range");
         }
@@ -124,23 +139,35 @@ public final class ChangeJournal {
             throw new IllegalStateException("stale journal cursor: " + afterVersion
                     + "; oldest=" + oldestCursor());
         }
-        int count = (int) (version - afterVersion);
+        if (maxChanges < 0) {
+            throw new IllegalArgumentException("negative change limit");
+        }
+        int count = (int) Math.min(version - afterVersion, (long) maxChanges);
         byte[] bk = new byte[count];
         int[] bi = new int[count];
         int[] br = new int[count];
         int[] ba = new int[count];
         Object[] bp = new Object[count];
         Object[] bc = new Object[count];
-        for (int i = 0; i < count; i++) {
-            int slot = (int) ((afterVersion + i) % capacity);
-            bk[i] = kinds[slot];
-            bi[i] = indexes[slot];
-            br[i] = removed[slot];
-            ba[i] = added[slot];
-            bp[i] = previous[slot];
-            bc[i] = current[slot];
+        int first = (int) (afterVersion % capacity);
+        int prefix = Math.min(count, capacity - first);
+        copyLanes(first, 0, prefix, bk, bi, br, ba, bp, bc);
+        int suffix = count - prefix;
+        if (suffix != 0) {
+            copyLanes(0, prefix, suffix, bk, bi, br, ba, bp, bc);
         }
-        return new Batch(version, bk, bi, br, ba, bp, bc);
+        return new Batch(afterVersion + count, bk, bi, br, ba, bp, bc);
+    }
+
+    /** Copies only the requested contiguous physical span of the circular lanes. */
+    private void copyLanes(int source, int target, int count, byte[] bk, int[] bi,
+                           int[] br, int[] ba, Object[] bp, Object[] bc) {
+        System.arraycopy(kinds, source, bk, target, count);
+        System.arraycopy(indexes, source, bi, target, count);
+        System.arraycopy(removed, source, br, target, count);
+        System.arraycopy(added, source, ba, target, count);
+        System.arraycopy(previous, source, bp, target, count);
+        System.arraycopy(current, source, bc, target, count);
     }
 
     /** Commits a positional event and returns its sequence version. */
