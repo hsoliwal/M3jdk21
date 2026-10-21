@@ -17,11 +17,31 @@ package java.util;
  */
 public final class ChangeJournal {
     /** Type of positional mutation. */
-    public enum Kind { INSERT, REMOVE, REPLACE, RESET }
+    public enum Kind {
+        /** Elements were inserted at the reported position. */
+        INSERT,
+        /** Elements were removed from the reported position. */
+        REMOVE,
+        /** Elements at the reported position were replaced. */
+        REPLACE,
+        /** The consumer must refresh its positional view. */
+        RESET
+    }
 
     /** Receives a projected change, without allocating a per-change object. */
     @FunctionalInterface
     public interface Consumer {
+        /**
+         * Receives one change in journal order.
+         *
+         * @param version the sequence version of the change
+         * @param kind the kind of positional mutation
+         * @param index the nonnegative position reported by the producer
+         * @param removedCount the number of removed elements
+         * @param addedCount the number of added elements
+         * @param previous the producer-supplied prior value, possibly {@code null}
+         * @param current the producer-supplied current value, possibly {@code null}
+         */
         void accept(long version, Kind kind, int index, int removedCount,
                     int addedCount, Object previous, Object current);
     }
@@ -47,13 +67,26 @@ public final class ChangeJournal {
             this.current = current;
         }
 
-        /** Version immediately after the last event in this batch, or the requested cursor if empty. */
+        /**
+         * Returns the version of the last event in this batch, or the requested cursor if empty.
+         *
+         * @return the cursor to use for the next snapshot
+         */
         public long cursor() { return cursor; }
 
-        /** Number of retained events copied into this batch. */
+        /**
+         * Returns the number of retained events copied into this batch.
+         *
+         * @return the number of changes in the batch
+         */
         public int size() { return kinds.length; }
 
-        /** Replays this stable batch in sequence; callbacks execute without a journal lock. */
+        /**
+         * Replays this stable batch in sequence; callbacks execute without a journal lock.
+         *
+         * @param receiver the consumer of each change
+         * @throws NullPointerException if {@code receiver} is {@code null}
+         */
         public void forEach(Consumer receiver) {
             Objects.requireNonNull(receiver, "receiver");
             long first = cursor - kinds.length + 1;
@@ -77,7 +110,12 @@ public final class ChangeJournal {
     private final Object[] current;
     private long version;
 
-    /** Creates a journal with a zero version. */
+    /**
+     * Creates a journal with a zero version.
+     *
+     * @param capacity the maximum number of retained changes, from 1 through 1,048,576
+     * @throws IllegalArgumentException if {@code capacity} is outside the supported range
+     */
     public ChangeJournal(int capacity) { this(capacity, 0); }
 
     // A late subscriber starts at the owner's current version, without fabricated history.
@@ -97,15 +135,27 @@ public final class ChangeJournal {
         current = new Object[capacity];
     }
 
-    /** Latest committed change version. */
+    /**
+     * Returns the latest committed change version.
+     *
+     * @return the current sequence version
+     */
     public synchronized long version() { return version; }
 
-    /** Earliest usable cursor; a client must refresh when its cursor is older. */
+    /**
+     * Returns the earliest usable cursor; a client must refresh when its cursor is older.
+     *
+     * @return the oldest cursor for which all subsequent changes remain available
+     */
     public synchronized long oldestCursor() {
         return Math.max(baseline, version - capacity);
     }
 
-    /** Fixed history bound; no retained per-change object allocation. */
+    /**
+     * Returns the fixed history bound; no per-change event objects are retained.
+     *
+     * @return the maximum number of retained changes
+     */
     public int capacity() { return capacity; }
 
     /**
@@ -113,6 +163,8 @@ public final class ChangeJournal {
      * An empty batch keeps the supplied cursor. Never invokes a callback while
      * the owner's monitor lock is held.
      *
+     * @param afterVersion the version of the last change already processed
+     * @return a snapshot containing all retained changes after the supplied cursor
      * @throws IllegalArgumentException if the cursor is negative or in the future
      * @throws IllegalStateException if some required events have been overwritten
      */
@@ -143,7 +195,20 @@ public final class ChangeJournal {
         return new Batch(version, bk, bi, br, ba, bp, bc);
     }
 
-    /** Commits a positional event and returns its sequence version. */
+    /**
+     * Commits a positional event and returns its sequence version.
+     *
+     * @param kind the kind of positional mutation
+     * @param index the nonnegative position reported by the producer
+     * @param removedCount the number of removed elements
+     * @param addedCount the number of added elements
+     * @param prior the producer-supplied prior value, possibly {@code null}
+     * @param next the producer-supplied current value, possibly {@code null}
+     * @return the sequence version assigned to the committed change
+     * @throws NullPointerException if {@code kind} is {@code null}
+     * @throws IllegalArgumentException if a position or count is negative
+     * @throws IllegalStateException if the version counter is exhausted
+     */
     public synchronized long append(Kind kind, int index, int removedCount,
                                     int addedCount, Object prior, Object next) {
         record(kind, index, removedCount, addedCount, prior, next);
