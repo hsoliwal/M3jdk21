@@ -1,0 +1,43 @@
+# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and contributors
+# SPDX-License-Identifier: Apache-2.0
+name: M3JDK21 indexed live views — source-sealed Java21 and recipe
+on:
+  push:
+    branches: ['m3/indexed-live-views-20261021']
+  pull_request:
+    paths:
+      - 'm3/collections/src/main/java/com/m3/collections/M3ArrayList.java'
+      - 'm3/collections/src/main/java/com/m3/collections/M3IndexSort.java'
+      - 'm3/collections/src/main/java/com/m3/collections/M3IndexedListSnapshot.java'
+      - 'm3/collections/src/main/java/com/m3/collections/M3IndexedLiveView.java'
+      - 'm3/collections/src/test/java/com/m3/collections/M3IndexedLiveView*.java'
+      - 'm3/collections/algorithm-catalog/indexed-live-views-20261021.tsv'
+      - 'm3/collections/qualification/indexed-live-views-20261021/**'
+      - 'm3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-indexed-live-views-20261021/**'
+      - 'm3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-indexed-live-views-20261021.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  qualify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          sparse-checkout: |
+            m3/collections
+            m3/tooling/migration-recipes/src/main/java/com/synexia/rewrite
+            m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-indexed-live-views-20261021
+            m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-indexed-live-views-20261021.yml
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Exact source seals and original Java21 owner differential
+        shell: bash
+        run: bash m3/collections/qualification/indexed-live-views-20261021/verify.sh
+      - name: Real OpenRewrite Java LST generation, fixed point and drift refusal
+        shell: bash
+        run: mvn -B -ntp -f m3/collections/qualification/indexed-live-views-20261021/pom.xml test

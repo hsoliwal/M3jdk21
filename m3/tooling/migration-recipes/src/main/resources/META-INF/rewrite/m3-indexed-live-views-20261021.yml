@@ -1,0 +1,9 @@
+# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and contributors
+# SPDX-License-Identifier: Apache-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.IndexedLiveViews20261021
+displayName: Reuse M3 parent arrays, mask compaction and stable primitive-index sort for live views
+description: Exact-source Java21 candidate. Source fingerprints and fixed-point replay are required; compiler, JNI and runtime qualification remain independent.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: m3-indexed-live-views-20261021

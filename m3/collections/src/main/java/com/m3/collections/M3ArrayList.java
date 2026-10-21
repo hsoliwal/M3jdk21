@@ -48,6 +48,8 @@ public final class M3ArrayList<E> extends AbstractList<E>
 
     private transient Object[] elements;
     private int size;
+    // Nonstructural set() changes invalidate cached physical-position projections.
+    private transient long m3ValueEpoch;
 
     public M3ArrayList() { elements = EMPTY; }
 
@@ -66,6 +68,10 @@ public final class M3ArrayList<E> extends AbstractList<E>
 
     /** Capacity is metadata, never the number of logically present elements. */
     public int capacity() { return elements.length; }
+
+    // Package-owned index metadata; not a public ArrayList replacement API.
+    int m3StructureEpoch() { return modCount; }
+    long m3ValueEpoch() { return m3ValueEpoch; }
 
     private static int required(int original, int additions) {
         long needed = (long) original + additions;
@@ -120,6 +126,7 @@ public final class M3ArrayList<E> extends AbstractList<E>
         int slot = Objects.checkIndex(index, size);
         E previous = (E) elements[slot];
         elements[slot] = value;
+        m3ValueEpoch++;
         return previous;
     }
 
@@ -229,6 +236,8 @@ public final class M3ArrayList<E> extends AbstractList<E>
     @SuppressWarnings({"unchecked", "rawtypes"})
     @Override public void sort(Comparator<? super E> comparator) {
         int expected = modCount;
+        // Even a comparator failure may leave a partially permuted backing array.
+        m3ValueEpoch++;
         Arrays.sort(elements, 0, size, (Comparator) comparator);
         if (modCount != expected) throw new ConcurrentModificationException("sort changed owner");
         modCount++;
