@@ -21,11 +21,13 @@ static int matches(jint state, jint required, jint forbidden) {
     return (value & yes) == yes && (value & no) == 0U;
 }
 
-JNIEXPORT jint JNICALL
-Java_com_m3_collections_M3MaskViewportNative_project(JNIEnv *env, jclass cls,
-        jintArray offsets, jintArray flags, jint first, jint length,
-        jint required, jint forbidden, jintArray target, jint targetOffset) {
-    (void) cls;
+/* Shared full-window and visible-page selection over borrowed aligned arrays.
+ * Preflight validates every source offset, including rows beyond the page.
+ * Only the accepted page is staged before releasing the borrowed JNI arrays. */
+static jint project_window(JNIEnv *env, jintArray offsets, jintArray flags,
+        jint first, jint length, jint required, jint forbidden,
+        jintArray target, jint targetOffset, jint skipVisible,
+        jint maxVisible, jboolean paged) {
     if (offsets == NULL || flags == NULL || target == NULL) {
         raise(env, "java/lang/NullPointerException", "null projection array");
         return 0;
@@ -40,6 +42,10 @@ Java_com_m3_collections_M3MaskViewportNative_project(JNIEnv *env, jclass cls,
     if (first < 0 || length < 0 || first > sourceSize - length ||
             targetOffset < 0 || targetOffset > outputSize) {
         raise(env, "java/lang/IndexOutOfBoundsException", "invalid array window");
+        return 0;
+    }
+    if (paged && (skipVisible < 0 || maxVisible < 0)) {
+        raise(env, "java/lang/IndexOutOfBoundsException", "negative visible page bounds");
         return 0;
     }
     jint *src = (*env)->GetIntArrayElements(env, offsets, NULL);
@@ -61,41 +67,69 @@ Java_com_m3_collections_M3MaskViewportNative_project(JNIEnv *env, jclass cls,
             ++selected;
         }
     }
-    if (selected > outputSize - targetOffset) {
+    jint needed = selected;
+    if (paged) {
+        needed = skipVisible >= selected ? 0 : selected - skipVisible;
+        if (needed > maxVisible) needed = maxVisible;
+    }
+    if (needed > outputSize - targetOffset) {
         raise(env, "java/lang/IndexOutOfBoundsException", "destination capacity");
         goto release;
     }
-    if (selected == 0) {
+    if (needed == 0) {
         goto release;
     }
-    /* Never mutate the destination until every possible input validation
-       has succeeded, including aliasing of target with either input array. */
-    if ((size_t) selected > SIZE_MAX / sizeof(jint)) {
+    /* Stage no more than the visible page. Aliased sources must not be modified
+       until both input arrays have been released without write-back. */
+    if ((size_t) needed > SIZE_MAX / sizeof(jint)) {
         raise(env, "java/lang/OutOfMemoryError", "projection size overflow");
         goto release;
     }
-    jint *scratch = (jint *) malloc((size_t) selected * sizeof(jint));
+    jint *scratch = (jint *) malloc((size_t) needed * sizeof(jint));
     if (scratch == NULL) {
         raise(env, "java/lang/OutOfMemoryError", "projection scratch allocation");
         goto release;
     }
     jint cursor = 0;
+    jint skip = paged ? skipVisible : 0;
     for (jint i = first; i < first + length; ++i) {
         if (matches(states[i], required, forbidden)) {
-            scratch[cursor++] = src[i];
+            if (skip != 0) {
+                --skip;
+            } else {
+                scratch[cursor++] = src[i];
+                if (cursor == needed) break;
+            }
         }
     }
-    /* Pinned/copy source elements must be released before the writeback,
-       so target-source aliasing does not let an abort undo output. */
     (*env)->ReleaseIntArrayElements(env, flags, states, JNI_ABORT);
     (*env)->ReleaseIntArrayElements(env, offsets, src, JNI_ABORT);
-    (*env)->SetIntArrayRegion(env, target, targetOffset, selected, scratch);
+    (*env)->SetIntArrayRegion(env, target, targetOffset, needed, scratch);
     free(scratch);
-    return (*env)->ExceptionCheck(env) ? 0 : selected;
+    return (*env)->ExceptionCheck(env) ? 0 : needed;
 release:
     (*env)->ReleaseIntArrayElements(env, flags, states, JNI_ABORT);
     (*env)->ReleaseIntArrayElements(env, offsets, src, JNI_ABORT);
     return 0;
+}
+
+JNIEXPORT jint JNICALL
+Java_com_m3_collections_M3MaskViewportNative_project(JNIEnv *env, jclass cls,
+        jintArray offsets, jintArray flags, jint first, jint length,
+        jint required, jint forbidden, jintArray target, jint targetOffset) {
+    (void) cls;
+    return project_window(env, offsets, flags, first, length, required,
+            forbidden, target, targetOffset, 0, 0, JNI_FALSE);
+}
+
+JNIEXPORT jint JNICALL
+Java_com_m3_collections_M3MaskViewportNative_projectPage(JNIEnv *env, jclass cls,
+        jintArray offsets, jintArray flags, jint first, jint length,
+        jint required, jint forbidden, jint skipVisible, jint maxVisible,
+        jintArray target, jint targetOffset) {
+    (void) cls;
+    return project_window(env, offsets, flags, first, length, required,
+            forbidden, target, targetOffset, skipVisible, maxVisible, JNI_TRUE);
 }
 
 /* Additive JNI original-owner CPU viewport output. Old project symbol unchanged. */
