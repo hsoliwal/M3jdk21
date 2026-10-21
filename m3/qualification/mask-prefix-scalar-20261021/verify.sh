@@ -14,7 +14,7 @@ if [[ "$(javac -version 2>&1)" != javac\ 21* ]]; then
   echo "BLOCKED: javac 21 is required" >&2
   exit 2
 fi
-if [[ "$(java -version 2>&1 | head -1)" != *\"21\"* ]]; then
+if [[ "$(java -version 2>&1 | head -1)" != *\"21.* ]]; then
   echo "BLOCKED: java 21 is required" >&2
   exit 2
 fi
