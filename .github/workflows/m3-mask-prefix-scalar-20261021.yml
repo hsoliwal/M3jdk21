@@ -1,0 +1,50 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3JDK21 direct array-mask prefix and filtered/sorted view proof
+
+on:
+  pull_request:
+    paths:
+      - 'src/java.base/share/classes/jdk/internal/mindex/M3CollectionMaskCompactor.java'
+      - 'test/jdk/jdk/internal/mindex/M3CollectionMaskCompactorPrefixTest.java'
+      - 'm3/qualification/mask-prefix-scalar-20261021/**'
+      - '.github/workflows/m3-mask-prefix-scalar-20261021.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  direct-java-base:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Check source and exact patch contract
+        shell: bash
+        run: |
+          set -euo pipefail
+          java -version
+          javac -version
+          git diff --check
+      - name: Execute direct M3JDK21 array-mask and sorted view contract regression
+        shell: bash
+        run: |
+          set -euo pipefail
+          bash m3/qualification/mask-prefix-scalar-20261021/verify.sh \
+            | tee "$RUNNER_TEMP/m3-mask-prefix-scalar.log"
+      - name: Refuse missing or skipped Java proof
+        shell: bash
+        run: |
+          set -euo pipefail
+          receipt="$RUNNER_TEMP/m3-mask-prefix-scalar.log"
+          test -s "$receipt"
+          grep -q '^PASS M3JDK21 direct java.base mask-prefix checks=' "$receipt"
+          grep -q 'BootstrapViewsTest.*PASS' "$receipt"
+          grep -q 'CollectionViewsContract.*PASS' "$receipt"
+          grep -q '^PASS: JDK21 patch-module compaction,' "$receipt"
