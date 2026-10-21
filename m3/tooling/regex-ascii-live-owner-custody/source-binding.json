@@ -1,0 +1,589 @@
+{
+  "schema": "M3_LEXICAL_LIVE_OWNER_HELPER_SOURCE_BINDING_V1",
+  "repository": "hsoliwal/com.synexia",
+  "receiverRepository": "hsoliwal/M3jdk21",
+  "sourceCommit": "b8a05dfab480e9df3c05f3adc3e03eac6b47341a",
+  "admissionCommit": "e2c397bdf9479a7bcae792ce2523b287273b9c45",
+  "helperSdkTree": "e790d6fdbfa18e3acccd9b451854f0412a5199f1",
+  "originalSdkTree": "089562441f095aef62f25338d1c148475e4e73a5",
+  "sdkFiles": 34,
+  "originalSdkFiles": 46,
+  "runtimeApplied": false,
+  "phaseAdvanced": false,
+  "files": [
+    {
+      "sourcePath": "synexia-openrewrite-recipes/tasks/regex-ascii-lexical-20261019/applied-owner-custody/sdk/FOSS_REUSE_DECISION.tsv",
+      "targetPath": "m3/tooling/regex-ascii-live-owner-custody/sdk/FOSS_REUSE_DECISION.tsv",
+      "gitBlob": "36fbe974864eab6b88b85cc8fc0468f5f47b8e7b",
+      "bytes": 501,
+      "sha256": "320def4377c99ce15b4976bd6c3491471629bb6773fe40af2dbe12c3ae517bdb"
+    },
+    {
+      "sourcePath": "synexia-openrewrite-recipes/tasks/regex-ascii-lexical-20261019/applied-owner-custody/sdk/README.md",
+      "targetPath": "m3/tooling/regex-ascii-live-owner-custody/sdk/README.md",
+      "gitBlob": "754f18b282992cf2ed7e66c7a70cdda58b187005",
+      "bytes": 2579,
+      "sha256": "d76253a0d53ce12b5ed158103a6ff84f5b5d3adf6efbf4e799f76e5a17ec5123"
+    },
+    {
+      "sourcePath": "synexia-openrewrite-recipes/tasks/regex-ascii-lexical-20261019/applied-owner-custody/sdk/THIRD_PARTY_NOTICES.md",
+      "targetPath": "m3/tooling/regex-ascii-live-owner-custody/sdk/THIRD_PARTY_NOTICES.md",
+      "gitBlob": "bb490f97874f601afecfa62837233035322f781c",
+      "bytes": 979,
+      "sha256": "55e884785878541993f4f4b89ddca0c30f629c821fa376ad42eb3792cfd11c03"
+    },
+    {
+      "sourcePath": "synexia-openrewrite-recipes/tasks/regex-ascii-lexical-20261019/applied-owner-custody/sdk/pinned-engine/com/synexia/rewrite/M3GpuToolJoinManifest.java",
+      "targetPath": "m3/tooling/regex-ascii-live-owner-custody/sdk/pinned-engine/com/synexia/rewrite/M3GpuToolJoinManifest.java",
+      "gitBlob": "38df5f97bbeec8a8a8cfc77091d56bda925c07f2",
+      "bytes": 10964,
+      "sha256": "56bd61be29eae76b3f468519677424450448751d94ca032956b330d7b3dd1999"
+    },
+    {
+      "sourcePath": "synexia-openrewrite-recipes/tasks/regex-ascii-lexical-20261019/applied-owner-custody/sdk/pinned-engine/com/synexia/rewrite/M3GpuToolJoinRecipe.java",
+      "targetPath": "m3/tooling/regex-ascii-live-owner-custody/sdk/pinned-engine/com/synexia/rewrite/M3GpuToolJoinRecipe.java",
+      "gitBlob": "1c1b1b568d369f688f6953161636bf36b484bf5a",
+      "bytes": 5187,
+      "sha256": "ee90a2b8689699745553c2f4d2d07121b91777f4e9a671fdb33ba8edea0c14ec"
+    },
+    {
+      "sourcePath": "synexia-openrewrite-recipes/tasks/regex-ascii-lexical-20261019/applied-owner-custody/sdk/pinned-engine/com/synexia/rewrite/M3RegexAsciiLiveOwnerCustodyInverseRecipe.java",
+      "targetPath": "m3/tooling/regex-ascii-live-owner-custody/sdk/pinned-engine/com/synexia/rewrite/M3RegexAsciiLiveOwnerCustodyInverseRecipe.java",
+      "gitBlob": "488698dfa970359d9ffa61905499a58625d4e230",
+      "bytes": 824,
+      "sha256": "ec97368b2c212a08d1fee230c5ff25c95153e2f12406a4a9a4f54ed4f3aa3343"
+    },
+    {
+      "sourcePath": "synexia-openrewrite-recipes/tasks/regex-ascii-lexical-20261019/applied-owner-custody/sdk/pinned-engine/com/synexia/rewrite/M3RegexAsciiLiveOwnerCustodyRecipe.java",
+      "targetPath": "m3/tooling/regex-ascii-live-owner-custody/sdk/pinned-engine/com/synexia/rewrite/M3RegexAsciiLiveOwnerCustodyRecipe.java",
+      "gitBlob": "3e810fcf37e5a441f6175345d564873c797dd943",
+      "bytes": 815,
+      "sha256": "e524a949c3c578a5e1d4c200e2f392fe65d6370b24c797bd23a501382f22ceab"
+    },
+    {
+      "sourcePath": "synexia-openrewrite-recipes/tasks/regex-ascii-lexical-20261019/applied-owner-custody/sdk/pins.json",
+      "targetPath": "m3/tooling/regex-ascii-live-owner-custody/sdk/pins.json",
+      "gitBlob": "9741d0d41a3ba20cec4acf5ebefdbb775f4a0430",
+      "bytes": 10386,
+      "sha256": "6b613478fe61ddcfb5b37a941f45e77d67192662ef12841b04f878ae36b83653"
+    },
+    {
+      "sourcePath": "synexia-openrewrite-recipes/tasks/regex-ascii-lexical-20261019/applied-owner-custody/sdk/pom.xml",
+      "targetPath": "m3/tooling/regex-ascii-live-owner-custody/sdk/pom.xml",
+      "gitBlob": "d79867bcc09ad6329e12418e15907e54b8ab025f",
+      "bytes": 2678,
+      "sha256": "f0ab99c3dafb38e82f8e5fd4c6d22db07831808c251c4622f292114c83e6673e"
+    },
+    {
+      "sourcePath": "synexia-openrewrite-recipes/tasks/regex-ascii-lexical-20261019/applied-owner-custody/sdk/src/main/resources/META-INF/rewrite/regex-ascii-live-owner-custody-20261020.yml",
+      "targetPath": "m3/tooling/regex-ascii-live-owner-custody/sdk/src/main/resources/META-INF/rewrite/regex-ascii-live-owner-custody-20261020.yml",
+      "gitBlob": "55f44f2d3f8629dd399345115b270903596b7844",
+      "bytes": 777,
+      "sha256": "607152d04cfee9e43c7e1a2189c454a23bce17eb11c2e436774094339b6a9c2e"
+    },
+    {
+      "sourcePath": "synexia-openrewrite-recipes/tasks/regex-ascii-lexical-20261019/applied-owner-custody/sdk/src/main/resources/com/synexia/rewrite/regex-ascii-live-owner-custody-20261020/forward/before/.github/workflows/m3-regex-ascii-lexical-receiver.yml",
+      "targetPath": "m3/tooling/regex-ascii-live-owner-custody/sdk/src/main/resources/com/synexia/rewrite/regex-ascii-live-owner-custody-20261020/forward/before/.github/workflows/m3-regex-ascii-lexical-receiver.yml",
+      "gitBlob": "7c7ad39526452b51f38b8e7c53ba9eab24b16688",
+      "bytes": 31096,
+      "sha256": "03626785e735055deb106c888cdb54b52202413a6d870834c7624e7e73da8fd4"
+    },
+    {
+      "sourcePath": "synexia-openrewrite-recipes/tasks/regex-ascii-lexical-20261019/applied-owner-custody/sdk/src/main/resources/com/synexia/rewrite/regex-ascii-live-owner-custody-20261020/forward/before/m3/tooling/regex-ascii-lexical-receiver/README.md",
+      "targetPath": "m3/tooling/regex-ascii-live-owner-custody/sdk/src/main/resources/com/synexia/rewrite/regex-ascii-live-owner-custody-20261020/forward/before/m3/tooling/regex-ascii-lexical-receiver/README.md",
+      "gitBlob": "28f4187fd8470dc0d036cb77ec24d471eebb3941",
+      "bytes": 1480,
+      "sha256": "ceff1c2cd62a3ae130c128b9dfa24484500dd2723e73b13e7b7e65458f39b631"
+    },
+    {
+      "sourcePath": "synexia-openrewrite-recipes/tasks/regex-ascii-lexical-20261019/applied-owner-custody/sdk/src/main/resources/com/synexia/rewrite/regex-ascii-live-owner-custody-20261020/forward/before/m3/tooling/regex-ascii-lexical-receiver/qualify.py",
+      "targetPath": "m3/tooling/regex-ascii-live-owner-custody/sdk/src/main/resources/com/synexia/rewrite/regex-ascii-live-owner-custody-20261020/forward/before/m3/tooling/regex-ascii-lexical-receiver/qualify.py",
+      "gitBlob": "ca061246d9e540e953badd0d7b65a17ed0755565",
+      "bytes": 12664,
+      "sha256": "21b295f83febcb34a9977dc3e5ed602893136641f09bece9d69884e53b27ab48"
+    },
+    {
+      "sourcePath": "synexia-openrewrite-recipes/tasks/regex-ascii-lexical-20261019/applied-owner-custody/sdk/src/main/resources/com/synexia/rewrite/regex-ascii-live-owner-custody-20261020/forward/before/m3/tooling/regex-ascii-lexical-receiver/sdk/pins.json",
+      "targetPath": "m3/tooling/regex-ascii-live-owner-custody/sdk/src/main/resources/com/synexia/rewrite/regex-ascii-live-owner-custody-20261020/forward/before/m3/tooling/regex-ascii-lexical-receiver/sdk/pins.json",
+      "gitBlob": "7c719489e46779476b77797b03fc6668f6d72324",
+      "bytes": 14670,
+      "sha256": "d1eb3f4deeee0440e4ff835394f4963bbb32cf3575cd10b4c4fdef8d95156f3b"
+    },
+    {
+      "sourcePath": "synexia-openrewrite-recipes/tasks/regex-ascii-lexical-20261019/applied-owner-custody/sdk/src/main/resources/com/synexia/rewrite/regex-ascii-live-owner-custody-20261020/forward/before/m3/tooling/regex-ascii-lexical-receiver/sdk/verify.py",
+      "targetPath": "m3/tooling/regex-ascii-live-owner-custody/sdk/src/main/resources/com/synexia/rewrite/regex-ascii-live-owner-custody-20261020/forward/before/m3/tooling/regex-ascii-lexical-receiver/sdk/verify.py",
+      "gitBlob": "b0d0c63653975ee92460dffb30e953bda3c8657b",
+      "bytes": 23045,
+      "sha256": "7e9b500925dcacbda836c0a1664f46c8b241568907de633848ac52fe555a143b"
+    },
+    {
+      "sourcePath": "synexia-openrewrite-recipes/tasks/regex-ascii-lexical-20261019/applied-owner-custody/sdk/src/main/resources/com/synexia/rewrite/regex-ascii-live-owner-custody-20261020/forward/manifest.tsv",
+      "targetPath": "m3/tooling/regex-ascii-live-owner-custody/sdk/src/main/resources/com/synexia/rewrite/regex-ascii-live-owner-custody-20261020/forward/manifest.tsv",
+      "gitBlob": "2d0dca8d2b245f1b0e9b38fa487135f4205092c7",
+      "bytes": 1090,
+      "sha256": "5a2bb451392bcd9e89fddaa6443e4c14a515d3db7c952d61a10dcf67769a35d9"
+    },
+    {
+      "sourcePath": "synexia-openrewrite-recipes/tasks/regex-ascii-lexical-20261019/applied-owner-custody/sdk/src/main/resources/com/synexia/rewrite/regex-ascii-live-owner-custody-20261020/forward/out/.github/workflows/m3-regex-ascii-lexical-receiver.yml",
+      "targetPath": "m3/tooling/regex-ascii-live-owner-custody/sdk/src/main/resources/com/synexia/rewrite/regex-ascii-live-owner-custody-20261020/forward/out/.github/workflows/m3-regex-ascii-lexical-receiver.yml",
+      "gitBlob": "543bed1285bb8903db5fb67ac89f6b6cf4183d93",
+      "bytes": 32037,
+      "sha256": "19ab6cb0b70ff4aa9adc33dfb795e98614d7264fed101ff6d9f22a03513c2317"
+    },
+    {
+      "sourcePath": "synexia-openrewrite-recipes/tasks/regex-ascii-lexical-20261019/applied-owner-custody/sdk/src/main/resources/com/synexia/rewrite/regex-ascii-live-owner-custody-20261020/forward/out/m3/tooling/regex-ascii-lexical-receiver/README.md",
+      "targetPath": "m3/tooling/regex-ascii-live-owner-custody/sdk/src/main/resources/com/synexia/rewrite/regex-ascii-live-owner-custody-20261020/forward/out/m3/tooling/regex-ascii-lexical-receiver/README.md",
+      "gitBlob": "d73a374eff026de3557f6163a4094d1c69222355",
+      "bytes": 3145,
+      "sha256": "4a727945cb9fdd54e1719916ed44d09cc88ea23e19c5493f90e0251ff9b16063"
+    },
+    {
+      "sourcePath": "synexia-openrewrite-recipes/tasks/regex-ascii-lexical-20261019/applied-owner-custody/sdk/src/main/resources/com/synexia/rewrite/regex-ascii-live-owner-custody-20261020/forward/out/m3/tooling/regex-ascii-lexical-receiver/qualify.py",
+      "targetPath": "m3/tooling/regex-ascii-live-owner-custody/sdk/src/main/resources/com/synexia/rewrite/regex-ascii-live-owner-custody-20261020/forward/out/m3/tooling/regex-ascii-lexical-receiver/qualify.py",
+      "gitBlob": "ec4315ca1f5a90af3f7269d0a923647b6f2bcb94",
+      "bytes": 22838,
+      "sha256": "203d4a2d6278400457544b103c905f8e3336caa54ddf9be35ee15b8caac15810"
+    },
+    {
+      "sourcePath": "synexia-openrewrite-recipes/tasks/regex-ascii-lexical-20261019/applied-owner-custody/sdk/src/main/resources/com/synexia/rewrite/regex-ascii-live-owner-custody-20261020/forward/out/m3/tooling/regex-ascii-lexical-receiver/sdk/pins.json",
+      "targetPath": "m3/tooling/regex-ascii-live-owner-custody/sdk/src/main/resources/com/synexia/rewrite/regex-ascii-live-owner-custody-20261020/forward/out/m3/tooling/regex-ascii-lexical-receiver/sdk/pins.json",
+      "gitBlob": "7c719489e46779476b77797b03fc6668f6d72324",
+      "bytes": 14670,
+      "sha256": "d1eb3f4deeee0440e4ff835394f4963bbb32cf3575cd10b4c4fdef8d95156f3b"
+    },
+    {
+      "sourcePath": "synexia-openrewrite-recipes/tasks/regex-ascii-lexical-20261019/applied-owner-custody/sdk/src/main/resources/com/synexia/rewrite/regex-ascii-live-owner-custody-20261020/forward/out/m3/tooling/regex-ascii-lexical-receiver/sdk/verify.py",
+      "targetPath": "m3/tooling/regex-ascii-live-owner-custody/sdk/src/main/resources/com/synexia/rewrite/regex-ascii-live-owner-custody-20261020/forward/out/m3/tooling/regex-ascii-lexical-receiver/sdk/verify.py",
+      "gitBlob": "b0d0c63653975ee92460dffb30e953bda3c8657b",
+      "bytes": 23045,
+      "sha256": "7e9b500925dcacbda836c0a1664f46c8b241568907de633848ac52fe555a143b"
+    },
+    {
+      "sourcePath": "synexia-openrewrite-recipes/tasks/regex-ascii-lexical-20261019/applied-owner-custody/sdk/src/main/resources/com/synexia/rewrite/regex-ascii-live-owner-custody-20261020/inverse/before/.github/workflows/m3-regex-ascii-lexical-receiver.yml",
+      "targetPath": "m3/tooling/regex-ascii-live-owner-custody/sdk/src/main/resources/com/synexia/rewrite/regex-ascii-live-owner-custody-20261020/inverse/before/.github/workflows/m3-regex-ascii-lexical-receiver.yml",
+      "gitBlob": "543bed1285bb8903db5fb67ac89f6b6cf4183d93",
+      "bytes": 32037,
+      "sha256": "19ab6cb0b70ff4aa9adc33dfb795e98614d7264fed101ff6d9f22a03513c2317"
+    },
+    {
+      "sourcePath": "synexia-openrewrite-recipes/tasks/regex-ascii-lexical-20261019/applied-owner-custody/sdk/src/main/resources/com/synexia/rewrite/regex-ascii-live-owner-custody-20261020/inverse/before/m3/tooling/regex-ascii-lexical-receiver/README.md",
+      "targetPath": "m3/tooling/regex-ascii-live-owner-custody/sdk/src/main/resources/com/synexia/rewrite/regex-ascii-live-owner-custody-20261020/inverse/before/m3/tooling/regex-ascii-lexical-receiver/README.md",
+      "gitBlob": "d73a374eff026de3557f6163a4094d1c69222355",
+      "bytes": 3145,
+      "sha256": "4a727945cb9fdd54e1719916ed44d09cc88ea23e19c5493f90e0251ff9b16063"
+    },
+    {
+      "sourcePath": "synexia-openrewrite-recipes/tasks/regex-ascii-lexical-20261019/applied-owner-custody/sdk/src/main/resources/com/synexia/rewrite/regex-ascii-live-owner-custody-20261020/inverse/before/m3/tooling/regex-ascii-lexical-receiver/qualify.py",
+      "targetPath": "m3/tooling/regex-ascii-live-owner-custody/sdk/src/main/resources/com/synexia/rewrite/regex-ascii-live-owner-custody-20261020/inverse/before/m3/tooling/regex-ascii-lexical-receiver/qualify.py",
+      "gitBlob": "ec4315ca1f5a90af3f7269d0a923647b6f2bcb94",
+      "bytes": 22838,
+      "sha256": "203d4a2d6278400457544b103c905f8e3336caa54ddf9be35ee15b8caac15810"
+    },
+    {
+      "sourcePath": "synexia-openrewrite-recipes/tasks/regex-ascii-lexical-20261019/applied-owner-custody/sdk/src/main/resources/com/synexia/rewrite/regex-ascii-live-owner-custody-20261020/inverse/before/m3/tooling/regex-ascii-lexical-receiver/sdk/pins.json",
+      "targetPath": "m3/tooling/regex-ascii-live-owner-custody/sdk/src/main/resources/com/synexia/rewrite/regex-ascii-live-owner-custody-20261020/inverse/before/m3/tooling/regex-ascii-lexical-receiver/sdk/pins.json",
+      "gitBlob": "7c719489e46779476b77797b03fc6668f6d72324",
+      "bytes": 14670,
+      "sha256": "d1eb3f4deeee0440e4ff835394f4963bbb32cf3575cd10b4c4fdef8d95156f3b"
+    },
+    {
+      "sourcePath": "synexia-openrewrite-recipes/tasks/regex-ascii-lexical-20261019/applied-owner-custody/sdk/src/main/resources/com/synexia/rewrite/regex-ascii-live-owner-custody-20261020/inverse/before/m3/tooling/regex-ascii-lexical-receiver/sdk/verify.py",
+      "targetPath": "m3/tooling/regex-ascii-live-owner-custody/sdk/src/main/resources/com/synexia/rewrite/regex-ascii-live-owner-custody-20261020/inverse/before/m3/tooling/regex-ascii-lexical-receiver/sdk/verify.py",
+      "gitBlob": "b0d0c63653975ee92460dffb30e953bda3c8657b",
+      "bytes": 23045,
+      "sha256": "7e9b500925dcacbda836c0a1664f46c8b241568907de633848ac52fe555a143b"
+    },
+    {
+      "sourcePath": "synexia-openrewrite-recipes/tasks/regex-ascii-lexical-20261019/applied-owner-custody/sdk/src/main/resources/com/synexia/rewrite/regex-ascii-live-owner-custody-20261020/inverse/manifest.tsv",
+      "targetPath": "m3/tooling/regex-ascii-live-owner-custody/sdk/src/main/resources/com/synexia/rewrite/regex-ascii-live-owner-custody-20261020/inverse/manifest.tsv",
+      "gitBlob": "ccb7ecadb79b195d243996f74ea1629ea906ee2d",
+      "bytes": 1090,
+      "sha256": "d5f889b7a62195b8137743fdd7fc00deec9b3c3a0adaf44f6b2a55ced5d9b9b7"
+    },
+    {
+      "sourcePath": "synexia-openrewrite-recipes/tasks/regex-ascii-lexical-20261019/applied-owner-custody/sdk/src/main/resources/com/synexia/rewrite/regex-ascii-live-owner-custody-20261020/inverse/out/.github/workflows/m3-regex-ascii-lexical-receiver.yml",
+      "targetPath": "m3/tooling/regex-ascii-live-owner-custody/sdk/src/main/resources/com/synexia/rewrite/regex-ascii-live-owner-custody-20261020/inverse/out/.github/workflows/m3-regex-ascii-lexical-receiver.yml",
+      "gitBlob": "7c7ad39526452b51f38b8e7c53ba9eab24b16688",
+      "bytes": 31096,
+      "sha256": "03626785e735055deb106c888cdb54b52202413a6d870834c7624e7e73da8fd4"
+    },
+    {
+      "sourcePath": "synexia-openrewrite-recipes/tasks/regex-ascii-lexical-20261019/applied-owner-custody/sdk/src/main/resources/com/synexia/rewrite/regex-ascii-live-owner-custody-20261020/inverse/out/m3/tooling/regex-ascii-lexical-receiver/README.md",
+      "targetPath": "m3/tooling/regex-ascii-live-owner-custody/sdk/src/main/resources/com/synexia/rewrite/regex-ascii-live-owner-custody-20261020/inverse/out/m3/tooling/regex-ascii-lexical-receiver/README.md",
+      "gitBlob": "28f4187fd8470dc0d036cb77ec24d471eebb3941",
+      "bytes": 1480,
+      "sha256": "ceff1c2cd62a3ae130c128b9dfa24484500dd2723e73b13e7b7e65458f39b631"
+    },
+    {
+      "sourcePath": "synexia-openrewrite-recipes/tasks/regex-ascii-lexical-20261019/applied-owner-custody/sdk/src/main/resources/com/synexia/rewrite/regex-ascii-live-owner-custody-20261020/inverse/out/m3/tooling/regex-ascii-lexical-receiver/qualify.py",
+      "targetPath": "m3/tooling/regex-ascii-live-owner-custody/sdk/src/main/resources/com/synexia/rewrite/regex-ascii-live-owner-custody-20261020/inverse/out/m3/tooling/regex-ascii-lexical-receiver/qualify.py",
+      "gitBlob": "ca061246d9e540e953badd0d7b65a17ed0755565",
+      "bytes": 12664,
+      "sha256": "21b295f83febcb34a9977dc3e5ed602893136641f09bece9d69884e53b27ab48"
+    },
+    {
+      "sourcePath": "synexia-openrewrite-recipes/tasks/regex-ascii-lexical-20261019/applied-owner-custody/sdk/src/main/resources/com/synexia/rewrite/regex-ascii-live-owner-custody-20261020/inverse/out/m3/tooling/regex-ascii-lexical-receiver/sdk/pins.json",
+      "targetPath": "m3/tooling/regex-ascii-live-owner-custody/sdk/src/main/resources/com/synexia/rewrite/regex-ascii-live-owner-custody-20261020/inverse/out/m3/tooling/regex-ascii-lexical-receiver/sdk/pins.json",
+      "gitBlob": "7c719489e46779476b77797b03fc6668f6d72324",
+      "bytes": 14670,
+      "sha256": "d1eb3f4deeee0440e4ff835394f4963bbb32cf3575cd10b4c4fdef8d95156f3b"
+    },
+    {
+      "sourcePath": "synexia-openrewrite-recipes/tasks/regex-ascii-lexical-20261019/applied-owner-custody/sdk/src/main/resources/com/synexia/rewrite/regex-ascii-live-owner-custody-20261020/inverse/out/m3/tooling/regex-ascii-lexical-receiver/sdk/verify.py",
+      "targetPath": "m3/tooling/regex-ascii-live-owner-custody/sdk/src/main/resources/com/synexia/rewrite/regex-ascii-live-owner-custody-20261020/inverse/out/m3/tooling/regex-ascii-lexical-receiver/sdk/verify.py",
+      "gitBlob": "b0d0c63653975ee92460dffb30e953bda3c8657b",
+      "bytes": 23045,
+      "sha256": "7e9b500925dcacbda836c0a1664f46c8b241568907de633848ac52fe555a143b"
+    },
+    {
+      "sourcePath": "synexia-openrewrite-recipes/tasks/regex-ascii-lexical-20261019/applied-owner-custody/sdk/src/test/java/com/synexia/rewrite/M3RegexAsciiLiveOwnerCustodyRecipeTest.java",
+      "targetPath": "m3/tooling/regex-ascii-live-owner-custody/sdk/src/test/java/com/synexia/rewrite/M3RegexAsciiLiveOwnerCustodyRecipeTest.java",
+      "gitBlob": "90327a3efa2a33953548f7d46402f490d7d8ebab",
+      "bytes": 16076,
+      "sha256": "5a5c5a5b4207cad82f1c781c9460fd6ae9269a4147217b567143ff61f36f278f"
+    },
+    {
+      "sourcePath": "synexia-openrewrite-recipes/tasks/regex-ascii-lexical-20261019/applied-owner-custody/sdk/verify.py",
+      "targetPath": "m3/tooling/regex-ascii-live-owner-custody/sdk/verify.py",
+      "gitBlob": "c44cd964d86dbf4afa8e2c7161b660d340e5c6ac",
+      "bytes": 28910,
+      "sha256": "ae7db5837fe0f5ad7dafc79e092c003955a3dfdce43caffd8f637a2227446bc6"
+    },
+    {
+      "targetPath": "m3/tooling/regex-ascii-live-owner-custody/qualify.py",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/regex-ascii-lexical-20261019/applied-owner-custody/hosted/qualify.py",
+      "gitBlob": "c5bb43b57b854c558ea7b193982c3c5f5d7edc70",
+      "bytes": 16534,
+      "sha256": "9b1436ac01033fbac684b99fb0635427b43c81539d7654292d67b077916d6bc7"
+    },
+    {
+      "targetPath": ".github/workflows/m3-regex-ascii-live-owner-custody.yml",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/regex-ascii-lexical-20261019/applied-owner-custody/hosted/qualification.yml",
+      "gitBlob": "17c2f91abfa8ffe0a3a50501629b88327869ed8f",
+      "bytes": 33587,
+      "sha256": "78c84ae2dd9e8e5e881f389f6e52e2456a5d1689f46a0d0494879319d3c8c3c7"
+    },
+    {
+      "sourcePath": "synexia-openrewrite-recipes/tasks/regex-ascii-lexical-20261019/receiver-sdk/FOSS_REUSE_DECISION.tsv",
+      "targetPath": "m3/tooling/regex-ascii-lexical-receiver/sdk/FOSS_REUSE_DECISION.tsv",
+      "gitBlob": "c5549cda82b37ec7a06e216fe38fd5f1ed3ffc70",
+      "bytes": 1246,
+      "sha256": "7beb028394b29dafdeca1c4f4c37d94deaf4ad35126f7c3ed8a559a9453ee5de"
+    },
+    {
+      "sourcePath": "synexia-openrewrite-recipes/tasks/regex-ascii-lexical-20261019/receiver-sdk/README.md",
+      "targetPath": "m3/tooling/regex-ascii-lexical-receiver/sdk/README.md",
+      "gitBlob": "bd82a9ad7112a06d70b0c82166c2ab62be84b2c1",
+      "bytes": 2576,
+      "sha256": "17afab41506ddfb0ad6f99db1c839c50830629fb88724a59f93615783f9ff910"
+    },
+    {
+      "sourcePath": "synexia-openrewrite-recipes/tasks/regex-ascii-lexical-20261019/receiver-sdk/THIRD_PARTY_NOTICES.md",
+      "targetPath": "m3/tooling/regex-ascii-lexical-receiver/sdk/THIRD_PARTY_NOTICES.md",
+      "gitBlob": "a955acfa11168926c54bdd0786f216c243843561",
+      "bytes": 982,
+      "sha256": "68793575d7552139a83950254ee70332141629ba396e28e68b981f0aa6c75c96"
+    },
+    {
+      "sourcePath": "synexia-openrewrite-recipes/tasks/regex-ascii-lexical-20261019/receiver-sdk/pinned-engine/com/synexia/rewrite/M3GpuToolJoinManifest.java",
+      "targetPath": "m3/tooling/regex-ascii-lexical-receiver/sdk/pinned-engine/com/synexia/rewrite/M3GpuToolJoinManifest.java",
+      "gitBlob": "38df5f97bbeec8a8a8cfc77091d56bda925c07f2",
+      "bytes": 10964,
+      "sha256": "56bd61be29eae76b3f468519677424450448751d94ca032956b330d7b3dd1999"
+    },
+    {
+      "sourcePath": "synexia-openrewrite-recipes/tasks/regex-ascii-lexical-20261019/receiver-sdk/pinned-engine/com/synexia/rewrite/M3GpuToolJoinRecipe.java",
+      "targetPath": "m3/tooling/regex-ascii-lexical-receiver/sdk/pinned-engine/com/synexia/rewrite/M3GpuToolJoinRecipe.java",
+      "gitBlob": "1c1b1b568d369f688f6953161636bf36b484bf5a",
+      "bytes": 5187,
+      "sha256": "ee90a2b8689699745553c2f4d2d07121b91777f4e9a671fdb33ba8edea0c14ec"
+    },
+    {
+      "sourcePath": "synexia-openrewrite-recipes/tasks/regex-ascii-lexical-20261019/receiver-sdk/pinned-engine/com/synexia/rewrite/M3RegexAsciiLexicalReceiverInverseRecipe.java",
+      "targetPath": "m3/tooling/regex-ascii-lexical-receiver/sdk/pinned-engine/com/synexia/rewrite/M3RegexAsciiLexicalReceiverInverseRecipe.java",
+      "gitBlob": "3e301aa374f34a04ac3364f674e1e6703f6a8761",
+      "bytes": 831,
+      "sha256": "dfee7fb0f0398450ba49e38e7544677cea71e2a85e997ed7492ca4ab5cd29e18"
+    },
+    {
+      "sourcePath": "synexia-openrewrite-recipes/tasks/regex-ascii-lexical-20261019/receiver-sdk/pinned-engine/com/synexia/rewrite/M3RegexAsciiLexicalReceiverRecipe.java",
+      "targetPath": "m3/tooling/regex-ascii-lexical-receiver/sdk/pinned-engine/com/synexia/rewrite/M3RegexAsciiLexicalReceiverRecipe.java",
+      "gitBlob": "71974e6dab0a12e3ad364769b3631e97f986ebe5",
+      "bytes": 812,
+      "sha256": "661a859dd246d5a9b68a3f3601cefb95ef0fbfbeb630bbd4fd6c86b01af7a9e2"
+    },
+    {
+      "sourcePath": "synexia-openrewrite-recipes/tasks/regex-ascii-lexical-20261019/receiver-sdk/pins.json",
+      "targetPath": "m3/tooling/regex-ascii-lexical-receiver/sdk/pins.json",
+      "gitBlob": "7c719489e46779476b77797b03fc6668f6d72324",
+      "bytes": 14670,
+      "sha256": "d1eb3f4deeee0440e4ff835394f4963bbb32cf3575cd10b4c4fdef8d95156f3b"
+    },
+    {
+      "sourcePath": "synexia-openrewrite-recipes/tasks/regex-ascii-lexical-20261019/receiver-sdk/pom.xml",
+      "targetPath": "m3/tooling/regex-ascii-lexical-receiver/sdk/pom.xml",
+      "gitBlob": "d79867bcc09ad6329e12418e15907e54b8ab025f",
+      "bytes": 2678,
+      "sha256": "f0ab99c3dafb38e82f8e5fd4c6d22db07831808c251c4622f292114c83e6673e"
+    },
+    {
+      "sourcePath": "synexia-openrewrite-recipes/tasks/regex-ascii-lexical-20261019/receiver-sdk/src/main/resources/META-INF/rewrite/regex-ascii-lexical-receiver-20261019.yml",
+      "targetPath": "m3/tooling/regex-ascii-lexical-receiver/sdk/src/main/resources/META-INF/rewrite/regex-ascii-lexical-receiver-20261019.yml",
+      "gitBlob": "1d9be3b38744c6cd6a3443a788f1e6474bb0a0ef",
+      "bytes": 853,
+      "sha256": "75090684812de7de29172351c10b194863c6699bd0e026c335849ab10b788588"
+    },
+    {
+      "sourcePath": "synexia-openrewrite-recipes/tasks/regex-ascii-lexical-20261019/receiver-sdk/src/main/resources/com/synexia/rewrite/regex-ascii-lexical-receiver-20261019/forward/before/m3/docs/name-mapping.json",
+      "targetPath": "m3/tooling/regex-ascii-lexical-receiver/sdk/src/main/resources/com/synexia/rewrite/regex-ascii-lexical-receiver-20261019/forward/before/m3/docs/name-mapping.json",
+      "gitBlob": "a7008bc04536586218da76e823bf570d50cec526",
+      "bytes": 451339,
+      "sha256": "1085c259e66bff017137e0c63bb86fc0b8daf436865f6378075cf4c920035ef4"
+    },
+    {
+      "sourcePath": "synexia-openrewrite-recipes/tasks/regex-ascii-lexical-20261019/receiver-sdk/src/main/resources/com/synexia/rewrite/regex-ascii-lexical-receiver-20261019/forward/before/src/java.base/share/classes/jdk/internal/mindex/M3Automaton.java",
+      "targetPath": "m3/tooling/regex-ascii-lexical-receiver/sdk/src/main/resources/com/synexia/rewrite/regex-ascii-lexical-receiver-20261019/forward/before/src/java.base/share/classes/jdk/internal/mindex/M3Automaton.java",
+      "gitBlob": "7755e02e9da1546240afb96078a86e766566ff59",
+      "bytes": 19912,
+      "sha256": "606b60797ecce1ce888888dd4056fdcddffef7f5eb8f1a56cc854126c7884f0f"
+    },
+    {
+      "sourcePath": "synexia-openrewrite-recipes/tasks/regex-ascii-lexical-20261019/receiver-sdk/src/main/resources/com/synexia/rewrite/regex-ascii-lexical-receiver-20261019/forward/before/src/java.base/share/classes/jdk/internal/mindex/M3AutomatonOps.java",
+      "targetPath": "m3/tooling/regex-ascii-lexical-receiver/sdk/src/main/resources/com/synexia/rewrite/regex-ascii-lexical-receiver-20261019/forward/before/src/java.base/share/classes/jdk/internal/mindex/M3AutomatonOps.java",
+      "gitBlob": "58cdad630918df11d186312b706bcea03ab52ffe",
+      "bytes": 37129,
+      "sha256": "9a34cb85a705f6bee43c5cbb6c7a7181996d3b3a9579aa4e547e1c2f112b8f45"
+    },
+    {
+      "sourcePath": "synexia-openrewrite-recipes/tasks/regex-ascii-lexical-20261019/receiver-sdk/src/main/resources/com/synexia/rewrite/regex-ascii-lexical-receiver-20261019/forward/before/src/java.base/share/classes/jdk/internal/mindex/M3ChunkCursor.java",
+      "targetPath": "m3/tooling/regex-ascii-lexical-receiver/sdk/src/main/resources/com/synexia/rewrite/regex-ascii-lexical-receiver-20261019/forward/before/src/java.base/share/classes/jdk/internal/mindex/M3ChunkCursor.java",
+      "gitBlob": "30df0c03381ba2348899d1a842a13045466ef500",
+      "bytes": 2336,
+      "sha256": "cda9d82febd03dd401c40884bf66eb7e394c1c36af19e5406172d2e58b7a0660"
+    },
+    {
+      "sourcePath": "synexia-openrewrite-recipes/tasks/regex-ascii-lexical-20261019/receiver-sdk/src/main/resources/com/synexia/rewrite/regex-ascii-lexical-receiver-20261019/forward/before/src/java.base/share/classes/jdk/internal/mindex/M3NotYetReceived.java",
+      "targetPath": "m3/tooling/regex-ascii-lexical-receiver/sdk/src/main/resources/com/synexia/rewrite/regex-ascii-lexical-receiver-20261019/forward/before/src/java.base/share/classes/jdk/internal/mindex/M3NotYetReceived.java",
+      "gitBlob": "ac96ac14ced11cf51983e555b7ff7898e2b0a4e9",
+      "bytes": 763,
+      "sha256": "2b53cf0eb526ab7af3c2e224f49676d0f3570db3e523b7c98e78715a4410cbff"
+    },
+    {
+      "sourcePath": "synexia-openrewrite-recipes/tasks/regex-ascii-lexical-20261019/receiver-sdk/src/main/resources/com/synexia/rewrite/regex-ascii-lexical-receiver-20261019/forward/before/src/java.base/share/classes/jdk/internal/mindex/M3RegExpCompiler.java",
+      "targetPath": "m3/tooling/regex-ascii-lexical-receiver/sdk/src/main/resources/com/synexia/rewrite/regex-ascii-lexical-receiver-20261019/forward/before/src/java.base/share/classes/jdk/internal/mindex/M3RegExpCompiler.java",
+      "gitBlob": "3cd380eca7cc903ea7fb8f80cccae1894a851ac2",
+      "bytes": 31026,
+      "sha256": "650f1ecce5c3b555ecf8ef3d8e5aaf6ad14d24f18497a5f74cdef0437f62106c"
+    },
+    {
+      "sourcePath": "synexia-openrewrite-recipes/tasks/regex-ascii-lexical-20261019/receiver-sdk/src/main/resources/com/synexia/rewrite/regex-ascii-lexical-receiver-20261019/forward/before/src/java.base/share/classes/jdk/internal/mindex/M3RunTable.java",
+      "targetPath": "m3/tooling/regex-ascii-lexical-receiver/sdk/src/main/resources/com/synexia/rewrite/regex-ascii-lexical-receiver-20261019/forward/before/src/java.base/share/classes/jdk/internal/mindex/M3RunTable.java",
+      "gitBlob": "8363e554ec77a65587a18ab468bdabd967e5f10d",
+      "bytes": 23015,
+      "sha256": "c5f97d75fe83e8dee3cf8c381c672edc0d8cbcb89a49fd94c158634db0342289"
+    },
+    {
+      "sourcePath": "synexia-openrewrite-recipes/tasks/regex-ascii-lexical-20261019/receiver-sdk/src/main/resources/com/synexia/rewrite/regex-ascii-lexical-receiver-20261019/forward/before/test/jdk/java/util/regex/M3AutomatonDifferentialTest.java",
+      "targetPath": "m3/tooling/regex-ascii-lexical-receiver/sdk/src/main/resources/com/synexia/rewrite/regex-ascii-lexical-receiver-20261019/forward/before/test/jdk/java/util/regex/M3AutomatonDifferentialTest.java",
+      "gitBlob": "687dff70a6278355847a287d7dc3792867471b58",
+      "bytes": 13035,
+      "sha256": "9f0591f385bc4717fadfacefeb75c8823a3f372413a9440a2c0838c50e9c541d"
+    },
+    {
+      "sourcePath": "synexia-openrewrite-recipes/tasks/regex-ascii-lexical-20261019/receiver-sdk/src/main/resources/com/synexia/rewrite/regex-ascii-lexical-receiver-20261019/forward/manifest.tsv",
+      "targetPath": "m3/tooling/regex-ascii-lexical-receiver/sdk/src/main/resources/com/synexia/rewrite/regex-ascii-lexical-receiver-20261019/forward/manifest.tsv",
+      "gitBlob": "269bcda77ed0f8b09d475bcc7b9614d7237967a3",
+      "bytes": 1719,
+      "sha256": "db7432adc99c7be2dfd48f7437d48abcb493c775e36049d0f13953cc36dc2186"
+    },
+    {
+      "sourcePath": "synexia-openrewrite-recipes/tasks/regex-ascii-lexical-20261019/receiver-sdk/src/main/resources/com/synexia/rewrite/regex-ascii-lexical-receiver-20261019/forward/out/m3/docs/name-mapping.json",
+      "targetPath": "m3/tooling/regex-ascii-lexical-receiver/sdk/src/main/resources/com/synexia/rewrite/regex-ascii-lexical-receiver-20261019/forward/out/m3/docs/name-mapping.json",
+      "gitBlob": "b97a5f233cd993fbaf7bb3c297bf1821c6f4b8d7",
+      "bytes": 461599,
+      "sha256": "017c24acab18146c994c89328fe1081738017f32d3f5e4635ce3402e053e20d1"
+    },
+    {
+      "sourcePath": "synexia-openrewrite-recipes/tasks/regex-ascii-lexical-20261019/receiver-sdk/src/main/resources/com/synexia/rewrite/regex-ascii-lexical-receiver-20261019/forward/out/src/java.base/share/classes/jdk/internal/mindex/M3Automaton.java",
+      "targetPath": "m3/tooling/regex-ascii-lexical-receiver/sdk/src/main/resources/com/synexia/rewrite/regex-ascii-lexical-receiver-20261019/forward/out/src/java.base/share/classes/jdk/internal/mindex/M3Automaton.java",
+      "gitBlob": "7755e02e9da1546240afb96078a86e766566ff59",
+      "bytes": 19912,
+      "sha256": "606b60797ecce1ce888888dd4056fdcddffef7f5eb8f1a56cc854126c7884f0f"
+    },
+    {
+      "sourcePath": "synexia-openrewrite-recipes/tasks/regex-ascii-lexical-20261019/receiver-sdk/src/main/resources/com/synexia/rewrite/regex-ascii-lexical-receiver-20261019/forward/out/src/java.base/share/classes/jdk/internal/mindex/M3AutomatonOps.java",
+      "targetPath": "m3/tooling/regex-ascii-lexical-receiver/sdk/src/main/resources/com/synexia/rewrite/regex-ascii-lexical-receiver-20261019/forward/out/src/java.base/share/classes/jdk/internal/mindex/M3AutomatonOps.java",
+      "gitBlob": "58cdad630918df11d186312b706bcea03ab52ffe",
+      "bytes": 37129,
+      "sha256": "9a34cb85a705f6bee43c5cbb6c7a7181996d3b3a9579aa4e547e1c2f112b8f45"
+    },
+    {
+      "sourcePath": "synexia-openrewrite-recipes/tasks/regex-ascii-lexical-20261019/receiver-sdk/src/main/resources/com/synexia/rewrite/regex-ascii-lexical-receiver-20261019/forward/out/src/java.base/share/classes/jdk/internal/mindex/M3ChunkCursor.java",
+      "targetPath": "m3/tooling/regex-ascii-lexical-receiver/sdk/src/main/resources/com/synexia/rewrite/regex-ascii-lexical-receiver-20261019/forward/out/src/java.base/share/classes/jdk/internal/mindex/M3ChunkCursor.java",
+      "gitBlob": "30df0c03381ba2348899d1a842a13045466ef500",
+      "bytes": 2336,
+      "sha256": "cda9d82febd03dd401c40884bf66eb7e394c1c36af19e5406172d2e58b7a0660"
+    },
+    {
+      "sourcePath": "synexia-openrewrite-recipes/tasks/regex-ascii-lexical-20261019/receiver-sdk/src/main/resources/com/synexia/rewrite/regex-ascii-lexical-receiver-20261019/forward/out/src/java.base/share/classes/jdk/internal/mindex/M3NotYetReceived.java",
+      "targetPath": "m3/tooling/regex-ascii-lexical-receiver/sdk/src/main/resources/com/synexia/rewrite/regex-ascii-lexical-receiver-20261019/forward/out/src/java.base/share/classes/jdk/internal/mindex/M3NotYetReceived.java",
+      "gitBlob": "ac96ac14ced11cf51983e555b7ff7898e2b0a4e9",
+      "bytes": 763,
+      "sha256": "2b53cf0eb526ab7af3c2e224f49676d0f3570db3e523b7c98e78715a4410cbff"
+    },
+    {
+      "sourcePath": "synexia-openrewrite-recipes/tasks/regex-ascii-lexical-20261019/receiver-sdk/src/main/resources/com/synexia/rewrite/regex-ascii-lexical-receiver-20261019/forward/out/src/java.base/share/classes/jdk/internal/mindex/M3RegExpCompiler.java",
+      "targetPath": "m3/tooling/regex-ascii-lexical-receiver/sdk/src/main/resources/com/synexia/rewrite/regex-ascii-lexical-receiver-20261019/forward/out/src/java.base/share/classes/jdk/internal/mindex/M3RegExpCompiler.java",
+      "gitBlob": "e51d3910df949e63229b100bc81716bc3f2742d6",
+      "bytes": 31293,
+      "sha256": "654390c7aeeacfa221a62044a9e2b863232aca461db6453a82f0270cb48ef914"
+    },
+    {
+      "sourcePath": "synexia-openrewrite-recipes/tasks/regex-ascii-lexical-20261019/receiver-sdk/src/main/resources/com/synexia/rewrite/regex-ascii-lexical-receiver-20261019/forward/out/src/java.base/share/classes/jdk/internal/mindex/M3RunTable.java",
+      "targetPath": "m3/tooling/regex-ascii-lexical-receiver/sdk/src/main/resources/com/synexia/rewrite/regex-ascii-lexical-receiver-20261019/forward/out/src/java.base/share/classes/jdk/internal/mindex/M3RunTable.java",
+      "gitBlob": "8363e554ec77a65587a18ab468bdabd967e5f10d",
+      "bytes": 23015,
+      "sha256": "c5f97d75fe83e8dee3cf8c381c672edc0d8cbcb89a49fd94c158634db0342289"
+    },
+    {
+      "sourcePath": "synexia-openrewrite-recipes/tasks/regex-ascii-lexical-20261019/receiver-sdk/src/main/resources/com/synexia/rewrite/regex-ascii-lexical-receiver-20261019/forward/out/test/jdk/java/util/regex/M3AutomatonDifferentialTest.java",
+      "targetPath": "m3/tooling/regex-ascii-lexical-receiver/sdk/src/main/resources/com/synexia/rewrite/regex-ascii-lexical-receiver-20261019/forward/out/test/jdk/java/util/regex/M3AutomatonDifferentialTest.java",
+      "gitBlob": "3d95edee3c14c0a2a142217da695e77ed69e8026",
+      "bytes": 18394,
+      "sha256": "eb770a17a99070d430330de96bb4357088d70a447e7c7c5d6b04f50375a56d3a"
+    },
+    {
+      "sourcePath": "synexia-openrewrite-recipes/tasks/regex-ascii-lexical-20261019/receiver-sdk/src/main/resources/com/synexia/rewrite/regex-ascii-lexical-receiver-20261019/inverse/before/m3/docs/name-mapping.json",
+      "targetPath": "m3/tooling/regex-ascii-lexical-receiver/sdk/src/main/resources/com/synexia/rewrite/regex-ascii-lexical-receiver-20261019/inverse/before/m3/docs/name-mapping.json",
+      "gitBlob": "b97a5f233cd993fbaf7bb3c297bf1821c6f4b8d7",
+      "bytes": 461599,
+      "sha256": "017c24acab18146c994c89328fe1081738017f32d3f5e4635ce3402e053e20d1"
+    },
+    {
+      "sourcePath": "synexia-openrewrite-recipes/tasks/regex-ascii-lexical-20261019/receiver-sdk/src/main/resources/com/synexia/rewrite/regex-ascii-lexical-receiver-20261019/inverse/before/src/java.base/share/classes/jdk/internal/mindex/M3Automaton.java",
+      "targetPath": "m3/tooling/regex-ascii-lexical-receiver/sdk/src/main/resources/com/synexia/rewrite/regex-ascii-lexical-receiver-20261019/inverse/before/src/java.base/share/classes/jdk/internal/mindex/M3Automaton.java",
+      "gitBlob": "7755e02e9da1546240afb96078a86e766566ff59",
+      "bytes": 19912,
+      "sha256": "606b60797ecce1ce888888dd4056fdcddffef7f5eb8f1a56cc854126c7884f0f"
+    },
+    {
+      "sourcePath": "synexia-openrewrite-recipes/tasks/regex-ascii-lexical-20261019/receiver-sdk/src/main/resources/com/synexia/rewrite/regex-ascii-lexical-receiver-20261019/inverse/before/src/java.base/share/classes/jdk/internal/mindex/M3AutomatonOps.java",
+      "targetPath": "m3/tooling/regex-ascii-lexical-receiver/sdk/src/main/resources/com/synexia/rewrite/regex-ascii-lexical-receiver-20261019/inverse/before/src/java.base/share/classes/jdk/internal/mindex/M3AutomatonOps.java",
+      "gitBlob": "58cdad630918df11d186312b706bcea03ab52ffe",
+      "bytes": 37129,
+      "sha256": "9a34cb85a705f6bee43c5cbb6c7a7181996d3b3a9579aa4e547e1c2f112b8f45"
+    },
+    {
+      "sourcePath": "synexia-openrewrite-recipes/tasks/regex-ascii-lexical-20261019/receiver-sdk/src/main/resources/com/synexia/rewrite/regex-ascii-lexical-receiver-20261019/inverse/before/src/java.base/share/classes/jdk/internal/mindex/M3ChunkCursor.java",
+      "targetPath": "m3/tooling/regex-ascii-lexical-receiver/sdk/src/main/resources/com/synexia/rewrite/regex-ascii-lexical-receiver-20261019/inverse/before/src/java.base/share/classes/jdk/internal/mindex/M3ChunkCursor.java",
+      "gitBlob": "30df0c03381ba2348899d1a842a13045466ef500",
+      "bytes": 2336,
+      "sha256": "cda9d82febd03dd401c40884bf66eb7e394c1c36af19e5406172d2e58b7a0660"
+    },
+    {
+      "sourcePath": "synexia-openrewrite-recipes/tasks/regex-ascii-lexical-20261019/receiver-sdk/src/main/resources/com/synexia/rewrite/regex-ascii-lexical-receiver-20261019/inverse/before/src/java.base/share/classes/jdk/internal/mindex/M3NotYetReceived.java",
+      "targetPath": "m3/tooling/regex-ascii-lexical-receiver/sdk/src/main/resources/com/synexia/rewrite/regex-ascii-lexical-receiver-20261019/inverse/before/src/java.base/share/classes/jdk/internal/mindex/M3NotYetReceived.java",
+      "gitBlob": "ac96ac14ced11cf51983e555b7ff7898e2b0a4e9",
+      "bytes": 763,
+      "sha256": "2b53cf0eb526ab7af3c2e224f49676d0f3570db3e523b7c98e78715a4410cbff"
+    },
+    {
+      "sourcePath": "synexia-openrewrite-recipes/tasks/regex-ascii-lexical-20261019/receiver-sdk/src/main/resources/com/synexia/rewrite/regex-ascii-lexical-receiver-20261019/inverse/before/src/java.base/share/classes/jdk/internal/mindex/M3RegExpCompiler.java",
+      "targetPath": "m3/tooling/regex-ascii-lexical-receiver/sdk/src/main/resources/com/synexia/rewrite/regex-ascii-lexical-receiver-20261019/inverse/before/src/java.base/share/classes/jdk/internal/mindex/M3RegExpCompiler.java",
+      "gitBlob": "e51d3910df949e63229b100bc81716bc3f2742d6",
+      "bytes": 31293,
+      "sha256": "654390c7aeeacfa221a62044a9e2b863232aca461db6453a82f0270cb48ef914"
+    },
+    {
+      "sourcePath": "synexia-openrewrite-recipes/tasks/regex-ascii-lexical-20261019/receiver-sdk/src/main/resources/com/synexia/rewrite/regex-ascii-lexical-receiver-20261019/inverse/before/src/java.base/share/classes/jdk/internal/mindex/M3RunTable.java",
+      "targetPath": "m3/tooling/regex-ascii-lexical-receiver/sdk/src/main/resources/com/synexia/rewrite/regex-ascii-lexical-receiver-20261019/inverse/before/src/java.base/share/classes/jdk/internal/mindex/M3RunTable.java",
+      "gitBlob": "8363e554ec77a65587a18ab468bdabd967e5f10d",
+      "bytes": 23015,
+      "sha256": "c5f97d75fe83e8dee3cf8c381c672edc0d8cbcb89a49fd94c158634db0342289"
+    },
+    {
+      "sourcePath": "synexia-openrewrite-recipes/tasks/regex-ascii-lexical-20261019/receiver-sdk/src/main/resources/com/synexia/rewrite/regex-ascii-lexical-receiver-20261019/inverse/before/test/jdk/java/util/regex/M3AutomatonDifferentialTest.java",
+      "targetPath": "m3/tooling/regex-ascii-lexical-receiver/sdk/src/main/resources/com/synexia/rewrite/regex-ascii-lexical-receiver-20261019/inverse/before/test/jdk/java/util/regex/M3AutomatonDifferentialTest.java",
+      "gitBlob": "3d95edee3c14c0a2a142217da695e77ed69e8026",
+      "bytes": 18394,
+      "sha256": "eb770a17a99070d430330de96bb4357088d70a447e7c7c5d6b04f50375a56d3a"
+    },
+    {
+      "sourcePath": "synexia-openrewrite-recipes/tasks/regex-ascii-lexical-20261019/receiver-sdk/src/main/resources/com/synexia/rewrite/regex-ascii-lexical-receiver-20261019/inverse/manifest.tsv",
+      "targetPath": "m3/tooling/regex-ascii-lexical-receiver/sdk/src/main/resources/com/synexia/rewrite/regex-ascii-lexical-receiver-20261019/inverse/manifest.tsv",
+      "gitBlob": "e61533b4e5f7d013bb2ce790fc6c4fa82cedbc1e",
+      "bytes": 1719,
+      "sha256": "df9909ff35c5c158682a58b0fd7f238cc57a144a38bc944a6abbf65b21f13e86"
+    },
+    {
+      "sourcePath": "synexia-openrewrite-recipes/tasks/regex-ascii-lexical-20261019/receiver-sdk/src/main/resources/com/synexia/rewrite/regex-ascii-lexical-receiver-20261019/inverse/out/m3/docs/name-mapping.json",
+      "targetPath": "m3/tooling/regex-ascii-lexical-receiver/sdk/src/main/resources/com/synexia/rewrite/regex-ascii-lexical-receiver-20261019/inverse/out/m3/docs/name-mapping.json",
+      "gitBlob": "a7008bc04536586218da76e823bf570d50cec526",
+      "bytes": 451339,
+      "sha256": "1085c259e66bff017137e0c63bb86fc0b8daf436865f6378075cf4c920035ef4"
+    },
+    {
+      "sourcePath": "synexia-openrewrite-recipes/tasks/regex-ascii-lexical-20261019/receiver-sdk/src/main/resources/com/synexia/rewrite/regex-ascii-lexical-receiver-20261019/inverse/out/src/java.base/share/classes/jdk/internal/mindex/M3Automaton.java",
+      "targetPath": "m3/tooling/regex-ascii-lexical-receiver/sdk/src/main/resources/com/synexia/rewrite/regex-ascii-lexical-receiver-20261019/inverse/out/src/java.base/share/classes/jdk/internal/mindex/M3Automaton.java",
+      "gitBlob": "7755e02e9da1546240afb96078a86e766566ff59",
+      "bytes": 19912,
+      "sha256": "606b60797ecce1ce888888dd4056fdcddffef7f5eb8f1a56cc854126c7884f0f"
+    },
+    {
+      "sourcePath": "synexia-openrewrite-recipes/tasks/regex-ascii-lexical-20261019/receiver-sdk/src/main/resources/com/synexia/rewrite/regex-ascii-lexical-receiver-20261019/inverse/out/src/java.base/share/classes/jdk/internal/mindex/M3AutomatonOps.java",
+      "targetPath": "m3/tooling/regex-ascii-lexical-receiver/sdk/src/main/resources/com/synexia/rewrite/regex-ascii-lexical-receiver-20261019/inverse/out/src/java.base/share/classes/jdk/internal/mindex/M3AutomatonOps.java",
+      "gitBlob": "58cdad630918df11d186312b706bcea03ab52ffe",
+      "bytes": 37129,
+      "sha256": "9a34cb85a705f6bee43c5cbb6c7a7181996d3b3a9579aa4e547e1c2f112b8f45"
+    },
+    {
+      "sourcePath": "synexia-openrewrite-recipes/tasks/regex-ascii-lexical-20261019/receiver-sdk/src/main/resources/com/synexia/rewrite/regex-ascii-lexical-receiver-20261019/inverse/out/src/java.base/share/classes/jdk/internal/mindex/M3ChunkCursor.java",
+      "targetPath": "m3/tooling/regex-ascii-lexical-receiver/sdk/src/main/resources/com/synexia/rewrite/regex-ascii-lexical-receiver-20261019/inverse/out/src/java.base/share/classes/jdk/internal/mindex/M3ChunkCursor.java",
+      "gitBlob": "30df0c03381ba2348899d1a842a13045466ef500",
+      "bytes": 2336,
+      "sha256": "cda9d82febd03dd401c40884bf66eb7e394c1c36af19e5406172d2e58b7a0660"
+    },
+    {
+      "sourcePath": "synexia-openrewrite-recipes/tasks/regex-ascii-lexical-20261019/receiver-sdk/src/main/resources/com/synexia/rewrite/regex-ascii-lexical-receiver-20261019/inverse/out/src/java.base/share/classes/jdk/internal/mindex/M3NotYetReceived.java",
+      "targetPath": "m3/tooling/regex-ascii-lexical-receiver/sdk/src/main/resources/com/synexia/rewrite/regex-ascii-lexical-receiver-20261019/inverse/out/src/java.base/share/classes/jdk/internal/mindex/M3NotYetReceived.java",
+      "gitBlob": "ac96ac14ced11cf51983e555b7ff7898e2b0a4e9",
+      "bytes": 763,
+      "sha256": "2b53cf0eb526ab7af3c2e224f49676d0f3570db3e523b7c98e78715a4410cbff"
+    },
+    {
+      "sourcePath": "synexia-openrewrite-recipes/tasks/regex-ascii-lexical-20261019/receiver-sdk/src/main/resources/com/synexia/rewrite/regex-ascii-lexical-receiver-20261019/inverse/out/src/java.base/share/classes/jdk/internal/mindex/M3RegExpCompiler.java",
+      "targetPath": "m3/tooling/regex-ascii-lexical-receiver/sdk/src/main/resources/com/synexia/rewrite/regex-ascii-lexical-receiver-20261019/inverse/out/src/java.base/share/classes/jdk/internal/mindex/M3RegExpCompiler.java",
+      "gitBlob": "3cd380eca7cc903ea7fb8f80cccae1894a851ac2",
+      "bytes": 31026,
+      "sha256": "650f1ecce5c3b555ecf8ef3d8e5aaf6ad14d24f18497a5f74cdef0437f62106c"
+    },
+    {
+      "sourcePath": "synexia-openrewrite-recipes/tasks/regex-ascii-lexical-20261019/receiver-sdk/src/main/resources/com/synexia/rewrite/regex-ascii-lexical-receiver-20261019/inverse/out/src/java.base/share/classes/jdk/internal/mindex/M3RunTable.java",
+      "targetPath": "m3/tooling/regex-ascii-lexical-receiver/sdk/src/main/resources/com/synexia/rewrite/regex-ascii-lexical-receiver-20261019/inverse/out/src/java.base/share/classes/jdk/internal/mindex/M3RunTable.java",
+      "gitBlob": "8363e554ec77a65587a18ab468bdabd967e5f10d",
+      "bytes": 23015,
+      "sha256": "c5f97d75fe83e8dee3cf8c381c672edc0d8cbcb89a49fd94c158634db0342289"
+    },
+    {
+      "sourcePath": "synexia-openrewrite-recipes/tasks/regex-ascii-lexical-20261019/receiver-sdk/src/main/resources/com/synexia/rewrite/regex-ascii-lexical-receiver-20261019/inverse/out/test/jdk/java/util/regex/M3AutomatonDifferentialTest.java",
+      "targetPath": "m3/tooling/regex-ascii-lexical-receiver/sdk/src/main/resources/com/synexia/rewrite/regex-ascii-lexical-receiver-20261019/inverse/out/test/jdk/java/util/regex/M3AutomatonDifferentialTest.java",
+      "gitBlob": "687dff70a6278355847a287d7dc3792867471b58",
+      "bytes": 13035,
+      "sha256": "9f0591f385bc4717fadfacefeb75c8823a3f372413a9440a2c0838c50e9c541d"
+    },
+    {
+      "sourcePath": "synexia-openrewrite-recipes/tasks/regex-ascii-lexical-20261019/receiver-sdk/src/test/java/com/synexia/rewrite/M3RegexAsciiLexicalReceiverRecipeTest.java",
+      "targetPath": "m3/tooling/regex-ascii-lexical-receiver/sdk/src/test/java/com/synexia/rewrite/M3RegexAsciiLexicalReceiverRecipeTest.java",
+      "gitBlob": "77e2fe7348670cf744de08c8cec6fa4c8ebf2ae6",
+      "bytes": 16047,
+      "sha256": "009427bfe21387443b46ee99bc3d2ba86f2af547be26f141f9b47d638562a4ff"
+    },
+    {
+      "sourcePath": "synexia-openrewrite-recipes/tasks/regex-ascii-lexical-20261019/receiver-sdk/verify.py",
+      "targetPath": "m3/tooling/regex-ascii-lexical-receiver/sdk/verify.py",
+      "gitBlob": "b0d0c63653975ee92460dffb30e953bda3c8657b",
+      "bytes": 23045,
+      "sha256": "7e9b500925dcacbda836c0a1664f46c8b241568907de633848ac52fe555a143b"
+    }
+  ]
+}
