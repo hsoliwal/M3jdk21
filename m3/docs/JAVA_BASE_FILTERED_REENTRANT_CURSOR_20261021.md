@@ -75,3 +75,31 @@ The canonical Synexia recipe remains
 pass 1 and pass 2, plus an original-to-final fixed-point receiver. Existing
 native mask selectors are reused unchanged; no new JNI ABI was submitted in
 this pass.
+
+## Continuation: exact sorted and Set Spliterator metadata
+
+Third serial source-file pass receives the **existing first-party donor**
+`M3CollectionViews` `FilteredSet.spliterator`,
+`FilteredSortedSet.spliterator`, and
+`SelectionSpliterator` metadata/constructor atom. The original
+`java.util.CollectionViews` remains the only runtime owner.
+
+The new source blob is
+`1df992f3258e3b8573003172d9b7ea7083ac5e18`, SHA-256
+`e6c6779848e867e0898a5b577a5c6109094bb2b9ed5ba5e625b446735102e3c6`.
+Filtered sorted views retain the stored comparator and
+`SORTED|ORDERED|DISTINCT` characteristics, even if an underlying
+`SortedSet.spliterator` does not advertise them. Split cursors retain those
+guarantees, and filtered Set views retain `DISTINCT`. Existing reentrant
+selection and stored-representative mutation corrections are preserved.
+
+`test/jdk/java/util/CollectionViews/FilteredSortedSpliteratorMetadataTest.java`
+is the new jtreg oracle: a deliberately metadata-sparse SortedSet owner,
+natural/reverse comparators, split forwarding, stable filter order and
+Set distinctness.
+
+**Executed bounded proof:** an independent Java 21 source-extracted
+Spliterator atom passed `javac --release 21 -Xlint:all -Werror`
+and **4,006** checks. Maven/OpenRewrite focused tests, the patched
+whole-JDK build/jtreg, native JNI and UI rendering suites remain **NOT RUN**.
+No benchmark or new JNI symbol is claimed.
