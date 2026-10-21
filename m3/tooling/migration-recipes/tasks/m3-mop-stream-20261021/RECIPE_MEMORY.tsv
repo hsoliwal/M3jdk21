@@ -1,0 +1,2 @@
+seq	recipe	trigger	observed	correction	guard	lesson	category	donor	status
+1	com.m3.rewrite.backport.M3MopStreamTraversalRecipe	user	M3JDK21 had one-pass file events and shadow streams but no monitored lazy whole-root traversal or retained-fact delta owner	PENDING	M3MopStreamTraversalRecipeTest	compose existing one-pass events instead of rereading payloads	stream-traversal-doop	M3JDK21-existing-M3ShadowStreams+M3FileStreamIndexer	RECORDED
