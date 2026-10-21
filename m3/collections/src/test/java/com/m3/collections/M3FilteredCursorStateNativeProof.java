@@ -36,6 +36,10 @@ public final class M3FilteredCursorStateNativeProof {
             }
             int[] selected = M3IndexMaskCompactor.selectPositions(
                     accepted, 1, M3IndexMaskCompactor.Backend.NATIVE_REQUIRED);
+            int[] javaSelected = M3IndexMaskCompactor.selectPositions(
+                    accepted, 1, M3IndexMaskCompactor.Backend.JAVA);
+            equal(true, Arrays.equals(javaSelected, selected),
+                    "existing JNI selector exactly equals Java primitive oracle");
             List<Integer> expected = new ArrayList<>(selected.length);
             for (int physical : selected) expected.add(values.get(physical));
             equal(expected, copy(M3FilteredLists.filtered(
@@ -49,10 +53,14 @@ public final class M3FilteredCursorStateNativeProof {
                     deque, value -> (value & 1) == 0)),
                     "deque selection versus existing JNI masks");
             if (selected.length > 0) {
-                int[] aliasCheck = Arrays.copyOf(selected, selected.length);
-                aliasCheck[0] = -1;
-                equal(expected.getFirst(), values.get(selected[0]),
-                        "native coordinates are detached from output mutations");
+                int sourceOrdinal = selected[0];
+                selected[0] = -1;
+                int[] fresh = M3IndexMaskCompactor.selectPositions(
+                        accepted, 1, M3IndexMaskCompactor.Backend.NATIVE_REQUIRED);
+                equal(sourceOrdinal, fresh[0],
+                        "JNI position result is detached from later native selection");
+                equal(expected.getFirst(), values.get(sourceOrdinal),
+                        "original source is unaffected by native output mutation");
             }
         }
         System.out.println("PASS M3FilteredCursorStateNativeProof checks=" + checks
