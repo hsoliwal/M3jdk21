@@ -12,7 +12,9 @@ import java.util.Objects;
  * The external parser remains authoritative. This index retains only kind IDs,
  * source geometry, occurrence-parent coordinates and sibling chains; no node
  * objects, Maps, entries, Strings of token text or compiler objects are retained.
- * Nodes are occurrence identities within this immutable source generation.
+ * Optional semantic projection retains only original binding keys and diagnostic text in
+ * reference lanes plus primitive kinds/modifiers/flags/ranges. No foreign binding or AST
+ * object survives publication. Nodes are occurrence identities within this source generation.
  */
 public final class M3ASTIndex {
     public enum Domain { ECLIPSE_JDT, MAVEN_POM, GRADLE_GROOVY, GRADLE_KOTLIN, JACKSON_JSON }
@@ -24,12 +26,28 @@ public final class M3ASTIndex {
     /** The external source owner could not be verified against the original AST. */
     public static final int SOURCE_UNVERIFIED = 4;
     public static final int RECOVERED = 8;
+    /** Binding flags are independent of structural/recovery flags. */
+    public static final int BINDING_RECOVERED = 1, BINDING_DEPRECATED = 2;
+    public static final int PROBLEM_ERROR = 1, PROBLEM_WARNING = 2;
+    private final String[] bindingKeys, typeKeys, problemMessages;
+    private final int[] bindingKinds, bindingModifiers, bindingFlags;
+    private final int[] problemIds, problemStarts, problemEnds, problemFlags;
     private final M3File source;
     private final Domain domain;
     private final String[] names;
     private final int[] kinds, parents, starts, ends, flags, first, next, childCounts;
 
     private M3ASTIndex(Builder builder) {
+        bindingKeys = builder.bindingKeys == null ? null : Arrays.copyOf(builder.bindingKeys, builder.size);
+        typeKeys = builder.typeKeys == null ? null : Arrays.copyOf(builder.typeKeys, builder.size);
+        bindingKinds = builder.bindingKinds == null ? null : Arrays.copyOf(builder.bindingKinds, builder.size);
+        bindingModifiers = builder.bindingModifiers == null ? null : Arrays.copyOf(builder.bindingModifiers, builder.size);
+        bindingFlags = builder.bindingFlags == null ? null : Arrays.copyOf(builder.bindingFlags, builder.size);
+        problemMessages = Arrays.copyOf(builder.problemMessages, builder.problemCount);
+        problemIds = Arrays.copyOf(builder.problemIds, builder.problemCount);
+        problemStarts = Arrays.copyOf(builder.problemStarts, builder.problemCount);
+        problemEnds = Arrays.copyOf(builder.problemEnds, builder.problemCount);
+        problemFlags = Arrays.copyOf(builder.problemFlags, builder.problemCount);
         source = builder.source;
         domain = builder.domain;
         names = Arrays.copyOf(builder.names, builder.nameCount);
@@ -66,7 +84,26 @@ public final class M3ASTIndex {
         if (!hasExactRange(node)) throw new IllegalStateException("unverified/unknown source range");
         return source.subSequence(starts[node], ends[node]);
     }
+    /** True only for an explicitly requested semantic projection, including unresolved input. */
+    public boolean hasSemanticProjection() { return bindingKeys != null; }
+    /** Original JDT key, or null when unresolved; never a cross-environment cache key. */
+    public String bindingKey(int node) { check(node); return bindingKeys == null ? null : bindingKeys[node]; }
+    public String typeKey(int node) { check(node); return typeKeys == null ? null : typeKeys[node]; }
+    public int bindingKind(int node) { check(node); return bindingKinds == null ? 0 : bindingKinds[node]; }
+    public int bindingModifiers(int node) { check(node); return bindingModifiers == null ? 0 : bindingModifiers[node]; }
+    public int bindingFlags(int node) { check(node); return bindingFlags == null ? 0 : bindingFlags[node]; }
+    public int problemCount() { return problemIds.length; }
+    public int problemId(int problem) { return problemIds[Objects.checkIndex(problem, problemIds.length)]; }
+    public int problemStart(int problem) { return problemStarts[Objects.checkIndex(problem, problemIds.length)]; }
+    public int problemEnd(int problem) { return problemEnds[Objects.checkIndex(problem, problemIds.length)]; }
+    public int problemFlags(int problem) { return problemFlags[Objects.checkIndex(problem, problemIds.length)]; }
+    public String problemMessage(int problem) { return problemMessages[Objects.checkIndex(problem, problemIds.length)]; }
+    /** Structural primitive storage; semantic storage is reported separately for compatibility. */
     public long primitiveBytes() { return (long) kinds.length * 8L * Integer.BYTES; }
+    public long semanticPrimitiveBytes() {
+        return (bindingKinds == null ? 0L : (long) bindingKinds.length * 3L * Integer.BYTES)
+                + (long) problemIds.length * 4L * Integer.BYTES;
+    }
     private int check(int node) { return Objects.checkIndex(node, kinds.length); }
 
     /** Bounded, single-owner creation; discarded immediately after immutable publication. */
@@ -81,6 +118,12 @@ public final class M3ASTIndex {
         private int[] last = new int[32], next = new int[32], childCounts = new int[32];
         private int size;
         private boolean sealed;
+        private String[] bindingKeys, typeKeys;
+        private int[] bindingKinds, bindingModifiers, bindingFlags;
+        private String[] problemMessages = new String[0];
+        private int[] problemIds = new int[0], problemStarts = new int[0];
+        private int[] problemEnds = new int[0], problemFlags = new int[0];
+        private int problemCount;
 
         private Builder(M3File source, Domain domain, int maxNodes) {
             this.source = Objects.requireNonNull(source, "source");
@@ -111,10 +154,7 @@ public final class M3ASTIndex {
             if ((flags & EXACT_RANGE) != 0 && start == NO_RANGE) {
                 throw new IllegalArgumentException("exact range without source coordinates");
             }
-            if (parent >= 0 && starts[parent] >= 0 && ends[parent] >= 0 && start >= 0
-                    && (start < starts[parent] || end > ends[parent])) {
-                throw new IllegalArgumentException("AST child escapes known parent range");
-            }
+            requireAncestorRange(parent, start, end);
             int name = nameId(Objects.requireNonNull(kind, "kind"));
             if (size == kinds.length) grow();
             int row = size++;
@@ -143,19 +183,63 @@ public final class M3ASTIndex {
             if (start < 0 || end < start || end > source.length()) {
                 throw new IllegalArgumentException("invalid completed source range");
             }
-            int parent = parents[node];
-            if (parent >= 0 && starts[parent] >= 0 && ends[parent] >= 0
-                    && (start < starts[parent] || end > ends[parent])) {
-                throw new IllegalArgumentException("completed range escapes parent");
-            }
-            for (int child = first[node]; child >= 0; child = next[child]) {
+            requireAncestorRange(parents[node], start, end);
+            // Children may themselves have unknown ranges. Walk their descendants using
+            // the existing parent/sibling lanes, without recursion or a scratch stack.
+            for (int child = first[node]; child >= 0;) {
                 if (starts[child] >= 0 && (starts[child] < start || ends[child] > end)) {
-                    throw new IllegalArgumentException("completed AST range excludes an indexed child");
+                    throw new IllegalArgumentException("completed AST range excludes an indexed descendant");
                 }
+                if (first[child] >= 0) { child = first[child]; continue; }
+                while (child != node && next[child] < 0) child = parents[child];
+                child = child == node ? -1 : next[child];
             }
             starts[node] = start;
             ends[node] = end;
             if (exact) flags[node] |= EXACT_RANGE;
+        }
+
+        private void requireAncestorRange(int parent, int start, int end) {
+            if (start < 0) return;
+            for (int ancestor = parent; ancestor >= 0; ancestor = parents[ancestor]) {
+                if (starts[ancestor] >= 0) {
+                    if (start < starts[ancestor] || end > ends[ancestor]) {
+                        throw new IllegalArgumentException("AST child escapes known ancestor range");
+                    }
+                    return; // This known range was already checked against its own ancestors.
+                }
+            }
+        }
+
+        void enableSemantics() {
+            if (sealed) throw new IllegalStateException("index already sealed");
+            bindingKeys = new String[kinds.length]; typeKeys = new String[kinds.length];
+            bindingKinds = new int[kinds.length]; bindingModifiers = new int[kinds.length];
+            bindingFlags = new int[kinds.length];
+        }
+
+        void binding(int node, String key, String type, int kind, int modifiers, int state) {
+            if (sealed || bindingKeys == null) throw new IllegalStateException("semantic index not open");
+            Objects.checkIndex(node, size);
+            bindingKeys[node] = key; typeKeys[node] = type;
+            bindingKinds[node] = kind; bindingModifiers[node] = modifiers; bindingFlags[node] = state;
+        }
+
+        void problem(int id, int start, int end, int state, String message) {
+            if (sealed || bindingKeys == null) throw new IllegalStateException("semantic index not open");
+            if (problemCount == maxNodes) throw new IllegalArgumentException("AST diagnostic budget exceeded");
+            if (!((start == -1 && end == -1) || (start >= 0 && end >= start && end <= source.length()))) {
+                start = end = -1;
+            }
+            if (problemCount == problemIds.length) {
+                int cap = Math.min(maxNodes, Math.max(8, problemCount + (problemCount >>> 1) + 1));
+                problemIds = Arrays.copyOf(problemIds, cap); problemStarts = Arrays.copyOf(problemStarts, cap);
+                problemEnds = Arrays.copyOf(problemEnds, cap); problemFlags = Arrays.copyOf(problemFlags, cap);
+                problemMessages = Arrays.copyOf(problemMessages, cap);
+            }
+            problemIds[problemCount] = id; problemStarts[problemCount] = start;
+            problemEnds[problemCount] = end; problemFlags[problemCount] = state;
+            problemMessages[problemCount++] = Objects.requireNonNull(message, "problem message");
         }
 
         public M3ASTIndex seal() {
@@ -179,6 +263,12 @@ public final class M3ASTIndex {
 
         private void grow() {
             int cap = (int) Math.min(maxNodes, Math.max((long) size + 1L, size + (long) (size >>> 1) + 1));
+            if (bindingKeys != null) {
+                bindingKeys = Arrays.copyOf(bindingKeys, cap); typeKeys = Arrays.copyOf(typeKeys, cap);
+                bindingKinds = Arrays.copyOf(bindingKinds, cap);
+                bindingModifiers = Arrays.copyOf(bindingModifiers, cap);
+                bindingFlags = Arrays.copyOf(bindingFlags, cap);
+            }
             kinds = Arrays.copyOf(kinds, cap);
             parents = Arrays.copyOf(parents, cap);
             starts = Arrays.copyOf(starts, cap);

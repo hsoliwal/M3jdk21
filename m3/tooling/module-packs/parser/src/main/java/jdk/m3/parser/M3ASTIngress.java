@@ -130,6 +130,22 @@ public final class M3ASTIngress {
      * ASTParser settings, recovery, bindings and edits remain Eclipse's authority.
      */
     public static M3ASTIndex eclipseJdt(M3File source, Object root, Limits limits) {
+        return eclipseJdt(source, root, limits, false);
+    }
+
+    /**
+     * Detach bindings and problems already supplied by the original JDT compilation.
+     * This does not parse, resolve a new environment, or retain compiler objects.
+     * Unresolved keys stay null; recovered bindings are explicitly flagged. The caller
+     * must supply the exact immutable source used for this unmodified AST and serialize
+     * access according to JDT's AST contract. Keys must not be reused across classpaths,
+     * source generations, compiler settings or working-copy owners.
+     */
+    public static M3ASTIndex eclipseJdtResolved(M3File source, Object root, Limits limits) {
+        return eclipseJdt(source, root, limits, true);
+    }
+
+    private static M3ASTIndex eclipseJdt(M3File source, Object root, Limits limits, boolean resolved) {
         check(source, limits);
         Objects.requireNonNull(root, "original Eclipse AST root");
         try {
@@ -138,6 +154,7 @@ public final class M3ASTIngress {
             Class<?> propertyType = Class.forName(
                     "org.eclipse.jdt.core.dom.StructuralPropertyDescriptor", false, loader);
             if (!nodeType.isInstance(root)) throw new IllegalArgumentException("not a JDT DOM ASTNode");
+            JdtSemantics semantics = resolved ? new JdtSemantics(root, nodeType, loader) : null;
             Method position = nodeType.getMethod("getStartPosition");
             Method length = nodeType.getMethod("getLength");
             Method properties = nodeType.getMethod("structuralPropertiesForType");
@@ -147,6 +164,7 @@ public final class M3ASTIngress {
             int malformedBit = nodeType.getField("MALFORMED").getInt(null);
             M3ASTIndex.Builder output = M3ASTIndex.builder(
                     source, M3ASTIndex.Domain.ECLIPSE_JDT, limits.maxNodes());
+            if (semantics != null) output.enableSemantics();
             Object[] stack = new Object[32];
             int[] parent = new int[32], depth = new int[32];
             stack[0] = root; parent[0] = -1; depth[0] = 1;
@@ -166,6 +184,7 @@ public final class M3ASTIngress {
                 if ((jdtFlags & (recoveredBit | malformedBit)) != 0) flags |= M3ASTIndex.RECOVERED;
                 String kind = "JDT_" + node.getClass().getSimpleName();
                 int row = output.add(owner, kind, start, end, flags);
+                if (semantics != null) semantics.capture(node, row, output);
                 children.clear();
                 List<?> descriptors = (List<?>) properties.invoke(node);
                 for (Object descriptor : descriptors) {
@@ -190,9 +209,88 @@ public final class M3ASTIngress {
                     depth[size++] = level + 1;
                 }
             }
+            if (semantics != null) semantics.finish(root, output);
             return output.seal();
         } catch (ReflectiveOperationException error) {
             throw new IllegalArgumentException("Eclipse JDT AST owner is missing/incompatible", error);
+        }
+    }
+
+    /** One projection-local public-API method table, never retained in the result. */
+    private static final class JdtSemantics {
+        private static final String[] RESOLVERS = { "resolveBinding", "resolveMethodBinding",
+                "resolveConstructorBinding", "resolveFieldBinding" };
+        private final Method key, kind, modifiers, recovered, deprecated, nodeKind, changes;
+        private final Class<?> bindingType, unitType, problemType;
+        private final Method[] bindings = new Method[512], types = new Method[512];
+        private final boolean[] known = new boolean[512];
+        private final Object ast;
+        private final long generation;
+
+        private JdtSemantics(Object root, Class<?> node, ClassLoader loader)
+                throws ReflectiveOperationException {
+            bindingType = Class.forName("org.eclipse.jdt.core.dom.IBinding", false, loader);
+            unitType = Class.forName("org.eclipse.jdt.core.dom.CompilationUnit", false, loader);
+            problemType = Class.forName("org.eclipse.jdt.core.compiler.IProblem", false, loader);
+            key = bindingType.getMethod("getKey"); kind = bindingType.getMethod("getKind");
+            modifiers = bindingType.getMethod("getModifiers");
+            recovered = bindingType.getMethod("isRecovered"); deprecated = bindingType.getMethod("isDeprecated");
+            nodeKind = node.getMethod("getNodeType");
+            ast = node.getMethod("getAST").invoke(root);
+            changes = ast.getClass().getMethod("modificationCount");
+            generation = (Long) changes.invoke(ast);
+        }
+
+        private static Method optional(Class<?> type, String name) {
+            try { return type.getMethod(name); }
+            catch (NoSuchMethodException absent) { return null; }
+        }
+
+        private void capture(Object node, int row, M3ASTIndex.Builder output)
+                throws ReflectiveOperationException {
+            int id = (Integer) nodeKind.invoke(node);
+            if (id < 0 || id >= known.length) throw new IllegalArgumentException("unsupported JDT node kind");
+            if (!known[id]) {
+                Class<?> type = node.getClass();
+                for (String name : RESOLVERS) {
+                    Method method = optional(type, name);
+                    if (method != null && bindingType.isAssignableFrom(method.getReturnType())) {
+                        bindings[id] = method; break;
+                    }
+                }
+                types[id] = optional(type, "resolveTypeBinding");
+                known[id] = true;
+            }
+            Object binding = bindings[id] == null ? null : bindings[id].invoke(node);
+            Object type = types[id] == null ? null : types[id].invoke(node);
+            int state = 0;
+            if (binding != null) {
+                if ((Boolean) recovered.invoke(binding)) state |= M3ASTIndex.BINDING_RECOVERED;
+                if ((Boolean) deprecated.invoke(binding)) state |= M3ASTIndex.BINDING_DEPRECATED;
+            }
+            output.binding(row, binding == null ? null : (String) key.invoke(binding),
+                    type == null ? null : (String) key.invoke(type),
+                    binding == null ? 0 : (Integer) kind.invoke(binding),
+                    binding == null ? 0 : (Integer) modifiers.invoke(binding), state);
+        }
+
+        private void finish(Object root, M3ASTIndex.Builder output) throws ReflectiveOperationException {
+            if (unitType.isInstance(root)) {
+                Object[] problems = (Object[]) unitType.getMethod("getProblems").invoke(root);
+                Method id = problemType.getMethod("getID"), start = problemType.getMethod("getSourceStart");
+                Method end = problemType.getMethod("getSourceEnd"), message = problemType.getMethod("getMessage");
+                Method error = problemType.getMethod("isError"), warning = problemType.getMethod("isWarning");
+                for (Object problem : problems) {
+                    int first = (Integer) start.invoke(problem), last = (Integer) end.invoke(problem);
+                    int stop = last < 0 || last == Integer.MAX_VALUE ? -1 : last + 1;
+                    int state = ((Boolean) error.invoke(problem) ? M3ASTIndex.PROBLEM_ERROR : 0)
+                            | ((Boolean) warning.invoke(problem) ? M3ASTIndex.PROBLEM_WARNING : 0);
+                    output.problem((Integer) id.invoke(problem), first, stop, state, (String) message.invoke(problem));
+                }
+            }
+            if (generation != (Long) changes.invoke(ast)) {
+                throw new java.util.ConcurrentModificationException("JDT AST changed during projection");
+            }
         }
     }
 

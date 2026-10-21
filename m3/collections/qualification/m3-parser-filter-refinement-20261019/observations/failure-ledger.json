@@ -1,0 +1,12 @@
+{
+  "workspace-first-attempt": "Conflicting Equinox storage/configuration properties; corrected the test bootstrap; log retained.",
+  "workspace-current": "After actual JNA platform 5.19.1 was supplied, mandatory osgi.component DS extender remains unresolved; no workspace qualification claim.",
+  "parser-original-first-attempt": "Harness excluded M3JavacTree required by existing fixture helper; included unchanged owner and reran both suites successfully.",
+  "native-fixture-first-attempt": "GCC strict aliasing rejected test-only cast between fake int/long arrays; fixture changed to union-backed fields; both C baselines and candidate pass; product algorithm was unchanged by the fixture repair.",
+  "full-suite-baseline": "464 tests, 3 failures, 2 skipped; strict sorted endpoint and reverse split regressions; tests preserved.",
+  "receiver-lineage": "Guard rejects hydrated checkout because required ancestor is unavailable; no bypass or phase promotion.",
+  "dependency-download": "Maven Central request failed with proxy CONNECT timeout; no replacement or synthetic DS runtime used.",
+  "incremental-final-run": "Stopped with exit 130 after three stale-output failures were recorded; unfinished remaining tests are not claimed as executed. Superseded by fresh forked full-suite run with all tests retained.",
+  "fresh-forked-full-suite": "473 tests, 1 failure, 0 errors, 2 existing skips. Only failure: obsolete empty-comparator assertion contradicted by JDK21. All three baseline filtered failures pass.",
+  "focused-footprint-reconciliation": "Actual SDK-emitted JDK-backed test-only correction; 7 footprint tests pass. No production source changes. Reconciled 473-case coverage: 471 passes, 2 skips; no single green full-run claim."
+}

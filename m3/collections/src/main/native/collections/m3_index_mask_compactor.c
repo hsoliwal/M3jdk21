@@ -16,6 +16,19 @@ static void m3_throw_state_drift(JNIEnv *env) {
     }
 }
 
+/* Reuse the state lane to bound each row fetch. Empty selection chunks never
+ * cross JNI for row values. Bounds are local offsets; no heap scratch or new ABI.
+ */
+static jsize m3_selected_span(const jbyte *marks, jsize length, jint mask, jsize *end) {
+    jsize first = 0;
+    *end = length;
+    if (mask == 0) return first;
+    while (first < length && (((unsigned char) marks[first] & (unsigned int) mask) != (unsigned int) mask)) first++;
+    if (first == length) { *end = first; return first; }
+    while (*end > first && (((unsigned char) marks[*end - 1] & (unsigned int) mask) != (unsigned int) mask)) (*end)--;
+    return first;
+}
+
 /* One core for legacy whole-index and offset windows. All bounds validated by exports.
  * Prefix compaction is safe in row_ids: accepted never exceeds the current input slot.
  */
@@ -43,13 +56,16 @@ static jintArray m3_select_range(JNIEnv *env, jintArray rows, jbyteArray states,
             (*env)->GetByteArrayRegion(env, states, offset, chunk, marks);
             if ((*env)->ExceptionCheck(env)) return NULL;
         }
-        (*env)->GetIntArrayRegion(env, rows, first + offset, chunk, row_ids);
+        jsize stop;
+        jsize begin = m3_selected_span(marks, chunk, required_mask, &stop);
+        if (begin == stop) { offset += chunk; continue; }
+        (*env)->GetIntArrayRegion(env, rows, first + offset + begin, stop - begin, row_ids);
         if ((*env)->ExceptionCheck(env)) return NULL;
         jsize accepted = 0;
-        for (jsize i = 0; i < chunk; i++) {
+        for (jsize i = begin; i < stop; i++) {
             unsigned int bits = required_mask == 0 ? 0u : (unsigned int)(unsigned char)marks[i];
             if ((bits & (unsigned int)required_mask) == (unsigned int)required_mask) {
-                row_ids[accepted++] = row_ids[i];
+                row_ids[accepted++] = row_ids[i - begin];
             }
         }
         if (accepted > count - written) {
@@ -343,15 +359,18 @@ Java_com_m3_collections_M3IndexMaskCompactor_selectWindowNative(
             (*env)->GetByteArrayRegion(env, states, state_offset + position, chunk, marks);
             if ((*env)->ExceptionCheck(env)) return NULL;
         }
-        (*env)->GetIntArrayRegion(env, rows, row_offset + position, chunk, values);
+        jsize stop;
+        jsize begin = m3_selected_span(marks, chunk, mask, &stop);
+        if (begin == stop) { position += chunk; continue; }
+        (*env)->GetIntArrayRegion(env, rows, row_offset + position + begin, stop - begin, values);
         if ((*env)->ExceptionCheck(env)) return NULL;
-        jsize batch = chunk;
+        jsize batch = stop - begin;
         if (mask != 0) {
-            /* Stable prefix compaction: batch <= i, so unread values stay intact. */
+            /* Stable prefix compaction: batch <= i - begin, so unread values stay intact. */
             batch = 0;
-            for (jsize i = 0; i < chunk; i++) {
+            for (jsize i = begin; i < stop; i++) {
                 unsigned int flags = (unsigned int)(unsigned char)marks[i];
-                if ((flags & (unsigned int)mask) == (unsigned int)mask) values[batch++] = values[i];
+                if ((flags & (unsigned int)mask) == (unsigned int)mask) values[batch++] = values[i - begin];
             }
         }
         if (batch > kept - written) {
@@ -395,15 +414,18 @@ Java_com_m3_collections_M3IndexMaskCompactor_selectLongWindowNative(
             (*env)->GetByteArrayRegion(env, states, state_offset + position, chunk, marks);
             if ((*env)->ExceptionCheck(env)) return NULL;
         }
-        (*env)->GetLongArrayRegion(env, rows, row_offset + position, chunk, values);
+        jsize stop;
+        jsize begin = m3_selected_span(marks, chunk, mask, &stop);
+        if (begin == stop) { position += chunk; continue; }
+        (*env)->GetLongArrayRegion(env, rows, row_offset + position + begin, stop - begin, values);
         if ((*env)->ExceptionCheck(env)) return NULL;
-        jsize batch = chunk;
+        jsize batch = stop - begin;
         if (mask != 0) {
-            /* Stable prefix compaction: batch <= i, so unread values stay intact. */
+            /* Stable prefix compaction: batch <= i - begin, so unread values stay intact. */
             batch = 0;
-            for (jsize i = 0; i < chunk; i++) {
+            for (jsize i = begin; i < stop; i++) {
                 unsigned int flags = (unsigned int)(unsigned char)marks[i];
-                if ((flags & (unsigned int)mask) == (unsigned int)mask) values[batch++] = values[i];
+                if ((flags & (unsigned int)mask) == (unsigned int)mask) values[batch++] = values[i - begin];
             }
         }
         if (batch > kept - written) {

@@ -1,0 +1,12 @@
+{
+  "command": [
+    "/tmp/m3-cursor-tools/jdk-21.0.12.1+1/bin/java",
+    "-Xcheck:jni",
+    "-Djava.library.path=/workspace/scratch/a20ebe6f78bb/continuation/native-after",
+    "-cp",
+    "/workspace/scratch/a20ebe6f78bb/continuation/native-after/classes",
+    "com.m3.collections.M3SparseMaskReadContract"
+  ],
+  "cwd": "/workspace/scratch/a20ebe6f78bb",
+  "jdk": "/tmp/m3-cursor-tools/jdk-21.0.12.1+1"
+}
