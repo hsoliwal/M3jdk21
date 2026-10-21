@@ -6,7 +6,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.m3.collections</groupId><artifactId>m3-five-provider-scaffold-aggregator</artifactId><version>0.1.0-SNAPSHOT</version><packaging>pom</packaging>
   <name>M3 five-provider scaffold aggregator</name>
-  <description>125 SCAFFOLD modules generated from INVENTORY.tsv OPEN rows; none is an owned implementation.</description>
+  <description>124 SCAFFOLD modules generated from INVENTORY.tsv OPEN rows; none is an owned implementation.</description>
   <modules>
     <module>apache-abstract-hashed-map</module>
     <module>apache-array-list-valued-linked-hash-map</module>
@@ -107,7 +107,6 @@
     <module>guava-immutable-set-multimap</module>
     <module>guava-immutable-sorted-map</module>
     <module>guava-linked-hash-multimap</module>
-    <module>guava-linked-hash-multiset</module>
     <module>guava-linked-list-multimap</module>
     <module>guava-tree-based-table</module>
     <module>guava-tree-multimap</module>

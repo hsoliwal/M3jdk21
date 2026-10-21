@@ -71,7 +71,7 @@ only; the core `m3/collections` module is unchanged and still depends on `java.b
 3. Guava `EnumHashBiMap` (DONE #1460) and `EnumBiMap` (DONE #1462); Commons `DualLinkedHashBidiMap` (DONE #1468).
 4. Filtered/sorted wrappers are already claimed (#1362, #1365, #1366, #1367, viewport selection lists): no scaffold.
 5. Spring `MultiValueMapAdapter` (DONE #1469; `LinkedMultiValueMap` is DONE on master).
-6. Next wave (approved 2026-10-19), one stacked PR each: Guava `EnumMultiset` (DONE #1499), `LinkedHashMultiset`,
+6. Next wave (approved 2026-10-19), one stacked PR each: Guava `EnumMultiset` (DONE #1499), `LinkedHashMultiset` (DONE #1523),
    `LinkedHashMultimap`, Commons `TreeBag`, Guava `TreeMultimap`. Each row's `in_place_landing` names the
    java.util store it lands in under the M3jdk21-is-the-JDK rule.
 
