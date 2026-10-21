@@ -134,16 +134,34 @@ public final class M3File {
      * atomic filesystem snapshot. Errors never produce an absent observation.
      */
     public Observation observe(long maxBytes) throws IOException {
-        return observe(maxBytes, new byte[8192], false);
+        return observe(maxBytes, new byte[8192], false, M3StreamProgress.none(), null);
+    }
+
+    /**
+     * A synchronous, borrowed view of bytes already read by this original M3File
+     * observation. The callback must not mutate the scratch bytes or retain
+     * their array: source, SHA-256, progress and parser layers advance together.
+     * An exception cancels publication; no complete fingerprint is returned.
+     */
+    @FunctionalInterface
+    public interface ByteObserver {
+        void onBytes(byte[] buffer, int offset, int length) throws IOException;
+    }
+
+    /** One bounded source read: content SHA-256 plus progress and optional layers. */
+    public Observation observe(long maxBytes, M3StreamProgress progress,
+            ByteObserver observer) throws IOException {
+        return observe(maxBytes, new byte[8192], false,
+                M3StreamProgress.require(progress), Objects.requireNonNull(observer, "observer"));
     }
 
     /** Ledger-only admission: only absence at the first metadata read returns null. */
     Observation observeIfExists(byte[] scratch) throws IOException {
-        return observe(Long.MAX_VALUE, scratch, true);
+        return observe(Long.MAX_VALUE, scratch, true, M3StreamProgress.none(), null);
     }
 
-    private Observation observe(long maxBytes, byte[] buffer, boolean initialAbsenceAllowed)
-            throws IOException {
+    private Observation observe(long maxBytes, byte[] buffer, boolean initialAbsenceAllowed,
+            M3StreamProgress progress, ByteObserver observer) throws IOException {
         if (maxBytes < 0) throw new IllegalArgumentException("negative maxBytes");
         Objects.requireNonNull(buffer, "scratch");
         if (buffer.length == 0) throw new IllegalArgumentException("empty scratch buffer");
@@ -168,13 +186,17 @@ public final class M3File {
         ByteBuffer scratch = ByteBuffer.wrap(buffer);
         try (SeekableByteChannel channel = openReadChannel()) {
             while (count < maxBytes) {
+                progress.checkCancelled();
                 scratch.clear().limit((int) Math.min(buffer.length, maxBytes - count));
                 int read = readProgressing(channel, scratch);
                 if (read < 0) break;
                 digest.update(buffer, 0, read);
+                progress.worked(read);
+                if (observer != null) observer.onBytes(buffer, 0, read);
                 count += read;
             }
             if (count == maxBytes) {
+                progress.checkCancelled();
                 scratch.clear().limit(1);
                 if (readProgressing(channel, scratch) >= 0) {
                     throw new IOException("resource exceeds configured read limit");
