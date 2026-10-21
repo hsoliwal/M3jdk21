@@ -1,3 +1,4 @@
+// Modified 2026 by Hitesh Soliwal and contributors: retain invalidation during callback capture.
 /*
  * Copyright 2026 Hitesh Soliwal and contributors
  * SPDX-License-Identifier: Apache-2.0
@@ -212,6 +213,7 @@ public final class M3LongBitmapFilteredSnapshot implements M3LongCollection {
         private final LongPredicate predicate;
         private final LongSupplier revision;
         private volatile Cache cache;
+        private long invalidationGeneration;
 
         private static final class Cache {
             final long revision;
@@ -232,7 +234,10 @@ public final class M3LongBitmapFilteredSnapshot implements M3LongCollection {
         }
 
         /** Invalidate manually when the owner cannot publish a trustworthy epoch. */
-        public synchronized void invalidate() { cache = null; }
+        public synchronized void invalidate() {
+            invalidationGeneration++;
+            cache = null;
+        }
 
         private Cache current() {
             long stamp = revision.getAsLong();
@@ -242,13 +247,17 @@ public final class M3LongBitmapFilteredSnapshot implements M3LongCollection {
                 stamp = revision.getAsLong();
                 seen = cache;
                 if (seen != null && seen.revision == stamp) return seen;
+                long generation = invalidationGeneration;
                 long[] detached = source.toArray();
                 M3LongBitmapFilteredSnapshot fresh = M3LongBitmapFilteredSnapshot.snapshot(detached, predicate);
                 if (revision.getAsLong() != stamp) {
                     throw new ConcurrentModificationException("revision changed during bitmap capture");
                 }
                 Cache rebuilt = new Cache(stamp, fresh);
-                cache = rebuilt;
+                // Reentrant callbacks may invalidate this owner while its monitor
+                // is held. Return this capture without retrying user predicates,
+                // but retain that invalidation for the next operation.
+                if (invalidationGeneration == generation) cache = rebuilt;
                 return rebuilt;
             }
         }

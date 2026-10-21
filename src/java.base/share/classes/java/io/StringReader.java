@@ -26,6 +26,9 @@
 package java.io;
 
 import java.util.Objects;
+import java.util.function.IntUnaryOperator;
+import jdk.internal.access.JavaLangAccess;
+import jdk.internal.access.SharedSecrets;
 
 /**
  * A character stream whose source is a string.
@@ -38,6 +41,7 @@ public class StringReader extends Reader {
 
     private final int length;
     private String str;
+    private IntUnaryOperator codeUnits;
     private int next = 0;
     private int mark = 0;
 
@@ -49,6 +53,8 @@ public class StringReader extends Reader {
     public StringReader(String s) {
         this.length = s.length();
         this.str = s;
+        JavaLangAccess access = SharedSecrets.getJavaLangAccess();
+        this.codeUnits = access == null ? null : access.stringCodeUnitCursor(s);
     }
 
     /** Check to make sure that the stream has not been closed */
@@ -70,7 +76,7 @@ public class StringReader extends Reader {
             ensureOpen();
             if (next >= length)
                 return -1;
-            return str.charAt(next++);
+            return codeUnits == null ? str.charAt(next++) : codeUnits.applyAsInt(next++);
         }
     }
 
@@ -198,6 +204,27 @@ public class StringReader extends Reader {
         }
     }
 
+    /** Called by Reader.transferTo for exact built-in string streams. */
+    long transferToStringWriter(StringWriter out) throws IOException {
+        long transferred = 0;
+        while (true) {
+            String source;
+            int start;
+            int count;
+            synchronized (lock) {
+                ensureOpen();
+                if (next >= length) return transferred;
+                source = str;
+                start = next;
+                count = Math.min(8192, length - next);
+                next += count;
+            }
+            out.write(source, start, count);
+            transferred = Long.MAX_VALUE - transferred < count
+                    ? Long.MAX_VALUE : transferred + count;
+        }
+    }
+
     /**
      * Closes the stream and releases any system resources associated with
      * it. Once the stream has been closed, further read(),
@@ -208,6 +235,7 @@ public class StringReader extends Reader {
     public void close() {
         synchronized (lock) {
             str = null;
+            codeUnits = null;
         }
     }
 }

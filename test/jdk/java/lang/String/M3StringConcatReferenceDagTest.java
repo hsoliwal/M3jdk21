@@ -4,6 +4,9 @@
  * @run main/othervm --add-opens=java.base/java.lang=ALL-UNNAMED -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage M3StringConcatReferenceDagTest
  */
 
+import java.lang.invoke.MethodHandles;
+import java.lang.invoke.MethodType;
+import java.lang.invoke.StringConcatFactory;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
@@ -47,6 +50,8 @@ public class M3StringConcatReferenceDagTest {
         check(typedConcat((byte) 3, (short) 4, 5, 6L, 'Q', true, 1.5f, 2.25d)
                 .equals("3|4|5|6|Q|true|1.5|2.25"), "typed primitive conversion");
 
+        nullableStringConcats();
+
         String empty1 = concat(new String[]{""}, new String[0]);
         String empty2 = concat(new String[]{""}, new String[0]);
         check(empty1.isEmpty(), "empty content");
@@ -71,6 +76,51 @@ public class M3StringConcatReferenceDagTest {
 
         System.out.println("M3_STRING_CONCAT_REFERENCE_DAG_PASS|checks=" + checks
                 + "|height=" + height);
+    }
+
+    private static void nullableStringConcats() {
+        String first = nullStringConcat(null);
+        check(first.equals("xnully"), "String null argument conversion");
+        check(nullStringConcat("").equals("xy"), "String empty argument conversion");
+        check(nullStringConcat("v").equals("xvy"), "String non-null argument conversion");
+        check(first != nullStringConcat(null), "fresh String-null concat wrapper");
+        check(threeStringConcat(null, "b", "c").equals("null|b|c"), "String null first");
+        check(threeStringConcat("a", null, "c").equals("a|null|c"), "String null middle");
+        check(threeStringConcat("a", "b", null).equals("a|b|null"), "String null last");
+        check(threeStringConcat(null, null, null).equals("null|null|null"), "String all null");
+
+        StringBuilder trace = new StringBuilder();
+        String ordered = stringPiece(trace, "A", null) + "|"
+                + stringPiece(trace, "B", "b") + "|" + stringPiece(trace, "C", null);
+        check(ordered.equals("null|b|null"), "String side-effect content");
+        check(trace.toString().equals("ABC"), "String left-to-right evaluation");
+        checkExplicitStringBootstrap();
+    }
+
+    private static String nullStringConcat(String value) {
+        return "x" + value + "y";
+    }
+
+    private static String threeStringConcat(String first, String second, String third) {
+        return first + "|" + second + "|" + third;
+    }
+
+    private static String stringPiece(StringBuilder trace, String label, String value) {
+        trace.append(label);
+        return value;
+    }
+
+    private static void checkExplicitStringBootstrap() {
+        try {
+            var target = StringConcatFactory.makeConcatWithConstants(
+                    MethodHandles.lookup(), "makeConcatWithConstants",
+                    MethodType.methodType(String.class, String.class), "x\u0001y")
+                    .dynamicInvoker();
+            String result = (String) target.invokeExact((String) null);
+            check(result.equals("xnully"), "explicit String-null bootstrap");
+        } catch (Throwable failure) {
+            throw new AssertionError("explicit String-null bootstrap failed", failure);
+        }
     }
 
     private static String concat(String[] constants, String[] args) throws Exception {

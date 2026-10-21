@@ -1,0 +1,543 @@
+{
+  "canonical_source": {
+    "commit": "89971b4f40a0335456aa5a803adebf1744e62acc",
+    "commit_verification": "offline_not_remote_verified",
+    "crate_path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017",
+    "recipe": "com.synexia.m3jdk.AstBuildReverse20261017",
+    "repository": "hsoliwal/com.synexia",
+    "writer": {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/tasks/m3-abseil-convergence-20261021/write_source_receipt.py",
+      "sha256": "801d0d0d12b92e065e77b5c394721ba7610a4746fd582397c05999444035fca8"
+    }
+  },
+  "datasets": [
+    {
+      "baseline_ref": "2779aba3f98f31c324be43f731be7914e1a05935",
+      "bound_files": [
+        {
+          "input": "crate/ENGINE_SOURCES.tsv",
+          "sha256": "b2e990a09f2c4b7c355b48cc33a72405829fd009f76d1866153aa07225e6684e",
+          "source_path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/ENGINE_SOURCES.tsv"
+        },
+        {
+          "input": "crate/contract/test_prepare.py",
+          "sha256": "25226239056bf62ac495376d50d7d51309649a09e8802a38a11fe29a2418b4b6",
+          "source_path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/contract/test_prepare.py"
+        },
+        {
+          "input": "crate/contract/verify_receiver.py",
+          "sha256": "f6129375240f0eb00171095f3ff7817ccf74ee92af715a55f60088fd6b68bfb4",
+          "source_path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/contract/verify_receiver.py"
+        },
+        {
+          "input": "crate/datasets/abseil-string-20261021/DATASET.json",
+          "sha256": "043a216161c95127bf234ef79a02a9e4e38bca8c20e03d5e128bd47a9a743763",
+          "source_path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/abseil-string-20261021/DATASET.json"
+        },
+        {
+          "input": "crate/datasets/abseil-string-20261021/ENGINE_EFFECTIVE.tsv",
+          "sha256": "483bb7d5a3fd59e2858bc7c22bec3f0e616e70fe08c4c07813d95f5c75351984",
+          "source_path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/abseil-string-20261021/ENGINE_EFFECTIVE.tsv"
+        },
+        {
+          "input": "crate/datasets/abseil-string-20261021/MODES.tsv",
+          "sha256": "95999bb4b90139dffa38cf210262757e24206b1ed367d07eba13b2efed13fed4",
+          "source_path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/abseil-string-20261021/MODES.tsv"
+        },
+        {
+          "input": "crate/datasets/abseil-string-20261021/resources/META-INF/rewrite/m3-ast-build-reverse-20261017-abseil-string-20261021.yml",
+          "sha256": "d66322f42971ebbef68ecfa1aad2ccc81628a868f3f9b01c257625f2db074f70",
+          "source_path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/abseil-string-20261021/resources/META-INF/rewrite/m3-ast-build-reverse-20261017-abseil-string-20261021.yml"
+        },
+        {
+          "input": "crate/datasets/abseil-string-20261021/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-build-reverse-20261017-abseil-string-20261021/0002-M3String.java.txt",
+          "sha256": "6c21eb9c6b3bcbdc317e17290527b48d285d9c68fb277fb7a837964581ffef56",
+          "source_path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/abseil-string-20261021/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-build-reverse-20261017-abseil-string-20261021/0002-M3String.java.txt"
+        },
+        {
+          "input": "crate/datasets/abseil-string-20261021/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-build-reverse-20261017-abseil-string-20261021/0003-M3StringImmediate.java.txt",
+          "sha256": "0bf8cf838c1c4d6cdb7c78c319d125cd1fe09ddb5bf9fe37ca31bc1e6d39bf21",
+          "source_path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/abseil-string-20261021/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-build-reverse-20261017-abseil-string-20261021/0003-M3StringImmediate.java.txt"
+        },
+        {
+          "input": "crate/datasets/abseil-string-20261021/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-build-reverse-20261017-abseil-string-20261021/0004-M3StringPrecomputeBridge.java.txt",
+          "sha256": "112699ac1f136f295efda67d54a1a7bc96db0f639ea3855c3925a5ca890952bf",
+          "source_path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/abseil-string-20261021/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-build-reverse-20261017-abseil-string-20261021/0004-M3StringPrecomputeBridge.java.txt"
+        },
+        {
+          "input": "crate/datasets/abseil-string-20261021/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-build-reverse-20261017-abseil-string-20261021/0006-M3StringCompositeComparisonTest.java.txt",
+          "sha256": "35da6dbc7cb4e355b787f1b556aecafcfabc8326cea0adb868f865190143c97f",
+          "source_path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/abseil-string-20261021/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-build-reverse-20261017-abseil-string-20261021/0006-M3StringCompositeComparisonTest.java.txt"
+        },
+        {
+          "input": "crate/datasets/abseil-string-20261021/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-build-reverse-20261017-abseil-string-20261021/0007-M3StringCompositePrefixCursorTest.java.txt",
+          "sha256": "df5be156775200b0883dbfa390ee61eb281724863ea95563948aefb51ce232c6",
+          "source_path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/abseil-string-20261021/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-build-reverse-20261017-abseil-string-20261021/0007-M3StringCompositePrefixCursorTest.java.txt"
+        },
+        {
+          "input": "crate/datasets/abseil-string-20261021/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-build-reverse-20261017-abseil-string-20261021/0008-M3StringPathCursorTest.java.txt",
+          "sha256": "8989a34dd9295a11f9af8c14f4c47062bb1f5cd1573ec0a86c6cce82714420bc",
+          "source_path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/abseil-string-20261021/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-build-reverse-20261017-abseil-string-20261021/0008-M3StringPathCursorTest.java.txt"
+        },
+        {
+          "input": "crate/datasets/abseil-string-20261021/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-build-reverse-20261017-abseil-string-20261021/manifest.tsv",
+          "sha256": "23332ca69069c30b1c4d7be01a4e35cf4d8a0c53c9ed353ed2a9c1c2acc4d9d9",
+          "source_path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/abseil-string-20261021/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-build-reverse-20261017-abseil-string-20261021/manifest.tsv"
+        },
+        {
+          "input": "crate/datasets/abseil-string-20261021/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-build-reverse-20261017-abseil-string-20261021/pre/0002-M3String.java.txt",
+          "sha256": "3048c2538f437dc612aab4af2c520fece3a7e8f3eb59aca2ac907d6307f9d0f2",
+          "source_path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/abseil-string-20261021/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-build-reverse-20261017-abseil-string-20261021/pre/0002-M3String.java.txt"
+        },
+        {
+          "input": "crate/datasets/abseil-string-20261021/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-build-reverse-20261017-abseil-string-20261021/pre/0003-M3StringImmediate.java.txt",
+          "sha256": "327ac7a55b80631378a822c2133729bd027f1f26bc53224020c3e1fad01109e3",
+          "source_path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/abseil-string-20261021/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-build-reverse-20261017-abseil-string-20261021/pre/0003-M3StringImmediate.java.txt"
+        },
+        {
+          "input": "crate/datasets/abseil-string-20261021/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-build-reverse-20261017-abseil-string-20261021/pre/0004-M3StringPrecomputeBridge.java.txt",
+          "sha256": "08e86c8cbac6c64486f7feca72f9e4c1e563895a537fd9c9d11415c108b6667d",
+          "source_path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/abseil-string-20261021/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-build-reverse-20261017-abseil-string-20261021/pre/0004-M3StringPrecomputeBridge.java.txt"
+        },
+        {
+          "input": "crate/datasets/abseil-string-20261021/resources/com/synexia/rewrite/hash-pinned-text/m3-ast-build-reverse-20261017-abseil-string-20261021/0001-README.md.txt",
+          "sha256": "ec843d4e9811b66c03349554a439c62f5d0e9e83f9dca688fc94f2e595abded4",
+          "source_path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/abseil-string-20261021/resources/com/synexia/rewrite/hash-pinned-text/m3-ast-build-reverse-20261017-abseil-string-20261021/0001-README.md.txt"
+        },
+        {
+          "input": "crate/datasets/abseil-string-20261021/resources/com/synexia/rewrite/hash-pinned-text/m3-ast-build-reverse-20261017-abseil-string-20261021/0005-String.java.txt",
+          "sha256": "029586cb367a7f3c79edd4039ec05a2a668bb79a84f7db3b7de76a61039d73ef",
+          "source_path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/abseil-string-20261021/resources/com/synexia/rewrite/hash-pinned-text/m3-ast-build-reverse-20261017-abseil-string-20261021/0005-String.java.txt"
+        },
+        {
+          "input": "crate/datasets/abseil-string-20261021/resources/com/synexia/rewrite/hash-pinned-text/m3-ast-build-reverse-20261017-abseil-string-20261021/manifest.tsv",
+          "sha256": "3033742ec4c5ceefd64a93271cd5f5263ce2045b554be637910715d75f9aedc4",
+          "source_path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/abseil-string-20261021/resources/com/synexia/rewrite/hash-pinned-text/m3-ast-build-reverse-20261017-abseil-string-20261021/manifest.tsv"
+        },
+        {
+          "input": "crate/datasets/abseil-string-20261021/resources/com/synexia/rewrite/hash-pinned-text/m3-ast-build-reverse-20261017-abseil-string-20261021/pre/0005-String.java.txt",
+          "sha256": "abd9604058045fd77cb5985a14f56487726b823f468990d5dc4277d6391de0cd",
+          "source_path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/abseil-string-20261021/resources/com/synexia/rewrite/hash-pinned-text/m3-ast-build-reverse-20261017-abseil-string-20261021/pre/0005-String.java.txt"
+        },
+        {
+          "input": "crate/pom.xml",
+          "sha256": "56567ab0175c47dbbada68bec8fe0fd9bbe027d6174c5cefef695a0b7283d448",
+          "source_path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/pom.xml"
+        },
+        {
+          "input": "crate/prepare.py",
+          "sha256": "cdf91d15781ef9037fcaf265452cb10fd3f7b3f41a2cf4f58812c5becb1c6c23",
+          "source_path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/prepare.py"
+        },
+        {
+          "input": "crate/receive.py",
+          "sha256": "31140ef7bb46caeddddf1074e6f180d317253118be30ca628a1c40c393a5ef69",
+          "source_path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/receive.py"
+        },
+        {
+          "input": "crate/src/test/java/com/synexia/rewrite/M3TaskRecipeTest.java",
+          "sha256": "74b03a3ac3e445a04b8b15076d3ced667bfae2442bd0968cbe74468e4a499e43",
+          "source_path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/src/test/java/com/synexia/rewrite/M3TaskRecipeTest.java"
+        },
+        {
+          "input": "owner/src/main/java/com/synexia/rewrite/M3EditScope.java",
+          "sha256": "962d37d62d740c3e8055c365a048ae7ee0479c26a9f6bbfe741e540d6c1134ab",
+          "source_path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3EditScope.java"
+        },
+        {
+          "input": "owner/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+          "sha256": "083f8b1fd956fe2ed81168bc580d1e0f39a815401c50571d397ddba40150cf63",
+          "source_path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java"
+        },
+        {
+          "input": "owner/src/main/java/com/synexia/rewrite/M3HashPinnedTextSnapshotRecipe.java",
+          "sha256": "5a64bd502cb8aa7d51b78813b736e37a0a7f420233f405c4d2df08ee2eefe8bc",
+          "source_path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedTextSnapshotRecipe.java"
+        },
+        {
+          "input": "owner/src/main/java/com/synexia/rewrite/M3ScopeInference.java",
+          "sha256": "9a6c54f42564c0ef82de3f40a2de17e6598569916c15255653bf79fbe3353579",
+          "source_path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3ScopeInference.java"
+        }
+      ],
+      "crate_name": "m3-ast-build-reverse-20261017-abseil-string-20261021",
+      "dataset": "abseil-string-20261021",
+      "order": 1,
+      "recipe_name": "com.synexia.m3jdk.AstBuildReverse20261017",
+      "repository": "hsoliwal/M3jdk21",
+      "sdk_proof": [
+        {
+          "path": "target/abseil-string-20261021/candidate/SDK_INPUTS.tsv",
+          "sha256": "f0caa53c05be4bb09d1d2b38907d3fc0c31fa0c31a1d53ccfd1b0264a4d35bfe"
+        },
+        {
+          "path": "target/abseil-string-20261021/candidate/SDK_RESULTS.tsv",
+          "sha256": "97008c1daa6839a29d30dabc71fb12971f4376d378077e7ccb7194e27fd78d9a"
+        },
+        {
+          "path": "target/abseil-string-20261021/surefire-reports/TEST-com.synexia.rewrite.M3TaskRecipeTest.xml",
+          "sha256": "7e2aab29cac78c4cd468e1c4bd5bd4cd5fb0847e54b520613d23688e52e383d3"
+        }
+      ],
+      "sdk_tests": [
+        "driftMissingDuplicateAndWrongRepresentationRefuse",
+        "exactReplayFixedPointAndInputOrder",
+        "mixedPreimagesAndPostimages",
+        "postScanChangesRefuse",
+        "qualifiedSdkResultsAreRetained"
+      ],
+      "source_path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/abseil-string-20261021",
+      "target_count": 8
+    },
+    {
+      "baseline_ref": "2779aba3f98f31c324be43f731be7914e1a05935",
+      "bound_files": [
+        {
+          "input": "crate/ENGINE_SOURCES.tsv",
+          "sha256": "b2e990a09f2c4b7c355b48cc33a72405829fd009f76d1866153aa07225e6684e",
+          "source_path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/ENGINE_SOURCES.tsv"
+        },
+        {
+          "input": "crate/contract/test_prepare.py",
+          "sha256": "25226239056bf62ac495376d50d7d51309649a09e8802a38a11fe29a2418b4b6",
+          "source_path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/contract/test_prepare.py"
+        },
+        {
+          "input": "crate/contract/verify_receiver.py",
+          "sha256": "f6129375240f0eb00171095f3ff7817ccf74ee92af715a55f60088fd6b68bfb4",
+          "source_path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/contract/verify_receiver.py"
+        },
+        {
+          "input": "crate/datasets/abseil-catalogue-20261021/DATASET.json",
+          "sha256": "c5a4b3be4e3268f2f66a69c718b6fa108b6381a0ea187dab24ea27696b19963b",
+          "source_path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/abseil-catalogue-20261021/DATASET.json"
+        },
+        {
+          "input": "crate/datasets/abseil-catalogue-20261021/ENGINE_EFFECTIVE.tsv",
+          "sha256": "483bb7d5a3fd59e2858bc7c22bec3f0e616e70fe08c4c07813d95f5c75351984",
+          "source_path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/abseil-catalogue-20261021/ENGINE_EFFECTIVE.tsv"
+        },
+        {
+          "input": "crate/datasets/abseil-catalogue-20261021/MODES.tsv",
+          "sha256": "b8355c9582eb7bd6b2d18965fd694fcc9fbc8a63c92f804cd597b771fd65a62d",
+          "source_path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/abseil-catalogue-20261021/MODES.tsv"
+        },
+        {
+          "input": "crate/datasets/abseil-catalogue-20261021/resources/META-INF/rewrite/m3-ast-build-reverse-20261017-abseil-catalogue-20261021.yml",
+          "sha256": "95d2283fd966ef80fbd98de865fe89bf258cd0b1ee7c0c01db4eec106328a165",
+          "source_path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/abseil-catalogue-20261021/resources/META-INF/rewrite/m3-ast-build-reverse-20261017-abseil-catalogue-20261021.yml"
+        },
+        {
+          "input": "crate/datasets/abseil-catalogue-20261021/resources/com/synexia/rewrite/hash-pinned-text/m3-ast-build-reverse-20261017-abseil-catalogue-20261021/0001-abseil-convergence-20261021.tsv.txt",
+          "sha256": "92e92f83463cde1341d30f7dcf8c2d454e0e3495323e540196f62ef6f5eb4736",
+          "source_path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/abseil-catalogue-20261021/resources/com/synexia/rewrite/hash-pinned-text/m3-ast-build-reverse-20261017-abseil-catalogue-20261021/0001-abseil-convergence-20261021.tsv.txt"
+        },
+        {
+          "input": "crate/datasets/abseil-catalogue-20261021/resources/com/synexia/rewrite/hash-pinned-text/m3-ast-build-reverse-20261017-abseil-catalogue-20261021/0002-DONOR_SOURCES.json.txt",
+          "sha256": "adbabc8aca5913c9bb1b9cc67a01786f2186aaedaf35e877b54cbd47d510528f",
+          "source_path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/abseil-catalogue-20261021/resources/com/synexia/rewrite/hash-pinned-text/m3-ast-build-reverse-20261017-abseil-catalogue-20261021/0002-DONOR_SOURCES.json.txt"
+        },
+        {
+          "input": "crate/datasets/abseil-catalogue-20261021/resources/com/synexia/rewrite/hash-pinned-text/m3-ast-build-reverse-20261017-abseil-catalogue-20261021/0003-FILE_PASSES.tsv.txt",
+          "sha256": "a9d157c33f80ed12b2d2118f70235fa4e34d101aa917e760cdf700bb6b024bee",
+          "source_path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/abseil-catalogue-20261021/resources/com/synexia/rewrite/hash-pinned-text/m3-ast-build-reverse-20261017-abseil-catalogue-20261021/0003-FILE_PASSES.tsv.txt"
+        },
+        {
+          "input": "crate/datasets/abseil-catalogue-20261021/resources/com/synexia/rewrite/hash-pinned-text/m3-ast-build-reverse-20261017-abseil-catalogue-20261021/0004-PLAN.md.txt",
+          "sha256": "766860e2b071be0de19910f9696d2afa8c11030b0e32e4fd3bf96588cda4ff68",
+          "source_path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/abseil-catalogue-20261021/resources/com/synexia/rewrite/hash-pinned-text/m3-ast-build-reverse-20261017-abseil-catalogue-20261021/0004-PLAN.md.txt"
+        },
+        {
+          "input": "crate/datasets/abseil-catalogue-20261021/resources/com/synexia/rewrite/hash-pinned-text/m3-ast-build-reverse-20261017-abseil-catalogue-20261021/0005-README.md.txt",
+          "sha256": "ec305c19c9ae9dc2b375c19eda8df781994037b9a6eb20f2073a0d59b679901b",
+          "source_path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/abseil-catalogue-20261021/resources/com/synexia/rewrite/hash-pinned-text/m3-ast-build-reverse-20261017-abseil-catalogue-20261021/0005-README.md.txt"
+        },
+        {
+          "input": "crate/datasets/abseil-catalogue-20261021/resources/com/synexia/rewrite/hash-pinned-text/m3-ast-build-reverse-20261017-abseil-catalogue-20261021/0006-name-mapping.json.txt",
+          "sha256": "cad5b4eed6529124b3125a0edafe688b557d33cc39e989214efc192af0388ba1",
+          "source_path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/abseil-catalogue-20261021/resources/com/synexia/rewrite/hash-pinned-text/m3-ast-build-reverse-20261017-abseil-catalogue-20261021/0006-name-mapping.json.txt"
+        },
+        {
+          "input": "crate/datasets/abseil-catalogue-20261021/resources/com/synexia/rewrite/hash-pinned-text/m3-ast-build-reverse-20261017-abseil-catalogue-20261021/manifest.tsv",
+          "sha256": "268324579ccec9a59c7b475278ed6ea364c8f5be5bcf591a6c8f3c5ef9bba3e8",
+          "source_path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/abseil-catalogue-20261021/resources/com/synexia/rewrite/hash-pinned-text/m3-ast-build-reverse-20261017-abseil-catalogue-20261021/manifest.tsv"
+        },
+        {
+          "input": "crate/datasets/abseil-catalogue-20261021/resources/com/synexia/rewrite/hash-pinned-text/m3-ast-build-reverse-20261017-abseil-catalogue-20261021/pre/0006-name-mapping.json.txt",
+          "sha256": "746e77693058fb09a3770e69bb60bf81dbe60fb3d7898b368e5b891b5456c6f2",
+          "source_path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/abseil-catalogue-20261021/resources/com/synexia/rewrite/hash-pinned-text/m3-ast-build-reverse-20261017-abseil-catalogue-20261021/pre/0006-name-mapping.json.txt"
+        },
+        {
+          "input": "crate/pom.xml",
+          "sha256": "56567ab0175c47dbbada68bec8fe0fd9bbe027d6174c5cefef695a0b7283d448",
+          "source_path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/pom.xml"
+        },
+        {
+          "input": "crate/prepare.py",
+          "sha256": "cdf91d15781ef9037fcaf265452cb10fd3f7b3f41a2cf4f58812c5becb1c6c23",
+          "source_path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/prepare.py"
+        },
+        {
+          "input": "crate/receive.py",
+          "sha256": "31140ef7bb46caeddddf1074e6f180d317253118be30ca628a1c40c393a5ef69",
+          "source_path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/receive.py"
+        },
+        {
+          "input": "crate/src/test/java/com/synexia/rewrite/M3TaskRecipeTest.java",
+          "sha256": "74b03a3ac3e445a04b8b15076d3ced667bfae2442bd0968cbe74468e4a499e43",
+          "source_path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/src/test/java/com/synexia/rewrite/M3TaskRecipeTest.java"
+        },
+        {
+          "input": "owner/src/main/java/com/synexia/rewrite/M3EditScope.java",
+          "sha256": "962d37d62d740c3e8055c365a048ae7ee0479c26a9f6bbfe741e540d6c1134ab",
+          "source_path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3EditScope.java"
+        },
+        {
+          "input": "owner/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+          "sha256": "083f8b1fd956fe2ed81168bc580d1e0f39a815401c50571d397ddba40150cf63",
+          "source_path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java"
+        },
+        {
+          "input": "owner/src/main/java/com/synexia/rewrite/M3HashPinnedTextSnapshotRecipe.java",
+          "sha256": "5a64bd502cb8aa7d51b78813b736e37a0a7f420233f405c4d2df08ee2eefe8bc",
+          "source_path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedTextSnapshotRecipe.java"
+        },
+        {
+          "input": "owner/src/main/java/com/synexia/rewrite/M3ScopeInference.java",
+          "sha256": "9a6c54f42564c0ef82de3f40a2de17e6598569916c15255653bf79fbe3353579",
+          "source_path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3ScopeInference.java"
+        }
+      ],
+      "crate_name": "m3-ast-build-reverse-20261017-abseil-catalogue-20261021",
+      "dataset": "abseil-catalogue-20261021",
+      "order": 2,
+      "recipe_name": "com.synexia.m3jdk.AstBuildReverse20261017",
+      "repository": "hsoliwal/M3jdk21",
+      "sdk_proof": [
+        {
+          "path": "target/abseil-catalogue-20261021/candidate/SDK_INPUTS.tsv",
+          "sha256": "fb1e2fc281def469d39f3d267fbd65d13cef0e0e31496b8e630ead936253b877"
+        },
+        {
+          "path": "target/abseil-catalogue-20261021/candidate/SDK_RESULTS.tsv",
+          "sha256": "2d93dae935267705be81f9d45454125c96f5f3afbd1e4ce6d18b346b1ac89d70"
+        },
+        {
+          "path": "target/abseil-catalogue-20261021/surefire-reports/TEST-com.synexia.rewrite.M3TaskRecipeTest.xml",
+          "sha256": "0cf7cff67c5833b077e71471e1be3e789f2b8be6d5051a02ff02e8fd6992d60e"
+        }
+      ],
+      "sdk_tests": [
+        "driftMissingDuplicateAndWrongRepresentationRefuse",
+        "exactReplayFixedPointAndInputOrder",
+        "mixedPreimagesAndPostimages",
+        "postScanChangesRefuse",
+        "qualifiedSdkResultsAreRetained"
+      ],
+      "source_path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/abseil-catalogue-20261021",
+      "target_count": 6
+    }
+  ],
+  "output_path": "m3/docs/abseil-convergence-20261021/SOURCE_RECEIPT.json",
+  "schema": "M3_ABSEIL_SOURCE_RECEIPT_V1",
+  "target_repository": "hsoliwal/M3JDK21",
+  "target_scope": "qualified_subset",
+  "targets": [
+    {
+      "mode": "0644",
+      "path": "m3/collections/algorithm-catalog/abseil-convergence-20261021.tsv",
+      "postimage_sha256": "92e92f83463cde1341d30f7dcf8c2d454e0e3495323e540196f62ef6f5eb4736",
+      "preimage_sha256": "ABSENT",
+      "stages": [
+        {
+          "dataset": "abseil-catalogue-20261021",
+          "mode": "0644",
+          "postimage_sha256": "92e92f83463cde1341d30f7dcf8c2d454e0e3495323e540196f62ef6f5eb4736",
+          "preimage_sha256": "ABSENT"
+        }
+      ]
+    },
+    {
+      "mode": "0644",
+      "path": "m3/docs/abseil-convergence-20261021/DONOR_SOURCES.json",
+      "postimage_sha256": "adbabc8aca5913c9bb1b9cc67a01786f2186aaedaf35e877b54cbd47d510528f",
+      "preimage_sha256": "ABSENT",
+      "stages": [
+        {
+          "dataset": "abseil-catalogue-20261021",
+          "mode": "0644",
+          "postimage_sha256": "adbabc8aca5913c9bb1b9cc67a01786f2186aaedaf35e877b54cbd47d510528f",
+          "preimage_sha256": "ABSENT"
+        }
+      ]
+    },
+    {
+      "mode": "0644",
+      "path": "m3/docs/abseil-convergence-20261021/FILE_PASSES.tsv",
+      "postimage_sha256": "a9d157c33f80ed12b2d2118f70235fa4e34d101aa917e760cdf700bb6b024bee",
+      "preimage_sha256": "ABSENT",
+      "stages": [
+        {
+          "dataset": "abseil-catalogue-20261021",
+          "mode": "0644",
+          "postimage_sha256": "a9d157c33f80ed12b2d2118f70235fa4e34d101aa917e760cdf700bb6b024bee",
+          "preimage_sha256": "ABSENT"
+        }
+      ]
+    },
+    {
+      "mode": "0644",
+      "path": "m3/docs/abseil-convergence-20261021/PLAN.md",
+      "postimage_sha256": "766860e2b071be0de19910f9696d2afa8c11030b0e32e4fd3bf96588cda4ff68",
+      "preimage_sha256": "ABSENT",
+      "stages": [
+        {
+          "dataset": "abseil-catalogue-20261021",
+          "mode": "0644",
+          "postimage_sha256": "766860e2b071be0de19910f9696d2afa8c11030b0e32e4fd3bf96588cda4ff68",
+          "preimage_sha256": "ABSENT"
+        }
+      ]
+    },
+    {
+      "mode": "0644",
+      "path": "m3/docs/abseil-convergence-20261021/README.md",
+      "postimage_sha256": "ec305c19c9ae9dc2b375c19eda8df781994037b9a6eb20f2073a0d59b679901b",
+      "preimage_sha256": "ABSENT",
+      "stages": [
+        {
+          "dataset": "abseil-catalogue-20261021",
+          "mode": "0644",
+          "postimage_sha256": "ec305c19c9ae9dc2b375c19eda8df781994037b9a6eb20f2073a0d59b679901b",
+          "preimage_sha256": "ABSENT"
+        }
+      ]
+    },
+    {
+      "mode": "0644",
+      "path": "m3/docs/name-mapping.json",
+      "postimage_sha256": "cad5b4eed6529124b3125a0edafe688b557d33cc39e989214efc192af0388ba1",
+      "preimage_sha256": "746e77693058fb09a3770e69bb60bf81dbe60fb3d7898b368e5b891b5456c6f2",
+      "stages": [
+        {
+          "dataset": "abseil-catalogue-20261021",
+          "mode": "0644",
+          "postimage_sha256": "cad5b4eed6529124b3125a0edafe688b557d33cc39e989214efc192af0388ba1",
+          "preimage_sha256": "746e77693058fb09a3770e69bb60bf81dbe60fb3d7898b368e5b891b5456c6f2"
+        }
+      ]
+    },
+    {
+      "mode": "0644",
+      "path": "m3/runtime-integration/string-comparison-cursor-20261021/README.md",
+      "postimage_sha256": "ec843d4e9811b66c03349554a439c62f5d0e9e83f9dca688fc94f2e595abded4",
+      "preimage_sha256": "ABSENT",
+      "stages": [
+        {
+          "dataset": "abseil-string-20261021",
+          "mode": "0644",
+          "postimage_sha256": "ec843d4e9811b66c03349554a439c62f5d0e9e83f9dca688fc94f2e595abded4",
+          "preimage_sha256": "ABSENT"
+        }
+      ]
+    },
+    {
+      "mode": "0644",
+      "path": "src/java.base/share/classes/java/lang/M3String.java",
+      "postimage_sha256": "6c21eb9c6b3bcbdc317e17290527b48d285d9c68fb277fb7a837964581ffef56",
+      "preimage_sha256": "3048c2538f437dc612aab4af2c520fece3a7e8f3eb59aca2ac907d6307f9d0f2",
+      "stages": [
+        {
+          "dataset": "abseil-string-20261021",
+          "mode": "0644",
+          "postimage_sha256": "6c21eb9c6b3bcbdc317e17290527b48d285d9c68fb277fb7a837964581ffef56",
+          "preimage_sha256": "3048c2538f437dc612aab4af2c520fece3a7e8f3eb59aca2ac907d6307f9d0f2"
+        }
+      ]
+    },
+    {
+      "mode": "0644",
+      "path": "src/java.base/share/classes/java/lang/M3StringImmediate.java",
+      "postimage_sha256": "0bf8cf838c1c4d6cdb7c78c319d125cd1fe09ddb5bf9fe37ca31bc1e6d39bf21",
+      "preimage_sha256": "327ac7a55b80631378a822c2133729bd027f1f26bc53224020c3e1fad01109e3",
+      "stages": [
+        {
+          "dataset": "abseil-string-20261021",
+          "mode": "0644",
+          "postimage_sha256": "0bf8cf838c1c4d6cdb7c78c319d125cd1fe09ddb5bf9fe37ca31bc1e6d39bf21",
+          "preimage_sha256": "327ac7a55b80631378a822c2133729bd027f1f26bc53224020c3e1fad01109e3"
+        }
+      ]
+    },
+    {
+      "mode": "0644",
+      "path": "src/java.base/share/classes/java/lang/M3StringPrecomputeBridge.java",
+      "postimage_sha256": "112699ac1f136f295efda67d54a1a7bc96db0f639ea3855c3925a5ca890952bf",
+      "preimage_sha256": "08e86c8cbac6c64486f7feca72f9e4c1e563895a537fd9c9d11415c108b6667d",
+      "stages": [
+        {
+          "dataset": "abseil-string-20261021",
+          "mode": "0644",
+          "postimage_sha256": "112699ac1f136f295efda67d54a1a7bc96db0f639ea3855c3925a5ca890952bf",
+          "preimage_sha256": "08e86c8cbac6c64486f7feca72f9e4c1e563895a537fd9c9d11415c108b6667d"
+        }
+      ]
+    },
+    {
+      "mode": "0644",
+      "path": "src/java.base/share/classes/java/lang/String.java",
+      "postimage_sha256": "029586cb367a7f3c79edd4039ec05a2a668bb79a84f7db3b7de76a61039d73ef",
+      "preimage_sha256": "abd9604058045fd77cb5985a14f56487726b823f468990d5dc4277d6391de0cd",
+      "stages": [
+        {
+          "dataset": "abseil-string-20261021",
+          "mode": "0644",
+          "postimage_sha256": "029586cb367a7f3c79edd4039ec05a2a668bb79a84f7db3b7de76a61039d73ef",
+          "preimage_sha256": "abd9604058045fd77cb5985a14f56487726b823f468990d5dc4277d6391de0cd"
+        }
+      ]
+    },
+    {
+      "mode": "0644",
+      "path": "test/jdk/java/lang/String/M3StringCompositeComparisonTest.java",
+      "postimage_sha256": "35da6dbc7cb4e355b787f1b556aecafcfabc8326cea0adb868f865190143c97f",
+      "preimage_sha256": "ABSENT",
+      "stages": [
+        {
+          "dataset": "abseil-string-20261021",
+          "mode": "0644",
+          "postimage_sha256": "35da6dbc7cb4e355b787f1b556aecafcfabc8326cea0adb868f865190143c97f",
+          "preimage_sha256": "ABSENT"
+        }
+      ]
+    },
+    {
+      "mode": "0644",
+      "path": "test/jdk/java/lang/String/M3StringCompositePrefixCursorTest.java",
+      "postimage_sha256": "df5be156775200b0883dbfa390ee61eb281724863ea95563948aefb51ce232c6",
+      "preimage_sha256": "ABSENT",
+      "stages": [
+        {
+          "dataset": "abseil-string-20261021",
+          "mode": "0644",
+          "postimage_sha256": "df5be156775200b0883dbfa390ee61eb281724863ea95563948aefb51ce232c6",
+          "preimage_sha256": "ABSENT"
+        }
+      ]
+    },
+    {
+      "mode": "0644",
+      "path": "test/jdk/java/lang/String/M3StringPathCursorTest.java",
+      "postimage_sha256": "8989a34dd9295a11f9af8c14f4c47062bb1f5cd1573ec0a86c6cce82714420bc",
+      "preimage_sha256": "ABSENT",
+      "stages": [
+        {
+          "dataset": "abseil-string-20261021",
+          "mode": "0644",
+          "postimage_sha256": "8989a34dd9295a11f9af8c14f4c47062bb1f5cd1573ec0a86c6cce82714420bc",
+          "preimage_sha256": "ABSENT"
+        }
+      ]
+    }
+  ]
+}

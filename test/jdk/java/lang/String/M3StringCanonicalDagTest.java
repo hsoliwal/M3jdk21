@@ -4,6 +4,7 @@
  * @test
  * @summary Verify M3String tuple identity is parenthesization-independent and composition stays balanced
  * @run main/othervm --add-opens=java.base/java.lang=ALL-UNNAMED -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage M3StringCanonicalDagTest
+ * @run main/othervm --add-opens=java.base/java.lang=ALL-UNNAMED -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage -XX:-CompactStrings M3StringCanonicalDagTest
  */
 
 import java.lang.reflect.Field;
@@ -12,6 +13,8 @@ import java.lang.reflect.Method;
 public class M3StringCanonicalDagTest {
     private static final Field STRING_M3;
     private static final Field M3_OWNER;
+    private static final Field M3_VALUE;
+    private static final Field OWNER_ROUTE;
     private static final Method M3_FACTS;
     private static long checks;
 
@@ -22,6 +25,11 @@ public class M3StringCanonicalDagTest {
             Class<?> m3 = Class.forName("java.lang.M3String");
             M3_OWNER = m3.getDeclaredField("owner");
             M3_OWNER.setAccessible(true);
+            M3_VALUE = m3.getDeclaredField("value");
+            M3_VALUE.setAccessible(true);
+            Class<?> owner = Class.forName("java.lang.M3StringOwner");
+            OWNER_ROUTE = owner.getDeclaredField("structuralHash64");
+            OWNER_ROUTE.setAccessible(true);
             M3_FACTS = m3.getDeclaredMethod("facts");
             M3_FACTS.setAccessible(true);
         } catch (ReflectiveOperationException failure) {
@@ -65,6 +73,8 @@ public class M3StringCanonicalDagTest {
                 "candidate hash collisions require exact coordinate verification");
         equal("Aa", hashCollisionA, "hash collision left content");
         equal("BB", hashCollisionB, "hash collision right content");
+
+        verifyChildCoordinates();
 
         String high = fresh("\uD83D");
         String lowAndSpace = fresh("\uDE00\u2003");
@@ -112,6 +122,48 @@ public class M3StringCanonicalDagTest {
 
     private static String fresh(String value) {
         return new String(value.toCharArray());
+    }
+
+    private static void verifyChildCoordinates() throws Exception {
+        String source = fresh("headAa#headBB");
+        String left = source.substring(0, 6);
+        String duplicateLeft = source.substring(0, 6);
+        String collidingLeft = source.substring(7, 13);
+        String tailSource = fresh("#tail#");
+        String tail = tailSource.substring(1, 5);
+        String duplicateTail = tailSource.substring(1, 5);
+
+        Object leftBody = body(left);
+        Object duplicateLeftBody = body(duplicateLeft);
+        Object collidingLeftBody = body(collidingLeft);
+        Object tailBody = body(tail);
+        Object duplicateTailBody = body(duplicateTail);
+        check(leftBody != duplicateLeftBody && tailBody != duplicateTailBody,
+                "duplicate slices must use distinct M3 descriptors");
+        same(owner(leftBody), owner(duplicateLeftBody), "duplicate left payload owner");
+        same(owner(tailBody), owner(duplicateTailBody), "duplicate right payload owner");
+        check(M3_VALUE.getLong(leftBody) == M3_VALUE.getLong(duplicateLeftBody)
+                        && M3_VALUE.getLong(tailBody) == M3_VALUE.getLong(duplicateTailBody),
+                "distinct descriptors retain exact child coordinates");
+        same(owner(leftBody), owner(collidingLeftBody), "collision slices share payload owner");
+        check(M3_VALUE.getLong(leftBody) != M3_VALUE.getLong(collidingLeftBody),
+                "collision slices retain distinct packed ranges");
+
+        String first = left.concat(tail);
+        String reused = duplicateLeft.concat(duplicateTail);
+        String collision = collidingLeft.concat(tail);
+        Object firstOwner = owner(body(first));
+        Object reusedOwner = owner(body(reused));
+        Object collisionOwner = owner(body(collision));
+        same(firstOwner, reusedOwner, "identical ordered child coordinates reuse canonical tuple");
+        check(first.hashCode() == collision.hashCode(), "full-route Java hash collision");
+        // Equal length/coder/hash and equal four-unit prefix/suffix force the same route.
+        check(OWNER_ROUTE.getLong(firstOwner) == OWNER_ROUTE.getLong(collisionOwner),
+                "full tuple route collision fixture");
+        check(firstOwner != collisionOwner, "route and shared owner cannot replace exact ranges");
+        equal("headAatail", first, "same-coordinate result");
+        equal("headAatail", reused, "duplicate-descriptor result");
+        equal("headBBtail", collision, "route collision result");
     }
 
     private static Object body(String value) throws Exception {

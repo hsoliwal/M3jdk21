@@ -90,7 +90,6 @@ for fragment in [
     "MethodHandle stringifier = m3Stringifier(mt.parameterType(i));",
     "mh = MethodHandles.filterArguments(mh, 0, stringifiers);",
     "private static MethodHandle m3Stringifier(Class<?> type)",
-    "if (type == String.class)",
     "return stringValueOf(type);",
     "return stringValueOf(int.class).asType(methodType(String.class, type));",
     "return floatStringifier();",
@@ -102,6 +101,16 @@ for fragment in [
 ]:
     if fragment not in factory:
         raise SystemExit(f"M3_STRING_CONCAT_RECEIVER_FAIL|stringifier={fragment}")
+
+stringifier_start = factory.find("private static MethodHandle m3Stringifier(Class<?> type)")
+stringifier_end = factory.find("\n    // We need one prepender", stringifier_start)
+if stringifier_end < 0:
+    raise SystemExit("M3_STRING_CONCAT_RECEIVER_FAIL|cannot_bound_m3Stringifier")
+stringifier_body = factory[stringifier_start:stringifier_end]
+if "return null;" in stringifier_body:
+    raise SystemExit("M3_STRING_CONCAT_RECEIVER_FAIL|nullable_reference_conversion_bypass")
+if "return objectStringifier();" not in stringifier_body:
+    raise SystemExit("M3_STRING_CONCAT_RECEIVER_FAIL|reference_stringifier_missing")
 
 if "static String stringOf(Object value)" not in helper:
     raise SystemExit("M3_STRING_CONCAT_RECEIVER_FAIL|stringOf authority missing")

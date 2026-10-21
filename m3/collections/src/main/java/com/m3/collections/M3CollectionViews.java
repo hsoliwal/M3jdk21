@@ -1,3 +1,4 @@
+// Modified 2026 by Hitesh Soliwal and contributors: preserve enclosing selection callback state.
 /*
  * Copyright 2026 Hitesh Soliwal and contributors
  * SPDX-License-Identifier: Apache-2.0
@@ -716,6 +717,8 @@ public final class M3CollectionViews {
         @Override
         public boolean tryAdvance(Consumer<? super E> consumer) {
             Objects.requireNonNull(consumer, "action");
+            Consumer<? super E> enclosingAction = action;
+            boolean enclosingDelivered = delivered;
             action = consumer;
             delivered = false;
             try {
@@ -724,7 +727,8 @@ public final class M3CollectionViews {
                 }
                 return delivered;
             } finally {
-                action = null;
+                action = enclosingAction;
+                delivered = enclosingDelivered;
             }
         }
 

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- SPDX-FileCopyrightText: 2026 Hitesh Soliwal and contributors -->
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.synexia.verification</groupId>
+  <artifactId>m3jdk21-native-build-superset-recipe</artifactId>
+  <version>2026.10.21</version>
+  <packaging>pom</packaging>
+  <name>M3JDK21 byte-sealed native build Git superset receipt</name>
+  <properties>
+    <m3.receiver.checkout>${project.basedir}/../../../..</m3.receiver.checkout>
+    <m3.verify.python>python3</m3.verify.python>
+    <m3.merge.first>116d735ffbd25a423821599481806c2460752bc3</m3.merge.first>
+    <m3.merge.second>cd54c4e62f9de664ad2c1458edbad95bed5b181a</m3.merge.second>
+    <m3.merge.tip>HEAD</m3.merge.tip>
+  </properties>
+  <build><plugins>
+    <plugin>
+      <groupId>org.codehaus.mojo</groupId><artifactId>exec-maven-plugin</artifactId><version>3.3.0</version>
+      <executions><execution><id>verify-exact-git-ancestry-and-source-closure</id>
+        <phase>verify</phase><goals><goal>exec</goal></goals>
+        <configuration>
+          <executable>${m3.verify.python}</executable>
+          <arguments>
+            <argument>${project.basedir}/verify_superset.py</argument>
+            <argument>--repository</argument><argument>${m3.receiver.checkout}</argument>
+            <argument>--manifest</argument><argument>${project.basedir}/RECEIVING.tsv</argument>
+            <argument>--first</argument><argument>${m3.merge.first}</argument>
+            <argument>--second</argument><argument>${m3.merge.second}</argument>
+            <argument>--tip</argument><argument>${m3.merge.tip}</argument>
+            <argument>--allow</argument><argument>m3/qualification/unified-superset-20261021/native-build-20261021/README.md</argument>
+            <argument>--allow</argument><argument>m3/qualification/unified-superset-20261021/native-build-20261021/RECEIVING.tsv</argument>
+            <argument>--allow</argument><argument>m3/qualification/unified-superset-20261021/native-build-20261021/verify_superset.py</argument>
+            <argument>--allow</argument><argument>m3/qualification/unified-superset-20261021/native-build-20261021/pom.xml</argument>
+            <argument>--allow</argument><argument>.github/workflows/m3-native-build-superset-20261021.yml</argument>
+          </arguments>
+        </configuration>
+      </execution></executions>
+    </plugin>
+  </plugins></build>
+</project>
