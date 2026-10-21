@@ -32,5 +32,7 @@ jobs:
             .github/workflows/m3jdk21-name-contract.yml
       - name: Canonical name and package mapping gate
         run: python3 m3/tooling/name-contract/check.py
+      - name: Canonical target class and JNI owner census
+        run: python3 m3/tooling/name-contract/audit.py --strict
       - name: Adversarial source-queue refusal tests
         run: python3 -m unittest discover -s m3/tooling/name-contract -p 'test_*.py' -v
