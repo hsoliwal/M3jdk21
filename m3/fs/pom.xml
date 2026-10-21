@@ -24,6 +24,12 @@
     <m3.fs.native.prefix></m3.fs.native.prefix>
   </properties>
   <dependencies>
+    <!-- Original M3File stream is a direct first-class M3JDK21 module owner. -->
+    <dependency>
+      <groupId>com.m3</groupId>
+      <artifactId>m3-file</artifactId>
+      <version>0.1.0-SNAPSHOT</version>
+    </dependency>
     <!-- Exact qualified m3-vfs-core closure; upstream versions and bounded overrides are recorded in legal/commons-vfs2/CHANGES-M3FS.md. -->
     <dependency>
       <groupId>commons-logging</groupId>
