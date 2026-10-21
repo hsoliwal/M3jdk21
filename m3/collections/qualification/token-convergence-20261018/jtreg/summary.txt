@@ -1,0 +1,2 @@
+jdk/internal/mindex/M3RX7BoundaryContract.java    Passed. Execution successful
+jdk/internal/mindex/M3RX7TokenIndexContract.java  Passed. Execution successful

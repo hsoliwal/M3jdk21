@@ -1,0 +1,29 @@
+Compiled from "M3TokenRegexPlan.java"
+public final class jdk.internal.mindex.M3TokenRegexPlan$Predicate extends java.lang.Record {
+  public jdk.internal.mindex.M3TokenRegexPlan$Predicate(int, long, long, long, int);
+    descriptor: (IJJJI)V
+
+  public final java.lang.String toString();
+    descriptor: ()Ljava/lang/String;
+
+  public final int hashCode();
+    descriptor: ()I
+
+  public final boolean equals(java.lang.Object);
+    descriptor: (Ljava/lang/Object;)Z
+
+  public int kind();
+    descriptor: ()I
+
+  public long symbol();
+    descriptor: ()J
+
+  public long requiredFlags();
+    descriptor: ()J
+
+  public long forbiddenFlags();
+    descriptor: ()J
+
+  public int attributes();
+    descriptor: ()I
+}

@@ -1,0 +1,29 @@
+Compiled from "M3RX7.java"
+public final class jdk.internal.mindex.M3RX7 {
+  public static jdk.internal.mindex.M3RX7 fromAsciiDfa(java.lang.String, int, short[], byte[]);
+    descriptor: (Ljava/lang/String;I[S[B)Ljdk/internal/mindex/M3RX7;
+
+  public java.lang.String programRoot();
+    descriptor: ()Ljava/lang/String;
+
+  public int stateCount();
+    descriptor: ()I
+
+  public long primitivePayloadBytes();
+    descriptor: ()J
+
+  public int matchesCandidate(java.lang.CharSequence);
+    descriptor: (Ljava/lang/CharSequence;)I
+
+  public int matchesCandidate(java.lang.String);
+    descriptor: (Ljava/lang/String;)I
+
+  public int matchesChunksCandidate(java.lang.CharSequence[], int[], int[]);
+    descriptor: ([Ljava/lang/CharSequence;[I[I)I
+
+  public jdk.internal.mindex.M3RX7$TokenIndex prepareTokenIndex(byte[], int[], int[]);
+    descriptor: ([B[I[I)Ljdk/internal/mindex/M3RX7$TokenIndex;
+
+  public boolean matchesVerified(java.lang.String, java.util.regex.Pattern);
+    descriptor: (Ljava/lang/String;Ljava/util/regex/Pattern;)Z
+}

@@ -1,0 +1,57 @@
+{
+  "schema": "M3_AST_BUILD_RECEIVER_CONTRACT_V1",
+  "status": "PASS",
+  "dataset": "typed-token-oracles-20261018",
+  "targets": 2,
+  "cases": [
+    {
+      "case": "check-no-write",
+      "exit_code": 0,
+      "expected_refusal": null
+    },
+    {
+      "case": "apply-exact-sdk",
+      "exit_code": 0,
+      "expected_refusal": null
+    },
+    {
+      "case": "fixed-point-no-write",
+      "exit_code": 0,
+      "expected_refusal": null
+    },
+    {
+      "case": "late-drift-no-partial-write",
+      "exit_code": 1,
+      "expected_refusal": "target source drift: test/jdk/jdk/internal/mindex/M3TokenRegexPlanContract.java"
+    },
+    {
+      "case": "qualified-input-tamper",
+      "exit_code": 1,
+      "expected_refusal": "recipe changed after SDK qualification:"
+    },
+    {
+      "case": "sdk-result-tamper",
+      "exit_code": 1,
+      "expected_refusal": "SDK result changed after qualification: test/jdk/jdk/internal/mindex/M3TokenRegexPlanContract.java"
+    },
+    {
+      "case": "symlink-target",
+      "exit_code": 1,
+      "expected_refusal": "symlink target or parent is not admitted:"
+    },
+    {
+      "case": "mixed-pre-postimages",
+      "exit_code": 0,
+      "expected_refusal": null
+    },
+    {
+      "case": "failed-sdk-test-refusal",
+      "exit_code": 1,
+      "expected_refusal": "all actual SDK qualification tests must execute successfully"
+    }
+  ],
+  "actual_sdk_results": true,
+  "product_files_written": false,
+  "sdk_inputs_sha256": "dbf62c4c05ccb4056adddcc436135ff9df9c13896884a26a8e728cc10b395a74",
+  "sdk_results_sha256": "76019cfe82e067d9465eaf8695d003fd0cf3eee10973e97911e80932bc85666f"
+}

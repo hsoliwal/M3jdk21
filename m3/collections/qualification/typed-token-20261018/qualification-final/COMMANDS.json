@@ -1,0 +1,342 @@
+[
+  {
+    "stage": "01-baseline-compile",
+    "argv": [
+      "/tmp/m3-regex-toolchain-20261018/jdk-21.0.12.1+1/bin/javac",
+      "-Xlint:all",
+      "-Werror",
+      "-d",
+      "/workspace/scratch/8cbeab1c181e/tooling/typed-token/qualification-final/baseline",
+      "-h",
+      "/workspace/scratch/8cbeab1c181e/tooling/typed-token/qualification-final/baseline-headers",
+      "/workspace/scratch/8cbeab1c181e/M3jdk21-token/src/java.base/share/classes/jdk/internal/mindex/M3RegexDpPlan.java"
+    ],
+    "exit_code": 0,
+    "max_rss_kib": 86292,
+    "user_seconds": 1.089778,
+    "system_seconds": 0.11340199999999999
+  },
+  {
+    "stage": "02-candidate-compile",
+    "argv": [
+      "/tmp/m3-regex-toolchain-20261018/jdk-21.0.12.1+1/bin/javac",
+      "-Xlint:all",
+      "-Werror",
+      "-d",
+      "/workspace/scratch/8cbeab1c181e/tooling/typed-token/qualification-final/classes",
+      "-h",
+      "/workspace/scratch/8cbeab1c181e/tooling/typed-token/qualification-final/headers",
+      "/workspace/scratch/8cbeab1c181e/M3jdk21-typed/src/java.base/share/classes/jdk/internal/mindex/M3RegexDpPlan.java",
+      "/workspace/scratch/8cbeab1c181e/M3jdk21-typed/src/java.base/share/classes/jdk/internal/mindex/M3TokenRegexPlan.java"
+    ],
+    "exit_code": 0,
+    "max_rss_kib": 101644,
+    "user_seconds": 1.6288369999999999,
+    "system_seconds": 0.146371
+  },
+  {
+    "stage": "03-tests-compile",
+    "argv": [
+      "/tmp/m3-regex-toolchain-20261018/jdk-21.0.12.1+1/bin/javac",
+      "-Xlint:all",
+      "-Werror",
+      "--patch-module",
+      "java.base=/workspace/scratch/8cbeab1c181e/tooling/typed-token/qualification-final/classes",
+      "--add-exports",
+      "java.base/jdk.internal.mindex=ALL-UNNAMED",
+      "--add-exports",
+      "jdk.compiler/com.sun.tools.javac.parser=ALL-UNNAMED",
+      "--add-exports",
+      "jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED",
+      "-d",
+      "/workspace/scratch/8cbeab1c181e/tooling/typed-token/qualification-final/tests",
+      "/workspace/scratch/8cbeab1c181e/M3jdk21-typed/test/jdk/jdk/internal/mindex/M3TokenRegexPlanContract.java",
+      "/workspace/scratch/8cbeab1c181e/M3jdk21-typed/test/jdk/jdk/internal/mindex/M3TokenCompilerLexicalContract.java",
+      "/workspace/scratch/8cbeab1c181e/Synexia/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/typed-token-20261018/src/test/java/M3CharacterPlanPreservation.java",
+      "/workspace/scratch/8cbeab1c181e/Synexia/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/typed-token-20261018/src/test/java/M3TokenResourceProbe.java"
+    ],
+    "exit_code": 0,
+    "max_rss_kib": 112204,
+    "user_seconds": 1.8785370000000001,
+    "system_seconds": 0.101287
+  },
+  {
+    "stage": "04-native-lint",
+    "argv": [
+      "gcc",
+      "-std=c17",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-I",
+      "/workspace/scratch/8cbeab1c181e/tooling/typed-token/qualification-final/headers",
+      "-I",
+      "/tmp/m3-regex-toolchain-20261018/jdk-21.0.12.1+1/include",
+      "-I",
+      "/tmp/m3-regex-toolchain-20261018/jdk-21.0.12.1+1/include/linux",
+      "-fsyntax-only",
+      "/workspace/scratch/8cbeab1c181e/M3jdk21-typed/src/java.base/share/native/libjava/M3RegexDpPlan.c",
+      "/workspace/scratch/8cbeab1c181e/Synexia/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/typed-token-20261018/src/test/native/libM3TokenPlanProof.c"
+    ],
+    "exit_code": 0,
+    "max_rss_kib": 11264,
+    "user_seconds": 0.01154,
+    "system_seconds": 0.015754999999999998
+  },
+  {
+    "stage": "05-native-link",
+    "argv": [
+      "gcc",
+      "-std=c17",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-I",
+      "/workspace/scratch/8cbeab1c181e/tooling/typed-token/qualification-final/headers",
+      "-I",
+      "/tmp/m3-regex-toolchain-20261018/jdk-21.0.12.1+1/include",
+      "-I",
+      "/tmp/m3-regex-toolchain-20261018/jdk-21.0.12.1+1/include/linux",
+      "-O2",
+      "-fPIC",
+      "-shared",
+      "-fsanitize=undefined",
+      "-fno-sanitize-recover=undefined",
+      "/workspace/scratch/8cbeab1c181e/M3jdk21-typed/src/java.base/share/native/libjava/M3RegexDpPlan.c",
+      "/workspace/scratch/8cbeab1c181e/Synexia/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/typed-token-20261018/src/test/native/libM3TokenPlanProof.c",
+      "-o",
+      "/workspace/scratch/8cbeab1c181e/tooling/typed-token/qualification-final/libM3TokenPlanProof.so"
+    ],
+    "exit_code": 0,
+    "max_rss_kib": 22376,
+    "user_seconds": 0.19386299999999998,
+    "system_seconds": 0.028488
+  },
+  {
+    "stage": "06-symbols",
+    "argv": [
+      "nm",
+      "-D",
+      "--defined-only",
+      "/workspace/scratch/8cbeab1c181e/tooling/typed-token/qualification-final/libM3TokenPlanProof.so"
+    ],
+    "exit_code": 0,
+    "max_rss_kib": 11392,
+    "user_seconds": 0.0020529999999999997,
+    "system_seconds": 0.0
+  },
+  {
+    "stage": "07-baseline-character",
+    "argv": [
+      "/tmp/m3-regex-toolchain-20261018/jdk-21.0.12.1+1/bin/java",
+      "--patch-module",
+      "java.base=/workspace/scratch/8cbeab1c181e/tooling/typed-token/qualification-final/baseline",
+      "--add-exports",
+      "java.base/jdk.internal.mindex=ALL-UNNAMED",
+      "-cp",
+      "/workspace/scratch/8cbeab1c181e/tooling/typed-token/qualification-final/tests",
+      "M3CharacterPlanPreservation"
+    ],
+    "exit_code": 0,
+    "max_rss_kib": 51652,
+    "user_seconds": 0.33712,
+    "system_seconds": 0.029781
+  },
+  {
+    "stage": "08-candidate-character",
+    "argv": [
+      "/tmp/m3-regex-toolchain-20261018/jdk-21.0.12.1+1/bin/java",
+      "--patch-module",
+      "java.base=/workspace/scratch/8cbeab1c181e/tooling/typed-token/qualification-final/classes",
+      "--add-exports",
+      "java.base/jdk.internal.mindex=ALL-UNNAMED",
+      "-cp",
+      "/workspace/scratch/8cbeab1c181e/tooling/typed-token/qualification-final/tests",
+      "M3CharacterPlanPreservation"
+    ],
+    "exit_code": 0,
+    "max_rss_kib": 51520,
+    "user_seconds": 0.318901,
+    "system_seconds": 0.023989
+  },
+  {
+    "stage": "09-java-token",
+    "argv": [
+      "/tmp/m3-regex-toolchain-20261018/jdk-21.0.12.1+1/bin/java",
+      "--patch-module",
+      "java.base=/workspace/scratch/8cbeab1c181e/tooling/typed-token/qualification-final/classes",
+      "--add-exports",
+      "java.base/jdk.internal.mindex=ALL-UNNAMED",
+      "-cp",
+      "/workspace/scratch/8cbeab1c181e/tooling/typed-token/qualification-final/tests",
+      "M3TokenRegexPlanContract"
+    ],
+    "exit_code": 0,
+    "max_rss_kib": 82448,
+    "user_seconds": 0.645647,
+    "system_seconds": 0.073446
+  },
+  {
+    "stage": "10-javac-lexical",
+    "argv": [
+      "/tmp/m3-regex-toolchain-20261018/jdk-21.0.12.1+1/bin/java",
+      "--patch-module",
+      "java.base=/workspace/scratch/8cbeab1c181e/tooling/typed-token/qualification-final/classes",
+      "--add-exports",
+      "java.base/jdk.internal.mindex=ALL-UNNAMED",
+      "-cp",
+      "/workspace/scratch/8cbeab1c181e/tooling/typed-token/qualification-final/tests",
+      "--add-exports",
+      "jdk.compiler/com.sun.tools.javac.parser=ALL-UNNAMED",
+      "--add-exports",
+      "jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED",
+      "M3TokenCompilerLexicalContract"
+    ],
+    "exit_code": 0,
+    "max_rss_kib": 45292,
+    "user_seconds": 0.25201,
+    "system_seconds": 0.036101999999999995
+  },
+  {
+    "stage": "11-native-token",
+    "argv": [
+      "/tmp/m3-regex-toolchain-20261018/jdk-21.0.12.1+1/bin/java",
+      "--patch-module",
+      "java.base=/workspace/scratch/8cbeab1c181e/tooling/typed-token/qualification-final/classes",
+      "--add-exports",
+      "java.base/jdk.internal.mindex=ALL-UNNAMED",
+      "-cp",
+      "/workspace/scratch/8cbeab1c181e/tooling/typed-token/qualification-final/tests",
+      "-Xcheck:jni",
+      "M3TokenRegexPlanContract",
+      "/workspace/scratch/8cbeab1c181e/tooling/typed-token/qualification-final/libM3TokenPlanProof.so"
+    ],
+    "exit_code": 0,
+    "max_rss_kib": 83660,
+    "user_seconds": 0.592723,
+    "system_seconds": 0.051916
+  },
+  {
+    "stage": "12-native-interpreter",
+    "argv": [
+      "/tmp/m3-regex-toolchain-20261018/jdk-21.0.12.1+1/bin/java",
+      "--patch-module",
+      "java.base=/workspace/scratch/8cbeab1c181e/tooling/typed-token/qualification-final/classes",
+      "--add-exports",
+      "java.base/jdk.internal.mindex=ALL-UNNAMED",
+      "-cp",
+      "/workspace/scratch/8cbeab1c181e/tooling/typed-token/qualification-final/tests",
+      "-Xcheck:jni",
+      "-Xint",
+      "M3TokenRegexPlanContract",
+      "/workspace/scratch/8cbeab1c181e/tooling/typed-token/qualification-final/libM3TokenPlanProof.so"
+    ],
+    "exit_code": 0,
+    "max_rss_kib": 75368,
+    "user_seconds": 6.000011,
+    "system_seconds": 0.070398
+  },
+  {
+    "stage": "api-old-M3RegexDpPlan",
+    "argv": [
+      "/tmp/m3-regex-toolchain-20261018/jdk-21.0.12.1+1/bin/javap",
+      "-public",
+      "-s",
+      "/workspace/scratch/8cbeab1c181e/tooling/typed-token/qualification-final/baseline/jdk/internal/mindex/M3RegexDpPlan.class"
+    ],
+    "exit_code": 0,
+    "max_rss_kib": 56296,
+    "user_seconds": 0.369289,
+    "system_seconds": 0.062352
+  },
+  {
+    "stage": "api-new-M3RegexDpPlan",
+    "argv": [
+      "/tmp/m3-regex-toolchain-20261018/jdk-21.0.12.1+1/bin/javap",
+      "-public",
+      "-s",
+      "/workspace/scratch/8cbeab1c181e/tooling/typed-token/qualification-final/classes/jdk/internal/mindex/M3RegexDpPlan.class"
+    ],
+    "exit_code": 0,
+    "max_rss_kib": 57008,
+    "user_seconds": 0.383584,
+    "system_seconds": 0.047459999999999995
+  },
+  {
+    "stage": "api-old-M3RegexDpPlan-Effect",
+    "argv": [
+      "/tmp/m3-regex-toolchain-20261018/jdk-21.0.12.1+1/bin/javap",
+      "-public",
+      "-s",
+      "/workspace/scratch/8cbeab1c181e/tooling/typed-token/qualification-final/baseline/jdk/internal/mindex/M3RegexDpPlan$Effect.class"
+    ],
+    "exit_code": 0,
+    "max_rss_kib": 57168,
+    "user_seconds": 0.388079,
+    "system_seconds": 0.055041
+  },
+  {
+    "stage": "api-new-M3RegexDpPlan-Effect",
+    "argv": [
+      "/tmp/m3-regex-toolchain-20261018/jdk-21.0.12.1+1/bin/javap",
+      "-public",
+      "-s",
+      "/workspace/scratch/8cbeab1c181e/tooling/typed-token/qualification-final/classes/jdk/internal/mindex/M3RegexDpPlan$Effect.class"
+    ],
+    "exit_code": 0,
+    "max_rss_kib": 56664,
+    "user_seconds": 0.35243599999999997,
+    "system_seconds": 0.055709999999999996
+  },
+  {
+    "stage": "resource-0",
+    "argv": [
+      "/tmp/m3-regex-toolchain-20261018/jdk-21.0.12.1+1/bin/java",
+      "--patch-module",
+      "java.base=/workspace/scratch/8cbeab1c181e/tooling/typed-token/qualification-final/classes",
+      "--add-exports",
+      "java.base/jdk.internal.mindex=ALL-UNNAMED",
+      "-cp",
+      "/workspace/scratch/8cbeab1c181e/tooling/typed-token/qualification-final/tests",
+      "M3TokenResourceProbe"
+    ],
+    "exit_code": 0,
+    "max_rss_kib": 39584,
+    "user_seconds": 0.570541,
+    "system_seconds": 0.023648
+  },
+  {
+    "stage": "resource-1",
+    "argv": [
+      "/tmp/m3-regex-toolchain-20261018/jdk-21.0.12.1+1/bin/java",
+      "--patch-module",
+      "java.base=/workspace/scratch/8cbeab1c181e/tooling/typed-token/qualification-final/classes",
+      "--add-exports",
+      "java.base/jdk.internal.mindex=ALL-UNNAMED",
+      "-cp",
+      "/workspace/scratch/8cbeab1c181e/tooling/typed-token/qualification-final/tests",
+      "M3TokenResourceProbe"
+    ],
+    "exit_code": 0,
+    "max_rss_kib": 40876,
+    "user_seconds": 0.505832,
+    "system_seconds": 0.020333999999999998
+  },
+  {
+    "stage": "resource-2",
+    "argv": [
+      "/tmp/m3-regex-toolchain-20261018/jdk-21.0.12.1+1/bin/java",
+      "--patch-module",
+      "java.base=/workspace/scratch/8cbeab1c181e/tooling/typed-token/qualification-final/classes",
+      "--add-exports",
+      "java.base/jdk.internal.mindex=ALL-UNNAMED",
+      "-cp",
+      "/workspace/scratch/8cbeab1c181e/tooling/typed-token/qualification-final/tests",
+      "M3TokenResourceProbe"
+    ],
+    "exit_code": 0,
+    "max_rss_kib": 39888,
+    "user_seconds": 0.532729,
+    "system_seconds": 0.025049
+  }
+]

@@ -1,0 +1,30 @@
+{
+  "status": "PASS_FINITE_COMPONENT_SCOPE",
+  "target_base": "872e70d20f3f3223a72eb5f67b001528b7fb2cb6",
+  "canonical_base": "a6fb7629316c0f610a06bba4ab17ffadb092e36e",
+  "datasets": [
+    "typed-token-20261018",
+    "typed-token-oracles-20261018",
+    "typed-token-map-20261018",
+    "typed-token-find-20261018"
+  ],
+  "sdk_tests_each": 5,
+  "sealing_cases": 8,
+  "receiver_cases_each": 9,
+  "serial_chain": "exact final output; terminal replay zero writes",
+  "java_checks": 176709,
+  "native_checks": 176710,
+  "interpreter_native_checks": 176710,
+  "character_checks_each": 12001,
+  "host_patched_jtreg_tests": 2,
+  "existing_API_and_JNI": "byte-identical descriptors/header; production C unchanged",
+  "new_facade_initial_final_API": "byte-identical",
+  "lineage_families": 32,
+  "full_source_built_JDK": "NOT_RUN",
+  "full_reactor": "NOT_RUN",
+  "non_linux_matrix": "NOT_RUN",
+  "hosted_CI": "NOT_ASSERTED",
+  "collection_baseline_failures": "three remain recorded in collection convergence",
+  "grammar_limits": "sequence and atom repetition; <=63 predicates; no parser/captures/alternation/lookaround/backreferences",
+  "scheduling_failure": "preserved logs/11-java-before-compile-finished.log; sequential runner passes"
+}

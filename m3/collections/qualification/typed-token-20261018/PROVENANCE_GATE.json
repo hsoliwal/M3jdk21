@@ -1,0 +1,6 @@
+{
+  "status": "PASS",
+  "paths": 233,
+  "scope": "explicit continuation manifest in bounded canonical assembly; not full repository diff/CI",
+  "violations": []
+}
