@@ -1,0 +1,18 @@
+src/java.base/share/classes/jdk/internal/mindex/M3TQ.java: OK
+src/java.base/share/classes/jdk/internal/mindex/M3StringBacking.java: OK
+test/jdk/java/lang/String/libM3TQTest.cpp: OK
+test/jdk/java/lang/String/M3TQArrayCompositionTest.java: OK
+test/jdk/java/lang/String/TQSeamCounterexample.java: OK
+openjdk version "21.0.12.1" 2026-08-18
+OpenJDK Runtime Environment (build 21.0.12.1+1-1-deb13u1-Debian)
+OpenJDK 64-Bit Server VM (build 21.0.12.1+1-1-deb13u1-Debian, mixed mode, sharing)
+g++ (Debian 14.2.0-19) 14.2.0
+Copyright (C) 2024 Free Software Foundation, Inc.
+This is free software; see the source for copying conditions.  There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+TQ_ARRAY_COMPOSITION_PASS checks=498900 native=false transcript=592c4ea3ec9fff5c6e13c03927e522f9970e508a588876c70cc94bba19047185
+TQ_ARRAY_COMPOSITION_PASS checks=510747 native=true transcript=154e8f85cbc447eaf6f51978c249c717a33a13cbd86e522073bee1d4619a5fb8
+TQ_ARRAY_COMPOSITION_PASS checks=510747 native=true transcript=154e8f85cbc447eaf6f51978c249c717a33a13cbd86e522073bee1d4619a5fb8
+TQ_SEAM_WITNESS_PASS
+TQ_ARRAY_HOST_PASS; JNI is a test oracle; full JDK/jtreg/SDK/reactor/platform/pressure gates NOT_RUN
