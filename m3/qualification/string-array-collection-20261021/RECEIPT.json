@@ -1,0 +1,222 @@
+{
+  "schema": "M3_CANONICAL_RECEIVER_QUALIFICATION_V1",
+  "canonical_repository": "hsoliwal/com.synexia",
+  "canonical_commit": "fb936abe6e3c643f5198b0aaefe5589359a0ec98",
+  "canonical_pull_request": "https://github.com/hsoliwal/com.synexia/pull/12748",
+  "canonical_crate": "synexia-openrewrite-recipes/recipe-crates/m3-string-array-collection-reconcile-20261021",
+  "canonical_recipe": "com.synexia.m3.StringArrayCollectionReconcile20261021",
+  "product_base": "1d105af842f16ba31a8ca14593f58ed43b7429ee",
+  "source_inventory_sha256": "5c86c61deb54d97e0ecc27618aa894a73b3f094047e44b93001d975b4c58e61a",
+  "recipe_proof_sha256": "e92552691a710be24c9f02e34450497f449c74bda0cfd23b421cd9a927c44316",
+  "source_changes": 23,
+  "actual_receiver_write_batches": [
+    16,
+    2,
+    2,
+    1,
+    2
+  ],
+  "receiver_replay_writes": 0,
+  "qualification_status": "PASS_RECORDED_SCOPE_WITH_EXPLICIT_REVIEW_HOLDS",
+  "observed_results": {
+    "owning_java": {
+      "tests": 551,
+      "failures": 0,
+      "errors": 0,
+      "optional_native_skips": 2
+    },
+    "owning_required_native": {
+      "tests": 551,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "libraries": 10
+    },
+    "focused_collection_commands": 91,
+    "integrated_string": {
+      "tests": 5,
+      "vm_actions": 13,
+      "assertions": 24499
+    },
+    "installed_collection_views": {
+      "bootstrap_checks": 77,
+      "java_checks": 14700,
+      "native_mode_checks": 15732,
+      "jni_queries": 1027
+    },
+    "jtreg_reported_version": "jtreg 7.3.1-dev+0"
+  },
+  "review_holds": [
+    "Private native invalid-input and filtered endpoint/cursor exception repairs intentionally change previously incorrect observable outcomes.",
+    "The strict facade adds two declared overrides; reflection surface review remains explicit.",
+    "Existing Apache-licensed core additions retain their notices and require integration license review; no blanket relicensing.",
+    "Full JDK/JCK, alternate platforms, GC/CDS/JVMTI matrix and blanket performance/memory qualification are not claimed.",
+    "Numeric token-text behavior remains M3NotYetReceived; this packet only repairs its invalid constructor invocation.",
+    "Runtime qualification is pinned to the product base; newer leaf-cursor work has source/three-way merge compatibility evidence only."
+  ],
+  "global_receiving_phase": "STRING",
+  "global_completion": false,
+  "source_files": [
+    {
+      "phase": "m3-string-array-collection-reconcile-20261021-001",
+      "kind": "java",
+      "path": "m3/collections/src/main/java/com/m3/collections/M3CollectionSdk.java",
+      "before_sha256": "4e6ca50c2e28f11e5b3b4143847a7b5c1e9a741cf1d68853ececdd4ca1c6e83a",
+      "after_sha256": "16efe88058628ccb4b03abf873e0ac237fbb2906ed59dbe9f251af3d4ddbef8c"
+    },
+    {
+      "phase": "m3-string-array-collection-reconcile-20261021-002",
+      "kind": "java",
+      "path": "m3/collections/src/main/java/com/m3/collections/M3FilteredNavigableSet.java",
+      "before_sha256": "d13c5c5db3e07e5c66f8857f2c74e07d2ba60babb7d2529bd397e61894881fd0",
+      "after_sha256": "31de687d603d3934629a765cde307852224b2b3668aaf61f8a23e6247a947269"
+    },
+    {
+      "phase": "m3-string-array-collection-reconcile-20261021-003",
+      "kind": "java",
+      "path": "m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java",
+      "before_sha256": "af1752c4b02eb7a7753424727e58b7c9cd38c3e4c28191ce7499c12d54be7c68",
+      "after_sha256": "2ee41ff9fe2be610de8e92334c24b4e1f48105574e5b3522a388c2ff4ebc7c5a"
+    },
+    {
+      "phase": "m3-string-array-collection-reconcile-20261021-004",
+      "kind": "java",
+      "path": "m3/collections/src/main/java/com/m3/collections/M3MutableFilteredViews.java",
+      "before_sha256": "3c65c0d918b6cb39d4c27f98699fa97067d2aa3a7fb76ea48b2fd6092a9d0178",
+      "after_sha256": "d6b88f4579c798b8715dbe7da1a41d33e0bd1329a2d518b23a20981f70b344a5"
+    },
+    {
+      "phase": "m3-string-array-collection-reconcile-20261021-005",
+      "kind": "java",
+      "path": "m3/collections/src/main/java/com/m3/collections/M3SignalOrder.java",
+      "before_sha256": "15c85e74a51a716af1b11038c05263b83b1a1ea02f345bc3838d661a158fd80f",
+      "after_sha256": "3b117a531afd39f071fda04796684084812371982295a508270e58bfb70a2430"
+    },
+    {
+      "phase": "m3-string-array-collection-reconcile-20261021-006",
+      "kind": "text",
+      "path": "m3/collections/src/main/native/collections/m3_signal_order_jni.c",
+      "before_sha256": "e7a5991f5be2e0bad99400ff477a1c03ec9d1d8e1236f9faf366485f94966ed5",
+      "after_sha256": "8dc63771408057e56610719e6d562454bece9769a5727c7614c104e659dc8a22"
+    },
+    {
+      "phase": "m3-string-array-collection-reconcile-20261021-007",
+      "kind": "java",
+      "path": "m3/collections/src/test/java/com/m3/collections/M3FilteredCursorExceptionContract.java",
+      "before_sha256": "ABSENT",
+      "after_sha256": "558bcb65249fba80faa5ddb00d138566132c13acfd3c6e67763c78fa1acd5fd8"
+    },
+    {
+      "phase": "m3-string-array-collection-reconcile-20261021-008",
+      "kind": "java",
+      "path": "m3/collections/src/test/java/com/m3/collections/M3FilteredCursorExceptionTest.java",
+      "before_sha256": "ABSENT",
+      "after_sha256": "5ff4d5d15263310027c66eac8d595c62161fdc20623b42b4f5265a77dab4cedb"
+    },
+    {
+      "phase": "m3-string-array-collection-reconcile-20261021-009",
+      "kind": "java",
+      "path": "m3/collections/src/test/java/com/m3/collections/M3FilteredFacadeEndpointContract.java",
+      "before_sha256": "ABSENT",
+      "after_sha256": "22277a8f7ab10398d49a966438eccbc3985c78998d0ca9676e7994186308a829"
+    },
+    {
+      "phase": "m3-string-array-collection-reconcile-20261021-010",
+      "kind": "java",
+      "path": "m3/collections/src/test/java/com/m3/collections/M3FilteredFacadeEndpointTest.java",
+      "before_sha256": "ABSENT",
+      "after_sha256": "5156212e76fd7df18fbb92f68ac395d9560eb2152734d7d5157a6572b318a064"
+    },
+    {
+      "phase": "m3-string-array-collection-reconcile-20261021-011",
+      "kind": "java",
+      "path": "m3/collections/src/test/java/com/m3/collections/M3SignalRadixUniformBench.java",
+      "before_sha256": "ABSENT",
+      "after_sha256": "8b026711262170986520d92fe782913d6a138f66bb9c795b6de748b11aa3dbe4"
+    },
+    {
+      "phase": "m3-string-array-collection-reconcile-20261021-012",
+      "kind": "java",
+      "path": "m3/collections/src/test/java/com/m3/collections/M3SignalRadixUniformContract.java",
+      "before_sha256": "ABSENT",
+      "after_sha256": "dd85a7c4b19364cc9b91ecf581abb33bf613435aec0873319f7082649dbdfbac"
+    },
+    {
+      "phase": "m3-string-array-collection-reconcile-20261021-013",
+      "kind": "java",
+      "path": "m3/collections/src/test/java/com/m3/collections/M3SignalRadixUniformTest.java",
+      "before_sha256": "ABSENT",
+      "after_sha256": "482d0d75e1b926b2da7013f8f572b9559738f18e8831ab0b398dcb06825071d8"
+    },
+    {
+      "phase": "m3-string-array-collection-reconcile-20261021-014",
+      "kind": "text",
+      "path": "src/java.base/share/native/libjava/String.c",
+      "before_sha256": "bb2beafaf57c1458f675eed554fc35e08c616f5c8b0a40178f47356768496086",
+      "after_sha256": "6f710e824e5416c8349dcfc5f81985f095519ced05175a2aaf76dfb436c87c54"
+    },
+    {
+      "phase": "m3-string-array-collection-reconcile-20261021-015",
+      "kind": "java",
+      "path": "test/jdk/java/lang/String/M3StringNativeProjectionTest.java",
+      "before_sha256": "ABSENT",
+      "after_sha256": "f73695e91163e664ce4a71502158667366e0dc961917aa6425537722eba25e0d"
+    },
+    {
+      "phase": "m3-string-array-collection-reconcile-20261021-016",
+      "kind": "text",
+      "path": "test/jdk/java/lang/String/libM3StringNativeProjectionTest.c",
+      "before_sha256": "ABSENT",
+      "after_sha256": "1b26cd8f571ce558e760540e7b8c0b3c80af538f914cea803352a1261ff61603"
+    },
+    {
+      "phase": "m3-string-array-collection-reconcile-20261021-017",
+      "kind": "java",
+      "path": "src/java.base/share/classes/java/lang/M3StringImmediate.java",
+      "before_sha256": "571a195e24a43b14e7a6c93078c8ae079e3dc33afe9e082b0d0437cf93afe8b7",
+      "after_sha256": "78c88187da0e325ae283305850c96d275a65c3824fe9b52d84f9fab11bbaf721"
+    },
+    {
+      "phase": "m3-string-array-collection-reconcile-20261021-018",
+      "kind": "java",
+      "path": "src/java.base/share/classes/java/lang/M3StringPool.java",
+      "before_sha256": "0b806777f319e48a6519dcac9162d76f37019888c698d8ef519f7a4d2fb7b197",
+      "after_sha256": "7f4ba387d61adc8d17032c30667154da630b06469687ec0cd9c0dc6b771e216b"
+    },
+    {
+      "phase": "m3-string-array-collection-reconcile-20261021-019",
+      "kind": "java",
+      "path": "src/java.base/share/classes/java/util/CollectionViews.java",
+      "before_sha256": "d294f1f9a25f664b4735c015ff1aec83118a90020d6fc443b6d92f459251fc8b",
+      "after_sha256": "52870370a65a790fd6efddfbb2654aa49ba81e697f9e39a27cf268ef6e74cea3"
+    },
+    {
+      "phase": "m3-string-array-collection-reconcile-20261021-020",
+      "kind": "java",
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3TokenPredicateCache.java",
+      "before_sha256": "d7b8699bc8be77df2e51ec37c45c85a35585360ce47e29307f53ba02b7fb5b88",
+      "after_sha256": "0ed768ba1672780790c55b4e64ac28b9c702740ba5a03484805e68b4d8725a10"
+    },
+    {
+      "phase": "m3-string-array-collection-reconcile-20261021-021",
+      "kind": "java",
+      "path": "src/java.base/share/classes/java/lang/M3String.java",
+      "before_sha256": "8fd453582c669ef2d13edf4f34d93db7ba47c00e498ddcba1b98105a61021bbb",
+      "after_sha256": "5cba7c6eb990017a7cb0b45b6b7814518d04353fa3d9c1e190609db5d9e5cb4f"
+    },
+    {
+      "phase": "m3-string-array-collection-reconcile-20261021-022",
+      "kind": "java",
+      "path": "test/jdk/java/util/CollectionViews/RunSearchJni.java",
+      "before_sha256": "ABSENT",
+      "after_sha256": "3ac4e4f7fba1e67590aec0d5cfe2db81eb5f5c434b0eefa322b74afe4e4df22a"
+    },
+    {
+      "phase": "m3-string-array-collection-reconcile-20261021-023",
+      "kind": "text",
+      "path": "test/jdk/java/util/CollectionViews/run_search_jni.c",
+      "before_sha256": "ABSENT",
+      "after_sha256": "aecfe097fe61b5260a09c2bbbcec57bca2a96bd7cabf343bc380cfc5b28a1d10"
+    }
+  ]
+}

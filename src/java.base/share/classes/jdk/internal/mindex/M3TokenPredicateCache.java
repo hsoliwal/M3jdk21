@@ -260,8 +260,8 @@ public final class M3TokenPredicateCache {
             return false;
         }
         if (op != M3TokenPattern.O_EQ) {
-            throw new M3NotYetReceived("M3TokenPredicateCache.numericTextRow",
-                    "T-Rex NumericPattern semantics over the in-place span");
+            throw new M3NotYetReceived("M3TokenPredicateCache.numericTextRow "
+                    + "T-Rex NumericPattern semantics over the in-place span");
         }
         int lexeme = index.lexemeAt(token);
         long wanted = values[r];
