@@ -1,0 +1,39 @@
+{
+  "schema": "m3.collections.convergence.context.v1",
+  "date": "2026-10-21",
+  "authorization": "Implement and enhance this chat's integrated M3JDK21 Java/JNI collection work, reusable canonical Synexia recipes, catalogue, reviewable PRs.",
+  "stage": "INVENTORY",
+  "target": {
+    "repository": "hsoliwal/M3jdk21",
+    "revision": "33d2e6ae8048c436bd55b951d9f7dbfab2f3efcb"
+  },
+  "canonical": {
+    "repository": "hsoliwal/com.synexia",
+    "revision": "408373f4101fdca2fb3625bec8af1234e5fd3e26"
+  },
+  "locked": [
+    "Public interfaces and observable behavior",
+    "Callback order/count and exceptions",
+    "Live/snapshot ownership, stable ordering, aliases and invalidation",
+    "No retained per-entry structural objects",
+    "No hidden moves/deletions/merges",
+    "No develop rebase or force push"
+  ],
+  "execution_order": [
+    "inventory",
+    "contract_documentation",
+    "recipe_patch",
+    "lint",
+    "compile",
+    "test",
+    "runtime",
+    "resource_comparison",
+    "fixed_point",
+    "publication_readback"
+  ],
+  "prior_prs": {
+    "canonical": 12857,
+    "target": 1760
+  },
+  "artifact_status": "No new implementation or tests executed yet"
+}
