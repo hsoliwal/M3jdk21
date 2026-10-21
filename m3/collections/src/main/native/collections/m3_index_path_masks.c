@@ -59,6 +59,11 @@ static int m3_matches(JNIEnv *env, jobjectArray planes,
  * All local references are released on every normal/exceptional exit.
  */
 #define M3_CACHED_STAGE_LIMIT 8
+/* At most 8 x 256 x sizeof(jint) = 8192 bytes of call-local state data.
+ * The row threshold amortizes an eager plane snapshot on constrained devices.
+ */
+#define M3_PLANE_SNAPSHOT_CAPACITY 256
+#define M3_PLANE_SNAPSHOT_MIN_ROWS 512
 
 typedef struct {
     jintArray plane[M3_CACHED_STAGE_LIMIT];
@@ -66,6 +71,8 @@ typedef struct {
     jint needs[M3_CACHED_STAGE_LIMIT];
     jint denies[M3_CACHED_STAGE_LIMIT];
     jsize count;
+    jboolean snapshot_ready;
+    jint snapshot_values[M3_CACHED_STAGE_LIMIT][M3_PLANE_SNAPSHOT_CAPACITY];
 } M3StageCache;
 
 static void m3_release_stages(JNIEnv *env, M3StageCache *cache) {
@@ -101,6 +108,29 @@ failure:
     return 0;
 }
 
+/* Snapshot only small, complete primitive state planes when repeated indexed
+ * lookups are likely to amortize the initial bulk JNI region reads. Every
+ * physical offset is still checked against its original per-stage capacity.
+ * No Java array address is retained; mutable inputs must remain stable for the
+ * duration of the call, as required by the existing M3IndexPathMasks contract.
+ */
+static int m3_prepare_small_plane_snapshot(JNIEnv *env, M3StageCache *cache,
+        jint logical_count) {
+    if (logical_count < M3_PLANE_SNAPSHOT_MIN_ROWS) return 1;
+    for (jsize stage = 0; stage < cache->count; ++stage) {
+        if (cache->length[stage] > M3_PLANE_SNAPSHOT_CAPACITY) return 1;
+    }
+    for (jsize stage = 0; stage < cache->count; ++stage) {
+        jsize length = cache->length[stage];
+        if (length == 0) continue;
+        (*env)->GetIntArrayRegion(env, cache->plane[stage], 0, length,
+                cache->snapshot_values[stage]);
+        if ((*env)->ExceptionCheck(env)) return 0;
+    }
+    cache->snapshot_ready = JNI_TRUE;
+    return 1;
+}
+
 /* -1 is an exception; 0 and 1 are rejected and admitted respectively. */
 static int m3_matches_cached(JNIEnv *env, const M3StageCache *cache, jint slot) {
     for (jsize i = 0; i < cache->count; ++i) {
@@ -110,8 +140,12 @@ static int m3_matches_cached(JNIEnv *env, const M3StageCache *cache, jint slot) 
             return -1;
         }
         jint state;
-        (*env)->GetIntArrayRegion(env, cache->plane[i], slot, 1, &state);
-        if ((*env)->ExceptionCheck(env)) return -1;
+        if (cache->snapshot_ready) {
+            state = cache->snapshot_values[i][slot];
+        } else {
+            (*env)->GetIntArrayRegion(env, cache->plane[i], slot, 1, &state);
+            if ((*env)->ExceptionCheck(env)) return -1;
+        }
         if ((state & cache->needs[i]) != cache->needs[i]
                 || (state & cache->denies[i]) != 0) return 0;
     }
@@ -191,8 +225,18 @@ static jintArray m3_select_cached_contiguous(JNIEnv *env, jintArray rows,
 static jintArray m3_select_cached(JNIEnv *env, jintArray rows, jintArray offsets,
         jobjectArray planes, jintArray required, jintArray forbidden,
         jint first, jint count, jint stride, jsize stages) {
-    M3StageCache cache = {0};
+    // Initialize only live JNI handles and the cache flag. State words are
+    // copied before first use; clearing all 8KiB on every short scan is wasteful.
+    M3StageCache cache;
+    for (jsize stage = 0; stage < M3_CACHED_STAGE_LIMIT; ++stage) {
+        cache.plane[stage] = NULL;
+    }
+    cache.snapshot_ready = JNI_FALSE;
     if (!m3_prepare_stages(env, planes, required, forbidden, stages, &cache)) return NULL;
+    if (!m3_prepare_small_plane_snapshot(env, &cache, count)) {
+        m3_release_stages(env, &cache);
+        return NULL;
+    }
     if (stride == 1) {
         jintArray output = m3_select_cached_contiguous(
                 env, rows, offsets, &cache, first, count);
