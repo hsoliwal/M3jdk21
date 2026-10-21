@@ -61,6 +61,10 @@ JNIEXPORT jintArray JNICALL Java_com_m3_collections_M3ResidencyStateMaskIndex_se
     }
     jintArray result = (*env)->NewIntArray(env, matches);
     if (result == NULL || (*env)->ExceptionCheck(env)) return NULL;
+    /* First pass already validated every lifecycle ordinal. When none passes the
+     * masks, no coordinate read, second state scan or JNI region write is needed.
+     * Caller-held snapshots must remain stable during this native operation. */
+    if (matches == 0) return result;
     jsize written = 0, buffered = 0;
     for (jsize base = 0; base < length;) {
         jsize take = length - base < M3_CHUNK ? length - base : M3_CHUNK;
