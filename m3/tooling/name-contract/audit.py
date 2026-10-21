@@ -107,7 +107,7 @@ def as_tsv(rows: list[dict[str, str]]) -> str:
 
 
 def main(argv: list[str]) -> int:
-    if argv not in (["audit.py"], ["audit.py", "--strict"]):
+    if argv[1:] not in ([], ["--strict"]):
         print("usage: audit.py [--strict]", file=sys.stderr)
         return 2
     try:
@@ -116,7 +116,7 @@ def main(argv: list[str]) -> int:
         bad = [r for r in rows if r["result"].startswith("REVIEW_")]
         print("M3JDK21_MAP_CENSUS rows=" + str(len(rows)) + " distinct_paths="
               + str(len({r["target_path"] for r in rows})) + " attention=" + str(len(bad)), file=sys.stderr)
-        if "--strict" in argv and bad:
+        if "--strict" in argv[1:] and bad:
             return 1
         return 0
     except (ValueError, OSError, UnicodeError, json.JSONDecodeError) as error:

@@ -227,8 +227,83 @@ public final class M3IndexedLiveView<E> extends AbstractList<E> implements Rando
     @Override public E removeFirst() { throw immutable(); }
     @Override public E removeLast() { throw immutable(); }
 
+    /** Backed ranges retain strict refusal, including empty and no-op mutations. */
+    @Override public List<E> subList(int fromIndex, int toIndex) {
+        return strictReadOnly(super.subList(fromIndex, toIndex));
+    }
+
     /** JDK reversed view stays backed while every modification remains refused. */
     @Override public List<E> reversed() {
-        return Collections.unmodifiableList(super.reversed());
+        return strictReadOnly(super.reversed());
+    }
+
+    /**
+     * Reuse the JDK range/reversal for reads and the existing unmodifiable cursor
+     * guards. JDK21 List default endpoints and reversed no-op methods need this
+     * explicit boundary to retain the root's unconditional mutation refusal.
+     * Only a view descriptor is retained; the parent still owns every value and
+     * physical index. Keep the delegate's RandomAccess declaration unchanged.
+     */
+    private static <E> List<E> strictReadOnly(List<E> delegate) {
+        return strictReadOnly(delegate, null);
+    }
+
+    private static <E> List<E> strictReadOnly(List<E> delegate, List<E> reverse) {
+        return delegate instanceof RandomAccess
+                ? new StrictRandomAccessList<>(delegate, reverse)
+                : new StrictReadOnlyList<>(delegate, reverse);
+    }
+
+    private static class StrictReadOnlyList<E> extends AbstractList<E> {
+        private final List<E> delegate;
+        private final List<E> reverse;
+
+        StrictReadOnlyList(List<E> delegate, List<E> reverse) {
+            this.delegate = Collections.unmodifiableList(delegate);
+            this.reverse = reverse;
+        }
+
+        @Override public int size() { return delegate.size(); }
+        @Override public E get(int index) { return delegate.get(index); }
+        @Override public boolean contains(Object value) { return delegate.contains(value); }
+        @Override public boolean containsAll(Collection<?> values) { return delegate.containsAll(values); }
+        @Override public int indexOf(Object value) { return delegate.indexOf(value); }
+        @Override public int lastIndexOf(Object value) { return delegate.lastIndexOf(value); }
+        @Override public Object[] toArray() { return delegate.toArray(); }
+        @Override public <T> T[] toArray(T[] target) { return delegate.toArray(target); }
+        @Override public void forEach(Consumer<? super E> action) { delegate.forEach(action); }
+        @Override public Iterator<E> iterator() { return delegate.iterator(); }
+        @Override public ListIterator<E> listIterator(int index) { return delegate.listIterator(index); }
+        @Override public Spliterator<E> spliterator() { return delegate.spliterator(); }
+        @Override public List<E> subList(int fromIndex, int toIndex) {
+            return strictReadOnly(delegate.subList(fromIndex, toIndex));
+        }
+        @Override public List<E> reversed() {
+            // Retain the opposite descriptor, not an ever-growing reversal chain.
+            return reverse != null ? reverse : strictReadOnly(delegate.reversed(), this);
+        }
+        @Override public E set(int index, E value) { throw immutable(); }
+        @Override public void add(int index, E value) { throw immutable(); }
+        @Override public boolean add(E value) { throw immutable(); }
+        @Override public boolean addAll(Collection<? extends E> values) { throw immutable(); }
+        @Override public boolean addAll(int index, Collection<? extends E> values) { throw immutable(); }
+        @Override public E remove(int index) { throw immutable(); }
+        @Override public boolean remove(Object value) { throw immutable(); }
+        @Override public boolean removeAll(Collection<?> values) { throw immutable(); }
+        @Override public boolean retainAll(Collection<?> values) { throw immutable(); }
+        @Override public boolean removeIf(Predicate<? super E> test) { throw immutable(); }
+        @Override public void replaceAll(UnaryOperator<E> action) { throw immutable(); }
+        @Override public void sort(Comparator<? super E> order) { throw immutable(); }
+        @Override public void clear() { throw immutable(); }
+        @Override protected void removeRange(int fromIndex, int toIndex) { throw immutable(); }
+        @Override public void addFirst(E value) { throw immutable(); }
+        @Override public void addLast(E value) { throw immutable(); }
+        @Override public E removeFirst() { throw immutable(); }
+        @Override public E removeLast() { throw immutable(); }
+    }
+
+    private static final class StrictRandomAccessList<E> extends StrictReadOnlyList<E>
+            implements RandomAccess {
+        StrictRandomAccessList(List<E> delegate, List<E> reverse) { super(delegate, reverse); }
     }
 }

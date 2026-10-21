@@ -19,17 +19,6 @@ jobs:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
         with:
           persist-credentials: false
-          sparse-checkout-cone-mode: false
-          sparse-checkout: |
-            AGENTS.md
-            m3/docs/name-mapping.json
-            m3/docs/M3JDK21_NAME_AND_PACKAGE_CONTRACT.md
-            m3/tooling/name-contract/**
-            src/java.base/share/classes/java/lang/Class.java
-            src/java.base/share/classes/jdk/internal/mindex/M3Class.java
-            src/java.base/share/classes/jdk/internal/mindex/M3Address28.java
-            m3/algorithms/src/com/m3/algorithm/M3PrefixZ.java
-            .github/workflows/m3jdk21-name-contract.yml
       - name: Canonical name and package mapping gate
         run: python3 m3/tooling/name-contract/check.py
       - name: Canonical target class and JNI owner census

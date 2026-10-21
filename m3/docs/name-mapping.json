@@ -8710,6 +8710,431 @@
         },
         "source_state": "proposed",
         "observation": "Candidate0a91 exists only in committed source SDK output. Actual receiving test5d477 and DP164c are explicitly pinned; all new execution remains NOT_RUN."
+      },
+      {
+        "id": "m3.mask-window.selection-count",
+        "kind": "specialization",
+        "status": "implemented-unverified",
+        "reason": "Receive the exact existing reviewed Java/libjava superset from public donor b025f65e77669a3ba6f84daf5482c14e090a411c; host component proof passed, complete source-built JDK acceptance pending.",
+        "sources": [
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "b1821dc3252df341992658ab47b26f4bed68ac4a",
+            "module": "synexia-openrewrite-recipes",
+            "path": "synexia-openrewrite-recipes/recipe-crates/m3-qualified-lexicon-index-views-20261021/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-qualified-lexicon-index-views-20261021-000/M3IndexMaskWindow.java.txt",
+            "symbol": "jdk.internal.m3.M3IndexMaskWindow",
+            "signatures": [],
+            "sha256": "91c7a99d394fe76a47af0c1eaaa35ffd6d070ee6e2497a63668db8301dd86329",
+            "git_blob_sha1": "b9c942d354189c26ed0848d7dd73f21754838049",
+            "fingerprint": null,
+            "revision_role": "pinned"
+          },
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "b1821dc3252df341992658ab47b26f4bed68ac4a",
+            "module": "synexia-openrewrite-recipes",
+            "path": "synexia-openrewrite-recipes/recipe-crates/m3-qualified-lexicon-index-views-20261021/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-qualified-lexicon-index-views-20261021-001/M3IndexMaskWindow.c.txt",
+            "symbol": "M3IndexMaskWindow JNI exports",
+            "signatures": [],
+            "sha256": "4a9c0ab3e8d7a0aac0027e8fb4789f768ee5a48b2db18b7a54e2fd543c5c7f91",
+            "git_blob_sha1": "59b2130ca8e897e75e24afbd45e8fd885c55b0e9",
+            "fingerprint": null,
+            "revision_role": "pinned"
+          }
+        ],
+        "targets": [
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": null,
+            "module": "java.base",
+            "path": "src/java.base/share/classes/jdk/internal/m3/M3IndexMaskWindow.java",
+            "symbol": "jdk.internal.m3.M3IndexMaskWindow",
+            "signatures": [],
+            "sha256": "91c7a99d394fe76a47af0c1eaaa35ffd6d070ee6e2497a63668db8301dd86329",
+            "git_blob_sha1": "b9c942d354189c26ed0848d7dd73f21754838049",
+            "fingerprint": null,
+            "revision_role": "candidate"
+          },
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": null,
+            "module": "java.base/libjava",
+            "path": "src/java.base/share/native/libjava/M3IndexMaskWindow.c",
+            "symbol": "M3IndexMaskWindow JNI exports",
+            "signatures": [],
+            "sha256": "4a9c0ab3e8d7a0aac0027e8fb4789f768ee5a48b2db18b7a54e2fd543c5c7f91",
+            "git_blob_sha1": "59b2130ca8e897e75e24afbd45e8fd885c55b0e9",
+            "fingerprint": null,
+            "revision_role": "candidate"
+          }
+        ],
+        "owner": "jdk.internal.m3.M3IndexMaskWindow; M3IndexMaskWindow JNI exports",
+        "identity": {
+          "namespace": "Existing ordered primitive index and aligned byte-state lanes; masks describe caller-owned state, not VM object lifecycle.",
+          "generation": "Caller keeps arrays stable during each call and revalidates its parent generation between calls."
+        },
+        "contract": {
+          "differences": [
+            "Add bounded primitive state-count reduction and independent count capability admission.",
+            "Probe both original scan symbols before native availability succeeds; missing or partial libraries now refuse explicit native requests, including zero-work early exits.",
+            "Preserve both existing scan exports and native call order; keep the historically selected native two-condition predicate."
+          ],
+          "compatibility_obligations": [
+            "Preserve existing scan signatures, order, duplicates, array alias refusal, bounds and exception propagation.",
+            "Qualify source-built libjava and generated header/exports on supported target platforms."
+          ],
+          "public_surface": [
+            "Internal non-exported jdk.internal.m3 class gains additive count APIs; Java SE names and exports unchanged."
+          ]
+        },
+        "format": {
+          "schema": null,
+          "abi": "Original two scan exports retained; additive countBoundedNative export.",
+          "bootstrap": "Existing target owners only; no Synexia runtime library or service dependency."
+        },
+        "dependencies": [],
+        "materialization": {
+          "admission": "Exact existing bounds/alias and explicit backend checks before native work.",
+          "joins": "Stable bounded compaction and state-only count; count reads no row IDs.",
+          "outputs": "Existing packed scan cursor/count and additive bounded count result.",
+          "cached_facts": "Constant capability holders and per-call bounded stack scratch; no retained payload or per-entry objects."
+        },
+        "recipe": {
+          "id": "com.synexia.m3jdk.QualifiedLexiconIndexViews20261021",
+          "version": "20261021",
+          "repository": "hsoliwal/com.synexia",
+          "commit": "b1821dc3252df341992658ab47b26f4bed68ac4a",
+          "path": "synexia-openrewrite-recipes/recipe-crates/m3-qualified-lexicon-index-views-20261021/src/main/resources/META-INF/rewrite/m3-qualified-lexicon-index-views-20261021.yml",
+          "sha256": "cc12e2ab30da0f997bb06aae29d8bb7717e067cb7603e23947ba6f4d4f7f113c",
+          "preconditions": [
+            "Exact per-file preimage or exact already-converged postimage; absent new file only.",
+            "Actual canonical OpenRewrite engine; serial source-sealed stages; foreign edits/missing/duplicate owners refuse."
+          ],
+          "rollback": "Review a source-sealed successor restoring exact preimages; no automatic reversal over foreign edits."
+        },
+        "tests": [
+          {
+            "id": "actual-sdk-and-target-components",
+            "receipt": "m3/compatibility/qualified-lexicon-index-views-20261021/README.md",
+            "canonical_evidence": "synexia-openrewrite-recipes/recipe-crates/m3-qualified-lexicon-index-views-20261021/evidence/native-host-component"
+          }
+        ],
+        "provenance": {
+          "license": "Original per-file Apache-2.0 notices retained; external challenge/GitHub comparisons reference-only, no copied external implementation.",
+          "publication": "User explicitly authorized Java/JNI implementation and public reviewable M3JDK21 PRs; canonical recipes/specification remain in Synexia.",
+          "copied_code": true,
+          "intake": "Existing target Apache owners and exact reviewed target-native donor; no GPL source relicensing is asserted."
+        },
+        "sync": {
+          "source_revision": "b1821dc3252df341992658ab47b26f4bed68ac4a",
+          "target_revision": "c831c4a77f0e3e10aac94178217efda882ba4be5",
+          "direction": "source-to-target",
+          "target_adaptations": [
+            "Add bounded primitive state-count reduction and independent count capability admission.",
+            "Probe both original scan symbols before native availability succeeds; missing or partial libraries now refuse explicit native requests, including zero-work early exits.",
+            "Preserve both existing scan exports and native call order; keep the historically selected native two-condition predicate."
+          ],
+          "pending": [
+            "Complete source-built JDK and applicable full jtreg/module/GC/CDS/platform acceptance.",
+            "Full-repository ancestry-based admission; source snapshot cannot prove Git ancestry.",
+            "Measured CPU/retained-heap/native/process memory and production corpus qualification."
+          ],
+          "conflicts": []
+        },
+        "lineage": {
+          "previous_sources": [
+            "hsoliwal/M3jdk21#1693",
+            "hsoliwal/M3jdk21#1708"
+          ],
+          "previous_targets": [],
+          "supersedes": []
+        },
+        "source_state": "component-qualified-candidate",
+        "observation": "Actual SDK and recorded bounded component gates passed; full family/repository qualification and ordered promotion remain pending."
+      },
+      {
+        "id": "m3.collections.indexed-live.strict-ranges",
+        "kind": "specialization",
+        "status": "implemented-unverified",
+        "reason": "Close the existing strict read-only contract through derived subList/reversed views using the established M3FilteredLists pattern and parent-owned arrays/permutations.",
+        "sources": [
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "b1821dc3252df341992658ab47b26f4bed68ac4a",
+            "module": "synexia-openrewrite-recipes",
+            "path": "synexia-openrewrite-recipes/recipe-crates/m3-qualified-lexicon-index-views-20261021/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-qualified-lexicon-index-views-20261021-004/M3IndexedLiveView.java.txt",
+            "symbol": "com.m3.collections.M3IndexedLiveView",
+            "signatures": [],
+            "sha256": "d525847598c4fb9264533d964918d29649b7647a3eaca6edc84534738befea4b",
+            "git_blob_sha1": "caafb4a9d0791faaa150f3f52d1a28aaf31ad878",
+            "fingerprint": null,
+            "revision_role": "pinned"
+          }
+        ],
+        "targets": [
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": null,
+            "module": "m3/collections",
+            "path": "m3/collections/src/main/java/com/m3/collections/M3IndexedLiveView.java",
+            "symbol": "com.m3.collections.M3IndexedLiveView",
+            "signatures": [],
+            "sha256": "d525847598c4fb9264533d964918d29649b7647a3eaca6edc84534738befea4b",
+            "git_blob_sha1": "caafb4a9d0791faaa150f3f52d1a28aaf31ad878",
+            "fingerprint": null,
+            "revision_role": "candidate"
+          }
+        ],
+        "owner": "com.m3.collections.M3IndexedLiveView",
+        "identity": {
+          "namespace": "Existing parent Object[] payload and primitive index permutation; no per-entry wrapper/payload store.",
+          "generation": "Existing live refresh, mutation generation, stable comparator order and cursor invalidation remain authoritative."
+        },
+        "contract": {
+          "differences": [
+            "Explicit strict range and reversal descriptors refuse mutation before callbacks, input inspection and invalid/null/empty argument validation.",
+            "This intentionally repairs previously accepted no-op mutations and changes exception precedence; it is not absolute observational equivalence.",
+            "An added declared subList override retains the existing resolved callable signature; concrete wrapper class/reflection identity is not preserved.",
+            "Opposite descriptors cancel double reversal; retain the failed 10000-reversal attempt and its regression."
+          ],
+          "compatibility_obligations": [
+            "Preserve parent-backed reads, RandomAccess where present, stable sorted/filter ordering and original invalidation behavior.",
+            "Do not import this stricter policy into the separate java.base M3IndexedView contract.",
+            "PR1734 refresh reentrancy work remains independent and was not overwritten or absorbed."
+          ],
+          "public_surface": [
+            "Existing resolved List signatures retained; stricter no-op refusal is an explicit bug repair in the existing convergence owner."
+          ]
+        },
+        "format": {
+          "schema": null,
+          "abi": null,
+          "bootstrap": "Existing target owners only; no Synexia runtime library or service dependency."
+        },
+        "dependencies": [],
+        "materialization": {
+          "admission": "Strict root owner policy propagated to derived ranges and reversals.",
+          "joins": "Backed offset/index reads through existing owner.",
+          "outputs": "Constant-size strict descriptors and existing iterator wrappers.",
+          "cached_facts": "No copied payload; opposing reversed descriptors cancel instead of retaining repeated reversal chains."
+        },
+        "recipe": {
+          "id": "com.synexia.m3jdk.QualifiedLexiconIndexViews20261021",
+          "version": "20261021",
+          "repository": "hsoliwal/com.synexia",
+          "commit": "b1821dc3252df341992658ab47b26f4bed68ac4a",
+          "path": "synexia-openrewrite-recipes/recipe-crates/m3-qualified-lexicon-index-views-20261021/src/main/resources/META-INF/rewrite/m3-qualified-lexicon-index-views-20261021.yml",
+          "sha256": "cc12e2ab30da0f997bb06aae29d8bb7717e067cb7603e23947ba6f4d4f7f113c",
+          "preconditions": [
+            "Exact per-file preimage or exact already-converged postimage; absent new file only.",
+            "Actual canonical OpenRewrite engine; serial source-sealed stages; foreign edits/missing/duplicate owners refuse."
+          ],
+          "rollback": "Review a source-sealed successor restoring exact preimages; no automatic reversal over foreign edits."
+        },
+        "tests": [
+          {
+            "id": "actual-sdk-and-target-components",
+            "receipt": "m3/compatibility/qualified-lexicon-index-views-20261021/README.md",
+            "canonical_evidence": "synexia-openrewrite-recipes/recipe-crates/m3-qualified-lexicon-index-views-20261021/evidence/collections-final-generated-source"
+          }
+        ],
+        "provenance": {
+          "license": "Original per-file Apache-2.0 notices retained; external challenge/GitHub comparisons reference-only, no copied external implementation.",
+          "publication": "User explicitly authorized Java/JNI implementation and public reviewable M3JDK21 PRs; canonical recipes/specification remain in Synexia.",
+          "copied_code": true,
+          "intake": "Existing target Apache owners and exact reviewed target-native donor; no GPL source relicensing is asserted."
+        },
+        "sync": {
+          "source_revision": "b1821dc3252df341992658ab47b26f4bed68ac4a",
+          "target_revision": "c831c4a77f0e3e10aac94178217efda882ba4be5",
+          "direction": "source-to-target",
+          "target_adaptations": [
+            "Explicit strict range and reversal descriptors refuse mutation before callbacks, input inspection and invalid/null/empty argument validation.",
+            "This intentionally repairs previously accepted no-op mutations and changes exception precedence; it is not absolute observational equivalence.",
+            "An added declared subList override retains the existing resolved callable signature; concrete wrapper class/reflection identity is not preserved.",
+            "Opposite descriptors cancel double reversal; retain the failed 10000-reversal attempt and its regression."
+          ],
+          "pending": [
+            "Complete source-built JDK and applicable full jtreg/module/GC/CDS/platform acceptance.",
+            "Full-repository ancestry-based admission; source snapshot cannot prove Git ancestry.",
+            "Measured CPU/retained-heap/native/process memory and production corpus qualification."
+          ],
+          "conflicts": []
+        },
+        "lineage": {
+          "previous_sources": [],
+          "previous_targets": [],
+          "supersedes": []
+        },
+        "source_state": "component-qualified-candidate",
+        "observation": "Actual SDK and recorded bounded component gates passed; full family/repository qualification and ordered promotion remain pending."
+      },
+      {
+        "id": "synexia.unicodex.qualified-lexical-transport",
+        "kind": "adapter",
+        "status": "implemented-unverified",
+        "reason": "Bind explicit catalog admission and the existing SMFILE01 token-range operation to the full UnicodeX specification/source/rank/projection seal, preventing short-generation-only interpretation.",
+        "sources": [
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "b1821dc3252df341992658ab47b26f4bed68ac4a",
+            "module": "synexia-openrewrite-recipes",
+            "path": "synexia-openrewrite-recipes/recipe-crates/m3-qualified-lexicon-index-views-20261021/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-qualified-lexicon-index-views-20261021-006/SharedLexiconCatalog.java.txt",
+            "symbol": "com.m3.text.SharedLexiconCatalog",
+            "signatures": [],
+            "sha256": "2bb7e88e409d9898eb81bcdf8ae3260bfa5e077e6099639e46c45364fecc8c5c",
+            "git_blob_sha1": "88c22c53e0d50ad0638218de84fbbebb1464d68a",
+            "fingerprint": null,
+            "revision_role": "pinned"
+          },
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "b1821dc3252df341992658ab47b26f4bed68ac4a",
+            "module": "synexia-openrewrite-recipes",
+            "path": "synexia-openrewrite-recipes/recipe-crates/m3-qualified-lexicon-index-views-20261021/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-qualified-lexicon-index-views-20261021-009/M3FileSystemStore.java.txt",
+            "symbol": "com.m3.fs.M3FileSystemStore",
+            "signatures": [],
+            "sha256": "f459ad09668e2802db3f0c44c3fc283d623b2fb1ef0b0e36e1bb65311a853677",
+            "git_blob_sha1": "584b5b5a2ed966160aae2de23b1d91d46dc4a7a0",
+            "fingerprint": null,
+            "revision_role": "pinned"
+          },
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "b1821dc3252df341992658ab47b26f4bed68ac4a",
+            "module": "synexia-openrewrite-recipes",
+            "path": "synexia-openrewrite-recipes/recipe-crates/m3-qualified-lexicon-index-views-20261021/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-qualified-lexicon-index-views-20261021-008/M3ColdFileImage.java.txt",
+            "symbol": "com.m3.fs.M3ColdFileImage",
+            "signatures": [],
+            "sha256": "1a1192fa7cfdfebd31f8fa1d914e5eb10147c2d2fedd20b6498ebc0ff3f64dfc",
+            "git_blob_sha1": "71b2d593cc02232e2abda58a51a7f944fd71a4ef",
+            "fingerprint": null,
+            "revision_role": "pinned"
+          }
+        ],
+        "targets": [
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": null,
+            "module": "m3/core",
+            "path": "m3/core/src/com/m3/text/SharedLexiconCatalog.java",
+            "symbol": "com.m3.text.SharedLexiconCatalog",
+            "signatures": [],
+            "sha256": "2bb7e88e409d9898eb81bcdf8ae3260bfa5e077e6099639e46c45364fecc8c5c",
+            "git_blob_sha1": "88c22c53e0d50ad0638218de84fbbebb1464d68a",
+            "fingerprint": null,
+            "revision_role": "candidate"
+          },
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": null,
+            "module": "m3/fs",
+            "path": "m3/fs/src/main/java/com/m3/fs/M3FileSystemStore.java",
+            "symbol": "com.m3.fs.M3FileSystemStore",
+            "signatures": [],
+            "sha256": "f459ad09668e2802db3f0c44c3fc283d623b2fb1ef0b0e36e1bb65311a853677",
+            "git_blob_sha1": "584b5b5a2ed966160aae2de23b1d91d46dc4a7a0",
+            "fingerprint": null,
+            "revision_role": "candidate"
+          },
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": null,
+            "module": "m3/fs",
+            "path": "m3/fs/src/main/java/com/m3/fs/M3ColdFileImage.java",
+            "symbol": "com.m3.fs.M3ColdFileImage",
+            "signatures": [],
+            "sha256": "1a1192fa7cfdfebd31f8fa1d914e5eb10147c2d2fedd20b6498ebc0ff3f64dfc",
+            "git_blob_sha1": "71b2d593cc02232e2abda58a51a7f944fd71a4ef",
+            "fingerprint": null,
+            "revision_role": "candidate"
+          }
+        ],
+        "owner": "com.m3.text.SharedLexiconCatalog; com.m3.fs.M3FileSystemStore; com.m3.fs.M3ColdFileImage",
+        "identity": {
+          "namespace": "Specification ID/version, immutable source revision and ID, language, lexicon, word count, rank-map seal and exact image-projection seal.",
+          "generation": "Full qualification precedes existing generation/structure checks; lexical rank, concept X, frequency rank and physical row remain distinct."
+        },
+        "contract": {
+          "differences": [
+            "Add opt-in Qualification and Qualified catalog APIs; existing local catalog and file APIs remain unchanged.",
+            "Dense zero-based canonical decimal record IDs resolve through two primitive rank-to-shard/row lanes, independent of physical search order.",
+            "Full qualification pins use existing RAW_BYTES objects and manifest relations mindex.unicodex.<language>; every declared language needs exact pin coverage.",
+            "Canonical ordering is defined only by synexia-unicodex; no target-side spelling sort or normalization defines source rank.",
+            "Retain literal/unknown pieces and exact UTF-16, including unpaired surrogates; this change is admission for existing images, not a general ID-only wire decoder."
+          ],
+          "compatibility_obligations": [
+            "Do not derive canonical ranks from physical sorting, concept X or frequency ranks.",
+            "Keep caller publication inputs stable while hashing; no implicit normalization or mutable-input snapshot promise.",
+            "Use exact immutable UnicodeX ordering revision and qualified publication; two-word single-language fixtures do not admit an entire production lexicon corpus."
+          ],
+          "public_surface": [
+            "Additive APIs on existing M3 convergence owners; no java.lang.String or Java SE signature/export change."
+          ]
+        },
+        "format": {
+          "schema": "Existing qualified publication envelope and SMFILE01",
+          "abi": null,
+          "bootstrap": "Existing target owners only; no Synexia runtime library or service dependency."
+        },
+        "dependencies": [],
+        "materialization": {
+          "admission": "Validate exact caller-trusted full seals and dense canonical IDs before qualified operations; publisher authenticity is outside this compatibility contract.",
+          "joins": "Reuse existing catalog/image and SMFILE01/content-addressed manifest owners.",
+          "outputs": "Qualified text/rank coordinates and existing token-range SHA-256 operation.",
+          "cached_facts": "Two primitive int[] coordinate lanes; no retained per-entry text store, new transport codec or core-to-fs runtime dependency."
+        },
+        "recipe": {
+          "id": "com.synexia.m3jdk.QualifiedLexiconIndexViews20261021",
+          "version": "20261021",
+          "repository": "hsoliwal/com.synexia",
+          "commit": "b1821dc3252df341992658ab47b26f4bed68ac4a",
+          "path": "synexia-openrewrite-recipes/recipe-crates/m3-qualified-lexicon-index-views-20261021/src/main/resources/META-INF/rewrite/m3-qualified-lexicon-index-views-20261021.yml",
+          "sha256": "cc12e2ab30da0f997bb06aae29d8bb7717e067cb7603e23947ba6f4d4f7f113c",
+          "preconditions": [
+            "Exact per-file preimage or exact already-converged postimage; absent new file only.",
+            "Actual canonical OpenRewrite engine; serial source-sealed stages; foreign edits/missing/duplicate owners refuse."
+          ],
+          "rollback": "Review a source-sealed successor restoring exact preimages; no automatic reversal over foreign edits."
+        },
+        "tests": [
+          {
+            "id": "actual-sdk-and-target-components",
+            "receipt": "m3/compatibility/qualified-lexicon-index-views-20261021/README.md",
+            "canonical_evidence": "synexia-openrewrite-recipes/recipe-crates/m3-qualified-lexicon-index-views-20261021/evidence/producer-target-input-stability-cross"
+          }
+        ],
+        "provenance": {
+          "license": "Original per-file Apache-2.0 notices retained; external challenge/GitHub comparisons reference-only, no copied external implementation.",
+          "publication": "User explicitly authorized Java/JNI implementation and public reviewable M3JDK21 PRs; canonical recipes/specification remain in Synexia.",
+          "copied_code": true,
+          "intake": "Existing target Apache owners and exact reviewed target-native donor; no GPL source relicensing is asserted."
+        },
+        "sync": {
+          "source_revision": "b1821dc3252df341992658ab47b26f4bed68ac4a",
+          "target_revision": "c831c4a77f0e3e10aac94178217efda882ba4be5",
+          "direction": "source-to-target",
+          "target_adaptations": [
+            "Add opt-in Qualification and Qualified catalog APIs; existing local catalog and file APIs remain unchanged.",
+            "Dense zero-based canonical decimal record IDs resolve through two primitive rank-to-shard/row lanes, independent of physical search order.",
+            "Full qualification pins use existing RAW_BYTES objects and manifest relations mindex.unicodex.<language>; every declared language needs exact pin coverage.",
+            "Canonical ordering is defined only by synexia-unicodex; no target-side spelling sort or normalization defines source rank.",
+            "Retain literal/unknown pieces and exact UTF-16, including unpaired surrogates; this change is admission for existing images, not a general ID-only wire decoder."
+          ],
+          "pending": [
+            "Complete source-built JDK and applicable full jtreg/module/GC/CDS/platform acceptance.",
+            "Full-repository ancestry-based admission; source snapshot cannot prove Git ancestry.",
+            "Measured CPU/retained-heap/native/process memory and production corpus qualification."
+          ],
+          "conflicts": []
+        },
+        "lineage": {
+          "previous_sources": [],
+          "previous_targets": [],
+          "supersedes": []
+        },
+        "source_state": "component-qualified-candidate",
+        "observation": "Actual SDK and recorded bounded component gates passed; full family/repository qualification and ordered promotion remain pending."
       }
     ]
   },
