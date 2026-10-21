@@ -463,4 +463,32 @@ public interface ExecutorService extends Executor, AutoCloseable {
         return submit((Runnable) () -> ProgressMonitors.run(task, monitor));
     }
 
+    /**
+     * Submits a runnable with a borrowed monitor and a result to return on
+     * successful completion. The monitor is bound only during execution and
+     * is not completed by this method. Cooperative monitor cancellation and
+     * cancellation of the returned future remain distinct.
+     *
+     * @implSpec
+     * The default implementation delegates to {@link #submit(Runnable, Object)}
+     * with a runnable that invokes {@link ProgressMonitors#run(Runnable,
+     * ProgressMonitor)}. Monitor cancellation is checked inside the submitted
+     * operation, so the executor's future records any resulting exception.
+     * The result and the returned future are those of the delegate submission.
+     *
+     * @param <T> the type of the supplied result
+     * @param task the task to submit
+     * @param result the result to return on success, which may be {@code null}
+     * @param monitor the borrowed monitor to bind during the task
+     * @return the future returned by the delegate submission
+     * @throws NullPointerException if {@code task} or {@code monitor} is null
+     * @throws RejectedExecutionException if the task cannot be scheduled
+     */
+    default <T> Future<T> submitMonitored(
+            Runnable task, T result, ProgressMonitor monitor) {
+        java.util.Objects.requireNonNull(task, "task");
+        java.util.Objects.requireNonNull(monitor, "monitor");
+        return submit((Runnable) () -> ProgressMonitors.run(task, monitor), result);
+    }
+
 }
