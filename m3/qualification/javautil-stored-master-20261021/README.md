@@ -17,7 +17,7 @@ This bounded change restores three existing `java.util.CollectionViews` implemen
 
 Original source Git blob: `2ff7ec57ab93c8bd118ceb320fd76aae1c0e7d66`.
 Oracle donor Git blob: `491b55c10f829b35f1cdcc5e2233d27564617d17`.
-The source postimage is constructed by replacing the two bounded stored-occurrence methods and one bounded reentrant cursor method only; it does not overwrite later master owners or concurrent changes. Any baseline drift must refuse recipe replay rather than doing a fuzzy patch.
+The source postimage is constructed by replacing the two bounded stored-occurrence methods, one bounded reentrant cursor method and metadata-only spliterator atoms; it does not overwrite later master owners or concurrent changes. Any baseline drift must refuse recipe replay rather than doing a fuzzy patch.
 
 ## Behavioral atoms
 - `contains(Object)`: validate the backing membership first; evaluate visibility on actual stored representative. Identity-set exact-reference match precedes ordinary equals fallback.
@@ -34,3 +34,14 @@ bash m3/qualification/javautil-stored-master-20261021/verify.sh /tmp/new-m3javau
 The script checks exact source seals, strict JDK21 `--patch-module` compilation of actual before/after java.base owners, stable `javap` public ABI, reproduces original red before-source failure and executes the original owner's 736,018-assertion oracle under interpreter, C1, C2 and mixed modes. No generic surrogate silently replaces the actual owner.
 
 **NOT RUN in authoring:** this exact receipt script, canonical Maven/OpenRewrite Recipe.run, full OpenJDK build, jtreg/JCK/installed-image/HotSpot/GC/native parity, five-library acceptance and CPU/heap/native memory benchmarks. CI is a configured independent acceptance path, not a completion claim. Keep draft until gates pass. History remains append-only; no rebase, force-push or auto-merge.
+
+## Source-sealed third pass: sorted/Set Spliterator metadata
+The prior combined 3-atom source `0b82812ca1e9069bde7d0d695f4f940fd56328b3` remains in additive history. The **current** product postimage of `src/java.base/share/classes/java/util/CollectionViews.java` is canonical Synexia source Git blob `b86464e5f381415e73bc14afb7b078a5e5f1bff0`, UTF-8 SHA-256 `9be6954fb7e4e5261a3f9932bbdd6aedf46c945fb6bb9e15e5c21727e8436d7c`.
+
+This exact original-owner source incorporates the first-party donor's `FilteredSet.spliterator`, `FilteredSortedSet.spliterator` and private `SelectionSpliterator` guaranteed characteristics/owner-comparator propagation from [#1770](https://github.com/hsoliwal/M3jdk21/pull/1770), **without** its extra Set `contains/remove` overrides. The previous stored representative/removal and reentrant state corrections are retained. A `SortedSet` view advertises `SORTED | ORDERED | DISTINCT` and its owner's comparator, including for metadata-sparse source spliterators and split cursors. An ordinary `Set` advertises `DISTINCT`. Neither receives `SIZED/SUBSIZED` when the filtered cardinality is unknown.
+
+Added third original JDK test `FilteredSortedSpliteratorMetadataTest.java`: Git blob `5697bc17eabcad66b6fb3725a76db0e3d2ea23f6`, SHA-256 `e3d8f4208b2f8d3f0b05f512d39e30e276ad4496632f917376f3ebb8e37957ad`; retain its GPLv2 with Classpath exception copyright header. All three tests and original source are sealed in canonical [Synexia #12867](https://github.com/hsoliwal/com.synexia/pull/12867).
+
+**Executed locally:** bounded standalone Java 21 atom proof with `javac --release 21 -Xlint:all -Werror`, **4,010 checks PASS** (metadata sparsity, comparator, null-free filtering, split, reentrancy, Set). This is not execution of the exact full patched `CollectionViews.java`. The PR CI invokes `verify.sh`, which now includes three baseline-red and three corrected-green tests in four JVM modes, source SHA and `javap` ABI validation. Its status must be read from GitHub Actions rather than inferred. Full JDK, JNI/GC/CDS/JCK, five-provider equality/ordering tests and resource benchmarks remain **NOT RUN**.
+
+**No duplicate payload owner:** original backing collections remain authoritative; no per-entry retained nodes, new runtime adapter, vendor package rename, JNI symbol or native object ownership change. New Spliterator metadata is an observable contract repair and requires explicit reviewer acceptance; do not present it as strict preservation of an incorrect prior metadata result.
