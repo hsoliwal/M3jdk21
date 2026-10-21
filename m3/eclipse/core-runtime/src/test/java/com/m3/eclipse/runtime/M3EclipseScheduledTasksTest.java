@@ -33,7 +33,7 @@ final class M3EclipseScheduledTasksTest {
                         owner.worked(3);
                         return 42;
                     }, 0, TimeUnit.MILLISECONDS);
-            assertEquals(42, scheduled.get(5, TimeUnit.SECONDS));
+            assertEquals(Integer.valueOf(42), scheduled.get(5, TimeUnit.SECONDS));
             assertEquals(0, scheduled.compareTo(scheduled));
             assertTrue(scheduled.isDone());
             assertFalse(scheduled.isCancelled());
