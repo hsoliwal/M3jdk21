@@ -66,6 +66,11 @@ public final class M3FilteredDeques {
         @Override public Iterator<E> iterator() { return new Cursor(false); }
         @Override public Iterator<E> descendingIterator() { return new Cursor(true); }
 
+        /** One lazy ordered cursor; short-circuit streams do not pre-count the entire view. */
+        @Override public java.util.Spliterator<E> spliterator() {
+            return M3SlotSpliterators.lateBoundOrdered(this::iterator);
+        }
+
         /** One cursor, one value and physical ordinal; no retained element index. */
         private final class Cursor implements Iterator<E> {
             private final boolean descending;
@@ -293,6 +298,11 @@ public final class M3FilteredDeques {
         @Override public boolean contains(Object item) { return selected.contains(item); }
         @Override public Iterator<E> iterator() { return noRemove(selected.iterator()); }
         @Override public Iterator<E> descendingIterator() { return noRemove(selected.descendingIterator()); }
+
+        /** Preserve the selected view's late binding without a redundant size scan. */
+        @Override public java.util.Spliterator<E> spliterator() {
+            return selected.spliterator();
+        }
         @Override public E getFirst() { return selected.getFirst(); }
         @Override public E getLast() { return selected.getLast(); }
         @Override public E peekFirst() { return selected.peekFirst(); }
