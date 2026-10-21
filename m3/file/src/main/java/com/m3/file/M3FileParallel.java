@@ -5,17 +5,9 @@ package com.m3.file;
 import java.io.IOException;
 import java.io.InterruptedIOException;
 import java.nio.file.Path;
-import java.util.ArrayDeque;
 import java.util.Objects;
 import java.util.PrimitiveIterator;
 import java.util.Spliterators;
-import java.util.concurrent.CancellationException;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.TimeoutException;
 import java.util.stream.Stream;
 
 /**
@@ -31,11 +23,12 @@ import java.util.stream.Stream;
  * <p>At most {@code parallelism} virtual tasks are live. Results reach the
  * caller's sink in encounter order; side effects inside worker callbacks
  * may execute in any order. Callback failure cancels pending work but cannot
- * roll back completed external writes.
+ * roll back completed external writes. Any admitted worker failure is observed
+ * while waiting for an earlier task; a failure may stop ordered publication early.
+ * Workers must honor interruption for cancellation and close to finish.
  */
 public final class M3FileParallel {
     private static final int MAX_PARALLELISM = 256;
-    private static final long CHECK_MILLIS = 50L;
 
     private M3FileParallel() { }
 
@@ -83,35 +76,21 @@ public final class M3FileParallel {
         PrimitiveIterator.OfInt iterator = Spliterators.iterator(selected.idSpliterator());
         long completed = 0;
         progress.begin("M3 selected-file work", 0L);
-        try (ExecutorService executor = Executors.newThreadPerTaskExecutor(
-                Thread.ofVirtual().name("m3-file-", 0).factory())) {
-            ArrayDeque<FileFuture<R>> pending = new ArrayDeque<>(parallelism);
-            try {
-                while (iterator.hasNext()) {
-                    check(progress);
-                    generation(tree, generation);
-                    int row = iterator.nextInt();
-                    if (!tree.flag(M3FileFlag.REGULAR, row)) continue;
-                    // No original path or facade is materialized before the task.
-                    Future<R> future = executor.submit(() ->
-                            work.apply(row, tree.file(row), child(progress)));
-                    pending.addLast(new FileFuture<>(row, future));
-                    if (pending.size() == parallelism) {
-                        completed += completeFile(pending.peekFirst(), tree,
-                                generation, progress, sink);
-                        pending.removeFirst();
-                    }
+        try (M3FileTaskWindow<R> pending = new M3FileTaskWindow<>(parallelism, "m3-file-")) {
+            while (iterator.hasNext()) {
+                check(progress);
+                pending.checkFailure();
+                generation(tree, generation);
+                int row = iterator.nextInt();
+                if (!tree.flag(M3FileFlag.REGULAR, row)) continue;
+                pending.add(row, () -> work.apply(row, tree.file(row), child(progress)));
+                if (pending.full()) {
+                    completed += completeFile(pending, tree, generation, progress, sink);
                 }
-                while (!pending.isEmpty()) {
-                    check(progress);
-                    completed += completeFile(pending.peekFirst(), tree,
-                            generation, progress, sink);
-                    pending.removeFirst();
-                }
-            } catch (IOException | RuntimeException | Error failure) {
-                for (FileFuture<R> item : pending) item.future().cancel(true);
-                executor.shutdownNow();
-                throw failure;
+            }
+            while (pending.size() != 0) {
+                check(progress);
+                completed += completeFile(pending, tree, generation, progress, sink);
             }
         }
         progress.done();
@@ -135,84 +114,51 @@ public final class M3FileParallel {
         Objects.requireNonNull(spec, "original scan policy");
         validate(parallelism, progress, work, sink);
         long completed = 0;
-        progress.begin("M3 independent drive/directory roots", 0L);
         try (roots;
-             ExecutorService executor = Executors.newThreadPerTaskExecutor(
-                     Thread.ofVirtual().name("m3-root-", 0).factory())) {
-            ArrayDeque<RootFuture<R>> pending = new ArrayDeque<>(parallelism);
-            try {
-                var iterator = roots.iterator();
-                while (iterator.hasNext()) {
-                    check(progress);
-                    Path root = Objects.requireNonNull(iterator.next(), "root path");
-                    Future<R> future = executor.submit(() -> {
-                        try (M3FileTree tree = M3FileTree.open(root, spec)) {
-                            return work.apply(tree, child(progress));
-                        }
-                    });
-                    pending.addLast(new RootFuture<>(root, future));
-                    if (pending.size() == parallelism) {
-                        RootFuture<R> item = pending.peekFirst();
-                        R result = await(item.future(), progress);
-                        sink.accept(item.root(), result);
-                        pending.removeFirst();
-                        completed++;
+             M3FileTaskWindow<R> pending = new M3FileTaskWindow<>(parallelism, "m3-root-")) {
+            // Ownership is established before an effectful monitor callback.
+            progress.begin("M3 independent drive/directory roots", 0L);
+            var iterator = roots.iterator();
+            while (iterator.hasNext()) {
+                check(progress);
+                pending.checkFailure();
+                Path root = Objects.requireNonNull(iterator.next(), "root path");
+                pending.add(root, () -> {
+                    try (M3FileTree tree = M3FileTree.open(root, spec)) {
+                        return work.apply(tree, child(progress));
                     }
-                }
-                while (!pending.isEmpty()) {
-                    check(progress);
-                    RootFuture<R> item = pending.peekFirst();
-                    R result = await(item.future(), progress);
-                    sink.accept(item.root(), result);
-                    pending.removeFirst();
+                });
+                if (pending.full()) {
+                    completeRoot(pending, progress, sink);
                     completed++;
                 }
-            } catch (IOException | RuntimeException | Error failure) {
-                for (RootFuture<R> item : pending) item.future().cancel(true);
-                executor.shutdownNow();
-                throw failure;
+            }
+            while (pending.size() != 0) {
+                check(progress);
+                completeRoot(pending, progress, sink);
+                completed++;
             }
         }
         progress.done();
         return completed;
     }
 
-    private static <R> int completeFile(FileFuture<R> item, M3FileTree tree,
+    private static <R> int completeFile(M3FileTaskWindow<R> pending, M3FileTree tree,
             int generation, M3FileProgress progress, FileResult<R> sink)
             throws IOException {
-        R result = await(item.future(), progress);
+        R result = pending.await(() -> check(progress));
         generation(tree, generation);
-        sink.accept(item.row(), result);
+        sink.accept(pending.row(), result);
         generation(tree, generation);
+        pending.remove();
         return 1;
     }
 
-    private static <R> R await(Future<R> future, M3FileProgress monitor)
-            throws IOException {
-        try {
-            for (;;) {
-                check(monitor);
-                try {
-                    return future.get(CHECK_MILLIS, TimeUnit.MILLISECONDS);
-                } catch (TimeoutException pending) {
-                    // Recheck cancellation without forcing a second stream read.
-                }
-            }
-        } catch (InterruptedException interrupted) {
-            future.cancel(true);
-            Thread.currentThread().interrupt();
-            InterruptedIOException error = new InterruptedIOException("M3 parallel work interrupted");
-            error.initCause(interrupted);
-            throw error;
-        } catch (CancellationException cancelled) {
-            throw new InterruptedIOException("M3 parallel work cancelled");
-        } catch (ExecutionException completed) {
-            Throwable failure = completed.getCause();
-            if (failure instanceof IOException error) throw error;
-            if (failure instanceof RuntimeException error) throw error;
-            if (failure instanceof Error error) throw error;
-            throw new IOException("M3 parallel source work failed", failure);
-        }
+    private static <R> void completeRoot(M3FileTaskWindow<R> pending,
+            M3FileProgress progress, RootResult<R> sink) throws IOException {
+        R result = pending.await(() -> check(progress));
+        sink.accept(pending.root(), result);
+        pending.remove();
     }
 
     private static void generation(M3FileTree owner, int expected) {
@@ -254,6 +200,4 @@ public final class M3FileParallel {
         }
     }
 
-    private record FileFuture<R>(int row, Future<R> future) { }
-    private record RootFuture<R>(Path root, Future<R> future) { }
 }
