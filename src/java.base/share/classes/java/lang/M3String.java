@@ -572,6 +572,147 @@ final class M3String implements CharSequence {
                 : owner.rangeFactsIfPrepared(value);
     }
 
+    static final class TokenSnapshot {
+        final byte[] packedAscii;
+        final int[] offsets;
+        final int[] lengths;
+        final int[] sequence;
+
+        TokenSnapshot(byte[] packedAscii, int[] offsets, int[] lengths, int[] sequence) {
+            this.packedAscii = packedAscii;
+            this.offsets = offsets;
+            this.lengths = lengths;
+            this.sequence = sequence;
+        }
+    }
+
+    TokenSnapshot asciiTokenSnapshot(
+            int maxSequence, int maxVocabulary, int maxTokenLength, int maxPackedBytes) {
+        if (maxSequence < 0 || maxVocabulary < 0 || maxTokenLength < 1 || maxPackedBytes < 0) {
+            throw new IllegalArgumentException("invalid M3 token snapshot budget");
+        }
+        if (length() == 0) {
+            return new TokenSnapshot(new byte[0], new int[0], new int[0], new int[0]);
+        }
+        if (maxSequence == 0 || maxVocabulary == 0 || maxPackedBytes == 0) return null;
+
+        int uniqueCapacity = Math.min(8, maxVocabulary);
+        M3StringOwner[] owners = new M3StringOwner[uniqueCapacity];
+        int[] starts = new int[uniqueCapacity];
+        int[] lengths = new int[uniqueCapacity];
+        int[] offsets = new int[uniqueCapacity];
+        int[] slots = new int[16];
+
+        int sequenceCapacity = Math.min(8, maxSequence);
+        int[] sequence = new int[sequenceCapacity];
+        byte[] packed = new byte[Math.min(64, maxPackedBytes)];
+
+        int unique = 0;
+        int sequenceSize = 0;
+        int packedSize = 0;
+        M3StringLeafCursor cursor = new M3StringLeafCursor(this, false);
+        while (cursor.next()) {
+            M3StringOwner scalar = cursor.owner();
+            int scalarStart = cursor.start();
+            int remaining = cursor.length();
+            while (remaining != 0) {
+                if (sequenceSize == maxSequence) return null;
+                int tokenLength = Math.min(remaining, maxTokenLength);
+                int tokenStart = scalarStart;
+
+                if ((long) (unique + 1) * 10L >= (long) slots.length * 6L
+                        && unique < maxVocabulary) {
+                    int[] grown = new int[Math.multiplyExact(slots.length, 2)];
+                    for (int index = 0; index < unique; index++) {
+                        int slot = tokenSlot(
+                                owners[index], starts[index], lengths[index], grown.length - 1);
+                        while (grown[slot] != 0) slot = (slot + 1) & (grown.length - 1);
+                        grown[slot] = index + 1;
+                    }
+                    slots = grown;
+                }
+
+                int slot = tokenSlot(scalar, tokenStart, tokenLength, slots.length - 1);
+                int vocabulary = -1;
+                while (slots[slot] != 0) {
+                    int candidate = slots[slot] - 1;
+                    if (owners[candidate] == scalar
+                            && starts[candidate] == tokenStart
+                            && lengths[candidate] == tokenLength) {
+                        vocabulary = candidate;
+                        break;
+                    }
+                    slot = (slot + 1) & (slots.length - 1);
+                }
+
+                if (vocabulary < 0) {
+                    if (unique == maxVocabulary || tokenLength > maxPackedBytes - packedSize) {
+                        return null;
+                    }
+                    if (unique == owners.length) {
+                        int capacity = Math.min(
+                                maxVocabulary,
+                                Math.max(unique + 1, Math.multiplyExact(owners.length, 2)));
+                        owners = Arrays.copyOf(owners, capacity);
+                        starts = Arrays.copyOf(starts, capacity);
+                        lengths = Arrays.copyOf(lengths, capacity);
+                        offsets = Arrays.copyOf(offsets, capacity);
+                    }
+                    if (packedSize + tokenLength > packed.length) {
+                        int capacity = Math.min(
+                                maxPackedBytes,
+                                Math.max(
+                                        packedSize + tokenLength,
+                                        Math.multiplyExact(packed.length, 2)));
+                        packed = Arrays.copyOf(packed, capacity);
+                    }
+                    int offset = packedSize;
+                    for (int index = 0; index < tokenLength; index++) {
+                        char unit = scalar.charAt(tokenStart + index);
+                        if (unit >= 128) return null;
+                        packed[packedSize++] = (byte) unit;
+                    }
+                    vocabulary = unique++;
+                    owners[vocabulary] = scalar;
+                    starts[vocabulary] = tokenStart;
+                    lengths[vocabulary] = tokenLength;
+                    offsets[vocabulary] = offset;
+                    slots[slot] = vocabulary + 1;
+                }
+
+                if (sequenceSize == sequence.length) {
+                    int capacity = Math.min(
+                            maxSequence,
+                            Math.max(
+                                    sequenceSize + 1,
+                                    Math.multiplyExact(sequence.length, 2)));
+                    sequence = Arrays.copyOf(sequence, capacity);
+                }
+                sequence[sequenceSize++] = vocabulary;
+                scalarStart += tokenLength;
+                remaining -= tokenLength;
+            }
+        }
+
+        return new TokenSnapshot(
+                Arrays.copyOf(packed, packedSize),
+                Arrays.copyOf(offsets, unique),
+                Arrays.copyOf(lengths, unique),
+                Arrays.copyOf(sequence, sequenceSize));
+    }
+
+    private static int tokenSlot(M3StringOwner owner, int start, int length, int mask) {
+        int hash = System.identityHashCode(owner);
+        hash = 31 * hash + start;
+        hash = 31 * hash + length;
+        hash ^= hash >>> 16;
+        hash *= 0x7feb352d;
+        hash ^= hash >>> 15;
+        hash *= 0x846c_a68b;
+        hash ^= hash >>> 16;
+        return hash & mask;
+    }
+
     /**
      * Thread-confined logical UTF-16 reader over persistent canonical tuple coordinates.
      * It resolves each contiguous visible scalar run once, not once per code unit.
