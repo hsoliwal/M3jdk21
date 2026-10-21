@@ -9134,6 +9134,21 @@
   },
   "optional_module_mappings": [
     {
+      "module": "jdk.m3.tornado",
+      "mapping": "m3/docs/name-mapping.d/m3-tornado-integrated-runtime-20261021.json",
+      "intake_mode": "INDEPENDENT_APACHE_MODULE",
+      "receiving_sequence_advanced": false,
+      "canonical_recipe": "com.synexia.rewrite.M3Jdk21TornadoIntegratedRuntimeRecipe",
+      "target_proof": "m3/runtime-integration/tornado/build_runtime.py",
+      "upstream_source": "m3/vendor/tornadovm",
+      "upstream_license_rule": "Tornado API/runtime/backend and Graal dependencies retain distinct original licenses",
+      "optional_exported_packages": [
+        "com.m3.tornado",
+        "com.synexia.m3.cpugpu"
+      ],
+      "compatibility_namespace_exception": "Historical com.synexia.m3.cpugpu types are target-owned in-tree compatibility classes; no external Synexia artifact or service."
+    },
+    {
       "module": "jdk.m3.collections",
       "maven_profile": "m3-collections",
       "mapping": "m3/docs/name-mapping.d/m3-filtered-collection-pack-20261017.json",

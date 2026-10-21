@@ -1,0 +1,159 @@
+{
+  "schema": "M3JDK21_RV32IM_PROVIDER_SOURCE_CUSTODY_V1",
+  "target_repository": "hsoliwal/M3jdk21",
+  "target_base": "2779aba3f98f31c324be43f731be7914e1a05935",
+  "target_module": "jdk.m3.tornado",
+  "canonical_recipe_owner": "hsoliwal/com.synexia",
+  "provider_repository": "hsoliwal/synexia-tornadovm",
+  "provider_revision": "cc79842887028af98b468efaf7f22be129dc055c",
+  "previous_target_cpu_ci_revision": "d7b4615ccaa286a1a11a60bc079969f24cc7f197",
+  "provider_source_tree_both_revisions": "eb6c71f11b8e5518ec8b581934ce3ed38dc0b451",
+  "original_provider_api_version": "6.1.0-jdk21",
+  "integrated_api_version": "7.2.0",
+  "integrated_tornado_source_revision": "87a465f9185eb8e822f9532076fb4a5bc44fdf2a",
+  "compatibility_package": "com.synexia.m3.cpugpu",
+  "compatibility_reason": "Retain original accepted Rv32iBatch binary name, Class identity, public methods, payload owner and provider behavior inside the M3JDK21-owned module.",
+  "external_synexia_runtime_artifact": false,
+  "provider_source_bodies_changed": false,
+  "implementation_files": 10,
+  "original_test_files": 5,
+  "files": [
+    {
+      "donor_path": "m3/cpu-gpu/src/main/java/com/synexia/m3/cpugpu/CpuRv32iEngine.java",
+      "target_path": "m3/ports/tornadovm-bulk/src/main/java/com/synexia/m3/cpugpu/CpuRv32iEngine.java",
+      "git_blob_sha1": "51d7fb072b5d508e6a30940e466271580927ce99",
+      "sha256": "cef11c1f919c78edab9ff267998d956934df6e131402d839a29760d3a2eec399",
+      "bytes": 19451,
+      "receiving_mode": "EXACT_COMPATIBILITY_SOURCE",
+      "license": "Apache-2.0"
+    },
+    {
+      "donor_path": "m3/cpu-gpu/src/main/java/com/synexia/m3/cpugpu/Elf32RiscVLoader.java",
+      "target_path": "m3/ports/tornadovm-bulk/src/main/java/com/synexia/m3/cpugpu/Elf32RiscVLoader.java",
+      "git_blob_sha1": "438563ab8b2ad81c33292764e88948595a8f3073",
+      "sha256": "55a427c85c7adb595f0dcf23793171bcbe8cb9eb1ee293c69b9db5bea5e777da",
+      "bytes": 4975,
+      "receiving_mode": "EXACT_COMPATIBILITY_SOURCE",
+      "license": "Apache-2.0"
+    },
+    {
+      "donor_path": "m3/cpu-gpu/src/main/java/com/synexia/m3/cpugpu/Rv32i.java",
+      "target_path": "m3/ports/tornadovm-bulk/src/main/java/com/synexia/m3/cpugpu/Rv32i.java",
+      "git_blob_sha1": "daf6914460fc9a1e3a2b6ba5eebd8ad87d17e364",
+      "sha256": "71e2fc45cc553f2688a25da6e754e02b8e06e25b240a36fd999ee68a6fb6e6eb",
+      "bytes": 3103,
+      "receiving_mode": "EXACT_COMPATIBILITY_SOURCE",
+      "license": "Apache-2.0"
+    },
+    {
+      "donor_path": "m3/cpu-gpu/src/main/java/com/synexia/m3/cpugpu/Rv32iAssembler.java",
+      "target_path": "m3/ports/tornadovm-bulk/src/main/java/com/synexia/m3/cpugpu/Rv32iAssembler.java",
+      "git_blob_sha1": "46d77d05c4a6c8dd3b0a94ada814d0d91e2d25a9",
+      "sha256": "0bbc60fdb009563c31871dde45b2b5e1fe5c06ee423adaa0ce104c062c182d13",
+      "bytes": 9914,
+      "receiving_mode": "EXACT_COMPATIBILITY_SOURCE",
+      "license": "Apache-2.0"
+    },
+    {
+      "donor_path": "m3/cpu-gpu/src/main/java/com/synexia/m3/cpugpu/Rv32iBatch.java",
+      "target_path": "m3/ports/tornadovm-bulk/src/main/java/com/synexia/m3/cpugpu/Rv32iBatch.java",
+      "git_blob_sha1": "71716430b6e014a296fadcf0b5cf260bcabbe77d",
+      "sha256": "151e1125eed78b0b5638544fa5204fc9430bcd588fa9c2a67b60372958a464ed",
+      "bytes": 8612,
+      "receiving_mode": "EXACT_COMPATIBILITY_SOURCE",
+      "license": "Apache-2.0"
+    },
+    {
+      "donor_path": "m3/cpu-gpu/src/main/java/com/synexia/m3/cpugpu/Rv32iBulkExecutor.java",
+      "target_path": "m3/ports/tornadovm-bulk/src/main/java/com/synexia/m3/cpugpu/Rv32iBulkExecutor.java",
+      "git_blob_sha1": "57c3b4006dba8461c4f53cc32a3efe8522227fa5",
+      "sha256": "b0ebdc225a2bab02010b070bb2a00d9d6e54e2978d4576f9931224492b425d0c",
+      "bytes": 5977,
+      "receiving_mode": "EXACT_COMPATIBILITY_SOURCE",
+      "license": "Apache-2.0"
+    },
+    {
+      "donor_path": "m3/cpu-gpu/src/main/java/com/synexia/m3/cpugpu/Rv32iBulkReceipt.java",
+      "target_path": "m3/ports/tornadovm-bulk/src/main/java/com/synexia/m3/cpugpu/Rv32iBulkReceipt.java",
+      "git_blob_sha1": "b4066e7b17d57693bb44974483950f73944dc80a",
+      "sha256": "17788b47933d816c2572ff7621cac91b6283228989267992928314ab30f148ed",
+      "bytes": 1744,
+      "receiving_mode": "EXACT_COMPATIBILITY_SOURCE",
+      "license": "Apache-2.0"
+    },
+    {
+      "donor_path": "m3/cpu-gpu/src/main/java/com/synexia/m3/cpugpu/Rv32iDemo.java",
+      "target_path": "m3/ports/tornadovm-bulk/src/main/java/com/synexia/m3/cpugpu/Rv32iDemo.java",
+      "git_blob_sha1": "77fe244d222c0b8443f4d936e178525fa9048fd0",
+      "sha256": "58d99c2dab2e802627a71a80936139d18895243246f8d67333b8317b51fe9ec8",
+      "bytes": 3364,
+      "receiving_mode": "EXACT_COMPATIBILITY_SOURCE",
+      "license": "Apache-2.0"
+    },
+    {
+      "donor_path": "m3/cpu-gpu/src/main/java/com/synexia/m3/cpugpu/Rv32iKernel.java",
+      "target_path": "m3/ports/tornadovm-bulk/src/main/java/com/synexia/m3/cpugpu/Rv32iKernel.java",
+      "git_blob_sha1": "f3c5289c12bfba830220be6e168423a62d9b97a7",
+      "sha256": "c51f837cfb50bfa5ba656ad7f3b6eb8423d990c2d69a8f5a3400519a45ca4315",
+      "bytes": 20372,
+      "receiving_mode": "EXACT_COMPATIBILITY_SOURCE",
+      "license": "Apache-2.0"
+    },
+    {
+      "donor_path": "m3/cpu-gpu/src/main/java/com/synexia/m3/cpugpu/TornadoRv32iSession.java",
+      "target_path": "m3/ports/tornadovm-bulk/src/main/java/com/synexia/m3/cpugpu/TornadoRv32iSession.java",
+      "git_blob_sha1": "d8b0979230b558d74ad1ff00420f95924d192c87",
+      "sha256": "42f138bf48f9b92ade0cfd87eb8598a38bda9a4ca4e6eb3f972f78ac0396a390",
+      "bytes": 4752,
+      "receiving_mode": "EXACT_COMPATIBILITY_SOURCE",
+      "license": "Apache-2.0"
+    },
+    {
+      "donor_path": "m3/cpu-gpu/src/test/java/com/synexia/m3/cpugpu/CpuRv32iEngineTest.java",
+      "target_path": "m3/ports/tornadovm-bulk/src/test/java/com/synexia/m3/cpugpu/CpuRv32iEngineTest.java",
+      "git_blob_sha1": "fc52c6bf206bbab6761ff70ab73abab1bd465a9f",
+      "sha256": "1a2dd4d8ed0304af5b13e1916e319b4665f7372c86927cc92ace35aed3f6c229",
+      "bytes": 5452,
+      "receiving_mode": "EXACT_COMPATIBILITY_SOURCE",
+      "license": "Apache-2.0"
+    },
+    {
+      "donor_path": "m3/cpu-gpu/src/test/java/com/synexia/m3/cpugpu/Elf32RiscVLoaderTest.java",
+      "target_path": "m3/ports/tornadovm-bulk/src/test/java/com/synexia/m3/cpugpu/Elf32RiscVLoaderTest.java",
+      "git_blob_sha1": "ad0643762eb138188f4045dff6682fc7cc6a8d96",
+      "sha256": "f1ef2f7714a09598c8161d7b3d1693595e81d146aea80d6c675d322a669af9ef",
+      "bytes": 3123,
+      "receiving_mode": "EXACT_COMPATIBILITY_SOURCE",
+      "license": "Apache-2.0"
+    },
+    {
+      "donor_path": "m3/cpu-gpu/src/test/java/com/synexia/m3/cpugpu/Rv32iAssemblerTest.java",
+      "target_path": "m3/ports/tornadovm-bulk/src/test/java/com/synexia/m3/cpugpu/Rv32iAssemblerTest.java",
+      "git_blob_sha1": "f3be12117ce47a58fcf78f420664b1efb976df20",
+      "sha256": "40ec048637950268c143a28b431fda950b6af0a2c27d4b9de0b94d293a88112f",
+      "bytes": 1772,
+      "receiving_mode": "EXACT_COMPATIBILITY_SOURCE",
+      "license": "Apache-2.0"
+    },
+    {
+      "donor_path": "m3/cpu-gpu/src/test/java/com/synexia/m3/cpugpu/Rv32iBulkExecutorTest.java",
+      "target_path": "m3/ports/tornadovm-bulk/src/test/java/com/synexia/m3/cpugpu/Rv32iBulkExecutorTest.java",
+      "git_blob_sha1": "1e13ba962f3a2bffbed54c641948bff0abfcccda",
+      "sha256": "084be070a96bb88877251d559e89575f6d7c7f133cfb3f9ecfb9b6e4ef11cd0d",
+      "bytes": 2790,
+      "receiving_mode": "EXACT_COMPATIBILITY_SOURCE",
+      "license": "Apache-2.0"
+    },
+    {
+      "donor_path": "m3/cpu-gpu/src/test/java/com/synexia/m3/cpugpu/TornadoRv32iDifferentialTest.java",
+      "target_path": "m3/ports/tornadovm-bulk/src/test/java/com/synexia/m3/cpugpu/TornadoRv32iDifferentialTest.java",
+      "git_blob_sha1": "3f693094cf74d8cb207b37ebddbd3d21203fda3d",
+      "sha256": "0bb642de93aa25ff42528e64c1775360f339938871c8154602710b5bfe16f3bf",
+      "bytes": 998,
+      "receiving_mode": "EXACT_COMPATIBILITY_SOURCE",
+      "license": "Apache-2.0"
+    }
+  ],
+  "receiving_phase_advanced": false,
+  "qualification": "Source custody only; compiler, tests, accelerator and installed-image results are separate execution receipts."
+}

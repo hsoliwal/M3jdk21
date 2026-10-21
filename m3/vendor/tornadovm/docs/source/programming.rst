@@ -1,0 +1,961 @@
+.. _programming:
+
+Core Programming
+===================
+
+TornadoVM exposes to the programmer task-level, data-level and pipeline-level parallelism via a light Application Programming Interface (API).
+In addition, TornadoVM uses single-source property, in which the code to be accelerated and the host code live in the same Java program.
+
+
+Programming in TornadoVM involves the development of four parts:
+
+1. **Data Representation:** TornadoVM offers a set of data types, built on top of the `Foreign Function & Memory API <https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/foreign/package-summary.html>`_ from Project Panama, to allocate data off-heap and to migrate data from on-heap to off-heap (and vice versa). These off-heap data types are automatically managed by the TornadoVM Runtime and the compiler.
+2. **Expressing parallelism within Java methods:** TornadoVM offers three APIs: one for loop parallelization using Java annotations; a second one for low-level programming using a KernelContext API; and a third one for tile-level programming using a TileContext API.
+   Developers can choose which one to use. The loop API is recommended for non-expert GPU programmers.
+   The KernelContext API is recommended for expert GPU programmers that want more control (access to GPU's local memory, barriers, etc.).
+   The TileContext API is recommended for programmers that want to express the computation over tiles of a tensor and let the CUDA Tile compiler choose the thread mapping (NVIDIA CUDA backend only).
+3. **Selecting the methods to be accelerated using a Task-Graph API:** once Java methods have been identified for acceleration (either using the loop parallel API, the KernelContext API or the TileContext API), Java methods can be grouped together in a graph.
+   TornadoVM offers an API to define the data as well as the Java methods to be accelerated.
+4. Building an **Execution Plan**: From the task-graphs, developers can accelerate all methods that are indicate in that graph on an accelerator. Additionally, through an execution plan in TornadoVM, developers can change the way TornadoVM offloads and runs the code (e.g., by selecting a specific GPU, enabling the profiler, etc.).
+
+1. Data Representation
+-------------------------
+TornadoVM offers a set of off-heap types that encapsulate a `Memory Segment <https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/foreign/MemorySegment.html>`_, a contiguous region of memory outside the Java heap. Below is a list of the native array types, with an arrow pointing from the on-heap primitive array types to their off-heap equivalent in TornadoVM.
+
+
+* ``int[]`` -> ``IntArray``
+* ``float[]`` -> ``FloatArray``
+* ``double[]`` -> ``DoubleArray``
+* ``long[]`` -> ``LongArray``
+* ``char[]`` -> ``CharArray``
+* ``short[]`` -> ``ShortArray``
+* ``byte[]`` -> ``ByteArray``
+
+
+To allocate off-heap memory using the TornadoVM API, each type offers a constructor with one argument that indicates the number of elements that the Memory Segment will contain.
+
+E.g.:
+
+.. code:: java
+
+   // allocate an off-heap memory segment that will contain 16 int values
+   IntArray intArray = new IntArray(16);
+
+Additionally, developers can create an instance of a TornadoVM native array by invoking factory methods for different data representations. In the following examples we will demonstrate the API functions for the ``FloatArray`` type, but the same methods apply for all support native array types. 
+
+.. code:: java
+
+   // from on-heap array to TornadoVM native array
+   public static FloatArray fromArray(float[] values);
+   // from individual items to TornadoVM native array
+   public static FloatArray fromElements(float... values);
+   // from Memory Segment to TornadoVM native array
+   public static FloatArray fromSegment(MemorySegment segment);
+   // from multiple TornadoVM native arrays to single TornadoVM native array
+   public static FloatArray concat(FloatArray... arrays);
+   // from a slice of a TornadoVM native array
+   public FloatArray slice(int offset,int length);
+   // from a FloatBuffer to a TornadoVM native array
+   public FloatArray fromFloatBuffer(FloatBuffer buffer);
+
+The main methods that the off-heap types expose to manage the Memory Segment of each type are presented in the list below. 
+
+.. code:: java
+
+   public void set(int index, float value) // sets a value at a specific index
+      E.g.:
+          FloatArray floatArray = new FloatArray(16);
+          floatArray.set(0, 10.0f); // at index 0 the value is 10.0f
+   public float get(int index) // returns the value of a specific index
+      E.g.:
+          FloatArray floatArray = FloatArray.fromArray(new float[] {2.0f, 1.0f, 2.0f, 5.0f});
+          float floatValue = floatArray.get(3); // returns 5.0f
+   public void clear() // sets the values of the segment to 0
+      E.g.:
+          FloatArray floatArray = new FloatArray(1024);
+          floatArray.clear(); // the floatArray contains 1024 zeros
+   public void init(float value) // initializes the segment with a specific value
+      E.g.:
+   	  FloatArray floatArray = new FloatArray(1024);
+          floatArray.init(1.0f); // the floatArray contains 1024 ones
+   public int getSize() // returns the number of elements in the segment
+      E.g.:
+          FloatArray floatArray = new FloatArray(16);
+          int size = floatArray.getSize(); // returns 16
+   public float[] toHeapArray(); // Converts the data from off-heap to on-heap
+   public long getNumBytesOfSegment(); // Returns the total number of bytes the underlying Memory Segment occupies, including the header bytes
+   public long getNumBytesWithoutHeader(); // Returns the total number of bytes the underlying Memory Segment occupies, excluding the header bytes
+   
+**NOTE:** The methods ``init()`` and ``clear()`` are essential because, contrary to their counterpart primitive arrays which are initialized by default with 0, the new types contain garbage values when first created.
+
+2. Expressing Parallelism within Java Methods
+------------------------------------------------
+
+
+TornadoVM offloads Java methods to heterogeneous hardware such as GPUs and multi-core CPUs for parallel execution.
+Those Java methods usually represents the sequential (single thread) implementation of the work to perform on the accelerator.
+However, TornadoVM does not auto-parallelize Java methods.
+
+Thus, TornadoVM needs a hint about how to parallelize the code.
+TornadoVM has three APIs to achieve this goal: one for loop parallelization using Java annotations; a second one for low-level programming using a KernelContext API; and a third one for tile-level programming using a TileContext API.
+Developers can choose which one to use. The loop API is recommended for non-expert GPU programmers.
+
+
+.. _loop-parallel-api:
+
+Loop Parallel API
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Compute kernels are written in a sequential form (tasks programmed for a single thread execution).
+To express parallelism, TornadoVM exposes two annotations that can be used in loops and parameters:
+a) ``@Parallel`` for annotating parallel loops; and b) ``@Reduce`` for annotating parameters used in reductions.
+
+The following code snippet shows a full example to accelerate Matrix-Multiplication using TornadoVM and the loop-parallel API:
+The two outermost loops can be parallelizable because there are no data dependencies across different iterations.
+Therefore, we can annotate these two loops.
+Note that, since TornadoVM maps parallel loops to Parallel ND-Range for OpenCL, CUDA and PTX, developers can benefit
+from 1D (annotating one parallel loop), 2D (annotating two consecutive parallel loops) and 3D (annotating 3 consecutive parallel loops) in their Java methods.
+
+
+.. include:: codesamples/Compute.java
+   :code: java
+
+
+The code snippet shows a complete example, using the Loop Parallel annotations, the Task Graphs and the execution plan.
+This document explains each part.
+
+
+.. _kernel-context-api:
+
+KernelContext API
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Another way to express compute-kernels in TornadoVM is via the KernelContext API.
+To do so, TornadoVM exposes a ``KernelContext`` with which the application can directly access
+the thread-id, allocate memory in local memory (shared memory on NVIDIA devices), and insert barriers.
+This model is similar to programming compute-kernels in OpenCL and CUDA.
+Therefore, this API is more suitable for GPU expert programmers that want more control or want to port existing CUDA/OpenCL compute kernels into TornadoVM.
+
+The following code-snippet shows the Matrix Multiplication example using the kernel-parallel API:
+
+
+.. include:: codesamples/ComputeKernel.java
+   :code: java
+
+
+Kernel Context
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+``KernelContext`` is a Java object exposed by the TornadoVM API to the developers in order to leverage Kernel Parallel Programming using the
+existing ``TaskGraph`` API.
+An instance of the ``KernelContext`` object is passed to each task that uses the kernel-parallel API.
+
+Additionally, for all tasks using the ``KernelContext`` object, the user must provide a Grid of execution threads to run on the parallel device.
+This grid of threads is similar to the number of threads to be launched using CUDA or OpenCL (Number of threads per block and number of blocks).
+Examples can be found in the ``Grid``
+`unit-tests <https://github.com/beehive-lab/TornadoVM/tree/master/tornado-unittests/src/main/java/uk/ac/manchester/tornado/unittests/grid>`__.
+
+KernelContext Features
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The following table presents the available features that TornadoVM exposes in Java along with the respective OpenCL and CUDA terminology.
+
+.. code:: java
+
+   // Note:
+   kc = new KernelContext();
+
++----------------------------------------------------+-------------------------------+------------------------------------+
+| TornadoVM KernelContext                            | OpenCL                        | CUDA                               |
++====================================================+===============================+====================================+
+| kc.globalIdx                                       | get_global_id(0)              | blockIdx \* blockDim.x + threadIdx |
++----------------------------------------------------+-------------------------------+------------------------------------+
+| kc.globalIdy                                       | get_global_id(1)              | blockIdy \* blockDim.y + threadIdy |
++----------------------------------------------------+-------------------------------+------------------------------------+
+| kc.globalIdz                                       | get_global_id(2)              | blockIdz \* blockDim.z + threadIdz |
++----------------------------------------------------+-------------------------------+------------------------------------+
+| kc.getLocalGroupSize()                             | get_local_size()              | blockDim                           |
++----------------------------------------------------+-------------------------------+------------------------------------+
+| kc.localBarrier()                                  | barrier(CLK_LOCAL_MEM_FENCE)  | \__syncthreads()                   |
++----------------------------------------------------+-------------------------------+------------------------------------+
+| kc.globalBarrier()                                 | barrier(CLK_GLOBAL_MEM_FENCE) | \__syncthreads()                   |
++----------------------------------------------------+-------------------------------+------------------------------------+
+| int[] array = kc.allocateIntLocalArray(size)       | \__local int array[size]      | \__shared__ int array[size]        |
++----------------------------------------------------+-------------------------------+------------------------------------+
+| float[] array = kc.allocateFloatLocalArray(size)   | \__local float array[size]    | \__shared__ float array[size]      |
++----------------------------------------------------+-------------------------------+------------------------------------+
+| long[] array = kc.allocateLongLocalArray(size)     | \__local long array[size]     | \__shared__ long array[size]       |
++----------------------------------------------------+-------------------------------+------------------------------------+
+| double[] array = kc.allocateDoubleLocalArray(size) | \__local double array[size]   | \__shared__ double array[size]     |
++----------------------------------------------------+-------------------------------+------------------------------------+
+
+Both barriers synchronise a work-group (a CUDA block), not the whole grid.
+``__syncthreads()`` already makes a block's prior global and shared memory
+accesses visible to the rest of the block, so it is the correct mapping for
+``globalBarrier()`` as well.
+
+Backend support for the advanced operations
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Not every ``KernelContext`` operation exists on every backend. An operation a
+backend cannot honour is rejected while the task graph is compiled, with a
+message naming the operation — it is never silently replaced by its Java
+fallback, which would run without complaint and produce a wrong result.
+
++-----------------------------------------------------------------+------------+--------+-------+
+| Operation                                                       | CUDA       | OpenCL | Metal |
++=================================================================+============+========+=======+
+| ``atomicAdd`` (IntArray, int[], LongArray)                      | yes        | yes    | yes   |
++-----------------------------------------------------------------+------------+--------+-------+
+| ``atomicAdd`` (FloatArray, DoubleArray)                         | yes        | no     | yes   |
++-----------------------------------------------------------------+------------+--------+-------+
+| ``atomicCAS``, ``atomicExchange``, ``atomicMin``, ``atomicMax`` | local only | no     | no    |
++-----------------------------------------------------------------+------------+--------+-------+
+| ``simdSum``, ``simdShuffleDown``, ``simdBroadcastFirst``        | yes        | no     | yes   |
++-----------------------------------------------------------------+------------+--------+-------+
+| ``allocateHalf2LocalArray``                                     | yes        | no     | no    |
++-----------------------------------------------------------------+------------+--------+-------+
+| ``mma*`` Tensor Core ops (FP16/BF16/INT8/FP8)                   | yes        | no     | no    |
++-----------------------------------------------------------------+------------+--------+-------+
+| ``asyncCopyToLocal`` and friends (``cp.async``, Ampere+)        | yes        | no     | no    |
++-----------------------------------------------------------------+------------+--------+-------+
+| ``swizzleLoadFp16Stride32``, ``swizzleStoreFp16Stride32``       | yes        | no     | no    |
++-----------------------------------------------------------------+------------+--------+-------+
+| ``swizzle*Fp16Stride16``, ``swizzle*Int8``                      | no         | no     | no    |
++-----------------------------------------------------------------+------------+--------+-------+
+| ``simdgroupMatrix*``, ``matrixMultiply8x8``                     | no         | no     | yes   |
++-----------------------------------------------------------------+------------+--------+-------+
+| ``launch``, ``launch3D`` (kernels launched from the device)     | yes        | no     | no    |
++-----------------------------------------------------------------+------------+--------+-------+
+
+``local only`` means the operation is supported when the array was allocated
+with ``KernelContext.allocateIntLocalArray(int)``; a global array is rejected.
+
+Launching kernels from the device (CUDA Dynamic Parallelism)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+On the CUDA backend a kernel can launch other kernels from the device with
+``KernelContext.launch``. This lets a kernel size follow-up work from data that
+only exists on the GPU (a count, a frontier size, a routing decision) without a
+round trip to the host. TornadoVM generates CUDA Dynamic Parallelism 2 code, so
+it needs CUDA 12.0 or newer.
+
+The child kernel is a static ``KernelContext``-style method. It is named with a
+``DeviceKernel`` held in a ``static final`` field, so the JIT compiler can
+resolve it while compiling the parent:
+
+.. code:: java
+
+    static final DeviceKernel CHILD = DeviceKernel.of(MyKernels::child);
+
+    static void parent(KernelContext context, IntArray a, int n) {
+        if (context.globalIdx == 0) {
+            // n threads in blocks of 256; then the child's arguments after its KernelContext
+            context.launch(CHILD, n, 256, a, n);
+        }
+    }
+
+    static void child(KernelContext context, IntArray a, int n) {
+        int i = context.globalIdx;
+        if (i < n) {
+            a.set(i, a.get(i) * 2);
+        }
+    }
+
+The child is compiled into the parent's CUDA module, and the module is linked
+against the CUDA device runtime (``libcudadevrt``). Children can launch kernels
+too, including each other. The main points:
+
+- Every thread that reaches ``launch`` launches its own grid, so guard the call.
+- Sizes are the global size in threads and the block size. The grid is rounded
+  up to whole blocks, so the child must bounds-check its thread index.
+  ``launch3D`` takes three global and three local sizes.
+- Arguments are global arrays and primitives, in the order of the child's
+  parameters after its ``KernelContext``. Local-memory arrays are rejected:
+  local memory belongs to the launching block.
+- ``DeviceLaunchMode`` selects the stream:
+
+  - ``DEFAULT``: the launching block's stream. The child may run while the
+    rest of the parent grid is still running. It sees the launching thread's
+    writes, but not necessarily those of other threads.
+  - ``TAIL``: the child runs once the parent grid has completed, and sees
+    every write the parent grid made.
+  - ``FIRE_AND_FORGET``: the child runs independently.
+
+- A parent cannot wait for its children. The whole tree of launches has
+  completed by the time the host sees the task complete, and arrays the child
+  writes are copied back like any other output.
+- ``--printKernel`` prints the whole module, children included.
+  ``--threadInfo`` also reports every device launch from the device, with the
+  thread that launched it and its global size, local size and number of blocks.
+- A launch that the device rejects (for example an invalid block size, or
+  too many pending launches) does not run the child. The error is printed on
+  the device's standard output.
+- At most 2048 device-side launches may be pending at once by default. A plan
+  that launches more (for example one child per thread block of a large grid)
+  raises the limit with ``executionPlan.withCUDAPendingLaunchCount(n)``, or,
+  for all plans, with ``-Dtornado.cuda.dp.pendingLaunchCount=n``.
+
+See ``tornado-examples/.../kernelcontext/compute/DynamicParallelismRouting.java``
+for a mixture-of-experts style example.
+
+Example
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The following
+`example <https://github.com/beehive-lab/TornadoVM/tree/master/tornado-examples/src/main/java/uk/ac/manchester/tornado/examples/kernelcontext/compute/MatrixMultiplication2DV2.java>`__
+is the Matrix Multiplication implementation using the ``KernelContext`` object for indexing threads and access to local memory. The following
+example also makes use of loop tiling. There are three main steps to leverage the features of the ``KernelContext``:
+
+1. The ``KernelContext`` object is passed as an argument in the method that will be accelerated. This implementation follows the OpenCL
+   implementation description provided in https://github.com/cnugteren/myGEMM.
+
+.. code:: java
+
+   public static void matrixMultiplication(KernelContext context,
+                                          final FloatArray A, final FloatArray B,
+                                          final FloatArray C, final int size) {
+
+       // Index thread in the first dimension ( get_global_id(0) )
+       int row = context.localIdx;
+
+       // Index thread in the second dimension ( get_global_id(1) )
+       int col = context.localIdy;
+
+       int globalRow = TS * context.groupIdx + row;
+       int globalCol = TS * context.groupIdy + col;
+
+       // Create Local Memory via the context
+       float[] aSub = context.allocateFloatLocalArray(TS * TS);
+       float[] bSub = context.allocateFloatLocalArray(TS * TS);
+
+       float sum = 0;
+
+       // Loop over all tiles
+       int numTiles = size/TS;
+       for(int t = 0; t < numTiles; t++){
+
+           // Load one tile of A and B into local memory
+           int tiledRow = TS * t + row;
+           int tiledCol = TS * t + col;
+           aSub[col * TS + row] = A.get(tiledCol * size + globalRow);
+           bSub[col * TS + row] = B.get(globalCol * size + tiledRow]);
+
+           // Synchronise to make sure the tile is loaded
+           context.localBarrier();
+
+           // Perform the computation for a single tile
+           for(int k = 0; k < TS; k++) {
+               sum += aSub[k* TS + row] * bSub[col * TS + k];
+           }
+           // Synchronise before loading the next tile
+           context.localBarrier();
+       }
+
+       // Store the final result in C
+       C.set((globalCol * size) + globalRow, sum);
+   }
+
+2. A TornadoVM program that uses the ``KernelContext`` must use the context with a ``WorkerGrid`` (1D/2D/3D). This is necessary in order
+   to obtain awareness about the dimensions and the sizes of the threads that will be deployed.
+   Therefore, ``KernelContext`` can only work with tasks that are linked with a ``GridScheduler``.
+
+.. code:: java
+
+   // Create 2D Grid of Threads with a 2D Worker
+   WorkerGrid workerGrid = new WorkerGrid2D(size, size);
+
+   // Create a GridScheduler that associates a task-ID with a worker grid
+   GridScheduler gridScheduler = new GridScheduler("s0.t0", workerGrid);
+
+   // Create the TornadoVM Context
+   KernelContext context = new KernelContext();
+
+   // [Optional] Set the local work size
+   workerGrid.setLocalWork(32, 32, 1);
+
+3. Create a ``TornadoExecutionPlan`` and execute:
+
+.. code:: java
+
+   TaskGraph tg = new TaskGraph("s0")
+         .transferToDevice(DataTransferMode.EVERY_EXECUTION, matrixA, matrixB)
+         .task("t0",MxM::compute,context, matrixA, matrixB, matrixC, size)
+         .transferToHost(DataTransferMode.EVERY_EXECUTION, matrixC);
+
+   ImmutableTaskGraph immutableTaskGraph = tg.snapshot();
+   TornadoExecutionPlan executionPlan = new TornadoExecutionPlan(immutableTaskGraph);
+
+   executionPlan.withGridScheduler(gridScheduler)  // Pass the GridScheduler in the execute method
+                .execute();
+
+
+
+Running Multiple Tasks with the Kernel Context
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The TornadoVM Task-Graph can be composed of multiple tasks which can either exploit the ``KernelContext`` features or adhere to the original
+TornadoVM annotations (``@Parallel``, ``@Reduce``).
+
+The following code snippet shows an example of how to combine tasks that require a ``KernelContext`` object with tasks that do not need a ``KernelContext``.
+
+.. code:: java
+
+   WorkerGrid worker = new WorkerGrid1D(size);
+
+   GridScheduler gridScheduler = new GridScheduler();
+   gridScheduler.setWorkerGrid("s02.t0", worker);
+   gridScheduler.setWorkerGrid("s02.t1", worker);
+
+   // Create a Kernel Context object
+   KernelContext context = new KernelContext();
+
+   TaskGraph taskGraph = new TaskGraph("s02") //
+      .transferToDevice(DataTransferMode.EVERY_EXECUTION, a, b) //
+      .task("t0", TestCombinedTaskGraph::vectorAddV2, context, a, b, cTornado) //
+      .task("t1", TestCombinedTaskGraph::vectorMulV2, context, cTornado, b, cTornado) //
+      .task("t2", TestCombinedTaskGraph::vectorSubV2, context, cTornado, b) //
+      .transferToHost(DataTransferMode.EVERY_EXECUTION, cTornado);
+
+   ImmutableTaskGraph immutableTaskGraph = taskGraph.snapshot();
+   TornadoExecutionPlan executor = new TornadoExecutionPlan(immutableTaskGraph);
+
+   executor.withGridScheduler(gridScheduler) //
+           .execute();
+
+
+In this test case, each of the first two tasks uses a separate ``WorkerGrid``.
+The third task does not use a ``WorkerGrid``, and it relies on the TornadoVM Runtime for the scheduling of the threads.
+
+You can see more examples on `GitHub <https://github.com/beehive-lab/TornadoVM/tree/master/tornado-examples/src/main/java/uk/ac/manchester/tornado/examples/kernelcontext>`_.
+
+
+
+.. _tile-context-api:
+
+TileContext API
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The third way to express compute-kernels in TornadoVM is via the TileContext API.
+While the ``KernelContext`` API describes what a *single thread* does, the ``TileContext`` API describes what a
+*single tile block* does over tiles of a tensor: the kernel loads tiles, computes on whole tiles, and stores tiles
+back. TornadoVM compiles such a task through **NVIDIA CUDA Tile** (``nvcc -tilecubin --tile-only``) instead of the
+SIMT path, and the tile compiler decides how many threads back the block, which tensor-core instruction to issue,
+and how the tiles move through shared memory.
+Nothing in this API names a thread, a warp or a fragment, so it is suited to programmers that want tensor-core
+performance without hand-writing the thread mapping.
+
+**This API is only available on the NVIDIA CUDA backend.** It requires the CUDA Toolkit 13.3 or newer, an R580 or
+newer driver, and a GPU with compute capability 8.0 or newer. If any of these is missing, the task fails with
+``TornadoDeviceTileNotSupported`` naming the missing requirement.
+
+A task is a tile task when its kernel method takes a ``TileContext`` as its first parameter, in the same way that a
+leading ``KernelContext`` selects the kernel-parallel API. The following code snippet shows the Matrix
+Multiplication example using the TileContext API:
+
+.. code:: java
+
+   public static void matrixMultiplication(TileContext tc,
+                                           HalfFloatArray A, HalfFloatArray B, FloatArray C,
+                                           int m, int n, int k) {
+
+       // Create a 2D view of each buffer, and split it into tiles
+       PartitionView aView = tc.partition(tc.view(A, m, k), 64, 32);
+       PartitionView bView = tc.partition(tc.view(B, k, n), 32, 64);
+       PartitionView cView = tc.partition(tc.view(C, m, n), 64, 64);
+
+       // The accumulator is a whole tile, not a scalar
+       Tile acc = tc.zeros(DType.F32, 64, 64);
+       for (int step = 0; step < k / 32; step++) {
+           // One tile-level matrix multiply-accumulate (mapped to the Tensor Cores)
+           acc = tc.mma(aView.load(tc.bidX(), step), bView.load(step, tc.bidY()), acc);
+       }
+
+       // Store the resulting tile
+       cView.store(acc, tc.bidX(), tc.bidY());
+   }
+
+As with the ``KernelContext`` API, a tile task must be linked with a ``GridScheduler``. The difference is that the
+``WorkerGrid`` counts **tile blocks, not threads**, and the local work size must not be set: the block is pinned to
+``1x1x1`` by the TornadoVM CUDA tile scheduler.
+
+.. code:: java
+
+   // The worker grid counts TILE BLOCKS, not threads
+   WorkerGrid2D worker = new WorkerGrid2D(m / 64, n / 64);
+   GridScheduler gridScheduler = new GridScheduler("s0.t0", worker);
+
+   TaskGraph taskGraph = new TaskGraph("s0")
+         .transferToDevice(DataTransferMode.EVERY_EXECUTION, A, B)
+         .task("t0", MxM::matrixMultiplication, new TileContext(), A, B, C, m, n, k)
+         .transferToHost(DataTransferMode.EVERY_EXECUTION, C);
+
+   try (TornadoExecutionPlan executionPlan = new TornadoExecutionPlan(taskGraph.snapshot())) {
+       executionPlan.withGridScheduler(gridScheduler) //
+                    .execute();
+   }
+
+There are three rules to keep in mind when programming with the TileContext API:
+
+1. **Tile shapes are compile-time constants and powers of two.** The shape is part of the kernel's type, so a
+   differently shaped variant is a differently compiled kernel. Passing a shape as a method parameter is rejected at
+   sketch time with a message naming the argument; use a literal or a ``static final int``.
+2. **Extents are not constrained.** Views take runtime extents, so the problem size does not specialise the kernel;
+   only the tile shape does.
+3. **The worker grid counts tile blocks**, and the local work size is set by TornadoVM.
+
+Like the other two APIs, the TileContext API is additive: a tile task shares a ``TaskGraph``, a CUDA stream and its
+device buffers with ``@Parallel`` tasks, with ``KernelContext`` tasks and with native library tasks (e.g., cuBLAS),
+so the intermediate results never leave the device. Every ``TileContext`` operation also has a JVM implementation,
+which means that the same Java method runs and can be debugged on the CPU.
+
+TileContext Operations
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The following table presents the main operations that the TileContext API exposes in Java, along with the CUDA Tile
+C++ they are compiled to. Every operation also has a JVM implementation, which is what runs when the same kernel is
+executed as ordinary Java.
+
+.. code:: java
+
+   // Note:
+   tc = new TileContext();          // the tile context
+   pv = tc.partition(view, ...);    // a partition view over a tensor
+
+.. list-table::
+   :widths: 36 28 36
+   :header-rows: 1
+
+   * - TornadoVM TileContext
+     - CUDA Tile C++
+     - Notes
+   * - ``tc.view(array, extents...)``
+     - ``ct::tensor_span``
+     - 1, 2 or 3 extents; the extents may be runtime values
+   * - ``tc.partition(view, tile...)``
+     - ``ct::partition_view``
+     - splits a view into tiles; each tile extent is a power-of-two constant
+   * - ``tc.bidX() tc.bidY() tc.bidZ()``
+     - ``ct::bid().x/.y/.z``
+     - the index of this tile block
+   * - ``tc.numBlocksX() tc.numBlocksY() tc.numBlocksZ()``
+     - ``ct::num_blocks().x/.y/.z``
+     - the grid size, counted in tile blocks
+   * - ``pv.load(blocks...)`` / ``pv.loadMasked(blocks...)``
+     - ``view.load(...)`` / ``view.load_masked(...)``
+     - the masked form zero-pads a partial tile
+   * - ``pv.store(tile, blocks...)`` / ``pv.storeMasked(tile, blocks...)``
+     - ``view.store(...)`` / ``view.store_masked(...)``
+     - the masked form writes only the in-bounds elements
+   * - ``pv.atomicAdd(tile, blocks...)``, ``atomicMin``, ``atomicMax``, ``atomicExchange``, ...
+     - ``ct::atomic_add`` ...
+     - relaxed order, device scope; used to accumulate into a view from many blocks
+   * - ``tc.zeros(dtype, shape...)`` ``ones`` ``full`` ``iota``
+     - ``ct::zeros ct::ones ct::full ct::iota``
+     - create a tile; the ``full`` fill value must be a compile-time constant
+   * - ``tc.add(a, b)`` ``sub`` ``mul`` ``div``
+     - ``+ - * /``
+     - elementwise, with broadcasting: a dimension of extent 1 stretches
+   * - ``tc.scale(tile, s)``
+     - ``tile * (E) s``
+     - no named function in CUDA Tile; unlike a ``full`` fill, ``s`` may be a runtime value
+   * - ``tc.fma(a, b, c)``
+     - ``ct::fma``
+     - elementwise, unlike ``mma``
+   * - ``tc.mma(a, b, acc)``
+     - ``ct::mma``
+     - ``a * b + acc`` on the Tensor Cores; the instruction is the tile compiler's choice
+   * - ``tc.matmul(a, b)``
+     - ``ct::matmul``
+     - ``a * b`` with no accumulator; the result type is inferred from the operands
+   * - ``tc.sum(tile, axis)`` ``prod`` ``allOf`` ``anyOf``
+     - ``ct::sum ct::prod ct::all_of ct::any_of``
+     - reductions over one axis of a rank-2 tile
+   * - ``tc.max(tile, axis)`` / ``tc.min(tile, axis)``
+     - ``ct::reduce_max`` / ``ct::reduce_min``
+     - note the spelling: ``ct::max`` is the elementwise two-operand form
+   * - ``tc.maximum(a, b)`` / ``tc.minimum(a, b)``
+     - ``ct::max`` / ``ct::min``
+     - two operands, elementwise - these are not reductions
+   * - ``tc.exp`` ``exp2`` ``log`` ``log2`` ``sqrt`` ``rsqrt`` ``tanh`` ``sin`` ``cos`` ``abs`` ...
+     - ``ct::exp ct::exp2 ct::log`` ...
+     - elementwise, shape preserved
+   * - ``tc.lessThan`` ``greaterThan`` ``equalTo`` ... and ``tc.select(mask, a, b)``
+     - ``< > ==`` ... and ``ct::select``
+     - a comparison yields a ``DType.PRED`` tile, and ``select`` is its only consumer
+   * - ``tc.transpose(tile)`` ``reshape`` ``broadcast`` ``concat`` ``extract``
+     - ``ct::transpose ct::reshape ct::broadcast ct::cat ct::extract``
+     - shape manipulation; ``reshape`` is the only way to change the rank
+   * - ``tc.cast(tile, dtype)`` / ``tc.bitcast(tile, dtype)``
+     - ``ct::element_cast<E>`` / ``ct::element_bitcast``
+     - there is no ``ct::cast``; a float to integer cast truncates towards zero
+   * - a counted ``for`` loop
+     - ``ct::irange``
+     - write an ordinary Java loop; there is no iterator API, which would allocate in the kernel
+
+The full surface (the remaining math and bitwise operations, the scans, the strided and raw-byte views, the
+element types, the rank supported per operation, the launch hints and the known limitations) is documented in the
+:ref:`CUDA Tile Programming guide <tile_api>`.
+You can see more examples on
+`GitHub <https://github.com/beehive-lab/TornadoVM/tree/master/tornado-examples/src/main/java/uk/ac/manchester/tornado/examples/tile>`__.
+
+
+.. _task-graph-api:
+
+3. Selecting the methods to be accelerated using a Task-Graph API
+-----------------------------------------------------------------
+
+A ``TaskGraph`` is an TornadoVM object that defines and identify which Java methods to be accelerated and the data involved.
+Task-graph defines data to be copied in, and out of the accelerator as well as all tasks (Java methods) to be accelerated.
+Note that a ``TaskGraph`` object does not compute/move data, but rather annotates what to do when the computation in launched.
+As we will see in Step 3, a task-graph is only executed through an execution plan.
+
+
+The following code snippet shows how to instantiate a ``TaskGraph`` TornadoVM object.
+
+.. code:: java
+
+   TaskGraph taskGraph = new TaskGraph(""name");
+
+
+
+A. Defining copies from the host (main CPU) to the device (accelerator).
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+The Task-Graph API also defines a method, named ``transferToDevice`` to set which arrays need to be copied to the target accelerator.
+This method receives two types of arguments:
+
+1. Data Transfer Mode:
+   a. ``EVERY_EXECUTION``: Data is copied from host to device every time a task-graph is executed by an execution plan.
+   b. ``FIRST_EXECUTION``: Data is only copied the first time a task-graph is executed by an execution plan.
+2. All input arrays needed to be copied from the host to the device.
+
+
+The following code snippet sets two arrays (a, b) to be copied from the host to the device every time a task-graph is executed.
+
+
+.. code:: java
+
+   taskGraph.transferToDevice(DataTransferMode.EVERY_EXECUTION, a, b);
+
+
+Note that this call is only used for the definition of the data flow across multiple tasks in a task-graph, and there are no data copies involved.
+The TornadoVM runtime stores which data are associated with each data transfer mode and the actual data transfers take place only during the execution by the execution plan.
+
+
+B. Code definition
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+To identify which Java methods, from all existing Java methods in a Java program, to accelerate.
+This is performed using the ``task`` API call as follows:
+
+
+.. code:: java
+
+   taskGraph.task("sample", Class::method, param1, param2);
+
+
+- The first parameter sets an ID to the task. This is useful if developers want to change device, or other runtime parameters, from the command line.
+- The second parameter is a reference (or a Java lambda expression), to an existing Java method.
+- The rest of the parameters correspond to the function call parameters, as if the method were invoked.
+
+
+Developers can add as many tasks as needed.
+The maximum number of tasks depends on the amount of code that can be shipped to the accelerator.
+
+
+C. Copy out from the device (accelerator) to the host (main CPU).
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Similar to ``transferToDevice``, the ``TaskGraph`` API also offers a call to sync the data back from the device to the host.
+The API call is ``transferToHost`` with the following parameters:
+
+1. Data Transfer Mode:
+   a. ``EVERY_EXECUTION``: Data is copied from the device to the host every time a task-graph is executed by an execution plan.
+   b. ``USER_DEFINED:`` Data is only copied by an execution result under demand. This is an optimization if developers plan to execute the task-graph multiple times and do not want to copy the results every time the execution plan is launched.
+2. All output arrays to be copied from the device to the host.
+
+
+Example:
+
+.. code:: java
+
+   taskGraph.transferToHost(DataTransferMode.EVERY_EXECUTION, output1, output2);
+
+
+.. _execution-plan:
+
+4. Execution Plans
+------------------------------------------------
+
+
+The last step is the creation of an execution plan. An execution plan receives a list of immutable task graphs ready to be executed, as follows:
+
+
+.. code:: java
+
+   TornadoExecutionPlan executionPlan = new TornadoExecutionPlan(itg);
+
+
+What can we do with an execution plan?
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+We can execute an execution plan directly, and TornadoVM will apply a list of default optimisations (e.g., it will run on the default device, using the default thread scheduler).
+
+
+.. code:: java
+
+   executionPlan.execute();
+
+
+
+How can we optimize an execution plan?
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+The execution plan offers a set of methods that developers can use to optimize different execution plans.
+Note that the execution plan operates over all immutable task graphs given in the constructor. Therefore, all immutable task graphs will be executed on the same device in order.
+
+Example:
+
+.. code:: java
+
+   executionPlan.withProfiler(ProfilerMode.SILENT) // Enable Profiling
+       .withWarmUp() //  Perform a warmup (compile and code and install it in a code-cache).
+       .withDevice(device); Select a specific device
+
+
+And then:
+
+.. code:: java
+
+   executionPlan.execute();
+
+
+
+Obtain the result and the profiler
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Every time an execution plan is executed, a new object of type ``TornadoExecutionResult`` is created.
+
+.. code:: java
+
+   TornadoExecutionResult executionResult = executionPlan.execute();
+
+
+
+From the execution result, developers can obtain the result of the TornadoVM profiler:
+
+
+.. code:: java
+
+   executionResult.getProfilerResult();
+
+
+And query the values of the profiling report.
+Note that the TornadoVM profiler works only if enabled in the execution plan (via the ``withProfiler`` method).
+
+
+
+.. _reductions:
+
+Parallel Reductions
+------------------------------------
+
+TornadoVM now supports basic reductions for ``int``, ``long``,\ ``float`` and ``double`` data types for the operators ``+`` and ``*``, ``max`` and ``min``.
+Examples can be found in the ``examples/src/main/java/uk/ac/manchester/tornado/unittests/reductions`` directory on GitHub.
+
+TornadoVM exposes the Java annotation ``@Reduce`` to represent parallel reductions.
+Similarly to the ``@Parallel`` annotation, the ``@Reduce`` annotation is used to identify parallel sections in Java sequential code.
+The annotations is used for method parameter in which reductions must be applied.
+This is similar to OpenMP and OpenACC.
+
+Example:
+
+.. code:: java
+
+   public static void reductionAddFloats(FloatArray input, @Reduce FloatArray result) {
+       for (@Parallel int i = 0; i < input.length; i++) {
+           result.set(0, result.get(0) + input.get(i));
+       }
+    }
+
+The code is very similar to a Java sequential reduction but with ``@Reduce`` and ``@Parallel`` annotations.
+The ``@Reduce`` annotation is associated with a variable, in this case, with the ``result`` float
+array.
+Then, we annotate the loop with ``@Parallel``. The OpenCL/CUDA JIT compilers generate OpenCL/CUDA parallel version for this code that can
+run on GPU and CPU.
+
+Creating reduction tasks
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+TornadoVM generates different OpenCL/PTX code depending on the target device.
+Internally, if the target is a GPU, TornadoVM performs full and
+parallel reductions using the threads within the same OpenCL work-group.
+If the target is a CPU, TornadoVM performs full reductions within the
+same thread-id. Besides, TornadoVM automatically resizes the output
+variables according to the number of work-groups and threads selected.
+
+For CUDA code generation, TornadoVM will always perform full and parallel
+reductions using the threads within the same CUDA block.
+
+.. code:: java
+
+   FloatArray input = new FloatArray(SIZE);
+   FloatArray result = new FloatArray(1);
+
+   Random r = new Random();
+   IntStream.range(0, SIZE).sequential().forEach(i -> {
+       input.set(i, r.nextFloat());
+   });
+
+   TaskGraph taskGraph = new TaskGraph("s0") //
+                .transferToDevice(DataTransferMode.EVERY_EXECUTION, input) //
+                .task("t0", TestReductionsFloats::reductionAddFloats, input, result) //
+                .transferToHost(DataTransferMode.EVERY_EXECUTION, result);
+
+   ImmutableTaskGraph immutableTaskGraph = taskGraph.snapshot();
+   TornadoExecutionPlan executionPlan = new TornadoExecutionPlan(immutableTaskGraph);
+   executionPlan.execute();
+
+
+Map/Reduce
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+This section shows an example of how to perform map/reduce operations with TornadoVM.
+Each of the operations corresponds to a task as follows
+in the next example:
+
+.. code:: java
+
+
+   public class ReduceExample {
+       public static void map01(IntArray a, IntArray b, IntArray c) {
+           for (@Parallel int i = 0; i < a.length; i++) {
+               c.set(i, a.get(i) + b.get(i));
+           }
+       }
+
+       public static void reduce01(IntArray c, @Reduce IntArray result) {
+           result.set(0, 0);
+           for (@Parallel int i = 0; i < c.length; i++) {
+               result.set(0, result.get(0) + c.get(i));
+           }
+       }
+
+       public void testMapReduce() {
+            IntArray a = new IntArray(BIG_SIZE);
+            IntArray b = new IntArray(BIG_SIZE);
+            IntArray c = new IntArray(BIG_SIZE);
+            IntArray result = IntArray.fromElements(0);
+
+            IntStream.range(0, BIG_SIZE).parallel().forEach(i -> {
+               a[i] = 10;
+               b[i] = 2;
+            });
+
+            TaskGraph taskGraph = new TaskGraph("s0") //
+                .transferToDevice(DataTransferMode.EVERY_EXECUTION, a, b, c) //
+                .task("t0", TestReductionsIntegers::map01, a, b, c) //
+                .task("t1", TestReductionsIntegers::reduce01, c, result) //
+                .transferToHost(DataTransferMode.EVERY_EXECUTION, result);
+            ImmutableTaskGraph immutableTaskGraph = taskGraph.snapshot();
+            TornadoExecutionPlan executionPlan = new TornadoExecutionPlan(immutableTaskGraph);
+            TornadoExecutionResult executionResult = executionPlan.execute();
+        }
+   }
+
+Reduction with dependencies
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+TornadoVM also supports reductions using data dependencies.
+The next example illustrates this case with the ``PI`` computation.
+
+.. code:: java
+
+   public static void computePi(FloatArray input, @Reduce FloatArray result) {
+       for (@Parallel int i = 1; i < input.length; i++) {
+           float value = (float) (Math.pow(-1, i + 1) / (2 * i - 1));
+           result.set(0, result.get(0) + value + input.get(i));
+       }
+   }
+
+
+.. _dynamic_reconfiguration:
+
+Dynamic Reconfiguration (Research Feature)
+-------------------------------------------
+
+The dynamic configuration in TornadoVM is the capability to migrate tasks at runtime from one device to another (e.g., from one GPU to another, or from one CPU to GPU, etc).
+
+.. important::
+
+   Dynamic reconfiguration is **not** enabled automatically and is currently maintained as a research feature rather than a core runtime capability. It must be explicitly opted into through the execution plan API, as follows:
+
+
+.. code:: java
+
+   executionPlan.withDynamicReconfiguration(Policy.PERFORMANCE, DRMode.Parallel)
+                .execute();
+
+
+
+The `withDynamicReconfiguration` call receives two arguments:
+
+1. Policy: dynamically changes devices based on one of the following policies:
+
+   -  `PERFORMANCE`: after a warmup of all devices (JIT compilation is excluded). The TornadoVM runtime evaluates the execution for all devices before making a decision.
+
+   - `END_2_END`: best performing device including the warm-up phase (JIT compilation and buffer allocations). The TornadoVM runtime evaluates the execution for all devices before making a decision.
+
+   - `LATENCY`: fastest device to return. The TornadoVM runtime does not evaluate the execution for all devices before making a decision, but rather it switches context with the first device that finishes the execution.
+
+
+.. _batch-processing:
+
+Batch Computing Processing
+--------------------------
+
+TornadoVM supports batch processing through the following API call ``withBatch`` of the ``TornadoExecutionPlan`` API.
+This was mainly designed to run big data applications in which host data is much larger than the device memory capacity.
+In these cases, developers can enable batch processing by simply calling ``withBatch`` in their execution plans.
+
+.. code:: java
+
+   int size = 2110000000;
+   FloatArray arrayA = new FloatArray(size); // Array of 8440MB
+   FloatArray arrayB = new FloatArray(size); // Array of 8440MB
+
+   TaskGraph taskGraph = new TaskGraph("s0") //
+         .transferToDevice(DataTransferMode.FIRST_EXECUTION, arrayA) //
+         .task("t0", TestBatches::compute, arrayA, arrayB) //
+         .transferToHost(DataTransferMode.EVERY_EXECUTION, arrayB);
+
+   ImmutableTaskGraph immutableTaskGraph = taskGraph.snapshot();
+   TornadoExecutionPlan executor = new TornadoExecutionPlan(immutableTaskGraph);
+   executor.withBatch("512MB") // Run in blocks of 512MB
+           .execute();
+
+
+The batch method-call receives a Java string representing the batch to be allocated, copied-in and copied-out to/from the heap of the target device.
+
+Examples of allowed sizes are:
+
+.. code:: java
+
+   batch("XMB");   // Express in MB (X is an int number)
+   batch("ZGB");   // Express in GB (Z is an int number)
+
+Current Limitations of Batch Processing
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+There is a set of limitations with the current implementation of batch processing.
+
+1. All arrays passed to the input methods to be compiled to the target device have to have the total size and element size
+(e.g. combining FloatArray and IntArray is possible).
+2. We only support arrays of primitives that are passed as arguments. This means that scope arrays in batches are not currently supported.
+3. All bytecodes make use of the same OpenCL command queue / CUDA stream.
+4. Matrix or non-regular batch distributions. (E.g., MxM would need to be split by rows in matrix-A and columns in matrix-B).
+
