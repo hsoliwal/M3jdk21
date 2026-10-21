@@ -1,4 +1,5 @@
 /* SPDX-License-Identifier: Apache-2.0 */
+/* Modified 2026-10-20: restore admitted donor null-result refusal and local cleanup. */
 #include <jni.h>
 #include <stdint.h>
 #include <stdlib.h>
@@ -96,7 +97,11 @@ Java_com_m3_arrays_M3ArrayNative_nativeConcatenateUtf16(
   jsize destination = 0;
   for (jsize index = 0; index < count; index++) {
     jcharArray segment = (jcharArray)(*env)->GetObjectArrayElement(env, segments, index);
-    if (segment == NULL) return NULL;
+    if (segment == NULL) {
+      (*env)->DeleteLocalRef(env, result);
+      throw_illegal(env, "null UTF-16 segment");
+      return NULL;
+    }
     jsize length = (*env)->GetArrayLength(env, segment);
     jsize source = 0;
     while (source < length) {
