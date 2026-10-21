@@ -1,0 +1,12 @@
+pass	file	behavior_atom	category	evaluation	action	evidence
+1	M3StateMaskHistogram.java	countMatching(required,forbidden)	state mask inclusion-exclusion	Original 2^F up to256 bucket lookups; correct and stable	Preserve original for F<=U	Source preimage ce6703d190c024bcf6ea5d4eb91db8ab7f6da087
+2	M3StateMaskHistogram.java	free state subset enumeration	LeetCode subsets bitmask	Exact[required|subset] over all U unconstrained bits; no allocation	Inline and atomize alternate when U<F	No challenge source code copied
+3	M3StateMaskHistogram.java	popcount branch selector	LeetCode popcount	2^min(U,F) <=16 for all masks, no per-state object	Patternize with original zero/overlap mask admission	Independent 1048576 local mask pair comparisons
+4	M3StateMaskHistogram.java	canonical source comment	GFG inclusion exclusion	Explain 8-bit partition and bound, retain exact existing API	Comment bounded choice	Public ABI unchanged
+5	m3_state_mask_histogram.c	JNI aligned/indexed hist	Existing first-party C17 native	Already traverses source physical offsets; no new native routine	KEEP exact JNI source untouched	Git blob 89a82a00206d1d486b86a5ce2daa2a6792a48fd1
+6	M3IndexMaskCompactor.java	one-pass byte mask selection	JDK/JNI position selection	Existing owner selectedCount semantics and signed masks	Cross-check but do not modify	Test selectable positions against original histogram
+7	M3IndexPathMasks.java	32-bit physical offset path	mask and index manipulation	Original JNI/Java orderedRows and physicalOffsets	Use as independent oracle	12 randomized duplicate and signed/reversed paths
+8	M3FilteredViews.java and M3CollectionViews.java	live sorted/filtered wrappers	Java JDK comparator semantics	Separate pending PRs own live predicate callbacks	No source edit	Review chronology and no duplicate runtime
+9	M3AST/M3File/String	one file one parse	M3JDK21 owner invariants	Do not introduce another input read or AST owner	No source edit	Existing product source unchanged
+10	GitHub	Product nested PR	Superset PR1680 already retains five previously qualified source heads	Base this atom branch on real superset head	No clobbering historical native/JDK work
+11	Synexia	recipe-first serial pass	Inline Atomize Patternize Comment / Maven	JDK21/Java/JNI proof and full source seals before promotion	Apply canonical source-sealed recipe	Source preimage and fixed-point refusal tests
