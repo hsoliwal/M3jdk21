@@ -1,0 +1,3 @@
+trigger	observed	behavioral_atom	guard	lesson	state
+source audit	Subtree physical node IDs can be interleaved with unrelated parents	M3ASTIndex.selectedSubtree	M3ASTSelectionContract#directed	Never treat a numeric ID interval as a tree subtree; use original parent/next topology	CANDIDATE_HOSTED_GATE_PENDING
+source audit	Repeated consumer filters can manufacture redundant AST or temporary node objects	M3ASTIndex.forEachSelectedNode	M3ASTSelectionContract#randomized	Filter shared primitive arrays and interned kind IDs before allocating a consumer-facing model	CANDIDATE_HOSTED_GATE_PENDING
