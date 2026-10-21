@@ -103,3 +103,37 @@ Spliterator atom passed `javac --release 21 -Xlint:all -Werror`
 and **4,006** checks. Maven/OpenRewrite focused tests, the patched
 whole-JDK build/jtreg, native JNI and UI rendering suites remain **NOT RUN**.
 No benchmark or new JNI symbol is claimed.
+
+## Continuation — original owner CopyOnWrite bulk mutation (pass 4)
+
+The original `java.util.CollectionViews.FilteredCollection.removeMatching` still
+used `Iterator.remove` for every backing type. JDK 21 `CopyOnWriteArrayList`
+and `CopyOnWriteArraySet` snapshot iterators prohibit removal, even though
+the actual owning collections offer `removeIf`. The first-party
+`m3/collections/src/main/java/com/m3/collections/M3CollectionViews.java`
+already contains the exact owner-sensitive correction. This pass transfers
+only that existing private method atom into `java.base`.
+
+- Preimage source Git blob `1df992f3258e3b8573003172d9b7ea7083ac5e18`
+- Final source Git blob `8563e257b27a9702514dfbd7978ddcbaa8959e54`
+- Final UTF-8 SHA-256 `a19d6a62821d81bc426ae14fb0f7bf5e9fad2efff6d68a232bc4a8b05b80ca8f`
+- Exact COW owners use their original `removeIf` with the composed
+  `visible(element) && condition.test(element)` predicate. Every other
+  collection keeps its original iterator-removal path.
+- Existing `clear`, `removeIf`, `removeAll` and `retainAll`
+  now share the same backed mutation atom, with no new public signature,
+  retained payload arrays, Entry objects, JNI ABI or compatibility layer.
+
+Added product test:
+`test/jdk/java/util/CollectionViews/FilteredCopyOnWriteBulkTest.java`.
+It covers COW List/Set, hidden equality and physical row order, no-op behavior,
+non-COW fallback and 10,000 seeded randomized comparisons.
+
+**Executed on local Java21:** independently source-extracted first-party
+`removeMatching` under `javac --release 21 -Xlint:all -Werror`
+passed **20,012** checks, including 10,000 randomized differential trials.
+The exact product test, patched full JDK build/jtreg, Maven/OpenRewrite
+fixture, JNI parity and SWT/Nebula/GEF/RWT integration are **NOT RUN**.
+
+Canonical build-time source-sealed pass and donor catalogue remain on
+[Synexia PR #12865](https://github.com/hsoliwal/com.synexia/pull/12865).
