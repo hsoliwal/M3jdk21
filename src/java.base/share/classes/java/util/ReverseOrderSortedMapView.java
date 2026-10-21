@@ -31,6 +31,13 @@ package java.util;
  * TODO: copy in equals and hashCode from AbstractMap
  */
 class ReverseOrderSortedMapView<K, V> extends AbstractMap<K, V> implements SortedMap<K, V> {
+    // Null is an ordinary key when the comparator admits it; state and bounds
+    // use compact bit masks rather than treating that key as an absent sentinel.
+    private static final int HAS_HEAD = 1;
+    private static final int HAS_TAIL = 2;
+    private static final int READY = 4;
+    private static final int CAN_REMOVE = 8;
+    private static final int EXHAUSTED = 16;
     final SortedMap<K, V> base;
     final Comparator<? super K> cmp;
 
@@ -174,18 +181,18 @@ class ReverseOrderSortedMapView<K, V> extends AbstractMap<K, V> implements Sorte
 
     public SortedMap<K, V> subMap(K fromKey, K toKey) {
         if (cmp.compare(fromKey, toKey) <= 0) {
-            return new Submap(fromKey, toKey);
+            return new Submap(fromKey, toKey, HAS_HEAD | HAS_TAIL);
         } else {
             throw new IllegalArgumentException();
         }
     }
 
     public SortedMap<K, V> headMap(K toKey) {
-        return new Submap(null, toKey);
+        return new Submap(null, toKey, HAS_TAIL);
     }
 
     public SortedMap<K, V> tailMap(K fromKey) {
-        return new Submap(fromKey, null);
+        return new Submap(fromKey, null, HAS_HEAD);
     }
 
     // ========== Infrastructure ==========
@@ -194,27 +201,29 @@ class ReverseOrderSortedMapView<K, V> extends AbstractMap<K, V> implements Sorte
         return new Iterator<>() {
             SortedMap<K, V> root = map;
             SortedMap<K, V> view = map;
-            K prev = null;
+            K prev;
+            int state;
 
             public boolean hasNext() {
-                return ! view.isEmpty();
+                return !view.isEmpty();
             }
 
             public K next() {
                 if (view.isEmpty())
                     throw new NoSuchElementException();
-                K k = prev = view.lastKey();
-                view = root.headMap(k);
-                return k;
+                K key = view.lastKey();
+                view = root.headMap(key);
+                prev = key;
+                state |= CAN_REMOVE;
+                return key;
             }
 
             public void remove() {
-                if (prev == null) {
+                if ((state & CAN_REMOVE) == 0)
                     throw new IllegalStateException();
-                } else {
-                    root.remove(prev);
-                    prev = null;
-                }
+                root.remove(prev);
+                prev = null;
+                state &= ~CAN_REMOVE;
             }
         };
     }
@@ -311,74 +320,81 @@ class ReverseOrderSortedMapView<K, V> extends AbstractMap<K, V> implements Sorte
      * because of the asymmetry between from-inclusive and to-exclusive.
      */
     class Submap extends AbstractMap<K, V> implements SortedMap<K, V> {
-        final K head; // head key, or negative infinity if null
-        final K tail; // tail key, or positive infinity if null
+        final K head;
+        final K tail;
+        final int bounds; // A present bound may be null when the comparator permits it.
 
-        @SuppressWarnings("unchecked")
         Submap(K head, K tail) {
+            this(head, tail, (head == null ? 0 : HAS_HEAD) | (tail == null ? 0 : HAS_TAIL));
+        }
+
+        Submap(K head, K tail, int bounds) {
             this.head = head;
             this.tail = tail;
+            this.bounds = bounds;
         }
 
-        // returns whether e is above the head, inclusive
-        boolean aboveHead(K k) {
-            return head == null || cmp.compare(k, head) >= 0;
+        // Inclusive lower bound in the reversed comparator.
+        boolean aboveHead(K key) {
+            return (bounds & HAS_HEAD) == 0 || cmp.compare(key, head) >= 0;
         }
 
-        // returns whether e is below the tail, exclusive
-        boolean belowTail(K k) {
-            return tail == null || cmp.compare(k, tail) < 0;
+        // Exclusive upper bound in the reversed comparator.
+        boolean belowTail(K key) {
+            return (bounds & HAS_TAIL) == 0 || cmp.compare(key, tail) < 0;
+        }
+
+        // A nested exclusive upper endpoint may equal the parent's tail.
+        boolean atOrBelowTail(K key) {
+            return (bounds & HAS_TAIL) == 0 || cmp.compare(key, tail) <= 0;
         }
 
         Iterator<Entry<K, V>> entryIterator() {
             return new Iterator<>() {
-                Entry<K, V> cache = null;
-                K prevKey = null;
-                boolean dead = false;
-                Iterator<Entry<K, V>> it = descendingEntryIterator(base);
+                Entry<K, V> cache;
+                K prevKey;
+                int state;
+                final Iterator<Entry<K, V>> it = descendingEntryIterator(base);
 
                 public boolean hasNext() {
-                    if (dead)
-                        return false;
-
-                    if (cache != null)
+                    if ((state & READY) != 0)
                         return true;
-
+                    if ((state & EXHAUSTED) != 0)
+                        return false;
                     while (it.hasNext()) {
-                        Entry<K, V> e = it.next();
-
-                        if (! aboveHead(e.getKey()))
+                        Entry<K, V> entry = it.next();
+                        if (!aboveHead(entry.getKey()))
                             continue;
-
-                        if (! belowTail(e.getKey())) {
-                            dead = true;
+                        if (!belowTail(entry.getKey())) {
+                            state |= EXHAUSTED;
                             return false;
                         }
-
-                        cache = e;
+                        cache = entry;
+                        state |= READY;
                         return true;
                     }
-
+                    state |= EXHAUSTED;
                     return false;
                 }
 
                 public Entry<K, V> next() {
-                    if (hasNext()) {
-                        Entry<K, V> e = cache;
-                        cache = null;
-                        prevKey = e.getKey();
-                        return e;
-                    } else {
+                    if (!hasNext())
                         throw new NoSuchElementException();
-                    }
+                    Entry<K, V> entry = cache;
+                    cache = null;
+                    prevKey = entry.getKey();
+                    state = (state & ~READY) | CAN_REMOVE;
+                    return entry;
                 }
 
                 public void remove() {
-                    if (prevKey == null) {
+                    if ((state & CAN_REMOVE) == 0)
                         throw new IllegalStateException();
-                    } else {
-                        base.remove(prevKey);
-                    }
+                    // hasNext() may prefetch the next mapping. Remove the last
+                    // returned representative, not the inner cursor's last.
+                    base.remove(prevKey);
+                    prevKey = null;
+                    state &= ~CAN_REMOVE;
                 }
             };
         }
@@ -448,24 +464,24 @@ class ReverseOrderSortedMapView<K, V> extends AbstractMap<K, V> implements Sorte
 
         public SortedMap<K, V> subMap(K from, K to) {
             if (aboveHead(from) && belowTail(from) &&
-                aboveHead(to) && belowTail(to) &&
+                aboveHead(to) && atOrBelowTail(to) &&
                 cmp.compare(from, to) <= 0) {
-                return new Submap(from, to);
+                return new Submap(from, to, HAS_HEAD | HAS_TAIL);
             } else {
                 throw new IllegalArgumentException();
             }
         }
 
         public SortedMap<K, V> headMap(K to) {
-            if (aboveHead(to) && belowTail(to))
-                return new Submap(head, to);
+            if (aboveHead(to) && atOrBelowTail(to))
+                return new Submap(head, to, bounds | HAS_TAIL);
             else
                 throw new IllegalArgumentException();
         }
 
         public SortedMap<K, V> tailMap(K from) {
             if (aboveHead(from) && belowTail(from))
-                return new Submap(from, tail);
+                return new Submap(from, tail, bounds | HAS_HEAD);
             else
                 throw new IllegalArgumentException();
         }
