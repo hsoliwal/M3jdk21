@@ -1,0 +1,23 @@
+{
+  "status": "PASS",
+  "scope": "focused-tooling-test-compile-only",
+  "artifact_resolution": "online bootstrap; not source-vendored reactor proof",
+  "command": [
+    "/tmp/m3-build-tools/apache-maven-3.9.9/bin/mvn",
+    "-B",
+    "-ntp",
+    "-f",
+    "/workspace/scratch/206049dfb270/synexia/synexia-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/pom.xml",
+    "-Dmaven.repo.local=/tmp/m3-build-m2",
+    "-s",
+    "/workspace/scratch/206049dfb270/canonical-work/maven-proxy-settings.xml",
+    "-U",
+    "test-compile"
+  ],
+  "cwd": "/workspace/scratch/206049dfb270",
+  "observed_at": "2026-10-21T01:01:36.283357+00:00",
+  "exit_code": 0,
+  "duration_seconds": "10.22",
+  "log_sha256": "351ab258b2aa410682d9eaee5dfe20570e5ea6c044dd03a580f8bf51a5a5ba51",
+  "pom_sha256": "934fb8b8fdad025d77f41166306de9f1148fd786a81db811da85b301c6af0bd1"
+}

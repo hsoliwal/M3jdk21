@@ -1,0 +1,145 @@
+{
+  "record_type": "Target observations for canonical recipe-owned memory; not itself a MOP-RCM admission event",
+  "receiver_commit": "2779aba3f98f31c324be43f731be7914e1a05935",
+  "handoff_sha256": "0af116bf45c1874344e3a262651851e817b973e627c798933967099e5a19adef",
+  "records": [
+    {
+      "atom": "strict-sorted-endpoint",
+      "trigger": "Both actual frozen-baseline endpoint modes throw NoSuchElementException instead of unconditional UnsupportedOperationException.",
+      "cause": "Inherited JDK defaults inspect an empty view before rejecting mutation.",
+      "correction": "Exact four PR1554 files; newer PR1616/1619 overlap is byte-identical.",
+      "fixtures": [
+        "evidence/BASELINE_ENDPOINT_PRIVATE.log",
+        "evidence/BASELINE_ENDPOINT_FACADE.log"
+      ],
+      "status": "BASELINE_FAILURE_REPRODUCED; CANDIDATE_RUNTIME_PENDING",
+      "limits": "Declared endpoint default/declaring-class reflection intentionally changes; descriptor and comparison receipts required.",
+      "fixture_seals": [
+        {
+          "path": "evidence/BASELINE_ENDPOINT_PRIVATE.log",
+          "sha256": "996881961667ddf64daec46c8af81a53aba0b2d5d0b6af9fb0eb64b03f221ff9",
+          "bytes": 907
+        },
+        {
+          "path": "evidence/BASELINE_ENDPOINT_FACADE.log",
+          "sha256": "1573f5f40170680a3219157ed0bee411a0d30e2014c9c21ff04fc915041e3b54",
+          "bytes": 756
+        }
+      ]
+    },
+    {
+      "atom": "masked-sort-selected-directory",
+      "trigger": "Current method selects a private directory then sorted() copies it and allocates a second wrapper.",
+      "cause": "Two-stage composition fails to reuse the fresh selection directory.",
+      "correction": "Reuse existing private stable sorter as filteredSorted already does; no new storage owner or JNI code.",
+      "fixtures": [
+        "evidence/BASELINE_MASKED_SORT_JAVA.log",
+        "evidence/BASELINE_ALLOCATION_JAVA.log"
+      ],
+      "status": "BASELINE_ORACLE_PASS_72202; CANDIDATE_RUNTIME_AND_COST_PENDING",
+      "limits": "Independent insertion content oracle plus existing pipeline callback tape; allocation only under -Xint, no throughput claim.",
+      "fixture_seals": [
+        {
+          "path": "evidence/BASELINE_MASKED_SORT_JAVA.log",
+          "sha256": "3ea0517db985a4ba1e863c92ff6863b4a76aadcd2dc3396e1b619aa1aa015582",
+          "bytes": 305
+        },
+        {
+          "path": "evidence/BASELINE_ALLOCATION_JAVA.log",
+          "sha256": "95948a932663fafc0a43056ab038de5c93ff70782157d61b2d5f716aa6c67c3c",
+          "bytes": 827
+        }
+      ]
+    },
+    {
+      "atom": "complete-existing-native-library-closure",
+      "trigger": "Actual baseline pack refuses nine existing compactor exports against its one-symbol allowlist.",
+      "cause": "Stale ABI list and omitted window C source; pathmask library also absent from original pack.",
+      "correction": "Link unchanged compactor9 plus window2; separate pathmask1; compare exact generated-header and exported names and exact strip-debug installed bytes.",
+      "fixtures": [
+        "evidence/BASELINE_PACK_HYDRATED.log",
+        "baseline/pack/native-symbols.log",
+        "evidence/CANDIDATE_ABI_REFUSALS.log"
+      ],
+      "status": "BASELINE_ABI_FAILURE_REPRODUCED; EIGHT_REFUSAL_TESTS_PASS; INSTALLED_RUNTIME_PENDING",
+      "limits": "A compactor-only nine-symbol repair is refused. No C implementation or native declaration change.",
+      "fixture_seals": [
+        {
+          "path": "evidence/BASELINE_PACK_HYDRATED.log",
+          "sha256": "de06f709023c0c8a5cd1534c54e41e57374eee3904f3a6e9009d45f957333f9d",
+          "bytes": 1047
+        },
+        {
+          "path": "baseline/pack/native-symbols.log",
+          "sha256": "a1d61f611350d03c87b8eb45c40b66170d9de955f6bf84beadaaf6b9f11ab242",
+          "bytes": 896
+        },
+        {
+          "path": "evidence/CANDIDATE_ABI_REFUSALS.log",
+          "sha256": "4813f0bdbc5a4864283aec3b8233fd2aeb0e919dfd7e177d97efa84b40e12ca2",
+          "bytes": 1312
+        }
+      ]
+    },
+    {
+      "atom": "source-launcher-closure",
+      "trigger": "Owning Maven cannot resolve the source-version launcher; original launcher verifier duplicates m3/vendor in provenance paths.",
+      "cause": "Incomplete build source closure plus wrong repository root and receipt revision key.",
+      "correction": "Exact PR1618 verifier; PR1616-derived one ordered launcher dependency entry; two existing workflow triggers.",
+      "fixtures": [
+        "evidence/initial-missing-source-launcher/BASELINE_OWNING_MAVEN.log",
+        "evidence/BASELINE_LAUNCHER_SOURCE_REFUSAL.log",
+        "evidence/LAUNCHER_SOURCE_COMPARISON.json"
+      ],
+      "status": "BASELINE_SOURCE_REFUSAL_REPRODUCED; CORRECTED_SOURCE_BUILD_PENDING",
+      "limits": "No launcher Java/POM/provenance/license edits; no runtime assertions skipped. The initial owning run executed zero tests and is a dependency blockage.",
+      "fixture_seals": [
+        {
+          "path": "evidence/initial-missing-source-launcher/BASELINE_OWNING_MAVEN.log",
+          "sha256": "6e259f013ed936361b128cba47ba56e07dfcc532a2a026624139fb9dc5f1f532",
+          "bytes": 2836
+        },
+        {
+          "path": "evidence/BASELINE_LAUNCHER_SOURCE_REFUSAL.log",
+          "sha256": "56535ba73ec40a9d55ff1a6298247e5ae45fc802d97bb14ede99ec3318264be0",
+          "bytes": 1161
+        },
+        {
+          "path": "evidence/LAUNCHER_SOURCE_COMPARISON.json",
+          "sha256": "1e5771655825b63a3b6bf748dc641a8e245317b7cc45fb39985d7d3a5da7fdab",
+          "bytes": 910
+        }
+      ]
+    },
+    {
+      "atom": "environment-bootstrap",
+      "trigger": "Direct Maven DNS and proxy TLS trust failed before source compilation.",
+      "cause": "Resolver needs explicit environment proxy and Java needs the preinstalled OS CA truststore.",
+      "correction": "Task-local proxy settings and javax.net.ssl.trustStore=/etc/ssl/certs/java/cacerts; TLS verification remains enabled.",
+      "fixtures": [
+        "evidence/initial-direct-dns-refusal/BUILD_apiguardian-api.log",
+        "evidence/initial-proxy-trust-refusal/BUILD_apiguardian-api.log",
+        "evidence/SOURCE_DEPENDENCY_BUILD.json"
+      ],
+      "status": "NINE_SOURCE_OWNERS_COMPILE_PACKAGE_VERIFY_PASS",
+      "limits": "Maven/SDK/build-plugin cache artifacts are not claimed source-built; complete source closure awaits launcher.",
+      "fixture_seals": [
+        {
+          "path": "evidence/initial-direct-dns-refusal/BUILD_apiguardian-api.log",
+          "sha256": "b905696c1ff23328bf9b9d656c07bc9f0e1018f82792d1f2c33e7b5830e89d2c",
+          "bytes": 1753
+        },
+        {
+          "path": "evidence/initial-proxy-trust-refusal/BUILD_apiguardian-api.log",
+          "sha256": "b8e8371390d4b10fcf405ab5c4b46b9bce1beb14e05e5bc12372aff8d98d70a0",
+          "bytes": 1945
+        },
+        {
+          "path": "evidence/SOURCE_DEPENDENCY_BUILD.json",
+          "sha256": "998180164fb65feb7f7e77381caa1b295beab3ecb7b0c370fc82cd7430d36515",
+          "bytes": 19919
+        }
+      ]
+    }
+  ]
+}

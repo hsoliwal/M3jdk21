@@ -1,0 +1,154 @@
+{
+  "status": "PASS",
+  "checks": [
+    {
+      "event": {
+        "path": "memory/events/3e877856e3f14207fece0d3f69c627ef420480da61a94b4210b4504ef5fc7616.json",
+        "sha256": "3e877856e3f14207fece0d3f69c627ef420480da61a94b4210b4504ef5fc7616"
+      },
+      "command": [
+        "/tmp/m3-build-tools/jdk-21.0.12.1+1/bin/java",
+        "-cp",
+        "/workspace/scratch/206049dfb270/synexia/synexia-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/proof/memory-conformance-001/classes:/tmp/m3-build-m2/com/fasterxml/jackson/core/jackson-core/2.16.1/jackson-core-2.16.1.jar",
+        "com.synexia.rewrite.memory.M3RecoveryMemory",
+        "check",
+        "/workspace/scratch/206049dfb270/synexia/synexia-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/memory/events/3e877856e3f14207fece0d3f69c627ef420480da61a94b4210b4504ef5fc7616.json",
+        "/workspace/scratch/206049dfb270/synexia/synexia-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021",
+        "/workspace/scratch/206049dfb270/synexia/synexia-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/memory/events"
+      ],
+      "exit_code": 0,
+      "log": {
+        "path": "proof/memory-integrity-003/3e877856e3f14207fece0d3f69c627ef420480da61a94b4210b4504ef5fc7616.log",
+        "sha256": "23e723ebc35ee770884bde06c98c9563e21d27cd16c34a5840334c81fad7a66d"
+      }
+    },
+    {
+      "event": {
+        "path": "memory/events/115767aa323e2ea6db2f6de6b13641157abc0f68ef45bbcfeeaeabc7e84698dd.json",
+        "sha256": "115767aa323e2ea6db2f6de6b13641157abc0f68ef45bbcfeeaeabc7e84698dd"
+      },
+      "command": [
+        "/tmp/m3-build-tools/jdk-21.0.12.1+1/bin/java",
+        "-cp",
+        "/workspace/scratch/206049dfb270/synexia/synexia-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/proof/memory-conformance-001/classes:/tmp/m3-build-m2/com/fasterxml/jackson/core/jackson-core/2.16.1/jackson-core-2.16.1.jar",
+        "com.synexia.rewrite.memory.M3RecoveryMemory",
+        "check",
+        "/workspace/scratch/206049dfb270/synexia/synexia-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/memory/events/115767aa323e2ea6db2f6de6b13641157abc0f68ef45bbcfeeaeabc7e84698dd.json",
+        "/workspace/scratch/206049dfb270/synexia/synexia-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021",
+        "/workspace/scratch/206049dfb270/synexia/synexia-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/memory/events"
+      ],
+      "exit_code": 0,
+      "log": {
+        "path": "proof/memory-integrity-003/115767aa323e2ea6db2f6de6b13641157abc0f68ef45bbcfeeaeabc7e84698dd.log",
+        "sha256": "9adb75973442657dfe8d97e18312951f48b54fc1ce6a2960632950a171527c44"
+      }
+    },
+    {
+      "event": {
+        "path": "memory/events/9f00fe04f180f10e0c2f0ba247d676add86c7afee28a11065a7f0fe69238b01d.json",
+        "sha256": "9f00fe04f180f10e0c2f0ba247d676add86c7afee28a11065a7f0fe69238b01d"
+      },
+      "command": [
+        "/tmp/m3-build-tools/jdk-21.0.12.1+1/bin/java",
+        "-cp",
+        "/workspace/scratch/206049dfb270/synexia/synexia-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/proof/memory-conformance-001/classes:/tmp/m3-build-m2/com/fasterxml/jackson/core/jackson-core/2.16.1/jackson-core-2.16.1.jar",
+        "com.synexia.rewrite.memory.M3RecoveryMemory",
+        "check",
+        "/workspace/scratch/206049dfb270/synexia/synexia-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/memory/events/9f00fe04f180f10e0c2f0ba247d676add86c7afee28a11065a7f0fe69238b01d.json",
+        "/workspace/scratch/206049dfb270/synexia/synexia-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021",
+        "/workspace/scratch/206049dfb270/synexia/synexia-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/memory/events"
+      ],
+      "exit_code": 0,
+      "log": {
+        "path": "proof/memory-integrity-003/9f00fe04f180f10e0c2f0ba247d676add86c7afee28a11065a7f0fe69238b01d.log",
+        "sha256": "2e435f5f605f53d412233b16f28df22bff692e47acdc450fe412faf0397e7c61"
+      }
+    },
+    {
+      "event": {
+        "path": "memory/events/7b087f5faa490efcdc3b783cd86ca790c87e4fd00b6a4580e5754f5cad84ac5b.json",
+        "sha256": "7b087f5faa490efcdc3b783cd86ca790c87e4fd00b6a4580e5754f5cad84ac5b"
+      },
+      "command": [
+        "/tmp/m3-build-tools/jdk-21.0.12.1+1/bin/java",
+        "-cp",
+        "/workspace/scratch/206049dfb270/synexia/synexia-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/proof/memory-conformance-001/classes:/tmp/m3-build-m2/com/fasterxml/jackson/core/jackson-core/2.16.1/jackson-core-2.16.1.jar",
+        "com.synexia.rewrite.memory.M3RecoveryMemory",
+        "check",
+        "/workspace/scratch/206049dfb270/synexia/synexia-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/memory/events/7b087f5faa490efcdc3b783cd86ca790c87e4fd00b6a4580e5754f5cad84ac5b.json",
+        "/workspace/scratch/206049dfb270/synexia/synexia-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021",
+        "/workspace/scratch/206049dfb270/synexia/synexia-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/memory/events"
+      ],
+      "exit_code": 0,
+      "log": {
+        "path": "proof/memory-integrity-003/7b087f5faa490efcdc3b783cd86ca790c87e4fd00b6a4580e5754f5cad84ac5b.log",
+        "sha256": "01dbfde1a06c4336f65e3f505db9b46ede4f68cb5ee7c6082ffdc1bd32d65e31"
+      }
+    },
+    {
+      "event": {
+        "path": "memory/events/d3f3be895c7fa277090fb372a22564b989448ea42b55be0aa3c16f5b7df37086.json",
+        "sha256": "d3f3be895c7fa277090fb372a22564b989448ea42b55be0aa3c16f5b7df37086"
+      },
+      "command": [
+        "/tmp/m3-build-tools/jdk-21.0.12.1+1/bin/java",
+        "-cp",
+        "/workspace/scratch/206049dfb270/synexia/synexia-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/proof/memory-conformance-001/classes:/tmp/m3-build-m2/com/fasterxml/jackson/core/jackson-core/2.16.1/jackson-core-2.16.1.jar",
+        "com.synexia.rewrite.memory.M3RecoveryMemory",
+        "check",
+        "/workspace/scratch/206049dfb270/synexia/synexia-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/memory/events/d3f3be895c7fa277090fb372a22564b989448ea42b55be0aa3c16f5b7df37086.json",
+        "/workspace/scratch/206049dfb270/synexia/synexia-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021",
+        "/workspace/scratch/206049dfb270/synexia/synexia-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/memory/events"
+      ],
+      "exit_code": 0,
+      "log": {
+        "path": "proof/memory-integrity-003/d3f3be895c7fa277090fb372a22564b989448ea42b55be0aa3c16f5b7df37086.log",
+        "sha256": "2aecf141bbd06d3f9993c127ed10ee2ef8c4603876bcbc91b5f0bc26fe1b70eb"
+      }
+    },
+    {
+      "event": {
+        "path": "memory/events/c12353186399bbacdc60cedb4b0f33cb0179f8f7c146f1d87bc3b27d2104f36b.json",
+        "sha256": "c12353186399bbacdc60cedb4b0f33cb0179f8f7c146f1d87bc3b27d2104f36b"
+      },
+      "command": [
+        "/tmp/m3-build-tools/jdk-21.0.12.1+1/bin/java",
+        "-cp",
+        "/workspace/scratch/206049dfb270/synexia/synexia-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/proof/memory-conformance-001/classes:/tmp/m3-build-m2/com/fasterxml/jackson/core/jackson-core/2.16.1/jackson-core-2.16.1.jar",
+        "com.synexia.rewrite.memory.M3RecoveryMemory",
+        "check",
+        "/workspace/scratch/206049dfb270/synexia/synexia-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/memory/events/c12353186399bbacdc60cedb4b0f33cb0179f8f7c146f1d87bc3b27d2104f36b.json",
+        "/workspace/scratch/206049dfb270/synexia/synexia-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021",
+        "/workspace/scratch/206049dfb270/synexia/synexia-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/memory/events"
+      ],
+      "exit_code": 0,
+      "log": {
+        "path": "proof/memory-integrity-003/c12353186399bbacdc60cedb4b0f33cb0179f8f7c146f1d87bc3b27d2104f36b.log",
+        "sha256": "1fd43a6e83e849eee474d34071226c5d6b0de684657c8e297b2f37ee302880af"
+      }
+    },
+    {
+      "event": {
+        "path": "memory/events/e110bc3de345c14e28b8719a8f8d93d708891c963a19d0b43a4edc25fffbf622.json",
+        "sha256": "e110bc3de345c14e28b8719a8f8d93d708891c963a19d0b43a4edc25fffbf622"
+      },
+      "command": [
+        "/tmp/m3-build-tools/jdk-21.0.12.1+1/bin/java",
+        "-cp",
+        "/workspace/scratch/206049dfb270/synexia/synexia-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/proof/memory-conformance-001/classes:/tmp/m3-build-m2/com/fasterxml/jackson/core/jackson-core/2.16.1/jackson-core-2.16.1.jar",
+        "com.synexia.rewrite.memory.M3RecoveryMemory",
+        "check",
+        "/workspace/scratch/206049dfb270/synexia/synexia-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/memory/events/e110bc3de345c14e28b8719a8f8d93d708891c963a19d0b43a4edc25fffbf622.json",
+        "/workspace/scratch/206049dfb270/synexia/synexia-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021",
+        "/workspace/scratch/206049dfb270/synexia/synexia-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/memory/events"
+      ],
+      "exit_code": 0,
+      "log": {
+        "path": "proof/memory-integrity-003/e110bc3de345c14e28b8719a8f8d93d708891c963a19d0b43a4edc25fffbf622.log",
+        "sha256": "ca05f86acb277fe4a1ba5b80e5000017a11554be3e1935b5ee714c75c494e7de"
+      }
+    }
+  ],
+  "unique_event_artifacts_verified": 76,
+  "admission": "PENDING"
+}

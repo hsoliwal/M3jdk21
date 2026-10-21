@@ -1,0 +1,52 @@
+{
+  "schema": "M3_CANONICAL_PUBLICATION_BASE/1",
+  "authoring_revision": "e02e7cb0f2e8e46db4c5b476d59aa26658fa4d07",
+  "publication_revision": "ad85831eda771cbd050124c806b45c050e545984",
+  "status": "ahead",
+  "ahead_by": 5,
+  "behind_by": 0,
+  "merge_base": "e02e7cb0f2e8e46db4c5b476d59aa26658fa4d07",
+  "commits": [
+    {
+      "sha": "6d3de67156e100444d17a02e31f92081a5e42df5",
+      "message": "fix(convergence): reject malformed UTF-8 archive tree paths"
+    },
+    {
+      "sha": "b6c7d8206ff35dde77bc9112d51a92c7d4d6da2a",
+      "message": "test(convergence): assert exact archive tree UTF-8 framing"
+    },
+    {
+      "sha": "ceb7dbe0565aad0344a9a27359c3018b7f10b0f8",
+      "message": "docs(convergence): pin seven-repo PR census and no-loss fork admission gates"
+    },
+    {
+      "sha": "8c634c6272d3a797abe1e26ae41e3b6e5f662f69",
+      "message": "merge: retain dated all-forks additive census and catalogue\n\nDocs-only additive no-loss convergence ledger; one new file, no deletions. Preserve all PR and branch history via merge commit."
+    },
+    {
+      "sha": "ad85831eda771cbd050124c806b45c050e545984",
+      "message": "merge: strict UTF-8 Git archive receipt parsing\n\nFocused additive Java 21 parser hardening with three regression tests. Existing contracts unchanged; no source files removed. Hosted CI checks were still queued at merge time; full reactor validation remains an open gate."
+    }
+  ],
+  "changed_files": [
+    {
+      "path": "docs/convergence/ADDITIVE_ALL_FORKS_2026-10-21.md",
+      "status": "added",
+      "git_blob": "13aada35ce55e5a1415ed47e9656cd66f9cc7f64"
+    },
+    {
+      "path": "synexia-code-convergence/src/main/java/com/synexia/convergence/repository/GitActiveTreeArchiveDebt.java",
+      "status": "modified",
+      "git_blob": "06d01728b40cba927db1cb3228ccac7f1d85c948"
+    },
+    {
+      "path": "synexia-code-convergence/src/test/java/com/synexia/convergence/repository/GitActiveTreeArchiveDebtTest.java",
+      "status": "modified",
+      "git_blob": "9924139c75bddcd6ff15dd815f2e5966b07db71a"
+    }
+  ],
+  "read_new_instruction": "docs/convergence/ADDITIVE_ALL_FORKS_2026-10-21.md",
+  "new_document_blob": "13aada35ce55e5a1415ed47e9656cd66f9cc7f64",
+  "interpretation": "Additive current publication base preserves all existing history. Exact three-file comparison leaves AGENTS, canonical four engines, relevant invariants, registry and ledger unchanged. Qualified authoring manifests retain e02; no new runtime or repository-completion claim.",
+  "parent_policy": "New branch/commit descends from ad858; append-only registry/ledger additions, no force/rebase/squash/delete."
+}

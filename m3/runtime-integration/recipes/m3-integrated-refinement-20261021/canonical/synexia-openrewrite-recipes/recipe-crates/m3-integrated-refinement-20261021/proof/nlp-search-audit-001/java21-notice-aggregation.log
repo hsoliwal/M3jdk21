@@ -1,0 +1,10 @@
+test_conflicting_module_payload_is_still_refused (__main__.ModuleCollectionTest.test_conflicting_module_payload_is_still_refused) ... ok
+test_conflicting_original_notice_path_is_refused (__main__.ModuleCollectionTest.test_conflicting_original_notice_path_is_refused) ... ok
+test_distinct_notice_scopes_preserve_distinct_contents (__main__.ModuleCollectionTest.test_distinct_notice_scopes_preserve_distinct_contents) ... ok
+test_legal_path_traversal_is_refused (__main__.ModuleCollectionTest.test_legal_path_traversal_is_refused) ... ok
+test_repeated_notices_keep_original_scope_once (__main__.ModuleCollectionTest.test_repeated_notices_keep_original_scope_once) ... ok
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.008s
+
+OK

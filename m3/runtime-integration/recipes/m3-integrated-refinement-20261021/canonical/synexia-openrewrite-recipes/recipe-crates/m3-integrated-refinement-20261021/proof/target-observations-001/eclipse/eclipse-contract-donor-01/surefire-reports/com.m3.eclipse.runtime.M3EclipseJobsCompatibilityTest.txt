@@ -1,0 +1,28 @@
+-------------------------------------------------------------------------------
+Test set: com.m3.eclipse.runtime.M3EclipseJobsCompatibilityTest
+-------------------------------------------------------------------------------
+Tests run: 4, Failures: 2, Errors: 0, Skipped: 0, Time elapsed: 0.021 s <<< FAILURE! -- in com.m3.eclipse.runtime.M3EclipseJobsCompatibilityTest
+com.m3.eclipse.runtime.M3EclipseJobsCompatibilityTest.eclipseCancellationExceptionMatchesNativeJob -- Time elapsed: 0.008 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: standard Eclipse OperationCanceledException must retain native CANCEL status ==> expected: <8> but was: <4>
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
+	at org.junit.jupiter.api.AssertEquals.failNotEqual(AssertEquals.java:197)
+	at org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:150)
+	at org.junit.jupiter.api.Assertions.assertEquals(Assertions.java:563)
+	at com.m3.eclipse.runtime.M3EclipseJobsCompatibilityTest.eclipseCancellationExceptionMatchesNativeJob(M3EclipseJobsCompatibilityTest.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+com.m3.eclipse.runtime.M3EclipseJobsCompatibilityTest.synchronousEclipseCancellationIsNotAnError -- Time elapsed: 0.002 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: runNow must recognize the Eclipse task cancellation signal ==> expected: <Status CANCEL: unknown code=1 > but was: <Status ERROR: com.m3.eclipse.runtime code=0 M3 task failed: synchronous cancellation org.eclipse.core.runtime.OperationCanceledException>
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
+	at org.junit.jupiter.api.AssertSame.failNotSame(AssertSame.java:50)
+	at org.junit.jupiter.api.AssertSame.assertSame(AssertSame.java:35)
+	at org.junit.jupiter.api.Assertions.assertSame(Assertions.java:2873)
+	at com.m3.eclipse.runtime.M3EclipseJobsCompatibilityTest.synchronousEclipseCancellationIsNotAnError(M3EclipseJobsCompatibilityTest.java:53)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
