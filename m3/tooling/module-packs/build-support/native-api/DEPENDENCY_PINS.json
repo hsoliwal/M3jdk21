@@ -1,0 +1,95 @@
+{
+  "schema": "M3_NATIVE_API_DEPENDENCIES_V1",
+  "artifacts": [
+    {
+      "coordinate": "org.codehaus.plexus:plexus-container-default:2.1.1",
+      "path": "org/codehaus/plexus/plexus-container-default/2.1.1/plexus-container-default-2.1.1.jar",
+      "sha256": "8b65840e41ca669a1a69ec1daedb3426304e560b24172cc93bb02e8c199e1ce7",
+      "pom_path": "org/codehaus/plexus/plexus-container-default/2.1.1/plexus-container-default-2.1.1.pom",
+      "pom_sha256": "0f5c6e592459262fc34942c2f4df370230ec2765dd4b707f54c269fdf5c5a7e3",
+      "scope": "compile",
+      "source": "https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-container-default/2.1.1/plexus-container-default-2.1.1.jar"
+    },
+    {
+      "coordinate": "org.codehaus.plexus:plexus-utils:4.1.0",
+      "path": "org/codehaus/plexus/plexus-utils/4.1.0/plexus-utils-4.1.0.jar",
+      "sha256": "6a2fe69e98301882bb2bb05afe36414eb82d6f7c63299cccdb2dc02b4358a968",
+      "pom_path": "org/codehaus/plexus/plexus-utils/4.1.0/plexus-utils-4.1.0.pom",
+      "pom_sha256": "449f00ecf08a9e78ec67661ac3b155b6a4493c90aeb4dcb7e2869eef1f067127",
+      "scope": "compile",
+      "source": "https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-utils/4.1.0/plexus-utils-4.1.0.jar"
+    },
+    {
+      "coordinate": "org.codehaus.plexus:plexus-component-annotations:2.2.0",
+      "path": "org/codehaus/plexus/plexus-component-annotations/2.2.0/plexus-component-annotations-2.2.0.jar",
+      "sha256": "50edb93c73786e62822b4fe1336e22880fdf147191373cf5c911370e16748fcf",
+      "pom_path": "org/codehaus/plexus/plexus-component-annotations/2.2.0/plexus-component-annotations-2.2.0.pom",
+      "pom_sha256": "c5483fc9c8e1a7ef6b0f899e37aaa6ce2f8afae54955bfa559fd63a33dbb065b",
+      "scope": "provided; retained for runtime annotations",
+      "source": "https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-component-annotations/2.2.0/plexus-component-annotations-2.2.0.jar"
+    },
+    {
+      "coordinate": "org.codehaus.plexus:plexus-classworlds:2.6.0",
+      "path": "org/codehaus/plexus/plexus-classworlds/2.6.0/plexus-classworlds-2.6.0.jar",
+      "sha256": "52f77c5ec49f787c9c417ebed5d6efd9922f44a202f217376e4f94c0d74f3549",
+      "pom_path": "org/codehaus/plexus/plexus-classworlds/2.6.0/plexus-classworlds-2.6.0.pom",
+      "pom_sha256": "469a6c59f92effa62c0797ce7d52d2c03cf8ee1034b923c360dd78a9f505a7ba",
+      "scope": "transitive compile",
+      "source": "https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-classworlds/2.6.0/plexus-classworlds-2.6.0.jar"
+    },
+    {
+      "coordinate": "org.apache.xbean:xbean-reflect:3.7",
+      "path": "org/apache/xbean/xbean-reflect/3.7/xbean-reflect-3.7.jar",
+      "sha256": "104e5e9bb5a669f86722f32281960700f7ec8e3209ef51b23eb9b6d23d1629cb",
+      "pom_path": "org/apache/xbean/xbean-reflect/3.7/xbean-reflect-3.7.pom",
+      "pom_sha256": "9795c15322c5d19af336eebd9e164fa7d5897c4b004a7d66e21635a173e748a9",
+      "scope": "transitive compile",
+      "source": "https://repo.maven.apache.org/maven2/org/apache/xbean/xbean-reflect/3.7/xbean-reflect-3.7.jar"
+    }
+  ],
+  "parent_poms": [
+    {
+      "path": "org/codehaus/plexus/plexus-containers/2.1.1/plexus-containers-2.1.1.pom",
+      "sha256": "c129ae94bc6de8ba2596fcdad4b3fcfe4f67640a4cb6d76a5540182214aa833c"
+    },
+    {
+      "path": "org/codehaus/plexus/plexus-containers/2.2.0/plexus-containers-2.2.0.pom",
+      "sha256": "743f42d967d02826ee79f0601108e2deeb11dd3e6add24fc5f2758b1b68634ec"
+    },
+    {
+      "path": "org/codehaus/mojo/mojo-parent/97/mojo-parent-97.pom",
+      "sha256": "888b0162ad7fabdeb6ee34ff6123025bffe34e064761da962e87de5c8cce5d39"
+    },
+    {
+      "path": "org/apache/xbean/xbean/3.7/xbean-3.7.pom",
+      "sha256": "ea717132de8404b62fc9097a1f3215c705d525d457be9a5f12653adc68c33ab7"
+    }
+  ],
+  "source_licenses": [
+    {
+      "path": "legal/plexus-classworlds-2.6.0-LICENSE.txt",
+      "sha256": "9d1b0f709d7e1a1fa8fccd53f90048047215eea5fbffaa9b299323cf2f8434cf",
+      "git_blob": "a8e9a986f62048b141a1b8d58f669861be05779b",
+      "repository": "https://github.com/codehaus-plexus/plexus-classworlds",
+      "source_ref": "plexus-classworlds-2.6.0",
+      "source_tree": "71132de9527b7fa154160a5bf679ea79a7d161a3"
+    },
+    {
+      "path": "legal/LICENSE-APACHE-2.0.txt",
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "git_blob": "d645695673349e3947e8e5ae42332d0ac3164cd7",
+      "repository": "https://github.com/codehaus-plexus/plexus-classworlds",
+      "source_ref": "plexus-classworlds-2.6.0",
+      "source_tree": "71132de9527b7fa154160a5bf679ea79a7d161a3"
+    }
+  ],
+  "resolution": {
+    "native_release": "1.1.0",
+    "source_release": 8,
+    "junit": "excluded by original native-api parent dependencyManagement",
+    "plexus-utils": "4.1.0 overrides transitive3.1.1",
+    "optional_dependencies": "plexus-xml3.1.0, XBean ASM/loggers excluded; no required inherited runtime dependencies",
+    "annotations": "upstream provided dependency also retained as its annotations have runtime retention",
+    "prebuilt_dependencies": "not represented as source-built"
+  }
+}
