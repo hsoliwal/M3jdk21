@@ -1,0 +1,203 @@
+[
+  {
+    "argv": [
+      "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/toolchain/jdk21/bin/jar",
+      "--create",
+      "--file",
+      "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/qualification/parser-final/jdk.m3.parser.jar",
+      "--date",
+      "2026-01-01T00:00:00Z",
+      "-C",
+      "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/qualification/parser-final/modules/jdk.m3.parser",
+      "."
+    ],
+    "exit": 0,
+    "name": "jar"
+  },
+  {
+    "argv": [
+      "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/toolchain/jdk21/bin/jar",
+      "--describe-module",
+      "--file",
+      "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/qualification/parser-final/jdk.m3.parser.jar"
+    ],
+    "exit": 0,
+    "name": "jar-descriptor"
+  },
+  {
+    "argv": [
+      "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+      "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/receiver/m3/tooling/jmod-recipes/tools/jmod_pack.py",
+      "--jdk-home",
+      "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/toolchain/jdk21",
+      "--image-tsv",
+      "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/qualification/parser-final/INPUT_JMOD_IMAGE.tsv",
+      "--manifest",
+      "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/qualification/parser-final/EMPTY_DESCRIPTOR_MANIFEST.tsv",
+      "--layer-root",
+      "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/receiver",
+      "--out",
+      "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/qualification/parser-final/pack",
+      "--legal-notices",
+      "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/receiver/m3/tooling/module-packs/parser/legal",
+      "--add-modules",
+      "java.se,jdk.compiler,jdk.jlink,jdk.jartool,jdk.jdeps"
+    ],
+    "exit": 0,
+    "name": "jmod-pack"
+  },
+  {
+    "argv": [
+      "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/toolchain/jdk21/bin/jmod",
+      "describe",
+      "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/qualification/parser-final/pack/jmods/jdk.m3.parser.jmod"
+    ],
+    "exit": 0,
+    "name": "jmod-descriptor"
+  },
+  {
+    "argv": [
+      "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/toolchain/jdk21/bin/jmod",
+      "list",
+      "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/qualification/parser-final/pack/jmods/jdk.m3.parser.jmod"
+    ],
+    "exit": 0,
+    "name": "jmod-contents"
+  },
+  {
+    "argv": [
+      "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/qualification/parser-final/pack/image/bin/java",
+      "--list-modules"
+    ],
+    "exit": 0,
+    "name": "image-modules"
+  },
+  {
+    "argv": [
+      "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/qualification/parser-final/pack/image/bin/java",
+      "-ea",
+      "-Dm3.parser.test.work=/workspace/scratch/e736b6177c79/m3-one-pass-20261020/qualification/parser-final/consumer-work/runtime-image-M3ParserFrameworkContract",
+      "--patch-module",
+      "jdk.compiler=/workspace/scratch/e736b6177c79/m3-one-pass-20261020/qualification/parser-final/compiler-patch",
+      "--add-modules",
+      "jdk.m3.parser",
+      "-cp",
+      "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/qualification/parser-final/test-classes",
+      "jdk.m3.parser.test.M3ParserFrameworkContract"
+    ],
+    "exit": 0,
+    "name": "image-M3ParserFrameworkContract"
+  },
+  {
+    "argv": [
+      "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/qualification/parser-final/pack/image/bin/java",
+      "-ea",
+      "-Dm3.parser.test.work=/workspace/scratch/e736b6177c79/m3-one-pass-20261020/qualification/parser-final/consumer-work/runtime-image-M3JavacParserContract",
+      "--patch-module",
+      "jdk.compiler=/workspace/scratch/e736b6177c79/m3-one-pass-20261020/qualification/parser-final/compiler-patch",
+      "--add-modules",
+      "jdk.m3.parser",
+      "-cp",
+      "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/qualification/parser-final/test-classes",
+      "jdk.m3.parser.test.M3JavacParserContract"
+    ],
+    "exit": 0,
+    "name": "image-M3JavacParserContract"
+  },
+  {
+    "argv": [
+      "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/qualification/parser-final/pack/image/bin/java",
+      "-ea",
+      "-Dm3.parser.test.work=/workspace/scratch/e736b6177c79/m3-one-pass-20261020/qualification/parser-final/consumer-work/runtime-image-M3CrossFrontendContract",
+      "--patch-module",
+      "jdk.compiler=/workspace/scratch/e736b6177c79/m3-one-pass-20261020/qualification/parser-final/compiler-patch",
+      "--add-modules",
+      "jdk.m3.parser",
+      "-cp",
+      "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/qualification/parser-final/test-classes",
+      "jdk.m3.parser.test.M3CrossFrontendContract"
+    ],
+    "exit": 0,
+    "name": "image-M3CrossFrontendContract"
+  },
+  {
+    "argv": [
+      "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/qualification/parser-final/pack/image/bin/java",
+      "-ea",
+      "-Dm3.parser.test.work=/workspace/scratch/e736b6177c79/m3-one-pass-20261020/qualification/parser-final/consumer-work/runtime-image-M3ASTDetailsContract",
+      "--patch-module",
+      "jdk.compiler=/workspace/scratch/e736b6177c79/m3-one-pass-20261020/qualification/parser-final/compiler-patch",
+      "--add-modules",
+      "jdk.m3.parser",
+      "-cp",
+      "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/qualification/parser-final/test-classes",
+      "jdk.m3.parser.test.M3ASTDetailsContract"
+    ],
+    "exit": 0,
+    "name": "image-M3ASTDetailsContract"
+  },
+  {
+    "argv": [
+      "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/qualification/parser-final/pack/image/bin/java",
+      "-ea",
+      "-Dm3.parser.test.work=/workspace/scratch/e736b6177c79/m3-one-pass-20261020/qualification/parser-final/consumer-work/runtime-image-M3ASTIndexProjectionContract",
+      "--patch-module",
+      "jdk.compiler=/workspace/scratch/e736b6177c79/m3-one-pass-20261020/qualification/parser-final/compiler-patch",
+      "--add-modules",
+      "jdk.m3.parser",
+      "-cp",
+      "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/qualification/parser-final/test-classes",
+      "jdk.m3.parser.test.M3ASTIndexProjectionContract"
+    ],
+    "exit": 0,
+    "name": "image-M3ASTIndexProjectionContract"
+  },
+  {
+    "argv": [
+      "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/qualification/parser-final/pack/image/bin/java",
+      "-ea",
+      "-Dm3.parser.test.work=/workspace/scratch/e736b6177c79/m3-one-pass-20261020/qualification/parser-final/consumer-work/runtime-image-M3FileInputContract",
+      "--patch-module",
+      "jdk.compiler=/workspace/scratch/e736b6177c79/m3-one-pass-20261020/qualification/parser-final/compiler-patch",
+      "--add-modules",
+      "jdk.m3.parser",
+      "-cp",
+      "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/qualification/parser-final/test-classes",
+      "jdk.m3.parser.test.M3FileInputContract"
+    ],
+    "exit": 0,
+    "name": "image-M3FileInputContract"
+  },
+  {
+    "argv": [
+      "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/qualification/parser-final/pack/image/bin/java",
+      "-ea",
+      "-Dm3.parser.test.work=/workspace/scratch/e736b6177c79/m3-one-pass-20261020/qualification/parser-final/consumer-work/runtime-image-smoke-1",
+      "--patch-module",
+      "jdk.compiler=/workspace/scratch/e736b6177c79/m3-one-pass-20261020/qualification/parser-final/compiler-patch",
+      "--add-modules",
+      "jdk.m3.parser",
+      "-cp",
+      "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/qualification/parser-final/test-classes",
+      "jdk.m3.parser.test.M3ParserImageSmoke"
+    ],
+    "exit": 0,
+    "name": "image-smoke-1"
+  },
+  {
+    "argv": [
+      "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/qualification/parser-final/pack/image/bin/java",
+      "-ea",
+      "-Dm3.parser.test.work=/workspace/scratch/e736b6177c79/m3-one-pass-20261020/qualification/parser-final/consumer-work/runtime-image-smoke-2",
+      "--patch-module",
+      "jdk.compiler=/workspace/scratch/e736b6177c79/m3-one-pass-20261020/qualification/parser-final/compiler-patch",
+      "--add-modules",
+      "jdk.m3.parser",
+      "-cp",
+      "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/qualification/parser-final/test-classes",
+      "jdk.m3.parser.test.M3ParserImageSmoke"
+    ],
+    "exit": 0,
+    "name": "image-smoke-2"
+  }
+]

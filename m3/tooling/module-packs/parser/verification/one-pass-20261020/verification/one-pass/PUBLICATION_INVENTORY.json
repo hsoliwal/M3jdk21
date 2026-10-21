@@ -1,0 +1,178 @@
+{
+  "retained_binary_primary_evidence": [
+    {
+      "bytes": 57344,
+      "path": "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/qualification/one-pass-final/work/module/target/m3/facts.sqlite",
+      "sha256": "1727729a7285afc5c79c8914f667b237fbd1758500a666c4f057ea47ec1f0f23"
+    },
+    {
+      "bytes": 96106165,
+      "path": "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/qualification/one-pass-final/image/lib/modules",
+      "sha256": "a5435e3628fd5c3a5fbc9853d2c88a681afff832417b9c06dbec8cedb9d0eabf"
+    }
+  ],
+  "schema": "M3_ONE_PASS_PUBLICATION_INVENTORY_V1",
+  "scope": "Publish text source/receipts as appropriate; original JAR/JMOD/native/image outputs and actual SQLite database remain retained qualification assets. No new native implementation.",
+  "text_evidence": [
+    {
+      "bytes": 8049,
+      "path": "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/verification/one-pass/README.md",
+      "sha256": "edc6ecfa76d3ad85126aa539960cfc30a7024adce18b73247d87a015a928296c"
+    },
+    {
+      "bytes": 17746,
+      "path": "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/verification/one-pass/run_proof.py",
+      "sha256": "3797a7f421fbd78bd53cdb442fd503189294f26f12ed7a0d0b0b0cfd5e4af853"
+    },
+    {
+      "bytes": 331,
+      "path": "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/verification/one-pass/src/module-info.java",
+      "sha256": "ba5b55b48e5563dcfc645123b17437014496fdb5a4dc4c8cd4e32d031cf85c30"
+    },
+    {
+      "bytes": 37776,
+      "path": "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/verification/one-pass/src/proof/OnePassProof.java",
+      "sha256": "811866311b38c376a45c82ca5c1765100f29e688124d02657e3cec0d0f3c373f"
+    },
+    {
+      "bytes": 3078,
+      "path": "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/verification/one-pass/CORRECTION.json",
+      "sha256": "b4d97973e5a066ab5961a5dabbd9a030ab15676a291b7ab4b2867b650aa94e4b"
+    },
+    {
+      "bytes": 1976,
+      "path": "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/verification/one-pass/INVOCATION.json",
+      "sha256": "5c8f849cd08cb3466a0da0eb0ba34c5eb300738dcb6ce18f1209ccbc9a62fbeb"
+    },
+    {
+      "bytes": 1766,
+      "path": "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/verification/one-pass/SOURCE_PINS.json",
+      "sha256": "371d1fb71877bd9d0c95e2f6f998b11bb1e2cb876014d917cf09c8943c61c790"
+    },
+    {
+      "bytes": 18672,
+      "path": "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/qualification/one-pass-final/RESULTS.json",
+      "sha256": "9903f6f97515baf46705a83fdda9b55ce5dd5206a727aeb961f08c93fca8d7a0"
+    },
+    {
+      "bytes": 144871,
+      "path": "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/qualification/one-pass-final/INPUTS.json",
+      "sha256": "76a8d92d4f7df5f0a49f9aebc262ff3b5c1b320c356da96a98325ac1db7ac208"
+    },
+    {
+      "bytes": 144608,
+      "path": "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/qualification/one-pass-final/INPUTS.after.json",
+      "sha256": "3ee4939afd20bb64386447cf761f83f05c105a9d881cb372261d64d6ab7191b0"
+    },
+    {
+      "bytes": 11021,
+      "path": "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/qualification/one-pass-final/COMMANDS.json",
+      "sha256": "f89e62239bcb57fabb3b8581c128ce15d7c3e72556909c78c9ace0ed9a36962e"
+    },
+    {
+      "bytes": 978,
+      "path": "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/qualification/one-pass-final/LEGAL_AND_NATIVE_RESOURCES.json",
+      "sha256": "64dad4690652b9012eb1ebdd66b917c6255472e3688510c9486270ce74aea7cd"
+    },
+    {
+      "bytes": 11416,
+      "path": "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/qualification/one-pass-final/work/RESULTS.json",
+      "sha256": "74673d4281e478f2daf147e1a3c454da35aa0f80e8c08d3512749edd5ac76d76"
+    },
+    {
+      "bytes": 315,
+      "path": "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/qualification/one-pass-final/JMOD_IMAGE.dependencies.tsv",
+      "sha256": "ede3eb566ade8910f2ed00476525abdc81b68b093dab10e9df2b0836ea01d93d"
+    },
+    {
+      "bytes": 159,
+      "path": "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/qualification/one-pass-final/JMOD_IMAGE.proof.tsv",
+      "sha256": "b46c5e66a8b2e5aeb1af98bd57cca30a35087ea3285054913234c943460a023b"
+    },
+    {
+      "bytes": 24,
+      "path": "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/qualification/one-pass-final/EMPTY_DESCRIPTOR_MANIFEST.tsv",
+      "sha256": "11ce370fc54de11722b463586ece08259211fb02badba18d679662f1caf75cf0"
+    },
+    {
+      "bytes": 764,
+      "path": "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/qualification/one-pass/RESULTS.json",
+      "sha256": "88811391d54b234cc27e8ab11d34ae5af4ab3724a7845a30631a442acf0e3d08"
+    },
+    {
+      "bytes": 144871,
+      "path": "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/qualification/one-pass/INPUTS.json",
+      "sha256": "0bcbe7a5414cea149593a0dc89f10c9386e156938cbf4398f8a17296d5442397"
+    },
+    {
+      "bytes": 4571,
+      "path": "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/qualification/one-pass/COMMANDS.json",
+      "sha256": "25f82eb8647f3c887882948952c5ea75531163e971230208ffe1dd2542ecf7d3"
+    },
+    {
+      "bytes": 268,
+      "path": "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/qualification/one-pass/compile-proof.log",
+      "sha256": "360d74fe1d862f5dfc0cb7f03a74fd32b916ca34fea98089dc605507508e21c5"
+    },
+    {
+      "bytes": 0,
+      "path": "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/qualification/one-pass-final/compile-proof.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 331,
+      "path": "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/qualification/one-pass-final/describe-slf4j.log",
+      "sha256": "d64eac1188405300eb8e9fad3bddf5bf3a34dde315d153ffc4a863ab45d26661"
+    },
+    {
+      "bytes": 626,
+      "path": "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/qualification/one-pass-final/describe-sqlite.log",
+      "sha256": "021da5bc250c0180b83631282f3b7d72c10e2c1c56151a81cbbbe9e7472aa888"
+    },
+    {
+      "bytes": 0,
+      "path": "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/qualification/one-pass-final/extract-original-jdbc-resources.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 0,
+      "path": "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/qualification/one-pass-final/jar-proof.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 0,
+      "path": "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/qualification/one-pass-final/jlink-composed-image.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 594,
+      "path": "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/qualification/one-pass-final/list-image-modules.log",
+      "sha256": "b7d9de3d371ecc566019be926d015efefc62c150ee9f2c5e9258c3d23328e421"
+    },
+    {
+      "bytes": 243,
+      "path": "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/qualification/one-pass-final/one-pass-image.log",
+      "sha256": "829817d55ad667d9e52ad59a73b4e9de853f16d8050e5a1f43ce48096a91643d"
+    },
+    {
+      "bytes": 57,
+      "path": "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/qualification/one-pass-final/pack-original-jdbc-modules.log",
+      "sha256": "14ba6afe29d3d278facc9d351f202ea27a0b48c5adb7ee71135b9c6d76dc5dd0"
+    },
+    {
+      "bytes": 57,
+      "path": "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/qualification/one-pass-final/pack-proof.log",
+      "sha256": "d2fc9338b29aa8987f823887f49adcafbad30d9b9c86c82bf3ba07f6eae70881"
+    },
+    {
+      "bytes": 205,
+      "path": "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/qualification/one-pass-final/toolchain.log",
+      "sha256": "5b4412738541184e84f6b2d7520d4f4a7c2a455f60650491464c61adcbbbdeb0"
+    },
+    {
+      "bytes": 0,
+      "path": "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/qualification/one-pass-final/validate-image.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ]
+}

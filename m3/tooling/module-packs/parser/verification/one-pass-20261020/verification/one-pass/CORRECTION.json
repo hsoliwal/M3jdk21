@@ -1,0 +1,47 @@
+{
+  "before_after_sources": [
+    {
+      "after_sha256": "3797a7f421fbd78bd53cdb442fd503189294f26f12ed7a0d0b0b0cfd5e4af853",
+      "before_sha256": "e83859426ba664bf6721c99779bc8dcdfc1d3435036c91cfdb6150dd7960fdf9",
+      "path": "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/verification/one-pass/run_proof.py"
+    },
+    {
+      "after_sha256": "ba5b55b48e5563dcfc645123b17437014496fdb5a4dc4c8cd4e32d031cf85c30",
+      "before_sha256": "7e4f35fd9377227e072d403769829a4289363751675859d9cbb885a0b7b4d527",
+      "path": "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/verification/one-pass/src/module-info.java"
+    },
+    {
+      "after_sha256": "811866311b38c376a45c82ca5c1765100f29e688124d02657e3cec0d0f3c373f",
+      "before_sha256": "9ce65964d9f84f11c0c5bab075fd7090f781c5b3a566e958228f605a1fbc311d",
+      "path": "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/verification/one-pass/src/proof/OnePassProof.java"
+    }
+  ],
+  "corrected_by": "Hitesh / Synexia MOP-assisted qualification workflow",
+  "correction": "Replace the qualification consumer name m3.onepass.proof with m3fs.onepass.proof in its descriptor, runtime module assertion and packaging/launch references. Keep all product module names, module requirements and lint flags unchanged.",
+  "failed_compile_log": {
+    "bytes": 268,
+    "path": "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/qualification/one-pass/compile-proof.log",
+    "sha256": "360d74fe1d862f5dfc0cb7f03a74fd32b916ca34fea98089dc605507508e21c5"
+  },
+  "failed_receipt": {
+    "bytes": 764,
+    "path": "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/qualification/one-pass/RESULTS.json",
+    "sha256": "88811391d54b234cc27e8ab11d34ae5af4ab3724a7845a30631a442acf0e3d08"
+  },
+  "guard": "Fresh strict compile, actual JMOD/image run and before/after generated-input seal comparison all pass.",
+  "memory_owner": "Existing M3RecipeMemory is the correction-memory owner; root may append this bounded lesson there. This JSON is evidence, not a second memory store.",
+  "observed_diagnostic": "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/verification/one-pass/src/module-info.java:3: warning: [module] module name component m3 should avoid terminal digits\nmodule m3.onepass.proof {\n       ^\nerror: warnings found and -Werror specified\n1 error\n1 warning\n",
+  "passing_compile_log": {
+    "bytes": 0,
+    "path": "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/qualification/one-pass-final/compile-proof.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "passing_receipt": {
+    "bytes": 18672,
+    "path": "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/qualification/one-pass-final/RESULTS.json",
+    "sha256": "9903f6f97515baf46705a83fdda9b55ce5dd5206a727aeb961f08c93fca8d7a0"
+  },
+  "schema": "M3_QUALIFICATION_HARNESS_CORRECTION_V1",
+  "scope": "Harness-only module name; no product source change or lint suppression",
+  "trigger": "Strict javac --release 21 -Xlint:all -Werror rejected consumer module component m3 ending in a digit"
+}

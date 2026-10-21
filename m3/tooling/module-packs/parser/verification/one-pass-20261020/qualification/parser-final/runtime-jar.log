@@ -1,0 +1,3 @@
+$ ["/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/toolchain/jdk21/bin/jar","--create","--file","/workspace/scratch/e736b6177c79/m3-one-pass-20261020/qualification/parser-final/jdk.m3.parser.jar","--date","2026-01-01T00:00:00Z","-C","/workspace/scratch/e736b6177c79/m3-one-pass-20261020/qualification/parser-final/modules/jdk.m3.parser","."]
+
+EXIT 0

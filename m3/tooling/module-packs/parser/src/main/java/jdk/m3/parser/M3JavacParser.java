@@ -29,6 +29,43 @@ public final class M3JavacParser {
     }
 
     /**
+     * Caller-owned rich syntax-index operation. Reuse this exact key to share
+     * one bounded detached index per PARSED event through the existing M3AST
+     * cache. No new parser, task, atom pool or persistent semantic cache exists.
+     * The exact compiler input seal, not URI/length equality, establishes the
+     * source binding; attributed semantic identity still requires its context.
+     */
+    public static M3AST.Projection<M3ASTIndex> indexProjection(M3ASTIngress.Limits limits) {
+        Objects.requireNonNull(limits, "limits");
+        return new M3AST.Projection<>("jdk.m3.parser.javac.details.v1", unit -> {
+            if (unit.phase() != M3AST.Phase.PARSED) {
+                throw new IllegalArgumentException("M3ASTIndex syntax projection requires a PARSED event");
+            }
+            M3AST.Source retained = unit.source();
+            M3File source = M3File.of(retained.uri(), retained.text());
+            if (!source.utf16Sha256().equals(retained.utf16Sha256())) {
+                throw new IllegalStateException("M3AST source seal mismatch");
+            }
+            return M3ASTIngress.javacSealed(source, unit.tree(), unit.trees().getSourcePositions(), limits);
+        });
+    }
+
+    /** Register a rich index consumer on the same original-task event owner. */
+    public static M3AST attachIndex(JavacTask task, M3AST.Projection<M3ASTIndex> projection,
+                                    Consumer<? super M3ASTIndex> consumer) {
+        Objects.requireNonNull(task, "task");
+        Objects.requireNonNull(projection, "projection");
+        Objects.requireNonNull(consumer, "consumer");
+        M3AST handle = M3AST.open(task, true);
+        handle.addConsumer(new M3AST.Consumer() {
+            @Override public void parsed(M3AST.Unit unit) throws Exception {
+                consumer.accept(unit.project(projection));
+            }
+        });
+        return handle;
+    }
+
+    /**
      * Register before the task starts, enabling the existing syntax-retention
      * policy. Closing the returned shared handle releases its consumers. For
      * parse/analyze/generate clients, use try-with-resources around this handle.
