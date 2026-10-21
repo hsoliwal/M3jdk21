@@ -1,0 +1,2 @@
+seq	recipe	trigger	observed	correction	guard	lesson	category	donor	status
+1	com.m3.rewrite.backport.M3StringTokenSequenceRegexRecipe	user	M3String regex had canonical-owner effect memoization but its regex alphabet remained UTF-16 code units	PENDING	M3StringTokenSequenceRegexRecipeTest	token-sequence regex must be a distinct exact algebra and must not silently redefine String.matches	token-sequence-regex	Stanford-CoreNLP-TokensRegex+Square-T-Rex-reference-only	RECORDED
