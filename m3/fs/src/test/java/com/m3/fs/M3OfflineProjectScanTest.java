@@ -85,7 +85,9 @@ class M3OfflineProjectScanTest {
             assertTrue(removed.delta().fullRebuild(),
                     "unknown compiler ABI and removed source conservatively invalidate the graph");
             assertArrayEquals(new String[]{"src/App.java"}, removed.removedPaths());
-            assertEquals(1, removed.changedRows().count());
+            // A removal invalidates the entire previous resolver inventory;
+            // the original M3BuildState intentionally marks all surviving rows dirty.
+            assertEquals(2, removed.changedRows().count());
             M3OfflineProjectScan.publish(fs, removed, LIMITS);
 
             var newContext = M3OfflineProjectScan.scan(project, fs,
