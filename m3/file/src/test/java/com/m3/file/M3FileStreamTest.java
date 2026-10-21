@@ -13,6 +13,7 @@ import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.security.MessageDigest;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 import org.junit.jupiter.api.Test;
@@ -95,6 +96,92 @@ class M3FileStreamTest {
         assertTrue(delta.exactContentChanged());
         assertFalse(delta.requiresContentProbe());
         assertEquals(before.metadata().size(), after.metadata().size());
+    }
+
+    @Test
+    void layeredFactsShareTheOneSourcePassAndPublishSortedReceipts() throws Exception {
+        Path path = temp.resolve("layered.txt");
+        Files.writeString(path, "alpha beta alpha", StandardCharsets.UTF_8);
+        M3File file = M3File.of(path);
+
+        M3FileFactObserver tokens = M3FileFactObserver.sha256("tokens");
+        M3FileFactObserver ast = M3FileFactObserver.sha256("ast");
+        M3FileIndexedSnapshot indexed =
+                file.indexedSnapshot(M3ProgressMonitor.none(), tokens, ast);
+
+        byte[] expected =
+                MessageDigest.getInstance("SHA-256")
+                        .digest(Files.readAllBytes(path));
+        assertArrayEquals(expected, indexed.source().contentSha256());
+        assertEquals(2, indexed.facts().size());
+        assertEquals("ast", indexed.facts().nameAt(0));
+        assertEquals("tokens", indexed.facts().nameAt(1));
+        assertArrayEquals(expected, indexed.facts().requireSha256("ast"));
+        assertArrayEquals(expected, indexed.facts().requireSha256("tokens"));
+    }
+
+    @Test
+    void identicalFactReceiptsConvergeButConflictsFail() throws Exception {
+        byte[] one = MessageDigest.getInstance("SHA-256").digest(new byte[] {1});
+        byte[] two = MessageDigest.getInstance("SHA-256").digest(new byte[] {2});
+
+        M3FileFacts converged =
+                M3FileFacts.of(
+                        new M3FileFact("ast", one),
+                        new M3FileFact("ast", one));
+        assertEquals(1, converged.size());
+        assertArrayEquals(one, converged.requireSha256("ast"));
+        org.junit.jupiter.api.Assertions.assertThrows(
+                IllegalArgumentException.class,
+                () ->
+                        M3FileFacts.of(
+                                new M3FileFact("ast", one),
+                                new M3FileFact("ast", two)));
+    }
+
+    @Test
+    void factDeltaUsesSortedLanesWithoutMapEntries() throws Exception {
+        byte[] one = MessageDigest.getInstance("SHA-256").digest(new byte[] {1});
+        byte[] two = MessageDigest.getInstance("SHA-256").digest(new byte[] {2});
+        byte[] three = MessageDigest.getInstance("SHA-256").digest(new byte[] {3});
+
+        M3FileFacts before =
+                M3FileFacts.of(
+                        new M3FileFact("ast", one),
+                        new M3FileFact("tokens", two));
+        M3FileFacts after =
+                M3FileFacts.of(
+                        new M3FileFact("ast", three),
+                        new M3FileFact("regex", two));
+        M3FileFactDelta delta = before.deltaTo(after);
+
+        assertEquals(3, delta.size());
+        assertEquals(M3FileFactDelta.CHANGED, delta.state("ast"));
+        assertEquals(M3FileFactDelta.ADDED, delta.state("regex"));
+        assertEquals(M3FileFactDelta.REMOVED, delta.state("tokens"));
+        assertEquals(0, delta.state("missing"));
+    }
+
+    @Test
+    void indexedDeltaCombinesSourceAndSemanticFacts() throws Exception {
+        Path path = temp.resolve("indexed-delta.txt");
+        Files.writeString(path, "alpha", StandardCharsets.UTF_8);
+        M3File file = M3File.of(path);
+        M3FileIndexedSnapshot before =
+                file.indexedSnapshot(
+                        M3ProgressMonitor.none(),
+                        M3FileFactObserver.sha256("tokens"));
+
+        Files.writeString(path, "bravo", StandardCharsets.UTF_8);
+        M3FileIndexedSnapshot after =
+                file.indexedSnapshot(
+                        M3ProgressMonitor.none(),
+                        M3FileFactObserver.sha256("tokens"));
+        M3FileIndexedDelta delta = before.deltaTo(after);
+
+        assertTrue(delta.changed());
+        assertTrue(delta.source().exactContentChanged());
+        assertEquals(M3FileFactDelta.CHANGED, delta.facts().state("tokens"));
     }
 
     @Test
