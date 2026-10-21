@@ -134,6 +134,25 @@ public final class MFiles {
     public interface FileTask<R> {
         /** Computes one selected entry's result on its owning worker. */
         R apply(MFile file) throws IOException;
+
+        /**
+         * Returns a lazy task that applies this task and then the supplied function.
+         * Both stages run once, in order, on the thread invoking the composed task;
+         * composition adds no scheduling or resource ownership. Null intermediate
+         * and final results are permitted. A failure in this task skips the supplied
+         * function; failures from either stage propagate to the composed caller.
+         * Captured function state must support the concurrent calls allowed by this
+         * task's execution context.
+         *
+         * @param <V> the composed result type
+         * @param after the function applied to this task's result
+         * @return a task with the same input and the composed result
+         * @throws NullPointerException if after is null
+         */
+        default <V> FileTask<V> andThen(Function<? super R, ? extends V> after) {
+            Objects.requireNonNull(after, "after");
+            return file -> after.apply(apply(file));
+        }
     }
 
     /**
