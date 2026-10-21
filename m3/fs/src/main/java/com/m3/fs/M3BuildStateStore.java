@@ -98,13 +98,34 @@ public final class M3BuildStateStore {
      */
     public static Optional<Version> readObserved(M3FS snapshot, byte[] expectedSuccessful,
             int maxBytes, int maxRows, int maxEdges) throws IOException {
+        return readObservedAt(snapshot, expectedSuccessful, null, maxBytes, maxRows, maxEdges);
+    }
+
+    /**
+     * Reads one exact Maven/Gradle/IDE observation profile in the SAME M3FS database.
+     * All profiles still share one globally authoritative successful-build head.
+     * The existing unprofiled method and checkpoint path remain unchanged.
+     */
+    public static Optional<Version> readObserved(M3FS snapshot, byte[] expectedSuccessful,
+            byte[] profileSha256, int maxBytes, int maxRows, int maxEdges) throws IOException {
+        return readObservedAt(snapshot, expectedSuccessful,
+                requiredProfile(profileSha256), maxBytes, maxRows, maxEdges);
+    }
+
+    private static Optional<Version> readObservedAt(M3FS snapshot, byte[] expectedSuccessful,
+            byte[] profile, int maxBytes, int maxRows, int maxEdges) throws IOException {
         Objects.requireNonNull(snapshot, "snapshot");
         byte[] expected = commitment(expectedSuccessful, true);
         if (!snapshot.isSnapshot()) throw new IOException("observed checkpoint read requires a pinned snapshot");
         requireCommitment(read(snapshot, maxBytes, maxRows, maxEdges), expected, "successful");
-        Optional<Version> observed = readHead(snapshot, observedPath(expected), maxBytes, maxRows, maxEdges);
-        if (observed.isPresent() && !observed.orElseThrow().state().completeInventory()) {
-            throw new IOException("observed checkpoint is not a completed inventory");
+        Optional<Version> observed = readHead(snapshot,
+                observedPath(expected, profile), maxBytes, maxRows, maxEdges);
+        if (observed.isPresent()) {
+            M3BuildState data = observed.orElseThrow().state();
+            if (!data.completeInventory()
+                    || profile != null && !Arrays.equals(profile, data.contextSha256())) {
+                throw new IOException("observed checkpoint has a foreign context or incomplete inventory");
+            }
         }
         return observed;
     }
@@ -117,15 +138,37 @@ public final class M3BuildStateStore {
      */
     public static Version observe(M3FS fs, M3BuildState completed, byte[] expectedSuccessful,
             byte[] expectedObserved, int maxBytes, int maxRows, int maxEdges) throws IOException {
+        return observeAt(fs, completed, expectedSuccessful, expectedObserved, null,
+                maxBytes, maxRows, maxEdges);
+    }
+
+    /**
+     * Stage one context-qualified completed inventory without publishing success.
+     * Different profiles have distinct observations but use the same SQLite lock,
+     * original CAS, native transaction and single successful build state.
+     */
+    public static Version observe(M3FS fs, M3BuildState completed, byte[] expectedSuccessful,
+            byte[] expectedObserved, byte[] profileSha256,
+            int maxBytes, int maxRows, int maxEdges) throws IOException {
+        return observeAt(fs, completed, expectedSuccessful, expectedObserved,
+                requiredProfile(profileSha256), maxBytes, maxRows, maxEdges);
+    }
+
+    private static Version observeAt(M3FS fs, M3BuildState completed, byte[] expectedSuccessful,
+            byte[] expectedObserved, byte[] profile,
+            int maxBytes, int maxRows, int maxEdges) throws IOException {
         Objects.requireNonNull(completed, "completed");
         if (!completed.completeInventory()) throw new IOException("observation requires a completed inventory");
+        if (profile != null && !Arrays.equals(profile, completed.contextSha256())) {
+            throw new IllegalArgumentException("observed source does not belong to profile");
+        }
         byte[] successful = commitment(expectedSuccessful, true);
         byte[] observed = commitment(expectedObserved, true);
         byte[] encoded = completed.encode(maxBytes);
         M3BuildState.decode(encoded, maxBytes, maxRows, maxEdges);
         return locked(fs, () -> {
             requireCommitment(read(fs, maxBytes, maxRows, maxEdges), successful, "successful");
-            String target = observedPath(successful);
+            String target = observedPath(successful, profile);
             requireCommitment(readHead(fs, target, maxBytes, maxRows, maxEdges), observed, "observed");
             return writeHead(fs, target, completed, encoded);
         });
@@ -142,17 +185,34 @@ public final class M3BuildStateStore {
      */
     public static Version promoteObserved(M3FS fs, byte[] expectedSuccessful, byte[] expectedObserved,
             int maxBytes, int maxRows, int maxEdges) throws IOException {
+        return promoteObservedAt(fs, expectedSuccessful, expectedObserved, null,
+                maxBytes, maxRows, maxEdges);
+    }
+
+    /** Promote exactly one successful profile; other profiles remain observations, not successes. */
+    public static Version promoteObserved(M3FS fs, byte[] expectedSuccessful, byte[] expectedObserved,
+            byte[] profileSha256, int maxBytes, int maxRows, int maxEdges) throws IOException {
+        return promoteObservedAt(fs, expectedSuccessful, expectedObserved,
+                requiredProfile(profileSha256), maxBytes, maxRows, maxEdges);
+    }
+
+    private static Version promoteObservedAt(M3FS fs, byte[] expectedSuccessful, byte[] expectedObserved,
+            byte[] profile, int maxBytes, int maxRows, int maxEdges) throws IOException {
         byte[] successful = commitment(expectedSuccessful, true);
         byte[] observed = commitment(expectedObserved, false);
         return locked(fs, () -> {
             requireCommitment(read(fs, maxBytes, maxRows, maxEdges), successful, "successful");
-            Optional<Version> pending = readHead(fs, observedPath(successful), maxBytes, maxRows, maxEdges);
+            String path = observedPath(successful, profile);
+            Optional<Version> pending = readHead(fs, path, maxBytes, maxRows, maxEdges);
             requireCommitment(pending, observed, "observed");
             M3BuildState candidate = pending.orElseThrow(() -> new IOException("missing observation")).state();
-            if (!candidate.completeInventory()) throw new IOException("observation is not a completed inventory");
+            if (!candidate.completeInventory()
+                    || profile != null && !Arrays.equals(profile, candidate.contextSha256())) {
+                throw new IOException("observation has a foreign context or incomplete inventory");
+            }
             Version committed = writeHead(fs, HEAD, candidate, candidate.encode(maxBytes));
             // The head is already committed. Cleanup must not report a failed promotion.
-            try { fs.unlink(observedPath(successful)); }
+            try { fs.unlink(path); }
             catch (IOException | RuntimeException cleanup) { /* restart may reclaim this exact orphan */ }
             return committed;
         });
@@ -169,6 +229,19 @@ public final class M3BuildStateStore {
 
     private static String observedPath(byte[] successful) {
         return DIRECTORY + "/observed-" + (successful == null ? "initial" : java.util.HexFormat.of().formatHex(successful));
+    }
+
+    /** Profile bytes only name a native SQLite inode; no new storage or pointer owner. */
+    private static String observedPath(byte[] successful, byte[] profile) {
+        String path = observedPath(successful);
+        return profile == null ? path : path + "-" + java.util.HexFormat.of().formatHex(profile);
+    }
+
+    private static byte[] requiredProfile(byte[] profile) {
+        if (Objects.requireNonNull(profile, "profile").length != M3BuildState.HASH_BYTES) {
+            throw new IllegalArgumentException("profile must be exactly 32 bytes");
+        }
+        return profile.clone();
     }
 
     private static void requireCommitment(Optional<Version> value, byte[] expected, String kind) throws IOException {
