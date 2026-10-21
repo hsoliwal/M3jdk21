@@ -99,6 +99,8 @@ public final class M3IndexedLiveViewContract {
         assertEqual(natural, List.of(1, 2, 3));
         assertEqual(natural.physicalIndex(0), 0);
         reentrantPreparationContracts();
+        strictSubListContracts();
+        strictDerivedAfterReentrancyContracts();
         randomDifferential();
     }
 
@@ -143,6 +145,203 @@ public final class M3IndexedLiveViewContract {
         assertEqual(recursive.size(), 3);
         assertEqual(sortedView.size(), 3);
         assertEqual(filteredView.size(), 3);
+    }
+
+    private record RangeCase(String name,
+            java.util.function.Function<List<Integer>, List<Integer>> select,
+            List<Integer> expected) { }
+
+    /**
+     * A read-only range must retain the root's unconditional mutation boundary,
+     * including empty/no-op calls and calls which would otherwise run callbacks.
+     */
+    private static void strictSubListContracts() {
+        List<RangeCase> ranges = List.of(
+                new RangeCase("whole", list -> list.subList(0, 3), List.of(2, 3, 4)),
+                new RangeCase("middle", list -> list.subList(1, 3), List.of(3, 4)),
+                new RangeCase("empty-first", list -> list.subList(0, 0), List.of()),
+                new RangeCase("empty-last", list -> list.subList(3, 3), List.of()),
+                new RangeCase("nested", list -> list.subList(0, 3).subList(1, 3), List.of(3, 4)),
+                new RangeCase("nested-empty", list -> list.subList(0, 3).subList(1, 1), List.of()),
+                new RangeCase("reversed", list -> list.subList(0, 3).reversed(), List.of(4, 3, 2)),
+                new RangeCase("reversed-nested",
+                        list -> list.subList(0, 3).reversed().subList(0, 2), List.of(4, 3)),
+                new RangeCase("root-reversed", list -> list.reversed().subList(0, 2), List.of(4, 3)),
+                new RangeCase("reversed-empty", list -> list.subList(1, 1).reversed(), List.of()),
+                new RangeCase("nested-reversed-empty",
+                        list -> list.subList(0, 3).reversed().subList(1, 1), List.of()),
+                new RangeCase("double-reversed",
+                        list -> list.subList(0, 3).reversed().reversed(), List.of(2, 3, 4)));
+        ArrayList<String> failures = new ArrayList<>();
+        AtomicInteger observations = new AtomicInteger();
+        for (RangeCase range : ranges) {
+            M3ArrayList<Integer> owner = new M3ArrayList<>(List.of(4, 1, 3, 2));
+            M3IndexedLiveView<Integer> root = M3IndexedLiveView.filteredSorted(
+                    owner, value -> value >= 2, Comparator.naturalOrder());
+            List<Integer> selected = range.select().apply(root);
+            assertEqual(selected, range.expected());
+            assertEqual(Arrays.asList(selected.toArray()), range.expected());
+            assertEqual(selected.stream().toList(), range.expected());
+            assertEqual(selected.reversed().reversed(), range.expected());
+            AtomicInteger callbacks = new AtomicInteger();
+            java.util.function.BiConsumer<String, Runnable> refuse = (operation, action) -> {
+                observations.incrementAndGet();
+                callbacks.set(0);
+                try {
+                    action.run();
+                    failures.add(range.name() + "/" + operation + ": mutation returned normally");
+                } catch (UnsupportedOperationException expected) {
+                    // Exact strict boundary: no callback/input traversal preceded refusal.
+                } catch (Throwable wrong) {
+                    failures.add(range.name() + "/" + operation + ": wrong failure " + wrong.getClass().getName());
+                }
+                if (callbacks.get() != 0) {
+                    failures.add(range.name() + "/" + operation + ": mutation invoked " + callbacks.get() + " callback(s)");
+                }
+                assertEqual(owner, List.of(4, 1, 3, 2));
+                assertEqual(root, List.of(2, 3, 4));
+                assertEqual(selected, range.expected());
+                checks++;
+            };
+            // A mutator must reject before inspecting even an adversarial input collection.
+            java.util.Collection<Integer> input = new java.util.AbstractCollection<>() {
+                @Override public int size() { callbacks.incrementAndGet(); return 1; }
+                @Override public Iterator<Integer> iterator() {
+                    callbacks.incrementAndGet();
+                    return List.of(8).iterator();
+                }
+                @Override public boolean contains(Object value) {
+                    callbacks.incrementAndGet();
+                    return false;
+                }
+            };
+            refuse.accept("add", () -> selected.add(8));
+            refuse.accept("add-indexed", () -> selected.add(0, 8));
+            refuse.accept("add-invalid-index", () -> selected.add(-1, 8));
+            refuse.accept("addAll-empty", () -> selected.addAll(List.of()));
+            refuse.accept("addAll-self", () -> selected.addAll(selected));
+            refuse.accept("addAll-input", () -> selected.addAll(input));
+            refuse.accept("addAll-null", () -> selected.addAll(null));
+            refuse.accept("addAll-indexed-empty", () -> selected.addAll(0, List.of()));
+            refuse.accept("addAll-indexed-input", () -> selected.addAll(0, input));
+            refuse.accept("addAll-invalid-index", () -> selected.addAll(-1, input));
+            refuse.accept("addAll-indexed-null", () -> selected.addAll(0, null));
+            refuse.accept("set", () -> selected.set(0, 8));
+            refuse.accept("set-invalid-index", () -> selected.set(-1, 8));
+            refuse.accept("remove-indexed", () -> selected.remove(0));
+            refuse.accept("remove-invalid-index", () -> selected.remove(-1));
+            refuse.accept("remove-value", () -> selected.remove(Integer.valueOf(3)));
+            refuse.accept("remove-absent", () -> selected.remove(Integer.valueOf(99)));
+            refuse.accept("removeAll-empty", () -> selected.removeAll(List.of()));
+            refuse.accept("removeAll-matching", () -> selected.removeAll(List.of(2, 3, 4)));
+            refuse.accept("removeAll-input", () -> selected.removeAll(input));
+            refuse.accept("removeAll-null", () -> selected.removeAll(null));
+            refuse.accept("retainAll-input", () -> selected.retainAll(input));
+            refuse.accept("retainAll-self", () -> selected.retainAll(selected));
+            refuse.accept("retainAll-null", () -> selected.retainAll(null));
+            refuse.accept("removeIf", () -> selected.removeIf(value -> { callbacks.incrementAndGet(); return false; }));
+            refuse.accept("removeIf-null", () -> selected.removeIf(null));
+            refuse.accept("replaceAll", () -> selected.replaceAll(value -> { callbacks.incrementAndGet(); return value; }));
+            refuse.accept("replaceAll-null", () -> selected.replaceAll(null));
+            refuse.accept("sort", () -> selected.sort((left, right) -> {
+                callbacks.incrementAndGet();
+                return Integer.compare(right, left);
+            }));
+            refuse.accept("sort-natural", () -> selected.sort(null));
+            refuse.accept("clear", selected::clear);
+            refuse.accept("addFirst", () -> selected.addFirst(8));
+            refuse.accept("addLast", () -> selected.addLast(8));
+            refuse.accept("removeFirst", selected::removeFirst);
+            refuse.accept("removeLast", selected::removeLast);
+            refuse.accept("iterator-remove-initial", () -> selected.iterator().remove());
+            refuse.accept("iterator-remove-exhausted", () -> {
+                Iterator<Integer> cursor = selected.iterator();
+                while (cursor.hasNext()) cursor.next();
+                cursor.remove();
+            });
+            refuse.accept("listIterator-remove-initial", () -> selected.listIterator().remove());
+            refuse.accept("listIterator-set-initial", () -> selected.listIterator().set(8));
+            refuse.accept("listIterator-add-initial", () -> selected.listIterator().add(8));
+            refuse.accept("listIterator-remove-forward", () -> {
+                java.util.ListIterator<Integer> cursor = selected.listIterator();
+                if (cursor.hasNext()) cursor.next();
+                cursor.remove();
+            });
+            refuse.accept("listIterator-set-forward", () -> {
+                java.util.ListIterator<Integer> cursor = selected.listIterator();
+                if (cursor.hasNext()) cursor.next();
+                cursor.set(8);
+            });
+            refuse.accept("listIterator-add-forward", () -> {
+                java.util.ListIterator<Integer> cursor = selected.listIterator();
+                if (cursor.hasNext()) cursor.next();
+                cursor.add(8);
+            });
+            refuse.accept("listIterator-remove-backward", () -> {
+                java.util.ListIterator<Integer> cursor = selected.listIterator(selected.size());
+                if (cursor.hasPrevious()) cursor.previous();
+                cursor.remove();
+            });
+            refuse.accept("listIterator-set-backward", () -> {
+                java.util.ListIterator<Integer> cursor = selected.listIterator(selected.size());
+                if (cursor.hasPrevious()) cursor.previous();
+                cursor.set(8);
+            });
+            refuse.accept("listIterator-add-backward", () -> {
+                java.util.ListIterator<Integer> cursor = selected.listIterator(selected.size());
+                if (cursor.hasPrevious()) cursor.previous();
+                cursor.add(8);
+            });
+        }
+        // Read validation retains AbstractList's established exception classes.
+        M3ArrayList<Integer> owner = new M3ArrayList<>(List.of(4, 1, 3, 2));
+        M3IndexedLiveView<Integer> root = M3IndexedLiveView.filteredSorted(
+                owner, value -> value >= 2, Comparator.naturalOrder());
+        fails(IndexOutOfBoundsException.class, () -> root.subList(-1, 0));
+        fails(IndexOutOfBoundsException.class, () -> root.subList(0, 4));
+        fails(IllegalArgumentException.class, () -> root.subList(2, 1));
+        List<Integer> selected = root.subList(0, 2);
+        fails(IndexOutOfBoundsException.class, () -> selected.get(-1));
+        fails(IndexOutOfBoundsException.class, () -> selected.listIterator(3));
+        assertEqual(selected, List.of(2, 3));
+        // Stable-length backing replacements remain visible through the original root.
+        owner.set(3, 6);
+        assertEqual(root, List.of(3, 4, 6));
+        assertEqual(selected, List.of(3, 4));
+        // Repeated reversal must cancel rather than retaining an unbounded wrapper chain.
+        List<Integer> repeated = selected;
+        for (int i = 0; i < 10_000; i++) repeated = repeated.reversed();
+        assertEqual(repeated, List.of(3, 4));
+        Iterator<Integer> invalidated = selected.iterator();
+        root.invalidate();
+        fails(ConcurrentModificationException.class, invalidated::hasNext);
+        if (!failures.isEmpty()) {
+            throw new AssertionError("strict sublist violations=" + failures.size()
+                    + " across " + observations.get() + " mutation observations: " + failures);
+        }
+    }
+
+    /** Both recipes in one original view: failed reentrant preparation, then strict ranges. */
+    private static void strictDerivedAfterReentrancyContracts() {
+        M3ArrayList<Integer> owner = new M3ArrayList<>(List.of(4, 1, 3, 2));
+        AtomicReference<M3IndexedLiveView<Integer>> current = new AtomicReference<>();
+        AtomicInteger attempts = new AtomicInteger();
+        M3IndexedLiveView<Integer> view = M3IndexedLiveView.filteredSorted(owner, value -> {
+            if (attempts.getAndIncrement() == 0) current.get().invalidate();
+            return value >= 2;
+        }, Comparator.naturalOrder());
+        current.set(view);
+        fails(ConcurrentModificationException.class, view::size);
+        List<Integer> derived = view.subList(0, 3).reversed().subList(0, 2);
+        assertEqual(derived, List.of(4, 3));
+        fails(UnsupportedOperationException.class, () -> derived.addAll(List.of()));
+        Iterator<Integer> stale = derived.iterator();
+        view.invalidate();
+        fails(ConcurrentModificationException.class, stale::hasNext);
+        owner.set(3, 5);
+        assertEqual(view, List.of(3, 4, 5));
+        assertEqual(derived, List.of(5, 4));
+        fails(UnsupportedOperationException.class, () -> derived.removeIf(value -> false));
     }
 
     private static void randomDifferential() {
