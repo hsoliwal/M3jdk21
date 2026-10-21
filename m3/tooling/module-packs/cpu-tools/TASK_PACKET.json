@@ -1,0 +1,91 @@
+{
+  "task_packet": "active",
+  "task_id": "m3-cpu-tools-jmod-20261018",
+  "source_doc": "m3/docs/community-capability-admission.md",
+  "invariant_id": "M3-COMMUNITY-1-2-4",
+  "base_commit": "f29b0afe7ad253cc0562bc8dfdd48fc1acec710e",
+  "canonical_repository": "hsoliwal/com.synexia",
+  "canonical_recipe_home": "synexia-openrewrite-recipes/recipes/m3-cpu-tools-jmod-20261018",
+  "canonical_recipe": "com.synexia.m3jdk.CpuToolsJmod20261018",
+  "donor_revision": "50f48cbbe11f17fb8dc209bac3812f8940a1e267",
+  "run": {
+    "mode": "apply",
+    "profile": "bounded-local",
+    "workers": 1,
+    "shard_count": 1,
+    "shard_index": 0
+  },
+  "targets": [
+    "m3/tooling/module-packs/cpu-tools/**",
+    "m3/tooling/module-packs/text-tools/src/jdk.m3.io/jdk/m3/io/M3File.java",
+    "m3/docs/name-mapping.d/m3-cpu-tools-jmod-20261018.json",
+    "m3/tooling/module-packs/text-tools/build.py",
+    "m3/tooling/module-packs/text-tools/README.md",
+    "m3/evidence/cpu-tools-jmod-20261018/**"
+  ],
+  "invariant_locks": {
+    "JDK_PRODUCT_SOURCE": "LOCKED",
+    "EXISTING_PUBLIC_API": "LOCKED",
+    "JAVA_HOME": "READ_ONLY",
+    "BUILD_SCRIPTS": "ONLY_DECLARED_TARGETS",
+    "EXISTING_JMOD_PACKAGER": "REUSE_UNMODIFIED"
+  },
+  "allowed_delta": [
+    "additive optional CPU modules and aggregate facade",
+    "bounded M3File adapter in existing jdk.m3.io owner",
+    "actual compiler M3AST snapshot projection",
+    "task-local build, tests, legal notices, naming and receipts",
+    "explicit fresh-output image assembly through existing packager",
+    "existing text-tools build source/target mode and documentation for the additive M3File custom-JDK API",
+    "generated tool evidence under m3/evidence/cpu-tools-jmod-20261018; source payload remains sealed"
+  ],
+  "forbidden": [
+    "editing generated production sources outside canonical recipe",
+    "new public String or competing M3String storage owner",
+    "new JMOD packager",
+    "global JAVA_HOME mutation",
+    "global historical lineage rewrite",
+    "unreviewed runtime dependency download",
+    "false full-catalogue or ordered-family completion"
+  ],
+  "verify_order": [
+    "diff and source identity",
+    "static contracts and recipe fixed point/refusal",
+    "Java21 compile",
+    "independent behavior and ownership fixtures",
+    "existing JNI compile",
+    "twenty-module JAR/JMOD readback and linked image",
+    "M3String enabled/default and exact replay"
+  ],
+  "output_contract": [
+    "STATUS.tsv",
+    "FINAL_REPORT.md",
+    "RUN_CONTEXT.tsv",
+    "PROVENANCE.tsv",
+    "VERIFY_CONTRACT.tsv",
+    "OUTPUT_CONTRACT.tsv"
+  ],
+  "stop_conditions": [
+    "failed locked input check",
+    "failed compile or behavior gate",
+    "occupied output directory",
+    "failed source/artifact checksum",
+    "missing actual M3 compiler/progress APIs",
+    "failed explicit M3String storage proof",
+    "command timeout"
+  ],
+  "declared_scope": "LIBRARY_API",
+  "scope_details": {
+    "kernel_export": "LIBRARY_API_ADDITIVE",
+    "image_assembly": "EXPLICIT_OUTPUT_ONLY",
+    "module_count": 20,
+    "donor_module_count": 16,
+    "registry_operation_count": 22,
+    "family_promotion": false,
+    "receiving_sequence_advanced": false,
+    "full_MIndexFile_plane": false,
+    "full_CPU_catalogue": false,
+    "qualification_authority": "Exact canonical recipe receipts and ${OUT}/BUILD_RECEIPT.json; static source ledgers are not a passing gate"
+  },
+  "evidence_state": "SEE_EXACT_RECEIPTS; missing required evidence remains pending"
+}

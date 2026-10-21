@@ -61,3 +61,48 @@ The three leaves had reached master only as zero-file superset merges (62153d40f
 ## 2026-10-12 reseal (logical concat length guard)
 
 Master commit 2442a6b242953f4ec8bd63d52ac48708d0383782 adds the checked logical-length/OOME guard to M3StringPool.java. This is an additive six-line change over the v2 recipe state; the source is pinned as an exact superseded SHA-256 (f8bac45d1623d25470e1b79beffa276f271db10e297ef5b434d5335c9d4c908b) in manifest.json. The recipe remains refusal-safe: it recognizes this state as already superseded and does not apply or reverse the older patch over it. Unknown source states remain rejected.
+
+## 2026-10-18 re-seal (A42 flat-needle trigram gate re-land, leaf REGEX-RELAND)
+
+Superseded-custody re-seal against aabb10ebf8 (receiver of Synexia #12397): `runtime.patch` and every
+`after` image are untouched (66 targets). `M3StringSearchPrecompute.java` and `String.java` record their
+A42 re-land owners as reviewed `superseded` hashes. The pinned master 970a34350eb already failed
+`apply.py --check` (`source drift: .../M3String.java`): `M3String.java`, `M3StringPool.java`,
+`M3PatternQuery.java` and `Pattern.java` had changed on master after the last seal (3c3d66694a) without a
+re-seal, so their master hashes are recorded as `superseded` too (PRE_EXISTING_DRIFT). A full
+`a4/reseal.py` regeneration is refused by the current `apply.py` (`modified UTF-8 recipe seal drift:
+src/hotspot/share/classfile/javaClasses.cpp`), so the superseded custody of the A41/A42 epoch-1 re-seals
+is kept. `apply.py --check` state=superseded and `test_recipe.py` 8/8 on the 66 targets of aabb10ebf8.
+
+## 2026-10-18 re-seal (A43 reverse needle stock lane re-land, leaf REGEX-RELAND)
+
+Superseded-custody re-seal against e977631b9f (receiver of Synexia #12397): `runtime.patch` and every
+`after` image untouched (66 targets); `M3StringSearchPrecompute.java` records its A43 owner as a reviewed
+`superseded` hash; no other target changed. `apply.py --check` state=superseded and `test_recipe.py` 8/8
+on the 66 targets of e977631b9f.
+
+## 2026-10-19 re-seal (A42 epoch 3 after the master merge, leaf REGEX-RELAND)
+
+Superseded-custody re-seal against 49b7e0cb99 (master 2f2beb2eff7a merged in 370b5cfc30): `runtime.patch`
+and every `after` image untouched (66 targets). Master changed `M3String.java`,
+`M3StringCodePointPrecompute.java` and `String.java` after the 2026-10-18 seals; their master hashes are
+recorded as `superseded` (PRE_EXISTING_DRIFT). `M3StringFacts.java` also changed on master (34663f5b), but it
+is one of the four modified-UTF-8 fan-in owners whose `superseded` list `apply.py` pins exactly
+(`MUTF8_FANIN`), so it is NOT recorded here: `apply.py --check` stays `source drift: .../M3StringFacts.java`
+on this branch (live master 2f2beb2eff7a fails the same check with 8 drifted targets, first
+`.../M3String.java`). Advancing that entry needs the fan-in owner's recipe, not this re-seal.
+
+## 2026-10-19 re-seal (immediate short String owner, leaf SHORTSTRING)
+
+Superseded-custody re-seal against e5869d9ffbd9fe65c03450e017e6691721ae2d9a (receiver of Synexia #12475): `runtime.patch` and every `after`
+image untouched. The immediate-string owner commit changed eight sealed targets (`M3String.java`,
+`M3StringOwner.java`, `M3StringPool.java`, `javaClasses.cpp`, `javaClasses.hpp`, `javaClasses.inline.hpp`,
+`vmClassMacros.hpp`, `vmSymbols.hpp`); their new hashes are recorded as `superseded`. Pre-existing
+drift on master (`M3StringFacts.java`, pinned by `apply.py` `MUTF8_FANIN`) is unchanged by this leaf.
+
+Correction (same leaf): `javaClasses.cpp`, `javaClasses.hpp` and `javaClasses.inline.hpp` are three of the four
+modified-UTF-8 fan-in owners whose `superseded` lists `apply.py` pins exactly (`MUTF8_FANIN`, with
+`M3StringFacts.java`), so their new hashes are NOT recorded: five targets are re-sealed (`M3String.java`,
+`M3StringOwner.java`, `M3StringPool.java`, `vmClassMacros.hpp`, `vmSymbols.hpp`). `apply.py --check` on this
+branch reports `modified UTF-8 source drift: .../javaClasses.cpp`; advancing the fan-in needs the fan-in owner
+recipe for all four owners together (live master already fails the check on `M3StringFacts.java`).

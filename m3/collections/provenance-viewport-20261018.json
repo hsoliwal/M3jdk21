@@ -61,7 +61,7 @@
      "changes": ["Apache-2.0 header with donor attribution kept", "type rename", "package move", "package-private surface made public; SWT.error replaced by the identical IllegalArgumentException"],
      "license": "Apache-2.0, elected from Apache-2.0 OR EPL-2.0 (extraction header EPL-2.0; LICENSE_ELECTION.tsv)"},
     {"source": "bundles/org.eclipse.swt/Eclipse SWT/common/org/eclipse/swt/widgets/VirtualTreeResidentPlan.java", "source_blob": "95381202d9c6c59a54f2475ac3e631486e1b3c09", "source_sha256": "3a069f83f1894385b12a60f90b2560a6a4ec507ef1313826c49ce5d93c8ffd49",
-     "target": "m3/collections/src/main/java/com/m3/collections/M3TreeWindowPlan.java", "target_sha256": "7d0908062e4b20e9fce2cc7cb0331d54d6179b5ed74bf98a557fab80606cc26a",
+     "target": "m3/collections/src/main/java/com/m3/collections/M3TreeWindowPlan.java", "target_sha256": "939c71664bda0330d30cbf88532226ec601c8908e12cf9a6a42a013bd3624368",
      "changes": ["Apache-2.0 header with donor attribution kept", "type rename", "package move", "package-private surface made public; SWT.error replaced by the identical IllegalArgumentException"],
      "license": "Apache-2.0, elected from Apache-2.0 OR EPL-2.0 (extraction header EPL-2.0; LICENSE_ELECTION.tsv)"},
     {"source": "bundles/org.eclipse.swt/Eclipse SWT/common/org/eclipse/swt/widgets/VirtualTreeViewport.java", "source_blob": "a23ded48cde168bbf96cf194db065d5b3715a8fe", "source_sha256": "21a13ff5e83042865f1459fcfd9d34f59a5b6ae757d88304fc653e0fa5fe1572",

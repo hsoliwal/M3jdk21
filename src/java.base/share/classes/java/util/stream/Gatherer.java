@@ -71,14 +71,14 @@ import java.util.function.Supplier;
  * <p>Performing a gathering operation with a {@code Gatherer} should produce a
  * result equivalent to:
  *
- * {@snippet lang = java:
+ * <pre>{@code
  * Gatherer.Downstream<? super R> downstream = ...;
  * A state = gatherer.initializer().get();
  * for (T t : data) {
  *     gatherer.integrator().integrate(state, t, downstream);
  * }
  * gatherer.finisher().accept(state, downstream);
- * }
+ * }</pre>
  *
  * <p>However, the library is free to partition the input, perform the
  * integrations on the partitions, and then use the combiner function to
@@ -92,32 +92,32 @@ import java.util.function.Supplier;
  * that implements the equivalent of
  * {@link java.util.stream.Stream#map(java.util.function.Function)} with:
  *
- * {@snippet lang = java:
+ * <pre>{@code
  * public static <T, R> Gatherer<T, ?, R> map(Function<? super T, ? extends R> mapper) {
  *     return Gatherer.of(
  *         (unused, element, downstream) -> // integrator
  *             downstream.push(mapper.apply(element))
  *     );
  * }
- * }
+ * }</pre>
  *
  * <p>Gatherers are designed to be <em>composed</em>; two or more Gatherers can
  * be composed into a single Gatherer using the {@link #andThen(Gatherer)}
  * method.
  *
- * {@snippet lang = java:
+ * <pre>{@code
  * // using the implementation of `map` as seen above
  * Gatherer<Integer, ?, Integer> increment = map(i -> i + 1);
  *
  * Gatherer<Object, ?, String> toString = map(i -> i.toString());
  *
  * Gatherer<Integer, ?, String> incrementThenToString = increment.andThen(toString);
- * }
+ * }</pre>
  *
  * <p>As an example, a Gatherer implementing a sequential Prefix Scan could
  * be done the following way:
  *
- * {@snippet lang = java:
+ * <pre>{@code
  * public static <T, R> Gatherer<T, ?, R> scan(
  *     Supplier<R> initial,
  *     BiFunction<? super R, ? super T, ? extends R> scanner) {
@@ -134,11 +134,11 @@ import java.util.function.Supplier;
  *          })
  *     );
  * }
- * }
+ * }</pre>
  *
  * <p>Example of usage:
  *
- * {@snippet lang = java:
+ * <pre>{@code
  * // will contain: ["1", "12", "123", "1234", "12345", "123456", "1234567", "12345678", "123456789"]
  * List<String> numberStrings =
  *     Stream.of(1,2,3,4,5,6,7,8,9)
@@ -146,7 +146,7 @@ import java.util.function.Supplier;
  *               scan(() -> "", (string, number) -> string + number)
  *            )
  *           .toList();
- * }
+ * }</pre>
  *
  * @implSpec Libraries that implement transformations based on {@code Gatherer},
  * such as {@link Stream#gather(Gatherer)}, must adhere to the following

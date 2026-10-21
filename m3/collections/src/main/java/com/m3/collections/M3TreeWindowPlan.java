@@ -30,8 +30,8 @@ public final class M3TreeWindowPlan {
 	private long [] keys = new long [0], handles = new long [0];
 	private int [] parentSlots = new int [0];
 	private int size;
-	private final HashMap<Long, Integer> slotByKey = new HashMap<> ();
-	private final HashMap<Long, Integer> slotByHandle = new HashMap<> ();
+	private final M3LongLongHashMap slotByKey = new M3LongLongHashMap ();
+	private final M3LongLongHashMap slotByHandle = new M3LongLongHashMap ();
 
 	private long [] planned = new long [0], retired = new long [0];
 	private int [] previousSiblings = new int [0];
@@ -52,14 +52,14 @@ public final class M3TreeWindowPlan {
 
 	/** Native handle of the committed row at this coordinate, or 0 when it is not resident. */
 	public long handleOf (int parentId, int childIndex) {
-		Integer slot = slotByKey.get (key (parentId, childIndex));
-		return slot == null ? 0 : handles [slot];
+		int slot = (int) slotByKey.getOrDefault (key (parentId, childIndex), -1L);
+		return slot < 0 ? 0 : handles [slot];
 	}
 
 	/** Entry (dense preorder index) of a committed native handle, or -1. */
 	public int entryOf (long handle) {
-		Integer slot = slotByHandle.get (handle);
-		return slot == null ? -1 : slot;
+		int slot = (int) slotByHandle.getOrDefault (handle, -1L);
+		return slot < 0 ? -1 : slot;
 	}
 
 	/** Native handle of a committed entry. */
@@ -96,8 +96,8 @@ public final class M3TreeWindowPlan {
 			if (physicalParent < -1 || physicalParent >= entry) throw new IllegalArgumentException ("preorder");
 			previousSiblings [entry] = lastChild [physicalParent + 1];
 			lastChild [physicalParent + 1] = entry;
-			Integer slot = slotByKey.get (key (parentIds [entry], childIndices [entry]));
-			if (slot != null && !kept [slot]) {
+			int slot = (int) slotByKey.getOrDefault (key (parentIds [entry], childIndices [entry]), -1L);
+			if (slot >= 0 && !kept [slot]) {
 				kept [slot] = true;
 				planned [entry] = handles [slot];
 			} else {

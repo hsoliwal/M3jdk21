@@ -1,0 +1,7 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.Jdk21IndexedReadonlyTwoSourceRoots20261018
+displayName: Keep main and test roots in strict Java21 collection receiver
+description: Hash-pinned one-file workflow correction, preserving all Java and JNI source.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe:
+      crateName: m3jdk21-index-readonly-two-source-roots-20261018

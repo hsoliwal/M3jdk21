@@ -356,12 +356,16 @@ public final class M3CI {
         return Arrays.copyOfRange(nameRows, nameOffsets[key], nameOffsets[key + 1]);
     }
 
-    /** Exact snapshot row for loader-space + binary-name, or -1. */
+    /** Exact snapshot row for loader-space + binary-name, or -1; no candidate array copy. */
     public int classRow(int loaderSpace, CharSequence binaryName) {
         if (loaderSpace < 0 || loaderSpace >= boundary.loaderSpaceCount()) return NONE;
-        int[] rows = classRows(binaryName);
-        for (int row : rows) {
-            if (loaderSpaces[row] == loaderSpace) return row;
+        int contentId = findText(Objects.requireNonNull(binaryName, "binaryName"));
+        if (contentId < 0) return NONE;
+        int key = Arrays.binarySearch(nameKeys, contentId);
+        if (key < 0) return NONE;
+        for (int at = nameOffsets[key], end = nameOffsets[key + 1]; at < end; at++) {
+            int candidate = nameRows[at];
+            if (loaderSpaces[candidate] == loaderSpace) return candidate;
         }
         return NONE;
     }

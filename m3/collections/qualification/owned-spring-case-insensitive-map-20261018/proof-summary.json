@@ -1,0 +1,281 @@
+{
+  "schema": "spring-owner-v2-current-base-compact-public-packet-v5",
+  "status": "ROOT_OWNER_V2_PROOFS_AND_CURRENT_BASE_V5_RUNTIME_PASS_CUSTODY_REPLAY_FOCUSED_REVIEW_PENDING",
+  "owner": {
+    "class": "com.m3.collections.spring.M3LinkedCaseInsensitiveMap",
+    "bytes": 31224,
+    "sha256": "450e3f70be37f0fa0fcee7edd4adc8a2eea4a05a40646fb3e5c531e4ee8447ca"
+  },
+  "rootExecuted": {
+    "protocol": {
+      "common": {
+        "status": "COMMON_CLEAN_LAWS_PASSED_OBSERVATIONS_RECORDED",
+        "ordinaryOperations": 4096,
+        "commonChecks": 196782,
+        "selectedObservations": 246,
+        "commonSHA256": "49c3783d3186b12cc569c4615f70b99d7280c6f4d0035a3cbecb49b6a35f6980",
+        "observationSHA256": "8263f68d9a7c2912c875787a56888f2c098fc66b2197949698f9cb4b64f15a24",
+        "scope": "prewritten finite public protocol; baseline expectations and candidate comparison separate; no universal ghost law or storage audit"
+      },
+      "requiredPolicyRows": 241,
+      "requiredEntryRows": 8,
+      "requiredPolicySHA256": "90f92584b05949d318ba30c7ea859c2242bd13758ae0df984012b39590ead25c",
+      "requiredEntrySHA256": "3058f1d66b6166822d9d22f31250940d96ef0c5264eabc65a51e54278a7cfb7f",
+      "compatibilityRows": 7,
+      "compatibilitySHA256": "e51c5a479726113e895bc0d1e10bdd6ddd914629326426f74cbc8c155df5edbd"
+    },
+    "publicSurface": {
+      "status": "PASS",
+      "publicConstructors": 4,
+      "nonbridgeInstanceMethods": 34,
+      "bridges": 4,
+      "mapDefaults": 7,
+      "protectedHooks": 2,
+      "normalization": "exact owner type names only",
+      "scope": "public metadata only; behavior and provider-free array ownership require separate proofs"
+    },
+    "projection": {
+      "status": "PASS",
+      "checks": 9437489,
+      "cases": 1048576,
+      "projectionSHA256": "83211754b2567685ea16a105d0d74c6510d4f7382f76580368f2d819806ca2d3",
+      "scope": "existing aligned primitive kernel over public map views/snapshots; no native map store or ABI addition"
+    },
+    "supplementals": {
+      "getter": {
+        "cases": 9,
+        "exactProviderStdout": true,
+        "stdoutSHA256": "46683c81e5187c5aeb732286883e54e62d2733e502aaac284a0a940fb0ec3e30",
+        "fixtureSHA256": "c98c0a55be337139d03ffc457d326e36776f8e5c2a63dc4c91cd9ed87e7a7779"
+      },
+      "equality": {
+        "cases": 6,
+        "exactProviderStdout": true,
+        "stdoutSHA256": "24567875cf56ef67781abeb65a7327019448982286537314854f14761c9aa08f",
+        "fixtureSHA256": "20db98ef08686c4887baf32fb2ad7fa96fed2ef6aa28c957026629837a630cca"
+      }
+    },
+    "constructors": {
+      "status": "PROVIDER_EMPTY_CONSTRUCTORS_RECORDED",
+      "invocations": 32,
+      "returnedEmpty": 24,
+      "illegalArguments": 8,
+      "actualOutOfMemoryErrors": 0,
+      "otherFailures": 0,
+      "traceSHA256": "d84d32ffd8f6f2e23fc27392b91ad6f6e69859d2812b042464c7333f548b9037",
+      "javaRuntime": "21.0.9+7-LTS-338",
+      "maxHeapBytes": 67108864,
+      "activeProcessors": 2
+    },
+    "currentBaseRuntime": {
+      "status": "PASS",
+      "baseCommit": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
+      "baseTree": "a493469edd30b3345cc32f608fca19b55b4a378a",
+      "selectedJavaFiles": 130,
+      "selectedNativeFiles": 1,
+      "classFiles": 304,
+      "maskKernelClassSHA256": "3c56df2cdced6979c30ee482834b00dfa41f5021658b65b07a11e4dfaf4eb763",
+      "nativeSourceSHA256": "8610e9fcedcc8eb698acbf3161bca8ea7d16194e61c66915f9e25fe47aae27f7",
+      "nativeDllSHA256": "3bb3c78efef58d90cc29160cd4b96b64ea88ef286763e94dd13c47bac7f0258c",
+      "fixtureSHA256": "e7b83f57343e3399865671eab4ec76997eed4953f8607fe8774c8ac9714c3b65",
+      "ownerSHA256": "450e3f70be37f0fa0fcee7edd4adc8a2eea4a05a40646fb3e5c531e4ee8447ca",
+      "results": {
+        "provider-java": {
+          "status": "PASS",
+          "checks": 9437489,
+          "cases": 1048576,
+          "projectionSHA256": "83211754b2567685ea16a105d0d74c6510d4f7382f76580368f2d819806ca2d3",
+          "scope": "existing aligned primitive kernel over public map views/snapshots; no native map store or ABI addition"
+        },
+        "owned-java": {
+          "status": "PASS",
+          "checks": 9437489,
+          "cases": 1048576,
+          "projectionSHA256": "83211754b2567685ea16a105d0d74c6510d4f7382f76580368f2d819806ca2d3",
+          "scope": "existing aligned primitive kernel over public map views/snapshots; no native map store or ABI addition"
+        },
+        "owned-native": {
+          "status": "PASS",
+          "checks": 9437489,
+          "cases": 1048576,
+          "projectionSHA256": "83211754b2567685ea16a105d0d74c6510d4f7382f76580368f2d819806ca2d3",
+          "scope": "existing aligned primitive kernel over public map views/snapshots; no native map store or ABI addition"
+        }
+      },
+      "scope": "Exact current130 selected core inputs strictcompiled; actual current C kernel compiled and same frozen public-map projection under provider JAVA/owned JAVA/actual NATIVE_REQUIRED with -Xcheck:jni. No native map storage/CRUD, new fixture, whole-library admission, performance claim or new ordinary protocol operations."
+    },
+    "historicalCurrentBaseRuntimeV3": {
+      "status": "PASS",
+      "selectedJavaFiles": 130,
+      "selectedNativeFiles": 1,
+      "classFiles": 304,
+      "maskKernelClassSHA256": "3c56df2cdced6979c30ee482834b00dfa41f5021658b65b07a11e4dfaf4eb763",
+      "nativeSourceSHA256": "8610e9fcedcc8eb698acbf3161bca8ea7d16194e61c66915f9e25fe47aae27f7",
+      "nativeDllSHA256": "ffc18499d914a34c06645b4559f95ceff23899f6d79a3b93249a739125295c9e",
+      "results": {
+        "provider-java": {
+          "status": "PASS",
+          "checks": 9437489,
+          "cases": 1048576,
+          "projectionSHA256": "83211754b2567685ea16a105d0d74c6510d4f7382f76580368f2d819806ca2d3",
+          "scope": "existing aligned primitive kernel over public map views/snapshots; no native map store or ABI addition"
+        },
+        "owned-java": {
+          "status": "PASS",
+          "checks": 9437489,
+          "cases": 1048576,
+          "projectionSHA256": "83211754b2567685ea16a105d0d74c6510d4f7382f76580368f2d819806ca2d3",
+          "scope": "existing aligned primitive kernel over public map views/snapshots; no native map store or ABI addition"
+        },
+        "owned-native": {
+          "status": "PASS",
+          "checks": 9437489,
+          "cases": 1048576,
+          "projectionSHA256": "83211754b2567685ea16a105d0d74c6510d4f7382f76580368f2d819806ca2d3",
+          "scope": "existing aligned primitive kernel over public map views/snapshots; no native map store or ABI addition"
+        }
+      }
+    }
+  },
+  "unchangedParserFunctionSourceSHA256": "9370c139811063664519f5e7953541e645b72ae3b23b62200f57a24b4efcfe25",
+  "rootReceipts": {
+    "proof-owned-v2/OWNED_RECEIPT.json": {
+      "bytes": 2632,
+      "sha256": "4ef890bcda14bcbbf58b95509db56088d37c2a0cad52d70fd59f9a8383e58e33"
+    },
+    "proof-baseline-v1/BASELINE_RECEIPT.json": {
+      "bytes": 11410,
+      "sha256": "d513cee82dcb3a74ee67b0c15f179585c7d0395d216445fae1f46fc2a9e81638"
+    },
+    "proof-constructor-v1/CONSTRUCTOR_RECEIPT.json": {
+      "bytes": 10415,
+      "sha256": "a3622a2eb6bca7c120f8cbdcbc27b225f16892d58682170da65c7b9f081ec922"
+    },
+    "supplementals-v2/SUPPLEMENTAL_RECEIPT.json": {
+      "bytes": 5511,
+      "sha256": "43d0ff6aa0c620ffa6ce76c993460217a1c92369e52f49a95480eccc50eb13a2"
+    },
+    "supplementals-v2/CONSTRUCTOR_RECEIPT.json": {
+      "bytes": 2494,
+      "sha256": "f782870ae26a91b34126da61483bf16db4588b9dbf53760a9ceeade2a8c9ea93"
+    },
+    "mask-projection/run-owned-v2/RECEIPT.json": {
+      "bytes": 4921,
+      "sha256": "bff2d0f7008dd93e219a71e67150dd6e59d75f24a7e08ebc257603e790cb0fd7"
+    },
+    "RECEIVING_PROOF-v2.json": {
+      "bytes": 23713,
+      "sha256": "2fcea9cd90862fec5d168dd31534db617f860517d65a8de9eae218e8614bec12"
+    },
+    "CURRENT_BASE_RUNTIME_V3.json": {
+      "bytes": 11075,
+      "sha256": "2c76fe6bc703509cd14b75b2125c18e17920334d439dac3576dd7d8e02c4182e"
+    },
+    "CURRENT_BASE_RUNTIME_V5.json": {
+      "bytes": 11075,
+      "sha256": "602494cad7e16cbf6c39fa0f1e6ba0a5889e563195b282d05d11572c349abdb5"
+    }
+  },
+  "limits": [
+    "One complete mapped owner, not complete five-library collections coverage",
+    "249 required records and common digest compared; seven compatibility diagnostics preserved separately with no parity",
+    "32 constructor calls and 15 supplemental cases are separate fixtures, not additional ordinary operations",
+    "Primitive JNI public-view projection only; no native map store, CRUD ABI or whole-library JNI admission",
+    "Own nominal and wire identity; no concrete Spring assignability or identical serialization bytes",
+    "No timing/allocation/resource parity or performance speedup measurement",
+    "Current130 core compile is context proof; class-file count is not collections count",
+    "Local actual strict javac and official JUnit recorded; local Maven/hosted Maven and final independent review are pending",
+    "Current master includes four new core Java sources outside the fixed selected130 input list; no all-master/all-library compile or family-completion claim."
+  ],
+  "evidenceSelection": {
+    "included": "Active frozen fixtures, provider/owned captured results, before-code/FOSS/28-atom/source custody, critical V2 receipts and two V1 callback failure witnesses with one V1 source preimage.",
+    "localHistoryPreserved": "Original209-file public-stage and all original local histories remain intact; repeated raw command traces/partition dumps/preimages/empty streams are not all included in this public selection.",
+    "historicalPaths": "Root receipt names/hashes refer to preserved original runs; absent historical paths are not public reproduction entrypoints.",
+    "freshExecution": "No passed behavioral/native/receiving suite rerun for compaction; only byte custody and actual captured stdout replay."
+  },
+  "includedRootReceiptPaths": [
+    "m3/collections/qualification/owned-spring-case-insensitive-map-20261018/archive/proof-owned-v2/OWNED_RECEIPT.json",
+    "m3/collections/qualification/owned-spring-case-insensitive-map-20261018/archive/proof-baseline-v1/BASELINE_RECEIPT.json",
+    "m3/collections/qualification/owned-spring-case-insensitive-map-20261018/archive/proof-constructor-v1/CONSTRUCTOR_RECEIPT.json",
+    "m3/collections/qualification/owned-spring-case-insensitive-map-20261018/archive/supplementals-v2/SUPPLEMENTAL_RECEIPT.json",
+    "m3/collections/qualification/owned-spring-case-insensitive-map-20261018/archive/supplementals-v2/CONSTRUCTOR_RECEIPT.json",
+    "m3/collections/qualification/owned-spring-case-insensitive-map-20261018/archive/mask-projection/run-owned-v2/RECEIPT.json",
+    "m3/collections/qualification/owned-spring-case-insensitive-map-20261018/RECEIVING_PROOF-v2.json",
+    "m3/collections/qualification/owned-spring-case-insensitive-map-20261018/CURRENT_BASE_RUNTIME_V3.json",
+    "m3/collections/qualification/owned-spring-case-insensitive-map-20261018/CURRENT_BASE_RUNTIME_V5.json"
+  ],
+  "selectedBaseCommit": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
+  "selectedBaseTree": "a493469edd30b3345cc32f608fca19b55b4a378a",
+  "algorithmEvaluation": {
+    "originalBeforeCodeCatalogue": {
+      "bytes": 6079,
+      "sha256": "8270860cc56b0130714da40fd9c24de185b4ed08cae14a8636aad81dd212f7bb"
+    },
+    "actualResultSuccessor": {
+      "bytes": 11915,
+      "sha256": "5541bfe699f7d5f9ace00f7016ced8be889b4256623f976e094a7bd94a032be8"
+    },
+    "rows": 13,
+    "scope": "12 retained categories plus15callback-witness row; finite executed proof pins versus source-only alternative rejection distinguished; no new benchmark or allocation-parity claim."
+  },
+  "historicalSelectedBaseV3": {
+    "baseCommit": "07ba6e383343d32c83cfdaf641387bbe72bf325d",
+    "baseTree": "d0486a434c45a525bc11fd69e6c49162c6562b3b",
+    "runtimeReceipt": "CURRENT_BASE_RUNTIME_V3.json",
+    "runtimeReceiptPin": {
+      "bytes": 11075,
+      "sha256": "2c76fe6bc703509cd14b75b2125c18e17920334d439dac3576dd7d8e02c4182e"
+    },
+    "scope": "Preserved historical executed proof; not the current merge-context qualification"
+  },
+  "currentContextSelection": {
+    "selectedJavaSources": 130,
+    "selectedNativeSources": 1,
+    "changedSelectedJavaSources": [
+      {
+        "path": "m3/collections/src/main/java/com/m3/collections/M3IndexedListSnapshot.java",
+        "oldSHA256": "0f0939615884c4d8bbfe2a3c9bbc5072d49faa6c20636c2eadac3104269aefaa",
+        "newSHA256": "0e201b871ca85fa0af306530b6e52cd7fbcdb47207ea0554456abb25e003a61d",
+        "gitBlob": "c1c0bead12632dd42a30961ccf63193de0773c64",
+        "bytes": 10082
+      },
+      {
+        "path": "m3/collections/src/main/java/com/m3/collections/M3IndexedTable.java",
+        "oldSHA256": "9b87cefcc65e295afe516a1d007e3b5acbc87a8035e1f55223d1b2558cf7858c",
+        "newSHA256": "3af737a20b7d75273dfe4ee29a34400902e0ad015535c05321898b1f5526aebc",
+        "gitBlob": "ef65261a642da8e473763d57905297d3e0dc5c2c",
+        "bytes": 21153
+      },
+      {
+        "path": "m3/collections/src/main/java/com/m3/collections/M3LongArrayDeque.java",
+        "oldSHA256": "cc87514c9499477dd435e512881ecb045356b99f65d212866ee2d32fb3795a84",
+        "newSHA256": "67a1118b2df4cff80430e47700d6243e5135048abfa26ffdeffa66dc8f2e76cc",
+        "gitBlob": "73d90117f3a3b4f1a5a670fb34f5326765627d2c",
+        "bytes": 10831
+      }
+    ],
+    "newCoreJavaFilesOutsideFixedSelection": 4,
+    "sourceCustodyReceipt": {
+      "file": "CURRENT_BASE_CUSTODY_V5.json",
+      "location": "preserved private root execution history",
+      "bytes": 76512,
+      "sha256": "fde5fca9b6608d022b6fecac5bfc189d934812f9ff721084b7e568f2c2006b56"
+    },
+    "scope": "Fixed selected130 source list at current base, not every Java source now present in master; 304 class files are context artifacts, not collections. Selected context is excluded from publication."
+  },
+  "metadataSuccessorV5": {
+    "priorV4StagingReceipt": {
+      "bytes": 29531,
+      "sha256": "7672310f0ba8f23ff375f831e608481e42a4115d5d71a1c94ccb33febdfaabfc"
+    },
+    "beforeEditSealSHA256": "a4fcde75d958ec1a527083759bd979c0bf27a7248bb39d6fd72fcd316233c867",
+    "prospectiveReuseDecisionSHA256": "885b779e05171369e8ec38d0e110eac77c2ac876e727572061f20c99cc918d34",
+    "ownerEngineTestsFixturesRunnersPomsWorkflowUnchanged": true,
+    "ordinaryConstructorSupplementalReceivingSuitesRepeated": false,
+    "newRuntimeProof": "Root strict current130 Java and unchanged C kernel compile plus frozen providerJAVA/ownedJAVA/new NATIVE_REQUIRED projection; exact actual receipt included",
+    "sourceGuardAndCapturedReplay": "Executed separately and recorded in the external V5 staging receipt",
+    "focusedMetadataReview": "PENDING_ROOT_NORMAL_DEFAULT_CODEX",
+    "hostedCI": "NOT_RUN",
+    "publication": "NOT_PERFORMED"
+  }
+}

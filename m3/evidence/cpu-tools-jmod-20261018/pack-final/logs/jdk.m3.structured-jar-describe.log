@@ -1,0 +1,5 @@
+jdk.m3.structured jar:file:///dev/shm/m3-cpu-tools-f4826e049195-build-v4/jars/jdk.m3.structured.jar!/module-info.class
+exports jdk.m3.structured
+requires java.base mandated
+requires jdk.m3.text transitive
+

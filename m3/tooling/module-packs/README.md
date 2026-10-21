@@ -69,3 +69,11 @@ and renders a control; missing artifacts/display/native libraries cause failure.
 COMMUNITY-1 kernel, COMMUNITY-2 JavaFX assembler and COMMUNITY-4 diagnostics are tracked
 separately. COMMUNITY-3 still requires real backport build/jtreg receipts. Dependency
 download or build failures never turn into accepted candidates or zero community demand.
+
+## Current Lucene and OpenNLP forks
+
+The separate [current-fork NLP/search lane](nlp-search/current-forks/README.md)
+receives sealed original fork builds as JMODs and supplies M3 byte-source, text
+and optional live-compiler adapters. Its pinned Lucene fork requires Java25;
+the existing Java21 compatibility pack retains its own sources and behavior.
+Compilation, focused tests and linked-image execution have separate receipts.

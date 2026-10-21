@@ -10,7 +10,10 @@ ROOT = Path(os.path.abspath(__file__)).parent
 CRATE = "m3-original-mapping-provider-20261017"
 RESOURCE = "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/" + CRATE + "/"
 SUITE = "com.m3.rewrite.backport.M3OriginalCliProviderRecipeTest"
-METHODS = ["allMutableStatesBothOrdersAndFixedPoint","exactRecipeResultsDeliveredToDeclaredOutput","everyUnknownTargetRefusesAfterItsPositiveBaseline","everyDuplicateTargetRefusesAfterItsPositiveBaseline","everyRequiredTargetMissingRefusesAfterItsPositiveBaseline","everyNonPlainTextTargetRefusesAfterItsPositiveBaseline","everyChangedAfterScanTargetRefusesAfterItsPositiveBaseline","sealedManifestPathSafetyAndConvergedIdentity","deliveryPrechecksForeignContentsAndAllSymlinkComponents","currentMappingReconciliationPreservesNewFieldsAndReviewedMigration"]
+BASELINE_MANIFEST = RESOURCE + "baseline-pre.tsv"
+BASELINE_MANIFEST_SHA = "11d69c05d4e4dd0ef27c8a2195827c62b5dd48a49bef34943f4c6a11fbc4899c"
+BASELINE_FILES, BASELINE_BYTES = 55, 795620
+METHODS = ["allMutableStatesBothOrdersAndFixedPoint","exactRecipeResultsDeliveredToDeclaredOutput","everyUnknownTargetRefusesAfterItsPositiveBaseline","everyDuplicateTargetRefusesAfterItsPositiveBaseline","everyRequiredTargetMissingRefusesAfterItsPositiveBaseline","everyNonPlainTextTargetRefusesAfterItsPositiveBaseline","everyChangedAfterScanTargetRefusesAfterItsPositiveBaseline","sealedManifestPathSafetyAndConvergedIdentity","deliveryPrechecksForeignContentsAndAllSymlinkComponents","currentMappingReconciliationPreservesNewFieldsAndReviewedMigration","frozenPreBaselineRemainsIndependentOfInstalledPost"]
 def digest(data):
     return hashlib.sha256(data).hexdigest()
 def git_blob(data):
@@ -61,7 +64,7 @@ def validate_packet(pins, files):
         if len(data)!=row["bytes"] or digest(data)!=row["sha256"] or git_blob(data)!=row["gitBlob"]:
             raise ValueError("SDK source drift: "+name)
     if "pins.json" in names: raise ValueError("self-pinning cycle")
-    for required in ["pom.xml","verify.py","src/main/java/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java","src/test/java/com/m3/rewrite/backport/M3OriginalCliProviderRecipeTest.java",RESOURCE+"manifest.tsv"]:
+    for required in ["pom.xml","verify.py","src/main/java/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java","src/test/java/com/m3/rewrite/backport/M3OriginalCliProviderRecipeTest.java",RESOURCE+"manifest.tsv",BASELINE_MANIFEST]:
         if required not in files: raise ValueError("required SDK input absent")
     provider=next(r for r in rows if r["path"]=="src/main/java/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java")
     if provider["gitBlob"]!=pins["snapshotProviderGitBlob"]: raise ValueError("provider replacement")
@@ -82,10 +85,13 @@ def validate_packet(pins, files):
         manifest.append({"path":path,"before":before,"after":after,"resource":resource})
     paths=[r["path"] for r in manifest]
     if paths!=sorted(set(paths)) or manifest!=pins["targets"]: raise ValueError("manifest pin/order drift")
-    if sum(r["before"]=="ABSENT" for r in manifest)!=5 or sum(r["before"] not in ("ABSENT",r["after"]) for r in manifest)!=1:
-        raise ValueError("expected five additions and one canonical mapping change")
+    if sum(r["before"]=="ABSENT" for r in manifest)!=4 or sum(r["before"] not in ("ABSENT",r["after"]) for r in manifest)!=2:
+        raise ValueError("expected four additions and two exact changes")
     workflow=next(row for row in manifest if row["path"]==".github/workflows/m3-original-mapping-provider-qualification.yml")
+    if workflow["before"]!="faf6a553557508404de8b644ae7ff17ffaf45c74d5b0cb6f3df86c583a0b2bc0":
+        raise ValueError("workflow must change from its exact qualified preimage")
     workflow_contexts(files[RESOURCE+workflow["resource"]])
+    frozen_pre(files)
     return manifest
 def traversal_error(error):
     raise ValueError("closed inventory traversal failed") from error
@@ -153,6 +159,51 @@ def emitted(base,pins):
             if rel not in wanted or digest(regular_data(path))!=wanted[rel]["after"]:
                 raise ValueError("foreign or incorrect emitted file: "+rel)
     if found!=set(wanted): raise ValueError("missing emitted target")
+
+def frozen_pre(files):
+    # Independent original state(0), never derived from successor targets or installed POST.
+    raw=files[BASELINE_MANIFEST]
+    if len(raw)!=7605 or digest(raw)!=BASELINE_MANIFEST_SHA:
+        raise ValueError("frozen PRE manifest identity drift")
+    rows=[];total=0
+    for line in raw.decode("utf-8",errors="strict").splitlines():
+        cells=line.split("\t")
+        if len(cells)!=3:raise ValueError("frozen PRE manifest columns")
+        path,sha,resource=cells;relative(path)
+        if not re.fullmatch("[0-9a-f]{64}",sha) or not re.fullmatch("[A-Za-z0-9_.-]+",resource):
+            raise ValueError("frozen PRE hash/resource")
+        data=files[RESOURCE+resource]
+        if digest(data)!=sha:raise ValueError("frozen PRE resource drift: "+path)
+        rows.append({"path":path,"after":sha,"bytes":len(data),"resource":resource})
+        total+=len(data)
+    names=[row["path"] for row in rows]
+    if names!=sorted(set(names)) or len(rows)!=BASELINE_FILES or total!=BASELINE_BYTES:
+        raise ValueError("frozen PRE closed source inventory drift")
+    return rows
+def baseline(base,files,excluded=()):
+    base=Path(base)
+    if not base.is_absolute() or base!=Path(os.path.normpath(base)):
+        raise ValueError("normalized absolute frozen PRE root required")
+    for other in (ROOT,*excluded):
+        if other is None:continue
+        other=Path(other).absolute()
+        if base==other or base in other.parents or other in base.parents:
+            raise ValueError("frozen PRE must be independent of SDK, checkout and POST")
+    rows=frozen_pre(files)
+    # Reuse the exact emission inventory/hash/traversal/symlink mechanism.
+    emitted(base,{"targets":rows})
+    inventory=[]
+    for row in rows:
+        data=regular_data(safe(base,row["path"]))
+        if len(data)!=row["bytes"] or digest(data)!=row["after"]:
+            raise ValueError("frozen PRE receipt-read drift: "+row["path"])
+        inventory.append({"path":row["path"],"bytes":len(data),"sha256":digest(data)})
+    total=sum(row["bytes"] for row in inventory)
+    if total!=BASELINE_BYTES:raise ValueError("frozen PRE byte total drift")
+    return {"root":str(base),"files":len(inventory),"bytes":total,
+            "manifestSha256":BASELINE_MANIFEST_SHA,
+            "preInventorySha256":digest((json.dumps(inventory,sort_keys=True,separators=(",",":"))+"\n").encode("utf-8")),
+            "independentOfInstalledPost":True}
 def self_test(pins,files):
     count=0
     def refuses(action):
@@ -214,6 +265,48 @@ def self_test(pins,files):
         from unittest import mock
         with mock.patch("os.walk",side_effect=ValueError("forced traversal refusal")):
             refuses(lambda:emitted(realroot,minimal))
+
+    # Six projection-specific refusals; all original22 controls above remain intact.
+    with tempfile.TemporaryDirectory(dir=scratch,prefix="m3-provider-pre-") as tmp:
+        base=Path(tmp);pre=base/"frozen-pre";pre.mkdir()
+        rows=frozen_pre(files)
+        for row in rows:
+            path=safe(pre,row["path"]);path.parent.mkdir(parents=True,exist_ok=True)
+            path.write_bytes(files[RESOURCE+row["resource"]])
+        baseline(pre,files)
+        mapping=safe(pre,"m3/docs/name-mapping.json")
+        original=mapping.read_bytes()
+        mapping.write_bytes(files[RESOURCE+"after-009.txt"])
+        refuses(lambda:baseline(pre,files)) # POST cannot substitute for frozen PRE.
+        mapping.write_bytes(original)
+        first=rows[0];path=safe(pre,first["path"]);original=path.read_bytes()
+        path.unlink()
+        refuses(lambda:baseline(pre,files)) # Missing PRE member.
+        path.write_bytes(original)
+        foreign=pre/"foreign.txt";foreign.write_bytes(b"foreign")
+        refuses(lambda:baseline(pre,files)) # Extra PRE member.
+        foreign.unlink()
+        link=base/"pre-link";link.symlink_to(pre,target_is_directory=True)
+        refuses(lambda:baseline(link,files)) # Root redirection.
+        outside=base/"outside.txt";outside.write_bytes(original)
+        path.unlink();path.symlink_to(outside)
+        refuses(lambda:baseline(pre,files)) # Child redirection even with matching bytes.
+        path.unlink();path.write_bytes(original)
+        baseline(pre,files) # Successful admission cannot authorize later changed bytes.
+        reads=[0];read_before_mutation=regular_data;target=path
+        def mutate_before_receipt_read(candidate,maximum=16*1024**2):
+            if Path(candidate)==target:
+                reads[0]+=1
+                if reads[0]==2:target.write_bytes(bytes([original[0]^1])+original[1:])
+            return read_before_mutation(candidate,maximum)
+        # The first read passes emitted(); the second returns same-size changed bytes.
+        # An implementation that merely records that second digest must fail this control.
+        with mock.patch.dict(globals(),{"regular_data":mutate_before_receipt_read}):
+            refuses(lambda:baseline(pre,files))
+        if reads[0]!=2:raise AssertionError("post-admission receipt-read counterexample not reached")
+        path.write_bytes(original)
+        baseline(pre,files)
+    if count!=28:raise AssertionError("exact original22 plus6 PRE custody controls required")
     return count
 def write_new(path,record):
     path=Path(path).absolute()
@@ -224,6 +317,7 @@ def main():
     ap=argparse.ArgumentParser()
     ap.add_argument("--self-test",action="store_true");ap.add_argument("--receiver",type=Path)
     ap.add_argument("--report",type=Path);ap.add_argument("--emitted",type=Path)
+    ap.add_argument("--baseline-root",type=Path)
     ap.add_argument("--receipt",type=Path);ap.add_argument("--run-id")
     args=ap.parse_args();pins,raw,files=inputs()
     tests=self_test(pins,files) if args.self_test else 0
@@ -235,8 +329,9 @@ def main():
             raise ValueError("foreign or missing Surefire suite")
     counts=validate_report(report_data,SUITE,METHODS) if report_data is not None else None
     if args.emitted:emitted(args.emitted,pins)
+    baseline_record=baseline(args.baseline_root,files,(args.receiver,args.emitted)) if args.baseline_root else None
     if args.receipt:
-        if not args.report or not args.emitted or not args.run_id:raise ValueError("actual named test/emission/run evidence required")
-        write_new(args.receipt,{"schema":"M3_ORIGINAL_PROVIDER_RECIPE_EXECUTION_V1","runId":args.run_id,"pinsSha256":digest(raw),"namedSdkMethods":METHODS,"actualSdkCounts":counts,"reportSha256":digest(report_data),"emittedTargetCount":len(pins["targets"]),"mutableTargets":6,"partialStates":64,"sourceOrders":2,"fixedPoint":"executed by named SDK tests","runtimeJniQualified":False,"matchedJdkQualified":False,"performanceQualified":False,"phaseAdvanced":False})
-    print("M3_ORIGINAL_PROVIDER_CUSTODY_PASS negativeControls="+str(tests)+" sdkExecution="+str(bool(counts)))
+        if not args.report or not args.emitted or not args.run_id or not args.baseline_root:raise ValueError("actual named test/emission/frozen PRE/run evidence required")
+        write_new(args.receipt,{"schema":"M3_ORIGINAL_PROVIDER_RECIPE_EXECUTION_V1","runId":args.run_id,"pinsSha256":digest(raw),"namedSdkMethods":METHODS,"actualSdkCounts":counts,"reportSha256":digest(report_data),"emittedTargetCount":len(pins["targets"]),"frozenPreBaseline":baseline_record,"mutableTargets":6,"addedTargets":4,"changedTargets":2,"partialStates":64,"sourceOrders":2,"fixedPoint":"executed by named SDK tests","runtimeJniQualified":False,"matchedJdkQualified":False,"performanceQualified":False,"phaseAdvanced":False})
+    print("M3_ORIGINAL_PROVIDER_CUSTODY_PASS negativeControls="+str(tests)+" sdkExecution="+str(bool(counts))+" frozenPreBaseline="+str(bool(baseline_record)))
 if __name__=="__main__":main()

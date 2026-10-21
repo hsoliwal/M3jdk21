@@ -56,6 +56,23 @@ public interface M3AST extends AutoCloseable {
         return M3ASTPC.open(task, retainSyntax);
     }
 
+    /**
+     * Whether this task's already-parsed options select the builtin M3AST plugin.
+     * This query creates no M3 handle, listener, compiler or source work. It
+     * reports selection, not successful plugin initialization or compilation.
+     * Call on the task's owning thread while its compiler context is available.
+     *
+     * @param task the original javac task whose options have been processed
+     * @return whether the existing plugin options select the exact name M3AST
+     * @throws NullPointerException if task is null
+     * @throws IllegalArgumentException if task is not a javac implementation
+     * @throws IllegalStateException if the task context has been released or
+     *         its parsed arguments are unavailable
+     */
+    static boolean isPluginSelected(JavacTask task) {
+        return M3ASTPC.isPluginSelected(task);
+    }
+
     /** Register a consumer once, by object identity, before the first event. */
     void addConsumer(Consumer consumer);
 

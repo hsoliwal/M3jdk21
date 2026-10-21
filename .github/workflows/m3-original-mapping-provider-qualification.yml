@@ -166,7 +166,7 @@ jobs:
               if re.fullmatch(r"3\.12\.\d+",version.name) and (version/"x64.complete").is_file() and os.access(python,os.X_OK) and (home/"lib/python3.12/venv/__init__.py").is_file() and (home/"lib/python3.12/ensurepip/__init__.py").is_file():pythons.append(python)
           if not javas or not pythons:raise SystemExit("HOLD_TOOLCHAIN preinstalled JDK21/CPython3.12 required; no setup/download fallback")
           java=sorted(javas)[-1].resolve();python=sorted(pythons)[-1].resolve()
-          for directory in ("home/.m2","m2","tmp","cache","config","data"):(root/directory).mkdir(parents=True,exist_ok=False)
+          for directory in ("home/.m2","m2","tmp","cache","config","data","baseline"):(root/directory).mkdir(parents=True,exist_ok=False)
           settings='<settings xmlns="http://maven.apache.org/SETTINGS/1.2.0"/>\n'
           for name in ("settings.xml","global-settings.xml"):(root/"home/.m2"/name).write_text(settings,encoding="utf-8")
           with open(os.environ["GITHUB_OUTPUT"],"a",encoding="utf-8") as f:
@@ -354,16 +354,22 @@ jobs:
               gate()
               if code:raise RuntimeError(name+" failed with "+str(code))
           py=[os.environ["M3_PYTHON"],"-I","-S","-B"]
-          build=root/"target";overlay=root/"emitted"
+          build=root/"target";overlay=root/"emitted";baseline=root/"baseline"
           runid=os.environ["GITHUB_RUN_ID"]+"-"+os.environ["GITHUB_RUN_ATTEMPT"]+"-"+head[:12]
           bootstrap=overlay/"m3/migration/provider/python312-linux-x86_64/bootstrap.py"
           settings=root/"home/.m2"
           try:
               run("closed-sdk-source-and-current-target-custody",py+[str(sdk/"verify.py"),"--self-test","--receiver",str(source)])
-              run("actual-maven-openrewrite-sdk",["mvn","-B","-ntp","-s",str(settings/"settings.xml"),"-gs",str(settings/"global-settings.xml"),"-Dmaven.repo.local="+str(root/"m2"),"-f",str(sdk/"pom.xml"),"-Dm3.build.root="+str(build),"-Dm3.output.root="+str(overlay),"verify"])
-              run("named-sdk-and-exact-emission-receipt",py+[str(sdk/"verify.py"),"--report",str(build/"surefire-reports/TEST-com.m3.rewrite.backport.M3OriginalCliProviderRecipeTest.xml"),"--emitted",str(overlay),"--receipt",str(root/"recipe-execution.json"),"--run-id",runid])
+              run("actual-maven-openrewrite-sdk",["mvn","-B","-ntp","-s",str(settings/"settings.xml"),"-gs",str(settings/"global-settings.xml"),"-Dmaven.repo.local="+str(root/"m2"),"-f",str(sdk/"pom.xml"),"-Dm3.build.root="+str(build),"-Dm3.output.root="+str(overlay),"-Dm3.baseline.root="+str(baseline),"verify"])
+              run("named-sdk-and-exact-emission-receipt",py+[str(sdk/"verify.py"),"--report",str(build/"surefire-reports/TEST-com.m3.rewrite.backport.M3OriginalCliProviderRecipeTest.xml"),"--emitted",str(overlay),"--receiver",str(source),"--baseline-root",str(baseline),"--receipt",str(root/"recipe-execution.json"),"--run-id",runid])
               run("provider-stdlib-boundary-tests",py+[str(bootstrap),"--self-test","--output",str(root/"provider-boundaries"),"--lock",str(bootstrap.with_name("wheels.lock.json"))])
-              run("genuine-provider-and-unchanged-original-cli",py+[str(bootstrap),"--root",str(overlay),"--baseline-root",str(source),"--output",str(root/"provider"),"--lock",str(bootstrap.with_name("wheels.lock.json"))],360)
+              try:
+                  run("genuine-provider-and-unchanged-original-cli",py+[str(bootstrap),"--root",str(overlay),"--baseline-root",str(baseline),"--output",str(root/"provider"),"--lock",str(bootstrap.with_name("wheels.lock.json"))],360)
+              finally:
+                  run("post-provider-frozen-pre-custody",py+[str(sdk/"verify.py"),"--report",str(build/"surefire-reports/TEST-com.m3.rewrite.backport.M3OriginalCliProviderRecipeTest.xml"),"--emitted",str(overlay),"--receiver",str(source),"--baseline-root",str(baseline),"--receipt",str(root/"recipe-after-provider.json"),"--run-id",runid])
+              pre=json.loads((root/"recipe-execution.json").read_bytes())["frozenPreBaseline"]
+              after=json.loads((root/"recipe-after-provider.json").read_bytes())["frozenPreBaseline"]
+              if pre!=after or pre.get("files")!=55 or pre.get("bytes")!=795620 or pre.get("manifestSha256")!="11d69c05d4e4dd0ef27c8a2195827c62b5dd48a49bef34943f4c6a11fbc4899c" or pre.get("root")!=str(baseline) or pre.get("independentOfInstalledPost") is not True:raise RuntimeError("frozen PRE before/after provider closure drift")
               # Exact bootstrap receipt shape is checked below after provider implementation freezes.
               provider_receipt_path=root/"provider"/"provider-receipt.json"
               provider=json.loads(provider_receipt_path.read_bytes())
@@ -393,7 +399,7 @@ jobs:
               if marker!="MIGRATION_MANIFEST_VALID completion=INCOMPLETE\n" or len(completion)!=158:raise RuntimeError("unchanged completion boundaries lost")
               coverage=(root/"provider"/records_by_label["current-report"]["stdoutPath"]).read_text(encoding="utf-8")
               if "**INCOMPLETE**" not in coverage:raise RuntimeError("actual original coverage report not incomplete")
-              final={"schema":"M3_ORIGINAL_MAPPING_PROVIDER_HOSTED_V1","runId":runid,"checkoutCommit":head,"canonicalSourceCommit":binding["sourceCommit"],"sdkTree":tree,"pinsSha256":hashlib.sha256(pins).hexdigest(),"commands":records,"providerReceiptSha256":hashlib.sha256(provider_receipt_path.read_bytes()).hexdigest(),"recipeReceiptSha256":hashlib.sha256((root/"recipe-execution.json").read_bytes()).hexdigest(),"runtimeJniQualified":False,"matchedJdkQualified":False,"performanceRetentionQualified":False,"phaseAdvanced":False}
+              final={"schema":"M3_ORIGINAL_MAPPING_PROVIDER_HOSTED_V1","runId":runid,"checkoutCommit":head,"canonicalSourceCommit":binding["sourceCommit"],"sdkTree":tree,"pinsSha256":hashlib.sha256(pins).hexdigest(),"commands":records,"providerReceiptSha256":hashlib.sha256(provider_receipt_path.read_bytes()).hexdigest(),"recipeReceiptSha256":hashlib.sha256((root/"recipe-execution.json").read_bytes()).hexdigest(),"baselineAfterProviderReceiptSha256":hashlib.sha256((root/"recipe-after-provider.json").read_bytes()).hexdigest(),"frozenPreBaseline":pre,"baselineVerifiedBeforeAndAfterProvider":True,"runtimeJniQualified":False,"matchedJdkQualified":False,"performanceRetentionQualified":False,"phaseAdvanced":False}
               (root/"hosted-receipt.json").write_text(json.dumps(final,indent=2)+"\n",encoding="utf-8")
           finally:
               # Never write failure artifacts until fresh reserve and planned-copy gates pass.
@@ -402,7 +408,7 @@ jobs:
                   with log.open("rb") as f:f.seek(max(0,log.stat().st_size-32768));tail=f.read(32768)
               try:
                   before=gate(496*1024**2)
-                  selected=[root/"recipe-execution.json",root/"hosted-receipt.json",source/"m3/migration/original-provider-20261017/source-binding.json"]
+                  selected=[root/"recipe-execution.json",root/"recipe-after-provider.json",root/"hosted-receipt.json",source/"m3/migration/original-provider-20261017/source-binding.json",sdk/"src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-original-mapping-provider-20261017/baseline-pre.tsv"]
                   selected+=sorted(build.glob("surefire-reports/TEST-*.xml"))
                   selected+=sorted((root/"provider").glob("*.json"))
                   selected+=sorted((root/"provider-boundaries").glob("*.json"))
@@ -420,7 +426,7 @@ jobs:
               for n,path in enumerate(selected):
                   gate(496*1024**2)
                   label=str(n).zfill(3)+"-"+path.name;shutil.copyfile(path,bundle/label)
-                  inv[label]={"bytes":path.stat().st_size,"sha256":hashlib.sha256(path.read_bytes()).hexdigest(),"source":str(path.relative_to(root)) if root in path.parents else "source-binding.json"}
+                  inv[label]={"bytes":path.stat().st_size,"sha256":hashlib.sha256(path.read_bytes()).hexdigest(),"source":str(path.relative_to(root)) if root in path.parents else str(path.relative_to(source))}
               gate(496*1024**2)
               (bundle/"log-tail.txt").write_bytes(tail);print(tail.decode("utf-8",errors="replace"))
               (bundle/"inventory.json").write_text(json.dumps(inv,indent=2)+"\n",encoding="utf-8")

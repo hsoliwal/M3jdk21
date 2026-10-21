@@ -1,0 +1,7 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.Jdk21StrictIndexedReadOnly20261018
+displayName: Qualify immutable M3 indexed and object-slot snapshot views including Java21 reversed
+description: Two serial source-sealed per-file owners and two new JDK21 differential oracles.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: m3jdk21-index-readonly-20261018

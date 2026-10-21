@@ -1,0 +1,22 @@
+{
+  "schema" : "M3_NLP_CURRENT_FORKS_SDK_RECEIPT_V1",
+  "engine" : "com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe",
+  "sdk_version" : "8.17.1",
+  "kind" : "java",
+  "crate" : "m3-nlp-current-forks-sdk-mirror-java-20261018",
+  "targets" : 7,
+  "first_application_changes" : 6,
+  "fixed_point_changes" : 0,
+  "drift_refusals" : 1,
+  "duplicate_refusals" : 1,
+  "missing_refusals" : 1,
+  "source_sha256" : {
+    "m3/vendor/synexia/synexia-openrewrite-recipes/crates/m3-nlp-search/current-forks-20261018/src/test/java/com/synexia/rewrite/M3NlpSearchCurrentForksAdmissionTest.java" : "eb758cade866a849346e3f362e55561158540c589180af88a0735fc56843b155",
+    "m3/vendor/synexia/synexia-openrewrite-recipes/crates/m3-nlp-search/current-forks-20261018/src/test/java/com/synexia/rewrite/M3NlpSearchCurrentForksRecipeRunner.java" : "e567edf1c8398c6f301a6382510ca260552059a39ff4314767ec0a9281ac1375",
+    "m3/vendor/synexia/synexia-openrewrite-recipes/src/main/java/com/m3/rewrite/jmod/M3ModuleDescriptorRecipe.java" : "db6625450e98eed094a19142370bcd7a064eb91322eab7cf8f8cf9bb2030417f",
+    "m3/vendor/synexia/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3EditScope.java" : "962d37d62d740c3e8055c365a048ae7ee0479c26a9f6bbfe741e540d6c1134ab",
+    "m3/vendor/synexia/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java" : "d108e1de83fdc9a53737216401d3e8b2c7b5e92e6ec4a2167d8e56b707eafad2",
+    "m3/vendor/synexia/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedTextSnapshotRecipe.java" : "8551934cf6ad0a1063f3adc14011a1eaa5e6ff2afef177fa074dbdb6b156f8fc",
+    "m3/vendor/synexia/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3ScopeInference.java" : "8b0d400a8eeceee4a5ca0b09dcfcd7cf2305a13d55d783eea00d24c8aacdfddd"
+  }
+}

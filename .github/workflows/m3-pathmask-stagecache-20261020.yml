@@ -1,0 +1,67 @@
+name: M3JDK21 native indexed-mask stage-cache proof
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - 'm3/collections/src/main/native/collections/m3_index_path_masks.c'
+      - 'm3/collections/qualification/pathmask-stage-cache-20261020/**'
+      - 'm3/tooling/migration-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java'
+      - 'm3/tooling/migration-recipes/src/test/java/com/synexia/rewrite/M3NativeRecipePathAdmissionTest.java'
+      - 'm3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-native-*/**'
+      - 'm3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-native-*.yml'
+      - 'm3/tooling/migration-recipes/qualification/native-recipe-admission-20261021/**'
+      - '.github/workflows/m3-pathmask-stagecache-20261020.yml'
+jobs:
+  focused-native-contract:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: C17 UBSan + Java21 CheckJNI owner parity with exact recipe seals
+        run: bash m3/collections/qualification/pathmask-stage-cache-20261020/verify.sh
+  recipe-maven-admission:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Refuse mutated source closure helpers
+        run: |
+          sha256sum -c m3/tooling/migration-recipes/qualification/native-recipe-admission-20261021/SOURCE_CLOSURE.sha256
+      - name: Test source-closure refusal and dependency graph integrity
+        run: |
+          python3 -m unittest discover -v \
+            -s m3/tooling/migration-recipes/qualification/native-recipe-admission-20261021 \
+            -p test_source_closure.py
+      - name: Admit exact source-built OpenRewrite and JUnit dependency closure
+        run: |
+          set -euo pipefail
+          python3 m3/tooling/migration-recipes/qualification/native-recipe-admission-20261021/source_closure.py \
+            --root . --verify-sources > "$RUNNER_TEMP/m3-source-closure.tsv"
+          cat "$RUNNER_TEMP/m3-source-closure.tsv"
+      - name: Install original source-pinned Maven producers in reactor order
+        run: |
+          set -euo pipefail
+          mvn -B -ntp -f m3/vendor/third_party/pom.xml \
+            -pl rewrite-java,rewrite-java-21,rewrite-test,junit-jupiter-5.10.2 \
+            -am -DskipTests install
+      - name: Verify installed source-built jars retain exact legal and provenance resources
+        run: |
+          set -euo pipefail
+          while IFS=\t' read -r group artifact version module; do
+            jar="m3/vendor/third_party/$module/target/$artifact-$version.jar"
+            test -f "$jar"
+            python3 "m3/vendor/third_party/$module/verify_source.py" "$jar"
+          done < "$RUNNER_TEMP/m3-source-closure.tsv"
+      - name: Build/test qualified OpenRewrite native-path admission source
+        run: |
+          mvn -B -ntp -f m3/pom.xml -pl tooling/migration-recipes -am \
+            -Dtest=M3NativeRecipePathAdmissionTest \
+            -Dsurefire.failIfNoSpecifiedTests=false test

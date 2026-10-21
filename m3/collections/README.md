@@ -138,3 +138,10 @@ Canonical recipes and actual source/runtime qualification stay in Synexia's
 See `synexia-donation.json`, `name-mapping.json` and `qualification/receiving-repair-20261008.json`.
 The global migration remains in STRING. No array/collection/AST phase or JDK backend
 is promoted by this independent module proof. Historical records retain their own hashes.
+
+## Swift Collections donor comparison
+
+See the [revision-pinned category catalogue](algorithm-catalog/swift-collections-20261018.tsv)
+and [deque span-copy qualification](qualification/swift-deque-spans-20261018/README.md).
+The selected private copy atom retains the current primitive deque contract; other Swift families
+remain separate candidate evaluations. This does not promote JDK collection integration.

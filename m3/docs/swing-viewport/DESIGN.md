@@ -97,15 +97,37 @@ the answers are the same (such sizes stay 0), the call counts are not. (3) After
   changes (`VariableHeightLayoutCache.java:436-440`: the hidden root's row is -1). Stock rows overlap or leave gaps,
   for example after a node's text changes from a two-line HTML label to one line with `setRootVisible(false)`. The
   M3 cache has no stored y origins, so its rows stay exact.
-- **D2**: `DefaultTreeSelectionModel.insureRowContinuity` throws `ArrayIndexOutOfBoundsException`
-  (`DefaultTreeSelectionModel.java:918`) when a CONTIGUOUS selection holds an invisible path; both caches throw it at
-  the same point. Not fixed in this leaf.
+- **D2** (fixed 2026-10-19, unconditionally, like D3): `DefaultTreeSelectionModel.insureRowContinuity` threw
+  `ArrayIndexOutOfBoundsException` (`DefaultTreeSelectionModel.java:918`) when a CONTIGUOUS selection held a path
+  that is not visible. It copies each selected path whose row is below the first gap to `newSel[row - min]`, and
+  row -1 is below every gap. Such a selection arises when one hidden path is selected (one path is always
+  contiguous) and `expandsSelectedPaths` is false. The recipe `M3SwingTreeSelectionContinuity` inserts one guard
+  that skips rows below `min`, so the selection becomes the documented first run of contiguous rows.
+  `M3TreeSelectionContinuityTest` fails on stock and passes on the patched JDK. JetBrainsRuntime has the same code.
+  Fixing it uncovered two `resetRowSelection` calls of the stock `FixedHeightLayoutCache` that leaf 2 skipped (a
+  structure change of an expanded node that leaves it a leaf; the collapse of an expanded node without children);
+  both are fixed, and the fixed-mode differential passes 300 x 400.
 - **D4**: stock `FixedHeightLayoutCache.getRowForPath` and `getVisiblePathsFrom` pass `getIndexOfChild`'s -1 on
   without a check when the parent is expanded and visible but no longer has the path's last component (a removed
   selected node, before `JTree` prunes the selection): the row is the parent's row and the enumeration starts at the
   parent, where `VariableHeightLayoutCache` answers -1 and null. The M3 cache reproduces it on purpose: answering -1
   would hand a row -1 to `resetRowSelection` during node removal (the UI's model listener runs before `JTree`'s) and
   expose D2 in CONTIGUOUS selections of large-model trees that do not throw today.
+
+- **D5, JDK-8366188** (fixed 2026-10-19, unconditionally): with a `RowFilter` that hides rows, `JTable.SortManager`
+  keeps the selection in model terms after a sorter event, and shifts it on an insert with
+  `insertIndexInterval(start, length, true)`. That call selects the new indices when the insertion point is selected,
+  so a row inserted at the selected model row came back selected too: the report's selection [2] becomes [1, 2].
+  Without a filter the same insert keeps one row. The inserted model rows are now deselected right after the
+  shift, keeping the cache's lead and anchor.
+- **D6, JDK-6727200** (fixed 2026-10-19, unconditionally; closed upstream in 2011 as "Cannot Reproduce"): every
+  table change caches the selection in `lastModelSelection`, but only a re-sort consumed it. After an update that
+  does not re-sort, the stale cache won over the current selection at the next sorter event with a filter.
+  `processChange` now drops it at its end. Found by the seeded filtered-vs-unfiltered scripts of
+  `M3TableFilterInsertSelectionTest`.
+- **Both:** one recipe, `M3SwingTableSortManagerSelection`. The test fails on stock and passes on the patched JDK.
+  JetBrainsRuntime changes only `JTable.processKeyBinding` (donor wave `JBR_DIFF.tsv`, `JBR_LINEAGE.tsv`), so there
+  is nothing to port.
 
 ## 5. Proof
 
@@ -219,14 +241,16 @@ method names and lane meanings change only together with a note in this section.
 ## 8. Next leaves
 
 1. Leaf 2 above (done).
-2. `JTree` expansion table: `getExpandedDescendants` and `removeDescendantToggledPaths` iterate the whole table on
-   every expansion; an expanded-path index keyed by parent removes the O(expanded) factor.
+2. `JTree` expansion table (done: leaf 5, section 11): `getExpandedDescendants` and `removeDescendantToggledPaths` iterated the whole table on
+   every expansion; an index by parent with the table's own order mirrored removes the O(expanded) factor.
 3. `BasicTreeUI` paint by row index (inventory OH18 of `m3-swing-awt-viewport.md`): one `TreePath` per painted row only
    where `paintRow` needs it.
 4. JList: prefix sums over `cellHeights` for `getCellBounds` and `convertLocationToRow` (done: leaf 3, section 9),
-   guarded so that subclasses that write `cellHeights` keep the stock loops; next: measure-on-demand for `updateLayoutState`.
+   guarded so that subclasses that write `cellHeights` keep the stock loops; `updateLayoutState` measures only the rows
+   that list data events touched (done: leaf 4, section 10). An estimated-height lane is a contract change, recorded
+   in `ENHANCED_API_MAP.tsv` for the user.
 5. Fix D2 in `DefaultTreeSelectionModel` in the M3 mode, with its own differential.
-6. Default-on switch, together with the SWT `swt.widget.mode` convention, once CI has run make and jtreg.
+6. Default-on switch, together with the SWT `swt.widget.mode` convention, once CI has run make and jtreg (proposal: section 12).
 
 ## 9. Leaf 3: JList row offsets by prefix lane (`sun.swing.list`)
 
@@ -284,4 +308,410 @@ machine, stock / M3): `locationToIndex` of the last row 405-626 us / 2.0-3.2 us;
 0.43-0.50 ms (the start frame is noise-bound in both); heap +4 MB (the lane). The single-shot relayout rows
 (`getPreferredSize` 493-687 ms / 593-869 ms, `add(0)` + relayout 378-574 ms / 360-588 ms) are noise-bound: two further
 rounds with a fixed 1.5 GB heap (no heap growth) gave `getPreferredSize` 559-699 ms stock and 622-656 ms M3. Every
-row is still measured on each relayout; the next leaf removes that for model edits.
+row is still measured on each relayout; leaf 4 (section 10) removes that for model edits.
+
+## 10. Leaf 4: JList measures only the rows that list data events touched (`sun.swing.list`)
+
+Stock `BasicListUI.updateLayoutState` measures every row on every layout: one `getElementAt`, one renderer call and
+one `getPreferredSize` per row. Each list data event (an insert, a removal, a `set`) therefore costs a full pass:
+360-588 ms per edit at 10^6 rows (section 9). Leaf 4 keeps each row's measured height and width between layouts and
+measures only the rows that the events touched.
+
+| Class | Role |
+|---|---|
+| `sun.swing.list.M3RowPieces` | piece table: the rows after the edits as runs of rows measured at the last layout, or runs of new rows; an event edits it in O(pieces), the next layout copies the kept sizes in one O(n) pass |
+| `sun.swing.list.M3ListMeasure` | per-UI state: the height and width lanes of the last layout (the height lane is the `cellHeights` array handed to `BasicListUI`, never written afterwards), the pieces, the inputs that set row sizes, and the `measure` decision |
+
+**When it applies.** With `-Dm3.swing.viewport=true`, a UI class in `java.desktop`, vertical layout, variable row
+heights (`fixedCellHeight == -1`), an enabled list, and a renderer whose class is exactly `DefaultListCellRenderer`
+or `DefaultListCellRenderer.UIResource` (the look and feel's default). That renderer sizes a row from the value
+(text, HTML or icon), the list's font and orientation, its border from the look and feel, and its own label
+properties; never from the row index (the index only selects drop-location colours). Anything else keeps the stock
+loop, and the next accepted layout measures every row.
+
+**What a layout measures.**
+- Every row, in the stock order: the first layout, and any layout after the model, the renderer, the list's font
+  (identity) or component orientation, or the renderer's `html.disable` property, icon-text gap, text positions,
+  alignments, label UI or set preferred size changed.
+- Otherwise the inserted and changed rows, in ascending order, plus one probe: the last row kept from the last
+  layout. When the probe is the last row it is measured last; otherwise it is measured first and the rows after it
+  are all new. Either way the renderer ends configured for the last row, as after the stock loop.
+- Every row again when the probe measures differently from its recorded size. This catches changes that resize every
+  row without an event or a tracked input, such as a `UIManager` border or a display scale change.
+- Every row when the events cannot be followed: `contentsChanged` with an index below 0, indices out of range, a
+  model size that the events do not explain, or more than 1,024 pieces.
+
+**Same answers.** The hook sets `cellWidth` (the fixed width, else the widest row, -1 for an empty list),
+`cellHeight = -1`, `cellHeights` (a new array per layout) and `columnCount = 1`, exactly the fields the stock
+method sets for a vertical list. They equal the stock values whenever every kept row would still measure as
+recorded. The tracked inputs, the probe and the events make sure of that, except in the one case below.
+
+**The one known divergence: a value changed without a list data event.** The `ListModel` contract says listeners are
+told of every change, and `DefaultListModel` does so. A model that breaks it, for example a mutable value whose
+`toString` changes, an `Icon` that changes size, or HTML whose images load later, gives different answers:
+- Stock keeps the row's old size until the next `updateLayoutState`, which any later event or property change
+  causes (an insert elsewhere, a font change). That layout measures every row and picks the change up.
+- The M3 path keeps the recorded size until the row itself gets an event, or until every row is measured again
+  (a tracked input changes, the probe differs, the events cannot be followed, or the changed row is the probe).
+- `M3ListMeasureTest.eventlessMutationIsTheOneKnownDivergence` records both behaviours. An application that hits
+  it fires the event the contract asks for (`DefaultListModel.set(i, sameValue)`).
+
+The renderer and the model also see fewer calls (the touched rows plus one probe instead of every row). Only the
+JDK's own renderer classes take the path, and neither has side effects; a model whose `getElementAt` has side
+effects sees fewer of them.
+
+**Not built: an estimated-height lane** (measure on demand, estimate unmeasured rows). `getPreferredSize` and every y
+below an unmeasured row would be estimates, so the answers would differ from stock until every row is measured. It
+is a contract change, recorded in `ENHANCED_API_MAP.tsv` (`LIST-ESTIMATED-ROW-HEIGHTS`, an opt-in client property)
+for the user to decide.
+
+**Algorithm choice (rule 21, `ALGORITHM_CATALOGUE.tsv`, `bench/ROW_EDITS_20261019.tsv`).** Bookkeeping between two
+layouts at 10^6 rows, measuring excluded: the piece table takes 1.0-3.0 ms whatever the edits (one front insert,
+40 random inserts, 1,000 appends, 1,000 front inserts, 100 changes, 100 removals); shifting both lanes on every
+event takes 0.5-1.0 ms for a single edit but 15.5 ms for 40 random inserts and 346 ms for 1,000 front inserts.
+The piece table is chosen. **Donor check:** JetBrainsRuntime `jbr21` `BasicListUI` is identical to stock and `main`
+changes only comments (`FOSS_REUSE_DECISION.tsv`); there is nothing to port.
+
+**Hook (recipe-first).** The same recipe, `M3SwingViewportBasicListUI`, adds a second field, a block at the start
+of `updateLayoutState` (it falls through to the stock loop when `measure` declines), and one statement at the start
+of `Handler.intervalAdded`, `intervalRemoved` and `contentsChanged`. The statement runs before the selection model
+is updated, because the selection listener can lay the list out in the middle of the event. Pass 1 CHANGED, pass 2
+UNCHANGED.
+
+| Proof (2026-10-19, JDK 21.0.9, stock + `--patch-module java.desktop`, output on S:) | Result |
+|---|---|
+| `M3JListViewportDifferential 40 300` (`-Dm3.swing.viewport=true`). Every third seed now keeps `DefaultListCellRenderer` with plain, HTML (one to four lines), empty and null strings and icons; those seeds also toggle `html.disable`, the icon-text gap, the text position, the enabled state and the orientation, and swap the renderer (UIResource, plain, a subclass). Public answers are compared after every step and pixels every 10 steps | **40/40 seeds x 300 steps pass, 1,240 pixel comparisons equal, 990 layouts measured only part of the rows** |
+| Planted bugs: `contentsChanged` not recorded; the piece split losing its row offset | caught: 2 of 9 and 1 of 9 seeds fail (the 3 renderer seeds among them) |
+| `M3ListMeasureTest` (JUnit 5, 9 tests: piece table against a reference list, which rows a layout measures, the probe at the front, at the end and for a height-only change, 12 tracked inputs, declined cases, untrackable events and the 1,024-piece cap, the event-less mutation divergence, empty/clear/fixed width, 30 x 200 differential) with `M3ListRowsTest`, under JaCoCo 0.8.15, merged with a flag-off run | **16/16 pass; `sun.swing.list` 100% lines (213/213), 100% branches (162/162)** |
+| `javac -Xlint:all` of the patched classes | clean for both new classes; warnings unchanged (`BasicTreeUI`'s two `this-escape`) |
+| Hook recipe via `M3PerFileApply` | pass 1 CHANGED, pass 2 UNCHANGED |
+| `make`, jtreg | PENDING_CI |
+
+**Benchmark** (`bench/LIST_MEASURE_20261019.tsv`, `SwingViewportBench list`, 10^6 rows, two interleaved rounds,
+stock / M3; `relayout_*` = one model edit + `getPreferredSize`, median of 11):
+
+| Edit | stock | M3 |
+|---|---:|---:|
+| insert at the front | 564-584 ms | 6.3 ms |
+| `set` in the middle (two-line HTML) | 681-971 ms | 12.1-14.0 ms |
+| append | 792-836 ms | 4.1-4.2 ms |
+| remove at the front | 693-1,007 ms | 5.3-6.1 ms |
+| first layout (`getPreferredSize`, single shot) | 1,302-1,350 ms | 939-1,165 ms (every row is measured either way; noise-bound) |
+| heap after the first layout | 62.3-63.3 MB | 70.9 MB (+4 MB width lane, +4 MB leaf 3 prefix lane) |
+
+The machine was more loaded than in section 9's run; the stock edit rows there were 360-588 ms single shot.
+
+## 11. Leaf 5: the JTree expansion table indexed by parent (`sun.swing.tree.M3ExpandedState`)
+
+`JTree` keeps every path ever expanded in a `Hashtable<TreePath, Boolean>`. Two of its operations scan the whole
+table with `TreePath.isDescendant`:
+- `getExpandedDescendants(parent)`. `BasicTreeUI` calls it on every expansion, so expanding n nodes costs O(n * table).
+- `removeDescendantToggledPaths`, run for every removed toggled child and on structure changes.
+
+On the deep shape (1,111,111 nodes), stock got through 23,152-30,752 of the 111,111 expansions in the 120 s budget,
+and so did leaves 1-2.
+
+**The table.** With `-Dm3.swing.viewport=true`, `JTree` creates `M3ExpandedState` instead of the plain table, in
+its constructor and in `readObject`. It is the stock `Hashtable`, with the same constructor and the same `put`
+sequence, so `get`, `keys()` and their order are those of stock. Beside it, it keeps:
+- A trie of the keys and their ancestors (`HashMap<TreePath, Node>`: parent, children, toggled), updated by
+  `put`, `remove` and `clear`.
+- The `Hashtable`'s bucket count, mirrored: 11 buckets, then 2n + 1 when a new key arrives and the count has
+  reached 0.75 of the capacity.
+- A stamp per key, whose descending order is the key's position in its bucket's chain. A new entry goes to the head
+  of its chain. `rehash` moves the entries in `keys()` order, each to the head of its new bucket, and the stamps are
+  renumbered in that order.
+
+**The two operations.**
+- `getExpandedDescendants` takes the TRUE keys at or below the parent from the trie, sorted as `keys()` walks them
+  (bucket descending, then stamp descending). It then tests `isVisible` on them in that order, which yields the stock
+  enumeration with the stock elements in the stock order. The parent is skipped by identity, as the stock loop's
+  `path != parent` does, so a fresh path equal to a key returns that key, as in stock.
+- `removeDescendantToggledPaths` removes each path's subtree through the trie. The order of removals does not change
+  the table: a removal unlinks one entry and never rehashes.
+
+**When the stock code still runs:**
+- The `JTree` class overrides `getDescendantToggledPaths`: it keeps a plain `Hashtable`, checked once per class
+  under `doPrivileged`. A class whose methods cannot be resolved also keeps it.
+- A mutation the index did not see. None exists in `JTree`, which only calls `get`, `put`, `remove`, `clear` and
+  `keys`; one would come from reflection or an entry-set iterator. It makes the key count differ, and every call
+  goes back to the stock scan until `clear`.
+
+**Precondition (the one known difference).** As for the `Hashtable` itself, a path's last component must keep its
+`hashCode` and `equals` while the tree shows it. The trie also holds the ancestors of keys, so a component whose
+hash changes while only its descendants are keys can make the index miss keys that the stock loop, which uses only
+`equals`, finds. `M3ExpandedStateTest.changedHashIsTheRecordedPrecondition` records it, and records that the
+cases where the index loses track fall back to the stock loop.
+
+**Algorithm choice (rule 21, `ALGORITHM_CATALOGUE.tsv`, `bench/EXPANSION_TABLE_20261019.tsv`).**
+- Chosen: the trie with mirrored bucket and chain order.
+- Rejected: the first version, which handed bucket ties to the stock scan. 17% of queries tied in the differential,
+  and every re-expansion with 100+ answers tied.
+- Rejected: replacing the table with a sorted or linked map, because it changes the order callers see.
+- Donors: JetBrainsRuntime has nothing to port. Its `jbr21` `JTree` differs only in accessibility, and
+  `DefaultTreeSelectionModel` is identical (`FOSS_REUSE_DECISION.tsv`).
+
+**Hook (recipe-first).** The recipe `M3SwingViewportJTree` makes four insertions into `JTree`: the constructor,
+`readObject`, `getExpandedDescendants` and `removeDescendantToggledPaths`. Pass 1 CHANGED, pass 2 UNCHANGED.
+`JTree`'s two `this-escape` warnings are stock.
+
+| Proof (2026-10-19, JDK 21.0.9, stock + `--patch-module java.desktop`, output on S:) | Result |
+|---|---|
+| `M3JTreeExpansionDifferential 40 300`. Two JTrees on one `DefaultTreeModel`; the stock side overrides `getDescendantToggledPaths` and keeps the plain table. Steps: expand and collapse by path and by row, makeVisible, selection, inserts, removals, subtree moves, structure changes, reloads, new roots, `setModel`, vetoes; every fourth seed uses nodes equal by name with reused names. Compared after every step: table keys, values and order; public queries with fresh paths and with the table's own keys; rows; selection; preferred size; pixels every 10 steps | **40/40 pass, 1,240 equal pixel captures; 130,207 expanded-parent queries answered by the index, 0 by the stock loop** |
+| Planted bugs: parent identity, growth rule, subtree removal without the path, stamp order, no renumbering on rehash | caught: 10, 10, 8, 10 and 7 of 10 seeds fail |
+| `M3ExpandedStateTest` (JUnit 5, 10 tests: 30 x 500 random operations against a plain `Hashtable`, including the bucket count read from `Hashtable.table`; the growth rule to the array limit; parent identity; chains in one bucket across three rehashes; null key or value at the threshold; an unseen removal; the recorded precondition; the class gate; serialization; 20 x 200 differential), under JaCoCo, merged with a flag-off run | **10/10 pass; `M3ExpandedState` 100% lines (136/136), 100% branches (90/90)** |
+| `javac -Xlint:all` | no new warnings |
+| `make`, jtreg | PENDING_CI |
+
+**Benchmark** (`bench/JTREE_EXPANSION_20261019.tsv`, `bench/EXPANSION_TABLE_20261019.tsv`):
+
+| Measure | stock | M3 |
+|---|---:|---:|
+| expand all inner nodes in preorder, deep shape (111,111) | 30,752 done in 120 s (budget) | all in 776 ms (1,226 ms with the stamps, loaded machine) |
+| expand all, wide shape (1,001) | 1,261 ms | 267-301 ms |
+| `getExpandedDescendants` table loop, fresh expansion, 11,111 keys | 755 us | 1.6 us |
+| re-expansion with 1,111 remembered keys | 411 us | 170 us |
+| subtree removal of 1,111 keys (with re-insert) | 779 us | 310 us |
+| memory | table only | about 190 bytes per key more |
+
+## 12. Proposal for the user: from opt-in to default-on (not applied)
+
+Today every M3 path is opt-in (`-Dm3.swing.viewport=true`). This section proposes how it becomes the default, with the
+property kept only as a kill switch. Nothing here is applied yet; the default stays off until the user decides.
+
+**Already in place.** M3jdk21 is the JDK, so the M3 paths are part of `java.desktop`, not a layer beside it:
+- The `sun.swing.tree` and `sun.swing.list` classes are reached from stock entry points (`BasicTreeUI.createLayoutCache`,
+  `BasicListUI.getCellBounds`, `convertLocationToRow` and `updateLayoutState`, the `JTree` constructor and
+  `readObject`) through hooks that a recipe applies (section 7a).
+- Each hook falls through to the unchanged stock code when the property is off, so the off state is the stock JDK by
+  construction.
+- No leaf so far needs JNI or HotSpot changes.
+
+**Gates that stay after the flip.** These are correctness conditions, not part of the opt-in, so they remain:
+
+| Leaf | Path | Stock code still runs when |
+|---|---|---|
+| 1, 2 | `M3VariableHeightLayoutCache`, `M3FixedHeightLayoutCache` | a `BasicTreeUI` subclass overrides `createLayoutCache` |
+| 3 | `M3ListRows` | the UI class is outside `java.desktop`, or `cellHeights` is null |
+| 4 | `M3ListMeasure` | renderer other than `DefaultListCellRenderer`(`.UIResource`), fixed cell height, disabled list, wrapped layout, UI outside `java.desktop` |
+| 5 | `M3ExpandedState` | the `JTree` class overrides `getDescendantToggledPaths`; a table mutation the index did not see (none in `JTree`) |
+
+**Known differences from stock.** Each needs a decision before the flip: accept it as a documented change, make
+M3 match stock, or keep that leaf opt-in.
+
+| Id | Leaf | Difference | Proposal |
+|---|---|---|---|
+| D1 | 1 | stock keeps stale y origins after `treeNodesChanged` under a hidden root; M3 rows stay exact | accept (M3 is right; upstream bug) |
+| D4 | 2 | reproduced on purpose; M3 equals stock | none |
+| leaf 4 | 4 | a value changed without a list data event: stock re-measures it at the next layout, M3 when its row gets an event or all rows are re-measured | accept, documented as a `ListModel` contract requirement; or keep leaf 4 opt-in |
+| leaf 5 | 5 | a path component whose `hashCode` changes while the tree shows it can make the index miss keys the stock loop finds | accept (the stock `Hashtable` breaks under the same misuse) |
+
+Already unconditional, so they apply whichever way the user decides: D3 (JDK-8299722,
+`DefaultRowSorter.getComparator`), D2 (`insureRowContinuity`), D5 (JDK-8366188) and D6 (JDK-6727200). Each turned an
+exception or a wrong selection into the documented
+result.
+
+**Exit criteria. All must hold before the flip:**
+1. CI builds the JDK (`make images`) from this branch. Today: PENDING_CI.
+2. The jtreg groups `test/jdk/javax/swing` (JTree, JList, JTable, `plaf/basic`, `plaf/metal`, `plaf/nimbus`) and the
+   new reproducers pass with the property true and with it false. The failure lists must equal those of stock.
+3. Every M3 differential is identical to stock under each shipped look and feel (Metal and Nimbus everywhere,
+   Windows, GTK and Aqua on their platforms). Today they run headless under Basic and Metal.
+4. Heap deltas are documented per leaf (leaf 3 +4 MB and leaf 4 +4 MB per 10^6 JList rows; leaf 5 about 190 bytes per
+   expanded path).
+5. The user approves the differences table above.
+
+**Steps (one PR each, recipe first):**
+1. **No behaviour change.** Move the four copies of `ENABLED` (in `M3ListRows`, `M3VariableHeightLayoutCache`,
+   `M3FixedHeightLayoutCache` and `M3ExpandedState`) into one `sun.swing.M3Viewport.ENABLED`, read once.
+2. **CI.** Run step 2 of the exit criteria with the property true. Fix or gate every new failure.
+3. **The look-and-feel matrix** for the differentials (exit criterion 3).
+4. **The flip.** `ENABLED = !"false".equals(property)`. `-Dm3.swing.viewport=false` is the kill switch: it restores
+   every stock path. Release note: what changed, the heap deltas, the differences table, the kill switch.
+5. **Only if CI finds a leaf-specific regression:** one switch per leaf, `m3.swing.viewport.<leaf>=false`, so the
+   other leaves stay on while it is fixed. Not proposed otherwise; one switch is simpler to support.
+
+## 13. Leaf 6: model events as deltas, and the stores the views keep beside the model (measured, proposal)
+
+Principle (user, 2026-10-19): one model, deltas end to end. A `TableModelEvent`, `TreeModelEvent` or `ListDataEvent` is
+a delta, and a cache must apply it incrementally:
+- inside the window: repaint the affected rows;
+- outside it: update only the extents and the scroll bar, through the prefix lanes;
+- never a full relayout.
+
+Stores the views keep beside the model's are counted and, where possible, removed. `bench/DELTA_20261019.tsv`
+measures both at 10^6 rows. Each scenario applies the same edit twice: once announced with the full event, once with
+the delta event, each followed by the lazy layout, `validate` and one 800x600 frame.
+
+**What the full events cost, and what the deltas cost** (p50, stock / M3):
+
+| View | Full event | Delta event for the same edit |
+|---|---|---|
+| `JTable`, no sorter | `fireTableDataChanged` 0.014 / 0.013 ms, but the selection is cleared | `fireTableCellUpdated` 0.009 / 0.009 ms |
+| `JTable` sorted | `fireTableDataChanged` 70-113 / 82-130 ms: full re-sort, selection cleared | `fireTableRowsUpdated` (100 rows) 0.03-0.05 / 0.03-0.05 ms |
+| `JTable` | `fireTableStructureChanged` 0.05-0.11 ms: columns recreated, sort keys and selection reset | none needed |
+| `JTree`, 1,001,001 nodes, all expanded | `reload()` + re-expand 1,118 / 421 ms | `nodesChanged` (100 nodes) 21.8 / **0.12** ms; `nodeChanged` (1) 6.2 / **0.08** ms |
+| `JTree` | `nodeStructureChanged(group)` + re-expand 105 / **1.3** ms | as above |
+| `JList`, 10^6 rows | `contentsChanged(0, n - 1)` 3,021 / 2,865 ms | `contentsChanged` over the edit, 1 row: 2,788 / **3.2** ms; 100 rows: 2,979 / **4.1** ms |
+
+**What this shows:**
+- **The M3 caches already apply deltas incrementally:**
+  - leaf 1 and leaf 2: the y origins and row counts of the tree;
+  - leaf 4: the measured rows of the list;
+  - leaf 5: the expansion table;
+  - the prefix lanes of leaves 1-3: extents and scroll bar.
+
+  Stock does not. A one-row list edit re-measures all 10^6 rows, and `nodeChanged` shifts the y origin of every
+  following row.
+- **The full events are full by contract.** A `JTable` with a sorter must re-sort after `fireTableDataChanged`,
+  because any row may have changed. Likewise `reload()` must rebuild the tree, and `contentsChanged(0, n - 1)` must
+  re-measure every row.
+- **Inferring the delta from a full event is not safe.** For example, the list cache could compare each row's value
+  with the one it measured. But a model that mutates its row objects in place and then fires the full event is
+  common and legal: the values compare equal while their text has changed. Stock re-measures those rows, so the
+  inference would diverge from stock. Leaf 6 therefore does not change any full-event path.
+
+**The delta path offered** (`ENHANCED_API_MAP.tsv` row `MODEL-ROW-DELTAS`, P1, for the user to decide, since it is
+public API):
+- Models fire full events when their edited rows are scattered, because the stock events carry one interval.
+- The proposal: `AbstractTableModel.fireTableRowsUpdated(int[] sortedModelRows)` and
+  `AbstractListModel.fireContentsChanged(Object, int[] sortedRows)`. Each delivers one event that carries a sorted int
+  lane of rows.
+- The event is a subclass whose interval is the lane's span, so old listeners keep working on a valid, wider event.
+- `JTable`, `DefaultRowSorter`, `BasicListUI` and the M3 caches read the lane and apply only those rows.
+- `DefaultTreeModel.nodesChanged(parent, int[])` already exists for trees.
+
+**Stores beside the model, at 10^6 rows** (heap after GC, MB, stock / M3):
+
+| Store | stock | M3 | Note |
+|---|---:|---:|---|
+| `DefaultTableModel` 10^6 x 3 (the model) | 132.0 | 132.0 | |
+| `JTable`, uniform rows | 0.8 | 0.8 | no per-row store |
+| `TableRowSorter`, sorted | 32.0 | 32.0 | one `Row` object per model row, plus two int lanes; the objects duplicate the model's row identity |
+| 1,000 custom row heights with a sorter | 8.0 | 8.0 | two dense `SizeSequence`s, view order (`rowModel`) and model order (`modelRowSizes`): the same heights twice, dense for 1,000 entries |
+| `DefaultMutableTreeNode` x 1,001,001 (the model) | 93.3 | 93.3 | |
+| `JTree` expanded: layout cache + expansion table | 129.1 | **20.7** | stock keeps one `TreeStateNode` per row; M3 keeps lanes (leaves 1, 5) |
+| 10^6 strings (the list model) | 60.2 | 60.2 | |
+| `JList` laid out | 4.5 | 12.5 | stock `cellHeights`; M3 adds the leaf 3 offset lane (4 MB) and the leaf 4 width lane (4 MB) |
+
+**Next leaves, all without API change.** Each is opt-in, with a differential against stock:
+1. `DefaultRowSorter` order as two int lanes, with no `Row` objects: 32 MB -> 8 MB per 10^6 rows. Ties keep
+   the stock order (the model index decides).
+2. `JTable` custom row heights as one sparse model-order lane, with the view order derived through the sorter's lane:
+   8 MB -> about 16 KB for 1,000 entries.
+3. The leaf 4 width lane as 16-bit values, with an int lane only when a width exceeds 32,767: 4 MB -> 2 MB. The leaf
+   3 offset lane stays, because `cellHeights` is a protected stock field and must keep its form.
+
+## 14. Leaf 7: the TableRowSorter order as two int lanes (`sun.swing.table.M3SorterLanes`)
+
+Stock `DefaultRowSorter` keeps one `Row` object per visible row (a reference to the sorter and the model index,
+sorted through `Comparable`), a `Row[]` lane and an `int[]` lane. That is 32 MB at 10^6 rows, and every row
+duplicates the model's own row identity.
+
+**The lanes.** With `-Dm3.swing.viewport=true`, the order is two int lanes, view-to-model and model-to-view: 8 MB at
+10^6 rows.
+- The sort compares model indices through the sorter's own `compare`, whose ties fall back to the model index. The
+  order is therefore strict, and any comparison sort gives the stock permutation.
+- The insert, delete and update paths are the stock paths with `Row` replaced by its model index.
+- The public `sort()` runs through the sorter, so an override still applies.
+- The `RowSorterEvent` carries the same previous order.
+- The one difference is the sequence of `compare` calls, which only a comparator with side effects can observe.
+
+**The lane sort** is a natural-run merge sort with the shape of the stock TimSort:
+- ascending runs are kept and strictly descending runs reversed;
+- runs shorter than 32 are extended by binary insertion;
+- runs are merged pairwise, and a merge whose halves are already in order is skipped.
+
+An ordered or reversed column costs n - 1 comparisons. The first version, a top-down merge sort, was 13-25x slower
+than stock at 10^5-10^6 rows (3 s against 140-383 ms at 10^6), because stock TimSort finds the runs of a sorted
+column. It was replaced within the leaf; the ledger records the rejection.
+
+**Hook (recipe-first).** The recipe `M3SwingTableSorterLanes` adds to `DefaultRowSorter`:
+- a field, null when the property is off;
+- a binding method that hands the lanes the sorter's `compare`, `include`, keys, flags and event;
+- gates in `setSortKeys`, `sort`, `convertRowIndexToView`, `convertRowIndexToModel`, `getViewRowCount`,
+  `allChanged`, `rowsInserted`, `rowsDeleted` and `rowsUpdated`.
+
+With the field null every stock line runs. Pass 1 CHANGED, pass 2 UNCHANGED.
+
+**Rule 24 (delta gate).** Insert, delete and update events are applied as deltas. Full sorts remain only at the stock
+cutoffs: the view is not sorted (after updates without `sortsOnUpdates`), it is empty, or more than a tenth of its
+rows changed. They are kept because the stock full sort also refreshes comparators and string converters, so a
+delta path there could answer differently. `fullSortsOnDeltas()` counts them: 697 in 40 x 300 differential steps,
+all at those cutoffs.
+
+| Proof (2026-10-20, JDK 21.0.9, stock + `--patch-module java.desktop`, output on S:) | Result |
+|---|---|
+| `M3RowSorterLanesDifferential 40 300`: two JTables on one `DefaultTableModel`; the stock sorter has its lanes field cleared. Steps: sort keys (UNSORTED included), toggles, filters, `sortsOnUpdates`, comparators, max keys, sortable columns, inserts, removals, edits, update/data/structure events, direct sorter calls, invalid ranges, `setRowCount`, selections. Compared: view count, the permutation both ways, out-of-range exceptions, keys, selection with lead and anchor, `RowSorterEvent`s with their previous order, pixels | **40/40 pass, 1,240 equal pixel captures; 11,006 of 12,040 checks with the lanes in use; no `Row` object created** |
+| `M3SorterLanesTest` (JUnit 5, 5 tests: lane sort against `Arrays.sort`, ordered and reversed lanes at n - 1 comparisons, 60 scripted hosts x 300 steps against a brute-force order, the stock corner cases, the sorter gate, 20 x 200 differential), merged with a flag-off run | **5/5; `M3SorterLanes` 100% lines (263/263), 100% branches (160/160)** |
+| `make`, jtreg | PENDING_CI |
+
+**Benchmark** (`bench/SORTER_LANES_20261020.tsv`, two rounds; time and allocation noise-bound on a shared machine):
+
+| Measure, 10^6 rows | stock | M3 |
+|---|---:|---:|
+| retained sorter heap, sorted | 32.0 MB | **8.0 MB** |
+| allocation of a sort from unsorted | 36.0 MB | **12.1 MB** (10^5: 3.6 -> 1.2 MB) |
+| sort by an Integer column | 140-383 ms | 200-238 ms |
+| one-row insert | 32-42 ms | 21-35 ms |
+| 1,000-row update with `sortsOnUpdates` | 24-28 ms | 10-18 ms |
+
+## 15. Leaf 8: JTable custom row heights in one sparse store per order (`sun.swing.table.M3SparseSizes`)
+
+**The stock stores.** Stock `JTable` keeps custom row heights in two dense `SizeSequence`s, 4n bytes each:
+- `rowModel`, in view order;
+- `SortManager.modelRowSizes`, in model order, with a sorter.
+
+So one custom height on a 10^6-row sorted table costs 8 MB, and every height is stored twice, densely.
+
+**The sparse stores.** With `-Dm3.swing.viewport=true`, the same two stores are `M3SparseSizes`: a sorted int lane of
+the rows whose height differs from the default, with a lane of their heights. Positions come from a prefix lane of
+the differences, rebuilt only after a change.
+- Every answer is the `SizeSequence` answer, including out of range: `getSize` is 0 there, `getPosition` is 0 before
+  the first entry and the total after the last, and `getIndex` is 0 before position 0 and the length at the total.
+- Above 4,096 custom heights the sparse form loses. An insert into the middle of the lanes and the prefix rebuild
+  are O(k), against O(log n) for the stock tree. So the store moves to a stock `SizeSequence` and stays there until
+  `setSizes`.
+
+**The hooks.** The recipe `M3SwingTableRowHeights` mirrors the stock lifecycle at every site that reads, writes or
+drops the stock pair:
+- `setRowHeight(int, int)` and `setRowHeight(int)`;
+- `getRowHeight(int)`, `rowAtPoint`, `getCellRect` and `getScrollableBlockIncrement` (the stock shortcut there is
+  for uniform rows only);
+- `tableChanged`, `tableRowsInserted`, `tableRowsDeleted` and `setRowSorter`;
+- `SortManager.setViewRowHeight`, `allChanged`, `processChange` and `setViewRowHeightsFromModel`;
+- `writeObject` and `readObject`.
+
+Default off: the transient flag `m3Sizes` is false and every stock line runs. Pass 1 CHANGED, pass 2 UNCHANGED.
+
+**Upstream defects met on the way:**
+- **D7:** `setRowHeight(row, h)` with a negative row reaches `SizeSequence.setSize`, which adds h into the sums of
+  the left subtrees and moves every row below. The sparse store ignores it, as stock already ignores rows at or
+  past the end. The differential leaves negative rows out, since their behaviour is unspecified.
+- **D8:** a table with custom heights cannot be serialized: `rowModel` is a non-transient `SizeSequence`, which is
+  not `Serializable`. The M3 side throws the same `NotSerializableException` with the same message. Both sides are
+  then left with their UI uninstalled, because the reinstall comes after a complete write.
+
+| Proof (2026-10-20, JDK 21.0.9, stock + `--patch-module java.desktop`, output on S:) | Result |
+|---|---|
+| `M3TableRowHeightsDifferential 40 300`: two JTables on one model; the stock side has its flag cleared. Steps: per-row and global heights, inserts, removals, moves, edits, update/data/structure events, sorters on and off, sort keys, filters, row counts, selections, serialization round trips. Compared: rows and preferred size, every row's height and rectangle, `rowAtPoint` at every boundary and outside, scroll increments, selection, round-trip outcomes and heights, pixels; the M3 side must never hold a dense `rowModel` | **40/40 pass, 1,240 equal pixel captures; 6,750 checks with the sparse store in use; 166 round trips, 141 throwing on both sides (D8)** |
+| `M3SparseSizesTest` (JUnit 5, 7 tests: 50 scripts x 300 steps of the four mutators against `SizeSequence` at every index and position; the store at exactly 4,096 entries and the dense range above; zero sizes; the bounds and arguments; the view-order mapping through a sorter; the differential), merged with a flag-off run | **7/7 pass; `M3SparseSizes` 175/175 lines, 124/124 branches** |
+| `make`, jtreg | PENDING_CI |
+
+**Measured at 10^6 rows with a sorter** (`bench/HEIGHTS_20261020.tsv`; medians of 7 rounds, then the median over the
+JVM runs; the machine was shared, so single runs vary by up to 3x):
+
+| | stock | M3 |
+|---|---|---|
+| Heap of 1,000 custom heights (`DeltaBench heap`) | 8.0 MB | 0.0 MB (two lanes of 1,000 entries, about 32 KB) |
+| `setRowHeight` on 1,000 spread rows | 3.37 ms | 0.78 ms |
+| 1,000 `rowAtPoint` + `getCellRect` pairs, sparse | 2.30 ms | 1.32 ms |
+| `setRowHeight` on every row, random order (dense above 4,096) | 2,561 ms | 2,338 ms |
+| 1,000 pairs with every row custom | 1.54 ms | 4.34 ms (steady 2.09; quiet run 1.23 / 0.97) |
+| Allocation per `setRowHeight` / per query pair | 0 / 56 B | 0 / 56 B |
+
+The dense row is open. Once the store is dense, the M3 queries make the same `SizeSequence` calls as stock, behind one
+more object. The bench's 1,000-pair medians put M3 behind in 9 of 10 runs. A probe with 100,000 pairs per round and
+the JVM order alternated measures the two as equal (flag on 0.94-2.70 ms, off 1.00-3.29 ms per 1,000 pairs). The
+next step is a JFR profile on a quiet machine. If the extra object is the cost, the dense form can keep the
+`SizeSequence` tree array itself.

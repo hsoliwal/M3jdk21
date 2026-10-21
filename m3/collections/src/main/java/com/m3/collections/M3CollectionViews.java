@@ -3,6 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  * Modified 2026: M3 receiver namespace, runtime-capability dispatch,
  * direct owner membership/removal and single-pass sorted snapshot acquisition.
+ * Identity-set refinement: owner-gated membership and exact-reference removal.
  */
 package com.m3.collections;
 
@@ -288,7 +289,13 @@ public final class M3CollectionViews {
 
         @Override
         public boolean isEmpty() {
-            return !iterator().hasNext();
+            // The original selected(...).hasNext() scans this same owner cursor.
+            // Avoid materializing the temporary filtering iterator for one terminal query.
+            Iterator<E> cursor = backing.iterator();
+            while (cursor.hasNext()) {
+                if (visible(cursor.next())) return false;
+            }
+            return true;
         }
 
         @Override
@@ -394,6 +401,12 @@ public final class M3CollectionViews {
         }
 
         private boolean removeMatching(Predicate<? super E> condition) {
+            // These exact owners publish bulk changes without mutating snapshot iterators.
+            // Subclasses retain their existing iterator dispatch and override contracts.
+            if (backing.getClass() == java.util.concurrent.CopyOnWriteArrayList.class
+                    || backing.getClass() == java.util.concurrent.CopyOnWriteArraySet.class) {
+                return backing.removeIf(element -> visible(element) && condition.test(element));
+            }
             boolean changed = false;
             Iterator<E> iterator = backing.iterator();
             while (iterator.hasNext()) {
@@ -411,6 +424,40 @@ public final class M3CollectionViews {
     private static class FilteredSet<E> extends FilteredCollection<E> implements Set<E> {
         private FilteredSet(Set<E> source, Predicate<? super E> predicate) {
             super(source, predicate);
+        }
+
+        /**
+         * Preserve owner membership before resolving stored visibility. Identity
+         * sets may retain equals-equal references, so an exact reference wins.
+         */
+        @Override
+        public boolean contains(Object candidate) {
+            if (!backing.contains(candidate)) return false;
+            for (E stored : backing) {
+                if (stored == candidate) return predicate.test(stored);
+            }
+            return super.contains(candidate);
+        }
+
+        @Override
+        public boolean remove(Object candidate) {
+            if (!backing.contains(candidate)) return false;
+            Iterator<E> cursor = backing.iterator();
+            while (cursor.hasNext()) {
+                E stored = cursor.next();
+                if (stored == candidate) {
+                    if (!predicate.test(stored)) return false;
+                    try {
+                        cursor.remove();
+                        return true;
+                    } catch (UnsupportedOperationException unsupported) {
+                        // Preserve the existing Set owner fallback, including
+                        // CopyOnWriteArraySet's read-only traversal cursors.
+                        return backing.remove(stored);
+                    }
+                }
+            }
+            return super.remove(candidate);
         }
 
         @Override

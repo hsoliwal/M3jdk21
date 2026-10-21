@@ -17,6 +17,10 @@ Existing JDK runtime owners remain authoritative:
 This port owns the broader second-pass fabric:
 
 - `M3TextMetrics`: composable UTF-16/UTF-8/code-point/Java-hash geometry;
+- `M3MeasuredRope` with `M3RopeArena`, `M3RopeMeasure`, `M3RopeMetric` and `M3RopeMeasures`: a persistent
+  rope whose nodes carry pluggable monoid measures (hash, code points, UTF-8, lines, whitespace, DFA
+  transfer) in primitive arena lanes, with range summaries and metric seek (Synexia crate
+  `m3-measured-rope`, receipt `m3/compatibility/synexia-measured-rope-receipt.json`);
 - `M3TextSignals`: character, bigram and trigram histograms, safe edit lower bounds,
   SimHash and MinHash/Jaccard sketches;
 - `M3RegexShape`: fail-closed literal/prefix/suffix/exact regex recognition;
@@ -155,3 +159,11 @@ java --patch-module java.base=<regex+mindex postimage classes> \
   -cp m3/ports/precompute/target/classes:m3/ports/precompute/target/test-classes \
   com.m3.precompute.M3PatternQueryDifferential
 ```
+
+## Token-aware regex candidate (2026-10-18)
+
+`M3TokenRegex` is an isolated lexer/AST-token matcher over canonical owner references,
+parallel token-kind/atom/mask/UTF-16 offset arrays and a bounded primitive Thompson NFA.
+It does **not** replace `java.util.regex.Pattern`, tokenize source itself, or advance
+String -> arrays -> collections -> AST/compiler receiving order. See
+[Token-aware regex receiver and proof status](docs/TOKEN_AWARE_REGEX_20261018.md).

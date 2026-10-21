@@ -1,0 +1,28 @@
+{
+  "schema": "M3_EFS_CONTRACT_SOURCE_RECEIPT_V1",
+  "copyright": "Copyright 2026 Hitesh Soliwal and contributors",
+  "license": "Apache-2.0",
+  "target_repository": "hsoliwal/M3JDK21",
+  "target_base_revision": "a3e88976ee8664d1ef5d0cade96aec1206b2133d",
+  "canonical_repository": "hsoliwal/com.synexia",
+  "canonical_base_revision": "6291b100548f7850279f49e693621d6460be25f9",
+  "canonical_crate": "synexia-openrewrite-recipes/recipe-crates/m3fs-efs-contract-20261019",
+  "recipe": "com.synexia.rewrite.M3EfsContractRefinement",
+  "engine": "com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe",
+  "engine_git_blob": "4a38e39d0755462d40c2b22548b87abde938ea0b",
+  "engine_sha256": "8133bcf7e9f750c714cdd42784bdf30b60f67dd957b2831cd54cb01c9a2cfc3a",
+  "contract_sha256": "e8f221f40337d0bfd02321551218a231932a4911069e132e4d1bdb1586ae3989",
+  "source_path": "m3/eclipse/filesystem/src/main/java/com/m3/eclipse/filesystem/M3EclipseFileStore.java",
+  "before_sha256": "308188cd75b590996a552a42de493d98cb38b6e9161c7ae140dc8d54fd3d5757",
+  "after_sha256": "bf0d651733929af93f6701d0174d8e6bc88c511111c6a5cd2a24055ddd65e955",
+  "regression_path": "m3/eclipse/filesystem/src/test/java/com/m3/eclipse/filesystem/M3EfsContractRefinementTest.java",
+  "regression_sha256": "464e5e1d89f1f6630b11ae3bdbb85cb88edb5f0f24cc693f66547c349995219f",
+  "declared_behavioral_refinements": [
+    "Best-effort sibling copy with recorded child failures",
+    "Existing-directory mkdir no-op on live readonly mount",
+    "Missing-entry delete no-op on live readonly mount",
+    "putInfo(NONE) no-op before path/mutation checks on live mount"
+  ],
+  "proof_location": "Canonical crate QUALIFICATION.md and evidence/ contain executed baseline, recipe, JNI, normal/linked Equinox and source custody receipts.",
+  "scope": "Current independent EFS module only; no full Eclipse or full modified-JDK/regex admission."
+}

@@ -1,0 +1,4 @@
+com.m3.tools.stats.streaming
+exports com.m3.tools.stats.streaming
+requires java.base mandated
+

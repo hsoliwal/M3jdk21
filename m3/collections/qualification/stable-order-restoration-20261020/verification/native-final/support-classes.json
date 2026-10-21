@@ -1,0 +1,16 @@
+{
+  "com/m3/collections/M3LongArrayDeque$1.class": "5b68d990925ccb89a1490f9f06d68185346c7837d74f43af0d2027d6dbd329b5",
+  "com/m3/collections/M3LongArrayDeque$2.class": "a10a7d84d5204a6ac77efd4fdca81c3ebe69e7ed5441fa4240a05ec546043db2",
+  "com/m3/collections/M3LongArrayDeque.class": "aa3ec4289ff3731ae2ba9cd61862f5597cd5a8804da44028098a4b5937fde11a",
+  "com/m3/collections/M3LongArrayList$1.class": "6f25c63196d89b6f6277f609b86985d2d52d9d46c655a349414d9b945f3317d4",
+  "com/m3/collections/M3LongArrayList.class": "13067dfee18834c653007154fa41ab93fbf37a62242f644318567b0669abb68e",
+  "com/m3/collections/M3LongCollection$1.class": "bb3f0f8e1d152cd3f45a94dae1502926bb0df4967cad9d438e33d2788bf24907",
+  "com/m3/collections/M3LongCollection.class": "515ed3480be8df795ae3a467a76711bf9f51250ce69306c99c55bba58447bcb2",
+  "com/m3/collections/M3LongDeque.class": "da9c8cc8dd92be8d282fc2bbb3020f4b369290a4e2c48043d74dcb2f0bc02a52",
+  "com/m3/collections/M3LongIterator.class": "27dc860fb4e54d0db92ab3de2aa48977024f4f7a23267c12d62181573aeacf3b",
+  "com/m3/collections/M3LongList.class": "8642c637a725f23ab6cf08255a424c8ec733f72671add97c824d25adbf09fa39",
+  "com/m3/collections/M3LongListSpliterator.class": "7ca5f1aa09510aa513c1e5496bbd311a22660c3e72a930dcd8d82ca66852d99a",
+  "com/m3/collections/M3LongQueue.class": "aa30f394bff887882a6511ab148217b13dd8ec7b89b7cc98ad71afba0c35db21",
+  "com/m3/collections/M3LongSequence.class": "d8db168936f54d25080ce3680c07f1d31d335fa9a267f4eb7aa78241e367d0f1",
+  "com/m3/collections/M3LongStack.class": "846e099b4dc8f77ba80316e8a128d6becd661dc7605295a9ef51f399996207ce"
+}

@@ -1,0 +1,609 @@
+diff --git a/m3/runtime-integration/progress-job-20261018/src/test/java/EclipseStatusIdentity.java b/m3/runtime-integration/progress-job-20261018/src/test/java/EclipseStatusIdentity.java
+new file mode 100644
+index 0000000..b41943f
+--- /dev/null
++++ b/m3/runtime-integration/progress-job-20261018/src/test/java/EclipseStatusIdentity.java
+@@ -0,0 +1,102 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
++/*
++ * SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
++ * SPDX-License-Identifier: Apache-2.0
++ */
++
++import java.io.IOException;
++import java.util.concurrent.CancellationException;
++import java.util.concurrent.ExecutionException;
++import java.util.concurrent.Executor;
++import java.util.concurrent.FutureTask;
++import java.util.concurrent.ProgressJob;
++import java.util.concurrent.ProgressMonitor;
++import java.util.concurrent.ProgressMonitors;
++import java.util.concurrent.TimeUnit;
++import java.util.concurrent.atomic.AtomicBoolean;
++import java.util.concurrent.atomic.AtomicInteger;
++import org.eclipse.core.runtime.IStatus;
++import org.eclipse.core.runtime.MultiStatus;
++import org.eclipse.core.runtime.Status;
++
++/** Executes against checksum-pinned Eclipse jars, not substitute status types. */
++public final class EclipseStatusIdentity {
++    private static int checks;
++    private EclipseStatusIdentity() { }
++
++    private static void check(boolean condition, String message) {
++        checks++;
++        if (!condition) throw new AssertionError(message);
++    }
++
++    public static void main(String[] args) throws Exception {
++        check(IStatus.class.getProtectionDomain().getCodeSource() != null, "external real Eclipse class source");
++        check(Status.class.getClassLoader() != null, "Eclipse is outside java.base");
++        IOException cause = new IOException("status cause");
++        IStatus warning = new Status(IStatus.WARNING, "m3.progress.job.fixture", 17, "warning", null);
++        IStatus error = new Status(IStatus.ERROR, "m3.progress.job.fixture", 19, "error", cause);
++        IStatus multi = new MultiStatus("m3.progress.job.fixture", 23, new IStatus[] { warning, error }, "aggregate", cause);
++        Executor executor = Runnable::run;
++        for (IStatus value : new IStatus[] { Status.OK_STATUS, Status.CANCEL_STATUS, warning, error, multi }) {
++            ProgressJob<IStatus> job = new ProgressJob<>() {
++                @Override protected IStatus run(ProgressMonitor monitor) {
++                    check(monitor == ProgressMonitors.current(), "real status lexical monitor");
++                    return value;
++                }
++            };
++            check(job.call(ProgressMonitor.NONE) == value, "real status direct identity");
++            FutureTask<IStatus> future = new FutureTask<>(() -> job.call(ProgressMonitor.NONE));
++            executor.execute(future);
++            check(future.get(15, TimeUnit.SECONDS) == value, "real status FutureTask identity");
++            check(!future.isCancelled(), "returned CANCEL status does not call Future.cancel");
++        }
++        check(error.getException() == cause, "status retains original cause");
++        check(error.getCode() == 19 && error.getSeverity() == IStatus.ERROR, "status code and severity");
++        check(multi.isMultiStatus() && multi.getChildren()[0] == warning && multi.getChildren()[1] == error,
++                "multi-status child identities");
++        ProgressJob<IStatus> throwsChecked = new ProgressJob<>() {
++            @Override protected IStatus run(ProgressMonitor monitor) throws IOException { throw cause; }
++        };
++        try {
++            throwsChecked.call(ProgressMonitor.NONE);
++            throw new AssertionError("expected checked exception");
++        } catch (IOException actual) {
++            check(actual == cause, "checked exception does not become a Status");
++        }
++        FutureTask<IStatus> failed = new FutureTask<>(() -> throwsChecked.call(ProgressMonitor.NONE));
++        executor.execute(failed);
++        try {
++            failed.get(15, TimeUnit.SECONDS);
++            throw new AssertionError("expected future failure");
++        } catch (ExecutionException actual) {
++            check(actual.getCause() == cause, "real IStatus job keeps Future.get cause identity");
++        }
++        AtomicBoolean cancelled = new AtomicBoolean(true);
++        AtomicInteger bodies = new AtomicInteger();
++        CancellationException marker = new CancellationException("Eclipse result pre-cancel marker");
++        ProgressMonitor monitor = new ProgressMonitor() {
++            @Override public boolean isCancelled() { return cancelled.get(); }
++            @Override public void cancel() { cancelled.set(true); }
++            @Override public void checkCancelled() { if (isCancelled()) throw marker; }
++        };
++        ProgressJob<IStatus> cancels = new ProgressJob<>() {
++            @Override protected IStatus run(ProgressMonitor current) {
++                bodies.incrementAndGet(); current.cancel(); return Status.CANCEL_STATUS;
++            }
++        };
++        for (boolean before : new boolean[] { true, false }) {
++            cancelled.set(before);
++            FutureTask<IStatus> future = new FutureTask<>(() -> cancels.call(monitor));
++            executor.execute(future);
++            try {
++                future.get(15, TimeUnit.SECONDS);
++                throw new AssertionError("expected monitor cancellation");
++            } catch (ExecutionException actual) {
++                check(actual.getCause() == marker, "monitor cancellation retains existing template exception");
++            }
++            check(future.isDone() && !future.isCancelled(), "monitor cancellation completes future exceptionally");
++        }
++        check(bodies.get() == 1, "pre-cancel skips body; post-cancel rejects returned CANCEL status");
++        System.out.println("PASS real Eclipse IStatus/Status/MultiStatus checks=" + checks
++                + "; status return preserved; cancellation follows existing MonitoredCallable contract");
++    }
++}
+diff --git a/m3/runtime-integration/progress-job-20261018/src/test/java/OldCallableClient.java b/m3/runtime-integration/progress-job-20261018/src/test/java/OldCallableClient.java
+new file mode 100644
+index 0000000..47f7cf5
+--- /dev/null
++++ b/m3/runtime-integration/progress-job-20261018/src/test/java/OldCallableClient.java
+@@ -0,0 +1,62 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
++/*
++ * SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
++ * SPDX-License-Identifier: Apache-2.0
++ */
++
++import java.io.IOException;
++import java.util.concurrent.Callable;
++import java.util.concurrent.ExecutionException;
++import java.util.concurrent.ExecutorService;
++import java.util.concurrent.Executors;
++import java.util.concurrent.TimeUnit;
++
++/** A real stock-JDK-compiled client that references no M3 progress API. */
++public final class OldCallableClient {
++    private OldCallableClient() { }
++
++    private static final class Dual implements Runnable, Callable<Object> {
++        private final Object value;
++        int runs;
++        Dual(Object value) { this.value = value; }
++        @Override public void run() { runs++; }
++        @Override public Object call() { return value; }
++    }
++
++    public static void main(String[] args) throws Exception {
++        Object value = new Object();
++        Callable<Object> lambda = () -> value;
++        Callable<Object> anonymous = new Callable<>() {
++            @Override public Object call() { return value; }
++        };
++        Dual dual = new Dual(value);
++        if (lambda.call() != value || anonymous.call() != value || dual.call() != value) {
++            throw new AssertionError("old result identity");
++        }
++        ((Runnable) dual).run();
++        if (dual.runs != 1) throw new AssertionError("old Runnable contract");
++        IOException marker = new IOException("legacy checked exception");
++        Callable<Object> fails = () -> { throw marker; };
++        try {
++            fails.call();
++            throw new AssertionError("expected checked exception");
++        } catch (IOException actual) {
++            if (actual != marker) throw new AssertionError("legacy exception identity");
++        }
++        ExecutorService executor = Executors.newSingleThreadExecutor();
++        try {
++            if (executor.submit((Callable<Object>) dual).get(15, TimeUnit.SECONDS) != value) {
++                throw new AssertionError("old executor result");
++            }
++            try {
++                executor.submit(fails).get(15, TimeUnit.SECONDS);
++                throw new AssertionError("expected future failure");
++            } catch (ExecutionException actual) {
++                if (actual.getCause() != marker) throw new AssertionError("legacy future cause identity");
++            }
++        } finally {
++            executor.shutdownNow();
++            if (!executor.awaitTermination(15, TimeUnit.SECONDS)) throw new AssertionError("worker did not stop");
++        }
++        System.out.println("PASS old Callable lambda/anonymous/class/dual Runnable and checked exception identity; finite client witness");
++    }
++}
+diff --git a/src/java.base/share/classes/java/util/concurrent/ProgressJob.java b/src/java.base/share/classes/java/util/concurrent/ProgressJob.java
+new file mode 100644
+index 0000000..ea5d302
+--- /dev/null
++++ b/src/java.base/share/classes/java/util/concurrent/ProgressJob.java
+@@ -0,0 +1,90 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
++/*
++ * SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
++ * SPDX-License-Identifier: GPL-2.0-only WITH Classpath-exception-2.0
++ */
++package java.util.concurrent;
++
++/**
++ * A Callable-oriented task with a protected, result-returning progress hook.
++ * Subclasses implement {@link #run(ProgressMonitor)}. The final {@link #call()}
++ * method uses the existing {@link MonitoredCallable} template to obtain the
++ * current monitor and check cancellation before and after the body.
++ *
++ * <p>The result type belongs to the caller and may be an application's status
++ * type. A successful call returns the body's value unchanged, including
++ * {@code null}. A checked exception from the body is propagated unchanged;
++ * this class does not convert exceptions into status values. Cancellation
++ * observed by the template throws {@link CancellationException}, even when
++ * the body has returned a value representing cancellation.
++ *
++ * <p>For an explicitly supplied monitor, the inherited
++ * {@link Callable#call(ProgressMonitor) call(monitor)} method binds that borrowed
++ * monitor during the call and restores the previous binding on exit. Neither
++ * template completes the borrowed monitor. Binding is local to the executing
++ * thread and is not automatically captured when a task is submitted elsewhere.
++ *
++ * <p>An ordinary {@link Executor} can execute the task through a
++ * {@link FutureTask} whose Callable binds the monitor:
++ * <pre>{@code
++ * FutureTask<S> future = new FutureTask<>(() -> job.call(monitor));
++ * executor.execute(future);
++ * S result = future.get();
++ * }</pre>
++ * Binding inside the FutureTask lets it record a cancellation exception from
++ * the call as exceptional completion. The Future uses its existing
++ * {@link Future#get() get()} exception and cancellation contracts.
++ *
++ * <p>This class has no task state, scheduler, or monitor field. Subclasses and
++ * monitor implementations determine whether their state supports concurrent
++ * calls. It is a Callable base: its value-returning progress hook is
++ * incompatible with the void progress overload in {@link Runnable}, so a
++ * subclass cannot also implement Runnable.
++ *
++ * @param <S> the result type, including an application-defined status type
++ */
++public abstract class ProgressJob<S> implements MonitoredCallable<S> {
++    /** Creates a task without execution or monitor state. */
++    protected ProgressJob() { }
++
++    /**
++     * Computes this task's result using a borrowed progress monitor.
++     * The monitor is never {@code null} when this method is invoked through
++     * {@link #call()}. A direct {@link #callMonitored(ProgressMonitor)} call
++     * forwards its argument unchanged. The body does not own completion of a
++     * borrowed monitor.
++     *
++     * @param monitor the monitor supplied to this invocation
++     * @return the computed result, which may be {@code null}
++     * @throws Exception if the body cannot compute its result
++     */
++    protected abstract S run(ProgressMonitor monitor) throws Exception;
++
++    /**
++     * Dispatches directly to {@link #run(ProgressMonitor)} with the supplied
++     * argument. This body entry point does not bind a monitor or check
++     * cancellation. Use {@link #call()} or the inherited
++     * {@link Callable#call(ProgressMonitor) call(monitor)} for template execution.
++     *
++     * @param monitor the argument passed unchanged to the body
++     * @return the body's result, unchanged
++     * @throws Exception if the body cannot compute its result
++     */
++    @Override
++    public final S callMonitored(ProgressMonitor monitor) throws Exception {
++        return run(monitor);
++    }
++
++    /**
++     * Executes the existing {@link MonitoredCallable#call()} template using
++     * {@link ProgressMonitors#current()} and returns the body's result.
++     *
++     * @return the body's result, unchanged when cancellation is not observed
++     * @throws CancellationException if cancellation is observed before or
++     *         after the body
++     * @throws Exception if the body cannot compute its result
++     */
++    @Override
++    public final S call() throws Exception {
++        return MonitoredCallable.super.call();
++    }
++}
+diff --git a/test/jdk/java/util/concurrent/ProgressJob/M3ProgressJob.java b/test/jdk/java/util/concurrent/ProgressJob/M3ProgressJob.java
+new file mode 100644
+index 0000000..9d8ae73
+--- /dev/null
++++ b/test/jdk/java/util/concurrent/ProgressJob/M3ProgressJob.java
+@@ -0,0 +1,331 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
++/*
++ * SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
++ * SPDX-License-Identifier: GPL-2.0-only WITH Classpath-exception-2.0
++ */
++
++/*
++ * @test
++ * @summary ProgressJob preserves result and exception identity through existing monitored Callable and FutureTask templates
++ * @run main/othervm M3ProgressJob
++ */
++
++import java.io.IOException;
++import java.lang.reflect.Modifier;
++import java.util.concurrent.Callable;
++import java.util.concurrent.CancellationException;
++import java.util.concurrent.CountDownLatch;
++import java.util.concurrent.ExecutionException;
++import java.util.concurrent.Executor;
++import java.util.concurrent.ExecutorService;
++import java.util.concurrent.Executors;
++import java.util.concurrent.Future;
++import java.util.concurrent.FutureTask;
++import java.util.concurrent.MonitoredCallable;
++import java.util.concurrent.ProgressJob;
++import java.util.concurrent.ProgressMonitor;
++import java.util.concurrent.ProgressMonitors;
++import java.util.concurrent.TimeUnit;
++import java.util.concurrent.atomic.AtomicBoolean;
++import java.util.concurrent.atomic.AtomicInteger;
++import java.util.concurrent.atomic.AtomicLong;
++import java.util.function.Supplier;
++
++public final class M3ProgressJob {
++    private static final AtomicInteger CHECKS = new AtomicInteger();
++
++    private M3ProgressJob() { }
++
++    private static void check(boolean condition, String message) {
++        CHECKS.incrementAndGet();
++        if (!condition) throw new AssertionError(message);
++    }
++
++    private static final class Monitor implements ProgressMonitor {
++        final AtomicBoolean cancelled = new AtomicBoolean();
++        final AtomicLong work = new AtomicLong();
++        final AtomicInteger begins = new AtomicInteger();
++        final AtomicInteger finishes = new AtomicInteger();
++        final CancellationException marker = new CancellationException("monitor marker");
++
++        @Override public boolean isCancelled() { return cancelled.get(); }
++        @Override public void cancel() { cancelled.set(true); }
++        @Override public void begin(String name, long total) { begins.incrementAndGet(); }
++        @Override public void worked(long units) { work.addAndGet(units); }
++        @Override public void done() { finishes.incrementAndGet(); }
++        @Override public void checkCancelled() {
++            if (isCancelled()) throw marker;
++            ProgressMonitor.super.checkCancelled();
++        }
++    }
++
++    private static <S> ProgressJob<S> constant(S value) {
++        return new ProgressJob<>() {
++            @Override protected S run(ProgressMonitor monitor) { return value; }
++        };
++    }
++
++    private static void signatures() throws Exception {
++        check(ProgressJob.class.getClassLoader() == null, "JDK-owned class");
++        check(ProgressJob.class.getModule() == Object.class.getModule(), "java.base owner");
++        check(Modifier.isAbstract(ProgressJob.class.getModifiers()), "abstract class");
++        check(ProgressJob.class.getDeclaredFields().length == 0, "no task or monitor fields");
++        check(ProgressJob.class.getInterfaces().length == 1
++                && ProgressJob.class.getInterfaces()[0] == MonitoredCallable.class, "one existing template owner");
++        check(Modifier.isProtected(ProgressJob.class.getDeclaredConstructor().getModifiers()), "protected constructor");
++        var run = ProgressJob.class.getDeclaredMethod("run", ProgressMonitor.class);
++        check(Modifier.isProtected(run.getModifiers()) && Modifier.isAbstract(run.getModifiers()), "protected abstract hook");
++        check(run.getExceptionTypes().length == 1 && run.getExceptionTypes()[0] == Exception.class, "checked hook contract");
++        for (var method : new java.lang.reflect.Method[] {
++                ProgressJob.class.getDeclaredMethod("call"),
++                ProgressJob.class.getDeclaredMethod("callMonitored", ProgressMonitor.class)}) {
++            check(Modifier.isPublic(method.getModifiers()) && Modifier.isFinal(method.getModifiers()), "final public template " + method);
++        }
++        check(Callable.class.getMethod("call").getExceptionTypes()[0] == Exception.class, "Callable still permits checked exceptions");
++        check(Runnable.class.getMethod("run").getReturnType() == void.class, "Runnable remains void");
++    }
++
++    private static void valuesAndScopes(Monitor global) throws Exception {
++        Object status = new Object();
++        Monitor outer = new Monitor();
++        Monitor supplied = new Monitor();
++        ProgressMonitors.Scope scope = ProgressMonitors.bind(outer);
++        try {
++            ProgressJob<Object> job = new ProgressJob<>() {
++                @Override protected Object run(ProgressMonitor monitor) {
++                    check(monitor == supplied, "explicit monitor identity");
++                    check(ProgressMonitors.current() == supplied, "explicit lexical binding");
++                    monitor.worked(3);
++                    return status;
++                }
++            };
++            check(job.call(supplied) == status, "result identity");
++            check(ProgressMonitors.current() == outer, "outer scope restored after success");
++            check(supplied.work.get() == 3, "body can report progress");
++            check(supplied.begins.get() == 0 && supplied.finishes.get() == 0, "borrowed lifecycle retained");
++            check(constant(null).call() == null, "null result preserved");
++            ProgressJob<ProgressMonitor> direct = new ProgressJob<>() {
++                @Override protected ProgressMonitor run(ProgressMonitor monitor) {
++                    check(ProgressMonitors.current() == outer, "direct body does not bind");
++                    return monitor;
++                }
++            };
++            check(direct.call() == outer, "current scope inherited");
++            supplied.cancel();
++            check(direct.callMonitored(supplied) == supplied, "direct body does not check cancellation");
++            check(direct.callMonitored(null) == null, "direct body forwards null unchanged");
++        } finally {
++            scope.close();
++        }
++        check(ProgressMonitors.current() == global, "global restored after scope");
++        ProgressJob<ProgressMonitor> fallback = new ProgressJob<>() {
++            @Override protected ProgressMonitor run(ProgressMonitor monitor) { return monitor; }
++        };
++        check(fallback.call() == global, "system provider fallback identity");
++        Supplier<? extends ProgressMonitor> previous = ProgressMonitors.setSystem(() -> null);
++        try {
++            check(fallback.call() == ProgressMonitor.NONE, "null provider value uses NONE");
++        } finally {
++            ProgressMonitors.setSystem(previous);
++        }
++    }
++
++    private static void exceptionsAndCancellation(Monitor global) throws Exception {
++        Monitor monitor = new Monitor();
++        IOException checked = new IOException("checked identity");
++        ProgressJob<Object> failure = new ProgressJob<>() {
++            @Override protected Object run(ProgressMonitor current) throws IOException {
++                check(current == monitor, "exception path monitor");
++                monitor.cancel();
++                throw checked;
++            }
++        };
++        try {
++            failure.call(monitor);
++            throw new AssertionError("expected checked exception");
++        } catch (IOException actual) {
++            check(actual == checked, "checked exception retained even if body cancels then throws");
++        }
++        check(ProgressMonitors.current() == global, "scope restored after checked exception");
++        check(monitor.finishes.get() == 0, "failure does not finish borrowed monitor");
++        RuntimeException runtime = new IllegalArgumentException("runtime identity");
++        Error error = new AssertionError("error identity");
++        for (Throwable expected : new Throwable[] { runtime, error }) {
++            ProgressJob<Object> task = new ProgressJob<>() {
++                @Override protected Object run(ProgressMonitor ignored) {
++                    if (expected instanceof RuntimeException exception) throw exception;
++                    throw (Error) expected;
++                }
++            };
++            try {
++                task.call(ProgressMonitor.NONE);
++                throw new AssertionError("expected throwable");
++            } catch (Throwable actual) {
++                check(actual == expected, "unchecked throwable identity");
++            }
++        }
++        AtomicInteger bodies = new AtomicInteger();
++        ProgressJob<Object> success = new ProgressJob<>() {
++            @Override protected Object run(ProgressMonitor ignored) { bodies.incrementAndGet(); return new Object(); }
++        };
++        try {
++            success.call(monitor);
++            throw new AssertionError("expected pre-cancellation");
++        } catch (CancellationException actual) {
++            check(actual == monitor.marker, "pre-cancellation exception identity");
++        }
++        check(bodies.get() == 0, "pre-cancellation skips body");
++        Monitor after = new Monitor();
++        ProgressJob<Object> cancels = new ProgressJob<>() {
++            @Override protected Object run(ProgressMonitor current) {
++                bodies.incrementAndGet(); current.cancel(); return new Object();
++            }
++        };
++        try {
++            cancels.call(after);
++            throw new AssertionError("expected post-cancellation");
++        } catch (CancellationException actual) {
++            check(actual == after.marker, "post-cancellation replaces returned value by existing contract");
++        }
++        check(bodies.get() == 1, "post-cancellation follows one body execution");
++        check(after.finishes.get() == 0, "cancellation does not finish borrowed monitor");
++        check(ProgressMonitors.current() == global, "scope restored after cancellations");
++        try {
++            success.call(null);
++            throw new AssertionError("expected null-monitor rejection");
++        } catch (NullPointerException expected) {
++            check(bodies.get() == 1, "null monitor rejected before body");
++        }
++        Thread.currentThread().interrupt();
++        try {
++            success.call(ProgressMonitor.NONE);
++            throw new AssertionError("expected interruption cancellation");
++        } catch (CancellationException expected) {
++            check(Thread.currentThread().isInterrupted(), "interrupt status preserved");
++            check(bodies.get() == 1, "interruption skips body");
++        } finally {
++            check(Thread.interrupted(), "test clears its own interruption");
++        }
++    }
++
++    private static void expectedFutureFailure(Future<?> future, Throwable expected) throws Exception {
++        try {
++            future.get(15, TimeUnit.SECONDS);
++            throw new AssertionError("expected exceptional completion");
++        } catch (ExecutionException actual) {
++            check(actual.getCause() == expected, "Future.get cause identity");
++        }
++        check(future.isDone(), "future completes exceptionally");
++        check(!future.isCancelled(), "body-thrown cancellation is exceptional completion, not Future.cancel");
++    }
++
++    private static void executors(Monitor global) throws Exception {
++        Executor executor = Runnable::run;
++        Object result = new Object();
++        Monitor monitor = new Monitor();
++        ProgressJob<Object> job = constant(result);
++        FutureTask<Object> future = new FutureTask<>(() -> job.call(monitor));
++        executor.execute(future);
++        check(future.get(15, TimeUnit.SECONDS) == result, "ordinary Executor/FutureTask result identity");
++        IOException failure = new IOException("future checked identity");
++        ProgressJob<Object> throwsChecked = new ProgressJob<>() {
++            @Override protected Object run(ProgressMonitor current) throws IOException {
++                check(current == monitor, "future exception monitor identity");
++                throw failure;
++            }
++        };
++        FutureTask<Object> failed = new FutureTask<>(() -> throwsChecked.call(monitor));
++        executor.execute(failed);
++        expectedFutureFailure(failed, failure);
++        monitor.cancel();
++        FutureTask<Object> preCancelled = new FutureTask<>(() -> job.call(monitor));
++        executor.execute(preCancelled);
++        expectedFutureFailure(preCancelled, monitor.marker);
++        check(ProgressMonitors.current() == global, "direct Executor scope restored");
++
++        FutureTask<Object> outside = new FutureTask<>(job);
++        try {
++            executor.execute(outside, monitor);
++            throw new AssertionError("expected outer-wrapper cancellation");
++        } catch (CancellationException actual) {
++            check(actual == monitor.marker, "outer-wrapper counterexample observed");
++            check(!outside.isDone(), "outer wrapper can skip FutureTask.run; bind inside future instead");
++        } finally {
++            outside.cancel(false);
++        }
++
++        ExecutorService pool = Executors.newSingleThreadExecutor();
++        try {
++            Monitor supplied = new Monitor();
++            ProgressJob<ProgressMonitor> sees = new ProgressJob<>() {
++                @Override protected ProgressMonitor run(ProgressMonitor current) {
++                    check(current == ProgressMonitors.current(), "pool lexical monitor");
++                    return current;
++                }
++            };
++            check(pool.submitMonitored(sees, supplied).get(15, TimeUnit.SECONDS) == supplied, "existing submitMonitored result");
++            check(pool.submit((Callable<ProgressMonitor>) ProgressMonitors::current).get(15, TimeUnit.SECONDS) == global,
++                    "reused worker restored after successful call");
++            monitor.cancelled.set(false);
++            expectedFutureFailure(pool.submitMonitored(throwsChecked, monitor), failure);
++            monitor.cancel();
++            expectedFutureFailure(pool.submitMonitored(job, monitor), monitor.marker);
++            check(pool.submit((Callable<ProgressMonitor>) ProgressMonitors::current).get(15, TimeUnit.SECONDS) == global,
++                    "reused worker restored after exceptional calls");
++            ProgressMonitors.Scope scope = ProgressMonitors.bind(supplied);
++            try {
++                check(pool.submit(sees).get(15, TimeUnit.SECONDS) == global, "ordinary submit does not capture caller scope");
++            } finally {
++                scope.close();
++            }
++            check(supplied.finishes.get() == 0, "pool retains borrowed monitor ownership");
++        } finally {
++            pool.shutdownNow();
++            check(pool.awaitTermination(15, TimeUnit.SECONDS), "single worker terminates");
++        }
++    }
++
++    private static void concurrentBindings(Monitor global) throws Exception {
++        ExecutorService pool = Executors.newFixedThreadPool(2);
++        CountDownLatch entered = new CountDownLatch(2);
++        ProgressJob<ProgressMonitor> shared = new ProgressJob<>() {
++            @Override protected ProgressMonitor run(ProgressMonitor monitor) throws InterruptedException {
++                entered.countDown();
++                check(entered.await(15, TimeUnit.SECONDS), "both calls entered concurrently");
++                check(ProgressMonitors.current() == monitor, "independent concurrent lexical binding");
++                monitor.worked(1);
++                return monitor;
++            }
++        };
++        Monitor first = new Monitor();
++        Monitor second = new Monitor();
++        try {
++            Future<ProgressMonitor> a = pool.submitMonitored(shared, first);
++            Future<ProgressMonitor> b = pool.submitMonitored(shared, second);
++            check(a.get(15, TimeUnit.SECONDS) == first, "first concurrent result identity");
++            check(b.get(15, TimeUnit.SECONDS) == second, "second concurrent result identity");
++            check(first.work.get() == 1 && second.work.get() == 1, "independent progress reports");
++            check(first.finishes.get() == 0 && second.finishes.get() == 0, "concurrent calls borrow monitors");
++            check(ProgressMonitors.current() == global, "caller scope unchanged by workers");
++        } finally {
++            pool.shutdownNow();
++            check(pool.awaitTermination(15, TimeUnit.SECONDS), "concurrent workers terminate");
++        }
++    }
++
++    public static void main(String[] args) throws Exception {
++        Monitor global = new Monitor();
++        Supplier<? extends ProgressMonitor> previous = ProgressMonitors.setSystem(() -> global);
++        try {
++            signatures();
++            valuesAndScopes(global);
++            exceptionsAndCancellation(global);
++            executors(global);
++            concurrentBindings(global);
++            check(global.begins.get() == 0 && global.finishes.get() == 0, "global monitor remains borrowed");
++        } finally {
++            ProgressMonitors.setSystem(previous);
++        }
++        System.out.println("PASS ProgressJob checks=" + CHECKS.get()
++                + "; new API=PENDING; Object universal compatibility=HOLD; STRING phase unchanged");
++    }
++}

@@ -1,5 +1,6 @@
 /*
  * Copyright (c) 2026, Hitesh Soliwal and contributors. All rights reserved.
+ * Copyright (c) 2000, 2022, Oracle and/or its affiliates. All rights reserved.
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
  *
  * This code is free software; you can redistribute it and/or modify it
@@ -7,6 +8,20 @@
  * published by the Free Software Foundation. Oracle designates this
  * particular file as subject to the "Classpath" exception as provided
  * by Oracle in the LICENSE file that accompanied this code.
+ *
+ * This code is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+ * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License
+ * version 2 for more details (a copy is included in the LICENSE file that
+ * accompanied this code).
+ *
+ * You should have received a copy of the GNU General Public License version
+ * 2 along with this work; if not, write to the Free Software Foundation,
+ * Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ * Please contact Oracle, 500 Oracle Parkway, Redwood Shores, CA 94065 USA
+ * or visit www.oracle.com if you need additional information or have any
+ * questions.
  */
 package com.sun.tools.javac.m3;
 
@@ -19,6 +34,7 @@ import com.sun.source.util.TaskListener;
 import com.sun.source.util.Trees;
 import com.sun.tools.javac.api.BasicJavacTask;
 import com.sun.tools.javac.api.MultiTaskListener;
+import com.sun.tools.javac.main.Arguments;
 import com.sun.tools.javac.processing.JavacProcessingEnvironment;
 import com.sun.tools.javac.util.Context;
 import com.sun.tools.javac.util.ClientCodeException;
@@ -36,7 +52,6 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.HexFormat;
-import java.util.IdentityHashMap;
 import java.util.HashMap;
 import javax.tools.JavaFileObject;
 import java.util.Objects;
@@ -118,14 +133,21 @@ public final class M3ASTPC implements Plugin {
     public static CharSequence retainSource(Context context, JavaFileObject file, CharSequence text) {
         Session session = context.get(KEY);
         if (session == null || session.closed || text == null) return text;
-        M3AST.Source source = retained(file.toUri(), text.toString());
-        Seal seal = new Seal(source.text().length(), source.utf16Sha256());
-        Seal previous = session.seals.putIfAbsent(source.uri(), seal);
-        if (previous != null && !previous.equals(seal))
-            throw new IllegalStateException("M3AST source changed within compilation: " + source.uri());
-        session.activeSource = source;
-        session.captures++;
-        return source.text();
+        try {
+            M3AST.Source source = retained(file.toUri(), text.toString());
+            Seal seal = new Seal(source.text().length(), source.utf16Sha256());
+            Seal previous = session.seals.putIfAbsent(source.uri(), seal);
+            if (previous != null && !previous.equals(seal))
+                throw new IllegalStateException("M3AST source changed within compilation: " + source.uri());
+            session.activeSource = source;
+            session.captures++;
+            return source.text();
+        } catch (RuntimeException | Error failure) {
+            // A COMPILATION event can follow this failure from javac's finally block.
+            // Close before that event can authorize a consumer's output publication.
+            session.abort(failure);
+            throw failure;
+        }
     }
 
     private record Seal(int length, String digest) { }
@@ -133,15 +155,37 @@ public final class M3ASTPC implements Plugin {
     private static M3AST.Source retained(URI uri, String text) {
         try {
             MessageDigest digest = MessageDigest.getInstance("SHA-256");
-            for (int i = 0; i < text.length(); i++) {
-                char value = text.charAt(i);
-                digest.update((byte) (value >>> 8));
-                digest.update((byte) value);
+            // Encode exact code units, including lone surrogates, in a bounded buffer.
+            byte[] block = new byte[Math.min(text.length(), 4096) * 2];
+            for (int offset = 0; offset < text.length();) {
+                int count = Math.min(text.length() - offset, block.length / 2);
+                for (int index = 0; index < count; index++) {
+                    char value = text.charAt(offset + index);
+                    block[index * 2] = (byte) (value >>> 8);
+                    block[index * 2 + 1] = (byte) value;
+                }
+                digest.update(block, 0, count * 2);
+                offset += count;
             }
             return new M3AST.Source(uri, text, HexFormat.of().formatHex(digest.digest()));
         } catch (NoSuchAlgorithmException impossible) {
             throw new InternalError(impossible);
         }
+    }
+
+    /** Read plugin selection from the original task without creating compiler owners. */
+    public static boolean isPluginSelected(JavacTask task) {
+        Objects.requireNonNull(task, "task");
+        if (!(task instanceof BasicJavacTask javac))
+            throw new IllegalArgumentException("M3AST requires the active javac task");
+        Context context = javac.getContext();
+        if (context == null) throw new IllegalStateException("closed javac context");
+        Arguments arguments = context.get(Arguments.argsKey);
+        if (arguments == null) throw new IllegalStateException("javac arguments not initialized");
+        for (var plugin : arguments.getPluginOpts()) {
+            if ("M3AST".equals(plugin.head)) return true;
+        }
+        return false;
     }
 
     public static M3AST open(JavacTask task, boolean retainSyntax) {
@@ -287,15 +331,19 @@ public final class M3ASTPC implements Plugin {
     }
 
     private static final class LiveUnit implements M3AST.Unit {
-        private static final Object COMPUTING = new Object();
-        private static final Object NULL = new Object();
-        private record Failure(Throwable cause) { }
+        private static final byte COMPUTING = 1;
+        private static final byte COMPLETED = 2;
+        private static final byte FAILED = 4;
         private Session session;
         private CompilationUnitTree tree;
         private TypeElement type;
         private final M3AST.Phase phase;
         private final Thread thread = Thread.currentThread();
-        private IdentityHashMap<M3AST.Projection<?>, Object> projections;
+        // IdentityHashMap's paired-slot probing, specialized to this event's state.
+        // No null key, removal, entry object, failure wrapper, or global owner.
+        private Object[] projections;
+        private byte[] projectionStates;
+        private int projectionCount;
         private M3AST.Source source;
         private IOException sourceFailure;
 
@@ -330,10 +378,11 @@ public final class M3ASTPC implements Plugin {
                         Seal seal = session.seals.get(uri);
                         if (seal == null) throw new IOException("M3AST parsed-source seal unavailable: " + uri);
                         session.reads++;
-                        M3AST.Source candidate = retained(uri,
-                                tree.getSourceFile().getCharContent(false).toString());
-                        if (candidate.text().length() != seal.length()
-                                || !candidate.utf16Sha256().equals(seal.digest()))
+                        String text = tree.getSourceFile().getCharContent(false).toString();
+                        if (text.length() != seal.length())
+                            throw new IOException("M3AST source changed since parsing: " + uri);
+                        M3AST.Source candidate = retained(uri, text);
+                        if (!candidate.utf16Sha256().equals(seal.digest()))
                             throw new IOException("M3AST source changed since parsing: " + uri);
                         source = candidate;
                     }
@@ -349,25 +398,75 @@ public final class M3ASTPC implements Plugin {
         public <T> T project(M3AST.Projection<T> projection) throws Exception {
             check();
             Objects.requireNonNull(projection, "projection");
-            if (projections == null) projections = new IdentityHashMap<>();
-            Object result = projections.get(projection);
-            if (result == COMPUTING) throw new IllegalStateException("recursive M3AST projection: " + projection.name());
-            if (result == null) {
-                projections.put(projection, COMPUTING);
-                session.computations++;
-                try {
-                    T value = projection.create(this);
-                    result = value == null ? NULL : value;
-                } catch (Throwable failure) {
-                    result = new Failure(failure);
-                }
-                projections.put(projection, result);
-            } else session.hits++;
-            if (result instanceof Failure failure) {
-                if (failure.cause() instanceof Error error) throw error;
-                throw (Exception) failure.cause();
+            if (projections == null) {
+                Object[] entries = new Object[16];
+                byte[] states = new byte[8];
+                projections = entries;
+                projectionStates = states;
             }
-            return result == NULL ? null : (T) result;
+            int slot = projectionSlot(projection, projections);
+            if ((projectionStates[slot >>> 1] & COMPUTING) != 0)
+                throw new IllegalStateException("recursive M3AST projection: " + projection.name());
+            if (projections[slot] == null) {
+                if (3L * (projectionCount + 1) > projections.length) {
+                    growProjections();
+                    slot = projectionSlot(projection, projections);
+                }
+                projections[slot] = projection;
+                projectionStates[slot >>> 1] = COMPUTING;
+                projectionCount++;
+                session.computations++;
+                Object result;
+                byte state = COMPLETED;
+                try {
+                    result = projection.create(this);
+                } catch (Throwable failure) {
+                    result = failure;
+                    state |= FAILED;
+                }
+                // Nested factories can grow and rehash this same event's arrays.
+                slot = projectionSlot(projection, projections);
+                projections[slot + 1] = result;
+                projectionStates[slot >>> 1] = state;
+            } else session.hits++;
+            Object result = projections[slot + 1];
+            if ((projectionStates[slot >>> 1] & FAILED) != 0) {
+                if (result instanceof Error error) throw error;
+                throw (Exception) result;
+            }
+            return (T) result;
+        }
+
+        /** Adapted from java.util.IdentityHashMap's identity hash and paired-slot probe. */
+        private static int projectionSlot(Object key, Object[] entries) {
+            int hash = System.identityHashCode(key);
+            int mask = entries.length - 1;
+            int slot = ((hash << 1) - (hash << 8)) & mask;
+            while (entries[slot] != null && entries[slot] != key) slot = (slot + 2) & mask;
+            return slot;
+        }
+
+        private void growProjections() {
+            int length = projections.length;
+            // As in IdentityHashMap, retain a vacant key slot at maximum capacity.
+            if (length == 1 << 30) {
+                if (projectionCount == (length >>> 1) - 1)
+                    throw new IllegalStateException("Capacity exhausted.");
+                return;
+            }
+            Object[] entries = new Object[length << 1];
+            byte[] states = new byte[length];
+            for (int old = 0; old < length; old += 2) {
+                Object key = projections[old];
+                if (key != null) {
+                    int slot = projectionSlot(key, entries);
+                    entries[slot] = key;
+                    entries[slot + 1] = projections[old + 1];
+                    states[slot >>> 1] = projectionStates[old >>> 1];
+                }
+            }
+            projections = entries;
+            projectionStates = states;
         }
 
         void release() {
@@ -376,8 +475,9 @@ public final class M3ASTPC implements Plugin {
             type = null;
             source = null;
             sourceFailure = null;
-            if (projections != null) projections.clear();
             projections = null;
+            projectionStates = null;
+            projectionCount = 0;
         }
     }
 

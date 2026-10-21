@@ -1,0 +1,44 @@
+name: M3File native delta and build-impact Java21
+on:
+  pull_request:
+    paths:
+      - 'm3/file/**'
+      - '.github/workflows/m3-file-delta-20261020.yml'
+  push:
+    paths:
+      - 'm3/file/**'
+      - '.github/workflows/m3-file-delta-20261020.yml'
+jobs:
+  source-class-delta-and-impact:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Compile native M3JDK21 source/class ledger and impact owner
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p build/m3file-delta-classes
+          javac --release 21 -Xlint:all,-module -Werror \
+            -d build/m3file-delta-classes \
+            m3/file/src/main/java/module-info.java \
+            m3/file/src/main/java/com/m3/file/M3File.java \
+            m3/file/src/main/java/com/m3/file/M3FileDeltaLedger.java \
+            m3/file/src/main/java/com/m3/file/M3BuildImpactPlan.java \
+            m3/file/src/main/java/com/m3/file/M3ReactorImpactPlan.java \
+            m3/file/src/test/java/com/m3/file/M3FileDeltaLedgerContract.java \
+            m3/file/src/test/java/com/m3/file/M3BuildImpactPlanContract.java \
+            m3/file/src/test/java/com/m3/file/M3ReactorImpactPlanContract.java
+          java --module-path build/m3file-delta-classes \
+            -m com.m3.file/com.m3.file.M3FileDeltaLedgerContract
+          java --module-path build/m3file-delta-classes \
+            -m com.m3.file/com.m3.file.M3BuildImpactPlanContract
+          java --module-path build/m3file-delta-classes \
+            -m com.m3.file/com.m3.file.M3ReactorImpactPlanContract
+      - name: Execute reusable Java LST recipe fixed point and drift proof
+        run: mvn -B -ntp -f m3/file/recipe/build-impact-20261020/pom.xml test

@@ -1,0 +1,23 @@
+{
+  "copied_exact": {
+    "ENGINE_SOURCES.tsv": {
+      "disposition": "EXACT_EXISTING_HOST_REUSE",
+      "sha256": "f6f6586f4e1239bfbe958188ad59777e03db516ab2afe07209d0a62c8ebe65fc",
+      "source": "synexia-openrewrite-recipes/recipe-crates/m3-collections-refinement-20261020/recipe-host/ENGINE_SOURCES.tsv"
+    },
+    "pom.xml": {
+      "disposition": "EXACT_EXISTING_HOST_REUSE",
+      "sha256": "1c5154e9b138e96de4e48cb140e761194e860d6e3ff5ba062770d10652faeeea",
+      "source": "synexia-openrewrite-recipes/recipe-crates/m3-collections-refinement-20261020/recipe-host/pom.xml"
+    },
+    "src/test/java/com/synexia/rewrite/M3TaskRecipeTest.java": {
+      "disposition": "EXACT_EXISTING_HOST_REUSE",
+      "sha256": "321776eb9a23a67403a8022dad3e61203e688742c8c229e3ded9de2e63e6301b",
+      "source": "synexia-openrewrite-recipes/recipe-crates/m3-collections-refinement-20261020/recipe-host/src/test/java/com/synexia/rewrite/M3TaskRecipeTest.java"
+    }
+  },
+  "existing_recipe": "com.synexia.m3.WrapperConvergence20261018",
+  "implementation_changes": [],
+  "owner_root": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/canonical/synexia-openrewrite-recipes",
+  "schema": "M3_CATALOGUE_HOST_REUSE_V1"
+}

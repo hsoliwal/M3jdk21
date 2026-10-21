@@ -178,8 +178,8 @@ public final class M3SdkSortedContractRecipe {
 
     private static void selfTest() throws Exception {
         Path root = Files.createTempDirectory("m3-sdk-sorted-recipe-");
+        Path file = root.resolve(MAIN + "SelfTestFixture.java");
         try {
-            Path file = root.resolve(MAIN + "SelfTestFixture.java");
             Files.createDirectories(file.getParent());
             String before = "start\n";
             String after = "done\n";
@@ -221,7 +221,7 @@ public final class M3SdkSortedContractRecipe {
         } finally {
             // Synthetic fixture root is isolated; remove files after proof.
             Files.deleteIfExists(root.resolve(MAIN + "SelfTestFixture.java"));
-            for (Path p = file.getParent(); !p.equals(root); p = p.getParent()) {
+            for (Path p = root.resolve(MAIN + "SelfTestFixture.java").getParent(); !p.equals(root); p = p.getParent()) {
                 Files.deleteIfExists(p);
             }
             Files.deleteIfExists(root);

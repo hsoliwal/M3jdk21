@@ -5,16 +5,19 @@
 
 /*
  * @test
- * @summary M3 swing-viewport leaf 3: a JList whose BasicListUI reads row offsets from a prefix lane
- *          answers every public query and paints every pixel as the stock loops do.
+ * @summary M3 swing-viewport leaves 3 and 4: a JList whose BasicListUI reads row offsets from a
+ *          prefix lane and measures only the rows that list data events touched answers every
+ *          public query and paints every pixel as the stock loops do.
  * @modules java.desktop/javax.swing.plaf.basic:open java.desktop/sun.swing.list:open
  * @run main/othervm -Djava.awt.headless=true -Dm3.swing.viewport=true -XX:-OmitStackTraceInFastThrow M3JListViewportDifferential 40 300
  */
 
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.ComponentOrientation;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.Rectangle;
@@ -25,7 +28,10 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
+import javax.swing.DefaultListCellRenderer;
 import javax.swing.DefaultListModel;
+import javax.swing.Icon;
+import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.ListCellRenderer;
@@ -41,7 +47,12 @@ import javax.swing.plaf.basic.BasicListUI;
  * lane. Row heights come from the values (0, negative and very large heights included, so the
  * wrapped int sums and the hand-back to the stock loop are exercised). After every step the public
  * answers are compared; every 10 steps both lists are painted at the same scroll offset and
- * compared pixel by pixel. Usage: {@code M3JListViewportDifferential <seeds> <steps> [firstSeed]}.
+ * compared pixel by pixel. Every third seed ({@code seed % 3 == 2}) keeps the look and feel's
+ * {@code DefaultListCellRenderer} and fills the model with plain, HTML (one to four lines), empty
+ * and null strings and icons, so that {@code sun.swing.list.M3ListMeasure} measures only the rows
+ * that list data events touched; those seeds also toggle {@code html.disable}, the icon-text gap,
+ * the enabled state and the orientation, and swap the renderer. Usage:
+ * {@code M3JListViewportDifferential <seeds> <steps> [firstSeed]}.
  */
 public final class M3JListViewportDifferential {
 
@@ -55,6 +66,30 @@ public final class M3JListViewportDifferential {
         public String toString() {
             return "i" + id + ":" + height;
         }
+    }
+
+    /** A list value painted by DefaultListCellRenderer as an icon of {@code w x h}. */
+    record Swatch(int id, int w, int h) implements Icon {
+        @Override
+        public void paintIcon(Component c, Graphics g, int x, int y) {
+            g.setColor(new Color(0x203040 + id * 7919 & 0xffffff));
+            g.fillRect(x, y, w, h);
+        }
+
+        @Override
+        public int getIconWidth() {
+            return w;
+        }
+
+        @Override
+        public int getIconHeight() {
+            return h;
+        }
+    }
+
+    /** A DefaultListCellRenderer subclass: outside the classes M3ListMeasure accepts. */
+    @SuppressWarnings("serial")
+    static final class OtherRenderer extends DefaultListCellRenderer {
     }
 
     static final class Renderer implements ListCellRenderer<Object> {
@@ -81,18 +116,23 @@ public final class M3JListViewportDifferential {
     private final JList<Object> m3 = new JList<>(model);
     private final List<String> log = new ArrayList<>();
     private final boolean wide;
+    private final boolean labels;
     private int ids;
     private int step;
     static int pixelChecks;
     static int m3Steps;
+    static int partialLayouts;
 
     M3JListViewportDifferential(long seed) {
         rnd = new Random(seed);
         wide = seed % 7 == 0;
+        labels = seed % 3 == 2;
         stock.setUI(new StockListUI());
         m3.setUI(new BasicListUI());
         for (JList<Object> l : lists()) {
-            l.setCellRenderer(new Renderer());
+            if (!labels) {
+                l.setCellRenderer(new Renderer());
+            }
             l.setSize(320, 400);
         }
         int n = wide ? 3000 + rnd.nextInt(3000) : rnd.nextInt(60);
@@ -106,7 +146,27 @@ public final class M3JListViewportDifferential {
         return List.of(stock, m3);
     }
 
-    Item item() {
+    Object item() {
+        return labels ? label() : sized();
+    }
+
+    /** A value for DefaultListCellRenderer: plain, HTML, empty or null text, or an icon. */
+    Object label() {
+        int r = rnd.nextInt(100);
+        int id = ids++;
+        if (r < 45) {
+            return "v" + id + "x".repeat(rnd.nextInt(40));
+        } else if (r < 62) {
+            return "<html>h" + id + "<br>y".repeat(rnd.nextInt(4)) + "</html>";
+        } else if (r < 72) {
+            return "";
+        } else if (r < 90) {
+            return new Swatch(id, 1 + rnd.nextInt(60), rnd.nextInt(50));
+        }
+        return null;
+    }
+
+    Item sized() {
         int r = rnd.nextInt(100);
         int h = r < 80 ? 12 + rnd.nextInt(30) : r < 90 ? 0 : r < 95 ? 1 + rnd.nextInt(3)
                 : r < 98 ? (1 << 24) + rnd.nextInt(1 << 25) : -1 - rnd.nextInt(20);
@@ -184,7 +244,7 @@ public final class M3JListViewportDifferential {
             model.removeRange(from, to);
         } else if (op < 38 && size > 0) {
             int at = rnd.nextInt(size);
-            Item it = item();
+            Object it = item();
             log.add(step + " set " + at + " " + it);
             model.set(at, it);
         } else if (op < 41) {
@@ -194,7 +254,7 @@ public final class M3JListViewportDifferential {
             int w = rnd.nextInt(3) == 0 ? -1 : 30 + rnd.nextInt(100);
             act("setFixedCellWidth " + w, l -> l.setFixedCellWidth(w));
         } else if (op < 46) {
-            Item p = rnd.nextBoolean() ? null : item();
+            Object p = rnd.nextBoolean() ? null : item();
             act("setPrototypeCellValue " + p, l -> l.setPrototypeCellValue(p));
         } else if (op < 49) {
             int o = rnd.nextInt(6) < 4 ? JList.VERTICAL : rnd.nextBoolean() ? JList.VERTICAL_WRAP
@@ -222,8 +282,35 @@ public final class M3JListViewportDifferential {
         } else if (op < 68) {
             log.add(step + " clear");
             model.clear();
+        } else if (labels && op < 81) {
+            labelStep(op);
         } else {
             act("query only", l -> { });
+        }
+    }
+
+    /** Changes that set row sizes without a list data event, for DefaultListCellRenderer seeds. */
+    void labelStep(int op) {
+        if (op < 70) {
+            Boolean b = rnd.nextBoolean() ? Boolean.TRUE : null;
+            act("html.disable " + b, l -> ((JComponent) l.getCellRenderer()).putClientProperty("html.disable", b));
+        } else if (op < 72) {
+            int g = rnd.nextInt(12);
+            act("iconTextGap " + g, l -> ((JLabel) l.getCellRenderer()).setIconTextGap(g));
+        } else if (op < 74) {
+            int p = rnd.nextBoolean() ? JLabel.LEADING : JLabel.CENTER;
+            act("horizontalTextPosition " + p, l -> ((JLabel) l.getCellRenderer()).setHorizontalTextPosition(p));
+        } else if (op < 76) {
+            boolean e = rnd.nextInt(3) > 0;
+            act("setEnabled " + e, l -> l.setEnabled(e));
+        } else if (op < 78) {
+            ComponentOrientation o = rnd.nextBoolean() ? ComponentOrientation.RIGHT_TO_LEFT
+                    : ComponentOrientation.LEFT_TO_RIGHT;
+            act("setComponentOrientation " + o.isLeftToRight(), l -> l.setComponentOrientation(o));
+        } else {
+            int k = rnd.nextInt(3);
+            act("setCellRenderer " + k, l -> l.setCellRenderer(k == 0 ? new DefaultListCellRenderer.UIResource()
+                    : k == 1 ? new DefaultListCellRenderer() : new OtherRenderer()));
         }
     }
 
@@ -280,6 +367,28 @@ public final class M3JListViewportDifferential {
         if (offsetsBuilt()) {
             m3Steps++;
         }
+        countPartialLayout();
+    }
+
+    private Object lastHeights;
+
+    /** Counts layouts of the M3 list that measured fewer rows than it has (evidence for leaf 4). */
+    void countPartialLayout() {
+        try {
+            Field h = BasicListUI.class.getDeclaredField("cellHeights");
+            h.setAccessible(true);
+            Object heights = h.get(m3.getUI());
+            Field f = BasicListUI.class.getDeclaredField("m3Measure");
+            f.setAccessible(true);
+            Object measure = f.get(m3.getUI());
+            int measured = (int) measure.getClass().getMethod("remeasured").invoke(measure);
+            if (heights != null && heights != lastHeights && measured < model.getSize()) {
+                partialLayouts++;
+            }
+            lastHeights = heights;
+        } catch (ReflectiveOperationException e) {
+            throw new IllegalStateException("M3 measure path not installed", e);
+        }
     }
 
     /** A hash of the list painted into a 320 x 240 image whose top is {@code y}. */
@@ -312,8 +421,42 @@ public final class M3JListViewportDifferential {
     void run(int steps) {
         check(true);
         for (step = 0; step < steps; step++) {
+            int logStart = log.size();
+            int before = fullMeasuresOnDeltas();
             step();
             check(step % 10 == 0);
+            deltaGate(logStart, before, fullMeasuresOnDeltas());
+        }
+    }
+
+    /** Steps that hand the list a delta: they must never make the M3 measure every row (brief rule 24). */
+    static final java.util.Set<String> DELTAS = java.util.Set.of("add", "removeRange", "set", "clear");
+    static int deltaSteps;
+
+    /** The M3 measure's count of full measures that delta events caused. */
+    int fullMeasuresOnDeltas() {
+        try {
+            Field f = BasicListUI.class.getDeclaredField("m3Measure");
+            f.setAccessible(true);
+            Object measure = f.get(m3.getUI());
+            return (int) measure.getClass().getMethod("fullMeasuresOnDeltas").invoke(measure);
+        } catch (ReflectiveOperationException e) {
+            throw new IllegalStateException("M3 measure path not installed", e);
+        }
+    }
+
+    /** Fails when a delta step made the M3 list measure every row. */
+    void deltaGate(int logStart, int before, int after) {
+        if (logStart >= log.size()) {
+            return;
+        }
+        String[] first = log.get(logStart).trim().split(" ");
+        if (first.length < 2 || !DELTAS.contains(first[1])) {
+            return;
+        }
+        deltaSteps++;
+        if (after != before) {
+            fail("full measure on a delta step (rule 24)", "0", String.valueOf(after - before));
         }
     }
 
@@ -347,6 +490,7 @@ public final class M3JListViewportDifferential {
         });
         return "M3JListViewportDifferential seeds " + seeds + " steps " + steps + " passed " + passed[0]
                 + " failed " + failures.size() + " " + failures + "; pixel comparisons " + pixelChecks
-                + "; checks on M3 offsets " + m3Steps;
+                + "; checks on M3 offsets " + m3Steps + "; partial M3 layouts " + partialLayouts
+                + "; full measures on " + deltaSteps + " delta steps: 0";
     }
 }

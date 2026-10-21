@@ -1,0 +1,25 @@
+# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
+# SPDX-License-Identifier: Apache-2.0
+name: M3 Mask Viewport Java JNI
+on:
+  pull_request:
+    paths:
+      - 'm3/collections/src/main/java/com/m3/collections/M3MaskViewport*.java'
+      - 'm3/collections/src/main/c/m3maskviewport.c'
+      - 'm3/collections/src/test/java/com/m3/collections/M3MaskViewportKernelContract.java'
+      - 'm3/collections/viewport-proof/**'
+      - '.github/workflows/m3-mask-viewport-jni.yml'
+  workflow_dispatch:
+jobs:
+  java-jni-parity:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Strict Java 21 and C17 JNI differential
+        run: bash m3/collections/viewport-proof/verify.sh

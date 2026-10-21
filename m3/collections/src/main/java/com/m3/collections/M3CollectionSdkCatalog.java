@@ -274,8 +274,8 @@ public final class M3CollectionSdkCatalog {
 
     private static final String[] OWNERS = {
         "",
-        "",
-        "",
+        "com.m3.collections.interop.M3BiMap",
+        "com.m3.collections.interop.M3GuavaClassToInstanceMaps",
         "",
         "",
         "",
@@ -494,8 +494,8 @@ public final class M3CollectionSdkCatalog {
 
     private static final Disposition[] STATES = {
         Disposition.PENDING,
-        Disposition.PENDING,
-        Disposition.PENDING,
+        Disposition.OPTIONAL_ADAPTER,
+        Disposition.OPTIONAL_ADAPTER,
         Disposition.PENDING,
         Disposition.PENDING,
         Disposition.PENDING,

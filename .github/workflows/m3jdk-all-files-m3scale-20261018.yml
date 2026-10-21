@@ -1,0 +1,31 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3JDK21 all tracked files M3Scale Java21
+on:
+  pull_request:
+    paths:
+      - 'tools/m3scale/**'
+      - '.github/workflows/m3jdk-all-files-m3scale-20261018.yml'
+  workflow_dispatch:
+jobs:
+  full-git-tree-inventory:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: false
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Strict compile of identical source-first all-file controller
+        run: |
+          mkdir -p /tmp/m3jdk-scale-classes
+          javac --release 21 -Xlint:all -Werror -d /tmp/m3jdk-scale-classes tools/m3scale/M3ForkFilePass.java
+      - name: Run all tracked-file inventory and fixed point
+        run: |
+          java -Xmx1g -cp /tmp/m3jdk-scale-classes M3ForkFilePass scan . /tmp/m3jdk-all-files
+          java -Xmx1g -cp /tmp/m3jdk-scale-classes M3ForkFilePass verify . /tmp/m3jdk-all-files
+      - uses: actions/upload-artifact@v4
+        with:
+          name: m3jdk21-full-tree-file-catalogue
+          path: /tmp/m3jdk-all-files/

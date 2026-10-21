@@ -1,0 +1,5 @@
+jdk.m3.io
+exports jdk.m3.io
+requires java.base mandated
+requires jdk.m3.text transitive
+

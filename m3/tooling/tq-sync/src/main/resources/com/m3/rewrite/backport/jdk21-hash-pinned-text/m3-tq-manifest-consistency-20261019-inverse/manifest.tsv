@@ -1,0 +1,4 @@
+# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
+# SPDX-License-Identifier: Apache-2.0
+# path	before	after	template
+m3/tooling/tq-sync/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/manifest.tsv	5fede1e09fb5ff23319605a6e986ebfb11ba213685f5a8df980534bd5ba40407	415d3a8fe282c705dc387761af853bead2740ad43403487f013fd9d9553a6e2e	tq-manifest.tsv.txt

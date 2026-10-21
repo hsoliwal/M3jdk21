@@ -51,18 +51,18 @@ public final class M3ASTHierarchy {
     public static final int ALL_COLLECTION_FAMILIES = (1 << 13) - 1;
     private static final String SCHEMA = "m3.ast.l0-l5/1";
 
-    /** One input descriptor per file, not one retained node per AST occurrence. */
+    /** One source-file descriptor. A zero family mask means no collection classification. */
     public record FileFact(String project, String module, String packageName,
                            String path, String sourceSha256, String atomizationReceiptSha256,
                            int collectionFamilies, int[] atomHandles, byte[] atomStateMasks) {
         public FileFact {
             project = token(project, "project");
-            module = token(module, "module");
-            packageName = token(packageName, "packageName");
+            module = optionalScope(module, "module");
+            packageName = optionalScope(packageName, "packageName");
             path = M3ASTHierarchy.path(path);
             sourceSha256 = hash(sourceSha256, "sourceSha256");
             atomizationReceiptSha256 = hash(atomizationReceiptSha256, "atomizationReceiptSha256");
-            if ((collectionFamilies & ~ALL_COLLECTION_FAMILIES) != 0 || collectionFamilies == 0) {
+            if ((collectionFamilies & ~ALL_COLLECTION_FAMILIES) != 0) {
                 throw new IllegalArgumentException("unrecognized/empty collection family mask");
             }
             atomHandles = Objects.requireNonNull(atomHandles, "atomHandles").clone();
@@ -288,8 +288,34 @@ public final class M3ASTHierarchy {
         d.update((byte) value);
     }
     private static void append(MessageDigest d, String value) {
-        byte[] bytes = value.getBytes(StandardCharsets.UTF_8);
-        integer(d, bytes.length); d.update(bytes);
+        if (wellFormedUtf16(value)) {
+            // Preserve every existing well-formed identifier's v1 hash encoding.
+            byte[] bytes = value.getBytes(StandardCharsets.UTF_8);
+            integer(d, bytes.length); d.update(bytes);
+        } else {
+            // 0xff cannot occur in valid UTF-8. This disjoint framed extension
+            // preserves every accepted UTF-16 code unit without replacement.
+            integer(d, Math.addExact(1, Math.multiplyExact(value.length(), Character.BYTES)));
+            d.update((byte) 0xff);
+            for (int index = 0; index < value.length(); index++) {
+                char unit = value.charAt(index);
+                d.update((byte) (unit >>> Byte.SIZE));
+                d.update((byte) unit);
+            }
+        }
+    }
+
+    private static boolean wellFormedUtf16(String value) {
+        for (int index = 0; index < value.length(); index++) {
+            char unit = value.charAt(index);
+            if (Character.isHighSurrogate(unit)) {
+                if (++index == value.length() || !Character.isLowSurrogate(value.charAt(index)))
+                    return false;
+            } else if (Character.isLowSurrogate(unit)) {
+                return false;
+            }
+        }
+        return true;
     }
     private static String hash(String s, String name) {
         if (s == null || !s.matches("[0-9a-f]{64}")) throw new IllegalArgumentException(name);
@@ -299,6 +325,11 @@ public final class M3ASTHierarchy {
         if (s == null || s.isBlank() || s.length() > 512 || s.indexOf('\u001f') >= 0
                 || s.indexOf('\n') >= 0 || s.indexOf('\r') >= 0) throw new IllegalArgumentException(name);
         return s;
+    }
+    /** Empty scope coordinates preserve unnamed Java modules and packages. */
+    private static String optionalScope(String value, String name) {
+        if (value != null && value.isEmpty()) return value;
+        return token(value, name);
     }
     private static String path(String s) {
         s = token(s, "path");

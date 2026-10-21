@@ -14,8 +14,17 @@ final class M3StateRelation {
       composeDense(left, lo, right, ro, result, out, states);
       return;
     }
+    // Identical adjacent frontiers have the same exact result in this invocation.
+    // Reuse two scalar locals, not a per-row object or retained result cache.
+    long previous = 0L;
+    long value = 0L;
     for (int state = 0; state < states; state++) {
-      result[out + state] = applyRows(right, ro, left[lo + state]);
+      long active = left[lo + state];
+      if (state == 0 || active != previous) {
+        value = applyRows(right, ro, active);
+        previous = active;
+      }
+      result[out + state] = value;
     }
   }
 

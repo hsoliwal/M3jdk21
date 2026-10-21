@@ -10,6 +10,7 @@ import com.google.common.collect.SetMultimap;
 import com.google.common.collect.SortedSetMultimap;
 import com.google.common.collect.Table;
 import com.google.common.collect.Tables;
+import com.m3.collections.M3ArrayList;
 import com.m3.collections.M3LinkedHashMap;
 import com.m3.collections.M3LinkedHashSet;
 import com.m3.collections.M3LinkedList;
@@ -79,9 +80,12 @@ public final class M3LibraryCollections {
         return new M3TreeSet<>(Objects.requireNonNull(order, "order"));
     }
 
-    /** Guava list semantics: duplicates, ordered values, live get(), pair-count size. */
+    /**
+     * Guava list semantics over M3 dynamic arrays: duplicates, ordered values,
+     * live get(), pair-count size and RandomAccess value lists.
+     */
     public static <K, V> ListMultimap<K, V> guavaListMultimap() {
-        return Multimaps.newListMultimap(new M3LinkedHashMap<>(), M3LinkedList::new);
+        return Multimaps.newListMultimap(new M3LinkedHashMap<>(), M3ArrayList::new);
     }
 
     /** Guava set semantics: duplicate suppression and automatic empty-key removal. */
@@ -177,6 +181,12 @@ public final class M3LibraryCollections {
     /** Apache Commons Collections bidirectional map over existing M3 indexed owners. */
     public static <K, V> org.apache.commons.collections4.BidiMap<K, V> apacheBidiMap() {
         return new M3ApacheBidiMap<>();
+    }
+
+    /** Spring 6.2 case-insensitive Map semantics over two existing M3 index maps.
+     * Does not impersonate Spring's concrete LinkedCaseInsensitiveMap class. */
+    public static <V> Map<String, V> springCaseInsensitiveMap(java.util.Locale locale) {
+        return new M3SpringCaseInsensitiveMap<>(Objects.requireNonNull(locale, "locale"));
     }
 
 }

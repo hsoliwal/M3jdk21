@@ -221,6 +221,32 @@ jint java_lang_M3String::java_hash(oop value) {
   return hash;
 }
 
+// Mirrors java.lang.M3StringImmediate: the field widths below are the same named constants.
+// LATIN1: unit i at bits 8i..8i+7. IDENT: bijective base-64 over the payload bits,
+// least significant digit first, digit = 1 + index in "0-9 A-Z a-z _ $".
+jchar java_lang_M3String::immediate_char_at(jlong packed, int index) {
+  const int tag_bits = 3;
+  const int tag_shift = BitsPerLong - tag_bits;
+  const julong tag_latin1 = 1;
+  const julong tag_ident = 2;
+  const julong latin1_unit_mask = 0xff;
+  const int digit_bits = 6;
+  const julong digit_mask = (CONST64(1) << digit_bits) - 1;
+  const julong payload_mask = (CONST64(1) << tag_shift) - 1;
+  static const char ident[] =
+      "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz_$";
+  const julong bits = (julong)packed;
+  if ((bits >> tag_shift) == tag_latin1) {
+    return (jchar)((bits >> (index * BitsPerByte)) & latin1_unit_mask);
+  }
+  assert((bits >> tag_shift) == tag_ident, "M3 immediate profile");
+  julong digits = bits & payload_mask;
+  for (int skip = 0; skip < index; skip++) {
+    digits = (digits - 1) >> digit_bits;
+  }
+  return (jchar)(unsigned char)ident[(digits - 1) & digit_mask];
+}
+
 jchar java_lang_M3String::char_at(oop value, int index) {
   const int value_length = length(value);
   assert(index >= 0 && index < value_length, "M3String index out of bounds");
@@ -244,7 +270,14 @@ jchar java_lang_M3String::char_at(oop value, int index) {
         : (jchar)(first | (second << 8));
   }
 
-  assert(o->klass() == vmClasses::M3StringTuple_klass(), "M3 owner must be atom or tuple");
+  if (o->klass() == vmClasses::M3StringImmediate_klass()) {
+    typeArrayOop words = (typeArrayOop)o->obj_field(_immediate_words_offset);
+    const int slot = o->int_field(_immediate_slot_offset);
+    assert(words != nullptr && slot >= 0 && slot < words->length(), "M3 immediate slot");
+    return immediate_char_at(words->long_at(slot), logical);
+  }
+
+  assert(o->klass() == vmClasses::M3StringTuple_klass(), "M3 owner must be atom, immediate or tuple");
   oop left = o->obj_field(_tuple_left_offset);
   oop right = o->obj_field(_tuple_right_offset);
   const int left_length = length(left);

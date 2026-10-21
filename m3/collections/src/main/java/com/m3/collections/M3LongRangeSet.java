@@ -125,12 +125,7 @@ public final class M3LongRangeSet {
     private int firstEndingAfter(long point) {
         int lo = 0;
         int hi = size;
-        while (lo < hi) {
-            int mid = lo + ((hi - lo) >>> 1);
-            if (ends[mid] <= point) lo = mid + 1;
-            else hi = mid;
-        }
-        return lo;
+        return M3LaneSearch.upperBound(ends, lo, hi, point);
     }
 
     /** Exact membership for all signed-long input values. */

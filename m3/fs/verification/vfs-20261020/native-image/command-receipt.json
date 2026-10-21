@@ -1,0 +1,58 @@
+{
+  "command": [
+    "python3",
+    "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/fs/tools/package_runtime.py",
+    "--jdk-home",
+    "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/toolchain/jdk21",
+    "--jar",
+    "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/qualification-capture/m3-fs-0.1.0-SNAPSHOT.jar",
+    "--native-library",
+    "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/native-capture/libm3fs.so",
+    "--sqlite-library",
+    "/usr/lib/x86_64-linux-gnu/libsqlite3.so.0.8.6",
+    "--provider-dependency-cache",
+    "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2",
+    "--repository-root",
+    "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver",
+    "--out",
+    "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/qualification-native-capture"
+  ],
+  "exit_code": 0,
+  "finished_utc": "2026-10-20T11:21:49.302383+00:00",
+  "input_sha256_after": {
+    "/usr/lib/x86_64-linux-gnu/libsqlite3.so.0.8.6": "eac351cf84d688d1f9235e6165bd57555b31a491cd2f65e0dca67daa69036370",
+    "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/native-capture/libm3fs.so": "fb2e70989a90f1ff151519ad875c09f82a3812ec7e2d7cfc932c2a001eccfcdf",
+    "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/qualification-capture/m3-fs-0.1.0-SNAPSHOT.jar": "05d5387d1b64d6075f9a0317b7bd3f598fbfad581b63793157926d3b3ccb1d9f",
+    "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/fs/tools/package_runtime.py": "8c1d74890543d30f191bf4f9dbeea57543d1e67e4479063ab23052ddd7b77462",
+    "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/fs/verification/M3FsRuntimeProbe.java": "dd1003681fe672c1f477183dfdc035853496e09093e5c71eb5de4b444f62a2c3"
+  },
+  "input_sha256_before": {
+    "/usr/lib/x86_64-linux-gnu/libsqlite3.so.0.8.6": "eac351cf84d688d1f9235e6165bd57555b31a491cd2f65e0dca67daa69036370",
+    "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/native-capture/libm3fs.so": "fb2e70989a90f1ff151519ad875c09f82a3812ec7e2d7cfc932c2a001eccfcdf",
+    "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/qualification-capture/m3-fs-0.1.0-SNAPSHOT.jar": "05d5387d1b64d6075f9a0317b7bd3f598fbfad581b63793157926d3b3ccb1d9f",
+    "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/fs/tools/package_runtime.py": "8c1d74890543d30f191bf4f9dbeea57543d1e67e4479063ab23052ddd7b77462",
+    "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/fs/verification/M3FsRuntimeProbe.java": "dd1003681fe672c1f477183dfdc035853496e09093e5c71eb5de4b444f62a2c3"
+  },
+  "inputs_unchanged": true,
+  "scope": "Existing package_runtime.py mandatory -Xcheck:jni native-required linked-image probe; supplied prebuilt Temurin JDK21, not a source-built OpenJDK qualification",
+  "source_lock_after": {
+    "donor_java_compiled": 237,
+    "donor_java_custody": 311,
+    "input_files": 389,
+    "receiver_base": "73f59218dc4ef1a3ef79aad990e77273db2a2d60",
+    "source_lock": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/SOURCE_LOCK.capture.tsv",
+    "source_lock_sha256": "c0de3ce42ee865bef48a037b1734fb606f4bb5acc206154826bb9102b07b9ec1",
+    "vfs_upstream_commit": "685b3b723a83e56034391350ea1a02231411142f"
+  },
+  "source_lock_before": {
+    "donor_java_compiled": 237,
+    "donor_java_custody": 311,
+    "input_files": 389,
+    "receiver_base": "73f59218dc4ef1a3ef79aad990e77273db2a2d60",
+    "source_lock": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/SOURCE_LOCK.capture.tsv",
+    "source_lock_sha256": "c0de3ce42ee865bef48a037b1734fb606f4bb5acc206154826bb9102b07b9ec1",
+    "vfs_upstream_commit": "685b3b723a83e56034391350ea1a02231411142f"
+  },
+  "started_utc": "2026-10-20T11:21:39.313858+00:00",
+  "working_directory": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020"
+}

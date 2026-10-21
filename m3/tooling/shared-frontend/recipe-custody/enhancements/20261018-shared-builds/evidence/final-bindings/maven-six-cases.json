@@ -1,0 +1,126 @@
+{
+  "cases": [
+    {
+      "case": "default-stock",
+      "class_sha256": {
+        "fixture/Generated.class": "b115df94a94f7b32ece72073fd13ff043698f75f7eca08c163374e5f77f3155d",
+        "fixture/Main.class": "64243778a073e02269f543afe061f61e9ba7b02f2098f9f72affa9f7e1cd4648"
+      },
+      "compile_log_sha256": "21033029efa7da0e4341b49f6aa8515d643f78a20859d0e8d28377ee7601b4d6",
+      "forked": false,
+      "method_parameters_retained": true,
+      "native_opt_in": false,
+      "processor_path_and_option_retained": true
+    },
+    {
+      "case": "enabled-stock-refusal",
+      "compile_log_sha256": "c0470c78ecafa7e1122080eb5f9c96a4a750740cdd1927511f6bf178eef4f07d",
+      "forked": false,
+      "native_opt_in": true,
+      "refusal": "plug-in not found: M3AST"
+    },
+    {
+      "case": "enabled-m3",
+      "class_sha256": {
+        "fixture/Generated.class": "b115df94a94f7b32ece72073fd13ff043698f75f7eca08c163374e5f77f3155d",
+        "fixture/Main.class": "64243778a073e02269f543afe061f61e9ba7b02f2098f9f72affa9f7e1cd4648"
+      },
+      "compile_log_sha256": "29ef7177d04e1bc370cdc957fecbbb1ad7db60dba15d63654e9b9ad5c06ca4ab",
+      "forked": false,
+      "method_parameters_retained": true,
+      "native_opt_in": true,
+      "processor_path_and_option_retained": true
+    },
+    {
+      "case": "api-trace",
+      "class_sha256": {
+        "fixture/Generated.class": "b115df94a94f7b32ece72073fd13ff043698f75f7eca08c163374e5f77f3155d",
+        "fixture/Main.class": "64243778a073e02269f543afe061f61e9ba7b02f2098f9f72affa9f7e1cd4648"
+      },
+      "compile_log_sha256": "f143da5cf63a09bc065a6b74aa0b8f7c51a0e2b51c0b0bbc72611f04991179ee",
+      "forked": false,
+      "image_sha256": "dd2fb7aff789684189477c5811262396ffdda36f137dc250982275a1eb99c8a3",
+      "method_parameters_retained": true,
+      "native_opt_in": true,
+      "processor_path_and_option_retained": true,
+      "slots_sha256": "fe9a127d4be7a070e8da3ca15c5c5074e45c1ff962e4dce1f2ed3b4fa88f59f2",
+      "trace_sha256": "ffb8cd78d61937f55acef8508e2ce43424a9510a85e6937dbd80a187437ca457",
+      "trace_stats": {
+        "analyzed": "2",
+        "captures": "2",
+        "completed": "true",
+        "consumerFailed": "false",
+        "errors": "0",
+        "extraSourceReads": "0",
+        "hits": "0",
+        "parsed": "2",
+        "projections": "0"
+      }
+    },
+    {
+      "case": "command-line-trace",
+      "class_sha256": {
+        "fixture/Generated.class": "b115df94a94f7b32ece72073fd13ff043698f75f7eca08c163374e5f77f3155d",
+        "fixture/Main.class": "64243778a073e02269f543afe061f61e9ba7b02f2098f9f72affa9f7e1cd4648"
+      },
+      "compile_log_sha256": "4b701aab08514e9f178fc8a74f905200180a913429ce9489f289d33f83215ad4",
+      "forked": true,
+      "image_sha256": "dd2fb7aff789684189477c5811262396ffdda36f137dc250982275a1eb99c8a3",
+      "method_parameters_retained": true,
+      "native_opt_in": true,
+      "processor_path_and_option_retained": true,
+      "slots_sha256": "fe9a127d4be7a070e8da3ca15c5c5074e45c1ff962e4dce1f2ed3b4fa88f59f2",
+      "trace_sha256": "6b85047afc24864721f9e5edb34de91950fca4dec4edc6b586ab40adc6ffd712",
+      "trace_stats": {
+        "analyzed": "2",
+        "captures": "2",
+        "completed": "true",
+        "consumerFailed": "false",
+        "errors": "0",
+        "extraSourceReads": "0",
+        "hits": "0",
+        "parsed": "2",
+        "projections": "0"
+      }
+    },
+    {
+      "case": "compiler-error",
+      "compile_log_sha256": "e921359c37b9a1ade1cf65a5c3b19fb6590c0aff137f91b459997ebe6c1e3244",
+      "forked": false,
+      "image_absent": true,
+      "native_opt_in": true,
+      "slots_absent": true,
+      "trace_sha256": "2ba1d2f3b977a478262f7de4459cf6905b72111c7b6a85cad903478154125448",
+      "trace_stats": {
+        "analyzed": "2",
+        "captures": "2",
+        "completed": "true",
+        "consumerFailed": "false",
+        "errors": "1",
+        "extraSourceReads": "0",
+        "hits": "0",
+        "parsed": "2",
+        "projections": "0"
+      }
+    }
+  ],
+  "compiler_plugin": "org.apache.maven.plugins:maven-compiler-plugin:3.16.0:compile",
+  "full_vm_build_provenance": "SUPPLY_BUILD_RECEIPT_SEPARATELY",
+  "input_sha256": {
+    "m3jdk_modules": "bea61bf4bf15cc270e23764db6ad70e86b5b4092ca05ebc5bca57a23d2b157f7",
+    "m3jdk_release": "2d6b79bc1885eb9a5466dd27056428a25034cba0c1a1bac88cc719966e688335",
+    "maven_core": "de19b8d700ca7c1872142bf7646f8ddb35e9730dec90605a7e4829793ae8e636",
+    "maven_launcher": "db456afa890616e7b73d89fd3336c3f7b70887a0cbf6ff99c543872055d99354",
+    "stock_modules": "70c5465dabf8e1bec2860631ea3ffd342f0ec23a5e2efd3a389d2abe32448f98",
+    "stock_release": "ebbd70bf00bab6d39addf51969c5ff244030b86b29de400b9fb10612ebd3ceec"
+  },
+  "jdk_home": "/workspace/scratch/65626af64474/m3-ast-shared-20261018/descriptor-qualification-02/candidate/image",
+  "maven_home": "/workspace/scratch/65626af64474/m3-ast-shared-20261018/maven-recovery/apache-maven-4.1.0-m3-session-recovery",
+  "maven_version_output": "Apache Maven 4.1.0-SNAPSHOT\nMaven home: /workspace/scratch/65626af64474/m3-ast-shared-20261018/maven-recovery/apache-maven-4.1.0-m3-session-recovery\nJava version: 21.0.12.1, vendor: Eclipse Adoptium, runtime: /workspace/scratch/65626af64474/m3-ast-shared-20261018/descriptor-qualification-02/candidate/image\nDefault locale: en, platform encoding: UTF-8, time zone: Asia/Dubai\nOS name: \"linux\", version: \"6.18.55\", arch: \"amd64\", family: \"unix\"\n",
+  "processor_coordinate": "org.m3.fixture:native-consumer-processor:1-bcd36ceb3fdb4e48751880243321c2e66c8a339dea06417acacbb69d50991ba3",
+  "processor_sha256": "bcd36ceb3fdb4e48751880243321c2e66c8a339dea06417acacbb69d50991ba3",
+  "source_build_provenance": "SUPPLY_BUILD_RECEIPT_SEPARATELY",
+  "status": "MAVEN4_NATIVE_OPTION_RUNTIME_PASS",
+  "stock_jdk": "/tmp/m3-regex-toolchain-20261018/jdk-21.0.12.1+1",
+  "verifier_sha256": "4c092f6111b54c14b34315648c60ba59075c031d15feb9873b5f9f52cf256830"
+}

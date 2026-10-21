@@ -1,0 +1,37 @@
+name: M3 AST unnamed source facts
+on:
+  pull_request:
+    paths:
+      - 'm3/ast/src/main/java/com/m3/ast/M3ASTHierarchy.java'
+      - 'm3/ast/src/test/java/com/m3/ast/M3ASTHierarchyContract.java'
+      - 'm3/ast/recipe-custody/hierarchy-encoding-20261018/**'
+      - '.github/workflows/m3-ast-general-source-facts.yml'
+  workflow_dispatch:
+jobs:
+  java21-and-openrewrite:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: maven
+      - name: Full original AST source/family contract and frozen roots
+        run: |
+          mkdir -p /tmp/m3-ast-general/classes
+          javac --release 21 -Xlint:all -Werror -d /tmp/m3-ast-general/classes \
+            m3/ast/src/main/java/com/m3/ast/M3ASTHierarchy.java \
+            m3/ast/src/test/java/com/m3/ast/M3ASTHierarchyContract.java \
+            m3/ast/src/test/java/com/m3/ast/M3ASTHierarchyEncodingTest.java
+          java -cp /tmp/m3-ast-general/classes com.m3.ast.M3ASTHierarchyContract 2000
+          java -cp /tmp/m3-ast-general/classes com.m3.ast.M3ASTHierarchyEncodingTest
+      - name: Qualify exact canonical OpenRewrite recipe result and fixed point
+        run: |
+          cd m3/ast/recipe-custody/hierarchy-encoding-20261018
+          mvn -B -ntp -Dm3.dataset=ast-general-source-20261019 \
+            -Dm3.crate.name=m3-ast-general-source-20261019 \
+            -Dm3.recipe.name=com.synexia.m3jdk.AstGeneralSourceFacts20261019 \
+            -Drecipe.owner.root="$PWD/sdk-owner" test

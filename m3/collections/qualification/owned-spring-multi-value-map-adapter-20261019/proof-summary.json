@@ -1,0 +1,13 @@
+{
+  "owner": "com.m3.collections.spring.M3MultiValueMapAdapter",
+  "provider_contract": "org.springframework.util.MultiValueMapAdapter (Spring Framework core 6.2.0)",
+  "inventory_row": "DONE #1469",
+  "source_sha256": "4ba5519506da5f317d1fa6faf44e5e1b5474e5478829b76ecea39531de5e948c",
+  "scaffold_preimage_sha256": "cef6efc5129bef9dc8ed1f077b711b806a55d58cde729813273b316df92b7776",
+  "module_tests": {"tests": 12, "failures": 0, "differential_seeds": 8, "differential_operations": 96000, "differential_checks": 576063},
+  "coverage": {"tool": "JaCoCo 0.8.12", "classes": 6, "line": "102/102", "branch": "48/48", "gate": "CLASS LINE and BRANCH COVEREDRATIO >= 0.99"},
+  "allocation_probe_bytes": 0,
+  "recipe_tests": {"tests": 2, "fixed_point_executions": 8, "refusals": 4},
+  "environment": "local Windows 11, JDK 21, Maven 3.9.14; hosted CI not run",
+  "not_claimed": ["Spring serialVersionUID / wire compatibility", "owned storage lanes (contract is write-through to the caller map)", "performance comparison", "JNI path"]
+}

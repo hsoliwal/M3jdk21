@@ -23,6 +23,9 @@ on:
       - 'm3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-atom-pattern.yml'
       - 'm3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-file-inventory.yml'
       - 'm3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-java21-convergence.yml'
+      - 'm3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-token-regex-convergence.yml'
+      - 'm3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/m3-token-regex-convergence/**'
+      - 'm3/tooling/migration-recipes/src/test/java/com/m3/rewrite/backport/M3TokenRegexConvergenceRecipeTest.java'
       - 'src/hotspot/share/prims/jni.cpp'
       - 'src/hotspot/share/gc/shared/stringdedup/stringDedupTable.cpp'
       - 'src/hotspot/share/classfile/vmClassMacros.hpp'
@@ -62,11 +65,18 @@ on:
       - 'test/jdk/java/lang/String/M3StringMixedLiteralReplaceTest.java'
       - 'test/jdk/java/lang/String/M3StringRegexSplitHistoryTest.java'
       - 'test/jdk/jdk/internal/mindex/M3TQFactsTest.java'
+      - 'test/jdk/jdk/internal/mindex/M3TokenRegexTest.java'
       - 'test/jdk/java/util/regex/M3RegexLiteralTQTest.java'
       - 'test/jdk/java/util/regex/M3RegexReuseTest.java'
       - 'src/java.base/share/classes/java/util/regex/**'
       - 'm3/tooling/mr/**'
       - 'doc/mindex-string-backing.md'
+      - 'src/java.base/share/classes/java/lang/M3FrozenLexiconIndex.java'
+      - 'src/java.base/share/native/libjava/M3StringPool.c'
+      - 'src/java.base/share/classes/jdk/internal/m3/M3IndexedView.java'
+      - 'src/java.base/share/classes/jdk/internal/m3/M3IndexedArray.java'
+      - 'test/jdk/jdk/internal/m3/M3IndexedViewEpochTest.java'
+      - 'test/jdk/jdk/internal/m3/M3IndexedArrayTest.java'
       - '.github/workflows/mindex-string-backing.yml'
   workflow_dispatch:
 
@@ -115,6 +125,8 @@ jobs:
         run: mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml -Dtest=M3StringCanonicalDagMasterRepairRecipeTest test
       - name: Prove direct M3 String stream traversal recipe
         run: mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml -Dtest=M3StringDirectStreamTraversalRecipeTest test
+      - name: Prove token-aware regex convergence recipe
+        run: mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml -Dtest=M3TokenRegexConvergenceRecipeTest test
       - name: Prove immutable Matcher fact reuse
         run: mvn -B -ntp -f m3/tooling/mr/pom.xml test
       - name: Verify current M3 String concat length and updated jtreg contract
@@ -153,4 +165,4 @@ jobs:
           if-no-files-found: error
           retention-days: 30
       - name: Run M3 String backing jtreg
-        run: make test TEST="test/jdk/java/lang/String/M3MappedStringBackingTest.java test/jdk/java/lang/String/MapGuardTest.java test/jdk/java/lang/String/MapFactsTest.java test/jdk/java/lang/String/MapUtfTest.java test/jdk/java/lang/String/M3StringFactsCompositionTest.java test/jdk/java/lang/String/M3StringCanonicalDagTest.java test/jdk/java/lang/String/M3StringStreamsTest.java test/jdk/java/lang/String/M3StringPrecomputeSearchTest.java test/jdk/java/lang/String/M3StringRegexReplacementTest.java test/jdk/java/lang/String/M3StringInternTest.java test/jdk/java/lang/String/M3StringCharArrayHistoryTest.java test/jdk/java/lang/String/M3StringConcatReferenceDagTest.java test/jdk/java/lang/String/M3StringConcatLengthOverflowTest.java test/jdk/java/lang/String/M3StringJoinCarryTest.java test/jdk/java/lang/String/M3StringBinaryConcatTest.java test/jdk/java/lang/String/M3StringCodePointGeometryTest.java test/jdk/java/lang/String/M3StringLiteralMatchesTest.java test/jdk/java/lang/String/M3StringPrecomputeBridgeTest.java test/jdk/java/lang/String/M3StringBuilderRangeBulkTest.java test/jdk/java/lang/String/M3StringByteSourceNeedleTest.java test/jdk/java/lang/String/M3StringMixedLiteralReplaceTest.java test/jdk/java/lang/String/M3StringRegexSplitHistoryTest.java test/jdk/jdk/internal/mindex/M3TQFactsTest.java test/jdk/java/util/regex/M3RegexLiteralTQTest.java test/jdk/java/util/regex/M3RegexReuseTest.java test/jdk/java/lang/String/M3StringConcatTupleTest.java test/jdk/java/lang/String/M3StringFactsMixedConsumersTest.java test/jdk/java/lang/String/M3StringFactsScanWindowTest.java test/jdk/java/lang/String/M3StringJniShadowLifetimeTest.java test/jdk/java/lang/String/M3StringLiteralSplitTest.java test/jdk/java/lang/String/M3StringMixedEqualityGatesTest.java test/jdk/java/lang/String/M3StringOwnerRangeLifetimeTest.java test/jdk/java/lang/String/M3StringPoolBoundsTest.java test/jdk/java/lang/String/M3StringPositionInvariant6Test.java test/jdk/java/lang/String/M3StringRegexSplitCurrentTest.java test/jdk/java/lang/String/M3StringUtf16DifferentialTest.java test/jdk/java/lang/String/M3TQSparseContainmentTest.java test/jdk/java/lang/String/M3TQTest.java test/jdk/java/lang/String/M3StringRegexDpTest.java"
+        run: make test TEST="test/jdk/java/lang/String/M3MappedStringBackingTest.java test/jdk/java/lang/String/MapGuardTest.java test/jdk/java/lang/String/MapFactsTest.java test/jdk/java/lang/String/MapUtfTest.java test/jdk/java/lang/String/M3StringFactsCompositionTest.java test/jdk/java/lang/String/M3StringCanonicalDagTest.java test/jdk/java/lang/String/M3StringStreamsTest.java test/jdk/java/lang/String/M3StringPrecomputeSearchTest.java test/jdk/java/lang/String/M3StringRegexReplacementTest.java test/jdk/java/lang/String/M3StringInternTest.java test/jdk/java/lang/String/M3StringCharArrayHistoryTest.java test/jdk/java/lang/String/M3StringConcatReferenceDagTest.java test/jdk/java/lang/String/M3StringConcatLengthOverflowTest.java test/jdk/java/lang/String/M3StringJoinCarryTest.java test/jdk/java/lang/String/M3StringBinaryConcatTest.java test/jdk/java/lang/String/M3StringCodePointGeometryTest.java test/jdk/java/lang/String/M3StringLiteralMatchesTest.java test/jdk/java/lang/String/M3StringPrecomputeBridgeTest.java test/jdk/java/lang/String/M3StringBuilderRangeBulkTest.java test/jdk/java/lang/String/M3StringByteSourceNeedleTest.java test/jdk/java/lang/String/M3StringMixedLiteralReplaceTest.java test/jdk/java/lang/String/M3StringRegexSplitHistoryTest.java test/jdk/jdk/internal/mindex/M3TQFactsTest.java test/jdk/jdk/internal/mindex/M3TokenRegexTest.java test/jdk/java/util/regex/M3RegexLiteralTQTest.java test/jdk/java/util/regex/M3RegexReuseTest.java test/jdk/java/lang/String/M3StringConcatTupleTest.java test/jdk/java/lang/String/M3StringFactsMixedConsumersTest.java test/jdk/java/lang/String/M3StringFactsScanWindowTest.java test/jdk/java/lang/String/M3StringJniShadowLifetimeTest.java test/jdk/java/lang/String/M3StringLiteralSplitTest.java test/jdk/java/lang/String/M3StringMixedEqualityGatesTest.java test/jdk/java/lang/String/M3StringOwnerRangeLifetimeTest.java test/jdk/java/lang/String/M3StringPoolBoundsTest.java test/jdk/java/lang/String/M3StringPositionInvariant6Test.java test/jdk/java/lang/String/M3StringRegexSplitCurrentTest.java test/jdk/java/lang/String/M3StringUtf16DifferentialTest.java test/jdk/java/lang/String/M3TQSparseContainmentTest.java test/jdk/java/lang/String/M3TQTest.java test/jdk/java/lang/String/M3StringRegexDpTest.java test/jdk/java/lang/String/M3StringLexiconHashIndexTest.java test/jdk/java/lang/String/M3FrozenLexiconIndexConstructionTest.java test/jdk/java/lang/String/M3StringFrozenLexiconIndexTest.java test/jdk/java/lang/String/M3StringPoolMetadataBoundsTest.java test/jdk/java/lang/String/M3StringCompilerAdmissionTest.java test/jdk/jdk/internal/m3/M3IndexedViewEpochTest.java test/jdk/jdk/internal/m3/M3IndexedArrayTest.java"

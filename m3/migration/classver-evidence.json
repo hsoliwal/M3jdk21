@@ -1,0 +1,1078 @@
+{
+  "schema": "m3.classver-evidence/1",
+  "authority": {
+    "repository": "hsoliwal/M3jdk21",
+    "commit": "8891dd43632cf6e5e7b174c5badd5c0d532f9541",
+    "tree": "90ff0bbaea96b14dc65806ee10b587deee7eaffc"
+  },
+  "observedFailure": {
+    "run": 37366461859,
+    "job": 111952743116,
+    "logSHA256": "cf72d7bd5d070c5dcc2a5e04d2b2db1bebc707c5fc01b1e9dd44f78cc76a8ea0",
+    "diagnostics": 774
+  },
+  "files": [
+    {
+      "path": "m3/migration/intake-20261005/current-752-ci/a3-producer/chain/02-compile.stdout.log",
+      "mode": "100644",
+      "gitBlob": "61ffda012c0342c76434e0c22cfb208422e45023",
+      "sha256": "189a3dcdd72f9d2b73b39ada76984a06e51b5ba8b9ce31d6c9cfc1107488feb8",
+      "bytes": 1407,
+      "role": "raw-log",
+      "provenance": [
+        {
+          "path": "m3/migration/intake-20261005/current-752-ci/delivery-envelope/archive-locator-v1/receiver-whitelist.json",
+          "sha256": "dd00b3ffb24dff10006f6f4c7a7e73aefd17b4e0bac870cc8ff44935e2025a45",
+          "gitBlob": "7e2ab77880e46a2c16c01869b4d0b0801e69d1e5",
+          "description": "files[16] binds this exact path, SHA-256, Git blob, byte count, and mode as qualified-task; the group alone does not grant an exemption."
+        },
+        {
+          "path": "m3/migration/intake-20261005/current-752-ci/a3-producer/chain/02-compile.json",
+          "sha256": "b953807987037ec26581f075fa317551c2348ff0940a7842f7209448f67eb902",
+          "gitBlob": "3fab74c6efefacdc9be2ba6cdca35f288180dc22",
+          "description": "Original compile receipt stdout.sha256 and stdout.bytes binds this retained stdout body. Receipt provenance is preserved without rerunning the command."
+        }
+      ]
+    },
+    {
+      "path": "m3/migration/intake-20261005/current-752-ci/a3-producer/chain/03-tests.stdout.log",
+      "mode": "100644",
+      "gitBlob": "b78d9db1c43ad9a2716e22893be2abfe4cf3c753",
+      "sha256": "7321ddfb282387ed034444bbf8342e72f721cf3eb9f56ad11d52c8234d61657f",
+      "bytes": 2586,
+      "role": "raw-log",
+      "provenance": [
+        {
+          "path": "m3/migration/intake-20261005/current-752-ci/delivery-envelope/archive-locator-v1/receiver-whitelist.json",
+          "sha256": "dd00b3ffb24dff10006f6f4c7a7e73aefd17b4e0bac870cc8ff44935e2025a45",
+          "gitBlob": "7e2ab77880e46a2c16c01869b4d0b0801e69d1e5",
+          "description": "files[19] binds this exact path, SHA-256, Git blob, byte count, and mode as qualified-task; the group alone does not grant an exemption."
+        },
+        {
+          "path": "m3/migration/intake-20261005/current-752-ci/a3-producer/chain/03-tests.json",
+          "sha256": "9953ce1bd9d82d25f409abb665f7ed038830be681934e8cdcae8aeab17790e8f",
+          "gitBlob": "248c4f9bf3cc857f474a80ebcb96c07ea40a40f2",
+          "description": "Original tests receipt stdout.sha256 and stdout.bytes binds this retained stdout body. Receipt provenance is preserved without rerunning the command."
+        }
+      ]
+    },
+    {
+      "path": "m3/migration/intake-20261005/current-752-ci/a3-receiving-producer/candidate.patch",
+      "mode": "100644",
+      "gitBlob": "b5839941b9bedb85f064ccdab18f0a684ae466f8",
+      "sha256": "52f34060ef1f8f8f01dbe3e0f73f1e9a85a9815817a47ab107e20ee6afd27d1d",
+      "bytes": 10488,
+      "role": "patch-snapshot",
+      "provenance": [
+        {
+          "path": "m3/migration/intake-20261005/current-752-ci/delivery-envelope/archive-locator-v1/receiver-whitelist.json",
+          "sha256": "dd00b3ffb24dff10006f6f4c7a7e73aefd17b4e0bac870cc8ff44935e2025a45",
+          "gitBlob": "7e2ab77880e46a2c16c01869b4d0b0801e69d1e5",
+          "description": "files[33] binds this exact path, SHA-256, Git blob, byte count, and mode as qualified-task; the group alone does not grant an exemption."
+        }
+      ]
+    },
+    {
+      "path": "m3/migration/intake-20261005/current-752-ci/a3-receiving-producer/chain/02-compile.stdout.log",
+      "mode": "100644",
+      "gitBlob": "f6e8af7f18c07058000fb1ea18424424bb07a84e",
+      "sha256": "57b2b4f835c5346c9191ecc7de7c461aeba40ebfc9d9dd131079ad188fa9593f",
+      "bytes": 1396,
+      "role": "raw-log",
+      "provenance": [
+        {
+          "path": "m3/migration/intake-20261005/current-752-ci/delivery-envelope/archive-locator-v1/receiver-whitelist.json",
+          "sha256": "dd00b3ffb24dff10006f6f4c7a7e73aefd17b4e0bac870cc8ff44935e2025a45",
+          "gitBlob": "7e2ab77880e46a2c16c01869b4d0b0801e69d1e5",
+          "description": "files[39] binds this exact path, SHA-256, Git blob, byte count, and mode as qualified-task; the group alone does not grant an exemption."
+        },
+        {
+          "path": "m3/migration/intake-20261005/current-752-ci/a3-receiving-producer/chain/02-compile.json",
+          "sha256": "874114c7bd4268b66a63246f10db3eeb0d0379c251cc1641cc10e211d2a4d51e",
+          "gitBlob": "a43ef4b2effe1dbefae280684e7e27a9c82a43b7",
+          "description": "Original compile receipt stdout.sha256 and stdout.bytes binds this retained stdout body. Receipt provenance is preserved without rerunning the command."
+        }
+      ]
+    },
+    {
+      "path": "m3/migration/intake-20261005/current-752-ci/a3-receiving-producer/chain/03-tests.stdout.log",
+      "mode": "100644",
+      "gitBlob": "649e5bdcc734969a9d27b845591c0e5ce8cc5904",
+      "sha256": "9e6f1027590956c18333d11039da7902ae88572917b0197613d9cf290ff0c342",
+      "bytes": 1619,
+      "role": "raw-log",
+      "provenance": [
+        {
+          "path": "m3/migration/intake-20261005/current-752-ci/delivery-envelope/archive-locator-v1/receiver-whitelist.json",
+          "sha256": "dd00b3ffb24dff10006f6f4c7a7e73aefd17b4e0bac870cc8ff44935e2025a45",
+          "gitBlob": "7e2ab77880e46a2c16c01869b4d0b0801e69d1e5",
+          "description": "files[42] binds this exact path, SHA-256, Git blob, byte count, and mode as qualified-task; the group alone does not grant an exemption."
+        },
+        {
+          "path": "m3/migration/intake-20261005/current-752-ci/a3-receiving-producer/chain/03-tests.json",
+          "sha256": "3121ea3525a4404186106387290b58be3af0865627b3e42ef659da9f8c0cd43b",
+          "gitBlob": "c54c09dfc53d55bf1fc1d213a8ce0f9a6ae52824",
+          "description": "Original tests receipt stdout.sha256 and stdout.bytes binds this retained stdout body. Receipt provenance is preserved without rerunning the command."
+        }
+      ]
+    },
+    {
+      "path": "m3/migration/intake-20261005/current-752-ci/cia-producer-portable/candidate.patch",
+      "mode": "100644",
+      "gitBlob": "b5839941b9bedb85f064ccdab18f0a684ae466f8",
+      "sha256": "52f34060ef1f8f8f01dbe3e0f73f1e9a85a9815817a47ab107e20ee6afd27d1d",
+      "bytes": 10488,
+      "role": "patch-snapshot",
+      "provenance": [
+        {
+          "path": "m3/migration/intake-20261005/current-752-ci/delivery-envelope/archive-locator-v1/receiver-whitelist.json",
+          "sha256": "dd00b3ffb24dff10006f6f4c7a7e73aefd17b4e0bac870cc8ff44935e2025a45",
+          "gitBlob": "7e2ab77880e46a2c16c01869b4d0b0801e69d1e5",
+          "description": "files[59] binds this exact path, SHA-256, Git blob, byte count, and mode as provenance-addition; the group alone does not grant an exemption."
+        }
+      ]
+    },
+    {
+      "path": "m3/migration/intake-20261005/current-752-ci/cih-producer-portable/candidate.patch",
+      "mode": "100644",
+      "gitBlob": "39f2bc58e877462f330513f16f78bf22502673a6",
+      "sha256": "17e4f8398e08468645b2ec15d99c45a0c49e942d03115cc92e53e713ba9c00af",
+      "bytes": 24160,
+      "role": "patch-snapshot",
+      "provenance": [
+        {
+          "path": "m3/migration/intake-20261005/current-752-ci/delivery-envelope/archive-locator-v1/receiver-whitelist.json",
+          "sha256": "dd00b3ffb24dff10006f6f4c7a7e73aefd17b4e0bac870cc8ff44935e2025a45",
+          "gitBlob": "7e2ab77880e46a2c16c01869b4d0b0801e69d1e5",
+          "description": "files[112] binds this exact path, SHA-256, Git blob, byte count, and mode as provenance-addition; the group alone does not grant an exemption."
+        }
+      ]
+    },
+    {
+      "path": "m3/migration/intake-20261005/current-752-ci/consumer-portable/openjdk-752-attribution/ADDITIONAL_LICENSE_INFO",
+      "mode": "100644",
+      "gitBlob": "ff700cd09f6ea0cc497f68169fd5c210bdaa7c2b",
+      "sha256": "a69bce275ba7a3570af6579cb0f55682cd75fedfcd49e0e8e9022270c447c916",
+      "bytes": 2114,
+      "role": "attribution-snapshot",
+      "provenance": [
+        {
+          "path": "m3/migration/intake-20261005/current-752-ci/delivery-envelope/archive-locator-v1/receiver-whitelist.json",
+          "sha256": "dd00b3ffb24dff10006f6f4c7a7e73aefd17b4e0bac870cc8ff44935e2025a45",
+          "gitBlob": "7e2ab77880e46a2c16c01869b4d0b0801e69d1e5",
+          "description": "files[303] binds this exact path, SHA-256, Git blob, byte count, and mode as provenance-addition; the group alone does not grant an exemption."
+        }
+      ]
+    },
+    {
+      "path": "m3/migration/intake-20261005/current-752-ci/consumer-portable/reference-scope.patch",
+      "mode": "100644",
+      "gitBlob": "fe19d5b31bc603b0b5bdf635f327151606d1e336",
+      "sha256": "77eae92e7c17461fafecb78bfddd292eb99322734a84e43731b48edf980d8943",
+      "bytes": 2319,
+      "role": "patch-snapshot",
+      "provenance": [
+        {
+          "path": "m3/migration/intake-20261005/current-752-ci/delivery-envelope/archive-locator-v1/receiver-whitelist.json",
+          "sha256": "dd00b3ffb24dff10006f6f4c7a7e73aefd17b4e0bac870cc8ff44935e2025a45",
+          "gitBlob": "7e2ab77880e46a2c16c01869b4d0b0801e69d1e5",
+          "description": "files[315] binds this exact path, SHA-256, Git blob, byte count, and mode as provenance-addition; the group alone does not grant an exemption."
+        }
+      ]
+    },
+    {
+      "path": "m3/migration/intake-20261005/current-752-ci/corpus-producer/chain/02-compile.stdout.log",
+      "mode": "100644",
+      "gitBlob": "e0e7b58dac3c6951a61800a7106f3fd628100ce5",
+      "sha256": "11efa6823ed1e146b49a2142934270717287bef2e756219f5ced73702b8ef25c",
+      "bytes": 1407,
+      "role": "raw-log",
+      "provenance": [
+        {
+          "path": "m3/migration/intake-20261005/current-752-ci/delivery-envelope/archive-locator-v1/receiver-whitelist.json",
+          "sha256": "dd00b3ffb24dff10006f6f4c7a7e73aefd17b4e0bac870cc8ff44935e2025a45",
+          "gitBlob": "7e2ab77880e46a2c16c01869b4d0b0801e69d1e5",
+          "description": "files[332] binds this exact path, SHA-256, Git blob, byte count, and mode as qualified-task; the group alone does not grant an exemption."
+        },
+        {
+          "path": "m3/migration/intake-20261005/current-752-ci/corpus-producer/chain/02-compile.json",
+          "sha256": "8b95ecda4eed8bade78c5fc504e3226b199d1ef8ca58e116014277dbf48ea366",
+          "gitBlob": "c1926290e650815aae70dbafcbd6509e54c0441f",
+          "description": "Original compile receipt stdout.sha256 and stdout.bytes binds this retained stdout body. Receipt provenance is preserved without rerunning the command."
+        }
+      ]
+    },
+    {
+      "path": "m3/migration/intake-20261005/current-752-ci/corpus-producer/chain/03-tests.stdout.log",
+      "mode": "100644",
+      "gitBlob": "e6ecf07a4ee1d4d684221b05bab5d4d97de3135f",
+      "sha256": "0417a8dcb315c18a32359f029b189afccd437d7edb9b6657b0a5aaa6e1a24ac1",
+      "bytes": 1417,
+      "role": "raw-log",
+      "provenance": [
+        {
+          "path": "m3/migration/intake-20261005/current-752-ci/delivery-envelope/archive-locator-v1/receiver-whitelist.json",
+          "sha256": "dd00b3ffb24dff10006f6f4c7a7e73aefd17b4e0bac870cc8ff44935e2025a45",
+          "gitBlob": "7e2ab77880e46a2c16c01869b4d0b0801e69d1e5",
+          "description": "files[335] binds this exact path, SHA-256, Git blob, byte count, and mode as qualified-task; the group alone does not grant an exemption."
+        },
+        {
+          "path": "m3/migration/intake-20261005/current-752-ci/corpus-producer/chain/03-tests.json",
+          "sha256": "881985e9eaa07ad82153f347e3aabbe0c69f3352ca1cffca4fbf02a92b7d1806",
+          "gitBlob": "076805b0a3fb23fd2784fb4877f3e37342224fdc",
+          "description": "Original tests receipt stdout.sha256 and stdout.bytes binds this retained stdout body. Receipt provenance is preserved without rerunning the command."
+        }
+      ]
+    },
+    {
+      "path": "m3/migration/intake-20261005/current-752-ci/crate/before/11.txt",
+      "mode": "100644",
+      "gitBlob": "1570299bc0a09012b2752143d7d2861521801104",
+      "sha256": "d684f2c95622c32683dbdce162d2f49101c7431bfbba1927a34182dcecadc77f",
+      "bytes": 4462,
+      "role": "before-image",
+      "provenance": [
+        {
+          "path": "m3/migration/intake-20261005/current-752-ci/delivery-envelope/archive-locator-v1/receiver-whitelist.json",
+          "sha256": "dd00b3ffb24dff10006f6f4c7a7e73aefd17b4e0bac870cc8ff44935e2025a45",
+          "gitBlob": "7e2ab77880e46a2c16c01869b4d0b0801e69d1e5",
+          "description": "files[371] binds this exact path, SHA-256, Git blob, byte count, and mode as qualified-task; the group alone does not grant an exemption."
+        },
+        {
+          "path": "m3/migration/intake-20261005/current-752-ci/crate/plan.json",
+          "sha256": "95f0f1e6bd79eec84a84c3fbab5801e22f8f3a1f6f3168eebeb694252508b0a6",
+          "gitBlob": "b38ab3c7dee887213e446509f37ab88c5ceb4c1d",
+          "description": "outputs[11].before identifies before/11.txt and its exact SHA-256 for target m3/tooling/a3/src/test/java/com/m3/a3/A3PlanTest.java. This archived preimage remains separate from the active target and generated postimage."
+        }
+      ]
+    },
+    {
+      "path": "m3/migration/intake-20261005/current-752-ci/crate/before/15.txt",
+      "mode": "100644",
+      "gitBlob": "1570299bc0a09012b2752143d7d2861521801104",
+      "sha256": "d684f2c95622c32683dbdce162d2f49101c7431bfbba1927a34182dcecadc77f",
+      "bytes": 4462,
+      "role": "before-image",
+      "provenance": [
+        {
+          "path": "m3/migration/intake-20261005/current-752-ci/delivery-envelope/archive-locator-v1/receiver-whitelist.json",
+          "sha256": "dd00b3ffb24dff10006f6f4c7a7e73aefd17b4e0bac870cc8ff44935e2025a45",
+          "gitBlob": "7e2ab77880e46a2c16c01869b4d0b0801e69d1e5",
+          "description": "files[375] binds this exact path, SHA-256, Git blob, byte count, and mode as qualified-task; the group alone does not grant an exemption."
+        },
+        {
+          "path": "m3/migration/intake-20261005/current-752-ci/crate/plan.json",
+          "sha256": "95f0f1e6bd79eec84a84c3fbab5801e22f8f3a1f6f3168eebeb694252508b0a6",
+          "gitBlob": "b38ab3c7dee887213e446509f37ab88c5ceb4c1d",
+          "description": "outputs[15].before identifies before/15.txt and its exact SHA-256 for target m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/a3-algorithm-catalogue/after/A3PlanTest.java. This archived preimage remains separate from the active target and generated postimage."
+        }
+      ]
+    },
+    {
+      "path": "m3/migration/intake-20261005/current-752-ci/delivery-envelope/prepare_consumer_package_v7.patch",
+      "mode": "100644",
+      "gitBlob": "1abb9a6c2a5b6c3215a16f5271af18e6b2512faa",
+      "sha256": "e2898cc86dde6ca751b1d5a0a25614868bb3ccb14e62a9b23c2d9dae7e69a721",
+      "bytes": 5476,
+      "role": "patch-snapshot",
+      "provenance": [
+        {
+          "path": "m3/migration/intake-20261005/current-752-ci/CURRENT-DELIVERY.json",
+          "sha256": "032c4c3289610a873a58b862a7f0d8941126790587c65459b58bc3a867d6f51c",
+          "gitBlob": "f603fda962b572ca9a0b8a592de6828f254ceb40",
+          "description": "historicalPreUploadEnvelopes.receivingPaths explicitly retains this patch in the original 17 historical publication envelopes; this membership list does not itself carry a per-file hash. The patch body is independently pinned by the frozen authority Git tree."
+        },
+        {
+          "path": "m3/migration/intake-20261005/current-752-ci/receiver-authoring/packaging/prepare_consumer_package_v6.py",
+          "sha256": "e6efaf7048989f0a6c16bc38ce2c013c3e8d2737a105fe32c62b4804858c0c08",
+          "gitBlob": "2c69b9846b680cad818b2f706f7c4ff475399cdf",
+          "description": "Exact historical preimage: this file and the paired v7 postimage reproduce the retained patch byte-for-byte using an ordinary unified diff."
+        },
+        {
+          "path": "m3/migration/intake-20261005/current-752-ci/consumer-portable/prepare_consumer_package_v7.py",
+          "sha256": "6925f5abd86ded85159175aa12aa05517ad3b5d87faa5faa99ae53bc7133f5f3",
+          "gitBlob": "1392ac73d8e71b2c9e0e0777eaf2693355fd9893",
+          "description": "Exact historical postimage: this file and the paired v6 preimage reproduce the retained patch byte-for-byte using an ordinary unified diff. Neither Python owner is included in the exemption set."
+        }
+      ]
+    },
+    {
+      "path": "m3/migration/intake-20261005/current-752-ci/jcc-context-producer/candidate.patch",
+      "mode": "100644",
+      "gitBlob": "39f2bc58e877462f330513f16f78bf22502673a6",
+      "sha256": "17e4f8398e08468645b2ec15d99c45a0c49e942d03115cc92e53e713ba9c00af",
+      "bytes": 24160,
+      "role": "patch-snapshot",
+      "provenance": [
+        {
+          "path": "m3/migration/intake-20261005/current-752-ci/delivery-envelope/archive-locator-v1/receiver-whitelist.json",
+          "sha256": "dd00b3ffb24dff10006f6f4c7a7e73aefd17b4e0bac870cc8ff44935e2025a45",
+          "gitBlob": "7e2ab77880e46a2c16c01869b4d0b0801e69d1e5",
+          "description": "files[400] binds this exact path, SHA-256, Git blob, byte count, and mode as qualified-task; the group alone does not grant an exemption."
+        }
+      ]
+    },
+    {
+      "path": "m3/migration/intake-20261005/current-752-ci/jcc-context-producer/chain/02-compile.stdout.log",
+      "mode": "100644",
+      "gitBlob": "a1d45636b1a89217d693ce89e187ad3f2764d431",
+      "sha256": "d12ffa21616214a362675ef2c22073d34056d58131ff6a87119c42a78166c5f2",
+      "bytes": 1397,
+      "role": "raw-log",
+      "provenance": [
+        {
+          "path": "m3/migration/intake-20261005/current-752-ci/delivery-envelope/archive-locator-v1/receiver-whitelist.json",
+          "sha256": "dd00b3ffb24dff10006f6f4c7a7e73aefd17b4e0bac870cc8ff44935e2025a45",
+          "gitBlob": "7e2ab77880e46a2c16c01869b4d0b0801e69d1e5",
+          "description": "files[406] binds this exact path, SHA-256, Git blob, byte count, and mode as qualified-task; the group alone does not grant an exemption."
+        },
+        {
+          "path": "m3/migration/intake-20261005/current-752-ci/jcc-context-producer/chain/02-compile.json",
+          "sha256": "4ba16ac5db5a3647f3fa828c75a37167c037e3ace119ef2190c2a6a8d1a24339",
+          "gitBlob": "7b2b80078a0ae783a63266b2d963aa7d4ab1d737",
+          "description": "Original compile receipt stdout.sha256 and stdout.bytes binds this retained stdout body. Receipt provenance is preserved without rerunning the command."
+        }
+      ]
+    },
+    {
+      "path": "m3/migration/intake-20261005/current-752-ci/jcc-context-producer/chain/03-tests.stdout.log",
+      "mode": "100644",
+      "gitBlob": "cdd9ff4ad657c7dab2d5111d76265c4584d5db34",
+      "sha256": "eed65cd56df5c1efe3d09804f2d23c7f327ccac0eb63a83521f37f31e268b16a",
+      "bytes": 5252,
+      "role": "raw-log",
+      "provenance": [
+        {
+          "path": "m3/migration/intake-20261005/current-752-ci/delivery-envelope/archive-locator-v1/receiver-whitelist.json",
+          "sha256": "dd00b3ffb24dff10006f6f4c7a7e73aefd17b4e0bac870cc8ff44935e2025a45",
+          "gitBlob": "7e2ab77880e46a2c16c01869b4d0b0801e69d1e5",
+          "description": "files[409] binds this exact path, SHA-256, Git blob, byte count, and mode as qualified-task; the group alone does not grant an exemption."
+        },
+        {
+          "path": "m3/migration/intake-20261005/current-752-ci/jcc-context-producer/chain/03-tests.json",
+          "sha256": "b16ef2c7fa9ef78439f9813445c081495898c86089e6646d4a341cbaed481e90",
+          "gitBlob": "75c88a5a19a14aa03fe4bfd5209ff21d3bcc4d3a",
+          "description": "Original tests receipt stdout.sha256 and stdout.bytes binds this retained stdout body. Receipt provenance is preserved without rerunning the command."
+        }
+      ]
+    },
+    {
+      "path": "m3/migration/intake-20261005/current-752-ci/producer-portable/candidate.patch",
+      "mode": "100644",
+      "gitBlob": "6613aaa40722230e5b1c1194e20b475b69bb19c3",
+      "sha256": "a9a56f1803d5d33e42efb63fa0f047a1b49027beb827ca427adc25f8b126440e",
+      "bytes": 4475,
+      "role": "patch-snapshot",
+      "provenance": [
+        {
+          "path": "m3/migration/intake-20261005/current-752-ci/delivery-envelope/archive-locator-v1/receiver-whitelist.json",
+          "sha256": "dd00b3ffb24dff10006f6f4c7a7e73aefd17b4e0bac870cc8ff44935e2025a45",
+          "gitBlob": "7e2ab77880e46a2c16c01869b4d0b0801e69d1e5",
+          "description": "files[458] binds this exact path, SHA-256, Git blob, byte count, and mode as provenance-addition; the group alone does not grant an exemption."
+        }
+      ]
+    },
+    {
+      "path": "m3/migration/intake-20261005/current-752-ci/producer-portable/source-context/source/AGENTS-9963.md",
+      "mode": "100644",
+      "gitBlob": "7038981e6d86a5e3bae25803fa0b6d77b557d538",
+      "sha256": "086b03459e4f441d0ecf1c90773dd63877c03956957ec0f41ac7ceb90069c0f9",
+      "bytes": 15464,
+      "role": "historical-source",
+      "provenance": [
+        {
+          "path": "m3/migration/intake-20261005/current-752-ci/delivery-envelope/archive-locator-v1/receiver-whitelist.json",
+          "sha256": "dd00b3ffb24dff10006f6f4c7a7e73aefd17b4e0bac870cc8ff44935e2025a45",
+          "gitBlob": "7e2ab77880e46a2c16c01869b4d0b0801e69d1e5",
+          "description": "files[470] binds this exact path, SHA-256, Git blob, byte count, and mode as provenance-addition; the group alone does not grant an exemption."
+        }
+      ]
+    },
+    {
+      "path": "m3/migration/intake-20261005/current-752-ci/producer/candidate.patch",
+      "mode": "100644",
+      "gitBlob": "6613aaa40722230e5b1c1194e20b475b69bb19c3",
+      "sha256": "a9a56f1803d5d33e42efb63fa0f047a1b49027beb827ca427adc25f8b126440e",
+      "bytes": 4475,
+      "role": "patch-snapshot",
+      "provenance": [
+        {
+          "path": "m3/migration/intake-20261005/current-752-ci/delivery-envelope/archive-locator-v1/receiver-whitelist.json",
+          "sha256": "dd00b3ffb24dff10006f6f4c7a7e73aefd17b4e0bac870cc8ff44935e2025a45",
+          "gitBlob": "7e2ab77880e46a2c16c01869b4d0b0801e69d1e5",
+          "description": "files[489] binds this exact path, SHA-256, Git blob, byte count, and mode as qualified-task; the group alone does not grant an exemption."
+        }
+      ]
+    },
+    {
+      "path": "m3/migration/intake-20261005/current-752-ci/producer/chain/02-compile.stdout.log",
+      "mode": "100644",
+      "gitBlob": "1132233c894618f4098eed6c54573319078bfa9f",
+      "sha256": "9a86b7e489bea2f312f63b57c4e824a1406a010cabcbd2cf31d2aaa34f7434a3",
+      "bytes": 1381,
+      "role": "raw-log",
+      "provenance": [
+        {
+          "path": "m3/migration/intake-20261005/current-752-ci/delivery-envelope/archive-locator-v1/receiver-whitelist.json",
+          "sha256": "dd00b3ffb24dff10006f6f4c7a7e73aefd17b4e0bac870cc8ff44935e2025a45",
+          "gitBlob": "7e2ab77880e46a2c16c01869b4d0b0801e69d1e5",
+          "description": "files[495] binds this exact path, SHA-256, Git blob, byte count, and mode as qualified-task; the group alone does not grant an exemption."
+        },
+        {
+          "path": "m3/migration/intake-20261005/current-752-ci/producer/chain/02-compile.json",
+          "sha256": "795301485d90a29f6617b7dcbccb287c0a08e677f62cde010d9d79711a1ddb0a",
+          "gitBlob": "cadb8fc2c220b392a3fb4c3f594fdbba414c0674",
+          "description": "Original compile receipt stdout.sha256 and stdout.bytes binds this retained stdout body. Receipt provenance is preserved without rerunning the command."
+        }
+      ]
+    },
+    {
+      "path": "m3/migration/intake-20261005/current-752-ci/producer/chain/03-tests.stdout.log",
+      "mode": "100644",
+      "gitBlob": "aee5ae1de256978a3cd11047c54f77672286f48f",
+      "sha256": "a7150ea622722e8d5e1a31869c206c45ca2b8a188d2da699d6c6232a02c4ad7a",
+      "bytes": 1200,
+      "role": "raw-log",
+      "provenance": [
+        {
+          "path": "m3/migration/intake-20261005/current-752-ci/delivery-envelope/archive-locator-v1/receiver-whitelist.json",
+          "sha256": "dd00b3ffb24dff10006f6f4c7a7e73aefd17b4e0bac870cc8ff44935e2025a45",
+          "gitBlob": "7e2ab77880e46a2c16c01869b4d0b0801e69d1e5",
+          "description": "files[498] binds this exact path, SHA-256, Git blob, byte count, and mode as qualified-task; the group alone does not grant an exemption."
+        },
+        {
+          "path": "m3/migration/intake-20261005/current-752-ci/producer/chain/03-tests.json",
+          "sha256": "8ec24288ce52cc24d9897e292f6b650e0226c92b0114598daa0a1ea5758d9dfc",
+          "gitBlob": "c76d850a030fa487ddc2f641019e87ada26de792",
+          "description": "Original tests receipt stdout.sha256 and stdout.bytes binds this retained stdout body. Receipt provenance is preserved without rerunning the command."
+        }
+      ]
+    },
+    {
+      "path": "m3/migration/intake-20261005/current-752-ci/receiver-authoring/author-current-context-v5b.patch",
+      "mode": "100644",
+      "gitBlob": "4db6455cda234cbe13e6b9fc39ec79c48ff8f5c0",
+      "sha256": "14e3640b5e92417aea38fd9c505e4df73805bf103bb0b318b4ec934c537d1f26",
+      "bytes": 3829,
+      "role": "patch-snapshot",
+      "provenance": [
+        {
+          "path": "m3/migration/intake-20261005/current-752-ci/delivery-envelope/archive-locator-v1/receiver-whitelist.json",
+          "sha256": "dd00b3ffb24dff10006f6f4c7a7e73aefd17b4e0bac870cc8ff44935e2025a45",
+          "gitBlob": "7e2ab77880e46a2c16c01869b4d0b0801e69d1e5",
+          "description": "files[511] binds this exact path, SHA-256, Git blob, byte count, and mode as provenance-addition; the group alone does not grant an exemption."
+        }
+      ]
+    },
+    {
+      "path": "m3/migration/intake-20261005/current-752-ci/receiver-authoring/packaging/prepare_receiver_whitelist_v4.patch",
+      "mode": "100644",
+      "gitBlob": "8a10c8be785fc8eb9586026a3bab9ff7ba97f759",
+      "sha256": "45ee179e7955dba3ce391301dd366e4910f4e00598b5d823157814776ac078cf",
+      "bytes": 7608,
+      "role": "patch-snapshot",
+      "provenance": [
+        {
+          "path": "m3/migration/intake-20261005/current-752-ci/delivery-envelope/archive-locator-v1/receiver-whitelist.json",
+          "sha256": "dd00b3ffb24dff10006f6f4c7a7e73aefd17b4e0bac870cc8ff44935e2025a45",
+          "gitBlob": "7e2ab77880e46a2c16c01869b4d0b0801e69d1e5",
+          "description": "files[515] binds this exact path, SHA-256, Git blob, byte count, and mode as provenance-addition; the group alone does not grant an exemption."
+        }
+      ]
+    },
+    {
+      "path": "m3/migration/intake-20261005/current-752-ci/receiver-authoring/proof-runner/python-components-v2.patch",
+      "mode": "100644",
+      "gitBlob": "b4e7092f713494a44f4a93bac97a6bb8ec143957",
+      "sha256": "a0a65d8653eb85ddbc00112a7097d629f7b19f7b108ebd3db9ce19f474de342d",
+      "bytes": 7377,
+      "role": "patch-snapshot",
+      "provenance": [
+        {
+          "path": "m3/migration/intake-20261005/current-752-ci/delivery-envelope/archive-locator-v1/receiver-whitelist.json",
+          "sha256": "dd00b3ffb24dff10006f6f4c7a7e73aefd17b4e0bac870cc8ff44935e2025a45",
+          "gitBlob": "7e2ab77880e46a2c16c01869b4d0b0801e69d1e5",
+          "description": "files[521] binds this exact path, SHA-256, Git blob, byte count, and mode as provenance-addition; the group alone does not grant an exemption."
+        }
+      ]
+    },
+    {
+      "path": "m3/migration/intake-20261005/current-752-ci/receiver-authoring/proof-runner/runtime-v5.patch",
+      "mode": "100644",
+      "gitBlob": "a9d74a163657a7fa57c0bbebabdf603499f8083f",
+      "sha256": "015e6d4861ba4a76b331d1620f5b20e25c90c186f76a0bfd5132b1a4e6fe8dc1",
+      "bytes": 12586,
+      "role": "patch-snapshot",
+      "provenance": [
+        {
+          "path": "m3/migration/intake-20261005/current-752-ci/delivery-envelope/archive-locator-v1/receiver-whitelist.json",
+          "sha256": "dd00b3ffb24dff10006f6f4c7a7e73aefd17b4e0bac870cc8ff44935e2025a45",
+          "gitBlob": "7e2ab77880e46a2c16c01869b4d0b0801e69d1e5",
+          "description": "files[523] binds this exact path, SHA-256, Git blob, byte count, and mode as provenance-addition; the group alone does not grant an exemption."
+        }
+      ]
+    },
+    {
+      "path": "m3/migration/intake-20261005/current-752-ci/source-admission-evidence/admission-evidence/ci-at-pr148-5c1ee94/foundation-command-excerpts.txt",
+      "mode": "100644",
+      "gitBlob": "b963a4847e181099ce468c387e857153adc09ef9",
+      "sha256": "917ccef20aa289428426ba14ccf7e532e15bbbe0f3cd9ae3a8f3562384e0b41c",
+      "bytes": 4747,
+      "role": "ci-excerpt",
+      "provenance": [
+        {
+          "path": "m3/migration/intake-20261005/current-752-ci/delivery-envelope/archive-locator-v1/receiver-whitelist.json",
+          "sha256": "dd00b3ffb24dff10006f6f4c7a7e73aefd17b4e0bac870cc8ff44935e2025a45",
+          "gitBlob": "7e2ab77880e46a2c16c01869b4d0b0801e69d1e5",
+          "description": "files[536] binds this exact path, SHA-256, Git blob, byte count, and mode as provenance-addition; the group alone does not grant an exemption."
+        },
+        {
+          "path": "m3/migration/intake-20261005/current-752-ci/source-admission-evidence/admission-evidence/ci-at-pr148-5c1ee94/job-111763397781.log",
+          "sha256": "03d194f95a632e9e2ccae5f4756253cb3776c23172e4a2f4986874c37302aee1",
+          "gitBlob": "f822dc080b5784fc8b75b12332e179f11f3ffe23",
+          "description": "Retained source log lines 218-234 exactly equal the corresponding timestamp/ANSI excerpt segment."
+        },
+        {
+          "path": "m3/migration/intake-20261005/current-752-ci/source-admission-evidence/admission-evidence/ci-at-pr148-5c1ee94/job-111763397781.log",
+          "sha256": "03d194f95a632e9e2ccae5f4756253cb3776c23172e4a2f4986874c37302aee1",
+          "gitBlob": "f822dc080b5784fc8b75b12332e179f11f3ffe23",
+          "description": "Retained source log lines 264-294 exactly equal the corresponding timestamp/ANSI excerpt segment."
+        }
+      ]
+    },
+    {
+      "path": "m3/migration/intake-20261005/current-752-ci/source-admission-evidence/admission-evidence/ci-at-pr148-5c1ee94/java-test-compile-excerpt.txt",
+      "mode": "100644",
+      "gitBlob": "e9c6ff5f5fc9588732e69ea055ef94d5e1d33e32",
+      "sha256": "0d1fca352c18ae7c7759ca0bcc24b3fc099b01bbfbb7bd4dfa257ce0d9a7c26f",
+      "bytes": 2654,
+      "role": "ci-excerpt",
+      "provenance": [
+        {
+          "path": "m3/migration/intake-20261005/current-752-ci/delivery-envelope/archive-locator-v1/receiver-whitelist.json",
+          "sha256": "dd00b3ffb24dff10006f6f4c7a7e73aefd17b4e0bac870cc8ff44935e2025a45",
+          "gitBlob": "7e2ab77880e46a2c16c01869b4d0b0801e69d1e5",
+          "description": "files[537] binds this exact path, SHA-256, Git blob, byte count, and mode as provenance-addition; the group alone does not grant an exemption."
+        },
+        {
+          "path": "m3/migration/intake-20261005/current-752-ci/source-admission-evidence/admission-evidence/ci-at-pr148-5c1ee94/job-111763397210.log",
+          "sha256": "28a1d7372652aa3d704aae587c8e3f0f1763ee9b077a4d6fb806d6c2404b7676",
+          "gitBlob": "ec8d701a0f2ac617068f91ba32de203bae3c4c96",
+          "description": "Retained source log lines 138-156 exactly equal the corresponding timestamp/ANSI excerpt segment."
+        }
+      ]
+    },
+    {
+      "path": "m3/migration/intake-20261005/current-752-ci/source-admission-evidence/admission-evidence/ci-at-pr148-5c1ee94/job-111763396934.log",
+      "mode": "100644",
+      "gitBlob": "8fa78f249c7642437d3720923755cb6a01d2d391",
+      "sha256": "5bf59102405b8a059dff536683a3344857f1e0a6d938a7288e1c43449f51291d",
+      "bytes": 78707,
+      "role": "raw-log",
+      "provenance": [
+        {
+          "path": "m3/migration/intake-20261005/current-752-ci/delivery-envelope/archive-locator-v1/receiver-whitelist.json",
+          "sha256": "dd00b3ffb24dff10006f6f4c7a7e73aefd17b4e0bac870cc8ff44935e2025a45",
+          "gitBlob": "7e2ab77880e46a2c16c01869b4d0b0801e69d1e5",
+          "description": "files[538] binds this exact path, SHA-256, Git blob, byte count, and mode as provenance-addition; the group alone does not grant an exemption."
+        }
+      ]
+    },
+    {
+      "path": "m3/migration/intake-20261005/current-752-ci/source-admission-evidence/admission-evidence/ci-at-pr148-5c1ee94/job-111763397210.log",
+      "mode": "100644",
+      "gitBlob": "ec8d701a0f2ac617068f91ba32de203bae3c4c96",
+      "sha256": "28a1d7372652aa3d704aae587c8e3f0f1763ee9b077a4d6fb806d6c2404b7676",
+      "bytes": 14446,
+      "role": "raw-log",
+      "provenance": [
+        {
+          "path": "m3/migration/intake-20261005/current-752-ci/delivery-envelope/archive-locator-v1/receiver-whitelist.json",
+          "sha256": "dd00b3ffb24dff10006f6f4c7a7e73aefd17b4e0bac870cc8ff44935e2025a45",
+          "gitBlob": "7e2ab77880e46a2c16c01869b4d0b0801e69d1e5",
+          "description": "files[539] binds this exact path, SHA-256, Git blob, byte count, and mode as provenance-addition; the group alone does not grant an exemption."
+        }
+      ]
+    },
+    {
+      "path": "m3/migration/intake-20261005/current-752-ci/source-admission-evidence/admission-evidence/ci-at-pr148-5c1ee94/job-111763397781.log",
+      "mode": "100644",
+      "gitBlob": "f822dc080b5784fc8b75b12332e179f11f3ffe23",
+      "sha256": "03d194f95a632e9e2ccae5f4756253cb3776c23172e4a2f4986874c37302aee1",
+      "bytes": 24769,
+      "role": "raw-log",
+      "provenance": [
+        {
+          "path": "m3/migration/intake-20261005/current-752-ci/delivery-envelope/archive-locator-v1/receiver-whitelist.json",
+          "sha256": "dd00b3ffb24dff10006f6f4c7a7e73aefd17b4e0bac870cc8ff44935e2025a45",
+          "gitBlob": "7e2ab77880e46a2c16c01869b4d0b0801e69d1e5",
+          "description": "files[540] binds this exact path, SHA-256, Git blob, byte count, and mode as provenance-addition; the group alone does not grant an exemption."
+        }
+      ]
+    },
+    {
+      "path": "m3/migration/intake-20261005/current-752-ci/source-delivery/coverage.tsv",
+      "mode": "100644",
+      "gitBlob": "441b95468e6d775aa826ae5a86e43ce95c3eb6c2",
+      "sha256": "1659c7e0e47cf50dd30eaa15008ead3919695aea5f7c5dc1fce09055862e875a",
+      "bytes": 145710,
+      "role": "coverage-snapshot",
+      "provenance": [
+        {
+          "path": "m3/migration/intake-20261005/current-752-ci/delivery-envelope/archive-locator-v1/receiver-whitelist.json",
+          "sha256": "dd00b3ffb24dff10006f6f4c7a7e73aefd17b4e0bac870cc8ff44935e2025a45",
+          "gitBlob": "7e2ab77880e46a2c16c01869b4d0b0801e69d1e5",
+          "description": "files[578] binds this exact path, SHA-256, Git blob, byte count, and mode as provenance-addition; the group alone does not grant an exemption."
+        }
+      ]
+    },
+    {
+      "path": "m3/migration/intake-20261005/portable/mrc2/consumer-0/chain/02-compile.stdout.log",
+      "mode": "100644",
+      "gitBlob": "f9e71a76c9782dd91eeee90ec912a295e8f1f640",
+      "sha256": "63d9e72bd087b60df8e3437133ffc1135f5dcb8e1d7e9349d78de73797a938cf",
+      "bytes": 1997,
+      "role": "raw-log",
+      "provenance": [
+        {
+          "path": "m3/migration/intake-20261005/portable/mrc2/consumer-0/chain/02-compile.json",
+          "sha256": "e5200afcc189f59d2c3e42a282c1184b8541e26f15134e1d5ee18e635a74409f",
+          "gitBlob": "c8c132bed555e3cde9821588cfb4b3b4925a9fe7",
+          "description": "Original compile receipt stdout_sha256 binds this retained stdout body. Receipt provenance is preserved without rerunning the command."
+        }
+      ]
+    },
+    {
+      "path": "m3/migration/intake-20261005/portable/mrc2/consumer-0/chain/03-test.stdout.log",
+      "mode": "100644",
+      "gitBlob": "b7321f1682f650502782c41b4aa4205e6d399341",
+      "sha256": "c1fc311230fa97476c41bedc18b5f332b7b30927f67c53597f6823eb3870d566",
+      "bytes": 3463,
+      "role": "raw-log",
+      "provenance": [
+        {
+          "path": "m3/migration/intake-20261005/portable/mrc2/consumer-0/chain/03-test.json",
+          "sha256": "7b7f35ac107c5c66ee3fd0796e3fe9065c7ebaa2e107cc4de97ec6860918ac81",
+          "gitBlob": "45d4f85fb6558a318e3438e250e6e61a673bd1a1",
+          "description": "Original test receipt stdout_sha256 binds this retained stdout body. Receipt provenance is preserved without rerunning the command."
+        }
+      ]
+    },
+    {
+      "path": "m3/migration/intake-20261005/portable/mrc2/recipe/chain/02-compile.stdout.log",
+      "mode": "100644",
+      "gitBlob": "2088260eb8debe1508de4156f4c080188741c689",
+      "sha256": "9a1f08dad80747f0019142a9447665a1c653714acc3c076e873a708571b0bf97",
+      "bytes": 1869,
+      "role": "raw-log",
+      "provenance": [
+        {
+          "path": "m3/migration/intake-20261005/portable/mrc2/recipe/chain/02-compile.json",
+          "sha256": "25e427aa4da274e1e15141264cdadf813b9b7a15fcffc3d15145813457f28fa4",
+          "gitBlob": "bf8dfe373b4c14a9c3a48b8e9c137a45ed47a676",
+          "description": "Original compile receipt stdout_sha256 binds this retained stdout body. Receipt provenance is preserved without rerunning the command."
+        }
+      ]
+    },
+    {
+      "path": "m3/migration/intake-20261005/portable/mrc2/recipe/chain/03-test.stdout.log",
+      "mode": "100644",
+      "gitBlob": "779909cc6b21ead2a1ae961e167e358433b8e9c0",
+      "sha256": "7eb3e8cd06995e297af8d74429012079d07684e34a8ca9336e9687982013855a",
+      "bytes": 2215,
+      "role": "raw-log",
+      "provenance": [
+        {
+          "path": "m3/migration/intake-20261005/portable/mrc2/recipe/chain/03-test.json",
+          "sha256": "9819ee775df2d3cfe6b943c59e187bfeac99ed13893678fea0cf157f7ff01444",
+          "gitBlob": "7b654909f4c4734be874c201f110bfb674ab56fe",
+          "description": "Original test receipt stdout_sha256 binds this retained stdout body. Receipt provenance is preserved without rerunning the command."
+        }
+      ]
+    },
+    {
+      "path": "m3/migration/intake-20261005/portable/mrc2/recipe/materialization/candidate.patch",
+      "mode": "100644",
+      "gitBlob": "d614e8ac47f172d66af3312aed8cb9b255df07d6",
+      "sha256": "a394e730e97d9d40efff4872fe668cf8cb7db7ad565a3dbd81c137ebef536c26",
+      "bytes": 10973,
+      "role": "patch-snapshot",
+      "provenance": [
+        {
+          "path": "m3/migration/intake-20261005/portable/mrc2/recipe/materialization/OUTPUT.json",
+          "sha256": "e01e85111926df3a2960b25a95ba7d385eaaaf820108ebe78090b7c39996ebc2",
+          "gitBlob": "032fd743050fe7f4b77999e60c14d6700d937f29",
+          "description": "Original materialization OUTPUT.json patch object binds candidate.patch, its exact SHA-256, and byte count. This is retained patch data, not an active source file."
+        }
+      ]
+    },
+    {
+      "path": "m3/migration/intake-20261005/portable/mrd/consumer-0/chain/02-compile.stdout.log",
+      "mode": "100644",
+      "gitBlob": "2088260eb8debe1508de4156f4c080188741c689",
+      "sha256": "9a1f08dad80747f0019142a9447665a1c653714acc3c076e873a708571b0bf97",
+      "bytes": 1869,
+      "role": "raw-log",
+      "provenance": [
+        {
+          "path": "m3/migration/intake-20261005/portable/mrd/consumer-0/chain/02-compile.json",
+          "sha256": "25e427aa4da274e1e15141264cdadf813b9b7a15fcffc3d15145813457f28fa4",
+          "gitBlob": "bf8dfe373b4c14a9c3a48b8e9c137a45ed47a676",
+          "description": "Original compile receipt stdout_sha256 binds this retained stdout body. Receipt provenance is preserved without rerunning the command."
+        }
+      ]
+    },
+    {
+      "path": "m3/migration/intake-20261005/portable/mrd/consumer-0/chain/03-test.stdout.log",
+      "mode": "100644",
+      "gitBlob": "779909cc6b21ead2a1ae961e167e358433b8e9c0",
+      "sha256": "7eb3e8cd06995e297af8d74429012079d07684e34a8ca9336e9687982013855a",
+      "bytes": 2215,
+      "role": "raw-log",
+      "provenance": [
+        {
+          "path": "m3/migration/intake-20261005/portable/mrd/consumer-0/chain/03-test.json",
+          "sha256": "9819ee775df2d3cfe6b943c59e187bfeac99ed13893678fea0cf157f7ff01444",
+          "gitBlob": "7b654909f4c4734be874c201f110bfb674ab56fe",
+          "description": "Original test receipt stdout_sha256 binds this retained stdout body. Receipt provenance is preserved without rerunning the command."
+        }
+      ]
+    },
+    {
+      "path": "m3/migration/intake-20261005/portable/mrd/recipe/chain/02-compile.stdout.log",
+      "mode": "100644",
+      "gitBlob": "af7500697a81a902ee1f7e46344cfde054682119",
+      "sha256": "669bf0fe614bbdc8e471fb6ba19c2ee2425aa3149e55f439bd70f8565ac5a5b0",
+      "bytes": 1870,
+      "role": "raw-log",
+      "provenance": [
+        {
+          "path": "m3/migration/intake-20261005/portable/mrd/recipe/chain/02-compile.json",
+          "sha256": "dea2dd4f661283b2b75d86e07c1c05e400e8b0fdc8788f658717d79d9a78bd0f",
+          "gitBlob": "90cef514040ace6c999ee86f38bceb531e98a76a",
+          "description": "Original compile receipt stdout_sha256 binds this retained stdout body. Receipt provenance is preserved without rerunning the command."
+        }
+      ]
+    },
+    {
+      "path": "m3/migration/intake-20261005/portable/mrd/recipe/chain/03-test.stdout.log",
+      "mode": "100644",
+      "gitBlob": "2013355b04c08ecd2082989b5b2173ce5fc6704c",
+      "sha256": "b1f8a51b676933e7fb18a92ae18dbf91e03c3899a31b27f80ac3d4bbeeb75472",
+      "bytes": 1712,
+      "role": "raw-log",
+      "provenance": [
+        {
+          "path": "m3/migration/intake-20261005/portable/mrd/recipe/chain/03-test.json",
+          "sha256": "65b836bb2e2611d9869e5f6e4ba64c941fcc7c8d76adfdf776f36b4b5c2120da",
+          "gitBlob": "fdd98644ba0f06b083f1bb8af624a32182ccc00f",
+          "description": "Original test receipt stdout_sha256 binds this retained stdout body. Receipt provenance is preserved without rerunning the command."
+        }
+      ]
+    },
+    {
+      "path": "m3/migration/intake-20261005/portable/mrd/recipe/materialization/candidate.patch",
+      "mode": "100644",
+      "gitBlob": "e742d7ac5d77d9fb533b8dca9858f73385ff0073",
+      "sha256": "1135bf4b540baa679e3c280048102c7765d19803fd3809fbf8dd96a292fb03be",
+      "bytes": 10832,
+      "role": "patch-snapshot",
+      "provenance": [
+        {
+          "path": "m3/migration/intake-20261005/portable/mrd/recipe/materialization/OUTPUT.json",
+          "sha256": "f5369f767e19cfc21ed889acfa6d632e2e147db317ff61f72572072052d77efc",
+          "gitBlob": "d7f2d40935b85f0f5ee5ed9cefa10f45415d762c",
+          "description": "Original materialization OUTPUT.json patch object binds candidate.patch, its exact SHA-256, and byte count. This is retained patch data, not an active source file."
+        }
+      ]
+    },
+    {
+      "path": "m3/migration/intake-20261005/portable/mre2/consumer-0/chain/02-compile.stdout.log",
+      "mode": "100644",
+      "gitBlob": "f9e71a76c9782dd91eeee90ec912a295e8f1f640",
+      "sha256": "63d9e72bd087b60df8e3437133ffc1135f5dcb8e1d7e9349d78de73797a938cf",
+      "bytes": 1997,
+      "role": "raw-log",
+      "provenance": [
+        {
+          "path": "m3/migration/intake-20261005/portable/mre2/consumer-0/chain/02-compile.json",
+          "sha256": "e5200afcc189f59d2c3e42a282c1184b8541e26f15134e1d5ee18e635a74409f",
+          "gitBlob": "c8c132bed555e3cde9821588cfb4b3b4925a9fe7",
+          "description": "Original compile receipt stdout_sha256 binds this retained stdout body. Receipt provenance is preserved without rerunning the command."
+        }
+      ]
+    },
+    {
+      "path": "m3/migration/intake-20261005/portable/mre2/consumer-0/chain/03-test.stdout.log",
+      "mode": "100644",
+      "gitBlob": "b7321f1682f650502782c41b4aa4205e6d399341",
+      "sha256": "c1fc311230fa97476c41bedc18b5f332b7b30927f67c53597f6823eb3870d566",
+      "bytes": 3463,
+      "role": "raw-log",
+      "provenance": [
+        {
+          "path": "m3/migration/intake-20261005/portable/mre2/consumer-0/chain/03-test.json",
+          "sha256": "7b7f35ac107c5c66ee3fd0796e3fe9065c7ebaa2e107cc4de97ec6860918ac81",
+          "gitBlob": "45d4f85fb6558a318e3438e250e6e61a673bd1a1",
+          "description": "Original test receipt stdout_sha256 binds this retained stdout body. Receipt provenance is preserved without rerunning the command."
+        }
+      ]
+    },
+    {
+      "path": "m3/migration/intake-20261005/portable/mre2/consumer-1/chain/02-compile.stdout.log",
+      "mode": "100644",
+      "gitBlob": "027513781564f47e8a38b01c5d33388becfdbd88",
+      "sha256": "bb41640c661c37cf593b3945c17780c4a5e1d95a1873f0287ebe5d8abdff4701",
+      "bytes": 1821,
+      "role": "raw-log",
+      "provenance": [
+        {
+          "path": "m3/migration/intake-20261005/portable/mre2/consumer-1/chain/02-compile.json",
+          "sha256": "4dcfbce6f5beee84f374681944a9f31292f1e5de54454a4f4c5514d56ba9590a",
+          "gitBlob": "d721195c7e9c1968ccb091f1638058bad1e633af",
+          "description": "Original compile receipt stdout_sha256 binds this retained stdout body. Receipt provenance is preserved without rerunning the command."
+        }
+      ]
+    },
+    {
+      "path": "m3/migration/intake-20261005/portable/mre2/consumer-1/chain/03-test.stdout.log",
+      "mode": "100644",
+      "gitBlob": "a81aa6ac30731ecd9467b5dcf67e1ade2f2de5ec",
+      "sha256": "079aab86d52f19c8e66e0ca3f349f486508adaba1fe42bd085991a7c31ba5d19",
+      "bytes": 3574,
+      "role": "raw-log",
+      "provenance": [
+        {
+          "path": "m3/migration/intake-20261005/portable/mre2/consumer-1/chain/03-test.json",
+          "sha256": "61ac4803a2443552b09dc1586b17275a96353ddbfcbe35fa51a09b40b76c7b5b",
+          "gitBlob": "aae11b9a0000c8b43524716907d693abd91e6505",
+          "description": "Original test receipt stdout_sha256 binds this retained stdout body. Receipt provenance is preserved without rerunning the command."
+        }
+      ]
+    },
+    {
+      "path": "m3/migration/intake-20261005/portable/mre2/recipe/chain/02-compile.stdout.log",
+      "mode": "100644",
+      "gitBlob": "54efe170222111459fe5430d4e1355cf114c98fa",
+      "sha256": "2159a2f0b6885cb3fdc71f582774b721ce4469e5894e48d84c543f2575e4ba88",
+      "bytes": 1859,
+      "role": "raw-log",
+      "provenance": [
+        {
+          "path": "m3/migration/intake-20261005/portable/mre2/recipe/chain/02-compile.json",
+          "sha256": "9285079750f62da9ef3c0683bbf47d41460d60549113b539e5584f85c724d7b1",
+          "gitBlob": "99b213032a7d541c69cebd7861c229a4eb4ae479",
+          "description": "Original compile receipt stdout_sha256 binds this retained stdout body. Receipt provenance is preserved without rerunning the command."
+        }
+      ]
+    },
+    {
+      "path": "m3/migration/intake-20261005/portable/mre2/recipe/chain/03-test.stdout.log",
+      "mode": "100644",
+      "gitBlob": "59e59e96aa1c49f002b7d2e3b9a82278548b0b9d",
+      "sha256": "5d048fa166cb1d223cf14efd96bb74a97980c0fdaac5b38c02d50254b093b239",
+      "bytes": 1709,
+      "role": "raw-log",
+      "provenance": [
+        {
+          "path": "m3/migration/intake-20261005/portable/mre2/recipe/chain/03-test.json",
+          "sha256": "0095dba42490fd86c87d400018d0c7bb63285d932fb36c996a8ae21cd5df1782",
+          "gitBlob": "01a790db35c2cebe769b392251548d94e7c427f1",
+          "description": "Original test receipt stdout_sha256 binds this retained stdout body. Receipt provenance is preserved without rerunning the command."
+        }
+      ]
+    },
+    {
+      "path": "m3/migration/intake-20261005/portable/mre2/recipe/materialization/candidate.patch",
+      "mode": "100644",
+      "gitBlob": "c3df8eaebc5dea07472ca48605c2de5d8ea4fa9e",
+      "sha256": "56ba623b4bf60cfb283405c9813e4a03ea48cc7411b57da2f1fc32ebe0c49265",
+      "bytes": 19751,
+      "role": "patch-snapshot",
+      "provenance": [
+        {
+          "path": "m3/migration/intake-20261005/portable/mre2/recipe/materialization/OUTPUT.json",
+          "sha256": "993166937996a1d8c013baa9c590a720f4a5df10a4fcbc33a4e49bca96dac6e2",
+          "gitBlob": "dff390b78fa9143fd5f510fa94d372106628f35a",
+          "description": "Original materialization OUTPUT.json patch object binds candidate.patch, its exact SHA-256, and byte count. This is retained patch data, not an active source file."
+        }
+      ]
+    },
+    {
+      "path": "m3/migration/intake-20261005/portable/mrp/consumer-0/chain/02-compile.stdout.log",
+      "mode": "100644",
+      "gitBlob": "34f7fdc1d7c404f5d28cc664146870d57493d829",
+      "sha256": "ee1330abf815172c6bf18ddd0f840672e8d134f369f0f6211f308a1babccf1d6",
+      "bytes": 1992,
+      "role": "raw-log",
+      "provenance": [
+        {
+          "path": "m3/migration/intake-20261005/portable/mrp/consumer-0/chain/02-compile.json",
+          "sha256": "1ca395a0dd86de19c72ac658b17e0cd41a561b17e4ff0fccc0c06507c9b27da1",
+          "gitBlob": "15dc6807a07234d95aa2d37fcb0804c3faca7147",
+          "description": "Original compile receipt stdout_sha256 binds this retained stdout body. Receipt provenance is preserved without rerunning the command."
+        }
+      ]
+    },
+    {
+      "path": "m3/migration/intake-20261005/portable/mrp/consumer-0/chain/03-test.stdout.log",
+      "mode": "100644",
+      "gitBlob": "04f7c7220a1db6285f0808af0e8d9b6cdf6bacaa",
+      "sha256": "308ad6e5f0dc446e7848b91c96966a2a949f9fd771587482a76bc3fe685d8b30",
+      "bytes": 20604,
+      "role": "raw-log",
+      "provenance": [
+        {
+          "path": "m3/migration/intake-20261005/portable/mrp/consumer-0/chain/03-test.json",
+          "sha256": "fce390121838d9586533b1194d063ebc0f98ee0fe738ffd81c9114c40ee1fbb0",
+          "gitBlob": "8e9c48d23db9ad6ccc38721f2a011f8d003a9ea8",
+          "description": "Original test receipt stdout_sha256 binds this retained stdout body. Receipt provenance is preserved without rerunning the command."
+        }
+      ]
+    },
+    {
+      "path": "m3/migration/intake-20261005/portable/mrp/recipe/chain/02-compile.stdout.log",
+      "mode": "100644",
+      "gitBlob": "6463386baf1b011811562ff626500a730bf3c2d9",
+      "sha256": "ed7aad05480bedd15244860c18f0ffe87c9f6b5194885f5c81d65df16ff36f74",
+      "bytes": 2099,
+      "role": "raw-log",
+      "provenance": [
+        {
+          "path": "m3/migration/intake-20261005/portable/mrp/recipe/chain/02-compile.json",
+          "sha256": "9fcafc3c09db88ae768857015b8518788010f066cb728c1e535f9d087998813a",
+          "gitBlob": "662afd9f44429d04013f4a89582c9368769513a0",
+          "description": "Original compile receipt stdout_sha256 binds this retained stdout body. Receipt provenance is preserved without rerunning the command."
+        }
+      ]
+    },
+    {
+      "path": "m3/migration/intake-20261005/portable/mrp/recipe/chain/03-test.stdout.log",
+      "mode": "100644",
+      "gitBlob": "dcfe69125c92a4e2a0879d7fb83ce066ea21948c",
+      "sha256": "fc60aa50b60befeae5e23f9775596627ee2d19efabdace71514d038afa546512",
+      "bytes": 2115,
+      "role": "raw-log",
+      "provenance": [
+        {
+          "path": "m3/migration/intake-20261005/portable/mrp/recipe/chain/03-test.json",
+          "sha256": "835036528a37b8939a33a7a4f7c4c2609fdd85593b84643f2be618503bdaf696",
+          "gitBlob": "29b0ae531682668c0131ab0c884fc4b5779a37a8",
+          "description": "Original test receipt stdout_sha256 binds this retained stdout body. Receipt provenance is preserved without rerunning the command."
+        }
+      ]
+    },
+    {
+      "path": "m3/migration/intake-20261005/portable/mrp/recipe/materialization/candidate.patch",
+      "mode": "100644",
+      "gitBlob": "748d905d08e56eac31539aaccf227818c05b38f9",
+      "sha256": "c66bf321695a7eb2db93693492e2732e8039e7982f5be7b138002368407ac5dd",
+      "bytes": 8613,
+      "role": "patch-snapshot",
+      "provenance": [
+        {
+          "path": "m3/migration/intake-20261005/portable/mrp/recipe/materialization/OUTPUT.json",
+          "sha256": "e20501e6fa400e4ebadfc52146e03aaeeb64839a99c47970f85d2fb9f0c3f639",
+          "gitBlob": "670f5bedc552d3d751bc43d717f6466630507dee",
+          "description": "Original materialization OUTPUT.json patch object binds candidate.patch, its exact SHA-256, and byte count. This is retained patch data, not an active source file."
+        }
+      ]
+    },
+    {
+      "path": "m3/migration/intake-20261005/portable/pcr/consumer-0/chain/02-compile.stdout.log",
+      "mode": "100644",
+      "gitBlob": "353a88a89aad502699dce313a733dbfc7f86d71a",
+      "sha256": "582397d4acf83a2088a4ef301f3f652f207c9ebfec53524aa796df8eeb573ddf",
+      "bytes": 1953,
+      "role": "raw-log",
+      "provenance": [
+        {
+          "path": "m3/migration/intake-20261005/portable/pcr/consumer-0/chain/02-compile.json",
+          "sha256": "4150634028ef2df3bbfe78c1cc7acf616fc909a9525262332ded199a7898545d",
+          "gitBlob": "f2b191aa1ea989d9e55765b158005a8c9e390467",
+          "description": "Original compile receipt stdout_sha256 binds this retained stdout body. Receipt provenance is preserved without rerunning the command."
+        }
+      ]
+    },
+    {
+      "path": "m3/migration/intake-20261005/portable/pcr/consumer-0/chain/03-test.stdout.log",
+      "mode": "100644",
+      "gitBlob": "ad87b495bc493db19779755a57f0ac3a9b068ccf",
+      "sha256": "3019e10ebfe82d113d2b791472a96a834ab4aff2a1e27a401e44549b23fd2072",
+      "bytes": 2552,
+      "role": "raw-log",
+      "provenance": [
+        {
+          "path": "m3/migration/intake-20261005/portable/pcr/consumer-0/chain/03-test.json",
+          "sha256": "32272090c319b49d844bc37417969cb6d168bfb6252b1791a38d5988b6dd5190",
+          "gitBlob": "78f091dc68fb02acedeb301bbe6772118a97ca8f",
+          "description": "Original test receipt stdout_sha256 binds this retained stdout body. Receipt provenance is preserved without rerunning the command."
+        }
+      ]
+    },
+    {
+      "path": "m3/migration/intake-20261005/portable/pcr/consumer-1/chain/02-compile.stdout.log",
+      "mode": "100644",
+      "gitBlob": "34f7fdc1d7c404f5d28cc664146870d57493d829",
+      "sha256": "ee1330abf815172c6bf18ddd0f840672e8d134f369f0f6211f308a1babccf1d6",
+      "bytes": 1992,
+      "role": "raw-log",
+      "provenance": [
+        {
+          "path": "m3/migration/intake-20261005/portable/pcr/consumer-1/chain/02-compile.json",
+          "sha256": "1ca395a0dd86de19c72ac658b17e0cd41a561b17e4ff0fccc0c06507c9b27da1",
+          "gitBlob": "15dc6807a07234d95aa2d37fcb0804c3faca7147",
+          "description": "Original compile receipt stdout_sha256 binds this retained stdout body. Receipt provenance is preserved without rerunning the command."
+        }
+      ]
+    },
+    {
+      "path": "m3/migration/intake-20261005/portable/pcr/consumer-1/chain/03-test.stdout.log",
+      "mode": "100644",
+      "gitBlob": "04f7c7220a1db6285f0808af0e8d9b6cdf6bacaa",
+      "sha256": "308ad6e5f0dc446e7848b91c96966a2a949f9fd771587482a76bc3fe685d8b30",
+      "bytes": 20604,
+      "role": "raw-log",
+      "provenance": [
+        {
+          "path": "m3/migration/intake-20261005/portable/pcr/consumer-1/chain/03-test.json",
+          "sha256": "fce390121838d9586533b1194d063ebc0f98ee0fe738ffd81c9114c40ee1fbb0",
+          "gitBlob": "8e9c48d23db9ad6ccc38721f2a011f8d003a9ea8",
+          "description": "Original test receipt stdout_sha256 binds this retained stdout body. Receipt provenance is preserved without rerunning the command."
+        }
+      ]
+    },
+    {
+      "path": "m3/migration/intake-20261005/portable/pcr/recipe/chain/02-compile.stdout.log",
+      "mode": "100644",
+      "gitBlob": "027513781564f47e8a38b01c5d33388becfdbd88",
+      "sha256": "bb41640c661c37cf593b3945c17780c4a5e1d95a1873f0287ebe5d8abdff4701",
+      "bytes": 1821,
+      "role": "raw-log",
+      "provenance": [
+        {
+          "path": "m3/migration/intake-20261005/portable/pcr/recipe/chain/02-compile.json",
+          "sha256": "4dcfbce6f5beee84f374681944a9f31292f1e5de54454a4f4c5514d56ba9590a",
+          "gitBlob": "d721195c7e9c1968ccb091f1638058bad1e633af",
+          "description": "Original compile receipt stdout_sha256 binds this retained stdout body. Receipt provenance is preserved without rerunning the command."
+        }
+      ]
+    },
+    {
+      "path": "m3/migration/intake-20261005/portable/pcr/recipe/chain/03-test.stdout.log",
+      "mode": "100644",
+      "gitBlob": "a81aa6ac30731ecd9467b5dcf67e1ade2f2de5ec",
+      "sha256": "079aab86d52f19c8e66e0ca3f349f486508adaba1fe42bd085991a7c31ba5d19",
+      "bytes": 3574,
+      "role": "raw-log",
+      "provenance": [
+        {
+          "path": "m3/migration/intake-20261005/portable/pcr/recipe/chain/03-test.json",
+          "sha256": "61ac4803a2443552b09dc1586b17275a96353ddbfcbe35fa51a09b40b76c7b5b",
+          "gitBlob": "aae11b9a0000c8b43524716907d693abd91e6505",
+          "description": "Original test receipt stdout_sha256 binds this retained stdout body. Receipt provenance is preserved without rerunning the command."
+        }
+      ]
+    }
+  ]
+}

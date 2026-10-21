@@ -23,11 +23,17 @@ import java.util.Set;
  * storage nodes. Single-threaded; count-changing iterators are fail-fast.
  */
 public final class M3GuavaMultiset<E> extends AbstractCollection<E> implements Multiset<E> {
-    private final M3CountedBag<E> bag = new M3CountedBag<>();
+    private final M3CountedBag<E> bag;
     private transient Set<E> elements;
     private transient Set<Entry<E>> entries;
 
-    public M3GuavaMultiset() { }
+    /** Independent default count owner; public behavior unchanged. */
+    public M3GuavaMultiset() { this(new M3CountedBag<>()); }
+
+    /** Explicitly reuse the same M3 packed count/index owner across provider facades. */
+    public M3GuavaMultiset(M3CountedBag<E> owner) {
+        this.bag = Objects.requireNonNull(owner, "owner");
+    }
     public static <E> M3GuavaMultiset<E> create() { return new M3GuavaMultiset<>(); }
     public static <E> M3GuavaMultiset<E> copyOf(Iterable<? extends E> source) {
         Objects.requireNonNull(source, "source");

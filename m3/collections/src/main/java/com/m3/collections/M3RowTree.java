@@ -296,6 +296,10 @@ public final class M3RowTree extends AbstractList<M3RowTreeItem> implements M3Ro
 		if (offset < 0) {
 			return -1;
 		}
+		// The count equality proves every weight is positive (or the tree is empty).
+		// Unlike the Fenwick donor, custom item heights can produce negative int
+		// weights; preserve the original descent whenever that proof is unavailable.
+		if (offset >= sum(root) && visible(root) == size(root)) return visible(root);
 		int rank = 0;
 		long extent = 0;
 		int node = root;

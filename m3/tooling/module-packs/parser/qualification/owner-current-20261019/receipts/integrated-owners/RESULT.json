@@ -1,0 +1,1649 @@
+{
+  "build_complete_before_runtime": true,
+  "class_families": {
+    "compiled": {
+      "com/sun/source/util/M3AST$Consumer.class": {
+        "mode": "0o644",
+        "sha256": "96ed26db9f315152a4e31a9736ba8e64ddd0cbfa8a698ded357eb80b309819d2",
+        "size": 640,
+        "type": "file"
+      },
+      "com/sun/source/util/M3AST$Factory.class": {
+        "mode": "0o644",
+        "sha256": "17c1923667d1cde9affc4d376ee949ffcc78afdaea5f24aecad211d09db47059",
+        "size": 566,
+        "type": "file"
+      },
+      "com/sun/source/util/M3AST$Phase.class": {
+        "mode": "0o644",
+        "sha256": "dd34d09c7ef03a56d5b5091f26940cebed25bd9b7bcb7fc5897244831bb567a6",
+        "size": 1096,
+        "type": "file"
+      },
+      "com/sun/source/util/M3AST$Projection.class": {
+        "mode": "0o644",
+        "sha256": "d41b2e0990704892ae9ad41ad0b7c7711b3d93414e697d28db2e192b414da3e7",
+        "size": 1234,
+        "type": "file"
+      },
+      "com/sun/source/util/M3AST$Source.class": {
+        "mode": "0o644",
+        "sha256": "f11c1591e6d29420b42d61fc489d4aaafe1a9922b04f6db5859b68f5d1f00ba5",
+        "size": 1694,
+        "type": "file"
+      },
+      "com/sun/source/util/M3AST$Summary.class": {
+        "mode": "0o644",
+        "sha256": "8914a16c074a095b18e9a754e1bb467c95f19e7bbbac43089750579457d8c382",
+        "size": 2299,
+        "type": "file"
+      },
+      "com/sun/source/util/M3AST$Unit.class": {
+        "mode": "0o644",
+        "sha256": "91f8219fcb1329d9a38172ca73615b19f66698d827d98e6e774b8456b6b8ffcb",
+        "size": 964,
+        "type": "file"
+      },
+      "com/sun/source/util/M3AST.class": {
+        "mode": "0o644",
+        "sha256": "7adc7c87923bf9c9fb347b85507c9ac1357191d7cc40d273fdb44db83f5cafe2",
+        "size": 1142,
+        "type": "file"
+      },
+      "com/sun/tools/javac/m3/M3ASTPC$1.class": {
+        "mode": "0o644",
+        "sha256": "c9f2efffc550cbc4e1da8f98c3726da57f54e6b9822e31f00fbb79e729885d5b",
+        "size": 813,
+        "type": "file"
+      },
+      "com/sun/tools/javac/m3/M3ASTPC$LiveUnit.class": {
+        "mode": "0o644",
+        "sha256": "218b45f45802804f3974c15c2a62ab9000b3d97d8ec61baa0564b2b0572262a3",
+        "size": 6142,
+        "type": "file"
+      },
+      "com/sun/tools/javac/m3/M3ASTPC$Seal.class": {
+        "mode": "0o644",
+        "sha256": "90abbdf0b47ef36330a719a7ac693f1595359133194b796122091280ad61a3d4",
+        "size": 1391,
+        "type": "file"
+      },
+      "com/sun/tools/javac/m3/M3ASTPC$Session.class": {
+        "mode": "0o644",
+        "sha256": "bce59affc25e8e8780b7425e88bfecf466d7b7974c2528e516130f514ed0484f",
+        "size": 6400,
+        "type": "file"
+      },
+      "com/sun/tools/javac/m3/M3ASTPC$Trace.class": {
+        "mode": "0o644",
+        "sha256": "7d9e9e86ae2000bb43653f34054bfadc50925c7d443603b7a58c8428472e890c",
+        "size": 3618,
+        "type": "file"
+      },
+      "com/sun/tools/javac/m3/M3ASTPC.class": {
+        "mode": "0o644",
+        "sha256": "66ce35bb4d610e6ae71f148c3b4efcc7cd6f644b6d1911c5f05c48c01a2a1666",
+        "size": 8399,
+        "type": "file"
+      },
+      "com/sun/tools/javac/m3/M3PrimitiveImageCompiler$1.class": {
+        "mode": "0o644",
+        "sha256": "758d419791269d166bb831225f20494f9e59fe80373d83930e9aa6bac60fdecb",
+        "size": 4187,
+        "type": "file"
+      },
+      "com/sun/tools/javac/m3/M3PrimitiveImageCompiler$2.class": {
+        "mode": "0o644",
+        "sha256": "7350b5b49e7d0fc9a22a913d0276f7bf9ba22dfc4f46199bb45e0130fcdcd7e2",
+        "size": 3644,
+        "type": "file"
+      },
+      "com/sun/tools/javac/m3/M3PrimitiveImageCompiler$3.class": {
+        "mode": "0o644",
+        "sha256": "afe16019e3c16f94e7b24966a18b9e8344dd2d32895d297eeac83b99ff6d58bd",
+        "size": 1585,
+        "type": "file"
+      },
+      "com/sun/tools/javac/m3/M3PrimitiveImageCompiler$Entry.class": {
+        "mode": "0o644",
+        "sha256": "7ae24a0a13e390e8e3b7dd20d6e66967ea17c4cc0aa9cf088fc072eeea319c13",
+        "size": 1462,
+        "type": "file"
+      },
+      "com/sun/tools/javac/m3/M3PrimitiveImageCompiler.class": {
+        "mode": "0o644",
+        "sha256": "16a8a22d6c53bca3fc1fea4c78365073c9ab59b9c58b5f73bd772270426295be",
+        "size": 14812,
+        "type": "file"
+      },
+      "com/sun/tools/javac/main/JavaCompiler$1.class": {
+        "mode": "0o644",
+        "sha256": "1bd9ec43595bd916c70c879758ad2fbc53bac9e7983ec6c5d2f6ba044f157718",
+        "size": 1327,
+        "type": "file"
+      },
+      "com/sun/tools/javac/main/JavaCompiler$1MethodBodyRemover.class": {
+        "mode": "0o644",
+        "sha256": "89254c8df792f553c8a7fafc6d61fe977d1f00b8642b89976136d0aa46c2209d",
+        "size": 4165,
+        "type": "file"
+      },
+      "com/sun/tools/javac/main/JavaCompiler$1ScanNested.class": {
+        "mode": "0o644",
+        "sha256": "bf6b8eef557105312d77856f9f75ba2c756c6aa1f3cad4d30ded6a4d908f1f74",
+        "size": 4090,
+        "type": "file"
+      },
+      "com/sun/tools/javac/main/JavaCompiler$2.class": {
+        "mode": "0o644",
+        "sha256": "6704dee3d34680c4cc17b1f94b9a67fb2d3ca080cc6b7513b68ec5d2611ca2cd",
+        "size": 837,
+        "type": "file"
+      },
+      "com/sun/tools/javac/main/JavaCompiler$CompilePolicy.class": {
+        "mode": "0o644",
+        "sha256": "673c5a560e1f65814360d168208af6466d0b00ddcf849ee131364008000f97d5",
+        "size": 1598,
+        "type": "file"
+      },
+      "com/sun/tools/javac/main/JavaCompiler$ImplicitSourcePolicy.class": {
+        "mode": "0o644",
+        "sha256": "97a2e331b204d9be35802bfe4026495f307560fac5c68b0ab18cee5a08f90c64",
+        "size": 1569,
+        "type": "file"
+      },
+      "com/sun/tools/javac/main/JavaCompiler$InitialFileParser.class": {
+        "mode": "0o644",
+        "sha256": "11c41aa5b2970adb09e0d05095edca18d5e1ead5868199d871ad4b485f4d74e2",
+        "size": 1882,
+        "type": "file"
+      },
+      "com/sun/tools/javac/main/JavaCompiler$InitialFileParserIntf.class": {
+        "mode": "0o644",
+        "sha256": "637a55fc17283dd2f992fd3d7ec6855b53bb0381dc46a0e4d936d0079afe691a",
+        "size": 620,
+        "type": "file"
+      },
+      "com/sun/tools/javac/main/JavaCompiler.class": {
+        "mode": "0o644",
+        "sha256": "66fce35f90de9df9b96ab74ef6538f1ba58f998b8a7d0237a1a0143161bd73d8",
+        "size": 56714,
+        "type": "file"
+      }
+    },
+    "removed": {
+      "com/sun/source/util/M3AST$Consumer.class": {
+        "mode": "0o644",
+        "sha256": "bcd77af611400c7440632f8d8df98830674a5a39bb37b856122c624f2410b8dd",
+        "size": 881,
+        "type": "file"
+      },
+      "com/sun/source/util/M3AST$Factory.class": {
+        "mode": "0o644",
+        "sha256": "17c1923667d1cde9affc4d376ee949ffcc78afdaea5f24aecad211d09db47059",
+        "size": 566,
+        "type": "file"
+      },
+      "com/sun/source/util/M3AST$Phase.class": {
+        "mode": "0o644",
+        "sha256": "5c93dda1063eb1f8212c02b463ba47680eb901eef6a5d3ccbece40be126d7e8f",
+        "size": 1188,
+        "type": "file"
+      },
+      "com/sun/source/util/M3AST$Projection.class": {
+        "mode": "0o644",
+        "sha256": "3138678cdafae230b258b485e5a18b2762a003bc8b1d87da2b0596063c1300cb",
+        "size": 1564,
+        "type": "file"
+      },
+      "com/sun/source/util/M3AST$Source.class": {
+        "mode": "0o644",
+        "sha256": "f1df44a98d9bda58b0894683cfae210abe3a5d915542b27e7d8fb4d35988527a",
+        "size": 1950,
+        "type": "file"
+      },
+      "com/sun/source/util/M3AST$Summary.class": {
+        "mode": "0o644",
+        "sha256": "63c8ae9a28be47fcd7499c75da5a12fc732896003a21f44349daa85e9f232278",
+        "size": 2752,
+        "type": "file"
+      },
+      "com/sun/source/util/M3AST$Unit.class": {
+        "mode": "0o644",
+        "sha256": "91f8219fcb1329d9a38172ca73615b19f66698d827d98e6e774b8456b6b8ffcb",
+        "size": 964,
+        "type": "file"
+      },
+      "com/sun/source/util/M3AST.class": {
+        "mode": "0o644",
+        "sha256": "b97940501dd31489ddcc387a52c5249f00f9decb1ad899d76c357870ec71a824",
+        "size": 1287,
+        "type": "file"
+      },
+      "com/sun/tools/javac/m3/M3ASTPC$1.class": {
+        "mode": "0o644",
+        "sha256": "df71f79def68f5e4a0a98a7119ca233d9fedb4a93f7a38102dc683746a548554",
+        "size": 842,
+        "type": "file"
+      },
+      "com/sun/tools/javac/m3/M3ASTPC$LiveUnit$Failure.class": {
+        "mode": "0o644",
+        "sha256": "9fba649aeb25770acfb1f551c5798da41b54772314d20aa64a5ae30124d0654f",
+        "size": 1640,
+        "type": "file"
+      },
+      "com/sun/tools/javac/m3/M3ASTPC$LiveUnit.class": {
+        "mode": "0o644",
+        "sha256": "0ab6beac2244ab2144a9b56e0936ff438feab43266369ec72eb667177b06373a",
+        "size": 6236,
+        "type": "file"
+      },
+      "com/sun/tools/javac/m3/M3ASTPC$Seal.class": {
+        "mode": "0o644",
+        "sha256": "d8af7c1759d17ef770fd04cb71f321d1a9556ac443723133936686bec825f1e5",
+        "size": 1622,
+        "type": "file"
+      },
+      "com/sun/tools/javac/m3/M3ASTPC$Session.class": {
+        "mode": "0o644",
+        "sha256": "3771c61d77346b626415c6f42f62f8869c182cdd58be8c7426e6f4ca292f75ff",
+        "size": 7124,
+        "type": "file"
+      },
+      "com/sun/tools/javac/m3/M3ASTPC$Trace.class": {
+        "mode": "0o644",
+        "sha256": "7a495a793b06a9c9c7965abe308433b5e1e2c03ee5f108bc832cbb6a7b553be7",
+        "size": 3961,
+        "type": "file"
+      },
+      "com/sun/tools/javac/m3/M3ASTPC.class": {
+        "mode": "0o644",
+        "sha256": "2e513c8c9a237c59aff279e5a80c16382a5e2332564f64ed7d0a0e5245baf63e",
+        "size": 9939,
+        "type": "file"
+      },
+      "com/sun/tools/javac/m3/M3PrimitiveImageCompiler$1.class": {
+        "mode": "0o644",
+        "sha256": "0b6e3068bd52073dcfd7d0aff1d3f328f3f6ffb5d3e2925e923908cbe2cf63e5",
+        "size": 4919,
+        "type": "file"
+      },
+      "com/sun/tools/javac/m3/M3PrimitiveImageCompiler$2.class": {
+        "mode": "0o644",
+        "sha256": "1d33771fad61a78981a83ade7e27eb8fdadda6fb1d73a94659769a79e47bedb5",
+        "size": 3731,
+        "type": "file"
+      },
+      "com/sun/tools/javac/m3/M3PrimitiveImageCompiler$3.class": {
+        "mode": "0o644",
+        "sha256": "a0245287ca40cca106b6ff2f70cc09f670f99e939af7dcc9447634286dcf4f39",
+        "size": 1614,
+        "type": "file"
+      },
+      "com/sun/tools/javac/m3/M3PrimitiveImageCompiler$Entry.class": {
+        "mode": "0o644",
+        "sha256": "46e76e79cd9e2083e6593a79bdec8590e713d577c2c233820b90fb17aee50e5b",
+        "size": 1711,
+        "type": "file"
+      },
+      "com/sun/tools/javac/m3/M3PrimitiveImageCompiler.class": {
+        "mode": "0o644",
+        "sha256": "de269a435090b9ad24c18dd6294ca097074d0828ef922313745518cf048f6d3c",
+        "size": 16946,
+        "type": "file"
+      },
+      "com/sun/tools/javac/main/JavaCompiler$1.class": {
+        "mode": "0o644",
+        "sha256": "f0c8a2d7b7f751d3f58489ab22e9603177069deb7a629b37b6c0a98d97027767",
+        "size": 1953,
+        "type": "file"
+      },
+      "com/sun/tools/javac/main/JavaCompiler$1MethodBodyRemover.class": {
+        "mode": "0o644",
+        "sha256": "c6421064b4a7a118208fc8c598275ebd117ece26095868c0df78c8164dd9cdaa",
+        "size": 4858,
+        "type": "file"
+      },
+      "com/sun/tools/javac/main/JavaCompiler$1ScanNested.class": {
+        "mode": "0o644",
+        "sha256": "f439d6441e5dba080d9ef7f285cb3fcce8e7cb2659eba0e9e9cfe2294d9c3f8e",
+        "size": 5013,
+        "type": "file"
+      },
+      "com/sun/tools/javac/main/JavaCompiler$2.class": {
+        "mode": "0o644",
+        "sha256": "0ba24a4f3b816d9a726a4b0b77e31976abef5d8b7a251b30d9a981424eda36fd",
+        "size": 866,
+        "type": "file"
+      },
+      "com/sun/tools/javac/main/JavaCompiler$CompilePolicy.class": {
+        "mode": "0o644",
+        "sha256": "a71a9e8a29dcfbac366e594cdbcb0aa43f2a525210b84b267059b187ce98f1af",
+        "size": 1717,
+        "type": "file"
+      },
+      "com/sun/tools/javac/main/JavaCompiler$ImplicitSourcePolicy.class": {
+        "mode": "0o644",
+        "sha256": "38b88552623cde9ef71ce8035a3eb0fd5a6de7ddfafd32c5e9720dd59ff709e8",
+        "size": 1688,
+        "type": "file"
+      },
+      "com/sun/tools/javac/main/JavaCompiler$InitialFileParser.class": {
+        "mode": "0o644",
+        "sha256": "61223a080d358db4287ab3120f431ed344b448f65ffa8f199d01f0ee2fe83c1e",
+        "size": 2298,
+        "type": "file"
+      },
+      "com/sun/tools/javac/main/JavaCompiler$InitialFileParserIntf.class": {
+        "mode": "0o644",
+        "sha256": "637a55fc17283dd2f992fd3d7ec6855b53bb0381dc46a0e4d936d0079afe691a",
+        "size": 620,
+        "type": "file"
+      },
+      "com/sun/tools/javac/main/JavaCompiler.class": {
+        "mode": "0o644",
+        "sha256": "1cea03e6c69d5bce881a2ec32ba0f1493d93b821244a7eeb25abae936db08869",
+        "size": 64544,
+        "type": "file"
+      }
+    }
+  },
+  "classification": "Qualification image relinked from sealed existing source-built M3JDK21 JMODs and native runtime, with four explicitly compiled compiler owner families and the emitted parser module. This is not a fresh full JDK/HotSpot source build.",
+  "commands": [
+    {
+      "argv": [
+        "/tmp/m3-collections-tools-20261019/jdk-21.0.12.1+1/bin/jmod",
+        "extract",
+        "--dir",
+        "/tmp/m3-parser-refinement-20261019/emitted-integrated-01/extract/java.base",
+        "/workspace/scratch/fed6767966ad/M3jdk21/build/m3-convergence-20261019/images/jmods/java.base.jmod"
+      ],
+      "cwd": "/tmp/m3-parser-refinement-20261019/emitted-integrated-01",
+      "exit_code": 0,
+      "expect_failure": false,
+      "finished": "2026-10-19T13:03:28.908502+00:00",
+      "label": "extract-java.base",
+      "log": "/tmp/m3-parser-refinement-20261019/emitted-integrated-01/logs/01-extract-java.base.log",
+      "log_record": {
+        "mode": "0o644",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "size": 0,
+        "type": "file"
+      },
+      "started": "2026-10-19T13:03:16.119834+00:00"
+    },
+    {
+      "argv": [
+        "/tmp/m3-collections-tools-20261019/jdk-21.0.12.1+1/bin/jmod",
+        "extract",
+        "--dir",
+        "/tmp/m3-parser-refinement-20261019/emitted-integrated-01/extract/jdk.compiler",
+        "/workspace/scratch/fed6767966ad/M3jdk21/build/m3-convergence-20261019/images/jmods/jdk.compiler.jmod"
+      ],
+      "cwd": "/tmp/m3-parser-refinement-20261019/emitted-integrated-01",
+      "exit_code": 0,
+      "expect_failure": false,
+      "finished": "2026-10-19T13:03:30.599658+00:00",
+      "label": "extract-jdk.compiler",
+      "log": "/tmp/m3-parser-refinement-20261019/emitted-integrated-01/logs/02-extract-jdk.compiler.log",
+      "log_record": {
+        "mode": "0o644",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "size": 0,
+        "type": "file"
+      },
+      "started": "2026-10-19T13:03:28.950264+00:00"
+    },
+    {
+      "argv": [
+        "/tmp/m3-collections-tools-20261019/jdk-21.0.12.1+1/bin/jmod",
+        "create",
+        "--date",
+        "2026-10-18T00:00:00Z",
+        "--class-path",
+        "/tmp/m3-parser-refinement-20261019/emitted-integrated-01/extract/jdk.compiler/classes",
+        "--cmds",
+        "/tmp/m3-parser-refinement-20261019/emitted-integrated-01/extract/jdk.compiler/bin",
+        "--legal-notices",
+        "/tmp/m3-parser-refinement-20261019/emitted-integrated-01/extract/jdk.compiler/legal",
+        "--man-pages",
+        "/tmp/m3-parser-refinement-20261019/emitted-integrated-01/extract/jdk.compiler/man",
+        "--libs",
+        "/tmp/m3-parser-refinement-20261019/emitted-integrated-01/extract/jdk.compiler/lib",
+        "--module-version",
+        "21-internal",
+        "--target-platform",
+        "linux-amd64",
+        "/tmp/m3-parser-refinement-20261019/emitted-integrated-01/jmods/jdk.compiler.jmod"
+      ],
+      "cwd": "/tmp/m3-parser-refinement-20261019/emitted-integrated-01",
+      "exit_code": 0,
+      "expect_failure": false,
+      "finished": "2026-10-19T13:03:32.818402+00:00",
+      "label": "create-compiler-jmod",
+      "log": "/tmp/m3-parser-refinement-20261019/emitted-integrated-01/logs/03-create-compiler-jmod.log",
+      "log_record": {
+        "mode": "0o644",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "size": 0,
+        "type": "file"
+      },
+      "started": "2026-10-19T13:03:30.938426+00:00"
+    },
+    {
+      "argv": [
+        "/tmp/m3-collections-tools-20261019/jdk-21.0.12.1+1/bin/jmod",
+        "create",
+        "--date",
+        "2026-10-18T00:00:00Z",
+        "--class-path",
+        "/tmp/m3-parser-refinement-20261019/emitted-integrated-01/extract/java.base/classes",
+        "--cmds",
+        "/tmp/m3-parser-refinement-20261019/emitted-integrated-01/extract/java.base/bin",
+        "--config",
+        "/tmp/m3-parser-refinement-20261019/emitted-integrated-01/extract/java.base/conf",
+        "--header-files",
+        "/tmp/m3-parser-refinement-20261019/emitted-integrated-01/extract/java.base/include",
+        "--legal-notices",
+        "/tmp/m3-parser-refinement-20261019/emitted-integrated-01/extract/java.base/legal",
+        "--man-pages",
+        "/tmp/m3-parser-refinement-20261019/emitted-integrated-01/extract/java.base/man",
+        "--libs",
+        "/tmp/m3-parser-refinement-20261019/emitted-integrated-01/extract/java.base/lib",
+        "--module-version",
+        "21-internal",
+        "--target-platform",
+        "linux-amd64",
+        "--hash-modules",
+        "^(?:java\\.datatransfer|java\\.desktop|java\\.instrument|java\\.logging|java\\.management|java\\.management\\.rmi|java\\.naming|java\\.net\\.http|java\\.prefs|java\\.rmi|java\\.scripting|java\\.se|java\\.security\\.jgss|java\\.security\\.sasl|java\\.smartcardio|java\\.sql|java\\.sql\\.rowset|java\\.transaction\\.xa|java\\.xml|java\\.xml\\.crypto|jdk\\.accessibility|jdk\\.attach|jdk\\.charsets|jdk\\.compiler|jdk\\.crypto\\.cryptoki|jdk\\.crypto\\.ec|jdk\\.dynalink|jdk\\.editpad|jdk\\.hotspot\\.agent|jdk\\.httpserver|jdk\\.incubator\\.vector|jdk\\.internal\\.ed|jdk\\.internal\\.jvmstat|jdk\\.internal\\.le|jdk\\.internal\\.opt|jdk\\.internal\\.vm\\.ci|jdk\\.jartool|jdk\\.javadoc|jdk\\.jcmd|jdk\\.jconsole|jdk\\.jdeps|jdk\\.jdi|jdk\\.jdwp\\.agent|jdk\\.jfr|jdk\\.jlink|jdk\\.jpackage|jdk\\.jshell|jdk\\.jsobject|jdk\\.jstatd|jdk\\.localedata|jdk\\.management|jdk\\.management\\.agent|jdk\\.management\\.jfr|jdk\\.naming\\.dns|jdk\\.naming\\.rmi|jdk\\.net|jdk\\.nio\\.mapmode|jdk\\.random|jdk\\.sctp|jdk\\.security\\.auth|jdk\\.security\\.jgss|jdk\\.unsupported|jdk\\.unsupported\\.desktop|jdk\\.xml\\.dom|jdk\\.zipfs)$",
+        "--module-path",
+        "/tmp/m3-parser-refinement-20261019/emitted-integrated-01/jmods",
+        "/tmp/m3-parser-refinement-20261019/emitted-integrated-01/jmods/java.base.jmod"
+      ],
+      "cwd": "/tmp/m3-parser-refinement-20261019/emitted-integrated-01",
+      "exit_code": 0,
+      "expect_failure": false,
+      "finished": "2026-10-19T13:04:32.736115+00:00",
+      "label": "create-base-with-original-hash-coverage",
+      "log": "/tmp/m3-parser-refinement-20261019/emitted-integrated-01/logs/04-create-base-with-original-hash-coverage.log",
+      "log_record": {
+        "mode": "0o644",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "size": 0,
+        "type": "file"
+      },
+      "started": "2026-10-19T13:03:32.821363+00:00"
+    },
+    {
+      "argv": [
+        "/tmp/m3-collections-tools-20261019/jdk-21.0.12.1+1/bin/jmod",
+        "hash",
+        "--date",
+        "2026-10-18T00:00:00Z",
+        "--hash-modules",
+        "^(?:java\\.datatransfer|java\\.desktop|java\\.instrument|java\\.logging|java\\.management|java\\.management\\.rmi|java\\.naming|java\\.net\\.http|java\\.prefs|java\\.rmi|java\\.scripting|java\\.se|java\\.security\\.jgss|java\\.security\\.sasl|java\\.smartcardio|java\\.sql|java\\.sql\\.rowset|java\\.transaction\\.xa|java\\.xml|java\\.xml\\.crypto|jdk\\.accessibility|jdk\\.attach|jdk\\.charsets|jdk\\.compiler|jdk\\.crypto\\.cryptoki|jdk\\.crypto\\.ec|jdk\\.dynalink|jdk\\.editpad|jdk\\.hotspot\\.agent|jdk\\.httpserver|jdk\\.incubator\\.vector|jdk\\.internal\\.ed|jdk\\.internal\\.jvmstat|jdk\\.internal\\.le|jdk\\.internal\\.opt|jdk\\.internal\\.vm\\.ci|jdk\\.jartool|jdk\\.javadoc|jdk\\.jcmd|jdk\\.jconsole|jdk\\.jdeps|jdk\\.jdi|jdk\\.jdwp\\.agent|jdk\\.jfr|jdk\\.jlink|jdk\\.jpackage|jdk\\.jshell|jdk\\.jsobject|jdk\\.jstatd|jdk\\.localedata|jdk\\.management|jdk\\.management\\.agent|jdk\\.management\\.jfr|jdk\\.naming\\.dns|jdk\\.naming\\.rmi|jdk\\.net|jdk\\.nio\\.mapmode|jdk\\.random|jdk\\.sctp|jdk\\.security\\.auth|jdk\\.security\\.jgss|jdk\\.unsupported|jdk\\.unsupported\\.desktop|jdk\\.xml\\.dom|jdk\\.zipfs)$",
+        "--module-path",
+        "/tmp/m3-parser-refinement-20261019/emitted-integrated-01/jmods",
+        "/tmp/m3-parser-refinement-20261019/emitted-integrated-01/jmods/java.base.jmod"
+      ],
+      "cwd": "/tmp/m3-parser-refinement-20261019/emitted-integrated-01",
+      "exit_code": 0,
+      "expect_failure": false,
+      "finished": "2026-10-19T13:05:45.881815+00:00",
+      "label": "supported-jmod-hash",
+      "log": "/tmp/m3-parser-refinement-20261019/emitted-integrated-01/logs/05-supported-jmod-hash.log",
+      "log_record": {
+        "mode": "0o644",
+        "sha256": "973f583fa94141e280fbc9456f897d1ad220fd4000725c609918b1a329b0940b",
+        "size": 40,
+        "type": "file"
+      },
+      "started": "2026-10-19T13:04:32.737135+00:00"
+    },
+    {
+      "argv": [
+        "/tmp/m3-collections-tools-20261019/jdk-21.0.12.1+1/bin/jlink",
+        "--module-path",
+        "/tmp/m3-parser-refinement-20261019/emitted-integrated-01/jmods",
+        "--add-modules",
+        "ALL-MODULE-PATH",
+        "--output",
+        "/tmp/m3-parser-refinement-20261019/emitted-integrated-01/image"
+      ],
+      "cwd": "/tmp/m3-parser-refinement-20261019/emitted-integrated-01",
+      "exit_code": 0,
+      "expect_failure": false,
+      "finished": "2026-10-19T13:06:11.948198+00:00",
+      "label": "link-m3jdk21-image",
+      "log": "/tmp/m3-parser-refinement-20261019/emitted-integrated-01/logs/06-link-m3jdk21-image.log",
+      "log_record": {
+        "mode": "0o644",
+        "sha256": "edc8d35623ef3b5bdbbf28491b2a7624c1b8e3502b34ec0aa1ae61ac754cb9c0",
+        "size": 55,
+        "type": "file"
+      },
+      "started": "2026-10-19T13:05:58.301274+00:00"
+    },
+    {
+      "argv": [
+        "/tmp/m3-collections-tools-20261019/jdk-21.0.12.1+1/bin/javac",
+        "--system",
+        "/tmp/m3-parser-refinement-20261019/emitted-integrated-01/image",
+        "-source",
+        "21",
+        "-target",
+        "21",
+        "-proc:none",
+        "-implicit:none",
+        "-Xlint:all",
+        "-Werror",
+        "--add-exports",
+        "jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED",
+        "--add-exports",
+        "jdk.compiler/com.sun.tools.javac.main=ALL-UNNAMED",
+        "--add-exports",
+        "jdk.compiler/com.sun.tools.javac.m3=ALL-UNNAMED",
+        "--add-exports",
+        "jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED",
+        "-d",
+        "/tmp/m3-parser-refinement-20261019/emitted-integrated-01/test-classes",
+        "/workspace/scratch/7ea994fb52d9/repos/M3jdk21/test/langtools/tools/javac/m3/M3ASTSharedFrontendTest.java",
+        "/workspace/scratch/7ea994fb52d9/repos/M3jdk21/test/langtools/tools/javac/m3/M3ASTSourceSealTest.java",
+        "/workspace/scratch/7ea994fb52d9/repos/M3jdk21/test/langtools/tools/javac/m3/M3ASTPluginSelectionTest.java",
+        "/workspace/scratch/7ea994fb52d9/repos/M3jdk21/test/langtools/tools/javac/m3/M3ASTProjectionStateTest.java",
+        "/workspace/scratch/7ea994fb52d9/repos/M3jdk21/test/langtools/tools/javac/m3/M3ComputeConstantFactsTest.java",
+        "/workspace/scratch/7ea994fb52d9/repos/M3jdk21/test/langtools/tools/javac/m3/M3PrimitiveFoldedImageTest.java",
+        "/workspace/scratch/7ea994fb52d9/candidates/parser/proof-src/M3ProjectionCacheResourceProbe.java"
+      ],
+      "cwd": "/tmp/m3-parser-refinement-20261019/emitted-integrated-01",
+      "exit_code": 0,
+      "expect_failure": false,
+      "finished": "2026-10-19T13:06:14.809037+00:00",
+      "label": "compile-all-integrated-consumers",
+      "log": "/tmp/m3-parser-refinement-20261019/emitted-integrated-01/logs/07-compile-all-integrated-consumers.log",
+      "log_record": {
+        "mode": "0o644",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "size": 0,
+        "type": "file"
+      },
+      "started": "2026-10-19T13:06:11.953776+00:00"
+    },
+    {
+      "argv": [
+        "/tmp/m3-parser-refinement-20261019/emitted-integrated-01/image/bin/java",
+        "-version"
+      ],
+      "cwd": "/tmp/m3-parser-refinement-20261019/emitted-integrated-01",
+      "exit_code": 0,
+      "expect_failure": false,
+      "finished": "2026-10-19T13:06:15.056208+00:00",
+      "label": "image-version",
+      "log": "/tmp/m3-parser-refinement-20261019/emitted-integrated-01/logs/08-image-version.log",
+      "log_record": {
+        "mode": "0o644",
+        "sha256": "cf763163e8db117ace5152b311cfd463f276ccdb0b9ddd4e1e51f9e75a02b69a",
+        "size": 204,
+        "type": "file"
+      },
+      "started": "2026-10-19T13:06:14.810170+00:00"
+    },
+    {
+      "argv": [
+        "/tmp/m3-parser-refinement-20261019/emitted-integrated-01/image/bin/java",
+        "--describe-module",
+        "jdk.compiler"
+      ],
+      "cwd": "/tmp/m3-parser-refinement-20261019/emitted-integrated-01",
+      "exit_code": 0,
+      "expect_failure": false,
+      "finished": "2026-10-19T13:06:15.499995+00:00",
+      "label": "image-compiler-descriptor",
+      "log": "/tmp/m3-parser-refinement-20261019/emitted-integrated-01/logs/09-image-compiler-descriptor.log",
+      "log_record": {
+        "mode": "0o644",
+        "sha256": "4fb4e75aa82788d4cfbb0a82fb7142c539eb1f7819a09938ee8a2561fa47f94f",
+        "size": 1995,
+        "type": "file"
+      },
+      "started": "2026-10-19T13:06:15.056690+00:00"
+    },
+    {
+      "argv": [
+        "/tmp/m3-parser-refinement-20261019/emitted-integrated-01/image/bin/java",
+        "-ea",
+        "--add-exports",
+        "jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED",
+        "--add-exports",
+        "jdk.compiler/com.sun.tools.javac.main=ALL-UNNAMED",
+        "--add-exports",
+        "jdk.compiler/com.sun.tools.javac.m3=ALL-UNNAMED",
+        "--add-exports",
+        "jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED",
+        "--add-opens",
+        "jdk.compiler/com.sun.tools.javac.m3=ALL-UNNAMED",
+        "-cp",
+        "/tmp/m3-parser-refinement-20261019/emitted-integrated-01/test-classes",
+        "M3ASTSharedFrontendTest"
+      ],
+      "cwd": "/tmp/m3-parser-refinement-20261019/emitted-integrated-01",
+      "exit_code": 0,
+      "expect_failure": false,
+      "finished": "2026-10-19T13:06:23.536538+00:00",
+      "label": "M3ASTSharedFrontendTest",
+      "log": "/tmp/m3-parser-refinement-20261019/emitted-integrated-01/logs/10-M3ASTSharedFrontendTest.log",
+      "log_record": {
+        "mode": "0o644",
+        "sha256": "ad33e48fae9af4643aaed9bc3f38d61247d818d9148ab0971992b375e4bb32d6",
+        "size": 425,
+        "type": "file"
+      },
+      "started": "2026-10-19T13:06:15.503005+00:00"
+    },
+    {
+      "argv": [
+        "/tmp/m3-parser-refinement-20261019/emitted-integrated-01/image/bin/java",
+        "-ea",
+        "--add-exports",
+        "jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED",
+        "--add-exports",
+        "jdk.compiler/com.sun.tools.javac.main=ALL-UNNAMED",
+        "--add-exports",
+        "jdk.compiler/com.sun.tools.javac.m3=ALL-UNNAMED",
+        "--add-exports",
+        "jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED",
+        "--add-opens",
+        "jdk.compiler/com.sun.tools.javac.m3=ALL-UNNAMED",
+        "-cp",
+        "/tmp/m3-parser-refinement-20261019/emitted-integrated-01/test-classes",
+        "M3ASTSourceSealTest"
+      ],
+      "cwd": "/tmp/m3-parser-refinement-20261019/emitted-integrated-01",
+      "exit_code": 0,
+      "expect_failure": false,
+      "finished": "2026-10-19T13:06:26.717729+00:00",
+      "label": "M3ASTSourceSealTest",
+      "log": "/tmp/m3-parser-refinement-20261019/emitted-integrated-01/logs/11-M3ASTSourceSealTest.log",
+      "log_record": {
+        "mode": "0o644",
+        "sha256": "c7ff363b68db0a047f3abe402dd1d313870bb23a9cfafb163110df9ed9eee10f",
+        "size": 61,
+        "type": "file"
+      },
+      "started": "2026-10-19T13:06:23.537381+00:00"
+    },
+    {
+      "argv": [
+        "/tmp/m3-parser-refinement-20261019/emitted-integrated-01/image/bin/java",
+        "-ea",
+        "--add-exports",
+        "jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED",
+        "--add-exports",
+        "jdk.compiler/com.sun.tools.javac.main=ALL-UNNAMED",
+        "--add-exports",
+        "jdk.compiler/com.sun.tools.javac.m3=ALL-UNNAMED",
+        "--add-exports",
+        "jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED",
+        "--add-opens",
+        "jdk.compiler/com.sun.tools.javac.m3=ALL-UNNAMED",
+        "-cp",
+        "/tmp/m3-parser-refinement-20261019/emitted-integrated-01/test-classes",
+        "M3ASTPluginSelectionTest"
+      ],
+      "cwd": "/tmp/m3-parser-refinement-20261019/emitted-integrated-01",
+      "exit_code": 0,
+      "expect_failure": false,
+      "finished": "2026-10-19T13:06:34.499762+00:00",
+      "label": "M3ASTPluginSelectionTest",
+      "log": "/tmp/m3-parser-refinement-20261019/emitted-integrated-01/logs/12-M3ASTPluginSelectionTest.log",
+      "log_record": {
+        "mode": "0o644",
+        "sha256": "e5cfa5977608bf177434ff06ae2f7711d3f436fb4505f60a97a50dc2dbc72b48",
+        "size": 44,
+        "type": "file"
+      },
+      "started": "2026-10-19T13:06:26.718463+00:00"
+    },
+    {
+      "argv": [
+        "/tmp/m3-parser-refinement-20261019/emitted-integrated-01/image/bin/java",
+        "-ea",
+        "--add-exports",
+        "jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED",
+        "--add-exports",
+        "jdk.compiler/com.sun.tools.javac.main=ALL-UNNAMED",
+        "--add-exports",
+        "jdk.compiler/com.sun.tools.javac.m3=ALL-UNNAMED",
+        "--add-exports",
+        "jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED",
+        "--add-opens",
+        "jdk.compiler/com.sun.tools.javac.m3=ALL-UNNAMED",
+        "-cp",
+        "/tmp/m3-parser-refinement-20261019/emitted-integrated-01/test-classes",
+        "M3ASTProjectionStateTest"
+      ],
+      "cwd": "/tmp/m3-parser-refinement-20261019/emitted-integrated-01",
+      "exit_code": 0,
+      "expect_failure": false,
+      "finished": "2026-10-19T13:06:36.786392+00:00",
+      "label": "M3ASTProjectionStateTest",
+      "log": "/tmp/m3-parser-refinement-20261019/emitted-integrated-01/logs/13-M3ASTProjectionStateTest.log",
+      "log_record": {
+        "mode": "0o644",
+        "sha256": "4d9cb6a30cb8a1a6918fcdf9a76bea91b1bc037c68d81ee2db1335eb566555cb",
+        "size": 42,
+        "type": "file"
+      },
+      "started": "2026-10-19T13:06:34.500913+00:00"
+    },
+    {
+      "argv": [
+        "/tmp/m3-parser-refinement-20261019/emitted-integrated-01/image/bin/java",
+        "-ea",
+        "--add-exports",
+        "jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED",
+        "--add-exports",
+        "jdk.compiler/com.sun.tools.javac.main=ALL-UNNAMED",
+        "--add-exports",
+        "jdk.compiler/com.sun.tools.javac.m3=ALL-UNNAMED",
+        "--add-exports",
+        "jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED",
+        "--add-opens",
+        "jdk.compiler/com.sun.tools.javac.m3=ALL-UNNAMED",
+        "-cp",
+        "/tmp/m3-parser-refinement-20261019/emitted-integrated-01/test-classes",
+        "M3ComputeConstantFactsTest"
+      ],
+      "cwd": "/tmp/m3-parser-refinement-20261019/emitted-integrated-01",
+      "exit_code": 0,
+      "expect_failure": false,
+      "finished": "2026-10-19T13:06:42.586855+00:00",
+      "label": "M3ComputeConstantFactsTest",
+      "log": "/tmp/m3-parser-refinement-20261019/emitted-integrated-01/logs/14-M3ComputeConstantFactsTest.log",
+      "log_record": {
+        "mode": "0o644",
+        "sha256": "a1f8d134c308daf759ce7ad23201afb118dfed0de95fb87a16a8c8c870bc739a",
+        "size": 68,
+        "type": "file"
+      },
+      "started": "2026-10-19T13:06:36.786715+00:00"
+    },
+    {
+      "argv": [
+        "/tmp/m3-parser-refinement-20261019/emitted-integrated-01/image/bin/java",
+        "-ea",
+        "--add-exports",
+        "jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED",
+        "--add-exports",
+        "jdk.compiler/com.sun.tools.javac.main=ALL-UNNAMED",
+        "--add-exports",
+        "jdk.compiler/com.sun.tools.javac.m3=ALL-UNNAMED",
+        "--add-exports",
+        "jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED",
+        "--add-opens",
+        "jdk.compiler/com.sun.tools.javac.m3=ALL-UNNAMED",
+        "-cp",
+        "/tmp/m3-parser-refinement-20261019/emitted-integrated-01/test-classes",
+        "M3PrimitiveFoldedImageTest"
+      ],
+      "cwd": "/tmp/m3-parser-refinement-20261019/emitted-integrated-01",
+      "exit_code": 0,
+      "expect_failure": false,
+      "finished": "2026-10-19T13:06:57.105997+00:00",
+      "label": "M3PrimitiveFoldedImageTest",
+      "log": "/tmp/m3-parser-refinement-20261019/emitted-integrated-01/logs/15-M3PrimitiveFoldedImageTest.log",
+      "log_record": {
+        "mode": "0o644",
+        "sha256": "7ad9c2252fe4434f7034fc9a7c2882da75681cdb1a867634dff0723729247eb8",
+        "size": 764,
+        "type": "file"
+      },
+      "started": "2026-10-19T13:06:42.587340+00:00"
+    },
+    {
+      "argv": [
+        "/tmp/m3-parser-refinement-20261019/emitted-integrated-01/image/bin/java",
+        "-ea",
+        "-Dm3.parser.test.work=/tmp/m3-parser-refinement-20261019/emitted-integrated-01/work-M3ParserFrameworkContract",
+        "--add-modules",
+        "jdk.m3.parser",
+        "-cp",
+        "/tmp/m3-parser-refinement-20261019/emitted-ordered/test-classes",
+        "jdk.m3.parser.test.M3ParserFrameworkContract"
+      ],
+      "cwd": "/tmp/m3-parser-refinement-20261019/emitted-integrated-01",
+      "exit_code": 0,
+      "expect_failure": false,
+      "finished": "2026-10-19T13:07:04.135611+00:00",
+      "label": "M3ParserFrameworkContract",
+      "log": "/tmp/m3-parser-refinement-20261019/emitted-integrated-01/logs/16-M3ParserFrameworkContract.log",
+      "log_record": {
+        "mode": "0o644",
+        "sha256": "603ef93975d7940dc4d94029ef8965e37a20b00af0af28fe73d2c46d4e67f7a2",
+        "size": 36,
+        "type": "file"
+      },
+      "started": "2026-10-19T13:06:57.107384+00:00"
+    },
+    {
+      "argv": [
+        "/tmp/m3-parser-refinement-20261019/emitted-integrated-01/image/bin/java",
+        "-ea",
+        "-Dm3.parser.test.work=/tmp/m3-parser-refinement-20261019/emitted-integrated-01/work-M3JavacParserContract",
+        "--add-modules",
+        "jdk.m3.parser",
+        "-cp",
+        "/tmp/m3-parser-refinement-20261019/emitted-ordered/test-classes",
+        "jdk.m3.parser.test.M3JavacParserContract"
+      ],
+      "cwd": "/tmp/m3-parser-refinement-20261019/emitted-integrated-01",
+      "exit_code": 0,
+      "expect_failure": false,
+      "finished": "2026-10-19T13:07:11.907532+00:00",
+      "label": "M3JavacParserContract",
+      "log": "/tmp/m3-parser-refinement-20261019/emitted-integrated-01/logs/17-M3JavacParserContract.log",
+      "log_record": {
+        "mode": "0o644",
+        "sha256": "83059451fd17946c27e1bd4d3c504bc6c74b71938a5af9d6ce2f4737df9c08e7",
+        "size": 33,
+        "type": "file"
+      },
+      "started": "2026-10-19T13:07:04.136358+00:00"
+    },
+    {
+      "argv": [
+        "/tmp/m3-parser-refinement-20261019/emitted-integrated-01/image/bin/java",
+        "-ea",
+        "-Dm3.parser.test.work=/tmp/m3-parser-refinement-20261019/emitted-integrated-01/work-M3ParserImageSmoke",
+        "--add-modules",
+        "jdk.m3.parser",
+        "-cp",
+        "/tmp/m3-parser-refinement-20261019/emitted-ordered/test-classes",
+        "jdk.m3.parser.test.M3ParserImageSmoke"
+      ],
+      "cwd": "/tmp/m3-parser-refinement-20261019/emitted-integrated-01",
+      "exit_code": 0,
+      "expect_failure": false,
+      "finished": "2026-10-19T13:07:16.219155+00:00",
+      "label": "M3ParserImageSmoke",
+      "log": "/tmp/m3-parser-refinement-20261019/emitted-integrated-01/logs/18-M3ParserImageSmoke.log",
+      "log_record": {
+        "mode": "0o644",
+        "sha256": "df8c5ff7e53750d37d5de36351d0fd6b6ec81d0e48eb67841cfae8db5e9fda61",
+        "size": 165,
+        "type": "file"
+      },
+      "started": "2026-10-19T13:07:11.908282+00:00"
+    },
+    {
+      "argv": [
+        "/workspace/scratch/fed6767966ad/M3jdk21/build/m3-convergence-20261019/jdk/bin/java",
+        "-Xint",
+        "-ea",
+        "-cp",
+        "/tmp/m3-parser-refinement-20261019/emitted-integrated-01/test-classes",
+        "M3ProjectionCacheResourceProbe"
+      ],
+      "cwd": "/tmp/m3-parser-refinement-20261019/emitted-integrated-01",
+      "exit_code": 0,
+      "expect_failure": false,
+      "finished": "2026-10-19T13:07:33.275139+00:00",
+      "label": "original-cache-allocation",
+      "log": "/tmp/m3-parser-refinement-20261019/emitted-integrated-01/logs/19-original-cache-allocation.log",
+      "log_record": {
+        "mode": "0o644",
+        "sha256": "f7cbaa0bee25406a7e9f2e27c26e50fc2445bc6329053732fe7f1c9ec1f1386c",
+        "size": 924,
+        "type": "file"
+      },
+      "started": "2026-10-19T13:07:16.219669+00:00"
+    },
+    {
+      "argv": [
+        "/tmp/m3-parser-refinement-20261019/emitted-integrated-01/image/bin/java",
+        "-Xint",
+        "-ea",
+        "-cp",
+        "/tmp/m3-parser-refinement-20261019/emitted-integrated-01/test-classes",
+        "M3ProjectionCacheResourceProbe"
+      ],
+      "cwd": "/tmp/m3-parser-refinement-20261019/emitted-integrated-01",
+      "exit_code": 0,
+      "expect_failure": false,
+      "finished": "2026-10-19T13:07:41.208459+00:00",
+      "label": "emitted-cache-allocation",
+      "log": "/tmp/m3-parser-refinement-20261019/emitted-integrated-01/logs/20-emitted-cache-allocation.log",
+      "log_record": {
+        "mode": "0o644",
+        "sha256": "b253383b5a16878c451fb9bb04bd396aa31b57f9ce946acf637aca576adb0173",
+        "size": 922,
+        "type": "file"
+      },
+      "started": "2026-10-19T13:07:33.275602+00:00"
+    }
+  ],
+  "compiler_build_tool": "/tmp/m3-collections-tools-20261019/jdk-21.0.12.1+1",
+  "compiler_source_witness": {
+    "src/jdk.compiler/share/classes/com/sun/source/util/M3AST.java": {
+      "candidate_sha256": "0c451956dbaa3cffcdd5e05705501c192b913048a7afd7562982aef584c9d37a",
+      "source_build_sha256": "0c451956dbaa3cffcdd5e05705501c192b913048a7afd7562982aef584c9d37a"
+    },
+    "src/jdk.compiler/share/classes/com/sun/tools/javac/m3/M3ASTPC.java": {
+      "candidate_sha256": "e337b44516d2fe8b2ce31e06051b15653e510f155cff2a10df7f9b0e36981808",
+      "source_build_sha256": "3e43390b9d9df94da9943b101c809f1bdc4c1039e825976b2cda72acb8c56b28"
+    },
+    "src/jdk.compiler/share/classes/com/sun/tools/javac/m3/M3PrimitiveImageCompiler.java": {
+      "candidate_sha256": "5827f24f34317707564be6ca031ecb6ef69958b66ca69a42a787080ef6ccb006",
+      "source_build_sha256": "5827f24f34317707564be6ca031ecb6ef69958b66ca69a42a787080ef6ccb006"
+    },
+    "src/jdk.compiler/share/classes/com/sun/tools/javac/main/JavaCompiler.java": {
+      "candidate_sha256": "129e8c19ef328185c45465b9c8bf9baee43bb24be54842b69833c52e3e6f3dcb",
+      "source_build_sha256": "129e8c19ef328185c45465b9c8bf9baee43bb24be54842b69833c52e3e6f3dcb"
+    },
+    "src/jdk.compiler/share/classes/module-info.java": {
+      "candidate_sha256": "ae52d1734570fee7404aeb68b65ef86ea23ad322b72ff0b137c9039c71aafb09",
+      "source_build_sha256": "ae52d1734570fee7404aeb68b65ef86ea23ad322b72ff0b137c9039c71aafb09"
+    }
+  },
+  "consumer_sources": {
+    "/workspace/scratch/7ea994fb52d9/candidates/parser/proof-src/M3ProjectionCacheResourceProbe.java": {
+      "mode": "0o644",
+      "sha256": "21725e2c1992e1a60c174f1fa39459fa0cc8db246bca1ea08970b1467931b294",
+      "size": 4736,
+      "type": "file"
+    },
+    "/workspace/scratch/7ea994fb52d9/repos/M3jdk21/test/langtools/tools/javac/m3/M3ASTPluginSelectionTest.java": {
+      "mode": "0o644",
+      "sha256": "34efbf105a3a3c7f37a6d67d11e480abd7c4ef84bef1992892613c94b28625b7",
+      "size": 12148,
+      "type": "file"
+    },
+    "/workspace/scratch/7ea994fb52d9/repos/M3jdk21/test/langtools/tools/javac/m3/M3ASTProjectionStateTest.java": {
+      "mode": "0o644",
+      "sha256": "c2a129e99790ce0abb8d82a852ae8962883d674e40dd252ac57c637a33e68537",
+      "size": 7429,
+      "type": "file"
+    },
+    "/workspace/scratch/7ea994fb52d9/repos/M3jdk21/test/langtools/tools/javac/m3/M3ASTSharedFrontendTest.java": {
+      "mode": "0o644",
+      "sha256": "47349ef82633f724f3ca694521250048ba70486b094b069fc51c13b5e64978a5",
+      "size": 21030,
+      "type": "file"
+    },
+    "/workspace/scratch/7ea994fb52d9/repos/M3jdk21/test/langtools/tools/javac/m3/M3ASTSourceSealTest.java": {
+      "mode": "0o644",
+      "sha256": "1b3423999ac2644f17ba6bc743f3873f4130846acc4e346518e16958606e5e1a",
+      "size": 16219,
+      "type": "file"
+    },
+    "/workspace/scratch/7ea994fb52d9/repos/M3jdk21/test/langtools/tools/javac/m3/M3ComputeConstantFactsTest.java": {
+      "mode": "0o644",
+      "sha256": "a5e90e643156c3f26713e2caa28e63f78735ca7b7ab4f02398172ee0ea631915",
+      "size": 5958,
+      "type": "file"
+    },
+    "/workspace/scratch/7ea994fb52d9/repos/M3jdk21/test/langtools/tools/javac/m3/M3PrimitiveFoldedImageTest.java": {
+      "mode": "0o644",
+      "sha256": "b531ced33b53246848fb4d47d8aa269e6020ba9e1aff80ef0dafbb7c855fb0fb",
+      "size": 11694,
+      "type": "file"
+    }
+  },
+  "emitted_sources": [
+    {
+      "after_sha256": "b5c439656c2b8028d482675727d1e4cb1dd6f9c43b35cf6ffa2d8683048fba6a",
+      "before_sha256": "5851f9fc09cb079818fe2224249129688e7637bd562f77cb016cdc8c32c868ad",
+      "path": "m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3File.java",
+      "recipe": "com.synexia.m3.ParserOwnerRefinements20261019",
+      "source_kind": "JAVA_LST"
+    },
+    {
+      "after_sha256": "6743e408798f7ddef9641f6d7957af8e3a2112dd5fe8a5b650454f5876fa6250",
+      "before_sha256": "64a255aa080e9197f16dac5112609592b7ce015379a8673a8dcc219529e5356b",
+      "path": "m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3JavacParser.java",
+      "recipe": "com.synexia.m3.ParserOwnerRefinements20261019",
+      "source_kind": "JAVA_LST"
+    },
+    {
+      "after_sha256": "6d225afc9ce50c1da5a914b92de3a977a1eee42f3ee8fd289017b5ff22c19ae0",
+      "before_sha256": "d1c19496b30a94a595818c3f7b8fc07c460ccb7ea3bb3fb382b445787c2bbadc",
+      "path": "m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3JavacTree.java",
+      "recipe": "com.synexia.m3.ParserOwnerRefinements20261019",
+      "source_kind": "JAVA_LST"
+    },
+    {
+      "after_sha256": "7e3d729cb471b52d72cf02499ed92c7b6ca5e072308f8ed70fb430eb44f6da4c",
+      "before_sha256": "94e70622b392e6f82eeeb4edff08279abaec0d086c683cbe55b6ed052531160b",
+      "path": "m3/tooling/module-packs/parser/src/test/java/jdk/m3/parser/test/M3JavacParserContract.java",
+      "recipe": "com.synexia.m3.ParserOwnerRefinements20261019",
+      "source_kind": "JAVA_LST"
+    },
+    {
+      "after_sha256": "deb08c3dbc95b65a72ad495e27f45c550f4770c461520d8a4a64f7b2f33daa3b",
+      "before_sha256": "e50633969f5fbea9bb425ad5623347beeaf9adc2f44524a5ec2b14773b077ce5",
+      "path": "m3/tooling/module-packs/parser/src/test/java/jdk/m3/parser/test/M3ParserFrameworkContract.java",
+      "recipe": "com.synexia.m3.ParserOwnerRefinements20261019",
+      "source_kind": "JAVA_LST"
+    },
+    {
+      "after_sha256": "020c2cc5076c443d26c6f0c8555076e2dad7516c3a975cce3a1d301b1e4ceb12",
+      "before_sha256": "ABSENT",
+      "path": "m3/tooling/module-packs/parser/src/test/java/jdk/m3/parser/test/M3ParserResourceProbe.java",
+      "recipe": "com.synexia.m3.ParserOwnerRefinements20261019",
+      "source_kind": "JAVA_LST"
+    },
+    {
+      "after_sha256": "e337b44516d2fe8b2ce31e06051b15653e510f155cff2a10df7f9b0e36981808",
+      "before_sha256": "3e43390b9d9df94da9943b101c809f1bdc4c1039e825976b2cda72acb8c56b28",
+      "path": "src/jdk.compiler/share/classes/com/sun/tools/javac/m3/M3ASTPC.java",
+      "recipe": "com.synexia.m3.ParserOwnerRefinements20261019",
+      "source_kind": "JAVA_LST"
+    },
+    {
+      "after_sha256": "c2a129e99790ce0abb8d82a852ae8962883d674e40dd252ac57c637a33e68537",
+      "before_sha256": "ABSENT",
+      "path": "test/langtools/tools/javac/m3/M3ASTProjectionStateTest.java",
+      "recipe": "com.synexia.m3.ParserOwnerRefinements20261019",
+      "source_kind": "JAVA_LST"
+    },
+    {
+      "after_sha256": "9345c88482b943b26d67490f9358cfd3d7a0e18bd744657b2bf6d223d2391c0b",
+      "before_sha256": "a7a4e6eb4bde9cd9e111d9cb22e91912f044612db085f76724a691fd441fce16",
+      "path": ".github/workflows/m3-parser-jmod-20261018.yml",
+      "recipe": "com.synexia.m3.ParserOwnerRefinements20261019",
+      "source_kind": "TEXT_EXACT"
+    },
+    {
+      "after_sha256": "d1e33939ce505a1237f9867da234d4422d34f8f7716b535081788f7b554eb7e3",
+      "before_sha256": "47e1629c84f31f403e99c4b53c6c605702ca7807193196254b37adf9265a42c6",
+      "path": "m3/tooling/module-packs/parser/build.py",
+      "recipe": "com.synexia.m3.ParserOwnerRefinements20261019",
+      "source_kind": "TEXT_EXACT"
+    },
+    {
+      "after_sha256": "5e8c84e37e5facc6df5a47624ded1e0a2d96910f17ee4dbeddf83406723bf8a9",
+      "before_sha256": "05952a2bfce357b72b25fdd5dba5f570ff5ae3ee29425773e9882b8427e0ab10",
+      "path": "m3/tooling/shared-frontend/algorithm-catalogue.tsv",
+      "recipe": "com.synexia.m3.ParserOwnerRefinements20261019",
+      "source_kind": "TEXT_EXACT"
+    }
+  ],
+  "image": "/tmp/m3-parser-refinement-20261019/emitted-integrated-01/image",
+  "input_jmods": {
+    "java.base.jmod": {
+      "mode": "0o644",
+      "sha256": "62b9f7e7d263f0d98bba7203327be13a7c55f66f18e1d14159809ac8a77e97c6",
+      "size": 255826608,
+      "type": "file"
+    },
+    "java.compiler.jmod": {
+      "mode": "0o644",
+      "sha256": "803dabc6f27edd8dbd77e080cfcc7359e75020df7aa8febf2e622dcf3a0f96b3",
+      "size": 137683,
+      "type": "file"
+    },
+    "java.datatransfer.jmod": {
+      "mode": "0o644",
+      "sha256": "898008001d99fc1f8d17915ce5dc16fa59933d20b0da2adad696edecfe296526",
+      "size": 62756,
+      "type": "file"
+    },
+    "java.desktop.jmod": {
+      "mode": "0o644",
+      "sha256": "b4147593c1c9df98e2b8065a84b4338d4b4eff07e7ec6382733d5902633f132d",
+      "size": 14839977,
+      "type": "file"
+    },
+    "java.instrument.jmod": {
+      "mode": "0o644",
+      "sha256": "b149b385f7299847edf18ad1d8a90b0af2f38c105969644a1388537e6f03955b",
+      "size": 54478,
+      "type": "file"
+    },
+    "java.logging.jmod": {
+      "mode": "0o644",
+      "sha256": "93a45e49568201bab719d1cca4574aa6e032a5bd530a220a14a44db0e79e13c6",
+      "size": 137045,
+      "type": "file"
+    },
+    "java.management.jmod": {
+      "mode": "0o644",
+      "sha256": "b2343e986dfb94ded26fdeaa741be7e3313f591dbc8135eb903c407fb8e1643f",
+      "size": 948276,
+      "type": "file"
+    },
+    "java.management.rmi.jmod": {
+      "mode": "0o644",
+      "sha256": "2b9219697491107c9fb0971c3634fffb5a8be49ec46010ecb8b215463ba87bda",
+      "size": 105899,
+      "type": "file"
+    },
+    "java.naming.jmod": {
+      "mode": "0o644",
+      "sha256": "8c7d758ff07ba7dc902b6ffa5eca1da6fd42cdaac795093d9890a8a8e8708248",
+      "size": 508119,
+      "type": "file"
+    },
+    "java.net.http.jmod": {
+      "mode": "0o644",
+      "sha256": "e931a5b03ef71f308f48fb0cbfee47482099668c2c14a77eb020d72ba1fc5bbc",
+      "size": 818279,
+      "type": "file"
+    },
+    "java.prefs.jmod": {
+      "mode": "0o644",
+      "sha256": "01d0ad8732007ac73b1058eaa210b4f897f3a61af7e425615126a1b8fd564e8c",
+      "size": 73740,
+      "type": "file"
+    },
+    "java.rmi.jmod": {
+      "mode": "0o644",
+      "sha256": "3abb1f101dc1fd5772d109825c5f5d3ac15e80d5b109b9c6b1e314574713ed53",
+      "size": 285113,
+      "type": "file"
+    },
+    "java.scripting.jmod": {
+      "mode": "0o644",
+      "sha256": "ca7d4a034617ff2b44c6e7db316123d781b353e44954ef6403d6d9c7c7781a3f",
+      "size": 52045,
+      "type": "file"
+    },
+    "java.se.jmod": {
+      "mode": "0o644",
+      "sha256": "c9df958c37574071a189f60ef8c2f3e2825d56763febf2918bc06d23e8e28d2a",
+      "size": 10902,
+      "type": "file"
+    },
+    "java.security.jgss.jmod": {
+      "mode": "0o644",
+      "sha256": "6b6dee26b591c959e7b7134a3b63f3585806eb9439d28abc9ac5e2d45defc391",
+      "size": 625981,
+      "type": "file"
+    },
+    "java.security.sasl.jmod": {
+      "mode": "0o644",
+      "sha256": "b641faf2c625a819f0fdf5c3f2ee1191c8fb830279cfe12ebbd2e426186e8901",
+      "size": 93484,
+      "type": "file"
+    },
+    "java.smartcardio.jmod": {
+      "mode": "0o644",
+      "sha256": "fd6c1a7ac178cc181e76e4556f987488d3944c61dc03f5b4fa9e2fd510302ca7",
+      "size": 66072,
+      "type": "file"
+    },
+    "java.sql.jmod": {
+      "mode": "0o644",
+      "sha256": "17799f3fb451c0aef66f310d06df392049affbc3cfb1f70dc7927ac7fab32cf7",
+      "size": 87912,
+      "type": "file"
+    },
+    "java.sql.rowset.jmod": {
+      "mode": "0o644",
+      "sha256": "3ef919030827ce8753ce996f1ce4f27baa2e0171ef3548a1bc6690f83c0c8c2d",
+      "size": 238771,
+      "type": "file"
+    },
+    "java.transaction.xa.jmod": {
+      "mode": "0o644",
+      "sha256": "01a0a181b15d2d0803b9e6607c6385ddda5e5527aa72429ead46e50863f44a24",
+      "size": 12733,
+      "type": "file"
+    },
+    "java.xml.crypto.jmod": {
+      "mode": "0o644",
+      "sha256": "a0285faf24d35f73e797585e456d40547cd109046092b9836412a072b168e609",
+      "size": 718629,
+      "type": "file"
+    },
+    "java.xml.jmod": {
+      "mode": "0o644",
+      "sha256": "c465c9c6c226bf1ceef2797ff477b48802834e4f2b37169b40f8f7c5ac404fa9",
+      "size": 5524167,
+      "type": "file"
+    },
+    "jdk.accessibility.jmod": {
+      "mode": "0o644",
+      "sha256": "35b26b1fc5a2cfd0fb6dab06517bbde47ca564ac6e7bf0e429b461d2e842648f",
+      "size": 60964,
+      "type": "file"
+    },
+    "jdk.attach.jmod": {
+      "mode": "0o644",
+      "sha256": "2b275a8856636420c3e5349e41a764b4ed06b431d704b967b6d8bad6b387e9b2",
+      "size": 41008,
+      "type": "file"
+    },
+    "jdk.charsets.jmod": {
+      "mode": "0o644",
+      "sha256": "9b365c0bc566f9dd0b3cdea83f5adf2780983f1edb6d1be2a3dd5a14e5c05199",
+      "size": 1276140,
+      "type": "file"
+    },
+    "jdk.compiler.jmod": {
+      "mode": "0o644",
+      "sha256": "231e224315fc0fb5ad6441204db2e6c8b7717f871dc3f454affe210577b2da6b",
+      "size": 11334144,
+      "type": "file"
+    },
+    "jdk.crypto.cryptoki.jmod": {
+      "mode": "0o644",
+      "sha256": "c7128af746cb6c6e7bb5504da947a9aded77aefd19f8165adf1e311d2acf7e80",
+      "size": 441771,
+      "type": "file"
+    },
+    "jdk.crypto.ec.jmod": {
+      "mode": "0o644",
+      "sha256": "bbe2542e03d28d3448ffa4df70e6da8cf750842b658cddc3f053360423603fc4",
+      "size": 153176,
+      "type": "file"
+    },
+    "jdk.dynalink.jmod": {
+      "mode": "0o644",
+      "sha256": "6158ba4c992665ff1b100085c8857a1eec6f568cb8cce679888617d48d0d9874",
+      "size": 174145,
+      "type": "file"
+    },
+    "jdk.editpad.jmod": {
+      "mode": "0o644",
+      "sha256": "618e073e9b06be4c83e8c5026b2094c713c0a563f92c8a4a73c34bb331260bad",
+      "size": 16549,
+      "type": "file"
+    },
+    "jdk.hotspot.agent.jmod": {
+      "mode": "0o644",
+      "sha256": "6df79049feeecb7078a6df338001a7296433f06e327623f8dbbe5d5a41ea0a31",
+      "size": 2410856,
+      "type": "file"
+    },
+    "jdk.httpserver.jmod": {
+      "mode": "0o644",
+      "sha256": "7cd39ebdae6d66cf332e48bc02d143f829d525c85e88193334a07964c807d5a4",
+      "size": 171141,
+      "type": "file"
+    },
+    "jdk.incubator.vector.jmod": {
+      "mode": "0o644",
+      "sha256": "b2fcf395d031062a07b42c371dbc12c96dd7daea34a852a1ee510646350673e8",
+      "size": 1280153,
+      "type": "file"
+    },
+    "jdk.internal.ed.jmod": {
+      "mode": "0o644",
+      "sha256": "35cc1d006ef9faf59dee62f0f8a8a8c3ef1b6944ba4d3a1e1c4231fd82e8bb43",
+      "size": 16477,
+      "type": "file"
+    },
+    "jdk.internal.jvmstat.jmod": {
+      "mode": "0o644",
+      "sha256": "17adc2e92ea9a41b8f57a7ceaf7614ef556ead8ce552dae24e9ce35eb0d49927",
+      "size": 100876,
+      "type": "file"
+    },
+    "jdk.internal.le.jmod": {
+      "mode": "0o644",
+      "sha256": "e5e844fe4d2d9a5f273c727dd7f5c6a91f51fde70d4833379fc083c6c4ad763d",
+      "size": 549008,
+      "type": "file"
+    },
+    "jdk.internal.opt.jmod": {
+      "mode": "0o644",
+      "sha256": "bfdbfd92585e6f5c39d55163579f6a796f8e38a9abf75a5ac6e13190834439ef",
+      "size": 100433,
+      "type": "file"
+    },
+    "jdk.internal.vm.ci.jmod": {
+      "mode": "0o644",
+      "sha256": "045a79fd9b3ccca1e090bf0e7c7529a33f00ad4710a5fc40f88670f9d43ed47f",
+      "size": 526952,
+      "type": "file"
+    },
+    "jdk.internal.vm.compiler.jmod": {
+      "mode": "0o644",
+      "sha256": "4f92cc33f1b9e81e317b26ae91799cf0e5edc65adbae54ffe33d6e44561524ab",
+      "size": 10682,
+      "type": "file"
+    },
+    "jdk.internal.vm.compiler.management.jmod": {
+      "mode": "0o644",
+      "sha256": "a57b8d0a484ec981bfb4c0826c316349c7490f4bb04f8bc529020c7108526d73",
+      "size": 10687,
+      "type": "file"
+    },
+    "jdk.jartool.jmod": {
+      "mode": "0o644",
+      "sha256": "b1c8443ae79a7a7e86a7ae3961cb4f12fa0623370987e3db7616d38648968419",
+      "size": 299733,
+      "type": "file"
+    },
+    "jdk.javadoc.jmod": {
+      "mode": "0o644",
+      "sha256": "90dbe87e54cac3c5f357d4432de3c257115f931dde713c58d21a4579fa42bb79",
+      "size": 1714509,
+      "type": "file"
+    },
+    "jdk.jcmd.jmod": {
+      "mode": "0o644",
+      "sha256": "de98331476e61e0f359bfc034128216e2cb8a47583e53c27d653389365f01c53",
+      "size": 151444,
+      "type": "file"
+    },
+    "jdk.jconsole.jmod": {
+      "mode": "0o644",
+      "sha256": "18c0d2662d45dcb1b6767006cb8d538efcad230f8829919edd33e9a74159f7ab",
+      "size": 505993,
+      "type": "file"
+    },
+    "jdk.jdeps.jmod": {
+      "mode": "0o644",
+      "sha256": "620692095118c50f3d8a1c13473b16b8ed7021210acbbd24bdd6ad711bd551ee",
+      "size": 803380,
+      "type": "file"
+    },
+    "jdk.jdi.jmod": {
+      "mode": "0o644",
+      "sha256": "0d02bae4236ceb8e17a51f221c28732d0ce1c7feab6107355a78edcfdea41800",
+      "size": 918584,
+      "type": "file"
+    },
+    "jdk.jdwp.agent.jmod": {
+      "mode": "0o644",
+      "sha256": "4dbaaed33556b020461b4275da62ac92716ab4201043ba0f5ac3370ec87ffb11",
+      "size": 170891,
+      "type": "file"
+    },
+    "jdk.jfr.jmod": {
+      "mode": "0o644",
+      "sha256": "baaa7d8c6b334a580da1612183934594147145e2c70f943e9aa4598076e15191",
+      "size": 926634,
+      "type": "file"
+    },
+    "jdk.jlink.jmod": {
+      "mode": "0o644",
+      "sha256": "63cebe0bd9183020a313ee6beed988c9e7c47c254f4112c76e00843523c03bd6",
+      "size": 482471,
+      "type": "file"
+    },
+    "jdk.jpackage.jmod": {
+      "mode": "0o644",
+      "sha256": "85efaa5630a0a3d5ce2d5f0275d4acff0c24ab78776d38a704a1918bc1b08411",
+      "size": 914228,
+      "type": "file"
+    },
+    "jdk.jshell.jmod": {
+      "mode": "0o644",
+      "sha256": "1bbc41dfed011d943ee7f2a4b3bb85abeedb65c8e2881790a3bc7c6fd0398ec7",
+      "size": 836242,
+      "type": "file"
+    },
+    "jdk.jsobject.jmod": {
+      "mode": "0o644",
+      "sha256": "30509374e986e361c3a64db2a023e8fd39834788b1938594c3b34ca3b2c665e2",
+      "size": 11795,
+      "type": "file"
+    },
+    "jdk.jstatd.jmod": {
+      "mode": "0o644",
+      "sha256": "19665b4657a6565fabf61fab27c465a4d8b4ddc9e777a44eb4a73dabc47403c4",
+      "size": 39868,
+      "type": "file"
+    },
+    "jdk.localedata.jmod": {
+      "mode": "0o644",
+      "sha256": "cccde56d9ef011caf72124f155cbe02f0a9eadebad4afb746045fe385cba5767",
+      "size": 12209630,
+      "type": "file"
+    },
+    "jdk.management.agent.jmod": {
+      "mode": "0o644",
+      "sha256": "04aeb649f10be8ffc976834dee0680d6c23c32cd2a8e90f15d3b7467680a4740",
+      "size": 102124,
+      "type": "file"
+    },
+    "jdk.management.jfr.jmod": {
+      "mode": "0o644",
+      "sha256": "46b9a4cbd96737a51f167b2bc2623537fee168c64acc92ad4516ae62d0a02d59",
+      "size": 65826,
+      "type": "file"
+    },
+    "jdk.management.jmod": {
+      "mode": "0o644",
+      "sha256": "31e34b688500ea5022d51b5ed596a492789f6c919bc0c5646f46c570a841b9c6",
+      "size": 85620,
+      "type": "file"
+    },
+    "jdk.naming.dns.jmod": {
+      "mode": "0o644",
+      "sha256": "3a257d8c65c42a05b9fdb35052628547b0c6053cec655c040e8d3afdce75d809",
+      "size": 74819,
+      "type": "file"
+    },
+    "jdk.naming.rmi.jmod": {
+      "mode": "0o644",
+      "sha256": "b20fbf794bdf4444e6eac7bacd42263a8befafa9797b8c78f8d1298a6baf852b",
+      "size": 33005,
+      "type": "file"
+    },
+    "jdk.net.jmod": {
+      "mode": "0o644",
+      "sha256": "09dbf311f8e192b85b9b8ecc02b09656479d4288ab30a65f8d95cb5889456c7e",
+      "size": 34587,
+      "type": "file"
+    },
+    "jdk.nio.mapmode.jmod": {
+      "mode": "0o644",
+      "sha256": "39c2515f62b7fcd0b5d9e3735362325173b1708598afbc66c2a35c143a055e61",
+      "size": 11252,
+      "type": "file"
+    },
+    "jdk.random.jmod": {
+      "mode": "0o644",
+      "sha256": "7ea00f127d67389de2242bfc7d843d2de537ac9fdfdc4c07225fa01209914ee5",
+      "size": 30921,
+      "type": "file"
+    },
+    "jdk.sctp.jmod": {
+      "mode": "0o644",
+      "sha256": "5fa8ae7a69d298473617ab09e64220444e17b69d89a43769279fadf397faa221",
+      "size": 98900,
+      "type": "file"
+    },
+    "jdk.security.auth.jmod": {
+      "mode": "0o644",
+      "sha256": "65c261bab895f8437ac3753c6e9bb40177161ab898e079a3161b064fde5f587e",
+      "size": 77752,
+      "type": "file"
+    },
+    "jdk.security.jgss.jmod": {
+      "mode": "0o644",
+      "sha256": "fca834f32af6ac06584ee78ca0aba7b3bef7c27f8f81199fe5960e7a01dade04",
+      "size": 34665,
+      "type": "file"
+    },
+    "jdk.unsupported.desktop.jmod": {
+      "mode": "0o644",
+      "sha256": "c11e18066b100cd2926e0c77899462f7de23a8ed63a2947c123452b2b87dfe87",
+      "size": 23258,
+      "type": "file"
+    },
+    "jdk.unsupported.jmod": {
+      "mode": "0o644",
+      "sha256": "ca4e07f2a44f489c1ecf03279c2ba22f460f41680c9792f591dd30ba8747d339",
+      "size": 26924,
+      "type": "file"
+    },
+    "jdk.xml.dom.jmod": {
+      "mode": "0o644",
+      "sha256": "5fffed5709f4083a0d92f481cc11a9df174e89c7c101fc8328ea4e67d6e8e3d1",
+      "size": 51451,
+      "type": "file"
+    },
+    "jdk.zipfs.jmod": {
+      "mode": "0o644",
+      "sha256": "723f4f0c385ea26ca724d468bafc24d0fe105789fc0225c05fe817a79f784d1b",
+      "size": 119091,
+      "type": "file"
+    }
+  },
+  "linked_modules": {
+    "mode": "0o644",
+    "sha256": "d852163d8569ccfe6887615d0be84b6803cb5f463fc4f2f9e0638daf5a62d84d",
+    "size": 143462454,
+    "type": "file"
+  },
+  "module_hashes": {
+    "algorithm": "SHA-256",
+    "hashes": {
+      "java.datatransfer": "fb4612dc6c6252a3dfc7f8326ca9b6260692012e5b1b9e47226ba501295a2b02",
+      "java.desktop": "8a3f72d52b58ed8dbda9ffa49e2f1d65bc38b70d25896bd8ae9d5b670b45d1f5",
+      "java.instrument": "8968734771145083cd120e2a433504547752af7edb3963c9c7a7c91f74e746a8",
+      "java.logging": "c3be093d948ac131875cdcc24ed4604107315f4217b4884d66052cead0dedff5",
+      "java.management": "888810d52728825865a2211d31cfc29996f9b1564ba98d293a62959486a6ec07",
+      "java.management.rmi": "222b67c1f2a5d06b5bd2a871593fc24adb4c20f4d5479ca93f39bb19114dc70e",
+      "java.naming": "c466befb4b52067f88e9e981e840fdc3a63cbaa2de0bbc7b52fe70e56e7a8d53",
+      "java.net.http": "bff0f16bb5ceeeeee49fb57cdb8f911ec4d60ad5b092f748fc093a50f363c8e0",
+      "java.prefs": "a6b2336abcc6794ac8fd3d77ce082816244d98701bf1722f8d88f473049d877e",
+      "java.rmi": "495c264cfa3555f99948a106a619318a7cdcf6e4ab65bf21899c0cd8416e5e1a",
+      "java.scripting": "f257d0e2cc6c14222b409b9919533188bdf31272105a24316706f2e0ef6d727d",
+      "java.se": "023f4a8103804f4f3763bdaa78ef095ba303cba8dfc846501e893f5e540093c2",
+      "java.security.jgss": "5fad7cfef6d99e1ebfcec6c911a150bdd0d1df7289ae378a386bfa4fd47a6c2e",
+      "java.security.sasl": "13abd3d54d768ad05a9276d48217d5ccc728bc2e8a5a13d96bc55892e7c40688",
+      "java.smartcardio": "5084cf815f84a3598f7c2e5522ea237d3dcad29948d672300caf1eff36edd8e0",
+      "java.sql": "12afdb2db9d7692c1666d52d444b3da81b3a44332238c6d47dcdd802bbee2e87",
+      "java.sql.rowset": "027902316edeaccfc93b2bd55ba521b00e13da48d82f3d8ebf1e6aa4edd126d0",
+      "java.transaction.xa": "1669b1d0e8308bfca4af3f319c4a9d12e136344083c78b5846af1d3bc947ea97",
+      "java.xml": "8c229df4acd6d5556c3a63027c067a142b7be326134a04a584363ae726779fef",
+      "java.xml.crypto": "06be1e33a40e928dc9668da50ab6b41eecb3506d0df28176f2419d47dd13f7a8",
+      "jdk.accessibility": "ddf81d9cbfea5111b96adc79612cd4b89ab5af6357f96ae783e36e12180204b0",
+      "jdk.attach": "0f122f41d90359672747bf8e7f90a9444f7ddbf89a26ef6d43d0574a205ea712",
+      "jdk.charsets": "7a88d6a18c857dcf3646dbed36e017ff92f3d259765d03d1eea6c4159420b87e",
+      "jdk.compiler": "de2ab6ef8fc964ef55ed961ab44063ed367c281649dc4a4a9e375ad2e8b48830",
+      "jdk.crypto.cryptoki": "f73b106a0b7fd5b196ded6db7229fce2331bb1289c87e031442661bbd244124d",
+      "jdk.crypto.ec": "2088959e33fbf4d5bc5359071da2701b0cdb2f249860c6aef274dc3672b5fd6a",
+      "jdk.dynalink": "e2465bba775e8f499b2bdcad17c9fb04d8311f9026b4e08da54a909a09096c19",
+      "jdk.editpad": "03918f309acb55e7657147afbb4189878031a5c18fd9c113b76130ef187038c9",
+      "jdk.hotspot.agent": "40000e533d789487f57cb2eadcfaf2ce91c8bfa10a7f681bbf459759dbef58e8",
+      "jdk.httpserver": "6e62c4e6e254579f2f5a1269003dca58dc2e32211235146cf220c7d058dc0ca6",
+      "jdk.incubator.vector": "8ff2d36ee585040f399761d64430e644f7cfa5d5e523df96688ec5cae1704664",
+      "jdk.internal.ed": "0c363032108968ff658b583a234226d1633f6c0dcb17ab89ac7f36c92db7841d",
+      "jdk.internal.jvmstat": "f303c7dcafb92a54f0de17ccf366d47e9d8b62e937b7109bd9aef14d991b38f4",
+      "jdk.internal.le": "463dbf6a1ef33c39f0111de519a74d0a63f22a6fa92344dc5f58d92d902e4851",
+      "jdk.internal.opt": "edc7e26157cd8502540d963870f402d7303f31e994847fccf4c0d1fe11598684",
+      "jdk.internal.vm.ci": "63f01b6437963a932b07300a651206b108f72d12edd17803b2a2fc060d4497ee",
+      "jdk.jartool": "81091b16bc7b40e7982646600857e11c52e81687f82c0d5a252bb7c8d6a3d8c3",
+      "jdk.javadoc": "9043a73d2a0443631f357ea2a8cc54d2ed354bc18195c7a883e6ddf45a323c56",
+      "jdk.jcmd": "d9f9301dcbef298ad9278e711efd0f35e59b59546604dde0cd428480e04fdec1",
+      "jdk.jconsole": "8cf97f5d0fd0e5e09e4e9e6fbb2ce8bb3ce48f1f683de902004e68cec41f4b30",
+      "jdk.jdeps": "deb3c518ddd4c4a3a9511218d3e4a38c0fc216ef1c0b74f76e9a670de78d54b2",
+      "jdk.jdi": "f434c36a103fc05dc98864c0d2626211465e563eb3ad91bac6c859f0d96627bc",
+      "jdk.jdwp.agent": "07264a8489d04dcad24c8aa05e329746c0261edba047b4af0e64e6249be0bc76",
+      "jdk.jfr": "6e13f30dbcfbd3565d0b4c410e9d6de5006205bd04597f51ce11c9663bd50de3",
+      "jdk.jlink": "9d9346a2f00a3bce5b2627966a5a34cb29ef45fff40e9e37ab5de3808e93a51e",
+      "jdk.jpackage": "e6893c2e5750744c1dad0d7bb57731e514212cdb2d3693beab95ce08398fa2d9",
+      "jdk.jshell": "f51a1269ab27b9c8a68a30ded5fe721031e0c78ade7a9c68b55f44d525e6767b",
+      "jdk.jsobject": "f5a431568430369dac9b99570eeecbd030ac2382f22260ec48d7ccc04ea3b5e9",
+      "jdk.jstatd": "e53e2f844cff28ceeaa1727ba49804b785905a4ae74e8912d506d42ba1b7715d",
+      "jdk.localedata": "41401915fc7cd257ed1b1e704e6fb63f68a4e81e7ebc05d0ac6eb9d5844f075b",
+      "jdk.management": "3cc0c3657f052786cffea9aaa3a1cada21cae31818f060896d78efcd0240891a",
+      "jdk.management.agent": "ea257e6e44672180d599fddfba3b6cada093c48b7aaa03b3692dd807e6f6afae",
+      "jdk.management.jfr": "be65feb23c56add8d0e6d2290306645bc49f5daa631230fe22fa9faf349368c2",
+      "jdk.naming.dns": "5942ab0874ed767838543129a30e28d84280eaf2f327a480cf38f2474dab541d",
+      "jdk.naming.rmi": "c6b94ca9fd8428fde7ced5fefeb83f27b1374a0e20b6fcb15241212fddc32bef",
+      "jdk.net": "f75592242b34644abd95d501403e167499fba0d5791ad5b98550b0391e94ddeb",
+      "jdk.nio.mapmode": "ec13afe2e876cab36f6f0f76a8f1c42dd0f67615742342a40378080a39cc6101",
+      "jdk.random": "b0325adadcd9b16a10e1072152789064e57adb9474cde54a84cdaae33005dbe1",
+      "jdk.sctp": "6098a853c6e09a3b8a0911b835da1bef78ec99449842c6bd4902881e2b94c132",
+      "jdk.security.auth": "be48bf012538a1f1ede162d38bc9890ffc8522ea0ea2bdc7b232105241b0a672",
+      "jdk.security.jgss": "1b187d0010a365d134672c54d6985d7a9ae6586912d2dcd1ee99c3a7c0f9d6a8",
+      "jdk.unsupported": "b2faa923ea14c2ef553027bf6b74ce339cdf844bbe4f3f10b9843226b7b9f25b",
+      "jdk.unsupported.desktop": "300cb1c2dd15fb712c442d3a4f1d356406db6fbcca8099843f20bb67d510b68c",
+      "jdk.xml.dom": "b8b0e7c7c74f52a4e27dfcdc737ca238abb08ed3e10fe5d09269fab2a027774f",
+      "jdk.zipfs": "9807c5e4968210731678daa26379e42f09e1c068e398aed45ac19ee51d1d1e95"
+    }
+  },
+  "ordered_parser_state": {
+    "mode": "0o644",
+    "sha256": "5f34c32da18f12a37b2adcdc6b42de59baba735533e00cfc35d7052de12a6f51",
+    "size": 586,
+    "type": "file"
+  },
+  "parser_jmod": {
+    "mode": "0o644",
+    "sha256": "11359e469dd483a640f60a89bca687998ba0f5ffeb7ed8b2eb618f8013731355",
+    "size": 85765,
+    "type": "file"
+  },
+  "payload_preservation": {
+    "java.base": {
+      "all_changes_confined_to_owned_classes_and_descriptor": true,
+      "changed_entries": [
+        "classes/module-info.class"
+      ],
+      "new_entry_count": 7869,
+      "original_entry_count": 7869,
+      "unchanged_entry_count": 7868
+    },
+    "jdk.compiler": {
+      "all_changes_confined_to_owned_classes_and_descriptor": true,
+      "changed_entries": [
+        "classes/com/sun/source/util/M3AST$Consumer.class",
+        "classes/com/sun/source/util/M3AST$Phase.class",
+        "classes/com/sun/source/util/M3AST$Projection.class",
+        "classes/com/sun/source/util/M3AST$Source.class",
+        "classes/com/sun/source/util/M3AST$Summary.class",
+        "classes/com/sun/source/util/M3AST.class",
+        "classes/com/sun/tools/javac/m3/M3ASTPC$1.class",
+        "classes/com/sun/tools/javac/m3/M3ASTPC$LiveUnit$Failure.class",
+        "classes/com/sun/tools/javac/m3/M3ASTPC$LiveUnit.class",
+        "classes/com/sun/tools/javac/m3/M3ASTPC$Seal.class",
+        "classes/com/sun/tools/javac/m3/M3ASTPC$Session.class",
+        "classes/com/sun/tools/javac/m3/M3ASTPC$Trace.class",
+        "classes/com/sun/tools/javac/m3/M3ASTPC.class",
+        "classes/com/sun/tools/javac/m3/M3PrimitiveImageCompiler$1.class",
+        "classes/com/sun/tools/javac/m3/M3PrimitiveImageCompiler$2.class",
+        "classes/com/sun/tools/javac/m3/M3PrimitiveImageCompiler$3.class",
+        "classes/com/sun/tools/javac/m3/M3PrimitiveImageCompiler$Entry.class",
+        "classes/com/sun/tools/javac/m3/M3PrimitiveImageCompiler.class",
+        "classes/com/sun/tools/javac/main/JavaCompiler$1.class",
+        "classes/com/sun/tools/javac/main/JavaCompiler$1MethodBodyRemover.class",
+        "classes/com/sun/tools/javac/main/JavaCompiler$1ScanNested.class",
+        "classes/com/sun/tools/javac/main/JavaCompiler$2.class",
+        "classes/com/sun/tools/javac/main/JavaCompiler$CompilePolicy.class",
+        "classes/com/sun/tools/javac/main/JavaCompiler$ImplicitSourcePolicy.class",
+        "classes/com/sun/tools/javac/main/JavaCompiler$InitialFileParser.class",
+        "classes/com/sun/tools/javac/main/JavaCompiler.class"
+      ],
+      "new_entry_count": 1635,
+      "original_entry_count": 1636,
+      "unchanged_entry_count": 1610
+    }
+  },
+  "pending": [
+    "fresh full M3JDK21 source rebuild and full jtreg matrix",
+    "other operating systems/architectures",
+    "controlled throughput benchmarking"
+  ],
+  "reused_descriptor_and_hash_helper": {
+    "mode": "0o644",
+    "sha256": "0bcb4b8deaa5a44437d4a3e576f7dd04b2236e24b7eb86aa6de5ad2d18d8e112",
+    "size": 31632,
+    "type": "file"
+  },
+  "runtime_patch_module": false,
+  "schema": "M3_EMITTED_SOURCE_BUILT_RUNTIME_PROOF_V1",
+  "script": {
+    "mode": "0o644",
+    "sha256": "7af0db9f08707ad9a4b86f778ba8a79a8e8de4635731118cfacdd85ae485c5d0",
+    "size": 13227,
+    "type": "file"
+  },
+  "sdk_execution": {
+    "mode": "0o644",
+    "sha256": "4375c856cb9259bb80f11089592a720fc67355321acb88e5701a06f513c42082",
+    "size": 2742,
+    "type": "file"
+  },
+  "source_build_root": "/workspace/scratch/fed6767966ad/M3jdk21",
+  "source_built_jmods": "/workspace/scratch/fed6767966ad/M3jdk21/build/m3-convergence-20261019/images/jmods",
+  "status": "PASS"
+}

@@ -1,7 +1,8 @@
 /*
  * Copyright 2026 Hitesh Soliwal <hsoliwal@gmail.com>
  * SPDX-License-Identifier: Apache-2.0
- * Optional, read-only peer of SegmentedBitLane28.cardinality(from,to).
+ * Read-only JDK peer of M3BitLane28.cardinality(from,to).
+ * Modified 2026: isolate endpoint masks from interior word counting.
  */
 #include "jdk_internal_mindex_M3BitLane28.h"
 #include <stdint.h>
@@ -71,11 +72,16 @@ Java_jdk_internal_mindex_M3BitLane28_cardinality0(
                     (*env)->DeleteLocalRef(env, region);
                     return 0;
                 }
-                for (jint w = first; w <= last; w++) {
-                    uint64_t word = (uint64_t)words[w - first];
-                    if (w == first) word &= UINT64_MAX << (from & 63);
-                    if (w == last) word &= UINT64_MAX >> (63 - ((end - 1) & 63));
-                    count += population(word);
+                uint64_t first_word = (uint64_t)words[0] & (UINT64_MAX << (from & 63));
+                uint64_t last_mask = UINT64_MAX >> (63 - ((end - 1) & 63));
+                if (first == last) {
+                    count += population(first_word & last_mask);
+                } else {
+                    count += population(first_word);
+                    for (jint w = 1; w < last - first; w++) {
+                        count += population((uint64_t)words[w]);
+                    }
+                    count += population((uint64_t)words[last - first] & last_mask);
                 }
             }
             from = end;

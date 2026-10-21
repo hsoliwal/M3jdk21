@@ -1,0 +1,9 @@
+problem_category	owner_behavior	candidate	comparative_cost	decision	license_provenance	proof_receipt
+8bit-state-matching	M3StateMaskHistogram.countMatching	Existing supersets inclusion-exclusion	2^F <=256 int-array probes	KEEP_AS_BRANCH	First-party M3JDK21 Apache-2.0 unchanged	Exhaustive 65536-mask reference equivalence
+submask-enumeration	same	Exact bucket sum via free-bit subsets	2^U <=256 probes	SELECT_WHEN_U_LT_F	LeetCode 78 subsets / HackerRank bit manipulation category only; no code copied	Exhaustive independent reference
+adaptive-index	Original int[256] exact and supersets lanes	Choose min(F,U) via Integer.bitCount	2^min(F,U) <=16; zero new arrays	SELECT	LeetCode 191 bit counting / GFG submask pattern; independent Java implementation	1048576 local comparisons and product Java21 suite
+full-answer-cache	Histogram query	Precompute 256x256 exact pair counts	~262144 extra bytes + initialization	REJECT_BULK	No source borrowed	Memory budget exceeds needed 2KB original lanes
+jni-per-query	Original native histogram interface	New JNI countMatching method	Call overhead for <=16 array probes	REJECT_DUPLICATE_NATIVE	Retain original C17 m3_state_mask_histogram.c	C blob 89a82a00206d1d486b86a5ce2daa2a6792a48fd1 unchanged
+phys-offset-rank	M3IndexPathMasks / M3IndexMaskCompactor	Existing Java and C17 selectors	Original O(N) path selection & JNI optional	REUSE_NO_CHANGE	First-party M3JDK21 signed physical array/index/mask owner	Source-selected occurrence differential
+source-owner	M3StateMaskHistogram.aligned and indexed	M3 source arrays and compiler snapshots	One histogram capture, many query evaluations	KEEP	No new AST/File/String/collection runtime sidecar	Original model and source unchanged
+filtered-sorted-wrappers	M3FilteredViews/M3CollectionViews	Current live comparator and predicate contracts	No extra predicate callbacks	RETAIN_ORIGINAL	Prior validated Synexia recipes; PR1680 unchanged	No edit to live wrapper owners

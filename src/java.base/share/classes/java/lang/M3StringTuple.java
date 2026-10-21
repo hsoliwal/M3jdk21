@@ -42,26 +42,12 @@ final class M3StringTuple extends M3StringOwner {
     void getChars(int start, int end, char[] destination, int destinationStart) {
         Objects.checkFromToIndex(start, end, length);
         Objects.checkFromIndexSize(destinationStart, end - start, destination.length);
-        int leftLength = left.length();
-        if (end <= leftLength) {
-            left.getChars(start, end, destination, destinationStart);
-            return;
-        }
-        if (start >= leftLength) {
-            right.getChars(start - leftLength, end - leftLength, destination, destinationStart);
-            return;
-        }
-        int leftCount = leftLength - start;
-        left.getChars(start, leftLength, destination, destinationStart);
-        right.getChars(0, end - leftLength, destination, destinationStart + leftCount);
+        // The pool cursor already resolves canonical nested owner paths and exact offsets.
+        M3StringPool.copyCharsFromPath(this, start, end, destination, destinationStart);
     }
 
     @Override
-    void getBytes(
-            int start,
-            int end,
-            byte[] destination,
-            int destinationStart,
+    void getBytes(int start, int end, byte[] destination, int destinationStart,
             byte destinationCoder) {
         Objects.checkFromToIndex(start, end, length);
         int count = end - start;
@@ -69,38 +55,8 @@ final class M3StringTuple extends M3StringOwner {
                 destinationStart << destinationCoder,
                 count << destinationCoder,
                 destination.length);
-        int leftLength = left.length();
-        if (end <= leftLength) {
-            left.owner().getBytes(
-                    left.start() + start,
-                    left.start() + end,
-                    destination,
-                    destinationStart,
-                    destinationCoder);
-            return;
-        }
-        if (start >= leftLength) {
-            right.owner().getBytes(
-                    right.start() + start - leftLength,
-                    right.start() + end - leftLength,
-                    destination,
-                    destinationStart,
-                    destinationCoder);
-            return;
-        }
-        int leftCount = leftLength - start;
-        left.owner().getBytes(
-                left.start() + start,
-                left.end(),
-                destination,
-                destinationStart,
-                destinationCoder);
-        right.owner().getBytes(
-                right.start(),
-                right.start() + end - leftLength,
-                destination,
-                destinationStart + leftCount,
-                destinationCoder);
+        M3StringPool.copyBytesFromPath(
+                this, start, end, destination, destinationStart, destinationCoder);
     }
 
     private static int childHeight(M3String value) {

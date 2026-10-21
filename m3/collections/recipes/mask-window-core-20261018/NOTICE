@@ -1,0 +1,9 @@
+M3 mask-window core recipe and receiver
+Copyright 2026 Hitesh Soliwal and contributors.
+Eligible first-party source, fixtures, recipe and documentation are Apache-2.0.
+Existing M3GpuToolJoinManifest and SealReplay are copied verbatim from the pinned
+Synexia recipe crate jdk21-navigable-receiver-20261017. Canonical reusable recipe
+ownership remains hsoliwal/com.synexia. Target product ownership remains M3JDK21.
+Modified files adapt the existing M3IndexMaskCompactor Java/C private kernels;
+original headers and JNI symbols remain. Upstream OpenJDK/third-party rights are
+unchanged. No LeetCode/HackerRank/GeeksforGeeks implementation source was copied.

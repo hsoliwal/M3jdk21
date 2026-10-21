@@ -1,0 +1,28 @@
+{
+  "status": "PASS_CURRENT_SOURCE_SUPPLEMENT",
+  "outputs": {
+    "before": {
+      "M3RequiredExcludedMaskSelectorContract": "PASS M3RequiredExcludedMaskSelectorContract checks=133140\n",
+      "M3RequiredExcludedMaskSelectorNativeContract": "PASS M3RequiredExcludedMaskSelectorNativeContract checks=512\n",
+      "capability-current": "PASS M3RequiredExcludedLegacyProbe mode=current checks=7\n",
+      "capability-legacy": "PASS M3RequiredExcludedLegacyProbe mode=legacy checks=7\n",
+      "capability-missing": "PASS M3RequiredExcludedLegacyProbe mode=missing checks=7\n"
+    },
+    "test": {
+      "M3RequiredExcludedMaskSelectorContract": "PASS M3RequiredExcludedMaskSelectorContract checks=133140\n",
+      "M3RequiredExcludedMaskSelectorNativeContract": "PASS M3RequiredExcludedMaskSelectorNativeContract checks=512\n",
+      "capability-current": "PASS M3RequiredExcludedLegacyProbe mode=current checks=7\n",
+      "capability-legacy": "PASS M3RequiredExcludedLegacyProbe mode=legacy checks=7\n",
+      "capability-missing": "PASS M3RequiredExcludedLegacyProbe mode=missing checks=7\n"
+    }
+  },
+  "preserved_bodies": 21,
+  "generated_headers": {
+    "com_m3_collections_M3IndexMaskCompactor.h": "2c9ee704fe1128ca05a7ff38b6844ad178fd79c03fef0aa24fe9605778f46c81",
+    "com_m3_collections_M3LongAddressKernel.h": "dffaa88fa278c69424c6879ddbe2b6d741e37dd48e123e97ebb86043b6b59df7"
+  },
+  "proof_result_sha256": "878a48a2bbae509e9690135718e8af1f037d595225668a8331d797c0248802d3",
+  "commands": 12,
+  "full_module_jdk": "NOT_RUN",
+  "phase_advanced": false
+}

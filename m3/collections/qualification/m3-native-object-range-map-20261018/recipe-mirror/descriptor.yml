@@ -1,0 +1,12 @@
+# SPDX-License-Identifier: Apache-2.0
+# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and contributors
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.rewrite.M3NativeObjectRangeMap20261018
+displayName: Generate first-party generic M3 object-keyed RangeMap on dynamic arrays, offsets and 32-bit JNI state masks
+description: >-
+  Four exact ABSENT-before Java21 sources for a full generic K,V reference-valued
+  range map (not a primitive long-only map or vendor adapter), plus standalone,
+  checked JNI and JUnit proofs; all derived from sealed original M3 source.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: m3-native-object-range-map-20261018

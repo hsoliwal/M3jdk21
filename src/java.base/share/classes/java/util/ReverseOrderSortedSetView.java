@@ -1,5 +1,6 @@
 /*
  * Copyright (c) 2021, 2023, Oracle and/or its affiliates. All rights reserved.
+ * Modifications Copyright (c) 2026, Hitesh Soliwal and contributors.
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
  *
  * This code is free software; you can redistribute it and/or modify it
@@ -35,6 +36,11 @@ import jdk.internal.util.ArraysSupport;
  * Provides a reversed-ordered view of a SortedSet. Not serializable.
  */
 class ReverseOrderSortedSetView<E> implements SortedSet<E> {
+    private static final int HAS_HEAD = 1;
+    private static final int HAS_TAIL = 2;
+    private static final int READY = 1;
+    private static final int CAN_REMOVE = 2;
+    private static final int EXHAUSTED = 4;
     final SortedSet<E> base;
     final Comparator<? super E> comp;
 
@@ -102,6 +108,7 @@ class ReverseOrderSortedSetView<E> implements SortedSet<E> {
     // ========== Iterable ==========
 
     public void forEach(Consumer<? super E> action) {
+        Objects.requireNonNull(action);
         for (E e : this)
             action.accept(e);
     }
@@ -111,14 +118,13 @@ class ReverseOrderSortedSetView<E> implements SortedSet<E> {
     }
 
     public Spliterator<E> spliterator() {
-        return Spliterators.spliterator(this, Spliterator.ORDERED);
+        return SortedSet.super.spliterator();
     }
 
     // ========== Collection ==========
 
     public boolean add(E e) {
-        base.add(e);
-        return true;
+        return base.add(e);
     }
 
     public boolean addAll(Collection<? extends E> c) {
@@ -190,15 +196,23 @@ class ReverseOrderSortedSetView<E> implements SortedSet<E> {
     public E last() { return base.first(); }
 
     public SortedSet<E> headSet(E to) {
-        return new Subset(null, to);
+        // Validate against hidden backing bounds; an exclusive endpoint may
+        // equal the backing set's exclusive upper endpoint.
+        base.headSet(to);
+        return new Subset(null, to, HAS_TAIL);
     }
 
     public SortedSet<E> subSet(E from, E to) {
-        return new Subset(from, to);
+        if (comp.compare(from, to) > 0)
+            throw new IllegalArgumentException();
+        base.tailSet(from);
+        base.headSet(to);
+        return new Subset(from, to, HAS_HEAD | HAS_TAIL);
     }
 
     public SortedSet<E> tailSet(E from) {
-        return new Subset(from, null);
+        base.tailSet(from);
+        return new Subset(from, null, HAS_HEAD);
     }
 
     // ========== Infrastructure ==========
@@ -208,6 +222,7 @@ class ReverseOrderSortedSetView<E> implements SortedSet<E> {
             SortedSet<T> root = set;
             SortedSet<T> view = set;
             T prev = null;
+            int state;
 
             public boolean hasNext() {
                 return ! view.isEmpty();
@@ -216,16 +231,19 @@ class ReverseOrderSortedSetView<E> implements SortedSet<E> {
             public T next() {
                 if (view.isEmpty())
                     throw new NoSuchElementException();
-                T t = prev = view.last();
+                T t = view.last();
                 view = root.headSet(t);
+                prev = t;
+                state |= CAN_REMOVE;
                 return t;
             }
 
             public void remove() {
-                if (prev == null) {
+                if ((state & CAN_REMOVE) == 0) {
                     throw new IllegalStateException();
                 } else {
                     root.remove(prev);
+                    state &= ~CAN_REMOVE;
                     prev = null;
                 }
             }
@@ -237,14 +255,20 @@ class ReverseOrderSortedSetView<E> implements SortedSet<E> {
      * because of the asymmetry between from-inclusive and to-exclusive.
      */
     class Subset extends AbstractSet<E> implements SortedSet<E> {
-        final E head; // head element, or negative infinity if null
-        final E tail; // tail element, or positive infinity if null
+        final E head;
+        final E tail;
         final Comparator<E> cmp;
+        final int bounds; // Presence is independent of a comparator-valid null.
+
+        Subset(E head, E tail) {
+            this(head, tail, (head == null ? 0 : HAS_HEAD) | (tail == null ? 0 : HAS_TAIL));
+        }
 
         @SuppressWarnings("unchecked")
-        Subset(E head, E tail) {
+        Subset(E head, E tail, int bounds) {
             this.head = head;
             this.tail = tail;
+            this.bounds = bounds;
             Comparator<E> c = (Comparator<E>) ReverseOrderSortedSetView.this.comparator();
             if (c == null)
                 c = (Comparator<E>) Comparator.naturalOrder();
@@ -253,55 +277,74 @@ class ReverseOrderSortedSetView<E> implements SortedSet<E> {
 
         // returns whether e is above the head, inclusive
         boolean aboveHead(E e) {
-            return head == null || cmp.compare(e, head) >= 0;
+            return (bounds & HAS_HEAD) == 0 || cmp.compare(e, head) >= 0;
         }
 
         // returns whether e is below the tail, exclusive
         boolean belowTail(E e) {
-            return tail == null || cmp.compare(e, tail) < 0;
+            return (bounds & HAS_TAIL) == 0 || cmp.compare(e, tail) < 0;
+        }
+
+        // An exclusive nested upper endpoint may equal this view's tail.
+        boolean atOrBelowTail(E e) {
+            return (bounds & HAS_TAIL) == 0 || cmp.compare(e, tail) <= 0;
         }
 
         public Iterator<E> iterator() {
             return new Iterator<>() {
-                E cache = null;
-                boolean dead = false;
-                Iterator<E> it = descendingIterator(base);
+                E cache;
+                E previous;
+                int state;
+                final Iterator<E> it = descendingIterator(base);
 
                 public boolean hasNext() {
-                    if (dead)
-                        return false;
-
-                    if (cache != null)
+                    if ((state & READY) != 0)
                         return true;
-
+                    if ((state & EXHAUSTED) != 0)
+                        return false;
                     while (it.hasNext()) {
                         E e = it.next();
-
-                        if (! aboveHead(e))
+                        if (!aboveHead(e))
                             continue;
-
-                        if (! belowTail(e)) {
-                            dead = true;
-                            return false;
-                        }
-
+                        if (!belowTail(e))
+                            break;
                         cache = e;
+                        state |= READY;
                         return true;
                     }
-
+                    state |= EXHAUSTED;
                     return false;
                 }
 
                 public E next() {
-                    if (hasNext()) {
-                        E e = cache;
-                        cache = null;
-                        return e;
-                    } else {
+                    if (!hasNext())
                         throw new NoSuchElementException();
-                    }
+                    previous = cache;
+                    cache = null;
+                    state = (state & ~READY) | CAN_REMOVE;
+                    return previous;
+                }
+
+                public void remove() {
+                    if ((state & CAN_REMOVE) == 0)
+                        throw new IllegalStateException();
+                    // hasNext may have prefetched another element. Remove the
+                    // last returned representative, not the inner cursor's last.
+                    base.remove(previous);
+                    previous = null;
+                    state &= ~CAN_REMOVE;
                 }
             };
+        }
+
+        public Spliterator<E> spliterator() {
+            return SortedSet.super.spliterator();
+        }
+
+        public boolean contains(Object o) {
+            @SuppressWarnings("unchecked")
+            E e = (E) o;
+            return aboveHead(e) && belowTail(e) && base.contains(o);
         }
 
         public boolean add(E e) {
@@ -347,26 +390,32 @@ class ReverseOrderSortedSetView<E> implements SortedSet<E> {
 
         public SortedSet<E> subSet(E from, E to) {
             if (aboveHead(from) && belowTail(from) &&
-                aboveHead(to) && belowTail(to) &&
+                aboveHead(to) && atOrBelowTail(to) &&
                 cmp.compare(from, to) <= 0) {
-                return ReverseOrderSortedSetView.this.new Subset(from, to);
+                base.tailSet(from);
+                base.headSet(to);
+                return ReverseOrderSortedSetView.this.new Subset(from, to, HAS_HEAD | HAS_TAIL);
             } else {
                 throw new IllegalArgumentException();
             }
         }
 
         public SortedSet<E> headSet(E to) {
-            if (aboveHead(to) && belowTail(to))
-                return ReverseOrderSortedSetView.this.new Subset(head, to);
-            else
+            if (aboveHead(to) && atOrBelowTail(to)) {
+                base.headSet(to);
+                return ReverseOrderSortedSetView.this.new Subset(head, to, bounds | HAS_TAIL);
+            } else {
                 throw new IllegalArgumentException();
+            }
         }
 
         public SortedSet<E> tailSet(E from) {
-            if (aboveHead(from) && belowTail(from))
-                return ReverseOrderSortedSetView.this.new Subset(null, tail);
-            else
+            if (aboveHead(from) && belowTail(from)) {
+                base.tailSet(from);
+                return ReverseOrderSortedSetView.this.new Subset(from, tail, bounds | HAS_HEAD);
+            } else {
                 throw new IllegalArgumentException();
+            }
         }
 
     }

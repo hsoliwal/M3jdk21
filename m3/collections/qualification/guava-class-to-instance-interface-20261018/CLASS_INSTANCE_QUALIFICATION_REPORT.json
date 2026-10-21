@@ -1,0 +1,183 @@
+{
+  "contract": {
+    "all_runtime_code_sources_verified": true,
+    "boundary": "Existing no-argument mutable factory and interface only; no supplied-map overload, immutable factory, concrete MutableClassToInstanceMap identity or serialization parity claimed.",
+    "feature_descriptor_sha256": "ade2db689d4118a103a372544ea4d7773b267df264f496aab8ea548e986f22ef",
+    "focused_tests": 7,
+    "generated_cases_failed": 0,
+    "generated_cases_succeeded": 898,
+    "interface": "Guava33.4.8 ClassToInstanceMap",
+    "no_suppressed_tests": true,
+    "original_mutable_feature_profile_except_serializable": true,
+    "seeded_differential_operations": 3000,
+    "unchanged_existing_tests": 1,
+    "unchanged_upstream_generated_cases": 898
+  },
+  "core_artifact": {
+    "path": "S:\\codex-work\\guava-array-multimap-one-file-20261018\\full-guava\\product-work\\m3-jre21\\target\\guava-33.4.8-m3-java21-qualified.jar",
+    "sha256": "84050590fa79bd8e6c40bb30cdfa33dad96ac96c0f77645f5723088863e066eb"
+  },
+  "executed_proofs": [
+    {
+      "exit": 0,
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "name": "class-instance-owner-compile-1",
+      "receipt_sha256": "b1d0f0dd64b4c4d6a639ffc5f5b1e9036bde2ccb7db6027530e3a8dd424cbebf"
+    },
+    {
+      "exit": 0,
+      "log_sha256": "6c5129ebaadb01ad353113692fb60d179352a5ca51894985e424b48f8e7831cd",
+      "name": "class-instance-existing-tests-2",
+      "receipt_sha256": "cfe137c4b3b8a02789bb2cf6089f86f40250956a71895bc8a3e0273f3728125c"
+    },
+    {
+      "exit": 0,
+      "log_sha256": "3bfe892d122ff414291d412c1fa2bfea91d8b5755b7da3516030526f2b8aa86e",
+      "name": "class-instance-focused-tests-1",
+      "receipt_sha256": "bf42826c9d43f3d37f36a5282114683b31b250db193410469411e6e8a51a4556"
+    },
+    {
+      "exit": 0,
+      "log_sha256": "3afff47c1fbe5be82f5c0d61affa8024648572bd43269277247ca93e77311741",
+      "name": "class-instance-official-fixtures-compile-1",
+      "receipt_sha256": "ac38642f4eb889f2be61e39a34143f3995300305890fa4b450440bfb05a90d72"
+    },
+    {
+      "exit": 0,
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "name": "class-instance-upstream-adapter-compile-1",
+      "receipt_sha256": "062c99613c0d6fa15645731074e842c526a8b2a06b1be2a18f30dbdfc0d1bcd2"
+    },
+    {
+      "exit": 0,
+      "log_sha256": "5d91311a166049b34e0d92f41aa230d482567b91fc8e873e9061c38a934de117",
+      "name": "class-instance-generated-tests-1",
+      "receipt_sha256": "cb727905450c793f184e75720b40e2d0da387ebf8ad70211eaf8d69332329edc"
+    },
+    {
+      "exit": 0,
+      "log_sha256": "69d9fce98708f48ec57d3ddcf7c8fedcde0e2cb8f4eeac7656ffb87775444ab1",
+      "name": "class-instance-catalogue-recipes-1",
+      "receipt_sha256": "02502b4598c002561a226cfa9d62f4e6cf115e37af3969ea8801cbe380621f21"
+    },
+    {
+      "exit": 0,
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "name": "class-instance-catalogue-compile-1",
+      "receipt_sha256": "5471fa187e840d3b5bc4a291c7936410d8bd65cc01a1b0850b69d08fba3c6f96"
+    },
+    {
+      "exit": 0,
+      "log_sha256": "8c468eeffd69795ed494796e094017b16079d540ce6864cae2bd561d12b0ac04",
+      "name": "class-instance-catalogue-lookup-1",
+      "receipt_sha256": "471e6e8958ecc0b2fc956623af6de0bd11aa857829233aef821ce6311c3f6185"
+    }
+  ],
+  "existing_production_owner_modified": false,
+  "family": "com.google.common.collect.ClassToInstanceMap",
+  "fixture_warning_disposition": {
+    "all_lint_enabled": true,
+    "kind": "serialVersionUID absent from original Serializable Impl",
+    "log_sha256": "3afff47c1fbe5be82f5c0d61affa8024648572bd43269277247ca93e77311741",
+    "observed_warnings": 1,
+    "production_and_new_proof_Werror": true,
+    "scope": "Unchanged original ImmutableClassToInstanceMapTest typed generator/Impl only",
+    "source_unmodified": true
+  },
+  "full_superset_complete": false,
+  "new_owner_created": false,
+  "next_family": "com.google.common.collect.HashBiMap concrete",
+  "owner_factory": "com.m3.collections.interop.M3GuavaClassToInstanceMaps",
+  "predecessor_drafts": {
+    "canonical": "https://github.com/hsoliwal/com.synexia/pull/12312",
+    "receiver": "https://github.com/hsoliwal/M3jdk21/pull/1304"
+  },
+  "registration": {
+    "actual_emitted_files": [
+      "S:\\codex-work\\guava-array-multimap-one-file-20261018\\full-guava\\build\\class-instance-catalogue-qualified\\m3\\collections\\src\\main\\java\\com\\m3\\collections\\M3CollectionSdkCatalog.java",
+      "S:\\codex-work\\guava-array-multimap-one-file-20261018\\full-guava\\build\\class-instance-catalogue-qualified\\m3\\collections\\qualification\\m3-sdk-families-20261017\\FAMILY_CATALOG.tsv"
+    ],
+    "actual_factory_invoked_and_interface_checked": true,
+    "actual_recipe_test_methods": 5,
+    "actual_recipe_tests_failed": 0,
+    "after_row": [
+      "com.google.common.collect.ClassToInstanceMap",
+      "GUAVA",
+      "com.m3.collections.interop.M3GuavaClassToInstanceMaps",
+      "M3ClassIndexMap",
+      "OPTIONAL_ADAPTER",
+      "class-token-key"
+    ],
+    "catalogue_sha256": "406d9809dab857a62b571423a51c3240a7969f682a4a37c577590d6d79f344f9",
+    "compiled_lookup_rows_checked": 107,
+    "data_changed_fields": [
+      "existing_m3_owner",
+      "disposition"
+    ],
+    "fixed_points": "PASS BOTH",
+    "generated_java_sha256": "53d845fb4289c5d856d8eccc86235cdea0d5d3182c62d5956140c4d3d9e46b48",
+    "generator": "Unchanged original pure parse/render helpers and template; historical installers/seals preserved. BiMap actual emitted predecessor is exact preimage.",
+    "java_changed_lines": 2,
+    "other_rows_byte_identical": 106,
+    "previous_bimap_registration_preserved": true,
+    "rows": 107
+  },
+  "retained_admission_refusal": {
+    "child_started": false,
+    "later_fresh_attempt_passed": true,
+    "name": "class-instance-existing-tests-1",
+    "reason": "commit3GiB",
+    "sha256": "67c1f4571ce9ada020b85ac1eee853957c3f365df38987ba07d201051df9ee9f"
+  },
+  "review": {
+    "configured_autoreview": "NO_VERDICT: original bundled helper refusal retained under mandatory no-tools mode; no retry or bypass",
+    "independent_source_review_sha256": "7a53855e86fc09d837c1f40ed1ac0221cc3f8c93b64b25d5a89099fb5450caa3",
+    "source_findings": []
+  },
+  "schema": "M3_EXISTING_CLASS_INSTANCE_INTERFACE_AND_CATALOGUE_QUALIFICATION_V1",
+  "source_pins": [
+    {
+      "bytes": 711,
+      "commit": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
+      "git_blob": "d812004a11374b6c361a16634d4a3062cb60e995",
+      "license": "Apache-2.0",
+      "modified": false,
+      "path": "S:\\codex-work\\guava-array-multimap-one-file-20261018\\full-guava\\class-instance-next\\src\\main\\java\\com\\m3\\collections\\interop\\M3GuavaClassToInstanceMaps.java",
+      "repository": "hsoliwal/M3jdk21",
+      "sha256": "8e149744d798e19f217f324553ef8373d0b761c47585380918d15f96a511af95"
+    },
+    {
+      "bytes": 389,
+      "commit": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
+      "git_blob": "a861afe830b672b4cf6970735e6a1d192077c911",
+      "license": "Apache-2.0",
+      "modified": false,
+      "path": "S:\\codex-work\\guava-array-multimap-one-file-20261018\\full-guava\\class-instance-next\\src\\test\\java\\com\\m3\\collections\\interop\\M3GuavaClassToInstanceMapsTest.java",
+      "repository": "hsoliwal/M3jdk21",
+      "sha256": "8c2cf570d004f7b3e8d1ab4476b3e7075de6a3f31c09ef6a1617eb78fd8c48d3"
+    },
+    {
+      "bytes": 2396,
+      "commit": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
+      "git_blob": "bfe2afc128fdda8ca32854df0ad4f9911374fe7a",
+      "license": "Apache-2.0",
+      "modified": false,
+      "path": "S:\\codex-work\\guava-array-multimap-one-file-20261018\\full-guava\\class-instance-next\\src\\test\\java\\com\\m3\\collections\\interop\\M3GuavaClassToInstanceMapsSelfTest.java",
+      "repository": "hsoliwal/M3jdk21",
+      "sha256": "c247f3c0a1b923b22cbbd693265d0960f5b062608fbe2827728f242a60cab22c"
+    }
+  ],
+  "status": "QUALIFIED_SOURCE_AND_REGISTRATION_READY_FOR_DRAFT_PUBLICATION",
+  "storage": {
+    "cap_bytes": 67108864,
+    "independent_protection": "ACTIVE",
+    "metrics": {
+      "K_free": 2629844992,
+      "S_free": 25622712320,
+      "commit_available": 7038476288,
+      "native_temp": "S:\\codex-work\\guava-array-multimap-one-file-20261018\\build\\tmp\\",
+      "output_bytes": 58938205,
+      "physical_available": 7260864512
+    }
+  }
+}

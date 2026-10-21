@@ -1,0 +1,22 @@
+{
+  "label": "05c-receiver-contracts",
+  "command": [
+    "python3",
+    "contract/verify_receiver.py",
+    "--crate",
+    "/workspace/scratch/65626af64474/m3-ast-shared-20261018/gradle-provider-work/canonical/synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017",
+    "--dataset",
+    "gradle-provider-20261018",
+    "--recipe-owner",
+    "/workspace/scratch/65626af64474/m3-ast-shared-20261018/gradle-provider-work/canonical/synexia-openrewrite-recipes",
+    "--output",
+    "/workspace/scratch/65626af64474/m3-ast-shared-20261018/gradle-provider-work/canonical/synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/target/gradle-provider-20261018/receiver-proof"
+  ],
+  "cwd": "/workspace/scratch/65626af64474/m3-ast-shared-20261018/gradle-provider-work/canonical/synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017",
+  "jdk": "/tmp/m3-regex-toolchain-20261018/jdk-21.0.12.1+1",
+  "previous": "05b-sealing-contracts",
+  "started_utc": "2026-10-18T12:55:16.910246+00:00",
+  "finished_utc": "2026-10-18T12:55:17.541644+00:00",
+  "exit_code": 0,
+  "log_sha256": "a1b9da09018fc875b42949371dcfa3ea65eb1771964bb235a4e363329b1547e7"
+}

@@ -1,6 +1,8 @@
 /* Copyright 2026 Hitesh Soliwal and contributors. SPDX-License-Identifier: Apache-2.0 */
 package com.m3.collections;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.Random;
 
@@ -123,6 +125,89 @@ public final class M3StateMaskHistogramSelfTest {
         }
     }
 
+    private static void stridedWindows() {
+        byte[] states = new byte[8193];
+        for (int i = 0; i < states.length; i++) states[i] = (byte) (i * 73 + i / 251);
+        int[] unusedOffsets = {};
+        int[] steps = {2, 3, 7, 16, 31, 63, 127, 128, 129, 255, 256, 257, 1024, 4096};
+        for (int step : steps) {
+            int first = 17;
+            int available = 1 + (states.length - 1 - first) / step;
+            int batch = 1 + 255 / step;
+            int[] counts = {0, 1, Math.min(available, batch - 1), Math.min(available, batch),
+                    Math.min(available, batch + 1), available};
+            for (int count : counts) {
+                verify(states, unusedOffsets, first, count, step, false);
+                verify(states, unusedOffsets, states.length - 1 - first, count, -step, false);
+            }
+        }
+        verify(states, unusedOffsets, states.length, 0, Integer.MIN_VALUE, false);
+        verify(states, unusedOffsets, states.length, 0, Integer.MAX_VALUE, false);
+        verify(states, unusedOffsets, 0, 1, Integer.MIN_VALUE, false);
+        verify(states, unusedOffsets, states.length - 1, 1, Integer.MAX_VALUE, false);
+        verify(states, unusedOffsets, 0, 4097, 2, false);
+        verify(states, unusedOffsets, states.length - 1, 4097, -2, false);
+    }
+
+    private static void invokeNative(Method tally, byte[] source, int first,
+                                     int count, int stride, int[] result) {
+        try {
+            tally.invoke(null, source, first, count, stride, result);
+        } catch (InvocationTargetException wrapper) {
+            Throwable cause = wrapper.getCause();
+            if (cause instanceof RuntimeException runtime) throw runtime;
+            if (cause instanceof Error error) throw error;
+            throw new AssertionError("unexpected checked JNI exception", cause);
+        } catch (ReflectiveOperationException error) {
+            throw new AssertionError("cannot exercise existing JNI boundary", error);
+        }
+    }
+
+    private static void rejectedNative(Method tally, byte[] source, int first,
+            int count, int stride, int outputLength, String label) {
+        int[] result = new int[outputLength];
+        Arrays.fill(result, 0x12345678);
+        fails(IllegalArgumentException.class,
+                () -> invokeNative(tally, source, first, count, stride, result), label);
+        for (int bucket : result) equal(0x12345678, bucket, "rejected JNI leaves output untouched");
+    }
+
+    private static void nativeBoundaries() {
+        if (!M3StateMaskHistogram.nativeAvailable()) return;
+        Method tally;
+        try {
+            tally = M3StateMaskHistogram.class.getDeclaredMethod("tallyNative",
+                    byte[].class, int.class, int.class, int.class, int[].class);
+            tally.setAccessible(true);
+        } catch (ReflectiveOperationException error) {
+            throw new AssertionError("existing JNI descriptor changed", error);
+        }
+        byte[] states = {0, 1, (byte) 0xff, (byte) 0x80};
+        rejectedNative(tally, null, 0, 0, 1, 256, "null native input");
+        rejectedNative(tally, states, -1, 0, 1, 256, "negative native first");
+        rejectedNative(tally, states, 5, 0, 1, 256, "native first after end");
+        rejectedNative(tally, states, 0, -1, 1, 256, "negative native count");
+        rejectedNative(tally, states, 0, 1, 0, 256, "zero native stride");
+        rejectedNative(tally, states, 4, 1, 1, 256, "nonempty native end");
+        rejectedNative(tally, states, 0, 2, -1, 256, "negative native endpoint");
+        rejectedNative(tally, states, 1, 2, Integer.MAX_VALUE, 256, "wide native endpoint");
+        rejectedNative(tally, states, 0, 2, Integer.MIN_VALUE, 256, "minimum native stride");
+        rejectedNative(tally, states, 0, Integer.MAX_VALUE, Integer.MAX_VALUE, 256,
+                "maximum native path product");
+        rejectedNative(tally, states, 0, 0, 1, 255, "short native output");
+        rejectedNative(tally, states, 0, 0, 1, 257, "long native output");
+        fails(IllegalArgumentException.class,
+                () -> invokeNative(tally, states, 0, 0, 1, null), "null native output");
+        int[] result = new int[256];
+        Arrays.fill(result, 19);
+        invokeNative(tally, states, states.length, 0, Integer.MIN_VALUE, result);
+        for (int bucket : result) equal(0, bucket, "valid empty native publishes zero histogram");
+        invokeNative(tally, states, 3, 1, Integer.MIN_VALUE, result);
+        for (int state = 0; state < 256; state++) {
+            equal(state == 128 ? 1 : 0, result[state], "valid huge-stride native singleton");
+        }
+    }
+
     private static void randomCases() {
         Random random = new Random(0x4d335354415445L);
         for (int t = 0; t < 240; t++) {
@@ -156,6 +241,8 @@ public final class M3StateMaskHistogramSelfTest {
 
     public static void main(String[] args) {
         edges();
+        stridedWindows();
+        nativeBoundaries();
         randomCases();
         System.out.println("M3StateMaskHistogramSelfTest PASS checks=" + checks
                 + " native=" + M3StateMaskHistogram.nativeAvailable());

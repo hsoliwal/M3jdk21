@@ -1,0 +1,148 @@
+#!/usr/bin/env python3
+"""Run the unchanged M3FS native owner through a recorded direct-GCC lane."""
+import concurrent.futures
+import hashlib
+import json
+import os
+from pathlib import Path
+import re
+import subprocess
+import sys
+from datetime import datetime, timezone
+
+B = Path(__file__).resolve().parent
+MODULE = B / "receiver/m3/fs"
+SOURCE = MODULE / "native"
+JDK = B / "toolchain/jdk21"
+OUT = B / "native-capture"
+SQLITE_INCLUDE = B / "toolchain/native/deps/usr/include"
+SQLITE_LIBRARY = Path("/usr/lib/x86_64-linux-gnu/libsqlite3.so.0.8.6")
+WARNINGS = ["-Wall", "-Wextra", "-Werror", "-Wconversion", "-Wshadow", "-Wpedantic"]
+BASE = ["/usr/bin/cc", "-std=gnu11", *WARNINGS, "-pthread", "-I", str(SOURCE / "include"),
+        "-isystem", str(SQLITE_INCLUDE)]
+JNI = ["-I", str(JDK / "include"), "-I", str(JDK / "include/linux")]
+ENV = dict(os.environ)
+for name in list(ENV):
+    if name in {"LD_LIBRARY_PATH", "LD_PRELOAD", "JAVA_TOOL_OPTIONS", "JDK_JAVA_OPTIONS",
+                "_JAVA_OPTIONS", "CLASSPATH"} or name.startswith("DYLD_"):
+        ENV.pop(name)
+ENV["LC_ALL"] = "C"
+ENV["PYTHONDONTWRITEBYTECODE"] = "1"
+
+
+def digest(path):
+    return hashlib.sha256(Path(path).read_bytes()).hexdigest()
+
+
+def run(name, command):
+    command = [str(value) for value in command]
+    result = subprocess.run(command, cwd=OUT, env=ENV, capture_output=True, text=True)
+    (OUT / (name + ".log")).write_text(result.stdout + result.stderr)
+    receipt = {"command": command, "exit_code": result.returncode, "log": name + ".log"}
+    (OUT / (name + ".json")).write_text(json.dumps(receipt, indent=2) + "\n")
+    if result.returncode:
+        raise RuntimeError(name + " failed: " + str(result.returncode))
+    return result.stdout
+
+
+def build_suite(suite):
+    target = OUT / ("m3fs-" + suite + "-test")
+    source = SOURCE / "tests" / ("m3fs_" + suite.replace("-", "_") + "_test.c")
+    libraries = [SQLITE_LIBRARY] if suite in {"snapshot-loss", "hotpath"} else [OUT / "libm3fs.so", SQLITE_LIBRARY]
+    run("compile-" + suite, [*BASE, source, *libraries, "-Wl,-rpath,$ORIGIN", "-o", target])
+    return suite
+
+
+def run_suite(suite):
+    database = OUT / ("m3fs-" + suite + "-test.sqlite")
+    paths = [database, Path(str(database) + "-wal"), Path(str(database) + "-shm")]
+    for path in paths:
+        path.unlink(missing_ok=True)
+    try:
+        run("test-" + suite, [OUT / ("m3fs-" + suite + "-test"), database])
+    finally:
+        for path in paths:
+            path.unlink(missing_ok=True)
+    return suite
+
+
+def main():
+    if OUT.exists():
+        raise FileExistsError("fresh native output required: " + str(OUT))
+    OUT.mkdir()
+    started = datetime.now(timezone.utc).isoformat()
+    sources = {path.relative_to(MODULE).as_posix(): digest(path)
+               for path in sorted(SOURCE.rglob("*")) if path.is_file()}
+    (OUT / "source-sha256.json").write_text(json.dumps(sources, indent=2, sort_keys=True) + "\n")
+    cmake = (SOURCE / "CMakeLists.txt").read_text()
+    suites = re.search(r"foreach\(suite IN ITEMS ([^)]+)\)", cmake).group(1).split()
+    assert len(suites) == 12
+    assert all(flag in cmake for flag in WARNINGS)
+    sqlite_hash = digest(SQLITE_LIBRARY)
+    assert sqlite_hash == "eac351cf84d688d1f9235e6165bd57555b31a491cd2f65e0dca67daa69036370"
+    assert digest(SQLITE_INCLUDE / "sqlite3.h") == "9bc10b653f5125a93dda7212c569607d837b1208b1a197a04d9e1a58f8f76489"
+    compiler_version = run("compiler-version", ["/usr/bin/cc", "--version"])
+    native_sources = [SOURCE / "src" / name for name in
+                      ("m3fs.c", "m3index_semantic_core.c", "m3fs_semantic.c", "m3fs_jni.c", "m3_fs_jni.c")]
+    run("compile-library", [*BASE, *JNI, "-fPIC", "-shared", *native_sources, SQLITE_LIBRARY,
+                            "-Wl,-soname,libm3fs.so", "-Wl,-rpath,$ORIGIN", "-o", OUT / "libm3fs.so"])
+    print("NATIVE_LIBRARY_READY=" + str(OUT / "libm3fs.so"), flush=True)
+    run("compile-tool", [*BASE, SOURCE / "src/m3fs_tool.c", OUT / "libm3fs.so",
+                         "-Wl,-rpath,$ORIGIN", "-o", OUT / "m3fs-tool"])
+    with concurrent.futures.ThreadPoolExecutor(max_workers=2) as executor:
+        list(executor.map(build_suite, suites))
+        passed = list(executor.map(run_suite, suites))
+    headers, classes = OUT / "jni-headers", OUT / "jni-header-classes"
+    headers.mkdir()
+    classes.mkdir()
+    java_sources = [MODULE / "src/main/java/com/m3/fs" / (name + ".java")
+                    for name in ("M3FsNative", "M3NativeContent")]
+    run("jni-headers", [JDK / "bin/javac", "--release", "21", "-Xlint:all", "-Werror",
+                        "-implicit:none", "-sourcepath", "", "-cp", B / "qualification-capture/classes",
+                        "-h", headers, "-d", classes, *java_sources])
+    symbols = run("jni-exports", ["nm", "-D", "--defined-only", OUT / "libm3fs.so"])
+    actual = {line.split()[-1] for line in symbols.splitlines() if line.split()[-1].startswith("Java_")}
+    expected = set()
+    per_header = {}
+    for java_name, c_name in (("M3FsNative", "m3fs_jni.c"), ("M3NativeContent", "m3_fs_jni.c")):
+        header = headers / ("com_m3_fs_" + java_name + ".h")
+        names = set(re.findall(r"JNICALL\s+(Java_[A-Za-z0-9_]+)", header.read_text()))
+        expected.update(names)
+        per_header[java_name] = sorted(names)
+        run("jni-signature-" + java_name, [*BASE, *JNI, "-fPIC", "-include", header,
+                                          "-fsyntax-only", SOURCE / "src" / c_name])
+    assert expected == actual and len(expected) == 45, (expected - actual, actual - expected, len(expected))
+    dynamic = run("native-dynamic", ["readelf", "-d", OUT / "libm3fs.so"])
+    assert re.search(r"\(SONAME\).*?\[libm3fs\.so\]", dynamic)
+    assert re.findall(r"\((?:RUNPATH|RPATH)\).*?\[([^\]]*)\]", dynamic) == ["$ORIGIN"]
+    assert all(digest(MODULE / relative) == expected_hash for relative, expected_hash in sources.items())
+    assert digest(SQLITE_LIBRARY) == sqlite_hash
+    report = {
+        "status": "PASS", "started_utc": started, "finished_utc": datetime.now(timezone.utc).isoformat(),
+        "execution_lane": "Direct GCC equivalent of existing CMake targets; CMake/CTest themselves were not run",
+        "source_owner": str(SOURCE / "CMakeLists.txt"), "source_owner_sha256": digest(SOURCE / "CMakeLists.txt"),
+        "source_inventory": "source-sha256.json", "native_sources_unchanged": True,
+        "compiler_version": compiler_version, "strict_flags": WARNINGS,
+        "jni_enabled": True, "fuse_enabled": False,
+        "pkg_config_scope": "Required only by optional M3FS_FUSE=ON; not the default JNI lane",
+        "test_driver_equivalence": "All 12 owner suites run with one fresh DB each; DB/WAL/SHM cleanup before and after matches run_indexed_test.cmake",
+        "c_suites": {"passed": len(passed), "total": len(suites), "names": passed},
+        "jni_abi": {"generated_headers": per_header, "expected_exports": sorted(expected),
+                    "actual_exports": sorted(actual), "count": len(actual),
+                    "force_included_header_signature_checks": "PASS"},
+        "library": {"path": str(OUT / "libm3fs.so"), "sha256": digest(OUT / "libm3fs.so"),
+                    "soname": "libm3fs.so", "runpath": "$ORIGIN"},
+        "sqlite_header": {"path": str(SQLITE_INCLUDE / "sqlite3.h"), "sha256": digest(SQLITE_INCLUDE / "sqlite3.h"),
+                          "package": "libsqlite3-dev 3.45.1-1ubuntu2"},
+        "sqlite_runtime": {"path": str(SQLITE_LIBRARY), "sha256": sqlite_hash, "package": "libsqlite3-0 3.45.1-1ubuntu2.5"},
+        "sqlite_revision_qualification": "Both upstream API version 3.45.1; header and installed runtime distribution revisions are recorded independently",
+        "native_image_probe": "PENDING_SEPARATE_EXISTING_PACKAGE_RUNTIME_OWNER",
+        "maven_lifecycle": "NOT_RUN", "source_built_m3jdk21": "NOT_RUN", "sanitizers": "NOT_RUN_IN_THIS_LANE",
+    }
+    (OUT / "qualification.json").write_text(json.dumps(report, indent=2, sort_keys=True) + "\n")
+    print(json.dumps({"status": "PASS", "native_c_suites": len(passed), "jni_exports": len(actual),
+                      "receipt": str(OUT / "qualification.json")}), flush=True)
+
+
+if __name__ == "__main__":
+    main()

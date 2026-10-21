@@ -396,15 +396,7 @@ public final class M3LongTreeSet implements M3LongSortedSet {
     private int locatePage(long value) {
         int low = 0;
         int high = pageCount - 1;
-        while (low < high) {
-            int mid = (low + high) >>> 1;
-            if (value <= pageMaxima[mid]) {
-                high = mid;
-            } else {
-                low = mid + 1;
-            }
-        }
-        return low;
+        return M3LaneSearch.lowerBound(pageMaxima, low, high, value);
     }
 
     private int pageOffset(int page) {

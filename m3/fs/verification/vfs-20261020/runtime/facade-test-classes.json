@@ -1,0 +1,16 @@
+{
+  "FacadeTestLauncher.class": "15a090d2a7a90a99316c135e67dfd5b860d0d8c3ae80a8ca01d315ff342e6e5c",
+  "com/m3/fs/MFileCaptureTest$RecordingContent$1.class": "6eaa5cf6e4440b5241b894c3efe09fccd52633823ce16179f995baac726b4ec6",
+  "com/m3/fs/MFileCaptureTest$RecordingContent.class": "3417c73a5f8a0512fbf3200aedb74972f4de31f356edbba7ff5d432283f330cb",
+  "com/m3/fs/MFileCaptureTest.class": "bb8a7e284c1036c7935ab76f51ab525d0468f4d99cec73503f4f8b5d7fa54af6",
+  "com/m3/fs/MFilesBehaviorTest.class": "70db2582113beb48e61aba80ab8f846aad4b86bb56fd60b73be6fc58994add94",
+  "com/m3/fs/MFilesProviderTest$1.class": "6c066858c4bff9a2988dace9217d4a3bc86ef393970d3d05b9951c8b20de0e90",
+  "com/m3/fs/MFilesProviderTest$2.class": "1e8e0d5e57d91345a3d4a69aac04eefb774271b17cfd3dc8621ef588f535b39a",
+  "com/m3/fs/MFilesProviderTest$ObservedLocalFile$1.class": "841e80ea81fdd531c2db80493b6a0ea4d6dad69a78fb7117eea4e0eaacfb85dc",
+  "com/m3/fs/MFilesProviderTest$ObservedLocalFile$2.class": "eda7bc3927a4c16c37699f1b5f359e2e52461d200d0b199e79766b6a905e3154",
+  "com/m3/fs/MFilesProviderTest$ObservedLocalFile.class": "9071fb507f10e3f63083cfeef7b86e9a157648c7212436439ca7ee7c9b051dd1",
+  "com/m3/fs/MFilesProviderTest$ObservedLocalProvider$1.class": "13023455033002c11b2b7f8ed6f0f8a45b21b819b65d302abe538ce2136b97a8",
+  "com/m3/fs/MFilesProviderTest$ObservedLocalProvider.class": "5c7cc1c95df209460bebdda6ed1878f38fc48eec51bb3c603833d5cd883ecc1c",
+  "com/m3/fs/MFilesProviderTest$ObservedReplicator.class": "c2c9845b74219d7b8b5c05e2900ec779def2308736f58394c9f7783a2083e39f",
+  "com/m3/fs/MFilesProviderTest.class": "6beeabbbbf46e3ff9ae2e21d67046d913dcf6c3cad3b97256a967f9863109759"
+}

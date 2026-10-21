@@ -1,0 +1,110 @@
+/tmp/apache-maven-3.9.9/bin/mvn -B -ntp -f /workspace/scratch/6b6041146177/M3JDK21/m3/collections/qualification/m3-filtered-navigation-20261018/runtime/pom.xml -Dm3.target=/workspace/scratch/6b6041146177/M3JDK21 -Dm3.runtime.output=/workspace/scratch/6b6041146177/verification/received-runtime-20261018/native -Dm3.native.path=/workspace/scratch/6b6041146177/verification/received-runtime-20261018/native-lib -o -Dmaven.repo.local=/tmp/m3-parser-m2 test
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] -----< com.m3.qualification:filtered-navigation-runtime-20261018 >------
+[INFO] Building M3JDK filtered navigation focused runtime proof 1.0-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ filtered-navigation-runtime-20261018 ---
+[INFO] skip non existing resourceDirectory /workspace/scratch/6b6041146177/M3JDK21/m3/collections/qualification/m3-filtered-navigation-20261018/runtime/src/main/resources
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ filtered-navigation-runtime-20261018 ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 134 source files with javac [debug release 21] to ../../../../../../verification/received-runtime-20261018/native/classes
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ filtered-navigation-runtime-20261018 ---
+[INFO] skip non existing resourceDirectory /workspace/scratch/6b6041146177/M3JDK21/m3/collections/qualification/m3-filtered-navigation-20261018/runtime/src/test/resources
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ filtered-navigation-runtime-20261018 ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 61 source files with javac [debug release 21] to ../../../../../../verification/received-runtime-20261018/native/test-classes
+[INFO] 
+[INFO] --- surefire:3.2.5:test (default-test) @ filtered-navigation-runtime-20261018 ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running com.m3.collections.M3FilteredDequesTest
+PASS checks=140595
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.134 s -- in com.m3.collections.M3FilteredDequesTest
+[INFO] Running com.m3.collections.M3FilteredListsTest
+PASS M3FilteredListsEdges checks=40
+PASS M3FilteredListsContract operations=32452 checks=755754
+PASS M3FilteredListsWorkProof rows=65537 predicate_calls=65537 split_payload=0
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 4.801 s -- in com.m3.collections.M3FilteredListsTest
+[INFO] Running com.m3.collections.M3MutableFilteredViewsTest
+PASS M3_MUTABLE_FILTERED_VIEWS assertions=288223
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.644 s -- in com.m3.collections.M3MutableFilteredViewsTest
+[INFO] Running com.m3.collections.M3LongFilteredViewContractTest
+[INFO] Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.089 s -- in com.m3.collections.M3LongFilteredViewContractTest
+[INFO] Running com.m3.collections.M3FilteredListsDeepCompositionTest
+M3_FILTERED_LIST_DEEP_PLAN_PASS checks=189
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.070 s -- in com.m3.collections.M3FilteredListsDeepCompositionTest
+[INFO] Running com.m3.collections.M3IndexPathRankTest
+PASS M3IndexPathRank Java21 deterministic differential: 36476 rank checks; 900 randomized paths
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.141 s -- in com.m3.collections.M3IndexPathRankTest
+[INFO] Running com.m3.collections.M3PrimitiveFilteredSequencesTest
+PASS checks=164104
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 3.225 s -- in com.m3.collections.M3PrimitiveFilteredSequencesTest
+[INFO] Running com.m3.collections.M3BoundedFilteredNavigationTest
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.411 s -- in com.m3.collections.M3BoundedFilteredNavigationTest
+[INFO] Running com.m3.collections.M3FilteredNavigableSetTest
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.103 s -- in com.m3.collections.M3FilteredNavigableSetTest
+[INFO] Running com.m3.collections.M3FilteredListsSortedInteropTest
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.036 s -- in com.m3.collections.M3FilteredListsSortedInteropTest
+[INFO] Running com.m3.collections.M3ZeroMaskArrayFastPathTest
+M3_ZERO_MASK_ARRAY_FAST_PATH_PASS checks=6176
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.082 s -- in com.m3.collections.M3ZeroMaskArrayFastPathTest
+[INFO] Running com.m3.collections.M3FilteredViewsTest
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.445 s -- in com.m3.collections.M3FilteredViewsTest
+[INFO] Running com.m3.collections.M3IndexMaskWindowTest
+PASS M3_INDEX_MASK_WINDOW checks=15298 native=false
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.216 s -- in com.m3.collections.M3IndexMaskWindowTest
+[INFO] Running com.m3.collections.M3IndexMaskCompactorTest
+PASS M3IndexMaskCompactorSelfTest checks=17188 JNI=false
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.365 s -- in com.m3.collections.M3IndexMaskCompactorTest
+[INFO] Running com.m3.collections.M3LongSortedAlgebraTest
+PASS M3LongSortedAlgebraSelfTest checks=508836
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.507 s -- in com.m3.collections.M3LongSortedAlgebraTest
+[INFO] Running com.m3.collections.M3LongTreeSetTest
+[INFO] Tests run: 7, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.720 s -- in com.m3.collections.M3LongTreeSetTest
+[INFO] Running com.m3.collections.M3FilteredListsReadonlyDepthTest
+M3_READONLY_FILTER_DEPTH_PASS checks=64
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.176 s -- in com.m3.collections.M3FilteredListsReadonlyDepthTest
+[INFO] Running com.m3.collections.M3FilteredNavigableSetRangeTest
+PASS M3FilteredNavigableSetRangeContract checks=110325
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.326 s -- in com.m3.collections.M3FilteredNavigableSetRangeTest
+[INFO] Running com.m3.collections.M3IndexPathMasksTest
+PASS M3IndexPathMasksSelfTest checks=1554 JNI=false
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.036 s -- in com.m3.collections.M3IndexPathMasksTest
+[INFO] Running com.m3.collections.M3FilteredNavigationReconciliationTest
+M3_PATH_MASK_ALIAS_PASS checks=2332 actualJNI=true
+navigation checks=141840 failures=0 first=null
+entries checks=11447 failures=0 first=null
+readonly checks=904 failures=0 first=null
+depth checks=48 failures=0 first=null
+TOTAL checks=154239 failures=0
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.089 s -- in com.m3.collections.M3FilteredNavigationReconciliationTest
+[INFO] Running com.m3.collections.M3NativeIndexRangeTest
+M3NativeIndexRangeSelfTest mode=legacy checks=638439 seededCases=2048
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 7.320 s -- in com.m3.collections.M3NativeIndexRangeTest
+[INFO] Running com.m3.collections.M3LazyTreeMapTest
+PACKED_LAZY_STATE_OK null/reuse/growth/failure/recursion/mutation/cancellation/events/system-progress
+PACKED_LAZY_TREE_OK eager/lazy AVL differential=20000 views/entries/flags/progress/events
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.496 s -- in com.m3.collections.M3LazyTreeMapTest
+[INFO] Running com.m3.collections.M3IndexMaskWindowRecoveryTest
+PASS M3IndexMaskWindowRecoverySelfTest checks=7524 JNI=false
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.274 s -- in com.m3.collections.M3IndexMaskWindowRecoveryTest
+[INFO] 
+[INFO] Results:
+[INFO] 
+[INFO] Tests run: 45, Failures: 0, Errors: 0, Skipped: 0
+[INFO] 
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  01:22 min
+[INFO] Finished at: 2026-10-18T07:00:45Z
+[INFO] ------------------------------------------------------------------------

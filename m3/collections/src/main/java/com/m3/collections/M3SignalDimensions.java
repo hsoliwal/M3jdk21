@@ -36,20 +36,62 @@ public final class M3SignalDimensions {
     /** Masks are aligned to source row IDs, not to sorted positions. */
     public static int[] filtered(double[][] columns, boolean[] descending,
             byte[] state, int required, int excluded, M3SignalOrder.Backend backend) {
+        return filtered(columns, descending, state, required, excluded, backend,
+                M3IndexMaskCompactor.Backend.JAVA);
+    }
+
+    /**
+     * Explicit mask-selection backend. Existing overloads remain Java-mask by default,
+     * so requesting native signal sorting does not acquire a new mask JNI dependency.
+     */
+    public static int[] filtered(double[][] columns, boolean[] descending,
+            byte[] state, int required, int excluded, M3SignalOrder.Backend backend,
+            M3IndexMaskCompactor.Backend maskBackend) {
         int length = validate(columns, descending);
         Objects.requireNonNull(backend, "backend");
+        Objects.requireNonNull(maskBackend, "maskBackend");
         validateState(state, length, required, excluded);
         if (backend == M3SignalOrder.Backend.NATIVE_REQUIRED && !M3SignalOrderNative.available()) {
             throw new UnsatisfiedLinkError("m3signalorder JNI is unavailable");
         }
+        int[] rows = state == null
+                ? identity(length)
+                : M3IndexMaskCompactor.selectPositions(
+                        state, required, excluded, maskBackend);
+        return orderSelected(columns, descending, backend, rows);
+    }
+
+    /**
+     * Stable multi-dimensional order over full-width physical-slot state masks.
+     * Selection uses all 32 bits (including bit 31) before reading signal rows;
+     * only source row ordinals and primitive radix scratch are allocated.
+     * The caller's state and signal lanes are never modified or retained.
+     */
+    public static int[] filtered32(double[][] columns, boolean[] descending,
+            int[] states, int requiredMask, int excludedMask,
+            M3SignalOrder.Backend backend) {
+        int length = validate(columns, descending);
+        Objects.requireNonNull(backend, "backend");
+        Objects.requireNonNull(states, "states");
+        if (states.length != length) {
+            throw new IllegalArgumentException("state array length mismatch");
+        }
+        if (backend == M3SignalOrder.Backend.NATIVE_REQUIRED
+                && !M3SignalOrderNative.available()) {
+            throw new UnsatisfiedLinkError("m3signalorder JNI is unavailable");
+        }
         int selected = 0;
         for (int row = 0; row < length; row++) {
-            if (accept(state, row, required, excluded)) selected++;
+            int flags = states[row];
+            if ((flags & requiredMask) == requiredMask
+                    && (flags & excludedMask) == 0) selected++;
         }
         int[] rows = new int[selected];
         int count = 0;
         for (int row = 0; row < length; row++) {
-            if (accept(state, row, required, excluded)) rows[count++] = row;
+            int flags = states[row];
+            if ((flags & requiredMask) == requiredMask
+                    && (flags & excludedMask) == 0) rows[count++] = row;
         }
         return orderSelected(columns, descending, backend, rows);
     }
@@ -62,11 +104,24 @@ public final class M3SignalDimensions {
             List<? extends ToDoubleFunction<? super T>> projections,
             boolean[] descending, byte[] state, int required, int excluded,
             M3SignalOrder.Backend backend) {
+        return project(rowCount, valueAt, projections, descending, state, required, excluded,
+                backend, M3IndexMaskCompactor.Backend.JAVA);
+    }
+
+    /**
+     * Explicit mask-selection backend for source-row filtering before projections execute.
+     * Filtering remains stable and projection callbacks run exactly once per selected row/dimension.
+     */
+    public static <T> int[] project(int rowCount, IntFunction<? extends T> valueAt,
+            List<? extends ToDoubleFunction<? super T>> projections,
+            boolean[] descending, byte[] state, int required, int excluded,
+            M3SignalOrder.Backend backend, M3IndexMaskCompactor.Backend maskBackend) {
         if (rowCount < 0) throw new IllegalArgumentException("negative rowCount");
         Objects.requireNonNull(valueAt, "valueAt");
         Objects.requireNonNull(projections, "projections");
         Objects.requireNonNull(descending, "descending");
         Objects.requireNonNull(backend, "backend");
+        Objects.requireNonNull(maskBackend, "maskBackend");
         if (projections.isEmpty() || projections.size() != descending.length) {
             throw new IllegalArgumentException("projection/direction dimension mismatch");
         }
@@ -74,15 +129,11 @@ public final class M3SignalDimensions {
         if (backend == M3SignalOrder.Backend.NATIVE_REQUIRED && !M3SignalOrderNative.available()) {
             throw new UnsatisfiedLinkError("m3signalorder JNI is unavailable");
         }
-        int selected = 0;
-        for (int row = 0; row < rowCount; row++) {
-            if (accept(state, row, required, excluded)) selected++;
-        }
-        int[] physical = new int[selected];
-        int p = 0;
-        for (int row = 0; row < rowCount; row++) {
-            if (accept(state, row, required, excluded)) physical[p++] = row;
-        }
+        int[] physical = state == null
+                ? identity(rowCount)
+                : M3IndexMaskCompactor.selectPositions(
+                        state, required, excluded, maskBackend);
+        int selected = physical.length;
         double[][] prepared = new double[projections.size()][selected];
         for (int dimension = 0; dimension < projections.size(); dimension++) {
             ToDoubleFunction<? super T> projection = Objects.requireNonNull(
@@ -205,12 +256,6 @@ public final class M3SignalDimensions {
         if (state != null && state.length != count) {
             throw new IllegalArgumentException("state array length mismatch");
         }
-    }
-
-    private static boolean accept(byte[] state, int row, int required, int excluded) {
-        if (state == null) return true;
-        int bits = Byte.toUnsignedInt(state[row]);
-        return (bits & required) == required && (bits & excluded) == 0;
     }
 
     private static int[] identity(int count) {

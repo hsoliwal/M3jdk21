@@ -1,0 +1,31 @@
+{
+  "dataset": "filtered-navigation-20261018",
+  "baseline_repository": "hsoliwal/M3JDK21",
+  "baseline_commit": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
+  "inventory": {
+    "present_verified_files": 203,
+    "counts": {
+      "src/main/java": 134,
+      "src/test/java": 58,
+      "src/main/native": 10,
+      "src/test/native": 1
+    },
+    "meaning": "Exact locally present baseline support closure; excludes source not fetched. Source-byte verification does not mean every operation was reviewed."
+  },
+  "selected_production_files": 2,
+  "other_operations": "PENDING",
+  "public_owner_disposition": "Preserve com.m3.collections public owners and callable interfaces; new contract sources are test-only.",
+  "target_writes": "Actual qualified SDK Results only after all-input receiver admission.",
+  "behavior_scope": "Repairs reproduce prior contract violations; unchanged observable traces are established only for retained differential and event-tape cases, not universal equivalence.",
+  "native_scope": "Two extra Java reference-identity checks precede existing backend selection. Native sources, native ABI and JNI allocation path are unchanged.",
+  "excluded_claims": [
+    "No complete review of all collection or JDK families.",
+    "No native throughput or allocation improvement claim.",
+    "No guarantee for concurrent owner or array mutation.",
+    "No flattening of opaque foreign filtered owners.",
+    "No whole-JDK promotion or new public naming mapping.",
+    "No universal comparator callback identity on the repaired null-sentinel branch.",
+    "No universal read-only endpoint closure; historical strict Map-derived endpoints remain unreconciled."
+  ],
+  "read_only_scope": "Strict sequenced endpoint guards in this pass are limited to the Set family. The current outer JDK-derived Map wrappers are unchanged; the stronger historical strict empty Map-derived endpoint guarantee remains unreconciled and requires separate admission for concrete wrapper, marker and delegation behavior."
+}

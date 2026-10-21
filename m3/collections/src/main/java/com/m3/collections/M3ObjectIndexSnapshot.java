@@ -8,11 +8,15 @@ package com.m3.collections;
 import java.util.AbstractList;
 import java.util.Arrays;
 import java.util.BitSet;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Comparator;
+import java.util.List;
 import java.util.ConcurrentModificationException;
 import java.util.Objects;
 import java.util.RandomAccess;
 import java.util.function.Predicate;
+import java.util.function.UnaryOperator;
 import java.util.function.ToDoubleFunction;
 
 /**
@@ -32,8 +36,9 @@ import java.util.function.ToDoubleFunction;
  *
  * <p>This is a detached read-only M3 view, not a replacement concrete identity
  * for {@code java.util.ArrayList}, {@code SortedSet} or another JDK collection.
- * Mutation methods inherited from {@link AbstractList} refuse with
- * {@link UnsupportedOperationException}.</p>
+ * Every mutator explicitly refuses with {@link UnsupportedOperationException},
+ * including empty/no-op bulk methods; reversed views retain the same strict
+ * immutable boundary instead of inheriting AbstractList's no-op paths.</p>
  */
 public final class M3ObjectIndexSnapshot<E> extends AbstractList<E> implements RandomAccess {
     public enum Order {
@@ -85,6 +90,35 @@ public final class M3ObjectIndexSnapshot<E> extends AbstractList<E> implements R
     @SuppressWarnings("unchecked")
     public E get(int index) {
         return (E) values[denseRow(index)];
+    }
+
+    /** Strict immutable mutation boundary, even for no-op writes or empty views. */
+    private static UnsupportedOperationException immutable() {
+        return new UnsupportedOperationException("immutable M3 object-index snapshot");
+    }
+
+    @Override public E set(int index, E value) { throw immutable(); }
+    @Override public void add(int index, E value) { throw immutable(); }
+    @Override public boolean add(E value) { throw immutable(); }
+    @Override public boolean addAll(Collection<? extends E> incoming) { throw immutable(); }
+    @Override public boolean addAll(int index, Collection<? extends E> incoming) { throw immutable(); }
+    @Override public E remove(int index) { throw immutable(); }
+    @Override public boolean remove(Object value) { throw immutable(); }
+    @Override public boolean removeAll(Collection<?> incoming) { throw immutable(); }
+    @Override public boolean retainAll(Collection<?> incoming) { throw immutable(); }
+    @Override public boolean removeIf(Predicate<? super E> test) { throw immutable(); }
+    @Override public void replaceAll(UnaryOperator<E> operator) { throw immutable(); }
+    @Override public void sort(Comparator<? super E> comparator) { throw immutable(); }
+    @Override public void clear() { throw immutable(); }
+    @Override protected void removeRange(int begin, int end) { throw immutable(); }
+    @Override public void addFirst(E value) { throw immutable(); }
+    @Override public void addLast(E value) { throw immutable(); }
+    @Override public E removeFirst() { throw immutable(); }
+    @Override public E removeLast() { throw immutable(); }
+
+    /** JDK21 reverse order is a view, but never a writable alias to a snapshot. */
+    @Override public List<E> reversed() {
+        return Collections.unmodifiableList(super.reversed());
     }
 
     public int physicalSlotAt(int index) {
@@ -163,6 +197,53 @@ public final class M3ObjectIndexSnapshot<E> extends AbstractList<E> implements R
 
     public M3ObjectIndexSnapshot<E> filteredByState(int requiredMask, int excludedMask) {
         return filteredByState(requiredMask, excludedMask, M3IndexMaskCompactor.Backend.JAVA);
+    }
+
+    /**
+     * Select a detached logical view through an external 32-bit state plane indexed by
+     * the snapshot's PHYSICAL slot IDs, not by the sorted encounter ordinals.
+     *
+     * <p>This is a metadata-only, immediate projection. It preserves the original Object[]
+     * reference owner, duplicates, nulls, stable comparator/signal order, and the selected
+     * physical-slot metadata. The caller-owned state plane is borrowed only for this call;
+     * later changes to that plane cannot change this snapshot's membership. State bits
+     * (including bit 31) are compared as full integer masks, with no byte truncation.
+     * Invalid physical slots are rejected before any native call or output publication.
+     *
+     * <p>The Java and optional JNI backends delegate to the EXISTING
+     * {@link M3IndexPathMasks} row/physical-offset selector. No object references,
+     * predicates, comparators or JVM heap pointers cross JNI, and NATIVE_REQUIRED
+     * refuses a missing library rather than silently falling back. Neither path retains
+     * an external pointer or aliases mutable caller state.</p>
+     */
+    public M3ObjectIndexSnapshot<E> filteredByPhysicalStatePlane(
+            int[] stateByPhysicalSlot, int requiredMask, int excludedMask,
+            M3IndexPathMasks.Backend backend) {
+        Objects.requireNonNull(stateByPhysicalSlot, "stateByPhysicalSlot");
+        Objects.requireNonNull(backend, "backend");
+        int[] orderedRows = Arrays.copyOfRange(rows, from, to);
+        int[] orderedSlots = new int[orderedRows.length];
+        for (int i = 0; i < orderedRows.length; i++) {
+            int slot = physicalSlots[orderedRows[i]];
+            if (slot < 0 || slot >= stateByPhysicalSlot.length) {
+                throw new IndexOutOfBoundsException(
+                        "physical slot has no caller state word: " + slot);
+            }
+            orderedSlots[i] = slot;
+        }
+        int[] selected = M3IndexPathMasks.select(
+                orderedRows, orderedSlots, new int[][] { stateByPhysicalSlot },
+                new int[] { requiredMask }, new int[] { excludedMask },
+                0, orderedRows.length, 1, backend);
+        return withRows(selected, order);
+    }
+
+    /** Java-only convenience overload; native use must remain explicit. */
+    public M3ObjectIndexSnapshot<E> filteredByPhysicalStatePlane(
+            int[] stateByPhysicalSlot, int requiredMask, int excludedMask) {
+        return filteredByPhysicalStatePlane(
+                stateByPhysicalSlot, requiredMask, excludedMask,
+                M3IndexPathMasks.Backend.JAVA);
     }
 
     public M3ObjectIndexSnapshot<E> filtered(Predicate<? super E> predicate) {
