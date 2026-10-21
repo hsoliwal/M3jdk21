@@ -10,6 +10,11 @@ import org.junit.jupiter.api.Test;
 /** Maven delegates to the same independent mains used in the linked-image proof. */
 final class M3CollectionsPackTest {
     @Test
+    void packedDecisionBoundariesAndComposition() {
+        com.m3.util.M3PrimitiveSelectionWordContract.main(new String[0]);
+    }
+
+    @Test
     void readOnlyFilteredAndSortedViews() {
         M3FilteredViewsContract.main(new String[0]);
     }

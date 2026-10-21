@@ -16,7 +16,18 @@ PORT_CLASSES = ("M3PrimitiveIndexView", "M3PrimitiveSoaStore", "M3PrimitiveKind"
                 "M3DenseHash", "M3SortableTopK", "M3RuntimeHeap")
 CONTRACTS = ("jdk.m3.collections.M3FilteredViewsContract",
              "jdk.m3.collections.M3MutableFilteredViewsContract",
-             "com.m3.util.M3PrimitiveIndexViewFilterContract")
+             "com.m3.util.M3PrimitiveIndexViewFilterContract",
+             "com.m3.util.M3PrimitiveSelectionWordContract")
+OWNER_CONTRACTS = (
+    "M3StrictFilteredSequencedContract", "M3FilteredNavigationReconciliationContract",
+    "M3FilteredViewsContract", "M3MutableFilteredViewsContract",
+    "M3FilteredSetIdentityContract", "M3FilteredNavigableSetRangeContract",
+    "M3BoundedFilteredNavigationContract")
+NATIVE_CONTRACTS = (
+    ("M3IndexMaskCompactorSelfTest", ("--native",)),
+    ("M3IndexMaskWindowRecoverySelfTest", ("--native",)),
+    ("M3RequiredExcludedMaskSelectorNativeContract", ()),
+    ("M3MaskNativeParityProof", ()))
 NATIVE_SYMBOL = "Java_com_m3_collections_M3IndexMaskCompactor_selectNative"
 
 
@@ -52,22 +63,49 @@ def qualify(java, javac, modules, pack, repo, output, native, linked):
             "-Xlint:all,-module", "-Werror", "-proc:none", *common,
             "--patch-module", "jdk.m3.collections=" + str(pack / "src/test/java"),
             "-d", patch, *tests)
-    for name in CONTRACTS:
-        command(output / (label + "-" + name.rsplit(".", 1)[1] + ".log"), java,
-                "-Xcheck:jni", *common, "--patch-module", "jdk.m3.collections=" + str(patch),
-                "-m", "jdk.m3.collections/" + name, expected="PASS")
-    mask_test = repo / "m3/collections/src/test/java/com/m3/collections/M3IndexMaskCompactorSelfTest.java"
-    native_patch = output / (label + "-native-contracts")
-    native_patch.mkdir()
-    command(output / (label + "-native-oracle-javac.log"), javac,
+    for mode in ((), ("-Xint",)):
+        suffix = "-int" if mode else ""
+        for name in CONTRACTS:
+            command(output / (label + "-" + name.rsplit(".", 1)[1] + suffix + ".log"), java,
+                    *mode, "-Xcheck:jni", *common,
+                    "--patch-module", "jdk.m3.collections=" + str(patch),
+                    "-m", "jdk.m3.collections/" + name, expected="PASS")
+    owner_tests = repo / "m3/collections/src/test/java/com/m3/collections"
+    owner_patch = output / (label + "-owner-contracts")
+    owner_patch.mkdir()
+    names = [*OWNER_CONTRACTS, *(name for name, _ in NATIVE_CONTRACTS)]
+    command(output / (label + "-owner-oracles-javac.log"), javac,
             "-source", "21", "-target", "21", "-Xlint:all,-module", "-Werror", "-proc:none",
-            *common, "--patch-module", "com.m3.collections=" + str(mask_test.parent),
-            "-d", native_patch, mask_test)
+            *common, "--patch-module", "com.m3.collections=" + str(owner_tests),
+            "-d", owner_patch, *(owner_tests / (name + ".java") for name in names))
     library_path = [] if linked else ["-Djava.library.path=" + str(native)]
-    command(output / (label + "-native-oracle.log"), java, "-Xcheck:jni", *library_path,
-            *common, "--patch-module", "com.m3.collections=" + str(native_patch),
-            "-m", "com.m3.collections/com.m3.collections.M3IndexMaskCompactorSelfTest",
-            "--native", expected="JNI=true")
+    for mode in ((), ("-Xint",)):
+        suffix = "-int" if mode else ""
+        for name in OWNER_CONTRACTS:
+            command(output / (label + "-owner-" + name + suffix + ".log"), java,
+                    *mode, "-Xcheck:jni", *common,
+                    "--patch-module", "com.m3.collections=" + str(owner_patch),
+                    "-m", "com.m3.collections/com.m3.collections." + name)
+        for name, arguments in NATIVE_CONTRACTS:
+            command(output / (label + "-native-" + name + suffix + ".log"), java,
+                    *mode, "-Xcheck:jni", *library_path, *common,
+                    "--patch-module", "com.m3.collections=" + str(owner_patch),
+                    "-m", "com.m3.collections/com.m3.collections." + name,
+                    *arguments, expected="PASS")
+
+
+def verify_exports(header, symbols):
+    """The generated Java declarations own the complete ABI, including additive capabilities."""
+    declared = set(re.findall(r"JNIEXPORT\s+\w+\s+JNICALL\s+(Java_\w+)\s*\(", header))
+    exported = {line.split()[-1] for line in symbols.splitlines()
+                if line.split() and line.split()[-1].startswith("Java_")}
+    if NATIVE_SYMBOL not in declared:
+        raise ValueError("existing JNI header contract is missing")
+    if exported != declared:
+        raise ValueError("JNI exports differ from generated declarations: missing="
+                         + repr(sorted(declared - exported)) + " extra="
+                         + repr(sorted(exported - declared)))
+    return sorted(declared)
 
 
 def main():
@@ -102,9 +140,16 @@ def main():
     modules, jars, native, headers = (output / name for name in ("modules", "jars", "native", "headers"))
     for directory in (modules, jars, native, headers):
         directory.mkdir()
+    contract_sources = [pack / "src/test/java" / (name.replace(".", "/") + ".java")
+                        for name in CONTRACTS]
+    contract_sources.extend(repo / "m3/collections/src/test/java/com/m3/collections" / (name + ".java")
+                            for name in [*OWNER_CONTRACTS, *(n for n, _ in NATIVE_CONTRACTS)])
+    inputs = sorted([*collection_sources, *view_sources, *contract_sources,
+                     native_source, packager, Path(__file__).resolve()])
+    input_hashes = {str(path.relative_to(repo)): digest(path) for path in inputs}
     source_receipt = ["path\tsha256"]
     source_receipt.extend(str(path.relative_to(repo)) + "\t" + digest(path)
-                          for path in sorted([*collection_sources, *view_sources, native_source, packager]))
+                          for path in inputs)
     (output / "COMPILED_INPUTS.tsv").write_text("\n".join(source_receipt) + "\n", encoding="utf-8")
     for name, sources in (("com.m3.collections", collection_sources), ("jdk.m3.collections", view_sources)):
         command(output / (name + "-javac.log"), home / "bin/javac", "--release", "21",
@@ -119,10 +164,10 @@ def main():
             "-I" + str(home / "include"), "-I" + str(home / "include/linux"),
             "-include", header, "-o", library, native_source)
     symbols = command(output / "native-symbols.log", "nm", "-D", "--defined-only", library)
-    exported_jni = {line.split()[-1] for line in symbols.splitlines()
-                    if line.split() and line.split()[-1].startswith("Java_")}
-    if exported_jni != {NATIVE_SYMBOL}:
-        raise ValueError("unexpected JNI export set: " + repr(exported_jni))
+    native_symbols = verify_exports(header.read_text(), symbols)
+    command(output / "native-header-cxx20.log", os.environ.get("CXX", "c++"),
+            "-std=c++20", "-Wall", "-Wextra", "-Werror", "-x", "c++", "-fsyntax-only",
+            "-I" + str(home / "include"), "-I" + str(home / "include/linux"), header)
     qualify(home / "bin/java", home / "bin/javac", modules, pack, repo, output, native, False)
     rows = ["artifact\tversion\tjar\tmodule\trequires\tdisposition"]
     for module in ("com.m3.collections", "jdk.m3.collections"):
@@ -153,16 +198,21 @@ def main():
     if not linked_library.is_file() or digest(linked_library) != digest(normalized_library):
         raise ValueError("linked native library differs from the exact strip-debug reference")
     qualify(image / "bin/java", image / "bin/javac", modules, pack, repo, output, native, True)
+    if input_hashes != {str(path.relative_to(repo)): digest(path) for path in inputs}:
+        raise ValueError("source or contract changed during qualification")
     receipt = {"status": "PASS", "modules": ["com.m3.collections", "jdk.m3.collections"],
                "existing_collection_source_files": len(collection_sources),
                "optional_projection_source_files": len(view_sources),
-               "native_symbol": NATIVE_SYMBOL, "native_sha256": digest(library),
+               "native_symbol": NATIVE_SYMBOL, "native_symbols": native_symbols,
+               "generated_header_sha256": digest(header),
+               "execution_modes": ["mixed", "interpreted"],
+               "contract_mains_per_mode_and_runtime": len(CONTRACTS) + len(OWNER_CONTRACTS) + len(NATIVE_CONTRACTS), "native_sha256": digest(library),
                "linked_native_sha256": digest(linked_library),
                "native_packaging_transform": "objcopy --strip-debug reference; exact linked byte parity",
                "native_required_on_host_and_image": True, "jdk_home": str(home),
                "toolchain_release_sha256": digest(home / "release"),
                "host_platform": platform.platform(),
-               "scope": "Linux optional source modules and actual JNI/JMOD linked-image proof; not a full custom HotSpot build or java.util receiving promotion"}
+               "scope": "Linux optional source modules and actual JNI/JMOD linked-image proof; toolchain provenance is identified separately; no java.util family receiving promotion"}
     (output / "M3_COLLECTIONS_PACK_PROOF.json").write_text(json.dumps(receipt, indent=2) + "\n", encoding="utf-8")
     print("M3_COLLECTIONS_PACK_PASS modules=2 native_required=true host_and_image=true")
 

@@ -1,4 +1,5 @@
 /*
+ * Copyright (c) 2026, Hitesh Soliwal and contributors.
  * Copyright (c) 1994, 2022, Oracle and/or its affiliates. All rights reserved.
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
  *
@@ -202,6 +203,24 @@ public abstract class OutputStream implements Closeable, Flushable {
      * @throws     IOException  if an I/O error occurs.
      */
     public void close() throws IOException {
+    }
+
+    /**
+     * Returns a stream that reports successful byte operations to a borrowed
+     * progress monitor, normally a child allocated by the caller. Closing the
+     * returned stream closes this stream; it never completes the monitor.
+     * The caller must use the returned stream for accounting to apply.
+     *
+     * <p>Cancellation is checked before positive I/O. A monitor callback can
+     * throw after successful I/O; this method provides no rollback. Layered
+     * wrappers should use distinct child budgets to avoid double accounting.
+     *
+     * @param monitor the borrowed monitor, never null
+     * @return the progress-reporting stream
+     * @throws NullPointerException if monitor is null
+     */
+    public OutputStream withProgress(java.util.concurrent.ProgressMonitor monitor) {
+        return jdk.internal.m3.io.M3IO.progress(this, monitor);
     }
 
 }

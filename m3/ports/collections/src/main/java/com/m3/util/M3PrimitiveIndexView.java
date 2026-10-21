@@ -69,26 +69,71 @@ public final class M3PrimitiveIndexView {
     public M3PrimitiveIndexView filterLane(int lane, LongPredicate predicate) {
         Objects.requireNonNull(predicate, "predicate");
         checkLive();
-        int[] selected = new int[rows.length];
-        int count = 0;
-        for (int row : rows) {
-            if (predicate.test(store.getBits(lane, row))) selected[count++] = row;
+        int prefix = 0;
+        while (prefix < rows.length && (predicate.test(store.getBits(lane, rows[prefix])))) prefix++;
+        if (prefix == rows.length) {
+            checkLive();
+            return new M3PrimitiveIndexView(store, rows, sourceVersion);
+        }
+        long[] selected = selectionWords(prefix);
+        int count = prefix;
+        for (int position = prefix + 1; position < rows.length; position++) {
+            if (predicate.test(store.getBits(lane, rows[position]))) {
+                selected[position >>> 6] |= 1L << (position & 63);
+                count++;
+            }
         }
         checkLive();
-        return new M3PrimitiveIndexView(store,
-                count == selected.length ? selected : Arrays.copyOf(selected, count), sourceVersion);
+        return new M3PrimitiveIndexView(store, selectedRows(selected, count), sourceVersion);
     }
 
     public M3PrimitiveIndexView filterStateMask(int requiredMask) {
         checkLive();
-        int[] selected = new int[rows.length];
-        int count = 0;
-        for (int row : rows) {
-            if ((store.stateAt(row) & requiredMask) == requiredMask) selected[count++] = row;
+        int prefix = 0;
+        while (prefix < rows.length && ((store.stateAt(rows[prefix]) & requiredMask) == requiredMask)) prefix++;
+        if (prefix == rows.length) {
+            checkLive();
+            return new M3PrimitiveIndexView(store, rows, sourceVersion);
+        }
+        long[] selected = selectionWords(prefix);
+        int count = prefix;
+        for (int position = prefix + 1; position < rows.length; position++) {
+            // Keep the owner's signed byte promotion, including negative int masks.
+            if ((store.stateAt(rows[position]) & requiredMask) == requiredMask) {
+                selected[position >>> 6] |= 1L << (position & 63);
+                count++;
+            }
         }
         checkLive();
-        return new M3PrimitiveIndexView(store,
-                count == selected.length ? selected : Arrays.copyOf(selected, count), sourceVersion);
+        return new M3PrimitiveIndexView(store, selectedRows(selected, count), sourceVersion);
+    }
+
+    /** Allocate only after the first rejection; preceding occurrences are all selected. */
+    private long[] selectionWords(int acceptedPrefix) {
+        // Quotient/remainder rounding cannot overflow the int array length.
+        long[] selected = new long[(rows.length >>> 6) + ((rows.length & 63) == 0 ? 0 : 1)];
+        int completeWords = acceptedPrefix >>> 6;
+        Arrays.fill(selected, 0, completeWords, -1L);
+        selected[completeWords] = (1L << (acceptedPrefix & 63)) - 1;
+        return selected;
+    }
+
+    /** Emit in encounter order without replaying predicates or retaining decision words. */
+    private int[] selectedRows(long[] selected, int count) {
+        // rows is private and immutable: all outward exports already make defensive copies.
+        if (count == rows.length) return rows;
+        int[] result = new int[count];
+        if (count == 0) return result;
+        int written = 0;
+        for (int word = 0; word < selected.length; word++) {
+            long pending = selected[word];
+            while (pending != 0) {
+                int position = (word << 6) + Long.numberOfTrailingZeros(pending);
+                result[written++] = rows[position];
+                pending &= pending - 1;
+            }
+        }
+        return result;
     }
 
     public M3PrimitiveIndexView slice(int fromInclusive, int toExclusive) {

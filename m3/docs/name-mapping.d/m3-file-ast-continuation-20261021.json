@@ -1,0 +1,35 @@
+{
+  "schema": "M3_OPTIONAL_MODULE_MAPPING_V1",
+  "modules": [
+    "com.m3.file",
+    "jdk.m3.parser"
+  ],
+  "canonical_recipe": "com.synexia.m3jdk.CollectionsContractRefinement20261017",
+  "canonical_repository": "hsoliwal/com.synexia",
+  "immutable_pin": "../file-ast-native-source-pin-20261021.json",
+  "target_base": "2879a91f48c184b90e7d1577ff581bd8793ae634",
+  "receiving_sequence_advanced": false,
+  "mappings": [
+    {
+      "source": "existing snapshot owner PR1581 and original M3File traversal",
+      "target": "com.m3.file.M3File/M3FileSnapshot",
+      "role": "bounded complete byte observation and lazy provider traversal"
+    },
+    {
+      "source": "M3 dense array/offset/mask pattern; explicit caller scope",
+      "target": "com.m3.file.M3FileScope",
+      "role": "bounded path identity interning without retained entry nodes"
+    },
+    {
+      "source": "NIO attribute and optional provider-version contracts",
+      "target": "com.m3.file.M3FileObservation/M3FileVersionView",
+      "role": "metadata state masks independent of complete content hashes"
+    },
+    {
+      "source": "existing M3ASTIndex domain/kind/topology lanes",
+      "target": "jdk.m3.parser.M3ASTIndex/Delta",
+      "role": "versioned structure fingerprint and exact primitive row changes"
+    }
+  ],
+  "qualification_scope": "source-built Linux x86_64 JDK and linked product modules; full jtreg, other platforms and performance remain separate"
+}

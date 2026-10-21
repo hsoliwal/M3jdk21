@@ -152,4 +152,84 @@ public final class M3IO {
     private static boolean active(long[] words, int physical) {
         return (words[physical >>> 6] & (1L << (physical & 63))) != 0;
     }
+    /**
+     * Borrows a monitor (including a caller-allocated child) for byte accounting.
+     * Positive reads and skips count; bytes reread after reset count again.
+     * Close never completes the monitor. An exception from a monitor callback
+     * may follow successful I/O; the delegate operation is not rolled back.
+     */
+    public static InputStream progress(InputStream source,
+            java.util.concurrent.ProgressMonitor monitor) {
+        Objects.requireNonNull(source, "source");
+        Objects.requireNonNull(monitor, "monitor");
+        return new InputStream() {
+            private boolean closed;
+            private void open() throws IOException {
+                if (closed) throw new IOException("progress stream is closed");
+            }
+            @Override public int read() throws IOException {
+                open(); monitor.checkCancelled();
+                int result = source.read();
+                if (result >= 0) monitor.worked(1);
+                return result;
+            }
+            @Override public int read(byte[] bytes, int offset, int length) throws IOException {
+                Objects.checkFromIndexSize(offset, length, bytes.length);
+                open();
+                if (length == 0) return 0;
+                monitor.checkCancelled();
+                int count = source.read(bytes, offset, length);
+                if (count > 0) monitor.worked(count);
+                return count;
+            }
+            @Override public long skip(long count) throws IOException {
+                open();
+                if (count <= 0) return 0;
+                monitor.checkCancelled();
+                long skipped = source.skip(count);
+                if (skipped > 0) monitor.worked(skipped);
+                return skipped;
+            }
+            @Override public int available() throws IOException { open(); return source.available(); }
+            @Override public boolean markSupported() { return source.markSupported(); }
+            @Override public synchronized void mark(int limit) { if (!closed) source.mark(limit); }
+            @Override public synchronized void reset() throws IOException { open(); source.reset(); }
+            @Override public void close() throws IOException {
+                if (!closed) { closed = true; source.close(); }
+            }
+        };
+    }
+
+    /**
+     * Counts completed writes once, retaining bulk delegate writes. An IOException
+     * may follow an unobservable partial write; no count is invented for that case.
+     * Closing the wrapper delegates once and never completes the borrowed monitor.
+     */
+    public static OutputStream progress(OutputStream target,
+            java.util.concurrent.ProgressMonitor monitor) {
+        Objects.requireNonNull(target, "target");
+        Objects.requireNonNull(monitor, "monitor");
+        return new OutputStream() {
+            private boolean closed;
+            private void open() throws IOException {
+                if (closed) throw new IOException("progress stream is closed");
+            }
+            @Override public void write(int value) throws IOException {
+                open(); monitor.checkCancelled(); target.write(value); monitor.worked(1);
+            }
+            @Override public void write(byte[] bytes, int offset, int length) throws IOException {
+                Objects.checkFromIndexSize(offset, length, bytes.length);
+                open();
+                if (length == 0) return;
+                monitor.checkCancelled();
+                target.write(bytes, offset, length);
+                monitor.worked(length);
+            }
+            @Override public void flush() throws IOException { open(); target.flush(); }
+            @Override public void close() throws IOException {
+                if (!closed) { closed = true; target.close(); }
+            }
+        };
+    }
+
 }
