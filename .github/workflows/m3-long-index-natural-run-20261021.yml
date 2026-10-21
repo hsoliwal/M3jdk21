@@ -1,0 +1,27 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3JDK21 native owner monotonic index contract
+on:
+  pull_request:
+    paths:
+      - 'm3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java'
+      - 'm3/collections/src/test/java/com/m3/collections/M3LongIndexNaturalRunContract.java'
+      - 'm3/collections/src/test/java/com/m3/collections/M3LongIndexNaturalRunTest.java'
+      - 'm3/collections/qualification/natural-run-20261021/**'
+      - 'm3/collections/algorithm-catalog/natural-run-20261021/**'
+      - 'm3/docs/M3JDK21-INTEGRATED-JAVA-JNI-RECIPE-CATALOGUE-20261021.md'
+      - '.github/workflows/m3-long-index-natural-run-20261021.yml'
+  workflow_dispatch:
+jobs:
+  real-source-baseline-candidate-java21:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Pinned source + actual product Java21 strict compile and differential
+        run: bash m3/collections/qualification/natural-run-20261021/verify.sh
