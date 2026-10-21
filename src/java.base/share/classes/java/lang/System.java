@@ -2537,6 +2537,11 @@ public final class System {
                 return String.m3JoinedStringsEnabled();
             }
 
+            public java.util.function.IntUnaryOperator stringCodeUnitCursor(String text) {
+                M3String source = text.m3();
+                return source == null ? null : new M3String.CodeUnitCursor(source);
+            }
+
             public java.util.function.LongPredicate stringM3TrigramFacts(String text) {
                 if (text == null) return null;
                 M3String source = text.m3();

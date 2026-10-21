@@ -20,6 +20,7 @@ import java.util.Arrays;
 import java.util.Objects;
 import java.util.Spliterator;
 import java.util.function.IntConsumer;
+import java.util.function.IntUnaryOperator;
 import java.util.stream.IntStream;
 import java.util.stream.StreamSupport;
 import sun.nio.cs.ArrayEncoder;
@@ -576,7 +577,7 @@ final class M3String implements CharSequence {
      * It resolves each contiguous visible scalar run once, not once per code unit.
      * Only canonical owners and primitive bounds are retained; no text or native pointer copy.
      */
-    static final class CodeUnitCursor {
+    static final class CodeUnitCursor implements IntUnaryOperator {
         private final M3String source;
         private M3StringOwner scalar;
         private int logicalBegin;
@@ -585,6 +586,11 @@ final class M3String implements CharSequence {
 
         CodeUnitCursor(M3String source) {
             this.source = source;
+        }
+
+        @Override
+        public int applyAsInt(int index) {
+            return at(index);
         }
 
         char at(int index) {
