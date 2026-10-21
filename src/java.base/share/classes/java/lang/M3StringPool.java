@@ -639,7 +639,11 @@ final class M3StringPool {
                         } else if (existing.length == totalLength
                                 && existing.coder == coder
                                 && existing.javaHash == javaHash
-                                && sameLeafSequence(M3String.whole(existing), left, right)) {
+                                // Identical immutable child coordinates are already an exact proof.
+                                // Keep normalized leaf comparison for different parenthesizations.
+                                && ((existing.left.sameCoordinate(left)
+                                        && existing.right.sameCoordinate(right))
+                                    || sameLeafSequence(M3String.whole(existing), left, right))) {
                             return M3String.whole(existing);
                         }
                     }
