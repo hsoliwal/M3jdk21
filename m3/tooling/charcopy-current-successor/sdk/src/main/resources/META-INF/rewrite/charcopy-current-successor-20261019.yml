@@ -1,0 +1,9 @@
+# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
+# SPDX-License-Identifier: Apache-2.0
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.CharcopyCurrentSuccessor20261019
+displayName: Verify exact char-copy successor source custody
+description: Eight exact KEEP inputs and absent legacy owners; grants no runtime admission.
+recipeList:
+  - com.synexia.rewrite.M3CharcopyCurrentSuccessorRecipe
