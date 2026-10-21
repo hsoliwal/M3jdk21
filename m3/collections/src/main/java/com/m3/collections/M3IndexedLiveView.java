@@ -45,6 +45,7 @@ public final class M3IndexedLiveView<E> extends AbstractList<E> implements Rando
     private int structureEpoch;
     private long valueEpoch;
     private boolean prepared;
+    private boolean preparing;
     private long invalidationEpoch;
 
     private M3IndexedLiveView(M3ArrayList<E> owner, Predicate<? super E> filter,
@@ -95,42 +96,60 @@ public final class M3IndexedLiveView<E> extends AbstractList<E> implements Rando
         }
     }
 
+    /** A callback can also invalidate this view without changing parent epochs. */
+    private void checkPreparation(int expectedStructure, long expectedValue,
+            long expectedInvalidation) {
+        checkEpoch(expectedStructure, expectedValue);
+        if (invalidationEpoch != expectedInvalidation) {
+            throw new ConcurrentModificationException("M3 indexed view invalidated during preparation");
+        }
+    }
+
     private void refresh() {
+        if (preparing) {
+            throw new ConcurrentModificationException("M3 indexed view reentered during preparation");
+        }
         int structure = owner.m3StructureEpoch();
         long values = owner.m3ValueEpoch();
         if (prepared && structure == structureEpoch && values == valueEpoch) return;
-        if (filter != null && backend == M3IndexMaskCompactor.Backend.NATIVE_REQUIRED
-                && !M3IndexMaskCompactor.nativeAvailable()) {
-            throw new UnsatisfiedLinkError("m3_index_mask JNI library unavailable");
-        }
-        int length = owner.size();
-        int[] selected;
-        if (filter == null) {
-            selected = new int[length];
-            for (int i = 0; i < length; i++) selected[i] = i;
-        } else {
-            byte[] selectedMask = new byte[length];
-            for (int i = 0; i < length; i++) {
-                checkEpoch(structure, values);
-                E value = owner.get(i);
-                selectedMask[i] = (byte) (filter.test(value) ? 1 : 0);
-                checkEpoch(structure, values);
+        long expectedInvalidation = invalidationEpoch;
+        preparing = true;
+        try {
+            if (filter != null && backend == M3IndexMaskCompactor.Backend.NATIVE_REQUIRED
+                    && !M3IndexMaskCompactor.nativeAvailable()) {
+                throw new UnsatisfiedLinkError("m3_index_mask JNI library unavailable");
             }
-            selected = M3IndexMaskCompactor.selectPositions(selectedMask, 1, backend);
+            int length = owner.size();
+            int[] selected;
+            if (filter == null) {
+                selected = new int[length];
+                for (int i = 0; i < length; i++) selected[i] = i;
+            } else {
+                byte[] selectedMask = new byte[length];
+                for (int i = 0; i < length; i++) {
+                    checkPreparation(structure, values, expectedInvalidation);
+                    E value = owner.get(i);
+                    selectedMask[i] = (byte) (filter.test(value) ? 1 : 0);
+                    checkPreparation(structure, values, expectedInvalidation);
+                }
+                selected = M3IndexMaskCompactor.selectPositions(selectedMask, 1, backend);
+            }
+            checkPreparation(structure, values, expectedInvalidation);
+            if (sorted) {
+                M3IndexSort.stable(selected, index -> {
+                    checkPreparation(structure, values, expectedInvalidation);
+                    return owner.get(index);
+                }, comparator);
+            }
+            checkPreparation(structure, values, expectedInvalidation);
+            // One publication after all callbacks, JNI selection and sorting complete.
+            physical = selected;
+            structureEpoch = structure;
+            valueEpoch = values;
+            prepared = true;
+        } finally {
+            preparing = false;
         }
-        checkEpoch(structure, values);
-        if (sorted) {
-            M3IndexSort.stable(selected, index -> {
-                checkEpoch(structure, values);
-                return owner.get(index);
-            }, comparator);
-        }
-        checkEpoch(structure, values);
-        // One publication after all callbacks, JNI selection and sorting complete.
-        physical = selected;
-        structureEpoch = structure;
-        valueEpoch = values;
-        prepared = true;
     }
 
     @Override public int size() { refresh(); return physical.length; }
