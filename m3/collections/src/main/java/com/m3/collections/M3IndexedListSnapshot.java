@@ -354,21 +354,56 @@ public final class M3IndexedListSnapshot<E> extends AbstractList<E> implements R
             }
         }
         if (ascending) {
-            int[] reverseGroups = new int[length];
-            int output = 0;
+            // Observe the exact historical comparator schedule before mutating an
+            // index. Store only equality-group starts, one bit per physical position,
+            // rather than materializing a second int[length] directory.
+            long[] groupStarts = new long[(int) (((long) length + 63L) >>> 6)];
             for (int end = length; end > 0;) {
                 int begin = end - 1;
                 while (begin > 0 && compare(indices[begin - 1],
                         indices[begin], comparator) == 0) begin--;
-                System.arraycopy(indices, begin, reverseGroups, output, end - begin);
-                output += end - begin;
+                groupStarts[begin >>> 6] |= 1L << (begin & 63);
                 end = begin;
             }
-            System.arraycopy(reverseGroups, 0, indices, 0, length);
+
+            // Reverse the private index directory, then restore encounter order
+            // inside each original comparator-equality group. No user callback
+            // occurs after the first write to indices.
+            reversePositions(indices, 0, length);
+            int output = 0;
+            for (int end = length; end > 0;) {
+                int begin = precedingGroupStart(groupStarts, end - 1);
+                int next = output + (end - begin);
+                reversePositions(indices, output, next);
+                output = next;
+                end = begin;
+            }
         } else {
             sortPositions(indices, (left, right) ->
                     comparator != null ? comparator.compare(right, left)
                             : ((Comparable<? super E>) right).compareTo(left));
+        }
+    }
+
+    /** Last admitted equality-group start at or before a selected source ordinal. */
+    private static int precedingGroupStart(long[] groupStarts, int ordinal) {
+        int word = ordinal >>> 6;
+        long candidates = groupStarts[word] & (-1L >>> (63 - (ordinal & 63)));
+        while (candidates == 0L) {
+            if (--word < 0) {
+                throw new IllegalStateException("missing immutable equality-group start");
+            }
+            candidates = groupStarts[word];
+        }
+        return (word << 6) + Long.SIZE - 1 - Long.numberOfLeadingZeros(candidates);
+    }
+
+    /** Reverse only a private primitive-index range; no payload, entry or callback. */
+    private static void reversePositions(int[] indices, int from, int to) {
+        for (int left = from, right = to - 1; left < right; left++, right--) {
+            int value = indices[left];
+            indices[left] = indices[right];
+            indices[right] = value;
         }
     }
 
