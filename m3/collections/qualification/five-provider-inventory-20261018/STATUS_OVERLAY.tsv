@@ -34,7 +34,7 @@ com.google.common.collect.LinkedHashMultimap	OPEN	-	-	core M3LinkedHashMap + M3I
 com.google.common.collect.LinkedListMultimap	OPEN	-	-	core M3LinkedList link lanes	-
 com.google.common.collect.TreeMultimap	OPEN	-	-	core M3TreeMap + M3TreeSet	-
 com.google.common.collect.HashMultiset	DONE #1418	com.m3.collections.guava.M3HashMultiset	PR #1418: implementations/guava-hash-multiset + qualification/owned-guava-hash-multiset-20261018	#1271 M3GuavaMultiset; core M3CountedBag	fill order b; reuse counts lanes
-com.google.common.collect.LinkedHashMultiset	OPEN	-	-	core M3CountedBag + M3LinkedHashMap	-
+com.google.common.collect.LinkedHashMultiset	DONE #1523	com.m3.collections.guava.M3LinkedHashMultiset	PR #1523: implementations/guava-linked-hash-multiset + qualification/owned-guava-linked-hash-multiset-20261019	PR #1418 M3HashMultiset (dense lanes, index); core M3LinkedHashMap (order chain)	next wave 2 of 5
 com.google.common.collect.TreeMultiset	OPEN	-	-	core M3CountedBag; #1403 M3OrderStatisticForest + M3SparseExtents	range counts via viewport owners
 com.google.common.collect.EnumMultiset	DONE #1499	com.m3.collections.guava.M3EnumMultiset	PR #1499: implementations/guava-enum-multiset + qualification/owned-guava-enum-multiset-20261019	core M3EnumLongMap (ordinal lanes + presence mask); PR #1418 M3HashMultiset (counting lanes, views)	next wave 1 of 5; reuse ordinal lanes
 com.google.common.collect.ConcurrentHashMultiset	OPEN	-	-	core M3CountedBag + M3LockedMap	-
