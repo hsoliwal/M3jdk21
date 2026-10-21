@@ -137,3 +137,27 @@ fixture, JNI parity and SWT/Nebula/GEF/RWT integration are **NOT RUN**.
 
 Canonical build-time source-sealed pass and donor catalogue remain on
 [Synexia PR #12865](https://github.com/hsoliwal/com.synexia/pull/12865).
+
+## Continuation — direct owner filtered isEmpty atom (pass 5)
+
+The existing `FilteredCollection.isEmpty()` constructed a temporary filtered
+iterator only to query `hasNext()`. The pre-existing first-party
+`M3CollectionViews` implementation instead scans the backing iterator
+directly. Its only observable work is the same ordered predicate evaluation and
+short circuit. This file-local performance pass reuses that existing private
+method body; no additional object store, result mask, JNI call, public API
+change, or new runtime layer.
+
+- Preimage Git blob: `8563e257b27a9702514dfbd7978ddcbaa8959e54`
+- Postimage Git blob: `7f010e155d26dd7c49aeb61120ce9b98b7e6d4fc`
+- Final source SHA-256: `6b8fc8b8cf685cc3ba3ccc08dc117c963c56112d217fb29c4cdfa3bc1de203df`
+- New regression source:
+  `test/jdk/java/util/CollectionViews/FilteredIsEmptyDirectTest.java`
+
+**Executed** a local isolated Java 21 comparison, passing **180,000**
+assertions over 60,000 seeded traces, including exception and predicate-order
+parity. **Not executed**: this branch's full patched OpenJDK build, jtreg,
+Maven/OpenRewrite fixture, JNI/native and toolkit UI verification.
+The authoring source and exact SHA-256 sealed recipe remain in
+Synexia PR #12865. The separate existing standalone collection `isEmpty`
+recipe is left unchanged.
