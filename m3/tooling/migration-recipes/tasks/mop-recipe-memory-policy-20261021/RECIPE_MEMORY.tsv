@@ -1,0 +1,2 @@
+seq	recipe	trigger	observed	correction	guard	lesson	category	donor	status
+1	com.m3.rewrite.backport.M3RecipeMemoryPolicyRecipe	invariant-review	canonical M3 recipe ownership classified recipe classes but did not validate append-only correction memory or require recipe+memory when runtime source changes	PENDING	M3RecipeMemoryPolicyRecipeTest	make learning memory a fail-closed PR invariant alongside recipe ownership	recipe-governance	M3JDK21-existing-m3-recipe-ownership	RECORDED
