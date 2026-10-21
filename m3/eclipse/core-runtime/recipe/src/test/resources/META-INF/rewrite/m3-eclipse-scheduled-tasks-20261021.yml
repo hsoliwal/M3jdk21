@@ -1,0 +1,13 @@
+# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and contributors
+# SPDX-License-Identifier: Apache-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.rewrite.M3EclipseScheduledTasks20261021
+displayName: Receive M3 Java 21 scheduled Runnable/Callable tasks
+description: >-
+  Reuse Java 21 ExecutorService/ScheduledExecutorService and the existing
+  M3 progress owner for one-shot Runnable, Callable and Eclipse IStatus work.
+  Preserve Future cancellation, pre-start rejection, JobManager authority and
+  the Java-only callback boundary. No JNI callback bridge.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: eclipse-m3-scheduled-tasks-20261021
