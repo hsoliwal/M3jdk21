@@ -24,7 +24,7 @@ if [[ "$(git -C "$root" hash-object "$src/jdk/internal/mindex/M3CollectionMaskCo
   exit 1
 fi
 if [[ "$(git -C "$root" hash-object "$test/jdk/internal/mindex/M3CollectionMaskCompactorPrefixTest.java")" \
-       != "39875249ce1b1adf5203bcf2074db45848bc5eeb" ]]; then
+       != "d720912f0f57bcde9fc07a05f31869a19f3452eb" ]]; then
   echo "HOLD: original jtreg oracle source drift" >&2
   exit 1
 fi
@@ -49,6 +49,10 @@ javac -source 21 -target 21 -Xlint:all -Werror -proc:none \
   "$test/java/util/CollectionViews/CollectionViewsContract.java"
 
 java --patch-module "java.base=$tmp/classes" \
+  --add-exports "java.base/jdk.internal.mindex=ALL-UNNAMED" \
+  -cp "$tmp/tests" M3CollectionMaskCompactorPrefixTest
+
+java -Xint --patch-module "java.base=$tmp/classes" \
   --add-exports "java.base/jdk.internal.mindex=ALL-UNNAMED" \
   -cp "$tmp/tests" M3CollectionMaskCompactorPrefixTest
 
