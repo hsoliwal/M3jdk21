@@ -3,6 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0 */
 #include "m3_state_relation.h"
 #include <jni.h>
+#include "m3_jni_util.h"
 #include <string.h>
 
 int m3_state_relation_compose(const uint64_t *left, const uint64_t *right,
@@ -42,11 +43,7 @@ int m3_state_relation_compose(const uint64_t *left, const uint64_t *right,
 }
 
 static void relation_error(JNIEnv *env, const char *type, const char *message) {
-  jclass exception = (*env)->FindClass(env, type);
-  if (exception != NULL) {
-    (void) (*env)->ThrowNew(env, exception, message);
-    (*env)->DeleteLocalRef(env, exception);
-  }
+  m3_jni_throw_by_name(env, type, message);
 }
 
 JNIEXPORT jlongArray JNICALL

@@ -5,6 +5,7 @@
  * GPLv2 with the Classpath exception.
  */
 #include "jdk_internal_mindex_M3RegexDpPlan.h"
+#include "m3_jni_util.h"
 #include <stdint.h>
 #include <string.h>
 
@@ -110,11 +111,7 @@ static int compose_structured_rows(const uint64_t *a, const uint64_t *b, uint64_
 }
 
 static void fail(JNIEnv *env, const char *type, const char *message) {
-    jclass cls = (*env)->FindClass(env, type);
-    if (cls != NULL) {
-        (void)(*env)->ThrowNew(env, cls, message);
-        (*env)->DeleteLocalRef(env, cls);
-    }
+    m3_jni_throw_by_name(env, type, message);
 }
 
 static jlongArray compose_jni(JNIEnv *env, jlongArray left, jlongArray right,

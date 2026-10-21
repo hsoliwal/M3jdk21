@@ -2,16 +2,14 @@
 #include <jni.h>
 #include <stdint.h>
 #include "com_m3_collections_M3ResidencyStateMaskIndex.h"
+#include "../../../../../../src/java.base/share/native/libjava/m3_jni_util.h"
 
 /* Only ephemeral primitive index/word/state snapshots cross JNI; no Java object handles. */
 #define M3_CHUNK 256
 
 static void fail(JNIEnv *env, const char *name, const char *message) {
     if ((*env)->ExceptionCheck(env)) return;
-    jclass kind = (*env)->FindClass(env, name);
-    if (kind == NULL) return;
-    (void) (*env)->ThrowNew(env, kind, message);
-    (*env)->DeleteLocalRef(env, kind);
+    m3_jni_throw_by_name(env, name, message);
 }
 
 static int selected(jlong bits, jbyte state, jlong required,

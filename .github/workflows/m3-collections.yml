@@ -10,6 +10,12 @@ on:
       - '.github/workflows/m3-collections.yml'
       - 'm3/collections/**'
       - 'm3/tooling/migration-recipes/**'
+      - 'src/java.base/share/native/libjava/M3*.c'
+      - 'src/java.base/share/native/libjava/m3_jni_util.h'
+      - 'src/java.base/share/native/libjava/m3_state_relation.h'
+      - 'src/java.base/share/classes/java/lang/M3StringPool.java'
+      - 'src/java.base/share/classes/java/lang/M3StringRegexDp.java'
+      - 'src/java.base/share/classes/jdk/internal/mindex/M3*.java'
       - 'm3/vendor/third_party/apiguardian-api/**'
       - 'm3/vendor/third_party/opentest4j/**'
       - 'm3/vendor/third_party/univocity-parsers/**'
@@ -25,6 +31,12 @@ on:
       - '.github/workflows/m3-collections.yml'
       - 'm3/collections/**'
       - 'm3/tooling/migration-recipes/**'
+      - 'src/java.base/share/native/libjava/M3*.c'
+      - 'src/java.base/share/native/libjava/m3_jni_util.h'
+      - 'src/java.base/share/native/libjava/m3_state_relation.h'
+      - 'src/java.base/share/classes/java/lang/M3StringPool.java'
+      - 'src/java.base/share/classes/java/lang/M3StringRegexDp.java'
+      - 'src/java.base/share/classes/jdk/internal/mindex/M3*.java'
       - 'm3/vendor/third_party/apiguardian-api/**'
       - 'm3/vendor/third_party/opentest4j/**'
       - 'm3/vendor/third_party/univocity-parsers/**'
@@ -124,6 +136,14 @@ jobs:
           tar -xzf "$RUNNER_TEMP/m3-jdk21.tar.gz" -C "$RUNNER_TEMP"
           printf 'JAVA_HOME=%s\n' "$RUNNER_TEMP/jdk-21.0.12.1+1" >> "$GITHUB_ENV"
           printf '%s\n' "$RUNNER_TEMP/jdk-21.0.12.1+1/bin" >> "$GITHUB_PATH"
+      - name: Verify common JNI contracts and safe fixed mappings
+        env:
+          EXPECTED_HEAD: ${{ github.event.pull_request.head.sha || github.sha }}
+        run: >-
+          python3 m3/collections/qualification/common-jni-20261020/run_native_tests.py
+          --candidate "$GITHUB_WORKSPACE"
+          --jdk "$JAVA_HOME"
+          --out "$RUNNER_TEMP/m3-common-jni-20261020"
       - name: Build source dependencies and run owning Java and all-native contracts
         env:
           EXPECTED_HEAD: ${{ github.event.pull_request.head.sha || github.sha }}
@@ -134,6 +154,7 @@ jobs:
         with:
           name: full-collection-java-jni-${{ github.event.pull_request.head.sha || github.sha }}
           path: |
+            ${{ runner.temp }}/m3-common-jni-20261020/
             m3/collections/target/full-java-jni/PROOF.json
             m3/collections/target/full-java-jni/java-reports/
             m3/collections/target/full-java-jni/native-reports/

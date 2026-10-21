@@ -7,6 +7,7 @@
 #include <stdint.h>
 #include <stddef.h>
 #include "jdk_internal_mindex_M3RX7.h"
+#include "m3_jni_util.h"
 
 #define M3_ASCII 128
 #define M3_MAX_STATES 4096
@@ -16,11 +17,7 @@
 #define M3_MAX_WORK (32 << 20)
 
 static void invalid(JNIEnv *env, const char *detail) {
-    jclass clazz = (*env)->FindClass(env, "java/lang/IllegalArgumentException");
-    if (clazz != NULL) {
-        (*env)->ThrowNew(env, clazz, detail);
-        (*env)->DeleteLocalRef(env, clazz);
-    }
+    m3_jni_throw_by_name(env, "java/lang/IllegalArgumentException", detail);
 }
 
 JNIEXPORT void JNICALL Java_jdk_internal_mindex_M3RX7_buildPacked0(

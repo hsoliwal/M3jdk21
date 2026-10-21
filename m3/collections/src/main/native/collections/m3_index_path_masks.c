@@ -8,13 +8,10 @@
  */
 #include <jni.h>
 #include <stddef.h>
+#include "../../../../../../src/java.base/share/native/libjava/m3_jni_util.h"
 
 static void m3_throw(JNIEnv *env, const char *type, const char *message) {
-    jclass exception = (*env)->FindClass(env, type);
-    if (exception != NULL) {
-        (void)(*env)->ThrowNew(env, exception, message);
-        (*env)->DeleteLocalRef(env, exception);
-    }
+    m3_jni_throw_by_name(env, type, message);
 }
 
 /* -1 = pending JNI exception, 0 = rejected, 1 = accepted. */
