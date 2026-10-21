@@ -316,6 +316,11 @@ public final class M3FilteredViews {
         // An explicit read-only boundary refuses even empty endpoint mutations.
         @Override public void addFirst(E value) { throw readonly(); }
         @Override public void addLast(E value) { throw readonly(); }
+        @Override public E removeFirst() { throw readonly(); }
+        @Override public E removeLast() { throw readonly(); }
+        @Override public SortedSet<E> reversed() {
+            return readOnlySortedSet(SortedSet.super.reversed());
+        }
         @Override public E first() { return iterator().next(); }
         @Override public E last() {
             Iterator<E> iterator = iterator();
@@ -398,6 +403,7 @@ public final class M3FilteredViews {
         @Override public NavigableSet<E> descendingSet() {
             return new NavigableSetView<>(nav.descendingSet(), predicate);
         }
+        @Override public NavigableSet<E> reversed() { return descendingSet(); }
         @Override public Iterator<E> descendingIterator() {
             return filtered(nav.descendingSet().iterator(), predicate);
         }
