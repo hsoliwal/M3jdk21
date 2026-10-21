@@ -101,6 +101,60 @@ class M3FsManagerBulkTest {
         assertTrue(provider.events.isEmpty());
     }
 
+    @Test
+    void fileSystemManagerOwnsBulkDefaultMethodsForAllRegisteredProviders() {
+        Harness provider = new Harness();
+        FileSystemManager manager = provider.manager();
+        provider.entries.put("ram:/from", new Entry(true, true, false));
+        M3FsBulk.Result stats = manager.statAll("ram:/from", "zip:/missing");
+        assertEquals(2, stats.successfulCount());
+        assertEquals(M3FsBulk.META_CHECKED | M3FsBulk.META_EXISTS | M3FsBulk.META_FILE,
+                stats.metadataMask(0));
+        assertEquals(M3FsBulk.META_CHECKED, stats.metadataMask(1));
+        assertEquals(2, manager.createFolders("ram:/one", "zip:/two").successfulCount());
+        assertEquals(1, manager.copyAll(new String[] { "ram:/from" },
+                new String[] { "zip:/to" }).successfulCount());
+        assertEquals(1, manager.moveAll(new String[] { "zip:/to" },
+                new String[] { "ram:/moved" }).successfulCount());
+        assertEquals(2, manager.deletePaths("ram:/one", "zip:/two").successfulCount());
+        assertEquals(List.of("stat ram:/from", "stat zip:/missing", "mkdir ram:/one",
+                "mkdir zip:/two", "copy ram:/from -> zip:/to",
+                "move zip:/to -> ram:/moved", "delete ram:/one", "delete zip:/two"), provider.events);
+    }
+
+    @Test
+    void managerDefaultMaskWindowsPreserveAbsolutePhysicalSlots() {
+        Harness provider = new Harness();
+        FileSystemManager manager = provider.manager();
+        M3FsBulk.Batch batch = M3FsBulk.builder(0).mkdir("ram:/a")
+                .mkdir("zip:/b").mkdir("ram:/c").mkdir("zip:/d").build();
+        long[] selected = { 0b1101L };
+        M3FsBulk.Result result = manager.executeM3Batch(batch, 1, 3, selected);
+        assertEquals(List.of("mkdir ram:/c", "mkdir zip:/d"), provider.events);
+        assertEquals(M3FsBulk.SKIPPED, result.status(0));
+        assertEquals(M3FsBulk.SKIPPED, result.status(1));
+        assertEquals(2, result.successfulCount());
+        provider.events.clear();
+        assertEquals(3, manager.executeM3Batch(batch, selected).successfulCount());
+        provider.events.clear();
+        assertEquals(4, manager.executeM3Batch(batch).successfulCount());
+    }
+
+    @Test
+    void managerBulkPairedDefaultsRejectMalformedInputBeforeAnyIO() {
+        Harness provider = new Harness();
+        FileSystemManager manager = provider.manager();
+        assertThrows(NullPointerException.class, () -> manager.statAll((String[]) null));
+        assertThrows(NullPointerException.class, () -> manager.createFolders((String[]) null));
+        assertThrows(IllegalArgumentException.class, () -> manager.copyAll(
+                new String[] { "ram:/from" }, new String[0]));
+        assertThrows(NullPointerException.class, () -> manager.moveAll(
+                new String[] { "ram:/from" }, new String[] { null }));
+        assertThrows(UnsupportedOperationException.class, () -> manager.executeM3Batch(
+                M3FsBulk.builder(0).atomic(true).stat("ram:/from").build()));
+        assertTrue(provider.events.isEmpty());
+    }
+
     private record Entry(boolean exists, boolean file, boolean directory) { }
 
     private static final class Harness {
@@ -111,6 +165,7 @@ class M3FsManagerBulkTest {
         FileSystemManager manager() {
             return (FileSystemManager) Proxy.newProxyInstance(getClass().getClassLoader(),
                     new Class<?>[] { FileSystemManager.class }, (p, method, args) -> {
+                        if (method.isDefault()) return java.lang.reflect.InvocationHandler.invokeDefault(p, method, args);
                         if (method.getName().equals("resolveFile")) return file((String) args[0]);
                         throw new UnsupportedOperationException(method.getName());
                     });
