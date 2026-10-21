@@ -148,13 +148,18 @@ public final class M3File implements CharSequence {
 
     private static String hashUtf16(String value) {
         MessageDigest digest = sha256();
-        byte[] pair = new byte[2];
+        byte[] block = new byte[2 * Math.min(4096, value.length())];
+        int used = 0;
         for (int index = 0; index < value.length(); index++) {
             char unit = value.charAt(index);
-            pair[0] = (byte) (unit >>> 8);
-            pair[1] = (byte) unit;
-            digest.update(pair);
+            block[used++] = (byte) (unit >>> 8);
+            block[used++] = (byte) unit;
+            if (used == block.length) {
+                digest.update(block);
+                used = 0;
+            }
         }
+        if (used != 0) digest.update(block, 0, used);
         return HexFormat.of().formatHex(digest.digest());
     }
 
