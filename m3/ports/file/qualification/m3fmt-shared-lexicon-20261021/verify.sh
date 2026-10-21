@@ -26,6 +26,9 @@ gcc -std=c17 -O2 -Wall -Wextra -Wpedantic -Werror -fPIC -shared \
   -I"$JAVA_HOME/include" -I"$JAVA_HOME/include/linux" \
   "$OWNER/native/m3fmt_varints_jni.c" -o "$WORK/native/libm3fmt_varints.so"
 nm -D "$WORK/native/libm3fmt_varints.so" | grep -q 'Java_com_m3_file_M3FmtVarints_packNative'
+cmake -S "$OWNER/native" -B "$WORK/cmake" -DCMAKE_BUILD_TYPE=Release
+cmake --build "$WORK/cmake" --parallel 2
+nm -D "$WORK/cmake/libm3fmt_varints.so" | grep -q 'Java_com_m3_file_M3FmtVarints_packNative'
 java -ea -Xcheck:jni -Djava.library.path="$WORK/native" \
   -Dm3.file.fmt.native=true -Dm3.file.fmt.native.required=true \
   -cp "$WORK/classes" com.m3.file.M3FmtLexiconFrameContract | tee "$WORK/native-result.txt"
