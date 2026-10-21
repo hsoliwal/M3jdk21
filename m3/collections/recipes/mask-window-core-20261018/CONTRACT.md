@@ -1,3 +1,5 @@
+<!-- SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project -->
+<!-- SPDX-License-Identifier: Apache-2.0 -->
 # Shared mask-window kernel contract
 Copyright 2026 Hitesh Soliwal and contributors. SPDX-License-Identifier: Apache-2.0
 
@@ -23,3 +25,12 @@ No measured throughput, build-system acceleration, whole SDK/JDK/GC/platform com
 
 ## Forward-preserved master additions
 selectPositions, identityPositions, NativePositions and both positions JNI exports remain in their current owners. Their behavior is included in the existing fixture matrix. The pre-positions binary must trigger the unchanged Java capability fallback, not lose native-required semantics.
+
+## 2026-10-21 retained current atoms
+
+Preserve required/excluded logical-position selection, selectedCount overload, its
+capability/refusal boundary and all nine current JNI exports. Reuse the current long
+prefix compaction. The unchanged current M3LongIndexProjection consumer is pinned and
+compiled. See the current reconciliation supplement for exact preservation and runtime evidence.
+
+Preserve the additive four-argument selectLong required/excluded overload from PR#1638; its body is byte-identical and its fallback to the existing required-only selector is differentially exercised.

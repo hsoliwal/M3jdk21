@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+<project xmlns="http://maven.apache.org/POM/4.0.0">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.synexia.m3.receivers</groupId><artifactId>opennlp-composite-text-review</artifactId>
+  <version>1.0-SNAPSHOT</version><packaging>pom</packaging>
+  <build><plugins><plugin>
+    <groupId>org.codehaus.mojo</groupId><artifactId>exec-maven-plugin</artifactId><version>3.5.1</version>
+    <executions><execution><id>check-canonical-runtime-pass</id><phase>verify</phase><goals><goal>exec</goal></goals>
+      <configuration><executable>python3</executable><arguments>
+        <argument>${synexia.recipe.home}/synexia-openrewrite-recipes/recipes/cputools-qualification-20261015/verify.py</argument>
+        <argument>--kind</argument><argument>opennlp</argument>
+        <argument>--target</argument><argument>${project.basedir}/../..</argument>
+      </arguments></configuration>
+    </execution></executions>
+  </plugin></plugins></build>
+</project>

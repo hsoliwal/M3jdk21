@@ -131,7 +131,25 @@ public final class M3LongBitmapFilteredSnapshot implements M3LongCollection {
     @Override public int size() { return selected.size(); }
 
     @Override public boolean contains(long value) {
+        M3LongIndexProjection.Order order = selected.order();
+        if (order != M3LongIndexProjection.Order.ENCOUNTER) {
+            return containsSorted(value, order == M3LongIndexProjection.Order.DESCENDING);
+        }
         for (int i = 0; i < size(); i++) if (selected.get(i) == value) return true;
+        return false;
+    }
+
+    /** Reuses the immutable projection order without callbacks or another index. */
+    private boolean containsSorted(long value, boolean descending) {
+        int low = 0;
+        int high = size();
+        while (low < high) {
+            int middle = low + ((high - low) >>> 1);
+            long candidate = selected.get(middle);
+            if (candidate == value) return true;
+            if (descending ? candidate > value : candidate < value) low = middle + 1;
+            else high = middle;
+        }
         return false;
     }
 
@@ -194,6 +212,9 @@ public final class M3LongBitmapFilteredSnapshot implements M3LongCollection {
         private final LongPredicate predicate;
         private final LongSupplier revision;
         private volatile Cache cache;
+        // Guarded by this monitor. Equality spans one capture; wrapping would
+        // require 2^64 synchronous invalidations during that single capture.
+        private long invalidationGeneration;
 
         private static final class Cache {
             final long revision;
@@ -214,13 +235,19 @@ public final class M3LongBitmapFilteredSnapshot implements M3LongCollection {
         }
 
         /** Invalidate manually when the owner cannot publish a trustworthy epoch. */
-        public synchronized void invalidate() { cache = null; }
+        public synchronized void invalidate() {
+            invalidationGeneration++;
+            cache = null;
+        }
 
         private Cache current() {
             long stamp = revision.getAsLong();
             Cache seen = cache;
             if (seen != null && seen.revision == stamp) return seen;
             synchronized (this) {
+                // Revision suppliers and predicates can invalidate reentrantly.
+                // Capture before either callback so publication cannot erase it.
+                long generation = invalidationGeneration;
                 stamp = revision.getAsLong();
                 seen = cache;
                 if (seen != null && seen.revision == stamp) return seen;
@@ -230,7 +257,9 @@ public final class M3LongBitmapFilteredSnapshot implements M3LongCollection {
                     throw new ConcurrentModificationException("revision changed during bitmap capture");
                 }
                 Cache rebuilt = new Cache(stamp, fresh);
-                cache = rebuilt;
+                // Return this call's detached result without retrying callbacks.
+                // A reentrant invalidation reserves rebuilding for the next read.
+                if (invalidationGeneration == generation) cache = rebuilt;
                 return rebuilt;
             }
         }

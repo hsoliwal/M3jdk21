@@ -1,0 +1,6 @@
+category	problem_shape	current_owner	donor_or_reference	decision	rationale
+stream-shadow	one producer with synchronous observers	com.m3.collections.M3ShadowStreams	Guava hashing/counting stream shapes	REUSE_EXISTING	M3JDK21 already mirrors consumed bytes without read-ahead
+file-one-pass-index	one physical read feeds hashes facts tokens events	com.m3.file.M3FileStreamIndexer	M3JDK21 existing owner	REUSE_EXISTING	add progress by composing events not by rereading
+filesystem-traversal	lazy deterministic rooted tree enumeration	new M3FileUniverseTraversal	java.nio.file.DirectoryStream	ADAPT_GAP	retain current directory frontier only and parallelize independent roots
+file-delta	metadata-first change rejection plus exact digest confirmation	new M3FileDelta	ZFS/Btrfs change-detection concepts REFERENCE_ONLY	ADAPT_GAP	use retained attributes and SHA-256; no source reread
+token-regex	regular expression over token sequences / rich-token sequence regex	M3String token-id automata	stanfordnlp/CoreNLP TokensRegex; square/t-rex	REFERENCE_ONLY	atomic alphabet is M3 token IDs/masks/facts rather than copied donor syntax

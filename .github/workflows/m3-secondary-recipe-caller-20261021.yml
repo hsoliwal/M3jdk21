@@ -1,0 +1,31 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright 2026 Hitesh Soliwal and contributors
+name: M3JDK21 Secondary Recipe Bootstrap (candidate-only)
+
+on:
+  pull_request:
+    paths:
+      - '.m3/openrewrite-recipes/**'
+      - '.m3/recipe-source-custody-20261018/**'
+      - '.github/workflows/m3-secondary-recipe-caller-20261021.yml'
+  workflow_dispatch:
+    inputs:
+      chrome_ai:
+        description: Require installed optional M3JDK21 Chrome AI capability
+        type: boolean
+        required: false
+        default: false
+
+permissions:
+  contents: read
+  pull-requests: read
+
+jobs:
+  existing-recipe-receiver:
+    # Full-length public executor SHA, not a floating tag or a private Synexia workflow.
+    uses: hsoliwal/rewrite/.github/workflows/m3-secondary-recipe-executor-20261021.yml@5bf9bfc4adf50d54efe14b36daf5a2e96f0e2bc1
+    with:
+      executor_sha: 5bf9bfc4adf50d54efe14b36daf5a2e96f0e2bc1
+      target_pom: .m3/openrewrite-recipes/pom.xml
+      pr_number: ${{ github.event.pull_request.number || 0 }}
+      chrome_ai: ${{ inputs.chrome_ai || false }}

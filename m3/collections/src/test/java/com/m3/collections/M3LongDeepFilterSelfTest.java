@@ -4,6 +4,8 @@
  */
 package com.m3.collections;
 
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.NavigableSet;
@@ -169,7 +171,38 @@ public final class M3LongDeepFilterSelfTest {
         }
     }
 
+    /** Retain a measured bound rather than accepting merely finite stack depth. */
+    private static int predicateHeight(LongPredicate value) {
+        try {
+            Field field = value.getClass().getDeclaredField("root");
+            field.setAccessible(true);
+            Object node = field.get(value);
+            Method height = node.getClass().getDeclaredMethod("height");
+            height.setAccessible(true);
+            return (Integer) height.invoke(node);
+        } catch (ReflectiveOperationException failure) {
+            throw new AssertionError("cannot inspect immutable predicate AVL geometry", failure);
+        }
+    }
+
+    private static void logarithmicPredicateHeight() {
+        LongPredicate always = value -> true;
+        LongPredicate chain = always;
+        for (int depth = 2; depth <= 100_000; depth++) {
+            chain = M3LongPredicates.and(chain, always);
+            if (depth % 10_000 == 0) {
+                int bound = 2 * (Integer.SIZE - Integer.numberOfLeadingZeros(depth)) + 2;
+                check(predicateHeight(chain) <= bound,
+                        "default conjunction must have logarithmic height at " + depth);
+            }
+        }
+        check(chain.test(1L), "deep balanced conjunction evaluates all predicates");
+        check(!M3LongPredicates.and(chain, value -> false).test(1L),
+                "last predicate retains left-to-right short circuit");
+    }
+
     public static void main(String[] args) {
+        logarithmicPredicateHeight();
         deepGeneric();
         deepSorted();
         customAnd();

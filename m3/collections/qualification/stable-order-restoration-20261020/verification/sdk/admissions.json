@@ -1,0 +1,82 @@
+[
+  {
+    "after_sha256": "7bf939ea374ce6c0b13c403f5e154c0f8d376f9cddb8e623cf00ef299183a77e",
+    "before_sha256": "77ef7d6197ef936f5ae9f62c35accf2f5f3ff690dcc55ca3fd4d8f545a007545",
+    "materialization": "actual OpenRewrite Result retained by ordered proof test",
+    "pass": "stable-order-groups",
+    "path": "m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java",
+    "receiving_compile": "PASS",
+    "sdk_receipts": {
+      "SDK_INPUTS.tsv": "6eab46bb1125c869e4f0888e131830dc9ec8a09a410032976ab9bad5becb2abe",
+      "SDK_REFUSALS.tsv": "bb71acfdedd9537618e090e6aa157a1d38ffbcef9fb60f3f91e9fa6208d08496",
+      "SDK_RESULTS.tsv": "92033ccd1e3ffaccec1f0825ba6bbf5f94af7a9f5099a35a0cc56a8885e23eb0",
+      "java.patch": "ffdfcea9056ae5839d937977c14bad4899d765070ae9b51dc527c4522e354240"
+    },
+    "sdk_tests": {
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0,
+      "tests": 5
+    }
+  },
+  {
+    "after_sha256": "7c1c055ec9a58a9c807fc05be3ec4a83b0a411729f41c259e3180d1e45262b94",
+    "before_sha256": "ABSENT",
+    "materialization": "actual OpenRewrite Result retained by ordered proof test",
+    "pass": "index-contract",
+    "path": "m3/collections/src/test/java/com/m3/collections/M3IndexOrderWindowContract.java",
+    "receiving_compile": "PASS",
+    "sdk_receipts": {
+      "SDK_INPUTS.tsv": "c48e8591122c00a5c4887072afb53b55f32fde242f44a4a5f6d5f222f12257d8",
+      "SDK_REFUSALS.tsv": "06a531eb2a99a31646b723d49d536610ba436323e5cc4dd229d1ea548cac60c3",
+      "SDK_RESULTS.tsv": "1e2c5aa0acd789c0129fa893952f43097d70330298c610f517c2bbf0bc4e03fe",
+      "java.patch": "cb504e55a6583e141edf3f4fffc96a05f1bdf88c8280e4218f0e49b808cb2e3d"
+    },
+    "sdk_tests": {
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0,
+      "tests": 5
+    }
+  },
+  {
+    "after_sha256": "d711aa55378fe89dc263a2de6fe90449ab690e9759d27906a9389f9a0434fdba",
+    "before_sha256": "ABSENT",
+    "materialization": "actual OpenRewrite Result retained by ordered proof test",
+    "pass": "index-resource-probe",
+    "path": "m3/collections/src/test/java/com/m3/collections/M3IndexOrderWindowResourceProbe.java",
+    "receiving_compile": "PASS",
+    "sdk_receipts": {
+      "SDK_INPUTS.tsv": "d5a40092bbf0e2a9799ef0aeb6dc9343c6e4218c7a625ce523cc8d6aa34deab7",
+      "SDK_REFUSALS.tsv": "bebf89e135067006b2adc0be0d97a6ea5aaf9373fbe9c12d31d7fcdff4038c5d",
+      "SDK_RESULTS.tsv": "de498d6fb27f7f99b5c9dfbd68f4ee79daf5e63a809620337eb48bcf9a99106c",
+      "java.patch": "97c66a4dbf55f1b0cf9878a638b1b5c14825adcfbb2f433fd22f6896eedec60a"
+    },
+    "sdk_tests": {
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0,
+      "tests": 5
+    }
+  },
+  {
+    "after_sha256": "75f32c3f515783fff233992a3144f867fa9bc767d481ba1d2db05b996895ad40",
+    "before_sha256": "ABSENT",
+    "materialization": "actual OpenRewrite Result retained by ordered proof test",
+    "pass": "index-junit",
+    "path": "m3/collections/src/test/java/com/m3/collections/M3IndexOrderWindowTest.java",
+    "receiving_compile": "PASS",
+    "sdk_receipts": {
+      "SDK_INPUTS.tsv": "5f032575c183a6a2cf147dcb9fe098b9b5de013c0356e87051734292e6170dd6",
+      "SDK_REFUSALS.tsv": "e209f3d9f2fd1739a24abbe5406387ad1da78b7355997db288d3ca98000ff3ab",
+      "SDK_RESULTS.tsv": "6f3ecfbb3e3130da7d97020a03fa9a359a645a922c201a4c7ca32203b1ffc1cf",
+      "java.patch": "b31733709810b45c0bca98f81b188857a318ee2fa1da688dbbdf2cb58d0a6eac"
+    },
+    "sdk_tests": {
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0,
+      "tests": 5
+    }
+  }
+]

@@ -1,0 +1,4 @@
+jdk.m3.text jar:file:///dev/shm/m3-cpu-tools-f4826e049195-build-v4/jars/jdk.m3.text.jar!/module-info.class
+exports jdk.m3.text
+requires java.base mandated
+

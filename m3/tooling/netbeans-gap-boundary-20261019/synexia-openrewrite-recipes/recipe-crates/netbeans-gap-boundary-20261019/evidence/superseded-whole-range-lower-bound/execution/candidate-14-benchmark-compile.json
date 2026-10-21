@@ -1,0 +1,23 @@
+{
+  "command": [
+    "javac",
+    "-Xlint:all",
+    "-Werror",
+    "--add-modules",
+    "java.management,jdk.management",
+    "--add-reads",
+    "java.desktop=java.management",
+    "--add-reads",
+    "java.desktop=jdk.management",
+    "--patch-module",
+    "java.desktop=/workspace/scratch/48c1329dbda8/netbeans-gap-20261019/trial-03/candidate/classes:/workspace/scratch/48c1329dbda8/netbeans-gap-20261019/trial-03/candidate/test-classes:/workspace/scratch/48c1329dbda8/netbeans-gap-20261019/trial-03/candidate/bench-source",
+    "-d",
+    "/workspace/scratch/48c1329dbda8/netbeans-gap-20261019/trial-03/candidate/bench",
+    "/workspace/scratch/48c1329dbda8/netbeans-gap-20261019/trial-03/candidate/bench-source/javax/swing/text/GapContentMarkBenchmark.java"
+  ],
+  "exit": 0,
+  "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "user_seconds": 2.076118,
+  "system_seconds": 0.179508,
+  "max_rss_kib_linux": 102124
+}

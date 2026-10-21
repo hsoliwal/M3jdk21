@@ -1,6 +1,7 @@
 /*
  * Copyright 2026 Hitesh Soliwal and contributors
  * SPDX-License-Identifier: Apache-2.0
+ * Modified 2026: refuse output aliasing mask vectors before selection or JNI dispatch.
  */
 package com.m3.collections;
 
@@ -96,7 +97,9 @@ public final class M3IndexPathMasks {
      * callbacks or mutable/live collection membership.
      *
      * <p>All path geometry, stage alignment, output bounds and aliases are checked before
-     * writes. Only offsets encountered in this window are checked: later offsets are
+     * writes. Output cannot alias any input integer array, including required or forbidden
+     * mask vectors, even when the window is empty or its limit is zero.
+     * Only offsets encountered in this window are checked: later offsets are
      * validated when their respective window is visited. A zero limit performs no scans
      * or writes and leaves {@code next} unchanged. The returned high 32 bits contain the
      * next ordinal in {@code [0,count]}, low 32 contain written count. All arrays must
@@ -122,7 +125,8 @@ public final class M3IndexPathMasks {
             throw new IllegalArgumentException("output limit exceeds bounded window");
         }
         Objects.checkFromIndexSize(outputOffset, limit, output.length);
-        if (output == orderedRows || output == physicalOffsets) {
+        if (output == orderedRows || output == physicalOffsets
+                || output == requiredMasks || output == forbiddenMasks) {
             throw new IllegalArgumentException("source/output metadata alias");
         }
         for (int[] plane : statePlanes) {
@@ -173,6 +177,41 @@ public final class M3IndexPathMasks {
             }
         }
         return packWindow(stop, kept);
+    }
+
+    /**
+     * Examines at most {@code maxExamined} successive path ordinals, while
+     * writing at most {@code limit} matching IDs into the caller's output.
+     * The `count` parameter describes the full declared path, not this slice;
+     * the high result bits retain that path's ordinal coordinate system.
+     *
+     * <p>The full path geometry is checked before scanning. Only encountered
+     * physical offsets are checked: an invalid future offset is rejected when
+     * its window is reached. Zero input budget visits no entries and preserves
+     * the cursor and output after normal alias/bounds/native checks.
+     *
+     * <p>Delegates the capped path to the existing {@link #scanWindow}
+     * implementation and its checked JNI selector; no new native symbol,
+     * element wrapper, retained index or Java predicate callback is introduced.
+     */
+    public static long scanWindowBounded(int[] orderedRows, int[] physicalOffsets,
+            int[][] statePlanes, int[] requiredMasks, int[] forbiddenMasks,
+            int first, int count, int stride, int next, int maxExamined,
+            int[] output, int outputOffset, int limit, Backend backend) {
+        Objects.requireNonNull(backend, "backend");
+        if (maxExamined < 0) {
+            throw new IllegalArgumentException("negative input scan budget");
+        }
+        validateShape(orderedRows, physicalOffsets, statePlanes,
+                requiredMasks, forbiddenMasks, first, count, stride);
+        if (next < 0 || next > count) {
+            throw new IndexOutOfBoundsException("path ordinal outside [0,count]");
+        }
+        // Clamping before addition avoids next + maxExamined overflow.
+        int boundedCount = next + Math.min(maxExamined, count - next);
+        return scanWindow(orderedRows, physicalOffsets, statePlanes,
+                requiredMasks, forbiddenMasks, first, boundedCount, stride, next,
+                output, outputOffset, limit, backend);
     }
 
     private static long packWindow(int next, int count) {
@@ -238,6 +277,31 @@ public final class M3IndexPathMasks {
 
     static int[] selectJava(int[] rows, int[] offsets, int[][] planes,
             int[] required, int[] forbidden, int first, int count, int stride) {
+        // Public selection has already checked complete logical/physical geometry.
+        // Do not pay a mask-classification pass for tiny scans.
+        if (count >= 8) {
+            boolean unrestricted = true;
+            for (int stage = 0; stage < required.length; stage++) {
+                int need = required[stage], deny = forbidden[stage];
+                if ((need | deny) != 0) {
+                    if ((need & deny) != 0) return new int[0];
+                    // The normal two-pass matcher remains authoritative as
+                    // soon as a nontrivial, noncontradictory stage appears.
+                    unrestricted = false;
+                    break;
+                }
+            }
+            if (unrestricted) {
+                // The input remains borrowed; the returned index directory is detached.
+                if (stride == 1) return java.util.Arrays.copyOfRange(rows, first, first + count);
+                int[] selected = new int[count];
+                long at = first;
+                for (int n = 0; n < count; n++, at += stride) {
+                    selected[n] = rows[(int) at];
+                }
+                return selected;
+            }
+        }
         int kept = 0;
         long at = first;
         for (int n = 0; n < count; n++, at += stride) {

@@ -12,21 +12,28 @@
 
   <modules>
     <module>indexdb</module>
+    <module>fs</module>
     <module>synexia-import</module>
     <module>synexia-import/pure-int-recipe-custody</module>
     <module>tooling/migration-recipes</module>
     <module>tooling/synexia-jdk-a3-recipes</module>
     <module>tooling/a3</module>
     <module>tooling/backport-dag</module>
+    <module>tooling/recipe-agent-api</module>
     <module>backports</module>
     <module>tooling/module-packs</module>
   </modules>
 
   <profiles>
     <profile>
+      <id>m3fs-eclipse</id>
+      <modules><module>eclipse/filesystem</module></modules>
+    </profile>
+    <profile>
       <id>m3-extended</id>
       <modules>
         <module>collections</module>
+        <module>viewport-core</module>
       </modules>
     </profile>
     <profile>

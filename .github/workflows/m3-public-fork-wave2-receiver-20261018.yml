@@ -1,0 +1,71 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3 Public Fork Wave2 Java21 Recipe Proof
+on:
+  pull_request:
+    paths:
+      - 'm3/compatibility/canonical-wave2-*-20261018.tsv'
+      - 'm3/docs/synexia-public-fork-wave2-20261018.md'
+      - '.github/workflows/m3-public-fork-wave2-receiver-20261018.yml'
+      - 'm3/collections/qualification/**'
+      - 'm3/collections/src/**'
+  push:
+    branches:
+      - 'work/apply-synexia-public-recipe-wave2-20261018'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  java21-source-sealed-receiving:
+    runs-on: ubuntu-latest
+    timeout-minutes: 65
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Compile ten exact original Maven recipe owners
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/m3-wave2-recipe-classes
+          javac --release 21 -Xlint:all -Werror -d /tmp/m3-wave2-recipe-classes \
+            m3/collections/qualification/m3-counted-sdk-20261017/recipe/src/main/java/com/synexia/m3/M3CountedSdkRecipe.java \
+            m3/collections/qualification/m3-generic-object-list-20261017/recipe/src/main/java/com/synexia/m3/M3GenericObjectListRecipe.java \
+            m3/collections/qualification/m3-long-bitmap-algebra-20261017/recipe/src/main/java/com/synexia/m3/M3LongBitmapFilterPlanRecipe.java \
+            m3/collections/qualification/m3-sdk-provider-names-20261017/recipe/src/main/java/com/synexia/m3/M3SdkNamesRecipe.java \
+            m3/collections/qualification/m3-linked-list-live-mask-20261017/recipe/src/main/java/com/synexia/m3/M3LinkedListLiveMaskRecipe.java \
+            m3/collections/qualification/sdk-bulk-capture-20261017/recipe/src/main/java/com/synexia/m3/M3SdkBulkCaptureRecipe.java \
+            m3/collections/qualification/sdk-mask-bounded-current-20261017/recipe/src/main/java/com/synexia/m3/M3MaskBoundedCurrentRecipe.java \
+            m3/collections/qualification/m3-sdk-families-20261017/recipe-v3/src/main/java/com/synexia/m3/M3SdkSortedContractRecipe.java \
+            m3/collections/qualification/m3-long-direct-address-kernel-20261017/recipe/src/main/java/com/synexia/m3/M3LongDirectAddressKernelRecipe.java \
+            m3/collections/qualification/m3-sdk-families-20261017/recipe/src/main/java/com/synexia/m3/M3CollectionSdkNamesRecipe.java
+      - name: Execute all ten temporary-receiver recipe selftests
+        shell: bash
+        run: |
+          set -euo pipefail
+          cp="/tmp/m3-wave2-recipe-classes:m3/collections/qualification/m3-counted-sdk-20261017/recipe/src/main/resources:m3/collections/qualification/m3-generic-object-list-20261017/recipe/src/main/resources:m3/collections/qualification/m3-long-bitmap-algebra-20261017/recipe/src/main/resources:m3/collections/qualification/m3-sdk-provider-names-20261017/recipe/src/main/resources:m3/collections/qualification/m3-linked-list-live-mask-20261017/recipe/src/main/resources:m3/collections/qualification/sdk-bulk-capture-20261017/recipe/src/main/resources:m3/collections/qualification/sdk-mask-bounded-current-20261017/recipe/src/main/resources:m3/collections/qualification/m3-sdk-families-20261017/recipe-v3/src/main/resources:m3/collections/qualification/m3-long-direct-address-kernel-20261017/recipe/src/main/resources:m3/collections/qualification/m3-sdk-families-20261017/recipe/src/main/resources"
+          java -cp "$cp" com.synexia.m3.M3CountedSdkRecipe --selftest
+          java -cp "$cp" com.synexia.m3.M3GenericObjectListRecipe --selftest
+          java -cp "$cp" com.synexia.m3.M3LongBitmapFilterPlanRecipe --selftest
+          java -cp "$cp" com.synexia.m3.M3SdkNamesRecipe --selftest
+          java -cp "$cp" com.synexia.m3.M3LinkedListLiveMaskRecipe --selftest
+          java -cp "$cp" com.synexia.m3.M3SdkBulkCaptureRecipe --selftest
+          java -cp "$cp" com.synexia.m3.M3MaskBoundedCurrentRecipe --selftest
+          java -cp "$cp" com.synexia.m3.M3SdkSortedContractRecipe --selftest
+          java -cp "$cp" com.synexia.m3.M3LongDirectAddressKernelRecipe --selftest
+          java -cp "$cp" com.synexia.m3.M3CollectionSdkNamesRecipe --selftest
+      - name: Apply only the already-exact bitmap plan and prove fixed point
+        shell: bash
+        run: |
+          set -euo pipefail
+          cp="/tmp/m3-wave2-recipe-classes:m3/collections/qualification/m3-counted-sdk-20261017/recipe/src/main/resources:m3/collections/qualification/m3-generic-object-list-20261017/recipe/src/main/resources:m3/collections/qualification/m3-long-bitmap-algebra-20261017/recipe/src/main/resources:m3/collections/qualification/m3-sdk-provider-names-20261017/recipe/src/main/resources:m3/collections/qualification/m3-linked-list-live-mask-20261017/recipe/src/main/resources:m3/collections/qualification/sdk-bulk-capture-20261017/recipe/src/main/resources:m3/collections/qualification/sdk-mask-bounded-current-20261017/recipe/src/main/resources:m3/collections/qualification/m3-sdk-families-20261017/recipe-v3/src/main/resources:m3/collections/qualification/m3-long-direct-address-kernel-20261017/recipe/src/main/resources:m3/collections/qualification/m3-sdk-families-20261017/recipe/src/main/resources"
+          root="$GITHUB_WORKSPACE"
+          java -cp "$cp" com.synexia.m3.M3LongBitmapFilterPlanRecipe --check "$root"
+          java -cp "$cp" com.synexia.m3.M3LongBitmapFilterPlanRecipe --apply "$root"
+          java -cp "$cp" com.synexia.m3.M3LongBitmapFilterPlanRecipe --check "$root"
+          git diff --exit-code -- m3/collections/src m3/collections/interop
+          test -z "$(git status --porcelain --untracked-files=all -- m3/collections/src m3/collections/interop)"

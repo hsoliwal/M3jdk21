@@ -23,3 +23,4 @@ GUAVA	guavaFilteredCollection	com.m3.collections.M3LinkedList;com.google.common.
 GUAVA	guavaFilteredNavigableSet	com.m3.collections.M3TreeSet;com.google.common.base.Predicate	java.util.NavigableSet	com.google.common.collect.Sets	com.m3.collections.M3TreeSet	BORROWED_M3	33.4.8-jre
 GUAVA	guavaBiMap		com.google.common.collect.BiMap	com.m3.collections.interop.M3GuavaBiMap	com.m3.collections.M3LinkedHashMap	M3_CREATED	33.4.8-jre
 APACHE_COMMONS_COLLECTIONS	apacheBidiMap		org.apache.commons.collections4.BidiMap	com.m3.collections.interop.M3ApacheBidiMap	com.m3.collections.M3LinkedHashMap	M3_CREATED	4.5.0
+SPRING_FRAMEWORK	springCaseInsensitiveMap	java.util.Locale	java.util.Map	com.m3.collections.interop.M3SpringCaseInsensitiveMap	com.m3.collections.M3LinkedHashMap	M3_CREATED	6.2.0

@@ -497,3 +497,44 @@ JDK backend. Record concrete consumer/name mapping, exact donor and target hashe
 rights, target recipe application, JDK 21/JUnit/jtreg/native/JNI/runtime and resource evidence first.
 Keep every untested owner and gate PENDING. Public JDK APIs, backing identity and this repository's
 intake/licensing modes remain unchanged; reusable recipes and algorithms stay canonical in Synexia.
+
+<!-- SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project -->
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+## Synexia M3 catalogue-driven per-file refinement
+
+Canonical policy: `SYNEXIA-CATALOGUE-FILE-REFINEMENT-1` in Synexia `docs/M3-SCALE/invariants`. The rules below are its receiving projection and use the same policy text; this existing porting invariant remains the target authority.
+
+This rule specializes the existing [M3 Recipe-First Mastery invariant](https://github.com/hsoliwal/com.synexia/blob/98368e107f4a205d852ef958cd48c1ee633219b1/synexia-m3-recipe/docs/M3_RECIPE_FIRST_MASTERY_INVARIANT.md) and [canonical ownership invariant](https://github.com/hsoliwal/com.synexia/blob/98368e107f4a205d852ef958cd48c1ee633219b1/docs/M3-SCALE/invariants/SYNEXIA-M3JDK21-CANONICAL-OWNERSHIP-1.md). Synexia owns reusable recipes and donor convergence; M3JDK21 owns receiving contracts and target acceptance. It creates no second recipe engine, payload owner or runtime dependency.
+
+**Maintain reusable, validated transformation recipes; apply them through contract-preserving, per-file transformations; continuously improve their algorithm choices through catalogue-driven comparison and donor evaluation.**
+
+1. **Catalogue by problem category.** Maintain searchable records linked to the current source file, relevant operation and behavioral atom. Reuse existing catalogue and history before discovery. Categories include array growth, offsets and ranges, indirect ordering, stable compaction, state masks, filtered views and sorted navigation. Search GitHub implementations and LeetCode, HackerRank and GeeksforGeeks problem families when their contracts match the nominated problem. Challenge/editorial/submission access is not a source license.
+2. **Compare the incumbent and candidates.** Record correctness, public/protected and JNI compatibility, ordering/identity/null/view semantics, bounds, exception and callback effects, concurrency/lifetime requirements, worst-case complexity, allocation and retained storage. Compare measured performance only under recorded workloads, source hashes, toolchains and runtime conditions; distinguish cold preparation from warm reuse and CPU from heap/native/process memory. Keep unmeasured expectations explicit. Pin each inspected donor repository, revision, path/blob, actual license and required notices before any adaptation. Reuse suitable existing Synexia/M3 owners first.
+3. **Use replaceable behavioral atoms.** An atom must express a meaningful operation or contract boundary and admit independent refinement or replacement while preserving the composed file's contract. There is no numerical cap on internal decomposition. Add boundaries when they improve reuse, replaceability or verification; decline fragmentation that merely adds indirection. Preserve existing public interfaces, payload ownership, observable effects and stronger previously qualified atoms. Record any proposed defect repair and its exact changed observation separately; do not label changed behavior as equivalence.
+4. **Transform mechanically and serially.** Freeze the current file, dependent contracts, candidate, oracle and exact preimage before mutation. Improve the existing canonical Synexia Maven/OpenRewrite recipe and its fixtures, then apply it to one receiving file at a time. Attributed structure and text/source matches are candidate facts, not semantic proof. Exact-source drift, duplicate/conflicting owners and unsupported shapes must refuse. A later pass consults the accumulated decisions and receipts instead of repeating discovery or replaying an older whole-file implementation over newer capabilities.
+5. **Execute the gates for every admitted pass.** Follow documentation and baseline capture, recipe/template patch, lint, compilation, tests, then actual runtime proof before advancing to another source-changing pass. Use independent actual-owner behavioral oracles, required API/ABI comparisons, refusal cases and a zero-change recipe replay. JNI work additionally preserves generated headers/exports, primitive-array/range and alias rules, exception checks, lifetime/GC boundaries and the existing explicit-unavailable or fallback policy; exercise the real native owner. A source read, syntax check, compile, imported historical log or successful merge cannot stand in for missing runtime evidence.
+6. **Accumulate precise evidence.** Append the selected/rejected candidate, rationale, before/after hashes, recipe identity, commands/exits, test results and applicable resource observations to the existing catalogue/provenance records. Preserve counterexamples and historical receipts. Requalify against a changed source base. Bound every claim to the exact reviewed operations, source revision and executed gate; retain unfinished or refused work as searchable pending findings.
+
+### Coverage states
+
+| State | Meaning |
+| --- | --- |
+| `INVENTORIED` | Exact source paths and identities were enumerated; body review and behavior are not implied. |
+| `READ` | The complete nominated source and relevant contract/test material were read; execution remains separate. |
+| `REVIEWED` | The named operation's contract, candidates, donor rights and selection rationale were evaluated. |
+| `QUALIFIED` | The recorded candidate and target passed their explicitly listed applicable gates at the pinned source identity. |
+| `REFUSED` | A particular candidate was rejected with a retained reason or counterexample; the underlying finding may remain pending. |
+
+Track these dimensions explicitly when one owner contains both qualified atoms and unfinished operations. Keep `PENDING`, `NOT_RUN` or the catalogue's existing equivalent for missing evidence. Do not convert inventory counts into reviewed-file counts or combine overlapping test counts into unique-case totals.
+
+### Search the existing catalogue
+
+From the M3JDK21 repository root:
+
+```sh
+rg -n --glob '*.tsv' 'M3LongIndexProjection|M3IndexMaskWindow|M3FilteredLists' m3/collections/algorithm-catalog
+rg -n --glob '*.tsv' 'ARRAY_OFFSETS|BIT_STATE|stable_indirect_order|ordered_native_compaction' m3/collections/algorithm-catalog
+rg -n --glob '*.tsv' 'REFUSED|REJECT|PENDING|PROOF_REQUIRED|NOT_EVALUATED' m3/collections/algorithm-catalog
+```
+
+Use existing Synexia catalogue/search components when their admitted data format applies; plain TSV search remains sufficient for these records. This invariant does not promote the global `STRING -> ARRAYS -> COLLECTIONS -> AST_COMPILER -> REMAINING_FAMILIES` sequence or declare any family complete. Independently licensed collection proving-ground work retains its existing scope and receiving gates.

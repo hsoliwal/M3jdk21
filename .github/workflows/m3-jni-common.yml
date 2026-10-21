@@ -1,0 +1,54 @@
+name: M3JDK21 common JNI C11 contract
+
+on:
+  pull_request:
+    paths:
+      - 'm3/native/**'
+      - 'm3/arrays/src/main/native/**'
+      - 'm3/collections/src/main/native/**'
+      - '.github/workflows/m3-jni-common.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  host-contract:
+    name: C11 JNI contract (${{ matrix.os }})
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-24.04, windows-2022, macos-15]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Build and run canonical native contract checks
+        run: |
+          cmake -S m3/native -B m3/native/build -DCMAKE_BUILD_TYPE=Release
+          cmake --build m3/native/build --config Release
+          ctest --test-dir m3/native/build -C Release --output-on-failure
+
+  android-ndk-compile:
+    name: Android ARM64 C11/JNI headers (compile only)
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: Compile with the runner Android NDK
+        shell: bash
+        run: |
+          set -euo pipefail
+          NDK="${ANDROID_NDK_LATEST_HOME:-${ANDROID_NDK_HOME:-}}"
+          if [[ -z "$NDK" || ! -f "$NDK/build/cmake/android.toolchain.cmake" ]]; then
+            echo 'A provisioned Android NDK is required for this build gate' >&2
+            exit 1
+          fi
+          cmake -S m3/native -B m3/native/build-android \
+            -DCMAKE_TOOLCHAIN_FILE="$NDK/build/cmake/android.toolchain.cmake" \
+            -DANDROID_ABI=arm64-v8a -DANDROID_PLATFORM=android-24 \
+            -DBUILD_TESTING=ON -DCMAKE_BUILD_TYPE=Release
+          cmake --build m3/native/build-android --config Release
+          echo 'Android JNI/C11 compile passed; runtime/device JNI tests remain pending.'

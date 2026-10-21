@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
+# SPDX-License-Identifier: Apache-2.0
 # Copyright 2026 Hitesh Soliwal and contributors. SPDX-License-Identifier: Apache-2.0
 """Ordered finite qualification of actual source bytes via the existing Synexia SealReplay."""
 from pathlib import Path
@@ -8,7 +10,7 @@ J='m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java'
 C='m3/collections/src/main/native/collections/m3_index_mask_compactor.c'
 TEST='m3/collections/src/test/java/com/m3/collections/M3MaskWindowKernelSelfTest.java'
 R=T/'src/main/resources/m3-mask-window'
-BASE='f29b0afe7ad253cc0562bc8dfdd48fc1acec710e'
+BASE='55b44776b15b658c14f33ee2c4e01b013d6547a8'
 def sha(p): return hashlib.sha256(p.read_bytes()).hexdigest()
 def rows(res=R): return [line.split('\t') for line in (res/'manifest.tsv').read_text().splitlines()]
 def put(root,path,data):

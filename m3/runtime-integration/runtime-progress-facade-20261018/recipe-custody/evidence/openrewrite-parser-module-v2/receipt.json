@@ -1,0 +1,61 @@
+{
+  "schema": "M3_OPENREWRITE_SOURCE_BUILT_PARSER_V1",
+  "status": "FAIL",
+  "sdk_inputs_sha256": "35b2cb9677d4756e7388543c5b9fcd599d8804c98bf1b1152f6f2dcb59ecd176",
+  "sdk_results_sha256": "688b9a06ea0eaf325439aa6b6b27ec0e81f5f604fa558808dd5de18b0f33bea6",
+  "coordinate": "com.synexia.sourcebuilt.openrewrite:rewrite-java-21:8.17.1-m3-javadoc-1",
+  "original_donor": "openrewrite/rewrite@3bd8271be963c025ce0856072d0f09360e3184cd",
+  "commands": [
+    {
+      "variant": "baseline",
+      "command": [
+        "/tmp/m3-toolchain/apache-maven-3.9.11/bin/mvn",
+        "-s",
+        "/tmp/m3-toolchain/settings.xml",
+        "-B",
+        "-ntp",
+        "-f",
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/openrewrite-parser-module-v2/baseline/rewrite-java-21/pom.xml",
+        "-Dmaven.repo.local=/tmp/m3-maven-repository",
+        "verify"
+      ],
+      "exit_code": 1,
+      "elapsed_seconds": 16.1392183303833,
+      "log_sha256": "5634c2583e05be555b5d0109fbd8d19c2187de3d788b26cf0b639bc644be98f1",
+      "tests": {
+        "tests": 4,
+        "failures": 3,
+        "errors": 0,
+        "skipped": 0
+      },
+      "report_sha256": "0cc1ed5ed01c92b34c1e80a8763654ef16f02249793868157422231d8f629fcc"
+    },
+    {
+      "variant": "candidate",
+      "command": [
+        "/tmp/m3-toolchain/apache-maven-3.9.11/bin/mvn",
+        "-s",
+        "/tmp/m3-toolchain/settings.xml",
+        "-B",
+        "-ntp",
+        "-f",
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/openrewrite-parser-module-v2/candidate/rewrite-java-21/pom.xml",
+        "-Dmaven.repo.local=/tmp/m3-maven-repository",
+        "install"
+      ],
+      "exit_code": 1,
+      "elapsed_seconds": 14.456749200820923,
+      "log_sha256": "0edd948cbc4346919614b03845198e3c95ffa5d4642481ec5a33592e5f77c876",
+      "tests": {
+        "tests": 4,
+        "failures": 2,
+        "errors": 0,
+        "skipped": 0
+      },
+      "report_sha256": "45534810663dacd7d39ece4e1ea14793a826009785cff8249675edd18add5248"
+    }
+  ],
+  "legacy_jdk_compiler_gate_changed": false,
+  "scope": "bounded Javadoc atoms and paired donor class proof; no full upstream TCK claim",
+  "failure": "AssertionError: repaired parser module did not pass all witnesses"
+}

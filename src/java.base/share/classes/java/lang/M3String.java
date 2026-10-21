@@ -20,6 +20,7 @@ import java.util.Arrays;
 import java.util.Objects;
 import java.util.Spliterator;
 import java.util.function.IntConsumer;
+import java.util.function.IntUnaryOperator;
 import java.util.stream.IntStream;
 import java.util.stream.StreamSupport;
 import sun.nio.cs.ArrayEncoder;
@@ -576,7 +577,7 @@ final class M3String implements CharSequence {
      * It resolves each contiguous visible scalar run once, not once per code unit.
      * Only canonical owners and primitive bounds are retained; no text or native pointer copy.
      */
-    static final class CodeUnitCursor {
+    static final class CodeUnitCursor implements IntUnaryOperator {
         private final M3String source;
         private M3StringOwner scalar;
         private int logicalBegin;
@@ -585,6 +586,11 @@ final class M3String implements CharSequence {
 
         CodeUnitCursor(M3String source) {
             this.source = source;
+        }
+
+        @Override
+        public int applyAsInt(int index) {
+            return at(index);
         }
 
         char at(int index) {
@@ -746,6 +752,10 @@ final class M3String implements CharSequence {
         M3String that = other.m3();
         if (that != null) {
             if (sameCoordinate(that)) return true;
+            if (isWholeOwner() && that.isWholeOwner()
+                    && owner instanceof M3StringImmediate && that.owner instanceof M3StringImmediate) {
+                return M3StringImmediate.sameText(owner, that.owner);
+            }
             if (that.length() != length()) return false;
             if (isWholeOwner() && that.isWholeOwner()) {
                 if (owner.javaHash != that.owner.javaHash) return false;
@@ -1057,6 +1067,22 @@ final class M3String implements CharSequence {
             if (offset == length() - checked.length() && !sourceFacts.suffixMayMatch(prefixFacts)) {
                 return false;
             }
+        }
+        // A long prefix of a composite would otherwise descend the balanced
+        // tuple DAG once per UTF-16 unit. Reuse the existing scalar-run cursor:
+        // at most two request-local cursors, no leaf directory or copied text.
+        // Short/flat comparisons retain their allocation-free direct path.
+        if (checked.length() >= 64
+                && (owner instanceof M3StringTuple
+                        || checked.owner() instanceof M3StringTuple)) {
+            CodeUnitCursor sourceUnits = new CodeUnitCursor(this);
+            CodeUnitCursor prefixUnits = new CodeUnitCursor(checked);
+            for (int index = 0; index < checked.length(); index++) {
+                if (sourceUnits.at(offset + index) != prefixUnits.at(index)) {
+                    return false;
+                }
+            }
+            return true;
         }
         for (int index = 0; index < checked.length(); index++) {
             if (charAt(offset + index) != checked.charAt(index)) return false;

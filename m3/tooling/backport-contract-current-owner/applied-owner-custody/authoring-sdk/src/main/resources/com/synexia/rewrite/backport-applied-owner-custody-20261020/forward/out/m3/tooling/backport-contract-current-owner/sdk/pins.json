@@ -1,0 +1,281 @@
+{
+  "schema": "M3_BACKPORT_CONTRACT_CURRENT_OWNER_SDK_INPUTS_V1",
+  "admissionCommit": "ab8633cc645487bc69bcd6919f328a0e1b5e40a9",
+  "sourceOnly": true,
+  "providers": {
+    "openrewriteAdapter": "1c1b1b568d369f688f6953161636bf36b484bf5a",
+    "manifestKernel": "38df5f97bbeec8a8a8cfc77091d56bda925c07f2"
+  },
+  "files": [
+    {
+      "path": "FOSS_REUSE_DECISION.tsv",
+      "gitBlob": "97446958ac069384435bc40f9ae46364ba205d31",
+      "bytes": 1493,
+      "sha256": "9e3b617c17ef54d2a249c8fcd69e557583a9dff21bddccdbb827003d6b1c568e"
+    },
+    {
+      "path": "README.md",
+      "gitBlob": "a4674f6ed7983503de54bb1223c2c4cd88ff8e3a",
+      "bytes": 5233,
+      "sha256": "6a60a4e313d5f8f2e1597c057bdd5d006dca504d9735a9aaeeae1d1d4d0bfbb2"
+    },
+    {
+      "path": "THIRD_PARTY_NOTICES.md",
+      "gitBlob": "0b57cea44151abad7c11d22479b1817bcce6fd6e",
+      "bytes": 2254,
+      "sha256": "dbe233c1a879d82c7a1c008c85c2dc6aa02653f1fefff33cecfbf384e365dfb3"
+    },
+    {
+      "path": "pinned-engine/com/synexia/rewrite/M3BackportContractCurrentOwnerInverseRecipe.java",
+      "gitBlob": "702a2160b4478193cc2ee9ff228c10f6ebe3787a",
+      "bytes": 862,
+      "sha256": "962c94e1fb41a76c1cbd1c2fa564dd96f15bd89b1ed768383a7d8e68b346517b"
+    },
+    {
+      "path": "pinned-engine/com/synexia/rewrite/M3BackportContractCurrentOwnerRecipe.java",
+      "gitBlob": "0739a5c4027b896eeebb98a20f7ad0f58d26f16a",
+      "bytes": 855,
+      "sha256": "5975fb63709acee43caf510f245f3aaf9675c8d6a1b887780bd4b237d28c5ec4"
+    },
+    {
+      "path": "pinned-engine/com/synexia/rewrite/M3GpuToolJoinManifest.java",
+      "gitBlob": "38df5f97bbeec8a8a8cfc77091d56bda925c07f2",
+      "bytes": 10964,
+      "sha256": "56bd61be29eae76b3f468519677424450448751d94ca032956b330d7b3dd1999"
+    },
+    {
+      "path": "pinned-engine/com/synexia/rewrite/M3GpuToolJoinRecipe.java",
+      "gitBlob": "1c1b1b568d369f688f6953161636bf36b484bf5a",
+      "bytes": 5187,
+      "sha256": "ee90a2b8689699745553c2f4d2d07121b91777f4e9a671fdb33ba8edea0c14ec"
+    },
+    {
+      "path": "pom.xml",
+      "gitBlob": "d79867bcc09ad6329e12418e15907e54b8ab025f",
+      "bytes": 2678,
+      "sha256": "f0ab99c3dafb38e82f8e5fd4c6d22db07831808c251c4622f292114c83e6673e"
+    },
+    {
+      "path": "src/main/resources/META-INF/rewrite/backport-contract-current-owner-20261019.yml",
+      "gitBlob": "5f3ad6e2aacd9fdb7a216cdd582ef12db204cde9",
+      "bytes": 804,
+      "sha256": "33f39511c2f9a7cd5b76eb38ea50cc7c656886d5472088435107f98ea86baca8"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/backport-contract-current-owner-20261019/forward/before/m3/backports/BACKPORT_EXECUTION_WAVES.md",
+      "gitBlob": "a5421ae43c55cbcce025f95cf49838a112a507bc",
+      "bytes": 5680,
+      "sha256": "b18e07de81e7296bf338589dd196463ad0d4e38eb96dcc639dea3d9af01b2c3e"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/backport-contract-current-owner-20261019/forward/before/m3/backports/JEP_CATALOGUE.tsv",
+      "gitBlob": "a0ef9aa95da17a19c3df8ab8aded355fad4f4598",
+      "bytes": 12083,
+      "sha256": "d47f07c2ee9829bfb91f4c4e2162bb221e86206aada802e0580aaef79d7fd250"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/backport-contract-current-owner-20261019/forward/before/m3/backports/POST21_PRIORITY_COMPATIBILITY.tsv",
+      "gitBlob": "db7579c96d7dfc9c0c70fb4b28773cf89bad76ca",
+      "bytes": 6319,
+      "sha256": "4d813438bb68106c65781b3891c43afd4b35d288e0440ec4d27f83305b780c1a"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/backport-contract-current-owner-20261019/forward/before/m3/backports/RELEASE_JEP_AUTHORITY.tsv",
+      "gitBlob": "745a26772b8050c28dd93d05c724bfa9c2ad5e18",
+      "bytes": 760,
+      "sha256": "05341181f89e150ae602644ddaca9d53596be533cb2695e4032f11c0e1a70709"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/backport-contract-current-owner-20261019/forward/before/m3/backports/backport_execution_waves.py",
+      "gitBlob": "cc2a6ceb90b56d3b05d1307e705586c8d7cf1b40",
+      "bytes": 12177,
+      "sha256": "2cb19465a6a0d4f24dc228921eb1a2d7c2bbc4e53ce68e635b0e60ddb2a563dc"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/backport-contract-current-owner-20261019/forward/before/m3/backports/compatibility_policy.py",
+      "gitBlob": "89673d65b2ad42fc694d809d5c6f4d0eab7adbd8",
+      "bytes": 4695,
+      "sha256": "d51301d3ea225e89b000a2256855ab7806a1faf20c5fa493eb5666de1e7880c2"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/backport-contract-current-owner-20261019/forward/before/m3/backports/test_backport_execution_waves.py",
+      "gitBlob": "e10ae062eb1b86a6335e7d64fd520d2206a4b4c4",
+      "bytes": 11810,
+      "sha256": "709eae19cbdebb0f8d7c8024f0682ef72c4adefabaff06e17ca13527111f0fe2"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/backport-contract-current-owner-20261019/forward/before/m3/backports/test_compatibility_policy.py",
+      "gitBlob": "14f15fff4c3cfcf940c0de01eb50da27792c9fc9",
+      "bytes": 6257,
+      "sha256": "e0171f209ede6484399312b5258ecfb11232bcf7e5b6d8bffde65c6f0c5aed11"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/backport-contract-current-owner-20261019/forward/manifest.tsv",
+      "gitBlob": "1e6891ec6490a157170d5f298648dffc2073af11",
+      "bytes": 1530,
+      "sha256": "6179a6c48be2b33f6f865926df13c78bd96ddf6a91a1574ad2c190cc71f8fac2"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/backport-contract-current-owner-20261019/forward/out/m3/backports/BACKPORT_EXECUTION_WAVES.md",
+      "gitBlob": "428d775ca476b187dceb26a012401b11b975bbbb",
+      "bytes": 6247,
+      "sha256": "df2aca41ab120bdbc8c165d4abe3552c54a91c591aab116b718b94283ae23f28"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/backport-contract-current-owner-20261019/forward/out/m3/backports/JEP_CATALOGUE.tsv",
+      "gitBlob": "a0ef9aa95da17a19c3df8ab8aded355fad4f4598",
+      "bytes": 12083,
+      "sha256": "d47f07c2ee9829bfb91f4c4e2162bb221e86206aada802e0580aaef79d7fd250"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/backport-contract-current-owner-20261019/forward/out/m3/backports/POST21_PRIORITY_COMPATIBILITY.tsv",
+      "gitBlob": "db7579c96d7dfc9c0c70fb4b28773cf89bad76ca",
+      "bytes": 6319,
+      "sha256": "4d813438bb68106c65781b3891c43afd4b35d288e0440ec4d27f83305b780c1a"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/backport-contract-current-owner-20261019/forward/out/m3/backports/RELEASE_JEP_AUTHORITY.tsv",
+      "gitBlob": "745a26772b8050c28dd93d05c724bfa9c2ad5e18",
+      "bytes": 760,
+      "sha256": "05341181f89e150ae602644ddaca9d53596be533cb2695e4032f11c0e1a70709"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/backport-contract-current-owner-20261019/forward/out/m3/backports/backport_execution_waves.py",
+      "gitBlob": "cc2a6ceb90b56d3b05d1307e705586c8d7cf1b40",
+      "bytes": 12177,
+      "sha256": "2cb19465a6a0d4f24dc228921eb1a2d7c2bbc4e53ce68e635b0e60ddb2a563dc"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/backport-contract-current-owner-20261019/forward/out/m3/backports/compatibility_policy.py",
+      "gitBlob": "89673d65b2ad42fc694d809d5c6f4d0eab7adbd8",
+      "bytes": 4695,
+      "sha256": "d51301d3ea225e89b000a2256855ab7806a1faf20c5fa493eb5666de1e7880c2"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/backport-contract-current-owner-20261019/forward/out/m3/backports/test_backport_execution_waves.py",
+      "gitBlob": "7a3b961caa4302a2ebd1675360e29e6b1df9697b",
+      "bytes": 12454,
+      "sha256": "5a59d038e108010c484f66f545ab5bc745a791182ed4794556b414ffde315dd0"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/backport-contract-current-owner-20261019/forward/out/m3/backports/test_compatibility_policy.py",
+      "gitBlob": "cd7b5a28ce3ec1f5a4475a145b40a3074b1a5c21",
+      "bytes": 7101,
+      "sha256": "69694e6e3725aeee8687a8c58bce477c7256f626d8425c04a9ce9772250a2bb6"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/backport-contract-current-owner-20261019/inverse/before/m3/backports/BACKPORT_EXECUTION_WAVES.md",
+      "gitBlob": "428d775ca476b187dceb26a012401b11b975bbbb",
+      "bytes": 6247,
+      "sha256": "df2aca41ab120bdbc8c165d4abe3552c54a91c591aab116b718b94283ae23f28"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/backport-contract-current-owner-20261019/inverse/before/m3/backports/JEP_CATALOGUE.tsv",
+      "gitBlob": "a0ef9aa95da17a19c3df8ab8aded355fad4f4598",
+      "bytes": 12083,
+      "sha256": "d47f07c2ee9829bfb91f4c4e2162bb221e86206aada802e0580aaef79d7fd250"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/backport-contract-current-owner-20261019/inverse/before/m3/backports/POST21_PRIORITY_COMPATIBILITY.tsv",
+      "gitBlob": "db7579c96d7dfc9c0c70fb4b28773cf89bad76ca",
+      "bytes": 6319,
+      "sha256": "4d813438bb68106c65781b3891c43afd4b35d288e0440ec4d27f83305b780c1a"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/backport-contract-current-owner-20261019/inverse/before/m3/backports/RELEASE_JEP_AUTHORITY.tsv",
+      "gitBlob": "745a26772b8050c28dd93d05c724bfa9c2ad5e18",
+      "bytes": 760,
+      "sha256": "05341181f89e150ae602644ddaca9d53596be533cb2695e4032f11c0e1a70709"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/backport-contract-current-owner-20261019/inverse/before/m3/backports/backport_execution_waves.py",
+      "gitBlob": "cc2a6ceb90b56d3b05d1307e705586c8d7cf1b40",
+      "bytes": 12177,
+      "sha256": "2cb19465a6a0d4f24dc228921eb1a2d7c2bbc4e53ce68e635b0e60ddb2a563dc"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/backport-contract-current-owner-20261019/inverse/before/m3/backports/compatibility_policy.py",
+      "gitBlob": "89673d65b2ad42fc694d809d5c6f4d0eab7adbd8",
+      "bytes": 4695,
+      "sha256": "d51301d3ea225e89b000a2256855ab7806a1faf20c5fa493eb5666de1e7880c2"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/backport-contract-current-owner-20261019/inverse/before/m3/backports/test_backport_execution_waves.py",
+      "gitBlob": "7a3b961caa4302a2ebd1675360e29e6b1df9697b",
+      "bytes": 12454,
+      "sha256": "5a59d038e108010c484f66f545ab5bc745a791182ed4794556b414ffde315dd0"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/backport-contract-current-owner-20261019/inverse/before/m3/backports/test_compatibility_policy.py",
+      "gitBlob": "cd7b5a28ce3ec1f5a4475a145b40a3074b1a5c21",
+      "bytes": 7101,
+      "sha256": "69694e6e3725aeee8687a8c58bce477c7256f626d8425c04a9ce9772250a2bb6"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/backport-contract-current-owner-20261019/inverse/manifest.tsv",
+      "gitBlob": "9d256c4070c8ded6c3e8c4930d43bbb86756c239",
+      "bytes": 1530,
+      "sha256": "3bf085cbeab90bc6926ca8fae0b08cf28610969620b2fd1023313c23b6b9ac96"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/backport-contract-current-owner-20261019/inverse/out/m3/backports/BACKPORT_EXECUTION_WAVES.md",
+      "gitBlob": "a5421ae43c55cbcce025f95cf49838a112a507bc",
+      "bytes": 5680,
+      "sha256": "b18e07de81e7296bf338589dd196463ad0d4e38eb96dcc639dea3d9af01b2c3e"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/backport-contract-current-owner-20261019/inverse/out/m3/backports/JEP_CATALOGUE.tsv",
+      "gitBlob": "a0ef9aa95da17a19c3df8ab8aded355fad4f4598",
+      "bytes": 12083,
+      "sha256": "d47f07c2ee9829bfb91f4c4e2162bb221e86206aada802e0580aaef79d7fd250"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/backport-contract-current-owner-20261019/inverse/out/m3/backports/POST21_PRIORITY_COMPATIBILITY.tsv",
+      "gitBlob": "db7579c96d7dfc9c0c70fb4b28773cf89bad76ca",
+      "bytes": 6319,
+      "sha256": "4d813438bb68106c65781b3891c43afd4b35d288e0440ec4d27f83305b780c1a"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/backport-contract-current-owner-20261019/inverse/out/m3/backports/RELEASE_JEP_AUTHORITY.tsv",
+      "gitBlob": "745a26772b8050c28dd93d05c724bfa9c2ad5e18",
+      "bytes": 760,
+      "sha256": "05341181f89e150ae602644ddaca9d53596be533cb2695e4032f11c0e1a70709"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/backport-contract-current-owner-20261019/inverse/out/m3/backports/backport_execution_waves.py",
+      "gitBlob": "cc2a6ceb90b56d3b05d1307e705586c8d7cf1b40",
+      "bytes": 12177,
+      "sha256": "2cb19465a6a0d4f24dc228921eb1a2d7c2bbc4e53ce68e635b0e60ddb2a563dc"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/backport-contract-current-owner-20261019/inverse/out/m3/backports/compatibility_policy.py",
+      "gitBlob": "89673d65b2ad42fc694d809d5c6f4d0eab7adbd8",
+      "bytes": 4695,
+      "sha256": "d51301d3ea225e89b000a2256855ab7806a1faf20c5fa493eb5666de1e7880c2"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/backport-contract-current-owner-20261019/inverse/out/m3/backports/test_backport_execution_waves.py",
+      "gitBlob": "e10ae062eb1b86a6335e7d64fd520d2206a4b4c4",
+      "bytes": 11810,
+      "sha256": "709eae19cbdebb0f8d7c8024f0682ef72c4adefabaff06e17ca13527111f0fe2"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/backport-contract-current-owner-20261019/inverse/out/m3/backports/test_compatibility_policy.py",
+      "gitBlob": "14f15fff4c3cfcf940c0de01eb50da27792c9fc9",
+      "bytes": 6257,
+      "sha256": "e0171f209ede6484399312b5258ecfb11232bcf7e5b6d8bffde65c6f0c5aed11"
+    },
+    {
+      "path": "src/test/java/com/synexia/rewrite/M3BackportContractCurrentOwnerRecipeTest.java",
+      "gitBlob": "ab67ffb13b80749990754e2771c7891f5f7a2d65",
+      "bytes": 16186,
+      "sha256": "ef1646275d74ed5c2254d07a2bc12ed3e2473d2946bc54bee60d253f31decccc"
+    },
+    {
+      "path": "verify.py",
+      "gitBlob": "c1b7cd322cbd715017704896fae1cd91749c8970",
+      "bytes": 25355,
+      "sha256": "e38ea432598fa1d0da3489395f7a55d6d03325cb71bd5eb9459d7fe913fb813c"
+    }
+  ]
+}

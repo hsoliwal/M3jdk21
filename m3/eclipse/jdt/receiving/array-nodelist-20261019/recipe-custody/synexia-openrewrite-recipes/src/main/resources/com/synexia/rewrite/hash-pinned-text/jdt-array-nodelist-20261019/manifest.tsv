@@ -1,0 +1,2 @@
+# target_path	before_sha256	after_sha256	template
+org.eclipse.jdt.core/model/org/eclipse/jdt/internal/core/builder/JavaBuilder.java	e2ab091ce00d8098aa259bddeabff98eb63949731639a773d186f93874090627	30865eb8f8af8f71cc2c755aa20c2efdd6f61a1eac84559bde364f8e4c2d9585	JavaBuilder.java.txt

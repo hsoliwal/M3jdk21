@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
 # SPDX-License-Identifier: Apache-2.0
-"""Compile three opt-in text modules with the existing JMOD/image packager."""
+"""Compile three opt-in text modules from an M3 JDK 21 development image."""
 import argparse
 import os
 import platform
@@ -26,7 +26,7 @@ def main():
     args = parser.parse_args()
     home = args.jdk_home.resolve(strict=True)
     if not re.search(r'^JAVA_VERSION="21(?:[.+"-])', (home / "release").read_text(), re.MULTILINE):
-        raise ValueError("Java 21 development toolchain required")
+        raise ValueError("M3 Java 21 development toolchain required")
     if platform.system() != "Linux":
         raise ValueError("this POSIX JNI image qualification currently requires Linux")
     output = args.out.resolve()
@@ -42,7 +42,10 @@ def main():
     classes, native, jars = (output / name for name in ("modules", "native", "jars"))
     for path in (classes, native, jars):
         path.mkdir()
-    command(output / "modules-javac.log", home / "bin/javac", "--release", "21", "-Xlint:all,-module",
+    command(output / "m3-progress-api.log", home / "bin/javap", "-public",
+            "java.util.concurrent.ProgressMonitor", "java.util.concurrent.ProgressMonitors")
+    # M3File uses the M3 java.base progress APIs; standard ct.sym omits them.
+    command(output / "modules-javac.log", home / "bin/javac", "-source", "21", "-target", "21", "-Xlint:all,-module",
             "-Werror", "--module-source-path", sources, "-d", classes, *sorted(sources.rglob("*.java")))
     command(output / "native.log", os.environ.get("CC", "cc"), "-std=c11", "-Wall", "-Wextra", "-Werror",
             "-shared", "-fPIC", "-I" + str(home / "include"), "-I" + str(home / "include/linux"),

@@ -1,3 +1,5 @@
+<!-- SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project -->
+<!-- SPDX-License-Identifier: Apache-2.0 -->
 # M3 mask-window core: canonical recipe and qualified receiver
 Copyright 2026 Hitesh Soliwal and contributors. SPDX-License-Identifier: Apache-2.0
 
@@ -36,3 +38,38 @@ The current-source candidate passed 105 recorded direct qualification commands: 
 The source-seal engine is Maven-addressable and directly executable. Maven is unavailable locally; archive retrieval failed DNS resolution. Maven lifecycle resolution, complete collection/custom-JUnit reactor, historical installed-source successor reconciliation, source-built JDK/jtreg/JCK, cross-platform JNI and performance benchmarks remain NOT_RUN until actual receipts exist. No admission rule or global phase is relaxed. This is an independently reviewable DRAFT.
 
 Shared javac frontend and selected build packs already exist in #1086; this increment is not complete custom Maven/Gradle/Ant/OpenRewrite packaging, M3File/Jackson/XML, L0-L5 intake, or all live filtered/sorted families. See SCOPE.tsv and RECONCILIATION.md.
+
+## Current-source reconciliation, 2026-10-21
+
+The earlier baseline and verification section above is historical. Current seals are in
+`CURRENT_SOURCE_PINS.json`, and the forward-qualified correction is recorded in
+`memory/LESSONS.md` and event `1d82d949bef954c038da5e3f08726634940c65bee35569ac114e373fc100c84f`. The source-seal engine remains unchanged.
+The new direct evidence preserves all nine current JNI exports; Maven resolution was
+attempted and blocked before build, as recorded under `reconciliation-20261021/evidence/`.
+
+## Canonical publication amendment
+
+The original source PR #12260 is merged/closed. Preserve its historical crate. The
+current-source successor is the distinct `current-master-20261021` dataset under that
+same canonical owner, prepared for the already-open source PR #12712 at
+`bad47f27aa06d011d297841eba11d935e0258be2`. No merged branch is resurrected and no new
+PR is created. Receiver PR #1280 mirrors this exact dataset in its existing custody
+path after the canonical source commit exists. This is a local prepared publication
+plan; no remote write has been performed by the qualification worker.
+
+Publication amendment event: `5ac55e2fa109d1c46914f09a18d1365848e5d1302607aee6b9814b9ad7e3e62c`.
+
+## Final checked source epoch:55b44776
+
+The final source comparison caught newly merged PR#1638's additive long required/excluded
+selector. The earlier1e5056b proof above remains historical; it is not the publication
+preimage. The current Java seal is `ec8b9d2683f5fdb99f6c3e9ad4c79dc60e8ad19cbc3fde2b09e9da2fe3a83f2b`, Git blob
+`6359eda54aceb2c3b73beab1cbb4718091a9041a`. C is unchanged. The same existing author was regenerated with this
+new exact preimage and preserves the new method byte-for-byte.
+
+Fresh serial qualification again passed105 commands. The current supplement passed14
+commands:133,140 existing Java contract checks,512 actual JNI cases,136,397 independent
+long-overload checks, and current/legacy/missing native capability cases on both before
+and generated sources. All22 retained method bodies and JNI headers match exactly.
+Current evidence is under `reconciliation-20261021/evidence/serial-v2` and `current-v2`.
+Event:`5e4a86e1a376e7855daf8a2d885765f1b284b930d6219ad5ce016871d82dd156`. Previous receipts and events remain immutable. No global phase advances.

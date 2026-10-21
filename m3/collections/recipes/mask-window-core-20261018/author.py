@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
+# SPDX-License-Identifier: Apache-2.0
 # Copyright 2026 Hitesh Soliwal and contributors. SPDX-License-Identifier: Apache-2.0
 """Author exact, reviewed templates only; SealReplay owns target application."""
 from pathlib import Path
@@ -6,7 +8,7 @@ import argparse, hashlib, json
 T=Path(__file__).resolve().parent
 JAVA='m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java'
 NATIVE='m3/collections/src/main/native/collections/m3_index_mask_compactor.c'
-EXPECTED={'M3IndexMaskCompactor.java':'477135e13481942fef3b95b96a08d39c9c86dd92a649959c6d035b19b5784031','m3_index_mask_compactor.c':'8610e9fcedcc8eb698acbf3161bca8ea7d16194e61c66915f9e25fe47aae27f7'}
+EXPECTED={'M3IndexMaskCompactor.java': 'ec8b9d2683f5fdb99f6c3e9ad4c79dc60e8ad19cbc3fde2b09e9da2fe3a83f2b', 'm3_index_mask_compactor.c': 'd1c300832aa9bf44cd7b7199cff593beb2a9464fbb52c9c8448da7773eaf0aef'}
 def sha(b):return hashlib.sha256(b).hexdigest()
 def replace_once(s,a,b):
     if s.count(a)!=1:raise ValueError('reviewed atom anchor mismatch: '+a[:90])
@@ -113,7 +115,6 @@ static jsize m3_first_selected(const jbyte *marks, jsize size, jint mask) {
     }
     return m3_select_range(env, rows, states, row_offset, state_offset, length, mask);
 '''+s[b:]
-    s=replace_once(s,'    jlong accepted[M3_CHUNK];\n','')
     s=replace_once(s,'        (*env)->GetLongArrayRegion(env, rows, row_offset + position, chunk, values);','''        jsize begin = m3_first_selected(marks, chunk, mask);
         if (begin == chunk) {
             position += chunk;
@@ -122,13 +123,12 @@ static jsize m3_first_selected(const jbyte *marks, jsize size, jint mask) {
         (*env)->GetLongArrayRegion(env, rows, row_offset + position, chunk, values);''')
     s=replace_once(s,'''            for (jsize i = 0; i < chunk; i++) {
                 unsigned int flags = (unsigned int)(unsigned char)marks[i];
-                if ((flags & (unsigned int)mask) == (unsigned int)mask) accepted[batch++] = values[i];
+                if ((flags & (unsigned int)mask) == (unsigned int)mask) values[batch++] = values[i];
             }''','''            /* Prefix compaction cannot overwrite an unread row: batch <= i. */
             for (jsize i = begin; i < chunk; i++) {
                 unsigned int flags = (unsigned int)(unsigned char)marks[i];
                 if ((flags & (unsigned int)mask) == (unsigned int)mask) values[batch++] = values[i];
             }''')
-    s=replace_once(s,'SetLongArrayRegion(env, result, written, batch, mask == 0 ? values : accepted);','SetLongArrayRegion(env, result, written, batch, values);')
     return s
 
 def main():

@@ -1,0 +1,31 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3JDK21 integrated Java21 JNI object-index-filter
+on:
+  pull_request:
+    paths:
+      - 'm3/qualification/direct-object-index-filter-20261021/**'
+      - 'm3/collections/src/main/java/com/m3/collections/M3CollectionViews.java'
+      - 'm3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java'
+      - 'm3/collections/src/test/java/com/m3/collections/M3FilteredIsEmptyContract.java'
+      - 'm3/collections/src/test/java/com/m3/collections/M3LongIndexNaturalRunContract.java'
+      - 'm3/collections/qualification/filtered-isempty-20261021/**'
+      - 'm3/collections/qualification/natural-run-20261021/**'
+      - 'src/java.base/share/classes/jdk/internal/misc/M3ObjectMemory.java'
+      - 'src/java.base/share/native/libjava/M3ObjectMemory.c'
+      - 'test/jdk/jdk/internal/misc/M3ObjectMemoryTest.java'
+      - '.github/workflows/m3-direct-object-index-filter-convergence-20261021.yml'
+  workflow_dispatch:
+jobs:
+  java21-abi-jni-and-collection-contract:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Exact baseline and candidate collection oracles plus libjava JNI source compile
+        run: bash m3/qualification/direct-object-index-filter-20261021/verify.sh

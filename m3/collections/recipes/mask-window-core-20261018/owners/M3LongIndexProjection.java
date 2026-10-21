@@ -21,7 +21,8 @@ import java.util.Objects;
  * <p>Unlike M3's live collection wrappers this class is a detached snapshot.
  * Its methods never refresh when a mutable source changes. It does not replace
  * {@code java.util} or claim compatible serialized concrete class identity.
- * Reordering is O(n log n) time and O(n) index scratch; indexed reads O(1).
+ * Reordering encounter order is O(n log n); switching a known sorted direction is O(n).
+ * Both use O(n) index storage; indexed reads are O(1).
  * Native mask selection is opt-in via the existing M3IndexMaskCompactor JNI.</p>
  */
 public final class M3LongIndexProjection {
@@ -135,11 +136,61 @@ public final class M3LongIndexProjection {
     /** Stable signed-long descending sort; exact ties retain encounter order. */
     public M3LongIndexProjection sortedDescending() { return sorted(true); }
 
+    /**
+     * Reverse equal-value groups without reversing occurrences inside a group.
+     * The immutable index window is already sorted. Copy each group forward,
+     * using one result index and the current address kernel for payload reads.
+     * Sliced and filtered tie groups remain bounded by this view's [from,to).
+     */
+    private int[] reverseValueGroups() {
+        int[] reversed = new int[size()];
+        int write = 0;
+        for (int end = to; end > from;) {
+            int start = end - 1;
+            long value = M3LongAddressKernel.loadUnchecked(values, indices, 0, start);
+            while (start > from
+                    && M3LongAddressKernel.loadUnchecked(values, indices, 0, start - 1)
+                    == value) {
+                start--;
+            }
+            int count = end - start;
+            System.arraycopy(indices, start, reversed, write, count);
+            write += count;
+            end = start;
+        }
+        return reversed;
+    }
+
+    /**
+     * Recognize an already-sorted encounter window without copying its physical
+     * directory. A tie is never inverted: identical values preserve the exact
+     * existing physical-index order, including repeated values and slices.
+     * Only the current immutable [from,to) window participates in this scan.
+     */
+    private boolean alreadyOrdered(boolean descending) {
+        long preceding = M3LongAddressKernel.loadPhysicalUnchecked(values, indices[from]);
+        for (int index = from + 1; index < to; index++) {
+            long current = M3LongAddressKernel.loadPhysicalUnchecked(values, indices[index]);
+            if (descending ? preceding < current : preceding > current) return false;
+            preceding = current;
+        }
+        return true;
+    }
+
     private M3LongIndexProjection sorted(boolean descending) {
         Order requested = descending ? Order.DESCENDING : Order.ASCENDING;
         if (order == requested || size() < 2) {
             // A slice/filter retains its direction and tie order; do not re-sort an
             // immutable directory already in the requested order or copy its window.
+            return new M3LongIndexProjection(values, indices, from, to, requested);
+        }
+        if (order != Order.ENCOUNTER) {
+            int[] reversed = reverseValueGroups();
+            return new M3LongIndexProjection(values, reversed, 0, reversed.length, requested);
+        }
+        if (alreadyOrdered(descending)) {
+            // A sorted encounter-order index needs neither a copied directory
+            // nor the scratch array / merge passes. Caller observes a new view.
             return new M3LongIndexProjection(values, indices, from, to, requested);
         }
         int[] current = physicalIndices();

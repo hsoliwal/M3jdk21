@@ -1,0 +1,16 @@
+{
+  "all_inventory_decisions": "NOT_EVALUATED",
+  "complete_blob_identity_rows_matched": 9996,
+  "files_before_final_event_and_manifest": 18,
+  "java_jni_execution_stages": "NOT_EXECUTED_METADATA_RESEARCH_ONLY",
+  "metadata_idempotence": "DETERMINISTIC_TSV_REPROJECTION_BYTE_EQUALITY_ALREADY_VERIFIED",
+  "owner_proposals": "REFERENCE_ONLY_REQUIRES_CURRENT_PREIMAGE_RECHECK",
+  "raw_source_snapshots_sha256_matched": 6,
+  "readme_scope": "COMPLETE_PINNED_README_PATH_INVENTORY;CONTENT_AND_PLATFORM_COMPLETENESS_NOT_CLAIMED",
+  "repository_mutations_by_this_agent": false,
+  "schema": "m3-final-donor-metadata-verification-v1",
+  "source_bodies_of_entire_corpus_reviewed": false,
+  "status": "PASS",
+  "target_implementation_admissions": 0,
+  "tree_completeness": "NONTRUNCATED_AND_ALL_GIT_DIRECTORY_HASHES_RECONSTRUCTED"
+}

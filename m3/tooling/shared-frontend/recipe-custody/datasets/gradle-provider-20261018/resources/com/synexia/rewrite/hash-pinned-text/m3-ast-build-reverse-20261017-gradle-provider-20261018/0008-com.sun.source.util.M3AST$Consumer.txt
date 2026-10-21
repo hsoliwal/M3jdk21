@@ -1,0 +1,2 @@
+org.gradle.internal.m3.ast.M3GradleASTProviderProbe$FirstConsumer
+org.gradle.internal.m3.ast.M3GradleASTProviderProbe$SecondConsumer

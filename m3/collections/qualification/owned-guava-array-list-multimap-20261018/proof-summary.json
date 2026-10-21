@@ -1,0 +1,13 @@
+{
+  "owner": "com.m3.collections.guava.M3ArrayListMultimap",
+  "provider_contract": "com.google.common.collect.ArrayListMultimap (Guava 33.4.8-jre)",
+  "inventory_row": "DONE #1400",
+  "source_sha256": "66ef182956a214103b2931f5d00526f1e8a0e727924e6fa73919faf1bc691fda",
+  "scaffold_preimage_sha256": "384c82472eb9caeea7d233d417b360a8111767d931a3edea4f97eb00bfa10d65",
+  "module_tests": {"tests": 22, "failures": 0, "differential_seeds": 8, "differential_operations": 96000, "differential_checks": 1025276},
+  "coverage": {"tool": "JaCoCo 0.8.12", "classes": 14, "line": "741/741", "branch": "484/484", "gate": "CLASS LINE and BRANCH COVEREDRATIO >= 0.99"},
+  "allocation_probe_bytes": 0,
+  "recipe_tests": {"tests": 2, "fixed_point_executions": 8, "refusals": 4},
+  "environment": "local Windows 11, JDK 21, Maven 3.9.14; hosted CI not run",
+  "not_claimed": ["Guava key iteration order", "Guava serialized form", "performance comparison", "JNI path"]
+}

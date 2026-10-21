@@ -236,6 +236,91 @@ Java_com_m3_collections_M3IndexMaskCompactor_selectPositionsNative(
     return result;
 }
 
+
+/* Additive exact-position ABI for required + excluded unsigned-byte state masks.
+ * Existing required-only symbols remain unchanged for binary compatibility.
+ */
+JNIEXPORT jint JNICALL
+Java_com_m3_collections_M3IndexMaskCompactor_positionsMasksAbiNative(
+        JNIEnv *env, jclass owner) {
+    (void)env; (void)owner;
+    return 1;
+}
+
+JNIEXPORT jintArray JNICALL
+Java_com_m3_collections_M3IndexMaskCompactor_selectPositionsMasksNative(
+        JNIEnv *env, jclass owner, jbyteArray states, jint required, jint excluded) {
+    (void)owner;
+    if (states == NULL || required < 0 || required > 255
+            || excluded < 0 || excluded > 255) {
+        m3_bad_window(env);
+        return NULL;
+    }
+    jsize length = (*env)->GetArrayLength(env, states);
+    if ((*env)->ExceptionCheck(env)) return NULL;
+    if ((required & excluded) != 0) {
+        return (*env)->NewIntArray(env, 0);
+    }
+
+    jbyte marks[M3_CHUNK];
+    jint kept = 0;
+    if ((required | excluded) == 0) {
+        kept = length;
+    } else {
+        for (jint offset = 0; offset < length;) {
+            jint remaining = length - offset;
+            jsize chunk = remaining < M3_CHUNK ? remaining : M3_CHUNK;
+            (*env)->GetByteArrayRegion(env, states, offset, chunk, marks);
+            if ((*env)->ExceptionCheck(env)) return NULL;
+            for (jsize i = 0; i < chunk; i++) {
+                unsigned int flags = (unsigned int)(unsigned char)marks[i];
+                if ((flags & (unsigned int)required) == (unsigned int)required
+                        && (flags & (unsigned int)excluded) == 0U) {
+                    kept++;
+                }
+            }
+            offset += chunk;
+        }
+    }
+
+    jintArray result = (*env)->NewIntArray(env, kept);
+    if (result == NULL) return NULL;
+    jint positions[M3_CHUNK];
+    jint written = 0;
+    for (jint offset = 0; offset < length;) {
+        jint remaining = length - offset;
+        jsize chunk = remaining < M3_CHUNK ? remaining : M3_CHUNK;
+        if ((required | excluded) != 0) {
+            (*env)->GetByteArrayRegion(env, states, offset, chunk, marks);
+            if ((*env)->ExceptionCheck(env)) return NULL;
+        }
+        jsize accepted = 0;
+        for (jsize i = 0; i < chunk; i++) {
+            unsigned int flags = (required | excluded) == 0
+                    ? 0U : (unsigned int)(unsigned char)marks[i];
+            if ((flags & (unsigned int)required) == (unsigned int)required
+                    && (flags & (unsigned int)excluded) == 0U) {
+                positions[accepted++] = offset + i;
+            }
+        }
+        if (accepted > kept - written) {
+            m3_throw_state_drift(env);
+            return NULL;
+        }
+        if (accepted > 0) {
+            (*env)->SetIntArrayRegion(env, result, written, accepted, positions);
+            if ((*env)->ExceptionCheck(env)) return NULL;
+            written += accepted;
+        }
+        offset += chunk;
+    }
+    if (written != kept) {
+        m3_throw_state_drift(env);
+        return NULL;
+    }
+    return result;
+}
+
 JNIEXPORT jintArray JNICALL
 Java_com_m3_collections_M3IndexMaskCompactor_selectWindowNative(
         JNIEnv *env, jclass owner, jintArray rows, jint row_offset,
@@ -250,7 +335,6 @@ Java_com_m3_collections_M3IndexMaskCompactor_selectWindowNative(
     if (result == NULL) return NULL;
     jbyte marks[M3_CHUNK];
     jint values[M3_CHUNK];
-    jint accepted[M3_CHUNK];
     jint written = 0;
     for (jint position = 0; position < length;) {
         jint remaining = length - position;
@@ -263,10 +347,11 @@ Java_com_m3_collections_M3IndexMaskCompactor_selectWindowNative(
         if ((*env)->ExceptionCheck(env)) return NULL;
         jsize batch = chunk;
         if (mask != 0) {
+            /* Stable prefix compaction: batch <= i, so unread values stay intact. */
             batch = 0;
             for (jsize i = 0; i < chunk; i++) {
                 unsigned int flags = (unsigned int)(unsigned char)marks[i];
-                if ((flags & (unsigned int)mask) == (unsigned int)mask) accepted[batch++] = values[i];
+                if ((flags & (unsigned int)mask) == (unsigned int)mask) values[batch++] = values[i];
             }
         }
         if (batch > kept - written) {
@@ -275,7 +360,7 @@ Java_com_m3_collections_M3IndexMaskCompactor_selectWindowNative(
         }
         if (batch > 0) {
             /* Zero-mask identity copies the row chunk without reading aligned states. */
-            (*env)->SetIntArrayRegion(env, result, written, batch, mask == 0 ? values : accepted);
+            (*env)->SetIntArrayRegion(env, result, written, batch, values);
             if ((*env)->ExceptionCheck(env)) return NULL;
             written += batch;
         }
@@ -302,7 +387,6 @@ Java_com_m3_collections_M3IndexMaskCompactor_selectLongWindowNative(
     if (result == NULL) return NULL;
     jbyte marks[M3_CHUNK];
     jlong values[M3_CHUNK];
-    jlong accepted[M3_CHUNK];
     jint written = 0;
     for (jint position = 0; position < length;) {
         jint remaining = length - position;
@@ -315,10 +399,11 @@ Java_com_m3_collections_M3IndexMaskCompactor_selectLongWindowNative(
         if ((*env)->ExceptionCheck(env)) return NULL;
         jsize batch = chunk;
         if (mask != 0) {
+            /* Stable prefix compaction: batch <= i, so unread values stay intact. */
             batch = 0;
             for (jsize i = 0; i < chunk; i++) {
                 unsigned int flags = (unsigned int)(unsigned char)marks[i];
-                if ((flags & (unsigned int)mask) == (unsigned int)mask) accepted[batch++] = values[i];
+                if ((flags & (unsigned int)mask) == (unsigned int)mask) values[batch++] = values[i];
             }
         }
         if (batch > kept - written) {
@@ -327,7 +412,7 @@ Java_com_m3_collections_M3IndexMaskCompactor_selectLongWindowNative(
         }
         if (batch > 0) {
             /* Keep the same detached, exact-sized copy contract as the int window. */
-            (*env)->SetLongArrayRegion(env, result, written, batch, mask == 0 ? values : accepted);
+            (*env)->SetLongArrayRegion(env, result, written, batch, values);
             if ((*env)->ExceptionCheck(env)) return NULL;
             written += batch;
         }

@@ -1,0 +1,4 @@
+com.m3.tools.graph.paths jar:file:///dev/shm/m3-cpu-tools-f4826e049195-build-v4/jars/com.m3.tools.graph.paths.jar!/module-info.class
+exports com.m3.tools.graph.paths
+requires java.base mandated
+

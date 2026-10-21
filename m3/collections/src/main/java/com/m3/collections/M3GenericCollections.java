@@ -41,6 +41,24 @@ public final class M3GenericCollections {
         return M3GenericCollections.<E>snapshot(source).filtered(predicate);
     }
 
+    /**
+     * One payload capture, one logical predicate pass, and stable sorting of
+     * selected physical int[] offsets. No per-row entry objects or boxed index
+     * sorting, and no extra selected-index copy between the two operations.
+     */
+    public static <E> M3IndexedListSnapshot<E> filteredSortedSnapshot(
+            Collection<? extends E> source, Predicate<? super E> predicate,
+            Comparator<? super E> comparator) {
+        return M3GenericCollections.<E>snapshot(source).filteredSorted(predicate, comparator);
+    }
+
+    /** Explicit JNI selection; native code receives mask bytes, never references. */
+    public static <E> M3IndexedListSnapshot<E> filteredSortedSnapshot(
+            Collection<? extends E> source, Predicate<? super E> predicate,
+            Comparator<? super E> comparator, M3IndexMaskCompactor.Backend backend) {
+        return M3GenericCollections.<E>snapshot(source).filteredSorted(predicate, comparator, backend);
+    }
+
     /** Sort only int[] physical indexes, never shuffle the Object[] payload. */
     public static <E> M3IndexedListSnapshot<E> sortedSnapshot(
             Collection<? extends E> source, Comparator<? super E> comparator) {

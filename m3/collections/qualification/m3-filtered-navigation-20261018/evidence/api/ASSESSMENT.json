@@ -1,0 +1,85 @@
+{
+  "passed": true,
+  "scope": "All production type signatures and JNI generated headers; module source and module class under identical compiler options. Maven artifact-version stamps recorded separately. Behavioral preservation relies on the separate completed contract suites.",
+  "source_units": 134,
+  "top_level_owners": 132,
+  "accessible_nested_types": 48,
+  "type_surface_count": 180,
+  "type_surfaces_identical": true,
+  "all_generated_jni_header_count": 10,
+  "all_generated_jni_headers_identical": true,
+  "jni_header_sha256": {
+    "com_m3_collections_M3BitLane28.h": "9100fb4d366f16641b244df49c3f284c72f618a8a0b925f6038a87c089d903e1",
+    "com_m3_collections_M3IndexMaskCompactor.h": "1f67a3bca5682e3d4b392bb04d6f27479a16fdaccb935463a9dbf026f13faf8c",
+    "com_m3_collections_M3IndexMaskWindow.h": "26d6f1302b888bbebde68d4d911f7b74d91c1fe5f90871928af0220829dc9866",
+    "com_m3_collections_M3IndexPathMasks.h": "5781e35d4a9a16a037e1e80a8e45f7ee53283822691ed863a7476e5defa9fe50",
+    "com_m3_collections_M3LongAddressKernel.h": "dffaa88fa278c69424c6879ddbe2b6d741e37dd48e123e97ebb86043b6b59df7",
+    "com_m3_collections_M3LongRankBatchNative.h": "d1b1b66ab80343d0ac9674334c2facf4c6e371200f463db2100ae6b73c7bc641",
+    "com_m3_collections_M3ResidencyStateMaskIndex.h": "f29cf38398b9d0972f57cea34d8fc7ecce822c484e8c02e8175c11dfe684e0ff",
+    "com_m3_collections_M3SignalOrderNative.h": "9aa514761c1a67d298c0cf463db64cbfde1f380951eadf30c8d664b3a1a15c96",
+    "com_m3_collections_M3SpanIndex.h": "97f7008debc3cb89057b4ca7be9f4fcbc9af8a5e823bc97e2c008cb243ad73cf",
+    "com_m3_collections_M3StateMaskHistogram.h": "7a7d83d5f7cebfb88857a2bc331570b4902ed71acb994f978eb05c3a8f5a51f4"
+  },
+  "module_source_sha256": {
+    "baseline": "e531b318ea4cbc6ca09bb3e52cb1a70ee4539ccf78d8b61b0f73bcf3027db557",
+    "received": "e531b318ea4cbc6ca09bb3e52cb1a70ee4539ccf78d8b61b0f73bcf3027db557"
+  },
+  "module_class_under_identical_javac_sha256": {
+    "baseline": "440779e416e3a6e75114f6aa1631d00083d502855636b833a295e60226c150f6",
+    "received": "440779e416e3a6e75114f6aa1631d00083d502855636b833a295e60226c150f6"
+  },
+  "raw_javap_exit_code": 1,
+  "raw_javap_only_difference": {
+    "java": {
+      "baseline_declaration": "module com.m3.collections {",
+      "maven_declaration": "module com.m3.collections@1.0-SNAPSHOT {"
+    },
+    "native": {
+      "baseline_declaration": "module com.m3.collections {",
+      "maven_declaration": "module com.m3.collections@1.0-SNAPSHOT {"
+    }
+  },
+  "inputs_unchanged": true,
+  "source_changes": [
+    {
+      "path": "com/m3/collections/M3FilteredViews.java",
+      "baseline_sha256": "1061f6a0c789082c7e86078c7ea3c48b97b804150a7ab96c2ff8e28ff6786369",
+      "received_sha256": "4213ae2302fca4a9e5044185104ae43a8829e4f2d3dbbd6422cff1b53fe713e9"
+    },
+    {
+      "path": "com/m3/collections/M3IndexPathMasks.java",
+      "baseline_sha256": "4d1c782345de46c31e24b4822f58c431903c7b951b6a15641c88e055271f971e",
+      "received_sha256": "33b894d2b4c9f89a0244023737d49645d54cbcb1b388a0956e475567fdd4a577"
+    }
+  ],
+  "elapsed_seconds": 152.01245824500074,
+  "baseline_counts": {
+    "class_files": 320,
+    "top_level_owners": 132,
+    "accessible_nested_types": 48,
+    "package_metadata_classes": 0,
+    "module_descriptors": 1
+  },
+  "candidate_counts": {
+    "java": {
+      "class_files": 321,
+      "top_level_owners": 132,
+      "accessible_nested_types": 48,
+      "package_metadata_classes": 1,
+      "module_descriptors": 1
+    },
+    "native": {
+      "class_files": 321,
+      "top_level_owners": 132,
+      "accessible_nested_types": 48,
+      "package_metadata_classes": 1,
+      "module_descriptors": 1
+    }
+  },
+  "evidence_sha256": {
+    "RESULTS.json": "d8051d2d47a6b9af878cdd4b2321816c30bbfd0331930c3408efb03c763f08d6",
+    "INPUTS.json": "7ff36a89f166352b8a6b5ce85ce7085e13c366bbb719b919bf33e54bdb0bfab1",
+    "TYPE_API_SEALS.tsv": "442421382c3691f34c0380b3d5a01fe08abd1219ac628615f2be5dbfabe6d83a",
+    "driver.json": "5c7411c96614beef7b4263569ef967c9c3c3c35d7e685d1c739564db5230a915"
+  }
+}

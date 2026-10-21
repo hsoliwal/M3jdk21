@@ -7,4 +7,8 @@ final class M3ASTHierarchyTest {
     @Test void verifiedHierarchyAllCollectionFamilies() {
         M3ASTHierarchyContract.main(new String[] { "2000" });
     }
+
+    @Test void exactIdentifierRoots() throws Exception {
+        M3ASTHierarchyEncodingTest.main(new String[0]);
+    }
 }

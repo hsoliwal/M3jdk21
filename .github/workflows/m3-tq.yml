@@ -1,3 +1,4 @@
+# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
 # SPDX-License-Identifier: Apache-2.0
 name: M3 TQ counterpart
 on:
@@ -7,6 +8,8 @@ on:
       - '.m3/openrewrite-recipes/**'
       - 'm3/tooling/tq/**'
       - 'm3/tooling/tq-sync/**'
+      - 'm3/synexia-import/pure-int-recipe-custody/install.sh'
+      - 'm3/synexia-import/pure-int-recipe-custody/test_source_bootstrap.py'
       - 'm3/tooling/lane28/**'
       - 'm3/tooling/migration-recipes/**'
       - 'm3/migration/**'
@@ -45,12 +48,21 @@ jobs:
           python3 -m venv "$RUNNER_TEMP/tq-python"
           "$RUNNER_TEMP/tq-python/bin/python" -m pip install -r m3/migration/requirements.txt
           echo "$RUNNER_TEMP/tq-python/bin" >> "$GITHUB_PATH"
+      - name: Source-built TQ Maven dependencies
+        shell: bash
+        run: |
+          bash -n m3/synexia-import/pure-int-recipe-custody/install.sh
+          python3 m3/synexia-import/pure-int-recipe-custody/test_source_bootstrap.py
+          bash m3/synexia-import/pure-int-recipe-custody/install.sh "$GITHUB_WORKSPACE" --dependencies-only
       - name: TQ successor recipe and custody
         run: |
           mvn -B -ntp -f m3/tooling/tq-sync/pom.xml verify
-          python3 m3/tooling/tq-sync/verify-plan.py
+          python3 m3/tooling/tq-sync/verify-plan.py --context ic0
+          python3 -B -S -m unittest discover -s m3/tooling/tq-sync/src/test/python -p test_ic0_context.py -v
       - name: Recipe, UTF-16, mapped-owner, JNI and compiled-kernel gates
         run: mvn -B -ntp -f m3/tooling/tq/pom.xml verify
+      - name: Current TQ workflow context regression
+        run: python3 -B -S -m unittest discover -s m3/tooling/tq/src/test/python -p test_ic0_context.py -v
       - name: Preserve release evidence
         run: |
           mkdir -p m3/tooling/tq/target/release
@@ -61,7 +73,7 @@ jobs:
       - name: Installed bytes and retained mapping
         shell: bash
         run: |
-          python3 m3/tooling/tq/verify-plan.py
+          python3 m3/tooling/tq/verify-plan.py --context ic0
           python3 m3/migration/migration.py validate . --previous m3/tooling/tq/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq/name-mapping.json.txt.before
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         if: always()

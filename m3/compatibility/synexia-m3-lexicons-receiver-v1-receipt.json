@@ -1,0 +1,229 @@
+{
+  "schema": "M3JDK21_SYNEXIA_M3_LEXICONS_RECEIVER_V1",
+  "copyright": "Copyright 2026 Hitesh Soliwal and contributors",
+  "receivedLicense": "Apache-2.0",
+  "canonicalSource": {
+    "repository": "hsoliwal/com.synexia",
+    "branch": "codex/m3-lexicons-receiver-v1-20261018",
+    "pullRequest": 12399,
+    "commit": "52d7aa5ff2fd9d4bcf8d9450c7a3bb7d91b8a0a0",
+    "recipe": "com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe",
+    "declarativeRecipe": "com.synexia.m3.LexiconsReceiverV1",
+    "crate": "m3-lexicons-receiver-v1",
+    "fossReuseDecisionRow": "lexicons.m3-lexicons-receiver-v1-20261018",
+    "donors": [
+      {
+        "path": "synexia-indexstring/src/main/java/com/synexia/indexstring/shared/SharedArrayPool.java",
+        "blob": "tree c22df1d6c8e5",
+        "developCommit": "11c94feb1815",
+        "target": "com.m3.lexicon.M3SharedArenaVerifier",
+        "mechanics": "SYNARR01 header, ARR1 records, CRC32C, COMMIT01 trailer"
+      },
+      {
+        "path": "synexia-dictlang/shared/core/src/main/java/com/synexia/dictshared/core/Format.java",
+        "blob": "25a1b5e2b8fd",
+        "developCommit": "11c94feb1815",
+        "target": "com.m3.lexicon.M3LexiconFormat / M3LexiconWordIds",
+        "mechanics": "SYNDICT1 magic, header, word id ((lang+1)<<25)|(word+1)"
+      },
+      {
+        "path": "synexia-indexstring/src/main/java/com/synexia/indexstring/IndexWordRowsImage.java",
+        "blob": "bc43bc85917a",
+        "developCommit": "11c94feb1815",
+        "target": "com.m3.lexicon.M3LexiconFormat / M3LexiconWordIds",
+        "mechanics": "MIWROWS1 format 3 header; IndexId layout"
+      },
+      {
+        "path": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/BigramImageFormat.java",
+        "blob": "8b6847b593d9",
+        "developCommit": "11c94feb1815",
+        "target": "com.m3.lexicon.M3LexiconFormat",
+        "mechanics": "M3PAIR01 header facts"
+      },
+      {
+        "path": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/LanguageImageFormat.java",
+        "blob": "433d36dccdb6",
+        "developCommit": "11c94feb1815",
+        "target": "com.m3.lexicon.M3LexiconFormat",
+        "mechanics": "M3LIMG01 header facts"
+      },
+      {
+        "path": "synexia-interned-language/src/main/java/com/synexia/language/IndexStringStoreWriter.java",
+        "blob": "b192494fc521",
+        "developCommit": "11c94feb1815",
+        "target": "com.m3.lexicon.M3LexiconFormat",
+        "mechanics": "SNXSTR01 magic"
+      },
+      {
+        "path": "synexia-interned-language/src/main/java/com/synexia/language/IndexedLexiconArtifact.java",
+        "blob": "4de4ac09e61d",
+        "developCommit": "11c94feb1815",
+        "target": "com.m3.lexicon.M3LexiconFormat",
+        "mechanics": "SNXLEX01 magic"
+      }
+    ],
+    "targetContract": {
+      "path": "src/java.base/share/classes/java/lang/M3StringPool.java",
+      "blob": "0905414556ad",
+      "mechanics": "M3LEX001/SYNARR01 admission rules; lexicon atom canonicalId = MIN_VALUE | tag | (row+1)"
+    },
+    "oracles": [
+      "commons-lang3 3.17.0 StringUtils.splitByCharacterTypeCamelCase (test scope; vendored m3/vendor/third_party/commons-lang3-3.17.0)",
+      "commons-csv 1.12.0 CSVFormat.RFC4180 (test scope; vendored m3/vendor/third_party/commons-csv)",
+      "java.lang.Character.getType",
+      "java.lang.String.equalsIgnoreCase"
+    ],
+    "license": "Apache-2.0 first-party; oracles Apache-2.0 test scope only",
+    "disposition": "ADAPT: verifiers mirror the M3StringPool reader; separator boundary monoids specified by donor split outputs; no third-party code copied"
+  },
+  "target": {
+    "repository": "hsoliwal/M3jdk21",
+    "base": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
+    "branch": "m3/lexicons-receiver-20261018",
+    "module": "m3/lexicon/receiver",
+    "package": "com.m3.lexicon",
+    "publicJdkReplacement": false
+  },
+  "runtimeDependencyOnSynexia": false,
+  "publicJdkReplacement": false,
+  "targets": [
+    {
+      "path": "m3/lexicon/receiver/src/main/java/com/m3/lexicon/M3AtomCursor.java",
+      "before": "ABSENT",
+      "after": "f9f45888c729f9a5003e5f88347fc114c180c5bfcbb6c7dc8b7be46d327cfaa4",
+      "resource": "00-M3AtomCursor.java.txt"
+    },
+    {
+      "path": "m3/lexicon/receiver/src/main/java/com/m3/lexicon/M3BitLanes.java",
+      "before": "ABSENT",
+      "after": "e131d285a340f123afe5ac43a0503b3dfa60d0d6c2ca21631eec2eab114c9252",
+      "resource": "01-M3BitLanes.java.txt"
+    },
+    {
+      "path": "m3/lexicon/receiver/src/main/java/com/m3/lexicon/M3CsvBoundarySummary.java",
+      "before": "ABSENT",
+      "after": "7b6b7bc23a6145d2334a072073154de628e8154d8ef6e99bb1711938c367b9d3",
+      "resource": "02-M3CsvBoundarySummary.java.txt"
+    },
+    {
+      "path": "m3/lexicon/receiver/src/main/java/com/m3/lexicon/M3Lex001Image.java",
+      "before": "ABSENT",
+      "after": "5223a03de311825175b242e65d2212b13012513cda9480d03973b6a053998f7d",
+      "resource": "03-M3Lex001Image.java.txt"
+    },
+    {
+      "path": "m3/lexicon/receiver/src/main/java/com/m3/lexicon/M3LexiconFoldIds.java",
+      "before": "ABSENT",
+      "after": "da306a48e49bfa2a150d95c3cf9933a3b52e7971ac56dc6dde94bcd58f48a2f9",
+      "resource": "04-M3LexiconFoldIds.java.txt"
+    },
+    {
+      "path": "m3/lexicon/receiver/src/main/java/com/m3/lexicon/M3LexiconFormat.java",
+      "before": "ABSENT",
+      "after": "188d9accceaa2244aa891d4a75b6f11e34b3bd0aa70b8e954ed7e6c936fd89f0",
+      "resource": "05-M3LexiconFormat.java.txt"
+    },
+    {
+      "path": "m3/lexicon/receiver/src/main/java/com/m3/lexicon/M3LexiconFormatException.java",
+      "before": "ABSENT",
+      "after": "31131540ccf9d0b2eba4c46d2ff6600a46598ab53ba072e509d6fa5090e683ec",
+      "resource": "06-M3LexiconFormatException.java.txt"
+    },
+    {
+      "path": "m3/lexicon/receiver/src/main/java/com/m3/lexicon/M3LexiconWordIds.java",
+      "before": "ABSENT",
+      "after": "4fee4b9c2cc65b8064bdddc45488a0cdda88978b1f8555ab0cb5f8dde487a344",
+      "resource": "07-M3LexiconWordIds.java.txt"
+    },
+    {
+      "path": "m3/lexicon/receiver/src/main/java/com/m3/lexicon/M3PunctBoundarySummary.java",
+      "before": "ABSENT",
+      "after": "acd6ff6ad0ff81328e62215bb4bd231406d16ea195eea875242bfa168d71d6e4",
+      "resource": "08-M3PunctBoundarySummary.java.txt"
+    },
+    {
+      "path": "m3/lexicon/receiver/src/main/java/com/m3/lexicon/M3RegexWordTransferRows.java",
+      "before": "ABSENT",
+      "after": "7e0be5e231e8e98d456b3d64e5ed54e08a398950e5bde0b1fa4e24342f727cb2",
+      "resource": "09-M3RegexWordTransferRows.java.txt"
+    },
+    {
+      "path": "m3/lexicon/receiver/src/main/java/com/m3/lexicon/M3SeparatorKind.java",
+      "before": "ABSENT",
+      "after": "2c52de8bec6851ac483e5853d42830e785b253f5ef3ba376f87815e80e036c84",
+      "resource": "10-M3SeparatorKind.java.txt"
+    },
+    {
+      "path": "m3/lexicon/receiver/src/main/java/com/m3/lexicon/M3SeparatorLexicon.java",
+      "before": "ABSENT",
+      "after": "950c8eb731f43f3b9575de28bd0ce5c6ca62dee046612a07daf7f895410fba2c",
+      "resource": "11-M3SeparatorLexicon.java.txt"
+    },
+    {
+      "path": "m3/lexicon/receiver/src/main/java/com/m3/lexicon/M3SharedArenaVerifier.java",
+      "before": "ABSENT",
+      "after": "82651f7b94190db8ca4b96bd1042381f4ad0676bf81da9a26dfd199026c0b5e1",
+      "resource": "12-M3SharedArenaVerifier.java.txt"
+    },
+    {
+      "path": "m3/lexicon/receiver/src/main/java/com/m3/lexicon/M3WindowBoundarySummary.java",
+      "before": "ABSENT",
+      "after": "1eaa5a660a538923c5582d557e6bdb70310ce089e16c354881f58ca714ff93b3",
+      "resource": "13-M3WindowBoundarySummary.java.txt"
+    },
+    {
+      "path": "m3/lexicon/receiver/src/main/java/com/m3/lexicon/M3WordIdSequence.java",
+      "before": "ABSENT",
+      "after": "1aedcd85e65c2f30d04c6701d8d3e4be5070e564e64e135da63b0a1ca05af947",
+      "resource": "14-M3WordIdSequence.java.txt"
+    },
+    {
+      "path": "m3/lexicon/receiver/src/test/java/com/m3/lexicon/M3LexiconReceiverProof.java",
+      "before": "ABSENT",
+      "after": "1407275a973ec46556202caee2b96b1bc13be5da083ed6a1e83bd71c6fe209cc",
+      "resource": "15-M3LexiconReceiverProof.java.txt"
+    }
+  ],
+  "receiverTextFiles": [
+    {
+      "path": "m3/lexicon/receiver/pom.xml",
+      "sha256": "aa633029b51366d2bfeaf8e75668f3867a73f384602544f4d19f1c335dacc01c"
+    },
+    {
+      "path": "m3/lexicon/receiver/README.md",
+      "sha256": "50b6f776d5be922afe6253eb91d5b46e3b7cecd6ac280e041f6c0ba71bde6987"
+    },
+    {
+      "path": "m3/lexicon/LEXICON_RECEIVER_LEDGER.tsv",
+      "sha256": "a817383e01e3e3eb362d97e3e75bded2c764ed5474af4f2a326f3d52866975db"
+    },
+    {
+      "path": "m3/lexicon/synexia-lexicon-data-manifest-20261018.tsv",
+      "sha256": "5f83d3245c8aee8d4674210b9a6700581aa8c2b0df41f486850ff1de8552c97f"
+    },
+    {
+      "path": "m3/docs/m3-lexicons-separator-wordid-20261018.md",
+      "sha256": "4483c0ec5ee8d769dfc46f0f96eede6a9ea5e8a673381df8bcd068b063c2bff4"
+    }
+  ],
+  "gates": {
+    "G1_crate_recipe_test": {
+      "result": "PASS 2/2",
+      "logSha256": "6d5df014f02c98ce0008c3164916891d2610c95d4ca458eedb7a13c87fafb54a"
+    },
+    "G2_receiver_verify": {
+      "command": "mvn -o -B -ntp -f m3/lexicon/receiver/pom.xml verify",
+      "result": "PASS M3LexiconReceiverProof checks=806797",
+      "logSha256": "b2aa8e748bc1eed5ae8b0e456c14c78214f6285dc0248fc0fcc42d1ea22490b2"
+    }
+  },
+  "dataPolicy": "DATA_OR_METADATA_EXPORT: manifest rows only (m3/lexicon/synexia-lexicon-data-manifest-20261018.tsv); no binaries",
+  "notClaimed": [
+    "java.base binding",
+    "jtreg",
+    "data images",
+    "body readers for SYNDICT1/SNXSTR01/SNXLEX01/M3PAIR01/M3LIMG01/M3GEO001",
+    "R6 DFA serialization",
+    "Jackson CSV differential"
+  ]
+}

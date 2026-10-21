@@ -101,6 +101,35 @@ SPDX-License-Identifier: Apache-2.0
               <timeout>120000</timeout>
             </configuration>
           </execution>
+          <execution>
+            <id>verify-m3-java-jni-multipass-refusal-fixtures</id>
+            <phase>verify</phase>
+            <goals><goal>exec</goal></goals>
+            <configuration>
+              <executable>${m3.contract.python}</executable>
+              <arguments>
+                <argument>${project.basedir}/contract/test_verify_stage_chain.py</argument>
+              </arguments>
+              <environmentVariables><PYTHONDONTWRITEBYTECODE>1</PYTHONDONTWRITEBYTECODE></environmentVariables>
+              <timeout>30000</timeout>
+            </configuration>
+          </execution>
+          <execution>
+            <id>verify-m3-serial-file-source-generations</id>
+            <phase>verify</phase>
+            <goals><goal>exec</goal></goals>
+            <configuration>
+              <executable>${m3.contract.python}</executable>
+              <arguments>
+                <argument>${project.basedir}/contract/verify_stage_chain.py</argument>
+                <argument>--dataset</argument><argument>${m3.dataset}</argument>
+                <argument>--allow-checkpoint</argument>
+                <argument>--optional</argument>
+              </arguments>
+              <environmentVariables><PYTHONDONTWRITEBYTECODE>1</PYTHONDONTWRITEBYTECODE></environmentVariables>
+              <timeout>30000</timeout>
+            </configuration>
+          </execution>
         </executions>
       </plugin>
     </plugins>

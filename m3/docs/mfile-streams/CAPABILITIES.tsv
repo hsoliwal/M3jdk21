@@ -1,0 +1,39 @@
+id	problem_category	capability	task	contract	status
+C01	ENTRY_TRAVERSAL	Directory recursion with files and folders	T1	Provider-owned paths; root excluded; Bounded core source: logical directory/provider hierarchy; evidence in the separate core receipt	SPECIFIED_RUNTIME_PENDING
+C02	ENTRY_TRAVERSAL	Separate emission and subtree pruning	T1	Rejecting a folder entry does not reject descendants; Bounded core source: filter and descendInto are separate AND-composed predicates	SPECIFIED_RUNTIME_PENDING
+C03	ENTRY_TRAVERSAL	Depth order and symbolic-link policy	T1	No implicit lexical sort or link following; Bounded core source: maxDepth and provider-level no-descent for links; explicit follow remains future	SPECIFIED_RUNTIME_PENDING
+C04	RESOURCE_LIFETIME	Stable MFile identity and metadata	T1	Retained descriptor cannot become the next entry; Bounded core source: distinct immutable metadata projections; physical archive occurrence identity remains future	SPECIFIED_RUNTIME_PENDING
+C05	RESOURCE_LIFETIME	Fresh replayable immutable plan	T2	Plan replay does not imply frozen source bytes; Bounded core source: from(Path) or from(String), one selected root and a fresh session per stream	SPECIFIED_RUNTIME_PENDING
+C06	RESOURCE_LIFETIME	Explicit session and resource closure	T2	Short circuits and exceptions still require close; Bounded core source: stream owns its session, readers and writers; public caller-owned sessions remain future	SPECIFIED_RUNTIME_PENDING
+C07	RESOURCE_LIFETIME	Metadata versus content snapshots	T2	Index capture is not a global content snapshot	SPECIFIED_RUNTIME_PENDING
+C08	ARCHIVE_READING	Indexed ZIP-family members	T3	Ordinal-safe duplicate-name content access; Bounded core exposes the VFS logical ZIP namespace; duplicate physical archive records can collapse	SPECIFIED_RUNTIME_PENDING
+C09	ARCHIVE_READING	Sequential archives and compression composition	T3	Format capability and required seekability explicit; Bounded core admits selected VFS archive providers; raw sequential scan and TAR.XZ are not claimed	SPECIFIED_RUNTIME_PENDING
+C10	ARCHIVE_READING	Scoped single-pass file scan	T3	Borrowed content cannot escape callback lifetime	SPECIFIED_RUNTIME_PENDING
+C11	ARCHIVE_READING	Explicit nested archive expansion	T3	Full container identity chain; separate depth budget; Bounded core accepts explicit nested layered URIs; deferred predicate-based enterArchives has a separate layer budget; physical occurrence chains remain future	SPECIFIED_RUNTIME_PENDING
+C12	ARCHIVE_READING	Virtual parent directories	T3	Synthetic marker; unknown unavailable metadata; Bounded core inherits donor logical parents; no facade synthetic-entry marker is exposed	SPECIFIED_RUNTIME_PENDING
+C13	SELECTION	Metadata predicates and unknown fields	T4	No unknown-to-zero conversion; Bounded core supports cheap name/extension selectors, arbitrary metadata predicates and OptionalLong size; richer content predicates remain future	SPECIFIED_RUNTIME_PENDING
+C14	SELECTION	Binary and decoded-text content predicates	T4	Charset policy; predicate read does not truncate later content	SPECIFIED_RUNTIME_PENDING
+C15	SELECTION	Reusable exact search and regex facts	T6	Existing M3 String owners; exact verification retained	SPECIFIED_RUNTIME_PENDING
+C16	TRANSFORM	Immutable rename and metadata views	T4	Content shared; contextual parse reuse checked; Bounded core provides ordinary Stream.map result projection; immutable MFile rename is future	SPECIFIED_RUNTIME_PENDING
+C17	TRANSFORM	Lazy binary and text transforms	T4	Content facts invalidated after byte changes	SPECIFIED_RUNTIME_PENDING
+C18	TRANSFORM	Explicit fan-out and derived identity	T4	New logical entries keep complete provenance	SPECIFIED_RUNTIME_PENDING
+C19	PLAN_RECIPE	Inspect opaque lambdas and named operations	T2	Do not infer semantic purity or durable lambda identity; Bounded core stores opaque predicates and provider suppliers; describe and durable operation descriptors are future	SPECIFIED_RUNTIME_PENDING
+C20	PLAN_RECIPE	Export registered operations to existing recipe DAG	T2	Opaque callbacks refuse durable export	SPECIFIED_RUNTIME_PENDING
+C21	MULTI_SOURCE	Preserving source union and explicit overlays	T5	No implicit winner on name collision	SPECIFIED_RUNTIME_PENDING
+C22	MULTI_SOURCE	Join by key with duplicate-key policy	T5	Groups or explicit refusal; indexed work accounted	SPECIFIED_RUNTIME_PENDING
+C23	MULTI_SOURCE	Metadata and exact-content diff	T5	Errors and unknown comparisons remain visible; bounded same-source MFileDelta separates provider, metadata, raw and qualified structure evidence; directory reconciliation remains future	SPECIFIED_RUNTIME_PENDING
+C24	MULTI_SOURCE	Exact content deduplication	T5	Digest candidates verified; logical removal explicit	SPECIFIED_RUNTIME_PENDING
+C25	MULTI_SOURCE	Global ordering and spill	T5	Existing segmented/index/swap owners	SPECIFIED_RUNTIME_PENDING
+C26	SOURCE_REUSE	Immutable source and M3AST/compiler bridge	T6	No second parser or payload owner; bounded observations reuse M3ContentId, M3ObjectRef, M3FileManifest and M3PrecomputeKey; AST construction remains with existing owners	SPECIFIED_RUNTIME_PENDING
+C27	SOURCE_REUSE	Context-qualified parse and semantic reuse	T6	Content plus decoding parser and compiler context	SPECIFIED_RUNTIME_PENDING
+C28	SOURCE_REUSE	Byte/UTF-16/source coordinate mappings	T6	Mappings bound to generation and validated	SPECIFIED_RUNTIME_PENDING
+C29	OUTPUT	Directory and ZIP output terminals	T7	Explicit writes; preserve declared empty directories	SPECIFIED_RUNTIME_PENDING
+C30	OUTPUT	Preflight and destination mapping	T7	Preview is context-bound and may perform reads	SPECIFIED_RUNTIME_PENDING
+C31	OUTPUT	Collision and commit guarantees	T7	Default FAIL; actual atomicity and partial output reported	SPECIFIED_RUNTIME_PENDING
+C32	OUTPUT	Reproducible output and metadata policy	T7	Fixed input plus declared timestamp/encoding/order policy	SPECIFIED_RUNTIME_PENDING
+C33	INCREMENTAL	Watch invalidation and exact reconciliation	T8	Overflow and missing events trigger rescan	SPECIFIED_RUNTIME_PENDING
+C34	INCREMENTAL	Archive and build dependency deltas	T8	Content/context changes invalidate dependent facts	SPECIFIED_RUNTIME_PENDING
+C35	EXECUTION	Progress cancellation and partial reports	T8	Existing monitor; unknown totals remain unknown; bounded I/O defaults bridge child callbacks and synchronous shadows per byte domain, without auto-completing the child	SPECIFIED_RUNTIME_PENDING
+C36	EXECUTION	Pressure backpressure and lease-aware residency	T8	No mandatory external capacity hints or silent element loss	SPECIFIED_RUNTIME_PENDING
+C37	ACCEPTANCE	Installed-image provider and JNI gates	T9	Per-contract acceptance; no overlay or Synexia runtime dependency; The bounded core has its own image receipt; this complete installed-image/JNI acceptance row remains pending	SPECIFIED_RUNTIME_PENDING
+C38	ACCEPTANCE	Cold/warm CPU heap/native work evidence	T9	Performance claims require measured matching workloads; No memory-gain, array-only, zero-copy or performance claim follows from source import or packaging	SPECIFIED_RUNTIME_PENDING

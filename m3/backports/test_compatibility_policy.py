@@ -22,7 +22,6 @@ class CompatibilityPolicyTest(unittest.TestCase):
         self.assertEqual((478,), by_jep[510].dependencies)
         self.assertEqual("COMPATIBLE_TOOLING", by_jep[493].classification)
         self.assertEqual("REJECT_LANGUAGE_SPEC", by_jep[511].classification)
-        self.assertEqual("REJECT_JVMS_LANGUAGE_SPEC", by_jep[401].classification)
 
         self.assertEqual((483,), by_jep[514].dependencies)
         self.assertEqual((483,), by_jep[515].dependencies)
@@ -54,6 +53,26 @@ class CompatibilityPolicyTest(unittest.TestCase):
             _load_rows([row])
 
     def test_rejected_feature_cannot_be_opt_in_default_marker(self) -> None:
+        # Synthetic classifier fixture only: this is not a released-JEP inventory row.
+        synthetic = _row(
+            jep="999",
+            release="22",
+            classification="REJECT_JVMS_LANGUAGE_SPEC",
+            default_java21="NO",
+        )
+        synthetic["title"] = "Synthetic classification-only fixture"
+        admitted = _load_rows([synthetic])
+        self.assertEqual(1, len(admitted))
+        self.assertEqual(999, admitted[0].jep)
+        self.assertEqual("REJECT_JVMS_LANGUAGE_SPEC", admitted[0].classification)
+        self.assertEqual("NO", admitted[0].default_java21)
+        for marker in ("OPT_IN", "CANDIDATE"):
+            with self.subTest(default_java21=marker):
+                invalid = dict(synthetic)
+                invalid["default_java21"] = marker
+                with self.assertRaisesRegex(ValueError, "cannot be default Java21"):
+                    _load_rows([invalid])
+
         row = _row(
             jep="401",
             release="26",

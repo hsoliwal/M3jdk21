@@ -1,0 +1,23 @@
+{
+  "schema": "m3-commons-namespace-identity-exception-v1",
+  "authorizedScope": "User requested package-first rename",
+  "source": "org.apache.commons.collections4",
+  "target": "com.m3.collections.apache",
+  "inventory": "FULL_SOURCE_BINDINGS.tsv",
+  "identitiesChanged": [
+    "declared qualified types",
+    "reflection/resource/serialized names",
+    "explicit qualified-name diagnostics"
+  ],
+  "preserved": [
+    "source headers/licenses/notices",
+    "algorithms under name mapping",
+    "stored serialization UIDs and opaque user bytes",
+    "original Maven coordinates/provenance URLs"
+  ],
+  "notClaimed": [
+    "original namespace assignability/wire compatibility",
+    "full Java fixture/runtime compatibility",
+    "all-array/JNI completion"
+  ]
+}

@@ -42,6 +42,25 @@ public final class M3LongBitmapFilteredSnapshotSelfTest {
         throw new AssertionError("expected failure: " + expected);
     }
 
+    private static void membershipOracle(M3LongBitmapFilteredSnapshot snapshot) {
+        long[] values = snapshot.toArray();
+        long[] probes = {Long.MIN_VALUE, Long.MIN_VALUE + 1, Long.MAX_VALUE - 1,
+                Long.MAX_VALUE, -17, -1, 0, 1, 17};
+        for (long value : values) {
+            membershipProbe(snapshot, values, value);
+            if (value > Long.MIN_VALUE) membershipProbe(snapshot, values, value - 1);
+            if (value < Long.MAX_VALUE) membershipProbe(snapshot, values, value + 1);
+        }
+        for (long value : probes) membershipProbe(snapshot, values, value);
+    }
+
+    private static void membershipProbe(M3LongBitmapFilteredSnapshot snapshot,
+                                         long[] values, long probe) {
+        boolean expected = false;
+        for (long value : values) if (value == probe) expected = true;
+        check(snapshot.contains(probe) == expected, "primitive membership " + probe);
+    }
+
     private static long[] valuesFrom(List<Integer> selected, long[] original) {
         long[] values = new long[selected.size()];
         for (int i = 0; i < selected.size(); i++) values[i] = original[selected.get(i)];
@@ -74,6 +93,7 @@ public final class M3LongBitmapFilteredSnapshotSelfTest {
             check(cached.get(i) == original[filteredIds.get(i)], "ordinal value");
             check(cached.includesPhysicalIndex(filteredIds.get(i)), "physical membership");
         }
+        membershipOracle(cached);
         long[] selected = cached.toArray();
         M3LongBitmapFilteredSnapshot ascending = cached.sortedAscending();
         M3LongBitmapFilteredSnapshot descendingView = cached.sortedDescending();
@@ -88,15 +108,20 @@ public final class M3LongBitmapFilteredSnapshotSelfTest {
             descendingOracle[descendingOracle.length - 1 - i] = temp;
         }
         equal(descendingOracle, descendingView.toArray(), "descending cached selection");
+        membershipOracle(ascending);
+        membershipOracle(descendingView);
         M3LongBitmapFilteredSnapshot sliced = ascending.slice(0, ascending.size());
         check(sliced == ascending, "full range is metadata identity");
         M3LongBitmapFilteredSnapshot tail = ascending.slice(ascending.size(), 0);
         check(tail.size() == 0 && tail.physicalMaskCopy().isEmpty(), "empty tail bitmap");
+        membershipOracle(tail);
         if (ascending.size() > 2) {
             M3LongBitmapFilteredSnapshot section = ascending.slice(1, ascending.size() - 2);
             equal(Arrays.copyOfRange(ascendingOracle, 1, ascendingOracle.length - 1),
                     section.toArray(), "offset selection");
             check(section.physicalMaskCopy().cardinality() == section.size(), "range bit set");
+            membershipOracle(section);
+            membershipOracle(descendingView.slice(1, descendingView.size() - 2));
         }
         BitSet leaked = cached.physicalMaskCopy();
         leaked.clear();
@@ -127,6 +152,7 @@ public final class M3LongBitmapFilteredSnapshotSelfTest {
         });
         check(nextCalls.get() == cached.size(), "only previously accepted values retested");
         check(refined.size() <= cached.size(), "refinement is monotone");
+        membershipOracle(refined);
         for (long value : refined.toArray()) check((value & 1) == 0, "refinement retained value");
         check(calls[0] == size, "previous predicate never recomputed by refinement");
 
@@ -136,6 +162,7 @@ public final class M3LongBitmapFilteredSnapshotSelfTest {
                     sorted, v -> { nativeCalls.incrementAndGet(); return v % divisor == 0; },
                     M3IndexMaskCompactor.Backend.NATIVE_REQUIRED);
             equal(cached.toArray(), jni.toArray(), "actual JNI primitive selection parity");
+            membershipOracle(jni);
             check(Arrays.equals(cached.physicalMaskCopy().toLongArray(),
                     jni.physicalMaskCopy().toLongArray()), "native bitmap parity");
             check(nativeCalls.get() == size, "JNI cannot call Java predicate again");
@@ -219,6 +246,110 @@ public final class M3LongBitmapFilteredSnapshotSelfTest {
         check(attempt.get() == 12, "failed capture did not publish incomplete bitmap");
     }
 
+    /** Explicit invalidation must survive reentrant callbacks without retrying this read. */
+    private static void verifyManualInvalidation() {
+        for (int repetitions : new int[]{1, 3}) {
+            MutableSource source = new MutableSource(3, 1, 2);
+            AtomicInteger calls = new AtomicInteger();
+            M3LongBitmapFilteredSnapshot.VersionedView[] holder =
+                    new M3LongBitmapFilteredSnapshot.VersionedView[1];
+            holder[0] = new M3LongBitmapFilteredSnapshot.VersionedView(source, value -> {
+                if (calls.getAndIncrement() == 0) {
+                    for (int i = 0; i < repetitions; i++) holder[0].invalidate();
+                }
+                return true;
+            }, () -> 0L);
+            M3LongBitmapFilteredSnapshot first = holder[0].snapshot();
+            equal(new long[]{3, 1, 2}, first.toArray(), "invalidated capture still returns its result");
+            check(calls.get() == 3, "capture invalidation does not retry callbacks");
+            M3LongBitmapFilteredSnapshot rebuilt = holder[0].snapshot();
+            check(rebuilt != first, "reentrant invalidation reserves the next rebuild");
+            check(calls.get() == 6, "next read rebuilds once after repeated invalidations");
+            check(holder[0].snapshot() == rebuilt, "rebuilt snapshot is cached");
+            M3LongBitmapFilteredSnapshot asc = holder[0].sortedAscending();
+            M3LongBitmapFilteredSnapshot desc = holder[0].sortedDescending();
+            equal(new long[]{1, 2, 3}, asc.toArray(), "rebuilt ascending cache");
+            equal(new long[]{3, 2, 1}, desc.toArray(), "rebuilt descending cache");
+            check(holder[0].sortedAscending() == asc
+                    && holder[0].sortedDescending() == desc, "sorted sidecars remain memoized");
+            check(calls.get() == 6, "sorted sidecars do not rerun predicates");
+            M3LongIterator old = holder[0].iterator();
+            check(old.nextLong() == 3, "manual invalidation cursor begins");
+            source.replace(9);
+            holder[0].invalidate();
+            check(old.hasNext() && old.nextLong() == 1,
+                    "manual invalidation preserves existing detached cursor behavior");
+            equal(new long[]{9}, holder[0].toArray(), "manual invalidation refreshes future reads");
+            check(holder[0].sortedAscending() != asc
+                    && holder[0].sortedDescending() != desc, "manual invalidation drops sorted sidecars");
+        }
+
+        // The outer supplier runs before capture. The inner supplier and final
+        // validation run within capture and must not erase their invalidations.
+        for (int callback = 1; callback <= 3; callback++) {
+            int invalidateAt = callback;
+            AtomicInteger revisions = new AtomicInteger();
+            AtomicInteger calls = new AtomicInteger();
+            M3LongBitmapFilteredSnapshot.VersionedView[] holder =
+                    new M3LongBitmapFilteredSnapshot.VersionedView[1];
+            holder[0] = new M3LongBitmapFilteredSnapshot.VersionedView(
+                    new MutableSource(2, 1), value -> {
+                        calls.incrementAndGet();
+                        return true;
+                    }, () -> {
+                        if (revisions.incrementAndGet() == invalidateAt) holder[0].invalidate();
+                        return 0L;
+                    });
+            M3LongBitmapFilteredSnapshot first = holder[0].snapshot();
+            check(calls.get() == 2, "revision supplier invalidation does not retry capture");
+            M3LongBitmapFilteredSnapshot next = holder[0].snapshot();
+            check((next == first) == (callback == 1), "supplier capture boundary retained");
+            check(calls.get() == (callback == 1 ? 2 : 4), "supplier invalidation rebuild count");
+            check(holder[0].snapshot() == next, "supplier-invalidated rebuild is cached");
+        }
+
+        AtomicInteger attempts = new AtomicInteger();
+        IllegalArgumentException failure = new IllegalArgumentException("frozen predicate failure");
+        M3LongBitmapFilteredSnapshot.VersionedView[] failing =
+                new M3LongBitmapFilteredSnapshot.VersionedView[1];
+        failing[0] = new M3LongBitmapFilteredSnapshot.VersionedView(
+                new MutableSource(4, 1), value -> {
+                    if (attempts.getAndIncrement() == 0) {
+                        failing[0].invalidate();
+                        throw failure;
+                    }
+                    return true;
+                }, () -> 0L);
+        try {
+            failing[0].snapshot();
+            throw new AssertionError("expected original predicate failure");
+        } catch (IllegalArgumentException observed) {
+            check(observed == failure, "predicate exception identity is unchanged");
+        }
+        M3LongBitmapFilteredSnapshot recovered = failing[0].snapshot();
+        equal(new long[]{4, 1}, recovered.toArray(), "failed capture can be retried by caller");
+        check(attempts.get() == 3, "failed capture never retries automatically");
+        check(failing[0].snapshot() == recovered && attempts.get() == 3,
+                "successful retry is cached after predicate failure");
+
+        AtomicInteger sortedCalls = new AtomicInteger();
+        M3LongBitmapFilteredSnapshot.VersionedView[] sorting =
+                new M3LongBitmapFilteredSnapshot.VersionedView[1];
+        sorting[0] = new M3LongBitmapFilteredSnapshot.VersionedView(
+                new MutableSource(2, 1), value -> {
+                    if (sortedCalls.getAndIncrement() == 0) sorting[0].invalidate();
+                    return true;
+                }, () -> 0L);
+        M3LongBitmapFilteredSnapshot firstSort = sorting[0].sortedAscending();
+        equal(new long[]{1, 2}, firstSort.toArray(), "invalidated capture can still be sorted");
+        check(sortedCalls.get() == 2, "sorting does not retry invalidated capture");
+        M3LongBitmapFilteredSnapshot nextSort = sorting[0].sortedAscending();
+        check(nextSort != firstSort && sortedCalls.get() == 4,
+                "invalidated sorted result is not published as a cached sidecar");
+        check(sorting[0].sortedAscending() == nextSort && sortedCalls.get() == 4,
+                "next sorted result is memoized");
+    }
+
     public static void main(String[] args) {
         fails(NullPointerException.class, () -> M3LongBitmapFilteredSnapshot.snapshot(null, v -> true));
         fails(NullPointerException.class, () -> M3LongBitmapFilteredSnapshot.snapshot(new long[0], null));
@@ -229,7 +360,22 @@ public final class M3LongBitmapFilteredSnapshotSelfTest {
         check(empty.isEmpty(), "empty snapshot");
         check(empty.physicalMaskCopy().isEmpty(), "empty mask");
         check(!empty.includesPhysicalIndex(-1), "negative physical handle");
+        membershipOracle(empty);
+        membershipOracle(empty.sortedAscending());
+        membershipOracle(empty.sortedDescending());
+        M3LongBitmapFilteredSnapshot singleton = M3LongBitmapFilteredSnapshot.snapshot(
+                new long[]{Long.MAX_VALUE}, v -> true);
+        membershipOracle(singleton);
+        membershipOracle(singleton.sortedAscending());
+        membershipOracle(singleton.sortedDescending());
         long[] extremes = {Long.MIN_VALUE, Long.MIN_VALUE, 0, 1, 1, Long.MAX_VALUE, -1};
+        M3LongBitmapFilteredSnapshot encounter = M3LongBitmapFilteredSnapshot.snapshot(
+                extremes, v -> true);
+        membershipOracle(encounter);
+        membershipOracle(encounter.slice(1, extremes.length - 2));
+        membershipOracle(encounter.filtered(v -> v != 0));
+        selectedOracle(extremes, 0, extremes.length, false, 1);
+        selectedOracle(extremes, 0, extremes.length, true, 1);
         selectedOracle(extremes, 0, extremes.length, false, 2);
         selectedOracle(extremes, 1, 4, true, 3);
         long[] original = {1, 2, 2, 3, 4};
@@ -237,9 +383,11 @@ public final class M3LongBitmapFilteredSnapshotSelfTest {
                 original, v -> (v & 1) == 0);
         Arrays.fill(original, 0L);
         equal(new long[]{2, 2, 4}, immutable.toArray(), "caller array isolation");
+        membershipOracle(immutable);
         check(immutable.physicalMaskCopy().get(1), "physical slot maps first duplicate");
         check(immutable.physicalMaskCopy().get(2), "physical slot maps second duplicate");
         verifyEpoch();
+        verifyManualInvalidation();
         Random r = new Random(0x20261017abcdL);
         for (int run = 0; run < 500; run++) {
             int n = r.nextInt(180);

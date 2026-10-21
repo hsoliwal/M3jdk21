@@ -1,0 +1,9 @@
+priority	task	status
+P0	Run canonical Maven/OpenRewrite recipe/JUnit fixed-point and drift-refusal	PENDING
+P0	Perform full M3JDK21 SDK/HotSpot installed module/JTReg validation	PENDING
+P1	Converge original javac CompilationUnitTree into M3ASTIndex with source/line/kind lanes	PENDING
+P1	Connect Maven static analyzers and OpenRewrite to single original compiler parse event	PENDING
+P1	Add provider-specific stable-generation notifications to M3File raw and structured delta stream	PENDING
+P1	Benchmark one-input/multi-shadow against repeated parser IO and JNI selectors	PENDING
+P1	Stress M3 streams across fail/cancel/close, variable block sizes and OS providers	PENDING
+P2	Evaluate bounded page eviction once reader cursor lifetimes/ownership are proven	PENDING

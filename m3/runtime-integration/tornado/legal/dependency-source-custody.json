@@ -1,0 +1,44 @@
+[
+  {
+    "artifact": "compiler-23.1.0",
+    "source_archive_url": "https://repo.maven.apache.org/maven2/org/graalvm/compiler/compiler/23.1.0/compiler-23.1.0-sources.jar",
+    "source_archive_sha256": "3a0a3dc0a6692c6b98585c33f7e4840ba67789bc5cc3965368efcd68a157d0c4",
+    "pom": "compiler-23.1.0.pom",
+    "pom_sha256": "424783614e675bdf2c9e573917966c3d7b99bf66ce65ab465840408c21936d62"
+  },
+  {
+    "artifact": "truffle-compiler-23.1.0",
+    "source_archive_url": "https://repo.maven.apache.org/maven2/org/graalvm/truffle/truffle-compiler/23.1.0/truffle-compiler-23.1.0-sources.jar",
+    "source_archive_sha256": "7383eab0f0613dc6d8747f1ff507962d24e3536fd0312f1d7281466ec3871c4e",
+    "pom": "truffle-compiler-23.1.0.pom",
+    "pom_sha256": "e2820f370b507a8b4cfa6f3188694fbcc07c6e9d1ee40eda3554d635642def1b"
+  },
+  {
+    "artifact": "collections-23.1.0",
+    "source_archive_url": "https://repo.maven.apache.org/maven2/org/graalvm/sdk/collections/23.1.0/collections-23.1.0-sources.jar",
+    "source_archive_sha256": "9c3fef65e1f8be27b85d3298c8c741174ed229e52715f43dcf91ecdbe5e6c114",
+    "pom": "collections-23.1.0.pom",
+    "pom_sha256": "37b9c860ca1fa8eb75ad74ec8e0bae3a54c09d5ffd0948962bab080af239ae13"
+  },
+  {
+    "artifact": "word-23.1.0",
+    "source_archive_url": "https://repo.maven.apache.org/maven2/org/graalvm/sdk/word/23.1.0/word-23.1.0-sources.jar",
+    "source_archive_sha256": "b649e75c33492131faa480d94a94d59da8fff229dcea591c0094f0fe95457091",
+    "pom": "word-23.1.0.pom",
+    "pom_sha256": "0f7156eee7cf3a60eab3b9d43f7bed36466c87fa306ff8bb4237bc55495a996d"
+  },
+  {
+    "artifact": "asm-9.7",
+    "source_archive_url": "https://repo.maven.apache.org/maven2/org/ow2/asm/asm/9.7/asm-9.7-sources.jar",
+    "source_archive_sha256": "11dfd88129204be18c0f592f8e066d0c07d8a6bc001f6c7b2cce5ff0588d5d71",
+    "pom": "asm-9.7.pom",
+    "pom_sha256": "de00115f1d84f3a0b2ee3a4b6f6192d066f86d185d67b9d1522f2c80feac5f00"
+  },
+  {
+    "artifact": "commons-math3-3.2",
+    "source_archive_url": "https://repo.maven.apache.org/maven2/org/apache/commons/commons-math3/3.2/commons-math3-3.2-sources.jar",
+    "source_archive_sha256": "b62d60712ea06fb6259506269b3a0ed73a7da5ee11f891c0eb0399eb9bc71e3f",
+    "pom": "commons-math3-3.2.pom",
+    "pom_sha256": "2cd0db7bce370c1404025cc013c11f8fd49f3f3c340a6d2dcf99d363d7948a69"
+  }
+]

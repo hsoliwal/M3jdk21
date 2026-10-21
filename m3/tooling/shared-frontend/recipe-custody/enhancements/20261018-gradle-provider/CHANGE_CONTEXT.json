@@ -1,0 +1,40 @@
+{
+  "task": "m3-gradle-provider-20261018",
+  "stage": "LOCAL_QUALIFICATION_PASS_READY_FOR_ROOT_RECEIPT",
+  "authorized_workspace": "/workspace/scratch/65626af64474/m3-ast-shared-20261018/gradle-provider-work",
+  "receiver_prefix": "m3/tooling/module-packs/build-support/gradle-provider/",
+  "receiver_baseline": "hsoliwal/M3jdk21@2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
+  "gradle_spi_commit": "419a77cf61af3924f60678510ed2440230047671",
+  "gradle_spi_blob": "f2a08ee8074d6f6faec69543032c9176ad62ef11",
+  "recipe_owner_commit": "140c263a90f9803b9c46103c63355a286e0515f0",
+  "recipe_owner": "com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe + com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe",
+  "preimage": "All proposed receiver paths were absent in the inventoried current module-packs subtree.",
+  "contract": [
+    "Use the exact published Gradle M3JavacASTProvider SPI.",
+    "Pass original compiler source/file-manager/diagnostic identities through unchanged.",
+    "Join the existing public M3AST handle on the exact supplied JavacTask.",
+    "Do not construct a compiler task, parse source, attribute source or build another AST.",
+    "Preserve normal task.call, processors, locale, modules and Gradle cleanup authority.",
+    "Builtin plugin selection owns service discovery when selected; otherwise provider assets own service discovery.",
+    "Keep compiler views and mutable provider state invocation-local.",
+    "No remote publication or mutation of the parent receiving checkout."
+  ],
+  "verification_order": [
+    "patch",
+    "lint",
+    "compile",
+    "tests",
+    "runtime"
+  ],
+  "full_gradle_distribution": "UNVERIFIED",
+  "full_m3jdk_image": "HYBRID_DESCRIPTOR_IMAGE_ONLY_NOT_FULL_SOURCE_BUILD",
+  "product_tests": {
+    "tests": 20,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "runtime": "PASS",
+  "receiving_root_mutations_by_this_agent": 0,
+  "remote_mutations_by_this_agent": 0
+}

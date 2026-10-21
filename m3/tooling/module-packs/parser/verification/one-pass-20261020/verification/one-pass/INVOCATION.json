@@ -1,0 +1,43 @@
+{
+  "argv": [
+    "python3",
+    "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/verification/one-pass/run_proof.py",
+    "--jdk",
+    "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/toolchain/jdk21",
+    "--receiving-root",
+    "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/receiver",
+    "--fs-qualification",
+    "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/qualification/fs",
+    "--fs-sha256",
+    "abc5879b71d6161e926970b637bb158a820af805cc175c17a4156184aa976b60",
+    "--parser-qualification",
+    "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/qualification/parser-final",
+    "--parser-sha256",
+    "28cb413a3c3b9e5777651e255b1b2f9b26c6910c04edcbe564dbcd06874e6289",
+    "--sqlite-jar",
+    "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/toolchain/test-dependencies/org/xerial/sqlite-jdbc/3.45.1.0/sqlite-jdbc-3.45.1.0.jar",
+    "--slf4j-jar",
+    "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/slf4j/slf4j-api/2.0.13/slf4j-api-2.0.13.jar",
+    "--out",
+    "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/qualification/one-pass-final"
+  ],
+  "cwd": "/workspace/scratch/e736b6177c79",
+  "exact_child_commands": {
+    "bytes": 11021,
+    "path": "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/qualification/one-pass-final/COMMANDS.json",
+    "sha256": "f89e62239bcb57fabb3b8581c128ce15d7c3e72556909c78c9ace0ed9a36962e"
+  },
+  "observed_exit_code": 0,
+  "observed_stdout_marker": "ONE_PASS_QUALIFICATION PASS",
+  "receipt": {
+    "bytes": 18672,
+    "path": "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/qualification/one-pass-final/RESULTS.json",
+    "sha256": "9903f6f97515baf46705a83fdda9b55ce5dd5206a727aeb961f08c93fca8d7a0"
+  },
+  "schema": "M3_QUALIFICATION_INVOCATION_V1",
+  "toolchain_release": {
+    "bytes": 1628,
+    "path": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/toolchain/jdk21/release",
+    "sha256": "ebbd70bf00bab6d39addf51969c5ff244030b86b29de400b9fb10612ebd3ceec"
+  }
+}

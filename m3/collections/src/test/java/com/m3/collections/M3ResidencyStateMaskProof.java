@@ -106,6 +106,33 @@ public final class M3ResidencyStateMaskProof {
                 req, notBits, absentMask) == -1, "state exclusion");
         equal(new int[0], M3ResidencyStateMaskIndex.select(arena, rows, rows.length, 0,
                 -1, 0L, 0L, 0, M3ResidencyStateMaskIndex.Backend.JAVA), "empty path");
+        // Both new empty-output atoms must preserve the full preflight contract.
+        // The all-zero state mask and an absent parent bit produce zero matches
+        // over a nonempty, duplicate-bearing, stable physical index path.
+        int[] unmodified = {88, 88, 88};
+        equal(new int[0], M3ResidencyStateMaskIndex.select(arena, rows, 0,
+                rows.length, 1, req, notBits, 0,
+                M3ResidencyStateMaskIndex.Backend.JAVA), "zero allowed-state mask");
+        equal(new int[0], M3ResidencyStateMaskIndex.select(arena, rows, 0,
+                rows.length, 1, 1L << 60, 0, liveMask,
+                M3ResidencyStateMaskIndex.Backend.JAVA), "zero parent-word match");
+        check(M3ResidencyStateMaskIndex.selectInto(arena, rows, 0, rows.length, 1,
+                req, notBits, 0, unmodified, 1) == 0, "zero-hit output count");
+        equal(new int[]{88, 88, 88}, unmodified, "zero-hit output not modified");
+        throwsType(IndexOutOfBoundsException.class,
+                () -> M3ResidencyStateMaskIndex.selectInto(arena, rows, 0, rows.length, 1,
+                        req, notBits, 0, unmodified, unmodified.length + 1),
+                "zero-hit preflight still rejects invalid output start");
+        if (actualNative) {
+            equal(new int[0], M3ResidencyStateMaskIndex.select(arena, rows, 0,
+                    rows.length, 1, req, notBits, 0,
+                    M3ResidencyStateMaskIndex.Backend.JNI_REQUIRED),
+                    "JNI zero allowed-state mask");
+            equal(new int[0], M3ResidencyStateMaskIndex.select(arena, rows, 0,
+                    rows.length, 1, 1L << 60, 0, liveMask,
+                    M3ResidencyStateMaskIndex.Backend.JNI_REQUIRED),
+                    "JNI zero parent-word match");
+        }
         throwsType(IllegalArgumentException.class, () -> M3ResidencyStateMaskIndex.count(
                 arena, rows, 0, 1, 1, 3, 1, liveMask), "overlap masks rejected");
         throwsType(IllegalArgumentException.class, () -> M3ResidencyStateMaskIndex.count(

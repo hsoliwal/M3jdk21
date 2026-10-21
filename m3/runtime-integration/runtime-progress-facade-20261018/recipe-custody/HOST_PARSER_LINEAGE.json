@@ -1,0 +1,25 @@
+{
+  "schema": "M3_RUNTIME_PARSER_HOST_SUCCESSOR_V1",
+  "original_canonical_revision": "8f8200375d8d403b58e855ee5db02f2e8fac33a8",
+  "original_crate": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017",
+  "original_capped_pom_sha256": "4c90faaa9e64aebeeba14fb2196731c6334293781d0fdcafbf190f2f5662eb7d",
+  "successor_pom_sha256": "824ced27a427e35901d413eb8c8beac0ee657d991a03079a5d1cc59e29f76092",
+  "unchanged_controls": {
+    "prepare.py": "9b0b3d93c787c9a56036cddb2b044aef30f6fa8a1fa20fa5a2edae46dfd1e62c",
+    "receive.py": "db258f16e1841f6f5191c1c969c20314a8d143bfa6558b60f684bea440cc1712",
+    "ENGINE_SOURCES.tsv": "ae731c5780c73a98f6fc81079b5f863613fddea50d2a6c893c6dfd2aa2030b5c",
+    "src/test/java/com/synexia/rewrite/M3TaskRecipeTest.java": "74b03a3ac3e445a04b8b15076d3ced667bfae2442bd0968cbe74468e4a499e43",
+    "contract/test_prepare.py": "f504f1dcfafb24fd87f8f677643b45eecc74674881e16bf727b76c4e6a4d1856",
+    "contract/verify_receiver.py": "a4d82df8b31e707afe7caa5e76524d191f285e2887dbfdfa95cfdc382ae01f7d"
+  },
+  "four_recipe_engines": "unchanged; supplied by the exact original canonical or existing public sdk-owner",
+  "parser_coordinate": "com.synexia.sourcebuilt.openrewrite:rewrite-java-21:8.17.1-m3-javadoc-1",
+  "parser_artifact_sha256": "bc5fef92a854c72e8706fc58f545a8ac3e9e4395a052b50810366b94869aef52",
+  "parser_sdk_inputs_sha256": "7763c7f44ca9ae65624fcfa0bf5cadecdff5b10b816db0e63916f18e7cd25f34",
+  "parser_sdk_results_sha256": "6c591d4b6d37db723682e79fbccc6f9bc8421276ddbcddc0ccf8971c2fae0601",
+  "parser_module_receipt_sha256": "eb3621051147d14c64f7dce96ea03c00812d88ec5cbfadffd9bd68989ac48ef9",
+  "new_gate": "validate the source-qualified parser digest before Maven compilation/tests; four explicit dependency refusal witnesses",
+  "old_reports": "history/ contains historical receipts only; fresh fixture and Runtime qualifications are separate",
+  "runtime_receiving_phase": "STRING",
+  "phase_promotion": false
+}

@@ -1,0 +1,4 @@
+com.m3.tools.verify.sha256
+exports com.m3.tools.verify.sha256
+requires java.base mandated
+

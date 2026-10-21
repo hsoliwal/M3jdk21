@@ -1,0 +1,15 @@
+test_commands_pass_arguments_without_a_shell (__main__.BuildContracts.test_commands_pass_arguments_without_a_shell) ... ok
+test_fresh_output_preserves_existing_content (__main__.BuildContracts.test_fresh_output_preserves_existing_content) ... ok
+test_jmod_legal_readback_rejects_missing_or_changed_notice (__main__.BuildContracts.test_jmod_legal_readback_rejects_missing_or_changed_notice) ... ok
+test_linked_legal_readback_allows_internal_dedup_and_refuses_escape (__main__.BuildContracts.test_linked_legal_readback_allows_internal_dedup_and_refuses_escape) ... ok
+test_module_inventory_and_descriptor_drift_refused (__main__.BuildContracts.test_module_inventory_and_descriptor_drift_refused) ... ok
+test_output_cannot_enter_jdk_or_source (__main__.BuildContracts.test_output_cannot_enter_jdk_or_source) ... ok
+test_precompiled_source_payload_refused (__main__.BuildContracts.test_precompiled_source_payload_refused) ... ok
+test_symlink_module_owner_refused (__main__.BuildContracts.test_symlink_module_owner_refused) ... ok
+test_symlink_output_components_refused (__main__.BuildContracts.test_symlink_output_components_refused) ... ok
+test_timeout_kills_spawned_child_and_records_failure (__main__.BuildContracts.test_timeout_kills_spawned_child_and_records_failure) ... ok
+
+----------------------------------------------------------------------
+Ran 10 tests in 1.062s
+
+OK

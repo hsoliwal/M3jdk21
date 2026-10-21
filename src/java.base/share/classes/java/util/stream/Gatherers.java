@@ -62,11 +62,11 @@ public final class Gatherers {
      * The last window may contain fewer elements than the supplied window size.
      *
      * <p>Example:
-     * {@snippet lang = java:
+     * <pre>{@code
      * // will contain: [[1, 2, 3], [4, 5, 6], [7, 8]]
      * List<List<Integer>> windows =
      *     Stream.of(1,2,3,4,5,6,7,8).gather(Gatherers.windowFixed(3)).toList();
-     * }
+     * }</pre>
      *
      * @implSpec Each window produced is an unmodifiable List; calls to any
      * mutator method will always cause {@code UnsupportedOperationException}
@@ -147,7 +147,7 @@ public final class Gatherers {
      * be produced, containing all elements in the stream.
      *
      * <p>Example:
-     * {@snippet lang = java:
+     * <pre>{@code
      * // will contain: [[1, 2], [2, 3], [3, 4], [4, 5], [5, 6], [6, 7], [7, 8]]
      * List<List<Integer>> windows2 =
      *     Stream.of(1,2,3,4,5,6,7,8).gather(Gatherers.windowSliding(2)).toList();
@@ -155,7 +155,7 @@ public final class Gatherers {
      * // will contain: [[1, 2, 3, 4, 5, 6], [2, 3, 4, 5, 6, 7], [3, 4, 5, 6, 7, 8]]
      * List<List<Integer>> windows6 =
      *     Stream.of(1,2,3,4,5,6,7,8).gather(Gatherers.windowSliding(6)).toList();
-     * }
+     * }</pre>
      *
      * @implSpec Each window produced is an unmodifiable List; calls to any
      * mutator method will always cause {@code UnsupportedOperationException}
@@ -241,7 +241,7 @@ public final class Gatherers {
      * operation only ever produces a single element.
      *
      * <p>Example:
-     * {@snippet lang = java:
+     * <pre>{@code
      * // will contain: Optional["123456789"]
      * Optional<String> numberString =
      *     Stream.of(1,2,3,4,5,6,7,8,9)
@@ -249,7 +249,7 @@ public final class Gatherers {
      *               Gatherers.fold(() -> "", (string, number) -> string + number)
      *            )
      *           .findFirst();
-     * }
+     * }</pre>
      *
      * @see java.util.stream.Stream#reduce(Object, BinaryOperator)
      *
@@ -290,7 +290,7 @@ public final class Gatherers {
      * produced downstream.
      *
      * <p>Example:
-     * {@snippet lang = java:
+     * <pre>{@code
      * // will contain: ["1", "12", "123", "1234", "12345", "123456", "1234567", "12345678", "123456789"]
      * List<String> numberStrings =
      *     Stream.of(1,2,3,4,5,6,7,8,9)
@@ -298,7 +298,7 @@ public final class Gatherers {
      *               Gatherers.scan(() -> "", (string, number) -> string + number)
      *            )
      *           .toList();
-     * }
+     * }</pre>
      *
      * @param initial the supplier of the initial value for the scanner
      * @param scanner the function to apply for each element

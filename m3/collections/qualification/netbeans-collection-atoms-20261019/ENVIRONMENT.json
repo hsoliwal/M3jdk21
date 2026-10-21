@@ -1,0 +1,13 @@
+{
+  "jdk": "openjdk version \"21.0.12.1\" 2026-08-18 LTS\nOpenJDK Runtime Environment Temurin-21.0.12.1+1 (build 21.0.12.1+1-LTS)\nOpenJDK 64-Bit Server VM Temurin-21.0.12.1+1 (build 21.0.12.1+1-LTS, mixed mode, sharing)\n",
+  "platform": "Linux-6.18.55-x86_64-with-glibc2.39",
+  "machine": "x86_64",
+  "logical_cpus_visible": 9,
+  "benchmark_flags": [
+    "-Xms512m",
+    "-Xmx512m",
+    "-Xbatch",
+    "-XX:+UseSerialGC"
+  ],
+  "physical_hardware_and_affinity": "shared execution environment, no CPU pinning or exclusive-core guarantee"
+}

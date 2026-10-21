@@ -61,20 +61,71 @@ public final class M3LongCompositeViews {
             }
         };
     }
+    /**
+     * Nested compositions are paths through existing child directories, not a
+     * reason to recursively wrap every child or materialize primitive payloads.
+     */
     private static final class Concatenation implements M3LongCollection {
         private final M3LongCollection[] inputs;
         Concatenation(M3LongCollection[] inputs) { this.inputs = inputs; }
+
+        /** One reference-array frame and one int offset per nesting level. */
+        private static final class PathCursor {
+            private M3LongCollection[][] frames = new M3LongCollection[8][];
+            private int[] offsets = new int[8];
+            private int depth = 1;
+            private M3LongCollection ready;
+
+            PathCursor(M3LongCollection[] roots) { frames[0] = roots; }
+
+            boolean hasNext() {
+                if (ready != null) return true;
+                while (depth != 0) {
+                    int frame = depth - 1;
+                    if (offsets[frame] == frames[frame].length) {
+                        frames[frame] = null;
+                        depth--;
+                        continue;
+                    }
+                    M3LongCollection child = frames[frame][offsets[frame]++];
+                    if (child instanceof Concatenation nested) {
+                        if (depth == frames.length) {
+                            int capacity = Math.multiplyExact(frames.length, 2);
+                            frames = Arrays.copyOf(frames, capacity);
+                            offsets = Arrays.copyOf(offsets, capacity);
+                        }
+                        frames[depth] = nested.inputs;
+                        offsets[depth++] = 0;
+                    } else {
+                        ready = child;
+                        return true;
+                    }
+                }
+                return false;
+            }
+
+            M3LongCollection next() {
+                if (!hasNext()) throw new NoSuchElementException();
+                M3LongCollection leaf = ready;
+                ready = null;
+                return leaf;
+            }
+        }
+
         public int size() {
-            int n = 0;
-            for (M3LongCollection c : inputs) n = Math.addExact(n, c.size());
-            return n;
+            int count = 0;
+            PathCursor path = new PathCursor(inputs);
+            while (path.hasNext()) count = Math.addExact(count, path.next().size());
+            return count;
         }
         public boolean contains(long value) {
-            for (M3LongCollection c : inputs) if (c.contains(value)) return true;
+            PathCursor path = new PathCursor(inputs);
+            while (path.hasNext()) if (path.next().contains(value)) return true;
             return false;
         }
         public boolean isEmpty() {
-            for (M3LongCollection c : inputs) if (!c.isEmpty()) return false;
+            PathCursor path = new PathCursor(inputs);
+            while (path.hasNext()) if (!path.next().isEmpty()) return false;
             return true;
         }
         public void clear() { throw new UnsupportedOperationException("read-only composite"); }
@@ -91,12 +142,13 @@ public final class M3LongCompositeViews {
         }
         public M3LongIterator iterator() {
             return new M3LongIterator() {
-                private int index;
+                private PathCursor path;
                 private M3LongIterator active;
                 public boolean hasNext() {
+                    if (path == null) path = new PathCursor(inputs);
                     while (active == null || !active.hasNext()) {
-                        if (index == inputs.length) return false;
-                        active = inputs[index++].iterator();
+                        if (!path.hasNext()) return false;
+                        active = path.next().iterator();
                     }
                     return true;
                 }
@@ -254,7 +306,73 @@ public final class M3LongCompositeViews {
             return last;
         }
 
+        /**
+         * Only the final, first-party M3LongTreeSet supplies proven, signed-long
+         * indexed neighbors. Other M3LongSortedSet implementations retain the
+         * original cursor traversal, including order/callback validation.
+         * For a STRICT neighbor the query itself is a safe miss marker:
+         * an existing predecessor or successor cannot equal that query.
+         */
+        private long indexedSeek(long query, long fallback,
+                boolean forward, boolean inclusive) {
+            if (inclusive && contains(query)) return query;
+            long a = forward ? left.higher(query, query) : left.lower(query, query);
+            long b = forward ? right.higher(query, query) : right.lower(query, query);
+            boolean haveA = a != query;
+            boolean haveB = b != query;
+            switch (operation) {
+                case INTERSECTION -> {
+                    while (haveA && haveB) {
+                        int comparison = Long.compare(a, b);
+                        if (comparison == 0) return a;
+                        if (forward ? comparison < 0 : comparison > 0) {
+                            long next = neighbor(left, a, forward);
+                            haveA = next != a;
+                            a = next;
+                        } else {
+                            long next = neighbor(right, b, forward);
+                            haveB = next != b;
+                            b = next;
+                        }
+                    }
+                }
+                case DIFFERENCE -> {
+                    while (haveA) {
+                        if (!right.contains(a)) return a;
+                        long next = neighbor(left, a, forward);
+                        haveA = next != a;
+                        a = next;
+                    }
+                }
+                case SYMMETRIC_DIFFERENCE -> {
+                    while (haveA || haveB) {
+                        if (!haveA) return b;
+                        if (!haveB) return a;
+                        int comparison = Long.compare(a, b);
+                        if (comparison != 0) {
+                            return (forward ? comparison < 0 : comparison > 0) ? a : b;
+                        }
+                        long nextA = neighbor(left, a, forward);
+                        long nextB = neighbor(right, b, forward);
+                        haveA = nextA != a;
+                        haveB = nextB != b;
+                        a = nextA;
+                        b = nextB;
+                    }
+                }
+            }
+            return fallback;
+        }
+
+        private static long neighbor(M3LongSortedSet owner, long pivot,
+                boolean forward) {
+            return forward ? owner.higher(pivot, pivot) : owner.lower(pivot, pivot);
+        }
+
         private long seek(long query, long fallback, boolean forward, boolean inclusive) {
+            if (left instanceof M3LongTreeSet && right instanceof M3LongTreeSet) {
+                return indexedSeek(query, fallback, forward, inclusive);
+            }
             M3LongIterator cursor = iterator();
             boolean found = false;
             long last = 0L;

@@ -29,6 +29,7 @@ import javax.swing.tree.AbstractLayoutCache;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.DefaultTreeSelectionModel;
+import javax.swing.tree.FixedHeightLayoutCache;
 import javax.swing.tree.TreeModel;
 import javax.swing.tree.TreePath;
 import javax.swing.tree.VariableHeightLayoutCache;
@@ -85,6 +86,14 @@ public class M3VariableHeightLayoutCacheTest {
     static void same(Scenario s) throws Exception {
         String stock = transcript(new VariableHeightLayoutCache(), s);
         String m3 = transcript(m3Cache(), s);
+        assertEquals(stock, m3);
+    }
+
+    /** The fixed-height pair: stock {@link FixedHeightLayoutCache} against the M3 fixed cache. */
+    static void sameFixed(Scenario s) throws Exception {
+        String stock = transcript(new FixedHeightLayoutCache(), s);
+        String m3 = transcript((AbstractLayoutCache) Class.forName("sun.swing.tree.M3FixedHeightLayoutCache")
+                .getDeclaredConstructor().newInstance(), s);
         assertEquals(stock, m3);
     }
 

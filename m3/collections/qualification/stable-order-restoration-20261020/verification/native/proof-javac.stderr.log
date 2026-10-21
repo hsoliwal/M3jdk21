@@ -1,0 +1,76 @@
+/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/baseline/m3/collections/src/test/java/com/m3/collections/M3IndexMaskCompactorSelfTest.java:310: error: cannot find symbol
+            M3LongArrayList list = M3LongArrayList.copyOf(inputs);
+            ^
+  symbol:   class M3LongArrayList
+  location: class M3IndexMaskCompactorSelfTest
+/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/baseline/m3/collections/src/test/java/com/m3/collections/M3IndexMaskCompactorSelfTest.java:310: error: cannot find symbol
+            M3LongArrayList list = M3LongArrayList.copyOf(inputs);
+                                   ^
+  symbol:   variable M3LongArrayList
+  location: class M3IndexMaskCompactorSelfTest
+/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/baseline/m3/collections/src/test/java/com/m3/collections/M3IndexMaskCompactorSelfTest.java:311: error: cannot find symbol
+            M3LongArrayDeque deque = new M3LongArrayDeque(0);
+            ^
+  symbol:   class M3LongArrayDeque
+  location: class M3IndexMaskCompactorSelfTest
+/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/baseline/m3/collections/src/test/java/com/m3/collections/M3IndexMaskCompactorSelfTest.java:311: error: cannot find symbol
+            M3LongArrayDeque deque = new M3LongArrayDeque(0);
+                                         ^
+  symbol:   class M3LongArrayDeque
+  location: class M3IndexMaskCompactorSelfTest
+/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/baseline/m3/collections/src/test/java/com/m3/collections/M3IndexMaskCompactorSelfTest.java:318: error: cannot find symbol
+            M3LongIterator listCursor = list.iterator();
+            ^
+  symbol:   class M3LongIterator
+  location: class M3IndexMaskCompactorSelfTest
+/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/baseline/m3/collections/src/test/java/com/m3/collections/M3IndexMaskCompactorSelfTest.java:319: error: cannot find symbol
+            M3LongIterator dequeCursor = deque.iterator();
+            ^
+  symbol:   class M3LongIterator
+  location: class M3IndexMaskCompactorSelfTest
+/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/baseline/m3/collections/src/test/java/com/m3/collections/M3IndexMaskCompactorSelfTest.java:333: error: cannot find symbol
+        M3LongArrayList list = M3LongArrayList.copyOf(new long[] {1, 2, 3});
+        ^
+  symbol:   class M3LongArrayList
+  location: class M3IndexMaskCompactorSelfTest
+/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/baseline/m3/collections/src/test/java/com/m3/collections/M3IndexMaskCompactorSelfTest.java:333: error: cannot find symbol
+        M3LongArrayList list = M3LongArrayList.copyOf(new long[] {1, 2, 3});
+                               ^
+  symbol:   variable M3LongArrayList
+  location: class M3IndexMaskCompactorSelfTest
+/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/baseline/m3/collections/src/test/java/com/m3/collections/M3IndexMaskCompactorSelfTest.java:334: error: cannot find symbol
+        M3LongArrayDeque deque = new M3LongArrayDeque();
+        ^
+  symbol:   class M3LongArrayDeque
+  location: class M3IndexMaskCompactorSelfTest
+/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/baseline/m3/collections/src/test/java/com/m3/collections/M3IndexMaskCompactorSelfTest.java:334: error: cannot find symbol
+        M3LongArrayDeque deque = new M3LongArrayDeque();
+                                     ^
+  symbol:   class M3LongArrayDeque
+  location: class M3IndexMaskCompactorSelfTest
+/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/baseline/m3/collections/src/test/java/com/m3/collections/M3IndexMaskCompactorSelfTest.java:351: error: cannot find symbol
+        M3LongArrayDeque zeroMaskDeque = new M3LongArrayDeque(0);
+        ^
+  symbol:   class M3LongArrayDeque
+  location: class M3IndexMaskCompactorSelfTest
+/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/baseline/m3/collections/src/test/java/com/m3/collections/M3IndexMaskCompactorSelfTest.java:351: error: cannot find symbol
+        M3LongArrayDeque zeroMaskDeque = new M3LongArrayDeque(0);
+                                             ^
+  symbol:   class M3LongArrayDeque
+  location: class M3IndexMaskCompactorSelfTest
+/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/baseline/m3/collections/src/test/java/com/m3/collections/M3IndexMaskCompactorSelfTest.java:355: error: cannot find symbol
+        M3LongIterator zeroMaskCursor = zeroMaskDeque.iterator();
+        ^
+  symbol:   class M3LongIterator
+  location: class M3IndexMaskCompactorSelfTest
+/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/baseline/m3/collections/src/test/java/com/m3/collections/M3IndexMaskCompactorSelfTest.java:361: error: cannot find symbol
+        for (Class<?> owner : new Class<?>[] {M3LongArrayList.class, M3LongArrayDeque.class}) {
+                                              ^
+  symbol:   class M3LongArrayList
+  location: class M3IndexMaskCompactorSelfTest
+/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/baseline/m3/collections/src/test/java/com/m3/collections/M3IndexMaskCompactorSelfTest.java:361: error: cannot find symbol
+        for (Class<?> owner : new Class<?>[] {M3LongArrayList.class, M3LongArrayDeque.class}) {
+                                                                     ^
+  symbol:   class M3LongArrayDeque
+  location: class M3IndexMaskCompactorSelfTest
+15 errors

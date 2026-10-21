@@ -1,3 +1,4 @@
+// Modified 2026 by Hitesh Soliwal and contributors: retain lazy comparator lookup for filtered split children.
 // Modified 2026 by Hitesh Soliwal and Contributors to the Synexia Project: Synexia-to-M3 package/type adaptation.
 // SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
 // Modified 2026 by Hitesh Soliwal and Contributors to the Synexia Project: late-binding collection adapters and comparator-preserving splits.
@@ -10,7 +11,9 @@ import java.util.Iterator;
 import java.util.Objects;
 import java.util.Spliterator;
 import java.util.Spliterators;
+import java.util.SortedSet;
 import java.util.function.Consumer;
+import java.util.function.Supplier;
 
 /** Preserve encounter/comparator semantics for sequential and parallel stream boundaries. */
 final class M3SlotSpliterators {
@@ -35,15 +38,20 @@ final class M3SlotSpliterators {
                 Objects.requireNonNull(action); if (!iterator.hasNext()) { return false; } action.accept(iterator.next()); return true;
             }
         };
-        return withComparator(source, comparator);
+        return withComparator(source, () -> comparator);
     }
     static <E> Spliterator<E> sorted(Collection<E> collection, Comparator<? super E> comparator) {
         return withComparator(Spliterators.spliterator(collection,
-                Spliterator.ORDERED | Spliterator.SORTED | Spliterator.DISTINCT), comparator);
+                Spliterator.ORDERED | Spliterator.SORTED | Spliterator.DISTINCT), () -> comparator);
+    }
+    /** Preserve the SortedSet default's lazy comparator lookup as well as child order. */
+    static <E> Spliterator<E> sorted(SortedSet<E> collection) {
+        return withComparator(Spliterators.spliterator(collection,
+                Spliterator.ORDERED | Spliterator.SORTED | Spliterator.DISTINCT), collection::comparator);
     }
     /** JDK iterator batching returns array splits; retain custom ordering on each child. */
     private static <E> Spliterator<E> withComparator(
-            Spliterator<E> source, Comparator<? super E> comparator) {
+            Spliterator<E> source, Supplier<Comparator<? super E>> comparator) {
         return new Spliterator<>() {
             @Override public boolean tryAdvance(Consumer<? super E> action) {
                 return source.tryAdvance(action);
@@ -57,7 +65,7 @@ final class M3SlotSpliterators {
             }
             @Override public long estimateSize() { return source.estimateSize(); }
             @Override public int characteristics() { return source.characteristics(); }
-            @Override public Comparator<? super E> getComparator() { return comparator; }
+            @Override public Comparator<? super E> getComparator() { return comparator.get(); }
         };
     }
 }

@@ -1,0 +1,278 @@
+{
+  "schema": "SYNEXIA_M3_EVIDENCE_CUSTODY_V1",
+  "canonical_source_commit": "528aaf79cfae79c5dbfe7c307340329d320e8c44",
+  "exact_copies": [
+    {
+      "canonical_path": "synexia-openrewrite-recipes/recipe-crates/m3-wrapper-convergence-20261018/evidence/integration-f29/BASELINE_WRAPPER_WITNESSES.json",
+      "target_path": "m3/collections/qualification/wrapper-convergence-20261018/evidence/integration-f29/BASELINE_WRAPPER_WITNESSES.json",
+      "sha256": "7665111043081599f0846a6517162499f214e764e5c73077b5ac7b7512d5cbdd",
+      "bytes": 5788
+    },
+    {
+      "canonical_path": "synexia-openrewrite-recipes/recipe-crates/m3-wrapper-convergence-20261018/evidence/integration-f29/FINAL_SOURCE_CHANGES.json",
+      "target_path": "m3/collections/qualification/wrapper-convergence-20261018/evidence/integration-f29/FINAL_SOURCE_CHANGES.json",
+      "sha256": "e2c9afc69124658cab8c648dd02cfc5bd39687aa2ee6a5052c03932e23f7c0f8",
+      "bytes": 2269
+    },
+    {
+      "canonical_path": "synexia-openrewrite-recipes/recipe-crates/m3-wrapper-convergence-20261018/evidence/integration-f29/FINAL_SUITE_MODE_EVIDENCE_NOTE.json",
+      "target_path": "m3/collections/qualification/wrapper-convergence-20261018/evidence/integration-f29/FINAL_SUITE_MODE_EVIDENCE_NOTE.json",
+      "sha256": "fa95ec57ad310426a3114a44a49b474a46a20995a96ba7bd02bc3af327a81cf2",
+      "bytes": 642
+    },
+    {
+      "canonical_path": "synexia-openrewrite-recipes/recipe-crates/m3-wrapper-convergence-20261018/evidence/integration-f29/RECEIVER_ORCHESTRATION_CORRECTION.json",
+      "target_path": "m3/collections/qualification/wrapper-convergence-20261018/evidence/integration-f29/RECEIVER_ORCHESTRATION_CORRECTION.json",
+      "sha256": "9874a16e403b60750f61f735b5b8c016c7b1c6b7d33d5bd8dc3b6c21daccf5e8",
+      "bytes": 771
+    },
+    {
+      "canonical_path": "synexia-openrewrite-recipes/recipe-crates/m3-wrapper-convergence-20261018/evidence/integration-f29/RECONCILIATION_ADMISSION.json",
+      "target_path": "m3/collections/qualification/wrapper-convergence-20261018/evidence/integration-f29/RECONCILIATION_ADMISSION.json",
+      "sha256": "5b5b0aee9fcddd9e0f0403f940eb05f49acd93142a976946c9eb9add59374446",
+      "bytes": 1453
+    },
+    {
+      "canonical_path": "synexia-openrewrite-recipes/recipe-crates/m3-wrapper-convergence-20261018/evidence/integration-f29/RESOURCE_COMPARISON.json",
+      "target_path": "m3/collections/qualification/wrapper-convergence-20261018/evidence/integration-f29/RESOURCE_COMPARISON.json",
+      "sha256": "96dc799ec6821e9b6776809a19f96ba9e57547b98188c7ff743be6c42a331c3c",
+      "bytes": 33432
+    },
+    {
+      "canonical_path": "synexia-openrewrite-recipes/recipe-crates/m3-wrapper-convergence-20261018/evidence/integration-f29/baseline-region-runtime.stdout.log",
+      "target_path": "m3/collections/qualification/wrapper-convergence-20261018/evidence/integration-f29/baseline-region-runtime.stdout.log",
+      "sha256": "8b1724d8f6f06e7018d7be49534d600cca664fb5e94ef2256bab050a8dd39149",
+      "bytes": 2278
+    },
+    {
+      "canonical_path": "synexia-openrewrite-recipes/recipe-crates/m3-wrapper-convergence-20261018/evidence/integration-f29/baseline-resource-sort.stdout.log",
+      "target_path": "m3/collections/qualification/wrapper-convergence-20261018/evidence/integration-f29/baseline-resource-sort.stdout.log",
+      "sha256": "fe3b9389a9e2975d78fd1f0d727e813f90356237a2df606dd9feecfd9e1a0ee3",
+      "bytes": 1458
+    },
+    {
+      "canonical_path": "synexia-openrewrite-recipes/recipe-crates/m3-wrapper-convergence-20261018/evidence/integration-f29/candidate-native-abi.json",
+      "target_path": "m3/collections/qualification/wrapper-convergence-20261018/evidence/integration-f29/candidate-native-abi.json",
+      "sha256": "fc4e71cebd833f2fc18354d2cb097db313c37526076cff591f76eeb68b131a14",
+      "bytes": 468
+    },
+    {
+      "canonical_path": "synexia-openrewrite-recipes/recipe-crates/m3-wrapper-convergence-20261018/evidence/integration-f29/candidate-region-runtime.stdout.log",
+      "target_path": "m3/collections/qualification/wrapper-convergence-20261018/evidence/integration-f29/candidate-region-runtime.stdout.log",
+      "sha256": "fb03fcd73f626129d63d5e1c0ac304616c4e0c7e2e3543ff44189245ff6796da",
+      "bytes": 2284
+    },
+    {
+      "canonical_path": "synexia-openrewrite-recipes/recipe-crates/m3-wrapper-convergence-20261018/evidence/integration-f29/full-borrow-receiver-v2.json",
+      "target_path": "m3/collections/qualification/wrapper-convergence-20261018/evidence/integration-f29/full-borrow-receiver-v2.json",
+      "sha256": "4723ff38360cd711913ef669ea2c08c56e024727ab30b4eeb112fb1007e5c1fa",
+      "bytes": 356
+    },
+    {
+      "canonical_path": "synexia-openrewrite-recipes/recipe-crates/m3-wrapper-convergence-20261018/evidence/integration-f29/invariant-policy-native-test.json",
+      "target_path": "m3/collections/qualification/wrapper-convergence-20261018/evidence/integration-f29/invariant-policy-native-test.json",
+      "sha256": "372bf9670f4357c12e2fd3c2554fba17fd8dc9b937e1cbc09b478c187ec06477",
+      "bytes": 918
+    },
+    {
+      "canonical_path": "synexia-openrewrite-recipes/recipe-crates/m3-wrapper-convergence-20261018/evidence/integration-f29/invariant-policy-product-test.json",
+      "target_path": "m3/collections/qualification/wrapper-convergence-20261018/evidence/integration-f29/invariant-policy-product-test.json",
+      "sha256": "ea48c7ed54e109028347c8108a73375c0473e95b28c2b19397150fe2c649f6fb",
+      "bytes": 781
+    },
+    {
+      "canonical_path": "synexia-openrewrite-recipes/recipe-crates/m3-wrapper-convergence-20261018/evidence/integration-f29/invariant-policy-runtime.json",
+      "target_path": "m3/collections/qualification/wrapper-convergence-20261018/evidence/integration-f29/invariant-policy-runtime.json",
+      "sha256": "ea331623940d61896d845950adac83d8bfd4715d758f4b5fa9add2effddb6d79",
+      "bytes": 397
+    },
+    {
+      "canonical_path": "synexia-openrewrite-recipes/recipe-crates/m3-wrapper-convergence-20261018/evidence/integration-f29/native-row-suffix-RUNTIME.json",
+      "target_path": "m3/collections/qualification/wrapper-convergence-20261018/evidence/integration-f29/native-row-suffix-RUNTIME.json",
+      "sha256": "76fec1d85cd61c2a4bb9674f176b3045f5362f4ecb9d705e80f0f609ac0563a9",
+      "bytes": 7366
+    },
+    {
+      "canonical_path": "synexia-openrewrite-recipes/recipe-crates/m3-wrapper-convergence-20261018/evidence/integration-f29/native-row-suffix-index-java.stdout.log",
+      "target_path": "m3/collections/qualification/wrapper-convergence-20261018/evidence/integration-f29/native-row-suffix-index-java.stdout.log",
+      "sha256": "b38c1615366f41e5a0ccbb6f9d8a018dd03ba86fc494460ebfaf64cc58e3d2c8",
+      "bytes": 160
+    },
+    {
+      "canonical_path": "synexia-openrewrite-recipes/recipe-crates/m3-wrapper-convergence-20261018/evidence/integration-f29/native-row-suffix-index-native.stdout.log",
+      "target_path": "m3/collections/qualification/wrapper-convergence-20261018/evidence/integration-f29/native-row-suffix-index-native.stdout.log",
+      "sha256": "3560deac75e8b9009fc5ca237be25a4c852d01763d452cb3538730c25f16a11a",
+      "bytes": 159
+    },
+    {
+      "canonical_path": "synexia-openrewrite-recipes/recipe-crates/m3-wrapper-convergence-20261018/evidence/integration-f29/native-row-suffix-receive-fixedpoint.json",
+      "target_path": "m3/collections/qualification/wrapper-convergence-20261018/evidence/integration-f29/native-row-suffix-receive-fixedpoint.json",
+      "sha256": "6db83c40cda6b82f42dae3cc48c1a0db4220223d80552f9bd13334cd5b611a0f",
+      "bytes": 990
+    },
+    {
+      "canonical_path": "synexia-openrewrite-recipes/recipe-crates/m3-wrapper-convergence-20261018/evidence/integration-f29/readonly-iterator-PASS.json",
+      "target_path": "m3/collections/qualification/wrapper-convergence-20261018/evidence/integration-f29/readonly-iterator-PASS.json",
+      "sha256": "46cf4e85fdf21df9d598f64b2f63f53dbe0a50f5bfcbe8b1518a01d008353bba",
+      "bytes": 597
+    },
+    {
+      "canonical_path": "synexia-openrewrite-recipes/recipe-crates/m3-wrapper-convergence-20261018/evidence/integration-f29/readonly-iterator-receive-fixedpoint.json",
+      "target_path": "m3/collections/qualification/wrapper-convergence-20261018/evidence/integration-f29/readonly-iterator-receive-fixedpoint.json",
+      "sha256": "2cc02a2aa4c95a4b7458f038c891c9becc82c63da8dea0f21893044885877895",
+      "bytes": 994
+    },
+    {
+      "canonical_path": "synexia-openrewrite-recipes/recipe-crates/m3-wrapper-convergence-20261018/evidence/integration-f29/stable-order-groups-RUNTIME.json",
+      "target_path": "m3/collections/qualification/wrapper-convergence-20261018/evidence/integration-f29/stable-order-groups-RUNTIME.json",
+      "sha256": "c8df1c9a3eda7d986cfa9d46e954646be88e0dd84cce0815cd9fce20ed9380e1",
+      "bytes": 4141
+    },
+    {
+      "canonical_path": "synexia-openrewrite-recipes/recipe-crates/m3-wrapper-convergence-20261018/evidence/integration-f29/stable-order-groups-receive-fixedpoint.json",
+      "target_path": "m3/collections/qualification/wrapper-convergence-20261018/evidence/integration-f29/stable-order-groups-receive-fixedpoint.json",
+      "sha256": "9d9b0ee3aedc07d58e97dfea35679cd22af4632f7796e109de4332edb2d2c13a",
+      "bytes": 1002
+    },
+    {
+      "canonical_path": "synexia-openrewrite-recipes/recipe-crates/m3-wrapper-convergence-20261018/evidence/integration-f29/stable-order-groups-resource-sort.stdout.log",
+      "target_path": "m3/collections/qualification/wrapper-convergence-20261018/evidence/integration-f29/stable-order-groups-resource-sort.stdout.log",
+      "sha256": "3772f566acd4337de93ebd4db743ff77ecc0d21bdd48215d21838b28d3f3936a",
+      "bytes": 1441
+    },
+    {
+      "canonical_path": "synexia-openrewrite-recipes/recipe-crates/m3-wrapper-convergence-20261018/evidence/sdk-results/fixture-java.json",
+      "target_path": "m3/collections/qualification/wrapper-convergence-20261018/evidence/sdk-results/fixture-java.json",
+      "sha256": "c8d1cd3010fb672ea9708ce6e4ed8fcb6d97ca57f4bfb2d6811a9fb84d8093ea",
+      "bytes": 23505
+    },
+    {
+      "canonical_path": "synexia-openrewrite-recipes/recipe-crates/m3-wrapper-convergence-20261018/evidence/sdk-results/fixture-text.json",
+      "target_path": "m3/collections/qualification/wrapper-convergence-20261018/evidence/sdk-results/fixture-text.json",
+      "sha256": "d3c07e2f1e6d45c75a3ba641b6491b32dd9cedf11d0c5ff9db628e7b1b7ffe4a",
+      "bytes": 23221
+    },
+    {
+      "canonical_path": "synexia-openrewrite-recipes/recipe-crates/m3-wrapper-convergence-20261018/evidence/sdk-results/index-contract.json",
+      "target_path": "m3/collections/qualification/wrapper-convergence-20261018/evidence/sdk-results/index-contract.json",
+      "sha256": "5fb9398f2124e0055cfeecfbdaa286717a1eec4028ba3cbbc45bf4112ec393a1",
+      "bytes": 89121
+    },
+    {
+      "canonical_path": "synexia-openrewrite-recipes/recipe-crates/m3-wrapper-convergence-20261018/evidence/sdk-results/index-junit.json",
+      "target_path": "m3/collections/qualification/wrapper-convergence-20261018/evidence/sdk-results/index-junit.json",
+      "sha256": "ff26b859d417f429bbe945f814860290933b2a4ab53f737b4f7e83a9d384e7d4",
+      "bytes": 65307
+    },
+    {
+      "canonical_path": "synexia-openrewrite-recipes/recipe-crates/m3-wrapper-convergence-20261018/evidence/sdk-results/index-resource-probe.json",
+      "target_path": "m3/collections/qualification/wrapper-convergence-20261018/evidence/sdk-results/index-resource-probe.json",
+      "sha256": "8bd16143eb7aa2c0eed9be30eb869d3ca0b4bd80f07ea2fd0684d57021103a2c",
+      "bytes": 73120
+    },
+    {
+      "canonical_path": "synexia-openrewrite-recipes/recipe-crates/m3-wrapper-convergence-20261018/evidence/sdk-results/invariant-policy.json",
+      "target_path": "m3/collections/qualification/wrapper-convergence-20261018/evidence/sdk-results/invariant-policy.json",
+      "sha256": "8cd8375f42868b95639bcd0fcf54417a5277e240db5c38b235b9223a0221eaf1",
+      "bytes": 30186
+    },
+    {
+      "canonical_path": "synexia-openrewrite-recipes/recipe-crates/m3-wrapper-convergence-20261018/evidence/sdk-results/native-region-proof.json",
+      "target_path": "m3/collections/qualification/wrapper-convergence-20261018/evidence/sdk-results/native-region-proof.json",
+      "sha256": "68d968a21b1abbc33d066ce9e566d76c79c87e81ff24f417b1182bfc81d523e5",
+      "bytes": 34415
+    },
+    {
+      "canonical_path": "synexia-openrewrite-recipes/recipe-crates/m3-wrapper-convergence-20261018/evidence/sdk-results/native-row-suffix.json",
+      "target_path": "m3/collections/qualification/wrapper-convergence-20261018/evidence/sdk-results/native-row-suffix.json",
+      "sha256": "87817390a2ddd65d2478ec93eb3839a05648204b2d56ebc2c6b3b96558614603",
+      "bytes": 24477
+    },
+    {
+      "canonical_path": "synexia-openrewrite-recipes/recipe-crates/m3-wrapper-convergence-20261018/evidence/sdk-results/readonly-iterator.json",
+      "target_path": "m3/collections/qualification/wrapper-convergence-20261018/evidence/sdk-results/readonly-iterator.json",
+      "sha256": "a1a5050a6f68a4c8e24a24c60c49d1323ac9e809fcbfd16dce22b133124bac2e",
+      "bytes": 64867
+    },
+    {
+      "canonical_path": "synexia-openrewrite-recipes/recipe-crates/m3-wrapper-convergence-20261018/evidence/sdk-results/stable-order-groups.json",
+      "target_path": "m3/collections/qualification/wrapper-convergence-20261018/evidence/sdk-results/stable-order-groups.json",
+      "sha256": "154a124a5f6dec9137e33b706bb9d6112584107cfe1206c53a609d6093fe7b8a",
+      "bytes": 66376
+    },
+    {
+      "canonical_path": "synexia-openrewrite-recipes/recipe-crates/m3-wrapper-convergence-20261018/evidence/sdk-results/wrapper-contract-v2.json",
+      "target_path": "m3/collections/qualification/wrapper-convergence-20261018/evidence/sdk-results/wrapper-contract-v2.json",
+      "sha256": "674a5ac9e4c0bae01349d72ea06a08efa149344572d6ffcf45f928bd56f239d7",
+      "bytes": 86930
+    },
+    {
+      "canonical_path": "synexia-openrewrite-recipes/recipe-crates/m3-wrapper-convergence-20261018/evidence/sdk-results/wrapper-junit-v2.json",
+      "target_path": "m3/collections/qualification/wrapper-convergence-20261018/evidence/sdk-results/wrapper-junit-v2.json",
+      "sha256": "c9376d6f90a3b9ef8ca07bf949e3c294b07f1e3dda8ad16fa0dc45afba17ec28",
+      "bytes": 68658
+    },
+    {
+      "canonical_path": "synexia-openrewrite-recipes/recipe-crates/m3-wrapper-convergence-20261018/evidence/recipe-host/INPUT_COUNT_CLARIFICATION.md",
+      "target_path": "m3/collections/qualification/wrapper-convergence-20261018/evidence/recipe-host/INPUT_COUNT_CLARIFICATION.md",
+      "sha256": "990a5e070d586bd428fab31fb091de261ac529e3c96002cfe1694a571570fece",
+      "bytes": 2798
+    },
+    {
+      "canonical_path": "synexia-openrewrite-recipes/recipe-crates/m3-wrapper-convergence-20261018/evidence/recipe-host/INPUT_COUNT_RECONCILIATION.tsv",
+      "target_path": "m3/collections/qualification/wrapper-convergence-20261018/evidence/recipe-host/INPUT_COUNT_RECONCILIATION.tsv",
+      "sha256": "baa895cbd1924a7840892f81b8222189b70a352d080bfd2ccc95f58131723ebc",
+      "bytes": 3153
+    },
+    {
+      "canonical_path": "synexia-openrewrite-recipes/recipe-crates/m3-wrapper-convergence-20261018/evidence/recipe-host/QUALIFICATION_EXTENSION_09_14.md",
+      "target_path": "m3/collections/qualification/wrapper-convergence-20261018/evidence/recipe-host/QUALIFICATION_EXTENSION_09_14.md",
+      "sha256": "73df836d66f237354c790bf642401d9607c294a8fec8009d538ab8ee3a8515fe",
+      "bytes": 1613
+    },
+    {
+      "canonical_path": "synexia-openrewrite-recipes/recipe-crates/m3-wrapper-convergence-20261018/evidence/recipe-host/QUALIFICATION_SUMMARY.md",
+      "target_path": "m3/collections/qualification/wrapper-convergence-20261018/evidence/recipe-host/QUALIFICATION_SUMMARY.md",
+      "sha256": "af9259444ea0bdcca624257e6f445bb09f45a59ed731ac2eab1bb4be02dc9d1c",
+      "bytes": 2433
+    },
+    {
+      "canonical_path": "synexia-openrewrite-recipes/recipe-crates/m3-wrapper-convergence-20261018/evidence/recipe-host/WRAPPER_V2_AND_POLICY_RESULTS.json",
+      "target_path": "m3/collections/qualification/wrapper-convergence-20261018/evidence/recipe-host/WRAPPER_V2_AND_POLICY_RESULTS.json",
+      "sha256": "b9c774796f0b62d5d37152de2ca7fb03bd749d8a4e4996e35dc125444060fee3",
+      "bytes": 13827
+    },
+    {
+      "canonical_path": "synexia-openrewrite-recipes/recipe-crates/m3-wrapper-convergence-20261018/evidence/PR1_RESULTS.json",
+      "target_path": "m3/collections/qualification/wrapper-convergence-20261018/evidence/PR1_RESULTS.json",
+      "sha256": "4db912a36f49513d6bd9e1eb1f003736ffda3aad05f11fb312303c8db4f39c5b",
+      "bytes": 2379
+    },
+    {
+      "canonical_path": "synexia-openrewrite-recipes/recipe-crates/m3-wrapper-convergence-20261018/evidence/PORTABILITY_SUMMARY.json",
+      "target_path": "m3/collections/qualification/wrapper-convergence-20261018/evidence/PORTABILITY_SUMMARY.json",
+      "sha256": "46a960aee51f2b81ab940655672e7b8cdfd8673c57dfe72143a2f665cc4e19bf",
+      "bytes": 5474
+    },
+    {
+      "canonical_path": "synexia-openrewrite-recipes/recipe-crates/m3-wrapper-convergence-20261018/evidence/public-custody-portability.json",
+      "target_path": "m3/collections/qualification/wrapper-convergence-20261018/evidence/public-custody-portability.json",
+      "sha256": "c88c94f72d3d6abcd8ce7f0831a2673a09b34ae0f76aaae40af36a78fd068ef8",
+      "bytes": 177918
+    },
+    {
+      "canonical_path": "synexia-openrewrite-recipes/recipe-crates/m3-wrapper-convergence-20261018/evidence/PUBLICATION_UPSTREAM_REFRESH.json",
+      "target_path": "m3/collections/qualification/wrapper-convergence-20261018/evidence/PUBLICATION_UPSTREAM_REFRESH.json",
+      "sha256": "c45fcb5183ad25e6f3c245f8cd1b608eb52bb4c9560326368189b0c639975d2f",
+      "bytes": 13518
+    }
+  ],
+  "curated_public_bundle": {
+    "path": "evidence/pr1-review.json",
+    "sha256": "23829a04e580ea79d5491e748d9cdc17f5b38c4f9e8b3e9da9f3c87c72bda482",
+    "source": "evidence/independent-pr1.json",
+    "source_sha256": "0fbb0cafd3e9ff83bc9ac561ff240cc05b3106927e620c5a0929ff63aa6bc9aa",
+    "selection": "All exact UTF-8 entries except repeated full JUnit XML, admission and full source-state inventories; canonical original retained in full."
+  },
+  "canonical_pr_url": "https://github.com/hsoliwal/com.synexia/pull/12289"
+}

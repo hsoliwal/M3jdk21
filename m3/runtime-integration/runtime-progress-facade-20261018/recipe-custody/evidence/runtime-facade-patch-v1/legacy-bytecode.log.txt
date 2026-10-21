@@ -1,0 +1,143 @@
+public final class M3RuntimeLegacyClient {
+  public M3RuntimeLegacyClient();
+    descriptor: ()V
+    Code:
+       0: aload_0
+       1: invokespecial #1                  // Method java/lang/Object."<init>":()V
+       4: return
+
+  public static void main(java.lang.String[]) throws java.lang.Exception;
+    descriptor: ([Ljava/lang/String;)V
+    Code:
+       0: invokestatic  #18                 // Method java/lang/Runtime.getRuntime:()Ljava/lang/Runtime;
+       3: astore_1
+       4: aload_1
+       5: invokestatic  #18                 // Method java/lang/Runtime.getRuntime:()Ljava/lang/Runtime;
+       8: if_acmpne     15
+      11: iconst_1
+      12: goto          16
+      15: iconst_0
+      16: ldc           #24                 // String existing Runtime singleton
+      18: invokestatic  #26                 // Method check:(ZLjava/lang/String;)V
+      21: aload_1
+      22: invokevirtual #30                 // Method java/lang/Runtime.availableProcessors:()I
+      25: ifle          32
+      28: iconst_1
+      29: goto          33
+      32: iconst_0
+      33: ldc           #34                 // String native availableProcessors
+      35: invokestatic  #26                 // Method check:(ZLjava/lang/String;)V
+      38: aload_1
+      39: invokevirtual #36                 // Method java/lang/Runtime.freeMemory:()J
+      42: lconst_0
+      43: lcmp
+      44: iflt          51
+      47: iconst_1
+      48: goto          52
+      51: iconst_0
+      52: ldc           #40                 // String native freeMemory
+      54: invokestatic  #26                 // Method check:(ZLjava/lang/String;)V
+      57: aload_1
+      58: invokevirtual #42                 // Method java/lang/Runtime.totalMemory:()J
+      61: lconst_0
+      62: lcmp
+      63: ifle          70
+      66: iconst_1
+      67: goto          71
+      70: iconst_0
+      71: ldc           #45                 // String native totalMemory
+      73: invokestatic  #26                 // Method check:(ZLjava/lang/String;)V
+      76: aload_1
+      77: invokevirtual #47                 // Method java/lang/Runtime.maxMemory:()J
+      80: lconst_0
+      81: lcmp
+      82: ifle          89
+      85: iconst_1
+      86: goto          90
+      89: iconst_0
+      90: ldc           #50                 // String native maxMemory
+      92: invokestatic  #26                 // Method check:(ZLjava/lang/String;)V
+      95: invokestatic  #52                 // Method java/lang/Runtime.version:()Ljava/lang/Runtime$Version;
+      98: invokevirtual #56                 // Method java/lang/Runtime$Version.feature:()I
+     101: bipush        21
+     103: if_icmpne     110
+     106: iconst_1
+     107: goto          111
+     110: iconst_0
+     111: ldc           #61                 // String existing version feature
+     113: invokestatic  #26                 // Method check:(ZLjava/lang/String;)V
+     116: ldc           #63                 // String 21.0.1+12
+     118: invokestatic  #65                 // Method java/lang/Runtime$Version.parse:(Ljava/lang/String;)Ljava/lang/Runtime$Version;
+     121: astore_2
+     122: aload_2
+     123: invokevirtual #56                 // Method java/lang/Runtime$Version.feature:()I
+     126: bipush        21
+     128: if_icmpne     143
+     131: aload_2
+     132: invokevirtual #69                 // Method java/lang/Runtime$Version.update:()I
+     135: iconst_1
+     136: if_icmpne     143
+     139: iconst_1
+     140: goto          144
+     143: iconst_0
+     144: ldc           #72                 // String existing version parser
+     146: invokestatic  #26                 // Method check:(ZLjava/lang/String;)V
+     149: aload_2
+     150: invokevirtual #74                 // Method java/lang/Runtime$Version.build:()Ljava/util/Optional;
+     153: invokevirtual #78                 // Method java/util/Optional.orElseThrow:()Ljava/lang/Object;
+     156: checkcast     #84                 // class java/lang/Integer
+     159: invokevirtual #86                 // Method java/lang/Integer.intValue:()I
+     162: bipush        12
+     164: if_icmpne     171
+     167: iconst_1
+     168: goto          172
+     171: iconst_0
+     172: ldc           #89                 // String existing optional version build
+     174: invokestatic  #26                 // Method check:(ZLjava/lang/String;)V
+     177: aload_2
+     178: ldc           #91                 // String 21.0.1+11
+     180: invokestatic  #65                 // Method java/lang/Runtime$Version.parse:(Ljava/lang/String;)Ljava/lang/Runtime$Version;
+     183: invokevirtual #93                 // Method java/lang/Runtime$Version.compareTo:(Ljava/lang/Runtime$Version;)I
+     186: ifle          193
+     189: iconst_1
+     190: goto          194
+     193: iconst_0
+     194: ldc           #97                 // String existing version comparison
+     196: invokestatic  #26                 // Method check:(ZLjava/lang/String;)V
+     199: ldc           #19                 // class java/lang/Runtime
+     201: iconst_0
+     202: anewarray     #99                 // class java/lang/Class
+     205: invokevirtual #101                // Method java/lang/Class.getDeclaredConstructor:([Ljava/lang/Class;)Ljava/lang/reflect/Constructor;
+     208: invokevirtual #105                // Method java/lang/reflect/Constructor.getModifiers:()I
+     211: invokestatic  #110                // Method java/lang/reflect/Modifier.isPrivate:(I)Z
+     214: ldc           #116                // String existing private constructor
+     216: invokestatic  #26                 // Method check:(ZLjava/lang/String;)V
+     219: new           #118                // class java/lang/Thread
+     222: dup
+     223: invokedynamic #120,  0            // InvokeDynamic #0:run:()Ljava/lang/Runnable;
+     228: ldc           #124                // String m3-runtime-legacy-hook
+     230: invokespecial #126                // Method java/lang/Thread."<init>":(Ljava/lang/Runnable;Ljava/lang/String;)V
+     233: astore_3
+     234: aload_1
+     235: aload_3
+     236: invokevirtual #129                // Method java/lang/Runtime.addShutdownHook:(Ljava/lang/Thread;)V
+     239: aload_1
+     240: aload_3
+     241: invokevirtual #133                // Method java/lang/Runtime.removeShutdownHook:(Ljava/lang/Thread;)Z
+     244: ldc           #137                // String existing shutdown hook removal
+     246: invokestatic  #26                 // Method check:(ZLjava/lang/String;)V
+     249: aload_1
+     250: aload_3
+     251: invokevirtual #133                // Method java/lang/Runtime.removeShutdownHook:(Ljava/lang/Thread;)Z
+     254: ifne          261
+     257: iconst_1
+     258: goto          262
+     261: iconst_0
+     262: ldc           #139                // String existing absent hook removal
+     264: invokestatic  #26                 // Method check:(ZLjava/lang/String;)V
+     267: getstatic     #141                // Field java/lang/System.out:Ljava/io/PrintStream;
+     270: getstatic     #7                  // Field checks:I
+     273: invokedynamic #147,  0            // InvokeDynamic #1:makeConcatWithConstants:(I)Ljava/lang/String;
+     278: invokevirtual #151                // Method java/io/PrintStream.println:(Ljava/lang/String;)V
+     281: return
+}

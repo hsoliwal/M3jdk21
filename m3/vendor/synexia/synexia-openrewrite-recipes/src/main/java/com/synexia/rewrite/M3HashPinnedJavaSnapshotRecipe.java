@@ -47,6 +47,9 @@ import org.openrewrite.java.tree.J;
 public final class M3HashPinnedJavaSnapshotRecipe
         extends ScanningRecipe<M3HashPinnedJavaSnapshotRecipe.Inventory> {
     private static final String RESOURCE_ROOT = "/com/synexia/rewrite/hash-pinned-java/";
+    // An explicit host classpath overrides parser defaults; an empty list remains explicit.
+    private static final String PARSER_CLASSPATH =
+            "com.synexia.rewrite.hashPinnedJavaSnapshotRecipe.parserClasspath";
     private static final int MAX_PARSE_CONTEXT_SOURCES = 64;
     private static final int MAX_PARSE_CONTEXT_UTF8_BYTES = 8 * 1024 * 1024;
     private static final int MAX_PARSER_DEPENDENCIES = 16;
@@ -216,11 +219,12 @@ public final class M3HashPinnedJavaSnapshotRecipe
         synchronized (inventory) {
             requireAdmissible(inventory);
             if (inventory.candidates == null) {
-                validateParserDependencies(inventory.parserDependencies, context);
+                List<Path> parserClasspath = parserClasspath(context);
+                validateParserDependencies(inventory.parserDependencies, context, parserClasspath);
                 Map<String, SourceFile> prepared = new HashMap<>();
                 for (Target target : inventory.targets) {
                     prepared.put(target.path(), parse(target, inventory.contextSources,
-                            inventory.parserDependencies, context));
+                            inventory.parserDependencies, context, parserClasspath));
                 }
                 inventory.candidates = Map.copyOf(prepared);
             }
@@ -241,9 +245,35 @@ public final class M3HashPinnedJavaSnapshotRecipe
         }
     }
 
+    /** Null means no host override; an empty list explicitly excludes the runtime classpath. */
+    private static List<Path> parserClasspath(ExecutionContext context) {
+        Object configured = context.getMessage(PARSER_CLASSPATH);
+        if (configured == null) return null;
+        if (!(configured instanceof List<?> values)) {
+            throw new IllegalArgumentException("hash-pinned Java parser classpath must be a list of paths");
+        }
+        List<Path> classpath = new ArrayList<>(values.size());
+        for (Object value : values) {
+            if (!(value instanceof Path path)) {
+                throw new IllegalArgumentException("hash-pinned Java parser classpath must be a list of paths");
+            }
+            classpath.add(path);
+        }
+        return List.copyOf(classpath);
+    }
+
+    private static JavaParser.Builder<?, ?> parserBuilder(
+            List<Path> parserClasspath, boolean runtimeFallback) {
+        JavaParser.Builder<?, ?> builder = JavaParser.fromJavaVersion();
+        if (parserClasspath != null) builder.classpath(parserClasspath);
+        else if (runtimeFallback) builder.classpath(JavaParser.runtimeClasspath());
+        return builder;
+    }
+
     private static SourceFile parse(
             Target target, List<ContextSource> contextSources,
-            List<ParserDependency> dependencies, ExecutionContext context) {
+            List<ParserDependency> dependencies, ExecutionContext context,
+            List<Path> parserClasspath) {
         List<Parser.Input> inputs = new ArrayList<>(contextSources.size() + 1);
         Map<String, String> expected = new HashMap<>();
         for (ContextSource source : contextSources) {
@@ -252,9 +282,8 @@ public final class M3HashPinnedJavaSnapshotRecipe
         }
         inputs.add(Parser.Input.fromString(Path.of(target.path()), target.text()));
         expected.put(target.path(), target.text());
-        JavaParser.Builder<?, ?> builder = JavaParser.fromJavaVersion();
+        JavaParser.Builder<?, ?> builder = parserBuilder(parserClasspath, dependencies.isEmpty());
         if (!dependencies.isEmpty()) builder.dependsOn(dependencyInputs(dependencies));
-        else builder.classpath(JavaParser.runtimeClasspath());
         String failureMessage = dependencies.isEmpty()
                 ? "Java template parse error: " + target.path()
                 : "Java parser failed while preparing " + target.path();
@@ -357,9 +386,10 @@ public final class M3HashPinnedJavaSnapshotRecipe
     }
 
     private static void validateParserDependencies(
-            List<ParserDependency> dependencies, ExecutionContext context) {
+            List<ParserDependency> dependencies, ExecutionContext context,
+            List<Path> parserClasspath) {
         if (dependencies.isEmpty()) return;
-        List<SourceFile> parsed = parseChecked(JavaParser.fromJavaVersion().build(),
+        List<SourceFile> parsed = parseChecked(parserBuilder(parserClasspath, false).build(),
                 dependencyInputs(dependencies), context,
                 "Java parser failed while preparing parser dependencies");
         Map<String, String> expected = new HashMap<>();
@@ -496,20 +526,46 @@ public final class M3HashPinnedJavaSnapshotRecipe
         int srcSegment = value.startsWith("src/") ? 0 : value.indexOf("/src/");
         int javaSegment = srcSegment < 0 ? -1 : value.indexOf("/java/", srcSegment + 1);
         boolean mavenSource = srcSegment >= 0 && javaSegment > srcSegment;
+        // Lucene's Gradle layout uses src/test/org rather than Maven's src/test/java.
+        // Admit only the current core/analysis test subtree; all other paths still refuse.
+        boolean luceneCoreAnalysisTest = value.startsWith(
+                "lucene/core/src/test/org/apache/lucene/analysis/");
         boolean eclipsePdeSource =
                 value.startsWith("bundles/") && value.contains("/src/");
         boolean eclipsePdeTestSource =
                 value.startsWith("tests/") && value.contains("/src/");
         boolean eclipseNebulaWidgetSource =
                 value.startsWith("widgets/") && value.contains("/src/");
+        boolean eclipseExampleSource =
+                value.startsWith("examples/") && value.contains("/src/");
         boolean eclipseSwtLegacySource = eclipseSwtPdePath(value);
         boolean eclipseSwtExampleSource = value.startsWith(
                 "examples/org.eclipse.swt.opengl.examples/src/org/eclipse/swt/opengl/examples/");
         boolean eclipseSwtTestSource =
                 value.startsWith("tests/org.eclipse.swt.tests/")
                         && (value.contains("/JUnit Tests/") || value.contains("/ManualTests/"));
+        boolean openJdkClassSource =
+                value.startsWith("src/") && value.contains("/share/classes/");
+        boolean openJdkTestSource = value.startsWith("test/jdk/")
+                || value.startsWith("test/langtools/");
+        // Existing standalone CPULLM Java/JNI proof is outside Maven src/test/java.
+        // Admit this exact first-party path only, never an arbitrary Java bypass.
+        boolean cpullmFacetReleaseTest = value.equals(
+                "cpullm-java/facet-release/tests/FacetExactCoverageChecks.java");
+        // Six reviewed current-fork module-pack owners retain Java AST admission.
+        boolean m3NlpCurrentForkOwner = switch (value) {
+            case "m3/tooling/module-packs/nlp-search/src/jdk.m3.nlp.search/jdk/m3/nlp/search/LuceneSourceFields.java" -> true;
+            case "m3/tooling/module-packs/nlp-search/src/jdk.m3.nlp.search/jdk/m3/nlp/search/SourceDocument.java" -> true;
+            case "m3/tooling/module-packs/nlp-search/src/jdk.m3.nlp.search/jdk/m3/nlp/search/SourceSpans.java" -> true;
+            case "m3/tooling/module-packs/nlp-search/tests/ModelSourceProbe.java" -> true;
+            case "m3/tooling/module-packs/nlp-search/tests/SourceFactsProbe.java" -> true;
+            case "m3/tooling/module-packs/nlp-search/tests/SourceIntegrationProbe.java" -> true;
+            default -> false;
+        };
         if ((!mavenSource && !eclipsePdeSource && !eclipsePdeTestSource && !eclipseNebulaWidgetSource
-                && !eclipseSwtLegacySource && !eclipseSwtTestSource && !eclipseSwtExampleSource)
+                && !eclipseExampleSource && !eclipseSwtLegacySource && !eclipseSwtTestSource && !eclipseSwtExampleSource
+                && !openJdkClassSource && !openJdkTestSource && !cpullmFacetReleaseTest && !luceneCoreAnalysisTest
+                && !m3NlpCurrentForkOwner)
                 || !value.endsWith(".java")
                 || value.startsWith("/")
                 || value.indexOf('\\') >= 0

@@ -1,0 +1,10 @@
+M3 viewport core
+Copyright 2026 Hitesh Soliwal <hsoliwal@gmail.com>
+
+Toolkit-neutral viewport logic (resident window, tree topology and projection,
+diff planner, selection, scroll geometry) copied by recipe from the SWT viewport
+classes of hsoliwal/eclipse.platform.swt 553eefd41d9961d303c41e0e4e181712e64a1e45,
+all authored by Hitesh Soliwal. Authority for Apache-2.0 here:
+m3/docs/viewport-everywhere/RELICENSE_RECORD.md. Exact source blobs and target
+hashes: provenance-viewport-20261018.json. Collection-shaped parts live in
+m3/collections (M3OrderStatisticForest, M3SparseExtents, M3BitLanes, ...).

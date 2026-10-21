@@ -1,0 +1,119 @@
+{
+  "schema": "M3JDK21_SYNEXIA_MEASURED_ROPE_RECEIVER_V1",
+  "copyright": "Copyright 2026 Hitesh Soliwal and contributors",
+  "receivedLicense": "Apache-2.0",
+  "canonicalSource": {
+    "repository": "hsoliwal/com.synexia",
+    "branch": "codex/m3-measured-rope-20261018",
+    "pullRequest": 12395,
+    "commit": "4c063fc42dbd242971575ca755a2bcf14d5e676f",
+    "recipe": "com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe",
+    "declarativeRecipe": "com.synexia.m3.MeasuredRope",
+    "crate": "m3-measured-rope",
+    "fossReuseDecisionRow": "m3.measured-rope.text-measures;m3.measured-rope.avl-join;m3.measured-rope.summary-contract;m3.measured-rope.apple-test-scenarios;m3.measured-rope.fingertree-contract",
+    "donors": [
+      {
+        "path": "synexia-indexstring/src/main/java/com/synexia/indexstring/IndexTextMetrics.java",
+        "blob": "043e68f6265504eb7ea70fd51ecf833299b4e583",
+        "developCommit": "11c94feb18155a53cc213708c353791132edc4a7",
+        "target": "com.m3.precompute.M3RopeMeasures",
+        "mechanics": "combine seam repair: code points and UTF-8 bytes across a split surrogate pair, Java hash h(L)*31^len(R)+h(R); lane-packed node form of com.m3.precompute.M3TextMetrics"
+      },
+      {
+        "path": "src/java.base/share/classes/java/lang/M3StringPool.java#concatBalanced",
+        "blob": "0905414556ad0b698a5b5f835f53d12bc040bc8c",
+        "developCommit": "970a34350ebdf6a3f1c5ff5acc8445d0f3515f55",
+        "target": "com.m3.precompute.M3RopeArena",
+        "mechanics": "AVL height rule for concatenation (rule only; independent arena-lane implementation)"
+      },
+      {
+        "path": "hsoliwal/swift-collections@b905c889ff75059b8ef0bde480fe55948147b1e6 Sources/RopeModule/Rope/Basics/RopeSummary.swift;RopeMetric.swift;RopeElement.swift;Operations/Rope+Find.swift;BigString/Basics/BigString+Summary.swift;BigString/Chunk/BigString+Chunk+Counts.swift",
+        "blob": "6bff9778b900;0d2b620d0558;6fd2e8823505;67a5fe3e4334;09685997e865;3c7b53a20133",
+        "developCommit": "b905c889ff75059b8ef0bde480fe55948147b1e6",
+        "target": "com.m3.precompute.M3RopeMeasure/M3RopeMetric/M3MeasuredRope.seek",
+        "mechanics": "pattern only (Swift, Apache-2.0 WITH Swift-exception): per-node summary monoid and metric find"
+      },
+      {
+        "path": "hsoliwal/swift-collections@b905c889ff75059b8ef0bde480fe55948147b1e6 Tests/RopeModuleTests/TestRope.swift;TestBigString.swift;SampleStrings.swift",
+        "blob": "95bb4b992ad1b0b24c37064057853d7782bb61de;e2135faed7c3e310de052f32f28cc4ee4e2a23bd;563fb8f87adcd3adfab03f6301da7504eb49d648",
+        "developCommit": "b905c889ff75059b8ef0bde480fe55948147b1e6",
+        "target": "com.m3.precompute.M3MeasuredRopeAppleScenarioTest",
+        "mechanics": "scenario only: 72-row APPLE_TEST_MAP (19 PORTED, 37 ADAPTED, 10 NOT_APPLICABLE, 6 NEW); first-party Java tests; sample text not copied"
+      }
+    ],
+    "license": "Apache-2.0 first-party; third-party donors pattern only",
+    "disposition": "ADAPT + TRANSPILE(pattern): new measured-node contract in the precompute port; M3StringTuple/M3StringFacts unchanged; C1 UNREACHABLE (owner imports only java.*)"
+  },
+  "target": {
+    "repository": "hsoliwal/M3jdk21",
+    "base": "970a34350ebdf6a3f1c5ff5acc8445d0f3515f55",
+    "owners": [
+      "com.m3.precompute.M3MeasuredRope",
+      "com.m3.precompute.M3RopeArena",
+      "com.m3.precompute.M3RopeMeasure",
+      "com.m3.precompute.M3RopeMetric",
+      "com.m3.precompute.M3RopeMeasures"
+    ],
+    "publicJdkReplacement": false
+  },
+  "runtimeDependencyOnSynexia": false,
+  "publicJdkReplacement": false,
+  "targets": [
+    {
+      "path": "m3/ports/precompute/src/main/java/com/m3/precompute/M3MeasuredRope.java",
+      "before": "ABSENT",
+      "after": "161d7d7c3652e299a4c1ef7535a690a3afbfdbc27bc3865f5dc45720507559d5",
+      "resource": "00-M3MeasuredRope.java.txt"
+    },
+    {
+      "path": "m3/ports/precompute/src/main/java/com/m3/precompute/M3RopeArena.java",
+      "before": "ABSENT",
+      "after": "59ae1cadaa0924f67c5d9e64f19eff68761ef91d29881063297462aa306b1d77",
+      "resource": "01-M3RopeArena.java.txt"
+    },
+    {
+      "path": "m3/ports/precompute/src/main/java/com/m3/precompute/M3RopeMeasure.java",
+      "before": "ABSENT",
+      "after": "2a5bfb457ab93601350ed848fdac74a28130758241a08d2e87d0b94ccc903768",
+      "resource": "02-M3RopeMeasure.java.txt"
+    },
+    {
+      "path": "m3/ports/precompute/src/main/java/com/m3/precompute/M3RopeMeasures.java",
+      "before": "ABSENT",
+      "after": "2a489d45e8c7c83561ee35553c501cceba6fcd87aa75f9fdb6479f0404113408",
+      "resource": "03-M3RopeMeasures.java.txt"
+    },
+    {
+      "path": "m3/ports/precompute/src/main/java/com/m3/precompute/M3RopeMetric.java",
+      "before": "ABSENT",
+      "after": "4558df4d18f0ec2117490628f58a914e6487ea1bef04d2b8826fb3577e75a90f",
+      "resource": "04-M3RopeMetric.java.txt"
+    },
+    {
+      "path": "m3/ports/precompute/src/test/java/com/m3/precompute/M3MeasuredRopeAppleScenarioTest.java",
+      "before": "ABSENT",
+      "after": "233a6d1d09861b4319e415c175d9ac0695014e7398e12ee4e99b0e040c62a2f1",
+      "resource": "05-M3MeasuredRopeAppleScenarioTest.java.txt"
+    },
+    {
+      "path": "m3/ports/precompute/src/test/java/com/m3/precompute/M3MeasuredRopeTest.java",
+      "before": "ABSENT",
+      "after": "c73bfd0c415ae1457351e99c47c39147d79d57d948ecb4c75ee5e9e891e201a3",
+      "resource": "06-M3MeasuredRopeTest.java.txt"
+    }
+  ],
+  "gates": {
+    "synexiaCrateTest": "PASS_WINDOWS 2/2 mvn -o -B -ntp -f crates/m3-measured-rope/pom.xml test (generate 7 targets, fixed point, foreign-occupant refusal); log sha256 36e1864e286c156bd9b9da4831d413db3830d24e1b69e2b792fffa12a7c00b58",
+    "m3PrecomputeModuleTests": "PASS_WINDOWS mvn -o -B -ntp -f m3/ports/precompute/pom.xml test: 62 run, 0 failures, 0 errors, 1 skipped (M3NativeParityTest, native library absent, pre-existing); M3MeasuredRopeTest 8/8, M3MeasuredRopeAppleScenarioTest 25/25; -Xlint:all -Werror via pom; log sha256 5736767d67e5c3cf1f1626e22ef4314ab6936a1ed34c9943357ef117d5a19dba",
+    "diffCheck": "PASS git diff --cached --check before each commit; no CR bytes",
+    "runtime": "NOT_RUN (no java.lang wiring; no Linux receipt)"
+  },
+  "semanticDecisions": [
+    "per-element and per-node allocation 0: nodes are ids into int/byte/String/long lanes; the rope value is a facade (arena, root id); summaries are fixed-width long slots per measure",
+    "persistent: nodes are never mutated; edits path-copy O(log n) nodes and share the rest; the arena never frees (compaction = rebuild into a new arena); an arena is confined to one thread",
+    "coordinates are UTF-16 code units with int lengths as java.lang.String; leaves are coordinate slices of immutable Strings cut to maxLeaf units at admission",
+    "seek(metric, k) returns the smallest offset whose prefix size exceeds k; for CODE_POINTS seek(k) - 1 is the offset of code point k",
+    "LINES counts CR, LF and CRLF once, also when CR ends one leaf and LF starts the next; WHITESPACE uses Character.isWhitespace per unit (String.strip semantics; no supplementary whitespace exists)",
+    "the DFA measure packs T: Q -> Q for at most 16 states in one long and composes T(uv) = T(v) o T(u); it is the REGEX_PRECOMPUTE_DESIGN 2b element, not a regex compiler"
+  ]
+}

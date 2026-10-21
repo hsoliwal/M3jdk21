@@ -1,0 +1,14 @@
+{
+  "schema": "M3_NAME_MAPPING_FRAGMENT_V1",
+  "note": "Maintenance of the existing compiler-owned source seal. This fragment does not promote any repository-wide String, array, collection, AST, native ABI, or performance gate.",
+  "source_commit": "140c263a90f9803b9c46103c63355a286e0515f0",
+  "target_baseline": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
+  "mappings": [
+    {
+      "source": "compiler-side M3ASTPC reserved owner",
+      "target": "com.sun.tools.javac.m3.M3ASTPC",
+      "status": "existing-owner-source-seal-maintenance",
+      "target_rule": "Keep the original JavacTask, tree identity, event-local projections, UTF-16BE digest contract, counters and exception messages; bound digest staging to 8192 bytes and close failed source capture through the existing abort lifecycle. No parser, AST, LRU, swap, JNI or public API replacement."
+    }
+  ]
+}

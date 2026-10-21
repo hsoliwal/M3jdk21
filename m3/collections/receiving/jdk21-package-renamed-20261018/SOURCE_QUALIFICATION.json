@@ -1,0 +1,68 @@
+{
+  "schema": "m3-jdk21-namespace-source-qualification-v1",
+  "sourceCommit": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
+  "sourcePrefix": "src/java.base/share/classes",
+  "sourceFiles": 59,
+  "retainedPlatformReferences": 28,
+  "targetPackageRoot": "com.m3.collections.jdk.util",
+  "sourceOnlyTree": "4c192cf510fc25a4b8fbea2c7373481b7202494f",
+  "implementationTree": "6955bd77e020f253bee3cfcb753e9df395d9da1d",
+  "javaTree": "8b46beb58a4e2980f02d8f91af7248e408195577",
+  "javaTreeExact": true,
+  "sourceCount": 59,
+  "licenseIncluded": true,
+  "finalRecipe": "Qualified byte recipe; source custody only. Introduced imports bound and removed for exact inverse.",
+  "all59ExactInverseAndHeaderChecks": true,
+  "typedPriorQualification": {
+    "postimages": 52,
+    "bodyInverses": 52,
+    "rawInverses": 38,
+    "parserRefusals": [
+      "src/java.base/share/classes/java/util/Arrays.java",
+      "src/java.base/share/classes/java/util/Collections.java",
+      "src/java.base/share/classes/java/util/Objects.java",
+      "src/java.base/share/classes/java/util/Properties.java",
+      "src/java.base/share/classes/java/util/concurrent/ConcurrentHashMap.java",
+      "src/java.base/share/classes/java/util/jar/Attributes.java",
+      "src/java.base/share/classes/java/util/jar/Manifest.java"
+    ],
+    "finalPostimageTypedQualification": false
+  },
+  "fullReceivingCompile": {
+    "errors": 78,
+    "warnings": 1,
+    "result": "FAIL preserved; internal APIs and package-private closure unresolved",
+    "bypassFlags": false
+  },
+  "finiteHelperCompile": {
+    "sources": [
+      "ArrayPrefixHelpers.java",
+      "ArraysParallelSortHelpers.java",
+      "ComparableTimSort.java",
+      "TimSort.java"
+    ],
+    "classfiles": 13,
+    "result": "Strict JDK21 compile PASS; jdeps no old selected-owner edges",
+    "runtimeBehavior": "Not executed"
+  },
+  "classInitializationRequested": false,
+  "pending": [
+    "Complete receiving compile and dependency closure",
+    "Bootstrap, SharedSecrets, CDS, native, Unsafe and global-state ownership",
+    "Behavioral contracts and full donor tests",
+    "Per-file array/index/offset/mask and no-stored-entry conversion",
+    "Java/JNI ABI, lifetime and runtime evidence"
+  ],
+  "sourceLicense": "GPL-2.0 with original designated Classpath exception headers and original LICENSE preserved",
+  "review": {
+    "result": "PASS: helper exited0; findings[]",
+    "engine": "Codex gpt-5.6-sol/high",
+    "scope": "Transformation recipes, records, ownership, licensing and source custody. All86 bodies separately machine-hashed; no manual all-body/runtime claim.",
+    "target": "a68678bc224343bc1354fcff218aa312fb84d0f7",
+    "reportSHA256": "e73be3776706e11090b278a37bdf81821a610a1d92ec63865ad99d7651267dbd",
+    "commandReceiptSHA256": "fddeabcfe46f21cd8754a007613183296c1d372a85d71fd5189b3e8bd747b252",
+    "elapsedSeconds": 253.265
+  },
+  "metadataLicense": "Apache-2.0",
+  "copyright": "Copyright 2026 Hitesh Soliwal and contributors"
+}

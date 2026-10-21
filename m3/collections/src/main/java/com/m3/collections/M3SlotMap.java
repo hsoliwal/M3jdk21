@@ -1,5 +1,6 @@
 // SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
 // Modified 2026 by Hitesh Soliwal and Contributors to the Synexia Project: Synexia-to-M3 package/type adaptation.
+// Modified 2026 by Hitesh Soliwal and Contributors to the Synexia Project: restore fresh caller-owned entry projections without retained facade storage.
 // SPDX-License-Identifier: Apache-2.0
 package com.m3.collections;
 
@@ -18,7 +19,10 @@ import java.util.function.BiConsumer;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 
-/** Shared JDK semantics over integer slots; internal traversal never constructs entries. */
+/**
+ * Shared JDK semantics over integer slots. Internal operations use slots and arrays;
+ * public entry views alone create fresh, caller-owned live projections.
+ */
 abstract class M3SlotMap<K, V> extends AbstractMap<K, V> {
     abstract int firstSlot();
     abstract int nextSlot(int slot);
@@ -33,6 +37,20 @@ abstract class M3SlotMap<K, V> extends AbstractMap<K, V> {
     final void check(int expected) {
         if (revision() != expected) { throw new ConcurrentModificationException(); }
     }
+    /**
+     * Compatibility hook retained for existing subclasses. It is invoked once for each
+     * live projection; its return value never permits owner retention of the entry.
+     */
+    protected boolean cacheEntryFacades() { return true; }
+    final Entry<K, V> entryFacade(K key) {
+        // Preserve subclass callback effects before constructing the caller's projection.
+        cacheEntryFacades();
+        return new LiveEntry(key);
+    }
+    /** Compatibility invalidation hook; there is no retained projection state. */
+    final void forgetEntryFacade(K key) { }
+    /** Compatibility invalidation hook; there is no retained projection state. */
+    final void clearEntryFacades() { }
     @Override public boolean containsKey(Object key) { return findSlot(key) >= 0; }
     @Override public V get(Object key) { return getOrDefault(key, null); }
     @Override public V getOrDefault(Object key, V fallback) {
@@ -55,8 +73,10 @@ abstract class M3SlotMap<K, V> extends AbstractMap<K, V> {
         eraseAt(s); return true;
     }
     @Override public void putAll(Map<? extends K, ? extends V> source) {
-        if (source != this) { source.forEach(this::put); }
+        if (source != this && !putAllSorted(source)) { source.forEach(this::put); }
     }
+    /** Optional internal bulk path; ordinary slot maps retain per-mapping insertion. */
+    boolean putAllSorted(Map<? extends K, ? extends V> source) { return false; }
     @Override public V putIfAbsent(K key, V value) {
         int s = findSlot(key);
         if (s < 0) { return put(key, value); }
@@ -189,7 +209,7 @@ abstract class M3SlotMap<K, V> extends AbstractMap<K, V> {
             @Override @SuppressWarnings("unchecked") public T next() {
                 if (!hasNext()) { throw new NoSuchElementException(); }
                 last = cursor; lastKey = heldKey; cursor = nextSlot(cursor); prepared = false;
-                Object result = kind == 0 ? heldKey : kind == 1 ? valueAt(last) : new LiveEntry(heldKey);
+                Object result = kind == 0 ? heldKey : kind == 1 ? valueAt(last) : entryFacade(heldKey);
                 heldKey = null; return (T) result;
             }
             @Override public void remove() {

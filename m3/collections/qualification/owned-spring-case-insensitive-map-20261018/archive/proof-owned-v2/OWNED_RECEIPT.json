@@ -1,0 +1,67 @@
+{
+  "status": "PASS_REQUIRED_PARTITIONS_AND_SURFACE",
+  "version": "v2",
+  "ownerSHA256": "450e3f70be37f0fa0fcee7edd4adc8a2eea4a05a40646fb3e5c531e4ee8447ca",
+  "ownerBytes": 31224,
+  "strictJDKOnlyCompile": true,
+  "hookBinding": {
+    "templateSHA256": "ca6371a1e2816a63fbdbb8d76db72791ccac02532ce056cabb4bab39d610e63e",
+    "boundSHA256": "abbdbac75cb7b7b890d816675c09b75511083b5453f9706e51d621e4a937f7bd",
+    "qualifiedSubstitutions": 1,
+    "simpleSubstitutions": 4,
+    "class": "SpringCaseInsensitiveMapHookCases"
+  },
+  "summary": {
+    "common": {
+      "status": "COMMON_CLEAN_LAWS_PASSED_OBSERVATIONS_RECORDED",
+      "ordinaryOperations": 4096,
+      "commonChecks": 196782,
+      "selectedObservations": 246,
+      "commonSHA256": "49c3783d3186b12cc569c4615f70b99d7280c6f4d0035a3cbecb49b6a35f6980",
+      "observationSHA256": "8263f68d9a7c2912c875787a56888f2c098fc66b2197949698f9cb4b64f15a24",
+      "scope": "prewritten finite public protocol; baseline expectations and candidate comparison separate; no universal ghost law or storage audit"
+    },
+    "requiredPolicyRows": 241,
+    "requiredEntryRows": 8,
+    "requiredPolicySHA256": "90f92584b05949d318ba30c7ea859c2242bd13758ae0df984012b39590ead25c",
+    "requiredEntrySHA256": "3058f1d66b6166822d9d22f31250940d96ef0c5264eabc65a51e54278a7cfb7f",
+    "compatibilityRows": 7,
+    "compatibilitySHA256": "e51c5a479726113e895bc0d1e10bdd6ddd914629326426f74cbc8c155df5edbd"
+  },
+  "differences": [],
+  "commands": [
+    {
+      "label": "strictcompile",
+      "returncode": 0
+    },
+    {
+      "label": "full-protocol",
+      "returncode": 0
+    },
+    {
+      "label": "full-surface",
+      "returncode": 0
+    }
+  ],
+  "storageBefore": {
+    "root": "S:\\codex-work\\m3-collections-next-20261018",
+    "free_bytes": 26181906432,
+    "logical_bytes": 44937596,
+    "cap_bytes": 536870912,
+    "reserve_bytes": 8589934592,
+    "verified_child_temp": "S:\\codex-work\\m3-collections-next-20261018\\temp\\",
+    "C_build_lane": "HELD",
+    "K_temp_lane": "UNAVAILABLE"
+  },
+  "storageAfter": {
+    "root": "S:\\codex-work\\m3-collections-next-20261018",
+    "free_bytes": 26180714496,
+    "logical_bytes": 45794753,
+    "cap_bytes": 536870912,
+    "reserve_bytes": 8589934592,
+    "verified_child_temp": "S:\\codex-work\\m3-collections-next-20261018\\temp\\",
+    "C_build_lane": "HELD",
+    "K_temp_lane": "UNAVAILABLE"
+  },
+  "scope": "One complete owner revision. Required partitions compared exactly; compatibility rows recorded without waiver/parity. No full-library/native/publication admission."
+}

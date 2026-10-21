@@ -44,6 +44,18 @@ public final class M3SignalOrder {
         return order(signals, masks, requiredMask, excludedMask, ascending, backend);
     }
 
+    /**
+     * Full-width physical-slot state-mask selection before stable primitive ordering.
+     * Bits 0..31 are all significant, including the sign bit. The state lane is
+     * caller-owned and never truncated to bytes or modified. JNI, when requested,
+     * receives only the selected primitive key/row lanes, not Java objects.
+     */
+    public static M3SignalOrder filtered32(double[] signals, int[] states,
+            int requiredMask, int excludedMask, boolean ascending, Backend backend) {
+        Objects.requireNonNull(states, "states");
+        return orderCore(signals, null, states, requiredMask, excludedMask, ascending, backend);
+    }
+
     /** A custom domain projection is evaluated once per object before the primitive sort. */
     public static <T> M3SignalOrder ascending(T[] values,
             ToDoubleFunction<? super T> projection) {
@@ -68,27 +80,38 @@ public final class M3SignalOrder {
 
     private static M3SignalOrder order(double[] signals, byte[] masks,
             int requiredMask, int excludedMask, boolean ascending, Backend backend) {
+        return orderCore(signals, masks, null, requiredMask, excludedMask, ascending, backend);
+    }
+
+    /** One scan/count and one fill for either metadata-width variant. */
+    private static M3SignalOrder orderCore(double[] signals, byte[] masks, int[] states32,
+            int requiredMask, int excludedMask, boolean ascending, Backend backend) {
         Objects.requireNonNull(signals, "signals");
         Objects.requireNonNull(backend, "backend");
-        if (((requiredMask | excludedMask) & ~0xff) != 0 || requiredMask < 0 || excludedMask < 0) {
-            throw new IllegalArgumentException("mask must be within 0..255");
-        }
-        if (masks != null && masks.length != signals.length) {
-            throw new IllegalArgumentException("mask length must match signal length");
+        if (states32 == null) {
+            if (((requiredMask | excludedMask) & ~0xff) != 0
+                    || requiredMask < 0 || excludedMask < 0) {
+                throw new IllegalArgumentException("mask must be within 0..255");
+            }
+            if (masks != null && masks.length != signals.length) {
+                throw new IllegalArgumentException("mask length must match signal length");
+            }
+        } else if (states32.length != signals.length) {
+            throw new IllegalArgumentException("state length must match signal length");
         }
         if (backend == Backend.NATIVE_REQUIRED && !M3SignalOrderNative.available()) {
             throw new UnsatisfiedLinkError("m3signalorder JNI is unavailable");
         }
         int count = 0;
         for (int i = 0; i < signals.length; i++) {
-            if (selected(masks, i, requiredMask, excludedMask)) count++;
+            if (selected(masks, states32, i, requiredMask, excludedMask)) count++;
         }
         if (count == 0) return new M3SignalOrder(EMPTY, 0, 0);
         int[] rows = new int[count];
         long[] keys = new long[count];
         int offset = 0;
         for (int i = 0; i < signals.length; i++) {
-            if (selected(masks, i, requiredMask, excludedMask)) {
+            if (selected(masks, states32, i, requiredMask, excludedMask)) {
                 rows[offset] = i;
                 long key = sortableKey(signals[i]);
                 keys[offset++] = ascending ? key : ~key;
@@ -99,7 +122,12 @@ public final class M3SignalOrder {
         return new M3SignalOrder(rows, 0, rows.length);
     }
 
-    private static boolean selected(byte[] masks, int index, int required, int excluded) {
+    private static boolean selected(byte[] masks, int[] states32,
+            int index, int required, int excluded) {
+        if (states32 != null) {
+            int state = states32[index];
+            return (state & required) == required && (state & excluded) == 0;
+        }
         if (masks == null) return true;
         int state = Byte.toUnsignedInt(masks[index]);
         return (state & required) == required && (state & excluded) == 0;

@@ -1,3 +1,4 @@
+# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
 # SPDX-License-Identifier: Apache-2.0
 name: M3 TQ counterpart
 on:
@@ -7,6 +8,8 @@ on:
       - '.m3/openrewrite-recipes/**'
       - 'm3/tooling/tq/**'
       - 'm3/tooling/tq-sync/**'
+      - 'm3/synexia-import/pure-int-recipe-custody/install.sh'
+      - 'm3/synexia-import/pure-int-recipe-custody/test_source_bootstrap.py'
       - 'm3/tooling/lane28/**'
       - 'm3/tooling/migration-recipes/**'
       - 'm3/migration/**'
@@ -45,12 +48,18 @@ jobs:
           python3 -m venv "$RUNNER_TEMP/tq-python"
           "$RUNNER_TEMP/tq-python/bin/python" -m pip install -r m3/migration/requirements.txt
           echo "$RUNNER_TEMP/tq-python/bin" >> "$GITHUB_PATH"
+      - name: Source-built TQ Maven dependencies
+        shell: bash
+        run: |
+          bash -n m3/synexia-import/pure-int-recipe-custody/install.sh
+          python3 m3/synexia-import/pure-int-recipe-custody/test_source_bootstrap.py
+          bash m3/synexia-import/pure-int-recipe-custody/install.sh "$GITHUB_WORKSPACE" --dependencies-only
+      - name: Recipe, UTF-16, mapped-owner, JNI and compiled-kernel gates
+        run: mvn -B -ntp -f m3/tooling/tq/pom.xml verify
       - name: TQ successor recipe and custody
         run: |
           mvn -B -ntp -f m3/tooling/tq-sync/pom.xml verify
           python3 m3/tooling/tq-sync/verify-plan.py
-      - name: Recipe, UTF-16, mapped-owner, JNI and compiled-kernel gates
-        run: mvn -B -ntp -f m3/tooling/tq/pom.xml verify
       - name: Preserve release evidence
         run: |
           mkdir -p m3/tooling/tq/target/release

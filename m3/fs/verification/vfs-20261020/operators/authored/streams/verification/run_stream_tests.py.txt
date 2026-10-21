@@ -1,0 +1,48 @@
+#!/usr/bin/env python3
+# Copyright 2026 Hitesh Soliwal and contributors. SPDX-License-Identifier: Apache-2.0
+from pathlib import Path
+import argparse
+import os
+import shutil
+import subprocess
+import sys
+
+p = argparse.ArgumentParser()
+p.add_argument('--baseline', action='store_true')
+p.add_argument('--classes', type=Path)
+a = p.parse_args()
+b = Path(__file__).resolve().parents[3]
+owned = b / 'authored/streams'
+java = Path(os.environ.get('M3FS_JAVA_HOME', str(b/'toolchain/jdk21'))) / 'bin'
+coords = [('org/junit/jupiter/junit-jupiter-api','5.10.2'),('org/junit/jupiter/junit-jupiter-engine','5.10.2'),('org/junit/platform/junit-platform-commons','1.10.2'),('org/junit/platform/junit-platform-engine','1.10.2'),('org/junit/platform/junit-platform-launcher','1.10.2'),('org/opentest4j/opentest4j','1.3.0'),('org/apiguardian/apiguardian-api','1.1.2')]
+deps = [b/'m2'/path/version/f'{Path(path).name}-{version}.jar' for path,version in coords]
+for dep in deps:
+    if not dep.is_file(): sys.exit(f'Missing dependency: {dep}')
+mode = 'baseline' if a.baseline else 'generated' if a.classes else 'authored'
+out = owned/'verification'/f'{mode}-classes'
+if out.exists(): shutil.rmtree(out)
+out.mkdir(parents=True,exist_ok=True)
+classpath = os.pathsep.join(map(str,deps))
+support = None
+if a.classes:
+    classpath += os.pathsep + str(a.classes.resolve())
+else:
+    sources = [b/'receiver/m3/fs/src/main/java/com/m3/fs'/name for name in ['M3FsProgress.java','M3ContentId.java']]
+    compile_classpath = []
+    if not a.baseline:
+        support = b/'qualification-final2/classes'
+        if not support.is_dir(): sys.exit(f'Missing generated dependency classes: {support}')
+        compile_classpath = ['-cp',str(support)]
+        sources += sorted((owned/'m3/fs/src/main/java').rglob('*.java'))
+        sources += [b/'authored/facade/m3/fs/src/main/java/com/m3/fs/MFileCapture.java']
+    subprocess.run([str(java/'javac'),'--release','21','-Xlint:all','-Werror',*compile_classpath,'-d',str(out),*map(str,sources)],check=True)
+classpath += os.pathsep + str(out)
+if support: classpath += os.pathsep + str(support)
+launcher = b/'authored/facade/verification/FacadeTestLauncher.java'
+tests = sorted((owned/'m3/fs/src/test/java').rglob('*.java'))
+log = owned/'verification'/f'{mode}.log'
+compiled = subprocess.run([str(java/'javac'),'--release','21','-Xlint:all','-Werror','-cp',classpath,'-d',str(out),*map(str,tests),str(launcher)],text=True,stdout=subprocess.PIPE,stderr=subprocess.STDOUT)
+if compiled.returncode:
+    log.write_text(compiled.stdout);print(compiled.stdout);sys.exit(compiled.returncode)
+result = subprocess.run([str(java/'java'),'-cp',classpath,'FacadeTestLauncher','com.m3.fs.MFileStreamsTest'],text=True,stdout=subprocess.PIPE,stderr=subprocess.STDOUT)
+log.write_text(result.stdout);print(result.stdout);sys.exit(result.returncode)

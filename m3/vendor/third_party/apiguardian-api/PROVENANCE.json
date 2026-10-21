@@ -54,7 +54,7 @@
   "group": "org.apiguardian",
   "kind": "MODULE",
   "license": "The Apache License, Version 2.0",
-  "license_file": "LICENSE",
+  "license_file": "src/main/resources/META-INF/LICENSE",
   "modifications": "No upstream source changes; Maven descriptor and provenance files are M3jdk21 composition (Apache-2.0) and do not relicense the donor.",
   "module_descriptors": "reproduced (see src/main/descriptor)",
   "multi_release_overlays": {

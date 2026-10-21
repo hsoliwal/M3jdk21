@@ -202,9 +202,9 @@ final class M3OriginalCliProviderRecipeTest {
 
     @Test void allMutableStatesBothOrdersAndFixedPoint() {
         assertEquals(6, mutableRows().size(), "six reviewed mutable owners");
-        assertEquals(5, ROWS.stream().filter(Row::added).count(), "five ADD owners");
-        assertEquals(1, ROWS.stream().filter(row -> row.mutable() && !row.added()).count(),
-                "one CHANGE owner");
+        assertEquals(4, ROWS.stream().filter(Row::added).count(), "four ADD owners");
+        assertEquals(2, ROWS.stream().filter(row -> row.mutable() && !row.added()).count(),
+                "two CHANGE owners");
         long states = 1L << mutableRows().size();
         assertEquals(64, states);
         for (long mask = 0; mask < states; mask++) {
@@ -477,6 +477,262 @@ final class M3OriginalCliProviderRecipeTest {
         } finally {
             removeOwnedFixture(base);
         }
+    }
+
+
+    private static final String FROZEN_PRE_MANIFEST_SHA256 =
+            "11d69c05d4e4dd0ef27c8a2195827c62b5dd48a49bef34943f4c6a11fbc4899c";
+    private static final String PRE_MAP_SHA256 =
+            "4247c5648cf6a5599f8840a7171f147f5c343bf9b97e7a386eb7f351f978c4f3";
+
+    private static Map<String, String> frozenPreImages() {
+        String manifest = resource(RES + "baseline-pre.tsv");
+        assertEquals(FROZEN_PRE_MANIFEST_SHA256, sha(manifest), "frozen PRE manifest custody");
+        Map<String, String> result = new TreeMap<>();
+        String previous = "";
+        long bytes = 0;
+        for (String line : manifest.lines().toList()) {
+            assertFalse(line.isBlank(), "frozen PRE does not admit undeclared blank rows");
+            String[] cells = line.split("\t", -1);
+            assertEquals(3, cells.length, "frozen PRE manifest width");
+            assertTrue(previous.compareTo(cells[0]) < 0, "frozen PRE manifest order");
+            previous = cells[0];
+            assertTrue(M3Jdk21HashPinnedTextSnapshotRecipe.jdkTextPath(cells[0]));
+            assertTrue(cells[1].matches("[0-9a-f]{64}"), "frozen PRE hash");
+            assertTrue(cells[2].matches("(?:before-)?after-[0-9]{3}[.]txt"),
+                    "frozen PRE resource name");
+            String text = resource(RES + cells[2]);
+            assertEquals(cells[1], sha(text), "frozen PRE resource: " + cells[0]);
+            assertNull(result.put(cells[0], text), "duplicate frozen PRE path");
+            bytes += text.getBytes(StandardCharsets.UTF_8).length;
+        }
+        assertEquals(55, result.size(), "independent frozen PRE file count");
+        assertEquals(795_620L, bytes, "independent frozen PRE bytes");
+        assertEquals(PRE_MAP_SHA256, sha(result.get("m3/docs/name-mapping.json")));
+        for (String excluded : List.of(
+                ".github/workflows/m3-original-mapping-provider-qualification.yml",
+                "m3/migration/provider/python312-linux-x86_64/bootstrap.py",
+                "m3/migration/provider/python312-linux-x86_64/previous-name-mapping.json",
+                "m3/migration/provider/python312-linux-x86_64/test_bootstrap.py",
+                "m3/migration/provider/python312-linux-x86_64/wheels.lock.json")) {
+            assertFalse(result.containsKey(excluded), "not part of frozen PRE: " + excluded);
+        }
+        return Collections.unmodifiableMap(result);
+    }
+
+    private static Path declaredRoot(String property) {
+        String value = System.getProperty(property);
+        assertNotNull(value, "explicit owned path required: " + property);
+        assertFalse(value.isBlank(), "empty owned path: " + property);
+        Path root = Path.of(value);
+        assertTrue(root.isAbsolute() && root.equals(root.normalize()),
+                "absolute normalized owned path required: " + property);
+        rejectSymlinks(root);
+        return root;
+    }
+
+    private static void frozenPlacement(Path root, Path sdk, Path output, Path build) {
+        for (Path path : List.of(root, sdk, output, build)) {
+            assertTrue(path.isAbsolute() && path.equals(path.normalize()));
+            rejectSymlinks(path);
+        }
+        assertTrue(Files.isDirectory(sdk, LinkOption.NOFOLLOW_LINKS), "recipe SDK missing");
+        assertTrue(Files.isDirectory(build, LinkOption.NOFOLLOW_LINKS), "owned build root missing");
+        for (Path protectedRoot : List.of(sdk, output)) {
+            assertFalse(root.startsWith(protectedRoot) || protectedRoot.startsWith(root),
+                    "frozen PRE overlaps protected root");
+        }
+        assertFalse(build.startsWith(root), "frozen PRE may not contain the Maven build root");
+        assertTrue(Files.isDirectory(root.getParent(), LinkOption.NOFOLLOW_LINKS),
+                "owned frozen PRE parent missing");
+    }
+
+    private static void checkFrozenTarget(Path root, String name, String expected)
+            throws IOException {
+        Path target = root.resolve(name).normalize();
+        rejectSymlinks(target);
+        if (Files.exists(target, LinkOption.NOFOLLOW_LINKS)) {
+            assertTrue(Files.isRegularFile(target, LinkOption.NOFOLLOW_LINKS),
+                    "nonregular frozen PRE target: " + name);
+            assertEquals((long) expected.getBytes(StandardCharsets.UTF_8).length,
+                    Files.size(target), "frozen PRE byte count: " + name);
+        }
+        checkTarget(root, name, expected);
+    }
+
+    private static void checkFrozenInventory(Path root, Map<String, String> frozen,
+            boolean complete) throws IOException {
+        rejectSymlinks(root);
+        if (!Files.exists(root, LinkOption.NOFOLLOW_LINKS)) {
+            assertFalse(complete, "frozen PRE root missing");
+            return;
+        }
+        assertTrue(Files.isDirectory(root, LinkOption.NOFOLLOW_LINKS),
+                "frozen PRE root is not a directory");
+        Set<String> observed = new TreeSet<>();
+        try (var paths = Files.walk(root)) {
+            for (Path item : paths.toList()) {
+                rejectSymlinks(item);
+                if (item.equals(root)) continue;
+                String name = root.relativize(item).toString().replace('\\', '/');
+                if (Files.isDirectory(item, LinkOption.NOFOLLOW_LINKS)) {
+                    assertTrue(frozen.keySet().stream().anyMatch(path -> path.startsWith(name + "/")),
+                            "foreign frozen PRE directory: " + name);
+                    continue;
+                }
+                assertTrue(frozen.containsKey(name), "foreign frozen PRE file: " + name);
+                assertTrue(observed.add(name), "duplicate frozen PRE file");
+                checkFrozenTarget(root, name, frozen.get(name));
+            }
+        }
+        if (complete) assertEquals(frozen.keySet(), observed, "closed frozen PRE inventory");
+    }
+
+    private static void deliverFrozenPre(Path root, Map<String, String> candidate,
+            Map<String, String> frozen) throws IOException {
+        assertEquals(frozen, candidate, "only the independently pinned PRE may be delivered");
+        checkFrozenInventory(root, frozen, false);
+        // Preflight every declared target before creating the root or any missing file.
+        for (var entry : frozen.entrySet()) {
+            checkFrozenTarget(root, entry.getKey(), entry.getValue());
+        }
+        if (!Files.exists(root, LinkOption.NOFOLLOW_LINKS)) Files.createDirectory(root);
+        for (var entry : frozen.entrySet()) {
+            Path target = root.resolve(entry.getKey());
+            if (!Files.exists(target, LinkOption.NOFOLLOW_LINKS)) {
+                Files.createDirectories(target.getParent());
+                checkFrozenTarget(root, entry.getKey(), entry.getValue());
+                Files.writeString(target, entry.getValue(), StandardCharsets.UTF_8,
+                        StandardOpenOption.CREATE_NEW);
+            }
+        }
+        checkFrozenInventory(root, frozen, true);
+    }
+
+    private static void assertEmptyDirectory(Path root) throws IOException {
+        try (var paths = Files.list(root)) {
+            assertEquals(0L, paths.count(), "refusal wrote an earlier target");
+        }
+    }
+
+    @Test void frozenPreBaselineRemainsIndependentOfInstalledPost() throws Exception {
+        Map<String, String> frozen = frozenPreImages();
+        Path sdk = declaredRoot("m3.recipe.root");
+        Path output = declaredRoot("m3.output.root");
+        Path build = declaredRoot("m3.build.root");
+        Path baseline = declaredRoot("m3.baseline.root");
+        frozenPlacement(baseline, sdk, output, build);
+        checkFrozenInventory(baseline, frozen, false);
+        Map<String, String> installed = assertReplay(images(), true);
+        assertNotEquals(frozen.get("m3/docs/name-mapping.json"),
+                installed.get("m3/docs/name-mapping.json"), "PRE cannot be derived from installed POST");
+        Path base = temporaryBase();
+        try {
+            Path post = base.resolve("installed-post");
+            deliver(post, installed);
+            assertThrows(AssertionError.class, () -> checkFrozenInventory(post, frozen, true));
+
+            Path substitution = Files.createDirectory(base.resolve("post-substitution"));
+            assertThrows(AssertionError.class,
+                    () -> deliverFrozenPre(substitution, installed, frozen));
+            assertEmptyDirectory(substitution);
+            Map<String, String> postMapOnly = new TreeMap<>(frozen);
+            postMapOnly.put("m3/docs/name-mapping.json",
+                    installed.get("m3/docs/name-mapping.json"));
+            assertEquals(55, postMapOnly.size());
+            assertThrows(AssertionError.class,
+                    () -> deliverFrozenPre(substitution, postMapOnly, frozen));
+            assertEmptyDirectory(substitution);
+
+            Path independent = base.resolve("independent-pre");
+            deliverFrozenPre(independent, frozen, frozen);
+            checkFrozenInventory(independent, frozen, true);
+            deliverFrozenPre(independent, frozen, frozen);
+            assertEquals(installed, images(), "installed POST was not changed by PRE materialization");
+
+            String first = frozen.keySet().iterator().next();
+            String last = frozen.keySet().stream().reduce((a, b) -> b).orElseThrow();
+            Path missing = independent.resolve(first);
+            Files.delete(missing);
+            assertThrows(AssertionError.class,
+                    () -> checkFrozenInventory(independent, frozen, true));
+            Files.writeString(missing, frozen.get(first), StandardCharsets.UTF_8,
+                    StandardOpenOption.CREATE_NEW);
+            checkFrozenInventory(independent, frozen, true);
+
+            Path foreign = independent.resolve("foreign-unlisted.txt");
+            Files.writeString(foreign, "foreign", StandardCharsets.UTF_8,
+                    StandardOpenOption.CREATE_NEW);
+            assertThrows(AssertionError.class,
+                    () -> checkFrozenInventory(independent, frozen, true));
+            Files.delete(foreign);
+            checkFrozenInventory(independent, frozen, true);
+
+            Path mutated = independent.resolve(last);
+            String originalLast = frozen.get(last);
+            String mutation = (originalLast.charAt(0) == '#' ? "!" : "#")
+                    + originalLast.substring(1);
+            assertEquals(originalLast.getBytes(StandardCharsets.UTF_8).length,
+                    mutation.getBytes(StandardCharsets.UTF_8).length,
+                    "same-byte-count mutation must reach exact content admission");
+            Files.writeString(mutated, mutation, StandardCharsets.UTF_8,
+                    StandardOpenOption.TRUNCATE_EXISTING);
+            assertThrows(AssertionError.class,
+                    () -> checkFrozenInventory(independent, frozen, true));
+            assertThrows(AssertionError.class,
+                    () -> deliverFrozenPre(independent, frozen, frozen));
+            Files.writeString(mutated, frozen.get(last), StandardCharsets.UTF_8,
+                    StandardOpenOption.TRUNCATE_EXISTING);
+            checkFrozenInventory(independent, frozen, true);
+
+            Path late = Files.createDirectory(base.resolve("late-occupied"));
+            Path occupied = late.resolve(last);
+            Files.createDirectories(occupied.getParent());
+            Files.writeString(occupied, "late foreign target", StandardCharsets.UTF_8,
+                    StandardOpenOption.CREATE_NEW);
+            assertThrows(AssertionError.class, () -> deliverFrozenPre(late, frozen, frozen));
+            assertNoEarlierWrites(late, last);
+            assertEquals("late foreign target", Files.readString(occupied, StandardCharsets.UTF_8));
+
+            Path outside = Files.createDirectory(base.resolve("outside"));
+            Path child = Files.createDirectory(base.resolve("child-link"));
+            Files.createSymbolicLink(child.resolve(Path.of(first).getName(0)), outside);
+            assertThrows(AssertionError.class, () -> deliverFrozenPre(child, frozen, frozen));
+            assertEmptyDirectory(outside);
+
+            Path leafRoot = Files.createDirectory(base.resolve("leaf-link"));
+            Path leaf = leafRoot.resolve(first);
+            Files.createDirectories(leaf.getParent());
+            Files.createSymbolicLink(leaf, outside);
+            assertThrows(AssertionError.class, () -> deliverFrozenPre(leafRoot, frozen, frozen));
+            assertNoEarlierWrites(leafRoot, first);
+            assertEmptyDirectory(outside);
+
+            Path rootLink = base.resolve("root-link");
+            Files.createSymbolicLink(rootLink, outside);
+            assertThrows(AssertionError.class, () -> deliverFrozenPre(rootLink, frozen, frozen));
+            assertEmptyDirectory(outside);
+
+            for (Path forbidden : List.of(sdk, sdk.resolve("overlap"), sdk.getParent(),
+                    output, output.resolve("overlap"), output.getParent(), build)) {
+                assertThrows(AssertionError.class,
+                        () -> frozenPlacement(forbidden, sdk, output, build));
+            }
+            checkFrozenInventory(independent, frozen, true);
+            checkOverlayInventory(post);
+            for (var entry : installed.entrySet()) {
+                assertEquals(entry.getValue(),
+                        Files.readString(post.resolve(entry.getKey()), StandardCharsets.UTF_8),
+                        "installed POST changed during PRE negative controls");
+            }
+        } finally {
+            removeOwnedFixture(base);
+        }
+        // Do not export until the independent fixture and every refusal have qualified.
+        deliverFrozenPre(baseline, frozen, frozen);
+        checkFrozenInventory(baseline, frozen, true);
+        System.out.println("M3_FROZEN_PRE_BASELINE_EXPORTED files=55 bytes=795620"
+                + " independentOfInstalledPost=true");
     }
 
     @Test void currentMappingReconciliationPreservesNewFieldsAndReviewedMigration()

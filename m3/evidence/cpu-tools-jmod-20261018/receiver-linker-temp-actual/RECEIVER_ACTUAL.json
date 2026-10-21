@@ -1,0 +1,90 @@
+{
+  "schema": "M3_CPU_ACTUAL_RECEIVER_V1",
+  "status": "PASS",
+  "dataset": "linker-temp",
+  "parent_dataset": "native-link",
+  "target_baseline": "f29b0afe7ad253cc0562bc8dfdd48fc1acec710e",
+  "targets": 4,
+  "new_files": 0,
+  "existing_replacements": 4,
+  "final_union_targets": 61,
+  "cases": [
+    {
+      "case": "check",
+      "argv": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "-B",
+        "/dev/shm/m3-cpu-tools-f4826e049195-workspace/com.synexia/synexia-openrewrite-recipes/recipes/m3-cpu-tools-jmod-20261018/receive.py",
+        "--dataset",
+        "linker-temp",
+        "--recipe-owner",
+        "/dev/shm/m3-cpu-tools-f4826e049195-workspace/com.synexia/synexia-openrewrite-recipes",
+        "--target",
+        "/dev/shm/m3-cpu-tools-f4826e049195-workspace/M3jdk21",
+        "--check"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.139,
+      "result": {
+        "actual_sdk_results": true,
+        "changes": 4,
+        "dataset": "linker-temp",
+        "mode": "check",
+        "targets": 4
+      },
+      "no_write_verified": true
+    },
+    {
+      "case": "apply",
+      "argv": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "-B",
+        "/dev/shm/m3-cpu-tools-f4826e049195-workspace/com.synexia/synexia-openrewrite-recipes/recipes/m3-cpu-tools-jmod-20261018/receive.py",
+        "--dataset",
+        "linker-temp",
+        "--recipe-owner",
+        "/dev/shm/m3-cpu-tools-f4826e049195-workspace/com.synexia/synexia-openrewrite-recipes",
+        "--target",
+        "/dev/shm/m3-cpu-tools-f4826e049195-workspace/M3jdk21"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.118,
+      "result": {
+        "actual_sdk_results": true,
+        "changes": 4,
+        "dataset": "linker-temp",
+        "mode": "apply",
+        "targets": 4
+      },
+      "no_write_verified": false
+    },
+    {
+      "case": "fixed-point",
+      "argv": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "-B",
+        "/dev/shm/m3-cpu-tools-f4826e049195-workspace/com.synexia/synexia-openrewrite-recipes/recipes/m3-cpu-tools-jmod-20261018/receive.py",
+        "--dataset",
+        "linker-temp",
+        "--recipe-owner",
+        "/dev/shm/m3-cpu-tools-f4826e049195-workspace/com.synexia/synexia-openrewrite-recipes",
+        "--target",
+        "/dev/shm/m3-cpu-tools-f4826e049195-workspace/M3jdk21"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.097,
+      "result": {
+        "actual_sdk_results": true,
+        "changes": 0,
+        "dataset": "linker-temp",
+        "mode": "apply",
+        "targets": 4
+      },
+      "no_write_verified": true
+    }
+  ],
+  "sdk_results_sha256": "d11405c8f862cd5858db2ec5477b4a048a54195ddcce3930e5ccb0b66a5d8c13",
+  "parent_sdk_results_sha256": "a9507f0949209eb663773a5049a7a2c10dc3898c383c0ec0ac627e523494525a",
+  "exact_sdk_postimage_readback": "PASS_ALL_61_FINAL_FILES",
+  "fixed_point_byte_mode_mtime_identity": "PASS"
+}
