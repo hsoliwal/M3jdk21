@@ -675,6 +675,8 @@ public final class CollectionViews {
         @Override
         public boolean tryAdvance(Consumer<? super E> consumer) {
             Objects.requireNonNull(consumer, "action");
+            Consumer<? super E> enclosingAction = action;
+            boolean enclosingDelivered = delivered;
             action = consumer;
             delivered = false;
             try {
@@ -683,7 +685,8 @@ public final class CollectionViews {
                 }
                 return delivered;
             } finally {
-                action = null;
+                action = enclosingAction;
+                delivered = enclosingDelivered;
             }
         }
 
