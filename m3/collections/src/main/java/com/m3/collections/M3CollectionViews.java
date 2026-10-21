@@ -289,7 +289,13 @@ public final class M3CollectionViews {
 
         @Override
         public boolean isEmpty() {
-            return !iterator().hasNext();
+            // The original selected(...).hasNext() scans this same owner cursor.
+            // Avoid materializing the temporary filtering iterator for one terminal query.
+            Iterator<E> cursor = backing.iterator();
+            while (cursor.hasNext()) {
+                if (visible(cursor.next())) return false;
+            }
+            return true;
         }
 
         @Override
