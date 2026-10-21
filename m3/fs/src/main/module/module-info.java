@@ -6,6 +6,7 @@
  */
 module jdk.m3fs {
     requires java.xml;
+    requires com.m3.file;
     requires org.apache.commons.io;
     requires org.apache.commons.lang3;
     // Log and TarArchiveEntry occur in exported public/protected provider SPI signatures.
