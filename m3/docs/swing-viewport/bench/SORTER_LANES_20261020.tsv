@@ -1,0 +1,154 @@
+# DeltaBench sorter 2026-10-20 on S:, JDK 21.0.9 with the patched java.desktop (stock = property off), headless, -XX:+UseSerialGC -Xmx2500m, n = 10^5 and 10^6 rows of DefaultTableModel (String, Integer, Boolean), TableRowSorter; median of 7 runs; _alloc rows = bytes the EDT allocated per run (ThreadMXBean); two rounds; machine shared
+case	impl	metric	value	unit	note
+# 2026-10-20T07:36:25+05:30 sorter n=100000 stock round 1 headroom_kb=12644008
+sorter	stock-100000	sort_descending_int	16.445	ms p50	setSortKeys on column b (Integer), alternating order: sortExistingData; min 13.214 max 36.629
+sorter	stock-100000	sort_descending_int_alloc	0.402	MB p50	bytes the thread allocated per run
+sorter	stock-100000	sort_from_unsorted	16.111	ms p50	setSortKeys(null) then one key: drop the lanes, build and sort them; min 14.435 max 25.284
+sorter	stock-100000	sort_from_unsorted_alloc	3.602	MB p50	bytes the thread allocated per run
+sorter	stock-100000	insert_one_row	1.820	ms p50	DefaultTableModel.insertRow at the middle: rowsInserted0; min 1.069 max 13.371
+sorter	stock-100000	insert_one_row_alloc	1.200	MB p50	bytes the thread allocated per run
+sorter	stock-100000	remove_one_row	5.963	ms p50	DefaultTableModel.removeRow at the middle: rowsDeleted0; min 3.209 max 9.787
+sorter	stock-100000	remove_one_row_alloc	1.200	MB p50	bytes the thread allocated per run
+sorter	stock-100000	update_one_row_sorts	1.855	ms p50	setValueAt with sortsOnUpdates: rowsUpdated0; min 1.528 max 8.754
+sorter	stock-100000	update_one_row_sorts_alloc	0.800	MB p50	bytes the thread allocated per run
+sorter	stock-100000	update_1000_rows_sorts	5.674	ms p50	fireTableRowsUpdated over 1,000 rows with sortsOnUpdates: rowsUpdated0; min 4.851 max 7.428
+sorter	stock-100000	update_1000_rows_sorts_alloc	0.815	MB p50	bytes the thread allocated per run
+sorter	stock-100000	set_filter	20.039	ms p50	setRowFilter: initializeFilteredMapping + sort; min 15.106 max 34.473
+sorter	stock-100000	set_filter_alloc	0.599	MB p50	bytes the thread allocated per run
+sorter	stock-100000	update_one_row_filtered	2.986	ms p50	setValueAt with a filter and sortsOnUpdates; min 0.572 max 5.355
+sorter	stock-100000	update_one_row_filtered_alloc	0.392	MB p50	bytes the thread allocated per run
+sorter	stock-100000	view_rows	49000	rows	after the filter
+# exit 0 sorter 100000 stock
+# 2026-10-20T07:36:33+05:30 sorter n=100000 m3 round 1 headroom_kb=14088124
+sorter	m3-100000	sort_descending_int	20.412	ms p50	setSortKeys on column b (Integer), alternating order: sortExistingData; min 13.046 max 34.530
+sorter	m3-100000	sort_descending_int_alloc	0.413	MB p50	bytes the thread allocated per run
+sorter	m3-100000	sort_from_unsorted	12.110	ms p50	setSortKeys(null) then one key: drop the lanes, build and sort them; min 11.344 max 22.231
+sorter	m3-100000	sort_from_unsorted_alloc	1.213	MB p50	bytes the thread allocated per run
+sorter	m3-100000	insert_one_row	1.535	ms p50	DefaultTableModel.insertRow at the middle: rowsInserted0; min 1.146 max 18.005
+sorter	m3-100000	insert_one_row_alloc	1.200	MB p50	bytes the thread allocated per run
+sorter	m3-100000	remove_one_row	5.810	ms p50	DefaultTableModel.removeRow at the middle: rowsDeleted0; min 2.607 max 8.849
+sorter	m3-100000	remove_one_row_alloc	1.200	MB p50	bytes the thread allocated per run
+sorter	m3-100000	update_one_row_sorts	0.968	ms p50	setValueAt with sortsOnUpdates: rowsUpdated0; min 0.859 max 8.616
+sorter	m3-100000	update_one_row_sorts_alloc	0.800	MB p50	bytes the thread allocated per run
+sorter	m3-100000	update_1000_rows_sorts	2.812	ms p50	fireTableRowsUpdated over 1,000 rows with sortsOnUpdates: rowsUpdated0; min 2.650 max 24.515
+sorter	m3-100000	update_1000_rows_sorts_alloc	0.818	MB p50	bytes the thread allocated per run
+sorter	m3-100000	set_filter	20.302	ms p50	setRowFilter: initializeFilteredMapping + sort; min 15.365 max 31.700
+sorter	m3-100000	set_filter_alloc	0.501	MB p50	bytes the thread allocated per run
+sorter	m3-100000	update_one_row_filtered	2.509	ms p50	setValueAt with a filter and sortsOnUpdates; min 0.365 max 2.574
+sorter	m3-100000	update_one_row_filtered_alloc	0.392	MB p50	bytes the thread allocated per run
+sorter	m3-100000	view_rows	49000	rows	after the filter
+# exit 0 sorter 100000 m3
+# 2026-10-20T07:36:43+05:30 sorter n=1000000 stock round 1 headroom_kb=11878976
+sorter	stock-1000000	sort_descending_int	382.689	ms p50	setSortKeys on column b (Integer), alternating order: sortExistingData; min 142.557 max 599.450
+sorter	stock-1000000	sort_descending_int_alloc	4.002	MB p50	bytes the thread allocated per run
+sorter	stock-1000000	sort_from_unsorted	204.347	ms p50	setSortKeys(null) then one key: drop the lanes, build and sort them; min 165.407 max 574.744
+sorter	stock-1000000	sort_from_unsorted_alloc	36.002	MB p50	bytes the thread allocated per run
+sorter	stock-1000000	insert_one_row	41.863	ms p50	DefaultTableModel.insertRow at the middle: rowsInserted0; min 9.742 max 95.096
+sorter	stock-1000000	insert_one_row_alloc	12.000	MB p50	bytes the thread allocated per run
+sorter	stock-1000000	remove_one_row	28.823	ms p50	DefaultTableModel.removeRow at the middle: rowsDeleted0; min 14.304 max 53.130
+sorter	stock-1000000	remove_one_row_alloc	12.000	MB p50	bytes the thread allocated per run
+sorter	stock-1000000	update_one_row_sorts	26.961	ms p50	setValueAt with sortsOnUpdates: rowsUpdated0; min 16.298 max 50.024
+sorter	stock-1000000	update_one_row_sorts_alloc	8.000	MB p50	bytes the thread allocated per run
+sorter	stock-1000000	update_1000_rows_sorts	28.384	ms p50	fireTableRowsUpdated over 1,000 rows with sortsOnUpdates: rowsUpdated0; min 14.359 max 43.209
+sorter	stock-1000000	update_1000_rows_sorts_alloc	8.015	MB p50	bytes the thread allocated per run
+sorter	stock-1000000	set_filter	888.532	ms p50	setRowFilter: initializeFilteredMapping + sort; min 186.726 max 1123.094
+sorter	stock-1000000	set_filter_alloc	6.000	MB p50	bytes the thread allocated per run
+sorter	stock-1000000	update_one_row_filtered	26.945	ms p50	setValueAt with a filter and sortsOnUpdates; min 6.900 max 63.253
+sorter	stock-1000000	update_one_row_filtered_alloc	3.992	MB p50	bytes the thread allocated per run
+sorter	stock-1000000	view_rows	499000	rows	after the filter
+# exit 0 sorter 1000000 stock
+# 2026-10-20T07:37:04+05:30 sorter n=1000000 m3 round 1 headroom_kb=16100228
+sorter	m3-1000000	sort_descending_int	200.451	ms p50	setSortKeys on column b (Integer), alternating order: sortExistingData; min 169.543 max 298.062
+sorter	m3-1000000	sort_descending_int_alloc	4.125	MB p50	bytes the thread allocated per run
+sorter	m3-1000000	sort_from_unsorted	280.186	ms p50	setSortKeys(null) then one key: drop the lanes, build and sort them; min 198.309 max 441.526
+sorter	m3-1000000	sort_from_unsorted_alloc	12.125	MB p50	bytes the thread allocated per run
+sorter	m3-1000000	insert_one_row	34.500	ms p50	DefaultTableModel.insertRow at the middle: rowsInserted0; min 16.231 max 92.013
+sorter	m3-1000000	insert_one_row_alloc	12.000	MB p50	bytes the thread allocated per run
+sorter	m3-1000000	remove_one_row	30.767	ms p50	DefaultTableModel.removeRow at the middle: rowsDeleted0; min 4.912 max 69.886
+sorter	m3-1000000	remove_one_row_alloc	12.000	MB p50	bytes the thread allocated per run
+sorter	m3-1000000	update_one_row_sorts	15.390	ms p50	setValueAt with sortsOnUpdates: rowsUpdated0; min 6.681 max 28.334
+sorter	m3-1000000	update_one_row_sorts_alloc	8.000	MB p50	bytes the thread allocated per run
+sorter	m3-1000000	update_1000_rows_sorts	10.432	ms p50	fireTableRowsUpdated over 1,000 rows with sortsOnUpdates: rowsUpdated0; min 6.050 max 16.779
+sorter	m3-1000000	update_1000_rows_sorts_alloc	8.018	MB p50	bytes the thread allocated per run
+sorter	m3-1000000	set_filter	234.072	ms p50	setRowFilter: initializeFilteredMapping + sort; min 169.494 max 432.164
+sorter	m3-1000000	set_filter_alloc	5.086	MB p50	bytes the thread allocated per run
+sorter	m3-1000000	update_one_row_filtered	8.095	ms p50	setValueAt with a filter and sortsOnUpdates; min 3.227 max 29.833
+sorter	m3-1000000	update_one_row_filtered_alloc	3.992	MB p50	bytes the thread allocated per run
+sorter	m3-1000000	view_rows	499000	rows	after the filter
+# exit 0 sorter 1000000 m3
+# 2026-10-20T07:37:17+05:30 sorter n=100000 stock round 2 headroom_kb=10003160
+sorter	stock-100000	sort_descending_int	20.732	ms p50	setSortKeys on column b (Integer), alternating order: sortExistingData; min 12.481 max 81.970
+sorter	stock-100000	sort_descending_int_alloc	0.402	MB p50	bytes the thread allocated per run
+sorter	stock-100000	sort_from_unsorted	30.603	ms p50	setSortKeys(null) then one key: drop the lanes, build and sort them; min 12.405 max 69.976
+sorter	stock-100000	sort_from_unsorted_alloc	3.602	MB p50	bytes the thread allocated per run
+sorter	stock-100000	insert_one_row	1.082	ms p50	DefaultTableModel.insertRow at the middle: rowsInserted0; min 0.838 max 70.780
+sorter	stock-100000	insert_one_row_alloc	1.200	MB p50	bytes the thread allocated per run
+sorter	stock-100000	remove_one_row	2.725	ms p50	DefaultTableModel.removeRow at the middle: rowsDeleted0; min 2.425 max 49.691
+sorter	stock-100000	remove_one_row_alloc	1.200	MB p50	bytes the thread allocated per run
+sorter	stock-100000	update_one_row_sorts	1.932	ms p50	setValueAt with sortsOnUpdates: rowsUpdated0; min 1.296 max 5.403
+sorter	stock-100000	update_one_row_sorts_alloc	0.800	MB p50	bytes the thread allocated per run
+sorter	stock-100000	update_1000_rows_sorts	3.257	ms p50	fireTableRowsUpdated over 1,000 rows with sortsOnUpdates: rowsUpdated0; min 3.163 max 52.904
+sorter	stock-100000	update_1000_rows_sorts_alloc	0.815	MB p50	bytes the thread allocated per run
+sorter	stock-100000	set_filter	17.623	ms p50	setRowFilter: initializeFilteredMapping + sort; min 14.053 max 186.193
+sorter	stock-100000	set_filter_alloc	0.599	MB p50	bytes the thread allocated per run
+sorter	stock-100000	update_one_row_filtered	2.408	ms p50	setValueAt with a filter and sortsOnUpdates; min 0.802 max 5.259
+sorter	stock-100000	update_one_row_filtered_alloc	0.392	MB p50	bytes the thread allocated per run
+sorter	stock-100000	view_rows	49000	rows	after the filter
+# exit 0 sorter 100000 stock
+# 2026-10-20T07:37:30+05:30 sorter n=100000 m3 round 2 headroom_kb=10250596
+sorter	m3-100000	sort_descending_int	16.324	ms p50	setSortKeys on column b (Integer), alternating order: sortExistingData; min 14.163 max 49.666
+sorter	m3-100000	sort_descending_int_alloc	0.413	MB p50	bytes the thread allocated per run
+sorter	m3-100000	sort_from_unsorted	18.167	ms p50	setSortKeys(null) then one key: drop the lanes, build and sort them; min 12.956 max 18.879
+sorter	m3-100000	sort_from_unsorted_alloc	1.213	MB p50	bytes the thread allocated per run
+sorter	m3-100000	insert_one_row	3.249	ms p50	DefaultTableModel.insertRow at the middle: rowsInserted0; min 0.831 max 20.481
+sorter	m3-100000	insert_one_row_alloc	1.200	MB p50	bytes the thread allocated per run
+sorter	m3-100000	remove_one_row	1.979	ms p50	DefaultTableModel.removeRow at the middle: rowsDeleted0; min 0.970 max 5.906
+sorter	m3-100000	remove_one_row_alloc	1.200	MB p50	bytes the thread allocated per run
+sorter	m3-100000	update_one_row_sorts	1.342	ms p50	setValueAt with sortsOnUpdates: rowsUpdated0; min 0.701 max 4.267
+sorter	m3-100000	update_one_row_sorts_alloc	0.800	MB p50	bytes the thread allocated per run
+sorter	m3-100000	update_1000_rows_sorts	4.581	ms p50	fireTableRowsUpdated over 1,000 rows with sortsOnUpdates: rowsUpdated0; min 3.905 max 7.966
+sorter	m3-100000	update_1000_rows_sorts_alloc	0.818	MB p50	bytes the thread allocated per run
+sorter	m3-100000	set_filter	24.753	ms p50	setRowFilter: initializeFilteredMapping + sort; min 19.195 max 39.981
+sorter	m3-100000	set_filter_alloc	0.501	MB p50	bytes the thread allocated per run
+sorter	m3-100000	update_one_row_filtered	0.540	ms p50	setValueAt with a filter and sortsOnUpdates; min 0.451 max 2.243
+sorter	m3-100000	update_one_row_filtered_alloc	0.392	MB p50	bytes the thread allocated per run
+sorter	m3-100000	view_rows	49000	rows	after the filter
+# exit 0 sorter 100000 m3
+# 2026-10-20T07:37:40+05:30 sorter n=1000000 stock round 2 headroom_kb=10826476
+sorter	stock-1000000	sort_descending_int	140.118	ms p50	setSortKeys on column b (Integer), alternating order: sortExistingData; min 134.909 max 317.358
+sorter	stock-1000000	sort_descending_int_alloc	4.002	MB p50	bytes the thread allocated per run
+sorter	stock-1000000	sort_from_unsorted	159.031	ms p50	setSortKeys(null) then one key: drop the lanes, build and sort them; min 147.827 max 212.537
+sorter	stock-1000000	sort_from_unsorted_alloc	36.002	MB p50	bytes the thread allocated per run
+sorter	stock-1000000	insert_one_row	32.201	ms p50	DefaultTableModel.insertRow at the middle: rowsInserted0; min 20.339 max 402.313
+sorter	stock-1000000	insert_one_row_alloc	12.000	MB p50	bytes the thread allocated per run
+sorter	stock-1000000	remove_one_row	36.099	ms p50	DefaultTableModel.removeRow at the middle: rowsDeleted0; min 27.895 max 42.906
+sorter	stock-1000000	remove_one_row_alloc	12.000	MB p50	bytes the thread allocated per run
+sorter	stock-1000000	update_one_row_sorts	30.295	ms p50	setValueAt with sortsOnUpdates: rowsUpdated0; min 18.696 max 53.254
+sorter	stock-1000000	update_one_row_sorts_alloc	8.000	MB p50	bytes the thread allocated per run
+sorter	stock-1000000	update_1000_rows_sorts	24.208	ms p50	fireTableRowsUpdated over 1,000 rows with sortsOnUpdates: rowsUpdated0; min 22.538 max 33.559
+sorter	stock-1000000	update_1000_rows_sorts_alloc	8.015	MB p50	bytes the thread allocated per run
+sorter	stock-1000000	set_filter	322.702	ms p50	setRowFilter: initializeFilteredMapping + sort; min 223.119 max 460.654
+sorter	stock-1000000	set_filter_alloc	6.000	MB p50	bytes the thread allocated per run
+sorter	stock-1000000	update_one_row_filtered	15.399	ms p50	setValueAt with a filter and sortsOnUpdates; min 10.625 max 61.843
+sorter	stock-1000000	update_one_row_filtered_alloc	3.992	MB p50	bytes the thread allocated per run
+sorter	stock-1000000	view_rows	499000	rows	after the filter
+# exit 0 sorter 1000000 stock
+# 2026-10-20T07:37:53+05:30 sorter n=1000000 m3 round 2 headroom_kb=16205700
+sorter	m3-1000000	sort_descending_int	237.655	ms p50	setSortKeys on column b (Integer), alternating order: sortExistingData; min 183.714 max 314.648
+sorter	m3-1000000	sort_descending_int_alloc	4.125	MB p50	bytes the thread allocated per run
+sorter	m3-1000000	sort_from_unsorted	166.089	ms p50	setSortKeys(null) then one key: drop the lanes, build and sort them; min 139.381 max 340.818
+sorter	m3-1000000	sort_from_unsorted_alloc	12.125	MB p50	bytes the thread allocated per run
+sorter	m3-1000000	insert_one_row	21.219	ms p50	DefaultTableModel.insertRow at the middle: rowsInserted0; min 7.722 max 43.785
+sorter	m3-1000000	insert_one_row_alloc	12.000	MB p50	bytes the thread allocated per run
+sorter	m3-1000000	remove_one_row	14.181	ms p50	DefaultTableModel.removeRow at the middle: rowsDeleted0; min 9.989 max 28.104
+sorter	m3-1000000	remove_one_row_alloc	12.000	MB p50	bytes the thread allocated per run
+sorter	m3-1000000	update_one_row_sorts	12.831	ms p50	setValueAt with sortsOnUpdates: rowsUpdated0; min 5.880 max 18.216
+sorter	m3-1000000	update_one_row_sorts_alloc	8.000	MB p50	bytes the thread allocated per run
+sorter	m3-1000000	update_1000_rows_sorts	18.168	ms p50	fireTableRowsUpdated over 1,000 rows with sortsOnUpdates: rowsUpdated0; min 9.872 max 35.075
+sorter	m3-1000000	update_1000_rows_sorts_alloc	8.018	MB p50	bytes the thread allocated per run
+sorter	m3-1000000	set_filter	305.142	ms p50	setRowFilter: initializeFilteredMapping + sort; min 203.531 max 1036.030
+sorter	m3-1000000	set_filter_alloc	5.086	MB p50	bytes the thread allocated per run
+sorter	m3-1000000	update_one_row_filtered	22.354	ms p50	setValueAt with a filter and sortsOnUpdates; min 14.496 max 75.369
+sorter	m3-1000000	update_one_row_filtered_alloc	3.992	MB p50	bytes the thread allocated per run
+sorter	m3-1000000	view_rows	499000	rows	after the filter
+# exit 0 sorter 1000000 m3
