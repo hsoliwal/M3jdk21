@@ -27,34 +27,48 @@ jobs:
           distribution: temurin
           java-version: '21'
           cache: maven
-      - name: Bind five exact recipe-generated candidate postimages
+      - name: Verify original, identity and full-flag successor source custody
         shell: bash
         run: |
-          set -euxo pipefail
+          set -euo pipefail
           mkdir -p proof
           git rev-parse HEAD > proof/head.txt
           python3 - <<'PY'
           from pathlib import Path
           import hashlib
           import subprocess
-          root = Path('m3/eclipse/framework/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-java/eclipse-framework-m3-index-forward')
-          rows = [r.split('\t') for r in (root/'manifest.tsv').read_text().splitlines() if r and not r.startswith('#')]
-          assert len(rows) == 8
-          assert [r[0] for r in rows] == sorted(r[0] for r in rows)
-          tracked = set(subprocess.check_output(['git', 'ls-files', 'm3/eclipse/framework/src'], text=True).splitlines())
-          assert tracked == {r[0] for r in rows}, tracked ^ {r[0] for r in rows}
-          for path, before, wanted, source in rows:
-              assert before == 'ABSENT'
-              for p in (Path(path),root/source):
-                  assert p.is_file() and not p.is_symlink(), p
-                  got = hashlib.sha256(p.read_bytes()).hexdigest()
-                  assert got == wanted, (p,got,wanted)
-          print('EXACT_EIGHT_JAVA_POSTIMAGES')
+          original = Path('m3/eclipse/framework/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-java/eclipse-framework-m3-index-forward')
+          current = Path('m3/eclipse/framework/recipe/flags-20261020/src/test/resources/com/synexia/rewrite/hash-pinned-java/m3-eclipse-full-delta-flags-20261020')
+          old = [row.split('\t') for row in (original/'manifest.tsv').read_text().splitlines() if row and not row.startswith('#')]
+          latest = [row.split('\t') for row in (current/'manifest.tsv').read_text().splitlines() if row and not row.startswith('#')]
+          assert len(old) == 8 and len(latest) == 2
+          assert [row[0] for row in old] == sorted(row[0] for row in old)
+          assert [row[0] for row in latest] == sorted(row[0] for row in latest)
+          replacements = {row[0]:row for row in latest}
+          originals = {row[0]:row for row in old}
+          for path, before, expected, template in old:
+              assert hashlib.sha256((original/template).read_bytes()).hexdigest() == expected, template
+              if path not in replacements:
+                  assert hashlib.sha256(Path(path).read_bytes()).hexdigest() == expected, path
+          delta = 'm3/eclipse/framework/src/main/java/com/m3/eclipse/framework/M3EclipseResourceDeltaSnapshot.java'
+          assert originals[delta][2] == '3e499ab33152d8a79c3171ce96a20ae35968c8e573e1ac48b999ede35a7581ec'
+          assert replacements[delta][1] == '94fc5f6ac7d87439758e8dc6544754e0a77ebbff52d36bbb8ae18a6447aa555c'
+          identity = Path('m3/eclipse/framework/src/test/java/com/m3/eclipse/framework/M3EclipseDeltaIdentitySetTest.java')
+          assert hashlib.sha256(identity.read_bytes()).hexdigest() == '2805f91b08f95e42f3fb9e0e6390de3174e5bf71fc761bc09210bb9ca9b6d781'
+          for path, before, after, template in latest:
+              prior = current/template.replace('.after.txt','.before.txt')
+              assert hashlib.sha256(prior.read_bytes()).hexdigest() == before, prior
+              assert hashlib.sha256((current/template).read_bytes()).hexdigest() == after, template
+              assert hashlib.sha256(Path(path).read_bytes()).hexdigest() == after, path
+          tracked = set(subprocess.check_output(['git','ls-files','m3/eclipse/framework/src'],text=True).splitlines())
+          assert tracked == set(originals) | {str(identity)}, tracked ^ (set(originals) | {str(identity)})
+          print('ECLIPSE_EIGHT_PLUS_IDENTITY_PLUS_FULL_FLAG_SOURCE_SEALS_OK')
           PY
       - name: Execute canonical source-sealed OpenRewrite recipe tests
         run: |
           set -euxo pipefail
           mvn -B -ntp -f m3/eclipse/framework/recipe/pom.xml test 2>&1 | tee proof/recipe.txt
+          mvn -B -ntp -f m3/eclipse/framework/recipe/flags-20261020/pom.xml test 2>&1 | tee proof/delta-flags-recipe.txt
       - name: Compile existing M3 collections and install exact jar
         run: |
           set -euxo pipefail
@@ -79,7 +93,7 @@ jobs:
           assert reports, 'no JUnit reports'
           roots=[E.parse(p).getroot() for p in reports]
           n={k:sum(int(v.attrib.get(k,0)) for v in roots) for k in ('tests','errors','failures','skipped')}
-          assert n=={'tests':6,'errors':0,'failures':0,'skipped':0},n
+          assert n=={'tests':11,'errors':0,'failures':0,'skipped':0},n
           print('ECLIPSE_API_OSGI_SERVICE_JUNIT_TESTS',n)
           PY
           unzip -p m3/eclipse/framework/target/m3-eclipse-framework-forward-0.1.0-SNAPSHOT.jar META-INF/MANIFEST.MF > proof/eclipse-bundle-manifest.txt
@@ -96,4 +110,5 @@ jobs:
           path: |
             proof/
             m3/eclipse/framework/recipe/target/surefire-reports/
+            m3/eclipse/framework/recipe/flags-20261020/target/surefire-reports/
             m3/eclipse/framework/target/surefire-reports/

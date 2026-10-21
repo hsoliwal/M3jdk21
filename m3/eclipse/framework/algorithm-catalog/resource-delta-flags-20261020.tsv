@@ -1,0 +1,5 @@
+# problem-category	operation	candidate	decision	complexity	provenance-and-contract
+Eclipse-resource-delta	capture all IResourceDelta.getFlags()	M3LongArrayList parent-owned full-width word lane	SELECT	O(n) time and O(n) primitive words	First-party M3; preserve original Eclipse object identity and BFS
+Eclipse-resource-delta	selected flag masks	CPU primitive bitwise required/excluded scan	SELECT	O(n) time, O(k) output	Java mask scan; LeetCode/HackerRank/GeeksforGeeks idea only, no donor code copied
+Eclipse-resource-delta	whole Eclipse delta service	Eclipse original Resources/JobManager	RETAIN	original API and lifecycle	Eclipse EPL-2.0 source/ABI authority; not replicated
+Eclipse-resource-delta	Java callbacks through JNI	per-element native callback crossing	REJECT	O(n) cross-boundary overhead	No JNI change needed for Java API callbacks; existing M3 JNI kernels remain separate

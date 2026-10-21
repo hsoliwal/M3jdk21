@@ -1,0 +1,10 @@
+[
+  {
+    "argv": [
+      "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+      "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/receiver/m3/compatibility/check_synexia_full_borrow_receiver.py"
+    ],
+    "exit": 0,
+    "name": "full-borrow-receiver"
+  }
+]

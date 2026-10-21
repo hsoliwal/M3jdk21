@@ -428,6 +428,15 @@ public interface JavaLangAccess {
     boolean stringConcatUsesM3Storage();
 
     /**
+     * Returns a thread-confined logical UTF-16 cursor for an already-admitted
+     * M3 String, or null for a flat String. The cursor retains its canonical
+     * owner and never copies text or triggers storage admission.
+     */
+    default java.util.function.IntUnaryOperator stringCodeUnitCursor(String text) {
+        return null;
+    }
+
+    /**
      * Return immutable, already-prepared M3 String trigram candidate facts, or null.
      * Lookup never admits storage or prepares facts. Absence proves nothing.
      */

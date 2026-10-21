@@ -1,0 +1,77 @@
+/* Copyright 2026 Hitesh Soliwal <hsoliwal@gmail.com>
+ * SPDX-License-Identifier: Apache-2.0
+ */
+package com.m3.text;
+
+import java.util.Objects;
+
+/** Flat leaf directory avoids recursive traversal or rope-depth amplification. */
+final class JoinedM3StringPiece implements M3StringPiece {
+    private final LocalM3StringPiece[] leaves;
+    private final int[] ends;
+    private final int length;
+
+    /** Takes only freshly created normalized range arrays; caller-owned inputs use the snapshot constructor. */
+    private JoinedM3StringPiece(LocalM3StringPiece[] ownedLeaves, int[] ownedEnds, int ownedLength) {
+        this.leaves = ownedLeaves;
+        this.ends = ownedEnds;
+        this.length = ownedLength;
+    }
+
+    JoinedM3StringPiece(M3StringPiece[] input) {
+        Objects.requireNonNull(input);
+        // Snapshot references: callers can mutate their directory after joining.
+        M3StringPiece[] pieces = input.clone();
+        int count = 0;
+        for (M3StringPiece piece : pieces) {
+            Objects.requireNonNull(piece);
+            count = Math.addExact(count, piece instanceof JoinedM3StringPiece joined ? joined.leaves.length : piece.length() == 0 ? 0 : 1);
+        }
+        leaves = new LocalM3StringPiece[count];
+        ends = new int[count];
+        int next = 0, units = 0;
+        for (M3StringPiece piece : pieces) {
+            if (piece instanceof JoinedM3StringPiece joined) {
+                for (LocalM3StringPiece leaf : joined.leaves) {
+                    leaves[next] = leaf;
+                    ends[next++] = units = Math.addExact(units, leaf.length());
+                }
+            } else if (piece.length() != 0) {
+                LocalM3StringPiece leaf = (LocalM3StringPiece)piece;
+                leaves[next] = leaf;
+                ends[next++] = units = Math.addExact(units, leaf.length());
+            }
+        }
+        length = units;
+    }
+    @Override public int length() { return length; }
+    @Override public char charAt(int index) {
+        Objects.checkIndex(index, length);
+        int leaf = leafIndex(index);
+        return leaves[leaf].charAt(index - (leaf == 0 ? 0 : ends[leaf - 1]));
+    }
+    @Override public M3StringPiece subSequence(int start, int end) {
+        Objects.checkFromToIndex(start, end, length);
+        if (start == end) return new JoinedM3StringPiece(new LocalM3StringPiece[0], new int[0], 0);
+        int first = leafIndex(start), last = leafIndex(end - 1);
+        LocalM3StringPiece[] ranges = new LocalM3StringPiece[last - first + 1];
+        int[] rangeEnds = new int[ranges.length];
+        for (int i = first; i <= last; i++) {
+            int origin = i == 0 ? 0 : ends[i - 1];
+            int a = Math.max(start, origin), b = Math.min(end, ends[i]);
+            ranges[i - first] = leaves[i].subSequence(a - origin, b - origin);
+            rangeEnds[i - first] = b - start;
+        }
+        return new JoinedM3StringPiece(ranges, rangeEnds, end - start);
+    }
+    /** First nonempty leaf whose cumulative end is greater than a valid code-unit index. */
+    private int leafIndex(int index) {
+        int lo = 0, hi = ends.length;
+        while (lo < hi) {
+            int middle = (lo + hi) >>> 1;
+            if (ends[middle] <= index) lo = middle + 1; else hi = middle;
+        }
+        return lo;
+    }
+    @Override public String toString() { return flatten(); }
+}

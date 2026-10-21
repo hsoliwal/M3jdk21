@@ -96,6 +96,20 @@ public final class M3LongSortedSnapshot implements M3LongSortedSet {
         return new M3LongSortedSnapshot(detached, 0, detached.length);
     }
 
+    /**
+     * Detached signed-natural sorted snapshot selecting precomputed required
+     * flags and rejecting excluded flags. Reuses the original M3 mask owner;
+     * no predicate callbacks or per-entry structural wrappers are retained.
+     */
+    public static M3LongSortedSnapshot fromAlignedMasks(
+            long[] sortedUnique, byte[] alignedStates, int requiredMask, int excludedMask) {
+        Objects.requireNonNull(sortedUnique, "sortedUnique");
+        validateSortedUnique(sortedUnique);
+        long[] detached = M3IndexMaskCompactor.selectLong(
+                sortedUnique, alignedStates, requiredMask, excludedMask);
+        return new M3LongSortedSnapshot(detached, 0, detached.length);
+    }
+
     private static void validateSortedUnique(long[] values) {
         for (int index = 1; index < values.length; index++) {
             if (values[index] <= values[index - 1]) {
@@ -206,23 +220,13 @@ public final class M3LongSortedSnapshot implements M3LongSortedSet {
     private int lowerBound(long value) {
         int low = from;
         int high = to;
-        while (low < high) {
-            int middle = low + ((high - low) >>> 1);
-            if (values[middle] < value) low = middle + 1;
-            else high = middle;
-        }
-        return low;
+        return M3LaneSearch.lowerBound(values, low, high, value);
     }
 
     private int upperBound(long value) {
         int low = from;
         int high = to;
-        while (low < high) {
-            int middle = low + ((high - low) >>> 1);
-            if (values[middle] <= value) low = middle + 1;
-            else high = middle;
-        }
-        return low;
+        return M3LaneSearch.upperBound(values, low, high, value);
     }
 
     private static UnsupportedOperationException immutable() {

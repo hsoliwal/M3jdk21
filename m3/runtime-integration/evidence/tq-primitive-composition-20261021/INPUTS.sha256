@@ -1,0 +1,5 @@
+79e922eb3d0c3ae28db264bcaeab0a03f31643ad581c3e28bc2545140c043367  src/java.base/share/classes/jdk/internal/mindex/M3TQ.java
+bcd2fe86a21464f7c65fd582368362d327e54b143dc05df13b31c1a029ecb251  src/java.base/share/classes/jdk/internal/mindex/M3StringBacking.java
+5ba504c0bbb6b6efbb29e97ff2b6229dc3602b1d36c722520729203bcd3490ae  test/jdk/java/lang/String/libM3TQTest.cpp
+1d9bc925b05d4069ffb6654738a1060ad7a160e55840275dea1dbf3d933398fd  test/jdk/java/lang/String/M3TQArrayCompositionTest.java
+bf20c0735533777ecf937c5e19537c6220c517b1286d3d5cb32d097e958fe171  test/jdk/java/lang/String/TQSeamCounterexample.java

@@ -26,17 +26,18 @@ import java.util.Objects;
  * plus O(8*256), with exactly two retained int[256] arrays; no boxed counts,
  * Map.Entry nodes, object graph traversal or extra owner of the payload.
  *
- * <p>The opt-in native backend scans aligned <em>primitive state bytes only</em>,
- * in bounded JNI regions. Indexed native capture first constructs a transient
- * aligned metadata byte lane on the Java side, never sending a Java object,
- * comparator, predicate or GC pointer to C. Native is not automatically faster:
- * the Java backend avoids this indexed realignment. No automatic fallback from
- * NATIVE_REQUIRED and no new JDK collection or serialization contract is claimed.
+ * <p>The explicit native backend scans only caller-owned primitive arrays through
+ * bounded JNI regions. The indexed native ABI consumes the original physical
+ * offset and byte-state lanes without a Java-sized aligned copy; old native
+ * binaries retain their existing aligned-region fallback. Native is not
+ * automatically faster, particularly for sparse random indices. NATIVE_REQUIRED
+ * never falls back to Java; no new collection or serialization contract is claimed.
  */
 public final class M3StateMaskHistogram {
     public enum Backend { JAVA, NATIVE_REQUIRED }
     private static final int STATES = 256;
     private static final boolean NATIVE_AVAILABLE = loadNative();
+    private static final boolean INDEXED_NATIVE_AVAILABLE = indexedNativeAvailable();
 
     private final int[] exact;
     private final int[] supersets;
@@ -85,8 +86,10 @@ public final class M3StateMaskHistogram {
     /**
      * Count occurrences through physical slot offsets without moving payloads.
      * Every addressed offset is validated before any native processing begins.
-     * Neither input array is retained; an indexed JNI call allocates only a
-     * temporary byte sequence aligned to this path and no Java object wrappers.
+     * Neither input array is retained. Compatible native binaries read the
+     * original offset/state planes directly through bounded regions; older
+     * binaries use the original aligned native tally ABI. No object references,
+     * predicates, or comparators cross this JNI boundary.
      */
     public static M3StateMaskHistogram indexed(int[] physicalOffsets, byte[] physicalStates,
             int first, int count, int stride, Backend backend) {
@@ -100,6 +103,14 @@ public final class M3StateMaskHistogram {
         }
         if (backend == Backend.NATIVE_REQUIRED) {
             requireNative();
+            if (INDEXED_NATIVE_AVAILABLE) {
+                int[] buckets = new int[STATES];
+                tallyIndexedNative(physicalOffsets, physicalStates,
+                        first, count, stride, buckets);
+                return new M3StateMaskHistogram(buckets, count);
+            }
+            // Older native binaries keep their original working ABI rather than
+            // losing NATIVE_REQUIRED functionality; this is still native tallying.
             byte[] aligned = new byte[count];
             at = first;
             for (int i = 0; i < count; i++, at += stride) {
@@ -142,6 +153,20 @@ public final class M3StateMaskHistogram {
         requireMask(forbiddenMask);
         if ((requiredMask & forbiddenMask) != 0) return 0;
         if (forbiddenMask == 0) return supersets[requiredMask];
+        // Each matching state is requiredMask | subset(unconstrained).
+        // Enumerate the smaller Boolean cube: either forbidden-bit
+        // inclusion/exclusion over precomputed supersets, or an exact-state
+        // sum over free-bit subsets. Eight state bits bound both to <=16
+        // bucket visits, regardless of source size or duplicate offsets.
+        int freeMask = ~(requiredMask | forbiddenMask) & (STATES - 1);
+        if (Integer.bitCount(freeMask) < Integer.bitCount(forbiddenMask)) {
+            int count = 0;
+            for (int subset = freeMask;; subset = (subset - 1) & freeMask) {
+                count += exact[requiredMask | subset];
+                if (subset == 0) break;
+            }
+            return count;
+        }
         long count = 0;
         int bits = forbiddenMask;
         for (int subset = bits;; subset = (subset - 1) & bits) {
@@ -192,4 +217,20 @@ public final class M3StateMaskHistogram {
 
     private static native void tallyNative(byte[] stateBytes, int first,
             int count, int stride, int[] buckets);
+
+    /** Additive ABI probe: older state-histogram libraries support aligned tally only. */
+    private static boolean indexedNativeAvailable() {
+        if (!NATIVE_AVAILABLE) return false;
+        try {
+            return indexedAbiNative() == 1;
+        } catch (UnsatisfiedLinkError olderLibrary) {
+            return false;
+        }
+    }
+
+    private static native int indexedAbiNative();
+
+    /** Native direct indexed histogram, with no Java-side aligned metadata copy. */
+    private static native void tallyIndexedNative(int[] physicalOffsets, byte[] physicalStates,
+            int first, int count, int stride, int[] buckets);
 }

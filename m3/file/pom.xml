@@ -9,5 +9,15 @@
   <build><plugins>
     <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-compiler-plugin</artifactId><version>3.13.0</version>
       <configuration><release>21</release><proc>none</proc><compilerArgs><arg>-Xlint:all,-module</arg><arg>-Werror</arg></compilerArgs></configuration></plugin>
+    <plugin><groupId>org.codehaus.mojo</groupId><artifactId>exec-maven-plugin</artifactId><version>3.5.0</version>
+      <executions><execution><id>file-source-class-content-contract</id><phase>test</phase><goals><goal>exec</goal></goals>
+        <configuration><executable>python3</executable><arguments>
+          <argument>${project.basedir}/verify.py</argument>
+          <argument>--java-home</argument><argument>${java.home}</argument>
+          <argument>--classes</argument><argument>${project.build.outputDirectory}</argument>
+          <argument>--output</argument><argument>${project.build.directory}/delta-check</argument>
+        </arguments></configuration>
+      </execution></executions>
+    </plugin>
   </plugins></build>
 </project>

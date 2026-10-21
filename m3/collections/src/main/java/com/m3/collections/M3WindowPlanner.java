@@ -334,22 +334,12 @@ public final class M3WindowPlanner {
 		 */
 		private static int firstAtLeast (long [] values, long target) {
 			int low = 0, high = values.length;
-			while (low < high) {
-				int middle = low + ((high - low) >>> 1);
-				if (values [middle] < target) low = middle + 1;
-				else high = middle;
-			}
-			return low;
+			return M3LaneSearch.lowerBound(values, low, high, target);
 		}
 
 		private static int firstGreater (long [] values, long target) {
 			int low = 0, high = values.length;
-			while (low < high) {
-				int middle = low + ((high - low) >>> 1);
-				if (values [middle] <= target) low = middle + 1;
-				else high = middle;
-			}
-			return low;
+			return M3LaneSearch.upperBound(values, low, high, target);
 		}
 	}
 }

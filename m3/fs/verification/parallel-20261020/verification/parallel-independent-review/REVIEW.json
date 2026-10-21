@@ -1,0 +1,96 @@
+{
+  "schema": "M3_PARALLEL_INDEPENDENT_REVIEW_V1",
+  "status": "PASS",
+  "completed_at_utc": "2026-10-20T13:50:45.747964+00:00",
+  "reviewer": "/root/m3fs_stream_facade",
+  "mode": "READ_ONLY_SOURCE_AND_EXISTING_EVIDENCE_REVIEW",
+  "source": "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/authored/parallel/m3/fs/src/main/java/com/m3/fs/MFiles.java",
+  "source_sha256": "1c0df84c0b8c57f0098f5e9c2124932c426f774b6247da5f5946715a192456ed",
+  "source_unchanged_during_review": true,
+  "production_edits": false,
+  "independent_runtime_rerun": false,
+  "scope": [
+    "Parallel/Work lifecycle and actual worker exit",
+    "global callback/result credits and queue accounting",
+    "local-coordinate subtree handoff and archive confinement",
+    "session/content ownership and provider instance claims",
+    "failure/cancellation aggregation and cleanup",
+    "finite-memory statement and publication boundaries"
+  ],
+  "evidence": {
+    "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/authored/parallel/m3/fs/src/main/java/com/m3/fs/MFiles.java": "1c0df84c0b8c57f0098f5e9c2124932c426f774b6247da5f5946715a192456ed",
+    "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/authored/parallel/m3/fs/src/test/java/com/m3/fs/MFilesParallelTest.java": "cd9b36f2c2b9e785978e54536e2ebc8867c8105d4e5451ec937e82c8cd02d64f",
+    "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/authored/parallel/verification/authored-final/production-sources/m3/fs/src/main/java/com/m3/fs/MFiles.java": "1c0df84c0b8c57f0098f5e9c2124932c426f774b6247da5f5946715a192456ed",
+    "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/authored/parallel/verification/authored-final/RESULTS.json": "fbcf7d5de17cfd5bedfdb134abd5db232c8d64045d635f57099f38f5ac063ba9",
+    "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/authored/parallel/verification/authored-final/junit.log": "8f3abe99679f56a8cc5cae4e0a95a7d1337333ee49bf3c4dc6412a211c86bff7",
+    "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/authored/parallel/README.md": "18b8891e92de3bc98ed5e1265730e287155d5c89fde3000d0a8a707ec5a018e3",
+    "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/CONTRACT.md": "c992427dd66abcf4d93d2ebbf95c10c0d715d1601e43c1a51c224c0fb20ad2c8",
+    "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/fs/src/main/java/com/m3/fs/MFiles.java": "b881c356f46fd5bed68d1e6d78a704b6fae7012c1fd0e576e043ea53bc8468b4",
+    "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/verification/parallel-independent-review/receiving.diff": "527b085c875a9a9c6fdae83c1ca76c0232b3f7a11429e60f1a5146991f14837f"
+  },
+  "existing_execution": {
+    "receipt": "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/authored/parallel/verification/authored-final/RESULTS.json",
+    "mode": "DIAGNOSTIC_AUTHORED_OVERLAY",
+    "junit": {
+      "found": 136,
+      "skipped": 0,
+      "started": 136,
+      "aborted": 0,
+      "successful": 136,
+      "failed": 0
+    },
+    "new_parallel_tests": 32,
+    "retained_tests": 104,
+    "production_receipt_matches_reviewed_source": true,
+    "all_test_source_hashes_match_receipt": true,
+    "frozen_production_unchanged": true,
+    "test_class_production_overlap": [],
+    "finite_resource_checks": [
+      {
+        "case": "local_files",
+        "executor_threads": 8,
+        "limit": 3,
+        "entries": 12,
+        "peak_active_callbacks": 3
+      },
+      {
+        "case": "paused_consumer",
+        "limit": 3,
+        "entries": 30,
+        "delivered": 1,
+        "callbacks_started": 4,
+        "observation_window_ms": 150
+      },
+      {
+        "case": "directory_branches",
+        "executor_threads": 6,
+        "limit": 3,
+        "overlapping_branches": 2
+      }
+    ]
+  },
+  "findings": [],
+  "review_conclusions": [
+    "Reservation, cancellation and Work.run completion share the Parallel monitor. Queued cancellation retires a slot once; running cancellation does not retire it before the owner exits cleanup. Future completion is not used as proof of session cleanup.",
+    "Callback/result credits reserve before task invocation and transfer to the fixed result ring. Delivery or failure releases each credit; stopped operations discard pending results and cancel admitted units. No worker waits for child futures.",
+    "Only local Path units may fork and only at the unmounted layer. A handoff carries URI/root URI/prefix/depth/root scalars. The receiving worker creates its own manager and resolves new FileObjects; custom URI regions and mounted archive regions retain one owner.",
+    "The owning worker closes forgotten tracked raw content before result publication and closes its region manager before relinquishing its worker slot. Factory calls are serialized and simultaneous reuse of an active provider instance is refused.",
+    "Failure signals cancellation before waiting for cleanup. Consumer exit waits for actual workers; distinct cleanup errors remain available as suppressed evidence. Runtime/Error identity and checked I/O cause are preserved.",
+    "The O(K) claim is correctly limited to admission and result state. Whole provider child arrays, DFS/BFS frontiers, registered provider claims, provider caches/spooling, root collections and task/result memory retain their documented independent costs.",
+    "The receiving diff adds the parallel path and nullable traversal hooks. The sequential entry point passes null hooks and retains its traversal scheduling, content ownership, filters and depth/layer behavior."
+  ],
+  "publication_contract": {
+    "generic_callback": "May process metadata, a prefix, no read, or multiple opens. Return is not proof of full content coverage. User-owned monitoring wrappers must be closed in the task so their completion observers run there.",
+    "individual_result": "Published after the task returns and tracked raw content cleanup succeeds. Region manager close may fail after earlier values have escaped; already delivered values cannot be retracted.",
+    "capture": "Task-owned full input EOF plus clean monitored close and successful observers is the complete-input capture boundary. Provider attribute sampling does not prove an atomic filesystem snapshot.",
+    "generation": "Commit a generation only after full stream exhaustion and successful stream close. The Facts Stream transaction is the intended atomic generation boundary.",
+    "parent_contract_action": "Narrow CONTRACT.md broad result-publication sentence to complete-read indexing captures, and state the separate terminal generation boundary. Root was notified; MFiles JavaDoc and parallel README already state the distinction.",
+    "production_change_required": false
+  },
+  "limitations": [
+    "Static review and inspection of existing real-test evidence are not a new generated-only runtime qualification.",
+    "Cooperative cancellation is required; uninterruptible provider calls or tasks can delay close.",
+    "Finite resource probes are workload-specific and do not establish universal performance or whole-tree constant memory.",
+    "A changing filesystem may differ between discovery and coordinate reopen; this API does not create snapshot semantics."
+  ]
+}

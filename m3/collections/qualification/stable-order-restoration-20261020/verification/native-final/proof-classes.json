@@ -1,0 +1,8 @@
+{
+  "com/m3/collections/M3IndexMaskCompactorSelfTest.class": "635e728aac113d07e6a94436ba2f09f197207dbc74bd64d8d076d103c3565fd5",
+  "com/m3/collections/M3IndexMaskWindowRecoverySelfTest.class": "ec166ec172606cb90df09de9f687d2d78eaf45ac7e8b63edaab6250060c16624",
+  "com/m3/collections/M3IndexMaskWindowSelfTest.class": "40a40de4fd58a9707548e2b46569edac214465980d5b42e5e64d00d4fbcba4de",
+  "com/m3/collections/M3IndexOrderWindowContract.class": "445d6dc7249da0acd9c51c73270ff9ec6766be66445e60293967f98a7612bea3",
+  "com/m3/collections/M3LongAddressKernelSelfTest.class": "779350d3274cf0c7813da3aa3bd84a202ba86660968e244aab3c0ff7a15c87cb",
+  "com/m3/collections/M3NativeIndexRangeSelfTest.class": "03f4adea61bdbbd5df639de4827a77fcd34af4a7712be49f91fde7f4242b51ac"
+}

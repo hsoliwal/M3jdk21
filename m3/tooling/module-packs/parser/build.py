@@ -39,7 +39,12 @@ CONTRACTS = (
     ("jdk.m3.parser.test.M3ParserFrameworkContract", "M3_PARSER_FRAMEWORK_PASS"),
     ("jdk.m3.parser.test.M3JavacParserContract", "M3_JAVAC_PARSER_PASS"),
     ("jdk.m3.parser.test.M3CrossFrontendContract", "M3_AST_MULTIFRONTEND_PASS"),
+    ("jdk.m3.parser.test.M3ASTDetailsContract", "M3_AST_DETAILS_PASS"),
+    ("jdk.m3.parser.test.M3ASTRelationsContract", "M3_AST_RELATIONS_PASS"),
+    ("jdk.m3.parser.test.M3ASTIndexProjectionContract", "M3_AST_INDEX_PROJECTION_PASS"),
+    ("jdk.m3.parser.test.M3FileInputContract", "M3_FILE_INPUT_PASS"),
 )
+COMPILER_CONTRACTS = (("M3ASTProjectionStateTest", "M3_AST_PROJECTION_STATE_PASS"),)
 SMOKE = ("jdk.m3.parser.test.M3ParserImageSmoke", "M3_PARSER_IMAGE_PASS")
 
 
@@ -91,6 +96,8 @@ def input_rows(repository, jdk):
     required += [pack / "src/main/java/module-info.java"]
     for name, unused in (*CONTRACTS, SMOKE):
         required.append(pack / "src/test/java" / (name.replace(".", "/") + ".java"))
+    required += [repository / "test/langtools/tools/javac/m3" / (name + ".java")
+                 for name, unused in COMPILER_CONTRACTS]
     rows = []
     for path in sorted(set(source_files + test_files + required)):
         checked_file(path)
@@ -288,6 +295,8 @@ class Qualification:
                                   "jdk.compiler=" + str(patch_classes), "-d", modules / MODULE,
                                   *parser_sources])
         test_sources = sorted((self.pack / "src/test/java").rglob("*.java"))
+        test_sources += [self.repository / "test/langtools/tools/javac/m3" / (name + ".java")
+                         for name, unused in COMPILER_CONTRACTS]
         self.run("all-consumers", [*common, "--patch-module", "jdk.compiler=" + str(patch_classes),
                                   "--module-path", modules, "--add-modules", MODULE,
                                   "-d", tests, *test_sources])
@@ -310,7 +319,7 @@ class Qualification:
         return self.run(name, arguments, marker)
 
     def test(self):
-        for main, marker in CONTRACTS:
+        for main, marker in (*CONTRACTS, *COMPILER_CONTRACTS):
             self.consumer(main.rsplit(".", 1)[-1], self.tool("java"), (main, marker), False)
         self.consumer("consumer-smoke", self.tool("java"), SMOKE, False)
         return []
@@ -347,7 +356,7 @@ class Qualification:
             if not (image / "bin" / executable(tool)).is_file():
                 raise ValueError("missing linked developer tool: " + tool)
         self.run("image-modules", [java, "--list-modules"], MODULE)
-        for main, marker in CONTRACTS:
+        for main, marker in (*CONTRACTS, *COMPILER_CONTRACTS):
             self.consumer("image-" + main.rsplit(".", 1)[-1], java, (main, marker), True)
         first = self.consumer("image-smoke-1", java, SMOKE, True)
         second = self.consumer("image-smoke-2", java, SMOKE, True)

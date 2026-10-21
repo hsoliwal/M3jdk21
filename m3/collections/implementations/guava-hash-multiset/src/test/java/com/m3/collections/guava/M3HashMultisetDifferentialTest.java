@@ -21,6 +21,7 @@ import java.util.Map;
 import java.util.Random;
 import java.util.concurrent.Callable;
 import java.util.concurrent.atomic.AtomicLong;
+import java.util.logging.Logger;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import org.junit.jupiter.api.AfterAll;
@@ -36,6 +37,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 final class M3HashMultisetDifferentialTest {
     static final AtomicLong CHECKS = new AtomicLong();
     static final AtomicLong OPERATIONS = new AtomicLong();
+    private static final Logger LOG = Logger.getLogger(M3HashMultisetDifferentialTest.class.getName());
     private static final int OPS_PER_SEED = 12_000;
 
     private final Multiset<Integer> oracle = HashMultiset.create();
@@ -43,7 +45,7 @@ final class M3HashMultisetDifferentialTest {
 
     @AfterAll
     static void report() {
-        System.out.println("M3HashMultiset differential: operations=" + OPERATIONS.get() + " checks=" + CHECKS.get());
+        LOG.info(() -> "M3HashMultiset differential: operations=" + OPERATIONS.get() + " checks=" + CHECKS.get());
     }
 
     @ParameterizedTest

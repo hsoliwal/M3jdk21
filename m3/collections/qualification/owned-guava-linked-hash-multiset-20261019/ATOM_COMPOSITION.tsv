@@ -1,0 +1,7 @@
+operation_atom	selected_permissive_surface	custom_uncovered_composition	validation_receipt	limits
+dense element/count lanes	owned M3HashMultiset pattern (#1418)	last-into-hole removal; long total saturated to int	differential ops 0-7, 31, 33	-
+object index	owned M3HashMultiset backward-shift index (#1418)	offset+1 entries; re-point moved offset	14 invariant corruption cases	load factor <= 2/3
+insertion order	first-party M3LinkedHashMap chain pattern	before/after on dense offsets; moved offset re-points both neighbours; cursors follow the move	differential exact order; insertionOrderIsKept; ownedOrderEdges	re-added element joins the end, as in LinkedHashMap
+fail-fast	modCount on element appearance/disappearance only, as Guava's LinkedHashMap	gens lane for removed-and-re-added elements under an occurrence iterator	iteratorsAndFailFast scenarios	stale iterator remove refuses before mutating; forEachEntry stops at first structural change
+views	flyweight elementSet/entrySet over the lanes	Guava's removeAll order	differential ops 13-20, 34	Multiset.Entry objects only from entrySet iteration, live counts
+serialization	owned stream format in insertion order	InvalidObjectException on negative or zero counts	serializationRoundTrip incl. 2 corrupt streams	not wire-compatible with Guava's serialized form

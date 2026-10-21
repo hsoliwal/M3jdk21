@@ -103,6 +103,22 @@ final class M3StringPool {
     /** Only an unpublished mapping owned by this admission may be released. */
     private static native boolean unmapLexicon0(long address, long length);
 
+    /**
+     * JNI batch concatenation over existing canonical M3String owner/range references.
+     *
+     * <p>The native code uses a fixed 32-slot stack to combine the already-interned
+     * coordinates through this pool's normal canonical concat operation. The Java
+     * input array contains references, never a copied joined text payload. Mapped
+     * lexicon/OS-shared atoms remain owned by their original retained mapping,
+     * and short immediate words remain in their fixed long[] pages. Materialization
+     * remains an explicit String/JNI compatibility operation.</p>
+     *
+     * <p>This is an internal opt-in batch entry point. Normal String concatenation
+     * keeps its Java path until installed-image/native performance qualification.</p>
+     */
+    // FLLDCIM: ATOM — canonical native batch join over fixed-array/view coordinates
+    static native M3String concatViewsNative0(M3String[] parts);
+
     private static String savedProperty(String name) {
         return VM.initLevel() >= 1 ? VM.getSavedProperty(name) : null;
     }
@@ -888,6 +904,47 @@ final class M3StringPool {
                 if (address != 0L) UNSAFE.freeMemory(address);
                 release(retainedBytes);
             }
+        }
+    }
+
+    /**
+     * Normalized, immutable owner/range sequence walker for canonical tuple interning.
+     *
+     * <p>The old walker allocated an M3String.range wrapper for every visited tuple child.
+     * Those objects were not payload owners, but on long concatenation DAGs they caused
+     * allocation pressure during every exact canonical-identity comparison. Two small
+     * private lanes now carry the same strong owner references and primitive coordinates.
+     * No native address, Java byte/char payload, or child M3String is retained or copied.
+     * The stack grows only when the tuple depth requires it.</p>
+     */
+    /**
+     * The JNI shadow allocation already owns the one contiguous output array.
+     * Reuse this pool's canonical owner/range cursor to transfer exact scalar
+     * subranges without recursive tuple calls or intermediate text payloads.
+     */
+    static void copyCharsFromPath(M3StringOwner root, int from, int end,
+            char[] destination, int destinationStart) {
+        if (from == end) return;
+        M3StringLeafCursor path = new M3StringLeafCursor(root, from, end - from, true);
+        int target = destinationStart;
+        while (path.next()) {
+            int count = path.length();
+            path.owner().getChars(path.start(), Math.addExact(path.start(), count),
+                    destination, target);
+            target = Math.addExact(target, count);
+        }
+    }
+
+    static void copyBytesFromPath(M3StringOwner root, int from, int end,
+            byte[] destination, int destinationStart, byte coder) {
+        if (from == end) return;
+        M3StringLeafCursor path = new M3StringLeafCursor(root, from, end - from, true);
+        int target = destinationStart;
+        while (path.next()) {
+            int count = path.length();
+            path.owner().getBytes(path.start(), Math.addExact(path.start(), count),
+                    destination, target, coder);
+            target = Math.addExact(target, count);
         }
     }
 

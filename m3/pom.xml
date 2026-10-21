@@ -19,6 +19,7 @@
     <module>tooling/synexia-jdk-a3-recipes</module>
     <module>tooling/a3</module>
     <module>tooling/backport-dag</module>
+    <module>tooling/recipe-agent-api</module>
     <module>backports</module>
     <module>tooling/module-packs</module>
   </modules>

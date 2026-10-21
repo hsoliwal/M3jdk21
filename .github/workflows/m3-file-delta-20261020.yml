@@ -1,0 +1,28 @@
+name: M3File delta Java21 contract
+on:
+  pull_request:
+    paths:
+      - 'm3/file/**'
+      - '.github/workflows/m3-file-delta-20261020.yml'
+  push:
+    paths:
+      - 'm3/file/**'
+      - '.github/workflows/m3-file-delta-20261020.yml'
+jobs:
+  source-class-delta:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Check Java 21 module and source/class delta contracts
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p build/m3file-delta-classes
+          javac --release 21 -Xlint:all,-module -Werror             -d build/m3file-delta-classes             m3/file/src/main/java/module-info.java             m3/file/src/main/java/com/m3/file/M3File.java             m3/file/src/main/java/com/m3/file/M3FileDeltaLedger.java             m3/file/src/test/java/com/m3/file/M3FileDeltaLedgerContract.java
+          java --module-path build/m3file-delta-classes             -m com.m3.file/com.m3.file.M3FileDeltaLedgerContract

@@ -1,9 +1,14 @@
+# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
+# SPDX-License-Identifier: Apache-2.0
 name: M3 TornadoVM Bulk Adapter
 
 on:
   pull_request:
     paths:
       - 'm3/ports/tornadovm-bulk/**'
+      - 'm3/vendor/tornadovm/**'
+      - 'm3/runtime-integration/tornado/**'
+      - 'm3/build-tornado.sh'
       - 'm3/pom.xml'
       - 'm3/compatibility/synexia-tornadovm-bulk-adapter-20261009.tsv'
       - 'm3/docs/name-mapping.json'
@@ -44,20 +49,12 @@ jobs:
           mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml
           -Dtest=M3TornadoBulkAdapterPortRecipeTest,M3TornadoBulkAdapterMappingRecipeTest,M3BulkSchedulerProviderRecoveryRecipeTest,M3BulkSchedulerRecoveryNameMappingRecipeTest,M3TornadoProviderUpgradeReceiverRecipeTest
           test
-      - name: Install receiver recipe artifact for plugin discovery
-        run: >
-          mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml
-          -DskipTests install
-      - name: Exact receiver fixed point
-        run: >
-          mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml
-          -Drewrite.recipeArtifactCoordinates=com.m3.tooling:migration-recipes:0.1.0-SNAPSHOT
-          -Drewrite.activeRecipes=com.m3.rewrite.backport.M3TornadoBulkAdapterPortRecipe,com.m3.rewrite.backport.M3BulkSchedulerProviderRecoveryRecipe,com.m3.rewrite.backport.M3TornadoProviderUpgradeReceiverRecipe
-          rewrite:dryRun
+      # Historical receiver unit tests remain above. The successor canonical
+      # Synexia recipe supplies the current SDK/refusal/fixed-point receipt.
 
-  cpu-adapter:
+  integrated-opencl:
     runs-on: ubuntu-24.04
-    timeout-minutes: 30
+    timeout-minutes: 60
     steps:
       - uses: actions/checkout@v5
       - uses: actions/setup-java@v5
@@ -65,20 +62,31 @@ jobs:
           distribution: temurin
           java-version: '21'
           cache: maven
-      - uses: actions/checkout@v5
+      - name: Install CPU OpenCL device
+        run: sudo apt-get update && sudo apt-get install -y pocl-opencl-icd ocl-icd-opencl-dev
+      - name: Build and seal the existing source-owned JUnit test support
+        run: >-
+          python3 -B m3/runtime-integration/tornado/build_junit_support.py
+          --repo-root "$GITHUB_WORKSPACE"
+          --jdk-home "$JAVA_HOME" --maven "$(command -v mvn)"
+          --maven-repo "$HOME/.m2/repository"
+          --out "$RUNNER_TEMP/m3-tornado-junit" --resolve-build-tools
+      - name: Lint integration and build source modules, tests and installed image
+        env:
+          POCL_MAX_PTHREAD_COUNT: '4'
+        run: >-
+          bash m3/build-tornado.sh
+          --jdk-home "$JAVA_HOME" --maven "$(command -v mvn)"
+          --maven-repo "$HOME/.m2/repository"
+          --junit-lock "$RUNNER_TEMP/m3-tornado-junit/JUNIT_LOCK.json"
+          --backend opencl --out "$RUNNER_TEMP/m3-tornado-proof"
+          --allow-bootstrap-jdk --require-device --resolve-build-tools --phase all
+      - name: Preserve exact commands, logs and admission scope
+        if: always()
+        uses: actions/upload-artifact@v4
         with:
-          repository: hsoliwal/synexia-tornadovm
-          ref: d7b4615ccaa286a1a11a60bc079969f24cc7f197
-          path: target/synexia-tornadovm
-      - name: Install pinned RV32IM provider with Java 21 preview ABI
-        run: >
-          mvn -B -ntp -f target/synexia-tornadovm/m3/cpu-gpu/pom.xml
-          -Dmaven.compiler.enablePreview=true -DskipTests install
-      - name: Install source-built JUnit 5.11.4 test runtime
-        run: >
-          mvn -B -ntp -f m3/vendor/third_party/pom.xml
-          -pl junit-jupiter-5.11.4,junit-platform-launcher-1.11.4 -am -DskipTests install
-      - name: CPU adapter contracts
-        run: >
-          mvn -B -ntp -f m3/ports/tornadovm-bulk/pom.xml
-          -Dmaven.compiler.enablePreview=true -Dm3.gpu=false test
+          name: m3-tornado-opencl-proof
+          path: |
+            ${{ runner.temp }}/m3-tornado-proof
+            ${{ runner.temp }}/m3-tornado-junit
+          if-no-files-found: error

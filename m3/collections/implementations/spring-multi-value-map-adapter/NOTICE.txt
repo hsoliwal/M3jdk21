@@ -1,8 +1,9 @@
-M3 collections scaffold: M3MultiValueMapAdapter
+M3 collections: M3MultiValueMapAdapter
 Copyright 2026 Hitesh Soliwal and contributors
 
 This product includes software developed by Hitesh Soliwal and contributors,
 licensed under the Apache License, Version 2.0.
 
-The declared public surface mirrors org.springframework.util.MultiValueMapAdapter from Spring Framework core 6.2.0
-(Apache-2.0) for compatibility. No provider implementation code is included.
+It implements the public API contract of org.springframework.util.MultiValueMapAdapter from
+Spring Framework core 6.2.0 (Copyright 2002-2024 the original author or authors, Apache License,
+Version 2.0) and links the Spring MultiValueMap interface. No Spring implementation code is included.

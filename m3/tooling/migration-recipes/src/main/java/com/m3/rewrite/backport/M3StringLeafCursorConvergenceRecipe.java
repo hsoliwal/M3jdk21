@@ -1,6 +1,6 @@
 // SPDX-FileCopyrightText: 2026 Hitesh Soliwal and contributors
 // SPDX-License-Identifier: Apache-2.0
-// Modified 2026-10-21: retain exact sealed postimages at the recipe fixed point.
+// Modified 2026-10-21: preserve current native-join and copy-path owners during shared cursor convergence.
 package com.m3.rewrite.backport;
 
 import java.io.IOException;
@@ -33,7 +33,7 @@ public final class M3StringLeafCursorConvergenceRecipe
   private static final String ROOT =
       "/com/m3/rewrite/backport/m3string-leaf-cursor-20261021/";
 
-  private record Target(String path, String before, String after, boolean required) {}
+  private record Target(String path, String before, String previousAfter, String after, boolean required) {}
 
   public static final class Inventory {
     final Map<String, SourceFile> seen = new HashMap<>();
@@ -66,12 +66,9 @@ public final class M3StringLeafCursorConvergenceRecipe
               return tree;
             }
             String blob = gitBlobSha1(file.printAll());
-            if (target.required() && !blob.equals(target.before()) && !blob.equals(target.after())) {
+            if (!blob.equals(target.before()) && !blob.equals(target.previousAfter()) && !blob.equals(target.after())) {
               inventory.conflicts.add(
                   "preimage drift " + path + " actual=" + gitBlobSha1(file.printAll()));
-            }
-            if (!target.required() && !gitBlobSha1(file.printAll()).equals(target.after())) {
-              inventory.conflicts.add("generated cursor drift " + path);
             }
           }
         }
@@ -101,7 +98,7 @@ public final class M3StringLeafCursorConvergenceRecipe
         stopAfterPreVisit();
         String path = file.getSourcePath().normalize().toString().replace('\\', '/');
         for (Target target : targets()) {
-          if (target.required() && target.path().equals(path)) {
+          if (target.path().equals(path)) {
             if (gitBlobSha1(file.printAll()).equals(target.after())) return file;
             return inventory.parsedAfter.get(path);
           }
@@ -142,18 +139,21 @@ public final class M3StringLeafCursorConvergenceRecipe
     return List.of(
         new Target(
             "src/java.base/share/classes/java/lang/M3StringPool.java",
-            "e5ab6c95526d9170fc88d9e3ac7c5040606a3367",
+            "394af2f062e9d99abf73e5a6f15df015a59b8072",
             "15231ee5a2c48153550c700f98722e15c0f4451c",
+            "7c05d6ab0082eb26f39e4e6dc93c422237588cae",
             true),
         new Target(
             "src/java.base/share/classes/java/lang/M3StringTokenRegex.java",
             "c06dc1366063d717cc998dae5593d4bf7997b6b6",
+            "",
             "ad87db7ed0f7e0490b46245782ec64185fb457d7",
             true),
         new Target(
             "src/java.base/share/classes/java/lang/M3StringLeafCursor.java",
             "",
             "1851d3ce7cd6de9f0a9d9b84ef83999b43de64f4",
+            "5ac0eee6e2a1eaf3e24c387c02bcff4e66eb2c0a",
             false));
   }
 

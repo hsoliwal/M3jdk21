@@ -46,6 +46,12 @@ final class M3StringLeafCursor {
         if (first != null) push(first.owner(), first.start(), first.length());
     }
 
+    /** Consume one retained immutable owner range without creating a child wrapper. */
+    M3StringLeafCursor(M3StringOwner owner, int start, int count, boolean coalesceAdjacent) {
+        this.coalesceAdjacent = coalesceAdjacent;
+        push(owner, start, count);
+    }
+
     boolean next() {
         if (!coalesceAdjacent) {
             if (!pullRaw()) return false;

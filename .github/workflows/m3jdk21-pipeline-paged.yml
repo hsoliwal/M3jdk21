@@ -1,0 +1,21 @@
+name: M3JDK21 paged pipeline private-atom proof
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - 'src/java.base/share/classes/jdk/internal/util/M3PipelinePlan.java'
+      - 'test/jdk/jdk/internal/util/M3Pipeline*Test.java'
+      - 'm3/tooling/pipeline-paged-20261019/**'
+      - '.github/workflows/m3jdk21-pipeline-paged.yml'
+jobs:
+  patch-module-contract:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Verify Java 21 in-place java.base
+        run: bash m3/tooling/pipeline-paged-20261019/verify.sh

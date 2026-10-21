@@ -5,6 +5,7 @@
 module jdk.m3.parser {
     requires transitive jdk.compiler;
     requires java.xml;
+    requires static transitive java.sql;
     exports jdk.m3.parser;
     exports jdk.m3.parser.grammar;
 }

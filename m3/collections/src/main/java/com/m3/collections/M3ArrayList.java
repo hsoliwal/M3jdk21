@@ -197,19 +197,27 @@ public final class M3ArrayList<E> extends AbstractList<E>
         Objects.requireNonNull(predicate, "predicate");
         int expectedModCount = modCount;
         int oldSize = size;
-        BitSet removed = new BitSet();
+        // Reuse the parent-owned Object[] and original stable two-pass algorithm.
+        // Short removal states fit in one primitive word, avoiding a BitSet allocation.
+        final boolean shortMask = oldSize <= Long.SIZE;
+        BitSet removed = shortMask ? null : new BitSet();
+        long removalBits = 0L;
         for (int read = 0; read < oldSize; read++) {
             boolean reject = predicate.test((E) elements[read]);
             if (modCount != expectedModCount) {
                 throw new ConcurrentModificationException("predicate structurally changed owner");
             }
-            if (reject) removed.set(read);
+            if (reject) {
+                if (shortMask) removalBits |= 1L << read;
+                else removed.set(read);
+            }
         }
-        int rejected = removed.cardinality();
+        int rejected = shortMask ? Long.bitCount(removalBits) : removed.cardinality();
         if (rejected == 0) return false;
         int write = 0;
         for (int read = 0; read < oldSize; read++) {
-            if (!removed.get(read)) elements[write++] = elements[read];
+            boolean reject = shortMask ? (removalBits & (1L << read)) != 0 : removed.get(read);
+            if (!reject) elements[write++] = elements[read];
         }
         Arrays.fill(elements, write, oldSize, null);
         size = write;
