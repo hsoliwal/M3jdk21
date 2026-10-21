@@ -47,7 +47,59 @@
       "target": "jdk.internal.mindex.M3MappedStringBacking",
       "status": "renamed target-side internal counterpart",
       "source_role": "Synexia donor/reference mapped backing",
-      "target_rule": "preserve mapped semantics while using M3 target vocabulary"
+      "target_rule": "preserve mapped semantics while using M3 target vocabulary",
+      "refinements": [
+        {
+          "migration_record_id": "synexia.m3jdk21.android-efficiency-20261020.mapped-scalars",
+          "date": "2026-10-20",
+          "target_path": "src/java.base/share/classes/jdk/internal/mindex/M3MappedStringBacking.java",
+          "target_base_commit": "8e868958f017482cfd6c5085869263c92a011cf6",
+          "inventory_commit": "d6d76b563050fc13c4fa79bc494edf29f1614b37",
+          "target_preimage_sha256": "f84d4d7763156d615d32b7a1024931e18073a1122227d8228d8638332407bd01",
+          "target_postimage_sha256": "89baa852620434a11eadf753f5c0593ac2ae88bfbe5d006904e849d378f281e6",
+          "target_preimage_git_blob": "c2dc2371c730aa758ccc45e06ba4ab95661e5593",
+          "target_postimage_git_blob": "27cc19dd4037da1779d57825d02393bb8ada732b",
+          "target_runtime_commit": "329cd9116eca5a3b2ec081fb6760ca3e6508da7e",
+          "receiving_pr_url": "https://github.com/hsoliwal/M3jdk21/pull/1572",
+          "status": "HOST_BOUNDED_QUALIFIED_RECEIVED_NO_PHASE_PROMOTION",
+          "canonical_recipe": {
+            "name": "com.synexia.rewrite.M3AndroidEfficiency20261020",
+            "source_path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3AndroidEfficiency20261020.java",
+            "source_sha256_observed": "624b8a771ebaf158450c33e6c930c7165bc82de5803dec435fbcf781fea0727c",
+            "manifest_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/m3-android-efficiency-20261020/manifest.tsv",
+            "manifest_sha256": "3f2bca03e4c67f376e0a5eccb753f433d224ca7f7d2c8032ef4b04fa6149ede7",
+            "canonical_repository": "hsoliwal/com.synexia",
+            "canonical_commit": "517d49739dca95ba5caad4a3f14f94171a984b71",
+            "canonical_pr_url": "https://github.com/hsoliwal/com.synexia/pull/12564",
+            "publication_state": "PUBLISHED_AT_INDEPENDENTLY_OBSERVED_CANONICAL_COMMIT",
+            "owner": "Existing M3GpuToolJoinRecipe / M3GpuToolJoinManifest",
+            "runtime_dependency_rule": "Canonical recipe and provenance ownership only; no Synexia runtime dependency.",
+            "license": "Apache-2.0; recipe implementation only, not the copied receiving source/template."
+          },
+          "qualification": {
+            "path": "java-leaf/QUALIFICATION.json",
+            "sha256": "33dda263a7c35d87137281be5cb01a40c6a44a34658071270124cbe90d55c00c",
+            "status": "PASS"
+          },
+          "target_rule": "Refine private Pages getInt/getLong with absolute reads of the existing mapped pages. Preserve subtraction bounds, exception ordering/messages, crossing refusal, big-endian decoding, cursor state and the existing M3MappedStringBacking runtime mapping.",
+          "receiving_sequence": {
+            "active_phase": "STRING",
+            "active_state": "QUALIFICATION_REQUIRED",
+            "phase_promotion": false,
+            "scope": "BOUNDED_OWNER_QUALIFICATION_ONLY",
+            "public_jdk_names_unchanged": true,
+            "canonical_payload_owner_unchanged": true
+          },
+          "pending_gates": [
+            "Source-built integrated M3JDK21/HotSpot and full libjava",
+            "Applicable jtreg/JCK and full Java SE compatibility",
+            "Android NDK/device and iOS VM/device/packaging execution",
+            "SWT/Swing/Skija mobile peers, lifecycle, input and native surfaces"
+          ],
+          "target_license": "GPL-2.0-only WITH Classpath-exception-2.0",
+          "source_template_license": "GPL-2.0-only WITH Classpath-exception-2.0"
+        }
+      ]
     },
     {
       "source": "com.synexia.indexstring.MIndexNativeResolver / com.synexia.indexstring.nativebridge.MIndexNativeIntern",
@@ -386,7 +438,56 @@
       "target": "com.m3.arrays.M3ArrayNative",
       "status": "candidate optional JNI boundary",
       "source_role": "Synexia native array materialization donor/reference",
-      "target_rule": "target-owned JNI symbols; no retained Java heap pointer; Java exact fallback; native absence never changes semantics"
+      "target_rule": "target-owned JNI symbols; no retained Java heap pointer; Java exact fallback; native absence never changes semantics",
+      "build_refinements": [
+        {
+          "migration_record_id": "synexia.m3jdk21.android-efficiency-20261020.arrays-common-jni-build",
+          "date": "2026-10-20",
+          "target_path": "m3/arrays/src/main/native/CMakeLists.txt",
+          "target_base_commit": "8e868958f017482cfd6c5085869263c92a011cf6",
+          "inventory_commit": "d6d76b563050fc13c4fa79bc494edf29f1614b37",
+          "target_preimage_sha256": "16a47b1494259d37063c1286d8c29f631777cfe3ba44db0cf4847f73fd925a9c",
+          "target_postimage_sha256": "1d3ea54f564b519d215a49bb6a7628aa894e94dc804cce5cae5cf92ee10a50c7",
+          "target_preimage_git_blob": "70d064ec1e41b6089105a471e831dc20c1e0ebe5",
+          "target_postimage_git_blob": "de0f4f870e2107ed74506a6ab9963b550cb4bc06",
+          "target_runtime_commit": "329cd9116eca5a3b2ec081fb6760ca3e6508da7e",
+          "receiving_pr_url": "https://github.com/hsoliwal/M3jdk21/pull/1572",
+          "status": "HOST_BOUNDED_QUALIFIED_RECEIVED_NO_PHASE_PROMOTION",
+          "canonical_recipe": {
+            "name": "com.synexia.rewrite.M3AndroidEfficiency20261020$CommonJniBuild",
+            "source_path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3AndroidEfficiency20261020.java",
+            "source_sha256_observed": "624b8a771ebaf158450c33e6c930c7165bc82de5803dec435fbcf781fea0727c",
+            "manifest_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/m3-android-efficiency-20261020/common-jni-build/manifest.tsv",
+            "manifest_sha256": "0b0b31bd583394003e8f97b79ad5ab64f02a02f3c0a1fb2a23f17499b3907b13",
+            "canonical_repository": "hsoliwal/com.synexia",
+            "canonical_commit": "517d49739dca95ba5caad4a3f14f94171a984b71",
+            "canonical_pr_url": "https://github.com/hsoliwal/com.synexia/pull/12564",
+            "publication_state": "PUBLISHED_AT_INDEPENDENTLY_OBSERVED_CANONICAL_COMMIT",
+            "owner": "Existing M3GpuToolJoinRecipe / M3GpuToolJoinManifest",
+            "runtime_dependency_rule": "Canonical recipe and provenance ownership only; no Synexia runtime dependency."
+          },
+          "qualification": {
+            "path": "donor-leaf/common-jni-build/QUALIFICATION.json",
+            "sha256": "1ea703992bf15733301f927fb3dac372e85e88c5794bbb91a481c6fa4ae6b658",
+            "status": "PASS_HOST_CLOSURE"
+          },
+          "target_rule": "Build the existing m3_arrays library with Android NDK target JNI headers and 16KiB linker options; retain non-Android JNI discovery, current M3ArrayNative Java owner, native implementation/payload owners, C ABI, fallback and tests.",
+          "receiving_sequence": {
+            "active_phase": "STRING",
+            "active_state": "QUALIFICATION_REQUIRED",
+            "phase_promotion": false,
+            "scope": "BOUNDED_OWNER_QUALIFICATION_ONLY",
+            "public_jdk_names_unchanged": true,
+            "canonical_payload_owner_unchanged": true
+          },
+          "pending_gates": [
+            "Source-built integrated M3JDK21/HotSpot and full libjava",
+            "Applicable jtreg/JCK and full Java SE compatibility",
+            "Android NDK/device and iOS VM/device/packaging execution",
+            "SWT/Swing/Skija mobile peers, lifecycle, input and native surfaces"
+          ]
+        }
+      ]
     },
     {
       "source": "com.synexia.indexstring.MatSegmentedIntArray / MatSegmentedLongArray",
@@ -2463,6 +2564,70 @@
         "rule": "Unchanged recipe/source bytes reuse earlier execution; current collection receipts do not extend Swing platform qualification."
       },
       "receiving_metadata_pr_url": "https://github.com/hsoliwal/M3jdk21/pull/1525"
+    },
+    {
+      "source": "Existing canonical sparse-20261014 state-relation compose atom",
+      "source_commit": "f04fbac91a7891e64b77c7b24cef1ab75ec88144",
+      "source_path": "synexia-openrewrite-recipes/tasks/m3-regex-relation-precompute-20261014/sparse-20261014/templates/synexia-indexstring/native/src/mindex_state_relation_jni.c.txt",
+      "source_blob": "e7a550949135a62478cbcbf7984aa35dac75b32b",
+      "source_sha256": "d29478ea9830ba1f27f23c26ddf085a31c1a7fcc3f0242ca3a194eabe8d14ef3",
+      "source_role": "REUSE existing first-party Apache-2.0 sparse implementation and exact portable fallback",
+      "target": "Existing jdk.internal.mindex.M3StateRelation common native composition owner",
+      "target_path": "src/java.base/share/native/libjava/M3StateRelation.c",
+      "target_module": "java.base",
+      "public_api": "Unchanged Java declarations, two JNI entry points and four native exports; no new facade or platform implementation.",
+      "license": "Apache-2.0",
+      "copyright": "Existing per-file copyright and donor attribution retained.",
+      "existing_migration_record_id": "synexia.regex.ordered-relations.adapter",
+      "refinements": [
+        {
+          "migration_record_id": "synexia.m3jdk21.android-efficiency-20261020.state-relation-sparse",
+          "date": "2026-10-20",
+          "target_path": "src/java.base/share/native/libjava/M3StateRelation.c",
+          "target_base_commit": "8e868958f017482cfd6c5085869263c92a011cf6",
+          "inventory_commit": "d6d76b563050fc13c4fa79bc494edf29f1614b37",
+          "target_preimage_sha256": "b1bfd040a1454ac06ab3f96952d97c8c5a6509dcf55dbba9797b6517eea2ef16",
+          "target_postimage_sha256": "faa999e2538087bd214c922cb1ad4b0dcaa208b04240acaed27771d47911cf1f",
+          "target_preimage_git_blob": "610ca8bab47065a49b9b58814d6392a287f4fd8b",
+          "target_postimage_git_blob": "d6bdfeb01dd632b83b978b1bdb5ed2cbdeaebd9d",
+          "target_runtime_commit": "329cd9116eca5a3b2ec081fb6760ca3e6508da7e",
+          "receiving_pr_url": "https://github.com/hsoliwal/M3jdk21/pull/1572",
+          "status": "HOST_BOUNDED_QUALIFIED_RECEIVED_NO_PHASE_PROMOTION",
+          "canonical_recipe": {
+            "name": "com.synexia.rewrite.M3AndroidEfficiency20261020",
+            "source_path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3AndroidEfficiency20261020.java",
+            "source_sha256_observed": "624b8a771ebaf158450c33e6c930c7165bc82de5803dec435fbcf781fea0727c",
+            "manifest_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/m3-android-efficiency-20261020/manifest.tsv",
+            "manifest_sha256": "3f2bca03e4c67f376e0a5eccb753f433d224ca7f7d2c8032ef4b04fa6149ede7",
+            "canonical_repository": "hsoliwal/com.synexia",
+            "canonical_commit": "517d49739dca95ba5caad4a3f14f94171a984b71",
+            "canonical_pr_url": "https://github.com/hsoliwal/com.synexia/pull/12564",
+            "publication_state": "PUBLISHED_AT_INDEPENDENTLY_OBSERVED_CANONICAL_COMMIT",
+            "owner": "Existing M3GpuToolJoinRecipe / M3GpuToolJoinManifest",
+            "runtime_dependency_rule": "Canonical recipe and provenance ownership only; no Synexia runtime dependency."
+          },
+          "qualification": {
+            "path": "native-leaf/QUALIFICATION.json",
+            "sha256": "18a887298d67d4873541a8326da7eaf5d5a7924f97bb1d964d6ace24114e8835",
+            "status": "HOST_CORRECTNESS_PASS_CONTROLLED_TIMING_PASS_ORIGINAL_HOLD_RETAINED"
+          },
+          "target_rule": "Receive the existing guarded sparse compose/private intrinsic atom. Preserve complete validation, dimensions1..64, bit63, exact/partial aliases, adjacent-row reuse, ceiling termination, repetition and the exact newer JNI/error/repeat tail.",
+          "receiving_sequence": {
+            "active_phase": "STRING",
+            "active_state": "QUALIFICATION_REQUIRED",
+            "phase_promotion": false,
+            "scope": "BOUNDED_OWNER_QUALIFICATION_ONLY",
+            "public_jdk_names_unchanged": true,
+            "canonical_payload_owner_unchanged": true
+          },
+          "pending_gates": [
+            "Source-built integrated M3JDK21/HotSpot and full libjava",
+            "Applicable jtreg/JCK and full Java SE compatibility",
+            "Android NDK/device and iOS VM/device/packaging execution",
+            "SWT/Swing/Skija mobile peers, lifecycle, input and native surfaces"
+          ]
+        }
+      ]
     }
   ],
   "imported_donor_sources": [],
@@ -5356,17 +5521,17 @@
         "targets": [
           {
             "repo": "hsoliwal/M3jdk21",
-            "commit": null,
+            "commit": "8e868958f017482cfd6c5085869263c92a011cf6",
             "module": "java.base",
             "path": "src/java.base/share/classes/jdk/internal/mindex/M3CI.java",
             "symbol": "jdk.internal.mindex.M3CI",
             "signatures": [
               "jdk.internal.mindex.M3CI"
             ],
-            "sha256": "9a8fa33a3edf5edaaf6b22eeeb203cd08ff386bdd4b7307cdd47e849bc3b98b1",
-            "git_blob_sha1": null,
+            "sha256": "8603f9aaded1ea8d8fdf886e3e549ae7196efc378f27eb4a452ca0f1907963fe",
+            "git_blob_sha1": "31620898a75896f922ce7f4e663b0e9d9a5ae068",
             "fingerprint": null,
-            "revision_role": "candidate",
+            "revision_role": "pinned",
             "tracking_ref": null
           }
         ],
@@ -5440,14 +5605,15 @@
         },
         "sync": {
           "source_revision": "7b5d45bea2fce0a042e4b85347c1eb4116846c55",
-          "target_revision": "3ec445df10a3e8fc74aa983181f0700ac7bfbcad",
+          "target_revision": "8e868958f017482cfd6c5085869263c92a011cf6",
           "direction": "source-to-target",
           "target_adaptations": [
             "Concise JDK counterpart names",
             "Weak defining-loader identity",
             "Counterpart-row effective declared release",
             "Exact VM-local precompute context",
-            "No application dependency"
+            "No application dependency",
+            "Pre-existing active-pin drift reconciliation to actual receiving base 8e868958f017482cfd6c5085869263c92a011cf6 only; no runtime edit or status/contract qualification change. Complete original record: m3/docs/android-efficiency-20261020/history/class-index-counterpart-before.json SHA256 349fb2885f2e8914d4e4c6714862a8c7f04b3991c013a06b26a0af4d20bd3320."
           ],
           "pending": [
             "Automatic Class/ClassLoader consumer and lifecycle hooks, module/agent/CDS/JNI/JIT admission",
@@ -5489,12 +5655,27 @@
               "fingerprint": null,
               "revision_role": "candidate",
               "tracking_ref": null
+            },
+            {
+              "repo": "hsoliwal/M3jdk21",
+              "commit": null,
+              "module": "java.base",
+              "path": "src/java.base/share/classes/jdk/internal/mindex/M3CI.java",
+              "symbol": "jdk.internal.mindex.M3CI",
+              "signatures": [
+                "jdk.internal.mindex.M3CI"
+              ],
+              "sha256": "9a8fa33a3edf5edaaf6b22eeeb203cd08ff386bdd4b7307cdd47e849bc3b98b1",
+              "git_blob_sha1": null,
+              "fingerprint": null,
+              "revision_role": "candidate",
+              "tracking_ref": null
             }
           ],
           "supersedes": []
         },
         "source_state": "experimental",
-        "observation": "See m3/tooling/cb/README.md; no automatic loader attachment, authenticated bytes or JIT/AOT reuse claim."
+        "observation": "See m3/tooling/cb/README.md; no automatic loader attachment, authenticated bytes or JIT/AOT reuse claim. Pre-existing active-pin drift reconciliation to actual receiving base 8e868958f017482cfd6c5085869263c92a011cf6 only; no runtime edit or status/contract qualification change. Complete original record: m3/docs/android-efficiency-20261020/history/class-index-counterpart-before.json SHA256 349fb2885f2e8914d4e4c6714862a8c7f04b3991c013a06b26a0af4d20bd3320."
       },
       {
         "id": "synexia.counterpart.MIndexAST",
@@ -9033,31 +9214,31 @@
         "targets": [
           {
             "repo": "hsoliwal/M3jdk21",
-            "commit": null,
+            "commit": "8e868958f017482cfd6c5085869263c92a011cf6",
             "module": "java.base",
             "path": "src/java.base/share/classes/jdk/internal/mindex/M3BitLane28.java",
             "symbol": "jdk.internal.mindex.M3BitLane28",
             "signatures": [
               "jdk.internal.mindex.M3BitLane28"
             ],
-            "sha256": "025556c17d0ce7879f63b75d04c30a3b16b6338ff73fa33f4ee49fdb1e196bb8",
-            "git_blob_sha1": "5942b1f46eedf83ad8c4ef8edee91f75e7424e7a",
+            "sha256": "f4ddda4db918b03450eb46d2c610d3bc1c7b65dc2ab0c4e00e42407e4026546b",
+            "git_blob_sha1": "dba8629e2a8a7ed9a18dc87e7849ac9a4e451566",
             "fingerprint": null,
-            "revision_role": "candidate"
+            "revision_role": "pinned"
           },
           {
             "repo": "hsoliwal/M3jdk21",
-            "commit": null,
+            "commit": "8e868958f017482cfd6c5085869263c92a011cf6",
             "module": "java.base",
             "path": "src/java.base/share/native/libjava/M3BitLane28.c",
             "symbol": "Java_jdk_internal_mindex_M3BitLane28_cardinality0",
             "signatures": [
               "Java_jdk_internal_mindex_M3BitLane28_cardinality0"
             ],
-            "sha256": "7cce5d9e56e5308f130e4dfaa191c663c27afb3e35ed206347447cc925dec89f",
-            "git_blob_sha1": "e68e05555efbe2dbf1355e6820cc7795d9c33942",
+            "sha256": "615b37ffa3781dae9739213db43299bfb2025e98b9960f35dc25c5b0325cc216",
+            "git_blob_sha1": "e635253e2ba030155f088e7750f6b1627f5e91cf",
             "fingerprint": null,
-            "revision_role": "candidate"
+            "revision_role": "pinned"
           }
         ],
         "owner": "jdk.internal.mindex.M3BitLane28",
@@ -9125,11 +9306,12 @@
         },
         "sync": {
           "source_revision": "123b49647bd3f1f7d5962a72a3e5bbb3cbc57038",
-          "target_revision": "87590cb96fb0e2dc0f88fae8e01957f7179cd255",
+          "target_revision": "8e868958f017482cfd6c5085869263c92a011cf6",
           "direction": "source-to-target",
           "target_adaptations": [
             "Internal package/name",
-            "JDK libjava ownership for bit count JNI"
+            "JDK libjava ownership for bit count JNI",
+            "Pre-existing active-pin drift reconciliation to actual receiving base 8e868958f017482cfd6c5085869263c92a011cf6 only; no runtime edit or status/contract qualification change. Complete original record: m3/docs/android-efficiency-20261020/history/segmented-bit-lane-28-before.json SHA256 7447594bd333dff329e320c6af54b00a3b6ac5e7b45a10861ad96080000f9ddb."
           ],
           "pending": [
             "Full-image validation of normal compiled kernels and the retained M3 interpreter boundary",
@@ -9169,12 +9351,40 @@
               "git_blob_sha1": "e68e05555efbe2dbf1355e6820cc7795d9c33942",
               "fingerprint": null,
               "revision_role": "candidate"
+            },
+            {
+              "repo": "hsoliwal/M3jdk21",
+              "commit": null,
+              "module": "java.base",
+              "path": "src/java.base/share/classes/jdk/internal/mindex/M3BitLane28.java",
+              "symbol": "jdk.internal.mindex.M3BitLane28",
+              "signatures": [
+                "jdk.internal.mindex.M3BitLane28"
+              ],
+              "sha256": "025556c17d0ce7879f63b75d04c30a3b16b6338ff73fa33f4ee49fdb1e196bb8",
+              "git_blob_sha1": "5942b1f46eedf83ad8c4ef8edee91f75e7424e7a",
+              "fingerprint": null,
+              "revision_role": "candidate"
+            },
+            {
+              "repo": "hsoliwal/M3jdk21",
+              "commit": null,
+              "module": "java.base",
+              "path": "src/java.base/share/native/libjava/M3BitLane28.c",
+              "symbol": "Java_jdk_internal_mindex_M3BitLane28_cardinality0",
+              "signatures": [
+                "Java_jdk_internal_mindex_M3BitLane28_cardinality0"
+              ],
+              "sha256": "7cce5d9e56e5308f130e4dfaa191c663c27afb3e35ed206347447cc925dec89f",
+              "git_blob_sha1": "e68e05555efbe2dbf1355e6820cc7795d9c33942",
+              "fingerprint": null,
+              "revision_role": "candidate"
             }
           ],
           "supersedes": []
         },
         "source_state": "implemented",
-        "observation": "The older com.m3.collections proof module is retained. New java.base owners are explicit internal capabilities, not a blanket java.util replacement. Source recovery: LOST at master 87590cb, restored through the version 2 recipe; historical record retained in history/9af35b3/mapping-records.json."
+        "observation": "The older com.m3.collections proof module is retained. New java.base owners are explicit internal capabilities, not a blanket java.util replacement. Source recovery: LOST at master 87590cb, restored through the version 2 recipe; historical record retained in history/9af35b3/mapping-records.json. Pre-existing active-pin drift reconciliation to actual receiving base 8e868958f017482cfd6c5085869263c92a011cf6 only; no runtime edit or status/contract qualification change. Complete original record: m3/docs/android-efficiency-20261020/history/segmented-bit-lane-28-before.json SHA256 7447594bd333dff329e320c6af54b00a3b6ac5e7b45a10861ad96080000f9ddb."
       },
       {
         "id": "synexia.collections.PackedBitAtoms",
@@ -9917,7 +10127,7 @@
           },
           {
             "repo": "hsoliwal/M3jdk21",
-            "commit": "e28fcedc76831dc7e7d1cbf71ea785dc545b117c",
+            "commit": "329cd9116eca5a3b2ec081fb6760ca3e6508da7e",
             "module": "java.base",
             "path": "src/java.base/share/native/libjava/M3StateRelation.c",
             "symbol": "m3_state_relation_compose / m3_state_relation_repeat",
@@ -9927,8 +10137,8 @@
               "jlongArray Java_jdk_internal_mindex_M3StateRelation_composeNative(JNIEnv*,jclass,jlongArray,jlongArray)",
               "jlongArray Java_jdk_internal_mindex_M3StateRelation_repeatNative(JNIEnv*,jclass,jlongArray,jlong)"
             ],
-            "sha256": "b1bfd040a1454ac06ab3f96952d97c8c5a6509dcf55dbba9797b6517eea2ef16",
-            "git_blob_sha1": "610ca8bab47065a49b9b58814d6392a287f4fd8b",
+            "sha256": "faa999e2538087bd214c922cb1ad4b0dcaa208b04240acaed27771d47911cf1f",
+            "git_blob_sha1": "d6bdfeb01dd632b83b978b1bdb5ed2cbdeaebd9d",
             "fingerprint": null,
             "revision_role": "pinned"
           },
@@ -9999,12 +10209,13 @@
         },
         "sync": {
           "source_revision": "515f2f2153aa6afbc758da34c495c7223ee7997a",
-          "target_revision": "e28fcedc76831dc7e7d1cbf71ea785dc545b117c",
+          "target_revision": "329cd9116eca5a3b2ec081fb6760ca3e6508da7e",
           "direction": "source-to-target",
           "target_adaptations": [
             "Internal M3 names and packages",
             "Runnable checkpoint replaces source IProgressMonitor",
-            "Numeric-only M3StateRelation subset and renamed JNI/header symbols"
+            "Numeric-only M3StateRelation subset and renamed JNI/header symbols",
+            "Scoped state-compose refinement synexia.m3jdk21.android-efficiency-20261020.state-relation-sparse; complete original record m3/docs/android-efficiency-20261020/history/ordered-relations-adapter-before.json SHA256 53535c80f8b2b434a4be6852a03175b831f42f73b8fa73a14ea3ec28c5ee13ac."
           ],
           "pending": [
             "Complete source API/dependency inventory and remaining Domain/RangeIndex/lifecycle surfaces",
@@ -10014,11 +10225,29 @@
         },
         "lineage": {
           "previous_sources": [],
-          "previous_targets": [],
+          "previous_targets": [
+            {
+              "repo": "hsoliwal/M3jdk21",
+              "commit": "e28fcedc76831dc7e7d1cbf71ea785dc545b117c",
+              "module": "java.base",
+              "path": "src/java.base/share/native/libjava/M3StateRelation.c",
+              "symbol": "m3_state_relation_compose / m3_state_relation_repeat",
+              "signatures": [
+                "int m3_state_relation_compose(const uint64_t*,const uint64_t*,uint64_t*,size_t)",
+                "int m3_state_relation_repeat(const uint64_t*,uint64_t*,size_t,uint64_t)",
+                "jlongArray Java_jdk_internal_mindex_M3StateRelation_composeNative(JNIEnv*,jclass,jlongArray,jlongArray)",
+                "jlongArray Java_jdk_internal_mindex_M3StateRelation_repeatNative(JNIEnv*,jclass,jlongArray,jlong)"
+              ],
+              "sha256": "b1bfd040a1454ac06ab3f96952d97c8c5a6509dcf55dbba9797b6517eea2ef16",
+              "git_blob_sha1": "610ca8bab47065a49b9b58814d6392a287f4fd8b",
+              "fingerprint": null,
+              "revision_role": "pinned"
+            }
+          ],
           "supersedes": []
         },
         "source_state": "partial",
-        "observation": "Four actual public receiving artifacts are pinned; no source candidate fixture is represented as an applied runtime owner."
+        "observation": "Partial adapter/source custody and all old product gates remain. Three unchanged artifacts retain previous pins. The common C active pin moves to the SDK-generated sparse refinement at receiving runtime commit 329cd9116eca5a3b2ec081fb6760ca3e6508da7e; complete previous record is preserved at m3/docs/android-efficiency-20261020/history/ordered-relations-adapter-before.json SHA256 53535c80f8b2b434a4be6852a03175b831f42f73b8fa73a14ea3ec28c5ee13ac. See synexia.m3jdk21.android-efficiency-20261020.state-relation-sparse for precise before/after pins and bounded host evidence."
       },
       {
         "id": "synexia.regex.ordered-relations.dispatch",
@@ -10396,6 +10625,442 @@
         },
         "source_state": "proposed",
         "observation": "Candidate0a91 exists only in committed source SDK output. Actual receiving test5d477 and DP164c are explicitly pinned; all new execution remains NOT_RUN."
+      },
+      {
+        "id": "synexia.m3jdk21.android-efficiency-20261020.mapped-scalars",
+        "kind": "specialization",
+        "status": "implemented-unverified",
+        "reason": "The exact canonical recipe/template is received at immutable runtime commit 329cd9116eca5a3b2ec081fb6760ca3e6508da7e with retained bounded host qualification. Source-built integrated product, compatibility and platform acceptance remain open.",
+        "sources": [
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "517d49739dca95ba5caad4a3f14f94171a984b71",
+            "module": "synexia-openrewrite-recipes",
+            "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/m3-android-efficiency-20261020/src/java.base/share/classes/jdk/internal/mindex/M3MappedStringBacking.java.txt",
+            "symbol": "jdk.internal.mindex.M3MappedStringBacking.Pages",
+            "signatures": [
+              "int getInt(long)",
+              "long getLong(long)"
+            ],
+            "sha256": "89baa852620434a11eadf753f5c0593ac2ae88bfbe5d006904e849d378f281e6",
+            "git_blob_sha1": "27cc19dd4037da1779d57825d02393bb8ada732b",
+            "fingerprint": null,
+            "revision_role": "pinned"
+          },
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": "d6d76b563050fc13c4fa79bc494edf29f1614b37",
+            "module": "java.base",
+            "path": "src/java.base/share/classes/jdk/internal/mindex/M3PrimitiveImage.java",
+            "symbol": "jdk.internal.mindex.M3PrimitiveImage",
+            "signatures": [
+              "public static M3PrimitiveImage open(Path path) throws IOException",
+              "public long bits(int slot)"
+            ],
+            "sha256": "db5720059a7ce4ab6919f2e0d6f23079a5bbf8915cc04a2a0c6171f2907e41d3",
+            "git_blob_sha1": "f0f8e4c82cd16ff0830d0f063b34d3243adde2e9",
+            "fingerprint": null,
+            "revision_role": "pinned"
+          }
+        ],
+        "targets": [
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": "329cd9116eca5a3b2ec081fb6760ca3e6508da7e",
+            "module": "java.base",
+            "path": "src/java.base/share/classes/jdk/internal/mindex/M3MappedStringBacking.java",
+            "symbol": "jdk.internal.mindex.M3MappedStringBacking.Pages",
+            "signatures": [
+              "int getInt(long)",
+              "long getLong(long)"
+            ],
+            "sha256": "89baa852620434a11eadf753f5c0593ac2ae88bfbe5d006904e849d378f281e6",
+            "git_blob_sha1": "27cc19dd4037da1779d57825d02393bb8ada732b",
+            "fingerprint": null,
+            "revision_role": "pinned"
+          }
+        ],
+        "owner": "jdk.internal.mindex.M3MappedStringBacking mapped store owner",
+        "identity": {
+          "namespace": "Retain the existing receiving owner, identities, offsets, indices and namespaces.",
+          "generation": "No canonical payload ownership, exposed identity, mapped-generation lifetime or public lifecycle change."
+        },
+        "contract": {
+          "differences": [
+            "Replace temporary scalar buffer views with absolute reads of the same private mapped page."
+          ],
+          "compatibility_obligations": [
+            "Preserve bounds/overflow refusal, exception order/messages, cross-page refusal, big-endian decoding, cursor state, MIXM/MIBM image formats and mapped lifetime.",
+            "Keep current primitive metadata arrays and public views. Resource result concerns admission, not steady-state public query speed."
+          ],
+          "public_surface": [
+            "Existing private scalar implementation only; public/protected Java descriptors unchanged."
+          ]
+        },
+        "format": {
+          "schema": null,
+          "abi": null,
+          "bootstrap": "Existing target build and runtime loading contract; no canonical Synexia runtime dependency."
+        },
+        "dependencies": [],
+        "materialization": {
+          "admission": "Exact receiving preimage and protected dependency hashes admitted by the actual canonical SDK.",
+          "joins": "Reuse existing manifest owner and current payload/array owners; serial per-file refinement.",
+          "outputs": "Only the designated receiving source/build file changes; canonical recipe, proof and catalogue custody remains in Synexia.",
+          "cached_facts": "No additional payload store, object namespace or persistent result cache."
+        },
+        "recipe": {
+          "id": "com.synexia.rewrite.M3AndroidEfficiency20261020",
+          "version": "20261020",
+          "path": null,
+          "sha256": null,
+          "preconditions": [
+            "Canonical recipe/template publication and immutable receiving runtime commit are pinned; exact references live on the associated naming refinement.",
+            "Require exact preimage/postimage, unchanged protected closure, actual SDK fixed point/refusals and scoped host qualification.",
+            "Keep recipe.path null: the canonical executable is not a local receiving path."
+          ],
+          "rollback": "Any restoration requires an exact-postimage, contract-preserving canonical recipe; refuse unrelated target edits."
+        },
+        "tests": [],
+        "provenance": {
+          "license": "GPL-2.0-only WITH Classpath-exception-2.0 for M3MappedStringBacking.java and its exact canonical resource template. Preserve the existing M3PrimitiveImage per-file rights. The separate canonical OpenRewrite recipe implementation is Apache-2.0.",
+          "publication": "Canonical commit 517d49739dca95ba5caad4a3f14f94171a984b71; canonical PR https://github.com/hsoliwal/com.synexia/pull/12564; receiving runtime commit 329cd9116eca5a3b2ec081fb6760ca3e6508da7e; receiving PR https://github.com/hsoliwal/M3jdk21/pull/1572. Scoped evidence is recorded under m3/docs/android-efficiency-20261020.",
+          "copied_code": true
+        },
+        "sync": {
+          "source_revision": "517d49739dca95ba5caad4a3f14f94171a984b71",
+          "target_revision": "329cd9116eca5a3b2ec081fb6760ca3e6508da7e",
+          "direction": "source-to-target",
+          "target_adaptations": [
+            "Replace temporary scalar buffer views with absolute reads of the same private mapped page."
+          ],
+          "pending": [
+            "Source-built integrated M3JDK21/HotSpot and full libjava",
+            "Applicable jtreg/JCK and full Java SE compatibility",
+            "Android NDK/device and iOS VM/device/packaging execution",
+            "SWT/Swing/Skija mobile peers, lifecycle, input and native surfaces"
+          ],
+          "conflicts": []
+        },
+        "lineage": {
+          "previous_sources": [],
+          "previous_targets": [
+            {
+              "repo": "hsoliwal/M3jdk21",
+              "commit": "8e868958f017482cfd6c5085869263c92a011cf6",
+              "module": "java.base",
+              "path": "src/java.base/share/classes/jdk/internal/mindex/M3MappedStringBacking.java",
+              "symbol": "jdk.internal.mindex.M3MappedStringBacking.Pages",
+              "signatures": [
+                "int getInt(long)",
+                "long getLong(long)"
+              ],
+              "sha256": "f84d4d7763156d615d32b7a1024931e18073a1122227d8228d8638332407bd01",
+              "git_blob_sha1": "c2dc2371c730aa758ccc45e06ba4ab95661e5593",
+              "fingerprint": null,
+              "revision_role": "pinned"
+            }
+          ],
+          "supersedes": []
+        },
+        "source_state": "partial",
+        "observation": "Canonical PR12564 commit 517d49739dca95ba5caad4a3f14f94171a984b71 and receiving PR1572 runtime commit 329cd9116eca5a3b2ec081fb6760ca3e6508da7e are independently observed. Exact SDK output and scoped host evidence are retained. Migration validation is structural; phase remains STRING / QUALIFICATION_REQUIRED and no runtime test or product acceptance status is promoted."
+      },
+      {
+        "id": "synexia.m3jdk21.android-efficiency-20261020.state-relation-sparse",
+        "kind": "specialization",
+        "status": "implemented-unverified",
+        "reason": "The exact canonical recipe/template is received at immutable runtime commit 329cd9116eca5a3b2ec081fb6760ca3e6508da7e with retained bounded host qualification. Source-built integrated product, compatibility and platform acceptance remain open.",
+        "sources": [
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "517d49739dca95ba5caad4a3f14f94171a984b71",
+            "module": "synexia-openrewrite-recipes",
+            "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/m3-android-efficiency-20261020/src/java.base/share/native/libjava/M3StateRelation.c.txt",
+            "symbol": "m3_state_relation_compose / m3_state_relation_repeat",
+            "signatures": [
+              "int m3_state_relation_compose(const uint64_t*,const uint64_t*,uint64_t*,size_t)",
+              "int m3_state_relation_repeat(const uint64_t*,uint64_t*,size_t,uint64_t)",
+              "jlongArray Java_jdk_internal_mindex_M3StateRelation_composeNative(JNIEnv*,jclass,jlongArray,jlongArray)",
+              "jlongArray Java_jdk_internal_mindex_M3StateRelation_repeatNative(JNIEnv*,jclass,jlongArray,jlong)"
+            ],
+            "sha256": "faa999e2538087bd214c922cb1ad4b0dcaa208b04240acaed27771d47911cf1f",
+            "git_blob_sha1": "d6bdfeb01dd632b83b978b1bdb5ed2cbdeaebd9d",
+            "fingerprint": null,
+            "revision_role": "pinned"
+          },
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "f04fbac91a7891e64b77c7b24cef1ab75ec88144",
+            "module": "synexia-openrewrite-recipes",
+            "path": "synexia-openrewrite-recipes/tasks/m3-regex-relation-precompute-20261014/sparse-20261014/templates/synexia-indexstring/native/src/mindex_state_relation_jni.c.txt",
+            "symbol": "mindex_state_relation_compose",
+            "signatures": [
+              "int mindex_state_relation_compose(const uint64_t*,const uint64_t*,uint64_t*,size_t)"
+            ],
+            "sha256": "d29478ea9830ba1f27f23c26ddf085a31c1a7fcc3f0242ca3a194eabe8d14ef3",
+            "git_blob_sha1": "e7a550949135a62478cbcbf7984aa35dac75b32b",
+            "fingerprint": null,
+            "revision_role": "pinned"
+          }
+        ],
+        "targets": [
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": "329cd9116eca5a3b2ec081fb6760ca3e6508da7e",
+            "module": "java.base",
+            "path": "src/java.base/share/native/libjava/M3StateRelation.c",
+            "symbol": "m3_state_relation_compose / m3_state_relation_repeat",
+            "signatures": [
+              "int m3_state_relation_compose(const uint64_t*,const uint64_t*,uint64_t*,size_t)",
+              "int m3_state_relation_repeat(const uint64_t*,uint64_t*,size_t,uint64_t)",
+              "jlongArray Java_jdk_internal_mindex_M3StateRelation_composeNative(JNIEnv*,jclass,jlongArray,jlongArray)",
+              "jlongArray Java_jdk_internal_mindex_M3StateRelation_repeatNative(JNIEnv*,jclass,jlongArray,jlong)"
+            ],
+            "sha256": "faa999e2538087bd214c922cb1ad4b0dcaa208b04240acaed27771d47911cf1f",
+            "git_blob_sha1": "d6bdfeb01dd632b83b978b1bdb5ed2cbdeaebd9d",
+            "fingerprint": null,
+            "revision_role": "pinned"
+          }
+        ],
+        "owner": "jdk.internal.mindex.M3DotStarRelations ordered algebra; M3StateRelation primitive representation; existing text owners retain payload authority",
+        "identity": {
+          "namespace": "Retain the existing receiving owner, identities, offsets, indices and namespaces.",
+          "generation": "No canonical payload ownership, exposed identity, mapped-generation lifetime or public lifecycle change."
+        },
+        "contract": {
+          "differences": [
+            "Receive existing CTZ/clear-lowest-bit traversal, intrinsic calls on nonzero words and exact original portable body.",
+            "Active C SHA256 b1bfd040a1454ac06ab3f96952d97c8c5a6509dcf55dbba9797b6517eea2ef16 / Git blob 610ca8bab47065a49b9b58814d6392a287f4fd8b becomes SHA256 faa999e2538087bd214c922cb1ad4b0dcaa208b04240acaed27771d47911cf1f / Git blob d6bdfeb01dd632b83b978b1bdb5ed2cbdeaebd9d.",
+            "Reconcile synexia.regex.ordered-relations.adapter active C pin; complete original record is retained at m3/docs/android-efficiency-20261020/history/ordered-relations-adapter-before.json SHA256 53535c80f8b2b434a4be6852a03175b831f42f73b8fa73a14ea3ec28c5ee13ac."
+          ],
+          "compatibility_obligations": [
+            "Keep all validation before output, dimensions1..64/bit63, sparse/dense/zero/full masks, adjacent-row reuse, ceiling termination, repetition, exact and partial aliases.",
+            "Preserve the current newer JNI/error/repeat tail byte-for-byte and exactly two JNI plus two C exports.",
+            "Retain original zero-control timing HOLD and fixed-CPU investigation; no universal nonregression claim."
+          ],
+          "public_surface": [
+            "Existing Java API and native exports unchanged; no second runtime facade."
+          ]
+        },
+        "format": {
+          "schema": null,
+          "abi": "Existing two JNI exports and two C kernel exports unchanged",
+          "bootstrap": "Existing target build and runtime loading contract; no canonical Synexia runtime dependency."
+        },
+        "dependencies": [
+          {
+            "id": "synexia.regex.ordered-relations.adapter",
+            "resolution": "resolved",
+            "reason": "Existing receiving numeric adapter supplies the unchanged Java/header/JNI closure; its full-API and matched-image gates remain open."
+          }
+        ],
+        "materialization": {
+          "admission": "Exact receiving preimage and protected dependency hashes admitted by the actual canonical SDK.",
+          "joins": "Reuse existing manifest owner and current payload/array owners; serial per-file refinement.",
+          "outputs": "Only the designated receiving source/build file changes; canonical recipe, proof and catalogue custody remains in Synexia.",
+          "cached_facts": "No additional payload store, object namespace or persistent result cache."
+        },
+        "recipe": {
+          "id": "com.synexia.rewrite.M3AndroidEfficiency20261020",
+          "version": "20261020",
+          "path": null,
+          "sha256": null,
+          "preconditions": [
+            "Canonical recipe/template publication and immutable receiving runtime commit are pinned; exact references live on the associated naming refinement.",
+            "Require exact preimage/postimage, unchanged protected closure, actual SDK fixed point/refusals and scoped host qualification.",
+            "Keep recipe.path null: the canonical executable is not a local receiving path."
+          ],
+          "rollback": "Any restoration requires an exact-postimage, contract-preserving canonical recipe; refuse unrelated target edits."
+        },
+        "tests": [],
+        "provenance": {
+          "license": "Apache-2.0; retain per-file rights and existing module notices.",
+          "publication": "Canonical commit 517d49739dca95ba5caad4a3f14f94171a984b71; canonical PR https://github.com/hsoliwal/com.synexia/pull/12564; receiving runtime commit 329cd9116eca5a3b2ec081fb6760ca3e6508da7e; receiving PR https://github.com/hsoliwal/M3jdk21/pull/1572. Scoped evidence is recorded under m3/docs/android-efficiency-20261020.",
+          "copied_code": true
+        },
+        "sync": {
+          "source_revision": "517d49739dca95ba5caad4a3f14f94171a984b71",
+          "target_revision": "329cd9116eca5a3b2ec081fb6760ca3e6508da7e",
+          "direction": "source-to-target",
+          "target_adaptations": [
+            "Receive existing CTZ/clear-lowest-bit traversal, intrinsic calls on nonzero words and exact original portable body.",
+            "Active C SHA256 b1bfd040a1454ac06ab3f96952d97c8c5a6509dcf55dbba9797b6517eea2ef16 / Git blob 610ca8bab47065a49b9b58814d6392a287f4fd8b becomes SHA256 faa999e2538087bd214c922cb1ad4b0dcaa208b04240acaed27771d47911cf1f / Git blob d6bdfeb01dd632b83b978b1bdb5ed2cbdeaebd9d.",
+            "Reconcile synexia.regex.ordered-relations.adapter active C pin; complete original record is retained at m3/docs/android-efficiency-20261020/history/ordered-relations-adapter-before.json SHA256 53535c80f8b2b434a4be6852a03175b831f42f73b8fa73a14ea3ec28c5ee13ac."
+          ],
+          "pending": [
+            "Source-built integrated M3JDK21/HotSpot and full libjava",
+            "Applicable jtreg/JCK and full Java SE compatibility",
+            "Android NDK/device and iOS VM/device/packaging execution",
+            "SWT/Swing/Skija mobile peers, lifecycle, input and native surfaces"
+          ],
+          "conflicts": []
+        },
+        "lineage": {
+          "previous_sources": [],
+          "previous_targets": [
+            {
+              "repo": "hsoliwal/M3jdk21",
+              "commit": "e28fcedc76831dc7e7d1cbf71ea785dc545b117c",
+              "module": "java.base",
+              "path": "src/java.base/share/native/libjava/M3StateRelation.c",
+              "symbol": "m3_state_relation_compose / m3_state_relation_repeat",
+              "signatures": [
+                "int m3_state_relation_compose(const uint64_t*,const uint64_t*,uint64_t*,size_t)",
+                "int m3_state_relation_repeat(const uint64_t*,uint64_t*,size_t,uint64_t)",
+                "jlongArray Java_jdk_internal_mindex_M3StateRelation_composeNative(JNIEnv*,jclass,jlongArray,jlongArray)",
+                "jlongArray Java_jdk_internal_mindex_M3StateRelation_repeatNative(JNIEnv*,jclass,jlongArray,jlong)"
+              ],
+              "sha256": "b1bfd040a1454ac06ab3f96952d97c8c5a6509dcf55dbba9797b6517eea2ef16",
+              "git_blob_sha1": "610ca8bab47065a49b9b58814d6392a287f4fd8b",
+              "fingerprint": null,
+              "revision_role": "pinned"
+            }
+          ],
+          "supersedes": []
+        },
+        "source_state": "partial",
+        "observation": "Canonical PR12564 commit 517d49739dca95ba5caad4a3f14f94171a984b71 and receiving PR1572 runtime commit 329cd9116eca5a3b2ec081fb6760ca3e6508da7e are independently observed. Exact SDK output and scoped host evidence are retained. Migration validation is structural; phase remains STRING / QUALIFICATION_REQUIRED and no runtime test or product acceptance status is promoted."
+      },
+      {
+        "id": "synexia.m3jdk21.android-efficiency-20261020.arrays-common-jni-build",
+        "kind": "specialization",
+        "status": "implemented-unverified",
+        "reason": "The exact canonical recipe/template is received at immutable runtime commit 329cd9116eca5a3b2ec081fb6760ca3e6508da7e with retained bounded host qualification. Source-built integrated product, compatibility and platform acceptance remain open.",
+        "sources": [
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "517d49739dca95ba5caad4a3f14f94171a984b71",
+            "module": "synexia-openrewrite-recipes",
+            "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/m3-android-efficiency-20261020/common-jni-build/m3/arrays/src/main/native/CMakeLists.txt.txt",
+            "symbol": "m3_arrays CMake target",
+            "signatures": [
+              "add_library(m3_arrays SHARED m3_arrays.c m3_arrays_jni.c)",
+              "if(ANDROID) target NDK JNI headers and 16384-byte max/common page-size link options"
+            ],
+            "sha256": "1d3ea54f564b519d215a49bb6a7628aa894e94dc804cce5cae5cf92ee10a50c7",
+            "git_blob_sha1": "de0f4f870e2107ed74506a6ab9963b550cb4bc06",
+            "fingerprint": null,
+            "revision_role": "pinned"
+          },
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "f04fbac91a7891e64b77c7b24cef1ab75ec88144",
+            "module": "synexia-indexstring",
+            "path": "synexia-indexstring/native/shared-arrays/CMakeLists.txt",
+            "symbol": "shared-arrays Android JNI build branches",
+            "signatures": [
+              "if(ANDROID) NDK JNI discovery",
+              "target_link_options 16KiB page alignment"
+            ],
+            "sha256": "b298cb31ec06b22211055e90345e3ceca2d608a6e9403317187960daa8a07c55",
+            "git_blob_sha1": "2f2439e381f755a9834e10f417fcb41f784cb465",
+            "fingerprint": null,
+            "revision_role": "pinned"
+          }
+        ],
+        "targets": [
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": "329cd9116eca5a3b2ec081fb6760ca3e6508da7e",
+            "module": "m3/arrays",
+            "path": "m3/arrays/src/main/native/CMakeLists.txt",
+            "symbol": "m3_arrays CMake target",
+            "signatures": [
+              "add_library(m3_arrays SHARED m3_arrays.c m3_arrays_jni.c)",
+              "if(ANDROID) target NDK JNI headers and 16384-byte max/common page-size link options"
+            ],
+            "sha256": "1d3ea54f564b519d215a49bb6a7628aa894e94dc804cce5cae5cf92ee10a50c7",
+            "git_blob_sha1": "de0f4f870e2107ed74506a6ab9963b550cb4bc06",
+            "fingerprint": null,
+            "revision_role": "pinned"
+          }
+        ],
+        "owner": "com.m3.arrays.M3ArrayNative existing common JNI build and library",
+        "identity": {
+          "namespace": "Retain the existing receiving owner, identities, offsets, indices and namespaces.",
+          "generation": "No canonical payload ownership, exposed identity, mapped-generation lifetime or public lifecycle change."
+        },
+        "contract": {
+          "differences": [
+            "Adapt only existing CMake Android JNI discovery and target 16KiB link branches."
+          ],
+          "compatibility_obligations": [
+            "Reuse existing com.m3.arrays.M3ArrayNative and common m3_arrays library; preserve fallback, Java/native declarations, payload arrays and ownership.",
+            "Keep every non-Android JNI discovery path, current warning flags and tests.",
+            "Host proof does not execute Android target headers, linking, ELF/package alignment, device execution or an Apple VM adapter."
+          ],
+          "public_surface": [
+            "Existing Java API and native exports unchanged; no second runtime facade."
+          ]
+        },
+        "format": {
+          "schema": null,
+          "abi": "Java_com_m3_arrays_M3ArrayNative_nativeCompareUtf16; Java_com_m3_arrays_M3ArrayNative_nativeConcatenateUtf16; m3_compare_utf16",
+          "bootstrap": "Existing target build and runtime loading contract; no canonical Synexia runtime dependency."
+        },
+        "dependencies": [],
+        "materialization": {
+          "admission": "Exact receiving preimage and protected dependency hashes admitted by the actual canonical SDK.",
+          "joins": "Reuse existing manifest owner and current payload/array owners; serial per-file refinement.",
+          "outputs": "Only the designated receiving source/build file changes; canonical recipe, proof and catalogue custody remains in Synexia.",
+          "cached_facts": "No additional payload store, object namespace or persistent result cache."
+        },
+        "recipe": {
+          "id": "com.synexia.rewrite.M3AndroidEfficiency20261020$CommonJniBuild",
+          "version": "20261020",
+          "path": null,
+          "sha256": null,
+          "preconditions": [
+            "Canonical recipe/template publication and immutable receiving runtime commit are pinned; exact references live on the associated naming refinement.",
+            "Require exact preimage/postimage, unchanged protected closure, actual SDK fixed point/refusals and scoped host qualification.",
+            "Keep recipe.path null: the canonical executable is not a local receiving path."
+          ],
+          "rollback": "Any restoration requires an exact-postimage, contract-preserving canonical recipe; refuse unrelated target edits."
+        },
+        "tests": [],
+        "provenance": {
+          "license": "Apache-2.0; retain per-file rights and existing module notices.",
+          "publication": "Canonical commit 517d49739dca95ba5caad4a3f14f94171a984b71; canonical PR https://github.com/hsoliwal/com.synexia/pull/12564; receiving runtime commit 329cd9116eca5a3b2ec081fb6760ca3e6508da7e; receiving PR https://github.com/hsoliwal/M3jdk21/pull/1572. Scoped evidence is recorded under m3/docs/android-efficiency-20261020.",
+          "copied_code": true
+        },
+        "sync": {
+          "source_revision": "517d49739dca95ba5caad4a3f14f94171a984b71",
+          "target_revision": "329cd9116eca5a3b2ec081fb6760ca3e6508da7e",
+          "direction": "source-to-target",
+          "target_adaptations": [
+            "Adapt only existing CMake Android JNI discovery and target 16KiB link branches."
+          ],
+          "pending": [
+            "Source-built integrated M3JDK21/HotSpot and full libjava",
+            "Applicable jtreg/JCK and full Java SE compatibility",
+            "Android NDK/device and iOS VM/device/packaging execution",
+            "SWT/Swing/Skija mobile peers, lifecycle, input and native surfaces"
+          ],
+          "conflicts": []
+        },
+        "lineage": {
+          "previous_sources": [],
+          "previous_targets": [
+            {
+              "repo": "hsoliwal/M3jdk21",
+              "commit": "8e868958f017482cfd6c5085869263c92a011cf6",
+              "module": "m3/arrays",
+              "path": "m3/arrays/src/main/native/CMakeLists.txt",
+              "symbol": "m3_arrays CMake target",
+              "signatures": [
+                "add_library(m3_arrays SHARED m3_arrays.c m3_arrays_jni.c)"
+              ],
+              "sha256": "16a47b1494259d37063c1286d8c29f631777cfe3ba44db0cf4847f73fd925a9c",
+              "git_blob_sha1": "70d064ec1e41b6089105a471e831dc20c1e0ebe5",
+              "fingerprint": null,
+              "revision_role": "pinned"
+            }
+          ],
+          "supersedes": []
+        },
+        "source_state": "partial",
+        "observation": "Canonical PR12564 commit 517d49739dca95ba5caad4a3f14f94171a984b71 and receiving PR1572 runtime commit 329cd9116eca5a3b2ec081fb6760ca3e6508da7e are independently observed. Exact SDK output and scoped host evidence are retained. Migration validation is structural; phase remains STRING / QUALIFICATION_REQUIRED and no runtime test or product acceptance status is promoted."
       }
     ]
   },
