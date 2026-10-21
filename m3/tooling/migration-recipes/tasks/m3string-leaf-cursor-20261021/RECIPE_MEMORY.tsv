@@ -1,0 +1,2 @@
+seq	recipe	trigger	observed	correction	guard	lesson	category	donor	status
+1	com.m3.rewrite.backport.M3StringLeafCursorConvergenceRecipe	post-token-regex-review	M3StringPool and M3StringTokenRegex duplicated persistent tuple owner-range traversal with different adjacency semantics	PENDING	M3StringLeafCursorConvergenceRecipeTest	extract one cursor with explicit coalesceAdjacent policy; never silently merge token occurrences	m3string-leaf-traversal	M3JDK21-existing-LeafCursor	RECORDED
