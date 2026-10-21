@@ -1,7 +1,7 @@
 upstream_fqcn	vendor	existing_m3_owner	proposed_m3_role_NOT_IMPLEMENTED	disposition	semantic_contract
 com.google.common.collect.ArrayListMultimap	GUAVA	-	M3ListMultimap	PENDING	guava-mutable-list-multimap
-com.google.common.collect.BiMap	GUAVA	-	M3BiIndexMap	PENDING	bijective-inverse
-com.google.common.collect.ClassToInstanceMap	GUAVA	-	M3ClassIndexMap	PENDING	class-token-key
+com.google.common.collect.BiMap	GUAVA	com.m3.collections.interop.M3BiMap	M3BiIndexMap	OPTIONAL_ADAPTER	bijective-inverse
+com.google.common.collect.ClassToInstanceMap	GUAVA	com.m3.collections.interop.M3GuavaClassToInstanceMaps	M3ClassIndexMap	OPTIONAL_ADAPTER	class-token-key
 com.google.common.collect.HashBiMap	GUAVA	-	M3BiIndexMap	PENDING	hash-bidirectional
 com.google.common.collect.HashMultimap	GUAVA	-	M3SetMultimap	PENDING	guava-mutable-set-multimap
 com.google.common.collect.HashMultiset	GUAVA	-	M3CountBag	PENDING	hash-counted-multiset

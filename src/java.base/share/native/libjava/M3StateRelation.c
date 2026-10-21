@@ -5,6 +5,24 @@
 #include <jni.h>
 #include <string.h>
 
+/* Only called for nonzero state masks; the builtin is undefined at zero.
+ * The portable lane has at most six tests, independent of the highest set bit. */
+static unsigned int relation_trailing_zeros(uint64_t bits) {
+#if (defined(__GNUC__) || defined(__clang__)) && !defined(M3_STATE_RELATION_PORTABLE_CTZ)
+  return (unsigned int) __builtin_ctzll((unsigned long long) bits);
+#else
+  unsigned int count = 0;
+  if ((bits & UINT64_C(0xffffffff)) == 0) { count += 32; bits >>= 32; }
+  if ((bits & UINT64_C(0xffff)) == 0) { count += 16; bits >>= 16; }
+  if ((bits & UINT64_C(0xff)) == 0) { count += 8; bits >>= 8; }
+  if ((bits & UINT64_C(0xf)) == 0) { count += 4; bits >>= 4; }
+  if ((bits & UINT64_C(0x3)) == 0) { count += 2; bits >>= 2; }
+  if ((bits & UINT64_C(0x1)) == 0) ++count;
+  return count;
+#endif
+}
+
+
 int m3_state_relation_compose(const uint64_t *left, const uint64_t *right,
                                  uint64_t *output, size_t states) {
   uint64_t temporary[64];
@@ -26,12 +44,10 @@ int m3_state_relation_compose(const uint64_t *left, const uint64_t *right,
     const uint64_t active = left[row];
     if (row == 0 || active != previous) {
       uint64_t bits = active;
-      size_t column = 0;
       value = 0;
       while (bits != 0 && value != ceiling) {
-        if ((bits & UINT64_C(1)) != 0) value |= right[column];
-        bits >>= 1;
-        ++column;
+        value |= right[relation_trailing_zeros(bits)];
+        bits &= bits - UINT64_C(1);
       }
       previous = active;
     }

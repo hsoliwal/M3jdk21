@@ -3,6 +3,35 @@
   "policy": "additive; no blind renames or unverified compatibility claims; Synexia donor names do not define M3JDK target ABI; precompute is internal-only",
   "mappings": [
     {
+      "source": "M3JDK21 java.lang.String standard byte[] shape + canonical OS-interned M3String owner/range",
+      "target": "java.lang.String.value/m3, java.lang.M3String, java.base JNI/HotSpot String region and array-return boundaries",
+      "status": "DRAFT_DUAL_VIEW_CONTRACT_TEST_PENDING_INSTALLED_IMAGE",
+      "recipe": "com.synexia.rewrite.m3dual.M3DualStringViewRecipe",
+      "target_rule": "A standard java.lang.String retains byte[] value/coder/hash fields and its additional M3 owner/coordinate. For M3-backed String, value shares one zero-length sentinel; the actual immutable content lives only in interned fixed arrays or OS-mapped atoms. JNI native view traversal uses these owners without flattening. Explicit mutable byte[]/char[] outputs are fresh compatibility arrays, never discontiguous zero-copy Java aliases.",
+      "not_claimed": "No java.lang.String char[] backing field in JDK21; no global OS intern API; true discontiguous Java primitive-array virtualization would require separate HotSpot ABI/GC/JMM/JNI proof",
+      "test": "test/jdk/java/lang/String/M3StringOsMappedNativeConcatTest.java",
+      "gates": "Target Java21/HotSpot installed image, JNI/JTReg, GC/CDS, replay/fixed point/refusal and comparative process/native/heap resource costs pending"
+    },
+    {
+      "source": "OS-mapped interned MIndexString/shared array atom views and M3JDK21 native String consumers",
+      "target": "java.lang.M3StringPool.concatViewsNative0 / src/java.base/share/native/libjava/M3StringPool.c",
+      "status": "DRAFT_JNI_OS_MAPPED_CONCAT_NO_INSTALLED_RUNTIME_QUALIFICATION",
+      "recipe": "com.synexia.rewrite.m3jni.M3OsInternedConcatRecipe",
+      "target_rule": "Compose already interned M3String owners and ranges through a JNI fixed 32-level reference stack; preserve mapped payload owners, immutable fixed backing arrays, canonical tuple DAG, exact UTF-16 order, no joined text buffer or retained heap pointer",
+      "gates": "Java21 native isolated-proof PASS; target HotSpot image/JNI symbol, installed jtreg, GC/CDS, Windows/Linux/Android, Maven/OpenRewrite replay, CPU/heap/native comparative benchmarks PENDING",
+      "note": "OS provides mapped/sharable memory, not a global OS intern API; canonical identities remain M3JDK21 owned; no automatic String hot-path switch before performance qualification"
+    },
+    {
+        "source": "Synexia MIndexString owner/range interning; tools4j/shortstring primitive-codec technique (MIT, no code copied)",
+        "source_commit": "383d2d17d5d1942673976db34cda3695991ca422",
+        "target": "java.lang.M3StringImmediate with HotSpot java_lang_M3String native char/copy adapter",
+        "status": "DRAFT_FIXED_ARRAY_IMMEDIATE_RECEIVER_NOT_RUNTIME_QUALIFIED",
+        "recipe": "com.synexia.rewrite.m3fixedshort.M3FixedArrayShortStringRecipe",
+        "target_rule": "Fixed long[32] pages own packed immediate words; weak index and slot owners; preserve java.lang.String, existing owner/range/tuple view, Unicode refusal and JNI compatibility",
+        "gates": "Source-sealed, fixed point/refusal fixture, JDK21 patch compile, HotSpot native build, jtreg, GC/CDS and CPU/heap/native evidence required; no runtime promotion before proof",
+        "provenance": "tools4j MIT copyright 2023 tools4j.org (Marco Terzer); target Java/HotSpot licenses unchanged"
+    },
+    {
       "source": "com.synexia.indexstring.projection.MIndexDerivativeRegex / MIndexPredicateAlphabet / native derivative power ABI",
       "source_commit": "892e3f6c51d78bc0948e8a8cf736055b4c70eafa",
       "source_blob": "292675e404c5a087e0039e20bf2b63f22bb97bfe",
@@ -9134,6 +9163,21 @@
   },
   "optional_module_mappings": [
     {
+      "module": "jdk.m3.tornado",
+      "mapping": "m3/docs/name-mapping.d/m3-tornado-integrated-runtime-20261021.json",
+      "intake_mode": "INDEPENDENT_APACHE_MODULE",
+      "receiving_sequence_advanced": false,
+      "canonical_recipe": "com.synexia.rewrite.M3Jdk21TornadoIntegratedRuntimeRecipe",
+      "target_proof": "m3/runtime-integration/tornado/build_runtime.py",
+      "upstream_source": "m3/vendor/tornadovm",
+      "upstream_license_rule": "Tornado API/runtime/backend and Graal dependencies retain distinct original licenses",
+      "optional_exported_packages": [
+        "com.m3.tornado",
+        "com.synexia.m3.cpugpu"
+      ],
+      "compatibility_namespace_exception": "Historical com.synexia.m3.cpugpu types are target-owned in-tree compatibility classes; no external Synexia artifact or service."
+    },
+    {
       "module": "jdk.m3.collections",
       "maven_profile": "m3-collections",
       "mapping": "m3/docs/name-mapping.d/m3-filtered-collection-pack-20261017.json",
@@ -9156,6 +9200,29 @@
       "upstream_version": "2.19.2",
       "optional_exported_package": "jdk.m3.jackson",
       "upstream_proof": "m3/tooling/module-packs/jackson/upstream-qualification.py"
+    },
+    {
+      "module": "org.m3jdk.file",
+      "mapping": "m3/docs/name-mapping.d/m3-file-nlp-search.json",
+      "intake_mode": "INDEPENDENT_APACHE_MODULE",
+      "receiving_sequence_advanced": false,
+      "canonical_recipe": "com.synexia.m3.M3NlpSearchIntegration20261018",
+      "target_proof": "m3/tooling/module-packs/nlp-search/build.py",
+      "optional_exported_packages": [
+        "com.m3.file",
+        "com.m3.file.json"
+      ]
+    },
+    {
+      "module": "org.m3jdk.tools.search",
+      "mapping": "m3/docs/name-mapping.d/m3-file-nlp-search.json",
+      "intake_mode": "INDEPENDENT_APACHE_MODULE",
+      "receiving_sequence_advanced": false,
+      "canonical_recipe": "com.synexia.m3.M3NlpSearchIntegration20261018",
+      "target_proof": "m3/tooling/module-packs/nlp-search/build.py",
+      "optional_exported_packages": [
+        "org.m3jdk.tools.search"
+      ]
     }
   ]
 }

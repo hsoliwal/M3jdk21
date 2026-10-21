@@ -1,0 +1,30 @@
+# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and contributors
+# SPDX-License-Identifier: Apache-2.0
+name: M3JDK21 long sorted masked window Java21 JNI
+on:
+  pull_request:
+    paths:
+      - 'm3/collections/src/main/java/com/m3/collections/M3LongSortedSnapshot.java'
+      - 'm3/collections/src/test/java/com/m3/collections/M3LongSortedMaskedWindow*'
+      - 'm3/collections/qualification/long-sorted-masked-window-20261021/**'
+      - 'm3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-long-sorted-masked-window-20261021.yml'
+      - 'm3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-long-sorted-masked-window-20261021/**'
+      - '.github/workflows/m3-long-sorted-masked-window-20261021.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  original-sorted-owner:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Compile and run original Java21/JNI sorted snapshot owner
+        shell: bash
+        run: |
+          set -euo pipefail
+          bash m3/collections/qualification/long-sorted-masked-window-20261021/verify.sh

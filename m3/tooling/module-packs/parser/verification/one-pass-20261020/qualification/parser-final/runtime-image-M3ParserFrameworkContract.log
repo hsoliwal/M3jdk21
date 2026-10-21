@@ -1,0 +1,4 @@
+$ ["/workspace/scratch/e736b6177c79/m3-one-pass-20261020/qualification/parser-final/pack/image/bin/java","-ea","-Dm3.parser.test.work=/workspace/scratch/e736b6177c79/m3-one-pass-20261020/qualification/parser-final/consumer-work/runtime-image-M3ParserFrameworkContract","--patch-module","jdk.compiler=/workspace/scratch/e736b6177c79/m3-one-pass-20261020/qualification/parser-final/compiler-patch","--add-modules","jdk.m3.parser","-cp","/workspace/scratch/e736b6177c79/m3-one-pass-20261020/qualification/parser-final/test-classes","jdk.m3.parser.test.M3ParserFrameworkContract"]
+M3_PARSER_FRAMEWORK_PASS checks=297
+
+EXIT 0

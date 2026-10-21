@@ -289,7 +289,13 @@ public final class M3CollectionViews {
 
         @Override
         public boolean isEmpty() {
-            return !iterator().hasNext();
+            // The original selected(...).hasNext() scans this same owner cursor.
+            // Avoid materializing the temporary filtering iterator for one terminal query.
+            Iterator<E> cursor = backing.iterator();
+            while (cursor.hasNext()) {
+                if (visible(cursor.next())) return false;
+            }
+            return true;
         }
 
         @Override
@@ -395,6 +401,12 @@ public final class M3CollectionViews {
         }
 
         private boolean removeMatching(Predicate<? super E> condition) {
+            // These exact owners publish bulk changes without mutating snapshot iterators.
+            // Subclasses retain their existing iterator dispatch and override contracts.
+            if (backing.getClass() == java.util.concurrent.CopyOnWriteArrayList.class
+                    || backing.getClass() == java.util.concurrent.CopyOnWriteArraySet.class) {
+                return backing.removeIf(element -> visible(element) && condition.test(element));
+            }
             boolean changed = false;
             Iterator<E> iterator = backing.iterator();
             while (iterator.hasNext()) {

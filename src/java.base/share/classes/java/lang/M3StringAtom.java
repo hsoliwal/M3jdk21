@@ -8,6 +8,7 @@ import java.lang.ref.Reference;
 import java.util.Objects;
 
 import jdk.internal.misc.Unsafe;
+import jdk.internal.util.ArraysSupport;
 
 /**
  * Canonical scalar M3String owner.
@@ -326,16 +327,58 @@ final class M3StringAtom extends M3StringOwner {
     char charAt(int index) {
         Objects.checkIndex(index, length);
         try {
-            if (storageWidth == 1) return (char) (UNSAFE.getByte(address + index) & 0xff);
-            long at = address + ((long) index << 1);
-            int first = UNSAFE.getByte(at) & 0xff;
-            int second = UNSAFE.getByte(at + 1L) & 0xff;
-            return bigEndian
-                    ? (char) ((first << 8) | second)
-                    : (char) (first | (second << 8));
+            return unitAt(index);
         } finally {
             Reference.reachabilityFence(this);
         }
+    }
+
+    /**
+     * Compare existing native runs without materializing either spelling. The bulk primitive accepts
+     * null bases for direct memory and reports a logical element index, including unaligned runs.
+     * Equal storage layouts can share its word-at-a-time scan; differing widths or byte orders decode
+     * UTF-16 units. Both owners remain reachable through the last native read.
+     */
+    int compareRange(int start, M3StringAtom other, int otherStart, int count) {
+        Objects.requireNonNull(other, "other");
+        Objects.checkFromIndexSize(start, count, length);
+        Objects.checkFromIndexSize(otherStart, count, other.length);
+        if (count == 0 || (this == other && start == otherStart)) return 0;
+        try {
+            int index = 0;
+            if (storageWidth == other.storageWidth
+                    && (storageWidth == 1 || bigEndian == other.bigEndian)) {
+                int scale = storageWidth - 1;
+                int mismatch = ArraysSupport.vectorizedMismatch(
+                        null, address + ((long) start << scale),
+                        null, other.address + ((long) otherStart << scale),
+                        count, scale);
+                if (mismatch >= 0) {
+                    return unitAt(start + mismatch) - other.unitAt(otherStart + mismatch);
+                }
+                // A negative result is the complement of the untested tail element count.
+                index = count - ~mismatch;
+            }
+            for (; index < count; index++) {
+                int difference = unitAt(start + index) - other.unitAt(otherStart + index);
+                if (difference != 0) return difference;
+            }
+            return 0;
+        } finally {
+            Reference.reachabilityFence(this);
+            Reference.reachabilityFence(other);
+        }
+    }
+
+    /** Caller checks bounds and retains this owner through the last read. */
+    private char unitAt(int index) {
+        if (storageWidth == 1) return (char) (UNSAFE.getByte(address + index) & 0xff);
+        long at = address + ((long) index << 1);
+        int first = UNSAFE.getByte(at) & 0xff;
+        int second = UNSAFE.getByte(at + 1L) & 0xff;
+        return bigEndian
+                ? (char) ((first << 8) | second)
+                : (char) (first | (second << 8));
     }
 
     @Override

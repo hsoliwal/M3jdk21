@@ -65,7 +65,10 @@ static jmethodID m3_method(
 {
     jclass type = (*env)->GetObjectClass(env, value);
     if (type == NULL) return NULL;
-    return (*env)->GetMethodID(env, type, name, signature);
+    jmethodID method = (*env)->GetMethodID(env, type, name, signature);
+    /* The class local reference is not needed during the bulk Java array copy. */
+    (*env)->DeleteLocalRef(env, type);
+    return method;
 }
 
 JNIEXPORT jbyteArray JNICALL

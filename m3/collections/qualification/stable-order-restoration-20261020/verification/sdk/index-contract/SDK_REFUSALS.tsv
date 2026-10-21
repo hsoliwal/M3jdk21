@@ -1,0 +1,5 @@
+# case	diagnostic-sha256	diagnostic
+duplicate-source	f054e539e1a22cb15f9dc09f0569cae1c4afcfa624ff3258cb49cf38966596b8	java.lang.IllegalStateException: duplicate target: m3/collections/src/test/java/com/m3/collections/M3IndexOrderWindowContract.java\n
+post-scan-drift	a33cf6a62d26ef53e4de2822e05cfe666110c1a0d03249e3f0efa2158e2ae24d	org.openrewrite.internal.RecipeRunException: java.lang.IllegalStateException: target changed after scan: m3/collections/src/test/java/com/m3/collections/M3IndexOrderWindowContract.java\njava.lang.IllegalStateException: target changed after scan: m3/collections/src/test/java/com/m3/collections/M3IndexOrderWindowContract.java\n
+source-drift	951732344de63a3bffa3851932ce18bcd883a6ba0d3549719dc667e528bdbeb6	java.lang.IllegalStateException: source drift: m3/collections/src/test/java/com/m3/collections/M3IndexOrderWindowContract.java\n
+wrong-java-representation	422ae57b0fd95fd932686fc5b54fb3791acb320e88a76ce33cefca4b3d42f26e	java.lang.IllegalStateException: target is not a Java compilation unit: m3/collections/src/test/java/com/m3/collections/M3IndexOrderWindowContract.java\n

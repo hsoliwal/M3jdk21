@@ -1,31 +1,75 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- SPDX-License-Identifier: Apache-2.0 -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>com.synexia.build</groupId><artifactId>apache-public-reuse-proof</artifactId><version>1.0-SNAPSHOT</version>
-  <properties><maven.compiler.release>21</maven.compiler.release>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding></properties>
+  <groupId>com.synexia.build</groupId>
+  <artifactId>apache-public-reuse-proof</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <properties>
+    <maven.compiler.release>21</maven.compiler.release>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
   <dependencies>
-    <dependency><groupId>org.openrewrite</groupId><artifactId>rewrite-java</artifactId><version>8.17.1-m3-source-1</version></dependency>
-    <dependency><groupId>org.junit.jupiter</groupId><artifactId>junit-jupiter</artifactId><version>5.10.2-m3-source-1</version><scope>test</scope></dependency>
+    <dependency>
+      <groupId>org.openrewrite</groupId>
+      <artifactId>rewrite-java</artifactId>
+      <version>8.17.1-m3-source-1</version>
+    </dependency>
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter</artifactId>
+      <version>5.10.2-m3-source-1</version>
+      <scope>test</scope>
+    </dependency>
   </dependencies>
-  <build><sourceDirectory>${project.basedir}/../src/main/java</sourceDirectory><plugins>
-    <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-resources-plugin</artifactId><version>3.3.1</version></plugin>
-    <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-compiler-plugin</artifactId><version>3.13.0</version>
-      <configuration><compilerArgs><arg>-Xlint:all</arg><arg>-Werror</arg></compilerArgs>
-        <includes><include>com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java</include></includes></configuration></plugin>
-    <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-surefire-plugin</artifactId><version>3.2.5</version>
-      <configuration><failIfNoTests>true</failIfNoTests><useModulePath>false</useModulePath>
-        <systemPropertyVariables>
-          <m3.reuse.crate>${project.basedir}</m3.reuse.crate><m3.reuse.root>${project.basedir}/../../../..</m3.reuse.root>
-          <m3.reuse.resourceRoot>com/m3/rewrite/backport/jdk21-hash-pinned-text/apache-public-reuse-v1</m3.reuse.resourceRoot>
-          <m3.reuse.engine>com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe</m3.reuse.engine>
-          <m3.reuse.enginePath>m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java</m3.reuse.enginePath><m3.reuse.engineBlob>a2e8c916208b563517e51b738744a05357e633aa</m3.reuse.engineBlob>
-          <m3.reuse.paths>m3/docs/synexia-apache-reuse-policy.properties,m3/docs/synexia-apache-reuse-scope.tsv,m3/docs/synexia-apache-reuse.md</m3.reuse.paths>
-        </systemPropertyVariables></configuration></plugin>
-    <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-jar-plugin</artifactId><version>3.4.1</version></plugin>
-  </plugins></build>
+  <build>
+    <sourceDirectory>${project.basedir}/../src/main/java</sourceDirectory>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-resources-plugin</artifactId>
+        <version>3.3.1</version>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.13.0</version>
+        <configuration>
+          <compilerArgs>
+            <arg>-Xlint:all</arg>
+            <arg>-Werror</arg>
+          </compilerArgs>
+          <includes>
+            <include>com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java</include>
+          </includes>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>3.2.5</version>
+        <configuration>
+          <failIfNoTests>true</failIfNoTests>
+          <useModulePath>false</useModulePath>
+          <systemPropertyVariables>
+            <m3.reuse.crate>${project.basedir}</m3.reuse.crate>
+            <m3.reuse.root>${project.basedir}/../../../..</m3.reuse.root>
+            <m3.reuse.resourceRoot>com/m3/rewrite/backport/jdk21-hash-pinned-text/apache-public-reuse-v1</m3.reuse.resourceRoot>
+            <m3.reuse.engine>com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe</m3.reuse.engine>
+            <m3.reuse.enginePath>m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java</m3.reuse.enginePath>
+            <m3.reuse.engineBlob>a2e8c916208b563517e51b738744a05357e633aa</m3.reuse.engineBlob>
+            <m3.reuse.paths>m3/docs/synexia-apache-reuse-policy.properties,m3/docs/synexia-apache-reuse-scope.tsv,m3/docs/synexia-apache-reuse.md</m3.reuse.paths>
+          </systemPropertyVariables>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+        <version>3.4.1</version>
+      </plugin>
+    </plugins>
+  </build>
   <profiles>
     <profile>
       <id>m3-synexia-atom-pattern</id>
@@ -46,11 +90,15 @@
               <execution>
                 <id>m3-synexia-atom-pattern-verify</id>
                 <phase>verify</phase>
-                <goals><goal>dryRun</goal></goals>
+                <goals>
+                  <goal>dryRun</goal>
+                </goals>
               </execution>
             </executions>
             <configuration>
-              <activeRecipes><recipe>com.synexia.m3.EveryModuleAtomPatternApplication</recipe></activeRecipes>
+              <activeRecipes>
+                <recipe>com.synexia.m3.EveryModuleAtomPatternApplication</recipe>
+              </activeRecipes>
               <exportDatatables>true</exportDatatables>
               <runPerSubmodule>false</runPerSubmodule>
               <failOnInvalidActiveRecipes>true</failOnInvalidActiveRecipes>
@@ -130,11 +178,15 @@
               <execution>
                 <id>m3-synexia-atom-pattern-mastery-verify</id>
                 <phase>verify</phase>
-                <goals><goal>dryRun</goal></goals>
+                <goals>
+                  <goal>dryRun</goal>
+                </goals>
               </execution>
             </executions>
             <configuration>
-              <activeRecipes><recipe>com.synexia.m3.EveryModuleAtomPatternMastery</recipe></activeRecipes>
+              <activeRecipes>
+                <recipe>com.synexia.m3.EveryModuleAtomPatternMastery</recipe>
+              </activeRecipes>
               <exportDatatables>true</exportDatatables>
               <runPerSubmodule>false</runPerSubmodule>
               <failOnInvalidActiveRecipes>true</failOnInvalidActiveRecipes>
@@ -191,6 +243,54 @@
                 <exclusion>**/vendor/**</exclusion>
               </exclusions>
             </configuration>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+    <profile>
+      <id>m3-recipe-boot</id>
+      <activation>
+        <file>
+          <exists>${maven.multiModuleProjectDirectory}/.m3/recipe-boot.properties</exists>
+        </file>
+      </activation>
+      <properties>
+        <m3.recipe.boot.skip>false</m3.recipe.boot.skip>
+      </properties>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>exec-maven-plugin</artifactId>
+            <version>3.5.0</version>
+            <inherited>true</inherited>
+            <dependencies>
+              <dependency>
+                <groupId>com.synexia.m3</groupId>
+                <artifactId>m3-pr-stack-preservation</artifactId>
+                <version>1.0.0-m3boot20261021</version>
+              </dependency>
+            </dependencies>
+            <executions>
+              <execution>
+                <id>m3-recipe-boot</id>
+                <phase>validate</phase>
+                <goals>
+                  <goal>java</goal>
+                </goals>
+                <configuration>
+                  <skip>${m3.recipe.boot.skip}</skip>
+                  <mainClass>com.synexia.m3.prstack.M3RecipeBoot</mainClass>
+                  <includeProjectDependencies>false</includeProjectDependencies>
+                  <includePluginDependencies>true</includePluginDependencies>
+                  <arguments>
+                    <argument>${maven.multiModuleProjectDirectory}/.m3/recipe-boot.properties</argument>
+                    <argument>${project.basedir}</argument>
+                    <argument>${session.projects[0].basedir.absolutePath}</argument>
+                  </arguments>
+                </configuration>
+              </execution>
+            </executions>
           </plugin>
         </plugins>
       </build>

@@ -1,0 +1,18 @@
+{
+  "schema": "M3_AST_BUILD_REVERSE_DATASET_V1",
+  "dataset": "m3-prefix-cursor-20261020",
+  "repository": "hsoliwal/M3JDK21",
+  "baseline_ref": "d6d76b563050fc13c4fa79bc494edf29f1614b37",
+  "crate_name": "m3-ast-build-reverse-20261017-m3-prefix-cursor-20261020",
+  "recipe_name": "com.synexia.m3jdk.AstBuildReverse20261017",
+  "targets": 3,
+  "java_targets": 3,
+  "text_targets": 0,
+  "product_sources_written": false,
+  "engine_changes_from_origin": [
+    "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+    "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedTextSnapshotRecipe.java"
+  ],
+  "category_catalogue": "m3/runtime-integration/string-prefix-cursor-20261020/CATEGORY_CATALOG.tsv",
+  "category_catalogue_blob": "4637c1d0f9a09d628fbdb04ddad7eaa90003dcb9"
+}

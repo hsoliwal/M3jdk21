@@ -1,0 +1,32 @@
+jdk.m3fs@0.1.0 jar:file:///workspace/scratch/e736b6177c79/m3-one-pass-20261020/qualification/fs/m3-fs-0.1.0-SNAPSHOT.jar!/module-info.class
+exports com.m3.fs
+exports com.m3.fs.vfs
+exports com.m3.fs.vfs.auth
+exports com.m3.fs.vfs.cache
+exports com.m3.fs.vfs.events
+exports com.m3.fs.vfs.filter
+exports com.m3.fs.vfs.function
+exports com.m3.fs.vfs.impl
+exports com.m3.fs.vfs.operations
+exports com.m3.fs.vfs.operations.vcs
+exports com.m3.fs.vfs.provider
+exports com.m3.fs.vfs.provider.bzip2
+exports com.m3.fs.vfs.provider.compressed
+exports com.m3.fs.vfs.provider.gzip
+exports com.m3.fs.vfs.provider.jar
+exports com.m3.fs.vfs.provider.local
+exports com.m3.fs.vfs.provider.ram
+exports com.m3.fs.vfs.provider.res
+exports com.m3.fs.vfs.provider.tar
+exports com.m3.fs.vfs.provider.temp
+exports com.m3.fs.vfs.provider.url
+exports com.m3.fs.vfs.provider.zip
+exports com.m3.fs.vfs.util
+requires commons.logging transitive
+requires java.base mandated
+requires java.xml
+requires org.apache.commons.compress transitive
+requires org.apache.commons.io
+requires org.apache.commons.lang3
+contains com.m3.fs.internal.re2j
+

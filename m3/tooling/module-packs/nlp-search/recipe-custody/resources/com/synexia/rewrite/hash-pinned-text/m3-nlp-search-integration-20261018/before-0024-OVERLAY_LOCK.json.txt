@@ -1,0 +1,4 @@
+{
+  "third_party/lucene-queryparser/src/main/java/org/apache/lucene/queryparser/classic/QueryParserBase.java": "f5de2da867ca3e9312d1563c27888c1570347f8014267c2f2cb1eaa2e9d1fd30",
+  "third_party/opennlp-tools/src/main/java/opennlp/tools/util/StringList.java": "bcaa3553c36688a0efa18e9f7efa2cd42a200815d4d983c117404e4607037fc4"
+}

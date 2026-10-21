@@ -11,7 +11,7 @@ Entry-shaped value demanded by the provider API is a boundary flyweight created 
 
 Planned lanes: `Object[] keys`, `int[] keyHashes`, `int[] keyIndex`, `int[] heads`, `int[] tails`, `int[] counts`, `Object[] pool`, `int[] next`, `long[] poolLive`, `int size`, `int modCount`.
 
-Reuse when filling: #1261 M3IndexedSetMultiMap; interop M3GuavaSetMultimap; apache M3SetValuedMap.
+Reuse when filling: BLOCKED until open #1261 lands (engine M3IndexedSetMultiMap); interop M3GuavaSetMultimap; apache M3SetValuedMap.
 
 The row in `m3/collections/qualification/five-provider-inventory-20261018/INVENTORY.tsv` is `SCAFFOLD`;
 the owning PR flips it to `DONE #PR`. Regenerate with the generator in that directory rather than editing

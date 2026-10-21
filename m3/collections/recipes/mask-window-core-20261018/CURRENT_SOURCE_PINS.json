@@ -1,0 +1,10 @@
+{
+  "product_base": "55b44776b15b658c14f33ee2c4e01b013d6547a8",
+  "java_blob": "6359eda54aceb2c3b73beab1cbb4718091a9041a",
+  "native_blob": "15024c40ba9b92fd50fb7823ecfa9543aba22be1",
+  "legacy_sha256": "cb8e8c66e07cc4651e95a0c28ad834d2c9de48df34dc90c6d7da68443f1da531",
+  "java_sha256": "ec8b9d2683f5fdb99f6c3e9ad4c79dc60e8ad19cbc3fde2b09e9da2fe3a83f2b",
+  "native_sha256": "d1c300832aa9bf44cd7b7199cff593beb2a9464fbb52c9c8448da7773eaf0aef",
+  "canonical_predecessor": "a0f22da4f2bd953a116f124adbe7784f9e5e419d",
+  "receiver_predecessor": "05a37a87a10fb7583770fdccecea4af54751bf39"
+}

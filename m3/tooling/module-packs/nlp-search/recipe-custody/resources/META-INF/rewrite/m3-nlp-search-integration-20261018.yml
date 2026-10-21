@@ -1,0 +1,11 @@
+# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
+# SPDX-License-Identifier: Apache-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.M3NlpSearchIntegration20261018
+displayName: Receive the complete M3 file family and Lucene/OpenNLP JMOD integration
+description: Apply the qualified Java and control snapshots with exact whole-packet preimages and drift refusal.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: m3-nlp-search-integration-20261018
+  - com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe:
+      crateName: m3-nlp-search-integration-20261018

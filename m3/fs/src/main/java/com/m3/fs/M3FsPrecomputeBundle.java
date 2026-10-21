@@ -404,8 +404,18 @@ public final class M3FsPrecomputeBundle {
     public boolean contentEquals(CharSequence other) {
       Objects.requireNonNull(other, "other");
       if (other.length() != length) return false;
-      for (int index = 0; index < length; index++) {
-        if (charAt(index) != other.charAt(index)) return false;
+      // The directory already stores ordered logical segment boundaries.
+      // Stream each mapped parent run once instead of binary-searching that
+      // directory for every UTF-16 code unit. Empty segments are valid.
+      int logical = 0;
+      for (int segment = 0; segment < lengths.remaining(); segment++) {
+        int count = lengths.get(segment);
+        ByteBuffer bytes = parents[parentIndexes.get(segment)];
+        int startByte = parentStarts.get(segment) * Character.BYTES;
+        for (int offset = 0; offset < count; offset++, logical++) {
+          if (bytes.getChar(startByte + offset * Character.BYTES)
+              != other.charAt(logical)) return false;
+        }
       }
       return true;
     }

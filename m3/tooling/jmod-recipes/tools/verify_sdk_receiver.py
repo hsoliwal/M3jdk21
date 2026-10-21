@@ -27,9 +27,32 @@ SUCCESSORS = {
     ),
     "m3/tooling/jmod-recipes/tools/jmod_pack.py": (
         "6824ea4419d769b71af846c5b6eee64f9a7454d1",
-        "83b1483c6c5e6a39c519f82af603382914eed3e5",
-        "synexia-openrewrite-recipes/crates/m3-text-jmods/tools/jmod_pack.py",
+        "86b62fddc148b372145e807438dd7cd018acca0f",
+        "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/m3jdk21-build/resources/com/synexia/rewrite/hash-pinned-text/m3-ast-build-reverse-20261017-m3jdk21-build/0001-jmod_pack.py.txt",
     ),
+    # Exact source-qualified successors from integration packet A.
+    "m3/tooling/jmod-recipes/src/main/java/com/m3/rewrite/jmod/M3ModuleDescriptorApply.java": (
+        "0c35f76c65cb009bfda0a7594a79005b457767b4",
+        "f291bedcb4be3f890d9361fec4d7265e84518def",
+        "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0080-M3ModuleDescriptorApply.java.txt",
+    ),
+    "m3/tooling/jmod-recipes/src/test/java/com/m3/rewrite/jmod/M3ModuleDescriptorRecipeTest.java": (
+        "a84e9add5ad5dcc30800c707e918a2593cc70cdb",
+        "6a2e25b6a7387538bad0d3786dcb24e38c513e61",
+        "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0081-M3ModuleDescriptorRecipeTest.java.txt",
+    ),
+}
+
+# The shared-frontend source-qualified successor is already in the retained target tree.
+# Preserve the earlier text/JNI identity as ancestry evidence; exact current bytes still refuse drift.
+SUCCESSOR_COMMITS = {
+    "m3/tooling/jmod-recipes/tools/jmod_pack.py": "c05613123249b74ac4243fe0b924b68494116931",
+    # Exact source-qualified successors from integration packet A.
+    "m3/tooling/jmod-recipes/src/main/java/com/m3/rewrite/jmod/M3ModuleDescriptorApply.java": "c4ae7e361c9253aaced47e843549a06e505d924d",
+    "m3/tooling/jmod-recipes/src/test/java/com/m3/rewrite/jmod/M3ModuleDescriptorRecipeTest.java": "c4ae7e361c9253aaced47e843549a06e505d924d",
+}
+PREVIOUS_SUCCESSORS = {
+    "m3/tooling/jmod-recipes/tools/jmod_pack.py": "83b1483c6c5e6a39c519f82af603382914eed3e5",
 }
 
 
@@ -79,7 +102,8 @@ def verify(repo, ledger, expected_count=52):
             successors.append({
                 "path": name, "predecessor_git_blob": predecessor,
                 "git_blob": successor, "canonical_repository": "hsoliwal/com.synexia",
-                "canonical_commit": SUCCESSOR_COMMIT, "canonical_path": canonical_path,
+                "canonical_commit": SUCCESSOR_COMMITS.get(name, SUCCESSOR_COMMIT), "canonical_path": canonical_path,
+                "previous_successor_git_blob": PREVIOUS_SUCCESSORS.get(name),
             })
         source = root.joinpath(*PurePosixPath(name).parts)
         if (source.is_symlink() or not source.is_file()

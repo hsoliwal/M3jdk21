@@ -1,0 +1,6 @@
+MECHANISM full-write blocks=8 old-block-reads=0 engine-copy-bytes=0 scratch-allocations=0 exact-id-lookups=0
+MECHANISM dense-read blocks=8 range-executions=1 engine-copy-bytes=524288 scratch-allocations=0 zero-overwrite-bytes=0
+MECHANISM sparse-read logical-blocks=8 allocated-blocks=1 range-executions=1 copied=65536 zeroed=458752
+SEARCH f USING PRIMARY KEY (inode=? AND block_no>? AND block_no<?)
+SEARCH b USING INTEGER PRIMARY KEY (rowid=?) LEFT-JOIN
+PASS hotpath-native checks=1055016 seed=20260928 cache-bound=11 scratch-bound=65536

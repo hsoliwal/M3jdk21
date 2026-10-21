@@ -63,10 +63,19 @@ public final class M3HfLexiconIntakeProof {
                 .findFirst().orElse("");
     }
 
+    private static void requireStructureRecord(List<String> lines, String id, String category, String marker) {
+        String[] fields = splitTsv(discoveryRecord(lines, id));
+        require(fields.length == 9 && category.equals(fields[2])
+                && "REFERENCE_ONLY".equals(fields[7]),
+                "structure record has typed category and remains reference-only: " + id);
+        if (fields.length == 9) require(String.join(" ", fields).contains(marker),
+                "structure record preserves donor distinction: " + id);
+    }
+
     private static int verifyLanguageResourceDiscovery() throws IOException {
         List<String> lines = resourceLines(
                 "/com/m3/lexicon/hf/language-resource-discovery.tsv");
-        require(lines.size() == 227, "226 language-resource candidates plus header");
+        require(lines.size() == 271, "270 language-resource candidates plus header");
         List<String> expectedHeader = List.of("source_id", "resource", "category",
                 "data_shape_and_identity", "rights_and_attribution", "m3_candidate_use",
                 "admission_blockers", "state", "evidence");
@@ -90,233 +99,153 @@ public final class M3HfLexiconIntakeProof {
                     "catalogue evidence links are HTTPS: " + fields[0]);
         }
         require(sourceIds.equals(java.util.Set.of(
-                "iana-language-subtags",
-                "wikidata-lexemes",
-                "unicode-cldr-48-2",
-                "unicode-ucd-17",
-                "iso-3166-code-elements",
-                "universal-dependencies",
-                "unimorph-language-files",
-                "glottolog-5-3",
-                "grambank",
-                "phoible-2",
-                "wals",
-                "lexibank",
-                "wiktionary-wiktextract",
-                "panlex",
-                "open-multilingual-wordnet",
-                "open-english-wordnet-namenet-2025",
-                "leipzig-corpora",
-                "google-books-ngrams-v3",
-                "tatoeba",
-                "opus-hplt-v3",
-                "geonames",
-                "bipm-si-brochure-2026",
-                "mozilla-common-voice-26",
-                "hf-vocabradar-wordfreq",
-                "hf-finefreq",
-                "hf-lefff-morphology",
-                "hf-seacrowd-unimorph",
-                "hf-multilingual-core-vocabulary",
-                "hf-langdex",
-                "kaggle-langdex-notebook",
-                "iso-4217-code-elements",
-                "hf-langdex-dictionaries",
-                "dgt-tm",
-                "elrc-share",
-                "apertium-language-data",
-                "wordfreq-3-0-2",
-                "subtlex-us",
-                "nga-geonames",
-                "unicode-uax29-18",
-                "clarin-vlo-api-4-15",
-                "olac-archive-network-2026",
-                "elra-language-resource-catalogue",
-                "concepticon-3-4",
-                "norare-1-0",
-                "asjp-database",
-                "clics-4",
-                "wold",
-                "asl-lex-2",
-                "mudidi-hf-2026",
-                "openslr-beep",
-                "dobes-archive",
-                "elar-archive",
-                "elarspeech-preprint-2026",
-                "ai4bharat-indic-frequency-lists",
-                "morphynet-multilingual-morphology",
-                "cmudict-us-english-pronunciations",
-                "hunspell-language-dictionaries",
-                "global-wordnet-discovery-index",
-                "babelnet-restricted-lexical-graph",
-                "hf-paranames-1-0",
-                "giellalt-language-repositories",
-                "gf-resource-grammar-library",
-                "sigmorphon-2022-segmentation",
-                "hf-world-languages-7130",
-                "wordfreq-3-0-2-data",
-                "reflex-africa-v1-0",
-                "opus-corpus-index-2026",
-                "google-fleurs-102",
-                "google-waxalnlp",
-                "dictionaria-cldf-dictionaries",
-                "nchlt-south-african-resource-bundles",
-                "sails-south-american-grammar",
-                "word2word-bilingual-lexicons",
-                "wordhoard-frequency-morphology",
-                "muse-bilingual-dictionary-benchmarks",
-                "numeralbank-chan-numerals-2019",
-                "numeralbank-cosinus-v2-2026",
-                "ai4bharat-aksharantar-26m",
-                "ai4bharat-samanantar-v0-3",
-                "ai4bharat-indiccorp-v2",
-                "ai4bharat-naamapadam-11",
-                "mozilla-common-voice-text-lid-300",
-                "dbnary-ontolex-wiktionary-26",
-                "masakhaner2-african-20",
-                "ids-intercontinental-dictionary-series",
-                "autotyp-typology-database-v1-1-1",
-                "apics-creole-grammar-cldf",
-                "dplace-language-culture-environment",
-                "apertium-language-data-packs",
-                "parseme-multilingual-mwe-corpus-v2",
-                "wikipron-pronunciation-lexicons",
-                "hplt-monolingual-v3",
-                "oldi-flores-plus-4-6",
-                "doreco-spoken-documentation-2",
-                "tico-19-medical-translation",
-                "mafand-mt-african-news",
-                "opus-100-parallel-corpus",
-                "afridoc-mt-health",
-                "multiconer-v2-entities",
-                "google-smol-gatitos",
-                "sprakbanken-flex",
-                "sprakbanken-kubord-lex",
-                "sprakbanken-lexin",
-                "sprakbanken-parole-lexplus",
-                "sprakbanken-swedish-names-2023",
-                "linguabase-english-lexical-graph",
-                "bashkir-frequency-index",
-                "bashkir-word-ngram-index",
-                "eurovoc-4-24",
-                "ufal-morfflex-cz-2-1",
-                "dmii-core-icelandic",
-                "unidic-ja-3-1-0",
-                "taigi-common-use-dictionary",
-                "hf-uzbek-lexicon-skeleton",
-                "hf-khmer-search-frequency",
-                "hf-afri-dict",
-                "hf-fineweb-2",
-                "sign-language-dataset-compendium-v1-5",
-                "easier-multilingual-sign-language-wordnet",
-                "corola-romanian-frequency-lists",
-                "hf-mainlp-word-level-translations",
-                "hf-jnext-chinese-word-frequency",
-                "hf-google-books-ngram-pos",
-                "hf-dillm-persian-grammar-corpus",
-                "hf-pashto-grammar-100",
-                "hf-qor-af-soomaali-frequency",
-                "hf-kablex-kabyle-lexicon",
-                "hf-kabinflect-kabyle-morphology",
-                "hf-hmar-heritage-wordlist",
-                "hf-kencorpus-kenpos",
-                "hf-galahad-dutch-frequency",
-                "hf-sango-vocabulary-grammar",
-                "hf-haajidheere-somali-dictionary",
-                "hf-nltk-word-lists",
-                "hf-nltk-swadesh-24",
-                "massive-nlu-1-1",
-                "madar-arabic-dialect-lexicon",
-                "samer-arabic-readability-v2",
-                "sil-bloom-library-discovery",
-                "arbml-masader-catalogue",
-                "hf-vocab-bloom-hub-en",
-                "madlad-400-v1-5",
-                "hf-wikidata-label-maps-2025",
-                "ai4bharat-bhasaanuvaad",
-                "iate-eu-terminology",
-                "crossgram-magram",
-                "gff-geez-data-archive",
-                "kelly-language-frequency-lists",
-                "clear-global-gamayun-kits",
-                "afrispeech-africa-corpus",
-                "ldc-global-yoruba-lexical-database",
-                "frequencywords-opensubtitles",
-                "lexique-fr-4-10",
-                "fao-agrovoc",
-                "gemet-environment-thesaurus",
-                "google-dakshina-v1",
-                "lexibank-cldf-v2-2",
-                "lexibank-austronesian-comparative-dictionary",
-                "dictionaria-teanu",
-                "shabd-cstt-indian-technical-terminology",
-                "iwn-en-indowordnet",
-                "multilingual-open-text-mot-release1",
-                "multi-simlex-12-language",
-                "tsammalex-v0-3",
-                "dicovalence-french-valency-v2",
-                "morphalou-3-1",
-                "rl-fr-2025-03",
-                "bel-rl-fr-3-1",
-                "prolexbase-2-2",
-                "unicode-unilex",
-                "polyglotta-africana-cldf-v2-0",
-                "lexik-fr-1-0-2026-10",
-                "ealex-east-african-lexome-2026",
-                "nzonza-cialr-44",
-                "dannet-danish-wordnet-2026-08-21",
-                "aiatsis-austlang-live-2026",
-                "afwn-2022-release-1-0",
-                "crubadan-hf-character-trigrams-449",
-                "elg-catalogue-release-3-0-2026",
-                "oanc-open-frequency-derivation",
-                "elexis-dictionary-rest-discovery",
-                "hf-multilingual-frequency-lists",
-                "hf-mlnorm-resources-composite",
-                "hf-multilexnorm2026-full-pub",
-                "hf-nanai-russian-dictionary",
-                "hf-haitian-creole-word-freq",
-                "hf-sindhi-open-lexicon",
-                "hf-javanese-multilingual-lexicon",
-                "hf-tajiknlp-ar-ru-en-dictionary",
-                "hf-tigre-data-lexicon",
-                "hf-tigre-generated-dictionary",
-                "nict-japanese-english-kyoto-wiki-corpus",
-                "kaggle-google-web-english-frequency-333333",
-                "hf-ratman-african-stopword-frequency",
-                "hf-amharic-gemination-lexicon-v3",
-                "hf-khmer-dictionary-44k",
-                "hf-khpos-seanghay-2023",
-                "hf-sasak-benchmark-100k",
-                "hf-georgian-case-alignment",
-                "hf-tibetan-word-segmentation-100",
-                "hf-bridgeconn-sign-dictionary-isl",
-                "hf-hmar-numeral-words",
-                "hf-hmar-unigrams",
-                "hf-hmar-corpus-archive",
-                "hf-robinson-hausa-en-1914",
-                "hf-african-tokenizer-challenge-v1",
-                "hf-naath-en-nuer-dinka-sw-corpus",
-                "hf-dusun-dictionary-corpus",
-                "hf-okinawan-dictionary-index",
-                "hf-tigre-parallel-multilingual",
-                "hf-multilingual-endangered-cultural-heritage",
-                "hf-nenets-mixed-schema",
-                "cefrlex-six-language",
-                "clearpond-five-language-neighborhoods",
-                "manulex-french-child-directed-lexicons",
-                "multi-lex-french-ngrams-2022",
-                "hf-malayalam-pronunciation-lexicon",
-                "hf-nusax-mt",
-                "hf-maori-language-eval",
-                "hf-afrisud-treebanks",
-                "hf-wolof-french-jolof",
-                "hf-apertium-breton-french",
-                "inuktitutcomputing-uqailaut-roots",
-                "nrc-nunavut-hansard-3",
-                "hf-americasnli",
-                "hf-teara-maori-english"
-        )), "exact 226 language-resource source IDs match the pinned catalogue");
+                "iana-language-subtags", "wikidata-lexemes", "unicode-cldr-48-2", "unicode-ucd-17",
+                "iso-3166-code-elements", "universal-dependencies", "unimorph-language-files", "glottolog-5-3",
+                "grambank", "phoible-2", "wals", "lexibank",
+                "wiktionary-wiktextract", "panlex", "open-multilingual-wordnet", "open-english-wordnet-namenet-2025",
+                "leipzig-corpora", "google-books-ngrams-v3", "tatoeba", "opus-hplt-v3",
+                "geonames", "bipm-si-brochure-2026", "mozilla-common-voice-26", "hf-vocabradar-wordfreq",
+                "hf-finefreq", "hf-lefff-morphology", "hf-seacrowd-unimorph", "hf-multilingual-core-vocabulary",
+                "hf-langdex", "kaggle-langdex-notebook", "iso-4217-code-elements", "hf-langdex-dictionaries",
+                "dgt-tm", "elrc-share", "apertium-language-data", "wordfreq-3-0-2",
+                "subtlex-us", "nga-geonames", "unicode-uax29-18", "clarin-vlo-api-4-15",
+                "olac-archive-network-2026", "elra-language-resource-catalogue", "concepticon-3-4", "norare-1-0",
+                "asjp-database", "clics-4", "wold", "asl-lex-2",
+                "mudidi-hf-2026", "openslr-beep", "dobes-archive", "elar-archive",
+                "elarspeech-preprint-2026", "ai4bharat-indic-frequency-lists", "morphynet-multilingual-morphology", "cmudict-us-english-pronunciations",
+                "hunspell-language-dictionaries", "global-wordnet-discovery-index", "babelnet-restricted-lexical-graph", "hf-paranames-1-0",
+                "giellalt-language-repositories", "gf-resource-grammar-library", "sigmorphon-2022-segmentation", "hf-world-languages-7130",
+                "wordfreq-3-0-2-data", "reflex-africa-v1-0", "opus-corpus-index-2026", "google-fleurs-102",
+                "google-waxalnlp", "dictionaria-cldf-dictionaries", "nchlt-south-african-resource-bundles", "sails-south-american-grammar",
+                "word2word-bilingual-lexicons", "wordhoard-frequency-morphology", "muse-bilingual-dictionary-benchmarks", "numeralbank-chan-numerals-2019",
+                "numeralbank-cosinus-v2-2026", "ai4bharat-aksharantar-26m", "ai4bharat-samanantar-v0-3", "ai4bharat-indiccorp-v2",
+                "ai4bharat-naamapadam-11", "mozilla-common-voice-text-lid-300", "dbnary-ontolex-wiktionary-26", "masakhaner2-african-20",
+                "ids-intercontinental-dictionary-series", "autotyp-typology-database-v1-1-1", "apics-creole-grammar-cldf", "dplace-language-culture-environment",
+                "apertium-language-data-packs", "parseme-multilingual-mwe-corpus-v2", "wikipron-pronunciation-lexicons", "hplt-monolingual-v3",
+                "oldi-flores-plus-4-6", "doreco-spoken-documentation-2", "tico-19-medical-translation", "mafand-mt-african-news",
+                "opus-100-parallel-corpus", "afridoc-mt-health", "multiconer-v2-entities", "google-smol-gatitos",
+                "sprakbanken-flex", "sprakbanken-kubord-lex", "sprakbanken-lexin", "sprakbanken-parole-lexplus",
+                "sprakbanken-swedish-names-2023", "linguabase-english-lexical-graph", "bashkir-frequency-index", "bashkir-word-ngram-index",
+                "eurovoc-4-24", "ufal-morfflex-cz-2-1", "dmii-core-icelandic", "unidic-ja-3-1-0",
+                "taigi-common-use-dictionary", "hf-uzbek-lexicon-skeleton", "hf-khmer-search-frequency", "hf-afri-dict",
+                "hf-fineweb-2", "sign-language-dataset-compendium-v1-5", "easier-multilingual-sign-language-wordnet", "corola-romanian-frequency-lists",
+                "hf-mainlp-word-level-translations", "hf-jnext-chinese-word-frequency", "hf-google-books-ngram-pos", "hf-dillm-persian-grammar-corpus",
+                "hf-pashto-grammar-100", "hf-qor-af-soomaali-frequency", "hf-kablex-kabyle-lexicon", "hf-kabinflect-kabyle-morphology",
+                "hf-hmar-heritage-wordlist", "hf-kencorpus-kenpos", "hf-galahad-dutch-frequency", "hf-sango-vocabulary-grammar",
+                "hf-haajidheere-somali-dictionary", "hf-nltk-word-lists", "hf-nltk-swadesh-24", "massive-nlu-1-1",
+                "madar-arabic-dialect-lexicon", "samer-arabic-readability-v2", "sil-bloom-library-discovery", "arbml-masader-catalogue",
+                "hf-vocab-bloom-hub-en", "madlad-400-v1-5", "hf-wikidata-label-maps-2025", "ai4bharat-bhasaanuvaad",
+                "iate-eu-terminology", "crossgram-magram", "gff-geez-data-archive", "kelly-language-frequency-lists",
+                "clear-global-gamayun-kits", "afrispeech-africa-corpus", "ldc-global-yoruba-lexical-database", "frequencywords-opensubtitles",
+                "lexique-fr-4-10", "fao-agrovoc", "gemet-environment-thesaurus", "google-dakshina-v1",
+                "lexibank-cldf-v2-2", "lexibank-austronesian-comparative-dictionary", "dictionaria-teanu", "shabd-cstt-indian-technical-terminology",
+                "iwn-en-indowordnet", "multilingual-open-text-mot-release1", "multi-simlex-12-language", "tsammalex-v0-3",
+                "dicovalence-french-valency-v2", "morphalou-3-1", "rl-fr-2025-03", "bel-rl-fr-3-1",
+                "prolexbase-2-2", "unicode-unilex", "polyglotta-africana-cldf-v2-0", "lexik-fr-1-0-2026-10",
+                "ealex-east-african-lexome-2026", "nzonza-cialr-44", "dannet-danish-wordnet-2026-08-21", "aiatsis-austlang-live-2026",
+                "afwn-2022-release-1-0", "crubadan-hf-character-trigrams-449", "elg-catalogue-release-3-0-2026", "oanc-open-frequency-derivation",
+                "elexis-dictionary-rest-discovery", "hf-multilingual-frequency-lists", "hf-mlnorm-resources-composite", "hf-multilexnorm2026-full-pub",
+                "hf-nanai-russian-dictionary", "hf-haitian-creole-word-freq", "hf-sindhi-open-lexicon", "hf-javanese-multilingual-lexicon",
+                "hf-tajiknlp-ar-ru-en-dictionary", "hf-tigre-data-lexicon", "hf-tigre-generated-dictionary", "nict-japanese-english-kyoto-wiki-corpus",
+                "kaggle-google-web-english-frequency-333333", "hf-ratman-african-stopword-frequency", "hf-amharic-gemination-lexicon-v3", "hf-khmer-dictionary-44k",
+                "hf-khpos-seanghay-2023", "hf-sasak-benchmark-100k", "hf-georgian-case-alignment", "hf-tibetan-word-segmentation-100",
+                "hf-bridgeconn-sign-dictionary-isl", "hf-hmar-numeral-words", "hf-hmar-unigrams", "hf-hmar-corpus-archive",
+                "hf-robinson-hausa-en-1914", "hf-african-tokenizer-challenge-v1", "hf-naath-en-nuer-dinka-sw-corpus", "hf-dusun-dictionary-corpus",
+                "hf-okinawan-dictionary-index", "hf-tigre-parallel-multilingual", "hf-multilingual-endangered-cultural-heritage", "hf-nenets-mixed-schema",
+                "cefrlex-six-language", "clearpond-five-language-neighborhoods", "manulex-french-child-directed-lexicons", "multi-lex-french-ngrams-2022",
+                "hf-malayalam-pronunciation-lexicon", "hf-nusax-mt", "hf-maori-language-eval", "hf-afrisud-treebanks",
+                "hf-wolof-french-jolof", "hf-apertium-breton-french", "inuktitutcomputing-uqailaut-roots", "nrc-nunavut-hansard-3",
+                "hf-americasnli", "hf-teara-maori-english", "jmdict-edrdg", "jmnedict-edrdg",
+                "kanjidic2-edrdg", "cc-cedict-v2", "iso-639-2023", "iso-15924-script-codes",
+                "clts-2-3-0", "multext-east-v6-morphosyntax", "dmlex-v1-0", "ontolex-lemon-model",
+                "lexinfo-3-0", "lmf-iso-24613-1-2024", "cldf-format-spec", "cldf-meta-catalogue",
+                "olia-annotation-ontologies", "ontolex-frac", "tei-p5-dictionaries", "tei-lex-0-v0-9-5",
+                "lift-v0-13", "freedict-tei-dictionaries", "tbx-iso-30042-2019", "xliff-2-2",
+                "tmx-1-4b", "hfst-fst-morphology-toolchain", "iso-12620-dcr-2022", "iso-cd-23096-jlaf",
+                "globalwordnet-wn-lmf-1-4", "iso-maf-core-24611-1-2025", "iso-laf-24612-2012", "iso-synaf-model-24615-1-2014",
+                "iso-mlif-24616-2012", "iso-semaf-24617-family", "unimorph-feature-schema-v1", "conllu-ud-v2-format",
+                "xigt-igt-format-v1-1-1", "ontolex-lexicog-module-2019", "folia-format-2-5-2", "elan-eaf-3-0",
+                "praat-textgrid-format", "talkbank-chat-format", "exmaralda-transcription-formats", "fieldworks-flextext-interlinear-xml",
+                "iso-graf-serialization-24612-2012", "iso-synaf-tigerxml-24615-2-2018"
+        )), "exact 270 language-resource source IDs match the pinned catalogue");
+        requireStructureRecord(lines, "dmlex-v1-0", "lexicographic_data_model_specification", "OASIS DMLex 1.0");
+        requireStructureRecord(lines, "ontolex-lemon-model", "semantic_lexicon_model_specification", "OntoLex-Lemon lexical model");
+        requireStructureRecord(lines, "lexinfo-3-0", "lexical_annotation_data_category_ontology", "LexInfo ontology 3.0");
+        requireStructureRecord(lines, "lmf-iso-24613-1-2024", "lexical_resource_metamodel", "ISO 24613-1:2024 Lexical Ma");
+        requireStructureRecord(lines, "cldf-format-spec", "cross_linguistic_data_format_specification", "CLDF 1.3.1 cross-linguistic");
+        requireStructureRecord(lines, "cldf-meta-catalogue", "language_resource_metadata_catalogue", "CLDF-Meta dataset catalogue");
+        requireStructureRecord(lines, "olia-annotation-ontologies", "linguistic_annotation_ontology", "OLiA linguistic annotation ");
+        requireStructureRecord(lines, "ontolex-frac", "frequency_attestation_annotation_model", "OntoLex FrAC frequency/atte");
+        requireStructureRecord(lines, "tei-p5-dictionaries", "dictionary_encoding_specification", "TEI P5 v4.12.0 dictionary m");
+        requireStructureRecord(lines, "tei-lex-0-v0-9-5", "dictionary_encoding_profile", "TEI Lex-0 v0.9.5 profile");
+        requireStructureRecord(lines, "lift-v0-13", "dictionary_interchange_format", "SIL LIFT 0.13");
+        requireStructureRecord(lines, "freedict-tei-dictionaries", "dictionary_data_fixture", "FreeDict TEI dictionaries");
+        requireStructureRecord(lines, "tbx-iso-30042-2019", "terminology_interchange_standard", "ISO 30042:2019 TBX");
+        requireStructureRecord(lines, "xliff-2-2", "localization_translation_interchange_format", "OASIS XLIFF 2.2");
+        requireStructureRecord(lines, "tmx-1-4b", "translation_memory_interchange_format", "TMX 1.4b Translation Memory");
+        requireStructureRecord(lines, "hfst-fst-morphology-toolchain", "finite_state_morphology_toolchain", "HFST lexicon/rule toolchain");
+        requireStructureRecord(lines, "iso-12620-dcr-2022", "data_category_repository_framework", "ISO 12620-2 data-category r");
+        requireStructureRecord(lines, "iso-cd-23096-jlaf", "linguistic_annotation_json_serialization_draft", "ISO/CD 23096 JLAF JSON seri");
+        requireStructureRecord(lines, "globalwordnet-wn-lmf-1-4", "wordnet_lexical_graph_interchange_format", "Global WordNet WN-LMF 1.4");
+        requireStructureRecord(lines, "iso-maf-core-24611-1-2025", "morphosyntactic_annotation_framework", "ISO 24611-1:2025 MAF Core");
+        requireStructureRecord(lines, "iso-laf-24612-2012", "linguistic_annotation_framework_model", "ISO 24612:2012 LAF abstract");
+        requireStructureRecord(lines, "iso-synaf-model-24615-1-2014", "syntactic_annotation_framework_model", "ISO 24615-1:2014 SynAF synt");
+        requireStructureRecord(lines, "iso-mlif-24616-2012", "multilingual_information_interchange_framework", "ISO 24616:2012 MLIF");
+        requireStructureRecord(lines, "iso-semaf-24617-family", "semantic_annotation_framework", "ISO 24617 SemAF independent");
+        requireStructureRecord(lines, "unimorph-feature-schema-v1", "morphological_feature_schema", "UniMorph schema v1 morphosy");
+        requireStructureRecord(lines, "conllu-ud-v2-format", "dependency_treebank_serialization", "Universal Dependencies CoNL");
+        requireStructureRecord(lines, "xigt-igt-format-v1-1-1", "interlinear_glossed_text_format", "Xigt Interlinear Glossed Te");
+        requireStructureRecord(lines, "ontolex-lexicog-module-2019", "lexicographic_linked_data_module", "OntoLex-Lexicog 2019 module");
+        requireStructureRecord(lines, "folia-format-2-5-2", "linguistic_annotation_interchange_format", "FoLiA 2.5.2 linguistic anno");
+        requireStructureRecord(lines, "elan-eaf-3-0", "multimodal_tier_annotation_format", "ELAN EUDICO Annotation Form");
+        requireStructureRecord(lines, "praat-textgrid-format", "time_aligned_phonetic_annotation_format", "Praat TextGrid file formats");
+        requireStructureRecord(lines, "talkbank-chat-format", "spoken_language_transcription_format", "TalkBank CHAT transcription");
+        requireStructureRecord(lines, "exmaralda-transcription-formats", "multitier_transcription_format", "EXMARaLDA EXB/EXS transcrip");
+        requireStructureRecord(lines, "fieldworks-flextext-interlinear-xml", "interlinear_text_exchange_format", "SIL FieldWorks FLExText int");
+        requireStructureRecord(lines, "iso-graf-serialization-24612-2012", "linguistic_annotation_graph_serialization", "ISO 24612:2012 GrAF XML ser");
+        requireStructureRecord(lines, "iso-synaf-tigerxml-24615-2-2018", "syntactic_annotation_serialization", "ISO 24615-2:2018 SynAF Tige");
+        String jmdict = discoveryRecord(lines, "jmdict-edrdg");
+        require(jmdict.contains("JMdict_e/JMdict_b")
+                && jmdict.contains("legacy generation")
+                && jmdict.contains("parallel NG generation"),
+                "JMdict edition and generation remain pinned separately");
+        String kanjidic2 = discoveryRecord(lines, "kanjidic2-edrdg");
+        require(kanjidic2.contains("CC BY-NC-SA 4.0")
+                && kanjidic2.contains("exclude SKIP from any commercial payload"),
+                "KANJIDIC2 SKIP rights stay field-scoped and noncommercial");
+        String ccCedict = discoveryRecord(lines, "cc-cedict-v2");
+        require(ccCedict.contains("case-sensitively")
+                && ccCedict.contains("[Wang2]") && ccCedict.contains("[wang2]")
+                && ccCedict.contains("case-fold Pinyin"),
+                "CC-CEDICT V2 preserves case-sensitive Pinyin identity");
+        String iso639 = discoveryRecord(lines, "iso-639-2023");
+        require(iso639.contains("\tlanguage_identity_and_code_system\t")
+                && iso639.contains("Edition 2 (2023)")
+                && iso639.contains("ISO 639-1") && iso639.contains("ISO 639-5")
+                && iso639.contains("free-of-charge use")
+                && iso639.contains("BCP 47 tags"),
+                "ISO language-code sets, code-use rights and namespace boundaries stay explicit");
+        String iso15924 = discoveryRecord(lines, "iso-15924-script-codes");
+        require(iso15924.contains("\tscript_identity_and_code_system\t")
+                && iso15924.contains("four-letter alphabetic")
+                && iso15924.contains("three-digit numeric")
+                && iso15924.contains("not language IDs")
+                && iso15924.contains("Unicode Script values"),
+                "ISO script-code forms and distinct language/Unicode identities stay explicit");
+        String clts = discoveryRecord(lines, "clts-2-3-0");
+        require(clts.contains("\tphonetic_transcription_and_sound_feature_specification\t")
+                && clts.contains("five transcription systems")
+                && clts.contains("22 transcription datasets")
+                && clts.contains("six sound-class systems")
+                && clts.contains("CC BY 4.0"),
+                "CLTS version, transcription coverage, feature schemes and attribution stay explicit");
+        String multext = discoveryRecord(lines, "multext-east-v6-morphosyntax");
+        require(multext.contains("\tmorphosyntactic_feature_and_tag_specification\t")
+                && multext.contains("2022-06-24") && multext.contains("compact MSD tag")
+                && multext.contains("CC BY-SA 4.0")
+                && multext.contains("specification artifact, not associated lexica or corpora")
+                && multext.contains("unknown versus absent"),
+                "MULTEXT-East versioned language-specific grammar specs and rights stay explicit");
         String sindhi = discoveryRecord(lines, "hf-sindhi-open-lexicon");
         require(sindhi.contains("223,342") && sindhi.contains("lexical_id")
                 && sindhi.contains("entry_id") && sindhi.contains("schema casting"),
@@ -748,7 +677,7 @@ public final class M3HfLexiconIntakeProof {
                 && austlang.contains("approximate"),
                 "Austlang stable variety IDs and approximate locations remain qualified");
         String afwn = discoveryRecord(lines, "afwn-2022-release-1-0");
-        require(afwn.contains("nine languages") && afwn.contains("CC BY 4.0")
+        require(afwn.contains("nine South African languages") && afwn.contains("CC BY 4.0")
                 && afwn.contains("synset"),
                 "African Wordnet release coverage, rights and sense identity remain explicit");
         String multilingualFrequency = discoveryRecord(lines, "hf-multilingual-frequency-lists");
@@ -798,8 +727,10 @@ public final class M3HfLexiconIntakeProof {
                 .filter(line -> "wordfreq-3-0-2-data".equals(splitTsv(line)[0]))
                 .findFirst().orElse("");
         require(wordfreq.contains("CC BY-SA 4.0") && wordfreq.contains("Apache-2.0")
-                && wordfreq.contains("2021") && wordfreq.contains("bare CSV"),
-                "wordfreq data/code rights, vintage and attribution constraints remain explicit");
+                && wordfreq.contains("2021") && wordfreq.contains("bare CSV")
+                && wordfreq.contains("issue #120") && wordfreq.contains("unanswered")
+                && wordfreq.contains("binary-derived"),
+                "wordfreq data/code rights, vintage and unresolved derived-list terms remain explicit");
         String reflex = lines.stream().skip(1)
                 .filter(line -> "reflex-africa-v1-0".equals(splitTsv(line)[0]))
                 .findFirst().orElse("");
@@ -1017,12 +948,13 @@ public final class M3HfLexiconIntakeProof {
                 && morphalou.contains("522,662") && morphalou.contains("LGPL-LR"),
                 "Morphalou form/phonetic counts, provenance and data license stay explicit");
         String rlfr = discoveryRecord(lines, "rl-fr-2025-03");
-        require(rlfr.contains("7 March 2025") && rlfr.contains("polysemy")
+        require(rlfr.contains("March 2025") && rlfr.contains("polysemy")
                 && rlfr.contains("CC BY 4.0") && rlfr.contains("not translations"),
                 "RL-fr version, typed lexical relations and scope stay explicit");
         String bel = discoveryRecord(lines, "bel-rl-fr-3-1");
         require(bel.contains("31,987 citations") && bel.contains("53,013")
-                && bel.contains("source rights") && bel.contains("REFERENCE_ONLY"),
+                && bel.contains("underlying text rights")
+                && bel.contains("citation-level provenance") && bel.contains("REFERENCE_ONLY"),
                 "BEL-RL citation identity and per-source rights remain gated");
         String prolexbase = discoveryRecord(lines, "prolexbase-2-2");
         require(prolexbase.contains("67,000") && prolexbase.contains("65,500")

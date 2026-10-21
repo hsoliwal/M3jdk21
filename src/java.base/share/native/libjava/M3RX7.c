@@ -101,3 +101,49 @@ done:
     if (packed != NULL) (*env)->ReleaseByteArrayElements(env, packedArray, packed, JNI_ABORT);
     if (dfa != NULL) (*env)->ReleaseShortArrayElements(env, dfaArray, dfa, JNI_ABORT);
 }
+
+/* Bounded token-symbol execution; no text decoding or retained Java addresses. */
+JNIEXPORT jint JNICALL Java_jdk_internal_mindex_M3RX7_advanceTokens0(
+        JNIEnv *env, jclass ignored, jshortArray rowArray, jint tokens, jint state,
+        jintArray idArray, jint offset, jint length) {
+    (void) ignored;
+    if (rowArray == NULL || idArray == NULL) {
+        invalid(env, "missing token-symbol arrays");
+        return -1;
+    }
+    jsize cells = (*env)->GetArrayLength(env, rowArray);
+    jsize ids = (*env)->GetArrayLength(env, idArray);
+    if (tokens <= 0 || cells <= 0 || cells > M3_MAX_CELLS || cells % tokens != 0
+            || cells / tokens > M3_MAX_STATES || state < -1 || state >= cells / tokens
+            || offset < 0 || length < 0 || length > 4096 || offset > ids
+            || length > ids - offset) {
+        invalid(env, "invalid token-symbol page geometry");
+        return -1;
+    }
+    jshort *rows = (*env)->GetShortArrayElements(env, rowArray, NULL);
+    if (rows == NULL) return -1;
+    jint page[256];
+    int valid = 1;
+    for (jint done = 0; done < length && valid;) {
+        jint count = length - done < 256 ? length - done : 256;
+        (*env)->GetIntArrayRegion(env, idArray, offset + done, count, page);
+        if ((*env)->ExceptionCheck(env)) {
+            (*env)->ReleaseShortArrayElements(env, rowArray, rows, JNI_ABORT);
+            return -1;
+        }
+        for (jint i = 0; i < count; i++) {
+            if (page[i] < 0 || page[i] >= tokens) { valid = 0; break; }
+            if (state >= 0) {
+                state = rows[(size_t) state * (size_t) tokens + (size_t) page[i]];
+                if (state < -1 || state >= cells / tokens) { valid = 0; break; }
+            }
+        }
+        done += count;
+    }
+    (*env)->ReleaseShortArrayElements(env, rowArray, rows, JNI_ABORT);
+    if (!valid) {
+        invalid(env, "invalid token-symbol ID or transition");
+        return -1;
+    }
+    return state;
+}

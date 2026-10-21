@@ -1,52 +1,248 @@
 <!-- SPDX-License-Identifier: Apache-2.0; build integration only, upstream source remains Apache License, Version 2.0 (from the license text; pom declares none). -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>net.bytebuddy</groupId><artifactId>byte-buddy</artifactId><version>1.14.11-m3-source-1</version>
+  <groupId>net.bytebuddy</groupId>
+  <artifactId>byte-buddy</artifactId>
+  <version>1.14.11-m3-source-1</version>
   <name>byte-buddy 1.14.11 - unchanged upstream source build for M3jdk21</name>
   <description>Source inclusion of the published net.bytebuddy:byte-buddy:1.14.11 sources jar (SHA-1 67010508a95b30eff7fc6f8ffe16b6d03fc57b99); no upstream implementation changes. See PROVENANCE.json.</description>
   <url>https://repo.maven.apache.org/maven2/net/bytebuddy/byte-buddy/1.14.11/</url>
-  <licenses><license><name>Apache License, Version 2.0 (from the license text; pom declares none)</name><url>https://repo.maven.apache.org/maven2/net/bytebuddy/byte-buddy/1.14.11/byte-buddy-1.14.11.pom</url><distribution>repo</distribution></license></licenses>
-  <properties><project.build.sourceEncoding>UTF-8</project.build.sourceEncoding></properties>
+  <licenses>
+    <license>
+      <name>Apache License, Version 2.0 (from the license text; pom declares none)</name>
+      <url>https://repo.maven.apache.org/maven2/net/bytebuddy/byte-buddy/1.14.11/byte-buddy-1.14.11.pom</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
   <dependencies>
-    <dependency><groupId>net.java.dev.jna</groupId><artifactId>jna</artifactId><version>5.12.1</version><scope>provided</scope><optional>true</optional><!-- published-pom compile input (provided), binary, never shipped --></dependency>
-    <dependency><groupId>net.java.dev.jna</groupId><artifactId>jna-platform</artifactId><version>5.12.1</version><scope>provided</scope><optional>true</optional><!-- published-pom compile input (provided), binary, never shipped --></dependency>
-    <dependency><groupId>com.google.code.findbugs</groupId><artifactId>findbugs-annotations</artifactId><version>3.0.1</version><scope>provided</scope><optional>true</optional><!-- published-pom compile input (provided), binary, never shipped --></dependency>
-    <dependency><groupId>com.google.code.findbugs</groupId><artifactId>jsr305</artifactId><version>3.0.2</version><scope>provided</scope><optional>true</optional><!-- published-pom compile input (provided), binary, never shipped --></dependency>
+    <dependency>
+      <groupId>net.java.dev.jna</groupId>
+      <artifactId>jna</artifactId>
+      <version>5.12.1</version>
+      <scope>provided</scope>
+      <optional>true</optional>
+      <!-- published-pom compile input (provided), binary, never shipped -->
+    </dependency>
+    <dependency>
+      <groupId>net.java.dev.jna</groupId>
+      <artifactId>jna-platform</artifactId>
+      <version>5.12.1</version>
+      <scope>provided</scope>
+      <optional>true</optional>
+      <!-- published-pom compile input (provided), binary, never shipped -->
+    </dependency>
+    <dependency>
+      <groupId>com.google.code.findbugs</groupId>
+      <artifactId>findbugs-annotations</artifactId>
+      <version>3.0.1</version>
+      <scope>provided</scope>
+      <optional>true</optional>
+      <!-- published-pom compile input (provided), binary, never shipped -->
+    </dependency>
+    <dependency>
+      <groupId>com.google.code.findbugs</groupId>
+      <artifactId>jsr305</artifactId>
+      <version>3.0.2</version>
+      <scope>provided</scope>
+      <optional>true</optional>
+      <!-- published-pom compile input (provided), binary, never shipped -->
+    </dependency>
   </dependencies>
   <build>
     <resources>
-      <resource><directory>src/main/resources</directory></resource>
-      <resource><directory>${project.basedir}</directory><targetPath>META-INF/third-party/byte-buddy</targetPath><includes><include>LICENSE</include><include>PROVENANCE.json</include><include>THIRD_PARTY_NOTICES.md</include></includes></resource>
+      <resource>
+        <directory>src/main/resources</directory>
+      </resource>
+      <resource>
+        <directory>${project.basedir}</directory>
+        <targetPath>META-INF/third-party/byte-buddy</targetPath>
+        <includes>
+          <include>LICENSE</include>
+          <include>PROVENANCE.json</include>
+          <include>THIRD_PARTY_NOTICES.md</include>
+        </includes>
+      </resource>
     </resources>
     <plugins>
-      <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-compiler-plugin</artifactId><version>3.15.0</version>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.15.0</version>
         <!-- Upstream bytes are compiled as published: no annotation processing, no warnings-as-errors. M3jdk21 integration is checked separately with -Werror. -->
-        <configuration><release>8</release><encoding>UTF-8</encoding><proc>none</proc><compilerArgs><arg>-Xlint:all,-options</arg></compilerArgs></configuration>
+        <configuration>
+          <release>8</release>
+          <encoding>UTF-8</encoding>
+          <proc>none</proc>
+          <compilerArgs>
+            <arg>-Xlint:all,-options</arg>
+          </compilerArgs>
+        </configuration>
       </plugin>
-      <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-surefire-plugin</artifactId><version>3.5.6</version>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>3.5.6</version>
         <!-- Published sources jars carry no test suite; the compile and the consumers' own tests are the proof lane. -->
-        <configuration><skipTests>true</skipTests></configuration>
+        <configuration>
+          <skipTests>true</skipTests>
+        </configuration>
       </plugin>
-      <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-jar-plugin</artifactId><version>3.5.0</version>
-        <configuration><excludes><exclude>META-INF/jpms.args</exclude></excludes><archive><manifestEntries><M3jdk21-Source-Inline>no upstream Automatic-Module-Name</M3jdk21-Source-Inline><Multi-Release>true</Multi-Release></manifestEntries></archive></configuration>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+        <version>3.5.0</version>
+        <configuration>
+          <excludes>
+            <exclude>META-INF/jpms.args</exclude>
+          </excludes>
+          <archive>
+            <manifestEntries>
+              <M3jdk21-Source-Inline>no upstream Automatic-Module-Name</M3jdk21-Source-Inline>
+              <Multi-Release>true</Multi-Release>
+            </manifestEntries>
+          </archive>
+        </configuration>
       </plugin>
-      <plugin><groupId>net.bytebuddy</groupId><artifactId>byte-buddy-maven-plugin</artifactId><version>1.14.10</version>
+      <plugin>
+        <groupId>net.bytebuddy</groupId>
+        <artifactId>byte-buddy-maven-plugin</artifactId>
+        <version>1.14.10</version>
         <!-- upstream byte-buddy-dep build: the same five transformations, applied to the compiled classes -->
-        <executions><execution><phase>compile</phase><goals><goal>transform</goal></goals><configuration>
-          <initialization><entryPoint>REDEFINE</entryPoint></initialization>
-          <transformations>
-            <transformation><groupId>net.bytebuddy</groupId><artifactId>byte-buddy</artifactId><version>1.14.10</version><plugin>net.bytebuddy.build.HashCodeAndEqualsPlugin$WithNonNullableFields</plugin><arguments><argument><index>0</index><value>net.bytebuddy.utility.nullability.MaybeNull</value></argument></arguments></transformation>
-            <transformation><groupId>net.bytebuddy</groupId><artifactId>byte-buddy</artifactId><version>1.14.10</version><plugin>net.bytebuddy.build.CachedReturnPlugin</plugin></transformation>
-            <transformation><groupId>net.bytebuddy</groupId><artifactId>byte-buddy</artifactId><version>1.14.10</version><plugin>net.bytebuddy.build.AccessControllerPlugin</plugin><arguments><argument><index>0</index><value>net.bytebuddy.securitymanager</value></argument></arguments></transformation>
-            <transformation><groupId>net.bytebuddy</groupId><artifactId>byte-buddy</artifactId><version>1.14.10</version><plugin>net.bytebuddy.build.DispatcherAnnotationPlugin</plugin></transformation>
-            <transformation><groupId>net.bytebuddy</groupId><artifactId>byte-buddy</artifactId><version>1.14.10</version><plugin>net.bytebuddy.build.RepeatedAnnotationPlugin</plugin></transformation>
-          </transformations>
-        </configuration></execution></executions>
+        <executions>
+          <execution>
+            <phase>compile</phase>
+            <goals>
+              <goal>transform</goal>
+            </goals>
+            <configuration>
+              <initialization>
+                <entryPoint>REDEFINE</entryPoint>
+              </initialization>
+              <transformations>
+                <transformation>
+                  <groupId>net.bytebuddy</groupId>
+                  <artifactId>byte-buddy</artifactId>
+                  <version>1.14.10</version>
+                  <plugin>net.bytebuddy.build.HashCodeAndEqualsPlugin$WithNonNullableFields</plugin>
+                  <arguments>
+                    <argument>
+                      <index>0</index>
+                      <value>net.bytebuddy.utility.nullability.MaybeNull</value>
+                    </argument>
+                  </arguments>
+                </transformation>
+                <transformation>
+                  <groupId>net.bytebuddy</groupId>
+                  <artifactId>byte-buddy</artifactId>
+                  <version>1.14.10</version>
+                  <plugin>net.bytebuddy.build.CachedReturnPlugin</plugin>
+                </transformation>
+                <transformation>
+                  <groupId>net.bytebuddy</groupId>
+                  <artifactId>byte-buddy</artifactId>
+                  <version>1.14.10</version>
+                  <plugin>net.bytebuddy.build.AccessControllerPlugin</plugin>
+                  <arguments>
+                    <argument>
+                      <index>0</index>
+                      <value>net.bytebuddy.securitymanager</value>
+                    </argument>
+                  </arguments>
+                </transformation>
+                <transformation>
+                  <groupId>net.bytebuddy</groupId>
+                  <artifactId>byte-buddy</artifactId>
+                  <version>1.14.10</version>
+                  <plugin>net.bytebuddy.build.DispatcherAnnotationPlugin</plugin>
+                </transformation>
+                <transformation>
+                  <groupId>net.bytebuddy</groupId>
+                  <artifactId>byte-buddy</artifactId>
+                  <version>1.14.10</version>
+                  <plugin>net.bytebuddy.build.RepeatedAnnotationPlugin</plugin>
+                </transformation>
+              </transformations>
+            </configuration>
+          </execution>
+        </executions>
       </plugin>
-      <plugin><groupId>org.moditect</groupId><artifactId>moditect-maven-plugin</artifactId><version>1.2.2.Final</version>
+      <plugin>
+        <groupId>org.moditect</groupId>
+        <artifactId>moditect-maven-plugin</artifactId>
+        <version>1.2.2.Final</version>
         <!-- descriptors upstream generates in its build, assembled from the declaration in src/main/descriptor -->
-        <executions><execution><id>add-module-info-9</id><phase>package</phase><goals><goal>add-module-info</goal></goals><configuration><jvmVersion>9</jvmVersion><overwriteExistingFiles>true</overwriteExistingFiles><failOnWarning>false</failOnWarning><version>1.14.11</version><module><moduleInfoFile>${project.basedir}/src/main/descriptor/9/module-info.java</moduleInfoFile></module></configuration></execution></executions>
+        <executions>
+          <execution>
+            <id>add-module-info-9</id>
+            <phase>package</phase>
+            <goals>
+              <goal>add-module-info</goal>
+            </goals>
+            <configuration>
+              <jvmVersion>9</jvmVersion>
+              <overwriteExistingFiles>true</overwriteExistingFiles>
+              <failOnWarning>false</failOnWarning>
+              <version>1.14.11</version>
+              <module>
+                <moduleInfoFile>${project.basedir}/src/main/descriptor/9/module-info.java</moduleInfoFile>
+              </module>
+            </configuration>
+          </execution>
+        </executions>
       </plugin>
     </plugins>
   </build>
+  <profiles>
+    <profile>
+      <id>m3-recipe-boot</id>
+      <activation>
+        <file>
+          <exists>${maven.multiModuleProjectDirectory}/.m3/recipe-boot.properties</exists>
+        </file>
+      </activation>
+      <properties>
+        <m3.recipe.boot.skip>false</m3.recipe.boot.skip>
+      </properties>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>exec-maven-plugin</artifactId>
+            <version>3.5.0</version>
+            <inherited>true</inherited>
+            <dependencies>
+              <dependency>
+                <groupId>com.synexia.m3</groupId>
+                <artifactId>m3-pr-stack-preservation</artifactId>
+                <version>1.0.0-m3boot20261021</version>
+              </dependency>
+            </dependencies>
+            <executions>
+              <execution>
+                <id>m3-recipe-boot</id>
+                <phase>validate</phase>
+                <goals>
+                  <goal>java</goal>
+                </goals>
+                <configuration>
+                  <skip>${m3.recipe.boot.skip}</skip>
+                  <mainClass>com.synexia.m3.prstack.M3RecipeBoot</mainClass>
+                  <includeProjectDependencies>false</includeProjectDependencies>
+                  <includePluginDependencies>true</includePluginDependencies>
+                  <arguments>
+                    <argument>${maven.multiModuleProjectDirectory}/.m3/recipe-boot.properties</argument>
+                    <argument>${project.basedir}</argument>
+                    <argument>${session.projects[0].basedir.absolutePath}</argument>
+                  </arguments>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
 </project>

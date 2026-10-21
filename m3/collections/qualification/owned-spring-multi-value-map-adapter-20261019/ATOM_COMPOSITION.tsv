@@ -1,0 +1,5 @@
+operation_atom	selected_permissive_surface	custom_uncovered_composition	validation_receipt	limits
+write-through delegation	Spring MultiValueMapAdapter contract	one target reference; every Map method delegates; Map defaults dispatch through the adapter	differential: exact target text and list classes after every op	-
+list creation	JDK ArrayList (M3-backed in place in M3jdk21)	non-capturing computeIfAbsent factory for add; sized factory for addAll that fails before mapping on a null list	constructionAndWriteThrough (addAll null list, null-mapped key); allocation probe 0 bytes	-
+first-value view	Spring 6.2 first-value protocol	private live view over any MultiValueMap; owned values/entries walkers over the target views	singleValueViewProtocol; differential view ops incl. failures	iterators do not support removal (as Spring)
+serialization	default form: adapter plus target map; view plus adapter	owned serialVersionUID 0	serializationRoundTrip (text matches Spring's round trip)	not wire-compatible with Spring (UID differs)

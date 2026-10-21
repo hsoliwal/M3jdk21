@@ -1,0 +1,362 @@
+{
+  "schema": 1,
+  "repository": "hsoliwal/com.synexia",
+  "receiverRepository": "hsoliwal/M3jdk21",
+  "sourceCommit": "923c9f6fa51593b5bad382af72fa07e25c8f8504",
+  "admissionCommit": "c095d7dd5c6acc2994cf469f12bfb13cfdbf3737",
+  "hostAdmissionCommit": "d22c2e0fb7ba7e5a39a3088aa1e29b633f46756c",
+  "receiverBase": "987bd0b32b8d94f02b51002c8ed6be85d2601924",
+  "sdkFiles": 36,
+  "files": [
+    {
+      "targetPath": "m3/tooling/backport-wave-current-output/sdk/FOSS_REUSE_DECISION.tsv",
+      "gitBlob": "77a9c18767e85e3b26ecbc7ee0a12e0f97bbf821",
+      "bytes": 848,
+      "sha256": "d82899d4b51ba5fa82fcf310133a558dbfd9e673981ba8309600366b18f40390",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/backport-contract-current-owner-20261019/wave-consumer-current-output-20261020/sdk/FOSS_REUSE_DECISION.tsv"
+    },
+    {
+      "targetPath": "m3/tooling/backport-wave-current-output/sdk/pinned-engine/com/synexia/rewrite/M3BackportWaveCurrentOutputInverseRecipe.java",
+      "gitBlob": "01151cc92849e7032d65197c2b58232b59efeec0",
+      "bytes": 845,
+      "sha256": "76fef1b44c0012b90b3dcfe28b305b9fb5d34548e8ce9fb6c82e2c49ca14210d",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/backport-contract-current-owner-20261019/wave-consumer-current-output-20261020/sdk/pinned-engine/com/synexia/rewrite/M3BackportWaveCurrentOutputInverseRecipe.java"
+    },
+    {
+      "targetPath": "m3/tooling/backport-wave-current-output/sdk/pinned-engine/com/synexia/rewrite/M3BackportWaveCurrentOutputRecipe.java",
+      "gitBlob": "5c0bd87b501f48f0e305be7fa04e6e613a7125d3",
+      "bytes": 839,
+      "sha256": "cb349c3d3fa5afffc686179fec1b3dca566917949b5c43b4c879b4f51c41721b",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/backport-contract-current-owner-20261019/wave-consumer-current-output-20261020/sdk/pinned-engine/com/synexia/rewrite/M3BackportWaveCurrentOutputRecipe.java"
+    },
+    {
+      "targetPath": "m3/tooling/backport-wave-current-output/sdk/pinned-engine/com/synexia/rewrite/M3GpuToolJoinManifest.java",
+      "gitBlob": "38df5f97bbeec8a8a8cfc77091d56bda925c07f2",
+      "bytes": 10964,
+      "sha256": "56bd61be29eae76b3f468519677424450448751d94ca032956b330d7b3dd1999",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/backport-contract-current-owner-20261019/wave-consumer-current-output-20261020/sdk/pinned-engine/com/synexia/rewrite/M3GpuToolJoinManifest.java"
+    },
+    {
+      "targetPath": "m3/tooling/backport-wave-current-output/sdk/pinned-engine/com/synexia/rewrite/M3GpuToolJoinRecipe.java",
+      "gitBlob": "1c1b1b568d369f688f6953161636bf36b484bf5a",
+      "bytes": 5187,
+      "sha256": "ee90a2b8689699745553c2f4d2d07121b91777f4e9a671fdb33ba8edea0c14ec",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/backport-contract-current-owner-20261019/wave-consumer-current-output-20261020/sdk/pinned-engine/com/synexia/rewrite/M3GpuToolJoinRecipe.java"
+    },
+    {
+      "targetPath": "m3/tooling/backport-wave-current-output/sdk/pins.json",
+      "gitBlob": "2ee327e4f6df480eb7753a8fc8f5556ffc3e8a17",
+      "bytes": 10594,
+      "sha256": "0e34d73fa548385b8ccb9e8fbf1e74b61bcf3275aa02000905be10e23e217282",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/backport-contract-current-owner-20261019/wave-consumer-current-output-20261020/sdk/pins.json"
+    },
+    {
+      "targetPath": "m3/tooling/backport-wave-current-output/sdk/pom.xml",
+      "gitBlob": "d79867bcc09ad6329e12418e15907e54b8ab025f",
+      "bytes": 2678,
+      "sha256": "f0ab99c3dafb38e82f8e5fd4c6d22db07831808c251c4622f292114c83e6673e",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/backport-contract-current-owner-20261019/wave-consumer-current-output-20261020/sdk/pom.xml"
+    },
+    {
+      "targetPath": "m3/tooling/backport-wave-current-output/sdk/README.md",
+      "gitBlob": "245205c21db1e565959649d0da1e0ed6f0f8e56a",
+      "bytes": 2170,
+      "sha256": "e554af162f93a84dfbe7ee2bcd0781cf95678f760f0b289492bdba190e2bcfb1",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/backport-contract-current-owner-20261019/wave-consumer-current-output-20261020/sdk/README.md"
+    },
+    {
+      "targetPath": "m3/tooling/backport-wave-current-output/sdk/src/main/resources/com/synexia/rewrite/backport-wave-current-output-20261020/before/.github/workflows/m3-jdk21-backport-wave-admission.yml",
+      "gitBlob": "9ba94e55b4c8f468fb0ff5f3cd7c530caa6fdff2",
+      "bytes": 3717,
+      "sha256": "622491eea231863f0b595ead49711b5c60f63ae8ea0bf408f44a71ec84de2c85",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/backport-contract-current-owner-20261019/wave-consumer-current-output-20261020/sdk/src/main/resources/com/synexia/rewrite/backport-wave-current-output-20261020/before/.github/workflows/m3-jdk21-backport-wave-admission.yml"
+    },
+    {
+      "targetPath": "m3/tooling/backport-wave-current-output/sdk/src/main/resources/com/synexia/rewrite/backport-wave-current-output-20261020/before/m3/backports/BACKPORT_EXECUTION_WAVES.md",
+      "gitBlob": "428d775ca476b187dceb26a012401b11b975bbbb",
+      "bytes": 6247,
+      "sha256": "df2aca41ab120bdbc8c165d4abe3552c54a91c591aab116b718b94283ae23f28",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/backport-contract-current-owner-20261019/wave-consumer-current-output-20261020/sdk/src/main/resources/com/synexia/rewrite/backport-wave-current-output-20261020/before/m3/backports/BACKPORT_EXECUTION_WAVES.md"
+    },
+    {
+      "targetPath": "m3/tooling/backport-wave-current-output/sdk/src/main/resources/com/synexia/rewrite/backport-wave-current-output-20261020/before/m3/backports/backport_execution_waves.py",
+      "gitBlob": "cc2a6ceb90b56d3b05d1307e705586c8d7cf1b40",
+      "bytes": 12177,
+      "sha256": "2cb19465a6a0d4f24dc228921eb1a2d7c2bbc4e53ce68e635b0e60ddb2a563dc",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/backport-contract-current-owner-20261019/wave-consumer-current-output-20261020/sdk/src/main/resources/com/synexia/rewrite/backport-wave-current-output-20261020/before/m3/backports/backport_execution_waves.py"
+    },
+    {
+      "targetPath": "m3/tooling/backport-wave-current-output/sdk/src/main/resources/com/synexia/rewrite/backport-wave-current-output-20261020/before/m3/backports/compatibility_policy.py",
+      "gitBlob": "89673d65b2ad42fc694d809d5c6f4d0eab7adbd8",
+      "bytes": 4695,
+      "sha256": "d51301d3ea225e89b000a2256855ab7806a1faf20c5fa493eb5666de1e7880c2",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/backport-contract-current-owner-20261019/wave-consumer-current-output-20261020/sdk/src/main/resources/com/synexia/rewrite/backport-wave-current-output-20261020/before/m3/backports/compatibility_policy.py"
+    },
+    {
+      "targetPath": "m3/tooling/backport-wave-current-output/sdk/src/main/resources/com/synexia/rewrite/backport-wave-current-output-20261020/before/m3/backports/JEP_CATALOGUE.tsv",
+      "gitBlob": "a0ef9aa95da17a19c3df8ab8aded355fad4f4598",
+      "bytes": 12083,
+      "sha256": "d47f07c2ee9829bfb91f4c4e2162bb221e86206aada802e0580aaef79d7fd250",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/backport-contract-current-owner-20261019/wave-consumer-current-output-20261020/sdk/src/main/resources/com/synexia/rewrite/backport-wave-current-output-20261020/before/m3/backports/JEP_CATALOGUE.tsv"
+    },
+    {
+      "targetPath": "m3/tooling/backport-wave-current-output/sdk/src/main/resources/com/synexia/rewrite/backport-wave-current-output-20261020/before/m3/backports/POST21_PRIORITY_COMPATIBILITY.tsv",
+      "gitBlob": "db7579c96d7dfc9c0c70fb4b28773cf89bad76ca",
+      "bytes": 6319,
+      "sha256": "4d813438bb68106c65781b3891c43afd4b35d288e0440ec4d27f83305b780c1a",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/backport-contract-current-owner-20261019/wave-consumer-current-output-20261020/sdk/src/main/resources/com/synexia/rewrite/backport-wave-current-output-20261020/before/m3/backports/POST21_PRIORITY_COMPATIBILITY.tsv"
+    },
+    {
+      "targetPath": "m3/tooling/backport-wave-current-output/sdk/src/main/resources/com/synexia/rewrite/backport-wave-current-output-20261020/before/m3/backports/RELEASE_JEP_AUTHORITY.tsv",
+      "gitBlob": "745a26772b8050c28dd93d05c724bfa9c2ad5e18",
+      "bytes": 760,
+      "sha256": "05341181f89e150ae602644ddaca9d53596be533cb2695e4032f11c0e1a70709",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/backport-contract-current-owner-20261019/wave-consumer-current-output-20261020/sdk/src/main/resources/com/synexia/rewrite/backport-wave-current-output-20261020/before/m3/backports/RELEASE_JEP_AUTHORITY.tsv"
+    },
+    {
+      "targetPath": "m3/tooling/backport-wave-current-output/sdk/src/main/resources/com/synexia/rewrite/backport-wave-current-output-20261020/before/m3/backports/test_backport_execution_waves.py",
+      "gitBlob": "7a3b961caa4302a2ebd1675360e29e6b1df9697b",
+      "bytes": 12454,
+      "sha256": "5a59d038e108010c484f66f545ab5bc745a791182ed4794556b414ffde315dd0",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/backport-contract-current-owner-20261019/wave-consumer-current-output-20261020/sdk/src/main/resources/com/synexia/rewrite/backport-wave-current-output-20261020/before/m3/backports/test_backport_execution_waves.py"
+    },
+    {
+      "targetPath": "m3/tooling/backport-wave-current-output/sdk/src/main/resources/com/synexia/rewrite/backport-wave-current-output-20261020/before/m3/backports/test_compatibility_policy.py",
+      "gitBlob": "cd7b5a28ce3ec1f5a4475a145b40a3074b1a5c21",
+      "bytes": 7101,
+      "sha256": "69694e6e3725aeee8687a8c58bce477c7256f626d8425c04a9ce9772250a2bb6",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/backport-contract-current-owner-20261019/wave-consumer-current-output-20261020/sdk/src/main/resources/com/synexia/rewrite/backport-wave-current-output-20261020/before/m3/backports/test_compatibility_policy.py"
+    },
+    {
+      "targetPath": "m3/tooling/backport-wave-current-output/sdk/src/main/resources/com/synexia/rewrite/backport-wave-current-output-20261020/before/m3/compatibility/synexia-wave-admission-pin-20261014.tsv",
+      "gitBlob": "60c11d68f482efadeadbbe6f58bfac9ec9aa0090",
+      "bytes": 1349,
+      "sha256": "984af6023eb4f4e0b917a700c5e75bd936083b7ae2f0daef07c37ad6a3e2ddd4",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/backport-contract-current-owner-20261019/wave-consumer-current-output-20261020/sdk/src/main/resources/com/synexia/rewrite/backport-wave-current-output-20261020/before/m3/compatibility/synexia-wave-admission-pin-20261014.tsv"
+    },
+    {
+      "targetPath": "m3/tooling/backport-wave-current-output/sdk/src/main/resources/com/synexia/rewrite/backport-wave-current-output-20261020/inverse/manifest.tsv",
+      "gitBlob": "7e81a5f1b2895cfc268fbda75a0015edcf81e11a",
+      "bytes": 1840,
+      "sha256": "e2064f6bdf6d301653c9e1112dba61bc9f6a543023b44f69805129b5866baf52",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/backport-contract-current-owner-20261019/wave-consumer-current-output-20261020/sdk/src/main/resources/com/synexia/rewrite/backport-wave-current-output-20261020/inverse/manifest.tsv"
+    },
+    {
+      "targetPath": "m3/tooling/backport-wave-current-output/sdk/src/main/resources/com/synexia/rewrite/backport-wave-current-output-20261020/inverse/out/.github/workflows/m3-jdk21-backport-wave-admission.yml",
+      "gitBlob": "9ba94e55b4c8f468fb0ff5f3cd7c530caa6fdff2",
+      "bytes": 3717,
+      "sha256": "622491eea231863f0b595ead49711b5c60f63ae8ea0bf408f44a71ec84de2c85",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/backport-contract-current-owner-20261019/wave-consumer-current-output-20261020/sdk/src/main/resources/com/synexia/rewrite/backport-wave-current-output-20261020/inverse/out/.github/workflows/m3-jdk21-backport-wave-admission.yml"
+    },
+    {
+      "targetPath": "m3/tooling/backport-wave-current-output/sdk/src/main/resources/com/synexia/rewrite/backport-wave-current-output-20261020/manifest.tsv",
+      "gitBlob": "38b9aad9544fde55cbfeecdbb61151486c5835a0",
+      "bytes": 1840,
+      "sha256": "8478e660b6e535bf1f069ce16da558a9f1d0dd1e1e17626cd8ec908d041cdf9a",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/backport-contract-current-owner-20261019/wave-consumer-current-output-20261020/sdk/src/main/resources/com/synexia/rewrite/backport-wave-current-output-20261020/manifest.tsv"
+    },
+    {
+      "targetPath": "m3/tooling/backport-wave-current-output/sdk/src/main/resources/com/synexia/rewrite/backport-wave-current-output-20261020/out/.github/workflows/m3-jdk21-backport-wave-admission.yml",
+      "gitBlob": "60ab068a3ebe7bab7c568afc405035f1fd15ffd3",
+      "bytes": 3717,
+      "sha256": "b64ac1da918bd1b5fd5dd56adc16aeb9705a854cfd262e0793fe79428ac450d6",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/backport-contract-current-owner-20261019/wave-consumer-current-output-20261020/sdk/src/main/resources/com/synexia/rewrite/backport-wave-current-output-20261020/out/.github/workflows/m3-jdk21-backport-wave-admission.yml"
+    },
+    {
+      "targetPath": "m3/tooling/backport-wave-current-output/sdk/src/main/resources/com/synexia/rewrite/backport-wave-current-output-20261020/out/m3/backports/BACKPORT_EXECUTION_WAVES.md",
+      "gitBlob": "428d775ca476b187dceb26a012401b11b975bbbb",
+      "bytes": 6247,
+      "sha256": "df2aca41ab120bdbc8c165d4abe3552c54a91c591aab116b718b94283ae23f28",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/backport-contract-current-owner-20261019/wave-consumer-current-output-20261020/sdk/src/main/resources/com/synexia/rewrite/backport-wave-current-output-20261020/out/m3/backports/BACKPORT_EXECUTION_WAVES.md"
+    },
+    {
+      "targetPath": "m3/tooling/backport-wave-current-output/sdk/src/main/resources/com/synexia/rewrite/backport-wave-current-output-20261020/out/m3/backports/backport_execution_waves.py",
+      "gitBlob": "cc2a6ceb90b56d3b05d1307e705586c8d7cf1b40",
+      "bytes": 12177,
+      "sha256": "2cb19465a6a0d4f24dc228921eb1a2d7c2bbc4e53ce68e635b0e60ddb2a563dc",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/backport-contract-current-owner-20261019/wave-consumer-current-output-20261020/sdk/src/main/resources/com/synexia/rewrite/backport-wave-current-output-20261020/out/m3/backports/backport_execution_waves.py"
+    },
+    {
+      "targetPath": "m3/tooling/backport-wave-current-output/sdk/src/main/resources/com/synexia/rewrite/backport-wave-current-output-20261020/out/m3/backports/compatibility_policy.py",
+      "gitBlob": "89673d65b2ad42fc694d809d5c6f4d0eab7adbd8",
+      "bytes": 4695,
+      "sha256": "d51301d3ea225e89b000a2256855ab7806a1faf20c5fa493eb5666de1e7880c2",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/backport-contract-current-owner-20261019/wave-consumer-current-output-20261020/sdk/src/main/resources/com/synexia/rewrite/backport-wave-current-output-20261020/out/m3/backports/compatibility_policy.py"
+    },
+    {
+      "targetPath": "m3/tooling/backport-wave-current-output/sdk/src/main/resources/com/synexia/rewrite/backport-wave-current-output-20261020/out/m3/backports/JEP_CATALOGUE.tsv",
+      "gitBlob": "a0ef9aa95da17a19c3df8ab8aded355fad4f4598",
+      "bytes": 12083,
+      "sha256": "d47f07c2ee9829bfb91f4c4e2162bb221e86206aada802e0580aaef79d7fd250",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/backport-contract-current-owner-20261019/wave-consumer-current-output-20261020/sdk/src/main/resources/com/synexia/rewrite/backport-wave-current-output-20261020/out/m3/backports/JEP_CATALOGUE.tsv"
+    },
+    {
+      "targetPath": "m3/tooling/backport-wave-current-output/sdk/src/main/resources/com/synexia/rewrite/backport-wave-current-output-20261020/out/m3/backports/POST21_PRIORITY_COMPATIBILITY.tsv",
+      "gitBlob": "db7579c96d7dfc9c0c70fb4b28773cf89bad76ca",
+      "bytes": 6319,
+      "sha256": "4d813438bb68106c65781b3891c43afd4b35d288e0440ec4d27f83305b780c1a",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/backport-contract-current-owner-20261019/wave-consumer-current-output-20261020/sdk/src/main/resources/com/synexia/rewrite/backport-wave-current-output-20261020/out/m3/backports/POST21_PRIORITY_COMPATIBILITY.tsv"
+    },
+    {
+      "targetPath": "m3/tooling/backport-wave-current-output/sdk/src/main/resources/com/synexia/rewrite/backport-wave-current-output-20261020/out/m3/backports/RELEASE_JEP_AUTHORITY.tsv",
+      "gitBlob": "745a26772b8050c28dd93d05c724bfa9c2ad5e18",
+      "bytes": 760,
+      "sha256": "05341181f89e150ae602644ddaca9d53596be533cb2695e4032f11c0e1a70709",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/backport-contract-current-owner-20261019/wave-consumer-current-output-20261020/sdk/src/main/resources/com/synexia/rewrite/backport-wave-current-output-20261020/out/m3/backports/RELEASE_JEP_AUTHORITY.tsv"
+    },
+    {
+      "targetPath": "m3/tooling/backport-wave-current-output/sdk/src/main/resources/com/synexia/rewrite/backport-wave-current-output-20261020/out/m3/backports/test_backport_execution_waves.py",
+      "gitBlob": "7a3b961caa4302a2ebd1675360e29e6b1df9697b",
+      "bytes": 12454,
+      "sha256": "5a59d038e108010c484f66f545ab5bc745a791182ed4794556b414ffde315dd0",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/backport-contract-current-owner-20261019/wave-consumer-current-output-20261020/sdk/src/main/resources/com/synexia/rewrite/backport-wave-current-output-20261020/out/m3/backports/test_backport_execution_waves.py"
+    },
+    {
+      "targetPath": "m3/tooling/backport-wave-current-output/sdk/src/main/resources/com/synexia/rewrite/backport-wave-current-output-20261020/out/m3/backports/test_compatibility_policy.py",
+      "gitBlob": "cd7b5a28ce3ec1f5a4475a145b40a3074b1a5c21",
+      "bytes": 7101,
+      "sha256": "69694e6e3725aeee8687a8c58bce477c7256f626d8425c04a9ce9772250a2bb6",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/backport-contract-current-owner-20261019/wave-consumer-current-output-20261020/sdk/src/main/resources/com/synexia/rewrite/backport-wave-current-output-20261020/out/m3/backports/test_compatibility_policy.py"
+    },
+    {
+      "targetPath": "m3/tooling/backport-wave-current-output/sdk/src/main/resources/com/synexia/rewrite/backport-wave-current-output-20261020/out/m3/compatibility/synexia-wave-admission-pin-20261014.tsv",
+      "gitBlob": "60c11d68f482efadeadbbe6f58bfac9ec9aa0090",
+      "bytes": 1349,
+      "sha256": "984af6023eb4f4e0b917a700c5e75bd936083b7ae2f0daef07c37ad6a3e2ddd4",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/backport-contract-current-owner-20261019/wave-consumer-current-output-20261020/sdk/src/main/resources/com/synexia/rewrite/backport-wave-current-output-20261020/out/m3/compatibility/synexia-wave-admission-pin-20261014.tsv"
+    },
+    {
+      "targetPath": "m3/tooling/backport-wave-current-output/sdk/src/main/resources/META-INF/rewrite/backport-wave-current-output-20261020-inverse.yml",
+      "gitBlob": "b2cbadfd4cfa24e69a9d62bf24867e35c121614e",
+      "bytes": 485,
+      "sha256": "3fd03781353bcf05bf26228fc0df2817d177fe012ecc3eb4b38a451bdc9df624",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/backport-contract-current-owner-20261019/wave-consumer-current-output-20261020/sdk/src/main/resources/META-INF/rewrite/backport-wave-current-output-20261020-inverse.yml"
+    },
+    {
+      "targetPath": "m3/tooling/backport-wave-current-output/sdk/src/main/resources/META-INF/rewrite/backport-wave-current-output-20261020.yml",
+      "gitBlob": "204b694072d9970a1e1bf7c7738aa8cc0850a2fe",
+      "bytes": 479,
+      "sha256": "80d565a20347d2afc987ac59ee6303cb298fc218fb1dc880583ad3bfe489292f",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/backport-contract-current-owner-20261019/wave-consumer-current-output-20261020/sdk/src/main/resources/META-INF/rewrite/backport-wave-current-output-20261020.yml"
+    },
+    {
+      "targetPath": "m3/tooling/backport-wave-current-output/sdk/src/test/java/com/synexia/rewrite/M3BackportWaveCurrentOutputRecipeTest.java",
+      "gitBlob": "d478a3ecc20204aa551a1663315c84f34e07a8ae",
+      "bytes": 18087,
+      "sha256": "c36860284e39b9d7fd976219cce59597e82fce60b72dc111c89ce37ba21a16ac",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/backport-contract-current-owner-20261019/wave-consumer-current-output-20261020/sdk/src/test/java/com/synexia/rewrite/M3BackportWaveCurrentOutputRecipeTest.java"
+    },
+    {
+      "targetPath": "m3/tooling/backport-wave-current-output/sdk/THIRD_PARTY_NOTICES.md",
+      "gitBlob": "9035fc5bb47fd067d0ac7dbb8da002e5326f1be1",
+      "bytes": 839,
+      "sha256": "760a33ae8a4f9403be7ce454498e85a3e3f4357838ed3323cdda366ca6ed7052",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/backport-contract-current-owner-20261019/wave-consumer-current-output-20261020/sdk/THIRD_PARTY_NOTICES.md"
+    },
+    {
+      "targetPath": "m3/tooling/backport-wave-current-output/sdk/verify.py",
+      "gitBlob": "5d48868fb8eaa9b46d96e809c8103de80c1cfc48",
+      "bytes": 25000,
+      "sha256": "fae54c3acda4e2aac2c10aa1fe05a46741e2d1c66a036b1a030b8a0e88e52625",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/backport-contract-current-owner-20261019/wave-consumer-current-output-20261020/sdk/verify.py"
+    },
+    {
+      "targetPath": "m3/tooling/backport-wave-current-output/qualify.py",
+      "gitBlob": "8f6da3f07c2ba3339ab58f203776ad9ac98d9ec2",
+      "bytes": 17359,
+      "sha256": "d874fe6f0cc461457ac1046cbdd3b83ea274607befde771e1654cd914f5f66cf",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/backport-contract-current-owner-20261019/wave-consumer-current-output-20261020/hosted/qualify.py"
+    },
+    {
+      "targetPath": ".github/workflows/m3-backport-wave-current-output.yml",
+      "gitBlob": "ab87e2bf773b41a2e0df4a4136662cb7aa9cef63",
+      "bytes": 31245,
+      "sha256": "19473e9d9e1952f5566dd36a3887ca9cce977a2401fbba89cf8f01bb28d02417",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/backport-contract-current-owner-20261019/wave-consumer-current-output-20261020/hosted/qualification.yml"
+    }
+  ],
+  "receiverOriginalOwners": [
+    {
+      "path": "m3/backports/test_compatibility_policy.py",
+      "gitBlob": "cd7b5a28ce3ec1f5a4475a145b40a3074b1a5c21",
+      "bytes": 7101,
+      "sha256": "69694e6e3725aeee8687a8c58bce477c7256f626d8425c04a9ce9772250a2bb6",
+      "role": "KEEP",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "m3/backports/compatibility_policy.py",
+      "gitBlob": "89673d65b2ad42fc694d809d5c6f4d0eab7adbd8",
+      "bytes": 4695,
+      "sha256": "d51301d3ea225e89b000a2256855ab7806a1faf20c5fa493eb5666de1e7880c2",
+      "role": "KEEP",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "m3/backports/POST21_PRIORITY_COMPATIBILITY.tsv",
+      "gitBlob": "db7579c96d7dfc9c0c70fb4b28773cf89bad76ca",
+      "bytes": 6319,
+      "sha256": "4d813438bb68106c65781b3891c43afd4b35d288e0440ec4d27f83305b780c1a",
+      "role": "KEEP",
+      "license": "PRESERVED_RECEIVER_NOTICE_NO_RELICENSING"
+    },
+    {
+      "path": "m3/backports/JEP_CATALOGUE.tsv",
+      "gitBlob": "a0ef9aa95da17a19c3df8ab8aded355fad4f4598",
+      "bytes": 12083,
+      "sha256": "d47f07c2ee9829bfb91f4c4e2162bb221e86206aada802e0580aaef79d7fd250",
+      "role": "KEEP",
+      "license": "PRESERVED_RECEIVER_NOTICE_NO_RELICENSING"
+    },
+    {
+      "path": "m3/backports/RELEASE_JEP_AUTHORITY.tsv",
+      "gitBlob": "745a26772b8050c28dd93d05c724bfa9c2ad5e18",
+      "bytes": 760,
+      "sha256": "05341181f89e150ae602644ddaca9d53596be533cb2695e4032f11c0e1a70709",
+      "role": "KEEP",
+      "license": "PRESERVED_RECEIVER_NOTICE_NO_RELICENSING"
+    },
+    {
+      "path": "m3/backports/test_backport_execution_waves.py",
+      "gitBlob": "7a3b961caa4302a2ebd1675360e29e6b1df9697b",
+      "bytes": 12454,
+      "sha256": "5a59d038e108010c484f66f545ab5bc745a791182ed4794556b414ffde315dd0",
+      "role": "KEEP",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "m3/backports/backport_execution_waves.py",
+      "gitBlob": "cc2a6ceb90b56d3b05d1307e705586c8d7cf1b40",
+      "bytes": 12177,
+      "sha256": "2cb19465a6a0d4f24dc228921eb1a2d7c2bbc4e53ce68e635b0e60ddb2a563dc",
+      "role": "KEEP",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "m3/backports/BACKPORT_EXECUTION_WAVES.md",
+      "gitBlob": "428d775ca476b187dceb26a012401b11b975bbbb",
+      "bytes": 6247,
+      "sha256": "df2aca41ab120bdbc8c165d4abe3552c54a91c591aab116b718b94283ae23f28",
+      "role": "KEEP",
+      "license": "PRESERVED_RECEIVER_NOTICE_NO_RELICENSING"
+    },
+    {
+      "path": "m3/compatibility/synexia-wave-admission-pin-20261014.tsv",
+      "gitBlob": "60c11d68f482efadeadbbe6f58bfac9ec9aa0090",
+      "bytes": 1349,
+      "sha256": "984af6023eb4f4e0b917a700c5e75bd936083b7ae2f0daef07c37ad6a3e2ddd4",
+      "role": "KEEP",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": ".github/workflows/m3-jdk21-backport-wave-admission.yml",
+      "gitBlob": "9ba94e55b4c8f468fb0ff5f3cd7c530caa6fdff2",
+      "bytes": 3717,
+      "sha256": "622491eea231863f0b595ead49711b5c60f63ae8ea0bf408f44a71ec84de2c85",
+      "role": "REPLACE",
+      "license": "Apache-2.0"
+    }
+  ],
+  "runtimeApplied": false,
+  "phaseAdvanced": false
+}

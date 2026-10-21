@@ -7,6 +7,7 @@ package com.m3.collections;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.List;
 import java.util.NavigableMap;
 import java.util.NavigableSet;
@@ -143,6 +144,28 @@ public final class M3CollectionSdk {
     public static <K, V> M3TreeMap<K, V> treeMap() { return M3Collections.treeMap(); }
 
     public static <E> M3TreeSet<E> treeSet() { return M3Collections.treeSet(); }
+
+    /**
+     * Detach an immutable Object[] owner and its physical int[] index directory.
+     * This is an M3JDK21 snapshot, not a live filtered java.util wrapper.
+     */
+    public static <E> M3IndexedListSnapshot<E> indexedObjectSnapshot(
+            Collection<? extends E> source) {
+        return M3IndexedListSnapshot.copyOf(source);
+    }
+
+    /**
+     * Mask physical slot words before stable comparison sorting. Full 32-bit
+     * multi-stage state semantics reuse the product-owned Java/JNI mask kernel;
+     * user comparators execute in Java after primitive selection only.
+     */
+    public static <E> M3IndexedListSnapshot<E> maskedSortedIndexedSnapshot(
+            Collection<? extends E> source, int[][] physicalStates,
+            int[] requiredMasks, int[] forbiddenMasks,
+            Comparator<? super E> comparator, M3IndexPathMasks.Backend backend) {
+        return M3CollectionSdk.<E>indexedObjectSnapshot(source).sortedMaskedByPhysicalStates(
+                physicalStates, requiredMasks, forbiddenMasks, comparator, backend);
+    }
 
     /** Immutable snapshot; indexes and offsets are managed by the existing owner. */
     public static M3LongIndexProjection indexedLongSnapshot(long[] input) {

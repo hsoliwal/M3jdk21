@@ -28,6 +28,8 @@ public final class M3RX7 {
     private static final long MAX_TOKEN_INDEX_BYTES = 8L << 20;
     private static final long MIN_NATIVE_CELLS = 65_536;
     private static volatile boolean nativeTokenUnavailable;
+    private static final int TOKEN_NATIVE_PAGE = 4096;
+    private static volatile boolean nativeAdvanceUnavailable;
 
     private final String programRoot;
     private final int start;
@@ -211,6 +213,81 @@ public final class M3RX7 {
         }
     }
 
+    /**
+     * Receive an already-compiled token-symbol DFA into the existing index owner.
+     * A column is one complete lexical symbol, not the spelling of a storage
+     * piece, BPE token, or UTF-16 character. Overlapping token predicates must be
+     * classified into disjoint symbols by the compiler before this call.
+     *
+     * <p>Both roots are lowercase SHA-256 identities. The alphabet root must bind
+     * token classification, dictionary identity/version and context policy. The
+     * caller remains responsible for proving the supplied automaton's semantics.
+     * No lexer, parser, captures, or automatic comment filtering is introduced.
+     * Arrays are snapshotted. Null means the bounded resource budget was refused;
+     * malformed inputs throw. Do not mutate inputs during construction.</p>
+     */
+    public static TokenIndex fromTokenDfa(String programRoot, String alphabetRoot,
+            int startState, int tokenCount, short[] transitions, byte[] finalStates) {
+        requireRoot(programRoot);
+        requireRoot(alphabetRoot);
+        Objects.requireNonNull(transitions, "transitions");
+        Objects.requireNonNull(finalStates, "finalStates");
+        int states = finalStates.length;
+        long cells = (long) states * tokenCount;
+        if (states < 1 || states > MAX_STATES || tokenCount < 0
+                || startState < 0 || startState >= states || cells != transitions.length) {
+            throw new IllegalArgumentException("invalid token-symbol DFA geometry");
+        }
+        int words = (int) (((long) tokenCount + 63) >>> 6);
+        // Include reverse edges and per-state scratch, not just retained rows.
+        long peak = cells * (Short.BYTES + Integer.BYTES)
+                + (long) states * words * Long.BYTES + 32L * states + Integer.BYTES;
+        if (cells > MAX_TOKEN_CELLS || peak > MAX_TOKEN_INDEX_BYTES) return null;
+        Runtime runtime = Runtime.getRuntime();
+        long available = Math.max(0L,
+                runtime.maxMemory() - (runtime.totalMemory() - runtime.freeMemory()));
+        if (peak > available / 8) return null;
+        try {
+            short[] rows = transitions.clone();
+            byte[] flags = finalStates.clone();
+            for (short destination : rows) {
+                if (destination < -1 || destination >= states) {
+                    throw new IllegalArgumentException("invalid token-symbol destination");
+                }
+            }
+            for (byte flag : flags) {
+                if (flag != 0 && flag != 1) {
+                    throw new IllegalArgumentException("invalid token-symbol final flag");
+                }
+            }
+            byte[] useful = usefulStates(rows, flags, tokenCount);
+            long[] allowed = new long[states * words];
+            for (int state = 0; state < states; state++) {
+                for (int token = 0; token < tokenCount; token++) {
+                    int destination = rows[state * tokenCount + token];
+                    if (destination >= 0 && useful[destination] != 0) {
+                        allowed[state * words + (token >>> 6)] |= 1L << (token & 63);
+                    }
+                }
+            }
+            return new TokenIndex(rows, allowed, flags, startState, states,
+                    tokenCount, words, programRoot, alphabetRoot);
+        } catch (OutOfMemoryError unavailable) {
+            return null;
+        }
+    }
+
+    private static void requireRoot(String root) {
+        Objects.requireNonNull(root, "root");
+        if (root.length() != 64) throw new IllegalArgumentException("invalid source root");
+        for (int i = 0; i < root.length(); i++) {
+            char c = root.charAt(i);
+            if (!((c >= '0' && c <= '9') || (c >= 'a' && c <= 'f'))) {
+                throw new IllegalArgumentException("invalid source root");
+            }
+        }
+    }
+
     private static void fillTokenRows(short[] dfa, byte[] packed, int[] offsets,
             int[] lengths, short[] rows, int states, int tokens) {
         for (int state = 0; state < states; state++) {
@@ -228,6 +305,10 @@ public final class M3RX7 {
 
     /** Reverse reachability over primitive coordinate lanes: no graph entry objects. */
     private byte[] usefulStates() {
+        return usefulStates(next, accepting, ASCII);
+    }
+
+    private static byte[] usefulStates(short[] next, byte[] accepting, int columns) {
         int states = accepting.length;
         int[] incoming = new int[states];
         int edges = 0;
@@ -241,7 +322,7 @@ public final class M3RX7 {
         int[] previous = new int[edges];
         for (int i = 0; i < next.length; i++) {
             int target = next[i];
-            if (target >= 0) previous[cursor[target]++] = i / ASCII;
+            if (target >= 0) previous[cursor[target]++] = i / columns;
         }
         byte[] useful = new byte[states];
         int[] queue = new int[states];
@@ -263,7 +344,10 @@ public final class M3RX7 {
     private static native void buildPacked0(short[] dfa, byte[] packed,
             int[] offsets, int[] lengths, short[] rows);
 
-    /** Primitive token-transition index. Stores no tokens, strings or Entry objects. */
+    private static native int advanceTokens0(short[] rows, int tokens, int state,
+            int[] tokenIds, int offset, int length);
+
+    /** Primitive token-transition index. No spelling payload or per-token objects. */
     public static final class TokenIndex {
         private final short[] rows;
         private final long[] allowed;
@@ -272,9 +356,18 @@ public final class M3RX7 {
         private final int states;
         private final int tokens;
         private final int words;
+        private final String programRoot;
+        private final String alphabetRoot;
 
         private TokenIndex(short[] rows, long[] allowed, byte[] accepting, int start,
                 int states, int tokens, int words) {
+            this(rows, allowed, accepting, start, states, tokens, words, null, null);
+        }
+
+        private TokenIndex(short[] rows, long[] allowed, byte[] accepting, int start,
+                int states, int tokens, int words, String programRoot, String alphabetRoot) {
+            this.programRoot = programRoot;
+            this.alphabetRoot = alphabetRoot;
             this.rows = rows;
             this.allowed = allowed;
             this.accepting = accepting;
@@ -302,10 +395,62 @@ public final class M3RX7 {
         public long retainedPrimitiveBytes() {
             return (long) rows.length * Short.BYTES + (long) allowed.length * Long.BYTES;
         }
+        /** Program/alphabet provenance; null for the older spelling-based index. */
+        public String programRoot() { return programRoot; }
+        public String alphabetRoot() { return alphabetRoot; }
+
+        /**
+         * Consume an int-array page without resetting the frontier. Return -1 for
+         * the dead state. An empty page preserves even the dead state. Every ID
+         * is checked, including IDs after a dead transition; no page is retained.
+         * Callers must not mutate the input during a call. Source UTF-16 spans,
+         * long stream positions and lexer continuation state belong to the caller.
+         */
+        public int advance(int state, int[] tokenIds, int offset, int length) {
+            Objects.requireNonNull(tokenIds, "tokenIds");
+            Objects.checkFromIndexSize(offset, length, tokenIds.length);
+            if (state != -1) Objects.checkIndex(state, states);
+            int initialForRetry = state;
+            int end = offset + length;
+            for (int i = offset; i < end; i++) Objects.checkIndex(tokenIds[i], tokens);
+            if (length >= TOKEN_NATIVE_PAGE && !nativeAdvanceUnavailable) {
+                try {
+                    for (int at = offset; at < end; at += Math.min(TOKEN_NATIVE_PAGE, end - at)) {
+                        state = advanceTokens0(rows, tokens, state, tokenIds,
+                                at, Math.min(TOKEN_NATIVE_PAGE, end - at));
+                    }
+                    return state;
+                } catch (UnsatisfiedLinkError missing) {
+                    nativeAdvanceUnavailable = true;
+                } catch (OutOfMemoryError unavailable) {
+                    // Optional JNI metadata copies must not prevent exact Java execution.
+                }
+                // A failing later JNI page must not replay the prefix from its new state.
+                return advanceJava(initialForRetry, tokenIds, offset, length);
+            }
+            return advanceJava(state, tokenIds, offset, length);
+        }
+
+        /** Reject mixing IDs from independently versioned token alphabets. */
+        public int advance(String expectedAlphabetRoot, int state,
+                int[] tokenIds, int offset, int length) {
+            Objects.requireNonNull(expectedAlphabetRoot, "expectedAlphabetRoot");
+            if (!expectedAlphabetRoot.equals(alphabetRoot)) {
+                throw new IllegalArgumentException("token alphabet identity mismatch");
+            }
+            return advance(state, tokenIds, offset, length);
+        }
+
+        private int advanceJava(int state, int[] tokenIds, int offset, int length) {
+            for (int i = offset, end = offset + length; i < end; i++) {
+                state = nextState(state, tokenIds[i]);
+            }
+            return state;
+        }
+
         public boolean matches(int[] tokenIds) {
             Objects.requireNonNull(tokenIds, "tokenIds");
-            int state = start;
-            for (int id : tokenIds) state = nextState(state, id);
+            int state = advance(start, tokenIds, 0, tokenIds.length);
             return state >= 0 && isFinal(state);
         }
     }

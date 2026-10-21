@@ -282,7 +282,7 @@ class StringTargetSuccessorTest(unittest.TestCase):
                 self.assertEqual(row["source_git_blob"] if key == "source_path"
                                  else row["cache_git_blob"],
                                  phase.git_blob(path), key)
-        self.assertEqual("4ef13745f3fdc265fc8df3f2d84a9f2ecd3b7516",
+        self.assertEqual("75d949e5aa2c8ff4e5c70d648e81fc0d37b68651",
                          phase.git_blob(phase.SUCCESSOR_CHAIN))
 
 

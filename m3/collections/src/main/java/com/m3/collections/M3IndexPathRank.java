@@ -200,8 +200,21 @@ public final class M3IndexPathRank {
 
         public int[] toArray() {
             int[] result = new int[size()];
-            for (int rank = 0; rank < result.length; rank++) {
-                result[rank] = owner.selectedRowId(firstRank + rank);
+            if (result.length == 0) return result;
+            int firstWord = from >>> 6;
+            int lastWord = (to - 1) >>> 6;
+            int write = 0;
+            for (int wordIndex = firstWord; wordIndex <= lastWord; wordIndex++) {
+                long bits = owner.selected[wordIndex];
+                if (wordIndex == firstWord) bits &= -1L << (from & 63);
+                if (wordIndex == lastWord && (to & 63) != 0) {
+                    bits &= (1L << (to & 63)) - 1L;
+                }
+                while (bits != 0) {
+                    int sourceOrdinal = (wordIndex << 6) + Long.numberOfTrailingZeros(bits);
+                    result[write++] = owner.rows[sourceOrdinal];
+                    bits &= bits - 1;
+                }
             }
             return result;
         }

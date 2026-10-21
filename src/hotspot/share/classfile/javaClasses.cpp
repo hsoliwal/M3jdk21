@@ -958,7 +958,8 @@ int java_lang_M3String::_atom_storageWidth_offset;
 int java_lang_M3String::_atom_bigEndian_offset;
 int java_lang_M3String::_tuple_left_offset;
 int java_lang_M3String::_tuple_right_offset;
-int java_lang_M3String::_immediate_packed_offset;
+int java_lang_M3String::_immediate_words_offset;
+int java_lang_M3String::_immediate_slot_offset;
 
 #define M3_STRING_VALUE_FIELDS_DO(macro) \
   macro(_owner_offset, v, "owner", m3_string_owner_signature, false); \
@@ -981,7 +982,8 @@ int java_lang_M3String::_immediate_packed_offset;
   macro(_tuple_right_offset, t, "right", m3_string_signature, false);
 
 #define M3_STRING_IMMEDIATE_FIELDS_DO(macro) \
-  macro(_immediate_packed_offset, i, "packed", long_signature, false);
+  macro(_immediate_words_offset, i, "words", long_array_signature, false); \
+  macro(_immediate_slot_offset, i, "slot", int_signature, false);
 
 #define M3_STRING_FACTS_FIELDS_DO(macro) \
   macro(_facts_utf8Length_offset, f, "utf8Length", int_signature, false); \
@@ -1049,7 +1051,10 @@ void java_lang_M3String::copy_owner_chars(
   }
 
   if (o->klass() == vmClasses::M3StringImmediate_klass()) {
-    const jlong packed = o->long_field(_immediate_packed_offset);
+    typeArrayOop words = (typeArrayOop)o->obj_field(_immediate_words_offset);
+    const int slot = o->int_field(_immediate_slot_offset);
+    assert(words != nullptr && slot >= 0 && slot < words->length(), "M3 immediate slot");
+    const jlong packed = words->long_at(slot);
     for (int index = 0; index < len; index++) {
       destination[index] = immediate_char_at(packed, start + index);
     }

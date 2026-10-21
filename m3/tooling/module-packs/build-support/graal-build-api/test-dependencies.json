@@ -1,0 +1,63 @@
+{
+  "schema": "M3_GRAAL_BUILD_API_TEST_DEPENDENCIES_V1",
+  "copyright": "Copyright 2026 Hitesh Soliwal and contributors",
+  "license": "Apache-2.0 for this dependency metadata; dependency licenses unchanged",
+  "scope": "TEST ONLY; never installed in product pack",
+  "selection": "Native Build Tools1.1.13 catalogue: Jupiter5.13.0,Platform1.13.0,Jimfs1.3.0. Jimfs parent pins Guava32.1.1-jre; Guava parent pins remaining closure. JUnit standalone bundles OpenJSON-required JUnit4.13.2 and Hamcrest1.3.",
+  "entries": [
+    {
+      "path": "org/junit/platform/junit-platform-console-standalone/1.13.0/junit-platform-console-standalone-1.13.0.jar",
+      "sha256": "6133d8d70cd89ee4e2b89fbe439ce8972ba93c99de1c2fff226c53f4bf721879",
+      "sha1": "875296899fe157c97f187f6700e00e30b81974f5",
+      "pom_sha256": "9de32037ff9cbb153116bf52a2da6e38bd4116949d1bf2011dfece1c23c72b4f"
+    },
+    {
+      "path": "com/google/jimfs/jimfs/1.3.0/jimfs-1.3.0.jar",
+      "sha256": "82494408bb513f5512652e7b7f63d6f31f01eff57ce35c878644ffc2d25aee4f",
+      "sha1": "93096472c3654a761c40c8e5d4ad82a7c1a0fd54",
+      "pom_sha256": "c47f2200810deecc2ef7ac6263a354a85eaf21fd54f6f18bbc738f514bfe70eb"
+    },
+    {
+      "path": "com/google/guava/guava/32.1.1-jre/guava-32.1.1-jre.jar",
+      "sha256": "91fbba37f1c8b251cf9ea9e7d3a369eb79eb1e6a5df1d4bbf483dd0380740281",
+      "sha1": "ad575652d84153075dd41ec6177ccb15251262b2",
+      "pom_sha256": "2c9071d7d1522b0c762057c34e8b9bfae39927a0eb755c36aa76519721870d7b"
+    },
+    {
+      "path": "com/google/guava/failureaccess/1.0.1/failureaccess-1.0.1.jar",
+      "sha256": "a171ee4c734dd2da837e4b16be9df4661afab72a41adaf31eb84dfdaf936ca26",
+      "sha1": "1dcf1de382a0bf95a3d8b0849546c88bac1292c9",
+      "pom_sha256": "e96042ce78fecba0da2be964522947c87b40a291b5fd3cd672a434924103c4b9"
+    },
+    {
+      "path": "com/google/guava/listenablefuture/9999.0-empty-to-avoid-conflict-with-guava/listenablefuture-9999.0-empty-to-avoid-conflict-with-guava.jar",
+      "sha256": "b372a037d4230aa57fbeffdef30fd6123f9c0c2db85d0aced00c91b974f33f99",
+      "sha1": "b421526c5f297295adef1c886e5246c39d4ac629",
+      "pom_sha256": "18d4b1db26153d4e55079ce1f76bb1fe05cdb862ef9954a88cbcc4ff38b8679b"
+    },
+    {
+      "path": "com/google/code/findbugs/jsr305/3.0.2/jsr305-3.0.2.jar",
+      "sha256": "766ad2a0783f2687962c8ad74ceecc38a28b9f72a2d085ee438b7813e928d0c7",
+      "sha1": "25ea2e8b0c338a877313bd4672d3fe056ea78f0d",
+      "pom_sha256": "19889dbdf1b254b2601a5ee645b8147a974644882297684c798afe5d63d78dfe"
+    },
+    {
+      "path": "org/checkerframework/checker-qual/3.33.0/checker-qual-3.33.0.jar",
+      "sha256": "e316255bbfcd9fe50d165314b85abb2b33cb2a66a93c491db648e498a82c2de1",
+      "sha1": "de2b60b62da487644fc11f734e73c8b0b431238f",
+      "pom_sha256": "f55a922027a78fdd8b3ea15a0d8bfe3fec6a5ceac30c86aa8afa4a5b9b0df603"
+    },
+    {
+      "path": "com/google/errorprone/error_prone_annotations/2.18.0/error_prone_annotations-2.18.0.jar",
+      "sha256": "9e6814cb71816988a4fd1b07a993a8f21bb7058d522c162b1de849e19bea54ae",
+      "sha1": "89b684257096f548fa39a7df9fdaa409d4d4df91",
+      "pom_sha256": "920135797dcca5917b5a5c017642a58d340a4cd1bcd12f56f892a5663bd7bddc"
+    },
+    {
+      "path": "com/google/j2objc/j2objc-annotations/2.8/j2objc-annotations-2.8.jar",
+      "sha256": "f02a95fa1a5e95edb3ed859fd0fb7df709d121a35290eff8b74dce2ab7f4d6ed",
+      "sha1": "c85270e307e7b822f1086b93689124b89768e273",
+      "pom_sha256": "37f87798b18385113c918bfa9e1276fe50735ef8fa849b5800c519d54dbf11f8"
+    }
+  ]
+}

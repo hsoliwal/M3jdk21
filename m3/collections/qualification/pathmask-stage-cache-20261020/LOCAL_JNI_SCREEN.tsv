@@ -1,0 +1,13 @@
+status	rows	stages	original_ns_per_call	eager_cached_ns_per_call	cache_over_original	final_gate	measurement_scope
+DIAGNOSTIC_SINGLE_RUN	0	1	118	186	1.58	LEGACY_LT_8_ROWS	Java21 HotSpot local stub JNI ABI with separate JVM processes no Android device
+DIAGNOSTIC_SINGLE_RUN	0	2	89	243	2.73	LEGACY_LT_8_ROWS	Java21 HotSpot local stub JNI ABI with separate JVM processes no Android device
+DIAGNOSTIC_SINGLE_RUN	0	4	87	365	4.18	LEGACY_LT_8_ROWS	Java21 HotSpot local stub JNI ABI with separate JVM processes no Android device
+DIAGNOSTIC_SINGLE_RUN	0	8	83	618	7.41	LEGACY_LT_8_ROWS	Java21 HotSpot local stub JNI ABI with separate JVM processes no Android device
+DIAGNOSTIC_SINGLE_RUN	1	8	612	726	1.19	LEGACY_LT_8_ROWS	Java21 HotSpot local stub JNI ABI with separate JVM processes no Android device
+DIAGNOSTIC_SINGLE_RUN	8	1	1797	944	0.53	CACHED_GE_8_ROWS	Java21 HotSpot local stub JNI ABI with separate JVM processes no Android device
+DIAGNOSTIC_SINGLE_RUN	8	8	2224	1218	0.55	CACHED_GE_8_ROWS	Java21 HotSpot local stub JNI ABI with separate JVM processes no Android device
+DIAGNOSTIC_SINGLE_RUN	32	8	9360	4048	0.43	CACHED_GE_8_ROWS	Java21 HotSpot local stub JNI ABI with separate JVM processes no Android device
+DIAGNOSTIC_SINGLE_RUN	64	4	26433	6599	0.25	CACHED_GE_8_ROWS	Java21 HotSpot local stub JNI ABI with separate JVM processes no Android device
+DIAGNOSTIC_SINGLE_RUN	512	8	199701	57005	0.29	CACHED_GE_8_ROWS	Java21 HotSpot local stub JNI ABI with separate JVM processes no Android device
+DIAGNOSTIC_SINGLE_RUN	4096	8	1523320	483167	0.32	CACHED_GE_8_ROWS	Java21 HotSpot local stub JNI ABI with separate JVM processes no Android device
+DIAGNOSTIC_SINGLE_RUN	4096	9	1542253	1725302	1.12	LEGACY_GT_8_STAGES	Java21 HotSpot local stub JNI ABI with separate JVM processes no Android device
