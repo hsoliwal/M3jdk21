@@ -212,6 +212,9 @@ public final class MFileStreams {
             try {
                 state.progress.checkCanceled();
                 int value = source.read();
+                if (value < -1 || value > 255) {
+                    throw new IOException("Input provider returned invalid byte: " + value);
+                }
                 if (value < 0) {
                     state.finish();
                 } else {
@@ -238,6 +241,9 @@ public final class MFileStreams {
             try {
                 state.progress.checkCanceled();
                 int amount = source.read(bytes, offset, length);
+                if (amount < -1 || amount == 0 || amount > length) {
+                    throw new IOException("Input provider returned invalid byte count: " + amount);
+                }
                 if (amount < 0) {
                     state.finish();
                 } else if (amount > 0) {
