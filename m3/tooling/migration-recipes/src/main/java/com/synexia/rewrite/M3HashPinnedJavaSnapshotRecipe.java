@@ -184,6 +184,11 @@ public final class M3HashPinnedJavaSnapshotRecipe
 
     public String getCrateName() { return crateName; }
 
+    /** Exact, sorted target paths sealed by this recipe crate. */
+    public List<String> targetPaths() {
+        return targets().stream().map(Target::path).toList();
+    }
+
     public boolean isLst() { return lst; }
 
     private void prepare(Inventory inventory, ExecutionContext context) {
