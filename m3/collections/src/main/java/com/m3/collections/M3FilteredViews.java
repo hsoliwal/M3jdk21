@@ -131,9 +131,34 @@ public final class M3FilteredViews {
         return visibleMember(source, predicate, value);
     }
 
-    /** Membership has already succeeded; preserve the original representative probe order. */
+    /**
+     * Resolve only our own private, identity-preserving view layers. The backing
+     * SortedSet owns comparator equivalence; equality-based alias scans do not.
+     * This is iterative to avoid recursive wrapper-depth growth.
+     */
+    @SuppressWarnings("unchecked")
+    private static <E> SortedSet<E> sortedOwner(Collection<E> source) {
+        Collection<E> owner = source;
+        while (true) {
+            if (owner instanceof SortedSet<?> sorted) return (SortedSet<E>) sorted;
+            if (owner.getClass() == SetView.class) {
+                owner = ((SetView<E>) owner).view.source;
+            } else if (owner.getClass() == CollectionView.class) {
+                owner = ((CollectionView<E>) owner).source;
+            } else {
+                return null;
+            }
+        }
+    }
+
+    /** Membership has already succeeded; evaluate the retained representative. */
     private static <E> boolean visibleMember(Collection<E> source,
             Predicate<? super E> predicate, Object value) {
+        SortedSet<E> sorted = sortedOwner(source);
+        if (sorted != null) {
+            @SuppressWarnings("unchecked") E alias = (E) value;
+            return predicate.test(sorted.tailSet(alias).first());
+        }
         if (source instanceof Set<?>) {
             for (E owned : source) {
                 if (owned == value) return predicate.test(owned);
