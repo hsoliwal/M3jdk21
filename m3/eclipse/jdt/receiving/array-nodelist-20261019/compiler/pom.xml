@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright 2026 Hitesh Soliwal and contributors. SPDX-License-Identifier: Apache-2.0 -->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent><groupId>com.synexia.receiving</groupId><artifactId>jdt-array-nodelist-source</artifactId><version>20261019</version></parent>
+  <artifactId>jdt-exact-compiler-source</artifactId>
+  <properties><maven.compiler.release>17</maven.compiler.release></properties>
+  <dependencies><dependency><groupId>org.apache.ant</groupId><artifactId>ant</artifactId><version>1.10.15</version></dependency></dependencies>
+  <build>
+    <sourceDirectory>${jdt.source}/org.eclipse.jdt.core.compiler.batch/src</sourceDirectory>
+    <resources><resource><directory>${jdt.source}/org.eclipse.jdt.core.compiler.batch/src</directory><excludes><exclude>**/*.java</exclude></excludes></resource></resources>
+    <plugins>
+      <plugin><groupId>org.codehaus.mojo</groupId><artifactId>exec-maven-plugin</artifactId><version>3.5.0</version>
+        <executions><execution><id>verify-exact-source-custody</id><phase>validate</phase><goals><goal>exec</goal></goals><configuration>
+          <executable>python3</executable><arguments><argument>${project.basedir}/../verify-source.py</argument><argument>${jdt.source}</argument></arguments>
+        </configuration></execution></executions>
+      </plugin>
+      <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-compiler-plugin</artifactId><configuration>
+        <compilerArgs><arg>--patch-module</arg><arg>java.compiler=${jdt.source}/org.eclipse.jdt.core.compiler.batch/lib/javax23api.jar</arg></compilerArgs>
+      </configuration></plugin>
+    </plugins>
+  </build>
+</project>

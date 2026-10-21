@@ -1,0 +1,9 @@
+evidenceKind	SDK_EXECUTION
+recipe	com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
+crate	m3jdk-collection-current-owners-java-05-20261017
+result	m3/tooling/module-packs/collections/src/main/java/module-info.java	ABSENT	c71ba613cca7b00283777d6268cb76c334b503f4423c466728b9a986de345340
+fixedPoint	PASSED
+driftRefusal	PASSED
+duplicateRefusal	PASSED
+missingRefusal	NOT_APPLICABLE_ALL_TARGETS_ABSENT
+scope	sealed-recipe-SDK-only; runtime-contracts-and-source-mirror-gates-separate

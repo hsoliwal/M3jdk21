@@ -1,0 +1,14 @@
+test_complete_original_runtime_and_legal_bytes_are_preserved (__main__.OpenRewritePackTests.test_complete_original_runtime_and_legal_bytes_are_preserved) ... ok
+test_coordinate_and_export_drift_are_refused_before_output (__main__.OpenRewritePackTests.test_coordinate_and_export_drift_are_refused_before_output) ... ok
+test_input_rebuild_after_admission_cannot_publish_a_lock (__main__.OpenRewritePackTests.test_input_rebuild_after_admission_cannot_publish_a_lock) ... ok
+test_legal_omission_overwrite_and_asset_drift_are_refused (__main__.OpenRewritePackTests.test_legal_omission_overwrite_and_asset_drift_are_refused) ... ok
+test_manifest_classpath_and_short_launchers_are_exact_and_relocatable (__main__.OpenRewritePackTests.test_manifest_classpath_and_short_launchers_are_exact_and_relocatable) ... ok
+test_missing_framework_module_is_refused_even_if_both_maven_lists_omit_it (__main__.OpenRewritePackTests.test_missing_framework_module_is_refused_even_if_both_maven_lists_omit_it) ... ok
+test_pom_coordinates_cannot_escape_retained_metadata_directories (__main__.OpenRewritePackTests.test_pom_coordinates_cannot_escape_retained_metadata_directories) ... ok
+test_real_complete_runtime_runs_typed_multifile_java_recipe_via_manifest (__main__.OpenRewritePackTests.test_real_complete_runtime_runs_typed_multifile_java_recipe_via_manifest) ... ok
+test_real_pack_remains_explicit_and_installs_exact_assets (__main__.OpenRewritePackTests.test_real_pack_remains_explicit_and_installs_exact_assets) ... ok
+
+----------------------------------------------------------------------
+Ran 9 tests in 5.631s
+
+OK

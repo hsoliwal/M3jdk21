@@ -1636,7 +1636,7 @@ public class Collections {
     /**
      * @serial include
      */
-    private static class UnmodifiableMap<K,V> implements Map<K,V>, Serializable {
+    static class UnmodifiableMap<K,V> implements Map<K,V>, Serializable {
         @java.io.Serial
         private static final long serialVersionUID = -1034234728574286014L;
 

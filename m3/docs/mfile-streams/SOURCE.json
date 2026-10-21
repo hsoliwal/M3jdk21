@@ -1,0 +1,120 @@
+{
+  "schema": "M3_FILE_STREAM_DESIGN_V1",
+  "status": "BOUNDED_CORE_BRIDGE_ENHANCED_CONTRACTS_RUNTIME_PENDING",
+  "copyright": "Copyright 2026 Hitesh Soliwal and contributors",
+  "license": "Apache-2.0",
+  "product_repository": "hsoliwal/M3jdk21",
+  "product_base_commit": "73f59218dc4ef1a3ef79aad990e77273db2a2d60",
+  "canonical_repository": "hsoliwal/com.synexia",
+  "canonical_base_commit": "f04fbac91a7891e64b77c7b24cef1ab75ec88144",
+  "recipe_owner": "com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe",
+  "recipe_owner_path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedTextSnapshotRecipe.java",
+  "recipe_owner_git_blob": "2e7747814b90c242cd89e8ecbcce61ab15825058",
+  "crate": "m3fs-vfs-text-20261020",
+  "intake_mode": "DATA_OR_METADATA_EXPORT",
+  "receiving_sequence_advanced": false,
+  "runtime_changes": [],
+  "observed_owners": [
+    {
+      "path": "m3/file/src/main/java/com/m3/file/M3File.java",
+      "git_blob": "c182a3b1526f9fd0ca20c631d97df3048076defd",
+      "role": "Stateless Path/provider read boundary"
+    },
+    {
+      "path": "m3/fs/src/main/java/com/m3/fs/M3DirectoryTable.java",
+      "git_blob": "a7146dc0bfa17f3e640fc84434c708c48ae79f43",
+      "role": "Immutable directory metadata arrays and API projections"
+    },
+    {
+      "path": "m3/fs/src/main/java/com/m3/fs/M3FS.java",
+      "git_blob": "2d048723c1db4b5dca523f70418aef9e88a5e582",
+      "role": "Existing native M3FS lifetime, pages and snapshots"
+    }
+  ],
+  "references": [
+    {
+      "url": "https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/nio/file/Files.html",
+      "use": "REFERENCE_ONLY: traversal and close contracts"
+    },
+    {
+      "url": "https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/stream/Stream.html",
+      "use": "REFERENCE_ONLY: single-use streams and lambda contracts"
+    },
+    {
+      "url": "https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/zip/ZipFile.html",
+      "use": "REFERENCE_ONLY: ZIP entry content and owner close"
+    },
+    {
+      "url": "https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/zip/ZipInputStream.html",
+      "use": "REFERENCE_ONLY: sequential archive lifetime"
+    },
+    {
+      "url": "https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/nio/file/WatchService.html",
+      "use": "REFERENCE_ONLY: events and overflow"
+    },
+    {
+      "url": "https://commons.apache.org/proper/commons-compress/examples.html",
+      "use": "REFERENCE_ONLY: archive/compression composition and capabilities"
+    },
+    {
+      "url": "https://github.com/apache/commons-vfs/tree/685b3b723a83e56034391350ea1a02231411142f",
+      "use": "PINNED_RUNTIME_DONOR: separate m3fs-vfs-20261020 integration"
+    }
+  ],
+  "donor_disposition": "Pinned VFS source is imported by the separate runtime integration recipe with Apache attribution; this component contains documentation only. See the intake/profile/dependency receipts for the exact delivered closure.",
+  "runtime_acceptance": "All 56 ACCEPTANCE.tsv rows remain NOT_RUN_RUNTIME. Related bounded-core evidence has separate scope and does not complete stronger future expectations.",
+  "capability_count": 38,
+  "runtime_acceptance_case_count": 56,
+  "scope": "Documentation bridge to the bounded runtime integration; future contracts and acceptance rows remain pending.",
+  "prior_design_crate": "m3-file-stream-design-20261020",
+  "runtime_integration_crate": "m3fs-vfs-20261020",
+  "runtime_source_receipt": "m3/fs/vfs/SOURCE.json",
+  "runtime_profile_receipt": "m3/fs/vfs/SOURCE_PROFILE.tsv",
+  "runtime_owner": {
+    "module": "jdk.m3fs",
+    "path": "m3/fs",
+    "facade": [
+      "com.m3.fs.MFiles",
+      "com.m3.fs.MFile"
+    ],
+    "provider_package": "com.m3.fs.vfs",
+    "provider_entrypoint": "com.m3.fs.vfs.M3VFS"
+  },
+  "bounded_source_surface": [
+    "MFiles.from(Path/String), stream(Path/String[, Predicate, Function])",
+    "Plan.filterName, extensions, filter, descendInto, maxDepth",
+    "Plan.order, breadthFirst, enterArchives(predicate, maxArchiveLayers)",
+    "Plan.withProvider and fresh Plan.stream",
+    "MFile metadata, owner-scoped input/output and explicit observation",
+    "MFileContent shared monitored defaults and transferTo",
+    "MFileStreams.Input/Output progress, synchronous shadows and completed-domain hash",
+    "MFileObservation, MFileChangeSource and evidence-qualified MFileDelta"
+  ],
+  "bounded_contract_limits": [
+    "Single selected root; fresh replay is not a snapshot",
+    "Archive expansion is explicit through a layered URI or enterArchives selection; arbitrary content sniffing is not provided",
+    "Logical provider hierarchy can collapse duplicate physical archive entries",
+    "Retained metadata outlives stream; content does not",
+    "Provider metadata and archive mounting can perform I/O and replicate content",
+    "Excluded optional transports are not supported by source custody alone",
+    "Git working trees use file provider; Git commit trees and LFS hydration remain future",
+    "No array-only, zero-copy, constant-memory or measured memory-gain claim",
+    "Shadow, raw byte, decoded byte and parser logical positions are separate domains",
+    "Metadata equality is a hint; complete content and qualified structural observations retain their own evidence",
+    "No new AST parser/cache, global interning registry or automatic watcher reconciliation"
+  ],
+  "qualification": {
+    "image_receipt": "m3/fs/verification/vfs-20261020/qualification.json",
+    "cross_gate_report": "m3/fs/verification/vfs-20261020/RESULTS.json",
+    "procedure": "m3/fs/verification/VFS_PACKAGING.md",
+    "status": "READ_ACTUAL_RECEIPTS; this documentation update asserts no test pass"
+  },
+  "donor": {
+    "repository": "apache/commons-vfs",
+    "tag": "rel/commons-vfs-2.10.0",
+    "commit": "685b3b723a83e56034391350ea1a02231411142f",
+    "core_main_java_source_custody": 311,
+    "source_profile": "m3-vfs-core",
+    "legal": "m3/fs/legal/commons-vfs2"
+  }
+}

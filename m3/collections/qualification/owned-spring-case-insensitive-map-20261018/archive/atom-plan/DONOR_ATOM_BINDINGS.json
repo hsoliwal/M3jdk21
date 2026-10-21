@@ -1,0 +1,119 @@
+{
+  "candidate_directory_absent": true,
+  "existing_readiness_receipt": {
+    "bytes": 8372,
+    "git_blob": "38587bf0f1e0cea1e534e2d5a2f18dadcf6539c3",
+    "sha256": "992f81f74db163c08f7c45ae19b321d31f8926625e38608fc2570ee27278f167"
+  },
+  "prior_foss_decision": {
+    "bytes": 7201,
+    "git_blob": "1273561125e7e7c46c60bb7320f6562fb3141c0d",
+    "sha256": "7dedd1159bf6b1f707bc3f44a876228774bb933b2769890eceb8fa907954ecdf"
+  },
+  "schema": "m3-spring-before-code-serial-atom-source-custody-v1",
+  "source_rows": [
+    {
+      "bytes": 13606,
+      "commit": "5024bb72279188f1d0dcfe19e8abdd4bdb9887c8",
+      "git_blob": "3a1f9f102946de7d7997fb7d9158315012685187",
+      "license": "Apache-2.0",
+      "local_path": "donors/spring/LinkedCaseInsensitiveMap.java.txt",
+      "repository": "spring-projects/spring-framework",
+      "scope": "SELECTED_POLICY_PENDING_PROOF",
+      "sha256": "7d60f89098072e25d566fb6c928bec3b600435c4575e15d107fa2865f8ed9095",
+      "source_custody": "EXACT_PRIOR_INVENTORY_BYTES_UNCHANGED",
+      "upstream_path": "spring-core/src/main/java/org/springframework/util/LinkedCaseInsensitiveMap.java"
+    },
+    {
+      "bytes": 8702,
+      "commit": "0efc1719ca5766aead09f4f7c49f5067975bd946",
+      "git_blob": "ade59880b8c9b2bee1b32ae67ca9d29b7382d998",
+      "license": "Apache-2.0",
+      "local_path": "donors/firstparty/M3LinkedHashMap.java.txt",
+      "repository": "hsoliwal/M3jdk21",
+      "scope": "SOURCE_REFERENCE_PENDING_SELECTIVE_REUSE",
+      "sha256": "5495a8200ff4030a8faa66fde2f8bb9ccca52bdcbccd200a76147698289c2c0c",
+      "source_custody": "EXACT_PRIOR_INVENTORY_BYTES_UNCHANGED",
+      "upstream_path": "m3/collections/src/main/java/com/m3/collections/M3LinkedHashMap.java"
+    },
+    {
+      "bytes": 1261,
+      "commit": "0efc1719ca5766aead09f4f7c49f5067975bd946",
+      "git_blob": "e337c69710c871f8caa77a1afe53149f1fd705cc",
+      "license": "Apache-2.0",
+      "local_path": "donors/firstparty/M3SlotArrays.java.txt",
+      "repository": "hsoliwal/M3jdk21",
+      "scope": "SOURCE_REFERENCE_PENDING_SELECTIVE_REUSE",
+      "sha256": "4e978861b03650cec9ab1f064648cc8d342117d8b4f0556152604707c83c2518",
+      "source_custody": "EXACT_PRIOR_INVENTORY_BYTES_UNCHANGED",
+      "upstream_path": "m3/collections/src/main/java/com/m3/collections/M3SlotArrays.java"
+    },
+    {
+      "bytes": 3512,
+      "commit": "0efc1719ca5766aead09f4f7c49f5067975bd946",
+      "git_blob": "30cf137538353ac8e91514fff7c5db3903da8819",
+      "license": "Apache-2.0",
+      "local_path": "donors/firstparty/M3SlotSpliterators.java.txt",
+      "repository": "hsoliwal/M3jdk21",
+      "scope": "SOURCE_REFERENCE_PENDING_SELECTIVE_REUSE",
+      "sha256": "4ee2b86ea682c64da881d36eb5b4aadc4ba6640389f2adbfdc8dff4d44cf4070",
+      "source_custody": "EXACT_PRIOR_INVENTORY_BYTES_UNCHANGED",
+      "upstream_path": "m3/collections/src/main/java/com/m3/collections/M3SlotSpliterators.java"
+    },
+    {
+      "bytes": 10870,
+      "commit": "0efc1719ca5766aead09f4f7c49f5067975bd946",
+      "git_blob": "a7d20300717661c26897f0b69e1e5a83400a62ad",
+      "license": "Apache-2.0",
+      "local_path": "donors/firstparty/M3SlotMap.java.txt",
+      "repository": "hsoliwal/M3jdk21",
+      "scope": "SOURCE_REFERENCE_PENDING_SELECTIVE_REUSE",
+      "sha256": "0499cb1f5825429fcf7434665c6785bcffa59ed4a975974a29856ad60317e806",
+      "source_custody": "EXACT_PRIOR_INVENTORY_BYTES_UNCHANGED",
+      "upstream_path": "m3/collections/src/main/java/com/m3/collections/M3SlotMap.java"
+    },
+    {
+      "bytes": 8519,
+      "commit": "0efc1719ca5766aead09f4f7c49f5067975bd946",
+      "git_blob": "42a33b9af05d9ec4e1e9c1833a27fa5dd008564b",
+      "license": "Apache-2.0",
+      "local_path": "atom-plan/donors/M3ObjectSlotStore28.java.txt",
+      "repository": "hsoliwal/M3jdk21",
+      "sha256": "f8c19b2dd04c6198f5061685d7fb7890531620970510fe666ce5338b115d3b12",
+      "source_custody": "EXACT_UPSTREAM_GIT_BLOB_VERIFIED",
+      "upstream_path": "m3/collections/src/main/java/com/m3/collections/M3ObjectSlotStore28.java"
+    },
+    {
+      "bytes": 2595,
+      "commit": "0efc1719ca5766aead09f4f7c49f5067975bd946",
+      "git_blob": "2dda612d7cfdc39d8138c17a85308dc9d084b28b",
+      "license": "Apache-2.0",
+      "local_path": "atom-plan/donors/M3Address28.java.txt",
+      "repository": "hsoliwal/M3jdk21",
+      "sha256": "5fa8a82e3655a675aa0d1e21ba456a7dae272776c605eeba4af22a9dbc7eaa56",
+      "source_custody": "EXACT_UPSTREAM_GIT_BLOB_VERIFIED",
+      "upstream_path": "m3/collections/src/main/java/com/m3/collections/M3Address28.java"
+    }
+  ],
+  "status": "SOURCE_ONLY_NO_OWNER_OR_JAVA_EXECUTION",
+  "storage_after": {
+    "C_build_lane": "HELD",
+    "K_temp_lane": "UNAVAILABLE",
+    "cap_bytes": 536870912,
+    "free_bytes": 26185498624,
+    "logical_bytes": 36165224,
+    "reserve_bytes": 8589934592,
+    "root": "S:\\codex-work\\m3-collections-next-20261018",
+    "verified_child_temp": "S:\\codex-work\\m3-collections-next-20261018\\temp\\"
+  },
+  "storage_before": {
+    "C_build_lane": "HELD",
+    "K_temp_lane": "UNAVAILABLE",
+    "cap_bytes": 536870912,
+    "free_bytes": 26185498624,
+    "logical_bytes": 36165224,
+    "reserve_bytes": 8589934592,
+    "root": "S:\\codex-work\\m3-collections-next-20261018",
+    "verified_child_temp": "S:\\codex-work\\m3-collections-next-20261018\\temp\\"
+  }
+}

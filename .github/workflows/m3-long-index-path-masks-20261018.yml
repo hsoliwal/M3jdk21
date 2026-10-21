@@ -1,0 +1,44 @@
+name: M3 long index path masks Java21
+on:
+  pull_request:
+    paths:
+      - 'm3/collections/qualification/m3-long-index-path-masks-20261018/**'
+      - 'm3/collections/src/main/java/com/m3/collections/M3LongIndexPathMasks.java'
+      - 'm3/collections/src/test/java/com/m3/collections/M3LongIndexPathMasksSelfTest.java'
+      - '.github/workflows/m3-long-index-path-masks-20261018.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  prove:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            m3/collections
+            .github/workflows/m3-long-index-path-masks-20261018.yml
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Maven source recipe compilation
+        run: mvn -B -ntp -f m3/collections/qualification/m3-long-index-path-masks-20261018/recipe/pom.xml package
+      - name: Check exact recipe-emitted source
+        run: |
+          RECIPE=m3/collections/qualification/m3-long-index-path-masks-20261018/recipe
+          java -cp "$RECIPE/target/classes" com.synexia.m3.M3LongIndexPathMasksRecipe --check . "$RECIPE/templates"
+      - name: Strict Java21 compile and differential test
+        run: |
+          mkdir -p /tmp/m3-long-path
+          javac --release 21 -proc:none -Xlint:all -Werror -d /tmp/m3-long-path \
+            m3/collections/src/main/java/com/m3/collections/M3LongIndexPathMasks.java \
+            m3/collections/src/test/java/com/m3/collections/M3LongIndexPathMasksSelfTest.java
+          java -ea -cp /tmp/m3-long-path com.m3.collections.M3LongIndexPathMasksSelfTest
+      - name: Recipe fixed-point and drift refusal
+        run: |
+          set -eu
+          RECIPE=m3/collections/qualification/m3-long-index-path-masks-20261018/recipe
+          java -cp "$RECIPE/target/classes" com.synexia.m3.M3LongIndexPathMasksRecipe --apply . "$RECIPE/templates"
+          java -cp "$RECIPE/target/classes" com.synexia.m3.M3LongIndexPathMasksRecipe --check . "$RECIPE/templates"

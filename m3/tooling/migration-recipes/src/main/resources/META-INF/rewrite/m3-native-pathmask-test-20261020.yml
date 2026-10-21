@@ -1,0 +1,8 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.rewrite.M3NativePathMaskTest20261020
+displayName: Exact Java 21 native path-mask differential
+description: Source-sealed Java LST fixture for the M3JDK21 JNI owner.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: m3-native-pathmask-test-20261020
+      lst: true

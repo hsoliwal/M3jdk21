@@ -1,5 +1,13 @@
 /* Copyright 2026 Hitesh Soliwal <hsoliwal@gmail.com>
- * SPDX-License-Identifier: Apache-2.0
+ * SPDX-License-Identifier: Apache-2.0 AND MIT
+ *
+ * Decimal sizing and digit emission adapted from tools4j shortstring.
+ * Copyright (c) 2023 tools4j.org (Marco Terzer).
+ * The original MIT permission notice is retained in m3/core/LICENSE-shortstring.md.
+ */
+/*
+ * Donor: hsoliwal/shortstring, commit 383d2d17d5d1942673976db34cda3695991ca422,
+ * StringLengths.java and NumericCodec.java. See shortstring-number-space-provenance.md.
  */
 package com.m3.text;
 
@@ -23,30 +31,43 @@ public final class M3NumberSpace {
     public static final String RECORD_ID = "number";
     public static final int MIN_VALUE = 0;
     public static final int MAX_VALUE = 10_000;
+    // Closed-domain decimal maxima; initialize before the singleton constructor.
+    private static final int[] DECIMAL_MAXIMA = {9, 99, 999, 9_999, MAX_VALUE};
     public static final M3NumberSpace INSTANCE = new M3NumberSpace();
 
     private final LocalM3StringPiece[] values;
     private final LocalM3StringPiece backing;
 
     private M3NumberSpace() {
-        int totalUnits = 0;
-        for (int value = MIN_VALUE; value <= MAX_VALUE; value++)
-            totalUnits = Math.addExact(totalUnits, Integer.toString(value).length());
-        char[] all = new char[totalUnits];
         int[] offsets = new int[MAX_VALUE + 1];
         int[] lengths = new int[MAX_VALUE + 1];
-        int cursor = 0;
+        int totalUnits = 0;
         for (int value = MIN_VALUE; value <= MAX_VALUE; value++) {
-            String spelling = Integer.toString(value);
-            offsets[value] = cursor;
-            lengths[value] = spelling.length();
-            spelling.getChars(0, spelling.length(), all, cursor);
-            cursor += spelling.length();
+            offsets[value] = totalUnits;
+            lengths[value] = decimalLength(value);
+            totalUnits = Math.addExact(totalUnits, lengths[value]);
+        }
+        char[] all = new char[totalUnits];
+        for (int value = MIN_VALUE; value <= MAX_VALUE; value++) {
+            int position = offsets[value] + lengths[value];
+            int remaining = value;
+            do {
+                int quotient = remaining / 10;
+                all[--position] = (char) ('0' + remaining - quotient * 10);
+                remaining = quotient;
+            } while (remaining != 0);
         }
         backing = new LocalM3Arena().copyUtf16(all);
         values = new LocalM3StringPiece[MAX_VALUE + 1];
         for (int value = MIN_VALUE; value <= MAX_VALUE; value++)
             values[value] = backing.subSequence(offsets[value], offsets[value] + lengths[value]);
+    }
+
+    /** Decimal length for constructor inputs in the closed 0..10000 domain. */
+    private static int decimalLength(int value) {
+        int index = 0;
+        while (value > DECIMAL_MAXIMA[index]) index++;
+        return index + 1;
     }
 
     /** Return the canonical cached view for one value. */

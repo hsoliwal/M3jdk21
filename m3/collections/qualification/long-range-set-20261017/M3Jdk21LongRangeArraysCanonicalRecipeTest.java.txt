@@ -1,0 +1,60 @@
+// SPDX-License-Identifier: Apache-2.0
+// Copyright 2026 Hitesh Soliwal and contributors
+package com.synexia.rewrite;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.openrewrite.java.Assertions.java;
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Path;
+import java.util.List;
+import org.junit.jupiter.api.Test;
+import org.openrewrite.InMemoryExecutionContext;
+import org.openrewrite.Parser;
+import org.openrewrite.internal.InMemoryLargeSourceSet;
+import org.openrewrite.java.JavaParser;
+import org.openrewrite.test.RewriteTest;
+
+/** Exact source preimage admission, generated output, refusal and fixed-point test. */
+final class M3Jdk21LongRangeArrays20261017RecipeTest implements RewriteTest {
+    private static final String CRATE = "m3jdk21-long-range-array-flags-20261017";
+    private static final String MAIN = "m3/collections/src/main/java/com/m3/collections/";
+    private static final String TEST = "m3/collections/src/test/java/com/m3/collections/";
+
+    private static String source(String name) throws IOException {
+        String path = "/com/synexia/rewrite/hash-pinned-java/" + CRATE + "/" + name + ".txt";
+        try (InputStream in = M3Jdk21LongRangeArrays20261017RecipeTest.class.getResourceAsStream(path)) {
+            if (in == null) throw new IOException(path);
+            return new String(in.readAllBytes(), StandardCharsets.UTF_8);
+        }
+    }
+
+    @Test
+    void emitsExactJavaAndReachesSecondCycleFixedPoint() throws Exception {
+        rewriteRun(spec -> spec.recipe(new M3HashPinnedJavaSnapshotRecipe(CRATE))
+                    .cycles(2).expectedCyclesThatMakeChanges(1),
+                java(null, source("M3LongRangeSet.java"),
+                        s -> s.path(MAIN + "M3LongRangeSet.java").noTrim()),
+                java(null, source("M3LongRangeSetSelfTest.java"),
+                        s -> s.path(TEST + "M3LongRangeSetSelfTest.java").noTrim()),
+                java(null, source("M3LongRangeSetTest.java"),
+                        s -> s.path(TEST + "M3LongRangeSetTest.java").noTrim()));
+    }
+
+    @Test
+    void refusesUnexpectedOccupiedSource() {
+        var recipe = new M3HashPinnedJavaSnapshotRecipe(CRATE);
+        assertEquals(3, recipe.targetPaths().size());
+        String path = MAIN + "M3LongRangeSet.java";
+        assertEquals("ABSENT", recipe.preimageManifest().get(path));
+        var context = new InMemoryExecutionContext(error -> { throw new AssertionError(error); });
+        var before = JavaParser.fromJavaVersion().build().parseInputs(
+                List.of(Parser.Input.fromString(Path.of(path),
+                    "package com.m3.collections; public final class M3LongRangeSet {}")),
+                null, context).toList();
+        assertThrows(IllegalStateException.class,
+                () -> recipe.run(new InMemoryLargeSourceSet(before), context, 1));
+    }
+}

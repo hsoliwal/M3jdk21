@@ -1,0 +1,2795 @@
+{
+  "schema": 1,
+  "status": "NATIVE_SELECTED_REACTOR_VERIFY_PASS",
+  "receiverBase": "bd11c44cd98aef16a3d049db0ebd8477608ccf4d",
+  "commandReceipt": "receiver-native-verify-provisioned.log.json",
+  "logSha256": "293e1b6789c5b71518d52617f195dae30448328166fabada0c648f84076f44ee",
+  "totals": {
+    "tests": 2273,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 5
+  },
+  "modules": [
+    {
+      "module": "api/maven-api-plugin",
+      "suites": [
+        {
+          "suite": "org.apache.maven.api.plugin.descriptor.another.ExtendedPluginDescriptorTest",
+          "tests": 1,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "api/maven-api-plugin/target/surefire-reports/TEST-org.apache.maven.api.plugin.descriptor.another.ExtendedPluginDescriptorTest.xml",
+          "sha256": "a71529c0b249c4167c84f76215d2c82a7819f7da709f5780278d2930be0c5c3c"
+        }
+      ],
+      "totals": {
+        "tests": 1,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "module": "api/maven-api-settings",
+      "suites": [
+        {
+          "suite": "org.apache.maven.api.settings.SettingsTest",
+          "tests": 1,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "api/maven-api-settings/target/surefire-reports/TEST-org.apache.maven.api.settings.SettingsTest.xml",
+          "sha256": "3655a49867b2095a0a9d5d63ed5e3948908e2d324850ee82a4d71ff56e5e607f"
+        }
+      ],
+      "totals": {
+        "tests": 1,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "module": "api/maven-api-core",
+      "suites": [
+        {
+          "suite": "org.apache.maven.api.ArtifactCoordinatesTest",
+          "tests": 2,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "api/maven-api-core/target/surefire-reports/TEST-org.apache.maven.api.ArtifactCoordinatesTest.xml",
+          "sha256": "79447befd669d6aa4bbd7bc8c9d95f088119bb898280c247d1c5dbf66b1bd4d1"
+        },
+        {
+          "suite": "org.apache.maven.api.JavaPathTypeTest",
+          "tests": 3,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "api/maven-api-core/target/surefire-reports/TEST-org.apache.maven.api.JavaPathTypeTest.xml",
+          "sha256": "71226c77d6efd4e528bb5fca1ee518cad526af8b672d941a3253bf79cf4fd32f"
+        },
+        {
+          "suite": "org.apache.maven.api.MonotonicClockTest",
+          "tests": 12,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "api/maven-api-core/target/surefire-reports/TEST-org.apache.maven.api.MonotonicClockTest.xml",
+          "sha256": "c4a9c66b575a70888b97554a13fdda1606d00b41342087280cd5a10cc4090978"
+        },
+        {
+          "suite": "org.apache.maven.api.ProtoSessionTest",
+          "tests": 1,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "api/maven-api-core/target/surefire-reports/TEST-org.apache.maven.api.ProtoSessionTest.xml",
+          "sha256": "8b212e6d2632327a4f1bc587af0d3884d554ab58c915dbbef546c88fbdd0fc94"
+        },
+        {
+          "suite": "org.apache.maven.api.SourceRootTest",
+          "tests": 2,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "api/maven-api-core/target/surefire-reports/TEST-org.apache.maven.api.SourceRootTest.xml",
+          "sha256": "a2ba2fa3290bd875858da9906154ea11d29e02d5916db6c6d825947a086f4094"
+        },
+        {
+          "suite": "org.apache.maven.api.feature.FeaturesTest",
+          "tests": 19,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "api/maven-api-core/target/surefire-reports/TEST-org.apache.maven.api.feature.FeaturesTest.xml",
+          "sha256": "ebf1d065b1c88158200e2723f1e49a458b48bb3438fe9ee6f6688cee2cc1362f"
+        },
+        {
+          "suite": "org.apache.maven.api.plugin.annotations.AfterAnnotationTest",
+          "tests": 6,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "api/maven-api-core/target/surefire-reports/TEST-org.apache.maven.api.plugin.annotations.AfterAnnotationTest.xml",
+          "sha256": "8b38f7f486a44ca0d7deb73164c9c4402b76498208d8344fbc1cbb77b54eadbf"
+        },
+        {
+          "suite": "org.apache.maven.api.services.ModelSourceTest",
+          "tests": 3,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "api/maven-api-core/target/surefire-reports/TEST-org.apache.maven.api.services.ModelSourceTest.xml",
+          "sha256": "e1401769ffd84ab6cf59e20f6f6634365ef2818dfb2647cbe875ffcbeec32c4d"
+        },
+        {
+          "suite": "org.apache.maven.api.services.RequestImplementationTest",
+          "tests": 3,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "api/maven-api-core/target/surefire-reports/TEST-org.apache.maven.api.services.RequestImplementationTest.xml",
+          "sha256": "29c40a8e8a953f07bb16b5164efe1b3ec1a0193d97860eb4b4cd91801dde1ef6"
+        },
+        {
+          "suite": "org.apache.maven.api.services.RequestTraceTest",
+          "tests": 6,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "api/maven-api-core/target/surefire-reports/TEST-org.apache.maven.api.services.RequestTraceTest.xml",
+          "sha256": "50f8d5dfb8633573fd8e0f6c598ba9bb347a6743bb5b9cb59e1e46badaef0b14"
+        },
+        {
+          "suite": "org.apache.maven.api.services.SourcesTest",
+          "tests": 9,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "api/maven-api-core/target/surefire-reports/TEST-org.apache.maven.api.services.SourcesTest.xml",
+          "sha256": "0a71c711384d2f8aedc86f904176a64b2b4fb56e81168805472a80d15fd971b5"
+        }
+      ],
+      "totals": {
+        "tests": 66,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "module": "impl/maven-xml",
+      "suites": [
+        {
+          "suite": "org.apache.maven.internal.xml.XmlNodeImplTest",
+          "tests": 58,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-xml/target/surefire-reports/TEST-org.apache.maven.internal.xml.XmlNodeImplTest.xml",
+          "sha256": "a76b405bd12c1dfb3f48bb72a399da4a5c52ee1a06fde208e9d1a4c5b0b0de27"
+        },
+        {
+          "suite": "org.apache.maven.internal.xml.XmlPlexusConfigurationTest",
+          "tests": 10,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-xml/target/surefire-reports/TEST-org.apache.maven.internal.xml.XmlPlexusConfigurationTest.xml",
+          "sha256": "c2cdb58f1691ae2ac559449a71f08cf8dcafa4664816855a472ee5d4d1209893"
+        },
+        {
+          "suite": "org.apache.maven.internal.xml.XmlServiceLoadingTest",
+          "tests": 1,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-xml/target/surefire-reports/TEST-org.apache.maven.internal.xml.XmlServiceLoadingTest.xml",
+          "sha256": "d249cb351a7d74af68b11d23a63627a0e11fb415599f70c223e0aa89555402de"
+        },
+        {
+          "suite": "org.apache.maven.internal.xml.XmlServiceTest",
+          "tests": 2,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-xml/target/surefire-reports/TEST-org.apache.maven.internal.xml.XmlServiceTest.xml",
+          "sha256": "e80debd2e2ccb93c6f9c656cb4dc54b8d00809bc6c3b1fd34aabbd2e193d2ea8"
+        }
+      ],
+      "totals": {
+        "tests": 71,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "module": "impl/maven-support",
+      "suites": [
+        {
+          "suite": "org.apache.maven.model.v4.MavenStaxReaderTest",
+          "tests": 10,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-support/target/surefire-reports/TEST-org.apache.maven.model.v4.MavenStaxReaderTest.xml",
+          "sha256": "a1c6f25ee75f8f55af656b06eb2fe90ec7a7996e004e2ff0d2c7aea6c8accd41"
+        }
+      ],
+      "totals": {
+        "tests": 10,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "module": "impl/maven-di",
+      "suites": [
+        {
+          "suite": "org.apache.maven.di.impl.BindingSelectionTest",
+          "tests": 26,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-di/target/surefire-reports/TEST-org.apache.maven.di.impl.BindingSelectionTest.xml",
+          "sha256": "c258298d9fb55d2a0e1b1c465b7f5ef88ab0f1af7c15caee96ca538754b7b85d"
+        },
+        {
+          "suite": "org.apache.maven.di.impl.InjectorImplTest",
+          "tests": 18,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-di/target/surefire-reports/TEST-org.apache.maven.di.impl.InjectorImplTest.xml",
+          "sha256": "b9f96e5a5807d52115b078f78ba2a6b85bc3e6e3f0872b0e2a5dcaccb3561e4a"
+        },
+        {
+          "suite": "org.apache.maven.di.impl.TypeUtilsTest",
+          "tests": 2,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-di/target/surefire-reports/TEST-org.apache.maven.di.impl.TypeUtilsTest.xml",
+          "sha256": "7f1d3668a05030627f0f01fe9aa4331ef93e9a5b62244d81eb269d075877fa48"
+        }
+      ],
+      "totals": {
+        "tests": 46,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "module": "impl/maven-jline",
+      "suites": [
+        {
+          "suite": "org.apache.maven.jline.FastTerminalReentrancyTest",
+          "tests": 5,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-jline/target/surefire-reports/TEST-org.apache.maven.jline.FastTerminalReentrancyTest.xml",
+          "sha256": "c4c8eee06d0c91da7de47b2a4b99020f068a450c385f12c6223f3149be7ce377"
+        }
+      ],
+      "totals": {
+        "tests": 5,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "module": "impl/maven-logging",
+      "suites": [
+        {
+          "suite": "org.apache.maven.slf4j.LogLevelRecorderTest",
+          "tests": 1,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-logging/target/surefire-reports/TEST-org.apache.maven.slf4j.LogLevelRecorderTest.xml",
+          "sha256": "587fabe1ce58d5036a45dfab9c34019bf44fc4988b680b4881370d6c62dcccfb"
+        },
+        {
+          "suite": "org.apache.maven.slf4j.MavenBaseLoggerTimestampTest",
+          "tests": 6,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-logging/target/surefire-reports/TEST-org.apache.maven.slf4j.MavenBaseLoggerTimestampTest.xml",
+          "sha256": "9dd889859fc410086f4c699e83cee0072003d6769a48b8723883d5079dbf2b28"
+        },
+        {
+          "suite": "org.apache.maven.slf4j.MavenLoggerFactoryTest",
+          "tests": 3,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-logging/target/surefire-reports/TEST-org.apache.maven.slf4j.MavenLoggerFactoryTest.xml",
+          "sha256": "03c1d2655557b20797a33434fdd171a37ad82e8a393627257a77bd65711e48e0"
+        },
+        {
+          "suite": "org.apache.maven.slf4j.MavenSimpleLoggerTest",
+          "tests": 1,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-logging/target/surefire-reports/TEST-org.apache.maven.slf4j.MavenSimpleLoggerTest.xml",
+          "sha256": "e37cf8697416b2c7f52b4fe2cf4fb62de946ec49b465f0fbba110baf3c8d2e3f"
+        },
+        {
+          "suite": "org.apache.maven.slf4j.SimpleLoggerConfigurationTest",
+          "tests": 10,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-logging/target/surefire-reports/TEST-org.apache.maven.slf4j.SimpleLoggerConfigurationTest.xml",
+          "sha256": "f77ea42e83406cedbdeed81494eed49e1f02d920b6a3814e16625800f2396448"
+        }
+      ],
+      "totals": {
+        "tests": 21,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "module": "impl/maven-impl",
+      "suites": [
+        {
+          "suite": "org.apache.maven.impl.DefaultArtifactCoordinatesTest",
+          "tests": 3,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-impl/target/surefire-reports/TEST-org.apache.maven.impl.DefaultArtifactCoordinatesTest.xml",
+          "sha256": "e10246af7d3b839c71b712ce825385cf25367b02c20ca5c92858a3958f225af8"
+        },
+        {
+          "suite": "org.apache.maven.impl.DefaultArtifactResolverTest",
+          "tests": 4,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-impl/target/surefire-reports/TEST-org.apache.maven.impl.DefaultArtifactResolverTest.xml",
+          "sha256": "0f32c666c38d2a860c95c192f29915a50d33040c98f7f3cd2afa75000e30cebf"
+        },
+        {
+          "suite": "org.apache.maven.impl.DefaultDependencyResolverResultTest",
+          "tests": 4,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-impl/target/surefire-reports/TEST-org.apache.maven.impl.DefaultDependencyResolverResultTest.xml",
+          "sha256": "f3e5601e1cba16c186523b56efdf851394ccdf40fc29a2a4fb63405ffb954d2c"
+        },
+        {
+          "suite": "org.apache.maven.impl.DefaultJavaToolchainFactoryTest",
+          "tests": 4,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-impl/target/surefire-reports/TEST-org.apache.maven.impl.DefaultJavaToolchainFactoryTest.xml",
+          "sha256": "9aa257c749a49e85f22b4ba46440dfad10c311c3412c0b800b828a9f92fad9dd"
+        },
+        {
+          "suite": "org.apache.maven.impl.DefaultModelVersionParserTest",
+          "tests": 1,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-impl/target/surefire-reports/TEST-org.apache.maven.impl.DefaultModelVersionParserTest.xml",
+          "sha256": "86a28ef98ac67dbb51962c9ec58d68571c12563de3805532727b160a2941108e"
+        },
+        {
+          "suite": "org.apache.maven.impl.DefaultModelXmlFactoryTest",
+          "tests": 10,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-impl/target/surefire-reports/TEST-org.apache.maven.impl.DefaultModelXmlFactoryTest.xml",
+          "sha256": "70c8627aded2a1b81e891bfc76a2e1f33914fbdd6ca19468388d35867a25c5fb"
+        },
+        {
+          "suite": "org.apache.maven.impl.DefaultNodeTest",
+          "tests": 11,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-impl/target/surefire-reports/TEST-org.apache.maven.impl.DefaultNodeTest.xml",
+          "sha256": "7a3a1f65baa6dc688f0494b3801b242dc30940aa627cacc7f207677f35c48d6f"
+        },
+        {
+          "suite": "org.apache.maven.impl.DefaultPathMatcherFactoryTest",
+          "tests": 11,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-impl/target/surefire-reports/TEST-org.apache.maven.impl.DefaultPathMatcherFactoryTest.xml",
+          "sha256": "47e0c1933e3640d097051c175508207d176e5e1887965c0c7b19ebc728270551"
+        },
+        {
+          "suite": "org.apache.maven.impl.DefaultPluginXmlFactoryTest",
+          "tests": 18,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-impl/target/surefire-reports/TEST-org.apache.maven.impl.DefaultPluginXmlFactoryTest.xml",
+          "sha256": "0fa037aaecaf172df98eae933b3b89ce3d52bab7cdd3c22af3e5ae1f96a39ecb"
+        },
+        {
+          "suite": "org.apache.maven.impl.DefaultProblemCollectorTest",
+          "tests": 5,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-impl/target/surefire-reports/TEST-org.apache.maven.impl.DefaultProblemCollectorTest.xml",
+          "sha256": "ede2ee446cdb718abc0bfe86b35e2c6d06c568708a2f833ff78ebbb9c5a1b891"
+        },
+        {
+          "suite": "org.apache.maven.impl.DefaultSettingsBuilderDecryptTest",
+          "tests": 1,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-impl/target/surefire-reports/TEST-org.apache.maven.impl.DefaultSettingsBuilderDecryptTest.xml",
+          "sha256": "166b28f7a70ce8866483e9005d634abe1a3f941be481a994efb8a35c71938d22"
+        },
+        {
+          "suite": "org.apache.maven.impl.DefaultSettingsBuilderFactoryTest",
+          "tests": 6,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-impl/target/surefire-reports/TEST-org.apache.maven.impl.DefaultSettingsBuilderFactoryTest.xml",
+          "sha256": "c238cd3d8a8a6fd7cf6baa19896007e4afadf702c0c9a5203e5ef403743d8461"
+        },
+        {
+          "suite": "org.apache.maven.impl.DefaultSettingsParserTest",
+          "tests": 25,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-impl/target/surefire-reports/TEST-org.apache.maven.impl.DefaultSettingsParserTest.xml",
+          "sha256": "d85c4a918d26f993a88e51bf1a6e09f09a51c746a7a40567be9c00cd3bd3cf4a"
+        },
+        {
+          "suite": "org.apache.maven.impl.DefaultSettingsValidatorTest",
+          "tests": 12,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-impl/target/surefire-reports/TEST-org.apache.maven.impl.DefaultSettingsValidatorTest.xml",
+          "sha256": "4b5c3055a853d0f9e5b1f26c5b078edb29db5f5f26aa8d3b664d06445b9a8efa"
+        },
+        {
+          "suite": "org.apache.maven.impl.DefaultSettingsXmlFactoryTest",
+          "tests": 2,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-impl/target/surefire-reports/TEST-org.apache.maven.impl.DefaultSettingsXmlFactoryTest.xml",
+          "sha256": "babe8e069405d6c6de6b12c6823852d4092effe28d2cc1a1bee75f366939a340"
+        },
+        {
+          "suite": "org.apache.maven.impl.DefaultSourceRootTest",
+          "tests": 16,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-impl/target/surefire-reports/TEST-org.apache.maven.impl.DefaultSourceRootTest.xml",
+          "sha256": "26a6ff4d1366d630a2196d41392191f14a115847d35f3441c466a07a34544206"
+        },
+        {
+          "suite": "org.apache.maven.impl.DefaultSuperPomProviderTest",
+          "tests": 1,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-impl/target/surefire-reports/TEST-org.apache.maven.impl.DefaultSuperPomProviderTest.xml",
+          "sha256": "af54d3ac96c8f4bb09aea52a9d4d468f2d125969d416dfcf9edb0ec3cff6facd"
+        },
+        {
+          "suite": "org.apache.maven.impl.DefaultToolchainManagerTest",
+          "tests": 17,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-impl/target/surefire-reports/TEST-org.apache.maven.impl.DefaultToolchainManagerTest.xml",
+          "sha256": "cb0b82708731b0f420e9a440ee2cfbd6b8a59f60ac91f54348d961f8f559d696"
+        },
+        {
+          "suite": "org.apache.maven.impl.DefaultToolchainsXmlFactoryTest",
+          "tests": 2,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-impl/target/surefire-reports/TEST-org.apache.maven.impl.DefaultToolchainsXmlFactoryTest.xml",
+          "sha256": "998d7ef6fe5198e1dc3b935055c9c912aa113dec3002b46c58f09e08d719d5f1"
+        },
+        {
+          "suite": "org.apache.maven.impl.DefaultTransportTest",
+          "tests": 5,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-impl/target/surefire-reports/TEST-org.apache.maven.impl.DefaultTransportTest.xml",
+          "sha256": "81aff301970803be515582ccf4847b3d919c393027e66843ead6d914363826c6"
+        },
+        {
+          "suite": "org.apache.maven.impl.DefaultUrlNormalizerTest",
+          "tests": 5,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-impl/target/surefire-reports/TEST-org.apache.maven.impl.DefaultUrlNormalizerTest.xml",
+          "sha256": "77ec2b543b7e1f7e635ce5996437e11489a7e7e5657d49514831e3c4482e78de"
+        },
+        {
+          "suite": "org.apache.maven.impl.JdkSourceLevelSupportTest",
+          "tests": 19,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-impl/target/surefire-reports/TEST-org.apache.maven.impl.JdkSourceLevelSupportTest.xml",
+          "sha256": "28bcdb153721d8544de9defd83e8958168c5e7a9037723b6e8f2e0ade90941c0"
+        },
+        {
+          "suite": "org.apache.maven.impl.MavenRepositoryListenerTest",
+          "tests": 7,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-impl/target/surefire-reports/TEST-org.apache.maven.impl.MavenRepositoryListenerTest.xml",
+          "sha256": "e8a62746108f56f04bb3507cf867c53f8ee8a35c2c8e112fe113474bb8bb0fff"
+        },
+        {
+          "suite": "org.apache.maven.impl.ModelVersionParserTest",
+          "tests": 3,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-impl/target/surefire-reports/TEST-org.apache.maven.impl.ModelVersionParserTest.xml",
+          "sha256": "746c67db101aaaf355968aee2a6f78949cec5fed372218512e36f1eadec29f8c"
+        },
+        {
+          "suite": "org.apache.maven.impl.PathSelectorTest",
+          "tests": 6,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-impl/target/surefire-reports/TEST-org.apache.maven.impl.PathSelectorTest.xml",
+          "sha256": "8d061694c081277872db4fe5ba0db171f9002fbab06b52d3257670fee6ad0638"
+        },
+        {
+          "suite": "org.apache.maven.impl.RepositoryRequestTraceTest",
+          "tests": 2,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-impl/target/surefire-reports/TEST-org.apache.maven.impl.RepositoryRequestTraceTest.xml",
+          "sha256": "5350d254d349637953aa1fff7d6aee2440c2f77ab674e1c86bf6df5bd075ff34"
+        },
+        {
+          "suite": "org.apache.maven.impl.RequestTraceHelperTest",
+          "tests": 6,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-impl/target/surefire-reports/TEST-org.apache.maven.impl.RequestTraceHelperTest.xml",
+          "sha256": "82e71267268eeba8cb15d37f088ab98a481c43fe39ac4a993cf013a2140a4599"
+        },
+        {
+          "suite": "org.apache.maven.impl.SettingsParserExceptionTest",
+          "tests": 3,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-impl/target/surefire-reports/TEST-org.apache.maven.impl.SettingsParserExceptionTest.xml",
+          "sha256": "d867b9cb1c90c3fa2d148bdec0938dc93bb7bf3f7d82e7a01fec936993555e88"
+        },
+        {
+          "suite": "org.apache.maven.impl.VersionRangeTest",
+          "tests": 10,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-impl/target/surefire-reports/TEST-org.apache.maven.impl.VersionRangeTest.xml",
+          "sha256": "18f5cc90bc03c7be8f36c12fe9c6bf6d8dcddf98642bf45a1318b7d6f9821606"
+        },
+        {
+          "suite": "org.apache.maven.impl.VersionTest",
+          "tests": 24,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-impl/target/surefire-reports/TEST-org.apache.maven.impl.VersionTest.xml",
+          "sha256": "1b5a9f97a2923cfc32e8a30d3d6139b7ae27458b28e8fefac9f4e0e4da97779f"
+        },
+        {
+          "suite": "org.apache.maven.impl.XmlFactoryTransformerTest",
+          "tests": 4,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-impl/target/surefire-reports/TEST-org.apache.maven.impl.XmlFactoryTransformerTest.xml",
+          "sha256": "319eae69719c0a1a72e07bbca42c242cfb5fa698130276227519eb47b831560f"
+        },
+        {
+          "suite": "org.apache.maven.impl.cache.AbstractRequestCacheTest",
+          "tests": 11,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-impl/target/surefire-reports/TEST-org.apache.maven.impl.cache.AbstractRequestCacheTest.xml",
+          "sha256": "94ef9c260473446f8724b757c88baa2ad150d60818fbf55574f5c5774f00f0ec"
+        },
+        {
+          "suite": "org.apache.maven.impl.cache.CacheConfigurationTest",
+          "tests": 15,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-impl/target/surefire-reports/TEST-org.apache.maven.impl.cache.CacheConfigurationTest.xml",
+          "sha256": "1bced37db38a4e1bb03e217c7580ddd03b45f1503fc293de3260a8bc54c4d19b"
+        },
+        {
+          "suite": "org.apache.maven.impl.cache.CacheStatisticsTest",
+          "tests": 7,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-impl/target/surefire-reports/TEST-org.apache.maven.impl.cache.CacheStatisticsTest.xml",
+          "sha256": "8dfe79f35626c2ce0873cb764f7955eeddd823cbe63f5b0ce9495daa3442b7ce"
+        },
+        {
+          "suite": "org.apache.maven.impl.cache.RefConcurrentMapTest",
+          "tests": 18,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-impl/target/surefire-reports/TEST-org.apache.maven.impl.cache.RefConcurrentMapTest.xml",
+          "sha256": "368c9d03da726bbd6341662e42bc053e4827132a5a2629d0af33471b5db8df84"
+        },
+        {
+          "suite": "org.apache.maven.impl.cache.ReferenceTypeStatisticsTest",
+          "tests": 5,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-impl/target/surefire-reports/TEST-org.apache.maven.impl.cache.ReferenceTypeStatisticsTest.xml",
+          "sha256": "e32dd5763b653b864fcd6691d68808d3216900e8d341af72ef57ccc93ca8f792"
+        },
+        {
+          "suite": "org.apache.maven.impl.di.SessionScopeTest",
+          "tests": 3,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-impl/target/surefire-reports/TEST-org.apache.maven.impl.di.SessionScopeTest.xml",
+          "sha256": "d2baec79fe7577f0ac903ca73f224d84ac41adc4226b9f9c433159f41641eb08"
+        },
+        {
+          "suite": "org.apache.maven.impl.model.ComplexActivationTest",
+          "tests": 4,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-impl/target/surefire-reports/TEST-org.apache.maven.impl.model.ComplexActivationTest.xml",
+          "sha256": "45a15578c5fd48512fa204ffd8c37a79b3a2270c1302c8c633eea92f82e4975f"
+        },
+        {
+          "suite": "org.apache.maven.impl.model.DefaultDependencyManagementImporterTest",
+          "tests": 6,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-impl/target/surefire-reports/TEST-org.apache.maven.impl.model.DefaultDependencyManagementImporterTest.xml",
+          "sha256": "743f068017ed5821740c344bbca7c8b3103063e7c3960bff95cfe1dd49e6e224"
+        },
+        {
+          "suite": "org.apache.maven.impl.model.DefaultInheritanceAssemblerTest",
+          "tests": 13,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-impl/target/surefire-reports/TEST-org.apache.maven.impl.model.DefaultInheritanceAssemblerTest.xml",
+          "sha256": "7d6038df7a64ce3ff07640e82d3c65b9d6ec70b642ee04dd0c7b589b8cb7e271"
+        },
+        {
+          "suite": "org.apache.maven.impl.model.DefaultInterpolatorTest",
+          "tests": 16,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-impl/target/surefire-reports/TEST-org.apache.maven.impl.model.DefaultInterpolatorTest.xml",
+          "sha256": "72b77afc8814031c052ea64ef9449a82eb2047eb4e611f9db10b870f482f118e"
+        },
+        {
+          "suite": "org.apache.maven.impl.model.DefaultModelBuilderResultTest",
+          "tests": 4,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-impl/target/surefire-reports/TEST-org.apache.maven.impl.model.DefaultModelBuilderResultTest.xml",
+          "sha256": "3a36ef2b18abf5c6ac4e94c3980e1eb75fc0a742381e0f8293104d10945e4f91"
+        },
+        {
+          "suite": "org.apache.maven.impl.model.DefaultModelBuilderTest",
+          "tests": 41,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-impl/target/surefire-reports/TEST-org.apache.maven.impl.model.DefaultModelBuilderTest.xml",
+          "sha256": "ec7a76be852e008856b7146fd16be1e8a7d1ffbd1f9e41306545299f1e27a7b2"
+        },
+        {
+          "suite": "org.apache.maven.impl.model.DefaultModelInterpolatorTest",
+          "tests": 30,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 1,
+          "report": "impl/maven-impl/target/surefire-reports/TEST-org.apache.maven.impl.model.DefaultModelInterpolatorTest.xml",
+          "sha256": "d894489b1426e0c53e26a51ae48246a9e14d4ba0e57ef3102b9b2067075aa326"
+        },
+        {
+          "suite": "org.apache.maven.impl.model.DefaultModelObjectPoolTest",
+          "tests": 7,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-impl/target/surefire-reports/TEST-org.apache.maven.impl.model.DefaultModelObjectPoolTest.xml",
+          "sha256": "320eead8fd3273071fe1e397d546697e57d3e4b3bcab1771a981700699b2fdd4"
+        },
+        {
+          "suite": "org.apache.maven.impl.model.DefaultModelPathTranslatorTest",
+          "tests": 4,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-impl/target/surefire-reports/TEST-org.apache.maven.impl.model.DefaultModelPathTranslatorTest.xml",
+          "sha256": "bc1560b73cf338959f2ac71d3d5ef15d57a99f7a1b3c68b35c2bedb897fa6867"
+        },
+        {
+          "suite": "org.apache.maven.impl.model.DefaultModelProcessorTest",
+          "tests": 4,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-impl/target/surefire-reports/TEST-org.apache.maven.impl.model.DefaultModelProcessorTest.xml",
+          "sha256": "e63d2d1141b3e28e9a340d3f10d3136aa24424810b95a344902bced4f2aa7a43"
+        },
+        {
+          "suite": "org.apache.maven.impl.model.DefaultModelValidatorTest",
+          "tests": 84,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-impl/target/surefire-reports/TEST-org.apache.maven.impl.model.DefaultModelValidatorTest.xml",
+          "sha256": "45d5bde6333235b3944d62214e49c6ecaa0179beb6902a94c902caa0a097aea7"
+        },
+        {
+          "suite": "org.apache.maven.impl.model.InterningTransformerTest",
+          "tests": 13,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-impl/target/surefire-reports/TEST-org.apache.maven.impl.model.InterningTransformerTest.xml",
+          "sha256": "c831e06dfdff5ba478a00af631c407b9db32e2a7e87708d417f48772a359cf9f"
+        },
+        {
+          "suite": "org.apache.maven.impl.model.MavenBuildTimestampTest",
+          "tests": 1,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-impl/target/surefire-reports/TEST-org.apache.maven.impl.model.MavenBuildTimestampTest.xml",
+          "sha256": "9a9e1490d24551814e2272a0ebd72d9f1949b8907e6f37944707ae9aac98341f"
+        },
+        {
+          "suite": "org.apache.maven.impl.model.MavenModelMergerTest",
+          "tests": 6,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-impl/target/surefire-reports/TEST-org.apache.maven.impl.model.MavenModelMergerTest.xml",
+          "sha256": "9ef70583a7eede39ebd108cc416720efa7d3225502d569424158b98eca134e0b"
+        },
+        {
+          "suite": "org.apache.maven.impl.model.ParentCycleDetectionTest",
+          "tests": 5,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-impl/target/surefire-reports/TEST-org.apache.maven.impl.model.ParentCycleDetectionTest.xml",
+          "sha256": "625f4ab12248c1f6bae9fbffe1c7b476c98194a9b878ecb8b37e45f1c25f7380"
+        },
+        {
+          "suite": "org.apache.maven.impl.model.ParentTraversalTest",
+          "tests": 11,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-impl/target/surefire-reports/TEST-org.apache.maven.impl.model.ParentTraversalTest.xml",
+          "sha256": "6763ae4afc6f71f2e5a91519f4d9e6bd6cc876bfc2b7999cf3107c452c6f1221"
+        },
+        {
+          "suite": "org.apache.maven.impl.model.RawModelReadingTest",
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-impl/target/surefire-reports/TEST-org.apache.maven.impl.model.RawModelReadingTest.xml",
+          "sha256": "eae4cdf0062886e4d1a9dbe1d2ee0b0466bcbcadce3f7aa58551ad875ee43bc9"
+        },
+        {
+          "suite": "org.apache.maven.impl.model.profile.ConditionParserTest",
+          "tests": 38,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-impl/target/surefire-reports/TEST-org.apache.maven.impl.model.profile.ConditionParserTest.xml",
+          "sha256": "5fece11bbe212bde05ee4cd453287a686f93b02b81263c5b30bed388087b0df7"
+        },
+        {
+          "suite": "org.apache.maven.impl.model.profile.ConditionProfileActivatorTest",
+          "tests": 38,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 2,
+          "report": "impl/maven-impl/target/surefire-reports/TEST-org.apache.maven.impl.model.profile.ConditionProfileActivatorTest.xml",
+          "sha256": "878653810c694cb0823dd1578475f8915182c13474de8cd5a1c80be3f877a072"
+        },
+        {
+          "suite": "org.apache.maven.impl.model.profile.ExecutableFinderTest",
+          "tests": 11,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-impl/target/surefire-reports/TEST-org.apache.maven.impl.model.profile.ExecutableFinderTest.xml",
+          "sha256": "b0933d560c5da5e0803f0fcd172a079672df1a3f92c5bf121968aee605cc3f15"
+        },
+        {
+          "suite": "org.apache.maven.impl.model.profile.FileProfileActivatorTest",
+          "tests": 6,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-impl/target/surefire-reports/TEST-org.apache.maven.impl.model.profile.FileProfileActivatorTest.xml",
+          "sha256": "b987345366fb9ca7de072ea4343dd9f13be093c15e2d919cdcdfba52701ae133"
+        },
+        {
+          "suite": "org.apache.maven.impl.model.profile.JdkVersionProfileActivatorTest",
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-impl/target/surefire-reports/TEST-org.apache.maven.impl.model.profile.JdkVersionProfileActivatorTest.xml",
+          "sha256": "287fc45f7ec4626acf0fe0307b8f1a0193fb5f19b77a22744baed53450f8bf8d"
+        },
+        {
+          "suite": "org.apache.maven.impl.model.profile.OperatingSystemProfileActivatorTest",
+          "tests": 11,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-impl/target/surefire-reports/TEST-org.apache.maven.impl.model.profile.OperatingSystemProfileActivatorTest.xml",
+          "sha256": "bb90ffc5d9abe7b4abd429c8b197dfa811c49998d83d1617ccf12814130ebee9"
+        },
+        {
+          "suite": "org.apache.maven.impl.model.profile.PropertyProfileActivatorTest",
+          "tests": 19,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-impl/target/surefire-reports/TEST-org.apache.maven.impl.model.profile.PropertyProfileActivatorTest.xml",
+          "sha256": "ba45c7f95333cb2b116cb5057300f948b46b59a3bfec2761494145d82782eeaa"
+        },
+        {
+          "suite": "org.apache.maven.impl.model.reflection.ReflectionValueExtractorTest",
+          "tests": 16,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-impl/target/surefire-reports/TEST-org.apache.maven.impl.model.reflection.ReflectionValueExtractorTest.xml",
+          "sha256": "7628b0c571b38845907fde4bee9a0e90a025dbbb3b99972a3835e6071d334d8b"
+        },
+        {
+          "suite": "org.apache.maven.impl.resolver.DefaultModelResolverTest",
+          "tests": 10,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-impl/target/surefire-reports/TEST-org.apache.maven.impl.resolver.DefaultModelResolverTest.xml",
+          "sha256": "7e276431c79d1a61f51c216bfc58ae1211258f49b37818915d06fa2ca12d2513"
+        },
+        {
+          "suite": "org.apache.maven.impl.resolver.MetadataInputValidatorTest",
+          "tests": 17,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-impl/target/surefire-reports/TEST-org.apache.maven.impl.resolver.MetadataInputValidatorTest.xml",
+          "sha256": "d282ae93caae64c9dfbcf65710d232f4578c5321945c2fe9e5c20c0334af8932"
+        },
+        {
+          "suite": "org.apache.maven.impl.resolver.MetadataVersionTokenValidationTest",
+          "tests": 3,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-impl/target/surefire-reports/TEST-org.apache.maven.impl.resolver.MetadataVersionTokenValidationTest.xml",
+          "sha256": "4470660b69a9b12753abe251bd935d9d455646d2743557c0a95362268f401285"
+        },
+        {
+          "suite": "org.apache.maven.impl.resolver.RemoteSnapshotMetadataTest",
+          "tests": 3,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-impl/target/surefire-reports/TEST-org.apache.maven.impl.resolver.RemoteSnapshotMetadataTest.xml",
+          "sha256": "1f4fce3abdf695601c9f327c1ec7f59be041959ff40ba5a8aacccc356a9170cd"
+        },
+        {
+          "suite": "org.apache.maven.impl.resolver.relocation.DistributionManagementArtifactRelocationSourceTest",
+          "tests": 7,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-impl/target/surefire-reports/TEST-org.apache.maven.impl.resolver.relocation.DistributionManagementArtifactRelocationSourceTest.xml",
+          "sha256": "4fd091d9e30fcb25a016c271c95f17cb55555012e2cfadc2f0eb517e75a8aeee"
+        },
+        {
+          "suite": "org.apache.maven.impl.resolver.type.DefaultTypeProviderTest",
+          "tests": 1,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-impl/target/surefire-reports/TEST-org.apache.maven.impl.resolver.type.DefaultTypeProviderTest.xml",
+          "sha256": "5a0b867f4fa566c1d003b08d1e28895696031f1fe254f77cccff3aa42febe362"
+        },
+        {
+          "suite": "org.apache.maven.impl.resolver.type.TypeDeriverTest",
+          "tests": 2,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-impl/target/surefire-reports/TEST-org.apache.maven.impl.resolver.type.TypeDeriverTest.xml",
+          "sha256": "b7e5a478a8fc171a31344747a73accb4fd61add24f289268ea26ff049d0caca9"
+        },
+        {
+          "suite": "org.apache.maven.impl.resolver.type.TypeDeriverWithConflictResolutionTest",
+          "tests": 2,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-impl/target/surefire-reports/TEST-org.apache.maven.impl.resolver.type.TypeDeriverWithConflictResolutionTest.xml",
+          "sha256": "c0c8bf41c6c01587354e8315a517fa9cf69bcec6fae51a54c57f31d6de9271c6"
+        },
+        {
+          "suite": "org.apache.maven.impl.resolver.validator.MavenValidatorFactoryTest",
+          "tests": 12,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-impl/target/surefire-reports/TEST-org.apache.maven.impl.resolver.validator.MavenValidatorFactoryTest.xml",
+          "sha256": "27bec1f4c57f04d0efb9a23ddd2ce601f18602d9e1bc95eb8e74794dd17f9401"
+        },
+        {
+          "suite": "org.apache.maven.impl.standalone.ApiRunnerSettingsTest",
+          "tests": 14,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-impl/target/surefire-reports/TEST-org.apache.maven.impl.standalone.ApiRunnerSettingsTest.xml",
+          "sha256": "b8c2578e3533877e15cff5008b402097ce641c5c36d67c35a681b5e211f48c9d"
+        },
+        {
+          "suite": "org.apache.maven.impl.standalone.DiTest",
+          "tests": 1,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-impl/target/surefire-reports/TEST-org.apache.maven.impl.standalone.DiTest.xml",
+          "sha256": "ed4d1dc89653e5787ab7db7aa420ffd0470607cc58ffdfd1795350fa174a1347"
+        },
+        {
+          "suite": "org.apache.maven.impl.standalone.RequestTraceTest",
+          "tests": 1,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-impl/target/surefire-reports/TEST-org.apache.maven.impl.standalone.RequestTraceTest.xml",
+          "sha256": "df5129eba465d2a5e77053fec4675eeef8875ef5d6b1104db0dd144b05cf3a1a"
+        },
+        {
+          "suite": "org.apache.maven.impl.standalone.TestApiStandalone",
+          "tests": 1,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-impl/target/surefire-reports/TEST-org.apache.maven.impl.standalone.TestApiStandalone.xml",
+          "sha256": "51177c13a5b3590cf3374c5ff3448443d024e3069a3d410222975ddaca4c5615"
+        },
+        {
+          "suite": "org.apache.maven.impl.util.PhasingExecutorTest",
+          "tests": 1,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-impl/target/surefire-reports/TEST-org.apache.maven.impl.util.PhasingExecutorTest.xml",
+          "sha256": "10757befc395a50cddbc123802c877cb83e27944c6dd4f4b5cb5bbc286197a68"
+        }
+      ],
+      "totals": {
+        "tests": 785,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 3
+      }
+    },
+    {
+      "module": "compat/maven-artifact",
+      "suites": [
+        {
+          "suite": "org.apache.maven.artifact.ArtifactUtilsTest",
+          "tests": 3,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "compat/maven-artifact/target/surefire-reports/TEST-org.apache.maven.artifact.ArtifactUtilsTest.xml",
+          "sha256": "3fe3bfef229150f69468ebefef7b22637125e3e50677b83415cc4f90b612aa35"
+        },
+        {
+          "suite": "org.apache.maven.artifact.DefaultArtifactTest",
+          "tests": 20,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "compat/maven-artifact/target/surefire-reports/TEST-org.apache.maven.artifact.DefaultArtifactTest.xml",
+          "sha256": "fbf1d2f5b6cf23e9ef04f52508e42ad58b939b7a63ecdc422fa41348c67e2415"
+        },
+        {
+          "suite": "org.apache.maven.artifact.versioning.ComparableVersionTest",
+          "tests": 35,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "compat/maven-artifact/target/surefire-reports/TEST-org.apache.maven.artifact.versioning.ComparableVersionTest.xml",
+          "sha256": "c207e71d2e1a4b42272e1c7f7832e1a75b97670e93f5f76f9c9d0cec35493925"
+        },
+        {
+          "suite": "org.apache.maven.artifact.versioning.DefaultArtifactVersionTest",
+          "tests": 11,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "compat/maven-artifact/target/surefire-reports/TEST-org.apache.maven.artifact.versioning.DefaultArtifactVersionTest.xml",
+          "sha256": "3f77f3ebada2f0c319e1a8db79b766faf1c162bbcaf7ff6cc7de2ec9b87fdf08"
+        },
+        {
+          "suite": "org.apache.maven.artifact.versioning.VersionRangeTest",
+          "tests": 12,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "compat/maven-artifact/target/surefire-reports/TEST-org.apache.maven.artifact.versioning.VersionRangeTest.xml",
+          "sha256": "cb2027e4d24869247e6ba605c8144e4ac287952cd3db9bfee88f016b6a951848"
+        }
+      ],
+      "totals": {
+        "tests": 81,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "module": "compat/maven-model",
+      "suites": [
+        {
+          "suite": "org.apache.maven.model.ActivationFileTest",
+          "tests": 4,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "compat/maven-model/target/surefire-reports/TEST-org.apache.maven.model.ActivationFileTest.xml",
+          "sha256": "ea6a09c83bacc6df6209c786f8cdf19cd333901474f1b15394365687522d70c2"
+        },
+        {
+          "suite": "org.apache.maven.model.ActivationOSTest",
+          "tests": 4,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "compat/maven-model/target/surefire-reports/TEST-org.apache.maven.model.ActivationOSTest.xml",
+          "sha256": "5a8dc9c4e06017f48c01be77c62f41eaa83404c5c705dd642497c947876b6709"
+        },
+        {
+          "suite": "org.apache.maven.model.ActivationPropertyTest",
+          "tests": 4,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "compat/maven-model/target/surefire-reports/TEST-org.apache.maven.model.ActivationPropertyTest.xml",
+          "sha256": "77d934194da3ac2819da4d134c9e08aa3ae4a392fa2438b5840b855260df243f"
+        },
+        {
+          "suite": "org.apache.maven.model.ActivationTest",
+          "tests": 4,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "compat/maven-model/target/surefire-reports/TEST-org.apache.maven.model.ActivationTest.xml",
+          "sha256": "8b73d2e1a2640980ddec03f07ca1e312dbf023a1e557586c44cb3606b89368a8"
+        },
+        {
+          "suite": "org.apache.maven.model.BuildTest",
+          "tests": 5,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "compat/maven-model/target/surefire-reports/TEST-org.apache.maven.model.BuildTest.xml",
+          "sha256": "5194dbc6f4acb491651b7c85a5a0406f75d3541e2685310533fc0529fb09045e"
+        },
+        {
+          "suite": "org.apache.maven.model.CiManagementTest",
+          "tests": 4,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "compat/maven-model/target/surefire-reports/TEST-org.apache.maven.model.CiManagementTest.xml",
+          "sha256": "960ad3f9c097e1b64c8b7c787a757145b0166932fb5cfad3bb7f81fef23bc12b"
+        },
+        {
+          "suite": "org.apache.maven.model.ContributorTest",
+          "tests": 4,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "compat/maven-model/target/surefire-reports/TEST-org.apache.maven.model.ContributorTest.xml",
+          "sha256": "2d557b2a9df51f9c970b8dd32cef02d7e81a7c5b32303cad57072f3fe6518572"
+        },
+        {
+          "suite": "org.apache.maven.model.DependencyManagementTest",
+          "tests": 5,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "compat/maven-model/target/surefire-reports/TEST-org.apache.maven.model.DependencyManagementTest.xml",
+          "sha256": "cfd25ec62badffec9adafcce58418a14b45c87887569e89f30ae9f995103ae26"
+        },
+        {
+          "suite": "org.apache.maven.model.DependencyTest",
+          "tests": 4,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "compat/maven-model/target/surefire-reports/TEST-org.apache.maven.model.DependencyTest.xml",
+          "sha256": "eaf4d708c3ff99b6c8ba4c8eea96e65dbb6c30008217aad4970638594bafc8ef"
+        },
+        {
+          "suite": "org.apache.maven.model.DeploymentRepositoryTest",
+          "tests": 4,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "compat/maven-model/target/surefire-reports/TEST-org.apache.maven.model.DeploymentRepositoryTest.xml",
+          "sha256": "ee80fa660047d0c9cb7cf4d35adad9bb0015335f80b02a1c7be8757871741888"
+        },
+        {
+          "suite": "org.apache.maven.model.DeveloperTest",
+          "tests": 4,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "compat/maven-model/target/surefire-reports/TEST-org.apache.maven.model.DeveloperTest.xml",
+          "sha256": "23f380910a52b5951c1e95162f7f0ea4e06c99c31f217ff42ddbd8ccc6296a4c"
+        },
+        {
+          "suite": "org.apache.maven.model.DistributionManagementTest",
+          "tests": 4,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "compat/maven-model/target/surefire-reports/TEST-org.apache.maven.model.DistributionManagementTest.xml",
+          "sha256": "fb42ea7ed461c6d923939b69146f3216be9ce8b4a7a7af0ad49a8f2108fc43e1"
+        },
+        {
+          "suite": "org.apache.maven.model.ExclusionTest",
+          "tests": 4,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "compat/maven-model/target/surefire-reports/TEST-org.apache.maven.model.ExclusionTest.xml",
+          "sha256": "a4d94685e46f44db4bd521adb8d7c1d891751f9b948a315f9c3e864b56ad5095"
+        },
+        {
+          "suite": "org.apache.maven.model.ExtensionTest",
+          "tests": 4,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "compat/maven-model/target/surefire-reports/TEST-org.apache.maven.model.ExtensionTest.xml",
+          "sha256": "159b7fb61f7c4a03529f65501ca43ac1d6fb54629dc3fe1e5dad2b7416ed1cb9"
+        },
+        {
+          "suite": "org.apache.maven.model.IssueManagementTest",
+          "tests": 5,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "compat/maven-model/target/surefire-reports/TEST-org.apache.maven.model.IssueManagementTest.xml",
+          "sha256": "da9cecb6dc669aa05a1c5f717ed042f06c5c9033e3244634fdbdcbaf3bbe802b"
+        },
+        {
+          "suite": "org.apache.maven.model.LicenseTest",
+          "tests": 5,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "compat/maven-model/target/surefire-reports/TEST-org.apache.maven.model.LicenseTest.xml",
+          "sha256": "9803015d96b8f13cf15b45542b76215166cacc7ce703360da7e0c5f8ea4a09ca"
+        },
+        {
+          "suite": "org.apache.maven.model.MailingListTest",
+          "tests": 5,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "compat/maven-model/target/surefire-reports/TEST-org.apache.maven.model.MailingListTest.xml",
+          "sha256": "e26af9c46e993465ebf0252418c48e31bd2341badfc4b0395be1d558f4a79133"
+        },
+        {
+          "suite": "org.apache.maven.model.ModelTest",
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "compat/maven-model/target/surefire-reports/TEST-org.apache.maven.model.ModelTest.xml",
+          "sha256": "490f6cd539d8bc3fa84e867a3f65b409b0c3f671745ac6357b6941c17c045256"
+        },
+        {
+          "suite": "org.apache.maven.model.NotifierTest",
+          "tests": 4,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "compat/maven-model/target/surefire-reports/TEST-org.apache.maven.model.NotifierTest.xml",
+          "sha256": "00dcfe532aca998c69a385e1cd956307340462122a40cee1eae093b0a3420524"
+        },
+        {
+          "suite": "org.apache.maven.model.OrganizationTest",
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "compat/maven-model/target/surefire-reports/TEST-org.apache.maven.model.OrganizationTest.xml",
+          "sha256": "cd76946bfb532ecca234db0c6d0a1dff41edee89ad5fadfe9bc343afee4273ab"
+        },
+        {
+          "suite": "org.apache.maven.model.ParentTest",
+          "tests": 4,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "compat/maven-model/target/surefire-reports/TEST-org.apache.maven.model.ParentTest.xml",
+          "sha256": "d656895976dab88f509ce4b47fd0a5ddf8ae385bbe72a855b5705beef0adfb1a"
+        },
+        {
+          "suite": "org.apache.maven.model.PluginConfigurationTest",
+          "tests": 4,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "compat/maven-model/target/surefire-reports/TEST-org.apache.maven.model.PluginConfigurationTest.xml",
+          "sha256": "8adf6c9c87a397b99a62e8924aafc94b3f547cd9921573ea436dd3af35897613"
+        },
+        {
+          "suite": "org.apache.maven.model.PluginContainerTest",
+          "tests": 4,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "compat/maven-model/target/surefire-reports/TEST-org.apache.maven.model.PluginContainerTest.xml",
+          "sha256": "f4f8593b37e6f00754fe253740cff39090dc23676d4b13e61d67edfa9bbbe02d"
+        },
+        {
+          "suite": "org.apache.maven.model.PluginExecutionTest",
+          "tests": 4,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "compat/maven-model/target/surefire-reports/TEST-org.apache.maven.model.PluginExecutionTest.xml",
+          "sha256": "5fce9919fcad21a286398266985a03b220bb87c45dd4d3fb0ff9b4aee6f72f66"
+        },
+        {
+          "suite": "org.apache.maven.model.PluginManagementTest",
+          "tests": 4,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "compat/maven-model/target/surefire-reports/TEST-org.apache.maven.model.PluginManagementTest.xml",
+          "sha256": "b8667e972f91e0bc92eb0b52da63d83c660de22666b9c86c5e1785ed08789612"
+        },
+        {
+          "suite": "org.apache.maven.model.PluginTest",
+          "tests": 4,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "compat/maven-model/target/surefire-reports/TEST-org.apache.maven.model.PluginTest.xml",
+          "sha256": "c80eb910a102125a6ee9ca9e648a51d190882ef97ea6a19f09720f0924d67b9b"
+        },
+        {
+          "suite": "org.apache.maven.model.PrerequisitesTest",
+          "tests": 4,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "compat/maven-model/target/surefire-reports/TEST-org.apache.maven.model.PrerequisitesTest.xml",
+          "sha256": "e059068e16d54a71bb067a580f540a35b1ed7104717d89597a371d0c0e7034b3"
+        },
+        {
+          "suite": "org.apache.maven.model.ProfileTest",
+          "tests": 4,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "compat/maven-model/target/surefire-reports/TEST-org.apache.maven.model.ProfileTest.xml",
+          "sha256": "1708c00d518db604dac6ad01f74db367ed6bc5b5c42de3f0d8e4bfb5918868cf"
+        },
+        {
+          "suite": "org.apache.maven.model.RelocationTest",
+          "tests": 4,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "compat/maven-model/target/surefire-reports/TEST-org.apache.maven.model.RelocationTest.xml",
+          "sha256": "d19760e0e7e8a7c96ff9aff8b0994ecabc5afdf12e80de8d7ba6c2847f897160"
+        },
+        {
+          "suite": "org.apache.maven.model.ReportPluginTest",
+          "tests": 4,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "compat/maven-model/target/surefire-reports/TEST-org.apache.maven.model.ReportPluginTest.xml",
+          "sha256": "fbf2eb1ba45dc5f0c9d012d49280e5d3ee3f4619a6b14d8fc58c3628e4e9864d"
+        },
+        {
+          "suite": "org.apache.maven.model.ReportSetTest",
+          "tests": 4,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "compat/maven-model/target/surefire-reports/TEST-org.apache.maven.model.ReportSetTest.xml",
+          "sha256": "a8b1a84195ea591f89ff789f09e34b1c6b9d39b730e47a438e82cc8f1c28f592"
+        },
+        {
+          "suite": "org.apache.maven.model.ReportingTest",
+          "tests": 4,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "compat/maven-model/target/surefire-reports/TEST-org.apache.maven.model.ReportingTest.xml",
+          "sha256": "a21d8b58f172c270fafc5c59bd361bd811a86e85bbb14bea7f98b2c338f0ad8a"
+        },
+        {
+          "suite": "org.apache.maven.model.RepositoryPolicyTest",
+          "tests": 4,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "compat/maven-model/target/surefire-reports/TEST-org.apache.maven.model.RepositoryPolicyTest.xml",
+          "sha256": "e9582238e71fd0b012651a6ca16317f699f7558635055899974e8c44ab156c7d"
+        },
+        {
+          "suite": "org.apache.maven.model.RepositoryTest",
+          "tests": 4,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "compat/maven-model/target/surefire-reports/TEST-org.apache.maven.model.RepositoryTest.xml",
+          "sha256": "eba2a8d696b1f58a6a60321d529e49e43a4e7f7051ab20065b2a11453e7ae90f"
+        },
+        {
+          "suite": "org.apache.maven.model.ResourceTest",
+          "tests": 4,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "compat/maven-model/target/surefire-reports/TEST-org.apache.maven.model.ResourceTest.xml",
+          "sha256": "72104bc1182011502cd858dbcf8a07a58f3ac344fd34dfed2b91061b25c78d1e"
+        },
+        {
+          "suite": "org.apache.maven.model.ScmTest",
+          "tests": 5,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "compat/maven-model/target/surefire-reports/TEST-org.apache.maven.model.ScmTest.xml",
+          "sha256": "748a5f419a3653710b2fa4db365cda3584041da1ee1ba982f530888dccb32f1d"
+        },
+        {
+          "suite": "org.apache.maven.model.SerializationTest",
+          "tests": 2,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "compat/maven-model/target/surefire-reports/TEST-org.apache.maven.model.SerializationTest.xml",
+          "sha256": "f8e523f15fe942e317204e0c356bc4f04f97ca4b614ef32dc407cc40f3d0822d"
+        },
+        {
+          "suite": "org.apache.maven.model.SiteTest",
+          "tests": 4,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "compat/maven-model/target/surefire-reports/TEST-org.apache.maven.model.SiteTest.xml",
+          "sha256": "f4a09cc4d83309d389c4eb1c4259780a4096129a9a242c1cce28e4c6ab41bf16"
+        },
+        {
+          "suite": "org.apache.maven.model.io.xpp3.MavenXpp3ReaderTest",
+          "tests": 1,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "compat/maven-model/target/surefire-reports/TEST-org.apache.maven.model.io.xpp3.MavenXpp3ReaderTest.xml",
+          "sha256": "109aee0597c71f44deb6ad6dd0d98a29e25e0593ae0348429c213d02e32840a6"
+        },
+        {
+          "suite": "org.apache.maven.model.merge.MavenMergerTest",
+          "tests": 3,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "compat/maven-model/target/surefire-reports/TEST-org.apache.maven.model.merge.MavenMergerTest.xml",
+          "sha256": "16e2aa26c272e393ca62e49ae716e04c361a3e0a406312eedbb357db9f09b8b2"
+        },
+        {
+          "suite": "org.apache.maven.model.v4.MavenModelVersionTest",
+          "tests": 5,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "compat/maven-model/target/surefire-reports/TEST-org.apache.maven.model.v4.MavenModelVersionTest.xml",
+          "sha256": "226a2ac19f613aaf79ebb309acf40ece3a7e3cb836bbc904022c2bd1a10bd58a"
+        },
+        {
+          "suite": "org.apache.maven.model.v4.ModelXmlTest",
+          "tests": 2,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "compat/maven-model/target/surefire-reports/TEST-org.apache.maven.model.v4.ModelXmlTest.xml",
+          "sha256": "05c33e2922837d472c7b0996dc582df3490212e4ec0177b87957ea7ca962108a"
+        }
+      ],
+      "totals": {
+        "tests": 175,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "module": "compat/maven-builder-support",
+      "suites": [
+        {
+          "suite": "org.apache.maven.building.DefaultProblemCollectorTest",
+          "tests": 2,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "compat/maven-builder-support/target/surefire-reports/TEST-org.apache.maven.building.DefaultProblemCollectorTest.xml",
+          "sha256": "f8285af915ae17522c85f8194e0dbc5cb52af5f6d47b512855502c414539737c"
+        },
+        {
+          "suite": "org.apache.maven.building.DefaultProblemTest",
+          "tests": 7,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "compat/maven-builder-support/target/surefire-reports/TEST-org.apache.maven.building.DefaultProblemTest.xml",
+          "sha256": "7dc1d479af9b82ad5242938692cb6238531ed680d40ae0746e230eb95c359bce"
+        },
+        {
+          "suite": "org.apache.maven.building.FileSourceTest",
+          "tests": 4,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "compat/maven-builder-support/target/surefire-reports/TEST-org.apache.maven.building.FileSourceTest.xml",
+          "sha256": "da2b2a4d5bd9da9e42076578dd9d7455d81b19d9c93d52854a0d388907365d57"
+        },
+        {
+          "suite": "org.apache.maven.building.ProblemCollectorFactoryTest",
+          "tests": 2,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "compat/maven-builder-support/target/surefire-reports/TEST-org.apache.maven.building.ProblemCollectorFactoryTest.xml",
+          "sha256": "bd1a66c62761a7fd043c2ffaccf94b947c832417d925c13cd16a60d77b1d4476"
+        },
+        {
+          "suite": "org.apache.maven.building.StringSourceTest",
+          "tests": 3,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "compat/maven-builder-support/target/surefire-reports/TEST-org.apache.maven.building.StringSourceTest.xml",
+          "sha256": "5e45d64865745ea4db552c76deaac7377e69e5ab6b3f35c911dbce3d8e909a81"
+        },
+        {
+          "suite": "org.apache.maven.building.UrlSourceTest",
+          "tests": 3,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "compat/maven-builder-support/target/surefire-reports/TEST-org.apache.maven.building.UrlSourceTest.xml",
+          "sha256": "d79d24a19a2cd194900565c5ef564e353888342f2a217dc7afa3fabbcc9fb964"
+        }
+      ],
+      "totals": {
+        "tests": 21,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "module": "compat/maven-model-builder",
+      "suites": [
+        {
+          "suite": "org.apache.maven.model.building.ComplexActivationTest",
+          "tests": 1,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "compat/maven-model-builder/target/surefire-reports/TEST-org.apache.maven.model.building.ComplexActivationTest.xml",
+          "sha256": "9657b27b699c553878bcd2b70569ae5a93c1f94d0a5708ce36577aebabe94dd5"
+        },
+        {
+          "suite": "org.apache.maven.model.building.DefaultModelBuilderFactoryTest",
+          "tests": 2,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "compat/maven-model-builder/target/surefire-reports/TEST-org.apache.maven.model.building.DefaultModelBuilderFactoryTest.xml",
+          "sha256": "838a5925e2c910d3854c52881d0eb85bf1504f5fd805aab805aa69490e2430b8"
+        },
+        {
+          "suite": "org.apache.maven.model.building.DefaultModelBuilderTest",
+          "tests": 3,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "compat/maven-model-builder/target/surefire-reports/TEST-org.apache.maven.model.building.DefaultModelBuilderTest.xml",
+          "sha256": "2e1412f8f69088c9f4f87f2a292741b62e68d360809cd002da68bb30bea05380"
+        },
+        {
+          "suite": "org.apache.maven.model.building.ExternalModelProfileActivationTest",
+          "tests": 12,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "compat/maven-model-builder/target/surefire-reports/TEST-org.apache.maven.model.building.ExternalModelProfileActivationTest.xml",
+          "sha256": "59ff489439f4f85be678b653d148590fcf4df9c9d9bb6d25321f8af7333b2c09"
+        },
+        {
+          "suite": "org.apache.maven.model.building.FileModelSourceTest",
+          "tests": 3,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 1,
+          "report": "compat/maven-model-builder/target/surefire-reports/TEST-org.apache.maven.model.building.FileModelSourceTest.xml",
+          "sha256": "111a497998a31b9f68afba053b163cf79559da409412b478d75c24e3b261454c"
+        },
+        {
+          "suite": "org.apache.maven.model.building.FileToRawModelMergerTest",
+          "tests": 1,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "compat/maven-model-builder/target/surefire-reports/TEST-org.apache.maven.model.building.FileToRawModelMergerTest.xml",
+          "sha256": "2eb1829b702088ac07b158f88ef1189a430f0bd0466f48e278584a925d756655"
+        },
+        {
+          "suite": "org.apache.maven.model.building.GraphTest",
+          "tests": 2,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "compat/maven-model-builder/target/surefire-reports/TEST-org.apache.maven.model.building.GraphTest.xml",
+          "sha256": "0f8c9e8bf85b42e7e49fbc2e0022ebfe9ab897af02e5f95731e0f381260ce464"
+        },
+        {
+          "suite": "org.apache.maven.model.inheritance.DefaultInheritanceAssemblerTest",
+          "tests": 9,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "compat/maven-model-builder/target/surefire-reports/TEST-org.apache.maven.model.inheritance.DefaultInheritanceAssemblerTest.xml",
+          "sha256": "d1398a53a7985dbda11b6f548fd79315b53a049675ee1e9fb9118c0176d19d9f"
+        },
+        {
+          "suite": "org.apache.maven.model.interpolation.MavenBuildTimestampTest",
+          "tests": 1,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "compat/maven-model-builder/target/surefire-reports/TEST-org.apache.maven.model.interpolation.MavenBuildTimestampTest.xml",
+          "sha256": "f49d731e47c4770fbd6b0caf899baaabd538ffcce9eae26730bf819c8261667c"
+        },
+        {
+          "suite": "org.apache.maven.model.interpolation.StringVisitorModelInterpolatorTest",
+          "tests": 21,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "compat/maven-model-builder/target/surefire-reports/TEST-org.apache.maven.model.interpolation.StringVisitorModelInterpolatorTest.xml",
+          "sha256": "9bbaa755b813f2a79893fdbc38f359fb6630222b7d00b19a40c5dea17008cdea"
+        },
+        {
+          "suite": "org.apache.maven.model.interpolation.reflection.ReflectionValueExtractorTest",
+          "tests": 15,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "compat/maven-model-builder/target/surefire-reports/TEST-org.apache.maven.model.interpolation.reflection.ReflectionValueExtractorTest.xml",
+          "sha256": "899aee6f73adeb0fe70bb36414053564e9451ef5e58ede74435aac3c67febb09"
+        },
+        {
+          "suite": "org.apache.maven.model.path.DefaultUrlNormalizerTest",
+          "tests": 7,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "compat/maven-model-builder/target/surefire-reports/TEST-org.apache.maven.model.path.DefaultUrlNormalizerTest.xml",
+          "sha256": "b976b927583d861fe2933fa9401afaf96509449972ac4afb7f5f37a0ed81f5c0"
+        },
+        {
+          "suite": "org.apache.maven.model.plugin.DefaultReportingConverterTest",
+          "tests": 1,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "compat/maven-model-builder/target/surefire-reports/TEST-org.apache.maven.model.plugin.DefaultReportingConverterTest.xml",
+          "sha256": "3b45b4f7f85b7234acb01c42efb3ba222f07cc10e9fc008e40ffabf59a862ab2"
+        },
+        {
+          "suite": "org.apache.maven.model.profile.DefaultProfileSelectorTest",
+          "tests": 1,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "compat/maven-model-builder/target/surefire-reports/TEST-org.apache.maven.model.profile.DefaultProfileSelectorTest.xml",
+          "sha256": "0c15305cf24a7be16b8cc578278393b5a9dcbd812ba6410578582e0ae5c47c45"
+        },
+        {
+          "suite": "org.apache.maven.model.profile.activation.FileProfileActivatorTest",
+          "tests": 6,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "compat/maven-model-builder/target/surefire-reports/TEST-org.apache.maven.model.profile.activation.FileProfileActivatorTest.xml",
+          "sha256": "9d62dd8332b601636ea198dea89cfd3d6d36d22b7b009389ab8c2762283b0660"
+        },
+        {
+          "suite": "org.apache.maven.model.profile.activation.JdkVersionProfileActivatorTest",
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "compat/maven-model-builder/target/surefire-reports/TEST-org.apache.maven.model.profile.activation.JdkVersionProfileActivatorTest.xml",
+          "sha256": "1f4697e6ed2a30ec40078a28c4247bad5190da1a3380190608cb0ff2f2b917c4"
+        },
+        {
+          "suite": "org.apache.maven.model.profile.activation.OperatingSystemProfileActivatorTest",
+          "tests": 10,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "compat/maven-model-builder/target/surefire-reports/TEST-org.apache.maven.model.profile.activation.OperatingSystemProfileActivatorTest.xml",
+          "sha256": "7b6e97cbe16d9ed1b3df1836c7459bf9240e851c8e84197e4390db5497f1ff54"
+        },
+        {
+          "suite": "org.apache.maven.model.profile.activation.PropertyProfileActivatorTest",
+          "tests": 10,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "compat/maven-model-builder/target/surefire-reports/TEST-org.apache.maven.model.profile.activation.PropertyProfileActivatorTest.xml",
+          "sha256": "08bb75c7cbc00bd0f0f078862df0d039044bd4def88d04387d325e233590a49c"
+        },
+        {
+          "suite": "org.apache.maven.model.superpom.DefaultSuperPomProviderTest",
+          "tests": 1,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "compat/maven-model-builder/target/surefire-reports/TEST-org.apache.maven.model.superpom.DefaultSuperPomProviderTest.xml",
+          "sha256": "654ca67ee3fd9e8ccf2e35cb0d48d16ad544b478367a7f03ceb3fc096d967e07"
+        },
+        {
+          "suite": "org.apache.maven.model.validation.DefaultModelValidatorTest",
+          "tests": 73,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "compat/maven-model-builder/target/surefire-reports/TEST-org.apache.maven.model.validation.DefaultModelValidatorTest.xml",
+          "sha256": "cb9dd0973dbb1d0d37a2c34435ee873ed369ae829a35e18b19e093927112a4b8"
+        }
+      ],
+      "totals": {
+        "tests": 187,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 1
+      }
+    },
+    {
+      "module": "compat/maven-plugin-api",
+      "suites": [
+        {
+          "suite": "org.apache.maven.plugin.descriptor.MojoDescriptorTest",
+          "tests": 2,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "compat/maven-plugin-api/target/surefire-reports/TEST-org.apache.maven.plugin.descriptor.MojoDescriptorTest.xml",
+          "sha256": "2dd5202d8a58033da33fb7a2317f6282ea1a1cbd2f4682e10bb0e8c264a4f721"
+        },
+        {
+          "suite": "org.apache.maven.plugin.descriptor.PluginDescriptorBuilderTest",
+          "tests": 1,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "compat/maven-plugin-api/target/surefire-reports/TEST-org.apache.maven.plugin.descriptor.PluginDescriptorBuilderTest.xml",
+          "sha256": "31600dd23e139f4ba5bdda49d4590de5cde12780ac79f4a3c2d518a007447f45"
+        }
+      ],
+      "totals": {
+        "tests": 3,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "module": "compat/maven-repository-metadata",
+      "suites": [
+        {
+          "suite": "org.apache.maven.artifact.repository.metadata.MetadataTest",
+          "tests": 10,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "compat/maven-repository-metadata/target/surefire-reports/TEST-org.apache.maven.artifact.repository.metadata.MetadataTest.xml",
+          "sha256": "33b04557b4175596069ca7b571a222eeeae7e152081feebcbadab18d2b1b4feb"
+        }
+      ],
+      "totals": {
+        "tests": 10,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "module": "compat/maven-toolchain-builder",
+      "suites": [
+        {
+          "suite": "org.apache.maven.toolchain.building.DefaultToolchainsBuilderTest",
+          "tests": 9,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "compat/maven-toolchain-builder/target/surefire-reports/TEST-org.apache.maven.toolchain.building.DefaultToolchainsBuilderTest.xml",
+          "sha256": "aff14d896eb67376e96055788adc5aa807fc2f43a690d4d058b0df74df92f753"
+        },
+        {
+          "suite": "org.apache.maven.toolchain.building.ToolchainsBuildingExceptionTest",
+          "tests": 4,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "compat/maven-toolchain-builder/target/surefire-reports/TEST-org.apache.maven.toolchain.building.ToolchainsBuildingExceptionTest.xml",
+          "sha256": "a66e2ddadda23e42ed45e015eb8e9a7f00304134a7febee58cb31a7cad2f87f1"
+        },
+        {
+          "suite": "org.apache.maven.toolchain.merge.MavenToolchainMergerTest",
+          "tests": 4,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "compat/maven-toolchain-builder/target/surefire-reports/TEST-org.apache.maven.toolchain.merge.MavenToolchainMergerTest.xml",
+          "sha256": "b5923c5ba25143ded933fd877b1d6e833148b5be39f2210bcd6f70c13fe21400"
+        }
+      ],
+      "totals": {
+        "tests": 17,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "module": "impl/maven-core",
+      "suites": [
+        {
+          "suite": "org.apache.maven.DefaultMavenProfileValidationTest",
+          "tests": 1,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-core/target/surefire-reports/TEST-org.apache.maven.DefaultMavenProfileValidationTest.xml",
+          "sha256": "b33fdeee60dec47518d3aa8cfff27e343a68f331d38eaf64f8ace4e023044981"
+        },
+        {
+          "suite": "org.apache.maven.DefaultMavenSessionScopeTest",
+          "tests": 1,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-core/target/surefire-reports/TEST-org.apache.maven.DefaultMavenSessionScopeTest.xml",
+          "sha256": "5385aa36a1b5e38d56004aae3c0cab845b3d50ef60a94f97c8c5ee15fa22843e"
+        },
+        {
+          "suite": "org.apache.maven.DefaultMavenTest",
+          "tests": 4,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-core/target/surefire-reports/TEST-org.apache.maven.DefaultMavenTest.xml",
+          "sha256": "8e8868afe1a40c6ac66aef21a8b07c5b31e6ceaa3d1df2738ec6a1d8cf714eed"
+        },
+        {
+          "suite": "org.apache.maven.MavenLifecycleParticipantTest",
+          "tests": 3,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-core/target/surefire-reports/TEST-org.apache.maven.MavenLifecycleParticipantTest.xml",
+          "sha256": "4c46c80265165c231ed08bcaba1729ddbabbca7b5b5944b22abc743768ab3a3a"
+        },
+        {
+          "suite": "org.apache.maven.RepositoryUtilsTest",
+          "tests": 1,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-core/target/surefire-reports/TEST-org.apache.maven.RepositoryUtilsTest.xml",
+          "sha256": "099704ee833d787d0c7391529e440b0e620a196138c0202cf21eccbd79ab7a50"
+        },
+        {
+          "suite": "org.apache.maven.artifact.handler.ArtifactHandlerTest",
+          "tests": 1,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-core/target/surefire-reports/TEST-org.apache.maven.artifact.handler.ArtifactHandlerTest.xml",
+          "sha256": "8a12b86aec5f731226d9b492bababe57e7aa5a268439f47dbf67d40069f52b57"
+        },
+        {
+          "suite": "org.apache.maven.artifact.resolver.filter.ExclusionArtifactFilterTest",
+          "tests": 11,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-core/target/surefire-reports/TEST-org.apache.maven.artifact.resolver.filter.ExclusionArtifactFilterTest.xml",
+          "sha256": "41d1225684a040b8edcfab118027615eef39936edba500b27ce6ffed2a2b86d9"
+        },
+        {
+          "suite": "org.apache.maven.bridge.MavenRepositorySystemTest",
+          "tests": 6,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-core/target/surefire-reports/TEST-org.apache.maven.bridge.MavenRepositorySystemTest.xml",
+          "sha256": "6518bf63f21618f23874767274724d15258c259f33c87d1fd1606a9781726713"
+        },
+        {
+          "suite": "org.apache.maven.classrealm.DefaultClassRealmManagerTest",
+          "tests": 2,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-core/target/surefire-reports/TEST-org.apache.maven.classrealm.DefaultClassRealmManagerTest.xml",
+          "sha256": "b38e9dce6e8178a955a8bf1517132fce289a52246bb075e000a7ec5aa5fe77fa"
+        },
+        {
+          "suite": "org.apache.maven.configuration.DefaultBeanConfiguratorPathTest",
+          "tests": 3,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-core/target/surefire-reports/TEST-org.apache.maven.configuration.DefaultBeanConfiguratorPathTest.xml",
+          "sha256": "6118b1837783fe77cb147ace10d85362a52902715976611aca847467065f1a22"
+        },
+        {
+          "suite": "org.apache.maven.configuration.DefaultBeanConfiguratorTest",
+          "tests": 7,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-core/target/surefire-reports/TEST-org.apache.maven.configuration.DefaultBeanConfiguratorTest.xml",
+          "sha256": "582b1aa64319dc193a318e29d3c2e2b65202db4d1344fcf9ee765741b319cb8b"
+        },
+        {
+          "suite": "org.apache.maven.configuration.internal.CompositeBeanHelperPerformanceTest",
+          "tests": 1,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-core/target/surefire-reports/TEST-org.apache.maven.configuration.internal.CompositeBeanHelperPerformanceTest.xml",
+          "sha256": "0e6dc7bb2c6ebdfdbc6b6c60180b905d2af10b832b12d7c2f089370e7109642d"
+        },
+        {
+          "suite": "org.apache.maven.configuration.internal.EnhancedCompositeBeanHelperTest",
+          "tests": 7,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-core/target/surefire-reports/TEST-org.apache.maven.configuration.internal.EnhancedCompositeBeanHelperTest.xml",
+          "sha256": "61965ce7d287084376148ff526d2dca9b90c64364a2368cde1f2ab6c7c7c0a55"
+        },
+        {
+          "suite": "org.apache.maven.di.DiTest",
+          "tests": 12,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-core/target/surefire-reports/TEST-org.apache.maven.di.DiTest.xml",
+          "sha256": "16e700a0112df11825ae1dbb991118dbcdfc8e005077770b35adae2ed015be1a"
+        },
+        {
+          "suite": "org.apache.maven.exception.DefaultExceptionHandlerTest",
+          "tests": 7,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-core/target/surefire-reports/TEST-org.apache.maven.exception.DefaultExceptionHandlerTest.xml",
+          "sha256": "4686c445905d1d8bb55c10bbf3d97a74f174492eea0527b71b5504d4926fe401"
+        },
+        {
+          "suite": "org.apache.maven.execution.DefaultBuildResumptionAnalyzerTest",
+          "tests": 5,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-core/target/surefire-reports/TEST-org.apache.maven.execution.DefaultBuildResumptionAnalyzerTest.xml",
+          "sha256": "5ac256ad31c080bcd6782a731d4dac84ff079916213862ae56155d1ea18f9b36"
+        },
+        {
+          "suite": "org.apache.maven.execution.DefaultBuildResumptionDataRepositoryTest",
+          "tests": 5,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-core/target/surefire-reports/TEST-org.apache.maven.execution.DefaultBuildResumptionDataRepositoryTest.xml",
+          "sha256": "60790bfce6f55f0247e2d62d094ba1e6ea2b089f9b717f99084332c800aa0948"
+        },
+        {
+          "suite": "org.apache.maven.execution.DefaultMavenExecutionRequestPopulatorTest",
+          "tests": 1,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-core/target/surefire-reports/TEST-org.apache.maven.execution.DefaultMavenExecutionRequestPopulatorTest.xml",
+          "sha256": "8ee294e288c31c191e19793e198c3f012283d2a662c2af52125f432c911cd388"
+        },
+        {
+          "suite": "org.apache.maven.execution.DefaultMavenExecutionTest",
+          "tests": 2,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-core/target/surefire-reports/TEST-org.apache.maven.execution.DefaultMavenExecutionTest.xml",
+          "sha256": "ecfcc37bf1117f617fd594805435a099944a452ccd10be50d2efdb8ba47ac693"
+        },
+        {
+          "suite": "org.apache.maven.execution.MavenSessionTest",
+          "tests": 14,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-core/target/surefire-reports/TEST-org.apache.maven.execution.MavenSessionTest.xml",
+          "sha256": "7ea545115470d16766ffafc136036ca9f57303aa68fad6ca84db072644bec34a"
+        },
+        {
+          "suite": "org.apache.maven.execution.scope.internal.MojoExecutionScopeTest",
+          "tests": 2,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-core/target/surefire-reports/TEST-org.apache.maven.execution.scope.internal.MojoExecutionScopeTest.xml",
+          "sha256": "a158fd19fa600ad1309e2ade28cd17b3702ac4873f5d4f98c6aecb0c9feb7efc"
+        },
+        {
+          "suite": "org.apache.maven.graph.DefaultGraphBuilderTest",
+          "tests": 34,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-core/target/surefire-reports/TEST-org.apache.maven.graph.DefaultGraphBuilderTest.xml",
+          "sha256": "39d9e8933984a89b831c7e6701e0e22f8b8a93cf0b5e5a745d064d42dfd85f50"
+        },
+        {
+          "suite": "org.apache.maven.graph.DefaultProjectDependencyGraphTest",
+          "tests": 10,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-core/target/surefire-reports/TEST-org.apache.maven.graph.DefaultProjectDependencyGraphTest.xml",
+          "sha256": "b2b971ea9442c1e19d7c477ed2c2e846672c09036ba62ba0a1400bd49fe79852"
+        },
+        {
+          "suite": "org.apache.maven.graph.FilteredProjectDependencyGraphTest",
+          "tests": 4,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-core/target/surefire-reports/TEST-org.apache.maven.graph.FilteredProjectDependencyGraphTest.xml",
+          "sha256": "0a8d6eb364b686396cf4b8b6695d9b83dbe82d9c68acc976871fff0537d17067"
+        },
+        {
+          "suite": "org.apache.maven.graph.ProjectSelectorTest",
+          "tests": 14,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-core/target/surefire-reports/TEST-org.apache.maven.graph.ProjectSelectorTest.xml",
+          "sha256": "51ad8b5d498758523b1645194a2f658a220da463a0442aa8bb4b34cdc55ee55f"
+        },
+        {
+          "suite": "org.apache.maven.internal.MultilineMessageHelperTest",
+          "tests": 2,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-core/target/surefire-reports/TEST-org.apache.maven.internal.MultilineMessageHelperTest.xml",
+          "sha256": "4d44b3fb1027c1077661588d83c5cc6ca1a4ac37128bc4cc317b39a5d3dc6dda"
+        },
+        {
+          "suite": "org.apache.maven.internal.aether.DefaultRepositorySystemSessionFactoryTest",
+          "tests": 15,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-core/target/surefire-reports/TEST-org.apache.maven.internal.aether.DefaultRepositorySystemSessionFactoryTest.xml",
+          "sha256": "9bb9470fc0e341c48fb17d6ec7077e0de7093c7aa4102610a8bc7247518c5f11"
+        },
+        {
+          "suite": "org.apache.maven.internal.aether.OriginBoundAuthenticationSelectorTest",
+          "tests": 7,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-core/target/surefire-reports/TEST-org.apache.maven.internal.aether.OriginBoundAuthenticationSelectorTest.xml",
+          "sha256": "9348338a9da1fddc7a57154316239ca1e4ab528f844df709793ecd1fe0cf7f98"
+        },
+        {
+          "suite": "org.apache.maven.internal.aether.ReverseTreeRepositoryListenerTest",
+          "tests": 3,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-core/target/surefire-reports/TEST-org.apache.maven.internal.aether.ReverseTreeRepositoryListenerTest.xml",
+          "sha256": "8e1eb595dafd3fa8502f426577a7044d2bd60ebb9ae295f3220b9312d73a92b7"
+        },
+        {
+          "suite": "org.apache.maven.internal.impl.DefaultArtifactManagerTest",
+          "tests": 1,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-core/target/surefire-reports/TEST-org.apache.maven.internal.impl.DefaultArtifactManagerTest.xml",
+          "sha256": "6fc3acb089be6d9488d76f19e69eb3619084844e49da1a60afeb78b207b3c293"
+        },
+        {
+          "suite": "org.apache.maven.internal.impl.DefaultChecksumAlgorithmServiceTest",
+          "tests": 5,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-core/target/surefire-reports/TEST-org.apache.maven.internal.impl.DefaultChecksumAlgorithmServiceTest.xml",
+          "sha256": "0dff4c0d4d90e9049e4a19d08d7f866b0372dc090d6f45680643e3723908e7ea"
+        },
+        {
+          "suite": "org.apache.maven.internal.impl.DefaultLifecycleRegistryTest",
+          "tests": 1,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-core/target/surefire-reports/TEST-org.apache.maven.internal.impl.DefaultLifecycleRegistryTest.xml",
+          "sha256": "d9ad3856a7e2962b18d9cce36755064405c61aca4e297135aa322c23d0fbac3c"
+        },
+        {
+          "suite": "org.apache.maven.internal.impl.DefaultLogTest",
+          "tests": 5,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-core/target/surefire-reports/TEST-org.apache.maven.internal.impl.DefaultLogTest.xml",
+          "sha256": "6ecae981a571fc15cbf0f864dee4eca45d18e6ab4f89d9aa641e3522fae6dc86"
+        },
+        {
+          "suite": "org.apache.maven.internal.impl.DefaultLookupTest",
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-core/target/surefire-reports/TEST-org.apache.maven.internal.impl.DefaultLookupTest.xml",
+          "sha256": "258f8d51f57d06b1c3844a43b67acfea9ddf117889989cde6698689d546ce95b"
+        },
+        {
+          "suite": "org.apache.maven.internal.impl.DefaultMojoExecutionTest",
+          "tests": 3,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-core/target/surefire-reports/TEST-org.apache.maven.internal.impl.DefaultMojoExecutionTest.xml",
+          "sha256": "0b601999816c37586726b38febc1ad0d100449ac35ac42d37d37efda7d090347"
+        },
+        {
+          "suite": "org.apache.maven.internal.impl.DefaultProjectManagerTest",
+          "tests": 2,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-core/target/surefire-reports/TEST-org.apache.maven.internal.impl.DefaultProjectManagerTest.xml",
+          "sha256": "e9feb554bc723102d7f0319f140cca1eee910a8c9e4b721abe5ff660b9d12d9b"
+        },
+        {
+          "suite": "org.apache.maven.internal.impl.DefaultSessionTest",
+          "tests": 7,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-core/target/surefire-reports/TEST-org.apache.maven.internal.impl.DefaultSessionTest.xml",
+          "sha256": "dde449a1eed62b3a4eeb295cdb3cdfa16f46b01211a5efa246a7027a8a497d76"
+        },
+        {
+          "suite": "org.apache.maven.internal.impl.DefaultTempFileServiceTest",
+          "tests": 7,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-core/target/surefire-reports/TEST-org.apache.maven.internal.impl.DefaultTempFileServiceTest.xml",
+          "sha256": "5902072155e325fc179b54b8192cda2a5eac5c14f8c1f03c1c1a555836c814f5"
+        },
+        {
+          "suite": "org.apache.maven.internal.impl.EventSpyImplTest",
+          "tests": 7,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-core/target/surefire-reports/TEST-org.apache.maven.internal.impl.EventSpyImplTest.xml",
+          "sha256": "95ab5a5d33308724858cd53e49fbf81c670b20763363c301fe6d48ee57c7c99c"
+        },
+        {
+          "suite": "org.apache.maven.internal.impl.PropertiesAsMapTest",
+          "tests": 1,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-core/target/surefire-reports/TEST-org.apache.maven.internal.impl.PropertiesAsMapTest.xml",
+          "sha256": "0fd107e12c7daf614a23b2f75656ebf952ea3407ed20666b50f627b3197d9d54"
+        },
+        {
+          "suite": "org.apache.maven.internal.impl.TestApi",
+          "tests": 6,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-core/target/surefire-reports/TEST-org.apache.maven.internal.impl.TestApi.xml",
+          "sha256": "d092d59abf008dab9dcca0916b2e0e8eea1f92685781b15d37d808dc58ad6bc9"
+        },
+        {
+          "suite": "org.apache.maven.internal.transformation.impl.ConsumerPomArtifactTransformerTest",
+          "tests": 10,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-core/target/surefire-reports/TEST-org.apache.maven.internal.transformation.impl.ConsumerPomArtifactTransformerTest.xml",
+          "sha256": "5694c73f06140aa208db9bc20641f61c483b7af71521de23b6ac77aa005dd0de"
+        },
+        {
+          "suite": "org.apache.maven.internal.transformation.impl.ConsumerPomBuilderTest",
+          "tests": 43,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-core/target/surefire-reports/TEST-org.apache.maven.internal.transformation.impl.ConsumerPomBuilderTest.xml",
+          "sha256": "c90a7f2de9d72277741ed177faa77d45600621ea5a98c57452e303098b3ab0c8"
+        },
+        {
+          "suite": "org.apache.maven.lifecycle.DefaultLifecyclesTest",
+          "tests": 6,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-core/target/surefire-reports/TEST-org.apache.maven.lifecycle.DefaultLifecyclesTest.xml",
+          "sha256": "13c2a6a78eb347a16ebaedc873bca504ce7879acb777abb4109692d48b2dec0e"
+        },
+        {
+          "suite": "org.apache.maven.lifecycle.LifecycleExecutorSubModulesTest",
+          "tests": 1,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-core/target/surefire-reports/TEST-org.apache.maven.lifecycle.LifecycleExecutorSubModulesTest.xml",
+          "sha256": "fdb6b82701458894f7e06e3e0a68c4e21426f7226f0865a799d5a490a9f0132b"
+        },
+        {
+          "suite": "org.apache.maven.lifecycle.LifecycleExecutorTest",
+          "tests": 14,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-core/target/surefire-reports/TEST-org.apache.maven.lifecycle.LifecycleExecutorTest.xml",
+          "sha256": "96bff1a6e5143a3609aafd99d1a84d3b138788fd57be0670c2c645a8e1a16622"
+        },
+        {
+          "suite": "org.apache.maven.lifecycle.MavenExecutionPlanTest",
+          "tests": 4,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-core/target/surefire-reports/TEST-org.apache.maven.lifecycle.MavenExecutionPlanTest.xml",
+          "sha256": "766d83f220f921231849ca024b2859e1715920fc1dd97a0705e94b77348423df"
+        },
+        {
+          "suite": "org.apache.maven.lifecycle.PluginVersionsTest",
+          "tests": 1,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-core/target/surefire-reports/TEST-org.apache.maven.lifecycle.PluginVersionsTest.xml",
+          "sha256": "87f1879644087066725b5e53ff243280e36f297f59b29c6396116fc43beb1caf"
+        },
+        {
+          "suite": "org.apache.maven.lifecycle.internal.BuildListCalculatorTest",
+          "tests": 1,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-core/target/surefire-reports/TEST-org.apache.maven.lifecycle.internal.BuildListCalculatorTest.xml",
+          "sha256": "81acc97d17ef777679449eaccdf4d6363fe002215f2de838073f16a0ade120af"
+        },
+        {
+          "suite": "org.apache.maven.lifecycle.internal.ConcurrencyDependencyGraphTest",
+          "tests": 2,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-core/target/surefire-reports/TEST-org.apache.maven.lifecycle.internal.ConcurrencyDependencyGraphTest.xml",
+          "sha256": "7b975e1bbca3d0d1cfd4e4cd063b60ca571dcd5b9ac0c20c96fb83110b8d6866"
+        },
+        {
+          "suite": "org.apache.maven.lifecycle.internal.DefaultLifecycleExecutionPlanCalculatorTest",
+          "tests": 2,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-core/target/surefire-reports/TEST-org.apache.maven.lifecycle.internal.DefaultLifecycleExecutionPlanCalculatorTest.xml",
+          "sha256": "cd2d32d9150c2a58218063c9cff941f6ddc5e85f296e245b603ac8539d494251"
+        },
+        {
+          "suite": "org.apache.maven.lifecycle.internal.LifecycleDependencyResolverTest",
+          "tests": 1,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-core/target/surefire-reports/TEST-org.apache.maven.lifecycle.internal.LifecycleDependencyResolverTest.xml",
+          "sha256": "e306ad3b84f2c16b50f8b04c9fe2e2fd3eb9bcc8fd0dfb1b6974170f7375a110"
+        },
+        {
+          "suite": "org.apache.maven.lifecycle.internal.LifecycleExecutionPlanCalculatorTest",
+          "tests": 1,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-core/target/surefire-reports/TEST-org.apache.maven.lifecycle.internal.LifecycleExecutionPlanCalculatorTest.xml",
+          "sha256": "23a2a09e7f7347ef6245f68eb8b3cfef152cae62d92d77933e8bcd7de2fd438d"
+        },
+        {
+          "suite": "org.apache.maven.lifecycle.internal.LifecycleModuleBuilderTest",
+          "tests": 1,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-core/target/surefire-reports/TEST-org.apache.maven.lifecycle.internal.LifecycleModuleBuilderTest.xml",
+          "sha256": "ae473b3297a857524d9275ed76b7425a653ec1f8ff279dddeac068bb60b615e3"
+        },
+        {
+          "suite": "org.apache.maven.lifecycle.internal.LifecycleTaskSegmentCalculatorImplTest",
+          "tests": 1,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-core/target/surefire-reports/TEST-org.apache.maven.lifecycle.internal.LifecycleTaskSegmentCalculatorImplTest.xml",
+          "sha256": "66bf3f0c2c71f982560ccb345c6f5fe2a56eaede6b9036b5de9e9d403e534874"
+        },
+        {
+          "suite": "org.apache.maven.lifecycle.internal.MojoExecutorForkedExecutionTest",
+          "tests": 2,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-core/target/surefire-reports/TEST-org.apache.maven.lifecycle.internal.MojoExecutorForkedExecutionTest.xml",
+          "sha256": "8dfe5858b4c56844bc2e46d776cc364afa46085eb8a233830d7622cd013edd26"
+        },
+        {
+          "suite": "org.apache.maven.lifecycle.internal.PhaseRecorderTest",
+          "tests": 1,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-core/target/surefire-reports/TEST-org.apache.maven.lifecycle.internal.PhaseRecorderTest.xml",
+          "sha256": "e57deeeeaf4a1e3c11b5ad32e2fe3443e475df3dc6d2234a740b255984ac944e"
+        },
+        {
+          "suite": "org.apache.maven.lifecycle.internal.ProjectBuildListTest",
+          "tests": 1,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-core/target/surefire-reports/TEST-org.apache.maven.lifecycle.internal.ProjectBuildListTest.xml",
+          "sha256": "530a5cdcc5a68a365980d4e277989cd8c87b4671779c8c332e0f8665b6d2fc00"
+        },
+        {
+          "suite": "org.apache.maven.lifecycle.internal.builder.BuilderCommonTest",
+          "tests": 5,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-core/target/surefire-reports/TEST-org.apache.maven.lifecycle.internal.builder.BuilderCommonTest.xml",
+          "sha256": "eec3c8e627fe9f300f039cc2b318d6c34d6efaa0a88d200768c662a6d5e87919"
+        },
+        {
+          "suite": "org.apache.maven.lifecycle.internal.builder.multithreaded.ConcurrencyDependencyGraphTest",
+          "tests": 1,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-core/target/surefire-reports/TEST-org.apache.maven.lifecycle.internal.builder.multithreaded.ConcurrencyDependencyGraphTest.xml",
+          "sha256": "8f304fd2727cd39dba06d1af86acbdb04382828966230204b02d20f2c90d9c82"
+        },
+        {
+          "suite": "org.apache.maven.lifecycle.internal.builder.multithreaded.SmartProjectComparatorTest",
+          "tests": 6,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-core/target/surefire-reports/TEST-org.apache.maven.lifecycle.internal.builder.multithreaded.SmartProjectComparatorTest.xml",
+          "sha256": "982e0e56ea49976b697971f3edcae3e74a6eaf502db00ac792392eaeeeadef3f"
+        },
+        {
+          "suite": "org.apache.maven.lifecycle.internal.concurrent.BuildPlanCreatorTest",
+          "tests": 13,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-core/target/surefire-reports/TEST-org.apache.maven.lifecycle.internal.concurrent.BuildPlanCreatorTest.xml",
+          "sha256": "f9c1f99fadd7a1adb9deb792079f722e3a1d52984b7bbe7cf073000edd3884bf"
+        },
+        {
+          "suite": "org.apache.maven.lifecycle.internal.concurrent.BuildPlanExecutorTest",
+          "tests": 4,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-core/target/surefire-reports/TEST-org.apache.maven.lifecycle.internal.concurrent.BuildPlanExecutorTest.xml",
+          "sha256": "15a58c2a95decac0d5168406e8d60a529b7140d8aea33f96748cb2a6357a15af"
+        },
+        {
+          "suite": "org.apache.maven.lifecycle.internal.concurrent.BuildStepTest",
+          "tests": 3,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-core/target/surefire-reports/TEST-org.apache.maven.lifecycle.internal.concurrent.BuildStepTest.xml",
+          "sha256": "f27de0101c9da866617b91656d5f41f88e2436771840b3d1cc56c61dae38bbb9"
+        },
+        {
+          "suite": "org.apache.maven.lifecycle.internal.stub.ProjectDependencyGraphStubTest",
+          "tests": 4,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-core/target/surefire-reports/TEST-org.apache.maven.lifecycle.internal.stub.ProjectDependencyGraphStubTest.xml",
+          "sha256": "a9c5927b31b7ce9d1e4a989b5625259a32812ba533ccf61278c84df292de902d"
+        },
+        {
+          "suite": "org.apache.maven.lifecycle.mapping.LifecyclePhaseTest",
+          "tests": 2,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-core/target/surefire-reports/TEST-org.apache.maven.lifecycle.mapping.LifecyclePhaseTest.xml",
+          "sha256": "14e0c1a68f79ae1e0233c6d06a0d4eb748463bcf94693c23a699dadaf8ad6eba"
+        },
+        {
+          "suite": "org.apache.maven.model.ModelBuilderTest",
+          "tests": 1,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-core/target/surefire-reports/TEST-org.apache.maven.model.ModelBuilderTest.xml",
+          "sha256": "647ae55bf249986a0d79b6658e05262853da89f3e103d3407175b9936c8ddba7"
+        },
+        {
+          "suite": "org.apache.maven.model.PropertiesTest",
+          "tests": 6,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-core/target/surefire-reports/TEST-org.apache.maven.model.PropertiesTest.xml",
+          "sha256": "01f16ffe7fc8a9137c28d5196f00cad9199348e1b0b8e3339311279cad3000f9"
+        },
+        {
+          "suite": "org.apache.maven.plugin.DefaultRealmCacheDisposeTest",
+          "tests": 2,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-core/target/surefire-reports/TEST-org.apache.maven.plugin.DefaultRealmCacheDisposeTest.xml",
+          "sha256": "9373c2de9d7386a530526e19bcd8d99660e3a58f88929750b69fc6aaf081b157"
+        },
+        {
+          "suite": "org.apache.maven.plugin.PluginManagerTest",
+          "tests": 5,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-core/target/surefire-reports/TEST-org.apache.maven.plugin.PluginManagerTest.xml",
+          "sha256": "6a1c11c8d24e11115a78aa52a71415a1fca66e7d4bd50156086941b496cf10f3"
+        },
+        {
+          "suite": "org.apache.maven.plugin.PluginParameterExceptionTest",
+          "tests": 4,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-core/target/surefire-reports/TEST-org.apache.maven.plugin.PluginParameterExceptionTest.xml",
+          "sha256": "aaa4fd890668938ffb801905893ec33164201046ea1730ed07d8e12b36b57749"
+        },
+        {
+          "suite": "org.apache.maven.plugin.PluginParameterExpressionEvaluatorTest",
+          "tests": 28,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-core/target/surefire-reports/TEST-org.apache.maven.plugin.PluginParameterExpressionEvaluatorTest.xml",
+          "sha256": "09238d14b124f76aa6976595e50ca5f6510ed903e0f77d325f23d3ce1ac239af"
+        },
+        {
+          "suite": "org.apache.maven.plugin.PluginParameterExpressionEvaluatorV4Test",
+          "tests": 20,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-core/target/surefire-reports/TEST-org.apache.maven.plugin.PluginParameterExpressionEvaluatorV4Test.xml",
+          "sha256": "e8aedcb41d7970fdf888ef26179d53dc4cfe39f1eb470eb405fc1848c886694a"
+        },
+        {
+          "suite": "org.apache.maven.plugin.internal.DefaultLegacySupportTest",
+          "tests": 1,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-core/target/surefire-reports/TEST-org.apache.maven.plugin.internal.DefaultLegacySupportTest.xml",
+          "sha256": "2b8d75e3f63435ab4b7212e727b24b217e8bd42535f344d1209fdf9251b7f9e7"
+        },
+        {
+          "suite": "org.apache.maven.plugin.internal.DefaultMavenPluginManagerRealmCacheTest",
+          "tests": 1,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-core/target/surefire-reports/TEST-org.apache.maven.plugin.internal.DefaultMavenPluginManagerRealmCacheTest.xml",
+          "sha256": "731dbf4cd1bb5e5047cbe4217a6a1a767df90d6ac781aed453259d8138230e60"
+        },
+        {
+          "suite": "org.apache.maven.plugin.internal.M3AstCompilerConfigurationTest",
+          "tests": 15,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-core/target/surefire-reports/TEST-org.apache.maven.plugin.internal.M3AstCompilerConfigurationTest.xml",
+          "sha256": "d30873db0528019308f7c6004fe2a6e965e6f8e9bffc13731df21196dc911a89"
+        },
+        {
+          "suite": "org.apache.maven.plugin.internal.M3PluginSessionServicesTest",
+          "tests": 10,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-core/target/surefire-reports/TEST-org.apache.maven.plugin.internal.M3PluginSessionServicesTest.xml",
+          "sha256": "85cbaae31a8f3b3f4a0df10eb5dbabe8366562788be77e55afd53449ec1a4fcb"
+        },
+        {
+          "suite": "org.apache.maven.plugin.internal.MavenPluginJavaPrerequisiteCheckerTest",
+          "tests": 1,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-core/target/surefire-reports/TEST-org.apache.maven.plugin.internal.MavenPluginJavaPrerequisiteCheckerTest.xml",
+          "sha256": "c9076bed06d208a0ea3f035d5b11efbefac193e5672d74a98800bb9b37ec1a3a"
+        },
+        {
+          "suite": "org.apache.maven.plugin.internal.MavenPluginValidatorTest",
+          "tests": 4,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-core/target/surefire-reports/TEST-org.apache.maven.plugin.internal.MavenPluginValidatorTest.xml",
+          "sha256": "878d02438404f769f8867bc8770099ab78bd7ad7068857cbfbba8d8bbde661ef"
+        },
+        {
+          "suite": "org.apache.maven.plugin.internal.PluginDependenciesResolverDefaultMethodsTest",
+          "tests": 3,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-core/target/surefire-reports/TEST-org.apache.maven.plugin.internal.PluginDependenciesResolverDefaultMethodsTest.xml",
+          "sha256": "36f395539fb432e45d214e5992bbdb57fe719f50362472db694bfd39eba2d45e"
+        },
+        {
+          "suite": "org.apache.maven.plugin.internal.PluginDescriptorRequirementsValidatorTest",
+          "tests": 2,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-core/target/surefire-reports/TEST-org.apache.maven.plugin.internal.PluginDescriptorRequirementsValidatorTest.xml",
+          "sha256": "f5fb2088f03fdf35eea5a07cf9873b2ce0844aeab3089ca37dfde761cf554da8"
+        },
+        {
+          "suite": "org.apache.maven.plugin.prefix.internal.DefaultPluginPrefixResolverTest",
+          "tests": 1,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-core/target/surefire-reports/TEST-org.apache.maven.plugin.prefix.internal.DefaultPluginPrefixResolverTest.xml",
+          "sha256": "8b36c0f3654c17e2cba8631527bff6cb299e7c424a3e42b5ad5acdaccb487abf"
+        },
+        {
+          "suite": "org.apache.maven.plugin.version.internal.DefaultPluginVersionResolverTest",
+          "tests": 31,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-core/target/surefire-reports/TEST-org.apache.maven.plugin.version.internal.DefaultPluginVersionResolverTest.xml",
+          "sha256": "e67909e8a49c78ab48aed252348e73c4632b9cef983bcf5ee4de90a71952a683"
+        },
+        {
+          "suite": "org.apache.maven.project.DefaultMavenProjectBuilderTest",
+          "tests": 35,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 1,
+          "report": "impl/maven-core/target/surefire-reports/TEST-org.apache.maven.project.DefaultMavenProjectBuilderTest.xml",
+          "sha256": "2d02e14caa41f1eb98f9f665ee9ea594278087b67cdb44bce49075eb5dd02d57"
+        },
+        {
+          "suite": "org.apache.maven.project.DefaultProjectBuilderTest",
+          "tests": 3,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-core/target/surefire-reports/TEST-org.apache.maven.project.DefaultProjectBuilderTest.xml",
+          "sha256": "e7d560e1bf503b0fdb735ebb2d4f72496079a692af379181a635d8aec14ebf4f"
+        },
+        {
+          "suite": "org.apache.maven.project.DefaultProjectRealmCacheTest",
+          "tests": 2,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-core/target/surefire-reports/TEST-org.apache.maven.project.DefaultProjectRealmCacheTest.xml",
+          "sha256": "d9352482706c2bf48eafbe5ee7e73092938c25172ee5511818cdb9d57e9a0ceb"
+        },
+        {
+          "suite": "org.apache.maven.project.ExtensionDescriptorBuilderTest",
+          "tests": 3,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-core/target/surefire-reports/TEST-org.apache.maven.project.ExtensionDescriptorBuilderTest.xml",
+          "sha256": "1fbe5dd47e0cbdad5de45953724cc87b3565547210e9175c3b2cebba965769d3"
+        },
+        {
+          "suite": "org.apache.maven.project.GraphTest",
+          "tests": 3,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-core/target/surefire-reports/TEST-org.apache.maven.project.GraphTest.xml",
+          "sha256": "46d49ae5ef068e4bfe6a3c99d69e7637d946148b54a9930f75e6845b099742ae"
+        },
+        {
+          "suite": "org.apache.maven.project.MavenProjectGetArtifactsTest",
+          "tests": 1,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-core/target/surefire-reports/TEST-org.apache.maven.project.MavenProjectGetArtifactsTest.xml",
+          "sha256": "bba4dad39567c3847de3e808f0b38d5617a515ff83763d75aa49a43f63b40b64"
+        },
+        {
+          "suite": "org.apache.maven.project.MavenProjectTest",
+          "tests": 13,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-core/target/surefire-reports/TEST-org.apache.maven.project.MavenProjectTest.xml",
+          "sha256": "921446a7f5d4439d5f8d28b74c3b14c9438a0be7759f9c029029c5496f5ccc6e"
+        },
+        {
+          "suite": "org.apache.maven.project.PluginConnectionSimpleTest",
+          "tests": 2,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-core/target/surefire-reports/TEST-org.apache.maven.project.PluginConnectionSimpleTest.xml",
+          "sha256": "b1df71dca8555c26cc5a9e6aedea53b2825cdd0514bfa6ff22ad2856d3079921"
+        },
+        {
+          "suite": "org.apache.maven.project.PomConstructionTest",
+          "tests": 125,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-core/target/surefire-reports/TEST-org.apache.maven.project.PomConstructionTest.xml",
+          "sha256": "02ac81ecee16a074d671620496955dfa13560b8d39e67a1ea77beb0f8f71a5e3"
+        },
+        {
+          "suite": "org.apache.maven.project.ProjectBuilderTest",
+          "tests": 32,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-core/target/surefire-reports/TEST-org.apache.maven.project.ProjectBuilderTest.xml",
+          "sha256": "97e983e5dbf3d67a7c0de8b8dd12998be20f1ebb91ea344489d5359048beee99"
+        },
+        {
+          "suite": "org.apache.maven.project.ProjectModelResolverTest",
+          "tests": 12,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-core/target/surefire-reports/TEST-org.apache.maven.project.ProjectModelResolverTest.xml",
+          "sha256": "53ea96c06c13b7f1905ebd199a7677f6727241c7c2977fa146bb942b733efc13"
+        },
+        {
+          "suite": "org.apache.maven.project.ProjectSorterDependencyManagementTest",
+          "tests": 1,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-core/target/surefire-reports/TEST-org.apache.maven.project.ProjectSorterDependencyManagementTest.xml",
+          "sha256": "81940d9c180942993344259f78babef50cfd2c47c44a62a5438c0b320e1e6a06"
+        },
+        {
+          "suite": "org.apache.maven.project.ProjectSorterTest",
+          "tests": 12,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-core/target/surefire-reports/TEST-org.apache.maven.project.ProjectSorterTest.xml",
+          "sha256": "bfc632f4fe71769bff11d2ec32ca2405cac2ea2bc13caf141f48f987ce50e04d"
+        },
+        {
+          "suite": "org.apache.maven.project.RepositoryLeakageTest",
+          "tests": 1,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-core/target/surefire-reports/TEST-org.apache.maven.project.RepositoryLeakageTest.xml",
+          "sha256": "33e293d74c043b0619b0eada72db11eb67e6d99d894bba45cfaa66a7c50e6a06"
+        },
+        {
+          "suite": "org.apache.maven.project.ResourceIncludeTest",
+          "tests": 11,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-core/target/surefire-reports/TEST-org.apache.maven.project.ResourceIncludeTest.xml",
+          "sha256": "60a6f4f84fa613a92c427d8aa2c31348b0a2159ce1e37de39367b975af72b696"
+        },
+        {
+          "suite": "org.apache.maven.project.WorkspaceParentProjectBuilderTest",
+          "tests": 2,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-core/target/surefire-reports/TEST-org.apache.maven.project.WorkspaceParentProjectBuilderTest.xml",
+          "sha256": "df68f8bad810b645123ff118185adb2e4dfa3e9afe150a25c7a1a68f5e5a0747"
+        },
+        {
+          "suite": "org.apache.maven.project.artifact.AttachedArtifactTest",
+          "tests": 2,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-core/target/surefire-reports/TEST-org.apache.maven.project.artifact.AttachedArtifactTest.xml",
+          "sha256": "8e1de100c082a3c3470d08d3951ac80d9c85a3aac91bb42e41fb28d4ece0aa7f"
+        },
+        {
+          "suite": "org.apache.maven.project.artifact.DefaultProjectArtifactsCacheTest",
+          "tests": 1,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-core/target/surefire-reports/TEST-org.apache.maven.project.artifact.DefaultProjectArtifactsCacheTest.xml",
+          "sha256": "b37e76d1b0398dc440029d8c9f900026f2de0164e0cb672c703aa06083542f29"
+        },
+        {
+          "suite": "org.apache.maven.project.canonical.CanonicalProjectBuilderTest",
+          "tests": 1,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-core/target/surefire-reports/TEST-org.apache.maven.project.canonical.CanonicalProjectBuilderTest.xml",
+          "sha256": "55d7ea578c4fed549aee44100a09dca1957cff5a909abb4945d426f8438acb8a"
+        },
+        {
+          "suite": "org.apache.maven.rtinfo.internal.DefaultRuntimeInformationTest",
+          "tests": 2,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-core/target/surefire-reports/TEST-org.apache.maven.rtinfo.internal.DefaultRuntimeInformationTest.xml",
+          "sha256": "d1dab8eaec105e1ecdd63579ed596cfd98d7e0103f1b0637cb1a0dc59dbd71b5"
+        },
+        {
+          "suite": "org.apache.maven.session.scope.SessionScopeProxyTest",
+          "tests": 1,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-core/target/surefire-reports/TEST-org.apache.maven.session.scope.SessionScopeProxyTest.xml",
+          "sha256": "6793435c05c187df53347e7c0d4e3940f1c779dd9eb8f81ad0c91442f813d5fa"
+        },
+        {
+          "suite": "org.apache.maven.settings.PomConstructionWithSettingsTest",
+          "tests": 3,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-core/target/surefire-reports/TEST-org.apache.maven.settings.PomConstructionWithSettingsTest.xml",
+          "sha256": "705ad7012d0d402ad465ed2dbcd44105f318c1fdd6f77425583cfebd42817417"
+        },
+        {
+          "suite": "org.apache.maven.settings.SettingsUtilsTest",
+          "tests": 2,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "report": "impl/maven-core/target/surefire-reports/TEST-org.apache.maven.settings.SettingsUtilsTest.xml",
+          "sha256": "b3cb42f08ad4157846334e77b392c12125eba01241ae9b95c0d49013653b97f2"
+        }
+      ],
+      "totals": {
+        "tests": 773,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 1
+      }
+    }
+  ],
+  "scope": "Original -pl impl/maven-core -am verify, including original compatibility and check gates. This is not full upstream Maven CI."
+}

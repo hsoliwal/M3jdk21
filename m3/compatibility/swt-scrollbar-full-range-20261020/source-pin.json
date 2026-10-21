@@ -1,0 +1,18 @@
+{
+  "schema": 1,
+  "purpose": "EXTERNAL_RECIPE_TOOL_AND_CROSS_TARGET_PROOF_NO_RUNTIME_CHANGE",
+  "canonicalRepository": "hsoliwal/com.synexia",
+  "canonicalCommit": "9372a2d57f1a05394172a7bd85dda3f0d6d83983",
+  "canonicalPr": 12544,
+  "publicProofRepository": "hsoliwal/eclipse.platform.swt",
+  "publicProofCommit": "30814fe4c1662bdc699b8f0ec25681c6945701a3",
+  "publicPr": 236,
+  "engineBlob": "135a28d0cec9ea988607cdef6caa1f0fe5115d75",
+  "scopeBlob": "9174dd681f0d75b5086fc19904a71524a03972dc",
+  "enumBlob": "274360816db1e44a2f1796a3bc5cdeff6b0ce6db",
+  "targetPath": "bundles/org.eclipse.swt/Eclipse SWT/common/org/eclipse/swt/widgets/ViewportScrollBarGeometry.java",
+  "preimage": "0b8ede7af0551b7afaa270b9723bb405fad315f4f0ddb6e8dfc4db3267e30b44",
+  "postimage": "df4f8498b1f633f2ffeae310f761ecaa0ea686e392557b8cfe2c684864a7f9b4",
+  "M3RuntimeStatus": "UNCHANGED_NOT_QUALIFIED_BY_THIS_PROOF",
+  "nativeWidgetStatus": "NOT_RUN"
+}

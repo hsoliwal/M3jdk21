@@ -1,0 +1,9 @@
+M3 collections: M3ArrayListMultimap
+Copyright 2026 Hitesh Soliwal and contributors
+
+This product includes software developed by Hitesh Soliwal and contributors,
+licensed under the Apache License, Version 2.0.
+
+It implements the public API contract of com.google.common.collect.ArrayListMultimap from
+Guava 33.4.8-jre (Copyright (C) The Guava Authors, Apache License, Version 2.0) and links the
+Guava API interfaces ListMultimap, Multimap and Multiset. No Guava implementation code is included.

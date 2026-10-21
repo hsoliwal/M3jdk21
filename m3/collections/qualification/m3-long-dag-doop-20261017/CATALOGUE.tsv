@@ -1,0 +1,28 @@
+family	category	pattern	role	implementation	license	donor_reference	decision
+GOF_CREATIONAL	Abstract Factory	Plan source family	Source constructors	M3LongDag.from/fromFiltered	Apache-2.0	JDK collections	PARTIAL
+GOF_CREATIONAL	Builder	Fluent immutable DAG builder	filter/map/concat	M3LongDag	Apache-2.0	JDK Stream	SELECTED
+GOF_CREATIONAL	Factory Method	Producer selection	Source factory methods	M3LongDag	Apache-2.0	M3LongCollection	SELECTED
+GOF_CREATIONAL	Prototype	Plan copy semantics	Immutable DAG branching, no payload clone	M3LongDag	Apache-2.0	JDK Stream	PARTIAL
+GOF_CREATIONAL	Singleton	Shared instance control	No global mutable singleton required	NONE	REFERENCE_ONLY	GoF catalogue	NOT_APPLICABLE
+GOF_STRUCTURAL	Adapter	JDK stream bridge	M3LongCollection.longStream	M3LongDag.stream	Apache-2.0	JDK21 LongStream	SELECTED
+GOF_STRUCTURAL	Bridge	Storage/execution separation	Parent-backed source versus operation nodes	M3LongDag	Apache-2.0	Synexia DOOP	SELECTED
+GOF_STRUCTURAL	Composite	DAG fan-in	concat plus shared-node count	M3LongDag	Apache-2.0	JDK Stream.concat	SELECTED
+GOF_STRUCTURAL	Decorator	Live filtered views	Existing M3LongFilteredView	M3LongSortedViews	Apache-2.0	Eclipse Collections	REUSE
+GOF_STRUCTURAL	Facade	Small public surface	M3LongDag fluent facade	M3LongDag	Apache-2.0	JDK Stream	SELECTED
+GOF_STRUCTURAL	Flyweight	No per-element façade	Parent-owned primitives and shared nodes	M3LongCollection	Apache-2.0	M3 DOOP	SELECTED
+GOF_STRUCTURAL	Proxy	Deferred terminal evaluation	VirtualAccumulator/Collector	M3VirtualCollector	Apache-2.0	GoF	SELECTED
+GOF_BEHAVIORAL	Chain of Responsibility	Ordered selection	filter nodes evaluate in encounter order	M3LongDag	Apache-2.0	JDK LongPredicate	PARTIAL
+GOF_BEHAVIORAL	Command	Deferred terminal	virtualCollector.evaluate	M3VirtualCollector	Apache-2.0	JDK Stream	SELECTED
+GOF_BEHAVIORAL	Interpreter	Node evaluator	Iterative interpreter, not general expression language	M3LongDag	Apache-2.0	JDK pipeline	PARTIAL
+GOF_BEHAVIORAL	Iterator	Lazy primitive cursor	Existing M3LongIterator	M3LongFilteredView	Apache-2.0	JDK PrimitiveIterator	REUSE
+GOF_BEHAVIORAL	Mediator	Collector fan-in	tee single traversal	M3VirtualCollector	Apache-2.0	JDK Collectors.teeing	SELECTED
+GOF_BEHAVIORAL	Memento	Restorable snapshot	Explicit bounded sort only; not durable replay	NONE	REFERENCE_ONLY	GoF	NOT_IMPLEMENTED
+GOF_BEHAVIORAL	Observer	Change propagation	No observable-list lifecycle here	NONE	REFERENCE_ONLY	JDK Flow	NOT_IMPLEMENTED
+GOF_BEHAVIORAL	State	Per-traversal accumulation	Client-owned state transitions	M3VirtualAccumulator	Apache-2.0	JDK reduction	SELECTED
+GOF_BEHAVIORAL	Strategy	Client predicates/mappers	LongPredicate/LongUnaryOperator	M3LongDag	Apache-2.0	JDK Function	SELECTED
+GOF_BEHAVIORAL	Template Method	Terminal lifecycle	Evaluation opens and closes input	M3VirtualCollector	Apache-2.0	JDK AutoCloseable	PARTIAL
+GOF_BEHAVIORAL	Visitor	Read-only plan traversal	Iterative nodeCount; full external visitor not implemented	M3LongDag	Apache-2.0	GoF	PARTIAL
+M3_EXTENSION	DOOP	Parent-owned deferred objects	Source references not payload clones	M3LongDag	Apache-2.0	Synexia M3	SELECTED
+M3_EXTENSION	VirtualAccumulator	Deferred primitive reduction	One seed per evaluation	M3VirtualAccumulator	Apache-2.0	Synexia PR11795	SELECTED
+M3_EXTENSION	VirtualCollector	Deferred result projection and fan-in	Collector finish/mapResult/tee	M3VirtualCollector	Apache-2.0	Synexia PR11795	SELECTED
+M3_EXTENSION	BarrierReplay	Marker/reprocessing contract	Separate stream operator PR11776; not implemented here	NONE	REFERENCE_ONLY	Synexia PR11776	NOT_IMPLEMENTED

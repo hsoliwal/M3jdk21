@@ -1,0 +1,7 @@
+library	public_name_authority	M3_companion	this_pass
+JDK	java.util and primitive Java array types	com.m3.collections.M3IndexMaskWindow	Existing independent SDK owner; no Java SE rename
+Guava	com.google.common.collect	M3LibraryCollections Guava factories	Existing adapter inventory; unchanged and not newly qualified
+Eclipse Collections	org.eclipse.collections	M3LibraryCollections Eclipse factories	Existing adapter inventory; unchanged and not newly qualified
+Spring Framework	org.springframework.util	M3SpringMultiValueMap and Spring factories	Existing adapter inventory; unchanged and not newly qualified
+Apache Commons Collections	org.apache.commons.collections4	No new companion admitted in this pass	Reference-only; no renamed donor or blanket SDK coverage claim
+Synexia	Private convergence and canonical recipe ownership	M3HashPinnedJavaSnapshotRecipe and M3HashPinnedTextSnapshotRecipe	Qualified authoring copy; no target runtime dependency

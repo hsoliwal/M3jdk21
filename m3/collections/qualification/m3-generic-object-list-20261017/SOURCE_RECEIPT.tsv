@@ -1,0 +1,7 @@
+role	relative_source	template_sha256	license	status
+GENERATED_GENERIC_LIST	m3/collections/src/main/java/com/m3/collections/M3ArrayList.java	ae1092d66bb27e18c0f435d9dc148bd0f46fbc33f9731d9e2d2194142ccc3d32	Apache-2.0	JAVA21_SELECTED_PASS
+GENERATED_INDEX_SNAPSHOT	m3/collections/src/main/java/com/m3/collections/M3IndexedListSnapshot.java	0f0939615884c4d8bbfe2a3c9bbc5072d49faa6c20636c2eadac3104269aefaa	Apache-2.0	JAVA21_SELECTED_PASS
+GENERATED_FACTORY	m3/collections/src/main/java/com/m3/collections/M3GenericCollections.java	7f44e22663f67a7e69108fd097807c36bcf0e62a421481a16dc0fbfd28435f6a	Apache-2.0	JAVA21_SELECTED_PASS
+GENERATED_ORACLE	m3/collections/src/test/java/com/m3/collections/M3GenericArrayListSelfTest.java	3ef322ba4992a0fd4c60e5e96c34f99c68137f5879e809e46d773b472f652035	Apache-2.0	JAVA21_SELECTED_PASS
+GENERATED_JUNIT_ADAPTER	m3/collections/src/test/java/com/m3/collections/M3GenericArrayListTest.java	b3c599bbb1e1300517ee269c9024f07a591f5cc3178abbb665c555bb5a96bf02	Apache-2.0	OWNING_MAVEN_PENDING
+REUSED_NATIVE	m3/collections/src/main/native/collections/m3_index_mask_compactor.c	EXISTING_M3_GIT_BLOB	Apache-2.0	EXACT_OWNER_UNCHANGED

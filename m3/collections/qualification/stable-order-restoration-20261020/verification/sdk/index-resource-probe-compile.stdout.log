@@ -1,0 +1,26 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ----< com.synexia.verification:m3-wrapper-convergence-recipe-proof >----
+[INFO] Building m3-wrapper-convergence-recipe-proof 1
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ m3-wrapper-convergence-recipe-proof ---
+[INFO] Copying 3 resources from passes/index-resource-probe/resources to target/index-resource-probe/classes
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ m3-wrapper-convergence-recipe-proof ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 4 source files with javac [debug release 21] to target/index-resource-probe/classes
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ m3-wrapper-convergence-recipe-proof ---
+[INFO] skip non existing resourceDirectory /workspace/scratch/e736b6177c79/m3fs-vfs-20261020/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-refinement-20261020/recipe-host/src/test/resources
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ m3-wrapper-convergence-recipe-proof ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 1 source file with javac [debug release 21] to target/index-resource-probe/test-classes
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  1.972 s
+[INFO] Finished at: 2026-10-20T12:25:34+01:00
+[INFO] ------------------------------------------------------------------------

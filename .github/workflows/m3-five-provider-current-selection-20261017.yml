@@ -1,0 +1,40 @@
+name: M3 current five-provider indexed selection
+on:
+  push:
+    branches: ['m3/five-provider-current-selection-receiver-20261017']
+  pull_request:
+    paths:
+      - 'm3/collections/interop/src/main/java/com/m3/collections/interop/M3FiveProviderFlagSelection.java'
+      - 'm3/collections/interop/src/test/java/com/m3/collections/interop/M3FiveProviderFlagSelectionTest.java'
+      - '.github/workflows/m3-five-provider-current-selection-20261017.yml'
+jobs:
+  real-sdk-and-native:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 50
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Verify canonical sources and retained direct SDK
+        run: |
+          echo '5becc5f604dc0309fe000c5388e76488f11f22e3f725ae01f073f2c3e85b73c0  m3/collections/interop/src/main/java/com/m3/collections/interop/M3FiveProviderFlagSelection.java' | sha256sum -c -
+          echo '511c42a8f8cf2119770931307ef4c29f35e0fdbbc1ba438e170aa151905ca76e  m3/collections/interop/src/test/java/com/m3/collections/interop/M3FiveProviderFlagSelectionTest.java' | sha256sum -c -
+          test "$(git hash-object m3/collections/interop/src/main/java/com/m3/collections/interop/M3FiveProviderDirectSdk.java)" = c8cb510049ab9618f7335ee789ea4ca531fc4b3c
+      - name: Original M3 core source/ABI admission
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 m3/collections/verify_donation.py
+          JAR="$GITHUB_WORKSPACE/m3/collections/target/donation-verification/m3-collections.jar"
+          test "$(jdeps --print-module-deps "$JAR")" = java.base
+          (cd "$RUNNER_TEMP" && mvn -B -ntp org.apache.maven.plugins:maven-install-plugin:3.1.3:install-file -Dfile="$JAR" -DgroupId=com.m3 -DartifactId=m3-collections -Dversion=0.1.0-SNAPSHOT -Dpackaging=jar -DgeneratePom=true)
+      - name: All real five-library JUnit
+        run: mvn -B -ntp -f m3/collections/interop/pom.xml verify
+      - name: Existing C17 JNI and mandatory native parity
+        shell: bash
+        run: |
+          set -euo pipefail
+          cc -std=c17 -O2 -Wall -Wextra -Werror -fPIC -shared -I"$JAVA_HOME/include" -I"$JAVA_HOME/include/linux" m3/collections/src/main/native/collections/m3_index_path_masks.c -o "$RUNNER_TEMP/libm3_collections_pathmask.so"
+          JAVA_TOOL_OPTIONS="-Xcheck:jni -Djava.library.path=$RUNNER_TEMP" mvn -B -ntp -f m3/collections/interop/pom.xml -Dm3.interop.requireNative=true -Dtest=M3FiveProviderFlagSelectionTest test

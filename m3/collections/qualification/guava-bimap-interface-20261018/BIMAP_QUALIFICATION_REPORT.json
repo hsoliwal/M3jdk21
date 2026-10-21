@@ -1,0 +1,155 @@
+{
+  "schema": "M3_EXISTING_BIMAP_INTERFACE_AND_CATALOGUE_QUALIFICATION_V1",
+  "status": "QUALIFIED_SOURCE_AND_REGISTRATION_READY_FOR_DRAFT_PUBLICATION",
+  "full_superset_complete": false,
+  "family": "com.google.common.collect.BiMap",
+  "owner": "com.m3.collections.interop.M3BiMap",
+  "companion": "com.m3.collections.interop.M3BiMaps",
+  "new_owner_created": false,
+  "existing_production_owner_modified": false,
+  "source_commit": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
+  "source_pins": [
+    {
+      "path": "S:\\codex-work\\guava-array-multimap-one-file-20261018\\full-guava\\bimap-next\\src\\main\\java\\com\\m3\\collections\\interop\\M3BiMap.java",
+      "bundle_relative_path": "src/main/java/com/m3/collections/interop/M3BiMap.java",
+      "bytes": 10762,
+      "git_blob": "6a705e1d9c33e7b0d6f0061e8154a0484ff8661d",
+      "sha256": "80aa788db958a34779f02559323e3d77268791eb82ababfacc42538217c6e4bc",
+      "repository": "hsoliwal/M3jdk21",
+      "commit": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
+      "original_path": "m3/collections/interop/src/main/java/com/m3/collections/interop/M3BiMap.java",
+      "license": "Apache-2.0",
+      "source_modified": false
+    },
+    {
+      "path": "S:\\codex-work\\guava-array-multimap-one-file-20261018\\full-guava\\bimap-next\\src\\main\\java\\com\\m3\\collections\\interop\\M3BiMaps.java",
+      "bundle_relative_path": "src/main/java/com/m3/collections/interop/M3BiMaps.java",
+      "bytes": 2764,
+      "git_blob": "0d7691d6a5abb3eac929b7334640171e7bac4ee0",
+      "sha256": "ae16d7395c3325230bebe7d3f58765669c639f091fd1e06c4b069031affd5db8",
+      "repository": "hsoliwal/M3jdk21",
+      "commit": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
+      "original_path": "m3/collections/interop/src/main/java/com/m3/collections/interop/M3BiMaps.java",
+      "license": "Apache-2.0",
+      "source_modified": false
+    },
+    {
+      "path": "S:\\codex-work\\guava-array-multimap-one-file-20261018\\full-guava\\bimap-next\\src\\test\\java\\com\\m3\\collections\\interop\\M3BiMapTest.java",
+      "bundle_relative_path": "src/test/java/com/m3/collections/interop/M3BiMapTest.java",
+      "bytes": 17675,
+      "git_blob": "49ca9ae0149c9981bc53ed6f0619410eb1d24712",
+      "sha256": "8b5171a387ba6f33a652f9a7dfd9f29e4bd40c9b87527d1c85b1323f775dba4a",
+      "repository": "hsoliwal/M3jdk21",
+      "commit": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
+      "original_path": "m3/collections/interop/src/test/java/com/m3/collections/interop/M3BiMapTest.java",
+      "license": "Apache-2.0",
+      "source_modified": false
+    }
+  ],
+  "contract": {
+    "interface": "Guava33.4.8 BiMap",
+    "unchanged_existing_tests": 22,
+    "seeded_differential_operations": 48000,
+    "unchanged_upstream_generated_cases": 2539,
+    "generated_cases_succeeded": 2539,
+    "generated_cases_failed": 0,
+    "feature_descriptor_sha256": "a471faae3d6bb1b71e764226510c566b416bcb0df6c66736088b53c5d900a18c",
+    "all_runtime_code_sources_verified": true,
+    "no_suppressed_tests": true,
+    "boundary": "BiMap interface and declared supported Map features; no concrete HashBiMap identity/serialization claim. Staged replaceAll failure behavior is a documented existing stronger guarantee."
+  },
+  "registration": {
+    "rows": 107,
+    "other_rows_byte_identical": 106,
+    "data_changed_fields": [
+      "existing_m3_owner",
+      "disposition"
+    ],
+    "after_row": [
+      "com.google.common.collect.BiMap",
+      "GUAVA",
+      "com.m3.collections.interop.M3BiMap",
+      "M3BiIndexMap",
+      "OPTIONAL_ADAPTER",
+      "bijective-inverse"
+    ],
+    "java_changed_lines": 2,
+    "generated_java_sha256": "70f8198ead492ac32901d5213aa966339bb79ca0aeafd5867868982dc85bde3e",
+    "catalogue_sha256": "b960683b56e85757933f3fe4c216afaea85d29f6e73a9ee96e48887b915e6954",
+    "generator": "Original M3CollectionSdkNamesRecipe private parse/render helpers reused; original generator/template/resource hashes preserved.",
+    "actual_recipe_test_methods": 5,
+    "actual_recipe_tests_failed": 0,
+    "recipe_kinds": [
+      "existing M3HashPinnedJavaSnapshotRecipe exact Java FILE successor",
+      "standard anchored full-preimage FindAndReplace exact TSV FILE"
+    ],
+    "actual_emitted_files": [
+      "S:\\codex-work\\guava-array-multimap-one-file-20261018\\full-guava\\build\\bimap-catalogue-qualified\\m3\\collections\\src\\main\\java\\com\\m3\\collections\\M3CollectionSdkCatalog.java",
+      "S:\\codex-work\\guava-array-multimap-one-file-20261018\\full-guava\\build\\bimap-catalogue-qualified\\m3\\collections\\qualification\\m3-sdk-families-20261017\\FAMILY_CATALOG.tsv"
+    ],
+    "fixed_points": "PASS BOTH",
+    "compiled_lookup_rows_checked": 107,
+    "original_array_multimap_row_unchanged": true,
+    "hypothetical_M3BiIndexMap_alias_installed": false
+  },
+  "core_artifact": {
+    "path": "S:\\codex-work\\guava-array-multimap-one-file-20261018\\full-guava\\product-work\\m3-jre21\\target\\guava-33.4.8-m3-java21-qualified.jar",
+    "sha256": "84050590fa79bd8e6c40bb30cdfa33dad96ac96c0f77645f5723088863e066eb",
+    "m3_receiver_dependency": "https://github.com/hsoliwal/M3jdk21/pull/1298",
+    "canonical_recipe_dependency": "https://github.com/hsoliwal/com.synexia/pull/12305"
+  },
+  "executed_proofs": [
+    {
+      "name": "bimap-owner-compile-1",
+      "receipt_sha256": "9ceddd86951a2c12c43b2b5cf37b6439c6c3fde3957c1b1df67e4d38790d2308",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "exit": 0
+    },
+    {
+      "name": "bimap-owner-tests-1",
+      "receipt_sha256": "29c8c792bc0b5da74bf74e9523ac05e3da002dc9584659efb62ae4eacb1dedfa",
+      "log_sha256": "43a688194909d09ffc3bec5d7a48fbc0446803f6271a17e1733c96dcd787eac4",
+      "exit": 0
+    },
+    {
+      "name": "bimap-upstream-compile-1",
+      "receipt_sha256": "5557e7ab7ebb131a5b0c1f753191b3ed905dbe2066c6aa3884dddb91ae77683f",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "exit": 0
+    },
+    {
+      "name": "bimap-upstream-tests-2",
+      "receipt_sha256": "baaa9002ce000d0a8ea1d7bf3ccccfc1d5cec71c31ba21c44dbcc957d04dfc8d",
+      "log_sha256": "d768969673fff22994edc27f64a1509015eecceb0b4b303c339916c5bd84f96b",
+      "exit": 0
+    },
+    {
+      "name": "bimap-catalogue-recipes-1",
+      "receipt_sha256": "2e267b4996011550313434b15dc4d3d4905a439a2434dccd868695134971e4ad",
+      "log_sha256": "5a8c12eeed85e56685f0c3c6c7ded446bc7b288b00a6c296f189f30d64bea6a2",
+      "exit": 0
+    },
+    {
+      "name": "bimap-catalogue-compile-1",
+      "receipt_sha256": "dfdf938abd2b87c24bcbb48437f2e32826c1fb52cdb2a733efc08d5c66fb8871",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "exit": 0
+    },
+    {
+      "name": "bimap-catalogue-lookup-1",
+      "receipt_sha256": "acc27dfb42d45e6642433c8727aeaa0254a7e782e8e1e488af09c8a847b57ce4",
+      "log_sha256": "937495b9900fa22c9dacd20b07b274314d1f98bba5e887d66459d5fedf1c6ea9",
+      "exit": 0
+    }
+  ],
+  "retained_observer_failure": "bimap-upstream-tests-1 expected nonexistent label despite actual exit0/2539success; v2 observer fixes label and freezes count without changing production/tests/features.",
+  "review": "Independent read-only review found no concrete BiMap interface defect. Structured autoreview remains unavailable under required no-tools mode; drafts/hostedCI pending.",
+  "next_family_intake": "next-class-to-instance/NEXT_FAMILY_INTAKE.json",
+  "storage": {
+    "regular_task_bytes": 59239311,
+    "cap_bytes": 67108864,
+    "K_free_bytes": 2629844992,
+    "S_free_bytes": 25628250112,
+    "independent_protection": "ACTIVE"
+  }
+}

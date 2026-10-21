@@ -958,6 +958,8 @@ int java_lang_M3String::_atom_storageWidth_offset;
 int java_lang_M3String::_atom_bigEndian_offset;
 int java_lang_M3String::_tuple_left_offset;
 int java_lang_M3String::_tuple_right_offset;
+int java_lang_M3String::_immediate_words_offset;
+int java_lang_M3String::_immediate_slot_offset;
 
 #define M3_STRING_VALUE_FIELDS_DO(macro) \
   macro(_owner_offset, v, "owner", m3_string_owner_signature, false); \
@@ -979,6 +981,10 @@ int java_lang_M3String::_tuple_right_offset;
   macro(_tuple_left_offset, t, "left", m3_string_signature, false); \
   macro(_tuple_right_offset, t, "right", m3_string_signature, false);
 
+#define M3_STRING_IMMEDIATE_FIELDS_DO(macro) \
+  macro(_immediate_words_offset, i, "words", long_array_signature, false); \
+  macro(_immediate_slot_offset, i, "slot", int_signature, false);
+
 #define M3_STRING_FACTS_FIELDS_DO(macro) \
   macro(_facts_utf8Length_offset, f, "utf8Length", int_signature, false); \
   macro(_facts_modifiedUtf8Length_offset, f, "modifiedUtf8Length", int_signature, false);
@@ -988,11 +994,13 @@ void java_lang_M3String::compute_offsets() {
   InstanceKlass* o = vmClasses::M3StringOwner_klass();
   InstanceKlass* a = vmClasses::M3StringAtom_klass();
   InstanceKlass* t = vmClasses::M3StringTuple_klass();
+  InstanceKlass* i = vmClasses::M3StringImmediate_klass();
   InstanceKlass* f = vmClasses::M3StringFacts_klass();
   M3_STRING_VALUE_FIELDS_DO(FIELD_COMPUTE_OFFSET);
   M3_STRING_OWNER_FIELDS_DO(FIELD_COMPUTE_OFFSET);
   M3_STRING_ATOM_FIELDS_DO(FIELD_COMPUTE_OFFSET);
   M3_STRING_TUPLE_FIELDS_DO(FIELD_COMPUTE_OFFSET);
+  M3_STRING_IMMEDIATE_FIELDS_DO(FIELD_COMPUTE_OFFSET);
   M3_STRING_FACTS_FIELDS_DO(FIELD_COMPUTE_OFFSET);
 }
 
@@ -1002,6 +1010,7 @@ void java_lang_M3String::serialize_offsets(SerializeClosure* f) {
   M3_STRING_OWNER_FIELDS_DO(FIELD_SERIALIZE_OFFSET);
   M3_STRING_ATOM_FIELDS_DO(FIELD_SERIALIZE_OFFSET);
   M3_STRING_TUPLE_FIELDS_DO(FIELD_SERIALIZE_OFFSET);
+  M3_STRING_IMMEDIATE_FIELDS_DO(FIELD_SERIALIZE_OFFSET);
   M3_STRING_FACTS_FIELDS_DO(FIELD_SERIALIZE_OFFSET);
 }
 #endif
@@ -1041,8 +1050,19 @@ void java_lang_M3String::copy_owner_chars(
     return;
   }
 
+  if (o->klass() == vmClasses::M3StringImmediate_klass()) {
+    typeArrayOop words = (typeArrayOop)o->obj_field(_immediate_words_offset);
+    const int slot = o->int_field(_immediate_slot_offset);
+    assert(words != nullptr && slot >= 0 && slot < words->length(), "M3 immediate slot");
+    const jlong packed = words->long_at(slot);
+    for (int index = 0; index < len; index++) {
+      destination[index] = immediate_char_at(packed, start + index);
+    }
+    return;
+  }
+
   assert(o->klass() == vmClasses::M3StringTuple_klass(),
-         "M3 owner must be atom or tuple");
+         "M3 owner must be atom, immediate or tuple");
   oop left = o->obj_field(_tuple_left_offset);
   oop right = o->obj_field(_tuple_right_offset);
   const int left_length = length(left);

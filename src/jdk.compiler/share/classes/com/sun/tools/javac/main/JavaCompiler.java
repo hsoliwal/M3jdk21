@@ -647,6 +647,8 @@ public class JavaCompiler {
                 keepComments = true;
                 genEndPos = true;
             }
+            // M3 is opt-in and binds source facts to this actual parser input.
+            if (!silent) content = com.sun.tools.javac.m3.M3ASTPC.retainSource(context, filename, content);
             Parser parser = parserFactory.newParser(content, keepComments(), genEndPos,
                                 lineDebugInfo, filename.isNameCompatible("module-info", Kind.SOURCE));
             tree = parser.parseCompilationUnit();

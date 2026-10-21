@@ -1,4 +1,6 @@
 // SPDX-License-Identifier: Apache-2.0
+// Copyright 2026 Hitesh Soliwal and contributors.
+// Modified: isolate page-boundary masks from interior word counting.
 package jdk.internal.mindex;
 
 /**
@@ -92,12 +94,18 @@ public final class M3BitLane28 {
     /** Returns the first set slot at or after from, or -1; MAX_SLOTS is a valid end. */
     public int nextSetBit(int from) {
         M3Address28.checkRange(from, M3Address28.MAX_SLOTS);
+        if (cardinality == 0) return -1;
         while (from < M3Address28.MAX_SLOTS) {
             long[][] region = regions[from >>> 20];
-            if (region == null) { from = ((from >>> 20) + 1) << 20; continue; }
+            // Reuse exact prepared counts; navigation must not prepare or allocate metadata.
+            if (region == null || (regionCounts != null && regionCounts[from >>> 20] == 0)) {
+                from = ((from >>> 20) + 1) << 20;
+                continue;
+            }
             long[] page = region[(from >>> 12) & 255];
             int end = ((from >>> 12) + 1) << 12;
-            if (page != null) {
+            if (page != null && (pageCounts == null
+                    || pageCounts[from >>> 20][(from >>> 12) & 255] != 0)) {
                 int wordIndex = (from & 4095) >>> 6;
                 long word = page[wordIndex] & (-1L << (from & 63));
                 for (;;) {
@@ -117,11 +125,17 @@ public final class M3BitLane28 {
         if (from < -1 || from >= M3Address28.MAX_SLOTS) {
             throw new IndexOutOfBoundsException(from);
         }
+        if (cardinality == 0) return -1;
         while (from >= 0) {
             long[][] region = regions[from >>> 20];
-            if (region == null) { from = (from & ~((1 << 20) - 1)) - 1; continue; }
+            // Counts describe the entire region/page, so zero safely excludes any suffix or prefix.
+            if (region == null || (regionCounts != null && regionCounts[from >>> 20] == 0)) {
+                from = (from & ~((1 << 20) - 1)) - 1;
+                continue;
+            }
             long[] page = region[(from >>> 12) & 255];
-            if (page != null) {
+            if (page != null && (pageCounts == null
+                    || pageCounts[from >>> 20][(from >>> 12) & 255] != 0)) {
                 int wordIndex = (from & 4095) >>> 6;
                 long word = page[wordIndex] & (-1L >>> (63 - (from & 63)));
                 for (;;) {
@@ -156,14 +170,24 @@ public final class M3BitLane28 {
                 count += pageCounts[from >>> 20][(from >>> 12) & 255];
                 from = end;
             } else if (page != null) {
-                while (from < end) {
-                    int wordEnd = Math.min(end, (from | 63) + 1);
-                    long mask = (-1L << (from & 63)) & (-1L >>> (63 - ((wordEnd - 1) & 63)));
-                    count += Long.bitCount(page[(from & 4095) >>> 6] & mask);
-                    from = wordEnd;
-                }
+                count += countPage(page, from, end);
+                from = end;
             } else from = end;
         }
+        return count;
+    }
+
+    /** Nonempty range within one existing page; no allocation or derived-state change. */
+    private static int countPage(long[] page, int from, int end) {
+        int first = (from & 4095) >>> 6;
+        int last = ((end - 1) & 4095) >>> 6;
+        long firstWord = page[first] & (-1L << (from & 63));
+        long lastMask = -1L >>> (63 - ((end - 1) & 63));
+        if (first == last)
+            return Long.bitCount(firstWord & lastMask);
+        int count = Long.bitCount(firstWord) + Long.bitCount(page[last] & lastMask);
+        for (int word = first + 1; word < last; word++)
+            count += Long.bitCount(page[word]);
         return count;
     }
 

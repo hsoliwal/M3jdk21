@@ -1,0 +1,98 @@
+{
+  "command": [
+    "python3",
+    "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/fs/tools/qualify_vfs.py",
+    "--module-root",
+    "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/fs",
+    "--repository-root",
+    "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver",
+    "--jdk-home",
+    "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/toolchain/jdk21",
+    "--dependency-cache",
+    "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2",
+    "--source-lock",
+    "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/SOURCE_LOCK.capture.tsv",
+    "--out",
+    "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/qualification-capture"
+  ],
+  "environment_overrides": {
+    "PYTHONDONTWRITEBYTECODE": "1"
+  },
+  "exit_code": 0,
+  "expected_source_lock_sha256": "c0de3ce42ee865bef48a037b1734fb606f4bb5acc206154826bb9102b07b9ec1",
+  "finished_utc": "2026-10-20T11:16:05.846582+00:00",
+  "prior_evidence_and_frozen_helper_sha256": {
+    "SOURCE_LOCK.final2.tsv": "a9f7ffb047e63620a0c6f45dcce4955bc4e0405bceeb524be699a4b3eaba54ad",
+    "qualification-final2/command-receipt.json": "eb4819b8f71fe82faaa017b424466b97c7dbfcd78a7e210c9c5b46296f0d1386",
+    "qualification-final2/consumer-run.log": "7e88fd68f17bd026978aabae13d1ff8abda5eec149547e9811a9c53c1fcf2f13",
+    "qualification-final2/qualification.json": "608f641ea5a99b3ceaa75c0df3c98eaf1b35e8271e25284ae003aa44f34cfbdf",
+    "receiver/m3/fs/tools/qualify_vfs.py": "07735a71d3466900678c8b4a0f1071724145a6d1a8f83a6c7bad8aa7389a410e",
+    "receiver/m3/fs/tools/vfs_pack_support.py": "410f158fdd7c7a81c98f5b2beb320c8eee23db20dff8db237bdd73722a7811e0",
+    "source-lock-final2.json": "3a44e23bc4f9f707db2708d687ede5040f97838237bc750400ead438cb2386f5"
+  },
+  "prior_evidence_and_frozen_helpers_unchanged": true,
+  "python_executable": "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+  "scope": "Full generated-source Java/VFS core JAR/JMOD/linked-image qualification through the existing packer; Maven/native/source-built OpenJDK remain separate gates",
+  "shared_tooling_unchanged": true,
+  "source_admission_after": {
+    "donor_java_compiled": 237,
+    "donor_java_custody": 311,
+    "input_files": 389,
+    "receiver_base": "73f59218dc4ef1a3ef79aad990e77273db2a2d60",
+    "source_lock": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/SOURCE_LOCK.capture.tsv",
+    "source_lock_sha256": "c0de3ce42ee865bef48a037b1734fb606f4bb5acc206154826bb9102b07b9ec1",
+    "vfs_upstream_commit": "685b3b723a83e56034391350ea1a02231411142f"
+  },
+  "source_admission_before": {
+    "donor_java_compiled": 237,
+    "donor_java_custody": 311,
+    "input_files": 389,
+    "receiver_base": "73f59218dc4ef1a3ef79aad990e77273db2a2d60",
+    "source_lock": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/SOURCE_LOCK.capture.tsv",
+    "source_lock_sha256": "c0de3ce42ee865bef48a037b1734fb606f4bb5acc206154826bb9102b07b9ec1",
+    "vfs_upstream_commit": "685b3b723a83e56034391350ea1a02231411142f"
+  },
+  "source_lock_after_sha256": "c0de3ce42ee865bef48a037b1734fb606f4bb5acc206154826bb9102b07b9ec1",
+  "source_lock_before_sha256": "c0de3ce42ee865bef48a037b1734fb606f4bb5acc206154826bb9102b07b9ec1",
+  "source_lock_path": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/SOURCE_LOCK.capture.tsv",
+  "source_lock_unchanged": true,
+  "started_utc": "2026-10-20T11:15:47.385589+00:00",
+  "toolchain": {
+    "acquisition_receipt_path": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/toolchain/java-maven-acquisition.json",
+    "acquisition_receipt_sha256": "d453953b20b8dc7adf2201381ac79caeae2ebeb7c67cd0de81d44eaeaaf6c633",
+    "commands": [
+      {
+        "command": [
+          "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/toolchain/jdk21/bin/java",
+          "-version"
+        ],
+        "exit_code": 0,
+        "stderr": "openjdk version \"21.0.12.1\" 2026-08-18 LTS\nOpenJDK Runtime Environment Temurin-21.0.12.1+1 (build 21.0.12.1+1-LTS)\nOpenJDK 64-Bit Server VM Temurin-21.0.12.1+1 (build 21.0.12.1+1-LTS, mixed mode, sharing)\n",
+        "stdout": ""
+      },
+      {
+        "command": [
+          "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/toolchain/jdk21/bin/javac",
+          "-version"
+        ],
+        "exit_code": 0,
+        "stderr": "",
+        "stdout": "javac 21.0.12.1\n"
+      }
+    ],
+    "home": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/toolchain/jdk21",
+    "release": "IMPLEMENTOR=\"Eclipse Adoptium\"\nIMPLEMENTOR_VERSION=\"Temurin-21.0.12.1+1\"\nJAVA_RUNTIME_VERSION=\"21.0.12.1+1-LTS\"\nJAVA_VERSION=\"21.0.12.1\"\nJAVA_VERSION_DATE=\"2026-08-18\"\nLIBC=\"gnu\"\nMODULES=\"java.base java.compiler java.datatransfer java.xml java.prefs java.desktop java.instrument java.logging java.management java.security.sasl java.naming java.rmi java.management.rmi java.net.http java.scripting java.security.jgss java.transaction.xa java.sql java.sql.rowset java.xml.crypto java.se java.smartcardio jdk.accessibility jdk.internal.jvmstat jdk.attach jdk.charsets jdk.internal.opt jdk.zipfs jdk.compiler jdk.crypto.ec jdk.crypto.cryptoki jdk.dynalink jdk.internal.ed jdk.editpad jdk.hotspot.agent jdk.httpserver jdk.incubator.vector jdk.internal.le jdk.internal.vm.ci jdk.internal.vm.compiler jdk.internal.vm.compiler.management jdk.jartool jdk.javadoc jdk.jcmd jdk.management jdk.management.agent jdk.jconsole jdk.jdeps jdk.jdwp.agent jdk.jdi jdk.jfr jdk.jlink jdk.jpackage jdk.jshell jdk.jsobject jdk.jstatd jdk.localedata jdk.management.jfr jdk.naming.dns jdk.naming.rmi jdk.net jdk.nio.mapmode jdk.random jdk.sctp jdk.security.auth jdk.security.jgss jdk.unsupported jdk.unsupported.desktop jdk.xml.dom\"\nOS_ARCH=\"x86_64\"\nOS_NAME=\"Linux\"\nSOURCE=\".:git:1c417fbfc2f7\"\nBUILD_SOURCE=\"git:e6ba7dec3d07654074559310376a3ae89da5f4ac\"\nBUILD_SOURCE_REPO=\"https://github.com/adoptium/temurin-build.git\"\nSOURCE_REPO=\"https://github.com/adoptium/jdk21u.git\"\nFULL_VERSION=\"21.0.12.1+1-LTS\"\nSEMANTIC_VERSION=\"21.0.12.1+1\"\nBUILD_INFO=\"OS: Linux Version: 6.8.0-1064-azure\"\nJVM_VARIANT=\"Hotspot\"\nJVM_VERSION=\"21.0.12.1+1-LTS\"\nIMAGE_TYPE=\"JDK\"\n",
+    "sha256": {
+      "bin/jar": "dca193d98d95aa0f14a785cf69f86187b042d10d69fa962428ea3d6427dd6649",
+      "bin/java": "2a207f5e7d075afa01d97f8048389a64432a44c4a5af0f5e77d6e286ec5f401d",
+      "bin/javac": "55859b80e7a9c4c4736be19ad3addeb35112ca6d17a30c4e0e116afc0a499bdb",
+      "bin/jlink": "67eac4c0cde181beb92a5dcb593912f301d78497173b014217e07ced2d56e5b4",
+      "bin/jmod": "50d79a9633aba380fdd1fa28f76990fbadd62e5d0b24d73ceb67400c1a7627e7",
+      "lib/modules": "70c5465dabf8e1bec2860631ea3ffd342f0ec23a5e2efd3a389d2abe32448f98",
+      "release": "ebbd70bf00bab6d39addf51969c5ff244030b86b29de400b9fb10612ebd3ceec"
+    },
+    "unchanged": true
+  },
+  "validation_errors": [],
+  "working_directory": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020"
+}

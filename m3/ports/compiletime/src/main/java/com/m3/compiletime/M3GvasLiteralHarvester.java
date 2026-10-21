@@ -20,14 +20,14 @@ public final class M3GvasLiteralHarvester {
     private M3GvasLiteralHarvester() { }
 
     public static void main(String[] args) throws IOException {
-        String destination = M3CompileTimeStringInventory.arg(args, "--out", null);
-        if (destination == null) throw new IllegalArgumentException("required --out DIRECTORY");
+        String requestedDestination = M3CompileTimeStringInventory.arg(args, "--out", null);
+        if (requestedDestination == null) throw new IllegalArgumentException("required --out DIRECTORY");
         String jarFile = M3CompileTimeStringInventory.arg(args, "--jars", null);
         boolean jdk = List.of(args).contains("--jdk");
         if (jarFile == null && !jdk) throw new IllegalArgumentException("requires --jdk or --jars");
         int max = Integer.parseInt(M3CompileTimeStringInventory.arg(args,
                 "--max-bytes", Integer.toString(M3GvasLiteralImageWriter.MAX_DEFAULT_BYTES)));
-        Path out = Path.of(destination);
+        Path out = Path.of(requestedDestination);
         if (Files.exists(out)) throw new IOException("output already exists: " + out);
         M3InventoryState state = new M3InventoryState();
         M3CompileTimeStringInventory scanner = new M3CompileTimeStringInventory(state, null, false);

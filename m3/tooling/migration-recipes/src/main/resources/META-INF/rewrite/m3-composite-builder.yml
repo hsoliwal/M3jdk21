@@ -1,0 +1,19 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright 2026 Hitesh Soliwal and contributors
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.CompositeBuilder
+displayName: M3JDK21 composite StringBuilder/StringBuffer lane (first cut)
+description: >-
+  AbstractStringBuilder keeps appended M3 Strings (and large M3 ranges) as pieces in the new
+  package-private java.lang.M3StringBuilderLane (parallel lanes, no per-piece objects); flat appends
+  run the stock code on the flat chunks; StringBuilder.toString and StringBuffer.toString return the
+  balanced M3 tuple of chunks and pieces through String(M3String) with no flatten; every other reader
+  or editor flattens once into the stock shape with the stock capacity. Flag off, no lane is created.
+  Ships the jtreg-shaped M3CompositeBuilderTest. TARGET_OWNED_PORT postimages;
+  AbstractStringBuilder, StringBuffer and StringBuilder are carried as text because the pinned Java parser cannot convert their
+  Javadoc.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: m3-composite-builder
+  - com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe:
+      crateName: m3-composite-builder

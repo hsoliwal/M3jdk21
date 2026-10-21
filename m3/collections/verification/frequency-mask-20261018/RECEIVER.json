@@ -1,0 +1,17 @@
+{
+  "synexia_repository": "hsoliwal/com.synexia",
+  "synexia_commit": "377a1c6627d815227639c327d852173b852649db",
+  "synexia_pr": 12385,
+  "recipe": "com.synexia.rewrite.M3FrequencyMaskRefinementRecipe",
+  "crate": "synexia-openrewrite-recipes/recipes/int-frequency-mask-20261018",
+  "target_baseline": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
+  "execution": "KERNEL_REPLAY_NOT_SDK_EXECUTION",
+  "target_map_sha256": "abb33ce6836e4c0dcf226d4ce75f6c827d07c325ea8ec26a64eb4208ed5bde4f",
+  "target_native_sha256": "294edbd47de881eed1987c2d9603a9cd35518d14746879c927d2ae9879d7b874",
+  "fixture_git_blob": "6bce61b1599c13a3384c694f1aa7c1d1be020d0a",
+  "donor_fixture_git_blobs": ["f9019ff7ba5c8398cdf6556d5f57e7ae57689a68", "7e0111b3df43a626de36ffb12f1c81903c41b9b8"],
+  "donor_fixture_use": "verification-only exact Apache snapshots; not a runtime dependency",
+  "naming_map_disposition": "Existing M3IntIntHashMap and M3IndexMaskCompactor owners unchanged; no new JDK API",
+  "phase_advance": false,
+  "promotion": "DRAFT_PENDING_SDK_FULL_MODULE_AND_PRODUCT_GATES"
+}

@@ -1,0 +1,36 @@
+{
+  "schema": "M3_AST_PLUGIN_SELECTION_CHANGE_V1",
+  "status": "QUALIFIED",
+  "repository": "hsoliwal/M3jdk21",
+  "baseline_ref": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
+  "source_owner_ref": "140c263a90f9803b9c46103c63355a286e0515f0",
+  "receiving_predecessor_dataset": "m3jdk21-seals",
+  "dataset": "m3jdk21-plugin-selection",
+  "product_targets": 5,
+  "api_change": "compatible additive static M3AST.isPluginSelected(JavacTask); no instance ABI change",
+  "original_owner": "context.get(Arguments.argsKey).getPluginOpts()",
+  "additional_compiler_task": false,
+  "additional_source_read": false,
+  "new_ast": false,
+  "new_cache": false,
+  "validation": {
+    "sdk_tests": 5,
+    "prepare_contract_tests": 8,
+    "receiver_contract_tests": 9,
+    "exact_receive": true,
+    "fixed_point_zero_writes": true,
+    "strict_compiler_compile": true,
+    "existing_frontend_checks": 70,
+    "source_seal_checks": 117,
+    "plugin_selection_checks": 462,
+    "plugin_selection_real_task_cases": 24,
+    "existing_openrewrite_adapter_tests": 5
+  },
+  "runtime": "actual compiler sources plus actual module-info in a linked stock21 image with preserved supported module hashing",
+  "scope_limits": [
+    "No full native JDK or HotSpot source build",
+    "No native Gradle distribution/daemon/worker/incremental-cache gate",
+    "No cross-process live AST reuse or performance claim"
+  ],
+  "preserved_failure_log": "12-descriptor-image-runtime.log is CLI usage rejection; no product test ran; 13-descriptor-image-runtime.log is the supported successful command"
+}

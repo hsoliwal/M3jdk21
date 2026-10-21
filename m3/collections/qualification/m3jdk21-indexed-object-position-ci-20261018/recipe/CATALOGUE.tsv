@@ -1,0 +1,4 @@
+problem_category	baseline	candidate	decision	preserved_contract	provenance
+SOURCE_BUILD_JUNIT	Isolated collections Maven JUnit cannot resolve 5.10.2-m3-source-1 from Central	Reactor -pl junit-jupiter-5.10.2 -am -DskipTests install	REUSE_EXISTING_BOOTSTRAP	Keep deliberate source-built Maven coordinate, owning module POM and every strict Java/JNI test step intact	Existing M3JDK21 #914; source-vendored JUnit EPL-2.0; no upstream source copied into this recipe
+CI_FAILURE_DIAGNOSIS	Reported as Maven library unavailable	official published junit 5.10.2 has different coordinate and rights/build provenance	REJECT_RELABEL	Never silently replace 5.10.2-m3-source-1 with downloaded central jar	M3 third_party/junit-jupiter-5.10.2/PROVENANCE.json
+ALGORITHM_CATEGORY	LeetCode/HackerRank/GFG	irrelevant to dependency resolver	NOT_APPLICABLE	Only source-built Maven bootstrap; leave semantic-atom catalogue for runtime selection untouched	No challenge sources borrowed

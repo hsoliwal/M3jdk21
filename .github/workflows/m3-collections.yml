@@ -10,12 +10,30 @@ on:
       - '.github/workflows/m3-collections.yml'
       - 'm3/collections/**'
       - 'm3/tooling/migration-recipes/**'
+      - 'm3/vendor/third_party/apiguardian-api/**'
+      - 'm3/vendor/third_party/opentest4j/**'
+      - 'm3/vendor/third_party/univocity-parsers/**'
+      - 'm3/vendor/third_party/junit-platform-commons-1.10.2/**'
+      - 'm3/vendor/third_party/junit-platform-engine-1.10.2/**'
+      - 'm3/vendor/third_party/junit-jupiter-api-5.10.2/**'
+      - 'm3/vendor/third_party/junit-jupiter-params-5.10.2/**'
+      - 'm3/vendor/third_party/junit-jupiter-engine-5.10.2/**'
+      - 'm3/vendor/third_party/junit-jupiter-5.10.2/**'
   push:
     branches: [master]
     paths:
       - '.github/workflows/m3-collections.yml'
       - 'm3/collections/**'
       - 'm3/tooling/migration-recipes/**'
+      - 'm3/vendor/third_party/apiguardian-api/**'
+      - 'm3/vendor/third_party/opentest4j/**'
+      - 'm3/vendor/third_party/univocity-parsers/**'
+      - 'm3/vendor/third_party/junit-platform-commons-1.10.2/**'
+      - 'm3/vendor/third_party/junit-platform-engine-1.10.2/**'
+      - 'm3/vendor/third_party/junit-jupiter-api-5.10.2/**'
+      - 'm3/vendor/third_party/junit-jupiter-params-5.10.2/**'
+      - 'm3/vendor/third_party/junit-jupiter-engine-5.10.2/**'
+      - 'm3/vendor/third_party/junit-jupiter-5.10.2/**'
   workflow_dispatch:
 
 permissions:
@@ -61,7 +79,7 @@ jobs:
         with:
           persist-credentials: false
       - name: Verify unambiguous collection donation metadata
-        run: python3 -m unittest discover -s m3/collections -p 'test_verify_donation.py' -v
+        run: python3 -m unittest discover -s m3/collections -p 'test_verify_*.py' -v
       - name: Prepare pinned Java 21 compiler and JUnit console
         shell: bash
         run: |
@@ -83,4 +101,41 @@ jobs:
           path: |
             m3/collections/target/donation-verification/evidence/
             m3/collections/target/donation-verification/junit-reports/
+          if-no-files-found: warn
+
+  filtered-splits-mask-spans:
+    name: Full collection Java and JNI at exact head
+    runs-on: ubuntu-22.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          persist-credentials: false
+      - name: Record exact checked-out head
+        env:
+          EXPECTED_HEAD: ${{ github.event.pull_request.head.sha || github.sha }}
+        run: test "$(git rev-parse HEAD)" = "$EXPECTED_HEAD"
+      - name: Prepare pinned Java 21 compiler
+        shell: bash
+        run: |
+          curl --fail --location --retry 3 'https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21.0.12.1%2B1/OpenJDK21U-jdk_x64_linux_hotspot_21.0.12.1_1.tar.gz' -o "$RUNNER_TEMP/m3-jdk21.tar.gz"
+          printf '%s  %s\n' 'ce79869e1307ed8ee1e2baa86a412b1eb5b75d10a01006d788a6f968bcfaee94' "$RUNNER_TEMP/m3-jdk21.tar.gz" | sha256sum --check -
+          tar -xzf "$RUNNER_TEMP/m3-jdk21.tar.gz" -C "$RUNNER_TEMP"
+          printf 'JAVA_HOME=%s\n' "$RUNNER_TEMP/jdk-21.0.12.1+1" >> "$GITHUB_ENV"
+          printf '%s\n' "$RUNNER_TEMP/jdk-21.0.12.1+1/bin" >> "$GITHUB_PATH"
+      - name: Build source dependencies and run owning Java and all-native contracts
+        env:
+          EXPECTED_HEAD: ${{ github.event.pull_request.head.sha || github.sha }}
+        run: python3 m3/collections/qualification/full-java-jni-20261018/verify.py
+      - name: Retain actual head proof
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: full-collection-java-jni-${{ github.event.pull_request.head.sha || github.sha }}
+          path: |
+            m3/collections/target/full-java-jni/PROOF.json
+            m3/collections/target/full-java-jni/java-reports/
+            m3/collections/target/full-java-jni/native-reports/
+            m3/collections/target/surefire-reports/
           if-no-files-found: warn

@@ -1,0 +1,154 @@
+{
+  "schema": "M3_NLP_SEARCH_M3FILE_HANDOFF_1",
+  "canonical_repository": "hsoliwal/com.synexia",
+  "canonical_crate": "synexia-openrewrite-recipes/crates/m3-nlp-search",
+  "canonical_integration": "integration-20261018",
+  "canonical_recipe": "com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe",
+  "receiver": "m3/tooling/module-packs/nlp-search",
+  "target_repository": "hsoliwal/M3jdk21",
+  "target_base_commit": "f29b0afe7ad253cc0562bc8dfdd48fc1acec710e",
+  "handoff_policy": "Canonical Synexia recipe templates are the editable owner. M3JDK files are admitted by exact preimage and recipe postimage hashes; regeneration and the receiver recipe-custody mirror record application evidence.",
+  "canonical_receipts_sha256": {
+    "synexia-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/candidates/file/FILE_PORT_MAP.json": "e3eb2199e6e6a045043534bbc9471feb1837c78c7edd0e62bd0675e64d07865d",
+    "synexia-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/candidates/file/FILE_API_PARITY.json": "8295009993e55feeb7f1b8173018e5a21b1815fc409dabec04e042d30e3ca711",
+    "synexia-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/candidates/file/COMPLETE_SOURCE_INVENTORY.json": "f077962ce7abe6aec7bf34e14736c1266429b18a911b147db32b73e8c904051e",
+    "synexia-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/candidates/file/JSON_CLOSURE_PROVENANCE.json": "ec720b682f1e459763c85b93577c7897449d0558191fee8652931ea30dfd9da5",
+    "synexia-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/candidates/file/NATIVE_MAPPED_PROVENANCE.json": "2a4412de9bc0ae088ca4df059c7175db22484545ee2b5712e3a59bd92e078d5c",
+    "synexia-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/candidates/lucene/PROVENANCE.json": "f4e39191726c753d006b463eab50ec0b243cd7aa2c26167a143608e17d33476a",
+    "synexia-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/candidates/opennlp/PROVENANCE.json": "751265f4507ace1c4cbc52b482bc1741e40710ab5df719a4e647239dc37ba3e8",
+    "synexia-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/candidates/frontend/PROVENANCE.json": "24b33550f4de2028900c63740ecf5e3bb582ea517bb640e58cb6cb124944d24a"
+  },
+  "sources": [
+    {
+      "repository": "hsoliwal/com.synexia",
+      "revision": "50f48cbbe11f17fb8dc209bac3812f8940a1e267",
+      "path": "synexia-indexstring/src/main/java/com/synexia/indexstring/file",
+      "scope": "Every one of the 50 donor file-family Java sources, with explicit package/owner mappings; supporting Java and native donor paths are pinned in the component receipts.",
+      "family_sources": 50,
+      "mapped_public_protected_declarations_and_record_components": 709,
+      "module_java_sources": 80,
+      "supporting_java_sources": 29,
+      "module_descriptors": 1,
+      "native_c_sources": 3,
+      "fixture_java_sources": 17,
+      "executable_file_probes": 16
+    },
+    {
+      "repository": "hsoliwal/lucene",
+      "revision": "d1b7235f1ba1c1eea5b04a5b7e6554595a90719e",
+      "scope": "Exact borrowed reader sources and a Java-11-compatible String-hash atom backported onto the full existing Lucene 9.10.0 core.",
+      "overlay_sources": 3,
+      "receipt": "LUCENE_PROVENANCE.json",
+      "full_fork_major_upgrade": false
+    },
+    {
+      "repository": "hsoliwal/opennlp",
+      "revision": "368337311ad94b665fd178f8d3ced005a73b2370",
+      "scope": "Pinned tokenizer bridge and additive wordpiece/normalization backports into complete OpenNLP Tools 2.4.0, with original public APIs retained.",
+      "overlay_sources": 8,
+      "receipt": "OPENNLP_PROVENANCE.json",
+      "full_fork_major_upgrade": false
+    },
+    {
+      "repository": "hsoliwal/M3jdk21",
+      "revision": "f29b0afe7ad253cc0562bc8dfdd48fc1acec710e",
+      "scope": "Existing actual compiler M3AST owner, source retention hook and module services.",
+      "compiler_source_files_sha256": {
+        "src/jdk.compiler/share/classes/com/sun/source/util/M3AST.java": "6a8bccb501a516cca779e71e24ef814ca40825faf92fed744e48f65ad4c1d854",
+        "src/jdk.compiler/share/classes/com/sun/tools/javac/m3/M3ASTPC.java": "845c70bdc5e77a62282417889dc77bf466fd0c0005f72112e86faf27ec616399",
+        "src/jdk.compiler/share/classes/com/sun/tools/javac/m3/M3PrimitiveImageCompiler.java": "5827f24f34317707564be6ca031ecb6ef69958b66ca69a42a787080ef6ccb006",
+        "src/jdk.compiler/share/classes/com/sun/tools/javac/main/JavaCompiler.java": "129e8c19ef328185c45465b9c8bf9baee43bb24be54842b69833c52e3e6f3dcb",
+        "src/jdk.compiler/share/classes/module-info.java": "ae52d1734570fee7404aeb68b65ef86ea23ad322b72ff0b137c9039c71aafb09"
+      }
+    },
+    {
+      "repository": "apache/opennlp",
+      "revision": "8c586ddebd84db4d66582aab3a885bf02c75e41f",
+      "version": "2.4.0",
+      "scope": "Original complete Tools source vendor retained under m3/vendor/third_party/opennlp-tools."
+    }
+  ],
+  "jmod_count": 10,
+  "modules": {
+    "org.apache.lucene.core": "Lucene 9.10.0 + three recorded compatible M3 fork sources",
+    "org.apache.lucene.analysis.common": "Lucene 9.10.0",
+    "org.apache.lucene.queries": "Lucene 9.10.0",
+    "org.apache.lucene.sandbox": "Lucene 9.10.0",
+    "org.apache.lucene.queryparser": "Lucene 9.10.0",
+    "org.apache.opennlp.tools": "OpenNLP Tools 2.4.0 + eight recorded compatible fork overlay sources",
+    "org.slf4j": "SLF4J API 2.0.12",
+    "org.slf4j.simple": "SLF4J Simple 2.0.13",
+    "org.m3jdk.file": "Complete mapped file-family receiver, 80 Java source files and three C workers",
+    "org.m3jdk.tools.search": "M3AST source-search consumer and CLI"
+  },
+  "ownership": {
+    "text_authority": "Public java.lang.String; matched M3JDK supplies the internal M3String representation.",
+    "file_text": "M3FileText implements CharSequence and retains resolver/packed-ID/composition/metric metadata, with no second retained character or byte payload owner.",
+    "compiler": "Existing com.sun.source.util.M3AST and real javac tree/task. Consumer projections are per instance and callback event; no retained Unit/tree/task.",
+    "source_identity": "Exact compiler big-endian UTF-16 SHA-256 including unpaired surrogates; separate from attributed/classpath equivalence.",
+    "library_formats": "OpenNLP supplies UTF-16 spans; Lucene owns term buffers, UTF-8 term encoding and persisted index format.",
+    "transactions": "API caller owns writer/resolver/commit. CLI snapshots M3File inputs, disables commit-on-close and explicitly commits only a successful complete parse batch.",
+    "runtime_dependency_on_synexia": false
+  },
+  "native_workers": {
+    "library": "m3file",
+    "linux_image_path": "lib/libm3file.so",
+    "sources": [
+      "m3_file_jni.c",
+      "m3_json_signal_jni.c",
+      "m3_text_metrics_jni.c"
+    ],
+    "scope": "Mapped file token search, JSON byte classification and direct text metrics with synchronous borrowed-pointer lifetimes.",
+    "java_fallback": true,
+    "required_native_probe_modes": true,
+    "m3_string_vm_storage_certification": false
+  },
+  "build_modes": {
+    "normal": "Supply an already built M3JDK21 exposing the actual M3AST compiler API and matching hook; no compiler-source-proof option.",
+    "compiler_source_proof": "Explicit --compiler-source-proof compiles the five locked compiler inputs, rebuilds their module/hash metadata and runs the complete receiver on the supplied stock Java21 String/HotSpot.",
+    "input_jdk_modified": false,
+    "compiler_source_proof_is_whole_jdk_build": false,
+    "runtime_option_scope": "Primary candidate launches and the matching reader baseline; OpenNLP diagnostic child and shared compiler verification harness have separate invocation scopes."
+  },
+  "executable_contracts": {
+    "file": "FILE_PROBES.json: 16 executable fixtures in Java and required-JNI modes, 32 runs",
+    "frontend": "FRONTEND_PROBES.json: actual compiler/source/disk-index fixture in Java and JNI modes",
+    "lucene": "Unchanged reader oracles on identical stripped runtime, actual library analyzers and persisted-index contracts",
+    "opennlp": "Independent null-parent baseline loader, tokenizer and additive wordpiece/normalization contracts",
+    "compiler": "Existing shared-frontend contract suite with real module services",
+    "recipe": "Exact receiver proof mirror under recipe-custody; canonical recipe engine and preimage/refusal/fixed-point evidence",
+    "runtime_receipts": "Per-execution RESULT.json, COMMANDS.json, compiler proof, module-pack report and all stage logs; this documentary source reference does not substitute for a successful run."
+  },
+  "phase_advanced": false,
+  "pending_global_certification": [
+    "Enabled native M3String VM/storage and global String semantics certification",
+    "Complete M3JDK configure/make/jtreg and release acceptance",
+    "Complete upstream library suites and additional fork distribution modules",
+    "Other-platform native qualification",
+    "Representative performance measurements"
+  ],
+  "licenses": "First-party Apache-2.0; original Apache and embedded Lucene/OpenNLP notices; SLF4J MIT; linked JDK retains its original module license terms.",
+  "historical_handoff": {
+    "schema": "M3_FULL_TOOL_HANDOFF_1",
+    "canonical_repository": "hsoliwal/com.synexia",
+    "canonical_commit": "c49cca384837ebd9dc71b6141c71ab0bcb938d10",
+    "canonical_crate": "synexia-openrewrite-recipes/crates/m3-nlp-search",
+    "file_receipt": "synexia-openrewrite-recipes/crates/m3-nlp-search/RECEIVER_FILES.json",
+    "source_restoration_commit": "ebff714f37756273594086226098137d0a37b30a",
+    "source_restoration_pr": "https://github.com/hsoliwal/com.synexia/pull/11374",
+    "recovery_receipt": {
+      "source_repository": "hsoliwal/com.synexia",
+      "source_commit": "ebff714f37756273594086226098137d0a37b30a",
+      "source_pr": "https://github.com/hsoliwal/com.synexia/pull/11374",
+      "path": "synexia-openrewrite-recipes/crates/m3-nlp-search/recovery-20261014/RECEIVER.json",
+      "sha256": "d3f508d4332b0a6f6879146f44080fb1cbf630f3947aa98ae444f8595cc79cf4",
+      "git_blob": "15113bd40279c9c0dbcf5b1707e174ae629b78b3"
+    },
+    "previous_receipt": {
+      "target_commit": "f9b3a0ce84dcdbd0cc75df956def7710ac5d04fd",
+      "path": "m3/tooling/module-packs/nlp-search/SOURCE_REF.json",
+      "git_blob": "e65dc6621efbedc64c76f4eaba8511342ad56f51"
+    }
+  },
+  "historical_handoff_scope": "These older identities preserve source restoration history. The integration above has its own exact donor, input and execution receipts."
+}

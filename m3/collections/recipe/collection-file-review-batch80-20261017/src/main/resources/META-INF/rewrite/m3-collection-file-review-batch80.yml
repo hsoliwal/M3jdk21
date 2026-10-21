@@ -1,0 +1,8 @@
+# SPDX-License-Identifier: Apache-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.CollectionFileReviewBatch8020261017
+displayName: Receive the exact eighty-source collection review catalogue
+description: Installs six source-sealed inventory and comparison files while preserving their review-required contract and license boundaries.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe:
+      crateName: collection-file-review-batch80

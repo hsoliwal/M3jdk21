@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- SPDX-License-Identifier: Apache-2.0. Adapted from pinned receiving POM d79867bcc09ad6329e12418e15907e54b8ab025f. -->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+ <modelVersion>4.0.0</modelVersion><groupId>com.synexia</groupId><artifactId>m3-original-cli-provider-recipe</artifactId><version>1.0-SNAPSHOT</version>
+ <properties><m3.build.root>${project.basedir}/target</m3.build.root><m3.output.root>${project.build.directory}/emitted</m3.output.root><m3.baseline.root>${m3.build.root}/frozen-pre-baseline</m3.baseline.root><maven.compiler.release>21</maven.compiler.release><project.build.sourceEncoding>UTF-8</project.build.sourceEncoding></properties>
+ <dependencies>
+  <dependency><groupId>org.jetbrains</groupId><artifactId>annotations</artifactId><version>24.1.0</version><scope>provided</scope></dependency>
+  <dependency><groupId>org.openrewrite</groupId><artifactId>rewrite-core</artifactId><version>8.17.1</version></dependency>
+  <dependency><groupId>org.slf4j</groupId><artifactId>slf4j-simple</artifactId><version>1.7.36</version><scope>test</scope></dependency>
+  <dependency><groupId>org.junit.jupiter</groupId><artifactId>junit-jupiter</artifactId><version>5.10.2</version><scope>test</scope></dependency>
+ </dependencies>
+ <build><directory>${m3.build.root}</directory><sourceDirectory>src/main/java</sourceDirectory><plugins>
+  <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-resources-plugin</artifactId><version>3.3.1</version></plugin>
+  <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-compiler-plugin</artifactId><version>3.13.0</version><configuration><release>21</release><proc>none</proc><compilerArgs><arg>-Xlint:all</arg><arg>-Werror</arg></compilerArgs></configuration></plugin>
+  <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-surefire-plugin</artifactId><version>3.2.5</version><configuration><useModulePath>false</useModulePath><failIfNoTests>true</failIfNoTests><systemPropertyVariables><m3.recipe.root>${project.basedir}</m3.recipe.root><m3.baseline.root>${m3.baseline.root}</m3.baseline.root><m3.build.root>${project.build.directory}</m3.build.root><m3.output.root>${m3.output.root}</m3.output.root></systemPropertyVariables></configuration></plugin>
+  <plugin><groupId>org.codehaus.mojo</groupId><artifactId>exec-maven-plugin</artifactId><version>3.5.0</version><executions><execution><id>qualify-receiving-input-closure</id><phase>validate</phase><goals><goal>exec</goal></goals><configuration><executable>python3</executable><arguments><argument>-I</argument><argument>-S</argument><argument>-B</argument><argument>${project.basedir}/verify.py</argument><argument>--self-test</argument></arguments></configuration></execution></executions></plugin>
+ </plugins></build>
+</project>

@@ -1,0 +1,7 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3jdk.AstBuildReverse20261017
+displayName: Original MIndexAST L0–L5 scope dispatch
+description: Reuse existing M3JDK21 source and atom identities without parsing or creating a second index.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: m3-ast-build-reverse-20261017-ast-scope-dispatch-20261020

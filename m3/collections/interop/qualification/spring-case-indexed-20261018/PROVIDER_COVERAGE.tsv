@@ -1,0 +1,7 @@
+provider	upstream_public_type	m3_component	status	limit
+JDK	java.util.Map; LinkedHashMap	com.m3.collections.M3LinkedHashMap	EXISTING	No java.base concrete replacement
+GUAVA	com.google.common.collect.ListMultimap; ClassToInstanceMap	M3LibraryCollections; M3GuavaClassToInstanceMaps	EXISTING	Different pair/typed semantics
+ECLIPSE	org.eclipse.collections.api.bag.MutableBag; MutableBagMultimap	M3EclipseBag; M3EclipseBagMultimap	EXISTING	Rich derived results may allocate
+SPRING	org.springframework.util.LinkedCaseInsensitiveMap	M3SpringCaseInsensitiveMap	NEW_PROVING_BACKEND	Map<String,V> semantic parity only; not Spring concrete class
+SPRING	org.springframework.util.MultiValueMap	M3SpringArrayMultiValueMap	EXISTING	Map of lists, not Guava Multimap
+APACHE	org.apache.commons.collections4.ListValuedMap	M3ApacheListValuedMap	EXISTING	Apache pair-count API distinct from Spring

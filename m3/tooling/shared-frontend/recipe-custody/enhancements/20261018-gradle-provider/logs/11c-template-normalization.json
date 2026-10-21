@@ -1,0 +1,14 @@
+{
+  "label": "11c-template-normalization",
+  "command": [
+    "python3",
+    "normalize_service_template.py"
+  ],
+  "cwd": "/workspace/scratch/65626af64474/m3-ast-shared-20261018/gradle-provider-work",
+  "jdk": "/tmp/m3-regex-toolchain-20261018/jdk-21.0.12.1+1",
+  "previous": "11-seal-refinement",
+  "started_utc": "2026-10-18T13:00:19.201069+00:00",
+  "finished_utc": "2026-10-18T13:00:19.225501+00:00",
+  "exit_code": 0,
+  "log_sha256": "9f9eb472625b66ddfe723b79de3bb92898da2366da01ad8c65dca4c61844b639"
+}

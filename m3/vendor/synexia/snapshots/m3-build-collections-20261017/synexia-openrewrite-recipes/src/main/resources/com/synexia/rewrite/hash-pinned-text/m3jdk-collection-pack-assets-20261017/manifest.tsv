@@ -1,0 +1,9 @@
+# path	before_sha256	after_sha256	template
+m3/docs/name-mapping.d/m3-filtered-collection-pack-20261017.json	ABSENT	457313570a9d937e637d8c401d4b9ebb5553520882ba623920ab02006e4e83f6	template-00.txt
+m3/tooling/module-packs/collections/PROJECTION_SOURCE_IDENTITY.json	ABSENT	030034473010575c8e7d061e447b1b5b52f9facc0a0d5dbfacb74ad3f241f854	template-01.txt
+m3/tooling/module-packs/collections/README.md	ABSENT	41c19669c53e35a16e8ea3e415a1c2968ed33e52b5a76513df1a938f3aa3a1b9	template-02.txt
+m3/tooling/module-packs/collections/build.py	ABSENT	af20d5f0797ac3cf45bb5674a1f07776e3b66e01ea578c887518bb6ff85cfd8a	template-03.txt
+m3/tooling/module-packs/collections/legal/LICENSE.txt	ABSENT	cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30	template-04.txt
+m3/tooling/module-packs/collections/legal/M3_COLLECTIONS_NOTICE.txt	ABSENT	81138f9994f4afa899c22904debf7cf8277803cf21b53536108ac7e254b0a5bb	template-05.txt
+m3/tooling/module-packs/collections/legal/NOTICE.txt	ABSENT	82381b1d02123cd532ee61e434e8aea0cec7516141c58b7491dcbdc1fc167b3b	template-06.txt
+m3/tooling/module-packs/collections/pom.xml	ABSENT	80fe5144d2ebed1e114de2c17bdd35e9e26968742c5224c20c375bdbb57d591a	template-07.txt

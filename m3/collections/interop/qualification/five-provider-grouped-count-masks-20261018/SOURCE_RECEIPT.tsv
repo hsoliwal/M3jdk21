@@ -1,0 +1,3 @@
+path	preimage_sha256	postimage_sha256	canonical_git_blob_sha1	contract
+m3/collections/interop/src/main/java/com/m3/collections/interop/M3FiveProviderKeyGroups.java	484a79decdfd5507dbdb4276c6a08df9048d98ddf7756a630f5493cd85e48a4c	49767629cccbc847c4a66252f86ce18ce57be8aa49a685350624e570a126597f	13dd02b3212cb14e7929b964c025f7e5047e5012	Old public methods unchanged; additive M3 index and 5 real-provider contracts
+m3/collections/interop/src/test/java/com/m3/collections/interop/M3FiveProviderKeyGroupClosureTest.java	ABSENT	97debdc8af2e48e695191daa9a5ad872b9d16131556b9372441ad75c3185a30a	fd29c1cf71f8adc3ce718fc38e03913ac4293ecb	True pinned provider JUnit, masks and 850 seeded oracle

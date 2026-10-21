@@ -1,0 +1,55 @@
+{
+  "schema": "M3_PRODUCT_RECEIPT_PATH_MAP_V1",
+  "original_receipt_sha256": "69a73330a169fbda61326144209583104bb9f8666d8e00ba4155ab9ce02284bb",
+  "note": "Raw log bytes are unchanged; .log suffixes become .txt for existing canonical text admission.",
+  "files": [
+    {
+      "original_receipt_path": "product-configure.log",
+      "receiving_path": "product-configure.txt",
+      "bytes": 19429,
+      "sha256": "5540d2840c2c3515396291fff946f0d56708aab8d4e811556659925bab479281"
+    },
+    {
+      "original_receipt_path": "product-baseline-build.log",
+      "receiving_path": "product-baseline-build.txt",
+      "bytes": 14326,
+      "sha256": "52e7fdc686f5906c8fb1dc03880e34de143488c197523d6d6e63361f80116384"
+    },
+    {
+      "original_receipt_path": "product-final-build.log",
+      "receiving_path": "product-final-build.txt",
+      "bytes": 2507,
+      "sha256": "e85d67450e1945588dfa96fa3c4e01baa8f43014845da0c2c16d77bedb5d6c61"
+    },
+    {
+      "original_receipt_path": "frontend-product-proof/RESULT.json",
+      "receiving_path": "frontend-product-proof/RESULT.json",
+      "bytes": 530,
+      "sha256": "06941d9f0668dbd4423931a322fa2b1e762f13a52bbb1ef2a332f27e41cef03d"
+    },
+    {
+      "original_receipt_path": "frontend-product-proof/commands.json",
+      "receiving_path": "frontend-product-proof/commands.json",
+      "bytes": 1424,
+      "sha256": "a1ddffd5b22df10cbbe61e09a448a44350a2cfbad0aa1a0df8ca45ace459b25d"
+    },
+    {
+      "original_receipt_path": "frontend-product-proof/compiler-contracts.log",
+      "receiving_path": "frontend-product-proof/compiler-contracts.txt",
+      "bytes": 425,
+      "sha256": "ad33e48fae9af4643aaed9bc3f38d61247d818d9148ab0971992b375e4bb32d6"
+    },
+    {
+      "original_receipt_path": "frontend-product-proof/openrewrite.log",
+      "receiving_path": "frontend-product-proof/openrewrite.txt",
+      "bytes": 2803,
+      "sha256": "ac0d583ad2b0ab5e3068413d825b5865f290d7e6a07f2faa5e0f131fa4b69eb5"
+    },
+    {
+      "original_receipt_path": "product-jtreg-local.log",
+      "receiving_path": "product-jtreg-local.txt",
+      "bytes": 24097,
+      "sha256": "010d63adfd42b4a8f4389c309616cc4611db5946923d8fcd9962d20150a7eaca"
+    }
+  ]
+}

@@ -1,0 +1,4 @@
+# path	before	after	template
+src/java.base/share/classes/jdk/internal/mindex/M3Release.java	ABSENT	901341910171b464c110d43ef4dd4da11a3606da5504d53691f24c5561132aeb	M3Release.java.txt
+src/java.base/share/classes/jdk/internal/mindex/M3VI.java	ABSENT	0c42cccb41251828efec2db858a9ed09aef3a2c489a75d11fd10e14c468cd67a	M3VI.java.txt
+src/test/java/com/m3/vi/VIProbe.java	ABSENT	a44ca0c914e67b86430ee81a253eda6d14f3ad038d9b35de95c7c8cd270b5b12	VIProbe.java.txt

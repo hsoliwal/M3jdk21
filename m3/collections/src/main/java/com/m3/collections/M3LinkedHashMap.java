@@ -1,6 +1,8 @@
+// Modified 2026 by Hitesh Soliwal and contributors: adaptive clearing of reusable linked slots.
 // SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
 // Modified 2026 by Hitesh Soliwal and Contributors to the Synexia Project: Synexia-to-M3 package/type adaptation.
 // SPDX-License-Identifier: Apache-2.0
+// Modified 2026 by Hitesh Soliwal and contributors: lazy expected-key reservation.
 package com.m3.collections;
 
 import java.util.Arrays;
@@ -17,6 +19,17 @@ public final class M3LinkedHashMap<K, V> extends M3OrderedSlotMap<K, V> {
     private final boolean reversed;
     /** Insertion-order map. */
     public M3LinkedHashMap() { this(false); }
+    /**
+     * Insertion-order map with an expected distinct-key reservation, applied on first insertion.
+     * Construction and empty reads allocate no backing arrays. Very large hints may exhaust
+     * allocation only when insertion needs storage; the hint is not an entry-count limit.
+     *
+     * @param expectedKeys nonnegative expected number of distinct keys
+     * @throws IllegalArgumentException if expectedKeys is negative
+     */
+    public M3LinkedHashMap(int expectedKeys) {
+        this(new Table(false, false, expectedKeys), false);
+    }
     /** Select insertion order or access order, as with LinkedHashMap. */
     public M3LinkedHashMap(boolean accessOrder) { this(new Table(accessOrder, false), false); }
     M3LinkedHashMap(boolean accessOrder, boolean keyOnly) { this(new Table(accessOrder, keyOnly), false); }
@@ -31,7 +44,7 @@ public final class M3LinkedHashMap<K, V> extends M3OrderedSlotMap<K, V> {
     @Override V writeAt(int slot, V value) {
         V old = valueAt(slot); if (!table.keyOnly) { table.values[slot] = value; } return old;
     }
-    @Override V eraseAt(int slot) { V old = valueAt(slot); table.erase(slot); return old; }
+    @Override V eraseAt(int slot) { V old = valueAt(slot); forgetEntryFacade(keyAt(slot)); table.erase(slot); return old; }
     @Override void accessed(int slot) { if (table.accessOrder) { table.move(slot, false); } }
     @Override public int size() { return table.size; }
     @Override public V put(K key, V value) {
@@ -52,7 +65,7 @@ public final class M3LinkedHashMap<K, V> extends M3OrderedSlotMap<K, V> {
     @Override public Entry<K, V> pollFirstEntry() { return poll(firstSlot()); }
     @Override public Entry<K, V> pollLastEntry() { return poll(lastSlot()); }
     @Override public M3LinkedHashMap<K, V> reversed() { return new M3LinkedHashMap<>(table, !reversed); }
-    @Override public void clear() { table.clear(); }
+    @Override public void clear() { table.clear(); clearEntryFacades(); }
     /** Validate index membership, encounter links and free-slot ownership. */
     public void verifyInvariants() { table.verify(); }
 
@@ -63,8 +76,11 @@ public final class M3LinkedHashMap<K, V> extends M3OrderedSlotMap<K, V> {
         private int[] index = M3SlotArrays.EMPTY_INTS;
         private int first = -1, last = -1, free = -1, used, occupied, size, modifications;
         private final boolean accessOrder, keyOnly;
-        Table(boolean accessOrder, boolean keyOnly) {
-            this.accessOrder = accessOrder; this.keyOnly = keyOnly;
+        private final int expectedKeys;
+        Table(boolean accessOrder, boolean keyOnly) { this(accessOrder, keyOnly, 0); }
+        Table(boolean accessOrder, boolean keyOnly, int expectedKeys) {
+            if (expectedKeys < 0) { throw new IllegalArgumentException("negative expectedKeys"); }
+            this.accessOrder = accessOrder; this.keyOnly = keyOnly; this.expectedKeys = expectedKeys;
         }
         int find(Object key, int hash) {
             if (index.length == 0) { return -1; }
@@ -87,11 +103,25 @@ public final class M3LinkedHashMap<K, V> extends M3OrderedSlotMap<K, V> {
             }
             index = replacement; occupied = size;
         }
+        private int initialPayloadCapacity() {
+            return Math.max(8, Math.min(expectedKeys, Integer.MAX_VALUE - 8));
+        }
+        private int initialIndexCapacity() {
+            int capacity = 16;
+            // Insert grows at equality, so the complete expected count must remain below it.
+            while (capacity < (1 << 30)
+                    && (long) expectedKeys >= (long) capacity - capacity / 3) {
+                capacity <<= 1;
+            }
+            return capacity;
+        }
         void grow() {
-            int n = M3SlotArrays.grow(keys.length);
+            int n = keys.length == 0 ? initialPayloadCapacity() : M3SlotArrays.grow(keys.length);
             Object[] k = Arrays.copyOf(keys, n), v = keyOnly ? values : Arrays.copyOf(values, n);
             int[] h = Arrays.copyOf(hashes, n), b = Arrays.copyOf(before, n), a = Arrays.copyOf(after, n), p = Arrays.copyOf(positions, n);
-            keys = k; values = v; hashes = h; before = b; after = a; positions = p;
+            int[] buckets = index.length == 0 ? new int[initialIndexCapacity()] : index;
+            // Publish only after every payload, metadata and first index allocation succeeds.
+            keys = k; values = v; hashes = h; before = b; after = a; positions = p; index = buckets;
         }
         void insert(Object key, Object value, int hash, boolean atFirst) {
             if (free < 0 && used == keys.length) { grow(); }
@@ -125,7 +155,17 @@ public final class M3LinkedHashMap<K, V> extends M3OrderedSlotMap<K, V> {
         }
         void clear() {
             if (size == 0) { return; }
-            Arrays.fill(keys, null); Arrays.fill(values, null); Arrays.fill(index, 0);
+            // Free slots already hold null; reuse encounter links when few slots remain.
+            if (size <= (keys.length >>> 6)) {
+                for (int s = first; s >= 0; s = after[s]) {
+                    keys[s] = null;
+                    if (!keyOnly) { values[s] = null; }
+                }
+            } else {
+                Arrays.fill(keys, null); Arrays.fill(values, null);
+            }
+            // Tombstones are not in the live links, so reset the complete hash index.
+            Arrays.fill(index, 0);
             first = -1; last = -1; free = -1; used = 0; occupied = 0; size = 0; modifications++;
         }
         void verify() {

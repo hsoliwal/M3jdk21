@@ -5,7 +5,9 @@ find_package(JNI REQUIRED)
 
 add_library(m3_precompute SHARED
   src/m3_precompute_signals.c
-  src/m3_precompute_signals_jni.c)
+  src/m3_precompute_signals_jni.c
+  src/m3_derivative_regex.c
+  src/m3_derivative_regex_jni.c)
 
 target_include_directories(m3_precompute
   PRIVATE ${JNI_INCLUDE_DIRS}
@@ -38,4 +40,17 @@ if(BUILD_TESTING)
       -Wall -Wextra -Werror -Wconversion -Wshadow -Wpedantic)
   endif()
   add_test(NAME m3_precompute_signal_checks COMMAND m3_precompute_signal_checks)
+  add_executable(m3_derivative_regex_checks
+    tests/m3_derivative_regex_checks.c
+    src/m3_derivative_regex.c)
+  target_include_directories(m3_derivative_regex_checks PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include)
+  target_compile_features(m3_derivative_regex_checks PRIVATE c_std_11)
+  if(MSVC)
+    target_compile_options(m3_derivative_regex_checks PRIVATE /W4 /WX)
+  else()
+    target_compile_options(m3_derivative_regex_checks PRIVATE
+      -Wall -Wextra -Werror -Wconversion -Wshadow -Wpedantic)
+  endif()
+  add_test(NAME m3_derivative_regex_checks COMMAND m3_derivative_regex_checks)
+
 endif()

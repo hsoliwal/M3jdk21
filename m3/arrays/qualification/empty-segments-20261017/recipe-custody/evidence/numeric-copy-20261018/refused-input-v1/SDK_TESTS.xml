@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.synexia.rewrite.M3TaskRecipeTest" time="15.794" tests="5" errors="2" skipped="0" failures="3">
+  <properties>
+    <property name="java.specification.version" value="21"/>
+    <property name="m3.recipe.name" value="com.synexia.m3jdk.CollectionsContractRefinement20261017"/>
+    <property name="sun.jnu.encoding" value="UTF-8"/>
+    <property name="java.class.path" value="/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-numeric-copy/test-classes:/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-numeric-copy/classes:/tmp/m3-maven-repository/org/openrewrite/rewrite-java/8.17.1/rewrite-java-8.17.1.jar:/tmp/m3-maven-repository/org/openrewrite/rewrite-core/8.17.1/rewrite-core-8.17.1.jar:/tmp/m3-maven-repository/com/fasterxml/jackson/core/jackson-databind/2.16.1/jackson-databind-2.16.1.jar:/tmp/m3-maven-repository/com/fasterxml/jackson/core/jackson-core/2.16.1/jackson-core-2.16.1.jar:/tmp/m3-maven-repository/com/fasterxml/jackson/dataformat/jackson-dataformat-smile/2.16.1/jackson-dataformat-smile-2.16.1.jar:/tmp/m3-maven-repository/com/fasterxml/jackson/module/jackson-module-parameter-names/2.16.1/jackson-module-parameter-names-2.16.1.jar:/tmp/m3-maven-repository/com/fasterxml/jackson/datatype/jackson-datatype-jsr310/2.16.1/jackson-datatype-jsr310-2.16.1.jar:/tmp/m3-maven-repository/org/openrewrite/tools/java-object-diff/1.0.1/java-object-diff-1.0.1.jar:/tmp/m3-maven-repository/io/quarkus/gizmo/gizmo/1.0.11.Final/gizmo-1.0.11.Final.jar:/tmp/m3-maven-repository/org/jboss/jandex/2.4.2.Final/jandex-2.4.2.Final.jar:/tmp/m3-maven-repository/net/java/dev/jna/jna-platform/5.14.0/jna-platform-5.14.0.jar:/tmp/m3-maven-repository/net/java/dev/jna/jna/5.14.0/jna-5.14.0.jar:/tmp/m3-maven-repository/org/apache/commons/commons-compress/1.26.0/commons-compress-1.26.0.jar:/tmp/m3-maven-repository/commons-io/commons-io/2.15.1/commons-io-2.15.1.jar:/tmp/m3-maven-repository/org/yaml/snakeyaml/2.2/snakeyaml-2.2.jar:/tmp/m3-maven-repository/org/openrewrite/rewrite-yaml/8.17.1/rewrite-yaml-8.17.1.jar:/tmp/m3-maven-repository/org/openrewrite/rewrite-xml/8.17.1/rewrite-xml-8.17.1.jar:/tmp/m3-maven-repository/io/micrometer/micrometer-core/1.9.17/micrometer-core-1.9.17.jar:/tmp/m3-maven-repository/org/hdrhistogram/HdrHistogram/2.1.12/HdrHistogram-2.1.12.jar:/tmp/m3-maven-repository/org/latencyutils/LatencyUtils/2.0.3/LatencyUtils-2.0.3.jar:/tmp/m3-maven-repository/org/jetbrains/annotations/24.1.0/annotations-24.1.0.jar:/tmp/m3-maven-repository/com/fasterxml/jackson/core/jackson-annotations/2.16.1/jackson-annotations-2.16.1.jar:/tmp/m3-maven-repository/org/antlr/antlr4-runtime/4.11.1/antlr4-runtime-4.11.1.jar:/tmp/m3-maven-repository/org/apache/commons/commons-lang3/3.14.0/commons-lang3-3.14.0.jar:/tmp/m3-maven-repository/org/apache/commons/commons-text/1.11.0/commons-text-1.11.0.jar:/tmp/m3-maven-repository/io/github/classgraph/classgraph/4.8.165/classgraph-4.8.165.jar:/tmp/m3-maven-repository/org/xerial/snappy/snappy-java/1.1.10.5/snappy-java-1.1.10.5.jar:/tmp/m3-maven-repository/io/github/fastfilter/fastfilter/1.0.2/fastfilter-1.0.2.jar:/tmp/m3-maven-repository/org/ow2/asm/asm/9.6/asm-9.6.jar:/tmp/m3-maven-repository/org/ow2/asm/asm-util/9.6/asm-util-9.6.jar:/tmp/m3-maven-repository/org/ow2/asm/asm-tree/9.6/asm-tree-9.6.jar:/tmp/m3-maven-repository/org/ow2/asm/asm-analysis/9.6/asm-analysis-9.6.jar:/tmp/m3-maven-repository/org/openrewrite/rewrite-java-21/8.17.1/rewrite-java-21-8.17.1.jar:/tmp/m3-maven-repository/org/junit/jupiter/junit-jupiter/5.10.2/junit-jupiter-5.10.2.jar:/tmp/m3-maven-repository/org/junit/jupiter/junit-jupiter-api/5.10.2/junit-jupiter-api-5.10.2.jar:/tmp/m3-maven-repository/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.jar:/tmp/m3-maven-repository/org/junit/platform/junit-platform-commons/1.10.2/junit-platform-commons-1.10.2.jar:/tmp/m3-maven-repository/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar:/tmp/m3-maven-repository/org/junit/jupiter/junit-jupiter-params/5.10.2/junit-jupiter-params-5.10.2.jar:/tmp/m3-maven-repository/org/junit/jupiter/junit-jupiter-engine/5.10.2/junit-jupiter-engine-5.10.2.jar:/tmp/m3-maven-repository/org/junit/platform/junit-platform-engine/1.10.2/junit-platform-engine-1.10.2.jar:/tmp/m3-maven-repository/org/slf4j/slf4j-simple/2.0.13/slf4j-simple-2.0.13.jar:/tmp/m3-maven-repository/org/slf4j/slf4j-api/2.0.13/slf4j-api-2.0.13.jar:"/>
+    <property name="java.vm.vendor" value="Eclipse Adoptium"/>
+    <property name="m3.recipe.owner.root" value="/workspace/scratch/2b4d1cb957a7/canonical-recovery/source/synexia-openrewrite-recipes"/>
+    <property name="sun.arch.data.model" value="64"/>
+    <property name="m3.candidate.root" value="/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-numeric-copy/candidate"/>
+    <property name="m3.dataset" value="m3jdk21-numeric-copy"/>
+    <property name="java.vendor.url" value="https://adoptium.net/"/>
+    <property name="recipe.owner.root" value="/workspace/scratch/2b4d1cb957a7/canonical-recovery/source/synexia-openrewrite-recipes"/>
+    <property name="user.timezone" value="Asia/Tokyo"/>
+    <property name="os.name" value="Linux"/>
+    <property name="java.vm.specification.version" value="21"/>
+    <property name="sun.java.launcher" value="SUN_STANDARD"/>
+    <property name="sun.boot.library.path" value="/tmp/m3-toolchain/jdk-21.0.12.1+1/lib"/>
+    <property name="sun.java.command" value="/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-numeric-copy/surefire/surefirebooter-20261018102316607_3.jar /workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-numeric-copy/surefire 2026-10-18T10-23-16_522-jvmRun1 surefire-20261018102316607_1tmp surefire_0-20261018102316607_2tmp"/>
+    <property name="jdk.debug" value="release"/>
+    <property name="surefire.test.class.path" value="/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-numeric-copy/test-classes:/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-numeric-copy/classes:/tmp/m3-maven-repository/org/openrewrite/rewrite-java/8.17.1/rewrite-java-8.17.1.jar:/tmp/m3-maven-repository/org/openrewrite/rewrite-core/8.17.1/rewrite-core-8.17.1.jar:/tmp/m3-maven-repository/com/fasterxml/jackson/core/jackson-databind/2.16.1/jackson-databind-2.16.1.jar:/tmp/m3-maven-repository/com/fasterxml/jackson/core/jackson-core/2.16.1/jackson-core-2.16.1.jar:/tmp/m3-maven-repository/com/fasterxml/jackson/dataformat/jackson-dataformat-smile/2.16.1/jackson-dataformat-smile-2.16.1.jar:/tmp/m3-maven-repository/com/fasterxml/jackson/module/jackson-module-parameter-names/2.16.1/jackson-module-parameter-names-2.16.1.jar:/tmp/m3-maven-repository/com/fasterxml/jackson/datatype/jackson-datatype-jsr310/2.16.1/jackson-datatype-jsr310-2.16.1.jar:/tmp/m3-maven-repository/org/openrewrite/tools/java-object-diff/1.0.1/java-object-diff-1.0.1.jar:/tmp/m3-maven-repository/io/quarkus/gizmo/gizmo/1.0.11.Final/gizmo-1.0.11.Final.jar:/tmp/m3-maven-repository/org/jboss/jandex/2.4.2.Final/jandex-2.4.2.Final.jar:/tmp/m3-maven-repository/net/java/dev/jna/jna-platform/5.14.0/jna-platform-5.14.0.jar:/tmp/m3-maven-repository/net/java/dev/jna/jna/5.14.0/jna-5.14.0.jar:/tmp/m3-maven-repository/org/apache/commons/commons-compress/1.26.0/commons-compress-1.26.0.jar:/tmp/m3-maven-repository/commons-io/commons-io/2.15.1/commons-io-2.15.1.jar:/tmp/m3-maven-repository/org/yaml/snakeyaml/2.2/snakeyaml-2.2.jar:/tmp/m3-maven-repository/org/openrewrite/rewrite-yaml/8.17.1/rewrite-yaml-8.17.1.jar:/tmp/m3-maven-repository/org/openrewrite/rewrite-xml/8.17.1/rewrite-xml-8.17.1.jar:/tmp/m3-maven-repository/io/micrometer/micrometer-core/1.9.17/micrometer-core-1.9.17.jar:/tmp/m3-maven-repository/org/hdrhistogram/HdrHistogram/2.1.12/HdrHistogram-2.1.12.jar:/tmp/m3-maven-repository/org/latencyutils/LatencyUtils/2.0.3/LatencyUtils-2.0.3.jar:/tmp/m3-maven-repository/org/jetbrains/annotations/24.1.0/annotations-24.1.0.jar:/tmp/m3-maven-repository/com/fasterxml/jackson/core/jackson-annotations/2.16.1/jackson-annotations-2.16.1.jar:/tmp/m3-maven-repository/org/antlr/antlr4-runtime/4.11.1/antlr4-runtime-4.11.1.jar:/tmp/m3-maven-repository/org/apache/commons/commons-lang3/3.14.0/commons-lang3-3.14.0.jar:/tmp/m3-maven-repository/org/apache/commons/commons-text/1.11.0/commons-text-1.11.0.jar:/tmp/m3-maven-repository/io/github/classgraph/classgraph/4.8.165/classgraph-4.8.165.jar:/tmp/m3-maven-repository/org/xerial/snappy/snappy-java/1.1.10.5/snappy-java-1.1.10.5.jar:/tmp/m3-maven-repository/io/github/fastfilter/fastfilter/1.0.2/fastfilter-1.0.2.jar:/tmp/m3-maven-repository/org/ow2/asm/asm/9.6/asm-9.6.jar:/tmp/m3-maven-repository/org/ow2/asm/asm-util/9.6/asm-util-9.6.jar:/tmp/m3-maven-repository/org/ow2/asm/asm-tree/9.6/asm-tree-9.6.jar:/tmp/m3-maven-repository/org/ow2/asm/asm-analysis/9.6/asm-analysis-9.6.jar:/tmp/m3-maven-repository/org/openrewrite/rewrite-java-21/8.17.1/rewrite-java-21-8.17.1.jar:/tmp/m3-maven-repository/org/junit/jupiter/junit-jupiter/5.10.2/junit-jupiter-5.10.2.jar:/tmp/m3-maven-repository/org/junit/jupiter/junit-jupiter-api/5.10.2/junit-jupiter-api-5.10.2.jar:/tmp/m3-maven-repository/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.jar:/tmp/m3-maven-repository/org/junit/platform/junit-platform-commons/1.10.2/junit-platform-commons-1.10.2.jar:/tmp/m3-maven-repository/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar:/tmp/m3-maven-repository/org/junit/jupiter/junit-jupiter-params/5.10.2/junit-jupiter-params-5.10.2.jar:/tmp/m3-maven-repository/org/junit/jupiter/junit-jupiter-engine/5.10.2/junit-jupiter-engine-5.10.2.jar:/tmp/m3-maven-repository/org/junit/platform/junit-platform-engine/1.10.2/junit-platform-engine-1.10.2.jar:/tmp/m3-maven-repository/org/slf4j/slf4j-simple/2.0.13/slf4j-simple-2.0.13.jar:/tmp/m3-maven-repository/org/slf4j/slf4j-api/2.0.13/slf4j-api-2.0.13.jar:"/>
+    <property name="sun.cpu.endian" value="little"/>
+    <property name="user.home" value="/root"/>
+    <property name="user.language" value="en"/>
+    <property name="java.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.version.date" value="2026-08-18"/>
+    <property name="java.home" value="/tmp/m3-toolchain/jdk-21.0.12.1+1"/>
+    <property name="file.separator" value="/"/>
+    <property name="basedir" value="/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017"/>
+    <property name="java.vm.compressedOopsMode" value="32-bit"/>
+    <property name="line.separator" value="&#10;"/>
+    <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.specification.name" value="Java Platform API Specification"/>
+    <property name="m3.crate.name" value="m3-collections-contract-refinement-20261017-m3jdk21-numeric-copy"/>
+    <property name="surefire.real.class.path" value="/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-numeric-copy/surefire/surefirebooter-20261018102316607_3.jar"/>
+    <property name="m3.contract.output" value="/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-numeric-v1/receiver-proof"/>
+    <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
+    <property name="java.runtime.version" value="21.0.12.1+1-LTS"/>
+    <property name="user.name" value="root"/>
+    <property name="stdout.encoding" value="UTF-8"/>
+    <property name="path.separator" value=":"/>
+    <property name="os.version" value="6.18.55"/>
+    <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
+    <property name="file.encoding" value="UTF-8"/>
+    <property name="m3.crate.root" value="/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017"/>
+    <property name="java.vm.name" value="OpenJDK 64-Bit Server VM"/>
+    <property name="java.vendor.version" value="Temurin-21.0.12.1+1"/>
+    <property name="localRepository" value="/tmp/m3-maven-repository"/>
+    <property name="java.vendor.url.bug" value="https://github.com/adoptium/adoptium-support/issues"/>
+    <property name="java.io.tmpdir" value="/tmp"/>
+    <property name="java.version" value="21.0.12.1"/>
+    <property name="user.dir" value="/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017"/>
+    <property name="os.arch" value="amd64"/>
+    <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+    <property name="native.encoding" value="UTF-8"/>
+    <property name="java.library.path" value="/usr/java/packages/lib:/usr/lib64:/lib64:/lib:/usr/lib"/>
+    <property name="java.vm.info" value="mixed mode, sharing"/>
+    <property name="stderr.encoding" value="UTF-8"/>
+    <property name="java.vendor" value="Eclipse Adoptium"/>
+    <property name="java.vm.version" value="21.0.12.1+1-LTS"/>
+    <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
+    <property name="maven.repo.local" value="/tmp/m3-maven-repository"/>
+    <property name="java.class.version" value="65.0"/>
+  </properties>
+  <testcase name="driftMissingDuplicateAndWrongRepresentationRefuse" classname="com.synexia.rewrite.M3TaskRecipeTest" time="6.201">
+    <failure message="Java parser errors: [org.openrewrite.java.JavaParsingException: Failed symbol entering or attribution] ==&gt; expected: &lt;true&gt; but was: &lt;false&gt;" type="org.opentest4j.AssertionFailedError"><![CDATA[org.opentest4j.AssertionFailedError: Java parser errors: [org.openrewrite.java.JavaParsingException: Failed symbol entering or attribution] ==> expected: <true> but was: <false>
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
+	at org.junit.jupiter.api.AssertTrue.failNotTrue(AssertTrue.java:63)
+	at org.junit.jupiter.api.AssertTrue.assertTrue(AssertTrue.java:42)
+	at org.junit.jupiter.api.Assertions.assertTrue(Assertions.java:191)
+	at com.synexia.rewrite.M3TaskRecipeTest.parse(M3TaskRecipeTest.java:103)
+	at com.synexia.rewrite.M3TaskRecipeTest.driftMissingDuplicateAndWrongRepresentationRefuse(M3TaskRecipeTest.java:205)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+]]></failure>
+  </testcase>
+  <testcase name="qualifiedSdkResultsAreRetained" classname="com.synexia.rewrite.M3TaskRecipeTest" time="2.845">
+    <error message="Java template parse error: m3/arrays/src/test/java/com/m3/arrays/M3ArrayNumericCopySelfTest.java" type="java.lang.IllegalStateException"><![CDATA[java.lang.IllegalStateException: Java template parse error: m3/arrays/src/test/java/com/m3/arrays/M3ArrayNumericCopySelfTest.java
+	at com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe.parseChecked(M3HashPinnedJavaSnapshotRecipe.java:423)
+	at com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe.parse(M3HashPinnedJavaSnapshotRecipe.java:290)
+	at com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe.prepare(M3HashPinnedJavaSnapshotRecipe.java:226)
+	at com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe.generate(M3HashPinnedJavaSnapshotRecipe.java:148)
+	at com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe.generate(M3HashPinnedJavaSnapshotRecipe.java:47)
+	at org.openrewrite.ScanningRecipe.generate(ScanningRecipe.java:63)
+	at org.openrewrite.scheduling.RecipeRunCycle.lambda$generateSources$4(RecipeRunCycle.java:113)
+	at org.openrewrite.scheduling.RecipeStack.reduce(RecipeStack.java:57)
+	at org.openrewrite.scheduling.RecipeRunCycle.generateSources(RecipeRunCycle.java:108)
+	at org.openrewrite.RecipeScheduler.runRecipeCycles(RecipeScheduler.java:85)
+	at org.openrewrite.RecipeScheduler.scheduleRun(RecipeScheduler.java:41)
+	at org.openrewrite.Recipe.run(Recipe.java:344)
+	at org.openrewrite.Recipe.run(Recipe.java:340)
+	at com.synexia.rewrite.M3TaskRecipeTest.replay(M3TaskRecipeTest.java:118)
+	at com.synexia.rewrite.M3TaskRecipeTest.qualifiedSdkResultsAreRetained(M3TaskRecipeTest.java:245)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+Caused by: org.openrewrite.java.JavaParsingException: Failed symbol entering or attribution
+	at org.openrewrite.java.isolated.ReloadableJava21Parser.parseInputsToCompilerAst(ReloadableJava21Parser.java:222)
+	at org.openrewrite.java.isolated.ReloadableJava21Parser.parseInputs(ReloadableJava21Parser.java:151)
+	at org.openrewrite.java.Java21Parser.parseInputs(Java21Parser.java:39)
+	at com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe.parseChecked(M3HashPinnedJavaSnapshotRecipe.java:421)
+	... 17 more
+Caused by: java.lang.AssertionError
+	at com.sun.tools.javac.util.Assert.error(Assert.java:155)
+	at com.sun.tools.javac.util.Assert.checkNonNull(Assert.java:62)
+	at com.sun.tools.javac.util.ListBuffer.append(ListBuffer.java:127)
+	at com.sun.tools.javac.comp.Attr$1.visitYield(Attr.java:1646)
+	at com.sun.tools.javac.tree.JCTree$JCYield.accept(JCTree.java:1677)
+	at com.sun.tools.javac.tree.TreeScanner.scan(TreeScanner.java:50)
+	at com.sun.tools.javac.tree.TreeScanner.scan(TreeScanner.java:58)
+	at com.sun.tools.javac.comp.Attr.lambda$visitSwitchExpression$7(Attr.java:1653)
+	at com.sun.tools.javac.comp.Attr.handleSwitch(Attr.java:1859)
+	at com.sun.tools.javac.comp.Attr.visitSwitchExpression(Attr.java:1638)
+	at com.sun.tools.javac.tree.JCTree$JCSwitchExpression.accept(JCTree.java:1399)
+	at com.sun.tools.javac.comp.Attr.attribTree(Attr.java:662)
+	at com.sun.tools.javac.comp.Attr.visitReturn(Attr.java:2484)
+	at com.sun.tools.javac.tree.JCTree$JCReturn.accept(JCTree.java:1728)
+	at com.sun.tools.javac.comp.Attr.attribTree(Attr.java:662)
+	at com.sun.tools.javac.comp.Attr.attribStat(Attr.java:736)
+	at com.sun.tools.javac.comp.Attr.attribStats(Attr.java:755)
+	at com.sun.tools.javac.comp.Attr.visitBlock(Attr.java:1448)
+	at com.sun.tools.javac.tree.JCTree$JCBlock.accept(JCTree.java:1092)
+	at com.sun.tools.javac.comp.Attr.attribTree(Attr.java:662)
+	at com.sun.tools.javac.comp.Attr.attribStat(Attr.java:736)
+	at com.sun.tools.javac.comp.Attr.visitMethodDef(Attr.java:1231)
+	at com.sun.tools.javac.tree.JCTree$JCMethodDecl.accept(JCTree.java:916)
+	at com.sun.tools.javac.comp.Attr.attribTree(Attr.java:662)
+	at com.sun.tools.javac.comp.Attr.attribStat(Attr.java:736)
+	at com.sun.tools.javac.comp.Attr.attribClassBody(Attr.java:5664)
+	at com.sun.tools.javac.comp.Attr.attribClass(Attr.java:5552)
+	at com.sun.tools.javac.comp.Attr.attribClass(Attr.java:5376)
+	at com.sun.tools.javac.comp.Attr.attrib(Attr.java:5315)
+	at com.sun.tools.javac.main.JavaCompiler.attribute(JavaCompiler.java:1359)
+	at com.sun.tools.javac.main.JavaCompiler.attribute(JavaCompiler.java:1332)
+	at org.openrewrite.java.isolated.ReloadableJava21Parser.parseInputsToCompilerAst(ReloadableJava21Parser.java:217)
+	... 20 more
+]]></error>
+  </testcase>
+  <testcase name="postScanChangesRefuse" classname="com.synexia.rewrite.M3TaskRecipeTest" time="4.46">
+    <failure message="Java parser errors: [org.openrewrite.java.JavaParsingException: Failed symbol entering or attribution] ==&gt; expected: &lt;true&gt; but was: &lt;false&gt;" type="org.opentest4j.AssertionFailedError"><![CDATA[org.opentest4j.AssertionFailedError: Java parser errors: [org.openrewrite.java.JavaParsingException: Failed symbol entering or attribution] ==> expected: <true> but was: <false>
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
+	at org.junit.jupiter.api.AssertTrue.failNotTrue(AssertTrue.java:63)
+	at org.junit.jupiter.api.AssertTrue.assertTrue(AssertTrue.java:42)
+	at org.junit.jupiter.api.Assertions.assertTrue(Assertions.java:191)
+	at com.synexia.rewrite.M3TaskRecipeTest.parse(M3TaskRecipeTest.java:103)
+	at com.synexia.rewrite.M3TaskRecipeTest.postScan(M3TaskRecipeTest.java:235)
+	at com.synexia.rewrite.M3TaskRecipeTest.postScanChangesRefuse(M3TaskRecipeTest.java:226)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+]]></failure>
+  </testcase>
+  <testcase name="mixedPreimagesAndPostimages" classname="com.synexia.rewrite.M3TaskRecipeTest" time="0.371">
+    <failure message="Java parser errors: [org.openrewrite.java.JavaParsingException: Failed symbol entering or attribution] ==&gt; expected: &lt;true&gt; but was: &lt;false&gt;" type="org.opentest4j.AssertionFailedError"><![CDATA[org.opentest4j.AssertionFailedError: Java parser errors: [org.openrewrite.java.JavaParsingException: Failed symbol entering or attribution] ==> expected: <true> but was: <false>
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
+	at org.junit.jupiter.api.AssertTrue.failNotTrue(AssertTrue.java:63)
+	at org.junit.jupiter.api.AssertTrue.assertTrue(AssertTrue.java:42)
+	at org.junit.jupiter.api.Assertions.assertTrue(Assertions.java:191)
+	at com.synexia.rewrite.M3TaskRecipeTest.parse(M3TaskRecipeTest.java:103)
+	at com.synexia.rewrite.M3TaskRecipeTest.mixedPreimagesAndPostimages(M3TaskRecipeTest.java:193)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+]]></failure>
+  </testcase>
+  <testcase name="exactReplayFixedPointAndInputOrder" classname="com.synexia.rewrite.M3TaskRecipeTest" time="1.867">
+    <error message="Java template parse error: m3/arrays/src/test/java/com/m3/arrays/M3ArrayNumericCopySelfTest.java" type="java.lang.IllegalStateException"><![CDATA[java.lang.IllegalStateException: Java template parse error: m3/arrays/src/test/java/com/m3/arrays/M3ArrayNumericCopySelfTest.java
+	at com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe.parseChecked(M3HashPinnedJavaSnapshotRecipe.java:423)
+	at com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe.parse(M3HashPinnedJavaSnapshotRecipe.java:290)
+	at com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe.prepare(M3HashPinnedJavaSnapshotRecipe.java:226)
+	at com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe.generate(M3HashPinnedJavaSnapshotRecipe.java:148)
+	at com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe.generate(M3HashPinnedJavaSnapshotRecipe.java:47)
+	at org.openrewrite.ScanningRecipe.generate(ScanningRecipe.java:63)
+	at org.openrewrite.scheduling.RecipeRunCycle.lambda$generateSources$4(RecipeRunCycle.java:113)
+	at org.openrewrite.scheduling.RecipeStack.reduce(RecipeStack.java:57)
+	at org.openrewrite.scheduling.RecipeRunCycle.generateSources(RecipeRunCycle.java:108)
+	at org.openrewrite.RecipeScheduler.runRecipeCycles(RecipeScheduler.java:85)
+	at org.openrewrite.RecipeScheduler.scheduleRun(RecipeScheduler.java:41)
+	at org.openrewrite.Recipe.run(Recipe.java:344)
+	at org.openrewrite.Recipe.run(Recipe.java:340)
+	at com.synexia.rewrite.M3TaskRecipeTest.namedDescriptorComposesTheQualifiedLanes(M3TaskRecipeTest.java:174)
+	at com.synexia.rewrite.M3TaskRecipeTest.exactReplayFixedPointAndInputOrder(M3TaskRecipeTest.java:143)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+Caused by: org.openrewrite.java.JavaParsingException: Failed symbol entering or attribution
+	at org.openrewrite.java.isolated.ReloadableJava21Parser.parseInputsToCompilerAst(ReloadableJava21Parser.java:222)
+	at org.openrewrite.java.isolated.ReloadableJava21Parser.parseInputs(ReloadableJava21Parser.java:151)
+	at org.openrewrite.java.Java21Parser.parseInputs(Java21Parser.java:39)
+	at com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe.parseChecked(M3HashPinnedJavaSnapshotRecipe.java:421)
+	... 17 more
+Caused by: java.lang.AssertionError
+	at com.sun.tools.javac.util.Assert.error(Assert.java:155)
+	at com.sun.tools.javac.util.Assert.checkNonNull(Assert.java:62)
+	at com.sun.tools.javac.util.ListBuffer.append(ListBuffer.java:127)
+	at com.sun.tools.javac.comp.Attr$1.visitYield(Attr.java:1646)
+	at com.sun.tools.javac.tree.JCTree$JCYield.accept(JCTree.java:1677)
+	at com.sun.tools.javac.tree.TreeScanner.scan(TreeScanner.java:50)
+	at com.sun.tools.javac.tree.TreeScanner.scan(TreeScanner.java:58)
+	at com.sun.tools.javac.comp.Attr.lambda$visitSwitchExpression$7(Attr.java:1653)
+	at com.sun.tools.javac.comp.Attr.handleSwitch(Attr.java:1859)
+	at com.sun.tools.javac.comp.Attr.visitSwitchExpression(Attr.java:1638)
+	at com.sun.tools.javac.tree.JCTree$JCSwitchExpression.accept(JCTree.java:1399)
+	at com.sun.tools.javac.comp.Attr.attribTree(Attr.java:662)
+	at com.sun.tools.javac.comp.Attr.visitReturn(Attr.java:2484)
+	at com.sun.tools.javac.tree.JCTree$JCReturn.accept(JCTree.java:1728)
+	at com.sun.tools.javac.comp.Attr.attribTree(Attr.java:662)
+	at com.sun.tools.javac.comp.Attr.attribStat(Attr.java:736)
+	at com.sun.tools.javac.comp.Attr.attribStats(Attr.java:755)
+	at com.sun.tools.javac.comp.Attr.visitBlock(Attr.java:1448)
+	at com.sun.tools.javac.tree.JCTree$JCBlock.accept(JCTree.java:1092)
+	at com.sun.tools.javac.comp.Attr.attribTree(Attr.java:662)
+	at com.sun.tools.javac.comp.Attr.attribStat(Attr.java:736)
+	at com.sun.tools.javac.comp.Attr.visitMethodDef(Attr.java:1231)
+	at com.sun.tools.javac.tree.JCTree$JCMethodDecl.accept(JCTree.java:916)
+	at com.sun.tools.javac.comp.Attr.attribTree(Attr.java:662)
+	at com.sun.tools.javac.comp.Attr.attribStat(Attr.java:736)
+	at com.sun.tools.javac.comp.Attr.attribClassBody(Attr.java:5664)
+	at com.sun.tools.javac.comp.Attr.attribClass(Attr.java:5552)
+	at com.sun.tools.javac.comp.Attr.attribClass(Attr.java:5376)
+	at com.sun.tools.javac.comp.Attr.attrib(Attr.java:5315)
+	at com.sun.tools.javac.main.JavaCompiler.attribute(JavaCompiler.java:1359)
+	at com.sun.tools.javac.main.JavaCompiler.attribute(JavaCompiler.java:1332)
+	at org.openrewrite.java.isolated.ReloadableJava21Parser.parseInputsToCompilerAst(ReloadableJava21Parser.java:217)
+	... 20 more
+]]></error>
+  </testcase>
+</testsuite>

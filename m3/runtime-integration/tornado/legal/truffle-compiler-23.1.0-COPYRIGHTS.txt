@@ -1,0 +1,7 @@
+Source archive: https://repo.maven.apache.org/maven2/org/graalvm/truffle/truffle-compiler/23.1.0/truffle-compiler-23.1.0-sources.jar
+
+Copyright (c) 2013, 2023, Oracle and/or its affiliates. All rights reserved.
+Copyright (c) 2018, 2023, Oracle and/or its affiliates. All rights reserved.
+Copyright (c) 2020, 2023, Oracle and/or its affiliates. All rights reserved.
+Copyright (c) 2022, 2023, Oracle and/or its affiliates. All rights reserved.
+Copyright (c) 2023, 2023, Oracle and/or its affiliates. All rights reserved.

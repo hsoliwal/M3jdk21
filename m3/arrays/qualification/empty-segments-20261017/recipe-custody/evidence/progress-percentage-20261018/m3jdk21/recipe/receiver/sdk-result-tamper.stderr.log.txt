@@ -1,0 +1,12 @@
+Traceback (most recent call last):
+  File "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/proof/recipe-m3jdk21/receiver-proof/isolated-kbz9hktn/result-tamper/crate/receive.py", line 195, in <module>
+    main()
+  File "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/proof/recipe-m3jdk21/receiver-proof/isolated-kbz9hktn/result-tamper/crate/receive.py", line 190, in main
+    result = receive(crate, args.dataset, owner.absolute(), args.target.absolute(), args.check)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/proof/recipe-m3jdk21/receiver-proof/isolated-kbz9hktn/result-tamper/crate/receive.py", line 147, in receive
+    qualified = qualification(crate, dataset, owner)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/proof/recipe-m3jdk21/receiver-proof/isolated-kbz9hktn/result-tamper/crate/receive.py", line 137, in qualification
+    raise ValueError("SDK result changed after qualification: " + path)
+ValueError: SDK result changed after qualification: m3/collections/src/test/java/com/m3/collections/M3ProgressAdaptersPercentageTest.java

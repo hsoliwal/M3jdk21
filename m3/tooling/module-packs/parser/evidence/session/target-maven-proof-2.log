@@ -1,0 +1,44 @@
+[INFO] Scanning for projects...
+[WARNING] The requested profile "m3-parser" could not be activated because it does not exist.
+[INFO] 
+[INFO] -----------------< com.m3.tooling:m3-parser-jmod-pack >-----------------
+[INFO] Building M3 parser source module and JMOD qualification 0.1.0-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/codehaus/mojo/exec-maven-plugin/3.3.0/exec-maven-plugin-3.3.0.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/codehaus/mojo/exec-maven-plugin/3.3.0/exec-maven-plugin-3.3.0.pom (14 kB at 32 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/codehaus/mojo/mojo-parent/82/mojo-parent-82.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/codehaus/mojo/mojo-parent/82/mojo-parent-82.pom (36 kB at 408 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/codehaus/mojo/exec-maven-plugin/3.3.0/exec-maven-plugin-3.3.0.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/codehaus/mojo/exec-maven-plugin/3.3.0/exec-maven-plugin-3.3.0.jar (85 kB at 1.5 MB/s)
+[INFO] 
+[INFO] --- exec:3.3.0:exec (parser-lint) @ m3-parser-jmod-pack ---
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/commons/commons-exec/1.4.0/commons-exec-1.4.0.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/commons/commons-exec/1.4.0/commons-exec-1.4.0.pom (9.5 kB at 119 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/ow2/asm/asm-commons/9.7/asm-commons-9.7.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/ow2/asm/asm-commons/9.7/asm-commons-9.7.pom (2.8 kB at 34 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/ow2/asm/asm-tree/9.7/asm-tree-9.7.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/ow2/asm/asm-tree/9.7/asm-tree-9.7.pom (2.6 kB at 30 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/commons/commons-exec/1.4.0/commons-exec-1.4.0.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/commons/commons-exec/1.4.0/commons-exec-1.4.0.jar (66 kB at 1.2 MB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/ow2/asm/asm-tree/9.7/asm-tree-9.7.jar
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/ow2/asm/asm-commons/9.7/asm-commons-9.7.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/ow2/asm/asm-tree/9.7/asm-tree-9.7.jar (52 kB at 285 kB/s)
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/ow2/asm/asm-commons/9.7/asm-commons-9.7.jar (73 kB at 305 kB/s)
+M3_PARSER_PHASE_PASS phase=lint input_sha256=e279db46a00e6a15a0d44275a40b32c4a1ed1cff9db13658ee971d7251f30ce5
+[INFO] 
+[INFO] --- exec:3.3.0:exec (parser-compile-all) @ m3-parser-jmod-pack ---
+M3_PARSER_PHASE_PASS phase=compile input_sha256=e279db46a00e6a15a0d44275a40b32c4a1ed1cff9db13658ee971d7251f30ce5
+[INFO] 
+[INFO] --- exec:3.3.0:exec (parser-contracts) @ m3-parser-jmod-pack ---
+M3_PARSER_PHASE_PASS phase=test input_sha256=e279db46a00e6a15a0d44275a40b32c4a1ed1cff9db13658ee971d7251f30ce5
+[INFO] 
+[INFO] --- exec:3.3.0:exec (parser-jmod-runtime) @ m3-parser-jmod-pack ---
+M3_PARSER_PHASE_PASS phase=runtime input_sha256=e279db46a00e6a15a0d44275a40b32c4a1ed1cff9db13658ee971d7251f30ce5
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  17.135 s
+[INFO] Finished at: 2026-10-18T08:09:00+02:00
+[INFO] ------------------------------------------------------------------------
+[WARNING] The requested profile "m3-parser" could not be activated because it does not exist.

@@ -1,0 +1,155 @@
+{
+  "schema": "M3_FILTERED_NAVIGATION_RECONCILIATION_EVALUATION_20261018",
+  "dataset": "filtered-navigation-20261018",
+  "baseline": "hsoliwal/M3JDK21@2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
+  "canonical_task": "hsoliwal/com.synexia@synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017",
+  "canonical_source_revision": "140c263a90f9803b9c46103c63355a286e0515f0",
+  "method": "Consult existing problem-category and donor decisions, compare named atoms serially, seal exact per-file preimages/postimages, qualify actual OpenRewrite SDK Results, then admit all target inputs before serial receiving.",
+  "invariant": "Maintain reusable validated transformation recipes; use contract-preserving per-file transformations; record category-driven donor comparison and selection rationale. A source fingerprint is candidate evidence, never semantic-equivalence or mutation authority.",
+  "selected": [
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java",
+      "operations": [
+        {
+          "category": "NULLABLE_BOUNDED_NAVIGATION",
+          "before": "The nullable neighbor result was treated as stored null only when null was the first or last owner element. A lawful comparator can place null between two stored nonnull elements.",
+          "selected": "Adapt the previously reviewed actual-stored-boundary proof. Retain current first/last acquisition order and compare the stored opposite extreme when neither extreme is null.",
+          "rejected": [
+            {
+              "candidate": "contains(null) or fabricated null comparator probe",
+              "reason": "Adds a potentially illegal probe and observable callbacks for a nonnull owner; historical catalogue already retains this counterexample."
+            },
+            {
+              "candidate": "Full owner scan or sorted snapshot",
+              "reason": "Changes demand, callback/exception order and live owner semantics; unnecessary for the selected presence atom."
+            }
+          ],
+          "scope": "Existing read-only NavigableSetView neighbor queries, including legal bounded and descending owners; no change to comparator ownership or range creation.",
+          "observable_change": "When both stored extremes are nonnull, the repaired null-sentinel branch performs one comparison with the actual opposite stored boundary where the baseline short-circuited. Current first/last lookup order and finite comparator/value results are established; universal comparator callback identity is not claimed. This repaired path is excluded from the unchanged ordinary-read tape."
+        },
+        {
+          "category": "STORED_REPRESENTATIVE_ENTRY_MEMBERSHIP",
+          "before": "Abstract entry-set membership compared detached entry keys with equals, inconsistent with the backing sorted map's comparator equivalence and stored representative predicate contract.",
+          "selected": "Use existing storedKey/get atoms following the pinned Synexia stored-entry donor. Evaluate visibility on the actual stored key; compare the actual value to candidate entry value.",
+          "rejected": [
+            {
+              "candidate": "Predicate on caller probe key",
+              "reason": "Fails comparator-equivalent keys with different equality/identity and can hide or reveal the wrong stored entry."
+            },
+            {
+              "candidate": "Entry allocation from the historical donor",
+              "reason": "Current source already provides the required storedKey/get atoms; no detached Entry is needed."
+            }
+          ],
+          "observable_change": "Corrected entrySet.contains calls its predicate once on a stored comparator-matching key, avoids unrelated predicates and reads candidate value once. This repaired path is excluded from unchanged callback-tape claims."
+        },
+        {
+          "category": "READ_ONLY_VIEW_DEFAULTS",
+          "before": "Inherited JDK21 sequenced removal on empty views and reversed sorted range defaults could throw NoSuchElementException or permit no-op mutation instead of the documented unconditional UnsupportedOperationException.",
+          "selected": "Reuse pinned explicit endpoint refusals and query-forwarding ReadOnlySortedSet guard.",
+          "rejected": [
+            {
+              "candidate": "Collections.unmodifiableSortedSet alone",
+              "reason": "Does not establish the required empty sequenced endpoint behavior throughout reversed/range wrappers."
+            },
+            {
+              "candidate": "Read first/last then refuse mutation",
+              "reason": "Invokes owner reads or predicate callbacks before a required unconditional refusal."
+            }
+          ],
+          "scope": "No public callable descriptor is added; inherited public descriptors can acquire explicit declaring-owner reflection metadata.",
+          "unreconciled_historical_map_guarantee": "PR#1204 README m3/collections/qualification/contracts-20261017/README.md (blob9d1e977abaceade36e51df6b0179e3b5db6540a3) promised strict empty sequenced endpoints for read-only maps and sorted sets. This candidate refines only Set guards. Current outer JDK-derived Map wrappers can still inherit NoSuchElementException on empty derived endpoints. That historical guarantee remains unreconciled, requiring separate admission of concrete wrapper/marker/delegation behavior."
+        },
+        {
+          "category": "DECORATOR_RECURSION_ELIMINATION",
+          "before": "Repeated known CollectionView/SetView wrappers recurse through iterator and membership, overflowing the Java stack at tested depths.",
+          "selected": "Reuse pinned iterationView, membershipView and visibleMember continuation atoms without changing source links.",
+          "rejected": [
+            {
+              "candidate": "Flatten predicate chains when constructing wrappers",
+              "reason": "Alters repeated inner scans and callback occurrence/order needed by the existing membership contract."
+            },
+            {
+              "candidate": "Unwrap arbitrary sorted, navigable or foreign views",
+              "reason": "Their membership and callback boundaries are opaque."
+            }
+          ],
+          "cost": "Iterator uses O(d) temporary predicate references and constant M3 stack; per-element predicate demand remains O(d). Contains retains repeated scans, including d(d+1)/2 predicates for one always-visible element. No linear-time membership claim.",
+          "scope": "Known generic collection and exact SetView chains only; temporary arrays contain references to behavioral state, not element snapshots."
+        }
+      ]
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3IndexPathMasks.java",
+      "operations": [
+        {
+          "category": "JNI_ARRAY_ALIAS_PREFLIGHT",
+          "before": "scanWindow's source/output guard omitted requiredMasks and forbiddenMasks. Java wrote into those inputs and could subsequently throw ConcurrentModificationException; actual JNI could return successfully after corrupting those masks.",
+          "selected": "Add both mask arrays to the existing output/input reference-identity guard, before backend selection and before any writes.",
+          "rejected": [
+            {
+              "candidate": "Clone mask vectors",
+              "reason": "Adds allocation and silently permits input/output aliases despite the existing documented alias-preflight rule."
+            },
+            {
+              "candidate": "Patch native selector alone",
+              "reason": "Misses JAVA behavior and changes the wrong owner; common Java admission precedes both backends."
+            }
+          ],
+          "cost": "Two extra constant-time identity comparisons; existing bounded two-pass selection, duplicate row order, signed stride, offset mapping and cursor packing unchanged.",
+          "scope": "All output/input aliases refuse including empty paths and zero limits. Input/input sharing remains permitted when separately valid. Existing geometry/output-bounds failure priority remains."
+        }
+      ]
+    }
+  ],
+  "discovery_reference_only": [
+    {
+      "platform": "GitHub",
+      "source": "https://github.com/hsoliwal/M3JDK21/pull/1204",
+      "use": "Selected first-party Apache-2.0 continuation and guard atoms; exact commit/blob in DONOR_SOURCES.tsv."
+    },
+    {
+      "platform": "LeetCode",
+      "source": "https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array/",
+      "use": "Sorted-boundary problem category and adversarial duplicate/boundary shapes; no submission or editorial source copied."
+    },
+    {
+      "platform": "LeetCode",
+      "source": "https://leetcode.com/problems/move-zeroes/",
+      "use": "Stable compaction problem category; confirms encounter-order obligation differs from in-place remove-element challenges. No algorithm change selected for current compaction owner."
+    },
+    {
+      "platform": "HackerRank",
+      "source": "https://www.hackerrank.com/challenges/java-bitset/problem",
+      "use": "State-bit operation category; existing M3 required/forbidden-mask implementation retained. No challenge source copied."
+    },
+    {
+      "platform": "HackerRank",
+      "source": "https://www.hackerrank.com/challenges/countingsort4/problem",
+      "use": "Stable ordering category. Snapshot sorting/permutation replacement rejected for live wrappers; no challenge source copied."
+    },
+    {
+      "platform": "GeeksforGeeks",
+      "source": "https://www.geeksforgeeks.org/dsa/implement-lower-bound/",
+      "use": "Lower-bound comparison category only; no article code transplanted."
+    },
+    {
+      "platform": "GeeksforGeeks",
+      "source": "https://www.geeksforgeeks.org/dsa/stable-and-unstable-sorting-algorithms/",
+      "use": "Stable ordering classification only; no article code transplanted."
+    },
+    {
+      "platform": "JDK21",
+      "source": "https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/SortedSet.html",
+      "use": "Sequenced/sorted public API behavioral reference and independent JDK owner oracle; no GPL source copied."
+    }
+  ],
+  "rights": "Existing M3 and Synexia Apache-2.0 source headers and module licenses are retained. Only pinned first-party atoms are reused. Challenge platforms, Guava and JDK are reference-only for this maintenance pass.",
+  "verification": {
+    "authoring": "Raw baseline failures, candidate checks and stable unaffected-read tape are frozen under AUTHORING_WITNESSES; authoring is distinct from receiving.",
+    "recipe": "Unchanged canonical OpenRewrite 8.17.1 Java/Text owners; existing five SDK tests, eight prepare tests and nine receiver cases must pass. No replacement harness.",
+    "receiving": "Use receive.py --check after SDK qualification, then receive actual retained SDK outputs. Runtime checks must run against received sources.",
+    "status_resolution": "Frozen authoring records do not predict later execution. See ../../evidence/filtered-navigation-20261018/ for exact SDK, receiver and runtime status receipts.",
+    "tape_scope": "Unchanged ordinary-read tape excludes both repaired entry-membership demand and repaired null-sentinel comparator demand; neither correction is represented as universal baseline callback equivalence."
+  }
+}

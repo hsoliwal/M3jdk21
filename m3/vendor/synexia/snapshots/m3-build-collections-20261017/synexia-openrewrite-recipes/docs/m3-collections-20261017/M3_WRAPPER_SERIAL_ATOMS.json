@@ -1,0 +1,42 @@
+{
+  "status": "CANDIDATE_PAYLOAD_NOT_TARGET_APPLICATION",
+  "baselineCommit": "11c94feb18155a53cc213708c353791132edc4a7",
+  "engine": "com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe",
+  "steps": [
+    {
+      "ordinal": 1,
+      "crate": "filtered-wrapper-descending-cursor-20261017",
+      "recipe": "com.synexia.m3.M3FilteredWrapperDescendingCursor20261017",
+      "displayName": "Remove private descending iterator view construction",
+      "target": "synexia-common/src/main/java/com/synexia/common/collections/M3FilteredViews.java",
+      "beforeSha256": "104ad823cd27f55489bee788c4c3716de81c8f51e06ae81c8f3619b7cf65b062",
+      "afterSha256": "81d1dcfe12664dbfa674388e1b52b1914f69e6caeadfc8d25ac566241ee7be0d",
+      "manifest": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/filtered-wrapper-descending-cursor-20261017/manifest.tsv",
+      "template": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/filtered-wrapper-descending-cursor-20261017/template-00.txt"
+    },
+    {
+      "ordinal": 2,
+      "crate": "filtered-wrapper-empty-map-20261017",
+      "recipe": "com.synexia.m3.M3FilteredWrapperEmptyMap20261017",
+      "displayName": "Remove private entry export wrappers from emptiness checks",
+      "target": "synexia-common/src/main/java/com/synexia/common/collections/M3FilteredViews.java",
+      "beforeSha256": "81d1dcfe12664dbfa674388e1b52b1914f69e6caeadfc8d25ac566241ee7be0d",
+      "afterSha256": "48bcb4d3dd3d7ebcfda5ba502e1ae59322254009b622b229d96a8ea349426f68",
+      "manifest": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/filtered-wrapper-empty-map-20261017/manifest.tsv",
+      "template": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/filtered-wrapper-empty-map-20261017/template-00.txt"
+    }
+  ],
+  "contractTestsFrozenBeforeAuthoring": "evidence/frozen-test-inputs.json",
+  "historicalInstallers": "Unchanged; retain original preconditions and source receipts.",
+  "performanceClaim": "Removes private construction paths. No speedup or typical JVM allocation measurement is claimed.",
+  "delivery": {
+    "crate": "filtered-wrapper-private-construction-20261017",
+    "recipe": "com.synexia.m3.M3FilteredWrapperPrivateConstruction20261017",
+    "target": "synexia-common/src/main/java/com/synexia/common/collections/M3FilteredViews.java",
+    "beforeSha256": "104ad823cd27f55489bee788c4c3716de81c8f51e06ae81c8f3619b7cf65b062",
+    "afterSha256": "48bcb4d3dd3d7ebcfda5ba502e1ae59322254009b622b229d96a8ea349426f68",
+    "manifest": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/filtered-wrapper-private-construction-20261017/manifest.tsv",
+    "template": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/filtered-wrapper-private-construction-20261017/template-00.txt"
+  },
+  "deliveryRationale": "Whole-file exact-hash forward steps are not a convergent composite: baseline->A refuses already-B. Qualify intermediate atoms serially, then deliver one exact baseline->B crate that accepts its final postimage unchanged. Retain intermediate resources as isolated qualification evidence; do not register them as a sequential named delivery recipe or widen their preconditions."
+}

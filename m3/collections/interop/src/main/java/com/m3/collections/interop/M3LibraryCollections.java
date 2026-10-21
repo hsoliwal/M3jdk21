@@ -10,6 +10,7 @@ import com.google.common.collect.SetMultimap;
 import com.google.common.collect.SortedSetMultimap;
 import com.google.common.collect.Table;
 import com.google.common.collect.Tables;
+import com.m3.collections.M3ArrayList;
 import com.m3.collections.M3LinkedHashMap;
 import com.m3.collections.M3LinkedHashSet;
 import com.m3.collections.M3LinkedList;
@@ -79,9 +80,12 @@ public final class M3LibraryCollections {
         return new M3TreeSet<>(Objects.requireNonNull(order, "order"));
     }
 
-    /** Guava list semantics: duplicates, ordered values, live get(), pair-count size. */
+    /**
+     * Guava list semantics over M3 dynamic arrays: duplicates, ordered values,
+     * live get(), pair-count size and RandomAccess value lists.
+     */
     public static <K, V> ListMultimap<K, V> guavaListMultimap() {
-        return Multimaps.newListMultimap(new M3LinkedHashMap<>(), M3LinkedList::new);
+        return Multimaps.newListMultimap(new M3LinkedHashMap<>(), M3ArrayList::new);
     }
 
     /** Guava set semantics: duplicate suppression and automatic empty-key removal. */
@@ -130,7 +134,7 @@ public final class M3LibraryCollections {
      * single-value copies. Unlike Guava, size counts distinct keys. Supplied lists stay aliased.
      */
     public static <K, V> MultiValueMap<K, V> springMultiValueMap() {
-        return new M3SpringMultiValueMap<>();
+        return new M3SpringArrayMultiValueMap<>();
     }
 
     /** Spring's single-value-to-multi-value view; no multi-value emulation is promised. */
@@ -142,4 +146,47 @@ public final class M3LibraryCollections {
     public static <E> List<E> springAutoPopulatingList(AutoPopulatingList.ElementFactory<E> factory) {
         return new AutoPopulatingList<>(new M3LinkedList<E>(), factory);
     }
+    /** Apache ListValuedMap contract, not Guava ListMultimap or Spring MultiValueMap. */
+    public static <K, V> org.apache.commons.collections4.ListValuedMap<K, V> apacheListValuedMap() {
+        return new M3ApacheListValuedMap<>();
+    }
+
+    /** Apache SetValuedMap contract with M3-owned keys and value sets. */
+    public static <K, V> org.apache.commons.collections4.SetValuedMap<K, V> apacheSetValuedMap() {
+        return new M3ApacheSetValuedMap<>();
+    }
+
+    /**
+     * Guava live filtered Collection over an existing M3 list owner; never a snapshot.
+     * Guava owns predicate evaluation, insertion rejection and iterator-remove semantics.
+     * Filtering does not acquire an independent value store or cache mutable predicates.
+     */
+    public static <E> java.util.Collection<E> guavaFilteredCollection(
+            M3LinkedList<E> owner, com.google.common.base.Predicate<? super E> predicate) {
+        return com.google.common.collect.Collections2.filter(
+                Objects.requireNonNull(owner, "owner"), Objects.requireNonNull(predicate, "predicate"));
+    }
+
+    /** Guava live sorted/range/descending view over the existing M3 navigable-set owner. */
+    public static <E> NavigableSet<E> guavaFilteredNavigableSet(
+            M3TreeSet<E> owner, com.google.common.base.Predicate<? super E> predicate) {
+        return com.google.common.collect.Sets.filter(
+                Objects.requireNonNull(owner, "owner"), Objects.requireNonNull(predicate, "predicate"));
+    }
+    /** Guava's real bidirectional-map interface backed by two indexed M3 map lanes. */
+    public static <K, V> com.google.common.collect.BiMap<K, V> guavaBiMap() {
+        return new M3GuavaBiMap<>();
+    }
+
+    /** Apache Commons Collections bidirectional map over existing M3 indexed owners. */
+    public static <K, V> org.apache.commons.collections4.BidiMap<K, V> apacheBidiMap() {
+        return new M3ApacheBidiMap<>();
+    }
+
+    /** Spring 6.2 case-insensitive Map semantics over two existing M3 index maps.
+     * Does not impersonate Spring's concrete LinkedCaseInsensitiveMap class. */
+    public static <V> Map<String, V> springCaseInsensitiveMap(java.util.Locale locale) {
+        return new M3SpringCaseInsensitiveMap<>(Objects.requireNonNull(locale, "locale"));
+    }
+
 }

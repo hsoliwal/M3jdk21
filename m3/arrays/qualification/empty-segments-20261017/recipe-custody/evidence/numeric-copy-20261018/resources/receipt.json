@@ -1,0 +1,2869 @@
+{
+  "schema": "M3_NUMERIC_COPY_FINITE_RESOURCE_OBSERVATIONS_V1",
+  "status": "PASS",
+  "baseline_revision": "4b24824c3aa09d802121447f8970d442a855f064",
+  "source_stage": "ACTUAL_SDK_OUTPUT",
+  "sources": {
+    "collection-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-numeric-copy/candidate/m3/arrays/qualification/numeric-copy-20261018/src/test/java/com/m3/arrays/M3ArrayCopySizeAgent.java": "d73537b80f827d774fbd0aa1918919a2e1747b9cc0b26d0b9c2c257b314e5585",
+    "collection-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-numeric-copy/candidate/m3/arrays/qualification/numeric-copy-20261018/src/test/java/com/m3/arrays/M3ArrayNumericCopyCostProbe.java": "cca6bab0a6b6ecccd952591a67c2c7a3f4599b56e8d44857bdc0b39028b5dc62"
+  },
+  "sdk_results_sha256": "0f4c412e6b4ade2c05bb7afcec22efd626e89eebf0278762fad32c71ee593043",
+  "workload_notes": [
+    "descriptor_count names the prepared 256-segment input pool; owned graph fields give retained shape-specific topology",
+    "15 warm samples per primitive and shape across three fresh JVMs per variant",
+    "Thread CPU and process RSS are observations, not an application throughput claim",
+    "copy algorithm makes no JNI call; original native gate remains separate"
+  ],
+  "commands": [
+    {
+      "stage": "compile",
+      "command": [
+        "/tmp/m3-toolchain/jdk-21.0.12.1+1/bin/javac",
+        "-Xlint:all,-module",
+        "-Werror",
+        "-cp",
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/sdk-numeric-v2/baseline/classes",
+        "-d",
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/sdk-resource-v2/classes",
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-numeric-copy/candidate/m3/arrays/qualification/numeric-copy-20261018/src/test/java/com/m3/arrays/M3ArrayCopySizeAgent.java",
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-numeric-copy/candidate/m3/arrays/qualification/numeric-copy-20261018/src/test/java/com/m3/arrays/M3ArrayNumericCopyCostProbe.java"
+      ],
+      "exit_code": 0
+    },
+    {
+      "stage": "agent-package",
+      "command": [
+        "/tmp/m3-toolchain/jdk-21.0.12.1+1/bin/jar",
+        "--create",
+        "--file",
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/sdk-resource-v2/size-agent.jar",
+        "--manifest",
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/sdk-resource-v2/MANIFEST.MF",
+        "-C",
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/sdk-resource-v2/classes",
+        "com/m3/arrays/M3ArrayCopySizeAgent.class"
+      ],
+      "exit_code": 0
+    },
+    {
+      "shape": "snapshot",
+      "fork": 0,
+      "variant": "baseline",
+      "command": [
+        "/tmp/m3-toolchain/jdk-21.0.12.1+1/bin/java",
+        "-Xms64m",
+        "-Xmx256m",
+        "-Xcheck:jni",
+        "-javaagent:/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/sdk-resource-v2/size-agent.jar",
+        "-cp",
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/sdk-resource-v2/classes:/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/sdk-numeric-v2/baseline/classes",
+        "com.m3.arrays.M3ArrayNumericCopyCostProbe",
+        "snapshot"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.7046029567718506,
+      "log_sha256": "36e0d891a06cc23487e78851bc2da12db7fd7046a7f7eea4a7951c18b87aa0f5"
+    },
+    {
+      "shape": "snapshot",
+      "fork": 0,
+      "variant": "sdk",
+      "command": [
+        "/tmp/m3-toolchain/jdk-21.0.12.1+1/bin/java",
+        "-Xms64m",
+        "-Xmx256m",
+        "-Xcheck:jni",
+        "-javaagent:/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/sdk-resource-v2/size-agent.jar",
+        "-cp",
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/sdk-resource-v2/classes:/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/sdk-numeric-v2/sdk/classes",
+        "com.m3.arrays.M3ArrayNumericCopyCostProbe",
+        "snapshot"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.5072553157806396,
+      "log_sha256": "dcfb5b6618c9e0ccd5a16cdb07d5f9082a74c82d2ed23bf3363111f69017c6cd"
+    },
+    {
+      "shape": "snapshot",
+      "fork": 1,
+      "variant": "baseline",
+      "command": [
+        "/tmp/m3-toolchain/jdk-21.0.12.1+1/bin/java",
+        "-Xms64m",
+        "-Xmx256m",
+        "-Xcheck:jni",
+        "-javaagent:/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/sdk-resource-v2/size-agent.jar",
+        "-cp",
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/sdk-resource-v2/classes:/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/sdk-numeric-v2/baseline/classes",
+        "com.m3.arrays.M3ArrayNumericCopyCostProbe",
+        "snapshot"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.554560661315918,
+      "log_sha256": "2040e9f9cbc8e6ba0012a57821116e1b162e466509196f825a9da4277b96b4b9"
+    },
+    {
+      "shape": "snapshot",
+      "fork": 1,
+      "variant": "sdk",
+      "command": [
+        "/tmp/m3-toolchain/jdk-21.0.12.1+1/bin/java",
+        "-Xms64m",
+        "-Xmx256m",
+        "-Xcheck:jni",
+        "-javaagent:/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/sdk-resource-v2/size-agent.jar",
+        "-cp",
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/sdk-resource-v2/classes:/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/sdk-numeric-v2/sdk/classes",
+        "com.m3.arrays.M3ArrayNumericCopyCostProbe",
+        "snapshot"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.5638267993927002,
+      "log_sha256": "28bb94d31495efd69b00af5d1ef291a1d3dccdc0a9467ccd0fe97f0ce468490d"
+    },
+    {
+      "shape": "snapshot",
+      "fork": 2,
+      "variant": "baseline",
+      "command": [
+        "/tmp/m3-toolchain/jdk-21.0.12.1+1/bin/java",
+        "-Xms64m",
+        "-Xmx256m",
+        "-Xcheck:jni",
+        "-javaagent:/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/sdk-resource-v2/size-agent.jar",
+        "-cp",
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/sdk-resource-v2/classes:/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/sdk-numeric-v2/baseline/classes",
+        "com.m3.arrays.M3ArrayNumericCopyCostProbe",
+        "snapshot"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.5380678176879883,
+      "log_sha256": "d5bc546dd341b41dec5ed0551dd89d1373a6a44d2e9f067f1d9e24cb0f2b1044"
+    },
+    {
+      "shape": "snapshot",
+      "fork": 2,
+      "variant": "sdk",
+      "command": [
+        "/tmp/m3-toolchain/jdk-21.0.12.1+1/bin/java",
+        "-Xms64m",
+        "-Xmx256m",
+        "-Xcheck:jni",
+        "-javaagent:/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/sdk-resource-v2/size-agent.jar",
+        "-cp",
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/sdk-resource-v2/classes:/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/sdk-numeric-v2/sdk/classes",
+        "com.m3.arrays.M3ArrayNumericCopyCostProbe",
+        "snapshot"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.35665392875671387,
+      "log_sha256": "5c50fe5e08f1da6d45f267833d3f91ed67722bb7a2fc97454c758d54cdd276ca"
+    },
+    {
+      "shape": "slice",
+      "fork": 0,
+      "variant": "baseline",
+      "command": [
+        "/tmp/m3-toolchain/jdk-21.0.12.1+1/bin/java",
+        "-Xms64m",
+        "-Xmx256m",
+        "-Xcheck:jni",
+        "-javaagent:/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/sdk-resource-v2/size-agent.jar",
+        "-cp",
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/sdk-resource-v2/classes:/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/sdk-numeric-v2/baseline/classes",
+        "com.m3.arrays.M3ArrayNumericCopyCostProbe",
+        "slice"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.4233701229095459,
+      "log_sha256": "5b3a74237707ea502541a644a5fad4e39dbdb7b352dd2431a2c575104219990d"
+    },
+    {
+      "shape": "slice",
+      "fork": 0,
+      "variant": "sdk",
+      "command": [
+        "/tmp/m3-toolchain/jdk-21.0.12.1+1/bin/java",
+        "-Xms64m",
+        "-Xmx256m",
+        "-Xcheck:jni",
+        "-javaagent:/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/sdk-resource-v2/size-agent.jar",
+        "-cp",
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/sdk-resource-v2/classes:/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/sdk-numeric-v2/sdk/classes",
+        "com.m3.arrays.M3ArrayNumericCopyCostProbe",
+        "slice"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.32792043685913086,
+      "log_sha256": "76d404a62563cb4df1b179c8333a94a821419b5bc38171b14d9ec154506b1e8b"
+    },
+    {
+      "shape": "slice",
+      "fork": 1,
+      "variant": "baseline",
+      "command": [
+        "/tmp/m3-toolchain/jdk-21.0.12.1+1/bin/java",
+        "-Xms64m",
+        "-Xmx256m",
+        "-Xcheck:jni",
+        "-javaagent:/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/sdk-resource-v2/size-agent.jar",
+        "-cp",
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/sdk-resource-v2/classes:/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/sdk-numeric-v2/baseline/classes",
+        "com.m3.arrays.M3ArrayNumericCopyCostProbe",
+        "slice"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.44409847259521484,
+      "log_sha256": "08d095a761e31ce4e48eda31673d72ca7cbabbf9244cbb11ec3550a11a45cd78"
+    },
+    {
+      "shape": "slice",
+      "fork": 1,
+      "variant": "sdk",
+      "command": [
+        "/tmp/m3-toolchain/jdk-21.0.12.1+1/bin/java",
+        "-Xms64m",
+        "-Xmx256m",
+        "-Xcheck:jni",
+        "-javaagent:/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/sdk-resource-v2/size-agent.jar",
+        "-cp",
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/sdk-resource-v2/classes:/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/sdk-numeric-v2/sdk/classes",
+        "com.m3.arrays.M3ArrayNumericCopyCostProbe",
+        "slice"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.35651183128356934,
+      "log_sha256": "c05853b6061156d98558a959c87635891844c3f60d48c9c2cd06c1c110763016"
+    },
+    {
+      "shape": "slice",
+      "fork": 2,
+      "variant": "baseline",
+      "command": [
+        "/tmp/m3-toolchain/jdk-21.0.12.1+1/bin/java",
+        "-Xms64m",
+        "-Xmx256m",
+        "-Xcheck:jni",
+        "-javaagent:/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/sdk-resource-v2/size-agent.jar",
+        "-cp",
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/sdk-resource-v2/classes:/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/sdk-numeric-v2/baseline/classes",
+        "com.m3.arrays.M3ArrayNumericCopyCostProbe",
+        "slice"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.45178699493408203,
+      "log_sha256": "647ed58070fdb2ab8d57ce8732fb0ff9a046a8bcec2acf33d2604d10c568dd29"
+    },
+    {
+      "shape": "slice",
+      "fork": 2,
+      "variant": "sdk",
+      "command": [
+        "/tmp/m3-toolchain/jdk-21.0.12.1+1/bin/java",
+        "-Xms64m",
+        "-Xmx256m",
+        "-Xcheck:jni",
+        "-javaagent:/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/sdk-resource-v2/size-agent.jar",
+        "-cp",
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/sdk-resource-v2/classes:/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/sdk-numeric-v2/sdk/classes",
+        "com.m3.arrays.M3ArrayNumericCopyCostProbe",
+        "slice"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.3773031234741211,
+      "log_sha256": "7f8b41379b57eda56ee0192bbad6897277409254559dbf7d46fdd724eb3b52dc"
+    },
+    {
+      "shape": "join",
+      "fork": 0,
+      "variant": "baseline",
+      "command": [
+        "/tmp/m3-toolchain/jdk-21.0.12.1+1/bin/java",
+        "-Xms64m",
+        "-Xmx256m",
+        "-Xcheck:jni",
+        "-javaagent:/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/sdk-resource-v2/size-agent.jar",
+        "-cp",
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/sdk-resource-v2/classes:/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/sdk-numeric-v2/baseline/classes",
+        "com.m3.arrays.M3ArrayNumericCopyCostProbe",
+        "join"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 2.081319808959961,
+      "log_sha256": "a47f8087a81faf6be2f2766669fa0759ca5f48623903ba5b478d032ed1137363"
+    },
+    {
+      "shape": "join",
+      "fork": 0,
+      "variant": "sdk",
+      "command": [
+        "/tmp/m3-toolchain/jdk-21.0.12.1+1/bin/java",
+        "-Xms64m",
+        "-Xmx256m",
+        "-Xcheck:jni",
+        "-javaagent:/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/sdk-resource-v2/size-agent.jar",
+        "-cp",
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/sdk-resource-v2/classes:/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/sdk-numeric-v2/sdk/classes",
+        "com.m3.arrays.M3ArrayNumericCopyCostProbe",
+        "join"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.31632065773010254,
+      "log_sha256": "dfc07931f89598fd7466010fd94673b8a7fed3bb858dd8931998a98d76937979"
+    },
+    {
+      "shape": "join",
+      "fork": 1,
+      "variant": "baseline",
+      "command": [
+        "/tmp/m3-toolchain/jdk-21.0.12.1+1/bin/java",
+        "-Xms64m",
+        "-Xmx256m",
+        "-Xcheck:jni",
+        "-javaagent:/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/sdk-resource-v2/size-agent.jar",
+        "-cp",
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/sdk-resource-v2/classes:/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/sdk-numeric-v2/baseline/classes",
+        "com.m3.arrays.M3ArrayNumericCopyCostProbe",
+        "join"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 2.5511281490325928,
+      "log_sha256": "8759aaaa1947a0643edfa2c11bd06b30cdd5851b132817c04e9cb18570d4bedb"
+    },
+    {
+      "shape": "join",
+      "fork": 1,
+      "variant": "sdk",
+      "command": [
+        "/tmp/m3-toolchain/jdk-21.0.12.1+1/bin/java",
+        "-Xms64m",
+        "-Xmx256m",
+        "-Xcheck:jni",
+        "-javaagent:/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/sdk-resource-v2/size-agent.jar",
+        "-cp",
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/sdk-resource-v2/classes:/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/sdk-numeric-v2/sdk/classes",
+        "com.m3.arrays.M3ArrayNumericCopyCostProbe",
+        "join"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.40660881996154785,
+      "log_sha256": "7f4c1fc7040a2bbb708f6b6cee33fcc2bfa6539481f3e7275cf36d68b1860893"
+    },
+    {
+      "shape": "join",
+      "fork": 2,
+      "variant": "baseline",
+      "command": [
+        "/tmp/m3-toolchain/jdk-21.0.12.1+1/bin/java",
+        "-Xms64m",
+        "-Xmx256m",
+        "-Xcheck:jni",
+        "-javaagent:/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/sdk-resource-v2/size-agent.jar",
+        "-cp",
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/sdk-resource-v2/classes:/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/sdk-numeric-v2/baseline/classes",
+        "com.m3.arrays.M3ArrayNumericCopyCostProbe",
+        "join"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 2.627006769180298,
+      "log_sha256": "932070cdcaf0322f5ad8fda502039e8935adf1316a9f0ca8dcf63483e33c570f"
+    },
+    {
+      "shape": "join",
+      "fork": 2,
+      "variant": "sdk",
+      "command": [
+        "/tmp/m3-toolchain/jdk-21.0.12.1+1/bin/java",
+        "-Xms64m",
+        "-Xmx256m",
+        "-Xcheck:jni",
+        "-javaagent:/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/sdk-resource-v2/size-agent.jar",
+        "-cp",
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/sdk-resource-v2/classes:/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/sdk-numeric-v2/sdk/classes",
+        "com.m3.arrays.M3ArrayNumericCopyCostProbe",
+        "join"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.5557734966278076,
+      "log_sha256": "dd4c45958cabe90bac98de3ad6edfadc51e0a4cbad5d2b3939a843042797409e"
+    },
+    {
+      "shape": "nested",
+      "fork": 0,
+      "variant": "baseline",
+      "command": [
+        "/tmp/m3-toolchain/jdk-21.0.12.1+1/bin/java",
+        "-Xms64m",
+        "-Xmx256m",
+        "-Xcheck:jni",
+        "-javaagent:/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/sdk-resource-v2/size-agent.jar",
+        "-cp",
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/sdk-resource-v2/classes:/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/sdk-numeric-v2/baseline/classes",
+        "com.m3.arrays.M3ArrayNumericCopyCostProbe",
+        "nested"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 2.8232274055480957,
+      "log_sha256": "39343f9550befbbd2036a6a56cbf7257853eec0343457ece6adfc33e0baf2dbc"
+    },
+    {
+      "shape": "nested",
+      "fork": 0,
+      "variant": "sdk",
+      "command": [
+        "/tmp/m3-toolchain/jdk-21.0.12.1+1/bin/java",
+        "-Xms64m",
+        "-Xmx256m",
+        "-Xcheck:jni",
+        "-javaagent:/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/sdk-resource-v2/size-agent.jar",
+        "-cp",
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/sdk-resource-v2/classes:/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/sdk-numeric-v2/sdk/classes",
+        "com.m3.arrays.M3ArrayNumericCopyCostProbe",
+        "nested"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 1.3848509788513184,
+      "log_sha256": "08539efc7621fa065bcb6ba3983535c8639790d16de5a0d366b22665165401f5"
+    },
+    {
+      "shape": "nested",
+      "fork": 1,
+      "variant": "baseline",
+      "command": [
+        "/tmp/m3-toolchain/jdk-21.0.12.1+1/bin/java",
+        "-Xms64m",
+        "-Xmx256m",
+        "-Xcheck:jni",
+        "-javaagent:/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/sdk-resource-v2/size-agent.jar",
+        "-cp",
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/sdk-resource-v2/classes:/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/sdk-numeric-v2/baseline/classes",
+        "com.m3.arrays.M3ArrayNumericCopyCostProbe",
+        "nested"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 2.3244383335113525,
+      "log_sha256": "03270711a6a96feab5ac34e3cf026abc902b9b91209209fbaf020edff9148097"
+    },
+    {
+      "shape": "nested",
+      "fork": 1,
+      "variant": "sdk",
+      "command": [
+        "/tmp/m3-toolchain/jdk-21.0.12.1+1/bin/java",
+        "-Xms64m",
+        "-Xmx256m",
+        "-Xcheck:jni",
+        "-javaagent:/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/sdk-resource-v2/size-agent.jar",
+        "-cp",
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/sdk-resource-v2/classes:/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/sdk-numeric-v2/sdk/classes",
+        "com.m3.arrays.M3ArrayNumericCopyCostProbe",
+        "nested"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 1.0962448120117188,
+      "log_sha256": "9ce92a3e4eb916f535cb2ca84c3cb350f038c46a6d80f2fb1dd6fe9580d7f70a"
+    },
+    {
+      "shape": "nested",
+      "fork": 2,
+      "variant": "baseline",
+      "command": [
+        "/tmp/m3-toolchain/jdk-21.0.12.1+1/bin/java",
+        "-Xms64m",
+        "-Xmx256m",
+        "-Xcheck:jni",
+        "-javaagent:/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/sdk-resource-v2/size-agent.jar",
+        "-cp",
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/sdk-resource-v2/classes:/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/sdk-numeric-v2/baseline/classes",
+        "com.m3.arrays.M3ArrayNumericCopyCostProbe",
+        "nested"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 2.1404917240142822,
+      "log_sha256": "2d6a9413780b5bde1dc015734e1abeb28b374cbb47e00cb04ed6a6585d5c08db"
+    },
+    {
+      "shape": "nested",
+      "fork": 2,
+      "variant": "sdk",
+      "command": [
+        "/tmp/m3-toolchain/jdk-21.0.12.1+1/bin/java",
+        "-Xms64m",
+        "-Xmx256m",
+        "-Xcheck:jni",
+        "-javaagent:/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/sdk-resource-v2/size-agent.jar",
+        "-cp",
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/sdk-resource-v2/classes:/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/sdk-numeric-v2/sdk/classes",
+        "com.m3.arrays.M3ArrayNumericCopyCostProbe",
+        "nested"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 1.4643361568450928,
+      "log_sha256": "72a7b3bd837a50dfe076a36e7d759ea5d253d2aa67a1081d07714e6dde9715e1"
+    }
+  ],
+  "observations": [
+    {
+      "shape": "snapshot",
+      "variant": "baseline",
+      "fork": 0,
+      "logical_length": 8192,
+      "descriptor_count": 256,
+      "copies_per_sample": 512,
+      "elements_per_copy": 8160,
+      "cold_constructions": 128,
+      "cold_allocated_bytes": 12594488,
+      "cold_cpu_ns": 2589332,
+      "cold_wall_ns": 22666278,
+      "int_cpu_ns": [
+        1904889,
+        2004382,
+        1822284,
+        1723672,
+        1989123
+      ],
+      "long_cpu_ns": [
+        2246869,
+        2804996,
+        2015227,
+        2330194,
+        2774728
+      ],
+      "int_wall_ns": [
+        1893583,
+        1993941,
+        1892866,
+        1719725,
+        1982761
+      ],
+      "long_wall_ns": [
+        2457464,
+        2793626,
+        2006992,
+        2324962,
+        2766562
+      ],
+      "int_allocated_bytes": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "long_allocated_bytes": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "int_graph": {
+        "shallow_bytes": 32800,
+        "primitive_bytes": 32768,
+        "reference_slots": 1,
+        "arrays": 1,
+        "views": 1
+      },
+      "long_graph": {
+        "shallow_bytes": 65568,
+        "primitive_bytes": 65536,
+        "reference_slots": 1,
+        "arrays": 1,
+        "views": 1
+      },
+      "rss_before_bytes": 82632704,
+      "rss_after_bytes": 99061760,
+      "direct_buffer_before_bytes": 8191,
+      "direct_buffer_after_bytes": 8191,
+      "checksum": 556203350198968320
+    },
+    {
+      "shape": "snapshot",
+      "variant": "sdk",
+      "fork": 0,
+      "logical_length": 8192,
+      "descriptor_count": 256,
+      "copies_per_sample": 512,
+      "elements_per_copy": 8160,
+      "cold_constructions": 128,
+      "cold_allocated_bytes": 12594328,
+      "cold_cpu_ns": 3141777,
+      "cold_wall_ns": 16614091,
+      "int_cpu_ns": [
+        1267696,
+        528128,
+        1636895,
+        723112,
+        1137762
+      ],
+      "long_cpu_ns": [
+        1201951,
+        1190628,
+        1049444,
+        1008384,
+        1632343
+      ],
+      "int_wall_ns": [
+        1258750,
+        525557,
+        1629274,
+        720264,
+        1133214
+      ],
+      "long_wall_ns": [
+        1233569,
+        1187083,
+        1046243,
+        1005498,
+        1626505
+      ],
+      "int_allocated_bytes": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "long_allocated_bytes": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "int_graph": {
+        "shallow_bytes": 32800,
+        "primitive_bytes": 32768,
+        "reference_slots": 1,
+        "arrays": 1,
+        "views": 1
+      },
+      "long_graph": {
+        "shallow_bytes": 65568,
+        "primitive_bytes": 65536,
+        "reference_slots": 1,
+        "arrays": 1,
+        "views": 1
+      },
+      "rss_before_bytes": 83329024,
+      "rss_after_bytes": 97984512,
+      "direct_buffer_before_bytes": 8191,
+      "direct_buffer_after_bytes": 8191,
+      "checksum": 556203350198968320
+    },
+    {
+      "shape": "snapshot",
+      "variant": "baseline",
+      "fork": 1,
+      "logical_length": 8192,
+      "descriptor_count": 256,
+      "copies_per_sample": 512,
+      "elements_per_copy": 8160,
+      "cold_constructions": 128,
+      "cold_allocated_bytes": 12594488,
+      "cold_cpu_ns": 3473061,
+      "cold_wall_ns": 18955668,
+      "int_cpu_ns": [
+        1918217,
+        1723207,
+        2057061,
+        1883454,
+        1606959
+      ],
+      "long_cpu_ns": [
+        1761209,
+        2347800,
+        2123694,
+        2398376,
+        2721913
+      ],
+      "int_wall_ns": [
+        1907054,
+        1717058,
+        2048283,
+        1877682,
+        1603357
+      ],
+      "long_wall_ns": [
+        1758360,
+        2338760,
+        2117198,
+        2389680,
+        2713604
+      ],
+      "int_allocated_bytes": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "long_allocated_bytes": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "int_graph": {
+        "shallow_bytes": 32800,
+        "primitive_bytes": 32768,
+        "reference_slots": 1,
+        "arrays": 1,
+        "views": 1
+      },
+      "long_graph": {
+        "shallow_bytes": 65568,
+        "primitive_bytes": 65536,
+        "reference_slots": 1,
+        "arrays": 1,
+        "views": 1
+      },
+      "rss_before_bytes": 83222528,
+      "rss_after_bytes": 97906688,
+      "direct_buffer_before_bytes": 8191,
+      "direct_buffer_after_bytes": 8191,
+      "checksum": 556203350198968320
+    },
+    {
+      "shape": "snapshot",
+      "variant": "sdk",
+      "fork": 1,
+      "logical_length": 8192,
+      "descriptor_count": 256,
+      "copies_per_sample": 512,
+      "elements_per_copy": 8160,
+      "cold_constructions": 128,
+      "cold_allocated_bytes": 12594328,
+      "cold_cpu_ns": 3029296,
+      "cold_wall_ns": 21262596,
+      "int_cpu_ns": [
+        466933,
+        431752,
+        431058,
+        429686,
+        446794
+      ],
+      "long_cpu_ns": [
+        941296,
+        1004834,
+        944933,
+        902058,
+        869820
+      ],
+      "int_wall_ns": [
+        465287,
+        430831,
+        430225,
+        428819,
+        445103
+      ],
+      "long_wall_ns": [
+        938138,
+        1023933,
+        943219,
+        899417,
+        868165
+      ],
+      "int_allocated_bytes": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "long_allocated_bytes": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "int_graph": {
+        "shallow_bytes": 32800,
+        "primitive_bytes": 32768,
+        "reference_slots": 1,
+        "arrays": 1,
+        "views": 1
+      },
+      "long_graph": {
+        "shallow_bytes": 65568,
+        "primitive_bytes": 65536,
+        "reference_slots": 1,
+        "arrays": 1,
+        "views": 1
+      },
+      "rss_before_bytes": 82976768,
+      "rss_after_bytes": 98119680,
+      "direct_buffer_before_bytes": 8191,
+      "direct_buffer_after_bytes": 8191,
+      "checksum": 556203350198968320
+    },
+    {
+      "shape": "snapshot",
+      "variant": "baseline",
+      "fork": 2,
+      "logical_length": 8192,
+      "descriptor_count": 256,
+      "copies_per_sample": 512,
+      "elements_per_copy": 8160,
+      "cold_constructions": 128,
+      "cold_allocated_bytes": 12594488,
+      "cold_cpu_ns": 3244802,
+      "cold_wall_ns": 14840314,
+      "int_cpu_ns": [
+        1732172,
+        1831042,
+        1818771,
+        1859993,
+        1900669
+      ],
+      "long_cpu_ns": [
+        2101748,
+        2102001,
+        2164070,
+        2323597,
+        2027197
+      ],
+      "int_wall_ns": [
+        1719588,
+        1819867,
+        1808972,
+        1834378,
+        1892164
+      ],
+      "long_wall_ns": [
+        2090259,
+        2092135,
+        2154954,
+        2314382,
+        2018066
+      ],
+      "int_allocated_bytes": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "long_allocated_bytes": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "int_graph": {
+        "shallow_bytes": 32800,
+        "primitive_bytes": 32768,
+        "reference_slots": 1,
+        "arrays": 1,
+        "views": 1
+      },
+      "long_graph": {
+        "shallow_bytes": 65568,
+        "primitive_bytes": 65536,
+        "reference_slots": 1,
+        "arrays": 1,
+        "views": 1
+      },
+      "rss_before_bytes": 83345408,
+      "rss_after_bytes": 98275328,
+      "direct_buffer_before_bytes": 8191,
+      "direct_buffer_after_bytes": 8191,
+      "checksum": 556203350198968320
+    },
+    {
+      "shape": "snapshot",
+      "variant": "sdk",
+      "fork": 2,
+      "logical_length": 8192,
+      "descriptor_count": 256,
+      "copies_per_sample": 512,
+      "elements_per_copy": 8160,
+      "cold_constructions": 128,
+      "cold_allocated_bytes": 12594328,
+      "cold_cpu_ns": 2637435,
+      "cold_wall_ns": 8764634,
+      "int_cpu_ns": [
+        533816,
+        805059,
+        536936,
+        559215,
+        570780
+      ],
+      "long_cpu_ns": [
+        1226632,
+        927038,
+        1241570,
+        950744,
+        1315652
+      ],
+      "int_wall_ns": [
+        530344,
+        799836,
+        532334,
+        554699,
+        566071
+      ],
+      "long_wall_ns": [
+        1219176,
+        921984,
+        1233350,
+        945432,
+        1307361
+      ],
+      "int_allocated_bytes": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "long_allocated_bytes": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "int_graph": {
+        "shallow_bytes": 32800,
+        "primitive_bytes": 32768,
+        "reference_slots": 1,
+        "arrays": 1,
+        "views": 1
+      },
+      "long_graph": {
+        "shallow_bytes": 65568,
+        "primitive_bytes": 65536,
+        "reference_slots": 1,
+        "arrays": 1,
+        "views": 1
+      },
+      "rss_before_bytes": 83464192,
+      "rss_after_bytes": 98414592,
+      "direct_buffer_before_bytes": 8191,
+      "direct_buffer_after_bytes": 8191,
+      "checksum": 556203350198968320
+    },
+    {
+      "shape": "slice",
+      "variant": "baseline",
+      "fork": 0,
+      "logical_length": 8186,
+      "descriptor_count": 256,
+      "copies_per_sample": 512,
+      "elements_per_copy": 8154,
+      "cold_constructions": 128,
+      "cold_allocated_bytes": 12600632,
+      "cold_cpu_ns": 3395412,
+      "cold_wall_ns": 14519304,
+      "int_cpu_ns": [
+        1846763,
+        1907715,
+        1717528,
+        1790043,
+        1691015
+      ],
+      "long_cpu_ns": [
+        2167451,
+        2073361,
+        1905712,
+        2249480,
+        1816076
+      ],
+      "int_wall_ns": [
+        1836510,
+        1899031,
+        1709536,
+        1782335,
+        1682980
+      ],
+      "long_wall_ns": [
+        2157885,
+        2065069,
+        1898558,
+        2241482,
+        1808510
+      ],
+      "int_allocated_bytes": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "long_allocated_bytes": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "int_graph": {
+        "shallow_bytes": 32824,
+        "primitive_bytes": 32768,
+        "reference_slots": 2,
+        "arrays": 1,
+        "views": 2
+      },
+      "long_graph": {
+        "shallow_bytes": 65592,
+        "primitive_bytes": 65536,
+        "reference_slots": 2,
+        "arrays": 1,
+        "views": 2
+      },
+      "rss_before_bytes": 83447808,
+      "rss_after_bytes": 98332672,
+      "direct_buffer_before_bytes": 8191,
+      "direct_buffer_after_bytes": 8191,
+      "checksum": 557210502850006298
+    },
+    {
+      "shape": "slice",
+      "variant": "sdk",
+      "fork": 0,
+      "logical_length": 8186,
+      "descriptor_count": 256,
+      "copies_per_sample": 512,
+      "elements_per_copy": 8154,
+      "cold_constructions": 128,
+      "cold_allocated_bytes": 12600472,
+      "cold_cpu_ns": 2781858,
+      "cold_wall_ns": 9272959,
+      "int_cpu_ns": [
+        619927,
+        464319,
+        671546,
+        491934,
+        458796
+      ],
+      "long_cpu_ns": [
+        983950,
+        984033,
+        1071644,
+        914024,
+        1052431
+      ],
+      "int_wall_ns": [
+        615937,
+        463152,
+        675198,
+        490325,
+        457954
+      ],
+      "long_wall_ns": [
+        978263,
+        978111,
+        1066040,
+        912193,
+        1046432
+      ],
+      "int_allocated_bytes": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "long_allocated_bytes": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "int_graph": {
+        "shallow_bytes": 32824,
+        "primitive_bytes": 32768,
+        "reference_slots": 2,
+        "arrays": 1,
+        "views": 2
+      },
+      "long_graph": {
+        "shallow_bytes": 65592,
+        "primitive_bytes": 65536,
+        "reference_slots": 2,
+        "arrays": 1,
+        "views": 2
+      },
+      "rss_before_bytes": 83521536,
+      "rss_after_bytes": 98156544,
+      "direct_buffer_before_bytes": 8191,
+      "direct_buffer_after_bytes": 8191,
+      "checksum": 557210502850006298
+    },
+    {
+      "shape": "slice",
+      "variant": "baseline",
+      "fork": 1,
+      "logical_length": 8186,
+      "descriptor_count": 256,
+      "copies_per_sample": 512,
+      "elements_per_copy": 8154,
+      "cold_constructions": 128,
+      "cold_allocated_bytes": 12600632,
+      "cold_cpu_ns": 13296403,
+      "cold_wall_ns": 13231326,
+      "int_cpu_ns": [
+        1565129,
+        2499760,
+        1751454,
+        1770851,
+        2144193
+      ],
+      "long_cpu_ns": [
+        1793327,
+        2436786,
+        2472275,
+        2034684,
+        3385196
+      ],
+      "int_wall_ns": [
+        1553409,
+        2487970,
+        1740482,
+        1762747,
+        2136066
+      ],
+      "long_wall_ns": [
+        1783011,
+        2424824,
+        2462798,
+        2025857,
+        3376466
+      ],
+      "int_allocated_bytes": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "long_allocated_bytes": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "int_graph": {
+        "shallow_bytes": 32824,
+        "primitive_bytes": 32768,
+        "reference_slots": 2,
+        "arrays": 1,
+        "views": 2
+      },
+      "long_graph": {
+        "shallow_bytes": 65592,
+        "primitive_bytes": 65536,
+        "reference_slots": 2,
+        "arrays": 1,
+        "views": 2
+      },
+      "rss_before_bytes": 109801472,
+      "rss_after_bytes": 124317696,
+      "direct_buffer_before_bytes": 8191,
+      "direct_buffer_after_bytes": 8191,
+      "checksum": 557210502850006298
+    },
+    {
+      "shape": "slice",
+      "variant": "sdk",
+      "fork": 1,
+      "logical_length": 8186,
+      "descriptor_count": 256,
+      "copies_per_sample": 512,
+      "elements_per_copy": 8154,
+      "cold_constructions": 128,
+      "cold_allocated_bytes": 12600472,
+      "cold_cpu_ns": 2714307,
+      "cold_wall_ns": 13754993,
+      "int_cpu_ns": [
+        478376,
+        478650,
+        475215,
+        500235,
+        510304
+      ],
+      "long_cpu_ns": [
+        889143,
+        1051371,
+        993357,
+        1062178,
+        1140233
+      ],
+      "int_wall_ns": [
+        476462,
+        476299,
+        472545,
+        497189,
+        505487
+      ],
+      "long_wall_ns": [
+        886449,
+        1043332,
+        985864,
+        1055532,
+        1165133
+      ],
+      "int_allocated_bytes": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "long_allocated_bytes": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "int_graph": {
+        "shallow_bytes": 32824,
+        "primitive_bytes": 32768,
+        "reference_slots": 2,
+        "arrays": 1,
+        "views": 2
+      },
+      "long_graph": {
+        "shallow_bytes": 65592,
+        "primitive_bytes": 65536,
+        "reference_slots": 2,
+        "arrays": 1,
+        "views": 2
+      },
+      "rss_before_bytes": 83775488,
+      "rss_after_bytes": 98525184,
+      "direct_buffer_before_bytes": 8191,
+      "direct_buffer_after_bytes": 8191,
+      "checksum": 557210502850006298
+    },
+    {
+      "shape": "slice",
+      "variant": "baseline",
+      "fork": 2,
+      "logical_length": 8186,
+      "descriptor_count": 256,
+      "copies_per_sample": 512,
+      "elements_per_copy": 8154,
+      "cold_constructions": 128,
+      "cold_allocated_bytes": 12600632,
+      "cold_cpu_ns": 3474193,
+      "cold_wall_ns": 16857961,
+      "int_cpu_ns": [
+        1730400,
+        5112079,
+        2088636,
+        3345977,
+        2297778
+      ],
+      "long_cpu_ns": [
+        2066339,
+        2068573,
+        2257242,
+        2243785,
+        3135920
+      ],
+      "int_wall_ns": [
+        1722127,
+        5128834,
+        1779447,
+        3336001,
+        2289045
+      ],
+      "long_wall_ns": [
+        2084062,
+        2060085,
+        2247619,
+        2235260,
+        3125920
+      ],
+      "int_allocated_bytes": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "long_allocated_bytes": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "int_graph": {
+        "shallow_bytes": 32824,
+        "primitive_bytes": 32768,
+        "reference_slots": 2,
+        "arrays": 1,
+        "views": 2
+      },
+      "long_graph": {
+        "shallow_bytes": 65592,
+        "primitive_bytes": 65536,
+        "reference_slots": 2,
+        "arrays": 1,
+        "views": 2
+      },
+      "rss_before_bytes": 83939328,
+      "rss_after_bytes": 98750464,
+      "direct_buffer_before_bytes": 8191,
+      "direct_buffer_after_bytes": 8191,
+      "checksum": 557210502850006298
+    },
+    {
+      "shape": "slice",
+      "variant": "sdk",
+      "fork": 2,
+      "logical_length": 8186,
+      "descriptor_count": 256,
+      "copies_per_sample": 512,
+      "elements_per_copy": 8154,
+      "cold_constructions": 128,
+      "cold_allocated_bytes": 12600472,
+      "cold_cpu_ns": 2655826,
+      "cold_wall_ns": 10852179,
+      "int_cpu_ns": [
+        508727,
+        441211,
+        460707,
+        485062,
+        631395
+      ],
+      "long_cpu_ns": [
+        1137312,
+        938109,
+        968145,
+        856437,
+        876540
+      ],
+      "int_wall_ns": [
+        507214,
+        440433,
+        459584,
+        483944,
+        629728
+      ],
+      "long_wall_ns": [
+        1133396,
+        936773,
+        966776,
+        855372,
+        875490
+      ],
+      "int_allocated_bytes": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "long_allocated_bytes": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "int_graph": {
+        "shallow_bytes": 32824,
+        "primitive_bytes": 32768,
+        "reference_slots": 2,
+        "arrays": 1,
+        "views": 2
+      },
+      "long_graph": {
+        "shallow_bytes": 65592,
+        "primitive_bytes": 65536,
+        "reference_slots": 2,
+        "arrays": 1,
+        "views": 2
+      },
+      "rss_before_bytes": 83488768,
+      "rss_after_bytes": 98054144,
+      "direct_buffer_before_bytes": 8191,
+      "direct_buffer_after_bytes": 8191,
+      "checksum": 557210502850006298
+    },
+    {
+      "shape": "join",
+      "variant": "baseline",
+      "fork": 0,
+      "logical_length": 8192,
+      "descriptor_count": 256,
+      "copies_per_sample": 512,
+      "elements_per_copy": 8160,
+      "cold_constructions": 128,
+      "cold_allocated_bytes": 1084728,
+      "cold_cpu_ns": 1845123,
+      "cold_wall_ns": 1810756,
+      "int_cpu_ns": [
+        120715843,
+        131389848,
+        78155477,
+        107817744,
+        120923906
+      ],
+      "long_cpu_ns": [
+        109936496,
+        74838297,
+        77253404,
+        112332376,
+        111427925
+      ],
+      "int_wall_ns": [
+        120816313,
+        131445342,
+        78176248,
+        107900561,
+        121010574
+      ],
+      "long_wall_ns": [
+        110522263,
+        74898413,
+        77296239,
+        112394532,
+        111487827
+      ],
+      "int_allocated_bytes": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "long_allocated_bytes": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "int_graph": {
+        "shallow_bytes": 43064,
+        "primitive_bytes": 33792,
+        "reference_slots": 514,
+        "arrays": 258,
+        "views": 257
+      },
+      "long_graph": {
+        "shallow_bytes": 75832,
+        "primitive_bytes": 66560,
+        "reference_slots": 514,
+        "arrays": 258,
+        "views": 257
+      },
+      "rss_before_bytes": 62787584,
+      "rss_after_bytes": 66187264,
+      "direct_buffer_before_bytes": 8191,
+      "direct_buffer_after_bytes": 8191,
+      "checksum": 556203350198968320
+    },
+    {
+      "shape": "join",
+      "variant": "sdk",
+      "fork": 0,
+      "logical_length": 8192,
+      "descriptor_count": 256,
+      "copies_per_sample": 512,
+      "elements_per_copy": 8160,
+      "cold_constructions": 128,
+      "cold_allocated_bytes": 1084568,
+      "cold_cpu_ns": 3231790,
+      "cold_wall_ns": 3219985,
+      "int_cpu_ns": [
+        1189070,
+        1113869,
+        1113478,
+        1371779,
+        1145044
+      ],
+      "long_cpu_ns": [
+        1442817,
+        1479280,
+        1376325,
+        1646332,
+        1500128
+      ],
+      "int_wall_ns": [
+        1187329,
+        1112677,
+        1112253,
+        1369924,
+        1143580
+      ],
+      "long_wall_ns": [
+        1441186,
+        1476269,
+        1375109,
+        1641241,
+        1498674
+      ],
+      "int_allocated_bytes": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "long_allocated_bytes": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "int_graph": {
+        "shallow_bytes": 43064,
+        "primitive_bytes": 33792,
+        "reference_slots": 514,
+        "arrays": 258,
+        "views": 257
+      },
+      "long_graph": {
+        "shallow_bytes": 75832,
+        "primitive_bytes": 66560,
+        "reference_slots": 514,
+        "arrays": 258,
+        "views": 257
+      },
+      "rss_before_bytes": 63590400,
+      "rss_after_bytes": 66867200,
+      "direct_buffer_before_bytes": 8191,
+      "direct_buffer_after_bytes": 8191,
+      "checksum": 556203350198968320
+    },
+    {
+      "shape": "join",
+      "variant": "baseline",
+      "fork": 1,
+      "logical_length": 8192,
+      "descriptor_count": 256,
+      "copies_per_sample": 512,
+      "elements_per_copy": 8160,
+      "cold_constructions": 128,
+      "cold_allocated_bytes": 1084728,
+      "cold_cpu_ns": 1155771,
+      "cold_wall_ns": 1119707,
+      "int_cpu_ns": [
+        118473474,
+        122221068,
+        118468020,
+        130581065,
+        113557149
+      ],
+      "long_cpu_ns": [
+        116554917,
+        117677736,
+        132552868,
+        126167426,
+        122680137
+      ],
+      "int_wall_ns": [
+        120028681,
+        122291438,
+        127763677,
+        135062759,
+        117962118
+      ],
+      "long_wall_ns": [
+        116613328,
+        122507793,
+        138198002,
+        130521991,
+        122713788
+      ],
+      "int_allocated_bytes": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "long_allocated_bytes": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "int_graph": {
+        "shallow_bytes": 43064,
+        "primitive_bytes": 33792,
+        "reference_slots": 514,
+        "arrays": 258,
+        "views": 257
+      },
+      "long_graph": {
+        "shallow_bytes": 75832,
+        "primitive_bytes": 66560,
+        "reference_slots": 514,
+        "arrays": 258,
+        "views": 257
+      },
+      "rss_before_bytes": 64155648,
+      "rss_after_bytes": 67182592,
+      "direct_buffer_before_bytes": 8191,
+      "direct_buffer_after_bytes": 8191,
+      "checksum": 556203350198968320
+    },
+    {
+      "shape": "join",
+      "variant": "sdk",
+      "fork": 1,
+      "logical_length": 8192,
+      "descriptor_count": 256,
+      "copies_per_sample": 512,
+      "elements_per_copy": 8160,
+      "cold_constructions": 128,
+      "cold_allocated_bytes": 1084568,
+      "cold_cpu_ns": 1715066,
+      "cold_wall_ns": 1704665,
+      "int_cpu_ns": [
+        2107986,
+        2242542,
+        1783392,
+        1694710,
+        1717228
+      ],
+      "long_cpu_ns": [
+        2151392,
+        3612116,
+        2317363,
+        2589207,
+        2368725
+      ],
+      "int_wall_ns": [
+        2102067,
+        2235573,
+        1779683,
+        1690900,
+        1713818
+      ],
+      "long_wall_ns": [
+        2147319,
+        3603585,
+        2311353,
+        2582697,
+        2364426
+      ],
+      "int_allocated_bytes": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "long_allocated_bytes": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "int_graph": {
+        "shallow_bytes": 43064,
+        "primitive_bytes": 33792,
+        "reference_slots": 514,
+        "arrays": 258,
+        "views": 257
+      },
+      "long_graph": {
+        "shallow_bytes": 75832,
+        "primitive_bytes": 66560,
+        "reference_slots": 514,
+        "arrays": 258,
+        "views": 257
+      },
+      "rss_before_bytes": 62812160,
+      "rss_after_bytes": 66752512,
+      "direct_buffer_before_bytes": 8191,
+      "direct_buffer_after_bytes": 8191,
+      "checksum": 556203350198968320
+    },
+    {
+      "shape": "join",
+      "variant": "baseline",
+      "fork": 2,
+      "logical_length": 8192,
+      "descriptor_count": 256,
+      "copies_per_sample": 512,
+      "elements_per_copy": 8160,
+      "cold_constructions": 128,
+      "cold_allocated_bytes": 1084728,
+      "cold_cpu_ns": 1317967,
+      "cold_wall_ns": 1284518,
+      "int_cpu_ns": [
+        123126092,
+        124726344,
+        190162404,
+        123728132,
+        119464708
+      ],
+      "long_cpu_ns": [
+        115446378,
+        114917720,
+        181440673,
+        151714824,
+        134398677
+      ],
+      "int_wall_ns": [
+        123207478,
+        124689380,
+        191755591,
+        123918516,
+        119813748
+      ],
+      "long_wall_ns": [
+        115539922,
+        115741610,
+        181553467,
+        156369761,
+        134868481
+      ],
+      "int_allocated_bytes": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "long_allocated_bytes": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "int_graph": {
+        "shallow_bytes": 43064,
+        "primitive_bytes": 33792,
+        "reference_slots": 514,
+        "arrays": 258,
+        "views": 257
+      },
+      "long_graph": {
+        "shallow_bytes": 75832,
+        "primitive_bytes": 66560,
+        "reference_slots": 514,
+        "arrays": 258,
+        "views": 257
+      },
+      "rss_before_bytes": 62550016,
+      "rss_after_bytes": 65916928,
+      "direct_buffer_before_bytes": 8191,
+      "direct_buffer_after_bytes": 8191,
+      "checksum": 556203350198968320
+    },
+    {
+      "shape": "join",
+      "variant": "sdk",
+      "fork": 2,
+      "logical_length": 8192,
+      "descriptor_count": 256,
+      "copies_per_sample": 512,
+      "elements_per_copy": 8160,
+      "cold_constructions": 128,
+      "cold_allocated_bytes": 1084568,
+      "cold_cpu_ns": 1119820,
+      "cold_wall_ns": 1106898,
+      "int_cpu_ns": [
+        1590626,
+        1822268,
+        3004176,
+        1561709,
+        1885364
+      ],
+      "long_cpu_ns": [
+        2751311,
+        2622692,
+        2489908,
+        2720461,
+        3718267
+      ],
+      "int_wall_ns": [
+        1581929,
+        1812482,
+        2994932,
+        1554438,
+        1876789
+      ],
+      "long_wall_ns": [
+        2739964,
+        2612969,
+        2481387,
+        2568311,
+        3709425
+      ],
+      "int_allocated_bytes": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "long_allocated_bytes": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "int_graph": {
+        "shallow_bytes": 43064,
+        "primitive_bytes": 33792,
+        "reference_slots": 514,
+        "arrays": 258,
+        "views": 257
+      },
+      "long_graph": {
+        "shallow_bytes": 75832,
+        "primitive_bytes": 66560,
+        "reference_slots": 514,
+        "arrays": 258,
+        "views": 257
+      },
+      "rss_before_bytes": 62722048,
+      "rss_after_bytes": 65957888,
+      "direct_buffer_before_bytes": 8191,
+      "direct_buffer_after_bytes": 8191,
+      "checksum": 556203350198968320
+    },
+    {
+      "shape": "nested",
+      "variant": "baseline",
+      "fork": 0,
+      "logical_length": 8192,
+      "descriptor_count": 256,
+      "copies_per_sample": 512,
+      "elements_per_copy": 8160,
+      "cold_constructions": 128,
+      "cold_allocated_bytes": 2022712,
+      "cold_cpu_ns": 1055503,
+      "cold_wall_ns": 1025521,
+      "int_cpu_ns": [
+        120111934,
+        121079509,
+        112035868,
+        99031498,
+        112822977
+      ],
+      "long_cpu_ns": [
+        118978841,
+        119932932,
+        113514132,
+        98022083,
+        108046125
+      ],
+      "int_wall_ns": [
+        137508279,
+        126065220,
+        116807305,
+        99221503,
+        113692271
+      ],
+      "long_wall_ns": [
+        119746319,
+        128445385,
+        118294586,
+        98107947,
+        108136903
+      ],
+      "int_allocated_bytes": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "long_allocated_bytes": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "int_graph": {
+        "shallow_bytes": 44088,
+        "primitive_bytes": 33856,
+        "reference_slots": 562,
+        "arrays": 290,
+        "views": 273
+      },
+      "long_graph": {
+        "shallow_bytes": 76856,
+        "primitive_bytes": 66624,
+        "reference_slots": 562,
+        "arrays": 290,
+        "views": 273
+      },
+      "rss_before_bytes": 74878976,
+      "rss_after_bytes": 75907072,
+      "direct_buffer_before_bytes": 8191,
+      "direct_buffer_after_bytes": 8191,
+      "checksum": 556203350198968320
+    },
+    {
+      "shape": "nested",
+      "variant": "sdk",
+      "fork": 0,
+      "logical_length": 8192,
+      "descriptor_count": 256,
+      "copies_per_sample": 512,
+      "elements_per_copy": 8160,
+      "cold_constructions": 128,
+      "cold_allocated_bytes": 2022712,
+      "cold_cpu_ns": 1253706,
+      "cold_wall_ns": 1219184,
+      "int_cpu_ns": [
+        55169983,
+        48395436,
+        61443471,
+        47302236,
+        61857425
+      ],
+      "long_cpu_ns": [
+        50183301,
+        57608299,
+        52929642,
+        55582848,
+        56581441
+      ],
+      "int_wall_ns": [
+        55152224,
+        48358610,
+        61454466,
+        47317008,
+        61946044
+      ],
+      "long_wall_ns": [
+        50225738,
+        57732470,
+        52970457,
+        55614118,
+        57045303
+      ],
+      "int_allocated_bytes": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "long_allocated_bytes": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "int_graph": {
+        "shallow_bytes": 44088,
+        "primitive_bytes": 33856,
+        "reference_slots": 562,
+        "arrays": 290,
+        "views": 273
+      },
+      "long_graph": {
+        "shallow_bytes": 76856,
+        "primitive_bytes": 66624,
+        "reference_slots": 562,
+        "arrays": 290,
+        "views": 273
+      },
+      "rss_before_bytes": 73551872,
+      "rss_after_bytes": 74637312,
+      "direct_buffer_before_bytes": 8191,
+      "direct_buffer_after_bytes": 8191,
+      "checksum": 556203350198968320
+    },
+    {
+      "shape": "nested",
+      "variant": "baseline",
+      "fork": 1,
+      "logical_length": 8192,
+      "descriptor_count": 256,
+      "copies_per_sample": 512,
+      "elements_per_copy": 8160,
+      "cold_constructions": 128,
+      "cold_allocated_bytes": 1953080,
+      "cold_cpu_ns": 1173800,
+      "cold_wall_ns": 1137156,
+      "int_cpu_ns": [
+        125344349,
+        78513984,
+        79359422,
+        115936897,
+        135420440
+      ],
+      "long_cpu_ns": [
+        121347361,
+        77456588,
+        73029584,
+        126851792,
+        136169945
+      ],
+      "int_wall_ns": [
+        133936848,
+        78756140,
+        79981067,
+        116320595,
+        135544343
+      ],
+      "long_wall_ns": [
+        121654225,
+        84728448,
+        73037034,
+        127076734,
+        136324207
+      ],
+      "int_allocated_bytes": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "long_allocated_bytes": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "int_graph": {
+        "shallow_bytes": 44088,
+        "primitive_bytes": 33856,
+        "reference_slots": 562,
+        "arrays": 290,
+        "views": 273
+      },
+      "long_graph": {
+        "shallow_bytes": 76856,
+        "primitive_bytes": 66624,
+        "reference_slots": 562,
+        "arrays": 290,
+        "views": 273
+      },
+      "rss_before_bytes": 72798208,
+      "rss_after_bytes": 73932800,
+      "direct_buffer_before_bytes": 8191,
+      "direct_buffer_after_bytes": 8191,
+      "checksum": 556203350198968320
+    },
+    {
+      "shape": "nested",
+      "variant": "sdk",
+      "fork": 1,
+      "logical_length": 8192,
+      "descriptor_count": 256,
+      "copies_per_sample": 512,
+      "elements_per_copy": 8160,
+      "cold_constructions": 128,
+      "cold_allocated_bytes": 2022712,
+      "cold_cpu_ns": 1223730,
+      "cold_wall_ns": 1191227,
+      "int_cpu_ns": [
+        29845091,
+        31471433,
+        31205396,
+        32357269,
+        29221095
+      ],
+      "long_cpu_ns": [
+        38722766,
+        34505130,
+        30333195,
+        30761298,
+        40378927
+      ],
+      "int_wall_ns": [
+        29832680,
+        31458394,
+        31238479,
+        39636716,
+        29214097
+      ],
+      "long_wall_ns": [
+        38753687,
+        34783568,
+        30320299,
+        30790407,
+        40395220
+      ],
+      "int_allocated_bytes": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "long_allocated_bytes": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "int_graph": {
+        "shallow_bytes": 44088,
+        "primitive_bytes": 33856,
+        "reference_slots": 562,
+        "arrays": 290,
+        "views": 273
+      },
+      "long_graph": {
+        "shallow_bytes": 76856,
+        "primitive_bytes": 66624,
+        "reference_slots": 562,
+        "arrays": 290,
+        "views": 273
+      },
+      "rss_before_bytes": 74657792,
+      "rss_after_bytes": 75669504,
+      "direct_buffer_before_bytes": 8191,
+      "direct_buffer_after_bytes": 8191,
+      "checksum": 556203350198968320
+    },
+    {
+      "shape": "nested",
+      "variant": "baseline",
+      "fork": 2,
+      "logical_length": 8192,
+      "descriptor_count": 256,
+      "copies_per_sample": 512,
+      "elements_per_copy": 8160,
+      "cold_constructions": 128,
+      "cold_allocated_bytes": 2022712,
+      "cold_cpu_ns": 1088402,
+      "cold_wall_ns": 1053679,
+      "int_cpu_ns": [
+        113324949,
+        101160050,
+        72682317,
+        72730840,
+        88348575
+      ],
+      "long_cpu_ns": [
+        138337116,
+        70430743,
+        89978092,
+        84094054,
+        93888417
+      ],
+      "int_wall_ns": [
+        113306865,
+        101438997,
+        72665722,
+        72713257,
+        88409081
+      ],
+      "long_wall_ns": [
+        138854738,
+        70419599,
+        89958687,
+        84062878,
+        93738915
+      ],
+      "int_allocated_bytes": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "long_allocated_bytes": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "int_graph": {
+        "shallow_bytes": 44088,
+        "primitive_bytes": 33856,
+        "reference_slots": 562,
+        "arrays": 290,
+        "views": 273
+      },
+      "long_graph": {
+        "shallow_bytes": 76856,
+        "primitive_bytes": 66624,
+        "reference_slots": 562,
+        "arrays": 290,
+        "views": 273
+      },
+      "rss_before_bytes": 75247616,
+      "rss_after_bytes": 76308480,
+      "direct_buffer_before_bytes": 8191,
+      "direct_buffer_after_bytes": 8191,
+      "checksum": 556203350198968320
+    },
+    {
+      "shape": "nested",
+      "variant": "sdk",
+      "fork": 2,
+      "logical_length": 8192,
+      "descriptor_count": 256,
+      "copies_per_sample": 512,
+      "elements_per_copy": 8160,
+      "cold_constructions": 128,
+      "cold_allocated_bytes": 2022712,
+      "cold_cpu_ns": 1042648,
+      "cold_wall_ns": 1013816,
+      "int_cpu_ns": [
+        35786442,
+        31411951,
+        42539384,
+        38019700,
+        51536704
+      ],
+      "long_cpu_ns": [
+        41956539,
+        36511859,
+        39067974,
+        53249390,
+        47546129
+      ],
+      "int_wall_ns": [
+        35770923,
+        31395623,
+        42522292,
+        38004136,
+        51643407
+      ],
+      "long_wall_ns": [
+        41938932,
+        36493734,
+        39049682,
+        53229391,
+        47812835
+      ],
+      "int_allocated_bytes": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "long_allocated_bytes": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "int_graph": {
+        "shallow_bytes": 44088,
+        "primitive_bytes": 33856,
+        "reference_slots": 562,
+        "arrays": 290,
+        "views": 273
+      },
+      "long_graph": {
+        "shallow_bytes": 76856,
+        "primitive_bytes": 66624,
+        "reference_slots": 562,
+        "arrays": 290,
+        "views": 273
+      },
+      "rss_before_bytes": 74018816,
+      "rss_after_bytes": 75055104,
+      "direct_buffer_before_bytes": 8191,
+      "direct_buffer_after_bytes": 8191,
+      "checksum": 556203350198968320
+    }
+  ],
+  "summary": [
+    {
+      "shape": "snapshot",
+      "int_graph_equal": true,
+      "int_graph_observations": {
+        "baseline": [
+          {
+            "shallow_bytes": 32800,
+            "primitive_bytes": 32768,
+            "reference_slots": 1,
+            "arrays": 1,
+            "views": 1
+          },
+          {
+            "shallow_bytes": 32800,
+            "primitive_bytes": 32768,
+            "reference_slots": 1,
+            "arrays": 1,
+            "views": 1
+          },
+          {
+            "shallow_bytes": 32800,
+            "primitive_bytes": 32768,
+            "reference_slots": 1,
+            "arrays": 1,
+            "views": 1
+          }
+        ],
+        "sdk": [
+          {
+            "shallow_bytes": 32800,
+            "primitive_bytes": 32768,
+            "reference_slots": 1,
+            "arrays": 1,
+            "views": 1
+          },
+          {
+            "shallow_bytes": 32800,
+            "primitive_bytes": 32768,
+            "reference_slots": 1,
+            "arrays": 1,
+            "views": 1
+          },
+          {
+            "shallow_bytes": 32800,
+            "primitive_bytes": 32768,
+            "reference_slots": 1,
+            "arrays": 1,
+            "views": 1
+          }
+        ]
+      },
+      "long_graph_equal": true,
+      "long_graph_observations": {
+        "baseline": [
+          {
+            "shallow_bytes": 65568,
+            "primitive_bytes": 65536,
+            "reference_slots": 1,
+            "arrays": 1,
+            "views": 1
+          },
+          {
+            "shallow_bytes": 65568,
+            "primitive_bytes": 65536,
+            "reference_slots": 1,
+            "arrays": 1,
+            "views": 1
+          },
+          {
+            "shallow_bytes": 65568,
+            "primitive_bytes": 65536,
+            "reference_slots": 1,
+            "arrays": 1,
+            "views": 1
+          }
+        ],
+        "sdk": [
+          {
+            "shallow_bytes": 65568,
+            "primitive_bytes": 65536,
+            "reference_slots": 1,
+            "arrays": 1,
+            "views": 1
+          },
+          {
+            "shallow_bytes": 65568,
+            "primitive_bytes": 65536,
+            "reference_slots": 1,
+            "arrays": 1,
+            "views": 1
+          },
+          {
+            "shallow_bytes": 65568,
+            "primitive_bytes": 65536,
+            "reference_slots": 1,
+            "arrays": 1,
+            "views": 1
+          }
+        ]
+      },
+      "cold_allocated_bytes_equal": false,
+      "cold_allocated_bytes_observations": {
+        "baseline": [
+          12594488,
+          12594488,
+          12594488
+        ],
+        "sdk": [
+          12594328,
+          12594328,
+          12594328
+        ]
+      },
+      "int_cpu_median_ns": {
+        "baseline": 1859993,
+        "sdk": 536936
+      },
+      "int_warm_allocated_bytes": {
+        "baseline": [
+          0,
+          0,
+          0
+        ],
+        "sdk": [
+          0,
+          0,
+          0
+        ]
+      },
+      "long_cpu_median_ns": {
+        "baseline": 2246869,
+        "sdk": 1008384
+      },
+      "long_warm_allocated_bytes": {
+        "baseline": [
+          0,
+          0,
+          0
+        ],
+        "sdk": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "shape": "slice",
+      "int_graph_equal": true,
+      "int_graph_observations": {
+        "baseline": [
+          {
+            "shallow_bytes": 32824,
+            "primitive_bytes": 32768,
+            "reference_slots": 2,
+            "arrays": 1,
+            "views": 2
+          },
+          {
+            "shallow_bytes": 32824,
+            "primitive_bytes": 32768,
+            "reference_slots": 2,
+            "arrays": 1,
+            "views": 2
+          },
+          {
+            "shallow_bytes": 32824,
+            "primitive_bytes": 32768,
+            "reference_slots": 2,
+            "arrays": 1,
+            "views": 2
+          }
+        ],
+        "sdk": [
+          {
+            "shallow_bytes": 32824,
+            "primitive_bytes": 32768,
+            "reference_slots": 2,
+            "arrays": 1,
+            "views": 2
+          },
+          {
+            "shallow_bytes": 32824,
+            "primitive_bytes": 32768,
+            "reference_slots": 2,
+            "arrays": 1,
+            "views": 2
+          },
+          {
+            "shallow_bytes": 32824,
+            "primitive_bytes": 32768,
+            "reference_slots": 2,
+            "arrays": 1,
+            "views": 2
+          }
+        ]
+      },
+      "long_graph_equal": true,
+      "long_graph_observations": {
+        "baseline": [
+          {
+            "shallow_bytes": 65592,
+            "primitive_bytes": 65536,
+            "reference_slots": 2,
+            "arrays": 1,
+            "views": 2
+          },
+          {
+            "shallow_bytes": 65592,
+            "primitive_bytes": 65536,
+            "reference_slots": 2,
+            "arrays": 1,
+            "views": 2
+          },
+          {
+            "shallow_bytes": 65592,
+            "primitive_bytes": 65536,
+            "reference_slots": 2,
+            "arrays": 1,
+            "views": 2
+          }
+        ],
+        "sdk": [
+          {
+            "shallow_bytes": 65592,
+            "primitive_bytes": 65536,
+            "reference_slots": 2,
+            "arrays": 1,
+            "views": 2
+          },
+          {
+            "shallow_bytes": 65592,
+            "primitive_bytes": 65536,
+            "reference_slots": 2,
+            "arrays": 1,
+            "views": 2
+          },
+          {
+            "shallow_bytes": 65592,
+            "primitive_bytes": 65536,
+            "reference_slots": 2,
+            "arrays": 1,
+            "views": 2
+          }
+        ]
+      },
+      "cold_allocated_bytes_equal": false,
+      "cold_allocated_bytes_observations": {
+        "baseline": [
+          12600632,
+          12600632,
+          12600632
+        ],
+        "sdk": [
+          12600472,
+          12600472,
+          12600472
+        ]
+      },
+      "int_cpu_median_ns": {
+        "baseline": 1846763,
+        "sdk": 485062
+      },
+      "int_warm_allocated_bytes": {
+        "baseline": [
+          0,
+          0,
+          0
+        ],
+        "sdk": [
+          0,
+          0,
+          0
+        ]
+      },
+      "long_cpu_median_ns": {
+        "baseline": 2167451,
+        "sdk": 984033
+      },
+      "long_warm_allocated_bytes": {
+        "baseline": [
+          0,
+          0,
+          0
+        ],
+        "sdk": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "shape": "join",
+      "int_graph_equal": true,
+      "int_graph_observations": {
+        "baseline": [
+          {
+            "shallow_bytes": 43064,
+            "primitive_bytes": 33792,
+            "reference_slots": 514,
+            "arrays": 258,
+            "views": 257
+          },
+          {
+            "shallow_bytes": 43064,
+            "primitive_bytes": 33792,
+            "reference_slots": 514,
+            "arrays": 258,
+            "views": 257
+          },
+          {
+            "shallow_bytes": 43064,
+            "primitive_bytes": 33792,
+            "reference_slots": 514,
+            "arrays": 258,
+            "views": 257
+          }
+        ],
+        "sdk": [
+          {
+            "shallow_bytes": 43064,
+            "primitive_bytes": 33792,
+            "reference_slots": 514,
+            "arrays": 258,
+            "views": 257
+          },
+          {
+            "shallow_bytes": 43064,
+            "primitive_bytes": 33792,
+            "reference_slots": 514,
+            "arrays": 258,
+            "views": 257
+          },
+          {
+            "shallow_bytes": 43064,
+            "primitive_bytes": 33792,
+            "reference_slots": 514,
+            "arrays": 258,
+            "views": 257
+          }
+        ]
+      },
+      "long_graph_equal": true,
+      "long_graph_observations": {
+        "baseline": [
+          {
+            "shallow_bytes": 75832,
+            "primitive_bytes": 66560,
+            "reference_slots": 514,
+            "arrays": 258,
+            "views": 257
+          },
+          {
+            "shallow_bytes": 75832,
+            "primitive_bytes": 66560,
+            "reference_slots": 514,
+            "arrays": 258,
+            "views": 257
+          },
+          {
+            "shallow_bytes": 75832,
+            "primitive_bytes": 66560,
+            "reference_slots": 514,
+            "arrays": 258,
+            "views": 257
+          }
+        ],
+        "sdk": [
+          {
+            "shallow_bytes": 75832,
+            "primitive_bytes": 66560,
+            "reference_slots": 514,
+            "arrays": 258,
+            "views": 257
+          },
+          {
+            "shallow_bytes": 75832,
+            "primitive_bytes": 66560,
+            "reference_slots": 514,
+            "arrays": 258,
+            "views": 257
+          },
+          {
+            "shallow_bytes": 75832,
+            "primitive_bytes": 66560,
+            "reference_slots": 514,
+            "arrays": 258,
+            "views": 257
+          }
+        ]
+      },
+      "cold_allocated_bytes_equal": false,
+      "cold_allocated_bytes_observations": {
+        "baseline": [
+          1084728,
+          1084728,
+          1084728
+        ],
+        "sdk": [
+          1084568,
+          1084568,
+          1084568
+        ]
+      },
+      "int_cpu_median_ns": {
+        "baseline": 120923906,
+        "sdk": 1694710
+      },
+      "int_warm_allocated_bytes": {
+        "baseline": [
+          0,
+          0,
+          0
+        ],
+        "sdk": [
+          0,
+          0,
+          0
+        ]
+      },
+      "long_cpu_median_ns": {
+        "baseline": 116554917,
+        "sdk": 2368725
+      },
+      "long_warm_allocated_bytes": {
+        "baseline": [
+          0,
+          0,
+          0
+        ],
+        "sdk": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "shape": "nested",
+      "int_graph_equal": true,
+      "int_graph_observations": {
+        "baseline": [
+          {
+            "shallow_bytes": 44088,
+            "primitive_bytes": 33856,
+            "reference_slots": 562,
+            "arrays": 290,
+            "views": 273
+          },
+          {
+            "shallow_bytes": 44088,
+            "primitive_bytes": 33856,
+            "reference_slots": 562,
+            "arrays": 290,
+            "views": 273
+          },
+          {
+            "shallow_bytes": 44088,
+            "primitive_bytes": 33856,
+            "reference_slots": 562,
+            "arrays": 290,
+            "views": 273
+          }
+        ],
+        "sdk": [
+          {
+            "shallow_bytes": 44088,
+            "primitive_bytes": 33856,
+            "reference_slots": 562,
+            "arrays": 290,
+            "views": 273
+          },
+          {
+            "shallow_bytes": 44088,
+            "primitive_bytes": 33856,
+            "reference_slots": 562,
+            "arrays": 290,
+            "views": 273
+          },
+          {
+            "shallow_bytes": 44088,
+            "primitive_bytes": 33856,
+            "reference_slots": 562,
+            "arrays": 290,
+            "views": 273
+          }
+        ]
+      },
+      "long_graph_equal": true,
+      "long_graph_observations": {
+        "baseline": [
+          {
+            "shallow_bytes": 76856,
+            "primitive_bytes": 66624,
+            "reference_slots": 562,
+            "arrays": 290,
+            "views": 273
+          },
+          {
+            "shallow_bytes": 76856,
+            "primitive_bytes": 66624,
+            "reference_slots": 562,
+            "arrays": 290,
+            "views": 273
+          },
+          {
+            "shallow_bytes": 76856,
+            "primitive_bytes": 66624,
+            "reference_slots": 562,
+            "arrays": 290,
+            "views": 273
+          }
+        ],
+        "sdk": [
+          {
+            "shallow_bytes": 76856,
+            "primitive_bytes": 66624,
+            "reference_slots": 562,
+            "arrays": 290,
+            "views": 273
+          },
+          {
+            "shallow_bytes": 76856,
+            "primitive_bytes": 66624,
+            "reference_slots": 562,
+            "arrays": 290,
+            "views": 273
+          },
+          {
+            "shallow_bytes": 76856,
+            "primitive_bytes": 66624,
+            "reference_slots": 562,
+            "arrays": 290,
+            "views": 273
+          }
+        ]
+      },
+      "cold_allocated_bytes_equal": false,
+      "cold_allocated_bytes_observations": {
+        "baseline": [
+          2022712,
+          1953080,
+          2022712
+        ],
+        "sdk": [
+          2022712,
+          2022712,
+          2022712
+        ]
+      },
+      "int_cpu_median_ns": {
+        "baseline": 112035868,
+        "sdk": 38019700
+      },
+      "int_warm_allocated_bytes": {
+        "baseline": [
+          0,
+          0,
+          0
+        ],
+        "sdk": [
+          0,
+          0,
+          0
+        ]
+      },
+      "long_cpu_median_ns": {
+        "baseline": 108046125,
+        "sdk": 41956539
+      },
+      "long_warm_allocated_bytes": {
+        "baseline": [
+          0,
+          0,
+          0
+        ],
+        "sdk": [
+          0,
+          0,
+          0
+        ]
+      }
+    }
+  ]
+}

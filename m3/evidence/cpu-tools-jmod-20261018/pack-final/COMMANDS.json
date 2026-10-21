@@ -1,0 +1,1463 @@
+[
+  {
+    "argv": [
+      "${JDK}/bin/java",
+      "--version"
+    ],
+    "elapsed_seconds": 0.215113,
+    "exit_code": 0,
+    "label": "jdk-version",
+    "log": "logs/jdk-version.log",
+    "log_sha256": "06bcb484d9203da0c770867ff309d4bd48ecd796e0379c03903398f24516ea80",
+    "status": "PASS",
+    "timeout_seconds": 115
+  },
+  {
+    "argv": [
+      "${JDK}/bin/javap",
+      "-public",
+      "com.sun.source.util.M3AST"
+    ],
+    "elapsed_seconds": 0.616977,
+    "exit_code": 0,
+    "label": "m3-ast-api",
+    "log": "logs/m3-ast-api.log",
+    "log_sha256": "7274701d13df2507490500bcb83d175fcb297301df7229522c4a7cce96044411",
+    "status": "PASS",
+    "timeout_seconds": 115
+  },
+  {
+    "argv": [
+      "${JDK}/bin/javap",
+      "-private",
+      "java.lang.M3String"
+    ],
+    "elapsed_seconds": 0.774631,
+    "exit_code": 0,
+    "label": "m3-string-owner",
+    "log": "logs/m3-string-owner.log",
+    "log_sha256": "d7be4413b35eaa491bd2bf2d9a3da65e883e3b6a2e208d920f6748ab68bdeec3",
+    "status": "PASS",
+    "timeout_seconds": 115
+  },
+  {
+    "argv": [
+      "${JDK}/bin/javap",
+      "-public",
+      "java.util.concurrent.ProgressMonitor"
+    ],
+    "elapsed_seconds": 0.666899,
+    "exit_code": 0,
+    "label": "m3-progress-api",
+    "log": "logs/m3-progress-api.log",
+    "log_sha256": "451b26f4a2d95a96a63388e6f69a2e99445d739f47c4512ead11de91f09720d1",
+    "status": "PASS",
+    "timeout_seconds": 115
+  },
+  {
+    "argv": [
+      "/usr/bin/x86_64-linux-gnu-gcc-13",
+      "--version"
+    ],
+    "elapsed_seconds": 0.004513,
+    "exit_code": 0,
+    "label": "cc-version",
+    "log": "logs/cc-version.log",
+    "log_sha256": "3fe5a5280ea5e228b69ed7f59fcec4ed6146228a5120306d37c656307725c2a0",
+    "status": "PASS",
+    "timeout_seconds": 115
+  },
+  {
+    "argv": [
+      "/usr/bin/x86_64-linux-gnu-objcopy",
+      "--version"
+    ],
+    "elapsed_seconds": 0.007866,
+    "exit_code": 0,
+    "label": "objcopy-version",
+    "log": "logs/objcopy-version.log",
+    "log_sha256": "deb6d79d83b91ab4d68f31a9b53ccc7529e6707c0d269ef8e6cf6359ce47fb69",
+    "status": "PASS",
+    "timeout_seconds": 115
+  },
+  {
+    "argv": [
+      "${JDK}/bin/javac",
+      "-source",
+      "21",
+      "-target",
+      "21",
+      "-Xlint:all,-module",
+      "-Werror",
+      "--module-source-path",
+      "${REPO}/m3/tooling/module-packs/text-tools/src:${REPO}/m3/tooling/module-packs/cpu-tools/src",
+      "-d",
+      "${OUT}/modules",
+      "${REPO}/m3/tooling/module-packs/text-tools/src/jdk.m3.io/jdk/m3/io/FileTools.java",
+      "${REPO}/m3/tooling/module-packs/text-tools/src/jdk.m3.io/jdk/m3/io/M3File.java",
+      "${REPO}/m3/tooling/module-packs/text-tools/src/jdk.m3.io/module-info.java",
+      "${REPO}/m3/tooling/module-packs/text-tools/src/jdk.m3.structured/jdk/m3/structured/JsonLinesTools.java",
+      "${REPO}/m3/tooling/module-packs/text-tools/src/jdk.m3.structured/jdk/m3/structured/StructuredCli.java",
+      "${REPO}/m3/tooling/module-packs/text-tools/src/jdk.m3.structured/jdk/m3/structured/StructuredTextTools.java",
+      "${REPO}/m3/tooling/module-packs/text-tools/src/jdk.m3.structured/module-info.java",
+      "${REPO}/m3/tooling/module-packs/text-tools/src/jdk.m3.text/jdk/m3/text/Atom.java",
+      "${REPO}/m3/tooling/module-packs/text-tools/src/jdk.m3.text/jdk/m3/text/Binding.java",
+      "${REPO}/m3/tooling/module-packs/text-tools/src/jdk.m3.text/jdk/m3/text/Canonical.java",
+      "${REPO}/m3/tooling/module-packs/text-tools/src/jdk.m3.text/jdk/m3/text/Capability.java",
+      "${REPO}/m3/tooling/module-packs/text-tools/src/jdk.m3.text/jdk/m3/text/CommandCatalog.java",
+      "${REPO}/m3/tooling/module-packs/text-tools/src/jdk.m3.text/jdk/m3/text/CoreDemo.java",
+      "${REPO}/m3/tooling/module-packs/text-tools/src/jdk.m3.text/jdk/m3/text/CsvTools.java",
+      "${REPO}/m3/tooling/module-packs/text-tools/src/jdk.m3.text/jdk/m3/text/ExecutionResult.java",
+      "${REPO}/m3/tooling/module-packs/text-tools/src/jdk.m3.text/jdk/m3/text/FrameCollector.java",
+      "${REPO}/m3/tooling/module-packs/text-tools/src/jdk.m3.text/jdk/m3/text/Ids.java",
+      "${REPO}/m3/tooling/module-packs/text-tools/src/jdk.m3.text/jdk/m3/text/Limits.java",
+      "${REPO}/m3/tooling/module-packs/text-tools/src/jdk.m3.text/jdk/m3/text/M3UnixRuntime.java",
+      "${REPO}/m3/tooling/module-packs/text-tools/src/jdk.m3.text/jdk/m3/text/Node.java",
+      "${REPO}/m3/tooling/module-packs/text-tools/src/jdk.m3.text/jdk/m3/text/Plan.java",
+      "${REPO}/m3/tooling/module-packs/text-tools/src/jdk.m3.text/jdk/m3/text/PlanValidator.java",
+      "${REPO}/m3/tooling/module-packs/text-tools/src/jdk.m3.text/jdk/m3/text/Receipt.java",
+      "${REPO}/m3/tooling/module-packs/text-tools/src/jdk.m3.text/jdk/m3/text/Registry.java",
+      "${REPO}/m3/tooling/module-packs/text-tools/src/jdk.m3.text/jdk/m3/text/StepReceipt.java",
+      "${REPO}/m3/tooling/module-packs/text-tools/src/jdk.m3.text/jdk/m3/text/TextFrame.java",
+      "${REPO}/m3/tooling/module-packs/text-tools/src/jdk.m3.text/jdk/m3/text/TextLine.java",
+      "${REPO}/m3/tooling/module-packs/text-tools/src/jdk.m3.text/jdk/m3/text/TextTools.java",
+      "${REPO}/m3/tooling/module-packs/text-tools/src/jdk.m3.text/jdk/m3/text/Utf8Segments.java",
+      "${REPO}/m3/tooling/module-packs/text-tools/src/jdk.m3.text/module-info.java",
+      "${REPO}/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.codec.varint/com/m3/tools/codec/varint/VarInts.java",
+      "${REPO}/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.codec.varint/module-info.java",
+      "${REPO}/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.constraint.interval/com/m3/tools/constraint/interval/Intervals.java",
+      "${REPO}/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.constraint.interval/module-info.java",
+      "${REPO}/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.cpu/com/m3/tools/cpu/CpuTools.java",
+      "${REPO}/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.cpu/com/m3/tools/cpu/CpuToolsCli.java",
+      "${REPO}/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.cpu/com/m3/tools/cpu/M3AstTools.java",
+      "${REPO}/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.cpu/module-info.java",
+      "${REPO}/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.graph.paths/com/m3/tools/graph/paths/ShortestPaths.java",
+      "${REPO}/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.graph.paths/module-info.java",
+      "${REPO}/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.graph.topology/com/m3/tools/graph/topology/TopologicalOrder.java",
+      "${REPO}/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.graph.topology/module-info.java",
+      "${REPO}/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.plan.priority/com/m3/tools/plan/priority/StablePriorityQueue.java",
+      "${REPO}/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.plan.priority/module-info.java",
+      "${REPO}/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.stats.streaming/com/m3/tools/stats/streaming/RunningStatistics.java",
+      "${REPO}/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.stats.streaming/module-info.java",
+      "${REPO}/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.text.diff/com/m3/tools/text/diff/TextDelta.java",
+      "${REPO}/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.text.diff/module-info.java",
+      "${REPO}/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.text.frequency/com/m3/tools/text/frequency/TermFrequency.java",
+      "${REPO}/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.text.frequency/module-info.java",
+      "${REPO}/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.text.index/com/m3/tools/text/index/InvertedIndex.java",
+      "${REPO}/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.text.index/module-info.java",
+      "${REPO}/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.text.ngram/com/m3/tools/text/ngram/NGrams.java",
+      "${REPO}/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.text.ngram/module-info.java",
+      "${REPO}/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.text.normalize/com/m3/tools/text/normalize/UnicodeNormalizer.java",
+      "${REPO}/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.text.normalize/module-info.java",
+      "${REPO}/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.text.regex/com/m3/tools/text/regex/RegexMatcher.java",
+      "${REPO}/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.text.regex/module-info.java",
+      "${REPO}/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.text.search/com/m3/tools/text/search/ExactSearch.java",
+      "${REPO}/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.text.search/module-info.java",
+      "${REPO}/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.text.similarity/com/m3/tools/text/similarity/EditDistance.java",
+      "${REPO}/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.text.similarity/module-info.java",
+      "${REPO}/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.text.tokenize/com/m3/tools/text/tokenize/WordTokenizer.java",
+      "${REPO}/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.text.tokenize/module-info.java",
+      "${REPO}/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.verify.sha256/com/m3/tools/verify/sha256/Sha256.java",
+      "${REPO}/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.verify.sha256/module-info.java"
+    ],
+    "elapsed_seconds": 6.36681,
+    "exit_code": 0,
+    "label": "modules-javac",
+    "log": "logs/modules-javac.log",
+    "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "status": "PASS",
+    "timeout_seconds": 115
+  },
+  {
+    "argv": [
+      "/usr/bin/x86_64-linux-gnu-gcc-13",
+      "-std=c11",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-shared",
+      "-fPIC",
+      "-I${JDK}/include",
+      "-I${JDK}/include/linux",
+      "-o",
+      "${OUT}/native/libm3textio.so",
+      "${REPO}/m3/tooling/module-packs/text-tools/native/m3textio.c"
+    ],
+    "elapsed_seconds": 0.115355,
+    "exit_code": 0,
+    "label": "native-compile",
+    "log": "logs/native-compile.log",
+    "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "status": "PASS",
+    "timeout_seconds": 115
+  },
+  {
+    "argv": [
+      "/usr/bin/x86_64-linux-gnu-objcopy",
+      "-g",
+      "${OUT}/native-expected/libm3textio.so"
+    ],
+    "elapsed_seconds": 0.005597,
+    "exit_code": 0,
+    "label": "native-strip-expected",
+    "log": "logs/native-strip-expected.log",
+    "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "status": "PASS",
+    "timeout_seconds": 115
+  },
+  {
+    "argv": [
+      "${JDK}/bin/jar",
+      "--create",
+      "--file",
+      "${OUT}/jars/com.m3.tools.codec.varint.jar",
+      "--date",
+      "2026-01-01T00:00:00Z",
+      "-C",
+      "${OUT}/modules/com.m3.tools.codec.varint",
+      "."
+    ],
+    "elapsed_seconds": 0.623633,
+    "exit_code": 0,
+    "label": "com.m3.tools.codec.varint-jar",
+    "log": "logs/com.m3.tools.codec.varint-jar.log",
+    "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "status": "PASS",
+    "timeout_seconds": 115
+  },
+  {
+    "argv": [
+      "${JDK}/bin/jar",
+      "--describe-module",
+      "--file",
+      "${OUT}/jars/com.m3.tools.codec.varint.jar"
+    ],
+    "elapsed_seconds": 0.515976,
+    "exit_code": 0,
+    "label": "com.m3.tools.codec.varint-jar-describe",
+    "log": "logs/com.m3.tools.codec.varint-jar-describe.log",
+    "log_sha256": "a8f61d93c915e7ac7497b274b28c70e0bb0512d9b6eccdae2c124945ad851969",
+    "status": "PASS",
+    "timeout_seconds": 115
+  },
+  {
+    "argv": [
+      "${JDK}/bin/jar",
+      "--create",
+      "--file",
+      "${OUT}/jars/com.m3.tools.constraint.interval.jar",
+      "--date",
+      "2026-01-01T00:00:00Z",
+      "-C",
+      "${OUT}/modules/com.m3.tools.constraint.interval",
+      "."
+    ],
+    "elapsed_seconds": 0.669364,
+    "exit_code": 0,
+    "label": "com.m3.tools.constraint.interval-jar",
+    "log": "logs/com.m3.tools.constraint.interval-jar.log",
+    "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "status": "PASS",
+    "timeout_seconds": 115
+  },
+  {
+    "argv": [
+      "${JDK}/bin/jar",
+      "--describe-module",
+      "--file",
+      "${OUT}/jars/com.m3.tools.constraint.interval.jar"
+    ],
+    "elapsed_seconds": 0.525193,
+    "exit_code": 0,
+    "label": "com.m3.tools.constraint.interval-jar-describe",
+    "log": "logs/com.m3.tools.constraint.interval-jar-describe.log",
+    "log_sha256": "e362540167331a2f13bf1f2ebfef27a55e44972e76c2d54267c94e8fac208986",
+    "status": "PASS",
+    "timeout_seconds": 115
+  },
+  {
+    "argv": [
+      "${JDK}/bin/jar",
+      "--create",
+      "--file",
+      "${OUT}/jars/com.m3.tools.cpu.jar",
+      "--date",
+      "2026-01-01T00:00:00Z",
+      "-C",
+      "${OUT}/modules/com.m3.tools.cpu",
+      "."
+    ],
+    "elapsed_seconds": 0.772996,
+    "exit_code": 0,
+    "label": "com.m3.tools.cpu-jar",
+    "log": "logs/com.m3.tools.cpu-jar.log",
+    "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "status": "PASS",
+    "timeout_seconds": 115
+  },
+  {
+    "argv": [
+      "${JDK}/bin/jar",
+      "--describe-module",
+      "--file",
+      "${OUT}/jars/com.m3.tools.cpu.jar"
+    ],
+    "elapsed_seconds": 0.421871,
+    "exit_code": 0,
+    "label": "com.m3.tools.cpu-jar-describe",
+    "log": "logs/com.m3.tools.cpu-jar-describe.log",
+    "log_sha256": "b0fae316d0c638a69f19ed285e4543916285bd6146fd4263dbf9797d03ba32fa",
+    "status": "PASS",
+    "timeout_seconds": 115
+  },
+  {
+    "argv": [
+      "${JDK}/bin/jar",
+      "--create",
+      "--file",
+      "${OUT}/jars/com.m3.tools.graph.paths.jar",
+      "--date",
+      "2026-01-01T00:00:00Z",
+      "-C",
+      "${OUT}/modules/com.m3.tools.graph.paths",
+      "."
+    ],
+    "elapsed_seconds": 0.619582,
+    "exit_code": 0,
+    "label": "com.m3.tools.graph.paths-jar",
+    "log": "logs/com.m3.tools.graph.paths-jar.log",
+    "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "status": "PASS",
+    "timeout_seconds": 115
+  },
+  {
+    "argv": [
+      "${JDK}/bin/jar",
+      "--describe-module",
+      "--file",
+      "${OUT}/jars/com.m3.tools.graph.paths.jar"
+    ],
+    "elapsed_seconds": 0.468907,
+    "exit_code": 0,
+    "label": "com.m3.tools.graph.paths-jar-describe",
+    "log": "logs/com.m3.tools.graph.paths-jar-describe.log",
+    "log_sha256": "8c579c3181bd3928710b3cb7ae68662734442846aaf37f48cbca4bb257e5111b",
+    "status": "PASS",
+    "timeout_seconds": 115
+  },
+  {
+    "argv": [
+      "${JDK}/bin/jar",
+      "--create",
+      "--file",
+      "${OUT}/jars/com.m3.tools.graph.topology.jar",
+      "--date",
+      "2026-01-01T00:00:00Z",
+      "-C",
+      "${OUT}/modules/com.m3.tools.graph.topology",
+      "."
+    ],
+    "elapsed_seconds": 0.616401,
+    "exit_code": 0,
+    "label": "com.m3.tools.graph.topology-jar",
+    "log": "logs/com.m3.tools.graph.topology-jar.log",
+    "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "status": "PASS",
+    "timeout_seconds": 115
+  },
+  {
+    "argv": [
+      "${JDK}/bin/jar",
+      "--describe-module",
+      "--file",
+      "${OUT}/jars/com.m3.tools.graph.topology.jar"
+    ],
+    "elapsed_seconds": 0.571999,
+    "exit_code": 0,
+    "label": "com.m3.tools.graph.topology-jar-describe",
+    "log": "logs/com.m3.tools.graph.topology-jar-describe.log",
+    "log_sha256": "2a70dd109dd8a9816f7a6440322dab84c158db9cd81f3c803cbfc3d1aa094969",
+    "status": "PASS",
+    "timeout_seconds": 115
+  },
+  {
+    "argv": [
+      "${JDK}/bin/jar",
+      "--create",
+      "--file",
+      "${OUT}/jars/com.m3.tools.plan.priority.jar",
+      "--date",
+      "2026-01-01T00:00:00Z",
+      "-C",
+      "${OUT}/modules/com.m3.tools.plan.priority",
+      "."
+    ],
+    "elapsed_seconds": 0.668535,
+    "exit_code": 0,
+    "label": "com.m3.tools.plan.priority-jar",
+    "log": "logs/com.m3.tools.plan.priority-jar.log",
+    "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "status": "PASS",
+    "timeout_seconds": 115
+  },
+  {
+    "argv": [
+      "${JDK}/bin/jar",
+      "--describe-module",
+      "--file",
+      "${OUT}/jars/com.m3.tools.plan.priority.jar"
+    ],
+    "elapsed_seconds": 0.466915,
+    "exit_code": 0,
+    "label": "com.m3.tools.plan.priority-jar-describe",
+    "log": "logs/com.m3.tools.plan.priority-jar-describe.log",
+    "log_sha256": "5f598970c41f1da31391fa1f3a19524e17150c03de9b6480db7371c9012053b7",
+    "status": "PASS",
+    "timeout_seconds": 115
+  },
+  {
+    "argv": [
+      "${JDK}/bin/jar",
+      "--create",
+      "--file",
+      "${OUT}/jars/com.m3.tools.stats.streaming.jar",
+      "--date",
+      "2026-01-01T00:00:00Z",
+      "-C",
+      "${OUT}/modules/com.m3.tools.stats.streaming",
+      "."
+    ],
+    "elapsed_seconds": 0.774113,
+    "exit_code": 0,
+    "label": "com.m3.tools.stats.streaming-jar",
+    "log": "logs/com.m3.tools.stats.streaming-jar.log",
+    "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "status": "PASS",
+    "timeout_seconds": 115
+  },
+  {
+    "argv": [
+      "${JDK}/bin/jar",
+      "--describe-module",
+      "--file",
+      "${OUT}/jars/com.m3.tools.stats.streaming.jar"
+    ],
+    "elapsed_seconds": 0.524009,
+    "exit_code": 0,
+    "label": "com.m3.tools.stats.streaming-jar-describe",
+    "log": "logs/com.m3.tools.stats.streaming-jar-describe.log",
+    "log_sha256": "7d857cc54252e98b66364aea9d466ec3d378765366ce90e8a3991e5fdef5a4a6",
+    "status": "PASS",
+    "timeout_seconds": 115
+  },
+  {
+    "argv": [
+      "${JDK}/bin/jar",
+      "--create",
+      "--file",
+      "${OUT}/jars/com.m3.tools.text.diff.jar",
+      "--date",
+      "2026-01-01T00:00:00Z",
+      "-C",
+      "${OUT}/modules/com.m3.tools.text.diff",
+      "."
+    ],
+    "elapsed_seconds": 0.719652,
+    "exit_code": 0,
+    "label": "com.m3.tools.text.diff-jar",
+    "log": "logs/com.m3.tools.text.diff-jar.log",
+    "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "status": "PASS",
+    "timeout_seconds": 115
+  },
+  {
+    "argv": [
+      "${JDK}/bin/jar",
+      "--describe-module",
+      "--file",
+      "${OUT}/jars/com.m3.tools.text.diff.jar"
+    ],
+    "elapsed_seconds": 0.584611,
+    "exit_code": 0,
+    "label": "com.m3.tools.text.diff-jar-describe",
+    "log": "logs/com.m3.tools.text.diff-jar-describe.log",
+    "log_sha256": "a0ca40af4942758e4c3072d8cc816f6b7201ac1ce22bc1737fa340bba9591b59",
+    "status": "PASS",
+    "timeout_seconds": 115
+  },
+  {
+    "argv": [
+      "${JDK}/bin/jar",
+      "--create",
+      "--file",
+      "${OUT}/jars/com.m3.tools.text.frequency.jar",
+      "--date",
+      "2026-01-01T00:00:00Z",
+      "-C",
+      "${OUT}/modules/com.m3.tools.text.frequency",
+      "."
+    ],
+    "elapsed_seconds": 0.775567,
+    "exit_code": 0,
+    "label": "com.m3.tools.text.frequency-jar",
+    "log": "logs/com.m3.tools.text.frequency-jar.log",
+    "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "status": "PASS",
+    "timeout_seconds": 115
+  },
+  {
+    "argv": [
+      "${JDK}/bin/jar",
+      "--describe-module",
+      "--file",
+      "${OUT}/jars/com.m3.tools.text.frequency.jar"
+    ],
+    "elapsed_seconds": 0.417004,
+    "exit_code": 0,
+    "label": "com.m3.tools.text.frequency-jar-describe",
+    "log": "logs/com.m3.tools.text.frequency-jar-describe.log",
+    "log_sha256": "3e1004c313e137c398881fef50c66346c40fc57349dcdccd10fc60cfcec47504",
+    "status": "PASS",
+    "timeout_seconds": 115
+  },
+  {
+    "argv": [
+      "${JDK}/bin/jar",
+      "--create",
+      "--file",
+      "${OUT}/jars/com.m3.tools.text.index.jar",
+      "--date",
+      "2026-01-01T00:00:00Z",
+      "-C",
+      "${OUT}/modules/com.m3.tools.text.index",
+      "."
+    ],
+    "elapsed_seconds": 0.886538,
+    "exit_code": 0,
+    "label": "com.m3.tools.text.index-jar",
+    "log": "logs/com.m3.tools.text.index-jar.log",
+    "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "status": "PASS",
+    "timeout_seconds": 115
+  },
+  {
+    "argv": [
+      "${JDK}/bin/jar",
+      "--describe-module",
+      "--file",
+      "${OUT}/jars/com.m3.tools.text.index.jar"
+    ],
+    "elapsed_seconds": 0.567215,
+    "exit_code": 0,
+    "label": "com.m3.tools.text.index-jar-describe",
+    "log": "logs/com.m3.tools.text.index-jar-describe.log",
+    "log_sha256": "b2133ac80c30700995a329fdcff1e16c41ea9adbc1e0e7f36d4fc20e7543252e",
+    "status": "PASS",
+    "timeout_seconds": 115
+  },
+  {
+    "argv": [
+      "${JDK}/bin/jar",
+      "--create",
+      "--file",
+      "${OUT}/jars/com.m3.tools.text.ngram.jar",
+      "--date",
+      "2026-01-01T00:00:00Z",
+      "-C",
+      "${OUT}/modules/com.m3.tools.text.ngram",
+      "."
+    ],
+    "elapsed_seconds": 0.723471,
+    "exit_code": 0,
+    "label": "com.m3.tools.text.ngram-jar",
+    "log": "logs/com.m3.tools.text.ngram-jar.log",
+    "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "status": "PASS",
+    "timeout_seconds": 115
+  },
+  {
+    "argv": [
+      "${JDK}/bin/jar",
+      "--describe-module",
+      "--file",
+      "${OUT}/jars/com.m3.tools.text.ngram.jar"
+    ],
+    "elapsed_seconds": 0.465816,
+    "exit_code": 0,
+    "label": "com.m3.tools.text.ngram-jar-describe",
+    "log": "logs/com.m3.tools.text.ngram-jar-describe.log",
+    "log_sha256": "e959c76de76f65fd099310d56f0da42702133797998948f44f8cfe87e030247b",
+    "status": "PASS",
+    "timeout_seconds": 115
+  },
+  {
+    "argv": [
+      "${JDK}/bin/jar",
+      "--create",
+      "--file",
+      "${OUT}/jars/com.m3.tools.text.normalize.jar",
+      "--date",
+      "2026-01-01T00:00:00Z",
+      "-C",
+      "${OUT}/modules/com.m3.tools.text.normalize",
+      "."
+    ],
+    "elapsed_seconds": 0.625657,
+    "exit_code": 0,
+    "label": "com.m3.tools.text.normalize-jar",
+    "log": "logs/com.m3.tools.text.normalize-jar.log",
+    "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "status": "PASS",
+    "timeout_seconds": 115
+  },
+  {
+    "argv": [
+      "${JDK}/bin/jar",
+      "--describe-module",
+      "--file",
+      "${OUT}/jars/com.m3.tools.text.normalize.jar"
+    ],
+    "elapsed_seconds": 0.470012,
+    "exit_code": 0,
+    "label": "com.m3.tools.text.normalize-jar-describe",
+    "log": "logs/com.m3.tools.text.normalize-jar-describe.log",
+    "log_sha256": "5fe000c28678b6f2bc6ad84bd99a8523982d7c168667a11f10cd9378b9bc5364",
+    "status": "PASS",
+    "timeout_seconds": 115
+  },
+  {
+    "argv": [
+      "${JDK}/bin/jar",
+      "--create",
+      "--file",
+      "${OUT}/jars/com.m3.tools.text.regex.jar",
+      "--date",
+      "2026-01-01T00:00:00Z",
+      "-C",
+      "${OUT}/modules/com.m3.tools.text.regex",
+      "."
+    ],
+    "elapsed_seconds": 0.618829,
+    "exit_code": 0,
+    "label": "com.m3.tools.text.regex-jar",
+    "log": "logs/com.m3.tools.text.regex-jar.log",
+    "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "status": "PASS",
+    "timeout_seconds": 115
+  },
+  {
+    "argv": [
+      "${JDK}/bin/jar",
+      "--describe-module",
+      "--file",
+      "${OUT}/jars/com.m3.tools.text.regex.jar"
+    ],
+    "elapsed_seconds": 0.51571,
+    "exit_code": 0,
+    "label": "com.m3.tools.text.regex-jar-describe",
+    "log": "logs/com.m3.tools.text.regex-jar-describe.log",
+    "log_sha256": "2410df4274ddb36e9cb6d78f479c3a8288f43a38514e49626135cb3cefbafb2e",
+    "status": "PASS",
+    "timeout_seconds": 115
+  },
+  {
+    "argv": [
+      "${JDK}/bin/jar",
+      "--create",
+      "--file",
+      "${OUT}/jars/com.m3.tools.text.search.jar",
+      "--date",
+      "2026-01-01T00:00:00Z",
+      "-C",
+      "${OUT}/modules/com.m3.tools.text.search",
+      "."
+    ],
+    "elapsed_seconds": 0.616808,
+    "exit_code": 0,
+    "label": "com.m3.tools.text.search-jar",
+    "log": "logs/com.m3.tools.text.search-jar.log",
+    "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "status": "PASS",
+    "timeout_seconds": 115
+  },
+  {
+    "argv": [
+      "${JDK}/bin/jar",
+      "--describe-module",
+      "--file",
+      "${OUT}/jars/com.m3.tools.text.search.jar"
+    ],
+    "elapsed_seconds": 0.516762,
+    "exit_code": 0,
+    "label": "com.m3.tools.text.search-jar-describe",
+    "log": "logs/com.m3.tools.text.search-jar-describe.log",
+    "log_sha256": "0ecf09a4fd331f0d3340e966591b83aac4572c181f9a93548e023f56ad8fe5b7",
+    "status": "PASS",
+    "timeout_seconds": 115
+  },
+  {
+    "argv": [
+      "${JDK}/bin/jar",
+      "--create",
+      "--file",
+      "${OUT}/jars/com.m3.tools.text.similarity.jar",
+      "--date",
+      "2026-01-01T00:00:00Z",
+      "-C",
+      "${OUT}/modules/com.m3.tools.text.similarity",
+      "."
+    ],
+    "elapsed_seconds": 0.718269,
+    "exit_code": 0,
+    "label": "com.m3.tools.text.similarity-jar",
+    "log": "logs/com.m3.tools.text.similarity-jar.log",
+    "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "status": "PASS",
+    "timeout_seconds": 115
+  },
+  {
+    "argv": [
+      "${JDK}/bin/jar",
+      "--describe-module",
+      "--file",
+      "${OUT}/jars/com.m3.tools.text.similarity.jar"
+    ],
+    "elapsed_seconds": 0.516958,
+    "exit_code": 0,
+    "label": "com.m3.tools.text.similarity-jar-describe",
+    "log": "logs/com.m3.tools.text.similarity-jar-describe.log",
+    "log_sha256": "a45053db113c432517e5b169673911990bf5f069c3643a34498a4a0fabfaadc8",
+    "status": "PASS",
+    "timeout_seconds": 115
+  },
+  {
+    "argv": [
+      "${JDK}/bin/jar",
+      "--create",
+      "--file",
+      "${OUT}/jars/com.m3.tools.text.tokenize.jar",
+      "--date",
+      "2026-01-01T00:00:00Z",
+      "-C",
+      "${OUT}/modules/com.m3.tools.text.tokenize",
+      "."
+    ],
+    "elapsed_seconds": 0.621231,
+    "exit_code": 0,
+    "label": "com.m3.tools.text.tokenize-jar",
+    "log": "logs/com.m3.tools.text.tokenize-jar.log",
+    "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "status": "PASS",
+    "timeout_seconds": 115
+  },
+  {
+    "argv": [
+      "${JDK}/bin/jar",
+      "--describe-module",
+      "--file",
+      "${OUT}/jars/com.m3.tools.text.tokenize.jar"
+    ],
+    "elapsed_seconds": 0.517709,
+    "exit_code": 0,
+    "label": "com.m3.tools.text.tokenize-jar-describe",
+    "log": "logs/com.m3.tools.text.tokenize-jar-describe.log",
+    "log_sha256": "c57be2a2826ee736a47c36f29c70c9286c502fe2170cb73a62ed8f66017899db",
+    "status": "PASS",
+    "timeout_seconds": 115
+  },
+  {
+    "argv": [
+      "${JDK}/bin/jar",
+      "--create",
+      "--file",
+      "${OUT}/jars/com.m3.tools.verify.sha256.jar",
+      "--date",
+      "2026-01-01T00:00:00Z",
+      "-C",
+      "${OUT}/modules/com.m3.tools.verify.sha256",
+      "."
+    ],
+    "elapsed_seconds": 0.772396,
+    "exit_code": 0,
+    "label": "com.m3.tools.verify.sha256-jar",
+    "log": "logs/com.m3.tools.verify.sha256-jar.log",
+    "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "status": "PASS",
+    "timeout_seconds": 115
+  },
+  {
+    "argv": [
+      "${JDK}/bin/jar",
+      "--describe-module",
+      "--file",
+      "${OUT}/jars/com.m3.tools.verify.sha256.jar"
+    ],
+    "elapsed_seconds": 0.521649,
+    "exit_code": 0,
+    "label": "com.m3.tools.verify.sha256-jar-describe",
+    "log": "logs/com.m3.tools.verify.sha256-jar-describe.log",
+    "log_sha256": "d1ba02bba119d3611fea0d338c3971ead968ca61dbec42c62a875479cb556a77",
+    "status": "PASS",
+    "timeout_seconds": 115
+  },
+  {
+    "argv": [
+      "${JDK}/bin/jar",
+      "--create",
+      "--file",
+      "${OUT}/jars/jdk.m3.io.jar",
+      "--date",
+      "2026-01-01T00:00:00Z",
+      "-C",
+      "${OUT}/modules/jdk.m3.io",
+      "."
+    ],
+    "elapsed_seconds": 0.674949,
+    "exit_code": 0,
+    "label": "jdk.m3.io-jar",
+    "log": "logs/jdk.m3.io-jar.log",
+    "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "status": "PASS",
+    "timeout_seconds": 115
+  },
+  {
+    "argv": [
+      "${JDK}/bin/jar",
+      "--describe-module",
+      "--file",
+      "${OUT}/jars/jdk.m3.io.jar"
+    ],
+    "elapsed_seconds": 0.617697,
+    "exit_code": 0,
+    "label": "jdk.m3.io-jar-describe",
+    "log": "logs/jdk.m3.io-jar-describe.log",
+    "log_sha256": "0009799a778c1b8fcf553853b225e68cdd67b13c34a180cc72428d992bc4eed0",
+    "status": "PASS",
+    "timeout_seconds": 115
+  },
+  {
+    "argv": [
+      "${JDK}/bin/jar",
+      "--create",
+      "--file",
+      "${OUT}/jars/jdk.m3.structured.jar",
+      "--date",
+      "2026-01-01T00:00:00Z",
+      "-C",
+      "${OUT}/modules/jdk.m3.structured",
+      "."
+    ],
+    "elapsed_seconds": 0.81862,
+    "exit_code": 0,
+    "label": "jdk.m3.structured-jar",
+    "log": "logs/jdk.m3.structured-jar.log",
+    "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "status": "PASS",
+    "timeout_seconds": 115
+  },
+  {
+    "argv": [
+      "${JDK}/bin/jar",
+      "--describe-module",
+      "--file",
+      "${OUT}/jars/jdk.m3.structured.jar"
+    ],
+    "elapsed_seconds": 0.600241,
+    "exit_code": 0,
+    "label": "jdk.m3.structured-jar-describe",
+    "log": "logs/jdk.m3.structured-jar-describe.log",
+    "log_sha256": "ab7644c14d94e581ac74c7f56143e9cc0ae46e7c5f2d908271fc9abc9264ef14",
+    "status": "PASS",
+    "timeout_seconds": 115
+  },
+  {
+    "argv": [
+      "${JDK}/bin/jar",
+      "--create",
+      "--file",
+      "${OUT}/jars/jdk.m3.text.jar",
+      "--date",
+      "2026-01-01T00:00:00Z",
+      "-C",
+      "${OUT}/modules/jdk.m3.text",
+      "."
+    ],
+    "elapsed_seconds": 0.914204,
+    "exit_code": 0,
+    "label": "jdk.m3.text-jar",
+    "log": "logs/jdk.m3.text-jar.log",
+    "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "status": "PASS",
+    "timeout_seconds": 115
+  },
+  {
+    "argv": [
+      "${JDK}/bin/jar",
+      "--describe-module",
+      "--file",
+      "${OUT}/jars/jdk.m3.text.jar"
+    ],
+    "elapsed_seconds": 1.118573,
+    "exit_code": 0,
+    "label": "jdk.m3.text-jar-describe",
+    "log": "logs/jdk.m3.text-jar-describe.log",
+    "log_sha256": "076827c1a6afc1d2fdcd1f1b63b5d5cd496d45f948e0fa22960a0fd598d24dad",
+    "status": "PASS",
+    "timeout_seconds": 115
+  },
+  {
+    "argv": [
+      "/usr/bin/python3",
+      "${REPO}/m3/tooling/jmod-recipes/tools/jmod_pack.py",
+      "--jdk-home",
+      "${JDK}",
+      "--image-tsv",
+      "${OUT}/INPUT_JMOD_IMAGE.tsv",
+      "--manifest",
+      "${OUT}/EMPTY_DESCRIPTOR_MANIFEST.tsv",
+      "--layer-root",
+      "${REPO}",
+      "--out",
+      "${OUT}/pack",
+      "--legal-notices",
+      "${OUT}/legal",
+      "--native-library",
+      "jdk.m3.io=${OUT}/native",
+      "--add-modules",
+      "java.se,jdk.compiler,jdk.jlink,jdk.jartool,jdk.jdeps"
+    ],
+    "elapsed_seconds": 33.538578,
+    "exit_code": 0,
+    "java_tmp_dir": "${OUT}/java-tmp",
+    "label": "jmod-pack",
+    "log": "logs/jmod-pack.log",
+    "log_sha256": "2ee268d8ae7215dfcc209ec4aa6689fdbe0dd5a1f2f140b99a9ed8ec18f7e5a6",
+    "status": "PASS",
+    "timeout_seconds": 115
+  },
+  {
+    "argv": [
+      "${JDK}/bin/jmod",
+      "describe",
+      "${OUT}/pack/jmods/com.m3.tools.codec.varint.jmod"
+    ],
+    "elapsed_seconds": 0.818241,
+    "exit_code": 0,
+    "label": "com.m3.tools.codec.varint-jmod-describe",
+    "log": "logs/com.m3.tools.codec.varint-jmod-describe.log",
+    "log_sha256": "2c057318ed01377fcd96221e85886939841a2f3dd79b7bec9a4c711af15dba07",
+    "status": "PASS",
+    "timeout_seconds": 115
+  },
+  {
+    "argv": [
+      "${JDK}/bin/jmod",
+      "describe",
+      "${OUT}/pack/jmods/com.m3.tools.constraint.interval.jmod"
+    ],
+    "elapsed_seconds": 0.418938,
+    "exit_code": 0,
+    "label": "com.m3.tools.constraint.interval-jmod-describe",
+    "log": "logs/com.m3.tools.constraint.interval-jmod-describe.log",
+    "log_sha256": "b72bba3616fc221665c8d6fdeb4d353d072daea031e58b76ad7e112ae19c9e0d",
+    "status": "PASS",
+    "timeout_seconds": 115
+  },
+  {
+    "argv": [
+      "${JDK}/bin/jmod",
+      "describe",
+      "${OUT}/pack/jmods/com.m3.tools.cpu.jmod"
+    ],
+    "elapsed_seconds": 0.466779,
+    "exit_code": 0,
+    "label": "com.m3.tools.cpu-jmod-describe",
+    "log": "logs/com.m3.tools.cpu-jmod-describe.log",
+    "log_sha256": "8d183f57b3d01153961491140ec2ece318f4b6589fba516adcfb52c5c4a13647",
+    "status": "PASS",
+    "timeout_seconds": 115
+  },
+  {
+    "argv": [
+      "${JDK}/bin/jmod",
+      "describe",
+      "${OUT}/pack/jmods/com.m3.tools.graph.paths.jmod"
+    ],
+    "elapsed_seconds": 0.875329,
+    "exit_code": 0,
+    "label": "com.m3.tools.graph.paths-jmod-describe",
+    "log": "logs/com.m3.tools.graph.paths-jmod-describe.log",
+    "log_sha256": "3d6786be3757c40f24af0fcd516d05b9067ea71e0ea5a82b5a1742e6f9d41d94",
+    "status": "PASS",
+    "timeout_seconds": 115
+  },
+  {
+    "argv": [
+      "${JDK}/bin/jmod",
+      "describe",
+      "${OUT}/pack/jmods/com.m3.tools.graph.topology.jmod"
+    ],
+    "elapsed_seconds": 0.519823,
+    "exit_code": 0,
+    "label": "com.m3.tools.graph.topology-jmod-describe",
+    "log": "logs/com.m3.tools.graph.topology-jmod-describe.log",
+    "log_sha256": "0dee904f1510aaa7c5740a86813f15523f53371192b0726ca43a9b153df038de",
+    "status": "PASS",
+    "timeout_seconds": 115
+  },
+  {
+    "argv": [
+      "${JDK}/bin/jmod",
+      "describe",
+      "${OUT}/pack/jmods/com.m3.tools.plan.priority.jmod"
+    ],
+    "elapsed_seconds": 0.516224,
+    "exit_code": 0,
+    "label": "com.m3.tools.plan.priority-jmod-describe",
+    "log": "logs/com.m3.tools.plan.priority-jmod-describe.log",
+    "log_sha256": "84c5760acdfccb92d1040e6275d83ae9cb19a868a3969f7922245ddac29d81ba",
+    "status": "PASS",
+    "timeout_seconds": 115
+  },
+  {
+    "argv": [
+      "${JDK}/bin/jmod",
+      "describe",
+      "${OUT}/pack/jmods/com.m3.tools.stats.streaming.jmod"
+    ],
+    "elapsed_seconds": 0.905485,
+    "exit_code": 0,
+    "label": "com.m3.tools.stats.streaming-jmod-describe",
+    "log": "logs/com.m3.tools.stats.streaming-jmod-describe.log",
+    "log_sha256": "0859d2a3db7a1a2036de32a39f779fc8080d9225561caac6c82c3215f5aed8d5",
+    "status": "PASS",
+    "timeout_seconds": 115
+  },
+  {
+    "argv": [
+      "${JDK}/bin/jmod",
+      "describe",
+      "${OUT}/pack/jmods/com.m3.tools.text.diff.jmod"
+    ],
+    "elapsed_seconds": 0.517571,
+    "exit_code": 0,
+    "label": "com.m3.tools.text.diff-jmod-describe",
+    "log": "logs/com.m3.tools.text.diff-jmod-describe.log",
+    "log_sha256": "f64aa5e81e830c68b8995052e53804af778f99d46d7bbb4ab28a0a90f992d55c",
+    "status": "PASS",
+    "timeout_seconds": 115
+  },
+  {
+    "argv": [
+      "${JDK}/bin/jmod",
+      "describe",
+      "${OUT}/pack/jmods/com.m3.tools.text.frequency.jmod"
+    ],
+    "elapsed_seconds": 0.569242,
+    "exit_code": 0,
+    "label": "com.m3.tools.text.frequency-jmod-describe",
+    "log": "logs/com.m3.tools.text.frequency-jmod-describe.log",
+    "log_sha256": "d9da9b811bbec3a8ffb3df5a0ceae3fadcc68c5c680c7e7dbc3344171c8326bc",
+    "status": "PASS",
+    "timeout_seconds": 115
+  },
+  {
+    "argv": [
+      "${JDK}/bin/jmod",
+      "describe",
+      "${OUT}/pack/jmods/com.m3.tools.text.index.jmod"
+    ],
+    "elapsed_seconds": 0.618056,
+    "exit_code": 0,
+    "label": "com.m3.tools.text.index-jmod-describe",
+    "log": "logs/com.m3.tools.text.index-jmod-describe.log",
+    "log_sha256": "dd9fa5a17f69e1b00b6b11906a42a4c585f597985db5b2182cbe6abb7a46e7eb",
+    "status": "PASS",
+    "timeout_seconds": 115
+  },
+  {
+    "argv": [
+      "${JDK}/bin/jmod",
+      "describe",
+      "${OUT}/pack/jmods/com.m3.tools.text.ngram.jmod"
+    ],
+    "elapsed_seconds": 0.419947,
+    "exit_code": 0,
+    "label": "com.m3.tools.text.ngram-jmod-describe",
+    "log": "logs/com.m3.tools.text.ngram-jmod-describe.log",
+    "log_sha256": "8e0957561ead530f9713ab70de0ee3f249dd2cdcce3822ef3360d831ae97f603",
+    "status": "PASS",
+    "timeout_seconds": 115
+  },
+  {
+    "argv": [
+      "${JDK}/bin/jmod",
+      "describe",
+      "${OUT}/pack/jmods/com.m3.tools.text.normalize.jmod"
+    ],
+    "elapsed_seconds": 0.577536,
+    "exit_code": 0,
+    "label": "com.m3.tools.text.normalize-jmod-describe",
+    "log": "logs/com.m3.tools.text.normalize-jmod-describe.log",
+    "log_sha256": "abb1cccd995d46290ba0fa0d414a6216c82eb8432b6271cec643857707fdeb0d",
+    "status": "PASS",
+    "timeout_seconds": 115
+  },
+  {
+    "argv": [
+      "${JDK}/bin/jmod",
+      "describe",
+      "${OUT}/pack/jmods/com.m3.tools.text.regex.jmod"
+    ],
+    "elapsed_seconds": 0.569427,
+    "exit_code": 0,
+    "label": "com.m3.tools.text.regex-jmod-describe",
+    "log": "logs/com.m3.tools.text.regex-jmod-describe.log",
+    "log_sha256": "373118c65ff0b35c8a9dbfb6ac6afed308270baab15576e5cf2d57fd1c7e1f65",
+    "status": "PASS",
+    "timeout_seconds": 115
+  },
+  {
+    "argv": [
+      "${JDK}/bin/jmod",
+      "describe",
+      "${OUT}/pack/jmods/com.m3.tools.text.search.jmod"
+    ],
+    "elapsed_seconds": 0.51719,
+    "exit_code": 0,
+    "label": "com.m3.tools.text.search-jmod-describe",
+    "log": "logs/com.m3.tools.text.search-jmod-describe.log",
+    "log_sha256": "75cd08a4ee78d45e703eee0336e50baaeab1e9891a1dab1d192e7a60eb7e7377",
+    "status": "PASS",
+    "timeout_seconds": 115
+  },
+  {
+    "argv": [
+      "${JDK}/bin/jmod",
+      "describe",
+      "${OUT}/pack/jmods/com.m3.tools.text.similarity.jmod"
+    ],
+    "elapsed_seconds": 0.471035,
+    "exit_code": 0,
+    "label": "com.m3.tools.text.similarity-jmod-describe",
+    "log": "logs/com.m3.tools.text.similarity-jmod-describe.log",
+    "log_sha256": "fe8572dd462cf507ec030fb03b4e887a7288c4847bdd13a24be4d7ea9e0970b4",
+    "status": "PASS",
+    "timeout_seconds": 115
+  },
+  {
+    "argv": [
+      "${JDK}/bin/jmod",
+      "describe",
+      "${OUT}/pack/jmods/com.m3.tools.text.tokenize.jmod"
+    ],
+    "elapsed_seconds": 0.46839,
+    "exit_code": 0,
+    "label": "com.m3.tools.text.tokenize-jmod-describe",
+    "log": "logs/com.m3.tools.text.tokenize-jmod-describe.log",
+    "log_sha256": "f6c2a0d61c9ba6423997b04a9a0b569ea072dcdecea2e05d09ea0bd1dc825f30",
+    "status": "PASS",
+    "timeout_seconds": 115
+  },
+  {
+    "argv": [
+      "${JDK}/bin/jmod",
+      "describe",
+      "${OUT}/pack/jmods/com.m3.tools.verify.sha256.jmod"
+    ],
+    "elapsed_seconds": 0.416238,
+    "exit_code": 0,
+    "label": "com.m3.tools.verify.sha256-jmod-describe",
+    "log": "logs/com.m3.tools.verify.sha256-jmod-describe.log",
+    "log_sha256": "69c32a87cffc414da4b6dccd481f21f75b6a30701c67442e47de52de3cef9d91",
+    "status": "PASS",
+    "timeout_seconds": 115
+  },
+  {
+    "argv": [
+      "${JDK}/bin/jmod",
+      "describe",
+      "${OUT}/pack/jmods/jdk.m3.io.jmod"
+    ],
+    "elapsed_seconds": 0.419019,
+    "exit_code": 0,
+    "label": "jdk.m3.io-jmod-describe",
+    "log": "logs/jdk.m3.io-jmod-describe.log",
+    "log_sha256": "31b4792bc0867f118811a687cc2776ca52fe25e5670a29965dc73c9f41b77f76",
+    "status": "PASS",
+    "timeout_seconds": 115
+  },
+  {
+    "argv": [
+      "${JDK}/bin/jmod",
+      "describe",
+      "${OUT}/pack/jmods/jdk.m3.structured.jmod"
+    ],
+    "elapsed_seconds": 0.417367,
+    "exit_code": 0,
+    "label": "jdk.m3.structured-jmod-describe",
+    "log": "logs/jdk.m3.structured-jmod-describe.log",
+    "log_sha256": "af4834a629dceac71822aed18575826b3bff09440d61120923a1e02d809340c8",
+    "status": "PASS",
+    "timeout_seconds": 115
+  },
+  {
+    "argv": [
+      "${JDK}/bin/jmod",
+      "describe",
+      "${OUT}/pack/jmods/jdk.m3.text.jmod"
+    ],
+    "elapsed_seconds": 0.418423,
+    "exit_code": 0,
+    "label": "jdk.m3.text-jmod-describe",
+    "log": "logs/jdk.m3.text-jmod-describe.log",
+    "log_sha256": "74f650afd7eda9a0095f9e13cc419b6b25a2d492c1297da273d2f6f80844ec3f",
+    "status": "PASS",
+    "timeout_seconds": 115
+  },
+  {
+    "argv": [
+      "${OUT}/pack/image/bin/java",
+      "--validate-modules"
+    ],
+    "elapsed_seconds": 0.317642,
+    "exit_code": 0,
+    "label": "image-validate",
+    "log": "logs/image-validate.log",
+    "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "status": "PASS",
+    "timeout_seconds": 115
+  },
+  {
+    "argv": [
+      "${OUT}/pack/image/bin/java",
+      "--list-modules"
+    ],
+    "elapsed_seconds": 0.316606,
+    "exit_code": 0,
+    "label": "image-modules",
+    "log": "logs/image-modules.log",
+    "log_sha256": "f19bafa465bf2284ad41e5d8f054d152ea94f8f613926e4a82efd9748341ecc1",
+    "status": "PASS",
+    "timeout_seconds": 115
+  },
+  {
+    "argv": [
+      "${OUT}/pack/image/bin/javac",
+      "-source",
+      "21",
+      "-target",
+      "21",
+      "-Xlint:all,-module",
+      "-Werror",
+      "--add-modules",
+      "com.m3.tools.codec.varint,com.m3.tools.constraint.interval,com.m3.tools.cpu,com.m3.tools.graph.paths,com.m3.tools.graph.topology,com.m3.tools.plan.priority,com.m3.tools.stats.streaming,com.m3.tools.text.diff,com.m3.tools.text.frequency,com.m3.tools.text.index,com.m3.tools.text.ngram,com.m3.tools.text.normalize,com.m3.tools.text.regex,com.m3.tools.text.search,com.m3.tools.text.similarity,com.m3.tools.text.tokenize,com.m3.tools.verify.sha256,jdk.m3.io,jdk.m3.structured,jdk.m3.text",
+      "-d",
+      "${OUT}/test-classes",
+      "${REPO}/m3/tooling/module-packs/cpu-tools/fixtures/M3DonorToolsTest.java",
+      "${REPO}/m3/tooling/module-packs/cpu-tools/fixtures/M3SourceToolsTest.java",
+      "${REPO}/m3/tooling/module-packs/cpu-tools/fixtures/M3CpuToolsTest.java",
+      "${REPO}/m3/tooling/module-packs/text-tools/fixtures/src/test/java/M3TextSmoke.java"
+    ],
+    "elapsed_seconds": 5.153584,
+    "exit_code": 0,
+    "label": "image-fixtures-javac",
+    "log": "logs/image-fixtures-javac.log",
+    "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "status": "PASS",
+    "timeout_seconds": 115
+  },
+  {
+    "argv": [
+      "${OUT}/pack/image/bin/java",
+      "-Xcheck:jni",
+      "-Djava.io.tmpdir=${OUT}/test-work",
+      "--add-modules",
+      "com.m3.tools.codec.varint,com.m3.tools.constraint.interval,com.m3.tools.cpu,com.m3.tools.graph.paths,com.m3.tools.graph.topology,com.m3.tools.plan.priority,com.m3.tools.stats.streaming,com.m3.tools.text.diff,com.m3.tools.text.frequency,com.m3.tools.text.index,com.m3.tools.text.ngram,com.m3.tools.text.normalize,com.m3.tools.text.regex,com.m3.tools.text.search,com.m3.tools.text.similarity,com.m3.tools.text.tokenize,com.m3.tools.verify.sha256,jdk.m3.io,jdk.m3.structured,jdk.m3.text",
+      "-cp",
+      "${OUT}/test-classes",
+      "M3DonorToolsTest"
+    ],
+    "elapsed_seconds": 1.275775,
+    "exit_code": 0,
+    "label": "image-M3DonorToolsTest",
+    "log": "logs/image-M3DonorToolsTest.log",
+    "log_sha256": "acb118bc5c29b6216ce61f816fa42a7f0342645839d2206f043ec6a6a08cc648",
+    "status": "PASS",
+    "timeout_seconds": 115
+  },
+  {
+    "argv": [
+      "${OUT}/pack/image/bin/java",
+      "-Xcheck:jni",
+      "-Djava.io.tmpdir=${OUT}/test-work",
+      "--add-modules",
+      "com.m3.tools.codec.varint,com.m3.tools.constraint.interval,com.m3.tools.cpu,com.m3.tools.graph.paths,com.m3.tools.graph.topology,com.m3.tools.plan.priority,com.m3.tools.stats.streaming,com.m3.tools.text.diff,com.m3.tools.text.frequency,com.m3.tools.text.index,com.m3.tools.text.ngram,com.m3.tools.text.normalize,com.m3.tools.text.regex,com.m3.tools.text.search,com.m3.tools.text.similarity,com.m3.tools.text.tokenize,com.m3.tools.verify.sha256,jdk.m3.io,jdk.m3.structured,jdk.m3.text",
+      "-cp",
+      "${OUT}/test-classes",
+      "M3SourceToolsTest"
+    ],
+    "elapsed_seconds": 2.13079,
+    "exit_code": 0,
+    "label": "image-M3SourceToolsTest",
+    "log": "logs/image-M3SourceToolsTest.log",
+    "log_sha256": "2570fcd88f71236c7fb54ab020e24acf4f9eea851cbfc599fda6a872534103ec",
+    "status": "PASS",
+    "timeout_seconds": 115
+  },
+  {
+    "argv": [
+      "${OUT}/pack/image/bin/java",
+      "-Xcheck:jni",
+      "-Djava.io.tmpdir=${OUT}/test-work",
+      "--add-modules",
+      "com.m3.tools.codec.varint,com.m3.tools.constraint.interval,com.m3.tools.cpu,com.m3.tools.graph.paths,com.m3.tools.graph.topology,com.m3.tools.plan.priority,com.m3.tools.stats.streaming,com.m3.tools.text.diff,com.m3.tools.text.frequency,com.m3.tools.text.index,com.m3.tools.text.ngram,com.m3.tools.text.normalize,com.m3.tools.text.regex,com.m3.tools.text.search,com.m3.tools.text.similarity,com.m3.tools.text.tokenize,com.m3.tools.verify.sha256,jdk.m3.io,jdk.m3.structured,jdk.m3.text",
+      "-cp",
+      "${OUT}/test-classes",
+      "M3CpuToolsTest"
+    ],
+    "elapsed_seconds": 3.596424,
+    "exit_code": 0,
+    "label": "image-M3CpuToolsTest",
+    "log": "logs/image-M3CpuToolsTest.log",
+    "log_sha256": "511f8e9ea85022711d86348843ea225f0962671feb856256ea44a254a27374b4",
+    "status": "PASS",
+    "timeout_seconds": 115
+  },
+  {
+    "argv": [
+      "${OUT}/pack/image/bin/java",
+      "-Xcheck:jni",
+      "-Djava.io.tmpdir=${OUT}/test-work",
+      "-XX:+UnlockExperimentalVMOptions",
+      "-XX:+UseM3StringStorage",
+      "-Dm3.test.requireStorage=true",
+      "--add-opens",
+      "java.base/java.lang=ALL-UNNAMED",
+      "--add-modules",
+      "com.m3.tools.codec.varint,com.m3.tools.constraint.interval,com.m3.tools.cpu,com.m3.tools.graph.paths,com.m3.tools.graph.topology,com.m3.tools.plan.priority,com.m3.tools.stats.streaming,com.m3.tools.text.diff,com.m3.tools.text.frequency,com.m3.tools.text.index,com.m3.tools.text.ngram,com.m3.tools.text.normalize,com.m3.tools.text.regex,com.m3.tools.text.search,com.m3.tools.text.similarity,com.m3.tools.text.tokenize,com.m3.tools.verify.sha256,jdk.m3.io,jdk.m3.structured,jdk.m3.text",
+      "-cp",
+      "${OUT}/test-classes",
+      "M3SourceToolsTest"
+    ],
+    "elapsed_seconds": 4.971157,
+    "exit_code": 0,
+    "label": "image-m3-storage-M3SourceToolsTest",
+    "log": "logs/image-m3-storage-M3SourceToolsTest.log",
+    "log_sha256": "9fed8060582297b16e5eb8fbcf494b26b9a67a6f7504e38a2b9337cb3bd3f3a0",
+    "status": "PASS",
+    "timeout_seconds": 115
+  },
+  {
+    "argv": [
+      "${OUT}/pack/image/bin/java",
+      "-Xcheck:jni",
+      "-Djava.io.tmpdir=${OUT}/test-work",
+      "-XX:+UnlockExperimentalVMOptions",
+      "-XX:+UseM3StringStorage",
+      "-Dm3.test.requireStorage=true",
+      "--add-opens",
+      "java.base/java.lang=ALL-UNNAMED",
+      "--add-modules",
+      "com.m3.tools.codec.varint,com.m3.tools.constraint.interval,com.m3.tools.cpu,com.m3.tools.graph.paths,com.m3.tools.graph.topology,com.m3.tools.plan.priority,com.m3.tools.stats.streaming,com.m3.tools.text.diff,com.m3.tools.text.frequency,com.m3.tools.text.index,com.m3.tools.text.ngram,com.m3.tools.text.normalize,com.m3.tools.text.regex,com.m3.tools.text.search,com.m3.tools.text.similarity,com.m3.tools.text.tokenize,com.m3.tools.verify.sha256,jdk.m3.io,jdk.m3.structured,jdk.m3.text",
+      "-cp",
+      "${OUT}/test-classes",
+      "M3CpuToolsTest"
+    ],
+    "elapsed_seconds": 7.950419,
+    "exit_code": 0,
+    "label": "image-m3-storage-M3CpuToolsTest",
+    "log": "logs/image-m3-storage-M3CpuToolsTest.log",
+    "log_sha256": "beb3d939616500469fa637160374cd347980d34a0f9ce0e210ed897daa3904e6",
+    "status": "PASS",
+    "timeout_seconds": 115
+  },
+  {
+    "argv": [
+      "${OUT}/pack/image/bin/java",
+      "-Xcheck:jni",
+      "-Djava.io.tmpdir=${OUT}/test-work",
+      "--add-modules",
+      "com.m3.tools.codec.varint,com.m3.tools.constraint.interval,com.m3.tools.cpu,com.m3.tools.graph.paths,com.m3.tools.graph.topology,com.m3.tools.plan.priority,com.m3.tools.stats.streaming,com.m3.tools.text.diff,com.m3.tools.text.frequency,com.m3.tools.text.index,com.m3.tools.text.ngram,com.m3.tools.text.normalize,com.m3.tools.text.regex,com.m3.tools.text.search,com.m3.tools.text.similarity,com.m3.tools.text.tokenize,com.m3.tools.verify.sha256,jdk.m3.io,jdk.m3.structured,jdk.m3.text",
+      "-cp",
+      "${OUT}/test-classes",
+      "M3TextSmoke",
+      "${OUT}/text-jni-fixture"
+    ],
+    "elapsed_seconds": 0.768185,
+    "exit_code": 0,
+    "label": "image-existing-text-jni",
+    "log": "logs/image-existing-text-jni.log",
+    "log_sha256": "fbd151ba85c214045e1ffa4fe2b5a03f9d852f93771b6cf598a918e34b915f99",
+    "status": "PASS",
+    "timeout_seconds": 115
+  },
+  {
+    "argv": [
+      "${OUT}/pack/image/bin/java",
+      "-Xcheck:jni",
+      "-Djava.io.tmpdir=${OUT}/test-work",
+      "-m",
+      "com.m3.tools.cpu/com.m3.tools.cpu.CpuToolsCli",
+      "--list"
+    ],
+    "elapsed_seconds": 0.87287,
+    "exit_code": 0,
+    "label": "image-cli-catalogue",
+    "log": "logs/image-cli-catalogue.log",
+    "log_sha256": "5c10bbe5a1a36c7614e7008d714494438e16250bea84c27e36ceb29fb91399ff",
+    "status": "PASS",
+    "timeout_seconds": 115
+  },
+  {
+    "argv": [
+      "${OUT}/pack/image/bin/java",
+      "-Xcheck:jni",
+      "-Djava.io.tmpdir=${OUT}/test-work",
+      "-m",
+      "com.m3.tools.cpu/com.m3.tools.cpu.CpuToolsCli",
+      "--list"
+    ],
+    "elapsed_seconds": 1.253007,
+    "exit_code": 0,
+    "label": "image-cli-catalogue-replay",
+    "log": "logs/image-cli-catalogue-replay.log",
+    "log_sha256": "5c10bbe5a1a36c7614e7008d714494438e16250bea84c27e36ceb29fb91399ff",
+    "status": "PASS",
+    "timeout_seconds": 115
+  },
+  {
+    "argv": [
+      "${OUT}/pack/image/bin/java",
+      "-Xcheck:jni",
+      "-Djava.io.tmpdir=${OUT}/test-work",
+      "-m",
+      "com.m3.tools.cpu/com.m3.tools.cpu.CpuToolsCli",
+      "--self-test"
+    ],
+    "elapsed_seconds": 1.076601,
+    "exit_code": 0,
+    "label": "image-cli-self-test",
+    "log": "logs/image-cli-self-test.log",
+    "log_sha256": "fdd1a2ea5477a12f4be68be120a982f8cc8fc400e703d3c3cb7ce0f1fabbe28b",
+    "status": "PASS",
+    "timeout_seconds": 115
+  },
+  {
+    "argv": [
+      "${OUT}/pack/image/bin/java",
+      "-Xcheck:jni",
+      "-Djava.io.tmpdir=${OUT}/test-work",
+      "-m",
+      "com.m3.tools.cpu/com.m3.tools.cpu.CpuToolsCli",
+      "--self-test"
+    ],
+    "elapsed_seconds": 1.01976,
+    "exit_code": 0,
+    "label": "image-cli-self-test-replay",
+    "log": "logs/image-cli-self-test-replay.log",
+    "log_sha256": "fdd1a2ea5477a12f4be68be120a982f8cc8fc400e703d3c3cb7ce0f1fabbe28b",
+    "status": "PASS",
+    "timeout_seconds": 115
+  }
+]

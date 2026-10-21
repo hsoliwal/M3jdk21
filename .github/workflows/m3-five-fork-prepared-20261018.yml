@@ -1,0 +1,69 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3 five-fork prepared selection Java/JNI
+on:
+  pull_request:
+    paths:
+      - 'm3/collections/interop/src/main/java/com/m3/collections/interop/M3FiveFamilyPreparedSelection.java'
+      - 'm3/collections/interop/src/test/java/com/m3/collections/interop/M3FiveFamilyPreparedSelection*.java'
+      - 'm3/collections/qualification/m3-five-fork-prepared-20261018/**'
+      - '.github/workflows/m3-five-fork-prepared-20261018.yml'
+  workflow_dispatch:
+jobs:
+  fork-source-custody:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - {family: JDK, repository: hsoliwal/M3jdk21, ref: 2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49, path: src/java.base/share/classes/java/util/HashMap.java, blob: 1a4e25044a1d4cf7125a07bc6ddde05b025b84a8}
+          - {family: GUAVA, repository: hsoliwal/guava, ref: 7f70b54a348dce28fcbfa6005155e71f3140b93f, path: guava/src/com/google/common/collect/AbstractMapBasedMultimap.java, blob: 96d599dd3945c78885c153391bda377f029d02d6}
+          - {family: ECLIPSE_COLLECTIONS, repository: hsoliwal/eclipse-collections, ref: 76d09e86a947b2f7cc0e8111f1af18941438af8d, path: eclipse-collections/src/main/java/com/m3/collections/eclipse/impl/multimap/list/FastListMultimap.java, blob: 1f8bae8611da3edb07b3b4a79ee657803fa2d97e}
+          - {family: APACHE_COMMONS_COLLECTIONS, repository: hsoliwal/commons-collections, ref: 69ecfb142228e424bfa345abf6f5b3bddfec3c22, path: src/main/java/com/m3/collections/apache/multimap/AbstractMultiValuedMap.java, blob: 690a80a58c19ba208837a951ca0dd0ea3d9579f0}
+          - {family: SPRING_FRAMEWORK, repository: hsoliwal/spring-framework, ref: 49adc91c7e41eaafb52fc11e1210989894bda1f3, path: spring-core/src/main/java/org/springframework/util/LinkedMultiValueMap.java, blob: 574b0eec83d8bbb0ce8df82287616c9b8add85da}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          repository: ${{ matrix.repository }}
+          ref: ${{ matrix.ref }}
+          path: fork
+          persist-credentials: false
+      - name: Exact original fork source pin (metadata only, not a binary build)
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git -C fork rev-parse HEAD)" = "${{ matrix.ref }}"
+          test "$(git -C fork hash-object "${{ matrix.path }}")" = "${{ matrix.blob }}"
+  recipe-and-provider-contracts:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Source-sealed recipe Maven and byte fixed-point
+        shell: bash
+        run: |
+          set -euo pipefail
+          RECIPE=m3/collections/qualification/m3-five-fork-prepared-20261018/recipe
+          mvn -B -ntp -f "$RECIPE/pom.xml" verify
+          java -cp "$RECIPE/target/classes" com.synexia.m3.M3FiveForkPreparedRecipe --check .
+      - name: Build real M3 core and real five-provider interop JUnit
+        shell: bash
+        run: |
+          set -euo pipefail
+          mvn -B -ntp -f m3/collections/pom.xml -DskipTests install
+          mvn -B -ntp -f m3/collections/interop/pom.xml -Dtest=M3FiveFamilyPreparedSelectionTest test
+      - name: Strict existing JNI C17 compile and checked provider oracle
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/m3-five-fork-native"
+          cc -std=c17 -O1 -g -fPIC -shared -Wall -Wextra -Werror \
+            -fsanitize=undefined -fno-sanitize-recover=all \
+            -I"$JAVA_HOME/include" -I"$JAVA_HOME/include/linux" \
+            m3/collections/src/main/native/collections/m3_index_mask_compactor.c \
+            -o "$RUNNER_TEMP/m3-five-fork-native/libm3_collections_mask.so"
+          mvn -B -ntp -f m3/collections/interop/pom.xml \
+            -Dtest=M3FiveFamilyPreparedSelectionTest \
+            -DargLine="-Xcheck:jni -Djava.library.path=$RUNNER_TEMP/m3-five-fork-native" test

@@ -1,0 +1,29 @@
+{
+  "schema" : "M3_NLP_CURRENT_FORKS_SDK_RECEIPT_V1",
+  "engine" : "com.m3.rewrite.jmod.M3ModuleDescriptorRecipe",
+  "sdk_version" : "8.17.1",
+  "kind" : "descriptor",
+  "crate" : "/workspace/scratch/842aadebd195/synexia-evidence/sdk-engine/synexia-openrewrite-recipes/crates/m3-nlp-search/current-forks-20261018/descriptors/opennlp/DESCRIPTOR_MANIFEST.tsv",
+  "targets" : 14,
+  "first_application_changes" : 14,
+  "fixed_point_changes" : 0,
+  "drift_refusals" : 1,
+  "duplicate_refusals" : 1,
+  "missing_refusals" : 0,
+  "source_sha256" : {
+    "dev/m3-jmod/descriptors/hppc/module-info.java" : "dca492d280b0cee3c4ae400961dd35727158228b67aace1cfaeb0b00771dac01",
+    "dev/m3-jmod/descriptors/jcommander/module-info.java" : "a528d7046bcd1e8ad8a8858f23f3acf6a7e163ce509fd0784e3b838b988d72f0",
+    "dev/m3-jmod/descriptors/libsvm/module-info.java" : "d8741513cb2ee513887548f7b60d4728a49034b091351693fbf60bea6ed4d071",
+    "dev/m3-jmod/descriptors/org.apache.opennlp.morfologik/module-info.java" : "f64f1a0f8435fa528c83f4dea8fc931ce190036460041c9db57602397d5198b5",
+    "dev/m3-jmod/descriptors/org.apache.opennlp.spellcheck/module-info.java" : "e8c04a3deefd39abf256ebf1fea6175502bd5fc87102c34adb907ef9d882c59e",
+    "dev/m3-jmod/descriptors/org.apache.opennlp.tools/module-info.java" : "d59ebf48eead595744e55928af267b04f165d9fe7dc4482522811117f62252db",
+    "dev/m3-jmod/descriptors/org.apache.opennlp.uima/module-info.java" : "cf469c4c8b7b444447cdb841dffeab049c24dc5f62b04af20274dcff4a269e55",
+    "dev/m3-jmod/descriptors/org.carrot2.morfologik.fsa/module-info.java" : "cc6a63def57000ef107d7137149453fd50ca530aeb524ee6b7e7012e5d111dc1",
+    "dev/m3-jmod/descriptors/org.carrot2.morfologik.fsa_builders/module-info.java" : "a0e2dd887cdb221d10d070d826d6802ed8eb6308825416c1b8ca23faf11b833f",
+    "dev/m3-jmod/descriptors/org.carrot2.morfologik.stemming/module-info.java" : "d0f0b67c338c8bc59635718f8de8a63bd8a1929a9479ab0c485b90608eba8f93",
+    "dev/m3-jmod/descriptors/org.carrot2.morfologik.tools/module-info.java" : "a883dfa4fdf9b49fbe9884e82711b82cc1608771cf48e31e5a656be1e6523a1c",
+    "dev/m3-jmod/descriptors/uimaj.core/module-info.java" : "565e2f777b94c628d73b2e014c73887d1c1758b4d04aa6d42a90dc52ed29b650",
+    "dev/m3-jmod/descriptors/zlibsvm.core/module-info.java" : "43788a3972424ad1f65a9ffc1cba98a555e15078b328f6bd944d89459c316491",
+    "dev/m3-jmod/src/test/java/org.apache.opennlp.m3.probe/module-info.java" : "b372cb6fc259f5b6f2f6836370342c85fc68246e79cecf246482a22e0fbfdd0d"
+  }
+}

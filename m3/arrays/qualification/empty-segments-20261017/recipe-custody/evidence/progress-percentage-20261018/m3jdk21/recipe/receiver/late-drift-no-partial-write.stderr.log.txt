@@ -1,0 +1,9 @@
+Traceback (most recent call last):
+  File "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/proof/recipe-m3jdk21/receiver-proof/isolated-kbz9hktn/late-drift/crate/receive.py", line 195, in <module>
+    main()
+  File "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/proof/recipe-m3jdk21/receiver-proof/isolated-kbz9hktn/late-drift/crate/receive.py", line 190, in main
+    result = receive(crate, args.dataset, owner.absolute(), args.target.absolute(), args.check)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/proof/recipe-m3jdk21/receiver-proof/isolated-kbz9hktn/late-drift/crate/receive.py", line 154, in receive
+    raise ValueError("target source drift: " + relative)
+ValueError: target source drift: m3/collections/src/test/java/com/m3/collections/M3ProgressAdaptersPercentageTest.java

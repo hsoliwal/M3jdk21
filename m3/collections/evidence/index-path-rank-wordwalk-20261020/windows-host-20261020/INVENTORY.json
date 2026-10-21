@@ -1,0 +1,43 @@
+{
+  "schema": "synexia.m3jdk21.exact-rank-source-inventory.v1",
+  "files": [
+    {
+      "path": "src/com/m3/collections/M3IndexPathRank.java",
+      "bytes": 9834,
+      "sha256": "24fc18d444d8e92d0a136b2541b5a92e203e3179b1ab1c4518f6d6becf902e2a",
+      "git_blob": "4a60fd1fab763c03dd14f1e4e5abe4ff33a712fa"
+    },
+    {
+      "path": "src/com/m3/collections/M3IndexPathRankSelfTest.java",
+      "bytes": 10699,
+      "sha256": "d354516b794666bb594d91acb1da0128172b88771b48a899e4c456da947759d2",
+      "git_blob": "0a95152c8b7345fc73901e850bde66bb1fcd390b"
+    },
+    {
+      "path": "src/com/m3/collections/M3IndexPathRankWordWalkProof.java",
+      "bytes": 4857,
+      "sha256": "876fd1c73030a39b1e629580111b94cee6cd39205da34e2ff900a0570057eae9",
+      "git_blob": "18267cd65e757a2d875754d4b852c2205b2e4e7d"
+    },
+    {
+      "path": "baseline/src/com/m3/collections/M3IndexPathRank.java",
+      "bytes": 9214,
+      "sha256": "9f683bec8b328f4d2ed4ae1540281ea14ccd2475e2096c60ffe77e36bfe53ecc",
+      "git_blob": "6bc439b69f739608141acf6ee3800e5b5b0163c3"
+    },
+    {
+      "path": "PLAN.json",
+      "bytes": 26322,
+      "sha256": "611ae5374fc50448ba41d4c5495145b1111af2529a234299a71b61cdf2c51e86"
+    },
+    {
+      "path": "README.md",
+      "bytes": 1655,
+      "sha256": "ca0b7bda7072f235ce9f908bdef2a69d968d59fa7a24a26a256ca36f725e226d"
+    }
+  ],
+  "product_head": "4fd2abe76a3a63f5c363f69b4a5f979540a95bdb",
+  "source_status": "UNCHANGED_PINNED_SOURCE",
+  "execution": "NOT_RUN",
+  "storage_protection": "ACTIVE"
+}

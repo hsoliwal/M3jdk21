@@ -30,7 +30,7 @@ public final class M3LongFilteredView implements M3LongCollection {
         Objects.requireNonNull(predicate, "predicate");
         if (source instanceof M3LongFilteredView previous) {
             this.source = previous.source;
-            this.predicate = previous.predicate.and(predicate);
+            this.predicate = M3LongPredicates.and(previous.predicate, predicate);
         } else {
             this.source = source;
             this.predicate = predicate;
@@ -44,18 +44,25 @@ public final class M3LongFilteredView implements M3LongCollection {
 
     @Override
     public int size() {
+        // Reuse the authoritative primitive owner cursor; terminal count does
+        // not need the intermediate filtering iterator or a new payload lane.
         int count = 0;
-        M3LongIterator iterator = iterator();
-        while (iterator.hasNext()) {
-            iterator.nextLong();
-            count++;
+        M3LongIterator input = source.iterator();
+        while (input.hasNext()) {
+            long value = input.nextLong();
+            if (predicate.test(value)) count++;
         }
         return count;
     }
 
     @Override
     public boolean isEmpty() {
-        return !iterator().hasNext();
+        // Retain first-match short-circuit semantics and predicate call order.
+        M3LongIterator input = source.iterator();
+        while (input.hasNext()) {
+            if (predicate.test(input.nextLong())) return false;
+        }
+        return true;
     }
 
     @Override
@@ -66,7 +73,13 @@ public final class M3LongFilteredView implements M3LongCollection {
     @Override
     public void forEachLong(LongConsumer consumer) {
         Objects.requireNonNull(consumer, "consumer");
-        iterator().forEachRemaining(consumer);
+        // Each value and predicate is visited exactly once, in encounter order.
+        // The direct cursor removes one intermediate iterator allocation.
+        M3LongIterator input = source.iterator();
+        while (input.hasNext()) {
+            long value = input.nextLong();
+            if (predicate.test(value)) consumer.accept(value);
+        }
     }
 
     /** Avoids querying source.size() or allocating a growth buffer when no key passes. */

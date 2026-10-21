@@ -1,0 +1,29 @@
+name: M3 AST Scoped File Identity Receiver
+on:
+  pull_request:
+    paths:
+      - 'm3/ports/compiletime/src/main/java/com/m3/compiletime/M3ASTLeafIndex.java'
+      - 'm3/ports/compiletime/src/test/java/com/m3/compiletime/M3ASTLeafIndexSelfTest.java'
+      - 'm3/ports/compiletime/qualification/ast-scoped-file-identity-20261017/**'
+      - '.github/workflows/m3-ast-scoped-file-identity-receiver-20261017.yml'
+  workflow_dispatch:
+jobs:
+  selected-java21:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Verify exact recipe-generated receiver postimages
+        run: python3 m3/ports/compiletime/qualification/ast-scoped-file-identity-20261017/verify.py
+      - name: Replay exact canonical Synexia Java postimages from public mirror
+        run: python3 m3/ports/compiletime/qualification/ast-scoped-file-identity-20261017/recipe-mirror/verify_mirror.py
+      - name: Java21 strict compile and differential oracle
+        run: |
+          mkdir -p "$RUNNER_TEMP/m3-ast-owner"
+          javac --release 21 -proc:none -Xlint:all -Werror -d "$RUNNER_TEMP/m3-ast-owner" \
+            m3/ports/compiletime/src/main/java/com/m3/compiletime/M3ASTLeafIndex.java \
+            m3/ports/compiletime/src/test/java/com/m3/compiletime/M3ASTLeafIndexSelfTest.java
+          java -cp "$RUNNER_TEMP/m3-ast-owner" com.m3.compiletime.M3ASTLeafIndexSelfTest

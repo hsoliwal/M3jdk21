@@ -1,0 +1,14 @@
+# SPDX-License-Identifier: Apache-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.M3Jdk21ResidencyStateMask20261017
+displayName: M3JDK21 parent-owned 64-bit residency state-mask indexed selection
+description: >-
+  Source-sealed addition of 3 Java21 source/proof classes and one
+  explicit JNI C17 numeric kernel. This is an opt-in primitive adapter
+  to the existing M3ObjectResidency owner; no previous JDK contract,
+  GC reachability or java.util method is changed.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: m3jdk21-residency-state-mask-20261017
+  - com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe:
+      crateName: m3jdk21-residency-state-mask-native-20261017

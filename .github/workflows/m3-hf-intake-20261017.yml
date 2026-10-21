@@ -1,0 +1,67 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3 Hugging Face lexical data receipt and JNI owner
+on:
+  pull_request:
+    paths:
+      - 'm3/lexicon/hf-intake/**'
+      - '.github/workflows/m3-hf-intake-20261017.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  offline-recipe-and-existing-receiver:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: maven
+      - name: Maven recipe and refusals
+        run: mvn -B -ntp -f m3/lexicon/hf-intake/pom.xml verify
+      - name: Bind a synthetic source to the existing M3LEX001 exporter and verifier
+        shell: bash
+        run: |
+          set -euo pipefail
+          tmp="$(mktemp -d)"
+          trap 'rm -rf "$tmp"' EXIT
+          python3 - "$tmp" <<'PY'
+          import hashlib
+          import pathlib
+          import sys
+          root = pathlib.Path(sys.argv[1])
+          sample = 'Namaste\t12\nनमस्ते\t5\n'.encode('utf-8')
+          (root / 'fixture.tsv').write_bytes(sample)
+          sha = hashlib.sha256(sample).hexdigest()
+          revision = '0123456789abcdef0123456789abcdef01234567'
+          columns = ('dataset revision file sha256 license attribution rights_evidence language '
+                     'kind word_column frequency_column has_header max_bytes max_rows approval').split()
+          values = ['synthetic-owner/hf-fixture', revision, 'fixtures/words.tsv', sha,
+                    'apache-2.0', 'synthetic-test-only', 'https://example.org/synthetic',
+                    'en', 'FREQUENCY_TSV', '0', '1', 'false', '4096', '2', 'APPROVED']
+          (root / 'approval.tsv').write_text('\t'.join(columns) + '\n' + '\t'.join(values)
+                                             + '\n', encoding='utf-8')
+          rows = pathlib.Path('m3/lexicon/synexia-source-manifest.tsv').read_text(encoding='utf-8').splitlines()
+          chosen = [row for row in rows if row.startswith('dictlang.huggingface\t')]
+          assert len(chosen) == 1, 'existing source family must remain mapped'
+          (root / 'manifest.tsv').write_text(rows[0] + '\n' + chosen[0] + '\n', encoding='utf-8')
+          PY
+          java -cp m3/lexicon/hf-intake/target/classes \
+            com.m3.lexicon.hf.M3HfLexiconIntakeRecipe \
+            "$tmp/approval.tsv" "$tmp/fixture.tsv" "$tmp/synexia-source.records.tsv"
+          python3 m3/runtime-integration/export-synexia-lexicon.py \
+            --source-manifest "$tmp/manifest.tsv" \
+            --records "$tmp/synexia-source.records.tsv" \
+            --output "$tmp/export" \
+            --source-repository https://github.com/hsoliwal/com.synexia \
+            --source-commit 892e3f6c51d78bc0948e8a8cf736055b4c70eafa
+          python3 m3/runtime-integration/verify-synexia-lexicon.py "$tmp/export"
+      - name: Reuse the existing C11 JNI word-row receiver, four runtime modes
+        shell: bash
+        run: |
+          set -euo pipefail
+          M3_JDK="$JAVA_HOME" bash m3/lexicon/run-wordrows-proof.sh

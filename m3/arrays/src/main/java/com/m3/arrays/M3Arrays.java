@@ -1,3 +1,4 @@
+// Copyright 2026 Hitesh Soliwal and contributors
 // SPDX-License-Identifier: Apache-2.0
 package com.m3.arrays;
 
@@ -89,6 +90,7 @@ public final class M3Arrays {
 
         public int length() { return data.length; }
         public byte byteAt(int index) { return data[Objects.checkIndex(index, data.length)]; }
+        public int segmentCount() { return data.length == 0 ? 0 : 1; }
         public M3ByteArrayView slice(int start, int end) {
             Objects.checkFromToIndex(start, end, data.length);
             return start == 0 && end == data.length ? this : new ByteSlice(this, start, end);
@@ -170,6 +172,7 @@ public final class M3Arrays {
 
         public int length() { return data.length; }
         public char charAt(int index) { return data[Objects.checkIndex(index, data.length)]; }
+        public int segmentCount() { return data.length == 0 ? 0 : 1; }
         public M3Utf16Facts facts() { return facts; }
         public M3Utf16ArrayView subSequence(int start, int end) {
             Objects.checkFromToIndex(start, end, data.length);
@@ -262,6 +265,14 @@ public final class M3Arrays {
             Objects.checkFromToIndex(start, end, data.length);
             return start == 0 && end == data.length ? this : new IntSlice(this, start, end);
         }
+
+        @Override
+        public void copyTo(int sourceStart, int[] target, int targetStart, int count) {
+            Objects.requireNonNull(target, "target");
+            Objects.checkFromIndexSize(sourceStart, count, length());
+            Objects.checkFromIndexSize(targetStart, count, target.length);
+            System.arraycopy(data, sourceStart, target, targetStart, count);
+        }
     }
 
     private static final class IntSlice extends SliceBase implements M3IntArrayView {
@@ -272,6 +283,14 @@ public final class M3Arrays {
         public M3IntArrayView slice(int from, int to) {
             Objects.checkFromToIndex(from, to, length);
             return from == 0 && to == length ? this : new IntSlice(source, start + from, start + to);
+        }
+
+        @Override
+        public void copyTo(int sourceStart, int[] target, int targetStart, int count) {
+            Objects.requireNonNull(target, "target");
+            Objects.checkFromIndexSize(sourceStart, count, length());
+            Objects.checkFromIndexSize(targetStart, count, target.length);
+            copyIntRange(source, start + sourceStart, target, targetStart, count);
         }
     }
 
@@ -292,6 +311,27 @@ public final class M3Arrays {
         public int length() { return length; }
         public int intAt(int index) { int c=Objects.checkIndex(index,length), s=locate(ends,c), p=s==0?0:ends[s-1]; return segments[s].intAt(c-p); }
         public M3IntArrayView slice(int start,int end) { Objects.checkFromToIndex(start,end,length); return start==0&&end==length?this:new IntSlice(this,start,end); }
+
+        @Override
+        public void copyTo(int sourceStart, int[] target, int targetStart, int count) {
+            Objects.requireNonNull(target, "target");
+            Objects.checkFromIndexSize(sourceStart, count, length());
+            Objects.checkFromIndexSize(targetStart, count, target.length);
+            if (count == 0) return;
+            int segment = locate(ends, sourceStart);
+            int copied = 0;
+            while (copied < count) {
+                int previous = segment == 0 ? 0 : ends[segment - 1];
+                int from = sourceStart + copied;
+                int take = Math.min(count - copied, ends[segment] - from);
+                if (take > 0) {
+                    copyIntRange(segments[segment], from - previous,
+                            target, targetStart + copied, take);
+                    copied += take;
+                }
+                segment++;
+            }
+        }
     }
 
     private static final class LongSnapshot implements M3LongArrayView {
@@ -303,6 +343,14 @@ public final class M3Arrays {
             Objects.checkFromToIndex(start, end, data.length);
             return start == 0 && end == data.length ? this : new LongSlice(this, start, end);
         }
+
+        @Override
+        public void copyTo(int sourceStart, long[] target, int targetStart, int count) {
+            Objects.requireNonNull(target, "target");
+            Objects.checkFromIndexSize(sourceStart, count, length());
+            Objects.checkFromIndexSize(targetStart, count, target.length);
+            System.arraycopy(data, sourceStart, target, targetStart, count);
+        }
     }
 
     private static final class LongSlice extends SliceBase implements M3LongArrayView {
@@ -311,6 +359,14 @@ public final class M3Arrays {
         public int length(){return length;}
         public long longAt(int index){return source.longAt(start+Objects.checkIndex(index,length));}
         public M3LongArrayView slice(int from,int to){Objects.checkFromToIndex(from,to,length);return from==0&&to==length?this:new LongSlice(source,start+from,start+to);}
+
+        @Override
+        public void copyTo(int sourceStart, long[] target, int targetStart, int count) {
+            Objects.requireNonNull(target, "target");
+            Objects.checkFromIndexSize(sourceStart, count, length());
+            Objects.checkFromIndexSize(targetStart, count, target.length);
+            copyLongRange(source, start + sourceStart, target, targetStart, count);
+        }
     }
 
     private static final class LongJoin implements M3LongArrayView {
@@ -324,11 +380,75 @@ public final class M3Arrays {
         public int length(){return length;}
         public long longAt(int index){int c=Objects.checkIndex(index,length),s=locate(ends,c),p=s==0?0:ends[s-1];return segments[s].longAt(c-p);}
         public M3LongArrayView slice(int start,int end){Objects.checkFromToIndex(start,end,length);return start==0&&end==length?this:new LongSlice(this,start,end);}
+
+        @Override
+        public void copyTo(int sourceStart, long[] target, int targetStart, int count) {
+            Objects.requireNonNull(target, "target");
+            Objects.checkFromIndexSize(sourceStart, count, length());
+            Objects.checkFromIndexSize(targetStart, count, target.length);
+            if (count == 0) return;
+            int segment = locate(ends, sourceStart);
+            int copied = 0;
+            while (copied < count) {
+                int previous = segment == 0 ? 0 : ends[segment - 1];
+                int from = sourceStart + copied;
+                int take = Math.min(count - copied, ends[segment] - from);
+                if (take > 0) {
+                    copyLongRange(segments[segment], from - previous,
+                            target, targetStart + copied, take);
+                    copied += take;
+                }
+                segment++;
+            }
+        }
+    }
+
+    /**
+     * Bulk-copy only known immutable owners. Unknown views keep their original
+     * element-accessor order and partial-write behavior; never dispatch copyTo.
+     */
+    private static void copyIntRange(M3IntArrayView source, int sourceStart,
+            int[] target, int targetStart, int count) {
+        if (source instanceof IntSnapshot snapshot) {
+            System.arraycopy(snapshot.data, sourceStart, target, targetStart, count);
+        } else if (source instanceof IntSlice slice && slice.source instanceof IntSnapshot snapshot) {
+            System.arraycopy(snapshot.data, slice.start + sourceStart, target, targetStart, count);
+        } else {
+            for (int index = 0; index < count; index++) {
+                target[targetStart + index] = source.intAt(sourceStart + index);
+            }
+        }
+    }
+
+    /**
+     * Bulk-copy only known immutable owners. Unknown views keep their original
+     * element-accessor order and partial-write behavior; never dispatch copyTo.
+     */
+    private static void copyLongRange(M3LongArrayView source, int sourceStart,
+            long[] target, int targetStart, int count) {
+        if (source instanceof LongSnapshot snapshot) {
+            System.arraycopy(snapshot.data, sourceStart, target, targetStart, count);
+        } else if (source instanceof LongSlice slice && slice.source instanceof LongSnapshot snapshot) {
+            System.arraycopy(snapshot.data, slice.start + sourceStart, target, targetStart, count);
+        } else {
+            for (int index = 0; index < count; index++) {
+                target[targetStart + index] = source.longAt(sourceStart + index);
+            }
+        }
     }
 
     private static int locate(int[] ends, int index) {
-        int found = java.util.Arrays.binarySearch(ends, index + 1);
-        return found >= 0 ? found : -found - 1;
+        // Reuse the half-open upper-bound atom: the containing segment has the
+        // first cumulative end greater than index, even when empty segments
+        // repeat a boundary. No descriptor or immutable payload is discarded.
+        int low = 0;
+        int high = ends.length;
+        while (low < high) {
+            int middle = low + ((high - low) >>> 1);
+            if (ends[middle] <= index) low = middle + 1;
+            else high = middle;
+        }
+        return low;
     }
 
     private static List<ByteBuffer> buffers(M3ByteArrayView source, int start, int length) {

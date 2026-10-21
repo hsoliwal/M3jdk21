@@ -1,0 +1,6 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.BiMapMainline20261017
+displayName: Receive original qualified M3 BiMap to current M3JDK21
+description: Install exact donor source and Java/JNI tests without changing existing collection owners.
+recipeList:
+  - com.synexia.rewrite.M3BiMapMainlineRecipe

@@ -1,0 +1,25 @@
+{
+  "schema": "M3_CPU_SDK_QUALIFICATION_V1",
+  "status": "PASS",
+  "dataset": "linker-temp",
+  "targets": 4,
+  "java_targets": 0,
+  "text_targets": 4,
+  "sdk_test_methods": [
+    "driftMissingDuplicateAndWrongRepresentationRefuse",
+    "exactReplayFixedPointAndInputOrder",
+    "mixedPreimagesAndPostimages",
+    "postScanChangesRefuse",
+    "qualifiedSdkResultsAreRetained"
+  ],
+  "tests": 5,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "prepare_contract_cases": 10,
+  "receiver_contract_cases": 10,
+  "sdk_inputs_sha256": "802c918a319b981e98247b90c9afda364e4c9fa496b12dfe8032bf0910e9e290",
+  "sdk_results_sha256": "d11405c8f862cd5858db2ec5477b4a048a54195ddcce3930e5ccb0b66a5d8c13",
+  "parent_sdk_results_sha256": "a9507f0949209eb663773a5049a7a2c10dc3898c383c0ec0ac627e523494525a",
+  "shared_engine_and_bound_harness_changes_from_parent": false
+}

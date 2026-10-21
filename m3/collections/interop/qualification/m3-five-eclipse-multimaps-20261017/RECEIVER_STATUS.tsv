@@ -1,0 +1,19 @@
+# M3JDK21 optional 5-provider collections SDK receiver; no release promotion
+canonical_source_repo	hsoliwal/com.synexia
+canonical_source_PR	12194
+canonical_recipe_commit	f4d4b05bc71e9f8758e6e8c2722a5377a69850b4
+target_base	e913ab89056657eca4009678cfe9a657c020e79b
+generator	existing M3HashPinnedJavaSnapshotRecipe, Java LST AST mode
+named_recipe	com.synexia.m3.FiveLibraryEclipseMultimaps20261017
+new_concrete_eclipse_owners	2
+new_source_oracle_and_junit_files	4
+existing_core_owners_modified	0
+existing_jni_symbols_modified	0
+local_maven_rewrite_junit	3 PASS
+local_eclipse_real_binary_tiered_checks	323336 PASS
+local_eclipse_real_binary_xint_checks	323336 PASS
+local_provider_versions	Eclipse Collections 11.1.0
+local_full_five_provider_integration	NOT_RUN
+hosted_full_sdk_and_checked_jni	NOT_YET_PROVEN
+installed_image_jtreg_jck	NOT_RUN
+phase	WAITING_FOR_STRING

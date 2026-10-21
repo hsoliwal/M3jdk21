@@ -1,0 +1,21 @@
+Synexia M3 filtered and sorted wrapper composition
+Copyright 2026 Hitesh Soliwal and contributors
+Licensed under the Apache License, Version 2.0.
+
+The stored-representative owner and proof are reused from hsoliwal/M3jdk21
+PR #1050, commit b2df8a4d342286421c7d1eeb91a73e5d69d39bdb.
+The staged batch atom and proof are reused from canonical hsoliwal/com.synexia
+PR #12028, commit b095e3c944d66a70d21c267e78ed0db197526a62, also received in
+M3jdk21 PR #1051 at c5e5e90e2dcc2298a372ab39640120dd60a2edb7.
+Both existing first-party notices and the unchanged source-sealed Java/text
+recipe providers are preserved. The task adds their bounded composition,
+source-order qualification, and successor workflow proof.
+
+The unchanged native iterator consumer is the first-party source from
+Synexia PR #11541 at 97eab661ff0a328f378fd20bd4317412292839fd, retained in the
+batch-admission task; C blob 0393f0122e948c157f8118e3f33a130b9f6e3d6b.
+Native test consumers do not introduce production JNI exports.
+
+OpenRewrite and JUnit remain independently licensed build/test dependencies.
+No challenge statement, solution or editorial implementation was copied.
+Abstract ideas and algorithms are not claimed as exclusive source expression.

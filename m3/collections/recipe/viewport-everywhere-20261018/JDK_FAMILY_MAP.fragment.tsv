@@ -1,0 +1,7 @@
+jdk_family	m3_backend	state	primary_shape	contract_note
+(none: order-statistic index)	M3OrderStatisticForest	VIEWPORT_EXTRACTED_V1	one AVL per parent over borrowed int key / long weight lanes; caller int ids are the nodes	from SWT VirtualTreeSiblingIndex; find/lower/prefix/seek O(log k); no node objects
+javax.swing.SizeSequence (pattern)	M3SparseExtents	VIEWPORT_EXTRACTED_V1	implicit estimate + sorted measured ids + Fenwick of signed deltas	from SWT VirtualRowExtents; offsetOf/rowAt/visibleRange/anchored resize; not a SizeSequence replacement
+BitSet (row-indexed, shifting)	M3BitLanes	VIEWPORT_EXTRACTED_V1	int-word bit lanes allocated on first set bit; word-wise ranges and insert/remove shifting	from SWT VirtualBitLanes; differs from M3BitLane28 (block-lazy, no shifting)
+(none: columnar row state)	M3ColumnarLanes	VIEWPORT_EXTRACTED_V1	lazy per (field, column) object/int lanes indexed by row	from SWT VirtualCellLanes; rows and columns move lanes, not values
+(none: block cache)	M3BlockStore / M3BlockCache	VIEWPORT_EXTRACTED_V1	bounded slots of blockSize rows keyed by (parentKey, block); packed state, frame-stamp LRU	from SWT VirtualBlockStore/VirtualBlockCache; no per-block objects
+(growth policy)	M3LaneGrowth / M3HeapGrowth	VIEWPORT_EXTRACTED_V1	geometric growth, exact under heap pressure, sampled once per miss	from SWT VirtualGrowth / PackedHeapGrowth (Synexia PackedHeapGrowth lineage)

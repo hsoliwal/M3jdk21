@@ -1,0 +1,17 @@
+candidate-extract-jdk.compiler: starting
+candidate-extract-jdk.compiler: exit 0
+candidate-extract-java.base: starting
+candidate-extract-java.base: exit 0
+candidate-compile-five-explicit-sources: starting
+candidate-compile-five-explicit-sources: exit 0
+candidate-create-compiler-jmod: starting
+candidate-create-compiler-jmod: exit 0
+candidate-create-base-and-hashes: starting
+candidate-create-base-and-hashes: exit 0
+candidate-supported-jmod-hash: starting
+candidate-supported-jmod-hash: exit 0
+candidate-link-descriptor-image: starting
+candidate-link-descriptor-image: exit 0
+compile-two-explicit-qualification-tests: starting
+compile-two-explicit-qualification-tests: exit 0
+BUILD_PASS_RUNTIME_NOT_EXECUTED /workspace/scratch/65626af64474/m3-ast-shared-20261018/descriptor-qualification-02

@@ -153,6 +153,17 @@ public final class String
      * Shadows produced from M3String are allocated by the JNI shadow boundary. Bootstrap Strings
      * created before M3 activation retain the stock representation.</p>
      *
+     * <p>M3JDK21 retains the ordinary Java 21 String layout <em>as well as</em> its
+     * canonical M3 owner/coordinate. For a nonempty M3-backed String, this field refers
+     * to the VM-wide shared zero-length byte[] sentinel, not a duplicate spelling.
+     * The coder and m3 fields describe the real immutable text; native region readers
+     * traverse the interned arrays and OS-mapped owner ranges.</p>
+     *
+     * <p>A returned byte[] or char[] must remain a genuine mutable Java array with
+     * the ordinary identity and copy semantics. It is an explicit JNI-produced snapshot,
+     * never an alias to read-only or discontiguous OS-mapped storage. Java 21 String
+     * has no additional char[] instance field.</p>
+     *
      * @implNote The field remains VM-trusted during the migration and is never mutated.
      */
     @Stable
@@ -2000,13 +2011,9 @@ public final class String
         }
         M3String leftStorage = m3();
         M3String rightStorage = aString.m3();
-        if (leftStorage != null) {
-            if (rightStorage == null && aString.cachedHashDiffers(leftStorage)) return false;
-            return leftStorage.contentEquals(aString);
-        }
-        if (rightStorage != null) {
-            if (cachedHashDiffers(rightStorage)) return false;
-            return rightStorage.contentEquals(this);
+        if (leftStorage != null || rightStorage != null) {
+            return M3StringPrecomputeBridge.contentEquals(
+                    this, aString, leftStorage, rightStorage);
         }
         return (!COMPACT_STRINGS || this.coder == aString.coder)
                 && StringLatin1.equals(value, aString.value);
@@ -2019,7 +2026,7 @@ public final class String
      * unknown hash on either side proves nothing. Reads of {@code hash}/{@code hashIsZero} are the
      * same benign race as in {@link #hashCode()}.
      */
-    private boolean cachedHashDiffers(M3String storage) {
+    boolean cachedHashDiffers(M3String storage) {
         int h = hash;
         if (h == 0 && !hashIsZero) return false;
         return storage.hashKnownToDiffer(h);
@@ -2233,20 +2240,9 @@ public final class String
     public int compareTo(String anotherString) {
         M3String leftM3 = m3();
         M3String rightM3 = anotherString.m3();
-        if (leftM3 != null && leftM3.sameCoordinate(rightM3)) {
-            return 0;
-        }
         if (leftM3 != null || rightM3 != null) {
-            int length1 = length();
-            int length2 = anotherString.length();
-            int limit = Math.min(length1, length2);
-            for (int index = 0; index < limit; index++) {
-                int difference = charAt(index) - anotherString.charAt(index);
-                if (difference != 0) {
-                    return difference;
-                }
-            }
-            return length1 - length2;
+            return M3StringPrecomputeBridge.compareTo(
+                    this, anotherString, leftM3, rightM3);
         }
         byte[] v1 = value();
         byte[] v2 = anotherString.value();
@@ -2577,24 +2573,7 @@ public final class String
         }
         M3String sourceM3 = m3();
         if (sourceM3 != null) {
-            M3String prefixM3 = prefix.m3();
-            if (prefixM3 != null) {
-                return sourceM3.startsWith(prefixM3, toffset);
-            }
-            // Flat prefix (for example a literal): prepared facts can prove a mismatch first.
-            M3StringFacts prepared = sourceM3.factsIfPrepared();
-            if (prepared != null) {
-                if (!prepared.mayContain(prefix)) return false;
-                if (toffset == 0 && !prepared.prefixMayMatch(prefix)) return false;
-                if (toffset == sourceM3.length() - prefix.length()
-                        && !prepared.suffixMayMatch(prefix)) {
-                    return false;
-                }
-            }
-            for (int index = 0; index < prefix.length(); index++) {
-                if (sourceM3.charAt(toffset + index) != prefix.charAt(index)) return false;
-            }
-            return true;
+            return M3StringPrecomputeBridge.startsWith(sourceM3, prefix, toffset);
         }
         byte[] ta = value();
         byte[] pa = prefix.value();
@@ -2679,7 +2658,7 @@ public final class String
         if (h == 0 && !hashIsZero) {
             M3String storage = m3();
             h = storage != null
-                    ? storage.hashCodeValue()
+                    ? M3StringPrecomputeBridge.hashCodeValue(storage)
                     : (isLatin1() ? StringLatin1.hashCode(value)
                                   : StringUTF16.hashCode(value));
             if (h == 0) {
@@ -2965,25 +2944,8 @@ public final class String
         Objects.requireNonNull(str, "str");
         M3String sourceM3 = m3();
         if (sourceM3 != null) {
-            M3String targetM3 = str.m3();
-            if (targetM3 != null) return sourceM3.indexOf(targetM3, fromIndex);
-            int from = Math.clamp(fromIndex, 0, sourceM3.length());
-            int targetLength = str.length();
-            if (targetLength == 0) return from;
-            if (targetLength > sourceM3.length() - from) return -1;
-            // Flat needle (for example a literal): prepared facts can prove absence first.
-            M3StringFacts prepared = sourceM3.factsIfPrepared();
-            if (prepared != null && !prepared.mayContain(str)) return -1;
-            int limit = sourceM3.length() - targetLength;
-            char first = str.charAt(0);
-            for (int start = from; start <= limit; start++) {
-                if (sourceM3.charAt(start) != first) continue;
-                int index = 1;
-                while (index < targetLength
-                        && sourceM3.charAt(start + index) == str.charAt(index)) index++;
-                if (index == targetLength) return start;
-            }
-            return -1;
+            return M3StringPrecomputeBridge.indexOf(
+                    sourceM3, str, fromIndex, sourceM3.length());
         }
         return indexOf(value(), coder(), length(), str, fromIndex);
     }
@@ -3020,26 +2982,8 @@ public final class String
         checkBoundsBeginEnd(beginIndex, endIndex, length());
         M3String sourceM3 = m3();
         if (sourceM3 != null) {
-            M3String targetM3 = str.m3();
-            if (targetM3 != null) {
-                return sourceM3.indexOf(targetM3, beginIndex, endIndex);
-            }
-            int targetLength = str.length();
-            if (targetLength == 0) return beginIndex;
-            if (targetLength > endIndex - beginIndex) return -1;
-            // Flat needle (for example a literal): prepared facts can prove absence first.
-            M3StringFacts prepared = sourceM3.factsIfPrepared();
-            if (prepared != null && !prepared.mayContain(str)) return -1;
-            int limit = endIndex - targetLength;
-            char first = str.charAt(0);
-            for (int start = beginIndex; start <= limit; start++) {
-                if (sourceM3.charAt(start) != first) continue;
-                int index = 1;
-                while (index < targetLength
-                        && sourceM3.charAt(start + index) == str.charAt(index)) index++;
-                if (index == targetLength) return start;
-            }
-            return -1;
+            return M3StringPrecomputeBridge.indexOf(
+                    sourceM3, str, beginIndex, endIndex);
         }
         return indexOf(value(), coder(), endIndex, str, beginIndex);
     }
@@ -3126,22 +3070,7 @@ public final class String
         Objects.requireNonNull(str, "str");
         M3String storage = m3();
         if (storage != null) {
-            int targetLength = str.length();
-            int start = Math.min(fromIndex, storage.length() - targetLength);
-            if (start < 0) return -1;
-            if (targetLength == 0) return start;
-            M3String target = str.m3();
-            if (target != null) return storage.lastIndexOf(target, fromIndex);
-            // Flat needle (for example a literal): prepared facts can prove absence first.
-            M3StringFacts prepared = storage.factsIfPrepared();
-            if (prepared != null && !prepared.mayContain(str)) return -1;
-            for (int candidate = start; candidate >= 0; candidate--) {
-                int index = 0;
-                while (index < targetLength
-                        && storage.charAt(candidate + index) == str.charAt(index)) index++;
-                if (index == targetLength) return candidate;
-            }
-            return -1;
+            return M3StringPrecomputeBridge.lastIndexOf(storage, str, fromIndex);
         }
         return lastIndexOf(value(), coder(), length(), str, fromIndex);
     }
@@ -3251,7 +3180,7 @@ public final class String
         }
         M3String storage = m3();
         if (storage != null) {
-            return new String(storage.slice(beginIndex, endIndex));
+            return M3StringPrecomputeBridge.substring(storage, beginIndex, endIndex);
         }
         byte[] currentValue = value();
         return isLatin1() ? StringLatin1.newString(currentValue, beginIndex, subLen)
@@ -4375,10 +4304,7 @@ public final class String
     public String trim() {
         M3String storage = m3();
         if (storage != null) {
-            M3StringFacts facts = storage.facts();
-            if (facts.trimStart == 0 && facts.trimEnd == storage.length()) return this;
-            if (facts.trimStart == storage.length()) return "";
-            return new String(storage.slice(facts.trimStart, facts.trimEnd));
+            return M3StringPrecomputeBridge.trim(this, storage);
         }
         byte[] currentValue = value();
         String ret = isLatin1() ? StringLatin1.trim(currentValue)
@@ -4415,10 +4341,7 @@ public final class String
     public String strip() {
         M3String storage = m3();
         if (storage != null) {
-            M3StringFacts facts = storage.facts();
-            if (facts.stripStart == 0 && facts.stripEnd == storage.length()) return this;
-            if (facts.stripStart == storage.length()) return "";
-            return new String(storage.slice(facts.stripStart, facts.stripEnd));
+            return M3StringPrecomputeBridge.strip(this, storage);
         }
         byte[] currentValue = value();
         String ret = isLatin1() ? StringLatin1.strip(currentValue)
@@ -4453,10 +4376,7 @@ public final class String
     public String stripLeading() {
         M3String storage = m3();
         if (storage != null) {
-            int start = storage.facts().stripStart;
-            if (start == 0) return this;
-            if (start == storage.length()) return "";
-            return new String(storage.slice(start, storage.length()));
+            return M3StringPrecomputeBridge.stripLeading(this, storage);
         }
         byte[] currentValue = value();
         String ret = isLatin1() ? StringLatin1.stripLeading(currentValue)
@@ -4491,10 +4411,7 @@ public final class String
     public String stripTrailing() {
         M3String storage = m3();
         if (storage != null) {
-            int end = storage.facts().stripEnd;
-            if (end == storage.length()) return this;
-            if (end == 0) return "";
-            return new String(storage.slice(0, end));
+            return M3StringPrecomputeBridge.stripTrailing(this, storage);
         }
         byte[] currentValue = value();
         String ret = isLatin1() ? StringLatin1.stripTrailing(currentValue)

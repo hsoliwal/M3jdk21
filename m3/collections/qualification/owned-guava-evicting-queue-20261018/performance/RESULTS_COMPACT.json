@@ -1,0 +1,711 @@
+{
+  "config": {
+    "bounds": {
+      "activeProcessors": 2,
+      "heapMiB": 256,
+      "perProcessTimeoutSeconds": 120,
+      "totalOutputBytes": 2097152
+    },
+    "capacities": [
+      0,
+      17,
+      1024
+    ],
+    "digest": "SHA256 outside timing over workload/capacity, consumed return checksum, size and every final queue element; every timed result must match the untimed result and both owners' digests must agree",
+    "freshJVMsPerOwner": 5,
+    "limits": "Five fresh JVMs are descriptive samples, not confidence intervals. Capacity-zero iterator and array cases are empty baselines. No allocation rate, whole-library, nativequeue or cross-machine speed claim. No full correctness corpus added.",
+    "measuredBatchesPerCasePerJVM": 3,
+    "ownerLaunchOrder": "sample parity alternates provider/owned then owned/provider",
+    "poolLength": 65536,
+    "schema": "indicative-owned-queue-performance-v1",
+    "seed": 1592594996,
+    "timingIncludes": "Queue calls, refill/clear where stated, iterator and array allocations, return-checksum arithmetic; excludes factory reflection, input generation, SHA256 and snapshot validation",
+    "untimedDigestBatchesPerCasePerJVM": 1,
+    "warmupBatchesPerCase": 3,
+    "workloads": [
+      {
+        "calls": "one offer per cycle; full queue prepared outside timing",
+        "cycles": 1000000,
+        "id": "eviction-offer",
+        "unit": "offer"
+      },
+      {
+        "calls": "one offer each cycle; poll every third cycle including cycle zero",
+        "cycles": 500000,
+        "id": "mixed-offer-poll",
+        "unit": "cycle"
+      },
+      {
+        "calls": "clear, refill capacity+capacity/3 to wrap, obtain iterator, advance capacity/2+1, remove, offer; at zero test empty cursor and offer",
+        "cycles": 1500,
+        "id": "interior-iterator-remove",
+        "unit": "cycle"
+      },
+      {
+        "calls": "clear, refill capacity+capacity/3 to wrap, removeAll prebuilt HashSet retaining matches whose integer&15 is zero",
+        "cycles": 1500,
+        "id": "removeAll-sparse",
+        "unit": "cycle"
+      },
+      {
+        "calls": "clear, refill capacity+capacity/3 to wrap, removeAll prebuilt HashSet retaining matches whose integer&3 is nonzero",
+        "cycles": 1500,
+        "id": "removeAll-dense",
+        "unit": "cycle"
+      },
+      {
+        "calls": "offer then addAll fixed ArrayList of 2*capacity+7 values; resulting queue is its suffix",
+        "cycles": 2500,
+        "id": "oversized-addAll",
+        "unit": "cycle"
+      },
+      {
+        "calls": "offer then typed toArray alternating a new zero-length Integer[] and reused oversized Integer[capacity+2]; consume length/first/last/null terminator",
+        "cycles": 20000,
+        "id": "wrapped-typed-toArray",
+        "unit": "cycle"
+      }
+    ]
+  },
+  "environment": {
+    "actualPerJVMMetadata": [
+      {
+        "javaRuntime": "21.0.9+7-LTS-338",
+        "maxHeapBytes": 268435456,
+        "owner": "provider",
+        "processors": 2,
+        "sample": 0,
+        "vm": "Java HotSpot(TM) 64-Bit Server VM"
+      },
+      {
+        "javaRuntime": "21.0.9+7-LTS-338",
+        "maxHeapBytes": 268435456,
+        "owner": "owned",
+        "processors": 2,
+        "sample": 0,
+        "vm": "Java HotSpot(TM) 64-Bit Server VM"
+      },
+      {
+        "javaRuntime": "21.0.9+7-LTS-338",
+        "maxHeapBytes": 268435456,
+        "owner": "owned",
+        "processors": 2,
+        "sample": 1,
+        "vm": "Java HotSpot(TM) 64-Bit Server VM"
+      },
+      {
+        "javaRuntime": "21.0.9+7-LTS-338",
+        "maxHeapBytes": 268435456,
+        "owner": "provider",
+        "processors": 2,
+        "sample": 1,
+        "vm": "Java HotSpot(TM) 64-Bit Server VM"
+      },
+      {
+        "javaRuntime": "21.0.9+7-LTS-338",
+        "maxHeapBytes": 268435456,
+        "owner": "provider",
+        "processors": 2,
+        "sample": 2,
+        "vm": "Java HotSpot(TM) 64-Bit Server VM"
+      },
+      {
+        "javaRuntime": "21.0.9+7-LTS-338",
+        "maxHeapBytes": 268435456,
+        "owner": "owned",
+        "processors": 2,
+        "sample": 2,
+        "vm": "Java HotSpot(TM) 64-Bit Server VM"
+      },
+      {
+        "javaRuntime": "21.0.9+7-LTS-338",
+        "maxHeapBytes": 268435456,
+        "owner": "owned",
+        "processors": 2,
+        "sample": 3,
+        "vm": "Java HotSpot(TM) 64-Bit Server VM"
+      },
+      {
+        "javaRuntime": "21.0.9+7-LTS-338",
+        "maxHeapBytes": 268435456,
+        "owner": "provider",
+        "processors": 2,
+        "sample": 3,
+        "vm": "Java HotSpot(TM) 64-Bit Server VM"
+      },
+      {
+        "javaRuntime": "21.0.9+7-LTS-338",
+        "maxHeapBytes": 268435456,
+        "owner": "provider",
+        "processors": 2,
+        "sample": 4,
+        "vm": "Java HotSpot(TM) 64-Bit Server VM"
+      },
+      {
+        "javaRuntime": "21.0.9+7-LTS-338",
+        "maxHeapBytes": 268435456,
+        "owner": "owned",
+        "processors": 2,
+        "sample": 4,
+        "vm": "Java HotSpot(TM) 64-Bit Server VM"
+      }
+    ],
+    "logicalProcessorsVisibleToPython": 32,
+    "machine": "AMD64",
+    "os": "Windows-11-10.0.26300-SP0"
+  },
+  "inputCustodyUnchanged": true,
+  "jvmVersion": "java 21.0.9 2025-10-21 LTS\nJava(TM) SE Runtime Environment (build 21.0.9+7-LTS-338)\nJava HotSpot(TM) 64-Bit Server VM (build 21.0.9+7-LTS-338, mixed mode, sharing)\n",
+  "limits": [
+    "Environment-specific microbenchmark, including common loop/return consumption overhead",
+    "Descriptive median/range; no confidence interval, statistical significance or allocation rate",
+    "Capacity-zero empty baselines do not perform interior removal",
+    "No whole-library/nativequeue/ABI speed claim; existing correctness proofs remain separate",
+    "No CPU affinity/frequency control; ambient load and GC may affect samples"
+  ],
+  "matchedWorkloadCapacityDigests": 21,
+  "measuredBatches": 630,
+  "sampleWallSeconds": 11.485000000000582,
+  "status": "INDICATIVE_SAMPLES_COMPLETE_DIGESTS_MATCH",
+  "summary": [
+    {
+      "capacity": 0,
+      "owned": {
+        "freshJVMs": 5,
+        "maxBatchNs": 3.5807,
+        "maxJVMMedianNs": 0.3327,
+        "measuredBatches": 15,
+        "medianOfJVMMediansNs": 0.2942,
+        "minBatchNs": 0.2531,
+        "minJVMMedianNs": 0.2579
+      },
+      "provider": {
+        "freshJVMs": 5,
+        "maxBatchNs": 4.4314,
+        "maxJVMMedianNs": 0.4392,
+        "measuredBatches": 15,
+        "medianOfJVMMediansNs": 0.3172,
+        "minBatchNs": 0.2806,
+        "minJVMMedianNs": 0.3019
+      },
+      "providerDividedByOwnedMedian": 1.0781781101291636,
+      "stateSHA256": "b54a6589d6fe5c587f3a18b8dc58d57a5deefbfbdf3fe750a9d711f1e00c11b6",
+      "unit": "offer",
+      "workload": "eviction-offer"
+    },
+    {
+      "capacity": 0,
+      "owned": {
+        "freshJVMs": 5,
+        "maxBatchNs": 6.7314,
+        "maxJVMMedianNs": 6.5942,
+        "measuredBatches": 15,
+        "medianOfJVMMediansNs": 0.8882,
+        "minBatchNs": 0.7588,
+        "minJVMMedianNs": 0.7588
+      },
+      "provider": {
+        "freshJVMs": 5,
+        "maxBatchNs": 6.387,
+        "maxJVMMedianNs": 6.2258,
+        "measuredBatches": 15,
+        "medianOfJVMMediansNs": 0.9332,
+        "minBatchNs": 0.7688,
+        "minJVMMedianNs": 0.7694
+      },
+      "providerDividedByOwnedMedian": 1.050664264805224,
+      "stateSHA256": "09f97da2d4e9b8d788ee4edccb245989df677463767eb621699c681eab2e7b32",
+      "unit": "cycle",
+      "workload": "mixed-offer-poll"
+    },
+    {
+      "capacity": 0,
+      "owned": {
+        "freshJVMs": 5,
+        "maxBatchNs": 105.86666666666666,
+        "maxJVMMedianNs": 105.6,
+        "measuredBatches": 15,
+        "medianOfJVMMediansNs": 32,
+        "minBatchNs": 19.266666666666666,
+        "minJVMMedianNs": 19.6
+      },
+      "provider": {
+        "freshJVMs": 5,
+        "maxBatchNs": 106.8,
+        "maxJVMMedianNs": 102.6,
+        "measuredBatches": 15,
+        "medianOfJVMMediansNs": 96.73333333333333,
+        "minBatchNs": 23.533333333333335,
+        "minJVMMedianNs": 24.6
+      },
+      "providerDividedByOwnedMedian": 3.0229166666666667,
+      "stateSHA256": "a9db3e4d5284e711d6204febe4b7b894477e40ea79a8775eb443867593a3819b",
+      "unit": "cycle",
+      "workload": "interior-iterator-remove"
+    },
+    {
+      "capacity": 0,
+      "owned": {
+        "freshJVMs": 5,
+        "maxBatchNs": 221,
+        "maxJVMMedianNs": 148.26666666666668,
+        "measuredBatches": 15,
+        "medianOfJVMMediansNs": 138.13333333333333,
+        "minBatchNs": 69.6,
+        "minJVMMedianNs": 72.2
+      },
+      "provider": {
+        "freshJVMs": 5,
+        "maxBatchNs": 187.93333333333334,
+        "maxJVMMedianNs": 165.4,
+        "measuredBatches": 15,
+        "medianOfJVMMediansNs": 154.4,
+        "minBatchNs": 75.46666666666667,
+        "minJVMMedianNs": 78
+      },
+      "providerDividedByOwnedMedian": 1.1177606177606179,
+      "stateSHA256": "65d67693034f26a400d2bfcf5a29ec4dfd69361bd8ee2af5f13ca43d174089a8",
+      "unit": "cycle",
+      "workload": "removeAll-sparse"
+    },
+    {
+      "capacity": 0,
+      "owned": {
+        "freshJVMs": 5,
+        "maxBatchNs": 198.73333333333332,
+        "maxJVMMedianNs": 149.66666666666666,
+        "measuredBatches": 15,
+        "medianOfJVMMediansNs": 139.4,
+        "minBatchNs": 71.4,
+        "minJVMMedianNs": 72.33333333333333
+      },
+      "provider": {
+        "freshJVMs": 5,
+        "maxBatchNs": 168.33333333333334,
+        "maxJVMMedianNs": 165.06666666666666,
+        "measuredBatches": 15,
+        "medianOfJVMMediansNs": 154.6,
+        "minBatchNs": 75.06666666666666,
+        "minJVMMedianNs": 78.8
+      },
+      "providerDividedByOwnedMedian": 1.1090387374461979,
+      "stateSHA256": "fdeafde76634733dc96ee6697f2c816d924fb3f3587c05170872ac9477544f30",
+      "unit": "cycle",
+      "workload": "removeAll-dense"
+    },
+    {
+      "capacity": 0,
+      "owned": {
+        "freshJVMs": 5,
+        "maxBatchNs": 711,
+        "maxJVMMedianNs": 134.28,
+        "measuredBatches": 15,
+        "medianOfJVMMediansNs": 125.36,
+        "minBatchNs": 48.4,
+        "minJVMMedianNs": 48.8
+      },
+      "provider": {
+        "freshJVMs": 5,
+        "maxBatchNs": 180.12,
+        "maxJVMMedianNs": 177.12,
+        "measuredBatches": 15,
+        "medianOfJVMMediansNs": 163.92,
+        "minBatchNs": 91.8,
+        "minJVMMedianNs": 95.88
+      },
+      "providerDividedByOwnedMedian": 1.3075941289087427,
+      "stateSHA256": "92feb700990bd6172e484e1015cca791d152c85ef18ecf5cc0c514ceb7c8434e",
+      "unit": "cycle",
+      "workload": "oversized-addAll"
+    },
+    {
+      "capacity": 0,
+      "owned": {
+        "freshJVMs": 5,
+        "maxBatchNs": 133.735,
+        "maxJVMMedianNs": 109.63,
+        "measuredBatches": 15,
+        "medianOfJVMMediansNs": 105.995,
+        "minBatchNs": 25.82,
+        "minJVMMedianNs": 26.21
+      },
+      "provider": {
+        "freshJVMs": 5,
+        "maxBatchNs": 128.425,
+        "maxJVMMedianNs": 120.715,
+        "measuredBatches": 15,
+        "medianOfJVMMediansNs": 112.725,
+        "minBatchNs": 27.32,
+        "minJVMMedianNs": 27.57
+      },
+      "providerDividedByOwnedMedian": 1.063493561017029,
+      "stateSHA256": "b150922f1def894a34a34632c2e77cacf2f0c43faff5794be8a9f8cdae6c3673",
+      "unit": "cycle",
+      "workload": "wrapped-typed-toArray"
+    },
+    {
+      "capacity": 17,
+      "owned": {
+        "freshJVMs": 5,
+        "maxBatchNs": 5.8924,
+        "maxJVMMedianNs": 5.2172,
+        "measuredBatches": 15,
+        "medianOfJVMMediansNs": 4.7766,
+        "minBatchNs": 3.9874,
+        "minJVMMedianNs": 4.1901
+      },
+      "provider": {
+        "freshJVMs": 5,
+        "maxBatchNs": 6.4116,
+        "maxJVMMedianNs": 6.4113,
+        "measuredBatches": 15,
+        "medianOfJVMMediansNs": 4.8942,
+        "minBatchNs": 3.3047,
+        "minJVMMedianNs": 3.4508
+      },
+      "providerDividedByOwnedMedian": 1.0246200226102247,
+      "stateSHA256": "421b53d01bcadd88b26e1275b0cfc3a0b4c74bd3b9a5671fd4848d60fbb1e3d8",
+      "unit": "offer",
+      "workload": "eviction-offer"
+    },
+    {
+      "capacity": 17,
+      "owned": {
+        "freshJVMs": 5,
+        "maxBatchNs": 13.3148,
+        "maxJVMMedianNs": 10.0756,
+        "measuredBatches": 15,
+        "medianOfJVMMediansNs": 8.2612,
+        "minBatchNs": 7.7044,
+        "minJVMMedianNs": 7.9292
+      },
+      "provider": {
+        "freshJVMs": 5,
+        "maxBatchNs": 9.5874,
+        "maxJVMMedianNs": 9.2978,
+        "measuredBatches": 15,
+        "medianOfJVMMediansNs": 8.4386,
+        "minBatchNs": 7.117,
+        "minJVMMedianNs": 7.303
+      },
+      "providerDividedByOwnedMedian": 1.0214738778869896,
+      "stateSHA256": "7c5a572f4cd66b5d70c088bda6b1c6b9c07b4d4547fcdc6d55cb4214e499bfa7",
+      "unit": "cycle",
+      "workload": "mixed-offer-poll"
+    },
+    {
+      "capacity": 17,
+      "owned": {
+        "freshJVMs": 5,
+        "maxBatchNs": 387.6666666666667,
+        "maxJVMMedianNs": 304.6666666666667,
+        "measuredBatches": 15,
+        "medianOfJVMMediansNs": 295,
+        "minBatchNs": 277.8,
+        "minJVMMedianNs": 281.4
+      },
+      "provider": {
+        "freshJVMs": 5,
+        "maxBatchNs": 347.93333333333334,
+        "maxJVMMedianNs": 314.8666666666667,
+        "measuredBatches": 15,
+        "medianOfJVMMediansNs": 285.4,
+        "minBatchNs": 268.06666666666666,
+        "minJVMMedianNs": 268.2
+      },
+      "providerDividedByOwnedMedian": 0.967457627118644,
+      "stateSHA256": "f7a8891917a0826d72c42dc764fc914f6f6704e5fc463a942f56c9e887dbfd2e",
+      "unit": "cycle",
+      "workload": "interior-iterator-remove"
+    },
+    {
+      "capacity": 17,
+      "owned": {
+        "freshJVMs": 5,
+        "maxBatchNs": 587.6,
+        "maxJVMMedianNs": 568.4,
+        "measuredBatches": 15,
+        "medianOfJVMMediansNs": 508.1333333333333,
+        "minBatchNs": 476.8,
+        "minJVMMedianNs": 480.6666666666667
+      },
+      "provider": {
+        "freshJVMs": 5,
+        "maxBatchNs": 583.4,
+        "maxJVMMedianNs": 577.3333333333334,
+        "measuredBatches": 15,
+        "medianOfJVMMediansNs": 543.5333333333333,
+        "minBatchNs": 510.6666666666667,
+        "minJVMMedianNs": 515.0666666666667
+      },
+      "providerDividedByOwnedMedian": 1.0696667541327736,
+      "stateSHA256": "c93992346e59e779e480148d911239a1efc1e27f847e14665df290735d295de4",
+      "unit": "cycle",
+      "workload": "removeAll-sparse"
+    },
+    {
+      "capacity": 17,
+      "owned": {
+        "freshJVMs": 5,
+        "maxBatchNs": 770.8666666666667,
+        "maxJVMMedianNs": 722.6666666666666,
+        "measuredBatches": 15,
+        "medianOfJVMMediansNs": 569.8666666666667,
+        "minBatchNs": 513.6666666666666,
+        "minJVMMedianNs": 514.8
+      },
+      "provider": {
+        "freshJVMs": 5,
+        "maxBatchNs": 694,
+        "maxJVMMedianNs": 644.2,
+        "measuredBatches": 15,
+        "medianOfJVMMediansNs": 614.4,
+        "minBatchNs": 557.6,
+        "minJVMMedianNs": 564.0666666666667
+      },
+      "providerDividedByOwnedMedian": 1.078146934955545,
+      "stateSHA256": "c4b1a3ba021d70f80f9301ff65ba0aa3326361d027e866867fbe550cac23bb09",
+      "unit": "cycle",
+      "workload": "removeAll-dense"
+    },
+    {
+      "capacity": 17,
+      "owned": {
+        "freshJVMs": 5,
+        "maxBatchNs": 385.24,
+        "maxJVMMedianNs": 344.88,
+        "measuredBatches": 15,
+        "medianOfJVMMediansNs": 273.56,
+        "minBatchNs": 218.36,
+        "minJVMMedianNs": 224.64
+      },
+      "provider": {
+        "freshJVMs": 5,
+        "maxBatchNs": 379.84,
+        "maxJVMMedianNs": 348.36,
+        "measuredBatches": 15,
+        "medianOfJVMMediansNs": 332.28,
+        "minBatchNs": 288.52,
+        "minJVMMedianNs": 290.84
+      },
+      "providerDividedByOwnedMedian": 1.214651264804796,
+      "stateSHA256": "3223142afdd3dc753477ee79751768ade7134952967fe967b1936968184ba753",
+      "unit": "cycle",
+      "workload": "oversized-addAll"
+    },
+    {
+      "capacity": 17,
+      "owned": {
+        "freshJVMs": 5,
+        "maxBatchNs": 415.17,
+        "maxJVMMedianNs": 400.445,
+        "measuredBatches": 15,
+        "medianOfJVMMediansNs": 172.58,
+        "minBatchNs": 54.91,
+        "minJVMMedianNs": 77.775
+      },
+      "provider": {
+        "freshJVMs": 5,
+        "maxBatchNs": 218.71,
+        "maxJVMMedianNs": 216.45,
+        "measuredBatches": 15,
+        "medianOfJVMMediansNs": 89.96,
+        "minBatchNs": 81.095,
+        "minJVMMedianNs": 81.795
+      },
+      "providerDividedByOwnedMedian": 0.521265500057944,
+      "stateSHA256": "ac118480ba1535f9778ba463b2c38200516dbc0e46e3e6e2dfb15f75b811c165",
+      "unit": "cycle",
+      "workload": "wrapped-typed-toArray"
+    },
+    {
+      "capacity": 1024,
+      "owned": {
+        "freshJVMs": 5,
+        "maxBatchNs": 4.8896,
+        "maxJVMMedianNs": 4.6461,
+        "measuredBatches": 15,
+        "medianOfJVMMediansNs": 4.5321,
+        "minBatchNs": 4.1847,
+        "minJVMMedianNs": 4.3328
+      },
+      "provider": {
+        "freshJVMs": 5,
+        "maxBatchNs": 5.2094,
+        "maxJVMMedianNs": 5.0441,
+        "measuredBatches": 15,
+        "medianOfJVMMediansNs": 2.7698,
+        "minBatchNs": 2.4057,
+        "minJVMMedianNs": 2.4381
+      },
+      "providerDividedByOwnedMedian": 0.6111515632929547,
+      "stateSHA256": "db1c7644d28b486445ab3399ad660a955ee665fe662c101db91b6f80c2ef6639",
+      "unit": "offer",
+      "workload": "eviction-offer"
+    },
+    {
+      "capacity": 1024,
+      "owned": {
+        "freshJVMs": 5,
+        "maxBatchNs": 10.0744,
+        "maxJVMMedianNs": 9.397,
+        "measuredBatches": 15,
+        "medianOfJVMMediansNs": 8.1722,
+        "minBatchNs": 5.3516,
+        "minJVMMedianNs": 6.3166
+      },
+      "provider": {
+        "freshJVMs": 5,
+        "maxBatchNs": 7.877,
+        "maxJVMMedianNs": 7.507,
+        "measuredBatches": 15,
+        "medianOfJVMMediansNs": 6.0208,
+        "minBatchNs": 3.4888,
+        "minJVMMedianNs": 3.9726
+      },
+      "providerDividedByOwnedMedian": 0.7367416362790926,
+      "stateSHA256": "6a9d82295e7ee20b6031ecd856d50d2d21db06cada70d9931117be9f720db258",
+      "unit": "cycle",
+      "workload": "mixed-offer-poll"
+    },
+    {
+      "capacity": 1024,
+      "owned": {
+        "freshJVMs": 5,
+        "maxBatchNs": 30215.2,
+        "maxJVMMedianNs": 9390.533333333333,
+        "measuredBatches": 15,
+        "medianOfJVMMediansNs": 7842.466666666666,
+        "minBatchNs": 5606.933333333333,
+        "minJVMMedianNs": 7602.133333333333
+      },
+      "provider": {
+        "freshJVMs": 5,
+        "maxBatchNs": 8213.666666666666,
+        "maxJVMMedianNs": 8196.466666666667,
+        "measuredBatches": 15,
+        "medianOfJVMMediansNs": 7479.2,
+        "minBatchNs": 4263.4,
+        "minJVMMedianNs": 4272.666666666667
+      },
+      "providerDividedByOwnedMedian": 0.9536795396006359,
+      "stateSHA256": "90e7b400c192641b23352279b5d3e69d7c027ebc16c5df95bb2f3b305f5b257c",
+      "unit": "cycle",
+      "workload": "interior-iterator-remove"
+    },
+    {
+      "capacity": 1024,
+      "owned": {
+        "freshJVMs": 5,
+        "maxBatchNs": 14937.266666666666,
+        "maxJVMMedianNs": 14562.8,
+        "measuredBatches": 15,
+        "medianOfJVMMediansNs": 12336,
+        "minBatchNs": 11558.733333333334,
+        "minJVMMedianNs": 12126.266666666666
+      },
+      "provider": {
+        "freshJVMs": 5,
+        "maxBatchNs": 10964.866666666667,
+        "maxJVMMedianNs": 10578.866666666667,
+        "measuredBatches": 15,
+        "medianOfJVMMediansNs": 10001.666666666666,
+        "minBatchNs": 8923.533333333333,
+        "minJVMMedianNs": 8954.6
+      },
+      "providerDividedByOwnedMedian": 0.8107706441850411,
+      "stateSHA256": "3df4f5a69fa1f301049a0d2d10c45cf3383c0ed5a5d6c15288fdaf1faaa1d707",
+      "unit": "cycle",
+      "workload": "removeAll-sparse"
+    },
+    {
+      "capacity": 1024,
+      "owned": {
+        "freshJVMs": 5,
+        "maxBatchNs": 12515.066666666668,
+        "maxJVMMedianNs": 12078.6,
+        "measuredBatches": 15,
+        "medianOfJVMMediansNs": 11369.533333333333,
+        "minBatchNs": 10217.733333333334,
+        "minJVMMedianNs": 10301.266666666666
+      },
+      "provider": {
+        "freshJVMs": 5,
+        "maxBatchNs": 11891.466666666667,
+        "maxJVMMedianNs": 10717.4,
+        "measuredBatches": 15,
+        "medianOfJVMMediansNs": 9981.8,
+        "minBatchNs": 7952.266666666666,
+        "minJVMMedianNs": 8468.933333333332
+      },
+      "providerDividedByOwnedMedian": 0.8779428062130958,
+      "stateSHA256": "758b8018094bf646a943d618d17351c8a7313e450fdc2ef4e4426e2b43964fc6",
+      "unit": "cycle",
+      "workload": "removeAll-dense"
+    },
+    {
+      "capacity": 1024,
+      "owned": {
+        "freshJVMs": 5,
+        "maxBatchNs": 9058.48,
+        "maxJVMMedianNs": 7349.96,
+        "measuredBatches": 15,
+        "medianOfJVMMediansNs": 4182.4,
+        "minBatchNs": 3753.48,
+        "minJVMMedianNs": 3770.04
+      },
+      "provider": {
+        "freshJVMs": 5,
+        "maxBatchNs": 8098.96,
+        "maxJVMMedianNs": 3585.6,
+        "measuredBatches": 15,
+        "medianOfJVMMediansNs": 3450.4,
+        "minBatchNs": 3035.88,
+        "minJVMMedianNs": 3196
+      },
+      "providerDividedByOwnedMedian": 0.824980872226473,
+      "stateSHA256": "4a2f0773431bf269d5ab3d3a1615c1ed4c9a236dcd52e56046df3dbe6b5d8847",
+      "unit": "cycle",
+      "workload": "oversized-addAll"
+    },
+    {
+      "capacity": 1024,
+      "owned": {
+        "freshJVMs": 5,
+        "maxBatchNs": 879.015,
+        "maxJVMMedianNs": 744.85,
+        "measuredBatches": 15,
+        "medianOfJVMMediansNs": 717,
+        "minBatchNs": 575.445,
+        "minJVMMedianNs": 614.31
+      },
+      "provider": {
+        "freshJVMs": 5,
+        "maxBatchNs": 774.585,
+        "maxJVMMedianNs": 604.52,
+        "measuredBatches": 15,
+        "medianOfJVMMediansNs": 579.885,
+        "minBatchNs": 547.455,
+        "minJVMMedianNs": 558.86
+      },
+      "providerDividedByOwnedMedian": 0.808765690376569,
+      "stateSHA256": "f2ddeb4a92f3bd579910053b71504d2fcd590c73b88f37440dfe88842c1b87cd",
+      "unit": "cycle",
+      "workload": "wrapped-typed-toArray"
+    }
+  ],
+  "untimedDigestCasesPerJVM": 21,
+  "rootExecutionOnly": true,
+  "rawResults": {
+    "bytes": 275759,
+    "sha256": "f934cedd0292225379389cd5dc4478bbe3e282cad6d09a3aa78d5b6089633e8c",
+    "included": false,
+    "reason": "Exceeds requested approximately100k raw-result packet limit; all per-batch raw logs retained by root"
+  },
+  "benchmarkSource": {
+    "bytes": 8690,
+    "sha256": "a7091bfe5b492765302453c4671dfdef694376fae886779fbd49367adc8c2159"
+  },
+  "fossLedgerSHA256": "2496d8355f60e966fea5955cf8d85f274e199a2c89fad93170f49acc3002c14d",
+  "observedConclusion": "At capacity1024 all7 owned workload medians are higher than provider medians; no general speedup/allocation/statistical/native claim"
+}

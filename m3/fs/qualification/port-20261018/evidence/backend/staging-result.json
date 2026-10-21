@@ -1,0 +1,275 @@
+{
+  "schema": "M3FS_FRESH_STAGING_QUALIFICATION_V1",
+  "java_tests": 97,
+  "java_suites": 31,
+  "zero_test_suites": 0,
+  "failures": 0,
+  "errors": 0,
+  "skips": 0,
+  "native_required": true,
+  "xcheck_jni": true,
+  "native_ctest": {
+    "passed": 12,
+    "failed": 0
+  },
+  "suites": [
+    {
+      "name": "com.m3.fs.M3ArrayMetadataCompatibilityTest",
+      "tests": "5",
+      "errors": "0",
+      "failures": "0",
+      "skipped": "0",
+      "time": "0.033"
+    },
+    {
+      "name": "com.m3.fs.M3ArrayMetadataContractTest",
+      "tests": "5",
+      "errors": "0",
+      "failures": "0",
+      "skipped": "0",
+      "time": "0.25"
+    },
+    {
+      "name": "com.m3.fs.M3FSNativeTest",
+      "tests": "3",
+      "errors": "0",
+      "failures": "0",
+      "skipped": "0",
+      "time": "0.167"
+    },
+    {
+      "name": "com.m3.fs.M3FSScrubTest",
+      "tests": "2",
+      "errors": "0",
+      "failures": "0",
+      "skipped": "0",
+      "time": "0.371"
+    },
+    {
+      "name": "com.m3.fs.M3FileSystemStoreHeadGenerationPrecomputeTest",
+      "tests": "2",
+      "errors": "0",
+      "failures": "0",
+      "skipped": "0",
+      "time": "0.137"
+    },
+    {
+      "name": "com.m3.fs.M3FsCatalogVarargsCompatibilityTest",
+      "tests": "3",
+      "errors": "0",
+      "failures": "0",
+      "skipped": "0",
+      "time": "2.042"
+    },
+    {
+      "name": "com.m3.fs.M3FsCheckedInodeIoTest",
+      "tests": "4",
+      "errors": "0",
+      "failures": "0",
+      "skipped": "0",
+      "time": "1.696"
+    },
+    {
+      "name": "com.m3.fs.M3FsCompactAsciiDfaTest",
+      "tests": "3",
+      "errors": "0",
+      "failures": "0",
+      "skipped": "0",
+      "time": "0.641"
+    },
+    {
+      "name": "com.m3.fs.M3FsFeatureTest",
+      "tests": "2",
+      "errors": "0",
+      "failures": "0",
+      "skipped": "0",
+      "time": "0.005"
+    },
+    {
+      "name": "com.m3.fs.M3FsGpuPipelineMappedSetTest",
+      "tests": "4",
+      "errors": "0",
+      "failures": "0",
+      "skipped": "0",
+      "time": "0.188"
+    },
+    {
+      "name": "com.m3.fs.M3FsHotPathTest",
+      "tests": "1",
+      "errors": "0",
+      "failures": "0",
+      "skipped": "0",
+      "time": "0.85"
+    },
+    {
+      "name": "com.m3.fs.M3FsImageBindingTest",
+      "tests": "4",
+      "errors": "0",
+      "failures": "0",
+      "skipped": "0",
+      "time": "0.356"
+    },
+    {
+      "name": "com.m3.fs.M3FsIndexedTest",
+      "tests": "1",
+      "errors": "0",
+      "failures": "0",
+      "skipped": "0",
+      "time": "7.912"
+    },
+    {
+      "name": "com.m3.fs.M3FsMappedBundleViewTest",
+      "tests": "3",
+      "errors": "0",
+      "failures": "0",
+      "skipped": "0",
+      "time": "0.424"
+    },
+    {
+      "name": "com.m3.fs.M3FsNativeSemanticTest",
+      "tests": "1",
+      "errors": "0",
+      "failures": "0",
+      "skipped": "0",
+      "time": "0.043"
+    },
+    {
+      "name": "com.m3.fs.M3FsPrecomputeBundleTest",
+      "tests": "9",
+      "errors": "0",
+      "failures": "0",
+      "skipped": "0",
+      "time": "0.408"
+    },
+    {
+      "name": "com.m3.fs.M3FsPrecomputePipelineManifestTest",
+      "tests": "4",
+      "errors": "0",
+      "failures": "0",
+      "skipped": "0",
+      "time": "0.227"
+    },
+    {
+      "name": "com.m3.fs.M3FsPreparedSearchStateTest",
+      "tests": "1",
+      "errors": "0",
+      "failures": "0",
+      "skipped": "0",
+      "time": "0.322"
+    },
+    {
+      "name": "com.m3.fs.M3FsSnapshotViewTest",
+      "tests": "1",
+      "errors": "0",
+      "failures": "0",
+      "skipped": "0",
+      "time": "1.441"
+    },
+    {
+      "name": "com.m3.fs.M3FsSparseFeatureTest",
+      "tests": "2",
+      "errors": "0",
+      "failures": "0",
+      "skipped": "0",
+      "time": "0.137"
+    },
+    {
+      "name": "com.m3.fs.M3GenerationRootDirectoryIndexTest",
+      "tests": "3",
+      "errors": "0",
+      "failures": "0",
+      "skipped": "0",
+      "time": "0.013"
+    },
+    {
+      "name": "com.m3.fs.M3GpuGrepSegmentsRuntimeTest",
+      "tests": "1",
+      "errors": "0",
+      "failures": "0",
+      "skipped": "0",
+      "time": "0.066"
+    },
+    {
+      "name": "com.m3.fs.M3HeadPromotionDurabilityTest",
+      "tests": "4",
+      "errors": "0",
+      "failures": "0",
+      "skipped": "0",
+      "time": "0.202"
+    },
+    {
+      "name": "com.m3.fs.M3MIndexFileTokenRangeSha256Test",
+      "tests": "10",
+      "errors": "0",
+      "failures": "0",
+      "skipped": "0",
+      "time": "1.56"
+    },
+    {
+      "name": "com.m3.fs.M3MappedStorageTest",
+      "tests": "1",
+      "errors": "0",
+      "failures": "0",
+      "skipped": "0",
+      "time": "1.852"
+    },
+    {
+      "name": "com.m3.fs.M3NativeContentPositionTest",
+      "tests": "1",
+      "errors": "0",
+      "failures": "0",
+      "skipped": "0",
+      "time": "0.675"
+    },
+    {
+      "name": "com.m3.fs.M3PrecomputeArrayMetadataTest",
+      "tests": "5",
+      "errors": "0",
+      "failures": "0",
+      "skipped": "0",
+      "time": "1.374"
+    },
+    {
+      "name": "com.m3.fs.M3PrecomputeBundleTest",
+      "tests": "6",
+      "errors": "0",
+      "failures": "0",
+      "skipped": "0",
+      "time": "0.183"
+    },
+    {
+      "name": "com.m3.fs.M3PrecomputePublicationDurabilityTest",
+      "tests": "3",
+      "errors": "0",
+      "failures": "0",
+      "skipped": "0",
+      "time": "1.313"
+    },
+    {
+      "name": "com.m3.fs.M3SegmentedUtf16FsTest",
+      "tests": "2",
+      "errors": "0",
+      "failures": "0",
+      "skipped": "0",
+      "time": "0.171"
+    },
+    {
+      "name": "com.m3.fs.M3SnapshotStoreTest",
+      "tests": "1",
+      "errors": "0",
+      "failures": "0",
+      "skipped": "0",
+      "time": "1.058"
+    }
+  ],
+  "artifacts": {
+    "target/m3-fs-0.1.0-SNAPSHOT.jar": {
+      "sha256": "d26696e0b79b81cbc51d8c07e0e19c574111e6603b930c15006a01c8d8c69970",
+      "bytes": 253672
+    },
+    "target/native/libm3fs.so": {
+      "sha256": "fb2e70989a90f1ff151519ad875c09f82a3812ec7e2d7cfc932c2a001eccfcdf",
+      "bytes": 126872
+    }
+  }
+}

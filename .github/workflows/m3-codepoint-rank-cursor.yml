@@ -1,0 +1,45 @@
+name: M3JDK21 code-point rank/select source proof
+
+on:
+  push:
+    branches:
+      - m3/jdk-codepoint-rank-cursor-20261017
+  pull_request:
+    paths:
+      - "src/java.base/share/classes/java/lang/M3StringCodePointPrecompute.java"
+      - "test/jdk/java/lang/String/M3StringCodePointRankCursorTest.java"
+      - "m3/runtime-integration/verify-codepoint-rank-cursor-receiver.py"
+      - "m3/runtime-integration/codepoint-rank/**"
+      - ".github/workflows/m3-codepoint-rank-cursor.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  source-and-extracted-java21:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout exact receiver
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # exact old 970a3435 ancestor for sealed before/after A/B
+      - name: Install stock JDK21 oracle (not a matched M3 image)
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
+      - name: Verify exact source pins, no source drift
+        run: python3 m3/runtime-integration/verify-codepoint-rank-cursor-receiver.py
+      - name: Compile and execute exact source-extracted geometry against Character oracle
+        run: python3 m3/runtime-integration/codepoint-rank/verify_source_oracle.py
+      - name: Compile and execute new jtreg's Java harness on stock JDK21
+        run: |
+          mkdir -p "$RUNNER_TEMP/m3-rank-jtreg-syntax"
+          javac --release 21 -proc:none -Xlint:all -Werror \
+            -d "$RUNNER_TEMP/m3-rank-jtreg-syntax" \
+            test/jdk/java/lang/String/M3StringCodePointRankCursorTest.java
+          java -ea -cp "$RUNNER_TEMP/m3-rank-jtreg-syntax" M3StringCodePointRankCursorTest
+      - name: A/B benchmark exact old vs new M3 geometry on same stock Java21
+        run: python3 m3/runtime-integration/codepoint-rank/measure_before_after.py
+      # IMPORTANT: Stock Java does not enable UseM3StringStorage; this never
+      # qualifies source-built java.base/HotSpot, JNI, native or jtreg runtime.

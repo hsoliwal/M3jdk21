@@ -1,0 +1,152 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3SDK JMOD Receiver Proof
+
+on:
+  pull_request:
+    paths:
+      - 'm3/tooling/jmod-recipes/**'
+      - 'm3/vendor/third_party-m3/**'
+      - 'm3/tooling/module-packs/nlp-search/**'
+      - 'm3/ports/file/**'
+      - 'm3/tooling/shared-frontend/**'
+      - 'src/jdk.compiler/share/classes/com/sun/source/util/M3AST.java'
+      - 'src/jdk.compiler/share/classes/com/sun/tools/javac/m3/**'
+      - 'src/jdk.compiler/share/classes/com/sun/tools/javac/main/JavaCompiler.java'
+      - 'src/jdk.compiler/share/classes/module-info.java'
+      - 'test/langtools/tools/javac/m3/**'
+      - 'm3/tooling/module-packs/text-tools/**'
+      - 'm3/vendor/synexia/nlp-search/**'
+      - 'm3/vendor/third_party/opennlp-tools/**'
+      - 'm3/vendor/third_party/lucene-core/**'
+      - 'm3/vendor/third_party/lucene-analysis-common/**'
+      - 'm3/vendor/third_party/lucene-queries/**'
+      - 'm3/vendor/third_party/lucene-sandbox/**'
+      - 'm3/vendor/third_party/lucene-queryparser/**'
+      - 'm3/vendor/third_party/slf4j-api-2.0.12/**'
+      - 'm3/vendor/third_party/slf4j-simple/**'
+      - '.github/workflows/m3sdk-jmod-receiver.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  source-custody:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: 1 - Diff hygiene
+        run: git diff --check
+      - name: 2 - Exact Git blob receiver proof
+        run: python3 m3/tooling/jmod-recipes/tools/verify_sdk_receiver.py --repo .
+      - name: 3 - SDK receiver and preflight refusal tests
+        run: >-
+          python3 -m unittest discover
+          -s m3/tooling/jmod-recipes/tools
+          -p 'test_*.py' -v
+      - name: 4 - Java 21 vendor smoke source compiles without donor classpath
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/m3sdk-smoke-classes"
+          javac --release 21 -Xlint:all -Werror \
+            -d "$RUNNER_TEMP/m3sdk-smoke-classes" \
+            m3/tooling/jmod-recipes/tools/fixtures/M3SdkImageSmoke.java
+      - name: 5 - Product acceptance remains independently proof-gated
+        run: |
+          set -euo pipefail
+          test -f m3/release/release-contract.json
+          echo 'SDK source and Java smoke compilation proof only; no linked image executed in this job.'
+
+  openrewrite-recipe-junit:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: maven
+      - name: Build source-vendored recipe and JUnit prerequisites
+        run: >-
+          mvn -B -ntp -f m3/vendor/third_party/pom.xml
+          -pl rewrite-core,rewrite-java,rewrite-java-21,slf4j-api-1.7.36,slf4j-api-2.0.9,junit-jupiter-5.10.2,junit-platform-launcher-1.10.2
+          -am -DskipTests install
+      - name: Run original hash-pinned JMOD descriptor OpenRewrite JUnit
+        run: >-
+          mvn -B -ntp -f m3/tooling/jmod-recipes/pom.xml
+          -Dtest=M3ModuleDescriptorRecipeTest test
+      - name: Run the exact receiver recipe-custody proof mirror
+        run: >-
+          mvn -B -ntp
+          -f m3/tooling/module-packs/nlp-search/recipe-custody/pom.xml
+          clean test
+      - name: Retain descriptor and receiver recipe proof reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: m3-recipe-custody-proof
+          if-no-files-found: error
+          path: |
+            m3/tooling/jmod-recipes/target/surefire-reports/**
+            m3/tooling/module-packs/nlp-search/recipe-custody/target/surefire-reports/**
+            m3/tooling/module-packs/nlp-search/recipe-custody/target/evidence/**
+
+
+  full-tool-images:
+    name: Full M3File OpenNLP Lucene and compiler images
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Build ten JMODs and run full file JNI NLP and M3AST contracts
+        run: >-
+          python3 m3/tooling/module-packs/nlp-search/build.py
+          --jdk-home "$JAVA_HOME" --compiler-source-proof
+          --out build/m3-nlp-search
+      - name: Build and execute text and POSIX JNI tools
+        run: |
+          set -euo pipefail
+          owner="$PWD/m3/tooling/module-packs/text-tools"
+          python3 "$owner/build.py" --jdk-home "$JAVA_HOME" \
+            --sources "$owner/src" --native-source "$owner/native/m3textio.c" \
+            --smoke "$owner/fixtures/src/test/java/M3TextSmoke.java" \
+            --legal-notices "$owner/legal" \
+            --packager "$PWD/m3/tooling/jmod-recipes/tools/jmod_pack.py" \
+            --out "$PWD/build/m3-text-tools"
+          image="$PWD/build/m3-text-tools/pack/image"
+          mkdir -p build/m3-text-tools/utf8
+          "$image/bin/javac" --patch-module "jdk.m3.text=$owner/fixtures/src/test/java" \
+            -d build/m3-text-tools/utf8 "$owner/fixtures/src/test/java/Utf8SegmentsProbe.java"
+          "$image/bin/java" --patch-module jdk.m3.text=build/m3-text-tools/utf8 \
+            -m jdk.m3.text/jdk.m3.text.Utf8SegmentsProbe | tee build/m3-text-tools/utf8.log
+      - name: Retain image proof and failure logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: m3-full-tool-images
+          if-no-files-found: error
+          path: |
+            build/m3-nlp-search/**/*.log
+            build/m3-nlp-search/**/*.json
+            build/m3-nlp-search/**/*.tsv
+            build/m3-nlp-search/pack/jmods/*.jmod
+            build/m3-nlp-search/native/*.so
+            build/m3-text-tools/**/*.log
+            build/m3-text-tools/**/*.json
+            build/m3-text-tools/**/*.tsv

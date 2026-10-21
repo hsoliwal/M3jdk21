@@ -1,0 +1,9 @@
+M3JDK21 M3FS runtime
+Copyright 2026 Hitesh Soliwal and contributors
+M3FS Java and native source adaptations are licensed under Apache-2.0.
+Pinned source lineage: hsoliwal/com.synexia@289e32f130c9c8e4a1cf0edc1066327d699393bf
+The MIndex serialized image magic and SQLite schema version 1 are retained.
+The supplied SQLite runtime remains a separate upstream/distribution component.
+Its exact input and linked-image hashes are recorded separately in the receipts.
+SQLite upstream licensing: https://www.sqlite.org/copyright.html
+The supplied JDK distribution retains its original licenses and legal notices.

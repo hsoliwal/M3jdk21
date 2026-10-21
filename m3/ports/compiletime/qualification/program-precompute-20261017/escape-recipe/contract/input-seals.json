@@ -1,0 +1,20 @@
+{
+  "target_revision": "d47a4b4fdb8e3794ec56768b06aa9e23730c6b8e",
+  "source_recipe_revision": "81c4f19a5ce5a68da316ff6f2802f2041a684f31",
+  "manifest_hashes": {
+    "java": "13e556fb54e01c3aac8ae328b6e75363ff626ae797652209f5e50ddc4c077c4a",
+    "text": "029f8135054b08b5b05b7e7b8ca62a4ed84614ac2a4ad04620e3a23848f8d293"
+  },
+  "manifest_counts": {
+    "java": 4,
+    "text": 1
+  },
+  "parent_inputs_sha256": "f131fbdae5e460c89a93521873f540e93921b16729ceebb0b23eb10542eceee6",
+  "parent_input_count": 141,
+  "owners": {
+    "M3EditScope.java": "962d37d62d740c3e8055c365a048ae7ee0479c26a9f6bbfe741e540d6c1134ab",
+    "M3HashPinnedJavaSnapshotRecipe.java": "67f7b81126e4736c7b61b444fa6545153a61e23c012975ca796fcee623ab6625",
+    "M3HashPinnedTextSnapshotRecipe.java": "fbf1ea9efad784afef5ac201ff7fc324551f77a099ebfe2f79b70c3a17c731ef",
+    "M3ScopeInference.java": "13660b59f60ec2941ec19e9bc8964ffd4b04689cdc33cd19711fba14b8da09a4"
+  }
+}

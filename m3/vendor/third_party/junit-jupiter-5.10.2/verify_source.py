@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 # SPDX-License-Identifier: Apache-2.0
+# Modified 2026 by Hitesh Soliwal and contributors: resolve repository-relative source seals.
 """Check the pinned, unchanged donor and its optional built legal resources."""
 import hashlib
 import json
@@ -10,7 +11,7 @@ import zipfile
 
 def main():
     owner = Path(__file__).resolve().parent
-    root = owner.parent.parent
+    root = owner.parents[3]  # PROVENANCE paths are repository-relative.
     manifest = json.loads((owner / "PROVENANCE.json").read_text(encoding="utf-8"))
     for item in manifest["files"]:
         source = root / item["repository"]
@@ -24,13 +25,14 @@ def main():
     }
     if set((owner / "src/main/java").rglob("*.java")) != expected:
         raise SystemExit("Production donor inventory changed")
-    receipt = {"revision": manifest["revision"], "exact_files": len(manifest["files"]),
+    receipt = {"coordinate": manifest["coordinate"],
+               "sources_jar_sha256": manifest["sources_jar_sha256"], "exact_files": len(manifest["files"]),
                "exact_production_files": len(expected)}
     if len(sys.argv) > 1:
         artifact = Path(sys.argv[1])
         with zipfile.ZipFile(artifact) as jar:
             for name in ("LICENSE", "THIRD_PARTY_NOTICES.md", "PROVENANCE.json"):
-                if jar.read("META-INF/third-party/junit-jupiter-5.10.2/" + name) != (owner / name).read_bytes():
+                if jar.read("META-INF/third-party/junit-jupiter-5.10.2/" + name) != (owner / (manifest["license_file"] if name == "LICENSE" else name)).read_bytes():
                     raise SystemExit("Packaged legal/provenance bytes changed: " + name)
             if "M3jdk21-Source-Inline: no upstream Automatic-Module-Name" not in jar.read("META-INF/MANIFEST.MF").decode():
                 raise SystemExit("Automatic module identity changed")

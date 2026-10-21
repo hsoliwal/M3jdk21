@@ -1,0 +1,98 @@
+01-java-version: PASS
+openjdk version "21.0.12.1" 2026-08-18 LTS
+OpenJDK Runtime Environment Temurin-21.0.12.1+1 (build 21.0.12.1+1-LTS)
+OpenJDK 64-Bit Server VM Temurin-21.0.12.1+1 (build 21.0.12.1+1-LTS, mixed mode, sharing)
+02-gcc-version: PASS
+gcc (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0
+Copyright (C) 2023 Free Software Foundation, Inc.
+This is free software; see the source for copying conditions.  There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+03-java-main-compile: PASS
+04-java-selftest-compile: PASS
+05-build-m3_collections_mask: PASS
+05-build-m3_collections_pathmask: PASS
+05-build-m3_collections_address: PASS
+05-build-m3rankbatch: PASS
+05-build-m3signalorder: PASS
+05-build-m3_collections_span: PASS
+05-build-m3_collections_statehist: PASS
+05-build-m3_residency_state_mask: PASS
+05-build-segmented_bits: PASS
+06-exports-libm3_collections_address: PASS
+00000000000011c0 T Java_com_m3_collections_M3LongAddressKernel_gatherNative
+06-exports-libm3_collections_mask: PASS
+0000000000005b50 T Java_com_m3_collections_M3IndexMaskCompactor_positionsAbiNative
+0000000000005720 T Java_com_m3_collections_M3IndexMaskCompactor_rangeAbiNative
+0000000000006ba0 T Java_com_m3_collections_M3IndexMaskCompactor_selectLongWindowNative
+0000000000005330 T Java_com_m3_collections_M3IndexMaskCompactor_selectNative
+0000000000005b60 T Java_com_m3_collections_M3IndexMaskCompactor_selectPositionsNative
+0000000000005730 T Java_com_m3_collections_M3IndexMaskCompactor_selectRangeNative
+00000000000061d0 T Java_com_m3_collections_M3IndexMaskCompactor_selectWindowNative
+00000000000086f0 T Java_com_m3_collections_M3IndexMaskWindow_scanBoundedNative
+00000000000086b0 T Java_com_m3_collections_M3IndexMaskWindow_scanNative
+06-exports-libm3_collections_pathmask: PASS
+0000000000002290 T Java_com_m3_collections_M3IndexPathMasks_selectNative
+06-exports-libm3_collections_span: PASS
+0000000000001180 T Java_com_m3_collections_M3SpanIndex_batchNative
+06-exports-libm3_collections_statehist: PASS
+00000000000012e0 T Java_com_m3_collections_M3StateMaskHistogram_tallyNative
+06-exports-libm3_residency_state_mask: PASS
+0000000000002330 T Java_com_m3_collections_M3ResidencyStateMaskIndex_select0
+06-exports-libm3rankbatch: PASS
+0000000000001180 T Java_com_m3_collections_M3LongRankBatchNative_lowerBounds0
+06-exports-libm3signalorder: PASS
+0000000000001280 T Java_com_m3_collections_M3SignalOrderNative_sort0
+06-exports-libsegmented_bits: PASS
+00000000000012c0 T Java_com_m3_collections_M3BitLane28_cardinality0
+07-01-M3IndexMaskCompactorSelfTest: PASS
+PASS M3IndexMaskCompactorSelfTest checks=26152 JNI=true
+07-02-M3IndexMaskWindowSelfTest: PASS
+PASS M3_INDEX_MASK_WINDOW checks=30596 native=true
+07-03-M3IndexMaskWindowRecoverySelfTest: PASS
+PASS M3IndexMaskWindowRecoverySelfTest checks=10528 JNI=true
+07-04-M3MaskNativeParityProof: PASS
+PASS M3MaskNativeParityProof checks=11520 checkedJNI=true
+07-05-M3NativeIndexRangeSelfTest: PASS
+M3NativeIndexRangeSelfTest mode=range checks=638454 seededCases=2048
+07-06-M3FilteredListsMaskBridgeProof: PASS
+PASS M3FilteredListsMaskBridgeProof checks=16241 native=true
+07-07-M3IndexPathMasksSelfTest: PASS
+PASS M3IndexPathMasksSelfTest checks=2324 JNI=true
+07-08-M3LongIndexPathMasksSelfTest: PASS
+PASS M3LongIndexPathMasksSelfTest checks=7127 randomized=1500
+07-09-M3IndexPathMaskWindowSelfTest: PASS
+M3_PATH_MASK_WINDOW_PASS checks=22461 backend=JAVA nativeAvailable=true
+07-10-M3IndexPathRankNativeSelfTest: PASS
+PASS M3IndexPathRank JNI parity: 180 deterministic Java/rank/native paths
+07-11-M3LongAddressKernelSelfTest: PASS
+PASS M3LongAddressKernelSelfTest checks=384942 native=true
+07-12-M3LongAddressBoundedSelfTest: PASS
+M3_BOUNDED_GATHER_PASS checks=21975732 fingerprint=-8730037866241443045 native=true
+07-13-M3LongRankIndexSelfTest: PASS
+M3LongRankIndexSelfTest PASS native=true
+07-14-M3SignalOrderContract: PASS
+PASS M3SignalOrderContract backend=NATIVE_REQUIRED checks=2010
+07-15-M3SignalDimensionsNativeContract: PASS
+PASS M3SignalDimensionsNativeContract JNI checks=400
+07-16-M3SpanIndexSelfTest: PASS
+M3SpanIndex Java21/JNI oracle: PASS 128804 assertions, JNI=true
+07-17-M3StateMaskHistogramSelfTest: PASS
+M3StateMaskHistogramSelfTest PASS checks=354665 native=true
+07-18-M3ResidencyStateMaskProof: PASS
+M3_RESIDENCY_STATE_MASK_PASS checks=11226 fingerprint=12197969927824375845 backend=jni-enabled
+07-19-M3LongRangeSetSelfTest: PASS
+PASS M3LongRangeSetSelfTest oracleChecks=411913
+07-20-M3LongSortedSnapshotSelfTest: PASS
+M3_LONG_SORTED_SNAPSHOT_PASS|assertions=472524|randomRounds=256
+07-21-M3LongBitmapFilterPlanSelfTest: PASS
+PASS M3LongBitmapFilterPlanSelfTest checks=637172 native=true
+07-22-M3LongBitmapFilteredSnapshotSelfTest: PASS
+PASS M3LongBitmapFilteredSnapshotSelfTest checks=32425 native=true
+07-23-M3StateMaskArraysSelfTest: PASS
+PASS M3StateMaskArrays checks=157638 JNI=true
+07-24-M3SdkRecoverySelfTest: PASS
+PASS M3SdkRecoverySelfTest checks=19834 native=true
+08-segmented-bit-lane-jni: PASS
+JNI parity PASS: 66 boundary ranges, 1200 changing random ranges, checked JNI
+PASS: isolated actual-source existing-native collection verification

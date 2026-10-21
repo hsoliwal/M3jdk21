@@ -121,20 +121,81 @@ public final class TextTools {
             throw new IllegalArgumentException("translation alphabet budget");
         if (from.indexOf('\n') >= 0 || from.indexOf('\r') >= 0 || to.indexOf('\n') >= 0 || to.indexOf('\r') >= 0)
             throw new IllegalArgumentException("translation is within line content");
-        int[] source = from.codePoints().toArray(), target = to.codePoints().toArray();
-        Map<Integer, Integer> map = new HashMap<>();
-        for (int i = 0; i < source.length; i++)
-            map.put(source[i], target.length == 0 ? -1 : target[Math.min(i, target.length - 1)]);
+        int firstLatin1 = 256, lastLatin1 = -1, highCount = 0;
+        for (int at = 0; at < from.length();) {
+            int value = from.codePointAt(at);
+            at += Character.charCount(value);
+            if (value < 256) {
+                firstLatin1 = Math.min(firstLatin1, value);
+                lastLatin1 = Math.max(lastLatin1, value);
+            } else highCount++;
+        }
+        int[] latin1 = new int[firstLatin1 < 256 ? lastLatin1 - firstLatin1 + 1 : 0];
+        long[] present = new long[(latin1.length + 63) >>> 6];
+        int capacity = 2;
+        while (capacity < 2 * Math.min(highCount, 32)) capacity <<= 1;
+        long[] translations = new long[highCount == 0 ? 0 : capacity];
+        int[] target = to.codePoints().toArray();
+        int used = 0;
+        for (int at = 0, ordinal = 0; at < from.length(); ordinal++) {
+            int value = from.codePointAt(at);
+            at += Character.charCount(value);
+            int replacement = target.length == 0 ? -1 : target[Math.min(ordinal, target.length - 1)];
+            if (value < 256) {
+                int offset = value - firstLatin1;
+                latin1[offset] = replacement;
+                present[offset >>> 6] |= 1L << (offset & 63);
+            } else {
+                int slot = translationSlot(value, translations);
+                if (translations[slot] == 0) {
+                    if (used == translations.length / 2) {
+                        translations = growTranslations(translations);
+                        slot = translationSlot(value, translations);
+                    }
+                    used++;
+                }
+                // Zero marks an empty slot; source and replacement NUL remain representable.
+                translations[slot] = ((long) (value + 1) << 32) | (replacement + 1L);
+            }
+        }
+        final int latin1Base = firstLatin1;
+        final long[] highTranslations = translations;
         FrameCollector out = new FrameCollector(limits);
         for (TextLine line : input.lines()) {
             StringBuilder text = new StringBuilder();
             line.content().codePoints().forEach(value -> {
-                int replacement = map.getOrDefault(value, value);
+                int replacement = value;
+                if (value < 256) {
+                    int offset = value - latin1Base;
+                    if (offset >= 0 && offset < latin1.length && (present[offset >>> 6] & (1L << (offset & 63))) != 0)
+                        replacement = latin1[offset];
+                } else if (highTranslations.length != 0) {
+                    long entry = highTranslations[translationSlot(value, highTranslations)];
+                    if (entry != 0) replacement = (int) entry - 1;
+                }
                 if (replacement >= 0) text.appendCodePoint(replacement);
             });
             out.accept(new TextLine(text.toString(), line.ending()));
         }
         return out.frame();
+    }
+
+    private static int translationSlot(int value, long[] translations) {
+        int hash = value * 0x9e3779b9;
+        int mask = translations.length - 1;
+        int slot = (hash ^ (hash >>> 16)) & mask;
+        while (translations[slot] != 0 && (int) (translations[slot] >>> 32) != value + 1)
+            slot = (slot + 1) & mask;
+        return slot;
+    }
+
+    private static long[] growTranslations(long[] translations) {
+        // Valid Unicode bounds distinct keys below 0x110000, so half occupancy needs at most 1<<22 slots.
+        long[] grown = new long[translations.length << 1];
+        for (long entry : translations) {
+            if (entry != 0) grown[translationSlot((int) (entry >>> 32) - 1, grown)] = entry;
+        }
+        return grown;
     }
 
     /** Breaks by Unicode scalar count, not display width; preserves each final original ending. */

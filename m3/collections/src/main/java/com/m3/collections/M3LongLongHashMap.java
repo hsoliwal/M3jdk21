@@ -53,6 +53,22 @@ public final class M3LongLongHashMap {
             return false;
         }
         if (needsGrowth(occupied + 1, keys.length)) {
+            // The lookup above proved this key absent. A tombstone reached
+            // before the first EMPTY slot is a legal insertion coordinate.
+            // Only probe again on the growth boundary; keep primitive lanes.
+            int mask = keys.length - 1;
+            int probe = mix(key) & mask;
+            while (states[probe] != EMPTY) {
+                if (states[probe] == DELETED) {
+                    keys[probe] = key;
+                    values[probe] = value;
+                    states[probe] = USED;
+                    size++;
+                    modCount++;
+                    return true;
+                }
+                probe = (probe + 1) & mask;
+            }
             if (keys.length >= (1 << 30)) {
                 throw new IllegalStateException("maximum hash-table capacity reached");
             }

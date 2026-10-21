@@ -1,0 +1,42 @@
+{
+  "base_commit": "e913ab89056657eca4009678cfe9a657c020e79b",
+  "license": "Apache-2.0",
+  "decision": "ADAPT existing owner zero-mask identity; no external C algorithm code copied",
+  "snapshot_engines": [
+    {
+      "commit": "976bb5c6c58439a772124d62e1c7103d3b8428c1",
+      "git_blob": "d58ca50dfaeb60f581b64f43545e688aca5c6530",
+      "path": "m3/tooling/migration-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+      "repository": "hsoliwal/M3jdk21",
+      "sha256": "3fc6e77a1394e292747d689a4a42a328b496000865aa390afe05d5571febd599"
+    },
+    {
+      "commit": "bc1634ab0387288e677afd563a01782b90aae618",
+      "git_blob": "9d0788d3717e017d58345c5c3e62022c2915a3c8",
+      "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedTextSnapshotRecipe.java",
+      "repository": "hsoliwal/com.synexia",
+      "sha256": "fbf1ea9efad784afef5ac201ff7fc324551f77a099ebfe2f79b70c3a17c731ef"
+    }
+  ],
+  "public_interface_changes": false,
+  "measured_speedup": false,
+  "review": {
+    "kind": "command-disabled Codex source review",
+    "finding_count": 0,
+    "scope": "int/long production emission patch and unchanged validation context",
+    "commands_executed": false
+  },
+  "ci_status": "PENDING",
+  "changed_owners": [
+    {
+      "path": "m3/collections/src/main/native/collections/m3_index_mask_compactor.c",
+      "before_sha256": "59b1bb47f2df09f1455e4ce2160becbeefd6da877ecddca4ad245a286d14fa48",
+      "after_sha256": "cb8e8c66e07cc4651e95a0c28ad834d2c9de48df34dc90c6d7da68443f1da531"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3IndexMaskCompactorSelfTest.java",
+      "before_sha256": "86eb2c9a436aac6f6e5b99f5c275636ca272d849dd08aa07f8796271167c63a1",
+      "after_sha256": "6b6fe32c60db7fb0e31e17e6cce0df727c856f17adff9eba32d5efd141498872"
+    }
+  ]
+}

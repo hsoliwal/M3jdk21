@@ -51,6 +51,76 @@ public final class M3IndexMaskCompactor {
         return selectJava(orderedRows, rowStates, requiredMask);
     }
 
+    /**
+     * Select logical positions satisfying all required state bits without a caller-owned
+     * identity row array. The result is detached, ascending encounter-order coordinates.
+     * New native binaries generate coordinates directly from the byte-state lane; legacy
+     * binaries remain compatible through the original row selector.
+     */
+    public static int[] selectPositions(byte[] rowStates, int requiredMask, Backend backend) {
+        Objects.requireNonNull(rowStates, "rowStates");
+        Objects.requireNonNull(backend, "backend");
+        requireMask(requiredMask);
+        if (backend == Backend.NATIVE_REQUIRED) {
+            if (!NativeLibrary.AVAILABLE) {
+                throw new UnsatisfiedLinkError("m3_index_mask JNI library unavailable");
+            }
+            if (NativePositions.AVAILABLE) {
+                return selectPositionsNative(rowStates, requiredMask);
+            }
+            return selectNative(identityPositions(rowStates.length), rowStates, requiredMask);
+        }
+        return selectPositionsJava(rowStates, requiredMask);
+    }
+
+    /**
+     * Select logical positions satisfying every required bit and no excluded bit.
+     * Existing required-only callers retain their original ABI and fallback behavior.
+     * An explicit native request with a nonzero excluded mask requires the additive
+     * required/excluded position ABI; older native libraries fail instead of weakening semantics.
+     */
+    public static int[] selectPositions(byte[] rowStates, int requiredMask,
+            int excludedMask, Backend backend) {
+        Objects.requireNonNull(rowStates, "rowStates");
+        Objects.requireNonNull(backend, "backend");
+        requireMask(requiredMask);
+        requireMask(excludedMask);
+        if (excludedMask == 0) return selectPositions(rowStates, requiredMask, backend);
+        if (backend == Backend.NATIVE_REQUIRED) {
+            if (!NativeLibrary.AVAILABLE) {
+                throw new UnsatisfiedLinkError("m3_index_mask JNI library unavailable");
+            }
+            if (!NativePositionMasks.AVAILABLE) {
+                throw new UnsatisfiedLinkError(
+                        "m3_index_mask required/excluded position ABI unavailable");
+            }
+            return selectPositionsMasksNative(rowStates, requiredMask, excludedMask);
+        }
+        if ((requiredMask & excludedMask) != 0) return new int[0];
+        return selectPositionsJava(rowStates, requiredMask, excludedMask);
+    }
+
+    /**
+     * Internal native selection over an owner's stable half-open index window.
+     * States describe logical positions, not physical row IDs. This never retains inputs.
+     * Old binaries keep using their original native selector and defensive window copy;
+     * an absent library still fails, and a native request never falls back to Java.
+     */
+    static int[] selectNativeRange(int[] orderedRows, int first, int length,
+            byte[] rowStates, int requiredMask) {
+        Objects.requireNonNull(orderedRows, "orderedRows");
+        Objects.checkFromIndexSize(first, length, orderedRows.length);
+        validate(rowStates, length, requiredMask);
+        if (!NativeLibrary.AVAILABLE) {
+            throw new UnsatisfiedLinkError("m3_index_mask JNI library unavailable");
+        }
+        if (NativeRange.AVAILABLE) {
+            return selectRangeNative(orderedRows, rowStates, first, length, requiredMask);
+        }
+        return selectNative(java.util.Arrays.copyOfRange(orderedRows, first, first + length),
+                rowStates, requiredMask);
+    }
+
     /** Count set-flag matches without boxing, copying, or retaining a view. */
     public static int selectedCount(byte[] rowStates, int requiredMask) {
         Objects.requireNonNull(rowStates, "rowStates");
@@ -58,11 +128,23 @@ public final class M3IndexMaskCompactor {
         return countSelected(rowStates, requiredMask);
     }
 
+    /** Count required/excluded matches without allocating an index array. */
+    public static int selectedCount(byte[] rowStates, int requiredMask, int excludedMask) {
+        Objects.requireNonNull(rowStates, "rowStates");
+        requireMask(requiredMask);
+        requireMask(excludedMask);
+        if ((requiredMask & excludedMask) != 0) return 0;
+        return countSelected(rowStates, requiredMask, excludedMask);
+    }
+
     /** Primitive-long index selection, preserving source order and duplicate IDs. */
     public static long[] selectLong(long[] orderedRows, byte[] rowStates, int requiredMask) {
         Objects.requireNonNull(orderedRows, "orderedRows");
         validate(rowStates, orderedRows.length, requiredMask);
-        long[] selected = new long[countSelected(rowStates, requiredMask)];
+        int selectedCount = countSelected(rowStates, requiredMask);
+        // Every row is selected: one defensive primitive copy, no second mask scan.
+        if (selectedCount == orderedRows.length) return orderedRows.clone();
+        long[] selected = new long[selectedCount];
         int written = 0;
         for (int i = 0; i < orderedRows.length; i++) {
             if (matches(rowStates[i], requiredMask)) {
@@ -73,6 +155,36 @@ public final class M3IndexMaskCompactor {
             }
         }
         if (written != selected.length) {
+            throw new ConcurrentModificationException("aligned selection states changed");
+        }
+        return selected;
+    }
+
+    /**
+     * Primitive-long selection requiring every included flag and no excluded flag.
+     * Existing required-only APIs remain byte-for-byte unchanged. A conflicting
+     * mask returns an empty detached result; both inputs must remain stable.
+     */
+    public static long[] selectLong(long[] orderedRows, byte[] rowStates,
+            int requiredMask, int excludedMask) {
+        Objects.requireNonNull(orderedRows, "orderedRows");
+        validate(rowStates, orderedRows.length, requiredMask);
+        requireMask(excludedMask);
+        if (excludedMask == 0) return selectLong(orderedRows, rowStates, requiredMask);
+        if ((requiredMask & excludedMask) != 0) return new long[0];
+        int count = countSelected(rowStates, requiredMask, excludedMask);
+        if (count == orderedRows.length) return orderedRows.clone();
+        long[] selected = new long[count];
+        int written = 0;
+        for (int index = 0; index < orderedRows.length; index++) {
+            if (matches(rowStates[index], requiredMask, excludedMask)) {
+                if (written == count) {
+                    throw new ConcurrentModificationException("aligned selection states changed");
+                }
+                selected[written++] = orderedRows[index];
+            }
+        }
+        if (written != count) {
             throw new ConcurrentModificationException("aligned selection states changed");
         }
         return selected;
@@ -94,12 +206,24 @@ public final class M3IndexMaskCompactor {
     }
 
     static boolean matches(byte state, int requiredMask) {
-        return ((state & 0xff) & requiredMask) == requiredMask;
+        return matches(state, requiredMask, 0);
+    }
+
+    static boolean matches(byte state, int requiredMask, int excludedMask) {
+        int bits = state & 0xff;
+        return (bits & requiredMask) == requiredMask && (bits & excludedMask) == 0;
     }
 
     private static int countSelected(byte[] states, int requiredMask) {
+        return countSelected(states, requiredMask, 0);
+    }
+
+    private static int countSelected(byte[] states, int requiredMask, int excludedMask) {
+        if ((requiredMask | excludedMask) == 0) return states.length;
         int kept = 0;
-        for (byte state : states) if (matches(state, requiredMask)) kept++;
+        for (byte state : states) {
+            if (matches(state, requiredMask, excludedMask)) kept++;
+        }
         return kept;
     }
 
@@ -108,7 +232,10 @@ public final class M3IndexMaskCompactor {
      * or per-element object. Caller must keep both input arrays stable during use.
      */
     static int[] selectJava(int[] orderedRows, byte[] rowStates, int requiredMask) {
-        int[] selected = new int[countSelected(rowStates, requiredMask)];
+        int selectedCount = countSelected(rowStates, requiredMask);
+        // Retain output isolation even when the mask selects every source index.
+        if (selectedCount == orderedRows.length) return orderedRows.clone();
+        int[] selected = new int[selectedCount];
         int written = 0;
         for (int i = 0; i < orderedRows.length; i++) {
             if (matches(rowStates[i], requiredMask)) {
@@ -123,6 +250,131 @@ public final class M3IndexMaskCompactor {
         }
         return selected;
     }
+
+    /** Exact-sized logical-position selection; no O(n) identity input scratch. */
+    static int[] selectPositionsJava(byte[] rowStates, int requiredMask) {
+        return selectPositionsJava(rowStates, requiredMask, 0);
+    }
+
+    static int[] selectPositionsJava(byte[] rowStates, int requiredMask, int excludedMask) {
+        int selectedCount = countSelected(rowStates, requiredMask, excludedMask);
+        if (selectedCount == rowStates.length) return identityPositions(rowStates.length);
+        int[] selected = new int[selectedCount];
+        int written = 0;
+        for (int i = 0; i < rowStates.length; i++) {
+            if (matches(rowStates[i], requiredMask, excludedMask)) {
+                if (written == selected.length) {
+                    throw new ConcurrentModificationException("aligned selection states changed");
+                }
+                selected[written++] = i;
+            }
+        }
+        if (written != selected.length) {
+            throw new ConcurrentModificationException("aligned selection states changed");
+        }
+        return selected;
+    }
+
+    private static int[] identityPositions(int length) {
+        int[] positions = new int[length];
+        for (int i = 0; i < length; i++) positions[i] = i;
+        return positions;
+    }
+
+    /**
+     * Select a bounded logical window with independently validated offsets into
+     * the dynamic row and state lanes; no input slices or per-row objects.
+     * The detached result preserves source encounter order and duplicate IDs.
+     * Both inputs must remain stable during this call.
+     */
+    public static int[] selectWindow(int[] orderedRows, int rowOffset,
+                                     byte[] states, int stateOffset, int length,
+                                     int requiredMask, Backend backend) {
+        Objects.requireNonNull(orderedRows, "orderedRows");
+        Objects.requireNonNull(states, "states");
+        Objects.requireNonNull(backend, "backend");
+        Objects.checkFromIndexSize(rowOffset, length, orderedRows.length);
+        Objects.checkFromIndexSize(stateOffset, length, states.length);
+        requireMask(requiredMask);
+        if (backend == Backend.NATIVE_REQUIRED) {
+            if (!NativeLibrary.AVAILABLE) {
+                throw new UnsatisfiedLinkError("m3_index_mask JNI library unavailable");
+            }
+            return selectWindowNative(orderedRows, rowOffset, states, stateOffset,
+                    length, requiredMask);
+        }
+        int kept = countWindow(states, stateOffset, length, requiredMask);
+        if (kept == length) {
+            return java.util.Arrays.copyOfRange(orderedRows, rowOffset, rowOffset + length);
+        }
+        int[] selected = new int[kept];
+        int written = 0;
+        for (int i = 0; i < length; i++) {
+            if (matches(states[stateOffset + i], requiredMask)) {
+                if (written == kept) {
+                    throw new ConcurrentModificationException("aligned selection states changed");
+                }
+                selected[written++] = orderedRows[rowOffset + i];
+            }
+        }
+        if (written != kept) {
+            throw new ConcurrentModificationException("aligned selection states changed");
+        }
+        return selected;
+    }
+
+    /** Primitive-long counterpart, preserving signed extremes and duplicates. */
+    public static long[] selectLongWindow(long[] orderedRows, int rowOffset,
+                                          byte[] states, int stateOffset, int length,
+                                          int requiredMask, Backend backend) {
+        Objects.requireNonNull(orderedRows, "orderedRows");
+        Objects.requireNonNull(states, "states");
+        Objects.requireNonNull(backend, "backend");
+        Objects.checkFromIndexSize(rowOffset, length, orderedRows.length);
+        Objects.checkFromIndexSize(stateOffset, length, states.length);
+        requireMask(requiredMask);
+        if (backend == Backend.NATIVE_REQUIRED) {
+            if (!NativeLibrary.AVAILABLE) {
+                throw new UnsatisfiedLinkError("m3_index_mask JNI library unavailable");
+            }
+            return selectLongWindowNative(orderedRows, rowOffset, states, stateOffset,
+                    length, requiredMask);
+        }
+        int kept = countWindow(states, stateOffset, length, requiredMask);
+        if (kept == length) {
+            return java.util.Arrays.copyOfRange(orderedRows, rowOffset, rowOffset + length);
+        }
+        long[] selected = new long[kept];
+        int written = 0;
+        for (int i = 0; i < length; i++) {
+            if (matches(states[stateOffset + i], requiredMask)) {
+                if (written == kept) {
+                    throw new ConcurrentModificationException("aligned selection states changed");
+                }
+                selected[written++] = orderedRows[rowOffset + i];
+            }
+        }
+        if (written != kept) {
+            throw new ConcurrentModificationException("aligned selection states changed");
+        }
+        return selected;
+    }
+
+    /** Zero-mask selection is known without reading any state words. */
+    private static int countWindow(byte[] states, int offset, int length, int mask) {
+        if (mask == 0) return length;
+        int kept = 0;
+        for (int i = 0; i < length; i++) {
+            if (matches(states[offset + i], mask)) kept++;
+        }
+        return kept;
+    }
+
+    private static native int[] selectWindowNative(int[] rows, int rowOffset,
+            byte[] states, int stateOffset, int length, int mask);
+
+    private static native long[] selectLongWindowNative(long[] rows, int rowOffset,
+            byte[] states, int stateOffset, int length, int mask);
 
     private static final class NativeLibrary {
         private static final boolean AVAILABLE;
@@ -139,6 +391,56 @@ public final class M3IndexMaskCompactor {
             AVAILABLE = loaded;
         }
     }
+
+    /** Lazy capability probe keeps old JNI binaries compatible with position selection. */
+    private static final class NativePositions {
+        private static final boolean AVAILABLE = available();
+        private static boolean available() {
+            try {
+                return positionsAbiNative() == 1;
+            } catch (UnsatisfiedLinkError legacyBinary) {
+                return false;
+            }
+        }
+    }
+
+    private static native int positionsAbiNative();
+
+    private static native int[] selectPositionsNative(byte[] rowStates, int requiredMask);
+
+    /** Lazy probe for the additive required/excluded logical-position ABI. */
+    private static final class NativePositionMasks {
+        private static final boolean AVAILABLE = available();
+        private static boolean available() {
+            try {
+                return positionsMasksAbiNative() == 1;
+            } catch (UnsatisfiedLinkError legacyBinary) {
+                return false;
+            }
+        }
+    }
+
+    private static native int positionsMasksAbiNative();
+
+    private static native int[] selectPositionsMasksNative(
+            byte[] rowStates, int requiredMask, int excludedMask);
+
+    /** Lazy probing does not change initialization of the legacy public native API. */
+    private static final class NativeRange {
+        private static final boolean AVAILABLE = available();
+        private static boolean available() {
+            try {
+                return rangeAbiNative() == 1;
+            } catch (UnsatisfiedLinkError legacyBinary) {
+                return false;
+            }
+        }
+    }
+
+    private static native int rangeAbiNative();
+
+    private static native int[] selectRangeNative(int[] orderedRows, byte[] rowStates,
+            int first, int length, int requiredMask);
 
     private static native int[] selectNative(int[] orderedRows, byte[] rowStates,
                                               int requiredMask);

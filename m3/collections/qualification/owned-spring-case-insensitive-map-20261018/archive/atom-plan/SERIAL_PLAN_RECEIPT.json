@@ -1,0 +1,100 @@
+{
+  "accepted_prior_readiness_receipt": {
+    "bytes": 8372,
+    "sha256": "992f81f74db163c08f7c45ae19b321d31f8926625e38608fc2570ee27278f167"
+  },
+  "before_code_source_bindings": 7,
+  "clone": "Own captured target hook-owner ancestor retained separately from local aliases and transient cached view lifecycle, subject to exact provider baseline.",
+  "contract_groups_covered": 40,
+  "entry_scope": "Defined API results preserved; repeated Entry reference identity remains an explicitly recorded NO_FIT concrete observer; external map-modification validity limits labelled before fixture seal.",
+  "explicit_law_provider_boundaries": 11,
+  "files_excluding_this_receipt": [
+    {
+      "bytes": 5330,
+      "path": "atom-plan/DONOR_ATOM_BINDINGS.json",
+      "sha256": "12351a8531009d1bfe55b392425b9347389fedaae9209d0649bae06f9ebe8a1f"
+    },
+    {
+      "bytes": 2595,
+      "path": "atom-plan/donors/M3Address28.java.txt",
+      "sha256": "5fa8a82e3655a675aa0d1e21ba456a7dae272776c605eeba4af22a9dbc7eaa56"
+    },
+    {
+      "bytes": 8519,
+      "path": "atom-plan/donors/M3ObjectSlotStore28.java.txt",
+      "sha256": "f8c19b2dd04c6198f5061685d7fb7890531620970510fe666ce5338b115d3b12"
+    },
+    {
+      "bytes": 1693,
+      "path": "atom-plan/ENTRY_OBSERVER_SCOPE.json",
+      "sha256": "37fab56ceca2ace914293fe89be3668e9c113fee5ee203d3058126cf49342774"
+    },
+    {
+      "bytes": 4223,
+      "path": "atom-plan/FOSS_IMPLEMENTATION_ATOM_DECISION.tsv",
+      "sha256": "94cc305a853b2598200bbdace1a5dce63e5bd69844b57fa219ecd665c529e2f8"
+    },
+    {
+      "bytes": 10594,
+      "path": "atom-plan/IMPLEMENTATION_ORDER.md",
+      "sha256": "637a696ea83646ff671a83b545b23e54f98c4b027e71128208e77b4967b2ef73"
+    },
+    {
+      "bytes": 5263,
+      "path": "atom-plan/LAW_PROVIDER_CONFLICTS.tsv",
+      "sha256": "fa31061bf6af2f4d66f99a59fffea2942688b1376648ed8d5d015d452238a954"
+    },
+    {
+      "bytes": 3379,
+      "path": "atom-plan/seal_donor_atoms.py",
+      "sha256": "2695f72d1f21642c4562e960dbaedf0059df6e7fa5fabc213a6cccd1a90eb744"
+    },
+    {
+      "bytes": 6061,
+      "path": "atom-plan/seal_serial_atom_plan.py",
+      "sha256": "eecc44b5bc6fb5dff70d8f49505080ba28c34aed6250d28b006791d990c73c88"
+    },
+    {
+      "bytes": 12112,
+      "path": "atom-plan/SERIAL_ATOM_PLAN.tsv",
+      "sha256": "1ab7d861aedbfdc23a44c730b48a74419232b77f16103c7ef97f499aaf00c4f0"
+    }
+  ],
+  "fixture_coordination": "Exact donor pins, clone-keyview/null-fold/held-entry witnesses and root identity partition sent to independent recipe_proof_impl before baseline seal. Its proof-plan directory was not edited.",
+  "foss_atom_decision_rows": 7,
+  "full_surface": {
+    "bridges": 4,
+    "constructors": 4,
+    "inherited_map_defaults": 7,
+    "nonbridge_instance_methods": 34,
+    "protected_hooks": 2
+  },
+  "logical_bytes_excluding_this_receipt": 59769,
+  "owner_generation_or_java_build_or_behavior_execution": false,
+  "paging_scope": "Conditional API-defined stability and proven firstparty reuse only; no whole28-bit allocator port or lifecycle admission.",
+  "production_candidate_directory_absent": true,
+  "schema": "m3-spring-source-only-serial-atom-plan-v1",
+  "serial_behavioral_atoms": 28,
+  "status": "SOURCE_ONLY; GENERATION_HELD_UNTIL_ROOT_FROZEN_PROVIDER_BASELINE",
+  "storage": "Own Object[] key/value lanes, primitive buckets/hashes/links/positions/state; independent ALIAS and PRESENT directories; no stored entrynodes/provider delegates/parents.",
+  "storage_after": {
+    "C_build_lane": "HELD",
+    "K_temp_lane": "UNAVAILABLE",
+    "cap_bytes": 536870912,
+    "free_bytes": 26190479360,
+    "logical_bytes": 31427735,
+    "reserve_bytes": 8589934592,
+    "root": "S:\\codex-work\\m3-collections-next-20261018",
+    "verified_child_temp": "S:\\codex-work\\m3-collections-next-20261018\\temp\\"
+  },
+  "storage_before": {
+    "C_build_lane": "HELD",
+    "K_temp_lane": "UNAVAILABLE",
+    "cap_bytes": 536870912,
+    "free_bytes": 26190479360,
+    "logical_bytes": 31427735,
+    "reserve_bytes": 8589934592,
+    "root": "S:\\codex-work\\m3-collections-next-20261018",
+    "verified_child_temp": "S:\\codex-work\\m3-collections-next-20261018\\temp\\"
+  }
+}

@@ -18,6 +18,7 @@ import subprocess
 import sys
 import xml.etree.ElementTree as ET
 import zipfile
+from m3_object_state_offset_receipt import include_successor as include_object_state_offset_successor
 
 HERE = Path(__file__).resolve().parent
 REPO = HERE.parents[1]
@@ -41,6 +42,130 @@ def read_donation_packet(path=HERE / 'synexia-donation.json'):
     """Read all nested objects without silently accepting duplicate JSON keys."""
     return json.loads(path.read_text(), object_pairs_hook=unique_json_object)
 
+
+
+# The next exact successor applies the validated stored-representative atom
+# without rewriting the six original filtered/sorted receiver source receipts.
+_REPRESENTATIVE_RECEIPT = HERE / 'recipe/stored-representative-20261017/manifest.tsv'
+_REPRESENTATIVE_SHA256 = 'a62827ffafc18bd6d710d7898741d2114a0068b8ac9ee63aac02e55038e1f293'
+_REPRESENTATIVE_PATHS = (
+    'm3/collections/src/main/java/com/m3/collections/M3FilteredViews.java',
+    'm3/collections/src/main/java/com/m3/collections/M3MutableFilteredViews.java',
+    'm3/collections/src/test/java/com/m3/collections/M3StoredRepresentativeContract.java',
+    'm3/collections/src/test/java/com/m3/collections/M3StoredRepresentativeTest.java',
+)
+
+
+def include_stored_representative_successor(previous_rows,
+        receipt=_REPRESENTATIVE_RECEIPT):
+    """Source-sealed additive correction for exactly two owners and two tests.
+
+    Verify the full previous receipt first, then only replace those two
+    exact old digests and append the two new Java21 test owners. No historical
+    manifest rewriting, unknown source admission or permissive wildcards.
+    """
+    if not receipt.exists() and not receipt.is_symlink():
+        return list(previous_rows)
+    if receipt.is_symlink() or not receipt.is_file() or digest(receipt) != _REPRESENTATIVE_SHA256:
+        raise SystemExit('Stored-representative successor missing, aliased or drifted')
+    entries = [line.split('\t') for line in receipt.read_text(encoding='utf-8').splitlines()]
+    if len(entries) != len(_REPRESENTATIVE_PATHS):
+        raise SystemExit('Stored-representative successor must declare exactly four paths')
+    current = {path: expected for path, expected in previous_rows}
+    if len(current) != len(previous_rows):
+        raise SystemExit('Duplicate prior stored-representative source path')
+    extras = []
+    for cells, expected_path in zip(entries, _REPRESENTATIVE_PATHS):
+        if len(cells) != 4:
+            raise SystemExit('Malformed stored-representative successor')
+        path, before, after, template = cells
+        if (path != expected_path or len(after) != 64
+                or any(c not in '0123456789abcdef' for c in after)
+                or template != path.rsplit('/', 1)[1] + '.after'):
+            raise SystemExit('Unapproved stored-representative source: ' + path)
+        if before == 'ABSENT':
+            if path in current:
+                raise SystemExit('Occupied new stored-representative source: ' + path)
+            extras.append((path, after))
+        else:
+            if current.get(path) != before:
+                raise SystemExit('Stored-representative source preimage drift: ' + path)
+            current[path] = after
+    return [(path, current[path]) for path, _ in previous_rows] + extras
+
+
+# The historical installed-source receipt remains immutable. This optional
+# additive overlay is authored by the Synexia OpenRewrite collection receiver.
+_FILTERED_VIEW_RECEIPT = HERE / 'recipe/filtered-sorted-views-20261017/manifest.tsv'
+_FILTERED_VIEW_SHA256 = '828e24b44e4d0b98c6819bb9dd983d71084ae0661e1d81fe90bd0dd286c50ede'
+_FILTERED_VIEW_PATHS = (
+    'm3/collections/src/main/java/com/m3/collections/M3FilteredViews.java',
+    'm3/collections/src/main/java/com/m3/collections/M3MutableFilteredViews.java',
+    'm3/collections/src/test/java/com/m3/collections/M3FilteredViewsContract.java',
+    'm3/collections/src/test/java/com/m3/collections/M3FilteredViewsTest.java',
+    'm3/collections/src/test/java/com/m3/collections/M3MutableFilteredViewsContract.java',
+    'm3/collections/src/test/java/com/m3/collections/M3MutableFilteredViewsTest.java',
+)
+
+
+def include_filtered_view_successor(historical_rows, receipt=_FILTERED_VIEW_RECEIPT):
+    """Admit only the exact six source-sealed, additive receiver files.
+
+    Missing overlay preserves historical behavior; unlisted Java files still fail
+    below. An invalid/aliased overlay is never treated as silently absent.
+    """
+    if not receipt.exists() and not receipt.is_symlink():
+        return list(historical_rows)
+    if receipt.is_symlink() or not receipt.is_file() or digest(receipt) != _FILTERED_VIEW_SHA256:
+        raise SystemExit('Filtered-view successor manifest missing, aliased or drifted')
+    entries = [line.split('\t') for line in receipt.read_text(encoding='utf-8').splitlines()]
+    if len(entries) != len(_FILTERED_VIEW_PATHS):
+        raise SystemExit('Filtered-view successor must declare exactly six paths')
+    extra = []
+    for entry, expected_path in zip(entries, _FILTERED_VIEW_PATHS):
+        if len(entry) != 4:
+            raise SystemExit('Malformed filtered-view successor row')
+        path, before, after, template = entry
+        if (path != expected_path or before != 'ABSENT'
+                or len(after) != 64 or any(c not in '0123456789abcdef' for c in after)
+                or template != path.rsplit('/', 1)[1] + '.after'):
+            raise SystemExit('Unapproved filtered-view receiver source: ' + path)
+        extra.append((path, after))
+    return [*historical_rows, *extra]
+
+
+# Additive M3IndexPathMasks receiving overlay. The pre-existing source manifest
+# and filtered/sorted receiver seal are immutable; this successor is exact and opt-in.
+_PATH_MASK_RECEIPT = HERE / 'recipe/index-path-masks-20261017/manifest.tsv'
+_PATH_MASK_SHA256 = '1cba7c9ed681fbe65653b75949558640ea5aa31a1e3c8f5d83d27f9197518020'
+_PATH_MASK_PATHS = (
+    'm3/collections/src/main/java/com/m3/collections/M3IndexPathMasks.java',
+    'm3/collections/src/main/native/collections/m3_index_path_masks.c',
+    'm3/collections/src/test/java/com/m3/collections/M3IndexPathMasksSelfTest.java',
+    'm3/collections/src/test/java/com/m3/collections/M3IndexPathMasksTest.java',
+)
+
+
+def include_path_mask_successor(historical_rows, receipt=_PATH_MASK_RECEIPT):
+    """Admit only the four SHA-256 sealed Java/JNI path-mask receiver sources."""
+    if not receipt.exists() and not receipt.is_symlink():
+        return list(historical_rows)
+    if receipt.is_symlink() or not receipt.is_file() or digest(receipt) != _PATH_MASK_SHA256:
+        raise SystemExit('Index-path-mask successor manifest missing, aliased or drifted')
+    entries = [line.split('\t') for line in receipt.read_text(encoding='utf-8').splitlines()]
+    if len(entries) != len(_PATH_MASK_PATHS):
+        raise SystemExit('Index-path-mask successor must declare exactly four paths')
+    extra = []
+    for entry, expected_path in zip(entries, _PATH_MASK_PATHS):
+        if len(entry) != 4:
+            raise SystemExit('Malformed index-path-mask successor row')
+        path, before, after, template = entry
+        if (path != expected_path or before != 'ABSENT'
+                or len(after) != 64 or any(c not in '0123456789abcdef' for c in after)
+                or template != path.rsplit('/', 1)[1] + '.after'):
+            raise SystemExit('Unapproved index-path-mask receiver source: ' + path)
+        extra.append((path, after))
+    return [*historical_rows, *extra]
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
@@ -84,6 +209,8 @@ def main():
         raise SystemExit('Installed source manifest drift: actual=' + digest(manifest) + ' expected=' + packet['installed_source_manifest_sha256'] + '; reconcile with canonical recipe before verifying')
     rows = [line.split('\t') for line in manifest.read_text().splitlines()
             if line and not line.startswith('#')]
+    rows = include_path_mask_successor(include_stored_representative_successor(include_filtered_view_successor(rows)))
+    rows = include_object_state_offset_successor(rows)
     if len({row[0] for row in rows}) != len(rows):
         raise SystemExit('Duplicate installed source path')
     for path, expected in rows:
@@ -91,7 +218,10 @@ def main():
         if relative.is_absolute() or '..' in relative.parts or not path.startswith('m3/collections/'):
             raise SystemExit('Invalid receiver path: ' + path)
         source = REPO / relative
-        if not source.is_file() or digest(source) != expected:
+        if (not source.is_file()
+                or (path.endswith("/M3ObjectStateSlots28.java")
+                    or path.endswith("/M3ObjectStateSlots28SelfTest.java")) and source.is_symlink()
+                or digest(source) != expected):
             raise SystemExit('Installed source drift: ' + path)
     declared_java = {path for path, _ in rows if path.endswith('.java') and '/src/' in path}
     actual_java = {str(path.relative_to(REPO)) for path in (HERE / 'src').rglob('*.java')}

@@ -21,7 +21,7 @@
       },
       "after": {
         "resource": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/01-m3-tq.yml.txt",
-        "sha256": "ed5bb9a6a3bcd32eb13dabf7cfc60ac406fe89b1eb34c0fe01286fc4327ae894"
+        "sha256": "783e59db8ae27787a5cc40310f534e90ae24d60ebdc71c5feb3f30f35a85972b"
       }
     },
     {
@@ -106,7 +106,7 @@
       },
       "after": {
         "resource": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/09-inputs.tsv.txt",
-        "sha256": "d764241cfc52f875c7c2b1b20f27b46d5bdce17d39e05cd32b3e409061ebe17e"
+        "sha256": "6f602866bae4dc215675311740a6f3d9b7795c866674e3f1f813c37ad07c075a"
       }
     },
     {
@@ -128,7 +128,7 @@
       },
       "after": {
         "resource": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/11-plan.json.txt",
-        "sha256": "8e6db1b290e9ee55bc028ce51e4aae85773cb8be167b7193ee721b031f46be4b"
+        "sha256": "3f416942febd9d1d96a6d9da6bdd7a2462cb905a153b722216d2239ce0cef81c"
       }
     },
     {
@@ -139,7 +139,7 @@
       },
       "after": {
         "resource": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/12-manifest.tsv.txt",
-        "sha256": "61f9431a2426d37e910d64fdf337d604d3cc5af31bb25bb546acdc0d07a1fd38"
+        "sha256": "456ce63b32cbeecefb417f082b4faf734d1652e7dc1a6c60e46bc86bde09d608"
       }
     },
     {
@@ -183,7 +183,7 @@
       },
       "after": {
         "resource": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/16-workflow.yml.txt.txt",
-        "sha256": "ed5bb9a6a3bcd32eb13dabf7cfc60ac406fe89b1eb34c0fe01286fc4327ae894"
+        "sha256": "783e59db8ae27787a5cc40310f534e90ae24d60ebdc71c5feb3f30f35a85972b"
       }
     },
     {
@@ -227,7 +227,7 @@
       },
       "after": {
         "resource": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/20-TQTest.java.txt",
-        "sha256": "584ea5dd53862f1519b7a8c4fc2c41454a0e61c29cff8da8a759011a8572e24d"
+        "sha256": "7ce7e90af7f0011c133ef71f2b75b01f17b02a102d3b2b70bd01856092467c8c"
       }
     },
     {
@@ -290,5 +290,5 @@
       "sha256": "3401754e77113c76d15c7f70844ae95e210000fb31c2be4a15b668aa7d3c64e5"
     }
   ],
-  "plan_sha256": "31b03129fe81d5e0681185763ad0d2059c16bcd7b93e7dc4b8290880c5317096"
+  "plan_sha256": "e7cb12198f014aef19b831cc62454e00f6e046c6f367b8b9de3c41f3745b99e9"
 }

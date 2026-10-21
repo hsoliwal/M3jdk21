@@ -1,0 +1,14 @@
+{
+  "java": "/tmp/m3-toolchain/jdk-21.0.12.1+1/bin/java",
+  "openrewrite_jars": [
+    "/tmp/m3-maven-repository/org/openrewrite/rewrite-core/8.17.1/rewrite-core-8.17.1.jar",
+    "/tmp/m3-maven-repository/org/openrewrite/rewrite-java/8.17.1/rewrite-java-8.17.1.jar",
+    "/tmp/m3-maven-repository/org/openrewrite/rewrite-java-21/8.17.1/rewrite-java-21-8.17.1.jar",
+    "/tmp/m3-maven-repository/org/openrewrite/rewrite-xml/8.17.1/rewrite-xml-8.17.1.jar",
+    "/tmp/m3-maven-repository/org/openrewrite/rewrite-yaml/8.17.1/rewrite-yaml-8.17.1.jar",
+    "/tmp/m3-maven-repository/org/openrewrite/tools/java-object-diff/1.0.1/java-object-diff-1.0.1.jar",
+    "/tmp/m3-maven-repository/org/openrewrite/tools/java-object-diff/1.0.2/java-object-diff-1.0.2.jar",
+    "/tmp/m3-maven-repository/org/openrewrite/tools/jgit/1.5.0/jgit-1.5.0.jar"
+  ],
+  "exit_code": 0
+}
