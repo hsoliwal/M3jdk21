@@ -16,7 +16,7 @@ cp "$ROOT/src/java.base/share/classes/java/util/CollectionViews.java" "$OUT/afte
   test "$(git -C "$ROOT" hash-object "$OUT/after-src/java/util/CollectionViews.java")" = "b3d21d61844f070df99b0289e514eff350a3f6e7"
   printf '%s  %s\n' "a6ea3101c0573d33808b5a25262e4bf26d72d2a8882ee544cfbbe3e693f7145d" "$OUT/before-src/java/util/CollectionViews.java" | sha256sum -c -
   printf '%s  %s\n' "f32eeb5079bcd6322e597303a937614931b7f33779a58d0ed03b53ae0a8302c6" "$ROOT/test/jdk/java/util/CollectionViews/StoredRepresentativeOracle.java" | sha256sum -c -
-  sha256sum "$OUT/after-src/java/util/CollectionViews.java"
+  printf '%s  %s\n' "c3da7a7f33b7a90058a8b033b6df65df6b56409495567253e836b50dd985bc40" "$OUT/after-src/java/util/CollectionViews.java" | sha256sum -c -
 } | tee "$OUT/seals.log"
 java -version > "$OUT/java-version.log" 2>&1
 javac -version > "$OUT/javac-version.log" 2>&1
