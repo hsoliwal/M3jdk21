@@ -1,0 +1,14 @@
+# SPDX-License-Identifier: Apache-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.TokenRegexConvergence
+displayName: Complete M3JDK token-aware regex over M3 token lanes
+description: >-
+  Current-master receiver for token-sequence regular expressions in java.base. Receives the
+  existing T-Rex-shaped M3TokenPattern/M3TokenIndex scaffold, completes regex predicate rows, and
+  replaces M3TokenMatcher's pending bodies with a bounded primitive endpoint-folding executor.
+  Storage-atom/tuple boundaries are never token boundaries. Six ABSENT targets are exact
+  hash-pinned postimages; a second application is fixed-point and a future competing owner is
+  refused rather than overwritten.
+recipeList:
+  - com.m3.rewrite.backport.M3Jdk21HashPinnedSnapshotRecipe:
+      crateName: m3-token-regex-convergence
