@@ -40,6 +40,11 @@ public interface M3FileCharShadow {
         return new M3FileTokenShadow();
     }
 
+    /** One-read paragraph structure, retained as bounded primitive offset/index/mask lanes. */
+    static M3Grammar grammar(int maxParagraphs) {
+        return M3Grammar.paragraphs(maxParagraphs);
+    }
+
     /** Collects the decoded text; for small files and tests. */
     static M3FileTextShadow text() {
         return new M3FileTextShadow();
