@@ -309,6 +309,19 @@ public final class M3RegexDpPlan {
             if (count < 0) throw new IllegalArgumentException("negative repeat count");
             long total = Math.multiplyExact(length, count);
             check(checkpoint);
+            // Preserve the original callback schedule and fresh Effect identity. Rows
+            // are private immutable summaries, so count one can share them safely.
+            // Keep both Unicode seam fields: a later join may complete a split pair.
+            if (count == 0) {
+                long[] empty = identityRows();
+                check(checkpoint);
+                return new Effect(empty, total);
+            }
+            if (count == 1) {
+                check(checkpoint);
+                check(checkpoint);
+                return new Effect(rows, total, withoutLeadingLow, trailingHigh);
+            }
             if (withoutLeadingLow != null || trailingHigh) {
                 return repeatedUtf16(count, total, checkpoint);
             }
@@ -363,7 +376,9 @@ public final class M3RegexDpPlan {
     }
 
     private static void composeJava(long[] left, long[] right, long[] result) {
-        for (int i = 0; i < left.length; i++) result[i] = applyRows(right, left[i]);
+        // Reuse the product's existing ordered primitive relation atom. All callers
+        // supply this plan's dimensions/domain and a distinct destination row array.
+        M3StateRelation.compose(left, 0, right, 0, result, 0, left.length);
     }
 
     private static long applyRows(long[] rows, long frontier) {
