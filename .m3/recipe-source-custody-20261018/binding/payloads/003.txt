@@ -1,0 +1,140 @@
+{
+  "schema": "synexia.recipe-source-custody-binding.v1",
+  "campaign": "public-fork-home-20261018",
+  "created_at_utc": "2026-10-18T08:01:12.888283+00:00",
+  "target": {
+    "repository": "hsoliwal/M3jdk21",
+    "default_ref": "refs/heads/master",
+    "base_sha": "275b610f26c191cd70420172ac65b634a8a4df49"
+  },
+  "canonical": {
+    "repository": "hsoliwal/com.synexia",
+    "source_commit": "215546d1ca0e724eb2c8e2e8ef6b4adce724733a",
+    "crate_path": "synexia-openrewrite-recipes/recipe-crates/public-fork-home-20261018",
+    "recipe_class": "com.synexia.rewrite.M3PublicForkRecipeHomeRecipe",
+    "recipe_name": "com.synexia.m3.PublicForkRecipeHome20261018",
+    "sdk_artifact": "com.synexia.verification:public-fork-recipe-home:2026.10.18",
+    "source_custody_path": "synexia-openrewrite-recipes/recipe-crates/public-fork-home-20261018/SOURCE_CUSTODY.tsv",
+    "source_custody_sha256": "ebcfbd42a49eec806f0a4572af731828deda41f22c17250d34d49af985d78f1d",
+    "snapshot_paths": [
+      "synexia-openrewrite-recipes/vendor/public-forks/hsoliwal/M3jdk21/default-275b610f26c1",
+      "synexia-openrewrite-recipes/vendor/public-forks/hsoliwal/M3jdk21/default-e913ab890566",
+      "synexia-openrewrite-recipes/vendor/public-forks/hsoliwal/M3jdk21/pr-1146-bb65589bb225",
+      "synexia-openrewrite-recipes/vendor/public-forks/hsoliwal/M3jdk21/pr-1147-ade2db89f45d",
+      "synexia-openrewrite-recipes/vendor/public-forks/hsoliwal/M3jdk21/pr-1148-d6d565a33664",
+      "synexia-openrewrite-recipes/vendor/public-forks/hsoliwal/M3jdk21/pr-1149-95c155a277c1",
+      "synexia-openrewrite-recipes/vendor/public-forks/hsoliwal/M3jdk21/pr-1150-c6490fa4ad5b",
+      "synexia-openrewrite-recipes/vendor/public-forks/hsoliwal/M3jdk21/pr-1151-7d730a48eeec",
+      "synexia-openrewrite-recipes/vendor/public-forks/hsoliwal/M3jdk21/pr-1152-c62407711c88",
+      "synexia-openrewrite-recipes/vendor/public-forks/hsoliwal/M3jdk21/pr-1153-f9435f0beaa8",
+      "synexia-openrewrite-recipes/vendor/public-forks/hsoliwal/M3jdk21/pr-1154-c3cc813959bb",
+      "synexia-openrewrite-recipes/vendor/public-forks/hsoliwal/M3jdk21/pr-1155-9a20757243a0",
+      "synexia-openrewrite-recipes/vendor/public-forks/hsoliwal/M3jdk21/pr-1156-e36049afb10d",
+      "synexia-openrewrite-recipes/vendor/public-forks/hsoliwal/M3jdk21/pr-1157-44f678ff256c",
+      "synexia-openrewrite-recipes/vendor/public-forks/hsoliwal/M3jdk21/pr-1158-6c3874960bfa",
+      "synexia-openrewrite-recipes/vendor/public-forks/hsoliwal/M3jdk21/pr-1159-9e7f75808a7f",
+      "synexia-openrewrite-recipes/vendor/public-forks/hsoliwal/M3jdk21/pr-1160-68a0da03883b",
+      "synexia-openrewrite-recipes/vendor/public-forks/hsoliwal/M3jdk21/pr-1161-01a95a342500",
+      "synexia-openrewrite-recipes/vendor/public-forks/hsoliwal/M3jdk21/pr-1162-aeece7a984e8",
+      "synexia-openrewrite-recipes/vendor/public-forks/hsoliwal/M3jdk21/pr-1163-6c404e6da159",
+      "synexia-openrewrite-recipes/vendor/public-forks/hsoliwal/M3jdk21/pr-1164-9b7620f59224",
+      "synexia-openrewrite-recipes/vendor/public-forks/hsoliwal/M3jdk21/pr-1165-b3ef065b1434",
+      "synexia-openrewrite-recipes/vendor/public-forks/hsoliwal/M3jdk21/pr-1166-1bf7e8222728",
+      "synexia-openrewrite-recipes/vendor/public-forks/hsoliwal/M3jdk21/pr-1167-47a43f7b153d",
+      "synexia-openrewrite-recipes/vendor/public-forks/hsoliwal/M3jdk21/pr-1168-12cd083e71a3",
+      "synexia-openrewrite-recipes/vendor/public-forks/hsoliwal/M3jdk21/pr-1169-f27e3759f8eb",
+      "synexia-openrewrite-recipes/vendor/public-forks/hsoliwal/M3jdk21/pr-1170-0024611781b1",
+      "synexia-openrewrite-recipes/vendor/public-forks/hsoliwal/M3jdk21/pr-1171-58e473562ddb",
+      "synexia-openrewrite-recipes/vendor/public-forks/hsoliwal/M3jdk21/pr-1172-17370668c705",
+      "synexia-openrewrite-recipes/vendor/public-forks/hsoliwal/M3jdk21/pr-1173-2a2ddd435785",
+      "synexia-openrewrite-recipes/vendor/public-forks/hsoliwal/M3jdk21/pr-1174-58a72d0b2b8f",
+      "synexia-openrewrite-recipes/vendor/public-forks/hsoliwal/M3jdk21/pr-1174-88ff3b3dd275",
+      "synexia-openrewrite-recipes/vendor/public-forks/hsoliwal/M3jdk21/pr-1175-de10335db2d3",
+      "synexia-openrewrite-recipes/vendor/public-forks/hsoliwal/M3jdk21/pr-1176-d873adfb679d",
+      "synexia-openrewrite-recipes/vendor/public-forks/hsoliwal/M3jdk21/pr-1177-060ca56702e8",
+      "synexia-openrewrite-recipes/vendor/public-forks/hsoliwal/M3jdk21/pr-1178-312e853395d5",
+      "synexia-openrewrite-recipes/vendor/public-forks/hsoliwal/M3jdk21/pr-1179-31cdce1db97f",
+      "synexia-openrewrite-recipes/vendor/public-forks/hsoliwal/M3jdk21/pr-1180-422819598632",
+      "synexia-openrewrite-recipes/vendor/public-forks/hsoliwal/M3jdk21/pr-1181-860bdf205c44",
+      "synexia-openrewrite-recipes/vendor/public-forks/hsoliwal/M3jdk21/pr-1182-fc581472e3eb",
+      "synexia-openrewrite-recipes/vendor/public-forks/hsoliwal/M3jdk21/pr-1183-7e3235182b29",
+      "synexia-openrewrite-recipes/vendor/public-forks/hsoliwal/M3jdk21/pr-1184-92c8fe6456ae",
+      "synexia-openrewrite-recipes/vendor/public-forks/hsoliwal/M3jdk21/pr-1185-65cda4f25a9e",
+      "synexia-openrewrite-recipes/vendor/public-forks/hsoliwal/M3jdk21/pr-1186-a27fd892978e",
+      "synexia-openrewrite-recipes/vendor/public-forks/hsoliwal/M3jdk21/pr-1187-f465dcff6593",
+      "synexia-openrewrite-recipes/vendor/public-forks/hsoliwal/M3jdk21/pr-1188-1047cb265fa4",
+      "synexia-openrewrite-recipes/vendor/public-forks/hsoliwal/M3jdk21/pr-1244-098c4de24fd4",
+      "synexia-openrewrite-recipes/vendor/public-forks/hsoliwal/M3jdk21/pr-1245-0286d9ec096e"
+    ]
+  },
+  "ownership": {
+    "reusable_recipe_source": "hsoliwal/com.synexia",
+    "product_source": "TARGET_REPOSITORY",
+    "build_api_runtime_promotion": "TARGET_REPOSITORY"
+  },
+  "retained_mirrors": {
+    "state": "PINNED_PUBLIC_SOURCE_MIRRORS",
+    "roots": [
+      ".m3/openrewrite-recipes",
+      "m3/backports/recipes",
+      "m3/collections",
+      "m3/synexia-import",
+      "m3/tooling",
+      "m3/vendor/synexia"
+    ],
+    "source_revision": "275b610f26c191cd70420172ac65b634a8a4df49",
+    "build_and_proof_callers_migrated": false,
+    "retention_condition": "Retain source mirrors until build and proof callers can use a qualified canonical handoff."
+  },
+  "original_packet_verification": {
+    "scope": "LISTED_PACKETS_ONLY",
+    "status": "INVENTORIED_GATES_PENDING",
+    "product_files_changed": 0,
+    "packets": [],
+    "evidence": []
+  },
+  "qualification": {
+    "canonical_kernel": {
+      "status": "PASS",
+      "execution": "MAVEN_KERNEL_EXECUTION",
+      "manifest_checks": 10600,
+      "replay_checks": 40,
+      "evidence": [
+        {
+          "repository": "hsoliwal/com.synexia",
+          "revision": "215546d1ca0e724eb2c8e2e8ef6b4adce724733a",
+          "path": "synexia-openrewrite-recipes/recipe-crates/public-fork-home-20261018/evidence/canonical-engine/original-test-runs.json",
+          "sha256": "7c8ecb7aee9e802125b98fb437e5fe0177e66f36d950cf24ea0ea710d2c5807d"
+        },
+        {
+          "repository": "hsoliwal/com.synexia",
+          "revision": "215546d1ca0e724eb2c8e2e8ef6b4adce724733a",
+          "path": "synexia-openrewrite-recipes/recipe-crates/public-fork-home-20261018/evidence/canonical-engine/engine-identity-50f48.json",
+          "sha256": "bf6963c8d06be41c0f71458d56422c0e2e0395719dd77d83a8c33bde958ce767"
+        },
+        {
+          "repository": "hsoliwal/com.synexia",
+          "revision": "215546d1ca0e724eb2c8e2e8ef6b4adce724733a",
+          "path": "synexia-openrewrite-recipes/recipe-crates/public-fork-home-20261018/evidence/CANONICAL_REPLAY.json",
+          "sha256": "beaf50843f4f742165c18d2d3f46aa5563f116f1f6339daf445a2ffc1e66f0b3"
+        }
+      ]
+    },
+    "canonical_sdk": {
+      "status": "BLOCKED_BEFORE_COMPILATION",
+      "tests_executed": 0,
+      "first_blocker": "org.apache.maven.plugins:maven-resources-plugin:3.3.1 absent from approved offline cache",
+      "evidence": [
+        {
+          "repository": "hsoliwal/com.synexia",
+          "revision": "215546d1ca0e724eb2c8e2e8ef6b4adce724733a",
+          "path": "synexia-openrewrite-recipes/recipe-crates/public-fork-home-20261018/evidence/canonical-engine/public-fork-home-sdk-attempt.json",
+          "sha256": "3adb4b3ffacc4446728dca2641130609d28c00756142fdac6da39d8bf842a68d"
+        }
+      ]
+    },
+    "native_product": "NOT_RUN_IN_THIS_EXECUTION",
+    "handoff_build_callers": "PENDING_QUALIFIED_CALLER_MIGRATION"
+  },
+  "promotion_authority": false
+}

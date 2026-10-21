@@ -1,0 +1,18 @@
+{
+  "schema": "M3_MASK_PROJECTION_POST_MERGE_V1",
+  "pr": 1142,
+  "observed_state": "closed/merged",
+  "merged_at": "2026-10-17T13:11:33Z",
+  "merge_commit": "e913ab89056657eca4009678cfe9a657c020e79b",
+  "merge_tree": "0fc2098bebc968f2ac1fe6b1a74b8fc6f26acf54",
+  "merge_performed_by_this_task": false,
+  "merge_message_disposition": "preserve current master tree unchanged; retain PR heads as explicit parents",
+  "qualified_projection_blob": "3903692e611c8b91cd043d92547249facbcf939e",
+  "merge_projection_blob": "317136e66200db1d8fc72d47ff9f8cf52b4566b5",
+  "qualified_native_blob": "0e8669991317266651e2d7a129bbf4b94b716797",
+  "merge_native_blob": "073d16f32c268b67b2b21a8d4152494654df8d56",
+  "qualification_applies_to": "9ab8197611e4a9f9d1a285a687bca16fd47d1d50 exact source; canonical45-file receiver",
+  "integration_status": "PENDING_RECONCILIATION; ancestry is not byte identity or semantic equivalence",
+  "new_owner_preservation": "merged projection uses M3LongAddressKernel and selectNativeRange; do not overwrite with frozen pre-range implementation",
+  "scope": "readback only; no merged-source compilation/JNI qualification claimed"
+}

@@ -12,21 +12,30 @@
 
   <modules>
     <module>indexdb</module>
+    <module>fs</module>
     <module>synexia-import</module>
     <module>synexia-import/pure-int-recipe-custody</module>
     <module>tooling/migration-recipes</module>
     <module>tooling/synexia-jdk-a3-recipes</module>
     <module>tooling/a3</module>
     <module>tooling/backport-dag</module>
+    <module>tooling/recipe-agent-api</module>
     <module>backports</module>
     <module>tooling/module-packs</module>
   </modules>
 
   <profiles>
     <profile>
+      <id>m3fs-eclipse</id>
+      <modules>
+        <module>eclipse/filesystem</module>
+      </modules>
+    </profile>
+    <profile>
       <id>m3-extended</id>
       <modules>
         <module>collections</module>
+        <module>viewport-core</module>
       </modules>
     </profile>
     <profile>
@@ -54,11 +63,15 @@
               <execution>
                 <id>m3-synexia-atom-pattern-verify</id>
                 <phase>verify</phase>
-                <goals><goal>dryRun</goal></goals>
+                <goals>
+                  <goal>dryRun</goal>
+                </goals>
               </execution>
             </executions>
             <configuration>
-              <activeRecipes><recipe>com.synexia.m3.EveryModuleAtomPatternApplication</recipe></activeRecipes>
+              <activeRecipes>
+                <recipe>com.synexia.m3.EveryModuleAtomPatternApplication</recipe>
+              </activeRecipes>
               <exportDatatables>true</exportDatatables>
               <runPerSubmodule>false</runPerSubmodule>
               <failOnInvalidActiveRecipes>true</failOnInvalidActiveRecipes>
@@ -138,11 +151,15 @@
               <execution>
                 <id>m3-synexia-atom-pattern-mastery-verify</id>
                 <phase>verify</phase>
-                <goals><goal>dryRun</goal></goals>
+                <goals>
+                  <goal>dryRun</goal>
+                </goals>
               </execution>
             </executions>
             <configuration>
-              <activeRecipes><recipe>com.synexia.m3.EveryModuleAtomPatternMastery</recipe></activeRecipes>
+              <activeRecipes>
+                <recipe>com.synexia.m3.EveryModuleAtomPatternMastery</recipe>
+              </activeRecipes>
               <exportDatatables>true</exportDatatables>
               <runPerSubmodule>false</runPerSubmodule>
               <failOnInvalidActiveRecipes>true</failOnInvalidActiveRecipes>
@@ -203,6 +220,91 @@
         </plugins>
       </build>
     </profile>
+    <profile>
+      <id>m3-synexia-atomlogic-readonly</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.openrewrite.maven</groupId>
+            <artifactId>rewrite-maven-plugin</artifactId>
+            <version>5.23.1</version>
+            <dependencies>
+              <dependency>
+                <groupId>com.synexia</groupId>
+                <artifactId>synexia-openrewrite-recipes</artifactId>
+                <version>1.0.0-SNAPSHOT</version>
+              </dependency>
+            </dependencies>
+            <executions>
+              <execution>
+                <id>m3-atomlogic-candidate-scan</id>
+                <phase>verify</phase>
+                <goals>
+                  <goal>dryRun</goal>
+                </goals>
+              </execution>
+            </executions>
+            <configuration>
+              <activeRecipes>
+                <recipe>com.synexia.rewrite.M3AtomLogicClusterRecipe</recipe>
+              </activeRecipes>
+              <exportDatatables>true</exportDatatables>
+              <runPerSubmodule>false</runPerSubmodule>
+              <failOnInvalidActiveRecipes>true</failOnInvalidActiveRecipes>
+              <failOnDryRunResults>false</failOnDryRunResults>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+    <profile>
+      <id>m3-recipe-boot</id>
+      <activation>
+        <file>
+          <exists>${maven.multiModuleProjectDirectory}/.m3/recipe-boot.properties</exists>
+        </file>
+      </activation>
+      <properties>
+        <m3.recipe.boot.skip>false</m3.recipe.boot.skip>
+      </properties>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>exec-maven-plugin</artifactId>
+            <version>3.5.0</version>
+            <inherited>true</inherited>
+            <dependencies>
+              <dependency>
+                <groupId>com.synexia.m3</groupId>
+                <artifactId>m3-pr-stack-preservation</artifactId>
+                <version>1.0.0-m3boot20261021</version>
+              </dependency>
+            </dependencies>
+            <executions>
+              <execution>
+                <id>m3-recipe-boot</id>
+                <phase>validate</phase>
+                <goals>
+                  <goal>java</goal>
+                </goals>
+                <configuration>
+                  <skip>${m3.recipe.boot.skip}</skip>
+                  <mainClass>com.synexia.m3.prstack.M3RecipeBoot</mainClass>
+                  <includeProjectDependencies>false</includeProjectDependencies>
+                  <includePluginDependencies>true</includePluginDependencies>
+                  <arguments>
+                    <argument>${maven.multiModuleProjectDirectory}/.m3/recipe-boot.properties</argument>
+                    <argument>${project.basedir}</argument>
+                    <argument>${session.projects[0].basedir.absolutePath}</argument>
+                  </arguments>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
   </profiles>
 
   <build>
@@ -214,11 +316,17 @@
         <executions>
           <execution>
             <id>m3-java21-control-plane</id>
-            <goals><goal>enforce</goal></goals>
+            <goals>
+              <goal>enforce</goal>
+            </goals>
             <configuration>
               <rules>
-                <requireJavaVersion><version>[21,22)</version></requireJavaVersion>
-                <requireMavenVersion><version>[3.9,)</version></requireMavenVersion>
+                <requireJavaVersion>
+                  <version>[21,22)</version>
+                </requireJavaVersion>
+                <requireMavenVersion>
+                  <version>[3.9,)</version>
+                </requireMavenVersion>
               </rules>
             </configuration>
           </execution>

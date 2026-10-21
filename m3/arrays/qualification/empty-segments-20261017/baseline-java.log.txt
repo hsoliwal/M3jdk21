@@ -1,0 +1,7 @@
+/workspace/scratch/13309be96b09/collections-work/baseline/m3/arrays/src/main/java/com/m3/arrays/M3Arrays.java:83: error: ByteSnapshot is not abstract and does not override abstract method segmentCount() in M3ByteArrayView
+    private static final class ByteSnapshot implements M3ByteArrayView {
+                         ^
+/workspace/scratch/13309be96b09/collections-work/baseline/m3/arrays/src/main/java/com/m3/arrays/M3Arrays.java:162: error: CharSnapshot is not abstract and does not override abstract method segmentCount() in M3Utf16ArrayView
+    private static final class CharSnapshot implements M3Utf16ArrayView {
+                         ^
+2 errors

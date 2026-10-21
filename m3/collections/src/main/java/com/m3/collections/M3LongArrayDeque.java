@@ -1,5 +1,7 @@
 /*
  * Copyright 2026 Hitesh Soliwal and contributors
+ * Modified 2026: copy wrapped exports and growth through two contiguous spans.
+ * Swift Collections segment-copy pattern evaluated; see qualification/swift-deque-spans-20261018.
  * SPDX-License-Identifier: Apache-2.0
  */
 package com.m3.collections;
@@ -181,6 +183,9 @@ public final class M3LongArrayDeque implements M3LongDeque {
      */
     public int retainByStateMask(byte[] alignedStates, int requiredMask) {
         M3IndexMaskCompactor.validate(alignedStates, size, requiredMask);
+        // A zero required mask admits every logical element. Validate first, then preserve
+        // the circular storage, logical size, and iterator epoch without scanning the ring.
+        if (requiredMask == 0) return 0;
         int previous = size;
         int kept = 0;
         for (int read = 0; read < previous; read++) {
@@ -257,9 +262,7 @@ public final class M3LongArrayDeque implements M3LongDeque {
     @Override
     public long[] toArray() {
         long[] result = new long[size];
-        for (int i = 0; i < size; i++) {
-            result[i] = elements[physicalIndex(i)];
-        }
+        copyElementsInto(result);
         return result;
     }
 
@@ -334,11 +337,18 @@ public final class M3LongArrayDeque implements M3LongDeque {
             throw new OutOfMemoryError("deque too large");
         }
         long[] grown = new long[elements.length << 1];
-        for (int i = 0; i < size; i++) {
-            grown[i] = elements[physicalIndex(i)];
-        }
+        copyElementsInto(grown);
         elements = grown;
         head = 0;
+    }
+
+    /** Copies logical encounter order into a fresh array with room for all live elements. */
+    private void copyElementsInto(long[] destination) {
+        int firstLength = Math.min(size, elements.length - head);
+        System.arraycopy(elements, head, destination, 0, firstLength);
+        if (firstLength < size) {
+            System.arraycopy(elements, 0, destination, firstLength, size - firstLength);
+        }
     }
 
     private int physicalIndex(int logicalIndex) {

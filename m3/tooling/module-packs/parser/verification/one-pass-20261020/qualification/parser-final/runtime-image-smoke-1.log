@@ -1,0 +1,4 @@
+$ ["/workspace/scratch/e736b6177c79/m3-one-pass-20261020/qualification/parser-final/pack/image/bin/java","-ea","-Dm3.parser.test.work=/workspace/scratch/e736b6177c79/m3-one-pass-20261020/qualification/parser-final/consumer-work/runtime-image-smoke-1","--patch-module","jdk.compiler=/workspace/scratch/e736b6177c79/m3-one-pass-20261020/qualification/parser-final/compiler-patch","--add-modules","jdk.m3.parser","-cp","/workspace/scratch/e736b6177c79/m3-one-pass-20261020/qualification/parser-final/test-classes","jdk.m3.parser.test.M3ParserImageSmoke"]
+M3_PARSER_IMAGE_PASS grammar=226dcf197db58d57e54d3d28e218ddc4432e3a59c324410d7a1f9faa2f3116a8 javac=baa59465e21b574b257298314e6bf5fa58f8b6d65a70f06e24801260169fedf1
+
+EXIT 0

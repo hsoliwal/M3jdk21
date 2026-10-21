@@ -185,3 +185,15 @@ Nebula PR #80 is intentionally recorded as
 `HOSTED_ACTIONS_STARTUP_BLOCKED_NO_JOBS`: its two relevant hosted M3 workflow runs created zero
 jobs. Therefore the custody/proving architecture is accepted from merged repository evidence, but
 no hosted green-build claim is inferred from that run.
+
+
+## Executable outer pipeline receiving (October 17, 2026)
+
+The nine-stage source/target admission sequence is Inventory -> Dated additive convergence
+-> Catalogue by problem category -> Inline -> Atomize -> Patternize -> Comment ->
+compile/test gates -> reviewable PR. Its canonical Java/Maven implementation is proposed
+in Synexia PR #11983; M3JDK21 uses the target-only Java 21 receiver documented in
+[m3/docs/ordered-convergence-receiving-20261017.md](ordered-convergence-receiving-20261017.md).
+Ancestry, taxonomy, atom/pattern evidence and the source receipt never bypass
+M3JDK21 product build, jtreg/JNI, license, GC/JIT/CDS or runtime gates. The receiver
+cannot copy/relicense source or mutate java.base, HotSpot or JDK Git history.

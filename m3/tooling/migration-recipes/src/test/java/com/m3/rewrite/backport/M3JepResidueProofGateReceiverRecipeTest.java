@@ -54,7 +54,10 @@ final class M3JepResidueProofGateReceiverRecipeTest {
     @Test
     void staleMissingAndUnrelatedInputAreNotPromoted() throws IOException {
         var wrapper = new M3JepResidueProofGateReceiverRecipe();
+        // This test must start from the complete three-target preimage, not
+        // accidentally omit the required queue and then index past the list.
         var before = List.<SourceFile>of(
+                file(QUEUE, resource(PRE + "JEP_RESIDUE_QUEUE.tsv.txt")),
                 file(SOURCE, resource(PRE + "jep_residue.py.txt")),
                 file(TEST, resource(PRE + "test_jep_residue.py.txt")));
         var unrelated = file("m3/backports/README.unrelated", "unchanged\n");
@@ -83,7 +86,10 @@ final class M3JepResidueProofGateReceiverRecipeTest {
 
     private static InMemoryExecutionContext context() {
         return new InMemoryExecutionContext(error -> {
-            throw new AssertionError(error);
+            // Preserve the original recipe error for negative admission tests.
+            // Error wrappers would make assertThrows(RuntimeException) reject
+            // the correct fail-closed behavior for the wrong reason.
+            throw new IllegalStateException(error);
         });
     }
 

@@ -1,7 +1,9 @@
 #!/usr/bin/env python3
 # SPDX-License-Identifier: Apache-2.0
 """Exercise existing sealed-install custody; require actual recipe postimages."""
+import argparse
 import copy
+import hashlib
 import importlib.util
 import json
 from pathlib import Path
@@ -14,6 +16,16 @@ sealed = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(sealed)
 plan_path = CRATE / 'plan.json'
 plan, rows = sealed.sealed_plan(plan_path)
+parser = argparse.ArgumentParser(description=__doc__)
+parser.add_argument('--context', choices=('historical', 'ic0'), default='historical')
+args = parser.parse_args()
+current_mapping_sha256 = 'cf6a75806908fee920ecbf7bbe548182f1d9db179e9cc554e36739b1c45a6e6c'
+current_workflow_sha256 = '84d3b48257a3c53b79c5aa5b2e6432951db2ff6a0d64822d85c1bca8b250d875'
+if args.context == 'ic0':
+    # Retain the sealed owner's source-path and incomplete-transaction refusals.
+    for name in (sealed.LOCK, sealed.JOURNAL):
+        if sealed.checked_path(ROOT, name).exists():
+            raise sealed.Refusal('incomplete transaction; use explicit recovery')
 sealed.observe_guards(ROOT, plan)
 # These three documents have shared ownership across serial port packets. Their
 # historical postimages remain byte-exact in the replay fixture below. The live
@@ -21,11 +33,22 @@ sealed.observe_guards(ROOT, plan)
 shared = {'m3/docs/name-mapping.json', 'm3/docs/counterpart-naming.md',
           'src/java.base/share/legal/synexia.md'}
 for row in rows:
-    current = (ROOT / row['path']).read_bytes()
-    if row['path'] not in shared:
+    if args.context == 'ic0':
+        current = sealed.read_optional(sealed.checked_path(ROOT, row['path']))
+        if current is None:
+            raise sealed.Refusal('missing current output: ' + row['path'])
+    else:
+        current = (ROOT / row['path']).read_bytes()
+    if args.context == 'ic0' and row['path'] == '.github/workflows/m3-tq.yml':
+        assert hashlib.sha256(current).hexdigest() == current_workflow_sha256, 'Unadmitted ic0 workflow'
+    elif row['path'] not in shared:
         assert current == row['after'], row['path']
     elif row['path'] == 'm3/docs/name-mapping.json':
+        if args.context == 'ic0':
+            assert hashlib.sha256(current).hexdigest() == current_mapping_sha256, 'Unadmitted ic0 mapping'
         current_map = json.loads(current)
+        if args.context == 'ic0':
+            assert len(current_map['migration']['records']) == 87, 'Unexpected current record count'
         expected_map = json.loads(row['after'])
         ids = {r['id'] for r in expected_map['migration']['records']}
         projected = copy.deepcopy(current_map)
@@ -37,7 +60,7 @@ for row in rows:
         assert all(any(candidate == line for candidate in lines)
                    for line in row['after'].decode().splitlines()), 'Naming lineage removed'
     else:
-        assert current.endswith(row['after']), 'Prior distribution notices changed' 
+        assert current.endswith(row['after']), 'Prior distribution notices changed'
 for row in rows:
     assert (CRATE / 'target/generated' / row['path']).read_bytes() == row['after'], row['path']
 
@@ -97,5 +120,8 @@ with tempfile.TemporaryDirectory(prefix='m3-tq-custody-') as temporary:
 result = {'schema': 'm3.tq-custody/1', 'plan_sha256': plan['plan_sha256'],
           'generated_outputs': len(rows), 'retained_records': len(before['migration']['records']),
           'retained_gates': len(before['migration']['gates']), 'events': events}
+if args.context == 'ic0':
+    result.update(source_context='ic0', current_mapping_sha256=current_mapping_sha256,
+                  current_workflow_sha256=current_workflow_sha256, current_records=87)
 (CRATE / 'target/custody.json').write_text(json.dumps(result, indent=2) + '\n')
 print('PASS: exact recipe postimages, retained mapping, replay/rollback and three no-write refusals')

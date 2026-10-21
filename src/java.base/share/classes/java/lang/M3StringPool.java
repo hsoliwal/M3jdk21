@@ -4,12 +4,12 @@
  */
 package java.lang;
 
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.lang.ref.ReferenceQueue;
 import java.lang.ref.WeakReference;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
-import java.nio.MappedByteBuffer;
 import java.nio.channels.FileChannel;
 import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
@@ -59,6 +59,13 @@ final class M3StringPool {
     static final String MAX_LOCAL_BYTES_PROPERTY = "m3.string.pool.maxBytes";
     static final String MAX_RETAINED_TUPLES_PROPERTY = "m3.string.pool.maxTuples";
     static final long DEFAULT_MAX_RETAINED_TUPLES = 1L << 20;
+    static final String IMMEDIATE_PROPERTY = "m3.string.immediate";
+    /**
+     * Short Latin-1 / identifier text is admitted as an {@link M3StringImmediate} owner (no native
+     * payload, no bucket) unless {@code -Dm3.string.immediate=false}.
+     */
+    static final boolean IMMEDIATE_STRINGS = !"false".equals(
+            VM.initLevel() >= 1 ? VM.getSavedProperty(IMMEDIATE_PROPERTY) : null);
     /** Native byte budget of the VM-local scalar lane; {@code 0} admits no multi-unit local atom. */
     static final long MAX_LOCAL_BYTES =
             bound(MAX_LOCAL_BYTES_PROPERTY, Runtime.getRuntime().maxMemory());
@@ -89,6 +96,33 @@ final class M3StringPool {
 
     private M3StringPool() {}
 
+    /** Admission only: ordinary String lookup never crosses JNI. */
+    private static native ByteBuffer mapLexicon0(
+            int descriptor, long handle, long address, long length) throws IOException;
+
+    /** Only an unpublished mapping owned by this admission may be released. */
+    private static native boolean unmapLexicon0(long address, long length);
+
+    /**
+     * JNI batch concatenation over existing canonical M3String owner/range references.
+     *
+     * <p>The native code uses a fixed 32-slot stack to combine the already-interned
+     * coordinates through this pool's normal canonical concat operation. The Java
+     * input array contains references, never a copied joined text payload. Mapped
+     * lexicon/OS-shared atoms remain owned by their original retained mapping,
+     * and short immediate words remain in their fixed long[] pages. Materialization
+     * remains an explicit String/JNI compatibility operation.</p>
+     *
+     * <p>This is an internal opt-in batch entry point. Normal String concatenation
+     * keeps its Java path until installed-image/native performance qualification.</p>
+     */
+    // FLLDCIM: ATOM - canonical native batch join over fixed-array/view coordinates
+    static native M3String concatViewsNative0(M3String[] parts);
+
+    private static String savedProperty(String name) {
+        return VM.initLevel() >= 1 ? VM.getSavedProperty(name) : null;
+    }
+
     static void initializeLexicon(String file) {
         if (file == null || file.isEmpty() || lexicon != null) return;
         synchronized (M3StringPool.class) {
@@ -96,6 +130,9 @@ final class M3StringPool {
             try {
                 lexicon = Lexicon.open(Path.of(file));
             } catch (IOException | RuntimeException failure) {
+                if (savedProperty("m3.string.lexicon.baseAddress") != null) {
+                    throw new IllegalStateException("Configured fixed M3 lexicon unavailable", failure);
+                }
                 lexicon = Lexicon.unavailable();
                 reportLexiconFailure(file, failure);
             }
@@ -175,6 +212,12 @@ final class M3StringPool {
             int row = active.findCodePoints(source, offset, count, utf16Length);
             if (row >= 0) return M3String.whole(active.atom(row));
         }
+        if (IMMEDIATE_STRINGS && coder == String.LATIN1 && utf16Length == count) {
+            long packed = M3StringImmediate.packCodePoints(source, offset, count);
+            if (packed != M3StringImmediate.NONE) {
+                return M3String.whole(M3StringImmediate.of(packed));
+            }
+        }
 
         int byteLength = utf16Length << coder;
         long hash64 =
@@ -196,28 +239,32 @@ final class M3StringPool {
             LocalBucket bucket = LOCAL.computeIfAbsent(fingerprint, ignored -> new LocalBucket());
             synchronized (bucket) {
                 if (bucket.retired) continue;
-                for (Iterator<LocalRef> iterator = bucket.values.iterator(); iterator.hasNext();) {
-                    LocalRef reference = iterator.next();
-                    M3StringAtom existing = reference.get();
-                    if (existing == null) {
-                        iterator.remove();
-                        reference.releaseNative();
-                    } else if (existing.contentEqualsCodePoints(
-                            source, offset, count, utf16Length, coder)) {
-                        return found(existing, reserved);
+                try {
+                    for (Iterator<LocalRef> iterator = bucket.values.iterator(); iterator.hasNext();) {
+                        LocalRef reference = iterator.next();
+                        M3StringAtom existing = reference.get();
+                        if (existing == null) {
+                            iterator.remove();
+                            reference.releaseNative();
+                        } else if (existing.contentEqualsCodePoints(
+                                source, offset, count, utf16Length, coder)) {
+                            return found(existing, reserved);
+                        }
                     }
-                }
 
-                if (reserved != 0L || tryReserve(byteLength)) {
-                    M3StringAtom created = null;
-                    try {
-                        long id = nextId(NEXT_LOCAL_ID, "M3 scalar ID");
-                        created = M3StringAtom.localCodePoints(
-                                source, offset, count, utf16Length, coder, id, hash64);
-                    } finally {
-                        if (created == null) release(byteLength);
+                    if (reserved != 0L || tryReserve(byteLength)) {
+                        M3StringAtom created = null;
+                        try {
+                            long id = nextId(NEXT_LOCAL_ID, "M3 scalar ID");
+                            created = M3StringAtom.localCodePoints(
+                                    source, offset, count, utf16Length, coder, id, hash64);
+                        } finally {
+                            if (created == null) release(byteLength);
+                        }
+                        return retain(bucket, fingerprint, created, byteLength);
                     }
-                    return retain(bucket, fingerprint, created, byteLength);
+                } finally {
+                    retireEmptyLocalBucket(fingerprint, bucket);
                 }
             }
             reserved = reserveSlow(byteLength);
@@ -255,6 +302,12 @@ final class M3StringPool {
             int row = active.findCompactBytes(source, sourceOffset, length, sourceCoder);
             if (row >= 0) return M3String.whole(active.atom(row));
         }
+        if (IMMEDIATE_STRINGS && targetCoder == String.LATIN1) {
+            long packed = M3StringImmediate.packCompactBytes(source, sourceOffset, length, sourceCoder);
+            if (packed != M3StringImmediate.NONE) {
+                return M3String.whole(M3StringImmediate.of(packed));
+            }
+        }
 
         int byteLength = length << targetCoder;
         long hash64 =
@@ -274,28 +327,32 @@ final class M3StringPool {
             LocalBucket bucket = LOCAL.computeIfAbsent(fingerprint, ignored -> new LocalBucket());
             synchronized (bucket) {
                 if (bucket.retired) continue;
-                for (Iterator<LocalRef> iterator = bucket.values.iterator(); iterator.hasNext();) {
-                    LocalRef reference = iterator.next();
-                    M3StringAtom existing = reference.get();
-                    if (existing == null) {
-                        iterator.remove();
-                        reference.releaseNative();
-                    } else if (existing.contentEqualsCompactBytes(
-                            source, sourceOffset, length, sourceCoder, targetCoder)) {
-                        return found(existing, reserved);
+                try {
+                    for (Iterator<LocalRef> iterator = bucket.values.iterator(); iterator.hasNext();) {
+                        LocalRef reference = iterator.next();
+                        M3StringAtom existing = reference.get();
+                        if (existing == null) {
+                            iterator.remove();
+                            reference.releaseNative();
+                        } else if (existing.contentEqualsCompactBytes(
+                                source, sourceOffset, length, sourceCoder, targetCoder)) {
+                            return found(existing, reserved);
+                        }
                     }
-                }
 
-                if (reserved != 0L || tryReserve(byteLength)) {
-                    M3StringAtom created = null;
-                    try {
-                        long id = nextId(NEXT_LOCAL_ID, "M3 scalar ID");
-                        created = M3StringAtom.localCompactBytes(
-                                source, sourceOffset, length, sourceCoder, targetCoder, id, hash64);
-                    } finally {
-                        if (created == null) release(byteLength);
+                    if (reserved != 0L || tryReserve(byteLength)) {
+                        M3StringAtom created = null;
+                        try {
+                            long id = nextId(NEXT_LOCAL_ID, "M3 scalar ID");
+                            created = M3StringAtom.localCompactBytes(
+                                    source, sourceOffset, length, sourceCoder, targetCoder, id, hash64);
+                        } finally {
+                            if (created == null) release(byteLength);
+                        }
+                        return retain(bucket, fingerprint, created, byteLength);
                     }
-                    return retain(bucket, fingerprint, created, byteLength);
+                } finally {
+                    retireEmptyLocalBucket(fingerprint, bucket);
                 }
             }
             reserved = reserveSlow(byteLength);
@@ -320,6 +377,12 @@ final class M3StringPool {
             int row = active.findLatin1Bytes(source, offset, length);
             if (row >= 0) return M3String.whole(active.atom(row));
         }
+        if (IMMEDIATE_STRINGS && coder == String.LATIN1) {
+            long packed = M3StringImmediate.packCompactBytes(source, offset, length, String.LATIN1);
+            if (packed != M3StringImmediate.NONE) {
+                return M3String.whole(M3StringImmediate.of(packed));
+            }
+        }
 
         int byteLength = length << coder;
         long hash64 =
@@ -335,28 +398,32 @@ final class M3StringPool {
             LocalBucket bucket = LOCAL.computeIfAbsent(fingerprint, ignored -> new LocalBucket());
             synchronized (bucket) {
                 if (bucket.retired) continue;
-                for (Iterator<LocalRef> iterator = bucket.values.iterator(); iterator.hasNext();) {
-                    LocalRef reference = iterator.next();
-                    M3StringAtom existing = reference.get();
-                    if (existing == null) {
-                        iterator.remove();
-                        reference.releaseNative();
-                    } else if (existing.contentEqualsLatin1Bytes(
-                            source, offset, length, coder)) {
-                        return found(existing, reserved);
+                try {
+                    for (Iterator<LocalRef> iterator = bucket.values.iterator(); iterator.hasNext();) {
+                        LocalRef reference = iterator.next();
+                        M3StringAtom existing = reference.get();
+                        if (existing == null) {
+                            iterator.remove();
+                            reference.releaseNative();
+                        } else if (existing.contentEqualsLatin1Bytes(
+                                source, offset, length, coder)) {
+                            return found(existing, reserved);
+                        }
                     }
-                }
 
-                if (reserved != 0L || tryReserve(byteLength)) {
-                    M3StringAtom created = null;
-                    try {
-                        long id = nextId(NEXT_LOCAL_ID, "M3 scalar ID");
-                        created = M3StringAtom.localLatin1Bytes(
-                                source, offset, length, coder, id, hash64);
-                    } finally {
-                        if (created == null) release(byteLength);
+                    if (reserved != 0L || tryReserve(byteLength)) {
+                        M3StringAtom created = null;
+                        try {
+                            long id = nextId(NEXT_LOCAL_ID, "M3 scalar ID");
+                            created = M3StringAtom.localLatin1Bytes(
+                                    source, offset, length, coder, id, hash64);
+                        } finally {
+                            if (created == null) release(byteLength);
+                        }
+                        return retain(bucket, fingerprint, created, byteLength);
                     }
-                    return retain(bucket, fingerprint, created, byteLength);
+                } finally {
+                    retireEmptyLocalBucket(fingerprint, bucket);
                 }
             }
             reserved = reserveSlow(byteLength);
@@ -390,6 +457,12 @@ final class M3StringPool {
             int row = active.find(source, offset, length);
             if (row >= 0) return M3String.whole(active.atom(row));
         }
+        if (IMMEDIATE_STRINGS && coder == String.LATIN1) {
+            long packed = M3StringImmediate.packChars(source, offset, length);
+            if (packed != M3StringImmediate.NONE) {
+                return M3String.whole(M3StringImmediate.of(packed));
+            }
+        }
 
         int byteLength = length << coder;
         long hash64 =
@@ -405,26 +478,30 @@ final class M3StringPool {
             LocalBucket bucket = LOCAL.computeIfAbsent(fingerprint, ignored -> new LocalBucket());
             synchronized (bucket) {
                 if (bucket.retired) continue;
-                for (Iterator<LocalRef> iterator = bucket.values.iterator(); iterator.hasNext();) {
-                    LocalRef reference = iterator.next();
-                    M3StringAtom existing = reference.get();
-                    if (existing == null) {
-                        iterator.remove();
-                        reference.releaseNative();
-                    } else if (existing.contentEquals(source, offset, length, coder)) {
-                        return found(existing, reserved);
+                try {
+                    for (Iterator<LocalRef> iterator = bucket.values.iterator(); iterator.hasNext();) {
+                        LocalRef reference = iterator.next();
+                        M3StringAtom existing = reference.get();
+                        if (existing == null) {
+                            iterator.remove();
+                            reference.releaseNative();
+                        } else if (existing.contentEquals(source, offset, length, coder)) {
+                            return found(existing, reserved);
+                        }
                     }
-                }
 
-                if (reserved != 0L || tryReserve(byteLength)) {
-                    M3StringAtom created = null;
-                    try {
-                        long id = nextId(NEXT_LOCAL_ID, "M3 scalar ID");
-                        created = M3StringAtom.localChars(source, offset, length, coder, id, hash64);
-                    } finally {
-                        if (created == null) release(byteLength);
+                    if (reserved != 0L || tryReserve(byteLength)) {
+                        M3StringAtom created = null;
+                        try {
+                            long id = nextId(NEXT_LOCAL_ID, "M3 scalar ID");
+                            created = M3StringAtom.localChars(source, offset, length, coder, id, hash64);
+                        } finally {
+                            if (created == null) release(byteLength);
+                        }
+                        return retain(bucket, fingerprint, created, byteLength);
                     }
-                    return retain(bucket, fingerprint, created, byteLength);
+                } finally {
+                    retireEmptyLocalBucket(fingerprint, bucket);
                 }
             }
             reserved = reserveSlow(byteLength);
@@ -457,25 +534,29 @@ final class M3StringPool {
             LocalBucket bucket = LOCAL.computeIfAbsent(fingerprint, ignored -> new LocalBucket());
             synchronized (bucket) {
                 if (bucket.retired) continue;
-                for (Iterator<LocalRef> iterator = bucket.values.iterator(); iterator.hasNext();) {
-                    LocalRef reference = iterator.next();
-                    M3StringAtom existing = reference.get();
-                    if (existing == null) {
-                        iterator.remove();
-                        reference.releaseNative();
-                    } else if (existing.length == 1
-                            && existing.coder == coder
-                            && existing.charAt(0) == unit) {
-                        return M3String.whole(existing);
+                try {
+                    for (Iterator<LocalRef> iterator = bucket.values.iterator(); iterator.hasNext();) {
+                        LocalRef reference = iterator.next();
+                        M3StringAtom existing = reference.get();
+                        if (existing == null) {
+                            iterator.remove();
+                            reference.releaseNative();
+                        } else if (existing.length == 1
+                                && existing.coder == coder
+                                && existing.charAt(0) == unit) {
+                            return M3String.whole(existing);
+                        }
                     }
-                }
 
-                long id = nextId(NEXT_LOCAL_ID, "M3 scalar ID");
-                M3StringAtom created = M3StringAtom.localUnit(unit, coder, id, hash64);
-                long retainedBytes = created.nativePayloadBytes();
-                LOCAL_NATIVE_BYTES.addAndGet(retainedBytes);
-                bucket.values.add(new LocalRef(created, fingerprint, bucket, retainedBytes));
-                return M3String.whole(created);
+                    long id = nextId(NEXT_LOCAL_ID, "M3 scalar ID");
+                    M3StringAtom created = M3StringAtom.localUnit(unit, coder, id, hash64);
+                    long retainedBytes = created.nativePayloadBytes();
+                    LOCAL_NATIVE_BYTES.addAndGet(retainedBytes);
+                    bucket.values.add(new LocalRef(created, fingerprint, bucket, retainedBytes));
+                    return M3String.whole(created);
+                } finally {
+                    retireEmptyLocalBucket(fingerprint, bucket);
+                }
             }
         }
     }
@@ -559,35 +640,53 @@ final class M3StringPool {
         int javaHash =
                 left.hashCodeValue() * M3String.pow31(right.length()) + right.hashCodeValue();
         byte coder = (byte) (left.coder() | right.coder());
-        long routeKey = tupleRouteKey(left, right, javaHash, totalLength, coder);
+        Long routeKey = tupleRouteKey(left, right, javaHash, totalLength, coder);
 
         for (;;) {
             TupleBucket bucket = TUPLES.computeIfAbsent(routeKey, ignored -> new TupleBucket());
             synchronized (bucket) {
                 if (bucket.retired) continue;
-                for (Iterator<TupleRef> iterator = bucket.values.iterator(); iterator.hasNext();) {
-                    TupleRef reference = iterator.next();
-                    M3StringTuple existing = reference.get();
-                    if (existing == null) {
-                        iterator.remove();
-                        RETAINED_TUPLES.decrementAndGet();
-                    } else if (existing.length == totalLength
-                            && existing.coder == coder
-                            && existing.javaHash == javaHash
-                            && sameLeafSequence(M3String.whole(existing), left, right)) {
-                        return M3String.whole(existing);
+                try {
+                    for (Iterator<TupleRef> iterator = bucket.values.iterator(); iterator.hasNext();) {
+                        TupleRef reference = iterator.next();
+                        M3StringTuple existing = reference.get();
+                        if (existing == null) {
+                            iterator.remove();
+                            RETAINED_TUPLES.decrementAndGet();
+                        } else if (existing.length == totalLength
+                                && existing.coder == coder
+                                && existing.javaHash == javaHash
+                                && sameLeafSequence(M3String.whole(existing), left, right)) {
+                            return M3String.whole(existing);
+                        }
                     }
+                    long id = nextId(NEXT_TUPLE_ID, "M3 tuple ID");
+                    M3StringTuple created = new M3StringTuple(left, right, id, routeKey);
+                    // Retention cap: past it the tuple composes and lives with its String, uncanonical.
+                    if (RETAINED_TUPLES.incrementAndGet() <= MAX_RETAINED_TUPLES) {
+                        bucket.values.add(new TupleRef(created, routeKey, bucket));
+                    } else {
+                        RETAINED_TUPLES.decrementAndGet();
+                    }
+                    return M3String.whole(created);
+                } finally {
+                    retireEmptyTupleBucket(routeKey, bucket);
                 }
-                long id = nextId(NEXT_TUPLE_ID, "M3 tuple ID");
-                M3StringTuple created = new M3StringTuple(left, right, id, routeKey);
-                // Retention cap: past it the tuple composes and lives with its String, uncanonical.
-                if (RETAINED_TUPLES.incrementAndGet() <= MAX_RETAINED_TUPLES) {
-                    bucket.values.add(new TupleRef(created, routeKey, bucket));
-                } else {
-                    RETAINED_TUPLES.decrementAndGet();
-                }
-                return M3String.whole(created);
             }
+        }
+    }
+
+    /** Caller holds this bucket's monitor, including the retired-bucket retry guard. */
+    private static void retireEmptyLocalBucket(Fingerprint fingerprint, LocalBucket bucket) {
+        if (bucket.values.isEmpty() && LOCAL.remove(fingerprint, bucket)) {
+            bucket.retired = true;
+        }
+    }
+
+    /** Caller holds this bucket's monitor; uncached tuples do not retain empty metadata. */
+    private static void retireEmptyTupleBucket(Long routeKey, TupleBucket bucket) {
+        if (bucket.values.isEmpty() && TUPLES.remove(routeKey, bucket)) {
+            bucket.retired = true;
         }
     }
 
@@ -740,16 +839,21 @@ final class M3StringPool {
                 : right.charAt(index - leftLength);
     }
 
+    /** Leaf identity for canonical tuple comparison; immediate owners are equal by packed text. */
+    private static boolean sameLeaf(M3StringOwner left, M3StringOwner right) {
+        return left == right || M3StringImmediate.sameText(left, right);
+    }
+
     private static boolean sameLeafSequence(
             M3String existing, M3String left, M3String right) {
-        LeafCursor candidate = new LeafCursor(existing, null);
-        LeafCursor requested = new LeafCursor(left, right);
+        M3StringLeafCursor candidate = new M3StringLeafCursor(existing, null, true);
+        M3StringLeafCursor requested = new M3StringLeafCursor(left, right, true);
         for (;;) {
             boolean candidateNext = candidate.next();
             boolean requestedNext = requested.next();
             if (candidateNext != requestedNext) return false;
             if (!candidateNext) return true;
-            if (candidate.atom() != requested.atom()
+            if (!sameLeaf(candidate.owner(), requested.owner())
                     || candidate.start() != requested.start()
                     || candidate.length() != requested.length()) {
                 return false;
@@ -813,113 +917,34 @@ final class M3StringPool {
      * No native address, Java byte/char payload, or child M3String is retained or copied.
      * The stack grows only when the tuple depth requires it.</p>
      */
-    private static final class LeafCursor {
-        private M3StringOwner[] pendingOwners = new M3StringOwner[8];
-        private long[] pendingCoordinates = new long[8];
-        private int pendingSize;
-
-        private M3StringAtom atom;
-        private int start;
-        private int length;
-
-        private boolean buffered;
-        private M3StringAtom bufferedAtom;
-        private int bufferedStart;
-        private int bufferedLength;
-
-        private M3StringAtom rawAtom;
-        private int rawStart;
-        private int rawLength;
-
-        LeafCursor(M3String first, M3String second) {
-            if (second != null) push(second.owner(), second.start(), second.length());
-            if (first != null) push(first.owner(), first.start(), first.length());
+    /**
+     * The JNI shadow allocation already owns the one contiguous output array.
+     * Reuse this pool's canonical owner/range cursor to transfer exact scalar
+     * subranges without recursive tuple calls or intermediate text payloads.
+     */
+    static void copyCharsFromPath(M3StringOwner root, int from, int end,
+            char[] destination, int destinationStart) {
+        if (from == end) return;
+        M3StringLeafCursor path = new M3StringLeafCursor(root, from, end - from, true);
+        int target = destinationStart;
+        while (path.next()) {
+            int count = path.length();
+            path.owner().getChars(path.start(), Math.addExact(path.start(), count),
+                    destination, target);
+            target = Math.addExact(target, count);
         }
+    }
 
-        /**
-         * Preserve M3String.range's exact bounds authority without manufacturing a child
-         * wrapper. Ownership remains strong for every pending JNI-visible atom.
-         */
-        private void push(M3StringOwner owner, int offset, int count) {
-            if (count == 0) return;
-            Objects.checkFromIndexSize(offset, count, owner.length);
-            if (pendingSize == pendingOwners.length) {
-                int capacity = Math.multiplyExact(pendingOwners.length, 2);
-                pendingOwners = Arrays.copyOf(pendingOwners, capacity);
-                pendingCoordinates = Arrays.copyOf(pendingCoordinates, capacity);
-            }
-            pendingOwners[pendingSize] = owner;
-            pendingCoordinates[pendingSize] =
-                    ((long) offset << Integer.SIZE) | Integer.toUnsignedLong(count);
-            pendingSize++;
-        }
-
-        boolean next() {
-            if (buffered) {
-                atom = bufferedAtom;
-                start = bufferedStart;
-                length = bufferedLength;
-                buffered = false;
-            } else {
-                if (!pullRaw()) return false;
-                atom = rawAtom;
-                start = rawStart;
-                length = rawLength;
-            }
-
-            while (pullRaw()) {
-                if (rawAtom == atom && start + length == rawStart) {
-                    length = Math.addExact(length, rawLength);
-                } else {
-                    buffered = true;
-                    bufferedAtom = rawAtom;
-                    bufferedStart = rawStart;
-                    bufferedLength = rawLength;
-                    break;
-                }
-            }
-            return true;
-        }
-
-        M3StringAtom atom() { return atom; }
-        int start() { return start; }
-        int length() { return length; }
-
-        private boolean pullRaw() {
-            while (pendingSize != 0) {
-                int top = --pendingSize;
-                M3StringOwner owner = pendingOwners[top];
-                pendingOwners[top] = null; // Do not pin already-consumed owners.
-                long coordinate = pendingCoordinates[top];
-                int rangeStart = (int) (coordinate >>> Integer.SIZE);
-                int rangeLength = (int) coordinate;
-                if (owner instanceof M3StringAtom scalar) {
-                    rawAtom = scalar;
-                    rawStart = rangeStart;
-                    rawLength = rangeLength;
-                    return true;
-                }
-
-                M3StringTuple tuple = (M3StringTuple) owner;
-                int rangeEnd = rangeStart + rangeLength;
-                int leftLength = tuple.left.length();
-
-                if (rangeEnd > leftLength) {
-                    int rightStart = Math.max(0, rangeStart - leftLength);
-                    int rightEnd = rangeEnd - leftLength;
-                    push(tuple.right.owner(),
-                            Math.addExact(tuple.right.start(), rightStart),
-                            rightEnd - rightStart);
-                }
-                if (rangeStart < leftLength) {
-                    int leftStart = rangeStart;
-                    int leftEnd = Math.min(rangeEnd, leftLength);
-                    push(tuple.left.owner(),
-                            Math.addExact(tuple.left.start(), leftStart),
-                            leftEnd - leftStart);
-                }
-            }
-            return false;
+    static void copyBytesFromPath(M3StringOwner root, int from, int end,
+            byte[] destination, int destinationStart, byte coder) {
+        if (from == end) return;
+        M3StringLeafCursor path = new M3StringLeafCursor(root, from, end - from, true);
+        int target = destinationStart;
+        while (path.next()) {
+            int count = path.length();
+            path.owner().getBytes(path.start(), Math.addExact(path.start(), count),
+                    destination, target, coder);
+            target = Math.addExact(target, count);
         }
     }
 
@@ -939,12 +964,19 @@ final class M3StringPool {
     }
 
     private static final class Lexicon {
-        private final MappedByteBuffer mapping;
+        /** Empty compatibility view when optional direct-address metadata is unavailable. */
+        private static final int[] NO_EXACT_INDEX = new int[0];
+        /** Packed validation geometry: Java hash in bits 0..31, Latin-1 eligibility in bit 32. */
+        private static final long LATIN1_GEOMETRY = 1L << Integer.SIZE;
+        private final ByteBuffer mapping;
         private final long baseAddress;
         private final int payloadOffset;
         private final int[] offsets;
         private final int[] lengths;
         private final int[] javaHashes;
+        private final byte[] coders;
+        private final M3FrozenLexiconIndex exactIndex;
+        private final int[] exactRows;
         private final M3StringAtom[] atoms;
         private final long generation64;
         private final boolean available;
@@ -957,17 +989,22 @@ final class M3StringPool {
             baseAddress = 0L;
             payloadOffset = 0;
             offsets = lengths = javaHashes = new int[0];
+            coders = null;
+            exactIndex = M3FrozenLexiconIndex.empty();
+            exactRows = NO_EXACT_INDEX;
             atoms = new M3StringAtom[0];
             generation64 = 0L;
             available = false;
         }
 
         private Lexicon(
-                MappedByteBuffer mapping,
+                ByteBuffer mapping,
                 int payloadOffset,
                 int[] offsets,
                 int[] lengths,
                 int[] javaHashes,
+                M3StringAtom[] atoms,
+                byte[] coders,
                 long generation64) {
             this.mapping = mapping;
             this.baseAddress = ((DirectBuffer) mapping).address();
@@ -975,7 +1012,10 @@ final class M3StringPool {
             this.offsets = offsets;
             this.lengths = lengths;
             this.javaHashes = javaHashes;
-            this.atoms = new M3StringAtom[offsets.length];
+            this.coders = coders;
+            this.atoms = atoms;
+            this.exactIndex = M3FrozenLexiconIndex.build(javaHashes, lengths);
+            this.exactRows = exactIndex.rows();
             this.generation64 = generation64;
             this.available = true;
         }
@@ -989,80 +1029,173 @@ final class M3StringPool {
         }
 
         static Lexicon open(Path path) throws IOException {
+            String fixed = savedProperty("m3.string.lexicon.baseAddress");
+            if (fixed != null) return openFixed(path, fixed);
             try (FileChannel channel = FileChannel.open(path, StandardOpenOption.READ)) {
                 long size = channel.size();
-                if (size < LEXICON_HEADER || size > MAX_LEXICON_BYTES) {
-                    throw new IOException("MIndex lexicon image size out of bounds");
-                }
-                MappedByteBuffer mapped =
-                        channel.map(FileChannel.MapMode.READ_ONLY, 0, size);
-                mapped.order(ByteOrder.BIG_ENDIAN);
-                if (mapped.getLong(0) == 0x53594e4152523031L) {
-                    return openSharedArena(mapped);
-                }
-                if (mapped.getLong(0) != LEXICON_MAGIC) {
-                    throw new IOException("unsupported MIndex lexicon image");
-                }
-                int version = mapped.getInt(8);
-                if (version != 1 && version != 2) {
-                    throw new IOException("unsupported MIndex lexicon version");
-                }
-                int count = mapped.getInt(12);
-                int directoryBytes = version == 1 ? 8 : 12;
-                long payload = mapped.getLong(16);
-                long units = mapped.getLong(24);
-                if (count < 0
-                        || payload != LEXICON_HEADER + (long) directoryBytes * count
-                        || units < 0
-                        || payload + 2L * units != size) {
-                    throw new IOException("invalid MIndex lexicon dimensions");
-                }
-
-                byte[] expected = new byte[32];
-                mapped.get(32, expected);
-                byte[] actual = digestImage(mapped);
-                if (!MessageDigest.isEqual(expected, actual)) {
-                    throw new IOException("MIndex lexicon checksum mismatch");
-                }
-
-                int[] offsets = new int[count];
-                int[] lengths = new int[count];
-                int[] javaHashes = new int[count];
-                for (int row = 0; row < count; row++) {
-                    int entry = LEXICON_HEADER + row * directoryBytes;
-                    int offset = mapped.getInt(entry);
-                    int length = mapped.getInt(entry + 4);
-                    if (offset < 0 || length < 0 || (long) offset + length > units) {
-                        throw new IOException("invalid MIndex lexicon record");
-                    }
-                    offsets[row] = offset;
-                    lengths[row] = length;
-                    javaHashes[row] =
-                            version == 2
-                                    ? mapped.getInt(entry + 8)
-                                    : javaHash(mapped, (int) payload, offset, length);
-                    if (javaHashes[row] != javaHash(mapped, (int) payload, offset, length)) {
-                        throw new IOException("MIndex lexicon Java hash mismatch");
-                    }
-                    if (row > 0
-                            && compareRecords(
-                                            mapped,
-                                            (int) payload,
-                                            offsets[row - 1],
-                                            lengths[row - 1],
-                                            offset,
-                                            length)
-                                    >= 0) {
-                        throw new IOException("MIndex lexicon must be UTF-16 sorted");
-                    }
-                }
-                long generation64 = ByteBuffer.wrap(actual).getLong();
-                return new Lexicon(
-                        mapped, (int) payload, offsets, lengths, javaHashes, generation64);
+                checkImageSize(size);
+                ByteBuffer mapped = channel.map(FileChannel.MapMode.READ_ONLY, 0, size);
+                return readMapped(mapped, size);
             }
         }
 
+        private static void checkImageSize(long size) throws IOException {
+            if (size < LEXICON_HEADER || size > MAX_LEXICON_BYTES) {
+                throw new IOException("MIndex lexicon image size out of bounds");
+            }
+        }
+
+        /**
+         * Opt-in fixed-address admission for an immutable, externally published image.
+         * A successful view has VM lifetime; neither a GC cleaner nor file close unmaps it.
+         * The publisher must keep the admitted file bytes and length immutable for that lifetime.
+         */
+        private static Lexicon openFixed(Path path, String fixed) throws IOException {
+            final long address;
+            try {
+                address = Long.decode(fixed);
+            } catch (NumberFormatException invalid) {
+                throw new IOException("Invalid fixed M3 lexicon base address", invalid);
+            }
+            if (address <= 0L || (address & 0xffffL) != 0L) {
+                throw new IOException("Fixed M3 lexicon base must be positive and 64 KiB aligned");
+            }
+            String pin = savedProperty("m3.string.lexicon.sha256");
+            if (pin == null || pin.length() != 64) {
+                throw new IOException("Fixed M3 lexicon requires a full-image SHA-256 pin");
+            }
+            final byte[] expected;
+            try {
+                expected = HexFormat.of().parseHex(pin);
+            } catch (IllegalArgumentException invalid) {
+                throw new IOException("Invalid fixed M3 lexicon SHA-256 pin", invalid);
+            }
+            ByteBuffer raw = null;
+            boolean ownsMapping = false;
+            boolean published = false;
+            try {
+                final Lexicon result;
+                // This Java-opened descriptor is the only native input; JNI never reopens a name.
+                try (FileInputStream input = new FileInputStream(path.toFile())) {
+                    long size = input.getChannel().size();
+                    checkImageSize(size);
+                    var access = SharedSecrets.getJavaIOFileDescriptorAccess();
+                    raw = mapLexicon0(access.get(input.getFD()), access.getHandle(input.getFD()),
+                            address, size);
+                    if (raw == null || !raw.isDirect() || raw.capacity() != size
+                            || ((DirectBuffer) raw).address() != address) {
+                        throw new IOException("Native M3 lexicon mapping violated its exact-address contract");
+                    }
+                    // Own cleanup before any allocation or descriptor-close failure can occur.
+                    ownsMapping = true;
+                    ByteBuffer mapped = raw.asReadOnlyBuffer();
+                    if (!MessageDigest.isEqual(expected, digestFullImage(mapped))) {
+                        throw new IOException("Fixed M3 lexicon full-image SHA-256 mismatch");
+                    }
+                    result = readMapped(mapped, size);
+                    if (result.offsets.length != 0 && !result.exactIndex.available()) {
+                        throw new IOException(
+                                "Fixed M3 lexicon direct-address index unavailable");
+                    }
+                }
+                published = true;
+                return result;
+            } finally {
+                if (ownsMapping && !published) unmapLexicon0(address, raw.capacity());
+            }
+        }
+
+        private static byte[] digestFullImage(ByteBuffer mapped) {
+            try {
+                MessageDigest digest = MessageDigest.getInstance("SHA-256");
+                digest.update(mapped.asReadOnlyBuffer());
+                return digest.digest();
+            } catch (NoSuchAlgorithmException impossible) {
+                throw new AssertionError(impossible);
+            }
+        }
+
+        private static Lexicon readMapped(ByteBuffer mapped, long size) throws IOException {
+            mapped.order(ByteOrder.BIG_ENDIAN);
+            if (mapped.getLong(0) == 0x53594e4152523031L) {
+                return openSharedArena(mapped);
+            }
+            if (mapped.getLong(0) != LEXICON_MAGIC) {
+                throw new IOException("unsupported MIndex lexicon image");
+            }
+            int version = mapped.getInt(8);
+            if (version != 1 && version != 2) {
+                throw new IOException("unsupported MIndex lexicon version");
+            }
+            int count = mapped.getInt(12);
+            int directoryBytes = version == 1 ? 8 : 12;
+            long payload = mapped.getLong(16);
+            long units = mapped.getLong(24);
+            if (count < 0
+                    || payload != LEXICON_HEADER + (long) directoryBytes * count
+                    || units < 0
+                    || payload + 2L * units != size) {
+                throw new IOException("invalid MIndex lexicon dimensions");
+            }
+
+            byte[] expected = new byte[32];
+            mapped.get(32, expected);
+            byte[] actual = digestImage(mapped);
+            if (!MessageDigest.isEqual(expected, actual)) {
+                throw new IOException("MIndex lexicon checksum mismatch");
+            }
+
+            int[] offsets = new int[count];
+            int[] lengths = new int[count];
+            int[] javaHashes = new int[count];
+            M3StringAtom[] atoms = new M3StringAtom[count];
+            byte[] coders = allocateCoders(count);
+            for (int row = 0; row < count; row++) {
+                int entry = LEXICON_HEADER + row * directoryBytes;
+                int offset = mapped.getInt(entry);
+                int length = mapped.getInt(entry + 4);
+                if (offset < 0 || length < 0 || (long) offset + length > units) {
+                    throw new IOException("invalid MIndex lexicon record");
+                }
+                offsets[row] = offset;
+                lengths[row] = length;
+                long geometry = scanMappedGeometry(
+                        mapped, (int) payload + (offset << 1), length, false);
+                int actualHash = (int) geometry;
+                javaHashes[row] = version == 2 ? mapped.getInt(entry + 8) : actualHash;
+                if (javaHashes[row] != actualHash) {
+                    throw new IOException("MIndex lexicon Java hash mismatch");
+                }
+                if (coders != null) coders[row] = coderFromGeometry(geometry);
+                if (row > 0
+                        && compareRecords(
+                                        mapped,
+                                        (int) payload,
+                                        offsets[row - 1],
+                                        lengths[row - 1],
+                                        offset,
+                                        length)
+                                >= 0) {
+                    throw new IOException("MIndex lexicon must be UTF-16 sorted");
+                }
+            }
+            long generation64 = ByteBuffer.wrap(actual).getLong();
+            return new Lexicon(
+                    mapped, (int) payload, offsets, lengths, javaHashes, atoms, coders, generation64);
+        }
+
         int findUnit(char unit) {
+            if (exactRows.length == 0) return findUnitBinary(unit);
+            int hash = unit;
+            int encoded = exactIndex.candidate(hash, 1);
+            if (encoded == 0) return -1;
+            int row = (encoded & Integer.MAX_VALUE) - 1;
+            if (javaHashes[row] != hash || lengths[row] != 1) return -1;
+            if (encoded < 0) return findUnitBinary(unit);
+            return mappedUnit(offsets[row], 0) == unit ? row : -1;
+        }
+
+        private int findUnitBinary(char unit) {
             int low = 0;
             int high = offsets.length - 1;
             while (low <= high) {
@@ -1087,7 +1220,33 @@ final class M3StringPool {
             return -1;
         }
 
-        int findCodePoints(
+        int findCodePoints(int[] value, int offset, int count, int utf16Length) {
+            if (exactRows.length == 0) return findCodePointsBinary(value, offset, count, utf16Length);
+            int hash = 0;
+            for (int index = 0; index < count; index++) {
+                int point = value[offset + index];
+                if (Character.isBmpCodePoint(point)) {
+                    hash = 31 * hash + (char) point;
+                } else {
+                    hash = 31 * hash + Character.highSurrogate(point);
+                    hash = 31 * hash + Character.lowSurrogate(point);
+                }
+            }
+            int encoded = exactIndex.candidate(hash, utf16Length);
+            if (encoded == 0) return -1;
+            int row = (encoded & Integer.MAX_VALUE) - 1;
+            if (javaHashes[row] != hash || lengths[row] != utf16Length) return -1;
+            if (encoded < 0) {
+                return findCodePointsBinary(value, offset, count, utf16Length);
+            }
+            return compareCodePoints(
+                            value, offset, count, utf16Length, offsets[row], lengths[row])
+                            == 0
+                    ? row
+                    : -1;
+        }
+
+        private int findCodePointsBinary(
                 int[] value, int offset, int count, int utf16Length) {
             int low = 0;
             int high = offsets.length - 1;
@@ -1143,7 +1302,30 @@ final class M3StringPool {
             return utf16Length - mappedLength;
         }
 
-        int findCompactBytes(
+        int findCompactBytes(byte[] value, int sourceOffset, int logicalLength, byte sourceCoder) {
+            if (exactRows.length == 0) return findCompactBytesBinary(value, sourceOffset, logicalLength, sourceCoder);
+            int hash = 0;
+            for (int index = 0; index < logicalLength; index++) {
+                char unit = sourceCoder == String.LATIN1
+                        ? (char) (value[sourceOffset + index] & 0xff)
+                        : StringUTF16.charAt(value, sourceOffset + index);
+                hash = 31 * hash + unit;
+            }
+            int encoded = exactIndex.candidate(hash, logicalLength);
+            if (encoded == 0) return -1;
+            int row = (encoded & Integer.MAX_VALUE) - 1;
+            if (javaHashes[row] != hash || lengths[row] != logicalLength) return -1;
+            if (encoded < 0) {
+                return findCompactBytesBinary(
+                        value, sourceOffset, logicalLength, sourceCoder);
+            }
+            return equalsCompactBytes(
+                            value, sourceOffset, logicalLength, sourceCoder, offsets[row])
+                    ? row
+                    : -1;
+        }
+
+        private int findCompactBytesBinary(
                 byte[] value, int sourceOffset, int logicalLength, byte sourceCoder) {
             int low = 0;
             int high = offsets.length - 1;
@@ -1168,6 +1350,12 @@ final class M3StringPool {
         }
 
         int findLatin1Bytes(byte[] value, int offset, int logicalLength) {
+            // The exact compact-string atom handles the same Latin-1 source shape;
+            // reuse its primitive hash probe and its original binary fallback.
+            return findCompactBytes(value, offset, logicalLength, String.LATIN1);
+        }
+
+        private int findLatin1BytesBinary(byte[] value, int offset, int logicalLength) {
             int low = 0;
             int high = offsets.length - 1;
             while (low <= high) {
@@ -1194,6 +1382,20 @@ final class M3StringPool {
         }
 
         int find(char[] value, int offset, int logicalLength) {
+            if (exactRows.length == 0) return findBinary(value, offset, logicalLength);
+            int hash = 0;
+            for (int index = 0; index < logicalLength; index++) {
+                hash = 31 * hash + value[offset + index];
+            }
+            int encoded = exactIndex.candidate(hash, logicalLength);
+            if (encoded == 0) return -1;
+            int row = (encoded & Integer.MAX_VALUE) - 1;
+            if (javaHashes[row] != hash || lengths[row] != logicalLength) return -1;
+            if (encoded < 0) return findBinary(value, offset, logicalLength);
+            return equalsChars(value, offset, logicalLength, offsets[row]) ? row : -1;
+        }
+
+        private int findBinary(char[] value, int offset, int logicalLength) {
             int low = 0;
             int high = offsets.length - 1;
             while (low <= high) {
@@ -1217,6 +1419,45 @@ final class M3StringPool {
             return -1;
         }
 
+        /** Exact payload authority after hash/length candidate selection. */
+        private boolean equalsCompactBytes(
+                byte[] value, int offset, int length, byte coder, int mappedOffset) {
+            for (int index = 0; index < length; index++) {
+                char unit = coder == String.LATIN1
+                        ? (char) (value[offset + index] & 0xff)
+                        : StringUTF16.charAt(value, offset + index);
+                if (unit != mappedUnit(mappedOffset, index)) return false;
+            }
+            return true;
+        }
+
+        private boolean equalsChars(char[] value, int offset, int length, int mappedOffset) {
+            for (int index = 0; index < length; index++) {
+                if (value[offset + index] != mappedUnit(mappedOffset, index)) return false;
+            }
+            return true;
+        }
+
+        /**
+         * Compatibility test hook: returns the precomputed row lane of the one-candidate index.
+         */
+        private static int[] buildExactIndex(int[] hashes, int[] lengths) {
+            return M3FrozenLexiconIndex.build(hashes, lengths).rows();
+        }
+
+        private static byte[] allocateCoders(int count) {
+            try {
+                return new byte[count];
+            } catch (OutOfMemoryError unavailable) {
+                return null;
+            }
+        }
+
+        private static byte coderFromGeometry(long geometry) {
+            return String.COMPACT_STRINGS && (geometry & LATIN1_GEOMETRY) != 0L
+                    ? String.LATIN1 : String.UTF16;
+        }
+
         M3StringAtom atom(int row) {
             M3StringAtom result = atoms[row];
             if (result != null) {
@@ -1236,10 +1477,12 @@ final class M3StringPool {
                                     (byte) 2,
                                     bigEndian,
                                     lengths[row],
-                                    String.COMPACT_STRINGS
-                                                    && mappedLatin1(address, lengths[row], bigEndian)
-                                            ? String.LATIN1
-                                            : String.UTF16,
+                                    coders != null
+                                            ? coders[row]
+                                            : String.COMPACT_STRINGS
+                                                            && mappedLatin1(address, lengths[row], bigEndian)
+                                                    ? String.LATIN1
+                                                    : String.UTF16,
                                     javaHashes[row],
                                     id,
                                     M3StringPool.mix64(id ^ lengths[row]));
@@ -1260,7 +1503,7 @@ final class M3StringPool {
          * records, no external truncation or mutation. This is a fixed snapshot, not a writer.
          * Only language-0 UTF16 scalar records enter ordinary String's language-neutral plane.
          */
-        private static Lexicon openSharedArena(MappedByteBuffer map) throws IOException {
+        private static Lexicon openSharedArena(ByteBuffer map) throws IOException {
             CRC32C crc = new CRC32C();
             crc.update(map.asReadOnlyBuffer().slice(0, 56));
             if (map.getInt(8) != 1 || map.getLong(56) != crc.getValue()
@@ -1298,9 +1541,14 @@ final class M3StringPool {
                     }
                     if(length!=units)throw new IOException("invalid SYNARR01 tuple length");
                 } else if (width==2 && language==0 && units>0) {
-                    int hash=0;for(int i=0;i<units;i++)hash=31*hash+(map.getChar(position+80+i*2)&65535);
+                    long geometry = scanMappedGeometry(map, position + 80, units, true);
+                    int hash = (int) geometry;
                     if(hash!=map.getInt(position+24))throw new IOException("SYNARR01 hash mismatch");
-                    records.add(new int[]{position+80,units,hash,position});
+                    // Every record offset is below the 1 GiB image limit. Its spare sign bit
+                    // carries transient validated geometry without increasing per-record scratch.
+                    int packedRecord = position | ((geometry & LATIN1_GEOMETRY) != 0L
+                            ? Integer.MIN_VALUE : 0);
+                    records.add(new int[]{position+80,units,hash,packedRecord});
                 }
                 prior.put((long)position,new int[]{width,units,parts});position+=total;
             }
@@ -1310,8 +1558,10 @@ final class M3StringPool {
                 return Integer.compare(a[1],b[1]);
             });
             int n=records.size();int[] offsets=new int[n],lengths=new int[n],hashes=new int[n],ids=new int[n];
-            for(int i=0;i<n;i++){int[] r=records.get(i);offsets[i]=r[0];lengths[i]=r[1];hashes[i]=r[2];ids[i]=r[3];}
-            Lexicon result=new Lexicon(map,0,offsets,lengths,hashes,map.getLong(16)^map.getLong(24));
+            M3StringAtom[] atoms = new M3StringAtom[n];
+            byte[] coders = allocateCoders(n);
+            for(int i=0;i<n;i++){int[] r=records.get(i);offsets[i]=r[0];lengths[i]=r[1];hashes[i]=r[2];ids[i]=r[3]&Integer.MAX_VALUE;if(coders!=null)coders[i]=String.COMPACT_STRINGS&&r[3]<0?String.LATIN1:String.UTF16;}
+            Lexicon result=new Lexicon(map,0,offsets,lengths,hashes,atoms,coders,map.getLong(16)^map.getLong(24));
             result.bigEndian=true;result.namespaceHigh=map.getLong(16);result.namespaceLow=map.getLong(24);
             result.recordOffsets=ids;return result;
         }
@@ -1334,13 +1584,22 @@ final class M3StringPool {
             return leftLength - rightLength;
         }
 
-        private static int javaHash(
-                ByteBuffer mapped, int payloadOffset, int offset, int length) {
+        /** One validation scan; the packed result is transient and owns no spelling. */
+        private static long scanMappedGeometry(
+                ByteBuffer mapped, int byteOffset, int length, boolean bigEndian) {
             int hash = 0;
+            boolean latin1 = true;
             for (int index = 0; index < length; index++) {
-                hash = 31 * hash + mappedChar(mapped, payloadOffset, offset + index);
+                int at = byteOffset + (index << 1);
+                int first = mapped.get(at) & 0xff;
+                int second = mapped.get(at + 1) & 0xff;
+                char unit = bigEndian
+                        ? (char) ((first << 8) | second)
+                        : (char) (first | (second << 8));
+                hash = 31 * hash + unit;
+                latin1 &= unit <= 0xff;
             }
-            return hash;
+            return Integer.toUnsignedLong(hash) | (latin1 ? LATIN1_GEOMETRY : 0L);
         }
 
         private static char mappedChar(ByteBuffer mapped, int payloadOffset, int unit) {

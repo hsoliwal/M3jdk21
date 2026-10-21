@@ -1,0 +1,70 @@
+name: Owned M3 Apache multivalue contracts
+on:
+  pull_request:
+    paths: ['m3/collections/**', '.github/workflows/m3-owned-apache-multivalue.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  contracts:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          sparse-checkout: |
+            m3/collections
+            .github/workflows
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Qualify sealed SDK successor and run owned contracts
+        shell: bash
+        run: |
+          set -euo pipefail
+          M3_TASK_OUT="$RUNNER_TEMP/m3-apache-sdk-successor"
+          mkdir -p "$M3_TASK_OUT/core" "$M3_TASK_OUT/classes" "$M3_TASK_OUT/native" "$M3_TASK_OUT/tmp"
+          export TMPDIR="$M3_TASK_OUT/tmp" TEMP="$M3_TASK_OUT/tmp" TMP="$M3_TASK_OUT/tmp"
+          python -I -S -B -c 'import os,shutil; assert shutil.disk_usage(os.environ["TMPDIR"]).free >= 8*1024**3+512*1024**2'
+          M3_PROVIDER="$M3_TASK_OUT/commons-collections4-4.5.0.jar"
+          curl --fail --location --silent --show-error --output "$M3_PROVIDER" https://repo.maven.apache.org/maven2/org/apache/commons/commons-collections4/4.5.0/commons-collections4-4.5.0.jar
+          python -I -S -B m3/collections/qualification/owned-apache-multivalue-20261018/verify_source_binding_successor_v3.py --jar "$M3_PROVIDER" --args "$M3_TASK_OUT/owned.args"
+          python -I -S -B m3/collections/qualification/owned-apache-multivalue-20261018/probe_source_binding_successor_v3.py --jar "$M3_PROVIDER" --work "$M3_TASK_OUT/guard-probe"
+          find m3/collections/src/main/java -name '*.java' | sort > "$M3_TASK_OUT/core.args"
+          javac -J-Djava.io.tmpdir="$M3_TASK_OUT/tmp" --release 21 -g -encoding UTF-8 -proc:none -Xlint:all,-module -Werror -d "$M3_TASK_OUT/core" @"$M3_TASK_OUT/core.args"
+          javac -J-Djava.io.tmpdir="$M3_TASK_OUT/tmp" --release 21 -g -encoding UTF-8 -proc:none -Xlint:all,-module -Werror -cp "$M3_TASK_OUT/core:$M3_PROVIDER" -d "$M3_TASK_OUT/classes" @"$M3_TASK_OUT/owned.args" m3/collections/src/test/java/com/m3/collections/M3CollectionSdkCatalogSelfTest.java m3/collections/src/test/java/com/m3/collections/M3CollectionSdkSelfTest.java m3/collections/src/test/java/com/m3/collections/M3SdkOwnerFactorySelfTest.java
+          gcc -std=c17 -O2 -Wall -Wextra -Werror -fPIC -shared -I"$JAVA_HOME/include" -I"$JAVA_HOME/include/linux" m3/collections/src/main/native/collections/m3_index_mask_compactor.c -o "$M3_TASK_OUT/native/libm3_collections_mask.so"
+          M3_CP="$M3_TASK_OUT/classes:$M3_TASK_OUT/core:$M3_PROVIDER"
+          java -Xmx512m -XX:-UsePerfData -Djava.io.tmpdir="$M3_TASK_OUT/tmp" -Djava.library.path="$M3_TASK_OUT/absent" -cp "$M3_CP" com.m3.collections.M3CollectionSdkSelfTest
+          java -Xmx512m -XX:-UsePerfData -Xcheck:jni -Djava.io.tmpdir="$M3_TASK_OUT/tmp" -Djava.library.path="$M3_TASK_OUT/native" -cp "$M3_CP" com.m3.collections.M3CollectionSdkSelfTest
+          java -Xmx512m -XX:-UsePerfData -Djava.io.tmpdir="$M3_TASK_OUT/tmp" -cp "$M3_CP" com.m3.collections.M3SdkOwnerFactorySelfTest
+          java -Xmx512m -XX:-UsePerfData -Xint -Djava.io.tmpdir="$M3_TASK_OUT/tmp" -cp "$M3_CP" com.m3.collections.M3SdkOwnerFactorySelfTest
+          java -Xmx512m -XX:-UsePerfData -Djava.io.tmpdir="$M3_TASK_OUT/tmp" -cp "$M3_CP" com.m3.collections.apache.M3MultiValuedMapSelfTest
+          java -Xmx512m -XX:-UsePerfData -Djava.io.tmpdir="$M3_TASK_OUT/tmp" -cp "$M3_CP" ApacheM3MultiValueCandidateProbe
+  sdk-receiving:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          sparse-checkout: |
+            m3/collections
+            .github/workflows
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Run exact SDK successor receiving host
+        shell: bash
+        run: |
+          set -euo pipefail
+          M3_TASK_OUT="$RUNNER_TEMP/m3-sdk-successor-receiving"
+          mkdir -p "$M3_TASK_OUT/tmp" "$M3_TASK_OUT/m2"
+          export TMPDIR="$M3_TASK_OUT/tmp" TEMP="$M3_TASK_OUT/tmp" TMP="$M3_TASK_OUT/tmp"
+          export MAVEN_OPTS="-Xmx512m -XX:-UsePerfData -Djava.io.tmpdir=$M3_TASK_OUT/tmp"
+          python -I -S -B -c 'import os,shutil; assert shutil.disk_usage(os.environ["TMPDIR"]).free >= 8*1024**3+512*1024**2'
+          python -I -S -B m3/collections/qualification/owned-apache-multivalue-20261018/verify_source_binding_successor_v3.py
+          mvn -B -ntp -f m3/collections/recipe/sdk-binding-successor-v3-20261018/pom.xml -Dmaven.repo.local="$M3_TASK_OUT/m2" -Dm3.recipe.output="$M3_TASK_OUT/target" test

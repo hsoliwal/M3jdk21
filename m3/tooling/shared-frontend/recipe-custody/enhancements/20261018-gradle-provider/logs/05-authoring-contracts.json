@@ -1,0 +1,21 @@
+{
+  "label": "05-authoring-contracts",
+  "command": [
+    "/tmp/m3-array-refinement-20261018-recovery/toolchain/apache-maven-3.9.9/bin/mvn",
+    "-B",
+    "-ntp",
+    "-o",
+    "-Pcontract",
+    "-Dmaven.repo.local=/workspace/scratch/65626af64474/m3-ast-shared-20261018/gradle-provider-work/maven-cache",
+    "-Dm3.dataset=gradle-provider-20261018",
+    "org.codehaus.mojo:exec-maven-plugin:3.5.0:exec@verify-input-sealing-contract",
+    "org.codehaus.mojo:exec-maven-plugin:3.5.0:exec@verify-sdk-receiver-integrity"
+  ],
+  "cwd": "/workspace/scratch/65626af64474/m3-ast-shared-20261018/gradle-provider-work/canonical/synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017",
+  "jdk": "/tmp/m3-regex-toolchain-20261018/jdk-21.0.12.1+1",
+  "previous": "04b-authoring-tests",
+  "started_utc": "2026-10-18T12:54:29.922544+00:00",
+  "finished_utc": "2026-10-18T12:54:31.510130+00:00",
+  "exit_code": 1,
+  "log_sha256": "438092bca34b1d5a3b0c474ab6a140cb80928b751134476451a582c9292bf997"
+}

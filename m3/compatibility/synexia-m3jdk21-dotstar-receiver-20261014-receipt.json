@@ -1,0 +1,74 @@
+{
+  "schema": "M3JDK21_SYNEXIA_RECEIPT_ONLY_CLOSURE_V1",
+  "copyright": "Copyright 2026 Hitesh Soliwal and contributors",
+  "receivedLicense": "Apache-2.0",
+  "evidenceOnly": true,
+  "claim": "Receipt is EVIDENCE of pre-existing pinned-master content and its Synexia canonical unit. It receives nothing, changes no source, advances no phase, and asserts no runtime result.",
+  "canonicalSource": {
+    "repository": "hsoliwal/com.synexia",
+    "branch": "develop",
+    "pullRequest": "UNVERIFIED",
+    "commit": "11c94feb18155a53cc213708c353791132edc4a7",
+    "pinRef": "refs/m3run/synexia-develop-20261017",
+    "recipe": "UNVERIFIED",
+    "crate": "m3jdk21-dotstar-receiver-20261014",
+    "unitKind": "RECIPE_DIR",
+    "unitPath": "synexia-openrewrite-recipes/recipes/m3jdk21-dotstar-receiver-20261014",
+    "unitTreeSha": "d0f313067be103b57552ad971bdc799520d999b3",
+    "mechanics": "M3JDK21 M3String dot-star DP receiver: exact bounded internal String.matches optimization (CONTRACT.md)",
+    "donors": [
+      {
+        "path": "synexia-openrewrite-recipes/recipes/m3jdk21-dotstar-receiver-20261014/CONTRACT.md",
+        "blob": "51cb6ee11724",
+        "target": "M3DotStarRelations",
+        "mechanics": "unit contract"
+      },
+      {
+        "path": "synexia-openrewrite-recipes/recipes/m3jdk21-dotstar-receiver-20261014/DONORS.tsv",
+        "blob": "9816753573f4",
+        "target": "M3DotStarRelations",
+        "mechanics": "donor rows"
+      },
+      {
+        "path": "synexia-openrewrite-recipes/recipes/m3jdk21-dotstar-receiver-20261014/manifest.tsv",
+        "blob": "fb2a8985191d",
+        "target": "M3DotStarRelations",
+        "mechanics": "git-blob manifest; DRIFT vs master, see residue"
+      }
+    ],
+    "license": "Apache-2.0 first-party"
+  },
+  "target": {
+    "repository": "hsoliwal/M3jdk21",
+    "base": "970a34350ebdf6a3f1c5ff5acc8445d0f3515f55",
+    "pinRef": "refs/m3run/m3jdk21-master-20261017",
+    "owners": [
+      "M3DotStarRelations"
+    ]
+  },
+  "runtimeDependencyOnSynexia": false,
+  "publicJdkReplacement": false,
+  "targets": [
+    {
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3DotStarRelations.java",
+      "blob": "780c7887aaa6",
+      "before": "PREEXISTING",
+      "after": "bbc2901ebe5b2de9951b672127bd47e9d13c70b5a39482fa0727703d0a2ff757"
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/String.java",
+      "blob": "1454f1b34fae",
+      "before": "PREEXISTING",
+      "after": "b7a074c6f366397847538b6b1bc6a5e5fecfb94809ab70fda40ef58406595b13",
+      "note": "MANIFEST_DRIFT: unit manifest after-blob b9452c19e7b2, master blob 1454f1b34fae"
+    }
+  ],
+  "residue": "DRIFT+ABSENT: manifest ADD files M3DotStarRegex.java and M3StringDotStarDpTest.java ABSENT on pinned master; String.java master blob 1454f1b34fae != manifest after-blob b9452c19e7b2; workflow mindex-string-backing.yml master blob 793ea2709380 != manifest after-blob 8130658aacc4; owner M3DotStarRelations itself is unpinned by the unit; RE_SEAL_REQUIRED: unit has no hash-pinned manifest covering the pinned-master content of its owner file(s); a successor hash-pinned recipe must seal master content before any phase advance",
+  "unverifiedFields": [
+    "pullRequest",
+    "recipe"
+  ],
+  "gates": {
+    "evidenceOnly": "NOT_RUN: no build, no recipe execution, no tests; ls-tree + git show sha256 only (run RCPT-receipt-only-closure 2026-10-18)"
+  }
+}

@@ -1,0 +1,39 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3 collection file review batch 80
+on:
+  pull_request:
+    paths:
+      - 'm3/collections/algorithm-catalog/collection-candidate-comparison-20261017.tsv'
+      - 'm3/collections/algorithm-catalog/collection-catalogue-input-provenance-20261017.tsv'
+      - 'm3/collections/algorithm-catalog/collection-file-review-20261017.tsv'
+      - 'm3/collections/algorithm-catalog/README-collection-file-review-20261017.md'
+      - 'm3/collections/algorithm-catalog/SOURCE_INVARIANT_CONTRACT-20261017.md'
+      - 'm3/collections/algorithm-catalog/TASKS-collection-batch80-20261017.md'
+      - 'm3/collections/recipe/collection-file-review-batch80-20261017/**'
+      - 'm3/collections/qualification/collection-file-review-batch80-20261017/**'
+      - '.github/workflows/m3-collection-file-review-batch80.yml'
+permissions:
+  contents: read
+jobs:
+  qualify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    env:
+      MAVEN_OPTS: '-Xmx512m -Dfile.encoding=UTF-8'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Verify exact receiver custody
+        run: python3 -I -S -B m3/collections/qualification/collection-file-review-batch80-20261017/verify.py
+      - name: Execute named recipe and catalogue boundary proof
+        run: mvn -B -ntp -f m3/collections/recipe/collection-file-review-batch80-20261017/pom.xml test
+      - name: Recheck custody and tracked source integrity
+        run: |
+          set -euxo pipefail
+          python3 -I -S -B m3/collections/qualification/collection-file-review-batch80-20261017/verify.py
+          git diff --exit-code

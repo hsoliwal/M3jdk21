@@ -1,0 +1,174 @@
+{
+  "after": {
+    "authority": "ROOT_SUPPLIED_EXACT_SDK_7807_SOURCE_IMAGE",
+    "bytes": 7807,
+    "sha256": "f805ff3b86349480dd575840326eb015e5626b5eb4f0f61deccc73f83e9e1452",
+    "template": "M3CollectionSdk.java.txt"
+  },
+  "authored_checks": {
+    "all_four_before_after_duplicate_orders": true,
+    "execution_status": "NOT_EXECUTED",
+    "fresh_marker_free_new_activation_fixedpoints": 4,
+    "junit_methods": 2,
+    "observed_installer_batch_zero_edits_and_generations_before_refusal": true,
+    "refusal_families": 4,
+    "refusal_inputs": 7,
+    "supplied_references_ids_markers_order_paths_text_preserved": true,
+    "valid_before_after_order_states": 4
+  },
+  "before": {
+    "authority": "ROOT_SUPPLIED_EXACT_SDK_7020_SOURCE_IMAGE",
+    "bytes": 7020,
+    "sha256": "258a4940136bce3998d7c2d717a6f5512f1412fd874580f242d2185be129b85a",
+    "template": "M3CollectionSdk.java.before.txt"
+  },
+  "before_adaptation_gate": {
+    "bytes": 1804,
+    "columns": 10,
+    "ledger_precedes_authored_test": true,
+    "observed_authored_test_mtime_ns": 1792292248347094000,
+    "observed_ledger_mtime_ns": 1792292047968533600,
+    "path": "FOSS_RECEIVING_DECISION.tsv",
+    "rows": 2,
+    "sha256": "34895010e3481ddeef5ba6140475fe4333e4f50be060b8979b199a52a16152b2"
+  },
+  "borrowed_hosts": {
+    "classification": "ADAPT",
+    "counted_host_version": "d2e1b76eedfee1172957d20f246b607f988eba4d",
+    "fifo_host_version": "ROOT_VALIDATED_LOCAL_FIFO_HOST_20261018",
+    "fixture_delta": "Compose exact existing SDK transition with observed edit/generate refusals, nonempty marker retention and fresh marker-free NEW activation fixed points.",
+    "measured_local_inputs": [
+      {
+        "bytes": 2672,
+        "path": "counted-bag/recipe/pom.xml",
+        "sha256": "beba98707f9d9fc0f27c5560cbc570a01f0ecabf45fc56bc83ace71c5776d7cc"
+      },
+      {
+        "bytes": 13805,
+        "path": "counted-bag/recipe/engine-src/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+        "sha256": "3fc6e77a1394e292747d689a4a42a328b496000865aa390afe05d5571febd599"
+      },
+      {
+        "bytes": 9588,
+        "path": "counted-bag/recipe/src/test/java/com/synexia/rewrite/M3CountedBagIteratorRemoveRecipeTest.java",
+        "sha256": "c0085fe219d6bd76da1deef04b87104e3ee2af1fe5c5f472d70f1115e1b335ff"
+      },
+      {
+        "bytes": 13503,
+        "path": "apache-circular-fifo/recipe/src/test/java/com/synexia/rewrite/M3OwnedApacheCircularFifoQueueRecipeTest.java",
+        "sha256": "0b4212cbf51a63456f1cc127745a1ffa27879bd8a7700e21043d280a38b4c82e"
+      }
+    ],
+    "pom_delta": "Only artifactId and the two receiving-test selectors change.",
+    "repository": "hsoliwal/M3jdk21"
+  },
+  "crate": "sdk-binding-successor-v3",
+  "engine": {
+    "bytes": 13805,
+    "classification": "DIRECT_IMPORT",
+    "git_blob": "d58ca50dfaeb60f581b64f43545e688aca5c6530",
+    "lst": false,
+    "modification": "NONE",
+    "path": "engine-src/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+    "repository": "hsoliwal/M3jdk21",
+    "sha256": "3fc6e77a1394e292747d689a4a42a328b496000865aa390afe05d5571febd599"
+  },
+  "files_excluding_this_provenance": [
+    {
+      "bytes": 13805,
+      "path": "engine-src/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+      "sha256": "3fc6e77a1394e292747d689a4a42a328b496000865aa390afe05d5571febd599"
+    },
+    {
+      "bytes": 1804,
+      "path": "FOSS_RECEIVING_DECISION.tsv",
+      "sha256": "34895010e3481ddeef5ba6140475fe4333e4f50be060b8979b199a52a16152b2"
+    },
+    {
+      "bytes": 2659,
+      "path": "pom.xml",
+      "sha256": "a2b05b17d35fe094bdf9b97041ce5e2992e92451f363b0c7cb6309c76839e4b8"
+    },
+    {
+      "bytes": 2017,
+      "path": "README.md",
+      "sha256": "6b3fc7d0b5f9ab79e45a113cb43102dc5a9e9045f25c133e2a234b136ee1c0a5"
+    },
+    {
+      "bytes": 253,
+      "path": "src/main/resources/com/synexia/rewrite/hash-pinned-java/sdk-binding-successor-v3/engine-receipt.tsv",
+      "sha256": "eb66d087806873f4a00f10e31f8bf31e48d461c6090f077e67e182fd12130a60"
+    },
+    {
+      "bytes": 7020,
+      "path": "src/main/resources/com/synexia/rewrite/hash-pinned-java/sdk-binding-successor-v3/M3CollectionSdk.java.before.txt",
+      "sha256": "258a4940136bce3998d7c2d717a6f5512f1412fd874580f242d2185be129b85a"
+    },
+    {
+      "bytes": 7589,
+      "path": "src/main/resources/com/synexia/rewrite/hash-pinned-java/sdk-binding-successor-v3/M3CollectionSdk.java.original-7589.txt",
+      "sha256": "1fb66d3c334f4087bfcd2be7502dad25cfe6b18ae7c3a6d968cb44a4612e41e8"
+    },
+    {
+      "bytes": 7807,
+      "path": "src/main/resources/com/synexia/rewrite/hash-pinned-java/sdk-binding-successor-v3/M3CollectionSdk.java.txt",
+      "sha256": "f805ff3b86349480dd575840326eb015e5626b5eb4f0f61deccc73f83e9e1452"
+    },
+    {
+      "bytes": 307,
+      "path": "src/main/resources/com/synexia/rewrite/hash-pinned-java/sdk-binding-successor-v3/manifest.tsv",
+      "sha256": "a9f0c7156644c4492ccb20cdb2cefe0b82a0382201a8ce19aa88938e6ae00925"
+    },
+    {
+      "bytes": 211,
+      "path": "src/main/resources/com/synexia/rewrite/hash-pinned-java/sdk-binding-successor-v3/source-receipt.tsv",
+      "sha256": "ba023eb0f093a0476629411d3d4ffd788bdc50f7edf67b1c11597e736917ba34"
+    },
+    {
+      "bytes": 558,
+      "path": "src/main/resources/META-INF/rewrite/m3-sdk-binding-successor-v3.yml",
+      "sha256": "8d83bf7976c58549069bfd662359c97729f8332a813718a0b4e720870660b523"
+    },
+    {
+      "bytes": 16182,
+      "path": "src/test/java/com/synexia/rewrite/M3SdkBindingSuccessorRecipeTest.java",
+      "sha256": "c13d8c143573dc51bfb86c11e45441391d389a51f64bdcc19158f73fb38103ee"
+    }
+  ],
+  "license": "Apache-2.0",
+  "original_7589_negative_only": {
+    "bytes": 7589,
+    "historical_path": "owned-apache-multivalue-20261018/src/main/resources/com/synexia/rewrite/hash-pinned-java/sdk-duplicate-sorted-factories/M3CollectionSdk.java.before.txt",
+    "scope": "NEGATIVE_FIXTURE_ONLY_NOT_INSTALLER_PREIMAGE",
+    "sha256": "1fb66d3c334f4087bfcd2be7502dad25cfe6b18ae7c3a6d968cb44a4612e41e8",
+    "template": "M3CollectionSdk.java.original-7589.txt"
+  },
+  "preservation": "Original 33-row receipt, V1/V2 SDK installers, SDK guard and runtime fixtures are not modified.",
+  "receiving_test_revision": {
+    "actual_v1_failure_receipt": "receiving-test-v1-failure/FAILURE_RECEIPT.json",
+    "actual_v1_result": "STRICT_COMPILE_PASS_JUNIT_ONE_OF_TWO_FAILED",
+    "changed_assertion": "Changed target retains identical supplied markers/IDs and gains exactly the official RecipesThatMadeChanges marker. Existing-source identities, seven refusal checks and fresh fixed points are unchanged.",
+    "execution_status": "V2_AUTHORED_NOT_COMPILED_OR_EXECUTED_BY_THIS_AGENT",
+    "official_audit_marker_git_blob": "a23c3a111bcc5db81b65186685ce5c829538cc4b",
+    "postimage": {
+      "bytes": 16182,
+      "sha256": "c13d8c143573dc51bfb86c11e45441391d389a51f64bdcc19158f73fb38103ee"
+    },
+    "preimage": {
+      "bytes": 15482,
+      "sha256": "d885434d53b6ba60baefa297a307ca7d635d08f342e705664ee6a36b88c6d1b6"
+    },
+    "revision": 2
+  },
+  "recipe": "com.synexia.m3.SdkBindingSuccessor20261018",
+  "schema": "m3-sdk-binding-successor-receiving-source-custody-v3",
+  "scope": "ONE_EXACT_EXISTING_SOURCE_TRANSITION; SOURCE_CUSTODY_ONLY; NO_NEW_ENGINE; NO_ARBITRARY_COMPOSED_RECIPE_TRANSACTION_CLAIM",
+  "source_headers": "PRESERVED_VERBATIM_IN_ENGINE_AND_IMAGES",
+  "status": {
+    "hosted_ci": "PENDING_PARENT_VALIDATION",
+    "publication": "PENDING_PARENT_REVIEW",
+    "receiving_host": "V2_SOURCE_ONLY_AUTHORED_PENDING_PARENT_COMPILE_AND_JUNIT",
+    "sdk_runtime_and_guard": "SEPARATE_ROOT_OWNED_PROOFS_NOT_ESTABLISHED_BY_THIS_HOST"
+  },
+  "target": "m3/collections/src/main/java/com/m3/collections/M3CollectionSdk.java"
+}

@@ -1,0 +1,11 @@
+problem_category	operation	candidate	decision	complexity	contract_reference	license_or_provenance
+DENSE_INT_ARRAY	indexed int sequence	M3LongArrayList converted to int[] geometry	SELECT	O(1) amortized append, O(n) middle insert	M3IntCollection/M3IntIterator + JDK List oracle	first-party M3/Synexia Apache-2.0
+STABLE_COMPACTION	filterInPlace/retainByStateMask	LeetCode 27 stable two-pointer pattern	SELECT_CATEGORY_NOT_CODE	O(n) time, O(1) memory	One callback per value; preserve unread suffix on throw	LeetCode taxonomy only; own implementation
+ORDERED_DEDUP	deduplicateSorted	LeetCode 26 adjacent-run elimination	SELECT_CATEGORY_NOT_CODE	O(n) time, O(1) memory	Preserve first representative of equal int values	LeetCode taxonomy only
+BINARY_LOOKUP	binarySearch/lowerBound	Arrays.binarySearch + signed primitive comparator	REUSE	O(log n)	Sorted precondition, duplicate lower bound	JDK public API; no copied implementation
+INDIRECT_STABLE_SORT	int[] logical index permutation	Stable bottom-up merge with primitive scratch	SELECT	O(n log n) time, O(n) index scratch	Original payload never reordered; equal-key ties stable	M3LongIndexProjection lineage, first-party
+IMMUTABLE_SLICE	[from,to) bounded view	Offset descriptors over shared copied int[]+int[]	SELECT	O(1) slices	No per-entry wrapper; all mutation refused	M3IndexedListSnapshot lineage, first-party
+JNI_MASK_SELECTION	logical position mask compaction	M3IndexMaskCompactor.selectPositions	REUSE	O(n) Java or opt-in JNI, no Java objects native	Actual checked JNI and missing-native refusal	M3JDK existing C17 ABI, no new symbol
+GUAVA_ECLIPSE_APACHE_SPRING	provider API types	Do not duplicate wrappers/adapters in int lane	OUT_OF_SCOPE_DIRECT_CORE	N/A	Distinct contracts preserved by own provider owners	Library provider licenses remain separate
+HACKERRANK	dynamic arrays	Indexed mutation/dynamic capacity category	TAXONOMY_ONLY	O(n) worst-case insert	Deterministic JDK oracle	No editorial or challenge source copied
+GEEKSFORGEEKS	array run filtering and stable merge	Algorithm catalogue reference	TAXONOMY_ONLY	O(n log n) sort	Stable tie test and extrema	No article/solution source copied

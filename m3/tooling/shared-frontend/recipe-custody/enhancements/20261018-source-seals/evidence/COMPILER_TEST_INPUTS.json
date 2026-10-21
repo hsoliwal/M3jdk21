@@ -1,0 +1,12 @@
+[
+  {
+    "path": "test/langtools/tools/javac/m3/M3ASTSourceSealTest.java",
+    "sha256": "1b3423999ac2644f17ba6bc743f3873f4130846acc4e346518e16958606e5e1a",
+    "bytes": 16219
+  },
+  {
+    "path": "test/langtools/tools/javac/m3/M3ASTSharedFrontendTest.java",
+    "sha256": "47349ef82633f724f3ca694521250048ba70486b094b069fc51c13b5e64978a5",
+    "bytes": 21030
+  }
+]

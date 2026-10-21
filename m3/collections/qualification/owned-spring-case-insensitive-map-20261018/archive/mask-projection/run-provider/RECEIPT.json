@@ -1,0 +1,89 @@
+{
+  "schema": "spring-public-map-mask-projection-v1",
+  "status": "PROVIDER_BASELINE_PASS",
+  "owner": null,
+  "fixtureSHA256": "e7b83f57343e3399865671eab4ec76997eed4953f8607fe8774c8ac9714c3b65",
+  "results": {
+    "provider-java": {
+      "status": "PASS",
+      "checks": 9437489,
+      "cases": 1048576,
+      "projectionSHA256": "83211754b2567685ea16a105d0d74c6510d4f7382f76580368f2d819806ca2d3",
+      "scope": "existing aligned primitive kernel over public map views/snapshots; no native map store or ABI addition"
+    }
+  },
+  "commands": [
+    {
+      "label": "strict-fixture-compile",
+      "argv": [
+        "C:\\Program Files\\Java\\jdk-21\\bin\\javac.exe",
+        "-J-Xmx256m",
+        "-J-Xss512k",
+        "-J-XX:ActiveProcessorCount=2",
+        "-J-XX:-UsePerfData",
+        "-J-Djava.io.tmpdir=S:\\codex-work\\m3-collections-next-20261018\\temp",
+        "-J-Duser.home=S:\\codex-work\\m3-collections-next-20261018\\temp",
+        "-J-XX:ErrorFile=S:\\codex-work\\m3-collections-next-20261018\\spring-case-insensitive-map\\mask-projection\\run-provider\\hs_err_pid%p.log",
+        "--release",
+        "21",
+        "-g",
+        "-proc:none",
+        "-Xlint:all,-module",
+        "-Werror",
+        "-cp",
+        "S:\\codex-work\\m3-collections-next-20261018\\apache-circular-fifo\\base129-classes",
+        "-d",
+        "S:\\codex-work\\m3-collections-next-20261018\\spring-case-insensitive-map\\mask-projection\\run-provider\\classes",
+        "S:\\codex-work\\m3-collections-next-20261018\\spring-case-insensitive-map\\mask-projection\\SpringCaseInsensitiveMapMaskProjectionProof.java"
+      ],
+      "returncode": 0,
+      "stdoutSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr": ""
+    },
+    {
+      "label": "provider-java",
+      "argv": [
+        "C:\\Program Files\\Java\\jdk-21\\bin\\java.exe",
+        "-Xmx256m",
+        "-Xss512k",
+        "-XX:ActiveProcessorCount=2",
+        "-XX:-UsePerfData",
+        "-Djava.io.tmpdir=S:\\codex-work\\m3-collections-next-20261018\\temp",
+        "-Duser.home=S:\\codex-work\\m3-collections-next-20261018\\temp",
+        "-XX:ErrorFile=S:\\codex-work\\m3-collections-next-20261018\\spring-case-insensitive-map\\mask-projection\\run-provider\\hs_err_pid%p.log",
+        "-Djava.library.path=S:\\codex-work\\m3-collections-next-20261018\\spring-case-insensitive-map\\mask-projection\\run-provider\\absent-native",
+        "-cp",
+        "S:\\codex-work\\m3-collections-next-20261018\\spring-case-insensitive-map\\mask-projection\\run-provider\\classes;S:\\codex-work\\m3-collections-next-20261018\\apache-circular-fifo\\base129-classes;C:\\Users\\hsoliwal\\.m2\\repository\\org\\springframework\\spring-core\\6.2.0\\spring-core-6.2.0.jar",
+        "SpringCaseInsensitiveMapMaskProjectionProof",
+        "org.springframework.util.LinkedCaseInsensitiveMap",
+        "java"
+      ],
+      "returncode": 0,
+      "stdoutSHA256": "4710d7d20e391fe18d3e7648fe7d1483ad06eebe561ca817dcca53800feb3a20",
+      "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr": ""
+    }
+  ],
+  "scope": "Unchanged existing primitive kernel over public mapped owner arrays/cursors/entries, 4capacityhints x4frames x256state seeds x256masks. Separate Java/native projection; no native map storage/CRUD/ABI or whole-library JNI admission. API temporary entries only.",
+  "storageBefore": {
+    "root": "S:\\codex-work\\m3-collections-next-20261018",
+    "free_bytes": 26181988352,
+    "logical_bytes": 44880492,
+    "cap_bytes": 536870912,
+    "reserve_bytes": 8589934592,
+    "verified_child_temp": "S:\\codex-work\\m3-collections-next-20261018\\temp\\",
+    "C_build_lane": "HELD",
+    "K_temp_lane": "UNAVAILABLE"
+  },
+  "storageAfter": {
+    "root": "S:\\codex-work\\m3-collections-next-20261018",
+    "free_bytes": 26181971968,
+    "logical_bytes": 44895306,
+    "cap_bytes": 536870912,
+    "reserve_bytes": 8589934592,
+    "verified_child_temp": "S:\\codex-work\\m3-collections-next-20261018\\temp\\",
+    "C_build_lane": "HELD",
+    "K_temp_lane": "UNAVAILABLE"
+  }
+}

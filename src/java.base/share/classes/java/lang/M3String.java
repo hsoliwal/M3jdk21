@@ -20,6 +20,7 @@ import java.util.Arrays;
 import java.util.Objects;
 import java.util.Spliterator;
 import java.util.function.IntConsumer;
+import java.util.function.IntUnaryOperator;
 import java.util.stream.IntStream;
 import java.util.stream.StreamSupport;
 import sun.nio.cs.ArrayEncoder;
@@ -576,7 +577,7 @@ final class M3String implements CharSequence {
      * It resolves each contiguous visible scalar run once, not once per code unit.
      * Only canonical owners and primitive bounds are retained; no text or native pointer copy.
      */
-    static final class CodeUnitCursor {
+    static final class CodeUnitCursor implements IntUnaryOperator {
         private final M3String source;
         private M3StringOwner scalar;
         private int logicalBegin;
@@ -587,12 +588,21 @@ final class M3String implements CharSequence {
             this.source = source;
         }
 
+        @Override
+        public int applyAsInt(int index) {
+            return at(index);
+        }
+
         char at(int index) {
             Objects.checkIndex(index, source.length());
+            prepare(index);
+            return scalar.charAt(scalarOffset + index - logicalBegin);
+        }
+
+        private void prepare(int index) {
             if (scalar == null || index < logicalBegin || index >= logicalEnd) {
                 seek(index);
             }
-            return scalar.charAt(scalarOffset + index - logicalBegin);
         }
 
         private void seek(int index) {
@@ -746,6 +756,10 @@ final class M3String implements CharSequence {
         M3String that = other.m3();
         if (that != null) {
             if (sameCoordinate(that)) return true;
+            if (isWholeOwner() && that.isWholeOwner()
+                    && owner instanceof M3StringImmediate && that.owner instanceof M3StringImmediate) {
+                return M3StringImmediate.sameText(owner, that.owner);
+            }
             if (that.length() != length()) return false;
             if (isWholeOwner() && that.isWholeOwner()) {
                 if (owner.javaHash != that.owner.javaHash) return false;
@@ -760,10 +774,64 @@ final class M3String implements CharSequence {
         } else if (other.length() != length()) {
             return false;
         }
-        for (int index = 0; index < length(); index++) {
-            if (charAt(index) != other.charAt(index)) return false;
+        return that != null
+                ? comparePrefix(that, length()) == 0
+                : compareFlatPrefix(other, length()) == 0;
+    }
+
+    /**
+     * Compare a logical prefix using existing scalar runs. Owner identity proves equality only for
+     * the same offset and run length; different owners or tuple segmentation still compare text.
+     */
+    int comparePrefix(M3String other, int count) {
+        Objects.requireNonNull(other, "other");
+        Objects.checkFromIndexSize(0, count, length());
+        Objects.checkFromIndexSize(0, count, other.length());
+        if (count == 0 || sameCoordinate(other)) return 0;
+        if (!(owner instanceof M3StringTuple) && !(other.owner instanceof M3StringTuple)) {
+            return compareScalarRange(owner, start(), other.owner, other.start(), count);
         }
-        return true;
+        CodeUnitCursor left = new CodeUnitCursor(this);
+        CodeUnitCursor right = new CodeUnitCursor(other);
+        for (int index = 0; index < count; ) {
+            left.prepare(index);
+            right.prepare(index);
+            int runEnd = Math.min(count, Math.min(left.logicalEnd, right.logicalEnd));
+            int difference = compareScalarRange(
+                    left.scalar, left.scalarOffset + index - left.logicalBegin,
+                    right.scalar, right.scalarOffset + index - right.logicalBegin,
+                    runEnd - index);
+            if (difference != 0) return difference;
+            index = runEnd;
+        }
+        return 0;
+    }
+
+    private static int compareScalarRange(
+            M3StringOwner left, int leftStart, M3StringOwner right, int rightStart, int count) {
+        if (left == right && leftStart == rightStart) return 0;
+        if (left instanceof M3StringAtom leftAtom && right instanceof M3StringAtom rightAtom) {
+            return leftAtom.compareRange(leftStart, rightAtom, rightStart, count);
+        }
+        for (int index = 0; index < count; index++) {
+            int difference = left.charAt(leftStart + index) - right.charAt(rightStart + index);
+            if (difference != 0) return difference;
+        }
+        return 0;
+    }
+
+    /** Mixed flat/M3 comparison never admits, flattens, or prepares facts for either side. */
+    int compareFlatPrefix(String other, int count) {
+        Objects.requireNonNull(other, "other");
+        Objects.checkFromIndexSize(0, count, length());
+        Objects.checkFromIndexSize(0, count, other.length());
+        CodeUnitCursor units = owner instanceof M3StringTuple ? new CodeUnitCursor(this) : null;
+        for (int index = 0; index < count; index++) {
+            char unit = units != null ? units.at(index) : owner.charAt(start() + index);
+            int difference = unit - other.charAt(index);
+            if (difference != 0) return difference;
+        }
+        return 0;
     }
 
     void getChars(int sourceBegin, int sourceEnd, char[] destination, int destinationBegin) {
@@ -811,6 +879,9 @@ final class M3String implements CharSequence {
 
     private byte[] encodeUtf8() {
         M3StringFacts prepared = facts();
+        if (prepared.utf8Length < 0) {
+            throw new OutOfMemoryError("Required UTF-8 length exceeds implementation limit");
+        }
         byte[] output = new byte[prepared.utf8Length];
         if (prepared.ascii) {
             getBytes(output, 0, 0, String.LATIN1, length());
@@ -907,6 +978,9 @@ final class M3String implements CharSequence {
         M3StringFacts prepared = facts();
         if (prepared.unpairedSurrogateCount == 0) {
             return encodeUtf8();
+        }
+        if (prepared.utf8Length < 0) {
+            throw new OutOfMemoryError("Required UTF-8 length exceeds implementation limit");
         }
         byte[] output = new byte[prepared.utf8Length];
         if (prepared.ascii) {
@@ -1051,6 +1125,22 @@ final class M3String implements CharSequence {
             if (offset == length() - checked.length() && !sourceFacts.suffixMayMatch(prefixFacts)) {
                 return false;
             }
+        }
+        // A long prefix of a composite would otherwise descend the balanced
+        // tuple DAG once per UTF-16 unit. Reuse the existing scalar-run cursor:
+        // at most two request-local cursors, no leaf directory or copied text.
+        // Short/flat comparisons retain their allocation-free direct path.
+        if (checked.length() >= 64
+                && (owner instanceof M3StringTuple
+                        || checked.owner() instanceof M3StringTuple)) {
+            CodeUnitCursor sourceUnits = new CodeUnitCursor(this);
+            CodeUnitCursor prefixUnits = new CodeUnitCursor(checked);
+            for (int index = 0; index < checked.length(); index++) {
+                if (sourceUnits.at(offset + index) != prefixUnits.at(index)) {
+                    return false;
+                }
+            }
+            return true;
         }
         for (int index = 0; index < checked.length(); index++) {
             if (charAt(offset + index) != checked.charAt(index)) return false;

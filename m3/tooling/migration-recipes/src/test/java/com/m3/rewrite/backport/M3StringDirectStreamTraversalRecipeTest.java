@@ -25,6 +25,26 @@ final class M3StringDirectStreamTraversalRecipeTest {
             "/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-string-stream-traversal/";
 
     @Test
+    void currentJavaAndTextCrateManifestsBindAllExactSourceOwners() {
+        var javaCrate = new M3Jdk21HashPinnedSnapshotRecipe(
+                "jdk22-m3-string-stream-traversal");
+        var textCrate = new M3Jdk21HashPinnedTextSnapshotRecipe(
+                "m3-string-stream-traversal");
+
+        // targetPaths also checks resource SHA-256, source path grammar,
+        // strict lexical order, and the existing flat crate-template rule.
+        assertEquals(List.of(
+                "src/java.base/share/classes/java/lang/M3String.java",
+                "src/java.base/share/classes/java/lang/String.java",
+                "test/jdk/java/lang/String/M3StringStreamsTest.java"), javaCrate.targetPaths());
+        assertEquals(List.of(
+                ".github/workflows/mindex-string-backing.yml",
+                "m3/docs/m3-runtime-invariants.tsv",
+                "m3/runtime-integration/check-m3string-invariants.py"),
+                textCrate.targetPaths());
+    }
+
+    @Test
     void javaPostimagesAreFixedPointAndWrongTypeRefuses() {
         var recipe =
                 new M3Jdk21HashPinnedSnapshotRecipe("jdk22-m3-string-stream-traversal");

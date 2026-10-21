@@ -1,0 +1,20 @@
+[
+  "/tmp/m3-ast-product-build/images/jdk/bin/javac",
+  "-source",
+  "21",
+  "-target",
+  "21",
+  "-proc:none",
+  "-Xlint:all",
+  "-Werror",
+  "-d",
+  "/workspace/scratch/13309be96b09/ast-work/sdk-complete-product-proof/strict-classes",
+  "-classpath",
+  "/workspace/scratch/13309be96b09/ast-work/sdk-complete-product-proof/classes:/tmp/m3-toolchain/jtreg-7.3.1+1/jtreg/lib/junit-platform-console-standalone-1.9.2.jar:/tmp/m3-maven-repository/org/slf4j/slf4j-api/2.0.13/slf4j-api-2.0.13.jar:/tmp/m3-maven-repository/com/fasterxml/jackson/core/jackson-databind/2.16.1/jackson-databind-2.16.1.jar:/tmp/m3-maven-repository/com/fasterxml/jackson/core/jackson-core/2.16.1/jackson-core-2.16.1.jar:/tmp/m3-maven-repository/com/fasterxml/jackson/core/jackson-annotations/2.16.1/jackson-annotations-2.16.1.jar:/tmp/m3-maven-repository/net/java/dev/jna/jna/5.14.0/jna-5.14.0.jar:/tmp/m3-maven-repository/org/eclipse/collections/eclipse-collections/11.1.0/eclipse-collections-11.1.0.jar:/tmp/m3-maven-repository/org/eclipse/collections/eclipse-collections-api/11.1.0/eclipse-collections-api-11.1.0.jar:/tmp/m3-maven-repository/commons-codec/commons-codec/1.16.1/commons-codec-1.16.1.jar:/tmp/m3-maven-repository/org/projectlombok/lombok/1.18.46/lombok-1.18.46.jar:/tmp/m3-maven-repository/com/google/guava/guava/33.4.8-jre/guava-33.4.8-jre.jar:/tmp/m3-maven-repository/org/apache/commons/commons-lang3/3.14.0/commons-lang3-3.14.0.jar",
+  "/workspace/scratch/13309be96b09/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/target/synexia-ast-complete/candidate/synexia-indexstring/src/main/java/com/synexia/indexstring/ast/MIndexASTParser.java",
+  "/workspace/scratch/13309be96b09/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/target/synexia-ast-complete/candidate/synexia-indexstring/src/test/java/com/synexia/indexstring/ast/MIndexASTExistingUnitCaptureTest.java",
+  "/workspace/scratch/13309be96b09/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/target/synexia-ast-complete/candidate/synexia-indexstring/integration/m3jdk21-ast/src/main/java/com/synexia/m3/integration/M3ASTCacheBridge.java",
+  "/workspace/scratch/13309be96b09/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/target/synexia-ast-complete/candidate/synexia-indexstring/integration/m3jdk21-ast/src/test/java/com/synexia/m3/integration/M3ASTCacheBridgeTest.java",
+  "/workspace/scratch/13309be96b09/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/target/synexia-ast-complete/candidate/synexia-indexstring/src/main/java/com/synexia/indexstring/ast/MIndexASTTieredLoader.java",
+  "/workspace/scratch/13309be96b09/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/target/synexia-ast-complete/candidate/synexia-indexstring/src/test/java/com/synexia/indexstring/ast/MIndexASTTieredCaptureTest.java"
+]

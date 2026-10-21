@@ -1,0 +1,27 @@
+[
+  {
+    "path": "/tmp/m3-array-refinement-20261018-recovery/maven-cache/org/slf4j/slf4j-simple/2.0.13/_remote.repositories",
+    "sha256": "44da08668d5a852cc16ceedceb53d903f46b7665dfab4794e57b7ffcfd484082",
+    "bytes": 206
+  },
+  {
+    "path": "/tmp/m3-array-refinement-20261018-recovery/maven-cache/org/slf4j/slf4j-simple/2.0.13/slf4j-simple-2.0.13.jar",
+    "sha256": "3153fe1d689cffb94f1530b58470c306685ba68844de8857116e3b6ebb81d9f7",
+    "bytes": 15703
+  },
+  {
+    "path": "/tmp/m3-array-refinement-20261018-recovery/maven-cache/org/slf4j/slf4j-simple/2.0.13/slf4j-simple-2.0.13.jar.sha1",
+    "sha256": "748045acb86652b385f5ef2cecb9163a82f0c52e66edb80cca6e4e196dca7ae1",
+    "bytes": 40
+  },
+  {
+    "path": "/tmp/m3-array-refinement-20261018-recovery/maven-cache/org/slf4j/slf4j-simple/2.0.13/slf4j-simple-2.0.13.pom",
+    "sha256": "4a4d4bb24cf8abe2cb874a836f5e743d3485b7db04fcff6fc071495253b5cfa8",
+    "bytes": 1313
+  },
+  {
+    "path": "/tmp/m3-array-refinement-20261018-recovery/maven-cache/org/slf4j/slf4j-simple/2.0.13/slf4j-simple-2.0.13.pom.sha1",
+    "sha256": "9870e3751b2e760b8f936a159464ff7af158121ed1a2a588ddd911229eecf889",
+    "bytes": 40
+  }
+]

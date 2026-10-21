@@ -439,6 +439,9 @@ public abstract class Reader implements Readable, Closeable {
      */
     public long transferTo(Writer out) throws IOException {
         Objects.requireNonNull(out, "out");
+        if (getClass() == StringReader.class && out.getClass() == StringWriter.class) {
+            return ((StringReader) this).transferToStringWriter((StringWriter) out);
+        }
         long transferred = 0;
         char[] buffer = new char[TRANSFER_BUFFER_SIZE];
         int nRead;

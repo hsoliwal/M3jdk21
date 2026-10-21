@@ -1,0 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright 2026 Hitesh Soliwal and contributors
+src/main/java/fixture/Carrier.java	ABSENT	69512e9fca52ca82ff704a0b13e5ef1a4b784203a0914af288111fa9cdff5b7f	Carrier.java.txt
+src/main/java/fixture/Extra.java	ABSENT	51e316c22299c64429328ec8ea37cb59cbc76371d0c842c179cd8959446d8ef9	Extra.java.txt
+src/main/java/fixture/Numbers.java	d8b509c96058eb36d837d299c88f49fdf1c7641b22ab78ec0b4314d332876d68	b19c66dbf7523359189f7302ddf089db8f7c935fe416b71cbeaf0f926ea36406	Numbers.java.txt

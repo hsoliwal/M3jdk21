@@ -1,0 +1,18 @@
+releases: 9
+
+org.xerial.sqlitejdbc@3.45.1.0 jar:file:///workspace/scratch/e736b6177c79/m3fs-vfs-20261020/toolchain/test-dependencies/org/xerial/sqlite-jdbc/3.45.1.0/sqlite-jdbc-3.45.1.0.jar!/META-INF/versions/9/module-info.class
+exports org.sqlite
+exports org.sqlite.core
+exports org.sqlite.date
+exports org.sqlite.javax
+exports org.sqlite.jdbc3
+exports org.sqlite.jdbc4
+exports org.sqlite.util
+requires java.base mandated
+requires java.sql transitive
+requires java.sql.rowset transitive
+requires org.graalvm.nativeimage static
+requires org.slf4j
+provides java.sql.Driver with org.sqlite.JDBC
+contains org.sqlite.nativeimage
+

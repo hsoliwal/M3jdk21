@@ -757,14 +757,75 @@ class CAccessibility implements PropertyChangeListener {
         return new Object[]{childrenAndRoles.get(whichChildren * 2), childrenAndRoles.get((whichChildren * 2) + 1)};
     }
 
+    private static Accessible createAccessibleTreeNode(JTree t, javax.swing.tree.TreePath p) {
+        Accessible a = null;
+
+        try {
+            Class<?> accessibleJTreeNodeClass = Class.forName("javax.swing.JTree$AccessibleJTree$AccessibleJTreeNode");
+            java.lang.reflect.Constructor<?> constructor = accessibleJTreeNodeClass.getConstructor(t.getAccessibleContext().getClass(), JTree.class, javax.swing.tree.TreePath.class, Accessible.class);
+            constructor.setAccessible(true);
+            a = ((Accessible) constructor.newInstance(t.getAccessibleContext(), t, p, null));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return a;
+    }
+
     // This method is called from the native
     // Each child takes up three entries in the array: one for itself, one for its role, and one for the recursion level
     private static Object[] getChildrenAndRolesRecursive(final Accessible a, final Component c, final int whichChildren, final boolean allowIgnored, final int level) {
         if (a == null) return null;
         return invokeAndWait(new Callable<Object[]>() {
             public Object[] call() throws Exception {
-                ArrayList<Object> currentLevelChildren = new ArrayList<Object>();
                 ArrayList<Object> allChildren = new ArrayList<Object>();
+
+                Accessible at = null;
+                if (a instanceof CAccessible) {
+                    at = CAccessible.getSwingAccessible(a);
+                } else {
+                    at = a;
+                }
+
+                if (at instanceof JTree) {
+                    JTree tree = ((JTree) at);
+
+                    if (whichChildren == JAVA_AX_ALL_CHILDREN) {
+                        int count = tree.getRowCount();
+                        for (int i = 0; i < count; i++) {
+                            javax.swing.tree.TreePath path = tree.getPathForRow(i);
+                            Accessible an = createAccessibleTreeNode(tree, path);
+                            if (an != null) {
+                                AccessibleContext ac = an.getAccessibleContext();
+                                if (ac != null) {
+                                    allChildren.add(an);
+                                    allChildren.add(ac.getAccessibleRole());;
+                                    allChildren.add(String.valueOf((tree.isRootVisible() ? path.getPathCount() : path.getPathCount() - 1)));
+                                }
+                            }
+                        }
+                    }
+
+                    if (whichChildren == JAVA_AX_SELECTED_CHILDREN) {
+                        int count = tree.getSelectionCount();
+                        for (int i = 0; i < count; i++) {
+                            javax.swing.tree.TreePath path = tree.getSelectionPaths()[i];
+                            Accessible an = createAccessibleTreeNode(tree, path);
+                            if (an != null) {
+                                AccessibleContext ac = an.getAccessibleContext();
+                                if (ac != null) {
+                                    allChildren.add(an);
+                                    allChildren.add(ac.getAccessibleRole());
+                                    allChildren.add(String.valueOf((tree.isRootVisible() ? path.getPathCount() : path.getPathCount() - 1)));
+                                }
+                            }
+                        }
+                    }
+
+                    return allChildren.toArray();
+                }
+
+                ArrayList<Object> currentLevelChildren = new ArrayList<Object>();
                 ArrayList<Accessible> parentStack = new ArrayList<Accessible>();
                 parentStack.add(a);
                 ArrayList<Integer> indexses = new ArrayList<Integer>();

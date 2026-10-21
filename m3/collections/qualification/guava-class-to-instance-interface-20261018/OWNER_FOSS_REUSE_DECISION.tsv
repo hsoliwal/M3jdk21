@@ -1,0 +1,2 @@
+capability	donor_revision	paths	license	classification	fit_and_gap
+existing-class-to-instance-api-factory	2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49	M3GuavaClassToInstanceMaps.java@d812004a11374b6c361a16634d4a3062cb60e995;SelfTest@bfe2afc128fdda8ca32854df0ad4f9911374fe7a;Test@a861afe830b672b4cf6970735e6a1d192077c911	Apache-2.0	DIRECT_IMPORT	Exact existing factory,1JUnit and3000-operation oracle; focused fixtures cover uncovered token/type/view/storage-contract behavior; no production owner changes.

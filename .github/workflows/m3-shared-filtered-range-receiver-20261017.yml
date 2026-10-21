@@ -1,0 +1,44 @@
+name: M3 filtered shared owner Java21 and family catalogue
+on:
+  push:
+    branches: ['m3/shared-filtered-range-audit-receiver-20261017']
+  pull_request:
+    paths:
+      - 'm3/collections/src/main/java/com/m3/collections/M3FilteredViews.java'
+      - 'm3/collections/src/test/java/com/m3/collections/M3FilteredNavigableSetRange*'
+      - 'm3/collections/algorithm-catalog/full-m3-family-inventory-20261017/**'
+      - '.github/workflows/m3-shared-filtered-range-receiver-20261017.yml'
+jobs:
+  filtered-owner-and-catalogue:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Check actual sealed Java and category catalogue SHA-256
+        shell: bash
+        run: |
+          echo '87a79889852d1890e6c9483089fa9f0869ca8f26b9cf1a82201e81a789f8e249  m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java' | sha256sum -c -
+          echo '029bfb06d64141be10804b7d303a5ab9a6014766f0c57437a5fa591899647ad5  m3/collections/src/test/java/com/m3/collections/M3FilteredNavigableSetRangeContract.java' | sha256sum -c -
+          echo 'bbd58091c3bfe9c03baf675159c87aade4d781a857bb9cbaf648c723d463e499  m3/collections/src/test/java/com/m3/collections/M3FilteredNavigableSetRangeTest.java' | sha256sum -c -
+          echo 'b06b70e0a3ae350853ad762a8835f68956513825ae58a75986a21e3d2e02d7d8  m3/collections/algorithm-catalog/full-m3-family-inventory-20261017/COLLECTION_SOURCE_INVENTORY.tsv' | sha256sum -c -
+          echo 'b03b7addca9efd62c8fdd546cc542949eb4848ebe575689f8e10f0dd2a5d1776  m3/collections/algorithm-catalog/full-m3-family-inventory-20261017/ALGORITHM_DECISIONS.tsv' | sha256sum -c -
+          echo 'a6f21ca922467b18a3d8d888f6c58f82346b2f2fe59a964bb90d00ed34630947  m3/collections/algorithm-catalog/full-m3-family-inventory-20261017/README.md' | sha256sum -c -
+          test "$(($(wc -l < m3/collections/algorithm-catalog/full-m3-family-inventory-20261017/COLLECTION_SOURCE_INVENTORY.tsv) - 1))" -eq 114
+      - name: Compile ACTUAL existing M3 filtered implementation and facade Java21
+        shell: bash
+        run: |
+          mkdir -p /tmp/m3-filtered-navigation-proof
+          javac --release 21 -proc:none -Xlint:all -Werror -d /tmp/m3-filtered-navigation-proof \
+            m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java \
+            m3/collections/src/main/java/com/m3/collections/M3FilteredNavigableSet.java \
+            m3/collections/src/test/java/com/m3/collections/M3FilteredNavigableSetRangeContract.java
+          java -ea -cp /tmp/m3-filtered-navigation-proof com.m3.collections.M3FilteredNavigableSetRangeContract
+      - name: Full owning module Maven/JUnit real runtime regression
+        shell: bash
+        run: |
+          mvn -B -ntp -f m3/collections/pom.xml -Dtest=M3FilteredNavigableSetRangeTest,M3FilteredViewsTest,M3FilteredNavigableSetTest test

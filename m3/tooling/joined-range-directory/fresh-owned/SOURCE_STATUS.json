@@ -1,0 +1,119 @@
+{
+  "schema": "M3_JOINED_FRESH_OWNED_RANGE_SOURCE_STATUS_V1",
+  "copyright": "Copyright 2026 Hitesh Soliwal and Contributors to the Synexia Project",
+  "license": "Apache-2.0",
+  "state": "SOURCE_AUTHORED_V8_CHECKED_RUNTIME_PENDING",
+  "admissionCommit": "80253b14a14191ad826a5c7c7594100c7c3c588a",
+  "parentDocs": "04b5feb1874fce2074f86244d83b3b0947c64a9f",
+  "sourceOnly": true,
+  "sdk": {
+    "path": "synexia-openrewrite-recipes/tasks/joined-fresh-owned-ranges-20261020/sdk",
+    "tree": "0079fba204e2a2820e66c4a83268ca6bb51cd329",
+    "files": 35,
+    "nonselfPins": 34,
+    "pins": {
+      "path": "synexia-openrewrite-recipes/tasks/joined-fresh-owned-ranges-20261020/sdk/pins.json",
+      "gitBlob": "329efb21b5878910ff3db1277bae25a948d62e13",
+      "bytes": 10316,
+      "sha256": "72274d3e0dbdaf86d8cadd8a41c696bcd7a43ba3ab729f0fb0da8c018547db9e"
+    },
+    "verifier": {
+      "path": "synexia-openrewrite-recipes/tasks/joined-fresh-owned-ranges-20261020/sdk/verify.py",
+      "gitBlob": "40c2e4a35315e953500ec3a3942bdc584db2f2b7",
+      "bytes": 25785,
+      "sha256": "b1cf55f585929b49f6ffeea0f4e5c93314c0e1bf3e89976c1ddc95fa070236d3"
+    },
+    "test": {
+      "path": "synexia-openrewrite-recipes/tasks/joined-fresh-owned-ranges-20261020/sdk/src/test/java/com/synexia/rewrite/M3JoinedRangeDirectoryRecipeTest.java",
+      "gitBlob": "73471b80d618b4ab2b016d097459dd5cb390ef93",
+      "bytes": 22058,
+      "sha256": "a36dd62e6d2cb03614473e90e77298971bb8203eeeefcf1f11689f3d128ec61f"
+    },
+    "suite": "com.synexia.rewrite.M3JoinedRangeDirectoryRecipeTest",
+    "methods": [
+      "allTwoPartialStatesBothOrdersReachExactFixedPoint",
+      "allTwoInverseStatesBothOrdersRecoverExactBefore",
+      "eachOwnedInputRefusesDriftMissingAndDuplicateOwnership"
+    ],
+    "expectedCounters": {
+      "tests": 3,
+      "successfulRuns": 16,
+      "refusedRuns": 30,
+      "emittedOutputs": 2
+    }
+  },
+  "cohorts": [
+    {
+      "name": "original-product",
+      "gitBlob": "cc3c84f5ea0230e2f57e3d3ae0f5d29b9241e597",
+      "bytes": 2634,
+      "sha256": "694ee6a9fa06803244fd56d7a846da16f1560d242a0660ae2f4a927c43fc3dcb",
+      "source": "public32152976 actual original58-input closure"
+    },
+    {
+      "name": "qualified-range",
+      "gitBlob": "3edc23c22362b08af00f7332ddc445a0274a6dd4",
+      "bytes": 2919,
+      "sha256": "10ddd082c142420c29985a85d8b2f77507fdbcde2552b8bfc154e658f3b2a9e3",
+      "source": "actual prior Maven emission; this new SDK before/inverse"
+    },
+    {
+      "name": "fresh-owned",
+      "gitBlob": "4f88f794266375ad8174fa56e952c30d32689877",
+      "bytes": 3377,
+      "sha256": "d69ef5cc0e4bd5d95808978b4a0d73982322230a623d897074840b58fab1993e",
+      "source": "New source proposal; not yet Java/Maven/runtime qualified"
+    }
+  ],
+  "javaFixture": {
+    "schema": "M3_JOINED_FRESH_OWNERSHIP_FIXTURE_V1",
+    "javaRelease": 21,
+    "compiledVariants": 4,
+    "semanticCohorts": 2,
+    "rejectedMutants": 2,
+    "qualifiedBeforeSha256": "10ddd082c142420c29985a85d8b2f77507fdbcde2552b8bfc154e658f3b2a9e3",
+    "afterSha256": "d69ef5cc0e4bd5d95808978b4a0d73982322230a623d897074840b58fab1993e",
+    "proofSummary": "JOINED_FRESH_RANGE_PASS fixtures=5 ranges=466 nested=466 freshResults=1864 invalidRanges=25 indexRefusals=3738 aliasMutations=3"
+  },
+  "proof": {
+    "path": "synexia-openrewrite-recipes/tasks/joined-fresh-owned-ranges-20261020/sdk/src/test/resources/com/synexia/rewrite/joined-range-directory-20261020/proof/M3JoinedFreshRangeProof.java.txt",
+    "gitBlob": "fa35d3170995ad74f6d7363d6e3fe85dd0b2449c",
+    "bytes": 14816,
+    "sha256": "8194f210675ff2da605989cf885687549a77ac6037757ac0a8fabcea307cee1f"
+  },
+  "sourceControls": {
+    "checks": 43,
+    "inputDriftRefusals": 41,
+    "kind": "V8_BYTE_STRUCTURE_AUTHORING_ONLY"
+  },
+  "existingModels": {
+    "originalBuildInputsGit": "921d708e2a0f1f1c43e95989ea9e37e02e22790a",
+    "originalEntries": 58,
+    "originalJoinedGit": "cc3c84f5ea0230e2f57e3d3ae0f5d29b9241e597",
+    "originalProofGit": "833b13b220110b6942277c2b8b8a4fd78ce9e285",
+    "coreClasses": 83,
+    "programs": 16,
+    "directories": 118,
+    "rangeCases": 4026,
+    "backingUnits": 7424,
+    "jvmModes": 4,
+    "disposition": "Frozen literal originals; runtime controller/cohort overlay integration remains pending."
+  },
+  "claims": {
+    "pythonExecuted": false,
+    "mavenExecuted": false,
+    "javaExecuted": false,
+    "originalCoreExecuted": false,
+    "originalReceivingModelQualified": false,
+    "fullJdkQualified": false,
+    "performanceRetentionQualified": false,
+    "defaultPromotion": false,
+    "timingImprovementClaimed": false,
+    "publicBranchUpdated": false,
+    "productOwnerApplied": false,
+    "newWorkflowCreated": false,
+    "requiredAutoreviewHelper": "NOT_RUN_LOCAL_BULK_HOLD"
+  },
+  "storageProtection": "ACTIVE",
+  "fullMigrationGoal": "ACTIVE"
+}

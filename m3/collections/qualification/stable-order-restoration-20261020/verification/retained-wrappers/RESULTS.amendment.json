@@ -1,0 +1,15 @@
+{
+  "commands_logs_or_fixture_bytes_changed": false,
+  "final_report": "RESULTS.json",
+  "final_scope": "Partial retained-wrapper qualification: original JUnit 1/1 and five standalone modes pass; four standalone modes have nonzero exits, with the default readonly mode duplicating the comparator-first failure.",
+  "final_sha256": "0009f9e99b53878dd0a22e38d4b81175d16fd5e65d594d5941030d2d868834fd",
+  "format": "m3-retained-wrapper-report-amendment-v1",
+  "initial_preservation": "Exact initial JSON bytes reconstructed from the final report and the unchanged executed driver static narrative, then checked against the pre-amendment SHA256 already recorded by the finalizer.",
+  "original_execution_fields_identical": true,
+  "production_changes": 0,
+  "reason": "The initial driver static narrative listed the historical interior-null finding despite the original six-check mode actually passing. Final known_findings describes only the three reproduced current findings.",
+  "superseded_initial_report": "RESULTS.initial.json",
+  "superseded_initial_sha256": "1c2979c678256f0d044c1b80923d5dd0e15e4203ad9bea04bfd40632cf0b7858",
+  "tests_rerun": false,
+  "timestamp": "2026-10-20T11:34:15.884812+00:00"
+}

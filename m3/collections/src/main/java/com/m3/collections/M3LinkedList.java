@@ -1,3 +1,4 @@
+// Modified 2026 by Hitesh Soliwal and contributors: adaptive clearing of reusable linked slots.
 // Modified 2026 by Hitesh Soliwal and Contributors to the Synexia Project: Synexia-to-M3 package/type adaptation.
 // SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
 // Modified 2026 by Hitesh Soliwal and Contributors to the Synexia Project: late-binding list spliterator.
@@ -13,6 +14,7 @@ import java.util.ListIterator;
 import java.util.NoSuchElementException;
 import java.util.Objects;
 import java.util.Spliterator;
+import java.util.function.Consumer;
 
 /**
  * List and deque over reusable array slots, with integer links instead of nodes.
@@ -65,7 +67,88 @@ public final class M3LinkedList<E> extends AbstractSequentialList<E> implements 
         }
         return false;
     }
-    @Override public Spliterator<E> spliterator() { return M3SlotSpliterators.ordered(this, false); }
+    @Override public Spliterator<E> spliterator() { return new LinkedIndexSplit(); }
+
+    /** Split the existing int[] slot links, never copy an Object[] batch. */
+    private final class LinkedIndexSplit implements Spliterator<E> {
+        private int cursor = -1;
+        private int remaining = -1;
+        private int expected;
+        private int depth = boundedSplitDepth();
+
+        LinkedIndexSplit() { }
+        private LinkedIndexSplit(int cursor, int count, int expected, int depth) {
+            this.cursor = cursor;
+            this.remaining = count;
+            this.expected = expected;
+            this.depth = depth;
+        }
+        private void bind() {
+            if (remaining < 0) {
+                cursor = first();
+                remaining = size();
+                expected = modCount;
+            }
+        }
+        private void check() {
+            if (expected != modCount) throw new ConcurrentModificationException();
+        }
+        @Override public boolean tryAdvance(Consumer<? super E> action) {
+            Objects.requireNonNull(action, "action");
+            bind();
+            check();
+            if (remaining == 0) return false;
+            if (cursor < 0) throw new ConcurrentModificationException("invalid linked slot");
+            int slot = cursor;
+            cursor = next(slot);
+            remaining--;
+            action.accept(value(slot));
+            check();
+            return true;
+        }
+        @Override public void forEachRemaining(Consumer<? super E> action) {
+            Objects.requireNonNull(action, "action");
+            bind();
+            check();
+            while (remaining > 0) {
+                if (cursor < 0) throw new ConcurrentModificationException("invalid linked slot");
+                int slot = cursor;
+                cursor = next(slot);
+                remaining--;
+                action.accept(value(slot));
+                check();
+            }
+        }
+        @Override public Spliterator<E> trySplit() {
+            bind();
+            check();
+            if (depth == 0 || remaining < 2) return null;
+            int half = remaining >>> 1;
+            int prefix = cursor, suffix = prefix;
+            for (int i = 0; i < half; i++) {
+                if (suffix < 0) throw new ConcurrentModificationException("invalid linked slot");
+                suffix = next(suffix);
+            }
+            cursor = suffix;
+            remaining -= half;
+            int budget = --depth;
+            return new LinkedIndexSplit(prefix, half, expected, budget);
+        }
+        @Override public long estimateSize() {
+            bind();
+            check();
+            return remaining;
+        }
+        @Override public int characteristics() {
+            return ORDERED | SIZED | SUBSIZED;
+        }
+    }
+
+    private static int boundedSplitDepth() {
+        int leaves = Math.min(64, Math.max(1,
+                Runtime.getRuntime().availableProcessors())) * 2;
+        return Integer.SIZE - Integer.numberOfLeadingZeros(leaves - 1);
+    }
     @Override public Iterator<E> descendingIterator() { return reversed().iterator(); }
     @Override public M3LinkedList<E> reversed() {
         if (reverse == null) {
@@ -75,7 +158,19 @@ public final class M3LinkedList<E> extends AbstractSequentialList<E> implements 
     }
     @Override public void clear() {
         if (isEmpty()) { return; }
-        Arrays.fill(storage.values, null); storage.first = -1; storage.last = -1; storage.free = -1;
+        // Reuse capacity without scanning every retained cell after a sparse drain.
+        // Free and never-used payload slots are already null. Physical links work
+        // for both the forward owner and its reversed facade.
+        if (storage.size <= (storage.values.length >>> 6)) {
+            for (int s = storage.first; s >= 0; s = storage.after[s]) {
+                storage.values[s] = null;
+                storage.liveMask[s >>> 6] = 0L;
+            }
+        } else {
+            Arrays.fill(storage.values, null);
+            Arrays.fill(storage.liveMask, 0L);
+        }
+        storage.first = -1; storage.last = -1; storage.free = -1;
         storage.size = 0; storage.used = 0; changed();
     }
     private int slot(int index) {
@@ -123,37 +218,74 @@ public final class M3LinkedList<E> extends AbstractSequentialList<E> implements 
     private static final class Storage {
         private Object[] values = M3SlotArrays.EMPTY_OBJECTS;
         private int[] before = M3SlotArrays.EMPTY_INTS, after = M3SlotArrays.EMPTY_INTS;
+        /** Physical-slot occupancy: one bit per slot, not one Java Node or Entry. */
+        private static final long[] EMPTY_LIVE_MASK = new long[0];
+        private long[] liveMask = EMPTY_LIVE_MASK;
         private int first = -1, last = -1, free = -1, size, used;
+
+        private boolean live(int slot) {
+            return (liveMask[slot >>> 6] & (1L << (slot & 63))) != 0L;
+        }
+
+        private void markLive(int slot) {
+            long mask = 1L << (slot & 63);
+            int word = slot >>> 6;
+            if ((liveMask[word] & mask) != 0L) {
+                throw new IllegalStateException("reused occupied list slot");
+            }
+            liveMask[word] |= mask;
+        }
+
+        private void markFree(int slot) {
+            long mask = 1L << (slot & 63);
+            int word = slot >>> 6;
+            if ((liveMask[word] & mask) == 0L) {
+                throw new IllegalStateException("freed non-live list slot");
+            }
+            liveMask[word] &= ~mask;
+        }
         void insert(int b, int a, Object value) {
             if (free < 0 && used == values.length) {
                 int n = M3SlotArrays.grow(values.length);
                 Object[] v = Arrays.copyOf(values, n); int[] p = Arrays.copyOf(before, n), q = Arrays.copyOf(after, n);
-                values = v; before = p; after = q;
+                long[] states = Arrays.copyOf(liveMask, ((n - 1) >>> 6) + 1);
+                values = v; before = p; after = q; liveMask = states;
             }
             int s;
             if (free < 0) { s = used++; } else { s = free; free = after[s]; }
+            markLive(s);
             values[s] = value; before[s] = b; after[s] = a;
             if (b < 0) { first = s; } else { after[b] = s; }
             if (a < 0) { last = s; } else { before[a] = s; } size++;
         }
         void erase(int s) {
+            if (s < 0 || s >= used) throw new IllegalStateException("list slot out of range");
+            markFree(s);
             int b = before[s], a = after[s];
             if (b < 0) { first = a; } else { after[b] = a; }
             if (a < 0) { last = b; } else { before[a] = b; }
             values[s] = null; before[s] = -1; after[s] = free; free = s; size--;
         }
         void verify() {
-            boolean[] seen = new boolean[used]; int n = 0, p = -1;
+            // The retained packed state lane is the authority; no temporary boolean[used].
+            int n = 0, p = -1;
             for (int s = first; s >= 0; s = after[s]) {
-                if (s >= used || seen[s] || before[s] != p) { throw new AssertionError("list links"); }
-                seen[s] = true; p = s; n++;
+                if (s >= used || !live(s) || before[s] != p || n >= size) {
+                    throw new AssertionError("list links");
+                }
+                p = s; n++;
             }
             if (n != size || p != last) { throw new AssertionError("list size"); }
             for (int s = free; s >= 0; s = after[s]) {
-                if (s >= used || seen[s] || values[s] != null) { throw new AssertionError("list free"); }
-                seen[s] = true; n++;
+                if (s >= used || live(s) || before[s] != -1 || values[s] != null || n >= used) {
+                    throw new AssertionError("list free");
+                }
+                n++;
             }
             if (n != used) { throw new AssertionError("list ownership"); }
+            int active = 0;
+            for (long word : liveMask) active += Long.bitCount(word);
+            if (active != size) { throw new AssertionError("list state-mask count"); }
         }
     }
 }

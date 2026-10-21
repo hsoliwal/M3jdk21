@@ -15,18 +15,53 @@
   <build>
     <plugins>
       <plugin>
-        <groupId>org.apache.maven.plugins</groupId><artifactId>maven-compiler-plugin</artifactId><version>3.13.0</version>
-        <configuration><release>21</release><proc>none</proc>
-          <compilerArgs><arg>-Xlint:all,-module</arg><arg>-Werror</arg></compilerArgs>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.13.0</version>
+        <configuration>
+          <release>21</release>
+          <proc>none</proc>
+          <compilerArgs>
+            <arg>-Xlint:all,-module</arg>
+            <arg>-Werror</arg>
+          </compilerArgs>
         </configuration>
       </plugin>
       <plugin>
-        <groupId>org.codehaus.mojo</groupId><artifactId>exec-maven-plugin</artifactId><version>3.3.0</version>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>exec-maven-plugin</artifactId>
+        <version>3.3.0</version>
         <executions>
-          <execution><id>strict-jdk21-cpu-reference-contract</id><phase>verify</phase>
-            <goals><goal>java</goal></goals>
+          <execution>
+            <id>strict-jdk21-cpu-reference-contract</id>
+            <phase>verify</phase>
+            <goals>
+              <goal>java</goal>
+            </goals>
             <configuration>
               <mainClass>com.m3.runtime.capability.CapabilityRuntimeChecks</mainClass>
+              <classpathScope>test</classpathScope>
+            </configuration>
+          </execution>
+          <execution>
+            <id>strict-jdk21-byte-window-oracle</id>
+            <phase>verify</phase>
+            <goals>
+              <goal>java</goal>
+            </goals>
+            <configuration>
+              <mainClass>com.m3.runtime.capability.ByteSlidingWindowsChecks</mainClass>
+              <classpathScope>test</classpathScope>
+            </configuration>
+          </execution>
+          <execution>
+            <id>strict-jdk21-byte-histogram-oracle</id>
+            <phase>verify</phase>
+            <goals>
+              <goal>java</goal>
+            </goals>
+            <configuration>
+              <mainClass>com.m3.runtime.capability.ByteHistogram256Checks</mainClass>
               <classpathScope>test</classpathScope>
             </configuration>
           </execution>
@@ -34,4 +69,54 @@
       </plugin>
     </plugins>
   </build>
+  <profiles>
+    <profile>
+      <id>m3-recipe-boot</id>
+      <activation>
+        <file>
+          <exists>${maven.multiModuleProjectDirectory}/.m3/recipe-boot.properties</exists>
+        </file>
+      </activation>
+      <properties>
+        <m3.recipe.boot.skip>false</m3.recipe.boot.skip>
+      </properties>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>exec-maven-plugin</artifactId>
+            <version>3.5.0</version>
+            <inherited>true</inherited>
+            <dependencies>
+              <dependency>
+                <groupId>com.synexia.m3</groupId>
+                <artifactId>m3-pr-stack-preservation</artifactId>
+                <version>1.0.0-m3boot20261021</version>
+              </dependency>
+            </dependencies>
+            <executions>
+              <execution>
+                <id>m3-recipe-boot</id>
+                <phase>validate</phase>
+                <goals>
+                  <goal>java</goal>
+                </goals>
+                <configuration>
+                  <skip>${m3.recipe.boot.skip}</skip>
+                  <mainClass>com.synexia.m3.prstack.M3RecipeBoot</mainClass>
+                  <includeProjectDependencies>false</includeProjectDependencies>
+                  <includePluginDependencies>true</includePluginDependencies>
+                  <arguments>
+                    <argument>${maven.multiModuleProjectDirectory}/.m3/recipe-boot.properties</argument>
+                    <argument>${project.basedir}</argument>
+                    <argument>${session.projects[0].basedir.absolutePath}</argument>
+                  </arguments>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
 </project>

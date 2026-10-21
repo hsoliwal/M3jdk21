@@ -1,0 +1,28 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3JDK21 source-time compiler signal candidate
+on:
+  pull_request:
+    paths:
+      - 'm3/compiler/source-signals/**'
+      - '.github/workflows/m3-source-signal-compiler-20261018.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  compiler-proof:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: maven
+      - name: Diff hygiene
+        if: github.event_name == 'pull_request'
+        run: git diff --check '${{ github.event.pull_request.base.sha }}...HEAD'
+      - name: Exact Java 21 javac and attributed signal self-test
+        run: bash m3/compiler/source-signals/verify.sh
+      - name: Maven / JUnit compiler fixture gate
+        run: mvn -B -ntp -f m3/compiler/source-signals/pom.xml test

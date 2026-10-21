@@ -1,0 +1,4 @@
+capability	repository	commit	path	license	classification_candidate_only	limit
+dynamic-array	hsoliwal/M3jdk21	a3e88976ee8664d1ef5d0cade96aec1206b2133d	src/java.base/share/classes/java/util/ArrayList.java	GPL-2.0 WITH Classpath-exception-2.0 per-file	ADAPT	Inventory only; retain notices and original license; no Apache relabeling, code import or execution admission
+ring-array	hsoliwal/M3jdk21	a3e88976ee8664d1ef5d0cade96aec1206b2133d	src/java.base/share/classes/java/util/ArrayDeque.java	GPL-2.0 WITH Classpath-exception-2.0 per-file	ADAPT	Conditional wrap is not automatically a capacity mask; no port or measurements executed
+sorted-node-owner	hsoliwal/M3jdk21	a3e88976ee8664d1ef5d0cade96aec1206b2133d	src/java.base/share/classes/java/util/TreeMap.java	GPL-2.0 WITH Classpath-exception-2.0 per-file	NO_FIT	Retained Entry nodes violate desired storage representation; public contract reference only

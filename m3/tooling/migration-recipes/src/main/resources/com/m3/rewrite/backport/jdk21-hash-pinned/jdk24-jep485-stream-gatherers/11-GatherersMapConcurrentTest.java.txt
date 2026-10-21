@@ -181,26 +181,26 @@ public class GatherersMapConcurrentTest {
                                         throw new TestException("expected");
                                     }
 
-                                    case Integer n when n == streamSize -> {
-                                        try { throwerReady.await(); }
-                                        catch (InterruptedException ie) {
-                                            fail("Unexpected");
-                                        }
-                                        while(tasksWaiting.getQueueLength() < tasksToCancel) {
-                                            try {
-                                                Thread.sleep(10);
-                                            } catch (InterruptedException ie) {
-                                                // Ignore
-                                            }
-                                        }
-                                        initiateThrow.countDown();
-                                    }
-
                                     default -> {
-                                        try {
-                                            tasksWaiting.acquire();
-                                        } catch (InterruptedException ie) {
-                                            tasksCancelled.countDown(); // used to ensure that they all were interrupted
+                                        if (i == streamSize) {
+                                            try { throwerReady.await(); }
+                                            catch (InterruptedException ie) {
+                                                fail("Unexpected");
+                                            }
+                                            while(tasksWaiting.getQueueLength() < tasksToCancel) {
+                                                try {
+                                                    Thread.sleep(10);
+                                                } catch (InterruptedException ie) {
+                                                    // Ignore
+                                                }
+                                            }
+                                            initiateThrow.countDown();
+                                        } else {
+                                            try {
+                                                tasksWaiting.acquire();
+                                            } catch (InterruptedException ie) {
+                                                tasksCancelled.countDown(); // used to ensure that they all were interrupted
+                                            }
                                         }
                                     }
                                 }
@@ -248,26 +248,26 @@ public class GatherersMapConcurrentTest {
                                 }
                             }
 
-                            case Integer n when n == streamSize -> {
-                                try { firstReady.await(); }
-                                catch (InterruptedException ie) {
-                                    fail("Unexpected!");
-                                }
-                                while(tasksWaiting.getQueueLength() < tasksToCancel) {
-                                    try {
-                                        Thread.sleep(10);
-                                    } catch (InterruptedException ie) {
-                                        // Ignore
-                                    }
-                                }
-                                lastDone.countDown();
-                            }
-
                             default -> {
-                                try {
-                                    tasksWaiting.acquire();
-                                } catch (InterruptedException ie) {
-                                    tasksCancelled.countDown(); // used to ensure that they all were interrupted
+                                if (i == streamSize) {
+                                    try { firstReady.await(); }
+                                    catch (InterruptedException ie) {
+                                        fail("Unexpected!");
+                                    }
+                                    while(tasksWaiting.getQueueLength() < tasksToCancel) {
+                                        try {
+                                            Thread.sleep(10);
+                                        } catch (InterruptedException ie) {
+                                            // Ignore
+                                        }
+                                    }
+                                    lastDone.countDown();
+                                } else {
+                                    try {
+                                        tasksWaiting.acquire();
+                                    } catch (InterruptedException ie) {
+                                        tasksCancelled.countDown(); // used to ensure that they all were interrupted
+                                    }
                                 }
                             }
                         }

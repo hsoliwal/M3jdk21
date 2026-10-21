@@ -51,9 +51,7 @@ public final class M3IntHashSet implements M3IntCollection {
             hasZero = true;
             size++;
             modCount++;
-            if (size > threshold) {
-                rehash(keys.length << 1);
-            }
+            // The present zero key lives outside keys[] and consumes no probe slot.
             return true;
         }
         int pos = mix(key) & mask;
@@ -67,7 +65,8 @@ public final class M3IntHashSet implements M3IntCollection {
         keys[pos] = key;
         size++;
         modCount++;
-        if (size > threshold) {
+        // Count only keys actually retained in the primitive probe lane.
+        if (size - (hasZero ? 1 : 0) > threshold) {
             rehash(keys.length << 1);
         }
         return true;

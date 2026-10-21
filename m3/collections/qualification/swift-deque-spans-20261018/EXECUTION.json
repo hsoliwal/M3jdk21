@@ -1,0 +1,72 @@
+{
+  "schema": "M3_SWIFT_DEQUE_EXECUTION_V1",
+  "target_predecessor": "7c6b3b51094c50c84746b819d79665e5f003bbdf",
+  "local_worktree_dirty": true,
+  "recipe": "com.synexia.m3.SwiftDequeSpans20261018",
+  "recipe_tests": 4,
+  "focused_baseline_tests": 5,
+  "focused_candidate_tests": 5,
+  "export_layouts": 5560,
+  "growth_layouts": 1008,
+  "target_source_proof_sha256": "137758faa2283803bda04e6bcb569952f425d9755c81bb5cbd06132747c9873e",
+  "cost_sha256": "fc075345a426f2aee9390aa7ec4bb132dfd02338fb6d39f5f29832fb8ae7a0c9",
+  "target_outputs": [
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LongArrayDeque.java",
+      "before_sha256": "67a1118b2df4cff80430e47700d6243e5135048abfa26ffdeffa66dc8f2e76cc",
+      "after_sha256": "ee2ce70df68f11d14ba85a7da8485c9e82e7bc38c08601b57b69d1f39d3bdd2a",
+      "template": "m3__collections__src__main__java__com__m3__collections__M3LongArrayDeque.java.txt",
+      "kind": "java"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3DequeSpanCopyTest.java",
+      "before_sha256": "ABSENT",
+      "after_sha256": "ace325fb05470e1b8b52d2f650c69dc339abf32d7402d6a73cbf718b9cdc1cbd",
+      "template": "m3__collections__src__test__java__com__m3__collections__M3DequeSpanCopyTest.java.txt",
+      "kind": "java"
+    },
+    {
+      "path": "m3/collections/algorithm-catalog/swift-collections-20261018.tsv",
+      "before_sha256": "ABSENT",
+      "after_sha256": "eb6c28af76ad53b68708f856ee76122c45b47abe006439b9484acdfa6afddddd",
+      "template": "m3__collections__algorithm-catalog__swift-collections-20261018.tsv.txt",
+      "kind": "text"
+    },
+    {
+      "path": "m3/collections/qualification/swift-deque-spans-20261018/SOURCES.tsv",
+      "before_sha256": "ABSENT",
+      "after_sha256": "af6da42aa859aa7c0ee6d43c0d1c35f6461994d5554a8999822cf1c1164a45c9",
+      "template": "m3__collections__qualification__swift-deque-spans-20261018__SOURCES.tsv.txt",
+      "kind": "text"
+    },
+    {
+      "path": "m3/collections/qualification/swift-deque-spans-20261018/SWIFT-LICENSE.txt",
+      "before_sha256": "ABSENT",
+      "after_sha256": "770af8291f708538d8ff885a0bbc4e045cd700531741c4f99528d435c14d7f55",
+      "template": "m3__collections__qualification__swift-deque-spans-20261018__SWIFT-LICENSE.txt.txt",
+      "kind": "text"
+    },
+    {
+      "path": "m3/collections/qualification/swift-deque-spans-20261018/NOTICE.txt",
+      "before_sha256": "ABSENT",
+      "after_sha256": "734e46ccebfed7247fd5eed4f3e80cc4b1807e3b77884b0bbc8da7656dd42704",
+      "template": "m3__collections__qualification__swift-deque-spans-20261018__NOTICE.txt.txt",
+      "kind": "text"
+    },
+    {
+      "path": "m3/collections/qualification/swift-deque-spans-20261018/README.md",
+      "before_sha256": "ABSENT",
+      "after_sha256": "b2ba17e0d1199a2b3ddffacb71cfb84bff8bc99964789f10f22fa07e0b9f4e98",
+      "template": "m3__collections__qualification__swift-deque-spans-20261018__README.md.txt",
+      "kind": "text"
+    },
+    {
+      "path": "m3/collections/README.md",
+      "before_sha256": "e72ff3d256fa47d49d5478532974e837af1a7a53d399655283c79fbd482d9dd0",
+      "after_sha256": "47f7da05b5fc2b80b910b9655367c1a9f912113121bd9a80d13b211a7de5ae89",
+      "template": "m3__collections__README.md.txt",
+      "kind": "text"
+    }
+  ],
+  "hosted_ci": "NOT_ESTABLISHED_BY_LOCAL_EVIDENCE"
+}

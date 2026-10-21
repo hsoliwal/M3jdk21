@@ -2,8 +2,9 @@
 
 M3JDK21 target-owned, **Java 21 CPU-only** validation of Synexia's module manifest.
 The frozen donor manifest is a **metadata snapshot**, not borrowed implementation code.
-It contains 20 source module entries; the existing target receiver retains its 18
-`QUALIFICATION_PENDING` entries unchanged. The other two entries must remain
+It now contains 21 source module entries: the original 18 mapped entries stay
+`QUALIFICATION_PENDING`, and signed INT8 quantization is an additional nineteenth
+mapped candidate. The other two entries must remain
 explicitly pending:
 * `com.synexia.m3.model.distill` — CPU model-math provider, separate Java/JNI qualification
 * `com.synexia.m3.compute.webgpu` — optional GPU-native Dawn provider, not a CPU dependency
@@ -46,3 +47,15 @@ and hosted CI have not been executed as part of this source-transfer step**;
 full target-owned JMOD rebuild, jlink, real JNI, C1/C2/jtreg and tool API
 runtime certification remain **NOT_RUN**. Nothing in this admission
 check grants JDK release status or silently includes GPU.
+
+## 2026-10-17 additive quantization receiver
+
+The snapshot now admits the twenty-first Synexia CPU tool,
+`com.synexia.m3.model.quantize`, as a **mapped candidate** named
+`com.m3.tools.model.quantize`. The original 18 pending
+receivers remain unchanged and the independent signed-INT8
+candidate is the nineteenth. Two deferrals (CPU model distillation
+and optional WebGPU) remain. All receiver entries still say
+QUALIFICATION_PENDING; the detached receiving module and JNI
+have their own compile/runtime proof. See
+`CPU_TOOL_QUANTIZE_RECEIVER_20261017.md`.

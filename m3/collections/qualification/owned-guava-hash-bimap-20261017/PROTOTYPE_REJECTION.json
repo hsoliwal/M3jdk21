@@ -1,0 +1,26 @@
+{
+  "status": "REJECTED_SHARED_DONOR_INDEX_LINK_INVARIANT",
+  "production_source_git_blob": "8c7caa428b1e5f1b58b4f9fa07c85df2798302ac",
+  "source_receipts": [
+    {
+      "source": "C:\\codex-work\\m3-apache-validation-20261017-g1\\guava-unit\\candidate\\m3\\collections\\implementations\\guava\\src\\main\\java\\com\\m3\\collections\\guava\\M3HashBiMap.java",
+      "archive": "C:\\codex-work\\m3-apache-validation-20261017-g1\\guava-unit\\prototype\\M3HashBiMap.java.txt",
+      "bytes": 51883,
+      "sha256": "611d92e7bfda61f900b2fceaa87abf32236561b7d04c9e6ecbd7024c34b455da"
+    },
+    {
+      "source": "C:\\codex-work\\m3-apache-validation-20261017-g1\\guava-unit\\proofs\\M3HashBiMapSelfTest.java",
+      "archive": "C:\\codex-work\\m3-apache-validation-20261017-g1\\guava-unit\\prototype\\M3HashBiMapSelfTest.java.txt",
+      "bytes": 54521,
+      "sha256": "d6b1229d112728a0d2f7f7936efb4b30091c6028558576c239226866453687c2"
+    }
+  ],
+  "original_proof": "guava-selftest-android-01",
+  "minimal_proofs": [
+    "guava-dense-android-01",
+    "guava-dense-jre-01"
+  ],
+  "refinement_gate": "FOSS_REFINEMENT_DECISION.tsv",
+  "historical_android_targeted_success": "guava-android-02",
+  "historical_targeted_scope": "66 cases missed two dense-relocation contract bugs; cannot establish full behavior"
+}

@@ -1,0 +1,37 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3JDK21 strict filtered sorted sequenced owner
+on:
+  pull_request:
+    paths:
+      - 'm3/collections/src/main/java/com/m3/collections/M3FilteredViews.java'
+      - 'm3/collections/src/test/java/com/m3/collections/M3StrictFilteredSequenced*'
+      - 'm3/collections/qualification/m3jdk21-strict-filtered-sequenced-20261018/**'
+      - 'm3/collections/algorithm-catalog/strict-filtered-sequenced-20261018.tsv'
+      - '.github/workflows/m3jdk-strict-filtered-sequenced-20261018.yml'
+  workflow_dispatch:
+jobs:
+  jdk21-contract:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Fail closed on source recipe and generated-output drift
+        run: python3 m3/collections/qualification/m3jdk21-strict-filtered-sequenced-20261018/verify.py
+      - name: Strict direct Java21 compilation against actual owner
+        run: |
+          mkdir -p "$RUNNER_TEMP/cls"
+          javac --release 21 -proc:none -Xlint:all,-module,-serial -Werror \
+            -d "$RUNNER_TEMP/cls" \
+            m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java \
+            m3/collections/src/test/java/com/m3/collections/M3FilteredViewsContract.java \
+            m3/collections/src/test/java/com/m3/collections/M3StrictFilteredSequencedContract.java
+      - name: Current deterministic JDK view oracle and strict read-only proofs
+        run: |
+          java -cp "$RUNNER_TEMP/cls" com.m3.collections.M3FilteredViewsContract
+          java -cp "$RUNNER_TEMP/cls" com.m3.collections.M3StrictFilteredSequencedContract
+          java -Xint -cp "$RUNNER_TEMP/cls" com.m3.collections.M3StrictFilteredSequencedContract
+      - name: Owning Maven JUnit gate (no test stand-ins)
+        run: mvn -B -ntp -f m3/collections/pom.xml -Dtest=M3StrictFilteredSequencedTest,M3FilteredViewsTest test

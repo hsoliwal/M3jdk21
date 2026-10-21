@@ -1,0 +1,29 @@
+{
+  "artifacts": [
+    {
+      "bytes": 31506,
+      "path": "INPUTS.json",
+      "sha256": "9ce677e850104c530ff1c68c482d497a17e4945bd9a6e75b7c121409ed7caeed"
+    },
+    {
+      "bytes": 291,
+      "path": "lint-commands.json",
+      "sha256": "0f1d132d7c2c0a1c0af54269740d0d24e361d71641b405e295070ef5012f1fe2"
+    },
+    {
+      "bytes": 488,
+      "path": "lint-full-borrow-receiver.log",
+      "sha256": "dd8627e035b7069a557c5d34a15b394a2e057e6dc531ea08be5f7043f597a8a1"
+    },
+    {
+      "bytes": 168,
+      "path": "lint-structure.log",
+      "sha256": "deec48481fd5f2b1e886fb66a016779fb4e9fd6c945e687da58e7b889fe1539b"
+    }
+  ],
+  "input_sha256": "f481be732b094cc7906147d2096a0b1f2196e6c2b8d5427d6af804ca3fc69648",
+  "phase": "lint",
+  "previous_receipt_sha256": null,
+  "schema": "M3_PARSER_PHASE_RECEIPT_V1",
+  "status": "PASS"
+}

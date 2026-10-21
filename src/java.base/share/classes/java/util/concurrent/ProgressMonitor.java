@@ -1,0 +1,84 @@
+/*
+ * SPDX-FileCopyrightText: 2026 Hitesh Soliwal and contributors
+ * SPDX-License-Identifier: GPL-2.0-only WITH Classpath-exception-2.0
+ */
+package java.util.concurrent;
+
+/**
+ * Cooperative progress and cancellation for a bounded unit of work.
+ * A monitor belongs to its caller. A task must not finish a borrowed monitor.
+ * Implementations must document whether concurrent updates are supported.
+ * This opt-in M3JDK API does not alter legacy Executor execution semantics.
+ */
+public interface ProgressMonitor {
+    /** Indicates that the total amount of work is not known. */
+    long UNKNOWN_WORK = -1L;
+    /**
+     * A monitor with no progress state and no local cancellation state.
+     * Its inherited {@link #checkCancelled()} still observes interruption
+     * of the calling thread.
+     */
+    ProgressMonitor NONE = new ProgressMonitor() { };
+
+    /**
+     * Announces a task and its estimated work. The default implementation
+     * does nothing; implementations define their task lifecycle and validation.
+     *
+     * @param task the task description
+     * @param totalWork the estimated work, or {@link #UNKNOWN_WORK}
+     */
+    default void begin(String task, long totalWork) { }
+    /**
+     * Reports additional completed work. The default implementation does nothing.
+     *
+     * @param units the additional work units, with validation defined by the
+     *              implementation
+     */
+    default void worked(long units) { }
+    /**
+     * Reports a progress message. The default implementation does nothing.
+     *
+     * @param text the progress message
+     */
+    default void message(String text) { }
+    /**
+     * Reports cooperative cancellation state. The default returns {@code false}.
+     *
+     * @return whether this monitor reports cancellation
+     */
+    default boolean isCancelled() { return false; }
+    /** Requests cooperative cancellation. The default implementation does nothing. */
+    default void cancel() { }
+    /**
+     * Completes work owned by this monitor. The default implementation does
+     * nothing. A task must not complete a monitor borrowed from its caller.
+     */
+    default void done() { }
+
+    /**
+     * Checks this monitor and the calling thread for cancellation without
+     * clearing the thread's interrupt status.
+     *
+     * @throws CancellationException if {@link #isCancelled()} is true or
+     *         the calling thread is interrupted
+     */
+    default void checkCancelled() {
+        if (isCancelled() || Thread.currentThread().isInterrupted()) {
+            throw new CancellationException("Operation cancelled");
+        }
+    }
+
+    /**
+     * Allocates parent ticks to a child that can be completed independently.
+     * Delegates to {@link ProgressMonitors#child(ProgressMonitor, String, long, long)}.
+     *
+     * @param name the child description, or {@code null} for no description
+     * @param parentTicks the nonnegative work budget credited to this monitor
+     * @param totalWork the positive child work estimate, or {@link #UNKNOWN_WORK}
+     * @return the child monitor, or {@link #NONE} when this monitor is {@code NONE}
+     * @throws IllegalArgumentException if the work budget or estimate is invalid
+     */
+    default ProgressMonitor child(String name, long parentTicks, long totalWork) {
+        return ProgressMonitors.child(this, name, parentTicks, totalWork);
+    }
+}

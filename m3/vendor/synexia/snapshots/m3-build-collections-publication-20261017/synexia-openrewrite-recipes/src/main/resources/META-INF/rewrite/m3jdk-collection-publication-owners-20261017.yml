@@ -1,0 +1,30 @@
+# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
+# SPDX-License-Identifier: Apache-2.0
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.M3JdkCollectionPublicationOwners20261017
+displayName: Apply collections through the preserved current M3 owners
+description: Preserve current membership semantics and compose the exact qualified primitive, test and optional packaging postimages.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: m3jdk-collection-publication-owner-java-20261017
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: m3jdk-collection-current-owners-java-01-20261017
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: m3jdk-collection-current-owners-java-02-20261017
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: m3jdk-collection-current-owners-java-03-20261017
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: m3jdk-collection-current-owners-java-04-20261017
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: m3jdk-collection-current-owners-java-05-20261017
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: m3jdk-collection-current-owners-java-06-20261017
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: m3jdk-collection-current-owners-java-07-20261017
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: m3jdk-collection-current-owners-java-08-20261017
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: m3jdk-collection-current-owners-java-09-20261017
+  - com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe:
+      crateName: m3jdk-collection-publication-assets-20261017

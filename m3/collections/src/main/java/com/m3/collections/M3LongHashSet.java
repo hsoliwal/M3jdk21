@@ -47,6 +47,20 @@ public final class M3LongHashSet implements M3LongCollection {
             return false;
         }
         if (needsGrowth(occupied + 1, keys.length)) {
+            // Reusing a tombstone on this key's probe path does not increase
+            // occupied or need a larger array. No extra scan on ordinary adds.
+            int mask = keys.length - 1;
+            int probe = mix(key) & mask;
+            while (states[probe] != EMPTY) {
+                if (states[probe] == DELETED) {
+                    keys[probe] = key;
+                    states[probe] = USED;
+                    size++;
+                    modCount++;
+                    return true;
+                }
+                probe = (probe + 1) & mask;
+            }
             if (keys.length >= (1 << 30)) {
                 throw new IllegalStateException("maximum hash-table capacity reached");
             }

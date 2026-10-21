@@ -1,0 +1,6 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.FiveProviderCurrentCensus20261017
+displayName: Five-provider M3 SDK current-source census
+description: Source-sealed exact-source admission of 34 existing JDK Guava Eclipse Apache Spring interop owners.
+recipeList:
+  - com.synexia.rewrite.M3FiveProviderCurrentCensusRecipe

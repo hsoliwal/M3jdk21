@@ -1,0 +1,32 @@
+{
+  "schema": "M3_MASK_PROJECTION_CONVERGENCE_V1",
+  "target_repo": "hsoliwal/M3jdk21",
+  "target_pr": 1142,
+  "runtime_head": "9ab8197611e4a9f9d1a285a687bca16fd47d1d50",
+  "qualified_base": "d47a4b4fdb8e3794ec56768b06aa9e23730c6b8e",
+  "canonical_repo": "hsoliwal/com.synexia",
+  "canonical_pr": 12140,
+  "canonical_commit": "bf7f48503fb1275d7046b7c9322e31afb664655d",
+  "canonical_path": "synexia-openrewrite-recipes/recipes/keyed-api-20261015/m3jdk-mask-refinement-20261017/receiver",
+  "canonical_receiver_tree": "328918ee3c099dc5cdb0de750c268ed1616323b7",
+  "canonical_files": 45,
+  "canonical_comparison": "all target-shaped source bytes match by complete independent Git tree hash",
+  "target_recipe_source_mirror": "f5db1efdd5002f2934ef9f8175144651e0619b08",
+  "second_replay": {
+    "run": "convergence-proof-0002",
+    "commands_verified": 168,
+    "expected_negative_exits": 4,
+    "sealed_inputs": 34,
+    "source_capsule_sha256": "65615ca59be2c338d301940367a489561af4aaac63d13a37109092bfe137bc94",
+    "same_source_bytes_as_final_target": true,
+    "sdk_receipt": "OBSERVED_RESULTS=0\nFROZEN_REPLAY_RESULTS=4\nREADBACK_RESULTS=0\n"
+  },
+  "packaging_correction": "epoch-zero archive resource discovery failed; fixed positive mtimes, zero source byte changes; complete replay passed",
+  "base_drift": {
+    "observed_master": "4e29dc9d4141261e8763fbe9ffd6a20e017b1aff",
+    "projection_blob": "ea7a32700cb16f7a20a5ca47a96d9eb484561eb3",
+    "disposition": "RECONCILIATION_REQUIRED; newer owner not overwritten or qualified"
+  },
+  "metadata_scope": "this derived receipt and allocation-only projection do not alter the sealed recipe/runtime inputs",
+  "admission": "DRAFT; full reactor/JDK/jtreg/central/platform/workload/SDK coverage remains open"
+}

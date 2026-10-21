@@ -1,0 +1,22 @@
+codec.varint.decode	One hexadecimal canonical LEB128 in [0,Long.MAX_VALUE] per line -> decimal\nlimits=e46600238306025a50a47573cc7c090d2c030ce547875dbb688c7440ce5165e6
+codec.varint.encode	One decimal in [0,Long.MAX_VALUE] per line -> canonical hexadecimal LEB128\nlimits=e46600238306025a50a47573cc7c090d2c030ce547875dbb688c7440ce5165e6
+graph.shortest-paths	First line vertex-count TAB source; edges from TAB to TAB nonnegative-weight; node TAB distance; MAX means unreachable-or-overflow\nlimits=e46600238306025a50a47573cc7c090d2c030ce547875dbb688c7440ce5165e6
+graph.topology	First line vertex-count; remaining lines from TAB to; deterministic integer topological order\nlimits=e46600238306025a50a47573cc7c090d2c030ce547875dbb688c7440ce5165e6
+graph.tsort	Existing TextTools tsort over whitespace-separated named edges\nlimits=e46600238306025a50a47573cc7c090d2c030ce547875dbb688c7440ce5165e6
+hash.sha256.utf8	SHA-256 of exact reassembled frame UTF-8 bytes, including line endings\nlimits=e46600238306025a50a47573cc7c090d2c030ce547875dbb688c7440ce5165e6
+statistics.moments	One finite double per line; count/mean/population-variance/min/max using existing Welford owner\nlimits=e46600238306025a50a47573cc7c090d2c030ce547875dbb688c7440ce5165e6
+structured.csv.first-column	Existing strict CSV projection of column zero with LF record output\nlimits=e46600238306025a50a47573cc7c090d2c030ce547875dbb688c7440ce5165e6
+structured.env	Existing strict dotenv subset -> sorted escaped key TAB value rows; no expansion\nlimits=e46600238306025a50a47573cc7c090d2c030ce547875dbb688c7440ce5165e6
+structured.tsv.first-column	Existing strict TSV projection of column zero with LF record output\nlimits=e46600238306025a50a47573cc7c090d2c030ce547875dbb688c7440ce5165e6
+text.fold.80	Existing code-point fold at width 80\nlimits=e46600238306025a50a47573cc7c090d2c030ce547875dbb688c7440ce5165e6
+text.frequency	Count each input line as one exact term; sorted term TAB count output\nlimits=e46600238306025a50a47573cc7c090d2c030ce547875dbb688c7440ce5165e6
+text.identity	Retain original line content and CR/LF/CRLF endings\nlimits=e46600238306025a50a47573cc7c090d2c030ce547875dbb688c7440ce5165e6
+text.ngram.2	Count overlapping UTF-16 code-unit bigrams; sorted escaped gram TAB count output\nlimits=e46600238306025a50a47573cc7c090d2c030ce547875dbb688c7440ce5165e6
+text.ngram.3	Count overlapping UTF-16 code-unit trigrams; sorted escaped gram TAB count output\nlimits=e46600238306025a50a47573cc7c090d2c030ce547875dbb688c7440ce5165e6
+text.normalize.nfc	JDK Unicode NFC; preserve resulting line endings\nlimits=e46600238306025a50a47573cc7c090d2c030ce547875dbb688c7440ce5165e6
+text.normalize.nfkc	JDK Unicode NFKC; preserve resulting line endings\nlimits=e46600238306025a50a47573cc7c090d2c030ce547875dbb688c7440ce5165e6
+text.number	Existing nl with first=1 and step=1\nlimits=e46600238306025a50a47573cc7c090d2c030ce547875dbb688c7440ce5165e6
+text.sort	Stable natural UTF-16 line-content ordering\nlimits=e46600238306025a50a47573cc7c090d2c030ce547875dbb688c7440ce5165e6
+text.sort.reverse	Stable reverse UTF-16 line-content ordering\nlimits=e46600238306025a50a47573cc7c090d2c030ce547875dbb688c7440ce5165e6
+text.uniq	Collapse adjacent equal-content lines under the existing TextTools contract\nlimits=e46600238306025a50a47573cc7c090d2c030ce547875dbb688c7440ce5165e6
+text.words	Locale.ROOT JDK word breaks; retain spans containing a letter or digit; LF output\nlimits=e46600238306025a50a47573cc7c090d2c030ce547875dbb688c7440ce5165e6

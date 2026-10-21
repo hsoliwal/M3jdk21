@@ -1,0 +1,26 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3JDK21 COW filtered owner Java21 contract after JVM integration
+on:
+  pull_request:
+    paths:
+      - 'm3/collections/src/main/java/com/m3/collections/M3CollectionViews.java'
+      - 'm3/collections/src/test/java/com/m3/collections/M3FilteredCowOwnerContract.java'
+      - 'm3/collections/src/test/java/com/m3/collections/M3FilteredCowOwnerTest.java'
+      - 'm3/collections/qualification/cow-filtered-owner-20261021/**'
+      - 'm3/collections/algorithm-catalog/cow-filtered-owner-20261021/**'
+      - '.github/workflows/m3-cow-filtered-owner-20261021.yml'
+  workflow_dispatch:
+jobs:
+  original-owner-java21-differential:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Preserve original combined owner API and early-stop behavior; qualify exact COW contract
+        run: bash m3/collections/qualification/cow-filtered-owner-20261021/verify.sh

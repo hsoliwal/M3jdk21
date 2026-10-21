@@ -1,0 +1,13 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.CommonsBag20261018
+displayName: M3 Apache Commons Bag API receiver
+description: Add the M3-backed Apache Bag and real five-library contract oracle from exact SHA256 sealed templates.
+recipeList:
+  - com.synexia.rewrite.M3CommonsBagRecipe
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.CommonsBagCensus20261018
+displayName: Extend strict five-provider SDK source census from 34 to 36
+description: Admit exact new Apache Bag and JUnit identities while preserving historical five-file receipts.
+recipeList:
+  - com.synexia.rewrite.M3CommonsBagCensusRecipe

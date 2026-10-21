@@ -1,0 +1,15 @@
+priority	category	upstream_or_family	issue_or_jep	target_owner	decision	rationale	status	evidence
+0	M3_STRING	Existing M3JDK21 geometry	NESTED_OFFSET_SEARCH	java.lang.M3StringCodePointPrecompute	PORT_THIS_PR	Direct rank/select avoids nested binary search; preserve UTF16 and canonical owner	CANDIDATE_SOURCE_INSTALLED	Isolated 4613796 oracle comparisons; runtime gates pending
+1	COLLECTIONS	OpenJDK27	JDK-8371656	java.util.HashMap	EVALUATE_FAST_PATH	Avoid redundant map iterator/re-hash for exact known classes	NOT_PORTED	https://github.com/openjdk/jdk/pull/28243
+1	SWING_TEXT	OpenJDK27	JDK-8380794	java.text.AttributedString	EVALUATE_SNAPSHOT	Attribute-run map may reduce iteration work	NOT_PORTED	https://github.com/openjdk/jdk/pull/30402
+1	STRING_URL	OpenJDK27	JDK-8379557	java.net.URLStreamHandler	EVALUATE_FAST_PATH	Reduce intermediate String concatenation	NOT_PORTED	https://github.com/openjdk/jdk/pull/30151
+1	IO_NATIVE	OpenJDK27	JDK-8373647	java.io.FileOutputStream;java.io.RandomAccessFile	EVALUATE_PLATFORM_NATIVE	Eliminate redundant Unix fstat with errno parity	NOT_PORTED	https://github.com/openjdk/jdk/pull/28823
+2	STRING_COPY	OpenJDK27	JDK-8378698	java.util.Base64;java.lang.String	HOLD_M3_LAYOUT	Internal constructor assumes contiguous flat byte storage	NOT_PORTED	https://github.com/openjdk/jdk/pull/29920
+2	C2_VECTORIZATION	OpenJDK27	JDK-8342095	hotspot/share/opto	EVALUATE_FULL_HOTSPOT	C2 subword vectorization architecture gates	NOT_PORTED	https://github.com/openjdk/jdk/pull/23413
+2	C2_SIMPLIFY	OpenJDK27	JDK-8367341	hotspot/share/opto	EVALUATE_FULL_HOTSPOT	Known-bits optimization requires full compiler tests	NOT_PORTED	https://github.com/openjdk/jdk/pull/27618
+3	OBJECT_LAYOUT	OpenJDK25-27	JEP-519;JEP-534	HotSpot;GC;JNI;JVMTI	HOLD_FULL_RUNTIME	Compact headers change object layout and locking	NOT_PORTED	https://openjdk.org/jeps/519
+3	GC	OpenJDK26	JEP-522	HotSpot G1	HOLD_FULL_RUNTIME	Concurrent barrier synchronization requires whole GC proof	NOT_PORTED	https://openjdk.org/jeps/522
+3	AOT	OpenJDK25-26	JEP-515;JEP-516	HotSpot;CDS	HOLD_FULL_RUNTIME	AOT profiles and GC-neutral object caches cross module boundaries	NOT_PORTED	https://openjdk.org/jeps/515
+R	REFERENCE	Eclipse OpenJ9	Shared classes cache	VM and ClassLoader	REFERENCE_ONLY	Independent VM with incompatible layout and collector	NOT_PORTED	https://github.com/eclipse-openj9/openj9-docs
+R	REFERENCE	GraalVM Native Image	Native Image PGO	AOT toolchain	REFERENCE_ONLY	Closed-world native output; PGO unavailable Community Edition	NOT_PORTED	https://www.graalvm.org/latest/reference-manual/native-image/guides/optimize-native-executable-with-pgo/
+R	REFERENCE	Azul Prime	ReadyNow Optimizer Hub	Warmup and JIT	REFERENCE_ONLY	Proprietary runtime implementation; design-only evidence	NOT_PORTED	https://docs.azul.com/optimizer-hub/

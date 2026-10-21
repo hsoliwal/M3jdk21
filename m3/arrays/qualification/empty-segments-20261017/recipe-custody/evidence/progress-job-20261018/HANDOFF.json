@@ -1,0 +1,45 @@
+{
+  "schema": "M3_PROGRESS_JOB_ADDITIVE_HANDOFF_V1",
+  "result": "BOUNDED_GATES_PASS_ADMISSION_PENDING",
+  "dataset": "m3jdk21-progress-job",
+  "target_base": "86528a90079b89a50b51ef13da08e7e70d468cb4",
+  "source_sha256": "d2734bcc607b1af8a593387040da53886530a310685a26965a5aa77609aaefc8",
+  "compiled_class_sha256": "30dc89da72ea1469c5c6871bcfb8b888829a5cef5de3f14d19508880a296c655",
+  "recipe_gates": {
+    "sdk": 5,
+    "sealer": 8,
+    "receiver": 9
+  },
+  "receiving": {
+    "check": 10,
+    "apply": 10,
+    "replay": 0
+  },
+  "behavior": {
+    "stock-patched": {
+      "core_checks": 81,
+      "real_eclipse_checks": 37
+    },
+    "m3-image-patched": {
+      "core_checks": 81,
+      "real_eclipse_checks": 37
+    }
+  },
+  "real_eclipse_dependency": "org.eclipse.platform:org.eclipse.equinox.common:3.21.0; original API types and jar bytes",
+  "new_runnable_subclass": {
+    "result": "EXPECTED_CONFLICT",
+    "diagnostic_keys": [
+      "compiler.err.override.weaker.access",
+      "compiler.err.override.incompatible.ret"
+    ],
+    "old_dual_clients": "SEPARATE_FINITE_POSITIVE_WITNESS"
+  },
+  "full_image_with_new_api": "NOT_RUN_PATCHED_IMAGE_ONLY",
+  "jtreg_harness_new_test": "PENDING_FULL_FEATURE_IMAGE",
+  "Object_universal_no_break": "HOLD_UNCHANGED",
+  "phase": "STRING_UNCHANGED",
+  "source_review": "Canonical agent independently inspected the source and fixtures; no material blocker for the approved Callable-only additive scope; no external certification claim.",
+  "runtime_mutation": "No frozen repair worktree, JDK image or GitHub ref changed by this task",
+  "composition": "May compose with separately qualified Runtime facade; no shared product target or mapping path.",
+  "native": "No JNI/native code changed; reuses existing Java owners and FutureTask."
+}

@@ -1,5 +1,18 @@
 # Native build evidence and reproduction
 
+## Common JNI platform contract
+
+All phone, desktop, server and embedded native work follows the
+[common JNI and native platform contract](common-jni-platform-contract.md).
+It requires shared JNI support and typed native service contracts with platform backends,
+target-runtime headers and explicit buffer/reference lifetimes. Common source ownership does
+not imply a single binary or remove existing JDK module/library boundaries.
+
+Record source compilation, linking, JNI registration/loading, device/simulator execution and
+complete M3JDK21 runtime qualification separately for each OS/CPU/runtime/linkage profile.
+The contract also records current target-header and critical-array transfer follow-ups; this
+documentation update does not implement those repairs or add mobile runtime support.
+
 ## Current checkout verification routes
 
 Run commands from the repository root. The historical result below belongs only to its

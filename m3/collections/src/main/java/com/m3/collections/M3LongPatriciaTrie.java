@@ -13,6 +13,12 @@ import java.util.NoSuchElementException;
  * strings, i.e. {@link Long#compareUnsigned}, with prefix queries and unsigned navigation and no
  * stored node objects (catalogue row {@code patricia-trie}, leaf GAP-LC-catalogue-gaps).
  *
+ * <p>Receiver compatibility: the installed long-returning {@code put}/{@code remove}
+ * and {@code selectKey} retain their explicit unreceived refusal contracts. The admitted
+ * donor mutation operations are {@link #putKey} and {@link #removeKey}; their boolean
+ * results and algorithms are unchanged. {@link #scaffoldDescriptor} retains the exact
+ * historical scaffold metadata, not a description of the received dense arenas.</p>
+ *
  * <p>Mechanics follow the PATRICIA idea that Apache Commons Collections {@code PatriciaTrie}
  * (contract reference only, nothing copied, no runtime dependency) implements with linked
  * {@code TrieEntry} nodes: an internal node stores only the index of the most significant bit at
@@ -30,6 +36,35 @@ import java.util.NoSuchElementException;
  * {@code java.util.SortedMap} or Commons {@code Trie}.</p>
  */
 public final class M3LongPatriciaTrie {
+    // Retain the installed scaffold API and its explicit unreceived contracts.
+    // Donor boolean mutation contracts are exposed as putKey/removeKey.
+    /** State-mask bit {@code OCCUPIED} (per-slot state word, bit 0). */
+    static final long STATE_OCCUPIED = 1L << 0;
+    /** State-mask bit {@code DELETED} (per-slot state word, bit 1). */
+    static final long STATE_DELETED = 1L << 1;
+    /** State-mask bit {@code LEAF} (per-slot state word, bit 2). */
+    static final long STATE_LEAF = 1L << 2;
+
+    /** Reports the declared state-mask bits and lanes for ledgers; never allocates per element. */
+    public static String scaffoldDescriptor() {
+        return "M3LongPatriciaTrie|LONG_PATRICIA_TRIE|LONG|OCCUPIED,DELETED,LEAF|long[] keyLane;long[] valueLane;int[] bitIndexLane;int[] leftLane;int[] rightLane";
+    }
+
+    /** PatriciaTrie.put (scaffold: not yet received). */
+    public long put(long key, long value) {
+        throw new M3NotYetReceived("M3LongPatriciaTrie.put");
+    }
+
+    /** PatriciaTrie.remove (scaffold: not yet received). */
+    public long remove(long key) {
+        throw new M3NotYetReceived("M3LongPatriciaTrie.remove");
+    }
+
+    /** PatriciaTrie.selectKey (closest by bit distance) (scaffold: not yet received). */
+    public long selectKey(long key) {
+        throw new M3NotYetReceived("M3LongPatriciaTrie.selectKey");
+    }
+
     private static final int MIN_CAPACITY = 8;
     private static final int MAX_CAPACITY = 1 << 30;
     private static final int NONE = -1;
@@ -58,7 +93,7 @@ public final class M3LongPatriciaTrie {
     }
 
     /** Inserts or replaces; returns {@code true} when a new key was added. */
-    public boolean put(long key, long value) {
+    public boolean putKey(long key, long value) {
         if (size == 0) {
             keys[0] = key;
             values[0] = value;
@@ -117,7 +152,7 @@ public final class M3LongPatriciaTrie {
         return find(key) != NONE;
     }
 
-    public boolean remove(long key) {
+    public boolean removeKey(long key) {
         int leaf = find(key);
         if (leaf == NONE) {
             return false;

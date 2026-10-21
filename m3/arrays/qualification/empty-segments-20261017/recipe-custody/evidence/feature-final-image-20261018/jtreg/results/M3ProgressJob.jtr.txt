@@ -1,0 +1,147 @@
+#Test Results (version 2)
+#Sun Oct 18 14:33:16 JST 2026
+#-----testdescription-----
+$file=/workspace/scratch/2b4d1cb957a7/M3jdk21-feature-current/test/jdk/java/util/concurrent/ProgressJob/M3ProgressJob.java
+$root=/workspace/scratch/2b4d1cb957a7/M3jdk21-feature-current/test/jdk
+keywords=othervm
+run=USER_SPECIFIED main/othervm M3ProgressJob\n
+source=M3ProgressJob.java
+title=ProgressJob preserves result and exception identity through existing monitored Callable and FutureTask templates
+
+#-----environment-----
+
+#-----testresult-----
+description=file\:/workspace/scratch/2b4d1cb957a7/M3jdk21-feature-current/test/jdk/java/util/concurrent/ProgressJob/M3ProgressJob.java
+elapsed=6235 0\:00\:06.235
+end=Sun Oct 18 14\:33\:16 JST 2026
+environment=regtest
+execStatus=Passed. Execution successful
+harnessLoaderMode=Classpath Loader
+harnessVariety=Full Bundle
+hostname=6b896e38bb8d
+javatestOS=Linux 6.18.55 (amd64)
+javatestVersion=6.0-ea+b24-2026-10-05-${BUILT_FROM_COMMIT}
+jtregVersion=jtreg 7.3.1 dev 0
+script=com.sun.javatest.regtest.exec.RegressionScript
+sections=script_messages build compile main
+start=Sun Oct 18 14\:33\:09 JST 2026
+test=java/util/concurrent/ProgressJob/M3ProgressJob.java
+testJDK=/workspace/scratch/2b4d1cb957a7/M3jdk21-features/build/m3-feature-fastdebug/images/jdk
+testJDK_OS=[name\:Linux,arch\:amd64,version\:6.18.55,family\:linux,simple_arch\:x64,simple_version\:6.18,processors\:8,maxMemory\:8589934592,maxSwap\:0]
+testJDK_os.arch=amd64
+testJDK_os.name=Linux
+testJDK_os.version=6.18.55
+totalTime=6236
+user.name=root
+work=/workspace/scratch/2b4d1cb957a7/build-proof/feature-jtreg/work/java/util/concurrent/ProgressJob
+
+#section:script_messages
+----------messages:(4/334)----------
+JDK under test: /workspace/scratch/2b4d1cb957a7/M3jdk21-features/build/m3-feature-fastdebug/images/jdk
+openjdk version "21-internal" 2023-09-19
+OpenJDK Runtime Environment (fastdebug build 21-internal-adhoc.root.M3jdk21-features)
+OpenJDK 64-Bit Server VM (fastdebug build 21-internal-adhoc.root.M3jdk21-features, mixed mode, sharing)
+
+#section:build
+----------messages:(7/216)----------
+command: build M3ProgressJob
+reason: Named class compiled on demand
+started: Sun Oct 18 14:33:09 JST 2026
+Test directory:
+  compile: M3ProgressJob
+finished: Sun Oct 18 14:33:15 JST 2026
+elapsed time (seconds): 5.841
+result: Passed. Build successful
+
+#section:compile
+----------messages:(6/305)----------
+command: compile /workspace/scratch/2b4d1cb957a7/M3jdk21-feature-current/test/jdk/java/util/concurrent/ProgressJob/M3ProgressJob.java
+reason: .class file out of date or does not exist
+started: Sun Oct 18 14:33:09 JST 2026
+Mode: othervm
+finished: Sun Oct 18 14:33:15 JST 2026
+elapsed time (seconds): 5.834
+----------configuration:(5/394)----------
+javac compilation environment
+  source path: /workspace/scratch/2b4d1cb957a7/M3jdk21-feature-current/test/jdk/java/util/concurrent/ProgressJob
+  class path:  /workspace/scratch/2b4d1cb957a7/M3jdk21-feature-current/test/jdk/java/util/concurrent/ProgressJob
+               /workspace/scratch/2b4d1cb957a7/build-proof/feature-jtreg/work/classes/1/java/util/concurrent/ProgressJob/M3ProgressJob.d
+
+----------rerun:(28/2427)*----------
+cd /workspace/scratch/2b4d1cb957a7/build-proof/feature-jtreg/work/scratch/1 && \\
+HOME=/root \\
+LANG=C.UTF-8 \\
+LC_ALL=C.UTF-8 \\
+LC_CTYPE=C.UTF-8 \\
+PATH=/bin:/usr/bin:/usr/sbin \\
+TZ=Asia/Tokyo \\
+    /workspace/scratch/2b4d1cb957a7/M3jdk21-features/build/m3-feature-fastdebug/images/jdk/bin/javac \\
+        -J-Xmx512m \\
+        -J-Xcheck:jni \\
+        -J-Dm3.stock.jdk=/tmp/m3-toolchain/jdk-21.0.12.1+1 \\
+        -J-Dtest.vm.opts='-Xmx512m -Xcheck:jni -Dm3.stock.jdk=/tmp/m3-toolchain/jdk-21.0.12.1+1' \\
+        -J-Dtest.tool.vm.opts='-J-Xmx512m -J-Xcheck:jni -J-Dm3.stock.jdk=/tmp/m3-toolchain/jdk-21.0.12.1+1' \\
+        -J-Dtest.compiler.opts= \\
+        -J-Dtest.java.opts= \\
+        -J-Dtest.jdk=/workspace/scratch/2b4d1cb957a7/M3jdk21-features/build/m3-feature-fastdebug/images/jdk \\
+        -J-Dcompile.jdk=/workspace/scratch/2b4d1cb957a7/M3jdk21-features/build/m3-feature-fastdebug/images/jdk \\
+        -J-Dtest.timeout.factor=1.0 \\
+        -J-Dtest.root=/workspace/scratch/2b4d1cb957a7/M3jdk21-feature-current/test/jdk \\
+        -J-Dtest.name=java/util/concurrent/ProgressJob/M3ProgressJob.java \\
+        -J-Dtest.file=/workspace/scratch/2b4d1cb957a7/M3jdk21-feature-current/test/jdk/java/util/concurrent/ProgressJob/M3ProgressJob.java \\
+        -J-Dtest.src=/workspace/scratch/2b4d1cb957a7/M3jdk21-feature-current/test/jdk/java/util/concurrent/ProgressJob \\
+        -J-Dtest.src.path=/workspace/scratch/2b4d1cb957a7/M3jdk21-feature-current/test/jdk/java/util/concurrent/ProgressJob \\
+        -J-Dtest.classes=/workspace/scratch/2b4d1cb957a7/build-proof/feature-jtreg/work/classes/1/java/util/concurrent/ProgressJob/M3ProgressJob.d \\
+        -J-Dtest.class.path=/workspace/scratch/2b4d1cb957a7/build-proof/feature-jtreg/work/classes/1/java/util/concurrent/ProgressJob/M3ProgressJob.d \\
+        -d /workspace/scratch/2b4d1cb957a7/build-proof/feature-jtreg/work/classes/1/java/util/concurrent/ProgressJob/M3ProgressJob.d \\
+        -sourcepath /workspace/scratch/2b4d1cb957a7/M3jdk21-feature-current/test/jdk/java/util/concurrent/ProgressJob \\
+        -classpath /workspace/scratch/2b4d1cb957a7/M3jdk21-feature-current/test/jdk/java/util/concurrent/ProgressJob:/workspace/scratch/2b4d1cb957a7/build-proof/feature-jtreg/work/classes/1/java/util/concurrent/ProgressJob/M3ProgressJob.d /workspace/scratch/2b4d1cb957a7/M3jdk21-feature-current/test/jdk/java/util/concurrent/ProgressJob/M3ProgressJob.java
+----------System.out:(0/0)----------
+----------System.err:(0/0)----------
+result: Passed. Compilation successful
+
+#section:main
+----------messages:(6/233)----------
+command: main M3ProgressJob
+reason: User specified action: run main/othervm M3ProgressJob 
+started: Sun Oct 18 14:33:15 JST 2026
+Mode: othervm [/othervm specified]
+finished: Sun Oct 18 14:33:16 JST 2026
+elapsed time (seconds): 0.388
+----------configuration:(0/0)----------
+----------System.out:(1/105)----------
+PASS ProgressJob checks=81; new API=PENDING; Object universal compatibility=HOLD; STRING phase unchanged
+----------System.err:(1/15)----------
+STATUS:Passed.
+----------rerun:(27/2265)*----------
+cd /workspace/scratch/2b4d1cb957a7/build-proof/feature-jtreg/work/scratch/1 && \\
+HOME=/root \\
+LANG=C.UTF-8 \\
+LC_ALL=C.UTF-8 \\
+LC_CTYPE=C.UTF-8 \\
+PATH=/bin:/usr/bin:/usr/sbin \\
+TZ=Asia/Tokyo \\
+CLASSPATH=/workspace/scratch/2b4d1cb957a7/build-proof/feature-jtreg/work/classes/1/java/util/concurrent/ProgressJob/M3ProgressJob.d:/workspace/scratch/2b4d1cb957a7/M3jdk21-feature-current/test/jdk/java/util/concurrent/ProgressJob:/tmp/m3-toolchain/jtreg/lib/javatest.jar:/tmp/m3-toolchain/jtreg/lib/jtreg.jar \\
+    /workspace/scratch/2b4d1cb957a7/M3jdk21-features/build/m3-feature-fastdebug/images/jdk/bin/java \\
+        -Dtest.vm.opts='-Xmx512m -Xcheck:jni -Dm3.stock.jdk=/tmp/m3-toolchain/jdk-21.0.12.1+1' \\
+        -Dtest.tool.vm.opts='-J-Xmx512m -J-Xcheck:jni -J-Dm3.stock.jdk=/tmp/m3-toolchain/jdk-21.0.12.1+1' \\
+        -Dtest.compiler.opts= \\
+        -Dtest.java.opts= \\
+        -Dtest.jdk=/workspace/scratch/2b4d1cb957a7/M3jdk21-features/build/m3-feature-fastdebug/images/jdk \\
+        -Dcompile.jdk=/workspace/scratch/2b4d1cb957a7/M3jdk21-features/build/m3-feature-fastdebug/images/jdk \\
+        -Dtest.timeout.factor=1.0 \\
+        -Dtest.root=/workspace/scratch/2b4d1cb957a7/M3jdk21-feature-current/test/jdk \\
+        -Dtest.name=java/util/concurrent/ProgressJob/M3ProgressJob.java \\
+        -Dtest.file=/workspace/scratch/2b4d1cb957a7/M3jdk21-feature-current/test/jdk/java/util/concurrent/ProgressJob/M3ProgressJob.java \\
+        -Dtest.src=/workspace/scratch/2b4d1cb957a7/M3jdk21-feature-current/test/jdk/java/util/concurrent/ProgressJob \\
+        -Dtest.src.path=/workspace/scratch/2b4d1cb957a7/M3jdk21-feature-current/test/jdk/java/util/concurrent/ProgressJob \\
+        -Dtest.classes=/workspace/scratch/2b4d1cb957a7/build-proof/feature-jtreg/work/classes/1/java/util/concurrent/ProgressJob/M3ProgressJob.d \\
+        -Dtest.class.path=/workspace/scratch/2b4d1cb957a7/build-proof/feature-jtreg/work/classes/1/java/util/concurrent/ProgressJob/M3ProgressJob.d \\
+        -Xmx512m \\
+        -Xcheck:jni \\
+        -Dm3.stock.jdk=/tmp/m3-toolchain/jdk-21.0.12.1+1 \\
+        com.sun.javatest.regtest.agent.MainWrapper /workspace/scratch/2b4d1cb957a7/build-proof/feature-jtreg/work/java/util/concurrent/ProgressJob/M3ProgressJob.d/main.0.jta
+result: Passed. Execution successful
+
+
+test result: Passed. Execution successful

@@ -1,0 +1,7 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3jdk.AstBuildReverse20261017
+displayName: M3JDK21 intrinsic indexed array state-mask live views
+description: Replays source-sealed Java21 state-aware views in the existing java.base storage owner.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: m3-ast-build-reverse-20261017-m3-state-masked-views-20261019

@@ -1,0 +1,6 @@
+# Canonical Synexia source recipe `com.synexia.m3.JdkDefaultTemplateContracts20261017`; draft target receipt
+src/java.base/share/classes/java/util/concurrent/Callable.java	d38c9364edd57c72791df26a9b4cb6af6b8955caa412715559899d19c864443f	a9d2d8cc73583297fb6c07dee24765473aaaeeaae2651a0b54eb411ed2d46261	01-Callable.java.txt
+src/java.base/share/classes/java/util/concurrent/MonitoredCallable.java	ABSENT	a402533489745504fa3e9b8ca667be9b0d9cc3a370bbe2092c70f20051afb2f7	02-MonitoredCallable.java.txt
+src/java.base/share/classes/java/util/concurrent/MonitoredRunnable.java	ABSENT	8c975815e833bca4c214313efde24acf776a1ef676140701f9a5293ef4b5415b	03-MonitoredRunnable.java.txt
+src/java.base/share/classes/java/util/concurrent/ProgressMonitors.java	7046ca9d6524586dc5c38a3a1a9c6b0a5c52d9e8aa551df44431175e245baad4	5073890ccf101b597e656b2516be70b83f0b77f9accdc157d75fc8d6f525a359	04-ProgressMonitors.java.txt
+test/jdk/java/lang/Object/M3MonitoredTemplateTest.java	ABSENT	46d25019252f8cc474103f2192332d394b36e4b169ed6ab0e567c0f83a46798b	05-M3MonitoredTemplateTest.java.txt

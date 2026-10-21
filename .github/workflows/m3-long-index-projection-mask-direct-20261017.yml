@@ -1,0 +1,124 @@
+# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and contributors
+# SPDX-License-Identifier: Apache-2.0
+name: M3 indexed long projection direct offset-mask filtering
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/m3-long-index-projection-mask-direct-20261017.yml'
+      - 'm3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java'
+      - 'm3/collections/src/test/java/com/m3/collections/M3LongIndexProjectionMaskOffset*.java'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  java21-exact-source-and-red-green:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Validate three exact canonical Synexia recipe SHA-256 postimages
+        shell: bash
+        run: |
+          set -euo pipefail
+          printf '%s  %s\n' 'a69694a2ce22ca9599cb665e4845f5dee75d527b7c144fa3ea7fb4518ec2d3fa' 'm3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java' | sha256sum -c -
+          printf '%s  %s\n' '1d554f7e18523f363279e0670abc572a3f430b0a8db65850aaf57e82b15e309a' 'm3/collections/src/test/java/com/m3/collections/M3LongIndexProjectionMaskOffsetProof.java' | sha256sum -c -
+          printf '%s  %s\n' 'e3401ec86e0ac9d227039983e93ca00ca4fe2bd59330deb1911ec2388b51f37f' 'm3/collections/src/test/java/com/m3/collections/M3LongIndexProjectionMaskOffsetTest.java' | sha256sum -c -
+          echo M3_LONG_MASK_DIRECT_SOURCE_SEAL_PASS
+      - name: Compile original and candidate complete source; prove all-pass sharing refinement
+        shell: bash
+        run: |
+          set -euo pipefail
+          ROOT=m3/collections/src
+          B="$(mktemp -d)"
+          trap 'rm -rf "$B"' EXIT
+          mkdir -p "$B/red/com/m3/collections" "$B/redclasses" "$B/greenclasses"
+          SOURCE="$ROOT/main/java/com/m3/collections/M3LongIndexProjection.java"
+          KERNEL="$ROOT/main/java/com/m3/collections/M3IndexMaskCompactor.java"
+          PROOF="$ROOT/test/java/com/m3/collections/M3LongIndexProjectionMaskOffsetProof.java"
+          BASE="d47a4b4fdb8e3794ec56768b06aa9e23730c6b8e"
+          git show "$BASE:$SOURCE" > "$B/red/com/m3/collections/M3LongIndexProjection.java"
+          javac --release 21 -proc:none -Xlint:all -Werror -d "$B/redclasses" \
+            "$KERNEL" "$B/red/com/m3/collections/M3LongIndexProjection.java" "$PROOF"
+          if java -ea -cp "$B/redclasses" com.m3.collections.M3LongIndexProjectionMaskOffsetProof > "$B/red.log" 2>&1; then
+            echo 'Original double-copy selection unexpectedly passed sharing oracle'
+            exit 1
+          fi
+          grep -Fq 'index directory reused iff all selected' "$B/red.log"
+          javac --release 21 -proc:none -Xlint:all -Werror \
+            -d "$B/greenclasses" "$KERNEL" "$SOURCE" "$PROOF" \
+            "$ROOT/test/java/com/m3/collections/M3LongIndexProjectionSelfTest.java"
+          java -ea -Xmx384m -cp "$B/greenclasses" com.m3.collections.M3LongIndexProjectionMaskOffsetProof
+          java -ea -Xint -Xmx384m -cp "$B/greenclasses" com.m3.collections.M3LongIndexProjectionMaskOffsetProof
+          java -ea -cp "$B/greenclasses" com.m3.collections.M3LongIndexProjectionSelfTest
+          javap -public -classpath "$B/redclasses" com.m3.collections.M3LongIndexProjection > "$B/red.api"
+          javap -public -classpath "$B/greenclasses" com.m3.collections.M3LongIndexProjection > "$B/green.api"
+          diff -u "$B/red.api" "$B/green.api"
+          git diff --check "$BASE" HEAD
+  native-original-jni-parity:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Compile unchanged canonical C17 JNI mask owner and execute native-required fast-path regression
+        shell: bash
+        run: |
+          set -euo pipefail
+          ROOT=m3/collections/src
+          B="$(mktemp -d)"
+          trap 'rm -rf "$B"' EXIT
+          # Compile the entire actual M3 module and test owners before the native gate.
+          mvn -B -ntp -f m3/collections/pom.xml -DskipTests test-compile
+          # Generate the JNI header from the exact Java declaration independently.
+          javac --release 21 -proc:none -Xlint:all -Werror -h "$B" -d "$B" \
+            "$ROOT/main/java/com/m3/collections/M3IndexMaskCompactor.java"
+          test -s "$B/com_m3_collections_M3IndexMaskCompactor.h"
+          grep -Fq 'Java_com_m3_collections_M3IndexMaskCompactor_selectNative' \
+            "$B/com_m3_collections_M3IndexMaskCompactor.h"
+          gcc -std=c17 -O2 -fPIC -shared -Wall -Wextra -Werror -pedantic \
+            -fsanitize=undefined -fno-sanitize-recover=undefined \
+            -I"$JAVA_HOME/include" -I"$JAVA_HOME/include/linux" \
+            "$ROOT/main/native/collections/m3_index_mask_compactor.c" \
+            -o "$B/libm3_collections_mask.so"
+          UBSAN_OPTIONS=halt_on_error=1:print_stacktrace=1 \
+            java -ea -Xcheck:jni -Djava.library.path="$B" -cp m3/collections/target/classes:m3/collections/target/test-classes \
+            com.m3.collections.M3LongIndexProjectionMaskOffsetProof
+          UBSAN_OPTIONS=halt_on_error=1:print_stacktrace=1 \
+            java -ea -Xcheck:jni -Djava.library.path="$B" -cp m3/collections/target/classes:m3/collections/target/test-classes \
+            com.m3.collections.M3IndexMaskCompactorSelfTest --native
+  maven-full-collections:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: maven
+      - name: Full module and inherited indexed/mask/sorted JUnit contracts
+        shell: bash
+        run: |
+          set -euo pipefail
+          mvn -B -ntp -f m3/collections/pom.xml \
+            -Dtest=M3LongIndexProjectionMaskOffsetTest,M3IndexMaskCompactorTest,M3IndexMaskWindowTest \
+            test
+          for suite in M3LongIndexProjectionMaskOffsetTest M3IndexMaskCompactorTest M3IndexMaskWindowTest; do
+            REPORT="m3/collections/target/surefire-reports/com.m3.collections.${suite}.txt"
+            test -s "$REPORT"
+            grep -E 'Tests run: [1-9][0-9]*, Failures: 0, Errors: 0, Skipped: 0' "$REPORT"
+          done

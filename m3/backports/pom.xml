@@ -25,7 +25,9 @@
           <execution>
             <id>verify-backport-catalogue</id>
             <phase>validate</phase>
-            <goals><goal>exec</goal></goals>
+            <goals>
+              <goal>exec</goal>
+            </goals>
             <configuration>
               <executable>${python.executable}</executable>
               <workingDirectory>${project.basedir}</workingDirectory>
@@ -39,7 +41,9 @@
           <execution>
             <id>verify-synexia-nebula-recipe-dag-handoff</id>
             <phase>validate</phase>
-            <goals><goal>exec</goal></goals>
+            <goals>
+              <goal>exec</goal>
+            </goals>
             <configuration>
               <executable>${python.executable}</executable>
               <workingDirectory>${project.basedir}</workingDirectory>
@@ -53,7 +57,9 @@
           <execution>
             <id>compile-backport-recipe-dag</id>
             <phase>validate</phase>
-            <goals><goal>exec</goal></goals>
+            <goals>
+              <goal>exec</goal>
+            </goals>
             <configuration>
               <executable>${python.executable}</executable>
               <workingDirectory>${project.basedir}</workingDirectory>
@@ -75,7 +81,9 @@
           <execution>
             <id>emit-backport-execution-waves</id>
             <phase>verify</phase>
-            <goals><goal>exec</goal></goals>
+            <goals>
+              <goal>exec</goal>
+            </goals>
             <configuration>
               <executable>${python.executable}</executable>
               <workingDirectory>${project.basedir}</workingDirectory>
@@ -93,7 +101,9 @@
           <execution>
             <id>emit-scoped-backport-programme-status</id>
             <phase>verify</phase>
-            <goals><goal>exec</goal></goals>
+            <goals>
+              <goal>exec</goal>
+            </goals>
             <configuration>
               <executable>${python.executable}</executable>
               <workingDirectory>${project.basedir}</workingDirectory>
@@ -109,9 +119,49 @@
             </configuration>
           </execution>
           <execution>
+            <id>emit-jep-source-witness</id>
+            <phase>verify</phase>
+            <goals>
+              <goal>exec</goal>
+            </goals>
+            <configuration>
+              <executable>${python.executable}</executable>
+              <workingDirectory>${project.basedir}</workingDirectory>
+              <arguments>
+                <argument>jep_source_witness.py</argument>
+                <argument>--root</argument>
+                <argument>${project.basedir}/../..</argument>
+                <argument>--out</argument>
+                <argument>${project.build.directory}/jep-source-witness.tsv</argument>
+              </arguments>
+            </configuration>
+          </execution>
+          <execution>
+            <id>emit-all-85-jep-proof-matrix</id>
+            <phase>verify</phase>
+            <goals>
+              <goal>exec</goal>
+            </goals>
+            <configuration>
+              <executable>${python.executable}</executable>
+              <workingDirectory>${project.basedir}</workingDirectory>
+              <arguments>
+                <argument>all_jep_matrix.py</argument>
+                <argument>--root</argument>
+                <argument>${project.basedir}/../..</argument>
+                <argument>--out</argument>
+                <argument>${project.build.directory}/all-jep-matrix.tsv</argument>
+                <argument>--json-out</argument>
+                <argument>${project.build.directory}/all-jep-matrix.json</argument>
+              </arguments>
+            </configuration>
+          </execution>
+          <execution>
             <id>emit-backport-program-status</id>
             <phase>verify</phase>
-            <goals><goal>exec</goal></goals>
+            <goals>
+              <goal>exec</goal>
+            </goals>
             <configuration>
               <executable>${python.executable}</executable>
               <workingDirectory>${project.basedir}</workingDirectory>
@@ -129,7 +179,9 @@
           <execution>
             <id>test-backport-inventory</id>
             <phase>test</phase>
-            <goals><goal>exec</goal></goals>
+            <goals>
+              <goal>exec</goal>
+            </goals>
             <configuration>
               <executable>${python.executable}</executable>
               <workingDirectory>${project.basedir}</workingDirectory>
@@ -169,11 +221,15 @@
               <execution>
                 <id>m3-synexia-atom-pattern-verify</id>
                 <phase>verify</phase>
-                <goals><goal>dryRun</goal></goals>
+                <goals>
+                  <goal>dryRun</goal>
+                </goals>
               </execution>
             </executions>
             <configuration>
-              <activeRecipes><recipe>com.synexia.m3.EveryModuleAtomPatternApplication</recipe></activeRecipes>
+              <activeRecipes>
+                <recipe>com.synexia.m3.EveryModuleAtomPatternApplication</recipe>
+              </activeRecipes>
               <exportDatatables>true</exportDatatables>
               <runPerSubmodule>false</runPerSubmodule>
               <failOnInvalidActiveRecipes>true</failOnInvalidActiveRecipes>
@@ -253,11 +309,15 @@
               <execution>
                 <id>m3-synexia-atom-pattern-mastery-verify</id>
                 <phase>verify</phase>
-                <goals><goal>dryRun</goal></goals>
+                <goals>
+                  <goal>dryRun</goal>
+                </goals>
               </execution>
             </executions>
             <configuration>
-              <activeRecipes><recipe>com.synexia.m3.EveryModuleAtomPatternMastery</recipe></activeRecipes>
+              <activeRecipes>
+                <recipe>com.synexia.m3.EveryModuleAtomPatternMastery</recipe>
+              </activeRecipes>
               <exportDatatables>true</exportDatatables>
               <runPerSubmodule>false</runPerSubmodule>
               <failOnInvalidActiveRecipes>true</failOnInvalidActiveRecipes>
@@ -314,6 +374,54 @@
                 <exclusion>**/vendor/**</exclusion>
               </exclusions>
             </configuration>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+    <profile>
+      <id>m3-recipe-boot</id>
+      <activation>
+        <file>
+          <exists>${maven.multiModuleProjectDirectory}/.m3/recipe-boot.properties</exists>
+        </file>
+      </activation>
+      <properties>
+        <m3.recipe.boot.skip>false</m3.recipe.boot.skip>
+      </properties>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>exec-maven-plugin</artifactId>
+            <version>3.5.0</version>
+            <inherited>true</inherited>
+            <dependencies>
+              <dependency>
+                <groupId>com.synexia.m3</groupId>
+                <artifactId>m3-pr-stack-preservation</artifactId>
+                <version>1.0.0-m3boot20261021</version>
+              </dependency>
+            </dependencies>
+            <executions>
+              <execution>
+                <id>m3-recipe-boot</id>
+                <phase>validate</phase>
+                <goals>
+                  <goal>java</goal>
+                </goals>
+                <configuration>
+                  <skip>${m3.recipe.boot.skip}</skip>
+                  <mainClass>com.synexia.m3.prstack.M3RecipeBoot</mainClass>
+                  <includeProjectDependencies>false</includeProjectDependencies>
+                  <includePluginDependencies>true</includePluginDependencies>
+                  <arguments>
+                    <argument>${maven.multiModuleProjectDirectory}/.m3/recipe-boot.properties</argument>
+                    <argument>${project.basedir}</argument>
+                    <argument>${session.projects[0].basedir.absolutePath}</argument>
+                  </arguments>
+                </configuration>
+              </execution>
+            </executions>
           </plugin>
         </plugins>
       </build>

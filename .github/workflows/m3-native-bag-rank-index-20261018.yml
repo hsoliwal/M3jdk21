@@ -1,0 +1,50 @@
+name: M3 Native Generic Bag Rank Java JNI
+on:
+  pull_request:
+    paths:
+      - 'm3/collections/src/main/java/com/m3/collections/M3BagRankIndex.java'
+      - 'm3/collections/src/test/java/com/m3/collections/M3BagRankIndex*'
+      - 'm3/collections/qualification/m3-native-bag-rank-index-20261018/**'
+      - '.github/workflows/m3-native-bag-rank-index-20261018.yml'
+  workflow_dispatch:
+jobs:
+  real-m3-java-jni:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Byte-for-byte canonical Synexia source-recipe proof
+        run: python3 m3/collections/qualification/m3-native-bag-rank-index-20261018/verify.py
+      - name: Strict Java21 compile against actual M3 CountedBag and JNI owners
+        run: |
+          mkdir -p "$RUNNER_TEMP/classes"
+          javac --release 21 -proc:none -Xlint:all,-processing,-serial,-module -Werror \
+            -sourcepath m3/collections/src/main/java \
+            -d "$RUNNER_TEMP/classes" \
+            m3/collections/src/main/java/com/m3/collections/M3BagRankIndex.java \
+            m3/collections/src/main/java/com/m3/collections/M3CountedBag.java \
+            m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java \
+            m3/collections/src/test/java/com/m3/collections/M3BagRankIndexSelfTest.java
+      - name: Execute actual generic bag contracts normal and interpreted
+        run: |
+          java -cp "$RUNNER_TEMP/classes" com.m3.collections.M3BagRankIndexSelfTest
+          java -Xint -cp "$RUNNER_TEMP/classes" com.m3.collections.M3BagRankIndexSelfTest
+      - name: Build incumbent C17 JNI with strict UBSan
+        run: |
+          JDK_HOME="$(dirname "$(dirname "$(readlink -f "$(command -v javac)")")")"
+          gcc -std=c17 -fPIC -shared -Wall -Wextra -Werror \
+            -fsanitize=undefined -fno-sanitize-recover=all \
+            -I"$JDK_HOME/include" -I"$JDK_HOME/include/linux" \
+            m3/collections/src/main/native/collections/m3_index_mask_compactor.c \
+            -o "$RUNNER_TEMP/libm3_collections_mask.so"
+      - name: Execute real native-required JNI parity with GC-safe primitive boundary
+        run: |
+          java -Xcheck:jni -Djava.library.path="$RUNNER_TEMP" \
+            -cp "$RUNNER_TEMP/classes" com.m3.collections.M3BagRankIndexSelfTest --native
+          java -Xcheck:jni -Xint -Djava.library.path="$RUNNER_TEMP" \
+            -cp "$RUNNER_TEMP/classes" com.m3.collections.M3BagRankIndexSelfTest --native
+      - name: Existing owning M3 module Maven JUnit gate
+        run: mvn -B -ntp -f m3/collections/pom.xml -Dtest=M3BagRankIndexTest test

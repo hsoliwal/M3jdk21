@@ -1,0 +1,7 @@
+# Actual M3-owned Eclipse provider classes, tests, and all-five-library API contract; all files must be ABSENT before emitting.
+m3/collections/interop/src/main/java/com/m3/collections/interop/M3EclipseListMultimap.java	ABSENT	d44ceb0849d9b2059c1432a3faace8edd999b3d72995eb35f025631883c07c58	M3EclipseListMultimap.java.txt
+m3/collections/interop/src/main/java/com/m3/collections/interop/M3EclipseSetMultimap.java	ABSENT	41c037332683d815898921e796490ef7505fb4fa9b76605ad0abd62643709960	M3EclipseSetMultimap.java.txt
+m3/collections/interop/src/test/java/com/m3/collections/interop/M3EclipseListMultimapSelfTest.java	ABSENT	f08cd0616def50f7d80769ab4ec86c0b7a4ffe9f4ac171ec4b1bbd216448844e	M3EclipseListMultimapSelfTest.java.txt
+m3/collections/interop/src/test/java/com/m3/collections/interop/M3EclipseMultimapTest.java	ABSENT	7646aa823ef4cf6a2203d6c7de6c69d28c0017cee16fc266db5dea6c6e291415	M3EclipseMultimapTest.java.txt
+m3/collections/interop/src/test/java/com/m3/collections/interop/M3EclipseSetMultimapSelfTest.java	ABSENT	3a7abcb3e898b088d6be60ddf1d078abfa94e6aaef1f7127fb111960727bccd5	M3EclipseSetMultimapSelfTest.java.txt
+m3/collections/interop/src/test/java/com/m3/collections/interop/M3FiveLibraryInteropContractTest.java	ABSENT	dad4233d279811dee46a9fc96ab665d596e82c18e1599b5cf2022a90d98e22b4	M3FiveLibraryInteropContractTest.java.txt

@@ -1,0 +1,358 @@
+[
+  {
+    "name": "/opt/pyvenv/bin/python",
+    "argv": [
+      "/opt/pyvenv/bin/python",
+      "/mnt/data/m3jdk21_tombstone_receiving_20261017/donor-repo/synexia-openrewrite-recipes/recipe-crates/collections-superset-counts/m3jdk21-tombstone-reuse-20261017/author_templates.py",
+      "--check"
+    ],
+    "exit": 0,
+    "expected_exit": 0,
+    "stdout": "PASS reviewed growth-atom template reconstruction targets=2\n",
+    "stderr": ""
+  },
+  {
+    "name": "javac",
+    "argv": [
+      "javac",
+      "--release",
+      "21",
+      "-proc:none",
+      "-Xlint:all",
+      "-Werror",
+      "-d",
+      "/tmp/m3-tombstone-replay-ufmfyyv9/classes-pre",
+      "/tmp/m3-tombstone-replay-ufmfyyv9/pre/m3/collections/src/main/java/com/m3/collections/M3LongHashSet.java",
+      "/tmp/m3-tombstone-replay-ufmfyyv9/pre/m3/collections/src/main/java/com/m3/collections/M3LongLongHashMap.java",
+      "/mnt/data/m3jdk21_tombstone_receiving_20261017/donor-repo/synexia-openrewrite-recipes/recipe-crates/collections-superset-counts/m3jdk21-tombstone-reuse-20261017/proof/deps/M3LongCollection.java",
+      "/mnt/data/m3jdk21_tombstone_receiving_20261017/donor-repo/synexia-openrewrite-recipes/recipe-crates/collections-superset-counts/m3jdk21-tombstone-reuse-20261017/proof/deps/M3LongIterator.java",
+      "/mnt/data/m3jdk21_tombstone_receiving_20261017/donor-repo/synexia-openrewrite-recipes/recipe-crates/collections-superset-counts/m3jdk21-tombstone-reuse-20261017/proof/deps/M3LongLongConsumer.java",
+      "/mnt/data/m3jdk21_tombstone_receiving_20261017/donor-repo/synexia-openrewrite-recipes/recipe-crates/collections-superset-counts/m3jdk21-tombstone-reuse-20261017/proof/M3TombstoneReuseSelfTest.java"
+    ],
+    "exit": 0,
+    "expected_exit": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  {
+    "name": "java",
+    "argv": [
+      "java",
+      "-ea",
+      "-Xmx64m",
+      "-cp",
+      "/tmp/m3-tombstone-replay-ufmfyyv9/classes-pre",
+      "com.m3.collections.M3TombstoneReuseSelfTest"
+    ],
+    "exit": 1,
+    "expected_exit": 1,
+    "stdout": "",
+    "stderr": "Exception in thread \"main\" java.lang.AssertionError: set allocated array despite reachable deleted slot\n\tat com.m3.collections.M3TombstoneReuseSelfTest.require(M3TombstoneReuseSelfTest.java:19)\n\tat com.m3.collections.M3TombstoneReuseSelfTest.boundary(M3TombstoneReuseSelfTest.java:55)\n\tat com.m3.collections.M3TombstoneReuseSelfTest.main(M3TombstoneReuseSelfTest.java:133)\n"
+  },
+  {
+    "name": "javac",
+    "argv": [
+      "javac",
+      "--release",
+      "21",
+      "-proc:none",
+      "-Xlint:all",
+      "-Werror",
+      "-d",
+      "/tmp/m3-tombstone-replay-ufmfyyv9/classes-post",
+      "/tmp/m3-tombstone-replay-ufmfyyv9/post/m3/collections/src/main/java/com/m3/collections/M3LongHashSet.java",
+      "/tmp/m3-tombstone-replay-ufmfyyv9/post/m3/collections/src/main/java/com/m3/collections/M3LongLongHashMap.java",
+      "/mnt/data/m3jdk21_tombstone_receiving_20261017/donor-repo/synexia-openrewrite-recipes/recipe-crates/collections-superset-counts/m3jdk21-tombstone-reuse-20261017/proof/deps/M3LongCollection.java",
+      "/mnt/data/m3jdk21_tombstone_receiving_20261017/donor-repo/synexia-openrewrite-recipes/recipe-crates/collections-superset-counts/m3jdk21-tombstone-reuse-20261017/proof/deps/M3LongIterator.java",
+      "/mnt/data/m3jdk21_tombstone_receiving_20261017/donor-repo/synexia-openrewrite-recipes/recipe-crates/collections-superset-counts/m3jdk21-tombstone-reuse-20261017/proof/deps/M3LongLongConsumer.java",
+      "/mnt/data/m3jdk21_tombstone_receiving_20261017/donor-repo/synexia-openrewrite-recipes/recipe-crates/collections-superset-counts/m3jdk21-tombstone-reuse-20261017/proof/M3TombstoneReuseSelfTest.java"
+    ],
+    "exit": 0,
+    "expected_exit": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  {
+    "name": "java",
+    "argv": [
+      "java",
+      "-ea",
+      "-Xmx64m",
+      "-cp",
+      "/tmp/m3-tombstone-replay-ufmfyyv9/classes-post",
+      "com.m3.collections.M3TombstoneReuseSelfTest"
+    ],
+    "exit": 0,
+    "expected_exit": 0,
+    "stdout": "PASS M3TombstoneReuseSelfTest checks=142438 saved_set_array_payload_bytes=72 saved_map_array_payload_bytes=136\n",
+    "stderr": ""
+  },
+  {
+    "name": "javac",
+    "argv": [
+      "javac",
+      "--release",
+      "21",
+      "-proc:none",
+      "-Xlint:all",
+      "-Werror",
+      "-d",
+      "/tmp/m3-tombstone-replay-ufmfyyv9/classes-repeat",
+      "/tmp/m3-tombstone-replay-ufmfyyv9/repeat/m3/collections/src/main/java/com/m3/collections/M3LongHashSet.java",
+      "/tmp/m3-tombstone-replay-ufmfyyv9/repeat/m3/collections/src/main/java/com/m3/collections/M3LongLongHashMap.java",
+      "/mnt/data/m3jdk21_tombstone_receiving_20261017/donor-repo/synexia-openrewrite-recipes/recipe-crates/collections-superset-counts/m3jdk21-tombstone-reuse-20261017/proof/deps/M3LongCollection.java",
+      "/mnt/data/m3jdk21_tombstone_receiving_20261017/donor-repo/synexia-openrewrite-recipes/recipe-crates/collections-superset-counts/m3jdk21-tombstone-reuse-20261017/proof/deps/M3LongIterator.java",
+      "/mnt/data/m3jdk21_tombstone_receiving_20261017/donor-repo/synexia-openrewrite-recipes/recipe-crates/collections-superset-counts/m3jdk21-tombstone-reuse-20261017/proof/deps/M3LongLongConsumer.java",
+      "/mnt/data/m3jdk21_tombstone_receiving_20261017/donor-repo/synexia-openrewrite-recipes/recipe-crates/collections-superset-counts/m3jdk21-tombstone-reuse-20261017/proof/M3TombstoneReuseSelfTest.java"
+    ],
+    "exit": 0,
+    "expected_exit": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  {
+    "name": "javap",
+    "argv": [
+      "javap",
+      "-public",
+      "-s",
+      "-classpath",
+      "/tmp/m3-tombstone-replay-ufmfyyv9/classes-pre",
+      "com.m3.collections.M3LongHashSet"
+    ],
+    "exit": 0,
+    "expected_exit": 0,
+    "stdout": "Compiled from \"M3LongHashSet.java\"\npublic final class com.m3.collections.M3LongHashSet implements com.m3.collections.M3LongCollection {\n  public com.m3.collections.M3LongHashSet();\n    descriptor: ()V\n\n  public com.m3.collections.M3LongHashSet(int);\n    descriptor: (I)V\n\n  public boolean add(long);\n    descriptor: (J)Z\n\n  public boolean remove(long);\n    descriptor: (J)Z\n\n  public boolean contains(long);\n    descriptor: (J)Z\n\n  public int size();\n    descriptor: ()I\n\n  public int capacity();\n    descriptor: ()I\n\n  public void clear();\n    descriptor: ()V\n\n  public long[] toArray();\n    descriptor: ()[J\n\n  public com.m3.collections.M3LongIterator iterator();\n    descriptor: ()Lcom/m3/collections/M3LongIterator;\n}\n",
+    "stderr": ""
+  },
+  {
+    "name": "javap",
+    "argv": [
+      "javap",
+      "-public",
+      "-s",
+      "-classpath",
+      "/tmp/m3-tombstone-replay-ufmfyyv9/classes-post",
+      "com.m3.collections.M3LongHashSet"
+    ],
+    "exit": 0,
+    "expected_exit": 0,
+    "stdout": "Compiled from \"M3LongHashSet.java\"\npublic final class com.m3.collections.M3LongHashSet implements com.m3.collections.M3LongCollection {\n  public com.m3.collections.M3LongHashSet();\n    descriptor: ()V\n\n  public com.m3.collections.M3LongHashSet(int);\n    descriptor: (I)V\n\n  public boolean add(long);\n    descriptor: (J)Z\n\n  public boolean remove(long);\n    descriptor: (J)Z\n\n  public boolean contains(long);\n    descriptor: (J)Z\n\n  public int size();\n    descriptor: ()I\n\n  public int capacity();\n    descriptor: ()I\n\n  public void clear();\n    descriptor: ()V\n\n  public long[] toArray();\n    descriptor: ()[J\n\n  public com.m3.collections.M3LongIterator iterator();\n    descriptor: ()Lcom/m3/collections/M3LongIterator;\n}\n",
+    "stderr": ""
+  },
+  {
+    "name": "javap",
+    "argv": [
+      "javap",
+      "-public",
+      "-s",
+      "-classpath",
+      "/tmp/m3-tombstone-replay-ufmfyyv9/classes-pre",
+      "com.m3.collections.M3LongLongHashMap"
+    ],
+    "exit": 0,
+    "expected_exit": 0,
+    "stdout": "Compiled from \"M3LongLongHashMap.java\"\npublic final class com.m3.collections.M3LongLongHashMap {\n  public com.m3.collections.M3LongLongHashMap();\n    descriptor: ()V\n\n  public com.m3.collections.M3LongLongHashMap(int);\n    descriptor: (I)V\n\n  public boolean put(long, long);\n    descriptor: (JJ)Z\n\n  public long getOrDefault(long, long);\n    descriptor: (JJ)J\n\n  public boolean containsKey(long);\n    descriptor: (J)Z\n\n  public boolean containsValue(long);\n    descriptor: (J)Z\n\n  public boolean replace(long, long, long);\n    descriptor: (JJJ)Z\n\n  public boolean remove(long);\n    descriptor: (J)Z\n\n  public boolean remove(long, long);\n    descriptor: (JJ)Z\n\n  public int size();\n    descriptor: ()I\n\n  public boolean isEmpty();\n    descriptor: ()Z\n\n  public int capacity();\n    descriptor: ()I\n\n  public void clear();\n    descriptor: ()V\n\n  public void forEach(com.m3.collections.M3LongLongConsumer);\n    descriptor: (Lcom/m3/collections/M3LongLongConsumer;)V\n\n  public com.m3.collections.M3LongIterator keyIterator();\n    descriptor: ()Lcom/m3/collections/M3LongIterator;\n\n  public long[] keysToArray();\n    descriptor: ()[J\n}\n",
+    "stderr": ""
+  },
+  {
+    "name": "javap",
+    "argv": [
+      "javap",
+      "-public",
+      "-s",
+      "-classpath",
+      "/tmp/m3-tombstone-replay-ufmfyyv9/classes-post",
+      "com.m3.collections.M3LongLongHashMap"
+    ],
+    "exit": 0,
+    "expected_exit": 0,
+    "stdout": "Compiled from \"M3LongLongHashMap.java\"\npublic final class com.m3.collections.M3LongLongHashMap {\n  public com.m3.collections.M3LongLongHashMap();\n    descriptor: ()V\n\n  public com.m3.collections.M3LongLongHashMap(int);\n    descriptor: (I)V\n\n  public boolean put(long, long);\n    descriptor: (JJ)Z\n\n  public long getOrDefault(long, long);\n    descriptor: (JJ)J\n\n  public boolean containsKey(long);\n    descriptor: (J)Z\n\n  public boolean containsValue(long);\n    descriptor: (J)Z\n\n  public boolean replace(long, long, long);\n    descriptor: (JJJ)Z\n\n  public boolean remove(long);\n    descriptor: (J)Z\n\n  public boolean remove(long, long);\n    descriptor: (JJ)Z\n\n  public int size();\n    descriptor: ()I\n\n  public boolean isEmpty();\n    descriptor: ()Z\n\n  public int capacity();\n    descriptor: ()I\n\n  public void clear();\n    descriptor: ()V\n\n  public void forEach(com.m3.collections.M3LongLongConsumer);\n    descriptor: (Lcom/m3/collections/M3LongLongConsumer;)V\n\n  public com.m3.collections.M3LongIterator keyIterator();\n    descriptor: ()Lcom/m3/collections/M3LongIterator;\n\n  public long[] keysToArray();\n    descriptor: ()[J\n}\n",
+    "stderr": ""
+  },
+  {
+    "name": "javac",
+    "argv": [
+      "javac",
+      "--release",
+      "21",
+      "-proc:none",
+      "-Xlint:all",
+      "-Werror",
+      "-d",
+      "/tmp/m3-tombstone-replay-ufmfyyv9/model-classes",
+      "/mnt/data/m3jdk21_tombstone_receiving_20261017/donor-repo/synexia-openrewrite-recipes/recipe-crates/collections-superset-counts/m3jdk21-tombstone-reuse-20261017/TombstoneReuseAlgorithmProof.java"
+    ],
+    "exit": 0,
+    "expected_exit": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  {
+    "name": "java",
+    "argv": [
+      "java",
+      "-ea",
+      "-Xmx64m",
+      "-cp",
+      "/tmp/m3-tombstone-replay-ufmfyyv9/model-classes",
+      "TombstoneReuseAlgorithmProof"
+    ],
+    "exit": 0,
+    "expected_exit": 0,
+    "stdout": "SET capacity=256 size=103\nMAP capacity=256 size=116\nPASS algorithm witness checks=192768 map bytes old/new=272/136 set bytes old/new=144/72\n",
+    "stderr": ""
+  },
+  {
+    "name": "javac",
+    "argv": [
+      "javac",
+      "--release",
+      "21",
+      "-proc:none",
+      "-Xlint:all",
+      "-Werror",
+      "-d",
+      "/tmp/m3-tombstone-replay-ufmfyyv9/classes-skip-set-slot",
+      "/tmp/m3-tombstone-replay-ufmfyyv9/skip-set-slot/m3/collections/src/main/java/com/m3/collections/M3LongHashSet.java",
+      "/tmp/m3-tombstone-replay-ufmfyyv9/skip-set-slot/m3/collections/src/main/java/com/m3/collections/M3LongLongHashMap.java",
+      "/mnt/data/m3jdk21_tombstone_receiving_20261017/donor-repo/synexia-openrewrite-recipes/recipe-crates/collections-superset-counts/m3jdk21-tombstone-reuse-20261017/proof/deps/M3LongCollection.java",
+      "/mnt/data/m3jdk21_tombstone_receiving_20261017/donor-repo/synexia-openrewrite-recipes/recipe-crates/collections-superset-counts/m3jdk21-tombstone-reuse-20261017/proof/deps/M3LongIterator.java",
+      "/mnt/data/m3jdk21_tombstone_receiving_20261017/donor-repo/synexia-openrewrite-recipes/recipe-crates/collections-superset-counts/m3jdk21-tombstone-reuse-20261017/proof/deps/M3LongLongConsumer.java",
+      "/mnt/data/m3jdk21_tombstone_receiving_20261017/donor-repo/synexia-openrewrite-recipes/recipe-crates/collections-superset-counts/m3jdk21-tombstone-reuse-20261017/proof/M3TombstoneReuseSelfTest.java"
+    ],
+    "exit": 0,
+    "expected_exit": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  {
+    "name": "java",
+    "argv": [
+      "java",
+      "-ea",
+      "-Xmx64m",
+      "-cp",
+      "/tmp/m3-tombstone-replay-ufmfyyv9/classes-skip-set-slot",
+      "com.m3.collections.M3TombstoneReuseSelfTest"
+    ],
+    "exit": 1,
+    "expected_exit": 1,
+    "stdout": "",
+    "stderr": "Exception in thread \"main\" java.lang.AssertionError: set allocated array despite reachable deleted slot\n\tat com.m3.collections.M3TombstoneReuseSelfTest.require(M3TombstoneReuseSelfTest.java:19)\n\tat com.m3.collections.M3TombstoneReuseSelfTest.boundary(M3TombstoneReuseSelfTest.java:55)\n\tat com.m3.collections.M3TombstoneReuseSelfTest.main(M3TombstoneReuseSelfTest.java:133)\n"
+  },
+  {
+    "name": "javac",
+    "argv": [
+      "javac",
+      "--release",
+      "21",
+      "-proc:none",
+      "-Xlint:all",
+      "-Werror",
+      "-d",
+      "/tmp/m3-tombstone-replay-ufmfyyv9/classes-skip-map-slot",
+      "/tmp/m3-tombstone-replay-ufmfyyv9/skip-map-slot/m3/collections/src/main/java/com/m3/collections/M3LongHashSet.java",
+      "/tmp/m3-tombstone-replay-ufmfyyv9/skip-map-slot/m3/collections/src/main/java/com/m3/collections/M3LongLongHashMap.java",
+      "/mnt/data/m3jdk21_tombstone_receiving_20261017/donor-repo/synexia-openrewrite-recipes/recipe-crates/collections-superset-counts/m3jdk21-tombstone-reuse-20261017/proof/deps/M3LongCollection.java",
+      "/mnt/data/m3jdk21_tombstone_receiving_20261017/donor-repo/synexia-openrewrite-recipes/recipe-crates/collections-superset-counts/m3jdk21-tombstone-reuse-20261017/proof/deps/M3LongIterator.java",
+      "/mnt/data/m3jdk21_tombstone_receiving_20261017/donor-repo/synexia-openrewrite-recipes/recipe-crates/collections-superset-counts/m3jdk21-tombstone-reuse-20261017/proof/deps/M3LongLongConsumer.java",
+      "/mnt/data/m3jdk21_tombstone_receiving_20261017/donor-repo/synexia-openrewrite-recipes/recipe-crates/collections-superset-counts/m3jdk21-tombstone-reuse-20261017/proof/M3TombstoneReuseSelfTest.java"
+    ],
+    "exit": 0,
+    "expected_exit": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  {
+    "name": "java",
+    "argv": [
+      "java",
+      "-ea",
+      "-Xmx64m",
+      "-cp",
+      "/tmp/m3-tombstone-replay-ufmfyyv9/classes-skip-map-slot",
+      "com.m3.collections.M3TombstoneReuseSelfTest"
+    ],
+    "exit": 1,
+    "expected_exit": 1,
+    "stdout": "",
+    "stderr": "Exception in thread \"main\" java.lang.AssertionError: map allocated array despite reachable deleted slot\n\tat com.m3.collections.M3TombstoneReuseSelfTest.require(M3TombstoneReuseSelfTest.java:19)\n\tat com.m3.collections.M3TombstoneReuseSelfTest.boundary(M3TombstoneReuseSelfTest.java:56)\n\tat com.m3.collections.M3TombstoneReuseSelfTest.main(M3TombstoneReuseSelfTest.java:133)\n"
+  },
+  {
+    "name": "javac",
+    "argv": [
+      "javac",
+      "--release",
+      "21",
+      "-proc:none",
+      "-Xlint:all",
+      "-Werror",
+      "-d",
+      "/tmp/m3-tombstone-replay-ufmfyyv9/classes-lose-map-value",
+      "/tmp/m3-tombstone-replay-ufmfyyv9/lose-map-value/m3/collections/src/main/java/com/m3/collections/M3LongHashSet.java",
+      "/tmp/m3-tombstone-replay-ufmfyyv9/lose-map-value/m3/collections/src/main/java/com/m3/collections/M3LongLongHashMap.java",
+      "/mnt/data/m3jdk21_tombstone_receiving_20261017/donor-repo/synexia-openrewrite-recipes/recipe-crates/collections-superset-counts/m3jdk21-tombstone-reuse-20261017/proof/deps/M3LongCollection.java",
+      "/mnt/data/m3jdk21_tombstone_receiving_20261017/donor-repo/synexia-openrewrite-recipes/recipe-crates/collections-superset-counts/m3jdk21-tombstone-reuse-20261017/proof/deps/M3LongIterator.java",
+      "/mnt/data/m3jdk21_tombstone_receiving_20261017/donor-repo/synexia-openrewrite-recipes/recipe-crates/collections-superset-counts/m3jdk21-tombstone-reuse-20261017/proof/deps/M3LongLongConsumer.java",
+      "/mnt/data/m3jdk21_tombstone_receiving_20261017/donor-repo/synexia-openrewrite-recipes/recipe-crates/collections-superset-counts/m3jdk21-tombstone-reuse-20261017/proof/M3TombstoneReuseSelfTest.java"
+    ],
+    "exit": 0,
+    "expected_exit": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  {
+    "name": "java",
+    "argv": [
+      "java",
+      "-ea",
+      "-Xmx64m",
+      "-cp",
+      "/tmp/m3-tombstone-replay-ufmfyyv9/classes-lose-map-value",
+      "com.m3.collections.M3TombstoneReuseSelfTest"
+    ],
+    "exit": 1,
+    "expected_exit": 1,
+    "stdout": "",
+    "stderr": "Exception in thread \"main\" java.lang.AssertionError: map value shift\n\tat com.m3.collections.M3TombstoneReuseSelfTest.require(M3TombstoneReuseSelfTest.java:19)\n\tat com.m3.collections.M3TombstoneReuseSelfTest.boundary(M3TombstoneReuseSelfTest.java:61)\n\tat com.m3.collections.M3TombstoneReuseSelfTest.main(M3TombstoneReuseSelfTest.java:133)\n"
+  },
+  {
+    "name": "javac",
+    "argv": [
+      "javac",
+      "--release",
+      "21",
+      "-proc:none",
+      "-Xlint:all",
+      "-Werror",
+      "-d",
+      "/tmp/m3-tombstone-replay-ufmfyyv9/classes-lose-set-epoch",
+      "/tmp/m3-tombstone-replay-ufmfyyv9/lose-set-epoch/m3/collections/src/main/java/com/m3/collections/M3LongHashSet.java",
+      "/tmp/m3-tombstone-replay-ufmfyyv9/lose-set-epoch/m3/collections/src/main/java/com/m3/collections/M3LongLongHashMap.java",
+      "/mnt/data/m3jdk21_tombstone_receiving_20261017/donor-repo/synexia-openrewrite-recipes/recipe-crates/collections-superset-counts/m3jdk21-tombstone-reuse-20261017/proof/deps/M3LongCollection.java",
+      "/mnt/data/m3jdk21_tombstone_receiving_20261017/donor-repo/synexia-openrewrite-recipes/recipe-crates/collections-superset-counts/m3jdk21-tombstone-reuse-20261017/proof/deps/M3LongIterator.java",
+      "/mnt/data/m3jdk21_tombstone_receiving_20261017/donor-repo/synexia-openrewrite-recipes/recipe-crates/collections-superset-counts/m3jdk21-tombstone-reuse-20261017/proof/deps/M3LongLongConsumer.java",
+      "/mnt/data/m3jdk21_tombstone_receiving_20261017/donor-repo/synexia-openrewrite-recipes/recipe-crates/collections-superset-counts/m3jdk21-tombstone-reuse-20261017/proof/M3TombstoneReuseSelfTest.java"
+    ],
+    "exit": 0,
+    "expected_exit": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  {
+    "name": "java",
+    "argv": [
+      "java",
+      "-ea",
+      "-Xmx64m",
+      "-cp",
+      "/tmp/m3-tombstone-replay-ufmfyyv9/classes-lose-set-epoch",
+      "com.m3.collections.M3TombstoneReuseSelfTest"
+    ],
+    "exit": 1,
+    "expected_exit": 1,
+    "stdout": "",
+    "stderr": "Exception in thread \"main\" java.lang.AssertionError: reusing set slot invalidates iterator did not fail fast\n\tat com.m3.collections.M3TombstoneReuseSelfTest.requireFailsConcurrent(M3TombstoneReuseSelfTest.java:116)\n\tat com.m3.collections.M3TombstoneReuseSelfTest.boundary(M3TombstoneReuseSelfTest.java:52)\n\tat com.m3.collections.M3TombstoneReuseSelfTest.main(M3TombstoneReuseSelfTest.java:133)\n"
+  }
+]

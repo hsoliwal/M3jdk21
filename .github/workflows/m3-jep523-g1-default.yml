@@ -86,6 +86,15 @@ jobs:
           test "${#paths[@]}" -eq 1
           test "${paths[0]}" = "src/hotspot/share/gc/shared/gcConfig.cpp"
 
+      - name: Install pinned source-built recipe dependencies
+        shell: bash
+        run: |
+          set -euo pipefail
+          # The JEP 523 OpenRewrite recipe depends on in-repo source-built
+          # OpenRewrite/JUnit coordinates, not unpinned public substitutes.
+          bash m3/synexia-import/pure-int-recipe-custody/install.sh "$PWD"
+          mvn -B -ntp -f m3/pom.xml -pl tooling/migration-recipes -am -DskipTests install
+
       - name: Recipe JUnit and fixed point
         shell: bash
         run: |

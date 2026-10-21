@@ -1,0 +1,9 @@
+gate	result
+universal_no_break	FAIL_COUNTEREXAMPLES_OBSERVED
+legacy_interface_default_dispatch	FAIL_OBSERVED
+interface_default_source	FAIL_OBSERVED
+optional_return_source	FAIL_OBSERVED
+optional_return_binary	PASS
+Runnable_Callable_source_and_binary	PASS
+legacy_class_tree_sha256	a9a1d839fefd609d8fe6e0c066628e68c43ac23d3399ce9c5cf9236767d50560
+checks	22

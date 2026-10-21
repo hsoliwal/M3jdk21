@@ -1,0 +1,381 @@
+{
+  "status": "PROVIDER_PROFILE_RECORDED",
+  "sourceSeal": {
+    "path": "S:\\codex-work\\m3-collections-next-20261018\\spring-case-insensitive-map\\proof-plan\\constructor-profile\\SOURCE_SEAL_V1.json",
+    "bytes": 1257,
+    "sha256": "74b4ced323f48e838b281098867710322a67ce08509d31fc083640681ab6bb63"
+  },
+  "sourceAndProviderUnchanged": true,
+  "providerArtifact": {
+    "path": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\springframework\\spring-core\\6.2.0\\spring-core-6.2.0.jar",
+    "bytes": 1954386,
+    "sha256": "3b82629da38717dd616a70ec1055f9a8e208d58132071a6314a32159f8bce162"
+  },
+  "onlyEmptyConstructorObservers": true,
+  "noEntriesOrViewsOrMutators": true,
+  "summary": {
+    "status": "PROVIDER_EMPTY_CONSTRUCTORS_RECORDED",
+    "invocations": 32,
+    "returnedEmpty": 24,
+    "illegalArguments": 8,
+    "actualOutOfMemoryErrors": 0,
+    "otherFailures": 0,
+    "traceSHA256": "d84d32ffd8f6f2e23fc27392b91ad6f6e69859d2812b042464c7333f548b9037",
+    "javaRuntime": "21.0.9+7-LTS-338",
+    "maxHeapBytes": 67108864,
+    "activeProcessors": 2
+  },
+  "rows": [
+    {
+      "case": "default",
+      "result": {
+        "status": "RETURNED_EMPTY",
+        "size": 0,
+        "empty": true,
+        "locale": "tr"
+      }
+    },
+    {
+      "case": "Locale-ROOT",
+      "result": {
+        "status": "RETURNED_EMPTY",
+        "size": 0,
+        "empty": true,
+        "locale": "und"
+      }
+    },
+    {
+      "case": "Locale-tr",
+      "result": {
+        "status": "RETURNED_EMPTY",
+        "size": 0,
+        "empty": true,
+        "locale": "tr"
+      }
+    },
+    {
+      "case": "Locale-null",
+      "result": {
+        "status": "RETURNED_EMPTY",
+        "size": 0,
+        "empty": true,
+        "locale": "tr"
+      }
+    },
+    {
+      "case": "int-only/2147483647",
+      "result": {
+        "status": "RETURNED_EMPTY",
+        "size": 0,
+        "empty": true,
+        "locale": "tr"
+      }
+    },
+    {
+      "case": "int-ROOT/2147483647",
+      "result": {
+        "status": "RETURNED_EMPTY",
+        "size": 0,
+        "empty": true,
+        "locale": "und"
+      }
+    },
+    {
+      "case": "int-tr/2147483647",
+      "result": {
+        "status": "RETURNED_EMPTY",
+        "size": 0,
+        "empty": true,
+        "locale": "tr"
+      }
+    },
+    {
+      "case": "int-null/2147483647",
+      "result": {
+        "status": "RETURNED_EMPTY",
+        "size": 0,
+        "empty": true,
+        "locale": "tr"
+      }
+    },
+    {
+      "case": "int-only/2147483646",
+      "result": {
+        "status": "RETURNED_EMPTY",
+        "size": 0,
+        "empty": true,
+        "locale": "tr"
+      }
+    },
+    {
+      "case": "int-ROOT/2147483646",
+      "result": {
+        "status": "RETURNED_EMPTY",
+        "size": 0,
+        "empty": true,
+        "locale": "und"
+      }
+    },
+    {
+      "case": "int-tr/2147483646",
+      "result": {
+        "status": "RETURNED_EMPTY",
+        "size": 0,
+        "empty": true,
+        "locale": "tr"
+      }
+    },
+    {
+      "case": "int-null/2147483646",
+      "result": {
+        "status": "RETURNED_EMPTY",
+        "size": 0,
+        "empty": true,
+        "locale": "tr"
+      }
+    },
+    {
+      "case": "int-only/2147483631",
+      "result": {
+        "status": "RETURNED_EMPTY",
+        "size": 0,
+        "empty": true,
+        "locale": "tr"
+      }
+    },
+    {
+      "case": "int-ROOT/2147483631",
+      "result": {
+        "status": "RETURNED_EMPTY",
+        "size": 0,
+        "empty": true,
+        "locale": "und"
+      }
+    },
+    {
+      "case": "int-tr/2147483631",
+      "result": {
+        "status": "RETURNED_EMPTY",
+        "size": 0,
+        "empty": true,
+        "locale": "tr"
+      }
+    },
+    {
+      "case": "int-null/2147483631",
+      "result": {
+        "status": "RETURNED_EMPTY",
+        "size": 0,
+        "empty": true,
+        "locale": "tr"
+      }
+    },
+    {
+      "case": "int-only/1073741824",
+      "result": {
+        "status": "RETURNED_EMPTY",
+        "size": 0,
+        "empty": true,
+        "locale": "tr"
+      }
+    },
+    {
+      "case": "int-ROOT/1073741824",
+      "result": {
+        "status": "RETURNED_EMPTY",
+        "size": 0,
+        "empty": true,
+        "locale": "und"
+      }
+    },
+    {
+      "case": "int-tr/1073741824",
+      "result": {
+        "status": "RETURNED_EMPTY",
+        "size": 0,
+        "empty": true,
+        "locale": "tr"
+      }
+    },
+    {
+      "case": "int-null/1073741824",
+      "result": {
+        "status": "RETURNED_EMPTY",
+        "size": 0,
+        "empty": true,
+        "locale": "tr"
+      }
+    },
+    {
+      "case": "int-only/0",
+      "result": {
+        "status": "RETURNED_EMPTY",
+        "size": 0,
+        "empty": true,
+        "locale": "tr"
+      }
+    },
+    {
+      "case": "int-ROOT/0",
+      "result": {
+        "status": "RETURNED_EMPTY",
+        "size": 0,
+        "empty": true,
+        "locale": "und"
+      }
+    },
+    {
+      "case": "int-tr/0",
+      "result": {
+        "status": "RETURNED_EMPTY",
+        "size": 0,
+        "empty": true,
+        "locale": "tr"
+      }
+    },
+    {
+      "case": "int-null/0",
+      "result": {
+        "status": "RETURNED_EMPTY",
+        "size": 0,
+        "empty": true,
+        "locale": "tr"
+      }
+    },
+    {
+      "case": "int-only/-1",
+      "result": {
+        "status": "THREW",
+        "exception": "IllegalArgumentException",
+        "message": "Illegal initial capacity: -1"
+      }
+    },
+    {
+      "case": "int-ROOT/-1",
+      "result": {
+        "status": "THREW",
+        "exception": "IllegalArgumentException",
+        "message": "Illegal initial capacity: -1"
+      }
+    },
+    {
+      "case": "int-tr/-1",
+      "result": {
+        "status": "THREW",
+        "exception": "IllegalArgumentException",
+        "message": "Illegal initial capacity: -1"
+      }
+    },
+    {
+      "case": "int-null/-1",
+      "result": {
+        "status": "THREW",
+        "exception": "IllegalArgumentException",
+        "message": "Illegal initial capacity: -1"
+      }
+    },
+    {
+      "case": "int-only/-2147483648",
+      "result": {
+        "status": "THREW",
+        "exception": "IllegalArgumentException",
+        "message": "Illegal initial capacity: -2147483648"
+      }
+    },
+    {
+      "case": "int-ROOT/-2147483648",
+      "result": {
+        "status": "THREW",
+        "exception": "IllegalArgumentException",
+        "message": "Illegal initial capacity: -2147483648"
+      }
+    },
+    {
+      "case": "int-tr/-2147483648",
+      "result": {
+        "status": "THREW",
+        "exception": "IllegalArgumentException",
+        "message": "Illegal initial capacity: -2147483648"
+      }
+    },
+    {
+      "case": "int-null/-2147483648",
+      "result": {
+        "status": "THREW",
+        "exception": "IllegalArgumentException",
+        "message": "Illegal initial capacity: -2147483648"
+      }
+    }
+  ],
+  "commands": [
+    {
+      "label": "strict-empty-constructor-compile",
+      "argv": [
+        "C:\\Program Files\\Java\\jdk-21\\bin\\javac.exe",
+        "-J-Xms64m",
+        "-J-Xmx64m",
+        "-J-Xss512k",
+        "-J-XX:ActiveProcessorCount=2",
+        "-J-XX:-UsePerfData",
+        "-J-Djava.io.tmpdir=S:\\codex-work\\m3-collections-next-20261018\\temp",
+        "-J-Duser.home=S:\\codex-work\\m3-collections-next-20261018\\temp",
+        "-J-XX:ErrorFile=S:\\codex-work\\m3-collections-next-20261018\\spring-case-insensitive-map\\proof-constructor-v1\\hs_err_pid%p.log",
+        "--release",
+        "21",
+        "-g",
+        "-proc:none",
+        "-Xlint:all",
+        "-Werror",
+        "-d",
+        "S:\\codex-work\\m3-collections-next-20261018\\spring-case-insensitive-map\\proof-constructor-v1\\classes",
+        "S:\\codex-work\\m3-collections-next-20261018\\spring-case-insensitive-map\\proof-plan\\constructor-profile\\SpringEmptyLargeConstructorProbe.java"
+      ],
+      "returncode": 0,
+      "wallSeconds": 0.7350000000005821,
+      "receipt": "strict-empty-constructor-compile.json"
+    },
+    {
+      "label": "isolated-provider-empty-constructors",
+      "argv": [
+        "C:\\Program Files\\Java\\jdk-21\\bin\\java.exe",
+        "-Xms64m",
+        "-Xmx64m",
+        "-Xss512k",
+        "-XX:ActiveProcessorCount=2",
+        "-XX:-UsePerfData",
+        "-Djava.io.tmpdir=S:\\codex-work\\m3-collections-next-20261018\\temp",
+        "-Duser.home=S:\\codex-work\\m3-collections-next-20261018\\temp",
+        "-XX:ErrorFile=S:\\codex-work\\m3-collections-next-20261018\\spring-case-insensitive-map\\proof-constructor-v1\\hs_err_pid%p.log",
+        "-Djava.library.path=S:\\codex-work\\m3-collections-next-20261018\\spring-case-insensitive-map\\proof-constructor-v1\\absent-native",
+        "-cp",
+        "S:\\codex-work\\m3-collections-next-20261018\\spring-case-insensitive-map\\proof-constructor-v1\\classes;C:\\Users\\hsoliwal\\.m2\\repository\\org\\springframework\\spring-core\\6.2.0\\spring-core-6.2.0.jar",
+        "SpringEmptyLargeConstructorProbe",
+        "org.springframework.util.LinkedCaseInsensitiveMap"
+      ],
+      "returncode": 0,
+      "wallSeconds": 0.20299999999406282,
+      "receipt": "isolated-provider-empty-constructors.json"
+    }
+  ],
+  "storageBefore": {
+    "root": "S:\\codex-work\\m3-collections-next-20261018",
+    "free_bytes": 26190954496,
+    "logical_bytes": 36219191,
+    "cap_bytes": 536870912,
+    "reserve_bytes": 8589934592,
+    "verified_child_temp": "S:\\codex-work\\m3-collections-next-20261018\\temp\\",
+    "C_build_lane": "HELD",
+    "K_temp_lane": "UNAVAILABLE"
+  },
+  "storageAfter": {
+    "root": "S:\\codex-work\\m3-collections-next-20261018",
+    "free_bytes": 26190934016,
+    "logical_bytes": 36232810,
+    "cap_bytes": 536870912,
+    "reserve_bytes": 8589934592,
+    "verified_child_temp": "S:\\codex-work\\m3-collections-next-20261018\\temp\\",
+    "C_build_lane": "HELD",
+    "K_temp_lane": "UNAVAILABLE"
+  },
+  "scope": "Separate isolated fixed64MiB provider profile; no aggregation with ordinary profile and no candidate/insertion/growth/capacity/allocation-rate admission"
+}

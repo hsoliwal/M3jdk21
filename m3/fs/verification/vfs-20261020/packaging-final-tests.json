@@ -1,0 +1,8 @@
+{
+  "command": [
+    "python3",
+    "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/fs/verification/test_vfs_packaging.py"
+  ],
+  "exit_code": 0,
+  "scope": "Generated-receiver packaging admission tests; synthetic fixture tests distinct from real linked image"
+}

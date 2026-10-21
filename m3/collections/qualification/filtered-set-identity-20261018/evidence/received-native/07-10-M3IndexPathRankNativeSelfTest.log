@@ -1,0 +1,3 @@
+PASS M3IndexPathRank JNI parity: 180 deterministic Java/rank/native paths
+
+EXIT=0

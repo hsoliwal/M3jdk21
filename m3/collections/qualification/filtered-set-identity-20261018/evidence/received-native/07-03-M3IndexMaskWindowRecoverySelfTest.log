@@ -1,0 +1,3 @@
+PASS M3IndexMaskWindowRecoverySelfTest checks=10528 JNI=true
+
+EXIT=0

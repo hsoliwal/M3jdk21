@@ -1,0 +1,10 @@
+PASS existing changed J is authoritative
+PASS detached scalar metadata and ownership
+PASS unknown ranges and source mismatch stay explicit
+PASS exact primitive literal encodings
+PASS input node depth and source budgets
+PASS interface and annotation capabilities
+PASS core optional bridge agrees
+PASS incompatible literal refuses
+PASS existing J is never printed
+OPENREWRITE_CONTRACT tests=9 passed=9 failed=0 checks=110

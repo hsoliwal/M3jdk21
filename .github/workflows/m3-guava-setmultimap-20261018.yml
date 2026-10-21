@@ -1,0 +1,58 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3 five-provider real Guava SetMultimap contract and JNI
+on:
+  pull_request:
+    paths:
+      - 'm3/collections/interop/src/main/java/com/m3/collections/interop/M3GuavaSetMultimap.java'
+      - 'm3/collections/interop/src/test/java/com/m3/collections/interop/M3GuavaSetMultimapTest.java'
+      - 'm3/collections/qualification/m3-guava-setmultimap-20261018/**'
+      - '.github/workflows/m3-guava-setmultimap-20261018.yml'
+  workflow_dispatch:
+jobs:
+  real-guava-ownership:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: maven
+      - name: Run canonical existing OpenRewrite SDK recipe, drift and fixed-point tests
+        run: mvn -B -ntp -f m3/collections/qualification/m3-guava-setmultimap-20261018/recipe/pom.xml clean verify
+      - name: Verify installed exact SHA-256 source and oracle
+        run: |
+          python3 - <<'PY'
+          import hashlib
+          from pathlib import Path
+          expected = {
+              "m3/collections/interop/src/main/java/com/m3/collections/interop/M3GuavaSetMultimap.java":
+                  "0517eb6b401671e18b870eeb307e74f856a071c21a4a033432d0fc3348844099",
+              "m3/collections/interop/src/test/java/com/m3/collections/interop/M3GuavaSetMultimapTest.java":
+                  "24c9b9ac0690dc04312c52363b25de179fa85ef38ad2d96696cb2e07dcef46d0"
+          }
+          root = Path.cwd()
+          for name, wanted in expected.items():
+              p = root / name
+              assert p.is_file() and not p.is_symlink(), name
+              got = hashlib.sha256(p.read_bytes()).hexdigest()
+              assert got == wanted, (name, got, wanted)
+              print("SEALED", name, got)
+          PY
+      - name: Compile/package actual M3 indexed collection owners
+        run: mvn -B -ntp -f m3/collections/pom.xml install -DskipTests
+      - name: Actual Guava 33.4.8 and five-provider contract JUnit
+        run: mvn -B -ntp -f m3/collections/interop/pom.xml -Dtest=M3GuavaSetMultimapTest test
+      - name: Compile unchanged native M3 full-width path mask kernel
+        run: |
+          mkdir -p "$RUNNER_TEMP/m3-guava-setmask-native"
+          cc -std=c17 -O1 -g -fPIC -shared -Wall -Wextra -Werror \
+            -fsanitize=undefined -fno-sanitize-recover=all \
+            -I"$JAVA_HOME/include" -I"$JAVA_HOME/include/linux" \
+            m3/collections/src/main/native/collections/m3_index_path_masks.c \
+            -o "$RUNNER_TEMP/m3-guava-setmask-native/libm3_collections_pathmask.so"
+      - name: Rerun real Guava donor oracle with checked JNI and fatal UBSan
+        run: |
+          mvn -B -ntp -f m3/collections/interop/pom.xml \
+            -Dtest=M3GuavaSetMultimapTest \
+            "-DargLine=-Xcheck:jni -Djava.library.path=$RUNNER_TEMP/m3-guava-setmask-native" test

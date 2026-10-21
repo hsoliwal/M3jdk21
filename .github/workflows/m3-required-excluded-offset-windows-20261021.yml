@@ -1,0 +1,31 @@
+# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and contributors
+# SPDX-License-Identifier: Apache-2.0
+name: M3JDK21 required/excluded offset-window Java and JNI
+on:
+  pull_request:
+    paths:
+      - 'm3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java'
+      - 'm3/collections/src/main/native/collections/m3_index_mask_compactor.c'
+      - 'm3/collections/src/test/java/com/m3/collections/M3RequiredExcludedWindow*'
+      - 'm3/collections/qualification/required-excluded-windows-20261021/**'
+      - 'm3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-required-excluded-offset-window*.yml'
+      - 'm3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-required-excluded-offset-window*/**'
+      - '.github/workflows/m3-required-excluded-offset-windows-20261021.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  physical-mask-java-jni:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Run exact Java21 oracle plus actual native C11/JNI
+        shell: bash
+        run: |
+          set -euo pipefail
+          bash m3/collections/qualification/required-excluded-windows-20261021/verify.sh

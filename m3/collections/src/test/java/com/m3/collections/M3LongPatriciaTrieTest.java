@@ -67,9 +67,9 @@ final class M3LongPatriciaTrieTest {
             switch (random.nextInt(12)) {
                 case 0, 1, 2, 3 -> {
                     long v = random.nextLong();
-                    assertEquals(expected.put(k, v) == null, actual.put(k, v));
+                    assertEquals(expected.put(k, v) == null, actual.putKey(k, v));
                 }
-                case 4, 5 -> assertEquals(expected.remove(k) != null, actual.remove(k));
+                case 4, 5 -> assertEquals(expected.remove(k) != null, actual.removeKey(k));
                 case 6 -> {
                     assertEquals(expected.containsKey(k), actual.containsKey(k));
                     assertEquals(orMissing(expected.get(k)), actual.getOrDefault(k, MISSING));
@@ -133,11 +133,11 @@ final class M3LongPatriciaTrieTest {
         assertArrayEquals(new long[0], trie.keysToArray());
         assertThrows(IllegalArgumentException.class, () -> trie.prefixCount(0L, 65));
         assertThrows(IllegalArgumentException.class, () -> trie.prefixKeys(0L, -1));
-        assertTrue(trie.put(-1L, 1L));
-        assertTrue(trie.put(0L, 2L));
-        assertTrue(trie.put(Long.MIN_VALUE, 3L));
-        assertTrue(trie.put(Long.MAX_VALUE, 4L));
-        assertFalse(trie.put(0L, 20L));
+        assertTrue(trie.putKey(-1L, 1L));
+        assertTrue(trie.putKey(0L, 2L));
+        assertTrue(trie.putKey(Long.MIN_VALUE, 3L));
+        assertTrue(trie.putKey(Long.MAX_VALUE, 4L));
+        assertFalse(trie.putKey(0L, 20L));
         assertEquals(20L, trie.getOrDefault(0L, MISSING));
         assertArrayEquals(new long[] {0L, Long.MAX_VALUE, Long.MIN_VALUE, -1L}, trie.keysToArray());
         assertEquals(0L, trie.firstKey());
@@ -153,12 +153,12 @@ final class M3LongPatriciaTrieTest {
         assertEquals(4, trie.prefixCount(12345L, 0));
         M3LongIterator iterator = trie.keyIterator();
         assertEquals(0L, iterator.nextLong());
-        assertTrue(trie.remove(0L));
+        assertTrue(trie.removeKey(0L));
         assertThrows(ConcurrentModificationException.class, iterator::hasNext);
-        assertFalse(trie.remove(0L));
-        assertTrue(trie.remove(-1L));
-        assertTrue(trie.remove(Long.MAX_VALUE));
-        assertTrue(trie.remove(Long.MIN_VALUE));
+        assertFalse(trie.removeKey(0L));
+        assertTrue(trie.removeKey(-1L));
+        assertTrue(trie.removeKey(Long.MAX_VALUE));
+        assertTrue(trie.removeKey(Long.MIN_VALUE));
         assertTrue(trie.isEmpty());
         M3LongIterator empty = trie.keyIterator();
         assertFalse(empty.hasNext());
@@ -166,11 +166,11 @@ final class M3LongPatriciaTrieTest {
         // Dense run and stride keys across several doublings, then remove every other key in
         // reverse order: swap-moves must keep order, values and prefix counts exact.
         for (long i = 0; i < 20_000; i++) {
-            assertTrue(trie.put(i * 3, i));
+            assertTrue(trie.putKey(i * 3, i));
         }
         assertEquals(32_768, trie.capacity());
         for (long i = 19_999; i >= 0; i -= 2) {
-            assertTrue(trie.remove(i * 3));
+            assertTrue(trie.removeKey(i * 3));
         }
         long[] survivors = trie.keysToArray();
         assertEquals(10_000, survivors.length);

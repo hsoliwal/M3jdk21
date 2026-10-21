@@ -1,0 +1,37 @@
+{
+  "schema": 1,
+  "status": "EXISTING_VIEWPORT_OWNERS_SOURCE_PASS_PRODUCT_PERFORMANCE_HOLD",
+  "source_repo": "hsoliwal/com.synexia",
+  "source_commit": "caa565d6b8d5e09e533a4c862a163b8efb2ef094",
+  "source_pr": 12482,
+  "recipe": "com.synexia.rewrite.M3Jdk21ViewportReceivingRecipe",
+  "target_base": "677437be295b23f7ccf7409be287008944d0e8b0",
+  "owner_fold_pr": 1403,
+  "mappings": [
+    {
+      "source": "SWT229 checked resident-window edits",
+      "target": "com.m3.collections.M3WindowPlan",
+      "disposition": "existing-owner contract correction"
+    },
+    {
+      "source": "Nebula259 endpoint principle guarded for signed AVL weights",
+      "target": "com.m3.collections.M3RowTree",
+      "disposition": "existing-owner specialization; performance HOLD"
+    },
+    {
+      "source": "current M3IndexMaskCompactor Java/C",
+      "target": "m3/collections",
+      "disposition": "KEEP; real JNI composition executed; nine exports unchanged"
+    }
+  ],
+  "runtime_dependency": "NONE",
+  "public_and_native_api": "UNCHANGED",
+  "phase": "STRING_ACTIVE_UNCHANGED",
+  "pending": [
+    "OpenRewrite SDK",
+    "full module and JDK image",
+    "jtreg/JCK",
+    "native widget and web/renderer acceptance",
+    "structural token-regex reconciliation"
+  ]
+}

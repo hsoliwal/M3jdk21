@@ -1,0 +1,54 @@
+{
+  "failure": "Ten literal dollar signs in javap evidence basenames violate the existing recipe template-name syntax; source bytes and target Runtime behavior are unchanged.",
+  "files": [
+    {
+      "path": "build_runtime_facade_handoff.py",
+      "sha256": "3c788e8d505ce27a57bf5f3b74b3590487bf6aef90ea07dc1d7b983173e89c27"
+    },
+    {
+      "path": "canonical-artifacts.json",
+      "sha256": "f83257b7b9c861d5d7ffcf40e61693db9e57f8f7f83dcebde6f4dcd83f676a0d"
+    },
+    {
+      "path": "CUSTODY-SOURCE.json",
+      "sha256": "cbb722ac6706721f1a9d055c3bf746bebb1891ad9e4367a5d0a3ccf878f05f57"
+    },
+    {
+      "path": "pom.xml",
+      "sha256": "4c90faaa9e64aebeeba14fb2196731c6334293781d0fdcafbf190f2f5662eb7d"
+    },
+    {
+      "path": "datasets/m3-runtime-facade-custody-1/DATASET.json",
+      "sha256": "759ad45abdf8371d021b5dd41c9ded25e7da1e763b64d9b5c5227dc11f35e2eb"
+    },
+    {
+      "path": "datasets/m3-runtime-facade-custody-1/ENGINE_EFFECTIVE.tsv",
+      "sha256": "80bf80ee81878cc05393b3c23ef07b2261be1bcb7dcb500b0d4b12cd8e05ec23"
+    },
+    {
+      "path": "datasets/m3-runtime-facade-custody-1/MODES.tsv",
+      "sha256": "3675321c66451066f34fde9d6eb212c75e4a2ebbb6da21df779157da8fedecd7"
+    },
+    {
+      "path": "datasets/m3-runtime-facade-custody-1/resources/META-INF/rewrite/m3-collections-contract-refinement-20261017-m3-runtime-facade-custody-1.yml",
+      "sha256": "ceb088c65b39becb51db6a6070f064cc0a9bee3accbb2821a4b9d60fda5fc564"
+    },
+    {
+      "path": "datasets/m3-runtime-facade-custody-1/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3-runtime-facade-custody-1/manifest.tsv",
+      "sha256": "1868e2c3885e2f4f718a21f455422f031129c142f5d4ce146d1dd63b4a16898e"
+    },
+    {
+      "path": "datasets/m3-runtime-facade-custody-1/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3-runtime-facade-custody-1/manifest.tsv",
+      "sha256": "33d18201c0c0521673ac8f7466c061684c2c1715d0fe81087329cf19f50620f2"
+    },
+    {
+      "path": "target/m3-runtime-facade-custody-1/surefire-reports/TEST-com.synexia.rewrite.M3TaskRecipeTest.xml",
+      "sha256": "7c6b7c5470b17cdca577f7b082205f6a781be34e317e9e406d906e658b45a6cc"
+    },
+    {
+      "path": "target/m3-runtime-facade-custody-1/surefire-reports/com.synexia.rewrite.M3TaskRecipeTest.txt",
+      "sha256": "ca119f12ec4b2f51d1a51da3d3a0cc154bb397126b2bf99e4286c222956e8c6b"
+    }
+  ],
+  "original_engine_pom_changed": false
+}

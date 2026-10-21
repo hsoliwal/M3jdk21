@@ -1,0 +1,12 @@
+step	status	command_or_reason
+source_identity	PASS	Three exact generated SHA256 and original Git blob checks
+source_diff	PASS	Recipe pre-post manifest, only three growth-decision atoms
+lint_compile	PASS	javac --release 21 -proc:none -Xlint:all -Werror
+api_descriptor	PASS	javap -public -s three classes, matched stored baseline
+jdk_value_differential	PASS	M3ZeroSlotCapacityContract 196611 operations 656464 checks
+fixed_point	PASS_SELECTED_SOURCE	Canonical donor recipe pre-post replay; no SDK claim
+module_maven_junit	NOT_RUN	./mvnw -f m3/collections/pom.xml -Dtest=M3ZeroSlotCapacityTest test
+openrewrite_sdk	NOT_RUN	Full actual OpenRewrite SDK tests remain authority
+jtreg_jdk_build	NOT_RUN	Matched JDK image unavailable in selected test
+jni_abi	UNCHANGED_NOT_RUN	No JNI files or symbols changed; separate regressions required
+benchmark	NOT_RUN	Retained whole-heap and throughput evidence missing

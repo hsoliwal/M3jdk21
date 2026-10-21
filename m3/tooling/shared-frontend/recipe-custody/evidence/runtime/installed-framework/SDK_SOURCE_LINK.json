@@ -1,0 +1,20 @@
+{
+  "schema": "M3_INSTALLED_FRAMEWORK_SDK_SOURCE_LINK_V1",
+  "status": "PASS",
+  "dataset": "m3jdk21-openrewrite-pack",
+  "receipt_sha256": "077cfb35402caf3e9644d0b8e105bf9d59796f5c56483e72d25a9f1fa844559b",
+  "selected_image_receipt_sha256": "a215edc13ebd547a0a8905f0e9b97b050b59a898da17d21e6f7875a4dff28132",
+  "sdk_results_sha256": "c39df2ca690e7c177059dec0f66b2fcf03804c90279cfd4dcdf211e952a9109e",
+  "framework_tests": 11,
+  "failures": 0,
+  "skipped": 0,
+  "production_framework_artifacts": 15,
+  "runtime_dependency_jars": 57,
+  "installed_class_origins_verified": 14,
+  "installed_assets_verified": 162,
+  "harness_files_are_exact": true,
+  "harness_directory": "src/test/java",
+  "installed_image_modules_sha256": "ca2c5b3a1dfcf229e220c40191755f8716d2a4aec046234c33610cdf6b1ba63c",
+  "scope": "Installed image launch.jar manifest; no Maven-repository framework jars on execution classpath. Unmodified JUnit Platform 1.10.2 and Jupiter 5.10.2 test-only jars.",
+  "reproduce": "The adjacent Python and Java harness sources retain exact executed bytes. Supply --image, a fresh --output, --proof pointing to a rebuilt optional pack proof containing runtime/test-classes plus the two qualification receipts and openrewrite-lock.json, --tool-pom, and --maven-repository. Source tests and module POMs are carried in the embedded pack/tool datasets and the receiving product source tree."
+}

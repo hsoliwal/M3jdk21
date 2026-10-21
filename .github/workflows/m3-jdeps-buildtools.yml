@@ -1,0 +1,35 @@
+# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and contributors
+# SPDX-License-Identifier: Apache-2.0
+name: M3JDK21 jdeps original-tool build facts
+on:
+  pull_request:
+    paths:
+      - 'src/jdk.jdeps/share/classes/com/sun/tools/jdeps/M3BuildClassDeps.java'
+      - 'src/jdk.jdeps/share/classes/module-info.java'
+      - 'test/jdk/tools/jdeps/M3BuildClassDepsContract.java'
+      - '.github/workflows/m3-jdeps-buildtools.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  original-jdeps-finder-java21:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Compile SDK source against the original JDK dependency module
+        run: |
+          mkdir -p build/m3-jdeps-classes
+          javac -Xlint:all,-module -Werror \
+            --patch-module jdk.jdeps=src/jdk.jdeps/share/classes:test/jdk/tools/jdeps \
+            -d build/m3-jdeps-classes \
+            src/jdk.jdeps/share/classes/com/sun/tools/jdeps/M3BuildClassDeps.java \
+            test/jdk/tools/jdeps/M3BuildClassDepsContract.java
+      - name: Run original javac to original jdeps differential oracle
+        run: |
+          java --patch-module jdk.jdeps=build/m3-jdeps-classes \
+            -m jdk.jdeps/com.sun.tools.jdeps.M3BuildClassDepsContract

@@ -1,3 +1,4 @@
+// SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
 // SPDX-License-Identifier: Apache-2.0
 package com.m3.tq;
 
@@ -35,6 +36,8 @@ final class TQTest {
     private static final Path GENERATED = OUT.resolve("generated");
     private static final Path PATCH = OUT.resolve("patch");
     private static final Path PROBES = OUT.resolve("probes");
+    private static final Path CURRENT_PATCH = OUT.resolve("current-patch");
+    private static final Path CURRENT_PROBES = OUT.resolve("current-probes");
     private static final String PRODUCT = "src/java.base/share/classes/";
     private static final String KERNEL = PRODUCT + "jdk/internal/mindex/M3TQ.java";
     private static final String TEST = "test/jdk/java/lang/String/";
@@ -42,6 +45,7 @@ final class TQTest {
     private static final String TEXT_RES = "com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq/";
     private static final String JAVAC = Path.of(System.getProperty("java.home"),"bin/javac").toString();
     private static final String JAVA = Path.of(System.getProperty("java.home"),"bin/java").toString();
+    private static final String JAVAP = Path.of(System.getProperty("java.home"),"bin/javap").toString();
     private static List<SourceFile> javaAfter;
     private static List<SourceFile> textAfter;
 
@@ -88,6 +92,19 @@ final class TQTest {
                 ROOT.resolve(TEST+"M3MappedStringBackingTest.java").toString(),ROOT.resolve(TEST+"MapFactsTest.java").toString()));
         execute(javac,"compile-probes.log",true);
         compileNative(OUT,false,"compile-native.log");
+        compileProduct(CURRENT_PATCH,ROOT.resolve(KERNEL),"compile-current-product.log");
+        Files.createDirectories(CURRENT_PROBES);
+        // Reuse the exact existing JNI probe and its generated header/library.
+        assertArrayEquals(Files.readAllBytes(GENERATED.resolve(TEST+"M3TQTest.java")),
+                Files.readAllBytes(ROOT.resolve(TEST+"M3TQTest.java")));
+        execute(List.of(JAVAC,"-source","21","-target","21","-proc:none","-Xlint:all","-Werror",
+                "--patch-module","java.base="+CURRENT_PATCH,
+                "--add-exports","java.base/jdk.internal.mindex=ALL-UNNAMED",
+                "-d",CURRENT_PROBES.toString(),
+                ROOT.resolve(TEST+"M3TQTest.java").toString(),
+                ROOT.resolve(TEST+"M3TQSparseContainmentTest.java").toString(),
+                ROOT.resolve(TEST+"M3MappedStringBackingTest.java").toString(),
+                ROOT.resolve(TEST+"MapFactsTest.java").toString()),"compile-current-probes.log",true);
     }
 
     @Test void exactRecipeAndFixedPoint() {
@@ -212,6 +229,71 @@ final class TQTest {
         assertTrue(Files.readString(OUT.resolve("containment-mutant.log")).contains("AssertionError: containment set oracle"));
     }
 
+
+    @TestFactory Stream<DynamicTest> currentRuntimeModes() {
+        return Stream.of("interpreter","mixed","c1","c2")
+                .map(mode -> DynamicTest.dynamicTest("current-"+mode,() -> {
+            for(String main:List.of("M3TQTest","M3TQSparseContainmentTest")) {
+                String stem="current-"+mode+"-"+main;
+                List<String> command=runtime(CURRENT_PATCH,OUT,CURRENT_PROBES,main);
+                command.addAll(1,List.of("--add-opens","java.base/jdk.internal.mindex=ALL-UNNAMED"));
+                if(mode.equals("interpreter"))command.add(1,"-Xint");
+                if(mode.equals("mixed"))command.add(1,"-Xmixed");
+                if(mode.equals("c1")||mode.equals("c2")) {
+                    command.addAll(1,List.of("-Xbatch","-XX:CompileThreshold=100",
+                            "-XX:+UnlockDiagnosticVMOptions","-XX:+LogCompilation",
+                            "-XX:LogFile="+OUT.resolve(stem+"-compilation.xml"),
+                            "-XX:CompileCommand=dontinline,jdk.internal.mindex.M3TQ$Facts::containsAll"));
+                    command.add(1,mode.equals("c1")?"-XX:TieredStopAtLevel=1":"-XX:-TieredCompilation");
+                }
+                execute(command,stem+".log",true);
+                String output=Files.readString(OUT.resolve(stem+".log"));
+                assertTrue(output.contains("warmPayloadReads=0"));
+                if(main.equals("M3TQTest")) {
+                    assertTrue(output.contains("TQ checks=308649 "));
+                    assertTrue(output.contains("nativeCalls=4458 "));
+                } else {
+                    assertTrue(output.contains("TQ_SPARSE_CONTAINMENT_PASS checks=31011 warmPayloadReads=0"));
+                }
+                if(mode.equals("c1")||mode.equals("c2")) {
+                    String log=Files.readString(OUT.resolve(stem+"-compilation.xml"));
+                    assertTrue(log.lines().anyMatch(line -> line.contains("<nmethod")
+                            &&line.contains("compiler='"+mode+"'")
+                            &&line.contains("method='jdk.internal.mindex.M3TQ$Facts containsAll ")),
+                            "current containment compiled by "+mode);
+                    if(main.equals("M3TQTest")) {
+                        assertTrue(log.lines().anyMatch(line -> line.contains("<nmethod")
+                                &&line.contains("compiler='"+mode+"'")
+                                &&line.contains("method='jdk.internal.mindex.M3TQ ")),
+                                "current kernel compiled by "+mode);
+                    }
+                }
+            }
+        }));
+    }
+
+    @Test void currentPublicProtectedApiMatchesLegacy() throws Exception {
+        for(String name:List.of("M3TQ","M3TQ$Facts","M3TQ$Op")) {
+            String relative="jdk/internal/mindex/"+name+".class";
+            String stem="api-"+name.replace('$','-');
+            execute(List.of(JAVAP,"-protected","-s",PATCH.resolve(relative).toString()),
+                    stem+"-legacy.log",true);
+            execute(List.of(JAVAP,"-protected","-s",CURRENT_PATCH.resolve(relative).toString()),
+                    stem+"-current.log",true);
+            assertEquals(Files.readString(OUT.resolve(stem+"-legacy.log")),
+                    Files.readString(OUT.resolve(stem+"-current.log")),name+" public/protected API");
+        }
+    }
+
+    @Test void currentMappedRegressionsAndModuleBoundary() throws Exception {
+        execute(runtime(CURRENT_PATCH,OUT,CURRENT_PROBES,"M3MappedStringBackingTest"),
+                "current-mapped.log",true);
+        execute(runtime(CURRENT_PATCH,OUT,CURRENT_PROBES,"MapFactsTest"),"current-facts.log",true);
+        execute(List.of(Path.of(System.getProperty("java.home"),"bin/jdeps").toString(),
+                "-s",CURRENT_PATCH.toString()),"current-jdeps.log",true);
+        assertEquals("current-patch -> java.base",Files.readString(OUT.resolve("current-jdeps.log")).strip());
+    }
+
     private static void compileProduct(Path output,Path kernel,String log) throws Exception {
         Files.createDirectories(output);
         Path isolated=output.resolveSibling(output.getFileName()+"-sources");
@@ -238,9 +320,13 @@ final class TQTest {
     }
 
     private static List<String> runtime(Path patch,Path nativePath,String main) {
+        return runtime(patch,nativePath,PROBES,main);
+    }
+
+    private static List<String> runtime(Path patch,Path nativePath,Path probeClasses,String main) {
         return new ArrayList<>(List.of(JAVA,"-Xmx256m","-Xcheck:jni","--patch-module","java.base="+patch,
                 "--add-exports","java.base/jdk.internal.mindex=ALL-UNNAMED","-Djava.library.path="+nativePath,
-                "-cp",PROBES.toString(),main));
+                "-cp",probeClasses.toString(),main));
     }
 
     private static String hash(byte[] bytes) throws Exception {

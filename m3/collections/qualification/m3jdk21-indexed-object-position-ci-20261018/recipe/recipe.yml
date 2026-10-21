@@ -1,0 +1,7 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.Jdk21IndexedObjectPositionCI20261018
+displayName: Bootstrap source-vendored JUnit before M3 object-index snapshot gates
+description: Exact-current workflow one-file transform preserving source-built dependency coordinates.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe:
+      crateName: m3jdk21-indexed-object-position-ci-20261018

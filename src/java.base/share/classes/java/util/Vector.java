@@ -32,6 +32,7 @@ import java.util.function.Consumer;
 import java.util.function.Predicate;
 import java.util.function.UnaryOperator;
 
+import jdk.internal.mindex.M3CollectionMaskCompactor;
 import jdk.internal.util.ArraysSupport;
 
 /**
@@ -998,9 +999,15 @@ public class Vector<E>
                 throw new ConcurrentModificationException();
             modCount++;
             int w = beg;
-            for (i = beg; i < end; i++)
-                if (isClear(deathRow, i - beg))
-                    es[w++] = es[i];
+            // M3JDK: use indexed deletion-mask runs only after predicate
+            // execution and the original fail-fast check have completed.
+            if (end - beg >= 512) {
+                w = M3CollectionMaskCompactor.compact(es, beg, end, deathRow);
+            } else {
+                for (i = beg; i < end; i++)
+                    if (isClear(deathRow, i - beg))
+                        es[w++] = es[i];
+            }
             for (i = elementCount = w; i < end; i++)
                 es[i] = null;
             return true;

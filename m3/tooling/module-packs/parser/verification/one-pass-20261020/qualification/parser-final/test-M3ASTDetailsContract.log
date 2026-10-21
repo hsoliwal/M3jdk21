@@ -1,0 +1,13 @@
+$ ["/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/toolchain/jdk21/bin/java","-ea","-Dm3.parser.test.work=/workspace/scratch/e736b6177c79/m3-one-pass-20261020/qualification/parser-final/consumer-work/test-M3ASTDetailsContract","--patch-module","jdk.compiler=/workspace/scratch/e736b6177c79/m3-one-pass-20261020/qualification/parser-final/compiler-patch","--module-path","/workspace/scratch/e736b6177c79/m3-one-pass-20261020/qualification/parser-final/modules","--add-modules","jdk.m3.parser","-cp","/workspace/scratch/e736b6177c79/m3-one-pass-20261020/qualification/parser-final/test-classes","jdk.m3.parser.test.M3ASTDetailsContract"]
+PASS legacy lanes and flags
+M3_AST_DETAILS_COST nodes=65 primitive_bytes=2080 metadata_bytes=1625 source_units=402 original_source_reads=1
+PASS existing javac tree metadata
+PASS physical Unicode-escape and text-block coordinates
+PASS unverified source and missing geometry
+PASS half-open lines and strict enclosing ancestors
+PASS bounded exact UTF-16 hashing
+PASS bounded structural evidence
+PASS optional provider refusal
+M3_AST_DETAILS_PASS checks=527 groups=8
+
+EXIT 0

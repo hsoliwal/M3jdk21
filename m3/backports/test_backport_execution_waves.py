@@ -87,10 +87,22 @@ class BackportExecutionWavesTest(unittest.TestCase):
             ),
         ]
 
-        held = {item.atom_id: item for item in self.w.plan(atoms, {})}
+        unapproved = {item.atom_id: item for item in self.w.plan(atoms, {})}
+        self.assertEqual(self.w.SCOPE_APPROVAL_HOLD, unapproved["a.recipe"].execution_state)
+        self.assertEqual(self.w.SCOPE_APPROVAL_HOLD, unapproved["a.compile"].execution_state)
+        self.assertFalse(unapproved["a.compile"].scope_approved)
+        self.assertEqual(-1, unapproved["a.compile"].wave)
+
+        # Approve only the child: its held parent must still block execution.
+        held = {
+            item.atom_id: item
+            for item in self.w.plan(atoms, {"a.compile": "review/child-only"})
+        }
         self.assertEqual(self.w.SCOPE_APPROVAL_HOLD, held["a.recipe"].execution_state)
         self.assertEqual(self.w.DEPENDENCY_HOLD, held["a.compile"].execution_state)
         self.assertEqual(-1, held["a.recipe"].wave)
+        self.assertTrue(held["a.compile"].scope_approved)
+        self.assertEqual(-1, held["a.compile"].wave)
 
         approved = {
             item.atom_id: item
@@ -245,20 +257,20 @@ class BackportExecutionWavesTest(unittest.TestCase):
             self.w.write_json(items, {}, json_path)
 
             raw_tsv = tsv.read_bytes()
-            self.assertEqual(3, raw_tsv.count(b"\\n"), "header + two physical TSV records")
-            self.assertTrue(raw_tsv.endswith(b"\\n"))
-            self.assertNotIn(b"\\\\n", raw_tsv, "no escaped row separator")
+            self.assertEqual(3, raw_tsv.count(b"\n"), "header + two physical TSV records")
+            self.assertTrue(raw_tsv.endswith(b"\n"))
+            self.assertNotIn(b"\\n", raw_tsv, "no escaped row separator")
             with tsv.open("r", encoding="utf-8", newline="") as handle:
-                parsed = list(csv.DictReader(handle, delimiter="\\t"))
+                parsed = list(csv.DictReader(handle, delimiter="\t"))
             self.assertEqual(2, len(parsed))
             self.assertEqual(["file.alpha", "file.beta"],
                              [row["atom_id"] for row in parsed])
             self.assertEqual(["0", "1"], [row["wave"] for row in parsed])
 
             raw_json = json_path.read_bytes()
-            self.assertTrue(raw_json.endswith(b"\\n"))
-            self.assertFalse(raw_json.endswith(b"\\\\n"))
-            self.assertEqual(1, len(raw_json) - len(raw_json.rstrip(b"\\n"))))
+            self.assertTrue(raw_json.endswith(b"\n"))
+            self.assertFalse(raw_json.endswith(b"\\n"))
+            self.assertEqual(1, len(raw_json) - len(raw_json.rstrip(b"\n")))
             document = json.loads(raw_json.decode("utf-8"))
             self.assertEqual(self.w.root(items), document["root"])
             self.assertEqual(["file.alpha", "file.beta"],

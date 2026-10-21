@@ -1,34 +1,140 @@
 <!-- SPDX-License-Identifier: Apache-2.0; shade aggregator only. Every merged class keeps its upstream license; the texts are merged under META-INF and kept per module under META-INF/third-party/<module>. -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>com.m3.vendor</groupId><artifactId>m3-tooling-third-party</artifactId><version>8.17.1-m3-shaded-1</version>
+  <groupId>com.m3.vendor</groupId>
+  <artifactId>m3-tooling-third-party</artifactId>
+  <version>8.17.1-m3-shaded-1</version>
   <name>M3jdk21 tooling third-party stack (shaded from in-repo source builds)</name>
   <description>OpenRewrite 8.17.1 and its runtime closure, compiled from the vendored sources in m3/vendor/third_party and merged into one jar with maven-shade-plugin. No relocation (OpenRewrite resolves recipes and Jackson type ids by class name).</description>
-  <properties><project.build.sourceEncoding>UTF-8</project.build.sourceEncoding></properties>
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
   <dependencies>
-      <dependency><groupId>org.openrewrite</groupId><artifactId>rewrite-core</artifactId><version>8.17.1-m3-source-1</version></dependency>
-      <dependency><groupId>org.openrewrite</groupId><artifactId>rewrite-java</artifactId><version>8.17.1-m3-source-1</version></dependency>
-      <dependency><groupId>org.openrewrite</groupId><artifactId>rewrite-java-21</artifactId><version>8.17.1-m3-source-1</version></dependency>
-      <dependency><groupId>org.openrewrite</groupId><artifactId>rewrite-test</artifactId><version>8.17.1-m3-source-1</version></dependency>
-      <dependency><groupId>org.openrewrite</groupId><artifactId>rewrite-xml</artifactId><version>8.17.1-m3-source-1</version></dependency>
-      <dependency><groupId>org.openrewrite</groupId><artifactId>rewrite-yaml</artifactId><version>8.17.1-m3-source-1</version></dependency>
+    <dependency>
+      <groupId>org.openrewrite</groupId>
+      <artifactId>rewrite-core</artifactId>
+      <version>8.17.1-m3-source-1</version>
+    </dependency>
+    <dependency>
+      <groupId>org.openrewrite</groupId>
+      <artifactId>rewrite-java</artifactId>
+      <version>8.17.1-m3-source-1</version>
+    </dependency>
+    <dependency>
+      <groupId>org.openrewrite</groupId>
+      <artifactId>rewrite-java-21</artifactId>
+      <version>8.17.1-m3-source-1</version>
+    </dependency>
+    <dependency>
+      <groupId>org.openrewrite</groupId>
+      <artifactId>rewrite-test</artifactId>
+      <version>8.17.1-m3-source-1</version>
+    </dependency>
+    <dependency>
+      <groupId>org.openrewrite</groupId>
+      <artifactId>rewrite-xml</artifactId>
+      <version>8.17.1-m3-source-1</version>
+    </dependency>
+    <dependency>
+      <groupId>org.openrewrite</groupId>
+      <artifactId>rewrite-yaml</artifactId>
+      <version>8.17.1-m3-source-1</version>
+    </dependency>
   </dependencies>
   <build>
     <plugins>
-      <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-shade-plugin</artifactId><version>3.6.0</version>
-        <executions><execution><phase>package</phase><goals><goal>shade</goal></goals>
-          <configuration>
-            <createDependencyReducedPom>true</createDependencyReducedPom>
-            <filters><filter><artifact>*:*</artifact><excludes><exclude>META-INF/*.SF</exclude><exclude>META-INF/*.RSA</exclude><exclude>META-INF/*.DSA</exclude><exclude>META-INF/*.EC</exclude><exclude>module-info.class</exclude><exclude>META-INF/versions/*/module-info.class</exclude></excludes></filter></filters>
-            <transformers>
-              <transformer implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer"/>
-              <transformer implementation="org.apache.maven.plugins.shade.resource.ApacheLicenseResourceTransformer"/>
-              <transformer implementation="org.apache.maven.plugins.shade.resource.ApacheNoticeResourceTransformer"><addHeader>false</addHeader></transformer>
-              <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer"><manifestEntries><Automatic-Module-Name>com.m3.vendor.tooling.thirdparty</Automatic-Module-Name><Multi-Release>true</Multi-Release></manifestEntries></transformer>
-            </transformers>
-          </configuration>
-        </execution></executions>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-shade-plugin</artifactId>
+        <version>3.6.0</version>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>shade</goal>
+            </goals>
+            <configuration>
+              <createDependencyReducedPom>true</createDependencyReducedPom>
+              <filters>
+                <filter>
+                  <artifact>*:*</artifact>
+                  <excludes>
+                    <exclude>META-INF/*.SF</exclude>
+                    <exclude>META-INF/*.RSA</exclude>
+                    <exclude>META-INF/*.DSA</exclude>
+                    <exclude>META-INF/*.EC</exclude>
+                    <exclude>module-info.class</exclude>
+                    <exclude>META-INF/versions/*/module-info.class</exclude>
+                  </excludes>
+                </filter>
+              </filters>
+              <transformers>
+                <transformer implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer"/>
+                <transformer implementation="org.apache.maven.plugins.shade.resource.ApacheLicenseResourceTransformer"/>
+                <transformer implementation="org.apache.maven.plugins.shade.resource.ApacheNoticeResourceTransformer">
+                  <addHeader>false</addHeader>
+                </transformer>
+                <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                  <manifestEntries>
+                    <Automatic-Module-Name>com.m3.vendor.tooling.thirdparty</Automatic-Module-Name>
+                    <Multi-Release>true</Multi-Release>
+                  </manifestEntries>
+                </transformer>
+              </transformers>
+            </configuration>
+          </execution>
+        </executions>
       </plugin>
     </plugins>
   </build>
+  <profiles>
+    <profile>
+      <id>m3-recipe-boot</id>
+      <activation>
+        <file>
+          <exists>${maven.multiModuleProjectDirectory}/.m3/recipe-boot.properties</exists>
+        </file>
+      </activation>
+      <properties>
+        <m3.recipe.boot.skip>false</m3.recipe.boot.skip>
+      </properties>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>exec-maven-plugin</artifactId>
+            <version>3.5.0</version>
+            <inherited>true</inherited>
+            <dependencies>
+              <dependency>
+                <groupId>com.synexia.m3</groupId>
+                <artifactId>m3-pr-stack-preservation</artifactId>
+                <version>1.0.0-m3boot20261021</version>
+              </dependency>
+            </dependencies>
+            <executions>
+              <execution>
+                <id>m3-recipe-boot</id>
+                <phase>validate</phase>
+                <goals>
+                  <goal>java</goal>
+                </goals>
+                <configuration>
+                  <skip>${m3.recipe.boot.skip}</skip>
+                  <mainClass>com.synexia.m3.prstack.M3RecipeBoot</mainClass>
+                  <includeProjectDependencies>false</includeProjectDependencies>
+                  <includePluginDependencies>true</includePluginDependencies>
+                  <arguments>
+                    <argument>${maven.multiModuleProjectDirectory}/.m3/recipe-boot.properties</argument>
+                    <argument>${project.basedir}</argument>
+                    <argument>${session.projects[0].basedir.absolutePath}</argument>
+                  </arguments>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
 </project>

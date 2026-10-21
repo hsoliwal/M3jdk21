@@ -1,0 +1,9 @@
+# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
+# SPDX-License-Identifier: Apache-2.0
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.BackportWaveCurrentOutput.Inverse
+displayName: Restore original backport wave consumer
+description: One sealed workflow and nine KEEP inputs; preserve production policy, authority and the original historical receipt.
+recipeList:
+  - com.synexia.rewrite.M3BackportWaveCurrentOutputInverseRecipe

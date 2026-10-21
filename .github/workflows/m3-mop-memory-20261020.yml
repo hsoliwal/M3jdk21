@@ -1,0 +1,38 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3JDK21 Machine Oriented Programming recipe memory
+on:
+  pull_request:
+    paths:
+      - 'm3/mop/**'
+      - 'm3/tooling/shared-frontend/recipe-custody/datasets/m3-mop-recipe-memory-20261020/**'
+      - '.github/workflows/m3-mop-memory-20261020.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  original-mop-memory:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Strict Java21 original MOP memory schema and independent tests
+        shell: bash
+        run: |
+          set -euo pipefail
+          bash m3/mop/verify.sh
+      - name: Existing OpenRewrite SDK source seals and fixed-point refusal
+        shell: bash
+        run: |
+          set -euo pipefail
+          root="$PWD/m3/tooling/shared-frontend/recipe-custody"
+          mvn -B -ntp -f "$root/pom.xml" \
+            -Dm3.dataset=m3-mop-recipe-memory-20261020 \
+            "-Drecipe.owner.root=$root/sdk-owner" -Pcontract verify
+          python3 "$root/receive.py" --dataset m3-mop-recipe-memory-20261020 \
+            --recipe-owner "$root/sdk-owner" --target "$PWD" --check

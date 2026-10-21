@@ -36,7 +36,7 @@ public final class M3LongSortedViews {
         Objects.requireNonNull(predicate, "predicate");
         if (source instanceof Filtered previous) {
             // Preserve predicate order and a single backing traversal, even for nested views.
-            return new Filtered(previous.source, previous.predicate.and(predicate));
+            return new Filtered(previous.source, M3LongPredicates.and(previous.predicate, predicate));
         }
         return new Filtered(source, predicate);
     }
@@ -66,10 +66,18 @@ public final class M3LongSortedViews {
         return source instanceof Unmodifiable ? source : new Unmodifiable(source);
     }
 
-    private static Spliterator.OfLong sortedCursor(M3LongIterator cursor) {
+    /**
+     * A sorted live view binds its backing iterator on first traversal, not when
+     * a stream/spliterator is obtained. Sorted metadata, splitting and size
+     * queries remain allocation-free and do not call the backing collection.
+     * The source owns post-binding interference/fail-fast behavior.
+     */
+    private static Spliterator.OfLong sortedCursor(M3LongCollection source) {
         return new Spliterator.OfLong() {
+            private M3LongIterator cursor;
             @Override public boolean tryAdvance(LongConsumer action) {
                 Objects.requireNonNull(action, "action");
+                if (cursor == null) cursor = source.iterator();
                 if (!cursor.hasNext()) return false;
                 action.accept(cursor.nextLong());
                 return true;
@@ -97,7 +105,7 @@ public final class M3LongSortedViews {
         @Override public boolean contains(long value) { return selection.contains(value); }
         @Override public long[] toArray() { return selection.toArray(); }
         @Override public M3LongIterator iterator() { return selection.iterator(); }
-        @Override public Spliterator.OfLong longSpliterator() { return sortedCursor(iterator()); }
+        @Override public Spliterator.OfLong longSpliterator() { return sortedCursor(this); }
 
         @Override public boolean add(long value) {
             if (!predicate.test(value)) {
@@ -177,7 +185,7 @@ public final class M3LongSortedViews {
         @Override public boolean contains(long value) { return source.contains(value); }
         @Override public long[] toArray() { return source.toArray(); }
         @Override public M3LongIterator iterator() { return source.iterator(); }
-        @Override public Spliterator.OfLong longSpliterator() { return sortedCursor(iterator()); }
+        @Override public Spliterator.OfLong longSpliterator() { return sortedCursor(this); }
         @Override public long first() { return source.first(); }
         @Override public long last() { return source.last(); }
         @Override public long lower(long value, long fallback) { return source.lower(value, fallback); }

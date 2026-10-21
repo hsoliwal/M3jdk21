@@ -1,0 +1,52 @@
+{
+  "schema": "m3-guava-namespace-receiving-disposition-v2",
+  "copyright": "Copyright 2026 Hitesh Soliwal and contributors",
+  "metadataLicense": "Apache-2.0",
+  "authority": {
+    "repository": "hsoliwal/M3jdk21",
+    "revision": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
+    "policy": "m3/docs/m3jdk21-porting-invariant.md",
+    "mapping": "m3/docs/name-mapping.json"
+  },
+  "namespaceMapping": {
+    "source": "com.google.common",
+    "target": "com.m3.collections.guava",
+    "ownedHelperSource": "com.google.thirdparty.publicsuffix",
+    "ownedHelperTarget": "com.m3.collections.guava.thirdparty.publicsuffix",
+    "externalProvidersPreserved": [
+      "com.google.common.truth",
+      "com.google.common.jimfs"
+    ],
+    "sourceTree": "e3e9dc721ce7d840a59a8de0484e90d1c3340736",
+    "scope": "Complete independently licensed source custody; source-only namespace pass"
+  },
+  "targetDisposition": "PENDING_RUNTIME_PORT",
+  "publicJDKNames": "UNCHANGED",
+  "receivingSequenceAdvanced": false,
+  "newCollectionAlgorithmsAdmitted": 0,
+  "arrayNativeStorage": "OPEN",
+  "runtimeDependencyOnSynexia": false,
+  "pending": [
+    "Target-owned M3 build/release coordinates and complete JRE/Android/GWT dependency graphs; original donor POMs are provenance and do not establish a receiving build",
+    "Full donor tests and cross-namespace external Truth/Jimfs/GWT signature compatibility",
+    "Per-concrete array/index/offset/mask conversion and no-stored-entry proof",
+    "Applicable Java/JNI ABI, lifetime, runtime, resource and performance evidence",
+    "Concrete existing target-owner mapping, recipe and license admission before src/** promotion"
+  ],
+  "sourceQualification": {
+    "jreCompleteCompile": "PASS:1972 emitted classfiles including separate versioned module stages on donor Java8/9 baselines",
+    "helperCoexistence": "PASS:166 finite source-aware checks, both classpath orders; not a whole-library behavioral proof",
+    "allFileCustody": "PASS: all3,356 complete paths/modes/blobs; final source subtree independently read back from M3 GitHub candidate.",
+    "fullMavenReactor": "OPEN",
+    "androidAndGwtFullBuilds": "OPEN",
+    "arrayNativeStorage": "OPEN",
+    "osgi": "Actual cached bnd6.3.1 ordered matcher:44 checks PASS; both helper packages excluded before public wildcard. No OSGi bundle execution claimed.",
+    "javaSources": "Configuration successor changes14POMs only; all previously qualified collection Java bodies are unchanged."
+  },
+  "donorBuildPublication": {
+    "normalLifecycle": "All14 POMs set default maven.install.skip=true and maven.deploy.skip=true; cached plugin descriptors confirm property contracts. No Maven execution claimed.",
+    "guardBoundary": "Defaults are explicitly overridable; no security-boundary claim",
+    "GAVs": "Retained unchanged as source provenance",
+    "M3ReceivingGraph": "OPEN: distinct M3 artifacts, mapped failureaccess, full original external Truth/Jimfs/GWT linkage and API compatibility"
+  }
+}

@@ -1,0 +1,8 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.SdkDuplicateSortedFactories20261018
+displayName: Remove duplicate identical M3 SDK factory declarations
+description: Keeps the existing public sorted-filter signatures and identical delegates from the exact master preimage. PlainText source custody only; the full repaired core compiled separately under Java21.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: sdk-duplicate-sorted-factories
+      lst: false

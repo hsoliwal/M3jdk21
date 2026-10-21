@@ -86,3 +86,11 @@ Java_M3TQTest_nativeRangeKeys(
     JNIEnv* env, jclass, jcharArray text, jint from, jint to, jint budget) {
   return range_keys(env, text, from, to, budget);
 }
+
+// Copyright 2026 Hitesh Soliwal and contributors.
+// Additive test binding: reuse the independent oracle, not a production JNI backend.
+extern "C" JNIEXPORT jlongArray JNICALL
+Java_M3TQArrayCompositionTest_nativeKeys(
+    JNIEnv* env, jclass, jcharArray text, jint from, jint to, jint budget) {
+  return range_keys(env, text, from, to, budget);
+}

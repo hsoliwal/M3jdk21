@@ -37,26 +37,9 @@ jobs:
           mkdir -p proof/core-classes/META-INF
           { git rev-parse HEAD; uname -m; java -version 2>&1; mvn -version; } > proof/identity.txt
           ENGINE=m3/tooling/migration-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java
-          test "$(git hash-object "$ENGINE")" = d58ca50dfaeb60f581b64f43545e688aca5c6530
-          python3 - <<'PY'
-          from pathlib import Path
-          import hashlib, subprocess
-          manifest = Path('m3/collections/interop/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-java/collections-library-interop/manifest.tsv')
-          rows = [line.split('\t') for line in manifest.read_text().splitlines() if line and not line.startswith('#')]
-          assert len(rows) == 5
-          expected = {row[0]: row[2] for row in rows}
-          tracked = set(subprocess.check_output(['git', 'ls-files', 'm3/collections/interop/src'], text=True).splitlines())
-          assert tracked == set(expected), ('unexpected or missing source', tracked ^ set(expected))
-          receipt = []
-          for name, wanted in sorted(expected.items()):
-              path = Path(name)
-              assert path.is_file() and not path.is_symlink(), name
-              actual = hashlib.sha256(path.read_bytes()).hexdigest()
-              assert actual == wanted, ('source drift', name, wanted, actual)
-              receipt.append(name + '\t' + actual)
-          Path('proof/admitted-postimages.tsv').write_text('\n'.join(receipt) + '\n')
-          print('ADMITTED_EXACT_POSTIMAGES', len(receipt))
-          PY
+          test "$(git hash-object "$ENGINE")" = 05e02169c7429183107a99c60e1aad05b4d73b5f
+          python3 -m unittest discover -s m3/collections/interop/qualification/current-census-20261017 -p 'test_*.py' -v 2>&1 | tee proof/census-tests.log
+          python3 m3/collections/interop/qualification/current-census-20261017/verify.py | tee proof/admitted-postimages.tsv
       - name: Run all six actual recipe proofs before delivery
         shell: bash
         run: |
@@ -73,13 +56,14 @@ jobs:
           assert totals == {'tests': 6, 'failures': 0, 'errors': 0, 'skipped': 0}, totals
           print('RECIPE_EXECUTED', totals)
           PY
-      - name: Reapply tested recipe at installed fixed point
+      - name: Reprove original five-file recipe in isolation and current exact successor
         shell: bash
         run: |
           set -euxo pipefail
           mvn -B -ntp -f m3/collections/interop/recipe/pom.xml \
             '-Dtest=M3CollectionsLibraryInteropTest#exactOutputsFixedPointAndOptionalMaterialization' \
-            -Dm3.collections.target="$GITHUB_WORKSPACE" test 2>&1 | tee proof/recipe-delivery.log
+            test 2>&1 | tee proof/recipe-delivery.log
+          python3 m3/collections/interop/qualification/current-census-20261017/verify.py > proof/current-successor-ledger.tsv
           cat m3/collections/interop/recipe-receipt.tsv | tee proof/recipe-receipt.tsv
           git diff --exit-code -- m3/collections/interop/src m3/collections/interop/recipe-receipt.tsv
       - name: Compile unchanged M3 core and verify the dependency boundary
@@ -96,7 +80,7 @@ jobs:
           JAR="$GITHUB_WORKSPACE/proof/m3-collections.jar"
           (cd "$RUNNER_TEMP" && mvn -B -ntp org.apache.maven.plugins:maven-install-plugin:3.1.3:install-file \
             -Dfile="$JAR" -DgroupId=com.m3 -DartifactId=m3-collections -Dversion=0.1.0-SNAPSHOT -Dpackaging=jar -DgeneratePom=true)
-      - name: Compile and execute all 42 adapter and collector tests
+      - name: Compile and execute all 55 admitted adapter and collector tests
         shell: bash
         run: |
           set -euxo pipefail
@@ -108,7 +92,7 @@ jobs:
           assert reports, 'missing actual runtime reports'
           roots = [E.parse(path).getroot() for path in reports]
           totals = {k: sum(int(r.attrib.get(k, 0)) for r in roots) for k in ('tests', 'failures', 'errors', 'skipped')}
-          assert totals == {'tests': 42, 'failures': 0, 'errors': 0, 'skipped': 0}, totals
+          assert totals == {'tests': 55, 'failures': 0, 'errors': 0, 'skipped': 0}, totals
           print('RUNTIME_EXECUTED', totals)
           PY
           javap -classpath m3/collections/interop/target/m3-collections-interop-0.1.0-SNAPSHOT.jar \

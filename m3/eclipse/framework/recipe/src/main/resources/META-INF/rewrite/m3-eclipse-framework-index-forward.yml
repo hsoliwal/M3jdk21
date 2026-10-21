@@ -1,0 +1,7 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.rewrite.M3EclipseFrameworkIndexForward
+displayName: Eclipse OSGi, extension registry and resource-delta indexed forward candidates
+description: Source-seal additive Java21 M3 index/mask projections without replacing Eclipse runtime authority.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: eclipse-framework-m3-index-forward

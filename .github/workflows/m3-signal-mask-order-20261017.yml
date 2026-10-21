@@ -1,0 +1,32 @@
+# Copyright 2026 Hitesh Soliwal and contributors. SPDX-License-Identifier: Apache-2.0
+name: M3JDK21 Signal Mask Order Java JNI
+on:
+  push:
+    branches:
+      - m3/signal-mask-order-receiver-20261017
+  pull_request:
+    paths:
+      - 'm3/collections/src/main/java/com/m3/collections/M3SignalOrder*.java'
+      - 'm3/collections/src/test/java/com/m3/collections/M3SignalOrder*.java'
+      - 'm3/collections/src/main/native/collections/m3_signal_order_jni.c'
+      - 'm3/collections/qualification/signal-mask-order-20261017/**'
+      - '.github/workflows/m3-signal-mask-order-20261017.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  focused-contract:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Exact source seal, Java21 differential, real checked JNI and UBSan
+        env:
+          M3_UBSAN: '1'
+        run: bash m3/collections/qualification/signal-mask-order-20261017/verify.sh
+      - name: Owning Maven JUnit module test (additional product admission gate)
+        run: mvn -B -ntp -f m3/collections/pom.xml -Dtest=M3SignalOrderJUnitTest test

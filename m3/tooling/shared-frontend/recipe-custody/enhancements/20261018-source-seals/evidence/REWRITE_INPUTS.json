@@ -1,0 +1,17 @@
+[
+  {
+    "path": "m3/tooling/shared-frontend/openrewrite/pom.xml",
+    "sha256": "f6dd1edf87821933d42e0adf549c7c180506455c52526a2d3e46471b58a17382",
+    "bytes": 3171
+  },
+  {
+    "path": "m3/tooling/shared-frontend/openrewrite/src/main/java/org/m3jdk/tooling/rewrite/M3RewriteFrontend.java",
+    "sha256": "533ffc0c12992f9a9c5c5232104590f7171b20959145f9fe4acd8da6a30e918f",
+    "bytes": 5753
+  },
+  {
+    "path": "m3/tooling/shared-frontend/openrewrite/src/test/java/org/m3jdk/tooling/rewrite/M3RewriteFrontendTest.java",
+    "sha256": "e7b1ac45e0d23a6dc308b19a4618323303eb4e335fe3a8c8ea549a747cbdf1cf",
+    "bytes": 9752
+  }
+]

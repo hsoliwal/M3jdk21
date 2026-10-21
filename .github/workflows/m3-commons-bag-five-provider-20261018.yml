@@ -1,0 +1,60 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3 Commons Bag real five-provider SDK / JNI
+on:
+  pull_request:
+    paths:
+      - 'm3/collections/interop/src/main/java/com/m3/collections/interop/M3ApacheBag.java'
+      - 'm3/collections/interop/src/test/java/com/m3/collections/interop/M3ApacheBagContractTest.java'
+      - 'm3/collections/qualification/m3-commons-bag-20261018/**'
+      - '.github/workflows/m3-commons-bag-five-provider-20261018.yml'
+  workflow_dispatch:
+jobs:
+  qualified-apache-bag:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: maven
+      - name: Maven OpenRewrite recipe fixed point and drift refusal
+        run: |
+          set -eu
+          mvn -B -ntp -f m3/collections/qualification/m3-commons-bag-20261018/recipe/pom.xml clean verify
+      - name: Verify exact recipe-emitted source and tests
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import hashlib
+          base=Path('m3/collections')
+          resources=base/'qualification/m3-commons-bag-20261018/recipe/src/main/resources/com/synexia/rewrite/m3-commons-bag-20261018'
+          entries=[
+            ('M3ApacheBag.java.txt','interop/src/main/java/com/m3/collections/interop/M3ApacheBag.java','5ff51272c4fd48ef11a09b9138ac2329392bb2a70e2a4fe43fab2889909d224f'),
+            ('M3ApacheBagContractTest.java.txt','interop/src/test/java/com/m3/collections/interop/M3ApacheBagContractTest.java','737dba455e469117b94cd82a48458bcbe2e4c1fd038b0beb578dcc00ccc1982a')
+          ]
+          for name,target,expected in entries:
+              source=(resources/name).read_bytes()
+              target_bytes=(base/target).read_bytes()
+              assert hashlib.sha256(source).hexdigest()==expected,(name,'source seal')
+              assert source==target_bytes,(target,'generated source drift')
+          print('PASS exact canonical source and test template bytes',len(entries))
+          PY
+      - name: Actual owning module and real Apache/JDK/Guava/Eclipse/Spring tests
+        run: |
+          set -eu
+          mvn -B -ntp -f m3/collections/pom.xml clean install
+          mvn -B -ntp -f m3/collections/interop/pom.xml clean verify
+      - name: Existing C17 JNI native-required mask selection
+        run: |
+          set -eu
+          NATIVE="$RUNNER_TEMP/m3-commons-bag-native"
+          mkdir -p "$NATIVE"
+          cc -std=c17 -O1 -g -Wall -Wextra -Werror -fPIC -shared \
+             -fsanitize=undefined -fno-sanitize-recover=all \
+             -I"$JAVA_HOME/include" -I"$JAVA_HOME/include/linux" \
+             m3/collections/src/main/native/collections/m3_index_mask_compactor.c \
+             -o "$NATIVE/libm3_collections_mask.so"
+          mvn -B -ntp -f m3/collections/interop/pom.xml \
+             -Dtest=M3ApacheBagContractTest \
+             -DargLine="-Xcheck:jni -Djava.library.path=$NATIVE" test

@@ -1,0 +1,12 @@
+# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and contributors
+# SPDX-License-Identifier: Apache-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.rewrite.M3FilteredListHistoryRestore20261017
+displayName: Recover lost M3 filtered List predicate-plan and read-only behavioral atoms
+description: >-
+  Exact current-master hash preimage to previously merged Java21 M3FilteredLists
+  history postimage, four exact original oracles and fail-closed fixed-point proof.
+  Preserve live contracts; no JNI or java.util runtime ABI changes.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: m3jdk21-filtered-list-history-restore-20261017

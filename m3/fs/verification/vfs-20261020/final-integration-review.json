@@ -1,0 +1,102 @@
+{
+  "contract_findings": [
+    "Each flattened configured content open owns one observation state and one digest; capture composition retains prior consumers rather than obsolete configured views.",
+    "Input completion publication requires observed EOF, successful primary close and terminal cancellation check. Early close, read/progress/shadow/cleanup failures do not publish a capture.",
+    "User shadows complete before capture construction and consumers. Size inconsistency remains a checked IOException; repeated consumers run in declaration order and fail fast without retry or rollback.",
+    "OwnedInputStream retains failed owner-initiated close evidence, preventing a later monitor close from publishing false successful completion.",
+    "Provider metadata sample time is distinct from provider modification time; no automatic after-read metadata query or atomic source-stability claim is made.",
+    "Complete raw references remain bound by source/coverage caller attestations and exact known-size validation. Optional structures reuse the existing manifest/precompute key and do not add a parser or payload store.",
+    "MFileCapture is detached and immutable; it retains metadata/reference objects without a live provider owner."
+  ],
+  "fresh_qualification_receipts": {
+    "java_command": {
+      "path": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/qualification-capture/command-receipt.json",
+      "sha256": "79a12e18fca640a639d71c56b044ec14a1fd8ebe181f955acf8a2dac9b2ae55a"
+    },
+    "java_vfs_image": {
+      "path": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/qualification-capture/qualification.json",
+      "sha256": "a77146db6880cddcdbc9a2042c844cd748b185352ac375abb75fce3ab3676abd"
+    },
+    "native_c_and_abi": {
+      "path": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/native-capture/qualification.json",
+      "sha256": "8ad787af5db84327867a88b48343beaad501c0f84751fc4ee15ccc5b378de4ac"
+    },
+    "native_runtime_image": {
+      "path": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/qualification-native-capture-receipts/runtime-proof.json",
+      "sha256": "5e3694f765ea6fb5890c3e111a3faaf723f40d6865d6f500f71d9358e5b817a2"
+    },
+    "same_image_vfs_and_native": {
+      "path": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/qualification-native-capture-receipts/combined-image-proof.json",
+      "sha256": "709f013ad75a8a32ed87460318c7cd3377f29dff7bbf9d1c74b22c603cf54b8b"
+    }
+  },
+  "generated_only_receipt_review": {
+    "authored_tests_byte_identical_to_admitted_generated_tests": 6,
+    "module_descriptor_difference": {
+      "changes": [
+        "Configured module version 0.1.0",
+        "ModulePackages inventory of actual packaged classes"
+      ],
+      "inspection": "Actual javap -verbose output inspected for compiled descriptor and JAR descriptor",
+      "name": "module-info.class",
+      "preserved": [
+        "Module name jdk.m3fs",
+        "All 6 requires entries including flags and dependency versions",
+        "All 23 exports",
+        "No opens, uses or provides added"
+      ]
+    },
+    "non_descriptor_class_files_byte_identical_between_qualified_classes_and_jar": 421,
+    "observation_assertions_recorded": 106,
+    "production_class_files": 422,
+    "production_classes_unchanged": true,
+    "production_overlays": false,
+    "runtime_junit_tests_recorded": 105,
+    "runtime_receipt": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/runtime-capture/results.json",
+    "runtime_receipt_sha256": "289237f73eaf9c3a406091af340fcc9d4dda36bbd098ece96a7ed779640fb9b9",
+    "test_output_production_class_name_overlap": {
+      "facade": 0,
+      "facts": 0,
+      "streams": 0
+    }
+  },
+  "inspected_generated_sources": {
+    "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/fs/src/main/java/com/m3/fs/MFile.java": "2cc3a1ef93ac7d208f50a9e6f2a878334b30aec6522c87ee505336c3dfc9cd5c",
+    "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/fs/src/main/java/com/m3/fs/MFileCapture.java": "63e5e0e0d5edebfc8e6913fb3b76b6245490ce89b53125f43040f6912a874344",
+    "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/fs/src/main/java/com/m3/fs/MFileContent.java": "44de25cf6ea3799ad0ecbdc44fc9284cc47a18f277bf77db4e2f92d13d7c5659",
+    "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/fs/src/main/java/com/m3/fs/MFileContentView.java": "4ab8a28c58f993603392a3c0b54c52e0ce71769a0a716124ca4744f0de004c3a",
+    "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/fs/src/main/java/com/m3/fs/MFileShadow.java": "ffbe1900d68dfcd190bb151a1fb2fab32547b461a476f74f84f0ca89e471a7f8",
+    "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/fs/src/main/java/com/m3/fs/MFileStreams.java": "b7083747af91c4bc4bfea41ea80ef8f74a1f63d157cbd72da54b489daa3004a5",
+    "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/fs/src/main/java/com/m3/fs/MFiles.java": "b881c356f46fd5bed68d1e6d78a704b6fae7012c1fd0e576e043ea53bc8468b4"
+  },
+  "qualification_results": {
+    "generated_owned_java_sources": 62,
+    "java_vfs_image": "PASS",
+    "jni_generated_header_exports": "45/45 PASS",
+    "native_c_suites": "12/12 PASS",
+    "native_image_legal_comparisons": 132,
+    "native_required_xcheck_jni_image": "PASS",
+    "same_native_image_named_vfs_capture_consumer": "PASS",
+    "vfs_sources": 237
+  },
+  "result": "NO_NEW_CONCRETE_CORRECTNESS_ISSUE_FOUND",
+  "review_test_reruns": 0,
+  "reviewed_utc": "2026-10-20T11:27:29.754294+00:00",
+  "schema": "M3FS_FINAL_INTEGRATION_READ_ONLY_REVIEW_V1",
+  "scope": "Bounded independent read-only review of the generated capture/default-stream/owner-close contract and generated-only qualification receipts; no optional test reruns",
+  "scope_limits": [
+    "The native lane executes equivalent existing owner targets directly with GCC; CMake and CTest executables were not run.",
+    "The complete Maven lifecycle remains a separate gate.",
+    "Optional FUSE and sanitizer/platform expansion were not run.",
+    "The images use a supplied prebuilt Temurin JDK21; full source-built OpenJDK/M3JDK21 is not qualified."
+  ],
+  "source_seal": {
+    "compiled_donor_java": 237,
+    "donor_custody_java": 311,
+    "generated_outputs_rehashed": 356,
+    "input_files": 389,
+    "path": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/SOURCE_LOCK.capture.tsv",
+    "receiver_base": "73f59218dc4ef1a3ef79aad990e77273db2a2d60",
+    "sha256": "c0de3ce42ee865bef48a037b1734fb606f4bb5acc206154826bb9102b07b9ec1"
+  }
+}

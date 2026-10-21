@@ -1,0 +1,70 @@
+{
+  "schema": "M3_PROGRESS_JOB_ECLIPSE_GITHUB_CROSSCHECK_V1",
+  "result": "PASS",
+  "release_receipt_sha256": "2bb059452121abd8c9b40af4261c1b9e302c4b3717955742e51d885fb6bdebc0",
+  "source_files": [
+    {
+      "url": "https://raw.githubusercontent.com/eclipse-equinox/equinox/f75094c787ff7ef5156be62ae52ad779072e66b1/bundles/org.eclipse.equinox.common/src/org/eclipse/core/runtime/IStatus.java",
+      "revision": "f75094c787ff7ef5156be62ae52ad779072e66b1",
+      "sha256": "571690bf96f357c16153b5b4175b5a7540d5646e475d8beefdeaf3760e02fe0a",
+      "git_blob": "ffa6b6740495c060096772ca9508533d65e87f1a",
+      "bytes": 6545,
+      "result": "EXACT_RELEASE_SOURCE_MATCH"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/eclipse-equinox/equinox/f75094c787ff7ef5156be62ae52ad779072e66b1/bundles/org.eclipse.equinox.common/src/org/eclipse/core/runtime/Status.java",
+      "revision": "f75094c787ff7ef5156be62ae52ad779072e66b1",
+      "sha256": "0d38b6f41e20f232b628bc8c74aceda525b250f7cd08a1a6a98be6e87ae7f347",
+      "git_blob": "f3e8db817f041cf66cb70533cc8ba573361f00e3",
+      "bytes": 15195,
+      "result": "EXACT_RELEASE_SOURCE_MATCH"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/eclipse-equinox/equinox/f75094c787ff7ef5156be62ae52ad779072e66b1/bundles/org.eclipse.equinox.common/src/org/eclipse/core/runtime/MultiStatus.java",
+      "revision": "f75094c787ff7ef5156be62ae52ad779072e66b1",
+      "sha256": "94329eff5f9f5b90b8cbd563eddb69e3038219156133230797c5df2957f86340",
+      "git_blob": "10cf47180b18803449fd795330fdb0cc0cd2476a",
+      "bytes": 6329,
+      "result": "EXACT_RELEASE_SOURCE_MATCH"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/eclipse-platform/eclipse.platform/a0b74bce8fa786009f86cc976917ba4faaf7b6c3/runtime/bundles/org.eclipse.core.jobs/src/org/eclipse/core/runtime/jobs/Job.java",
+      "revision": "a0b74bce8fa786009f86cc976917ba4faaf7b6c3",
+      "sha256": "c4806faba6972feda245853331703c3ba758c0df0850297a67a612685283ba36",
+      "git_blob": "86651cf5f0f2c3bb772a11085ef32ced37302e2e",
+      "bytes": 34637,
+      "result": "EXACT_RELEASE_SOURCE_MATCH"
+    }
+  ],
+  "preserved_distribution_notices": [
+    {
+      "artifact": "org.eclipse.equinox.common-3.21.0.jar",
+      "entry": "about.html",
+      "path": "notices/org.eclipse.equinox.common-3.21.0.jar-about.html.txt",
+      "sha256": "8789732570d4dc6c1c9275f5aea90eee2453615a446343468b62213dfa1bcfd1",
+      "bytes": 1461
+    },
+    {
+      "artifact": "org.eclipse.equinox.common-3.21.0-sources.jar",
+      "entry": "about.html",
+      "path": "notices/org.eclipse.equinox.common-3.21.0-sources.jar-about.html.txt",
+      "sha256": "8789732570d4dc6c1c9275f5aea90eee2453615a446343468b62213dfa1bcfd1",
+      "bytes": 1461
+    },
+    {
+      "artifact": "org.eclipse.core.jobs-3.15.900-sources.jar",
+      "entry": "about.html",
+      "path": "notices/org.eclipse.core.jobs-3.15.900-sources.jar-about.html.txt",
+      "sha256": "ee66d2fb3b4c0d2ed2e7f698bc9ed4e3d6cf77fa5caf40ad03296125db1ac5f0",
+      "bytes": 1460
+    },
+    {
+      "artifact": "org.eclipse.osgi-3.24.300.jar",
+      "entry": "about.html",
+      "path": "notices/org.eclipse.osgi-3.24.300.jar-about.html.txt",
+      "sha256": "b982d0ebf003695c2327f28a75234b49e9bf3be776b96b2350ac7a768acc163e",
+      "bytes": 4678
+    }
+  ],
+  "source_copied_into_java_base": false
+}

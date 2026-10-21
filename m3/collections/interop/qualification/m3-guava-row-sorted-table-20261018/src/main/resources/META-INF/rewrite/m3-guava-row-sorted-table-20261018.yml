@@ -1,0 +1,7 @@
+# SPDX-License-Identifier: Apache-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.Jdk21GuavaRowSortedTable20261018
+displayName: Guava RowSortedTable over sorted M3 row and column index arrays
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: m3-guava-row-sorted-table-20261018

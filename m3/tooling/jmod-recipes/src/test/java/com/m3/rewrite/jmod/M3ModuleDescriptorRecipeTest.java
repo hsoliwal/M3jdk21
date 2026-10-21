@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: Apache-2.0
+// SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
 package com.m3.rewrite.jmod;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -59,4 +60,24 @@ class M3ModuleDescriptorRecipeTest {
         assertThrows(IllegalStateException.class, () -> M3ModuleDescriptorApply.apply(repo, m, dir.resolve("r.tsv")));
         assertTrue(Files.notExists(repo.resolve("m3")));
     }
+    @Test
+    void driftRefusesTheWholePacketBeforeCreatingAnySibling(@TempDir Path dir) throws Exception {
+        Path repo = Files.createDirectories(dir.resolve("repo"));
+        Path drifted = repo.resolve("m3/vendor/third_party-m3/descriptors/demo.lib/module-info.java");
+        Files.createDirectories(drifted.getParent());
+        Files.writeString(drifted, "module demo.lib { }\n", StandardCharsets.UTF_8);
+        Path m = manifest(dir, DESCRIPTOR, M3ModuleDescriptorRecipe.sha256(DESCRIPTOR));
+        String sibling = "module demo.other { }\n";
+        Path generated = dir.resolve("generated/demo.other/module-info.java");
+        Files.createDirectories(generated.getParent());
+        Files.writeString(generated, sibling, StandardCharsets.UTF_8);
+        Files.writeString(m, Files.readString(m) + "demo.other\tdemo-other\tdemo-other.jar\t"
+                + "m3/vendor/third_party-m3/descriptors/demo.other/module-info.java\t"
+                + M3ModuleDescriptorRecipe.sha256(sibling) + "\t" + generated + "\n");
+        assertEquals(3, M3ModuleDescriptorApply.apply(repo, m, dir.resolve("refusal.tsv")));
+        assertEquals("module demo.lib { }\n", Files.readString(drifted));
+        assertTrue(Files.notExists(repo.resolve("m3/vendor/third_party-m3/descriptors/demo.other")));
+        assertTrue(Files.readString(dir.resolve("refusal.tsv")).contains("REFUSED\tdescriptor drift:"));
+    }
+
 }

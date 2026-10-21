@@ -1,0 +1,22 @@
+{
+  "image": "/tmp/m3fs-native-work/runtime-generated-receiver-qualification/image",
+  "input_hash_receipt": "inputs.json",
+  "linked_jni": {
+    "path": "/tmp/m3fs-native-work/runtime-generated-receiver-qualification/image/lib/libm3fs.so",
+    "sha256": "856c1d9bb8ea084970f73b811c3a7a91f2d89921538080ef01e7dfad0111a7a6"
+  },
+  "linked_sqlite": {
+    "path": "/tmp/m3fs-native-work/runtime-generated-receiver-qualification/image/lib/libsqlite3.so.0",
+    "sha256": "2e6eef9a727f081f0d453b4e5e6cbd8b9ef8b6f86cbf7681cbad444d3b0b55c8"
+  },
+  "native_hash_note": "jlink --strip-debug can change copied native bytes; input and image hashes are distinct observations.",
+  "probe": {
+    "M3FS_FEATURE_BITS": "2097151",
+    "M3FS_MODULE_RESOURCE": "jrt:/jdk.m3fs/com/m3/fs/M3FS.class",
+    "M3FS_NATIVE_ORIGIN": "/tmp/m3fs-native-work/runtime-generated-receiver-qualification/image/lib/libm3fs.so",
+    "M3FS_RUNTIME_PROBE": "PASS",
+    "M3FS_SQLITE_ORIGIN": "/tmp/m3fs-native-work/runtime-generated-receiver-qualification/image/lib/libsqlite3.so.0"
+  },
+  "scope": "Linked-image packaging and native probe on the supplied prebuilt JDK 21. This wrapper does not build or qualify the full modified OpenJDK/M3JDK21 tree.",
+  "status": "PASS"
+}

@@ -1,0 +1,5 @@
+operation_atom	selected_permissive_surface	custom_uncovered_composition	validation_receipt	limits
+mirrored ordinal lanes	first-party ordinal lane mechanics (EnumLongMap/EnumSet, #1460)	two int[] lanes, 0 = absent, mirror invariant	invariantCheckerDetectsCorruption; differential both sides	-
+side-symmetric bimap rules	Guava contract (uniqueness, forcePut, entry setValue, replaceAll conflicts)	one code path for side 0 and side 1	mapContract, viewsAndEntries	validation before mutation where Guava corrupts
+weak consistency	EnumMap iterator semantics on both sides	ordinal cursors read live lanes	weakly consistent scenario	-
+serialization	owned stream format (types, size, pairs); inverse resolves to forward.inverse()	InvalidObjectException on bad types/size/mapping	serializationRoundTrip	not wire-compatible with Guava

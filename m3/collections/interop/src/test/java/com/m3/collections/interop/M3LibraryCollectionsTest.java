@@ -124,6 +124,47 @@ final class M3LibraryCollectionsTest {
         assertEquals(expected, actual); assertEquals(new ArrayList<>(expected), new ArrayList<>(actual));
     }
 
+    @Test void guavaListMultimapRetainsArrayListRandomAccessContracts() {
+        var actual = M3LibraryCollections.<String, Integer>guavaListMultimap();
+        var expected = ArrayListMultimap.<String, Integer>create();
+        var actualLive = actual.get("k");
+        var expectedLive = expected.get("k");
+        assertInstanceOf(java.util.RandomAccess.class, actualLive);
+        assertInstanceOf(java.util.RandomAccess.class, expectedLive);
+        assertFalse(actual.containsKey("k"));
+        actualLive.addAll(Arrays.asList(null, 1, 1, 2));
+        expectedLive.addAll(Arrays.asList(null, 1, 1, 2));
+        assertInstanceOf(java.util.RandomAccess.class, actualLive.subList(1, 3));
+        var actualPrevious = actual.replaceValues("k", Arrays.asList(7, 7, null));
+        var expectedPrevious = expected.replaceValues("k", Arrays.asList(7, 7, null));
+        assertInstanceOf(java.util.RandomAccess.class, actualPrevious);
+        assertInstanceOf(java.util.RandomAccess.class, expectedPrevious);
+        assertEquals(expectedPrevious, actualPrevious);
+        assertThrows(UnsupportedOperationException.class, () -> actualPrevious.add(5));
+        assertEquals(expectedLive, actualLive);
+        assertEquals(expected.size(), actual.size());
+        actualLive.set(1, 8);
+        expectedLive.set(1, 8);
+        var actualRemoved = actual.removeAll("k");
+        var expectedRemoved = expected.removeAll("k");
+        assertInstanceOf(java.util.RandomAccess.class, actualRemoved);
+        assertInstanceOf(java.util.RandomAccess.class, expectedRemoved);
+        assertEquals(expectedRemoved, actualRemoved);
+        assertThrows(UnsupportedOperationException.class, () -> actualRemoved.add(5));
+        assertTrue(actualLive.isEmpty());
+        assertFalse(actual.containsKey("k"));
+        actualLive.add(9);
+        expectedLive.add(9);
+        assertEquals(expected.asMap(), actual.asMap());
+        assertEquals(expectedRemoved, actualRemoved);
+        assertEquals(expectedPrevious, actualPrevious);
+        actualLive.subList(0, actualLive.size()).clear();
+        expectedLive.subList(0, expectedLive.size()).clear();
+        assertFalse(actual.containsKey("k"));
+        assertEquals(expected.asMap(), actual.asMap());
+        assertTrue(actual.isEmpty());
+    }
+
     @Test void guavaListMultimapDifferentialTrace() {
         var actual = M3LibraryCollections.<Integer, Integer>guavaListMultimap();
         var expected = ArrayListMultimap.<Integer, Integer>create();

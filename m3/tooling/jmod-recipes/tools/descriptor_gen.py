@@ -25,8 +25,8 @@ def vkey(v):
     return [int(x) if x.isdigit() else x for x in re.split(r"[.\-]", v)]
 
 
-def class_names(jar):
-    """Binary names (a.b.C, a.b.C$D) of the release-21 view of a jar, package-info/module-info excluded."""
+def class_names(jar, release=21):
+    """Binary names (a.b.C, a.b.C$D) of the requested release view of a jar, package-info/module-info excluded."""
     out = set()
     with zipfile.ZipFile(jar) as z:
         for n in z.namelist():
@@ -34,7 +34,7 @@ def class_names(jar):
                 continue
             if n.startswith("META-INF/versions/"):
                 parts = n.split("/")
-                if not parts[2].isdigit() or int(parts[2]) > 21:
+                if not parts[2].isdigit() or int(parts[2]) > release:
                     continue
                 n = "/".join(parts[3:])
             elif n.startswith("META-INF/"):
@@ -43,11 +43,11 @@ def class_names(jar):
     return out
 
 
-def normalize(text, jar, all_classes):
+def normalize(text, jar, all_classes, release=21):
     """Make jdeps output compile: javac refuses `exports` of a package that holds only package-info, and `provides`
     clauses that name classes absent from the jars (jdeps copies META-INF/services lines verbatim). Returns the
     normalized text and the dropped clauses (recorded in DESCRIPTORS.tsv)."""
-    own = class_names(jar)
+    own = class_names(jar, release=release)
     real_pkgs = {c.rsplit(".", 1)[0] for c in own if "." in c}
     dropped = []
 

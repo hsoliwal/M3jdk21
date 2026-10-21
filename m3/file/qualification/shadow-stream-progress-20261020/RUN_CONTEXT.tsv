@@ -1,0 +1,9 @@
+key	value
+date	2026-10-20
+source	hsoliwal/M3JDK21
+source_base	065e3626aac2de62d2f531aec3bed2fca533c9f9
+recipe	hsoliwal/com.synexia#12598
+java_runtime	OpenJDK 21.0.12.1
+build_mode	Java21 strict and interpreted named module
+maven	NOT_INSTALLED_LOCALLY
+jni	NO_NATIVE_METHOD_ADDED
