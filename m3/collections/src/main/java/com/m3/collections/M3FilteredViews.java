@@ -1,3 +1,4 @@
+// Modified 2026 by Hitesh Soliwal and contributors: forward-source-qualified direct first-visible private scans.
 // Modified 2026 by Hitesh Soliwal and contributors: restore strict sequenced refusal and original backed reversal.
 // Modified 2026 by Hitesh Soliwal and contributors: reconcile merged sequenced guards and retain reversed split ordering.
 // Modified 2026 by Hitesh Soliwal and contributors: preserve comparator metadata across filtered splits.
@@ -365,8 +366,11 @@ public final class M3FilteredViews {
                     : (inclusive ? direction <= 0 : direction < 0);
         }
         private E firstVisible(Iterator<E> cursor) {
-            Iterator<E> selected = M3FilteredViews.filtered(cursor, predicate);
-            return selected.hasNext() ? selected.next() : null;
+            while (cursor.hasNext()) {
+                E candidate = cursor.next();
+                if (predicate.test(candidate)) return candidate;
+            }
+            return null;
         }
         private E navigate(E candidate, E query, boolean forward, boolean inclusive) {
             if (candidate == null && !nullIsCandidate(query, forward, inclusive)) return null;
@@ -540,9 +544,13 @@ public final class M3FilteredViews {
          * entries are then skipped by iterator advancement instead of repeated lookup.
          */
         private Entry<K, V> firstVisible(Iterator<Entry<K, V>> cursor) {
-            Iterator<Entry<K, V>> selected = M3FilteredViews.filtered(cursor,
-                    entry -> predicate.test(entry.getKey(), entry.getValue()));
-            return selected.hasNext() ? new SimpleImmutableEntry<>(selected.next()) : null;
+            while (cursor.hasNext()) {
+                Entry<K, V> candidate = cursor.next();
+                if (predicate.test(candidate.getKey(), candidate.getValue())) {
+                    return new SimpleImmutableEntry<>(candidate);
+                }
+            }
+            return null;
         }
         /**
          * Do not turn an out-of-range query on a live bounded map into a
@@ -551,10 +559,9 @@ public final class M3FilteredViews {
          * comparator-backed bounded iterator, retaining each stored key/value.
          */
         private Entry<K, V> boundedEntry(K query, boolean forward, boolean inclusive) {
-            Iterator<Entry<K, V>> cursor;
+            NavigableMap<K, V> range;
             try {
-                cursor = forward ? nav.tailMap(query, inclusive).entrySet().iterator()
-                        : nav.headMap(query, inclusive).descendingMap().entrySet().iterator();
+                range = forward ? nav.tailMap(query, inclusive) : nav.headMap(query, inclusive);
             } catch (IllegalArgumentException outOfRange) {
                 Iterator<Entry<K, V>> bounded = forward
                         ? nav.entrySet().iterator() : nav.descendingMap().entrySet().iterator();
@@ -570,6 +577,8 @@ public final class M3FilteredViews {
                 }
                 return null;
             }
+            Iterator<Entry<K, V>> cursor = forward ? range.entrySet().iterator()
+                    : range.descendingMap().entrySet().iterator();
             return firstVisible(cursor);
         }
         @Override public Entry<K, V> lowerEntry(K key) {

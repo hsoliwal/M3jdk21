@@ -26,6 +26,9 @@
 package java.nio;
 
 import java.util.Objects;
+import java.util.function.IntUnaryOperator;
+import jdk.internal.access.JavaLangAccess;
+import jdk.internal.access.SharedSecrets;
 
 // ## If the sequence is a string, use reflection to share its array
 
@@ -33,12 +36,24 @@ final class StringCharBuffer                                  // package-private
     extends CharBuffer
 {
     CharSequence str;
+    private final IntUnaryOperator codeUnits;
+
+    private static IntUnaryOperator cursorFor(CharSequence source) {
+        if (!(source instanceof String text)) return null;
+        JavaLangAccess access = SharedSecrets.getJavaLangAccess();
+        return access == null ? null : access.stringCodeUnitCursor(text);
+    }
+
+    private char unitAt(int index) {
+        return codeUnits == null ? str.charAt(index) : (char) codeUnits.applyAsInt(index);
+    }
 
     StringCharBuffer(CharSequence s, int start, int end) { // package-private
         super(-1, start, end, s.length(), null);
         int n = s.length();
         Objects.checkFromToIndex(start, end, n);
         str = s;
+        codeUnits = cursorFor(s);
         this.isReadOnly = true;
     }
 
@@ -73,6 +88,7 @@ final class StringCharBuffer                                  // package-private
                              int offset) {
         super(mark, pos, limit, cap, null, offset, null);
         str = s;
+        codeUnits = cursorFor(s);
         this.isReadOnly = true;
     }
 
@@ -86,18 +102,36 @@ final class StringCharBuffer                                  // package-private
     }
 
     public final char get() {
-        return str.charAt(nextGetIndex() + offset);
+        return unitAt(nextGetIndex() + offset);
     }
 
     public final char get(int index) {
-        return str.charAt(checkIndex(index) + offset);
+        return unitAt(checkIndex(index) + offset);
     }
 
     char getUnchecked(int index) {
-        return str.charAt(index + offset);
+        return unitAt(index + offset);
     }
 
-    // ## Override bulk get methods for better performance
+    @Override
+    public CharBuffer get(char[] dst, int off, int len) {
+        if (!(str instanceof String text)) return super.get(dst, off, len);
+        Objects.checkFromIndexSize(off, len, dst.length);
+        int pos = position();
+        if (len > limit() - pos) throw new BufferUnderflowException();
+        text.getChars(pos + offset, pos + offset + len, dst, off);
+        position(pos + len);
+        return this;
+    }
+
+    @Override
+    public CharBuffer get(int index, char[] dst, int off, int len) {
+        if (!(str instanceof String text)) return super.get(index, dst, off, len);
+        Objects.checkFromIndexSize(index, len, limit());
+        Objects.checkFromIndexSize(off, len, dst.length);
+        text.getChars(index + offset, index + offset + len, dst, off);
+        return this;
+    }
 
     public final CharBuffer put(char c) {
         throw new ReadOnlyBufferException();

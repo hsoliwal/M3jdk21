@@ -2048,7 +2048,16 @@ public final class String
         if (len != sb.length()) {
             return false;
         }
-        if (m3() != null) {
+        M3String storage = m3();
+        if (storage != null) {
+            if (len >= 256 && storage.owner() instanceof M3StringTuple) {
+                if (charAt(0) != sb.charAt(0)) return false;
+                M3String.CodeUnitCursor units = new M3String.CodeUnitCursor(storage);
+                for (int index = 1; index < len; index++) {
+                    if (units.at(index) != sb.charAt(index)) return false;
+                }
+                return true;
+            }
             for (int index = 0; index < len; index++) {
                 if (charAt(index) != sb.charAt(index)) {
                     return false;
@@ -2108,7 +2117,16 @@ public final class String
         if (n != length()) {
             return false;
         }
-        if (m3() != null) {
+        M3String storage = m3();
+        if (storage != null) {
+            if (n >= 256 && storage.owner() instanceof M3StringTuple) {
+                if (charAt(0) != cs.charAt(0)) return false;
+                M3String.CodeUnitCursor units = new M3String.CodeUnitCursor(storage);
+                for (int i = 1; i < n; i++) {
+                    if (units.at(i) != cs.charAt(i)) return false;
+                }
+                return true;
+            }
             for (int i = 0; i < n; i++) {
                 if (charAt(i) != cs.charAt(i)) {
                     return false;
@@ -2373,6 +2391,8 @@ public final class String
              (ooffset > (long)other.length() - len)) {
             return false;
         }
+        // Empty regions succeed only after the original ordered bounds/null checks.
+        if (len <= 0) return true;
         M3String leftM3 = m3();
         M3String rightM3 = other.m3();
         if (leftM3 != null || rightM3 != null) {
@@ -2473,6 +2493,8 @@ public final class String
                 || (ooffset > (long)other.length() - len)) {
             return false;
         }
+        // A negative length must not create an invalid canonical slice.
+        if (len <= 0) return true;
         M3String leftM3 = m3();
         M3String rightM3 = other.m3();
         if (leftM3 != null || rightM3 != null) {

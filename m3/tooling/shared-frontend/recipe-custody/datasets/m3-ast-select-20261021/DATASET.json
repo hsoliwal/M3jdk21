@@ -1,0 +1,16 @@
+{
+  "schema": "M3_AST_BUILD_REVERSE_DATASET_V1",
+  "dataset": "m3-ast-select-20261021",
+  "repository": "hsoliwal/M3JDK21",
+  "baseline_ref": "1559f3525dd32937d4851576f231b13f92e4cf55",
+  "crate_name": "m3-ast-build-reverse-20261017-m3-ast-select-20261021",
+  "recipe_name": "com.synexia.m3jdk.AstBuildReverse20261017",
+  "targets": 3,
+  "java_targets": 2,
+  "text_targets": 1,
+  "product_sources_written": false,
+  "engine_changes_from_origin": [
+    "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+    "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedTextSnapshotRecipe.java"
+  ]
+}

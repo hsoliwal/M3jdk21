@@ -27,6 +27,7 @@
  * M3JDK21 direct-index map rendering Copyright 2026 Hitesh Soliwal
  * and contributors. Original OpenJDK GPLv2 with Classpath Exception
  * notices and conditions remain in force.
+ * Modified 2026-10-21: package-private identity metadata for collection views.
  */
 
 package java.util;
@@ -993,6 +994,22 @@ public class IdentityHashMap<K,V>
     }
 
     // Views
+
+    static final int COLLECTION_EQUALS = 0;
+    static final int COLLECTION_IDENTITY_ELEMENTS = 1;
+    static final int COLLECTION_IDENTITY_ENTRIES = 2;
+
+    /** Classifies only this owner's view implementations; no elements are read. */
+    static int collectionViewIdentityKind(Collection<?> view) {
+        if (view instanceof IdentityHashMap<?, ?>.KeySet
+                || view instanceof IdentityHashMap<?, ?>.Values) {
+            return COLLECTION_IDENTITY_ELEMENTS;
+        }
+        if (view instanceof IdentityHashMap<?, ?>.EntrySet) {
+            return COLLECTION_IDENTITY_ENTRIES;
+        }
+        return COLLECTION_EQUALS;
+    }
 
     /**
      * This field is initialized to contain an instance of the entry set

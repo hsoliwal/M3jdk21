@@ -151,6 +151,8 @@ public final class M3SignalOrder {
             Arrays.fill(counts, 0);
             int shift = pass << 3;
             for (long key : sourceKeys) counts[(int) ((key >>> shift) & 255L)]++;
+            // A uniform byte is an identity pass; retain the current source planes.
+            if (counts[(int) ((sourceKeys[0] >>> shift) & 255L)] == sourceKeys.length) continue;
             int start = 0;
             for (int digit = 0; digit < RADIX; digit++) {
                 int occurrences = counts[digit];
@@ -166,7 +168,11 @@ public final class M3SignalOrder {
             long[] k = sourceKeys; sourceKeys = targetKeys; targetKeys = k;
             int[] r = sourceRows; sourceRows = targetRows; targetRows = r;
         }
-        // Eight passes are even, so rows and keys contain the final order.
+        // Skipped identity passes can leave the final order in the scratch planes.
+        if (sourceKeys != keys) {
+            System.arraycopy(sourceKeys, 0, keys, 0, keys.length);
+            System.arraycopy(sourceRows, 0, rows, 0, rows.length);
+        }
     }
 
     /** The scalar projection defines ordering; separation is NOT automatically a domain metric. */

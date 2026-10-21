@@ -1,0 +1,40 @@
+{
+  "schema": "M3_COLLECTION_PUBLIC_EVIDENCE_PACKET_V1",
+  "epoch": "E1",
+  "status": "PASS_SANITIZED_RECEIVING_EVIDENCE_CANDIDATE",
+  "receiverCommit": "f35342202149b98465bb4e9e6be807eb0cf3f762",
+  "canonicalCommit": "0ee3e62241cb1252f2d018a33969f64e66c2b2fe",
+  "files": {
+    "EPOCHS.json": "be99aca4b7c2dd53e9e6383d0b3684190bc712bb3c3bb1fe1e618cddcde40f35",
+    "FAILURES_AND_SCOPE.md": "870e9b9272d30e5ad59c6f29afae2a3bfed4da781ba3f661e3cf3c555ab7eb53",
+    "LINKED_SDK_INPUTS.json": "f2edac9b30fe19f023bb553fb3e5384101049439c0a5d4ee106cc6b6586f8fa7",
+    "LINKED_SDK_OWNERSHIP.json": "8c0b26ecc5581fb57ad605917f2efdfa21e34d067acdad20e88b499a1b285d62",
+    "LINKED_SDK_QUALIFICATION.json": "066d2ba04a2451f9d32b5534b8b5c750e4e6cc9961ec1ba44aaedac53de74140",
+    "LINKED_SDK_RESULTS.json": "cdce7bdc3088d26eff46a8a1a4badf579fa27128ca441b533fe6a9ef12a26a29",
+    "LinkedM3SdkOwnership.java": "3703801e4938946d28d6b14cbef5a9f9cd3453ad77071763d86363cae6eeadac",
+    "NATIVE_ADDENDA.json": "2c7e2537a3b24c80abe2285abd67e0e78b6f98ee44810e8a1ac820fe072ad8cf",
+    "OWNING_PROOF.json": "4fbc24a40e0a78ec10deeacfddf5a42a40fe067f726fb83d7e15f0c9d9b1deaa",
+    "OWNING_RUN.json": "02d8b7ea58d109f6f3992405c4f106b61b2eedd8f28a2a08d054b603632de63b",
+    "RAW_EVIDENCE_SHA256.tsv": "955fb34130513aebd44937fdb0c47fd199a88e752c7a01f0835400e1032da51b",
+    "README.md": "3d0f893186dc0638c565b4d277a2e4cef4631477075a31a26a9cbdde6d60461a",
+    "REPORT_INDEX_DIGESTS.json": "7c7f7059cd46af29b992aa0f6733224198a723abee4ebfac7493c6e4530a01a1",
+    "RERUN_COMMANDS.json": "7bdd99ac802c0a01973af11850671286382698d5ca3dffd7fcd565d2599e8b73",
+    "RESOURCE_COMPARISON.json": "ed21be5b10e5fcfeb819827269122524979f4a0f29d51683ae38d3c3640da9df",
+    "RESOURCE_PROCESS_USAGE.json": "c170bd4c1641ff7f92da5a8c4afcbe2ad37680d4c28f59647e49c93186b1a0cc",
+    "RESOURCE_SAMPLES.csv": "2d73889da9a401d9b6e8c868acbbb3a2c379d340220a702d452f0a2e2b2b06c5"
+  },
+  "fileCountExcludingManifest": 17,
+  "contentBytesExcludingManifest": 288659,
+  "validation": {
+    "jsonParsed": 12,
+    "rawEvidenceHashesVerified": 125,
+    "resourceRows": 96,
+    "pairedWorkloads": 24,
+    "readmePythonSnippetsParsed": 2,
+    "privateAbsolutePathsAbsent": true,
+    "binariesConfigsCredentialsAndXmlExcluded": true,
+    "owningProofIsExactOriginal": true,
+    "linkedImageHashesVerified": true
+  },
+  "publicationBoundary": "Prepared outside product checkout for canonical metadata receipt; this packet does not mutate product sources."
+}

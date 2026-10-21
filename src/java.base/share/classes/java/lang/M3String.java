@@ -20,6 +20,7 @@ import java.util.Arrays;
 import java.util.Objects;
 import java.util.Spliterator;
 import java.util.function.IntConsumer;
+import java.util.function.IntUnaryOperator;
 import java.util.stream.IntStream;
 import java.util.stream.StreamSupport;
 import sun.nio.cs.ArrayEncoder;
@@ -576,7 +577,7 @@ final class M3String implements CharSequence {
      * It resolves each contiguous visible scalar run once, not once per code unit.
      * Only canonical owners and primitive bounds are retained; no text or native pointer copy.
      */
-    static final class CodeUnitCursor {
+    static final class CodeUnitCursor implements IntUnaryOperator {
         private final M3String source;
         private M3StringOwner scalar;
         private int logicalBegin;
@@ -585,6 +586,11 @@ final class M3String implements CharSequence {
 
         CodeUnitCursor(M3String source) {
             this.source = source;
+        }
+
+        @Override
+        public int applyAsInt(int index) {
+            return at(index);
         }
 
         char at(int index) {
@@ -763,6 +769,22 @@ final class M3String implements CharSequence {
             }
         } else if (other.length() != length()) {
             return false;
+        }
+        if (length() >= 256
+                && (owner instanceof M3StringTuple
+                        || that != null && that.owner instanceof M3StringTuple)) {
+            // Reject a first-unit mismatch before allocating temporary cursors.
+            if (charAt(0) != other.charAt(0)) return false;
+            CodeUnitCursor leftUnits = owner instanceof M3StringTuple
+                    ? new CodeUnitCursor(this) : null;
+            CodeUnitCursor rightUnits = that != null && that.owner instanceof M3StringTuple
+                    ? new CodeUnitCursor(that) : null;
+            for (int index = 1; index < length(); index++) {
+                char left = leftUnits == null ? charAt(index) : leftUnits.at(index);
+                char right = rightUnits == null ? other.charAt(index) : rightUnits.at(index);
+                if (left != right) return false;
+            }
+            return true;
         }
         for (int index = 0; index < length(); index++) {
             if (charAt(index) != other.charAt(index)) return false;
@@ -1061,6 +1083,24 @@ final class M3String implements CharSequence {
             if (offset == length() - checked.length() && !sourceFacts.suffixMayMatch(prefixFacts)) {
                 return false;
             }
+        }
+        // Reuse scalar runs for long composite prefixes without a retained leaf index.
+        if (checked.length() >= 256
+                && (owner instanceof M3StringTuple
+                        || checked.owner instanceof M3StringTuple)) {
+            if (charAt(offset) != checked.charAt(0)) return false;
+            CodeUnitCursor sourceUnits = owner instanceof M3StringTuple
+                    ? new CodeUnitCursor(this) : null;
+            CodeUnitCursor prefixUnits = checked.owner instanceof M3StringTuple
+                    ? new CodeUnitCursor(checked) : null;
+            for (int index = 1; index < checked.length(); index++) {
+                char left = sourceUnits == null
+                        ? charAt(offset + index) : sourceUnits.at(offset + index);
+                char right = prefixUnits == null
+                        ? checked.charAt(index) : prefixUnits.at(index);
+                if (left != right) return false;
+            }
+            return true;
         }
         for (int index = 0; index < checked.length(); index++) {
             if (charAt(offset + index) != checked.charAt(index)) return false;

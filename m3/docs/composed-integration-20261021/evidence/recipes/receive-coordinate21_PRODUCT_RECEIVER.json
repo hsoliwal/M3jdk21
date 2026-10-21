@@ -1,0 +1,31 @@
+{
+  "dataset": "receive-coordinate21",
+  "checks": [
+    {
+      "dataset": "receive-coordinate21",
+      "targets": 2,
+      "changes": 2,
+      "mode": "check",
+      "actual_sdk_results": true
+    },
+    {
+      "dataset": "receive-coordinate21",
+      "targets": 2,
+      "changes": 2,
+      "mode": "apply",
+      "actual_sdk_results": true
+    },
+    {
+      "dataset": "receive-coordinate21",
+      "targets": 2,
+      "changes": 0,
+      "mode": "apply",
+      "actual_sdk_results": true
+    }
+  ],
+  "replay_preserved_bytes_and_mtime": true,
+  "postimages": {
+    "src/java.base/share/classes/java/lang/M3StringPool.java": "a4fe0b9327d48748083d92e6212f306bc8e039a76ed437afd6ecee57b903aa6e",
+    "test/jdk/java/lang/String/M3StringCanonicalDagTest.java": "ce58fbed5fb3608d625059d32b565bba80ca1bfa7ed556bdaa4d86ad03454c95"
+  }
+}

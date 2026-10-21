@@ -23,6 +23,12 @@
  * questions.
  */
 
+/*
+ * M3JDK21 collection-view metadata Copyright 2026 Hitesh Soliwal and
+ * contributors. Original OpenJDK GPLv2 with Classpath Exception notices
+ * and conditions remain in force.
+ */
+
 package java.util;
 
 import java.io.IOException;
@@ -85,6 +91,30 @@ import jdk.internal.access.SharedSecrets;
 public class Collections {
     // Suppresses default constructor, ensuring non-instantiability.
     private Collections() {
+    }
+
+    /**
+     * Finds membership metadata through this class's known wrappers only.
+     * Callers must retain the original source for traversal and mutation, so
+     * unwrapping cannot bypass type checks, read-only views or synchronization.
+     * This method reads owner references; it invokes no collection callbacks.
+     */
+    static Collection<?> collectionViewMembershipSource(Collection<?> source) {
+        for (;;) {
+            if (source instanceof UnmodifiableCollection<?> wrapper) {
+                source = wrapper.c;
+            } else if (source instanceof SynchronizedCollection<?> wrapper) {
+                source = wrapper.c;
+            } else if (source instanceof CheckedCollection<?> wrapper) {
+                source = wrapper.c;
+            } else if (source instanceof CheckedMap.CheckedEntrySet<?, ?> wrapper) {
+                source = wrapper.s;
+            } else if (source instanceof SetFromMap<?> wrapper) {
+                source = wrapper.s;
+            } else {
+                return source;
+            }
+        }
     }
 
     // Algorithms

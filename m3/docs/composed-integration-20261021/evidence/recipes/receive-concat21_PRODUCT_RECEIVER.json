@@ -1,0 +1,31 @@
+{
+  "dataset": "receive-concat21",
+  "checks": [
+    {
+      "dataset": "receive-concat21",
+      "targets": 2,
+      "changes": 2,
+      "mode": "check",
+      "actual_sdk_results": true
+    },
+    {
+      "dataset": "receive-concat21",
+      "targets": 2,
+      "changes": 2,
+      "mode": "apply",
+      "actual_sdk_results": true
+    },
+    {
+      "dataset": "receive-concat21",
+      "targets": 2,
+      "changes": 0,
+      "mode": "apply",
+      "actual_sdk_results": true
+    }
+  ],
+  "replay_preserved_bytes_and_mtime": true,
+  "postimages": {
+    "src/java.base/share/classes/java/lang/invoke/StringConcatFactory.java": "732c410330a1137aace06d3b20e0e8a86899b4fe98f15c738d588102383c4052",
+    "test/jdk/java/lang/String/M3StringConcatReferenceDagTest.java": "053c69bd70909731e6509d06f6b29d31a24e2fb669a57f82bf22587e44e839c0"
+  }
+}
