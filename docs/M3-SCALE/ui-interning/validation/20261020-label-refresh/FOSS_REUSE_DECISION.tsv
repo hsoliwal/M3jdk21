@@ -1,0 +1,3 @@
+capability	classification	donor	proof	uncovered_delta
+label-refresh-delta-validation	DIRECT_IMPORT	hsoliwal/M3jdk21@fe5d02986b6364f42df3e6d213bdad42e851784a five source blobs; JUnit Console Standalone1.11.4	Existing exact single method; strict five-source compile; actual JUnit/native receipts and independent review in QUALIFICATION.json	Validation metadata only; no new Java/runner/architecture
+owned-process-supervision	WRAP_EXISTING	Existing Synexia OwnedJobSupervisor and definitions-only qualification/retention primitives; hashes in SOURCE_PINS.json	Retained physical closure and lock retirement receipts	No helper source distributed

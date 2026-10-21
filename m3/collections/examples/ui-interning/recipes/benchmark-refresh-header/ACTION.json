@@ -1,0 +1,158 @@
+{
+  "schema": "m3.existing-recipe.scoped-action.v1",
+  "id": "m3.collections.benchmark.refresh-header",
+  "category": "TSV schema alignment",
+  "kind": "EXISTING_MAVEN_OR_TYPED_ACTION",
+  "descriptor": {
+    "id": "org.openrewrite.text.FindAndReplace",
+    "kind": "OPENREWRITE_RECIPE",
+    "category": "text",
+    "executor": "org.openrewrite.text.FindAndReplace",
+    "artifact": "org.openrewrite:rewrite-core:8.17.1",
+    "options": [
+      {
+        "name": "find",
+        "java_type": "String",
+        "required": true
+      },
+      {
+        "name": "replace",
+        "java_type": "String",
+        "required": false
+      },
+      {
+        "name": "regex",
+        "java_type": "Boolean",
+        "required": false
+      },
+      {
+        "name": "caseSensitive",
+        "java_type": "Boolean",
+        "required": false
+      },
+      {
+        "name": "multiline",
+        "java_type": "Boolean",
+        "required": false
+      },
+      {
+        "name": "dotAll",
+        "java_type": "Boolean",
+        "required": false
+      },
+      {
+        "name": "filePattern",
+        "java_type": "String",
+        "required": false
+      }
+    ],
+    "source": {
+      "repository": "openrewrite/rewrite",
+      "commit": "3bd8271be963c025ce0856072d0f09360e3184cd",
+      "path": "rewrite-core/src/main/java/org/openrewrite/text/FindAndReplace.java",
+      "git_blob": "a24333a90943786185f52d7e733c15d5b1d0a572",
+      "bytes": 6921,
+      "sha256": "b2ca9434d337492a3e6221647ae46887f58d16699d003f23fdc3a9f6917f71cf",
+      "license": "Apache-2.0",
+      "url": "https://github.com/openrewrite/rewrite/blob/3bd8271be963c025ce0856072d0f09360e3184cd/rewrite-core/src/main/java/org/openrewrite/text/FindAndReplace.java"
+    },
+    "availability": "SOURCE_INSPECTED_NOT_RUN",
+    "execution": "HOLD_ENVIRONMENT_AND_FIT",
+    "scope": {
+      "input": "Parsed source set from receiving project",
+      "native_selector_options": [
+        "filePattern"
+      ],
+      "precondition": "FindSourceFiles(filePattern) can fence edit visitors; scanning and generation require independent complete source/output fencing.",
+      "universal_scope_flag": false,
+      "selector_roles": {
+        "filePattern": "INPUT_PATH_MATCHER"
+      }
+    },
+    "checks": [
+      "validateAll and real recipe discovery",
+      "parser and type attribution",
+      "exact requested input paths and allowed read/write/create/delete/move sets",
+      "preimage hashes and source custody",
+      "positive, unrelated input, drift refusal and fresh-run fixed point",
+      "target compile, contract and behavior gates"
+    ],
+    "effects": [
+      "VISITOR_POSSIBLE_EDIT_REQUIRES_EXACT_EFFECT_ENUMERATION"
+    ],
+    "runner": "Existing rewrite-maven-plugin5.23.1 dryRunNoFork/runNoFork after all prerequisites",
+    "notes": [
+      "Matching sources become PlainText; do not chain into Java/XML/YAML AST transforms without a separate verified reparse boundary.",
+      "Java Pattern/Matcher semantics, not PCRE/JavaScript; explicit caseSensitive/multiline/dotAll; no intrinsic regex timeout.",
+      "filePattern semicolon means OR; absent pattern searches all sources. Capture groups use Matcher replacement semantics.",
+      "Literal-mode source only escapes dollars in replacement; backslash replacement behavior needs discriminators. Marker prevents repeated replacement in one in-memory run; fresh parse fixed point must be separately proved.",
+      "No plaintextOnly option exists in this version."
+    ],
+    "lifecycle_phases": [
+      "VISIT"
+    ],
+    "effect_metadata_is_permission": false
+  },
+  "options": {
+    "find": "frame_us_p90\\n",
+    "replace": "frame_us_p90\\\\trefresh_ms\\\\n",
+    "regex": false,
+    "caseSensitive": true,
+    "multiline": false,
+    "dotAll": false,
+    "filePattern": "m3/collections/examples/ui-interning/M3ImmediateLabelBench.java"
+  },
+  "config": "m3/collections/examples/ui-interning/recipes/benchmark-refresh-header.yml",
+  "scope": {
+    "repository": "hsoliwal/M3JDK21",
+    "exact_file": "m3/collections/examples/ui-interning/M3ImmediateLabelBench.java",
+    "preimage_sha256": "f76e2d948d44ee0222b07ff78651a3dfe276696275af07da44820f44330bb902",
+    "allowed_postimage_sha256": "67848c52b378520219b23afc6a5ad11befeaa0848cefa7da731d9a6ee69ddc35",
+    "read_set": "Isolated fixture POM, exact target, same-text control and pinned runtime/dependency inputs",
+    "write_set": [
+      "m3/collections/examples/ui-interning/M3ImmediateLabelBench.java"
+    ],
+    "create_delete_move_set": [],
+    "filePattern_is_discovery_fence": false,
+    "recipe_contains_intrinsic_preimage_refusal": false
+  },
+  "invocation": {
+    "plugin": "org.openrewrite.maven:rewrite-maven-plugin:5.23.1",
+    "goals": [
+      "dryRunNoFork",
+      "runNoFork",
+      "dryRunNoFork"
+    ],
+    "lifecycle_fork": false,
+    "properties": {
+      "rewrite.activeRecipes": "com.synexia.m3.agent.BenchmarkRefreshHeader20261020",
+      "rewrite.configLocation": "<isolated fixture config>/benchmark-refresh-header.yml",
+      "rewrite.plainTextMasks": "**/*.java",
+      "rewrite.exclusions": "**/pom.xml",
+      "skipMavenParsing": "true",
+      "rewrite.pomCacheEnabled": "false",
+      "rewrite.checkstyleDetectionEnabled": "false",
+      "rewrite.failOnInvalidActiveRecipes": "true",
+      "reportOutputDirectory": "<new empty report directory outside project>"
+    },
+    "project": "Unchanged proof POM SHA256 56567ab0175c47dbbada68bec8fe0fd9bbe027d6174c5cefef695a0b7283d448 in isolated project; source roots empty; local repository read-tail/write-head explicitly bounded.",
+    "future_environment_gate": "Close resolved TEST graph pinning and optional JGit shell discovery before a new invocation; current fixture proof does not grant generic execution permission."
+  },
+  "DAG": [
+    "Seal exact input and allowed output sets",
+    "dryRunNoFork",
+    "Check one target/header hunk and escaping",
+    "runNoFork",
+    "Verify exact postimage and unchanged control",
+    "Fresh dryRunNoFork with zero patch",
+    "Fresh strict JDK21 compile with exact four M3 dependencies",
+    "Compare protected API captures"
+  ],
+  "evaluation": {
+    "selected": "Existing FindAndReplace plus declarative options expresses the literal operation without a new Java recipe or dispatcher.",
+    "alternatives": "Whole-file snapshot replacement requires a reviewed postimage resource; a parameterized literal recipe records intent directly.",
+    "performance": "Not measured; no benchmark performance claim."
+  },
+  "fixture_qualification": "QUALIFICATION.json",
+  "global_execution_promotion": false
+}

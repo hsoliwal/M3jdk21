@@ -1,0 +1,176 @@
+{
+  "schema": "synexia.ui.retained-class-custody.v1",
+  "runtime_only": true,
+  "source_commit": "fe5d02986b6364f42df3e6d213bdad42e851784a",
+  "receiving_head": "5fd166bf68ebd9f05306ffb35199e298cfcb6f5a",
+  "sources": "SOURCE_PINS.json",
+  "source_count": 5,
+  "source_bytes": 54438,
+  "prior_result": {
+    "path": "RESULT.json",
+    "bytes": 1883,
+    "sha256": "dc479307f11b8c68d32c0edf1e0b68e966736b811030dfb06d3d5b40c29dc83f"
+  },
+  "prior_compile_claim": {
+    "path": "compile.CLAIM.json",
+    "bytes": 2772,
+    "sha256": "959de3a6ad1c2b5ae9533537b7f94eeef180c2e105c3ba6bb1b5714f8e3b533e"
+  },
+  "prior_compile_native": {
+    "path": "compile.NATIVE.json",
+    "bytes": 452,
+    "sha256": "a83973525b50943370458074d9d185151af197af7e261903e59547aaa15cde70"
+  },
+  "prior_output_manifest": {
+    "path": "OUTPUT_MANIFEST.json",
+    "bytes": 2983,
+    "sha256": "6b6f5288568be23962d4756ab5c44ad32ffe15e27f4165de6b60fb93babb7ca0"
+  },
+  "classes": [
+    {
+      "path": "com/m3/collections/M3LabelLanes.class",
+      "bytes": 6592,
+      "sha256": "3919763cb4befb642aaafd5acd6fef41b18cf89206e1bc6c524f021eb8fe05d5"
+    },
+    {
+      "path": "com/m3/collections/M3LabelLanesTest.class",
+      "bytes": 11365,
+      "sha256": "f584f61fb8e2a12bfd4b2773e72cb4beee1d84152020568b7c45dc0b9e1e3832"
+    },
+    {
+      "path": "com/m3/collections/M3LabelPool$CanonicalIds.class",
+      "bytes": 393,
+      "sha256": "89cb03096ea136fb149f90d2671f6b5b5bbff5239b58dedbef2c49d120439a1e"
+    },
+    {
+      "path": "com/m3/collections/M3LabelPool.class",
+      "bytes": 11987,
+      "sha256": "ef6a7f2ad3bff1b375eee00124cd2b92055a64e37bf4236edb7ad9d911a3329b"
+    },
+    {
+      "path": "com/m3/collections/M3ShortLabel.class",
+      "bytes": 3705,
+      "sha256": "35b15e636b957bac4955414214e57aaf7aa25cfb541bd0fb2b5cc7dad7d40260"
+    },
+    {
+      "path": "com/m3/collections/M3TextExtentCache$Measurer.class",
+      "bytes": 397,
+      "sha256": "6aa25af75c42bb88a294423e7700222161f300b05eea16328013a149797032f5"
+    },
+    {
+      "path": "com/m3/collections/M3TextExtentCache.class",
+      "bytes": 5549,
+      "sha256": "ed4bbb6b73e02684f5fbbf76a17259b9faafddcb275af1feeb23c3063f8df0b7"
+    }
+  ],
+  "prior_files": [
+    {
+      "path": "classes/com/m3/collections/M3LabelLanes.class",
+      "bytes": 6592,
+      "sha256": "3919763cb4befb642aaafd5acd6fef41b18cf89206e1bc6c524f021eb8fe05d5"
+    },
+    {
+      "path": "classes/com/m3/collections/M3LabelLanesTest.class",
+      "bytes": 11365,
+      "sha256": "f584f61fb8e2a12bfd4b2773e72cb4beee1d84152020568b7c45dc0b9e1e3832"
+    },
+    {
+      "path": "classes/com/m3/collections/M3LabelPool$CanonicalIds.class",
+      "bytes": 393,
+      "sha256": "89cb03096ea136fb149f90d2671f6b5b5bbff5239b58dedbef2c49d120439a1e"
+    },
+    {
+      "path": "classes/com/m3/collections/M3LabelPool.class",
+      "bytes": 11987,
+      "sha256": "ef6a7f2ad3bff1b375eee00124cd2b92055a64e37bf4236edb7ad9d911a3329b"
+    },
+    {
+      "path": "classes/com/m3/collections/M3ShortLabel.class",
+      "bytes": 3705,
+      "sha256": "35b15e636b957bac4955414214e57aaf7aa25cfb541bd0fb2b5cc7dad7d40260"
+    },
+    {
+      "path": "classes/com/m3/collections/M3TextExtentCache$Measurer.class",
+      "bytes": 397,
+      "sha256": "6aa25af75c42bb88a294423e7700222161f300b05eea16328013a149797032f5"
+    },
+    {
+      "path": "classes/com/m3/collections/M3TextExtentCache.class",
+      "bytes": 5549,
+      "sha256": "ed4bbb6b73e02684f5fbbf76a17259b9faafddcb275af1feeb23c3063f8df0b7"
+    },
+    {
+      "path": "compile.CLAIM.json",
+      "bytes": 2772,
+      "sha256": "959de3a6ad1c2b5ae9533537b7f94eeef180c2e105c3ba6bb1b5714f8e3b533e"
+    },
+    {
+      "path": "compile.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "compile.NATIVE.json",
+      "bytes": 452,
+      "sha256": "a83973525b50943370458074d9d185151af197af7e261903e59547aaa15cde70"
+    },
+    {
+      "path": "compile.START.json",
+      "bytes": 235,
+      "sha256": "7754793ce70c588219403557a3e751e6848fa1f23a8ff2f367ebc58a417054a8"
+    },
+    {
+      "path": "EXECUTION.CLAIM.json",
+      "bytes": 1131,
+      "sha256": "a2786973f057956ef8f9f3fd8869fafe02085eb6fedb57f76620b931165c1417"
+    },
+    {
+      "path": "INDEPENDENT_POSTRUN_REVIEW.json",
+      "bytes": 2356,
+      "sha256": "7e77186c21b40685f20593e0aca16a89d21a03accdaa346d1f1973ec4ca8e5ee"
+    },
+    {
+      "path": "JVM_LOCK_OWNERSHIP.json",
+      "bytes": 170,
+      "sha256": "30c3961da3cc4dc9ddb45a6548f482ff50b41102cef99afb2d0143c458b008ac"
+    },
+    {
+      "path": "OUTPUT_MANIFEST.json",
+      "bytes": 2983,
+      "sha256": "6b6f5288568be23962d4756ab5c44ad32ffe15e27f4165de6b60fb93babb7ca0"
+    },
+    {
+      "path": "reports/TEST-junit-jupiter.xml",
+      "bytes": 5404,
+      "sha256": "e2e9b1da06d9277faadea1a2de2dd8e9e45fc7b9c2aebc2274a7b2c921cea6d4"
+    },
+    {
+      "path": "RESULT.json",
+      "bytes": 1883,
+      "sha256": "dc479307f11b8c68d32c0edf1e0b68e966736b811030dfb06d3d5b40c29dc83f"
+    },
+    {
+      "path": "test.CLAIM.json",
+      "bytes": 2285,
+      "sha256": "b521e47427d148ed6f62fa1883dd7fb6bf8549fca7feffa52a848d381bf90716"
+    },
+    {
+      "path": "test.log",
+      "bytes": 479,
+      "sha256": "1697990370deae5e244532e82d2f4ff3e58596033c625fbfdc131d435d9e8b11"
+    },
+    {
+      "path": "test.NATIVE.json",
+      "bytes": 452,
+      "sha256": "3d8d7fe3938852ea4b60c7b45306a56abe3e4b29cf113d08bd4b1556061122a5"
+    },
+    {
+      "path": "test.START.json",
+      "bytes": 235,
+      "sha256": "17343c6dbb75464d0b23aa706225d7ecf21eb60e2404f6e3f80e412e8d998dfb"
+    }
+  ],
+  "proof": "Original strict release21/proc:none/implicit:none/Xlint:all/Werror compile produced exact seven major65 classes with empty diagnostics. All original21 files match before/after the new selector; no new classes or compile.",
+  "compile_replayed": false,
+  "refresh_method_replayed": false
+}

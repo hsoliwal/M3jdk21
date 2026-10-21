@@ -1,0 +1,31 @@
+{
+  "schema": "synexia.junit.single-case-projection.v1",
+  "original_report": {
+    "bytes": 5437,
+    "sha256": "d056df12d7412fbd833b86d9f1aa255112177227059222f0ec8500fdf454e871"
+  },
+  "tests": 1,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "cases": [
+    {
+      "classname": "com.m3.collections.M3LabelLanesTest",
+      "name": "evictedLabelsLeaveTheExtentCache()"
+    }
+  ],
+  "stdout_summary": {
+    "found": 1,
+    "skipped": 0,
+    "started": 1,
+    "aborted": 0,
+    "successful": 1,
+    "failed": 0
+  },
+  "omitted": [
+    "XML system properties",
+    "system-out/system-err",
+    "environment and host properties",
+    "elapsed time interpretation"
+  ]
+}

@@ -48,7 +48,7 @@ public final class M3ImmediateLabelBench {
 	public static void main (String [] args) throws IOException {
 		Path data = Path.of (args [0]);
 		try (PrintWriter tsv = new PrintWriter (Files.newBufferedWriter (Path.of (args [1]), StandardCharsets.UTF_8))) {
-			tsv.print ("table\tstore\trows\tcolumns\tretained_mb\tbytes_per_cell\timmediate_cell_pct\tpool_entries\tfill_ms\tframe_us_p50\tframe_us_p90\n");
+			tsv.print ("table\tstore\trows\tcolumns\tretained_mb\tbytes_per_cell\timmediate_cell_pct\tpool_entries\tfill_ms\tframe_us_p50\tframe_us_p90\trefresh_ms\n");
 			run ("explorer-S-drive", load (data.resolve ("fs-sample-1m.tsv"), 4, 1), tsv);
 			run ("json-viewer", load (data.resolve ("json-labels.tsv"), 2, 1), tsv);
 			run ("problems-view-x50", load (data.resolve ("problems.tsv"), 6, 50), tsv);
@@ -93,7 +93,27 @@ public final class M3ImmediateLabelBench {
 			entries = Integer.toString (lanes.pool ().size ());
 		}
 		long [] frames = frames (model, columns, rows);
-		return String.format ("%s\t%s\t%d\t%d\t%.1f\t%.2f\t%s\t%s\t%d\t%d\t%d", table, store, rows, columns, bytes / 1048576.0, bytes / (double) ((long) rows * columns), immediatePct, entries, fillMs, frames [0], frames [1]);
+		long refreshMs = refresh (model, source);
+		return String.format ("%s\t%s\t%d\t%d\t%.1f\t%.2f\t%s\t%s\t%d\t%d\t%d\t%d", table, store, rows, columns, bytes / 1048576.0, bytes / (double) ((long) rows * columns), immediatePct, entries, fillMs, frames [0], frames [1], refreshMs);
+	}
+
+	/**
+	 * A full refresh that hands every cell its text again as a fresh String (what
+	 * a label provider does on refresh); milliseconds. The copies are made
+	 * before the clock starts.
+	 */
+	static long refresh (Object model, String [] [] source) {
+		if (!(model instanceof M3LabelLanes lanes)) return 0;
+		int columns = source.length, rows = source [0].length;
+		String [] [] again = new String [columns] [rows];
+		for (int c = 0; c < columns; c++) {
+			for (int r = 0; r < rows; r++) again [c] [r] = String.valueOf (source [c] [r].toCharArray ());
+		}
+		long start = System.nanoTime ();
+		for (int c = 0; c < columns; c++) {
+			for (int r = 0; r < rows; r++) lanes.setText (r, c, again [c] [r]);
+		}
+		return (System.nanoTime () - start) / 1_000_000;
 	}
 
 	/** The model under test; Strings are copied so that cells do not share the source's instances. */

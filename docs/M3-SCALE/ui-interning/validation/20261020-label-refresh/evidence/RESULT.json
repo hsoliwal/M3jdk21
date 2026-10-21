@@ -1,0 +1,61 @@
+{
+  "schema": "synexia.ui.single-existing-method-result.v1",
+  "status": "PASS_EXISTING_LABEL_REFRESH_SINGLE_METHOD",
+  "plan_sha256": "3908834c6b3558bc19f924efaac8072d890a63629da8cefb7009a68fcbca5c01",
+  "source_commit": "fe5d02986b6364f42df3e6d213bdad42e851784a",
+  "native_outcomes": [
+    {
+      "pid": 14128,
+      "creation_FILETIME": "134369913696715390",
+      "assigned_to_job": true,
+      "resumed": true,
+      "termination_requested": false,
+      "terminal": true,
+      "cleanup_errors": [],
+      "thread_handle_closed": true,
+      "same_handle_wait": 0,
+      "exitcode": 0,
+      "job_active_processes": 0,
+      "job_total_processes": 2,
+      "process_handle_closed": true,
+      "job_handle_closed": true,
+      "all_owned_native_handles_closed": true,
+      "supervisor_error": null
+    },
+    {
+      "pid": 50004,
+      "creation_FILETIME": "134369913720730392",
+      "assigned_to_job": true,
+      "resumed": true,
+      "termination_requested": false,
+      "terminal": true,
+      "cleanup_errors": [],
+      "thread_handle_closed": true,
+      "same_handle_wait": 0,
+      "exitcode": 0,
+      "job_active_processes": 0,
+      "job_total_processes": 2,
+      "process_handle_closed": true,
+      "job_handle_closed": true,
+      "all_owned_native_handles_closed": true,
+      "supervisor_error": null
+    }
+  ],
+  "own_jvm_lock_released": true,
+  "new_Java_or_test_authored": false,
+  "performance_admission": false,
+  "GUI_or_benchmark_admission": false,
+  "tests": 1,
+  "classes": 7,
+  "class_major": 65,
+  "expected_method": "refreshIsADeltaNotARebuild",
+  "source_inputs_unchanged": true,
+  "final_capacity": {
+    "k_free_bytes": 9293455360,
+    "fixture_logical_bytes": 56586,
+    "physical_free_bytes": 8440946688,
+    "commit_free_bytes": 33869324288,
+    "combined_logical_bytes": 48507344
+  },
+  "owned_processes_physically_terminal": true
+}

@@ -1,0 +1,48 @@
+{
+  "schema": "synexia.ui.existing-label-eviction-result.v1",
+  "status": "PASS_ONE_NEW_EXISTING_LABEL_EVICTION_METHOD",
+  "plan_sha256": "5b47bd0cce0ae23a0199d413009df6023df25e64eb0f7234f484b49efec713a8",
+  "selected_method": "com.m3.collections.M3LabelLanesTest#evictedLabelsLeaveTheExtentCache",
+  "source_commit": "fe5d02986b6364f42df3e6d213bdad42e851784a",
+  "native_outcomes": [
+    {
+      "pid": 4456,
+      "creation_FILETIME": "134370170412561391",
+      "assigned_to_job": true,
+      "resumed": true,
+      "termination_requested": false,
+      "terminal": true,
+      "cleanup_errors": [],
+      "thread_handle_closed": true,
+      "same_handle_wait": 0,
+      "exitcode": 0,
+      "job_active_processes": 0,
+      "job_total_processes": 2,
+      "process_handle_closed": true,
+      "job_handle_closed": true,
+      "all_owned_native_handles_closed": true,
+      "supervisor_error": null
+    }
+  ],
+  "storage_protection": "ACTIVE",
+  "own_jvm_lock_released": true,
+  "compile_replayed": false,
+  "refresh_test_replayed": false,
+  "new_Java_or_test_authored": false,
+  "GUI_or_performance_admission": false,
+  "tests": 1,
+  "retained_classes": 7,
+  "retained_class_major": 65,
+  "source_and_retained_proof_unchanged": true,
+  "new_class_files": 0,
+  "final_capacity": {
+    "k_free_bytes": 9297117184,
+    "fixture_logical_bytes": 11411,
+    "physical_free_bytes": 19755356160,
+    "commit_free_bytes": 37907324928,
+    "combined_logical_bytes": 50829935
+  },
+  "whole_C_write_audit": false,
+  "per_child_loaded_image_and_CWD": "NOT_OBSERVED",
+  "owned_processes_physically_terminal": true
+}

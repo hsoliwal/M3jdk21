@@ -1,0 +1,7 @@
+The existing `M3LabelLanesTest#refreshIsADeltaNotARebuild` method passes after strict fresh compilation of its five unchanged sources. Across 1,000 equal-content refreshes it retains label IDs, the widest result and pool/cache miss counters. Renaming one row adds exactly one pool miss and one measurement miss; the pool contains five labels.
+
+`ACTION.json` describes this fixed validation action using the existing JDK compiler and JUnit ConsoleLauncher. `SOURCE_PINS.json` binds the five source blobs at PR1606 head `fe5d02986b6364f42df3e6d213bdad42e851784a`, the offline JUnit artifact, and selected tool inputs. `QUALIFICATION.json` links the actual zero-exit native receipts, empty compiler log, one-test stdout/XML result and independent review. Path substitutions in the argv projection are explicit; it is not a copy of the original command bytes.
+
+This proof uses standard pooled labels and a synthetic deterministic measurer. It does not qualify actual fonts, GUI lifecycle, visible-window offsets, immediate labels, eviction, the complete test class or benchmark performance. Elapsed time in the unchanged stdout is not interpreted. Global recipe admission remains `HOLD_ENVIRONMENT_AND_FIT`.
+
+This addition contains validation data and small retained receipt/log bytes. It adds no Java, JAR, class files, source snapshots or execution helper. Native JOB supervision remains an external coordinator requirement. Publication head/ref/blob verification belongs in a separate delivery receipt.
