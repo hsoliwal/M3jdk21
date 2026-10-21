@@ -1,0 +1,25 @@
+gate	receipt_status	evidence_or_command	disposition
+CANONICAL_RECIPE_OWNER	SOURCE_COMMITTED_DRAFT	Synexia #12711, #12702, #12688, #12671, #12641; source and provenance verified	Hold for actual OpenRewrite Recipe.run/fixed point
+EXACT_GIT_SOURCE_RECEIVING	READBACK_MATCH_20_FILES	RECEIVED_DONORS.tsv; offline verify_received_blobs.py	Pass source custody only
+BASE_SOURCE_CUSTODY	INHERITED_PR_1653	Stacked on exact #1653 head 1a0d32bde2aa0dab48486a7a5dc0259920dd946b	Does not mean master is fully reconciled
+JNI_DONOR_ISOLATED	HISTORICAL_SCOPED_PASS	#1669 Java21/C17 -Xcheck:jni 5003 checks on API-shape prototype	Not repeated on this combined branch
+JNI_ORIGINAL_C_HEADERS	NOT_RUN	javac -h, strict C17 compile, symbol check, -Xcheck:jni in actual m3/collections module	Required
+FIRST_VISIBLE_DONOR	HISTORICAL_SCOPED_PASS	#1643 64 normal / 1104 failure trace cases + deterministic tape	Re-execute on combined branch
+GRAMMAR_DONOR	HISTORICAL_SCOPED_PASS	#1661 415994 grammar checks each mixed/-Xint donor modes	Re-execute on combined branch
+COMPILER_FACT_DONOR	HISTORICAL_SCOPED_PASS	#1649 syntax geometry 16-case standalone source proof	Parser runner not wired to new contract
+DEQUE_QUERY_EQUALITY	RECEIVED_MERGED_MASTER_EXACT	Master #1633 class and contract bytes identical	Owning Maven/JUnit pending
+JTREG_BASELINE	RECEIVED_DONOR_EXACT	#1640 stand-alone 4-case JDK21 jtreg witness	Actual new installed product jtreg pending
+M3FILE_PROGRESS_DONOR	HISTORICAL_SCOPED_PASS	#1653 Java21 standalone 20014 checks, source/callback proof	Owning module JUnit pending
+MAVEN_OPENREWRITE_ACTUAL	NOT_RUN	mvn -B -f canonical Synexia recipe crates test and apply/replay	Required before merge
+OWNING_MAVEN_MODULES	NOT_RUN	mvn -B -f m3/file/pom.xml test; m3/collections/pom.xml test	Required
+PARSER_JMOD_PATCHED_JDK	NOT_RUN	m3/tooling/module-packs/parser/build.py lint compile test runtime	Required
+M3JDK21_MAKE_IMAGES	NOT_RUN	Complete Java21/HotSpot release/server source-built image	Required
+JNI_JTREG_GC	NOT_RUN	-jdk21-source-image, -Xcheck:jni, jtreg, JNI header/exceptions and lifetime	Required
+OTHER_OS_ARCHITECTURES	NOT_RUN	Linux x86_64, Windows, macOS, Android/ART separate ABI profiles	Required
+PERFORMANCE_COMPARISONS	NOT_RUN	CPU, allocated heap, JNI crossing cost and native-memory per workload	No speedup claim
+FIVE_LIBRARY_SUPERSET	NOT_RUN	JDK, Guava, Eclipse Collections, Apache Commons, Spring contract differential	No blanket compatibility claim
+LATEST_MASTER_FORWARD_RECONCILIATION	PARTIAL	Included already-merged #1633 two-file fix; other newer master edits not reconciled	Do not merge wholesale
+CONFLICTED_COMPARATOR_REPRESENTATIVES	HELD	#1659 changes same M3FilteredViews; must forward via separate source-sealed recipe	Do not overwrite qualified atom
+PARALLEL_HOTSPOT_LIFECYCLE	HELD	#1661 ThreadPerTaskExecutor/M3FileTaskWindow subset excluded	Needs dedicated JDK product proof
+PROVIDER_AWARE_M3FILE_DELTAS	HELD	#1608 detached file version/snapshot conflicts with #1624 M3FileTree owner	Reconcile by original-provider semantics
+MAVEN_GRADLE_BUILD_API	HELD	M3JDK21/Maven/Gradle owned semantic ABI and build-delta consumers	No fake second parser/AST
