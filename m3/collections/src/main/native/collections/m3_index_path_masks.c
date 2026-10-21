@@ -118,11 +118,87 @@ static int m3_matches_cached(JNIEnv *env, const M3StageCache *cache, jint slot) 
     return 1;
 }
 
+
+/* Bulk contiguous physical-index path execution: one native entry for the whole
+ * selection. Keep per-state reads checked (physical offsets may be arbitrary),
+ * but bring logical offsets and accepted row IDs across JNI in bounded regions.
+ * A source array is borrowed only during this operation; no GC-unsafe pointer
+ * is retained, and the output remains a detached, exact-sized primitive array.
+ */
+enum { M3_PATH_BULK = 256 };
+
+static jintArray m3_select_cached_contiguous(JNIEnv *env, jintArray rows,
+        jintArray offsets, const M3StageCache *cache, jint first, jint count) {
+    jint slots[M3_PATH_BULK];
+    jint row_ids[M3_PATH_BULK];
+    jint selected_indices[M3_PATH_BULK];
+    jint selected_values[M3_PATH_BULK];
+    jsize matching = 0;
+    jintArray result = NULL;
+
+    for (jint pass = 0; pass < 2; ++pass) {
+        if (pass == 1) {
+            result = (*env)->NewIntArray(env, matching);
+            if (result == NULL) return NULL;
+        }
+        jsize written = 0;
+        for (jint position = 0; position < count;) {
+            jint remaining = count - position;
+            jsize chunk = remaining < M3_PATH_BULK ? remaining : M3_PATH_BULK;
+            (*env)->GetIntArrayRegion(env, offsets, first + position, chunk, slots);
+            if ((*env)->ExceptionCheck(env)) return NULL;
+
+            jsize selected = 0;
+            for (jsize index = 0; index < chunk; ++index) {
+                int keep = m3_matches_cached(env, cache, slots[index]);
+                if (keep < 0) return NULL;
+                if (keep == 0) continue;
+                if (pass == 0) {
+                    matching++;
+                } else {
+                    if (selected >= matching - written) {
+                        m3_throw(env, "java/util/ConcurrentModificationException",
+                                "mask stages changed during JNI selection");
+                        return NULL;
+                    }
+                    selected_indices[selected++] = index;
+                }
+            }
+            if (pass == 1 && selected > 0) {
+                (*env)->GetIntArrayRegion(env, rows, first + position, chunk, row_ids);
+                if ((*env)->ExceptionCheck(env)) return NULL;
+                for (jsize index = 0; index < selected; ++index) {
+                    selected_values[index] = row_ids[selected_indices[index]];
+                }
+                (*env)->SetIntArrayRegion(env, result, written, selected, selected_values);
+                if ((*env)->ExceptionCheck(env)) return NULL;
+                written += selected;
+            }
+            position += chunk;
+        }
+        if (pass == 1) {
+            if (written != matching) {
+                m3_throw(env, "java/util/ConcurrentModificationException",
+                        "mask stages changed during JNI selection");
+                return NULL;
+            }
+            return result;
+        }
+    }
+    return NULL;
+}
+
 static jintArray m3_select_cached(JNIEnv *env, jintArray rows, jintArray offsets,
         jobjectArray planes, jintArray required, jintArray forbidden,
         jint first, jint count, jint stride, jsize stages) {
     M3StageCache cache = {0};
     if (!m3_prepare_stages(env, planes, required, forbidden, stages, &cache)) return NULL;
+    if (stride == 1) {
+        jintArray output = m3_select_cached_contiguous(
+                env, rows, offsets, &cache, first, count);
+        m3_release_stages(env, &cache);
+        return output;
+    }
     jintArray result = NULL;
     jsize matching = 0;
     for (jint pass = 0; pass < 2; ++pass) {
