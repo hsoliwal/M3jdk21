@@ -373,6 +373,12 @@ public final class CollectionViews {
         }
 
         @Override
+        public Spliterator<E> spliterator() {
+            return new SelectionSpliterator<>(backing.spliterator(), predicate,
+                    Spliterator.DISTINCT, null);
+        }
+
+        @Override
         public boolean equals(Object other) {
             if (other == this) {
                 return true;
@@ -439,6 +445,14 @@ public final class CollectionViews {
         @Override
         public Comparator<? super E> comparator() {
             return sorted.comparator();
+        }
+
+        /** Owner order is authoritative, including bounded and descending views. */
+        @Override
+        public Spliterator<E> spliterator() {
+            return new SelectionSpliterator<>(sorted.spliterator(), super.predicate,
+                    Spliterator.DISTINCT | Spliterator.SORTED | Spliterator.ORDERED,
+                    sorted.comparator());
         }
 
         @Override
@@ -600,17 +614,28 @@ public final class CollectionViews {
     private static final class SelectionSpliterator<E> implements Spliterator<E>, Consumer<E> {
         private final Spliterator<E> source;
         private final Predicate<? super E> predicate;
+        private final int guaranteed;
+        private final Comparator<? super E> ownerComparator;
         private Consumer<? super E> action;
         private boolean delivered;
 
         private SelectionSpliterator(Spliterator<E> source, Predicate<? super E> predicate) {
+            this(source, predicate, 0, null);
+        }
+
+        private SelectionSpliterator(Spliterator<E> source, Predicate<? super E> predicate,
+                int guaranteed, Comparator<? super E> ownerComparator) {
             this.source = source;
             this.predicate = predicate;
+            this.guaranteed = guaranteed;
+            this.ownerComparator = ownerComparator;
         }
 
         @Override
         public boolean tryAdvance(Consumer<? super E> consumer) {
             Objects.requireNonNull(consumer, "action");
+            Consumer<? super E> enclosingAction = action;
+            boolean enclosingDelivered = delivered;
             action = consumer;
             delivered = false;
             try {
@@ -619,7 +644,8 @@ public final class CollectionViews {
                 }
                 return delivered;
             } finally {
-                action = null;
+                action = enclosingAction;
+                delivered = enclosingDelivered;
             }
         }
 
@@ -643,7 +669,7 @@ public final class CollectionViews {
         @Override
         public Spliterator<E> trySplit() {
             Spliterator<E> prefix = source.trySplit();
-            return prefix == null ? null : new SelectionSpliterator<>(prefix, predicate);
+            return prefix == null ? null : new SelectionSpliterator<>(prefix, predicate, guaranteed, ownerComparator);
         }
 
         @Override
@@ -653,12 +679,12 @@ public final class CollectionViews {
 
         @Override
         public int characteristics() {
-            return source.characteristics() & (ORDERED | DISTINCT | SORTED | NONNULL | IMMUTABLE);
+            return (source.characteristics() & (ORDERED | DISTINCT | SORTED | NONNULL | IMMUTABLE)) | guaranteed;
         }
 
         @Override
         public Comparator<? super E> getComparator() {
-            return source.getComparator();
+            return (guaranteed & SORTED) != 0 ? ownerComparator : source.getComparator();
         }
     }
 
