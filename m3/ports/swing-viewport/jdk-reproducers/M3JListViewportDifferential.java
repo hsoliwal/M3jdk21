@@ -421,8 +421,42 @@ public final class M3JListViewportDifferential {
     void run(int steps) {
         check(true);
         for (step = 0; step < steps; step++) {
+            int logStart = log.size();
+            int before = fullMeasuresOnDeltas();
             step();
             check(step % 10 == 0);
+            deltaGate(logStart, before, fullMeasuresOnDeltas());
+        }
+    }
+
+    /** Steps that hand the list a delta: they must never make the M3 measure every row (brief rule 24). */
+    static final java.util.Set<String> DELTAS = java.util.Set.of("add", "removeRange", "set", "clear");
+    static int deltaSteps;
+
+    /** The M3 measure's count of full measures that delta events caused. */
+    int fullMeasuresOnDeltas() {
+        try {
+            Field f = BasicListUI.class.getDeclaredField("m3Measure");
+            f.setAccessible(true);
+            Object measure = f.get(m3.getUI());
+            return (int) measure.getClass().getMethod("fullMeasuresOnDeltas").invoke(measure);
+        } catch (ReflectiveOperationException e) {
+            throw new IllegalStateException("M3 measure path not installed", e);
+        }
+    }
+
+    /** Fails when a delta step made the M3 list measure every row. */
+    void deltaGate(int logStart, int before, int after) {
+        if (logStart >= log.size()) {
+            return;
+        }
+        String[] first = log.get(logStart).trim().split(" ");
+        if (first.length < 2 || !DELTAS.contains(first[1])) {
+            return;
+        }
+        deltaSteps++;
+        if (after != before) {
+            fail("full measure on a delta step (rule 24)", "0", String.valueOf(after - before));
         }
     }
 
@@ -456,6 +490,7 @@ public final class M3JListViewportDifferential {
         });
         return "M3JListViewportDifferential seeds " + seeds + " steps " + steps + " passed " + passed[0]
                 + " failed " + failures.size() + " " + failures + "; pixel comparisons " + pixelChecks
-                + "; checks on M3 offsets " + m3Steps + "; partial M3 layouts " + partialLayouts;
+                + "; checks on M3 offsets " + m3Steps + "; partial M3 layouts " + partialLayouts
+                + "; full measures on " + deltaSteps + " delta steps: 0";
     }
 }
