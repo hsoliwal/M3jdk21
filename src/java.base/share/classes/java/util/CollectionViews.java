@@ -302,7 +302,15 @@ public final class CollectionViews {
         @Override
         @SuppressWarnings("unchecked")
         public boolean contains(Object candidate) {
-            return backing.contains(candidate) && predicate.test((E) candidate);
+            // Collection membership is defined by the stored occurrence, not by a
+            // caller-provided equal probe. Equivalence does not imply that a
+            // predicate depending on other fields agrees for both instances.
+            for (E stored : backing) {
+                if (Objects.equals(candidate, stored) && visible(stored)) {
+                    return true;
+                }
+            }
+            return false;
         }
 
         @Override
@@ -325,8 +333,47 @@ public final class CollectionViews {
         }
 
         @Override
+        @SuppressWarnings("unchecked")
         public boolean remove(Object candidate) {
-            return contains(candidate) && backing.remove(candidate);
+            // A List can contain a hidden and visible occurrence that compare
+            // equal. Removing by probe would delete the wrong physical element.
+            // Indexed deletion also admits Lists whose iterators are read-only
+            // but whose indexed removal is writable (CopyOnWriteArrayList).
+            if (backing instanceof List<?>) {
+                List<E> list = (List<E>) backing;
+                int physical = 0;
+                for (E stored : list) {
+                    if (Objects.equals(candidate, stored) && visible(stored)) {
+                        list.remove(physical);
+                        return true;
+                    }
+                    physical++;
+                }
+                return false;
+            }
+            Iterator<E> cursor = backing.iterator();
+            boolean skippedEqual = false;
+            while (cursor.hasNext()) {
+                E stored = cursor.next();
+                if (Objects.equals(candidate, stored)) {
+                    if (visible(stored)) {
+                        try {
+                            cursor.remove();
+                            return true;
+                        } catch (UnsupportedOperationException unsupported) {
+                            // A Set has at most one equal occurrence. For other
+                            // owners, direct removal is safe only if no earlier
+                            // hidden equal occurrence could be removed instead.
+                            if (backing instanceof Set<?> || !skippedEqual) {
+                                return backing.remove(stored);
+                            }
+                            throw unsupported;
+                        }
+                    }
+                    skippedEqual = true;
+                }
+            }
+            return false;
         }
 
         @Override
@@ -370,6 +417,40 @@ public final class CollectionViews {
     private static class FilteredSet<E> extends FilteredCollection<E> implements Set<E> {
         private FilteredSet(Set<E> source, Predicate<? super E> predicate) {
             super(source, predicate);
+        }
+
+        /**
+         * Preserve owner membership before resolving stored visibility. Identity
+         * sets may retain equals-equal references, so an exact reference wins.
+         */
+        @Override
+        public boolean contains(Object candidate) {
+            if (!backing.contains(candidate)) return false;
+            for (E stored : backing) {
+                if (stored == candidate) return predicate.test(stored);
+            }
+            return super.contains(candidate);
+        }
+
+        @Override
+        public boolean remove(Object candidate) {
+            if (!backing.contains(candidate)) return false;
+            Iterator<E> cursor = backing.iterator();
+            while (cursor.hasNext()) {
+                E stored = cursor.next();
+                if (stored == candidate) {
+                    if (!predicate.test(stored)) return false;
+                    try {
+                        cursor.remove();
+                        return true;
+                    } catch (UnsupportedOperationException unsupported) {
+                        // Preserve the existing Set owner fallback, including
+                        // CopyOnWriteArraySet's read-only traversal cursors.
+                        return backing.remove(stored);
+                    }
+                }
+            }
+            return super.remove(candidate);
         }
 
         @Override
