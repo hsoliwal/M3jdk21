@@ -95,14 +95,24 @@ static jlong m3_window_scan_range(JNIEnv *env, jintArray rows, jbyteArray states
             jint span = (jint) offsets[matches - 1] - first_match + 1;
             (*env)->GetIntArrayRegion(env, rows, next + first_match, span, values);
             if ((*env)->ExceptionCheck(env)) return (jlong) -1;
-            for (jint i = 0; i < matches; i++) {
-                selected[pending++] = values[(jint) offsets[i] - first_match];
-                written++;
-                if (pending == M3_MASK_WINDOW_CHUNK || written == limit) {
-                    (*env)->SetIntArrayRegion(env, output,
-                            output_offset + written - pending, pending, selected);
-                    if ((*env)->ExceptionCheck(env)) return (jlong) -1;
-                    pending = 0;
+            /* A contiguous selected span already is the compacted output. Bypass
+             * identity compaction only when the original loop would flush exactly
+             * this batch here. JNI call order, ranges and failure points stay equal. */
+            if (matches == span && pending == 0
+                    && (matches == M3_MASK_WINDOW_CHUNK || matches == remaining)) {
+                (*env)->SetIntArrayRegion(env, output, output_offset + written, matches, values);
+                if ((*env)->ExceptionCheck(env)) return (jlong) -1;
+                written += matches;
+            } else {
+                for (jint i = 0; i < matches; i++) {
+                    selected[pending++] = values[(jint) offsets[i] - first_match];
+                    written++;
+                    if (pending == M3_MASK_WINDOW_CHUNK || written == limit) {
+                        (*env)->SetIntArrayRegion(env, output,
+                                output_offset + written - pending, pending, selected);
+                        if ((*env)->ExceptionCheck(env)) return (jlong) -1;
+                        pending = 0;
+                    }
                 }
             }
         }
