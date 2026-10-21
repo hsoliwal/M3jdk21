@@ -153,6 +153,20 @@ public final class M3StateMaskHistogram {
         requireMask(forbiddenMask);
         if ((requiredMask & forbiddenMask) != 0) return 0;
         if (forbiddenMask == 0) return supersets[requiredMask];
+        // Each matching state is requiredMask | subset(unconstrained).
+        // Enumerate the smaller Boolean cube: either forbidden-bit
+        // inclusion/exclusion over precomputed supersets, or an exact-state
+        // sum over free-bit subsets. Eight state bits bound both to <=16
+        // bucket visits, regardless of source size or duplicate offsets.
+        int freeMask = ~(requiredMask | forbiddenMask) & (STATES - 1);
+        if (Integer.bitCount(freeMask) < Integer.bitCount(forbiddenMask)) {
+            int count = 0;
+            for (int subset = freeMask;; subset = (subset - 1) & freeMask) {
+                count += exact[requiredMask | subset];
+                if (subset == 0) break;
+            }
+            return count;
+        }
         long count = 0;
         int bits = forbiddenMask;
         for (int subset = bits;; subset = (subset - 1) & bits) {
