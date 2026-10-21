@@ -2,6 +2,7 @@
 # SPDX-FileCopyrightText: 2026 Hitesh Soliwal and contributors
 # SPDX-License-Identifier: Apache-2.0
 """Build the optional M3 collection modules with the existing JMOD/image packager."""
+# Modified 2026: package the complete existing mask/window and path-mask JNI owners.
 import argparse
 import hashlib
 import json
@@ -17,7 +18,52 @@ PORT_CLASSES = ("M3PrimitiveIndexView", "M3PrimitiveSoaStore", "M3PrimitiveKind"
 CONTRACTS = ("jdk.m3.collections.M3FilteredViewsContract",
              "jdk.m3.collections.M3MutableFilteredViewsContract",
              "com.m3.util.M3PrimitiveIndexViewFilterContract")
-NATIVE_SYMBOL = "Java_com_m3_collections_M3IndexMaskCompactor_selectNative"
+# These are the existing javac-generated ABI names, not a count-only allowlist.
+NATIVE_OWNERS = {
+    "M3IndexMaskCompactor": ("m3_index_mask_compactor.c", (
+        "selectWindowNative", "selectLongWindowNative", "positionsAbiNative",
+        "selectPositionsNative", "positionsMasksAbiNative", "selectPositionsMasksNative",
+        "rangeAbiNative", "selectRangeNative", "selectNative")),
+    "M3IndexMaskWindow": ("m3_index_mask_window.c", ("scanNative", "scanBoundedNative")),
+    "M3IndexPathMasks": ("m3_index_path_masks.c", ("selectNative",)),
+}
+NATIVE_LIBRARIES = {
+    "m3_collections_mask": ("M3IndexMaskCompactor", "M3IndexMaskWindow"),
+    "m3_collections_pathmask": ("M3IndexPathMasks",),
+}
+NATIVE_CONTRACTS = (
+    ("M3IndexMaskCompactorSelfTest", "PASS M3IndexMaskCompactorSelfTest"),
+    ("M3IndexMaskWindowSelfTest", "PASS M3_INDEX_MASK_WINDOW"),
+    ("M3BudgetedMaskWindowContract", "BUDGETED_MASK_WINDOW_PASS"),
+    ("M3IndexPathMasksSelfTest", "PASS M3IndexPathMasksSelfTest"),
+    ("M3PhysicalStateSnapshotProof", "PASS M3PhysicalStateSnapshotProof"),
+    ("M3MaskedSortFusionContract", "PASS M3MaskedSortFusionContract"),
+)
+
+
+def expected_symbols(owner):
+    return {"Java_com_m3_collections_" + owner + "_" + method
+            for method in NATIVE_OWNERS[owner][1]}
+
+
+def require_symbols(actual, expected, label):
+    """Refuse missing, unknown or duplicate JNI entries before packaging."""
+    actual = list(actual)
+    if len(actual) != len(set(actual)):
+        raise ValueError("duplicate JNI symbol in " + label)
+    missing, unexpected = set(expected) - set(actual), set(actual) - set(expected)
+    if missing or unexpected:
+        raise ValueError(label + " JNI ABI differs: missing=" + repr(sorted(missing))
+                         + " unexpected=" + repr(sorted(unexpected)))
+
+
+def header_symbols(text):
+    return re.findall(r"\bJNICALL\s+(Java_[A-Za-z0-9_]+)\s*\(", text)
+
+
+def export_symbols(text):
+    return [line.split()[-1] for line in text.splitlines()
+            if line.split() and line.split()[-1].startswith("Java_")]
 
 
 def command(log, *args, expected=None):
@@ -56,18 +102,22 @@ def qualify(java, javac, modules, pack, repo, output, native, linked):
         command(output / (label + "-" + name.rsplit(".", 1)[1] + ".log"), java,
                 "-Xcheck:jni", *common, "--patch-module", "jdk.m3.collections=" + str(patch),
                 "-m", "jdk.m3.collections/" + name, expected="PASS")
-    mask_test = repo / "m3/collections/src/test/java/com/m3/collections/M3IndexMaskCompactorSelfTest.java"
+    test_root = repo / "m3/collections/src/test/java/com/m3/collections"
+    native_tests = [test_root / (name + ".java") for name, _ in NATIVE_CONTRACTS]
     native_patch = output / (label + "-native-contracts")
     native_patch.mkdir()
     command(output / (label + "-native-oracle-javac.log"), javac,
             "-source", "21", "-target", "21", "-Xlint:all,-module", "-Werror", "-proc:none",
-            *common, "--patch-module", "com.m3.collections=" + str(mask_test.parent),
-            "-d", native_patch, mask_test)
+            *common, "--patch-module", "com.m3.collections=" + str(test_root),
+            "-d", native_patch, *native_tests)
     library_path = [] if linked else ["-Djava.library.path=" + str(native)]
-    command(output / (label + "-native-oracle.log"), java, "-Xcheck:jni", *library_path,
-            *common, "--patch-module", "com.m3.collections=" + str(native_patch),
-            "-m", "com.m3.collections/com.m3.collections.M3IndexMaskCompactorSelfTest",
-            "--native", expected="JNI=true")
+    for name, marker in NATIVE_CONTRACTS:
+        for mode, arguments in (("java", ()), ("native", ("--native",))):
+            command(output / (label + "-" + mode + "-" + name + ".log"), java,
+                    "-Xcheck:jni", *library_path, *common,
+                    "--patch-module", "com.m3.collections=" + str(native_patch),
+                    "-m", "com.m3.collections/com.m3.collections." + name,
+                    *arguments, expected=marker)
 
 
 def main():
@@ -92,9 +142,16 @@ def main():
     view_sources = sorted((pack / "src/main/java").rglob("*.java"))
     port = repo / "m3/ports/collections/src/main/java/com/m3/util"
     view_sources.extend(port / (name + ".java") for name in PORT_CLASSES)
-    native_source = repo / "m3/collections/src/main/native/collections/m3_index_mask_compactor.c"
+    native_root = repo / "m3/collections/src/main/native/collections"
+    native_sources = [native_root / source for source, _ in NATIVE_OWNERS.values()]
+    oracle_sources = [repo / "m3/collections/src/test/java/com/m3/collections" / (name + ".java")
+                      for name, _ in NATIVE_CONTRACTS]
+    oracle_sources += [pack / "src/test/java" / (name.replace(".", "/") + ".java")
+                       for name in CONTRACTS]
     packager = repo / "m3/tooling/jmod-recipes/tools/jmod_pack.py"
-    for source in [*collection_sources, *view_sources, native_source, packager]:
+    inputs = [*collection_sources, *view_sources, *native_sources, *oracle_sources,
+              packager, Path(__file__).resolve()]
+    for source in inputs:
         source.resolve(strict=True)
     if not collection_sources or not (pack / "src/main/java/module-info.java").is_file():
         raise ValueError("complete collection source modules required")
@@ -104,25 +161,42 @@ def main():
         directory.mkdir()
     source_receipt = ["path\tsha256"]
     source_receipt.extend(str(path.relative_to(repo)) + "\t" + digest(path)
-                          for path in sorted([*collection_sources, *view_sources, native_source, packager]))
+                          for path in sorted(set(inputs)))
     (output / "COMPILED_INPUTS.tsv").write_text("\n".join(source_receipt) + "\n", encoding="utf-8")
     for name, sources in (("com.m3.collections", collection_sources), ("jdk.m3.collections", view_sources)):
         command(output / (name + "-javac.log"), home / "bin/javac", "--release", "21",
                 "-Xlint:all,-module", "-Werror", "-proc:none", "-h", headers,
                 "-d", modules / name, *sources)
-    header = headers / "com_m3_collections_M3IndexMaskCompactor.h"
-    if NATIVE_SYMBOL not in header.read_text():
-        raise ValueError("existing JNI header contract is missing")
-    library = native / "libm3_collections_mask.so"
-    command(output / "native-compile.log", os.environ.get("CC", "cc"), "-std=c17", "-O2",
-            "-fPIC", "-shared", "-Wall", "-Wextra", "-Werror",
-            "-I" + str(home / "include"), "-I" + str(home / "include/linux"),
-            "-include", header, "-o", library, native_source)
-    symbols = command(output / "native-symbols.log", "nm", "-D", "--defined-only", library)
-    exported_jni = {line.split()[-1] for line in symbols.splitlines()
-                    if line.split() and line.split()[-1].startswith("Java_")}
-    if exported_jni != {NATIVE_SYMBOL}:
-        raise ValueError("unexpected JNI export set: " + repr(exported_jni))
+    objects = output / "native-objects"
+    objects.mkdir()
+    native_receipts = {}
+    for library_name, owners in NATIVE_LIBRARIES.items():
+        library = native / ("lib" + library_name + ".so")
+        compiled = []
+        expected = set()
+        for owner in owners:
+            header = headers / ("com_m3_collections_" + owner + ".h")
+            required = expected_symbols(owner)
+            require_symbols(header_symbols(header.read_text()), required, owner + " generated header")
+            if expected.intersection(required):
+                raise ValueError("duplicate JNI owner in " + library_name)
+            expected.update(required)
+            source = native_root / NATIVE_OWNERS[owner][0]
+            obj = objects / (owner + ".o")
+            command(output / (owner + "-native-compile.log"), os.environ.get("CC", "cc"),
+                    "-std=c17", "-O2", "-fPIC", "-Wall", "-Wextra", "-Werror",
+                    "-I" + str(home / "include"), "-I" + str(home / "include/linux"),
+                    "-include", header, "-c", source, "-o", obj)
+            compiled.append(obj)
+        command(output / (library_name + "-native-link.log"), os.environ.get("CC", "cc"),
+                "-shared", "-o", library, *compiled)
+        symbols = command(output / (library_name + "-native-symbols.log"),
+                          "nm", "-D", "--defined-only", library)
+        require_symbols(export_symbols(symbols), expected, library_name + " exports")
+        native_receipts[library_name] = {"symbols": sorted(expected),
+            "source_owners": list(owners), "native_sha256": digest(library),
+            "generated_headers": {owner: digest(headers / ("com_m3_collections_" + owner + ".h"))
+                                  for owner in owners}}
     qualify(home / "bin/java", home / "bin/javac", modules, pack, repo, output, native, False)
     rows = ["artifact\tversion\tjar\tmodule\trequires\tdisposition"]
     for module in ("com.m3.collections", "jdk.m3.collections"):
@@ -144,20 +218,26 @@ def main():
     for tool in ("java", "javac", "jar", "jmod", "jlink", "jdeps"):
         if not os.access(image / "bin" / tool, os.X_OK):
             raise ValueError("missing developer tool: " + tool)
-    linked_library = image / "lib" / library.name
     # The existing packager passes --strip-debug to jlink. Compare against that
     # exact packaging transform; a raw object-file hash would reject valid images.
-    normalized_library = output / "reference-strip-debug.so"
-    command(output / "native-strip-debug-reference.log", "objcopy", "--strip-debug",
-            library, normalized_library)
-    if not linked_library.is_file() or digest(linked_library) != digest(normalized_library):
-        raise ValueError("linked native library differs from the exact strip-debug reference")
+    for library_name, proof in native_receipts.items():
+        library = native / ("lib" + library_name + ".so")
+        linked_library = image / "lib" / library.name
+        normalized_library = output / (library_name + "-reference-strip-debug.so")
+        command(output / (library_name + "-strip-debug-reference.log"), "objcopy", "--strip-debug",
+                library, normalized_library)
+        if not linked_library.is_file() or digest(linked_library) != digest(normalized_library):
+            raise ValueError("linked native library differs from exact strip-debug reference: " + library_name)
+        symbols = command(output / (library_name + "-linked-symbols.log"),
+                          "nm", "-D", "--defined-only", linked_library)
+        require_symbols(export_symbols(symbols), proof["symbols"], library_name + " linked exports")
+        proof["linked_native_sha256"] = digest(linked_library)
     qualify(image / "bin/java", image / "bin/javac", modules, pack, repo, output, native, True)
     receipt = {"status": "PASS", "modules": ["com.m3.collections", "jdk.m3.collections"],
                "existing_collection_source_files": len(collection_sources),
                "optional_projection_source_files": len(view_sources),
-               "native_symbol": NATIVE_SYMBOL, "native_sha256": digest(library),
-               "linked_native_sha256": digest(linked_library),
+               "native_libraries": native_receipts,
+               "native_contracts": [name for name, _ in NATIVE_CONTRACTS],
                "native_packaging_transform": "objcopy --strip-debug reference; exact linked byte parity",
                "native_required_on_host_and_image": True, "jdk_home": str(home),
                "toolchain_release_sha256": digest(home / "release"),

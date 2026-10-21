@@ -1,0 +1,43 @@
+{
+  "schema": "M3_PENDING_CORRECTION_INDEX/1",
+  "events": [
+    "3e877856e3f14207fece0d3f69c627ef420480da61a94b4210b4504ef5fc7616",
+    "115767aa323e2ea6db2f6de6b13641157abc0f68ef45bbcfeeaeabc7e84698dd",
+    "9f00fe04f180f10e0c2f0ba247d676add86c7afee28a11065a7f0fe69238b01d",
+    "7b087f5faa490efcdc3b783cd86ca790c87e4fd00b6a4580e5754f5cad84ac5b",
+    "d3f3be895c7fa277090fb372a22564b989448ea42b55be0aa3c16f5b7df37086",
+    "c12353186399bbacdc60cedb4b0f33cb0179f8f7c146f1d87bc3b27d2104f36b",
+    "e110bc3de345c14e28b8719a8f8d93d708891c963a19d0b43a4edc25fffbf622"
+  ],
+  "admission": "PENDING",
+  "conformance_receipt": {
+    "path": "proof/memory-conformance-001/RESULT.json",
+    "sha256": "439ce4868a8e4d6274006e04ec88a4d5ac09044959ed6449f7e4b841cfa5d6b3"
+  },
+  "follow_up_receipts": [
+    {
+      "path": "proof/receiving-observations-001/RESOURCE_FRAMEWORK_RESULT.json",
+      "sha256": "2bb91fcf18bc5589fef785fc5bf151e11fec9c4dda2c3d18a59561ffdfa5f589"
+    },
+    {
+      "path": "proof/receiving-observations-001/SCHEDULED_TARGET_RESULT.json",
+      "sha256": "d3d012bf73991c9b1bd1dfcd5f2227cd02e090dc199b0bfc43b217e108cda1d8"
+    },
+    {
+      "path": "proof/receiving-observations-001/ECLIPSE_CORE_RUNTIME_RESULT.json",
+      "sha256": "f117fa9737bb59dcc6d138afbe5a543260ac2b04d507e7c5c6bd0b8b1b592e5a"
+    },
+    {
+      "path": "proof/receiving-observations-001/ECLIPSE_CORE_RUNTIME_INPUTS_AND_COMMAND.json",
+      "sha256": "0d98c120510514da032a1719c20c751c774e7996de04bfdd2cf75767e887ced9"
+    },
+    {
+      "path": "proof/sdk-003-workflow-successor-offline/RESULT.json",
+      "sha256": "72ea68db76198ff1f8d4e55f7df9bd6c5a40c1cc075abbfb851a7a343ff9e0ff"
+    }
+  ],
+  "predecessor_checkpoint": {
+    "path": "memory/FINAL_RESULT-002.json",
+    "sha256": "50061ce8f2d14c8e7f9799bdba83b4b16ff564d53ab2d1e904f07b2d2469d2ee"
+  }
+}

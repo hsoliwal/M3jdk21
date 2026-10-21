@@ -1,0 +1,367 @@
+Compiled from "Worker.java"
+public class org.eclipse.core.internal.jobs.Worker extends java.lang.Thread {
+  private static int nextWorkerNumber;
+
+  private volatile org.eclipse.core.internal.jobs.InternalJob currentJob;
+
+  private final org.eclipse.core.internal.jobs.WorkerPool pool;
+
+  private final java.lang.String generalName;
+
+  static {};
+    Code:
+       0: iconst_0
+       1: putstatic     #16                 // Field nextWorkerNumber:I
+       4: return
+
+  public org.eclipse.core.internal.jobs.Worker(org.eclipse.core.internal.jobs.WorkerPool);
+    Code:
+       0: aload_0
+       1: getstatic     #16                 // Field nextWorkerNumber:I
+       4: dup
+       5: iconst_1
+       6: iadd
+       7: putstatic     #16                 // Field nextWorkerNumber:I
+      10: invokedynamic #22,  0             // InvokeDynamic #0:makeConcatWithConstants:(I)Ljava/lang/String;
+      15: invokespecial #26                 // Method java/lang/Thread."<init>":(Ljava/lang/String;)V
+      18: aload_0
+      19: aload_0
+      20: invokevirtual #29                 // Method getName:()Ljava/lang/String;
+      23: putfield      #33                 // Field generalName:Ljava/lang/String;
+      26: aload_0
+      27: aload_1
+      28: putfield      #35                 // Field pool:Lorg/eclipse/core/internal/jobs/WorkerPool;
+      31: aload_0
+      32: aload_1
+      33: getfield      #37                 // Field org/eclipse/core/internal/jobs/WorkerPool.defaultContextLoader:Ljava/lang/ClassLoader;
+      36: invokevirtual #43                 // Method setContextClassLoader:(Ljava/lang/ClassLoader;)V
+      39: return
+
+  public org.eclipse.core.runtime.jobs.Job currentJob();
+    Code:
+       0: aload_0
+       1: getfield      #50                 // Field currentJob:Lorg/eclipse/core/internal/jobs/InternalJob;
+       4: checkcast     #52                 // class org/eclipse/core/runtime/jobs/Job
+       7: areturn
+
+  private org.eclipse.core.runtime.IStatus handleException(org.eclipse.core.internal.jobs.InternalJob, java.lang.Throwable);
+    Code:
+       0: getstatic     #56                 // Field org/eclipse/core/internal/jobs/JobMessages.jobs_internalError:Ljava/lang/String;
+       3: aload_1
+       4: invokevirtual #61                 // Method org/eclipse/core/internal/jobs/InternalJob.getName:()Ljava/lang/String;
+       7: invokestatic  #64                 // Method org/eclipse/osgi/util/NLS.bind:(Ljava/lang/String;Ljava/lang/Object;)Ljava/lang/String;
+      10: astore_3
+      11: new           #70                 // class org/eclipse/core/runtime/Status
+      14: dup
+      15: iconst_4
+      16: ldc           #76                 // String org.eclipse.core.jobs
+      18: iconst_2
+      19: aload_3
+      20: aload_2
+      21: invokespecial #78                 // Method org/eclipse/core/runtime/Status."<init>":(ILjava/lang/String;ILjava/lang/String;Ljava/lang/Throwable;)V
+      24: areturn
+
+  public void run();
+    Code:
+       0: aload_0
+       1: invokevirtual #86                 // Method setNormPriority:()V
+       4: goto          439
+       7: getstatic     #89                 // Field org/eclipse/core/runtime/Status.OK_STATUS:Lorg/eclipse/core/runtime/IStatus;
+      10: astore_1
+      11: aload_0
+      12: getfield      #50                 // Field currentJob:Lorg/eclipse/core/internal/jobs/InternalJob;
+      15: invokevirtual #93                 // Method org/eclipse/core/internal/jobs/InternalJob.getProgressMonitor:()Lorg/eclipse/core/runtime/IProgressMonitor;
+      18: astore_2
+      19: aload_0
+      20: aload_0
+      21: invokevirtual #97                 // Method getJobName:()Ljava/lang/String;
+      24: invokevirtual #100                // Method setName:(Ljava/lang/String;)V
+      27: aload_0
+      28: getfield      #50                 // Field currentJob:Lorg/eclipse/core/internal/jobs/InternalJob;
+      31: aload_2
+      32: invokevirtual #103                // Method org/eclipse/core/internal/jobs/InternalJob.run:(Lorg/eclipse/core/runtime/IProgressMonitor;)Lorg/eclipse/core/runtime/IStatus;
+      35: astore_1
+      36: goto          349
+      39: astore_3
+      40: getstatic     #106                // Field org/eclipse/core/runtime/Status.CANCEL_STATUS:Lorg/eclipse/core/runtime/IStatus;
+      43: astore_1
+      44: aload_1
+      45: getstatic     #109                // Field org/eclipse/core/runtime/jobs/Job.ASYNC_FINISH:Lorg/eclipse/core/runtime/IStatus;
+      48: if_acmpeq     61
+      51: aload_2
+      52: ifnull        61
+      55: aload_2
+      56: invokeinterface #112,  1          // InterfaceMethod org/eclipse/core/runtime/IProgressMonitor.done:()V
+      61: invokestatic  #117                // Method java/lang/Thread.interrupted:()Z
+      64: pop
+      65: aload_1
+      66: ifnonnull     105
+      69: getstatic     #121                // Field org/eclipse/core/internal/jobs/JobMessages.jobs_returnNoStatus:Ljava/lang/String;
+      72: aload_0
+      73: getfield      #50                 // Field currentJob:Lorg/eclipse/core/internal/jobs/InternalJob;
+      76: invokevirtual #124                // Method java/lang/Object.getClass:()Ljava/lang/Class;
+      79: invokevirtual #130                // Method java/lang/Class.getName:()Ljava/lang/String;
+      82: invokestatic  #64                 // Method org/eclipse/osgi/util/NLS.bind:(Ljava/lang/String;Ljava/lang/Object;)Ljava/lang/String;
+      85: astore        5
+      87: aload_0
+      88: aload_0
+      89: getfield      #50                 // Field currentJob:Lorg/eclipse/core/internal/jobs/InternalJob;
+      92: new           #133                // class java/lang/NullPointerException
+      95: dup
+      96: aload         5
+      98: invokespecial #135                // Method java/lang/NullPointerException."<init>":(Ljava/lang/String;)V
+     101: invokevirtual #136                // Method handleException:(Lorg/eclipse/core/internal/jobs/InternalJob;Ljava/lang/Throwable;)Lorg/eclipse/core/runtime/IStatus;
+     104: astore_1
+     105: aload_0
+     106: getfield      #35                 // Field pool:Lorg/eclipse/core/internal/jobs/WorkerPool;
+     109: aload_0
+     110: getfield      #50                 // Field currentJob:Lorg/eclipse/core/internal/jobs/InternalJob;
+     113: aload_1
+     114: invokevirtual #138                // Method org/eclipse/core/internal/jobs/WorkerPool.endJob:(Lorg/eclipse/core/internal/jobs/InternalJob;Lorg/eclipse/core/runtime/IStatus;)V
+     117: aload_0
+     118: aconst_null
+     119: putfield      #50                 // Field currentJob:Lorg/eclipse/core/internal/jobs/InternalJob;
+     122: aload_0
+     123: aload_0
+     124: getfield      #33                 // Field generalName:Ljava/lang/String;
+     127: invokevirtual #100                // Method setName:(Ljava/lang/String;)V
+     130: aload_0
+     131: invokevirtual #86                 // Method setNormPriority:()V
+     134: goto          439
+     137: astore_3
+     138: aload_0
+     139: aload_0
+     140: getfield      #50                 // Field currentJob:Lorg/eclipse/core/internal/jobs/InternalJob;
+     143: aload_3
+     144: invokevirtual #136                // Method handleException:(Lorg/eclipse/core/internal/jobs/InternalJob;Ljava/lang/Throwable;)Lorg/eclipse/core/runtime/IStatus;
+     147: astore_1
+     148: aload_3
+     149: athrow
+     150: astore_3
+     151: aload_0
+     152: aload_0
+     153: getfield      #50                 // Field currentJob:Lorg/eclipse/core/internal/jobs/InternalJob;
+     156: aload_3
+     157: invokevirtual #136                // Method handleException:(Lorg/eclipse/core/internal/jobs/InternalJob;Ljava/lang/Throwable;)Lorg/eclipse/core/runtime/IStatus;
+     160: astore_1
+     161: aload_1
+     162: getstatic     #109                // Field org/eclipse/core/runtime/jobs/Job.ASYNC_FINISH:Lorg/eclipse/core/runtime/IStatus;
+     165: if_acmpeq     178
+     168: aload_2
+     169: ifnull        178
+     172: aload_2
+     173: invokeinterface #112,  1          // InterfaceMethod org/eclipse/core/runtime/IProgressMonitor.done:()V
+     178: invokestatic  #117                // Method java/lang/Thread.interrupted:()Z
+     181: pop
+     182: aload_1
+     183: ifnonnull     222
+     186: getstatic     #121                // Field org/eclipse/core/internal/jobs/JobMessages.jobs_returnNoStatus:Ljava/lang/String;
+     189: aload_0
+     190: getfield      #50                 // Field currentJob:Lorg/eclipse/core/internal/jobs/InternalJob;
+     193: invokevirtual #124                // Method java/lang/Object.getClass:()Ljava/lang/Class;
+     196: invokevirtual #130                // Method java/lang/Class.getName:()Ljava/lang/String;
+     199: invokestatic  #64                 // Method org/eclipse/osgi/util/NLS.bind:(Ljava/lang/String;Ljava/lang/Object;)Ljava/lang/String;
+     202: astore        5
+     204: aload_0
+     205: aload_0
+     206: getfield      #50                 // Field currentJob:Lorg/eclipse/core/internal/jobs/InternalJob;
+     209: new           #133                // class java/lang/NullPointerException
+     212: dup
+     213: aload         5
+     215: invokespecial #135                // Method java/lang/NullPointerException."<init>":(Ljava/lang/String;)V
+     218: invokevirtual #136                // Method handleException:(Lorg/eclipse/core/internal/jobs/InternalJob;Ljava/lang/Throwable;)Lorg/eclipse/core/runtime/IStatus;
+     221: astore_1
+     222: aload_0
+     223: getfield      #35                 // Field pool:Lorg/eclipse/core/internal/jobs/WorkerPool;
+     226: aload_0
+     227: getfield      #50                 // Field currentJob:Lorg/eclipse/core/internal/jobs/InternalJob;
+     230: aload_1
+     231: invokevirtual #138                // Method org/eclipse/core/internal/jobs/WorkerPool.endJob:(Lorg/eclipse/core/internal/jobs/InternalJob;Lorg/eclipse/core/runtime/IStatus;)V
+     234: aload_0
+     235: aconst_null
+     236: putfield      #50                 // Field currentJob:Lorg/eclipse/core/internal/jobs/InternalJob;
+     239: aload_0
+     240: aload_0
+     241: getfield      #33                 // Field generalName:Ljava/lang/String;
+     244: invokevirtual #100                // Method setName:(Ljava/lang/String;)V
+     247: aload_0
+     248: invokevirtual #86                 // Method setNormPriority:()V
+     251: goto          439
+     254: astore        4
+     256: aload_1
+     257: getstatic     #109                // Field org/eclipse/core/runtime/jobs/Job.ASYNC_FINISH:Lorg/eclipse/core/runtime/IStatus;
+     260: if_acmpeq     273
+     263: aload_2
+     264: ifnull        273
+     267: aload_2
+     268: invokeinterface #112,  1          // InterfaceMethod org/eclipse/core/runtime/IProgressMonitor.done:()V
+     273: invokestatic  #117                // Method java/lang/Thread.interrupted:()Z
+     276: pop
+     277: aload_1
+     278: ifnonnull     317
+     281: getstatic     #121                // Field org/eclipse/core/internal/jobs/JobMessages.jobs_returnNoStatus:Ljava/lang/String;
+     284: aload_0
+     285: getfield      #50                 // Field currentJob:Lorg/eclipse/core/internal/jobs/InternalJob;
+     288: invokevirtual #124                // Method java/lang/Object.getClass:()Ljava/lang/Class;
+     291: invokevirtual #130                // Method java/lang/Class.getName:()Ljava/lang/String;
+     294: invokestatic  #64                 // Method org/eclipse/osgi/util/NLS.bind:(Ljava/lang/String;Ljava/lang/Object;)Ljava/lang/String;
+     297: astore        5
+     299: aload_0
+     300: aload_0
+     301: getfield      #50                 // Field currentJob:Lorg/eclipse/core/internal/jobs/InternalJob;
+     304: new           #133                // class java/lang/NullPointerException
+     307: dup
+     308: aload         5
+     310: invokespecial #135                // Method java/lang/NullPointerException."<init>":(Ljava/lang/String;)V
+     313: invokevirtual #136                // Method handleException:(Lorg/eclipse/core/internal/jobs/InternalJob;Ljava/lang/Throwable;)Lorg/eclipse/core/runtime/IStatus;
+     316: astore_1
+     317: aload_0
+     318: getfield      #35                 // Field pool:Lorg/eclipse/core/internal/jobs/WorkerPool;
+     321: aload_0
+     322: getfield      #50                 // Field currentJob:Lorg/eclipse/core/internal/jobs/InternalJob;
+     325: aload_1
+     326: invokevirtual #138                // Method org/eclipse/core/internal/jobs/WorkerPool.endJob:(Lorg/eclipse/core/internal/jobs/InternalJob;Lorg/eclipse/core/runtime/IStatus;)V
+     329: aload_0
+     330: aconst_null
+     331: putfield      #50                 // Field currentJob:Lorg/eclipse/core/internal/jobs/InternalJob;
+     334: aload_0
+     335: aload_0
+     336: getfield      #33                 // Field generalName:Ljava/lang/String;
+     339: invokevirtual #100                // Method setName:(Ljava/lang/String;)V
+     342: aload_0
+     343: invokevirtual #86                 // Method setNormPriority:()V
+     346: aload         4
+     348: athrow
+     349: aload_1
+     350: getstatic     #109                // Field org/eclipse/core/runtime/jobs/Job.ASYNC_FINISH:Lorg/eclipse/core/runtime/IStatus;
+     353: if_acmpeq     366
+     356: aload_2
+     357: ifnull        366
+     360: aload_2
+     361: invokeinterface #112,  1          // InterfaceMethod org/eclipse/core/runtime/IProgressMonitor.done:()V
+     366: invokestatic  #117                // Method java/lang/Thread.interrupted:()Z
+     369: pop
+     370: aload_1
+     371: ifnonnull     410
+     374: getstatic     #121                // Field org/eclipse/core/internal/jobs/JobMessages.jobs_returnNoStatus:Ljava/lang/String;
+     377: aload_0
+     378: getfield      #50                 // Field currentJob:Lorg/eclipse/core/internal/jobs/InternalJob;
+     381: invokevirtual #124                // Method java/lang/Object.getClass:()Ljava/lang/Class;
+     384: invokevirtual #130                // Method java/lang/Class.getName:()Ljava/lang/String;
+     387: invokestatic  #64                 // Method org/eclipse/osgi/util/NLS.bind:(Ljava/lang/String;Ljava/lang/Object;)Ljava/lang/String;
+     390: astore        5
+     392: aload_0
+     393: aload_0
+     394: getfield      #50                 // Field currentJob:Lorg/eclipse/core/internal/jobs/InternalJob;
+     397: new           #133                // class java/lang/NullPointerException
+     400: dup
+     401: aload         5
+     403: invokespecial #135                // Method java/lang/NullPointerException."<init>":(Ljava/lang/String;)V
+     406: invokevirtual #136                // Method handleException:(Lorg/eclipse/core/internal/jobs/InternalJob;Ljava/lang/Throwable;)Lorg/eclipse/core/runtime/IStatus;
+     409: astore_1
+     410: aload_0
+     411: getfield      #35                 // Field pool:Lorg/eclipse/core/internal/jobs/WorkerPool;
+     414: aload_0
+     415: getfield      #50                 // Field currentJob:Lorg/eclipse/core/internal/jobs/InternalJob;
+     418: aload_1
+     419: invokevirtual #138                // Method org/eclipse/core/internal/jobs/WorkerPool.endJob:(Lorg/eclipse/core/internal/jobs/InternalJob;Lorg/eclipse/core/runtime/IStatus;)V
+     422: aload_0
+     423: aconst_null
+     424: putfield      #50                 // Field currentJob:Lorg/eclipse/core/internal/jobs/InternalJob;
+     427: aload_0
+     428: aload_0
+     429: getfield      #33                 // Field generalName:Ljava/lang/String;
+     432: invokevirtual #100                // Method setName:(Ljava/lang/String;)V
+     435: aload_0
+     436: invokevirtual #86                 // Method setNormPriority:()V
+     439: aload_0
+     440: aload_0
+     441: getfield      #35                 // Field pool:Lorg/eclipse/core/internal/jobs/WorkerPool;
+     444: aload_0
+     445: invokevirtual #142                // Method org/eclipse/core/internal/jobs/WorkerPool.startJob:(Lorg/eclipse/core/internal/jobs/Worker;)Lorg/eclipse/core/internal/jobs/InternalJob;
+     448: dup_x1
+     449: putfield      #50                 // Field currentJob:Lorg/eclipse/core/internal/jobs/InternalJob;
+     452: ifnonnull     7
+     455: goto          510
+     458: astore_1
+     459: new           #70                 // class org/eclipse/core/runtime/Status
+     462: dup
+     463: iconst_4
+     464: ldc           #76                 // String org.eclipse.core.jobs
+     466: iconst_2
+     467: ldc           #146                // String Unhandled error
+     469: aload_1
+     470: invokespecial #78                 // Method org/eclipse/core/runtime/Status."<init>":(ILjava/lang/String;ILjava/lang/String;Ljava/lang/Throwable;)V
+     473: invokestatic  #148                // Method org/eclipse/core/internal/runtime/RuntimeLog.log:(Lorg/eclipse/core/runtime/IStatus;)V
+     476: aload_0
+     477: aconst_null
+     478: putfield      #50                 // Field currentJob:Lorg/eclipse/core/internal/jobs/InternalJob;
+     481: aload_0
+     482: getfield      #35                 // Field pool:Lorg/eclipse/core/internal/jobs/WorkerPool;
+     485: aload_0
+     486: invokevirtual #154                // Method org/eclipse/core/internal/jobs/WorkerPool.endWorker:(Lorg/eclipse/core/internal/jobs/Worker;)V
+     489: goto          523
+     492: astore        6
+     494: aload_0
+     495: aconst_null
+     496: putfield      #50                 // Field currentJob:Lorg/eclipse/core/internal/jobs/InternalJob;
+     499: aload_0
+     500: getfield      #35                 // Field pool:Lorg/eclipse/core/internal/jobs/WorkerPool;
+     503: aload_0
+     504: invokevirtual #154                // Method org/eclipse/core/internal/jobs/WorkerPool.endWorker:(Lorg/eclipse/core/internal/jobs/Worker;)V
+     507: aload         6
+     509: athrow
+     510: aload_0
+     511: aconst_null
+     512: putfield      #50                 // Field currentJob:Lorg/eclipse/core/internal/jobs/InternalJob;
+     515: aload_0
+     516: getfield      #35                 // Field pool:Lorg/eclipse/core/internal/jobs/WorkerPool;
+     519: aload_0
+     520: invokevirtual #154                // Method org/eclipse/core/internal/jobs/WorkerPool.endWorker:(Lorg/eclipse/core/internal/jobs/Worker;)V
+     523: return
+    Exception table:
+       from    to  target type
+          19    36    39   Class org/eclipse/core/runtime/OperationCanceledException
+          19    36   137   Class java/lang/ThreadDeath
+          19    36   150   Class java/lang/Exception
+          19    36   150   Class java/lang/Error
+          19    44   254   any
+         137   161   254   any
+           4   455   458   Class java/lang/Throwable
+           4   476   492   any
+
+  private void setNormPriority();
+    Code:
+       0: aload_0
+       1: invokevirtual #175                // Method getPriority:()I
+       4: iconst_5
+       5: if_icmpeq     13
+       8: aload_0
+       9: iconst_5
+      10: invokevirtual #179                // Method setPriority:(I)V
+      13: return
+
+  private java.lang.String getJobName();
+    Code:
+       0: aload_0
+       1: getfield      #50                 // Field currentJob:Lorg/eclipse/core/internal/jobs/InternalJob;
+       4: invokevirtual #61                 // Method org/eclipse/core/internal/jobs/InternalJob.getName:()Ljava/lang/String;
+       7: astore_1
+       8: aload_1
+       9: ifnull        22
+      12: aload_1
+      13: invokevirtual #183                // Method java/lang/String.trim:()Ljava/lang/String;
+      16: invokevirtual #188                // Method java/lang/String.isEmpty:()Z
+      19: ifeq          38
+      22: aload_0
+      23: getfield      #50                 // Field currentJob:Lorg/eclipse/core/internal/jobs/InternalJob;
+      26: invokevirtual #124                // Method java/lang/Object.getClass:()Ljava/lang/Class;
+      29: invokevirtual #130                // Method java/lang/Class.getName:()Ljava/lang/String;
+      32: invokedynamic #191,  0            // InvokeDynamic #1:makeConcatWithConstants:(Ljava/lang/String;)Ljava/lang/String;
+      37: astore_1
+      38: aload_0
+      39: getfield      #33                 // Field generalName:Ljava/lang/String;
+      42: aload_1
+      43: invokedynamic #194,  0            // InvokeDynamic #2:makeConcatWithConstants:(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+      48: areturn
+}

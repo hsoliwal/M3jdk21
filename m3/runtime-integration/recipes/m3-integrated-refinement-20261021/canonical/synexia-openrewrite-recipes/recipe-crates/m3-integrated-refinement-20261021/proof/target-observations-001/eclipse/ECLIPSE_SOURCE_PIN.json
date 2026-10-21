@@ -1,0 +1,132 @@
+{
+  "schema": "M3_ECLIPSE_JOBS_RECOVERY_PIN_V1",
+  "repository": "hsoliwal/M3jdk21",
+  "receiving_revision": "2779aba3f98f31c324be43f731be7914e1a05935",
+  "donor": {
+    "revision": "6b75e71559c09c9212ef051f2d3927202eaa5819",
+    "pr": "https://github.com/hsoliwal/M3jdk21/pull/1576",
+    "canonical_recipe_lineage": "https://github.com/hsoliwal/com.synexia/pull/12575",
+    "file_pin_manifest": "/workspace/scratch/206049dfb270/jobs-work/DONOR_1576_INPUTS.json",
+    "file_pin_sha256": "fb6f8e45bc1e8953cda53fad6f0363b06c763f137ab787fac433cfc53f38b2d6"
+  },
+  "rights": {
+    "recovered_java": "Existing first-party Apache-2.0; original copyright and SPDX preserved",
+    "new_test_catalogue_qualification": "2026 Hitesh Soliwal and Contributors to the Synexia Project; Apache-2.0",
+    "native_dependencies": "Existing Eclipse provided binary dependencies; original EPL artifacts not copied into target; no Eclipse implementation source copied",
+    "modification": "Catch OperationCanceledException alongside existing CancellationException; dated modification notice in changed donor file"
+  },
+  "target_preimages": {
+    "all_absent_at_receiving_revision": true,
+    "checked_with": "git cat-file -e <pinned-revision>:<target-path>",
+    "target_count": 7
+  },
+  "handoff": {
+    "path": "/workspace/scratch/206049dfb270/jobs-work/ECLIPSE_HANDOFF.json",
+    "sha256": "56a8ae82b7def0ece78ce5b8ecadf1752900893311632b7b7b2661cde225be32"
+  },
+  "source_correction_diff": {
+    "path": "/workspace/scratch/206049dfb270/jobs-work/ECLIPSE_DONOR_CORRECTION.diff",
+    "sha256": "0b7837df5183d97028648a392538a521eb06d63388ed09b064ba921df1a2ed66"
+  },
+  "unchanged_donor_files": [
+    "M3EclipseJobScheduler.java",
+    "M3EclipseJobsTest.java",
+    "M3EclipseJobSchedulerTest.java"
+  ],
+  "current_owning_pom": {
+    "path": "m3/eclipse/core-runtime/pom.xml",
+    "sha256": "3b4d4fadfec5822bd5a9022797870fc41443954f0d63ab718586738cd926e244",
+    "modified": false,
+    "dependency_decision": "Keep current runtime3.35.0 and its transitive jobs3.15.900; exclude donor explicit jobs3.15.700 POM edit"
+  },
+  "qualification": {
+    "proofs": [
+      {
+        "path": "/workspace/scratch/206049dfb270/jobs-work/eclipse-evaluation/RESULT.json",
+        "sha256": "7c8219f905f060bed732a86cabff10d3e086c11e56a4311c32fe081956948510"
+      },
+      {
+        "path": "/workspace/scratch/206049dfb270/jobs-work/eclipse-contract-donor-01/RESULT.json",
+        "sha256": "8f376b6bca15d672d8f06fca66b0fcc2e77139e42933f27824bdcdfc517c243b"
+      },
+      {
+        "path": "/workspace/scratch/206049dfb270/jobs-work/eclipse-contract-candidate-02/RESULT.json",
+        "sha256": "1f6b8e28de7a10c0a8dee6afd3a747be169e6fd8943080d9c2651d11a4bf4fce"
+      },
+      {
+        "path": "/workspace/scratch/206049dfb270/jobs-work/eclipse-current-candidate-03/RESULT.json",
+        "sha256": "7584ff1ca7865cb05f3200d33283c3c5f71ad81c7fec23d0de2e8297c161921b"
+      },
+      {
+        "path": "/workspace/scratch/206049dfb270/jobs-work/ECLIPSE_API_COMPARISON.json",
+        "sha256": "81d91b1c76df978a6c82f4fa977e9eb6d4e87d252f502dff85482316ba95003c"
+      }
+    ],
+    "source_inputs_manifest": "/workspace/scratch/206049dfb270/jobs-work/eclipse-evaluation/INPUTS.json",
+    "source_inputs_sha256": "d964daf4cb627b0ac8cd5de8bc44ac599acfcdc173ace06d2e97bb6061278197",
+    "original_donor_tests": 12,
+    "current_progress_tests": 5,
+    "new_native_oracle_tests": 4,
+    "current_candidate_tests": 21,
+    "original_donor_counterexample_failures": 2,
+    "public_protected_api": "Exact pinned donor declarations and descriptors preserved",
+    "all_current_target_existing_api": "Unchanged; recovered public types are explicitly additive",
+    "full_module_receiver_proof": "PENDING_CANONICAL_MATERIALIZATION_AND_SOURCE_QUALIFIED_COLLECTIONS_INSTALL",
+    "full_osgi_pde_ui_and_full_jdk": "NOT_EXECUTED"
+  },
+  "current_source_owner_relationship": "Reuse existing M3ProgressMonitor/M3ChildProgressMonitor/M3EclipseProgressMonitor; task status and Future remain Java APIs; original Eclipse JobManager owns jobs and rules; no parallel scheduler or JNI callbacks",
+  "commands": {
+    "actual_target_owning_gate": "JAVA_HOME=/tmp/m3-build-tools/jdk-21.0.12.1+1 PATH=/tmp/m3-build-tools/jdk-21.0.12.1+1/bin:$PATH /tmp/m3-build-tools/apache-maven-3.9.9/bin/mvn -B -o -Dmaven.repo.local=/tmp/m3-build-m2 -f /workspace/scratch/206049dfb270/M3jdk21/m3/eclipse/core-runtime/pom.xml verify"
+  },
+  "frozen_files": [
+    {
+      "target_path": "m3/eclipse/core-runtime/algorithm-catalog/jobs-executor-20261021.tsv",
+      "candidate_path": "/workspace/scratch/206049dfb270/jobs-work/eclipse-postimages/m3/eclipse/core-runtime/algorithm-catalog/jobs-executor-20261021.tsv",
+      "before_sha256": "ABSENT",
+      "after_sha256": "097aa0453736d6b3d13272a5d12e3562a25ec26cc56a5154cbc01195a0cb2ef2",
+      "kind": "TEXT"
+    },
+    {
+      "target_path": "m3/eclipse/core-runtime/qualification/M3_ECLIPSE_JOBS_20261021.md",
+      "candidate_path": "/workspace/scratch/206049dfb270/jobs-work/eclipse-postimages/m3/eclipse/core-runtime/qualification/M3_ECLIPSE_JOBS_20261021.md",
+      "before_sha256": "ABSENT",
+      "after_sha256": "b7c7c07a300ed7e2d83aacdc48c9af30eaf89e1c4d61a2bd42d32ab316f3cadd",
+      "kind": "TEXT"
+    },
+    {
+      "target_path": "m3/eclipse/core-runtime/src/main/java/com/m3/eclipse/runtime/M3EclipseJobScheduler.java",
+      "candidate_path": "/workspace/scratch/206049dfb270/jobs-work/eclipse-postimages/m3/eclipse/core-runtime/src/main/java/com/m3/eclipse/runtime/M3EclipseJobScheduler.java",
+      "before_sha256": "ABSENT",
+      "after_sha256": "dc7e2cc6243291c362e135311ca2e50fb9d445db4f0c72cee5508d770526b6dd",
+      "kind": "JAVA"
+    },
+    {
+      "target_path": "m3/eclipse/core-runtime/src/main/java/com/m3/eclipse/runtime/M3EclipseJobs.java",
+      "candidate_path": "/workspace/scratch/206049dfb270/jobs-work/eclipse-postimages/m3/eclipse/core-runtime/src/main/java/com/m3/eclipse/runtime/M3EclipseJobs.java",
+      "before_sha256": "ABSENT",
+      "after_sha256": "a9cdf65296a3841a5bdeab909fd24f6f3bbe60773f5d3070c2091a710a00b5a7",
+      "kind": "JAVA"
+    },
+    {
+      "target_path": "m3/eclipse/core-runtime/src/test/java/com/m3/eclipse/runtime/M3EclipseJobSchedulerTest.java",
+      "candidate_path": "/workspace/scratch/206049dfb270/jobs-work/eclipse-postimages/m3/eclipse/core-runtime/src/test/java/com/m3/eclipse/runtime/M3EclipseJobSchedulerTest.java",
+      "before_sha256": "ABSENT",
+      "after_sha256": "89ea9107defabe8f35a3ee8bc5d8559f79c6a13c90e1fa7cbbbf65f3d1c6724f",
+      "kind": "JAVA"
+    },
+    {
+      "target_path": "m3/eclipse/core-runtime/src/test/java/com/m3/eclipse/runtime/M3EclipseJobsCompatibilityTest.java",
+      "candidate_path": "/workspace/scratch/206049dfb270/jobs-work/eclipse-postimages/m3/eclipse/core-runtime/src/test/java/com/m3/eclipse/runtime/M3EclipseJobsCompatibilityTest.java",
+      "before_sha256": "ABSENT",
+      "after_sha256": "9897ba5f3f5cf6dae226844ccf56baed776fd552fa0ca74877a3923ee774e1b7",
+      "kind": "JAVA"
+    },
+    {
+      "target_path": "m3/eclipse/core-runtime/src/test/java/com/m3/eclipse/runtime/M3EclipseJobsTest.java",
+      "candidate_path": "/workspace/scratch/206049dfb270/jobs-work/eclipse-postimages/m3/eclipse/core-runtime/src/test/java/com/m3/eclipse/runtime/M3EclipseJobsTest.java",
+      "before_sha256": "ABSENT",
+      "after_sha256": "e12bdc3c08aec2d886a403d6f342de3ac0b35a0e063409ad43ae0c8784de19e5",
+      "kind": "JAVA"
+    }
+  ]
+}

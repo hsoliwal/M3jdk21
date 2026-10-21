@@ -1,0 +1,440 @@
+{
+  "status": "PASS",
+  "dependencies": [
+    {
+      "owner": "apiguardian-api",
+      "artifact": "apiguardian-api",
+      "version": "1.1.2-m3-source-1",
+      "provenance_sha256": "8e1396bcf3bb9065824ba2b9db4aab03d2b4e9bf09c9209c0eb6cc0198effa58",
+      "pom_sha256": "54521e57cf458017c20682a31ad1a4dc1fa08b2847f8fa79091566dc748404d6",
+      "jar_sha256": "75b8e7d5ece329cb110ea47d746775be6f7fdcda4d9e3caa5d1849b88ef0bb4c"
+    },
+    {
+      "owner": "opentest4j",
+      "artifact": "opentest4j",
+      "version": "1.3.0-m3-source-1",
+      "provenance_sha256": "80f1b151283659911db971c9de37bb262c5107014ab5527178288a9ba59d101c",
+      "pom_sha256": "664f4ae07d627e1e067de8b713382e86c77e18c364a58acbd31226a6d457ecfd",
+      "jar_sha256": "58173a869665b50addd5090012ac0c1eebd7eba16742d84d259ae1bf0ade1c00"
+    },
+    {
+      "owner": "univocity-parsers",
+      "artifact": "univocity-parsers",
+      "version": "2.9.1-m3-source-1",
+      "provenance_sha256": "44e70f89c7a241a65c05f8d5956e1d1301e48292de18b7b32fdb01699c4dd6f7",
+      "pom_sha256": "1d083aee85527e57506f459d134fa4824fc25e73af1178ef0b59bee3fed7cb5a",
+      "jar_sha256": "06b2f4c9f702f79e6ad38913648ac4bc858e9328905652b49f2f6b187217a9a9"
+    },
+    {
+      "owner": "junit-platform-commons-1.10.2",
+      "artifact": "junit-platform-commons",
+      "version": "1.10.2-m3-source-1",
+      "provenance_sha256": "122eb73e35664bd56635ea2f5fb81bea474a9537ff7453d3ae0703a15e62698a",
+      "pom_sha256": "7229160b2c4c0888870b91c9284cbe8f3fb7b19c3cceae707279020c0724d4fc",
+      "jar_sha256": "a036de99fa9e683846af15b1200c2ed59817c6e4085b224dc824f8f626b6de33"
+    },
+    {
+      "owner": "junit-platform-engine-1.10.2",
+      "artifact": "junit-platform-engine",
+      "version": "1.10.2-m3-source-1",
+      "provenance_sha256": "93c618264cefd8b473973a6a4bc87baa2a83b55adeca2555c47a94989096ae1f",
+      "pom_sha256": "5c2ff4b940d6a68f116fe85196b451e42cda7aedbef736672739ca68fdffd0a3",
+      "jar_sha256": "563814663e7114b3b16162ff11fa57c969d7e470628f4c62c6c0e8f6cddd6983"
+    },
+    {
+      "owner": "junit-jupiter-api-5.10.2",
+      "artifact": "junit-jupiter-api",
+      "version": "5.10.2-m3-source-1",
+      "provenance_sha256": "ec5564e4cdace0c8a0fe173f3502eef24ed8e4989dd49db8086b7c9295a301e4",
+      "pom_sha256": "7a84b4659b179d5278900b2da51e6b255a9bf7d087d071d4e34fa8d297ddb3a5",
+      "jar_sha256": "e75584ea254573e9303de44f8832ee9e3b4af90d7342030678191cf1bc2daa0f"
+    },
+    {
+      "owner": "junit-jupiter-params-5.10.2",
+      "artifact": "junit-jupiter-params",
+      "version": "5.10.2-m3-source-1",
+      "provenance_sha256": "038f44693e10fb9267e130284a4c257418a24277f2d1c14f8dbacf0681f072f0",
+      "pom_sha256": "0c7ee996514f6cb13f5b1c89fc3614410c9227e45f995ab93890c6a99adfde79",
+      "jar_sha256": "5757d019ea3247524ffaaf086e15882ae8b89c5710b3a88f92f31ae1d1ebf308"
+    },
+    {
+      "owner": "junit-jupiter-engine-5.10.2",
+      "artifact": "junit-jupiter-engine",
+      "version": "5.10.2-m3-source-1",
+      "provenance_sha256": "fefbe8ed4151302e6a98da3b154a6c7ec58c29206466ddae1cb848e6744a18fb",
+      "pom_sha256": "b951e664fbfa938e093dd75366fc45278d7da795b9148d7cc6cb1ba082908f18",
+      "jar_sha256": "d2ce3e7bf0ecea06af86ae4233636f59d3a65ac80db7bcabb7f71e4c2cad0201"
+    },
+    {
+      "owner": "junit-jupiter-5.10.2",
+      "artifact": "junit-jupiter",
+      "version": "5.10.2-m3-source-1",
+      "provenance_sha256": "8ccf4180e433160d923d076ff63fb9f6440d71ff3a522422ea338b0d979714ba",
+      "pom_sha256": "398f8c945d45f7e55006c9e4d083aa5bddc6f774f973a793a6cd95c827d095c3",
+      "jar_sha256": "f63a714086045001913fa3bdb91037482fc3a1b0effd7f8af61cff1d76a5cff0"
+    }
+  ],
+  "commands": [
+    {
+      "name": "SOURCE_apiguardian-api",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "/workspace/scratch/206049dfb270/collections-work/baseline/repo/m3/vendor/third_party/apiguardian-api/verify_source.py"
+      ],
+      "exit": 0,
+      "log": "evidence/SOURCE_apiguardian-api.log",
+      "log_sha256": "29886d9725e342d3db8f5823a81284dde972534c221e39c2c54460c6371a4396"
+    },
+    {
+      "name": "BUILD_apiguardian-api",
+      "command": [
+        "/tmp/m3-build-tools/apache-maven-3.9.9/bin/mvn",
+        "-B",
+        "-ntp",
+        "-s",
+        "/workspace/scratch/206049dfb270/collections-work/maven-settings.xml",
+        "-U",
+        "-Dmaven.repo.local=/tmp/m3-build-m2",
+        "-f",
+        "/workspace/scratch/206049dfb270/collections-work/baseline/repo/m3/vendor/third_party/apiguardian-api/pom.xml",
+        "-DskipTests",
+        "install"
+      ],
+      "exit": 0,
+      "log": "evidence/BUILD_apiguardian-api.log",
+      "log_sha256": "554188d2995d25552b28d4dc71b14927598f723d92db23ec09266581922dea91"
+    },
+    {
+      "name": "PACKAGE_apiguardian-api",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "/workspace/scratch/206049dfb270/collections-work/baseline/repo/m3/vendor/third_party/apiguardian-api/verify_source.py",
+        "/workspace/scratch/206049dfb270/collections-work/baseline/repo/m3/vendor/third_party/apiguardian-api/target/apiguardian-api-1.1.2-m3-source-1.jar"
+      ],
+      "exit": 0,
+      "log": "evidence/PACKAGE_apiguardian-api.log",
+      "log_sha256": "7c7a53cfa3e38b742591c9d8e0302d27b5037c1b90cc5131944e5a57487f8b33"
+    },
+    {
+      "name": "SOURCE_opentest4j",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "/workspace/scratch/206049dfb270/collections-work/baseline/repo/m3/vendor/third_party/opentest4j/verify_source.py"
+      ],
+      "exit": 0,
+      "log": "evidence/SOURCE_opentest4j.log",
+      "log_sha256": "4abeb4aa1bbe497987589ef10e55ce4502d7ee83e96820a042a71ca43bc91ff1"
+    },
+    {
+      "name": "BUILD_opentest4j",
+      "command": [
+        "/tmp/m3-build-tools/apache-maven-3.9.9/bin/mvn",
+        "-B",
+        "-ntp",
+        "-s",
+        "/workspace/scratch/206049dfb270/collections-work/maven-settings.xml",
+        "-U",
+        "-Dmaven.repo.local=/tmp/m3-build-m2",
+        "-f",
+        "/workspace/scratch/206049dfb270/collections-work/baseline/repo/m3/vendor/third_party/opentest4j/pom.xml",
+        "-DskipTests",
+        "install"
+      ],
+      "exit": 0,
+      "log": "evidence/BUILD_opentest4j.log",
+      "log_sha256": "a23dc463f6efcb7f7dd358415f9aa92040ce658ac6600168a32c62eee8e7ca0a"
+    },
+    {
+      "name": "PACKAGE_opentest4j",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "/workspace/scratch/206049dfb270/collections-work/baseline/repo/m3/vendor/third_party/opentest4j/verify_source.py",
+        "/workspace/scratch/206049dfb270/collections-work/baseline/repo/m3/vendor/third_party/opentest4j/target/opentest4j-1.3.0-m3-source-1.jar"
+      ],
+      "exit": 0,
+      "log": "evidence/PACKAGE_opentest4j.log",
+      "log_sha256": "e63e1bb0d5cf69f7999bffda8b02589a8242d4b7464ec0be01a3407e2ecbfd4a"
+    },
+    {
+      "name": "SOURCE_univocity-parsers",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "/workspace/scratch/206049dfb270/collections-work/baseline/repo/m3/vendor/third_party/univocity-parsers/verify_source.py"
+      ],
+      "exit": 0,
+      "log": "evidence/SOURCE_univocity-parsers.log",
+      "log_sha256": "a06e2506d8d9de03a1ad066281927690e7d59c1e083bc171ff5e6362efe1ffdc"
+    },
+    {
+      "name": "BUILD_univocity-parsers",
+      "command": [
+        "/tmp/m3-build-tools/apache-maven-3.9.9/bin/mvn",
+        "-B",
+        "-ntp",
+        "-s",
+        "/workspace/scratch/206049dfb270/collections-work/maven-settings.xml",
+        "-U",
+        "-Dmaven.repo.local=/tmp/m3-build-m2",
+        "-f",
+        "/workspace/scratch/206049dfb270/collections-work/baseline/repo/m3/vendor/third_party/univocity-parsers/pom.xml",
+        "-DskipTests",
+        "install"
+      ],
+      "exit": 0,
+      "log": "evidence/BUILD_univocity-parsers.log",
+      "log_sha256": "048e22ed38ea61eb8b6b93fa2bca57b6fd731db0552b259c242bbb4466e8d7b2"
+    },
+    {
+      "name": "PACKAGE_univocity-parsers",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "/workspace/scratch/206049dfb270/collections-work/baseline/repo/m3/vendor/third_party/univocity-parsers/verify_source.py",
+        "/workspace/scratch/206049dfb270/collections-work/baseline/repo/m3/vendor/third_party/univocity-parsers/target/univocity-parsers-2.9.1-m3-source-1.jar"
+      ],
+      "exit": 0,
+      "log": "evidence/PACKAGE_univocity-parsers.log",
+      "log_sha256": "4493154d24b8bcb28663fc2c2e4da4476ba198f49a437d6af5a24565aa26ad3d"
+    },
+    {
+      "name": "SOURCE_junit-platform-commons-1.10.2",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "/workspace/scratch/206049dfb270/collections-work/baseline/repo/m3/vendor/third_party/junit-platform-commons-1.10.2/verify_source.py"
+      ],
+      "exit": 0,
+      "log": "evidence/SOURCE_junit-platform-commons-1.10.2.log",
+      "log_sha256": "9bf4a0eb39548d101e58152adae7a5d3cc6b4b261193e7f05adf3acf47f9be14"
+    },
+    {
+      "name": "BUILD_junit-platform-commons-1.10.2",
+      "command": [
+        "/tmp/m3-build-tools/apache-maven-3.9.9/bin/mvn",
+        "-B",
+        "-ntp",
+        "-s",
+        "/workspace/scratch/206049dfb270/collections-work/maven-settings.xml",
+        "-U",
+        "-Dmaven.repo.local=/tmp/m3-build-m2",
+        "-f",
+        "/workspace/scratch/206049dfb270/collections-work/baseline/repo/m3/vendor/third_party/junit-platform-commons-1.10.2/pom.xml",
+        "-DskipTests",
+        "install"
+      ],
+      "exit": 0,
+      "log": "evidence/BUILD_junit-platform-commons-1.10.2.log",
+      "log_sha256": "1ccf2354ff45511a971f956b3be5fe0e5bc6c0c2076a59fea31b7fbe12784fc6"
+    },
+    {
+      "name": "PACKAGE_junit-platform-commons-1.10.2",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "/workspace/scratch/206049dfb270/collections-work/baseline/repo/m3/vendor/third_party/junit-platform-commons-1.10.2/verify_source.py",
+        "/workspace/scratch/206049dfb270/collections-work/baseline/repo/m3/vendor/third_party/junit-platform-commons-1.10.2/target/junit-platform-commons-1.10.2-m3-source-1.jar"
+      ],
+      "exit": 0,
+      "log": "evidence/PACKAGE_junit-platform-commons-1.10.2.log",
+      "log_sha256": "2d1c79d4d30724471f70f9321f6817476c4378e7ce9e4cc92d83ff5a6df37903"
+    },
+    {
+      "name": "SOURCE_junit-platform-engine-1.10.2",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "/workspace/scratch/206049dfb270/collections-work/baseline/repo/m3/vendor/third_party/junit-platform-engine-1.10.2/verify_source.py"
+      ],
+      "exit": 0,
+      "log": "evidence/SOURCE_junit-platform-engine-1.10.2.log",
+      "log_sha256": "63b349383c90f011cdc3f076d996002355aec25e3874b1f4fa34d02f4791e032"
+    },
+    {
+      "name": "BUILD_junit-platform-engine-1.10.2",
+      "command": [
+        "/tmp/m3-build-tools/apache-maven-3.9.9/bin/mvn",
+        "-B",
+        "-ntp",
+        "-s",
+        "/workspace/scratch/206049dfb270/collections-work/maven-settings.xml",
+        "-U",
+        "-Dmaven.repo.local=/tmp/m3-build-m2",
+        "-f",
+        "/workspace/scratch/206049dfb270/collections-work/baseline/repo/m3/vendor/third_party/junit-platform-engine-1.10.2/pom.xml",
+        "-DskipTests",
+        "install"
+      ],
+      "exit": 0,
+      "log": "evidence/BUILD_junit-platform-engine-1.10.2.log",
+      "log_sha256": "0bc14e57b230f339615b39593ac8aeac8d077e790f822073f3553fb507909d55"
+    },
+    {
+      "name": "PACKAGE_junit-platform-engine-1.10.2",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "/workspace/scratch/206049dfb270/collections-work/baseline/repo/m3/vendor/third_party/junit-platform-engine-1.10.2/verify_source.py",
+        "/workspace/scratch/206049dfb270/collections-work/baseline/repo/m3/vendor/third_party/junit-platform-engine-1.10.2/target/junit-platform-engine-1.10.2-m3-source-1.jar"
+      ],
+      "exit": 0,
+      "log": "evidence/PACKAGE_junit-platform-engine-1.10.2.log",
+      "log_sha256": "d3f91af229ecfba8dc5ae4012777015a088687dc697f94bd6c5e738d8aa0e70b"
+    },
+    {
+      "name": "SOURCE_junit-jupiter-api-5.10.2",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "/workspace/scratch/206049dfb270/collections-work/baseline/repo/m3/vendor/third_party/junit-jupiter-api-5.10.2/verify_source.py"
+      ],
+      "exit": 0,
+      "log": "evidence/SOURCE_junit-jupiter-api-5.10.2.log",
+      "log_sha256": "c6c4070fcfae51a3614fc187695916cefa8eb9b2e0078c78c392fb2cb631eff1"
+    },
+    {
+      "name": "BUILD_junit-jupiter-api-5.10.2",
+      "command": [
+        "/tmp/m3-build-tools/apache-maven-3.9.9/bin/mvn",
+        "-B",
+        "-ntp",
+        "-s",
+        "/workspace/scratch/206049dfb270/collections-work/maven-settings.xml",
+        "-U",
+        "-Dmaven.repo.local=/tmp/m3-build-m2",
+        "-f",
+        "/workspace/scratch/206049dfb270/collections-work/baseline/repo/m3/vendor/third_party/junit-jupiter-api-5.10.2/pom.xml",
+        "-DskipTests",
+        "install"
+      ],
+      "exit": 0,
+      "log": "evidence/BUILD_junit-jupiter-api-5.10.2.log",
+      "log_sha256": "d2e0a61b8bbd0e419d3b709b391ee65843ab80042a25a8778df99ceb4da58669"
+    },
+    {
+      "name": "PACKAGE_junit-jupiter-api-5.10.2",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "/workspace/scratch/206049dfb270/collections-work/baseline/repo/m3/vendor/third_party/junit-jupiter-api-5.10.2/verify_source.py",
+        "/workspace/scratch/206049dfb270/collections-work/baseline/repo/m3/vendor/third_party/junit-jupiter-api-5.10.2/target/junit-jupiter-api-5.10.2-m3-source-1.jar"
+      ],
+      "exit": 0,
+      "log": "evidence/PACKAGE_junit-jupiter-api-5.10.2.log",
+      "log_sha256": "0e257511d79dbeca355321df10cdef4330192fa3e0208fbfd0e6ffa02f0a7216"
+    },
+    {
+      "name": "SOURCE_junit-jupiter-params-5.10.2",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "/workspace/scratch/206049dfb270/collections-work/baseline/repo/m3/vendor/third_party/junit-jupiter-params-5.10.2/verify_source.py"
+      ],
+      "exit": 0,
+      "log": "evidence/SOURCE_junit-jupiter-params-5.10.2.log",
+      "log_sha256": "0313706e9977b71ec679270277bf9047ed1f63e05f6f1986963456fd1700ff34"
+    },
+    {
+      "name": "BUILD_junit-jupiter-params-5.10.2",
+      "command": [
+        "/tmp/m3-build-tools/apache-maven-3.9.9/bin/mvn",
+        "-B",
+        "-ntp",
+        "-s",
+        "/workspace/scratch/206049dfb270/collections-work/maven-settings.xml",
+        "-U",
+        "-Dmaven.repo.local=/tmp/m3-build-m2",
+        "-f",
+        "/workspace/scratch/206049dfb270/collections-work/baseline/repo/m3/vendor/third_party/junit-jupiter-params-5.10.2/pom.xml",
+        "-DskipTests",
+        "install"
+      ],
+      "exit": 0,
+      "log": "evidence/BUILD_junit-jupiter-params-5.10.2.log",
+      "log_sha256": "7fec61adb2a270c0236734a89cafd96915fe9679bc4a60b196b96976d72e18b7"
+    },
+    {
+      "name": "PACKAGE_junit-jupiter-params-5.10.2",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "/workspace/scratch/206049dfb270/collections-work/baseline/repo/m3/vendor/third_party/junit-jupiter-params-5.10.2/verify_source.py",
+        "/workspace/scratch/206049dfb270/collections-work/baseline/repo/m3/vendor/third_party/junit-jupiter-params-5.10.2/target/junit-jupiter-params-5.10.2-m3-source-1.jar"
+      ],
+      "exit": 0,
+      "log": "evidence/PACKAGE_junit-jupiter-params-5.10.2.log",
+      "log_sha256": "88fda41be9ea29721b4dc7bd7e9b257e18263b84be9312fb26d75bfc7b095efc"
+    },
+    {
+      "name": "SOURCE_junit-jupiter-engine-5.10.2",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "/workspace/scratch/206049dfb270/collections-work/baseline/repo/m3/vendor/third_party/junit-jupiter-engine-5.10.2/verify_source.py"
+      ],
+      "exit": 0,
+      "log": "evidence/SOURCE_junit-jupiter-engine-5.10.2.log",
+      "log_sha256": "1d3104264f6f1218c27a43d5af87e0632cc556da37bbd9008bc90f767a774a16"
+    },
+    {
+      "name": "BUILD_junit-jupiter-engine-5.10.2",
+      "command": [
+        "/tmp/m3-build-tools/apache-maven-3.9.9/bin/mvn",
+        "-B",
+        "-ntp",
+        "-s",
+        "/workspace/scratch/206049dfb270/collections-work/maven-settings.xml",
+        "-U",
+        "-Dmaven.repo.local=/tmp/m3-build-m2",
+        "-f",
+        "/workspace/scratch/206049dfb270/collections-work/baseline/repo/m3/vendor/third_party/junit-jupiter-engine-5.10.2/pom.xml",
+        "-DskipTests",
+        "install"
+      ],
+      "exit": 0,
+      "log": "evidence/BUILD_junit-jupiter-engine-5.10.2.log",
+      "log_sha256": "c97bda17f98d8c857a194a0f70db7bfe66af9a02a68b5b39e9ec0c66e378ec22"
+    },
+    {
+      "name": "PACKAGE_junit-jupiter-engine-5.10.2",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "/workspace/scratch/206049dfb270/collections-work/baseline/repo/m3/vendor/third_party/junit-jupiter-engine-5.10.2/verify_source.py",
+        "/workspace/scratch/206049dfb270/collections-work/baseline/repo/m3/vendor/third_party/junit-jupiter-engine-5.10.2/target/junit-jupiter-engine-5.10.2-m3-source-1.jar"
+      ],
+      "exit": 0,
+      "log": "evidence/PACKAGE_junit-jupiter-engine-5.10.2.log",
+      "log_sha256": "086fd5fa0ede5f8a94a83995b944db95669cd810afd5e841c58637313e4bd3a5"
+    },
+    {
+      "name": "SOURCE_junit-jupiter-5.10.2",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "/workspace/scratch/206049dfb270/collections-work/baseline/repo/m3/vendor/third_party/junit-jupiter-5.10.2/verify_source.py"
+      ],
+      "exit": 0,
+      "log": "evidence/SOURCE_junit-jupiter-5.10.2.log",
+      "log_sha256": "61495ea12c8118775a770868bd99ad54c7fc22b3b3a7a5bc8337da24d8c677ef"
+    },
+    {
+      "name": "BUILD_junit-jupiter-5.10.2",
+      "command": [
+        "/tmp/m3-build-tools/apache-maven-3.9.9/bin/mvn",
+        "-B",
+        "-ntp",
+        "-s",
+        "/workspace/scratch/206049dfb270/collections-work/maven-settings.xml",
+        "-U",
+        "-Dmaven.repo.local=/tmp/m3-build-m2",
+        "-f",
+        "/workspace/scratch/206049dfb270/collections-work/baseline/repo/m3/vendor/third_party/junit-jupiter-5.10.2/pom.xml",
+        "-DskipTests",
+        "install"
+      ],
+      "exit": 0,
+      "log": "evidence/BUILD_junit-jupiter-5.10.2.log",
+      "log_sha256": "22d76602bd259ed9de36469e1c0639fb2273ec7a4ea8fcad78a13d464b5ca69a"
+    },
+    {
+      "name": "PACKAGE_junit-jupiter-5.10.2",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "/workspace/scratch/206049dfb270/collections-work/baseline/repo/m3/vendor/third_party/junit-jupiter-5.10.2/verify_source.py",
+        "/workspace/scratch/206049dfb270/collections-work/baseline/repo/m3/vendor/third_party/junit-jupiter-5.10.2/target/junit-jupiter-5.10.2-m3-source-1.jar"
+      ],
+      "exit": 0,
+      "log": "evidence/PACKAGE_junit-jupiter-5.10.2.log",
+      "log_sha256": "9eab12ea76a918ebfe4b5860d832c79ecc2bc53462927e49a2e2fdc1871fea93"
+    }
+  ],
+  "scope": "Nine repository-pinned source owners compiled and installed; Maven plugins and ordinary build transitive artifacts downloaded to the private cache are not claimed source-built."
+}

@@ -1,0 +1,21 @@
+/workspace/scratch/206049dfb270/jobs-work/authoring-proof-02/RequestedApiMissing.java:4: error: cannot find symbol
+s.scheduleMonitored(r, 0, TimeUnit.SECONDS, m);
+ ^
+  symbol:   method scheduleMonitored(Runnable,int,TimeUnit,ProgressMonitor)
+  location: variable s of type ScheduledExecutorService
+/workspace/scratch/206049dfb270/jobs-work/authoring-proof-02/RequestedApiMissing.java:5: error: cannot find symbol
+s.scheduleMonitored(c, 0, TimeUnit.SECONDS, m);
+ ^
+  symbol:   method scheduleMonitored(Callable<Object>,int,TimeUnit,ProgressMonitor)
+  location: variable s of type ScheduledExecutorService
+/workspace/scratch/206049dfb270/jobs-work/authoring-proof-02/RequestedApiMissing.java:6: error: cannot find symbol
+s.scheduleAtFixedRateMonitored(r, 0, 1, TimeUnit.SECONDS, m);
+ ^
+  symbol:   method scheduleAtFixedRateMonitored(Runnable,int,int,TimeUnit,ProgressMonitor)
+  location: variable s of type ScheduledExecutorService
+/workspace/scratch/206049dfb270/jobs-work/authoring-proof-02/RequestedApiMissing.java:7: error: cannot find symbol
+s.scheduleWithFixedDelayMonitored(r, 0, 1, TimeUnit.SECONDS, m);
+ ^
+  symbol:   method scheduleWithFixedDelayMonitored(Runnable,int,int,TimeUnit,ProgressMonitor)
+  location: variable s of type ScheduledExecutorService
+4 errors

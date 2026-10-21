@@ -1,0 +1,17 @@
+{
+  "repository": "hsoliwal/com.synexia",
+  "base": "ad85831eda771cbd050124c806b45c050e545984",
+  "base_tree": "ccc786139978c5d70d700850be0ac35835e53795",
+  "tree": "ad621c33a8f8da8f8b834ebb680bd4f011357886",
+  "commit": "a2b50cfe926c5c5f400c7f659a947a5020fb8d4d",
+  "branch": "codex/m3-integrated-recipes-20261021",
+  "pr": "https://github.com/hsoliwal/com.synexia/pull/12648",
+  "number": 12648,
+  "draft": true,
+  "files": 1273,
+  "schema": "M3_CANONICAL_PUBLICATION_SOURCE/1",
+  "runtime_repository": "hsoliwal/M3JDK21",
+  "runtime_base": "2779aba3f98f31c324be43f731be7914e1a05935",
+  "source_seals_sha256": "b931ab0a97eb0b5b708f549c2ee79c321ee3ad62d8c27c1f1cb23006c964bc68",
+  "classification": "Generated publication receipt; canonical recipe ownership stays in com.synexia."
+}
