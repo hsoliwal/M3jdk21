@@ -1,3 +1,4 @@
+// Modified 2026 by Hitesh Soliwal and contributors: sort newly selected physical indexes in place.
 /*
  * Copyright 2026 Hitesh Soliwal and contributors
  * SPDX-License-Identifier: Apache-2.0
@@ -245,8 +246,12 @@ public final class M3IndexedListSnapshot<E> extends AbstractList<E> implements R
     public M3IndexedListSnapshot<E> sortedMaskedByPhysicalState(
             int[] physicalStates, int requiredMask, int forbiddenMask,
             Comparator<? super E> comparator, M3IndexPathMasks.Backend backend) {
-        return maskedByPhysicalState(
-                physicalStates, requiredMask, forbiddenMask, backend).sorted(comparator);
+        M3IndexedListSnapshot<E> selected = maskedByPhysicalState(
+                physicalStates, requiredMask, forbiddenMask, backend);
+        // Selection owns a fresh index directory with zero-based bounds. Sort
+        // that private directory directly, as filteredSorted already does.
+        selected.sortPositions(selected.positions, comparator);
+        return selected;
     }
 
     public M3IndexedListSnapshot<E> sorted(Comparator<? super E> comparator) {

@@ -1,10 +1,13 @@
+# Copyright 2026 Hitesh Soliwal and contributors. SPDX-License-Identifier: Apache-2.0
+# Modified 2026-10-21: preserve historical recipes and qualify current sealed resource/JNI owners.
 name: M3 Eclipse framework indexed forward receiver
 on:
   pull_request:
     branches: [master]
     paths:
       - 'm3/eclipse/framework/**'
-      - 'm3/collections/src/main/java/**'
+      - 'm3/collections/src/main/**'
+      - 'm3/runtime-integration/recipes/m3-integrated-refinement-20261021/**'
       - 'm3/tooling/migration-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java'
       - '.github/workflows/m3-eclipse-framework-forward-20261017.yml'
   workflow_dispatch:
@@ -13,82 +16,90 @@ permissions:
 jobs:
   eclipse-framework-forward:
     runs-on: ubuntu-latest
-    timeout-minutes: 35
+    timeout-minutes: 45
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
         with:
           ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          persist-credentials: false
           sparse-checkout: |
+            .github/workflows
             m3/eclipse/framework
             m3/collections
             m3/tooling/migration-recipes
-      - uses: actions/setup-java@v4
+            m3/runtime-integration/recipes/m3-integrated-refinement-20261021
+            m3/runtime-integration/scheduled-progress-20261021
+            m3/eclipse/core-runtime
+            m3/tooling/module-packs/collections
+            m3/vendor/third_party/junit-platform-launcher-1.10.2
+            src/java.base/share/classes/java/util/concurrent
+            src/java.base/share/classes/java/lang
+            test/jdk/java/util/concurrent/ProgressJob
+            test/jdk/java/util/concurrent/ProgressMonitor
+      - uses: actions/setup-java@cf277c60eb25467037889841efdb72551f06f6c3 # v4
         with:
           distribution: temurin
           java-version: '21'
           cache: maven
-      - name: Bind five exact recipe-generated candidate postimages
+      - name: Bind historical templates and current recipe source closure
         shell: bash
         run: |
           set -euxo pipefail
           mkdir -p proof
           git rev-parse HEAD > proof/head.txt
+          test "$(cat proof/head.txt)" = '${{ github.event.pull_request.head.sha || github.sha }}'
           python3 - <<'PY'
           from pathlib import Path
           import hashlib
+          import json
           import subprocess
-          root = Path('m3/eclipse/framework/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-java/eclipse-framework-m3-index-forward')
-          rows = [r.split('\t') for r in (root/'manifest.tsv').read_text().splitlines() if r and not r.startswith('#')]
+          historical = Path('m3/eclipse/framework/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-java/eclipse-framework-m3-index-forward')
+          rows = [r.split('\t') for r in (historical/'manifest.tsv').read_text().splitlines() if r and not r.startswith('#')]
           assert len(rows) == 8
           assert [r[0] for r in rows] == sorted(r[0] for r in rows)
-          tracked = set(subprocess.check_output(['git', 'ls-files', 'm3/eclipse/framework/src'], text=True).splitlines())
-          assert tracked == {r[0] for r in rows}, tracked ^ {r[0] for r in rows}
           for path, before, wanted, source in rows:
               assert before == 'ABSENT'
-              for p in (Path(path),root/source):
-                  assert p.is_file() and not p.is_symlink(), p
-                  got = hashlib.sha256(p.read_bytes()).hexdigest()
-                  assert got == wanted, (p,got,wanted)
-          print('EXACT_EIGHT_JAVA_POSTIMAGES')
+              template = historical / source
+              assert template.is_file() and not template.is_symlink(), template
+              assert hashlib.sha256(template.read_bytes()).hexdigest() == wanted, template
+          crate = Path('m3/runtime-integration/recipes/m3-integrated-refinement-20261021/canonical/synexia-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021')
+          pins = json.loads((crate/'SOURCE_SEALS.json').read_text())
+          sealed = {r['target_path'] for r in pins['files'] if r['target_path'].startswith('m3/eclipse/framework/src/')}
+          tracked = set(subprocess.check_output(['git', 'ls-files', 'm3/eclipse/framework/src'], text=True).splitlines())
+          assert sealed == tracked, sealed ^ tracked
+          subprocess.run(['python3', str(crate/'verify_sources.py'), '.'], check=True)
+          print('HISTORICAL_EIGHT_TEMPLATES_AND_CURRENT_SOURCE_CLOSURE')
           PY
-      - name: Execute canonical source-sealed OpenRewrite recipe tests
+      - name: Execute historical source-sealed OpenRewrite recipe tests
         run: |
           set -euxo pipefail
-          mvn -B -ntp -f m3/eclipse/framework/recipe/pom.xml test 2>&1 | tee proof/recipe.txt
-      - name: Compile existing M3 collections and install exact jar
+          mvn -B -ntp -f m3/eclipse/framework/recipe/pom.xml test 2>&1 | tee proof/historical-recipe.txt
+      - name: Qualify current resource owner and existing Linux JNI
         run: |
           set -euxo pipefail
-          mkdir -p proof/classes
-          find m3/collections/src/main/java -name '*.java' | sort > proof/m3-sources.txt
-          javac --release 21 -Xlint:all,-module -Werror -d proof/classes @proof/m3-sources.txt 2>&1 | tee proof/m3-core-compile.txt
-          jar --create --file proof/m3-collections.jar -C proof/classes .
-          jar --create --file proof/m3-collections-osgi.jar --manifest m3/eclipse/framework/osgi/m3-collections.MF -C proof/classes .
+          python3 m3/eclipse/framework/qualification/resource-change-20261021/verify.py --out proof/resource-owner
+      - name: Qualify current Eclipse progress and Jobs owners
+        run: |
+          set -euxo pipefail
+          mvn -B -ntp -f m3/eclipse/core-runtime/pom.xml verify 2>&1 | tee proof/core-runtime.txt
+      - name: Execute current canonical SDK refusal and fixed-point gates
+        run: |
+          set -euxo pipefail
+          crate=m3/runtime-integration/recipes/m3-integrated-refinement-20261021/canonical/synexia-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021
+          parser_cp="$GITHUB_WORKSPACE/proof/resource-owner/classes:$GITHUB_WORKSPACE/m3/eclipse/framework/target/classes:$GITHUB_WORKSPACE/m3/eclipse/core-runtime/target/classes:$(cat proof/resource-owner/classpath.txt)"
+          mvn -B -ntp -f "$crate/pom.xml" "-Dparser.classpath=$parser_cp" test 2>&1 | tee proof/current-recipe.txt
+      - name: Check OSGi packaging and unchanged receiving sources
+        run: |
+          set -euxo pipefail
+          jar --create --file proof/m3-collections-osgi.jar --manifest m3/eclipse/framework/osgi/m3-collections.MF -C proof/resource-owner/classes .
           jar --describe-module --file proof/m3-collections-osgi.jar > proof/core-module-describe.txt
-          mvn -B -ntp org.apache.maven.plugins:maven-install-plugin:3.1.3:install-file \
-            -Dfile="$GITHUB_WORKSPACE/proof/m3-collections.jar" \
-            -DgroupId=com.m3 -DartifactId=m3-collections -Dversion=0.1.0-SNAPSHOT \
-            -Dpackaging=jar -DgeneratePom=true
-      - name: Compile and execute real Eclipse API tests
-        run: |
-          set -euxo pipefail
-          mvn -B -ntp -f m3/eclipse/framework/pom.xml verify 2>&1 | tee proof/eclipse-maven.txt
-          python3 - <<'PY'
-          from pathlib import Path
-          import xml.etree.ElementTree as E
-          reports=list(Path('m3/eclipse/framework/target/surefire-reports').glob('TEST-*.xml'))
-          assert reports, 'no JUnit reports'
-          roots=[E.parse(p).getroot() for p in reports]
-          n={k:sum(int(v.attrib.get(k,0)) for v in roots) for k in ('tests','errors','failures','skipped')}
-          assert n=={'tests':6,'errors':0,'failures':0,'skipped':0},n
-          print('ECLIPSE_API_OSGI_SERVICE_JUNIT_TESTS',n)
-          PY
           unzip -p m3/eclipse/framework/target/m3-eclipse-framework-forward-0.1.0-SNAPSHOT.jar META-INF/MANIFEST.MF > proof/eclipse-bundle-manifest.txt
           grep -q 'Bundle-Activator: com.m3.eclipse.framework.M3EclipseRuntimeActivator' proof/eclipse-bundle-manifest.txt
           unzip -p proof/m3-collections-osgi.jar META-INF/MANIFEST.MF > proof/collections-bundle-manifest.txt
           grep -q 'Export-Package: com.m3.collections' proof/collections-bundle-manifest.txt
-          git diff --exit-code -- m3/eclipse/framework/src m3/collections/src/main/java
+          git diff --exit-code -- m3/eclipse/framework/src m3/collections/src/main
       - name: Retain exact-head evidence including failures
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         if: always()
         with:
           name: eclipse-m3-framework-${{ github.event.pull_request.head.sha || github.sha }}
@@ -97,3 +108,5 @@ jobs:
             proof/
             m3/eclipse/framework/recipe/target/surefire-reports/
             m3/eclipse/framework/target/surefire-reports/
+            m3/eclipse/core-runtime/target/surefire-reports/
+            m3/runtime-integration/recipes/m3-integrated-refinement-20261021/canonical/synexia-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/target/surefire-reports/

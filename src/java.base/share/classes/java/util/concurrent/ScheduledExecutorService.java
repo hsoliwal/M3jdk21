@@ -33,6 +33,7 @@
  * http://creativecommons.org/publicdomain/zero/1.0/
  */
 
+// Modified 2026 by Hitesh Soliwal and contributors: add opt-in borrowed-monitor scheduling defaults.
 package java.util.concurrent;
 
 /**
@@ -205,5 +206,114 @@ public interface ScheduledExecutorService extends ExecutorService {
                                                      long initialDelay,
                                                      long delay,
                                                      TimeUnit unit);
+
+    /**
+     * Schedules a one-shot task with a borrowed monitor scoped to its execution.
+     * The monitor is checked for cancellation before and after the task. Binding
+     * occurs when the task runs, and the worker's previous binding is restored
+     * on exit. This method does not begin, complete, or cancel the monitor.
+     *
+     * <p>The returned future is the scheduler's actual future. Future cancellation
+     * and cooperative monitor cancellation remain distinct. A cancellation
+     * exception thrown during execution is recorded as exceptional completion
+     * under the scheduler's existing future contract.
+     *
+     * @param command the task to execute
+     * @param delay the delay before execution, in the given unit
+     * @param unit the delay unit
+     * @param monitor the borrowed monitor to bind during execution
+     * @return the scheduler's future, whose successful result is {@code null}
+     * @throws NullPointerException if command, unit, or monitor is null
+     * @throws RejectedExecutionException if the task cannot be scheduled
+     */
+    default ScheduledFuture<?> scheduleMonitored(
+            Runnable command, long delay, TimeUnit unit, ProgressMonitor monitor) {
+        java.util.Objects.requireNonNull(command, "command");
+        java.util.Objects.requireNonNull(monitor, "monitor");
+        return schedule((Runnable) () -> ProgressMonitors.run(command, monitor), delay, unit);
+    }
+
+    /**
+     * Schedules a value-returning task with a borrowed monitor scoped to execution.
+     * The monitor is checked before and after the call; the previous worker
+     * binding is restored on exit. Neither success nor failure begins, completes,
+     * or cancels the borrowed monitor. The result, including {@code null}, and
+     * exceptions retain the existing Callable and scheduled-future contracts.
+     *
+     * @param <V> the result type
+     * @param callable the task to execute
+     * @param delay the delay before execution, in the given unit
+     * @param unit the delay unit
+     * @param monitor the borrowed monitor to bind during execution
+     * @return the scheduler's actual future for the computed result
+     * @throws NullPointerException if callable, unit, or monitor is null
+     * @throws RejectedExecutionException if the task cannot be scheduled
+     */
+    default <V> ScheduledFuture<V> scheduleMonitored(
+            Callable<V> callable, long delay, TimeUnit unit, ProgressMonitor monitor) {
+        java.util.Objects.requireNonNull(callable, "callable");
+        java.util.Objects.requireNonNull(monitor, "monitor");
+        return schedule((Callable<V>) () -> ProgressMonitors.call(callable, monitor), delay, unit);
+    }
+
+    /**
+     * Schedules a periodic task at a fixed rate, borrowing the same monitor for
+     * each execution. Each execution binds, checks, and restores its own scope
+     * through {@link ProgressMonitors#run(Runnable, ProgressMonitor)}. The caller
+     * owns monitor lifecycle and must support any concurrent uses it initiates.
+     *
+     * <p>The original {@link #scheduleAtFixedRate} timing, non-overlap, failure,
+     * and future rules apply. An exception, including cooperative cancellation,
+     * suppresses subsequent executions. Canceling the returned future follows
+     * the scheduler's contract and does not cancel or complete the monitor.
+     *
+     * @param command the task to execute repeatedly
+     * @param initialDelay the delay before the first execution
+     * @param period the period between successive executions
+     * @param unit the time unit of initialDelay and period
+     * @param monitor the borrowed monitor to bind for every execution
+     * @return the scheduler's actual future for the periodic task
+     * @throws NullPointerException if command, unit, or monitor is null
+     * @throws IllegalArgumentException if period is not positive
+     * @throws RejectedExecutionException if the task cannot be scheduled
+     */
+    default ScheduledFuture<?> scheduleAtFixedRateMonitored(
+            Runnable command, long initialDelay, long period,
+            TimeUnit unit, ProgressMonitor monitor) {
+        java.util.Objects.requireNonNull(command, "command");
+        java.util.Objects.requireNonNull(monitor, "monitor");
+        return scheduleAtFixedRate(() -> ProgressMonitors.run(command, monitor),
+                initialDelay, period, unit);
+    }
+
+    /**
+     * Schedules a periodic task with a fixed delay between executions, borrowing
+     * the same monitor for each execution. Each execution has its own monitor
+     * binding and cancellation checks. The previous binding is restored on exit;
+     * the caller retains ownership of monitor lifecycle and concurrent use.
+     *
+     * <p>The original {@link #scheduleWithFixedDelay} timing, failure, and future
+     * rules apply. An exception, including cooperative cancellation, suppresses
+     * subsequent executions. Canceling the scheduler's returned future does not
+     * cancel or complete the borrowed monitor.
+     *
+     * @param command the task to execute repeatedly
+     * @param initialDelay the delay before the first execution
+     * @param delay the delay between completion and the next execution
+     * @param unit the time unit of initialDelay and delay
+     * @param monitor the borrowed monitor to bind for every execution
+     * @return the scheduler's actual future for the periodic task
+     * @throws NullPointerException if command, unit, or monitor is null
+     * @throws IllegalArgumentException if delay is not positive
+     * @throws RejectedExecutionException if the task cannot be scheduled
+     */
+    default ScheduledFuture<?> scheduleWithFixedDelayMonitored(
+            Runnable command, long initialDelay, long delay,
+            TimeUnit unit, ProgressMonitor monitor) {
+        java.util.Objects.requireNonNull(command, "command");
+        java.util.Objects.requireNonNull(monitor, "monitor");
+        return scheduleWithFixedDelay(() -> ProgressMonitors.run(command, monitor),
+                initialDelay, delay, unit);
+    }
 
 }
