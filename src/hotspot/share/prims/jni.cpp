@@ -2847,9 +2847,8 @@ JNI_ENTRY(const jchar*, jni_GetStringCritical(JNIEnv *env, jstring string, jbool
     ret = NEW_C_HEAP_ARRAY_RETURN_NULL(jchar, s_len + 1, mtInternal);  // add one for zero termination
     /* JNI Specification states return null on OOM */
     if (ret != nullptr) {
-      for (int i = 0; i < s_len; i++) {
-        ret[i] = java_lang_String::char_at(s, i);
-      }
+      // Reuse the canonical flat/M3 range copier within the existing JNI lifetime.
+      java_lang_String::copy_chars(s, 0, s_len, ret);
       ret[s_len] = 0;
     }
     if (isCopy != nullptr) *isCopy = JNI_TRUE;
