@@ -14,6 +14,9 @@ import jdk.internal.misc.Unsafe;
  *
  * <p>The spelling is native/mapped storage addressed by {@code address}. No byte[] or char[]
  * payload is retained by this owner.</p>
+ *
+ * <p>A local factory owns its allocation until the Java owner is constructed successfully.
+ * Failed construction releases the address before the pool returns its byte reservation.</p>
  */
 final class M3StringAtom extends M3StringOwner {
     private static final Unsafe UNSAFE = Unsafe.getUnsafe();
@@ -55,22 +58,29 @@ final class M3StringAtom extends M3StringOwner {
         byte width = coder == String.LATIN1 ? (byte) 1 : (byte) 2;
         long bytes = Math.max(1L, (long) length * width);
         long address = UNSAFE.allocateMemory(bytes);
-        if (length == 0) {
-            UNSAFE.putByte(address, (byte) 0);
-        } else if (width == 1) {
-            for (int index = 0; index < length; index++) {
-                UNSAFE.putByte(address + index, compactValue[index]);
+        boolean completed = false;
+        try {
+            if (length == 0) {
+                UNSAFE.putByte(address, (byte) 0);
+            } else if (width == 1) {
+                for (int index = 0; index < length; index++) {
+                    UNSAFE.putByte(address + index, compactValue[index]);
+                }
+            } else {
+                for (int index = 0; index < length; index++) {
+                    char unit = StringUTF16.charAt(compactValue, index);
+                    long at = address + ((long) index << 1);
+                    UNSAFE.putByte(at, (byte) (unit >>> 8));
+                    UNSAFE.putByte(at + 1L, (byte) unit);
+                }
             }
-        } else {
-            for (int index = 0; index < length; index++) {
-                char unit = StringUTF16.charAt(compactValue, index);
-                long at = address + ((long) index << 1);
-                UNSAFE.putByte(at, (byte) (unit >>> 8));
-                UNSAFE.putByte(at + 1L, (byte) unit);
-            }
+            M3StringAtom created = new M3StringAtom(
+                    null, address, width, true, length, coder, javaHash, canonicalId, structuralHash64);
+            completed = true;
+            return created;
+        } finally {
+            if (!completed) UNSAFE.freeMemory(address);
         }
-        return new M3StringAtom(
-                null, address, width, true, length, coder, javaHash, canonicalId, structuralHash64);
     }
 
     static M3StringAtom localCodePoints(
@@ -89,44 +99,57 @@ final class M3StringAtom extends M3StringOwner {
         byte width = coder == String.LATIN1 ? (byte) 1 : (byte) 2;
         long bytes = Math.max(1L, (long) utf16Length * width);
         long address = UNSAFE.allocateMemory(bytes);
-        int javaHash = 0;
-        int output = 0;
-        for (int index = 0; index < count; index++) {
-            int cp = source[offset + index];
-            if (Character.isBmpCodePoint(cp)) {
-                char unit = (char) cp;
-                if (coder == String.LATIN1 && unit > 0xff) {
-                    UNSAFE.freeMemory(address);
-                    throw new IllegalArgumentException("Latin1 unit out of range");
+        boolean completed = false;
+        try {
+            int javaHash = 0;
+            int output = 0;
+            for (int index = 0; index < count; index++) {
+                int cp = source[offset + index];
+                if (Character.isBmpCodePoint(cp)) {
+                    char unit = (char) cp;
+                    if (coder == String.LATIN1 && unit > 0xff) {
+                        throw new IllegalArgumentException("Latin1 unit out of range");
+                    }
+                    if (output >= utf16Length) {
+                        throw new InternalError("M3 code-point UTF16 length mismatch");
+                    }
+                    javaHash = 31 * javaHash + unit;
+                    putUnit(address, width, output++, unit);
+                } else if (Character.isValidCodePoint(cp)) {
+                    if (coder == String.LATIN1) {
+                        throw new IllegalArgumentException("Latin1 unit out of range");
+                    }
+                    if ((long) output + 2L > utf16Length) {
+                        throw new InternalError("M3 code-point UTF16 length mismatch");
+                    }
+                    char high = Character.highSurrogate(cp);
+                    char low = Character.lowSurrogate(cp);
+                    javaHash = 31 * javaHash + high;
+                    javaHash = 31 * javaHash + low;
+                    putUnit(address, width, output++, high);
+                    putUnit(address, width, output++, low);
+                } else {
+                    throw new IllegalArgumentException(Integer.toString(cp));
                 }
-                javaHash = 31 * javaHash + unit;
-                putUnit(address, width, output++, unit);
-            } else if (Character.isValidCodePoint(cp)) {
-                char high = Character.highSurrogate(cp);
-                char low = Character.lowSurrogate(cp);
-                javaHash = 31 * javaHash + high;
-                javaHash = 31 * javaHash + low;
-                putUnit(address, width, output++, high);
-                putUnit(address, width, output++, low);
-            } else {
-                UNSAFE.freeMemory(address);
-                throw new IllegalArgumentException(Integer.toString(cp));
             }
+            if (output != utf16Length) {
+                throw new InternalError("M3 code-point UTF16 length mismatch");
+            }
+            M3StringAtom created = new M3StringAtom(
+                    null,
+                    address,
+                    width,
+                    true,
+                    utf16Length,
+                    coder,
+                    javaHash,
+                    canonicalId,
+                    structuralHash64);
+            completed = true;
+            return created;
+        } finally {
+            if (!completed) UNSAFE.freeMemory(address);
         }
-        if (output != utf16Length) {
-            UNSAFE.freeMemory(address);
-            throw new InternalError("M3 code-point UTF16 length mismatch");
-        }
-        return new M3StringAtom(
-                null,
-                address,
-                width,
-                true,
-                utf16Length,
-                coder,
-                javaHash,
-                canonicalId,
-                structuralHash64);
     }
 
     private static void putUnit(long address, byte width, int index, char unit) {
@@ -159,35 +182,41 @@ final class M3StringAtom extends M3StringOwner {
         byte width = targetCoder == String.LATIN1 ? (byte) 1 : (byte) 2;
         long bytes = Math.max(1L, (long) length * width);
         long address = UNSAFE.allocateMemory(bytes);
-        int javaHash = 0;
-        for (int index = 0; index < length; index++) {
-            char unit =
-                    sourceCoder == String.LATIN1
-                            ? (char) (source[sourceOffset + index] & 0xff)
-                            : StringUTF16.charAt(source, sourceOffset + index);
-            if (targetCoder == String.LATIN1 && unit > 0xff) {
-                UNSAFE.freeMemory(address);
-                throw new IllegalArgumentException("Latin1 unit out of range");
+        boolean completed = false;
+        try {
+            int javaHash = 0;
+            for (int index = 0; index < length; index++) {
+                char unit =
+                        sourceCoder == String.LATIN1
+                                ? (char) (source[sourceOffset + index] & 0xff)
+                                : StringUTF16.charAt(source, sourceOffset + index);
+                if (targetCoder == String.LATIN1 && unit > 0xff) {
+                    throw new IllegalArgumentException("Latin1 unit out of range");
+                }
+                javaHash = 31 * javaHash + unit;
+                if (width == 1) {
+                    UNSAFE.putByte(address + index, (byte) unit);
+                } else {
+                    long at = address + ((long) index << 1);
+                    UNSAFE.putByte(at, (byte) (unit >>> 8));
+                    UNSAFE.putByte(at + 1L, (byte) unit);
+                }
             }
-            javaHash = 31 * javaHash + unit;
-            if (width == 1) {
-                UNSAFE.putByte(address + index, (byte) unit);
-            } else {
-                long at = address + ((long) index << 1);
-                UNSAFE.putByte(at, (byte) (unit >>> 8));
-                UNSAFE.putByte(at + 1L, (byte) unit);
-            }
+            M3StringAtom created = new M3StringAtom(
+                    null,
+                    address,
+                    width,
+                    true,
+                    length,
+                    targetCoder,
+                    javaHash,
+                    canonicalId,
+                    structuralHash64);
+            completed = true;
+            return created;
+        } finally {
+            if (!completed) UNSAFE.freeMemory(address);
         }
-        return new M3StringAtom(
-                null,
-                address,
-                width,
-                true,
-                length,
-                targetCoder,
-                javaHash,
-                canonicalId,
-                structuralHash64);
     }
 
     static M3StringAtom localLatin1Bytes(
@@ -205,28 +234,35 @@ final class M3StringAtom extends M3StringOwner {
         byte width = coder == String.LATIN1 ? (byte) 1 : (byte) 2;
         long bytes = Math.max(1L, (long) length * width);
         long address = UNSAFE.allocateMemory(bytes);
-        int javaHash = 0;
-        for (int index = 0; index < length; index++) {
-            char unit = (char) (source[offset + index] & 0xff);
-            javaHash = 31 * javaHash + unit;
-            if (width == 1) {
-                UNSAFE.putByte(address + index, (byte) unit);
-            } else {
-                long at = address + ((long) index << 1);
-                UNSAFE.putByte(at, (byte) 0);
-                UNSAFE.putByte(at + 1L, (byte) unit);
+        boolean completed = false;
+        try {
+            int javaHash = 0;
+            for (int index = 0; index < length; index++) {
+                char unit = (char) (source[offset + index] & 0xff);
+                javaHash = 31 * javaHash + unit;
+                if (width == 1) {
+                    UNSAFE.putByte(address + index, (byte) unit);
+                } else {
+                    long at = address + ((long) index << 1);
+                    UNSAFE.putByte(at, (byte) 0);
+                    UNSAFE.putByte(at + 1L, (byte) unit);
+                }
             }
+            M3StringAtom created = new M3StringAtom(
+                    null,
+                    address,
+                    width,
+                    true,
+                    length,
+                    coder,
+                    javaHash,
+                    canonicalId,
+                    structuralHash64);
+            completed = true;
+            return created;
+        } finally {
+            if (!completed) UNSAFE.freeMemory(address);
         }
-        return new M3StringAtom(
-                null,
-                address,
-                width,
-                true,
-                length,
-                coder,
-                javaHash,
-                canonicalId,
-                structuralHash64);
     }
 
     static M3StringAtom localChars(
@@ -244,32 +280,38 @@ final class M3StringAtom extends M3StringOwner {
         byte width = coder == String.LATIN1 ? (byte) 1 : (byte) 2;
         long bytes = Math.max(1L, (long) length * width);
         long address = UNSAFE.allocateMemory(bytes);
-        int javaHash = 0;
-        for (int index = 0; index < length; index++) {
-            char unit = source[offset + index];
-            if (coder == String.LATIN1 && unit > 0xff) {
-                UNSAFE.freeMemory(address);
-                throw new IllegalArgumentException("Latin1 unit out of range");
+        boolean completed = false;
+        try {
+            int javaHash = 0;
+            for (int index = 0; index < length; index++) {
+                char unit = source[offset + index];
+                if (coder == String.LATIN1 && unit > 0xff) {
+                    throw new IllegalArgumentException("Latin1 unit out of range");
+                }
+                javaHash = 31 * javaHash + unit;
+                if (width == 1) {
+                    UNSAFE.putByte(address + index, (byte) unit);
+                } else {
+                    long at = address + ((long) index << 1);
+                    UNSAFE.putByte(at, (byte) (unit >>> 8));
+                    UNSAFE.putByte(at + 1L, (byte) unit);
+                }
             }
-            javaHash = 31 * javaHash + unit;
-            if (width == 1) {
-                UNSAFE.putByte(address + index, (byte) unit);
-            } else {
-                long at = address + ((long) index << 1);
-                UNSAFE.putByte(at, (byte) (unit >>> 8));
-                UNSAFE.putByte(at + 1L, (byte) unit);
-            }
+            M3StringAtom created = new M3StringAtom(
+                    null,
+                    address,
+                    width,
+                    true,
+                    length,
+                    coder,
+                    javaHash,
+                    canonicalId,
+                    structuralHash64);
+            completed = true;
+            return created;
+        } finally {
+            if (!completed) UNSAFE.freeMemory(address);
         }
-        return new M3StringAtom(
-                null,
-                address,
-                width,
-                true,
-                length,
-                coder,
-                javaHash,
-                canonicalId,
-                structuralHash64);
     }
 
     static M3StringAtom localUnit(
@@ -282,22 +324,29 @@ final class M3StringAtom extends M3StringOwner {
         }
         byte width = coder == String.LATIN1 ? (byte) 1 : (byte) 2;
         long address = UNSAFE.allocateMemory(width);
-        if (width == 1) {
-            UNSAFE.putByte(address, (byte) unit);
-        } else {
-            UNSAFE.putByte(address, (byte) (unit >>> 8));
-            UNSAFE.putByte(address + 1L, (byte) unit);
+        boolean completed = false;
+        try {
+            if (width == 1) {
+                UNSAFE.putByte(address, (byte) unit);
+            } else {
+                UNSAFE.putByte(address, (byte) (unit >>> 8));
+                UNSAFE.putByte(address + 1L, (byte) unit);
+            }
+            M3StringAtom created = new M3StringAtom(
+                    null,
+                    address,
+                    width,
+                    true,
+                    1,
+                    coder,
+                    unit,
+                    canonicalId,
+                    structuralHash64);
+            completed = true;
+            return created;
+        } finally {
+            if (!completed) UNSAFE.freeMemory(address);
         }
-        return new M3StringAtom(
-                null,
-                address,
-                width,
-                true,
-                1,
-                coder,
-                unit,
-                canonicalId,
-                structuralHash64);
     }
 
     static M3StringAtom mapped(

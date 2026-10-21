@@ -1,4 +1,5 @@
 /* Copyright 2026 Hitesh Soliwal and contributors. SPDX-License-Identifier: Apache-2.0 */
+/* Modified 2026: skip empty-admission payload reads while retaining state drift checks. */
 /* JNI boundary: no callbacks, no pointer retention, no Java object graph walking.
  * Read fixed-size primitive chunks with Region API (no long-lived critical pins).
  * Two passes count then emit; input arrays are never mutated.
@@ -43,13 +44,16 @@ static jintArray m3_select_range(JNIEnv *env, jintArray rows, jbyteArray states,
             (*env)->GetByteArrayRegion(env, states, offset, chunk, marks);
             if ((*env)->ExceptionCheck(env)) return NULL;
         }
-        (*env)->GetIntArrayRegion(env, rows, first + offset, chunk, row_ids);
-        if ((*env)->ExceptionCheck(env)) return NULL;
+        if (count != 0) {
+            (*env)->GetIntArrayRegion(env, rows, first + offset, chunk, row_ids);
+            if ((*env)->ExceptionCheck(env)) return NULL;
+        }
         jsize accepted = 0;
         for (jsize i = 0; i < chunk; i++) {
             unsigned int bits = required_mask == 0 ? 0u : (unsigned int)(unsigned char)marks[i];
             if ((bits & (unsigned int)required_mask) == (unsigned int)required_mask) {
-                row_ids[accepted++] = row_ids[i];
+                if (count != 0) row_ids[accepted] = row_ids[i];
+                accepted++;
             }
         }
         if (accepted > count - written) {
@@ -343,15 +347,20 @@ Java_com_m3_collections_M3IndexMaskCompactor_selectWindowNative(
             (*env)->GetByteArrayRegion(env, states, state_offset + position, chunk, marks);
             if ((*env)->ExceptionCheck(env)) return NULL;
         }
-        (*env)->GetIntArrayRegion(env, rows, row_offset + position, chunk, values);
-        if ((*env)->ExceptionCheck(env)) return NULL;
+        if (kept != 0) {
+            (*env)->GetIntArrayRegion(env, rows, row_offset + position, chunk, values);
+            if ((*env)->ExceptionCheck(env)) return NULL;
+        }
         jsize batch = chunk;
         if (mask != 0) {
             /* Stable prefix compaction: batch <= i, so unread values stay intact. */
             batch = 0;
             for (jsize i = 0; i < chunk; i++) {
                 unsigned int flags = (unsigned int)(unsigned char)marks[i];
-                if ((flags & (unsigned int)mask) == (unsigned int)mask) values[batch++] = values[i];
+                if ((flags & (unsigned int)mask) == (unsigned int)mask) {
+                    if (kept != 0) values[batch] = values[i];
+                    batch++;
+                }
             }
         }
         if (batch > kept - written) {
@@ -395,15 +404,20 @@ Java_com_m3_collections_M3IndexMaskCompactor_selectLongWindowNative(
             (*env)->GetByteArrayRegion(env, states, state_offset + position, chunk, marks);
             if ((*env)->ExceptionCheck(env)) return NULL;
         }
-        (*env)->GetLongArrayRegion(env, rows, row_offset + position, chunk, values);
-        if ((*env)->ExceptionCheck(env)) return NULL;
+        if (kept != 0) {
+            (*env)->GetLongArrayRegion(env, rows, row_offset + position, chunk, values);
+            if ((*env)->ExceptionCheck(env)) return NULL;
+        }
         jsize batch = chunk;
         if (mask != 0) {
             /* Stable prefix compaction: batch <= i, so unread values stay intact. */
             batch = 0;
             for (jsize i = 0; i < chunk; i++) {
                 unsigned int flags = (unsigned int)(unsigned char)marks[i];
-                if ((flags & (unsigned int)mask) == (unsigned int)mask) values[batch++] = values[i];
+                if ((flags & (unsigned int)mask) == (unsigned int)mask) {
+                    if (kept != 0) values[batch] = values[i];
+                    batch++;
+                }
             }
         }
         if (batch > kept - written) {

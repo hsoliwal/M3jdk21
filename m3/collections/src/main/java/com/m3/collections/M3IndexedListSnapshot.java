@@ -1,3 +1,4 @@
+// Modified 2026 by Hitesh Soliwal and contributors: pack Java admission bits without index aliasing.
 /*
  * Copyright 2026 Hitesh Soliwal and contributors
  * SPDX-License-Identifier: Apache-2.0
@@ -157,7 +158,7 @@ public final class M3IndexedListSnapshot<E> extends AbstractList<E> implements R
     }
 
     /**
-     * A one-time predicate evaluation. JNI, if required, receives only the
+     * A one-time predicate evaluation using packed bits in Java. JNI, if required, receives only the
      * transient primitive byte-state lane; Java retains all Object[] references,
      * index offsets, comparators and callbacks.
      */
@@ -169,6 +170,7 @@ public final class M3IndexedListSnapshot<E> extends AbstractList<E> implements R
                 && !M3IndexMaskCompactor.nativeAvailable()) {
             throw new UnsatisfiedLinkError("m3_collections_mask JNI library unavailable");
         }
+        if (backend == M3IndexMaskCompactor.Backend.JAVA) return filteredJava(predicate);
         byte[] alignedStates = new byte[size()];
         // Evaluate Java callbacks once in logical encounter order. The JNI boundary
         // receives only the primitive state byte lane, never the Object[] owner.
@@ -185,6 +187,34 @@ public final class M3IndexedListSnapshot<E> extends AbstractList<E> implements R
         }
         // Physical membership is already lazily computable from admitted indexes;
         // do not allocate a separate BitSet until a caller actually requests it.
+        return new M3IndexedListSnapshot<>(values, admitted, 0, admitted.length, null);
+    }
+
+    /** Packed logical admission, followed by stable physical-index emission. */
+    private M3IndexedListSnapshot<E> filteredJava(Predicate<? super E> predicate) {
+        int length = size();
+        long[] selected = new long[(int) (((long) length + 63) >>> 6)];
+        int count = 0;
+        for (int ordinal = 0; ordinal < length; ordinal++) {
+            if (predicate.test(get(ordinal))) {
+                selected[ordinal >>> 6] |= 1L << (ordinal & 63);
+                count++;
+            }
+        }
+        // filteredSorted permutes the result directory. Even an all-pass result
+        // must own its directory rather than alias this snapshot or its slices.
+        int[] admitted = count == length ? Arrays.copyOfRange(positions, from, to) : new int[count];
+        if (count != length) {
+            int output = 0;
+            for (int word = 0; word < selected.length; word++) {
+                long bits = selected[word];
+                while (bits != 0) {
+                    int ordinal = (word << 6) + Long.numberOfTrailingZeros(bits);
+                    admitted[output++] = positions[from + ordinal];
+                    bits &= bits - 1;
+                }
+            }
+        }
         return new M3IndexedListSnapshot<>(values, admitted, 0, admitted.length, null);
     }
 
