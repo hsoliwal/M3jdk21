@@ -1,0 +1,63 @@
+# SwingViewportBench tree-jtree (JTree public API: expandPath of every inner node in preorder, 120 s budget), 2026-10-19 on S:, JDK 21.0.9, -XX:+UseSerialGC -Xms64m -Xmx1500m, headless. Rows 13:05-13:09: stock vs M3 with leaf 5 before the chain-order stamps (fresh expansions never needed them). Rows after "# rerun": M3 with the stamps (final leaf 5), 13:55, machine loaded (bash fork retries during the run). Baseline before leaf 5, 07:48-07:50: deep stock 23,152 and M3 (leaves 1-2 only) 23,728 expansions in the 120 s budget
+case	shape	impl	nodes	rows	metric	value	unit	note
+# 2026-10-19T13:05:05+05:30 tree-jtree deep m3 headroom_kb=35676684
+tree-jtree	deep	m3	1111111	1111111	jtree_expand_all	776	ms	JTree.expandPath in preorder, 111111 expanded in 776 ms
+tree-jtree	deep	m3	1111111	1111111	jtree_preferred_size	11	ms	199x21999998
+tree-jtree	deep	m3	1111111	1111111	jtree_heap	84.5	MB	JTree + UI + layout cache + expansion table
+tree-jtree	deep	m3	1111111	1111111	jtree_get_row_for_path_last_first	135.30	us	first query of a fresh path, row 1111110
+tree-jtree	deep	m3	1111111	1111111	jtree_get_row_for_path_last	2.07	us/op	the same path 100 more times, row 1111110
+tree-jtree	deep	m3	1111111	1111111	frame_start	1.822	ms p50	p95 2.695 ms; setViewPosition + paint 800x600
+tree-jtree	deep	m3	1111111	1111111	frame_middle	0.784	ms p50	p95 0.981 ms; setViewPosition + paint 800x600
+tree-jtree	deep	m3	1111111	1111111	frame_end	0.399	ms p50	p95 0.516 ms; setViewPosition + paint 800x600
+# exit 0 tree-jtree deep
+# 2026-10-19T13:05:19+05:30 tree-jtree deep stock headroom_kb=34462320
+tree-jtree	deep	stock	1111111	307521	jtree_expand_all	TIMEOUT	ms	JTree.expandPath in preorder, 30752 expanded in 120757 ms (budget)
+tree-jtree	deep	stock	1111111	307521	jtree_preferred_size	1307	ms	192x6088878
+tree-jtree	deep	stock	1111111	307521	jtree_heap	45.0	MB	JTree + UI + layout cache + expansion table
+tree-jtree	deep	stock	1111111	307521	jtree_get_row_for_path_last_first	1000.00	us	first query of a fresh path, row -1
+tree-jtree	deep	stock	1111111	307521	jtree_get_row_for_path_last	4.96	us/op	the same path 100 more times, row -1
+tree-jtree	deep	stock	1111111	307521	frame_start	1.127	ms p50	p95 3.667 ms; setViewPosition + paint 800x600
+tree-jtree	deep	stock	1111111	307521	frame_middle	1.066	ms p50	p95 2.380 ms; setViewPosition + paint 800x600
+tree-jtree	deep	stock	1111111	307521	frame_end	0.759	ms p50	p95 1.345 ms; setViewPosition + paint 800x600
+# exit 0 tree-jtree deep
+# 2026-10-19T13:07:34+05:30 tree-jtree wide m3 headroom_kb=31870420
+tree-jtree	wide	m3	1001001	1001001	jtree_expand_all	267	ms	JTree.expandPath in preorder, 1001 expanded in 267 ms
+tree-jtree	wide	m3	1001001	1001001	jtree_preferred_size	6	ms	119x20018018
+tree-jtree	wide	m3	1001001	1001001	jtree_heap	20.6	MB	JTree + UI + layout cache + expansion table
+tree-jtree	wide	m3	1001001	1001001	jtree_get_row_for_path_last_first	41.00	us	first query of a fresh path, row 1001000
+tree-jtree	wide	m3	1001001	1001001	jtree_get_row_for_path_last	0.21	us/op	the same path 100 more times, row 1001000
+tree-jtree	wide	m3	1001001	1001001	frame_start	0.516	ms p50	p95 1.426 ms; setViewPosition + paint 800x600
+tree-jtree	wide	m3	1001001	1001001	frame_middle	0.387	ms p50	p95 1.014 ms; setViewPosition + paint 800x600
+tree-jtree	wide	m3	1001001	1001001	frame_end	0.387	ms p50	p95 0.924 ms; setViewPosition + paint 800x600
+# exit 0 tree-jtree wide
+# 2026-10-19T13:07:38+05:30 tree-jtree wide stock headroom_kb=32056892
+tree-jtree	wide	stock	1001001	1001001	jtree_expand_all	1261	ms	JTree.expandPath in preorder, 1001 expanded in 1261 ms
+tree-jtree	wide	stock	1001001	1001001	jtree_preferred_size	18	ms	119x20018018
+tree-jtree	wide	stock	1001001	1001001	jtree_heap	124.8	MB	JTree + UI + layout cache + expansion table
+tree-jtree	wide	stock	1001001	1001001	jtree_get_row_for_path_last_first	929.40	us	first query of a fresh path, row 1001000
+tree-jtree	wide	stock	1001001	1001001	jtree_get_row_for_path_last	327.97	us/op	the same path 100 more times, row 1001000
+tree-jtree	wide	stock	1001001	1001001	frame_start	1.081	ms p50	p95 2.438 ms; setViewPosition + paint 800x600
+tree-jtree	wide	stock	1001001	1001001	frame_middle	1.014	ms p50	p95 1.255 ms; setViewPosition + paint 800x600
+tree-jtree	wide	stock	1001001	1001001	frame_end	1.079	ms p50	p95 2.371 ms; setViewPosition + paint 800x600
+# exit 0 tree-jtree wide
+# rerun with the chain-order stamps
+# 2026-10-19T13:38:46+05:30 tree-jtree deep m3 headroom_kb=8221852
+tree-jtree	deep	m3	1111111	1111111	jtree_expand_all	1226	ms	JTree.expandPath in preorder, 111111 expanded in 1226 ms
+tree-jtree	deep	m3	1111111	1111111	jtree_preferred_size	8	ms	199x21999998
+tree-jtree	deep	m3	1111111	1111111	jtree_heap	85.3	MB	JTree + UI + layout cache + expansion table
+tree-jtree	deep	m3	1111111	1111111	jtree_get_row_for_path_last_first	886.10	us	first query of a fresh path, row 1111110
+tree-jtree	deep	m3	1111111	1111111	jtree_get_row_for_path_last	2.43	us/op	the same path 100 more times, row 1111110
+tree-jtree	deep	m3	1111111	1111111	frame_start	0.957	ms p50	p95 2.764 ms; setViewPosition + paint 800x600
+tree-jtree	deep	m3	1111111	1111111	frame_middle	1.021	ms p50	p95 1.236 ms; setViewPosition + paint 800x600
+tree-jtree	deep	m3	1111111	1111111	frame_end	1.145	ms p50	p95 3.562 ms; setViewPosition + paint 800x600
+# exit 0 tree-jtree deep
+# 2026-10-19T13:38:53+05:30 tree-jtree wide m3 headroom_kb=29505052
+tree-jtree	wide	m3	1001001	1001001	jtree_expand_all	301	ms	JTree.expandPath in preorder, 1001 expanded in 301 ms
+tree-jtree	wide	m3	1001001	1001001	jtree_preferred_size	9	ms	119x20018018
+tree-jtree	wide	m3	1001001	1001001	jtree_heap	20.6	MB	JTree + UI + layout cache + expansion table
+tree-jtree	wide	m3	1001001	1001001	jtree_get_row_for_path_last_first	159.00	us	first query of a fresh path, row 1001000
+tree-jtree	wide	m3	1001001	1001001	jtree_get_row_for_path_last	1.03	us/op	the same path 100 more times, row 1001000
+tree-jtree	wide	m3	1001001	1001001	frame_start	1.021	ms p50	p95 2.838 ms; setViewPosition + paint 800x600
+tree-jtree	wide	m3	1001001	1001001	frame_middle	0.491	ms p50	p95 0.702 ms; setViewPosition + paint 800x600
+tree-jtree	wide	m3	1001001	1001001	frame_end	0.423	ms p50	p95 1.217 ms; setViewPosition + paint 800x600
+# exit 0 tree-jtree wide

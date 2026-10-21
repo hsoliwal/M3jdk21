@@ -681,9 +681,41 @@ public final class M3TreeLayoutCacheDifferential {
     void run(int steps) throws Exception {
         check(true);
         for (step = 0; step < steps; step++) {
+            int logStart = log.size();
+            int before = rebuilds(m3.cache);
             step();
             checkConsistent();
             check(step % 25 == 0);
+            deltaGate(logStart, before, rebuilds(m3.cache));
+        }
+    }
+
+    /** Steps that hand the cache a delta: they must never rebuild it in full (brief rule 24). */
+    static final java.util.Set<String> DELTAS = java.util.Set.of("insert", "remove", "nodeChanged", "nodesChanged",
+            "setExpandedState", "invalidatePathBounds");
+    static int deltaSteps;
+
+    static int rebuilds(AbstractLayoutCache cache) throws ReflectiveOperationException {
+        return (int) cache.getClass().getMethod("rebuilds").invoke(cache);
+    }
+
+    /** Fails when a delta step rebuilt the M3 cache, unless the harness itself rebuilt both after an exception. */
+    void deltaGate(int logStart, int before, int after) {
+        if (logStart >= log.size()) {
+            return;
+        }
+        String[] first = log.get(logStart).trim().split(" ");
+        if (first.length < 2 || !DELTAS.contains(first[1])) {
+            return;
+        }
+        for (String line : log.subList(logStart, log.size())) {
+            if (line.contains("rebuild") || line.contains("resync")) {
+                return;
+            }
+        }
+        deltaSteps++;
+        if (after != before) {
+            fail("full rebuild on a delta step (rule 24): " + (after - before), "0", String.valueOf(after - before));
         }
     }
 
@@ -717,6 +749,7 @@ public final class M3TreeLayoutCacheDifferential {
         return "M3TreeLayoutCacheDifferential" + (FIXED ? " (fixed)" : "") + " seeds " + seeds + " steps " + steps
                 + " passed " + passed
                 + " failed " + failures.size() + " " + failures + "; accepted upstream defect D1 " + ACCEPTED[0]
-                + " times; rebuilt after exceptions: D2 " + ACCEPTED[1] + ", other " + ACCEPTED[2];
+                + " times; rebuilt after exceptions: D2 " + ACCEPTED[1] + ", other " + ACCEPTED[2]
+                + "; full rebuilds on " + deltaSteps + " delta steps: 0";
     }
 }
