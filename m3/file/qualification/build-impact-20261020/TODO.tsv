@@ -1,0 +1,9 @@
+priority	task	status
+P0	Run canonical OpenRewrite source generation/fixed-point/drift refusal	PENDING
+P0	Full source-built installed M3JDK21 module/HotSpot validation	PENDING
+P0	Seal javac ABI facts including constants/processors and full dependency closure	PENDING
+P1	Consume build impact through Maven DefaultModelBuilder and original ProjectSorter	PENDING
+P1	Consume through Gradle existing incremental and task-cache owners	PENDING
+P1	Evaluate no-op/implementation-only/ABI/toolchain cases with actual distributions	PENDING
+P1	Compare Java CSR graph against existing JNI selectors before native optimization	PENDING
+P1	Finish separate five-provider filtered/sorted wrapper contract inventories	PENDING
