@@ -1,0 +1,6 @@
+# case	diagnostic-sha256	diagnostic
+duplicate-source	7ede3e990b85ee60ac2150c7a2d10d4375f9cd58721d4274a4df1a3a7dbf91f9	java.lang.IllegalStateException: duplicate target: m3/collections/src/main/java/com/m3/collections/M3LongLongTreeMap.java\n
+missing-source	a112f94eae6a4aefae2c6f220c00e376fc0008fd8f2056c28e124dca3759efd4	java.lang.IllegalStateException: required source missing: m3/collections/src/main/java/com/m3/collections/M3LongLongTreeMap.java\n
+post-scan-drift	218c0fdd3e2cec8ea4d638d02fd241e4fa99f6cbe7fc6432231643438bab7ed3	org.openrewrite.internal.RecipeRunException: java.lang.IllegalStateException: target changed after scan: m3/collections/src/main/java/com/m3/collections/M3LongLongTreeMap.java\njava.lang.IllegalStateException: target changed after scan: m3/collections/src/main/java/com/m3/collections/M3LongLongTreeMap.java\n
+source-drift	8d8b6bd4b0b41e665138a4a94f38efa18fe14363eefdc67a8ce5b0aef538d778	java.lang.IllegalStateException: source drift: m3/collections/src/main/java/com/m3/collections/M3LongLongTreeMap.java\n
+wrong-java-representation	ddaf047f65d814fb6f0946878a2d668012c5426cae64653d969f5ddf7b46686c	java.lang.IllegalStateException: target is not a Java compilation unit: m3/collections/src/main/java/com/m3/collections/M3LongLongTreeMap.java\n
