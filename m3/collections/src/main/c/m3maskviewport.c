@@ -97,3 +97,97 @@ release:
     (*env)->ReleaseIntArrayElements(env, offsets, src, JNI_ABORT);
     return 0;
 }
+
+/* Additive JNI original-owner CPU viewport output. Old project symbol unchanged. */
+JNIEXPORT jint JNICALL
+Java_com_m3_collections_M3MaskViewportNative_projectFramePage(JNIEnv *env, jclass cls,
+        jintArray offsets, jintArray flags, jint first, jint length,
+        jint required, jint forbidden, jint skipVisible, jint maxVisible,
+        jintArray rows, jint rowOffset, jintArray slots, jint slotOffset,
+        jintArray words, jint wordOffset) {
+    (void)cls;
+    if (offsets == NULL || flags == NULL || rows == NULL || slots == NULL || words == NULL) {
+        raise(env, "java/lang/NullPointerException", "null frame lane");
+        return 0;
+    }
+    const jsize size = (*env)->GetArrayLength(env, offsets);
+    const jsize flagSize = (*env)->GetArrayLength(env, flags);
+    const jsize rowSize = (*env)->GetArrayLength(env, rows);
+    const jsize slotSize = (*env)->GetArrayLength(env, slots);
+    const jsize wordSize = (*env)->GetArrayLength(env, words);
+    if (size != flagSize) {
+        raise(env, "java/lang/IllegalArgumentException", "offset and state array lengths differ");
+        return 0;
+    }
+    if ((*env)->IsSameObject(env, rows, offsets) || (*env)->IsSameObject(env, rows, flags)
+        || (*env)->IsSameObject(env, slots, offsets) || (*env)->IsSameObject(env, slots, flags)
+        || (*env)->IsSameObject(env, words, offsets) || (*env)->IsSameObject(env, words, flags)
+        || (*env)->IsSameObject(env, rows, slots) || (*env)->IsSameObject(env, rows, words)
+        || (*env)->IsSameObject(env, slots, words)) {
+        raise(env, "java/lang/IllegalArgumentException", "frame outputs must be disjoint");
+        return 0;
+    }
+    if (first < 0 || length < 0 || first > size - length
+            || skipVisible < 0 || maxVisible < 0) {
+        raise(env, "java/lang/IndexOutOfBoundsException", "invalid source window");
+        return 0;
+    }
+    jint *src = (*env)->GetIntArrayElements(env, offsets, NULL);
+    if (src == NULL) return 0;
+    jint *state = (*env)->GetIntArrayElements(env, flags, NULL);
+    if (state == NULL) {
+        (*env)->ReleaseIntArrayElements(env, offsets, src, JNI_ABORT);
+        return 0;
+    }
+    jint available = 0;
+    for (jint i = first, end = first + length; i < end; ++i) {
+        if (src[i] < 0) {
+            raise(env, "java/lang/IllegalArgumentException", "negative logical offset");
+            goto frame_cleanup;
+        }
+        if (matches(state[i], required, forbidden)) ++available;
+    }
+    const jint needed = skipVisible >= available ? 0
+        : (available - skipVisible < maxVisible ? available - skipVisible : maxVisible);
+    if (rowOffset < 0 || slotOffset < 0 || wordOffset < 0
+        || needed > rowSize || rowOffset > rowSize - needed
+        || needed > slotSize || slotOffset > slotSize - needed
+        || needed > wordSize || wordOffset > wordSize - needed) {
+        raise(env, "java/lang/IndexOutOfBoundsException", "destination capacity");
+        goto frame_cleanup;
+    }
+    if (needed == 0) goto frame_cleanup;
+    if ((size_t) needed > SIZE_MAX / (3U * sizeof(jint))) {
+        raise(env, "java/lang/OutOfMemoryError", "scratch size overflow");
+        goto frame_cleanup;
+    }
+    jint *scratch = (jint*)malloc(3U * (size_t)needed * sizeof(jint));
+    if (scratch == NULL) {
+        raise(env, "java/lang/OutOfMemoryError", "scratch allocation");
+        goto frame_cleanup;
+    }
+    jint *ordinals = scratch + needed, *values = scratch + 2 * needed;
+    jint left = skipVisible, written = 0;
+    for (jint i = first, end = first + length; i < end; ++i) {
+        if (matches(state[i], required, forbidden)) {
+            if (left > 0) --left;
+            else {
+                scratch[written] = src[i];
+                ordinals[written] = i;
+                values[written] = state[i];
+                if (++written == needed) break;
+            }
+        }
+    }
+    (*env)->ReleaseIntArrayElements(env, flags, state, JNI_ABORT);
+    (*env)->ReleaseIntArrayElements(env, offsets, src, JNI_ABORT);
+    (*env)->SetIntArrayRegion(env, rows, rowOffset, needed, scratch);
+    if (!(*env)->ExceptionCheck(env)) (*env)->SetIntArrayRegion(env, slots, slotOffset, needed, ordinals);
+    if (!(*env)->ExceptionCheck(env)) (*env)->SetIntArrayRegion(env, words, wordOffset, needed, values);
+    free(scratch);
+    return (*env)->ExceptionCheck(env) ? 0 : needed;
+frame_cleanup:
+    (*env)->ReleaseIntArrayElements(env, flags, state, JNI_ABORT);
+    (*env)->ReleaseIntArrayElements(env, offsets, src, JNI_ABORT);
+    return 0;
+}
