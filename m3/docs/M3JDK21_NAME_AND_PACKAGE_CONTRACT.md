@@ -108,6 +108,35 @@ python3 synexia-openrewrite-recipes/crates/m3jdk21-owner-naming/emit.py \
   --plan /path/to/M3jdk21/m3/tooling/name-contract/name-plan.json
 ```
 
+## Canonical-target naming census
+
+`audit.py` derives a deterministic, read-only TSV from the same canonical
+`migration.records[]` map. Each concrete target entry retains its mapping ID,
+module, path, symbol, mapping state, number of mappings sharing the path, and
+a conservative presence/type-declaration disposition. Pending or blocked source
+targets are not treated as failures merely because a file is absent.
+Native C/H paths are not parsed as Java. A file present with the expected
+package/type name is **not** proof of ABI, behavior, performance or installed
+JDK admission, and this is not a full-source inventory.
+
+```sh
+python3 m3/tooling/name-contract/audit.py --strict
+```
+
+This fails for broken path/type pairs, missing files claimed by an implemented
+mapping, duplicate capability IDs and changes to the authoritative map blob.
+Multiple capability records may share an implementation file without
+being reported as a collision; the shared owner must still be reconciled
+before any source-changing recipe.
+
+An executable `READY_FOR_STAGING` recipe is additionally required to
+provide a hash-pinned `closed_java_scope` for the defining compilation unit
+and **every affected caller**. The canonical Synexia emitter refuses missing
+caller preimages, path collisions and unknown source owners. Its `--verify-stage`
+pass refuses output-drift, residual old-path files and unexpected Java
+compilation units in an isolated staging tree. This remains candidate verification,
+not evidence of installed-JDK behavioral equivalence.
+
 The current queue has no promoted candidates. Do not execute an OpenRewrite
 product mutation from this queue until mapping updates, exact staging receipts
 and independent tests are reviewed. Source-first processing stays serial per
