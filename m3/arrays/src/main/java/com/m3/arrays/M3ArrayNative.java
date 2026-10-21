@@ -60,4 +60,64 @@ public final class M3ArrayNative {
             char[] left, int leftStart, char[] right, int rightStart, int count);
 
     private static native char[] nativeConcatenateUtf16(char[][] segments);
+
+    // SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
+    /**
+     * Creates detached, zero-initialized Object backing storage through the loaded JNI owner.
+     * The result's component type is Object. This required-native boundary never substitutes
+     * Java allocation and retains no native pointer or global reference.
+     */
+    public static Object[] allocateObjectsRequired(int length) {
+        requireAllocationLengthAndLibrary(length);
+        Object[] result = nativeAllocateObjects(length);
+        if (result == null) throw new OutOfMemoryError("native Object[] allocation failed");
+        return result;
+    }
+
+    /** Creates detached, zero-initialized byte backing storage through the loaded JNI owner. */
+    public static byte[] allocateBytesRequired(int length) {
+        requireAllocationLengthAndLibrary(length);
+        byte[] result = nativeAllocateBytes(length);
+        if (result == null) throw new OutOfMemoryError("native byte[] allocation failed");
+        return result;
+    }
+
+    /** Creates detached, zero-initialized int backing storage through the loaded JNI owner. */
+    public static int[] allocateIntsRequired(int length) {
+        requireAllocationLengthAndLibrary(length);
+        int[] result = nativeAllocateInts(length);
+        if (result == null) throw new OutOfMemoryError("native int[] allocation failed");
+        return result;
+    }
+
+    /** Creates detached, zero-initialized long backing storage through the loaded JNI owner. */
+    public static long[] allocateLongsRequired(int length) {
+        requireAllocationLengthAndLibrary(length);
+        long[] result = nativeAllocateLongs(length);
+        if (result == null) throw new OutOfMemoryError("native long[] allocation failed");
+        return result;
+    }
+
+    private static void requireAllocationLengthAndLibrary(int length) {
+        if (length < 0) throw new NegativeArraySizeException(Integer.toString(length));
+        if (!loaded) {
+            synchronized (M3ArrayNative.class) {
+                if (!loaded) {
+                    String configured = System.getProperty("m3.arrays.native.path");
+                    if (configured == null || configured.isBlank()) {
+                        throw new UnsatisfiedLinkError("M3 array JNI library is not loaded");
+                    }
+                    load(Path.of(configured));
+                }
+            }
+        }
+    }
+
+    private static native Object[] nativeAllocateObjects(int length);
+
+    private static native byte[] nativeAllocateBytes(int length);
+
+    private static native int[] nativeAllocateInts(int length);
+
+    private static native long[] nativeAllocateLongs(int length);
 }

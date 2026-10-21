@@ -1,0 +1,67 @@
+{
+  "schema": "M3_JNI_ARRAY_STORAGE_RECEIVING_V1",
+  "canonical_repository": "hsoliwal/com.synexia",
+  "canonical_commit": "b096b2b3c1904bb0f32e1cc8802e5bec7fd64ced",
+  "canonical_task": "synexia-openrewrite-recipes/recipe-crates/m3-jni-array-storage-20261021/TASK.json",
+  "canonical_PR": "https://github.com/hsoliwal/com.synexia/pull/12835",
+  "target_base": "51259ccbdc9b17dc7a76a68730acd92f8b278525",
+  "target_postimages": [
+    {
+      "path": "m3/arrays/src/main/java/com/m3/arrays/M3ArrayNative.java",
+      "sha256": "bfaef4b69399dbd12647166bed0485d7a5bf9bdc448a6f195ee12fae4cd4b140",
+      "bytes": 5090,
+      "blob": "3572d82c20495cd4f03a15a9de4ba580ad3d509a"
+    },
+    {
+      "path": "m3/arrays/src/main/native/m3_arrays_jni.c",
+      "sha256": "da4ba8620a190e07f08446d4a1cc6081d860dcd6d98f94ab2633b87643ddcfb7",
+      "bytes": 6349,
+      "blob": "5c11ec1f5db5dd25c05233f3ad9c5a38631c4b2f"
+    },
+    {
+      "path": "m3/collections/pom.xml",
+      "sha256": "aa9905011b1509de8e8aa733dcbdfe134df47971c2cfeab2f82814f9185ea670",
+      "bytes": 14538,
+      "blob": "d022049588142bcc38544bf1f0c10817318097bb"
+    },
+    {
+      "path": "m3/collections/src/main/java/module-info.java",
+      "sha256": "7604bb623b44314dd34e2ac99c8fe391a3d9dba963cc771fa304e9e99fc0683a",
+      "bytes": 193,
+      "blob": "bcbe8a81cab01c1f994080d728a1bc9ee5f5932a"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LinkedHashMap.java",
+      "sha256": "79b033383db19026dc88361dc95f4ecc0ea4e5262c23701460b183d4d83c6188",
+      "bytes": 11998,
+      "blob": "5a8238484ff6831fd07a9050bfd2402c2a8bd94c"
+    }
+  ],
+  "status": "DRAFT_SCOPED_PROOFS_NOT_INSTALLED_RUNTIME_ADMISSION",
+  "map_checks": 10077334,
+  "current_native_checks": 18612,
+  "current_C_compilation": "C17 -O2 -Wall -Wextra -Werror; actual owned job exit0, readers joined",
+  "current_C_SDK_tests": 5,
+  "current_POM_SDK_tests": 7,
+  "map_SDK_tests": 5,
+  "preserved_current_variants": [
+    "shared m3_jni_core.h helpers",
+    "complete m3-recipe-boot Maven profile",
+    "existing current target map public/protected API",
+    "raw Slot production initialization"
+  ],
+  "rejected_Slot_native_empty": "NOT_APPLIED; four existing reentry RED cases retained",
+  "formal_review": "NO_VERDICT; configured helper refused required --no-tools before engine invocation",
+  "pending": [
+    "full reactor, jtreg and installed image",
+    "C++20 qualification",
+    "combined current-DLL Map mode replay; separate current DLL boundary proof passed",
+    "global Slot reentry",
+    "LFU API projections",
+    "concurrency and serialization",
+    "Unicode native-path gap",
+    "full SDK-family superset"
+  ],
+  "regex_scope": "BOTH compiled-pattern reuse and configurable language detection/tokenization required; implementation not added in this delivery",
+  "storage": "105 MiB S-only user approval; protection active"
+}
