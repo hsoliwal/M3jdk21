@@ -188,6 +188,9 @@ public final class M3RegexDpPlan {
         long[] rows = identityRows();
         long[] withoutLeadingLow = null;
         boolean pendingHigh = false;
+        boolean seekFixedPoint = length >= 2 * states;
+        long previousMask = 0L;
+        int fixedLanes = 0;
         for (int i = 0; i < length; i++) {
             if ((i & 255) == 0) check(checkpoint);
             char unit = text.charAt(i);
@@ -197,8 +200,9 @@ public final class M3RegexDpPlan {
             if (pendingHigh) {
                 // Both a complete supplementary code point and a lone high surrogate
                 // have the dot predicate in this program's strictly ASCII literal domain.
-                advanceRows(rows, dots);
-                if (withoutLeadingLow != null) advanceRows(withoutLeadingLow, dots);
+                fixedLanes = advanceUtf16Rows(rows, withoutLeadingLow, dots,
+                        previousMask, fixedLanes, seekFixedPoint);
+                previousMask = dots;
                 pendingHigh = false;
                 if (Character.isLowSurrogate(unit)) continue;
             }
@@ -206,14 +210,61 @@ public final class M3RegexDpPlan {
                 pendingHigh = true;
             } else {
                 long matched = matchingMask(unit);
-                advanceRows(rows, matched);
-                if (withoutLeadingLow != null && i != 0) {
-                    advanceRows(withoutLeadingLow, matched);
-                }
+                fixedLanes = advanceUtf16Rows(rows, i == 0 ? null : withoutLeadingLow,
+                        matched, previousMask, fixedLanes, seekFixedPoint);
+                previousMask = matched;
             }
         }
         check(checkpoint);
         return new Effect(rows, length, withoutLeadingLow, pendingHigh);
+    }
+
+    /**
+     * Invocation-local state bits: primary fixed=1, skipped fixed=2,
+     * primary zero=4, skipped zero=8, previous predicate available=16.
+     * Each relation proves its own fixed point. A zero matching predicate maps
+     * every incoming state to zero; that relation remains zero under all later
+     * predicates. Source reads, surrogate resolution and checkpoints stay external.
+     */
+    private int advanceUtf16Rows(long[] rows, long[] skipped, long matched,
+            long previousMask, int fixedLanes, boolean seekFixedPoint) {
+        if (!seekFixedPoint) {
+            advanceRows(rows, matched);
+            if (skipped != null) advanceRows(skipped, matched);
+            return 0;
+        }
+        if (matched == 0L) {
+            if ((fixedLanes & 4) == 0) java.util.Arrays.fill(rows, 0L);
+            if (skipped != null && (fixedLanes & 8) == 0) java.util.Arrays.fill(skipped, 0L);
+            return fixedLanes | 16 | (skipped == null ? 5 : 15);
+        }
+        if ((fixedLanes & 16) == 0 || matched != previousMask) {
+            // Avoid equality-proof overhead on alternating predicates; absorbing
+            // zero lanes survive a predicate change, ordinary fixed points do not.
+            fixedLanes &= 12;
+            if ((fixedLanes & 4) == 0) advanceRows(rows, matched);
+            if (skipped != null && (fixedLanes & 8) == 0) advanceRows(skipped, matched);
+            return fixedLanes | 16;
+        }
+        if ((fixedLanes & 5) == 0 && advanceRowsToFixedPoint(rows, matched)) {
+            fixedLanes |= 1;
+        }
+        if (skipped != null && (fixedLanes & 10) == 0
+                && advanceRowsToFixedPoint(skipped, matched)) {
+            fixedLanes |= 2;
+        }
+        return fixedLanes;
+    }
+
+    private boolean advanceRowsToFixedPoint(long[] rows, long matched) {
+        boolean unchanged = true;
+        for (int state = 0; state < states; state++) {
+            long incoming = rows[state];
+            long next = advanceMatched(incoming, matched);
+            unchanged &= incoming == next;
+            rows[state] = next;
+        }
+        return unchanged;
     }
 
     private void advanceRows(long[] rows, long matched) {
@@ -314,8 +365,12 @@ public final class M3RegexDpPlan {
             }
             // Preserve every supplied checkpoint on the original Java schedule.
             // A null checkpoint permits one bounded native call; it never owns text.
+            // Preserve the all-star lane and admit sufficiently dense generic powers.
+            // Probe the first two origin rows for eight active bits: sparse powers
+            // do not reliably repay a JNI crossing. This selects cost, not semantics.
             if (checkpoint == null && count >= 256 && states >= 16
-                    && starred == (universe & ~1L) && needsRowUnion(rows)
+                    && (starred == (universe & ~1L) || Long.bitCount(rows[0] | rows[1]) >= 8)
+                    && needsRowUnion(rows)
                     && !nativeUnavailable && !repeatUnavailable) {
                 try {
                     return new Effect(repeat0(rows, count, starred == (universe & ~1L)), total);
@@ -363,7 +418,8 @@ public final class M3RegexDpPlan {
     }
 
     private static void composeJava(long[] left, long[] right, long[] result) {
-        for (int i = 0; i < left.length; i++) result[i] = applyRows(right, left[i]);
+        // Same validated, nonoverlapping primitive relation contract; keep one Java owner.
+        M3StateRelation.compose(left, 0, right, 0, result, 0, left.length);
     }
 
     private static long applyRows(long[] rows, long frontier) {
