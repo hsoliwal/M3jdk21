@@ -42,7 +42,7 @@ public final class M3CollectionMaskCompactor {
         if (length == 0) return from;
         int words = ((length - 1) >>> 6) + 1;
         if (deleted.length < words) throw new IllegalArgumentException("mask too short");
-        if (length < 512 || removalRuns(deleted, length) > Math.max(4, length >>> 7)) {
+        if (length < 512 || fragmented(deleted, length, Math.max(4, length >>> 7))) {
             int write = from;
             for (int read = 0; read < length; read++) {
                 if ((deleted[read >>> 6] & (1L << (read & 63))) == 0) {
@@ -67,8 +67,13 @@ public final class M3CollectionMaskCompactor {
         return write;
     }
 
-    /** Count deletion runs, including ones crossing the 64-bit boundary. */
-    private static int removalRuns(long[] deleted, int length) {
+    /**
+     * Count deletion-run starts only until the caller's run budget is exceeded.
+     * Runs crossing a word boundary count once; high tail bits are ignored.
+     * A fragmented mask cannot become unfragmented after another word, so
+     * the early exit leaves the scalar/run-copy decision exactly unchanged.
+     */
+    private static boolean fragmented(long[] deleted, int length, int budget) {
         int words = ((length - 1) >>> 6) + 1;
         int count = 0;
         long preceding = 0L;
@@ -77,9 +82,10 @@ public final class M3CollectionMaskCompactor {
             int tail = length & 63;
             if (word == words - 1 && tail != 0) bits &= (1L << tail) - 1L;
             count += Long.bitCount(bits & ~((bits << 1) | preceding));
+            if (count > budget) return true;
             preceding = bits >>> 63;
         }
-        return count;
+        return false;
     }
 
     /** Find next removed/retained bit, skipping complete mask words. */
