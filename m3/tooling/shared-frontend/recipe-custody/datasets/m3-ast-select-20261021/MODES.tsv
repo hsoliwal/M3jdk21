@@ -1,0 +1,3 @@
+m3/tooling/module-packs/parser/build.py	0644
+m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3ASTIndex.java	0644
+m3/tooling/module-packs/parser/src/test/java/jdk/m3/parser/test/M3ASTSelectionContract.java	0644

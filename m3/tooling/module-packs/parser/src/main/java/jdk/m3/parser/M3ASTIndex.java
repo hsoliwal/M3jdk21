@@ -7,6 +7,10 @@ import java.util.HashMap;
 import java.util.HexFormat;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Spliterator;
+import java.util.function.IntConsumer;
+import java.util.stream.IntStream;
+import java.util.stream.StreamSupport;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
@@ -221,6 +225,118 @@ public final class M3ASTIndex {
             digest.update((byte) (unit >>> 8));
             digest.update((byte) unit);
         }
+    }
+
+
+    /**
+     * Select the original physical AST occurrence IDs using the parser's
+     * already-interned kind IDs and full-width int state flags.
+     *
+     * <p>A null kind matches all rows. This creates no array, AST node,
+     * wrapper per occurrence or second frontend session. The returned
+     * primitive stream is a fresh read-only view of this source generation.
+     * It may be consumed once. Its encounter order is original row order,
+     * which is not necessarily DFS preorder for all external AST ingress.
+     */
+    public IntStream selectedNodes(String kind, int requiredFlags, int forbiddenFlags) {
+        checkMasks(requiredFlags, forbiddenFlags);
+        int wanted = kindId(kind);
+        if (wanted == -2) return IntStream.empty();
+        return IntStream.range(0, kinds.length)
+                .filter(row -> matches(row, wanted, requiredFlags, forbiddenFlags));
+    }
+
+    /**
+     * Process the same original rows without even an IntStream/spliterator
+     * allocation. The callback is the caller's; the index keeps no listener
+     * or extracted selection. Return the number of callbacks completed.
+     */
+    public int forEachSelectedNode(String kind, int requiredFlags,
+            int forbiddenFlags, IntConsumer visitor) {
+        Objects.requireNonNull(visitor, "original consumer");
+        checkMasks(requiredFlags, forbiddenFlags);
+        int wanted = kindId(kind);
+        if (wanted == -2) return 0;
+        int visited = 0;
+        for (int row = 0; row < kinds.length; row++) {
+            if (matches(row, wanted, requiredFlags, forbiddenFlags)) {
+                visitor.accept(row);
+                visited++;
+            }
+        }
+        return visited;
+    }
+
+    /**
+     * Select an original subtree in child/sibling preorder. Children can be
+     * interleaved with unrelated indexed rows because Builder.add accepts
+     * any previously admitted parent; integer range slicing is therefore
+     * NOT an admissible subtree projection.
+     *
+     * <p>Only one primitive cursor is retained. It follows the original
+     * first/next/parent lanes and stops at the selected root, never entering
+     * that root's sibling chain or allocating a DFS stack. The resulting
+     * source-bound stream is sequential; unlike a splittable global ID
+     * range, subtree traversal may not safely partition without more facts.
+     */
+    public IntStream selectedSubtree(int rootNode, boolean includeRoot,
+            String kind, int requiredFlags, int forbiddenFlags) {
+        int root = check(rootNode);
+        checkMasks(requiredFlags, forbiddenFlags);
+        int wanted = kindId(kind);
+        if (wanted == -2) return IntStream.empty();
+        Spliterator.OfInt rows = new Spliterator.OfInt() {
+            private int cursor = includeRoot ? root : first[root];
+            @Override public boolean tryAdvance(IntConsumer consumer) {
+                Objects.requireNonNull(consumer, "original consumer");
+                if (cursor < 0) return false;
+                int original = cursor;
+                cursor = nextWithinSubtree(original, root);
+                consumer.accept(original);
+                return true;
+            }
+            @Override public Spliterator.OfInt trySplit() { return null; }
+            @Override public long estimateSize() { return kinds.length; }
+            @Override public int characteristics() {
+                return Spliterator.ORDERED | Spliterator.NONNULL | Spliterator.IMMUTABLE;
+            }
+        };
+        return StreamSupport.intStream(rows, false)
+                .filter(row -> matches(row, wanted, requiredFlags, forbiddenFlags));
+    }
+
+    private int nextWithinSubtree(int current, int root) {
+        if (first[current] >= 0) return first[current];
+        while (current != root) {
+            if (next[current] >= 0) return next[current];
+            current = parents[current];
+        }
+        return -1;
+    }
+
+    /**
+     * Kind names already belong to the immutable, per-source vocabulary:
+     * lookup compares existing spellings once instead of constructing a
+     * second String table or retaining a new kind-to-ID map.
+     */
+    private int kindId(String kind) {
+        if (kind == null) return -1;
+        for (int i = 0; i < names.length; i++) {
+            if (names[i].equals(kind)) return i;
+        }
+        return -2;
+    }
+
+    private static void checkMasks(int required, int forbidden) {
+        if ((required & forbidden) != 0) {
+            throw new IllegalArgumentException("contradictory M3AST state masks");
+        }
+    }
+
+    private boolean matches(int row, int wanted, int required, int forbidden) {
+        return (wanted < 0 || kinds[row] == wanted)
+                && (flags[row] & required) == required
+                && (flags[row] & forbidden) == 0;
     }
 
     private int check(int node) { return Objects.checkIndex(node, kinds.length); }
