@@ -1,7 +1,9 @@
 /*
+ * SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
  * Copyright 2026 Hitesh Soliwal and contributors
  * SPDX-License-Identifier: Apache-2.0
  * Modified 2026: refuse output aliasing mask vectors before selection or JNI dispatch.
+ * Modified 2026-10-21: avoid the second metadata scan for an empty Java selection.
  */
 package com.m3.collections;
 
@@ -248,6 +250,8 @@ public final class M3IndexPathMasks {
             if (matches(planes, required, forbidden, offsets[(int) at])) kept++;
         }
         int[] selected = new int[kept];
+        // Stable inputs are required: an empty selection needs no second metadata pass.
+        if (kept == 0) return selected;
         int written = 0;
         at = first;
         for (int n = 0; n < count; n++, at += stride) {
