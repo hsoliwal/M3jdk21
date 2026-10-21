@@ -190,11 +190,36 @@ public final class M3ASTRelationsContract {
         check(failure.get() == null, "concurrent analyzer reads reuse one immutable result");
     }
 
+    private static void eclipseShaped() {
+        // Fixture exercises the identical query API on a separately supplied
+        // JDT-shaped AST. Actual JDT ASTParser parity has an independent gate.
+        M3File source = M3File.of(URI.create("memory:/Example.java"), "class A {}");
+        var builder = M3ASTIndex.builder(source, M3ASTIndex.Domain.ECLIPSE_JDT, 8);
+        int root = builder.add(-1, "JDT_CompilationUnit", 0, source.length(),
+                M3ASTIndex.EXACT_RANGE);
+        int type = builder.add(root, "JDT_TypeDeclaration", 0, source.length(),
+                M3ASTIndex.EXACT_RANGE);
+        int name = builder.add(type, "JDT_SimpleName", 6, 7,
+                M3ASTIndex.EXACT_RANGE);
+        M3ASTRelations shared = M3ASTRelations.of(builder.seal());
+        check(shared.countKind("JDT_TypeDeclaration") == 1,
+                "Eclipse analyzer counts existing detached AST kinds");
+        check(shared.rowOfKind("JDT_SimpleName", 0) == name,
+                "Eclipse linter returns primitive node coordinate");
+        same(type, shared.nearestAncestor(name, "JDT_TypeDeclaration"),
+                "Eclipse analyzer shares original parent relationship");
+        same("A", shared.index().sourceText(name),
+                "JDT-qualified source location, no new source text copy");
+        check(shared.structuralClasses(3, 1000).totalOccurrences() == 3,
+                "identical query owner works across Maven/JDT domains");
+    }
+
     public static void main(String[] args) throws Exception {
         if (args.length != 0) throw new IllegalArgumentException("no arguments");
         Built build = detached(); // AST supplied exactly once, never re-parsed below.
         postings(build);
         structural(build);
+        eclipseShaped();
         concurrent(build);
         System.out.println("M3_AST_RELATIONS_PASS checks=" + CHECKS.get()
                 + " rows=" + build.index().nodeCount());
