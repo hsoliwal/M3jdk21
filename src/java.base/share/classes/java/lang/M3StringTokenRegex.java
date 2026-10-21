@@ -301,9 +301,9 @@ final class M3StringTokenRegex {
 
         static TokenSequence capture(M3String source) {
             TokenSequence result = new TokenSequence();
-            LeafCursor cursor = new LeafCursor(source);
+            M3StringLeafCursor cursor = new M3StringLeafCursor(source, false);
             while (cursor.next()) {
-                result.add(cursor.owner, cursor.start, cursor.length);
+                result.add(cursor.owner(), cursor.start(), cursor.length());
             }
             return result;
         }
@@ -323,68 +323,5 @@ final class M3StringTokenRegex {
         }
     }
 
-    /**
-     * Allocation-bounded owner/range traversal. It mirrors the canonical tuple walk used by
-     * M3StringPool interning but retains no text and creates no child M3String wrappers.
-     */
-    private static final class LeafCursor {
-        private M3StringOwner[] owners = new M3StringOwner[8];
-        private long[] coordinates = new long[8];
-        private int size;
-        private M3StringOwner owner;
-        private int start;
-        private int length;
 
-        LeafCursor(M3String source) {
-            push(source.owner(), source.start(), source.length());
-        }
-
-        boolean next() {
-            while (size != 0) {
-                int top = --size;
-                M3StringOwner current = owners[top];
-                owners[top] = null;
-                long coordinate = coordinates[top];
-                int rangeStart = (int) (coordinate >>> Integer.SIZE);
-                int rangeLength = (int) coordinate;
-                if (!(current instanceof M3StringTuple tuple)) {
-                    owner = current;
-                    start = rangeStart;
-                    length = rangeLength;
-                    return true;
-                }
-                int rangeEnd = Math.addExact(rangeStart, rangeLength);
-                int leftLength = tuple.left.length();
-                if (rangeEnd > leftLength) {
-                    int rightStart = Math.max(0, rangeStart - leftLength);
-                    int rightEnd = rangeEnd - leftLength;
-                    push(tuple.right.owner(),
-                            Math.addExact(tuple.right.start(), rightStart),
-                            rightEnd - rightStart);
-                }
-                if (rangeStart < leftLength) {
-                    int leftStart = rangeStart;
-                    int leftEnd = Math.min(rangeEnd, leftLength);
-                    push(tuple.left.owner(),
-                            Math.addExact(tuple.left.start(), leftStart),
-                            leftEnd - leftStart);
-                }
-            }
-            return false;
-        }
-
-        private void push(M3StringOwner owner, int start, int length) {
-            if (length == 0) return;
-            Objects.checkFromIndexSize(start, length, owner.length);
-            if (size == owners.length) {
-                int capacity = Math.multiplyExact(owners.length, 2);
-                owners = Arrays.copyOf(owners, capacity);
-                coordinates = Arrays.copyOf(coordinates, capacity);
-            }
-            owners[size] = owner;
-            coordinates[size] =
-                    ((long) start << Integer.SIZE) | Integer.toUnsignedLong(length);
-            size++;
-        }
-    }
 }
