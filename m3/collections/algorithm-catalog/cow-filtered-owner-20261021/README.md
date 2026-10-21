@@ -1,7 +1,7 @@
 <!-- SPDX-License-Identifier: Apache-2.0 -->
 # M3JDK21 original-owner filtered COW bulk mutation convergence
 
-This PR is **direct M3JDK21 Java source**, not an M3-over-JDK adapter. It is stacked on the exact [integrated JVM/array/filter PR #1682](https://github.com/hsoliwal/M3jdk21/pull/1682) and preserves its original `java.base`/native `libjava`, `M3LongIndexProjection` and `M3CollectionViews.isEmpty` work byte-for-byte outside the admitted private method.
+This PR is **direct M3JDK21 Java source**, not an M3-over-JDK adapter. It now targets `master` after the merge of [integrated JVM/array/filter PR #1682](https://github.com/hsoliwal/M3jdk21/pull/1682); source provenance remains pinned to that product epoch and preserves its original `java.base`/native `libjava`, `M3LongIndexProjection` and `M3CollectionViews.isEmpty` work byte-for-byte outside the admitted private method.
 
 Canonical reusable Maven/OpenRewrite recipe and donor choice: [Synexia PR #12728](https://github.com/hsoliwal/com.synexia/pull/12728), `com.synexia.m3.Jdk21CowFilteredOwnerConvergence20261021`. The candidate was source-sealed from the actual product parent Git blob `a99cd0355879a2f941079e8401de00b51cd0093e` and SHA-256 `34c5ebc2cfde388f02dfee4fcaa64d1cb81058210d5dcb261bb76ef01adaf0c7`. Complete new Java source SHA-256 `7975e471f1b1b92d2a4bdbecdc3a79049dea4a3c93342da71f8e8d403cd0ca18`.
 
