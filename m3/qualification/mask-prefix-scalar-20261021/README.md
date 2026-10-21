@@ -42,7 +42,7 @@ submission/editorial or unreviewed external GitHub code was copied.
 
 - Before original java.base Git blob: 51ea3a72bb191afc250a58be964363bd5680467c.
 - Direct product postimage Git blob: f85e7359010bd25e0a909a145e283007cff25d7c.
-- New independent test Git blob: 39875249ce1b1adf5203bcf2074db45848bc5eeb.
+- New independent test Git blob: d720912f0f57bcde9fc07a05f31869a19f3452eb.
 - Both exact postimages are first held as canonical Synexia recipe templates;
   the product branch readback returned the exact same Git blobs.
 - The product Java file retains its GPLv2+Classpath original header.
@@ -52,7 +52,7 @@ submission/editorial or unreviewed external GitHub code was copied.
 
 The exact original and candidate compactor sources each compiled in a
 patched java.base Java 21 module with -source 21 -target 21 -Xlint:all -Werror.
-Both separately executed M3CollectionMaskCompactorPrefixTest and passed
+Both separately executed M3CollectionMaskCompactorPrefixTest in mixed mode, and the candidate also passed under -Xint, with
 **2,371,785 assertions per run**. Coverage includes offsets 0/1/13, null and
 reference identity, lengths 0 to 4095 around 64-bit word and 512-element
 dispatch boundaries, nine mask scenarios, 2,000 seeded random masks, poisoned
