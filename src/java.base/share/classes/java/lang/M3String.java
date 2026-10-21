@@ -573,8 +573,9 @@ final class M3String implements CharSequence {
 
     /**
      * Thread-confined logical UTF-16 reader over persistent canonical tuple coordinates.
-     * It resolves each contiguous visible scalar run once, not once per code unit.
-     * Only canonical owners and primitive bounds are retained; no text or native pointer copy.
+     * It caches complete clipped scalar runs and continues adjacent forward runs from an
+     * array-backed owner/range stack. Other jumps seek from the root. Only canonical owners
+     * and primitive coordinates are retained; no text or native pointer is copied.
      */
     static final class CodeUnitCursor {
         private final M3String source;
@@ -582,6 +583,9 @@ final class M3String implements CharSequence {
         private int logicalBegin;
         private int logicalEnd;
         private int scalarOffset;
+        private M3StringOwner[] pendingOwners;
+        private long[] pendingCoordinates;
+        private int pendingSize;
 
         CodeUnitCursor(M3String source) {
             this.source = source;
@@ -590,34 +594,83 @@ final class M3String implements CharSequence {
         char at(int index) {
             Objects.checkIndex(index, source.length());
             if (scalar == null || index < logicalBegin || index >= logicalEnd) {
-                seek(index);
+                boolean adjacent = scalar != null && index == logicalEnd;
+                if (adjacent && pendingSize != 0) {
+                    advance();
+                } else {
+                    seek(index, adjacent);
+                }
             }
             return scalar.charAt(scalarOffset + index - logicalBegin);
         }
 
-        private void seek(int index) {
-            int position = source.start() + index;
-            M3StringOwner current = source.owner();
-            int remaining = source.length() - index;
+        private void seek(int index, boolean continuation) {
+            scalar = null;
+            if (pendingSize != 0) {
+                Arrays.fill(pendingOwners, 0, pendingSize, null);
+                pendingSize = 0;
+            }
+            resolve(source.owner(), source.start(), source.length(), index, 0, continuation);
+        }
+
+        private void advance() {
+            int begin = logicalEnd;
+            scalar = null;
+            int top = --pendingSize;
+            M3StringOwner next = pendingOwners[top];
+            pendingOwners[top] = null;
+            long coordinate = pendingCoordinates[top];
+            resolve(next, (int) (coordinate >>> Integer.SIZE), (int) coordinate, 0, begin, true);
+        }
+
+        /** Resolve a clipped owner range, saving only the later visible siblings. */
+        private void resolve(
+                M3StringOwner current, int offset, int length, int index, int begin,
+                boolean continuation) {
             while (current instanceof M3StringTuple tuple) {
                 int leftLength = tuple.left.length();
-                M3String child;
-                int childIndex;
-                if (position < leftLength) {
-                    child = tuple.left;
-                    childIndex = position;
+                int leftCount = offset < leftLength
+                        ? Math.min(length, leftLength - offset) : 0;
+                if (index < leftCount) {
+                    int rightCount = length - leftCount;
+                    // Build the stack only after an adjacent run has actually been requested.
+                    if (continuation && rightCount != 0) {
+                        push(tuple.right.owner(), tuple.right.start(), rightCount);
+                    }
+                    offset = Math.addExact(tuple.left.start(), offset);
+                    length = leftCount;
+                    current = tuple.left.owner();
                 } else {
-                    child = tuple.right;
-                    childIndex = position - leftLength;
+                    index -= leftCount;
+                    begin += leftCount;
+                    offset = Math.addExact(tuple.right.start(), Math.max(0, offset - leftLength));
+                    length -= leftCount;
+                    current = tuple.right.owner();
                 }
-                remaining = Math.min(remaining, child.length() - childIndex);
-                position = child.start() + childIndex;
-                current = child.owner();
             }
+            logicalBegin = begin;
+            logicalEnd = begin + length;
+            scalarOffset = offset;
             scalar = current;
-            logicalBegin = index;
-            logicalEnd = index + remaining;
-            scalarOffset = position;
+        }
+
+        /** Same owner/packed-coordinate stack discipline as M3StringPool.LeafCursor. */
+        private void push(M3StringOwner owner, int offset, int length) {
+            Objects.checkFromIndexSize(offset, length, owner.length);
+            if (pendingOwners == null || pendingSize == pendingOwners.length) {
+                int capacity = pendingOwners == null
+                        ? 8 : Math.multiplyExact(pendingOwners.length, 2);
+                M3StringOwner[] owners = pendingOwners == null
+                        ? new M3StringOwner[capacity] : Arrays.copyOf(pendingOwners, capacity);
+                long[] coordinates = pendingCoordinates == null
+                        ? new long[capacity] : Arrays.copyOf(pendingCoordinates, capacity);
+                pendingOwners = owners;
+                pendingCoordinates = coordinates;
+            }
+            pendingOwners[pendingSize] = owner;
+            pendingCoordinates[pendingSize] =
+                    ((long) offset << Integer.SIZE) | Integer.toUnsignedLong(length);
+            pendingSize++;
         }
     }
 
@@ -763,6 +816,18 @@ final class M3String implements CharSequence {
             }
         } else if (other.length() != length()) {
             return false;
+        }
+        boolean leftTuple = owner instanceof M3StringTuple;
+        boolean rightTuple = that != null && that.owner instanceof M3StringTuple;
+        if (leftTuple || rightTuple) {
+            CodeUnitCursor leftUnits = leftTuple ? new CodeUnitCursor(this) : null;
+            CodeUnitCursor rightUnits = rightTuple ? new CodeUnitCursor(that) : null;
+            for (int index = 0; index < length(); index++) {
+                char left = leftUnits != null ? leftUnits.at(index) : charAt(index);
+                char right = rightUnits != null ? rightUnits.at(index) : other.charAt(index);
+                if (left != right) return false;
+            }
+            return true;
         }
         for (int index = 0; index < length(); index++) {
             if (charAt(index) != other.charAt(index)) return false;

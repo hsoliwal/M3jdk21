@@ -1,0 +1,35 @@
+{
+  "scope": "unchanged current three-owner source closure; rejected shortcut observations and reproduced known defect",
+  "commands": [
+    {
+      "gate": "compile",
+      "exit": 0,
+      "log": "compile.txt",
+      "sha256": "cd2c240e3e60ad50af75dc9e8322113e039a961b204c4d5598f1ac489e4382df"
+    },
+    {
+      "gate": "mixed",
+      "exit": 0,
+      "log": "mixed.txt",
+      "sha256": "9f5752203dce1346ec56353c42faa50405b3556c8c41230e7df6d91dc567d0ca"
+    },
+    {
+      "gate": "interpreted",
+      "exit": 0,
+      "log": "interpreted.txt",
+      "sha256": "97a8fd24b891d11d15890bca09a713bd990f90d69ec9135cd9b0b827d0b142c6"
+    }
+  ],
+  "diagnostic_sha256": "ede95cc2e0494f6389a3ccd604f39d0b4003320cf3c1c6d7157cf6b0cffcda43",
+  "known_compile_correction": "Initial diagnostic strict compilation rejected non-transient Serializable-subclass List trace field; marked diagnostic-only field transient without changing test assertions. Original compiler log retained.",
+  "donor_proof": {
+    "repository": "hsoliwal/M3jdk21",
+    "commit": "12b16ff9dcf5a2ff4cbd99dfc58b616ae5f76cbe",
+    "git_blob": "006629ccaf6442167f5a208ff9c8e5e0eb1b12bd",
+    "source_sha256": "ead20dcb382d3bde0aed937af39b20ed509af3014b57fda3ce25b39b5b195866",
+    "baseline_exit": 1,
+    "baseline_expected_assertion": "generic Set must retain comparator membership",
+    "interpretation": "known defect reproduced, not acceptance or repaired behavior",
+    "git_blob_exact": true
+  }
+}

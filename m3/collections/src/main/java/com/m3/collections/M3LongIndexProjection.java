@@ -3,6 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  *
  * Additive M3 indexed-array receiver, generated from a sealed Synexia recipe.
+ * Modified 2026: recognize monotone encounter windows before stable index merging.
  */
 package com.m3.collections;
 
@@ -21,8 +22,10 @@ import java.util.Objects;
  * <p>Unlike M3's live collection wrappers this class is a detached snapshot.
  * Its methods never refresh when a mutable source changes. It does not replace
  * {@code java.util} or claim compatible serialized concrete class identity.
- * Reordering encounter order is O(n log n); switching a known sorted direction is O(n).
- * Both use O(n) index storage; indexed reads are O(1).
+ * Reordering encounter order is O(n log n), or O(n) when already monotone.
+ * A monotone whole-index window shares its index; a partial window copies only
+ * its selected range. Switching a known sorted direction is O(n) with O(n)
+ * index storage; indexed reads are O(1).
  * Native mask selection is opt-in via the existing M3IndexMaskCompactor JNI.</p>
  */
 public final class M3LongIndexProjection {
@@ -161,6 +164,21 @@ public final class M3LongIndexProjection {
         return reversed;
     }
 
+    /**
+     * Checks only the selected immutable window, stopping at its first inversion.
+     * The caller handles windows smaller than two before entering this atom.
+     * Equal values are admitted in either direction without moving occurrences.
+     */
+    private boolean isMonotone(boolean descending) {
+        long previous = M3LongAddressKernel.loadUnchecked(values, indices, 0, from);
+        for (int position = from + 1; position < to; position++) {
+            long current = M3LongAddressKernel.loadUnchecked(values, indices, 0, position);
+            if (descending ? previous < current : previous > current) return false;
+            previous = current;
+        }
+        return true;
+    }
+
     private M3LongIndexProjection sorted(boolean descending) {
         Order requested = descending ? Order.DESCENDING : Order.ASCENDING;
         if (order == requested || size() < 2) {
@@ -171,6 +189,15 @@ public final class M3LongIndexProjection {
         if (order != Order.ENCOUNTER) {
             int[] reversed = reverseValueGroups();
             return new M3LongIndexProjection(values, reversed, 0, reversed.length, requested);
+        }
+        if (isMonotone(descending)) {
+            if (from == 0 && to == indices.length) {
+                return new M3LongIndexProjection(values, indices, from, to, requested);
+            }
+            // Keep a small sorted slice from retaining an unrelated index tail.
+            // The payload owner is shared exactly as in the existing merge path.
+            int[] selected = physicalIndices();
+            return new M3LongIndexProjection(values, selected, 0, selected.length, requested);
         }
         int[] current = physicalIndices();
         int size = current.length;
