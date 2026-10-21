@@ -1,0 +1,95 @@
+{
+  "schema": "M3_NAME_MAPPING_FRAGMENT_V1",
+  "copyright": "Copyright 2026 Hitesh Soliwal and contributors",
+  "license": "Apache-2.0 for this new mapping document; source rights remain per file",
+  "mappings": [
+    {
+      "source": "Existing M3JDK21 donor PR #1633 at d3b610f0603522adb3d28dabd82fbeabb2e49d3d; canonical Synexia recipe crate m3-filtered-deque-query-equality-20261021 at hsoliwal/com.synexia PR #12641",
+      "target": "com.m3.collections.M3FilteredDeques.View.remove; com.m3.collections.M3FilteredDeques.View.removeLastOccurrence",
+      "module": "m3/collections",
+      "status": "Explicit existing-contract behavior repair, composed with receiver a115db5; actual combined receiver evidence remains distinct from donor evidence",
+      "recipe": "combine-collections21: existing canonical Synexia hash-pinned OpenRewrite engine",
+      "target_rule": "Keep original backed deque, first/last visible occurrence, hidden occurrences, reverse order, predicate order and read-only refusal. Correct the two equality invocations to Objects.equals(query, stored), matching Java 21 Deque. No new class, field, public signature, JNI symbol or per-entry storage.",
+      "license": "Copyright 2026 Hitesh Soliwal and contributors; existing Apache-2.0 notices retained; no external implementation body copied",
+      "gates": "Exact before/after seals; baseline failure and candidate regression; owning Java21 Maven suite; canonical OpenRewrite refusal/fixed-point. No global platform admission or performance claim.",
+      "receiving_evidence": "m3/docs/composed-integration-20261021/SOURCE_RECEIPT.json"
+    },
+    {
+      "source": "hsoliwal/M3JDK21 PR1636@3b39000f53a886c575686c84e82b0b613296248c; canonical hsoliwal/com.synexia PR12633@a5ecf38c81bcd9f7695e6e6fc9adba33080a6837",
+      "target": "com.m3.collections.M3CollectionViews.SelectionSpliterator;com.m3.collections.M3LongBitmapFilteredSnapshot.VersionedView",
+      "module": "m3/collections",
+      "status": "Explicit callback-state/invalidation behavior repair in existing owners",
+      "recipe": "combine-views-final21: existing canonical Synexia hash-pinned source engine",
+      "target_rule": "Save and restore enclosing callback delivery state; keep generation invalidation raised during capture from being memoized; preserve receiver CopyOnWriteArrayList bulk-owner behavior. No callback retry or new entry owner.",
+      "license": "Existing first-party Apache-2.0 notices retained",
+      "gates": "Before/after seals; baseline failure witnesses; owning Java21 and real JNI tests; original SDK refusal/fixed-point; final receiver full suite required.",
+      "receiving_evidence": "m3/docs/composed-integration-20261021/SOURCE_RECEIPT.json"
+    },
+    {
+      "source": "hsoliwal/M3JDK21 PR1636@3b39000f53a886c575686c84e82b0b613296248c; canonical hsoliwal/com.synexia PR12633@a5ecf38c81bcd9f7695e6e6fc9adba33080a6837",
+      "target": "com.m3.collections.M3IndexedListSnapshot.filteredJava;Java_com_m3_collections_M3IndexMaskCompactor_*",
+      "module": "m3/collections",
+      "status": "Scoped packed-selection and empty-admission work refinement",
+      "recipe": "combine-views-final21: existing canonical Synexia hash-pinned source engine",
+      "target_rule": "Use temporary bit words for scalar admission, then stable physical-index emission into private output; retain fresh selected-directory sort reuse. Native empty admission skips payload reads but preserves state rescan/drift detection and all11 combined mask/window exports.",
+      "license": "Existing first-party Apache-2.0 notices retained",
+      "gates": "Stable occurrence/index/slice/alias oracle; before/after allocation observation; actual checkedJNI8438 and four-export region/drift fixture; generated ABI equality; no universal performance claim.",
+      "receiving_evidence": "m3/docs/composed-integration-20261021/SOURCE_RECEIPT.json"
+    },
+    {
+      "source": "hsoliwal/M3JDK21 PR1636@3b39000f53a886c575686c84e82b0b613296248c; canonical hsoliwal/com.synexia PR12633@a5ecf38c81bcd9f7695e6e6fc9adba33080a6837",
+      "target": "java.util.CollectionViews;java.util.Collections.collectionViewMembershipSource;java.util.IdentityHashMap.collectionViewIdentityKind",
+      "module": "java.base",
+      "status": "Integrated public-owner identity/callback repair; same seven public CollectionViews signatures",
+      "recipe": "combine-views-final21: existing canonical Synexia hash-pinned source engine",
+      "target_rule": "Existing JDK owner classifies key/value/entry semantics. Known Collections wrappers unwrap only for metadata. Keep original source for traversal/mutation; compare identity entry key+value references and identity hash; preserve bulk operand.contains and current binary-carry predicate/COW atoms. Generic com.m3 identity defects are not guessed or bridged.",
+      "license": "Original OpenJDK GPLv2 with Classpath Exception notices retained; current CollectionViews Apache-origin notice and existing core admission note retained",
+      "gates": "Public descriptor equality; actual core identity540/refinement1828/current-owner14694/COW120 checks; source-built images and target legal/API admission remain distinct gates.",
+      "receiving_evidence": "m3/docs/composed-integration-20261021/SOURCE_RECEIPT.json"
+    },
+    {
+      "source": "hsoliwal/M3JDK21 PR1636@3b39000f53a886c575686c84e82b0b613296248c; canonical hsoliwal/com.synexia PR12633@a5ecf38c81bcd9f7695e6e6fc9adba33080a6837;current java.base doclint failure",
+      "target": "java.util.CollectionViews seven public factory Javadocs",
+      "module": "java.base",
+      "status": "Required source-build documentation correction",
+      "recipe": "combine-views-final21: existing canonical Synexia hash-pinned source engine",
+      "target_rule": "Reuse donor parameter, return and throws tags while retaining receiver prose; do not change public descriptors, method behavior or compiler policy.",
+      "license": "Existing notices retained",
+      "gates": "Candidate Xdoclint:all/protected with warnings-as-errors passes; actual full image rebuild required.",
+      "receiving_evidence": "m3/docs/composed-integration-20261021/SOURCE_RECEIPT.json"
+    },
+    {
+      "source": "Canonical Synexia PR12680; exact source seals in SOURCE_RECEIPT.json and FILE_PASSES.tsv",
+      "target": "java.lang.M3StringAtom;java.lang.M3StringPool",
+      "module": "java.base",
+      "status": "Qualified per-file receiving refinement with explicit failure-repair classification",
+      "recipe": "combine-ownership21;combine-tuple21;combine-codepoint21",
+      "target_rule": "Unpublished native memory/reservations and tuple counts released exactly once; bound native writes before access; same payload owners and public API",
+      "license": "Existing GPLv2 with Classpath exception production owners; original test notices individually retained",
+      "gates": "Actual SDK/refusal/replay; exact source-built image/fixture and native ownership evidence; wider phase gate remains open",
+      "receiving_evidence": "m3/docs/composed-integration-20261021/SOURCE_RECEIPT.json"
+    },
+    {
+      "source": "Canonical Synexia PR12680; exact source seals in SOURCE_RECEIPT.json and FILE_PASSES.tsv",
+      "target": "java.lang.invoke.StringConcatFactory.m3Stringifier",
+      "module": "java.base",
+      "status": "Qualified per-file receiving refinement with explicit failure-repair classification",
+      "recipe": "receive-concat21;receive-concat-guard21",
+      "target_rule": "Reuse existing reference stringifier for nullable String inputs; retain typed conversion order and both M3 admission/flat fallback; exact runtime-manifest successor",
+      "license": "OpenJDK Factory GPLv2 with Classpath exception; no license invented for headerless historical fixture",
+      "gates": "Actual SDK/refusal/replay; exact source-built image/fixture and native ownership evidence; wider phase gate remains open",
+      "receiving_evidence": "m3/docs/composed-integration-20261021/SOURCE_RECEIPT.json"
+    },
+    {
+      "source": "Canonical Synexia PR12680; exact source seals in SOURCE_RECEIPT.json and FILE_PASSES.tsv",
+      "target": "java.lang.M3StringPool.internTuple",
+      "module": "java.base",
+      "status": "Qualified per-file receiving refinement with explicit failure-repair classification",
+      "recipe": "receive-coordinate21",
+      "target_rule": "Equal ordered child owner+packed coordinates suffice for canonical reuse; exact leaf walk remains for every other case including full route collisions",
+      "license": "Existing GPLv2 with Classpath exception production owner; existing CanonicalDag notice retained",
+      "gates": "Actual SDK/refusal/replay; exact source-built image/fixture and native ownership evidence; wider phase gate remains open",
+      "receiving_evidence": "m3/docs/composed-integration-20261021/SOURCE_RECEIPT.json"
+    }
+  ]
+}

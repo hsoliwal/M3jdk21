@@ -1,0 +1,94 @@
+{
+  "schema": "M3_CANONICAL_RECIPE_EVIDENCE_INDEX_V1",
+  "copyright": "Copyright 2026 Hitesh Soliwal and contributors",
+  "license": "Apache-2.0 for this new index; copied receipts retain canonical provenance",
+  "canonical_E1": "0ee3e62241cb1252f2d018a33969f64e66c2b2fe",
+  "canonical_E2": "a67c7c03742f0c994b0d4a57d56269ea012b0b25",
+  "qualification": {
+    "datasets": 13,
+    "actual_sdk_tests": 65,
+    "preparation_checks": 156,
+    "receiver_contract_cases": 198
+  },
+  "source": "Compact execution/composition/product-receiver records from the canonical task. Only command workspace prefixes explicitly listed below are normalized; detailed raw logs and exact templates remain in canonical source.",
+  "normalizations": [
+    {
+      "path": "receive-composed21_PRODUCT_RECEIVER.json",
+      "raw_sha256": "1ac44584caea391c0ba2343337689bd05f40637efdc6ee3f01dc8d18534442ca",
+      "published_sha256": "885a6ece9527fae534e9ef26344317b65644020629dbb892bb0e1e4b0c96b1e3",
+      "replacements": 9,
+      "rule": "Replace the execution workspace prefix in argv with ${M3_WORK}; retain every argument suffix, exit code, output and source hash.",
+      "canonical_source": "tasks/m3-receiving-corrections-20261021/evidence/receive-composed21/PRODUCT_RECEIVER.json"
+    }
+  ],
+  "files": [
+    {
+      "path": "E1_COMPOSITION.json",
+      "sha256": "adf54486bcf4d30413f977ac0aab0291a05dd1907a79c6c65b41abf5b137a00a"
+    },
+    {
+      "path": "E1_SDK_EXECUTION.json",
+      "sha256": "6d915232d610dacdc1533e5ca3821ff3019e0c392dfe18dc619ae1206d7599dd"
+    },
+    {
+      "path": "E2_COMPOSITION.json",
+      "sha256": "b765c27e924a755d9bc74047b5fa77be6923bc6ec0c88f7e143aa38332b70cb7"
+    },
+    {
+      "path": "E2_SDK_EXECUTION.json",
+      "sha256": "0d6eaf3166f31f08139251302a71576877f2cda0d215de386f8c7bc281ae0fd7"
+    },
+    {
+      "path": "combine-addendum21_PRODUCT_RECEIVER.json",
+      "sha256": "ca43ee6119ef2b3531cdc5a7014ae24483a4fbaec8e0e349d9950b50e5017191"
+    },
+    {
+      "path": "combine-codepoint21_PRODUCT_RECEIVER.json",
+      "sha256": "b5bffc5dec8effbbdca63bdbb29653ee7890af1aea87d1d92bf35b1be34dfc82"
+    },
+    {
+      "path": "combine-collections21_PRODUCT_RECEIVER.json",
+      "sha256": "78d55f1cf05a4d392bb765626d87fb147fe8a07c54902f831e24df392234c954"
+    },
+    {
+      "path": "combine-composed21_PRODUCT_RECEIVER.json",
+      "sha256": "191bcd33e51f4492ae954af58c25475333494e7fdc7f139506dec03576e73cc9"
+    },
+    {
+      "path": "combine-ownership21_PRODUCT_RECEIVER.json",
+      "sha256": "04547e8f6a2eb095b5b9e15a6af94e317c1aad5b92d56ccde62deca9b2a1e6d0"
+    },
+    {
+      "path": "combine-string21_PRODUCT_RECEIVER.json",
+      "sha256": "770c9629eb0c8cff824a074809384aa23e45e07e312e6f6a9553321c493877dc"
+    },
+    {
+      "path": "combine-tuple21_PRODUCT_RECEIVER.json",
+      "sha256": "4c3ace5b193e89815e3d8f0f0fcabdb63509de9365ff31133b78c725f0f4b1cb"
+    },
+    {
+      "path": "combine-views-final21_PRODUCT_RECEIVER.json",
+      "sha256": "700126c0cd98693ffca9dbbd3452db9dfdfce737241e4586799e7bc619db586c"
+    },
+    {
+      "path": "receive-budget21_PRODUCT_RECEIVER.json",
+      "sha256": "824bef0cbe0b130ab2d7a7b463fd9e9b7328452784a0c5436f9916d18f98c2fe"
+    },
+    {
+      "path": "receive-composed21_PRODUCT_RECEIVER.json",
+      "sha256": "885a6ece9527fae534e9ef26344317b65644020629dbb892bb0e1e4b0c96b1e3"
+    },
+    {
+      "path": "receive-concat-guard21_PRODUCT_RECEIVER.json",
+      "sha256": "f0147dfa5688e2fdc5b6f5d55cc8b9f264174636e191589ad728f5ef532f7668"
+    },
+    {
+      "path": "receive-concat21_PRODUCT_RECEIVER.json",
+      "sha256": "93ea81f1541814a3dc172335ac978d364c8e73cf7a5c01872bc3207105a402b1"
+    },
+    {
+      "path": "receive-coordinate21_PRODUCT_RECEIVER.json",
+      "sha256": "3d5d5cbf5be1c2b20acb8074e72f65a70ba6117a1d6a081f792b1f192ddb9310"
+    }
+  ]
+}
