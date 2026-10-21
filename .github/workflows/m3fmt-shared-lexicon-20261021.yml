@@ -1,0 +1,24 @@
+# Copyright 2026 Hitesh Soliwal and contributors. SPDX-License-Identifier: Apache-2.0
+name: M3JDK21 shared immutable lexicon M3FMT Java JNI
+on:
+  pull_request:
+    paths:
+      - 'm3/ports/file/src/main/java/com/m3/file/M3Fmt*.java'
+      - 'm3/ports/file/native/m3fmt_varints_jni.c'
+      - 'm3/ports/file/qualification/m3fmt-shared-lexicon-20261021/**'
+      - '.github/workflows/m3fmt-shared-lexicon-20261021.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  original-file-owner-java-jni:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Compile M3JDK21 original Java owners, JNI header and C17 source, run both paths
+        run: bash m3/ports/file/qualification/m3fmt-shared-lexicon-20261021/verify.sh
