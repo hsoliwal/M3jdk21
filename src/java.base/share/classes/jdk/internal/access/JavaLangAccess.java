@@ -427,6 +427,14 @@ public interface JavaLangAccess {
      */
     boolean stringConcatUsesM3Storage();
 
+    /**
+     * Return immutable, already-prepared M3 String trigram candidate facts, or null.
+     * Lookup never admits storage or prepares facts. Absence proves nothing.
+     */
+    default java.util.function.LongPredicate stringM3TrigramFacts(String text) {
+        return null;
+    }
+
    /**
     * Get the coder for the supplied character.
     */
