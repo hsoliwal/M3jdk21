@@ -5,11 +5,9 @@ package com.m3.rewrite.backport;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
-import java.security.MessageDigest;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.HexFormat;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -66,11 +64,11 @@ public final class M3StringLeafCursorConvergenceRecipe
               inventory.conflicts.add("duplicate target " + path);
               return tree;
             }
-            if (target.required() && !sha256(file.printAll()).equals(target.before())) {
+            if (target.required() && !gitBlobSha1(file.printAll()).equals(target.before())) {
               inventory.conflicts.add(
-                  "preimage drift " + path + " actual=" + sha256(file.printAll()));
+                  "preimage drift " + path + " actual=" + gitBlobSha1(file.printAll()));
             }
-            if (!target.required() && !sha256(file.printAll()).equals(target.after())) {
+            if (!target.required() && !gitBlobSha1(file.printAll()).equals(target.after())) {
               inventory.conflicts.add("generated cursor drift " + path);
             }
           }
@@ -128,7 +126,7 @@ public final class M3StringLeafCursorConvergenceRecipe
                 List.of(Parser.Input.fromString(Path.of(target.path()), text)), null, ctx).toList();
         if (files.size() != 1 || !(files.getFirst() instanceof J.CompilationUnit)
             || !files.getFirst().printAll().equals(text)
-            || !sha256(text).equals(target.after())) {
+            || !gitBlobSha1(text).equals(target.after())) {
           throw new IllegalStateException("M3 leaf cursor postimage drift " + target.path());
         }
         parsed.put(target.path(), files.getFirst());
@@ -141,18 +139,18 @@ public final class M3StringLeafCursorConvergenceRecipe
     return List.of(
         new Target(
             "src/java.base/share/classes/java/lang/M3StringPool.java",
-            "POOL_BEFORE_SHA256",
-            "POOL_AFTER_SHA256",
+            "e5ab6c95526d9170fc88d9e3ac7c5040606a3367",
+            "15231ee5a2c48153550c700f98722e15c0f4451c",
             true),
         new Target(
             "src/java.base/share/classes/java/lang/M3StringTokenRegex.java",
-            "TOKEN_BEFORE_SHA256",
-            "TOKEN_AFTER_SHA256",
+            "c06dc1366063d717cc998dae5593d4bf7997b6b6",
+            "ad87db7ed0f7e0490b46245782ec64185fb457d7",
             true),
         new Target(
             "src/java.base/share/classes/java/lang/M3StringLeafCursor.java",
             "",
-            "CURSOR_SHA256",
+            "1851d3ce7cd6de9f0a9d9b84ef83999b43de64f4",
             false));
   }
 
@@ -165,10 +163,15 @@ public final class M3StringLeafCursorConvergenceRecipe
     }
   }
 
-  private static String sha256(String text) {
+  /** Git blob identity, matching repository source receipts rather than a parallel digest domain. */
+  private static String gitBlobSha1(String text) {
     try {
-      MessageDigest digest = MessageDigest.getInstance("SHA-256");
-      return HexFormat.of().formatHex(digest.digest(text.getBytes(StandardCharsets.UTF_8)));
+      byte[] payload = text.getBytes(StandardCharsets.UTF_8);
+      byte[] header = ("blob " + payload.length + "\0").getBytes(StandardCharsets.US_ASCII);
+      java.security.MessageDigest digest = java.security.MessageDigest.getInstance("SHA-1");
+      digest.update(header);
+      digest.update(payload);
+      return java.util.HexFormat.of().formatHex(digest.digest());
     } catch (java.security.NoSuchAlgorithmException impossible) {
       throw new ExceptionInInitializerError(impossible);
     }
