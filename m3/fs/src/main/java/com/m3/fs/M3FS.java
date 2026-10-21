@@ -896,7 +896,7 @@ public final class M3FS implements AutoCloseable {
     String[] checked = Objects.requireNonNull(paths, "paths").clone();
     if (checked.length > 4096) throw new IllegalArgumentException("stat batch limit");
     for (String entry : checked) Objects.requireNonNull(entry, "path");
-    return new M3FsStatBatch(M3FsNative.statBatch(state.requireHandle(), checked));
+    return M3FsStatBatch.adoptNative(M3FsNative.statBatch(state.requireHandle(), checked));
   }
 
   public synchronized List<DirEntry> list(String path) throws IOException {
