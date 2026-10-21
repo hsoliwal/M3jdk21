@@ -17,6 +17,7 @@ import java.lang.reflect.Array;
 import java.lang.reflect.Field;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
+import java.nio.charset.StandardCharsets;
 import java.nio.MappedByteBuffer;
 import java.nio.channels.FileChannel;
 import java.nio.file.Files;
@@ -34,7 +35,9 @@ public final class M3StringOsMappedNativeConcatTest {
     private static long checks;
     private static Class<?> valueClass, ownerClass, atomClass, tupleClass;
     private static MethodHandle mappedAtom, whole, range, concatNative, charShadow, hash, sameCoordinate;
+    private static MethodHandle ordinaryStringConstructor, compactValueProjection;
     private static Field valueOwner, atomPayloadOwner, tupleLeft, tupleRight;
+    private static Field stringValueField, stringM3Field;
 
     public static void main(String[] args) throws Throwable {
         bind();
@@ -63,6 +66,7 @@ public final class M3StringOsMappedNativeConcatTest {
             check(expected.equals(text(joined)), "native multi-owner spelling");
             check(expected.hashCode() == (int) hash.invoke(joined), "Java hash parity");
             checkAllLeavesMapped(joined, mapped);
+            checkOrdinaryStringDualView(joined, expected);
 
             for (int trial = 0; trial < 300; trial++) {
                 Random random = new Random(0x4d3L + trial);
@@ -91,6 +95,53 @@ public final class M3StringOsMappedNativeConcatTest {
             Reference.reachabilityFence(mapped);
         }
         System.out.println("M3StringOsMappedNativeConcatTest PASS checks=" + checks);
+    }
+
+    /**
+     * The standard java.lang.String object remains the public receiver and keeps its byte[]
+     * field, coder and hash fields. Its canonical M3 view owns the actual shared spelling.
+     * Compatibility byte[] and char[] are explicit fresh array snapshots, not cached copies
+     * or a fabricated mutable alias of the operating system's read-only mapping.
+     */
+    private static void checkOrdinaryStringDualView(Object mappedView, String expected)
+            throws Throwable {
+        String first = (String) ordinaryStringConstructor.invoke(mappedView);
+        String second = (String) ordinaryStringConstructor.invoke(mappedView);
+        byte[] sentinel = (byte[]) stringValueField.get(first);
+        check(sentinel != null && sentinel.length == 0, "M3 String uses empty byte[] sentinel");
+        check(sentinel == stringValueField.get(second), "String wrappers share compatibility sentinel");
+        check(stringM3Field.get(first) == mappedView, "first String retains canonical M3 view");
+        check(stringM3Field.get(second) == mappedView, "second String retains same M3 view");
+
+        check(first.length() == expected.length(), "ordinary String.length over M3");
+        check(first.equals(expected) && expected.equals(first), "ordinary String.equals");
+        check(first.hashCode() == expected.hashCode(), "ordinary String.hashCode");
+        check(first.charAt(0) == expected.charAt(0), "ordinary String.charAt");
+
+        char[] charsA = first.toCharArray();
+        char[] charsB = first.toCharArray();
+        check(charsA != charsB, "toCharArray must return a fresh Java array");
+        check(Arrays.equals(charsA, expected.toCharArray()), "ordinary char[] contents");
+        check(Arrays.equals(charsB, expected.toCharArray()), "repeat char[] contents");
+        charsA[0] ^= 1;
+        check(first.charAt(0) == expected.charAt(0), "mutable char[] cannot mutate interned text");
+
+        byte[] bytesA = (byte[]) compactValueProjection.invoke(first);
+        byte[] bytesB = (byte[]) compactValueProjection.invoke(first);
+        check(bytesA != bytesB && bytesA != sentinel && bytesB != sentinel,
+                "explicit Compact-String byte[] snapshots");
+        check(bytesA.length == expected.length() * 2, "UTF-16 array byte length");
+        bytesA[0] ^= 1;
+        check(first.equals(expected), "mutating byte[] snapshot leaves String unchanged");
+
+        check(Arrays.equals(first.getBytes(StandardCharsets.UTF_8),
+                expected.getBytes(StandardCharsets.UTF_8)), "ordinary String UTF-8 export");
+        check(Arrays.equals(first.codePoints().toArray(), expected.codePoints().toArray()),
+                "ordinary String code points across mapped leaves");
+        check(first.substring(1, first.length() - 1)
+                .equals(expected.substring(1, expected.length() - 1)), "ordinary substring view");
+        check(stringValueField.get(first) == sentinel, "projections never replace String sentinel");
+        check(stringM3Field.get(first) == mappedView, "canonical M3 owner remains authoritative");
     }
 
     private static Object mappedValue(MappedByteBuffer mapping, long address, String text) throws Throwable {
@@ -156,6 +207,11 @@ public final class M3StringOsMappedNativeConcatTest {
         MethodHandles.Lookup atomLookup = MethodHandles.privateLookupIn(atomClass, base);
         MethodHandles.Lookup valueLookup = MethodHandles.privateLookupIn(valueClass, base);
         MethodHandles.Lookup poolLookup = MethodHandles.privateLookupIn(poolClass, base);
+        MethodHandles.Lookup stringLookup = MethodHandles.privateLookupIn(String.class, base);
+        ordinaryStringConstructor = stringLookup.findConstructor(String.class,
+                MethodType.methodType(void.class, valueClass));
+        compactValueProjection = stringLookup.findVirtual(String.class, "value",
+                MethodType.methodType(byte[].class));
         mappedAtom = atomLookup.findStatic(atomClass, "mapped", MethodType.methodType(atomClass,
             Object.class, long.class, byte.class, boolean.class, int.class,
             byte.class, int.class, long.class, long.class));
@@ -175,6 +231,10 @@ public final class M3StringOsMappedNativeConcatTest {
         atomPayloadOwner = atomClass.getDeclaredField("payloadOwner");
         tupleLeft = tupleClass.getDeclaredField("left");
         tupleRight = tupleClass.getDeclaredField("right");
+        stringValueField = String.class.getDeclaredField("value");
+        stringM3Field = String.class.getDeclaredField("m3");
+        stringValueField.setAccessible(true);
+        stringM3Field.setAccessible(true);
         valueOwner.setAccessible(true);
         atomPayloadOwner.setAccessible(true);
         tupleLeft.setAccessible(true);
