@@ -47,3 +47,22 @@ serial recipe and immutable receipt, not a weakened or dynamically regenerated
 file list. The actual prior PR-head four-library run caught the stale test blob
 before compilation; this successor is designed to restore the integrity gate,
 not to claim JDK/JNI/provider tests pass. Canonical Synexia dataset: `m3-interop-epoch2-20261021`.
+
+## Third source epoch — three Java 21 test/contract corrections
+
+The 76-member predecessor from the previous source epoch is preserved byte-for-byte
+as `previous-source-census-76-epoch2-20261021.tsv`. The exact three Java test
+changes are recorded in `source-epoch-76-epoch3-delta-20261021.tsv`, with both
+source SHA-256 and Git blobs. The earlier 36-file receipt, original seven-successor
+ledger, first complete 76-file receipt and single-test epoch-2 change all remain
+immutable. The verifier replays **all three** transitions serially, rejects any
+unlisted file/source divergence, and preserves historical five-file rights.
+
+The three source-only changes answer real Maven compiler diagnostics from
+workflow 39621301706: locally suppress only the documented deprecated Apache
+Predicate field warning (not `-Werror`), import the missing JDK `Map`, and
+replace a missing test-only `M3FiveProviderDirectSdk` reference with the
+existing real `M3LibraryCollections.springMultiValueMap()` factory, which
+returns the current `M3SpringArrayMultiValueMap` owner. No production Java,
+JNI or collection storage implementation is changed. The actual full suite
+remains separately proof-gated.

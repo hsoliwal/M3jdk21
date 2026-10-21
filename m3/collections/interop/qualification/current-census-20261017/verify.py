@@ -14,7 +14,7 @@ HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[4] if len(HERE.parents) > 4 else Path.cwd()
 CENSUS = HERE / 'current-source-census.tsv'
 LEGACY = ROOT / 'm3/collections/interop/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-java/collections-library-interop/manifest.tsv'
-RECEIPT_SHA256 = 'd3312d7aca804f20d9ee10a1d5ab4a4f7ad3d8e2290f15465593c2e89201ee65'
+RECEIPT_SHA256 = 'ac26cde080faab280c68d76aa372ce7185cded482be466650fb6d16b75bd9ffe'
 LEGACY_GIT_BLOB = 'bdc0cab41cd4033421388fbd44f37203d765f57e'
 BASE = 'm3/collections/interop/src/'
 MAIN = BASE + 'main/java/com/m3/collections/interop/'
@@ -117,6 +117,10 @@ EPOCH_76 = HERE / 'previous-source-census-76-20261021.tsv'
 EPOCH_76_SHA256 = 'c2c83e083c242ce54da263b75fe1423662b194b7e69c8f2c97a242ad6cf8f4f0'
 EPOCH_76_DELTA = HERE / 'source-epoch-76-delta-20261021.tsv'
 EPOCH_76_DELTA_SHA256 = '06fa373ed02f4647d57954c27335bbfdd4f35e49bbcfc5d268b2e14c7ceaf0f8'
+EPOCH_76_2 = HERE / 'previous-source-census-76-epoch2-20261021.tsv'
+EPOCH_76_2_SHA256 = 'd3312d7aca804f20d9ee10a1d5ab4a4f7ad3d8e2290f15465593c2e89201ee65'
+EPOCH_76_3_DELTA = HERE / 'source-epoch-76-epoch3-delta-20261021.tsv'
+EPOCH_76_3_DELTA_SHA256 = '06fb9ef4f2f39f59d879be8741585c49102ea6d55f38e4608003a5a18e376b4f'
 
 
 
@@ -208,23 +212,24 @@ def verify(root=ROOT, census=CENSUS, legacy=LEGACY,
     current = rows(census, 4)
     if len(current) != len(ALLOWED_PATHS) or tuple(r[0] for r in current) != ALLOWED_PATHS:
         raise ValueError('current interop file census not exact/reordered')
+
     if check_tracked:
-        if (PREVIOUS_CENSUS.is_symlink() or not PREVIOUS_CENSUS.is_file()
-                or sha256(PREVIOUS_CENSUS.read_bytes()) != PREVIOUS_SHA256):
-            raise ValueError('previous source receipt missing or changed')
-        if (SUCCESSOR_LEDGER.is_symlink() or not SUCCESSOR_LEDGER.is_file()
-                or sha256(SUCCESSOR_LEDGER.read_bytes()) != SUCCESSOR_SHA256):
-            raise ValueError('source successor ledger missing or changed')
-        verify_successor_lineage(current, rows(PREVIOUS_CENSUS, 4),
+        for path, expected in ((PREVIOUS_CENSUS, PREVIOUS_SHA256),
+                               (SUCCESSOR_LEDGER, SUCCESSOR_SHA256),
+                               (EPOCH_76, EPOCH_76_SHA256),
+                               (EPOCH_76_DELTA, EPOCH_76_DELTA_SHA256),
+                               (EPOCH_76_2, EPOCH_76_2_SHA256),
+                               (EPOCH_76_3_DELTA, EPOCH_76_3_DELTA_SHA256)):
+            if path.is_symlink() or not path.is_file() or sha256(path.read_bytes()) != expected:
+                raise ValueError('missing or drifted source-epoch receipt: ' + str(path))
+        epoch1 = rows(EPOCH_76, 4)
+        epoch2 = rows(EPOCH_76_2, 4)
+        verify_successor_lineage(epoch1, rows(PREVIOUS_CENSUS, 4),
                                  rows(SUCCESSOR_LEDGER, 5))
-        if (EPOCH_76.is_symlink() or not EPOCH_76.is_file()
-                or sha256(EPOCH_76.read_bytes()) != EPOCH_76_SHA256):
-            raise ValueError('preceding 76-owner source census changed or absent')
-        if (EPOCH_76_DELTA.is_symlink() or not EPOCH_76_DELTA.is_file()
-                or sha256(EPOCH_76_DELTA.read_bytes()) != EPOCH_76_DELTA_SHA256):
-            raise ValueError('current 76-owner source delta changed or absent')
-        verify_current_epoch(current, rows(EPOCH_76, 4),
-                             rows(EPOCH_76_DELTA, 5), expected_changes=1)
+        verify_current_epoch(epoch2, epoch1, rows(EPOCH_76_DELTA, 5),
+                             expected_changes=1)
+        verify_current_epoch(current, epoch2, rows(EPOCH_76_3_DELTA, 5),
+                             expected_changes=3)
     if check_tracked:
         tracked = set(subprocess.check_output(
             ['git', 'ls-files', '--', BASE + 'main', BASE + 'test'],

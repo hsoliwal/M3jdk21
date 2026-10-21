@@ -123,5 +123,23 @@ class SourceCensusTest(unittest.TestCase):
             verify.verify_current_epoch(after + [after[0]], before, ledger, 1)
 
 
+    def test_epoch_three_can_admit_only_three_exact_test_successors(self):
+        before = [('p'+str(i), 'ABSENT', str(i)*64, str(i)*40) for i in range(4)]
+        now = [list(row) for row in before]
+        ledger = []
+        for index in (0, 1, 2):
+            now[index][2] = 'e' * 64
+            now[index][3] = 'f' * 40
+            ledger.append([now[index][0], before[index][2], now[index][2],
+                           now[index][3], before[index][3]])
+        verify.verify_current_epoch(now, before, ledger, 3)
+        with self.assertRaisesRegex(ValueError, 'unadmitted source epoch'):
+            verify.verify_current_epoch(now, before, ledger[:2], 3)
+        with self.assertRaisesRegex(ValueError, 'successor hash or blob'):
+            tampered = [list(row) for row in ledger]
+            tampered[1][4] = 'a' * 40
+            verify.verify_current_epoch(now, before, tampered, 3)
+
+
 if __name__ == '__main__':
     unittest.main()
