@@ -1,0 +1,12 @@
+{
+  "repository": "hsoliwal/com.synexia",
+  "canonical_commit": "bf28d16edd4106be7961aefdb895e3e9f3ad30f7",
+  "canonical_pr": "https://github.com/hsoliwal/com.synexia/pull/12514",
+  "selected_recipe": "com.synexia.m3.CollectionsOwnerCurrent20261019",
+  "selected_crate": "m3-collections-owner-current-20261019",
+  "receiving_base": "9a164c31b38c7013c179a3ff38b0bb60c199c7fd",
+  "source_files": 50,
+  "engine": "Exact canonical OpenRewrite ScanningRecipe owners; actual SDK Recipe.run scheduler",
+  "source_boundary": "Four host/scope sources, three SDK tests, their exact resource closure, original focused POM, selected crate, descriptor and standing invariant. No host adaptation.",
+  "rights": "Per-file upstream and SPDX headers are retained byte-for-byte. Apache-2.0 recipe/qualification owners; GPL-2.0-with-Classpath-Exception compiler payload and EPL-2.0 JDT payload remain distinct as present."
+}

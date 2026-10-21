@@ -1,0 +1,138 @@
+{
+  "classification": "pre-existing stale interop source census; identical refusal at the exact PR base",
+  "repository": "hsoliwal/M3jdk21",
+  "pullRequest": 1515,
+  "head": "4b703804cadd55f2fa1b6e3fe22a416faeb8dffc",
+  "base": "9a164c31b38c7013c179a3ff38b0bb60c199c7fd",
+  "remote": {
+    "workflow": "M3 four-library receiver admission",
+    "runId": 39262096545,
+    "runUrl": "https://github.com/hsoliwal/M3jdk21/actions/runs/39262096545",
+    "jobId": 118092118868,
+    "jobUrl": "https://github.com/hsoliwal/M3jdk21/actions/runs/39262096545/job/118092118868",
+    "conclusion": "failure",
+    "failedStep": {
+      "name": "Identify exact head and verify admitted production postimages",
+      "status": "completed",
+      "conclusion": "failure",
+      "number": 4
+    },
+    "failureTimestamp": "2026-10-19T13:40:54.8921379Z",
+    "errorType": "ValueError",
+    "errorPrefix": "installed interop files missing or not admitted: ",
+    "sourceLocation": "m3/collections/interop/qualification/current-census-20261017/verify.py:113",
+    "exitCode": 1,
+    "engineBlobCheck": "d58ca50dfaeb60f581b64f43545e688aca5c6530 (passed)",
+    "censusUnitTests": {
+      "run": 4,
+      "failures": 0,
+      "errors": 0
+    },
+    "skippedSteps": [
+      "Run all six actual recipe proofs before delivery",
+      "Reprove original five-file recipe in isolation and current exact successor",
+      "Compile unchanged M3 core and verify the dependency boundary",
+      "Compile and execute all 55 admitted adapter and collector tests",
+      "Preserve actual resolved runtime dependency closure and hashes"
+    ],
+    "artifactUrl": "https://github.com/hsoliwal/M3jdk21/actions/runs/39262096545/artifacts/12191487354",
+    "artifactZipSha256": "af1462925d6f45e9c5686441deafb354bdca5a46c167411ddf252c3ae95e8512"
+  },
+  "sourceWitness": {
+    "workflowPath": ".github/workflows/m3-collections-interop-receiving.yml",
+    "workflowBlobAtBaseAndHead": "8f57b8a77361aa1ba9dfa2313a04dcb5bc1cb17f",
+    "verifierPath": "m3/collections/interop/qualification/current-census-20261017/verify.py",
+    "verifierBlobAtBaseAndHead": "efe6d0f959cdc3172d6f6659f06bb486ef825291",
+    "trackedAdmissionRule": "set(git ls-files -- m3/collections/interop/src/main m3/collections/interop/src/test) == set(ALLOWED_PATHS)",
+    "workflowInvocationLines": [
+      33,
+      42
+    ],
+    "verifierRefusalLines": [
+      108,
+      114
+    ],
+    "allowedFiles": 36,
+    "trackedFilesAtExactBase": 76,
+    "additionalFilesAtExactBase": 40,
+    "missingAllowedFiles": [],
+    "trackedPathPrefix": "m3/collections/interop/src/",
+    "additionalPathsRelativeToPrefix": [
+      "main/java/com/m3/collections/interop/M3EclipseBag.java",
+      "main/java/com/m3/collections/interop/M3EclipseBagMultimap.java",
+      "main/java/com/m3/collections/interop/M3FiveFamilyPreparedSelection.java",
+      "main/java/com/m3/collections/interop/M3FiveLibraryKeyRanges.java",
+      "main/java/com/m3/collections/interop/M3FiveLibraryPreparedRows.java",
+      "main/java/com/m3/collections/interop/M3FiveListFamilies.java",
+      "main/java/com/m3/collections/interop/M3FiveProviderFlagSelection.java",
+      "main/java/com/m3/collections/interop/M3FiveProviderKeyGroups.java",
+      "main/java/com/m3/collections/interop/M3GuavaClassToInstanceMaps.java",
+      "main/java/com/m3/collections/interop/M3GuavaListMultimap.java",
+      "main/java/com/m3/collections/interop/M3GuavaRowSortedTable.java",
+      "main/java/com/m3/collections/interop/M3GuavaSetMultimap.java",
+      "main/java/com/m3/collections/interop/M3SpringCaseInsensitiveMap.java",
+      "test/java/com/m3/collections/interop/M3EclipseBagMultimapSelfTest.java",
+      "test/java/com/m3/collections/interop/M3EclipseBagMultimapTest.java",
+      "test/java/com/m3/collections/interop/M3FiveFamilyPreparedSelectionSelfTest.java",
+      "test/java/com/m3/collections/interop/M3FiveFamilyPreparedSelectionTest.java",
+      "test/java/com/m3/collections/interop/M3FiveLibraryArrayificationTest.java",
+      "test/java/com/m3/collections/interop/M3FiveLibraryExpandedContractsTest.java",
+      "test/java/com/m3/collections/interop/M3FiveLibraryKeyRangesTest.java",
+      "test/java/com/m3/collections/interop/M3FiveLibraryPreparedRowsTest.java",
+      "test/java/com/m3/collections/interop/M3FiveLibraryState32Test.java",
+      "test/java/com/m3/collections/interop/M3FiveListFamiliesContract.java",
+      "test/java/com/m3/collections/interop/M3FiveListFamiliesTest.java",
+      "test/java/com/m3/collections/interop/M3FiveProviderBagContractTest.java",
+      "test/java/com/m3/collections/interop/M3FiveProviderCountSharingRegressionTest.java",
+      "test/java/com/m3/collections/interop/M3FiveProviderFlagSelectionTest.java",
+      "test/java/com/m3/collections/interop/M3FiveProviderKeyGroupClosureTest.java",
+      "test/java/com/m3/collections/interop/M3FiveProviderKeyGroupsTest.java",
+      "test/java/com/m3/collections/interop/M3GuavaClassToInstanceMapsSelfTest.java",
+      "test/java/com/m3/collections/interop/M3GuavaClassToInstanceMapsTest.java",
+      "test/java/com/m3/collections/interop/M3GuavaListMultimapContract.java",
+      "test/java/com/m3/collections/interop/M3GuavaListMultimapRealTest.java",
+      "test/java/com/m3/collections/interop/M3GuavaRowSortedTableContract.java",
+      "test/java/com/m3/collections/interop/M3GuavaRowSortedTableTest.java",
+      "test/java/com/m3/collections/interop/M3GuavaSetMultimapTest.java",
+      "test/java/com/m3/collections/interop/M3ObjectStreamProviderContractTest.java",
+      "test/java/com/m3/collections/interop/M3SpringCaseInsensitiveContract.java",
+      "test/java/com/m3/collections/interop/M3SpringCaseInsensitiveSdkFactoryTest.java",
+      "test/java/com/m3/collections/interop/M3SpringCaseInsensitiveTest.java"
+    ]
+  },
+  "baseReproduction": {
+    "checkoutHead": "9a164c31b38c7013c179a3ff38b0bb60c199c7fd",
+    "command": [
+      "python3",
+      "m3/collections/interop/qualification/current-census-20261017/verify.py"
+    ],
+    "readOnlyEnvironment": {
+      "PYTHONDONTWRITEBYTECODE": "1"
+    },
+    "exitCode": 1,
+    "remoteAndBaseErrorMessagesExactlyEqual": true,
+    "trackedSetReadAtExactBaseWith": [
+      "git",
+      "ls-tree",
+      "-r",
+      "--name-only",
+      "9a164c31b38c7013c179a3ff38b0bb60c199c7fd",
+      "--",
+      "m3/collections/interop/src/main",
+      "m3/collections/interop/src/test"
+    ],
+    "scriptBlobMatchesBase": true
+  },
+  "changedFiles": [
+    "m3/collections/src/main/java/com/m3/collections/M3FilteredLists.java",
+    "m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java",
+    "m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java",
+    "m3/collections/src/test/java/com/m3/collections/M3FilteredListMutationProof.java",
+    "m3/collections/src/test/java/com/m3/collections/M3FilteredListMutationTest.java",
+    "m3/collections/src/test/java/com/m3/collections/M3IndexOrderWindowContract.java",
+    "m3/collections/src/test/java/com/m3/collections/M3IndexOrderWindowTest.java"
+  ],
+  "scope": "The PR triggers this existing workflow through m3/collections/src/main/java/**. It changes none of the verifier, workflow or interop paths. No collection compilation or runtime contract ran in the failed job. This diagnosis does not turn remote CI green or certify skipped/queued jobs.",
+  "admissionsModified": false,
+  "externalWrites": false
+}
