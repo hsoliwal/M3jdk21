@@ -22,7 +22,7 @@ import javax.lang.model.element.Modifier;
  * Nodes are occurrence identities within this immutable source generation.
  */
 public final class M3ASTIndex {
-    public enum Domain { ECLIPSE_JDT, MAVEN_POM, GRADLE_GROOVY, GRADLE_KOTLIN, JACKSON_JSON, JAVAC, OPENREWRITE }
+    public enum Domain { ECLIPSE_JDT, MAVEN_POM, GRADLE_GROOVY, GRADLE_KOTLIN, JACKSON_JSON, JAVAC, OPENREWRITE, ANTLR4 }
     public enum LiteralKind { NONE, NULL, BOOLEAN, CHAR, STRING, INT, LONG, FLOAT, DOUBLE }
     private static final LiteralKind[] LITERAL_KINDS = LiteralKind.values();
     public static final String DETAILS_SCHEMA = "M3_AST_DETAILS_V1";
