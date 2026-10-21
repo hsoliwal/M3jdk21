@@ -20,6 +20,12 @@ import org.springframework.util.MultiValueMapAdapter;
 
 /** Exact real Spring 6.2 interface, donor differential and ownership qualification. */
 final class M3SpringArrayContractTest {
+    /** A retained fixed-size or singleton caller list must fail identically to Spring. */
+    private static Class<? extends RuntimeException> mutationFailure(Runnable action) {
+        try { action.run(); return null; }
+        catch (RuntimeException failure) { return failure.getClass(); }
+    }
+
     @Test void directContractNotSpringAdapter() {
         var actual = M3LibraryCollections.<String, Integer>springMultiValueMap();
         assertInstanceOf(M3SpringArrayMultiValueMap.class, actual);
@@ -81,13 +87,22 @@ final class M3SpringArrayContractTest {
             Integer key = random.nextInt(7) == 0 ? null : random.nextInt(32);
             Integer value = random.nextInt(8) == 0 ? null : random.nextInt(50);
             switch (random.nextInt(13)) {
-                case 0 -> { actual.add(key, value); expected.add(key, value); }
+                case 0 -> assertEquals(
+                        mutationFailure(() -> expected.add(key, value)),
+                        mutationFailure(() -> actual.add(key, value)),
+                        "add exception parity step " + step);
                 case 1 -> { actual.set(key, value); expected.set(key, value); }
-                case 2 -> { actual.addIfAbsent(key, value); expected.addIfAbsent(key, value); }
+                case 2 -> assertEquals(
+                        mutationFailure(() -> expected.addIfAbsent(key, value)),
+                        mutationFailure(() -> actual.addIfAbsent(key, value)),
+                        "addIfAbsent exception parity step " + step);
                 case 3 -> assertEquals(expected.remove(key), actual.remove(key));
                 case 4 -> {
                     List<Integer> input = Arrays.asList(value, value);
-                    actual.addAll(key, input); expected.addAll(key, input);
+                    assertEquals(
+                            mutationFailure(() -> expected.addAll(key, input)),
+                            mutationFailure(() -> actual.addAll(key, input)),
+                            "addAll exception parity step " + step);
                 }
                 case 5 -> {
                     List<Integer> a = random.nextInt(6) == 0 ? null : new ArrayList<>(Arrays.asList(value));

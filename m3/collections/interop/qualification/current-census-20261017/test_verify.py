@@ -141,5 +141,22 @@ class SourceCensusTest(unittest.TestCase):
             verify.verify_current_epoch(now, before, tampered, 3)
 
 
+    def test_epoch_four_seven_exact_pinned_successors(self):
+        before = [('p'+str(i), 'ABSENT', str(i)*64, str(i)*40) for i in range(8)]
+        now = [list(row) for row in before]
+        ledger = []
+        for index in range(7):
+            now[index][2] = 'e' * 64
+            now[index][3] = 'f' * 40
+            ledger.append([now[index][0], before[index][2], now[index][2],
+                           now[index][3], before[index][3]])
+        verify.verify_current_epoch(now, before, ledger, 7)
+        with self.assertRaisesRegex(ValueError, 'unadmitted source epoch'):
+            verify.verify_current_epoch(now, before, ledger[:6], 7)
+        with self.assertRaisesRegex(ValueError, 'successor hash or blob'):
+            changed = [list(row) for row in ledger]
+            changed[4][4] = 'a' * 40
+            verify.verify_current_epoch(now, before, changed, 7)
+
 if __name__ == '__main__':
     unittest.main()

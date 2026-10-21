@@ -14,7 +14,7 @@ HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[4] if len(HERE.parents) > 4 else Path.cwd()
 CENSUS = HERE / 'current-source-census.tsv'
 LEGACY = ROOT / 'm3/collections/interop/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-java/collections-library-interop/manifest.tsv'
-RECEIPT_SHA256 = 'ac26cde080faab280c68d76aa372ce7185cded482be466650fb6d16b75bd9ffe'
+RECEIPT_SHA256 = 'd9ed46c1ebb31850319dec8bdf73ee3a1eaf5fdd4bb4430d5c1ab91ba4591e26'
 LEGACY_GIT_BLOB = 'bdc0cab41cd4033421388fbd44f37203d765f57e'
 BASE = 'm3/collections/interop/src/'
 MAIN = BASE + 'main/java/com/m3/collections/interop/'
@@ -106,6 +106,8 @@ ALLOWED_PATHS = tuple(sorted([
 # Historical five-file manifest stays immutable. Only this exact independently
 # recorded test successor may depart from its historical postimage.
 HISTORICAL_SUCCESSORS = {
+    TEST + 'M3LibraryClosureTest.java': (
+        '5ece9a369bcf5a223cb163ed0857534600fcd53bcc881f239956be15a4200f40', '29691e36f212ae79c31a06a597a58e76c7e51280787c46db6d7264b30fd567e0'),
     TEST + 'M3LibraryCollectionsTest.java': (
         '4bebee17ef96cefd2c779c76a0b190e27de311d136dec2de0fc5c05161ac199a', '792a0a8fdb7dadd0fc81e033fc0fc61cc8e2f7c4af5acdfb7098304d19b0d1f1'),
 }
@@ -121,6 +123,10 @@ EPOCH_76_2 = HERE / 'previous-source-census-76-epoch2-20261021.tsv'
 EPOCH_76_2_SHA256 = 'd3312d7aca804f20d9ee10a1d5ab4a4f7ad3d8e2290f15465593c2e89201ee65'
 EPOCH_76_3_DELTA = HERE / 'source-epoch-76-epoch3-delta-20261021.tsv'
 EPOCH_76_3_DELTA_SHA256 = '06fb9ef4f2f39f59d879be8741585c49102ea6d55f38e4608003a5a18e376b4f'
+EPOCH_76_3 = HERE / 'previous-source-census-76-epoch3-20261021.tsv'
+EPOCH_76_3_SHA256 = 'ac26cde080faab280c68d76aa372ce7185cded482be466650fb6d16b75bd9ffe'
+EPOCH_76_4_DELTA = HERE / 'source-epoch-76-epoch4-delta-20261021.tsv'
+EPOCH_76_4_DELTA_SHA256 = 'b0a440c2b19dbc7759bd65f0031c626b31b9d23e8fabf87c5c79c3d289c5b5e0'
 
 
 
@@ -219,7 +225,9 @@ def verify(root=ROOT, census=CENSUS, legacy=LEGACY,
                                (EPOCH_76, EPOCH_76_SHA256),
                                (EPOCH_76_DELTA, EPOCH_76_DELTA_SHA256),
                                (EPOCH_76_2, EPOCH_76_2_SHA256),
-                               (EPOCH_76_3_DELTA, EPOCH_76_3_DELTA_SHA256)):
+                               (EPOCH_76_3_DELTA, EPOCH_76_3_DELTA_SHA256),
+                               (EPOCH_76_3, EPOCH_76_3_SHA256),
+                               (EPOCH_76_4_DELTA, EPOCH_76_4_DELTA_SHA256)):
             if path.is_symlink() or not path.is_file() or sha256(path.read_bytes()) != expected:
                 raise ValueError('missing or drifted source-epoch receipt: ' + str(path))
         epoch1 = rows(EPOCH_76, 4)
@@ -228,8 +236,11 @@ def verify(root=ROOT, census=CENSUS, legacy=LEGACY,
                                  rows(SUCCESSOR_LEDGER, 5))
         verify_current_epoch(epoch2, epoch1, rows(EPOCH_76_DELTA, 5),
                              expected_changes=1)
-        verify_current_epoch(current, epoch2, rows(EPOCH_76_3_DELTA, 5),
+        epoch3 = rows(EPOCH_76_3, 4)
+        verify_current_epoch(epoch3, epoch2, rows(EPOCH_76_3_DELTA, 5),
                              expected_changes=3)
+        verify_current_epoch(current, epoch3, rows(EPOCH_76_4_DELTA, 5),
+                             expected_changes=7)
     if check_tracked:
         tracked = set(subprocess.check_output(
             ['git', 'ls-files', '--', BASE + 'main', BASE + 'test'],

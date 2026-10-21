@@ -66,3 +66,21 @@ existing real `M3LibraryCollections.springMultiValueMap()` factory, which
 returns the current `M3SpringArrayMultiValueMap` owner. No production Java,
 JNI or collection storage implementation is changed. The actual full suite
 remains separately proof-gated.
+
+## Fourth serial 76-file source epoch — real runtime differential repairs
+
+The previous 76-file receipt is preserved byte-identically in
+`previous-source-census-76-epoch3-20261021.tsv` and its seven exact successor
+blobs recorded in `source-epoch-76-epoch4-delta-20261021.tsv`.
+One original interop production class (`M3ApacheBag`) and six associated tests
+were refined after actual workflow 39622691005 executed 158 Java21 tests and
+reported five failures and one exception. Apache Commons Collections 4.5.0
+`AbstractMapBag.retainAll` explicitly removes a key when requested multiplicity
+exceeds resident multiplicity. Spring 6.2.0 `MultiValueMapAdapter` throws when
+adding to retained fixed-size lists, which the source test now asserts by donor
+exception-class parity. Stable sorted duplicate merge retains comparator tie order;
+SDK factory count and Spring factory concrete-type assertions now match the
+existing first-party M3-backed ownership. No JNI ABI or separate collection
+storage introduced. The six prior source-census/test epochs remain provable
+and `verify.py` guards each transition in sequence. This is a candidate
+whose complete original-receiver Maven/HotSpot/UI acceptance remains pending.

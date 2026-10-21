@@ -80,7 +80,7 @@ jobs:
           JAR="$GITHUB_WORKSPACE/proof/m3-collections.jar"
           (cd "$RUNNER_TEMP" && mvn -B -ntp org.apache.maven.plugins:maven-install-plugin:3.1.3:install-file \
             -Dfile="$JAR" -DgroupId=com.m3 -DartifactId=m3-collections -Dversion=0.1.0-SNAPSHOT -Dpackaging=jar -DgeneratePom=true)
-      - name: Compile and execute all 55 admitted adapter and collector tests
+      - name: Compile and execute all 159 current adapter and collector tests
         shell: bash
         run: |
           set -euxo pipefail
@@ -92,7 +92,7 @@ jobs:
           assert reports, 'missing actual runtime reports'
           roots = [E.parse(path).getroot() for path in reports]
           totals = {k: sum(int(r.attrib.get(k, 0)) for r in roots) for k in ('tests', 'failures', 'errors', 'skipped')}
-          assert totals == {'tests': 55, 'failures': 0, 'errors': 0, 'skipped': 0}, totals
+          assert totals == {'tests': 159, 'failures': 0, 'errors': 0, 'skipped': 0}, totals
           print('RUNTIME_EXECUTED', totals)
           PY
           javap -classpath m3/collections/interop/target/m3-collections-interop-0.1.0-SNAPSHOT.jar \
