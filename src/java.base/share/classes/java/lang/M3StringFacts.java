@@ -36,6 +36,28 @@ final class M3StringFacts implements java.util.function.LongPredicate {
     final boolean ascii;
     final boolean latin1;
 
+    // Exact class facts, independent of collision-prone character/ngram signals.
+    static final int REGEX_DIGIT = 1;
+    static final int REGEX_WORD = 1 << 1;
+    static final int REGEX_SPACE = 1 << 2;
+    static final int REGEX_LOWER = 1 << 3;
+    static final int REGEX_UPPER = 1 << 4;
+    static final int REGEX_ALPHA = 1 << 5;
+    static final int REGEX_ALNUM = 1 << 6;
+    static final int REGEX_HEX = 1 << 7;
+    static final int REGEX_ASCII = 1 << 8;
+    static final int REGEX_LOWER_HEX = 1 << 9;
+    static final int REGEX_UPPER_HEX = 1 << 10;
+    static final int REGEX_DOT = 1 << 11;
+    static final int REGEX_HORIZONTAL = 1 << 12;
+    static final int REGEX_VERTICAL = 1 << 13;
+    static final int REGEX_CLASSES = (1 << 14) - 1;
+
+    /** Intersection of classes matching every unit; REGEX_CLASSES for empty text. */
+    final int regexAllClasses;
+    /** Union of classes matching any unit; zero for empty text. */
+    final int regexAnyClasses;
+
     final int asciiUpperHash;
     final int asciiLowerHash;
     final int asciiTitleHash;
@@ -78,7 +100,9 @@ final class M3StringFacts implements java.util.function.LongPredicate {
             int trimStart,
             int trimEnd,
             int stripStart,
-            int stripEnd) {
+            int stripEnd,
+            int regexAllClasses,
+            int regexAnyClasses) {
         this.utf16Length = utf16Length;
         this.utf8Length = utf8Length;
         this.modifiedUtf8Length = modifiedUtf8Length;
@@ -102,6 +126,8 @@ final class M3StringFacts implements java.util.function.LongPredicate {
         this.trimEnd = trimEnd;
         this.stripStart = stripStart;
         this.stripEnd = stripEnd;
+        this.regexAllClasses = regexAllClasses;
+        this.regexAnyClasses = regexAnyClasses;
     }
 
     /**
@@ -116,6 +142,8 @@ final class M3StringFacts implements java.util.function.LongPredicate {
      * Units above U+00FF are mixed on demand. Pure cache of {@link #addSignal}; no output changes.
      */
     private static final long[] LATIN1_UNIT_SIGNAL = latin1UnitSignals();
+    // One shared bounded table; the per-string facts retain only two primitive words.
+    private static final int[] ASCII_REGEX_CLASSES = asciiRegexClasses();
 
     /**
      * Folds every fact in one streaming pass over bulk-read windows. The code-point lane keeps a
@@ -136,6 +164,8 @@ final class M3StringFacts implements java.util.function.LongPredicate {
         long signal = 0L;
         boolean ascii = true;
         boolean latin1 = true;
+        int regexAll = REGEX_CLASSES;
+        int regexAny = 0;
         long prefix = 0L;
         long suffix = 0L;
         long bigrams = 0L;
@@ -172,6 +202,9 @@ final class M3StringFacts implements java.util.function.LongPredicate {
                 signal |= unitSignal(unit);
                 ascii &= unit <= 0x7f;
                 latin1 &= unit <= 0xff;
+                int regexClasses = regexClasses(unit);
+                regexAll &= regexClasses;
+                regexAny |= regexClasses;
                 upperHash = 31 * upperHash + asciiUpper(unit);
                 lowerHash = 31 * lowerHash + asciiLower(unit);
                 titleHash = 31 * titleHash + (index == 0 ? asciiUpper(unit) : asciiLower(unit));
@@ -268,7 +301,52 @@ final class M3StringFacts implements java.util.function.LongPredicate {
                 trimStart,
                 trimEnd,
                 stripStart,
-                stripEnd);
+                stripEnd,
+                regexAll,
+                regexAny);
+    }
+
+
+    /**
+     * Exact zero-flags Java regex classes. Every admitted class gives a supplementary
+     * code point the same membership as both of its surrogate units. This makes the
+     * masks seam-independent; repetition cardinality still uses codePointCount.
+     */
+    private static int regexClasses(char unit) {
+        if (unit < ASCII_REGEX_CLASSES.length) return ASCII_REGEX_CLASSES[unit];
+        boolean vertical = unit == '\u0085' || unit == '\u2028' || unit == '\u2029';
+        int classes = vertical ? REGEX_VERTICAL : REGEX_DOT;
+        if (unit == '\u00a0' || unit == '\u1680' || unit == '\u180e'
+                || (unit >= '\u2000' && unit <= '\u200a')
+                || unit == '\u202f' || unit == '\u205f' || unit == '\u3000') {
+            classes |= REGEX_HORIZONTAL;
+        }
+        return classes;
+    }
+
+    private static int[] asciiRegexClasses() {
+        int[] table = new int[128];
+        for (int unit = 0; unit < table.length; unit++) {
+            int classes = REGEX_ASCII;
+            if (unit >= '0' && unit <= '9') {
+                classes |= REGEX_DIGIT | REGEX_WORD | REGEX_ALNUM | REGEX_HEX
+                        | REGEX_LOWER_HEX | REGEX_UPPER_HEX;
+            } else if (unit >= 'a' && unit <= 'z') {
+                classes |= REGEX_LOWER | REGEX_ALPHA | REGEX_ALNUM | REGEX_WORD;
+                if (unit <= 'f') classes |= REGEX_HEX | REGEX_LOWER_HEX;
+            } else if (unit >= 'A' && unit <= 'Z') {
+                classes |= REGEX_UPPER | REGEX_ALPHA | REGEX_ALNUM | REGEX_WORD;
+                if (unit <= 'F') classes |= REGEX_HEX | REGEX_UPPER_HEX;
+            } else if (unit == '_') {
+                classes |= REGEX_WORD;
+            }
+            if (unit == ' ' || (unit >= '\t' && unit <= '\r')) classes |= REGEX_SPACE;
+            if (unit == ' ' || unit == '\t') classes |= REGEX_HORIZONTAL;
+            if (unit >= '\n' && unit <= '\r') classes |= REGEX_VERTICAL;
+            if (unit != '\n' && unit != '\r') classes |= REGEX_DOT;
+            table[unit] = classes;
+        }
+        return table;
     }
 
     static M3StringFacts compose(M3StringFacts left, M3StringFacts right) {
@@ -360,7 +438,9 @@ final class M3StringFacts implements java.util.function.LongPredicate {
                 trimStart,
                 trimEnd,
                 stripStart,
-                stripEnd);
+                stripEnd,
+                left.regexAllClasses & right.regexAllClasses,
+                left.regexAnyClasses | right.regexAnyClasses);
     }
 
     /**

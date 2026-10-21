@@ -4,6 +4,8 @@
  */
 package jdk.internal.mindex;
 
+import java.lang.invoke.MethodHandles;
+import java.lang.invoke.VarHandle;
 import java.util.Objects;
 import java.util.regex.Pattern;
 
@@ -19,8 +21,16 @@ import java.util.regex.Pattern;
  * the token and never cached by spelling. Accepted-lexeme sets follow the BlackLab
  * NfaStateToken per-state term set (Apache-2.0, pattern only) with M3 mask words instead of a
  * third-party int set.
+ *
+ * <p>For an immutable String, completed text-regex answers are reused per exact row and token
+ * occurrence inside this owner. The recent answer uses one primitive word; a second distinct
+ * query may allocate at most 256 primitive result words. Collisions evict reuse, not correctness.
+ * This does not complete the pending per-lexeme B_P table or certify arbitrary lexeme ids.
  */
 public final class M3TokenPredicateCache {
+    private static final int MAX_TEXT_REGEX_RESULTS = 256;
+    private static final VarHandle TEXT_REGEX_ELEMENT = MethodHandles.arrayElementVarHandle(long[].class);
+
     /** Caller vocabulary; must be the one that assigned the index lexeme lane. */
     public interface Vocabulary {
         /** Canonical lexeme id of the spelling, 0 when it is not a lexicon word. */
@@ -48,6 +58,10 @@ public final class M3TokenPredicateCache {
     private final int[] columns;
     private final Pattern[] regex;
     private final Vocabulary vocabulary;
+    /** Exact row/occurrence key and truth, together in one atomic word; zero is empty. */
+    private volatile long textRegexRecent;
+    /** Optional bounded result metadata, allocated only after two different immutable occurrences. */
+    private volatile long[] textRegexResults;
 
     private M3TokenPredicateCache(M3TokenPattern pattern, M3TokenIndex index, CharSequence source,
             long[] values, int[] columns, Pattern[] regex, Vocabulary vocabulary) {
@@ -202,6 +216,9 @@ public final class M3TokenPredicateCache {
             long start = index.startAt(token);
             long end = index.endAt(token);
             if (start < 0 || end < start || end > source.length()) return false;
+            if (source instanceof String) {
+                return immutableTextRegex(r, token, Math.toIntExact(start), Math.toIntExact(end));
+            }
             text = new Span(source, Math.toIntExact(start), Math.toIntExact(end));
         } else {
             long raw = switch (key) {
@@ -253,6 +270,58 @@ public final class M3TokenPredicateCache {
             for (int index = 0; index < length(); index++) out.append(charAt(index));
             return out.toString();
         }
+    }
+
+    /**
+     * Reuses only this owner's immutable String and defensive token-index snapshot. Lexeme ids
+     * and vocabulary symbols are not spelling identity. Each miss still uses a fresh Matcher;
+     * mutable sources and occurrence-dependent symbolic rows never enter this result lane.
+     */
+    private boolean immutableTextRegex(int row, int token, int start, int end) {
+        long key = textRegexKey(row, token, index.count());
+        long recent = textRegexRecent;
+        if ((recent & ~1L) == key) {
+            return (recent & 1L) != 0;
+        }
+        long[] results = textRegexResults;
+        if (results != null) {
+            int slot = (int) (key >>> 1) & (results.length - 1);
+            long result = (long) TEXT_REGEX_ELEMENT.getOpaque(results, slot);
+            if ((result & ~1L) == key) {
+                return (result & 1L) != 0;
+            }
+        }
+        boolean matched = regex[row].matcher(new Span(source, start, end)).matches();
+        long result = key | (matched ? 1L : 0L);
+        textRegexRecent = result;
+        if (results != null) {
+            int slot = (int) (key >>> 1) & (results.length - 1);
+            TEXT_REGEX_ELEMENT.setOpaque(results, slot, result);
+        } else if (recent != 0) {
+            // Concurrent initializers may lose reuse, never key/truth integrity. Publication
+            // retains at most one bounded primitive array; no spelling or Matcher is retained.
+            try {
+                long required = Math.min(MAX_TEXT_REGEX_RESULTS, (long) index.count() * pattern.rowCount());
+                int capacity = 2;
+                while (capacity < required) capacity <<= 1;
+                results = new long[capacity];
+                results[(int) (recent >>> 1) & (capacity - 1)] = recent;
+                results[(int) (key >>> 1) & (capacity - 1)] = result;
+                textRegexResults = results;
+            } catch (OutOfMemoryError unavailable) {
+                // The exact answer is already known; this optional metadata is expendable.
+            }
+        }
+        return matched;
+    }
+
+    /**
+     * Called only after row/token bounds checks. For nonnegative int row and token < count,
+     * row * count + token + 1 is positive and below 2^62. Its doubled key cannot overflow,
+     * never aliases the empty word, and leaves bit zero exclusively for the Boolean result.
+     */
+    private static long textRegexKey(int row, int token, int count) {
+        return ((long) row * count + token + 1L) << 1;
     }
 
     private boolean textRow(int r, byte op, int token) {
