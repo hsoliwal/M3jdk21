@@ -63,10 +63,16 @@ public final class M3HfLexiconIntakeProof {
                 .findFirst().orElse("");
     }
 
+    private static String algorithmRecord(List<String> lines, String category) {
+        return lines.stream().skip(1)
+                .filter(line -> category.equals(splitTsv(line)[0]))
+                .findFirst().orElse("");
+    }
+
     private static int verifyLanguageResourceDiscovery() throws IOException {
         List<String> lines = resourceLines(
                 "/com/m3/lexicon/hf/language-resource-discovery.tsv");
-        require(lines.size() == 231, "230 language-resource candidates plus header");
+        require(lines.size() == 240, "239 language-resource candidates plus header");
         List<String> expectedHeader = List.of("source_id", "resource", "category",
                 "data_shape_and_identity", "rights_and_attribution", "m3_candidate_use",
                 "admission_blockers", "state", "evidence");
@@ -319,8 +325,17 @@ public final class M3HfLexiconIntakeProof {
                 "jmdict-edrdg",
                 "jmnedict-edrdg",
                 "kanjidic2-edrdg",
-                "cc-cedict-v2"
-        )), "exact 230 language-resource source IDs match the pinned catalogue");
+                "cc-cedict-v2",
+                "icu4x-unicode-segmentation-2-3-1",
+                "opencc-1-4-2",
+                "sudachi-dict-v202610-v1",
+                "camel-morph-calima-databases",
+                "zemberek-turkish-morphology-0-17-1",
+                "indic-nlp-library-resources",
+                "vabamorf-estonian-morphology-lexicon",
+                "pymorphy3-opencorpora-dictionary-build",
+                "unicode-cldr-48-2-likely-subtags-grammar"
+        )), "exact 239 language-resource source IDs match the pinned catalogue");
         String jmdict = discoveryRecord(lines, "jmdict-edrdg");
         require(jmdict.contains("JMdict_e/JMdict_b")
                 && jmdict.contains("legacy generation")
@@ -335,6 +350,45 @@ public final class M3HfLexiconIntakeProof {
                 && ccCedict.contains("[Wang2]") && ccCedict.contains("[wang2]")
                 && ccCedict.contains("case-fold Pinyin"),
                 "CC-CEDICT V2 preserves case-sensitive Pinyin identity");
+        String icu4x = discoveryRecord(lines, "icu4x-unicode-segmentation-2-3-1");
+        require(icu4x.contains("2.3.1") && icu4x.contains("Unicode License v3")
+                && icu4x.contains("dictionary/LSTM") && icu4x.contains("no corpus"),
+                "ICU4X keeps data licensing, provider choices and reference-only scope explicit");
+        String opencc = discoveryRecord(lines, "opencc-1-4-2");
+        require(opencc.contains("Apache-2.0") && opencc.contains("longest-prefix")
+                && opencc.contains("architecture-dependent") && opencc.contains("not semantic translation"),
+                "OpenCC preserves phrase priority, architecture and dictionary-rights boundaries");
+        String sudachi = discoveryRecord(lines, "sudachi-dict-v202610-v1");
+        require(sudachi.contains("V1") && sudachi.contains("A/B/C")
+                && sudachi.contains("UniDic") && sudachi.contains("NEologd")
+                && sudachi.contains("incompatible with V0"),
+                "Sudachi keeps granularity, source identity and binary compatibility explicit");
+        String camel = discoveryRecord(lines, "camel-morph-calima-databases");
+        require(camel.contains("GPL-2.0") && camel.contains("CC BY 4.0")
+                && camel.contains("SAMA") && camel.contains("analysis, generation and reinflection"),
+                "CAMeL preserves database-specific rights and morphology operations");
+        String zemberek = discoveryRecord(lines, "zemberek-turkish-morphology-0-17-1");
+        require(zemberek.contains("0.17.1") && zemberek.contains("2019")
+                && zemberek.contains("slow-maintenance") && zemberek.contains("Apache-2.0"),
+                "Zemberek age and code/data license distinction remain visible");
+        String indic = discoveryRecord(lines, "indic-nlp-library-resources");
+        require(indic.contains("separate source identities") && indic.contains("MIT")
+                && indic.contains("Pin both repositories"),
+                "Indic library and model resources retain separate provenance");
+        String vabamorf = discoveryRecord(lines, "vabamorf-estonian-morphology-lexicon");
+        require(vabamorf.contains("prefix, suffix and special-list")
+                && vabamorf.contains("historical source metadata may be unreliable")
+                && vabamorf.contains("LGPL"),
+                "Vabamorf retains its structured lexicon layout and provenance blocker");
+        String pymorphy = discoveryRecord(lines, "pymorphy3-opencorpora-dictionary-build");
+        require(pymorphy.contains("CC BY-SA 3.0") && pymorphy.contains("MIT")
+                && pymorphy.contains("suffix-length backoff"),
+                "pymorphy3 separates builder licensing from OpenCorpora data and backoff");
+        String cldrGrammar = discoveryRecord(lines, "unicode-cldr-48-2-likely-subtags-grammar");
+        require(cldrGrammar.contains("likely-subtag") && cldrGrammar.contains("grammatical-feature")
+                && cldrGrammar.contains("release-48-2") && cldrGrammar.contains("parentLocales")
+                && cldrGrammar.contains("specification prose"),
+                "CLDR fallback and grammar data remain release- and rights-scoped");
         String sindhi = discoveryRecord(lines, "hf-sindhi-open-lexicon");
         require(sindhi.contains("223,342") && sindhi.contains("lexical_id")
                 && sindhi.contains("entry_id") && sindhi.contains("schema casting"),
@@ -1080,7 +1134,7 @@ public final class M3HfLexiconIntakeProof {
         require(Files.isRegularFile(catalogue), "algorithm catalogue exists at Maven invocation root");
         if (!Files.isRegularFile(catalogue)) return 0;
         List<String> lines = Files.readAllLines(catalogue, StandardCharsets.UTF_8);
-        require(lines.size() == 79, "78 algorithm patterns plus header");
+        require(lines.size() == 87, "86 algorithm patterns plus header");
         List<String> header = List.of("problem_category", "discovery_source", "candidate",
                 "decision", "owner_or_reason", "qualification");
         require(!lines.isEmpty() && List.of(splitTsv(lines.getFirst())).equals(header),
@@ -1172,8 +1226,16 @@ public final class M3HfLexiconIntakeProof {
                 "multiword_ngram_frequency_index",
                 "regional_parallel_pair_views",
                 "african_sud_treebank_precompute",
-                "indigenous_language_task_partitioned_regression"
-        )), "all 78 algorithm categories match the pinned catalogue");
+                "indigenous_language_task_partitioned_regression",
+                "icu4x_complex_script_provider_tradeoff",
+                "opencc_phrase_priority_conversion",
+                "sudachi_multigranular_morphological_tokenization",
+                "camel_spec_to_morphology_database",
+                "vabamorf_paradigm_compound_constraints",
+                "pymorphy_suffix_backoff_probabilities",
+                "cldr_locale_fallback_grammatical_features",
+                "unicode_boundary_property_conformance"
+        )), "all 86 algorithm categories match the pinned catalogue");
         for (String category : List.of("spoken_language_phoneme_morphology_alignment",
                 "medical_translation_regression", "low_resource_african_parallel_corpus",
                 "multi_source_parallel_corpus_provenance", "document_level_translation_regression",
@@ -1196,13 +1258,67 @@ public final class M3HfLexiconIntakeProof {
                 "multiword_ngram_frequency_index",
                 "regional_parallel_pair_views",
                 "african_sud_treebank_precompute",
-                "indigenous_language_task_partitioned_regression")) {
+                "indigenous_language_task_partitioned_regression",
+                "icu4x_complex_script_provider_tradeoff",
+                "opencc_phrase_priority_conversion",
+                "sudachi_multigranular_morphological_tokenization",
+                "camel_spec_to_morphology_database",
+                "vabamorf_paradigm_compound_constraints",
+                "pymorphy_suffix_backoff_probabilities",
+                "cldr_locale_fallback_grammatical_features",
+                "unicode_boundary_property_conformance")) {
             String row = lines.stream().skip(1)
                     .filter(line -> category.equals(splitTsv(line)[0]))
                     .findFirst().orElse("");
             require(!row.isEmpty() && "EVALUATE_ONLY".equals(splitTsv(row)[3]),
                     "algorithm candidate remains evaluation-only: " + category);
         }
+        String icu4x = algorithmRecord(lines, "icu4x_complex_script_provider_tradeoff");
+        require(splitTsv(icu4x).length == 6
+                && splitTsv(icu4x)[2].contains("dictionary-backed versus LSTM")
+                && splitTsv(icu4x)[5].contains("startup"),
+                "ICU4X provider tradeoff stays a measured, evaluation-only pattern");
+        String opencc = algorithmRecord(lines, "opencc_phrase_priority_conversion");
+        require(splitTsv(opencc).length == 6
+                && splitTsv(opencc)[2].contains("longest-prefix")
+                && splitTsv(opencc)[2].contains("not semantic translation")
+                && splitTsv(opencc)[4].contains("translation mappings remain authoritative"),
+                "OpenCC phrase conversion remains separate from translation identity");
+        String sudachi = algorithmRecord(lines, "sudachi_multigranular_morphological_tokenization");
+        require(splitTsv(sudachi).length == 6
+                && splitTsv(sudachi)[2].contains("A/B/C")
+                && splitTsv(sudachi)[5].contains("V0 refusal"),
+                "Sudachi segmentation modes retain versioned differential gates");
+        String camel = algorithmRecord(lines, "camel_spec_to_morphology_database");
+        require(splitTsv(camel).length == 6
+                && splitTsv(camel)[2].contains("analysis/generation/reinflection")
+                && splitTsv(camel)[5].contains("SAMA-gated"),
+                "CAMeL database compilation retains operations and license gate");
+        String vabamorf = algorithmRecord(lines, "vabamorf_paradigm_compound_constraints");
+        require(splitTsv(vabamorf).length == 6
+                && splitTsv(vabamorf)[2].contains("paradigm")
+                && splitTsv(vabamorf)[5].contains("compound acceptance"),
+                "Vabamorf paradigm and compound behavior stays measurable");
+        String pymorphy = algorithmRecord(lines, "pymorphy_suffix_backoff_probabilities");
+        require(splitTsv(pymorphy).length == 6
+                && splitTsv(pymorphy)[2].contains("suffix-length backoff")
+                && splitTsv(pymorphy)[5].contains("no train/test leakage"),
+                "pymorphy backoff remains a held-out candidate-ranking evaluation");
+        String cldr = algorithmRecord(lines, "cldr_locale_fallback_grammatical_features");
+        require(splitTsv(cldr).length == 6
+                && splitTsv(cldr)[1].contains("likelySubtags.xml")
+                && splitTsv(cldr)[1].contains("supplementalData.xml(parentLocales)")
+                && splitTsv(cldr)[5].contains("parentLocales chains"),
+                "CLDR locale fallback is separately tested from transliteration");
+        String unicode = algorithmRecord(lines, "unicode_boundary_property_conformance");
+        require(splitTsv(unicode).length == 6
+                && splitTsv(unicode)[1].contains("UAX #29")
+                && splitTsv(unicode)[1].contains("revision 47")
+                && splitTsv(unicode)[1].contains("revision 55")
+                && splitTsv(unicode)[2].contains("UAX #14")
+                && splitTsv(unicode)[5].contains("UAX #14 conformance vectors")
+                && splitTsv(unicode)[5].contains("split atoms"),
+                "Unicode boundary conformance covers segmented M3String inputs");
         String bilingual = lines.stream().skip(1)
                 .filter(line -> "bilingual_dictionary_regression".equals(splitTsv(line)[0]))
                 .findFirst().orElse("");
