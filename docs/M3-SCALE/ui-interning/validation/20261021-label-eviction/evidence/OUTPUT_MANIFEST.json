@@ -1,0 +1,34 @@
+{
+  "files": [
+    {
+      "path": "EXECUTION.CLAIM.json",
+      "bytes": 3702,
+      "sha256": "ebc1a65d701f0d20595d502b1ffaeedc3c179e6e437c582a2650caa40762b7cf"
+    },
+    {
+      "path": "JVM_LOCK_OWNERSHIP.json",
+      "bytes": 170,
+      "sha256": "a5d9125c48b1d01d5baf162c16af10abadc7a0382307aaf86d65bb381d17070e"
+    },
+    {
+      "path": "reports/TEST-junit-jupiter.xml",
+      "bytes": 5437,
+      "sha256": "d056df12d7412fbd833b86d9f1aa255112177227059222f0ec8500fdf454e871"
+    },
+    {
+      "path": "test.log",
+      "bytes": 479,
+      "sha256": "1c112c39110783ffc2f5e8e7786a2bbff0474ffa5ec901c1976e37610b30b988"
+    },
+    {
+      "path": "test.NATIVE.json",
+      "bytes": 451,
+      "sha256": "eac11790a103fc1f7170465094158908ad7e3f971265477c61859893caf5a20a"
+    },
+    {
+      "path": "test.START.json",
+      "bytes": 234,
+      "sha256": "99d61f39c9c776b168017a1e757f81780be2d4152a9afdb37caa526b48bb3fff"
+    }
+  ]
+}

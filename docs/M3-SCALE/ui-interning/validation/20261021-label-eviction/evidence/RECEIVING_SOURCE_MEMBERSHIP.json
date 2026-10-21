@@ -1,0 +1,42 @@
+{
+  "schema": "synexia.ui.label-eviction.receiving-source-membership-input.v1",
+  "observed_utc": "2026-10-21T00:44:39.146Z",
+  "repository": "hsoliwal/M3JDK21",
+  "PR": 1606,
+  "head": "5fd166bf68ebd9f05306ffb35199e298cfcb6f5a",
+  "head_ref": "preserve/claude-label-bench-20261020-1314",
+  "base": "97660a5ec49f77d7029fafdd1bd364cd0eaabf4c",
+  "base_ref": "m3/ui-interning-20261019",
+  "state": "open",
+  "draft": true,
+  "source_files": [
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LabelLanes.java",
+      "ref": "5fd166bf68ebd9f05306ffb35199e298cfcb6f5a",
+      "git_blob": "20caa0659caccb59b453464c1c8a8e8cc98fdc2a"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LabelPool.java",
+      "ref": "5fd166bf68ebd9f05306ffb35199e298cfcb6f5a",
+      "git_blob": "f311f91a43e8fc12830a6cbd8fc9b67e26d015fe"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3ShortLabel.java",
+      "ref": "5fd166bf68ebd9f05306ffb35199e298cfcb6f5a",
+      "git_blob": "2358477620a85266576c2af10a8ed1f40b2473fe"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3TextExtentCache.java",
+      "ref": "5fd166bf68ebd9f05306ffb35199e298cfcb6f5a",
+      "git_blob": "0646293bdf9798710eb14c6b4a0de13937b4710b"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3LabelLanesTest.java",
+      "ref": "5fd166bf68ebd9f05306ffb35199e298cfcb6f5a",
+      "git_blob": "fa1ab404b5f9cad9d215ee1825495b3dc1979b08"
+    }
+  ],
+  "requests": 6,
+  "source_contents_distributed": false,
+  "verification": "Fresh PR metadata and five source GETs at exact5fd166bf return Git blobs equal to independently recomputed local source blobs. Public packet references bytes; no full source is distributed."
+}

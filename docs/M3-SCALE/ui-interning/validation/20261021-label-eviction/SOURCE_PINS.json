@@ -1,0 +1,244 @@
+{
+  "schema": "synexia.ui.label-eviction.source-pins.v1",
+  "projection": true,
+  "projection_rule": "Source refs unchanged; local filesystem paths omitted. Tool and supervision inputs are named by role with exact retained bytes/hash. Full original manifest hash retained.",
+  "original_source_pins_sha256": "a6b6a567de20a35780ce401a6fa7eed4e5bfc4351e007398831dd12d4f5ab4d8",
+  "repository": "hsoliwal/M3jdk21",
+  "proof_commit": "fe5d02986b6364f42df3e6d213bdad42e851784a",
+  "PR": 1606,
+  "sources": [
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LabelLanes.java",
+      "git_blob": "20caa0659caccb59b453464c1c8a8e8cc98fdc2a",
+      "bytes": 9294,
+      "sha256": "fcdf917f8096b46b900bd3b19a80421a34e0c891d102e9c203b7d48d30dcafc9",
+      "license": "Apache-2.0 OR EPL-2.0"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LabelPool.java",
+      "git_blob": "f311f91a43e8fc12830a6cbd8fc9b67e26d015fe",
+      "bytes": 19455,
+      "sha256": "6afb8b52caa16357c56f94e60419f22436a06e240513daaaa311a75d65620d76",
+      "license": "Apache-2.0 OR EPL-2.0"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3ShortLabel.java",
+      "git_blob": "2358477620a85266576c2af10a8ed1f40b2473fe",
+      "bytes": 6676,
+      "sha256": "13cc808c47bd4f1ac96e9798a7d02718789fcf6248c1d713a324861e726b7f33",
+      "license": "Apache-2.0 OR EPL-2.0"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3TextExtentCache.java",
+      "git_blob": "0646293bdf9798710eb14c6b4a0de13937b4710b",
+      "bytes": 8956,
+      "sha256": "f4f028cb7e13423678538d2a1bb9c8bf81877c57b85b2b26917dbb36b0ba33c6",
+      "license": "Apache-2.0 OR EPL-2.0"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3LabelLanesTest.java",
+      "git_blob": "fa1ab404b5f9cad9d215ee1825495b3dc1979b08",
+      "bytes": 10057,
+      "sha256": "52cdb1128361add4821ce5d46185e38f397f572047293299b0dea67f2aeb1b8b",
+      "license": "Apache-2.0 OR EPL-2.0"
+    }
+  ],
+  "source_bytes": 54438,
+  "dependency": {
+    "coordinate": "org.junit.platform:junit-platform-console-standalone:1.11.4",
+    "bytes": 2809597,
+    "sha256": "b016ef6b1c3454d6d7c2c88ce081dabf289699686af6622d6e4e2e1b54b4a2fc",
+    "main_class": "org.junit.platform.console.ConsoleLauncher",
+    "license": "EPL-2.0",
+    "license_entry_sha256": "9648bb2891b9813970bddb68d4be8a5e6ec8280d0180a53dfb29236b579c55bb",
+    "select_method_entry": {
+      "org/junit/platform/console/options/TestDiscoveryOptionsMixin$SelectorOptions.class": "9d38eac8ce26736b7c88f112790b6b88349126215d293eb2a895c23e2b990268"
+    },
+    "console_class_sha256": "1717c3f37841d24ed6b3d6703303fe7227d88e18933865a0cf9185386337600b"
+  },
+  "jdk": [
+    {
+      "role": "java.exe",
+      "bytes": 54440,
+      "sha256": "d27c1a75edf380963c430232e93340eab4bd3694044976cff85421bf163b876c"
+    },
+    {
+      "role": "javac.exe",
+      "bytes": 23720,
+      "sha256": "8a1d32f529ba4d01940194e3b06d14aff828e5d47f5f374ec88c81902fc3456f"
+    },
+    {
+      "role": "modules",
+      "bytes": 138252462,
+      "sha256": "3f407b6247e6025c69b1668f7358f163ad2c29c282d80bde2199527fb5b0bb6d"
+    },
+    {
+      "role": "release",
+      "bytes": 1282,
+      "sha256": "8387c31dfd5b853ec8b58a0c3b08b2ad6abed2d40d1aba46d125f8a2420d1c14"
+    }
+  ],
+  "operational_python_inputs": [
+    {
+      "role": "DLLs/_ctypes.pyd",
+      "bytes": 125208,
+      "sha256": "6c5f31bef3fdbff31beac0b1a477be880dda61346d859cf34ca93b9291594d93"
+    },
+    {
+      "role": "DLLs/_elementtree.pyd",
+      "bytes": 133400,
+      "sha256": "798e8ddfc45495c26593a0550554e32a62cbdd9da5556e25da7231a0bf8fd274"
+    },
+    {
+      "role": "DLLs/_hashlib.pyd",
+      "bytes": 66328,
+      "sha256": "43acecdc00dd5f9a19b48ff251106c63c975c732b9a2a7b91714642f76be074d"
+    },
+    {
+      "role": "DLLs/pyexpat.pyd",
+      "bytes": 202008,
+      "sha256": "d32d7722d6ed2b2780c039d63af044554c0ba9cf6e6efef28ebc79cb443d2da0"
+    },
+    {
+      "role": "Lib/ast.py",
+      "bytes": 66095,
+      "sha256": "a3cc2501761596db13cdc84f085dd2736e5c352b51f39f26bdd2407d99dfbb72"
+    },
+    {
+      "role": "Lib/ctypes/__init__.py",
+      "bytes": 18789,
+      "sha256": "8fc533f8ae18a7ca06dce88fc8dca5eae61f2a4198ceb9d4b4b5a69862aa42ee"
+    },
+    {
+      "role": "Lib/ctypes/wintypes.py",
+      "bytes": 5831,
+      "sha256": "4d9150e8603bd922e9dbee8a5e9cf1379cf599a382b09a5cbf09bed520f6c459"
+    },
+    {
+      "role": "Lib/datetime.py",
+      "bytes": 277,
+      "sha256": "5068c4ed2c79bfb4b9ae426675112ca8c89ca27aa40b33dabe6cd313ab22dd73"
+    },
+    {
+      "role": "Lib/hashlib.py",
+      "bytes": 9602,
+      "sha256": "f0c8900585062c567a283cb782c3c867f86c38516e30f1f98a04ffa775b9a013"
+    },
+    {
+      "role": "Lib/json/__init__.py",
+      "bytes": 14379,
+      "sha256": "feb17670e443e5db2723f217727dcc5d5e155c40e4e6935b16061c88542f24e7"
+    },
+    {
+      "role": "Lib/json/decoder.py",
+      "bytes": 12829,
+      "sha256": "b719fbcfcebd2b174f076e71292e22b1a17d9e258dbe896c768325383bad4f80"
+    },
+    {
+      "role": "Lib/json/encoder.py",
+      "bytes": 16513,
+      "sha256": "7db65c95f09297d57cc6273d78858b25ffcba65bc83709c4a15584d1dbef3c38"
+    },
+    {
+      "role": "Lib/json/scanner.py",
+      "bytes": 2498,
+      "sha256": "9841566fb17315ebdd40a1ca9cb214f02cde7171b187d4dc821c80120ea853c3"
+    },
+    {
+      "role": "Lib/pathlib.py",
+      "bytes": 52543,
+      "sha256": "e6d99265c5e9ecad314263aa552f050abe195d3dcfce4f2c09c25ec24bedade1"
+    },
+    {
+      "role": "Lib/uuid.py",
+      "bytes": 30449,
+      "sha256": "328e41c4eed0877be1dd3af10bc93ca54ff6d9a49b4fcbcb27dab47a7c3ae424"
+    },
+    {
+      "role": "Lib/xml/etree/ElementPath.py",
+      "bytes": 14420,
+      "sha256": "9cf2c5248524016c9044bdfe5f81ac1c9ad6edc0a04ac8433a33ead7f7d52413"
+    },
+    {
+      "role": "Lib/xml/etree/ElementTree.py",
+      "bytes": 76102,
+      "sha256": "bd8570fa4b3c22dcdb7510ae02a98d6a87d317007cdb8402cc16ca19fa4350ef"
+    },
+    {
+      "role": "python312.dll",
+      "bytes": 6927640,
+      "sha256": "c045b57348c21f5f810bae60654ae39490846b487378e917595f1f95438f9546"
+    },
+    {
+      "role": "python.exe",
+      "bytes": 103704,
+      "sha256": "737a7e3b71e3578f8432acc7dd88c452e593622c544bc13da4789d69c63da5ae"
+    }
+  ],
+  "supervision_inputs": [
+    {
+      "role": "run_qualification definitions: Memory/check/persist/lock_identity",
+      "bytes": 8266,
+      "sha256": "e0513362b4240c6698fb8190a05420e9fcd6e1894a918cf54a998a5919cc34d8"
+    },
+    {
+      "role": "existing OwnedJobSupervisor",
+      "bytes": 10328,
+      "sha256": "c3f5f71cacbb8b95c99eaff74b3bc787359540ad738d65a007668da6b6ad83e9"
+    },
+    {
+      "role": "retention-diagnostic definitions: safe_lstat/confined/physically_closed",
+      "bytes": 9923,
+      "sha256": "ae4554df42842f4e2747e4948e98655dd51e2e0e4f72406931bfda9c7198faf1"
+    }
+  ],
+  "prepared_plan_sha256": "5b47bd0cce0ae23a0199d413009df6023df25e64eb0f7234f484b49efec713a8",
+  "approved_adapter_sha256": "4f57237f23baee8b9d6a4ab90ae0a663eee2b8247f624690abf920aba6669611",
+  "receiving_head": "5fd166bf68ebd9f05306ffb35199e298cfcb6f5a",
+  "receiving_membership": "evidence/RECEIVING_SOURCE_MEMBERSHIP.json",
+  "retained_classes": [
+    {
+      "path": "com/m3/collections/M3LabelLanes.class",
+      "bytes": 6592,
+      "sha256": "3919763cb4befb642aaafd5acd6fef41b18cf89206e1bc6c524f021eb8fe05d5"
+    },
+    {
+      "path": "com/m3/collections/M3LabelLanesTest.class",
+      "bytes": 11365,
+      "sha256": "f584f61fb8e2a12bfd4b2773e72cb4beee1d84152020568b7c45dc0b9e1e3832"
+    },
+    {
+      "path": "com/m3/collections/M3LabelPool$CanonicalIds.class",
+      "bytes": 393,
+      "sha256": "89cb03096ea136fb149f90d2671f6b5b5bbff5239b58dedbef2c49d120439a1e"
+    },
+    {
+      "path": "com/m3/collections/M3LabelPool.class",
+      "bytes": 11987,
+      "sha256": "ef6a7f2ad3bff1b375eee00124cd2b92055a64e37bf4236edb7ad9d911a3329b"
+    },
+    {
+      "path": "com/m3/collections/M3ShortLabel.class",
+      "bytes": 3705,
+      "sha256": "35b15e636b957bac4955414214e57aaf7aa25cfb541bd0fb2b5cc7dad7d40260"
+    },
+    {
+      "path": "com/m3/collections/M3TextExtentCache$Measurer.class",
+      "bytes": 397,
+      "sha256": "6aa25af75c42bb88a294423e7700222161f300b05eea16328013a149797032f5"
+    },
+    {
+      "path": "com/m3/collections/M3TextExtentCache.class",
+      "bytes": 5549,
+      "sha256": "ed4bbb6b73e02684f5fbbf76a17259b9faafddcb275af1feeb23c3063f8df0b7"
+    }
+  ],
+  "original_compile_proof": {
+    "result_sha256": "dc479307f11b8c68d32c0edf1e0b68e966736b811030dfb06d3d5b40c29dc83f",
+    "output_manifest_sha256": "6b6f5288568be23962d4756ab5c44ad32ffe15e27f4165de6b60fb93babb7ca0",
+    "compile_claim_sha256": "959de3a6ad1c2b5ae9533537b7f94eeef180c2e105c3ba6bb1b5714f8e3b533e",
+    "compile_native_sha256": "a83973525b50943370458074d9d185151af197af7e261903e59547aaa15cde70",
+    "compile_log_bytes": 0,
+    "compile_replayed": false
+  }
+}
