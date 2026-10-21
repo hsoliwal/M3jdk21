@@ -402,3 +402,149 @@ Java_com_m3_collections_M3IndexMaskCompactor_selectLongWindowNative(
     }
     return result;
 }
+
+/* Additive ABI: required and excluded unsigned-byte state bits on independent
+ * row/state offsets. Reuse the existing checked geometry, fixed 256-row
+ * Region buffers and state-drift exception. Old JNI exports are unchanged.
+ */
+static int m3_window_accepts_masks(jbyte state, jint required, jint excluded) {
+    unsigned int word = (unsigned int)(unsigned char) state;
+    return ((word & (unsigned int) required) == (unsigned int) required)
+            && ((word & (unsigned int) excluded) == 0U);
+}
+
+static int m3_window_valid_two_masks(JNIEnv *env, jarray rows, jbyteArray states,
+        jint row_offset, jint state_offset, jint length,
+        jint required, jint excluded) {
+    if (excluded < 0 || excluded > 255) {
+        m3_bad_window(env);
+        return 0;
+    }
+    return m3_window_valid(env, rows, states, row_offset,
+            state_offset, length, required);
+}
+
+/* -1 means a pending JNI exception, otherwise exact selected count. */
+static jint m3_count_window_two_masks(JNIEnv *env, jbyteArray states,
+        jint state_offset, jint length, jint required, jint excluded) {
+    if ((required & excluded) != 0) return 0;
+    if ((required | excluded) == 0) return length;
+    jbyte marks[M3_CHUNK];
+    jint kept = 0;
+    for (jint position = 0; position < length;) {
+        jint remaining = length - position;
+        jsize chunk = remaining < M3_CHUNK ? remaining : M3_CHUNK;
+        (*env)->GetByteArrayRegion(env, states,
+                state_offset + position, chunk, marks);
+        if ((*env)->ExceptionCheck(env)) return -1;
+        for (jsize i = 0; i < chunk; i++) {
+            if (m3_window_accepts_masks(marks[i], required, excluded)) kept++;
+        }
+        position += chunk;
+    }
+    return kept;
+}
+
+JNIEXPORT jint JNICALL
+Java_com_m3_collections_M3IndexMaskCompactor_windowMasksAbiNative(
+        JNIEnv *env, jclass owner) {
+    (void) env;
+    (void) owner;
+    return 1;
+}
+
+JNIEXPORT jintArray JNICALL
+Java_com_m3_collections_M3IndexMaskCompactor_selectWindowMasksNative(
+        JNIEnv *env, jclass owner, jintArray rows, jint row_offset,
+        jbyteArray states, jint state_offset, jint length,
+        jint required, jint excluded) {
+    (void) owner;
+    if (!m3_window_valid_two_masks(env, rows, states, row_offset,
+            state_offset, length, required, excluded)) return NULL;
+    jint kept = m3_count_window_two_masks(env, states, state_offset,
+            length, required, excluded);
+    if (kept < 0) return NULL;
+    jintArray result = (*env)->NewIntArray(env, kept);
+    if (result == NULL || kept == 0) return result;
+    jbyte marks[M3_CHUNK];
+    jint values[M3_CHUNK];
+    jint written = 0;
+    for (jint position = 0; position < length;) {
+        jint remaining = length - position;
+        jsize chunk = remaining < M3_CHUNK ? remaining : M3_CHUNK;
+        (*env)->GetByteArrayRegion(env, states,
+                state_offset + position, chunk, marks);
+        if ((*env)->ExceptionCheck(env)) return NULL;
+        (*env)->GetIntArrayRegion(env, rows, row_offset + position, chunk, values);
+        if ((*env)->ExceptionCheck(env)) return NULL;
+        jsize accepted = 0;
+        for (jsize i = 0; i < chunk; i++) {
+            if (m3_window_accepts_masks(marks[i], required, excluded)) {
+                values[accepted++] = values[i];
+            }
+        }
+        if (accepted > kept - written) {
+            m3_throw_state_drift(env);
+            return NULL;
+        }
+        if (accepted > 0) {
+            (*env)->SetIntArrayRegion(env, result, written, accepted, values);
+            if ((*env)->ExceptionCheck(env)) return NULL;
+            written += accepted;
+        }
+        position += chunk;
+    }
+    if (written != kept) {
+        m3_throw_state_drift(env);
+        return NULL;
+    }
+    return result;
+}
+
+JNIEXPORT jlongArray JNICALL
+Java_com_m3_collections_M3IndexMaskCompactor_selectLongWindowMasksNative(
+        JNIEnv *env, jclass owner, jlongArray rows, jint row_offset,
+        jbyteArray states, jint state_offset, jint length,
+        jint required, jint excluded) {
+    (void) owner;
+    if (!m3_window_valid_two_masks(env, rows, states, row_offset,
+            state_offset, length, required, excluded)) return NULL;
+    jint kept = m3_count_window_two_masks(env, states, state_offset,
+            length, required, excluded);
+    if (kept < 0) return NULL;
+    jlongArray result = (*env)->NewLongArray(env, kept);
+    if (result == NULL || kept == 0) return result;
+    jbyte marks[M3_CHUNK];
+    jlong values[M3_CHUNK];
+    jint written = 0;
+    for (jint position = 0; position < length;) {
+        jint remaining = length - position;
+        jsize chunk = remaining < M3_CHUNK ? remaining : M3_CHUNK;
+        (*env)->GetByteArrayRegion(env, states,
+                state_offset + position, chunk, marks);
+        if ((*env)->ExceptionCheck(env)) return NULL;
+        (*env)->GetLongArrayRegion(env, rows, row_offset + position, chunk, values);
+        if ((*env)->ExceptionCheck(env)) return NULL;
+        jsize accepted = 0;
+        for (jsize i = 0; i < chunk; i++) {
+            if (m3_window_accepts_masks(marks[i], required, excluded)) {
+                values[accepted++] = values[i];
+            }
+        }
+        if (accepted > kept - written) {
+            m3_throw_state_drift(env);
+            return NULL;
+        }
+        if (accepted > 0) {
+            (*env)->SetLongArrayRegion(env, result, written, accepted, values);
+            if ((*env)->ExceptionCheck(env)) return NULL;
+            written += accepted;
+        }
+        position += chunk;
+    }
+    if (written != kept) {
+        m3_throw_state_drift(env);
+        return NULL;
+    }
+    return result;
+}

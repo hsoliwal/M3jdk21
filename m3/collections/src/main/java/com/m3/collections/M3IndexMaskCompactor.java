@@ -340,6 +340,140 @@ public final class M3IndexMaskCompactor {
         return selected;
     }
 
+    /**
+     * Filter a bounded parent-owned int row window with required AND excluded state
+     * bits. Row and state offsets are independent; no aligned-state copy or boxed
+     * predicate is constructed. The detached output preserves every surviving
+     * occurrence, signed row ID and encounter order of the existing row lane.
+     *
+     * <p>Existing required-only API and JNI symbols remain unchanged. Explicit
+     * native selection requires the additive window-mask ABI; an old binary
+     * throws instead of silently ignoring excluded bits or falling back to Java.
+     * Source arrays must stay stable for the duration of both selection passes.
+     */
+    public static int[] selectWindow(int[] orderedRows, int rowOffset,
+            byte[] states, int stateOffset, int length,
+            int requiredMask, int excludedMask, Backend backend) {
+        Objects.requireNonNull(orderedRows, "orderedRows");
+        Objects.requireNonNull(states, "states");
+        Objects.requireNonNull(backend, "backend");
+        Objects.checkFromIndexSize(rowOffset, length, orderedRows.length);
+        Objects.checkFromIndexSize(stateOffset, length, states.length);
+        requireMask(requiredMask);
+        requireMask(excludedMask);
+        if (excludedMask == 0) {
+            return selectWindow(orderedRows, rowOffset, states, stateOffset,
+                    length, requiredMask, backend);
+        }
+        if (backend == Backend.NATIVE_REQUIRED) {
+            requireWindowMasksNative();
+            return selectWindowMasksNative(orderedRows, rowOffset,
+                    states, stateOffset, length, requiredMask, excludedMask);
+        }
+        if ((requiredMask & excludedMask) != 0) return new int[0];
+        int kept = countWindowMasks(states, stateOffset, length,
+                requiredMask, excludedMask);
+        if (kept == length) {
+            return java.util.Arrays.copyOfRange(orderedRows, rowOffset, rowOffset + length);
+        }
+        int[] selected = new int[kept];
+        int written = 0;
+        for (int i = 0; i < length; i++) {
+            if (matches(states[stateOffset + i], requiredMask, excludedMask)) {
+                if (written == kept) {
+                    throw new ConcurrentModificationException("aligned selection states changed");
+                }
+                selected[written++] = orderedRows[rowOffset + i];
+            }
+        }
+        if (written != kept) {
+            throw new ConcurrentModificationException("aligned selection states changed");
+        }
+        return selected;
+    }
+
+    /** Same independent-offset state-mask contract for primitive long rows. */
+    public static long[] selectLongWindow(long[] orderedRows, int rowOffset,
+            byte[] states, int stateOffset, int length,
+            int requiredMask, int excludedMask, Backend backend) {
+        Objects.requireNonNull(orderedRows, "orderedRows");
+        Objects.requireNonNull(states, "states");
+        Objects.requireNonNull(backend, "backend");
+        Objects.checkFromIndexSize(rowOffset, length, orderedRows.length);
+        Objects.checkFromIndexSize(stateOffset, length, states.length);
+        requireMask(requiredMask);
+        requireMask(excludedMask);
+        if (excludedMask == 0) {
+            return selectLongWindow(orderedRows, rowOffset, states, stateOffset,
+                    length, requiredMask, backend);
+        }
+        if (backend == Backend.NATIVE_REQUIRED) {
+            requireWindowMasksNative();
+            return selectLongWindowMasksNative(orderedRows, rowOffset,
+                    states, stateOffset, length, requiredMask, excludedMask);
+        }
+        if ((requiredMask & excludedMask) != 0) return new long[0];
+        int kept = countWindowMasks(states, stateOffset, length,
+                requiredMask, excludedMask);
+        if (kept == length) {
+            return java.util.Arrays.copyOfRange(orderedRows, rowOffset, rowOffset + length);
+        }
+        long[] selected = new long[kept];
+        int written = 0;
+        for (int i = 0; i < length; i++) {
+            if (matches(states[stateOffset + i], requiredMask, excludedMask)) {
+                if (written == kept) {
+                    throw new ConcurrentModificationException("aligned selection states changed");
+                }
+                selected[written++] = orderedRows[rowOffset + i];
+            }
+        }
+        if (written != kept) {
+            throw new ConcurrentModificationException("aligned selection states changed");
+        }
+        return selected;
+    }
+
+    private static int countWindowMasks(byte[] states, int offset, int length,
+            int requiredMask, int excludedMask) {
+        if ((requiredMask | excludedMask) == 0) return length;
+        int kept = 0;
+        for (int i = 0; i < length; i++) {
+            if (matches(states[offset + i], requiredMask, excludedMask)) kept++;
+        }
+        return kept;
+    }
+
+    private static void requireWindowMasksNative() {
+        if (!NativeLibrary.AVAILABLE) {
+            throw new UnsatisfiedLinkError("m3_index_mask JNI library unavailable");
+        }
+        if (!NativeWindowMasks.AVAILABLE) {
+            throw new UnsatisfiedLinkError(
+                    "m3_index_mask required/excluded window ABI unavailable");
+        }
+    }
+
+    private static final class NativeWindowMasks {
+        private static final boolean AVAILABLE = available();
+
+        private static boolean available() {
+            try {
+                return windowMasksAbiNative() == 1;
+            } catch (UnsatisfiedLinkError oldNativeLibrary) {
+                return false;
+            }
+        }
+    }
+
+    private static native int windowMasksAbiNative();
+
+    private static native int[] selectWindowMasksNative(int[] rows, int rowOffset,
+            byte[] states, int stateOffset, int length, int required, int excluded);
+
+    private static native long[] selectLongWindowMasksNative(long[] rows, int rowOffset,
+            byte[] states, int stateOffset, int length, int required, int excluded);
+
     /** Zero-mask selection is known without reading any state words. */
     private static int countWindow(byte[] states, int offset, int length, int mask) {
         if (mask == 0) return length;
