@@ -63,5 +63,8 @@
     "full SDK-family superset"
   ],
   "regex_scope": "BOTH compiled-pattern reuse and configurable language detection/tokenization required; implementation not added in this delivery",
-  "storage": "105 MiB S-only user approval; protection active"
+  "storage": "105 MiB S-only user approval; protection active",
+  "delivery_receipt_commit": "4043f9b6f95782533efe758dc77641e2b5790517",
+  "delivery_receipt_path": "synexia-openrewrite-recipes/recipe-crates/m3-jni-array-storage-20261021/delivery/JNI_ARRAY_MAP_PUBLICATION_V1.json",
+  "delivery_checkpoint_path": "synexia-openrewrite-recipes/recipe-crates/m3-jni-array-storage-20261021/delivery/CONTINUATION_STATE_V21.json"
 }
