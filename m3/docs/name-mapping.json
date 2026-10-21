@@ -748,6 +748,19 @@
       "source_license": "GPL-2.0-only WITH Classpath-exception-2.0; existing target notices retained",
       "recipe_owner": "synexia-openrewrite-recipes/recipe-crates/m3jdk21-fixed-lexicon-convergence-20261019/datasets/indexed-views-20261019",
       "scope_limit": "Refines one existing owner; public collection APIs and the current STRING qualification phase remain unchanged."
+    },
+    {
+      "source": "Canonical Synexia Abseil/category convergence task m3-abseil-convergence-20261021",
+      "source_commit": "See per-revision m3/docs/abseil-convergence-20261021/SOURCE_RECEIPT.json; no inferred commit",
+      "source_role": "Reusable exact-source Maven/OpenRewrite recipes, historical first-party atoms, fixtures, catalogue and correction memory",
+      "target": "java.lang.String/M3String/M3StringPrecomputeBridge; proposed java.util.CollectionViews; existing com.m3.collections array/index/mask owners and m3_index_mask_compactor.c",
+      "status": "BOUNDED_DRAFT_REVIEW; individual emitted subsets and executed gates are source-receipt bound",
+      "recipe": "com.synexia.m3jdk.AstBuildReverse20261017; canonical m3-ast-build-reverse-20261017 task datasets",
+      "target_rule": "M3JDK21 owns Java/HotSpot/JNI runtime; keep public names, current payload/state/generation authorities, primitive-only JNI and stronger current trigram guards",
+      "scope": "Two stacked review units: String first; collections/JNI plus additive bootstrap view candidate second. Catalogue presence does not prove receipt of either.",
+      "gates": "Fresh SDK and receiver proof, serial per-file compilation/API, native header/export/runtime, installed-image behavior and separate resource evidence; core CollectionViews API/license review and wider platform/reactor/full-family gates remain explicit",
+      "phase": "STRING remains active; no global receiving-phase advance",
+      "license": "Preserve OpenJDK GPL/ClassPath, independent Apache modules and historical file notices; external donor expression not copied"
     }
   ],
   "imported_donor_sources": [],
