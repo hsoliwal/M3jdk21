@@ -1,55 +1,25 @@
 {
-  "schema": "M3_RX7_RECEIVE_BOOTSTRAP_RECEIVER_STATUS_V1",
-  "observedUtc": "2026-10-18 06:49:16 UTC",
-  "scope": "Tool qualification SDK and binding only on separate stacked draft; active controls/original runtime sources unchanged",
-  "canonicalSource": {
-    "commit": "2c6c80a68b732926d74d34e0138d74d2dac4fb48",
-    "pr": "https://github.com/hsoliwal/com.synexia/pull/12287",
-    "path": "synexia-openrewrite-recipes/tasks/regex-v7-cold-free-projection-20261007/codec-receive-bootstrap-20261018/sdk"
-  },
-  "sdk": {
-    "tree": "603c438782a1447b4dd0a486ec6bb6287c8db715",
-    "files": 44,
-    "bytes": 371346,
-    "nonselfPins": 43,
-    "pinsSha256": "269767130ddc605c47fca66d6d171b78395dc00c57b0fb8e0ca52d06a1e2035b"
-  },
-  "controls": {
-    "launcherSha256": "63de29b3444fcd5a794ff8ba47b8cebf2d0aa14934c5fb38ed58624f0a661a00",
-    "workflowSha256": "b878863f71b122dcabbfef09658458a358662e8210a470b70d5cc431acc250a8",
-    "unchanged": true
-  },
-  "qualification": {
-    "maven": "NOT_RUN",
-    "carrier": "NOT_RUN",
-    "codecRuntimeRegression": "NOT_RUN_ON_BOOTSTRAP",
-    "everyModule": "NOT_RUN",
-    "receiveControlRuntime": "NOT_RUN"
-  },
-  "carrier": {
-    "schema": "M3_RX7_TEXT_RESULT_B64_V1",
-    "records": 3,
-    "calculatedBytes": 44256,
-    "calculatedReceiptBytes": 731,
-    "calculationNotProof": true,
-    "entireCarrierCapBytes": 65536,
-    "combinedMavenLogCapBytes": 131072
-  },
-  "oldQualifiedContext": {
-    "head": "b42f5260417d12bb73246302c8722b9295a2d24f",
-    "sdk": "e89f12783efeb9b6302aa0d02219651c8aeb9b5d",
-    "run": 39102406947,
-    "unchangedBranch": true
-  },
-  "formalAutoreviewHelper": "NOT_RUN_STORAGE_HOLD",
-  "runtimeApplied": false,
-  "controlApplied": false,
-  "productReceived": false,
-  "receivePre": false,
-  "receivePost": false,
-  "fullJdkQualified": false,
-  "jniQualified": false,
-  "performanceRetentionQualified": false,
+  "schema": "M3_STRING_CONCAT_NULL_STRING_RECEIVER_V1",
+  "status": "UNADMITTED_SDK_RECIPE_QUALIFICATION_CANDIDATE",
+  "canonicalSourceCommit": "a7e7bbdc7a69fbee615ea04d47321956f0abf35a",
+  "sourcePR": "https://github.com/hsoliwal/com.synexia/pull/12315",
+  "sdkTree": "74d9cacb400b6116f36a1ec7315d720b30a00813",
+  "files": 62,
+  "bytes": 610090,
+  "nonselfPins": 61,
+  "pinsSha256": "a5184199af5e6cd6e41cb43427e9f29c84548ca1f0b7e9bce99d74a14dc55890",
+  "qualificationReceiverBase": "b83c325c8a395464909bc71156cfb3b563b6623e",
+  "intendedProductionApplicationBase": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
+  "maven": "NOT_RUN",
+  "actualResultDiffCarrier": "NOT_RUN",
+  "actualEveryModule": "NOT_RUN",
+  "originalModel": "UNSEALED",
+  "typedFactoryPostimage": "NOT_RUN",
+  "matchedImageBaseline": "NOT_RUN",
+  "matchedImageCandidate": "NOT_RUN",
+  "factoryPlane": "EXISTING_TEXT_JAVADOC_BOOTSTRAP",
+  "targetApplied": false,
+  "controlsChanged": false,
   "phaseAdvanced": false,
   "fullMigrationComplete": false,
   "goalActive": true

@@ -155,6 +155,8 @@ final class M3RX7CodecCapRecipeTest {
                 "com.synexia.m3.RX7CodecCapLauncher20261018", false);
         qualifyTextCrates("m3-rx7-codec-receive-20261018",
                 "com.synexia.m3.RX7CodecReceive20261018", true);
+        qualifyHierarchyTestRecipe();
+        qualifyStringConcatNullStringRecipe();
     }
 
     private static void qualifyTextCrates(String forward, String namedForward,
@@ -345,7 +347,11 @@ final class M3RX7CodecCapRecipeTest {
                 "m3-rx7-codec-cap-launcher-20261018.yml",
                 "m3-rx7-codec-cap-launcher-20261018-inverse.yml",
                 "m3-rx7-codec-receive-20261018.yml",
-                "m3-rx7-codec-receive-20261018-inverse.yml")) {
+                "m3-rx7-codec-receive-20261018-inverse.yml",
+                "m3-everymodule-hierarchy-test-20261018.yml",
+                "m3-everymodule-hierarchy-test-20261018-inverse.yml",
+                "m3-string-concat-null-string-20261018.yml",
+                "m3-string-concat-null-string-20261018-inverse.yml")) {
             String path = "/META-INF/rewrite/" + name;
             try (var stream = M3RX7CodecCapRecipeTest.class.getResourceAsStream(path)) {
                 assertNotNull(stream, "exact classpath descriptor required: " + path);
@@ -766,6 +772,747 @@ final class M3RX7CodecCapRecipeTest {
                 + " refusalControls=2 origin=ACTUAL_NAMED_FORWARD_RESULTS"
                 + " carrierRecords=3 carrierBytes=" + carrierBytes.length
                 + " targetActivatedByExporter=false hostedReceiveQualification=NOT_RUN");
+    }
+
+
+    private static void qualifyHierarchyTestRecipe() throws Exception {
+        String forward = "m3-everymodule-hierarchy-test-20261018";
+        String inverse = forward + "-inverse";
+        String name = "com.synexia.m3.EveryModuleHierarchyTest20261018";
+        String target = hierarchyTestTarget();
+        String seed = "src/test/java/demo/HierarchyQualificationUnrelated.java";
+        String seedText = "package demo; final class HierarchyQualificationUnrelated {"
+                + " int value() { return 7; } }\n";
+        String before = resource(inverse, file(target));
+        String after = resource(forward, file(target));
+        assertEquals("2221343fd8f8219e80305ff912a27eb8e64d7183ccc603b415dda45eb016546b",
+                sha256(before));
+        assertEquals("486cad828ea18cf395bf658763db961a870ed21a513d03eef10234d2e14e3adc",
+                sha256(after));
+        assertManifest(forward, Map.of(target, before), Map.of(target, after));
+        assertManifest(inverse, Map.of(target, after), Map.of(target, before));
+        Environment environment = recipeEnvironment();
+        Map<String, String> actualResult = null;
+        int actualRuns = 0;
+        int fixedPoints = 0;
+        for (boolean undo : List.of(false, true)) {
+            String crate = undo ? inverse : forward;
+            String named = undo ? name + "Inverse" : name;
+            String from = undo ? after : before;
+            String to = undo ? before : after;
+            var activated = environment.activateRecipes(named);
+            assertEquals(1, activated.getRecipeList().size());
+            var descriptor = activated.getRecipeList().getFirst();
+            assertEquals(named, descriptor.getName());
+            assertEquals(1, descriptor.getRecipeList().size());
+            assertInstanceOf(M3HashPinnedJavaSnapshotRecipe.class,
+                    descriptor.getRecipeList().getFirst());
+            assertEquals(crate, ((M3HashPinnedJavaSnapshotRecipe)
+                    descriptor.getRecipeList().getFirst()).getCrateName());
+            for (int state = 0; state < 2; state++) {
+                for (boolean reversed : List.of(false, true)) {
+                    Map<String, String> input = Map.of(
+                            target, state == 0 ? from : to, seed, seedText);
+                    Map<String, String> expected = Map.of(target, to, seed, seedText);
+                    Outcome applied = runHierarchyRecipe(
+                            environment.activateRecipes(named), parse(input, reversed));
+                    assertEquals(expected, successfulHierarchyResult(target, input, applied));
+                    assertEquals(state == 0 ? 1 : 0,
+                            applied.run().getChangeset().getAllResults().size());
+                    actualRuns++;
+                    if (!undo && state == 0 && !reversed) {
+                        Map<String, String> emitted = new TreeMap<>();
+                        for (var result : applied.run().getChangeset().getAllResults()) {
+                            assertNotNull(result.getBefore());
+                            assertNotNull(result.getAfter());
+                            assertEquals(before, result.getBefore().printAll());
+                            assertNull(emitted.put(normalized(result.getAfter().getSourcePath()),
+                                    result.getAfter().printAll()), "duplicate hierarchy Result");
+                        }
+                        assertEquals(Map.of(target, after), emitted);
+                        actualResult = Map.copyOf(emitted);
+                    }
+                    Outcome fixed = runHierarchyRecipe(
+                            environment.activateRecipes(named), parse(expected, reversed));
+                    assertEquals(expected, successfulHierarchyResult(target, expected, fixed));
+                    assertTrue(fixed.run().getChangeset().getAllResults().isEmpty());
+                    fixedPoints++;
+                }
+            }
+            Map<String, String> complete = Map.of(target, from, seed, seedText);
+            List<SourceFile> missing = parse(complete, false);
+            missing.removeIf(source -> normalized(source.getSourcePath()).equals(target));
+            refused(crate, missing, "required source missing");
+            Map<String, String> drift = new TreeMap<>(complete);
+            drift.put(target, from + "\n// deliberate hierarchy qualification drift\n");
+            refused(crate, parse(drift, false), "source drift");
+            List<SourceFile> duplicate = parse(complete, false);
+            SourceFile first = duplicate.stream().filter(source ->
+                    normalized(source.getSourcePath()).equals(target)).findFirst().orElseThrow();
+            duplicate.add(first.withId(java.util.UUID.randomUUID()));
+            refused(crate, duplicate, "duplicate target");
+            List<SourceFile> text = parse(complete, false);
+            text.replaceAll(source -> normalized(source.getSourcePath()).equals(target)
+                    ? withCustodyMarker(PlainText.builder()
+                            .sourcePath(Path.of(target)).text(from).build()) : source);
+            refused(crate, text, "not a Java compilation unit");
+            hierarchyChangedAfterScan(crate, target, complete,
+                    Map.of(target, to, seed, seedText));
+        }
+        assertEquals(8, actualRuns);
+        assertEquals(8, fixedPoints);
+        assertNotNull(actualResult, "actual named full-BEFORE Java Result required");
+        Map<String, String> missingResult = new TreeMap<>(actualResult);
+        missingResult.remove(target);
+        AssertionError missingRefusal = assertThrows(AssertionError.class,
+                () -> exportHierarchyTestResult(before, after, missingResult));
+        assertTrue(missingRefusal.getMessage().contains("exact hierarchy Result allowlist"));
+        Map<String, String> changedResult = new TreeMap<>(actualResult);
+        changedResult.put(target, changedResult.get(target) + "\n// exported Result drift\n");
+        AssertionError changedRefusal = assertThrows(AssertionError.class,
+                () -> exportHierarchyTestResult(before, after, changedResult));
+        assertTrue(changedRefusal.getMessage().contains("exact actual hierarchy Java Result"));
+        assertFalse(Files.exists(owned("m3.build.root").resolve("everymodule-test-recipe-results"),
+                LinkOption.NOFOLLOW_LINKS), "refused hierarchy Results must not create output");
+        exportHierarchyTestResult(before, after, actualResult);
+    }
+
+    private static String hierarchyTestTarget() {
+        return "synexia-openrewrite-recipes/src/test/java/com/synexia/rewrite/"
+                + "M3EveryModuleRecipeFirstRecipeTest.java";
+    }
+
+    private static Outcome runHierarchyRecipe(org.openrewrite.Recipe recipe,
+            List<SourceFile> sources) {
+        List<Throwable> errors = new ArrayList<>();
+        InMemoryExecutionContext context = new InMemoryExecutionContext(errors::add);
+        context.putMessage(PARSER_CLASSPATH, List.<Path>of());
+        RecipeRun run = null;
+        Throwable thrown = null;
+        try {
+            run = recipe.run(new InMemoryLargeSourceSet(sources), context, 1);
+        } catch (RuntimeException | AssertionError failure) {
+            thrown = failure;
+        }
+        return new Outcome(run, List.copyOf(errors), thrown);
+    }
+
+    private static Map<String, String> successfulHierarchyResult(String target,
+            Map<String, String> input, Outcome outcome) {
+        assertNull(outcome.thrown(), messages(outcome));
+        assertTrue(outcome.errors().isEmpty(), messages(outcome));
+        assertNotNull(outcome.run());
+        Map<String, String> result = new TreeMap<>(input);
+        for (var change : outcome.run().getChangeset().getAllResults()) {
+            assertNotNull(change.getBefore(), "hierarchy recipe changes an existing test only");
+            assertNotNull(change.getAfter());
+            assertInstanceOf(J.CompilationUnit.class, change.getBefore());
+            assertInstanceOf(J.CompilationUnit.class, change.getAfter());
+            assertEquals(target, normalized(change.getBefore().getSourcePath()));
+            assertEquals(target, normalized(change.getAfter().getSourcePath()),
+                    "unrelated source changed");
+            assertEquals(input.get(target), change.getBefore().printAll());
+            assertEquals(change.getBefore().getId(), change.getAfter().getId());
+            assertEquals(change.getBefore().getSourcePath(), change.getAfter().getSourcePath());
+            assertMarkersPreserved(change.getBefore(), change.getAfter(),
+                    M3HashPinnedJavaSnapshotRecipe.class);
+            assertSameIdMarkerDriftRefused(change.getBefore(), change.getAfter(),
+                    M3HashPinnedJavaSnapshotRecipe.class);
+            assertEquals(change.getBefore().getFileAttributes(), change.getAfter().getFileAttributes());
+            assertEquals(change.getBefore().getCharset(), change.getAfter().getCharset());
+            assertEquals(change.getBefore().isCharsetBomMarked(), change.getAfter().isCharsetBomMarked());
+            result.put(target, change.getAfter().printAll());
+        }
+        return Map.copyOf(result);
+    }
+
+    private static void hierarchyChangedAfterScan(String crate, String target,
+            Map<String, String> scannedText, Map<String, String> changedText) {
+        InMemoryExecutionContext context = new InMemoryExecutionContext(failure -> {
+            throw new AssertionError("hierarchy Java parser callback failed", failure);
+        });
+        context.putMessage(PARSER_CLASSPATH, List.<Path>of());
+        M3HashPinnedJavaSnapshotRecipe recipe = new M3HashPinnedJavaSnapshotRecipe(crate);
+        var inventory = recipe.getInitialValue(context);
+        var scanner = recipe.getScanner(inventory);
+        for (SourceFile source : parse(scannedText, false)) scanner.visit(source, context);
+        assertTrue(recipe.generate(inventory, context).isEmpty(),
+                "existing hierarchy test must not be generated as an addition");
+        var visitor = recipe.getVisitor(inventory);
+        SourceFile changed = parse(changedText, false).stream().filter(source ->
+                normalized(source.getSourcePath()).equals(target)).findFirst().orElseThrow();
+        RuntimeException refusal = assertThrows(RuntimeException.class,
+                () -> visitor.visit(changed, context));
+        String detail = messages(new Outcome(null, List.of(), refusal));
+        assertTrue(detail.contains("java.lang.IllegalStateException: target changed after scan: "
+                + target), detail);
+    }
+
+    private static void exportHierarchyTestResult(String before, String expected,
+            Map<String, String> actual) throws Exception {
+        String target = hierarchyTestTarget();
+        assertEquals(Set.of(target), actual.keySet(), "exact hierarchy Result allowlist");
+        assertEquals(Map.of(target, expected), actual, "exact actual hierarchy Java Result");
+        assertEquals("2221343fd8f8219e80305ff912a27eb8e64d7183ccc603b415dda45eb016546b",
+                sha256(before));
+        assertEquals("486cad828ea18cf395bf658763db961a870ed21a513d03eef10234d2e14e3adc",
+                sha256(expected));
+        byte[] resultBytes = actual.get(target).getBytes(StandardCharsets.UTF_8);
+        assertTrue(resultBytes.length > 0 && resultBytes.length <= 16 * 1024);
+        String receipt = "# SPDX-License-Identifier: Apache-2.0\n"
+                + "# schema=M3_EVERYMODULE_TEST_RECIPE_RESULT_V1\n"
+                + "# recipe=com.synexia.m3.EveryModuleHierarchyTest20261018\n"
+                + "# origin=ACTUAL_NAMED_FULL_BEFORE_FORWARD_JAVA_AST_RESULT\n"
+                + "# originalModuleCompile=NOT_RUN\n"
+                + "# originalModuleTestExecution=NOT_RUN\n"
+                + "# actualEveryModule=NOT_RUN\n"
+                + "# fullMavenModel=NOT_RUN\n"
+                + "# typeAttribution=NOT_PROVEN\n"
+                + "# targetActivatedByExporter=false\n"
+                + "# receiptSelfExcluded=true\n"
+                + "path\tbefore_sha256\tafter_sha256\tbytes\n"
+                + target + "\t" + sha256(before) + "\t" + sha256(actual.get(target))
+                + "\t" + resultBytes.length + "\n";
+        byte[] receiptBytes = receipt.getBytes(StandardCharsets.UTF_8);
+        assertTrue(receiptBytes.length <= 4 * 1024);
+        Map<String, byte[]> payloads = new TreeMap<>();
+        payloads.put(target, resultBytes);
+        payloads.put("receipt.tsv", receiptBytes);
+        long plannedBytes = payloads.values().stream().mapToLong(data -> data.length).sum();
+        assertTrue(plannedBytes <= 64 * 1024);
+        Path recipeRoot = owned("m3.recipe.root");
+        Path build = owned("m3.build.root");
+        Path javaOutput = owned("m3.output.root");
+        for (Path external : List.of(build, javaOutput)) {
+            assertFalse(external.startsWith(recipeRoot) || recipeRoot.startsWith(external),
+                    "hierarchy outputs must be external to recipe source");
+        }
+        assertFalse(build.startsWith(javaOutput) || javaOutput.startsWith(build),
+                "hierarchy build root and Java export root must be disjoint");
+        Path output = build.resolve("everymodule-test-recipe-results").normalize();
+        assertTrue(output.startsWith(build) && !output.equals(build));
+        Path prior = build.resolve("text-recipe-results").normalize();
+        assertFalse(output.startsWith(prior) || prior.startsWith(output),
+                "hierarchy and existing text Result roots must be disjoint");
+        assertFalse(Files.exists(output, LinkOption.NOFOLLOW_LINKS),
+                "fresh hierarchy Result root required");
+        assertFalse(Files.isSymbolicLink(output));
+        for (String relative : payloads.keySet()) {
+            Path destination = output.resolve(relative).normalize();
+            assertTrue(destination.startsWith(output) && !destination.equals(output));
+            for (Path current = destination; current != null && !current.equals(build);
+                    current = current.getParent()) {
+                assertFalse(Files.isSymbolicLink(current));
+                assertFalse(Files.exists(current, LinkOption.NOFOLLOW_LINKS),
+                        "all hierarchy destinations must initially be absent");
+            }
+        }
+        assertTrue(Files.getFileStore(build).getUsableSpace()
+                >= 8L * 1024 * 1024 * 1024 + plannedBytes,
+                "8GiB reserve after planned hierarchy output required");
+        Files.createDirectory(output);
+        for (var entry : payloads.entrySet()) {
+            Path destination = output.resolve(entry.getKey()).normalize();
+            Files.createDirectories(destination.getParent());
+            for (Path current = destination.getParent(); current != null;
+                    current = current.getParent()) {
+                assertFalse(Files.isSymbolicLink(current));
+                assertTrue(Files.isDirectory(current, LinkOption.NOFOLLOW_LINKS));
+                if (current.equals(build)) break;
+            }
+            Files.write(destination, entry.getValue(), StandardOpenOption.CREATE_NEW);
+        }
+        Map<String, byte[]> observed = new TreeMap<>();
+        try (var paths = Files.walk(output, 10)) {
+            List<Path> entries = paths.limit(16).toList();
+            assertEquals(10, entries.size(), "closed hierarchy Result output inventory");
+            for (Path path : entries) {
+                assertFalse(Files.isSymbolicLink(path));
+                if (Files.isDirectory(path, LinkOption.NOFOLLOW_LINKS)) continue;
+                assertTrue(Files.isRegularFile(path, LinkOption.NOFOLLOW_LINKS));
+                String relative = normalized(output.relativize(path));
+                assertTrue(payloads.containsKey(relative), "foreign hierarchy output");
+                assertTrue(Files.size(path) <= 16 * 1024);
+                byte[] data;
+                try (var stream = Files.newInputStream(path, LinkOption.NOFOLLOW_LINKS)) {
+                    data = stream.readNBytes(16 * 1024 + 1);
+                }
+                assertTrue(data.length <= 16 * 1024);
+                assertArrayEquals(payloads.get(relative), data, "exact hierarchy readback");
+                assertNull(observed.put(relative, data), "duplicate hierarchy output");
+            }
+        }
+        assertEquals(payloads.keySet(), observed.keySet());
+        assertTrue(Files.getFileStore(build).getUsableSpace() >= 8L * 1024 * 1024 * 1024);
+        StringBuilder carrier = new StringBuilder();
+        for (String path : List.of(target, "receipt.tsv")) {
+            byte[] data = observed.get(path);
+            String encoded = java.util.Base64.getEncoder().encodeToString(data);
+            assertArrayEquals(data, java.util.Base64.getDecoder().decode(encoded));
+            String hash = HexFormat.of().formatHex(
+                    MessageDigest.getInstance("SHA-256").digest(data));
+            carrier.append("M3_EVERYMODULE_TEST_RESULT_B64_V1").append('\t')
+                    .append(path).append('\t').append(hash).append('\t')
+                    .append(data.length).append('\t').append(encoded).append('\n');
+        }
+        byte[] carrierBytes = carrier.toString().getBytes(StandardCharsets.UTF_8);
+        assertTrue(carrierBytes.length <= 16 * 1024, "bounded hierarchy Result carrier");
+        assertEquals(2L, carrier.toString().lines().count());
+        System.out.print(carrier.toString());
+        System.out.println("M3_EVERYMODULE_HIERARCHY_TEST_RECIPE_PASS actualRuns=8 fixedPoints=8"
+                + " refusalControls=10 exportRefusals=2 outputs=1 receipt=1 carrierRecords=2"
+                + " carrierBytes=" + carrierBytes.length
+                + " originalModuleCompile=NOT_RUN originalModuleTestExecution=NOT_RUN"
+                + " actualEveryModule=NOT_RUN fullMavenModel=NOT_RUN typeAttribution=NOT_PROVEN"
+                + " targetActivatedByExporter=false");
+    }
+
+    private static void qualifyStringConcatNullStringRecipe() throws Exception {
+        String forward = "m3-string-concat-null-string-20261018";
+        String inverse = forward + "-inverse";
+        String namedForward = "com.synexia.m3.StringConcatNullString20261018";
+        String factory = "src/java.base/share/classes/java/lang/invoke/StringConcatFactory.java";
+        String test = "test/jdk/java/lang/String/M3StringConcatReferenceDagTest.java";
+        String manifest = "m3/runtime-integration/recipe/manifest.json";
+        String seed = "qualification/UnrelatedConcatSeed.java";
+        String seedText = "package qualification; final class UnrelatedConcatSeed { int value = 11; }\n";
+        Map<String, String> before = Map.of(
+                factory, textResource(inverse, "StringConcatFactory.java.txt"),
+                test, resource(inverse, "M3StringConcatReferenceDagTest.java.txt"),
+                manifest, textResource(inverse, "manifest.json.txt"));
+        Map<String, String> after = Map.of(
+                factory, textResource(forward, "StringConcatFactory.java.txt"),
+                test, resource(forward, "M3StringConcatReferenceDagTest.java.txt"),
+                manifest, textResource(forward, "manifest.json.txt"));
+        assertEquals("0bdcf30e2e090545d41e80566ca2b60d50d3a1c3e80e3dc849f1a22ecc3e11b8",
+                sha256(before.get(factory)));
+        assertEquals("732c410330a1137aace06d3b20e0e8a86899b4fe98f15c738d588102383c4052",
+                sha256(after.get(factory)));
+        assertEquals("e4624f56a93d68cd04337e39ed2cd3896867149908f287d5839ddff9b965ae95",
+                sha256(before.get(test)));
+        assertEquals("053c69bd70909731e6509d06f6b29d31a24e2fb669a57f82bf22587e44e839c0", sha256(after.get(test)));
+        assertEquals("12a749485fcd401d8fba311e5b8911f30e10988a63a14ebcbd11edac3fbee643",
+                sha256(before.get(manifest)));
+        assertEquals("260cf8202542543db466b0fba64ae7613e10810ecaac76dac4d6fea20e096779",
+                sha256(after.get(manifest)));
+        assertEquals(62359, after.get(factory).getBytes(StandardCharsets.UTF_8).length);
+        assertEquals(6913, after.get(test).getBytes(StandardCharsets.UTF_8).length);
+        assertEquals(18795, after.get(manifest).getBytes(StandardCharsets.UTF_8).length);
+        Environment environment = recipeEnvironment();
+        for (boolean undo : List.of(false, true)) {
+            String crate = undo ? inverse : forward;
+            String named = namedForward + (undo ? "Inverse" : "");
+            var activated = environment.activateRecipes(named);
+            assertEquals(1, activated.getRecipeList().size());
+            var composite = activated.getRecipeList().getFirst();
+            assertEquals(named, composite.getName());
+            assertEquals(2, composite.getRecipeList().size());
+            var javaRecipe = assertInstanceOf(M3HashPinnedJavaSnapshotRecipe.class,
+                    composite.getRecipeList().get(0));
+            var textRecipe = assertInstanceOf(M3HashPinnedTextSnapshotRecipe.class,
+                    composite.getRecipeList().get(1));
+            assertEquals(crate, javaRecipe.getCrateName());
+            assertEquals(crate, textRecipe.getCrateName());
+            assertEquals(List.of(test), javaRecipe.targetPaths());
+            assertEquals(List.of(manifest, factory), textRecipe.targetPaths());
+            Map<String, String> from = undo ? after : before;
+            Map<String, String> to = undo ? before : after;
+            assertConcatManifest(crate, true, List.of(test), from, to);
+            assertConcatManifest(crate, false, List.of(manifest, factory), from, to);
+        }
+        List<String> targets = before.keySet().stream().sorted().toList();
+        List<org.openrewrite.Result> actualResults = null;
+        int actualRuns = 0;
+        int fixedPoints = 0;
+        int leafRefusals = 0;
+        for (boolean undo : List.of(false, true)) {
+            String crate = undo ? inverse : forward;
+            String named = namedForward + (undo ? "Inverse" : "");
+            Map<String, String> from = undo ? after : before;
+            Map<String, String> to = undo ? before : after;
+            for (int state = 0; state < 8; state++) {
+                for (boolean reversed : List.of(false, true)) {
+                    Map<String, String> input = new TreeMap<>(from);
+                    for (int index = 0; index < targets.size(); index++) {
+                        if ((state & (1 << index)) != 0) {
+                            input.put(targets.get(index), to.get(targets.get(index)));
+                        }
+                    }
+                    input.put(seed, seedText);
+                    Map<String, String> expected = new TreeMap<>(to);
+                    expected.put(seed, seedText);
+                    Outcome applied = runHierarchyRecipe(environment.activateRecipes(named),
+                            concatSources(input, reversed));
+                    assertEquals(expected, successfulConcatResult(targets, input, applied));
+                    assertEquals(3 - Integer.bitCount(state),
+                            applied.run().getChangeset().getAllResults().size());
+                    actualRuns++;
+                    if (!undo && state == 0 && !reversed) {
+                        actualResults = List.copyOf(applied.run().getChangeset().getAllResults());
+                        assertEquals(3, actualResults.size(), "actual named complete forward Results");
+                    }
+                    Outcome fixed = runHierarchyRecipe(environment.activateRecipes(named),
+                            concatSources(expected, reversed));
+                    assertEquals(expected, successfulConcatResult(targets, expected, fixed));
+                    assertTrue(fixed.run().getChangeset().getAllResults().isEmpty());
+                    fixedPoints++;
+                }
+            }
+            // Each unchanged scanner seals its own plane. These controls do not
+            // assert cross-engine transactional atomicity for the composite.
+            Map<String, String> complete = new TreeMap<>(from);
+            complete.put(seed, seedText);
+            for (String target : targets) {
+                boolean javaPlane = target.equals(test);
+                List<SourceFile> missing = concatSources(complete, false);
+                missing.removeIf(source -> normalized(source.getSourcePath()).equals(target));
+                concatLeafRefused(crate, javaPlane, missing, "required source missing");
+                leafRefusals++;
+                Map<String, String> drift = new TreeMap<>(complete);
+                drift.put(target, from.get(target) + (javaPlane
+                        ? "\n// deliberate concat source drift\n" : "\n "));
+                concatLeafRefused(crate, javaPlane, concatSources(drift, false), "source drift");
+                leafRefusals++;
+                List<SourceFile> duplicate = concatSources(complete, false);
+                SourceFile first = duplicate.stream().filter(source ->
+                        normalized(source.getSourcePath()).equals(target)).findFirst().orElseThrow();
+                duplicate.add(first.withId(java.util.UUID.randomUUID()));
+                concatLeafRefused(crate, javaPlane, duplicate, "duplicate target");
+                leafRefusals++;
+                if (javaPlane) {
+                    List<SourceFile> wrongPlane = concatSources(complete, false);
+                    wrongPlane.replaceAll(source ->
+                            normalized(source.getSourcePath()).equals(target)
+                                    ? withCustodyMarker(PlainText.builder().sourcePath(Path.of(target))
+                                            .text(from.get(target)).build()) : source);
+                    concatLeafRefused(crate, true, wrongPlane, "not a Java compilation unit");
+                    leafRefusals++;
+                }
+            }
+            Map<String, String> javaScanned = new TreeMap<>(complete);
+            javaScanned.remove(manifest);
+            javaScanned.remove(factory);
+            Map<String, String> javaChanged = new TreeMap<>(javaScanned);
+            javaChanged.put(test, to.get(test));
+            hierarchyChangedAfterScan(crate, test, javaScanned, javaChanged);
+            leafRefusals++;
+            concatTextChangedAfterScan(crate, factory, complete, to.get(factory));
+            leafRefusals++;
+        }
+        assertEquals(32, actualRuns);
+        assertEquals(32, fixedPoints);
+        assertEquals(24, leafRefusals);
+        assertNotNull(actualResults, "actual named full-BEFORE forward Results required");
+        List<org.openrewrite.Result> captured = List.copyOf(actualResults);
+        List<org.openrewrite.Result> outside = new ArrayList<>(captured);
+        org.openrewrite.Result first = outside.getFirst();
+        Path foreign = Path.of("outside/UnauthorizedConcatOwner.java");
+        outside.set(0, new org.openrewrite.Result(
+                first.getBefore().withSourcePath(foreign), first.getAfter().withSourcePath(foreign)));
+        AssertionError wrongSource = assertThrows(AssertionError.class,
+                () -> exportConcatDiffResults(before, after, outside));
+        assertTrue(wrongSource.getMessage().contains("exact concat Result allowlist"));
+        Path build = owned("m3.build.root");
+        Path output = build.resolve("string-concat-null-string-results");
+        assertFalse(Files.exists(output, LinkOption.NOFOLLOW_LINKS),
+                "refused outside Result must not create output");
+        assertTrue(Files.getFileStore(build).getUsableSpace()
+                >= 8L * 1024 * 1024 * 1024 + 64 * 1024);
+        Files.createDirectory(output);
+        try {
+            AssertionError preexisting = assertThrows(AssertionError.class,
+                    () -> exportConcatDiffResults(before, after, captured));
+            assertTrue(preexisting.getMessage().contains("fresh concat Result root required"));
+            assertEmpty(output);
+        } finally {
+            assertFalse(Files.isSymbolicLink(output));
+            assertEmpty(output);
+            Files.delete(output); // Only this helper's newly created empty refusal fixture.
+        }
+        assertFalse(Files.exists(output, LinkOption.NOFOLLOW_LINKS));
+        exportConcatDiffResults(before, after, captured);
+    }
+
+    private static void assertConcatManifest(String crate, boolean javaPlane,
+            List<String> targets, Map<String, String> before, Map<String, String> after)
+            throws Exception {
+        String manifest = javaPlane ? resource(crate, "manifest.tsv")
+                : textResource(crate, "manifest.tsv");
+        List<String> declared = new ArrayList<>();
+        for (String line : manifest.lines().toList()) {
+            if (line.isBlank() || line.startsWith("#")) continue;
+            String[] cells = line.split("\t", -1);
+            assertEquals(4, cells.length);
+            assertTrue(targets.contains(cells[0]));
+            assertEquals(sha256(before.get(cells[0])), cells[1]);
+            assertEquals(sha256(after.get(cells[0])), cells[2]);
+            assertEquals(after.get(cells[0]), javaPlane ? resource(crate, cells[3])
+                    : textResource(crate, cells[3]));
+            declared.add(cells[0]);
+        }
+        assertEquals(targets, declared, "exact sorted concat manifest target set");
+    }
+
+    private static List<SourceFile> concatSources(Map<String, String> input, boolean reversed) {
+        Map<String, String> javaSources = new TreeMap<>();
+        List<SourceFile> sources = new ArrayList<>();
+        for (var entry : new TreeMap<>(input).entrySet()) {
+            String path = entry.getKey();
+            if (path.equals("test/jdk/java/lang/String/M3StringConcatReferenceDagTest.java")
+                    || path.equals("qualification/UnrelatedConcatSeed.java")) {
+                javaSources.put(path, entry.getValue());
+            } else {
+                assertTrue(Set.of("src/java.base/share/classes/java/lang/invoke/StringConcatFactory.java",
+                        "m3/runtime-integration/recipe/manifest.json").contains(path));
+                sources.add(withCustodyMarker(PlainText.builder()
+                        .sourcePath(Path.of(entry.getKey())).text(entry.getValue()).build()));
+            }
+        }
+        sources.addAll(parse(javaSources, false)); // Strict callbacks, exact prints, explicit empty classpath.
+        sources.sort(java.util.Comparator.comparing(source -> normalized(source.getSourcePath())));
+        if (reversed) Collections.reverse(sources);
+        return sources;
+    }
+
+    private static Map<String, String> successfulConcatResult(List<String> targets,
+            Map<String, String> input, Outcome outcome) {
+        assertNull(outcome.thrown(), messages(outcome));
+        assertTrue(outcome.errors().isEmpty(), messages(outcome));
+        assertNotNull(outcome.run());
+        Map<String, String> result = new TreeMap<>(input);
+        Set<String> changed = new java.util.HashSet<>();
+        for (var change : outcome.run().getChangeset().getAllResults()) {
+            assertNotNull(change.getBefore(), "concat recipe replaces existing sources only");
+            assertNotNull(change.getAfter());
+            String path = normalized(change.getAfter().getSourcePath());
+            assertTrue(targets.contains(path), "unrelated concat source changed");
+            assertTrue(changed.add(path), "duplicate concat Result");
+            assertEquals(path, normalized(change.getBefore().getSourcePath()));
+            assertEquals(input.get(path), change.getBefore().printAll());
+            Class<?> owner;
+            if (path.equals("test/jdk/java/lang/String/M3StringConcatReferenceDagTest.java")) {
+                assertInstanceOf(J.CompilationUnit.class, change.getBefore());
+                assertInstanceOf(J.CompilationUnit.class, change.getAfter());
+                owner = M3HashPinnedJavaSnapshotRecipe.class;
+            } else {
+                assertInstanceOf(PlainText.class, change.getBefore());
+                assertInstanceOf(PlainText.class, change.getAfter());
+                owner = M3HashPinnedTextSnapshotRecipe.class;
+            }
+            assertEquals(change.getBefore().getId(), change.getAfter().getId());
+            assertEquals(change.getBefore().getSourcePath(), change.getAfter().getSourcePath());
+            assertMarkersPreserved(change.getBefore(), change.getAfter(), owner);
+            assertSameIdMarkerDriftRefused(change.getBefore(), change.getAfter(), owner);
+            assertEquals(change.getBefore().getFileAttributes(), change.getAfter().getFileAttributes());
+            assertEquals(change.getBefore().getCharset(), change.getAfter().getCharset());
+            assertEquals(change.getBefore().isCharsetBomMarked(), change.getAfter().isCharsetBomMarked());
+            result.put(path, change.getAfter().printAll());
+        }
+        return Map.copyOf(result);
+    }
+
+    private static void concatLeafRefused(String crate, boolean javaPlane,
+            List<SourceFile> sources, String expected) {
+        Outcome outcome = javaPlane ? run(crate, sources) : runText(crate, sources);
+        assertTrue(messages(outcome).contains(expected), messages(outcome));
+        if (outcome.run() != null) {
+            assertTrue(outcome.run().getChangeset().getAllResults().isEmpty(),
+                    "refused owning leaf must publish no Result");
+        }
+    }
+
+    private static void concatTextChangedAfterScan(String crate, String target,
+            Map<String, String> scanned, String otherValidState) {
+        InMemoryExecutionContext context = new InMemoryExecutionContext(failure -> {
+            throw new AssertionError("concat text preparation failed", failure);
+        });
+        M3HashPinnedTextSnapshotRecipe recipe = new M3HashPinnedTextSnapshotRecipe(crate);
+        var inventory = recipe.getInitialValue(context);
+        var scanner = recipe.getScanner(inventory);
+        for (SourceFile source : concatSources(scanned, false)) scanner.visit(source, context);
+        assertTrue(recipe.generate(inventory, context).isEmpty());
+        var visitor = recipe.getVisitor(inventory);
+        SourceFile changed = withCustodyMarker(PlainText.builder()
+                .sourcePath(Path.of(target)).text(otherValidState).build());
+        RuntimeException refusal = assertThrows(RuntimeException.class,
+                () -> visitor.visit(changed, context));
+        String detail = messages(new Outcome(null, List.of(), refusal));
+        assertTrue(detail.contains("java.lang.IllegalStateException: target changed after scan: "
+                + target), detail);
+    }
+
+    private static void exportConcatDiffResults(Map<String, String> before,
+            Map<String, String> after, List<org.openrewrite.Result> actual) throws Exception {
+        String factory = "src/java.base/share/classes/java/lang/invoke/StringConcatFactory.java";
+        String test = "test/jdk/java/lang/String/M3StringConcatReferenceDagTest.java";
+        String manifest = "m3/runtime-integration/recipe/manifest.json";
+        Map<String, String> patchNames = Map.of(factory, "StringConcatFactory.java.patch",
+                test, "M3StringConcatReferenceDagTest.java.patch",
+                manifest, "runtime-manifest.json.patch");
+        assertEquals(patchNames.keySet(), before.keySet());
+        assertEquals(patchNames.keySet(), after.keySet());
+        Map<String, org.openrewrite.Result> results = new TreeMap<>();
+        for (var result : actual) {
+            assertNotNull(result.getBefore());
+            assertNotNull(result.getAfter());
+            String path = normalized(result.getAfter().getSourcePath());
+            assertTrue(patchNames.containsKey(path), "exact concat Result allowlist");
+            assertEquals(path, normalized(result.getBefore().getSourcePath()));
+            assertNull(results.put(path, result), "duplicate actual concat Result");
+            assertEquals(before.get(path), result.getBefore().printAll(), "exact concat Result before");
+            assertEquals(after.get(path), result.getAfter().printAll(), "exact concat Result after");
+            assertEquals(result.getBefore().getId(), result.getAfter().getId());
+            assertEquals(result.getBefore().getSourcePath(), result.getAfter().getSourcePath());
+            Class<?> owner = path.equals(test)
+                    ? M3HashPinnedJavaSnapshotRecipe.class : M3HashPinnedTextSnapshotRecipe.class;
+            if (path.equals("test/jdk/java/lang/String/M3StringConcatReferenceDagTest.java")) {
+                assertInstanceOf(J.CompilationUnit.class, result.getBefore());
+                assertInstanceOf(J.CompilationUnit.class, result.getAfter());
+            } else {
+                assertInstanceOf(PlainText.class, result.getBefore());
+                assertInstanceOf(PlainText.class, result.getAfter());
+            }
+            assertMarkersPreserved(result.getBefore(), result.getAfter(), owner);
+            assertEquals(result.getBefore().getFileAttributes(), result.getAfter().getFileAttributes());
+            assertEquals(result.getBefore().getCharset(), result.getAfter().getCharset());
+            assertEquals(result.getBefore().isCharsetBomMarked(), result.getAfter().isCharsetBomMarked());
+        }
+        assertEquals(patchNames.keySet(), results.keySet(), "complete actual concat Results");
+        Path recipeRoot = owned("m3.recipe.root");
+        Path build = owned("m3.build.root");
+        Path javaOutput = owned("m3.output.root");
+        for (Path external : List.of(build, javaOutput)) {
+            assertFalse(external.startsWith(recipeRoot) || recipeRoot.startsWith(external),
+                    "concat outputs must be external to recipe source");
+        }
+        assertFalse(build.startsWith(javaOutput) || javaOutput.startsWith(build));
+        Path output = build.resolve("string-concat-null-string-results").normalize();
+        assertTrue(output.startsWith(build) && !output.equals(build));
+        for (String name : List.of("text-recipe-results", "everymodule-test-recipe-results")) {
+            Path old = build.resolve(name).normalize();
+            assertFalse(output.startsWith(old) || old.startsWith(output),
+                    "concat and old Result roots must be disjoint");
+        }
+        assertFalse(Files.exists(output, LinkOption.NOFOLLOW_LINKS),
+                "fresh concat Result root required");
+        assertFalse(Files.isSymbolicLink(output));
+        Map<String, byte[]> payloads = new TreeMap<>();
+        StringBuilder receipt = new StringBuilder("# SPDX-License-Identifier: Apache-2.0\n"
+                + "# schema=M3_STRING_CONCAT_RESULT_DIFF_V1\n"
+                + "# recipe=com.synexia.m3.StringConcatNullString20261018\n"
+                + "# origin=ACTUAL_NAMED_FULL_BEFORE_FORWARD_RESULTS_DIFF\n"
+                + "# baselineRuntime=NOT_RUN\n# candidateRuntime=NOT_RUN\n"
+                + "# originalModel=NOT_RUN\n# actualEveryModule=NOT_RUN\n"
+                + "# factoryPlane=EXISTING_TEXT_JAVADOC_BOOTSTRAP\n"
+                + "# typedFactoryPostimage=NOT_RUN\n# fullJdkCompile=NOT_RUN\n"
+                + "# typeAttribution=NOT_PROVEN\n# targetAppliedByExporter=false\n"
+                + "# negativeScope=OWNING_LEAF_ONLY_NOT_CROSS_ENGINE_ATOMICITY\n"
+                + "# receiptSelfExcluded=true\n"
+                + "path\tbefore_sha256\tbefore_bytes\tafter_sha256\tresult_bytes"
+                + "\tpatch\tpatch_sha256\tpatch_bytes\n");
+        for (var entry : results.entrySet()) {
+            String path = entry.getKey();
+            org.openrewrite.Result result = entry.getValue();
+            String diff = result.diff(); // Existing OpenRewrite 8.17.1 actual Result API.
+            assertFalse(diff.isEmpty(), "actual concat Result must have a diff");
+            assertEquals(-1, diff.indexOf('\r'), "LF-only actual diff");
+            assertEquals(-1, diff.indexOf('\0'));
+            assertTrue(diff.endsWith("\n"));
+            assertTrue(diff.startsWith("diff --git a/" + path + " b/" + path + "\n"),
+                    "actual diff must bind its exact target path");
+            byte[] data = diff.getBytes(StandardCharsets.UTF_8);
+            assertTrue(data.length > 0 && data.length <= 64 * 1024);
+            assertNull(payloads.put(patchNames.get(path), data));
+            String beforeText = result.getBefore().printAll();
+            String resultText = result.getAfter().printAll();
+            receipt.append(path).append('\t').append(sha256(beforeText)).append('\t')
+                    .append(beforeText.getBytes(StandardCharsets.UTF_8).length).append('\t')
+                    .append(sha256(resultText)).append('\t')
+                    .append(resultText.getBytes(StandardCharsets.UTF_8).length).append('\t')
+                    .append(patchNames.get(path)).append('\t').append(sha256(diff)).append('\t')
+                    .append(data.length).append('\n');
+        }
+        payloads.put("receipt.tsv", receipt.toString().getBytes(StandardCharsets.UTF_8));
+        long plannedBytes = payloads.values().stream().mapToLong(data -> data.length).sum();
+        assertEquals(4, payloads.size());
+        assertTrue(plannedBytes <= 64 * 1024, "bounded concat diff bundle");
+        String plannedCarrier = concatResultCarrier(payloads);
+        assertTrue(plannedCarrier.getBytes(StandardCharsets.UTF_8).length <= 16 * 1024,
+                "bounded concat diff carrier before output");
+        for (String relative : payloads.keySet()) {
+            Path destination = output.resolve(relative).normalize();
+            assertEquals(output, destination.getParent(), "flat concat Result output");
+            assertFalse(Files.exists(destination, LinkOption.NOFOLLOW_LINKS));
+            assertFalse(Files.isSymbolicLink(destination));
+        }
+        assertTrue(Files.getFileStore(build).getUsableSpace()
+                >= 8L * 1024 * 1024 * 1024 + 64 * 1024,
+                "8GiB reserve after planned concat output required");
+        Files.createDirectory(output);
+        for (var entry : payloads.entrySet()) {
+            assertFalse(Files.isSymbolicLink(output));
+            assertTrue(Files.isDirectory(output, LinkOption.NOFOLLOW_LINKS));
+            Files.write(output.resolve(entry.getKey()), entry.getValue(), StandardOpenOption.CREATE_NEW);
+        }
+        Map<String, byte[]> observed = new TreeMap<>();
+        try (var paths = Files.walk(output, 1)) {
+            List<Path> entries = paths.limit(6).toList();
+            assertEquals(5, entries.size(), "closed concat Result output inventory");
+            for (Path path : entries) {
+                assertFalse(Files.isSymbolicLink(path));
+                if (path.equals(output)) {
+                    assertTrue(Files.isDirectory(path, LinkOption.NOFOLLOW_LINKS));
+                    continue;
+                }
+                assertTrue(Files.isRegularFile(path, LinkOption.NOFOLLOW_LINKS));
+                String relative = normalized(output.relativize(path));
+                assertTrue(payloads.containsKey(relative), "foreign concat output");
+                assertTrue(Files.size(path) <= 64 * 1024);
+                byte[] data;
+                try (var stream = Files.newInputStream(path, LinkOption.NOFOLLOW_LINKS)) {
+                    data = stream.readNBytes(64 * 1024 + 1);
+                }
+                assertTrue(data.length <= 64 * 1024);
+                assertArrayEquals(payloads.get(relative), data, "exact concat diff readback");
+                assertNull(observed.put(relative, data), "duplicate concat output");
+            }
+        }
+        assertEquals(payloads.keySet(), observed.keySet());
+        assertTrue(observed.values().stream().mapToLong(data -> data.length).sum() <= 64 * 1024);
+        assertTrue(Files.getFileStore(build).getUsableSpace() >= 8L * 1024 * 1024 * 1024);
+        String carrier = concatResultCarrier(observed);
+        assertEquals(plannedCarrier, carrier, "carrier must use exact actual Result diff readback");
+        int carrierBytes = carrier.getBytes(StandardCharsets.UTF_8).length;
+        assertTrue(carrierBytes <= 16 * 1024);
+        assertEquals(4L, carrier.lines().count());
+        System.out.print(carrier);
+        System.out.println("M3_STRING_CONCAT_NULL_STRING_RECIPE_PASS actualRuns=32 fixedPoints=32"
+                + " leafRefusals=24 exportRefusals=2 patches=3 receipt=1 carrierRecords=4"
+                + " carrierBytes=" + carrierBytes
+                + " baselineRuntime=NOT_RUN candidateRuntime=NOT_RUN originalModel=NOT_RUN"
+                + " actualEveryModule=NOT_RUN typedFactoryPostimage=NOT_RUN fullJdkCompile=NOT_RUN"
+                + " typeAttribution=NOT_PROVEN targetAppliedByExporter=false");
+    }
+
+    private static String concatResultCarrier(Map<String, byte[]> payloads) throws Exception {
+        assertEquals(Set.of("M3StringConcatReferenceDagTest.java.patch",
+                "StringConcatFactory.java.patch", "runtime-manifest.json.patch", "receipt.tsv"),
+                payloads.keySet());
+        List<String> order = new ArrayList<>(payloads.keySet().stream()
+                .filter(path -> !path.equals("receipt.tsv")).sorted().toList());
+        order.add("receipt.tsv");
+        StringBuilder carrier = new StringBuilder();
+        for (String path : order) {
+            byte[] data = payloads.get(path);
+            String encoded = java.util.Base64.getEncoder().encodeToString(data);
+            assertArrayEquals(data, java.util.Base64.getDecoder().decode(encoded));
+            String hash = HexFormat.of().formatHex(
+                    MessageDigest.getInstance("SHA-256").digest(data));
+            carrier.append("M3_STRING_CONCAT_RESULT_B64_V1").append('\t')
+                    .append(path).append('\t').append(hash).append('\t')
+                    .append(data.length).append('\t').append(encoded).append('\n');
+        }
+        return carrier.toString();
     }
 
     private static String file(String path) {

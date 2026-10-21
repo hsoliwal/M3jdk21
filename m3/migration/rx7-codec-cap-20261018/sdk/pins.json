@@ -1,9 +1,9 @@
 {
   "schema": "M3_RX7_CODEC_CAP_SDK_PINS_V1",
-  "status": "UNADMITTED_TOOL_QUALIFICATION_BOOTSTRAP",
-  "canonicalSourceBase": "a17b395aa849a53ba48e896d53636b9dc6942f7d",
-  "receiverBase": "b42f5260417d12bb73246302c8722b9295a2d24f",
-  "fossContractCommit": "d2cbc85192d09abc0548b7f825f86cddff44a224",
+  "status": "UNADMITTED_TOOL_QUALIFICATION_NULLABLE_STRING_CONCAT",
+  "canonicalSourceBase": "67d8729cf2d90f350a67f7ad2baafdb184ece1c7",
+  "receiverBase": "b83c325c8a395464909bc71156cfb3b563b6623e",
+  "fossContractCommit": "04d5ced83d6a014784671bc5606ac61e4bc0723a",
   "qualifiedCapDonor": "e89f12783efeb9b6302aa0d02219651c8aeb9b5d",
   "receiveRecipeDonor": "2711cbfe44896502aa31ecf854de41f571aa3a13",
   "everyModuleAdmission": "NOT_RUN",
@@ -35,12 +35,42 @@
     "carrierRecords": 3,
     "carrierCapBytes": 65536,
     "carrierSchema": "M3_RX7_TEXT_RESULT_B64_V1",
-    "receiveControlRuntime": "NOT_EXECUTED_BY_THIS_BOOTSTRAP"
+    "receiveControlRuntime": "NOT_EXECUTED_BY_THIS_BOOTSTRAP",
+    "hierarchyNamedRecipe": "com.synexia.m3.EveryModuleHierarchyTest20261018",
+    "hierarchyRecipeRuns": 8,
+    "hierarchyFixedPoints": 8,
+    "hierarchySourceRefusals": 10,
+    "hierarchyExportRefusals": 2,
+    "hierarchyResultExports": 1,
+    "hierarchyResultReceipt": 1,
+    "hierarchyCarrierRecords": 2,
+    "hierarchyCarrierPrefix": "M3_EVERYMODULE_TEST_RESULT_B64_V1",
+    "hierarchyCarrierCapBytes": 16384,
+    "originalModuleCompile": "NOT_RUN",
+    "originalModuleTestExecution": "NOT_RUN",
+    "actualEveryModule": "NOT_RUN",
+    "typeAttribution": "NOT_PROVEN",
+    "nullableStringNamedRecipe": "com.synexia.m3.StringConcatNullString20261018",
+    "nullableStringRecipeRuns": 32,
+    "nullableStringFixedPoints": 32,
+    "nullableStringLeafRefusals": 24,
+    "nullableStringExportRefusals": 2,
+    "nullableStringActualDiffPatches": 3,
+    "nullableStringReceipt": 1,
+    "nullableStringCarrierRecords": 4,
+    "nullableStringCarrierPrefix": "M3_STRING_CONCAT_RESULT_B64_V1",
+    "nullableStringCarrierCapBytes": 16384,
+    "nullableStringBundleCapBytes": 65536,
+    "factoryPlane": "EXISTING_TEXT_JAVADOC_BOOTSTRAP",
+    "typedFactoryPostimage": "NOT_RUN",
+    "actualImageBaseline": "NOT_RUN",
+    "actualImageCandidate": "NOT_RUN",
+    "targetAppliedByExporter": false
   },
   "files": {
     "FOSS_REUSE_DECISION.tsv": {
-      "sha256": "10e36cfc6dc810c8be52b56fa943c463c473e4c33787bff26025f1a08f166afa",
-      "bytes": 3164,
+      "sha256": "5daa25e1932bb8abf9fac6e78e0b69ac0d975ce670be659f5274e2ac4b93bd7b",
+      "bytes": 7435,
       "license": "Apache-2.0"
     },
     "LICENSE": {
@@ -54,13 +84,13 @@
       "license": "GPLv2 with Classpath exception; unchanged original fixture"
     },
     "NOTICE": {
-      "sha256": "8119032b4049805679590845a079bc23656e28ab2843d2d20179584b3be6ac9f",
-      "bytes": 973,
+      "sha256": "a0eb323175020018bf15453ce64cc14d420b4bc15581666c8b9c840f08dfad3f",
+      "bytes": 1454,
       "license": "Apache-2.0"
     },
     "README.md": {
-      "sha256": "ee76bee9639c6fd907e147140407933cd9fa4b65b166f4cc582b5d77dfbf9d10",
-      "bytes": 4756,
+      "sha256": "7f8bd5e5c5eeef50a40cf418edd4f530c0a816aea1fdaeddf01880b8c971358d",
+      "bytes": 4277,
       "license": "Apache-2.0"
     },
     "pom.xml": {
@@ -86,6 +116,16 @@
     "src/main/java/com/synexia/rewrite/M3ScopeInference.java": {
       "sha256": "13660b59f60ec2941ec19e9bc8964ffd4b04689cdc33cd19711fba14b8da09a4",
       "bytes": 7655,
+      "license": "Apache-2.0"
+    },
+    "src/main/resources/META-INF/rewrite/m3-everymodule-hierarchy-test-20261018-inverse.yml": {
+      "sha256": "818b75f4c41190c2ed5a52574f040c102b30e80b89fcfd99d29e951aa8f07298",
+      "bytes": 498,
+      "license": "Apache-2.0"
+    },
+    "src/main/resources/META-INF/rewrite/m3-everymodule-hierarchy-test-20261018.yml": {
+      "sha256": "d05daf64d1914f369d5f258b742a1282c531e7581cc5e5be7e82c877ecbf1637",
+      "bytes": 495,
       "license": "Apache-2.0"
     },
     "src/main/resources/META-INF/rewrite/m3-rx7-codec-cap-20261018-inverse.yml": {
@@ -116,6 +156,36 @@
     "src/main/resources/META-INF/rewrite/m3-rx7-codec-receive-20261018.yml": {
       "sha256": "6debd00e69b0325917906ece59329dfb8d3d4833c439915a0300b6d37585c6aa",
       "bytes": 621,
+      "license": "Apache-2.0"
+    },
+    "src/main/resources/META-INF/rewrite/m3-string-concat-null-string-20261018-inverse.yml": {
+      "sha256": "030502f45e958191084cc1f6ad2926a9b261173f5534b2af98d85f9a87104a27",
+      "bytes": 646,
+      "license": "Apache-2.0"
+    },
+    "src/main/resources/META-INF/rewrite/m3-string-concat-null-string-20261018.yml": {
+      "sha256": "b6f7acb558f63b76c021086007aeeb56bb9674f822fdbedf8a5fbe2b647e1019",
+      "bytes": 645,
+      "license": "Apache-2.0"
+    },
+    "src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-everymodule-hierarchy-test-20261018-inverse/M3EveryModuleRecipeFirstRecipeTest.java.txt": {
+      "sha256": "2221343fd8f8219e80305ff912a27eb8e64d7183ccc603b415dda45eb016546b",
+      "bytes": 1734,
+      "license": "Apache-2.0"
+    },
+    "src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-everymodule-hierarchy-test-20261018-inverse/manifest.tsv": {
+      "sha256": "79a5b05ac8f43a3e24fa9a0e9c882c562bca5188ccf4e750762ff2ce69ee2714",
+      "bytes": 276,
+      "license": "Apache-2.0"
+    },
+    "src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-everymodule-hierarchy-test-20261018/M3EveryModuleRecipeFirstRecipeTest.java.txt": {
+      "sha256": "486cad828ea18cf395bf658763db961a870ed21a513d03eef10234d2e14e3adc",
+      "bytes": 1855,
+      "license": "Apache-2.0"
+    },
+    "src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-everymodule-hierarchy-test-20261018/manifest.tsv": {
+      "sha256": "a36d0e7394ec465629956d46014f70396b065739a43236383a1b8e4368826f06",
+      "bytes": 276,
       "license": "Apache-2.0"
     },
     "src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-rx7-codec-cap-20261018-inverse/M3RX7.java.txt": {
@@ -188,6 +258,26 @@
       "bytes": 1173,
       "license": "Apache-2.0"
     },
+    "src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-string-concat-null-string-20261018-inverse/M3StringConcatReferenceDagTest.java.txt": {
+      "sha256": "e4624f56a93d68cd04337e39ed2cd3896867149908f287d5839ddff9b965ae95",
+      "bytes": 4536,
+      "license": "Existing receiving-repository provenance retained; no relicensing"
+    },
+    "src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-string-concat-null-string-20261018-inverse/manifest.tsv": {
+      "sha256": "91c719a37fb0901c5a9c5a1d84e4ad418ef397b636ef0fcd1df757584c061707",
+      "bytes": 232,
+      "license": "Apache-2.0"
+    },
+    "src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-string-concat-null-string-20261018/M3StringConcatReferenceDagTest.java.txt": {
+      "sha256": "053c69bd70909731e6509d06f6b29d31a24e2fb669a57f82bf22587e44e839c0",
+      "bytes": 6913,
+      "license": "Existing receiving-repository provenance retained; no relicensing"
+    },
+    "src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-string-concat-null-string-20261018/manifest.tsv": {
+      "sha256": "ae4c02fed8d92d28e5babcbc57417b1afaf5b801d9acd12c9974937dc68e8f58",
+      "bytes": 232,
+      "license": "Apache-2.0"
+    },
     "src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-rx7-codec-cap-launcher-20261018-inverse/launcher.sh.txt": {
       "sha256": "d0bc79bbb30d42fe33a92833aa8715d4aa6ca7ec4868612e3497fc047e98ea1f",
       "bytes": 1633,
@@ -248,10 +338,42 @@
       "bytes": 7800,
       "license": "Apache-2.0"
     },
+    "src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-string-concat-null-string-20261018-inverse/StringConcatFactory.java.txt": {
+      "sha256": "0bdcf30e2e090545d41e80566ca2b60d50d3a1c3e80e3dc849f1a22ecc3e11b8",
+      "bytes": 62348,
+      "license": "GPL-2.0-only WITH Classpath-exception-2.0; original header retained"
+    },
+    "src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-string-concat-null-string-20261018-inverse/manifest.json.txt": {
+      "sha256": "12a749485fcd401d8fba311e5b8911f30e10988a63a14ebcbd11edac3fbee643",
+      "bytes": 18689,
+      "license": "Existing receiving-repository provenance retained; no relicensing"
+    },
+    "src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-string-concat-null-string-20261018-inverse/manifest.tsv": {
+      "sha256": "3c59b86a9ac14dbc6e3ad9d10585b69ada1375b914dff57297495791106de8bb",
+      "bytes": 421,
+      "license": "Apache-2.0"
+    },
+    "src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-string-concat-null-string-20261018/StringConcatFactory.java.txt": {
+      "sha256": "732c410330a1137aace06d3b20e0e8a86899b4fe98f15c738d588102383c4052",
+      "bytes": 62359,
+      "license": "GPL-2.0-only WITH Classpath-exception-2.0; original header retained"
+    },
+    "src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-string-concat-null-string-20261018/manifest.json.txt": {
+      "sha256": "260cf8202542543db466b0fba64ae7613e10810ecaac76dac4d6fea20e096779",
+      "bytes": 18795,
+      "license": "Existing receiving-repository provenance retained; no relicensing"
+    },
+    "src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-string-concat-null-string-20261018/manifest.tsv": {
+      "sha256": "77322757fb4856eebb0c8b1898914f6852f46c34c00e526d4bf5e4283e29aacb",
+      "bytes": 421,
+      "license": "Apache-2.0"
+    },
     "src/test/java/com/synexia/rewrite/M3RX7CodecCapRecipeTest.java": {
-      "sha256": "a475796fac0ef0e0adb999bc920f7d00ee6a0bfdcad5a8c22172581899b28a2c",
-      "bytes": 44507,
+      "sha256": "21f09e6b13de3da8f61eb0205c953aaa6ff2db54670203c3d83935a1a57a7346",
+      "bytes": 91070,
       "license": "Apache-2.0"
     }
-  }
+  },
+  "qualifiedBootstrapDonor": "603c438782a1447b4dd0a486ec6bb6287c8db715",
+  "qualifiedHierarchyDonor": "8fba702e07911581678c94aca44ba724a7b5d2e8"
 }

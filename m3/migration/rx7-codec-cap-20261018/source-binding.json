@@ -1,12 +1,12 @@
 {
   "schema": "SYNEXIA_RX7_CODEC_CAP_BINDING_V1",
   "repository": "hsoliwal/com.synexia",
-  "sourceCommit": "2c6c80a68b732926d74d34e0138d74d2dac4fb48",
-  "sourcePullRequest": "https://github.com/hsoliwal/com.synexia/pull/12287",
-  "canonicalPath": "synexia-openrewrite-recipes/tasks/regex-v7-cold-free-projection-20261007/codec-receive-bootstrap-20261018/sdk",
+  "sourceCommit": "a7e7bbdc7a69fbee615ea04d47321956f0abf35a",
+  "sourcePullRequest": "https://github.com/hsoliwal/com.synexia/pull/12315",
+  "canonicalPath": "synexia-openrewrite-recipes/tasks/string-concat-null-string-20261018/sdk",
   "receiverCorePath": "m3/migration/rx7-codec-cap-20261018/sdk",
-  "moduleGitTree": "603c438782a1447b4dd0a486ec6bb6287c8db715",
-  "pinsSha256": "269767130ddc605c47fca66d6d171b78395dc00c57b0fb8e0ca52d06a1e2035b",
+  "moduleGitTree": "74d9cacb400b6116f36a1ec7315d720b30a00813",
+  "pinsSha256": "a5184199af5e6cd6e41cb43427e9f29c84548ca1f0b7e9bce99d74a14dc55890",
   "launcherSha256": "63de29b3444fcd5a794ff8ba47b8cebf2d0aa14934c5fb38ed58624f0a661a00",
   "workflowSha256": "b878863f71b122dcabbfef09658458a358662e8210a470b70d5cc431acc250a8",
   "runtimeApplied": false,
@@ -15,17 +15,25 @@
     39100818657,
     39101824825
   ],
-  "candidateExecution": "NOT_RUN_RECEIVE_RECIPE_BOOTSTRAP",
+  "candidateExecution": "NOT_RUN_NULLABLE_STRING_CONCAT_RECIPE_QUALIFICATION",
   "bootstrapOnly": true,
   "qualifiedCapBranchPreserved": "b42f5260417d12bb73246302c8722b9295a2d24f",
   "everyModuleAdmission": "NOT_RUN",
   "controlApplication": false,
   "productReceipt": false,
+  "sourceCommitRuntimeCheck": "SYNTAX_ONLY; canonical path/tree readback performed externally, not full source admission",
+  "qualifiedBootstrapBranchPreserved": "9701611c9f9cfc99850f4a439e3c9c5b4f8e1634",
+  "originalModuleCompile": "NOT_RUN",
+  "originalModuleTestExecution": "NOT_RUN",
+  "originalTestApplication": false,
   "sourcePathTreeExternalReadback": {
-    "commit": "2c6c80a68b732926d74d34e0138d74d2dac4fb48",
-    "path": "synexia-openrewrite-recipes/tasks/regex-v7-cold-free-projection-20261007/codec-receive-bootstrap-20261018/sdk",
-    "tree": "603c438782a1447b4dd0a486ec6bb6287c8db715",
-    "verifiedBy": "GITHUB_API_SOURCE_NAMESPACE_DIRECTORY_AT_EXACT_COMMIT"
+    "commit": "a7e7bbdc7a69fbee615ea04d47321956f0abf35a",
+    "path": "synexia-openrewrite-recipes/tasks/string-concat-null-string-20261018/sdk",
+    "tree": "74d9cacb400b6116f36a1ec7315d720b30a00813"
   },
-  "sourceCommitRuntimeCheck": "SYNTAX_ONLY; canonical path/tree readback performed externally, not full source admission"
+  "qualifiedHierarchyBranchPreserved": "b83c325c8a395464909bc71156cfb3b563b6623e",
+  "intendedProductionApplicationBase": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
+  "typedFactoryPostimage": "NOT_RUN",
+  "matchedImageBaseline": "NOT_RUN",
+  "matchedImageCandidate": "NOT_RUN"
 }
