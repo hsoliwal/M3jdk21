@@ -28,6 +28,11 @@ public final class M3AST {
         return rootAtomIndex;
     }
 
+    /** Internal sealed document owner used for primitive-only AST token traversal. */
+    M3ASTPool tokenPool() {
+        return pool;
+    }
+
     public M3ASTAtom root() {
         return pool.atom(rootAtomIndex);
     }
