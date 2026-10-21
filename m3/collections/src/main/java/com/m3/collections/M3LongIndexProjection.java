@@ -7,6 +7,7 @@
 package com.m3.collections;
 
 import java.util.Arrays;
+import java.util.BitSet;
 import java.util.Objects;
 
 /**
@@ -128,6 +129,70 @@ public final class M3LongIndexProjection {
                     "aligned selection states changed");
         }
         return new M3LongIndexProjection(values, selected, 0, selected.length, order);
+    }
+
+    /**
+     * Compose a signed-stride path over this view with precomputed full-width state masks.
+     *
+     * <p>Each mask plane is addressed by the original physical slot in the
+     * privately owned value array, rather than by this view's logical ordinal.
+     * The ordered index lane therefore also serves as the physical-offset lane:
+     * sorting, slicing and previous filtering do not create a redundant offset
+     * array. Repeated values remain distinct physical occurrences.
+     *
+     * <p>Filters are pure, precomputed 32-bit metadata stages, not callbacks.
+     * The caller must keep the mask planes unchanged for this entire call.
+     * {@code first/count/stride} are relative to this logical view. A negative
+     * stride reverses sorted direction without claiming stable reverse ties.
+     * The result is detached, with no retained caller mask or native pointer.
+     * A required JNI backend never silently falls back to Java.
+     *
+     * @throws IndexOutOfBoundsException for invalid relative traversal geometry
+     */
+    public M3LongIndexProjection filteredPathMasks(
+            int[][] statePlanes, int[] requiredMasks, int[] forbiddenMasks,
+            int first, int count, int stride, M3IndexPathMasks.Backend backend) {
+        Objects.requireNonNull(backend, "backend");
+        int length = size();
+        if (first < 0 || first > length || count < 0 || stride == 0) {
+            throw new IndexOutOfBoundsException("invalid projection path");
+        }
+        if (count != 0) {
+            long last = (long) first + (long) (count - 1) * stride;
+            if (first == length || last < 0 || last >= length) {
+                throw new IndexOutOfBoundsException("path leaves projection window");
+            }
+        }
+        int[] selected = M3IndexPathMasks.select(
+                indices, indices, statePlanes, requiredMasks, forbiddenMasks,
+                from + first, count, stride, backend);
+        Order resultOrder = order;
+        if (stride < 0) {
+            resultOrder = switch (order) {
+                case ASCENDING -> Order.DESCENDING;
+                case DESCENDING -> Order.ASCENDING;
+                case ENCOUNTER -> Order.ENCOUNTER;
+            };
+        }
+        return new M3LongIndexProjection(values, selected, 0, selected.length, resultOrder);
+    }
+
+    /**
+     * Select trusted, private logical-occurrence bits without an intermediate byte mask.
+     * The plan owns a plain immutable BitSet whose bounded extent and cached count were
+     * admitted together. Opaque BitSet origins keep the existing byte-mask path.
+     */
+    M3LongIndexProjection filteredOrdinals(BitSet selected, int selectedCount) {
+        if (selectedCount == size()) {
+            return new M3LongIndexProjection(values, indices, from, to, order);
+        }
+        int[] selectedIndices = new int[selectedCount];
+        int write = 0;
+        for (int ordinal = selected.nextSetBit(0); ordinal >= 0;
+                ordinal = selected.nextSetBit(ordinal + 1)) {
+            selectedIndices[write++] = M3LongAddressKernel.addressUnchecked(indices, from, ordinal);
+        }
+        return new M3LongIndexProjection(values, selectedIndices, 0, selectedCount, order);
     }
 
     /** Stable signed-long sort; only the primitive index vector is permuted. */
