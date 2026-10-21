@@ -103,8 +103,9 @@ static jlong m3_window_scan_range(JNIEnv *env, jintArray rows, jbyteArray states
          * Only the enclosing admitted row span crosses JNI. Offsets fit in one byte
          * because the fixed chunk is 128; no retained index or native heap is added. */
         jint consumed;
+        jint remaining = limit - written;
         jint matches = m3_window_select_offsets(marks, take, required, excluded,
-                limit - written, offsets, &consumed);
+                remaining, offsets, &consumed);
         if (matches != 0) {
             jint first_match = offsets[0];
             jint span = (jint) offsets[matches - 1] - first_match + 1;
