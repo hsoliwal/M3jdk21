@@ -47,6 +47,22 @@ final class M3StringPrecomputeBridge {
         int length1 = left.length();
         int length2 = right.length();
         int limit = Math.min(length1, length2);
+        if (limit == 0) return length1 - length2;
+        boolean leftTuple = leftStorage != null && leftStorage.owner() instanceof M3StringTuple;
+        boolean rightTuple = rightStorage != null && rightStorage.owner() instanceof M3StringTuple;
+        if (leftTuple || rightTuple) {
+            M3String.CodeUnitCursor leftUnits = leftTuple
+                    ? new M3String.CodeUnitCursor(leftStorage) : null;
+            M3String.CodeUnitCursor rightUnits = rightTuple
+                    ? new M3String.CodeUnitCursor(rightStorage) : null;
+            for (int index = 0; index < limit; index++) {
+                char first = leftUnits != null ? leftUnits.at(index) : left.charAt(index);
+                char second = rightUnits != null ? rightUnits.at(index) : right.charAt(index);
+                int difference = first - second;
+                if (difference != 0) return difference;
+            }
+            return length1 - length2;
+        }
         for (int index = 0; index < limit; index++) {
             int difference = left.charAt(index) - right.charAt(index);
             if (difference != 0) return difference;

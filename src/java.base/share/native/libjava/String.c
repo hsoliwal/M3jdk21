@@ -68,6 +68,24 @@ static jmethodID m3_method(
     return (*env)->GetMethodID(env, type, name, signature);
 }
 
+/* Validate logical coordinates before an empty return or array allocation.
+ * Nonnegative arguments are checked by each entry point. Subtraction makes the
+ * upper bound safe even when start + length would overflow a signed jint.
+ */
+static jboolean m3_check_shadow_range(
+        JNIEnv *env, jobject value, jint start, jint length, const char *exception)
+{
+    jmethodID get_length = m3_method(env, value, "length", "()I");
+    if (get_length == NULL) return JNI_FALSE;
+    jint source_length = (*env)->CallIntMethod(env, value, get_length);
+    if ((*env)->ExceptionCheck(env)) return JNI_FALSE;
+    if (start > source_length || length > source_length - start) {
+        m3_throw(env, exception, "M3 shadow range exceeds source length");
+        return JNI_FALSE;
+    }
+    return JNI_TRUE;
+}
+
 JNIEXPORT jbyteArray JNICALL
 Java_java_lang_M3String_nativeByteShadow(
         JNIEnv *env, jclass ignored, jobject value, jint start, jint length, jbyte coder)
@@ -85,6 +103,9 @@ Java_java_lang_M3String_nativeByteShadow(
         m3_throw(env, "java/lang/OutOfMemoryError", "M3 byte shadow too large");
         return NULL;
     }
+
+    if (!m3_check_shadow_range(env, value, start, length,
+            "java/lang/IndexOutOfBoundsException")) return NULL;
 
     jbyteArray result = (*env)->NewByteArray(env, (jsize)byte_length);
     if (result == NULL || byte_length == 0) return result;
@@ -114,6 +135,9 @@ Java_java_lang_M3String_nativeCharShadow(
         m3_throw(env, "java/lang/IllegalArgumentException", "invalid M3 char shadow range");
         return NULL;
     }
+
+    if (!m3_check_shadow_range(env, value, start, length,
+            "java/lang/StringIndexOutOfBoundsException")) return NULL;
 
     jcharArray result = (*env)->NewCharArray(env, length);
     if (result == NULL || length == 0) return result;

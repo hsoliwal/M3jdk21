@@ -1,0 +1,126 @@
+{
+  "scope": "three real Java owners and unchanged real JNI compactor",
+  "baseline_owner_sha256": "7bf939ea374ce6c0b13c403f5e154c0f8d376f9cddb8e623cf00ef299183a77e",
+  "candidate_owner_sha256": "ee57cf7d5c5fab41bf35f1bbf5cfbd84f7f882e919f3bef8bf31b9d042ed9b11",
+  "native_source_sha256": "d1c300832aa9bf44cd7b7199cff593beb2a9464fbb52c9c8448da7773eaf0aef",
+  "api_equal": true,
+  "generated_headers_equal": true,
+  "outcomes_equal": true,
+  "commands": [
+    {
+      "gate": "jdk-version",
+      "exit": 0,
+      "log": "jdk-version.log",
+      "sha256": "36ac0a90083b1094aab49800cc0d8310fc023abf07f03999d676d882c7044dc2"
+    },
+    {
+      "gate": "baseline-compile",
+      "exit": 0,
+      "log": "baseline-compile.log",
+      "sha256": "606f3e4e6fc5d8d12b6070f5590dcdd8497512d37d92b268fe924d7fcfffbeb3"
+    },
+    {
+      "gate": "candidate-compile",
+      "exit": 0,
+      "log": "candidate-compile.log",
+      "sha256": "583bdc11919339bac331f25d3809111814615708347b4ae28775015b99c5b7ed"
+    },
+    {
+      "gate": "baseline-api",
+      "exit": 0,
+      "log": "baseline-api.log",
+      "sha256": "43fbc06d99ca67a9f19f253555ca3f0362bab7b348a0060378a766a78e73531c"
+    },
+    {
+      "gate": "candidate-api",
+      "exit": 0,
+      "log": "candidate-api.log",
+      "sha256": "8d48098704e6913eb2eba69412e390498567864295bffeb0a374d5a9a7c08c7a"
+    },
+    {
+      "gate": "native-compile",
+      "exit": 0,
+      "log": "native-compile.log",
+      "sha256": "0e2d92d504332fda167d18b285e603ca5125c0ccfcdbca586536c8cc7cbcfc87"
+    },
+    {
+      "gate": "baseline-mixed-java",
+      "exit": 0,
+      "log": "baseline-mixed-java.log",
+      "sha256": "a741380beb7a3c5b2dc1b50889e001f2ba47449b2763236e6c1273ab6bdcd98a"
+    },
+    {
+      "gate": "baseline-mixed-native",
+      "exit": 0,
+      "log": "baseline-mixed-native.log",
+      "sha256": "6ea8661645e35afb2dff12b0e058b5916390b147cba51cb6afa80bd46c66ffb1"
+    },
+    {
+      "gate": "baseline-interpreted-java",
+      "exit": 0,
+      "log": "baseline-interpreted-java.log",
+      "sha256": "b5c9de4b1d7874bdb47a4797b3c8342db0f03388de9aa800f5cd1038ad4f850f"
+    },
+    {
+      "gate": "baseline-interpreted-native",
+      "exit": 0,
+      "log": "baseline-interpreted-native.log",
+      "sha256": "3747a70e2f54b9c5ef838044c6138885a051559765b41beb1771ad53a056e3d6"
+    },
+    {
+      "gate": "baseline-original-selftest",
+      "exit": 0,
+      "log": "baseline-original-selftest.log",
+      "sha256": "c286dcecc1daaefe52a899a98208dece28daeb22b3cb591f439e621d3a681ac7"
+    },
+    {
+      "gate": "candidate-mixed-java",
+      "exit": 0,
+      "log": "candidate-mixed-java.log",
+      "sha256": "598dd799f80680167e35c7072b735347ae18ab61db7ddd4286650951bd923203"
+    },
+    {
+      "gate": "candidate-mixed-native",
+      "exit": 0,
+      "log": "candidate-mixed-native.log",
+      "sha256": "21da9e275f7ddb4b9e3124fdab80a7fcf098ec7917f8a671d70a566233a0b773"
+    },
+    {
+      "gate": "candidate-interpreted-java",
+      "exit": 0,
+      "log": "candidate-interpreted-java.log",
+      "sha256": "4c68a5375ba4ff107e56fd30dd7c40cb9b85eb28c45a0c7344f68c26b9fc4667"
+    },
+    {
+      "gate": "candidate-interpreted-native",
+      "exit": 0,
+      "log": "candidate-interpreted-native.log",
+      "sha256": "41f684742acb45fdafcbacc7bf0a639105f8a6ee522f89711c3e5b5eb4c9853f"
+    },
+    {
+      "gate": "candidate-original-selftest",
+      "exit": 0,
+      "log": "candidate-original-selftest.log",
+      "sha256": "e1247f1d07c053d8dfb4beaaa52162dd857f8755580b83491981089069268d01"
+    }
+  ],
+  "not_run": [
+    "complete Maven reactor",
+    "full source-built JDK",
+    "installed module",
+    "other platforms",
+    "whole-collection-family acceptance"
+  ],
+  "source_files": {
+    "m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java": "ee57cf7d5c5fab41bf35f1bbf5cfbd84f7f882e919f3bef8bf31b9d042ed9b11",
+    "m3/collections/src/test/java/com/m3/collections/M3LongIndexMonotoneTest.java": "1bec1688868b47cd69b7897c2826209201d96e911922f8930b516d25b7123c07",
+    "m3/collections/src/test/java/com/m3/collections/M3LongIndexMonotoneContract.java": "459e1c11606dc4960e9b8fa5142faf2fe9cfa0e3fa10700b8b69b53c1314cc4d",
+    "m3/collections/src/test/java/com/m3/collections/M3LongIndexMonotoneResourceProbe.java": "09a2da60447547b85fc63d58a13c64546c143ecf313461cf2e02502c659d899a"
+  },
+  "selected_runtime_sha256": "ee57cf7d5c5fab41bf35f1bbf5cfbd84f7f882e919f3bef8bf31b9d042ed9b11",
+  "test_digest": "30748f642d55955a",
+  "checks_per_oracle_run": 1836766,
+  "scenarios_per_oracle_run": 132070,
+  "original_selftest_checks_per_variant": 20706,
+  "resource_probe_followup": "ResourceProbe warmup=max(80,repetitions) is compiled separately with strict Java21 lint; production/runtime contract bytes unchanged; additional logs baseline-probe-recompile.log and candidate-probe-recompile.log."
+}
