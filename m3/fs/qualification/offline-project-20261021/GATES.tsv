@@ -1,0 +1,18 @@
+gate	status	proof_or_command
+ORIGINAL_STREAM_OWNER	EXACT_BASE	PR #1681 M3FileTree/M3File primitive offsets/state/shadow APIs
+MASTER_BUILD_STATE_DONOR	GIT_BLOB_MATCH	M3BuildState.java exact master blob 3b933d3ba3de41b8acc0a7013049de84338069d6
+MASTER_BUILD_STATE_STORE	SOURCE_SEALED	Before master 1c178381a5275b68cedea9973ee430a1b7793818; separate offline entry added
+SOURCE_RECEIVER	READBACK_VERIFIED	Sequential target commits match canonical Synexia Java/module/POM templates
+MAVEN_REWRITE_SDK	NOT_EXECUTED	com.synexia.m3.OfflineProjectScanJava20261021 and Pom20261021
+OFFLINE_COLD_WARM_DELTA	TEST_COMMITTED_NOT_RUN	M3OfflineProjectScanTest
+SAME_MTIME_FULL_HASH	TEST_COMMITTED_NOT_RUN	M3OfflineProjectScanTest modifies same-length source and resets mtime
+NO_WATCH_REQUIRED	DESIGN_INVARIANT	No WatchService in M3OfflineProjectScan implementation
+PER_PROJECT_NATIVE_SQLITE	TEST_COMMITTED_NOT_RUN	M3BuildStateStore.readOffline/publishOffline
+ABI_SEPARATION	SOURCE_REVIEWED	Offline-scan checkpoint separate from /m3-build/state
+STALE_WRITER_REJECTION	TEST_COMMITTED_NOT_RUN	M3BuildStateStore shared CAS + OS lock
+M3_FILE_MODULE_BUILD	NOT_EXECUTED	mvn -f m3/file/pom.xml install
+M3_FS_NATIVE_JNI_BUILD	NOT_EXECUTED	mvn -f m3/fs/pom.xml verify
+M3JDK21_JMOD_IMAGE	NOT_EXECUTED	Full source-built Java21/HotSpot image
+MAVEN_GRADLE_CONSUMERS	NOT_EXECUTED	Effective model and compiler-javac semantic ABI dependence
+CROSS_PLATFORM	NOT_EXECUTED	Windows/macOS/Android and network providers
+PERFORMANCE	NOT_MEASURED	Repeated SHA I/O versus provider-qualified generation fast paths

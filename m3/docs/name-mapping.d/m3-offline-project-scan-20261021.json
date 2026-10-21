@@ -1,0 +1,30 @@
+{
+  "schema": "M3JDK21_OFFLINE_SCAN_RECEIVER_V1",
+  "product": "M3JDK21 integrated Java/HotSpot/JNI SDK",
+  "canonical_entry": "com.m3.file.M3File",
+  "baseline_project_sqlite": "caller-owned M3FS per-project native database",
+  "scan_state_key": "/m3-build/offline-scan",
+  "compiler_proven_state_key": "/m3-build/state",
+  "original_stream_owner": "com.m3.file.M3FileTree/M3FileTraversal/M3FileShadow",
+  "original_storage_owner": "com.m3.fs.M3FS/M3BuildState/M3BuildStateStore",
+  "source_recipe_pr": 12807,
+  "source_recipe_branch": "chatgpt/m3jdk21-offline-project-pass-recipe-20261021",
+  "target_stack_base": "e691f1f96f6a4ff42113f3d6ac5a2d1723fe3915",
+  "donor_master_blobs": {
+    "M3BuildState": "3b933d3ba3de41b8acc0a7013049de84338069d6",
+    "M3BuildStateStore": "1c178381a5275b68cedea9973ee430a1b7793818"
+  },
+  "invariants": [
+    "One existing M3FileTree traversal and one input read per selected source",
+    "No mandatory watcher; full SHA-256 for generic offline change equality",
+    "Source paths, length, role, SHA256 retained in primitive/array M3BuildState",
+    "Compiler attributed ABI and dependency edges never invented or overwritten by scan",
+    "Per-project M3FS native SQLite WAL/CAS with distinct offline checkpoint",
+    "Explicit no-automatic publication, stale writer refusal and bounded progress/shadows"
+  ],
+  "known_limits": [
+    "Actual Maven/OpenRewrite/JUnit/JNI/JMOD and cross platform gates not run",
+    "Provider source stability not atomic without qualified generation",
+    "No direct Maven/Gradle plugin hook adopted yet"
+  ]
+}
