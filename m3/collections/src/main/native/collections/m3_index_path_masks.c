@@ -225,7 +225,13 @@ static jintArray m3_select_cached_contiguous(JNIEnv *env, jintArray rows,
 static jintArray m3_select_cached(JNIEnv *env, jintArray rows, jintArray offsets,
         jobjectArray planes, jintArray required, jintArray forbidden,
         jint first, jint count, jint stride, jsize stages) {
-    M3StageCache cache = {0};
+    // Initialize only live JNI handles and the cache flag. State words are
+    // copied before first use; clearing all 8KiB on every short scan is wasteful.
+    M3StageCache cache;
+    for (jsize stage = 0; stage < M3_CACHED_STAGE_LIMIT; ++stage) {
+        cache.plane[stage] = NULL;
+    }
+    cache.snapshot_ready = JNI_FALSE;
     if (!m3_prepare_stages(env, planes, required, forbidden, stages, &cache)) return NULL;
     if (!m3_prepare_small_plane_snapshot(env, &cache, count)) {
         m3_release_stages(env, &cache);
