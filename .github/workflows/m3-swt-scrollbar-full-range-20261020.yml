@@ -1,0 +1,60 @@
+# Copyright 2026 Hitesh Soliwal and contributors. SPDX-License-Identifier: Apache-2.0
+name: M3 SWT full-range canonical recipe proof
+on:
+  push:
+    branches: ['m3/swt-scrollbar-full-range-20261020-01']
+  pull_request:
+    paths:
+      - '.github/workflows/m3-swt-scrollbar-full-range-20261020.yml'
+      - 'm3/compatibility/swt-scrollbar-full-range-20261020/**'
+permissions:
+  contents: read
+jobs:
+  pinned-recipe-arithmetic-not-native-ui:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          persist-credentials: false
+          fetch-depth: 1
+          sparse-checkout: |
+            m3/compatibility/swt-scrollbar-full-range-20261020
+      - name: Record exact M3 proof revision
+        run: git rev-parse HEAD
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
+        with:
+          repository: hsoliwal/eclipse.platform.swt
+          ref: 30814fe4c1662bdc699b8f0ec25681c6945701a3
+          path: swt-proof
+          persist-credentials: false
+          fetch-depth: 1
+          sparse-checkout: |
+            docs/m3/scrollbar-full-range-20261020
+            bundles/org.eclipse.swt/Eclipse SWT/common/org/eclipse/swt/widgets
+      - uses: actions/setup-java@b6effb05e454b25005698d916606bdc6ffcbf961
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Verify exact canonical engine and receiver baseline
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git -C swt-proof rev-parse HEAD)" = 30814fe4c1662bdc699b8f0ec25681c6945701a3
+          Q=swt-proof/docs/m3/scrollbar-full-range-20261020
+          test "$(git hash-object "$Q/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java")" = 135a28d0cec9ea988607cdef6caa1f0fe5115d75
+          test "$(git hash-object "$Q/src/main/java/com/synexia/rewrite/M3ScopeInference.java")" = 9174dd681f0d75b5086fc19904a71524a03972dc
+          test "$(git hash-object "$Q/src/main/java/com/synexia/rewrite/M3EditScope.java")" = 274360816db1e44a2f1796a3bc5cdeff6b0ce6db
+          test "$(git hash-object 'swt-proof/bundles/org.eclipse.swt/Eclipse SWT/common/org/eclipse/swt/widgets/ViewportScrollBarGeometry.java')" = 1fd72c44bf9dcd5c2beca6ce95388640f48e0f67
+      - name: Actual canonical Maven OpenRewrite generation and seven SDK gates
+        run: mvn -B -ntp -f swt-proof/docs/m3/scrollbar-full-range-20261020/recipes/swt-scrollbar-full-range-20261020/pom.xml clean test
+      - name: Actual generated Java arithmetic and package-ABI proof
+        run: python3 swt-proof/docs/m3/scrollbar-full-range-20261020/recipes/swt-scrollbar-full-range-20261020/verify.py
+      - name: Confirm exact emitted source identity
+        shell: bash
+        run: |
+          set -euo pipefail
+          GENERATED='swt-proof/docs/m3/scrollbar-full-range-20261020/recipes/swt-scrollbar-full-range-20261020/target/generated-receiver/bundles/org.eclipse.swt/Eclipse SWT/common/org/eclipse/swt/widgets/ViewportScrollBarGeometry.java'
+          test "$(git hash-object "$GENERATED")" = 7370ac91ca85784b7b72efabef4129ffbfd3cea3
+          echo CANONICAL_GENERATION_ONLY_NATIVE_UI_AND_M3_RUNTIME_NOT_QUALIFIED
