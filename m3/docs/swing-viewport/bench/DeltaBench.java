@@ -17,10 +17,12 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTree;
 import javax.swing.JViewport;
+import javax.swing.RowFilter;
 import javax.swing.RowSorter;
 import javax.swing.SortOrder;
 import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreePath;
@@ -38,7 +40,7 @@ import javax.swing.tree.TreePath;
  */
 public final class DeltaBench {
 
-    static final int N = 1_000_000;
+    static final int N = Integer.getInteger("n", 1_000_000);
     static String impl = "stock";
     static String kase = "";
     static long sink;
@@ -53,6 +55,8 @@ public final class DeltaBench {
                 case "tree" -> tree();
                 case "list" -> list();
                 case "heap" -> heap();
+                case "sorter" -> sorter();
+                case "heights" -> heights();
                 default -> throw new IllegalArgumentException(kase);
             }
         });
@@ -139,6 +143,108 @@ public final class DeltaBench {
         measure("structure_changed", t, r -> m.fireTableStructureChanged(),
                 "no change, fireTableStructureChanged (columns recreated)");
         measure("no_event", t, r -> sink += r, "validate + frame only");
+    }
+
+    /** Leaf 7: the sorter's own paths at 10^6 rows, median of 7, without a frame. */
+    @SuppressWarnings("unchecked")
+    static void sorter() {
+        DefaultTableModel m = tableModel();
+        JTable t = new JTable(m);
+        TableRowSorter<DefaultTableModel> s = new TableRowSorter<>(m);
+        t.setRowSorter(s);
+        Vector<Vector<Object>> data = (Vector<Vector<Object>>) (Vector<?>) m.getDataVector();
+        int mid = N / 2;
+        time("sort_descending_int", r -> {
+            s.setSortKeys(List.of(new RowSorter.SortKey(1, r % 2 == 0 ? SortOrder.DESCENDING : SortOrder.ASCENDING)));
+        }, "setSortKeys on column b (Integer), alternating order: sortExistingData");
+        s.setSortKeys(List.of(new RowSorter.SortKey(1, SortOrder.DESCENDING)));
+        time("sort_from_unsorted", r -> {
+            s.setSortKeys(null);
+            s.setSortKeys(List.of(new RowSorter.SortKey(1, SortOrder.DESCENDING)));
+        }, "setSortKeys(null) then one key: drop the lanes, build and sort them");
+        time("insert_one_row", r -> m.insertRow(mid, new Object[] {"ins" + r, N / 2, true}),
+                "DefaultTableModel.insertRow at the middle: rowsInserted0");
+        time("remove_one_row", r -> m.removeRow(mid), "DefaultTableModel.removeRow at the middle: rowsDeleted0");
+        s.setSortsOnUpdates(true);
+        time("update_one_row_sorts", r -> m.setValueAt(r, mid, 1), "setValueAt with sortsOnUpdates: rowsUpdated0");
+        time("update_1000_rows_sorts", r -> {
+            for (int i = mid; i < mid + 1000; i++) {
+                data.get(i).set(1, (r + i) % 1000);
+            }
+            m.fireTableRowsUpdated(mid, mid + 999);
+        }, "fireTableRowsUpdated over 1,000 rows with sortsOnUpdates: rowsUpdated0");
+        time("set_filter", r -> s.setRowFilter(RowFilter.numberFilter(RowFilter.ComparisonType.AFTER, r % 2 == 0 ? N / 2 : N / 4, 1)),
+                "setRowFilter: initializeFilteredMapping + sort");
+        time("update_one_row_filtered", r -> m.setValueAt(r, mid, 1), "setValueAt with a filter and sortsOnUpdates");
+        row("view_rows", s.getViewRowCount(), "rows", "after the filter");
+    }
+
+    /** Leaf 8: custom row heights at N rows (sparse store below 4,096 entries, the stock dense tree above). */
+    static void heights() {
+        DefaultTableModel m = tableModel();
+        JTable t = new JTable(m);
+        t.setAutoCreateRowSorter(true);
+        t.getRowSorter().setSortKeys(List.of(new RowSorter.SortKey(1, SortOrder.DESCENDING)));
+        java.util.Random rnd = new java.util.Random(7);
+        time("set_1000_heights", r -> {
+            for (int i = 0; i < N; i += Math.max(1, N / 1000)) {
+                t.setRowHeight(i, 20 + (i + r) % 9);
+            }
+        }, "setRowHeight on 1,000 rows spread over the table, with a sorter");
+        time("frame_queries_1000", r -> {
+            for (int k = 0; k < 1000; k++) {
+                int y = rnd.nextInt(Math.max(1, t.getHeight() > 0 ? t.getHeight() : N * 16));
+                sink += t.rowAtPoint(new Point(5, y)) + t.getCellRect(rnd.nextInt(N), 0, false).y;
+            }
+        }, "1,000 rowAtPoint + getCellRect pairs (a page of painting)");
+        int[] order = new int[N];
+        for (int i = 0; i < N; i++) {
+            order[i] = i;
+        }
+        for (int i = N - 1; i > 0; i--) {
+            int j = rnd.nextInt(i + 1);
+            int x = order[i];
+            order[i] = order[j];
+            order[j] = x;
+        }
+        time("set_every_height_random", r -> {
+            for (int i = 0; i < N; i++) {
+                t.setRowHeight(order[i], 17 + (order[i] + r) % 7);
+            }
+        }, "setRowHeight on every row in random order (pack rows): dense above 4,096 entries");
+        time("frame_queries_dense_1000", r -> {
+            for (int k = 0; k < 1000; k++) {
+                sink += t.rowAtPoint(new Point(5, rnd.nextInt(N * 17))) + t.getCellRect(rnd.nextInt(N), 0, false).y;
+            }
+        }, "1,000 rowAtPoint + getCellRect pairs with every row custom");
+        for (int k = 0; k < 200_000; k++) {
+            sink += t.rowAtPoint(new Point(5, rnd.nextInt(N * 17))) + t.getCellRect(rnd.nextInt(N), 0, false).y;
+        }
+        time("frame_queries_dense_1000_steady", r -> {
+            for (int k = 0; k < 1000; k++) {
+                sink += t.rowAtPoint(new Point(5, rnd.nextInt(N * 17))) + t.getCellRect(rnd.nextInt(N), 0, false).y;
+            }
+        }, "the same after 200,000 more queries (the M3 store changed shape, so its query methods recompile)");
+    }
+
+    /** Median of 7 runs of {@code edit}, in ms, and the median bytes the thread allocated per run. */
+    static void time(String metric, Edit edit, String note) {
+        com.sun.management.ThreadMXBean mx =
+                (com.sun.management.ThreadMXBean) java.lang.management.ManagementFactory.getThreadMXBean();
+        long[] ns = new long[7];
+        long[] bytes = new long[7];
+        for (int r = 0; r < ns.length; r++) {
+            long a0 = mx.getCurrentThreadAllocatedBytes();
+            long t0 = System.nanoTime();
+            edit.run(r);
+            ns[r] = System.nanoTime() - t0;
+            bytes[r] = mx.getCurrentThreadAllocatedBytes() - a0;
+        }
+        Arrays.sort(ns);
+        Arrays.sort(bytes);
+        row(metric, String.format("%.3f", ns[3] / 1e6), "ms p50", note + "; min " + String.format("%.3f", ns[0] / 1e6)
+                + " max " + String.format("%.3f", ns[6] / 1e6));
+        row(metric + "_alloc", String.format("%.3f", bytes[3] / 1e6), "MB p50", "bytes the thread allocated per run");
     }
 
     // ---- JTree ------------------------------------------------------------------------------------

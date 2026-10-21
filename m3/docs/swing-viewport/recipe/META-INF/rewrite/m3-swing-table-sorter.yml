@@ -1,0 +1,83 @@
+# Copyright 2026 Hitesh Soliwal and contributors
+# SPDX-License-Identifier: Apache-2.0
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.openrewrite.viewport.M3SwingTableSorterLanes
+displayName: DefaultRowSorter keeps its order in int lanes when m3.swing.viewport is set
+description: >-
+  M3JDK Swing viewport leaf 7 (m3/docs/swing-viewport/DESIGN.md section 14). With the property set,
+  javax.swing.DefaultRowSorter keeps its view order in sun.swing.table.M3SorterLanes (two int lanes) instead of
+  one Row object per visible row: a field created with the sorter, a private method that binds the lanes to the
+  sorter's compare, include, keys, flags and event on first use, and a gate at the start of sort,
+  convertRowIndexToView, convertRowIndexToModel, getViewRowCount and allChanged and before the stock change
+  handling of setSortKeys, rowsInserted, rowsDeleted and rowsUpdated. Default off: with the field null every
+  stock line runs unchanged. Applied by M3PerFileApply; a second pass must report UNCHANGED.
+recipeList:
+  - com.synexia.openrewrite.viewport.M3AddMemberIfMissing:
+      declaringClasses: [javax.swing.DefaultRowSorter]
+      memberName: m3Lanes
+      beforeMethod: DefaultRowSorter
+      memberSource: "    /** The view order as int lanes when m3.swing.viewport is set ({@code sun.swing.table.M3SorterLanes}), else null. */\n    private final sun.swing.table.M3SorterLanes m3Lanes =\n            sun.swing.table.M3SorterLanes.ENABLED ? new sun.swing.table.M3SorterLanes() : null;"
+  - com.synexia.openrewrite.viewport.M3AddMemberIfMissing:
+      declaringClasses: [javax.swing.DefaultRowSorter]
+      memberName: m3BoundLanes
+      beforeMethod: setModelWrapper
+      memberSource: "    /** The lanes, bound on first use to this sorter's comparison, filter, keys, flags and event. */\n    private sun.swing.table.M3SorterLanes m3BoundLanes() {\n        if (!m3Lanes.bound()) {\n            m3Lanes.bind(new sun.swing.table.M3SorterLanes.Host() {\n                public int compare(int model1, int model2) {\n                    return DefaultRowSorter.this.compare(model1, model2);\n                }\n                public boolean include(int modelRow) {\n                    return DefaultRowSorter.this.include(modelRow);\n                }\n                public int modelRowCount() {\n                    return getModelWrapper().getRowCount();\n                }\n                public boolean unsorted() {\n                    return isUnsorted();\n                }\n                public boolean filtered() {\n                    return getRowFilter() != null;\n                }\n                public boolean sorted() {\n                    return sorted;\n                }\n                public void sorted(boolean value) {\n                    sorted = value;\n                }\n                public void prepareSort() {\n                    updateUseToString();\n                    if (isUnsorted()) {\n                        cachedSortKeys = new SortKey[0];\n                    } else {\n                        cacheSortKeys(getSortKeys());\n                    }\n                }\n                public void prepareResort() {\n                    updateUseToString();\n                    cacheSortKeys(getSortKeys());\n                }\n                public void sort() {\n                    DefaultRowSorter.this.sort();\n                }\n                public void changed(int[] lastViewToModel) {\n                    fireRowSorterChanged(lastViewToModel);\n                }\n            });\n        }\n        return m3Lanes;\n    }"
+  - com.synexia.openrewrite.viewport.M3InsertStatements:
+      declaringClasses: [javax.swing.DefaultRowSorter]
+      methodName: setSortKeys
+      parameterCount: 1
+      anchor: "if (viewToModel == null) {"
+      position: BEFORE
+      statements: "            if (m3Lanes != null) {\n                m3BoundLanes().sortKeysChanged();\n                return;\n            }"
+  - com.synexia.openrewrite.viewport.M3InsertStatements:
+      declaringClasses: [javax.swing.DefaultRowSorter]
+      methodName: convertRowIndexToView
+      parameterCount: 1
+      position: METHOD_START
+      statements: "        if (m3Lanes != null && m3Lanes.transformed()) {\n            return m3Lanes.viewIndex(index);\n        }"
+  - com.synexia.openrewrite.viewport.M3InsertStatements:
+      declaringClasses: [javax.swing.DefaultRowSorter]
+      methodName: convertRowIndexToModel
+      parameterCount: 1
+      position: METHOD_START
+      statements: "        if (m3Lanes != null && m3Lanes.transformed()) {\n            return m3Lanes.modelIndex(index);\n        }"
+  - com.synexia.openrewrite.viewport.M3InsertStatements:
+      declaringClasses: [javax.swing.DefaultRowSorter]
+      methodName: sort
+      parameterCount: 0
+      position: METHOD_START
+      statements: "        if (m3Lanes != null) {\n            m3BoundLanes().sort();\n            return;\n        }"
+  - com.synexia.openrewrite.viewport.M3InsertStatements:
+      declaringClasses: [javax.swing.DefaultRowSorter]
+      methodName: getViewRowCount
+      parameterCount: 0
+      position: METHOD_START
+      statements: "        if (m3Lanes != null && m3Lanes.transformed()) {\n            return m3Lanes.viewRowCount();\n        }"
+  - com.synexia.openrewrite.viewport.M3InsertStatements:
+      declaringClasses: [javax.swing.DefaultRowSorter]
+      methodName: allChanged
+      parameterCount: 0
+      position: METHOD_START
+      statements: "        if (m3Lanes != null) {\n            m3Lanes.clear();\n        }"
+  - com.synexia.openrewrite.viewport.M3InsertStatements:
+      declaringClasses: [javax.swing.DefaultRowSorter]
+      methodName: rowsInserted
+      parameterCount: 2
+      anchor: "if (shouldOptimizeChange(firstRow, endRow)) {"
+      position: BEFORE
+      statements: "        if (m3Lanes != null) {\n            m3BoundLanes().rowsInserted(firstRow, endRow);\n            return;\n        }"
+  - com.synexia.openrewrite.viewport.M3InsertStatements:
+      declaringClasses: [javax.swing.DefaultRowSorter]
+      methodName: rowsDeleted
+      parameterCount: 2
+      anchor: "if (shouldOptimizeChange(firstRow, endRow)) {"
+      position: BEFORE
+      statements: "        if (m3Lanes != null) {\n            m3BoundLanes().rowsDeleted(firstRow, endRow);\n            return;\n        }"
+  - com.synexia.openrewrite.viewport.M3InsertStatements:
+      declaringClasses: [javax.swing.DefaultRowSorter]
+      methodName: rowsUpdated
+      parameterCount: 2
+      anchor: "if (getSortsOnUpdates()) {"
+      position: BEFORE
+      statements: "        if (m3Lanes != null) {\n            m3BoundLanes().rowsUpdated(firstRow, endRow, getSortsOnUpdates());\n            return;\n        }"

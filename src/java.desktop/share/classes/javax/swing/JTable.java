@@ -615,6 +615,12 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
         }
     }
 
+    /** Whether custom row heights live in sparse stores ({@code sun.swing.table.M3SparseSizes}); set again on deserialization. */
+    private transient boolean m3Sizes = sun.swing.table.M3SparseSizes.ENABLED;
+
+    /** The sparse rowModel: the view rows whose height differs from rowHeight; null while rowModel would be null. */
+    private transient sun.swing.table.M3SparseSizes m3RowSizes;
+
 //
 // Constructors
 //
@@ -1004,6 +1010,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
         int old = this.rowHeight;
         this.rowHeight = rowHeight;
         rowModel = null;
+        m3RowSizes = null;
+        if (sortManager != null) {
+            sortManager.m3ModelSizes = null;
+        }
         if (sortManager != null) {
             sortManager.modelRowSizes = null;
         }
@@ -1047,6 +1057,17 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
         if (rowHeight <= 0) {
             throw new IllegalArgumentException("New row height less than 1");
         }
+        if (m3Sizes) {
+            if (m3RowSizes == null) {
+                m3RowSizes = new sun.swing.table.M3SparseSizes(getRowCount(), getRowHeight());
+            }
+            m3RowSizes.setSize(row, rowHeight);
+            if (sortManager != null) {
+                sortManager.setViewRowHeight(row, rowHeight);
+            }
+            resizeAndRepaint();
+            return;
+        }
         getRowModel().setSize(row, rowHeight);
         if (sortManager != null) {
             sortManager.setViewRowHeight(row, rowHeight);
@@ -1061,6 +1082,9 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
      * @since 1.3
      */
     public int getRowHeight(int row) {
+        if (m3RowSizes != null) {
+            return m3RowSizes.getSize(row);
+        }
         return (rowModel == null) ? getRowHeight() : rowModel.getSize(row);
     }
 
@@ -1994,6 +2018,7 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
             sortManager = null;
         }
         rowModel = null;
+        m3RowSizes = null;
         clearSelectionAndLeadAnchor();
         if (sorter != null) {
             sortManager = new SortManager(sorter);
@@ -2919,6 +2944,9 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
     public int rowAtPoint(Point point) {
         int y = point.y;
         int result = (rowModel == null) ?  y/getRowHeight() : rowModel.getIndex(y);
+        if (m3RowSizes != null) {
+            result = m3RowSizes.getIndex(y);
+        }
         if (result < 0) {
             return -1;
         }
@@ -2988,6 +3016,9 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
         else {
             r.height = getRowHeight(row);
             r.y = (rowModel == null) ? row * r.height : rowModel.getPosition(row);
+            if (m3RowSizes != null) {
+                r.y = m3RowSizes.getPosition(row);
+            }
         }
 
         if (column < 0) {
@@ -3913,6 +3944,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
         private SizeSequence modelRowSizes;
 
 
+        /** The sparse modelRowSizes: the model rows whose height differs from rowHeight; null while modelRowSizes would be null. */
+        private sun.swing.table.M3SparseSizes m3ModelSizes;
+
+
         SortManager(RowSorter<? extends TableModel> sorter) {
             this.sorter = sorter;
             sorter.addRowSorterListener(JTable.this);
@@ -3931,6 +3966,13 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
          * Sets the height for a row at a specified index.
          */
         public void setViewRowHeight(int viewIndex, int rowHeight) {
+            if (m3Sizes) {
+                if (m3ModelSizes == null) {
+                    m3ModelSizes = new sun.swing.table.M3SparseSizes(getModel().getRowCount(), getRowHeight());
+                }
+                m3ModelSizes.setSize(convertRowIndexToModel(viewIndex), rowHeight);
+                return;
+            }
             if (modelRowSizes == null) {
                 modelRowSizes = new SizeSequence(getModel().getRowCount(),
                                                  getRowHeight());
@@ -3945,6 +3987,7 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
             modelLeadIndex = -1;
             modelSelection = null;
             modelRowSizes = null;
+            m3ModelSizes = null;
         }
 
         /**
@@ -4055,6 +4098,18 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
                                   boolean sorterChanged) {
             if (change != null) {
                 if (change.allRowsChanged) {
+                    m3ModelSizes = null;
+                    m3RowSizes = null;
+                } else if (m3ModelSizes != null) {
+                    if (change.type == TableModelEvent.INSERT) {
+                        m3ModelSizes.insertEntries(change.startModelIndex,
+                                change.endModelIndex - change.startModelIndex + 1, getRowHeight());
+                    } else if (change.type == TableModelEvent.DELETE) {
+                        m3ModelSizes.removeEntries(change.startModelIndex,
+                                change.endModelIndex - change.startModelIndex + 1);
+                    }
+                }
+                if (change.allRowsChanged) {
                     modelRowSizes = null;
                     rowModel = null;
                 } else if (modelRowSizes != null) {
@@ -4084,6 +4139,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
          * that of the variable row heights in terms of the model.
          */
         private void setViewRowHeightsFromModel() {
+            if (m3ModelSizes != null) {
+                m3RowSizes = m3ModelSizes.inViewOrder(getRowCount(), getRowHeight(), sorter);
+                return;
+            }
             if (modelRowSizes != null) {
                 rowModel.setSizes(getRowCount(), getRowHeight());
                 for (int viewIndex = getRowCount() - 1; viewIndex >= 0;
@@ -4451,6 +4510,7 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
             clearSelectionAndLeadAnchor();
 
             rowModel = null;
+            m3RowSizes = null;
 
             if (sortManager != null) {
                 try {
@@ -4475,6 +4535,9 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
         if (sortManager != null) {
             sortedTableChanged(null, e);
             return;
+        }
+        if (m3RowSizes != null) {
+            repaint();
         }
 
         // The totalRowHeight calculated below will be incorrect if
@@ -4527,6 +4590,9 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
             resizeAndRepaint();
             rowModel = null;
         }
+        if (end == Integer.MAX_VALUE) {
+            m3RowSizes = null;
+        }
     }
 
     /*
@@ -4550,6 +4616,9 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
         // Adjust the selection to account for the new rows.
         int length = end - start + 1;
         selectionModel.insertIndexInterval(start, length, true);
+        if (m3RowSizes != null) {
+            m3RowSizes.insertEntries(start, length, getRowHeight());
+        }
 
         // If we have variable height rows, adjust the row model.
         if (rowModel != null) {
@@ -4588,6 +4657,9 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
         int previousRowCount = getRowCount() + deletedCount;
         // Adjust the selection to account for the new rows
         selectionModel.removeIndexInterval(start, end);
+        if (m3RowSizes != null) {
+            m3RowSizes.removeEntries(start, deletedCount);
+        }
 
         // If we have variable height rows, adjust the row model.
         if (rowModel != null) {
@@ -4976,6 +5048,11 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
             else {
                 return visibleRect.width;
             }
+        }
+        if (m3RowSizes != null) {
+            // the stock shortcut below is for uniform rows only
+            return direction < 0 ? getPreviousBlockIncrement(visibleRect, orientation)
+                    : getNextBlockIncrement(visibleRect, orientation);
         }
         // Shortcut for vertical scrolling of a table w/ uniform row height
         if (null == rowModel && SwingConstants.VERTICAL == orientation) {
@@ -5939,6 +6016,10 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
      */
     @Serial
     private void writeObject(ObjectOutputStream s) throws IOException {
+        if (m3RowSizes != null) {
+            // as the stock: rowModel, a SizeSequence, is not serializable (upstream defect D8)
+            throw new java.io.NotSerializableException("javax.swing.SizeSequence");
+        }
         s.defaultWriteObject();
         if (getUIClassID().equals(uiClassID)) {
             byte count = JComponent.getWriteObjCounter(this);
@@ -5953,6 +6034,7 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
     private void readObject(ObjectInputStream s)
         throws IOException, ClassNotFoundException
     {
+        m3Sizes = sun.swing.table.M3SparseSizes.ENABLED;
         ObjectInputStream.GetField f = s.readFields();
 
         TableModel newDataModel = (TableModel) f.get("dataModel", null);

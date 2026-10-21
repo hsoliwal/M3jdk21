@@ -412,6 +412,7 @@ public final class M3JTreeExpansionDifferential {
             if (m3.isExpanded(p)) {
                 if (s.expandedKeysBelow(p) == null) {
                     scans++;
+                    fail("the expansion index fell back to the stock scan (rule 24)");
                 } else {
                     indexSkips++;
                 }
