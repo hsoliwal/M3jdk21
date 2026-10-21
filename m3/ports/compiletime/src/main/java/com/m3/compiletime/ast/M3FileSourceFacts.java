@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: Apache-2.0
 // Copyright 2026 Hitesh Soliwal and contributors
+// Modified 2026-10-20: frame exact UTF-16 through bounded bulk String reads.
 package com.m3.compiletime.ast;
 
 import java.nio.charset.StandardCharsets;
@@ -24,6 +25,7 @@ public record M3FileSourceFacts(
         String providerId,
         int schemaVersion,
         String phase) {
+    private static final int UTF16_BLOCK_CHARS = 4_096;
     private static final byte[] SOURCE_DOMAIN =
             "M3_FILE_SOURCE_UTF16_V1".getBytes(StandardCharsets.US_ASCII);
     private static final byte[] CONTEXT_DOMAIN =
@@ -120,11 +122,25 @@ public record M3FileSourceFacts(
     }
 
     private static void frame(MessageDigest digest, CharSequence value) {
-        updateInt(digest, value.length());
-        for (int i = 0; i < value.length(); i++) {
-            char c = value.charAt(i);
-            digest.update((byte) (c >>> 8));
-            digest.update((byte) c);
+        int length = value.length();
+        updateInt(digest, length);
+        if (length == 0) return;
+        int capacity = Math.min(length, UTF16_BLOCK_CHARS);
+        byte[] bytes = new byte[capacity * 2];
+        String text = value instanceof String string ? string : null;
+        char[] units = text == null ? null : new char[capacity];
+        for (int base = 0; base < length; ) {
+            int count = Math.min(capacity, length - base);
+            // String delegates bulk reads to its existing M3 owner. Preserve every raw
+            // UTF-16 unit; charset encoders can replace unpaired surrogates.
+            if (text != null) text.getChars(base, base + count, units, 0);
+            for (int i = 0; i < count; i++) {
+                char unit = text == null ? value.charAt(base + i) : units[i];
+                bytes[i * 2] = (byte) (unit >>> 8);
+                bytes[i * 2 + 1] = (byte) unit;
+            }
+            digest.update(bytes, 0, count * 2);
+            base += count;
         }
     }
 

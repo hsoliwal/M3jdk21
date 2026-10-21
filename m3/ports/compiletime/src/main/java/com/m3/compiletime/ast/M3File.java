@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: Apache-2.0
 // Copyright 2026 Hitesh Soliwal and contributors
+// Modified 2026-10-20: publish the immutable character digest lazily and reuse it.
 package com.m3.compiletime.ast;
 
 import com.synexia.mindex.compiler.ast.MIndexJavaAST;
@@ -23,6 +24,7 @@ import javax.tools.SimpleJavaFileObject;
 public final class M3File extends SimpleJavaFileObject {
     private final String source;
     private final String byteSha256;
+    private volatile String sourceSha256;
 
     private M3File(URI uri, String source, String byteSha256) {
         super(Objects.requireNonNull(uri, "uri"), Kind.SOURCE);
@@ -52,7 +54,20 @@ public final class M3File extends SimpleJavaFileObject {
     @Override public String getCharContent(boolean ignoreEncodingErrors) { return source; }
     @Override public Reader openReader(boolean ignoreEncodingErrors) { return new StringReader(source); }
     public String source() { return source; }
-    public String sourceSha256() { return M3FileSourceFacts.sourceSha256(source); }
+    /** Compute the exact immutable character seal on first demand and share it thereafter. */
+    public String sourceSha256() {
+        String known = sourceSha256;
+        if (known == null) {
+            synchronized (this) {
+                known = sourceSha256;
+                if (known == null) {
+                    known = M3FileSourceFacts.sourceSha256ImmutableView(source);
+                    sourceSha256 = known;
+                }
+            }
+        }
+        return known;
+    }
     /** Null for character-only inputs, which have no asserted original byte encoding. */
     public String byteSha256() { return byteSha256; }
 
