@@ -77,6 +77,22 @@ public final class M3HostFileInventoryProof {
                 "budget",p->true,profile,null,new M3HostFileInventory.Limits(1,116,1,1),M3StreamProgress.none(),(f,b,o,l)->{}),"file byte limit");
             expect(IllegalArgumentException.class,()->M3HostFileInventory.capture(project,Stream.of(M3File.of(project.resolve("pom.xml"))),
                 "bad-context",p->true,new byte[31],null,LARGE,M3StreamProgress.none(),(f,b,o,l)->{}),"bad SHA");
+            // Distinct policy identifiers must not collapse under replacement UTF-8.
+            expect(IllegalArgumentException.class,()->M3HostFileInventory.capture(project,
+                Stream.of(M3File.of(project.resolve("pom.xml"))),"policy-\uD800",p->true,
+                profile,null,LARGE,M3StreamProgress.none(),(f,b,o,l)->{}),"malformed UTF16 selection");
+            // A symlink hidden in a project-root ancestor must not escape source identity.
+            Path alias=project.resolve("alias-directory");
+            try {
+                Files.createSymbolicLink(alias,project.resolve("module"));
+                Path maskedRoot=alias.resolve("src");
+                expect(IOException.class,()->M3HostFileInventory.capture(maskedRoot,
+                    Stream.of(M3File.of(maskedRoot.resolve("New.java"))),"aliased-root",p->true,
+                    profile,null,LARGE,M3StreamProgress.none(),(f,b,o,l)->{}),"root ancestor symlink");
+            } catch (UnsupportedOperationException | SecurityException | IOException unsupported) {
+                // A filesystem without symlink creation cannot run this check.
+            }
+            Files.deleteIfExists(alias);
             Path link=project.resolve("linked.java");
             try {
                 Files.createSymbolicLink(link,project.resolve("module/src/New.java"));
