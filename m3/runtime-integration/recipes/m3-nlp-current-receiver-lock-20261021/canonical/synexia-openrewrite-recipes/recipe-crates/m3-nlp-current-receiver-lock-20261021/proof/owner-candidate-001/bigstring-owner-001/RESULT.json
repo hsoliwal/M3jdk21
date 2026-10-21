@@ -1,0 +1,155 @@
+{
+  "classes": [
+    {
+      "bytes": 2256,
+      "path": "com/m3/text/JoinedM3StringPiece.class",
+      "sha256": "9b892c0920b5f4f406f528136dee3964147fc62328b7c452c3fa558833022405"
+    },
+    {
+      "bytes": 1248,
+      "path": "com/m3/text/LocalM3StringPiece$Encoding.class",
+      "sha256": "1b2499977c871d8ecf4d79c293549fd5a129e9cb3112f3693ddb8aecf1b3426d"
+    },
+    {
+      "bytes": 1839,
+      "path": "com/m3/text/LocalM3StringPiece.class",
+      "sha256": "b15aa28d7b408088924213ac9a785e533f40a6359adba478bd0f09a90a13c05c"
+    },
+    {
+      "bytes": 1313,
+      "path": "com/m3/text/M3BigString$ChunkSlice.class",
+      "sha256": "b4350089b9181998d5b17724c78c4c73059878dd93130436f5a3866ec83c6f1e"
+    },
+    {
+      "bytes": 1005,
+      "path": "com/m3/text/M3BigString$IntView.class",
+      "sha256": "e5d824c15f7904d8140c4f3ffb46f4be99e5f35a25568f4a91df0dd2b86379c9"
+    },
+    {
+      "bytes": 7137,
+      "path": "com/m3/text/M3BigString$Storage.class",
+      "sha256": "11d1bbd97a708b34abb9afe5bfd87475747468b10263e9ae275feb31223febb5"
+    },
+    {
+      "bytes": 3070,
+      "path": "com/m3/text/M3BigString$Summary.class",
+      "sha256": "00152ea7f029c207c4a8dcf97a5b429ee48497b2c9539398be5014b0ea823863"
+    },
+    {
+      "bytes": 1831,
+      "path": "com/m3/text/M3BigString$SummaryAccumulator.class",
+      "sha256": "ee8e6479a29362cb61f429a60925dfbe65d17ca97054a37702e519fd9ae6778b"
+    },
+    {
+      "bytes": 10386,
+      "path": "com/m3/text/M3BigString.class",
+      "sha256": "7488deac7e29c47b153f8fe8e43a0649e6bc579afa1fe86ff25a946abb0a51a3"
+    },
+    {
+      "bytes": 9899,
+      "path": "com/m3/text/M3BigStringSelfTest.class",
+      "sha256": "730075981b9209286212cd7de4108a05c5e73e5aca68867da3e21fc585641483"
+    },
+    {
+      "bytes": 880,
+      "path": "com/m3/text/M3StringPiece.class",
+      "sha256": "cfa32d2b114ac4cd571d61156eaccb7d782c8ad16e9461db368052d2071b061f"
+    },
+    {
+      "bytes": 1721,
+      "path": "com/m3/text/StorageIdentity.class",
+      "sha256": "0ce64b0492977ebd9d1fb41de2fa77e56942ef69772bdd30a991c5fa2e864f02"
+    }
+  ],
+  "classpath": "/workspace/scratch/206049dfb270/nlp-work/source-lock-correction/bigstring-owner-001/runner-temp/m3-bigstring-classes",
+  "commands": [
+    {
+      "argv": [
+        "bash",
+        "/workspace/scratch/206049dfb270/nlp-work/source-lock-correction/bigstring-owner-001/workflow-step-01.sh"
+      ],
+      "elapsed_seconds": 0.037,
+      "exit": 0,
+      "log": "source-lock-correction/bigstring-owner-001/command-01.log",
+      "log_bytes": 99,
+      "log_sha256": "2f5d781f6854e0ca0f53470e204aa93b2ab599e6fbc0a7872ac64cefeacc37f2"
+    },
+    {
+      "argv": [
+        "bash",
+        "/workspace/scratch/206049dfb270/nlp-work/source-lock-correction/bigstring-owner-001/workflow-step-02.sh"
+      ],
+      "elapsed_seconds": 1.199,
+      "exit": 0,
+      "log": "source-lock-correction/bigstring-owner-001/command-02.log",
+      "log_bytes": 0,
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "argv": [
+        "bash",
+        "/workspace/scratch/206049dfb270/nlp-work/source-lock-correction/bigstring-owner-001/workflow-step-03.sh"
+      ],
+      "elapsed_seconds": 0.152,
+      "exit": 0,
+      "log": "source-lock-correction/bigstring-owner-001/command-03.log",
+      "log_bytes": 29,
+      "log_sha256": "300d9167aaee6a77a795cfb8e4e2f1763a573c606a785fe7825d7e75572c95c8"
+    }
+  ],
+  "driver_sha256": "1e324672f8f77a66e60f38cba53359b9f387d8df4935cd39ccd8a8172693bf44",
+  "elapsed_seconds": 1.559,
+  "gate_inputs": [
+    {
+      "bytes": 2433,
+      "git_blob": "05130e9c153e72da64a7c15fef596d070ff5302e",
+      "path": ".github/workflows/m3-bigstring-rope-summary-20261018.yml",
+      "sha256": "da4c7f83e7e1633201f184d75ef6bafd392582d18663dfee8606e00e2567b7ef"
+    },
+    {
+      "bytes": 2634,
+      "git_blob": "cc3c84f5ea0230e2f57e3d3ae0f5d29b9241e597",
+      "path": "m3/core/src/com/m3/text/JoinedM3StringPiece.java",
+      "sha256": "694ee6a9fa06803244fd56d7a846da16f1560d242a0660ae2f4a927c43fc3dcb"
+    },
+    {
+      "bytes": 2115,
+      "git_blob": "6b745c9472144ad6de01de4d06a533974e558fb1",
+      "path": "m3/core/src/com/m3/text/LocalM3StringPiece.java",
+      "sha256": "06370c193953ead287f6fd6c423e12bd7761da8bf1c825dacd7445afe1876b51"
+    },
+    {
+      "bytes": 33365,
+      "git_blob": "9f66122b2dba2e4e0bc417208f18d0f8a2f95dec",
+      "path": "m3/core/src/com/m3/text/M3BigString.java",
+      "sha256": "e09815cea88c44e4da89ca8979ba247cddeee6c97b496d1aa2309a48916a90de"
+    },
+    {
+      "bytes": 767,
+      "git_blob": "99cb72623fa6bc2d5426553e04aaf0e5bfa993cc",
+      "path": "m3/core/src/com/m3/text/M3StringPiece.java",
+      "sha256": "d43e66b414d96ba4b16b8cc94f64fa5a01c2dcb350ad58050105b04996486479"
+    },
+    {
+      "bytes": 494,
+      "git_blob": "7f0a0bb63d38a0a6efbe08f37249dd3e258eb35a",
+      "path": "m3/core/src/com/m3/text/StorageIdentity.java",
+      "sha256": "b1e4fcbd385adc7c01c56d0f6a6af63d42ef0e6fa75b46d66d8d75c64c7a6417"
+    },
+    {
+      "bytes": 8955,
+      "git_blob": "8819a1632add4eb4dc52a8961168c4b6b7af23d2",
+      "path": "m3/core/test/com/m3/text/M3BigStringSelfTest.java",
+      "sha256": "5f47db4885a99b1ec7dc95957276d0130f2eab7cba16614907995c722fa6f9a6"
+    }
+  ],
+  "inputs_unchanged": true,
+  "jdk": "/tmp/m3-build-tools/jdk-21.0.12.1+1",
+  "owner": "bigstring",
+  "receiver_head": "2779aba3f98f31c324be43f731be7914e1a05935",
+  "receiver_root": "/workspace/scratch/206049dfb270/nlp-work/receiver-source",
+  "schema": "M3_NLP_RECEIVER_TEXT_OWNER_GATE_1",
+  "scope": "Unchanged existing source owner tests on pinned receiving sources; no full M3JDK or HotSpot admission.",
+  "state": "PASS",
+  "stdout": "m3/core/src/com/m3/text/M3BigString.java: OK\nm3/core/test/com/m3/text/M3BigStringSelfTest.java: OK\nM3_BIG_STRING_OK checks=3213\n"
+}

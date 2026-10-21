@@ -1,0 +1,7 @@
+["git", "init", "-q", "/workspace/scratch/206049dfb270/nlp-work/forks/opennlp"]
+["git", "-C", "/workspace/scratch/206049dfb270/nlp-work/forks/opennlp", "remote", "add", "origin", "https://github.com/hsoliwal/opennlp.git"]
+["git", "-C", "/workspace/scratch/206049dfb270/nlp-work/forks/opennlp", "fetch", "--depth=1", "origin", "8b647d1d389736952e43fb46865c874747f7acde"]
+From https://github.com/hsoliwal/opennlp
+ * branch            8b647d1d389736952e43fb46865c874747f7acde -> FETCH_HEAD
+["git", "-C", "/workspace/scratch/206049dfb270/nlp-work/forks/opennlp", "checkout", "--detach", "FETCH_HEAD"]
+HEAD is now at 8b647d1 feat(m3): preserve immutable source views and package current OpenNLP JMODs

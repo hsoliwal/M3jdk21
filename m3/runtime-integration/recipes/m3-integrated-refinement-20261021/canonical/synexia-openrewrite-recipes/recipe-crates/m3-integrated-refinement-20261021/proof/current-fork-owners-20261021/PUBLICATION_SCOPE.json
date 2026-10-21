@@ -1,0 +1,43 @@
+{
+  "schema": "M3_CURRENT_FORK_OWNER_PUBLICATION_SCOPE/1",
+  "status": "DRAFT_QUALIFIED_ADDITIVE_STAGE",
+  "parent_commit": "3f4c3e1c97ca12b7f0d3efbbc387f40f942fa399",
+  "parent_tree": "219eebe67fab908a3a4991a35c3c4f77c2907133",
+  "parent_pull_request": "https://github.com/hsoliwal/com.synexia/pull/12657",
+  "engine_source_pin": "e02e7cb0f2e8e46db4c5b476d59aa26658fa4d07",
+  "receiving_source_pin": "2779aba3f98f31c324be43f731be7914e1a05935",
+  "swt_receiving_pin": "c0ffa6d76338ed1b06cfe0158b0e04d8930df546",
+  "new_recipe_families": [
+    "m3-nlp-current-receiver-lock-20261021",
+    "swt-current-owner-runtime-closure-20261021"
+  ],
+  "actual_receiving_file_changes": {
+    "M3jdk21": 2,
+    "eclipse.platform.swt": 1
+  },
+  "prior_packets": [
+    {
+      "inventory": "/workspace/scratch/206049dfb270/canonical-work/publication-002/core/INVENTORY.json",
+      "sha256": "0783d22a81f08568d919d7dd80afed5ea3b806076ca8c6bdcf4c54f571804e5e",
+      "files": 1273
+    },
+    {
+      "inventory": "/workspace/scratch/206049dfb270/canonical-work/publication-002/swt/INVENTORY.json",
+      "sha256": "e5a45ab6cd7525f35ee19c7fb3b314d5baa20ea7baf2eea24a10b9db80d8d2fa",
+      "files": 63
+    },
+    {
+      "inventory": "/workspace/scratch/206049dfb270/canonical-work/publication-003/maven4/INVENTORY.json",
+      "sha256": "b83492c59f89bb1f2346dd1b7c4477340cd6e318e08533770427faceb2468254",
+      "files": 329
+    }
+  ],
+  "existing_catalogue_owners": "The bounded current-owner decision index points to existing collection/resource/scheduler/Eclipse/Maven catalogues and exact new source contracts; no replacement implementation or algorithm catalogue.",
+  "qualification_index": "synexia-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/proof/current-fork-owners-20261021/QUALIFICATION_INDEX.json",
+  "authorization": "User-authorized implementation and PRs with Synexia component reuse; routine licensed source/array/source-lock/build-runtime maintenance. Exact notices preserved; no patent status or priority claim.",
+  "hosted_admission": "Actual broader pre-existing migration-engine pin failure is retained separately. This stage does not weaken or repair that owner.",
+  "new_workflows": 0,
+  "shared_engine_edits": 0,
+  "deletions": 0,
+  "status_boundary": "Draft; local bounded actual proof does not establish full-product/upstream/platform/performance/hosted admission."
+}

@@ -1,0 +1,136 @@
+{
+  "status": "PASS",
+  "scope": "locked external artifact provisioning, not source or runtime qualification",
+  "command": [
+    "/tmp/m3-build-tools/apache-maven-3.9.9/bin/mvn",
+    "-B",
+    "-ntp",
+    "-s",
+    "/workspace/scratch/206049dfb270/canonical-work/maven-proxy-settings.xml",
+    "-Dmaven.repo.local=/tmp/m3-build-m2",
+    "-f",
+    "/workspace/scratch/206049dfb270/nlp-work/forks/opennlp/dev/m3-jmod/dependencies.xml",
+    "org.apache.maven.plugins:maven-dependency-plugin:3.11.0:copy-dependencies",
+    "-DincludeScope=runtime",
+    "-DoutputDirectory=/workspace/scratch/206049dfb270/nlp-work/dependencies/opennlp"
+  ],
+  "exit_code": 0,
+  "seconds": 3.838,
+  "dependency_pom_sha256": "f7899f5daed7f95d753480a47b36bc13f2dd24510321097f06ce99e0b703c09c",
+  "dependency_lock_sha256": "bd56b7e43cf8190793c828ddb067e8b292bf226456b2de13fcf64449aeab8c66",
+  "log_sha256": "9964528ddf4f20f601ca46b3733b838aa602d05a3a743c293b94fb536796396e",
+  "artifacts": [
+    {
+      "filename": "classgraph-4.8.197.jar",
+      "coordinate": "io.github.classgraph:classgraph:4.8.197",
+      "expected_sha256": "fe4910a0c02572d2374cac12464feaf9ccf17e97eef311c624c0438b98fc5ec5",
+      "actual_sha256": "fe4910a0c02572d2374cac12464feaf9ccf17e97eef311c624c0438b98fc5ec5",
+      "bytes": 631086,
+      "match": true
+    },
+    {
+      "filename": "commons-secure-xml-1.1.0.jar",
+      "coordinate": "org.apache.commons:commons-secure-xml:1.1.0",
+      "expected_sha256": "5fc54f0d153bb9c42379a434a05177e79bbfddec7791c383370da1f592789513",
+      "actual_sha256": "5fc54f0d153bb9c42379a434a05177e79bbfddec7791c383370da1f592789513",
+      "bytes": 77465,
+      "match": true
+    },
+    {
+      "filename": "hppc-0.7.2.jar",
+      "coordinate": "com.carrotsearch:hppc:0.7.2",
+      "expected_sha256": "7b3dd6661e83e313d70b4aa82c5180bb39535e536a3435fa741fff9727433b6a",
+      "actual_sha256": "7b3dd6661e83e313d70b4aa82c5180bb39535e536a3435fa741fff9727433b6a",
+      "bytes": 1671083,
+      "match": true
+    },
+    {
+      "filename": "jcommander-1.78.jar",
+      "coordinate": "com.beust:jcommander:1.78",
+      "expected_sha256": "7891debb84b5f83e9bd57593ebece3399abbe0fd938cf306b3534c57913b9615",
+      "actual_sha256": "7891debb84b5f83e9bd57593ebece3399abbe0fd938cf306b3534c57913b9615",
+      "bytes": 83782,
+      "match": true
+    },
+    {
+      "filename": "libsvm-3.35.jar",
+      "coordinate": "tw.edu.ntu.csie:libsvm:3.35",
+      "expected_sha256": "66793be8d30bc4a51396bd323ad9e59e37ed19a80dfa0b23eaf71dcaed398df0",
+      "actual_sha256": "66793be8d30bc4a51396bd323ad9e59e37ed19a80dfa0b23eaf71dcaed398df0",
+      "bytes": 40974,
+      "match": true
+    },
+    {
+      "filename": "morfologik-fsa-2.2.0.jar",
+      "coordinate": "org.carrot2:morfologik-fsa:2.2.0",
+      "expected_sha256": "d41cb460e6754c507250077312b8f26c302a3e9343881b9d7d7c6cf3c5a6aa6f",
+      "actual_sha256": "d41cb460e6754c507250077312b8f26c302a3e9343881b9d7d7c6cf3c5a6aa6f",
+      "bytes": 19165,
+      "match": true
+    },
+    {
+      "filename": "morfologik-fsa-builders-2.2.0.jar",
+      "coordinate": "org.carrot2:morfologik-fsa-builders:2.2.0",
+      "expected_sha256": "225586a29fcc4861fa81813852fb71d9464d91fde737ed14ec8c826a8147ba81",
+      "actual_sha256": "225586a29fcc4861fa81813852fb71d9464d91fde737ed14ec8c826a8147ba81",
+      "bytes": 31589,
+      "match": true
+    },
+    {
+      "filename": "morfologik-stemming-2.2.0.jar",
+      "coordinate": "org.carrot2:morfologik-stemming:2.2.0",
+      "expected_sha256": "ed989f60c38918b5c3ae1c39b2aaacffffbb26031c5d37815faf1a98cf0e3e2b",
+      "actual_sha256": "ed989f60c38918b5c3ae1c39b2aaacffffbb26031c5d37815faf1a98cf0e3e2b",
+      "bytes": 54075,
+      "match": true
+    },
+    {
+      "filename": "morfologik-tools-2.2.0.jar",
+      "coordinate": "org.carrot2:morfologik-tools:2.2.0",
+      "expected_sha256": "349c52ab683c4acfb8c74264d19232a2439441df4212412acbe42d04ee66ba31",
+      "actual_sha256": "349c52ab683c4acfb8c74264d19232a2439441df4212412acbe42d04ee66ba31",
+      "bytes": 36474,
+      "match": true
+    },
+    {
+      "filename": "slf4j-api-2.0.20.jar",
+      "coordinate": "org.slf4j:slf4j-api:2.0.20",
+      "expected_sha256": "7e1446499b359675d8aabe6af2de86b85e72ae8a2a932c0b40d0e5ba57097439",
+      "actual_sha256": "7e1446499b359675d8aabe6af2de86b85e72ae8a2a932c0b40d0e5ba57097439",
+      "bytes": 70255,
+      "match": true
+    },
+    {
+      "filename": "slf4j-simple-2.0.20.jar",
+      "coordinate": "org.slf4j:slf4j-simple:2.0.20",
+      "expected_sha256": "8e701404786a4f87219d39d4853c86dfe4e86ae99376a39749df6c08e75022e0",
+      "actual_sha256": "8e701404786a4f87219d39d4853c86dfe4e86ae99376a39749df6c08e75022e0",
+      "bytes": 15705,
+      "match": true
+    },
+    {
+      "filename": "uimaj-core-3.6.1.jar",
+      "coordinate": "org.apache.uima:uimaj-core:3.6.1",
+      "expected_sha256": "d4139ca434ea572edd2314bcb55331d15c9b21a5100f5b94a08c208ea907fbdb",
+      "actual_sha256": "d4139ca434ea572edd2314bcb55331d15c9b21a5100f5b94a08c208ea907fbdb",
+      "bytes": 1940734,
+      "match": true
+    },
+    {
+      "filename": "zlibsvm-api-3.0.0.jar",
+      "coordinate": "de.hs-heilbronn.mi:zlibsvm-api:3.0.0",
+      "expected_sha256": "b248a317cadced28516aff243659a550034e463db7b86c753b18e912c227ac08",
+      "actual_sha256": "b248a317cadced28516aff243659a550034e463db7b86c753b18e912c227ac08",
+      "bytes": 9937,
+      "match": true
+    },
+    {
+      "filename": "zlibsvm-core-3.0.0.jar",
+      "coordinate": "de.hs-heilbronn.mi:zlibsvm-core:3.0.0",
+      "expected_sha256": "1b462da36966aad5b017010216c538efa1589cd8e7cc708e57e38fc8539dd458",
+      "actual_sha256": "1b462da36966aad5b017010216c538efa1589cd8e7cc708e57e38fc8539dd458",
+      "bytes": 32002,
+      "match": true
+    }
+  ]
+}

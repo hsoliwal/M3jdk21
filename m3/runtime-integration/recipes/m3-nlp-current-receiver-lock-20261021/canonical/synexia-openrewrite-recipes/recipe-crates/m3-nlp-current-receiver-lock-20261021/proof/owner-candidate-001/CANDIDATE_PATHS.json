@@ -1,0 +1,16 @@
+[
+  {
+    "after_sha256": "92fd76c3f0d3c10c90ea4cb52485d2dbceda513fa3d794d22ec67fd153fd62ed",
+    "before_sha256": "8e6156376ea9548971b78bb876dc3968195266f04c17c5b061d7f5e4b52f367d",
+    "candidate_path": "/workspace/scratch/206049dfb270/nlp-work/source-lock-correction/candidates/m3/core/src/com/m3/text/SharedLexiconPrecomputeCatalog.java",
+    "kind": "JAVA",
+    "target_path": "m3/core/src/com/m3/text/SharedLexiconPrecomputeCatalog.java"
+  },
+  {
+    "after_sha256": "7f591c98c603ba8128c97747fe38fd1ccfe8adb5f2cd712b98b2697fff935acb",
+    "before_sha256": "054029431fbd8063c1e0397c43f3538f319984e252c92f08538881dc0a2eaff5",
+    "candidate_path": "/workspace/scratch/206049dfb270/nlp-work/source-lock-correction/candidates/m3/tooling/module-packs/nlp-search/current-source-lock.json",
+    "kind": "TEXT",
+    "target_path": "m3/tooling/module-packs/nlp-search/current-source-lock.json"
+  }
+]

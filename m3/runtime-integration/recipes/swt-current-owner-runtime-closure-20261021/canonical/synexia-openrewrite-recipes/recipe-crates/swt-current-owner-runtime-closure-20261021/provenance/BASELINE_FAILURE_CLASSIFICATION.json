@@ -1,0 +1,42 @@
+{
+  "schema": "SWT_CURRENT_OWNER_FAILURE_CLASSIFICATION/1",
+  "attempts": [
+    {
+      "path": "proof/incumbent-offline-001",
+      "kind": "OFFLINE_DEPENDENCY_UNAVAILABLE",
+      "executed_tests": 0,
+      "signature": "maven-clean-plugin:3.2.0 missing from offline cache",
+      "product_source_changed": false
+    },
+    {
+      "path": "proof/incumbent-bootstrap-001",
+      "kind": "OWNING_POM_RUNTIME_CLOSURE",
+      "executed_tests": 7,
+      "counts": {
+        "tests": 7,
+        "failures": 4,
+        "errors": 3,
+        "skipped": 0
+      },
+      "signature": "java.lang.NoClassDefFoundError: org/slf4j/LoggerFactory",
+      "correction": "Add existing qualified org.slf4j:slf4j-api:2.0.13 to the owning proof POM"
+    },
+    {
+      "path": "proof/incumbent-offline-002",
+      "kind": "LOCAL_COMPILED_CLASS_DISCOVERY",
+      "executed_tests": 0,
+      "signature": "Unable to create test class 'com.synexia.rewrite..rsync-tmp.ScrollbarFullRangeRecipeTest'",
+      "correction": "Fresh isolated temporary build directory; no selector, test, engine or production change"
+    }
+  ],
+  "stale_reports": [
+    {
+      "path": "/workspace/scratch/206049dfb270/jobs-work/swt-receiver-current-001/evidence-002/surefire-reports/.rsync-tmp/TEST-com.synexia.rewrite.ScrollbarFullRangeRecipeTest.xml",
+      "sha256": "39bd8ee10e9310b474e348220a6849f7fd4427a38783b8843f8535664814ab03",
+      "classification": "STALE_COPY_OF_BOOTSTRAP_001_NOT_EXECUTED_BY_ATTEMPT_002"
+    }
+  ],
+  "stale_report_payloads": "Already retained once under incumbent-bootstrap-001; not counted again",
+  "candidate_receipt": "proof/pom-candidate-001/RESULT.json",
+  "runtime_scope": "Arithmetic only; native widget/Tycho/platform/display/performance gates not run"
+}

@@ -1,0 +1,96 @@
+openjdk version "21.0.12.1" 2026-08-18 LTS
+OpenJDK Runtime Environment Microsoft-14941483 (build 21.0.12.1+1-LTS)
+OpenJDK 64-Bit Server VM Microsoft-14941483 (build 21.0.12.1+1-LTS, mixed mode, sharing)
+GEOMETRY_BASELINE_REPRODUCED checks=5723783 ordinaryFailures=0 oracleDigest=27d10dbfbd5f515a
+mulDiv mismatches=0
+hasThumb mismatches=0
+thumbLength mismatches=1156
+thumbStart mismatches=571
+selectionAt mismatches=1771
+hit mismatches=1124782
+GEOMETRY_BASELINE_REPRODUCED checks=5723783 ordinaryFailures=0 oracleDigest=27d10dbfbd5f515a
+mulDiv mismatches=0
+hasThumb mismatches=0
+thumbLength mismatches=1156
+thumbStart mismatches=571
+selectionAt mismatches=1771
+hit mismatches=1124782
+Compiled from "ViewportScrollBarGeometry.java"
+final class org.eclipse.swt.widgets.ViewportScrollBarGeometry {
+  static final int NONE;
+    descriptor: I
+  static final int ARROW_DECREASE;
+    descriptor: I
+  static final int PAGE_DECREASE;
+    descriptor: I
+  static final int THUMB;
+    descriptor: I
+  static final int PAGE_INCREASE;
+    descriptor: I
+  static final int ARROW_INCREASE;
+    descriptor: I
+  static int mulDiv(int, int, int);
+    descriptor: (III)I
+
+  static boolean hasThumb(int, int);
+    descriptor: (II)Z
+
+  static int thumbLength(int, int, int, int, int);
+    descriptor: (IIIII)I
+
+  static int thumbStart(int, int, int, int, int, int);
+    descriptor: (IIIIII)I
+
+  static int selectionAt(int, int, int, int, int, int);
+    descriptor: (IIIIII)I
+
+  static int hit(int, int, int, int, int, int, int, int);
+    descriptor: (IIIIIIII)I
+}
+GEOMETRY_PASS checks=5723783 ordinaryFailures=0 oracleDigest=27d10dbfbd5f515a
+mulDiv mismatches=0
+hasThumb mismatches=0
+thumbLength mismatches=0
+thumbStart mismatches=0
+selectionAt mismatches=0
+hit mismatches=0
+GEOMETRY_PASS checks=5723783 ordinaryFailures=0 oracleDigest=27d10dbfbd5f515a
+mulDiv mismatches=0
+hasThumb mismatches=0
+thumbLength mismatches=0
+thumbStart mismatches=0
+selectionAt mismatches=0
+hit mismatches=0
+Compiled from "ViewportScrollBarGeometry.java"
+final class org.eclipse.swt.widgets.ViewportScrollBarGeometry {
+  static final int NONE;
+    descriptor: I
+  static final int ARROW_DECREASE;
+    descriptor: I
+  static final int PAGE_DECREASE;
+    descriptor: I
+  static final int THUMB;
+    descriptor: I
+  static final int PAGE_INCREASE;
+    descriptor: I
+  static final int ARROW_INCREASE;
+    descriptor: I
+  static int mulDiv(int, int, int);
+    descriptor: (III)I
+
+  static boolean hasThumb(int, int);
+    descriptor: (II)Z
+
+  static int thumbLength(int, int, int, int, int);
+    descriptor: (IIIII)I
+
+  static int thumbStart(int, int, int, int, int, int);
+    descriptor: (IIIIII)I
+
+  static int selectionAt(int, int, int, int, int, int);
+    descriptor: (IIIIII)I
+
+  static int hit(int, int, int, int, int, int, int, int);
+    descriptor: (IIIIIIII)I
+}
+CANONICAL_GENERATED_SCROLLBAR_GEOMETRY_PASS
