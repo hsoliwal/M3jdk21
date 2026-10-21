@@ -52,13 +52,15 @@ final class M3EclipseIndexedSnapshot<T> {
     int state(int ordinal) { return states.state(handles.get(ordinal)); }
 
     List<T> selected(int requiredMask, int excludedMask) {
-        long[] source = handles.toArray();
-        long[] result = states.snapshotHandles(source, 0, source.length,
-                requiredMask, excludedMask);
+        // Snapshot slots are dense, append-only ordinals; no handle materialization is needed.
+        int slot = states.nextMatchingSlot(0, requiredMask, excludedMask);
+        if (slot < 0) return List.of();
+        if ((requiredMask | excludedMask) == 0) return all();
         List<T> selected = M3Collections.arrayList();
-        for (long handle : result) {
-            selected.add(payloads.get(M3SlotAllocator28.slot(handle)));
-        }
+        do {
+            selected.add(payloads.get(slot));
+            slot = states.nextMatchingSlot(slot + 1, requiredMask, excludedMask);
+        } while (slot >= 0);
         return List.copyOf(selected);
     }
 
