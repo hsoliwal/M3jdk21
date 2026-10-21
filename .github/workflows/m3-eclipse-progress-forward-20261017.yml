@@ -42,6 +42,27 @@ jobs:
                   assert hashlib.sha256(candidate.read_bytes()).hexdigest() == digest, candidate
           print('ADMITTED_TWO_EXACT_POSTIMAGES')
           PY
+      - name: Verify scheduled-task recipe custody
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import hashlib
+          from pathlib import Path
+          root = Path("m3/eclipse/core-runtime/recipe/src/test/resources/com/synexia/rewrite/hash-pinned-java/eclipse-m3-scheduled-tasks-20261021")
+          rows = [line.split("\t") for line in (root / "manifest.tsv").read_text(encoding="utf-8").splitlines()
+                  if line and not line.startswith("#")]
+          assert len(rows) == 2, rows
+          assert [row[0] for row in rows] == sorted(row[0] for row in rows)
+          for relative, before, expected, template in rows:
+              assert before == "ABSENT", relative
+              assert len(expected) == 64, expected
+              for item in (Path(relative), root / template):
+                  assert item.is_file() and not item.is_symlink(), item
+                  actual = hashlib.sha256(item.read_bytes()).hexdigest()
+                  assert actual == expected, (item, expected, actual)
+          print("M3_ECLIPSE_SCHEDULED_TASKS_SEALED", len(rows))
+          PY
       - name: Run hash-pinned Java LST recipe and refusal/fixed-point tests
         shell: bash
         run: |
@@ -65,6 +86,27 @@ jobs:
           set -euxo pipefail
           mvn -B -ntp -f m3/eclipse/core-runtime/pom.xml verify 2>&1 | tee proof/maven-bridge.txt
           git diff --exit-code -- m3/collections/src/main/java m3/eclipse/core-runtime/src
+      - name: Require scheduled-task product and recipe JUnit receipts
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          import xml.etree.ElementTree as ET
+          cases = {
+              Path("m3/eclipse/core-runtime/recipe/target/surefire-reports/"
+                   "TEST-com.synexia.rewrite.M3EclipseScheduledTasksRecipeTest.xml"): 4,
+              Path("m3/eclipse/core-runtime/target/surefire-reports/"
+                   "TEST-com.m3.eclipse.runtime.M3EclipseScheduledTasksTest.xml"): 9
+          }
+          for path, count in cases.items():
+              assert path.is_file(), f"missing execution receipt {path}"
+              root = ET.parse(path).getroot()
+              actual = {k: int(root.attrib.get(k, "0"))
+                        for k in ("tests", "errors", "failures", "skipped")}
+              assert actual == dict(tests=count, errors=0, failures=0, skipped=0), (path, actual)
+          print("M3_ECLIPSE_SCHEDULED_TASKS_RECEIPTS_PASS")
+          PY
       - name: Preserve receipts and JUnit reports
         if: always()
         uses: actions/upload-artifact@v4

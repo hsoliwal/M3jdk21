@@ -22,13 +22,13 @@ import org.eclipse.core.runtime.IStatus;
  * <p>Executors own their queues, scheduling policies and shutdown. M3 owns only the supplied
  * progress monitor. Each submission requires an exclusive, single-use owner: it is begun only
  * after the task starts and completed once on exit. Cancellation propagates to that owner only
- * when the original Future accepts cancellation. Rejection never begins progress.
+ * when the original Future accepts cancellation. Rejection never begins progress.</p>
  *
  * <p>Ordinary {@code Callable<V>} failures retain the standard Future.get/ExecutionException
  * contract; Eclipse status tasks retain {@link M3EclipseJobs#runNow} status semantics. This is
  * not an Eclipse JobManager replacement: scheduling rules, job families, priority, UI dispatch
  * and listener notification must still use {@link M3EclipseJobScheduler}. No user callback
- * or Eclipse lifecycle operation crosses JNI.
+ * or Eclipse lifecycle operation crosses JNI.</p>
  */
 public final class M3EclipseScheduledTasks {
     private M3EclipseScheduledTasks() {}
