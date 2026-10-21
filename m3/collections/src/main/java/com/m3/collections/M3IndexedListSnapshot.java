@@ -245,8 +245,11 @@ public final class M3IndexedListSnapshot<E> extends AbstractList<E> implements R
     public M3IndexedListSnapshot<E> sortedMaskedByPhysicalState(
             int[] physicalStates, int requiredMask, int forbiddenMask,
             Comparator<? super E> comparator, M3IndexPathMasks.Backend backend) {
-        return maskedByPhysicalState(
-                physicalStates, requiredMask, forbiddenMask, backend).sorted(comparator);
+        M3IndexedListSnapshot<E> selected = maskedByPhysicalState(
+                physicalStates, requiredMask, forbiddenMask, backend);
+        // The fresh selection owns its int[]; reuse it exactly as filteredSorted does.
+        selected.sortPositions(selected.positions, comparator);
+        return selected;
     }
 
     public M3IndexedListSnapshot<E> sorted(Comparator<? super E> comparator) {
