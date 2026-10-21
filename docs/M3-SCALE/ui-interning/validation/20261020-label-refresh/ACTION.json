@@ -1,0 +1,248 @@
+{
+  "schema": "synexia.validation-action.v1",
+  "id": "m3.ui.label-refresh.existing-junit.20261020",
+  "kind": "EXISTING_JUNIT_METHOD_VALIDATION",
+  "status": "SCOPED_SINGLE_METHOD_PASS",
+  "global_recipe_descriptor_status": "HOLD_ENVIRONMENT_AND_FIT",
+  "existing_owner": "org.junit.platform.console.ConsoleLauncher",
+  "selected_method": "com.m3.collections.M3LabelLanesTest#refreshIsADeltaNotARebuild",
+  "fixed_source_pins": "SOURCE_PINS.json",
+  "qualified_receipt": "evidence/RESULT.json",
+  "qualification": "QUALIFICATION.json",
+  "required_bindings": {
+    "source_root": {
+      "type": "absolute_directory",
+      "access": "read_only",
+      "constraint": "Contains exactly the five selected repository paths at the SOURCE_PINS.json bytes/hash preconditions; source commit at proof is fe5d02986b6364f42df3e6d213bdad42e851784a."
+    },
+    "jdk_home": {
+      "type": "absolute_directory",
+      "access": "read_only",
+      "constraint": "JDK21 java.exe, javac.exe, lib/modules and release must match SOURCE_PINS.json."
+    },
+    "junit_console_jar": {
+      "type": "absolute_file",
+      "access": "read_only",
+      "coordinate": "org.junit.platform:junit-platform-console-standalone:1.11.4",
+      "sha256": "b016ef6b1c3454d6d7c2c88ce081dabf289699686af6622d6e4e2e1b54b4a2fc",
+      "bytes": 2809597,
+      "constraint": "Use existing offline artifact; no dependency resolution or download."
+    },
+    "run_root": {
+      "type": "absolute_directory",
+      "access": "exclusive_new_output",
+      "constraint": "New empty directory on measured K storage, without reparse points; never reuse the qualified run."
+    },
+    "agent_temp": {
+      "type": "absolute_directory",
+      "access": "bounded_output",
+      "constraint": "Existing K temp directory; native GetTempPathW must equal its explicit TEMP/TMP routing."
+    },
+    "global_jvm_lock": {
+      "type": "absolute_directory",
+      "access": "exclusive_atomic_lock",
+      "constraint": "Coordinator-provided shared JVM lock. Existing/foreign lock means HOLD; retire only own unchanged empty lock after physical closure."
+    }
+  },
+  "invocation": {
+    "format": "argv arrays; substitute typed paths as data, do not pass through a shell",
+    "phases": [
+      {
+        "id": "compile",
+        "launcher": "existing JDK compiler",
+        "argv": [
+          "${jdk_home}/bin/javac.exe",
+          "-J-Xms32m",
+          "-J-Xmx256m",
+          "-J-XX:+UseSerialGC",
+          "-J-XX:MaxMetaspaceSize=128m",
+          "-J-XX:ReservedCodeCacheSize=32m",
+          "-J-XX:TieredStopAtLevel=1",
+          "-J-XX:-UsePerfData",
+          "-J-XX:+DisableAttachMechanism",
+          "-J-XX:-HeapDumpOnOutOfMemoryError",
+          "-J-XX:-CreateCoredumpOnCrash",
+          "-J-XX:HeapDumpPath=${run_root}/dumps",
+          "-J-XX:ErrorFile=${run_root}/dumps/hs_err_pid%p.log",
+          "-J-Djava.io.tmpdir=${run_root}/tmp",
+          "-J-Duser.home=${run_root}/home",
+          "-J-Duser.dir=${run_root}",
+          "-J-Djna.tmpdir=${run_root}/tmp/jna",
+          "-J-Djansi.tmpdir=${run_root}/tmp/jansi",
+          "-J-Dorg.xerial.snappy.tempdir=${run_root}/tmp/snappy",
+          "-J-Djava.util.prefs.userRoot=${run_root}/prefs/user",
+          "-J-Djava.util.prefs.systemRoot=${run_root}/prefs/system",
+          "-J-Dfile.encoding=UTF-8",
+          "-J-Djava.awt.headless=true",
+          "--release",
+          "21",
+          "-encoding",
+          "UTF-8",
+          "-parameters",
+          "-proc:none",
+          "-implicit:none",
+          "-Xlint:all",
+          "-Werror",
+          "-sourcepath",
+          "${run_root}/empty-sourcepath",
+          "-classpath",
+          "${junit_console_jar}",
+          "-d",
+          "${run_root}/classes",
+          "${source_root}/m3/collections/src/main/java/com/m3/collections/M3LabelLanes.java",
+          "${source_root}/m3/collections/src/main/java/com/m3/collections/M3LabelPool.java",
+          "${source_root}/m3/collections/src/main/java/com/m3/collections/M3ShortLabel.java",
+          "${source_root}/m3/collections/src/main/java/com/m3/collections/M3TextExtentCache.java",
+          "${source_root}/m3/collections/src/test/java/com/m3/collections/M3LabelLanesTest.java"
+        ],
+        "cwd": "${run_root}",
+        "deadline_seconds": 120,
+        "expected_exitcode": 0,
+        "original_claim_sha256": "959de3a6ad1c2b5ae9533537b7f94eeef180c2e105c3ba6bb1b5714f8e3b533e"
+      },
+      {
+        "id": "test",
+        "launcher": "existing JUnit ConsoleLauncher",
+        "argv": [
+          "${jdk_home}/bin/java.exe",
+          "-Xms32m",
+          "-Xmx256m",
+          "-XX:+UseSerialGC",
+          "-XX:MaxMetaspaceSize=128m",
+          "-XX:ReservedCodeCacheSize=32m",
+          "-XX:TieredStopAtLevel=1",
+          "-XX:-UsePerfData",
+          "-XX:+DisableAttachMechanism",
+          "-XX:-HeapDumpOnOutOfMemoryError",
+          "-XX:-CreateCoredumpOnCrash",
+          "-XX:HeapDumpPath=${run_root}/dumps",
+          "-XX:ErrorFile=${run_root}/dumps/hs_err_pid%p.log",
+          "-Djava.io.tmpdir=${run_root}/tmp",
+          "-Duser.home=${run_root}/home",
+          "-Duser.dir=${run_root}",
+          "-Djna.tmpdir=${run_root}/tmp/jna",
+          "-Djansi.tmpdir=${run_root}/tmp/jansi",
+          "-Dorg.xerial.snappy.tempdir=${run_root}/tmp/snappy",
+          "-Djava.util.prefs.userRoot=${run_root}/prefs/user",
+          "-Djava.util.prefs.systemRoot=${run_root}/prefs/system",
+          "-Dfile.encoding=UTF-8",
+          "-Djava.awt.headless=true",
+          "-Djunit.jupiter.execution.parallel.enabled=false",
+          "-jar",
+          "${junit_console_jar}",
+          "execute",
+          "--disable-banner",
+          "--disable-ansi-colors",
+          "--details=summary",
+          "--include-engine",
+          "junit-jupiter",
+          "--class-path",
+          "${run_root}/classes",
+          "--select-method",
+          "com.m3.collections.M3LabelLanesTest#refreshIsADeltaNotARebuild",
+          "--fail-if-no-tests",
+          "--reports-dir",
+          "${run_root}/reports"
+        ],
+        "cwd": "${run_root}",
+        "deadline_seconds": 120,
+        "expected_exitcode": 0,
+        "original_claim_sha256": "b521e47427d148ed6f62fa1883dd7fb6bf8549fca7feffa52a848d381bf90716"
+      }
+    ]
+  },
+  "phases_dag": [
+    {
+      "id": "admit",
+      "requires": [
+        "source/tool/dependency hashes match",
+        "fresh K output and native temp routing",
+        "available K bytes >= 8673820672 after bounded output",
+        "combined task roots <=83886080 bytes",
+        "atomic global JVM lock acquired"
+      ]
+    },
+    {
+      "id": "compile",
+      "after": [
+        "admit"
+      ]
+    },
+    {
+      "id": "compile-oracle",
+      "after": [
+        "compile"
+      ],
+      "requires": [
+        "native exit0, wait0, active0, all handles closed, no supervisor/cleanup error",
+        "empty compile.log",
+        "exact seven classes named in QUALIFICATION.json, class major65"
+      ]
+    },
+    {
+      "id": "test",
+      "after": [
+        "compile-oracle"
+      ]
+    },
+    {
+      "id": "test-oracle",
+      "after": [
+        "test"
+      ],
+      "requires": [
+        "exact one selected test in JUnit XML",
+        "stdout tests found/started/successful=1; skipped/aborted/failed=0"
+      ]
+    },
+    {
+      "id": "close-and-review",
+      "after": [
+        "test-oracle"
+      ],
+      "requires": [
+        "all inputs unchanged",
+        "exact output manifest",
+        "owned processes physically terminal",
+        "own lock retired",
+        "independent retained-evidence review"
+      ]
+    }
+  ],
+  "supervision": {
+    "existing_owned_job_required": true,
+    "assign_before_resume": true,
+    "stdout_file_limit_bytes": 262144,
+    "run_output_limit_bytes": 4194304,
+    "receipt_reserve_bytes": 65536,
+    "timeout_each_seconds": 120,
+    "fresh_routing_environment_allowlist": [
+      "SYSTEMROOT",
+      "WINDIR",
+      "COMSPEC",
+      "NUMBER_OF_PROCESSORS"
+    ],
+    "routed_environment": {
+      "TEMP": "${agent_temp}",
+      "TMP": "${agent_temp}",
+      "HOME": "${run_root}/home",
+      "USERPROFILE": "${run_root}/home",
+      "APPDATA": "${run_root}/home/AppData/Roaming",
+      "LOCALAPPDATA": "${run_root}/home/AppData/Local",
+      "XDG_CACHE_HOME": "${run_root}/home/cache",
+      "JAVA_HOME": "${jdk_home}",
+      "PATH": "${jdk_home}/bin;<Windows system directories>"
+    },
+    "inherited_java_options_or_classpath": false
+  },
+  "new_Java_or_test_authored": false,
+  "performance_claim": false,
+  "limits": [
+    "Standard pooled-label mode only; other methods in M3LabelLanesTest were not selected.",
+    "Synthetic deterministic measurer; no actual font, SWT Display, GUI lifecycle or visible-window offset proof.",
+    "No immediate-label, eviction, invalid-input, broad UI suite or benchmark-runtime admission.",
+    "No performance claim; the elapsed time in unchanged stdout is not interpreted.",
+    "Selected source/tool/stdlib and owned-process evidence does not attest the whole host or a generic executor."
+  ],
+  "future_delivery": "Commit/ref/blob readback belongs in a separate delivery receipt; this fixture evidence does not certify publication."
+}

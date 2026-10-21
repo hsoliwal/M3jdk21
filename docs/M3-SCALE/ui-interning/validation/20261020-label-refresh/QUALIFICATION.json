@@ -1,0 +1,151 @@
+{
+  "schema": "synexia.ui.label-refresh.qualification.v1",
+  "status": "SCOPED_SINGLE_METHOD_PASS",
+  "validation_action": "ACTION.json",
+  "source_repository": "hsoliwal/M3jdk21",
+  "source_commit": "fe5d02986b6364f42df3e6d213bdad42e851784a",
+  "existing_PR": 1606,
+  "concrete_result": "The existing selected method passes after strict fresh compilation: 1000 equal-content String refreshes preserve label IDs, widest result and pool/cache miss counters; renaming row7 adds exactly one pool miss and one measurement miss, with pool size5.",
+  "source_scope": {
+    "files": 5,
+    "bytes": 54438,
+    "pins": "SOURCE_PINS.json",
+    "unchanged": true
+  },
+  "strict_compile": {
+    "release": 21,
+    "flags": [
+      "-encoding UTF-8",
+      "-parameters",
+      "-proc:none",
+      "-implicit:none",
+      "-Xlint:all",
+      "-Werror",
+      "empty -sourcepath"
+    ],
+    "compile_log_empty": true,
+    "expected_class_major": 65,
+    "exact_expected_classes": [
+      "com/m3/collections/M3LabelLanes.class",
+      "com/m3/collections/M3LabelPool.class",
+      "com/m3/collections/M3LabelPool$CanonicalIds.class",
+      "com/m3/collections/M3ShortLabel.class",
+      "com/m3/collections/M3TextExtentCache.class",
+      "com/m3/collections/M3TextExtentCache$Measurer.class",
+      "com/m3/collections/M3LabelLanesTest.class"
+    ]
+  },
+  "junit": {
+    "method": "com.m3.collections.M3LabelLanesTest#refreshIsADeltaNotARebuild",
+    "engine": "junit-jupiter",
+    "parallel": false,
+    "tests_found": 1,
+    "tests_started": 1,
+    "tests_successful": 1,
+    "tests_skipped": 0,
+    "tests_aborted": 0,
+    "tests_failed": 0,
+    "XML_exact_selected_test": true
+  },
+  "native": {
+    "actions": 2,
+    "expected_exitcodes": [
+      0,
+      0
+    ],
+    "assigned_before_resume": true,
+    "same_handle_waits": [
+      0,
+      0
+    ],
+    "active_processes": [
+      0,
+      0
+    ],
+    "total_processes_per_job": [
+      2,
+      2
+    ],
+    "handles_closed": true,
+    "supervisor_or_cleanup_errors": false,
+    "own_global_jvm_lock_released": true
+  },
+  "independent_review": {
+    "path": "evidence/INDEPENDENT_POSTRUN_REVIEW.json",
+    "sha256": "7e77186c21b40685f20593e0aca16a89d21a03accdaa346d1f1973ec4ca8e5ee",
+    "input_pins_checked": 32,
+    "original_output_manifest_entries_checked": 18
+  },
+  "evidence": [
+    {
+      "path": "evidence/EXECUTION_ARGV_PROJECTION.json",
+      "bytes": 4177,
+      "sha256": "e390e2ea1771c6c7b0cdb8c4e99d23698d69f9a26095d08f32d789bb443b6099",
+      "git_blob": "e677dc2b492fc5ae5dbb041c6119c7026b20dcb0"
+    },
+    {
+      "path": "evidence/INDEPENDENT_POSTRUN_REVIEW.json",
+      "bytes": 2356,
+      "sha256": "7e77186c21b40685f20593e0aca16a89d21a03accdaa346d1f1973ec4ca8e5ee",
+      "git_blob": "52b7ece6a4ca2b5bb8c71347ec3238a08e2051f5"
+    },
+    {
+      "path": "evidence/JUNIT_REPORT_PROJECTION.json",
+      "bytes": 781,
+      "sha256": "2195fce3d45c7539f36a7753deecd4313a179befeda0d8ed740ab8d7dacd113f",
+      "git_blob": "86daf139121d2ec8cb87dccecead3fa67163f449"
+    },
+    {
+      "path": "evidence/OUTPUT_MANIFEST.json",
+      "bytes": 2983,
+      "sha256": "6b6f5288568be23962d4756ab5c44ad32ffe15e27f4165de6b60fb93babb7ca0",
+      "git_blob": "1501f7ccb754039f9a52b3c55c31e5d4680b633c"
+    },
+    {
+      "path": "evidence/RESULT.json",
+      "bytes": 1883,
+      "sha256": "dc479307f11b8c68d32c0edf1e0b68e966736b811030dfb06d3d5b40c29dc83f",
+      "git_blob": "de822d2a80205dd9cd22fdc649347781683bf31c"
+    },
+    {
+      "path": "evidence/compile.NATIVE.json",
+      "bytes": 452,
+      "sha256": "a83973525b50943370458074d9d185151af197af7e261903e59547aaa15cde70",
+      "git_blob": "d02dd481726d2aa7036243c82fdc91b12b213acd"
+    },
+    {
+      "path": "evidence/compile.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "evidence/test.NATIVE.json",
+      "bytes": 452,
+      "sha256": "3d8d7fe3938852ea4b60c7b45306a56abe3e4b29cf113d08bd4b1556061122a5",
+      "git_blob": "04dad61f75036d72df270dc3691b89668063f3bc"
+    },
+    {
+      "path": "evidence/test.log",
+      "bytes": 479,
+      "sha256": "1697990370deae5e244532e82d2f4ff3e58596033c625fbfdc131d435d9e8b11",
+      "git_blob": "8a0ee4049d532c326919da7f38206de143c91611"
+    }
+  ],
+  "retained_original_claims": {
+    "compile_claim_sha256": "959de3a6ad1c2b5ae9533537b7f94eeef180c2e105c3ba6bb1b5714f8e3b533e",
+    "test_claim_sha256": "b521e47427d148ed6f62fa1883dd7fb6bf8549fca7feffa52a848d381bf90716",
+    "execution_claim_sha256": "a2786973f057956ef8f9f3fd8869fafe02085eb6fedb57f76620b931165c1417",
+    "JVM_lock_ownership_sha256": "30c3961da3cc4dc9ddb45a6548f482ff50b41102cef99afb2d0143c458b008ac"
+  },
+  "proof_independence": "This method is separate from the completed six M3MarkerLanesAlgorithmsTest methods and prior benchmark-header compile/API proof; no previous completed test was replayed for this qualification.",
+  "limits": [
+    "Standard pooled-label mode only; other methods in M3LabelLanesTest were not selected.",
+    "Synthetic deterministic measurer; no actual font, SWT Display, GUI lifecycle or visible-window offset proof.",
+    "No immediate-label, eviction, invalid-input, broad UI suite or benchmark-runtime admission.",
+    "No performance claim; the elapsed time in unchanged stdout is not interpreted.",
+    "Selected source/tool/stdlib and owned-process evidence does not attest the whole host or a generic executor."
+  ],
+  "global_recipe_descriptor_status": "HOLD_ENVIRONMENT_AND_FIT",
+  "delivery_receipt_is_external": true
+}

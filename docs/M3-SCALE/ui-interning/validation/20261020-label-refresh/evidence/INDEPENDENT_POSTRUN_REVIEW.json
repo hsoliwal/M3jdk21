@@ -1,0 +1,68 @@
+{
+  "schema": "synexia.ui.label-refresh.independent-postrun-review.v1",
+  "status": "PASS_SCOPED_EXISTING_SINGLE_METHOD",
+  "method": "com.m3.collections.M3LabelLanesTest#refreshIsADeltaNotARebuild",
+  "source_commit": "fe5d02986b6364f42df3e6d213bdad42e851784a",
+  "plan_sha256": "3908834c6b3558bc19f924efaac8072d890a63629da8cefb7009a68fcbca5c01",
+  "pins_sha256": "a6b6a567de20a35780ce401a6fa7eed4e5bfc4351e007398831dd12d4f5ab4d8",
+  "result_sha256": "dc479307f11b8c68d32c0edf1e0b68e966736b811030dfb06d3d5b40c29dc83f",
+  "output_manifest_sha256": "6b6f5288568be23962d4756ab5c44ad32ffe15e27f4165de6b60fb93babb7ca0",
+  "verified_input_pins": 32,
+  "verified_output_manifest_rows": 18,
+  "exact_source_files": 5,
+  "source_bytes": 54438,
+  "classes": 7,
+  "class_major": 65,
+  "compile_log_empty": true,
+  "stdout_test_counts": {
+    "found": 1,
+    "skipped": 0,
+    "started": 1,
+    "aborted": 0,
+    "successful": 1,
+    "failed": 0
+  },
+  "xml_testcase_count": 1,
+  "xml_selected_method_exact": true,
+  "phase_argv_matches_plan": true,
+  "both_native_exitcodes": [
+    0,
+    0
+  ],
+  "owned_processes_physically_terminal": true,
+  "own_lock_released_record": true,
+  "jvm_lock_absent_at_review": false,
+  "no_reparse_points_in_outputs": true,
+  "native_processes": [
+    {
+      "pid": "14128",
+      "creation_FILETIME": "134369913696715390",
+      "total_processes": 2,
+      "wait": 0,
+      "active": 0,
+      "handles_closed": true
+    },
+    {
+      "pid": "50004",
+      "creation_FILETIME": "134369913720730392",
+      "total_processes": 2,
+      "wait": 0,
+      "active": 0,
+      "handles_closed": true
+    }
+  ],
+  "storage": {
+    "k_available_bytes": 9293373440,
+    "native_temp_verified": true,
+    "combined_bytes": 48562016
+  },
+  "scope": "Standard pooled-label mode: 1000 equal-string refreshes retain IDs, width result and miss counters; one renamed label adds one pool miss and one extent miss, pool size5.",
+  "limits": [
+    "Synthetic deterministic Measurer; no actual font or GUI.",
+    "Only the selected method; no full class, viewport, immediate-mode, eviction or invalid-input coverage.",
+    "No benchmark or performance admission; elapsed log time is not interpreted.",
+    "Selected source/tool/stdlib pins and owned process receipts; no whole-OS admission."
+  ],
+  "replay_or_new_execution": false,
+  "blockers": []
+}
