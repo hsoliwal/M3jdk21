@@ -102,6 +102,9 @@ public final class M3OfflineProjectScan {
      * Selection is explicit and scoped by the required stable selectionId.
      * The .m3/.git control folders and SQLite's live database/WAL/lock
      * files are excluded so checkpoint writes never invalidate themselves.
+     * Profiles are keyed by project root, selection identity and tool context:
+     * independent offline Maven, Gradle and analyzer scans cannot clobber
+     * each other's last accepted generation in the same native SQLite DB.
      */
     public static Result capture(Path project, M3FS database, Stream<M3File> entries,
             byte[] toolContextSha256, String selectionId, Predicate<String> accept,
@@ -121,7 +124,7 @@ public final class M3OfflineProjectScan {
         }
         byte[] context = context(root, selectionId, toolContextSha256);
         M3BuildStateStore.Version prior = M3BuildStateStore.readOffline(
-                database, limits.maxStateBytes(), limits.maxRows()).orElse(null);
+                database, context, limits.maxStateBytes(), limits.maxRows()).orElse(null);
         Builder facts = new Builder(limits.maxRows());
         long observed = 0;
         progress.begin("M3 offline project discovery", 0L);
@@ -187,8 +190,9 @@ public final class M3OfflineProjectScan {
         if (!database.database().toAbsolutePath().normalize().equals(candidate.database())) {
             throw new IOException("project database changed since offline scan");
         }
-        return M3BuildStateStore.publishOffline(database, candidate.state(),
-                candidate.expectedCommitment(), limits.maxStateBytes(), limits.maxRows());
+        return M3BuildStateStore.publishOffline(database, candidate.state().contextSha256(),
+                candidate.state(), candidate.expectedCommitment(),
+                limits.maxStateBytes(), limits.maxRows());
     }
 
     private static Path root(Path project) throws IOException {
@@ -219,7 +223,8 @@ public final class M3OfflineProjectScan {
                 || key.endsWith(".groovy")) return M3BuildState.SOURCE;
         if (key.endsWith(".class")) return M3BuildState.CLASS;
         if (key.endsWith(".jar") || key.endsWith(".jmod")) return M3BuildState.DEPENDENCY;
-        if (key.equals("pom.xml") || key.endsWith(".gradle") || key.endsWith(".gradle.kts")
+        if (key.equals("pom.xml") || key.endsWith("/pom.xml")
+                || key.endsWith(".gradle") || key.endsWith(".gradle.kts")
                 || key.endsWith("gradle.properties") || key.endsWith("settings.xml")
                 || key.endsWith("maven.config")) return M3BuildState.BUILD_INPUT;
         return M3BuildState.RESOURCE;

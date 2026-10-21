@@ -39,6 +39,7 @@ class M3OfflineProjectScanTest {
         Files.writeString(project.resolve("pom.xml"), "<project/>", StandardCharsets.UTF_8);
         Files.writeString(project.resolve(".git/HEAD"), "changed", StandardCharsets.UTF_8);
         Path database = project.resolve(".m3/project.sqlite");
+        byte[] removedContext;
         AtomicLong shadowBytes = new AtomicLong();
         AtomicLong progressBytes = new AtomicLong();
         M3OfflineProjectScan.ShadowLayers shadows = file ->
@@ -59,7 +60,8 @@ class M3OfflineProjectScanTest {
                     "original attributed compiler state stays independent");
             var published = M3OfflineProjectScan.publish(fs, first, LIMITS);
             assertArrayEquals(published.commitment(), M3BuildStateStore.readOffline(
-                    fs, LIMITS.maxStateBytes(), LIMITS.maxRows()).orElseThrow().commitment());
+                    fs, first.state().contextSha256(),
+                    LIMITS.maxStateBytes(), LIMITS.maxRows()).orElseThrow().commitment());
 
             var warm = M3OfflineProjectScan.scan(project, fs, context, "all-inputs-v1",
                     path -> true, file -> new M3FileShadow[0], LIMITS, M3FileProgress.NONE);
@@ -89,6 +91,7 @@ class M3OfflineProjectScanTest {
             // the original M3BuildState intentionally marks all surviving rows dirty.
             assertEquals(2, removed.changedRows().count());
             M3OfflineProjectScan.publish(fs, removed, LIMITS);
+            removedContext = removed.state().contextSha256();
 
             var newContext = M3OfflineProjectScan.scan(project, fs,
                     sha("maven:21:changed-flags"), "all-inputs-v1",
@@ -102,7 +105,7 @@ class M3OfflineProjectScanTest {
         }
         try (M3FS reopened = M3FS.openSnapshot(database)) {
             var generation = M3BuildStateStore.readOffline(
-                    reopened, LIMITS.maxStateBytes(), LIMITS.maxRows()).orElseThrow();
+                    reopened, removedContext, LIMITS.maxStateBytes(), LIMITS.maxRows()).orElseThrow();
             assertTrue(generation.state().find("src/New.java", M3BuildState.SOURCE) >= 0);
             assertEquals(-1, generation.state().find("src/App.java", M3BuildState.SOURCE));
             assertTrue(M3BuildStateStore.read(reopened, LIMITS.maxStateBytes(), 128, 0).isEmpty());
@@ -147,6 +150,56 @@ class M3OfflineProjectScanTest {
                 assertThrows(IOException.class, () -> M3OfflineProjectScan.publish(
                         anotherProject, newest, LIMITS));
             }
+        }
+    }
+
+    @Test
+    void multipleOfflineConsumersRetainIndependentProjectBaselines() throws Exception {
+        Path project = temporary.resolve("reactor");
+        Files.createDirectories(project.resolve("module/src"));
+        Files.createDirectories(project.resolve(".m3"));
+        Files.writeString(project.resolve("pom.xml"), "root", StandardCharsets.UTF_8);
+        Files.writeString(project.resolve("module/pom.xml"), "child", StandardCharsets.UTF_8);
+        Files.writeString(project.resolve("module/src/A.java"), "class A {}", StandardCharsets.UTF_8);
+        Path database = project.resolve(".m3/project.sqlite");
+        byte[] maven = sha("maven-4-jdk21");
+        byte[] gradle = sha("gradle-jdk21");
+        try (M3FS fs = M3FS.create(database)) {
+            var firstMaven = M3OfflineProjectScan.scan(project, fs, maven,
+                    "all-files-v1", path -> true,
+                    file -> new M3FileShadow[0], LIMITS, M3FileProgress.NONE);
+            int pomRow = firstMaven.state().find("module/pom.xml", M3BuildState.BUILD_INPUT);
+            assertTrue(pomRow >= 0, "nested reactor POM is a build input, not a generic resource");
+            assertTrue(firstMaven.delta().fullRebuild());
+            M3OfflineProjectScan.publish(fs, firstMaven, LIMITS);
+
+            var firstGradle = M3OfflineProjectScan.scan(project, fs, gradle,
+                    "all-files-v1", path -> true,
+                    file -> new M3FileShadow[0], LIMITS, M3FileProgress.NONE);
+            assertTrue(firstGradle.delta().fullRebuild(), "different tool context is cold");
+            M3OfflineProjectScan.publish(fs, firstGradle, LIMITS);
+
+            var warmMaven = M3OfflineProjectScan.scan(project, fs, maven,
+                    "all-files-v1", path -> true,
+                    file -> new M3FileShadow[0], LIMITS, M3FileProgress.NONE);
+            assertFalse(warmMaven.needsCompilerImpactAnalysis(),
+                    "Gradle scan cannot overwrite Maven's file checkpoint");
+            assertEquals(0, warmMaven.changedRows().count());
+            var warmGradle = M3OfflineProjectScan.scan(project, fs, gradle,
+                    "all-files-v1", path -> true,
+                    file -> new M3FileShadow[0], LIMITS, M3FileProgress.NONE);
+            assertFalse(warmGradle.needsCompilerImpactAnalysis(),
+                    "Maven scan cannot overwrite Gradle's file checkpoint");
+            assertEquals(0, warmGradle.changedRows().count());
+            assertTrue(M3BuildStateStore.readOffline(fs,
+                    LIMITS.maxStateBytes(), LIMITS.maxRows()).isEmpty(),
+                    "legacy unkeyed slot untouched by named profiles");
+            assertThrows(IllegalArgumentException.class, () ->
+                    M3BuildStateStore.readOffline(fs, new byte[31],
+                            LIMITS.maxStateBytes(), LIMITS.maxRows()));
+            assertThrows(IllegalArgumentException.class, () ->
+                    M3BuildStateStore.publishOffline(fs, new byte[32],
+                            firstMaven.state(), null, LIMITS.maxStateBytes(), LIMITS.maxRows()));
         }
     }
 
