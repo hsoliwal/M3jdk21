@@ -354,21 +354,47 @@ public final class M3IndexedListSnapshot<E> extends AbstractList<E> implements R
             }
         }
         if (ascending) {
-            int[] reverseGroups = new int[length];
-            int output = 0;
+            // Observe the exact historical comparator schedule before mutating an
+            // index. Store only equality-group starts, one bit per physical position,
+            // rather than materializing a second int[length] directory.
+            long[] groupStarts = new long[(int) (((long) length + 63L) >>> 6)];
             for (int end = length; end > 0;) {
                 int begin = end - 1;
                 while (begin > 0 && compare(indices[begin - 1],
                         indices[begin], comparator) == 0) begin--;
-                System.arraycopy(indices, begin, reverseGroups, output, end - begin);
-                output += end - begin;
+                groupStarts[begin >>> 6] |= 1L << (begin & 63);
                 end = begin;
             }
-            System.arraycopy(reverseGroups, 0, indices, 0, length);
+
+            // Reverse the private index directory, then restore encounter order
+            // inside each original comparator-equality group. No user callback
+            // occurs after the first write to indices.
+            reversePositions(indices, 0, length);
+            int output = 0;
+            for (int end = length; end > 0;) {
+                int begin = end - 1;
+                while (begin > 0
+                        && (groupStarts[begin >>> 6] & (1L << (begin & 63))) == 0L) {
+                    begin--;
+                }
+                int next = output + (end - begin);
+                reversePositions(indices, output, next);
+                output = next;
+                end = begin;
+            }
         } else {
             sortPositions(indices, (left, right) ->
                     comparator != null ? comparator.compare(right, left)
                             : ((Comparable<? super E>) right).compareTo(left));
+        }
+    }
+
+    /** Reverse only a private primitive-index range; no payload, entry or callback. */
+    private static void reversePositions(int[] indices, int from, int to) {
+        for (int left = from, right = to - 1; left < right; left++, right--) {
+            int value = indices[left];
+            indices[left] = indices[right];
+            indices[right] = value;
         }
     }
 
