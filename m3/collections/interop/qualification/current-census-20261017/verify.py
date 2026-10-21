@@ -155,7 +155,7 @@ def verify_successor_lineage(current, previous, successors, expected_added=40, e
             raise ValueError('historical predecessor cell mutated: ' + path)
         if path in changed:
             expected = [path, prior_row[2], current_row[2], current_row[3], prior_row[3]]
-            if ledger[path] != expected:
+            if list(ledger[path]) != expected:
                 raise ValueError('changed source predecessor or successor not admitted: ' + path)
     for path, row in present.items():
         if path not in prior and row[1] != 'ABSENT':
