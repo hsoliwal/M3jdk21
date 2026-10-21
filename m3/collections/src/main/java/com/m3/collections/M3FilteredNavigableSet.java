@@ -100,4 +100,6 @@ public final class M3FilteredNavigableSet<E> extends AbstractSet<E> implements N
     @Override public void clear() { throw readonly(); }
     @Override public E pollFirst() { throw readonly(); }
     @Override public E pollLast() { throw readonly(); }
+    @Override public E removeFirst() { throw readonly(); }
+    @Override public E removeLast() { throw readonly(); }
 }
