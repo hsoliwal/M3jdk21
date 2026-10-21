@@ -1,0 +1,19 @@
+--- qualified-sdk003/verify_sources.py
++++ maven4-packet/verify_sources.py
+@@ -1,6 +1,7 @@
+ #!/usr/bin/env python3
+ # SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
+ # SPDX-License-Identifier: Apache-2.0
++# Modified 2026-10-21 from qualified integrated SDK003 for the separate Maven4 packet.
+ """Read back the finite receiving source set and unchanged canonical recipe owners."""
+ import argparse
+ import hashlib
+@@ -29,7 +30,7 @@
+     crate = Path(__file__).resolve().parent
+     seal_path = crate / 'SOURCE_SEALS.json'
+     seals = json.loads(seal_path.read_text())
+-    assert seals['schema'] == 'M3_INTEGRATED_RECOVERY_SOURCE_SEALS/1'
++    assert seals['schema'] == 'M3_MAVEN4_EFFECTIVE_SOURCE_SEALS/1'
+     assert seals['task'] == TASK and seals['recipe'] == NAMED
+     assert seals['receiving_revision'] == SOURCE and seals['canonical_source_revision'] == CANONICAL
+     seen = set()

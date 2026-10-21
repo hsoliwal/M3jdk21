@@ -1,0 +1,12 @@
+[
+  {
+    "mode": "baseline",
+    "exit": 0,
+    "log_sha256": "b99448d1fb3556da543b89c0a85403691b4d548921ebe83a3e9f51ae6eac896e"
+  },
+  {
+    "mode": "candidate",
+    "exit": 0,
+    "log_sha256": "b17029d02b440a635dd78127ca9685a7196f1f923117dc394ba8b05330c2f9c3"
+  }
+]

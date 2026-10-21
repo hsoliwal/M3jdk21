@@ -1,0 +1,10 @@
+[
+  {
+    "mode": "baseline",
+    "exit": 0
+  },
+  {
+    "mode": "candidate",
+    "exit": 1
+  }
+]

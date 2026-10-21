@@ -1,0 +1,166 @@
+{
+  "schema": "M3_MAVEN4_RECEIVER_EVIDENCE_INTAKE/1",
+  "status": "PASS",
+  "earlier_intake_unchanged_sha256": "3d221bf3870a46eb8d64b2a4f70eeac5f8bb9c85b456765394700d9af2f496cf",
+  "files": [
+    {
+      "source_path": "/workspace/scratch/206049dfb270/integration-work/maven4-receiver-001/RESULT.json",
+      "crate_path": "proof/receiving-application-001/RESULT.json",
+      "bytes": 688,
+      "sha256": "36a2a91229a88b2e3fd53171ab738cdb3bb110e2c651b368ade1d5728c6198b2"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/integration-work/maven4-receiver-001/apply.json",
+      "crate_path": "proof/receiving-application-001/apply.json",
+      "bytes": 2206,
+      "sha256": "539d99bc764882c4a9ab8c2ec4e30a244e196b662fd75d3b765d1165b4fa21b2"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/integration-work/maven4-receiver-001/apply.log",
+      "crate_path": "proof/receiving-application-001/apply.log",
+      "bytes": 61,
+      "sha256": "1cbe601b356eabae85ba1c4a362f96a916d0c7338cff62d8d51c198e95ae04db"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/integration-work/maven4-receiver-001/preflight.json",
+      "crate_path": "proof/receiving-application-001/preflight.json",
+      "bytes": 2206,
+      "sha256": "8b7122d37e1378a35e4707509fb4a41e1d214eac75a3f1f5eda50b68786d8642"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/integration-work/maven4-receiver-001/preflight.log",
+      "crate_path": "proof/receiving-application-001/preflight.log",
+      "bytes": 61,
+      "sha256": "96d6dabf9a1577625dbd7670da827a0ff58d8036fce20140ebdf9dbf1c668c93"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/integration-work/maven4-receiver-001/replay.json",
+      "crate_path": "proof/receiving-application-001/replay.json",
+      "bytes": 2508,
+      "sha256": "6cb03f498211b71b53cb9c4f598c71550a8a530c87f6c22a73d467ab3f611341"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/integration-work/maven4-receiver-001/replay.log",
+      "crate_path": "proof/receiving-application-001/replay.log",
+      "bytes": 61,
+      "sha256": "54385b94ffb37b578f44629cdceaeb1fe593c25f8f2e6f786d2307e56bdb0419"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/integration-work/maven4-receiver-001/source-seals.log",
+      "crate_path": "proof/receiving-application-001/source-seals.log",
+      "bytes": 254,
+      "sha256": "b8b30e84f9f3bc770e65c29ecc56368a253a647d962d7536f1d2c94a79fc434c"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/maven-work/qualified-receiver-001/COMMANDS.json",
+      "crate_path": "proof/receiver-runtime-001/COMMANDS.json",
+      "bytes": 31508,
+      "sha256": "a0117e4776321fdb222153b5c06fd7918772e590f17af1ced487f24e65fb9bed"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/maven-work/qualified-receiver-001/INPUTS.json",
+      "crate_path": "proof/receiver-runtime-001/INPUTS.json",
+      "bytes": 1769061,
+      "sha256": "af2ec82c5e0a97d9c4ed02e18e4afb07132f2484999ce3660251421b2446a028"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/maven-work/qualified-receiver-001/PROOF.json",
+      "crate_path": "proof/receiver-runtime-001/PROOF.json",
+      "bytes": 1629,
+      "sha256": "9b1e3a81d5c37fc36bef68b4ae95554a76ccaf55a0f9464346b920a3fc09e107"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/maven-work/qualified-receiver-001/PROVIDER_ARTIFACTS.json",
+      "crate_path": "proof/receiver-runtime-001/PROVIDER_ARTIFACTS.json",
+      "bytes": 23451,
+      "sha256": "08d73ec9ff2e4949d4da0c8a3673b3fb72294e79d7e375ef13a84e30a08789f7"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/maven-work/qualified-receiver-001/TEST-org.apache.maven.impl.model.DefaultModelBuilderTest.xml",
+      "crate_path": "proof/receiver-runtime-001/TEST-org.apache.maven.impl.model.DefaultModelBuilderTest.xml",
+      "bytes": 21686,
+      "sha256": "41300edb68dac77389152291c6a9f59e75e424971ee063bb00e1d86ac90bb790"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/maven-work/qualified-receiver-001/baseline-api.log",
+      "crate_path": "proof/receiver-runtime-001/baseline-api.log",
+      "bytes": 1896,
+      "sha256": "8d88c16267423295d6346d5d670a6d563d2d510efa47e0bf6c7c539796ebfcfe"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/maven-work/qualified-receiver-001/baseline-compile.log",
+      "crate_path": "proof/receiver-runtime-001/baseline-compile.log",
+      "bytes": 748,
+      "sha256": "33f37992d0e758910b7d3ed1220422382e0b1c7bbd5355e1e3b282cea2d7fd5f"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/maven-work/qualified-receiver-001/baseline-provider.log",
+      "crate_path": "proof/receiver-runtime-001/baseline-provider.log",
+      "bytes": 9580,
+      "sha256": "c754e2008f92584735c4ba789fd98af2b90a4a9c41258bb060f9708d599be6d8"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/maven-work/qualified-receiver-001/candidate-api.log",
+      "crate_path": "proof/receiver-runtime-001/candidate-api.log",
+      "bytes": 2151,
+      "sha256": "95acd3755c5c24cfc80fb839105fb93c44b2307f72ebe9e1b8d9627ebf61564a"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/maven-work/qualified-receiver-001/candidate-compile.log",
+      "crate_path": "proof/receiver-runtime-001/candidate-compile.log",
+      "bytes": 701,
+      "sha256": "bd478ebc605ae9daf9252f2f94b0b045a6e9f213f19d8ff13eac96ebfc29e272"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/maven-work/qualified-receiver-001/candidate-provider.log",
+      "crate_path": "proof/receiver-runtime-001/candidate-provider.log",
+      "bytes": 9592,
+      "sha256": "fa16108cc29af96781a92de82b39dd8ec0a9a0371270c53284af6234cc59d583"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/maven-work/qualified-receiver-001/fixture-compile.log",
+      "crate_path": "proof/receiver-runtime-001/fixture-compile.log",
+      "bytes": 8582,
+      "sha256": "a1572fb3ce1244cd810f0e7314f9605b02441f47cf8bfbbc6f4a109a401166ba"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/maven-work/qualified-receiver-001/incumbent-classpath.txt",
+      "crate_path": "proof/receiver-runtime-001/incumbent-classpath.txt",
+      "bytes": 2612,
+      "sha256": "0e59234508b81d6197a8f057b2edeb234ad00d7a68584ace3a63cc2e8bea500d"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/maven-work/qualified-receiver-001/incumbent-offline.log",
+      "crate_path": "proof/receiver-runtime-001/incumbent-offline.log",
+      "bytes": 1343,
+      "sha256": "0aac677e713dbefc8f5a8543c2d08630c6e4e589428ab4bfbca2ee85c66322f6"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/maven-work/qualified-receiver-001/provider-classpath.txt",
+      "crate_path": "proof/receiver-runtime-001/provider-classpath.txt",
+      "bytes": 8121,
+      "sha256": "814e8e538fd9139f7b7614854141bdfe8295eff0e0b31763bc12196b308f52fd"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/maven-work/qualified-receiver-001/source-offline.log",
+      "crate_path": "proof/receiver-runtime-001/source-offline.log",
+      "bytes": 65180,
+      "sha256": "c216b9f366b2fd72dbe67b6f81f1df7bd6cd06e4ff6f525e993309ac162393b5"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/maven-work/evidence/QUALIFIER_RECEIVER_001.log",
+      "crate_path": "proof/receiver-runtime-001/QUALIFIER_RECEIVER_001.log",
+      "bytes": 991,
+      "sha256": "c0e9e4e49d16a1bc71d992aea510604cc721ca4e624d23340e29e94048bb9ecb"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/append_receiver_evidence.py",
+      "crate_path": "provenance/qualification-tools/append_receiver_evidence.py",
+      "bytes": 2826,
+      "sha256": "01dcec8f858f32937db8588993761987d21abac5a6cbfb7681cb8db19777ff1a"
+    }
+  ],
+  "count": 26,
+  "compiled_payloads_copied": false,
+  "all_source_and_destination_readbacks_match": true
+}

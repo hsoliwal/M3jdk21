@@ -1,0 +1,11 @@
+{
+  "status": "PASS_SOURCE_STRUCTURE",
+  "old_workflow_sha256": "29154a6605ad4bd1ecac65a980a0f70bb9f88d61805295ad698ec965c9ac6d57",
+  "new_workflow_sha256": "fa803e9cba2a7882f8f7f3fe90071734d6ec660aa162929ee873f20a0f7ebcb0",
+  "old_workflow_bytes_are_exact_prefix": true,
+  "provider_job_unchanged": true,
+  "new_job": "maven4-fork",
+  "online_phase_is_only_bootstrap": true,
+  "final_acceptance_requires_offline_source_tests": 41,
+  "github_ci_status": "not executed locally; no exact-head CI claim"
+}

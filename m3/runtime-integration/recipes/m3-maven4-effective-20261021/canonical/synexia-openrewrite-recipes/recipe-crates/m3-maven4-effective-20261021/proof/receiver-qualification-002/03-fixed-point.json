@@ -1,0 +1,51 @@
+{
+  "status": "PASS",
+  "mode": "APPLY",
+  "recipe_proof_sha256": "8675c41844c4731ab75b124ccdcd6c1e1897c43417e28f9e9d2850550f13b772",
+  "receiver_root": "9dd825588ddc2c21503e57b898bbcc2056910f8aa0c44403cee4f87fef908608",
+  "repository": "/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/receiver-qualification-002/receiving",
+  "files": [
+    {
+      "path": ".github/workflows/m3-ast-real-providers-20261019.yml",
+      "before_sha256": "fa803e9cba2a7882f8f7f3fe90071734d6ec660aa162929ee873f20a0f7ebcb0",
+      "after_sha256": "fa803e9cba2a7882f8f7f3fe90071734d6ec660aa162929ee873f20a0f7ebcb0",
+      "action": "ALREADY_APPLIED"
+    },
+    {
+      "path": "m3/tooling/module-packs/parser/real-providers/README.md",
+      "before_sha256": "6fc9cb143dcc9b7f475b8b0a67bbc3dd06c9cc8911910af7ad4d10521e0b0fd5",
+      "after_sha256": "6fc9cb143dcc9b7f475b8b0a67bbc3dd06c9cc8911910af7ad4d10521e0b0fd5",
+      "action": "ALREADY_APPLIED"
+    },
+    {
+      "path": "m3/tooling/module-packs/parser/real-providers/maven4/README.md",
+      "before_sha256": "2ca516f609e270927621a1e17f808673bd70cf9620347fdc1a8e86e7b33a08cd",
+      "after_sha256": "2ca516f609e270927621a1e17f808673bd70cf9620347fdc1a8e86e7b33a08cd",
+      "action": "ALREADY_APPLIED"
+    },
+    {
+      "path": "m3/tooling/module-packs/parser/real-providers/maven4/pom.xml",
+      "before_sha256": "4676935b501344ce535b3c49af87a2ba06ca413c0bd23bc20f3cf9fdbd95ad14",
+      "after_sha256": "4676935b501344ce535b3c49af87a2ba06ca413c0bd23bc20f3cf9fdbd95ad14",
+      "action": "ALREADY_APPLIED"
+    },
+    {
+      "path": "m3/tooling/module-packs/parser/real-providers/maven4/verify.py",
+      "before_sha256": "9f1d5601bf227bacb431e94cfcce2efa9484fec9fdc64c656875276ca56c6cff",
+      "after_sha256": "9f1d5601bf227bacb431e94cfcce2efa9484fec9fdc64c656875276ca56c6cff",
+      "action": "ALREADY_APPLIED"
+    },
+    {
+      "path": "m3/tooling/module-packs/parser/real-providers/src/test/java/jdk/m3/parser/tests/M3Maven4ProviderContract.java",
+      "before_sha256": "0d0e529cb57618d7a790764f2fed1089c3c18865bf8169ae6f6859e8046e5191",
+      "after_sha256": "0d0e529cb57618d7a790764f2fed1089c3c18865bf8169ae6f6859e8046e5191",
+      "action": "ALREADY_APPLIED"
+    },
+    {
+      "path": "m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3ASTAuthoritativeModels.java",
+      "before_sha256": "2814f6f292978b421cec2914cc48a96384cc3e926377b138559e287a005854c3",
+      "after_sha256": "2814f6f292978b421cec2914cc48a96384cc3e926377b138559e287a005854c3",
+      "action": "ALREADY_APPLIED"
+    }
+  ]
+}
