@@ -1,0 +1,76 @@
+{
+  "status": "PASS",
+  "scope": "fresh selected-source M3JDK21 wrapper application and target Java execution",
+  "base_pull_request": 1642,
+  "base_revision": "6d9bad615851f346e3062e3034ccd74cbe2776af",
+  "whole_repository_checkout": false,
+  "commands": 14,
+  "copier_commands": 3,
+  "fresh_exact_output_comparisons": 8,
+  "recipe_execution": "CONSUMED_EXISTING_QUALIFIED_D_OUTPUT",
+  "recipe_proof_sha256": "688e24e3c80dfa2ea64bc6cfbb952291b3eeb5898a3cd8a6e20d2565513cecfe",
+  "receiver_root": "759d990c9a943e42e9cb399ccd92b4a13ddc3feee07ba462b3645f0d5ad81ae6",
+  "target_files": [
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java",
+      "sha256": "4209587c4cc43537e1ce0d7b316d1824a4de0f25154fef1a87cbe7e9ae9871ea"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3FirstVisibleAtomContract.java",
+      "sha256": "cea097e4b1cf67a3cd2d8fdd4df5f29751db7d767daf785732c350003acede29"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3FirstVisibleAtomTest.java",
+      "sha256": "c16fa40bc6768618df372d8d43936f5761d3375c35dfeeb9da15b84dc4fcb44d"
+    }
+  ],
+  "application_receipt_sha256": {
+    "copier-check": "59e3a4f626342a4b045b7f6526d156fae2adb93388f2e63fca97876f4f981a2c",
+    "copier-apply": "0346454337d162aeeeb7c04968b6d0fda95927329b9de670092a038faa98a061",
+    "copier-replay": "66319aa1caab6373720c297838cdb5582c932288d6418714f38182b54e43610f"
+  },
+  "check_product_snapshot_unchanged": true,
+  "replay_product_snapshot_unchanged": true,
+  "unchanged_native_source_files": 5,
+  "all_excluded_native_bytes_modes_mtimes_inodes_preserved": true,
+  "focused_junit": {
+    "found": 1,
+    "succeeded": 1,
+    "skipped": 0,
+    "aborted": 0,
+    "failed": 0
+  },
+  "focused_probe_invocations": 2,
+  "normal_cases_per_probe_invocation": 64,
+  "caller_failure_cases_per_probe_invocation": 1104,
+  "focused_tape_digest": "53a3ac80b4ba43ad3df0c2397041513fb02346c2ba2cb2ddebc12b7540329b99",
+  "public_protected_api_unchanged": true,
+  "stable_read_tape_unchanged": true,
+  "exception_controls": {
+    "cases": 120,
+    "checks": 240,
+    "failures": 0
+  },
+  "preserved_known_defects": {
+    "late_range_failures": 100,
+    "real_comparator_failures": 3,
+    "initial_comparator_origin": "exact expected failure preserved"
+  },
+  "historical_three_stage_commands_reused": 44,
+  "historical_comparisons_reused": 38,
+  "historical_qualification_files_verified": 76,
+  "broad_three_stage_matrix_rerun": false,
+  "semantic_scope_exclusions": [
+    "internal stack-frame inspection including StackWalker",
+    "exhaustive allocation-failure/OOME equivalence",
+    "allocation timing"
+  ],
+  "inputs_unchanged": true,
+  "native_execution_this_run": "NONE_EXCLUDED_SOURCES_ONLY",
+  "full_jdk_build": "NOT_RUN",
+  "whole_module": "NOT_RUN",
+  "jtreg": "NOT_RUN",
+  "performance_claim": "NONE",
+  "target_metadata": "PARENT_OWNED_NOT_EDITED",
+  "target_promotion": "NOT_PERFORMED"
+}

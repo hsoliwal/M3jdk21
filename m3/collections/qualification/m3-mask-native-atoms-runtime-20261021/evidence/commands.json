@@ -1,0 +1,222 @@
+[
+  {
+    "label": "copier-check",
+    "argv": [
+      "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+      "/workspace/scratch/213cc9f26139/continuation/m3-runtime-native/evidence/build/qualified-copier/synexia-openrewrite-recipes/recipe-crates/m3-mask-native-atoms-runtime-20261021/apply_receiver.py",
+      "/workspace/scratch/213cc9f26139/continuation/m3-runtime-native/repository"
+    ],
+    "cwd": "/workspace/scratch/213cc9f26139/continuation/m3-runtime-native/evidence/build",
+    "exit_code": 0,
+    "elapsed_seconds": 0.0394351729992195,
+    "removed_ambient_environment_keys": [],
+    "stdout_sha256": "20a7260560b6f05b20a12dc0dc69f2e8af95cd8a7c3f372f09320535032c33bc",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "label": "copier-apply",
+    "argv": [
+      "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+      "/workspace/scratch/213cc9f26139/continuation/m3-runtime-native/evidence/build/qualified-copier/synexia-openrewrite-recipes/recipe-crates/m3-mask-native-atoms-runtime-20261021/apply_receiver.py",
+      "/workspace/scratch/213cc9f26139/continuation/m3-runtime-native/repository",
+      "--apply"
+    ],
+    "cwd": "/workspace/scratch/213cc9f26139/continuation/m3-runtime-native/evidence/build",
+    "exit_code": 0,
+    "elapsed_seconds": 0.035271382999781054,
+    "removed_ambient_environment_keys": [],
+    "stdout_sha256": "39e11f25b4aa0270d4dafbea116c8f43998b22a279442b87dd9d4a76791fc529",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "label": "copier-replay",
+    "argv": [
+      "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+      "/workspace/scratch/213cc9f26139/continuation/m3-runtime-native/evidence/build/qualified-copier/synexia-openrewrite-recipes/recipe-crates/m3-mask-native-atoms-runtime-20261021/apply_receiver.py",
+      "/workspace/scratch/213cc9f26139/continuation/m3-runtime-native/repository",
+      "--apply"
+    ],
+    "cwd": "/workspace/scratch/213cc9f26139/continuation/m3-runtime-native/evidence/build",
+    "exit_code": 0,
+    "elapsed_seconds": 0.04738197299957392,
+    "removed_ambient_environment_keys": [],
+    "stdout_sha256": "ecc80624289ed9259e855f275d0387e19655c9af71139e8898c75f1f0670f7b6",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "label": "java-version",
+    "argv": [
+      "/workspace/scratch/a0e8d20cc027/toolchains/jdk-21.0.12.1+1/bin/java",
+      "-XX:-UsePerfData",
+      "-version"
+    ],
+    "cwd": "/workspace/scratch/213cc9f26139/continuation/m3-runtime-native/evidence/build",
+    "exit_code": 0,
+    "elapsed_seconds": 0.024007115000131307,
+    "removed_ambient_environment_keys": [],
+    "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stderr_sha256": "5b4412738541184e84f6b2d7520d4f4a7c2a455f60650491464c61adcbbbdeb0"
+  },
+  {
+    "label": "javac-version",
+    "argv": [
+      "/workspace/scratch/a0e8d20cc027/toolchains/jdk-21.0.12.1+1/bin/javac",
+      "-J-XX:-UsePerfData",
+      "--version"
+    ],
+    "cwd": "/workspace/scratch/213cc9f26139/continuation/m3-runtime-native/evidence/build",
+    "exit_code": 0,
+    "elapsed_seconds": 0.13661500899979728,
+    "removed_ambient_environment_keys": [],
+    "stdout_sha256": "2df6b9c76e710158266aeaae8f3578eaed8ddd747a2272483506ad9a8a5e644a",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "label": "cc-version",
+    "argv": [
+      "/usr/bin/gcc",
+      "--version"
+    ],
+    "cwd": "/workspace/scratch/213cc9f26139/continuation/m3-runtime-native/evidence/build",
+    "exit_code": 0,
+    "elapsed_seconds": 0.002957923999929335,
+    "removed_ambient_environment_keys": [],
+    "stdout_sha256": "cc08f972264fd3ba58abb3ebc6337013b225be267c91d2df9f29f066284fe2b6",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "label": "compile-java",
+    "argv": [
+      "/workspace/scratch/a0e8d20cc027/toolchains/jdk-21.0.12.1+1/bin/javac",
+      "-J-XX:-UsePerfData",
+      "--release",
+      "21",
+      "-encoding",
+      "UTF-8",
+      "-Xlint:all",
+      "-Werror",
+      "-proc:none",
+      "-implicit:none",
+      "-classpath",
+      "/workspace/scratch/213cc9f26139/continuation/m3-runtime-native/evidence/build/classes",
+      "-sourcepath",
+      "",
+      "-h",
+      "/workspace/scratch/213cc9f26139/continuation/m3-runtime-native/evidence/build/headers",
+      "-d",
+      "/workspace/scratch/213cc9f26139/continuation/m3-runtime-native/evidence/build/classes",
+      "/workspace/scratch/213cc9f26139/continuation/m3-runtime-native/repository/m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java",
+      "/workspace/scratch/213cc9f26139/continuation/m3-runtime-native/repository/m3/collections/src/test/java/com/m3/collections/M3MaskPositionAtomsTest.java",
+      "/workspace/scratch/213cc9f26139/continuation/m3-runtime-native/repository/m3/collections/src/test/java/com/m3/collections/M3IndexMaskRangeNativeTest.java",
+      "/workspace/scratch/213cc9f26139/continuation/m3-runtime-native/repository/m3/collections/src/test/java/com/m3/collections/M3RequiredExcludedMaskSelectorNativeContract.java"
+    ],
+    "cwd": "/workspace/scratch/213cc9f26139/continuation/m3-runtime-native/evidence/build",
+    "exit_code": 0,
+    "elapsed_seconds": 0.8481296439986181,
+    "removed_ambient_environment_keys": [],
+    "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "label": "compile-native",
+    "argv": [
+      "/usr/bin/gcc",
+      "-std=c17",
+      "-O3",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-pedantic",
+      "-I/workspace/scratch/a0e8d20cc027/toolchains/jdk-21.0.12.1+1/include",
+      "-I/workspace/scratch/a0e8d20cc027/toolchains/jdk-21.0.12.1+1/include/linux",
+      "-fPIC",
+      "-shared",
+      "-include",
+      "/workspace/scratch/213cc9f26139/continuation/m3-runtime-native/evidence/build/headers/com_m3_collections_M3IndexMaskCompactor.h",
+      "/workspace/scratch/213cc9f26139/continuation/m3-runtime-native/repository/m3/collections/src/main/native/collections/m3_index_mask_compactor.c",
+      "-o",
+      "/workspace/scratch/213cc9f26139/continuation/m3-runtime-native/evidence/build/libm3_collections_mask.so"
+    ],
+    "cwd": "/workspace/scratch/213cc9f26139/continuation/m3-runtime-native/evidence/build",
+    "exit_code": 0,
+    "elapsed_seconds": 0.3059767769991595,
+    "removed_ambient_environment_keys": [],
+    "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "label": "exports",
+    "argv": [
+      "/usr/bin/nm",
+      "-D",
+      "--defined-only",
+      "/workspace/scratch/213cc9f26139/continuation/m3-runtime-native/evidence/build/libm3_collections_mask.so"
+    ],
+    "cwd": "/workspace/scratch/213cc9f26139/continuation/m3-runtime-native/evidence/build",
+    "exit_code": 0,
+    "elapsed_seconds": 0.0019154010005877353,
+    "removed_ambient_environment_keys": [],
+    "stdout_sha256": "b0e5c0f2ff0f0a962a58e3bd79082357e83db893e762406d50748512d1e06590",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "label": "target-M3MaskPositionAtomsTest",
+    "argv": [
+      "/workspace/scratch/a0e8d20cc027/toolchains/jdk-21.0.12.1+1/bin/java",
+      "-XX:-UsePerfData",
+      "-Xms32m",
+      "-Xmx256m",
+      "-Xcheck:jni",
+      "-Djava.library.path=/workspace/scratch/213cc9f26139/continuation/m3-runtime-native/evidence/build",
+      "-cp",
+      "/workspace/scratch/213cc9f26139/continuation/m3-runtime-native/evidence/build/classes",
+      "com.m3.collections.M3MaskPositionAtomsTest"
+    ],
+    "cwd": "/workspace/scratch/213cc9f26139/continuation/m3-runtime-native/evidence/build",
+    "exit_code": 0,
+    "elapsed_seconds": 0.37735553400125355,
+    "removed_ambient_environment_keys": [],
+    "stdout_sha256": "00d6715c4893348cb2bc486633632cecea069826d07101e491a68b7b9c7e82c2",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "label": "target-M3IndexMaskRangeNativeTest",
+    "argv": [
+      "/workspace/scratch/a0e8d20cc027/toolchains/jdk-21.0.12.1+1/bin/java",
+      "-XX:-UsePerfData",
+      "-Xms32m",
+      "-Xmx256m",
+      "-Xcheck:jni",
+      "-Djava.library.path=/workspace/scratch/213cc9f26139/continuation/m3-runtime-native/evidence/build",
+      "-cp",
+      "/workspace/scratch/213cc9f26139/continuation/m3-runtime-native/evidence/build/classes",
+      "com.m3.collections.M3IndexMaskRangeNativeTest"
+    ],
+    "cwd": "/workspace/scratch/213cc9f26139/continuation/m3-runtime-native/evidence/build",
+    "exit_code": 0,
+    "elapsed_seconds": 0.1665304100006324,
+    "removed_ambient_environment_keys": [],
+    "stdout_sha256": "f5bcf7f607e507686a3f7981703e1aa5fc0b7b4fa5c482099631b5614917ec87",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "label": "target-M3RequiredExcludedMaskSelectorNativeContract",
+    "argv": [
+      "/workspace/scratch/a0e8d20cc027/toolchains/jdk-21.0.12.1+1/bin/java",
+      "-XX:-UsePerfData",
+      "-Xms32m",
+      "-Xmx256m",
+      "-Xcheck:jni",
+      "-Djava.library.path=/workspace/scratch/213cc9f26139/continuation/m3-runtime-native/evidence/build",
+      "-cp",
+      "/workspace/scratch/213cc9f26139/continuation/m3-runtime-native/evidence/build/classes",
+      "com.m3.collections.M3RequiredExcludedMaskSelectorNativeContract"
+    ],
+    "cwd": "/workspace/scratch/213cc9f26139/continuation/m3-runtime-native/evidence/build",
+    "exit_code": 0,
+    "elapsed_seconds": 0.04700631699961377,
+    "removed_ambient_environment_keys": [],
+    "stdout_sha256": "c1a67ac51dee0798af3359903f125ca0bdf6b71f5e1f73ef666ff06dbb0147e0",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+]
