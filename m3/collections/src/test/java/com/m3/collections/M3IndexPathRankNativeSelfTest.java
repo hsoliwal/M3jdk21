@@ -49,7 +49,12 @@ public final class M3IndexPathRankNativeSelfTest {
                     required, forbidden, first, count, stride, M3IndexPathMasks.Backend.JAVA);
             int[] nativeRows = M3IndexPathMasks.select(rows, positions, stages,
                     required, forbidden, first, count, stride, M3IndexPathMasks.Backend.NATIVE_REQUIRED);
-            if (!Arrays.equals(reference, index.toArray()) || !Arrays.equals(reference, nativeRows)) {
+            int[] bulkRows = new int[index.size()];
+            index.window(0, index.sourceSize()).copySelectedRowIds(
+                    0, bulkRows, 0, bulkRows.length);
+            if (!Arrays.equals(reference, index.toArray())
+                    || !Arrays.equals(reference, bulkRows)
+                    || !Arrays.equals(reference, nativeRows)) {
                 throw new AssertionError("M3 native rank/path mask disagreement in trial " + trial);
             }
         }
