@@ -1,0 +1,5 @@
+source_or_capability	target_owner	disposition
+M3IndexMaskCompactor	com.m3.collections.M3IndexMaskCompactor	EXISTING_NAME_AND_PUBLIC_API_RETAINED
+Native mask range/window kernels	m3/collections/src/main/native/collections/m3_index_mask_compactor.c	EXISTING_SEVEN_JNI_EXPORTS_RETAINED
+Synexia M3GpuToolJoinManifest and SealReplay	Maven authoring/proof tooling only	EXACT_CUSTODY_NOT_RUNTIME_DEPENDENCY
+MIndexAST and MIndexFile	existing M3AST/M3File naming owners	NO_NEW_PORT_IN_THIS_INCREMENT
