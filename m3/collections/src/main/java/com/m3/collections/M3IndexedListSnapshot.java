@@ -303,6 +303,75 @@ public final class M3IndexedListSnapshot<E> extends AbstractList<E> implements R
                 physicalMembership);
     }
 
+    /**
+     * Stable descending order of this snapshot's physical positions.
+     *
+     * <p>Already ascending index paths reverse comparator-distinct groups in
+     * O(k) time while retaining encounter order inside equal groups.
+     * Otherwise the existing primitive stable merge sort is reused.
+     * The canonical Object[] payload, caller arrays and parent view stay intact.
+     */
+    public M3IndexedListSnapshot<E> sortedDescending(Comparator<? super E> comparator) {
+        int[] result = physicalIndices();
+        orderDescending(result, comparator);
+        return new M3IndexedListSnapshot<>(values, result, 0, result.length,
+                physicalMembership);
+    }
+
+    /** Natural Comparable descending order; never reverses equal-value encounters. */
+    public M3IndexedListSnapshot<E> sortedDescending() {
+        return sortedDescending(null);
+    }
+
+    /**
+     * Mask all 32-bit physical state planes before descending index sorting.
+     * No Java callback or object reference crosses the existing JNI boundary.
+     * The selected int[] is private, so its sort does not copy the directory.
+     */
+    public M3IndexedListSnapshot<E> sortedMaskedByPhysicalStatesDescending(
+            int[][] physicalStates, int[] requiredMasks, int[] forbiddenMasks,
+            Comparator<? super E> comparator, M3IndexPathMasks.Backend backend) {
+        M3IndexedListSnapshot<E> selected = maskedByPhysicalStates(
+                physicalStates, requiredMasks, forbiddenMasks, backend);
+        selected.orderDescending(selected.positions, comparator);
+        return selected;
+    }
+
+    /**
+     * Two deterministic paths: a linear-time reverse of ascending equality
+     * groups or the original stable int[] merge sorter with reversed operands.
+     * Operand reversal (not sign negation) handles MIN_VALUE comparison results.
+     */
+    @SuppressWarnings("unchecked")
+    private void orderDescending(int[] indices, Comparator<? super E> comparator) {
+        int length = indices.length;
+        if (length < 2) return;
+        boolean ascending = true;
+        for (int i = 1; i < length; i++) {
+            if (compare(indices[i - 1], indices[i], comparator) > 0) {
+                ascending = false;
+                break;
+            }
+        }
+        if (ascending) {
+            int[] reverseGroups = new int[length];
+            int output = 0;
+            for (int end = length; end > 0;) {
+                int begin = end - 1;
+                while (begin > 0 && compare(indices[begin - 1],
+                        indices[begin], comparator) == 0) begin--;
+                System.arraycopy(indices, begin, reverseGroups, output, end - begin);
+                output += end - begin;
+                end = begin;
+            }
+            System.arraycopy(reverseGroups, 0, indices, 0, length);
+        } else {
+            sortPositions(indices, (left, right) ->
+                    comparator != null ? comparator.compare(right, left)
+                            : ((Comparable<? super E>) right).compareTo(left));
+        }
+    }
+
     /** Stable bottom-up mergesort of physical indices with an int[] scratch lane. */
     private void sortPositions(int[] current, Comparator<? super E> comparator) {
         int length = current.length;
