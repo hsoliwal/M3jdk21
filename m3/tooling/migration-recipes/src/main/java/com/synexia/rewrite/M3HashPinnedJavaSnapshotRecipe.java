@@ -248,7 +248,7 @@ public final class M3HashPinnedJavaSnapshotRecipe
         for (String line : resource(root + "manifest.tsv").lines().toList()) {
             if (line.isBlank() || line.startsWith("#")) continue;
             String[] cells = line.split("\t", -1);
-            if (cells.length != 4 || !javaPath(cells[0]) || !paths.add(cells[0])
+            if (cells.length != 4 || !admittedPath(cells[0]) || !paths.add(cells[0])
                     || previousPath.compareTo(cells[0]) >= 0
                     || !("ABSENT".equals(cells[1]) || sha(cells[1]))
                     || !sha(cells[2]) || !cells[3].matches("[A-Za-z0-9_.-]+")) {
@@ -265,6 +265,30 @@ public final class M3HashPinnedJavaSnapshotRecipe
             throw new IllegalStateException("hash-pinned Java target budget");
         }
         return List.copyOf(targets);
+    }
+
+    /**
+     * Native sources use exact source hashes and PlainText only. The Java LST
+     * path admission and parser remain unchanged.
+     */
+    private boolean admittedPath(String path) {
+        return javaPath(path) || (!lst && nativePath(path));
+    }
+
+    private static boolean nativePath(String path) {
+        boolean owner = path.startsWith("src/java.base/share/native/")
+                || (path.startsWith("m3/") && (path.contains("/src/main/native/")
+                        || path.contains("/src/test/native/")));
+        if (!owner || !(path.endsWith(".c") || path.endsWith(".h")
+                || path.endsWith(".cc") || path.endsWith(".cpp"))
+                || path.indexOf('\\') >= 0 || path.length() > 4096) {
+            return false;
+        }
+        for (String part : path.split("/", -1)) {
+            if (!part.matches("[A-Za-z0-9_$.-]+")
+                    || part.equals(".") || part.equals("..")) return false;
+        }
+        return path.chars().noneMatch(Character::isISOControl);
     }
 
     private static boolean javaPath(String value) {
