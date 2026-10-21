@@ -4,6 +4,7 @@ on:
     paths:
       - 'src/java.base/share/classes/java/util/CollectionViews.java'
       - 'test/jdk/java/util/CollectionViews/StoredRepresentativeOracle.java'
+      - 'test/jdk/java/util/CollectionViews/FilteredSpliteratorReentrantTest.java'
       - 'm3/qualification/javautil-stored-master-20261021/**'
       - '.github/workflows/m3-javautil-stored-master-20261021.yml'
   workflow_dispatch:
