@@ -27,6 +27,7 @@ diff -u "$OUT/abi-before.txt" "$OUT/abi-after.txt" > "$OUT/abi-diff.txt"
 javac --patch-module java.base="$OUT/after-classes" --add-modules jdk.management -Xlint:all -Werror -d "$OUT/test-classes" \
     "$ROOT/test/jdk/java/util/CollectionViews/StoredRepresentativeOracle.java" \
     "$ROOT/test/jdk/java/util/CollectionViews/BootstrapViewsTest.java" \
+    "$ROOT/test/jdk/java/util/CollectionViews/RunSearchJni.java" \
     "$ROOT/test/jdk/java/util/CollectionViews/CollectionViewsContract.java"
 set +e
 java -Xint --patch-module java.base="$OUT/before-classes" -cp "$OUT/test-classes" StoredRepresentativeOracle > "$OUT/old-red.log" 2>&1
