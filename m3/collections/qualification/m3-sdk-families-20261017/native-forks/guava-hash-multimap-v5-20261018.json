@@ -1,0 +1,86 @@
+{
+  "canonical": {
+    "commit": "c7a2de8816d2097c73125bc4b8e95227b3a83605",
+    "crate": "guava-native-hash-multimap-v5-20261018",
+    "crate_url": "https://github.com/hsoliwal/com.synexia/tree/c7a2de8816d2097c73125bc4b8e95227b3a83605/synexia-openrewrite-recipes/recipe-crates/guava-native-hash-multimap-v5-20261018",
+    "publication_receipt": {
+      "bytes": 172289,
+      "git_blob": "fbd2c5ed3186e5e312ba284c8d2e3cc862cf12ca",
+      "path": "S:\\codex-work\\guava-array-multimap-one-file-20261018\\full-guava\\hash-multimap-publication-receipts\\SYNEXIA_PUBLICATION_READBACK_V1.json",
+      "sha256": "2f67a7275f056e596ff68d288833bd51c219494148550e0445185dc95efa0b44"
+    },
+    "pull_request": "https://github.com/hsoliwal/com.synexia/pull/12465",
+    "repository": "hsoliwal/com.synexia"
+  },
+  "catalogue": {
+    "git_blob": "6323376fc5e14d87d2b1c375173529473752c657",
+    "main_catalogue_bytes_changed": false,
+    "main_catalogue_rows_preserved": 107,
+    "original_hash_multimap_row": {
+      "disposition": "PENDING",
+      "existing_m3_owner": "-",
+      "proposed_m3_role_NOT_IMPLEMENTED": "M3SetMultimap",
+      "semantic_contract": "guava-mutable-set-multimap",
+      "upstream_fqcn": "com.google.common.collect.HashMultimap",
+      "vendor": "GUAVA"
+    },
+    "path": "m3/collections/qualification/m3-sdk-families-20261017/FAMILY_CATALOG.tsv",
+    "repository": "hsoliwal/M3jdk21",
+    "revision": "2fe5c0eeef02ea6f5ff6d84f7b64df6ce90e1b2b"
+  },
+  "full_superset_complete": false,
+  "native_fork": {
+    "M3SetMultimap_alias_implemented": false,
+    "base_branch": "m3/guava-33.4.8-jre-baseline",
+    "base_commit": "6dbcfdadac4a0349ff01daf9c66416a9ad4a4a71",
+    "commit": "f6d0341a226e7ba7781b702642efc6a918227fcc",
+    "coordinate": "com.google.guava:guava:33.4.8-m3-java21",
+    "feature_commit": "f6d0341a226e7ba7781b702642efc6a918227fcc",
+    "feature_tree": "053fefaaeb9389207bcd74630d7aaf77087f0be0",
+    "module": "m3-jre21",
+    "public_owner": "com.google.common.collect.HashMultimap",
+    "publication_receipt": {
+      "bytes": 10076,
+      "git_blob": "ded1228400fffd735188b75887140b4d9685631e",
+      "path": "S:\\codex-work\\guava-array-multimap-one-file-20261018\\full-guava\\hash-multimap-publication-receipts\\GUAVA_PUBLICATION_READBACK_V1.json",
+      "sha256": "b98f464fd4a7466afff87202fb2d1ce46e8b59a3d047cd7b0a93374e82e2fde3"
+    },
+    "pull_request": "https://github.com/hsoliwal/guava/pull/11",
+    "repository": "hsoliwal/guava",
+    "sources": {
+      "m3-jre21/pom.xml": {
+        "git_blob": "ff0ccd62dd1bbf2ac41f1eb46feb1cf9aee771c8",
+        "sha256": "1eb1eaee542406a349e4cc335f1fcc000a940be07a509b45708e6691470bb22e"
+      },
+      "m3-jre21/qualification/HASH_MULTIMAP_FULL_QUALIFICATION_REPORT_V5.json": {
+        "git_blob": "b3f871fbba1e5f031b6a6c29caf30ee74884aec5",
+        "sha256": "15c93d13c756cde7ebfff246cc4f52ee3e70e211c1f0cdd29d7106eaf2d81fb8"
+      },
+      "m3-jre21/src/main/java/com/google/common/collect/HashMultimap.java": {
+        "git_blob": "c2f5064afddc31359b2a2057a69917e2e424f731",
+        "sha256": "e7e5c5c0be849c73292e638053dd924402f5a8f124317812c907913f84b499a8"
+      },
+      "m3-jre21/src/main/resources/META-INF/M3-HASH-MULTIMAP-NOTICE.txt": {
+        "git_blob": "6e8aac0cdea76866b53e374792f91a03db925356",
+        "sha256": "1e903b53bf77f2aad9fc770885d420b3099e8e29ca194e2a6148aaa2905ea0ad"
+      }
+    }
+  },
+  "qualification": {
+    "artifact_sha256": "90e42d9d9eb7cb46b330905cde592b2424d1bf72f1b4b3e570cd07b58fd74b27",
+    "configured_autoreview": "NO_VERDICT_UNCHANGED",
+    "detached_stock_readability": "UNQUALIFIED_PRIVATE_VALUESET_DESCRIPTOR",
+    "fresh_receiver_sole_final_jar_cases": 16337,
+    "historical_package_cases": 16336,
+    "hosted_CI": "PENDING_NOT_CHECKED",
+    "inherited_live_entry_API_cache": "OPEN_SEPARATE_POLICY_PROOF",
+    "pom_sdk_methods": 7,
+    "pom_sha256": "1eb1eaee542406a349e4cc335f1fcc000a940be07a509b45708e6691470bb22e",
+    "report_sha256": "15c93d13c756cde7ebfff246cc4f52ee3e70e211c1f0cdd29d7106eaf2d81fb8",
+    "source_sdk_methods": 5,
+    "source_sha256": "e7e5c5c0be849c73292e638053dd924402f5a8f124317812c907913f84b499a8"
+  },
+  "schema": "M3_NATIVE_FORK_FAMILY_QUALIFICATION_V1",
+  "scope": "Native concrete Guava HashMultimap companion; no M3 alias, catalogue or java.base transition.",
+  "status": "QUALIFIED_NATIVE_FORK_PUBLISHED_DRAFT_REVIEW_PENDING"
+}
