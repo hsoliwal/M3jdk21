@@ -136,8 +136,13 @@ public interface Executor {
     void execute(Runnable command);
 
     /**
-     * An overload for monitored dispatch. Captures the caller-selected monitor
-     * before switching threads. Existing execute(Runnable) is unchanged.
+     * Dispatches a task with the caller-selected borrowed monitor.
+     * The monitor is captured before switching threads and is not completed by this overload.
+     *
+     * @param command the task to dispatch
+     * @param monitor the borrowed progress monitor
+     * @throws NullPointerException if either argument is null
+     * @throws RejectedExecutionException if the task cannot be accepted
      */
     default void execute(Runnable command, ProgressMonitor monitor) {
         java.util.Objects.requireNonNull(command, "command");
@@ -145,7 +150,13 @@ public interface Executor {
         execute(() -> ProgressMonitors.run(command, monitor));
     }
 
-    /** Capture the current lexical or process-wide monitor at submission. */
+    /**
+     * Captures the current lexical or process monitor at submission and dispatches the task.
+     *
+     * @param command the task to dispatch
+     * @throws NullPointerException if command is null
+     * @throws RejectedExecutionException if the task cannot be accepted
+     */
     default void executeWithProgress(Runnable command) {
         execute(command, ProgressMonitors.current());
     }
