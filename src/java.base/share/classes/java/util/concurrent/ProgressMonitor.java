@@ -81,4 +81,51 @@ public interface ProgressMonitor {
     default ProgressMonitor child(String name, long parentTicks, long totalWork) {
         return ProgressMonitors.child(this, name, parentTicks, totalWork);
     }
+    /**
+     * Allocates parent ticks to an unnamed child with an estimated work total.
+     *
+     * @implSpec
+     * The default implementation invokes {@link #child(String, long, long)}
+     * with a {@code null} name and the supplied budget and estimate.
+     *
+     * @param parentTicks the nonnegative work budget credited to this monitor
+     * @param totalWork the positive child work estimate, or {@link #UNKNOWN_WORK}
+     * @return the child returned by the full-argument method
+     * @throws IllegalArgumentException if the work budget or estimate is invalid
+     */
+    default ProgressMonitor child(long parentTicks, long totalWork) {
+        return child(null, parentTicks, totalWork);
+    }
+
+    /**
+     * Allocates parent ticks to a named child whose work total is unknown.
+     *
+     * @implSpec
+     * The default implementation invokes {@link #child(String, long, long)}
+     * with the supplied name and budget and {@link #UNKNOWN_WORK} as the total.
+     *
+     * @param name the child description, or {@code null} for no description
+     * @param parentTicks the nonnegative work budget credited to this monitor
+     * @return the child returned by the full-argument method
+     * @throws IllegalArgumentException if the work budget is invalid
+     */
+    default ProgressMonitor child(String name, long parentTicks) {
+        return child(name, parentTicks, UNKNOWN_WORK);
+    }
+
+    /**
+     * Allocates parent ticks to an unnamed child whose work total is unknown.
+     *
+     * @implSpec
+     * The default implementation invokes {@link #child(String, long, long)}
+     * with a {@code null} name, the supplied budget and {@link #UNKNOWN_WORK}.
+     *
+     * @param parentTicks the nonnegative work budget credited to this monitor
+     * @return the child returned by the full-argument method
+     * @throws IllegalArgumentException if the work budget is invalid
+     */
+    default ProgressMonitor child(long parentTicks) {
+        return child(null, parentTicks, UNKNOWN_WORK);
+    }
+
 }
