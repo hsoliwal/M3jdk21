@@ -50,3 +50,14 @@ The JUnit5 wrapper `M3StableGroupReversalTest` invokes the same self-test inside
 **Already executed:** a separately compiled Java21 standalone 33,410-case algorithm oracle with exact comparator transcripts, `--release 21 -Xlint:all -Werror`, PASS.
 
 **NOT YET EXECUTED:** this actual M3JDK21 owner compile and contract self-test, real Maven/OpenRewrite SDK `Recipe.run`, full M3 collections/filtered/sorted tests, source-built JDK21/JNI/HotSpot, jtreg/JCK, Windows/Android and before/after performance measurements. Promotion stays subject to these gates. Tests need the original Maven/JDK CI to run before default-branch acceptance.
+
+## Performance caution
+
+Synexia's [preliminary allocation/timing receipt](https://github.com/hsoliwal/com.synexia/blob/recipe/m3-stable-run-inplace-20261021/synexia-openrewrite-recipes/crates/m3-atom-pattern-multipass/STABLE_RUN_REVERSAL_LOCAL_MEASURES_20261021.tsv)
+measured one run on a stock Linux Java21 container. The original path allocated
+two int[n] arrays per invocation including the common caller clone; the new
+path allocated one. At n=1,024 the thread allocation was 8,224 vs 4,112 bytes.
+**Latency was worse for the candidate at several sizes**, so this PR claims
+only the structural elimination of O(n) temporary scratch, not a broad
+throughput gain. Production promotion needs repeated source-built M3JDK21
+benchmarks, memory/GC receipts and comparator/JNI contract gates.
