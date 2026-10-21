@@ -2,6 +2,8 @@
 // SPDX-License-Identifier: Apache-2.0
 package com.m3.fs;
 
+// Modified 2026-10-21: completed native inventories, exact timestamp lanes and v1-compatible persistence.
+
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.DataInputStream;
@@ -18,15 +20,15 @@ import java.util.Objects;
 
 /**
  * Versioned, immutable, array/offset/mask build facts owned by M3JDK21's M3FS.
- * The producer (M3File and M3AST/javac) supplies verified facts; this class does not
- * read source files, parse code or independently infer ABI compatibility.
+ * The producer (M3File and M3AST/javac) supplies verified facts. Native inventory capture
+ * delegates byte observation to M3FS; this class never parses code or infers ABI compatibility.
  * Dependency offsets contain the row indices on which each row depends.
  */
 public final class M3BuildState {
     public static final byte SOURCE = 1, CLASS = 2, BUILD_INPUT = 3, DEPENDENCY = 4, RESOURCE = 5;
     public static final int HASH_BYTES = 32;
     private static final int MAGIC = 0x4d334253; // M3BS
-    private static final int VERSION = 1;
+    private static final int VERSION = 2;
     private static final int MAX_KEY_BYTES = 65_535;
 
     private final String[] paths;
@@ -38,10 +40,21 @@ public final class M3BuildState {
     private final int[] offsets;
     private final int[] dependencies;
     private final byte[] contextHash;
+    private final long[] modifiedNanos;
+    private final long[] modifiedKnown;
+    private final byte[] inventoryScope;
 
     /** All input arrays are defensively copied. A zero ABI-known bit means NOT PROVEN. */
     public M3BuildState(String[] paths, byte[] roles, long[] lengths, byte[] contentHashes,
             byte[] abiHashes, long[] abiKnown, int[] offsets, int[] dependencies, byte[] contextHash) {
+        this(paths, roles, lengths, contentHashes, abiHashes, abiKnown, offsets, dependencies, contextHash,
+                new long[Objects.requireNonNull(paths, "paths").length],
+                new long[(int) ((paths.length + 63L) >>> 6)], null);
+    }
+
+    private M3BuildState(String[] paths, byte[] roles, long[] lengths, byte[] contentHashes,
+            byte[] abiHashes, long[] abiKnown, int[] offsets, int[] dependencies, byte[] contextHash,
+            long[] modifiedNanos, long[] modifiedKnown, byte[] inventoryScope) {
         this.paths = Objects.requireNonNull(paths, "paths").clone();
         this.roles = Objects.requireNonNull(roles, "roles").clone();
         this.lengths = Objects.requireNonNull(lengths, "lengths").clone();
@@ -51,6 +64,9 @@ public final class M3BuildState {
         this.offsets = Objects.requireNonNull(offsets, "offsets").clone();
         this.dependencies = Objects.requireNonNull(dependencies, "dependencies").clone();
         this.contextHash = Objects.requireNonNull(contextHash, "contextHash").clone();
+        this.modifiedNanos = Objects.requireNonNull(modifiedNanos, "modifiedNanos").clone();
+        this.modifiedKnown = Objects.requireNonNull(modifiedKnown, "modifiedKnown").clone();
+        this.inventoryScope = inventoryScope == null ? null : inventoryScope.clone();
         validate();
     }
 
@@ -60,13 +76,21 @@ public final class M3BuildState {
                 contentHashes.length != Math.multiplyExact(n, HASH_BYTES) ||
                 abiHashes.length != Math.multiplyExact(n, HASH_BYTES) ||
                 abiKnown.length != (n + 63L) / 64L || offsets.length != n + 1 ||
+                modifiedNanos.length != n || modifiedKnown.length != (n + 63L) / 64L ||
+                inventoryScope != null && inventoryScope.length != HASH_BYTES ||
                 contextHash.length != HASH_BYTES || offsets[0] != 0 || offsets[n] != dependencies.length) {
             throw new IllegalArgumentException("build state column geometry");
         }
         if (n % 64 != 0 && n != 0 && (abiKnown[abiKnown.length - 1] >>> (n & 63)) != 0) {
             throw new IllegalArgumentException("noncanonical ABI mask tail");
         }
+        if (n != 0 && (n & 63) != 0 && (modifiedKnown[modifiedKnown.length - 1] >>> (n & 63)) != 0) {
+            throw new IllegalArgumentException("noncanonical timestamp mask tail");
+        }
         for (int i = 0; i < n; i++) {
+            if (hasModifiedTime(i) ? modifiedNanos[i] < 0 : modifiedNanos[i] != 0) {
+                throw new IllegalArgumentException("invalid known or unknown timestamp");
+            }
             String key = paths[i];
             if (key == null || key.isEmpty() || key.indexOf('\0') >= 0 ||
                     key.startsWith("/") || key.indexOf('\\') >= 0 ||
@@ -150,6 +174,143 @@ public final class M3BuildState {
         return -1;
     }
 
+    /** Producer-declared complete inventory, retained by the checksum image; not authenticated provenance. */
+    public boolean completeInventory() { return inventoryScope != null; }
+    public boolean hasModifiedTime(int row) { Objects.checkIndex(row, size()); return bit(modifiedKnown, row); }
+    public java.util.OptionalLong modifiedTimeNanos(int row) {
+        return hasModifiedTime(row) ? java.util.OptionalLong.of(modifiedNanos[row]) : java.util.OptionalLong.empty();
+    }
+    public byte[] contentSha256(int row) {
+        Objects.checkIndex(row, size()); return Arrays.copyOfRange(contentHashes, row * HASH_BYTES, (row + 1) * HASH_BYTES);
+    }
+
+    /**
+     * Collects a complete native-container input inventory using the existing M3FS stream owner.
+     * Retained state and sorting scratch are O(N) primitive/reference columns, bounded by both
+     * maxImageBytes and limits.maxEntries; payload transfer remains one 64-KiB buffer.
+     * All rows are BUILD_INPUT with unknown ABI and no claimed dependency graph. The selected
+     * root must be separate from /m3-build so publication cannot become its own build input.
+     */
+    public static M3BuildState captureInventory(M3FS snapshot, String root, byte[] contextHash,
+            M3FS.InventoryLimits limits, int maxImageBytes, M3FsProgress progress) throws IOException {
+        Objects.requireNonNull(snapshot, "snapshot"); Objects.requireNonNull(root, "root");
+        Objects.requireNonNull(limits, "limits"); Objects.requireNonNull(contextHash, "contextHash");
+        if (contextHash.length != HASH_BYTES) throw new IllegalArgumentException("contextHash");
+        byte[] requestedContext = contextHash.clone();
+        if (maxImageBytes < 116) throw new IllegalArgumentException("maxImageBytes");
+        if (root.equals("/") || root.equals("/m3-build") || root.startsWith("/m3-build/")) {
+            throw new IOException("build inventory root must exclude the M3FS build-state namespace");
+        }
+        InventoryColumns columns = new InventoryColumns(maxImageBytes);
+        M3FS.InventoryReceipt complete = snapshot.scanInventory(root, limits, progress, columns::add);
+        if (complete.files() != columns.size) throw new IOException("inventory completion count mismatch");
+        String[] sorted = Arrays.copyOf(columns.paths, columns.size); Arrays.sort(sorted);
+        byte[] roles = new byte[columns.size]; Arrays.fill(roles, BUILD_INPUT);
+        long[] lengths = new long[columns.size], times = new long[columns.size];
+        byte[] hashes = new byte[Math.multiplyExact(columns.size, HASH_BYTES)];
+        long[] known = new long[(int) ((columns.size + 63L) >>> 6)];
+        for (int i = 1; i < sorted.length; i++) {
+            if (sorted[i - 1].equals(sorted[i])) throw new IOException("duplicate inventory path");
+        }
+        for (int i = 0; i < columns.size; i++) {
+            int row = Arrays.binarySearch(sorted, columns.paths[i]);
+            lengths[row] = columns.lengths[i]; times[row] = columns.times[i]; set(known, row);
+            System.arraycopy(columns.hashes, i * HASH_BYTES, hashes, row * HASH_BYTES, HASH_BYTES);
+        }
+        return new M3BuildState(sorted, roles, lengths, hashes, new byte[hashes.length],
+                new long[known.length], new int[sorted.length + 1], new int[0], requestedContext,
+                times, known, digest(complete.scope().getBytes(StandardCharsets.UTF_8)));
+    }
+
+    private static final class InventoryColumns {
+        private final int maxBytes;
+        private String[] paths = new String[0];
+        private long[] lengths = new long[0], times = new long[0];
+        private byte[] hashes = new byte[0];
+        private int size;
+        private long nameBytes;
+        private InventoryColumns(int maxBytes) { this.maxBytes = maxBytes; }
+        private void add(String path, M3FS.Stat metadata, MFileCapture capture) throws IOException {
+            long names = Math.addExact(nameBytes, encodedKey(path).length);
+            long next = (long) size + 1;
+            long required = 116L + 89L * next + 16L * ((next + 63L) >>> 6) + names;
+            if (required > maxBytes || next > Integer.MAX_VALUE / HASH_BYTES) {
+                throw new IOException("build inventory image budget exceeded");
+            }
+            if (size == paths.length) {
+                int capacity = Math.max(size + 1, (int) Math.min((long) Integer.MAX_VALUE / HASH_BYTES,
+                        Math.max(8L, (long) paths.length * 2L)));
+                // Do not let geometric spare capacity exceed the admitted image budget.
+                capacity = Math.min(capacity, Math.max(size + 1, maxBytes / 89));
+                paths = Arrays.copyOf(paths, capacity); lengths = Arrays.copyOf(lengths, capacity);
+                times = Arrays.copyOf(times, capacity); hashes = Arrays.copyOf(hashes, capacity * HASH_BYTES);
+            }
+            paths[size] = path; lengths[size] = metadata.size(); times[size] = metadata.modifiedTimeNanos();
+            System.arraycopy(capture.manifest().raw().id().bytes(), 0, hashes, size * HASH_BYTES, HASH_BYTES);
+            size++; nameBytes = names;
+        }
+    }
+
+    /**
+     * Full file-membership delta for completed inventories of the same source scope and build context.
+     * A different scope/context or legacy facts image is explicitly incomparable: no deletion mask
+     * is inferred, and the caller must rebuild its full scope. Timestamp-only changes are optional;
+     * an unknown timestamp becoming known is never interpreted as a modification by itself.
+     */
+    public InventoryDelta deltaFrom(M3BuildState previous, boolean includeTimestampChanges) {
+        if (!completeInventory()) throw new IllegalStateException("delta requires a completed inventory");
+        int oldSize = previous == null ? 0 : previous.size();
+        long[] added = new long[(int) ((size() + 63L) >>> 6)];
+        long[] modified = new long[added.length], removed = new long[(int) ((oldSize + 63L) >>> 6)];
+        if (previous != null && (!previous.completeInventory()
+                || !Arrays.equals(contextHash, previous.contextHash)
+                || !Arrays.equals(inventoryScope, previous.inventoryScope))) {
+            return new InventoryDelta(added, modified, removed, size(), oldSize, false, false);
+        }
+        int now = 0, old = 0;
+        while (now < size() || old < oldSize) {
+            int comparison = now == size() ? 1 : old == oldSize ? -1
+                    : compare(paths[now], roles[now], previous.paths[old], previous.roles[old]);
+            if (comparison < 0) { set(added, now++); }
+            else if (comparison > 0) { set(removed, old++); }
+            else {
+                if (lengths[now] != previous.lengths[old]
+                        || !sameHash(contentHashes, now, previous.contentHashes, old)
+                        || includeTimestampChanges && hasModifiedTime(now) && previous.hasModifiedTime(old)
+                            && modifiedNanos[now] != previous.modifiedNanos[old]) set(modified, now);
+                now++; old++;
+            }
+        }
+        return new InventoryDelta(added, modified, removed, size(), oldSize, true, previous == null);
+    }
+
+    /** Masks index current rows for additions/modifications and previous rows for removals. */
+    public record InventoryDelta(long[] addedMask, long[] modifiedMask, long[] removedMask,
+            int size, int previousSize, boolean comparable, boolean initial) {
+        public InventoryDelta {
+            addedMask = addedMask.clone(); modifiedMask = modifiedMask.clone(); removedMask = removedMask.clone();
+            if (size < 0 || previousSize < 0 || addedMask.length != (size + 63L) / 64L
+                    || modifiedMask.length != addedMask.length || removedMask.length != (previousSize + 63L) / 64L) {
+                throw new IllegalArgumentException("inventory delta geometry");
+            }
+        }
+        @Override public long[] addedMask() { return addedMask.clone(); }
+        @Override public long[] modifiedMask() { return modifiedMask.clone(); }
+        @Override public long[] removedMask() { return removedMask.clone(); }
+        public boolean added(int row) { Objects.checkIndex(row, size); return bit(addedMask, row); }
+        public boolean modified(int row) { Objects.checkIndex(row, size); return bit(modifiedMask, row); }
+        public boolean removed(int row) { Objects.checkIndex(row, previousSize); return bit(removedMask, row); }
+        public long changedCount() {
+            long count = 0;
+            for (long word : addedMask) count += Long.bitCount(word);
+            for (long word : modifiedMask) count += Long.bitCount(word);
+            for (long word : removedMask) count += Long.bitCount(word);
+            return count;
+        }
+        /** Whether an impact planner must evaluate this inventory; does not select rebuild scope. */
+        public boolean needsPlanning() { return initial || !comparable || changedCount() != 0; }
+    }
+
     private static boolean zeroHash(byte[] values, int row) {
         int base = row * HASH_BYTES;
         for (int i = 0; i < HASH_BYTES; i++) if (values[base + i] != 0) return false;
@@ -182,6 +343,15 @@ public final class M3BuildState {
     public Plan changedFrom(M3BuildState previous) {
         int n = size(), words = (int) ((n + 63L) >>> 6);
         long[] changed = new long[words], affected = new long[words];
+        if (completeInventory()) {
+            InventoryDelta delta = deltaFrom(previous, false);
+            if (previous != null && delta.comparable() && delta.changedCount() == 0) {
+                return new Plan(changed, affected, false, n);
+            }
+            Arrays.fill(changed, -1L);
+            if (words != 0 && (n & 63) != 0) changed[words - 1] = (1L << (n & 63)) - 1L;
+            return new Plan(changed, changed.clone(), true, n);
+        }
         if (previous == null || !Arrays.equals(contextHash, previous.contextHash) || removedFrom(previous)) {
             Arrays.fill(changed, -1L);
             if (words != 0 && (n & 63) != 0) changed[words - 1] = (1L << (n & 63)) - 1L;
@@ -267,13 +437,15 @@ public final class M3BuildState {
         if (maxBytes < HASH_BYTES + 48) throw new IllegalArgumentException("maxBytes");
         // Verify exact encoded geometry before allocating a growing output buffer.
         long required = 84L + 81L * size() + 4L * dependencies.length + 8L * abiKnown.length;
+        if (completeInventory()) required += HASH_BYTES + 8L * size() + 8L * modifiedKnown.length;
+        if (required > maxBytes) throw new IOException("build state image budget exceeded");
         for (String path : paths) {
             required = Math.addExact(required, encodedKey(path).length);
             if (required > maxBytes) throw new IOException("build state image budget exceeded");
         }
         ByteArrayOutputStream bytes = new ByteArrayOutputStream((int) required);
         try (DataOutputStream out = new DataOutputStream(bytes)) {
-            out.writeInt(MAGIC); out.writeInt(VERSION);
+            out.writeInt(MAGIC); out.writeInt(completeInventory() ? VERSION : 1);
             out.writeInt(size()); out.writeInt(dependencies.length);
             out.write(contextHash);
             for (int i = 0; i < size(); i++) {
@@ -286,6 +458,11 @@ public final class M3BuildState {
             for (long word : abiKnown) out.writeLong(word);
             for (int offset : offsets) out.writeInt(offset);
             for (int dependency : dependencies) out.writeInt(dependency);
+            if (completeInventory()) {
+                out.write(inventoryScope);
+                for (long time : modifiedNanos) out.writeLong(time);
+                for (long word : modifiedKnown) out.writeLong(word);
+            }
         }
         byte[] payload = bytes.toByteArray();
         if (payload.length > maxBytes - HASH_BYTES) throw new IOException("build state image budget exceeded");
@@ -305,12 +482,15 @@ public final class M3BuildState {
             throw new IOException("build state checksum mismatch");
         }
         try (DataInputStream in = new DataInputStream(new ByteArrayInputStream(encoded, 0, payloadEnd))) {
-            if (in.readInt() != MAGIC || in.readInt() != VERSION) throw new IOException("unknown build state schema");
+            if (in.readInt() != MAGIC) throw new IOException("unknown build state schema");
+            int version = in.readInt();
+            if (version != 1 && version != VERSION) throw new IOException("unknown build state schema");
             int n = in.readInt(), m = in.readInt();
             if (n < 0 || n > maxRows || m < 0 || m > maxEdges) throw new IOException("invalid image counts");
             // Reject impossible counts before any data-column allocation; a tiny image must
             // never cause large allocations even when the caller sets generous count caps.
-            if (52L + 82L * n + 4L * m + 8L * ((n + 63L) >>> 6) > payloadEnd) {
+            long metadataBytes = version == 1 ? 0 : HASH_BYTES + 8L * n + 8L * ((n + 63L) >>> 6);
+            if (52L + 82L * n + 4L * m + 8L * ((n + 63L) >>> 6) + metadataBytes > payloadEnd) {
                 throw new IOException("build state counts exceed sealed byte budget");
             }
             byte[] context = new byte[HASH_BYTES]; in.readFully(context);
@@ -336,8 +516,16 @@ public final class M3BuildState {
             int[] offsets = new int[n + 1], dependencies = new int[m];
             for (int i = 0; i < offsets.length; i++) offsets[i] = in.readInt();
             for (int i = 0; i < m; i++) dependencies[i] = in.readInt();
+            long[] modifiedNanos = new long[n], modifiedKnown = new long[abiKnown.length];
+            byte[] scope = null;
+            if (version == VERSION) {
+                scope = new byte[HASH_BYTES]; in.readFully(scope);
+                for (int i = 0; i < n; i++) modifiedNanos[i] = in.readLong();
+                for (int i = 0; i < modifiedKnown.length; i++) modifiedKnown[i] = in.readLong();
+            }
             if (in.read() != -1) throw new IOException("trailing build state payload");
-            return new M3BuildState(paths, roles, lengths, content, abi, abiKnown, offsets, dependencies, context);
+            return new M3BuildState(paths, roles, lengths, content, abi, abiKnown, offsets, dependencies, context,
+                    modifiedNanos, modifiedKnown, scope);
         } catch (IllegalArgumentException | ArithmeticException invalid) {
             throw new IOException("invalid build state lanes", invalid);
         }

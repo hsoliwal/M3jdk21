@@ -2,6 +2,8 @@
 // SPDX-License-Identifier: Apache-2.0
 package com.m3.file;
 
+// Modified 2026-10-21: Add explicit selection policy and file/source counts through the existing impact plan.
+
 import java.util.Objects;
 
 /**
@@ -35,11 +37,92 @@ public final class M3BuildImpactPlan {
     /** Missing proof requires conservative source/class compilation. */
     public static final int CONSERVATIVE = 1 << 4;
 
+    /** Caller policy; an explicit incremental request cannot waive correctness. */
+    public enum Mode { AUTO, FULL, INCREMENTAL }
+
+    /** Executable result, distinct from the requested policy. */
+    public enum Decision { NO_OP, INCREMENTAL, FULL }
+
+    /** First applicable rule, in the precedence documented by {@link #select}. */
+    public enum SelectionReason {
+        REQUESTED_FULL, NO_CHANGES, BUILD_INPUT_CHANGE, UNVERIFIED_GRAPH,
+        REQUESTED_INCREMENTAL, AFFECTED_FILE_THRESHOLD,
+        AFFECTED_PERCENT_THRESHOLD, BELOW_THRESHOLDS
+    }
+
+    /**
+     * Immutable build decision over the ledger's original physical slots.
+     * Counts describe this delta generation, not accumulated historical slots.
+     * Removed slots are retained separately even when no live source is selected.
+     * This value does not execute a build or publish a successful ledger baseline.
+     */
+    public static final class Selection {
+        private final Mode requestedMode;
+        private final Decision decision;
+        private final SelectionReason reason;
+        private final int totalLiveFiles;
+        private final int totalLiveSources;
+        private final int createdFiles;
+        private final int modifiedFiles;
+        private final int removedFiles;
+        private final int[] affectedSourceSlots;
+        private final int[] selectedSourceSlots;
+        private final int[] removedSlots;
+
+        private Selection(Mode requestedMode, Decision decision, SelectionReason reason,
+                int totalLiveFiles, int totalLiveSources, int createdFiles,
+                int modifiedFiles, int removedFiles, int[] affectedSourceSlots,
+                int[] selectedSourceSlots, int[] removedSlots) {
+            this.requestedMode = requestedMode;
+            this.decision = decision;
+            this.reason = reason;
+            this.totalLiveFiles = totalLiveFiles;
+            this.totalLiveSources = totalLiveSources;
+            this.createdFiles = createdFiles;
+            this.modifiedFiles = modifiedFiles;
+            this.removedFiles = removedFiles;
+            this.affectedSourceSlots = affectedSourceSlots;
+            this.selectedSourceSlots = selectedSourceSlots;
+            this.removedSlots = removedSlots;
+        }
+
+        public Mode requestedMode() { return requestedMode; }
+        public Decision decision() { return decision; }
+        public SelectionReason reason() { return reason; }
+        /** True for cleanup-only work and for an explicit full request as well. */
+        public boolean hasWork() { return decision != Decision.NO_OP; }
+        /** All live SOURCE, CLASS and BUILD_INPUT files; tombstones are excluded. */
+        public int totalLiveFiles() { return totalLiveFiles; }
+        public int totalLiveSources() { return totalLiveSources; }
+        /** Direct created files of every tracked kind, without dependent fanout. */
+        public int createdFiles() { return createdFiles; }
+        /** Direct modified files of every tracked kind, without dependent fanout. */
+        public int modifiedFiles() { return modifiedFiles; }
+        /** Direct removals of every tracked kind in this generation only. */
+        public int removedFiles() { return removedFiles; }
+        public int directChangedFiles() { return createdFiles + modifiedFiles + removedFiles; }
+        public int affectedSourceCount() { return affectedSourceSlots.length; }
+        public int selectedSourceCount() { return selectedSourceSlots.length; }
+        public double affectedSourcePercent() {
+            return totalLiveSources == 0 ? 0.0
+                    : 100.0 * affectedSourceSlots.length / totalLiveSources;
+        }
+        /** Live source closure already computed by this impact plan. */
+        public int[] affectedSourceSlots() { return affectedSourceSlots.clone(); }
+        /** Ascending physical slots to compile; empty does not imply no work. */
+        public int[] selectedSourceSlots() { return selectedSourceSlots.clone(); }
+        /** Original physical slots whose outputs may need deletion or cleanup. */
+        public int[] removedSlots() { return removedSlots.clone(); }
+    }
+
+    private final M3FileDeltaLedger.Snapshot sourceSnapshot;
     private final byte[] reasons;
     private final int[] impactedSlots;
     private final boolean fullRebuild;
 
-    private M3BuildImpactPlan(byte[] reasons, int[] impactedSlots, boolean fullRebuild) {
+    private M3BuildImpactPlan(M3FileDeltaLedger.Snapshot snapshot,
+            byte[] reasons, int[] impactedSlots, boolean fullRebuild) {
+        this.sourceSnapshot = snapshot;
         this.reasons = reasons;
         this.impactedSlots = impactedSlots;
         this.fullRebuild = fullRebuild;
@@ -52,6 +135,122 @@ public final class M3BuildImpactPlan {
     public boolean requiresConservativeBuild() { return fullRebuild; }
     public int reasonAt(int physicalSlot) {
         return Byte.toUnsignedInt(reasons[Objects.checkIndex(physicalSlot, reasons.length)]);
+    }
+
+    /**
+     * Select work without introducing another graph or persisted state store.
+     * The caller must supply the exact immutable snapshot instance used by
+     * {@link #compute}; the plan retains one reference, not a copy of file payloads.
+     * Identity, slot dimensions and direct delta/kind masks are checked before
+     * selection. These checks do not certify the caller's semantic graph or
+     * toolchain proof.
+     *
+     * <p>FULL selects every live SOURCE even with no deltas. Otherwise an empty
+     * impact plan is NO_OP. A conservative plan then forces FULL, including for
+     * requested INCREMENTAL; a changed build input takes reason precedence over
+     * an unverified graph. Requested INCREMENTAL bypasses only the cost policy.
+     *
+     * <p>In AUTO, either inclusive threshold can choose FULL. The file threshold
+     * counts affected live SOURCE files; the percentage uses all live SOURCE
+     * files as its denominator, never historical slots or generated class files.
+     * A value of -1 disables that threshold. The file threshold is otherwise
+     * nonnegative; the percentage must be finite and in [0, 100]. If both are
+     * reached, the file threshold supplies the reason. Thresholds are considered
+     * only when at least one live source is affected; deletion-only work still
+     * yields INCREMENTAL with removal slots, not NO_OP.
+     */
+    public Selection select(M3FileDeltaLedger.Snapshot snapshot, Mode mode,
+            int affectedFileThreshold, double affectedPercentThreshold) {
+        Objects.requireNonNull(snapshot, "snapshot");
+        Objects.requireNonNull(mode, "mode");
+        if (affectedFileThreshold < -1 || !Double.isFinite(affectedPercentThreshold)
+                || (affectedPercentThreshold != -1.0
+                    && (affectedPercentThreshold < 0.0 || affectedPercentThreshold > 100.0))) {
+            throw new IllegalArgumentException("invalid M3 affected-source thresholds");
+        }
+        if (snapshot.slots() != reasons.length) {
+            throw new IllegalArgumentException("file plan/snapshot slot dimensions differ");
+        }
+        if (snapshot != sourceSnapshot) {
+            throw new IllegalArgumentException("file plan belongs to different snapshot instance");
+        }
+        int liveFiles = 0, liveSources = 0, created = 0, modified = 0, removed = 0;
+        boolean buildInputChange = false;
+        for (int slot = 0; slot < reasons.length; slot++) {
+            int direct = reasons[slot] & (SOURCE_DELTA | CLASS_DELTA | BUILD_INPUT_DELTA);
+            int expected = snapshot.changedAt(slot) ? switch (snapshot.kindAt(slot)) {
+                case SOURCE -> SOURCE_DELTA;
+                case CLASS -> CLASS_DELTA;
+                case BUILD_INPUT -> BUILD_INPUT_DELTA;
+            } : 0;
+            if (direct != expected) {
+                throw new IllegalArgumentException("file plan belongs to different delta generation");
+            }
+            if (direct == BUILD_INPUT_DELTA) buildInputChange = true;
+            long state = snapshot.stateAt(slot);
+            if ((state & M3FileDeltaLedger.LIVE) != 0) {
+                liveFiles++;
+                if (snapshot.kindAt(slot) == M3FileDeltaLedger.Kind.SOURCE) liveSources++;
+            }
+            if ((state & M3FileDeltaLedger.CREATED) != 0) created++;
+            if ((state & M3FileDeltaLedger.MODIFIED) != 0) modified++;
+            if ((state & M3FileDeltaLedger.REMOVED) != 0) removed++;
+        }
+        int affected = 0;
+        for (int slot : impactedSlots) {
+            if (snapshot.liveAt(slot) && snapshot.kindAt(slot) == M3FileDeltaLedger.Kind.SOURCE) {
+                affected++;
+            }
+        }
+        int[] affectedSources = new int[affected];
+        int affectedAt = 0;
+        for (int slot : impactedSlots) {
+            if (snapshot.liveAt(slot) && snapshot.kindAt(slot) == M3FileDeltaLedger.Kind.SOURCE) {
+                affectedSources[affectedAt++] = slot;
+            }
+        }
+        Decision decision;
+        SelectionReason reason;
+        if (mode == Mode.FULL) {
+            decision = Decision.FULL;
+            reason = SelectionReason.REQUESTED_FULL;
+        } else if (isEmpty()) {
+            decision = Decision.NO_OP;
+            reason = SelectionReason.NO_CHANGES;
+        } else if (requiresConservativeBuild()) {
+            decision = Decision.FULL;
+            reason = buildInputChange ? SelectionReason.BUILD_INPUT_CHANGE
+                    : SelectionReason.UNVERIFIED_GRAPH;
+        } else if (mode == Mode.INCREMENTAL) {
+            decision = Decision.INCREMENTAL;
+            reason = SelectionReason.REQUESTED_INCREMENTAL;
+        } else if (affectedSources.length > 0 && affectedFileThreshold >= 0
+                && affectedSources.length >= affectedFileThreshold) {
+            decision = Decision.FULL;
+            reason = SelectionReason.AFFECTED_FILE_THRESHOLD;
+        } else if (affectedSources.length > 0 && affectedPercentThreshold >= 0.0
+                && 100.0 * affectedSources.length >= affectedPercentThreshold * liveSources) {
+            decision = Decision.FULL;
+            reason = SelectionReason.AFFECTED_PERCENT_THRESHOLD;
+        } else {
+            decision = Decision.INCREMENTAL;
+            reason = SelectionReason.BELOW_THRESHOLDS;
+        }
+        int[] selectedSources = affectedSources;
+        if (decision == Decision.FULL) {
+            selectedSources = new int[liveSources];
+            for (int slot = 0, at = 0; slot < reasons.length; slot++) {
+                if (snapshot.liveAt(slot) && snapshot.kindAt(slot) == M3FileDeltaLedger.Kind.SOURCE) {
+                    selectedSources[at++] = slot;
+                }
+            }
+        }
+        int[] removedSlots = new int[removed];
+        for (int slot = 0, at = 0; slot < reasons.length; slot++) {
+            if ((snapshot.stateAt(slot) & M3FileDeltaLedger.REMOVED) != 0) removedSlots[at++] = slot;
+        }
+        return new Selection(mode, decision, reason, liveFiles, liveSources, created,
+                modified, removed, affectedSources, selectedSources, removedSlots);
     }
 
     /**
@@ -93,7 +292,7 @@ public final class M3BuildImpactPlan {
             bits[slot] = (byte) reason;
             if (reason == BUILD_INPUT_DELTA) buildInputChange = true;
         }
-        if (!changed) return new M3BuildImpactPlan(bits, new int[0], false);
+        if (!changed) return new M3BuildImpactPlan(snapshot, bits, new int[0], false);
 
         boolean conservative = !verified || buildInputChange;
         if (conservative) {
@@ -136,7 +335,7 @@ public final class M3BuildImpactPlan {
         for (int slot = 0, out = 0; slot < count; slot++) {
             if (bits[slot] != 0) selected[out++] = slot;
         }
-        return new M3BuildImpactPlan(bits, selected, conservative);
+        return new M3BuildImpactPlan(snapshot, bits, selected, conservative);
     }
 
     private static void validate(int count, int[] offsets, int[] targets, byte[] safe) {

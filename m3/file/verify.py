@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 # Copyright 2026 Hitesh Soliwal and contributors
 # SPDX-License-Identifier: Apache-2.0
+# Modified 2026-10-21: Execute existing and new module contracts on host and linked images.
 """Compile the existing file module, run its independent contract, and check a linked image."""
 
 import argparse
@@ -38,7 +39,8 @@ def main():
         'source_class_correspondence': ('EXTERNAL_BUILD_RESPONSIBILITY' if args.classes
                                         else 'THIS_RUN_JAVAC_COMMAND'),
         'full_m3jdk21_bootstrap': 'NOT_RUN',
-        'maven_gradle_planners': 'NOT_IMPLEMENTED',
+        'maven_fork_execution': 'SEPARATE_GATE',
+        'semantic_graph_coverage': 'FIXTURE_ONLY_NO_PRODUCTION_COMPLETENESS_CLAIM',
         'hosted_exact_head': 'PENDING',
     }
 
@@ -67,6 +69,7 @@ def main():
     def input_paths():
         return [*sorted((root / 'src/main/java').rglob('*.java')),
                 *sorted((root / 'verification/src/test/java').rglob('*.java')),
+                *sorted((root / 'src/test/java').rglob('*.java')),
                 Path(__file__).resolve()]
 
     def class_hashes(directory):
@@ -157,6 +160,49 @@ def main():
         if 'M3FileDeltaContract: PASS;' not in host:
             raise RuntimeError('contract success marker missing')
         receipt['host_result'] = host.strip()
+        module_tests = output / 'module-tests'
+        if module_tests.exists():
+            if module_tests.is_symlink() or module_tests.parent != output:
+                raise RuntimeError('unsafe module contract classes path')
+            shutil.rmtree(module_tests)
+        module_tests.mkdir()
+        test_sources = sorted((root / 'src/test/java').rglob('*.java'))
+        contracts = {
+            'M3FileDeltaLedgerContract': 'M3_FILE_DELTA_PASS',
+            'M3BuildImpactPlanContract': 'M3_BUILD_IMPACT_PASS',
+            'M3FileBuildImpactContract': 'M3_FILE_IMPACT_PASS',
+            'M3ReactorImpactPlanContract': 'M3_REACTOR_IMPACT_PASS',
+            'M3FileStreamsContract': 'M3_FILE_SHADOW_STREAM_PASS',
+            'M3ShadowStreamsContract': 'M3_SHADOW_STREAM_PASS',
+            'M3FileWatcherContract': 'M3_FILE_WATCHER_PASS',
+            'M3ProjectDeltaPermutationContract': 'M3_PROJECT_DELTA_PERMUTATION_PASS',
+        }
+        if {path.stem for path in test_sources} != set(contracts):
+            raise RuntimeError('module contract inventory changed; review each executable contract')
+        run('compile-module-contracts', [tool('javac'), '--release', '21', '-Xlint:all,-module', '-Werror',
+                '--module-path', module_jar, '--patch-module', 'com.m3.file=' + str(root / 'src/test/java'),
+                '-d', module_tests, *test_sources])
+        module_test_hashes = class_hashes(module_tests)
+        receipt['module_contract_class_files'] = module_test_hashes
+        temporary_tests = output / 'runtime-temporary'
+        temporary_tests.mkdir(exist_ok=True)
+
+        def module_contracts(java, lane, module_path):
+            outputs = {}
+            for name, marker in contracts.items():
+                command = [java, '-Djava.io.tmpdir=' + str(temporary_tests)]
+                if module_path:
+                    command += ['--module-path', module_path]
+                command += ['--add-modules', 'com.m3.file,jdk.compiler,jdk.zipfs', '--patch-module',
+                            'com.m3.file=' + str(module_tests), '-m', 'com.m3.file/com.m3.file.' + name]
+                text = run(lane + '-' + name, command)
+                if marker not in text:
+                    raise RuntimeError('contract success marker missing: ' + name)
+                outputs[name] = text.strip()
+            return outputs
+
+        receipt['host_module_contracts'] = module_contracts(tool('java'), 'host', module_jar)
+        write_receipt()
         image = output / 'image'
         if image.exists():
             if image.is_symlink() or image.parent != output:
@@ -172,6 +218,9 @@ def main():
                                        'com.m3.file,jdk.compiler', '-cp', tests, main_class])
         if 'M3FileDeltaContract: PASS;' not in linked:
             raise RuntimeError('linked-image contract success marker missing')
+        receipt['image_module_contracts'] = module_contracts(image / 'bin' / ('java' + suffix), 'image', None)
+        if class_hashes(module_tests) != module_test_hashes:
+            raise RuntimeError('compiled module contract classes changed during qualification')
         if hashes(input_paths(), root) != inputs:
             raise RuntimeError('source, contract or verifier changed during qualification')
         if class_hashes(classes) != admitted_classes:
