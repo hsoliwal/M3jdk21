@@ -36,6 +36,7 @@ COMPILER_SOURCES = (
     "com/sun/tools/javac/main/JavaCompiler.java",
 )
 CONTRACTS = (
+    ("jdk.m3.parser.test.M3ASTDeltaContract", "M3_AST_DELTA_PASS"),
     ("jdk.m3.parser.test.M3ParserFrameworkContract", "M3_PARSER_FRAMEWORK_PASS"),
     ("jdk.m3.parser.test.M3JavacParserContract", "M3_JAVAC_PARSER_PASS"),
     ("jdk.m3.parser.test.M3CrossFrontendContract", "M3_AST_MULTIFRONTEND_PASS"),

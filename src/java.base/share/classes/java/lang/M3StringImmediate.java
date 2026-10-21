@@ -34,9 +34,9 @@ import java.util.Objects;
  * <p>HotSpot decodes the same layout in {@code java_lang_M3String::immediate_char_at}
  * (javaClasses.cpp); both sides change together.</p>
  */
-//FLLDCIM: IOP — pattern=M3StringOwnerKinds role=ImmediateOwner contract=M3StringOwner(charAt,getChars,computeFacts,computeRangeFacts)
-//FLLDCIM: HPCPOP — hot path; pack/unit/charAt allocate nothing
-//FLLDCIM: E14 — no magic numbers: every width, mask and multiplier below is a named constant
+//FLLDCIM: IOP \u2014 pattern=M3StringOwnerKinds role=ImmediateOwner contract=M3StringOwner(charAt,getChars,computeFacts,computeRangeFacts)
+//FLLDCIM: HPCPOP \u2014 hot path; pack/unit/charAt allocate nothing
+//FLLDCIM: E14 \u2014 no magic numbers: every width, mask and multiplier below is a named constant
 final class M3StringImmediate extends M3StringOwner {
     static final int TAG_BITS = 3;
     static final int TAG_SHIFT = Long.SIZE - TAG_BITS;
@@ -89,7 +89,7 @@ final class M3StringImmediate extends M3StringOwner {
     }
 
     /** The owner for an admitted packed value; {@code packed} must come from a pack method. */
-    //FLLDCIM: ATOM — of: packed -> owner (length + String.hashCode parity)
+    //FLLDCIM: ATOM \u2014 of: packed -> owner (length + String.hashCode parity)
     static M3StringImmediate of(long packed) {
         int length = length(packed);
         int hash = 0;
@@ -107,7 +107,7 @@ final class M3StringImmediate extends M3StringOwner {
         return new M3StringImmediate(packed, length, hash);
     }
 
-    //FLLDCIM: ATOM — pack: four source kinds, one canonical packed value or NONE
+    //FLLDCIM: ATOM \u2014 pack: four source kinds, one canonical packed value or NONE
     static long packCompactBytes(byte[] source, int offset, int length, byte coder) {
         return pack(coder == String.LATIN1 ? KIND_LATIN1_BYTES : KIND_UTF16_BYTES,
                 source, offset, length);
@@ -123,7 +123,7 @@ final class M3StringImmediate extends M3StringOwner {
     }
 
     /** Unit count of an admitted packed value. */
-    //FLLDCIM: ATOM — length: LATIN1 field, IDENT digit count
+    //FLLDCIM: ATOM \u2014 length: LATIN1 field, IDENT digit count
     static int length(long packed) {
         long tag = packed & TAG_MASK;
         if (tag == TAG_LATIN1) {
@@ -140,7 +140,7 @@ final class M3StringImmediate extends M3StringOwner {
     }
 
     /** Unit {@code index} of an admitted packed value; the bounds are the caller's. */
-    //FLLDCIM: ATOM — unit: O(1) LATIN1 shift, O(index) IDENT digit walk (index below IDENT_MAX)
+    //FLLDCIM: ATOM \u2014 unit: O(1) LATIN1 shift, O(index) IDENT digit walk (index below IDENT_MAX)
     static char unit(long packed, int index) {
         if (isLatin1(packed)) {
             return latin1Unit(packed, index);
@@ -153,7 +153,7 @@ final class M3StringImmediate extends M3StringOwner {
     }
 
     /** Equal text of two whole immediate owners is equal packed values (canonical profile). */
-    //FLLDCIM: ATOM — sameText: identity of text = equality of packed words
+    //FLLDCIM: ATOM \u2014 sameText: identity of text = equality of packed words
     static boolean sameText(M3StringOwner left, M3StringOwner right) {
         return left instanceof M3StringImmediate a
                 && right instanceof M3StringImmediate b

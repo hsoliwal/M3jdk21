@@ -67,6 +67,110 @@ public final class M3ASTIndex {
         return source.subSequence(starts[node], ends[node]);
     }
     public long primitiveBytes() { return (long) kinds.length * 8L * Integer.BYTES; }
+
+    /**
+     * SHA-256 of the versioned domain, node kinds and ordered tree topology.
+     * Source characters, source ranges and flags are excluded. Equal structure
+     * hashes never certify source, binding, ABI or build-context equivalence.
+     * Encoding uses length-prefixed UTF-16 code units and big-endian integers.
+     * This is an explicit O(nodes + kind text) observation with bounded scratch.
+     */
+    public String structureSha256() {
+        java.security.MessageDigest digest;
+        try { digest = java.security.MessageDigest.getInstance("SHA-256"); }
+        catch (java.security.NoSuchAlgorithmException impossible) { throw new AssertionError(impossible); }
+        hashText(digest, "M3AST_STRUCTURE_V1");
+        hashText(digest, domain.name());
+        hashInt(digest, kinds.length);
+        for (int i = 0; i < kinds.length; i++) {
+            hashText(digest, names[kinds[i]]);
+            hashInt(digest, parents[i]);
+            hashInt(digest, first[i]);
+            hashInt(digest, next[i]);
+            hashInt(digest, childCounts[i]);
+        }
+        return java.util.HexFormat.of().formatHex(digest.digest());
+    }
+
+    /**
+     * Exact comparison of two immutable indices for the same URI and domain.
+     * Uses actual lanes and kind strings, never a digest as equality proof.
+     * Occurrence rows are generation-local: an insertion can shift later rows;
+     * this is a bounded row delta, not a minimal edit script or a stable node ID.
+     * Source changes are reported independently even when indexed rows match.
+     * Parser/options/binding context is still the original provider's authority.
+     */
+    public Delta deltaFrom(M3ASTIndex previous) {
+        Objects.requireNonNull(previous, "previous");
+        if (domain != previous.domain || !source.uri().equals(previous.source.uri())) {
+            throw new IllegalArgumentException("different AST source identity or domain");
+        }
+        byte[] states = new byte[Math.max(kinds.length, previous.kinds.length)];
+        for (int i = 0; i < states.length; i++) {
+            if (i >= previous.kinds.length) { states[i] = Delta.ADDED; continue; }
+            if (i >= kinds.length) { states[i] = Delta.REMOVED; continue; }
+            int state = 0;
+            if (!names[kinds[i]].equals(previous.names[previous.kinds[i]])
+                    || parents[i] != previous.parents[i] || first[i] != previous.first[i]
+                    || next[i] != previous.next[i] || childCounts[i] != previous.childCounts[i]) {
+                state |= Delta.STRUCTURE;
+            }
+            if (starts[i] != previous.starts[i] || ends[i] != previous.ends[i]) state |= Delta.RANGE;
+            if (flags[i] != previous.flags[i]) state |= Delta.FLAGS;
+            states[i] = (byte) state;
+        }
+        return new Delta(previous.kinds.length, kinds.length,
+                !source.text().equals(previous.source.text()), states);
+    }
+
+    /** Immutable downstream change mask; retains no AST, provider or source payload. */
+    public static final class Delta {
+        public static final byte ADDED = 1;
+        public static final byte REMOVED = 2;
+        public static final byte STRUCTURE = 4;
+        public static final byte RANGE = 8;
+        public static final byte FLAGS = 16;
+        private final int previousCount, currentCount;
+        private final boolean sourceChanged;
+        private final byte[] states;
+
+        private Delta(int previousCount, int currentCount, boolean sourceChanged, byte[] states) {
+            this.previousCount = previousCount;
+            this.currentCount = currentCount;
+            this.sourceChanged = sourceChanged;
+            this.states = states;
+        }
+        public int previousNodeCount() { return previousCount; }
+        public int currentNodeCount() { return currentCount; }
+        public int rows() { return states.length; }
+        public boolean sourceChanged() { return sourceChanged; }
+        public int stateAt(int row) { return states[Objects.checkIndex(row, states.length)]; }
+        /** Fresh caller-owned, ascending row indices. */
+        public int[] changedRows() {
+            int count = 0;
+            for (byte state : states) if (state != 0) count++;
+            int[] rows = new int[count];
+            for (int i = 0, at = 0; i < states.length; i++) if (states[i] != 0) rows[at++] = i;
+            return rows;
+        }
+    }
+
+    private static void hashInt(java.security.MessageDigest digest, int value) {
+        digest.update((byte) (value >>> 24));
+        digest.update((byte) (value >>> 16));
+        digest.update((byte) (value >>> 8));
+        digest.update((byte) value);
+    }
+
+    private static void hashText(java.security.MessageDigest digest, String value) {
+        hashInt(digest, value.length());
+        for (int i = 0; i < value.length(); i++) {
+            char unit = value.charAt(i);
+            digest.update((byte) (unit >>> 8));
+            digest.update((byte) unit);
+        }
+    }
+
     private int check(int node) { return Objects.checkIndex(node, kinds.length); }
 
     /** Bounded, single-owner creation; discarded immediately after immutable publication. */

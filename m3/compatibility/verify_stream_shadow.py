@@ -27,10 +27,11 @@ run('compile-stream-test',[a.jdk/'bin/javac','-Xlint:all','-Werror','--patch-mod
 for mode,flags in [('mixed',[]),('interpreted',['-Xint'])]:
  run('stream-'+mode,[a.jdk/'bin/java',*flags,'-Xcheck:jni','--patch-module','java.base='+str(out/'patch'),'-cp',out/'tests','M3StreamProgressShadow'])
 filetest=root/'m3/file/src/test/java/com/m3/file/M3FileTraversalTest.java'
-run('compile-file-module',[a.jdk/'bin/javac','-Xlint:all,-module','-Werror','-d',out/'file-module',root/'m3/file/src/main/java/module-info.java',root/'m3/file/src/main/java/com/m3/file/M3File.java'])
+file_sources=sorted((root/'m3/file/src/main/java').rglob('*.java'))
+run('compile-file-module',[a.jdk/'bin/javac','-Xlint:all,-module','-Werror','-d',out/'file-module',*file_sources])
 run('compile-traversal-test',[a.jdk/'bin/javac','-Xlint:all','-Werror','-cp',out/'file-module','-d',out/'tests',filetest])
 run('traversal',[a.jdk/'bin/java','-Xcheck:jni','--module-path',out/'file-module','--add-modules','com.m3.file','--patch-module','com.m3.file='+str(out/'tests'),'-m','com.m3.file/com.m3.file.M3FileTraversalTest'])
-for s in [streamtest,filetest,root/'m3/file/src/main/java/com/m3/file/M3File.java']:
+for s in [streamtest,filetest,*file_sources]:
  seals[str(s.relative_to(root))]=hashlib.sha256(s.read_bytes()).hexdigest()
 (out/'source-seals.json').write_text(json.dumps(seals,indent=2,sort_keys=True)+'\n')
 print('STREAM_SHADOW_TARGET_PASS commands='+str(len(commands)))
