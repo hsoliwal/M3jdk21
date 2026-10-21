@@ -225,13 +225,16 @@ public final class M3IndexedArray<E> {
             }
         }
         final int newLength = (int) Math.min(MAX_ARRAY_SIZE, proposed);
+        // values.length is the committed capacity. Grow every metadata lane
+        // first so an allocation failure leaves all committed slots usable.
+        // Retain completed lane growth for a retry instead of recopying it.
+        if (states.length < newLength) states = Arrays.copyOf(states, newLength);
+        if (generations.length < newLength) generations = Arrays.copyOf(generations, newLength);
+        if (leaseCounts.length < newLength) leaseCounts = Arrays.copyOf(leaseCounts, newLength);
+        if (freeLinks.length < newLength) freeLinks = Arrays.copyOf(freeLinks, newLength);
+        if (positions.length < newLength) positions = Arrays.copyOf(positions, newLength);
+        if (order.length < newLength) order = Arrays.copyOf(order, newLength);
         values = Arrays.copyOf(values, newLength);
-        states = Arrays.copyOf(states, newLength);
-        generations = Arrays.copyOf(generations, newLength);
-        leaseCounts = Arrays.copyOf(leaseCounts, newLength);
-        freeLinks = Arrays.copyOf(freeLinks, newLength);
-        positions = Arrays.copyOf(positions, newLength);
-        order = Arrays.copyOf(order, newLength);
     }
 
     private int validSlot(long handle) {
