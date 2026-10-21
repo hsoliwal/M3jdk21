@@ -1,0 +1,8 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.rewrite.M3FilteredStoredRepresentative20261021
+displayName: M3JDK21 sorted-backed Set comparator representative
+description: Exact source-pinned Java LST refinement of existing filtered collection membership.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: m3-filtered-representative-20261021
+      lst: true
