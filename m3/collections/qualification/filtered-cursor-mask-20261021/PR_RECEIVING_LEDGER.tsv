@@ -1,0 +1,14 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright 2026 Hitesh Soliwal and contributors.
+# Review date: 2026-10-21. Never claim ancestral merge means qualified product transfer.
+source	status	intersection	disposition	rationale
+hsoliwal/M3jdk21#1720	MERGED	M3MaskViewportKernel	ALREADY_IN_BASE	Qualified viewport page atom has separate existing owner; not copied again
+hsoliwal/M3jdk21#1738	OPEN_DRAFT	M3IndexPathRank and tests	PENDING_DIRECT_RECEIPT	Disjoint index/rank bulk candidate; keep source seals and gates, not reimplemented here
+hsoliwal/M3jdk21#1757	OPEN_DRAFT	M3IndexedListSnapshot and tests	PENDING_DIRECT_RECEIPT	Disjoint stable-sort bitmap candidate; current M3Sorted comparator contracts preserved
+hsoliwal/M3jdk21#1619	OPEN	M3FilteredViews plus other owners	HISTORICAL_OVERLAP_HOLD	478-path branch changes may differ behavior and JDK contracts; do not overwrite current master
+hsoliwal/M3jdk21#1631	OPEN	M3FilteredViews and sorted providers	HISTORICAL_OVERLAP_HOLD	Exception-origin/radix proposals demand explicit forward comparison
+hsoliwal/M3jdk21#1515	OPEN	Filtered cursor and sorted provider families	HISTORICAL_OVERLAP_HOLD	Earlier versions and COW mutation proposals require exact public/exception review
+hsoliwal/M3jdk21#1603	OPEN	Filtered/sorted owner merge proposals	HISTORICAL_OVERLAP_HOLD	No automatic replacement of current owner behavior
+hsoliwal/com.synexia#12834	OPEN_DRAFT	Canonical index rank bulk	RECIPE_REUSE	Separate recipe and tests, not imported as new runtime module
+hsoliwal/com.synexia#12854	OPEN_DRAFT	Canonical stable group sort	RECIPE_REUSE	Separate recipe and tests, no sorting comparator edits in this slice
+hsoliwal/com.synexia#12819	OPEN_DRAFT	Regex/String mastery	OUT_OF_SCOPE_THIS_SLICE	Active String phase remains distinct
