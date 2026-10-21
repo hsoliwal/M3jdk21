@@ -168,6 +168,31 @@ public final class M3IndexedLiveView<E> extends AbstractList<E> implements Rando
     /** Detached primitive positions, not a payload-array copy. */
     public int[] physicalIndices() { refresh(); return physical.clone(); }
 
+    /**
+     * Copy only the required resident page of selected physical positions.
+     * The parent M3ArrayList still owns the sole Object[] payload; this
+     * operation neither copies values nor changes public List behavior.
+     *
+     * <p>Validation is complete before the first destination write.
+     * Filtering/sorting refresh and callback epoch checks use the incumbent
+     * logic; the visible-page transfer is one arraycopy, O(page) instead of
+     * cloning the entire O(selected) index directory. The caller owns
+     * synchronization against concurrent mutation, as in other live reads.</p>
+     *
+     * @return physical positions copied, at most maxCount
+     */
+    int copyPhysicalWindow(int firstOrdinal, int maxCount,
+            int[] destination, int destinationOffset) {
+        Objects.requireNonNull(destination, "destination");
+        refresh();
+        Objects.checkFromIndexSize(firstOrdinal, 0, physical.length);
+        if (maxCount < 0) throw new IndexOutOfBoundsException("negative page size");
+        int length = Math.min(maxCount, physical.length - firstOrdinal);
+        Objects.checkFromIndexSize(destinationOffset, length, destination.length);
+        System.arraycopy(physical, firstOrdinal, destination, destinationOffset, length);
+        return length;
+    }
+
     @Override public Iterator<E> iterator() { return listIterator(0); }
 
     @Override public ListIterator<E> listIterator(int begin) {
