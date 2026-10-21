@@ -1,0 +1,142 @@
+{
+  "schema": "M3_RECEIVING_PUBLICATION_ASSEMBLY_V1",
+  "state": "ASSEMBLED_FOR_OPEN_DRAFT_RECEIVING_PRS",
+  "canonical_source_evidence_commit": "74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd",
+  "canonical_pr_url": "https://github.com/hsoliwal/com.synexia/pull/12528",
+  "receiving_source_parent": "9a164c31b38c7013c179a3ff38b0bb60c199c7fd",
+  "collections_receiving_pr_url": "https://github.com/hsoliwal/M3jdk21/pull/1522",
+  "collections_receiving_head": "4d1854a96df13371d33c0cc18d39ca51a15c16b6",
+  "collections_qualified_source_head": "066b7a15c29388f3444ab3cf0550ecf1df698c6d",
+  "collections_ci_followup": "The additional parent changes four CI/dependency-verification owners and preserves all guarded Java/JNI sources, tests and canonical runtime recipes.",
+  "swing_receiving_pr_url": "https://github.com/hsoliwal/M3jdk21/pull/1525",
+  "swing_source_commit": "a170a8bfd33b1d5a938761f56e1ebaf3290b2cd7",
+  "proof_mirror_staging_tree": "9078339d6e1b3a1ab8c7b515bb098e1ef925c665",
+  "template_assembly_sha256": "28753f20751fb61b922f0d8f0dbeb3310a3316bdec1551d31ff22e04c04e653d",
+  "template_manifest_sha256": "ba1d6211087dffa64f2e3d65ada7880b008a55f3e701254893d4970a3ec96aef",
+  "append_proposal_sha256": "1672e651a0f0560f6f13269d76fd4b2670a7e74516b5338ac0f3ae5ff9ee9b36",
+  "new_metadata_lineage": "Recreated from published records; new metadata is not claimed to exist at the canonical source pin.",
+  "metadata_changes": [
+    "Bind actual open-draft receiving PR URLs and statuses.",
+    "Remove recovery-only local-path diagnostics from new metadata.",
+    "Clarify that d1e0a211 is the 73-file baseline tree at both source epochs.",
+    "Replace coordinator instructions with receiving links and exact index receipt."
+  ],
+  "main_index": {
+    "path": "m3/docs/name-mapping.json",
+    "before_sha256": "1085c259e66bff017137e0c63bb86fc0b8daf436865f6378075cf4c920035ef4",
+    "before_git_blob_sha1": "a7008bc04536586218da76e823bf570d50cec526",
+    "after_sha256": "7815ef0f4003f0b5a753a6439b8e7b658f4a09baf82c8b529deaef0cf92664b0",
+    "after_git_blob_sha1": "32d214357ba4f13c8e63be3737a989978b3613a2",
+    "before_bytes": 451339,
+    "after_bytes": 590143,
+    "insert_offset_bytes": 50215,
+    "insert_bytes": 138804,
+    "all_original_bytes_preserved": true,
+    "all_existing_mapping_objects_preserved": true,
+    "all_other_fields_preserved": true,
+    "before_mappings": 66,
+    "after_mappings": 76,
+    "receiving_sequence_preserved": true,
+    "guarded_receiving_sequence_sha256": "8491805a9ade7a38e5920f18f16907491575a0e6484ae80d826fa9e4493cca72"
+  },
+  "metadata_files": [
+    {
+      "path": "m3/docs/name-mapping.d/m3-swing-ui-convergence-20261019.json",
+      "preimage": "ABSENT",
+      "recreated_template_sha256": "4d5162fe6a19b5d50d8d3e9c6c9a29a6945875c04ac6573e551f50aa83b907f4",
+      "sha256": "dc3f01930aaa2e389550682363c822f8516016fff202d5bb5ffdfd8df1ce779e",
+      "git_blob_sha1": "d56ab4bd49f303ec3ea612df0d32c74bd25f4d21",
+      "bytes": 93357
+    },
+    {
+      "path": "m3/docs/name-mapping.d/m3-viewport-convergence-20261019.json",
+      "preimage": "ABSENT",
+      "recreated_template_sha256": "be240191dacac57612d94a87ed3a957bfbed7100b8114b254a7e96793f082b1a",
+      "sha256": "9008b33e4b31c7ed784a98a25499fc371e351a95f165378c6db18384b6eea595",
+      "git_blob_sha1": "876380e7e97e479b4383951d8222368df9b50f20",
+      "bytes": 47659
+    },
+    {
+      "path": "m3/docs/swing-viewport/convergence-20261019/RECEIVING.md",
+      "preimage": "ABSENT",
+      "recreated_template_sha256": "033fa57e486623dd61fe3d97808f4ac29334e3442e183f6bed716800639ee00f",
+      "sha256": "a8fcd4e12235cde8d817688a8f942fc9f90e79fa9ce3d1d02bd135e53e41741c",
+      "git_blob_sha1": "7d05989b7f0ecfc0ad072b8615fe3cd9c3427b37",
+      "bytes": 12009
+    },
+    {
+      "path": "m3/docs/viewport-everywhere/convergence-20261019/FRONTIERS.json",
+      "preimage": "ABSENT",
+      "recreated_template_sha256": "12cea9ce20fe85d28916de2d5084520302637997b3ad7495c26de5c3fff6b117",
+      "sha256": "54c3aa47bb1c4b87b043cb24545b43d77e4c1dda6483d45451104256601ef865",
+      "git_blob_sha1": "4be628eff05eaf116901da3b30e5b880f3d9649c",
+      "bytes": 18096
+    },
+    {
+      "path": "m3/docs/viewport-everywhere/convergence-20261019/MASTER_ADMISSION.md",
+      "preimage": "ABSENT",
+      "recreated_template_sha256": "137adff8180010a2b959557d6d5121b72af60b260a262b7adc28313d70111152",
+      "sha256": "8b2bc491f7b6e606df40d433e726b9e1b2e888e367514c5e786a0bd7a3fad9dd",
+      "git_blob_sha1": "369cbe0fb5c3db08ce454b9c13932a755dae73fc",
+      "bytes": 7850
+    },
+    {
+      "path": "m3/docs/viewport-everywhere/convergence-20261019/SOURCE_RIGHTS.tsv",
+      "preimage": "ABSENT",
+      "recreated_template_sha256": "e04fd130933abec38abab0ffca9fb7c7dea1de4ce6e953fa218e8f54c137bef8",
+      "sha256": "e04fd130933abec38abab0ffca9fb7c7dea1de4ce6e953fa218e8f54c137bef8",
+      "git_blob_sha1": "9075351a4d69c003960bb9d62bd047c1f2647fd4",
+      "bytes": 35426
+    },
+    {
+      "path": "m3/ports/swing-viewport/receiving-20261019/RECEIVING.md",
+      "preimage": "ABSENT",
+      "recreated_template_sha256": "50771f4910841c149e7b6ed39f3551ed95a081b46dd8fb756180c5f0fb4e0ca5",
+      "sha256": "0c3b32cc4dab928a8a293cc3787e3710f7608e46a73a5648dcabc29c971460b4",
+      "git_blob_sha1": "9b95c4b5eee9d68962db64197e03b4beca8bf878",
+      "bytes": 6293
+    },
+    {
+      "path": "m3/docs/name-mapping.d/m3-swing-ui-convergence-20261019.json.license",
+      "preimage": "ABSENT",
+      "sha256": "2a819b604d118df763a3793e14ffc879b063f6b88b8a1bbfd88ad365699c7a45",
+      "git_blob_sha1": "4fde9aac5ac25272ad2c3d94ee823eb83ed5d610",
+      "bytes": 171
+    },
+    {
+      "path": "m3/docs/name-mapping.d/m3-viewport-convergence-20261019.json.license",
+      "preimage": "ABSENT",
+      "sha256": "e89703e8c2b8b52209c66b000bdcc02d86e1c9c110bb04ec02918df178208530",
+      "git_blob_sha1": "95f3578484affef603db660af796ee6c58904ae3",
+      "bytes": 171
+    },
+    {
+      "path": "m3/docs/viewport-everywhere/convergence-20261019/FRONTIERS.json.license",
+      "preimage": "ABSENT",
+      "sha256": "e0f11de3520c1a7b1e57ded65094ae94750ac9501a69506f5635ef6542a643e6",
+      "git_blob_sha1": "f9e033577896b4d6205734e0e1c67737bc10a179",
+      "bytes": 171
+    },
+    {
+      "path": "m3/docs/viewport-everywhere/convergence-20261019/SOURCE_RIGHTS.tsv.license",
+      "preimage": "ABSENT",
+      "sha256": "c60c6201cfc4f933dadf2244d9bd80daa9184fe511cb7617ac8a3d103aaf40cf",
+      "git_blob_sha1": "1f16cb00ba70551998f597e8d84b7c6aa75a4d88",
+      "bytes": 171
+    }
+  ],
+  "production_sources_changed_by_this_assembly": 0,
+  "canonical_recipes_or_manifests_changed": 0,
+  "historical_execution_receipts_changed": 0,
+  "fresh_compiler_runtime_sdk_native_execution": "NOT_RUN",
+  "swing_module_scope": {
+    "baseline": 73,
+    "earlier_executed_binding_candidate": 75,
+    "combined_source_before_receiving_metadata": 80,
+    "fresh_combined_module_maven_execution": "NOT_RUN"
+  },
+  "active_phase": "STRING",
+  "active_state": "QUALIFICATION_REQUIRED",
+  "phase_promotion": false,
+  "runtime_application_authorized_by_metadata": false
+}

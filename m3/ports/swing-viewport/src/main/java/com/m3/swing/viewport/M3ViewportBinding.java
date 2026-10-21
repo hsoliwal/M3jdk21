@@ -27,6 +27,7 @@ public final class M3ViewportBinding implements ChangeListener, HierarchyListene
 	private final Target target;
 	private final int rowHeight, overscan;
 	private final Rectangle visible = new Rectangle ();
+	private JViewport viewport;
 	private boolean pending = true;
 	private int pushes, deferred;
 
@@ -41,7 +42,7 @@ public final class M3ViewportBinding implements ChangeListener, HierarchyListene
 	public static M3ViewportBinding install (JComponent view, int rowHeight, int overscan, Target target) {
 		M3ViewportBinding b = new M3ViewportBinding (view, target, rowHeight, overscan);
 		view.addHierarchyListener (b);
-		if (view.getParent () instanceof JViewport vp) vp.addChangeListener (b);
+		b.bindViewport ();
 		b.sync ();
 		return b;
 	}
@@ -53,11 +54,16 @@ public final class M3ViewportBinding implements ChangeListener, HierarchyListene
 
 	@Override
 	public void hierarchyChanged (HierarchyEvent e) {
-		if ((e.getChangeFlags () & HierarchyEvent.PARENT_CHANGED) != 0 && view.getParent () instanceof JViewport vp) {
-			vp.removeChangeListener (this);
-			vp.addChangeListener (this);
-		}
+		if ((e.getChangeFlags () & HierarchyEvent.PARENT_CHANGED) != 0) bindViewport ();
 		if ((e.getChangeFlags () & HierarchyEvent.SHOWING_CHANGED) != 0 && pending) sync ();
+	}
+
+	private void bindViewport () {
+		JViewport next = view.getParent () instanceof JViewport vp ? vp : null;
+		if (next == viewport) return;
+		if (viewport != null) viewport.removeChangeListener (this);
+		viewport = next;
+		if (viewport != null) viewport.addChangeListener (this);
 	}
 
 	/** Pushes the current viewport, or defers it while the view is not showing. */
