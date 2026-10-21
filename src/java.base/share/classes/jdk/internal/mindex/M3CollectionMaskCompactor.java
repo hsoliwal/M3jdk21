@@ -67,16 +67,19 @@ public final class M3CollectionMaskCompactor {
         return write;
     }
 
-    /** Count deletion runs, including ones crossing the 64-bit boundary. */
+    /** Count runs across word boundaries only until the scalar dispatch is decided. */
     private static int removalRuns(long[] deleted, int length) {
         int words = ((length - 1) >>> 6) + 1;
         int count = 0;
+        int threshold = Math.max(4, length >>> 7);
         long preceding = 0L;
         for (int word = 0; word < words; word++) {
             long bits = deleted[word];
             int tail = length & 63;
             if (word == words - 1 && tail != 0) bits &= (1L << tail) - 1L;
             count += Long.bitCount(bits & ~((bits << 1) | preceding));
+            // This count is used only for the threshold decision in compact().
+            if (count > threshold) return count;
             preceding = bits >>> 63;
         }
         return count;
