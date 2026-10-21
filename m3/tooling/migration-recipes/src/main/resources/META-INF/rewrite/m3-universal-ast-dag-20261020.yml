@@ -1,0 +1,7 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: com.m3.m3jdk.UniversalAstDag20261020
+displayName: M3JDK21 universal immutable AST/DAG mechanics
+description: Materialize the reviewed primitive-lane AST/DAG owners from exact absent preimages; second application is fixed.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: m3-universal-ast-dag-20261020
