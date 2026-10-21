@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Copyright 2026 Hitesh Soliwal and contributors. SPDX-License-Identifier: Apache-2.0
 set -euo pipefail
-ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../../../.." && pwd)"
+ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../../../../.." && pwd)"
 OWNER="$ROOT/m3/ports/file"
 SRC="$OWNER/src/main/java"
 TESTS="$OWNER/qualification/m3fmt-shared-lexicon-20261021"
