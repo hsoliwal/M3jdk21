@@ -29,21 +29,21 @@ com.google.common.collect.MutableClassToInstanceMap	CLAIMED #1307	com.m3.collect
 com.google.common.collect.ImmutableClassToInstanceMap	CLAIMED #1307	com.m3.collections.interop.M3GuavaClassToInstanceMaps	open PR #1307	-	do not duplicate
 org.springframework.util.LinkedCaseInsensitiveMap	CLAIMED #1269	com.m3.collections.spring.M3LinkedCaseInsensitiveMap	open PR #1269 (other worker: owned Spring case-insensitive map)	-	claimed by the other five-provider worker
 com.google.common.collect.ArrayListMultimap	DONE #1400	com.m3.collections.guava.M3ArrayListMultimap	PR #1400: implementations/guava-array-list-multimap + qualification/owned-guava-array-list-multimap-20261018	interop M3GuavaListMultimap; core M3IndexedMultiValueMap; apache M3ListValuedMap	fill order a
-com.google.common.collect.HashMultimap	OPEN	-	native engine in open PR #1261; interop adapter on master	#1261 M3IndexedSetMultiMap; interop M3GuavaSetMultimap; apache M3SetValuedMap	fill order a; reuse engine, do not duplicate
+com.google.common.collect.HashMultimap	OPEN	-	native engine in open PR #1261; interop adapter on master	BLOCKED until open #1261 lands (engine M3IndexedSetMultiMap); interop M3GuavaSetMultimap; apache M3SetValuedMap	fill order a; BLOCKED on #1261 (coordinator 2026-10-19): reuse its engine, do not duplicate
 com.google.common.collect.LinkedHashMultimap	OPEN	-	-	core M3LinkedHashMap + M3IndexedMultiValueMap	-
 com.google.common.collect.LinkedListMultimap	OPEN	-	-	core M3LinkedList link lanes	-
 com.google.common.collect.TreeMultimap	OPEN	-	-	core M3TreeMap + M3TreeSet	-
 com.google.common.collect.HashMultiset	DONE #1418	com.m3.collections.guava.M3HashMultiset	PR #1418: implementations/guava-hash-multiset + qualification/owned-guava-hash-multiset-20261018	#1271 M3GuavaMultiset; core M3CountedBag	fill order b; reuse counts lanes
 com.google.common.collect.LinkedHashMultiset	OPEN	-	-	core M3CountedBag + M3LinkedHashMap	-
 com.google.common.collect.TreeMultiset	OPEN	-	-	core M3CountedBag; #1403 M3OrderStatisticForest + M3SparseExtents	range counts via viewport owners
-com.google.common.collect.EnumMultiset	OPEN	-	-	core M3EnumLongMap counts by ordinal	-
+com.google.common.collect.EnumMultiset	DONE #1499	com.m3.collections.guava.M3EnumMultiset	PR #1499: implementations/guava-enum-multiset + qualification/owned-guava-enum-multiset-20261019	core M3EnumLongMap (ordinal lanes + presence mask); PR #1418 M3HashMultiset (counting lanes, views)	next wave 1 of 5; reuse ordinal lanes
 com.google.common.collect.ConcurrentHashMultiset	OPEN	-	-	core M3CountedBag + M3LockedMap	-
 org.apache.commons.collections4.bag.HashBag	DONE #1421	com.m3.collections.apache.M3HashBag	PR #1421: implementations/apache-hash-bag + qualification/owned-apache-hash-bag-20261019	interop M3ApacheBag; core M3CountedBag	fill order b
 org.apache.commons.collections4.multiset.HashMultiSet	OPEN	-	adapter work in open PR #1271	#1271 M3ApacheMultiSet; core M3CountedBag	fill order b
 org.apache.commons.collections4.bag.TreeBag	OPEN	-	-	core M3CountedBag + M3TreeMap	-
 com.google.common.collect.EnumBiMap	DONE #1462	com.m3.collections.guava.M3EnumBiMap	PR #1462: implementations/guava-enum-bi-map + qualification/owned-guava-enum-bi-map-20261019	guava M3HashBiMap; core M3EnumLongMap	fill order c
 com.google.common.collect.EnumHashBiMap	DONE #1460	com.m3.collections.guava.M3EnumHashBiMap	PR #1460: implementations/guava-enum-hash-bi-map + qualification/owned-guava-enum-hash-bi-map-20261019	guava M3HashBiMap	fill order c
-org.apache.commons.collections4.bidimap.DualLinkedHashBidiMap	OPEN	-	-	apache M3BidiMap	fill order c
+org.apache.commons.collections4.bidimap.DualLinkedHashBidiMap	DONE #1468	com.m3.collections.apache.M3DualLinkedHashBidiMap	PR #1468: implementations/apache-dual-linked-hash-bidi-map + qualification/owned-apache-dual-linked-hash-bidi-map-20261019	apache M3BidiMap; core M3LinkedHashMap.Table	fill order c
 org.apache.commons.collections4.bidimap.DualTreeBidiMap	OPEN	-	-	apache M3BidiMap + core M3TreeMap	fill order c
 org.apache.commons.collections4.bidimap.TreeBidiMap	OPEN	-	-	core M3TreeMap twice	fill order c
 com.google.common.collect.HashBasedTable	OPEN	-	-	core M3IndexedTable; viewport int-pair-keyed map	-
@@ -52,7 +52,7 @@ com.google.common.collect.ArrayTable	OPEN	-	-	core M3IndexedTable; viewport pack
 com.google.common.collect.TreeRangeSet	OPEN	-	-	#1403 M3RangeSet + M3OrderStatisticForest; core M3LongRangeSet	-
 com.google.common.collect.ImmutableRangeSet	OPEN	-	-	#1403 M3RangeSet; core M3LongRangeSet	-
 com.google.common.collect.ImmutableRangeMap	OPEN	-	-	#1264 M3ObjectRangeMap	-
-org.springframework.util.MultiValueMapAdapter	OPEN	-	-	spring M3MultiValueMap	fill order e (LinkedMultiValueMap already owned)
+org.springframework.util.MultiValueMapAdapter	DONE #1469	com.m3.collections.spring.M3MultiValueMapAdapter	PR #1469: implementations/spring-multi-value-map-adapter + qualification/owned-spring-multi-value-map-adapter-20261019	spring M3MultiValueMap (protocol); JDK ArrayList (in-place M3 lanes)	fill order e (LinkedMultiValueMap already owned)
 org.apache.commons.collections4.map.CaseInsensitiveMap	OPEN	-	-	#1269 casefold lanes	-
 org.apache.commons.collections4.map.LinkedMap	OPEN	-	-	core M3LinkedHashMap	-
 org.apache.commons.collections4.map.ListOrderedMap	OPEN	-	-	core M3LinkedHashMap	-

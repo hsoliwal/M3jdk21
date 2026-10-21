@@ -26,6 +26,7 @@ import java.util.Map;
 import java.util.Random;
 import java.util.concurrent.Callable;
 import java.util.concurrent.atomic.AtomicLong;
+import java.util.logging.Logger;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import org.junit.jupiter.api.AfterAll;
@@ -42,6 +43,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 final class M3ArrayListMultimapDifferentialTest {
     static final AtomicLong CHECKS = new AtomicLong();
     static final AtomicLong OPERATIONS = new AtomicLong();
+    private static final Logger LOG = Logger.getLogger(M3ArrayListMultimapDifferentialTest.class.getName());
     private static final int OPS_PER_SEED = 12_000;
     private static final Comparator<Integer> ORDER = Comparator.nullsFirst(Comparator.naturalOrder());
 
@@ -51,7 +53,7 @@ final class M3ArrayListMultimapDifferentialTest {
 
     @AfterAll
     static void report() {
-        System.out.println("M3ArrayListMultimap differential: operations=" + OPERATIONS.get() + " checks=" + CHECKS.get());
+        LOG.info(() -> "M3ArrayListMultimap differential: operations=" + OPERATIONS.get() + " checks=" + CHECKS.get());
     }
 
     @ParameterizedTest

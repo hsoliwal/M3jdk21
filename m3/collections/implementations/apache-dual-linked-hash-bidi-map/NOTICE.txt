@@ -1,8 +1,9 @@
-M3 collections scaffold: M3DualLinkedHashBidiMap
+M3 collections: M3DualLinkedHashBidiMap
 Copyright 2026 Hitesh Soliwal and contributors
 
 This product includes software developed by Hitesh Soliwal and contributors,
 licensed under the Apache License, Version 2.0.
 
-The declared public surface mirrors org.apache.commons.collections4.bidimap.DualLinkedHashBidiMap from Apache Commons Collections 4.5.0
-(Apache-2.0) for compatibility. No provider implementation code is included.
+It implements the public API contract of org.apache.commons.collections4.bidimap.DualLinkedHashBidiMap from
+Apache Commons Collections 4.5.0 (Copyright 2001-2025 The Apache Software Foundation, Apache License,
+Version 2.0) and links the Commons BidiMap, MapIterator and ResettableIterator interfaces. No Commons implementation code is included.
