@@ -205,16 +205,23 @@ public final class M3FilteredViews {
         @Override public boolean contains(Object value) {
             if (membershipView(source) == null) return visible(source, predicate, value);
             // Replay the existing inner membership and outer representative scans in order.
-            ArrayList<CollectionView<E>> pending = new ArrayList<>();
+            int depth = 0;
             CollectionView<E> layer = this;
             CollectionView<E> inner;
             while ((inner = membershipView(layer.source)) != null) {
-                pending.add(layer);
+                depth++;
                 layer = inner;
             }
+            @SuppressWarnings("unchecked")
+            CollectionView<E>[] pending = (CollectionView<E>[]) new CollectionView<?>[depth];
+            layer = this;
+            for (int index = 0; index < pending.length; index++) {
+                pending[index] = layer;
+                layer = membershipView(layer.source);
+            }
             if (!visible(layer.source, layer.predicate, value)) return false;
-            for (int index = pending.size() - 1; index >= 0; index--) {
-                layer = pending.get(index);
+            for (int index = pending.length - 1; index >= 0; index--) {
+                layer = pending[index];
                 if (!visibleMember(layer.source, layer.predicate, value)) return false;
             }
             return true;
