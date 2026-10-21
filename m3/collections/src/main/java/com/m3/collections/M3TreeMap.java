@@ -86,8 +86,13 @@ public final class M3TreeMap<K, V> extends M3OrderedSlotMap<K, V> implements Nav
         int s = tree.step(slot, descending); return slotWithin(s) ? s : -1;
     }
     @Override int findSlot(Object key) {
-        if (tree.size == 0 && tree.comparator != null && !hasLow && !hasHigh) { return -1; }
-        K k = checked(key); return within(k) ? tree.find(k) : -1;
+        if (tree.size == 0 && !hasLow && !hasHigh) {
+            // Empty natural lookup checks null/type without comparing a key.
+            if (tree.comparator == null) { Objects.requireNonNull((Comparable<?>) key); }
+            return -1;
+        }
+        @SuppressWarnings("unchecked") K k = (K) key;
+        return within(k) ? tree.find(k) : -1;
     }
     @Override int entrySlot(K key, int hint, int expected) {
         // Attached API entries can address their slot without invoking the comparator.
@@ -123,8 +128,23 @@ public final class M3TreeMap<K, V> extends M3OrderedSlotMap<K, V> implements Nav
         int count = 0; for (int s = firstSlot(); s >= 0; s = nextSlot(s)) { count++; } return count;
     }
     @Override public boolean isEmpty() { return firstSlot() < 0; }
+    /** Single-search value lookup, independent of getOrDefault's null-result probe. */
+    @Override public V get(Object key) { return super.getOrDefault(key, null); }
+    /** Preserve JDK TreeMap's observable second search after a null result. */
+    @Override public V getOrDefault(Object key, V fallback) {
+        // M3-specific value modes retain their established single-search contract.
+        if (tree.lazy != null || tree.keyOnly) { return super.getOrDefault(key, fallback); }
+        V value = get(key);
+        if (value != null) { return value; }
+        return containsKey(key) ? null : fallback;
+    }
     @Override public V put(K key, V value) {
-        tree.writable(); checked(key);
+        tree.writable();
+        // Ordinary nonempty roots validate against visited keys during descent.
+        // Keep admission validation for the first key and all other value/view modes.
+        if (tree.size == 0 || hasLow || hasHigh || descending || tree.lazy != null || tree.keyOnly) {
+            checked(key);
+        }
         if (!within(key)) { throw new IllegalArgumentException("key outside view"); }
         int expected = revision(), p = -1, s = tree.root, cmp = 0;
         while (s >= 0) {
