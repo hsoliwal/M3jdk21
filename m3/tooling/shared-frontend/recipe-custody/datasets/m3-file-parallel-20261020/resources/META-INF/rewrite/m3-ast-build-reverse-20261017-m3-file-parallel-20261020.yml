@@ -1,0 +1,20 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3jdk.AstBuildReverse20261017
+displayName: M3JDK21 original M3FileTree scoped parallel scan work
+description: >-
+  Three serial exact FILE-local OpenRewrite Java recipes over original M3File
+  traversal owners, with bounded parallel execution as a product capability,
+  never as the source transformation mechanism.
+tags:
+  - m3jdk21
+  - file-local
+  - multi-pass
+  - contract-preserving
+  - no-second-filesystem
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: m3-file-parallel-20261020-p1
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: m3-file-parallel-20261020-p2
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: m3-file-parallel-20261020-p3
