@@ -1,0 +1,93 @@
+Picked up JAVA_TOOL_OPTIONS: -Xmx512m -XX:ActiveProcessorCount=2 -XX:-UsePerfData
+com.fasterxml.jackson.annotation@2.22 open
+com.fasterxml.jackson.core@2.22.4
+com.fasterxml.jackson.databind@2.22.4
+com.ibm.icu@78.3 open
+com.m3.text
+hppc open
+io.github.classgraph
+io.github.dmlloyd.classfile@25.1
+java.base@21.0.12.1
+java.compiler@21.0.12.1
+java.datatransfer@21.0.12.1
+java.desktop@21.0.12.1
+java.instrument@21.0.12.1
+java.logging@21.0.12.1
+java.management@21.0.12.1
+java.management.rmi@21.0.12.1
+java.naming@21.0.12.1
+java.net.http@21.0.12.1
+java.prefs@21.0.12.1
+java.rmi@21.0.12.1
+java.scripting@21.0.12.1
+java.se@21.0.12.1
+java.security.jgss@21.0.12.1
+java.security.sasl@21.0.12.1
+java.sql@21.0.12.1
+java.sql.rowset@21.0.12.1
+java.transaction.xa@21.0.12.1
+java.xml@21.0.12.1
+java.xml.crypto@21.0.12.1
+jcommander open
+jdk.compiler@21.0.12.1
+jdk.incubator.vector@21.0.12.1
+jdk.internal.opt@21.0.12.1
+jdk.jartool@21.0.12.1
+jdk.javadoc@21.0.12.1
+jdk.jdeps@21.0.12.1
+jdk.jlink@21.0.12.1
+jdk.m3.compiletime
+jdk.m3.nlp.search
+jdk.unsupported@21.0.12.1
+jdk.zipfs@21.0.12.1
+libsvm
+morfologik.ukrainian.search@4.9.1 open
+noggit@0.8 open
+org.antlr.antlr4.runtime@4.13.2 open
+org.apache.commons.codec@1.22.1
+org.apache.commons.xml.secure@1.1.0
+org.apache.lucene.analysis.common@11.0.0-m3-current-d1b7235f1ba1
+org.apache.lucene.analysis.icu@11.0.0-m3-current-d1b7235f1ba1
+org.apache.lucene.analysis.kuromoji@11.0.0-m3-current-d1b7235f1ba1
+org.apache.lucene.analysis.morfologik@11.0.0-m3-current-d1b7235f1ba1
+org.apache.lucene.analysis.nori@11.0.0-m3-current-d1b7235f1ba1
+org.apache.lucene.analysis.opennlp@11.0.0-m3-current-d1b7235f1ba1
+org.apache.lucene.analysis.phonetic@11.0.0-m3-current-d1b7235f1ba1
+org.apache.lucene.analysis.smartcn@11.0.0-m3-current-d1b7235f1ba1
+org.apache.lucene.analysis.stempel@11.0.0-m3-current-d1b7235f1ba1
+org.apache.lucene.backward_codecs@11.0.0-m3-current-d1b7235f1ba1
+org.apache.lucene.classification@11.0.0-m3-current-d1b7235f1ba1
+org.apache.lucene.codecs@11.0.0-m3-current-d1b7235f1ba1
+org.apache.lucene.core@11.0.0-m3-current-d1b7235f1ba1
+org.apache.lucene.expressions@11.0.0-m3-current-d1b7235f1ba1
+org.apache.lucene.facet@11.0.0-m3-current-d1b7235f1ba1
+org.apache.lucene.grouping@11.0.0-m3-current-d1b7235f1ba1
+org.apache.lucene.highlighter@11.0.0-m3-current-d1b7235f1ba1
+org.apache.lucene.join@11.0.0-m3-current-d1b7235f1ba1
+org.apache.lucene.luke@11.0.0-m3-current-d1b7235f1ba1
+org.apache.lucene.memory@11.0.0-m3-current-d1b7235f1ba1
+org.apache.lucene.misc@11.0.0-m3-current-d1b7235f1ba1
+org.apache.lucene.monitor@11.0.0-m3-current-d1b7235f1ba1
+org.apache.lucene.queries@11.0.0-m3-current-d1b7235f1ba1
+org.apache.lucene.queryparser@11.0.0-m3-current-d1b7235f1ba1
+org.apache.lucene.replicator@11.0.0-m3-current-d1b7235f1ba1
+org.apache.lucene.sandbox@11.0.0-m3-current-d1b7235f1ba1
+org.apache.lucene.spatial3d@11.0.0-m3-current-d1b7235f1ba1
+org.apache.lucene.spatial_extras@11.0.0-m3-current-d1b7235f1ba1
+org.apache.lucene.suggest@11.0.0-m3-current-d1b7235f1ba1
+org.apache.opennlp.morfologik open
+org.apache.opennlp.spellcheck open
+org.apache.opennlp.tools open
+org.apache.opennlp.uima open
+org.carrot2.morfologik.fsa open
+org.carrot2.morfologik.fsa_builders open
+org.carrot2.morfologik.polish@2.2.0 open
+org.carrot2.morfologik.stemming open
+org.carrot2.morfologik.tools open
+org.locationtech.jts@1.20.0 open
+org.slf4j@2.0.20
+org.slf4j.simple@2.0.20
+s2.geometry.library.java@1.0.0 open
+spatial4j@0.8 open
+uimaj.core open
+zlibsvm.core open

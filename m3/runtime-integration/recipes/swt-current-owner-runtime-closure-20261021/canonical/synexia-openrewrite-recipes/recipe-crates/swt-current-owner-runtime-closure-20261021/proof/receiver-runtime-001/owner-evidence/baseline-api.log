@@ -1,0 +1,32 @@
+Compiled from "ViewportScrollBarGeometry.java"
+final class org.eclipse.swt.widgets.ViewportScrollBarGeometry {
+  static final int NONE;
+    descriptor: I
+  static final int ARROW_DECREASE;
+    descriptor: I
+  static final int PAGE_DECREASE;
+    descriptor: I
+  static final int THUMB;
+    descriptor: I
+  static final int PAGE_INCREASE;
+    descriptor: I
+  static final int ARROW_INCREASE;
+    descriptor: I
+  static int mulDiv(int, int, int);
+    descriptor: (III)I
+
+  static boolean hasThumb(int, int);
+    descriptor: (II)Z
+
+  static int thumbLength(int, int, int, int, int);
+    descriptor: (IIIII)I
+
+  static int thumbStart(int, int, int, int, int, int);
+    descriptor: (IIIIII)I
+
+  static int selectionAt(int, int, int, int, int, int);
+    descriptor: (IIIIII)I
+
+  static int hit(int, int, int, int, int, int, int, int);
+    descriptor: (IIIIIIII)I
+}

@@ -1,0 +1,1 @@
+{"status": "PASS", "attempt": "sdk-001-offline", "counts": {"tests": 1, "failures": 0, "errors": 0, "skipped": 0}, "duration_seconds": "6.143", "receipt": "/tmp/m3-swt-current-owner-sdk-001/canonical/synexia-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/sdk-001-offline/RESULT.json"}

@@ -1,0 +1,646 @@
+{
+  "schema": "SWT_CURRENT_OWNER_EVIDENCE_INTAKE/1",
+  "files": [
+    {
+      "source_path": "/workspace/scratch/206049dfb270/jobs-work/swt-receiver-current-001/source/.github/workflows/build.yml",
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/incumbent-inputs/.github/workflows/build.yml",
+      "bytes": 9213,
+      "sha256": "31f4535e8ab1ec189a0f9f9fed4fd1eb2167fe78de6e5ef89e802b52e00c1bd5",
+      "scope": "Pinned current SWT source and existing proof/test/workflow input; not a new edit"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/jobs-work/swt-receiver-current-001/source/.github/workflows/maven.yml",
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/incumbent-inputs/.github/workflows/maven.yml",
+      "bytes": 5260,
+      "sha256": "c1013f2fcc40751858b73fb3594831a14ed329975a25e14dd1e4c6adbda04360",
+      "scope": "Pinned current SWT source and existing proof/test/workflow input; not a new edit"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/jobs-work/swt-receiver-current-001/source/.github/workflows/swt-scrollbar-full-range-20261020.yml",
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/incumbent-inputs/.github/workflows/swt-scrollbar-full-range-20261020.yml",
+      "bytes": 3073,
+      "sha256": "443fa115d1ca9e90798b2bfa97a1a592ba94eca8784f823724a0ab0966205d34",
+      "scope": "Pinned current SWT source and existing proof/test/workflow input; not a new edit"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/jobs-work/swt-receiver-current-001/source/AGENTS.md",
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/incumbent-inputs/AGENTS.md",
+      "bytes": 12451,
+      "sha256": "7fef4871cb74188b0cfd9ea183c3836847f05f0f9ea4462e58bb155239dfd104",
+      "scope": "Pinned current SWT source and existing proof/test/workflow input; not a new edit"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/jobs-work/swt-receiver-current-001/source/bundles/org.eclipse.swt/Eclipse SWT/common/org/eclipse/swt/widgets/ViewportScrollBarGeometry.java",
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/incumbent-inputs/bundles/org.eclipse.swt/Eclipse SWT/common/org/eclipse/swt/widgets/ViewportScrollBarGeometry.java",
+      "bytes": 5260,
+      "sha256": "df4f8498b1f633f2ffeae310f761ecaa0ea686e392557b8cfe2c684864a7f9b4",
+      "scope": "Pinned current SWT source and existing proof/test/workflow input; not a new edit"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/jobs-work/swt-receiver-current-001/source/docs/m3/scrollbar-full-range-20261020/README.md",
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/incumbent-inputs/docs/m3/scrollbar-full-range-20261020/README.md",
+      "bytes": 4522,
+      "sha256": "865df36749ac167528f723b880ded72507cf99d67fdcb842c0237ed63bb379ba",
+      "scope": "Pinned current SWT source and existing proof/test/workflow input; not a new edit"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/jobs-work/swt-receiver-current-001/source/docs/m3/scrollbar-full-range-20261020/RECEIVER_LOCAL_JAVA21_PROOF.md",
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/incumbent-inputs/docs/m3/scrollbar-full-range-20261020/RECEIVER_LOCAL_JAVA21_PROOF.md",
+      "bytes": 2284,
+      "sha256": "c1ac1342e0c0aeb6252cd6511451bb47748f34688ff2006a34c443713765306b",
+      "scope": "Pinned current SWT source and existing proof/test/workflow input; not a new edit"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/jobs-work/swt-receiver-current-001/source/docs/m3/scrollbar-full-range-20261020/receiver-map.json",
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/incumbent-inputs/docs/m3/scrollbar-full-range-20261020/receiver-map.json",
+      "bytes": 847,
+      "sha256": "6eabc37f6a3225032e1d2a99fcbcf6d2f3e7c22d1a70413a58fbaa87304ee2cb",
+      "scope": "Pinned current SWT source and existing proof/test/workflow input; not a new edit"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/jobs-work/swt-receiver-current-001/source/docs/m3/scrollbar-full-range-20261020/recipes/swt-scrollbar-full-range-20261020/pom.xml",
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/incumbent-inputs/docs/m3/scrollbar-full-range-20261020/recipes/swt-scrollbar-full-range-20261020/pom.xml",
+      "bytes": 2179,
+      "sha256": "7539cf81d2d7a7b30bff97ce2812a7e67f4e3593463a898aa38c8e6b0240dfa0",
+      "scope": "Pinned current SWT source and existing proof/test/workflow input; not a new edit"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/jobs-work/swt-receiver-current-001/source/docs/m3/scrollbar-full-range-20261020/recipes/swt-scrollbar-full-range-20261020/proof/ScrollbarFullRangeProof.java",
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/incumbent-inputs/docs/m3/scrollbar-full-range-20261020/recipes/swt-scrollbar-full-range-20261020/proof/ScrollbarFullRangeProof.java",
+      "bytes": 9275,
+      "sha256": "bf11b1abb3cc394331bc213860dd6bc6fc01cde09856035e32074c955df5f7c8",
+      "scope": "Pinned current SWT source and existing proof/test/workflow input; not a new edit"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/jobs-work/swt-receiver-current-001/source/docs/m3/scrollbar-full-range-20261020/recipes/swt-scrollbar-full-range-20261020/src/test/java/com/synexia/rewrite/ScrollbarFullRangeRecipeTest.java",
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/incumbent-inputs/docs/m3/scrollbar-full-range-20261020/recipes/swt-scrollbar-full-range-20261020/src/test/java/com/synexia/rewrite/ScrollbarFullRangeRecipeTest.java",
+      "bytes": 5435,
+      "sha256": "90d22367810a3dd7358d1b47e3129358b9a540c5a81dc79865db073480385cb6",
+      "scope": "Pinned current SWT source and existing proof/test/workflow input; not a new edit"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/jobs-work/swt-receiver-current-001/source/docs/m3/scrollbar-full-range-20261020/recipes/swt-scrollbar-full-range-20261020/verify.py",
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/incumbent-inputs/docs/m3/scrollbar-full-range-20261020/recipes/swt-scrollbar-full-range-20261020/verify.py",
+      "bytes": 3609,
+      "sha256": "53ff0e591c650b363f50988d5ae496866ecba37b444886dedd7115c4c73d530b",
+      "scope": "Pinned current SWT source and existing proof/test/workflow input; not a new edit"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/jobs-work/swt-receiver-current-001/source/docs/m3/scrollbar-full-range-20261020/src/main/java/com/synexia/rewrite/M3EditScope.java",
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/incumbent-inputs/docs/m3/scrollbar-full-range-20261020/src/main/java/com/synexia/rewrite/M3EditScope.java",
+      "bytes": 1052,
+      "sha256": "962d37d62d740c3e8055c365a048ae7ee0479c26a9f6bbfe741e540d6c1134ab",
+      "scope": "Pinned current SWT source and existing proof/test/workflow input; not a new edit"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/jobs-work/swt-receiver-current-001/source/docs/m3/scrollbar-full-range-20261020/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/incumbent-inputs/docs/m3/scrollbar-full-range-20261020/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+      "bytes": 31505,
+      "sha256": "083f8b1fd956fe2ed81168bc580d1e0f39a815401c50571d397ddba40150cf63",
+      "scope": "Pinned current SWT source and existing proof/test/workflow input; not a new edit"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/jobs-work/swt-receiver-current-001/source/docs/m3/scrollbar-full-range-20261020/src/main/java/com/synexia/rewrite/M3ScopeInference.java",
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/incumbent-inputs/docs/m3/scrollbar-full-range-20261020/src/main/java/com/synexia/rewrite/M3ScopeInference.java",
+      "bytes": 8268,
+      "sha256": "9a6c54f42564c0ef82de3f40a2de17e6598569916c15255653bf79fbe3353579",
+      "scope": "Pinned current SWT source and existing proof/test/workflow input; not a new edit"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/jobs-work/swt-receiver-current-001/source/docs/m3/scrollbar-full-range-20261020/src/main/resources/META-INF/rewrite/swt-scrollbar-full-range-20261020.yml",
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/incumbent-inputs/docs/m3/scrollbar-full-range-20261020/src/main/resources/META-INF/rewrite/swt-scrollbar-full-range-20261020.yml",
+      "bytes": 508,
+      "sha256": "6d0f5be2c965dc21bd30ad15f52bb062cfd9f48ed44002f93256eefc5b340fe8",
+      "scope": "Pinned current SWT source and existing proof/test/workflow input; not a new edit"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/jobs-work/swt-receiver-current-001/source/docs/m3/scrollbar-full-range-20261020/src/main/resources/com/synexia/rewrite/hash-pinned-java/swt-scrollbar-full-range-20261020/ViewportScrollBarGeometry.before.java.txt",
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/incumbent-inputs/docs/m3/scrollbar-full-range-20261020/src/main/resources/com/synexia/rewrite/hash-pinned-java/swt-scrollbar-full-range-20261020/ViewportScrollBarGeometry.before.java.txt",
+      "bytes": 5067,
+      "sha256": "0b8ede7af0551b7afaa270b9723bb405fad315f4f0ddb6e8dfc4db3267e30b44",
+      "scope": "Pinned current SWT source and existing proof/test/workflow input; not a new edit"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/jobs-work/swt-receiver-current-001/source/docs/m3/scrollbar-full-range-20261020/src/main/resources/com/synexia/rewrite/hash-pinned-java/swt-scrollbar-full-range-20261020/ViewportScrollBarGeometry.java.txt",
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/incumbent-inputs/docs/m3/scrollbar-full-range-20261020/src/main/resources/com/synexia/rewrite/hash-pinned-java/swt-scrollbar-full-range-20261020/ViewportScrollBarGeometry.java.txt",
+      "bytes": 5260,
+      "sha256": "df4f8498b1f633f2ffeae310f761ecaa0ea686e392557b8cfe2c684864a7f9b4",
+      "scope": "Pinned current SWT source and existing proof/test/workflow input; not a new edit"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/jobs-work/swt-receiver-current-001/source/docs/m3/scrollbar-full-range-20261020/src/main/resources/com/synexia/rewrite/hash-pinned-java/swt-scrollbar-full-range-20261020/manifest.tsv",
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/incumbent-inputs/docs/m3/scrollbar-full-range-20261020/src/main/resources/com/synexia/rewrite/hash-pinned-java/swt-scrollbar-full-range-20261020/manifest.tsv",
+      "bytes": 263,
+      "sha256": "fedd7bc812f25b7f3e56da86470ac4acef369f850b1075c31f5a4fe4c0b62560",
+      "scope": "Pinned current SWT source and existing proof/test/workflow input; not a new edit"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/jobs-work/swt-receiver-current-001/source/tests/org.eclipse.swt.tests/JUnit Tests/org/eclipse/swt/tests/junit/AllNonBrowserTests.java",
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/incumbent-inputs/tests/org.eclipse.swt.tests/JUnit Tests/org/eclipse/swt/tests/junit/AllNonBrowserTests.java",
+      "bytes": 6018,
+      "sha256": "822e13cbf45fa8f58c3b51f514bb9a2197b50724004fc3ac37d8795107c261f2",
+      "scope": "Pinned current SWT source and existing proof/test/workflow input; not a new edit"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/jobs-work/swt-receiver-current-001/source/tests/org.eclipse.swt.tests/JUnit Tests/org/eclipse/swt/tests/junit/AllTests.java",
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/incumbent-inputs/tests/org.eclipse.swt.tests/JUnit Tests/org/eclipse/swt/tests/junit/AllTests.java",
+      "bytes": 1266,
+      "sha256": "3156425c594d20c299f7f43ed13e0c092f6c5209997f31e128107545fc267ffd",
+      "scope": "Pinned current SWT source and existing proof/test/workflow input; not a new edit"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/jobs-work/swt-receiver-current-001/source/tests/org.eclipse.swt.tests/JUnit Tests/org/eclipse/swt/tests/junit/AllWidgetTests.java",
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/incumbent-inputs/tests/org.eclipse.swt.tests/JUnit Tests/org/eclipse/swt/tests/junit/AllWidgetTests.java",
+      "bytes": 4996,
+      "sha256": "7d5d332d1ba3bb34ef840eacca3c710e434a0cf0396a91ebe5a73fac720b235c",
+      "scope": "Pinned current SWT source and existing proof/test/workflow input; not a new edit"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/jobs-work/swt-receiver-current-001/source/tests/org.eclipse.swt.tests/JUnit Tests/org/eclipse/swt/tests/junit/Test_ViewportScrollBarGeometry.java",
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/incumbent-inputs/tests/org.eclipse.swt.tests/JUnit Tests/org/eclipse/swt/tests/junit/Test_ViewportScrollBarGeometry.java",
+      "bytes": 5182,
+      "sha256": "83501fc504d65ee63f1dcfec59c34a496433d8c107a9e4fb0870ef34bd6aa000",
+      "scope": "Pinned current SWT source and existing proof/test/workflow input; not a new edit"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/jobs-work/swt-receiver-current-001/source/tests/org.eclipse.swt.tests/JUnit Tests/org/eclipse/swt/tests/junit/Test_org_eclipse_swt_widgets_ScrollBar_GeometryDifferential.java",
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/incumbent-inputs/tests/org.eclipse.swt.tests/JUnit Tests/org/eclipse/swt/tests/junit/Test_org_eclipse_swt_widgets_ScrollBar_GeometryDifferential.java",
+      "bytes": 6937,
+      "sha256": "37d0e8fd029d134f20d73f89a43244287594e808ca55f95944d637cfe7c3b9a6",
+      "scope": "Pinned current SWT source and existing proof/test/workflow input; not a new edit"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/jobs-work/swt-receiver-current-001/source/tests/org.eclipse.swt.tests/JUnit Tests/org/eclipse/swt/tests/junit/ViewportDifferential.java",
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/incumbent-inputs/tests/org.eclipse.swt.tests/JUnit Tests/org/eclipse/swt/tests/junit/ViewportDifferential.java",
+      "bytes": 27274,
+      "sha256": "ce880dc75362906fc451f5497d419f1351845ac0c57a266462aa2c726927de0a",
+      "scope": "Pinned current SWT source and existing proof/test/workflow input; not a new edit"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/jobs-work/swt-receiver-current-001/source/tests/org.eclipse.swt.tests/build.properties",
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/incumbent-inputs/tests/org.eclipse.swt.tests/build.properties",
+      "bytes": 782,
+      "sha256": "bef09e51f49f020280574399c836485e448f8c141c277d3b2dd268f7dff0ddf3",
+      "scope": "Pinned current SWT source and existing proof/test/workflow input; not a new edit"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/jobs-work/swt-receiver-current-001/source/tests/org.eclipse.swt.tests/pom.xml",
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/incumbent-inputs/tests/org.eclipse.swt.tests/pom.xml",
+      "bytes": 3342,
+      "sha256": "2899464097d8f2163df217f1b56454acad07b6f932b9274b0aab4618f39d9c04",
+      "scope": "Pinned current SWT source and existing proof/test/workflow input; not a new edit"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/jobs-work/swt-receiver-current-001/evidence-001/RESULT.json",
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/incumbent-offline-001/RESULT.json",
+      "bytes": 1842,
+      "sha256": "fd53b2706907681869f7ad2f838a85e73f3b01ef2298e93fbbb0189d20c9cf48",
+      "scope": "Zero tests; missing offline clean-plugin3.2.0"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/jobs-work/swt-receiver-current-001/evidence-001/INPUTS.json",
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/incumbent-offline-001/INPUTS.json",
+      "bytes": 7355,
+      "sha256": "f5796a267c780913f385af8aa1fcf700e9c4a929dc408c7b642a2e276398cba5",
+      "scope": "Zero tests; missing offline clean-plugin3.2.0"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/jobs-work/swt-receiver-current-001/evidence-001/INPUTS_AFTER.json",
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/incumbent-offline-001/INPUTS_AFTER.json",
+      "bytes": 7355,
+      "sha256": "f5796a267c780913f385af8aa1fcf700e9c4a929dc408c7b642a2e276398cba5",
+      "scope": "Zero tests; missing offline clean-plugin3.2.0"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/jobs-work/swt-receiver-current-001/evidence-001/COMMANDS.json",
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/incumbent-offline-001/COMMANDS.json",
+      "bytes": 1112,
+      "sha256": "c6bd71fef880d5543b2a461043559713eb468075111ad909b0f551cfb1bad98d",
+      "scope": "Zero tests; missing offline clean-plugin3.2.0"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/jobs-work/swt-receiver-current-001/evidence-001/sdk.log",
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/incumbent-offline-001/sdk.log",
+      "bytes": 1444,
+      "sha256": "4dfeef9e6b708d5d17ff7b2631ab8faa29746fea67b4161474d2c6ea22069d85",
+      "scope": "Zero tests; missing offline clean-plugin3.2.0"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/jobs-work/swt-receiver-current-001/bootstrap-001/RESULT.json",
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/incumbent-bootstrap-001/RESULT.json",
+      "bytes": 516,
+      "sha256": "88e255ecb06a2138f5c4c39eb6df142ecdbddecaaac2c55e7320a01b4dbd6955",
+      "scope": "Actual7test failure from missing SLF4J API"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/jobs-work/swt-receiver-current-001/bootstrap-001/COMMAND.json",
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/incumbent-bootstrap-001/COMMAND.json",
+      "bytes": 725,
+      "sha256": "b9dcfdf2defd8b90598c653921b7c8f240623b701b432cca5ba2cf1939b552a0",
+      "scope": "Actual7test failure from missing SLF4J API"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/jobs-work/swt-receiver-current-001/bootstrap-001/maven.log",
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/incumbent-bootstrap-001/maven.log",
+      "bytes": 16460,
+      "sha256": "fa72c38e2e74aed7f8cb8b4c3ba8705ece9a53f061489979c635569a60ac6600",
+      "scope": "Actual7test failure from missing SLF4J API"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/jobs-work/swt-receiver-current-001/bootstrap-001/surefire-reports/TEST-com.synexia.rewrite.ScrollbarFullRangeRecipeTest.xml",
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/incumbent-bootstrap-001/surefire-reports/TEST-com.synexia.rewrite.ScrollbarFullRangeRecipeTest.xml",
+      "bytes": 25327,
+      "sha256": "39bd8ee10e9310b474e348220a6849f7fd4427a38783b8843f8535664814ab03",
+      "scope": "Actual7test failure reports"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/jobs-work/swt-receiver-current-001/bootstrap-001/surefire-reports/com.synexia.rewrite.ScrollbarFullRangeRecipeTest.txt",
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/incumbent-bootstrap-001/surefire-reports/com.synexia.rewrite.ScrollbarFullRangeRecipeTest.txt",
+      "bytes": 12246,
+      "sha256": "5510e27698578734c98dde4dbc5d9d46992a48ea17fc20202353776b0e928edf",
+      "scope": "Actual7test failure reports"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/jobs-work/swt-receiver-current-001/evidence-002/RESULT.json",
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/incumbent-offline-002/RESULT.json",
+      "bytes": 1842,
+      "sha256": "97443fdc49e144d0946a89005e8b684c324d18ba295851eac00847bf133597f4",
+      "scope": "Zero tests; transient compiled-class discovery infrastructure refusal"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/jobs-work/swt-receiver-current-001/evidence-002/INPUTS.json",
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/incumbent-offline-002/INPUTS.json",
+      "bytes": 7355,
+      "sha256": "f5796a267c780913f385af8aa1fcf700e9c4a929dc408c7b642a2e276398cba5",
+      "scope": "Zero tests; transient compiled-class discovery infrastructure refusal"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/jobs-work/swt-receiver-current-001/evidence-002/INPUTS_AFTER.json",
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/incumbent-offline-002/INPUTS_AFTER.json",
+      "bytes": 7355,
+      "sha256": "f5796a267c780913f385af8aa1fcf700e9c4a929dc408c7b642a2e276398cba5",
+      "scope": "Zero tests; transient compiled-class discovery infrastructure refusal"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/jobs-work/swt-receiver-current-001/evidence-002/COMMANDS.json",
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/incumbent-offline-002/COMMANDS.json",
+      "bytes": 1112,
+      "sha256": "c6bd71fef880d5543b2a461043559713eb468075111ad909b0f551cfb1bad98d",
+      "scope": "Zero tests; transient compiled-class discovery infrastructure refusal"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/jobs-work/swt-receiver-current-001/evidence-002/sdk.log",
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/incumbent-offline-002/sdk.log",
+      "bytes": 6610,
+      "sha256": "e700f08f1aa8c92c0641e3043b37e9451da24c5412ddc91c3bb29614a544910c",
+      "scope": "Zero tests; transient compiled-class discovery infrastructure refusal"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/jobs-work/swt-receiver-current-001/evidence-002/surefire-reports/2026-10-21T03-18-39_578-jvmRun1.dump",
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/incumbent-offline-002/surefire-reports/2026-10-21T03-18-39_578-jvmRun1.dump.txt",
+      "bytes": 1360,
+      "sha256": "f93f03ad59bb6188fde4e1949564ea765100bc934bcbf05f2630738a396c852e",
+      "scope": "Discovery diagnostic, not test execution"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/jobs-work/swt-receiver-current-001/evidence-002/surefire-reports/2026-10-21T03-18-39_578-jvmRun1.dumpstream",
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/incumbent-offline-002/surefire-reports/2026-10-21T03-18-39_578-jvmRun1.dumpstream.txt",
+      "bytes": 128,
+      "sha256": "71a510eff91d39b0461b25f4dc4f08e451b73dcc5f000a4a6157e3c4aa2b510c",
+      "scope": "Discovery diagnostic, not test execution"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/jobs-work/swt-owner-closure-20261021/candidate-001/COMMANDS.json",
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/pom-candidate-001/COMMANDS.json",
+      "bytes": 976,
+      "sha256": "4f71800f86ce81ce5a70c60cc75618516f0fc7da8fdbd7e2439090ed7d0b7eab",
+      "scope": "Qualified POM authoring candidate; actual final emitted-POM receiver proof remains separate"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/jobs-work/swt-owner-closure-20261021/candidate-001/INPUTS.json",
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/pom-candidate-001/INPUTS.json",
+      "bytes": 12699,
+      "sha256": "465aae1915cada475d7bdb13acb82c28cc08f112c672ba04c3154972d317d883",
+      "scope": "Qualified POM authoring candidate; actual final emitted-POM receiver proof remains separate"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/jobs-work/swt-owner-closure-20261021/candidate-001/RESULT.json",
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/pom-candidate-001/RESULT.json",
+      "bytes": 1837,
+      "sha256": "3d6a95ec2df502b7ec13ef74e85f6e68e8213675fc3dbdbb42e4464eb58125a1",
+      "scope": "Qualified POM authoring candidate; actual final emitted-POM receiver proof remains separate"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/jobs-work/swt-owner-closure-20261021/candidate-001/owner-evidence/baseline-api.log",
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/pom-candidate-001/owner-evidence/baseline-api.log",
+      "bytes": 858,
+      "sha256": "1ec7c1f77881b06f1df76c35a71286176f032b0e67c8420e4e6b23071579512a",
+      "scope": "Qualified POM authoring candidate; actual final emitted-POM receiver proof remains separate"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/jobs-work/swt-owner-closure-20261021/candidate-001/owner-evidence/baseline-c1.log",
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/pom-candidate-001/owner-evidence/baseline-c1.log",
+      "bytes": 240,
+      "sha256": "b85c4827e66e203b05c3067d077025b5b6ea676ed4f121e5402994dbe2226f2f",
+      "scope": "Qualified POM authoring candidate; actual final emitted-POM receiver proof remains separate"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/jobs-work/swt-owner-closure-20261021/candidate-001/owner-evidence/baseline-compile.log",
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/pom-candidate-001/owner-evidence/baseline-compile.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "scope": "Qualified POM authoring candidate; actual final emitted-POM receiver proof remains separate"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/jobs-work/swt-owner-closure-20261021/candidate-001/owner-evidence/baseline-tiered.log",
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/pom-candidate-001/owner-evidence/baseline-tiered.log",
+      "bytes": 240,
+      "sha256": "b85c4827e66e203b05c3067d077025b5b6ea676ed4f121e5402994dbe2226f2f",
+      "scope": "Qualified POM authoring candidate; actual final emitted-POM receiver proof remains separate"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/jobs-work/swt-owner-closure-20261021/candidate-001/owner-evidence/generated-api.log",
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/pom-candidate-001/owner-evidence/generated-api.log",
+      "bytes": 858,
+      "sha256": "1ec7c1f77881b06f1df76c35a71286176f032b0e67c8420e4e6b23071579512a",
+      "scope": "Qualified POM authoring candidate; actual final emitted-POM receiver proof remains separate"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/jobs-work/swt-owner-closure-20261021/candidate-001/owner-evidence/generated-c1.log",
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/pom-candidate-001/owner-evidence/generated-c1.log",
+      "bytes": 211,
+      "sha256": "bd0e90820083dc65799be345d5c03803455d260030e201f430ec2cfc364094ad",
+      "scope": "Qualified POM authoring candidate; actual final emitted-POM receiver proof remains separate"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/jobs-work/swt-owner-closure-20261021/candidate-001/owner-evidence/generated-compile.log",
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/pom-candidate-001/owner-evidence/generated-compile.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "scope": "Qualified POM authoring candidate; actual final emitted-POM receiver proof remains separate"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/jobs-work/swt-owner-closure-20261021/candidate-001/owner-evidence/generated-tiered.log",
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/pom-candidate-001/owner-evidence/generated-tiered.log",
+      "bytes": 211,
+      "sha256": "bd0e90820083dc65799be345d5c03803455d260030e201f430ec2cfc364094ad",
+      "scope": "Qualified POM authoring candidate; actual final emitted-POM receiver proof remains separate"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/jobs-work/swt-owner-closure-20261021/candidate-001/owner-evidence/java-version.log",
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/pom-candidate-001/owner-evidence/java-version.log",
+      "bytes": 203,
+      "sha256": "5701a552cbd46ea0a0e39c6ace218dc386a0782e51100efbcf3ca15628bca475",
+      "scope": "Qualified POM authoring candidate; actual final emitted-POM receiver proof remains separate"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/jobs-work/swt-owner-closure-20261021/candidate-001/owner-evidence/receipt.json",
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/pom-candidate-001/owner-evidence/receipt.json",
+      "bytes": 437,
+      "sha256": "6020a7ba950632f3bbfa54e09862d95b4d7fa437a8cc772ec7e3fa52ea469556",
+      "scope": "Qualified POM authoring candidate; actual final emitted-POM receiver proof remains separate"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/jobs-work/swt-owner-closure-20261021/candidate-001/receiver.log",
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/pom-candidate-001/receiver.log",
+      "bytes": 2865,
+      "sha256": "08e66ae27bafdcd8fab887c6f2e6e1fd4c81a6f26445b77e79b03dd36246cc66",
+      "scope": "Qualified POM authoring candidate; actual final emitted-POM receiver proof remains separate"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/jobs-work/swt-owner-closure-20261021/candidate-001/sdk.log",
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/pom-candidate-001/sdk.log",
+      "bytes": 2582,
+      "sha256": "7947ed1f9a83c43b010c58cc1642a6396eba7ce7cc68667dffe08a5aa580447f",
+      "scope": "Qualified POM authoring candidate; actual final emitted-POM receiver proof remains separate"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/jobs-work/swt-owner-closure-20261021/candidate-001/surefire-reports/TEST-com.synexia.rewrite.ScrollbarFullRangeRecipeTest.xml",
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/pom-candidate-001/surefire-reports/TEST-com.synexia.rewrite.ScrollbarFullRangeRecipeTest.xml",
+      "bytes": 13037,
+      "sha256": "29d783ccc8491a2d54b25e79f1d04a9ebeb01a0fe1746913118ce0e38c6561a0",
+      "scope": "Qualified POM authoring candidate; actual final emitted-POM receiver proof remains separate"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/jobs-work/swt-owner-closure-20261021/candidate-001/surefire-reports/com.synexia.rewrite.ScrollbarFullRangeRecipeTest.txt",
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/pom-candidate-001/surefire-reports/com.synexia.rewrite.ScrollbarFullRangeRecipeTest.txt",
+      "bytes": 346,
+      "sha256": "28a310741eba1c75380029e2672285cffc5f16f736aec6ad25f93e150fc0cfc8",
+      "scope": "Qualified POM authoring candidate; actual final emitted-POM receiver proof remains separate"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/jobs-work/swt-owner-closure-20261021/receiver-qualification-001/01-preflight.json",
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/copier-qualification-001/01-preflight.json",
+      "bytes": 687,
+      "sha256": "dd80dcf24821033311f053c4377ac8b6280ef9d2735295dba6d810e19a6709a7",
+      "scope": "Actual qualified-output copier:1write,0replay,4guardrefusals"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/jobs-work/swt-owner-closure-20261021/receiver-qualification-001/01-preflight.log",
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/copier-qualification-001/01-preflight.log",
+      "bytes": 61,
+      "sha256": "79f612b4453a59fdef83008a4e862e6a2ca903b357649ae28be432f09ae95477",
+      "scope": "Actual qualified-output copier:1write,0replay,4guardrefusals"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/jobs-work/swt-owner-closure-20261021/receiver-qualification-001/02-first-apply.json",
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/copier-qualification-001/02-first-apply.json",
+      "bytes": 687,
+      "sha256": "2fcaadd71764120502c1b424cdcb8a02defad4abfda5fcc116d9b95094c98ace",
+      "scope": "Actual qualified-output copier:1write,0replay,4guardrefusals"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/jobs-work/swt-owner-closure-20261021/receiver-qualification-001/02-first-apply.log",
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/copier-qualification-001/02-first-apply.log",
+      "bytes": 61,
+      "sha256": "41364394aee6f6a2ba1bd479557c58e24731c73b03c0d584d39ea10be7ad7807",
+      "scope": "Actual qualified-output copier:1write,0replay,4guardrefusals"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/jobs-work/swt-owner-closure-20261021/receiver-qualification-001/03-fixed-point.json",
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/copier-qualification-001/03-fixed-point.json",
+      "bytes": 697,
+      "sha256": "b6e5f2e15eac1e2deba1ad0a281d460772137fbe0259b9483ea08f538d530f9e",
+      "scope": "Actual qualified-output copier:1write,0replay,4guardrefusals"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/jobs-work/swt-owner-closure-20261021/receiver-qualification-001/03-fixed-point.log",
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/copier-qualification-001/03-fixed-point.log",
+      "bytes": 61,
+      "sha256": "e71d6838344f10f48f8754b0213837514322b4ea7e4dba62baf33bd529c4e729",
+      "scope": "Actual qualified-output copier:1write,0replay,4guardrefusals"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/jobs-work/swt-owner-closure-20261021/receiver-qualification-001/04-product-drift.json",
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/copier-qualification-001/04-product-drift.json",
+      "bytes": 161,
+      "sha256": "aa1e94274493dd7319d55c789d978ecdaca766b77db26913e2f8f1decefee43e",
+      "scope": "Actual qualified-output copier:1write,0replay,4guardrefusals"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/jobs-work/swt-owner-closure-20261021/receiver-qualification-001/04-product-drift.log",
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/copier-qualification-001/04-product-drift.log",
+      "bytes": 700,
+      "sha256": "65dc1f067cca22532d0ee33266813ee43496808f297b52490c0476c8cfaa4fe0",
+      "scope": "Actual qualified-output copier:1write,0replay,4guardrefusals"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/jobs-work/swt-owner-closure-20261021/receiver-qualification-001/05-symbolic-destination.json",
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/copier-qualification-001/05-symbolic-destination.json",
+      "bytes": 194,
+      "sha256": "fddba93d93494af70c864757938899b67db527606e09220cc668b8d69c43cfc9",
+      "scope": "Actual qualified-output copier:1write,0replay,4guardrefusals"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/jobs-work/swt-owner-closure-20261021/receiver-qualification-001/05-symbolic-destination.log",
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/copier-qualification-001/05-symbolic-destination.log",
+      "bytes": 1047,
+      "sha256": "e7ced098fc0ddab96821af24f61698a331b6fab23501014d438c4c17503a988b",
+      "scope": "Actual qualified-output copier:1write,0replay,4guardrefusals"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/jobs-work/swt-owner-closure-20261021/receiver-qualification-001/06-emitted-drift.json",
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/copier-qualification-001/06-emitted-drift.json",
+      "bytes": 161,
+      "sha256": "c4f88c2e332fa75dc4695574ce4e0a4b4e4f42970007908a5e6f62f000891760",
+      "scope": "Actual qualified-output copier:1write,0replay,4guardrefusals"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/jobs-work/swt-owner-closure-20261021/receiver-qualification-001/06-emitted-drift.log",
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/copier-qualification-001/06-emitted-drift.log",
+      "bytes": 699,
+      "sha256": "1e18e10e844ac131163caa314b6b5521b6484cf46a455d915754b2163bbde8b3",
+      "scope": "Actual qualified-output copier:1write,0replay,4guardrefusals"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/jobs-work/swt-owner-closure-20261021/receiver-qualification-001/07-owner-drift.json",
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/copier-qualification-001/07-owner-drift.json",
+      "bytes": 95,
+      "sha256": "2bd989d319c9efd45406107075f891e7dfca2ab8c3b9cb8c8956b596ea6dceee",
+      "scope": "Actual qualified-output copier:1write,0replay,4guardrefusals"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/jobs-work/swt-owner-closure-20261021/receiver-qualification-001/07-owner-drift.log",
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/copier-qualification-001/07-owner-drift.log",
+      "bytes": 637,
+      "sha256": "7ddf49b370a147e4d665fff8a18bb77a52972e155f8d78fbb3cfc6dcb3d3d26c",
+      "scope": "Actual qualified-output copier:1write,0replay,4guardrefusals"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/jobs-work/swt-owner-closure-20261021/receiver-qualification-001/RESULT.json",
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/copier-qualification-001/RESULT.json",
+      "bytes": 7547,
+      "sha256": "02b696d2d3615f6b6e0742b8711cff1783b4c80371e6ad82fbbc00b79e9db671",
+      "scope": "Actual qualified-output copier:1write,0replay,4guardrefusals"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/jobs-work/swt-owner-closure-20261021/REMOTE_LINEAGE.json",
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/provenance/intake/REMOTE_LINEAGE.json",
+      "bytes": 19741,
+      "sha256": "c07003052405c72656f6f76b2aaf707cd97650963606cdbd51ab66f1d6891f7f",
+      "scope": "Exact task pin, byte custody or command receipt"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/jobs-work/swt-owner-closure-20261021/HANDOFF.json",
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/provenance/intake/HANDOFF.json",
+      "bytes": 511,
+      "sha256": "ab70e96a8a4700165ca30bb0b49699ceee775d946c34a750973b852b32639d58",
+      "scope": "Exact task pin, byte custody or command receipt"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/jobs-work/swt-owner-closure-20261021/ATTRIBUTION.json",
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/provenance/intake/ATTRIBUTION.json",
+      "bytes": 838,
+      "sha256": "565106504a9f9ebaef8c5ee33d3c251fdaf11a18bc197ccf857eb92754021cf4",
+      "scope": "Exact task pin, byte custody or command receipt"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/jobs-work/swt-owner-closure-20261021/attribution-compile.log",
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/provenance/intake/attribution-compile.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "scope": "Exact task pin, byte custody or command receipt"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/jobs-work/swt-owner-closure-20261021/parser-classpath.txt",
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/provenance/intake/parser-classpath.txt",
+      "bytes": 50,
+      "sha256": "2a5c4694e425d29be1c6f25e4fe4fe7f500c574a62556ad2322c657ffac060fa",
+      "scope": "Exact task pin, byte custody or command receipt"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/jobs-work/swt-owner-closure-20261021/SDK_001_COMMAND.json",
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/provenance/intake/SDK_001_COMMAND.json",
+      "bytes": 716,
+      "sha256": "f56295df47812966782cbf63162c4cc81d8387cde5faec6b8a556b2ed986a940",
+      "scope": "Exact task pin, byte custody or command receipt"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/jobs-work/swt-owner-closure-20261021/SDK_001.log",
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/provenance/intake/SDK_001.log",
+      "bytes": 321,
+      "sha256": "9df7e6186951fb9cf547572512ef514536856ef1ea4dde02055900d87bbcb9b4",
+      "scope": "Exact task pin, byte custody or command receipt"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/jobs-work/swt-owner-closure-20261021/SDK_001_CUSTODY.json",
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/provenance/intake/SDK_001_CUSTODY.json",
+      "bytes": 4449,
+      "sha256": "b4d48c68beaf63f0f5c71e084de41b54b38ab0e3acc1d0d814749a8e241df839",
+      "scope": "Exact task pin, byte custody or command receipt"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/jobs-work/swt-owner-closure-20261021/author_packet.py",
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/provenance/qualification-tools/author_packet.py",
+      "bytes": 7941,
+      "sha256": "bbbbdf5273b9329d0c56897fa0f1814cf8427d1143a2901b65ed60b500a80a2e",
+      "scope": "Reproducible authoring/qualification/intake tool; not transformation authority"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/jobs-work/swt-owner-closure-20261021/run_candidate_001.py",
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/provenance/qualification-tools/run_candidate_001.py",
+      "bytes": 5554,
+      "sha256": "1add929015ee527e4c1a6ef79f0ec66d90b07bb4e536ca12b4ae02c9d1f7985a",
+      "scope": "Reproducible authoring/qualification/intake tool; not transformation authority"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/jobs-work/swt-owner-closure-20261021/run_canonical_sdk_001.py",
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/provenance/qualification-tools/run_canonical_sdk_001.py",
+      "bytes": 3388,
+      "sha256": "2d7d7b6df9e99df4bdbf36d302f29af691169f3be0f60f9b530c747386fcbb9f",
+      "scope": "Reproducible authoring/qualification/intake tool; not transformation authority"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/jobs-work/swt-owner-closure-20261021/curate_packet.py",
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/provenance/qualification-tools/curate_packet.py",
+      "bytes": 6638,
+      "sha256": "565939192d3724729906a656f581beeb892df3e40b0c46b0fbd1e92856599940",
+      "scope": "Reproducible authoring/qualification/intake tool; not transformation authority"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/jobs-work/swt-receiver-current-001/run_owner_gate.py",
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/provenance/qualification-tools/incumbent/run_owner_gate.py",
+      "bytes": 6841,
+      "sha256": "6f19ef65a6aaf4e7d7d76733b011a52d9821f20d04f6ca874e63ba14e9ed855d",
+      "scope": "Original failed-attempt command orchestrator retained unchanged"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/jobs-work/swt-receiver-current-001/run_owner_gate_002.py",
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/provenance/qualification-tools/incumbent/run_owner_gate_002.py",
+      "bytes": 6841,
+      "sha256": "05f7ce757507dfe17cee1da4d84fe39c6509c3e285eaba83aee81987ecd53fbe",
+      "scope": "Original failed-attempt command orchestrator retained unchanged"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/jobs-work/swt-receiver-current-001/bootstrap_owner_gate.py",
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/provenance/qualification-tools/incumbent/bootstrap_owner_gate.py",
+      "bytes": 2460,
+      "sha256": "e7b31188d7183e9e60527be7cec479b745bee4c3aa0019a08e23c47a016fd5e3",
+      "scope": "Original failed-attempt command orchestrator retained unchanged"
+    }
+  ],
+  "copied_files": 91,
+  "total_bytes": 388656,
+  "excluded": "Compiled classes, JAR payloads, caches, temporary receiver trees and duplicate stale XML bytes",
+  "readback": "PASS"
+}
