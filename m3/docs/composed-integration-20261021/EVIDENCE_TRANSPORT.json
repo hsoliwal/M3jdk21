@@ -1,0 +1,1095 @@
+{
+  "schema": "M3_DOCUMENTARY_EVIDENCE_TRANSPORT_V1",
+  "copyright": "Copyright 2026 Hitesh Soliwal and contributors",
+  "license": "Apache-2.0 for this transport metadata only; embedded and direct evidence retains its original source rights and notices",
+  "scope": "Documentary serialization only. Embedded Java text is evidence data, not a Java transformation target, runtime source or build input. Extraction writes only a fresh external evidence tree.",
+  "repository": "hsoliwal/M3jdk21",
+  "runtime_parent": "18213fe70c66567fdfc6ba6f669909e7e9251663",
+  "canonical_implementation_commit": "a67c7c03742f0c994b0d4a57d56269ea012b0b25",
+  "original_selection_sha256": "b8dbd94ee955bdf8a9283e553c00208e00725efd3a8872d8941ae7df3ccca830",
+  "original_selection_binding": "The full original selection is retained by hash; executor-local location metadata is omitted. Every original file record is retained verbatim below.",
+  "logical_manifest_sha256": "3eb363680608829af4d6eee1c2104c817de3d59214252c508fdb299f8bd4af52",
+  "logical_manifest_format": "SHA-256 of logical_files serialized as JSON with sorted object keys, ASCII escaping and compact comma/colon separators",
+  "logical_file_count": 82,
+  "logical_content_bytes": 1153188,
+  "direct_file_count": 69,
+  "embedded_asset_count": 13,
+  "logical_files": [
+    {
+      "path": "m3/collections/algorithm-catalog/composed-integration-20261021.md",
+      "sha256": "daf412fc20e6c7bd7b7c4878a983250e074975cf7235209a58635548c6723bb5",
+      "git_blob": "26f0fbde2e0eeaeb339d828789654c66a6fcac7a",
+      "mode": "100644",
+      "bytes": 1795,
+      "preimage": "ABSENT"
+    },
+    {
+      "path": "m3/collections/algorithm-catalog/composed-integration-20261021.tsv",
+      "sha256": "a3d0e9e00c3b39a327a7c771bf6e1f20bf83dca169476a19dc5e9818d81287dd",
+      "git_blob": "4652ebaa0b0bd65de3116c78bad3eb0368ef3079",
+      "mode": "100644",
+      "bytes": 30098,
+      "preimage": "ABSENT"
+    },
+    {
+      "path": "m3/docs/composed-integration-20261021/FILE_PASSES.tsv",
+      "sha256": "f9866ffc2423bd192178d26f5c4cae408496be028c156e0dc0d3592101aaaf97",
+      "git_blob": "05332883866685c145c5789a3ddb10b03ebfccf4",
+      "mode": "100644",
+      "bytes": 52381,
+      "preimage": "ABSENT"
+    },
+    {
+      "path": "m3/docs/composed-integration-20261021/M3_INVARIANT.md",
+      "sha256": "3e0852dce28b121feff717d1cc74814a1f4d35f04102a9e4442ac5a8a6191d8c",
+      "git_blob": "66ffd9ad8045b27d8cff4d5006227018fd2b636f",
+      "mode": "100644",
+      "bytes": 5894,
+      "preimage": "ABSENT"
+    },
+    {
+      "path": "m3/docs/composed-integration-20261021/OPEN_GATES.md",
+      "sha256": "b9c98472d0a08a77ab6df4e57be7f0dfdfa77d2105b1f49377e2f53a00e60deb",
+      "git_blob": "6c89d9498d4f9d72a835a4917016768527e76286",
+      "mode": "100644",
+      "bytes": 5353,
+      "preimage": "ABSENT"
+    },
+    {
+      "path": "m3/docs/composed-integration-20261021/README.md",
+      "sha256": "b37358fb910c47c1f71a6d9a9deff46a635fb367b1beb435c6224505e2a6dc86",
+      "git_blob": "a5becc01737970266510b9f95712ae3248a794c0",
+      "mode": "100644",
+      "bytes": 8391,
+      "preimage": "ABSENT"
+    },
+    {
+      "path": "m3/docs/composed-integration-20261021/SOURCE_RECEIPT.json",
+      "sha256": "6d0ba67e4945b288735154c84434321e493f10556b63dfdc851ab2a753a339e4",
+      "git_blob": "caabebfb91a111c3be411275e8eb9e19c706b580",
+      "mode": "100644",
+      "bytes": 19676,
+      "preimage": "ABSENT"
+    },
+    {
+      "path": "m3/docs/composed-integration-20261021/evidence/collections/EPOCHS.json",
+      "sha256": "be99aca4b7c2dd53e9e6383d0b3684190bc712bb3c3bb1fe1e618cddcde40f35",
+      "git_blob": "d6a5fc9c69adfde8c5594a78935aa7c668e19a75",
+      "mode": "100644",
+      "bytes": 10158,
+      "preimage": "ABSENT"
+    },
+    {
+      "path": "m3/docs/composed-integration-20261021/evidence/collections/FAILURES_AND_SCOPE.md",
+      "sha256": "870e9b9272d30e5ad59c6f29afae2a3bfed4da781ba3f661e3cf3c555ab7eb53",
+      "git_blob": "fa3a107273e485b74e622cceceddcc41751f7529",
+      "mode": "100644",
+      "bytes": 6720,
+      "preimage": "ABSENT"
+    },
+    {
+      "path": "m3/docs/composed-integration-20261021/evidence/collections/LINKED_SDK_INPUTS.json",
+      "sha256": "f2edac9b30fe19f023bb553fb3e5384101049439c0a5d4ee106cc6b6586f8fa7",
+      "git_blob": "b03a4ba47b80a19f088107f074265e5adf679298",
+      "mode": "100644",
+      "bytes": 18530,
+      "preimage": "ABSENT"
+    },
+    {
+      "path": "m3/docs/composed-integration-20261021/evidence/collections/LINKED_SDK_OWNERSHIP.json",
+      "sha256": "8c0b26ecc5581fb57ad605917f2efdfa21e34d067acdad20e88b499a1b285d62",
+      "git_blob": "a8a15eaf32d44284f6ad45a2bfcb853eae1ecc7c",
+      "mode": "100644",
+      "bytes": 23100,
+      "preimage": "ABSENT"
+    },
+    {
+      "path": "m3/docs/composed-integration-20261021/evidence/collections/LINKED_SDK_QUALIFICATION.json",
+      "sha256": "066d2ba04a2451f9d32b5534b8b5c750e4e6cc9961ec1ba44aaedac53de74140",
+      "git_blob": "1e5caa5d8cd42eeb7f8b6953a03e203acf967e18",
+      "mode": "100644",
+      "bytes": 3300,
+      "preimage": "ABSENT"
+    },
+    {
+      "path": "m3/docs/composed-integration-20261021/evidence/collections/LINKED_SDK_RESULTS.json",
+      "sha256": "cdce7bdc3088d26eff46a8a1a4badf579fa27128ca441b533fe6a9ef12a26a29",
+      "git_blob": "dfc21fefb7a4b983064c726b2dbc1bb525a26fe1",
+      "mode": "100644",
+      "bytes": 7132,
+      "preimage": "ABSENT"
+    },
+    {
+      "path": "m3/docs/composed-integration-20261021/evidence/collections/LinkedM3SdkOwnership.java",
+      "sha256": "3703801e4938946d28d6b14cbef5a9f9cd3453ad77071763d86363cae6eeadac",
+      "git_blob": "b660c597e3f608ddfa1f349f59a3b2cbc9c299d9",
+      "mode": "100644",
+      "bytes": 2364,
+      "preimage": "ABSENT"
+    },
+    {
+      "path": "m3/docs/composed-integration-20261021/evidence/collections/NATIVE_ADDENDA.json",
+      "sha256": "2c7e2537a3b24c80abe2285abd67e0e78b6f98ee44810e8a1ac820fe072ad8cf",
+      "git_blob": "578236ff1baab2978a94a6752cd215bd5e9caddd",
+      "mode": "100644",
+      "bytes": 5960,
+      "preimage": "ABSENT"
+    },
+    {
+      "path": "m3/docs/composed-integration-20261021/evidence/collections/OWNING_PROOF.json",
+      "sha256": "4fbc24a40e0a78ec10deeacfddf5a42a40fe067f726fb83d7e15f0c9d9b1deaa",
+      "git_blob": "d19fb6411232d1d0fcef20fd36dcc4ba87e16dad",
+      "mode": "100644",
+      "bytes": 88517,
+      "preimage": "ABSENT"
+    },
+    {
+      "path": "m3/docs/composed-integration-20261021/evidence/collections/OWNING_RUN.json",
+      "sha256": "02d8b7ea58d109f6f3992405c4f106b61b2eedd8f28a2a08d054b603632de63b",
+      "git_blob": "57b8069c889bad5ca54b3a97aa2244ec4bd1863a",
+      "mode": "100644",
+      "bytes": 1443,
+      "preimage": "ABSENT"
+    },
+    {
+      "path": "m3/docs/composed-integration-20261021/evidence/collections/PACKET_MANIFEST.json",
+      "sha256": "5e3d6eb075e61174c3de5b72c10f63c923bafbf9c5d84a45948eb267c23db06a",
+      "git_blob": "e1e96b3323f4db37709b65e61aee8259fb33f9db",
+      "mode": "100644",
+      "bytes": 2487,
+      "preimage": "ABSENT"
+    },
+    {
+      "path": "m3/docs/composed-integration-20261021/evidence/collections/RAW_EVIDENCE_SHA256.tsv",
+      "sha256": "955fb34130513aebd44937fdb0c47fd199a88e752c7a01f0835400e1032da51b",
+      "git_blob": "29d6b3a16cf3eda56035db2a5f0bd4d383fc912e",
+      "mode": "100644",
+      "bytes": 16994,
+      "preimage": "ABSENT"
+    },
+    {
+      "path": "m3/docs/composed-integration-20261021/evidence/collections/README.md",
+      "sha256": "3d0f893186dc0638c565b4d277a2e4cef4631477075a31a26a9cbdde6d60461a",
+      "git_blob": "fb436f581eb93a6c1bf7687db0e0baac200a700b",
+      "mode": "100644",
+      "bytes": 14268,
+      "preimage": "ABSENT"
+    },
+    {
+      "path": "m3/docs/composed-integration-20261021/evidence/collections/REPORT_INDEX_DIGESTS.json",
+      "sha256": "7c7f7059cd46af29b992aa0f6733224198a723abee4ebfac7493c6e4530a01a1",
+      "git_blob": "2312b267dee770be13243a5465b1291a56d9d410",
+      "mode": "100644",
+      "bytes": 874,
+      "preimage": "ABSENT"
+    },
+    {
+      "path": "m3/docs/composed-integration-20261021/evidence/collections/RERUN_COMMANDS.json",
+      "sha256": "7bdd99ac802c0a01973af11850671286382698d5ca3dffd7fcd565d2599e8b73",
+      "git_blob": "ce799eeacc0d40e31f4aa89a3a0acd70ee315b60",
+      "mode": "100644",
+      "bytes": 46911,
+      "preimage": "ABSENT"
+    },
+    {
+      "path": "m3/docs/composed-integration-20261021/evidence/collections/RESOURCE_COMPARISON.json",
+      "sha256": "ed21be5b10e5fcfeb819827269122524979f4a0f29d51683ae38d3c3640da9df",
+      "git_blob": "650aef32cce45edd868fc5bb487a1012f440d37e",
+      "mode": "100644",
+      "bytes": 28915,
+      "preimage": "ABSENT"
+    },
+    {
+      "path": "m3/docs/composed-integration-20261021/evidence/collections/RESOURCE_PROCESS_USAGE.json",
+      "sha256": "c170bd4c1641ff7f92da5a8c4afcbe2ad37680d4c28f59647e49c93186b1a0cc",
+      "git_blob": "bba2f83dc69cdc448a509be6d888efa50e03f93b",
+      "mode": "100644",
+      "bytes": 8003,
+      "preimage": "ABSENT"
+    },
+    {
+      "path": "m3/docs/composed-integration-20261021/evidence/collections/RESOURCE_SAMPLES.csv",
+      "sha256": "2d73889da9a401d9b6e8c868acbbb3a2c379d340220a702d452f0a2e2b2b06c5",
+      "git_blob": "93f1e0914c830c19ad96083ab9162f31954cb4f6",
+      "mode": "100644",
+      "bytes": 5470,
+      "preimage": "ABSENT"
+    },
+    {
+      "path": "m3/docs/composed-integration-20261021/evidence/collections/e2/OWNERSHIP.json",
+      "sha256": "d5200cfe1fc402632429ef2c1676dfde5dfb0488e39335c442fb44fdcf22ff0b",
+      "git_blob": "af857feebe7d971d62225b0a43f55f7a76a7d5f3",
+      "mode": "100644",
+      "bytes": 8271,
+      "preimage": "ABSENT"
+    },
+    {
+      "path": "m3/docs/composed-integration-20261021/evidence/collections/e2/PACKET_MANIFEST.json",
+      "sha256": "f7234aae1e9a690ccf52a7a4d6ef5a970e186fa9c88e3d9679f24efcfe89b297",
+      "git_blob": "1aa39944fb4fe9957d843c454219491a6ebe5234",
+      "mode": "100644",
+      "bytes": 1227,
+      "preimage": "ABSENT"
+    },
+    {
+      "path": "m3/docs/composed-integration-20261021/evidence/collections/e2/QUALIFICATION.json",
+      "sha256": "1b17bbf68f773fee45be855226524f84ae5459553fec9d344d71d72d289b9ef5",
+      "git_blob": "5d5333456e58d5708051eeac4f76229525ec1b3a",
+      "mode": "100644",
+      "bytes": 2911,
+      "preimage": "ABSENT"
+    },
+    {
+      "path": "m3/docs/composed-integration-20261021/evidence/collections/e2/RAW_EVIDENCE_SHA256.tsv",
+      "sha256": "598f72cad4022a86f4681b46d47330e28213a02e22e061012b39c212dd6c56cc",
+      "git_blob": "d003f176a34c6c632f7656fa645f22be26334f95",
+      "mode": "100644",
+      "bytes": 4337,
+      "preimage": "ABSENT"
+    },
+    {
+      "path": "m3/docs/composed-integration-20261021/evidence/collections/e2/README.md",
+      "sha256": "d79659784a2027d6efaf86200cda2000fa822a5e8b07e8d48b464bad2e097fec",
+      "git_blob": "f9cdd0bf2718143cc996461377e5d9cedf05be0b",
+      "mode": "100644",
+      "bytes": 6025,
+      "preimage": "ABSENT"
+    },
+    {
+      "path": "m3/docs/composed-integration-20261021/evidence/collections/e2/RUNS.json",
+      "sha256": "a1551890fd481784d873c651c3b51d37a1ab2403a96ac6d71f6de296e1236743",
+      "git_blob": "7ec05121ac56d6cd722ff0847d247b7135e64745",
+      "mode": "100644",
+      "bytes": 18339,
+      "preimage": "ABSENT"
+    },
+    {
+      "path": "m3/docs/composed-integration-20261021/evidence/collections/e2/SOURCE_EPOCH.json",
+      "sha256": "1ad4977db028ba0dd4c5e9a74eea6d929be85ba3db3a15ae3c85224377c8288b",
+      "git_blob": "f3733ab5a717a4855a88de17ab070792a1a450c2",
+      "mode": "100644",
+      "bytes": 11726,
+      "preimage": "ABSENT"
+    },
+    {
+      "path": "m3/docs/composed-integration-20261021/evidence/collections/e2/SOURCE_SDK_INPUTS.json",
+      "sha256": "2a85c9ff594e3b799e6cbe0c4834ce40f3d37faaa1c2dd10cba41197d39de4f9",
+      "git_blob": "3120f387d33f6e3ddb006ab0c99df01703169f87",
+      "mode": "100644",
+      "bytes": 8558,
+      "preimage": "ABSENT"
+    },
+    {
+      "path": "m3/docs/composed-integration-20261021/evidence/core/DIAGNOSTICS.json",
+      "sha256": "ceceff7313107f8a338a46f1f715359657467a165e616dc5570743a07062ae56",
+      "git_blob": "4f8098665fbd6ebe487fcf2fcf8ddf22a046cd5d",
+      "mode": "100644",
+      "bytes": 15677,
+      "preimage": "ABSENT"
+    },
+    {
+      "path": "m3/docs/composed-integration-20261021/evidence/core/E2/BUILD_RECEIPT.json",
+      "sha256": "2581d2906ffc5db4579862ddc2707d45b6776c869dfa3563aa1091595686f87f",
+      "git_blob": "a9bd47a335e6f932b00e9049f03c43a9b8b81089",
+      "mode": "100644",
+      "bytes": 3370,
+      "preimage": "ABSENT"
+    },
+    {
+      "path": "m3/docs/composed-integration-20261021/evidence/core/E2/INSTALLED_BYTECODE.json",
+      "sha256": "d2023aa57afa34f0600c3f28c7faf512c8c4d79135c5b482ce5acd4a8331bd85",
+      "git_blob": "7df006d37f794455469a086be4faa1ed0ac5174d",
+      "mode": "100644",
+      "bytes": 13399,
+      "preimage": "ABSENT"
+    },
+    {
+      "path": "m3/docs/composed-integration-20261021/evidence/core/E2/JTREG_ARGUMENTS.txt",
+      "sha256": "be858e9cb88dcc44526b0f748ff770cabee0b7b0fba6e30f051737d6a9340f36",
+      "git_blob": "77d584a9faf7b74726f904a47ed9b2098d764dc2",
+      "mode": "100644",
+      "bytes": 1584,
+      "preimage": "ABSENT"
+    },
+    {
+      "path": "m3/docs/composed-integration-20261021/evidence/core/E2/JTREG_E2.json",
+      "sha256": "6b3743e6f450ff76b7a912f54e19822942a5fdcd5ad0cfae852df6ee1c9b888a",
+      "git_blob": "0fbdb4350c40580702ef2b1103a48b22890cfc37",
+      "mode": "100644",
+      "bytes": 164822,
+      "preimage": "ABSENT"
+    },
+    {
+      "path": "m3/docs/composed-integration-20261021/evidence/core/E2/JTREG_E2_SUMMARY.log",
+      "sha256": "4004adfa05b777b5fa44873e40d3b83c94421f26a0bd5b9d885b69cd2d9d0f68",
+      "git_blob": "473762e049d88d44610c930791d3d70ba133e11c",
+      "mode": "100644",
+      "bytes": 2793,
+      "preimage": "ABSENT"
+    },
+    {
+      "path": "m3/docs/composed-integration-20261021/evidence/core/E2/PACKET_MANIFEST.json",
+      "sha256": "f39d5b1636ccd78b86dcad2b0e6a954ba0f082c6e6560ddb6e719a5aaa7a5db5",
+      "git_blob": "11096aad673d34f24245374dd417a9728b0b68d8",
+      "mode": "100644",
+      "bytes": 25631,
+      "preimage": "ABSENT"
+    },
+    {
+      "path": "m3/docs/composed-integration-20261021/evidence/core/E2/SCOPE.md",
+      "sha256": "9d46d12bf3ff56cb7f48908034a5cd70f00940baff4b51d5bf9790755ff4f382",
+      "git_blob": "2d1433a7499737d414c29c82e91c130719c2448e",
+      "mode": "100644",
+      "bytes": 3333,
+      "preimage": "ABSENT"
+    },
+    {
+      "path": "m3/docs/composed-integration-20261021/evidence/core/E2/SOURCE55_HASHES.tsv",
+      "sha256": "24e7dfcd14b1ef3ab6bc1c2a7f359abcbe424df0682c1596fbb5184342c519df",
+      "git_blob": "e016203586f10a2d6548b9bf51fd2fdd3b42833a",
+      "mode": "100644",
+      "bytes": 11739,
+      "preimage": "ABSENT"
+    },
+    {
+      "path": "m3/docs/composed-integration-20261021/evidence/core/E2/build/images-receiving-retry.log",
+      "sha256": "c6c8aefe441520a4171a67250923d9ca7e9fea0d43bddd56a097d847293a0420",
+      "git_blob": "dad9a48ac1ab115e0926db1df1bfd043fd116073",
+      "mode": "100644",
+      "bytes": 313,
+      "preimage": "ABSENT"
+    },
+    {
+      "path": "m3/docs/composed-integration-20261021/evidence/core/E2/build/images-receiving.log",
+      "sha256": "f40b09bfa89200e6eb12cba7fd5c7d8264f18124c0c39ecb6f6450bb7d61a494",
+      "git_blob": "aaa923ec0490bf5f9bbbcbfcfa16cb4fbe43fa90",
+      "mode": "100644",
+      "bytes": 6472,
+      "preimage": "ABSENT"
+    },
+    {
+      "path": "m3/docs/composed-integration-20261021/evidence/core/JTREG_ARGUMENTS.txt",
+      "sha256": "8516f91a8802bac663dbe0dc3b307289d6912896e83763b2c0943a6bccc0261c",
+      "git_blob": "c59f8b4b959586168b3522eb3fc6e72bc05b454a",
+      "mode": "100644",
+      "bytes": 1575,
+      "preimage": "ABSENT"
+    },
+    {
+      "path": "m3/docs/composed-integration-20261021/evidence/core/JTREG_E1.json",
+      "sha256": "60102cf98af48bb649b69aab72e80370603a18b662709ac3155c179d2b7f99ee",
+      "git_blob": "0dfaf5793a31ec063bed265952801d4afcaaa013",
+      "mode": "100644",
+      "bytes": 159268,
+      "preimage": "ABSENT"
+    },
+    {
+      "path": "m3/docs/composed-integration-20261021/evidence/core/JTREG_E1_SUMMARY.log",
+      "sha256": "c8808798d3a6c2cc96f63731116e2bce8eef13ef34e24a7f24464ee4fac782a1",
+      "git_blob": "df3dc73998da1e7f9229e18eef04bb4dd67c50cd",
+      "mode": "100644",
+      "bytes": 3073,
+      "preimage": "ABSENT"
+    },
+    {
+      "path": "m3/docs/composed-integration-20261021/evidence/core/M3StringNullableConcatProbe.java",
+      "sha256": "4ebc9766db609be395291e5c083d9b8e1c2fd7ed5d1c27938cd134c034076588",
+      "git_blob": "dd479a913b3e3c42672bfa5d964e48ef07e7b997",
+      "mode": "100644",
+      "bytes": 4190,
+      "preimage": "ABSENT"
+    },
+    {
+      "path": "m3/docs/composed-integration-20261021/evidence/core/PACKET_MANIFEST.json",
+      "sha256": "0bc5395622babd5c0cff4ff2770d6359b14c3645e3a42669f5b85c09211f468d",
+      "git_blob": "0fedf88b22f42a34261108e969a01f6a1f12881d",
+      "mode": "100644",
+      "bytes": 32839,
+      "preimage": "ABSENT"
+    },
+    {
+      "path": "m3/docs/composed-integration-20261021/evidence/core/RECEIVING_PROOFS.json",
+      "sha256": "a465cce54fad10b04e22c774956a6d84e98e19fe867e0471d19e20bea3bfb3c3",
+      "git_blob": "d6ddf5eacab0549978b57726ec00ff9b04daddb7",
+      "mode": "100644",
+      "bytes": 54379,
+      "preimage": "ABSENT"
+    },
+    {
+      "path": "m3/docs/composed-integration-20261021/evidence/core/SANITIZATION.json",
+      "sha256": "5b11aba3372939423f7fede5edb249af59a63651c3ae8b0a418a449a0881e80e",
+      "git_blob": "3a88ecaf4881daa68d5691b18783f3ea6aa61d04",
+      "mode": "100644",
+      "bytes": 1723,
+      "preimage": "ABSENT"
+    },
+    {
+      "path": "m3/docs/composed-integration-20261021/evidence/core/SCOPE.md",
+      "sha256": "e0873615d35cc9ffba9147da4770fd4c88e21d89cb2faa786f03dabdd570fdd5",
+      "git_blob": "f2319f11017d7a55d4bd5303b9df00b8d8b98c2b",
+      "mode": "100644",
+      "bytes": 4887,
+      "preimage": "ABSENT"
+    },
+    {
+      "path": "m3/docs/composed-integration-20261021/evidence/core/SOURCE_BUILD.json",
+      "sha256": "89b47918754e22db0f8a9882387e68c389ad8c0e7deebcfb55ecf4cf164c2c8c",
+      "git_blob": "9ad357a678ff8ed934cd481bd221494cf21f5bfc",
+      "mode": "100644",
+      "bytes": 10312,
+      "preimage": "ABSENT"
+    },
+    {
+      "path": "m3/docs/composed-integration-20261021/evidence/core/SOURCE_HASHES.tsv",
+      "sha256": "8a59f4e3ed4e2ee845834bc7d5c756efe9d60711e06d5e347114070362987e66",
+      "git_blob": "48d8803696e1d1e1605983c5ee93168637f86d87",
+      "mode": "100644",
+      "bytes": 17229,
+      "preimage": "ABSENT"
+    },
+    {
+      "path": "m3/docs/composed-integration-20261021/evidence/core/build/images-direct.log",
+      "sha256": "e951fce51edaa6051b70a005256de11b90b0ef203b4decdef11a5abec712d6bd",
+      "git_blob": "05c16afef963cb9348aa21b743ed2327fca26895",
+      "mode": "100644",
+      "bytes": 12738,
+      "preimage": "ABSENT"
+    },
+    {
+      "path": "m3/docs/composed-integration-20261021/evidence/core/build/images-final.log",
+      "sha256": "ae5939461b9f2288afb14d925efe93cb6e33999be611e3a0214cb5752a452ed8",
+      "git_blob": "e182552efc118c09c489d3e28e8044ceae624183",
+      "mode": "100644",
+      "bytes": 595,
+      "preimage": "ABSENT"
+    },
+    {
+      "path": "m3/docs/composed-integration-20261021/evidence/guards/MANIFEST.json",
+      "sha256": "f85ef390fef6e6521a4361d400b7adfbc6c7deb1ea3c21e1198404f41936f801",
+      "git_blob": "ae06b470f280c9bca18c2bd3c4a15e1f6d2f06d0",
+      "mode": "100644",
+      "bytes": 2096,
+      "preimage": "ABSENT"
+    },
+    {
+      "path": "m3/docs/composed-integration-20261021/evidence/guards/baseline-string-phase.json",
+      "sha256": "619f784116a8f0c7fde85d0bfd9e2f61bee518c2ae6605d0d61c6ff7e464e1f9",
+      "git_blob": "ffd3fbbf8f15cd4b8ceb01d6d3ed655f131483b5",
+      "mode": "100644",
+      "bytes": 151,
+      "preimage": "ABSENT"
+    },
+    {
+      "path": "m3/docs/composed-integration-20261021/evidence/guards/baseline-string-phase.log",
+      "sha256": "8d7bf998665451c65e8de1b1365fcc42edaa555568eac13d8f748a8458c9376b",
+      "git_blob": "8f9e233f604a3fc6de031e63d7295ad6e2054700",
+      "mode": "100644",
+      "bytes": 711,
+      "preimage": "ABSENT"
+    },
+    {
+      "path": "m3/docs/composed-integration-20261021/evidence/guards/candidate.json",
+      "sha256": "e55067f05b5c7b092e92ce25ecc7f26277e39e2a38295d54040fdce189d740aa",
+      "git_blob": "e76b8b517bd31e5ccd1083f0e7bd3135daecf941",
+      "mode": "100644",
+      "bytes": 1301,
+      "preimage": "ABSENT"
+    },
+    {
+      "path": "m3/docs/composed-integration-20261021/evidence/guards/final-full-borrow.log",
+      "sha256": "69354cd1ab04227bdf9f5a5a912361e57b90b1d8315146d447827e2636a259e5",
+      "git_blob": "c4b4aadaf0197dadd7907a9776493f119af717ee",
+      "mode": "100644",
+      "bytes": 281,
+      "preimage": "ABSENT"
+    },
+    {
+      "path": "m3/docs/composed-integration-20261021/evidence/guards/final-string-phase.log",
+      "sha256": "c2fff1d1f4d709e20d8726db27190729c43acd731b35ee54e2e8644a939ea9d9",
+      "git_blob": "7abdf1c45d23687645650c1de57c443e8b4c4572",
+      "mode": "100644",
+      "bytes": 660,
+      "preimage": "ABSENT"
+    },
+    {
+      "path": "m3/docs/composed-integration-20261021/evidence/guards/receiving-concat-source-gate.log",
+      "sha256": "3ba4380bca0c24aef2002ead0c359fc8d5858b927e6d7b3f99490399f0f393fd",
+      "git_blob": "64cec695f3acfd33bd30a377ddbe3fb1e3902e9b",
+      "mode": "100644",
+      "bytes": 128,
+      "preimage": "ABSENT"
+    },
+    {
+      "path": "m3/docs/composed-integration-20261021/evidence/recipes/E1_COMPOSITION.json",
+      "sha256": "adf54486bcf4d30413f977ac0aab0291a05dd1907a79c6c65b41abf5b137a00a",
+      "git_blob": "b4ce6ee3966fd35036fbca44cd177d8ca2076b8f",
+      "mode": "100644",
+      "bytes": 19472,
+      "preimage": "ABSENT"
+    },
+    {
+      "path": "m3/docs/composed-integration-20261021/evidence/recipes/E1_SDK_EXECUTION.json",
+      "sha256": "6d915232d610dacdc1533e5ca3821ff3019e0c392dfe18dc619ae1206d7599dd",
+      "git_blob": "f8d4da82ef36b4f47c00ac3022812f3c9932db8f",
+      "mode": "100644",
+      "bytes": 19097,
+      "preimage": "ABSENT"
+    },
+    {
+      "path": "m3/docs/composed-integration-20261021/evidence/recipes/E2_COMPOSITION.json",
+      "sha256": "b765c27e924a755d9bc74047b5fa77be6923bc6ec0c88f7e143aa38332b70cb7",
+      "git_blob": "e8537a69a6f031c265a6a5f6a1949c6fd519c0f1",
+      "mode": "100644",
+      "bytes": 24000,
+      "preimage": "ABSENT"
+    },
+    {
+      "path": "m3/docs/composed-integration-20261021/evidence/recipes/E2_SDK_EXECUTION.json",
+      "sha256": "0d6eaf3166f31f08139251302a71576877f2cda0d215de386f8c7bc281ae0fd7",
+      "git_blob": "6e776257616742cdd45cd0906d510246b34cec99",
+      "mode": "100644",
+      "bytes": 12243,
+      "preimage": "ABSENT"
+    },
+    {
+      "path": "m3/docs/composed-integration-20261021/evidence/recipes/README.json",
+      "sha256": "4fc884d83b60e1fe7e61063e2c7aff49484e2b35b6085f92c5a2bf11c9a014bd",
+      "git_blob": "4ccc5867c514c2f54d4d8f1dc162cf88daf72399",
+      "mode": "100644",
+      "bytes": 3837,
+      "preimage": "ABSENT"
+    },
+    {
+      "path": "m3/docs/composed-integration-20261021/evidence/recipes/combine-addendum21_PRODUCT_RECEIVER.json",
+      "sha256": "ca43ee6119ef2b3531cdc5a7014ae24483a4fbaec8e0e349d9950b50e5017191",
+      "git_blob": "87bbcd99ac425f9d98254e85467669c6fee3a6fb",
+      "mode": "100644",
+      "bytes": 838,
+      "preimage": "ABSENT"
+    },
+    {
+      "path": "m3/docs/composed-integration-20261021/evidence/recipes/combine-codepoint21_PRODUCT_RECEIVER.json",
+      "sha256": "b5bffc5dec8effbbdca63bdbb29653ee7890af1aea87d1d92bf35b1be34dfc82",
+      "git_blob": "b8e670d3531eb459f9da4c78bc6fd7a5ed45c165",
+      "mode": "100644",
+      "bytes": 835,
+      "preimage": "ABSENT"
+    },
+    {
+      "path": "m3/docs/composed-integration-20261021/evidence/recipes/combine-collections21_PRODUCT_RECEIVER.json",
+      "sha256": "78d55f1cf05a4d392bb765626d87fb147fe8a07c54902f831e24df392234c954",
+      "git_blob": "86f14acc2986d5d2270e8080dd820280f7fd9e0f",
+      "mode": "100644",
+      "bytes": 2513,
+      "preimage": "ABSENT"
+    },
+    {
+      "path": "m3/docs/composed-integration-20261021/evidence/recipes/combine-composed21_PRODUCT_RECEIVER.json",
+      "sha256": "191bcd33e51f4492ae954af58c25475333494e7fdc7f139506dec03576e73cc9",
+      "git_blob": "99848bf2a8159e332a37e9a95b02de468beea7ce",
+      "mode": "100644",
+      "bytes": 7575,
+      "preimage": "ABSENT"
+    },
+    {
+      "path": "m3/docs/composed-integration-20261021/evidence/recipes/combine-ownership21_PRODUCT_RECEIVER.json",
+      "sha256": "04547e8f6a2eb095b5b9e15a6af94e317c1aad5b92d56ccde62deca9b2a1e6d0",
+      "git_blob": "299cabe5cd09edc8c8d6988a6c311ac1f57293ec",
+      "mode": "100644",
+      "bytes": 1239,
+      "preimage": "ABSENT"
+    },
+    {
+      "path": "m3/docs/composed-integration-20261021/evidence/recipes/combine-string21_PRODUCT_RECEIVER.json",
+      "sha256": "770c9629eb0c8cff824a074809384aa23e45e07e312e6f6a9553321c493877dc",
+      "git_blob": "dfc2e999958f4194dae0c68341dcbb37d5a68761",
+      "mode": "100644",
+      "bytes": 2512,
+      "preimage": "ABSENT"
+    },
+    {
+      "path": "m3/docs/composed-integration-20261021/evidence/recipes/combine-tuple21_PRODUCT_RECEIVER.json",
+      "sha256": "4c3ace5b193e89815e3d8f0f0fcabdb63509de9365ff31133b78c725f0f4b1cb",
+      "git_blob": "e8d64fcbf9989b568279d262106e3ba062fb1638",
+      "mode": "100644",
+      "bytes": 827,
+      "preimage": "ABSENT"
+    },
+    {
+      "path": "m3/docs/composed-integration-20261021/evidence/recipes/combine-views-final21_PRODUCT_RECEIVER.json",
+      "sha256": "700126c0cd98693ffca9dbbd3452db9dfdfce737241e4586799e7bc619db586c",
+      "git_blob": "7f15eba72d1a580f8ef02b545e4ad0c9387816a1",
+      "mode": "100644",
+      "bytes": 2479,
+      "preimage": "ABSENT"
+    },
+    {
+      "path": "m3/docs/composed-integration-20261021/evidence/recipes/receive-budget21_PRODUCT_RECEIVER.json",
+      "sha256": "824bef0cbe0b130ab2d7a7b463fd9e9b7328452784a0c5436f9916d18f98c2fe",
+      "git_blob": "7a2c5870feae21da86fe2329ea66b90269c63c5f",
+      "mode": "100644",
+      "bytes": 695,
+      "preimage": "ABSENT"
+    },
+    {
+      "path": "m3/docs/composed-integration-20261021/evidence/recipes/receive-composed21_PRODUCT_RECEIVER.json",
+      "sha256": "885a6ece9527fae534e9ef26344317b65644020629dbb892bb0e1e4b0c96b1e3",
+      "git_blob": "4e0f1eb3b1c4f734c93e0b0c1eeead6eea841fbd",
+      "mode": "100644",
+      "bytes": 10197,
+      "preimage": "ABSENT"
+    },
+    {
+      "path": "m3/docs/composed-integration-20261021/evidence/recipes/receive-concat-guard21_PRODUCT_RECEIVER.json",
+      "sha256": "f0147dfa5688e2fdc5b6f5d55cc8b9f264174636e191589ad728f5ef532f7668",
+      "git_blob": "a6f89fec2ea8fe3ade4b8f77d78c2b3e28164848",
+      "mode": "100644",
+      "bytes": 838,
+      "preimage": "ABSENT"
+    },
+    {
+      "path": "m3/docs/composed-integration-20261021/evidence/recipes/receive-concat21_PRODUCT_RECEIVER.json",
+      "sha256": "93ea81f1541814a3dc172335ac978d364c8e73cf7a5c01872bc3207105a402b1",
+      "git_blob": "eb7dd7f5d6f1cf90a5da03728ee36ab0ea0d4d44",
+      "mode": "100644",
+      "bytes": 840,
+      "preimage": "ABSENT"
+    },
+    {
+      "path": "m3/docs/composed-integration-20261021/evidence/recipes/receive-coordinate21_PRODUCT_RECEIVER.json",
+      "sha256": "3d5d5cbf5be1c2b20acb8074e72f65a70ba6117a1d6a081f792b1f192ddb9310",
+      "git_blob": "e8a770739f377e185c9207b80853bafac20cc2ad",
+      "mode": "100644",
+      "bytes": 836,
+      "preimage": "ABSENT"
+    },
+    {
+      "path": "m3/docs/name-mapping.d/composed-integration-20261021.json",
+      "sha256": "e4c09abbe122822b4e864e3ccd021b90e651e20eb6eae27b416c3509c20747f3",
+      "git_blob": "009711de906e60a41058703bed44740cd89093c6",
+      "mode": "100644",
+      "bytes": 8918,
+      "preimage": "ABSENT"
+    }
+  ],
+  "direct_files": [
+    {
+      "physical_path": "m3/collections/algorithm-catalog/composed-integration-20261021.md",
+      "logical_path": "m3/collections/algorithm-catalog/composed-integration-20261021.md"
+    },
+    {
+      "physical_path": "m3/collections/algorithm-catalog/composed-integration-20261021.tsv",
+      "logical_path": "m3/collections/algorithm-catalog/composed-integration-20261021.tsv"
+    },
+    {
+      "physical_path": "m3/docs/composed-integration-20261021/FILE_PASSES.tsv",
+      "logical_path": "m3/docs/composed-integration-20261021/FILE_PASSES.tsv"
+    },
+    {
+      "physical_path": "m3/docs/composed-integration-20261021/M3_INVARIANT.md",
+      "logical_path": "m3/docs/composed-integration-20261021/M3_INVARIANT.md"
+    },
+    {
+      "physical_path": "m3/docs/composed-integration-20261021/OPEN_GATES.md",
+      "logical_path": "m3/docs/composed-integration-20261021/OPEN_GATES.md"
+    },
+    {
+      "physical_path": "m3/docs/composed-integration-20261021/README.md",
+      "logical_path": "m3/docs/composed-integration-20261021/README.md"
+    },
+    {
+      "physical_path": "m3/docs/composed-integration-20261021/SOURCE_RECEIPT.json",
+      "logical_path": "m3/docs/composed-integration-20261021/SOURCE_RECEIPT.json"
+    },
+    {
+      "physical_path": "m3/docs/composed-integration-20261021/evidence/collections/EPOCHS.json",
+      "logical_path": "m3/docs/composed-integration-20261021/evidence/collections/EPOCHS.json"
+    },
+    {
+      "physical_path": "m3/docs/composed-integration-20261021/evidence/collections/FAILURES_AND_SCOPE.md",
+      "logical_path": "m3/docs/composed-integration-20261021/evidence/collections/FAILURES_AND_SCOPE.md"
+    },
+    {
+      "physical_path": "m3/docs/composed-integration-20261021/evidence/collections/LINKED_SDK_INPUTS.json",
+      "logical_path": "m3/docs/composed-integration-20261021/evidence/collections/LINKED_SDK_INPUTS.json"
+    },
+    {
+      "physical_path": "m3/docs/composed-integration-20261021/evidence/collections/LINKED_SDK_OWNERSHIP.json",
+      "logical_path": "m3/docs/composed-integration-20261021/evidence/collections/LINKED_SDK_OWNERSHIP.json"
+    },
+    {
+      "physical_path": "m3/docs/composed-integration-20261021/evidence/collections/LINKED_SDK_QUALIFICATION.json",
+      "logical_path": "m3/docs/composed-integration-20261021/evidence/collections/LINKED_SDK_QUALIFICATION.json"
+    },
+    {
+      "physical_path": "m3/docs/composed-integration-20261021/evidence/collections/LINKED_SDK_RESULTS.json",
+      "logical_path": "m3/docs/composed-integration-20261021/evidence/collections/LINKED_SDK_RESULTS.json"
+    },
+    {
+      "physical_path": "m3/docs/composed-integration-20261021/evidence/collections/NATIVE_ADDENDA.json",
+      "logical_path": "m3/docs/composed-integration-20261021/evidence/collections/NATIVE_ADDENDA.json"
+    },
+    {
+      "physical_path": "m3/docs/composed-integration-20261021/evidence/collections/OWNING_PROOF.json",
+      "logical_path": "m3/docs/composed-integration-20261021/evidence/collections/OWNING_PROOF.json"
+    },
+    {
+      "physical_path": "m3/docs/composed-integration-20261021/evidence/collections/OWNING_RUN.json",
+      "logical_path": "m3/docs/composed-integration-20261021/evidence/collections/OWNING_RUN.json"
+    },
+    {
+      "physical_path": "m3/docs/composed-integration-20261021/evidence/collections/PACKET_MANIFEST.json",
+      "logical_path": "m3/docs/composed-integration-20261021/evidence/collections/PACKET_MANIFEST.json"
+    },
+    {
+      "physical_path": "m3/docs/composed-integration-20261021/evidence/collections/RAW_EVIDENCE_SHA256.tsv",
+      "logical_path": "m3/docs/composed-integration-20261021/evidence/collections/RAW_EVIDENCE_SHA256.tsv"
+    },
+    {
+      "physical_path": "m3/docs/composed-integration-20261021/evidence/collections/README.md",
+      "logical_path": "m3/docs/composed-integration-20261021/evidence/collections/README.md"
+    },
+    {
+      "physical_path": "m3/docs/composed-integration-20261021/evidence/collections/REPORT_INDEX_DIGESTS.json",
+      "logical_path": "m3/docs/composed-integration-20261021/evidence/collections/REPORT_INDEX_DIGESTS.json"
+    },
+    {
+      "physical_path": "m3/docs/composed-integration-20261021/evidence/collections/RERUN_COMMANDS.json",
+      "logical_path": "m3/docs/composed-integration-20261021/evidence/collections/RERUN_COMMANDS.json"
+    },
+    {
+      "physical_path": "m3/docs/composed-integration-20261021/evidence/collections/RESOURCE_COMPARISON.json",
+      "logical_path": "m3/docs/composed-integration-20261021/evidence/collections/RESOURCE_COMPARISON.json"
+    },
+    {
+      "physical_path": "m3/docs/composed-integration-20261021/evidence/collections/RESOURCE_PROCESS_USAGE.json",
+      "logical_path": "m3/docs/composed-integration-20261021/evidence/collections/RESOURCE_PROCESS_USAGE.json"
+    },
+    {
+      "physical_path": "m3/docs/composed-integration-20261021/evidence/collections/e2/OWNERSHIP.json",
+      "logical_path": "m3/docs/composed-integration-20261021/evidence/collections/e2/OWNERSHIP.json"
+    },
+    {
+      "physical_path": "m3/docs/composed-integration-20261021/evidence/collections/e2/PACKET_MANIFEST.json",
+      "logical_path": "m3/docs/composed-integration-20261021/evidence/collections/e2/PACKET_MANIFEST.json"
+    },
+    {
+      "physical_path": "m3/docs/composed-integration-20261021/evidence/collections/e2/QUALIFICATION.json",
+      "logical_path": "m3/docs/composed-integration-20261021/evidence/collections/e2/QUALIFICATION.json"
+    },
+    {
+      "physical_path": "m3/docs/composed-integration-20261021/evidence/collections/e2/RAW_EVIDENCE_SHA256.tsv",
+      "logical_path": "m3/docs/composed-integration-20261021/evidence/collections/e2/RAW_EVIDENCE_SHA256.tsv"
+    },
+    {
+      "physical_path": "m3/docs/composed-integration-20261021/evidence/collections/e2/README.md",
+      "logical_path": "m3/docs/composed-integration-20261021/evidence/collections/e2/README.md"
+    },
+    {
+      "physical_path": "m3/docs/composed-integration-20261021/evidence/collections/e2/RUNS.json",
+      "logical_path": "m3/docs/composed-integration-20261021/evidence/collections/e2/RUNS.json"
+    },
+    {
+      "physical_path": "m3/docs/composed-integration-20261021/evidence/collections/e2/SOURCE_EPOCH.json",
+      "logical_path": "m3/docs/composed-integration-20261021/evidence/collections/e2/SOURCE_EPOCH.json"
+    },
+    {
+      "physical_path": "m3/docs/composed-integration-20261021/evidence/collections/e2/SOURCE_SDK_INPUTS.json",
+      "logical_path": "m3/docs/composed-integration-20261021/evidence/collections/e2/SOURCE_SDK_INPUTS.json"
+    },
+    {
+      "physical_path": "m3/docs/composed-integration-20261021/evidence/core/DIAGNOSTICS.json",
+      "logical_path": "m3/docs/composed-integration-20261021/evidence/core/DIAGNOSTICS.json"
+    },
+    {
+      "physical_path": "m3/docs/composed-integration-20261021/evidence/core/E2/BUILD_RECEIPT.json",
+      "logical_path": "m3/docs/composed-integration-20261021/evidence/core/E2/BUILD_RECEIPT.json"
+    },
+    {
+      "physical_path": "m3/docs/composed-integration-20261021/evidence/core/E2/INSTALLED_BYTECODE.json",
+      "logical_path": "m3/docs/composed-integration-20261021/evidence/core/E2/INSTALLED_BYTECODE.json"
+    },
+    {
+      "physical_path": "m3/docs/composed-integration-20261021/evidence/core/E2/JTREG_ARGUMENTS.txt",
+      "logical_path": "m3/docs/composed-integration-20261021/evidence/core/E2/JTREG_ARGUMENTS.txt"
+    },
+    {
+      "physical_path": "m3/docs/composed-integration-20261021/evidence/core/E2/JTREG_E2.json",
+      "logical_path": "m3/docs/composed-integration-20261021/evidence/core/E2/JTREG_E2.json"
+    },
+    {
+      "physical_path": "m3/docs/composed-integration-20261021/evidence/core/E2/PACKET_MANIFEST.json",
+      "logical_path": "m3/docs/composed-integration-20261021/evidence/core/E2/PACKET_MANIFEST.json"
+    },
+    {
+      "physical_path": "m3/docs/composed-integration-20261021/evidence/core/E2/SCOPE.md",
+      "logical_path": "m3/docs/composed-integration-20261021/evidence/core/E2/SCOPE.md"
+    },
+    {
+      "physical_path": "m3/docs/composed-integration-20261021/evidence/core/E2/SOURCE55_HASHES.tsv",
+      "logical_path": "m3/docs/composed-integration-20261021/evidence/core/E2/SOURCE55_HASHES.tsv"
+    },
+    {
+      "physical_path": "m3/docs/composed-integration-20261021/evidence/core/JTREG_ARGUMENTS.txt",
+      "logical_path": "m3/docs/composed-integration-20261021/evidence/core/JTREG_ARGUMENTS.txt"
+    },
+    {
+      "physical_path": "m3/docs/composed-integration-20261021/evidence/core/JTREG_E1.json",
+      "logical_path": "m3/docs/composed-integration-20261021/evidence/core/JTREG_E1.json"
+    },
+    {
+      "physical_path": "m3/docs/composed-integration-20261021/evidence/core/PACKET_MANIFEST.json",
+      "logical_path": "m3/docs/composed-integration-20261021/evidence/core/PACKET_MANIFEST.json"
+    },
+    {
+      "physical_path": "m3/docs/composed-integration-20261021/evidence/core/RECEIVING_PROOFS.json",
+      "logical_path": "m3/docs/composed-integration-20261021/evidence/core/RECEIVING_PROOFS.json"
+    },
+    {
+      "physical_path": "m3/docs/composed-integration-20261021/evidence/core/SANITIZATION.json",
+      "logical_path": "m3/docs/composed-integration-20261021/evidence/core/SANITIZATION.json"
+    },
+    {
+      "physical_path": "m3/docs/composed-integration-20261021/evidence/core/SCOPE.md",
+      "logical_path": "m3/docs/composed-integration-20261021/evidence/core/SCOPE.md"
+    },
+    {
+      "physical_path": "m3/docs/composed-integration-20261021/evidence/core/SOURCE_BUILD.json",
+      "logical_path": "m3/docs/composed-integration-20261021/evidence/core/SOURCE_BUILD.json"
+    },
+    {
+      "physical_path": "m3/docs/composed-integration-20261021/evidence/core/SOURCE_HASHES.tsv",
+      "logical_path": "m3/docs/composed-integration-20261021/evidence/core/SOURCE_HASHES.tsv"
+    },
+    {
+      "physical_path": "m3/docs/composed-integration-20261021/evidence/guards/MANIFEST.json",
+      "logical_path": "m3/docs/composed-integration-20261021/evidence/guards/MANIFEST.json"
+    },
+    {
+      "physical_path": "m3/docs/composed-integration-20261021/evidence/guards/baseline-string-phase.json",
+      "logical_path": "m3/docs/composed-integration-20261021/evidence/guards/baseline-string-phase.json"
+    },
+    {
+      "physical_path": "m3/docs/composed-integration-20261021/evidence/guards/candidate.json",
+      "logical_path": "m3/docs/composed-integration-20261021/evidence/guards/candidate.json"
+    },
+    {
+      "physical_path": "m3/docs/composed-integration-20261021/evidence/recipes/E1_COMPOSITION.json",
+      "logical_path": "m3/docs/composed-integration-20261021/evidence/recipes/E1_COMPOSITION.json"
+    },
+    {
+      "physical_path": "m3/docs/composed-integration-20261021/evidence/recipes/E1_SDK_EXECUTION.json",
+      "logical_path": "m3/docs/composed-integration-20261021/evidence/recipes/E1_SDK_EXECUTION.json"
+    },
+    {
+      "physical_path": "m3/docs/composed-integration-20261021/evidence/recipes/E2_COMPOSITION.json",
+      "logical_path": "m3/docs/composed-integration-20261021/evidence/recipes/E2_COMPOSITION.json"
+    },
+    {
+      "physical_path": "m3/docs/composed-integration-20261021/evidence/recipes/E2_SDK_EXECUTION.json",
+      "logical_path": "m3/docs/composed-integration-20261021/evidence/recipes/E2_SDK_EXECUTION.json"
+    },
+    {
+      "physical_path": "m3/docs/composed-integration-20261021/evidence/recipes/README.json",
+      "logical_path": "m3/docs/composed-integration-20261021/evidence/recipes/README.json"
+    },
+    {
+      "physical_path": "m3/docs/composed-integration-20261021/evidence/recipes/combine-addendum21_PRODUCT_RECEIVER.json",
+      "logical_path": "m3/docs/composed-integration-20261021/evidence/recipes/combine-addendum21_PRODUCT_RECEIVER.json"
+    },
+    {
+      "physical_path": "m3/docs/composed-integration-20261021/evidence/recipes/combine-codepoint21_PRODUCT_RECEIVER.json",
+      "logical_path": "m3/docs/composed-integration-20261021/evidence/recipes/combine-codepoint21_PRODUCT_RECEIVER.json"
+    },
+    {
+      "physical_path": "m3/docs/composed-integration-20261021/evidence/recipes/combine-collections21_PRODUCT_RECEIVER.json",
+      "logical_path": "m3/docs/composed-integration-20261021/evidence/recipes/combine-collections21_PRODUCT_RECEIVER.json"
+    },
+    {
+      "physical_path": "m3/docs/composed-integration-20261021/evidence/recipes/combine-composed21_PRODUCT_RECEIVER.json",
+      "logical_path": "m3/docs/composed-integration-20261021/evidence/recipes/combine-composed21_PRODUCT_RECEIVER.json"
+    },
+    {
+      "physical_path": "m3/docs/composed-integration-20261021/evidence/recipes/combine-ownership21_PRODUCT_RECEIVER.json",
+      "logical_path": "m3/docs/composed-integration-20261021/evidence/recipes/combine-ownership21_PRODUCT_RECEIVER.json"
+    },
+    {
+      "physical_path": "m3/docs/composed-integration-20261021/evidence/recipes/combine-string21_PRODUCT_RECEIVER.json",
+      "logical_path": "m3/docs/composed-integration-20261021/evidence/recipes/combine-string21_PRODUCT_RECEIVER.json"
+    },
+    {
+      "physical_path": "m3/docs/composed-integration-20261021/evidence/recipes/combine-tuple21_PRODUCT_RECEIVER.json",
+      "logical_path": "m3/docs/composed-integration-20261021/evidence/recipes/combine-tuple21_PRODUCT_RECEIVER.json"
+    },
+    {
+      "physical_path": "m3/docs/composed-integration-20261021/evidence/recipes/combine-views-final21_PRODUCT_RECEIVER.json",
+      "logical_path": "m3/docs/composed-integration-20261021/evidence/recipes/combine-views-final21_PRODUCT_RECEIVER.json"
+    },
+    {
+      "physical_path": "m3/docs/composed-integration-20261021/evidence/recipes/receive-budget21_PRODUCT_RECEIVER.json",
+      "logical_path": "m3/docs/composed-integration-20261021/evidence/recipes/receive-budget21_PRODUCT_RECEIVER.json"
+    },
+    {
+      "physical_path": "m3/docs/composed-integration-20261021/evidence/recipes/receive-composed21_PRODUCT_RECEIVER.json",
+      "logical_path": "m3/docs/composed-integration-20261021/evidence/recipes/receive-composed21_PRODUCT_RECEIVER.json"
+    },
+    {
+      "physical_path": "m3/docs/composed-integration-20261021/evidence/recipes/receive-concat-guard21_PRODUCT_RECEIVER.json",
+      "logical_path": "m3/docs/composed-integration-20261021/evidence/recipes/receive-concat-guard21_PRODUCT_RECEIVER.json"
+    },
+    {
+      "physical_path": "m3/docs/composed-integration-20261021/evidence/recipes/receive-concat21_PRODUCT_RECEIVER.json",
+      "logical_path": "m3/docs/composed-integration-20261021/evidence/recipes/receive-concat21_PRODUCT_RECEIVER.json"
+    },
+    {
+      "physical_path": "m3/docs/composed-integration-20261021/evidence/recipes/receive-coordinate21_PRODUCT_RECEIVER.json",
+      "logical_path": "m3/docs/composed-integration-20261021/evidence/recipes/receive-coordinate21_PRODUCT_RECEIVER.json"
+    },
+    {
+      "physical_path": "m3/docs/name-mapping.d/composed-integration-20261021.json",
+      "logical_path": "m3/docs/name-mapping.d/composed-integration-20261021.json"
+    }
+  ],
+  "embedded_assets": [
+    {
+      "logical_path": "m3/docs/composed-integration-20261021/evidence/collections/LinkedM3SdkOwnership.java",
+      "encoding": "UTF-8",
+      "mode": "100644",
+      "bytes": 2364,
+      "sha256": "3703801e4938946d28d6b14cbef5a9f9cd3453ad77071763d86363cae6eeadac",
+      "git_blob": "b660c597e3f608ddfa1f349f59a3b2cbc9c299d9",
+      "content_utf8": "/* Copyright 2026 Hitesh Soliwal and contributors. SPDX-License-Identifier: Apache-2.0 */\nimport java.net.URL;\nimport java.nio.file.Path;\n\n/** Finite installed-image ownership check; this fixture is never packaged in the SDK. */\npublic final class LinkedM3SdkOwnership {\n    private LinkedM3SdkOwnership() { }\n\n    private static void owner(String name, String module, boolean bootstrap) throws Exception {\n        Class<?> type = Class.forName(name, false, ClassLoader.getSystemClassLoader());\n        if (!type.getModule().isNamed() || !module.equals(type.getModule().getName())) {\n            throw new AssertionError(name + \" module=\" + type.getModule());\n        }\n        if (bootstrap && type.getClassLoader() != null) {\n            throw new AssertionError(name + \" is not bootstrap-owned\");\n        }\n        String resource = \"/\" + name.replace('.', '/') + \".class\";\n        URL location = type.getResource(resource);\n        if (location == null || !\"jrt\".equals(location.getProtocol())\n                || !location.getPath().equals(\"/\" + module + resource)) {\n            throw new AssertionError(name + \" resource=\" + location);\n        }\n        if (ModuleLayer.boot().findModule(module).orElseThrow() != type.getModule()) {\n            throw new AssertionError(name + \" is not in the installed boot layer\");\n        }\n        System.out.println(\"OWNER \" + name + \" \" + location);\n    }\n\n    public static void main(String[] arguments) throws Exception {\n        Path expected = Path.of(arguments[0]).toRealPath();\n        Path actual = Path.of(System.getProperty(\"java.home\")).toRealPath();\n        if (!actual.equals(expected)) {\n            throw new AssertionError(\"java.home=\" + actual + \" expected=\" + expected);\n        }\n        owner(\"java.lang.String\", \"java.base\", true);\n        owner(\"java.lang.M3String\", \"java.base\", true);\n        owner(\"java.util.CollectionViews\", \"java.base\", true);\n        owner(\"com.m3.collections.M3CollectionViews\", \"com.m3.collections\", false);\n        owner(\"com.m3.collections.M3IndexedListSnapshot\", \"com.m3.collections\", false);\n        owner(\"com.m3.collections.M3IndexMaskCompactor\", \"com.m3.collections\", false);\n        owner(\"com.m3.collections.M3SignalOrder\", \"com.m3.collections\", false);\n        System.out.println(\"PASS installed M3JDK21 ownership: 7 classes from the linked jrt image\");\n    }\n}\n"
+    },
+    {
+      "logical_path": "m3/docs/composed-integration-20261021/evidence/collections/RESOURCE_SAMPLES.csv",
+      "encoding": "UTF-8",
+      "mode": "100644",
+      "bytes": 5470,
+      "sha256": "2d73889da9a401d9b6e8c868acbbb3a2c379d340220a702d452f0a2e2b2b06c5",
+      "git_blob": "93f1e0914c830c19ad96083ab9162f31954cb4f6",
+      "content_utf8": "variant,round,backend,size,distribution,cold_wall_ns,median_wall_ns_per_op,median_thread_cpu_ns_per_op,median_thread_allocated_bytes_per_op,retained_index_payload_bytes,modeled_native_scratch_bytes\nbaseline,1,Java,0,repeated,541367,82,83,24,0,0\nbaseline,1,Java,0,narrow,681,54,55,24,0,0\nbaseline,1,Java,0,varying,270,57,57,24,0,0\nbaseline,1,Java,1,repeated,73521,72,73,72,4,0\nbaseline,1,Java,1,narrow,2604,55,55,72,4,0\nbaseline,1,Java,1,varying,1252,56,57,72,4,0\nbaseline,1,Java,256,repeated,63806,8949,8856,7272,1024,0\nbaseline,1,Java,256,narrow,12729,6552,6556,7272,1024,0\nbaseline,1,Java,256,varying,6340,6330,6334,7272,1024,0\nbaseline,1,Java,65536,repeated,1590601,1280357,1237801,1573992,262144,0\nbaseline,1,Java,65536,narrow,1306893,1385003,1334337,1573992,262144,0\nbaseline,1,Java,65536,varying,1416508,1569096,1562761,1573992,262144,0\ncandidate,1,Java,0,repeated,705094,71,71,24,0,0\ncandidate,1,Java,0,narrow,6710,55,55,24,0,0\ncandidate,1,Java,0,varying,220,64,64,24,0,0\ncandidate,1,Java,1,repeated,85249,103,94,72,4,0\ncandidate,1,Java,1,narrow,2444,65,66,72,4,0\ncandidate,1,Java,1,varying,511,65,66,72,4,0\ncandidate,1,Java,256,repeated,43996,6330,6338,7272,1024,0\ncandidate,1,Java,256,narrow,177899,4307,4305,7272,1024,0\ncandidate,1,Java,256,varying,11818,5834,5838,7272,1024,0\ncandidate,1,Java,65536,repeated,916934,680652,667709,1573992,262144,0\ncandidate,1,Java,65536,narrow,686326,754402,684408,1573992,262144,0\ncandidate,1,Java,65536,varying,1192680,1232691,1186857,1573992,262144,0\nbaseline,1,JNI,0,repeated,1546775,102,103,24,0,0\nbaseline,1,JNI,0,narrow,7211,53,54,24,0,0\nbaseline,1,JNI,0,varying,791,54,54,24,0,0\nbaseline,1,JNI,1,repeated,123647,134,135,72,4,0\nbaseline,1,JNI,1,narrow,3345,107,108,72,4,0\nbaseline,1,JNI,1,varying,681,83,84,72,4,0\nbaseline,1,JNI,256,repeated,33080,7381,7254,3128,1024,6144\nbaseline,1,JNI,256,narrow,22664,6900,6907,3128,1024,6144\nbaseline,1,JNI,256,varying,14372,7012,6936,3128,1024,6144\nbaseline,1,JNI,65536,repeated,2075062,1036357,995775,786488,262144,1572864\nbaseline,1,JNI,65536,narrow,931186,1150458,1151030,786488,262144,1572864\nbaseline,1,JNI,65536,varying,1185059,1211218,1206173,786488,262144,1572864\ncandidate,1,JNI,0,repeated,1238049,75,75,24,0,0\ncandidate,1,JNI,0,narrow,5969,54,55,24,0,0\ncandidate,1,JNI,0,varying,220,56,56,24,0,0\ncandidate,1,JNI,1,repeated,104538,157,158,72,4,0\ncandidate,1,JNI,1,narrow,3065,116,116,72,4,0\ncandidate,1,JNI,1,varying,471,105,106,72,4,0\ncandidate,1,JNI,256,repeated,24897,2974,2718,3128,1024,6144\ncandidate,1,JNI,256,narrow,21413,4311,4326,3128,1024,6144\ncandidate,1,JNI,256,varying,14742,6219,6031,3128,1024,6144\ncandidate,1,JNI,65536,repeated,1182565,398320,393912,786488,262144,1572864\ncandidate,1,JNI,65536,narrow,881130,633065,630624,786488,262144,1572864\ncandidate,1,JNI,65536,varying,1204388,1207412,1206657,786488,262144,1572864\ncandidate,2,Java,0,repeated,591352,80,80,24,0,0\ncandidate,2,Java,0,narrow,1042,55,56,24,0,0\ncandidate,2,Java,0,varying,210,54,55,24,0,0\ncandidate,2,Java,1,repeated,92029,124,124,72,4,0\ncandidate,2,Java,1,narrow,4928,61,61,72,4,0\ncandidate,2,Java,1,varying,160,54,55,72,4,0\ncandidate,2,Java,256,repeated,173742,3571,3576,7272,1024,0\ncandidate,2,Java,256,narrow,172731,3528,3531,7272,1024,0\ncandidate,2,Java,256,varying,11106,5259,5250,7272,1024,0\ncandidate,2,Java,65536,repeated,735801,599316,580908,1573992,262144,0\ncandidate,2,Java,65536,narrow,683091,962743,925764,1573992,262144,0\ncandidate,2,Java,65536,varying,1196025,1433041,1392897,1573992,262144,0\nbaseline,2,Java,0,repeated,622089,75,76,24,0,0\nbaseline,2,Java,0,narrow,6680,53,54,24,0,0\nbaseline,2,Java,0,varying,230,54,55,24,0,0\nbaseline,2,Java,1,repeated,79630,72,67,72,4,0\nbaseline,2,Java,1,narrow,3225,60,60,72,4,0\nbaseline,2,Java,1,varying,290,59,59,72,4,0\nbaseline,2,Java,256,repeated,52109,7093,7076,7272,1024,0\nbaseline,2,Java,256,narrow,13270,5788,5792,7272,1024,0\nbaseline,2,Java,256,varying,6470,5866,5870,7272,1024,0\nbaseline,2,Java,65536,repeated,1382787,1178592,1149535,1573992,262144,0\nbaseline,2,Java,65536,narrow,1200582,1278785,1237831,1573992,262144,0\nbaseline,2,Java,65536,varying,1387674,1866717,1853444,1573992,262144,0\ncandidate,2,JNI,0,repeated,921071,76,67,24,0,0\ncandidate,2,JNI,0,narrow,11428,60,61,24,0,0\ncandidate,2,JNI,0,varying,290,56,56,24,0,0\ncandidate,2,JNI,1,repeated,98158,127,128,72,4,0\ncandidate,2,JNI,1,narrow,2985,105,106,72,4,0\ncandidate,2,JNI,1,varying,541,83,83,72,4,0\ncandidate,2,JNI,256,repeated,24848,2707,2457,3128,1024,6144\ncandidate,2,JNI,256,narrow,22313,4192,4194,3128,1024,6144\ncandidate,2,JNI,256,varying,14652,5909,5912,3128,1024,6144\ncandidate,2,JNI,65536,repeated,715180,437583,408265,786488,262144,1572864\ncandidate,2,JNI,65536,narrow,1184118,688967,646459,786488,262144,1572864\ncandidate,2,JNI,65536,varying,1583039,1620906,1621414,786488,262144,1572864\nbaseline,2,JNI,0,repeated,1486073,95,96,24,0,0\nbaseline,2,JNI,0,narrow,1442,66,66,24,0,0\nbaseline,2,JNI,0,varying,881,65,66,24,0,0\nbaseline,2,JNI,1,repeated,152200,183,184,72,4,0\nbaseline,2,JNI,1,narrow,4987,165,166,72,4,0\nbaseline,2,JNI,1,varying,1452,175,176,72,4,0\nbaseline,2,JNI,256,repeated,43505,6247,6253,3128,1024,6144\nbaseline,2,JNI,256,narrow,22134,7120,7137,3128,1024,6144\nbaseline,2,JNI,256,varying,21382,9098,8798,3128,1024,6144\nbaseline,2,JNI,65536,repeated,2303738,1026485,975320,786488,262144,1572864\nbaseline,2,JNI,65536,narrow,973710,1097529,1071523,786488,262144,1572864\nbaseline,2,JNI,65536,varying,1830403,1368702,1281363,786488,262144,1572864\n"
+    },
+    {
+      "logical_path": "m3/docs/composed-integration-20261021/evidence/core/E2/JTREG_E2_SUMMARY.log",
+      "encoding": "UTF-8",
+      "mode": "100644",
+      "bytes": 2793,
+      "sha256": "4004adfa05b777b5fa44873e40d3b83c94421f26a0bd5b9d885b69cd2d9d0f68",
+      "git_blob": "473762e049d88d44610c930791d3d70ba133e11c",
+      "content_utf8": "java/io/StringReader/M3NativeStringIoTest.java                  Passed. Execution successful\njava/lang/String/M3StringCanonicalDagTest.java                  Passed. Execution successful\njava/lang/String/M3StringCharArrayCompositionTest.java          Failed. Execution failed: `main' threw exception: java.lang.NoSuchMethodException: java.lang.M3String.admitArrays([[C)\njava/lang/String/M3StringCodePointBoundsTest.java               Passed. Execution successful\njava/lang/String/M3StringCompositeComparisonTest.java           Passed. Execution successful\njava/lang/String/M3StringCompositePrefixCursorTest.java         Passed. Execution successful\njava/lang/String/M3StringConcatLengthOverflowTest.java          Passed. Execution successful\njava/lang/String/M3StringConcatReferenceDagTest.java            Passed. Execution successful\njava/lang/String/M3StringCriticalBulkTest.java                  Passed. Execution successful\njava/lang/String/M3StringJniShadowLifetimeTest.java             Passed. Execution successful\njava/lang/String/M3StringLeafCursorCanonicalTest.java           Passed. Execution successful\njava/lang/String/M3StringModifiedUtf8DpTest.java                Passed. Execution successful\njava/lang/String/M3StringNativePublicationFailureTest.java      Passed. Execution successful\njava/lang/String/M3StringOwnerRangeLifetimeTest.java            Passed. Execution successful\njava/lang/String/M3StringPathCursorTest.java                    Passed. Execution successful\njava/lang/String/M3StringPoolBoundsTest.java                    Failed. Execution failed: `main' threw exception: java.lang.AssertionError: a refused admission leaves the accounting untouched\njava/lang/String/M3StringPoolMetadataBoundsTest.java            Passed. Execution successful\njava/lang/String/M3StringRegexNativeBridgeTest.java             Passed. Execution successful\njava/lang/String/M3StringTuplePublicationFailureTest.java       Passed. Execution successful\njava/lang/String/M3StringUtf16DifferentialTest.java             Passed. Execution successful\njava/util/CollectionViews/BootstrapViewsTest.java               Passed. Execution successful\njava/util/CollectionViews/CollectionViewsCoreContract.java      Passed. Execution successful\njava/util/CollectionViews/CollectionViewsCowBulkTest.java       Passed. Execution successful\njava/util/CollectionViews/CollectionViewsIdentityContract.java  Passed. Execution successful\njava/util/CollectionViews/CollectionViewsIdentityTest.java      Passed. Execution successful\njava/util/CollectionViews/CollectionViewsRefinement.java        Passed. Execution successful\njdk/internal/m3/M3IndexMaskWindowIntegrationTest.java           Passed. Execution successful\njdk/internal/m3/M3IndexMaskWindowJniTest.java                   Passed. Execution successful\n"
+    },
+    {
+      "logical_path": "m3/docs/composed-integration-20261021/evidence/core/E2/build/images-receiving-retry.log",
+      "encoding": "UTF-8",
+      "mode": "100644",
+      "bytes": 313,
+      "sha256": "c6c8aefe441520a4171a67250923d9ca7e9fea0d43bddd56a097d847293a0420",
+      "git_blob": "dad9a48ac1ab115e0926db1df1bfd043fd116073",
+      "content_utf8": "Using exact match for CONF=m3-composed-release (other matches are possible)\nBuilding target 'images' in configuration 'm3-composed-release'\nCreating CDS archive for jdk image for server\nCreating CDS-NOCOOPS archive for jdk image for server\nFinished building target 'images' in configuration 'm3-composed-release'\n"
+    },
+    {
+      "logical_path": "m3/docs/composed-integration-20261021/evidence/core/E2/build/images-receiving.log",
+      "encoding": "UTF-8",
+      "mode": "100644",
+      "bytes": 6472,
+      "sha256": "f40b09bfa89200e6eb12cba7fd5c7d8264f18124c0c39ecb6f6450bb7d61a494",
+      "git_blob": "aaa923ec0490bf5f9bbbcbfcfa16cb4fbe43fa90",
+      "content_utf8": "Using exact match for CONF=m3-composed-release (other matches are possible)\nBuilding target 'images' in configuration 'm3-composed-release'\nCompiling up to 3591 files for java.base\nUpdating support/src.zip\nCreating interim java.base.jmod\nCreating interim jimage\nCreating jdk.jlink.jmod\nCreating java.base.jmod\nCreating jdk image\nError: directory already exists: <M3JDK21>/build/m3-composed-release/images/jdk\njava.lang.IllegalArgumentException: directory already exists: <M3JDK21>/build/m3-composed-release/images/jdk\n\tat jdk.jlink/jdk.tools.jlink.internal.TaskHelper$PluginsHelper.getPluginsConfig(TaskHelper.java:417)\n\tat jdk.jlink/jdk.tools.jlink.internal.TaskHelper.getPluginsConfig(TaskHelper.java:713)\n\tat jdk.jlink/jdk.tools.jlink.internal.JlinkTask.createImage(JlinkTask.java:420)\n\tat jdk.jlink/jdk.tools.jlink.internal.JlinkTask.run(JlinkTask.java:286)\n\tat jdk.jlink/jdk.tools.jlink.internal.Main.run(Main.java:56)\n\tat jdk.jlink/jdk.tools.jlink.internal.Main.main(Main.java:34)\ngmake[3]: *** [Images.gmk:90: <M3JDK21>/build/m3-composed-release/support/images/jdk/_jlink_jdk_exec.marker] Error 1\ngmake[2]: *** [make/Main.gmk:446: jdk-image] Error 2\n\nERROR: Build failed for target 'images' in configuration 'm3-composed-release' (exit code 2) \nStopping javac server\n\n=== Output from failing command(s) repeated here ===\n* For target buildtools_depend__the.COMPILE_DEPEND_batch:\njavacserver server process failed to initialize: No port file values materialized. Giving up after 60254 ms\nProcess output:\njava.net.SocketException: Operation not permitted\n\tat java.base/sun.nio.ch.Net.socket0(Native Method)\n\tat java.base/sun.nio.ch.Net.serverSocket(Net.java:556)\n\tat java.base/sun.nio.ch.Net.serverSocket(Net.java:550)\n\tat java.base/sun.nio.ch.NioSocketImpl.create(NioSocketImpl.java:464)\n\tat java.base/java.net.ServerSocket.getImpl(ServerSocket.java:311)\n\tat java.base/java.net.ServerSocket.bind(ServerSocket.java:390)\n\tat java.base/java.net.ServerSocket.bind(ServerSocket.java:342)\n\tat javacserver.server.Server.start(Server.java:144)\n\tat javacserver.server.Server.main(Server.java:81)\n<End of process output>\nProcess exit code: 1\nIOException caught during compilation: Server failed to initialize: No port file values materialized. Giving up after 60254 ms\n* For target buildtools_jdk_tools_classes__the.BUILD_TOOLS_JDK_batch:\njavacserver server process failed to initialize: No port file values materialized. Giving up after 60196 ms\nProcess output:\njava.net.SocketException: Operation not permitted\n\tat java.base/sun.nio.ch.Net.socket0(Native Method)\n\tat java.base/sun.nio.ch.Net.serverSocket(Net.java:556)\n\tat java.base/sun.nio.ch.Net.serverSocket(Net.java:550)\n\tat java.base/sun.nio.ch.NioSocketImpl.create(NioSocketImpl.java:464)\n\tat java.base/java.net.ServerSocket.getImpl(ServerSocket.java:311)\n\tat java.base/java.net.ServerSocket.bind(ServerSocket.java:390)\n\tat java.base/java.net.ServerSocket.bind(ServerSocket.java:342)\n\tat javacserver.server.Server.start(Server.java:144)\n\tat javacserver.server.Server.main(Server.java:81)\n<End of process output>\nProcess exit code: 1\nIOException caught during compilation: Server failed to initialize: No port file values materialized. Giving up after 60196 ms\n* For target jdk_modules_java.base__the.java.base_batch:\n<M3JDK21>/src/java.base/share/classes/java/util/CollectionViews.java:57: warning: no @param for <E>\n    public static <E> Collection<E> filtered(\n                                    ^\n<M3JDK21>/src/java.base/share/classes/java/util/CollectionViews.java:57: warning: no @param for backing\n    public static <E> Collection<E> filtered(\n                                    ^\n<M3JDK21>/src/java.base/share/classes/java/util/CollectionViews.java:57: warning: no @param for predicate\n    public static <E> Collection<E> filtered(\n                                    ^\n<M3JDK21>/src/java.base/share/classes/java/util/CollectionViews.java:57: warning: no @return\n    public static <E> Collection<E> filtered(\n                                    ^\n<M3JDK21>/src/java.base/share/classes/java/util/CollectionViews.java:67: warning: no @param for <E>\n    public static <E> Set<E> filtered(Set<E> backing, Predicate<? super E> predicate) {\n                             ^\n   ... (rest of output omitted)\n* For target jdk_modules_java.compiler__the.java.compiler_batch:\nConnection attempt failed: Connection refused\nConnection attempt failed: Connection refused\nConnection attempt failed: Connection refused\nGiving up\nIOException caught during compilation: Could not connect to server\n* For target jdk_modules_java.datatransfer__the.java.datatransfer_batch:\nConnection attempt failed: Connection refused\nConnection attempt failed: Connection refused\nConnection attempt failed: Connection refused\nGiving up\nIOException caught during compilation: Could not connect to server\n* For target jdk_modules_java.instrument__the.java.instrument_batch:\nConnection attempt failed: Connection refused\nConnection attempt failed: Connection refused\nConnection attempt failed: Connection refused\nGiving up\nIOException caught during compilation: Could not connect to server\n* For target jdk_modules_java.xml__the.java.xml_batch:\nConnection attempt failed: Connection refused\nConnection attempt failed: Connection refused\nConnection attempt failed: Connection refused\nGiving up\nIOException caught during compilation: Could not connect to server\n* For target support_images_jdk__jlink_jdk_exec:\nError: directory already exists: <M3JDK21>/build/m3-composed-release/images/jdk\njava.lang.IllegalArgumentException: directory already exists: <M3JDK21>/build/m3-composed-release/images/jdk\n\tat jdk.jlink/jdk.tools.jlink.internal.TaskHelper$PluginsHelper.getPluginsConfig(TaskHelper.java:417)\n\tat jdk.jlink/jdk.tools.jlink.internal.TaskHelper.getPluginsConfig(TaskHelper.java:713)\n\tat jdk.jlink/jdk.tools.jlink.internal.JlinkTask.createImage(JlinkTask.java:420)\n\tat jdk.jlink/jdk.tools.jlink.internal.JlinkTask.run(JlinkTask.java:286)\n\tat jdk.jlink/jdk.tools.jlink.internal.Main.run(Main.java:56)\n\tat jdk.jlink/jdk.tools.jlink.internal.Main.main(Main.java:34)\n\n* All command lines available in <M3JDK21>/build/m3-composed-release/make-support/failure-logs.\n=== End of repeated output ===\n\nNo indication of failed target found.\nHELP: Try searching the build log for '] Error'.\nHELP: Run 'make doctor' to diagnose build problems.\n\nmake[1]: *** [<M3JDK21>/make/Init.gmk:320: main] Error 2\nmake: *** [<M3JDK21>/make/Init.gmk:186: images] Error 2\n"
+    },
+    {
+      "logical_path": "m3/docs/composed-integration-20261021/evidence/core/JTREG_E1_SUMMARY.log",
+      "encoding": "UTF-8",
+      "mode": "100644",
+      "bytes": 3073,
+      "sha256": "c8808798d3a6c2cc96f63731116e2bce8eef13ef34e24a7f24464ee4fac782a1",
+      "git_blob": "df3dc73998da1e7f9229e18eef04bb4dd67c50cd",
+      "content_utf8": "java/io/StringReader/M3NativeStringIoTest.java                  Passed. Execution successful\njava/lang/String/M3StringCanonicalDagTest.java                  Passed. Execution successful\njava/lang/String/M3StringCharArrayCompositionTest.java          Failed. Execution failed: `main' threw exception: java.lang.NoSuchMethodException: java.lang.M3String.admitArrays([[C)\njava/lang/String/M3StringCodePointBoundsTest.java               Passed. Execution successful\njava/lang/String/M3StringCompositeComparisonTest.java           Passed. Execution successful\njava/lang/String/M3StringCompositePrefixCursorTest.java         Passed. Execution successful\njava/lang/String/M3StringConcatLengthOverflowTest.java          Error. Program `<M3JDK21>/build/m3-composed-release/images/jdk/bin/java' timed out (timeout set to 480000ms, elapsed time including timeout handling was 480122ms).\njava/lang/String/M3StringConcatReferenceDagTest.java            Failed. Execution failed: `main' threw exception: java.lang.AssertionError: null toString conversion\njava/lang/String/M3StringCriticalBulkTest.java                  Passed. Execution successful\njava/lang/String/M3StringJniShadowLifetimeTest.java             Passed. Execution successful\njava/lang/String/M3StringLeafCursorCanonicalTest.java           Passed. Execution successful\njava/lang/String/M3StringModifiedUtf8DpTest.java                Passed. Execution successful\njava/lang/String/M3StringNativePublicationFailureTest.java      Passed. Execution successful\njava/lang/String/M3StringOwnerRangeLifetimeTest.java            Passed. Execution successful\njava/lang/String/M3StringPathCursorTest.java                    Passed. Execution successful\njava/lang/String/M3StringPoolBoundsTest.java                    Failed. Execution failed: `main' threw exception: java.lang.AssertionError: a refused admission leaves the accounting untouched\njava/lang/String/M3StringPoolMetadataBoundsTest.java            Failed. Execution failed: `main' threw exception: java.lang.AssertionError: Latin-1 admission refused\njava/lang/String/M3StringRegexNativeBridgeTest.java             Passed. Execution successful\njava/lang/String/M3StringTuplePublicationFailureTest.java       Passed. Execution successful\njava/lang/String/M3StringUtf16DifferentialTest.java             Passed. Execution successful\njava/util/CollectionViews/BootstrapViewsTest.java               Passed. Execution successful\njava/util/CollectionViews/CollectionViewsCoreContract.java      Passed. Execution successful\njava/util/CollectionViews/CollectionViewsCowBulkTest.java       Passed. Execution successful\njava/util/CollectionViews/CollectionViewsIdentityContract.java  Passed. Execution successful\njava/util/CollectionViews/CollectionViewsIdentityTest.java      Passed. Execution successful\njava/util/CollectionViews/CollectionViewsRefinement.java        Passed. Execution successful\njdk/internal/m3/M3IndexMaskWindowIntegrationTest.java           Passed. Execution successful\njdk/internal/m3/M3IndexMaskWindowJniTest.java                   Passed. Execution successful\n"
+    },
+    {
+      "logical_path": "m3/docs/composed-integration-20261021/evidence/core/M3StringNullableConcatProbe.java",
+      "encoding": "UTF-8",
+      "mode": "100644",
+      "bytes": 4190,
+      "sha256": "4ebc9766db609be395291e5c083d9b8e1c2fd7ed5d1c27938cd134c034076588",
+      "git_blob": "dd479a913b3e3c42672bfa5d964e48ef07e7b997",
+      "content_utf8": "/*\n * Copyright (c) 2026, Hitesh Soliwal and contributors. All rights reserved.\n * SPDX-License-Identifier: Apache-2.0\n *\n * Isolated installed-image probe; not a replacement for the product jtreg test.\n */\n\nimport java.lang.invoke.MethodHandle;\nimport java.lang.invoke.MethodHandles;\nimport java.lang.invoke.MethodType;\nimport java.lang.invoke.StringConcatFactory;\nimport java.lang.reflect.Field;\n\npublic final class M3StringNullableConcatProbe {\n    private static int checks;\n\n    private M3StringNullableConcatProbe() {}\n\n    public static void main(String[] args) throws Throwable {\n        same(single(null), \"left-long-null-right-long\", \"typed String null\");\n        same(single(\"\"), \"left-long--right-long\", \"typed String empty\");\n        same(single(\"v\"), \"left-long-v-right-long\", \"typed String value\");\n        same(triple(null, \"b\", \"c\"), \"null|b|c\", \"first null\");\n        same(triple(\"a\", null, \"c\"), \"a|null|c\", \"middle null\");\n        same(triple(\"a\", \"b\", null), \"a|b|null\", \"last null\");\n        same(triple(null, null, null), \"null|null|null\", \"all null\");\n        same(mixed(null, 3, '\\u03bb'), \"null|3|\\u03bb\", \"String and primitive\");\n\n        StringBuilder trace = new StringBuilder();\n        same(threePieces(trace), \"null|b|null\", \"side-effect content\");\n        same(trace.toString(), \"ABC\", \"left-to-right evaluation\");\n\n        int[] calls = {0};\n        Object nullText = new Object() {\n            @Override public String toString() {\n                calls[0]++;\n                return null;\n            }\n        };\n        same(object(nullText), \"left-long-null-right-long\", \"null toString\");\n        check(calls[0] == 1, \"one toString call\");\n\n        MethodHandle target = StringConcatFactory.makeConcatWithConstants(\n                MethodHandles.lookup(), \"makeConcatWithConstants\",\n                MethodType.methodType(String.class, String.class, String.class),\n                \"left-long-\\u0001|\\u0001-right-long\").dynamicInvoker();\n        same((String) target.invokeExact((String) null, \"x\"),\n                \"left-long-null|x-right-long\", \"explicit bootstrap first null\");\n        same((String) target.invokeExact(\"x\", (String) null),\n                \"left-long-x|null-right-long\", \"explicit bootstrap last null\");\n        same((String) target.invokeExact((String) null, (String) null),\n                \"left-long-null|null-right-long\", \"explicit bootstrap all null\");\n\n        String first = single(null);\n        String second = single(null);\n        check(first != second, \"fresh concat wrapper\");\n        if (args.length != 0) {\n            Field m3 = String.class.getDeclaredField(\"m3\");\n            m3.setAccessible(true);\n            if (args[0].equals(\"admitted\")) {\n                check(m3.get(first) != null, \"M3 composition admitted\");\n            } else if (args[0].equals(\"refused\")) {\n                check(m3.get(first) == null, \"zero-budget flat fallback\");\n            } else {\n                throw new IllegalArgumentException(args[0]);\n            }\n        }\n        System.out.println(\"M3_STRING_NULLABLE_CONCAT_PROBE_PASS|checks=\" + checks);\n    }\n\n    private static String single(String value) {\n        return \"left-long-\" + value + \"-right-long\";\n    }\n\n    private static String triple(String a, String b, String c) {\n        return a + \"|\" + b + \"|\" + c;\n    }\n\n    private static String mixed(String a, int b, char c) {\n        return a + \"|\" + b + \"|\" + c;\n    }\n\n    private static String object(Object value) {\n        return \"left-long-\" + value + \"-right-long\";\n    }\n\n    private static String threePieces(StringBuilder trace) {\n        return piece(trace, \"A\", null) + \"|\"\n                + piece(trace, \"B\", \"b\") + \"|\" + piece(trace, \"C\", null);\n    }\n\n    private static String piece(StringBuilder trace, String label, String value) {\n        trace.append(label);\n        return value;\n    }\n\n    private static void same(String actual, String expected, String label) {\n        check(actual.equals(expected), label + \": expected=\" + expected + \" actual=\" + actual);\n    }\n\n    private static void check(boolean ok, String label) {\n        checks++;\n        if (!ok) throw new AssertionError(label);\n    }\n}\n"
+    },
+    {
+      "logical_path": "m3/docs/composed-integration-20261021/evidence/core/build/images-direct.log",
+      "encoding": "UTF-8",
+      "mode": "100644",
+      "bytes": 12738,
+      "sha256": "e951fce51edaa6051b70a005256de11b90b0ef203b4decdef11a5abec712d6bd",
+      "git_blob": "05c16afef963cb9348aa21b743ed2327fca26895",
+      "content_utf8": "Using exact match for CONF=m3-composed-release (other matches are possible)\nBuilding target 'images' in configuration 'm3-composed-release'\nCompiling up to 187 files for BUILD_TOOLS_JDK\nCreating support/modules_libs/java.base/jrt-fs.jar\nCompiling up to 2 files for COMPILE_DEPEND\nCompiling up to 2 files for BUILD_BREAKITERATOR_BASE\nCompiling up to 2 files for BUILD_BREAKITERATOR_LD\nCompiling 11 properties into resource bundles for java.logging\nCompiling 4 properties into resource bundles for jdk.httpserver\nCompiling 11 properties into resource bundles for jdk.jartool\nCompiling up to 71 files for COMPILE_CREATE_SYMBOLS\nCompiling 11 properties into resource bundles for jdk.management.agent\nCompiling 9 properties into resource bundles for jdk.jlink\nCompiling 4 properties into resource bundles for jdk.jlink\nCompiling 1 properties into resource bundles for jdk.jlink\nCompiling 4 properties into resource bundles for jdk.jdi\nCompiling 224 properties into resource bundles for jdk.localedata\nCompiling up to 71 files for COMPILE_CREATE_SYMBOLS\nCompiling 11 properties into resource bundles for java.base\nCreating ct.sym classes\nCompiling 6 properties into resource bundles for java.base\nCompiling up to 3591 files for java.base\nCompiling 89 properties into resource bundles for java.desktop\nUpdating support/src.zip\nCompiling up to 18 files for java.datatransfer\nCompiling up to 127 files for java.compiler\nCompiling up to 1850 files for java.xml\nCompiling up to 10 files for java.instrument\nCompiling up to 35 files for java.logging\nCompiling up to 330 files for java.management\nCreating support/modules_cmds/java.rmi/rmiregistry from 1 file(s)\nCompiling up to 144 files for java.net.http\nCompiling up to 15 files for java.scripting\nCreating support/modules_cmds/java.scripting/jrunscript from 1 file(s)\nCompiling up to 5 files for java.transaction.xa\nCompiling up to 22 files for java.smartcardio\nCompiling up to 61 files for jdk.internal.jvmstat\nCompiling up to 125 files for jdk.charsets\nCompiling up to 52 files for jdk.internal.opt\nCompiling up to 14 files for jdk.zipfs\nCreating support/modules_cmds/jdk.compiler/javac from 1 file(s)\nCreating support/modules_cmds/jdk.compiler/serialver from 1 file(s)\nCompiling up to 35 files for jdk.crypto.ec\nCompiling up to 68 files for jdk.dynalink\nCompiling up to 3 files for jdk.internal.ed\nCreating support/modules_cmds/jdk.hotspot.agent/jhsdb from 1 file(s)\nCompiling up to 59 files for jdk.httpserver\nCreating support/modules_cmds/jdk.httpserver/jwebserver from 1 file(s)\nCompiling up to 50 files for jdk.incubator.vector\nCompiling up to 114 files for jdk.internal.le\nCompiling up to 214 files for jdk.internal.vm.ci\nCompiling up to 28 files for jdk.jartool\nCreating support/modules_cmds/jdk.jartool/jar from 1 file(s)\nCreating support/modules_cmds/jdk.jartool/jarsigner from 1 file(s)\nCreating support/modules_cmds/jdk.javadoc/javadoc from 1 file(s)\nCreating support/modules_cmds/jdk.jcmd/jinfo from 1 file(s)\nCreating support/modules_cmds/jdk.jcmd/jmap from 1 file(s)\nCreating support/modules_cmds/jdk.jcmd/jps from 1 file(s)\nCreating support/modules_cmds/jdk.jcmd/jstack from 1 file(s)\nCreating support/modules_cmds/jdk.jcmd/jstat from 1 file(s)\nCreating support/modules_cmds/jdk.jcmd/jcmd from 1 file(s)\nCompiling up to 24 files for jdk.management\nCreating support/modules_cmds/jdk.jconsole/jconsole from 1 file(s)\nCreating support/modules_cmds/jdk.jdeps/javap from 1 file(s)\nCreating support/modules_cmds/jdk.jdeps/jdeps from 1 file(s)\nCreating support/modules_cmds/jdk.jdeps/jdeprscan from 1 file(s)\nCompiling up to 1 files for jdk.jdwp.agent\nCreating support/modules_cmds/jdk.jdi/jdb from 1 file(s)\nCompiling up to 311 files for jdk.jfr\nCreating support/modules_cmds/jdk.jfr/jfr from 1 file(s)\nCreating support/modules_cmds/jdk.jlink/jimage from 1 file(s)\nCreating support/modules_cmds/jdk.jlink/jlink from 1 file(s)\nCreating support/modules_cmds/jdk.jlink/jmod from 1 file(s)\nCreating support/modules_cmds/jdk.jpackage/jpackage from 1 file(s)\nCreating support/modules_cmds/jdk.jshell/jshell from 1 file(s)\nCompiling up to 4 files for jdk.jsobject\nCreating support/modules_cmds/jdk.jstatd/jstatd from 1 file(s)\nCompiling up to 9 files for jdk.net\nCompiling up to 1877 files for jdk.localedata\nCompiling up to 2 files for jdk.nio.mapmode\nCompiling up to 11 files for jdk.random\nCompiling up to 33 files for jdk.sctp\nCompiling up to 9 files for jdk.unsupported\nCompiling up to 94 files for jdk.xml.dom\nCreating support/modules_cmds/java.base/java from 1 file(s)\nCreating support/modules_cmds/java.base/keytool from 1 file(s)\nCreating support/modules_libs/java.base/jexec from 1 file(s)\nCreating support/modules_libs/java.base/jspawnhelper from 1 file(s)\nCompiling up to 15 files for java.prefs\nCreating support/modules_libs/java.instrument/libinstrument.so from 12 file(s)\nCreating support/modules_libs/java.management/libmanagement.so from 9 file(s)\nCompiling up to 30 files for java.security.sasl\nCompiling up to 106 files for java.rmi\nCompiling up to 77 files for java.sql\nCreating support/modules_libs/java.smartcardio/libj2pcsc.so from 2 file(s)\nCompiling up to 272 files for java.xml.crypto\nCompiling up to 15 files for jdk.attach\nCompiling up to 372 files for jdk.compiler\nCompiling up to 78 files for jdk.crypto.cryptoki\nCreating support/modules_libs/jdk.incubator.vector/libjsvml.so from 36 file(s)\nCreating support/modules_libs/jdk.internal.le/lible.so from 1 file(s)\nCompiling up to 1 files for jdk.internal.vm.compiler\nCompiling up to 1 files for jdk.internal.vm.compiler.management\nCompiling up to 40 files for jdk.jcmd\nCreating support/modules_libs/jdk.management/libmanagement_ext.so from 8 file(s)\nCreating support/modules_libs/jdk.jdwp.agent/libdt_socket.so from 2 file(s)\nCreating support/modules_libs/jdk.jdwp.agent/libjdwp.so from 43 file(s)\nCompiling up to 254 files for jdk.jdi\nCompiling up to 11 files for jdk.jstatd\nCompiling up to 15 files for jdk.management.jfr\nCreating support/modules_libs/jdk.net/libextnet.so from 1 file(s)\nCreating support/modules_libs/jdk.sctp/libsctp.so from 2 file(s)\nCreating support/modules_libs/java.prefs/libprefs.so from 1 file(s)\nCompiling up to 199 files for java.naming\nCreating support/modules_libs/java.rmi/librmi.so from 1 file(s)\nCreating support/modules_libs/jdk.attach/libattach.so from 1 file(s)\nCreating support/modules_libs/jdk.crypto.cryptoki/libj2pkcs11.so from 14 file(s)\nCompiling up to 2776 files for java.desktop\nCompiling up to 242 files for jdk.javadoc\nCompiling up to 139 files for jdk.jdeps\nCompiling up to 99 files for jdk.jshell\nCompiling up to 16 files for jdk.naming.dns\nCompiling up to 8 files for jdk.naming.rmi\nCompiling up to 15 files for java.management.rmi\nCompiling up to 212 files for java.security.jgss\nCompiling up to 56 files for java.sql.rowset\nCompiling up to 91 files for jdk.jlink\nCompiling up to 30 files for jdk.management.agent\nCreating support/modules_libs/java.security.jgss/libj2gss.so from 3 file(s)\nCompiling up to 30 files for jdk.security.auth\nCompiling up to 16 files for jdk.security.jgss\nCreating support/modules_libs/jdk.management.agent/libmanagement_agent.so from 1 file(s)\nUpdating images/sec-bin.zip\nCreating support/modules_libs/jdk.security.auth/libjaas.so from 1 file(s)\nCompiling up to 18 files for jdk.accessibility\nCompiling up to 1 files for java.se\nCompiling up to 3 files for jdk.editpad\nCreating support/modules_libs/java.desktop/libmlib_image.so from 50 file(s)\nCreating support/modules_libs/java.desktop/libawt.so from 72 file(s)\nCreating support/modules_libs/java.desktop/liblcms.so from 27 file(s)\nCreating support/modules_libs/java.desktop/libjavajpeg.so from 46 file(s)\nCreating support/modules_libs/java.desktop/libawt_headless.so from 26 file(s)\nCreating support/modules_libs/java.desktop/libfreetype.so from 105 file(s)\nCreating support/modules_libs/java.desktop/libfontmanager.so from 69 file(s)\nCreating support/modules_libs/java.desktop/libjawt.so from 1 file(s)\nCreating support/modules_libs/java.desktop/libjsound.so from 18 file(s)\nCompiling up to 64 files for jdk.jconsole\nCompiling up to 946 files for jdk.hotspot.agent\nCompiling up to 55 files for jdk.jpackage\nCompiling up to 8 files for jdk.unsupported.desktop\nCreating jdk/modules/jdk.jpackage/jdk/jpackage/internal/resources/jpackageapplauncher from 3 file(s)\nCreating jdk/modules/jdk.jpackage/jdk/jpackage/internal/resources/libjpackageapplauncheraux.so from 18 file(s)\nCreating support/modules_libs/jdk.hotspot.agent/libsaproc.so from 10 file(s)\nCompiling up to 4 files for BUILD_JIGSAW_TOOLS\nOptimizing the exploded image\nCreating java.compiler.jmod\nCreating java.datatransfer.jmod\nCreating java.instrument.jmod\nCreating java.desktop.jmod\nCreating java.logging.jmod\nCreating java.management.jmod\nCreating java.management.rmi.jmod\nCreating java.naming.jmod\nCreating java.net.http.jmod\nCreating java.prefs.jmod\nCreating java.rmi.jmod\nCreating java.scripting.jmod\nCreating java.se.jmod\nCreating java.security.jgss.jmod\nCreating java.security.sasl.jmod\nCreating java.smartcardio.jmod\nCreating java.sql.jmod\nCreating java.sql.rowset.jmod\nCreating java.transaction.xa.jmod\nCreating java.xml.crypto.jmod\nCreating java.xml.jmod\nCreating jdk.accessibility.jmod\nCreating jdk.attach.jmod\nCreating jdk.charsets.jmod\nCreating jdk.compiler.jmod\nCreating jdk.crypto.cryptoki.jmod\nCreating jdk.crypto.ec.jmod\nCreating jdk.dynalink.jmod\nCreating jdk.editpad.jmod\nCreating jdk.httpserver.jmod\nCreating jdk.hotspot.agent.jmod\nCreating jdk.incubator.vector.jmod\nCreating jdk.internal.ed.jmod\nCreating jdk.internal.jvmstat.jmod\nCreating jdk.internal.le.jmod\nCreating jdk.internal.opt.jmod\nCreating jdk.internal.vm.ci.jmod\nCreating jdk.internal.vm.compiler.jmod\nCreating jdk.internal.vm.compiler.management.jmod\nCreating jdk.jartool.jmod\nCreating jdk.javadoc.jmod\nCreating jdk.jcmd.jmod\nCreating jdk.jconsole.jmod\nCreating jdk.jdeps.jmod\nCreating jdk.jdi.jmod\nCreating jdk.jdwp.agent.jmod\nCreating jdk.jfr.jmod\nCreating interim java.base.jmod\nCreating interim java.logging.jmod\nCreating jdk.jpackage.jmod\nCreating jdk.jshell.jmod\nCreating jdk.jsobject.jmod\nCreating jdk.jstatd.jmod\nCreating jdk.management.jmod\nCreating jdk.localedata.jmod\nCreating jdk.management.agent.jmod\nCreating jdk.management.jfr.jmod\nCreating jdk.naming.dns.jmod\nCreating jdk.naming.rmi.jmod\nCreating jdk.net.jmod\nCreating jdk.nio.mapmode.jmod\nCreating jdk.random.jmod\nCreating jdk.sctp.jmod\nCreating jdk.security.auth.jmod\nCreating jdk.security.jgss.jmod\nCreating jdk.unsupported.jmod\nCreating jdk.unsupported.desktop.jmod\nCreating jdk.xml.dom.jmod\nCreating jdk.zipfs.jmod\nCreating interim jimage\nCompiling up to 3 files for BUILD_DEMO_CodePointIM\nUpdating support/demos/image/jfc/CodePointIM/src.zip\nCompiling up to 3 files for BUILD_DEMO_FileChooserDemo\nUpdating support/demos/image/jfc/FileChooserDemo/src.zip\nCompiling up to 2 files for CLASSLIST_JAR\nCompiling up to 29 files for BUILD_DEMO_SwingSet2\nUpdating support/demos/image/jfc/SwingSet2/src.zip\nCompiling up to 3 files for BUILD_DEMO_Font2DTest\nUpdating support/demos/image/jfc/Font2DTest/src.zip\nCompiling up to 64 files for BUILD_DEMO_J2Ddemo\nUpdating support/demos/image/jfc/J2Ddemo/src.zip\nCreating support/classlist.jar\nCompiling up to 15 files for BUILD_DEMO_Metalworks\nUpdating support/demos/image/jfc/Metalworks/src.zip\nCompiling up to 2 files for BUILD_DEMO_Notepad\nUpdating support/demos/image/jfc/Notepad/src.zip\nCreating jdk.jlink.jmod\nCreating java.base.jmod\nCompiling up to 5 files for BUILD_DEMO_Stylepad\nUpdating support/demos/image/jfc/Stylepad/src.zip\nCompiling up to 5 files for BUILD_DEMO_SampleTree\nUpdating support/demos/image/jfc/SampleTree/src.zip\nCompiling up to 8 files for BUILD_DEMO_TableExample\nUpdating support/demos/image/jfc/TableExample/src.zip\nCompiling up to 1 files for BUILD_DEMO_TransparentRuler\nUpdating support/demos/image/jfc/TransparentRuler/src.zip\nCreating support/demos/image/jfc/CodePointIM/CodePointIM.jar\nCreating support/demos/image/jfc/FileChooserDemo/FileChooserDemo.jar\nCreating support/demos/image/jfc/SwingSet2/SwingSet2.jar\nCreating support/demos/image/jfc/Font2DTest/Font2DTest.jar\nCreating support/demos/image/jfc/J2Ddemo/J2Ddemo.jar\nCreating support/demos/image/jfc/Metalworks/Metalworks.jar\nCreating support/demos/image/jfc/Notepad/Notepad.jar\nCreating support/demos/image/jfc/Stylepad/Stylepad.jar\nCreating support/demos/image/jfc/SampleTree/SampleTree.jar\nCreating support/demos/image/jfc/TableExample/TableExample.jar\nCreating support/demos/image/jfc/TransparentRuler/TransparentRuler.jar\nCreating jdk image\nCreating CDS archive for jdk image for server\nCreating CDS-NOCOOPS archive for jdk image for server\nStopping javac server\nFinished building target 'images' in configuration 'm3-composed-release'\n"
+    },
+    {
+      "logical_path": "m3/docs/composed-integration-20261021/evidence/core/build/images-final.log",
+      "encoding": "UTF-8",
+      "mode": "100644",
+      "bytes": 595,
+      "sha256": "ae5939461b9f2288afb14d925efe93cb6e33999be611e3a0214cb5752a452ed8",
+      "git_blob": "e182552efc118c09c489d3e28e8044ceae624183",
+      "content_utf8": "Using exact match for CONF=m3-composed-release (other matches are possible)\nBuilding target 'images' in configuration 'm3-composed-release'\nCompiling up to 3591 files for java.base\nUpdating support/src.zip\nCompiling up to 2776 files for java.desktop\nCreating java.desktop.jmod\nCreating interim java.base.jmod\nCreating interim jimage\nCreating jdk.jlink.jmod\nCreating java.base.jmod\nCreating jdk image\nCreating CDS archive for jdk image for server\nCreating CDS-NOCOOPS archive for jdk image for server\nStopping javac server\nFinished building target 'images' in configuration 'm3-composed-release'\n"
+    },
+    {
+      "logical_path": "m3/docs/composed-integration-20261021/evidence/guards/baseline-string-phase.log",
+      "encoding": "UTF-8",
+      "mode": "100644",
+      "bytes": 711,
+      "sha256": "8d7bf998665451c65e8de1b1365fcc42edaa555568eac13d8f748a8458c9376b",
+      "git_blob": "8f9e233f604a3fc6de031e63d7295ad6e2054700",
+      "content_utf8": "Traceback (most recent call last):\n  File \"${M3_WORK}/evidence/guards/baseline/m3/synexia-import/current-full-borrow/check_string_phase.py\", line 560, in <module>\n    raise SystemExit(main(sys.argv))\n                     ^^^^^^^^^^^^^^\n  File \"${M3_WORK}/evidence/guards/baseline/m3/synexia-import/current-full-borrow/check_string_phase.py\", line 493, in main\n    current_blobs = current_successor_blobs(rows)\n                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"${M3_WORK}/evidence/guards/baseline/m3/synexia-import/current-full-borrow/check_string_phase.py\", line 269, in current_successor_blobs\n    raise ValueError(\"String successor chain length drift\")\nValueError: String successor chain length drift\n"
+    },
+    {
+      "logical_path": "m3/docs/composed-integration-20261021/evidence/guards/final-full-borrow.log",
+      "encoding": "UTF-8",
+      "mode": "100644",
+      "bytes": 281,
+      "sha256": "69354cd1ab04227bdf9f5a5a912361e57b90b1d8315146d447827e2636a259e5",
+      "git_blob": "c4b4aadaf0197dadd7907a9776493f119af717ee",
+      "content_utf8": "SYNEXIA_FULL_BORROW_RECEIVER_PASS families=32 source=296323958b1019edd59b60b9c05cb148d024cfe5 state=SOURCE_PIN_ONLY mixed_review_rows=4 dag=acyclic phases=STRING>ARRAYS>COLLECTIONS>AST_COMPILER>REMAINING_FAMILIES completion=false historical_mapping_evidence=preserved_not_accepted\n"
+    },
+    {
+      "logical_path": "m3/docs/composed-integration-20261021/evidence/guards/final-string-phase.log",
+      "encoding": "UTF-8",
+      "mode": "100644",
+      "bytes": 660,
+      "sha256": "c2fff1d1f4d709e20d8726db27190729c43acd731b35ee54e2e8644a939ea9d9",
+      "git_blob": "7abdf1c45d23687645650c1de57c443e8b4c4572",
+      "content_utf8": "Traceback (most recent call last):\n  File \"${M3_WORK}/M3jdk21/m3/synexia-import/current-full-borrow/check_string_phase.py\", line 560, in <module>\n    raise SystemExit(main(sys.argv))\n                     ^^^^^^^^^^^^^^\n  File \"${M3_WORK}/M3jdk21/m3/synexia-import/current-full-borrow/check_string_phase.py\", line 493, in main\n    current_blobs = current_successor_blobs(rows)\n                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"${M3_WORK}/M3jdk21/m3/synexia-import/current-full-borrow/check_string_phase.py\", line 269, in current_successor_blobs\n    raise ValueError(\"String successor chain length drift\")\nValueError: String successor chain length drift\n"
+    },
+    {
+      "logical_path": "m3/docs/composed-integration-20261021/evidence/guards/receiving-concat-source-gate.log",
+      "encoding": "UTF-8",
+      "mode": "100644",
+      "bytes": 128,
+      "sha256": "3ba4380bca0c24aef2002ead0c359fc8d5858b927e6d7b3f99490399f0f393fd",
+      "git_blob": "64cec695f3acfd33bd30a377ddbe3fb1e3902e9b",
+      "content_utf8": "M3_STRING_CONCAT_REFERENCE_DAG_PASS|m3append=true|budget_fallback=true|typed_stringify=true|no_staging=true|balanced_owner=true\n"
+    }
+  ],
+  "packet_manifests": [
+    {
+      "path": "m3/docs/composed-integration-20261021/evidence/collections/PACKET_MANIFEST.json",
+      "sha256": "5e3d6eb075e61174c3de5b72c10f63c923bafbf9c5d84a45948eb267c23db06a"
+    },
+    {
+      "path": "m3/docs/composed-integration-20261021/evidence/collections/e2/PACKET_MANIFEST.json",
+      "sha256": "f7234aae1e9a690ccf52a7a4d6ef5a970e186fa9c88e3d9679f24efcfe89b297"
+    },
+    {
+      "path": "m3/docs/composed-integration-20261021/evidence/core/PACKET_MANIFEST.json",
+      "sha256": "0bc5395622babd5c0cff4ff2770d6359b14c3645e3a42669f5b85c09211f468d"
+    },
+    {
+      "path": "m3/docs/composed-integration-20261021/evidence/core/E2/PACKET_MANIFEST.json",
+      "sha256": "f39d5b1636ccd78b86dcad2b0e6a954ba0f082c6e6560ddb6e719a5aaa7a5db5"
+    }
+  ],
+  "limits": [
+    "The physical metadata recipe qualifies text transport only, with zero Java targets.",
+    "Original packet manifests verify the reconstructed 82-file logical evidence tree.",
+    "No runtime, compilation, benchmark or promotion result is created by extraction."
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "dataset": "combine-codepoint21",
+  "checks": [
+    {
+      "dataset": "combine-codepoint21",
+      "targets": 2,
+      "changes": 2,
+      "mode": "check",
+      "actual_sdk_results": true
+    },
+    {
+      "dataset": "combine-codepoint21",
+      "targets": 2,
+      "changes": 2,
+      "mode": "apply",
+      "actual_sdk_results": true
+    },
+    {
+      "dataset": "combine-codepoint21",
+      "targets": 2,
+      "changes": 0,
+      "mode": "apply",
+      "actual_sdk_results": true
+    }
+  ],
+  "replay_preserved_bytes_and_mtime": true,
+  "postimages": {
+    "src/java.base/share/classes/java/lang/M3StringAtom.java": "a1226c8ac637fc22b3eba2d95ee65524d12d5f3875cba35cf3c849dcb18c310a",
+    "test/jdk/java/lang/String/M3StringCodePointBoundsTest.java": "4c6936ded44cae6f209e9c93660f334fb2d3f44f3822ff03a9806dbfe1f55c4e"
+  }
+}

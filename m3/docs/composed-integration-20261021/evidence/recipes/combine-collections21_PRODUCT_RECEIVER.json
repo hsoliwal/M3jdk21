@@ -1,0 +1,42 @@
+{
+  "dataset": "combine-collections21",
+  "checks": [
+    {
+      "dataset": "combine-collections21",
+      "targets": 13,
+      "changes": 13,
+      "mode": "check",
+      "actual_sdk_results": true
+    },
+    {
+      "dataset": "combine-collections21",
+      "targets": 13,
+      "changes": 13,
+      "mode": "apply",
+      "actual_sdk_results": true
+    },
+    {
+      "dataset": "combine-collections21",
+      "targets": 13,
+      "changes": 0,
+      "mode": "apply",
+      "actual_sdk_results": true
+    }
+  ],
+  "replay_preserved_bytes_and_mtime": true,
+  "postimages": {
+    "m3/collections/algorithm-catalog/eclipse-structures-20261021.tsv": "aff8cbc734d5723f825c9fb4af172283f8942fe8c0cab5a693be30efd4dc8f30",
+    "m3/collections/src/main/java/com/m3/collections/M3FilteredDeques.java": "b6aec5a921f9eaba6feb14461bf6dca7e67cee26bb84fee3ee3143f873df5121",
+    "m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java": "d2c8962a596c81103f543b3b4b5cd2b55233d44d00238527711b0f38c363acc5",
+    "m3/collections/src/main/java/com/m3/collections/M3MutableFilteredViews.java": "d6b88f4579c798b8715dbe7da1a41d33e0bd1329a2d518b23a20981f70b344a5",
+    "m3/collections/src/main/java/com/m3/collections/M3SignalOrder.java": "3b117a531afd39f071fda04796684084812371982295a508270e58bfb70a2430",
+    "m3/collections/src/main/native/collections/m3_signal_order_jni.c": "8dc63771408057e56610719e6d562454bece9769a5727c7614c104e659dc8a22",
+    "m3/collections/src/test/java/com/m3/collections/M3FilteredCursorExceptionContract.java": "558bcb65249fba80faa5ddb00d138566132c13acfd3c6e67763c78fa1acd5fd8",
+    "m3/collections/src/test/java/com/m3/collections/M3FilteredCursorExceptionTest.java": "5ff4d5d15263310027c66eac8d595c62161fdc20623b42b4f5265a77dab4cedb",
+    "m3/collections/src/test/java/com/m3/collections/M3FilteredDequeContract.java": "83115c8518a132029ea7b4f6818df74c9f628909a6dd8328c9aaf7a85cd2c7ea",
+    "m3/collections/src/test/java/com/m3/collections/M3SignalRadixUniformBench.java": "8b026711262170986520d92fe782913d6a138f66bb9c795b6de748b11aa3dbe4",
+    "m3/collections/src/test/java/com/m3/collections/M3SignalRadixUniformContract.java": "dd85a7c4b19364cc9b91ecf581abb33bf613435aec0873319f7082649dbdfbac",
+    "m3/collections/src/test/java/com/m3/collections/M3SignalRadixUniformTest.java": "482d0d75e1b926b2da7013f8f572b9559738f18e8831ab0b398dcb06825071d8",
+    "m3/docs/name-mapping.d/eclipse-collections-20261021.json": "2201aae2f7a422829c62bbbe3f6fd4bd1545c60611a5806b2faee9cd1b0f5224"
+  }
+}

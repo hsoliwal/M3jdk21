@@ -1,0 +1,615 @@
+{
+  "schema": "SYNEXIA_M3_QUALIFIED_TRANSFORMATION_COMPOSITION_V1",
+  "canonical_parent": "0ee3e62241cb1252f2d018a33969f64e66c2b2fe",
+  "origin": "a115db5d8d9a53c20bf6f6880286a967a80a8dda",
+  "status": "AGGREGATE_SDK_AND_RECEIVER_FIXED_POINT_PASSED",
+  "receiver_function": "receive.py:qualification",
+  "receiver_sha256": "31140ef7bb46caeddddf1074e6f180d317253118be30ca628a1c40c393a5ef69",
+  "source_stages": [
+    {
+      "dataset": "combine-composed21",
+      "baseline_ref": "a115db5d8d9a53c20bf6f6880286a967a80a8dda",
+      "sdk_inputs_sha256": "77b018c5f447470d9598c94736fe92a826c9773b023bd38511735d3c97d6aa1c",
+      "sdk_results_sha256": "b0b8e1e30d18abef22612be7543a3dcf0daaf100db43602ad5d23c62a1337022",
+      "targets": 49
+    },
+    {
+      "dataset": "receive-concat21",
+      "baseline_ref": "a115db5d8d9a53c20bf6f6880286a967a80a8dda + received combine-composed21 local checkpoint; exact current per-file preimages",
+      "sdk_inputs_sha256": "67f75e3474c096d40c6cb238754e705182921bc53c3f0a284aca6b44fa1036f4",
+      "sdk_results_sha256": "aaa27925de377cff310618fb661f580389b5084c146365b30e011cf612b85519",
+      "targets": 2
+    },
+    {
+      "dataset": "receive-budget21",
+      "baseline_ref": "a115db5d8d9a53c20bf6f6880286a967a80a8dda + received combine-composed21 local checkpoint; exact current per-file preimages",
+      "sdk_inputs_sha256": "b82d7c7c2e041fed20f85f920552f271bcf15484410ebcb50b3e99ab9da59c45",
+      "sdk_results_sha256": "92335a4cbf30b5e3578bcafe9c321e6d28154f532dc1e5b519b587c2d6833aba",
+      "targets": 1
+    },
+    {
+      "dataset": "receive-coordinate21",
+      "baseline_ref": "a115db5d8d9a53c20bf6f6880286a967a80a8dda + received combine-composed21 local checkpoint; exact current per-file preimages",
+      "sdk_inputs_sha256": "9fe77d285ecae8fc7d81db4a5ab17b98ed74486a79c8731ed7f741ccb39abfca",
+      "sdk_results_sha256": "414f72ae1729289da089bc354465a3abad04e6f65ab858e0b2df16b00d29767c",
+      "targets": 2
+    },
+    {
+      "dataset": "receive-concat-guard21",
+      "baseline_ref": "a115db5d8d9a53c20bf6f6880286a967a80a8dda + received combine-composed21 local checkpoint; exact current per-file preimages",
+      "sdk_inputs_sha256": "f564e79c42f75c487f3ac879bbd17741b18c6d4d00a06b347f36ecb562fc530f",
+      "sdk_results_sha256": "4fb055a218f4ab5e6487604d64f4968321f0cc18102de832ece42cf03bffd45e",
+      "targets": 2
+    }
+  ],
+  "target_count": 55,
+  "source_packet_admissions": 56,
+  "original_component_admissions": 52,
+  "receiving_component_admissions": 7,
+  "combined_component_admissions": 59,
+  "modifications": 28,
+  "additions": 27,
+  "targets": [
+    {
+      "path": "m3/collections/algorithm-catalog/abseil-convergence-20261021.tsv",
+      "postimage_sha256": "92e92f83463cde1341d30f7dcf8c2d454e0e3495323e540196f62ef6f5eb4736",
+      "mode": 420,
+      "stages": [
+        "combine-composed21"
+      ],
+      "preimage_sha256": null,
+      "preimage_git_blob": null
+    },
+    {
+      "path": "m3/collections/algorithm-catalog/eclipse-structures-20261021.tsv",
+      "postimage_sha256": "aff8cbc734d5723f825c9fb4af172283f8942fe8c0cab5a693be30efd4dc8f30",
+      "mode": 420,
+      "stages": [
+        "combine-composed21"
+      ],
+      "preimage_sha256": null,
+      "preimage_git_blob": null
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3CollectionViews.java",
+      "postimage_sha256": "c8e9361f50f503ee0fb45c322cbd2e1f1701b84dd57f3948c210178b29bebfb4",
+      "mode": 420,
+      "stages": [
+        "combine-composed21"
+      ],
+      "preimage_sha256": "48d8636ea51c1bf05a1c4747e416916695b6bcbe665467f940e71b07ce2d327a",
+      "preimage_git_blob": "11fa30e7cc498b7d46759c72ebae17b0edb78290"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3FilteredDeques.java",
+      "postimage_sha256": "b6aec5a921f9eaba6feb14461bf6dca7e67cee26bb84fee3ee3143f873df5121",
+      "mode": 420,
+      "stages": [
+        "combine-composed21"
+      ],
+      "preimage_sha256": "6342d1acb4f406dc5b3c086d2db18966d7a5fc7f2b2a14c680ca520133165f0a",
+      "preimage_git_blob": "d6ac51e7632a5e6ca8d51c9bfcc94c27d4463f25"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java",
+      "postimage_sha256": "d2c8962a596c81103f543b3b4b5cd2b55233d44d00238527711b0f38c363acc5",
+      "mode": 420,
+      "stages": [
+        "combine-composed21"
+      ],
+      "preimage_sha256": "dce9da78508449041db8907ef7bc44e9fcee1117bbe91db880e35c26933f9470",
+      "preimage_git_blob": "b9eb9c75d51844abda78517f9c1116a00c414f94"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3IndexedListSnapshot.java",
+      "postimage_sha256": "86e277ee069f3f077e44f5cd93b7f75cf07d357c613250d96a8e1e494969572c",
+      "mode": 420,
+      "stages": [
+        "combine-composed21"
+      ],
+      "preimage_sha256": "4b20bfb5ff5974218cfea24af265f6eae5e67606df2bcbfe99b51eb9b1f1ff34",
+      "preimage_git_blob": "b826029d9fffef73d9bb6797c8b6e27ec07e790d"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LongBitmapFilteredSnapshot.java",
+      "postimage_sha256": "cb1c0ab9eccd76078ec2e4b8e30dc9fb1bde945979326c3a2466392b33d66257",
+      "mode": 420,
+      "stages": [
+        "combine-composed21"
+      ],
+      "preimage_sha256": "9b4b095f7f51b27a76e6a56cda60c6662cbbf60bcb8b55655f82c127b4451af6",
+      "preimage_git_blob": "f82ffe51ababbdd9b663ceb2b113d7efc9e121e0"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3MutableFilteredViews.java",
+      "postimage_sha256": "d6b88f4579c798b8715dbe7da1a41d33e0bd1329a2d518b23a20981f70b344a5",
+      "mode": 420,
+      "stages": [
+        "combine-composed21"
+      ],
+      "preimage_sha256": "3c65c0d918b6cb39d4c27f98699fa97067d2aa3a7fb76ea48b2fd6092a9d0178",
+      "preimage_git_blob": "37b669dfe22a3b6be9e68aa59f9dd94e96fc3d49"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3SignalOrder.java",
+      "postimage_sha256": "3b117a531afd39f071fda04796684084812371982295a508270e58bfb70a2430",
+      "mode": 420,
+      "stages": [
+        "combine-composed21"
+      ],
+      "preimage_sha256": "15c85e74a51a716af1b11038c05263b83b1a1ea02f345bc3838d661a158fd80f",
+      "preimage_git_blob": "dfbcd0cb5552d979af3340cdbd7aec98155841ce"
+    },
+    {
+      "path": "m3/collections/src/main/native/collections/m3_index_mask_compactor.c",
+      "postimage_sha256": "fedca631c2f0f0f73a27dde5e87395e95ac00fde07fc1d7006735c2ef18a579a",
+      "mode": 420,
+      "stages": [
+        "combine-composed21"
+      ],
+      "preimage_sha256": "d1c300832aa9bf44cd7b7199cff593beb2a9464fbb52c9c8448da7773eaf0aef",
+      "preimage_git_blob": "15024c40ba9b92fd50fb7823ecfa9543aba22be1"
+    },
+    {
+      "path": "m3/collections/src/main/native/collections/m3_signal_order_jni.c",
+      "postimage_sha256": "8dc63771408057e56610719e6d562454bece9769a5727c7614c104e659dc8a22",
+      "mode": 420,
+      "stages": [
+        "combine-composed21"
+      ],
+      "preimage_sha256": "e7a5991f5be2e0bad99400ff477a1c03ec9d1d8e1236f9faf366485f94966ed5",
+      "preimage_git_blob": "46b578b94710d804dd4eb198a8c235fb3db92547"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3CatalogueRefinementContract.java",
+      "postimage_sha256": "661279db0cf532a67a0bf8ee5483cd91f79b49936add8e96fde08b1130f55174",
+      "mode": 420,
+      "stages": [
+        "combine-composed21"
+      ],
+      "preimage_sha256": null,
+      "preimage_git_blob": null
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3CatalogueRefinementTest.java",
+      "postimage_sha256": "9f932bdf49aff3acf020bf36a2f5cead295a7ff6fb87fe55c9fde3c3a656cf93",
+      "mode": 420,
+      "stages": [
+        "combine-composed21"
+      ],
+      "preimage_sha256": null,
+      "preimage_git_blob": null
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3FilteredCursorExceptionContract.java",
+      "postimage_sha256": "558bcb65249fba80faa5ddb00d138566132c13acfd3c6e67763c78fa1acd5fd8",
+      "mode": 420,
+      "stages": [
+        "combine-composed21"
+      ],
+      "preimage_sha256": null,
+      "preimage_git_blob": null
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3FilteredCursorExceptionTest.java",
+      "postimage_sha256": "5ff4d5d15263310027c66eac8d595c62161fdc20623b42b4f5265a77dab4cedb",
+      "mode": 420,
+      "stages": [
+        "combine-composed21"
+      ],
+      "preimage_sha256": null,
+      "preimage_git_blob": null
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3FilteredDequeContract.java",
+      "postimage_sha256": "83115c8518a132029ea7b4f6818df74c9f628909a6dd8328c9aaf7a85cd2c7ea",
+      "mode": 420,
+      "stages": [
+        "combine-composed21"
+      ],
+      "preimage_sha256": "0aa372f430f3ab3614adf33bf4e33729e6f874404a6834fd13996bdee71c73fb",
+      "preimage_git_blob": "62a4dad21383e8459aaf2a374280cbc268032e3c"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3PackedSelectionAllocationProbe.java",
+      "postimage_sha256": "bbb4abeb2f9dbc512d6236173b68e8404ac5b11729640e1747aac6f002b933a7",
+      "mode": 420,
+      "stages": [
+        "combine-composed21"
+      ],
+      "preimage_sha256": null,
+      "preimage_git_blob": null
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3SignalRadixUniformBench.java",
+      "postimage_sha256": "8b026711262170986520d92fe782913d6a138f66bb9c795b6de748b11aa3dbe4",
+      "mode": 420,
+      "stages": [
+        "combine-composed21"
+      ],
+      "preimage_sha256": null,
+      "preimage_git_blob": null
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3SignalRadixUniformContract.java",
+      "postimage_sha256": "dd85a7c4b19364cc9b91ecf581abb33bf613435aec0873319f7082649dbdfbac",
+      "mode": 420,
+      "stages": [
+        "combine-composed21"
+      ],
+      "preimage_sha256": null,
+      "preimage_git_blob": null
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3SignalRadixUniformTest.java",
+      "postimage_sha256": "482d0d75e1b926b2da7013f8f572b9559738f18e8831ab0b398dcb06825071d8",
+      "mode": 420,
+      "stages": [
+        "combine-composed21"
+      ],
+      "preimage_sha256": null,
+      "preimage_git_blob": null
+    },
+    {
+      "path": "m3/collections/src/test/native/m3_mask_compactor_empty_regions.c",
+      "postimage_sha256": "48631b556931bd113464bfabca7876615261f2a4bbb17b54be6fa2fa801e96c7",
+      "mode": 420,
+      "stages": [
+        "combine-composed21"
+      ],
+      "preimage_sha256": null,
+      "preimage_git_blob": null
+    },
+    {
+      "path": "m3/docs/abseil-convergence-20261021/DONOR_SOURCES.json",
+      "postimage_sha256": "adbabc8aca5913c9bb1b9cc67a01786f2186aaedaf35e877b54cbd47d510528f",
+      "mode": 420,
+      "stages": [
+        "combine-composed21"
+      ],
+      "preimage_sha256": null,
+      "preimage_git_blob": null
+    },
+    {
+      "path": "m3/docs/abseil-convergence-20261021/FILE_PASSES.tsv",
+      "postimage_sha256": "a9d157c33f80ed12b2d2118f70235fa4e34d101aa917e760cdf700bb6b024bee",
+      "mode": 420,
+      "stages": [
+        "combine-composed21"
+      ],
+      "preimage_sha256": null,
+      "preimage_git_blob": null
+    },
+    {
+      "path": "m3/docs/abseil-convergence-20261021/PLAN.md",
+      "postimage_sha256": "766860e2b071be0de19910f9696d2afa8c11030b0e32e4fd3bf96588cda4ff68",
+      "mode": 420,
+      "stages": [
+        "combine-composed21"
+      ],
+      "preimage_sha256": null,
+      "preimage_git_blob": null
+    },
+    {
+      "path": "m3/docs/abseil-convergence-20261021/README.md",
+      "postimage_sha256": "ec305c19c9ae9dc2b375c19eda8df781994037b9a6eb20f2073a0d59b679901b",
+      "mode": 420,
+      "stages": [
+        "combine-composed21"
+      ],
+      "preimage_sha256": null,
+      "preimage_git_blob": null
+    },
+    {
+      "path": "m3/docs/abseil-convergence-20261021/SOURCE_RECEIPT.json",
+      "postimage_sha256": "ce3b0dcdb4b452f744a5dc7b37eacb98c5b47b31e3fa9716f73d1c4689b36fac",
+      "mode": 420,
+      "stages": [
+        "combine-composed21"
+      ],
+      "preimage_sha256": null,
+      "preimage_git_blob": null
+    },
+    {
+      "path": "m3/docs/name-mapping.d/eclipse-collections-20261021.json",
+      "postimage_sha256": "2201aae2f7a422829c62bbbe3f6fd4bd1545c60611a5806b2faee9cd1b0f5224",
+      "mode": 420,
+      "stages": [
+        "combine-composed21"
+      ],
+      "preimage_sha256": null,
+      "preimage_git_blob": null
+    },
+    {
+      "path": "m3/docs/name-mapping.json",
+      "postimage_sha256": "6e017ad8c780434a8681a6fb506d72975d064859b205164973f60ec9c20d8ad6",
+      "mode": 420,
+      "stages": [
+        "combine-composed21"
+      ],
+      "preimage_sha256": "a0799f75fa395e2f1b015882e7d6673a6be1af9f4590c5803d0905a9f03d59e7",
+      "preimage_git_blob": "f42a9d329646369bf4e14fa8ea3e38e01eb895ad"
+    },
+    {
+      "path": "m3/runtime-integration/check-m3string-concat-reference-dag.py",
+      "postimage_sha256": "4fff9f78297b91a63c401e9fd9994de6ed643207661bb58fd099d0870e073ec2",
+      "mode": 420,
+      "stages": [
+        "receive-concat-guard21"
+      ],
+      "preimage_sha256": "9fd82a96ad813f11c90e593c8cd3b93feae9d5658a7b7b68ca48e95f035b19fa",
+      "preimage_git_blob": "bddd68cc9b36439fda39fe2fd655b8819fae7e0e"
+    },
+    {
+      "path": "m3/runtime-integration/recipe/manifest.json",
+      "postimage_sha256": "416f8c17500afd1d9d2d2e3a7a85e300cf9807fbac7ead514b9c48cf0494e4e5",
+      "mode": 420,
+      "stages": [
+        "receive-concat-guard21"
+      ],
+      "preimage_sha256": "b44b3740eefe6780a11f31291b2f3f446231365ea3c441844fe4d9aa5fe0b462",
+      "preimage_git_blob": "4800b1910b4ec69cfd7aa4d1f91cf1239bf337c8"
+    },
+    {
+      "path": "m3/runtime-integration/string-comparison-cursor-20261021/README.md",
+      "postimage_sha256": "ec843d4e9811b66c03349554a439c62f5d0e9e83f9dca688fc94f2e595abded4",
+      "mode": 420,
+      "stages": [
+        "combine-composed21"
+      ],
+      "preimage_sha256": null,
+      "preimage_git_blob": null
+    },
+    {
+      "path": "m3/runtime-integration/string-native-ownership-20261021/README.md",
+      "postimage_sha256": "4b92321708185b95fa86493c818dee5c6c877040328bdaf4868820eebc5cc6f3",
+      "mode": 420,
+      "stages": [
+        "combine-composed21"
+      ],
+      "preimage_sha256": null,
+      "preimage_git_blob": null
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/M3String.java",
+      "postimage_sha256": "36d994c458aeb959beec4581d1b8df52bdbed90b84028cfe106522f3b6cc54ea",
+      "mode": 420,
+      "stages": [
+        "combine-composed21"
+      ],
+      "preimage_sha256": "b3a6f23d8cdc54be9add800a2b1a7044a313ef04577f79f86082fcee8152ed39",
+      "preimage_git_blob": "65ee70d5b359d9bdcd6cc93dbf25298f0bae8528"
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/M3StringAtom.java",
+      "postimage_sha256": "a1226c8ac637fc22b3eba2d95ee65524d12d5f3875cba35cf3c849dcb18c310a",
+      "mode": 420,
+      "stages": [
+        "combine-composed21"
+      ],
+      "preimage_sha256": "26b4138ae6e438615ce6f894e956ca84a1c18579f1aa4b76aff0ce9ebbf04b0b",
+      "preimage_git_blob": "e001823fefe0242028b3116d0fbce8512956614a"
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/M3StringImmediate.java",
+      "postimage_sha256": "0bf8cf838c1c4d6cdb7c78c319d125cd1fe09ddb5bf9fe37ca31bc1e6d39bf21",
+      "mode": 420,
+      "stages": [
+        "combine-composed21"
+      ],
+      "preimage_sha256": "327ac7a55b80631378a822c2133729bd027f1f26bc53224020c3e1fad01109e3",
+      "preimage_git_blob": "4ddb21b9aaa33fd62d91846079b173624897ce6d"
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/M3StringPool.java",
+      "postimage_sha256": "a4fe0b9327d48748083d92e6212f306bc8e039a76ed437afd6ecee57b903aa6e",
+      "mode": 420,
+      "stages": [
+        "combine-composed21",
+        "receive-coordinate21"
+      ],
+      "preimage_sha256": "09916fd6c69828d5703113ed79e684245a4684a801b573ff2e4f7b973fa75185",
+      "preimage_git_blob": "e5ab6c95526d9170fc88d9e3ac7c5040606a3367"
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/M3StringPrecomputeBridge.java",
+      "postimage_sha256": "112699ac1f136f295efda67d54a1a7bc96db0f639ea3855c3925a5ca890952bf",
+      "mode": 420,
+      "stages": [
+        "combine-composed21"
+      ],
+      "preimage_sha256": "08e86c8cbac6c64486f7feca72f9e4c1e563895a537fd9c9d11415c108b6667d",
+      "preimage_git_blob": "178dae73c3a8fc8bf121f8b462b0798e73932e59"
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/String.java",
+      "postimage_sha256": "029586cb367a7f3c79edd4039ec05a2a668bb79a84f7db3b7de76a61039d73ef",
+      "mode": 420,
+      "stages": [
+        "combine-composed21"
+      ],
+      "preimage_sha256": "abd9604058045fd77cb5985a14f56487726b823f468990d5dc4277d6391de0cd",
+      "preimage_git_blob": "db3fd603765644fffe9edd92511624b944914068"
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/invoke/StringConcatFactory.java",
+      "postimage_sha256": "732c410330a1137aace06d3b20e0e8a86899b4fe98f15c738d588102383c4052",
+      "mode": 420,
+      "stages": [
+        "receive-concat21"
+      ],
+      "preimage_sha256": "0bdcf30e2e090545d41e80566ca2b60d50d3a1c3e80e3dc849f1a22ecc3e11b8",
+      "preimage_git_blob": "a067c1e5bcf31ef9f199218bd66239f5b534f825"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/CollectionViews.java",
+      "postimage_sha256": "d7f484dd010d8d57383da419a1d6291283efc9aece94e8451c6755049683a48f",
+      "mode": 420,
+      "stages": [
+        "combine-composed21"
+      ],
+      "preimage_sha256": "ba48ef15edf9f64824669354d38f9fb295b6c39e2fc7885ee6b3b654aa932ef3",
+      "preimage_git_blob": "444b2c9d19e095c56f812d28773b3fe431b6069c"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/Collections.java",
+      "postimage_sha256": "9ff54af7397feb3f5619ec0f803619c698b403150827a6417bd4dbee7139b1ef",
+      "mode": 420,
+      "stages": [
+        "combine-composed21"
+      ],
+      "preimage_sha256": "7dcb1bde18923274518b747ad4e65e3019046ca7742714ead678c615d99499ba",
+      "preimage_git_blob": "874a056d6d1c24f4fbc0f564ba564519c9db71e7"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/IdentityHashMap.java",
+      "postimage_sha256": "9abd2b9914c474ad1c9702a541dec0f1a1e2d3b02cfe34934177fd8b4a721400",
+      "mode": 420,
+      "stages": [
+        "combine-composed21"
+      ],
+      "preimage_sha256": "f4db1f943d2468d5edfc46512fcd117950c8716481b846eaccef84806f5e48a9",
+      "preimage_git_blob": "208838b3c9508f86e5ceaebbee30609c4118ae0e"
+    },
+    {
+      "path": "test/jdk/java/lang/String/M3StringCanonicalDagTest.java",
+      "postimage_sha256": "ce58fbed5fb3608d625059d32b565bba80ca1bfa7ed556bdaa4d86ad03454c95",
+      "mode": 420,
+      "stages": [
+        "receive-coordinate21"
+      ],
+      "preimage_sha256": "0075a3d497d1dba5b8ce0f167b1b67ea58121eeec0338c951b76f5dda2a3a1fd",
+      "preimage_git_blob": "147478672c571d7942ec43c3df2f43a1d7d46f76"
+    },
+    {
+      "path": "test/jdk/java/lang/String/M3StringCodePointBoundsTest.java",
+      "postimage_sha256": "4c6936ded44cae6f209e9c93660f334fb2d3f44f3822ff03a9806dbfe1f55c4e",
+      "mode": 420,
+      "stages": [
+        "combine-composed21"
+      ],
+      "preimage_sha256": null,
+      "preimage_git_blob": null
+    },
+    {
+      "path": "test/jdk/java/lang/String/M3StringCompositeComparisonTest.java",
+      "postimage_sha256": "35da6dbc7cb4e355b787f1b556aecafcfabc8326cea0adb868f865190143c97f",
+      "mode": 420,
+      "stages": [
+        "combine-composed21"
+      ],
+      "preimage_sha256": null,
+      "preimage_git_blob": null
+    },
+    {
+      "path": "test/jdk/java/lang/String/M3StringCompositePrefixCursorTest.java",
+      "postimage_sha256": "df5be156775200b0883dbfa390ee61eb281724863ea95563948aefb51ce232c6",
+      "mode": 420,
+      "stages": [
+        "combine-composed21"
+      ],
+      "preimage_sha256": null,
+      "preimage_git_blob": null
+    },
+    {
+      "path": "test/jdk/java/lang/String/M3StringConcatReferenceDagTest.java",
+      "postimage_sha256": "053c69bd70909731e6509d06f6b29d31a24e2fb669a57f82bf22587e44e839c0",
+      "mode": 420,
+      "stages": [
+        "receive-concat21"
+      ],
+      "preimage_sha256": "e4624f56a93d68cd04337e39ed2cd3896867149908f287d5839ddff9b965ae95",
+      "preimage_git_blob": "edf35d940739581b76b73d7b431989ec4ff0d966"
+    },
+    {
+      "path": "test/jdk/java/lang/String/M3StringCriticalBulkTest.java",
+      "postimage_sha256": "97c1372bb36098af26777651c7048207ec1216070aea5ca2128b608baddf382b",
+      "mode": 420,
+      "stages": [
+        "combine-composed21"
+      ],
+      "preimage_sha256": "78fe1337dd4a9481b36ac817a15e8796dbb0e5cdab24d402ef94d65b1b699cb7",
+      "preimage_git_blob": "c3ff3c5e28af56623308abef754c24c3d975e4f4"
+    },
+    {
+      "path": "test/jdk/java/lang/String/M3StringNativePublicationFailureTest.java",
+      "postimage_sha256": "264666f587d4b5cd99a0d17da66f7833df40b49e4f52aafb4112fcbfc4b16ed1",
+      "mode": 420,
+      "stages": [
+        "combine-composed21"
+      ],
+      "preimage_sha256": null,
+      "preimage_git_blob": null
+    },
+    {
+      "path": "test/jdk/java/lang/String/M3StringPathCursorTest.java",
+      "postimage_sha256": "8989a34dd9295a11f9af8c14f4c47062bb1f5cd1573ec0a86c6cce82714420bc",
+      "mode": 420,
+      "stages": [
+        "combine-composed21"
+      ],
+      "preimage_sha256": null,
+      "preimage_git_blob": null
+    },
+    {
+      "path": "test/jdk/java/lang/String/M3StringPoolMetadataBoundsTest.java",
+      "postimage_sha256": "1ead247d909137f295633f488f8db0849f405cfed75a87ba4f3779ab67ff9180",
+      "mode": 420,
+      "stages": [
+        "receive-budget21"
+      ],
+      "preimage_sha256": "21523bf18d83f7f94f4941ff4d039814eb09c4d89c91df3b27b20cb22099481b",
+      "preimage_git_blob": "2f44d79eaa0acd90532cee474baf3cba6f93701f"
+    },
+    {
+      "path": "test/jdk/java/lang/String/M3StringRegexNativeBridgeTest.c",
+      "postimage_sha256": "3549fc5d0ab78d3af0355a65597a367adedf208529b8eb9824c741550537eef8",
+      "mode": 420,
+      "stages": [
+        "combine-composed21"
+      ],
+      "preimage_sha256": "8ee49ba30626238d8d3afb06efd48c9ca357767fe2c6d79ee2600fe5113038c7",
+      "preimage_git_blob": "056a7d9fd47460e185df6d206936e46845e99f8b"
+    },
+    {
+      "path": "test/jdk/java/lang/String/M3StringTuplePublicationFailureTest.java",
+      "postimage_sha256": "36c36637b50dd14c45666125bd2b371ed9ac6cd56649a9aa4a616e46b36045f8",
+      "mode": 420,
+      "stages": [
+        "combine-composed21"
+      ],
+      "preimage_sha256": null,
+      "preimage_git_blob": null
+    },
+    {
+      "path": "test/jdk/java/util/CollectionViews/CollectionViewsIdentityContract.java",
+      "postimage_sha256": "e332147bc9f559f63fa4d5f0909c58e5416f3a20e4992da8ab13d6fba100fd7f",
+      "mode": 420,
+      "stages": [
+        "combine-composed21"
+      ],
+      "preimage_sha256": null,
+      "preimage_git_blob": null
+    },
+    {
+      "path": "test/jdk/java/util/CollectionViews/CollectionViewsRefinement.java",
+      "postimage_sha256": "16b8cbd6f1fe1287435284e3680a6c2b603f3fdabb17806cc61ea409d03425a7",
+      "mode": 420,
+      "stages": [
+        "combine-composed21"
+      ],
+      "preimage_sha256": null,
+      "preimage_git_blob": null
+    }
+  ],
+  "meaning": "Original Git-blob preimages to exact final SDK outputs; predecessor equality verified for every overlap. Full aggregate SDK and receiving fixed point are separate gates.",
+  "aggregate_dataset": "receive-composed21",
+  "aggregate_sdk_inputs_sha256": "54c20a4fdb70c5cb56bae1a9019df0fe1d43d7bd1f66cb4a6bba796248de14dd",
+  "aggregate_sdk_results_sha256": "df5a1d4d8f4dcd6702f1fe05d4b068f2ce83b9a4625e73bbf60098c27e16086e",
+  "actual_receiver_receipt_sha256": "1ac44584caea391c0ba2343337689bd05f40637efdc6ee3f01dc8d18534442ca",
+  "actual_receiver_changes": [
+    0,
+    0,
+    0
+  ]
+}

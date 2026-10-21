@@ -1,0 +1,21 @@
+{
+  "encoding": "UTF-8; filename, TAB, lowercase SHA-256, LF; filenames sorted lexicographically",
+  "sets": {
+    "owning-java": {
+      "reportFiles": 150,
+      "sortedNameTabSha256IndexSha256": "d86fa97f8042358a2645ad872d68aec2d410a832b1b0d1b156689387b0a6818f",
+      "contentsPublished": false
+    },
+    "owning-native": {
+      "reportFiles": 150,
+      "sortedNameTabSha256IndexSha256": "afdf952d33ed20276d8103ec41c675abc50a5b5a792d8a32554ab6f6157355a4",
+      "contentsPublished": false
+    },
+    "linked-junit": {
+      "reportFiles": 150,
+      "sortedNameTabSha256IndexSha256": "c9bb4c3650312ed6903da5ab098552a9e8abfabaaa502479c4a2741105d17a8b",
+      "contentsPublished": false
+    }
+  },
+  "reason": "Raw Surefire XML includes system properties and environment-specific paths. Only aggregate results and a hash of each complete report index are published."
+}

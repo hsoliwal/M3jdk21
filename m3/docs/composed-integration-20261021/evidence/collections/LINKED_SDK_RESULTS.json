@@ -1,0 +1,208 @@
+{
+  "status": "PASS_LINKED_SDK_NAMED_MODULE_AND_PUBLIC_CORE_CONTRACTS",
+  "moduleMainRuns": 22,
+  "publicCoreRuns": 7,
+  "allCommandsPassed": true,
+  "owningVerifierSha256": "f6a76836d96bc6d41033ce94b0aa760fd5f68ebcb903396bb5f6eb1618d0931a",
+  "scope": "Production owners from linked jrt image; test classes only are patched into com.m3.collections; public core uses no java.base patch. The final bit-lane contract uses its external test-only JNI fixture; all10 product libraries remain embedded image libraries.",
+  "epoch": "E1",
+  "runs": [
+    {
+      "label": "M3MaskWindowSparseContract",
+      "returncode": 0,
+      "seconds": 0.4475764389990218,
+      "output": "PASS M3MaskWindowSparseContract backend=NATIVE_REQUIRED checks=357095\n"
+    },
+    {
+      "label": "M3BudgetedMaskWindowContract",
+      "returncode": 0,
+      "seconds": 0.33520981000037864,
+      "output": "BUDGETED_MASK_WINDOW_PASS random=5000 assertions=28914 backend=NATIVE_REQUIRED\n"
+    },
+    {
+      "label": "M3IndexMaskWindowSelfTest",
+      "returncode": 0,
+      "seconds": 0.2527925699996558,
+      "output": "PASS M3_INDEX_MASK_WINDOW checks=30596 native=true\n"
+    },
+    {
+      "label": "M3IndexMaskWindowRecoverySelfTest",
+      "returncode": 0,
+      "seconds": 0.34374927799945,
+      "output": "PASS M3IndexMaskWindowRecoverySelfTest checks=10528 JNI=true\n"
+    },
+    {
+      "label": "M3IndexMaskCompactorSelfTest",
+      "returncode": 0,
+      "seconds": 0.2747896540004149,
+      "output": "PASS M3IndexMaskCompactorSelfTest checks=26152 JNI=true\n"
+    },
+    {
+      "label": "M3IndexPathMasksSelfTest",
+      "returncode": 0,
+      "seconds": 0.1898981950016605,
+      "output": "PASS M3IndexPathMasksSelfTest checks=2324 JNI=true\n"
+    },
+    {
+      "label": "M3LongIndexPathMasksJNISelfTest",
+      "returncode": 0,
+      "seconds": 0.3223275979999016,
+      "output": "PASS M3_LONG_PATH_JNI|assertions=9360|rounds=1600\n"
+    },
+    {
+      "label": "M3LongAddressBoundedSelfTest",
+      "returncode": 0,
+      "seconds": 0.6115222449989233,
+      "output": "M3_BOUNDED_GATHER_PASS checks=21975732 fingerprint=-8730037866241443045 native=true\n"
+    },
+    {
+      "label": "M3IndexPathMaskWindowSelfTest",
+      "returncode": 0,
+      "seconds": 0.1990911410011904,
+      "output": "M3_PATH_MASK_WINDOW_PASS checks=22462 backend=NATIVE_REQUIRED nativeAvailable=true\n"
+    },
+    {
+      "label": "M3IndexPathRankNativeSelfTest",
+      "returncode": 0,
+      "seconds": 0.22476658100094937,
+      "output": "PASS M3IndexPathRank JNI parity: 180 deterministic Java/rank/native paths\n"
+    },
+    {
+      "label": "M3NativeIndexRangeSelfTest",
+      "returncode": 0,
+      "seconds": 1.1910990409996884,
+      "output": "M3NativeIndexRangeSelfTest mode=range checks=638454 seededCases=2048\n"
+    },
+    {
+      "label": "M3ObjectStateSlots28SelfTest",
+      "returncode": 0,
+      "seconds": 1.024629718000142,
+      "output": "PASS M3_OBJECT_STATE_SLOTS_28 checks=1215408 randomized_operations=101376 primitive_state_bytes_per_touched_slot=1\n"
+    },
+    {
+      "label": "M3IndexedTableSelfTest",
+      "returncode": 0,
+      "seconds": 0.45572974999959115,
+      "output": "PASS M3IndexedTableSelfTest checks=63149 randomized=6000 native=true\n"
+    },
+    {
+      "label": "M3BagRankIndexSelfTest",
+      "returncode": 0,
+      "seconds": 0.6037170649997279,
+      "output": "M3BagRankIndex randomized scenarios=1200\nPASS M3BagRankIndexSelfTest checks=213320 native=true\n"
+    },
+    {
+      "label": "M3SdkRecoverySelfTest",
+      "returncode": 0,
+      "seconds": 0.3080235699999321,
+      "output": "PASS M3SdkRecoverySelfTest checks=19834 native=true\n"
+    },
+    {
+      "label": "M3SignalOrderContract",
+      "returncode": 0,
+      "seconds": 0.3789699709996057,
+      "output": "PASS M3SignalOrderContract backend=NATIVE_REQUIRED checks=2010\n"
+    },
+    {
+      "label": "M3SignalDimensionsNativeContract",
+      "returncode": 0,
+      "seconds": 0.4151064729994687,
+      "output": "PASS M3SignalDimensionsNativeContract JNI checks=400\n"
+    },
+    {
+      "label": "M3ResidencyStateMaskProof",
+      "returncode": 0,
+      "seconds": 0.5158297610014415,
+      "output": "M3_RESIDENCY_STATE_MASK_PASS checks=11226 fingerprint=12197969927824375845 backend=jni-enabled\n"
+    },
+    {
+      "label": "M3BitLaneJumpProof",
+      "returncode": 0,
+      "seconds": 0.48819270900094125,
+      "output": "M3_BITLANE_JUMP_PASS assertions=68034 native=true\n"
+    },
+    {
+      "label": "M3CatalogueRefinementContract",
+      "returncode": 0,
+      "seconds": 0.2897154040001624,
+      "output": "PASS M3CatalogueRefinementContract mode=native checks=8438\n"
+    },
+    {
+      "label": "M3SignalRadixUniformContract",
+      "returncode": 0,
+      "seconds": 0.3348286559994449,
+      "output": "PASS radix JNI checks=417038\n"
+    },
+    {
+      "label": "M3PackedSelectionAllocationProbe",
+      "returncode": 0,
+      "seconds": 0.27857481999853917,
+      "output": "zero_survivors=1000000 average_allocated_bytes=125890\n"
+    },
+    {
+      "label": "compile-public-core",
+      "returncode": 0,
+      "seconds": 3.0435126009997475,
+      "output": ""
+    },
+    {
+      "label": "BootstrapViewsTest",
+      "returncode": 0,
+      "seconds": 0.3658023570005753,
+      "output": "BootstrapViewsTest checks=77 module=java.base loader=bootstrap PASS\n"
+    },
+    {
+      "label": "CollectionViewsCoreContract",
+      "returncode": 0,
+      "seconds": 0.8413349239999661,
+      "output": "warm_predicate_tests=100000 depth=64 allocated_bytes=0\nCollectionViewsCoreContract methods=10 checks=14694 baseline=false PASS\n"
+    },
+    {
+      "label": "CollectionViewsIdentityTest",
+      "returncode": 0,
+      "seconds": 0.19014163600149914,
+      "output": "CollectionViewsIdentityTest: 46 checks passed\n"
+    },
+    {
+      "label": "CollectionViewsCowBulkTest",
+      "returncode": 0,
+      "seconds": 0.23723306299871183,
+      "output": "CollectionViewsCowBulkTest PASS checks=120\n"
+    },
+    {
+      "label": "CollectionViewsIdentityContract",
+      "returncode": 0,
+      "seconds": 0.401942747999783,
+      "output": "CollectionViewsIdentityContract mode=all: 540 checks passed\n"
+    },
+    {
+      "label": "CollectionViewsRefinement",
+      "returncode": 0,
+      "seconds": 0.29892544799986354,
+      "output": "PASS CollectionViewsRefinement mode=all checks=1828\n"
+    },
+    {
+      "label": "CollectionViewsRefinement-size",
+      "returncode": 0,
+      "seconds": 2.4647509489986987,
+      "output": "PASS CollectionViewsRefinement mode=size checks=2\n"
+    }
+  ],
+  "owningJUnit": {
+    "returncode": 0,
+    "seconds": 67.66094425099982,
+    "log": "logs/linked-junit-001.log",
+    "jvm": "${IMAGE}/bin/java",
+    "scope": "Existing source-owned JUnit owning suite with production classes resolved from linked com.m3.collections; only test classes patched. Native libraries loaded from linked image lib.",
+    "junit": {
+      "tests": 491,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "reportFiles": 150,
+    "reportedJavaHomes": [
+      "${IMAGE}"
+    ]
+  }
+}
