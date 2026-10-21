@@ -24,12 +24,40 @@ jobs:
         run: bash m3/collections/qualification/pathmask-stage-cache-20261020/verify.sh
   recipe-maven-admission:
     runs-on: ubuntu-latest
-    timeout-minutes: 25
+    timeout-minutes: 45
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-java@v4
         with:
           distribution: temurin
           java-version: '21'
+      - name: Test source-closure refusal and dependency graph integrity
+        run: |
+          python3 -m unittest discover -v \
+            -s m3/tooling/migration-recipes/qualification/native-recipe-admission-20261021 \
+            -p test_source_closure.py
+      - name: Admit exact source-built OpenRewrite and JUnit dependency closure
+        run: |
+          set -euo pipefail
+          python3 m3/tooling/migration-recipes/qualification/native-recipe-admission-20261021/source_closure.py \
+            --root . --verify-sources > "$RUNNER_TEMP/m3-source-closure.tsv"
+          cat "$RUNNER_TEMP/m3-source-closure.tsv"
+      - name: Install original source-pinned Maven producers in reactor order
+        run: |
+          set -euo pipefail
+          mvn -B -ntp -f m3/vendor/third_party/pom.xml \
+            -pl rewrite-java,rewrite-java-21,rewrite-test,junit-jupiter-5.10.2 \
+            -am -DskipTests install
+      - name: Verify installed source-built jars retain exact legal and provenance resources
+        run: |
+          set -euo pipefail
+          while IFS=\t' read -r group artifact version module; do
+            jar="m3/vendor/third_party/$module/target/$artifact-$version.jar"
+            test -f "$jar"
+            python3 "m3/vendor/third_party/$module/verify_source.py" "$jar"
+          done < "$RUNNER_TEMP/m3-source-closure.tsv"
       - name: Build/test qualified OpenRewrite native-path admission source
-        run: mvn -B -ntp -f m3/pom.xml -pl tooling/migration-recipes -am -Dtest=M3NativeRecipePathAdmissionTest -Dsurefire.failIfNoSpecifiedTests=false test
+        run: |
+          mvn -B -ntp -f m3/pom.xml -pl tooling/migration-recipes -am \
+            -Dtest=M3NativeRecipePathAdmissionTest \
+            -Dsurefire.failIfNoSpecifiedTests=false test
