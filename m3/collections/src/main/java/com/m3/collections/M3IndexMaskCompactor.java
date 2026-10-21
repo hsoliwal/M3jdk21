@@ -160,6 +160,36 @@ public final class M3IndexMaskCompactor {
         return selected;
     }
 
+    /**
+     * Primitive-long selection requiring every included flag and no excluded flag.
+     * Existing required-only APIs remain byte-for-byte unchanged. A conflicting
+     * mask returns an empty detached result; both inputs must remain stable.
+     */
+    public static long[] selectLong(long[] orderedRows, byte[] rowStates,
+            int requiredMask, int excludedMask) {
+        Objects.requireNonNull(orderedRows, "orderedRows");
+        validate(rowStates, orderedRows.length, requiredMask);
+        requireMask(excludedMask);
+        if (excludedMask == 0) return selectLong(orderedRows, rowStates, requiredMask);
+        if ((requiredMask & excludedMask) != 0) return new long[0];
+        int count = countSelected(rowStates, requiredMask, excludedMask);
+        if (count == orderedRows.length) return orderedRows.clone();
+        long[] selected = new long[count];
+        int written = 0;
+        for (int index = 0; index < orderedRows.length; index++) {
+            if (matches(rowStates[index], requiredMask, excludedMask)) {
+                if (written == count) {
+                    throw new ConcurrentModificationException("aligned selection states changed");
+                }
+                selected[written++] = orderedRows[index];
+            }
+        }
+        if (written != count) {
+            throw new ConcurrentModificationException("aligned selection states changed");
+        }
+        return selected;
+    }
+
     /** Validate before an in-place primitive owner writes a single resident slot. */
     static void validate(byte[] states, int logicalSize, int requiredMask) {
         Objects.requireNonNull(states, "rowStates");

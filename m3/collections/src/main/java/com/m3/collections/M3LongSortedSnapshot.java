@@ -96,6 +96,20 @@ public final class M3LongSortedSnapshot implements M3LongSortedSet {
         return new M3LongSortedSnapshot(detached, 0, detached.length);
     }
 
+    /**
+     * Detached signed-natural sorted snapshot selecting precomputed required
+     * flags and rejecting excluded flags. Reuses the original M3 mask owner;
+     * no predicate callbacks or per-entry structural wrappers are retained.
+     */
+    public static M3LongSortedSnapshot fromAlignedMasks(
+            long[] sortedUnique, byte[] alignedStates, int requiredMask, int excludedMask) {
+        Objects.requireNonNull(sortedUnique, "sortedUnique");
+        validateSortedUnique(sortedUnique);
+        long[] detached = M3IndexMaskCompactor.selectLong(
+                sortedUnique, alignedStates, requiredMask, excludedMask);
+        return new M3LongSortedSnapshot(detached, 0, detached.length);
+    }
+
     private static void validateSortedUnique(long[] values) {
         for (int index = 1; index < values.length; index++) {
             if (values[index] <= values[index - 1]) {
