@@ -70,6 +70,16 @@ final class M3StringPrecomputeBridge {
             }
         }
 
+        // Preserve flat-prefix admission (never intern solely for a match).
+        // A long source tuple is read by consecutive scalar runs rather than
+        // descending its binary DAG for every compared UTF-16 code unit.
+        if (prefix.length() >= 64 && source.owner() instanceof M3StringTuple) {
+            M3String.CodeUnitCursor units = new M3String.CodeUnitCursor(source);
+            for (int index = 0; index < prefix.length(); index++) {
+                if (units.at(offset + index) != prefix.charAt(index)) return false;
+            }
+            return true;
+        }
         for (int index = 0; index < prefix.length(); index++) {
             if (source.charAt(offset + index) != prefix.charAt(index)) return false;
         }

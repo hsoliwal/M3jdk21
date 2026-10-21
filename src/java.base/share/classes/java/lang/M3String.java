@@ -1068,6 +1068,22 @@ final class M3String implements CharSequence {
                 return false;
             }
         }
+        // A long prefix of a composite would otherwise descend the balanced
+        // tuple DAG once per UTF-16 unit. Reuse the existing scalar-run cursor:
+        // at most two request-local cursors, no leaf directory or copied text.
+        // Short/flat comparisons retain their allocation-free direct path.
+        if (checked.length() >= 64
+                && (owner instanceof M3StringTuple
+                        || checked.owner() instanceof M3StringTuple)) {
+            CodeUnitCursor sourceUnits = new CodeUnitCursor(this);
+            CodeUnitCursor prefixUnits = new CodeUnitCursor(checked);
+            for (int index = 0; index < checked.length(); index++) {
+                if (sourceUnits.at(offset + index) != prefixUnits.at(index)) {
+                    return false;
+                }
+            }
+            return true;
+        }
         for (int index = 0; index < checked.length(); index++) {
             if (charAt(offset + index) != checked.charAt(index)) return false;
         }
