@@ -52,7 +52,7 @@ public final class M3ASTRelations {
         }
     }
 
-    /** O(1) repeat: the first count query retains only one int per kind. */
+    /** Repeated counts read one int after a bounded existing-kind vocabulary lookup. */
     public int countKind(String kind) {
         int id = kindId(Objects.requireNonNull(kind, "kind"));
         return id < 0 ? 0 : counts()[id];
