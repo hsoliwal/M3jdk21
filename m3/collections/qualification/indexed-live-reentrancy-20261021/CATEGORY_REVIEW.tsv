@@ -1,0 +1,6 @@
+# SPDX-License-Identifier: Apache-2.0
+category	selected_owner	donor_reference	decision
+REENTRANT_INDEX_PREPARATION	M3IndexedLiveView	JDK AbstractList/List fail-fast contract	KEEP_ORIGINAL_FLAG_ATOM
+LIVE_VIEW_INVALIDATION	M3ArrayList and M3IndexedLiveView	LeetCode 981 temporal version category	KEEP_EXISTING_EPOCHS_AND_ADD_GENERATION_CHECK
+STABLE_MASKED_SORT	M3IndexSort	LeetCode 912, GeeksforGeeks stable merge sort	KEEP_EXISTING_INT_INDEX_LANE
+JNI_MASKED_SELECTION	M3IndexMaskCompactor	HackerRank bitwise filtering taxonomy	NO_NATIVE_ABI_CHANGE
