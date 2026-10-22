@@ -1,15 +1,15 @@
-gate	state	evidence_or_required_action
-SHA256_SOURCE_PREIMAGE	PASS	Four original source preimages checked against canonical Synexia recipe
-ABSENT_NEW_TESTS	PASS	Three new original-owner source/test paths admitted after no existing target
-SOURCE_POSTIMAGE_GIT	PASS	All seven original Java/test/Python source blobs match canonical templates
-STRICT_M3FILE_CENSUS	PASS_NAME_ONLY	13 actual test stems and 13 original verifier keys, zero extra or missing
-JAVA21_RANGE_DONOR	HISTORICAL_ONLY	#1815 equivalent test 1200/22168; not current product original class
-DIRECTORY_INDEX_DONOR	HISTORICAL_ONLY	#1793 equivalent test 520/3134; not current native SQLite library
-PROVIDER_RANGE_TRANSFER_DONOR	HISTORICAL_ONLY	#1815 28-byte ZIP selected transfer isolated probe
-OPENREWRITE_RECIPE_EXECUTION	NOT_RUN	Maven SDK fixed-point and drift-refusal tests defined only
-FILE_MODULE_LINKED_IMAGE	NOT_RUN	m3/file/verify.py host and JLink actual full contract census
-M3FS_NATIVE_SQLITE	NOT_RUN	Original M3FS JNI/JUnit/C17/SQLite provider and index row wire
-M3JDK21_JTREG_JCK	NOT_RUN	Complete HotSpot source-built JDK21 image
-CROSS_PLATFORM	NOT_RUN	Windows macOS Android ZIP/JRT/network provider differences
-PERFORMANCE	NOT_MEASURED	CPU, heap, native allocations, file bytes and JNI crossing costs
-FIVE_LIBRARY_COLLECTION	NOT_RUN	JDK Guava Eclipse Commons Spring sorted/filter view matrix
+gate	status	evidence
+SOURCE_CUSTODY	PASS	Seven source/readback Git blobs equal canonical Synexia templates
+STRICT_MODULE_CENSUS	STATIC_PASS	13 exact Java module Contract test stems match verify.py
+M3FILE_CAPTURE_SCRATCH	PRESERVED_SOURCE	Existing M3File.captureBytes and 64KiB inventory scratch unaffected
+NATIVE_SQLITE_PROVIDER	PRESERVED_SOURCE	Existing m3db M3FS native JNI WAL + ZIP/JRT providers
+RANGE_JAVA21_DONOR	HISTORICAL_SCOPED_ONLY	#1815 1200/22168 on equivalent range code, not original target
+DIRECTORY_JAVA21_DONOR	HISTORICAL_SCOPED_ONLY	#1793 520/3134 equivalent directory code, not full owner
+CANONICAL_OPENREWRITE	NOT_RUN	Recipe.run, source drift, idempotence and missing-target tests
+M3_FILE_HOST_LINKED_IMAGE	NOT_RUN	Original m3/file/verify.py exact 13 executable entry points
+M3_FS_NATIVE_SQLITE_JNI	NOT_RUN	Maven/JUnit/CTest/real JNI and SQLite WAL
+JDK_HOTSPOT_JTREG	NOT_RUN	Full M3JDK21 java.base/libjava/JMOD/jtreg/JCK
+PLATFORM_PROVIDER	NOT_RUN	ZIP/JRT native/local/remote OS provider contracts
+END_TO_END_MAVEN_GRADLE	NOT_RUN	Successful build promotion vs observed source facts
+FILTERED_SORTED_PARITY	NOT_RUN	JDK/Guava/Eclipse Collections/Commons/Spring
+PERFORMANCE	NOT_MEASURED	CPU/heap/native-memory and bytes-read comparison

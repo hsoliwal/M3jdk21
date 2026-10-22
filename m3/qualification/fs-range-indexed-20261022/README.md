@@ -1,87 +1,90 @@
-# M3JDK21 M3FS/M3File range, indexed directory and provider-use-case convergence
+# Original M3JDK21 FS/file: range fingerprints, sequential providers and indexed directory views
 
-Copyright 2026 Hitesh Soliwal and contributors.
-SPDX-License-Identifier: Apache-2.0.
+Copyright 2026 Hitesh Soliwal and contributors. SPDX-License-Identifier: Apache-2.0.
 
-**M3JDK21 is the original integrated Java21/JDK/HotSpot/JNI SDK.**
-This reviewable branch is stacked on
-[M3JDK21 #1823](https://github.com/hsoliwal/M3jdk21/pull/1823),
-which already contains native M3FS m3db SQLite/VFS, provider-aware
-NIO ZIP/JRT, original one-read M3File.captureBytes and the 64KiB
-reused project scratch buffer. Synexia is **not a runtime layer**.
+**M3JDK21 is one Java21/HotSpot/JNI SDK.** Source and runtime owners stay
+in the original M3File/M3FS/JDK classes. This PR is stacked on
+[M3FS provider and capture/scratch superset #1823](https://github.com/hsoliwal/M3jdk21/pull/1823);
+it retains original NIO ZIP/JRT provider identity, `m3db:` native SQLite
+WAL/JNI state and the original M3 collections arrays/offsets/state masks.
 
-## Accepted existing owners and precise use cases
+## First-party use cases and implementation ownership
 
-**Seekable host M3File / source classes / chunk store:** the existing
-one-source original `M3File` adds bounded sorted/disjoint physical byte-range
-SHA256, copied offset/length arrays, and on-demand records projected from
-primitive long[] digest words. The source is exactly original PR #1815
-forward-adapted to this branch's richer M3File, **not** a historical
-whole-file replacement that would lose captureBytes or shared scratch.
-A range digest is never a claim that unselected bytes have not changed.
+1. **Known byte ranges in a seekable local source/class/index file:**
+   `M3File.fingerprintRanges` uses one original checked NIO
+   `SeekableByteChannel`, verified sorted/nonoverlapping positions,
+   bounded 8KiB scratch and `long[]` hash-word lanes. A
+   `RangeFingerprints.fingerprint(i)` record is created on access.
+   It is not a full-file fingerprint, offline dirty-file discovery
+   guarantee or compiler ABI proof. The file's checked
+   `captureBytes`, `observe`, borrowed scratch and existing
+   progress APIs remain intact; no older donor M3File.java is copied.
+2. **Selected byte transfer through a sequential/archive/database
+   provider:** `MFileStreams.transferRanges` reads one original
+   `MFileContent` input. It drains gaps through the existing
+   shadow/progress mechanism and writes only selected ranges to the
+   borrowed output. Failure may leave a partial output prefix; this
+   is not an atomic destination commit, retry, close or flush.
+3. **Filter and stable-sort an existing SQLite-backed directory:**
+   `M3DirectoryTable` keeps original `char[]` names,
+   `int[]` offsets and state/size/time primitive lanes from JNI.
+   New selected rows and masks operate on physical indexes;
+   bottom-up stable sorting manipulates only primitive `int[]`
+   row order, not retained copies of source names/entries.
+   Read-only list projections materialize `DirEntry` on access
+   with validated, detached indexes. The SQLite/JNI row encoding
+   and existing encounter order are unchanged.
 
-**Stream-only M3FS provider / ZIP or remote archive:** the existing
-`MFileStreams.transferRanges` from #1815 consumes gaps via original
-read-through progress/shadows, writes only selected bytes to a borrowed
-caller output, and retains only 8KiB scratch. It cannot seek and must not
-claim that a partial destination write can be rolled back. No new JNI
-export or secondary content store is introduced.
+## Source-first exact custody
 
-**Native M3FS SQLite directory result and file-browser index:** the original
-`M3DirectoryTable` from #1793 keeps its parent-owned char[] name payload,
-int[] physical offsets, state flags and scalar metadata. Filter and
-stable size-sort operations return primitive physical row-ID arrays or
-read-only indexed views; DirEntry records are produced on access, not
-retained once per entry. Native M3FS row layout, JNI/C and SQLite engine
-are unchanged. The original comparator, inclusive range, occurrence
-and sorted tie order are preserved.
+Canonical [Synexia #13012](https://github.com/hsoliwal/com.synexia/pull/13012)
+contains `RangeIndexedFsJava20261022` and
+`RangeIndexedFsVerifier20261022`, reusing existing exact
+Maven/OpenRewrite Java and text recipes; each original preimage,
+candidate SHA256 and new-source ABSENT row are sealed. The target
+receives six Java/test files and one strict Python verifier serially.
+All seven source postimages were checked byte-for-byte against the
+canonical recipe after receiving.
 
-**Strict SDK host+linked-image verifier:** `m3/file/verify.py` retains
-its exact Java source/test set gate, adding explicit markers for the
-original M3File observation, shared scratch and resource lock contracts
-plus the new range contract. A remote check of this product branch
-confirmed **13 test source files and 13 verifier map entries**, with
-zero missing or surplus names. This is a source-census result, **not**
-execution of the host or jlink/image verifier.
+The original strict `m3/file/verify.py` was extended with the
+already-existing observation, shared-scratch and resource-lock
+contracts and the new `M3FileRangeContract`. The guard requiring
+an *exact* registered host+linked image test inventory remains
+in place. The 13 test file stems match the 13 exact verifier keys.
+`RECEIVED_DONORS.tsv` contains all seven original Git blob IDs and
+`verify_received_blobs.py` is a read-only local reproducibility
+gate; the latter does not qualify behavior by itself.
 
-## Canonical recipes, donor cases and licence custody
+## Canonical problem categories and donor decisions
 
-[Synexia #13012](https://github.com/hsoliwal/com.synexia/pull/13012)
-holds the reusable class-backed `M3HashPinnedJavaSnapshotRecipe` and
-`M3HashPinnedTextSnapshotRecipe`, source SHA256 pre- and postimages
-and new-file ABSENT receipts, Maven/OpenRewrite two-cycle fixed point
-and drift-refusal **test definitions**, category-indexed donor
-comparisons and correction-memory entries. Qualified donors
-[M3JDK21 #1815](https://github.com/hsoliwal/M3jdk21/pull/1815)
-and [#1793](https://github.com/hsoliwal/M3jdk21/pull/1793)
-plus their Synexia #12967/#12887 sources are reused.
-No LeetCode/HackerRank/GeeksforGeeks challenge answer bodies are copied.
-Original licence notices and source/JNI authority remain unchanged.
+Catalogue lives in [Synexia #13012](https://github.com/hsoliwal/com.synexia/pull/13012):
+known-region hashing vs full-source hashing; sequential skip/read;
+parent-owned physical indexes and state masks; primitive stable
+mergesort; immutable projection views; source-blessed Maven/AST
+build facts; strict host+linked image test census. LeetCode,
+HackerRank and GeeksforGeeks contribute comparison categories only,
+not copied contest implementations. Preserve existing Apache-2.0
+first-party and any Apache Commons VFS upstream notices.
 
-`RECEIVED_DONORS.tsv` lists seven exact product Git blob preimages
-and generated postimages, original donor and canonical recipe IDs
-and problem categories. The read-only `verify_received_blobs.py`
-checks **all seven source files** and fails on path or content drift;
-it performs no source mutation, testing or native compilation.
+## Evidence and withheld gates
 
-## Actual receipt versus remaining gates
+**Verified in this receiving step:** canonical exact pre/post
+source readback 7/7; strict source census matching 13/13.
 
-**PASS:** Source preimage checks before serial per-file receiving;
-seven canonical Java/test/Python postimages read back byte-for-byte.
-Strict M3File test census 13/13 exact names.
+**Historical donor proof only:** #1815 ran isolated equivalent Java21
+range tests (1,200 trials/22,168 assertions, plus 28 selected ZIP
+bytes); #1793 ran isolated equivalent directory selectors (520
+trials/3,134 assertions and standalone C11/Java wire-layout check).
+Those were not full original target native builds and have not
+been rerun on this combined source.
 
-**HISTORICAL SCOPED donor results, NOT rerun here:** #1815 reports an
-isolated equivalent Java21 range test (1,200 trials/22,168 assertions)
-and compressed ZIP sample; #1793 reports isolated directory sorter
-(520 trials/3,134 assertions) and C11-Java row codec sample.
-Neither proves full original M3FS JNI/SQLite/JUnit/HotSpot packaging.
+**NOT EXECUTED:** canonical Maven/OpenRewrite Recipe.run/fixed point;
+complete m3/file/verify.py host+linked-JDK image; native M3FS SQLite
+JNI/JUnit/CTest across providers, full HotSpot/JMOD/jtreg/JCK and
+Android/Windows/macOS matrix; Maven/Gradle ABI/plugin impacts;
+five-library JDK/Guava/Eclipse/Commons/Spring collection parity;
+comparative CPU/heap/native-memory throughput and allocation
+measurements. Do not promote an observed file state to successful
+build status based on source hashes, or assert speedup.
 
-**NOT RUN:** canonical Maven/OpenRewrite Recipe.run/fixed point,
-original `m3/file/verify.py` on host plus linked SDK image,
-M3FS native SQLite/C/JNI/JUnit on actual library and provider
-lifetimes, HotSpot/JMOD/jtreg/JCK, Windows/macOS/Android and
-network/ZIP/JRT provider matrix, full Maven/Gradle/IDE dependent
-task impact and CPU/heap/native-memory benchmarks. No speedup,
-snapshot atomicity or full SDK admission is claimed.
-
-**DRAFT; do not merge** on source identity alone.
+Keep **DRAFT** until real source-built SDK gates pass.
