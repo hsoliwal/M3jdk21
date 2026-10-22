@@ -43,8 +43,12 @@ public final class M3CollectionMaskCompactor {
         int words = ((length - 1) >>> 6) + 1;
         if (deleted.length < words) throw new IllegalArgumentException("mask too short");
         if (length < 512 || removalRuns(deleted, length) > Math.max(4, length >>> 7)) {
-            int write = from;
-            for (int read = 0; read < length; read++) {
+            // Prefix before the first deletion is already at its final physical slots.
+            // Do not issue redundant reference stores or GC barriers for those entries.
+            int firstRemoved = next(deleted, 0, length, true);
+            if (firstRemoved == length) return to;
+            int write = from + firstRemoved;
+            for (int read = firstRemoved + 1; read < length; read++) {
                 if ((deleted[read >>> 6] & (1L << (read & 63))) == 0) {
                     values[write++] = values[from + read];
                 }
