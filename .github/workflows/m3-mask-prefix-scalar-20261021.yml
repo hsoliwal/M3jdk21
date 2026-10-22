@@ -48,7 +48,9 @@ jobs:
           grep -q 'BootstrapViewsTest.*PASS' "$receipt"
           grep -q 'CollectionViewsContract.*PASS' "$receipt"
           test "$(grep -c '^PASS M3JDK21 ArrayList+Vector mask-callers checks=' "$receipt")" -eq 4
-          grep -q '^PASS: baseline and integrated JDK ArrayList/Vector masks,' "$receipt"
+          grep -q '^M3_JDK_ARRAY_MASK_DIFF_PASS checks=' "$receipt"
+          grep -q '^M3_JDK_REMOVEIF_COLLECTION_CONTRACT_PASS checks=' "$receipt"
+          grep -q '^PASS: original Java21 API, native M3JDK ArrayList/Vector and mask differentials,' "$receipt"
 
   native-mask-parity:
     runs-on: ubuntu-24.04
