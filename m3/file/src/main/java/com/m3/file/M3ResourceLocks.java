@@ -6,6 +6,7 @@ import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.concurrent.Callable;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -124,6 +125,35 @@ public final class M3ResourceLocks {
             Lease prior = top.get();
             requireNested(prior, scope);
             return conflicted(scope, Thread.currentThread()) ? null : admit(scope, prior);
+        } finally {
+            mutex.unlock();
+        }
+    }
+
+    /**
+     * Wait at most the specified total budget for a participating scope.
+     * Timeout returns null without publishing a lease. Interruption aborts
+     * without acquiring ownership. The budget includes mutex contention and
+     * condition waiting; NIO provider and Eclipse scheduling rules stay owned
+     * by their original implementations.
+     */
+    public Lease tryAcquire(Scope scope, long timeout, TimeUnit unit)
+            throws InterruptedException {
+        Objects.requireNonNull(scope, "scope");
+        Objects.requireNonNull(unit, "unit");
+        if (timeout < 0L) throw new IllegalArgumentException("negative resource wait");
+        long budget = unit.toNanos(timeout);
+        long started = System.nanoTime();
+        if (!mutex.tryLock(budget, TimeUnit.NANOSECONDS)) return null;
+        try {
+            Lease prior = top.get();
+            requireNested(prior, scope);
+            while (conflicted(scope, Thread.currentThread())) {
+                long remaining = budget - (System.nanoTime() - started);
+                if (remaining <= 0L) return null;
+                available.awaitNanos(remaining);
+            }
+            return admit(scope, prior);
         } finally {
             mutex.unlock();
         }
