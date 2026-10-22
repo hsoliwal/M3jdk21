@@ -1,0 +1,11 @@
+gate	status	artifact_or_command	interpretation
+CANONICAL_SOURCE_BLOB_READBACK	PASS	a5a7d4508513b829d1ac14b9562aa108998a0e3f;5da0a5f54f5830ad6cfd97b4b3d5adb09d6f92a4	Both new target artifacts byte-identical to Synexia canonical recipe payloads
+PARENT_DONOR_SOURCE_PIN	INVENTORIED	M3JDK21 PR1797 RECEIVED_DONORS.tsv	Original Java/C owned mask/filtered/sorted donor source unchanged
+LOCAL_SCRIPT_SYNTAX	PASS	bash -n verify-integrated-java-jni.sh	Shell syntax only, not integration execution
+SYNEXIA_OPENREWRITE_JUNIT	NOT_RUN	mvn -f synexia-openrewrite-recipes/pom-m3jdk21-native-filtered-integration-20261022.xml test	Actual named Java/text recipe fixed point and refusals pending CI
+JAVA21_JDK_OWNERS	NOT_RUN	verify-integrated-java-jni.sh	Actual production M3IndexMaskWindow and CollectionViews patch-module compile pending
+LIBJAVA_C17_NATIVE_JNI	NOT_RUN	verify-integrated-java-jni.sh	Original C compiler/JNI symbol/scan/count parity pending
+FILTERED_SORTED_BACKED_CONTRACTS	NOT_RUN	verify-integrated-java-jni.sh	Existing BootstrapViewsTest and CollectionViewsContract pending
+M3JDK21_MATCHED_IMAGE	NOT_RUN	configure/make image + jtreg/JCK	Product bootstrap/HotSpot/GC/native-image proof pending
+ALL_FIVE_COLLECTION_LIBRARIES	NOT_RUN	provider-specific suites	JDK Guava Eclipse Collections Apache Commons Collections Spring pending
+CPU_HEAP_NATIVE_MEMORY	NOT_RUN	paired cold/warm measured comparison	No universal speedup or reduction claim
