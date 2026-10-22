@@ -1,0 +1,13 @@
+use_case	original_owner	Synexia_donor	implemented_here	algorithm_or_data_shape	validation_status	remaining_conditions
+offline_maven_build_delta	M3FileDeltaLedger+M3BuildStateStore	synexia-build-inventory	PRESERVED	physical rows long bitmask SHA256	SRC_OWNED	Semantic javac ABI and plugin dependency closure must qualify
+provider_nondefault_NIO	MFiles+NioFileProvider	Synexia recipe 12844	RECEIVED	borrowed FileSystem lazy MFile traversal	DONOR_372_JAVA_12_CTEST	Other OS nondefault FS identity, borrowed close and mount lifecycle
+zip_jrt_archive_read	MFiles Plan	Synexia recipe 12844	RECEIVED	selective lazy hierarchy, directory prune	DONOR_QUALIFIED	Archive provider limits/credentials/native quotas
+m3db_native_sqlite_provider	DatabaseFileProvider+M3FS JNI	Synexia recipe 12844	RECEIVED	M3FS native inode SQLite WAL/CAS	DONOR_QUALIFIED	Power-loss, cross-process CAS, actual native JDK image
+bounded_input_progress_and_shadow	MFileContent/MFileStreams	Synexia recipe 12844	RECEIVED	one owner stream, borrowed monitor and shadow	DONOR_QUALIFIED	Full project source/native tests on this branch
+whole_source_and_hash_one_read	M3FileundefinedcaptureBytes	Synexia m3file-observed-content-capture-20261022	IMPLEMENTED	parent-owned growing byte[] immutable read-only view	SCOPED_87270	Original linked image and performance comparison
+streaming_only_sha_ast	M3File.observe ByteObserver	Synexia earlier recipe 12877	PRESERVED	8192-byte chunks, one SHA256 pass	PREVIOUS_SCOPED	No whole-file allocation when unnecessary
+content_identity_and_derivations	M3FileManifest/M3PrecomputeKey	synexia-fileindex CONTENT-TRUTH	PRESERVED	32-byte SHA256 raw/projection proof	NOT_TESTED_NEW	Version binding and parser provenance
+commit_version_fences	M3BuildStateStore M3FS native SQLite	synexia-fileindex COMMIT_PROTOCOL_WAL	PRESERVED	observed/successful generations and native transaction	PREVIOUS_QUALIFIED	Never publish provisional semantic work
+java_native_index_acceleration	M3FsPrecomputeBundle + JNI	synexia-index-precompute	PRESERVED	generation-scoped primitive fact arrays	OTHER_PR_GATES	JNI parity/performance before changing kernels
+large_file_paged_residency	M3SnapshotStore	Synexia m3-residency	HELD	bounded CRC32C page images and leases	NOT_IMPLEMENTED	Codec, object identity, GC, liveness, heap benchmarks
+remote_HDFS_loader	MFiles provider framework	synexia-dfs	HELD	provider resource address and lifetime	NOT_IMPLEMENTED	Credentials, HDFS failure/isolation, licensing and tests
