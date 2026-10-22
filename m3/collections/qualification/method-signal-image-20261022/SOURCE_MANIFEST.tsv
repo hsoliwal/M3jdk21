@@ -1,0 +1,8 @@
+# SPDX-License-Identifier: Apache-2.0
+# Canonical recipe: hsoliwal/com.synexia m3-method-signal-image-receiver-20261022
+# Parent: M3JDK21 #1838 opt-in javac M3MethodSignals; source owner unchanged.
+# path	before_sha256	after_sha256	git_blob	canonical_resource
+m3/collections/qualification/method-signal-image-20261022/pom.xml	ABSENT	71695dc6f75de866f45fb3e30c3ef7fed1ca6b130b93ccb060034f304bc987b2	a44fc6e346ba72d6544ecdec8210ba1d24a01396	00-method-signal-image-pom.xml.txt
+m3/collections/src/main/java/com/m3/collections/M3MethodSignalImage.java	ABSENT	9cfa11a8495eb97288b09c56935a91e1b8c498ad08c15040244d40e0df1cc07d	d9b252bdcf2fb00b257a2d2a8a3350af46e50dec	00-M3MethodSignalImage.java.txt
+m3/collections/src/test/java/com/m3/collections/M3MethodSignalImageSelfTest.java	ABSENT	98e0a9e2cc5c6c7d21665a5231f6b76b55cc8528ae72c418fbecbd88f2bcf84d	d1fe3041222ebd618956c66b4aab58d0c4cd62e9	01-M3MethodSignalImageSelfTest.java.txt
+m3/collections/src/test/java/com/m3/collections/M3MethodSignalImageTest.java	ABSENT	6f6fc5c21caa51ed9a546f867a193ada5bf7cfaef17a360a919101e9c2684ebd	557127e066560f3523cbddbdb19963a6707692e5	02-M3MethodSignalImageTest.java.txt
