@@ -171,15 +171,12 @@ public final class M3LongStateArray {
     public static final class Snapshot {
         private final long[] values;
         private final int[] states;
-        private final int[] ordinalIds;
         private final long sourceGeneration;
 
         private Snapshot(long[] values, int[] states, long sourceGeneration) {
             this.values = values;
             this.states = states;
             this.sourceGeneration = sourceGeneration;
-            ordinalIds = new int[values.length];
-            for (int i = 0; i < ordinalIds.length; i++) ordinalIds[i] = i;
         }
 
         public int size() { return values.length; }
@@ -195,12 +192,16 @@ public final class M3LongStateArray {
         public Selection prepare(int requiredMask, int forbiddenMask,
                                  M3IndexPathMasks.Backend backend) {
             Objects.requireNonNull(backend, "backend");
-            int[][] planes = {states};
-            int[] required = {requiredMask};
-            int[] forbidden = {forbiddenMask};
-            M3IndexPathRank rank = M3IndexPathRank.snapshot(
-                    ordinalIds, ordinalIds, planes, required, forbidden, 0, size(), 1);
+            M3IndexPathRank rank = M3IndexPathRank.snapshotIdentity(
+                    states, requiredMask, forbiddenMask);
             if (backend == M3IndexPathMasks.Backend.NATIVE_REQUIRED) {
+                // Existing JNI ABI remains authoritative. Materialize its
+                // ordinary identity path only for an explicit native call.
+                int[] ordinalIds = new int[states.length];
+                for (int i = 0; i < ordinalIds.length; i++) ordinalIds[i] = i;
+                int[][] planes = {states};
+                int[] required = {requiredMask};
+                int[] forbidden = {forbiddenMask};
                 int[] nativeOrdinals = M3IndexPathMasks.select(
                         ordinalIds, ordinalIds, planes, required, forbidden,
                         0, size(), 1, backend);
