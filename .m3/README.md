@@ -1,14 +1,23 @@
-# M3 RECIPE_FIRST sidecar
+# M3JDK21 public receiver — executed postimages only
 
-Isolated Java 21/OpenRewrite recipe crate; native build files are untouched.
+Synexia (`hsoliwal/com.synexia`) exclusively owns every Maven/OpenRewrite
+recipe, task crate, transformation template, mastery fixture, recipe runner and
+recipe execution. M3JDK21 receives only qualified **executed** Java/JNI/native
+postimages and data-only receipts binding recipe ID, source revision, target
+preimage/postimage hashes, licensing, and completed target-specific gates.
 
-- Build: `mvn -f .m3/openrewrite-recipes/pom.xml clean install`
-- Inventory: `mvn -f .m3/analysis-pom.xml -Pm3-recipe-first-inventory org.openrewrite.maven:rewrite-maven-plugin:dryRun`
-- Task lane requires `m3.llm.taskCrateFile` plus exact SHA-256 `m3.llm.taskCrateRoot`.
+Historical `.m3/openrewrite-recipes/`, `.m3/task-crates/`,
+`.m3/atomize-patternize/` and related sidecars are migration residue.
+Their presence is **not** permission for new recipe authoring, installation,
+copying or execution in this public repository. Do not run the historic
+OpenRewrite recipe commands here as a new delivery workflow.
 
-Source-changing work must be authored as a reusable tested recipe after these gates. Direct LLM target-file editing is not an allowed lane.
+Migration is source-sealed and non-destructive: inventory exact blob hashes and
+callers, transfer the canonical recipe sources and their tests to Synexia,
+run/qualify them there, then deliver reviewed product postimages and remove
+redundant public recipe copies by an independently reviewed cleanup PR.
+Do not silently delete provenance or change OpenJDK licensing.
 
-Synexia handoff crates use the `synexia-*` namespace. The receiver admits both materialized
-M3 ports and reusable OpenRewrite recipe/test sources under this sidecar; the provenance guard runs
-before hash-pinned snapshot recipes. M3-owned direct bytes must remain Apache-2.0, and target
-promotion still requires the target's own build/test/runtime evidence.
+Target-side work remains authoritative for the actual JDK build, jtreg, API/ABI,
+JNI/GC/native correctness, installed-image testing and runtime acceptance.
+A recipe identifier in a receipt is a provenance pointer, not an executable recipe.

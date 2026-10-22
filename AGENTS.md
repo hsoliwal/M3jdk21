@@ -1,6 +1,28 @@
 <!-- SPDX-License-Identifier: Apache-2.0 -->
 # M3JDK21 agent instructions
 
+## Hard boundary: postimages only, never recipes
+
+**Synexia (`hsoliwal/com.synexia`) is the exclusive convergence, Maven/OpenRewrite
+recipe-authoring, recipe-storage, recipe-execution and qualification workspace.**
+This public M3JDK21 repository is a **receiver**: it may contain only the actual
+executed Java/HotSpot/JNI/native/product postimages, target-authoritative tests,
+license/NOTICE material and data-only source/recipe-ID/execution-gate receipts.
+No Synexia-owned recipe Java/YAML/descriptor, Maven recipe crate, transformation
+template, recipe executor, mastery fixture, copy of a recipe engine or recipe mirror
+may be introduced or run in M3JDK21.
+
+Any new change must be re-created by improving and executing the named recipe in
+Synexia against the exact pinned M3JDK21 preimage, followed by verified postimage
+transfer, JDK/API/ABI/JNI/jtreg/runtime gates and a receiving PR. Existing
+`m3/recipes/`, `.m3/openrewrite-recipes/`, `.m3/task-crates/` and similar recipe
+copies on historical M3JDK21 branches are **migration residue, not permission**:
+inventory them, seal exact content and dependencies in Synexia, then migrate with
+a separate reviewed content-preserving cleanup. Do not delete historical source
+before verifying its Synexia owner and affected callers. No new recipe assets are
+admitted to the public target during migration.
+
+
 ## M3JDK21 is the SDK product, not "M3 + JDK"
 
 **Do not implement or describe M3 as an overlay over an otherwise unchanged JDK.**
@@ -49,16 +71,17 @@ fixed-point/refusal proof live only in Synexia. A candidate may enter target cod
 distinct source-sealed recipe and the actual target compiler, runtime, JNI/GC and performance gates.
 A naming preflight PASS is not a JDK backend promotion.
 
-Synexia (`hsoliwal/com.synexia`) is the donor-convergence workspace. M3JDK21 owns the delivered
-Java/HotSpot/JNI runtime and target acceptance. Keep reusable Maven/OpenRewrite recipes, fixtures,
-source seals, provenance and convergence receipts in Synexia, then apply qualified recipes to
-materialize target changes. Target-local proof-tooling mirrors keep exact Synexia revision/hash/
-license lineage and do not become competing canonical recipe owners. Return improvements as
-new Synexia convergence evidence.
+Synexia (`hsoliwal/com.synexia`) exclusively owns authoring, execution and storage of recipes,
+mastery fixtures, source seals and convergence evidence. M3JDK21 owns only the receiving
+Java/HotSpot/JNI postimages and its independent target acceptance. The target stores data-only
+receipt references to Synexia revision, recipe ID, execution and gate roots; no target-local
+recipe runner, recipe project or compatibility mirror may remain after migration.
+Return every transformation correction to Synexia, then receive its newly executed result.
 
-Eligible Synexia-owned Apache-2.0 source **and recipes** may be freely reused under that license,
-including fixtures, catalogues and proof tooling. Retain license, NOTICE, attribution and change
-notices. Preserve OpenJDK and other upstream licenses per file/payload; the recipe license does
+Eligible, generated Synexia postimage source may be received under its applicable license,
+with exact execution evidence, NOTICE, attribution and change notices. A recipe's permissive
+license does not authorize storing or executing that recipe in the public product.
+Recipe source, fixtures, catalogues, task crates and runners remain exclusively in Synexia. Preserve OpenJDK and other upstream licenses per file/payload; the recipe license does
 not relicense generated target code or embedded donors. Do not introduce a Synexia runtime service
 or Maven/package dependency into Java/HotSpot/JNI to borrow its source.
 
