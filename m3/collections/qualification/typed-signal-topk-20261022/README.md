@@ -11,3 +11,32 @@ The existing public `M3SignalColumns.compare` still returns its diagnostic sign/
 **Real gates:** strict Java21 original source and standalone differential, JUnit in the owning Maven module, canonical Maven/OpenRewrite first application/fixed point/preimage refusal, full source-built JDK, JNI/HotSpot/JTreg/JCK, ABI, CPU/retained heap/native RSS and cross-platform. The earlier isolated algorithm kernel passed 23,302 checks; this exact newly received test file must run separately before any product PASS is claimed. The original M3ProgressiveSignalEvidence remains the only metric-bound/certificate authority.
 
 The global String → arrays → collections → AST/compiler receiving order has not been declared complete.
+
+## Independent actual-source JUnit gate while custom fork is unavailable
+
+The original `m3/collections/pom.xml` declares the test dependency
+`org.junit.jupiter:junit-jupiter:5.10.2-m3-source-1`.
+That custom coordinate did not resolve on GitHub Actions for merged typed-columns PR
+#1803 (workflow 39713990682, job 119611649959); its strict javac gate passed.
+The original POM and custom dependency remain **unchanged**.
+
+The exact source-sealed, canonical Synexia text recipe
+`m3-typed-signal-topk-20261022` adds an optional test-only
+`qualification/typed-signal-topk-20261022/pom.xml` using
+`junit-jupiter:5.11.4`, already used in M3JDK21's source-signals compiler module.
+It compiles **the actual** `M3SignalColumns`, `M3SignalTopK` and their original
+selftests/JUnit classes with Java 21 and warnings-as-errors. It does **not** copy
+the production sources, change the canonical JDK/runtime API, overwrite the original
+custom-fork dependency, or certify fork-specific JUnit semantics.
+
+Run:
+
+```sh
+mvn -B -ntp -f m3/collections/qualification/typed-signal-topk-20261022/pom.xml \
+  -Dtest=M3SignalTopKTest,M3SignalColumnsTest test
+```
+
+The focused workflow reports this as **ALTERNATE_JUNIT**.
+The original owning module must independently pass when its customized
+test artifact becomes available. Do not convert a portable pass into an
+unqualified release/whole-JDK/modified-JUnit acceptance.
