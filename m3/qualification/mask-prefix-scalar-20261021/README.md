@@ -151,3 +151,25 @@ Full `make images` of M3JDK21 with a matching Boot JDK, all jtreg/JCK,
 platform-specific JNI, JVMTI, CDS, ZGC, Shenandoah and HotSpot/JIT
 phase-lifetime oracles remain separate `NOT_RUN` gates. No formal
 performance admission or universal equivalence is asserted.
+
+
+## Full modified OpenJDK image and real jtreg gate
+
+The focused PR workflow now also has a separate heavy
+`source-built-jdk-jtreg` job. It reuses the repository's original
+`.github/actions/get-bootjdk` and `get-jtreg` actions, runs
+`bash configure`, `make images`, and then the six existing/new original
+JDK jtreg contract classes in the **built M3JDK21 image**:
+
+- `M3ArrayMaskCallersContract`, `M3MaskCompactionDifferential`,
+  `M3JdkRemoveIfMaskContracts`, `M3CollectionMaskCompactorPrefixTest`;
+- `BootstrapViewsTest` and `CollectionViewsContract`.
+
+This is source-image qualification, not merely `--patch-module`.
+It is deliberately fail-closed: a missing image, failed configure/build,
+or failing jtreg is a **HOLD**, never treated as a success. The job is
+committed and queued, **NOT YET EXECUTED/VERIFIED**. Native state-mask
+Java/C11 parity remains an independently required job. Full JCK, JVM
+compiler tier matrix, JVMTI, CDS/shared lexicon, ZGC/Shenandoah,
+cross-platform architecture and measured allocation/CPU performance
+are still outside the bounded PR proof.
