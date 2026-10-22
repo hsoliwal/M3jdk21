@@ -104,7 +104,9 @@ public class M3PatternStateMaskTest {
         Method matches = shortPlan.getClass().getDeclaredMethod("matches", String.class);
         matches.setAccessible(true);
         for (String text : List.of("\ud800", "\udc00", "\ud83d\ude00", "z\ud800")) {
-            check((int) matches.invoke(shortPlan, text) == -1, "surrogate deferral even after dead frontier");
+            int expected = warm.matcher(new StringBuilder(text)).matches() ? 1 : 0;
+            check((int) matches.invoke(shortPlan, text) == expected,
+                    "surrogate decision even after dead frontier");
         }
         var random = new Random(0x4d334d41534bL);
         String[] atoms = {"a", "b", ".", "a*", "b*", ".*", "[ab]*", "\\d*", "é*", "[^x]*"};
