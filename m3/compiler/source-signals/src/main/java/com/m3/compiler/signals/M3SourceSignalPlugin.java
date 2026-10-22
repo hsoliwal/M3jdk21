@@ -11,6 +11,7 @@ import com.sun.source.tree.ForLoopTree;
 import com.sun.source.tree.IfTree;
 import com.sun.source.tree.LambdaExpressionTree;
 import com.sun.source.tree.MemberReferenceTree;
+import com.sun.source.tree.MethodTree;
 import com.sun.source.tree.MethodInvocationTree;
 import com.sun.source.tree.NewClassTree;
 import com.sun.source.tree.SwitchExpressionTree;
@@ -69,6 +70,7 @@ import javax.lang.model.util.ElementFilter;
 public final class M3SourceSignalPlugin implements Plugin {
     private static final String ANNOTATION = "com.m3.collections.sortable.Sortable";
     private static final String SCHEMA = "M3JDK21-SOURCE-SIGNALS/1";
+    private static final String METHOD_SCHEMA = "M3JDK21-SOURCE-SIGNALS/2";
     private static final java.util.Comparator<Long> UNSIGNED = Long::compareUnsigned;
 
     private enum Family {
@@ -78,6 +80,8 @@ public final class M3SourceSignalPlugin implements Plugin {
     private final TreeMap<String, Facts> facts = new TreeMap<>();
     private Path output;
     private boolean includeAll;
+    private boolean methodSignals;
+    private boolean methodOptionSeen;
     private boolean written;
     private Trees trees;
 
@@ -101,6 +105,16 @@ public final class M3SourceSignalPlugin implements Plugin {
                 includeAll = true;
             } else if (argument.equals("include=annotated")) {
                 includeAll = false;
+            } else if (argument.startsWith("methods=")) {
+                if (methodOptionSeen) {
+                    throw new IllegalArgumentException("duplicate methods option");
+                }
+                methodOptionSeen = true;
+                methodSignals = switch (argument) {
+                    case "methods=on" -> true;
+                    case "methods=off" -> false;
+                    default -> throw new IllegalArgumentException("unknown methods option: " + argument);
+                };
             } else {
                 throw new IllegalArgumentException("unknown M3SourceSignals option: " + argument);
             }
@@ -236,6 +250,7 @@ public final class M3SourceSignalPlugin implements Plugin {
     private final class SourceScanner extends TreePathScanner<Void, Void> {
         private final Facts row;
         private final ClassTree root;
+        private MethodFacts currentMethod;
 
         private SourceScanner(Facts row, ClassTree root) {
             this.row = row;
@@ -249,8 +264,28 @@ public final class M3SourceSignalPlugin implements Plugin {
         }
 
         @Override
+        public Void visitMethod(MethodTree tree, Void unused) {
+            if (!methodSignals) return super.visitMethod(tree, unused);
+            Element element = trees.getElement(getCurrentPath());
+            if (!(element instanceof ExecutableElement executable)) {
+                return super.visitMethod(tree, unused);
+            }
+            String signature = methodSignature(executable);
+            MethodFacts next = row.methods.computeIfAbsent(signature,
+                    ignored -> new MethodFacts(executable));
+            MethodFacts previous = currentMethod;
+            currentMethod = next;
+            try {
+                return super.visitMethod(tree, unused);
+            } finally {
+                currentMethod = previous;
+            }
+        }
+
+        @Override
         public Void visitMethodInvocation(MethodInvocationTree tree, Void unused) {
             row.callSiteCount++;
+            if (currentMethod != null) currentMethod.callSiteCount++;
             recordCall("call", trees.getElement(getCurrentPath()));
             return super.visitMethodInvocation(tree, unused);
         }
@@ -258,6 +293,7 @@ public final class M3SourceSignalPlugin implements Plugin {
         @Override
         public Void visitNewClass(NewClassTree tree, Void unused) {
             row.allocationSiteCount++;
+            if (currentMethod != null) currentMethod.allocationSiteCount++;
             recordCall("new", trees.getElement(getCurrentPath()));
             return super.visitNewClass(tree, unused);
         }
@@ -265,6 +301,7 @@ public final class M3SourceSignalPlugin implements Plugin {
         @Override
         public Void visitMemberReference(MemberReferenceTree tree, Void unused) {
             row.memberReferenceCount++;
+            if (currentMethod != null) currentMethod.memberReferenceCount++;
             recordCall("reference", trees.getElement(getCurrentPath()));
             return super.visitMemberReference(tree, unused);
         }
@@ -272,6 +309,7 @@ public final class M3SourceSignalPlugin implements Plugin {
         private void recordCall(String shape, Element target) {
             if (!(target instanceof ExecutableElement callee)) {
                 row.unresolvedCallCount++;
+                if (currentMethod != null) currentMethod.unresolvedCallCount++;
                 return;
             }
             String kind;
@@ -280,12 +318,15 @@ public final class M3SourceSignalPlugin implements Plugin {
                     || callee.getModifiers().contains(Modifier.PRIVATE)) {
                 kind = "DIRECT";
                 row.directCallCount++;
+                if (currentMethod != null) currentMethod.directCallCount++;
             } else {
                 kind = "DISPATCH_CANDIDATE";
                 row.dispatchCandidateCount++;
+                if (currentMethod != null) currentMethod.dispatchCandidateCount++;
             }
             String key = shape + ':' + kind + ':' + methodSignature(callee);
             row.calls.merge(key, 1, Integer::sum);
+            if (currentMethod != null) currentMethod.calls.merge(key, 1, Integer::sum);
             row.add(Family.CALLS, key);
             Element owner = callee.getEnclosingElement();
             if (owner instanceof TypeElement type) {
@@ -298,37 +339,37 @@ public final class M3SourceSignalPlugin implements Plugin {
         }
 
         @Override public Void visitForLoop(ForLoopTree t, Void p) {
-            row.loopCount++; return super.visitForLoop(t, p);
+            row.loopCount++; if (currentMethod != null) currentMethod.loopCount++; return super.visitForLoop(t, p);
         }
         @Override public Void visitEnhancedForLoop(EnhancedForLoopTree t, Void p) {
-            row.loopCount++; return super.visitEnhancedForLoop(t, p);
+            row.loopCount++; if (currentMethod != null) currentMethod.loopCount++; return super.visitEnhancedForLoop(t, p);
         }
         @Override public Void visitWhileLoop(WhileLoopTree t, Void p) {
-            row.loopCount++; return super.visitWhileLoop(t, p);
+            row.loopCount++; if (currentMethod != null) currentMethod.loopCount++; return super.visitWhileLoop(t, p);
         }
         @Override public Void visitDoWhileLoop(DoWhileLoopTree t, Void p) {
-            row.loopCount++; return super.visitDoWhileLoop(t, p);
+            row.loopCount++; if (currentMethod != null) currentMethod.loopCount++; return super.visitDoWhileLoop(t, p);
         }
         @Override public Void visitIf(IfTree t, Void p) {
-            row.branchCount++; return super.visitIf(t, p);
+            row.branchCount++; if (currentMethod != null) currentMethod.branchCount++; return super.visitIf(t, p);
         }
         @Override public Void visitConditionalExpression(ConditionalExpressionTree t, Void p) {
-            row.branchCount++; return super.visitConditionalExpression(t, p);
+            row.branchCount++; if (currentMethod != null) currentMethod.branchCount++; return super.visitConditionalExpression(t, p);
         }
         @Override public Void visitSwitch(SwitchTree t, Void p) {
-            row.branchCount++; return super.visitSwitch(t, p);
+            row.branchCount++; if (currentMethod != null) currentMethod.branchCount++; return super.visitSwitch(t, p);
         }
         @Override public Void visitSwitchExpression(SwitchExpressionTree t, Void p) {
-            row.branchCount++; return super.visitSwitchExpression(t, p);
+            row.branchCount++; if (currentMethod != null) currentMethod.branchCount++; return super.visitSwitchExpression(t, p);
         }
         @Override public Void visitCatch(CatchTree t, Void p) {
-            row.catchCount++; return super.visitCatch(t, p);
+            row.catchCount++; if (currentMethod != null) currentMethod.catchCount++; return super.visitCatch(t, p);
         }
         @Override public Void visitTry(TryTree t, Void p) {
-            row.tryCount++; return super.visitTry(t, p);
+            row.tryCount++; if (currentMethod != null) currentMethod.tryCount++; return super.visitTry(t, p);
         }
         @Override public Void visitLambdaExpression(LambdaExpressionTree t, Void p) {
-            row.lambdaCount++; return super.visitLambdaExpression(t, p);
+            row.lambdaCount++; if (currentMethod != null) currentMethod.lambdaCount++; return super.visitLambdaExpression(t, p);
         }
     }
 
@@ -337,6 +378,7 @@ public final class M3SourceSignalPlugin implements Plugin {
         private final Map<Family, TreeSet<Long>> dimensions = new EnumMap<>(Family.class);
         private final Set<String> dependencyNames = new TreeSet<>();
         private final TreeMap<String, Integer> calls = new TreeMap<>();
+        private final TreeMap<String, MethodFacts> methods = new TreeMap<>();
         private int fieldCount, methodCount, constructorCount;
         private int callSiteCount, allocationSiteCount, memberReferenceCount;
         private int directCallCount, dispatchCandidateCount, unresolvedCallCount;
@@ -354,11 +396,39 @@ public final class M3SourceSignalPlugin implements Plugin {
         }
     }
 
+    /** One source declaration's exact counters and attributed candidate edges. */
+    private static final class MethodFacts {
+        private final int modifierBits;
+        private final int parameters;
+        private final TreeMap<String, Integer> calls = new TreeMap<>();
+        private int callSiteCount, allocationSiteCount, memberReferenceCount;
+        private int directCallCount, dispatchCandidateCount, unresolvedCallCount;
+        private int loopCount, branchCount, tryCount, catchCount, lambdaCount;
+
+        private MethodFacts(ExecutableElement method) {
+            parameters = method.getParameters().size();
+            int bits = method.getKind() == ElementKind.CONSTRUCTOR ? 1 : 0;
+            bits |= method.getModifiers().contains(Modifier.PUBLIC) ? 1 << 1 : 0;
+            bits |= method.getModifiers().contains(Modifier.PROTECTED) ? 1 << 2 : 0;
+            bits |= method.getModifiers().contains(Modifier.PRIVATE) ? 1 << 3 : 0;
+            bits |= method.getModifiers().contains(Modifier.STATIC) ? 1 << 4 : 0;
+            bits |= method.getModifiers().contains(Modifier.FINAL) ? 1 << 5 : 0;
+            bits |= method.getModifiers().contains(Modifier.SYNCHRONIZED) ? 1 << 6 : 0;
+            bits |= method.getModifiers().contains(Modifier.ABSTRACT) ? 1 << 7 : 0;
+            bits |= method.getModifiers().contains(Modifier.NATIVE) ? 1 << 8 : 0;
+            modifierBits = bits;
+        }
+    }
+
     private void publish() {
         List<String> lines = new ArrayList<>();
-        lines.add("# " + SCHEMA);
+        lines.add("# " + (methodSignals ? METHOD_SCHEMA : SCHEMA));
         lines.add("# S=scalar counts (exact nonnegative integers); T=hashed token; E=attributed candidate edge");
         lines.add("# hashes and virtual call edges are heuristic, not exact equality or runtime dispatch proof");
+        if (methodSignals) {
+            lines.add("# M=attributed declaring-method exact counts; R=source method candidate call edge");
+            lines.add("# method flags and syntactic counters do not certify purity/escape/runtime dispatch");
+        }
         for (Facts row : facts.values()) {
             lines.add(String.join("\t", "S", escape(row.name),
                     Integer.toString(row.fieldCount), Integer.toString(row.methodCount),
@@ -378,6 +448,26 @@ public final class M3SourceSignalPlugin implements Plugin {
             for (Map.Entry<String, Integer> edge : row.calls.entrySet()) {
                 lines.add("E\t" + escape(row.name) + "\t" + escape(edge.getKey()) + "\t"
                         + edge.getValue());
+            }
+            if (methodSignals) {
+                for (Map.Entry<String, MethodFacts> item : row.methods.entrySet()) {
+                    MethodFacts method = item.getValue();
+                    lines.add(String.join("\t", "M", escape(row.name),
+                            escape(item.getKey()), Integer.toString(method.modifierBits),
+                            Integer.toString(method.parameters), Integer.toString(method.callSiteCount),
+                            Integer.toString(method.allocationSiteCount),
+                            Integer.toString(method.memberReferenceCount),
+                            Integer.toString(method.directCallCount),
+                            Integer.toString(method.dispatchCandidateCount),
+                            Integer.toString(method.unresolvedCallCount),
+                            Integer.toString(method.loopCount), Integer.toString(method.branchCount),
+                            Integer.toString(method.tryCount), Integer.toString(method.catchCount),
+                            Integer.toString(method.lambdaCount)));
+                    for (Map.Entry<String, Integer> edge : method.calls.entrySet()) {
+                        lines.add("R\t" + escape(row.name) + "\t" + escape(item.getKey())
+                                + "\t" + escape(edge.getKey()) + "\t" + edge.getValue());
+                    }
+                }
             }
         }
         String content = String.join("\n", lines) + "\n";
