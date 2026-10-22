@@ -63,3 +63,27 @@ M3JDK21 master and prior 40-row Synexia receipts.
 Historical origin: M3JDK21 failed four-library workflow on October 22, 2026;
 canonical Synexia source successor PR #12999, which preserved the 36-file
 baseline and catalogued 40 additional Java files.
+## Append-only Guava JNI dual-mode test successor (2026-10-22)
+
+The nine-owner compiler/runtime transition ledger is immutable. The new
+`receipts/changed-native-01.tsv` is a separately SHA-pinned **tenth behavioral-test
+successor**, not a modification of the original 36/40 census, `changed-07.tsv`,
+`changed-01.tsv`, or `changed-09.tsv`. It admits exactly one existing additive
+source: `M3GuavaListMultimapContract.java`, using the previously sealed SHA-256/
+Git blob and the exact generated Synexia Java recipe postimage. The original 76
+production/test paths remain unchanged.
+
+The predecessor test wrongly required `UnsatisfiedLinkError` even when the
+original `M3IndexPathMasks` Linux JNI library was correctly loaded. The
+**Synexia-owned hash-pinned Java recipe** refines only that test atom: it
+retains fail-closed unavailable-native behavior, but checks exact ordered
+native-vs-Java selection when `nativeAvailable()` is true. The public receiver
+keeps only generated Java test source and passive source-ledger/verifier output;
+no recipe Java/YAML/POM, production owner, JDK interface, or JNI ABI enters it.
+
+Local Java 21 evidence on the exact disposable #1847 successor image: all
+158 five-provider Maven JUnit methods pass with the JNI library absent **and**
+all 158 pass with the real library loaded and native parity required. The
+Synexia Java snapshot recipe itself passes 4 Maven/JUnit tests (exact source,
+fixed point, tamper refusal, behavioral-atom custody). Product source/verifier
+and hosted/full-JDK gates must be rerun on any final PR head before promotion.

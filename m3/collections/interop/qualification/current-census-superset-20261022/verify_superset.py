@@ -70,6 +70,21 @@ GATE_STATUS = 'CANDIDATE_JAVA21_158_PASS_JTREG_HOLD'
 GATE_COMPILE_CRATE = 'm3-interop-compile-gates-20261022'
 GATE_RUNTIME_CRATE = 'm3-interop-runtime-gates-20261022'
 
+# The tenth revision is a separate, append-only test-mode successor.
+# Never mutate the nine-owner receipt or the original 36/40 source ledgers.
+NATIVE_MODE_RECEIPT_SHA256 = 'ae0fc91c8493d97fc0ccad0c49e3886e5545ffcd943d608377da4dda51be1e31'
+NATIVE_MODE_PATH = TEST + 'M3GuavaListMultimapContract.java'
+NATIVE_MODE_ATOM = (
+    NATIVE_MODE_PATH,
+    '32dfc1e0441589ccc809364d7832287b2748c5925a2625fbb51e9c6f273c6748',
+    '93c899b1445b5cde063ff66e715ef1d245b8297f',
+    'ac2ff0dc5d6d395cf235e9e45218b4c0493915734d02d9f4fb7e4a5bded9cc34',
+    'b027c0bf647afe8bf6703f2789cad80cbcbd025b',
+    'm3jdk21-interop-native-mode-20261022',
+    'Apache-2.0',
+    'CANDIDATE_JAVA21_NATIVE_DUAL_158_PASS_JTREG_HOLD',
+)
+
 
 def exact_gate_transitions(receipts: Path) -> dict[str, tuple[str, str, str, str]]:
     """Fail closed on a missing, aliased, reordered or edited nine-owner ledger."""
@@ -99,6 +114,21 @@ def exact_gate_transitions(receipts: Path) -> dict[str, tuple[str, str, str, str
             raise ValueError('invalid nine-owner successor proof: ' + path)
         admitted[path] = (before_sha, before_blob, after_sha, after_blob)
     return admitted
+
+
+def exact_native_mode_transition(receipts: Path) -> dict[str, tuple[str, str, str, str]]:
+    """Bind one additional original additive test to its exact previous image."""
+    file = receipts / 'changed-native-01.tsv'
+    if file.is_symlink() or not file.is_file():
+        raise ValueError('missing or aliased native-mode source receipt')
+    data = file.read_bytes()
+    if hashlib.sha256(data).hexdigest() != NATIVE_MODE_RECEIPT_SHA256:
+        raise ValueError('native-mode source receipt was tampered')
+    rows = [line.split('\t') for line in data.decode('utf-8').splitlines()
+            if line and not line.startswith('#')]
+    if rows != [list(NATIVE_MODE_ATOM)]:
+        raise ValueError('native-mode source successor is not exact')
+    return {NATIVE_MODE_PATH: NATIVE_MODE_ATOM[1:5]}
 
 
 def advance_expected_image(path: str, prior: tuple[str, str],
@@ -157,6 +187,13 @@ def verify_additions(product: Path, receipts: Path,
             or (receipts / 'changed-09.tsv').is_symlink()) else {})
     if successor is not None and successor[0] not in paths:
         raise ValueError('one-test source transition target not admitted')
+    # Optional here for existing historical fixture tests; the real current
+    # product entrypoint below unconditionally requires the new receipt.
+    native = exact_native_mode_transition(receipts) if (
+        (receipts / 'changed-native-01.tsv').exists()
+        or (receipts / 'changed-native-01.tsv').is_symlink()) else {}
+    if native and NATIVE_MODE_PATH not in paths:
+        raise ValueError('native-mode test owner not in existing additive census')
     production = tests = 0
     for relative, sha, blob, family, kind, license_id in rows:
         if (not relative.endswith('.java') or not (relative.startswith(MAIN)
@@ -179,6 +216,7 @@ def verify_additions(product: Path, receipts: Path,
                 raise ValueError('invalid one-test predecessor identity')
             sha, blob = successor[3], successor[4]
         sha, blob = advance_expected_image(relative, (sha, blob), gate)
+        sha, blob = advance_expected_image(relative, (sha, blob), native)
         if (hashlib.sha256(data).hexdigest() != sha or git_blob(data) != blob
                 or b'SPDX-License-Identifier: Apache-2.0' not in data[:1800]):
             raise ValueError('source SHA, Git blob or license header drift: ' + relative)
@@ -274,6 +312,7 @@ def verify_product_checkout(product: Path, receipts: Path,
     # receipt; the old six-test fixture runs verify_additions without it.
     exact_compound_transition(receipts)
     successor = exact_gate_transitions(receipts)
+    native = exact_native_mode_transition(receipts)
     older, revisions = verify_historical_revisions(
         product, receipts, historical_product, successor)
     tracked = set(subprocess.check_output(['git', 'ls-files', '--',
@@ -281,6 +320,8 @@ def verify_product_checkout(product: Path, receipts: Path,
     extras = verify_additions(product, receipts, older, tracked, successor)
     if not set(successor).issubset(older | set(extras)):
         raise ValueError('nine-owner transition was not admitted to the 76-source census')
+    if not set(native).issubset(set(extras)):
+        raise ValueError('native-mode successor was not admitted to the 40-source census')
     return len(older), revisions, len(extras)
 
 
@@ -296,7 +337,7 @@ def main() -> None:
         args.product, args.receipts, args.historical_product)
     print(f'M3_FIVE_LIBRARY_SOURCE_SUPERSET_PASS original={original} revised={revisions} '
           f'additive={additive} gate_successors={len(GATE_PATHS)} '
-          f'total={original + additive}')
+          f'native_mode_successors=1 total={original + additive}')
 
 
 if __name__ == '__main__':
