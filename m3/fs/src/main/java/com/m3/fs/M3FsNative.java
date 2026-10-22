@@ -410,6 +410,17 @@ final class M3FsNative {
     return nativeStat(handle, Objects.requireNonNull(path, "path"));
   }
 
+  /** Native packed stat receipt; absent entrypoints on older ABI-1 libraries fail closed. */
+  static long[] statBatch(long handle, String[] paths) throws IOException {
+    requireAvailable();
+    try {
+      return nativeStatBatch(handle, Objects.requireNonNull(paths, "paths"));
+    } catch (UnsatisfiedLinkError missingExtension) {
+      throw new UnsupportedOperationException(
+          "loaded M3FS native library has no stat-batch extension", missingExtension);
+    }
+  }
+
   static byte[] list(long handle, String path) throws IOException {
     requireAvailable();
     return nativeList(handle, Objects.requireNonNull(path, "path"));
@@ -518,6 +529,8 @@ final class M3FsNative {
   private static native byte[] nativeReadlink(long handle, String path);
 
   private static native long[] nativeStat(long handle, String path);
+
+  private static native long[] nativeStatBatch(long handle, String[] paths);
 
   private static native byte[] nativeList(long handle, String path);
 
