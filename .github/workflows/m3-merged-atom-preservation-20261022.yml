@@ -36,6 +36,48 @@ jobs:
         run: python3 -m unittest discover -s m3/history -p 'test_merged_atoms_preservation_20261022.py' -v
       - name: Reject disappearing merged product atoms
         run: python3 m3/history/verify-merged-atoms-preservation-20261022.py --root .
+      - name: Verify product source SHA-256 matches canonical Synexia handoff receipts
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import hashlib
+          import re
+          from pathlib import Path
+          root = Path.cwd().resolve()
+          receipt = root / "m3/docs/synexia-m3jdk21-eclipse-recipe-handoff-20261022.tsv"
+          lines = [line for line in receipt.read_text(encoding="utf-8").splitlines()
+                   if line and not line.startswith("#")]
+          if len(lines) != 5:
+              raise SystemExit("M3 product/source recipe handoff must cover five Java outputs")
+          last = ""
+          for line in lines:
+              cells = line.split("\t")
+              if len(cells) != 8:
+                  raise SystemExit("invalid M3 handoff receipt shape")
+              relative, recipe, previous, expected, origin, pull, state, license_id = cells
+              if (relative <= last or Path(relative).is_absolute()
+                      or any(part in ("..", ".") for part in Path(relative).parts)):
+                  raise SystemExit("unsafe or unsorted M3 handoff source path")
+              last = relative
+              if not relative.endswith(".java") or not recipe.startswith("com.synexia.m3."):
+                  raise SystemExit("invalid M3 product recipe binding")
+              if (previous != "ABSENT" and not re.fullmatch("[0-9a-f]{64}", previous)):
+                  raise SystemExit("invalid original preimage SHA-256")
+              if not re.fullmatch("[0-9a-f]{64}", expected) or license_id != "Apache-2.0":
+                  raise SystemExit("invalid M3 postimage SHA or license receipt")
+              if pull != "hsoliwal/com.synexia#12951":
+                  raise SystemExit("missing canonical Synexia recipe provenance")
+              if state not in ("PENDING_RECIPE_AND_PRODUCT_CI", "QUALIFIED"):
+                  raise SystemExit("invalid M3 source admission status")
+              file = root / relative
+              if file.is_symlink() or not file.is_file() or not file.resolve().is_relative_to(root):
+                  raise SystemExit("lost M3 product source: " + relative)
+              actual = hashlib.sha256(file.read_bytes()).hexdigest()
+              if actual != expected:
+                  raise SystemExit("M3 source drifted from Synexia recipe result: " + relative)
+          print("M3_PRODUCT_SOURCE_RECIPE_HANDOFF_PASS outputs=5")
+          PY
       - name: Reject new transformation recipe sources in the downstream product
         if: github.event_name == 'pull_request'
         shell: bash
