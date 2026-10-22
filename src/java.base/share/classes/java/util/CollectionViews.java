@@ -306,15 +306,25 @@ public final class CollectionViews {
         }
 
         @Override
-        @SuppressWarnings("unchecked")
         public boolean contains(Object candidate) {
-            // Collection membership is defined by the stored occurrence, not by a
-            // caller-provided equal probe. Equivalence does not imply that a
-            // predicate depending on other fields agrees for both instances.
-            for (E stored : backing) {
-                if (Objects.equals(candidate, stored) && visible(stored)) {
-                    return true;
+            // Probe equality alone does not establish visibility: predicates
+            // belong to stored occurrences, not caller-supplied equal aliases.
+            if (!backing.contains(candidate)) return false;
+            if (backing instanceof Set<?>) {
+                E equivalent = null;
+                boolean found = false;
+                for (E stored : backing) {
+                    // Identity-keyed sets require the same stored object.
+                    if (stored == candidate) return visible(stored);
+                    if (!found && Objects.equals(candidate, stored)) {
+                        equivalent = stored;
+                        found = true;
+                    }
                 }
+                return found && visible(equivalent);
+            }
+            for (E stored : backing) {
+                if (Objects.equals(candidate, stored) && visible(stored)) return true;
             }
             return false;
         }
@@ -341,11 +351,10 @@ public final class CollectionViews {
         @Override
         @SuppressWarnings("unchecked")
         public boolean remove(Object candidate) {
-            // A List can contain a hidden and visible occurrence that compare
-            // equal. Removing by probe would delete the wrong physical element.
-            // Indexed deletion also admits Lists whose iterators are read-only
-            // but whose indexed removal is writable (CopyOnWriteArrayList).
+            if (!backing.contains(candidate)) return false;
             if (backing instanceof List<?>) {
+                // Remove the selected physical occurrence, not an earlier
+                // equal occurrence that was hidden by the filter.
                 List<E> list = (List<E>) backing;
                 int physical = 0;
                 for (E stored : list) {
@@ -357,26 +366,33 @@ public final class CollectionViews {
                 }
                 return false;
             }
-            Iterator<E> cursor = backing.iterator();
-            boolean skippedEqual = false;
-            while (cursor.hasNext()) {
-                E stored = cursor.next();
+            if (backing instanceof Set<?>) {
+                E equivalent = null;
+                boolean found = false;
+                for (E stored : backing) {
+                    if (stored == candidate) return visible(stored) && backing.remove(stored);
+                    if (!found && Objects.equals(candidate, stored)) {
+                        equivalent = stored;
+                        found = true;
+                    }
+                }
+                return found && visible(equivalent) && backing.remove(equivalent);
+            }
+            Iterator<E> iterator = backing.iterator();
+            boolean skippedHiddenEqual = false;
+            while (iterator.hasNext()) {
+                E stored = iterator.next();
                 if (Objects.equals(candidate, stored)) {
                     if (visible(stored)) {
                         try {
-                            cursor.remove();
+                            iterator.remove();
                             return true;
                         } catch (UnsupportedOperationException unsupported) {
-                            // A Set has at most one equal occurrence. For other
-                            // owners, direct removal is safe only if no earlier
-                            // hidden equal occurrence could be removed instead.
-                            if (backing instanceof Set<?> || !skippedEqual) {
-                                return backing.remove(stored);
-                            }
-                            throw unsupported;
+                            if (skippedHiddenEqual) throw unsupported;
+                            return backing.remove(stored);
                         }
                     }
-                    skippedEqual = true;
+                    skippedHiddenEqual = true;
                 }
             }
             return false;
