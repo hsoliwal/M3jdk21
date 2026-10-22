@@ -157,6 +157,42 @@ public final class M3SignalColumns {
         return 0;
     }
 
+    /**
+     * Fail-closed internal transport to progressive double-only evidence.
+     *
+     * <p>Full-width typed comparisons remain authoritative in this class.
+     * An exact progressive-coordinate reader may use only present, finite values;
+     * long values beyond ±2^53 are conservatively rejected rather than rounded.
+     * The original row arrays and validity bits are never copied into another store.
+     */
+    double exactFiniteDoubleAt(int dimension, int row) {
+        Column c = column(dimension);
+        Objects.checkIndex(row, rows);
+        if (!c.present(row)) {
+            throw new IllegalArgumentException("missing signal at column " + dimension
+                    + ", row " + row);
+        }
+        return switch (c.kind) {
+            case INTEGER -> c.integers[row];
+            case LONG -> {
+                long value = c.longs[row];
+                long exactLimit = 1L << 53;
+                if (value < -exactLimit || value > exactLimit) {
+                    throw new IllegalArgumentException("64-bit signal cannot be represented "
+                            + "by a provably exact double coordinate");
+                }
+                yield (double) value;
+            }
+            case DOUBLE -> {
+                double value = c.doubles[row];
+                if (!Double.isFinite(value)) {
+                    throw new IllegalArgumentException("non-finite progressive signal");
+                }
+                yield value;
+            }
+        };
+    }
+
     /** Stable primitive-index mergesort. Equal coordinates retain selected encounter order. */
     public int[] sortSelected(int[] selectedRows) {
         Objects.requireNonNull(selectedRows, "selectedRows");
