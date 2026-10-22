@@ -117,3 +117,37 @@ This is still a focused java.base **patch-module** proof, not a
 `make images`/jtreg/JCK installed modified OpenJDK build or a JIT/GC
 performance benchmark. New tests may fail and must be fixed in the
 canonical recipe first; no equivalence or speedup is inferred from queued CI.
+
+
+## Reused M3JDK21 original qualified Java/JNI tests — 2026-10-22
+
+The receiver's proof script now also reuses the unchanged original
+`test/jdk/java/util/ArrayList/M3MaskCompactionDifferential.java`
+(Git blob `c505b5604e978f215e4aeb93eadfd9f933ffc743`) and
+`M3JdkRemoveIfMaskContracts.java`
+(Git blob `2dc2fb6494f008fb7166dabfb97000d282a5f9af`).
+Those cover the established 25,000-case sparse/dense/full-deletion
+mask differential, nested `ArrayList.subList`, `Vector`, fail-fast,
+exception and callback behavior. Actual patched `ArrayList.class` and
+`Vector.class` public declarations are compared to original Java 21
+with `javap -public` on exact classfile paths. These source tests are
+**reused**, not reimplemented.
+
+The focused GitHub workflow additionally calls the existing
+`m3/collections/qualification/required-excluded-windows-20261021/verify.sh`
+to compile the original C11 `m3_index_mask_compactor.c` and
+execute Java vs real JNI with `-Xcheck:jni`. That is a companion
+M3JDK21 state-mask JNI proof, **not** a claim that this Object[] compactor
+calls native C or creates a new JNI ABI.
+
+The patched Java 21 `java.base` owner tests are configured under
+normal, interpreter, Serial GC, Parallel GC and G1 GC execution.
+Host JDK 21 passed **365,398** direct caller checks in baseline
+normal, interpreted, Serial, Parallel and G1 modes locally.
+The new patched modes, original donor suites, public ABI gate, and
+native C11 gate are committed but **PENDING actual PR CI results**.
+
+Full `make images` of M3JDK21 with a matching Boot JDK, all jtreg/JCK,
+platform-specific JNI, JVMTI, CDS, ZGC, Shenandoah and HotSpot/JIT
+phase-lifetime oracles remain separate `NOT_RUN` gates. No formal
+performance admission or universal equivalence is asserted.
