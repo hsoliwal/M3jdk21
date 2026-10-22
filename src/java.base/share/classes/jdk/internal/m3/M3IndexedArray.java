@@ -201,6 +201,35 @@ public final class M3IndexedArray<E> {
                 requiredMask, forbiddenMask, true);
     }
 
+    /**
+     * Live fused predicate + state-mask view. The existing selector evaluates
+     * state bits and the predicate in one logical-order pass and stores only
+     * the selected primitive slot indexes. No intermediate collection or
+     * duplicate payload array is materialized.
+     */
+    public List<E> filteredMaskedStates(Predicate<? super E> predicate,
+                                        int requiredMask, int forbiddenMask) {
+        Objects.requireNonNull(predicate, "predicate");
+        checkMasks(requiredMask, forbiddenMask);
+        return new M3IndexedView<>(this, predicate, null,
+                requiredMask, forbiddenMask, true);
+    }
+
+    /**
+     * Live fused predicate + state-mask + stable-sort view. Selection is one
+     * pass over the original array/mask owner; stable ordering is then applied
+     * only to the primitive selected-slot directory.
+     */
+    public List<E> filteredMaskedSortedStates(Predicate<? super E> predicate,
+                                              int requiredMask, int forbiddenMask,
+                                              Comparator<? super E> comparator) {
+        Objects.requireNonNull(predicate, "predicate");
+        Objects.requireNonNull(comparator, "comparator");
+        checkMasks(requiredMask, forbiddenMask);
+        return new M3IndexedView<>(this, predicate, comparator,
+                requiredMask, forbiddenMask, true);
+    }
+
     private static void checkMasks(int requiredMask, int forbiddenMask) {
         if ((requiredMask & forbiddenMask) != 0) {
             throw new IllegalArgumentException("overlapping required/forbidden M3 state bits");
@@ -221,20 +250,27 @@ public final class M3IndexedArray<E> {
                               int requiredMask, int forbiddenMask,
                               boolean stateAware) {
         final long initialVersion = stateAware ? stateVersion : version;
-        final int[] selected = new int[size];
-        int used = 0;
-        for (int i = 0; i < size; i++) {
-            final int slot = order[i];
-            final int state = states[slot];
-            if ((!stateAware || ((state & requiredMask) == requiredMask
-                                 && (state & forbiddenMask) == 0))
-                    && (predicate == null || predicate.test(valueAtSlot(slot)))) {
-                selected[used++] = slot;
+        final int[] result;
+        if (predicate == null && !stateAware) {
+            // No callback or state predicate exists; copy only the primitive
+            // logical directory and let the optional stable sorter refine it.
+            result = Arrays.copyOf(order, size);
+        } else {
+            final int[] selected = new int[size];
+            int used = 0;
+            for (int i = 0; i < size; i++) {
+                final int slot = order[i];
+                final int state = states[slot];
+                if ((!stateAware || ((state & requiredMask) == requiredMask
+                                     && (state & forbiddenMask) == 0))
+                        && (predicate == null || predicate.test(valueAtSlot(slot)))) {
+                    selected[used++] = slot;
+                }
+                rejectReentrantMutation(initialVersion, stateAware);
             }
-            rejectReentrantMutation(initialVersion, stateAware);
+            result = used == selected.length
+                    ? selected : Arrays.copyOf(selected, used);
         }
-        final int[] result = used == selected.length
-                ? selected : Arrays.copyOf(selected, used);
         if (comparator != null) {
             stableSort(result, comparator, initialVersion, stateAware);
         }
@@ -326,6 +362,7 @@ public final class M3IndexedArray<E> {
         if (count < 2) {
             return;
         }
+        final int bulkCopyThreshold = 16;
         int[] source = indexes;
         int[] target = new int[count];
         for (long width = 1; width < count; width *= 2) {
@@ -341,11 +378,17 @@ public final class M3IndexedArray<E> {
                     rejectReentrantMutation(initialVersion, stateAware);
                     target[output++] = ordering <= 0 ? source[l++] : source[r++];
                 }
-                while (l < leftEnd) {
-                    target[output++] = source[l++];
-                }
-                while (r < rightEnd) {
-                    target[output++] = source[r++];
+                if (leftEnd - l >= bulkCopyThreshold) {
+                    System.arraycopy(source, l, target, output, leftEnd - l);
+                } else if (rightEnd - r >= bulkCopyThreshold) {
+                    System.arraycopy(source, r, target, output, rightEnd - r);
+                } else {
+                    while (l < leftEnd) {
+                        target[output++] = source[l++];
+                    }
+                    while (r < rightEnd) {
+                        target[output++] = source[r++];
+                    }
                 }
             }
             final int[] previousSource = source;
