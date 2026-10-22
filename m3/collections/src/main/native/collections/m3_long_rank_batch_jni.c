@@ -1,17 +1,25 @@
-/* SPDX-License-Identifier: Apache-2.0 */
+/* Copyright 2026 Hitesh Soliwal and contributors. SPDX-License-Identifier: Apache-2.0 */
 #include <jni.h>
 #include <stddef.h>
 
 /*
- * One JNI transition per batch, signed jlong order matching Java Long.compare.
- * Get/ReleaseArrayElements respects moving GC: no object addresses are retained.
- * Input arrays are released JNI_ABORT; only the preallocated output array is written.
+ * One transition per batch; signed jlong order matches Java. The JVM can copy
+ * the input arrays during GetArrayElements. No heap address escapes the call.
+ * JNI_ABORT releases inputs; only the caller-allocated output is committed.
  */
-JNIEXPORT void JNICALL
-Java_com_m3_collections_M3LongRankBatchNative_lowerBounds0(
-        JNIEnv *env, jclass ignored, jlongArray sorted, jlongArray queries,
-        jintArray results) {
-    (void) ignored;
+static jsize bound(const jlong *values, jsize size, jlong needle, int upper) {
+    jsize lo = 0;
+    jsize hi = size;
+    while (lo < hi) {
+        jsize mid = lo + ((hi - lo) >> 1);
+        if (upper ? values[mid] <= needle : values[mid] < needle) lo = mid + 1;
+        else hi = mid;
+    }
+    return lo;
+}
+
+static void run_bounds(JNIEnv *env, jlongArray sorted, jlongArray queries,
+                       jintArray results, int upper) {
     if (sorted == NULL || queries == NULL || results == NULL) {
         jclass error = (*env)->FindClass(env, "java/lang/NullPointerException");
         if (error != NULL) (*env)->ThrowNew(env, error, "null batch argument");
@@ -39,19 +47,34 @@ Java_com_m3_collections_M3LongRankBatchNative_lowerBounds0(
         (*env)->ReleaseLongArrayElements(env, sorted, values, JNI_ABORT);
         return;
     }
-
     for (jsize i = 0; i < count; i++) {
-        jlong needle = targets[i];
-        jsize lo = 0;
-        jsize hi = size;
-        while (lo < hi) {
-            jsize mid = lo + ((hi - lo) >> 1);
-            if (values[mid] < needle) lo = mid + 1;
-            else hi = mid;
-        }
-        positions[i] = (jint) lo;
+        positions[i] = (jint) bound(values, size, targets[i], upper);
     }
     (*env)->ReleaseIntArrayElements(env, results, positions, 0);
     (*env)->ReleaseLongArrayElements(env, queries, targets, JNI_ABORT);
     (*env)->ReleaseLongArrayElements(env, sorted, values, JNI_ABORT);
+}
+
+JNIEXPORT void JNICALL
+Java_com_m3_collections_M3LongRankBatchNative_lowerBounds0(
+        JNIEnv *env, jclass ignored, jlongArray sorted, jlongArray queries,
+        jintArray results) {
+    (void) ignored;
+    run_bounds(env, sorted, queries, results, 0);
+}
+
+JNIEXPORT jint JNICALL
+Java_com_m3_collections_M3LongRankBatchNative_upperBoundsAbi0(
+        JNIEnv *env, jclass ignored) {
+    (void) env;
+    (void) ignored;
+    return 1;
+}
+
+JNIEXPORT void JNICALL
+Java_com_m3_collections_M3LongRankBatchNative_upperBounds0(
+        JNIEnv *env, jclass ignored, jlongArray sorted, jlongArray queries,
+        jintArray results) {
+    (void) ignored;
+    run_bounds(env, sorted, queries, results, 1);
 }

@@ -22,6 +22,7 @@ public final class M3LongRankIndexSelfTest {
         equal(0, empty.upperBound(Long.MAX_VALUE));
         equal(0, empty.rangeCountInclusive(Long.MIN_VALUE, Long.MAX_VALUE));
         equal(3, empty.lowerBounds(new long[]{-1, 0, 1}).length);
+        arrayEqual(new long[]{0, 0, 0}, toLongs(empty.upperBounds(new long[]{-1, 0, 1})));
         long[] input = {Long.MAX_VALUE, Long.MIN_VALUE, -1, 0, 0, Long.MIN_VALUE};
         M3LongRankIndex index = M3LongRankIndex.copyOf(input);
         input[0] = 12345;
@@ -86,8 +87,10 @@ public final class M3LongRankIndexSelfTest {
             long[] queries = new long[70 + random.nextInt(75)];
             for (int q = 0; q < queries.length; q++) queries[q] = random.nextInt(101) - 50L;
             int[] batched = index.lowerBounds(queries);
+            int[] upperBatched = index.upperBounds(queries);
             for (int q = 0; q < queries.length; q++) {
                 equal(index.lowerBound(queries[q]), batched[q]);
+                equal(index.upperBound(queries[q]), upperBatched[q]);
             }
             M3LongRankIndex filtered = M3LongRankIndex.snapshotFiltered(list, v -> v < 0);
             for (long v : filtered.toArray()) if (!(v < 0)) fail("filter");
@@ -124,6 +127,11 @@ public final class M3LongRankIndexSelfTest {
 
     private static void equal(boolean a, boolean b) { if (a != b) fail(a + " != " + b); }
     private static void equal(long a, long b) { if (a != b) fail(a + " != " + b); }
+    private static long[] toLongs(int[] source) {
+        long[] result = new long[source.length];
+        for (int i = 0; i < source.length; i++) result[i] = source[i];
+        return result;
+    }
     private static void arrayEqual(long[] a, long[] b) {
         if (!Arrays.equals(a, b)) fail("array mismatch");
     }
