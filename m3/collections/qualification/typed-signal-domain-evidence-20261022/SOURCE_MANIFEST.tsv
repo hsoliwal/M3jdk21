@@ -1,0 +1,8 @@
+# SPDX-License-Identifier: Apache-2.0
+# Source-sealed canonical Synexia crate: m3-typed-signal-domain-evidence-20261022
+# Direct M3JDK21 branch based on typed TopK PR #1832; no API/ABI or JNI symbol change.
+# path	before_sha256	after_sha256	git_blob	canonical_resource
+m3/collections/src/main/java/com/m3/collections/M3SignalColumns.java	f4caab98f766b076894e478444067c4245f61c6a2e660bda52f39c481af6e314	7fa79c7072f3a6e4f90fd86256dbaeecceca651c13cda798467a591fbe681547	71338a8b3858c98b659af744e1a6eef671b50ab8	00-M3SignalColumns.java.txt
+m3/collections/src/main/java/com/m3/collections/M3SignalDomainPolicy.java	ABSENT	6d37ac622ce57f5c2f899e2e7c2764dcaf4d5ad9440097a5c1f8aed6e89f154a	b5983c3cc62ba6fd727023824e3bdf56eb3b44b5	01-M3SignalDomainPolicy.java.txt
+m3/collections/src/test/java/com/m3/collections/M3SignalDomainPolicySelfTest.java	ABSENT	89aafb6847a88568301b57c34e62102d82d4e6a363da24d661c9d275bf38b8c9	d54ca594a869c54aca12bb5543620e4a607c56b2	02-M3SignalDomainPolicySelfTest.java.txt
+m3/collections/src/test/java/com/m3/collections/M3SignalDomainPolicyTest.java	ABSENT	467759b1ed7b613d79c14b2f30dc8d7dfeeea9d76fa8812c4ccbf60d89559eb7	349a75bd7e73e37b61a2b874060fe48dd6b3a2b7	03-M3SignalDomainPolicyTest.java.txt
