@@ -76,10 +76,25 @@ public final class M3SignalDomainPolicy {
             if (!Double.isNaN(maximum) && (!Double.isFinite(maximum) || maximum < 0.0)) {
                 throw new IllegalArgumentException("invalid certified maximum gap");
             }
-            // Admission checks must precede constructing any metric plan. No lossy long,
-            // missing coordinate or runtime NaN can enter the declared numeric metric.
+            // Admission checks must precede constructing any metric plan. Derive the
+            // complete coordinate span once from the immutable source snapshot. A declared
+            // maximum-gap certificate may not underestimate any future pair: otherwise
+            // an as-yet-unrefined upper bound could cause unsafe early search pruning.
+            double minimum = Double.POSITIVE_INFINITY;
+            double maximumValue = Double.NEGATIVE_INFINITY;
             for (int row = 0; row < signals.rowCount(); row++) {
-                signals.finiteMetricAt(column, row);
+                double value = signals.finiteMetricAt(column, row);
+                minimum = Math.min(minimum, value);
+                maximumValue = Math.max(maximumValue, value);
+            }
+            if (signals.rowCount() > 1) {
+                double observedSpan = maximumValue - minimum;
+                if (!Double.isFinite(observedSpan)) {
+                    throw new IllegalArgumentException("metric numeric span is unrepresentable");
+                }
+                if (Double.isFinite(maximum) && observedSpan > maximum) {
+                    throw new IllegalArgumentException("false maximum-gap certificate");
+                }
             }
             M3SignalColumns.Origin origin = signals.origin(column);
             M3ProgressiveSignalEvidence.Family family = switch (origin) {
