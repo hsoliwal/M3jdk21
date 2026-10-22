@@ -33,6 +33,24 @@ public final class M3SignalEvidenceBridge {
     }
 
     /**
+     * Source-time intake from the existing compiler-image owner, which has already
+     * verified the SHA-256 trailer against the received S/T/E source bytes.
+     *
+     * <p>This is an integrity check, not a cryptographic signature or proof of
+     * compiler producer identity. Exact ordering and metric policies remain
+     * independent caller-supplied certificates.</p>
+     */
+    public static M3ProgressiveSignalEvidence.Plan compileVerified(
+            M3SourceSignalImage verifiedImage,
+            long sourceVersion,
+            boolean completeExactSchema,
+            Lane... lanes) {
+        Objects.requireNonNull(verifiedImage, "verifiedImage");
+        return compile(verifiedImage.columns(), sourceVersion,
+                verifiedImage.sourceSha256(), completeExactSchema, lanes);
+    }
+
+    /**
      * Validate every projected source row *before* returning a reusable versioned plan.
      * This avoids converting missing facts or arbitrary long values into a false double
      * similarity/order coordinate while retaining the single original primitive payload.
