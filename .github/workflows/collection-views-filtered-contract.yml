@@ -6,7 +6,7 @@ on:
     paths:
       - 'src/java.base/share/classes/java/util/CollectionViews.java'
       - 'test/jdk/java/util/CollectionViews/**'
-      - '.github/workflows/m3-java-base-filtered-contract-20261022.yml'
+      - '.github/workflows/collection-views-filtered-contract.yml'
   workflow_dispatch:
 permissions:
   contents: read
