@@ -49,7 +49,33 @@ The current priority queue starts with JEP **423** (G1 region pinning), **458** 
 
 Authority: [upstream JBS seed file](UPSTREAM_CHANGE_SEEDS.tsv) on the same `master` snapshot (the relevant JDK-8359706 update-line repair is JDK-8380236). The actual jcmd completion postimages for JDK-8357439 are present at `make/modules/jdk.jcmd/Copy.gmk` and `src/jdk.jcmd/share/conf/bash-completion/jcmd` on that snapshot. **The existence of source is not a claim that image/JTReg/shell integration tests passed.**
 
-To enumerate **all** JBS IDs (including repeat IDs, multiple commits per issue, and untagged changes), execute existing `inventory.py` on a *complete* `openjdk/jdk` tree at the pinned GA tags, then `compatibility_queue.py`; keep commit identity, issue identity, release interval and patch dependency closure separate. This complete generated issue ledger is **not available** in this read-only audit. No claim of all-JBS classification or migration is made.
+A complete upstream commit inventory was subsequently executed against the exact GA tags (details below). Its JBS-ID extraction is **not yet canonical**: normalization of the actual upstream subject conventions requires a Synexia recipe correction and verified regeneration. Do not equate subject tokens with independently confirmed JBS issue records, or merge any unverified source.
+
+## Executed upstream JBS census and proof-blocker supplement — 2026-10-22
+
+This supplements the earlier read-only inventory; it grants **zero** additional source/backport acceptance.
+
+| JDK donor | Release-interval commits independently verified | Distinct candidate issue IDs in that interval |
+| --- | ---: | ---: |
+| 22 | 2,384 | 2,401 |
+| 23 | 2,355 | 2,370 |
+| 24 | 2,562 | 2,590 |
+| 25 | 2,678 | 2,699 |
+| 26 | 2,611 | 2,648 |
+| 27 | 2,358 | 2,380 |
+| **Total commit rows** | **14,948** | **14,726 distinct across all intervals (deduplicated)** |
+
+**Executed, read-only provenance:** complete commit/tree metadata from `openjdk/jdk` GA refs `jdk-21+35` through `jdk-27+35`, run through existing `inventory.py` and `compatibility_queue.py`. The raw inventory has 14,948 rows and SHA-256 `1d4adeb2ba00868d59c944a3d3582652ef1911ba4fb96b39d5950b730cd77151`; its raw 14,948-row compatibility queue has SHA-256 `9552a969b0869f5087b79c182815379427f4115262441b5af9480faa594bacc8`.
+
+**Discovered JBS-ID intake defect:** 14,420 upstream subjects begin with a bare numeric issue marker (e.g. `8305104:`); current `inventory.py` recognizes only explicit `JDK-`-prefixed tokens and therefore supplies issue IDs on just **657** of 14,948 commit rows, spanning **561** distinct IDs. A noncanonical, read-only subject normalization of both forms and additional colon-delimited issue markers produced **14,726 candidate distinct IDs**, with 17 unlinked `Merge`-subject commits. These counts are derived from commit subjects, **not** verified against all JBS database records.
+
+Candidate normalized inventory: SHA-256 `7defa67185f4bb1c695ac3add006ede120153a4a246a00bdfc8c770a12ae74df`; candidate compatibility queue: SHA-256 `869c04d59d153f965809b2654311a032da3f04ed46e7d4dccd2a9de989a3c3fd`. All **14,948** queue rows retain `PENDING_COMPATIBILITY_PROOF`; mechanically comparing raw and candidate queues showed only the JBS-ID field changed on 14,931 rows, with the 17 merge rows unchanged. Both candidate files are **unadmitted local evidence**; they are deliberately not committed as a new public target catalogue.
+
+**Second repair needed:** the raw inventory contains a 191,224-character TSV line. The unmodified compatibility queue failed at Python's 131,072-byte default CSV field limit; a bounded process-local 262,144-byte field limit allowed generation. Canonical input-size handling and a regression fixture must be repaired and executed in Synexia; this run did not edit public programme source.
+
+**Actual focused checks:** `bash m3/backports/recipes/jdk-8357439/test_jcmd_completion.sh` **PASS** (Bash completion stub contract). The 198-test Python backport suite ran: **196 PASS, 2 FAIL**. Both failures were JDK-8364182 source-lineage gates: `src/hotspot/share/classfile/vmSymbols.hpp` is now SHA-256 `7e65d715fb0098213a28ec63e5c1150699062716eecf9e8db32bf8366df3fa08`, not the receipt's accepted target/superseded hashes. Current source still includes the security-properties symbol and added M3 String symbols; this is **not** an equivalence proof. A later [M3 String owner source commit](https://github.com/hsoliwal/M3jdk21/commit/4402dca8d07dc7a98eb70bc6d003a78a1f08803f) touches this file. Hold this JBS packet for independent source-history, canonical recipe and HotSpot/JNI tests.
+
+**Next action:** repair these two ingestion/proof failures through the Synexia-owned source-sealed Maven/OpenRewrite/text recipe with adversarial numeric-prefix/multi-ID, wide-TSV and current-source fixtures, then replay against M3JDK21 and run authoritative product gates. No direct source acceptance or branch merge is authorized by this receipt.
 
 ## Acceptance / next serial passes
 
@@ -58,4 +84,4 @@ To enumerate **all** JBS IDs (including repeat IDs, multiple commits per issue, 
 3. Apply serially per target file with real OpenJDK 21 compile, jtreg, JNI/native, GC/runtime and performance gates appropriate to that leaf; emit passive receiver proof of the executed result.
 4. Promote only reviewed results by PR after gates execute; never equate JEP inventory, source hash, GitHub merge ancestry or queued/zero-job CI with passing product proof.
 
-**This receipt changes no OpenJDK source, Java API, class-file version, runtime flag, recipe, Maven build, or existing authority file.** It is a point-in-time count/crosswalk of the named master snapshot. Verification performed: exact in-memory TSV row count, release grouping and disposition reconciliation. Not performed: upstream Git log replay, recipe execution, Maven/JDK image build, jtreg or native/runtime tests.
+**This receipt changes no OpenJDK source, Java API, class-file version, runtime flag, recipe, Maven build, or existing authority file.** Its receiver snapshot remains the exact original `master` SHA above. Verification: 85-JEP TSV cross-check, all 14,948 upstream GA commits and candidate queue reconciled with exact hashes, and Bash completion smoke as recorded below. Not performed: canonical Synexia recipe execution, Maven/JDK image build, jtreg, JNI/HotSpot runtime or performance testing.
