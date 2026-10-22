@@ -35,3 +35,5 @@ jobs:
         run: python3 m3/file/verify.py --java-home "$JAVA_HOME" --output "$RUNNER_TEMP/m3-file-move-contract"
       - name: Verify exact OpenRewrite postimages and refusal
         run: mvn -B -ntp -f m3/file/recipe/move-candidates-20261021/pom.xml test
+      - name: Verify constructor recipe source custody and fixed point
+        run: mvn -B -ntp -f m3/file/recipe/resource-locks-constructor-20261022/pom.xml test

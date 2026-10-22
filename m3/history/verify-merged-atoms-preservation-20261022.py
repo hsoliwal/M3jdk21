@@ -17,7 +17,7 @@ MANIFEST = Path(__file__).with_name("merged-atoms-preservation-20261022.tsv")
 
 
 def git_blob_sha1(data: bytes) -> str:
-    return hashlib.sha1(b"blob " + str(len(data)).encode("ascii") + b"\\x00" + data).hexdigest()
+    return hashlib.sha1(b"blob " + str(len(data)).encode("ascii") + b"\x00" + data).hexdigest()
 
 
 def verify(root: Path, manifest: Path) -> int:

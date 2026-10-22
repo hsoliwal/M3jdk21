@@ -1,0 +1,38 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3 merged recipe atom preservation
+
+on:
+  pull_request:
+    paths:
+      - 'm3/file/**'
+      - 'm3/collections/**'
+      - 'm3/tooling/migration-recipes/**'
+      - 'm3/history/**'
+      - '.github/workflows/**'
+  push:
+    branches:
+      - master
+      - m3/restore-merged-atoms-ci-20261022
+    paths:
+      - 'm3/file/**'
+      - 'm3/collections/**'
+      - 'm3/tooling/migration-recipes/**'
+      - 'm3/history/**'
+      - '.github/workflows/**'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  require-merged-sources:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - name: Exercise missing, drifted and forged-recipe negative oracles
+        run: python3 -m unittest discover -s m3/history -p 'test_merged_atoms_preservation_20261022.py' -v
+      - name: Reject disappearing merged product atoms
+        run: python3 m3/history/verify-merged-atoms-preservation-20261022.py --root .
