@@ -44,6 +44,17 @@ if [[ "$(git -C "$root" hash-object "$test/java/util/ArrayList/M3ArrayMaskCaller
   echo "HOLD: original JDK ArrayList/Vector behavior oracle source drift" >&2
   exit 1
 fi
+# Existing, previously qualified original JDK array-mask and subList/Vector donor tests.
+if [[ "$(git -C "$root" hash-object "$test/java/util/ArrayList/M3MaskCompactionDifferential.java")" \
+       != "c505b5604e978f215e4aeb93eadfd9f933ffc743" ]]; then
+  echo "HOLD: original JDK compaction differential changed" >&2
+  exit 1
+fi
+if [[ "$(git -C "$root" hash-object "$test/java/util/ArrayList/M3JdkRemoveIfMaskContracts.java")" \
+       != "2dc2fb6494f008fb7166dabfb97000d282a5f9af" ]]; then
+  echo "HOLD: original JDK removeIf/sublist contract changed" >&2
+  exit 1
+fi
 
 mkdir -p "$tmp/src/jdk/internal/mindex" "$tmp/src/java/util" "$tmp/classes" "$tmp/tests"
 cp "$src/jdk/internal/mindex/M3CollectionMaskCompactor.java" "$tmp/src/jdk/internal/mindex/"
@@ -65,6 +76,8 @@ javac -source 21 -target 21 -Xlint:all -Werror -proc:none \
   -d "$tmp/tests" \
   "$test/jdk/internal/mindex/M3CollectionMaskCompactorPrefixTest.java" \
   "$test/java/util/ArrayList/M3ArrayMaskCallersContract.java" \
+  "$test/java/util/ArrayList/M3MaskCompactionDifferential.java" \
+  "$test/java/util/ArrayList/M3JdkRemoveIfMaskContracts.java" \
   "$test/java/util/CollectionViews/RunSearchJni.java" \
   "$test/java/util/CollectionViews/BootstrapViewsTest.java" \
   "$test/java/util/CollectionViews/CollectionViewsContract.java"
@@ -89,6 +102,22 @@ java -Xint --patch-module "java.base=$tmp/classes" \
   --add-opens "java.base/java.util=ALL-UNNAMED" \
   -cp "$tmp/tests" M3ArrayMaskCallersContract
 
+# Reuse original JDK integration regression rather than inventing another collection engine.
+java -ea -Xcheck:jni --patch-module "java.base=$tmp/classes" \
+  --add-exports "java.base/jdk.internal.mindex=ALL-UNNAMED" \
+  -cp "$tmp/tests" M3MaskCompactionDifferential
+java -ea -Xcheck:jni --patch-module "java.base=$tmp/classes" \
+  -cp "$tmp/tests" M3JdkRemoveIfMaskContracts
+
+# Compare the actual patched class files against the Java 21 public APIs.
+# javap -public on a classname alone would silently read the host bootstrap JDK.
+javap -public "$tmp/classes/java/util/ArrayList.class" > "$tmp/public-after-arraylist.txt"
+javap -public java.util.ArrayList > "$tmp/public-before-arraylist.txt"
+diff -u "$tmp/public-before-arraylist.txt" "$tmp/public-after-arraylist.txt"
+javap -public "$tmp/classes/java/util/Vector.class" > "$tmp/public-after-vector.txt"
+javap -public java.util.Vector > "$tmp/public-before-vector.txt"
+diff -u "$tmp/public-before-vector.txt" "$tmp/public-after-vector.txt"
+
 java --patch-module "java.base=$tmp/classes" \
   --add-exports "java.base/jdk.internal.mindex=ALL-UNNAMED" \
   -cp "$tmp/tests" M3CollectionMaskCompactorPrefixTest
@@ -106,4 +135,4 @@ java --patch-module "java.base=$tmp/classes" -Xss256k \
   --add-opens "java.base/java.util=ALL-UNNAMED" --add-modules jdk.management \
   -cp "$tmp/tests" CollectionViewsContract
 
-echo "PASS: baseline and integrated JDK ArrayList/Vector masks, java.base compaction, bootstrap filtered and sorted contract oracles"
+echo "PASS: original Java21 API, native M3JDK ArrayList/Vector and mask differentials, filtered and sorted owners"
